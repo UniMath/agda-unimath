@@ -70,3 +70,44 @@ module _
   right-inverse-law-mul-∞-Group :
     (x : type-∞-Group) → Id (mul-∞-Group x (inv-∞-Group x)) unit-∞-Group
   right-inverse-law-mul-∞-Group x = right-inv x
+
+module _
+  {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
+  where
+
+  hom-∞-Group : UU (l1 ⊔ l2)
+  hom-∞-Group =
+    classifying-pointed-type-∞-Group G →* classifying-pointed-type-∞-Group H
+
+  classifying-map-hom-∞-Group :
+    hom-∞-Group → classifying-type-∞-Group G → classifying-type-∞-Group H
+  classifying-map-hom-∞-Group =
+    map-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+
+  preserves-point-classifying-map-hom-∞-Group :
+    (f : hom-∞-Group) →
+    Id (classifying-map-hom-∞-Group f (point-∞-Group G)) (point-∞-Group H)
+  preserves-point-classifying-map-hom-∞-Group =
+    preserves-point-map-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+
+  map-hom-∞-Group : hom-∞-Group → type-∞-Group G → type-∞-Group H
+  map-hom-∞-Group f x =
+    ( inv (preserves-point-classifying-map-hom-∞-Group f)) ∙
+    ( ( ap (classifying-map-hom-∞-Group f) x) ∙
+      ( preserves-point-classifying-map-hom-∞-Group f))
+
+  preserves-unit-map-hom-∞-Group :
+    (f : hom-∞-Group) → Id (map-hom-∞-Group f (unit-∞-Group G)) (unit-∞-Group H)
+  preserves-unit-map-hom-∞-Group f =
+    left-inv (preserves-point-classifying-map-hom-∞-Group f)
+
+  preserves-mul-map-hom-∞-Group :
+    (f : hom-∞-Group) (x y : type-∞-Group G) →
+    Id ( map-hom-∞-Group f (mul-∞-Group G x y))
+       ( mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y))
+  preserves-mul-map-hom-∞-Group f x y =
+    {!!}
