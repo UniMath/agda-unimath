@@ -2,7 +2,7 @@
 
 module groups.higher-groups where
 
-open import foundations public
+open import groups.pointed-maps public
 
 ∞-Group : (l : Level) → UU (lsuc l)
 ∞-Group l = Σ (UU-pt l) (λ X → is-path-connected (type-UU-pt X))
@@ -110,4 +110,20 @@ module _
     Id ( map-hom-∞-Group f (mul-∞-Group G x y))
        ( mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y))
   preserves-mul-map-hom-∞-Group f x y =
+    ( ap
+      ( concat
+        ( inv (preserves-point-classifying-map-hom-∞-Group f))
+        ( point-∞-Group H))
+      ( ( ap
+          ( concat'
+            ( classifying-map-hom-∞-Group f (point-∞-Group G))
+            ( preserves-point-classifying-map-hom-∞-Group f))
+          ( ( ap-concat (classifying-map-hom-∞-Group f) x y) ∙
+            ( ( ap
+                ( concat
+                  ( ap (classifying-map-hom-∞-Group f) x)
+                  ( classifying-map-hom-∞-Group f (point-∞-Group G)))
+                {! ap ( concat' ? ?) ?!}) ∙
+              {!!}))) ∙
+        {!!})) ∙
     {!!}
