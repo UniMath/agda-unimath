@@ -39,6 +39,30 @@ module _
   type-Concrete-Group : UU l
   type-Concrete-Group = type-∞-Group ∞-group-Concrete-Group
 
+  is-set-type-Concrete-Group : is-set type-Concrete-Group
+  is-set-type-Concrete-Group = pr2 G
+
+  set-Concrete-Group : UU-Set l
+  set-Concrete-Group = pair type-Concrete-Group is-set-type-Concrete-Group
+
+  is-1-type-classifying-type-Concrete-Group :
+    is-trunc one-𝕋 classifying-type-Concrete-Group
+  is-1-type-classifying-type-Concrete-Group X Y =
+    apply-universal-property-trunc-Prop
+      ( mere-eq-classifying-type-Concrete-Group point-Concrete-Group X)
+      ( is-set-Prop (Id X Y))
+      ( λ { refl →
+            apply-universal-property-trunc-Prop
+              ( mere-eq-classifying-type-Concrete-Group point-Concrete-Group Y)
+              ( is-set-Prop (Id point-Concrete-Group Y))
+              ( λ { refl → is-set-type-Concrete-Group})})
+
+  classifying-1-type-Concrete-Group : UU-Trunc one-𝕋 l
+  classifying-1-type-Concrete-Group =
+    pair
+      classifying-type-Concrete-Group
+      is-1-type-classifying-type-Concrete-Group
+
   unit-Concrete-Group : type-Concrete-Group
   unit-Concrete-Group = unit-∞-Group ∞-group-Concrete-Group
 
