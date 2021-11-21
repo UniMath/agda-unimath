@@ -55,8 +55,8 @@ module _
 
   -- Pointed homotopies
 
-  pointed-htpy : (g : pointed-Π A B) → UU (l1 ⊔ l2)
-  pointed-htpy g =
+  htpy-pointed-Π : (g : pointed-Π A B) → UU (l1 ⊔ l2)
+  htpy-pointed-Π g =
     pointed-Π A
       ( pair
         ( λ x →
@@ -65,16 +65,16 @@ module _
         ( ( preserves-point-function-pointed-Π A B f) ∙
           ( inv (preserves-point-function-pointed-Π A B g))))
 
-  refl-pointed-htpy : pointed-htpy f
-  refl-pointed-htpy =
+  refl-htpy-pointed-Π : htpy-pointed-Π f
+  refl-htpy-pointed-Π =
     pair refl-htpy (inv (right-inv (preserves-point-function-pointed-Π A B f)))
 
-  pointed-htpy-eq :
-    (g : pointed-Π A B) → Id f g → pointed-htpy g
-  pointed-htpy-eq .f refl = refl-pointed-htpy
+  htpy-eq-pointed-Π :
+    (g : pointed-Π A B) → Id f g → htpy-pointed-Π g
+  htpy-eq-pointed-Π .f refl = refl-htpy-pointed-Π
 
-  is-contr-total-pointed-htpy : is-contr (Σ (pointed-Π A B) pointed-htpy)
-  is-contr-total-pointed-htpy =
+  is-contr-total-htpy-pointed-Π : is-contr (Σ (pointed-Π A B) htpy-pointed-Π)
+  is-contr-total-htpy-pointed-Π =
     is-contr-total-Eq-structure
       ( λ g β (H : function-pointed-Π A B f ~ g) →
           Id ( H (pt-UU-pt A))
@@ -89,26 +89,29 @@ module _
             equiv-con-inv refl β (preserves-point-function-pointed-Π A B f)))
         ( is-contr-total-path' (preserves-point-function-pointed-Π A B f)))
 
-  is-equiv-pointed-htpy-eq :
-    (g : pointed-Π A B) → is-equiv (pointed-htpy-eq g)
-  is-equiv-pointed-htpy-eq =
+  is-equiv-htpy-eq-pointed-Π :
+    (g : pointed-Π A B) → is-equiv (htpy-eq-pointed-Π g)
+  is-equiv-htpy-eq-pointed-Π =
     fundamental-theorem-id f
-      ( refl-pointed-htpy)
-      ( is-contr-total-pointed-htpy)
-      ( pointed-htpy-eq)
+      ( refl-htpy-pointed-Π)
+      ( is-contr-total-htpy-pointed-Π)
+      ( htpy-eq-pointed-Π)
 
-  eq-pointed-htpy :
-    (g : pointed-Π A B) → (pointed-htpy g) → Id f g
-  eq-pointed-htpy g = map-inv-is-equiv (is-equiv-pointed-htpy-eq g)
+  eq-htpy-pointed-Π :
+    (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g
+  eq-htpy-pointed-Π g = map-inv-is-equiv (is-equiv-htpy-eq-pointed-Π g)
 
 -- Pointed maps
 
 module _
   {l1 l2 : Level}
   where
+
+  constant-pointed-fam : (A : UU-pt l1) → UU-pt l2 → pointed-fam l2 A
+  constant-pointed-fam A B = pair (λ x → type-UU-pt B) (pt-UU-pt B)
   
   _→*_ : UU-pt l1 → UU-pt l2 → UU (l1 ⊔ l2)
-  A →* B = pointed-Π A (pair (λ x → type-UU-pt B) (pt-UU-pt B))
+  A →* B = pointed-Π A (constant-pointed-fam A B)
 
   [_→*_] : UU-pt l1 → UU-pt l2 → UU-pt (l1 ⊔ l2)
   [ A →* B ] =
@@ -129,55 +132,157 @@ module _
     (f : A →* B) → Id (map-pointed-map f (pt-UU-pt A)) (pt-UU-pt B)
   preserves-point-map-pointed-map f = pr2 f
 
--- Loop spaces
-
 module _
-  {l : Level} (A : UU-pt l)
-  where
-  
-  type-Ω : UU l
-  type-Ω = Id (pt-UU-pt A) (pt-UU-pt A)
-
-  refl-Ω : type-Ω
-  refl-Ω = refl
-
-  Ω : UU-pt l
-  Ω = pair type-Ω refl-Ω
-
--- Iterated loop spaces
-
-module _
-  {l : Level}
+  {l1 l2 l3 : Level} (A : UU-pt l1) (B : UU-pt l2) (C : pointed-fam l3 B)
+  (f : A →* B)
   where
 
-  iterated-loop-space : ℕ → UU-pt l → UU-pt l
-  iterated-loop-space zero-ℕ A = A
-  iterated-loop-space (succ-ℕ n) A = Ω (iterated-loop-space n A)
-  
-  Ω² : UU-pt l → UU-pt l
-  Ω² A = iterated-loop-space two-ℕ A
-  
-  type-Ω² : {A : UU l} (a : A) → UU l
-  type-Ω² a = Id (refl {x = a}) (refl {x = a})
-  
-  refl-Ω² : {A : UU l} {a : A} → type-Ω² a
-  refl-Ω² = refl
-  
-  Ω³ : UU-pt l → UU-pt l
-  Ω³ A = iterated-loop-space three-ℕ A
-  
-  type-Ω³ : {A : UU l} (a : A) → UU l
-  type-Ω³ a = Id (refl-Ω² {a = a}) (refl-Ω² {a = a})
-  
-  refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
-  refl-Ω³ = refl
+  precomp-pointed-fam : pointed-fam l3 A
+  precomp-pointed-fam =
+    pair
+      ( fam-pointed-fam B C ∘ map-pointed-map A B f)
+      ( tr
+        ( fam-pointed-fam B C)
+        ( inv (preserves-point-map-pointed-map A B f))
+        ( pt-pointed-fam B C))
+
+  precomp-pointed-Π : pointed-Π B C → pointed-Π A precomp-pointed-fam
+  precomp-pointed-Π g =
+    pair
+      ( λ x → function-pointed-Π B C g (map-pointed-map A B f x))
+      ( ( inv
+          ( apd
+            ( function-pointed-Π B C g)
+            ( inv (preserves-point-map-pointed-map A B f)))) ∙
+        ( ap
+          ( tr
+            ( fam-pointed-fam B C)
+            ( inv (preserves-point-map-pointed-map A B f)))
+          ( preserves-point-function-pointed-Π B C g)))
+
+module _
+  {l1 l2 l3 : Level} (A : UU-pt l1) (B : UU-pt l2) (C : UU-pt l3)
+  where
+
+  precomp-pointed-map : A →* B → B →* C → A →* C
+  precomp-pointed-map f g =
+    pair
+      ( map-pointed-map B C g ∘ map-pointed-map A B f)
+      ( ( ap (map-pointed-map B C g) (preserves-point-map-pointed-map A B f)) ∙
+        ( preserves-point-map-pointed-map B C g))
+
+  comp-pointed-map : B →* C → A →* B → A →* C
+  comp-pointed-map g f = precomp-pointed-map f g
+
+module _
+  {l1 : Level} (A : UU-pt l1)
+  where
+
+  id-pointed-map : A →* A
+  id-pointed-map = pair id refl
+
+module _
+  {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) (f : A →* B)
+  where
+
+  -- Pointed homotopies of pointed maps
+
+  htpy-pointed-map : (g : A →* B) → UU (l1 ⊔ l2)
+  htpy-pointed-map = htpy-pointed-Π A (constant-pointed-fam A B) f
+
+  refl-htpy-pointed-map : htpy-pointed-map f
+  refl-htpy-pointed-map = refl-htpy-pointed-Π A (constant-pointed-fam A B) f
+
+  htpy-eq-pointed-map :
+    (g : A →* B) → Id f g → htpy-pointed-map g
+  htpy-eq-pointed-map = htpy-eq-pointed-Π A (constant-pointed-fam A B) f
+
+  is-contr-total-htpy-pointed-map : is-contr (Σ (A →* B) htpy-pointed-map)
+  is-contr-total-htpy-pointed-map =
+    is-contr-total-htpy-pointed-Π A (constant-pointed-fam A B) f
+
+  is-equiv-htpy-eq-pointed-map :
+    (g : A →* B) → is-equiv (htpy-eq-pointed-map g)
+  is-equiv-htpy-eq-pointed-map =
+    is-equiv-htpy-eq-pointed-Π A (constant-pointed-fam A B) f
+
+  eq-htpy-pointed-map :
+    (g : A →* B) → (htpy-pointed-map g) → Id f g
+  eq-htpy-pointed-map = eq-htpy-pointed-Π A (constant-pointed-fam A B) f
 
 -- Pointed equivalences
+
+module _
+  {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) (f : A →* B)
+  where
+
+  sec-pointed-map : UU (l1 ⊔ l2)
+  sec-pointed-map =
+    Σ ( B →* A)
+      ( λ g →
+        htpy-pointed-map B B
+          ( comp-pointed-map B A B f g)
+          ( id-pointed-map B))
+
+  retr-pointed-map : UU (l1 ⊔ l2)
+  retr-pointed-map =
+    Σ ( B →* A)
+      ( λ g →
+        htpy-pointed-map A A
+          ( comp-pointed-map A B A g f)
+          ( id-pointed-map A))
+
+  is-equiv-pointed-map : UU (l1 ⊔ l2)
+  is-equiv-pointed-map = is-equiv (map-pointed-map A B f)
+
+  is-contr-sec-is-equiv-pointed-map :
+    is-equiv-pointed-map → is-contr sec-pointed-map
+  is-contr-sec-is-equiv-pointed-map H =
+    is-contr-total-Eq-structure
+      ( λ g p (G : (map-pointed-map A B f ∘ g) ~ id) →
+          Id { A = Id { A = type-UU-pt B}
+                      ( map-pointed-map A B f (g (pt-UU-pt B)))
+                      ( pt-UU-pt B)}
+             ( G (pt-UU-pt B))
+             ( ( ( ap (map-pointed-map A B f) p) ∙
+                 ( preserves-point-map-pointed-map A B f)) ∙
+               ( refl)))
+      ( is-contr-sec-is-equiv H)
+      ( pair (map-inv-is-equiv H) (issec-map-inv-is-equiv H))
+      ( is-contr-equiv
+        ( fib
+          ( ap (map-pointed-map A B f))
+          ( ( issec-map-inv-is-equiv H (pt-UU-pt B)) ∙
+            ( inv (preserves-point-map-pointed-map A B f))))
+        ( equiv-tot
+          ( λ p →
+            ( ( equiv-con-inv
+                ( ap (map-pointed-map A B f) p)
+                ( preserves-point-map-pointed-map A B f)
+                ( issec-map-inv-is-equiv H (pt-UU-pt B))) ∘e
+              ( equiv-inv
+                ( issec-map-inv-is-equiv H (pt-UU-pt B))
+                ( ( ap (map-pointed-map A B f) p) ∙
+                  ( preserves-point-map-pointed-map A B f)))) ∘e
+            ( equiv-concat'
+              ( issec-map-inv-is-equiv H (pt-UU-pt B))
+              ( right-unit))))
+        ( is-contr-map-is-equiv
+          ( is-emb-is-equiv H
+            ( map-inv-is-equiv H (pt-UU-pt B))
+            ( pt-UU-pt A))
+          ( ( issec-map-inv-is-equiv H (pt-UU-pt B)) ∙
+            ( inv (preserves-point-map-pointed-map A B f)))))
 
 _≃*_ : {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) → UU (l1 ⊔ l2)
 A ≃* B =
   Σ ( type-UU-pt A ≃ type-UU-pt B)
     ( λ e → Id (map-equiv e (pt-UU-pt A)) (pt-UU-pt B))
+
+compute-pointed-equiv :
+  {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) →
+  (A ≃* B) ≃ Σ (A →* B) (is-equiv-pointed-map A B)
+compute-pointed-equiv A B = equiv-right-swap-Σ
 
 module _
   {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) (e : A ≃* B)
@@ -233,6 +338,49 @@ module _
   eq-pointed-equiv : (B : UU-pt l1) → A ≃* B → Id A B
   eq-pointed-equiv B =
     map-inv-is-equiv (is-equiv-pointed-equiv-eq B)
+
+-- Loop spaces
+
+module _
+  {l : Level} (A : UU-pt l)
+  where
+  
+  type-Ω : UU l
+  type-Ω = Id (pt-UU-pt A) (pt-UU-pt A)
+
+  refl-Ω : type-Ω
+  refl-Ω = refl
+
+  Ω : UU-pt l
+  Ω = pair type-Ω refl-Ω
+
+-- Iterated loop spaces
+
+module _
+  {l : Level}
+  where
+
+  iterated-loop-space : ℕ → UU-pt l → UU-pt l
+  iterated-loop-space zero-ℕ A = A
+  iterated-loop-space (succ-ℕ n) A = Ω (iterated-loop-space n A)
+  
+  Ω² : UU-pt l → UU-pt l
+  Ω² A = iterated-loop-space two-ℕ A
+  
+  type-Ω² : {A : UU l} (a : A) → UU l
+  type-Ω² a = Id (refl {x = a}) (refl {x = a})
+  
+  refl-Ω² : {A : UU l} {a : A} → type-Ω² a
+  refl-Ω² = refl
+  
+  Ω³ : UU-pt l → UU-pt l
+  Ω³ A = iterated-loop-space three-ℕ A
+  
+  type-Ω³ : {A : UU l} (a : A) → UU l
+  type-Ω³ a = Id (refl-Ω² {a = a}) (refl-Ω² {a = a})
+  
+  refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
+  refl-Ω³ = refl
 
 -- We compute transport of type-Ω
 
