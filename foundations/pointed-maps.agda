@@ -232,6 +232,9 @@ module _
           ( comp-pointed-map A B A g f)
           ( id-pointed-map A))
 
+  is-iso-pointed-map : UU (l1 ⊔ l2)
+  is-iso-pointed-map = sec-pointed-map × retr-pointed-map
+
   is-equiv-pointed-map : UU (l1 ⊔ l2)
   is-equiv-pointed-map = is-equiv (map-pointed-map A B f)
 
@@ -273,6 +276,55 @@ module _
             ( pt-UU-pt A))
           ( ( issec-map-inv-is-equiv H (pt-UU-pt B)) ∙
             ( inv (preserves-point-map-pointed-map A B f)))))
+
+  is-contr-retr-is-equiv-pointed-map :
+    is-equiv-pointed-map → is-contr retr-pointed-map
+  is-contr-retr-is-equiv-pointed-map H =
+    is-contr-total-Eq-structure
+      ( λ g p (G : (g ∘ map-pointed-map A B f) ~ id) →
+        Id {A = Id { A = type-UU-pt A}
+                   ( g (map-pointed-map A B f (pt-UU-pt A)))
+                   ( pt-UU-pt A)}
+           ( G (pt-UU-pt A))
+           ( ( ( ap g (preserves-point-map-pointed-map A B f)) ∙
+               ( p)) ∙
+             ( refl)))
+      ( is-contr-retr-is-equiv H)
+      ( pair (map-inv-is-equiv H) (isretr-map-inv-is-equiv H))
+      ( is-contr-equiv
+        ( fib
+          ( λ p →
+            ( ( ap
+                ( map-inv-is-equiv H)
+                ( preserves-point-map-pointed-map A B f)) ∙
+              ( p)) ∙
+            ( refl))
+          ( isretr-map-inv-is-equiv H (pt-UU-pt A)))
+        ( equiv-tot (λ p → equiv-inv _ _))
+        ( is-contr-map-is-equiv
+          ( is-equiv-comp'
+            ( λ q → q ∙ refl)
+            ( λ p →
+              ( ap
+                ( map-inv-is-equiv H)
+                ( preserves-point-map-pointed-map A B f)) ∙
+              ( p))
+            ( is-equiv-concat
+              ( ap
+                ( map-inv-is-equiv H)
+                ( preserves-point-map-pointed-map A B f))
+              ( pt-UU-pt A))
+            ( is-equiv-concat'
+              ( map-inv-is-equiv H (map-pointed-map A B f (pt-UU-pt A)))
+              ( refl)))
+          ( isretr-map-inv-is-equiv H (pt-UU-pt A))))
+
+  is-contr-is-iso-is-equiv-pointed-map :
+    is-equiv-pointed-map → is-contr is-iso-pointed-map
+  is-contr-is-iso-is-equiv-pointed-map H =
+    is-contr-prod
+      ( is-contr-sec-is-equiv-pointed-map H)
+      ( is-contr-retr-is-equiv-pointed-map H)
 
 _≃*_ : {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) → UU (l1 ⊔ l2)
 A ≃* B =
