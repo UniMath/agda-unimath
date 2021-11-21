@@ -33,7 +33,7 @@ pt-cofiber :
 pt-cofiber {A = A} f = inr-cofiber f star
 
 cofiber-ptd :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → UU-pt (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → Pointed-Type (l1 ⊔ l2)
 cofiber-ptd f = pair (cofiber f) (pt-cofiber f)
 
 up-cofiber :
@@ -71,7 +71,7 @@ glue-join :
 glue-join A B = pr2 (pr2 (cocone-join A B))
 
 _∨_ :
-  {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) → UU-pt (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
 A ∨ B =
   pair
     ( pushout
@@ -83,14 +83,14 @@ A ∨ B =
       ( pr2 A))
 
 indexed-wedge :
-  {l1 l2 : Level} (I : UU l1) (A : I → UU-pt l2) → UU-pt (l1 ⊔ l2)
+  {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
 indexed-wedge I A =
   pair
     ( cofiber (λ i → pair i (pr2 (A i))))
     ( pt-cofiber (λ i → pair i (pr2 (A i))))
 
 wedge-inclusion :
-  {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) →
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   pr1 (A ∨ B) → (pr1 A) × (pr1 B)
 wedge-inclusion {l1} {l2} (pair A a) (pair B b) =
   map-inv-is-equiv
@@ -185,9 +185,9 @@ right-zero-law-join X =
     ( pair (inr-join X unit) (is-equiv-inr-join-unit X))
     ( is-contr-unit)
 
-unit-pt : UU-pt lzero
+unit-pt : Pointed-Type lzero
 unit-pt = pair unit star
 
 is-contr-pt :
-  {l : Level} → UU-pt l → UU l
+  {l : Level} → Pointed-Type l → UU l
 is-contr-pt A = is-contr (pr1 A)

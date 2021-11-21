@@ -1,26 +1,26 @@
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module groups.higher-groups where
 
-open import groups.pointed-maps public
+open import foundations.pointed-maps public
 
 ∞-Group : (l : Level) → UU (lsuc l)
-∞-Group l = Σ (UU-pt l) (λ X → is-path-connected (type-UU-pt X))
+∞-Group l = Σ (Pointed-Type l) (λ X → is-path-connected (type-Pointed-Type X))
 
 module _
   {l : Level} (G : ∞-Group l)
   where
 
-  classifying-pointed-type-∞-Group : UU-pt l
+  classifying-pointed-type-∞-Group : Pointed-Type l
   classifying-pointed-type-∞-Group = pr1 G
 
   classifying-type-∞-Group : UU l
   classifying-type-∞-Group =
-    type-UU-pt classifying-pointed-type-∞-Group
+    type-Pointed-Type classifying-pointed-type-∞-Group
 
   point-∞-Group : classifying-type-∞-Group
   point-∞-Group =
-    pt-UU-pt classifying-pointed-type-∞-Group
+    pt-Pointed-Type classifying-pointed-type-∞-Group
 
   is-path-connected-classifying-type-∞-Group :
     is-path-connected classifying-type-∞-Group

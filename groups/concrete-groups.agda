@@ -14,7 +14,7 @@ module _
   ∞-group-Concrete-Group : ∞-Group l
   ∞-group-Concrete-Group = pr1 G
 
-  classifying-pointed-type-Concrete-Group : UU-pt l
+  classifying-pointed-type-Concrete-Group : Pointed-Type l
   classifying-pointed-type-Concrete-Group =
     classifying-pointed-type-∞-Group ∞-group-Concrete-Group
 
