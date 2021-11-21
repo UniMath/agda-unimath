@@ -326,6 +326,37 @@ module _
       ( is-contr-sec-is-equiv-pointed-map H)
       ( is-contr-retr-is-equiv-pointed-map H)
 
+  is-iso-is-equiv-pointed-map :
+    is-equiv-pointed-map → is-iso-pointed-map
+  is-iso-is-equiv-pointed-map H =
+    center (is-contr-is-iso-is-equiv-pointed-map H)
+
+  is-equiv-is-iso-pointed-map :
+    is-iso-pointed-map → is-equiv-pointed-map
+  is-equiv-is-iso-pointed-map H =
+    pair
+      ( pair
+        ( pr1 (pr1 (pr1 H)))
+        ( pr1 (pr2 (pr1 H))))
+      ( pair
+        ( pr1 (pr1 (pr2 H)))
+        ( pr1 (pr2 (pr2 H))))
+
+  is-prop-is-iso-pointed-map : is-prop is-iso-pointed-map
+  is-prop-is-iso-pointed-map =
+    is-prop-is-proof-irrelevant
+      ( λ H →
+        is-contr-is-iso-is-equiv-pointed-map (is-equiv-is-iso-pointed-map H))
+
+  equiv-is-iso-is-equiv-pointed-map : is-equiv-pointed-map ≃ is-iso-pointed-map
+  equiv-is-iso-is-equiv-pointed-map =
+    pair
+      ( is-iso-is-equiv-pointed-map)
+      ( is-equiv-is-prop
+        ( is-subtype-is-equiv (map-pointed-map A B f))
+        ( is-prop-is-iso-pointed-map)
+        ( is-equiv-is-iso-pointed-map))
+
 _≃*_ : {l1 l2 : Level} (A : UU-pt l1) (B : UU-pt l2) → UU (l1 ⊔ l2)
 A ≃* B =
   Σ ( type-UU-pt A ≃ type-UU-pt B)
