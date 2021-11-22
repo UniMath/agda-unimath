@@ -6,7 +6,7 @@ src/Everything.agda:
 	@cd src ˆ&& sort -o agdaFiles agdaFiles
 	@cd src ˆ&& echo "-- Everything" > Everything.agda
 	@cd src ˆ&& echo "-- The list of Agda modules below is automatically generated.\n" >> Everything.agda
-	@cd src ˆ&& echo "{-# OPTIONS --without-K --exact-split --rewriting --allow-unsolved-metas #-}\n" >> Everything.agda
+	@cd src ˆ&& echo "{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}\n" >> Everything.agda
 	@cd src ˆ&& echo "module Everything where" >> Everything.agda
 	@cd src ˆ&& echo "" >> Everything.agda
 	@cd src ˆ&& cat agdaFiles | cut -c 3-               \
