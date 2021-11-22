@@ -3,6 +3,7 @@
 *.agdai
 MAlonzo/**
 _build/**
+src/agdaFiles
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
