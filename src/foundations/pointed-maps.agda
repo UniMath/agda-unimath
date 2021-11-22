@@ -257,6 +257,18 @@ module _
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
 
+  inv-assoc-comp-pointed-map :
+    (A : Pointed-Type l1) (B : Pointed-Type l2)
+    (C : Pointed-Type l3) (D : Pointed-Type l4)
+    (h : C →* D) (g : B →* C) (f : A →* B) →
+    htpy-pointed-map A D
+      ( comp-pointed-map A C D h (comp-pointed-map A B C g f))
+      ( comp-pointed-map A B D (comp-pointed-map B C D h g) f)
+  inv-assoc-comp-pointed-map
+    (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
+    (pair h refl) (pair g refl) (pair f refl) =
+    pair refl-htpy refl
+
 -- Groupoid structure of homotopies of pointed maps
 
 module _
@@ -277,6 +289,19 @@ module _
               ( ap
                 ( concat' (pt-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
+
+  inv-htpy-pointed-Π :
+    (f g : pointed-Π A B) → htpy-pointed-Π A B f g → htpy-pointed-Π A B g f
+  inv-htpy-pointed-Π f g H =
+    pair
+      ( inv-htpy (pr1 H))
+      ( ( ap inv (pr2 H)) ∙
+        ( ( distributive-inv-concat (pr2 f) (inv (pr2 g))) ∙
+          ( ap
+            ( concat'
+              ( function-pointed-Π A B g (pt-Pointed-Type A))
+              ( inv (pr2 f)))
+            ( inv-inv (pr2 g)))))
 
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
@@ -676,6 +701,118 @@ module _
     H : htpy-pointed-map A A (comp-pointed-map A B A h f) (id-pointed-map A)
     H = pr2 (pr2 I)
 
+-- Postcomposing by pointed equivalences
+
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
+  where
+
+  is-equiv-is-equiv-comp-pointed-map :
+    ({l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map X A B f)) →
+    is-equiv-pointed-map A B f
+  is-equiv-is-equiv-comp-pointed-map H =
+    is-equiv-has-inverse
+      ( map-pointed-map B A g)
+      ( pr1 G)
+      ( htpy-eq
+        ( ap pr1
+          ( ap pr1
+            ( eq-is-contr
+              ( is-contr-map-is-equiv (H A) f)
+                { pair
+                  ( comp-pointed-map A B A g f)
+                  ( eq-htpy-pointed-map A B
+                    ( comp-pointed-map A A B f (comp-pointed-map A B A g f))
+                    ( f)
+                    ( concat-htpy-pointed-map A B
+                      ( comp-pointed-map A A B f (comp-pointed-map A B A g f))
+                      ( comp-pointed-map A B B (comp-pointed-map B A B f g) f)
+                      ( f)
+                      ( inv-assoc-comp-pointed-map A B A B f g f)
+                      ( concat-htpy-pointed-map A B
+                        ( comp-pointed-map A B B (comp-pointed-map B A B f g) f)
+                        ( comp-pointed-map A B B (id-pointed-map B) f)
+                        ( f)
+                        ( right-whisker-htpy-pointed-map A B B
+                          ( comp-pointed-map B A B f g)
+                          ( id-pointed-map B)
+                          ( G)
+                          ( f))
+                        ( left-unit-law-comp-pointed-map A B f))))}
+                { pair
+                  ( id-pointed-map A)
+                  ( eq-htpy-pointed-map A B
+                    ( comp-pointed-map A A B f (id-pointed-map A))
+                    ( f)
+                    ( right-unit-law-comp-pointed-map A B f))}))))
+    where
+    g : B →* A
+    g = pr1 (center (is-contr-map-is-equiv (H B) (id-pointed-map B)))
+    G : htpy-pointed-map B B (comp-pointed-map B A B f g) (id-pointed-map B)
+    G = htpy-eq-pointed-map B B
+          ( comp-pointed-map B A B f g)
+          ( id-pointed-map B)
+          ( pr2 (center (is-contr-map-is-equiv (H B) (id-pointed-map B))))
+
+  is-equiv-comp-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f →
+    {l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map X A B f)
+  is-equiv-comp-is-equiv-pointed-map E X =
+    pair
+      ( pair
+        ( comp-pointed-map X B A g)
+        ( λ k →
+          eq-htpy-pointed-map X B
+            ( comp-pointed-map X A B f (comp-pointed-map X B A g k))
+            ( k)
+            ( concat-htpy-pointed-map X B
+              ( comp-pointed-map X A B f (comp-pointed-map X B A g k))
+              ( comp-pointed-map X B B (comp-pointed-map B A B f g) k)
+              ( k)
+              ( inv-assoc-comp-pointed-map X B A B f g k)
+              ( concat-htpy-pointed-map X B
+                ( comp-pointed-map X B B (comp-pointed-map B A B f g) k)
+                ( comp-pointed-map X B B (id-pointed-map B) k)
+                ( k)
+                ( right-whisker-htpy-pointed-map X B B
+                  ( comp-pointed-map B A B f g)
+                  ( id-pointed-map B)
+                  ( G)
+                  ( k))
+                ( left-unit-law-comp-pointed-map X B k)))))
+      ( pair
+        ( comp-pointed-map X B A h)
+        ( λ k →
+          eq-htpy-pointed-map X A
+            ( comp-pointed-map X B A h (comp-pointed-map X A B f k))
+            ( k)
+            ( concat-htpy-pointed-map X A
+              ( comp-pointed-map X B A h (comp-pointed-map X A B f k))
+              ( comp-pointed-map X A A (comp-pointed-map A B A h f) k)
+              ( k)
+              ( inv-assoc-comp-pointed-map X A B A h f k)
+              ( concat-htpy-pointed-map X A
+                ( comp-pointed-map X A A (comp-pointed-map A B A h f) k)
+                ( comp-pointed-map X A A (id-pointed-map A) k)
+                ( k)
+                ( right-whisker-htpy-pointed-map X A A
+                  ( comp-pointed-map A B A h f)
+                  ( id-pointed-map A)
+                  ( H)
+                  ( k))
+                ( left-unit-law-comp-pointed-map X A k)))))
+    where
+    I : is-iso-pointed-map A B f
+    I = is-iso-is-equiv-pointed-map A B f E
+    g : B →* A
+    g = pr1 (pr1 I)
+    G : htpy-pointed-map B B (comp-pointed-map B A B f g) (id-pointed-map B)
+    G = pr2 (pr1 I)
+    h : B →* A
+    h = pr1 (pr2 I)
+    H : htpy-pointed-map A A (comp-pointed-map A B A h f) (id-pointed-map A)
+    H = pr2 (pr2 I)
+
 -- Loop spaces
 
 module _
@@ -690,6 +827,107 @@ module _
 
   Ω : Pointed-Type l
   Ω = pair type-Ω refl-Ω
+
+  -- Wild group structure on loop spaces
+
+  mul-Ω : type-Ω → type-Ω → type-Ω
+  mul-Ω x y = x ∙ y
+
+  inv-Ω : type-Ω → type-Ω
+  inv-Ω = inv
+
+  associative-mul-Ω :
+    (x y z : type-Ω) → Id (mul-Ω (mul-Ω x y) z) (mul-Ω x (mul-Ω y z))
+  associative-mul-Ω x y z = assoc x y z
+
+  left-unit-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω refl-Ω x) x
+  left-unit-law-mul-Ω x = left-unit
+
+  right-unit-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω x refl-Ω) x
+  right-unit-law-mul-Ω x = right-unit
+
+  left-inverse-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω (inv-Ω x) x) refl-Ω
+  left-inverse-law-mul-Ω x = left-inv x
+
+  right-inverse-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω x (inv-Ω x)) refl-Ω
+  right-inverse-law-mul-Ω x = right-inv x
+
+-- We compute transport of type-Ω
+
+module _
+  {l1 : Level} {A : UU l1} {x y : A} 
+  where
+
+  equiv-tr-Ω : Id x y → Ω (pair A x) ≃* Ω (pair A y)
+  equiv-tr-Ω refl = pair equiv-id refl
+  
+  equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
+  equiv-tr-type-Ω p =
+    equiv-pointed-equiv (Ω (pair A x)) (Ω (pair A y)) (equiv-tr-Ω p)
+
+  tr-type-Ω : Id x y → type-Ω (pair A x) → type-Ω (pair A y)
+  tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
+
+  is-equiv-tr-type-Ω : (p : Id x y) → is-equiv (tr-type-Ω p)
+  is-equiv-tr-type-Ω p = is-equiv-map-equiv (equiv-tr-type-Ω p)
+
+  preserves-refl-tr-Ω : (p : Id x y) → Id (tr-type-Ω p refl) refl
+  preserves-refl-tr-Ω refl = refl
+
+  preserves-mul-tr-Ω :
+    (p : Id x y) (u v : type-Ω (pair A x)) →
+    Id ( tr-type-Ω p (mul-Ω (pair A x) u v))
+       ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
+  preserves-mul-tr-Ω refl u v = refl
+
+  preserves-inv-tr-Ω :
+    (p : Id x y) (u : type-Ω (pair A x)) →
+    Id ( tr-type-Ω p (inv-Ω (pair A x) u))
+       ( inv-Ω (pair A y) (tr-type-Ω p u))
+  preserves-inv-tr-Ω refl u = refl
+
+-- We show that Ω is a functor
+
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
+  where
+
+  map-Ω : type-Ω A → type-Ω B
+  map-Ω p =
+    tr-type-Ω
+      ( preserves-point-map-pointed-map A B f)
+      ( ap (map-pointed-map A B f) p)
+  
+  preserves-refl-map-Ω : Id (map-Ω refl) refl
+  preserves-refl-map-Ω = preserves-refl-tr-Ω (pr2 f)
+
+  pointed-map-Ω : Ω A →* Ω B
+  pointed-map-Ω = pair map-Ω preserves-refl-map-Ω
+
+  preserves-mul-map-Ω :
+    (x y : type-Ω A) → Id (map-Ω (mul-Ω A x y)) (mul-Ω B (map-Ω x) (map-Ω y))
+  preserves-mul-map-Ω x y =
+    ( ap
+      ( tr-type-Ω (preserves-point-map-pointed-map A B f))
+      ( ap-concat (map-pointed-map A B f) x y)) ∙
+    ( preserves-mul-tr-Ω
+      ( preserves-point-map-pointed-map A B f)
+      ( ap (map-pointed-map A B f) x)
+      ( ap (map-pointed-map A B f) y))
+
+  preserves-inv-map-Ω :
+    (x : type-Ω A) → Id (map-Ω (inv-Ω A x)) (inv-Ω B (map-Ω x))
+  preserves-inv-map-Ω x =
+    ( ap
+      ( tr-type-Ω (preserves-point-map-pointed-map A B f))
+      ( ap-inv (map-pointed-map A B f) x)) ∙
+    ( preserves-inv-tr-Ω
+      ( preserves-point-map-pointed-map A B f)
+      ( ap (map-pointed-map A B f) x))
 
 -- Iterated loop spaces
 
@@ -718,44 +956,5 @@ module _
   
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
-
--- We compute transport of type-Ω
-
-module _
-  {l1 : Level} {A : UU l1} {x y : A} (p : Id x y)
-  where
-
-  equiv-tr-type-Ω : type-Ω (pair A x) ≃ type-Ω (pair A y)
-  equiv-tr-type-Ω  = equiv-concat (inv p) y ∘e equiv-concat' x p
-
-  tr-type-Ω : type-Ω (pair A x) → type-Ω (pair A y)
-  tr-type-Ω = map-equiv equiv-tr-type-Ω
-
-  is-equiv-tr-type-Ω : is-equiv tr-type-Ω
-  is-equiv-tr-type-Ω = is-equiv-map-equiv equiv-tr-type-Ω
-
-  preserves-point-tr-Ω : Id (tr-type-Ω refl) refl
-  preserves-point-tr-Ω = left-inv p
-
-  equiv-tr-Ω : Ω (pair A x) ≃* Ω (pair A y)
-  equiv-tr-Ω = pair equiv-tr-type-Ω preserves-point-tr-Ω
-
--- We show that Ω is a functor
-
-module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
-  where
-
-  map-Ω : type-Ω A → type-Ω B
-  map-Ω p =
-    tr-type-Ω
-      ( preserves-point-map-pointed-map A B f)
-      ( ap (map-pointed-map A B f) p)
-  
-  preserves-refl-map-Ω : Id (map-Ω refl) refl
-  preserves-refl-map-Ω = left-inv (preserves-point-map-pointed-map A B f)
-
-  pointed-map-Ω : Ω A →* Ω B
-  pointed-map-Ω = pair map-Ω preserves-refl-map-Ω
 
 
