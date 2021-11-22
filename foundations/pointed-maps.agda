@@ -257,6 +257,18 @@ module _
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
 
+  inv-assoc-comp-pointed-map :
+    (A : Pointed-Type l1) (B : Pointed-Type l2)
+    (C : Pointed-Type l3) (D : Pointed-Type l4)
+    (h : C →* D) (g : B →* C) (f : A →* B) →
+    htpy-pointed-map A D
+      ( comp-pointed-map A C D h (comp-pointed-map A B C g f))
+      ( comp-pointed-map A B D (comp-pointed-map B C D h g) f)
+  inv-assoc-comp-pointed-map
+    (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
+    (pair h refl) (pair g refl) (pair f refl) =
+    pair refl-htpy refl
+
 -- Groupoid structure of homotopies of pointed maps
 
 module _
@@ -277,6 +289,19 @@ module _
               ( ap
                 ( concat' (pt-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
+
+  inv-htpy-pointed-Π :
+    (f g : pointed-Π A B) → htpy-pointed-Π A B f g → htpy-pointed-Π A B g f
+  inv-htpy-pointed-Π f g H =
+    pair
+      ( inv-htpy (pr1 H))
+      ( ( ap inv (pr2 H)) ∙
+        ( ( distributive-inv-concat (pr2 f) (inv (pr2 g))) ∙
+          ( ap
+            ( concat'
+              ( function-pointed-Π A B g (pt-Pointed-Type A))
+              ( inv (pr2 f)))
+            ( inv-inv (pr2 g)))))
 
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
@@ -664,6 +689,118 @@ module _
                   ( id-pointed-map B)
                   ( G))
                 ( right-unit-law-comp-pointed-map B C k)))))
+    where
+    I : is-iso-pointed-map A B f
+    I = is-iso-is-equiv-pointed-map A B f E
+    g : B →* A
+    g = pr1 (pr1 I)
+    G : htpy-pointed-map B B (comp-pointed-map B A B f g) (id-pointed-map B)
+    G = pr2 (pr1 I)
+    h : B →* A
+    h = pr1 (pr2 I)
+    H : htpy-pointed-map A A (comp-pointed-map A B A h f) (id-pointed-map A)
+    H = pr2 (pr2 I)
+
+-- Postcomposing by pointed equivalences
+
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
+  where
+
+  is-equiv-is-equiv-comp-pointed-map :
+    ({l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map X A B f)) →
+    is-equiv-pointed-map A B f
+  is-equiv-is-equiv-comp-pointed-map H =
+    is-equiv-has-inverse
+      ( map-pointed-map B A g)
+      ( pr1 G)
+      ( htpy-eq
+        ( ap pr1
+          ( ap pr1
+            ( eq-is-contr
+              ( is-contr-map-is-equiv (H A) f)
+                { pair
+                  ( comp-pointed-map A B A g f)
+                  ( eq-htpy-pointed-map A B
+                    ( comp-pointed-map A A B f (comp-pointed-map A B A g f))
+                    ( f)
+                    ( concat-htpy-pointed-map A B
+                      ( comp-pointed-map A A B f (comp-pointed-map A B A g f))
+                      ( comp-pointed-map A B B (comp-pointed-map B A B f g) f)
+                      ( f)
+                      ( inv-assoc-comp-pointed-map A B A B f g f)
+                      ( concat-htpy-pointed-map A B
+                        ( comp-pointed-map A B B (comp-pointed-map B A B f g) f)
+                        ( comp-pointed-map A B B (id-pointed-map B) f)
+                        ( f)
+                        ( right-whisker-htpy-pointed-map A B B
+                          ( comp-pointed-map B A B f g)
+                          ( id-pointed-map B)
+                          ( G)
+                          ( f))
+                        ( left-unit-law-comp-pointed-map A B f))))}
+                { pair
+                  ( id-pointed-map A)
+                  ( eq-htpy-pointed-map A B
+                    ( comp-pointed-map A A B f (id-pointed-map A))
+                    ( f)
+                    ( right-unit-law-comp-pointed-map A B f))}))))
+    where
+    g : B →* A
+    g = pr1 (center (is-contr-map-is-equiv (H B) (id-pointed-map B)))
+    G : htpy-pointed-map B B (comp-pointed-map B A B f g) (id-pointed-map B)
+    G = htpy-eq-pointed-map B B
+          ( comp-pointed-map B A B f g)
+          ( id-pointed-map B)
+          ( pr2 (center (is-contr-map-is-equiv (H B) (id-pointed-map B))))
+
+  is-equiv-comp-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f →
+    {l : Level} (X : Pointed-Type l) → is-equiv (comp-pointed-map X A B f)
+  is-equiv-comp-is-equiv-pointed-map E X =
+    pair
+      ( pair
+        ( comp-pointed-map X B A g)
+        ( λ k →
+          eq-htpy-pointed-map X B
+            ( comp-pointed-map X A B f (comp-pointed-map X B A g k))
+            ( k)
+            ( concat-htpy-pointed-map X B
+              ( comp-pointed-map X A B f (comp-pointed-map X B A g k))
+              ( comp-pointed-map X B B (comp-pointed-map B A B f g) k)
+              ( k)
+              ( inv-assoc-comp-pointed-map X B A B f g k)
+              ( concat-htpy-pointed-map X B
+                ( comp-pointed-map X B B (comp-pointed-map B A B f g) k)
+                ( comp-pointed-map X B B (id-pointed-map B) k)
+                ( k)
+                ( right-whisker-htpy-pointed-map X B B
+                  ( comp-pointed-map B A B f g)
+                  ( id-pointed-map B)
+                  ( G)
+                  ( k))
+                ( left-unit-law-comp-pointed-map X B k)))))
+      ( pair
+        ( comp-pointed-map X B A h)
+        ( λ k →
+          eq-htpy-pointed-map X A
+            ( comp-pointed-map X B A h (comp-pointed-map X A B f k))
+            ( k)
+            ( concat-htpy-pointed-map X A
+              ( comp-pointed-map X B A h (comp-pointed-map X A B f k))
+              ( comp-pointed-map X A A (comp-pointed-map A B A h f) k)
+              ( k)
+              ( inv-assoc-comp-pointed-map X A B A h f k)
+              ( concat-htpy-pointed-map X A
+                ( comp-pointed-map X A A (comp-pointed-map A B A h f) k)
+                ( comp-pointed-map X A A (id-pointed-map A) k)
+                ( k)
+                ( right-whisker-htpy-pointed-map X A A
+                  ( comp-pointed-map A B A h f)
+                  ( id-pointed-map A)
+                  ( H)
+                  ( k))
+                ( left-unit-law-comp-pointed-map X A k)))))
     where
     I : is-iso-pointed-map A B f
     I = is-iso-is-equiv-pointed-map A B f E
