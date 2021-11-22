@@ -2,14 +2,14 @@
 .PHONY : src/Everything.agda
 src/Everything.agda:
 	@rm -rf $@
-	@cd src ˆ&& find . -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > agdaFiles
-	@cd src ˆ&& sort -o agdaFiles agdaFiles
-	@cd src ˆ&& echo "-- Everything" > Everything.agda
-	@cd src ˆ&& echo "-- The list of Agda modules below is automatically generated.\n" >> Everything.agda
-	@cd src ˆ&& echo "{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}\n" >> Everything.agda
-	@cd src ˆ&& echo "module Everything where" >> Everything.agda
-	@cd src ˆ&& echo "" >> Everything.agda
-	@cd src ˆ&& cat agdaFiles | cut -c 3-               \
+	@cd src && find . -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > agdaFiles
+	@cd src && sort -o agdaFiles agdaFiles
+	@cd src && echo "-- Everything" > Everything.agda
+	@cd src && echo "-- The list of Agda modules below is automatically generated." >> Everything.agda
+	@cd src && echo "{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}" >> Everything.agda
+	@cd src && echo "module Everything where" >> Everything.agda
+	@cd src && echo "" >> Everything.agda
+	@cd src && cat agdaFiles | cut -c 3-               \
                      | cut -f1 -d'.'           \
                      | sed 's/\//\./g'         \
                      | sed 's/^/open import /' \
