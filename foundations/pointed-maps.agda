@@ -828,6 +828,107 @@ module _
   Ω : Pointed-Type l
   Ω = pair type-Ω refl-Ω
 
+  -- Wild group structure on loop spaces
+
+  mul-Ω : type-Ω → type-Ω → type-Ω
+  mul-Ω x y = x ∙ y
+
+  inv-Ω : type-Ω → type-Ω
+  inv-Ω = inv
+
+  associative-mul-Ω :
+    (x y z : type-Ω) → Id (mul-Ω (mul-Ω x y) z) (mul-Ω x (mul-Ω y z))
+  associative-mul-Ω x y z = assoc x y z
+
+  left-unit-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω refl-Ω x) x
+  left-unit-law-mul-Ω x = left-unit
+
+  right-unit-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω x refl-Ω) x
+  right-unit-law-mul-Ω x = right-unit
+
+  left-inverse-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω (inv-Ω x) x) refl-Ω
+  left-inverse-law-mul-Ω x = left-inv x
+
+  right-inverse-law-mul-Ω :
+    (x : type-Ω) → Id (mul-Ω x (inv-Ω x)) refl-Ω
+  right-inverse-law-mul-Ω x = right-inv x
+
+-- We compute transport of type-Ω
+
+module _
+  {l1 : Level} {A : UU l1} {x y : A} 
+  where
+
+  equiv-tr-Ω : Id x y → Ω (pair A x) ≃* Ω (pair A y)
+  equiv-tr-Ω refl = pair equiv-id refl
+  
+  equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
+  equiv-tr-type-Ω p =
+    equiv-pointed-equiv (Ω (pair A x)) (Ω (pair A y)) (equiv-tr-Ω p)
+
+  tr-type-Ω : Id x y → type-Ω (pair A x) → type-Ω (pair A y)
+  tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
+
+  is-equiv-tr-type-Ω : (p : Id x y) → is-equiv (tr-type-Ω p)
+  is-equiv-tr-type-Ω p = is-equiv-map-equiv (equiv-tr-type-Ω p)
+
+  preserves-refl-tr-Ω : (p : Id x y) → Id (tr-type-Ω p refl) refl
+  preserves-refl-tr-Ω refl = refl
+
+  preserves-mul-tr-Ω :
+    (p : Id x y) (u v : type-Ω (pair A x)) →
+    Id ( tr-type-Ω p (mul-Ω (pair A x) u v))
+       ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
+  preserves-mul-tr-Ω refl u v = refl
+
+  preserves-inv-tr-Ω :
+    (p : Id x y) (u : type-Ω (pair A x)) →
+    Id ( tr-type-Ω p (inv-Ω (pair A x) u))
+       ( inv-Ω (pair A y) (tr-type-Ω p u))
+  preserves-inv-tr-Ω refl u = refl
+
+-- We show that Ω is a functor
+
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
+  where
+
+  map-Ω : type-Ω A → type-Ω B
+  map-Ω p =
+    tr-type-Ω
+      ( preserves-point-map-pointed-map A B f)
+      ( ap (map-pointed-map A B f) p)
+  
+  preserves-refl-map-Ω : Id (map-Ω refl) refl
+  preserves-refl-map-Ω = preserves-refl-tr-Ω (pr2 f)
+
+  pointed-map-Ω : Ω A →* Ω B
+  pointed-map-Ω = pair map-Ω preserves-refl-map-Ω
+
+  preserves-mul-map-Ω :
+    (x y : type-Ω A) → Id (map-Ω (mul-Ω A x y)) (mul-Ω B (map-Ω x) (map-Ω y))
+  preserves-mul-map-Ω x y =
+    ( ap
+      ( tr-type-Ω (preserves-point-map-pointed-map A B f))
+      ( ap-concat (map-pointed-map A B f) x y)) ∙
+    ( preserves-mul-tr-Ω
+      ( preserves-point-map-pointed-map A B f)
+      ( ap (map-pointed-map A B f) x)
+      ( ap (map-pointed-map A B f) y))
+
+  preserves-inv-map-Ω :
+    (x : type-Ω A) → Id (map-Ω (inv-Ω A x)) (inv-Ω B (map-Ω x))
+  preserves-inv-map-Ω x =
+    ( ap
+      ( tr-type-Ω (preserves-point-map-pointed-map A B f))
+      ( ap-inv (map-pointed-map A B f) x)) ∙
+    ( preserves-inv-tr-Ω
+      ( preserves-point-map-pointed-map A B f)
+      ( ap (map-pointed-map A B f) x))
+
 -- Iterated loop spaces
 
 module _
@@ -855,44 +956,5 @@ module _
   
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
-
--- We compute transport of type-Ω
-
-module _
-  {l1 : Level} {A : UU l1} {x y : A} (p : Id x y)
-  where
-
-  equiv-tr-type-Ω : type-Ω (pair A x) ≃ type-Ω (pair A y)
-  equiv-tr-type-Ω  = equiv-concat (inv p) y ∘e equiv-concat' x p
-
-  tr-type-Ω : type-Ω (pair A x) → type-Ω (pair A y)
-  tr-type-Ω = map-equiv equiv-tr-type-Ω
-
-  is-equiv-tr-type-Ω : is-equiv tr-type-Ω
-  is-equiv-tr-type-Ω = is-equiv-map-equiv equiv-tr-type-Ω
-
-  preserves-point-tr-Ω : Id (tr-type-Ω refl) refl
-  preserves-point-tr-Ω = left-inv p
-
-  equiv-tr-Ω : Ω (pair A x) ≃* Ω (pair A y)
-  equiv-tr-Ω = pair equiv-tr-type-Ω preserves-point-tr-Ω
-
--- We show that Ω is a functor
-
-module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
-  where
-
-  map-Ω : type-Ω A → type-Ω B
-  map-Ω p =
-    tr-type-Ω
-      ( preserves-point-map-pointed-map A B f)
-      ( ap (map-pointed-map A B f) p)
-  
-  preserves-refl-map-Ω : Id (map-Ω refl) refl
-  preserves-refl-map-Ω = left-inv (preserves-point-map-pointed-map A B f)
-
-  pointed-map-Ω : Ω A →* Ω B
-  pointed-map-Ω = pair map-Ω preserves-refl-map-Ω
 
 
