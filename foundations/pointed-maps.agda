@@ -324,6 +324,20 @@ module _
             ( inv (ap (pr1 g) (pr2 f2) ∙ pr2 g)))))
 
 module _
+  {l1 l2 l3 : Level} 
+  where
+
+  right-whisker-htpy-pointed-map :
+    (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3)
+    (g1 g2 : B →* C) (H : htpy-pointed-map B C g1 g2) (f : A →* B) →
+    htpy-pointed-map A C
+      ( comp-pointed-map A B C g1 f)
+      ( comp-pointed-map A B C g2 f)
+  right-whisker-htpy-pointed-map (pair A a) (pair B .(f a)) (pair C c)
+    g1 g2 H (pair f refl) = 
+    pair (pr1 H ·r f) (pr2 H)
+  
+module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
@@ -604,6 +618,63 @@ module _
           ( comp-pointed-map A B A g f)
           ( id-pointed-map A)
           ( pr2 (center (is-contr-map-is-equiv (H A) (id-pointed-map A))))
+
+  is-equiv-precomp-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f →
+    {l : Level} → (C : Pointed-Type l) → is-equiv (precomp-pointed-map A B C f)
+  is-equiv-precomp-is-equiv-pointed-map E C =
+    pair
+      ( pair
+        ( precomp-pointed-map B A C h)
+        ( λ k →
+          eq-htpy-pointed-map A C
+            ( comp-pointed-map A B C (comp-pointed-map B A C k h) f)
+            ( k)
+            ( concat-htpy-pointed-map A C
+              ( comp-pointed-map A B C (comp-pointed-map B A C k h) f)
+              ( comp-pointed-map A A C k (comp-pointed-map A B A h f))
+              ( k)
+              ( assoc-comp-pointed-map A B A C k h f)
+              ( concat-htpy-pointed-map A C
+                ( comp-pointed-map A A C k (comp-pointed-map A B A h f))
+                ( comp-pointed-map A A C k (id-pointed-map A))
+                ( k)
+                ( left-whisker-htpy-pointed-map A A C k
+                  ( comp-pointed-map A B A h f)
+                  ( id-pointed-map A)
+                  ( H))
+                ( right-unit-law-comp-pointed-map A C k)))))
+      ( pair
+        ( precomp-pointed-map B A C g)
+        ( λ k →
+          eq-htpy-pointed-map B C
+            ( comp-pointed-map B A C (comp-pointed-map A B C k f) g)
+            ( k)
+            ( concat-htpy-pointed-map B C
+              ( comp-pointed-map B A C (comp-pointed-map A B C k f) g)
+              ( comp-pointed-map B B C k (comp-pointed-map B A B f g))
+              ( k)
+              ( assoc-comp-pointed-map B A B C k f g)
+              ( concat-htpy-pointed-map B C
+                ( comp-pointed-map B B C k (comp-pointed-map B A B f g))
+                ( comp-pointed-map B B C k (id-pointed-map B))
+                ( k)
+                ( left-whisker-htpy-pointed-map B B C k
+                  ( comp-pointed-map B A B f g)
+                  ( id-pointed-map B)
+                  ( G))
+                ( right-unit-law-comp-pointed-map B C k)))))
+    where
+    I : is-iso-pointed-map A B f
+    I = is-iso-is-equiv-pointed-map A B f E
+    g : B →* A
+    g = pr1 (pr1 I)
+    G : htpy-pointed-map B B (comp-pointed-map B A B f g) (id-pointed-map B)
+    G = pr2 (pr1 I)
+    h : B →* A
+    h = pr1 (pr2 I)
+    H : htpy-pointed-map A A (comp-pointed-map A B A h f) (id-pointed-map A)
+    H = pr2 (pr2 I)
 
 -- Loop spaces
 
