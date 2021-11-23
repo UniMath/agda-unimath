@@ -956,5 +956,3 @@ module _
   
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
-
-

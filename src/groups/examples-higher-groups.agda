@@ -6,6 +6,27 @@ open import groups.higher-groups public
 open import the-circle.the-circle public
 
 module _
+  where
+
+  classifying-type-ℤ-∞-Group : UU lzero
+  classifying-type-ℤ-∞-Group = 𝕊¹
+
+  shape-ℤ-∞-Group : 𝕊¹
+  shape-ℤ-∞-Group = base-𝕊¹
+
+  classifying-pointed-type-ℤ-∞-Group : Pointed-Type lzero
+  classifying-pointed-type-ℤ-∞-Group =
+    pair
+      classifying-type-ℤ-∞-Group
+      shape-ℤ-∞-Group
+
+  ℤ-∞-Group : ∞-Group lzero
+  ℤ-∞-Group =
+    pair
+      classifying-pointed-type-ℤ-∞-Group
+      is-path-connected-𝕊¹
+
+module _
   {l : Level} (X : UU l)
   where
 
@@ -32,12 +53,3 @@ module _
     pair
       classifying-pointed-type-symmetric-∞-Group
       is-path-connected-classifying-type-symmetric-∞-Group
-
-module _
-  where
-
-  classifying-type-ℤ-∞-Group : UU lzero
-  classifying-type-ℤ-∞-Group = 𝕊¹
-
-  shape-ℤ-∞-Group : 𝕊¹
-  shape-ℤ-∞-Group = base-𝕊¹

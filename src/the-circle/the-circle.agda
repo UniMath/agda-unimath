@@ -354,8 +354,6 @@ universal-property-𝕊¹ =
 
 -- Section 14.3 Multiplication on the circle
 
-
-
 {- Exercises -}
 
 -- Exercise 11.1
@@ -378,6 +376,17 @@ abstract
 
 --------------------------------------------------------------------------------
 
+-- The circle is path connected
+
 mere-eq-𝕊¹ : (x y : 𝕊¹) → mere-eq x y
 mere-eq-𝕊¹ =
-  {!dependent-universal-property-𝕊¹ ?!}
+  apply-dependent-universal-property-𝕊¹
+    ( λ x → (y : 𝕊¹) → mere-eq x y)
+    ( apply-dependent-universal-property-𝕊¹
+      ( mere-eq base-𝕊¹)
+      ( refl-mere-eq)
+      ( eq-is-prop is-prop-type-trunc-Prop))
+    ( eq-is-prop (is-prop-Π (λ y → is-prop-type-trunc-Prop)))
+
+is-path-connected-𝕊¹ : is-path-connected 𝕊¹
+is-path-connected-𝕊¹ = is-path-connected-mere-eq base-𝕊¹ (mere-eq-𝕊¹ base-𝕊¹)
