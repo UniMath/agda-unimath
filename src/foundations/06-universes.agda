@@ -93,7 +93,8 @@ is-injective-succ-ℤ {x} {y} p =
 
 Peano-7 :
   (x y : ℕ) → (Id x y) ↔ (Id (succ-ℕ x) (succ-ℕ y))
-Peano-7 x y = pair (ap succ-ℕ) (is-injective-succ-ℕ)
+pr1 (Peano-7 x y) = ap succ-ℕ
+pr2 (Peano-7 x y) = is-injective-succ-ℕ
 
 -- Theorem 6.4.2
 
@@ -120,7 +121,8 @@ is-nonzero-is-successor-ℕ {.succ-ℕ x} (pair x refl) = Peano-8 x
 
 is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-ℕ x
 is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)
-is-successor-is-nonzero-ℕ {succ-ℕ x} H = pair x refl
+pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
+pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
 
 --------------------------------------------------------------------------------
 
@@ -1012,7 +1014,8 @@ is-positive-one-ℤ : is-positive-ℤ one-ℤ
 is-positive-one-ℤ = star
 
 one-positive-ℤ : positive-ℤ
-one-positive-ℤ = pair one-ℤ is-positive-one-ℤ
+pr1 one-positive-ℤ = one-ℤ
+pr2 one-positive-ℤ = is-positive-one-ℤ
 
 is-positive-succ-ℤ : {x : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ (succ-ℤ x)
 is-positive-succ-ℤ {inr (inl star)} H = is-positive-one-ℤ
@@ -1067,8 +1070,8 @@ is-nonnegative-int-ℕ zero-ℕ = star
 is-nonnegative-int-ℕ (succ-ℕ n) = star
 
 nonnegative-int-ℕ : ℕ → nonnegative-ℤ
-nonnegative-int-ℕ n =
-  pair (int-ℕ n) (is-nonnegative-int-ℕ n)
+pr1 (nonnegative-int-ℕ n) = int-ℕ n
+pr2 (nonnegative-int-ℕ n) = is-nonnegative-int-ℕ n
 
 nat-nonnegative-ℤ : nonnegative-ℤ → ℕ
 nat-nonnegative-ℤ (pair (inr (inl x)) H) = zero-ℕ

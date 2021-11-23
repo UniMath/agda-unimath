@@ -248,7 +248,8 @@ A ↔ B = (A → B) × (B → A)
 _∘iff_ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (B ↔ C) → (A ↔ B) → (A ↔ C)
-(pair g1 g2) ∘iff (pair f1 f2) = pair (g1 ∘ f1) (f2 ∘ g2)
+pr1 (pair g1 g2 ∘iff pair f1 f2) = g1 ∘ f1
+pr2 (pair g1 g2 ∘iff pair f1 f2) = f2 ∘ g2
 
 --------------------------------------------------------------------------------
 
@@ -409,10 +410,8 @@ dn-elim-exp {P = P} {Q = Q} f p =
 dn-elim-prod :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
-dn-elim-prod {P = P} {Q = Q} f =
-  pair
-    ( dn-elim-neg (¬ P) (functor-dn pr1 f))
-    ( dn-elim-neg (¬ Q) (functor-dn pr2 f))
+pr1 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ P) (functor-dn pr1 f)
+pr2 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ Q) (functor-dn pr2 f)
 
 -- Exercise 4.3
 

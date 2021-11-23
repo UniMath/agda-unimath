@@ -341,7 +341,10 @@ apply-dependent-universal-property-𝕊¹ P p0 α =
 
 dependent-uniqueness-𝕊¹ :
   {l : Level} {P : 𝕊¹ → UU l} (k : dependent-free-loops free-loop-𝕊¹ P) →
-  is-contr (Σ ((x : 𝕊¹) → P x) (λ h → Eq-dependent-free-loops free-loop-𝕊¹ P (ev-free-loop' free-loop-𝕊¹ P h) k))
+  is-contr
+    ( Σ ( (x : 𝕊¹) → P x)
+        ( λ h →
+          Eq-dependent-free-loops free-loop-𝕊¹ P (ev-free-loop' free-loop-𝕊¹ P h) k))
 dependent-uniqueness-𝕊¹ {l} {P} k =
   dependent-uniqueness-circle free-loop-𝕊¹ dependent-universal-property-𝕊¹ k
 

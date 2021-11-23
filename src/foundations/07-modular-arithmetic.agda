@@ -50,7 +50,8 @@ is-odd-ℕ n = ¬ (is-even-ℕ n)
 
 div-one-ℕ :
   (x : ℕ) → div-ℕ one-ℕ x
-div-one-ℕ x = pair x (right-unit-law-mul-ℕ x)
+pr1 (div-one-ℕ x) = x
+pr2 (div-one-ℕ x) = right-unit-law-mul-ℕ x
 
 div-is-one-ℕ :
   (k x : ℕ) → is-one-ℕ k → div-ℕ k x
@@ -58,7 +59,8 @@ div-is-one-ℕ .one-ℕ x refl = div-one-ℕ x
 
 div-zero-ℕ :
   (k : ℕ) → div-ℕ k zero-ℕ
-div-zero-ℕ k = pair zero-ℕ (left-zero-law-mul-ℕ k)
+pr1 (div-zero-ℕ k) = zero-ℕ
+pr2 (div-zero-ℕ k) = left-zero-law-mul-ℕ k
 
 div-is-zero-ℕ :
   (k x : ℕ) → is-zero-ℕ x → div-ℕ k x
@@ -71,11 +73,10 @@ div-is-zero-ℕ k .zero-ℕ refl = div-zero-ℕ k
 
 div-add-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (add-ℕ x y)
-div-add-ℕ d x y (pair n p) (pair m q) =
-  pair
-    ( add-ℕ n m)
-    ( ( right-distributive-mul-add-ℕ n m d) ∙
-      ( ap-add-ℕ p q))
+pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = add-ℕ n m
+pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
+  ( right-distributive-mul-add-ℕ n m d) ∙
+  ( ap-add-ℕ p q)
 
 div-left-summand-ℕ :
   (d x y : ℕ) → div-ℕ d y → div-ℕ d (add-ℕ x y) → div-ℕ d x
@@ -83,23 +84,22 @@ div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
   pair zero-ℕ
     ( ( inv (right-zero-law-mul-ℕ n)) ∙
       ( p ∙ (ap (add-ℕ x) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
-div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p) =
-  pair
-    ( dist-ℕ m n)
-    ( is-injective-add-ℕ' (mul-ℕ m (succ-ℕ d))
-      ( ( inv
-          ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
-            ( commutative-add-ℕ
-              ( mul-ℕ m (succ-ℕ d))
-              ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙ 
-        ( ( ap
-            ( mul-ℕ' (succ-ℕ d))
-            ( is-additive-right-inverse-dist-ℕ m n
-              ( leq-leq-mul-ℕ' m n d
-                ( concatenate-eq-leq-eq-ℕ q
-                  ( leq-add-ℕ' y x)
-                  ( inv p))))) ∙
-          ( p ∙ (ap (add-ℕ x) (inv q))))))
+pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
+pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
+  is-injective-add-ℕ' (mul-ℕ m (succ-ℕ d))
+    ( ( inv
+        ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
+          ( commutative-add-ℕ
+            ( mul-ℕ m (succ-ℕ d))
+            ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙ 
+      ( ( ap
+          ( mul-ℕ' (succ-ℕ d))
+          ( is-additive-right-inverse-dist-ℕ m n
+            ( leq-leq-mul-ℕ' m n d
+              ( concatenate-eq-leq-eq-ℕ q
+                ( leq-add-ℕ' y x)
+                ( inv p))))) ∙
+        ( p ∙ (ap (add-ℕ x) (inv q)))))
 
 div-right-summand-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d (add-ℕ x y) → div-ℕ d y
@@ -165,8 +165,9 @@ is-discrete-cong-zero-ℕ x y (pair k p) =
 
 cong-zero-ℕ :
   (k : ℕ) → cong-ℕ k k zero-ℕ
-cong-zero-ℕ k =
-  pair one-ℕ ((left-unit-law-mul-ℕ k) ∙ (inv (right-unit-law-dist-ℕ k)))
+pr1 (cong-zero-ℕ k) = one-ℕ
+pr2 (cong-zero-ℕ k) =
+  (left-unit-law-mul-ℕ k) ∙ (inv (right-unit-law-dist-ℕ k))
 
 {- Proposition 7.2.4 -}
 
@@ -174,8 +175,9 @@ cong-zero-ℕ k =
 
 refl-cong-ℕ :
   (k x : ℕ) → cong-ℕ k x x
-refl-cong-ℕ k x =
-  pair zero-ℕ ((left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl)))
+pr1 (refl-cong-ℕ k x) = zero-ℕ
+pr2 (refl-cong-ℕ k x) =
+  (left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl))
 
 cong-identification-ℕ :
   (k : ℕ) {x y : ℕ} → Id x y → cong-ℕ k x y
@@ -183,8 +185,8 @@ cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
 symm-cong-ℕ :
   (k x y : ℕ) → cong-ℕ k x y → cong-ℕ k y x
-symm-cong-ℕ k x y (pair d p) =
-  pair d (p ∙ (symmetric-dist-ℕ x y))
+pr1 (symm-cong-ℕ k x y (pair d p)) = d
+pr2 (symm-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
 
 cong-zero-ℕ' :
   (k : ℕ) → cong-ℕ k zero-ℕ k
@@ -629,8 +631,8 @@ issec-nat-Fin {k} x =
 
 is-split-surjective-mod-succ-ℕ :
   {k : ℕ} → is-split-surjective (mod-succ-ℕ k)
-is-split-surjective-mod-succ-ℕ {k} x =
-  pair (nat-Fin x) (issec-nat-Fin x)
+pr1 (is-split-surjective-mod-succ-ℕ {k} x) = nat-Fin x
+pr2 (is-split-surjective-mod-succ-ℕ {k} x) = issec-nat-Fin x
 
 --------------------------------------------------------------------------------
 
@@ -684,8 +686,9 @@ cong-neg-Fin {succ-ℕ k} x =
 
 translation-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ z x) (add-ℕ z y)
-translation-invariant-cong-ℕ k x y z (pair d p) =
-  pair d (p ∙ inv (translation-invariant-dist-ℕ z x y))
+pr1 (translation-invariant-cong-ℕ k x y z (pair d p)) = d
+pr2 (translation-invariant-cong-ℕ k x y z (pair d p)) =
+  p ∙ inv (translation-invariant-dist-ℕ z x y)
 
 translation-invariant-cong-ℕ' :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ x z) (add-ℕ y z)
@@ -701,8 +704,9 @@ step-invariant-cong-ℕ k x y = translation-invariant-cong-ℕ' k x y one-ℕ
 
 reflects-cong-add-ℕ :
   {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (add-ℕ x y) (add-ℕ x z) → cong-ℕ k y z
-reflects-cong-add-ℕ {k} x {y} {z} (pair d p) =
-  pair d (p ∙ translation-invariant-dist-ℕ x y z)
+pr1 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) = d
+pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
+  p ∙ translation-invariant-dist-ℕ x y z
 
 reflects-cong-add-ℕ' :
   {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (add-ℕ' x y) (add-ℕ' x z) → cong-ℕ k y z
@@ -850,7 +854,8 @@ right-inverse-law-add-Fin x =
 -- We show that the divisibility relation is a poset
 
 refl-div-ℕ : (x : ℕ) → div-ℕ x x
-refl-div-ℕ x = pair one-ℕ (left-unit-law-mul-ℕ x)
+pr1 (refl-div-ℕ x) = one-ℕ
+pr2 (refl-div-ℕ x) = left-unit-law-mul-ℕ x
 
 antisymmetric-div-ℕ :
   (x y : ℕ) → div-ℕ x y → div-ℕ y x → Id x y
@@ -871,9 +876,9 @@ antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
 
 transitive-div-ℕ :
   (x y z : ℕ) → div-ℕ x y → div-ℕ y z → div-ℕ x z
-transitive-div-ℕ x y z (pair k p) (pair l q) =
-  pair ( mul-ℕ l k)
-       ( associative-mul-ℕ l k x ∙ (ap (mul-ℕ l) p ∙ q))
+pr1 (transitive-div-ℕ x y z (pair k p) (pair l q)) = mul-ℕ l k
+pr2 (transitive-div-ℕ x y z (pair k p) (pair l q)) =
+  associative-mul-ℕ l k x ∙ (ap (mul-ℕ l) p ∙ q)
 
 div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (mul-ℕ k y)
@@ -882,22 +887,22 @@ div-mul-ℕ k x y H =
 
 preserves-div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ (mul-ℕ k x) (mul-ℕ k y)
-preserves-div-mul-ℕ k x y (pair q p) =
-  pair q
-    ( ( inv (associative-mul-ℕ q k x)) ∙
-      ( ( ap (mul-ℕ' x) (commutative-mul-ℕ q k)) ∙
-        ( ( associative-mul-ℕ k q x) ∙
-          ( ap (mul-ℕ k) p))))
+pr1 (preserves-div-mul-ℕ k x y (pair q p)) = q
+pr2 (preserves-div-mul-ℕ k x y (pair q p)) =
+  ( inv (associative-mul-ℕ q k x)) ∙
+    ( ( ap (mul-ℕ' x) (commutative-mul-ℕ q k)) ∙
+      ( ( associative-mul-ℕ k q x) ∙
+        ( ap (mul-ℕ k) p)))
 
 reflects-div-mul-ℕ :
   (k x y : ℕ) → is-nonzero-ℕ k → div-ℕ (mul-ℕ k x) (mul-ℕ k y) → div-ℕ x y
-reflects-div-mul-ℕ k x y H (pair q p) =
-  pair q
-    ( is-injective-mul-ℕ k H
-      ( ( inv (associative-mul-ℕ k q x)) ∙
-        ( ( ap (mul-ℕ' x) (commutative-mul-ℕ k q)) ∙
-          ( ( associative-mul-ℕ q k x) ∙
-            ( p)))))
+pr1 (reflects-div-mul-ℕ k x y H (pair q p)) = q
+pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
+  is-injective-mul-ℕ k H
+    ( ( inv (associative-mul-ℕ k q x)) ∙
+      ( ( ap (mul-ℕ' x) (commutative-mul-ℕ k q)) ∙
+        ( ( associative-mul-ℕ q k x) ∙
+          ( p))))
 
 div-quotient-div-div-ℕ :
   (x y d : ℕ) (H : div-ℕ d y) → is-nonzero-ℕ d →
@@ -1153,7 +1158,8 @@ standard-classical-Fin {succ-ℕ k} (pair x H) = mod-succ-ℕ k x
 
 classical-standard-Fin :
   (k : ℕ) → Fin k → classical-Fin k
-classical-standard-Fin k x = pair (nat-Fin x) (strict-upper-bound-nat-Fin x)
+pr1 (classical-standard-Fin k x) = nat-Fin x
+pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin x
 
 {- We show that these maps are mutual inverses -}
 
@@ -1208,12 +1214,11 @@ cong-mul-Fin {succ-ℕ k} x y =
 
 scalar-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y →  cong-ℕ k (mul-ℕ z x) (mul-ℕ z y)
-scalar-invariant-cong-ℕ k x y z (pair d p) =
-  pair
-    ( mul-ℕ z d)
-    ( ( associative-mul-ℕ z d k) ∙
-      ( ( ap (mul-ℕ z) p) ∙
-        ( left-distributive-mul-dist-ℕ x y z)))
+pr1 (scalar-invariant-cong-ℕ k x y z (pair d p)) = mul-ℕ z d
+pr2 (scalar-invariant-cong-ℕ k x y z (pair d p)) =
+  ( associative-mul-ℕ z d k) ∙
+    ( ( ap (mul-ℕ z) p) ∙
+      ( left-distributive-mul-dist-ℕ x y z))
 
 scalar-invariant-cong-ℕ' :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (mul-ℕ x z) (mul-ℕ y z)
@@ -1429,15 +1434,18 @@ leq-nat-mod-succ-ℕ k (succ-ℕ x) =
 
 euclidean-division-ℕ :
   (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → le-ℕ r k))
-euclidean-division-ℕ zero-ℕ x =
-  pair x (pair (refl-cong-ℕ zero-ℕ x) (λ f → ex-falso (f refl)))
-euclidean-division-ℕ (succ-ℕ k) x =
-  pair
+pr1 (euclidean-division-ℕ zero-ℕ x) = x
+pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
+pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
+pr1 (euclidean-division-ℕ (succ-ℕ k) x) = nat-Fin (mod-succ-ℕ k x)
+pr1 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) =
+  symm-cong-ℕ
+    ( succ-ℕ k)
     ( nat-Fin (mod-succ-ℕ k x))
-    ( pair
-      ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (mod-succ-ℕ k x)) x
-        ( cong-nat-mod-succ-ℕ k x))
-      ( λ f → strict-upper-bound-nat-Fin (mod-succ-ℕ k x)))
+    ( x)
+    ( cong-nat-mod-succ-ℕ k x)
+pr2 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) f =
+  strict-upper-bound-nat-Fin (mod-succ-ℕ k x)
 
 remainder-euclidean-division-ℕ : ℕ → ℕ → ℕ
 remainder-euclidean-division-ℕ k x =
@@ -1673,5 +1681,6 @@ isretr-inv-convert-based-ℕ k x =
 --------------------------------------------------------------------------------
 
 map-extended-euclidean-algorithm : ℕ × ℕ → ℕ × ℕ
-map-extended-euclidean-algorithm (pair x y) =
-  pair y (remainder-euclidean-division-ℕ y x)
+pr1 (map-extended-euclidean-algorithm (pair x y)) = y
+pr2 (map-extended-euclidean-algorithm (pair x y)) =
+  remainder-euclidean-division-ℕ y x
