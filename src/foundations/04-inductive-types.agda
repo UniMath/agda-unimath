@@ -134,8 +134,13 @@ map-left-unit-law-coprod-is-empty A B na (inr b) = b
 
 -- Definition 4.6.1
 
-data Σ {l1 l2 : Level} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
-  pair : (x : A) → (B x → Σ A B)
+record Σ {l1 l2} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
+  constructor pair
+  field
+    pr1 : A
+    pr2 : B pr1
+
+open Σ public
 
 ind-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
@@ -148,14 +153,6 @@ ev-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
   ((t : Σ A B) → C t) → (x : A) (y : B x) → C (pair x y)
 ev-pair f x y = f (pair x y)
-
--- Definition 4.6.3
-
-pr1 : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → Σ A B → A
-pr1 (pair a _) = a
-
-pr2 : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → (t : Σ A B) → B (pr1 t)
-pr2 (pair a b) = b
 
 -- Definition 4.6.4
 
@@ -172,7 +169,8 @@ A × B = prod A B
 map-prod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → C) (g : B → D) → (A × B) → (C × D)
-map-prod f g (pair a b) = pair (f a) (g b)
+pr1 (map-prod f g (pair a b)) = f a
+pr2 (map-prod f g (pair a b)) = g b
 
 --------------------------------------------------------------------------------
 

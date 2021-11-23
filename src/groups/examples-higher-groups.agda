@@ -3,6 +3,7 @@
 module groups.examples-higher-groups where
 
 open import groups.higher-groups public
+open import the-circle.the-circle public
 
 module _
   {l : Level} (X : UU l)
@@ -31,3 +32,12 @@ module _
     pair
       classifying-pointed-type-symmetric-∞-Group
       is-path-connected-classifying-type-symmetric-∞-Group
+
+module _
+  where
+
+  classifying-type-ℤ-∞-Group : UU lzero
+  classifying-type-ℤ-∞-Group = 𝕊¹
+
+  shape-ℤ-∞-Group : 𝕊¹
+  shape-ℤ-∞-Group = base-𝕊¹

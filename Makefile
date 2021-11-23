@@ -1,6 +1,6 @@
 
 .PHONY : src/everything.agda
-src/Everything.agda:
+src/everything.agda:
 	@rm -rf $@
 	@cd src && find . -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > agdaFiles
 	@cd src && sort -o agdaFiles agdaFiles

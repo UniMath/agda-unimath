@@ -1,7 +1,7 @@
--- Everything
+-- everything
 -- The list of Agda modules below is automatically generated.
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-module Everything where
+module everything where
 
 open import foundations
 open import foundations.00-preamble

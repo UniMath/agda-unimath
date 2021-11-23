@@ -333,6 +333,12 @@ dependent-universal-property-𝕊¹ :
 dependent-universal-property-𝕊¹ =
   dependent-universal-property-induction-principle-circle free-loop-𝕊¹ ind-𝕊¹
 
+apply-dependent-universal-property-𝕊¹ :
+  {l : Level} (P : 𝕊¹ → UU l) (p0 : P base-𝕊¹) (α : Id (tr P loop-𝕊¹ p0) p0) →
+  (x : 𝕊¹) → P x
+apply-dependent-universal-property-𝕊¹ P p0 α =
+  map-inv-is-equiv (dependent-universal-property-𝕊¹ P) (pair p0 α)
+
 dependent-uniqueness-𝕊¹ :
   {l : Level} {P : 𝕊¹ → UU l} (k : dependent-free-loops free-loop-𝕊¹ P) →
   is-contr (Σ ((x : 𝕊¹) → P x) (λ h → Eq-dependent-free-loops free-loop-𝕊¹ P (ev-free-loop' free-loop-𝕊¹ P h) k))
@@ -369,3 +375,9 @@ abstract
     map-inv-is-equiv
       ( dup-circle P)
       ( pair p (center (is-prop-P _ (tr P (pr2 l) p) p)))
+
+--------------------------------------------------------------------------------
+
+mere-eq-𝕊¹ : (x y : 𝕊¹) → mere-eq x y
+mere-eq-𝕊¹ =
+  {!dependent-universal-property-𝕊¹ ?!}
