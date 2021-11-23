@@ -137,11 +137,50 @@ module _
 
   htpy-hom-∞-Group :
     (g : hom-∞-Group G H) → UU (l1 ⊔ l2)
-  htpy-hom-∞-Group g =
+  htpy-hom-∞-Group =
     htpy-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
-      f g
+      ( f)
+
+  refl-htpy-hom-∞-Group : htpy-hom-∞-Group f
+  refl-htpy-hom-∞-Group =
+    refl-htpy-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+      ( f)
+
+  htpy-eq-hom-∞-Group :
+    (g : hom-∞-Group G H) → Id f g → htpy-hom-∞-Group g
+  htpy-eq-hom-∞-Group =
+    htpy-eq-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+      ( f)
+
+  is-contr-total-htpy-hom-∞-Group :
+    is-contr (Σ (hom-∞-Group G H) htpy-hom-∞-Group)
+  is-contr-total-htpy-hom-∞-Group =
+    is-contr-total-htpy-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+      ( f)
+
+  is-equiv-htpy-eq-hom-∞-Group :
+    (g : hom-∞-Group G H) → is-equiv (htpy-eq-hom-∞-Group g)
+  is-equiv-htpy-eq-hom-∞-Group =
+    is-equiv-htpy-eq-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+      ( f)
+
+  eq-htpy-hom-∞-Group :
+    (g : hom-∞-Group G H) → (htpy-hom-∞-Group g) → Id f g
+  eq-htpy-hom-∞-Group =
+    eq-htpy-pointed-map
+      ( classifying-pointed-type-∞-Group G)
+      ( classifying-pointed-type-∞-Group H)
+      ( f)
 
 -- Wild category structure on higher groups
 
