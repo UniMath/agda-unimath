@@ -38,6 +38,7 @@ open import groups
 open import groups.abstract-abelian-groups
 open import groups.abstract-groups
 open import groups.concrete-groups
+open import groups.examples-higher-groups
 open import groups.higher-groups
 open import subgroups
 open import subgroups.abstract-subgroups
