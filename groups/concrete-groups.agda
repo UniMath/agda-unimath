@@ -23,9 +23,9 @@ module _
   classifying-type-Concrete-Group =
     classifying-type-∞-Group ∞-group-Concrete-Group
 
-  point-Concrete-Group : classifying-type-Concrete-Group
-  point-Concrete-Group =
-    point-∞-Group ∞-group-Concrete-Group
+  shape-Concrete-Group : classifying-type-Concrete-Group
+  shape-Concrete-Group =
+    shape-∞-Group ∞-group-Concrete-Group
 
   is-path-connected-classifying-type-Concrete-Group :
     is-path-connected classifying-type-Concrete-Group
@@ -50,12 +50,12 @@ module _
     is-trunc one-𝕋 classifying-type-Concrete-Group
   is-1-type-classifying-type-Concrete-Group X Y =
     apply-universal-property-trunc-Prop
-      ( mere-eq-classifying-type-Concrete-Group point-Concrete-Group X)
+      ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
       ( is-set-Prop (Id X Y))
       ( λ { refl →
             apply-universal-property-trunc-Prop
-              ( mere-eq-classifying-type-Concrete-Group point-Concrete-Group Y)
-              ( is-set-Prop (Id point-Concrete-Group Y))
+              ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
+              ( is-set-Prop (Id shape-Concrete-Group Y))
               ( λ { refl → is-set-type-Concrete-Group})})
 
   classifying-1-type-Concrete-Group : UU-Trunc one-𝕋 l
@@ -145,8 +145,8 @@ module _
 
   preserves-point-classifying-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) →
-    Id ( classifying-map-hom-Concrete-Group f (point-Concrete-Group G))
-       ( point-Concrete-Group H)
+    Id ( classifying-map-hom-Concrete-Group f (shape-Concrete-Group G))
+       ( shape-Concrete-Group H)
   preserves-point-classifying-map-hom-Concrete-Group =
     preserves-point-classifying-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)

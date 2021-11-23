@@ -18,8 +18,8 @@ module _
   classifying-type-∞-Group =
     type-Pointed-Type classifying-pointed-type-∞-Group
 
-  point-∞-Group : classifying-type-∞-Group
-  point-∞-Group =
+  shape-∞-Group : classifying-type-∞-Group
+  shape-∞-Group =
     pt-Pointed-Type classifying-pointed-type-∞-Group
 
   is-path-connected-classifying-type-∞-Group :
@@ -92,7 +92,7 @@ module _
 
   preserves-point-classifying-map-hom-∞-Group :
     (f : hom-∞-Group) →
-    Id (classifying-map-hom-∞-Group f (point-∞-Group G)) (point-∞-Group H)
+    Id (classifying-map-hom-∞-Group f (shape-∞-Group G)) (shape-∞-Group H)
   preserves-point-classifying-map-hom-∞-Group =
     preserves-point-map-pointed-map
       ( classifying-pointed-type-∞-Group G)
