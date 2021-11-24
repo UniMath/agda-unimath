@@ -1306,14 +1306,12 @@ module _
   pr1 (map-left-swap-Σ (pair a (pair b c))) = b
   pr1 (pr2 (map-left-swap-Σ (pair a (pair b c)))) = a
   pr2 (pr2 (map-left-swap-Σ (pair a (pair b c)))) = c
-  -- pair (pr1 (pr2 t)) (pair (pr1 t) (pr2 (pr2 t)))
   
   map-inv-left-swap-Σ :
     Σ B (λ y → Σ A (λ x → C x y)) → Σ A (λ x → Σ B (C x))
   pr1 (map-inv-left-swap-Σ (pair b (pair a c))) = a
   pr1 (pr2 (map-inv-left-swap-Σ (pair b (pair a c)))) = b
   pr2 (pr2 (map-inv-left-swap-Σ (pair b (pair a c)))) = c
-  -- pair (pr1 (pr2 t)) (pair (pr1 t) (pr2 (pr2 t)))
   
   isretr-map-inv-left-swap-Σ : (map-inv-left-swap-Σ ∘ map-left-swap-Σ) ~ id
   isretr-map-inv-left-swap-Σ (pair a (pair b c)) = refl
@@ -1340,10 +1338,14 @@ module _
   where
 
   map-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) → Σ (Σ A C) (B ∘ pr1)
-  map-right-swap-Σ t = pair (pair (pr1 (pr1 t)) (pr2 t)) (pr2 (pr1 t))
+  pr1 (pr1 (map-right-swap-Σ (pair (pair a b) c))) = a
+  pr2 (pr1 (map-right-swap-Σ (pair (pair a b) c))) = c
+  pr2 (map-right-swap-Σ (pair (pair a b) c)) = b
 
   map-inv-right-swap-Σ : Σ (Σ A C) (B ∘ pr1) → Σ (Σ A B) (C ∘ pr1)
-  map-inv-right-swap-Σ t = pair (pair (pr1 (pr1 t)) (pr2 t)) (pr2 (pr1 t))
+  pr1 (pr1 (map-inv-right-swap-Σ (pair (pair a c) b))) = a
+  pr2 (pr1 (map-inv-right-swap-Σ (pair (pair a c) b))) = b
+  pr2 (map-inv-right-swap-Σ (pair (pair a c) b)) = c
 
   issec-map-inv-right-swap-Σ : (map-right-swap-Σ ∘ map-inv-right-swap-Σ) ~ id
   issec-map-inv-right-swap-Σ (pair (pair x y) z) = refl
@@ -1359,104 +1361,92 @@ module _
       isretr-map-inv-right-swap-Σ
 
   equiv-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) ≃ Σ (Σ A C) (B ∘ pr1)
-  equiv-right-swap-Σ = pair map-right-swap-Σ is-equiv-map-right-swap-Σ
+  pr1 equiv-right-swap-Σ = map-right-swap-Σ
+  pr2 equiv-right-swap-Σ = is-equiv-map-right-swap-Σ
 
 --------------------------------------------------------------------------------
 
 -- Section 9.3 The identity type of a Σ-type
 
--- Definition 9.3.1
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
-Eq-Σ :
-  {i j : Level} {A : UU i} {B : A → UU j} (s t : Σ A B) → UU (i ⊔ j)
-Eq-Σ {B = B} s t = Σ (Id (pr1 s) (pr1 t)) (λ α → Id (tr B α (pr2 s)) (pr2 t))
+  -- Definition 9.3.1
+  
+  Eq-Σ : (s t : Σ A B) → UU (l1 ⊔ l2)
+  Eq-Σ s t = Σ (Id (pr1 s) (pr1 t)) (λ α → Id (tr B α (pr2 s)) (pr2 t))
 
--- Lemma 9.3.2
+  -- Lemma 9.3.2
+    
+  refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s
+  pr1 (refl-Eq-Σ (pair a b)) = refl
+  pr2 (refl-Eq-Σ (pair a b)) = refl
 
-reflexive-Eq-Σ :
-  {i j : Level} {A : UU i} {B : A → UU j} (s : Σ A B) → Eq-Σ s s
-reflexive-Eq-Σ (pair a b) = pair refl refl
+  -- Definition 9.3.3
+  
+  pair-eq-Σ : {s t : Σ A B} → Id s t → Eq-Σ s t
+  pair-eq-Σ {s} refl = refl-Eq-Σ s
 
--- Definition 9.3.3
+  -- Theorem 9.3.4
+  
+  eq-pair-Σ :
+    {s t : Σ A B} →
+    (α : Id (pr1 s) (pr1 t)) → Id (tr B α (pr2 s)) (pr2 t) → Id s t
+  eq-pair-Σ {pair x y} {pair .x .y} refl refl = refl
 
-pair-eq-Σ :
-  {i j : Level} {A : UU i} {B : A → UU j} {s t : Σ A B} →
-  (Id s t) → Eq-Σ s t
-pair-eq-Σ {s = s} refl = reflexive-Eq-Σ s
+  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → Id s t
+  eq-pair-Σ' (pair α β) = eq-pair-Σ α β
 
--- Theorem 9.3.4
+  isretr-pair-eq-Σ :
+    (s t : Σ A B) →
+    ((pair-eq-Σ {s} {t}) ∘ (eq-pair-Σ' {s} {t})) ~ id {A = Eq-Σ s t}
+  isretr-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
 
-eq-pair-Σ :
-  {i j : Level} {A : UU i} {B : A → UU j} {s t : Σ A B} →
-  (α : Id (pr1 s) (pr1 t)) → Id (tr B α (pr2 s)) (pr2 t) → Id s t
-eq-pair-Σ {B = B} {pair x y} {pair .x .y} refl refl = refl
+  issec-pair-eq-Σ :
+    (s t : Σ A B) → ((eq-pair-Σ' {s} {t}) ∘ (pair-eq-Σ {s} {t})) ~ id
+  issec-pair-eq-Σ (pair x y) .(pair x y) refl = refl
 
-eq-pair-Σ' :
-  {i j : Level} {A : UU i} {B : A → UU j} {s t : Σ A B} →
-  Eq-Σ s t → Id s t
-eq-pair-Σ' (pair α β) = eq-pair-Σ α β
+  abstract
+    is-equiv-eq-pair-Σ : (s t : Σ A B) → is-equiv (eq-pair-Σ' {s} {t})
+    is-equiv-eq-pair-Σ s t =
+      is-equiv-has-inverse
+        ( pair-eq-Σ)
+        ( issec-pair-eq-Σ s t)
+        ( isretr-pair-eq-Σ s t)
 
-isretr-pair-eq-Σ :
-  {i j : Level} {A : UU i} {B : A → UU j} (s t : Σ A B) →
-  ((pair-eq-Σ {s = s} {t}) ∘ (eq-pair-Σ' {s = s} {t})) ~ id {A = Eq-Σ s t}
-isretr-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
+  equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ Id s t
+  equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
 
-issec-pair-eq-Σ :
-  {i j : Level} {A : UU i} {B : A → UU j} (s t : Σ A B) →
-  ((eq-pair-Σ' {s = s} {t}) ∘ (pair-eq-Σ {s = s} {t})) ~ id
-issec-pair-eq-Σ (pair x y) .(pair x y) refl = refl
+  abstract
+    is-equiv-pair-eq-Σ : (s t : Σ A B) → is-equiv (pair-eq-Σ {s} {t})
+    is-equiv-pair-eq-Σ s t =
+      is-equiv-has-inverse
+        ( eq-pair-Σ')
+        ( isretr-pair-eq-Σ s t)
+        ( issec-pair-eq-Σ s t)
 
-abstract
-  is-equiv-eq-pair-Σ :
-    {i j : Level} {A : UU i} {B : A → UU j} (s t : Σ A B) →
-    is-equiv (eq-pair-Σ' {s = s} {t})
-  is-equiv-eq-pair-Σ s t =
-    is-equiv-has-inverse
-      ( pair-eq-Σ)
-      ( issec-pair-eq-Σ s t)
-      ( isretr-pair-eq-Σ s t)
+  equiv-pair-eq-Σ : (s t : Σ A B) → Id s t ≃ Eq-Σ s t
+  equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
 
-equiv-eq-pair-Σ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (s t : Σ A B) → Eq-Σ s t ≃ Id s t
-equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
-
-abstract
-  is-equiv-pair-eq-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (s t : Σ A B) →
-    is-equiv (pair-eq-Σ {s = s} {t})
-  is-equiv-pair-eq-Σ s t =
-    is-equiv-has-inverse
-      ( eq-pair-Σ')
-      ( isretr-pair-eq-Σ s t)
-      ( issec-pair-eq-Σ s t)
-
-equiv-pair-eq-Σ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (s t : Σ A B) → Id s t ≃ Eq-Σ s t
-equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
-
-η-pair :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (t : Σ A B) →
-  Id (pair (pr1 t) (pr2 t)) t
-η-pair t = eq-pair-Σ refl refl
+  η-pair : (t : Σ A B) → Id (pair (pr1 t) (pr2 t)) t
+  η-pair t = eq-pair-Σ refl refl
 
 {- For our convenience, we repeat the above argument for cartesian products. -}
 
-Eq-prod :
-  {i j : Level} {A : UU i} {B : UU j} (s t : A × B) → UU (i ⊔ j)
-Eq-prod s t = (Id (pr1 s) (pr1 t)) × (Id (pr2 s) (pr2 t))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  Eq-prod : (s t : A × B) → UU (l1 ⊔ l2)
+  Eq-prod s t = (Id (pr1 s) (pr1 t)) × (Id (pr2 s) (pr2 t))
 
-{- We also define a function eq-pair-Σ-triv, which is like eq-pair-Σ but simplified 
-   for the case where B is just a type. -}
+  eq-pair' : {s t : prod A B} → Eq-prod s t → Id s t
+  eq-pair' {pair x y} {pair .x .y} (pair refl refl) = refl
 
-eq-pair' :
-  {i j : Level} {A : UU i} {B : UU j} {s t : prod A B} →
-  Eq-prod s t → Id s t
-eq-pair' {s = pair x y} {pair .x .y} (pair refl refl) = refl
-
-eq-pair :
-  {i j : Level} {A : UU i} {B : UU j} {s t : prod A B} →
-  Id (pr1 s) (pr1 t) → Id (pr2 s) (pr2 t) → Id s t
-eq-pair p q = eq-pair' (pair p q)
+  eq-pair :
+    {s t : prod A B} → Id (pr1 s) (pr1 t) → Id (pr2 s) (pr2 t) → Id s t
+  eq-pair p q = eq-pair' (pair p q)
 
 {- Ideally, we would use the 3-for-2 property of equivalences to show that 
    eq-pair-triv is an equivalence, using that eq-pair-Σ is an equivalence. 
@@ -1469,46 +1459,42 @@ eq-pair p q = eq-pair' (pair p q)
    eq-pair-triv is an equivalence), or we use the fact that it is the induced 
    map on total spaces of a fiberwise equivalence (the topic of Lecture 8). 
    Thus it seems that a direct proof showing that eq-pair-triv is an 
-   equivalence is quickest for now. -}
+   equivalence is quickest for now. 
+-}
 
-pair-eq :
-  {i j : Level} {A : UU i} {B : UU j} {s t : prod A B} →
-  Id s t → Eq-prod s t
-pair-eq α = pair (ap pr1 α) (ap pr2 α)
+  pair-eq : {s t : prod A B} → Id s t → Eq-prod s t
+  pr1 (pair-eq α) = ap pr1 α
+  pr2 (pair-eq α) = ap pr2 α
 
-isretr-pair-eq :
-  {i j : Level} {A : UU i} {B : UU j} {s t : prod A B} →
-  ((pair-eq {s = s} {t}) ∘ (eq-pair' {s = s} {t})) ~ id
-isretr-pair-eq {s = pair x y} {pair .x .y} (pair refl refl) = refl
+  isretr-pair-eq :
+    {s t : prod A B} → ((pair-eq {s} {t}) ∘ (eq-pair' {s} {t})) ~ id
+  isretr-pair-eq {pair x y} {pair .x .y} (pair refl refl) = refl
 
-issec-pair-eq :
-  {i j : Level} {A : UU i} {B : UU j} {s t : prod A B} →
-  ((eq-pair' {s = s} {t}) ∘ (pair-eq {s = s} {t})) ~ id
-issec-pair-eq {s = pair x y} {pair .x .y} refl = refl
+  issec-pair-eq :
+    {s t : prod A B} → ((eq-pair' {s} {t}) ∘ (pair-eq {s} {t})) ~ id
+  issec-pair-eq {pair x y} {pair .x .y} refl = refl
 
-abstract
-  is-equiv-eq-pair :
-    {i j : Level} {A : UU i} {B : UU j} (s t : prod A B) →
-    is-equiv (eq-pair' {s = s} {t})
-  is-equiv-eq-pair s t =
-    is-equiv-has-inverse pair-eq issec-pair-eq isretr-pair-eq
+  abstract
+    is-equiv-eq-pair :
+      (s t : prod A B) → is-equiv (eq-pair' {s} {t})
+    is-equiv-eq-pair s t =
+      is-equiv-has-inverse pair-eq issec-pair-eq isretr-pair-eq
 
-equiv-eq-pair :
-  {i j : Level} {A : UU i} {B : UU j} (s t : prod A B) →
-  Eq-prod s t ≃ Id s t
-equiv-eq-pair s t = pair eq-pair' (is-equiv-eq-pair s t)
+  equiv-eq-pair :
+    (s t : prod A B) → Eq-prod s t ≃ Id s t
+  pr1 (equiv-eq-pair s t) = eq-pair'
+  pr2 (equiv-eq-pair s t) = is-equiv-eq-pair s t
 
-abstract
-  is-equiv-pair-eq :
-    {i j : Level} {A : UU i} {B : UU j} (s t : A × B) →
-    is-equiv (pair-eq {s = s} {t})
-  is-equiv-pair-eq s t =
-    is-equiv-has-inverse eq-pair' isretr-pair-eq issec-pair-eq
+  abstract
+    is-equiv-pair-eq :
+      (s t : A × B) → is-equiv (pair-eq {s} {t})
+    is-equiv-pair-eq s t =
+      is-equiv-has-inverse eq-pair' isretr-pair-eq issec-pair-eq
 
-equiv-pair-eq :
-  {i j : Level} {A : UU i} {B : UU j} (s t : A × B) →
-  Id s t ≃ Eq-prod s t
-equiv-pair-eq s t = pair pair-eq (is-equiv-pair-eq s t)
+  equiv-pair-eq :
+    (s t : A × B) → Id s t ≃ Eq-prod s t
+  pr1 (equiv-pair-eq s t) = pair-eq
+  pr2 (equiv-pair-eq s t) = is-equiv-pair-eq s t
 
 --------------------------------------------------------------------------------
 
@@ -1516,123 +1502,107 @@ equiv-pair-eq s t = pair pair-eq (is-equiv-pair-eq s t)
 
 -- Exercise 9.1
 
-{- We show that inv is an equivalence. -}
+module _
+  {l : Level} {A : UU l}
+  where
 
-inv-inv :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) → Id (inv (inv p)) p
-inv-inv refl = refl
+  {- We show that inv is an equivalence. -}
+  
+  inv-inv : {x y : A} (p : Id x y) → Id (inv (inv p)) p
+  inv-inv refl = refl
 
-abstract
-  is-equiv-inv :
-    {i : Level} {A : UU i} (x y : A) →
-    is-equiv (λ (p : Id x y) → inv p)
-  is-equiv-inv x y =
-    is-equiv-has-inverse inv inv-inv inv-inv
+  abstract
+    is-equiv-inv : (x y : A) → is-equiv (λ (p : Id x y) → inv p)
+    is-equiv-inv x y = is-equiv-has-inverse inv inv-inv inv-inv
 
-equiv-inv :
-  {i : Level} {A : UU i} (x y : A) → (Id x y) ≃ (Id y x)
-equiv-inv x y = pair inv (is-equiv-inv x y)
+  equiv-inv : (x y : A) → (Id x y) ≃ (Id y x)
+  pr1 (equiv-inv x y) = inv
+  pr2 (equiv-inv x y) = is-equiv-inv x y
 
-{- We show that concat p is an equivalence, for any path p. -}
+  {- We show that concat p is an equivalence, for any path p. -}
+  
+  inv-concat : {x y : A} (p : Id x y) (z : A) → Id x z → Id y z
+  inv-concat p = concat (inv p)
 
-inv-concat :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) (z : A) →
-  (Id x z) → (Id y z)
-inv-concat p = concat (inv p)
+  isretr-inv-concat :
+    {x y : A} (p : Id x y) (z : A) → (inv-concat p z ∘ concat p z) ~ id
+  isretr-inv-concat refl z q = refl
 
-isretr-inv-concat :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) (z : A) →
-  ((inv-concat p z) ∘ (concat p z)) ~ id
-isretr-inv-concat refl z q = refl
+  issec-inv-concat :
+    {x y : A} (p : Id x y) (z : A) → (concat p z ∘ inv-concat p z) ~ id
+  issec-inv-concat refl z refl = refl
 
-issec-inv-concat :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) (z : A) →
-  ((concat p z) ∘ (inv-concat p z)) ~ id
-issec-inv-concat refl z refl = refl
+  abstract
+    is-equiv-concat :
+      {x y : A} (p : Id x y) (z : A) → is-equiv (concat p z)
+    is-equiv-concat p z =
+      is-equiv-has-inverse
+        ( inv-concat p z)
+        ( issec-inv-concat p z)
+        ( isretr-inv-concat p z)
 
-abstract
-  is-equiv-concat :
-    {i : Level} {A : UU i} {x y : A} (p : Id x y) (z : A) →
-    is-equiv (concat p z)
-  is-equiv-concat p z =
-    is-equiv-has-inverse
-      ( inv-concat p z)
-      ( issec-inv-concat p z)
-      ( isretr-inv-concat p z)
+  equiv-concat :
+    {x y : A} (p : Id x y) (z : A) → Id y z ≃ Id x z
+  pr1 (equiv-concat p z) = concat p z
+  pr2 (equiv-concat p z) = is-equiv-concat p z
 
-equiv-concat :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) (z : A) →
-  Id y z ≃ Id x z
-equiv-concat p z = pair (concat p z) (is-equiv-concat p z)
+  {- We show that concat' q is an equivalence, for any path q. -}
+  
+  concat' : (x : A) {y z : A} → Id y z → Id x y → Id x z
+  concat' x q p = p ∙ q
+  
+  inv-concat' : (x : A) {y z : A} → Id y z → Id x z → Id x y
+  inv-concat' x q = concat' x (inv q)
 
-{- We show that concat' q is an equivalence, for any path q. -}
+  isretr-inv-concat' :
+    (x : A) {y z : A} (q : Id y z) → (inv-concat' x q ∘ concat' x q) ~ id
+  isretr-inv-concat' x refl refl = refl
 
-concat' :
-  {i : Level} {A : UU i} (x : A) {y z : A} → Id y z → Id x y → Id x z
-concat' x q p = p ∙ q
+  issec-inv-concat' :
+    (x : A) {y z : A} (q : Id y z) → (concat' x q ∘ inv-concat' x q) ~ id
+  issec-inv-concat' x refl refl = refl
 
-inv-concat' :
-  {i : Level} {A : UU i} (x : A) {y z : A} → Id y z →
-  Id x z → Id x y
-inv-concat' x q = concat' x (inv q)
+  abstract
+    is-equiv-concat' :
+      (x : A) {y z : A} (q : Id y z) → is-equiv (concat' x q)
+    is-equiv-concat' x q =
+      is-equiv-has-inverse
+        ( inv-concat' x q)
+        ( issec-inv-concat' x q)
+        ( isretr-inv-concat' x q)
+  
+  equiv-concat' :
+    (x : A) {y z : A} (q : Id y z) → Id x y ≃ Id x z
+  pr1 (equiv-concat' x q) = concat' x q
+  pr2 (equiv-concat' x q) = is-equiv-concat' x q
 
-isretr-inv-concat' :
-  {i : Level} {A : UU i} (x : A) {y z : A} (q : Id y z) →
-  ((inv-concat' x q) ∘ (concat' x q)) ~ id
-isretr-inv-concat' x refl refl = refl
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
+  where
 
-issec-inv-concat' :
-  {i : Level} {A : UU i} (x : A) {y z : A} (q : Id y z) →
-  ((concat' x q) ∘ (inv-concat' x q)) ~ id
-issec-inv-concat' x refl refl = refl
-
-abstract
-  is-equiv-concat' :
-    {i : Level} {A : UU i} (x : A) {y z : A} (q : Id y z) →
-    is-equiv (concat' x q)
-  is-equiv-concat' x q =
-    is-equiv-has-inverse
-      ( inv-concat' x q)
-      ( issec-inv-concat' x q)
-      ( isretr-inv-concat' x q)
-
-equiv-concat' :
-  {i : Level} {A : UU i} (x : A) {y z : A} (q : Id y z) →
-  Id x y ≃ Id x z
-equiv-concat' x q = pair (concat' x q) (is-equiv-concat' x q)
-
-{- We show that tr B p is an equivalence, for an path p and any type family B.
-   -}
+  {- We show that tr B p is an equivalence, for an path p and any type family B.
+  -}
    
-inv-tr :
-  {i j : Level} {A : UU i} (B : A → UU j) {x y : A} →
-  Id x y → B y → B x
-inv-tr B p = tr B (inv p)
+  inv-tr : Id x y → B y → B x
+  inv-tr p = tr B (inv p)
 
-isretr-inv-tr :
-  {i j : Level} {A : UU i} (B : A → UU j) {x y : A}
-  (p : Id x y) → ((inv-tr B p ) ∘ (tr B p)) ~ id
-isretr-inv-tr B refl b = refl
+  isretr-inv-tr : (p : Id x y) → ((inv-tr p ) ∘ (tr B p)) ~ id
+  isretr-inv-tr refl b = refl
 
-issec-inv-tr :
-  {i j : Level} {A : UU i} (B : A → UU j) {x y : A}
-  (p : Id x y) → ((tr B p) ∘ (inv-tr B p)) ~ id
-issec-inv-tr B refl b = refl
+  issec-inv-tr : (p : Id x y) → ((tr B p) ∘ (inv-tr p)) ~ id
+  issec-inv-tr refl b = refl
 
-abstract
-  is-equiv-tr :
-    {i j : Level} {A : UU i} (B : A → UU j) {x y : A}
-    (p : Id x y) → is-equiv (tr B p)
-  is-equiv-tr B p =
-    is-equiv-has-inverse
-      ( inv-tr B p)
-      ( issec-inv-tr B p)
-      ( isretr-inv-tr B p)
+  abstract
+    is-equiv-tr : (p : Id x y) → is-equiv (tr B p)
+    is-equiv-tr p =
+      is-equiv-has-inverse
+        ( inv-tr p)
+        ( issec-inv-tr p)
+        ( isretr-inv-tr p)
 
-equiv-tr :
-  {i j : Level} {A : UU i} (B : A → UU j) {x y : A}
-  (p : Id x y) → (B x) ≃ (B y)
-equiv-tr B p = pair (tr B p) (is-equiv-tr B p)
+  equiv-tr : Id x y → (B x) ≃ (B y)
+  pr1 (equiv-tr p) = tr B p
+  pr2 (equiv-tr p) = is-equiv-tr p
 
 -- Exercise 9.2
 
@@ -1646,158 +1616,139 @@ abstract
 
 -- Exercise 9.3
 
--- Exercise 9.3(a)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-abstract
-  is-equiv-htpy :
-    {i j : Level} {A : UU i} {B : UU j} {f : A → B} (g : A → B) →
-    f ~ g → is-equiv g → is-equiv f
-  is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)) =
-    pair
-      ( pair gs ((H ·r gs) ∙h issec))
-      ( pair gr ((gr ·l H) ∙h isretr))
+  -- Exercise 9.3(a)
+  
+  abstract
+    is-equiv-htpy :
+      {f : A → B} (g : A → B) → f ~ g → is-equiv g → is-equiv f
+    pr1 (pr1 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) = gs
+    pr2 (pr1 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) =
+      (H ·r gs) ∙h issec
+    pr1 (pr2 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) = gr
+    pr2 (pr2 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) =
+      (gr ·l H) ∙h isretr
 
-is-equiv-htpy-equiv :
-  {i j : Level} {A : UU i} {B : UU j} {f : A → B} (e : A ≃ B) →
-  f ~ map-equiv e → is-equiv f
-is-equiv-htpy-equiv e H = is-equiv-htpy (map-equiv e) H (is-equiv-map-equiv e)
+  is-equiv-htpy-equiv : {f : A → B} (e : A ≃ B) → f ~ map-equiv e → is-equiv f
+  is-equiv-htpy-equiv e H = is-equiv-htpy (map-equiv e) H (is-equiv-map-equiv e)
 
-abstract
-  is-equiv-htpy' :
-    {i j : Level} {A : UU i} {B : UU j} (f : A → B) {g : A → B} →
-    f ~ g → is-equiv f → is-equiv g
-  is-equiv-htpy' f H = is-equiv-htpy f (inv-htpy H)
+  abstract
+    is-equiv-htpy' : (f : A → B) {g : A → B} → f ~ g → is-equiv f → is-equiv g
+    is-equiv-htpy' f H = is-equiv-htpy f (inv-htpy H)
 
-is-equiv-htpy-equiv' :
-  {i j : Level} {A : UU i} {B : UU j} (e : A ≃ B) {g : A → B} →
-  map-equiv e ~ g → is-equiv g
-is-equiv-htpy-equiv' e H = is-equiv-htpy' (map-equiv e) H (is-equiv-map-equiv e)
+  is-equiv-htpy-equiv' : (e : A ≃ B) {g : A → B} → map-equiv e ~ g → is-equiv g
+  is-equiv-htpy-equiv' e H =
+    is-equiv-htpy' (map-equiv e) H (is-equiv-map-equiv e)
 
--- Exercise 9.3(b)
-
-inv-htpy-is-equiv :
-  {i j : Level} {A : UU i} {B : UU j} {f f' : A → B} (H : f ~ f') →
-  (is-equiv-f : is-equiv f) (is-equiv-f' : is-equiv f') →
-  (map-inv-is-equiv is-equiv-f) ~ (map-inv-is-equiv is-equiv-f')
-inv-htpy-is-equiv H is-equiv-f is-equiv-f' b =
-  ( inv
-    ( isretr-map-inv-is-equiv' is-equiv-f' (map-inv-is-equiv is-equiv-f b))) ∙
-  ( ap (map-inv-is-equiv is-equiv-f')
-    ( ( inv (H (map-inv-is-equiv is-equiv-f b))) ∙
-      ( issec-map-inv-is-equiv' is-equiv-f b)))
+  -- Exercise 9.3(b)
+  
+  inv-htpy-is-equiv :
+    {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
+    (map-inv-is-equiv H) ~ (map-inv-is-equiv K)
+  inv-htpy-is-equiv G H K b =
+    ( inv
+      ( isretr-map-inv-is-equiv' K (map-inv-is-equiv H b))) ∙
+    ( ap (map-inv-is-equiv K)
+      ( ( inv (G (map-inv-is-equiv H b))) ∙
+        ( issec-map-inv-is-equiv' H b)))
 
 -- Exercise 9.4
 
--- Exercise 9.4(a)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
 
-{- Exercise 9.4 (a) asks to show that, given a commuting triangle f ~ g ∘ h and
-   a section s of h, we get a new commuting triangle g ~ f ∘ s. Moreover, under
-   the same assumptions it follows that f has a section if and only if g has a 
-   section. -}
+  -- Exercise 9.4(a)
+  
+  {- Exercise 9.4 (a) asks to show that, given a commuting triangle f ~ g ∘ h 
+     and a section s of h, we get a new commuting triangle g ~ f ∘ s. Moreover, 
+     under the same assumptions it follows that f has a section if and only if g
+     has a section. -}
 
-triangle-section :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (S : sec h) →
-  g ~ (f ∘ (pr1 S))
-triangle-section f g h H (pair s issec) =
-  inv-htpy (( H ·r s) ∙h (g ·l issec))
+  triangle-section : (S : sec h) → g ~ (f ∘ (pr1 S))
+  triangle-section (pair s issec) = inv-htpy ((H ·r s) ∙h (g ·l issec))
 
-section-comp :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-  sec h → sec f → sec g
-section-comp f g h H sec-h sec-f =
-  pair (h ∘ (pr1 sec-f)) ((inv-htpy (H ·r (pr1 sec-f))) ∙h (pr2 sec-f))
+  section-comp : sec h → sec f → sec g
+  pr1 (section-comp sec-h sec-f) = h ∘ (pr1 sec-f)
+  pr2 (section-comp sec-h sec-f) = (inv-htpy (H ·r (pr1 sec-f))) ∙h (pr2 sec-f)
+  
+  section-comp' : sec h → sec g → sec f
+  pr1 (section-comp' sec-h sec-g) = (pr1 sec-h) ∘ (pr1 sec-g)
+  pr2 (section-comp' sec-h sec-g) =
+    ( H ·r ((pr1 sec-h) ∘ (pr1 sec-g))) ∙h
+    ( ( g ·l ((pr2 sec-h) ·r (pr1 sec-g))) ∙h ((pr2 sec-g)))
 
-section-comp' :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-  sec h → sec g → sec f
-section-comp' f g h H sec-h sec-g =
-  pair
-    ( (pr1 sec-h) ∘ (pr1 sec-g))
-    ( ( H ·r ((pr1 sec-h) ∘ (pr1 sec-g))) ∙h
-      ( ( g ·l ((pr2 sec-h) ·r (pr1 sec-g))) ∙h ((pr2 sec-g))))
+  -- Exercise 9.4(b)
+  
+  {- Exercise 9.4 (b) is dual to exercise 9.4 (a). It asks to show that, given a
+     commuting triangle f ~ g ∘ h and a retraction r of g, we get a new 
+     commuting triangle h ~ r ∘ f. Moreover, under these assumptions it also 
+     follows that f has a retraction if and only if h has a retraction. -}
 
--- Exercise 9.4(b)
+  triangle-retraction : (R : retr g) → h ~ ((pr1 R) ∘ f)
+  triangle-retraction (pair r isretr) = inv-htpy ((r ·l H) ∙h (isretr ·r h))
 
-{- Exercise 9.4 (b) is dual to exercise 9.4 (a). It asks to show that, given a 
-   commuting triangle f ~ g ∘ h and a retraction r of g, we get a new commuting
-   triangle h ~ r ∘ f. Moreover, under these assumptions it also follows that f
-   has a retraction if and only if h has a retraction. -}
+  retraction-comp : retr g → retr f → retr h
+  pr1 (retraction-comp retr-g retr-f) = (pr1 retr-f) ∘ g
+  pr2 (retraction-comp retr-g retr-f) =
+    (inv-htpy ((pr1 retr-f) ·l H)) ∙h (pr2 retr-f)
 
-triangle-retraction :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (R : retr g) →
-  h ~ ((pr1 R) ∘ f)
-triangle-retraction f g h H (pair r isretr) =
-  inv-htpy (( r ·l H) ∙h (isretr ·r h))
+  retraction-comp' : retr g → retr h → retr f
+  pr1 (retraction-comp' retr-g retr-h) = (pr1 retr-h) ∘ (pr1 retr-g)
+  pr2 (retraction-comp' retr-g retr-h) =
+    ( ((pr1 retr-h) ∘ (pr1 retr-g)) ·l H) ∙h
+    ( ((pr1 retr-h) ·l ((pr2 retr-g) ·r h)) ∙h (pr2 retr-h))
 
-retraction-comp :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-  retr g → retr f → retr h
-retraction-comp f g h H retr-g retr-f =
-  pair
-    ( (pr1 retr-f) ∘ g)
-    ( (inv-htpy ((pr1 retr-f) ·l H)) ∙h (pr2 retr-f))
+  -- Exercise 9.4(c)
+  
+  {- In Exercise 9.4 (c) we use the constructions of parts (a) and (b) to derive
+     the 3-for-2 property of equivalences. -}
 
-retraction-comp' :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-  retr g → retr h → retr f
-retraction-comp' f g h H retr-g retr-h =
-  pair
-    ( (pr1 retr-h) ∘ (pr1 retr-g))
-    ( ( ((pr1 retr-h) ∘ (pr1 retr-g)) ·l H) ∙h
-      ( ((pr1 retr-h) ·l ((pr2 retr-g) ·r h)) ∙h (pr2 retr-h)))
+  abstract
+    is-equiv-comp : is-equiv h → is-equiv g → is-equiv f
+    pr1 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
+      section-comp' sec-h sec-g
+    pr2 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
+      retraction-comp' retr-g retr-h
 
--- Exercise 9.4(c)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  where
 
-{- In Exercise 9.4 (c) we use the constructions of parts (a) and (b) to derive 
-   the 3-for-2 property of equivalences. -}
+  abstract
+    is-equiv-comp' :
+      (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
+    is-equiv-comp' g h = is-equiv-comp (g ∘ h) g h refl-htpy
 
-abstract
-  is-equiv-comp :
-    {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
-    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    is-equiv h → is-equiv g → is-equiv f
-  is-equiv-comp f g h H (pair sec-h retr-h) (pair sec-g retr-g) =
-    pair
-      ( section-comp' f g h H sec-h sec-g)
-      ( retraction-comp' f g h H retr-g retr-h)
+  equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
+  pr1 (equiv-comp g h) = (pr1 g) ∘ (pr1 h)
+  pr2 (equiv-comp g h) = is-equiv-comp' (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
-abstract
-  is-equiv-comp' :
-    {i j k : Level} {A : UU i} {B : UU j} {X : UU k} (g : B → X) (h : A → B) →
-    is-equiv h → is-equiv g → is-equiv (g ∘ h)
-  is-equiv-comp' g h = is-equiv-comp (g ∘ h) g h refl-htpy
-
-equiv-comp :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k} →
-  (B ≃ X) → (A ≃ B) → (A ≃ X)
-equiv-comp g h =
-  pair ((pr1 g) ∘ (pr1 h)) (is-equiv-comp' (pr1 g) (pr1 h) (pr2 h) (pr2 g))
-
-_∘e_ :
-  {i j k : Level} {A : UU i} {B : UU j} {X : UU k} →
-  (B ≃ X) → (A ≃ B) → (A ≃ X)
-_∘e_ = equiv-comp
+  _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
+  _∘e_ = equiv-comp
 
 abstract
   is-equiv-left-factor :
     {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-equiv f → is-equiv h → is-equiv g
-  is-equiv-left-factor f g h H
-    ( pair sec-f retr-f)
-    ( pair (pair sh sh-issec) retr-h) =
-    pair
-      ( section-comp f g h H (pair sh sh-issec) sec-f)
-      ( retraction-comp' g f sh
-        ( triangle-section f g h H (pair sh sh-issec))
-        ( retr-f)
-        ( pair h sh-issec))
+  pr1
+    ( is-equiv-left-factor f g h H
+      ( pair sec-f retr-f)
+      ( pair (pair sh sh-issec) retr-h)) =
+    section-comp f g h H (pair sh sh-issec) sec-f
+  pr2
+    ( is-equiv-left-factor f g h H
+      ( pair sec-f retr-f)
+      ( pair (pair sh sh-issec) retr-h)) =
+    retraction-comp' g f sh
+      ( triangle-section f g h H (pair sh sh-issec))
+      ( retr-f)
+      ( pair h sh-issec)
 
 abstract
   is-equiv-left-factor' :
@@ -1811,15 +1762,19 @@ abstract
     {i j k : Level} {A : UU i} {B : UU j} {X : UU k}
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-equiv g → is-equiv f → is-equiv h
-  is-equiv-right-factor f g h H
-    ( pair sec-g (pair rg rg-isretr))
-    ( pair sec-f retr-f) =
-    pair
-      ( section-comp' h rg f
-        ( triangle-retraction f g h H (pair rg rg-isretr))
-        ( sec-f)
-        ( pair g rg-isretr))
-      ( retraction-comp f g h H (pair rg rg-isretr) retr-f)
+  pr1
+    ( is-equiv-right-factor f g h H
+      ( pair sec-g (pair rg rg-isretr))
+      ( pair sec-f retr-f)) =
+    section-comp' h rg f
+      ( triangle-retraction f g h H (pair rg rg-isretr))
+      ( sec-f)
+      ( pair g rg-isretr)
+  pr2
+    ( is-equiv-right-factor f g h H
+      ( pair sec-g (pair rg rg-isretr))
+      ( pair sec-f retr-f)) =
+    retraction-comp f g h H (pair rg rg-isretr) retr-f
 
 abstract
   is-equiv-right-factor' :
@@ -1894,77 +1849,82 @@ convert-eq-values-htpy {f = f} {g} H x y =
 
 -- Exercise 9.5 (a)
 
-iterate : {l : Level} {X : UU l} → ℕ → (X → X) → (X → X)
-iterate zero-ℕ f x = x
-iterate (succ-ℕ k) f x = f (iterate k f x)
+module _
+  {l : Level} {X : UU l}
+  where
+  
+  iterate : ℕ → (X → X) → (X → X)
+  iterate zero-ℕ f x = x
+  iterate (succ-ℕ k) f x = f (iterate k f x)
 
-iterate-succ-ℕ :
-  {l : Level} {X : UU l} (k : ℕ) (f : X → X) (x : X) →
-  Id (iterate (succ-ℕ k) f x) (iterate k f (f x))
-iterate-succ-ℕ zero-ℕ f x = refl
-iterate-succ-ℕ (succ-ℕ k) f x = ap f (iterate-succ-ℕ k f x)
+  iterate-succ-ℕ :
+    (k : ℕ) (f : X → X) (x : X) →
+    Id (iterate (succ-ℕ k) f x) (iterate k f (f x))
+  iterate-succ-ℕ zero-ℕ f x = refl
+  iterate-succ-ℕ (succ-ℕ k) f x = ap f (iterate-succ-ℕ k f x)
 
-iterate-add-ℕ :
-  {l : Level} {X : UU l} (k l : ℕ) (f : X → X) (x : X) →
-  Id (iterate (add-ℕ k l) f x) (iterate k f (iterate l f x))
-iterate-add-ℕ k zero-ℕ f x = refl
-iterate-add-ℕ k (succ-ℕ l) f x =
-  ap f (iterate-add-ℕ k l f x) ∙ iterate-succ-ℕ k f (iterate l f x)
+  iterate-add-ℕ :
+    (k l : ℕ) (f : X → X) (x : X) →
+    Id (iterate (add-ℕ k l) f x) (iterate k f (iterate l f x))
+  iterate-add-ℕ k zero-ℕ f x = refl
+  iterate-add-ℕ k (succ-ℕ l) f x =
+    ap f (iterate-add-ℕ k l f x) ∙ iterate-succ-ℕ k f (iterate l f x)
 
-iterate-iterate :
-  {l : Level} {X : UU l} (k l : ℕ) (f : X → X) (x : X) →
-  Id (iterate k f (iterate l f x)) (iterate l f (iterate k f x))
-iterate-iterate k l f x =
-  ( inv (iterate-add-ℕ k l f x)) ∙
-  ( ( ap (λ t → iterate t f x) (commutative-add-ℕ k l)) ∙
-    ( iterate-add-ℕ l k f x))
+  iterate-iterate :
+    (k l : ℕ) (f : X → X) (x : X) →
+    Id (iterate k f (iterate l f x)) (iterate l f (iterate k f x))
+  iterate-iterate k l f x =
+    ( inv (iterate-add-ℕ k l f x)) ∙
+    ( ( ap (λ t → iterate t f x) (commutative-add-ℕ k l)) ∙
+      ( iterate-add-ℕ l k f x))
 
-is-cyclic-map : {l : Level} {X : UU l} (f : X → X) → UU l
-is-cyclic-map {l} {X} f = (x y : X) → Σ ℕ (λ k → Id (iterate k f x) y)
+  is-finitely-cyclic-map : (f : X → X) → UU l
+  is-finitely-cyclic-map f = (x y : X) → Σ ℕ (λ k → Id (iterate k f x) y)
 
-length-path-is-cyclic-map :
-  {l : Level} {X : UU l} {f : X → X} → is-cyclic-map f → X → X → ℕ
-length-path-is-cyclic-map H x y = pr1 (H x y)
+  length-path-is-finitely-cyclic-map :
+    {f : X → X} → is-finitely-cyclic-map f → X → X → ℕ
+  length-path-is-finitely-cyclic-map H x y = pr1 (H x y)
 
-eq-is-cyclic-map :
-  {l : Level} {X : UU l} {f : X → X} (H : is-cyclic-map f) (x y : X) →
-  Id (iterate (length-path-is-cyclic-map H x y) f x) y
-eq-is-cyclic-map H x y = pr2 (H x y)
+  eq-is-finitely-cyclic-map :
+    {f : X → X} (H : is-finitely-cyclic-map f) (x y : X) →
+    Id (iterate (length-path-is-finitely-cyclic-map H x y) f x) y
+  eq-is-finitely-cyclic-map H x y = pr2 (H x y)
 
-map-inv-is-cyclic-map :
-  {l : Level} {X : UU l} (f : X → X) (H : is-cyclic-map f) → X → X
-map-inv-is-cyclic-map f H x =
-  iterate (length-path-is-cyclic-map H (f x) x) f x
+  map-inv-is-finitely-cyclic-map :
+    (f : X → X) (H : is-finitely-cyclic-map f) → X → X
+  map-inv-is-finitely-cyclic-map f H x =
+    iterate (length-path-is-finitely-cyclic-map H (f x) x) f x
 
-issec-map-inv-is-cyclic-map :
-  {l : Level} {X : UU l} (f : X → X) (H : is-cyclic-map f) →
-  (f ∘ map-inv-is-cyclic-map f H) ~ id
-issec-map-inv-is-cyclic-map f H x =
-  ( iterate-succ-ℕ (length-path-is-cyclic-map H (f x) x) f x) ∙
-  ( eq-is-cyclic-map H (f x) x)
+  issec-map-inv-is-finitely-cyclic-map :
+    (f : X → X) (H : is-finitely-cyclic-map f) →
+    (f ∘ map-inv-is-finitely-cyclic-map f H) ~ id
+  issec-map-inv-is-finitely-cyclic-map f H x =
+    ( iterate-succ-ℕ (length-path-is-finitely-cyclic-map H (f x) x) f x) ∙
+    ( eq-is-finitely-cyclic-map H (f x) x)
 
-isretr-map-inv-is-cyclic-map :
-  {l : Level} {X : UU l} (f : X → X) (H : is-cyclic-map f) →
-  (map-inv-is-cyclic-map f H ∘ f) ~ id
-isretr-map-inv-is-cyclic-map f H x =
-  ( ap ( iterate (length-path-is-cyclic-map H (f (f x)) (f x)) f ∘ f)
-       ( inv (eq-is-cyclic-map H (f x) x))) ∙
-  ( ( ap ( iterate (length-path-is-cyclic-map H (f (f x)) (f x)) f)
-         ( iterate-succ-ℕ (length-path-is-cyclic-map H (f x) x) f (f x))) ∙
-    ( ( iterate-iterate
-        ( length-path-is-cyclic-map H (f (f x)) (f x))
-        ( length-path-is-cyclic-map H (f x) x) f (f (f x))) ∙
-      ( ( ap ( iterate (length-path-is-cyclic-map H (f x) x) f)
-           ( eq-is-cyclic-map H (f (f x)) (f x))) ∙
-        ( eq-is-cyclic-map H (f x) x))))
+  isretr-map-inv-is-finitely-cyclic-map :
+    (f : X → X) (H : is-finitely-cyclic-map f) →
+    (map-inv-is-finitely-cyclic-map f H ∘ f) ~ id
+  isretr-map-inv-is-finitely-cyclic-map f H x =
+    ( ap ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f ∘ f)
+         ( inv (eq-is-finitely-cyclic-map H (f x) x))) ∙
+    ( ( ap ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f)
+           ( iterate-succ-ℕ
+             ( length-path-is-finitely-cyclic-map H (f x) x) f (f x))) ∙
+      ( ( iterate-iterate
+          ( length-path-is-finitely-cyclic-map H (f (f x)) (f x))
+          ( length-path-is-finitely-cyclic-map H (f x) x) f (f (f x))) ∙
+        ( ( ap ( iterate (length-path-is-finitely-cyclic-map H (f x) x) f)
+            ( eq-is-finitely-cyclic-map H (f (f x)) (f x))) ∙
+          ( eq-is-finitely-cyclic-map H (f x) x))))
 
-is-equiv-is-cyclic-map :
-  {l : Level} {X : UU l} (f : X → X) → is-cyclic-map f → is-equiv f
-is-equiv-is-cyclic-map f H =
-  is-equiv-has-inverse
-    ( map-inv-is-cyclic-map f H)
-    ( issec-map-inv-is-cyclic-map f H)
-    ( isretr-map-inv-is-cyclic-map f H)
+  is-equiv-is-finitely-cyclic-map :
+    (f : X → X) → is-finitely-cyclic-map f → is-equiv f
+  is-equiv-is-finitely-cyclic-map f H =
+    is-equiv-has-inverse
+      ( map-inv-is-finitely-cyclic-map f H)
+      ( issec-map-inv-is-finitely-cyclic-map f H)
+      ( isretr-map-inv-is-finitely-cyclic-map f H)
 
 -- Exercise 9.5 (b)
 
@@ -1976,68 +1936,83 @@ compute-iterate-succ-Fin {k} (succ-ℕ n) x =
   ( ap succ-Fin (compute-iterate-succ-Fin n x)) ∙
   ( inv (right-successor-law-add-Fin x (mod-succ-ℕ k n)))
 
-is-cyclic-succ-Fin : {k : ℕ} → is-cyclic-map (succ-Fin {k})
-is-cyclic-succ-Fin {succ-ℕ k} x y =
-  pair
-    ( nat-Fin (add-Fin y (neg-Fin x)))
-    ( ( compute-iterate-succ-Fin (nat-Fin (add-Fin y (neg-Fin x))) x) ∙
-      ( ( ap (add-Fin x) (issec-nat-Fin (add-Fin y (neg-Fin x)))) ∙
-        ( ( commutative-add-Fin x (add-Fin y (neg-Fin x))) ∙
-          ( ( associative-add-Fin y (neg-Fin x) x) ∙
-            ( ( ap (add-Fin y) (left-inverse-law-add-Fin x)) ∙
-              ( right-unit-law-add-Fin y))))))
+is-finitely-cyclic-succ-Fin : {k : ℕ} → is-finitely-cyclic-map (succ-Fin {k})
+pr1 (is-finitely-cyclic-succ-Fin {succ-ℕ k} x y) =
+  nat-Fin (add-Fin y (neg-Fin x))
+pr2 (is-finitely-cyclic-succ-Fin {succ-ℕ k} x y) =
+  ( compute-iterate-succ-Fin (nat-Fin (add-Fin y (neg-Fin x))) x) ∙
+    ( ( ap (add-Fin x) (issec-nat-Fin (add-Fin y (neg-Fin x)))) ∙
+      ( ( commutative-add-Fin x (add-Fin y (neg-Fin x))) ∙
+        ( ( associative-add-Fin y (neg-Fin x) x) ∙
+          ( ( ap (add-Fin y) (left-inverse-law-add-Fin x)) ∙
+            ( right-unit-law-add-Fin y)))))
 
 -- Exercise 9.6
 
-{- In this exercise we construct an equivalence from A + B to B + A, showing 
-   that the coproduct is commutative. -}
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
 
-swap-coprod :
-  {i j : Level} (A : UU i) (B : UU j) → coprod A B → coprod B A
-swap-coprod A B (inl x) = inr x
-swap-coprod A B (inr x) = inl x
+  {- In this exercise we construct an equivalence from A + B to B + A, showing 
+     that the coproduct is commutative. -}
 
-swap-swap-coprod :
-  {i j : Level} (A : UU i) (B : UU j) →
-  ((swap-coprod B A) ∘ (swap-coprod A B)) ~ id
-swap-swap-coprod A B (inl x) = refl
-swap-swap-coprod A B (inr x) = refl
+  swap-coprod : coprod A B → coprod B A
+  swap-coprod (inl x) = inr x
+  swap-coprod (inr x) = inl x
 
-abstract
-  is-equiv-swap-coprod :
-    {i j : Level} (A : UU i) (B : UU j) → is-equiv (swap-coprod A B)
-  is-equiv-swap-coprod A B =
-    is-equiv-has-inverse
-      ( swap-coprod B A)
-      ( swap-swap-coprod B A)
-      ( swap-swap-coprod A B)
+  inv-swap-coprod : coprod B A → coprod A B
+  inv-swap-coprod (inl x) = inr x
+  inv-swap-coprod (inr x) = inl x
 
-equiv-swap-coprod :
-  {i j : Level} (A : UU i) (B : UU j) → coprod A B ≃ coprod B A
-equiv-swap-coprod A B = pair (swap-coprod A B) (is-equiv-swap-coprod A B)
+  issec-inv-swap-coprod : (swap-coprod ∘ inv-swap-coprod) ~ id
+  issec-inv-swap-coprod (inl x) = refl
+  issec-inv-swap-coprod (inr x) = refl
 
-swap-prod :
-  {i j : Level} (A : UU i) (B : UU j) → prod A B → prod B A
-swap-prod A B t = pair (pr2 t) (pr1 t)
+  isretr-inv-swap-coprod : (inv-swap-coprod ∘ swap-coprod) ~ id
+  isretr-inv-swap-coprod (inl x) = refl
+  isretr-inv-swap-coprod (inr x) = refl
 
-swap-swap-prod :
-  {i j : Level} (A : UU i) (B : UU j) →
-  ((swap-prod B A) ∘ (swap-prod A B)) ~ id
-swap-swap-prod A B (pair x y) = refl
+  abstract
+    is-equiv-swap-coprod : is-equiv swap-coprod
+    is-equiv-swap-coprod =
+      is-equiv-has-inverse
+        ( inv-swap-coprod)
+        ( issec-inv-swap-coprod)
+        ( isretr-inv-swap-coprod)
 
-abstract
-  is-equiv-swap-prod :
-    {i j : Level} (A : UU i) (B : UU j) →
-    is-equiv (swap-prod A B)
-  is-equiv-swap-prod A B =
-    is-equiv-has-inverse
-      ( swap-prod B A)
-      ( swap-swap-prod B A)
-      ( swap-swap-prod A B)
+  equiv-swap-coprod : coprod A B ≃ coprod B A
+  pr1 equiv-swap-coprod = swap-coprod
+  pr2 equiv-swap-coprod = is-equiv-swap-coprod
 
-equiv-swap-prod :
-  {i j : Level} (A : UU i) (B : UU j) → (A × B) ≃ (B × A)
-equiv-swap-prod A B = pair (swap-prod A B) (is-equiv-swap-prod A B)
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+  
+  swap-prod : prod A B → prod B A
+  pr1 (swap-prod (pair a b)) = b
+  pr2 (swap-prod (pair a b)) = a
+
+  inv-swap-prod : prod B A → prod A B
+  pr1 (inv-swap-prod (pair b a)) = a
+  pr2 (inv-swap-prod (pair b a)) = b
+
+  issec-inv-swap-prod : (swap-prod ∘ inv-swap-prod) ~ id
+  issec-inv-swap-prod (pair b a) = refl
+
+  isretr-inv-swap-prod : (inv-swap-prod ∘ swap-prod) ~ id
+  isretr-inv-swap-prod (pair a b) = refl
+
+  abstract
+    is-equiv-swap-prod : is-equiv swap-prod
+    is-equiv-swap-prod =
+      is-equiv-has-inverse
+        inv-swap-prod
+        issec-inv-swap-prod
+        isretr-inv-swap-prod
+
+  equiv-swap-prod : (A × B) ≃ (B × A)
+  pr1 equiv-swap-prod = swap-prod
+  pr2 equiv-swap-prod = is-equiv-swap-prod
 
 -- Exercise 9.8
 
