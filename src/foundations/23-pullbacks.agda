@@ -828,7 +828,7 @@ abstract
     (b : B) → is-pullback f (const unit B b) (cone-fiber f b)
   is-pullback-cone-fiber f b =
     is-equiv-tot-is-fiberwise-equiv
-      (λ a → is-equiv-map-inv-left-unit-law-prod (Id (f a) b))
+      (λ a → is-equiv-map-inv-left-unit-law-prod)
 
 abstract
   universal-property-pullback-cone-fiber :

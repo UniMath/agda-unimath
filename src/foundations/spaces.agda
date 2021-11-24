@@ -156,7 +156,7 @@ is-equiv-inl-join-unit X =
     ( pr1)
     ( pr2)
     ( cocone-join unit X)
-    ( is-equiv-map-left-unit-law-prod X)
+    ( is-equiv-map-left-unit-law-prod)
     ( up-join unit X)
 
 left-zero-law-join :

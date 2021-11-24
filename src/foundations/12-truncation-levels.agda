@@ -1346,7 +1346,7 @@ abstract
 
 fib-const :
   {l : Level} {A : UU l} (x y : A) → fib (const unit A x) y ≃ (Id x y)
-fib-const x y = left-unit-law-prod (Id x y)
+fib-const x y = left-unit-law-prod
 
 abstract
   is-trunc-const-is-trunc : {l : Level} (k : 𝕋) {A : UU l} →
@@ -1670,7 +1670,7 @@ module _
       refl
       ( is-contr-equiv
         ( Id a a)
-        ( left-unit-law-prod (Id a a))
+        ( left-unit-law-prod)
         ( is-proof-irrelevant-is-prop
           ( is-prop-eq-isolated-point d a)
           ( refl)))
