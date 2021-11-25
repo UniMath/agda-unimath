@@ -703,6 +703,28 @@ module _
   pr1 inv-left-unit-law-Σ-is-contr = map-inv-left-unit-law-Σ-is-contr
   pr2 inv-left-unit-law-Σ-is-contr = is-equiv-map-inv-left-unit-law-Σ-is-contr
 
+  abstract
+    is-contr-Σ :
+      is-contr (B a) → is-contr (Σ A B)
+    is-contr-Σ is-contr-B =
+      is-contr-equiv
+        ( B a)
+        ( left-unit-law-Σ-is-contr)
+        ( is-contr-B)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-contr-Σ' :
+      is-contr A → ((x : A) → is-contr (B x)) → is-contr (Σ A B)
+    is-contr-Σ' is-contr-A is-contr-B =
+      is-contr-equiv
+        ( B (center is-contr-A))
+        ( left-unit-law-Σ-is-contr is-contr-A (center is-contr-A))
+        ( is-contr-B (center is-contr-A))
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (C : is-contr A)
   where

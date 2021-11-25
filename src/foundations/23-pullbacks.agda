@@ -930,7 +930,7 @@ abstract
     (Q : B → UU l4) (f : A → B) (g : (x : A) → (P x) → (Q (f x))) →
     is-pullback f (pr1 {B = Q}) (cone-toto Q f g) → is-fiberwise-equiv g
   is-fiberwise-equiv-is-pullback Q f g is-pullback-cone-toto =
-    is-fiberwise-equiv-is-equiv-tot g
+    is-fiberwise-equiv-is-equiv-tot
       ( is-equiv-right-factor
         ( gap f pr1 (cone-toto Q f g))
         ( gap f pr1 (cone-subst f Q))
@@ -992,7 +992,6 @@ abstract
         H = pr2 (pr2 c)
     in
     is-fiberwise-equiv-is-equiv-tot
-      ( fib-square f g c)
       ( is-equiv-top-is-equiv-bottom-square
         ( map-equiv-total-fib p)
         ( tot (λ x → tot (λ y → inv)))

@@ -281,10 +281,11 @@ abstract
     {l : Level} → is-subtype {lsuc l} {A = UU l} is-contr
   is-subtype-is-contr A =
     is-prop-is-proof-irrelevant
-      ( λ is-contr-A →
-        is-contr-Σ
-          ( is-contr-A)
-          ( λ x → is-contr-Π (is-prop-is-contr is-contr-A x)))
+      ( λ { (pair c C) →
+            is-contr-Σ
+              ( pair c C)
+              ( c)
+              ( is-contr-Π (is-prop-is-contr (pair c C) c))})
 
 is-contr-Prop : {l : Level} → UU l → UU-Prop l
 is-contr-Prop A = pair (is-contr A) (is-subtype-is-contr A)
@@ -722,30 +723,40 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-prop (is-coherently-invertible f)
   is-prop-is-coherently-invertible {l1} {l2} {A} {B} f =
-    is-prop-is-proof-irrelevant (λ is-hae-f →
-      let is-equiv-f = is-equiv-is-coherently-invertible f is-hae-f in
-      is-contr-equiv'
-        ( Σ (sec f)
-          ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
-            ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
-        ( assoc-Σ (B → A)
-          ( λ g → ((f ∘ g) ~ id))
-          ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
-            ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
-        ( is-contr-Σ
-          ( is-contr-sec-is-equiv is-equiv-f)
-          ( λ sf → is-contr-equiv'
-            ( (x : A) →
-              Σ (Id ((pr1 sf) (f x)) x) (λ p → Id ((pr2 sf) (f x)) (ap f p)))
-            ( equiv-choice-∞)
-            ( is-contr-Π (λ x →
-              is-contr-equiv'
-                ( fib (ap f) ((pr2 sf) (f x)))
-                ( equiv-tot
-                  ( λ p → equiv-inv (ap f p) ((pr2 sf) (f x))))
-                ( is-contr-map-is-equiv
-                  ( is-emb-is-equiv is-equiv-f (pr1 sf (f x)) x)
-                  ( (pr2 sf) (f x))))))))
+    is-prop-is-proof-irrelevant
+      ( λ H →
+        is-contr-equiv'
+          ( Σ (sec f)
+            ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
+              ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
+          ( assoc-Σ (B → A)
+            ( λ g → ((f ∘ g) ~ id))
+            ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
+              ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
+          ( is-contr-Σ
+            ( is-contr-sec-is-equiv (E H))
+            ( pair (g H) (G H))
+            ( is-contr-equiv'
+              ( (x : A) →
+                Σ ( Id (g H (f x)) x)
+                  ( λ p → Id (G H (f x)) (ap f p)))
+              ( equiv-choice-∞)
+              ( is-contr-Π
+                ( λ x →
+                  is-contr-equiv'
+                    ( fib (ap f) (G H (f x)))
+                    ( equiv-tot
+                      ( λ p → equiv-inv (ap f p) (G H (f x))))
+                    ( is-contr-map-is-equiv
+                      ( is-emb-is-equiv (E H) (g H (f x)) x)
+                      ( (G H) (f x))))))))
+    where
+    E : is-coherently-invertible f → is-equiv f
+    E H = is-equiv-is-coherently-invertible f H
+    g : is-coherently-invertible f → (B → A)
+    g H = pr1 H
+    G : (H : is-coherently-invertible f) → (f ∘ g H) ~ id
+    G H = pr1 (pr2 H)
 
 abstract
   is-equiv-is-coherently-invertible-is-equiv :

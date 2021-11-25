@@ -1166,7 +1166,7 @@ abstract
   is-trunc-Σ : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
     is-trunc k A → ((x : A) → is-trunc k (B x)) → is-trunc k (Σ A B)
   is-trunc-Σ neg-two-𝕋 is-trunc-A is-trunc-B =
-    is-contr-Σ is-trunc-A is-trunc-B
+    is-contr-Σ' is-trunc-A is-trunc-B
   is-trunc-Σ (succ-𝕋 k) {B = B} is-trunc-A is-trunc-B s t =
     is-trunc-is-equiv k
       ( Σ (Id (pr1 s) (pr1 t)) (λ p → Id (tr B p (pr2 s)) (pr2 t)))
