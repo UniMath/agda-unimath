@@ -256,7 +256,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-subtype B → is-emb (pr1 {B = B})
   is-emb-pr1 {B = B} H =
-    is-emb-is-prop-map (λ x → is-prop-equiv (B x) (equiv-fib-pr1 x) (H x))
+    is-emb-is-prop-map (λ x → is-prop-equiv (B x) (equiv-fib-pr1 B x) (H x))
 
 equiv-ap-pr1 : {i j : Level} {A : UU i} {B : A → UU j} →
   is-subtype B → {s t : Σ A B} → Id s t ≃ Id (pr1 s) (pr1 t)
@@ -266,8 +266,8 @@ equiv-ap-pr1 is-subtype-B {s} {t} =
 abstract
   is-subtype-is-emb-pr1 : {i j : Level} {A : UU i} {B : A → UU j} →
     is-emb (pr1 {B = B}) → is-subtype B
-  is-subtype-is-emb-pr1 H x =
-    is-prop-equiv' (fib pr1 x) (equiv-fib-pr1 x) (is-prop-map-is-emb H x)
+  is-subtype-is-emb-pr1 {B = B} H x =
+    is-prop-equiv' (fib pr1 x) (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
 
 {- Remark 12.2.5 -}
 
@@ -857,7 +857,7 @@ abstract
     {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU j) →
     ((x : A) → is-trunc k (B x)) → is-trunc-map k (pr1 {i} {j} {A} {B})
   is-trunc-pr1-is-trunc-fam k B H x =
-    is-trunc-equiv k (B x) (equiv-fib-pr1 x) (H x)
+    is-trunc-equiv k (B x) (equiv-fib-pr1 B x) (H x)
 
 trunc-pr1 :
   {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU-Truncated-Type k j) →
@@ -1230,7 +1230,7 @@ abstract
   is-trunc-fam-is-trunc-Σ k {B = B} is-trunc-A is-trunc-ΣAB x =
     is-trunc-equiv' k
       ( fib pr1 x)
-      ( equiv-fib-pr1 x)
+      ( equiv-fib-pr1 B x)
       ( is-trunc-map-is-trunc-domain-codomain k is-trunc-ΣAB is-trunc-A x)
 
 -- Exercise 12.6
@@ -1724,7 +1724,7 @@ has-decidable-equality-fiber-has-decidable-equality-Σ :
   (x : A) → has-decidable-equality (B x)
 has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
   has-decidable-equality-equiv'
-    ( equiv-fib-pr1 x)
+    ( equiv-fib-pr1 B x)
     ( has-decidable-equality-Σ dΣ
       (λ t → has-decidable-equality-is-prop
                ( is-set-has-decidable-equality dA (pr1 t) x)))

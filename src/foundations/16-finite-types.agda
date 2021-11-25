@@ -330,7 +330,7 @@ count-fiber-count-Σ :
   count A → count (Σ A B) → (x : A) → count (B x)
 count-fiber-count-Σ {B = B} e f x =
   count-equiv
-    ( equiv-fib-pr1 x)
+    ( equiv-fib-pr1 B x)
     ( count-Σ f
       ( λ z → count-eq (has-decidable-equality-count e) (pr1 z) x))
 

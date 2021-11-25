@@ -757,7 +757,7 @@ module _
 
 issec-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
-issec-Pr1 B = eq-equiv-fam equiv-fib-pr1
+issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
                            
 isretr-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
