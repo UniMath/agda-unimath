@@ -361,12 +361,12 @@ module _
 -- Section 11.3 Identity systems
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
+  {l1 l2 : Level} (l : Level) {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
   where
 
-  IND-identity-system : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  IND-identity-system k =
-    ( P : (x : A) (y : B x) → UU k) →
+  IND-identity-system : UU (l1 ⊔ l2 ⊔ lsuc l)
+  IND-identity-system =
+    ( P : (x : A) (y : B x) → UU l) →
       sec (λ (h : (x : A) (y : B x) → P x y) → h a b)
 
 module _
@@ -377,13 +377,13 @@ module _
   fam-Σ C (pair x y) = C x y
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where
 
   abstract
     Ind-identity-system :
       (is-contr-AB : is-contr (Σ A B)) →
-      {l : Level} → IND-identity-system B a b l
+      {l : Level} → IND-identity-system l B a b
     pr1 (Ind-identity-system is-contr-AB P) p x y =
       tr ( fam-Σ P)
          ( eq-is-contr is-contr-AB)
@@ -397,7 +397,7 @@ module _
 
   abstract
     is-contr-total-space-IND-identity-system :
-      ({l : Level} → IND-identity-system B a b l) → is-contr (Σ A B)
+      ({l : Level} → IND-identity-system l B a b) → is-contr (Σ A B)
     pr1 (pr1 (is-contr-total-space-IND-identity-system ind)) = a
     pr2 (pr1 (is-contr-total-space-IND-identity-system ind)) = b
     pr2 (is-contr-total-space-IND-identity-system ind) (pair x y) =
@@ -405,7 +405,7 @@ module _
 
   abstract
     fundamental-theorem-id-IND-identity-system :
-      ({l : Level} → IND-identity-system B a b l) →
+      ({l : Level} → IND-identity-system l B a b) →
       (f : (x : A) → Id a x → B x) → (x : A) → is-equiv (f x)
     fundamental-theorem-id-IND-identity-system ind f =
       fundamental-theorem-id a b

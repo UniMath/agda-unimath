@@ -422,8 +422,8 @@ module _
       (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
       sec ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
             h e (refl-htpy-equiv e))
-    Ind-htpy-equiv {l3 = l3} e =
-      Ind-identity-system l3 e
+    Ind-htpy-equiv e =
+      Ind-identity-system e
         ( refl-htpy-equiv e)
         ( is-contr-total-htpy-equiv e)
   
