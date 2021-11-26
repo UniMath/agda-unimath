@@ -866,7 +866,6 @@ module _
       pair
         ( pr1 (pr2 (small-map-emb-is-surjective-and-effective H b a)))
         ( is-prop-equiv'
-          ( type-Prop (large-map-emb-is-surjective-and-effective H b a))
           ( pr2 (pr2 (small-map-emb-is-surjective-and-effective H b a)))
           ( is-prop-type-Prop
             ( large-map-emb-is-surjective-and-effective H b a)))
@@ -1070,7 +1069,6 @@ module _
     {l} E X (pair f H) =
     is-proof-irrelevant-is-prop
       ( is-prop-equiv
-        ( fib (precomp q (type-Set X)) f)
         ( equiv-tot
           ( λ h → equiv-ap-pr1 (is-prop-reflects-Eq-Rel R X)))
         ( is-prop-map-is-emb (is-emb-precomp-is-surjective (pr1 E) X) f))

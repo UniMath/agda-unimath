@@ -1952,42 +1952,6 @@ abstract
   is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g (pair h H) =
     is-fiberwise-equiv-is-equiv-triangle f g h H
 
-left-factor-fiberwise-equiv-equiv-slice :
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X) →
-  Σ (hom-slice f g) (λ hH → is-equiv (pr1 hH)) →
-  Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
-left-factor-fiberwise-equiv-equiv-slice f g =
-  map-Σ
-    ( is-fiberwise-equiv)
-    ( fiberwise-hom-hom-slice f g)
-    ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g)
-
-swap-equiv-slice :
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X) →
-  equiv-slice f g →
-  Σ (hom-slice f g) (λ hH → is-equiv (pr1 hH))
-swap-equiv-slice {A = A} {B} f g =
-  map-equiv-double-structure is-equiv (λ h → f ~ (g ∘ h))
-
-abstract
-  is-equiv-swap-equiv-slice :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-    (f : A → X) (g : B → X) →
-    is-equiv (swap-equiv-slice f g)
-  is-equiv-swap-equiv-slice f g =
-    is-equiv-map-equiv (equiv-double-structure is-equiv (λ h → f ~ (g ∘ h)))
-
-abstract
-  fiberwise-equiv-equiv-slice :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-    (f : A → X) (g : B → X) →
-    equiv-slice f g → Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
-  fiberwise-equiv-equiv-slice {X = X} {A} {B} f g =
-    ( left-factor-fiberwise-equiv-equiv-slice f g) ∘
-    ( swap-equiv-slice f g)
-
 abstract
   is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
@@ -1999,35 +1963,31 @@ abstract
     f g (pair h H) =
     is-equiv-triangle-is-fiberwise-equiv f g h H
 
-abstract
-  is-equiv-fiberwise-equiv-equiv-slice :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-    (f : A → X) (g : B → X) →
-    is-equiv (fiberwise-equiv-equiv-slice f g)
-  is-equiv-fiberwise-equiv-equiv-slice {X = X} {A} {B} f g =
-    is-equiv-comp
-      ( fiberwise-equiv-equiv-slice f g)
-      ( left-factor-fiberwise-equiv-equiv-slice f g)
-      ( swap-equiv-slice f g)
-      ( refl-htpy)
-      ( is-equiv-swap-equiv-slice f g)
-      ( is-equiv-subtype-is-equiv
-        ( λ t → is-subtype-is-equiv (pr1 t))
-        ( λ α → is-prop-Π (λ x → is-subtype-is-equiv (α x)))
-        ( fiberwise-hom-hom-slice f g)
-        ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g)
-        ( is-equiv-fiberwise-hom-hom-slice f g)
-        ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice
-          f g))
-
 equiv-fiberwise-equiv-equiv-slice :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (f : A → X) (g : B → X) →
   equiv-slice f g ≃ Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
 equiv-fiberwise-equiv-equiv-slice f g =
-  pair ( fiberwise-equiv-equiv-slice f g)
-       ( is-equiv-fiberwise-equiv-equiv-slice f g)
+  equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
+  equiv-right-swap-Σ
+  where
+  α   : ( h : hom-slice f g) →
+        is-equiv (pr1 h) ≃
+        is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+  α h = equiv-prop
+          ( is-subtype-is-equiv _)
+          ( is-prop-Π (λ x → is-subtype-is-equiv _))
+          ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g h)
+          ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice
+            f g h)
 
+fiberwise-equiv-equiv-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  equiv-slice f g → Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
+fiberwise-equiv-equiv-slice f g =
+  map-equiv (equiv-fiberwise-equiv-equiv-slice f g)
+    
 equiv-fam-equiv-equiv-slice :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (f : A → X) (g : B → X) →

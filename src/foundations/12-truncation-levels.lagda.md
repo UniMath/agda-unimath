@@ -27,13 +27,16 @@ UU-Prop :
   (l : Level) → UU (lsuc l)
 UU-Prop l = Σ (UU l) is-prop
 
-type-Prop :
-  {l : Level} → UU-Prop l → UU l
-type-Prop P = pr1 P
+module _
+  {l : Level}
+  where
 
-is-prop-type-Prop :
-  {l : Level} (P : UU-Prop l) → is-prop (type-Prop P)
-is-prop-type-Prop P = pr2 P
+  type-Prop : UU-Prop l → UU l
+  type-Prop P = pr1 P
+
+  abstract
+    is-prop-type-Prop : (P : UU-Prop l) → is-prop (type-Prop P)
+    is-prop-type-Prop P = pr2 P
 
 {- Example 12.1.2 -}
 
@@ -42,136 +45,137 @@ abstract
   is-prop-unit = is-prop-is-contr is-contr-unit
 
 unit-Prop : UU-Prop lzero
-unit-Prop = pair unit is-prop-unit
+pr1 unit-Prop = unit
+pr2 unit-Prop = is-prop-unit
 
-is-prop-empty : is-prop empty
-is-prop-empty ()
+abstract
+  is-prop-empty : is-prop empty
+  is-prop-empty ()
 
 empty-Prop : UU-Prop lzero
-empty-Prop = pair empty is-prop-empty
+pr1 empty-Prop = empty
+pr2 empty-Prop = is-prop-empty
 
-is-prop-leq-Fin :
-  {k : ℕ} (x y : Fin k) → is-prop (leq-Fin x y)
-is-prop-leq-Fin {succ-ℕ k} (inl x) (inl y) = is-prop-leq-Fin x y
-is-prop-leq-Fin {succ-ℕ k} (inl x) (inr star) = is-prop-unit
-is-prop-leq-Fin {succ-ℕ k} (inr star) (inl y) = is-prop-empty
-is-prop-leq-Fin {succ-ℕ k} (inr star) (inr star) = is-prop-unit
+abstract
+  is-prop-leq-Fin :
+    {k : ℕ} (x y : Fin k) → is-prop (leq-Fin x y)
+  is-prop-leq-Fin {succ-ℕ k} (inl x) (inl y) = is-prop-leq-Fin x y
+  is-prop-leq-Fin {succ-ℕ k} (inl x) (inr star) = is-prop-unit
+  is-prop-leq-Fin {succ-ℕ k} (inr star) (inl y) = is-prop-empty
+  is-prop-leq-Fin {succ-ℕ k} (inr star) (inr star) = is-prop-unit
 
 {- Proposition 12.1.3 -}
 
-all-elements-equal :
-  {i : Level} (A : UU i) → UU i
-all-elements-equal A = (x y : A) → Id x y
+module _
+  {l : Level} (A : UU l)
+  where
+  
+  all-elements-equal : UU l
+  all-elements-equal = (x y : A) → Id x y
+  
+  is-proof-irrelevant : UU l
+  is-proof-irrelevant = A → is-contr A
+  
+  is-subterminal : UU l
+  is-subterminal = is-emb (terminal-map {A = A})
 
-is-proof-irrelevant :
-  {l1 : Level} → UU l1 → UU l1
-is-proof-irrelevant A = A → is-contr A
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-prop-all-elements-equal : all-elements-equal A → is-prop A
+    pr1 (is-prop-all-elements-equal H x y) = (inv (H x x)) ∙ (H x y)
+    pr2 (is-prop-all-elements-equal H x .x) refl = left-inv (H x x)
 
-is-subterminal :
-  {l1 : Level} → UU l1 → UU l1
-is-subterminal A = is-emb (terminal-map {A = A})
+  abstract
+    eq-is-prop' : is-prop A → all-elements-equal A
+    eq-is-prop' H x y = pr1 (H x y)
 
-abstract
-  is-prop-all-elements-equal :
-    {i : Level} {A : UU i} → all-elements-equal A → is-prop A
-  is-prop-all-elements-equal {i} {A} H x y =
-    pair
-      ( (inv (H x x)) ∙ (H x y))
-      ( λ { refl → left-inv (H x x)})
+  abstract
+    eq-is-prop : is-prop A → {x y : A} → Id x y
+    eq-is-prop H {x} {y} = eq-is-prop' H x y
 
-abstract
-  eq-is-prop' :
-    {i : Level} {A : UU i} → is-prop A → all-elements-equal A
-  eq-is-prop' H x y = pr1 (H x y)
+  abstract
+    is-proof-irrelevant-all-elements-equal :
+      all-elements-equal A → is-proof-irrelevant A
+    pr1 (is-proof-irrelevant-all-elements-equal H a) = a
+    pr2 (is-proof-irrelevant-all-elements-equal H a) = H a
 
-abstract
-  eq-is-prop :
-    {i : Level} {A : UU i} → is-prop A → {x y : A} → Id x y
-  eq-is-prop H {x} {y} = eq-is-prop' H x y
+  abstract
+    is-proof-irrelevant-is-prop : is-prop A → is-proof-irrelevant A
+    is-proof-irrelevant-is-prop =
+      is-proof-irrelevant-all-elements-equal ∘ eq-is-prop'
 
-abstract
-  is-proof-irrelevant-all-elements-equal :
-    {l1 : Level} {A : UU l1} → all-elements-equal A → is-proof-irrelevant A
-  is-proof-irrelevant-all-elements-equal H a = pair a (H a)
+  abstract
+    is-prop-is-proof-irrelevant : is-proof-irrelevant A → is-prop A
+    is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y
 
-abstract
-  is-proof-irrelevant-is-prop :
-    {i : Level} {A : UU i} → is-prop A → is-proof-irrelevant A
-  is-proof-irrelevant-is-prop =
-    is-proof-irrelevant-all-elements-equal ∘ eq-is-prop'
+  abstract
+    eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
+    eq-is-proof-irrelevant H = eq-is-prop' (is-prop-is-proof-irrelevant H)
 
-abstract
-  is-prop-is-proof-irrelevant :
-    {i : Level} {A : UU i} → is-proof-irrelevant A → is-prop A
-  is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y
+  abstract
+    is-emb-is-emb :
+      {l2 : Level} {B : UU l2} {f : A → B} → (A → is-emb f) → is-emb f
+    is-emb-is-emb H x y = H x x y
 
-abstract
-  eq-is-proof-irrelevant :
-    {l1 : Level} {A : UU l1} → is-proof-irrelevant A → all-elements-equal A
-  eq-is-proof-irrelevant H =
-    eq-is-prop' (is-prop-is-proof-irrelevant H)
+  abstract
+    is-subterminal-is-proof-irrelevant :
+      is-proof-irrelevant A → is-subterminal A
+    is-subterminal-is-proof-irrelevant H =
+      is-emb-is-emb
+        ( λ x → is-emb-is-equiv (is-equiv-is-contr _ (H x) is-contr-unit))
 
-is-emb-is-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  (A → is-emb f) → is-emb f
-is-emb-is-emb H x y = H x x y
+  abstract
+    is-subterminal-all-elements-equal : all-elements-equal A → is-subterminal A
+    is-subterminal-all-elements-equal =
+      is-subterminal-is-proof-irrelevant ∘
+      is-proof-irrelevant-all-elements-equal
 
-abstract
-  is-subterminal-is-proof-irrelevant :
-    {l1 : Level} {A : UU l1} → is-proof-irrelevant A → is-subterminal A
-  is-subterminal-is-proof-irrelevant H =
-    is-emb-is-emb
-      ( λ x → is-emb-is-equiv (is-equiv-is-contr _ (H x) is-contr-unit))
+  abstract
+    is-subterminal-is-prop : is-prop A → is-subterminal A
+    is-subterminal-is-prop = is-subterminal-all-elements-equal ∘ eq-is-prop'
 
-abstract
-  is-subterminal-all-elements-equal :
-    {l1 : Level} {A : UU l1} → all-elements-equal A → is-subterminal A
-  is-subterminal-all-elements-equal =
-    is-subterminal-is-proof-irrelevant ∘ is-proof-irrelevant-all-elements-equal
+  abstract
+    is-prop-is-subterminal : is-subterminal A → is-prop A
+    is-prop-is-subterminal H x y =
+      is-contr-is-equiv
+        ( Id star star)
+        ( ap terminal-map)
+        ( H x y)
+        ( is-prop-is-contr is-contr-unit star star)
 
-abstract
-  is-subterminal-is-prop :
-    {l1 : Level} {A : UU l1} → is-prop A → is-subterminal A
-  is-subterminal-is-prop =
-    is-subterminal-all-elements-equal ∘ eq-is-prop'
+  abstract
+    eq-is-subterminal : is-subterminal A → all-elements-equal A
+    eq-is-subterminal = eq-is-prop' ∘ is-prop-is-subterminal
 
-abstract
-  is-prop-is-subterminal :
-    {l1 : Level} {A : UU l1} → is-subterminal A → is-prop A
-  is-prop-is-subterminal {l1} {A} H x y =
-    is-contr-is-equiv
-      ( Id star star)
-      ( ap terminal-map)
-      ( H x y)
-      ( is-prop-is-contr is-contr-unit star star)
-
-abstract
-  eq-is-subterminal :
-    {l1 : Level} {A : UU l1} → is-subterminal A → all-elements-equal A
-  eq-is-subterminal = eq-is-prop' ∘ is-prop-is-subterminal
-
-abstract
-  is-proof-irrelevant-is-subterminal :
-    {l1 : Level} {A : UU l1} → is-subterminal A → is-proof-irrelevant A
-  is-proof-irrelevant-is-subterminal H =
-    is-proof-irrelevant-all-elements-equal (eq-is-subterminal H)
+  abstract
+    is-proof-irrelevant-is-subterminal :
+      is-subterminal A → is-proof-irrelevant A
+    is-proof-irrelevant-is-subterminal H =
+      is-proof-irrelevant-all-elements-equal (eq-is-subterminal H)
 
 {- Proposition 12.1.4 -}
 
-abstract
-  is-equiv-is-prop : {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-prop A →
-    is-prop B → {f : A → B} → (B → A) → is-equiv f
-  is-equiv-is-prop is-prop-A is-prop-B {f} g =
-    is-equiv-has-inverse
-      ( g)
-      ( λ y → center (is-prop-B (f (g y)) y))
-      ( λ x → center (is-prop-A (g (f x)) x))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-equiv-prop :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-prop A → is-prop B →
-  (A → B) → (B → A) → A ≃ B
-equiv-prop is-prop-A is-prop-B f g =
-  pair f (is-equiv-is-prop is-prop-A is-prop-B g)
+  abstract
+    is-equiv-is-prop :
+      is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
+    is-equiv-is-prop is-prop-A is-prop-B {f} g =
+      is-equiv-has-inverse
+        ( g)
+        ( λ y → center (is-prop-B (f (g y)) y))
+        ( λ x → center (is-prop-A (g (f x)) x))
+
+  abstract
+    equiv-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
+    pr1 (equiv-prop is-prop-A is-prop-B f g) = f
+    pr2 (equiv-prop is-prop-A is-prop-B f g) =
+      is-equiv-is-prop is-prop-A is-prop-B g
 
 --------------------------------------------------------------------------------
 
@@ -179,191 +183,183 @@ equiv-prop is-prop-A is-prop-B f g =
 
 {- Definition 12.2.1 -}
 
-is-subtype : {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
-is-subtype B = (x : _) → is-prop (B x)
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
 
-is-property : {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
-is-property B = is-subtype B
+  is-subtype : UU (l1 ⊔ l2)
+  is-subtype = (x : A) → is-prop (B x)
 
-is-prop-map : {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → UU (l1 ⊔ l2)
-is-prop-map f = (b : _) → is-prop (fib f b)
+  is-property : UU (l1 ⊔ l2)
+  is-property = is-subtype
 
-total-subtype :
-  {l1 l2 : Level} {A : UU l1} (P : A → UU-Prop l2) → UU (l1 ⊔ l2)
-total-subtype {A = A} P = Σ A (λ x → pr1 (P x))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-prop-map : (A → B) → UU (l1 ⊔ l2)
+  is-prop-map f = (b : B) → is-prop (fib f b)
+
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  total-subtype : (A → UU-Prop l2) → UU (l1 ⊔ l2)
+  total-subtype P = Σ A (λ x → pr1 (P x))
 
 {- Lemma 12.2.2 -}
 
-abstract
-  is-prop-is-equiv :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (f : A → B) (E : is-equiv f) →
-    is-prop B → is-prop A
-  is-prop-is-equiv B f E H x y =
-    is-contr-is-equiv _ (ap f {x} {y}) (is-emb-is-equiv E x y) (H (f x) (f y))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-is-prop-equiv :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (e : A ≃ B) → is-prop B → is-prop A
-is-prop-equiv B (pair f is-equiv-f) = is-prop-is-equiv B f is-equiv-f
+  abstract
+    is-prop-is-equiv : {f : A → B} → is-equiv f → is-prop B → is-prop A
+    is-prop-is-equiv {f} E H x y =
+      is-contr-is-equiv _ (ap f {x} {y}) (is-emb-is-equiv E x y) (H (f x) (f y))
 
-abstract
-  is-prop-is-equiv' :
-    {l1 l2 : Level} (A : UU l1) {B : UU l2} (f : A → B) (E : is-equiv f) →
-    is-prop A → is-prop B
-  is-prop-is-equiv' A f E H =
-    is-prop-is-equiv _ (map-inv-is-equiv E) (is-equiv-map-inv-is-equiv E) H
+  abstract
+    is-prop-equiv : A ≃ B → is-prop B → is-prop A
+    is-prop-equiv (pair f is-equiv-f) = is-prop-is-equiv is-equiv-f
 
-is-prop-equiv' :
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (e : A ≃ B) → is-prop A → is-prop B
-is-prop-equiv' A (pair f is-equiv-f) = is-prop-is-equiv' A f is-equiv-f
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-prop-is-equiv' : {f : A → B} → is-equiv f → is-prop A → is-prop B
+    is-prop-is-equiv' E H =
+      is-prop-is-equiv (is-equiv-map-inv-is-equiv E) H
+
+  abstract
+    is-prop-equiv' : A ≃ B → is-prop A → is-prop B
+    is-prop-equiv' (pair f is-equiv-f) = is-prop-is-equiv' is-equiv-f
 
 {- Theorem 12.2.3 -}
 
-abstract
-  is-emb-is-prop-map :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-prop-map f → is-emb f
-  is-emb-is-prop-map {f = f} is-prop-map-f x =
-    fundamental-theorem-id x refl
-      ( is-contr-equiv
-        ( fib f (f x))
-        ( equiv-tot (λ y → equiv-inv (f x) (f y)))
-        ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (pair x refl)))
-      ( λ y → ap f)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
 
-abstract
-  is-prop-map-is-emb :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-emb f → is-prop-map f
-  is-prop-map-is-emb {f = f} is-emb-f y =
-    is-prop-is-proof-irrelevant α
-    where
-    α : (t : fib f y) → is-contr (fib f y)
-    α (pair x refl) =
-      fundamental-theorem-id' x refl
-        ( λ y → inv ∘ ap f)
-        ( λ y →
-          is-equiv-comp' inv (ap f)
-            ( is-emb-f x y)
-            ( is-equiv-inv (f x) (f y)))
+  abstract
+    is-emb-is-prop-map : is-prop-map f → is-emb f
+    is-emb-is-prop-map is-prop-map-f x =
+      fundamental-theorem-id x refl
+        ( is-contr-equiv
+          ( fib f (f x))
+          ( equiv-tot (λ y → equiv-inv (f x) (f y)))
+          ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (pair x refl)))
+        ( λ y → ap f)
 
-is-prop-map-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : B ↪ A) → is-prop-map (map-emb f)
-is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
+  abstract
+    is-prop-map-is-emb : is-emb f → is-prop-map f
+    is-prop-map-is-emb is-emb-f y =
+      is-prop-is-proof-irrelevant α
+      where
+      α : (t : fib f y) → is-contr (fib f y)
+      α (pair x refl) =
+        fundamental-theorem-id' x refl
+          ( λ y → inv ∘ ap f)
+          ( λ y →
+            is-equiv-comp' inv (ap f)
+              ( is-emb-f x y)
+              ( is-equiv-inv (f x) (f y)))
 
-fib-emb-Prop :
-  {i j : Level} {A : UU i} {B : UU j} (f : A ↪ B) → B → UU-Prop (i ⊔ j)
-fib-emb-Prop f y =
-  pair ( fib (map-emb f) y)
-       ( is-prop-map-is-emb (is-emb-map-emb f) y)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-abstract
-  is-emb-pr1 :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    is-subtype B → is-emb (pr1 {B = B})
-  is-emb-pr1 {B = B} H =
-    is-emb-is-prop-map (λ x → is-prop-equiv (B x) (equiv-fib-pr1 B x) (H x))
+  abstract
+    is-prop-map-emb : (f : B ↪ A) → is-prop-map (map-emb f)
+    is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
 
-equiv-ap-pr1 : {i j : Level} {A : UU i} {B : A → UU j} →
-  is-subtype B → {s t : Σ A B} → Id s t ≃ Id (pr1 s) (pr1 t)
-equiv-ap-pr1 is-subtype-B {s} {t} =
-  pair (ap pr1) (is-emb-pr1 is-subtype-B s t)
+  fib-emb-Prop : A ↪ B → B → UU-Prop (l1 ⊔ l2)
+  pr1 (fib-emb-Prop f y) = fib (map-emb f) y
+  pr2 (fib-emb-Prop f y) = is-prop-map-is-emb (is-emb-map-emb f) y
 
-abstract
-  is-subtype-is-emb-pr1 : {i j : Level} {A : UU i} {B : A → UU j} →
-    is-emb (pr1 {B = B}) → is-subtype B
-  is-subtype-is-emb-pr1 {B = B} H x =
-    is-prop-equiv' (fib pr1 x) (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-emb-pr1 : is-subtype B → is-emb (pr1 {B = B})
+    is-emb-pr1 H =
+      is-emb-is-prop-map (λ x → is-prop-equiv (equiv-fib-pr1 B x) (H x))
+
+  equiv-ap-pr1 : is-subtype B → {s t : Σ A B} → Id s t ≃ Id (pr1 s) (pr1 t)
+  pr1 (equiv-ap-pr1 is-subtype-B {s} {t}) = ap pr1
+  pr2 (equiv-ap-pr1 is-subtype-B {s} {t}) = is-emb-pr1 is-subtype-B s t
+
+  abstract
+    is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
+    is-subtype-is-emb-pr1 H x =
+      is-prop-equiv' (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
 
 {- Remark 12.2.5 -}
 
-equiv-double-structure :
-  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3) →
-  Σ (Σ A B) (λ t → C (pr1 t)) ≃ Σ (Σ A C) (λ t → B (pr1 t))
-equiv-double-structure {A = A} B C =
-  ( ( inv-assoc-Σ A C (λ t → B (pr1 t))) ∘e
-    ( equiv-tot (λ x → commutative-prod))) ∘e
-  ( assoc-Σ A B (λ t → C (pr1 t)))
-
-map-equiv-double-structure :
-  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3) →
-  Σ (Σ A B) (λ t → C (pr1 t)) → Σ (Σ A C) (λ t → B (pr1 t))
-map-equiv-double-structure B C = map-equiv (equiv-double-structure B C)
-
-is-equiv-map-equiv-double-structure :
-  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3) →
-  is-equiv (map-equiv-double-structure B C)
-is-equiv-map-equiv-double-structure B C =
-  is-equiv-map-equiv (equiv-double-structure B C)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
 {- The following is a general construction that will help us show that
    the identity type of a subtype agrees with the identity type of the 
    original type. We already know that the first projection of a family of
    propositions is an embedding, but the following lemma still has its uses. -}
 
-abstract
-  is-contr-total-Eq-substructure :
-    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {P : A → UU l3} →
-    is-contr (Σ A B) → (is-subtype P) → (a : A) (b : B a) (p : P a) →
-    is-contr (Σ (Σ A P) (λ t → B (pr1 t)))
-  is-contr-total-Eq-substructure {A = A} {B} {P}
-    is-contr-AB is-subtype-P a b p =
-    is-contr-equiv
-      ( Σ (Σ A B) (λ t → P (pr1 t)))
-      ( equiv-double-structure P B)
-      ( is-contr-equiv
-        ( P a)
-        ( left-unit-law-Σ-is-contr
-          ( is-contr-AB)
-          ( pair a b))
-        ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
+  abstract
+    is-contr-total-Eq-substructure :
+      {l3 : Level} {P : A → UU l3} →
+      is-contr (Σ A B) → (is-subtype P) → (a : A) (b : B a) (p : P a) →
+      is-contr (Σ (Σ A P) (λ t → B (pr1 t)))
+    is-contr-total-Eq-substructure {l3} {P}
+      is-contr-AB is-subtype-P a b p =
+      is-contr-equiv
+        ( Σ (Σ A B) (λ t → P (pr1 t)))
+        ( equiv-right-swap-Σ)
+        ( is-contr-equiv
+          ( P a)
+          ( left-unit-law-Σ-is-contr
+            ( is-contr-AB)
+            ( pair a b))
+          ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
 
-Eq-total-subtype :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-subtype B →
-  (Σ A B) → (Σ A B) → UU l1
-Eq-total-subtype is-subtype-B p p' = Id (pr1 p) (pr1 p') 
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (H : is-subtype B)
+  where
 
-reflexive-Eq-total-subtype :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (is-subtype-B : is-subtype B) →
-  (p : Σ A B) → Eq-total-subtype is-subtype-B p p
-reflexive-Eq-total-subtype is-subtype-B (pair x y) = refl
+  Eq-total-subtype : (Σ A B) → (Σ A B) → UU l1
+  Eq-total-subtype p p' = Id (pr1 p) (pr1 p') 
 
-Eq-total-subtype-eq :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (is-subtype-B : is-subtype B) →
-  (p p' : Σ A B) → Id p p' → Eq-total-subtype is-subtype-B p p'
-Eq-total-subtype-eq is-subtype-B p .p refl =
-  reflexive-Eq-total-subtype is-subtype-B p
+  refl-Eq-total-subtype : (p : Σ A B) → Eq-total-subtype p p
+  refl-Eq-total-subtype (pair x y) = refl
 
-is-contr-total-Eq-total-subtype :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (is-subtype-B : is-subtype B) →
-  (p : Σ A B) → is-contr (Σ (Σ A B) (Eq-total-subtype is-subtype-B p))
-is-contr-total-Eq-total-subtype is-subtype-B (pair x y) =
-  is-contr-total-Eq-substructure
-    ( is-contr-total-path x)
-    ( is-subtype-B)
-    x refl y
+  Eq-eq-total-subtype : (p p' : Σ A B) → Id p p' → Eq-total-subtype p p'
+  Eq-eq-total-subtype p .p refl = refl-Eq-total-subtype p
 
-is-equiv-Eq-total-subtype-eq :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (is-subtype-B : is-subtype B) →
-  (p p' : Σ A B) → is-equiv (Eq-total-subtype-eq is-subtype-B p p')
-is-equiv-Eq-total-subtype-eq is-subtype-B p =
-  fundamental-theorem-id p
-    ( reflexive-Eq-total-subtype is-subtype-B p)
-    ( is-contr-total-Eq-total-subtype is-subtype-B p)
-    ( Eq-total-subtype-eq is-subtype-B p)
+  abstract
+    is-contr-total-Eq-total-subtype :
+      (p : Σ A B) → is-contr (Σ (Σ A B) (Eq-total-subtype p))
+    is-contr-total-Eq-total-subtype (pair x y) =
+      is-contr-total-Eq-substructure (is-contr-total-path x) H x refl y
 
-equiv-Eq-total-subtype-eq :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (is-subtype-B : is-subtype B) →
-  (p p' : Σ A B) → (Id p p') ≃ (Eq-total-subtype is-subtype-B p p')
-equiv-Eq-total-subtype-eq is-subtype-B p p' =
-  pair
-    ( Eq-total-subtype-eq is-subtype-B p p')
-    ( is-equiv-Eq-total-subtype-eq is-subtype-B p p')
+  abstract
+    is-equiv-Eq-eq-total-subtype :
+      (p p' : Σ A B) → is-equiv (Eq-eq-total-subtype p p')
+    is-equiv-Eq-eq-total-subtype p =
+      fundamental-theorem-id p
+        ( refl-Eq-total-subtype p)
+        ( is-contr-total-Eq-total-subtype p)
+        ( Eq-eq-total-subtype p)
 
-eq-subtype :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (is-subtype-B : is-subtype B) →
-  {p p' : Σ A B} → Eq-total-subtype is-subtype-B p p' → Id p p'
-eq-subtype is-subtype-B {p} {p'} =
-  map-inv-is-equiv (is-equiv-Eq-total-subtype-eq is-subtype-B p p')
+  equiv-Eq-eq-total-subtype :
+    (p p' : Σ A B) → (Id p p') ≃ (Eq-total-subtype p p')
+  pr1 (equiv-Eq-eq-total-subtype p p') = Eq-eq-total-subtype p p'
+  pr2 (equiv-Eq-eq-total-subtype p p') = is-equiv-Eq-eq-total-subtype p p'
+
+  eq-subtype :
+    {p p' : Σ A B} → Eq-total-subtype p p' → Id p p'
+  eq-subtype {p} {p'} =
+    map-inv-is-equiv (is-equiv-Eq-eq-total-subtype p p')
 
 --------------------------------------------------------------------------------
 
@@ -377,66 +373,62 @@ UU-Set :
   (i : Level) → UU (lsuc i)
 UU-Set i = Σ (UU i) is-set
 
-type-Set :
-  {l : Level} → UU-Set l → UU l
-type-Set X = pr1 X
+module _
+  {l : Level} (X : UU-Set l)
+  where
 
-is-set-type-Set :
-  {l : Level} (X : UU-Set l) → is-set (type-Set X)
-is-set-type-Set X = pr2 X
+  type-Set : UU l
+  type-Set = pr1 X
 
-Id-Prop :
-  {l : Level} (X : UU-Set l) (x y : type-Set X) → UU-Prop l
-Id-Prop X x y = pair (Id x y) (is-set-type-Set X x y)
+  abstract
+    is-set-type-Set : is-set type-Set
+    is-set-type-Set = pr2 X
+
+  Id-Prop : (x y : type-Set) → UU-Prop l
+  pr1 (Id-Prop x y) = Id x y
+  pr2 (Id-Prop x y) = is-set-type-Set x y
 
 axiom-K :
   {i : Level} → UU i → UU i
 axiom-K A = (x : A) (p : Id x x) → Id refl p
 
-abstract
-  is-set-axiom-K' :
-    {l1 : Level} {A : UU l1} → axiom-K A → (x y : A) → all-elements-equal (Id x y)
-  is-set-axiom-K' K x .x refl q with K x q
-  ... | refl = refl
+module _
+  {l : Level} {A : UU l}
+  where
 
-abstract
-  is-set-axiom-K :
-    {i : Level} {A : UU i} → axiom-K A → is-set A
-  is-set-axiom-K H x y = is-prop-all-elements-equal (is-set-axiom-K' H x y) 
+  abstract
+    is-set-axiom-K' : axiom-K A → (x y : A) → all-elements-equal (Id x y)
+    is-set-axiom-K' K x .x refl q with K x q
+    ... | refl = refl
 
-abstract
-  axiom-K-is-set :
-    {i : Level} (A : UU i) → is-set A → axiom-K A
-  axiom-K-is-set A H x p =
-    ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙ 
-    ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
+  abstract
+    is-set-axiom-K : axiom-K A → is-set A
+    is-set-axiom-K H x y = is-prop-all-elements-equal (is-set-axiom-K' H x y) 
 
-abstract
-  is-equiv-prop-in-id :
-    {i j : Level} {A : UU i}
-    (R : A → A → UU j)
-    (p : (x y : A) → is-prop (R x y))
-    (ρ : (x : A) → R x x)
-    (i : (x y : A) → R x y → Id x y) →
-    (x y : A) → is-equiv (i x y)
-  is-equiv-prop-in-id R p ρ i x =
-    fundamental-theorem-id-retr x (i x)
-      (λ y → pair
-        (ind-Id x (λ z p → R x z) (ρ x) y)
-        ((λ r → eq-is-prop (p x y))))
+  abstract
+    axiom-K-is-set : is-set A → axiom-K A
+    axiom-K-is-set H x p =
+      ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙ 
+      ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 
-abstract
-  is-set-prop-in-id :
-    {i j : Level} {A : UU i} (R : A → A → UU j)
-    (p : (x y : A) → is-prop (R x y))
-    (ρ : (x : A) → R x x)
-    (i : (x y : A) → R x y → Id x y) →
-    is-set A
-  is-set-prop-in-id R p ρ i x y =
-    is-prop-is-equiv'
-      ( R x y)
-      ( i x y)
-      ( is-equiv-prop-in-id R p ρ i x y) (p x y)
+module _
+  {l1 l2 : Level} {A : UU l1} (R : A → A → UU l2)
+  (p : (x y : A) → is-prop (R x y)) (ρ : (x : A) → R x x)
+  (i : (x y : A) → R x y → Id x y)
+  where
+
+  abstract
+    is-equiv-prop-in-id : (x y : A) → is-equiv (i x y)
+    is-equiv-prop-in-id x =
+      fundamental-theorem-id-retr x (i x)
+        ( λ y →
+          pair
+            ( ind-Id x (λ z p → R x z) (ρ x) y)
+            ( λ r → eq-is-prop (p x y)))
+
+  abstract
+    is-set-prop-in-id : is-set A
+    is-set-prop-in-id x y = is-prop-is-equiv' (is-equiv-prop-in-id x y) (p x y)
 
 abstract
   is-prop-Eq-ℕ :
@@ -456,117 +448,79 @@ abstract
       eq-Eq-ℕ
 
 ℕ-Set : UU-Set lzero
-ℕ-Set = pair ℕ is-set-ℕ
+pr1 ℕ-Set = ℕ
+pr2 ℕ-Set = is-set-ℕ
 
-{- Next, we show that types with decidable equality are sets. To see this, we 
-   will construct a fiberwise equivalence with the binary relation R that is
-   defined by R x y := unit if (x = y), and empty otherwise. In order to define
-   this relation, we first define a type family over ((x = y) + ¬(x = y)) that 
-   returns unit on the left and empty on the right. -}
+module _
+  {l : Level} {A : UU l}
+  where
+
+  {- Next, we show that types with decidable equality are sets. To see this, we 
+     will construct a fiberwise equivalence with the binary relation R that is
+     defined by R x y := unit if (x = y), and empty otherwise. In order to
+     define this relation, we first define a type family over
+     ((x = y) + ¬(x = y)) that returns unit on the left and empty on the right.   -}
    
-Eq-has-decidable-equality' :
-  {l : Level} {A : UU l} (x y : A) → is-decidable (Id x y) → UU lzero
-Eq-has-decidable-equality' x y (inl p) = unit
-Eq-has-decidable-equality' x y (inr f) = empty
+  Eq-has-decidable-equality' :
+    (x y : A) → is-decidable (Id x y) → UU lzero
+  Eq-has-decidable-equality' x y (inl p) = unit
+  Eq-has-decidable-equality' x y (inr f) = empty
 
-Eq-has-decidable-equality :
-  {l : Level} {A : UU l} (d : has-decidable-equality A) → A → A → UU lzero
-Eq-has-decidable-equality d x y = Eq-has-decidable-equality' x y (d x y)
+  Eq-has-decidable-equality :
+    (d : has-decidable-equality A) → A → A → UU lzero
+  Eq-has-decidable-equality d x y = Eq-has-decidable-equality' x y (d x y)
 
-is-prop-Eq-has-decidable-equality' :
-  {l : Level} {A : UU l} (x y : A) (t : is-decidable (Id x y)) →
-  is-prop (Eq-has-decidable-equality' x y t)
-is-prop-Eq-has-decidable-equality' x y (inl p) = is-prop-unit
-is-prop-Eq-has-decidable-equality' x y (inr f) = is-prop-empty
+  abstract
+    is-prop-Eq-has-decidable-equality' :
+      (x y : A) (t : is-decidable (Id x y)) →
+      is-prop (Eq-has-decidable-equality' x y t)
+    is-prop-Eq-has-decidable-equality' x y (inl p) = is-prop-unit
+    is-prop-Eq-has-decidable-equality' x y (inr f) = is-prop-empty
 
-is-prop-Eq-has-decidable-equality :
-  {l : Level} {A : UU l} (d : has-decidable-equality A)
-  {x y : A} → is-prop (Eq-has-decidable-equality d x y)
-is-prop-Eq-has-decidable-equality d {x} {y} =
-  is-prop-Eq-has-decidable-equality' x y (d x y)
+  abstract
+    is-prop-Eq-has-decidable-equality :
+      (d : has-decidable-equality A)
+      {x y : A} → is-prop (Eq-has-decidable-equality d x y)
+    is-prop-Eq-has-decidable-equality d {x} {y} =
+      is-prop-Eq-has-decidable-equality' x y (d x y)
 
-reflexive-Eq-has-decidable-equality :
-  {l : Level} {A : UU l} (d : has-decidable-equality A) (x : A) →
-  Eq-has-decidable-equality d x x 
-reflexive-Eq-has-decidable-equality d x with d x x
-... | inl α = star
-... | inr f = f refl
+  abstract
+    refl-Eq-has-decidable-equality :
+      (d : has-decidable-equality A) (x : A) →
+      Eq-has-decidable-equality d x x 
+    refl-Eq-has-decidable-equality d x with d x x
+    ... | inl α = star
+    ... | inr f = f refl
 
-Eq-has-decidable-equality-eq :
-  {l : Level} {A : UU l} (d : has-decidable-equality A) {x y : A} →
-  Id x y → Eq-has-decidable-equality d x y
-Eq-has-decidable-equality-eq {l} {A} d {x} {.x} refl =
-  reflexive-Eq-has-decidable-equality d x
+  abstract
+    Eq-has-decidable-equality-eq :
+      (d : has-decidable-equality A) {x y : A} →
+      Id x y → Eq-has-decidable-equality d x y
+    Eq-has-decidable-equality-eq d {x} {.x} refl =
+      refl-Eq-has-decidable-equality d x
 
-eq-Eq-has-decidable-equality' :
-  {l : Level} {A : UU l} (x y : A) (t : is-decidable (Id x y)) →
-  Eq-has-decidable-equality' x y t → Id x y
-eq-Eq-has-decidable-equality' x y (inl p) t = p
-eq-Eq-has-decidable-equality' x y (inr f) t = ex-falso t
+  abstract
+    eq-Eq-has-decidable-equality' :
+      (x y : A) (t : is-decidable (Id x y)) →
+      Eq-has-decidable-equality' x y t → Id x y
+    eq-Eq-has-decidable-equality' x y (inl p) t = p
+    eq-Eq-has-decidable-equality' x y (inr f) t = ex-falso t
 
-eq-Eq-has-decidable-equality :
-  {l : Level} {A : UU l} (d : has-decidable-equality A) {x y : A} →
-  Eq-has-decidable-equality d x y → Id x y
-eq-Eq-has-decidable-equality d {x} {y} =
-  eq-Eq-has-decidable-equality' x y (d x y)
+  abstract
+    eq-Eq-has-decidable-equality :
+      (d : has-decidable-equality A) {x y : A} →
+      Eq-has-decidable-equality d x y → Id x y
+    eq-Eq-has-decidable-equality d {x} {y} =
+      eq-Eq-has-decidable-equality' x y (d x y)
 
-is-set-has-decidable-equality :
-  {l : Level} {A : UU l} → has-decidable-equality A → is-set A
-is-set-has-decidable-equality d =
-  is-set-prop-in-id
-    ( λ x y → Eq-has-decidable-equality d x y)
-    ( λ x y → is-prop-Eq-has-decidable-equality d)
-    ( λ x → reflexive-Eq-has-decidable-equality d x)
-    ( λ x y → eq-Eq-has-decidable-equality d)
-
-{- We also prove a unary version of Hedberg's theorem -}
-
-Eq-unary-Hedberg' :
-  {l : Level} {A : UU l} {x y : A} → is-decidable (Id x y) → UU lzero
-Eq-unary-Hedberg' (inl p) = unit 
-Eq-unary-Hedberg' (inr f) = empty
-
-Eq-unary-Hedberg :
-  {l : Level} {A : UU l} {x : A} (d : (y : A) → is-decidable (Id x y)) →
-  A → UU lzero
-Eq-unary-Hedberg d y = Eq-unary-Hedberg' (d y)
-
-is-prop-Eq-unary-Hedberg' :
-  {l : Level} {A : UU l} {x y : A} (d : is-decidable (Id x y)) →
-  is-prop (Eq-unary-Hedberg' d)
-is-prop-Eq-unary-Hedberg' (inl p) = is-prop-unit
-is-prop-Eq-unary-Hedberg' (inr f) = is-prop-empty
-
-is-prop-Eq-unary-Hedberg :
-  {l : Level} {A : UU l} {x : A} (d : (y : A) → is-decidable (Id x y)) →
-  (y : A) → is-prop (Eq-unary-Hedberg d y)
-is-prop-Eq-unary-Hedberg d y = is-prop-Eq-unary-Hedberg' (d y)
-
-refl-Eq-unary-Hedberg :
-  {l : Level} {A : UU l} {x : A} (d : (y : A) → is-decidable (Id x y)) →
-  Eq-unary-Hedberg d x
-refl-Eq-unary-Hedberg {x = x} d with (d x)
-... | inl p = star
-... | inr f = f refl
-
-{-
-contraction-total-Eq-unary-Hedberg' :
-  {l : Level} {A : UU l} {x : A} (d : (y : A) → is-decidable (Id x y)) →
-  (t : Σ A (Eq-unary-Hedberg d)) →
-  (u : is-decidable (Id x (pr1 t))) (v : Id (d (pr1 t)) u) →
-  Id (pair x (refl-Eq-unary-Hedberg d)) t
-contraction-total-Eq-unary-Hedberg' {l} {A} {x} d (pair y t) (inl x₁) v =
-  eq-pair-Σ {!map-inv-is-equiv (is-emb-inl (Id x y) (¬ (Id x y)) ? ?!} {!!}
-contraction-total-Eq-unary-Hedberg' {l} {A} {x} d (pair y t) (inr x₁) v = {!!}
-
-is-contr-total-Eq-unary-Hedberg :
-  {l : Level} {A : UU l} {x : A} (d : (y : A) → is-decidable (Id x y)) →
-  is-contr (Σ A (Eq-unary-Hedberg d))
-is-contr-total-Eq-unary-Hedberg {l} {A} {x} d =
-  pair
-    ( pair x (refl-Eq-unary-Hedberg d))
-    {! α!}
--}
+  abstract
+    is-set-has-decidable-equality : has-decidable-equality A → is-set A
+    is-set-has-decidable-equality d =
+      is-set-prop-in-id
+        ( λ x y → Eq-has-decidable-equality d x y)
+        ( λ x y → is-prop-Eq-has-decidable-equality d)
+        ( λ x → refl-Eq-has-decidable-equality d x)
+        ( λ x y → eq-Eq-has-decidable-equality d)
 
 --------------------------------------------------------------------------------
 
@@ -619,13 +573,27 @@ is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (Id x y)
 
 -- Truncated maps
 
-is-trunc-map :
-  {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} → (A → B) → UU (i ⊔ j)
-is-trunc-map k f = (y : _) → is-trunc k (fib f y)
+module _
+  {l1 l2 : Level} (k : 𝕋)
+  where
 
-trunc-map : {i j : Level} (k : 𝕋) (A : UU i) (B : UU j) → UU (i ⊔ j)
-trunc-map k A B = Σ (A → B) (is-trunc-map k)
+  is-trunc-map : {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
+  is-trunc-map f = (y : _) → is-trunc k (fib f y)
+  
+  trunc-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+  trunc-map A B = Σ (A → B) is-trunc-map
 
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2}
+  where
+
+  map-trunc-map : trunc-map k A B → A → B
+  map-trunc-map = pr1
+
+  abstract
+    is-trunc-map-map-trunc-map :
+      (f : trunc-map k A B) → is-trunc-map k (map-trunc-map f)
+    is-trunc-map-map-trunc-map = pr2
 
 -- We introduce some notation for the special case of 1-types --
 
@@ -635,13 +603,13 @@ is-1-type = is-trunc one-𝕋
 UU-1-Type : (l : Level) → UU (lsuc l)
 UU-1-Type l = Σ (UU l) is-1-type
 
-type-1-Type :
-  {l : Level} → UU-1-Type l → UU l
+type-1-Type : {l : Level} → UU-1-Type l → UU l
 type-1-Type = pr1
 
-is-1-type-type-1-Type :
-  {l : Level} (A : UU-1-Type l) → is-1-type (type-1-Type A)
-is-1-type-type-1-Type = pr2
+abstract
+  is-1-type-type-1-Type :
+    {l : Level} (A : UU-1-Type l) → is-1-type (type-1-Type A)
+  is-1-type-type-1-Type = pr2
 
 -- We introduce some notation for the special case of 2-types --
 
@@ -655,23 +623,27 @@ type-2-Type :
   {l : Level} → UU-2-Type l → UU l
 type-2-Type = pr1
 
-is-2-type-type-2-Type :
-  {l : Level} (A : UU-2-Type l) → is-2-type (type-2-Type A)
-is-2-type-type-2-Type = pr2
+abstract
+  is-2-type-type-2-Type :
+    {l : Level} (A : UU-2-Type l) → is-2-type (type-2-Type A)
+  is-2-type-type-2-Type = pr2
 
 -- We introduce some notation for the universe of k-truncated types --
 
 UU-Truncated-Type : 𝕋 → (l : Level) → UU (lsuc l)
 UU-Truncated-Type k l = Σ (UU l) (is-trunc k)
 
-type-Truncated-Type :
-  {k : 𝕋} {l : Level} → UU-Truncated-Type k l → UU l
-type-Truncated-Type = pr1
+module _
+  {k : 𝕋} {l : Level}
+  where
+  
+  type-Truncated-Type : UU-Truncated-Type k l → UU l
+  type-Truncated-Type = pr1
 
-is-trunc-type-Truncated-Type :
-  {k : 𝕋} {l : Level} (A : UU-Truncated-Type k l) →
-  is-trunc k (type-Truncated-Type A)
-is-trunc-type-Truncated-Type = pr2
+  abstract
+    is-trunc-type-Truncated-Type :
+      (A : UU-Truncated-Type k l) → is-trunc k (type-Truncated-Type A)
+    is-trunc-type-Truncated-Type = pr2
 
 {- Remark 12.4.2
 
@@ -691,10 +663,6 @@ abstract
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y =
     is-trunc-succ-is-trunc k (H x y)
 
-is-set-is-prop :
-  {l : Level} {P : UU l} → is-prop P → is-set P
-is-set-is-prop = is-trunc-succ-is-trunc neg-one-𝕋
-
 abstract
   is-trunc-map-succ-is-trunc-map :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
@@ -704,10 +672,14 @@ abstract
 
 truncated-type-succ-Truncated-Type :
   (k : 𝕋) {l : Level} → UU-Truncated-Type k l → UU-Truncated-Type (succ-𝕋 k) l
-truncated-type-succ-Truncated-Type k A =
-  pair
-    ( type-Truncated-Type A)
-    ( is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A))
+pr1 (truncated-type-succ-Truncated-Type k A) = type-Truncated-Type A
+pr2 (truncated-type-succ-Truncated-Type k A) =
+  is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
+
+abstract
+  is-set-is-prop :
+    {l : Level} {P : UU l} → is-prop P → is-set P
+  is-set-is-prop = is-trunc-succ-is-trunc neg-one-𝕋
 
 set-Prop :
   {l : Level} → UU-Prop l → UU-Set l
@@ -719,29 +691,33 @@ set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 
 -- We conclude that a contractible type is k-truncated for any k
 
-is-trunc-is-contr :
-  { l : Level} (k : 𝕋) {A : UU l} → is-contr A → is-trunc k A
-is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
-is-trunc-is-contr (succ-𝕋 k) is-contr-A =
-  is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
+abstract
+  is-trunc-is-contr :
+    {l : Level} (k : 𝕋) {A : UU l} → is-contr A → is-trunc k A
+  is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
+  is-trunc-is-contr (succ-𝕋 k) is-contr-A =
+    is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
 
-is-set-is-contr :
-  {l : Level} {A : UU l} → is-contr A → is-set A
-is-set-is-contr = is-trunc-is-contr zero-𝕋
+abstract
+  is-set-is-contr :
+    {l : Level} {A : UU l} → is-contr A → is-set A
+  is-set-is-contr = is-trunc-is-contr zero-𝕋
 
 -- We also conclude that a proposition is (k+1)-truncated for any k
 
-is-trunc-is-prop :
-  { l : Level} (k : 𝕋) {A : UU l} → is-prop A → is-trunc (succ-𝕋 k) A
-is-trunc-is-prop k is-prop-A x y = is-trunc-is-contr k (is-prop-A x y)
+abstract
+  is-trunc-is-prop :
+    { l : Level} (k : 𝕋) {A : UU l} → is-prop A → is-trunc (succ-𝕋 k) A
+  is-trunc-is-prop k is-prop-A x y = is-trunc-is-contr k (is-prop-A x y)
 
 abstract
-  is-trunc-succ-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
-  is-trunc-succ-empty k = ind-empty
+  is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
+  is-trunc-empty k = ind-empty
 
-is-trunc-is-empty :
-  {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
-is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
+abstract
+  is-trunc-is-empty :
+    {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
+  is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
 
 -- Corollary 12.4.4
 
@@ -819,14 +795,16 @@ abstract
 -- We show that if A embeds into a (k+1)-type B, then A is a (k+1)-type. --
 
 abstract
-  is-trunc-is-emb : {i j : Level} (k : 𝕋) {A : UU i} {B : UU j}
-    (f : A → B) → is-emb f → is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
+  is-trunc-is-emb :
+    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A → B) →
+    is-emb f → is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-is-emb k f Ef H x y =
     is-trunc-is-equiv k (Id (f x) (f y)) (ap f {x} {y}) (Ef x y) (H (f x) (f y))
 
 abstract
-  is-trunc-emb : {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} →
-    (f : A ↪ B) → is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
+  is-trunc-emb :
+    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A ↪ B) →
+    is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
 
 -- Proposition 12.4.7
@@ -867,8 +845,9 @@ abstract
 trunc-pr1 :
   {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU-Truncated-Type k j) →
   trunc-map k (Σ A (λ x → pr1 (B x))) A
-trunc-pr1 k B =
-  pair pr1 (is-trunc-pr1-is-trunc-fam k (λ x → pr1 (B x)) (λ x → pr2 (B x)))
+pr1 (trunc-pr1 k B) = pr1
+pr2 (trunc-pr1 k B) =
+  is-trunc-pr1-is-trunc-fam k (λ x → pr1 (B x)) (λ x → pr2 (B x))
 
 abstract
   is-trunc-fam-is-trunc-pr1 : {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU j) →
@@ -911,10 +890,12 @@ abstract
 
 abstract
   is-set-bool : is-set bool
-  is-set-bool = is-set-prop-in-id Eq-𝟚 is-prop-Eq-𝟚 reflexive-Eq-𝟚 (λ x y → eq-Eq-𝟚)
+  is-set-bool =
+    is-set-prop-in-id Eq-𝟚 is-prop-Eq-𝟚 reflexive-Eq-𝟚 (λ x y → eq-Eq-𝟚)
 
-set-bool : UU-Set lzero
-set-bool = pair bool is-set-bool
+bool-Set : UU-Set lzero
+pr1 bool-Set = bool
+pr2 bool-Set = is-set-bool
 
 -- Exercise 12.2
 
@@ -974,87 +955,78 @@ is-emb-nat-Fin : {k : ℕ} → is-emb (nat-Fin {k})
 is-emb-nat-Fin {k} = is-emb-is-injective is-set-ℕ is-injective-nat-Fin
 
 emb-nat-Fin : (k : ℕ) → Fin k ↪ ℕ
-emb-nat-Fin k = pair nat-Fin is-emb-nat-Fin
+pr1 (emb-nat-Fin k) = nat-Fin
+pr2 (emb-nat-Fin k) = is-emb-nat-Fin
 
 -- Exercise 12.3
 
 -- Exercise 12.3 (a)
 
-is-not-contractible-coprod-is-contr :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-contr A → is-contr B →
-  ¬ (is-contr (coprod A B))
-is-not-contractible-coprod-is-contr {l1} {l2} {A} {B} HA HB HAB =
-  map-inv-raise
-    ( Eq-eq-coprod A B (inl (center HA)) (inr (center HB)) (eq-is-contr HAB))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-not-contractible-coprod-is-contr :
+      is-contr A → is-contr B → ¬ (is-contr (coprod A B))
+    is-not-contractible-coprod-is-contr HA HB HAB =
+      map-inv-raise
+        ( Eq-eq-coprod A B
+          ( inl (center HA))
+          ( inr (center HB))
+          ( eq-is-contr HAB))
 
 -- Exercise 12.3 (b)
 
-abstract
-  all-elements-equal-coprod :
-    {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-    (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
-    all-elements-equal (coprod P Q)
-  all-elements-equal-coprod
-    {P = P} {Q = Q} f is-prop-P is-prop-Q (inl p) (inl p') =
-    ap inl (is-prop-P p p')
-  all-elements-equal-coprod
-    {P = P} {Q = Q} f is-prop-P is-prop-Q (inl p) (inr q') =
-    ex-falso (f p q')
-  all-elements-equal-coprod
-    {P = P} {Q = Q} f is-prop-P is-prop-Q (inr q) (inl p') =
-    ex-falso (f p' q)
-  all-elements-equal-coprod
-    {P = P} {Q = Q} f is-prop-P is-prop-Q (inr q) (inr q') =
-    ap inr (is-prop-Q q q')
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
 
-abstract
-  is-prop-coprod :
-    {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-    (P → ¬ Q) → is-prop P → is-prop Q → is-prop (coprod P Q)
-  is-prop-coprod f is-prop-P is-prop-Q =
-    is-prop-all-elements-equal
-      ( all-elements-equal-coprod f
-        ( eq-is-prop' is-prop-P)
-        ( eq-is-prop' is-prop-Q))
+  abstract
+    all-elements-equal-coprod :
+      (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
+      all-elements-equal (coprod P Q)
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inl p') =
+      ap inl (is-prop-P p p')
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inr q') =
+      ex-falso (f p q')
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inl p') =
+      ex-falso (f p' q)
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inr q') =
+      ap inr (is-prop-Q q q')
+  
+  abstract
+    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (coprod P Q)
+    is-prop-coprod f is-prop-P is-prop-Q =
+      is-prop-all-elements-equal
+        ( all-elements-equal-coprod f
+          ( eq-is-prop' is-prop-P)
+          ( eq-is-prop' is-prop-Q))
 
 -- Exercise 12.3 (c)
 
-abstract
-  is-trunc-coprod : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
-    is-trunc (succ-𝕋 (succ-𝕋 k)) A → is-trunc (succ-𝕋 (succ-𝕋 k)) B →
-    is-trunc (succ-𝕋 (succ-𝕋 k)) (coprod A B)
-  is-trunc-coprod k {A} {B} is-trunc-A is-trunc-B (inl x) (inl y) =
-    is-trunc-equiv (succ-𝕋 k)
-      ( Eq-coprod A B (inl x) (inl y))
-      ( equiv-Eq-eq-coprod A B (inl x) (inl y))
-      ( is-trunc-equiv' (succ-𝕋 k)
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-trunc-coprod :
+      is-trunc (succ-𝕋 (succ-𝕋 k)) A → is-trunc (succ-𝕋 (succ-𝕋 k)) B →
+      is-trunc (succ-𝕋 (succ-𝕋 k)) (coprod A B)
+    is-trunc-coprod is-trunc-A is-trunc-B (inl x) (inl y) =
+      is-trunc-equiv (succ-𝕋 k)
         ( Id x y)
-        ( equiv-raise _ (Id x y))
-        ( is-trunc-A x y))
-  is-trunc-coprod k {A} {B} is-trunc-A is-trunc-B (inl x) (inr y) =
-    is-trunc-equiv (succ-𝕋 k)
-      ( Eq-coprod A B (inl x) (inr y))
-      ( equiv-Eq-eq-coprod A B (inl x) (inr y))
-      ( is-trunc-equiv' (succ-𝕋 k)
-        ( empty)
-        ( equiv-raise _ empty)
-        ( is-trunc-succ-empty k))
-  is-trunc-coprod k {A} {B} is-trunc-A is-trunc-B (inr x) (inl y) =
-    is-trunc-equiv (succ-𝕋 k)
-      ( Eq-coprod A B (inr x) (inl y))
-      ( equiv-Eq-eq-coprod A B (inr x) (inl y))
-      ( is-trunc-equiv' (succ-𝕋 k)
-        ( empty)
-        ( equiv-raise _ empty)
-        ( is-trunc-succ-empty k))
-  is-trunc-coprod k {A} {B} is-trunc-A is-trunc-B (inr x) (inr y) =
-    is-trunc-equiv (succ-𝕋 k)
-      ( Eq-coprod A B (inr x) (inr y))
-      ( equiv-Eq-eq-coprod A B (inr x) (inr y))
-      ( is-trunc-equiv' (succ-𝕋 k)
+        ( compute-eq-coprod-inl-inl x y)
+        ( is-trunc-A x y)
+    is-trunc-coprod is-trunc-A is-trunc-B (inl x) (inr y) =
+      is-trunc-is-empty k (is-empty-eq-coprod-inl-inr x y)
+    is-trunc-coprod is-trunc-A is-trunc-B (inr x) (inl y) =
+      is-trunc-is-empty k (is-empty-eq-coprod-inr-inl x y)
+    is-trunc-coprod is-trunc-A is-trunc-B (inr x) (inr y) =
+      is-trunc-equiv (succ-𝕋 k)
         ( Id x y)
-        ( equiv-raise _ (Id x y))
-        ( is-trunc-B x y))
+        ( compute-eq-coprod-inr-inr x y)
+        ( is-trunc-B x y)
 
 abstract
   is-set-coprod : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -1063,28 +1035,32 @@ abstract
 
 coprod-Set :
   {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
-coprod-Set (pair A is-set-A) (pair B is-set-B) =
-  pair (coprod A B) (is-set-coprod is-set-A is-set-B)
+pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = coprod A B
+pr2 (coprod-Set (pair A is-set-A) (pair B is-set-B)) =
+  is-set-coprod is-set-A is-set-B
 
 abstract
   is-set-unit : is-set unit
   is-set-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-unit
 
 unit-Set : UU-Set lzero
-unit-Set = pair unit is-set-unit
+pr1 unit-Set = unit
+pr2 unit-Set = is-set-unit
 
 abstract
   is-set-ℤ : is-set ℤ
   is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
 
 ℤ-Set : UU-Set lzero
-ℤ-Set = pair ℤ is-set-ℤ
+pr1 ℤ-Set = ℤ
+pr2 ℤ-Set = is-set-ℤ
 
 is-set-empty : is-set empty
 is-set-empty ()
 
 empty-Set : UU-Set lzero
-empty-Set = pair empty is-set-empty
+pr1 empty-Set = empty
+pr2 empty-Set = is-set-empty
 
 abstract
   is-set-Fin :
@@ -1095,7 +1071,8 @@ abstract
 
 Fin-Set :
   (n : ℕ) → UU-Set lzero
-Fin-Set n = pair (Fin n) (is-set-Fin n)
+pr1 (Fin-Set n) = Fin n
+pr2 (Fin-Set n) = is-set-Fin n
 
 -- Exercise 12.4
 
@@ -1104,7 +1081,8 @@ module _
   where
 
   diagonal : A → A × A
-  diagonal x = pair x x
+  pr1 (diagonal x) = x
+  pr2 (diagonal x) = x
 
   -- Exercise 12.4 (a)
   
@@ -1119,7 +1097,8 @@ module _
   eq-fib-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
   
   fib-diagonal-eq : (t : A × A) → Id (pr1 t) (pr2 t) → fib diagonal t
-  fib-diagonal-eq (pair x y) β = pair x (eq-pair refl β)
+  pr1 (fib-diagonal-eq (pair x y) β) = x
+  pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
   
   issec-fib-diagonal-eq :
     (t : A × A) → ((eq-fib-diagonal t) ∘ (fib-diagonal-eq t)) ~ id
@@ -1193,12 +1172,11 @@ abstract
 Σ-Prop :
   {l1 l2 : Level} (P : UU-Prop l1) (Q : type-Prop P → UU-Prop l2) →
   UU-Prop (l1 ⊔ l2)
-Σ-Prop P Q =
-  pair
-    ( Σ (type-Prop P) (λ p → type-Prop (Q p)))
-    ( is-prop-Σ
-      ( is-prop-type-Prop P)
-      ( λ p → is-prop-type-Prop (Q p)))
+pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
+pr2 (Σ-Prop P Q) =
+  is-prop-Σ
+    ( is-prop-type-Prop P)
+    ( λ p → is-prop-type-Prop (Q p))
 
 abstract
   is-set-Σ :
@@ -1208,10 +1186,8 @@ abstract
 
 Σ-Set :
   {l1 l2 : Level} (A : UU-Set l1) (B : pr1 A → UU-Set l2) → UU-Set (l1 ⊔ l2)
-Σ-Set A B =
-  pair
-    ( Σ (type-Set A) (λ x → (type-Set (B x))))
-    ( is-set-Σ (is-set-type-Set A) (λ x → is-set-type-Set (B x)))
+pr1 (Σ-Set A B) = Σ (type-Set A) (λ x → (type-Set (B x)))
+pr2 (Σ-Set A B) = is-set-Σ (is-set-type-Set A) (λ x → is-set-type-Set (B x))
 
 prod-Set :
   {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
@@ -1292,10 +1268,8 @@ abstract
   is-prop-prod = is-trunc-prod neg-one-𝕋
 
 prod-Prop : {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
-prod-Prop P Q =
-  pair
-    ( type-Prop P × type-Prop Q)
-    ( is-prop-prod (is-prop-type-Prop P) (is-prop-type-Prop Q))
+pr1 (prod-Prop P Q) = type-Prop P × type-Prop Q
+pr2 (prod-Prop P Q) = is-prop-prod (is-prop-type-Prop P) (is-prop-type-Prop Q)
 
 abstract
   is-set-prod :
@@ -1326,14 +1300,14 @@ isretr-ap-retraction i r H x .x refl = left-inv (H x)
 retr-ap :
   {i j : Level} {A : UU i} {B : UU j} (i : A → B) →
   retr i → (x y : A) → retr (ap i {x} {y})
-retr-ap i (pair r H) x y =
-  pair (ap-retraction i r H x y) (isretr-ap-retraction i r H x y)
+pr1 (retr-ap i (pair r H) x y) = ap-retraction i r H x y
+pr2 (retr-ap i (pair r H) x y) = isretr-ap-retraction i r H x y
 
 retract-eq :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) →
   (x y : A) → (Id x y) retract-of (Id (pr1 R x) (pr1 R y))
-retract-eq (pair i (pair r H)) x y =
-  pair (ap i) (retr-ap i (pair r H) x y)
+pr1 (retract-eq (pair i (pair r H)) x y) = ap i
+pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
 
 -- Exercise 12.7 (b)
 
@@ -1376,16 +1350,16 @@ abstract
 map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) → fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
-map-fib-comp g h x (pair a p) =
-  pair
-    ( pair (h a) p)
-    ( pair a refl)
+pr1 (pr1 (map-fib-comp g h x (pair a p))) = h a
+pr2 (pr1 (map-fib-comp g h x (pair a p))) = p
+pr1 (pr2 (map-fib-comp g h x (pair a p))) = a
+pr2 (pr2 (map-fib-comp g h x (pair a p))) = refl
 
 inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) → Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
-inv-map-fib-comp g h c t =
-  pair (pr1 (pr2 t)) ((ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t)))
+pr1 (inv-map-fib-comp g h c t) = pr1 (pr2 t)
+pr2 (inv-map-fib-comp g h c t) = (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
 
 issec-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
@@ -1491,7 +1465,8 @@ module _
 
 fiber-inclusion :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (x : A) → B x → Σ A B
-fiber-inclusion B x = pair x
+pr1 (fiber-inclusion B x y) = x
+pr2 (fiber-inclusion B x y) = y
 
 fib-fiber-inclusion :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (t : Σ A B) →
@@ -1532,8 +1507,8 @@ is-emb-fiber-inclusion B H x =
 
 emb-fiber-inclusion :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → is-set A → (x : A) → B x ↪ Σ A B
-emb-fiber-inclusion B H x =
-  pair (fiber-inclusion B x) (is-emb-fiber-inclusion B H x)
+pr1 (emb-fiber-inclusion B H x) = fiber-inclusion B x
+pr2 (emb-fiber-inclusion B H x) = is-emb-fiber-inclusion B H x
 
 -- Exercise 12.12
 
@@ -1596,169 +1571,188 @@ module _
   cases-Eq-isolated-point H x (inl p) = unit
   cases-Eq-isolated-point H x (inr f) = empty
 
-  is-prop-cases-Eq-isolated-point :
-    (d : is-isolated a) (x : A) (dx : is-decidable (Id a x)) →
-    is-prop (cases-Eq-isolated-point d x dx)
-  is-prop-cases-Eq-isolated-point d x (inl p) = is-prop-unit
-  is-prop-cases-Eq-isolated-point d x (inr f) = is-prop-empty
+  abstract
+    is-prop-cases-Eq-isolated-point :
+      (d : is-isolated a) (x : A) (dx : is-decidable (Id a x)) →
+      is-prop (cases-Eq-isolated-point d x dx)
+    is-prop-cases-Eq-isolated-point d x (inl p) = is-prop-unit
+    is-prop-cases-Eq-isolated-point d x (inr f) = is-prop-empty
 
   Eq-isolated-point : is-isolated a → A → UU lzero
   Eq-isolated-point d x = cases-Eq-isolated-point d x (d x)
 
-  is-prop-Eq-isolated-point :
-    (d : is-isolated a) (x : A) → is-prop (Eq-isolated-point d x)
-  is-prop-Eq-isolated-point d x =
-    is-prop-cases-Eq-isolated-point d x (d x)
+  abstract
+    is-prop-Eq-isolated-point :
+      (d : is-isolated a) (x : A) → is-prop (Eq-isolated-point d x)
+    is-prop-Eq-isolated-point d x =
+      is-prop-cases-Eq-isolated-point d x (d x)
 
   decide-reflexivity :
     (d : is-decidable (Id a a)) → Σ (Id a a) (λ p → Id (inl p) d)
-  decide-reflexivity (inl p) = pair p refl
+  pr1 (decide-reflexivity (inl p)) = p
+  pr2 (decide-reflexivity (inl p)) = refl
   decide-reflexivity (inr f) = ex-falso (f refl)
 
-  refl-Eq-isolated-point : (d : is-isolated a) → Eq-isolated-point d a
-  refl-Eq-isolated-point d =
-    tr ( cases-Eq-isolated-point d a)
-       ( pr2 (decide-reflexivity (d a)))
-       ( star)
+  abstract
+    refl-Eq-isolated-point : (d : is-isolated a) → Eq-isolated-point d a
+    refl-Eq-isolated-point d =
+      tr ( cases-Eq-isolated-point d a)
+        ( pr2 (decide-reflexivity (d a)))
+        ( star)
 
-  Eq-eq-isolated-point :
-    (d : is-isolated a) {x : A} → Id a x → Eq-isolated-point d x
-  Eq-eq-isolated-point d refl = refl-Eq-isolated-point d
+  abstract
+    Eq-eq-isolated-point :
+      (d : is-isolated a) {x : A} → Id a x → Eq-isolated-point d x
+    Eq-eq-isolated-point d refl = refl-Eq-isolated-point d
 
-  center-total-Eq-isolated-point :
-    (d : is-isolated a) → Σ A (Eq-isolated-point d)
-  center-total-Eq-isolated-point d =
-    pair a (refl-Eq-isolated-point d)
+  abstract
+    center-total-Eq-isolated-point :
+      (d : is-isolated a) → Σ A (Eq-isolated-point d)
+    pr1 (center-total-Eq-isolated-point d) = a
+    pr2 (center-total-Eq-isolated-point d) = refl-Eq-isolated-point d
+  
+    cases-contraction-total-Eq-isolated-point :
+      (d : is-isolated a) (x : A) (dx : is-decidable (Id a x))
+      (e : cases-Eq-isolated-point d x dx) → Id a x
+    cases-contraction-total-Eq-isolated-point d x (inl p) e = p
+  
+    contraction-total-Eq-isolated-point :
+      (d : is-isolated a) (t : Σ A (Eq-isolated-point d)) →
+      Id (center-total-Eq-isolated-point d) t
+    contraction-total-Eq-isolated-point d (pair x e) =
+      eq-subtype
+        ( is-prop-Eq-isolated-point d)
+        ( cases-contraction-total-Eq-isolated-point d x (d x) e)
 
-  cases-contraction-total-Eq-isolated-point :
-    (d : is-isolated a) (x : A) (dx : is-decidable (Id a x))
-    (e : cases-Eq-isolated-point d x dx) → Id a x
-  cases-contraction-total-Eq-isolated-point d x (inl p) e = p
+    is-contr-total-Eq-isolated-point :
+      (d : is-isolated a) → is-contr (Σ A (Eq-isolated-point d))
+    pr1 (is-contr-total-Eq-isolated-point d) = center-total-Eq-isolated-point d
+    pr2 (is-contr-total-Eq-isolated-point d) =
+      contraction-total-Eq-isolated-point d
 
-  contraction-total-Eq-isolated-point :
-    (d : is-isolated a) (t : Σ A (Eq-isolated-point d)) →
-    Id (center-total-Eq-isolated-point d) t
-  contraction-total-Eq-isolated-point d (pair x e) =
-    eq-subtype
-      ( is-prop-Eq-isolated-point d)
-      ( cases-contraction-total-Eq-isolated-point d x (d x) e)
+  abstract
+    is-equiv-Eq-eq-isolated-point :
+      (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-point d {x})
+    is-equiv-Eq-eq-isolated-point d =
+      fundamental-theorem-id a
+        ( refl-Eq-isolated-point d)
+        ( is-contr-total-Eq-isolated-point d)
+        ( λ x → Eq-eq-isolated-point d {x})
 
-  is-contr-total-Eq-isolated-point :
-    (d : is-isolated a) → is-contr (Σ A (Eq-isolated-point d))
-  is-contr-total-Eq-isolated-point d =
-    pair ( center-total-Eq-isolated-point d)
-         ( contraction-total-Eq-isolated-point d)
+  abstract
+    equiv-Eq-eq-isolated-point :
+      (d : is-isolated a) (x : A) → Id a x ≃ Eq-isolated-point d x
+    pr1 (equiv-Eq-eq-isolated-point d x) = Eq-eq-isolated-point d
+    pr2 (equiv-Eq-eq-isolated-point d x) = is-equiv-Eq-eq-isolated-point d x
 
-  is-equiv-Eq-eq-isolated-point :
-    (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-point d {x})
-  is-equiv-Eq-eq-isolated-point d =
-    fundamental-theorem-id a
-      ( refl-Eq-isolated-point d)
-      ( is-contr-total-Eq-isolated-point d)
-      ( λ x → Eq-eq-isolated-point d {x})
+  abstract
+    is-prop-eq-isolated-point : (d : is-isolated a) (x : A) → is-prop (Id a x)
+    is-prop-eq-isolated-point d x =
+      is-prop-equiv
+        ( equiv-Eq-eq-isolated-point d x)
+        ( is-prop-Eq-isolated-point d x)
 
-  equiv-Eq-eq-isolated-point :
-    (d : is-isolated a) (x : A) → Id a x ≃ Eq-isolated-point d x
-  equiv-Eq-eq-isolated-point d x =
-    pair (Eq-eq-isolated-point d) (is-equiv-Eq-eq-isolated-point d x)
+  abstract
+    is-emb-const-is-isolated : is-isolated a → is-emb (const unit A a)
+    is-emb-const-is-isolated d star =
+      fundamental-theorem-id star
+        refl
+        ( is-contr-equiv
+          ( Id a a)
+          ( left-unit-law-prod)
+          ( is-proof-irrelevant-is-prop
+            ( is-prop-eq-isolated-point d a)
+            ( refl)))
+        ( λ x → ap (λ y → a))
 
-  is-prop-eq-isolated-point : (d : is-isolated a) (x : A) → is-prop (Id a x)
-  is-prop-eq-isolated-point d x =
-    is-prop-equiv
-      ( Eq-isolated-point d x)
-      ( equiv-Eq-eq-isolated-point d x)
-      ( is-prop-Eq-isolated-point d x)
-
-  is-emb-const-is-isolated : is-isolated a → is-emb (const unit A a)
-  is-emb-const-is-isolated d star =
-    fundamental-theorem-id star
-      refl
-      ( is-contr-equiv
-        ( Id a a)
-        ( left-unit-law-prod)
-        ( is-proof-irrelevant-is-prop
-          ( is-prop-eq-isolated-point d a)
-          ( refl)))
-      ( λ x → ap (λ y → a))
-
-has-decidable-equality-retract-of :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  A retract-of B → has-decidable-equality B → has-decidable-equality A
-has-decidable-equality-retract-of (pair i (pair r H)) d x y =
-  is-decidable-retract-of
-    ( retract-eq (pair i (pair r H)) x y)
-    ( d (i x) (i y))
+abstract
+  has-decidable-equality-retract-of :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    A retract-of B → has-decidable-equality B → has-decidable-equality A
+  has-decidable-equality-retract-of (pair i (pair r H)) d x y =
+    is-decidable-retract-of
+      ( retract-eq (pair i (pair r H)) x y)
+      ( d (i x) (i y))
 
 --------------------------------------------------------------------------------
 
 -- Extra stuff
 
-has-decidable-equality-Σ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  has-decidable-equality A → ((x : A) → has-decidable-equality (B x)) →
-  has-decidable-equality (Σ A B)
-has-decidable-equality-Σ dA dB (pair x y) (pair x' y') with dA x x'
-... | inr np = inr (λ r → np (ap pr1 r))
-... | inl p =
-  is-decidable-iff eq-pair-Σ' pair-eq-Σ
-    ( is-decidable-equiv
-      ( left-unit-law-Σ-is-contr
-        ( is-proof-irrelevant-is-prop
-          ( is-set-has-decidable-equality dA x x') p)
-        ( p))
-      ( dB x' (tr _ p y) y'))
+abstract
+  has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality (Σ A B)
+  has-decidable-equality-Σ dA dB (pair x y) (pair x' y') with dA x x'
+  ... | inr np = inr (λ r → np (ap pr1 r))
+  ... | inl p =
+    is-decidable-iff eq-pair-Σ' pair-eq-Σ
+      ( is-decidable-equiv
+        ( left-unit-law-Σ-is-contr
+          ( is-proof-irrelevant-is-prop
+            ( is-set-has-decidable-equality dA x x') p)
+          ( p))
+        ( dB x' (tr _ p y) y'))
 
-has-decidable-equality-is-prop :
-  {l1 : Level} {A : UU l1} → is-prop A → has-decidable-equality A
-has-decidable-equality-is-prop H x y = inl (eq-is-prop H)
+abstract
+  has-decidable-equality-is-prop :
+    {l1 : Level} {A : UU l1} → is-prop A → has-decidable-equality A
+  has-decidable-equality-is-prop H x y = inl (eq-is-prop H)
 
-has-decidable-equality-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  has-decidable-equality B → has-decidable-equality A
-has-decidable-equality-equiv e dB x y =
-  is-decidable-equiv (equiv-ap e x y) (dB (map-equiv e x) (map-equiv e y))
+abstract
+  has-decidable-equality-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+    has-decidable-equality B → has-decidable-equality A
+  has-decidable-equality-equiv e dB x y =
+    is-decidable-equiv (equiv-ap e x y) (dB (map-equiv e x) (map-equiv e y))
+  
+abstract
+  has-decidable-equality-equiv' :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+    has-decidable-equality A → has-decidable-equality B
+  has-decidable-equality-equiv' e = has-decidable-equality-equiv (inv-equiv e)
 
-has-decidable-equality-equiv' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  has-decidable-equality A → has-decidable-equality B
-has-decidable-equality-equiv' e = has-decidable-equality-equiv (inv-equiv e)
-
-has-decidable-equality-fiber-has-decidable-equality-Σ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  has-decidable-equality A → has-decidable-equality (Σ A B) →
-  (x : A) → has-decidable-equality (B x)
-has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
-  has-decidable-equality-equiv'
-    ( equiv-fib-pr1 B x)
-    ( has-decidable-equality-Σ dΣ
-      (λ t → has-decidable-equality-is-prop
-               ( is-set-has-decidable-equality dA (pr1 t) x)))
+abstract
+  has-decidable-equality-fiber-has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → has-decidable-equality (Σ A B) →
+    (x : A) → has-decidable-equality (B x)
+  has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
+    has-decidable-equality-equiv'
+      ( equiv-fib-pr1 B x)
+      ( has-decidable-equality-Σ dΣ
+        ( λ t →
+          has-decidable-equality-is-prop
+            ( is-set-has-decidable-equality dA (pr1 t) x)))
 
 is-injective-map-section :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   is-injective (map-section b)
 is-injective-map-section b = ap pr1
 
-has-decidable-equality-base-has-decidable-equality-Σ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
-  has-decidable-equality (Σ A B) → ((x : A) → has-decidable-equality (B x)) →
-  has-decidable-equality A
-has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
-  has-decidable-equality-equiv'
-    ( equiv-total-fib (map-section b))
-    ( has-decidable-equality-Σ dΣ
-      ( λ t →
-        has-decidable-equality-is-prop
-          ( is-prop-map-is-injective
-            ( is-set-has-decidable-equality dΣ)
-            ( is-injective-map-section b)
-            ( t))))
+abstract
+  has-decidable-equality-base-has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+    has-decidable-equality (Σ A B) → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality A
+  has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
+    has-decidable-equality-equiv'
+      ( equiv-total-fib (map-section b))
+      ( has-decidable-equality-Σ dΣ
+        ( λ t →
+          has-decidable-equality-is-prop
+            ( is-prop-map-is-injective
+              ( is-set-has-decidable-equality dΣ)
+              ( is-injective-map-section b)
+              ( t))))
 
-is-injective-const-true : is-injective (const unit bool true)
-is-injective-const-true {star} {star} p = refl
+abstract
+  is-injective-const-true : is-injective (const unit bool true)
+  is-injective-const-true {star} {star} p = refl
 
-is-injective-const-false : is-injective (const unit bool false)
-is-injective-const-false {star} {star} p = refl
+abstract
+  is-injective-const-false : is-injective (const unit bool false)
+  is-injective-const-false {star} {star} p = refl
 
 equiv-total-subtype :
   { l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3} →
@@ -1766,23 +1760,21 @@ equiv-total-subtype :
   ( f : (x : A) → P x → Q x) →
   ( g : (x : A) → Q x → P x) →
   ( Σ A P) ≃ (Σ A Q)
-equiv-total-subtype is-subtype-P is-subtype-Q f g =
-  pair
-    ( tot f)
-    ( is-equiv-tot-is-fiberwise-equiv {f = f}
-      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x)))
+pr1 (equiv-total-subtype is-subtype-P is-subtype-Q f g) = tot f
+pr2 (equiv-total-subtype is-subtype-P is-subtype-Q f g) =
+  is-equiv-tot-is-fiberwise-equiv {f = f}
+    ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x))
 
 {- We show that if f : A → B is an embedding, then the induced map
    Σ A (C ∘ f) → Σ A C is also an embedding. -}
 
-is-emb-map-Σ-map-base :
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3) →
-  is-emb f → is-emb (map-Σ-map-base f C)
-is-emb-map-Σ-map-base f C is-emb-f =
-  is-emb-is-prop-map
-    ( λ x →
-      is-prop-equiv'
-        ( fib f (pr1 x))
-        ( equiv-fib-map-Σ-map-base-fib f C x)
-        ( is-prop-map-is-emb is-emb-f (pr1 x)))
-```
+abstract
+  is-emb-map-Σ-map-base :
+    { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3) →
+    is-emb f → is-emb (map-Σ-map-base f C)
+  is-emb-map-Σ-map-base f C is-emb-f =
+    is-emb-is-prop-map
+      ( λ x →
+        is-prop-equiv'
+          ( equiv-fib-map-Σ-map-base-fib f C x)
+          ( is-prop-map-is-emb is-emb-f (pr1 x)))

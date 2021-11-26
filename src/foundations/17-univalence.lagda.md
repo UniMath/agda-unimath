@@ -255,7 +255,7 @@ is-contr-raise-unit {l1} =
 is-prop-raise-unit :
   {l1 : Level} → is-prop (raise-unit l1)
 is-prop-raise-unit {l1} =
-  is-prop-equiv' unit (equiv-raise l1 unit) is-prop-unit
+  is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
 
 raise-unit-Prop :
   (l1 : Level) → UU-Prop l1
@@ -285,7 +285,6 @@ is-prop-raise-empty :
   {l1 : Level} → is-prop (raise-empty l1)
 is-prop-raise-empty {l1} =
   is-prop-equiv'
-    ( empty)
     ( equiv-raise l1 empty)
     ( is-prop-empty)
 

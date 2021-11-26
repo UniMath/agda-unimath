@@ -507,97 +507,52 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-compute-eq-coprod-inl-inl :
-    (x x' : A) → Id (inl {B = B} x) (inl {B = B} x') → Id x x'
-  map-compute-eq-coprod-inl-inl x x' =
-    map-inv-raise ∘ Eq-eq-coprod A B (inl x) (inl x')
-
-  abstract
-    is-equiv-map-compute-eq-coprod-inl-inl :
-      (x x' : A) → is-equiv (map-compute-eq-coprod-inl-inl x x')
-    is-equiv-map-compute-eq-coprod-inl-inl x x' =
-      is-equiv-comp
-        ( map-compute-eq-coprod-inl-inl x x')
-        ( map-inv-raise)
-        ( Eq-eq-coprod A B (inl x) (inl x'))
-        ( refl-htpy)
-        ( is-equiv-Eq-eq-coprod A B (inl x) (inl x'))
-        ( is-equiv-map-inv-is-equiv is-equiv-map-raise)
+  -- It should be possible to make these definitions abstract,
+  -- but currently that breaks something in 23-pullbacks
 
   compute-eq-coprod-inl-inl :
     (x x' : A) → (Id (inl {B = B} x) (inl x')) ≃ (Id x x')
-  pr1 (compute-eq-coprod-inl-inl x x') = map-compute-eq-coprod-inl-inl x x'
-  pr2 (compute-eq-coprod-inl-inl x x') =
-    is-equiv-map-compute-eq-coprod-inl-inl x x'
+  compute-eq-coprod-inl-inl x x' =
+    ( inv-equiv (equiv-raise (l1 ⊔ l2) (Id x x'))) ∘e
+    ( equiv-Eq-eq-coprod A B (inl x) (inl x'))
 
-  map-compute-eq-coprod-inl-inr :
-    (x : A) (y' : B) → Id (inl x) (inr y') → empty
-  map-compute-eq-coprod-inl-inr x y' =
-    map-inv-raise ∘ Eq-eq-coprod A B (inl x) (inr y')
+  map-compute-eq-coprod-inl-inl :
+    (x x' : A) → Id (inl {B = B} x) (inl x') → Id x x'
+  map-compute-eq-coprod-inl-inl x x' =
+    map-equiv (compute-eq-coprod-inl-inl x x')
 
-  abstract
-    is-equiv-map-compute-eq-coprod-inl-inr :
-      (x : A) (y' : B) → is-equiv (map-compute-eq-coprod-inl-inr x y')
-    is-equiv-map-compute-eq-coprod-inl-inr x y' =
-      is-equiv-comp
-        ( map-compute-eq-coprod-inl-inr x y')
-        ( map-inv-raise)
-        ( Eq-eq-coprod A B (inl x) (inr y'))
-        ( refl-htpy)
-        ( is-equiv-Eq-eq-coprod A B (inl x) (inr y'))
-        ( is-equiv-map-inv-is-equiv is-equiv-map-raise)
-  
   compute-eq-coprod-inl-inr :
     (x : A) (y' : B) → (Id (inl x) (inr y')) ≃ empty
-  pr1 (compute-eq-coprod-inl-inr x y') = map-compute-eq-coprod-inl-inr x y'
-  pr2 (compute-eq-coprod-inl-inr x y') =
-    is-equiv-map-compute-eq-coprod-inl-inr x y'
+  compute-eq-coprod-inl-inr x y' =
+    ( inv-equiv (equiv-raise (l1 ⊔ l2) empty)) ∘e
+    ( equiv-Eq-eq-coprod A B (inl x) (inr y'))
 
-  map-compute-eq-coprod-inr-inl :
-    (y : B) (x' : A) → (Id (inr {A = A} y) (inl x')) → empty
-  map-compute-eq-coprod-inr-inl y x' =
-    map-inv-raise ∘ Eq-eq-coprod A B (inr y) (inl x')
-
-  abstract
-    is-equiv-map-compute-eq-coprod-inr-inl :
-      (y : B) (x' : A) → is-equiv (map-compute-eq-coprod-inr-inl y x')
-    is-equiv-map-compute-eq-coprod-inr-inl y x' =
-      is-equiv-comp
-        ( map-compute-eq-coprod-inr-inl y x')
-        ( map-inv-raise)
-        ( Eq-eq-coprod A B (inr y) (inl x'))
-        ( refl-htpy)
-        ( is-equiv-Eq-eq-coprod A B (inr y) (inl x'))
-        ( is-equiv-map-inv-is-equiv is-equiv-map-raise)
+  is-empty-eq-coprod-inl-inr :
+    (x : A) (y' : B) → is-empty (Id (inl x) (inr y'))
+  is-empty-eq-coprod-inl-inr x y' =
+    map-equiv (compute-eq-coprod-inl-inr x y')
 
   compute-eq-coprod-inr-inl :
     (y : B) (x' : A) → (Id (inr y) (inl x')) ≃ empty
-  pr1 (compute-eq-coprod-inr-inl y x') = map-compute-eq-coprod-inr-inl y x'
-  pr2 (compute-eq-coprod-inr-inl y x') =
-    is-equiv-map-compute-eq-coprod-inr-inl y x'
+  compute-eq-coprod-inr-inl y x' =
+    ( inv-equiv (equiv-raise (l1 ⊔ l2) empty)) ∘e
+    ( equiv-Eq-eq-coprod A B (inr y) (inl x'))
 
-  map-compute-eq-coprod-inr-inr :
-    (y y' : B) → (Id (inr {A = A} y) (inr y')) → Id y y'
-  map-compute-eq-coprod-inr-inr y y' =
-    map-inv-raise ∘ Eq-eq-coprod A B (inr y) (inr y')
-
-  abstract
-    is-equiv-map-compute-eq-coprod-inr-inr :
-      (y y' : B) → is-equiv (map-compute-eq-coprod-inr-inr y y')
-    is-equiv-map-compute-eq-coprod-inr-inr y y' =
-      is-equiv-comp
-        ( map-compute-eq-coprod-inr-inr y y')
-        ( map-inv-raise)
-        ( Eq-eq-coprod A B (inr y) (inr y'))
-        ( refl-htpy)
-        ( is-equiv-Eq-eq-coprod A B (inr y) (inr y'))
-        ( is-equiv-map-inv-is-equiv is-equiv-map-raise)
+  is-empty-eq-coprod-inr-inl :
+    (y : B) (x' : A) → is-empty (Id (inr y) (inl x'))
+  is-empty-eq-coprod-inr-inl y x' =
+    map-equiv (compute-eq-coprod-inr-inl y x')
 
   compute-eq-coprod-inr-inr :
     (y y' : B) → (Id (inr {A = A} y) (inr y')) ≃ (Id y y')
-  pr1 (compute-eq-coprod-inr-inr y y') = map-compute-eq-coprod-inr-inr y y'
-  pr2 (compute-eq-coprod-inr-inr y y') =
-    is-equiv-map-compute-eq-coprod-inr-inr y y'
+  compute-eq-coprod-inr-inr y y' =
+    ( inv-equiv (equiv-raise (l1 ⊔ l2) (Id y y'))) ∘e
+    ( equiv-Eq-eq-coprod A B (inr y) (inr y'))
+
+  map-compute-eq-coprod-inr-inr :
+    (y y' : B) → Id (inr {A = A} y) (inr y') → Id y y'
+  map-compute-eq-coprod-inr-inr y y' =
+    map-equiv (compute-eq-coprod-inr-inr y y')
 
 --------------------------------------------------------------------------------
 

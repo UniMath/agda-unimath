@@ -224,7 +224,6 @@ abstract
     is-subtype B → is-prop ({x : A} → B x)
   is-prop-Π' {l1} {l2} {A} {B} H =
     is-prop-equiv
-      ( (x : A) → B x)
       ( pair
         ( λ f x → f {x})
         ( is-equiv-has-inverse
