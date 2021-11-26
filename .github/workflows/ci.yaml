@@ -9,8 +9,9 @@
 #   7. Verify the whole formalisation
 # - html
 #   8. Setup Graphviz to generate the Agda dependency graph
-#   9. Generate HTML
-#   10. Deploy HTML to github pages
+#   9. Setup Pandoc
+#   10. Generate HTML
+#   11. Deploy HTML to github pages
 
 name: build
 on:
@@ -112,19 +113,24 @@ jobs:
       - name: Setup Graphviz to generate the Agda dependency graph
         uses: ts-graphviz/setup-graphviz@v1
 
+      - uses: docker://pandoc/core:2.16.2
+        with:
+          args: "--help"
+
       - name: Generate HTML
-        if : steps.typecheck.outputs.cache-hit != 'true' 
-        id : html
+        if: steps.typecheck.outputs.cache-hit != 'true' 
+        id: html
         run: |
           cd main
           make html
 
       - name: Deploy HTML to github pages
-        if : steps.html.outputs.cache-hit != 'true' 
+        if: steps.html.outputs.cache-hit != 'true' 
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: main/docs
+          enable_jekyll: true
 
 # References:
 #
