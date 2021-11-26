@@ -64,8 +64,6 @@ is-prop-hom-slice :
   { B : UU l3} (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
 is-prop-hom-slice {X = X} f i =
   is-prop-is-equiv
-    ( (x : X) → fib f x → fib (map-emb i) x)
-    ( fiberwise-hom-hom-slice f (map-emb i))
     ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))
     ( is-prop-Π
       ( λ x → is-prop-Π

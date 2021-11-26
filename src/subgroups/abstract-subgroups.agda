@@ -148,8 +148,6 @@ set-group-Subgroup G P =
   pair ( type-group-Subgroup G P)
        ( λ x y →
          is-prop-is-equiv
-           ( Id (pr1 x) (pr1 y))
-           ( ap (incl-group-Subgroup G P))
            ( is-emb-incl-group-Subgroup G P x y)
            ( is-set-type-Group G (pr1 x) (pr1 y)))
 

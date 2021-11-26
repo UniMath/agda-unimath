@@ -1142,13 +1142,13 @@ eq-resize-𝕍 :
   {l1 l2 : Level} {x y : 𝕍 l1} (H : is-small-𝕍 l2 x) (K : is-small-𝕍 l2 y) →
   Id x y ≃ Id (resize-𝕍 x H) (resize-𝕍 y K)
 eq-resize-𝕍 H K =
-  ( equiv-Eq-total-subtype-eq
+  ( equiv-Eq-eq-total-subtype
     ( is-prop-is-small-𝕍)
     ( resize-𝕍' (pair _ H))
     ( resize-𝕍' (pair _ K))) ∘e
   ( ( equiv-ap (equiv-resize-𝕍') (pair _ H) (pair _ K)) ∘e
     ( inv-equiv
-      ( equiv-Eq-total-subtype-eq
+      ( equiv-Eq-eq-total-subtype
         ( is-prop-is-small-𝕍)
         ( pair _ H)
         ( pair _ K))))

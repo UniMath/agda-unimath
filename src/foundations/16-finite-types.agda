@@ -1974,7 +1974,7 @@ is-finite-base-is-finite-complement {l1} {l2} {A} {B} K f g h =
         ( is-set-subtype (λ x → is-prop-type-trunc-Prop) K)
         ( λ t → pr2 t)
         ( is-finite-equiv
-          ( equiv-double-structure B (λ x → type-trunc-Prop (B x)))
+          ( equiv-right-swap-Σ)
           ( is-finite-Σ
             ( f)
             ( λ x → is-finite-type-trunc-Prop (g (pr1 x)))))
@@ -2550,7 +2550,7 @@ is-finite-im {f = f} K d =
     ( is-surjective-map-unit-im f)
     ( λ x y →
       is-decidable-equiv
-        ( equiv-Eq-total-subtype-eq (λ u → is-prop-type-trunc-Prop) x y)
+        ( equiv-Eq-eq-total-subtype (λ u → is-prop-type-trunc-Prop) x y)
         ( d (pr1 x) (pr1 y)))
 
 -- Exercise 16.15

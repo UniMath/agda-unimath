@@ -580,8 +580,6 @@ is-set-hom-Semi-Group :
   is-set (hom-Semi-Group G H)
 is-set-hom-Semi-Group G H (pair f μ-f) (pair g μ-g) =
   is-prop-is-equiv
-    ( htpy-hom-Semi-Group G H (pair f μ-f) (pair g μ-g))
-    ( htpy-hom-Semi-Group-eq G H (pair f μ-f) (pair g μ-g))
     ( is-equiv-htpy-hom-Semi-Group-eq G H (pair f μ-f) (pair g μ-g))
     ( is-prop-Π (λ x → is-set-type-Semi-Group H (f x) (g x)))
 
