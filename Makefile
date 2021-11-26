@@ -9,11 +9,12 @@ src/everything.agda :
 	@cd src && echo "{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}" >> everything.agda
 	@cd src && echo "module everything where" >> everything.agda
 	@cd src && echo "" >> everything.agda
-	@cd src && cat agdaFiles | cut -c 3-               \
-													 | cut -f1 -d'.'           \
-													 | sed 's/\//\./g'         \
-													 | sed 's/^/open import /' \
-													 >> everything.agda
+	@cd src && cat agdaFiles \
+		| cut -c 3-               \
+		| cut -f1 -d'.'           \
+		| sed 's/\//\./g'         \
+		| sed 's/^/open import /' \
+		>> everything.agda
 
 .PHONY : check
 check : src/everything.agda
