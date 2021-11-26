@@ -871,9 +871,7 @@ map-canpb-tot-cone-cone-fam-right-factor :
           ( g' (pr1 bα) b'))))
 map-canpb-tot-cone-cone-fam-right-factor
   {X = X} {A} {B} {C} PX {PA} {PB} {PC} {f} {g} f' g' c c' =
-  swap-total-Eq-structure
-    ( λ a → Σ B (λ b → Id (f a) (g b)))
-    ( PA)
+  map-swap-total-Eq-structure
     ( λ a bα a' → Σ (PB (pr1 bα))
       ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b')))
 
@@ -894,10 +892,8 @@ map-canpb-tot-cone-cone-fam-left-factor :
       ( λ α → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' (pr1 bb') (pr2 bb'))))
 map-canpb-tot-cone-cone-fam-left-factor
   {X = X} {A} {B} {C} PX {PA} {PB} {PC} {f} {g} f' g' c c' aa' =
-  ( swap-total-Eq-structure
-    ( λ b → Id (f (pr1 aa')) (g b))
-      ( PB)
-      ( λ b α b' → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' b b')))
+  ( map-swap-total-Eq-structure
+    ( λ b α b' → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' b b')))
 
 map-canonical-pullback-tot-cone-cone-family :
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
@@ -933,9 +929,7 @@ is-equiv-map-canonical-pullback-tot-cone-cone-family
       ( map-canpb-tot-cone-cone-fam-left-factor PX f' g' c c' aa')))
     ( map-canpb-tot-cone-cone-fam-right-factor PX f' g' c c')
     ( refl-htpy)
-    ( is-equiv-swap-total-Eq-structure
-      ( λ a → Σ B (λ b → Id (f a) (g b)))
-      ( PA)
+    ( is-equiv-map-swap-total-Eq-structure
       ( λ a bα a' → Σ (PB (pr1 bα))
         ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b'))))
     ( is-equiv-tot-is-fiberwise-equiv (λ aa' → is-equiv-comp
@@ -944,7 +938,7 @@ is-equiv-map-canonical-pullback-tot-cone-cone-family
       ( tot (λ bb' → eq-pair-Σ'))
       ( map-canpb-tot-cone-cone-fam-left-factor PX f' g' c c' aa')
       ( refl-htpy)
-      ( is-equiv-swap-total-Eq-structure _ _ _)
+      ( is-equiv-map-swap-total-Eq-structure _)
       ( is-equiv-tot-is-fiberwise-equiv (λ bb' → is-equiv-eq-pair-Σ
         ( pair (f (pr1 aa')) (f' (pr1 aa') (pr2 aa')))
         ( pair (g (pr1 bb')) (g' (pr1 bb') (pr2 bb')))))))

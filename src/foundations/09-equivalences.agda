@@ -1354,6 +1354,39 @@ module _
   pr1 equiv-right-swap-Σ = map-right-swap-Σ
   pr2 equiv-right-swap-Σ = is-equiv-map-right-swap-Σ
 
+{- Raising universe levels -}
+
+module _
+  {l l1 : Level} {A : UU l1}
+  where
+
+  issec-map-inv-raise : (x : raise l A) → Id (map-raise (map-inv-raise x)) x
+  issec-map-inv-raise (map-raise x) = refl
+
+  isretr-map-inv-raise : (x : A) → Id (map-inv-raise {l} (map-raise x)) x
+  isretr-map-inv-raise x = refl
+
+  is-equiv-map-raise : is-equiv (map-raise {l} {l1} {A})
+  is-equiv-map-raise =
+    is-equiv-has-inverse
+      map-inv-raise
+      issec-map-inv-raise
+      isretr-map-inv-raise
+
+equiv-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
+pr1 (equiv-raise l A) = map-raise
+pr2 (equiv-raise l A) = is-equiv-map-raise
+  
+equiv-raise-unit : (l : Level) → unit ≃ raise-unit l
+equiv-raise-unit l = equiv-raise l unit
+  
+equiv-raise-empty : (l : Level) → empty ≃ raise-empty l
+equiv-raise-empty l = equiv-raise l empty
+
+Raise : (l : Level) {l1 : Level} (A : UU l1) → Σ (UU (l1 ⊔ l)) (λ X → A ≃ X)
+pr1 (Raise l A) = raise l A
+pr2 (Raise l A) = equiv-raise l A
+
 --------------------------------------------------------------------------------
 
 -- Section 9.3 The identity type of a Σ-type
@@ -1834,6 +1867,53 @@ convert-eq-values-htpy :
   (x y : A) → Id (f x) (f y) ≃ Id (g x) (g y)
 convert-eq-values-htpy {f = f} {g} H x y =
   ( equiv-concat' (g x) (H y)) ∘e (equiv-concat (inv (H x)) (f y))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
+  where
+
+  {-
+
+  We assumed a commuting square
+
+          h
+    A --------> C
+    |           |
+   f|           |g
+    V           V
+    B --------> D
+          i                                                                   -}
+          
+  abstract
+    is-equiv-top-is-equiv-left-square :
+      is-equiv i → is-equiv f → is-equiv g → is-equiv h
+    is-equiv-top-is-equiv-left-square Ei Ef Eg =
+      is-equiv-right-factor (i ∘ f) g h H Eg (is-equiv-comp' i f Ef Ei)
+
+  abstract
+    is-equiv-top-is-equiv-bottom-square :
+      is-equiv f → is-equiv g → is-equiv i → is-equiv h
+    is-equiv-top-is-equiv-bottom-square Ef Eg Ei =
+      is-equiv-right-factor (i ∘ f) g h H Eg (is-equiv-comp' i f Ef Ei)
+
+  abstract
+    is-equiv-bottom-is-equiv-top-square :
+      is-equiv f → is-equiv g → is-equiv h → is-equiv i
+    is-equiv-bottom-is-equiv-top-square Ef Eg Eh = 
+      is-equiv-left-factor' i f (is-equiv-comp (i ∘ f) g h H Eh Eg) Ef
+
+  abstract
+    is-equiv-left-is-equiv-right-square :
+      is-equiv h → is-equiv i → is-equiv g → is-equiv f
+    is-equiv-left-is-equiv-right-square Eh Ei Eg =
+      is-equiv-right-factor' i f Ei (is-equiv-comp (i ∘ f) g h H Eh Eg)
+
+  abstract
+    is-equiv-right-is-equiv-left-square :
+      is-equiv h → is-equiv i → is-equiv f → is-equiv g
+    is-equiv-right-is-equiv-left-square Eh Ei Ef =
+      is-equiv-left-factor (i ∘ f) g h H (is-equiv-comp' i f Ef Ei) Eh
     
 -- Exercise 9.5
 

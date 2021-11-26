@@ -2188,31 +2188,6 @@ is-weakly-constant-map-fold-count-μ-is-commutative-monoid-Magma M H {k} e f = {
 
 --------------------------------------------------------------------------------
 
-{- Finiteness of the image of a map -}
-
-{- We characterize when im(f) is finite, given that the domain of f is finite -}
-
-{-
-is-prop-Π-is-decidable-Id :
-  {l : Level} {A : UU l} (x : A) → is-prop ((y : A) → is-decidable (Id x y))
-is-prop-Π-is-decidable-Id {l} {A} x =
-  is-prop-is-proof-irrelevant (λ H → is-contr-Π (λ y → is-proof-irrelevant-is-prop (is-prop-coprod intro-dn {!is-set-has-decidable-equality!} {!!}) (H y)))
-
-is-finite-im :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (e : is-finite A) → (d : (x : A) (y : B) → is-decidable (Id (f x) y)) →
-  is-finite (im f)
-is-finite-im f e d =
-  is-finite-base-is-finite-Σ-merely-inhabited
-    ( is-set-has-decidable-equality
-      {!!})
-    {!!}
-    {!!}
-    {!!}
--}
-
---------------------------------------------------------------------------------
-
 -- Exercises
 
 --------------------------------------------------------------------------------
@@ -2558,20 +2533,20 @@ module _
   (K : is-finite A)
   where
 
-  is-finite-codomain-has-decidable-equality :
+  is-finite-codomain :
     is-surjective f → has-decidable-equality B → is-finite B
-  is-finite-codomain-has-decidable-equality H d =
+  is-finite-codomain H d =
     is-finite-base-is-finite-Σ-merely-inhabited
       ( is-set-has-decidable-equality d)
       ( H)
       ( is-finite-equiv' (equiv-total-fib f) K)
       ( λ b → is-finite-Σ K (λ a → is-finite-eq d))
 
-is-finite-im-has-decidable-equality :
+is-finite-im :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (K : is-finite A) →
   has-decidable-equality B → is-finite (im f)
-is-finite-im-has-decidable-equality {f = f} K d =
-  is-finite-codomain-has-decidable-equality K
+is-finite-im {f = f} K d =
+  is-finite-codomain K
     ( is-surjective-map-unit-im f)
     ( λ x y →
       is-decidable-equiv
