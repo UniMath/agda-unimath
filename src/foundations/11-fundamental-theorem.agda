@@ -1172,13 +1172,3 @@ module _
         ( is-equiv-map-equiv-total-fib f)
         ( is-equiv-map-equiv-total-fib g)
         ( is-equiv-tot-is-fiberwise-equiv E)
-
-{-
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (g : B → X) (h : A → B)
-  where
-
-  fib-triangle' : (x : X) → (fib (g ∘ h) x) → fib g x
-  fib-triangle' x = fib-triangle (g ∘ h) g h refl-htpy x
--}
