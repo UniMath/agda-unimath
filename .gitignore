@@ -4,6 +4,7 @@
 MAlonzo/**
 _build/**
 src/agdaFiles
+docs/dependency.dot
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
@@ -415,3 +416,5 @@ node_modules/*
 .rvmrc
 
 package-lock.json
+
+docs/*.html

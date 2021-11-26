@@ -1,0 +1,132 @@
+# CI workflow summary:
+# - build
+#   1. Caching
+#   2. Setup Haskell
+#   3. Add .cabal/bin into PATH
+#   4. Checkout Agda repository
+#   5. Install Agda
+#   6. Checkout the main repository
+#   7. Verify the whole formalisation
+# - html
+#   8. Setup Graphviz to generate the Agda dependency graph
+#   9. Generate HTML
+#   10. Deploy HTML to github pages
+
+name: build
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master , develop ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest , macOS-latest ]
+        agda: ["v2.6.2"]
+        ghc: ["8.10.7"]
+
+    steps:
+      - uses: actions/cache@v2
+        name: Caching
+        id: cache
+        env:
+          cache-name: cache-env
+        with:
+          path: |
+            ~/.cabal
+            dist-newstyle
+            agda
+            main/_build
+          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-
+            ${{ runner.os }}-build-${{ matrix.agda }}-
+            ${{ runner.os }}-
+
+      - uses: haskell/actions/setup@v1
+        name: Setup Haskell
+        with:
+          ghc-version: ${{ matrix.ghc }}
+
+      - name: Add .cabal/bin into PATH
+        run:
+          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
+        shell: bash
+
+      - uses: actions/checkout@v2
+        name: Checkout Agda repository
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          repository: agda/agda
+          path: agda
+          ref: ${{ matrix.agda }}
+
+      - name: Install Agda
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cd agda
+          touch doc/user-manual.pdf
+          cabal install --overwrite-policy=always --ghc-options='-O2 +RTS -M6G -RTS' -foptimise-heavily
+        shell: bash
+
+      - name: Checkout the main repository
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Verify the whole formalisation
+        if: steps.cache.outputs.cache-hit != 'true'
+        id: typecheck
+        run: |
+          cd main
+          make check
+
+  website:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        agda: ["v2.6.2"]
+        ghc: ["8.10.7"]  
+    steps:
+      - uses: actions/cache@v2 
+        with:
+          path: |
+            ~/.cabal
+            dist-newstyle
+            agda
+            main/_build
+          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
+      - name: Add .cabal/bin into PATH
+        run:
+          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
+        shell: bash
+      - name: Checkout the main repository
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Setup Graphviz to generate the Agda dependency graph
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Generate HTML
+        if : steps.typecheck.outputs.cache-hit != 'true' 
+        id : html
+        run: |
+          cd main
+          make html
+
+      - name: Deploy HTML to github pages
+        if : steps.html.outputs.cache-hit != 'true' 
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: main/docs
+
+# References:
+#
+# - fangyi-zhou/setup-agda-action
+# - oisdk/agda-playground/blob/master/.github/workflows/compile.yaml
