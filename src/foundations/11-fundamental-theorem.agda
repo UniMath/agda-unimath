@@ -727,22 +727,6 @@ module _
         ( is-equiv-fib-ap-eq-fib f (pair x q) (pair y refl))
         ( is-equiv-tr (fib (ap f)) right-unit)
 
-{-
--- Comparing fib and fib'
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
-  where
-
-  fib'-fib : fib f y → fib' f y
-  fib'-fib = tot (λ x → inv)
-
-  abstract
-    is-equiv-fib'-fib : is-equiv fib'-fib
-    is-equiv-fib'-fib =
-      is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-inv (f x) y)
--}
-
 --------------------------------------------------------------------------------
 
 -- Exercises
