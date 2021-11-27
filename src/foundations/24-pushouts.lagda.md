@@ -377,11 +377,11 @@ comparison-suspension-cocone :
 comparison-suspension-cocone X Z =
   equiv-Σ
     ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
-    ( equiv-ev-star' Z)
+    ( equiv-universal-property-unit Z)
     ( λ z1 →
       equiv-Σ
         ( λ z2 → (x : X) → Id (z1 star) z2)
-        ( equiv-ev-star' Z)
+        ( equiv-universal-property-unit Z)
         ( λ z2 → equiv-id))
 
 map-comparison-suspension-cocone :

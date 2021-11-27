@@ -1540,7 +1540,7 @@ finite-choice-Fin {l1} {succ-ℕ k} {Y} H =
       ( pair
         ( finite-choice-Fin (λ x → H (inl x)))
         ( map-inv-equiv-trunc-Prop
-          ( equiv-ev-star (Y ∘ inr))
+          ( equiv-dependent-universal-property-unit (Y ∘ inr))
           ( H (inr star)))))
 
 finite-choice-count :
@@ -2003,7 +2003,7 @@ count-Π-Fin {l1} {succ-ℕ k} {B} e =
     ( count-prod
       ( count-Π-Fin (λ x → e (inl x)))
       ( count-equiv'
-        ( equiv-ev-star (B ∘ inr))
+        ( equiv-dependent-universal-property-unit (B ∘ inr))
         ( e (inr star))))
 
 count-Π :
