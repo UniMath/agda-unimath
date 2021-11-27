@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Adapted from https://jonaprieto.github.io/synthetic-graph-theory/conv.sh
 #
 # 1. Install pandoc from http://johnmacfarlane.net/pandoc/
@@ -10,24 +11,33 @@
 AGDAVERSION=$(agda --version)
 PANDOCVERSION=$(pandoc --version | head -n 1)
 
-FILES=*.md
+FILES="*.md"
 
 for f in $FILES
 do
   filename="${f%.*}"
-  echo "Converting $f to $filename.html"
+  html=$filename.html
+  echo "Converting $f to $html"
+  agdafile="${filename//.//}.lagda.md"
+  echo "Agda file: $agdafile"
+  pathAgdafile="./../src/$agdafile"
+  echo "Path Agda file: $pathAgdafile"
+  logdata=$(git log --pretty="format:(%as)(%h) %Creset%s by %cl" --no-merges -15)
+  echo "--------------------------------------------------------------------------------"
   pandoc --standalone \
          --metadata-file="_config.yml" \
          --template=template.html5 \
-         $f \
+         "$f" \
          --from markdown+tex_math_dollars+tex_math_double_backslash+latex_macros+lists_without_preceding_blankline \
          --to=html5  \
          --mathjax \
-         -o $filename.html \
+         -o "$html" \
          --variable=updated:"$(date +'%A, %B %e, %Y, %I:%M %p')" \
-         --variable=lastCommit:"$(git log --pretty='format:(%as)(%h) %Creset%s by %cl' --no-merges -15)" \
+         --variable=lastCommit:"$logdata" \
          --variable=agdaVersion:"$AGDAVERSION" \
          --variable=pandocVersion:"${PANDOCVERSION:u}" \
-         --variable=file:$f
-  rm $f
+         --variable=file:"src/$agdafile"
 done
+
+# Working only in local:
+#   logdata=$(git log --pretty="format:(%as)(%h) %Creset%s by %cl" --no-merges -15 -- "$pathAgdafile")

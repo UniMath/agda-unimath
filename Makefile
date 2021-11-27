@@ -26,5 +26,5 @@ html: src/everything.lagda.md
 	agda --html --html-highlight=code --html-dir=docs src/everything.lagda.md --css=docs/Agda.css
 	agda --html --html-highlight=code --html-dir=docs src/README.lagda.md --css=docs/Agda.css --dependency-graph=docs/dependency.dot -v0
 	dot -Tpng -o docs/graph.png docs/dependency.dot
-	cd docs/ && ./conv.sh
+	cd docs/ && sh conv.sh
 	cp docs/README.html  docs/index.html

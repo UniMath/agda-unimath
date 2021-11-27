@@ -9,7 +9,7 @@
 #   7. Verify the whole formalisation
 # - html
 #   8. Setup Graphviz to generate the Agda dependency graph
-#   9. Setup Pandoc
+#   9. Setup Pandoc using setup-pandoc 
 #   10. Generate HTML
 #   11. Deploy HTML to github pages
 
@@ -25,7 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest , macOS-latest ]
+        os: [ macOS-latest , ubuntu-latest ]
         agda: ["v2.6.2"]
         ghc: ["8.10.7"]
 
@@ -87,7 +87,7 @@ jobs:
 
   website:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     strategy:
       matrix:
         agda: ["v2.6.2"]
@@ -113,9 +113,10 @@ jobs:
       - name: Setup Graphviz to generate the Agda dependency graph
         uses: ts-graphviz/setup-graphviz@v1
 
-      - uses: docker://pandoc/core:2.16.2
+      - uses: r-lib/actions/setup-pandoc@v1
         with:
-          args: "--help"
+          pandoc-version: '2.13'
+      - run: echo "# Test" | pandoc -t html
 
       - name: Generate HTML
         if: steps.typecheck.outputs.cache-hit != 'true' 
