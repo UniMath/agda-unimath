@@ -2291,16 +2291,13 @@ abstract
 cone-empty :
   {l1 l2 l3 : Level} {B : UU l1} {X : UU l2} {C : UU l3} →
   (g : B → X) (p : C → empty) (q : C → B) →
-  cone (ind-empty {P = λ t → X}) g C
-cone-empty g p q =
-  triple p q
-    ( λ c → ind-empty {P = λ t → Id (ind-empty (p c)) (g (q c))} (p c))
+  cone ex-falso g C
+cone-empty g p q = triple p q (λ c → ex-falso (p c))
 
 abstract
   descent-empty :
     {l1 l2 l3 : Level} {B : UU l1} {X : UU l2} {C : UU l3} →
-    let f = ind-empty {P = λ t → X} in
-    (g : B → X) (c : cone f g C) → is-pullback f g c
+    (g : B → X) (c : cone ex-falso g C) → is-pullback ex-falso g c
   descent-empty g c =
     is-pullback-is-fiberwise-equiv-fib-square _ g c ind-empty
 
@@ -2308,7 +2305,7 @@ abstract
   descent-empty' :
     {l1 l2 l3 : Level} {B : UU l1} {X : UU l2} {C : UU l3} →
     (g : B → X) (p : C → empty) (q : C → B) →
-    is-pullback (ind-empty {P = λ t → X}) g (cone-empty g p q)
+    is-pullback ex-falso g (cone-empty g p q)
   descent-empty' g p q = descent-empty g (cone-empty g p q)
 
 -- Exercise 10.5

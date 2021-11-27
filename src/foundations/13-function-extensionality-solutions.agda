@@ -204,7 +204,9 @@ eq-htpy-sec :
 eq-htpy-sec {f = f} s t H K =
   map-inv-is-equiv (is-equiv-htpy-eq-sec f s t) (pair H K)
 
-{- We introduce the type hom-coslice -}
+-- Exercise 13.2 (b)
+
+-- We introduce the type hom-coslice
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : X → A) (g : X → B)
