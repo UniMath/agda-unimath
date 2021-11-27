@@ -2666,7 +2666,7 @@ module _
                   ( inclusion-im (map-trunc-Set f))
                   ( inclusion-trunc-im-Set)
                   ( e))
-                ( hom-slice-im (map-trunc-Set f)))
+                ( unit-im (map-trunc-Set f)))
               ( hom-slice-trunc-im-Set)))
   unique-equiv-trunc-im-Set =
     uniqueness-im
@@ -2702,7 +2702,7 @@ module _
           ( inclusion-im (map-trunc-Set f))
           ( inclusion-trunc-im-Set)
           ( equiv-slice-trunc-im-Set))
-        ( hom-slice-im (map-trunc-Set f)))
+        ( unit-im (map-trunc-Set f)))
       ( hom-slice-trunc-im-Set)
   htpy-hom-slice-trunc-im-Set =
     pr2 (center unique-equiv-trunc-im-Set)
