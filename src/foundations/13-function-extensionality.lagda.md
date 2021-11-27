@@ -85,12 +85,12 @@ abstract
     {l1 l2 : Level} →
     ((A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → FUNEXT f) →
     ((A : UU l1) (B : A → UU l2) → WEAK-FUNEXT A B)
-  WEAK-FUNEXT-FUNEXT funext A B is-contr-B =
-    let pi-center = (λ x → center (is-contr-B x)) in
-    pair
-      ( pi-center)
-      ( λ f → map-inv-is-equiv (funext A B pi-center f)
-        ( λ x → contraction (is-contr-B x) (f x)))
+  pr1 (WEAK-FUNEXT-FUNEXT funext A B is-contr-B) x = center (is-contr-B x)
+  pr2 (WEAK-FUNEXT-FUNEXT funext A B is-contr-B) f =
+    map-inv-is-equiv (funext A B c f) (λ x → contraction (is-contr-B x) (f x))
+    where
+    c : (x : A) → B x
+    c x = center (is-contr-B x)
 
 abstract
   FUNEXT-WEAK-FUNEXT :
@@ -117,7 +117,8 @@ postulate funext : {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B 
 
 equiv-funext : {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x} →
   (Id f g) ≃ (f ~ g)
-equiv-funext {f = f} {g} = pair htpy-eq (funext f g) 
+pr1 (equiv-funext {f = f} {g}) = htpy-eq
+pr2 (equiv-funext {f = f} {g}) = funext f g
 
 abstract
   eq-htpy :
@@ -148,7 +149,8 @@ abstract
 equiv-eq-htpy :
   {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x} →
   (f ~ g) ≃ Id f g
-equiv-eq-htpy {f = f} {g} = pair eq-htpy (is-equiv-eq-htpy f g)
+pr1 (equiv-eq-htpy {f = f} {g}) = eq-htpy
+pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
 
 {-
 The immediate proof of the following theorem would be
@@ -166,15 +168,15 @@ abstract
   is-contr-total-htpy :
     {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) →
     is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
-  is-contr-total-htpy f =
-    pair
-      ( pair f refl-htpy)
-      ( λ t →
-        ( inv (contraction
-          ( is-contr-total-htpy-FUNEXT f (funext f))
-          ( pair f refl-htpy))) ∙
-        ( contraction (is-contr-total-htpy-FUNEXT f (funext f)) t))
-
+  pr1 (pr1 (is-contr-total-htpy f)) = f
+  pr2 (pr1 (is-contr-total-htpy f)) = refl-htpy
+  pr2 (is-contr-total-htpy f) t =
+    ( inv
+      ( contraction
+        ( is-contr-total-htpy-FUNEXT f (funext f))
+        ( pair f refl-htpy))) ∙
+    ( contraction (is-contr-total-htpy-FUNEXT f (funext f)) t)
+  
 abstract
   Ind-htpy :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
@@ -290,8 +292,8 @@ is-prop-type-Π-Prop A P = is-prop-Π (λ x → is-prop-type-Prop (P x))
 Π-Prop :
   {l1 l2 : Level} (A : UU l1) →
   (A → UU-Prop l2) → UU-Prop (l1 ⊔ l2)
-Π-Prop A P =
-  pair (type-Π-Prop A P) (is-prop-type-Π-Prop A P)
+pr1 (Π-Prop A P) = type-Π-Prop A P
+pr2 (Π-Prop A P) = is-prop-type-Π-Prop A P
 
 -- A special case for dependent products on propositions is exponents --
 
@@ -307,8 +309,8 @@ is-prop-type-function-Prop A P =
 
 function-Prop :
   {l1 l2 : Level} → UU l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
-function-Prop A P =
-  pair (type-function-Prop A P) (is-prop-type-function-Prop A P)
+pr1 (function-Prop A P) = type-function-Prop A P
+pr2 (function-Prop A P) = is-prop-type-function-Prop A P
 
 -- We also define the hom-type of propositions --
 
@@ -323,10 +325,8 @@ is-prop-type-hom-Prop P Q = is-prop-type-function-Prop (type-Prop P) Q
 
 hom-Prop :
   { l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
-hom-Prop P Q =
-  pair
-    ( type-hom-Prop P Q)
-    ( is-prop-type-hom-Prop P Q)
+pr1 (hom-Prop P Q) = type-hom-Prop P Q
+pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
 implication-Prop :
   {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
@@ -342,7 +342,8 @@ is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg {A = A} = is-prop-function-type is-prop-empty
 
 neg-Prop' : {l1 : Level} → UU l1 → UU-Prop l1
-neg-Prop' A = pair (¬ A) is-prop-neg
+pr1 (neg-Prop' A) = ¬ A
+pr2 (neg-Prop' A) = is-prop-neg
 
 neg-Prop : {l1 : Level} → UU-Prop l1 → UU-Prop l1
 neg-Prop P = neg-Prop' (type-Prop P)
@@ -351,7 +352,8 @@ is-prop-is-empty : {l : Level} {A : UU l} → is-prop (is-empty A)
 is-prop-is-empty = is-prop-neg
 
 is-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
-is-empty-Prop A = pair (is-empty A) is-prop-is-empty
+pr1 (is-empty-Prop A) = is-empty A
+pr2 (is-empty-Prop A) = is-prop-is-empty
 
 -- Double negation is a special case of negation
 
@@ -376,7 +378,8 @@ is-set-type-Π-Set' A B =
 
 Π-Set' :
   {l1 l2 : Level} (A : UU l1) (B : A → UU-Set l2) → UU-Set (l1 ⊔ l2)
-Π-Set' A B = pair (type-Π-Set' A B) (is-set-type-Π-Set' A B)
+pr1 (Π-Set' A B) = type-Π-Set' A B
+pr2 (Π-Set' A B) = is-set-type-Π-Set' A B
 
 -- We define dependent products on sets --
 
@@ -393,8 +396,8 @@ is-set-type-Π-Set A B =
 Π-Set :
   {l1 l2 : Level} (A : UU-Set l1) →
   (type-Set A → UU-Set l2) → UU-Set (l1 ⊔ l2)
-Π-Set A B =
-  pair (type-Π-Set A B) (is-set-type-Π-Set A B)
+pr1 (Π-Set A B) = type-Π-Set A B
+pr2 (Π-Set A B) = is-set-type-Π-Set A B
 
 -- We define the type of morphisms between sets --
 
@@ -409,8 +412,8 @@ is-set-type-hom-Set A B = is-set-function-type (is-set-type-Set B)
 
 hom-Set :
   {l1 l2 : Level} → UU-Set l1 → UU-Set l2 → UU-Set (l1 ⊔ l2)
-hom-Set A B =
-  pair (type-hom-Set A B) (is-set-type-hom-Set A B)
+pr1 (hom-Set A B) = type-hom-Set A B
+pr2 (hom-Set A B) = is-set-type-hom-Set A B
 
 -- We define the dependent product of 1-types indexed by an arbitrary type
 
@@ -426,8 +429,8 @@ is-1-type-type-Π-1-Type' A B =
 
 Π-1-Type' :
   {l1 l2 : Level} (A : UU l1) (B : A → UU-1-Type l2) → UU-1-Type (l1 ⊔ l2)
-Π-1-Type' A B =
-  pair (type-Π-1-Type' A B) (is-1-type-type-Π-1-Type' A B)
+pr1 (Π-1-Type' A B) = type-Π-1-Type' A B
+pr2 (Π-1-Type' A B) = is-1-type-type-Π-1-Type' A B
 
 -- We define the dependent product of 1-types
 
@@ -445,8 +448,8 @@ is-1-type-type-Π-1-Type A B =
 Π-1-Type :
   {l1 l2 : Level} (A : UU-1-Type l1) (B : type-1-Type A → UU-1-Type l2) →
   UU-1-Type (l1 ⊔ l2)
-Π-1-Type A B =
-  pair (type-Π-1-Type A B) (is-1-type-type-Π-1-Type A B)
+pr1 (Π-1-Type A B) = type-Π-1-Type A B
+pr2 (Π-1-Type A B) = is-1-type-type-Π-1-Type A B
 
 -- We define the type of morphisms between 1-types
 
@@ -462,8 +465,8 @@ is-1-type-type-hom-1-Type A B =
 
 hom-1-Type :
   {l1 l2 : Level} (A : UU-1-Type l1) (B : UU-1-Type l2) → UU-1-Type (l1 ⊔ l2)
-hom-1-Type A B =
-  pair (type-hom-1-Type A B) (is-1-type-type-hom-1-Type A B)
+pr1 (hom-1-Type A B) = type-hom-1-Type A B
+pr2 (hom-1-Type A B) = is-1-type-type-hom-1-Type A B
 
 {- We define the dependent product of truncated types indexed by an arbitrary
    type. -}
@@ -482,8 +485,8 @@ is-trunc-type-Π-Truncated-Type' k A B =
 Π-Truncated-Type' :
   (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
   UU-Truncated-Type k (l1 ⊔ l2)
-Π-Truncated-Type' k A B =
-  pair (type-Π-Truncated-Type' k A B) (is-trunc-type-Π-Truncated-Type' k A B)
+pr1 (Π-Truncated-Type' k A B) = type-Π-Truncated-Type' k A B
+pr2 (Π-Truncated-Type' k A B) = is-trunc-type-Π-Truncated-Type' k A B
 
 -- We define the dependent product of truncated types
 
@@ -526,8 +529,8 @@ is-trunc-type-hom-Truncated-Type k A B =
 hom-Truncated-Type :
   (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
   (B : UU-Truncated-Type k l2) → UU-Truncated-Type k (l1 ⊔ l2)
-hom-Truncated-Type k A B =
-  pair (type-hom-Truncated-Type k A B) (is-trunc-type-hom-Truncated-Type k A B)
+pr1 (hom-Truncated-Type k A B) = type-hom-Truncated-Type k A B
+pr2 (hom-Truncated-Type k A B) = is-trunc-type-hom-Truncated-Type k A B
 
 --------------------------------------------------------------------------------
 
@@ -568,7 +571,8 @@ Eq-type-choice-∞ {A = A} {B} C t t' =
 reflexive-Eq-type-choice-∞ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
   (t : type-choice-∞ C) → Eq-type-choice-∞ C t t
-reflexive-Eq-type-choice-∞ C (pair f g) = pair refl-htpy refl-htpy
+pr1 (reflexive-Eq-type-choice-∞ C (pair f g)) = refl-htpy
+pr2 (reflexive-Eq-type-choice-∞ C (pair f g)) = refl-htpy
 
 Eq-type-choice-∞-eq :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
@@ -607,12 +611,14 @@ abstract
 choice-∞ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
   Π-total-fam C → type-choice-∞ C
-choice-∞ φ = pair (λ x → pr1 (φ x)) (λ x → pr2 (φ x))
+pr1 (choice-∞ φ) x = pr1 (φ x)
+pr2 (choice-∞ φ) x = pr2 (φ x)
 
 inv-choice-∞ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
   type-choice-∞ C → Π-total-fam C
-inv-choice-∞ ψ x = pair ((pr1 ψ) x) ((pr2 ψ) x)
+pr1 (inv-choice-∞ ψ x) = (pr1 ψ) x
+pr2 (inv-choice-∞ ψ x) = (pr2 ψ) x
 
 issec-inv-choice-∞ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
@@ -641,7 +647,8 @@ abstract
 equiv-choice-∞ :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
   Π-total-fam C ≃ type-choice-∞ C
-equiv-choice-∞ = pair choice-∞ is-equiv-choice-∞
+pr1 equiv-choice-∞ = choice-∞
+pr2 equiv-choice-∞ = is-equiv-choice-∞
 
 distributive-Π-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
@@ -661,7 +668,8 @@ abstract
 equiv-inv-choice-∞ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
   (type-choice-∞ C) ≃ (Π-total-fam C)
-equiv-inv-choice-∞ C = pair inv-choice-∞ is-equiv-inv-choice-∞
+pr1 (equiv-inv-choice-∞ C) = inv-choice-∞
+pr2 (equiv-inv-choice-∞ C) = is-equiv-inv-choice-∞
 
 inv-distributive-Π-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
@@ -695,7 +703,8 @@ Eq-Π-total-fam {A = A} C t t' =
 reflexive-Eq-Π-total-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
   (t : (a : A) → Σ (B a) (C a)) → Eq-Π-total-fam C t t
-reflexive-Eq-Π-total-fam C t a = pair refl refl
+pr1 (reflexive-Eq-Π-total-fam C t a) = refl
+pr2 (reflexive-Eq-Π-total-fam C t a) = refl
 
 Eq-Π-total-fam-eq :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
@@ -777,19 +786,16 @@ abstract
   is-equiv-ev-pair :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
     is-equiv (ev-pair {C = C})
-  is-equiv-ev-pair =
-    pair
-      ( pair ind-Σ refl-htpy)
-      ( pair ind-Σ
-        ( λ f → eq-htpy
-          ( ind-Σ
-            {C = (λ t → Id (ind-Σ (ev-pair f) t) (f t))}
-            (λ x y → refl))))
+  pr1 (pr1 is-equiv-ev-pair) = ind-Σ
+  pr2 (pr1 is-equiv-ev-pair) = refl-htpy
+  pr1 (pr2 is-equiv-ev-pair) = ind-Σ
+  pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
 
 equiv-ev-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
   ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (pair a b))
-equiv-ev-pair = pair ev-pair is-equiv-ev-pair
+pr1 equiv-ev-pair = ev-pair
+pr2 equiv-ev-pair = is-equiv-ev-pair
 
 -- Corollary 13.3.2
 
@@ -817,7 +823,8 @@ abstract
 equiv-ev-refl :
   {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → Id a x → UU l2} →
   ((x : A) (p : Id a x) → B x p) ≃ (B a refl)
-equiv-ev-refl a = pair (ev-refl a) (is-equiv-ev-refl a)
+pr1 (equiv-ev-refl a) = ev-refl a
+pr2 (equiv-ev-refl a) = is-equiv-ev-refl a
 
 --------------------------------------------------------------------------------
 
@@ -862,10 +869,9 @@ abstract
 equiv-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
   (C : B → UU l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
-equiv-precomp-Π e C =
-  pair
-    ( precomp-Π (map-equiv e) C)
-    ( is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C)
+pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
+pr2 (equiv-precomp-Π e C) =
+  is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
 
 abstract
   ind-is-equiv :
@@ -913,10 +919,9 @@ abstract
 equiv-precomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) (C : UU l3) →
   (B → C) ≃ (A → C)
-equiv-precomp e C =
-  pair
-    ( precomp (map-equiv e) C)
-    ( is-equiv-precomp-is-equiv (map-equiv e) (is-equiv-map-equiv e) C)
+pr1 (equiv-precomp e C) = precomp (map-equiv e) C
+pr2 (equiv-precomp e C) =
+  is-equiv-precomp-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
 
 abstract
   is-equiv-is-equiv-precomp-subuniverse :
@@ -995,7 +1000,8 @@ is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
 is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
 
 leq-ℕ-Prop : ℕ → ℕ → UU-Prop lzero
-leq-ℕ-Prop m n = pair (leq-ℕ m n) (is-prop-leq-ℕ m n)
+pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
+pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
 
 neg-succ-leq-ℕ :
   (n : ℕ) → ¬ (leq-ℕ (succ-ℕ n) n)
@@ -1231,12 +1237,8 @@ total-strong-ind-ℕ :
     ( λ h →
       ( Id (h zero-ℕ) p0) ×
       ( (n : ℕ) → Id (h (succ-ℕ n)) (pS n (λ m p → h m))))
-total-strong-ind-ℕ P p0 pS =
-  pair
-    ( strong-ind-ℕ P p0 pS)
-    ( pair
-      ( comp-zero-strong-ind-ℕ P p0 pS)
-      ( comp-succ-strong-ind-ℕ P p0 pS))
-
+pr1 (total-strong-ind-ℕ P p0 pS) = strong-ind-ℕ P p0 pS
+pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = comp-zero-strong-ind-ℕ P p0 pS
+pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = comp-succ-strong-ind-ℕ P p0 pS
 
 ```
