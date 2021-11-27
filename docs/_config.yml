@@ -1,0 +1,14 @@
+theme: minima
+keywords:
+  - univalent mathematics
+  - homotopy type theory
+  - univalent foundations
+  - symmetry book
+  - agda
+  - formalisation
+  - unimath
+
+lang: en_US
+css:
+  - Agda.css
+  - main.css
