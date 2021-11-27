@@ -22,20 +22,22 @@ do
   echo "Agda file: $agdafile"
   pathAgdafile="./../src/$agdafile"
   echo "Path Agda file: $pathAgdafile"
-  logdata=$(git log --pretty="format:(%as)(%h) %Creset%s by %cl" --no-merges -15 -- "$pathAgdafile")
-  echo "log in commits: $logdata"
+  logdata=$(git log --pretty="format:(%as)(%h) %Creset%s by %cl" --no-merges -15)
   echo "--------------------------------------------------------------------------------"
   pandoc --standalone \
-    --metadata-file="_config.yml" \
-    --template=template.html5 \
-    "$f" \
-    --from markdown+tex_math_dollars+tex_math_double_backslash+latex_macros+lists_without_preceding_blankline \
-    --to=html5  \
-    --mathjax \
-    -o "$html" \
-    --variable=updated:"$(date +'%A, %B %e, %Y, %I:%M %p')" \
-    --variable=lastCommit:"$logdata" \
-    --variable=agdaVersion:"$AGDAVERSION" \
-    --variable=pandocVersion:"${PANDOCVERSION:u}" \
-    --variable=file:"src/$agdafile"
+         --metadata-file="_config.yml" \
+         --template=template.html5 \
+         "$f" \
+         --from markdown+tex_math_dollars+tex_math_double_backslash+latex_macros+lists_without_preceding_blankline \
+         --to=html5  \
+         --mathjax \
+         -o "$html" \
+         --variable=updated:"$(date +'%A, %B %e, %Y, %I:%M %p')" \
+         --variable=lastCommit:"$logdata" \
+         --variable=agdaVersion:"$AGDAVERSION" \
+         --variable=pandocVersion:"${PANDOCVERSION:u}" \
+         --variable=file:"src/$agdafile"
 done
+
+# Working only in local:
+#   logdata=$(git log --pretty="format:(%as)(%h) %Creset%s by %cl" --no-merges -15 -- "$pathAgdafile")

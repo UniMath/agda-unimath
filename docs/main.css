@@ -54,17 +54,19 @@ pre {
     text-overflow: clip;
     line-height: 1rem;
     width: 50%;
-    font-family: "PragmataPro Mono Liga", "Menlo","Inconsolata","Consolas","Roboto Mono","Ubuntu Mono","Liberation Mono","Courier New",monospace;
+    font-family: "Menlo","Inconsolata","Consolas","Roboto Mono","Ubuntu Mono","Liberation Mono","Courier New",monospace;
 }
 
 .changelog {
     color: darkgray;
+    min-width: 700px;
 }
 
 .powerby {
     font-size: .8em;
     line-height: .9em;
     color:#999;
+    min-width: 700px;
 }
 
 .powerby p {
