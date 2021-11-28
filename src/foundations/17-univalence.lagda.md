@@ -29,17 +29,19 @@ UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
 
 -- Theorem 17.1.1 (i) implies (ii)
 
-is-contr-total-equiv-UNIVALENCE : {i : Level} (A : UU i) →
-  ((B : UU i) → UNIVALENCE A B) → is-contr (Σ (UU i) (λ X → A ≃ X))
-is-contr-total-equiv-UNIVALENCE A UA =
-  fundamental-theorem-id' A equiv-id (λ B → equiv-eq) UA
+abstract
+  is-contr-total-equiv-UNIVALENCE : {i : Level} (A : UU i) →
+    ((B : UU i) → UNIVALENCE A B) → is-contr (Σ (UU i) (λ X → A ≃ X))
+  is-contr-total-equiv-UNIVALENCE A UA =
+    fundamental-theorem-id' A equiv-id (λ B → equiv-eq) UA
 
 -- Theorem 17.1.1 (ii) implies (i)
 
-UNIVALENCE-is-contr-total-equiv : {i : Level} (A : UU i) →
-  is-contr (Σ (UU i) (λ X → A ≃ X)) → (B : UU i) → UNIVALENCE A B
-UNIVALENCE-is-contr-total-equiv A c =
-  fundamental-theorem-id A equiv-id c (λ B → equiv-eq)
+abstract
+  UNIVALENCE-is-contr-total-equiv : {i : Level} (A : UU i) →
+    is-contr (Σ (UU i) (λ X → A ≃ X)) → (B : UU i) → UNIVALENCE A B
+  UNIVALENCE-is-contr-total-equiv A c =
+    fundamental-theorem-id A equiv-id c (λ B → equiv-eq)
 
 -- Theorem 17.1.1 Condition (iii)
 
@@ -113,20 +115,22 @@ eq-equiv A B = map-inv-is-equiv (univalence A B)
 
 equiv-univalence :
   {i : Level} {A B : UU i} → Id A B ≃ (A ≃ B)
-equiv-univalence = pair equiv-eq (univalence _ _)
+pr1 equiv-univalence = equiv-eq
+pr2 equiv-univalence = univalence _ _
 
 abstract
   is-contr-total-equiv : {i : Level} (A : UU i) →
     is-contr (Σ (UU i) (λ X → A ≃ X))
   is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
 
-is-contr-total-equiv' : {i : Level} (A : UU i) →
-  is-contr (Σ (UU i) (λ X → X ≃ A))
-is-contr-total-equiv' A =
-  is-contr-equiv
-    ( Σ (UU _) (λ X → A ≃ X))
-    ( equiv-tot (λ X → equiv-inv-equiv))
-    ( is-contr-total-equiv A)
+abstract
+  is-contr-total-equiv' : {i : Level} (A : UU i) →
+    is-contr (Σ (UU i) (λ X → X ≃ A))
+  is-contr-total-equiv' A =
+    is-contr-equiv
+      ( Σ (UU _) (λ X → A ≃ X))
+      ( equiv-tot (λ X → equiv-inv-equiv))
+      ( is-contr-total-equiv A)
 
 abstract
   Ind-equiv : {i j : Level} (A : UU i) (P : (B : UU i) (e : A ≃ B) → UU j) →
@@ -155,21 +159,23 @@ equiv-eq-fam :
   {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → Id B C → equiv-fam B C
 equiv-eq-fam B .B refl = equiv-id-fam B
 
-is-contr-total-equiv-fam :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-  is-contr (Σ (A → UU l2) (equiv-fam B))
-is-contr-total-equiv-fam B =
-  is-contr-total-Eq-Π
-    ( λ x X → (B x) ≃ X)
-    ( λ x → is-contr-total-equiv (B x))
+abstract
+  is-contr-total-equiv-fam :
+    {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
+    is-contr (Σ (A → UU l2) (equiv-fam B))
+  is-contr-total-equiv-fam B =
+    is-contr-total-Eq-Π
+      ( λ x X → (B x) ≃ X)
+      ( λ x → is-contr-total-equiv (B x))
 
-is-equiv-equiv-eq-fam :
-  {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
-is-equiv-equiv-eq-fam B =
-  fundamental-theorem-id B
-    ( equiv-id-fam B)
-    ( is-contr-total-equiv-fam B)
-    ( equiv-eq-fam B)
+abstract
+  is-equiv-equiv-eq-fam :
+    {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
+  is-equiv-equiv-eq-fam B =
+    fundamental-theorem-id B
+      ( equiv-id-fam B)
+      ( is-contr-total-equiv-fam B)
+      ( equiv-eq-fam B)
 
 eq-equiv-fam :
   {l1 l2 : Level} {A : UU l1} {B C : A → UU l2} → equiv-fam B C → Id B C
@@ -181,26 +187,28 @@ tr-equiv-eq-ap refl = refl-htpy
 
 -- Theorem 17.1.3
 
-is-contr-total-iff :
-  {l1 : Level} (P : UU-Prop l1) → is-contr (Σ (UU-Prop l1) (λ Q → P ⇔ Q))
-is-contr-total-iff {l1} P =
-  is-contr-equiv
-    ( Σ (UU-Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
-    ( equiv-tot (equiv-equiv-iff P))
-    ( is-contr-total-Eq-substructure
-      ( is-contr-total-equiv (type-Prop P))
-      ( is-prop-is-prop)
-      ( type-Prop P)
-      ( equiv-id)
-      ( is-prop-type-Prop P))
+abstract
+  is-contr-total-iff :
+    {l1 : Level} (P : UU-Prop l1) → is-contr (Σ (UU-Prop l1) (λ Q → P ⇔ Q))
+  is-contr-total-iff {l1} P =
+    is-contr-equiv
+      ( Σ (UU-Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
+      ( equiv-tot (equiv-equiv-iff P))
+      ( is-contr-total-Eq-substructure
+        ( is-contr-total-equiv (type-Prop P))
+        ( is-prop-is-prop)
+        ( type-Prop P)
+        ( equiv-id)
+        ( is-prop-type-Prop P))
 
-is-equiv-iff-eq :
-  {l1 : Level} (P Q : UU-Prop l1) → is-equiv (iff-eq {l1} {P} {Q})
-is-equiv-iff-eq P =
-  fundamental-theorem-id P
-    ( pair id id)
-    ( is-contr-total-iff P)
-    ( λ Q → iff-eq {P = P} {Q})
+abstract
+  is-equiv-iff-eq :
+    {l1 : Level} (P Q : UU-Prop l1) → is-equiv (iff-eq {l1} {P} {Q})
+  is-equiv-iff-eq P =
+    fundamental-theorem-id P
+      ( pair id id)
+      ( is-contr-total-iff P)
+      ( λ Q → iff-eq {P = P} {Q})
 
 eq-iff' :
   {l1 : Level} (P Q : UU-Prop l1) → P ⇔ Q → Id P Q
@@ -227,15 +235,17 @@ decidable-Prop l = Σ (UU l) is-decidable-prop
 
 prop-decidable-Prop :
   {l : Level} → decidable-Prop l → UU-Prop l
-prop-decidable-Prop P = pair (pr1 P) (pr1 (pr2 P))
+pr1 (prop-decidable-Prop P) = pr1 P
+pr2 (prop-decidable-Prop P) = pr1 (pr2 P)
 
 type-decidable-Prop :
   {l : Level} → decidable-Prop l → UU l
 type-decidable-Prop P = type-Prop (prop-decidable-Prop P)
 
-is-prop-type-decidable-Prop :
-  {l : Level} (P : decidable-Prop l) → is-prop (type-decidable-Prop P)
-is-prop-type-decidable-Prop P = is-prop-type-Prop (prop-decidable-Prop P)
+abstract
+  is-prop-type-decidable-Prop :
+    {l : Level} (P : decidable-Prop l) → is-prop (type-decidable-Prop P)
+  is-prop-type-decidable-Prop P = is-prop-type-Prop (prop-decidable-Prop P)
 
 is-decidable-type-decidable-Prop :
   {l : Level} (P : decidable-Prop l) → is-decidable (type-decidable-Prop P)
@@ -243,74 +253,83 @@ is-decidable-type-decidable-Prop P = pr2 (pr2 P)
 
 is-decidable-prop-decidable-Prop :
   {l : Level} (P : decidable-Prop l) → UU-Prop l
-is-decidable-prop-decidable-Prop P =
-  pair ( is-decidable (type-decidable-Prop P))
-       ( is-prop-is-decidable (is-prop-type-decidable-Prop P))
+pr1 (is-decidable-prop-decidable-Prop P) = is-decidable (type-decidable-Prop P)
+pr2 (is-decidable-prop-decidable-Prop P) =
+  is-prop-is-decidable (is-prop-type-decidable-Prop P)
 
-is-contr-raise-unit :
-  {l1 : Level} → is-contr (raise-unit l1)
-is-contr-raise-unit {l1} =
-  is-contr-equiv' unit (equiv-raise l1 unit) is-contr-unit
+abstract
+  is-contr-raise-unit :
+    {l1 : Level} → is-contr (raise-unit l1)
+  is-contr-raise-unit {l1} =
+    is-contr-equiv' unit (equiv-raise l1 unit) is-contr-unit
 
-is-prop-raise-unit :
-  {l1 : Level} → is-prop (raise-unit l1)
-is-prop-raise-unit {l1} =
-  is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
+abstract
+  is-prop-raise-unit :
+    {l1 : Level} → is-prop (raise-unit l1)
+  is-prop-raise-unit {l1} =
+    is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
 
 raise-unit-Prop :
   (l1 : Level) → UU-Prop l1
-raise-unit-Prop l1 = pair (raise-unit l1) is-prop-raise-unit
+pr1 (raise-unit-Prop l1) = raise-unit l1
+pr2 (raise-unit-Prop l1) = is-prop-raise-unit
 
-is-contr-total-true-Prop :
-  {l1 : Level} → is-contr (Σ (UU-Prop l1) (λ P → type-Prop P))
-is-contr-total-true-Prop {l1} =
-  is-contr-equiv
-    ( Σ (UU-Prop l1) (λ P → raise-unit-Prop l1 ⇔ P))
-    ( equiv-tot
-      ( λ P →
-        inv-equiv
-          ( ( equiv-universal-property-contr
-              ( raise-star)
-              ( is-contr-raise-unit)
-              ( type-Prop P)) ∘e
-            ( right-unit-law-prod-is-contr
-              ( is-contr-Π
-                ( λ x →
-                  is-proof-irrelevant-is-prop
-                    ( is-prop-raise-unit)
-                    ( raise-star)))))))
-    ( is-contr-total-iff (raise-unit-Prop l1))
+abstract
+  is-contr-total-true-Prop :
+    {l1 : Level} → is-contr (Σ (UU-Prop l1) (λ P → type-Prop P))
+  is-contr-total-true-Prop {l1} =
+    is-contr-equiv
+      ( Σ (UU-Prop l1) (λ P → raise-unit-Prop l1 ⇔ P))
+      ( equiv-tot
+        ( λ P →
+          inv-equiv
+            ( ( equiv-universal-property-contr
+                ( raise-star)
+                ( is-contr-raise-unit)
+                ( type-Prop P)) ∘e
+              ( right-unit-law-prod-is-contr
+                ( is-contr-Π
+                  ( λ x →
+                    is-proof-irrelevant-is-prop
+                      ( is-prop-raise-unit)
+                      ( raise-star)))))))
+      ( is-contr-total-iff (raise-unit-Prop l1))
 
-is-prop-raise-empty :
-  {l1 : Level} → is-prop (raise-empty l1)
-is-prop-raise-empty {l1} =
-  is-prop-equiv'
-    ( equiv-raise l1 empty)
-    ( is-prop-empty)
+abstract
+  is-prop-raise-empty :
+    {l1 : Level} → is-prop (raise-empty l1)
+  is-prop-raise-empty {l1} =
+    is-prop-equiv'
+      ( equiv-raise l1 empty)
+      ( is-prop-empty)
 
 raise-empty-Prop :
   (l1 : Level) → UU-Prop l1
-raise-empty-Prop l1 = pair (raise-empty l1) is-prop-raise-empty
+pr1 (raise-empty-Prop l1) = raise-empty l1
+pr2 (raise-empty-Prop l1) = is-prop-raise-empty
 
-is-empty-raise-empty :
-  {l1 : Level} → is-empty (raise-empty l1)
-is-empty-raise-empty {l1} = map-inv-equiv (equiv-raise-empty l1)
+abstract
+  is-empty-raise-empty :
+    {l1 : Level} → is-empty (raise-empty l1)
+  is-empty-raise-empty {l1} = map-inv-equiv (equiv-raise-empty l1)
 
-is-contr-total-false-Prop :
-  {l1 : Level} → is-contr (Σ (UU-Prop l1) (λ P → type-Prop (neg-Prop P)))
-is-contr-total-false-Prop {l1} =
-  is-contr-equiv
-    ( Σ (UU-Prop l1) (λ P → raise-empty-Prop l1 ⇔ P))
-    ( equiv-tot
-      ( λ P →
-        inv-equiv
-          ( ( inv-equiv (equiv-postcomp (type-Prop P) (equiv-raise l1 empty))) ∘e
-            ( left-unit-law-prod-is-contr
-              ( universal-property-empty-is-empty
-                ( raise-empty l1)
-                ( is-empty-raise-empty)
-                ( type-Prop P))))))
-    ( is-contr-total-iff (raise-empty-Prop l1))
+abstract
+  is-contr-total-false-Prop :
+    {l1 : Level} → is-contr (Σ (UU-Prop l1) (λ P → type-Prop (neg-Prop P)))
+  is-contr-total-false-Prop {l1} =
+    is-contr-equiv
+      ( Σ (UU-Prop l1) (λ P → raise-empty-Prop l1 ⇔ P))
+      ( equiv-tot
+        ( λ P →
+          inv-equiv
+            ( ( inv-equiv
+                ( equiv-postcomp (type-Prop P) (equiv-raise l1 empty))) ∘e
+              ( left-unit-law-prod-is-contr
+                ( universal-property-empty-is-empty
+                  ( raise-empty l1)
+                  ( is-empty-raise-empty)
+                  ( type-Prop P))))))
+      ( is-contr-total-iff (raise-empty-Prop l1))
 
 split-decidable-Prop :
   {l : Level} →
@@ -332,17 +351,19 @@ equiv-Fin-two-ℕ-decidable-Prop {l1} =
       ( is-contr-unit))) ∘e
   ( split-decidable-Prop)
 
-compute-equiv-Fin-two-ℕ-decidable-Prop :
-  {l1 : Level} (P : decidable-Prop l1) →
-  type-decidable-Prop P ≃
-  Id (map-equiv equiv-Fin-two-ℕ-decidable-Prop P) zero-Fin
-compute-equiv-Fin-two-ℕ-decidable-Prop (pair P (pair H (inl p))) =
-  equiv-is-contr
-    ( is-proof-irrelevant-is-prop H p)
-    ( is-proof-irrelevant-is-prop
-      ( is-set-Fin two-ℕ _ zero-Fin) (ap inl (eq-is-contr is-contr-Fin-one-ℕ)))
-compute-equiv-Fin-two-ℕ-decidable-Prop (pair P (pair H (inr f))) =
-  equiv-is-empty f Eq-Fin-eq
+abstract
+  compute-equiv-Fin-two-ℕ-decidable-Prop :
+    {l1 : Level} (P : decidable-Prop l1) →
+    type-decidable-Prop P ≃
+    Id (map-equiv equiv-Fin-two-ℕ-decidable-Prop P) zero-Fin
+  compute-equiv-Fin-two-ℕ-decidable-Prop (pair P (pair H (inl p))) =
+    equiv-is-contr
+      ( is-proof-irrelevant-is-prop H p)
+      ( is-proof-irrelevant-is-prop
+        ( is-set-Fin two-ℕ _ zero-Fin)
+        ( ap inl (eq-is-contr is-contr-Fin-one-ℕ)))
+  compute-equiv-Fin-two-ℕ-decidable-Prop (pair P (pair H (inr f))) =
+    equiv-is-empty f Eq-Fin-eq
 
 bool-Fin-two-ℕ : Fin two-ℕ → bool
 bool-Fin-two-ℕ (inl (inr star)) = true
@@ -352,69 +373,75 @@ Fin-two-ℕ-bool : bool → Fin two-ℕ
 Fin-two-ℕ-bool true = inl (inr star)
 Fin-two-ℕ-bool false = inr star
 
-isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
-isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
-isretr-Fin-two-ℕ-bool (inr star) = refl
+abstract
+  isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
+  isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
+  isretr-Fin-two-ℕ-bool (inr star) = refl
 
-issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
-issec-Fin-two-ℕ-bool true = refl
-issec-Fin-two-ℕ-bool false = refl
+abstract
+  issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
+  issec-Fin-two-ℕ-bool true = refl
+  issec-Fin-two-ℕ-bool false = refl
 
 equiv-bool-Fin-two-ℕ : Fin two-ℕ ≃ bool
-equiv-bool-Fin-two-ℕ =
-  pair
-    ( bool-Fin-two-ℕ)
-    ( is-equiv-has-inverse
-      ( Fin-two-ℕ-bool)
-      ( issec-Fin-two-ℕ-bool)
-      ( isretr-Fin-two-ℕ-bool))
+pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
+pr2 equiv-bool-Fin-two-ℕ =
+  is-equiv-has-inverse
+    ( Fin-two-ℕ-bool)
+    ( issec-Fin-two-ℕ-bool)
+    ( isretr-Fin-two-ℕ-bool)
 
 equiv-bool-decidable-Prop : {l : Level} → decidable-Prop l ≃ bool
 equiv-bool-decidable-Prop {l} =
   equiv-bool-Fin-two-ℕ ∘e equiv-Fin-two-ℕ-decidable-Prop
 
-compute-equiv-bool-decidable-Prop :
-  {l : Level} (P : decidable-Prop l) →
-  type-decidable-Prop P ≃ Id (map-equiv equiv-bool-decidable-Prop P) true
-compute-equiv-bool-decidable-Prop P =
-  ( equiv-ap equiv-bool-Fin-two-ℕ _ zero-Fin) ∘e
-  ( compute-equiv-Fin-two-ℕ-decidable-Prop P)
+abstract
+  compute-equiv-bool-decidable-Prop :
+    {l : Level} (P : decidable-Prop l) →
+    type-decidable-Prop P ≃ Id (map-equiv equiv-bool-decidable-Prop P) true
+  compute-equiv-bool-decidable-Prop P =
+    ( equiv-ap equiv-bool-Fin-two-ℕ _ zero-Fin) ∘e
+    ( compute-equiv-Fin-two-ℕ-decidable-Prop P)
 
 -- Bureaucracy
 
 decidable-Eq-Fin :
   (n : ℕ) (i j : Fin n) → decidable-Prop lzero
-decidable-Eq-Fin n i j =
-  pair (Id i j) (pair (is-set-Fin n i j) ( has-decidable-equality-Fin i j))
+pr1 (decidable-Eq-Fin n i j) = Id i j
+pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
+pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin i j
 
-is-prop-is-decidable-prop :
-  {l : Level} (X : UU l) → is-prop (is-decidable-prop X)
-is-prop-is-decidable-prop X =
-  is-prop-is-inhabited
-    ( λ H →
-      is-prop-prod
-        ( is-prop-is-prop X)
-        ( is-prop-is-decidable (pr1 H)))
+abstract
+  is-prop-is-decidable-prop :
+    {l : Level} (X : UU l) → is-prop (is-decidable-prop X)
+  is-prop-is-decidable-prop X =
+    is-prop-is-inhabited
+      ( λ H →
+        is-prop-prod
+          ( is-prop-is-prop X)
+          ( is-prop-is-decidable (pr1 H)))
 
 is-decidable-prop-map :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
 is-decidable-prop-map {Y = Y} f = (y : Y) → is-decidable-prop (fib f y)
 
-is-prop-map-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-  is-decidable-prop-map f → is-prop-map f
-is-prop-map-is-decidable-prop-map H y = pr1 (H y)
+abstract
+  is-prop-map-is-decidable-prop-map :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+    is-decidable-prop-map f → is-prop-map f
+  is-prop-map-is-decidable-prop-map H y = pr1 (H y)
 
 is-decidable-map-is-decidable-prop-map :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
   is-decidable-prop-map f → is-decidable-map f
 is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
 
-is-prop-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-  is-prop (is-decidable-prop-map f)
-is-prop-is-decidable-prop-map f =
-  is-prop-Π (λ y → is-prop-is-decidable-prop (fib f y))
+abstract
+  is-prop-is-decidable-prop-map :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
+    is-prop (is-decidable-prop-map f)
+  is-prop-is-decidable-prop-map f =
+    is-prop-Π (λ y → is-prop-is-decidable-prop (fib f y))
 
 -- Subuniverses
 
@@ -426,10 +453,11 @@ subuniverse :
   (l1 l2 : Level) → UU ((lsuc l1) ⊔ (lsuc l2))
 subuniverse l1 l2 = UU l1 → UU-Prop l2
 
-is-subtype-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
-  is-prop (type-Prop (P X))
-is-subtype-subuniverse P X = is-prop-type-Prop (P X)
+abstract
+  is-subtype-subuniverse :
+    {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
+    is-prop (type-Prop (P X))
+  is-subtype-subuniverse P X = is-prop-type-Prop (P X)
 
 {- By univalence, subuniverses are closed under equivalences. -}
 in-subuniverse-equiv :
@@ -506,10 +534,11 @@ type-component-UU-Level :
   {l1 l2 : Level} {A : UU l2} → component-UU-Level l1 A → UU l1
 type-component-UU-Level X = pr1 X
 
-mere-equiv-component-UU-Level :
-  {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
-  mere-equiv A (type-component-UU-Level X)
-mere-equiv-component-UU-Level X = pr2 X
+abstract
+  mere-equiv-component-UU-Level :
+    {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
+    mere-equiv A (type-component-UU-Level X)
+  mere-equiv-component-UU-Level X = pr2 X
 
 component-UU :
   {l1 : Level} (A : UU l1) → UU (lsuc l1)
@@ -518,10 +547,11 @@ component-UU {l1} A = component-UU-Level l1 A
 type-component-UU : {l1 : Level} {A : UU l1} (X : component-UU A) → UU l1
 type-component-UU X = type-component-UU-Level X
 
-mere-equiv-component-UU :
-  {l1 : Level} {A : UU l1} (X : component-UU A) →
-  mere-equiv A (type-component-UU X)
-mere-equiv-component-UU X = mere-equiv-component-UU-Level X
+abstract
+  mere-equiv-component-UU :
+    {l1 : Level} {A : UU l1} (X : component-UU A) →
+    mere-equiv A (type-component-UU X)
+  mere-equiv-component-UU X = mere-equiv-component-UU-Level X
 
 -- We characterize the identity types of connected components of the universe
 
@@ -541,25 +571,27 @@ equiv-eq-component-UU-Level :
 equiv-eq-component-UU-Level {X = X} refl =
   id-equiv-component-UU-Level X
 
-is-contr-total-equiv-component-UU-Level :
-  {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
-  is-contr (Σ (component-UU-Level l1 A) (equiv-component-UU-Level X))
-is-contr-total-equiv-component-UU-Level X =
-  is-contr-total-Eq-substructure
-    ( is-contr-total-equiv (type-component-UU-Level X))
-    ( λ Y → is-prop-mere-equiv _ Y)
-    ( type-component-UU-Level X)
-    ( equiv-id)
-    ( mere-equiv-component-UU-Level X)
+abstract
+  is-contr-total-equiv-component-UU-Level :
+    {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
+    is-contr (Σ (component-UU-Level l1 A) (equiv-component-UU-Level X))
+  is-contr-total-equiv-component-UU-Level X =
+    is-contr-total-Eq-substructure
+      ( is-contr-total-equiv (type-component-UU-Level X))
+      ( λ Y → is-prop-mere-equiv _ Y)
+      ( type-component-UU-Level X)
+      ( equiv-id)
+      ( mere-equiv-component-UU-Level X)
 
-is-equiv-equiv-eq-component-UU-Level :
-  {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
-  is-equiv (equiv-eq-component-UU-Level {X = X} {Y})
-is-equiv-equiv-eq-component-UU-Level X =
-  fundamental-theorem-id X
-    ( id-equiv-component-UU-Level X)
-    ( is-contr-total-equiv-component-UU-Level X)
-    ( λ Y → equiv-eq-component-UU-Level {X = X} {Y})
+abstract
+  is-equiv-equiv-eq-component-UU-Level :
+    {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
+    is-equiv (equiv-eq-component-UU-Level {X = X} {Y})
+  is-equiv-equiv-eq-component-UU-Level X =
+    fundamental-theorem-id X
+      ( id-equiv-component-UU-Level X)
+      ( is-contr-total-equiv-component-UU-Level X)
+      ( λ Y → equiv-eq-component-UU-Level {X = X} {Y})
 
 eq-equiv-component-UU-Level :
   {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
@@ -580,17 +612,19 @@ equiv-eq-component-UU :
   Id X Y → equiv-component-UU X Y
 equiv-eq-component-UU p = equiv-eq-component-UU-Level p
 
-is-contr-total-equiv-component-UU :
-  {l1 : Level} {A : UU l1} (X : component-UU A) →
-  is-contr (Σ (component-UU A) (equiv-component-UU X))
-is-contr-total-equiv-component-UU X =
-  is-contr-total-equiv-component-UU-Level X
+abstract
+  is-contr-total-equiv-component-UU :
+    {l1 : Level} {A : UU l1} (X : component-UU A) →
+    is-contr (Σ (component-UU A) (equiv-component-UU X))
+  is-contr-total-equiv-component-UU X =
+    is-contr-total-equiv-component-UU-Level X
 
-is-equiv-equiv-eq-component-UU :
-  {l1 : Level} {A : UU l1} (X Y : component-UU A) →
-  is-equiv (equiv-eq-component-UU {X = X} {Y})
-is-equiv-equiv-eq-component-UU X Y =
-  is-equiv-equiv-eq-component-UU-Level X Y
+abstract
+  is-equiv-equiv-eq-component-UU :
+    {l1 : Level} {A : UU l1} (X Y : component-UU A) →
+    is-equiv (equiv-eq-component-UU {X = X} {Y})
+  is-equiv-equiv-eq-component-UU X Y =
+    is-equiv-equiv-eq-component-UU-Level X Y
 
 eq-equiv-component-UU :
   {l1 : Level} {A : UU l1} (X Y : component-UU A) →
@@ -622,27 +656,31 @@ equiv-eq-UU-Fin :
   {k : ℕ} {X Y : UU-Fin k} → Id X Y → equiv-UU-Fin X Y
 equiv-eq-UU-Fin p = equiv-eq-component-UU p
 
-is-contr-total-equiv-UU-Fin-Level :
-  {l : Level} {k : ℕ} (X : UU-Fin-Level l k) →
-  is-contr (Σ (UU-Fin-Level l k) (equiv-UU-Fin-Level X))
-is-contr-total-equiv-UU-Fin-Level {l} {k} X =
-  is-contr-total-equiv-component-UU-Level X
+abstract
+  is-contr-total-equiv-UU-Fin-Level :
+    {l : Level} {k : ℕ} (X : UU-Fin-Level l k) →
+    is-contr (Σ (UU-Fin-Level l k) (equiv-UU-Fin-Level X))
+  is-contr-total-equiv-UU-Fin-Level {l} {k} X =
+    is-contr-total-equiv-component-UU-Level X
 
-is-contr-total-equiv-UU-Fin :
-  {k : ℕ} (X : UU-Fin k) → is-contr (Σ (UU-Fin k) (equiv-UU-Fin X))
-is-contr-total-equiv-UU-Fin X =
-  is-contr-total-equiv-component-UU X
+abstract
+  is-contr-total-equiv-UU-Fin :
+    {k : ℕ} (X : UU-Fin k) → is-contr (Σ (UU-Fin k) (equiv-UU-Fin X))
+  is-contr-total-equiv-UU-Fin X =
+    is-contr-total-equiv-component-UU X
 
-is-equiv-equiv-eq-UU-Fin-Level :
-  {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
-  is-equiv (equiv-eq-UU-Fin-Level {X = X} {Y})
-is-equiv-equiv-eq-UU-Fin-Level X =
-  is-equiv-equiv-eq-component-UU-Level X
+abstract
+  is-equiv-equiv-eq-UU-Fin-Level :
+    {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
+    is-equiv (equiv-eq-UU-Fin-Level {X = X} {Y})
+  is-equiv-equiv-eq-UU-Fin-Level X =
+    is-equiv-equiv-eq-component-UU-Level X
 
-is-equiv-equiv-eq-UU-Fin :
-  {k : ℕ} (X Y : UU-Fin k) → is-equiv (equiv-eq-UU-Fin {X = X} {Y})
-is-equiv-equiv-eq-UU-Fin X =
-  is-equiv-equiv-eq-component-UU X
+abstract
+  is-equiv-equiv-eq-UU-Fin :
+    {k : ℕ} (X Y : UU-Fin k) → is-equiv (equiv-eq-UU-Fin {X = X} {Y})
+  is-equiv-equiv-eq-UU-Fin X =
+    is-equiv-equiv-eq-component-UU X
 
 eq-equiv-UU-Fin-Level :
   {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
@@ -657,13 +695,13 @@ eq-equiv-UU-Fin X Y = eq-equiv-component-UU X Y
 equiv-equiv-eq-UU-Fin-Level :
   {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
   Id X Y ≃ equiv-UU-Fin-Level X Y
-equiv-equiv-eq-UU-Fin-Level X Y =
-  pair equiv-eq-UU-Fin-Level (is-equiv-equiv-eq-UU-Fin-Level X Y)
+pr1 (equiv-equiv-eq-UU-Fin-Level X Y) = equiv-eq-UU-Fin-Level
+pr2 (equiv-equiv-eq-UU-Fin-Level X Y) = is-equiv-equiv-eq-UU-Fin-Level X Y
 
 equiv-equiv-eq-UU-Fin :
   {k : ℕ} (X Y : UU-Fin k) → Id X Y ≃ equiv-UU-Fin X Y
-equiv-equiv-eq-UU-Fin X Y =
-  pair equiv-eq-UU-Fin (is-equiv-equiv-eq-UU-Fin X Y)
+pr1 (equiv-equiv-eq-UU-Fin X Y) = equiv-eq-UU-Fin
+pr2 (equiv-equiv-eq-UU-Fin X Y) = is-equiv-equiv-eq-UU-Fin X Y
 
 add-free-point-UU-Fin-Level :
   {l1 : Level} {k : ℕ} → UU-Fin-Level l1 k → UU-Fin-Level l1 (succ-ℕ k)
@@ -678,32 +716,35 @@ add-free-point-UU-Fin X = add-free-point-UU-Fin-Level X
 
 -- Lemma 17.2.1
 
-is-equiv-postcomp-univalence :
-  {l1 l2 : Level} {X Y : UU l1} (A : UU l2) (e : X ≃ Y) →
-  is-equiv (postcomp A (map-equiv e))
-is-equiv-postcomp-univalence {X = X} A =
-  ind-equiv X (λ Y e → is-equiv (postcomp A (map-equiv e))) is-equiv-id
+abstract
+  is-equiv-postcomp-univalence :
+    {l1 l2 : Level} {X Y : UU l1} (A : UU l2) (e : X ≃ Y) →
+    is-equiv (postcomp A (map-equiv e))
+  is-equiv-postcomp-univalence {X = X} A =
+    ind-equiv X (λ Y e → is-equiv (postcomp A (map-equiv e))) is-equiv-id
 
 -- Theorem 17.2.2
 
-weak-funext-univalence :
-  {l : Level} {A : UU l} {B : A → UU l} → WEAK-FUNEXT A B
-weak-funext-univalence {A = A} {B} is-contr-B =
-  is-contr-retract-of
-    ( fib (postcomp A (pr1 {B = B})) id)
-    ( pair
-      ( λ f → pair (λ x → pair x (f x)) refl)
+abstract
+  weak-funext-univalence :
+    {l : Level} {A : UU l} {B : A → UU l} → WEAK-FUNEXT A B
+  weak-funext-univalence {A = A} {B} is-contr-B =
+    is-contr-retract-of
+      ( fib (postcomp A (pr1 {B = B})) id)
       ( pair
-        ( λ h x → tr B (htpy-eq (pr2 h) x) (pr2 (pr1 h x)))
-        ( refl-htpy)))
-    ( is-contr-map-is-equiv
-      ( is-equiv-postcomp-univalence A (equiv-pr1 is-contr-B))
-      ( id))
+        ( λ f → pair (λ x → pair x (f x)) refl)
+        ( pair
+          ( λ h x → tr B (htpy-eq (pr2 h) x) (pr2 (pr1 h x)))
+          ( refl-htpy)))
+      ( is-contr-map-is-equiv
+        ( is-equiv-postcomp-univalence A (equiv-pr1 is-contr-B))
+        ( id))
 
-funext-univalence :
-  {l : Level} {A : UU l} {B : A → UU l} (f : (x : A) → B x) → FUNEXT f
-funext-univalence {A = A} {B} f =
-  FUNEXT-WEAK-FUNEXT (λ A B → weak-funext-univalence) A B f
+abstract
+  funext-univalence :
+    {l : Level} {A : UU l} {B : A → UU l} (f : (x : A) → B x) → FUNEXT f
+  funext-univalence {A = A} {B} f =
+    FUNEXT-WEAK-FUNEXT (λ A B → weak-funext-univalence) A B f
 
 --------------------------------------------------------------------------------
 
@@ -722,7 +763,8 @@ Fib : {l l1 : Level} (A : UU l1) → slice-UU l A → A → UU (l1 ⊔ l)
 Fib A f = fib (pr2 f)
 
 Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → slice-UU (l1 ⊔ l) A
-Pr1 A B = pair (Σ A B) pr1
+pr1 (Pr1 A B) = Σ A B
+pr2 (Pr1 A B) = pr1
 
 module _
   {l1 l2 : Level} {A : UU l1}
@@ -732,62 +774,69 @@ module _
   equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
   
   equiv-id-slice-UU : (f : slice-UU l2 A) → equiv-slice' f f
-  equiv-id-slice-UU f = pair equiv-id refl-htpy
+  pr1 (equiv-id-slice-UU f) = equiv-id
+  pr2 (equiv-id-slice-UU f) = refl-htpy
 
   equiv-eq-slice-UU : (f g : slice-UU l2 A) → Id f g → equiv-slice' f g
   equiv-eq-slice-UU f .f refl = equiv-id-slice-UU f
 
-  is-contr-total-equiv-slice' :
-    (f : slice-UU l2 A) → is-contr (Σ (slice-UU l2 A) (equiv-slice' f))
-  is-contr-total-equiv-slice' (pair X f) =
-    is-contr-total-Eq-structure
-      ( λ Y g e → f ~ (g ∘ map-equiv e))
-      ( is-contr-total-equiv X)
-      ( pair X equiv-id)
-      ( is-contr-total-htpy f)
+  abstract
+    is-contr-total-equiv-slice' :
+      (f : slice-UU l2 A) → is-contr (Σ (slice-UU l2 A) (equiv-slice' f))
+    is-contr-total-equiv-slice' (pair X f) =
+      is-contr-total-Eq-structure
+        ( λ Y g e → f ~ (g ∘ map-equiv e))
+        ( is-contr-total-equiv X)
+        ( pair X equiv-id)
+        ( is-contr-total-htpy f)
 
-  is-equiv-equiv-eq-slice-UU :
-    (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
-  is-equiv-equiv-eq-slice-UU f =
-    fundamental-theorem-id f
-      ( equiv-id-slice-UU f)
-      ( is-contr-total-equiv-slice' f)
-      ( equiv-eq-slice-UU f)
+  abstract
+    is-equiv-equiv-eq-slice-UU :
+      (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
+    is-equiv-equiv-eq-slice-UU f =
+      fundamental-theorem-id f
+        ( equiv-id-slice-UU f)
+        ( is-contr-total-equiv-slice' f)
+        ( equiv-eq-slice-UU f)
 
   eq-equiv-slice :
     (f g : slice-UU l2 A) → equiv-slice' f g → Id f g
   eq-equiv-slice f g =
     map-inv-is-equiv (is-equiv-equiv-eq-slice-UU f g)
 
-issec-Pr1 :
-  {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
-issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
+abstract
+  issec-Pr1 :
+    {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
+  issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
                            
-isretr-Pr1 :
-  {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
-isretr-Pr1 {A = A} (pair X f) =
-  eq-equiv-slice
-    ( Pr1 A (Fib A (pair X f)))
-    ( pair X f)
-    ( pair (equiv-total-fib f) (triangle-map-equiv-total-fib f))
+  isretr-Pr1 :
+    {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
+  isretr-Pr1 {A = A} (pair X f) =
+    eq-equiv-slice
+      ( Pr1 A (Fib A (pair X f)))
+      ( pair X f)
+      ( pair (equiv-total-fib f) (triangle-map-equiv-total-fib f))
 
-is-equiv-Fib :
-  {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
-is-equiv-Fib l2 A =
-  is-equiv-has-inverse (Pr1 A) (issec-Pr1 {l2 = l2}) (isretr-Pr1 {l2 = l2})
+  is-equiv-Fib :
+    {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
+  is-equiv-Fib l2 A =
+    is-equiv-has-inverse (Pr1 A) (issec-Pr1 {l2 = l2}) (isretr-Pr1 {l2 = l2})
 
 equiv-Fib :
   {l1 : Level} (l2 : Level) (A : UU l1) → slice-UU (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
-equiv-Fib l2 A = pair (Fib A) (is-equiv-Fib l2 A)
+pr1 (equiv-Fib l2 A) = Fib A
+pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
 
-is-equiv-Pr1 :
-  {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
-is-equiv-Pr1 {l1} l2 A =
-  is-equiv-has-inverse (Fib A) (isretr-Pr1 {l2 = l2}) (issec-Pr1 {l2 = l2})
+abstract
+  is-equiv-Pr1 :
+    {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
+  is-equiv-Pr1 {l1} l2 A =
+    is-equiv-has-inverse (Fib A) (isretr-Pr1 {l2 = l2}) (issec-Pr1 {l2 = l2})
 
 equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → (A → UU (l1 ⊔ l2)) ≃ slice-UU (l1 ⊔ l2) A
-equiv-Pr1 l2 A = pair (Pr1 A) (is-equiv-Pr1 l2 A)
+pr1 (equiv-Pr1 l2 A) = Pr1 A
+pr2 (equiv-Pr1 l2 A) = is-equiv-Pr1 l2 A
 
 -- Theorem 17.3.2
 
@@ -853,115 +902,125 @@ inv-ev-zero-equiv-Fin-two-ℕ' :
 inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = equiv-id
 inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = equiv-succ-Fin
 
-issec-inv-ev-zero-equiv-Fin-two-ℕ' :
-  (ev-zero-equiv-Fin-two-ℕ ∘ inv-ev-zero-equiv-Fin-two-ℕ') ~ id
-issec-inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = refl
-issec-inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = refl
+abstract
+  issec-inv-ev-zero-equiv-Fin-two-ℕ' :
+    (ev-zero-equiv-Fin-two-ℕ ∘ inv-ev-zero-equiv-Fin-two-ℕ') ~ id
+  issec-inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = refl
+  issec-inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = refl
 
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
-  (e : Fin two-ℕ ≃ Fin two-ℕ) (x y : Fin two-ℕ) → Id (map-equiv e zero-Fin) x →
-  Id (map-equiv e one-Fin) y → htpy-equiv (inv-ev-zero-equiv-Fin-two-ℕ' x) e
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inl (inr star)) (inl (inr star)) p q (inr star) =
-  ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inl (inr star)) (inr star) p q (inr star) = inv q
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inr star) (inl (inr star)) p q (inl (inr star)) = inv p
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inr star) (inl (inr star)) p q (inr star) = inv q
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inr star) (inr star) p q (inl (inr star)) =
-  ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
-aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-  (inr star) (inr star) p q (inr star) =
-  ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
+    (e : Fin two-ℕ ≃ Fin two-ℕ) (x y : Fin two-ℕ) →
+    Id (map-equiv e zero-Fin) x →
+    Id (map-equiv e one-Fin) y → htpy-equiv (inv-ev-zero-equiv-Fin-two-ℕ' x) e
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inl (inr star)) (inl (inr star)) p q (inr star) =
+    ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inl (inr star)) (inr star) p q (inr star) = inv q
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inr star) (inl (inr star)) p q (inl (inr star)) = inv p
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inr star) (inl (inr star)) p q (inr star) = inv q
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inr star) (inr star) p q (inl (inr star)) =
+    ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
+  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    (inr star) (inr star) p q (inr star) =
+    ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
 
-isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
-  (inv-ev-zero-equiv-Fin-two-ℕ' ∘ ev-zero-equiv-Fin-two-ℕ) ~ id
-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e =
-  eq-htpy-equiv
-    ( aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
-      ( map-equiv e zero-Fin)
-      ( map-equiv e one-Fin)
-      ( refl)
-      ( refl))
+  isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
+    (inv-ev-zero-equiv-Fin-two-ℕ' ∘ ev-zero-equiv-Fin-two-ℕ) ~ id
+  isretr-inv-ev-zero-equiv-Fin-two-ℕ' e =
+    eq-htpy-equiv
+      ( aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+        ( map-equiv e zero-Fin)
+        ( map-equiv e one-Fin)
+        ( refl)
+        ( refl))
 
-is-equiv-ev-zero-equiv-Fin-two-ℕ' :
-  is-equiv (ev-zero-equiv-Fin-two-ℕ {lzero} {Fin two-ℕ})
-is-equiv-ev-zero-equiv-Fin-two-ℕ' =
-  is-equiv-has-inverse
-    inv-ev-zero-equiv-Fin-two-ℕ'
-    issec-inv-ev-zero-equiv-Fin-two-ℕ'
-    isretr-inv-ev-zero-equiv-Fin-two-ℕ'
+abstract
+  is-equiv-ev-zero-equiv-Fin-two-ℕ' :
+    is-equiv (ev-zero-equiv-Fin-two-ℕ {lzero} {Fin two-ℕ})
+  is-equiv-ev-zero-equiv-Fin-two-ℕ' =
+    is-equiv-has-inverse
+      inv-ev-zero-equiv-Fin-two-ℕ'
+      issec-inv-ev-zero-equiv-Fin-two-ℕ'
+      isretr-inv-ev-zero-equiv-Fin-two-ℕ'
 
-is-equiv-ev-zero-equiv-Fin-two-ℕ :
-  {l1 : Level} {X : UU l1} → mere-equiv (Fin two-ℕ) X →
-  is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {X})
-is-equiv-ev-zero-equiv-Fin-two-ℕ {l1} {X} H =
-  apply-universal-property-trunc-Prop H
-    ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
-    ( λ α →
-      is-equiv-left-factor'
-        ( ev-zero-equiv-Fin-two-ℕ)
-        ( map-equiv (equiv-postcomp-equiv α (Fin two-ℕ)))
-        ( is-equiv-comp
-          ( ( ev-zero-equiv-Fin-two-ℕ) ∘
-            ( map-equiv (equiv-postcomp-equiv α (Fin two-ℕ))))
-          ( map-equiv α)
+abstract
+  is-equiv-ev-zero-equiv-Fin-two-ℕ :
+    {l1 : Level} {X : UU l1} → mere-equiv (Fin two-ℕ) X →
+    is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {X})
+  is-equiv-ev-zero-equiv-Fin-two-ℕ {l1} {X} H =
+    apply-universal-property-trunc-Prop H
+      ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
+      ( λ α →
+        is-equiv-left-factor'
           ( ev-zero-equiv-Fin-two-ℕ)
-          ( refl-htpy)
-          ( is-equiv-ev-zero-equiv-Fin-two-ℕ')
-          ( is-equiv-map-equiv α))
-        ( is-equiv-comp-equiv α (Fin two-ℕ)))
+          ( map-equiv (equiv-postcomp-equiv α (Fin two-ℕ)))
+          ( is-equiv-comp
+            ( ( ev-zero-equiv-Fin-two-ℕ) ∘
+              ( map-equiv (equiv-postcomp-equiv α (Fin two-ℕ))))
+            ( map-equiv α)
+            ( ev-zero-equiv-Fin-two-ℕ)
+            ( refl-htpy)
+            ( is-equiv-ev-zero-equiv-Fin-two-ℕ')
+            ( is-equiv-map-equiv α))
+          ( is-equiv-comp-equiv α (Fin two-ℕ)))
 
 equiv-ev-zero-equiv-Fin-two-ℕ :
   {l1 : Level} {X : UU l1} → mere-equiv (Fin two-ℕ) X →
   (Fin two-ℕ ≃ X) ≃ X
-equiv-ev-zero-equiv-Fin-two-ℕ e =
-  pair ev-zero-equiv-Fin-two-ℕ (is-equiv-ev-zero-equiv-Fin-two-ℕ e)
+pr1 (equiv-ev-zero-equiv-Fin-two-ℕ e) = ev-zero-equiv-Fin-two-ℕ
+pr2 (equiv-ev-zero-equiv-Fin-two-ℕ e) = is-equiv-ev-zero-equiv-Fin-two-ℕ e
 
-is-contr-total-UU-Fin-Level-two-ℕ :
-  {l : Level} → is-contr (Σ (UU-Fin-Level l two-ℕ) type-UU-Fin-Level)
-is-contr-total-UU-Fin-Level-two-ℕ {l} =
-  is-contr-equiv'
-    ( Σ (UU-Fin-Level l two-ℕ) (λ X → raise-Fin l two-ℕ ≃ type-UU-Fin-Level X))
-    ( equiv-tot
-      ( λ X →
-        ( equiv-ev-zero-equiv-Fin-two-ℕ (pr2 X)) ∘e
-        ( equiv-precomp-equiv (equiv-raise-Fin l two-ℕ) (pr1 X))))
-    ( is-contr-total-equiv-subuniverse
-      ( mere-equiv-Prop (Fin two-ℕ))
-      ( Fin-UU-Fin-Level l two-ℕ))
+abstract
+  is-contr-total-UU-Fin-Level-two-ℕ :
+    {l : Level} → is-contr (Σ (UU-Fin-Level l two-ℕ) type-UU-Fin-Level)
+  is-contr-total-UU-Fin-Level-two-ℕ {l} =
+    is-contr-equiv'
+      ( Σ ( UU-Fin-Level l two-ℕ)
+          ( λ X → raise-Fin l two-ℕ ≃ type-UU-Fin-Level X))
+      ( equiv-tot
+        ( λ X →
+          ( equiv-ev-zero-equiv-Fin-two-ℕ (pr2 X)) ∘e
+          ( equiv-precomp-equiv (equiv-raise-Fin l two-ℕ) (pr1 X))))
+      ( is-contr-total-equiv-subuniverse
+        ( mere-equiv-Prop (Fin two-ℕ))
+        ( Fin-UU-Fin-Level l two-ℕ))
 
-is-contr-total-UU-Fin-two-ℕ :
-  is-contr (Σ (UU-Fin two-ℕ) (λ X → type-UU-Fin X))
-is-contr-total-UU-Fin-two-ℕ = is-contr-total-UU-Fin-Level-two-ℕ
+abstract
+  is-contr-total-UU-Fin-two-ℕ :
+    is-contr (Σ (UU-Fin two-ℕ) (λ X → type-UU-Fin X))
+  is-contr-total-UU-Fin-two-ℕ = is-contr-total-UU-Fin-Level-two-ℕ
 
 point-eq-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l two-ℕ} →
   Id (Fin-UU-Fin-Level l two-ℕ) X → type-UU-Fin-Level X
 point-eq-UU-Fin-Level-two-ℕ refl = map-raise zero-Fin
 
-is-equiv-point-eq-UU-Fin-Level-two-ℕ :
-  {l : Level} (X : UU-Fin-Level l two-ℕ) →
-  is-equiv (point-eq-UU-Fin-Level-two-ℕ {l} {X})
-is-equiv-point-eq-UU-Fin-Level-two-ℕ {l} =
-  fundamental-theorem-id
-    ( Fin-UU-Fin-Level l two-ℕ)
-    ( map-raise zero-Fin)
-    ( is-contr-total-UU-Fin-Level-two-ℕ)
-    ( λ X → point-eq-UU-Fin-Level-two-ℕ {l} {X})
+abstract
+  is-equiv-point-eq-UU-Fin-Level-two-ℕ :
+    {l : Level} (X : UU-Fin-Level l two-ℕ) →
+    is-equiv (point-eq-UU-Fin-Level-two-ℕ {l} {X})
+  is-equiv-point-eq-UU-Fin-Level-two-ℕ {l} =
+    fundamental-theorem-id
+      ( Fin-UU-Fin-Level l two-ℕ)
+      ( map-raise zero-Fin)
+      ( is-contr-total-UU-Fin-Level-two-ℕ)
+      ( λ X → point-eq-UU-Fin-Level-two-ℕ {l} {X})
 
 equiv-point-eq-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l two-ℕ} →
   Id (Fin-UU-Fin-Level l two-ℕ) X ≃ type-UU-Fin-Level X
-equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X} =
-  pair point-eq-UU-Fin-Level-two-ℕ (is-equiv-point-eq-UU-Fin-Level-two-ℕ X)
+pr1 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
+  point-eq-UU-Fin-Level-two-ℕ
+pr2 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
+  is-equiv-point-eq-UU-Fin-Level-two-ℕ X
 
 eq-point-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l two-ℕ} →
@@ -973,19 +1032,20 @@ point-eq-UU-Fin-two-ℕ :
   {X : UU-Fin two-ℕ} → Id (Fin-UU-Fin two-ℕ) X → type-UU-Fin X
 point-eq-UU-Fin-two-ℕ refl = zero-Fin
 
-is-equiv-point-eq-UU-Fin-two-ℕ :
-  (X : UU-Fin two-ℕ) → is-equiv (point-eq-UU-Fin-two-ℕ {X})
-is-equiv-point-eq-UU-Fin-two-ℕ =
-  fundamental-theorem-id
-    ( Fin-UU-Fin two-ℕ)
-    ( zero-Fin)
-    ( is-contr-total-UU-Fin-two-ℕ)
-    ( λ X → point-eq-UU-Fin-two-ℕ {X})
+abstract
+  is-equiv-point-eq-UU-Fin-two-ℕ :
+    (X : UU-Fin two-ℕ) → is-equiv (point-eq-UU-Fin-two-ℕ {X})
+  is-equiv-point-eq-UU-Fin-two-ℕ =
+    fundamental-theorem-id
+      ( Fin-UU-Fin two-ℕ)
+      ( zero-Fin)
+      ( is-contr-total-UU-Fin-two-ℕ)
+      ( λ X → point-eq-UU-Fin-two-ℕ {X})
 
 equiv-point-eq-UU-Fin-two-ℕ :
   {X : UU-Fin two-ℕ} → Id (Fin-UU-Fin two-ℕ) X ≃ type-UU-Fin X
-equiv-point-eq-UU-Fin-two-ℕ {X} =
-  pair point-eq-UU-Fin-two-ℕ (is-equiv-point-eq-UU-Fin-two-ℕ X)
+pr1 (equiv-point-eq-UU-Fin-two-ℕ {X}) = point-eq-UU-Fin-two-ℕ
+pr2 (equiv-point-eq-UU-Fin-two-ℕ {X}) = is-equiv-point-eq-UU-Fin-two-ℕ X
 
 eq-point-UU-Fin-two-ℕ :
   {X : UU-Fin two-ℕ} → type-UU-Fin X → Id (Fin-UU-Fin two-ℕ) X
@@ -994,35 +1054,38 @@ eq-point-UU-Fin-two-ℕ {X} =
 
 -- Corollary 17.4.2
 
-no-section-type-UU-Fin-Level-two-ℕ :
-  {l : Level} → ¬ ((X : UU-Fin-Level l two-ℕ) → type-UU-Fin-Level X)
-no-section-type-UU-Fin-Level-two-ℕ {l} f =
-  is-not-contractible-Fin two-ℕ
-    ( Eq-eq-ℕ)
-    ( is-contr-equiv
-      ( Id (Fin-UU-Fin-Level l two-ℕ) (Fin-UU-Fin-Level l two-ℕ))
-      ( ( inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ) ∘e
-        ( equiv-raise-Fin l two-ℕ))
-      ( is-prop-is-contr
-        ( pair
+abstract
+  no-section-type-UU-Fin-Level-two-ℕ :
+    {l : Level} → ¬ ((X : UU-Fin-Level l two-ℕ) → type-UU-Fin-Level X)
+  no-section-type-UU-Fin-Level-two-ℕ {l} f =
+    is-not-contractible-Fin two-ℕ
+      ( Eq-eq-ℕ)
+      ( is-contr-equiv
+        ( Id (Fin-UU-Fin-Level l two-ℕ) (Fin-UU-Fin-Level l two-ℕ))
+        ( ( inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ) ∘e
+          ( equiv-raise-Fin l two-ℕ))
+        ( is-prop-is-contr
+          ( pair
+            ( Fin-UU-Fin-Level l two-ℕ)
+            ( λ X → eq-point-UU-Fin-Level-two-ℕ (f X)))
           ( Fin-UU-Fin-Level l two-ℕ)
-          ( λ X → eq-point-UU-Fin-Level-two-ℕ (f X)))
-        ( Fin-UU-Fin-Level l two-ℕ)
-        ( Fin-UU-Fin-Level l two-ℕ)))
+          ( Fin-UU-Fin-Level l two-ℕ)))
 
-no-section-type-UU-Fin-two-ℕ :
-  ¬ ((X : UU-Fin two-ℕ) → type-UU-Fin X)
-no-section-type-UU-Fin-two-ℕ f =
-  no-section-type-UU-Fin-Level-two-ℕ f
+abstract
+  no-section-type-UU-Fin-two-ℕ :
+    ¬ ((X : UU-Fin two-ℕ) → type-UU-Fin X)
+  no-section-type-UU-Fin-two-ℕ f =
+    no-section-type-UU-Fin-Level-two-ℕ f
 
 -- Corollary 17.4.3
 
-no-global-section :
-  {l : Level} → ¬ ((X : UU l) → type-trunc-Prop X → X)
-no-global-section f =
-  no-section-type-UU-Fin-Level-two-ℕ
-    ( λ X →
-      f (pr1 X) (functor-trunc-Prop (λ e → map-equiv e zero-Fin) (pr2 X)))
+abstract
+  no-global-section :
+    {l : Level} → ¬ ((X : UU l) → type-trunc-Prop X → X)
+  no-global-section f =
+    no-section-type-UU-Fin-Level-two-ℕ
+      ( λ X →
+        f (pr1 X) (functor-trunc-Prop (λ e → map-equiv e zero-Fin) (pr2 X)))
 
 -- Definition 17.4.4
 
@@ -1034,25 +1097,27 @@ AC l1 l2 =
 
 -- Theorem 17.4.5
 
-is-not-decidable-type-UU-Fin-Level-two-ℕ :
-  {l : Level} →
-  ¬ ((X : UU-Fin-Level l two-ℕ) → is-decidable (type-UU-Fin-Level X))
-is-not-decidable-type-UU-Fin-Level-two-ℕ {l} d =
-  no-section-type-UU-Fin-Level-two-ℕ
-    ( λ X →
-      map-right-unit-law-coprod-is-empty
-        ( pr1 X)
-        ( ¬ (pr1 X))
-        ( apply-universal-property-trunc-Prop
-          ( pr2 X)
-          ( dn-Prop' (pr1 X))
-          ( λ e → intro-dn {l} (map-equiv e zero-Fin)))
-        ( d X))
+abstract
+  is-not-decidable-type-UU-Fin-Level-two-ℕ :
+    {l : Level} →
+    ¬ ((X : UU-Fin-Level l two-ℕ) → is-decidable (type-UU-Fin-Level X))
+  is-not-decidable-type-UU-Fin-Level-two-ℕ {l} d =
+    no-section-type-UU-Fin-Level-two-ℕ
+      ( λ X →
+        map-right-unit-law-coprod-is-empty
+          ( pr1 X)
+          ( ¬ (pr1 X))
+          ( apply-universal-property-trunc-Prop
+            ( pr2 X)
+            ( dn-Prop' (pr1 X))
+            ( λ e → intro-dn {l} (map-equiv e zero-Fin)))
+          ( d X))
 
-no-global-decidability :
-  {l : Level} → ¬ ((X : UU l) → is-decidable X)
-no-global-decidability {l} d =
-  is-not-decidable-type-UU-Fin-Level-two-ℕ (λ X → d (pr1 X))
+abstract
+  no-global-decidability :
+    {l : Level} → ¬ ((X : UU l) → is-decidable X)
+  no-global-decidability {l} d =
+    is-not-decidable-type-UU-Fin-Level-two-ℕ (λ X → d (pr1 X))
 
 -- Definition 17.4.6
 
@@ -1069,23 +1134,25 @@ is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
 is-decidable-emb {Y = Y} f = is-emb f × is-decidable-map f
 
-is-emb-is-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-  is-decidable-emb f → is-emb f
-is-emb-is-decidable-emb H = pr1 H
+abstract
+  is-emb-is-decidable-emb :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+    is-decidable-emb f → is-emb f
+  is-emb-is-decidable-emb H = pr1 H
 
 is-decidable-map-is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
   is-decidable-emb f → is-decidable-map f
 is-decidable-map-is-decidable-emb H = pr2 H
 
-is-decidable-emb-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-  is-decidable-prop-map f → is-decidable-emb f
-is-decidable-emb-is-decidable-prop-map f H =
-  pair
-    ( is-emb-is-prop-map (is-prop-map-is-decidable-prop-map H))
-    ( is-decidable-map-is-decidable-prop-map H)
+abstract
+  is-decidable-emb-is-decidable-prop-map :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
+    is-decidable-prop-map f → is-decidable-emb f
+  pr1 (is-decidable-emb-is-decidable-prop-map f H) =
+    is-emb-is-prop-map (is-prop-map-is-decidable-prop-map H)
+  pr2 (is-decidable-emb-is-decidable-prop-map f H) =
+    is-decidable-map-is-decidable-prop-map H
 
 _↪d_ :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
@@ -1095,26 +1162,30 @@ map-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪d Y → X → Y
 map-decidable-emb e = pr1 e
 
-is-decidable-emb-map-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
-  is-decidable-emb (map-decidable-emb e)
-is-decidable-emb-map-decidable-emb e = pr2 e
+abstract
+  is-decidable-emb-map-decidable-emb :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
+    is-decidable-emb (map-decidable-emb e)
+  is-decidable-emb-map-decidable-emb e = pr2 e
 
-is-emb-map-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
-  is-emb (map-decidable-emb e)
-is-emb-map-decidable-emb e =
-  is-emb-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
+abstract
+  is-emb-map-decidable-emb :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
+    is-emb (map-decidable-emb e)
+  is-emb-map-decidable-emb e =
+    is-emb-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
 
-is-decidable-map-map-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
-  is-decidable-map (map-decidable-emb e)
-is-decidable-map-map-decidable-emb e =
-  is-decidable-map-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
+abstract
+  is-decidable-map-map-decidable-emb :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
+    is-decidable-map (map-decidable-emb e)
+  is-decidable-map-map-decidable-emb e =
+    is-decidable-map-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
 
 emb-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪d Y → X ↪ Y
-emb-decidable-emb e = pair (map-decidable-emb e) (is-emb-map-decidable-emb e)
+pr1 (emb-decidable-emb e) = map-decidable-emb e
+pr2 (emb-decidable-emb e) = is-emb-map-decidable-emb e
 
 -- Bureaucracy
 
@@ -1130,30 +1201,35 @@ equiv-Fib-decidable-Prop l A =
           ( inv-equiv equiv-choice-∞) ∘e
           ( equiv-prod (equiv-is-prop-map-is-emb f) equiv-id))))
 
-is-decidable-emb-is-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-equiv f → is-decidable-emb f
-is-decidable-emb-is-equiv H =
-  pair (is-emb-is-equiv H) (λ x → inl (center (is-contr-map-is-equiv H x)))
+abstract
+  is-decidable-emb-is-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-equiv f → is-decidable-emb f
+  pr1 (is-decidable-emb-is-equiv H) = is-emb-is-equiv H
+  pr2 (is-decidable-emb-is-equiv H) x = inl (center (is-contr-map-is-equiv H x))
 
-is-decidable-emb-id :
-  {l1 : Level} {A : UU l1} → is-decidable-emb (id {A = A})
-is-decidable-emb-id {l1} {A} = pair is-emb-id (λ x → inl (pair x refl))
+abstract
+  is-decidable-emb-id :
+    {l1 : Level} {A : UU l1} → is-decidable-emb (id {A = A})
+  pr1 (is-decidable-emb-id {l1} {A}) = is-emb-id
+  pr2 (is-decidable-emb-id {l1} {A}) x = inl (pair x refl)
 
 decidable-emb-id :
   {l1 : Level} {A : UU l1} → A ↪d A
-decidable-emb-id {l1} {A} = pair id is-decidable-emb-id
+pr1 (decidable-emb-id {l1} {A}) = id
+pr2 (decidable-emb-id {l1} {A}) = is-decidable-emb-id
 
-is-prop-is-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-decidable-emb f)
-is-prop-is-decidable-emb f =
-  is-prop-is-inhabited
-    ( λ H →
-      is-prop-prod
-        ( is-prop-is-emb f)
-        ( is-prop-Π
-          ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
+abstract
+  is-prop-is-decidable-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-prop (is-decidable-emb f)
+  is-prop-is-decidable-emb f =
+    is-prop-is-inhabited
+      ( λ H →
+        is-prop-prod
+          ( is-prop-is-emb f)
+          ( is-prop-Π
+            ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
 
 fib-comp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C) (f : A → B)
@@ -1170,38 +1246,39 @@ fib-comp {A = A} {B} {C} g f c =
               ( is-contr-total-path (f a))
               ( pair (f a) refl)))))))
 
-is-decidable-emb-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {g : B → C}
-  {f : A → B} →
-  is-decidable-emb f → is-decidable-emb g → is-decidable-emb (g ∘ f)
-is-decidable-emb-comp {g = g} {f} H K =
-  pair
-    ( is-emb-comp' _ _ (pr1 K) (pr1 H))
-    ( λ x →
-      ind-coprod
-        ( λ t → is-decidable (fib (g ∘ f) x))
-        ( λ u →
-          is-decidable-equiv
-            ( fib-comp g f x)
-            ( is-decidable-equiv
-              ( left-unit-law-Σ-is-contr
-                ( is-proof-irrelevant-is-prop
-                  ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x)
-                  ( u))
+abstract
+  is-decidable-emb-comp :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {g : B → C}
+    {f : A → B} →
+    is-decidable-emb f → is-decidable-emb g → is-decidable-emb (g ∘ f)
+  pr1 (is-decidable-emb-comp {g = g} {f} H K) =
+    is-emb-comp' _ _ (pr1 K) (pr1 H)
+  pr2 (is-decidable-emb-comp {g = g} {f} H K) x =
+    ind-coprod
+      ( λ t → is-decidable (fib (g ∘ f) x))
+      ( λ u →
+        is-decidable-equiv
+          ( fib-comp g f x)
+          ( is-decidable-equiv
+          ( left-unit-law-Σ-is-contr
+            ( is-proof-irrelevant-is-prop
+              ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x)
+                ( u))
                 ( u))
               ( is-decidable-map-is-decidable-emb H (pr1 u))))
-        ( λ α → inr (λ t → α (pair (f (pr1 t)) (pr2 t))))
-        ( pr2 K x))
+      ( λ α → inr (λ t → α (pair (f (pr1 t)) (pr2 t))))
+      ( pr2 K x)
 
-is-decidable-emb-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
-  f ~ g → is-decidable-emb g → is-decidable-emb f
-is-decidable-emb-htpy {f = f} {g} H K =
-  pair ( is-emb-htpy f g H (is-emb-is-decidable-emb K))
-       ( λ b →
-         is-decidable-equiv
-           ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
-           ( is-decidable-map-is-decidable-emb K b))
+abstract
+  is-decidable-emb-htpy :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+    f ~ g → is-decidable-emb g → is-decidable-emb f
+  pr1 (is-decidable-emb-htpy {f = f} {g} H K) =
+    is-emb-htpy f g H (is-emb-is-decidable-emb K)
+  pr2 (is-decidable-emb-htpy {f = f} {g} H K) b =
+    is-decidable-equiv
+      ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
+      ( is-decidable-map-is-decidable-emb K b)
 
 htpy-decidable-emb :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) → UU (l1 ⊔ l2)
@@ -1216,25 +1293,27 @@ htpy-eq-decidable-emb :
   Id f g → htpy-decidable-emb f g
 htpy-eq-decidable-emb f .f refl = refl-htpy-decidable-emb f
 
-is-contr-total-htpy-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪d B) →
-  is-contr (Σ (A ↪d B) (htpy-decidable-emb f))
-is-contr-total-htpy-decidable-emb f =
-  is-contr-total-Eq-substructure
-    ( is-contr-total-htpy (map-decidable-emb f))
-    ( is-prop-is-decidable-emb)
-    ( map-decidable-emb f)
-    ( refl-htpy)
-    ( is-decidable-emb-map-decidable-emb f)
+abstract
+  is-contr-total-htpy-decidable-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪d B) →
+    is-contr (Σ (A ↪d B) (htpy-decidable-emb f))
+  is-contr-total-htpy-decidable-emb f =
+    is-contr-total-Eq-substructure
+      ( is-contr-total-htpy (map-decidable-emb f))
+      ( is-prop-is-decidable-emb)
+      ( map-decidable-emb f)
+      ( refl-htpy)
+      ( is-decidable-emb-map-decidable-emb f)
 
-is-equiv-htpy-eq-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) →
-  is-equiv (htpy-eq-decidable-emb f g)
-is-equiv-htpy-eq-decidable-emb f =
-  fundamental-theorem-id f
-    ( refl-htpy-decidable-emb f)
-    ( is-contr-total-htpy-decidable-emb f)
-    ( htpy-eq-decidable-emb f)
+abstract
+  is-equiv-htpy-eq-decidable-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) →
+    is-equiv (htpy-eq-decidable-emb f g)
+  is-equiv-htpy-eq-decidable-emb f =
+    fundamental-theorem-id f
+      ( refl-htpy-decidable-emb f)
+      ( is-contr-total-htpy-decidable-emb f)
+      ( htpy-eq-decidable-emb f)
 
 eq-htpy-decidable-emb :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A ↪d B} →
@@ -1278,10 +1357,12 @@ type-binomial-type-Level :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → binomial-type-Level l3 X Y → UU l3
 type-binomial-type-Level Z = type-component-UU-Level (pr1 Z)
 
-mere-compute-binomial-type-Level :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
-  mere-equiv Y (type-binomial-type-Level Z)
-mere-compute-binomial-type-Level Z = mere-equiv-component-UU-Level (pr1 Z)
+abstract
+  mere-compute-binomial-type-Level :
+    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+    (Z : binomial-type-Level l3 X Y) →
+    mere-equiv Y (type-binomial-type-Level Z)
+  mere-compute-binomial-type-Level Z = mere-equiv-component-UU-Level (pr1 Z)
 
 decidable-emb-binomial-type-Level :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
@@ -1294,11 +1375,13 @@ map-decidable-emb-binomial-type-Level :
 map-decidable-emb-binomial-type-Level Z =
   map-decidable-emb (decidable-emb-binomial-type-Level Z)
 
-is-emb-map-emb-binomial-type-Level :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
-  is-emb (map-decidable-emb-binomial-type-Level Z)
-is-emb-map-emb-binomial-type-Level Z =
-  is-emb-map-decidable-emb (decidable-emb-binomial-type-Level Z)
+abstract
+  is-emb-map-emb-binomial-type-Level :
+    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+    (Z : binomial-type-Level l3 X Y) →
+    is-emb (map-decidable-emb-binomial-type-Level Z)
+  is-emb-map-emb-binomial-type-Level Z =
+    is-emb-map-decidable-emb (decidable-emb-binomial-type-Level Z)
 
 -- We now define the standard binomial types
 
@@ -1309,10 +1392,11 @@ type-binomial-type :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → binomial-type X Y → UU (l1 ⊔ l2)
 type-binomial-type Z = type-component-UU-Level (pr1 Z)
 
-mere-compute-binomial-type :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-  mere-equiv Y (type-binomial-type Z)
-mere-compute-binomial-type Z = mere-equiv-component-UU-Level (pr1 Z)
+abstract
+  mere-compute-binomial-type :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
+    mere-equiv Y (type-binomial-type Z)
+  mere-compute-binomial-type Z = mere-equiv-component-UU-Level (pr1 Z)
 
 decidable-emb-binomial-type :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
@@ -1325,11 +1409,12 @@ map-decidable-emb-binomial-type :
 map-decidable-emb-binomial-type Z =
   map-decidable-emb (decidable-emb-binomial-type Z)
 
-is-emb-map-emb-binomial-type :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-  is-emb (map-decidable-emb-binomial-type Z)
-is-emb-map-emb-binomial-type Z =
-  is-emb-map-decidable-emb (decidable-emb-binomial-type Z)
+abstract
+  is-emb-map-emb-binomial-type :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
+    is-emb (map-decidable-emb-binomial-type Z)
+  is-emb-map-emb-binomial-type Z =
+    is-emb-map-decidable-emb (decidable-emb-binomial-type Z)
 
 -- Proposition 17.5.6
 
@@ -1392,162 +1477,168 @@ compute-small-binomial-type A B =
 
 -- Lemma 17.5.8
 
-is-contr-component-UU-Level-empty :
-  (l : Level) → is-contr (component-UU-Level l empty)
-is-contr-component-UU-Level-empty l =
-  pair
-    ( Fin-UU-Fin-Level l zero-ℕ)
-    ( λ X →
-      eq-equiv-subuniverse
-        ( mere-equiv-Prop empty)
-        ( equiv-is-empty
-          ( map-inv-equiv (equiv-raise l empty))
-          ( λ x →
-            apply-universal-property-trunc-Prop
-              ( pr2 X)
-              ( empty-Prop)
-              ( λ e → map-inv-equiv e x))))
+abstract
+  is-contr-component-UU-Level-empty :
+    (l : Level) → is-contr (component-UU-Level l empty)
+  pr1 (is-contr-component-UU-Level-empty l) = Fin-UU-Fin-Level l zero-ℕ
+  pr2 (is-contr-component-UU-Level-empty l) X =
+    eq-equiv-subuniverse
+      ( mere-equiv-Prop empty)
+      ( equiv-is-empty
+        ( map-inv-equiv (equiv-raise l empty))
+        ( λ x →
+          apply-universal-property-trunc-Prop
+          ( pr2 X)
+          ( empty-Prop)
+          ( λ e → map-inv-equiv e x)))
 
-is-contr-component-UU-empty : is-contr (component-UU empty)
-is-contr-component-UU-empty =
-  is-contr-component-UU-Level-empty lzero
+abstract
+  is-contr-component-UU-empty : is-contr (component-UU empty)
+  is-contr-component-UU-empty =
+    is-contr-component-UU-Level-empty lzero
 
-is-decidable-emb-ex-falso :
-  {l : Level} {X : UU l} → is-decidable-emb (ex-falso {l} {X})
-is-decidable-emb-ex-falso {l} {X} =
-  pair (is-emb-ex-falso X) (λ x → inr pr1)
+abstract
+  is-decidable-emb-ex-falso :
+    {l : Level} {X : UU l} → is-decidable-emb (ex-falso {l} {X})
+  pr1 (is-decidable-emb-ex-falso {l} {X}) = is-emb-ex-falso X
+  pr2 (is-decidable-emb-ex-falso {l} {X}) x = inr pr1
 
-binomial-type-over-empty :
-  {l : Level} {X : UU l} → is-contr (binomial-type X empty)
-binomial-type-over-empty {l} {X} =
-  is-contr-equiv
-    ( raise-empty l ↪d X)
-    ( left-unit-law-Σ-is-contr
-      ( is-contr-component-UU-Level-empty l)
-      ( Fin-UU-Fin-Level l zero-ℕ))
-    ( is-contr-equiv
-      ( empty ↪d X)
-      ( equiv-precomp-decidable-emb-equiv (equiv-raise-empty l) X)
+abstract
+  binomial-type-over-empty :
+    {l : Level} {X : UU l} → is-contr (binomial-type X empty)
+  binomial-type-over-empty {l} {X} =
+    is-contr-equiv
+      ( raise-empty l ↪d X)
+      ( left-unit-law-Σ-is-contr
+        ( is-contr-component-UU-Level-empty l)
+        ( Fin-UU-Fin-Level l zero-ℕ))
       ( is-contr-equiv
-        ( is-decidable-emb ex-falso)
-        ( left-unit-law-Σ-is-contr (universal-property-empty' X) ex-falso)
-        ( is-proof-irrelevant-is-prop
-          ( is-prop-is-decidable-emb ex-falso)
-          ( is-decidable-emb-ex-falso))))
+        ( empty ↪d X)
+        ( equiv-precomp-decidable-emb-equiv (equiv-raise-empty l) X)
+        ( is-contr-equiv
+          ( is-decidable-emb ex-falso)
+          ( left-unit-law-Σ-is-contr (universal-property-empty' X) ex-falso)
+          ( is-proof-irrelevant-is-prop
+            ( is-prop-is-decidable-emb ex-falso)
+            ( is-decidable-emb-ex-falso))))
 
-binomial-type-empty-under :
-  {l : Level} {X : UU l} → type-trunc-Prop X → is-empty (binomial-type empty X)
-binomial-type-empty-under H Y =
-  apply-universal-property-trunc-Prop H empty-Prop
-    ( λ x →
-      apply-universal-property-trunc-Prop (pr2 (pr1 Y)) empty-Prop
-        ( λ e → map-decidable-emb (pr2 Y) (map-equiv e x)))
+abstract
+  binomial-type-empty-under :
+    {l : Level} {X : UU l} →
+    type-trunc-Prop X → is-empty (binomial-type empty X)
+  binomial-type-empty-under H Y =
+    apply-universal-property-trunc-Prop H empty-Prop
+      ( λ x →
+        apply-universal-property-trunc-Prop (pr2 (pr1 Y)) empty-Prop
+          ( λ e → map-decidable-emb (pr2 Y) (map-equiv e x)))
 
-recursion-binomial-type' :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  binomial-type' (Maybe A) (Maybe B) ≃
-  coprod (binomial-type' A B) (binomial-type' A (Maybe B))
-recursion-binomial-type' A B =
-  ( ( ( left-distributive-Σ-coprod
-        ( A → decidable-Prop _)
-        ( λ P → mere-equiv B (Σ A _))
-        ( λ P → mere-equiv (Maybe B) (Σ A _))) ∘e
-      ( equiv-tot
-        ( λ P →
-          ( ( equiv-coprod
-              ( ( ( equiv-iff
-                    ( mere-equiv-Prop (Maybe B) (Maybe (Σ A _)))
-                    ( mere-equiv-Prop B (Σ A _))
-                    ( functor-trunc-Prop (equiv-equiv-Maybe))
-                    ( functor-trunc-Prop
-                      ( λ e → equiv-coprod e equiv-id))) ∘e
-                  ( equiv-trunc-Prop
+abstract
+  recursion-binomial-type' :
+    {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+    binomial-type' (Maybe A) (Maybe B) ≃
+    coprod (binomial-type' A B) (binomial-type' A (Maybe B))
+  recursion-binomial-type' A B =
+    ( ( ( left-distributive-Σ-coprod
+          ( A → decidable-Prop _)
+          ( λ P → mere-equiv B (Σ A _))
+          ( λ P → mere-equiv (Maybe B) (Σ A _))) ∘e
+        ( equiv-tot
+          ( λ P →
+            ( ( equiv-coprod
+                ( ( ( equiv-iff
+                      ( mere-equiv-Prop (Maybe B) (Maybe (Σ A _)))
+                      ( mere-equiv-Prop B (Σ A _))
+                      ( functor-trunc-Prop (equiv-equiv-Maybe))
+                      ( functor-trunc-Prop
+                        ( λ e → equiv-coprod e equiv-id))) ∘e
+                    ( equiv-trunc-Prop
+                      ( equiv-postcomp-equiv
+                        ( equiv-coprod
+                          ( equiv-id)
+                          ( equiv-is-contr is-contr-raise-unit is-contr-unit))
+                        ( Maybe B)))) ∘e
+                  ( left-unit-law-Σ-is-contr
+                    ( is-contr-total-true-Prop)
+                    ( pair (raise-unit-Prop _) raise-star)))
+                ( ( equiv-trunc-Prop
                     ( equiv-postcomp-equiv
-                      ( equiv-coprod
-                        ( equiv-id)
-                        ( equiv-is-contr is-contr-raise-unit is-contr-unit))
-                      ( Maybe B)))) ∘e
-                ( left-unit-law-Σ-is-contr
-                  ( is-contr-total-true-Prop)
-                  ( pair (raise-unit-Prop _) raise-star)))
-              ( ( equiv-trunc-Prop
-                  ( equiv-postcomp-equiv
-                    ( right-unit-law-coprod-is-empty
-                      ( Σ A _)
-                      ( raise-empty _)
-                      ( is-empty-raise-empty))
-                    ( Maybe B))) ∘e
-                ( left-unit-law-Σ-is-contr
-                  ( is-contr-total-false-Prop)
-                  ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
-            ( right-distributive-Σ-coprod
-              ( Σ (UU-Prop _) type-Prop)
-              ( Σ (UU-Prop _) (¬ ∘ type-Prop))
+                      ( right-unit-law-coprod-is-empty
+                        ( Σ A _)
+                        ( raise-empty _)
+                        ( is-empty-raise-empty))
+                      ( Maybe B))) ∘e
+                  ( left-unit-law-Σ-is-contr
+                    ( is-contr-total-false-Prop)
+                    ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
+              ( right-distributive-Σ-coprod
+                ( Σ (UU-Prop _) type-Prop)
+                ( Σ (UU-Prop _) (¬ ∘ type-Prop))
+                ( ind-coprod _
+                  ( λ Q →
+                    mere-equiv (Maybe B) (coprod (Σ A _) (type-Prop (pr1 Q))))
+                  ( λ Q →
+                    mere-equiv
+                      ( Maybe B)
+                      ( coprod (Σ A _) (type-Prop (pr1 Q))))))) ∘e
+            ( equiv-Σ
               ( ind-coprod _
-                ( λ Q →
-                  mere-equiv (Maybe B) (coprod (Σ A _) (type-Prop (pr1 Q))))
                 ( λ Q →
                   mere-equiv
                     ( Maybe B)
-                    ( coprod (Σ A _) (type-Prop (pr1 Q))))))) ∘e
-          ( equiv-Σ
-            ( ind-coprod _
-              ( λ Q →
-                mere-equiv
-                  ( Maybe B)
-                  ( coprod
-                    ( Σ A (λ a → type-decidable-Prop (P a)))
-                    ( type-Prop (pr1 Q))))
-              ( λ Q →
-                mere-equiv
-                  ( Maybe B)
-                  ( coprod
-                    ( Σ A (λ a → type-decidable-Prop (P a)))
-                    ( type-Prop (pr1 Q)))))
-            ( split-decidable-Prop)
-            ( ind-Σ
-              ( λ Q →
-                ind-Σ
-                  ( λ H →
-                    ind-coprod _ ( λ q → equiv-id) (λ q → equiv-id)))))))) ∘e
-    ( assoc-Σ
-      ( A → decidable-Prop _)
-      ( λ a → decidable-Prop _)
-      ( λ t →
+                    ( coprod
+                      ( Σ A (λ a → type-decidable-Prop (P a)))
+                      ( type-Prop (pr1 Q))))
+                ( λ Q →
+                  mere-equiv
+                    ( Maybe B)
+                    ( coprod
+                      ( Σ A (λ a → type-decidable-Prop (P a)))
+                      ( type-Prop (pr1 Q)))))
+              ( split-decidable-Prop)
+              ( ind-Σ
+                ( λ Q →
+                  ind-Σ
+                    ( λ H →
+                      ind-coprod _ ( λ q → equiv-id) (λ q → equiv-id)))))))) ∘e
+      ( assoc-Σ
+        ( A → decidable-Prop _)
+        ( λ a → decidable-Prop _)
+        ( λ t →
+          mere-equiv
+            ( Maybe B)
+            ( coprod
+              ( Σ A (λ a → type-decidable-Prop (pr1 t a)))
+              ( type-decidable-Prop (pr2 t)))))) ∘e
+    ( equiv-Σ
+      ( λ p →
         mere-equiv
           ( Maybe B)
           ( coprod
-            ( Σ A (λ a → type-decidable-Prop (pr1 t a)))
-            ( type-decidable-Prop (pr2 t)))))) ∘e
-  ( equiv-Σ
-    ( λ p →
-      mere-equiv
-        ( Maybe B)
-        ( coprod
-          ( Σ A (λ a → type-decidable-Prop (pr1 p a)))
-          ( type-decidable-Prop (pr2 p))))
-    ( equiv-universal-property-Maybe)
-    ( λ u →
-      equiv-trunc-Prop
-        ( equiv-postcomp-equiv
-          ( ( equiv-coprod
-              ( equiv-id)
-              ( left-unit-law-Σ (λ y → type-decidable-Prop (u (inr y))))) ∘e
-            ( right-distributive-Σ-coprod A unit
-              ( λ x → type-decidable-Prop (u x))))
-          ( Maybe B))))
+            ( Σ A (λ a → type-decidable-Prop (pr1 p a)))
+            ( type-decidable-Prop (pr2 p))))
+      ( equiv-universal-property-Maybe)
+      ( λ u →
+        equiv-trunc-Prop
+          ( equiv-postcomp-equiv
+            ( ( equiv-coprod
+                ( equiv-id)
+                ( left-unit-law-Σ (λ y → type-decidable-Prop (u (inr y))))) ∘e
+              ( right-distributive-Σ-coprod A unit
+                ( λ x → type-decidable-Prop (u x))))
+            ( Maybe B))))
 
-binomial-type-Maybe :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  binomial-type (Maybe A) (Maybe B) ≃
-  coprod (binomial-type A B) (binomial-type A (Maybe B))
-binomial-type-Maybe A B =
-  ( inv-equiv
-    ( equiv-coprod
-      ( compute-binomial-type A B)
-      ( compute-binomial-type A (Maybe B))) ∘e
-    ( recursion-binomial-type' A B)) ∘e
-  ( compute-binomial-type (Maybe A) (Maybe B))
+abstract
+  binomial-type-Maybe :
+    {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+    binomial-type (Maybe A) (Maybe B) ≃
+    coprod (binomial-type A B) (binomial-type A (Maybe B))
+  binomial-type-Maybe A B =
+    ( inv-equiv
+      ( equiv-coprod
+        ( compute-binomial-type A B)
+        ( compute-binomial-type A (Maybe B))) ∘e
+      ( recursion-binomial-type' A B)) ∘e
+    ( compute-binomial-type (Maybe A) (Maybe B))
 
 -- Theorem 17.5.9
 
@@ -1609,51 +1700,54 @@ has-cardinality-binomial-type {A = A} {B} {n} {m} H K =
 binomial-type-UU-Fin-Level :
   {l1 l2 : Level} {n m : ℕ} → UU-Fin-Level l1 n → UU-Fin-Level l2 m →
   UU-Fin-Level (lsuc l1 ⊔ lsuc l2) (n choose-ℕ m)
-binomial-type-UU-Fin-Level A B =
-  pair ( binomial-type (type-UU-Fin-Level A) (type-UU-Fin-Level B))
-       ( has-cardinality-binomial-type
-         ( mere-equiv-UU-Fin-Level A)
-         ( mere-equiv-UU-Fin-Level B))
+pr1 (binomial-type-UU-Fin-Level A B) =
+  binomial-type (type-UU-Fin-Level A) (type-UU-Fin-Level B)
+pr2 (binomial-type-UU-Fin-Level A B) =
+  has-cardinality-binomial-type
+    ( mere-equiv-UU-Fin-Level A)
+    ( mere-equiv-UU-Fin-Level B)
 
 binomial-type-UU-Fin :
   {n m : ℕ} → UU-Fin n → UU-Fin m → UU-Fin (n choose-ℕ m)
-binomial-type-UU-Fin {n} {m} A B =
-  pair ( small-binomial-type (type-UU-Fin A) (type-UU-Fin B))
-       ( apply-universal-property-trunc-Prop
-         ( has-cardinality-binomial-type
-           ( mere-equiv-UU-Fin A)
-           ( mere-equiv-UU-Fin B))
-         ( mere-equiv-Prop
-           ( Fin (n choose-ℕ m))
-           ( small-binomial-type (pr1 A) (pr1 B)))
-         ( λ e →
-           unit-trunc-Prop
-             ( ( compute-small-binomial-type (type-UU-Fin A) (type-UU-Fin B)) ∘e
-               ( e))))
+pr1 (binomial-type-UU-Fin {n} {m} A B) =
+  small-binomial-type (type-UU-Fin A) (type-UU-Fin B)
+pr2 (binomial-type-UU-Fin {n} {m} A B) =
+  apply-universal-property-trunc-Prop
+    ( has-cardinality-binomial-type
+      ( mere-equiv-UU-Fin A)
+      ( mere-equiv-UU-Fin B))
+    ( mere-equiv-Prop
+      ( Fin (n choose-ℕ m))
+      ( small-binomial-type (pr1 A) (pr1 B)))
+    ( λ e →
+      unit-trunc-Prop
+        ( ( compute-small-binomial-type (type-UU-Fin A) (type-UU-Fin B)) ∘e
+          ( e)))
 
 has-finite-cardinality-binomial-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-finite-cardinality A → has-finite-cardinality B →
   has-finite-cardinality (binomial-type A B)
-has-finite-cardinality-binomial-type (pair n H) (pair m K) =
-  pair (n choose-ℕ m) (has-cardinality-binomial-type H K)
+pr1 (has-finite-cardinality-binomial-type (pair n H) (pair m K)) = n choose-ℕ m
+pr2 (has-finite-cardinality-binomial-type (pair n H) (pair m K)) =
+  has-cardinality-binomial-type H K
 
-is-finite-binomial-type :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-finite A → is-finite B → is-finite (binomial-type A B)
-is-finite-binomial-type H K =
-  is-finite-has-finite-cardinality
-    ( has-finite-cardinality-binomial-type
-      ( has-finite-cardinality-is-finite H)
-      ( has-finite-cardinality-is-finite K))
+abstract
+  is-finite-binomial-type :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-finite A → is-finite B → is-finite (binomial-type A B)
+  is-finite-binomial-type H K =
+    is-finite-has-finite-cardinality
+      ( has-finite-cardinality-binomial-type
+        ( has-finite-cardinality-is-finite H)
+        ( has-finite-cardinality-is-finite K))
 
 binomial-type-𝔽 : 𝔽 → 𝔽 → 𝔽
-binomial-type-𝔽 A B =
-  pair
-    ( small-binomial-type (type-𝔽 A) (type-𝔽 B))
-    ( is-finite-equiv
-      ( compute-small-binomial-type (type-𝔽 A) (type-𝔽 B))
-      ( is-finite-binomial-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)))
+pr1 (binomial-type-𝔽 A B) = small-binomial-type (type-𝔽 A) (type-𝔽 B)
+pr2 (binomial-type-𝔽 A B) =
+  is-finite-equiv
+    ( compute-small-binomial-type (type-𝔽 A) (type-𝔽 B))
+    ( is-finite-binomial-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B))
 
 --------------------------------------------------------------------------------
 
@@ -1669,9 +1763,10 @@ UU-Contr l = total-subuniverse is-contr-Prop
 type-UU-Contr : {l : Level} → UU-Contr l → UU l
 type-UU-Contr A = pr1 A
 
-is-contr-type-UU-Contr :
-  {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
-is-contr-type-UU-Contr A = pr2 A
+abstract
+  is-contr-type-UU-Contr :
+    {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
+  is-contr-type-UU-Contr A = pr2 A
 
 equiv-UU-Contr :
   {l1 l2 : Level} (X : UU-Contr l1) (Y : UU-Contr l2) → UU (l1 ⊔ l2)
@@ -1681,10 +1776,11 @@ equiv-eq-UU-Contr :
   {l1 : Level} (X Y : UU-Contr l1) → Id X Y → equiv-UU-Contr X Y
 equiv-eq-UU-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
 
-is-equiv-equiv-eq-UU-Contr :
-  {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
-is-equiv-equiv-eq-UU-Contr X Y =
-  is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
+abstract
+  is-equiv-equiv-eq-UU-Contr :
+    {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
+  is-equiv-equiv-eq-UU-Contr X Y =
+    is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
 
 eq-equiv-UU-Contr :
   {l1 : Level} {X Y : UU-Contr l1} → equiv-UU-Contr X Y → Id X Y
@@ -1712,31 +1808,33 @@ UU-Trunc k l = Σ (UU l) (is-trunc k)
 type-UU-Trunc : {k : 𝕋} {l : Level} → UU-Trunc k l → UU l
 type-UU-Trunc A = pr1 A
 
-is-trunc-type-UU-Trunc :
-  {k : 𝕋} {l : Level} (A : UU-Trunc k l) → is-trunc k (type-UU-Trunc A)
-is-trunc-type-UU-Trunc A = pr2 A
+abstract
+  is-trunc-type-UU-Trunc :
+    {k : 𝕋} {l : Level} (A : UU-Trunc k l) → is-trunc k (type-UU-Trunc A)
+  is-trunc-type-UU-Trunc A = pr2 A
 
-is-trunc-UU-Trunc :
-  (k : 𝕋) (l : Level) → is-trunc (succ-𝕋 k) (UU-Trunc k l)
-is-trunc-UU-Trunc k l X Y =
-  is-trunc-is-equiv k
-    ( Id (pr1 X) (pr1 Y))
-    ( ap pr1)
-    ( is-emb-pr1
-      ( is-prop-is-trunc k) X Y)
-    ( is-trunc-is-equiv k
-      ( (pr1 X) ≃ (pr1 Y))
-      ( equiv-eq)
-      ( univalence (pr1 X) (pr1 Y))
-      ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
+abstract
+  is-trunc-UU-Trunc :
+    (k : 𝕋) (l : Level) → is-trunc (succ-𝕋 k) (UU-Trunc k l)
+  is-trunc-UU-Trunc k l X Y =
+    is-trunc-is-equiv k
+      ( Id (pr1 X) (pr1 Y))
+      ( ap pr1)
+      ( is-emb-pr1
+        ( is-prop-is-trunc k) X Y)
+      ( is-trunc-is-equiv k
+        ( (pr1 X) ≃ (pr1 Y))
+        ( equiv-eq)
+        ( univalence (pr1 X) (pr1 Y))
+        ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
 
-is-set-UU-Prop : (l : Level) → is-set (UU-Prop l)
-is-set-UU-Prop l = is-trunc-UU-Trunc (neg-one-𝕋) l
+abstract
+  is-set-UU-Prop : (l : Level) → is-set (UU-Prop l)
+  is-set-UU-Prop l = is-trunc-UU-Trunc (neg-one-𝕋) l
 
 UU-Prop-Set : (l : Level) → UU-Set (lsuc l)
 UU-Prop-Set l = pair (UU-Prop l) (is-set-UU-Prop l)
   
-
 ev-true-false :
   {l : Level} (A : UU l) → (f : bool → A) → A × A
 ev-true-false A f = pair (f true) (f false)
@@ -1747,32 +1845,36 @@ map-universal-property-bool :
 map-universal-property-bool (pair x y) true = x
 map-universal-property-bool (pair x y) false = y
 
-issec-map-universal-property-bool :
-  {l : Level} {A : UU l} →
-  ((ev-true-false A) ∘ map-universal-property-bool) ~ id
-issec-map-universal-property-bool (pair x y) =
-  eq-pair refl refl
+abstract
+  issec-map-universal-property-bool :
+    {l : Level} {A : UU l} →
+    ((ev-true-false A) ∘ map-universal-property-bool) ~ id
+  issec-map-universal-property-bool (pair x y) =
+    eq-pair refl refl
 
-isretr-map-universal-property-bool' :
-  {l : Level} {A : UU l} (f : bool → A) →
-  (map-universal-property-bool (ev-true-false A f)) ~ f
-isretr-map-universal-property-bool' f true = refl
-isretr-map-universal-property-bool' f false = refl
+abstract
+  isretr-map-universal-property-bool' :
+    {l : Level} {A : UU l} (f : bool → A) →
+    (map-universal-property-bool (ev-true-false A f)) ~ f
+  isretr-map-universal-property-bool' f true = refl
+  isretr-map-universal-property-bool' f false = refl
 
-isretr-map-universal-property-bool :
-  {l : Level} {A : UU l} →
-  (map-universal-property-bool ∘ (ev-true-false A)) ~ id
-isretr-map-universal-property-bool f =
-  eq-htpy (isretr-map-universal-property-bool' f)
+abstract
+  isretr-map-universal-property-bool :
+    {l : Level} {A : UU l} →
+    (map-universal-property-bool ∘ (ev-true-false A)) ~ id
+  isretr-map-universal-property-bool f =
+    eq-htpy (isretr-map-universal-property-bool' f)
 
-universal-property-bool :
-  {l : Level} (A : UU l) →
-  is-equiv (λ (f : bool → A) → pair (f true) (f false))
-universal-property-bool A =
-  is-equiv-has-inverse
-    map-universal-property-bool
-    issec-map-universal-property-bool
-    isretr-map-universal-property-bool
+abstract
+  universal-property-bool :
+    {l : Level} (A : UU l) →
+    is-equiv (λ (f : bool → A) → pair (f true) (f false))
+  universal-property-bool A =
+    is-equiv-has-inverse
+      map-universal-property-bool
+      issec-map-universal-property-bool
+      isretr-map-universal-property-bool
 
 ev-true :
   {l : Level} {A : UU l} → (bool → A) → A
@@ -1834,46 +1936,48 @@ precomp-Set :
   (B → type-Set C) → (A → type-Set C)
 precomp-Set f C = precomp f (type-Set C)
 
-is-emb-precomp-Set-is-surjective :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-surjective f → (C : UU-Set l3) → is-emb (precomp-Set f C)
-is-emb-precomp-Set-is-surjective H C =
-  is-emb-is-injective
-    ( is-set-function-type (is-set-type-Set C))
-    ( λ {g} {h} p →
-      eq-htpy (λ b →
-         apply-universal-property-trunc-Prop
-           ( H b)
-           ( Id-Prop C (g b) (h b))
-           ( λ u →
-             ( inv (ap g (pr2 u))) ∙
-             ( ( htpy-eq p (pr1 u))  ∙
-               ( ap h (pr2 u))))))
+abstract
+  is-emb-precomp-Set-is-surjective :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-surjective f → (C : UU-Set l3) → is-emb (precomp-Set f C)
+  is-emb-precomp-Set-is-surjective H C =
+    is-emb-is-injective
+      ( is-set-function-type (is-set-type-Set C))
+      ( λ {g} {h} p →
+        eq-htpy (λ b →
+          apply-universal-property-trunc-Prop
+            ( H b)
+            ( Id-Prop C (g b) (h b))
+            ( λ u →
+              ( inv (ap g (pr2 u))) ∙
+              ( ( htpy-eq p (pr1 u))  ∙
+                ( ap h (pr2 u))))))
 
-is-surjective-is-emb-precomp-Set :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  ({l3 : Level} (C : UU-Set l3) → is-emb (precomp-Set f C)) → is-surjective f
-is-surjective-is-emb-precomp-Set {l1} {l2} {A} {B} {f} H b =
-  map-equiv
-    ( equiv-eq
-      ( ap ( pr1)
-           ( htpy-eq
-             ( is-injective-is-emb
-               ( H (UU-Prop-Set (l1 ⊔ l2)))
-               { g}
-               { h}
-               ( eq-htpy
-                 ( λ a →
-                   eq-iff
-                     ( λ _ → unit-trunc-Prop (pair a refl))
-                     ( λ _ → raise-star))))
-             ( b))))
-    ( raise-star)
-  where
-  g : B → UU-Prop (l1 ⊔ l2)
-  g y = raise-unit-Prop (l1 ⊔ l2)
-  h : B → UU-Prop (l1 ⊔ l2)
-  h y = ∃-Prop (λ x → Id (f x) y)
+abstract
+  is-surjective-is-emb-precomp-Set :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    ({l3 : Level} (C : UU-Set l3) → is-emb (precomp-Set f C)) → is-surjective f
+  is-surjective-is-emb-precomp-Set {l1} {l2} {A} {B} {f} H b =
+    map-equiv
+      ( equiv-eq
+        ( ap ( pr1)
+             ( htpy-eq
+               ( is-injective-is-emb
+                 ( H (UU-Prop-Set (l1 ⊔ l2)))
+                 { g}
+                 { h}
+                 ( eq-htpy
+                   ( λ a →
+                     eq-iff
+                       ( λ _ → unit-trunc-Prop (pair a refl))
+                       ( λ _ → raise-star))))
+               ( b))))
+      ( raise-star)
+    where
+    g : B → UU-Prop (l1 ⊔ l2)
+    g y = raise-unit-Prop (l1 ⊔ l2)
+    h : B → UU-Prop (l1 ⊔ l2)
+    h y = ∃-Prop (λ x → Id (f x) y)
 
 -- Exercise 17.11
 
@@ -1884,20 +1988,21 @@ square-htpy-eq :
   ( htpy-eq ∘ (ap (precomp f C)))
 square-htpy-eq f g .g refl = refl
 
-is-emb-precomp-is-surjective :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-surjective f → (C : UU-Set l3) → is-emb (precomp f (type-Set C))
-is-emb-precomp-is-surjective {f = f} is-surj-f C g h =
-  is-equiv-top-is-equiv-bottom-square
-    ( htpy-eq)
-    ( htpy-eq)
-    ( ap (precomp f (type-Set C)))
-    ( λ p a → p (f a))
-    ( square-htpy-eq f g h)
-    ( funext g h)
-    ( funext (g ∘ f) (h ∘ f))
-    ( dependent-universal-property-surj-is-surjective f is-surj-f
-      ( λ a → Id-Prop C (g a) (h a)))
+abstract
+  is-emb-precomp-is-surjective :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-surjective f → (C : UU-Set l3) → is-emb (precomp f (type-Set C))
+  is-emb-precomp-is-surjective {f = f} is-surj-f C g h =
+    is-equiv-top-is-equiv-bottom-square
+      ( htpy-eq)
+      ( htpy-eq)
+      ( ap (precomp f (type-Set C)))
+      ( λ p a → p (f a))
+      ( square-htpy-eq f g h)
+      ( funext g h)
+      ( funext (g ∘ f) (h ∘ f))
+      ( dependent-universal-property-surj-is-surjective f is-surj-f
+        ( λ a → Id-Prop C (g a) (h a)))
 
 {-
 eq-false-equiv :
