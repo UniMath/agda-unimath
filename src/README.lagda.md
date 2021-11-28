@@ -35,6 +35,15 @@ open import foundations.15-image public
 open import foundations.16-finite-types public
 open import foundations.17-univalence public
 open import foundations.18-set-quotients public
+open import foundations.23-pullbacks
+open import foundations.24-pushouts
+open import foundations.25-cubical-diagrams
+open import foundations.26-descent
+open import foundations.26-id-pushout
+open import foundations.27-sequences
+open import foundations.W-types
+open import foundations.pointed-maps
+open import foundations.spaces
 ```
 
 ## Chapter 3 : The circle
