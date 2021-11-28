@@ -1883,13 +1883,11 @@ module _
   We assumed a commuting square
 
           h
-    A --------
-``` C
+    A --------> C
     |           |
    f|           |g
     V           V
-    B --------
-``` D
+    B --------> D
           i                                                                   -}
           
   abstract
