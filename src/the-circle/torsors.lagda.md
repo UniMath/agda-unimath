@@ -263,9 +263,9 @@ module _
     ( equiv-left-factor-compute-Ω-ℤ-Torsor) ∘e
     ( equiv-equiv-eq-ℤ-Torsor canonical-ℤ-Torsor)
 
-ℤ-Torsor-𝕊¹ : 𝕊¹ → ℤ-Torsor
-pr1 (pr1 (ℤ-Torsor-𝕊¹ x)) = Id x x
-pr2 (pr1 (ℤ-Torsor-𝕊¹ x)) = {!!}
-pr2 (ℤ-Torsor-𝕊¹ x) = {!!}
+-- ℤ-Torsor-𝕊¹ : 𝕊¹ → ℤ-Torsor
+-- pr1 (pr1 (ℤ-Torsor-𝕊¹ x)) = Id x x
+-- pr2 (pr1 (ℤ-Torsor-𝕊¹ x)) = {!!}
+-- pr2 (ℤ-Torsor-𝕊¹ x) = {!!}
 
 ```

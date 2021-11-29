@@ -61,7 +61,7 @@ eq-Eq-Fam-circle :
 eq-Eq-Fam-circle P Q = map-inv-is-equiv (is-equiv-Eq-Fam-circle-eq P Q)
 
 ev-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
   ( X → UU l2) → Fam-circle l2
 ev-fam-circle l P =
   pair
@@ -69,7 +69,7 @@ ev-fam-circle l P =
     ( equiv-tr P (loop-free-loop l))
 
 comparison-fam-circle :
-  ( l1 : Level) → free-loops (UU l1) → Fam-circle l1
+  ( l1 : Level) → free-loop (UU l1) → Fam-circle l1
 comparison-fam-circle l1 = tot (λ Y → equiv-eq)
 
 abstract
@@ -79,7 +79,7 @@ abstract
     is-equiv-tot-is-fiberwise-equiv (λ Y → univalence Y Y)
 
 triangle-comparison-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
   (ev-fam-circle l) ~ ((comparison-fam-circle l2) ∘ (ev-free-loop l (UU l2)))
 triangle-comparison-fam-circle l P =
   eq-Eq-Fam-circle
@@ -89,7 +89,7 @@ triangle-comparison-fam-circle l P =
 
 abstract
   is-equiv-ev-fam-circle-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X)
+    { l1 l2 : Level} {X : UU l1} (l : free-loop X)
     ( up-circle : universal-property-circle (lsuc l2) l) →
     is-equiv (ev-fam-circle {l2 = l2} l)
   is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
@@ -102,7 +102,7 @@ abstract
       ( is-equiv-comparison-fam-circle l2)
 
 unique-family-property-circle :
-  { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loops X) →
+  { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
   UU (l1 ⊔ (lsuc l2))
 unique-family-property-circle l2 {X} l =
   ( Q : Fam-circle l2) →
@@ -110,7 +110,7 @@ unique-family-property-circle l2 {X} l =
 
 abstract
   unique-family-property-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
+    { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
     universal-property-circle (lsuc l2) l → unique-family-property-circle l2 l
   unique-family-property-universal-property-circle l up-circle Q =
     is-contr-is-equiv'
@@ -126,13 +126,13 @@ abstract
         ( Q))
 
 Section-Fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : Fam-circle l2) → UU _
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X) (P : Fam-circle l2) → UU _
 Section-Fam-circle l P =
   Σ (pr1 P) (λ p → Id (map-equiv (pr2 P) p) p)
 
 fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-  ( dependent-universal-property-circle (lsuc l2) l) →
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
+  ( {k : Level} → dependent-universal-property-circle k l) →
   Fam-circle l2 → X → UU l2
 fam-circle {l1} {l2} l dup-circle =
   map-inv-is-equiv
@@ -140,7 +140,7 @@ fam-circle {l1} {l2} l dup-circle =
       ( universal-property-dependent-universal-property-circle l dup-circle))
 
 section-fam-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : dependent-universal-property-circle l2 l) →
   ( Q : X → UU l2) (P : Fam-circle l2) →
   ( e : Eq-Fam-circle P (ev-fam-circle l Q)) →
@@ -162,11 +162,11 @@ naturality-tr-fiberwise-transformation :
   Id (tr Q α (f x p)) (f y (tr P α p))
 naturality-tr-fiberwise-transformation f refl p = refl
 
-functor-dependent-free-loops :
-  { l1 l2 l3 : Level} {X : UU l1} (l : free-loops X)
+functor-dependent-free-loop :
+  { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   { P : X → UU l2} {Q : X → UU l3} (f : (x : X) → P x → Q x) →
-  dependent-free-loops l P → dependent-free-loops l Q
-functor-dependent-free-loops l {P} {Q} f =
+  dependent-free-loop l P → dependent-free-loop l Q
+functor-dependent-free-loop l {P} {Q} f =
   map-Σ
     ( λ q₀ → Id (tr Q (loop-free-loop l) q₀) q₀)
     ( f (base-free-loop l))
@@ -174,35 +174,35 @@ functor-dependent-free-loops l {P} {Q} f =
       ( naturality-tr-fiberwise-transformation f (loop-free-loop l) p₀) ∙
       ( ap (f (base-free-loop l)) α))
 
-coherence-square-functor-dependent-free-loops :
+coherence-square-functor-dependent-free-loop :
   { l1 l2 l3 : Level} {X : UU l1} {P : X → UU l2} {Q : X → UU l3}
   ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y)
   ( h : (x : X) → P x) →
   Id ( ( naturality-tr-fiberwise-transformation f α (h x)) ∙
        ( ap (f y) (apd h α)))
      ( apd (map-Π f h) α)
-coherence-square-functor-dependent-free-loops f refl h = refl
+coherence-square-functor-dependent-free-loop f refl h = refl
   
-square-functor-dependent-free-loops :
-  { l1 l2 l3 : Level} {X : UU l1} (l : free-loops X)
+square-functor-dependent-free-loop :
+  { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   { P : X → UU l2} {Q : X → UU l3} (f : (x : X) → P x → Q x) →
-  ( (functor-dependent-free-loops l f) ∘ (ev-free-loop' l P)) ~
+  ( (functor-dependent-free-loop l f) ∘ (ev-free-loop' l P)) ~
   ( (ev-free-loop' l Q) ∘ (map-Π f))
-square-functor-dependent-free-loops (pair x l) {P} {Q} f h =
-  eq-Eq-dependent-free-loops (pair x l) Q
-    ( functor-dependent-free-loops (pair x l) f
+square-functor-dependent-free-loop (pair x l) {P} {Q} f h =
+  eq-Eq-dependent-free-loop (pair x l) Q
+    ( functor-dependent-free-loop (pair x l) f
       ( ev-free-loop' (pair x l) P h))
     ( ev-free-loop' (pair x l) Q (map-Π f h))
     ( pair refl
-      ( right-unit ∙ (coherence-square-functor-dependent-free-loops f l h)))
+      ( right-unit ∙ (coherence-square-functor-dependent-free-loop f l h)))
 
 abstract
-  is-equiv-functor-dependent-free-loops-is-fiberwise-equiv :
-    { l1 l2 l3 : Level} {X : UU l1} (l : free-loops X)
+  is-equiv-functor-dependent-free-loop-is-fiberwise-equiv :
+    { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
     { P : X → UU l2} {Q : X → UU l3} {f : (x : X) → P x → Q x}
     ( is-equiv-f : (x : X) → is-equiv (f x)) →
-    is-equiv (functor-dependent-free-loops l f)
-  is-equiv-functor-dependent-free-loops-is-fiberwise-equiv
+    is-equiv (functor-dependent-free-loop l f)
+  is-equiv-functor-dependent-free-loop-is-fiberwise-equiv
     (pair x l) {P} {Q} {f} is-equiv-f =
     is-equiv-map-Σ
       ( λ q₀ → Id (tr Q l q₀) q₀)
@@ -222,7 +222,7 @@ abstract
 
 abstract
   lower-dependent-universal-property-circle :
-    { l1 l2 : Level} (l3 : Level) {X : UU l1} (l : free-loops X) →
+    { l1 l2 : Level} (l3 : Level) {X : UU l1} (l : free-loop X) →
     dependent-universal-property-circle (l2 ⊔ l3) l →
     dependent-universal-property-circle l3 l
   lower-dependent-universal-property-circle {l1} {l2} l3 l dup-circle P =
@@ -230,16 +230,16 @@ abstract
       ( ev-free-loop' l P)
       ( ev-free-loop' l (λ x → raise l2 (P x)))
       ( map-Π (λ x → map-raise))
-      ( functor-dependent-free-loops l (λ x → map-raise))
-      ( square-functor-dependent-free-loops l (λ x → map-raise))
+      ( functor-dependent-free-loop l (λ x → map-raise))
+      ( square-functor-dependent-free-loop l (λ x → map-raise))
       ( is-equiv-map-Π _ (λ x → is-equiv-map-raise))
-      ( is-equiv-functor-dependent-free-loops-is-fiberwise-equiv l
+      ( is-equiv-functor-dependent-free-loop-is-fiberwise-equiv l
         ( λ x → is-equiv-map-raise))
       ( dup-circle (λ x → raise l2 (P x)))
 
 abstract
   lower-lzero-dependent-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
+    { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
     dependent-universal-property-circle l2 l →
     dependent-universal-property-circle lzero l
   lower-lzero-dependent-universal-property-circle =
@@ -251,35 +251,34 @@ abstract
 
 abstract
   Fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ( {k : Level} → dependent-universal-property-circle k l) →
     Σ ( X → UU lzero)
       ( λ P → Eq-Fam-circle (pair ℤ equiv-succ-ℤ) (ev-fam-circle l P))
   Fundamental-cover-circle {l1} l dup-circle =
     center
       ( unique-family-property-universal-property-circle l
         ( universal-property-dependent-universal-property-circle l
-          ( lower-dependent-universal-property-circle
-            {l2 = l1} (lsuc lzero) l dup-circle))
+          ( dup-circle))
         ( pair ℤ equiv-succ-ℤ))
   
   fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ({k : Level} → dependent-universal-property-circle k l) →
     X → UU lzero
   fundamental-cover-circle l dup-circle =
     pr1 (Fundamental-cover-circle l dup-circle)
     
   comp-fiber-fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
     ℤ ≃ fundamental-cover-circle l dup-circle (base-free-loop l)
   comp-fiber-fundamental-cover-circle l dup-circle =
     pr1 ( pr2 ( Fundamental-cover-circle l dup-circle))
   
   comp-tr-fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
     ( ( map-equiv (comp-fiber-fundamental-cover-circle l dup-circle)) ∘
       ( succ-ℤ)) ~
     ( ( tr (fundamental-cover-circle l dup-circle) (loop-free-loop l)) ∘
@@ -291,12 +290,12 @@ abstract
 
 abstract
   is-set-fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
     ( x : X) → is-set (fundamental-cover-circle l dup-circle x)
   is-set-fundamental-cover-circle l dup-circle =
     is-connected-circle' l
-      ( lower-dependent-universal-property-circle lzero l dup-circle)
+      ( dup-circle)
       ( λ x → is-set (fundamental-cover-circle l dup-circle x))
       ( λ x → is-prop-is-set (fundamental-cover-circle l dup-circle x))
       ( is-trunc-is-equiv' zero-𝕋 ℤ
@@ -489,8 +488,8 @@ equiv-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' =
    space of the fundamental cover to be contractible. -}
 
 center-total-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   Σ X (fundamental-cover-circle l dup-circle)
 center-total-fundamental-cover-circle l dup-circle =
   pair
@@ -499,8 +498,8 @@ center-total-fundamental-cover-circle l dup-circle =
       ( comp-fiber-fundamental-cover-circle l dup-circle) zero-ℤ)
 
 path-over-loop-contraction-total-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   ( h : contraction-total-space'
         ( center-total-fundamental-cover-circle l dup-circle)
         ( base-free-loop l)
@@ -543,8 +542,8 @@ path-over-loop-contraction-total-fundamental-cover-circle l dup-circle h p =
     ( p)
 
 contraction-total-fundamental-cover-circle-data :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   ( h : contraction-total-space'
         ( center-total-fundamental-cover-circle l dup-circle)
         ( base-free-loop l)
@@ -579,8 +578,8 @@ contraction-total-fundamental-cover-circle-data
     x y
 
 is-contr-total-fundamental-cover-circle-data :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   ( h : contraction-total-space'
         ( center-total-fundamental-cover-circle l dup-circle)
         ( base-free-loop l)
@@ -805,8 +804,8 @@ abstract
 {- Section 12.5 The identity type of the circle -}
 
 path-total-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l)
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l)
   (k : ℤ) →
   Id {A = Σ X (fundamental-cover-circle l dup-circle)}
      ( pair
@@ -827,8 +826,8 @@ path-total-fundamental-cover-circle l dup-circle k =
     k
 
 CONTRACTION-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   UU l1
 CONTRACTION-fundamental-cover-circle l dup-circle =
   ELIM-ℤ
@@ -843,8 +842,8 @@ CONTRACTION-fundamental-cover-circle l dup-circle =
       ( path-total-fundamental-cover-circle l dup-circle k))
 
 Contraction-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   CONTRACTION-fundamental-cover-circle l dup-circle
 Contraction-fundamental-cover-circle l dup-circle =
   Elim-ℤ
@@ -860,8 +859,8 @@ Contraction-fundamental-cover-circle l dup-circle =
 
 abstract
   is-contr-total-fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
     is-contr (Σ X (fundamental-cover-circle l dup-circle))
   is-contr-total-fundamental-cover-circle l dup-circle =
     is-contr-total-fundamental-cover-circle-data l dup-circle
@@ -870,23 +869,23 @@ abstract
         ( pr2 (pr2 (Contraction-fundamental-cover-circle l dup-circle))))
 
 pt-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   fundamental-cover-circle l dup-circle (base-free-loop l)
 pt-fundamental-cover-circle l dup-circle =
   map-equiv (comp-fiber-fundamental-cover-circle l dup-circle) zero-ℤ
 
 fundamental-cover-circle-eq :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   ( x : X) → Id (base-free-loop l) x → fundamental-cover-circle l dup-circle x
 fundamental-cover-circle-eq l dup-circle .(base-free-loop l) refl =
   pt-fundamental-cover-circle l dup-circle
 
 abstract
   is-equiv-fundamental-cover-circle-eq :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+    { l1 : Level} {X : UU l1} (l : free-loop X) →
+    ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
     ( x : X) → is-equiv (fundamental-cover-circle-eq l dup-circle x)
   is-equiv-fundamental-cover-circle-eq l dup-circle =
     fundamental-theorem-id
@@ -896,8 +895,8 @@ abstract
       ( fundamental-cover-circle-eq l dup-circle)
 
 equiv-fundamental-cover-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   ( x : X) →
   ( Id (base-free-loop l) x) ≃ (fundamental-cover-circle l dup-circle x)
 equiv-fundamental-cover-circle l dup-circle x =
@@ -906,8 +905,8 @@ equiv-fundamental-cover-circle l dup-circle x =
     ( is-equiv-fundamental-cover-circle-eq l dup-circle x)
 
 comp-loop-space-circle :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  ( dup-circle : dependent-universal-property-circle (l1 ⊔ (lsuc lzero)) l) →
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : {k : Level} → dependent-universal-property-circle k l) →
   ( Id (base-free-loop l) (base-free-loop l)) ≃ ℤ
 comp-loop-space-circle l dup-circle =
   ( inv-equiv (comp-fiber-fundamental-cover-circle l dup-circle)) ∘e
