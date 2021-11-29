@@ -471,10 +471,10 @@ is-pullback-back-left-is-pullback-back-right-cube
     ( is-pb-front-left)
     ( is-pullback-htpy
       { f = h ∘ f}
-      ( k ∘ g)
+      -- ( k ∘ g)
       ( bottom)
       { g = hD}
-      ( hD)
+      -- ( hD)
       ( refl-htpy)
       { c = pair hA (pair (h' ∘ f')
         ( rectangle-back-left-front-left-cube
@@ -524,10 +524,10 @@ is-pullback-back-right-is-pullback-back-left-cube
     ( pair hA (pair g' back-right))
     ( is-pb-front-right)
     ( is-pullback-htpy'
-      ( h ∘ f)
+      -- ( h ∘ f)
       { f' = k ∘ g}
       ( bottom)
-      ( hD)
+      -- ( hD)
       { g' = hD}
       ( refl-htpy)
       ( pair hA (pair (h' ∘ f')
@@ -666,10 +666,10 @@ is-pullback-bottom-is-pullback-top-cube-is-equiv
     ( is-equiv-hA)
     ( is-pullback-htpy
       {f = h ∘ hB}
-      ( hD ∘ h')
+      -- ( hD ∘ h')
       ( front-left)
       {g = k}
-      ( k)
+      -- ( k)
       ( refl-htpy' k)
       { c = pair f'
         ( pair
@@ -731,7 +731,7 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
     ( is-pullback-is-equiv h hD
       ( pair hB (pair h' front-left))
       is-equiv-hD is-equiv-hB)
-    ( is-pullback-htpy' h refl-htpy (k ∘ hC) front-right
+    ( is-pullback-htpy' refl-htpy front-right
       ( cone-comp-vertical h k hC
         ( pair f (pair g bottom))
         ( pair hA (pair g' back-right)))
@@ -1104,9 +1104,9 @@ is-pullback-cone-ap :
     ( cone-ap f g c c1 c2)
 is-pullback-cone-ap f g (pair p (pair q H)) is-pb-c c1 c2 =
   is-pullback-htpy'
-    ( λ α → tr (λ x → Id (f (p c1)) x) (H c2) (ap f α))
+    -- ( λ α → tr (λ x → Id (f (p c1)) x) (H c2) (ap f α))
     ( λ α → tr-id-right (H c2) (ap f α))
-    ( λ β → (H c1) ∙ (ap g β))
+    -- ( λ β → (H c1) ∙ (ap g β))
     ( refl-htpy)
     ( cone-ap' f g (pair p (pair q H)) c1 c2)
     { c' = cone-ap f g (pair p (pair q H)) c1 c2}

@@ -435,9 +435,9 @@ pullback-property-dependent-pullback-property-pushout :
 pullback-property-dependent-pullback-property-pushout
   l f g (pair i (pair j H)) dpb Y =
   is-pullback-htpy
-    ( λ h s → tr (λ x → Y) (H s) (h (f s)))
+    -- ( λ h s → tr (λ x → Y) (H s) (h (f s)))
     ( λ h → eq-htpy (λ s → inv (tr-triv (H s) (h (f s)))))
-    ( λ h s → h (g s))
+    -- ( λ h s → h (g s))
     ( refl-htpy)
     { c = pair
       ( λ h a → h (i a))
@@ -808,9 +808,9 @@ dependent-pullback-property-pullback-property-pushout
   f g (pair i (pair j H)) pullback-c l P =
   let c = pair i (pair j H) in
   is-pullback-htpy'
-    ( (tr (fam-lifts S P) (eq-htpy (id ·l H))) ∘ (precompose-lifts P f i))
+    -- ( (tr (fam-lifts S P) (eq-htpy (id ·l H))) ∘ (precompose-lifts P f i))
     ( (tr-eq-htpy-fam-lifts P id H) ·r (precompose-lifts P f i))
-    ( precompose-lifts P g j)
+    -- ( precompose-lifts P g j)
     ( refl-htpy)
     ( cone-family-dependent-pullback-property f g c P id)
     { c' = cone-dependent-pullback-property-pushout f g c P}
