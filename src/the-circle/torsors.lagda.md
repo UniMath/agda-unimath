@@ -192,64 +192,65 @@ module _
     equiv-ℤ-Torsor canonical-ℤ-Torsor canonical-ℤ-Torsor → ℤ
   map-left-factor-compute-Ω-ℤ-Torsor e = map-equiv (pr1 e) zero-ℤ
 
-  is-equiv-map-left-factor-compute-Ω-ℤ-Torsor :
-    is-equiv map-left-factor-compute-Ω-ℤ-Torsor
-  is-equiv-map-left-factor-compute-Ω-ℤ-Torsor =
-    is-equiv-is-contr-map
-      ( λ x →
-        is-contr-equiv
-          ( hom-Pointed-Type-With-Aut
-              ℤ-Pointed-Type-With-Aut
-              ℤ-Pointed-Type-With-Aut)
-          ( ( right-unit-law-Σ-is-contr
-              { B = λ f → is-equiv (pr1 f)}
-              ( λ f →
-                is-proof-irrelevant-is-prop
-                  ( is-subtype-is-equiv (pr1 f))
-                  ( is-equiv-htpy id
-                    ( htpy-eq
-                      ( ap
-                        ( pr1)
-                        { x = f}
-                        { y = pair id (pair refl refl-htpy)}
-                        ( eq-is-contr
-                          ( is-initial-ℤ-Pointed-Type-With-Aut
-                            ℤ-Pointed-Type-With-Aut))))
-                    ( is-equiv-id)))) ∘e
-            ( ( equiv-right-swap-Σ) ∘e
-              ( ( assoc-Σ
-                  ( ℤ ≃ ℤ)
-                  ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
-                  ( λ e →
-                    ( map-equiv (pr1 e) ∘ succ-ℤ) ~
-                    ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e
-                ( ( equiv-right-swap-Σ) ∘e
-                  ( equiv-Σ
-                    ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
-                    ( equiv-Σ
-                      ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
-                      ( equiv-postcomp-equiv (equiv-add-ℤ (neg-ℤ x)) ℤ)
-                      ( λ e →
-                        equiv-map-Π
-                          ( λ k →
-                             ( equiv-concat'
-                               ( add-ℤ (neg-ℤ x) (map-equiv e (succ-ℤ k)))
-                               ( right-successor-law-add-ℤ
-                                 ( neg-ℤ x)
-                                 ( map-equiv e k))) ∘e
-                             ( equiv-ap
-                               ( equiv-add-ℤ (neg-ℤ x))
-                               ( map-equiv e (succ-ℤ k))
-                               ( succ-ℤ (map-equiv e k))))))
+  abstract
+    is-equiv-map-left-factor-compute-Ω-ℤ-Torsor :
+      is-equiv map-left-factor-compute-Ω-ℤ-Torsor
+    is-equiv-map-left-factor-compute-Ω-ℤ-Torsor =
+      is-equiv-is-contr-map
+        ( λ x →
+          is-contr-equiv
+            ( hom-Pointed-Type-With-Aut
+                ℤ-Pointed-Type-With-Aut
+                ℤ-Pointed-Type-With-Aut)
+            ( ( right-unit-law-Σ-is-contr
+                { B = λ f → is-equiv (pr1 f)}
+                ( λ f →
+                  is-proof-irrelevant-is-prop
+                    ( is-subtype-is-equiv (pr1 f))
+                    ( is-equiv-htpy id
+                      ( htpy-eq
+                        ( ap
+                          ( pr1)
+                          { x = f}
+                          { y = pair id (pair refl refl-htpy)}
+                          ( eq-is-contr
+                            ( is-initial-ℤ-Pointed-Type-With-Aut
+                              ℤ-Pointed-Type-With-Aut))))
+                      ( is-equiv-id)))) ∘e
+              ( ( equiv-right-swap-Σ) ∘e
+                ( ( assoc-Σ
+                    ( ℤ ≃ ℤ)
+                    ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
                     ( λ e →
-                      ( equiv-concat'
-                        ( add-ℤ (neg-ℤ x) (map-equiv (pr1 e) zero-ℤ))
-                        ( left-inverse-law-add-ℤ x)) ∘e
-                      ( equiv-ap
-                        ( equiv-add-ℤ (neg-ℤ x))
-                        ( map-equiv (pr1 e) zero-ℤ)
-                        ( x))))))))
-          ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))
+                      ( map-equiv (pr1 e) ∘ succ-ℤ) ~
+                      ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e
+                  ( ( equiv-right-swap-Σ) ∘e
+                    ( equiv-Σ
+                      ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
+                      ( equiv-Σ
+                        ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
+                        ( equiv-postcomp-equiv (equiv-add-ℤ (neg-ℤ x)) ℤ)
+                        ( λ e →
+                          equiv-map-Π
+                            ( λ k →
+                              ( equiv-concat'
+                                ( add-ℤ (neg-ℤ x) (map-equiv e (succ-ℤ k)))
+                                ( right-successor-law-add-ℤ
+                                  ( neg-ℤ x)
+                                  ( map-equiv e k))) ∘e
+                              ( equiv-ap
+                                ( equiv-add-ℤ (neg-ℤ x))
+                                ( map-equiv e (succ-ℤ k))
+                                ( succ-ℤ (map-equiv e k))))))
+                      ( λ e →
+                        ( equiv-concat'
+                          ( add-ℤ (neg-ℤ x) (map-equiv (pr1 e) zero-ℤ))
+                          ( left-inverse-law-add-ℤ x)) ∘e
+                        ( equiv-ap
+                          ( equiv-add-ℤ (neg-ℤ x))
+                          ( map-equiv (pr1 e) zero-ℤ)
+                          ( x))))))))
+            ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))
 
   equiv-left-factor-compute-Ω-ℤ-Torsor :
     equiv-ℤ-Torsor canonical-ℤ-Torsor canonical-ℤ-Torsor ≃ ℤ
@@ -261,5 +262,10 @@ module _
   compute-Ω-ℤ-Torsor =
     ( equiv-left-factor-compute-Ω-ℤ-Torsor) ∘e
     ( equiv-equiv-eq-ℤ-Torsor canonical-ℤ-Torsor)
+
+ℤ-Torsor-𝕊¹ : 𝕊¹ → ℤ-Torsor
+pr1 (pr1 (ℤ-Torsor-𝕊¹ x)) = Id x x
+pr2 (pr1 (ℤ-Torsor-𝕊¹ x)) = {!!}
+pr2 (ℤ-Torsor-𝕊¹ x) = {!!}
 
 ```

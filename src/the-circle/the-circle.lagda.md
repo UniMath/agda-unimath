@@ -11,160 +11,163 @@ open import foundations public
 
 {- Section 11.1 The induction principle of the circle -}
 
-free-loops :
-  { l1 : Level} (X : UU l1) → UU l1
-free-loops X = Σ X (λ x → Id x x)
+free-loop : {l1 : Level} (X : UU l1) → UU l1
+free-loop X = Σ X (λ x → Id x x)
 
-base-free-loop :
-  { l1 : Level} {X : UU l1} → free-loops X → X
-base-free-loop = pr1
-
-loop-free-loop :
-  { l1 : Level} {X : UU l1} (l : free-loops X) →
-  Id (base-free-loop l) (base-free-loop l)
-loop-free-loop = pr2
+module _
+  {l1 : Level} {X : UU l1}
+  where
+    
+  base-free-loop : free-loop X → X
+  base-free-loop = pr1
+  
+  loop-free-loop : (α : free-loop X) → Id (base-free-loop α) (base-free-loop α)
+  loop-free-loop = pr2
 
 -- Now we characterize the identity types of free loops
 
-Eq-free-loops :
-  { l1 : Level} {X : UU l1} (l l' : free-loops X) → UU l1
-Eq-free-loops (pair x l) l' =
-  Σ (Id x (pr1 l')) (λ p → Id (l ∙ p) (p ∙ (pr2 l')))
+module _
+  {l1 : Level} {X : UU l1}
+  where
 
-reflexive-Eq-free-loops :
-  { l1 : Level} {X : UU l1} (l : free-loops X) → Eq-free-loops l l
-reflexive-Eq-free-loops (pair x l) = pair refl right-unit
+  Eq-free-loop : (α α' : free-loop X) → UU l1
+  Eq-free-loop (pair x α) α' =
+    Σ (Id x (pr1 α')) (λ p → Id (α ∙ p) (p ∙ (pr2 α')))
 
-Eq-free-loops-eq :
-  { l1 : Level} {X : UU l1} (l l' : free-loops X) →
-  Id l l' → Eq-free-loops l l'
-Eq-free-loops-eq l .l refl = reflexive-Eq-free-loops l
+  refl-Eq-free-loop : (α : free-loop X) → Eq-free-loop α α
+  pr1 (refl-Eq-free-loop (pair x α)) = refl
+  pr2 (refl-Eq-free-loop (pair x α)) = right-unit
 
-abstract
-  is-contr-total-Eq-free-loops :
-    { l1 : Level} {X : UU l1} (l : free-loops X) →
-    is-contr (Σ (free-loops X) (Eq-free-loops l))
-  is-contr-total-Eq-free-loops (pair x l) =
-    is-contr-total-Eq-structure
-      ( λ x l' p → Id (l ∙ p) (p ∙ l'))
-      ( is-contr-total-path x)
-      ( pair x refl)
-      ( is-contr-is-equiv'
-        ( Σ (Id x x) (λ l' → Id l l'))
-        ( tot (λ l' α → right-unit ∙ α))
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ l' → is-equiv-concat right-unit l'))
-        ( is-contr-total-path l))
+  Eq-eq-free-loop : (α α' : free-loop X) → Id α α' → Eq-free-loop α α'
+  Eq-eq-free-loop α .α refl = refl-Eq-free-loop α
 
-abstract
-  is-equiv-Eq-free-loops-eq :
-    { l1 : Level} {X : UU l1} (l l' : free-loops X) →
-    is-equiv (Eq-free-loops-eq l l')
-  is-equiv-Eq-free-loops-eq l =
-    fundamental-theorem-id l
-      ( reflexive-Eq-free-loops l)
-      ( is-contr-total-Eq-free-loops l)
-      ( Eq-free-loops-eq l) 
+  abstract
+    is-contr-total-Eq-free-loop :
+      (α : free-loop X) → is-contr (Σ (free-loop X) (Eq-free-loop α))
+    is-contr-total-Eq-free-loop (pair x α) =
+      is-contr-total-Eq-structure
+        ( λ x α' p → Id (α ∙ p) (p ∙ α'))
+        ( is-contr-total-path x)
+        ( pair x refl)
+        ( is-contr-is-equiv'
+          ( Σ (Id x x) (λ α' → Id α α'))
+          ( tot (λ α' α → right-unit ∙ α))
+          ( is-equiv-tot-is-fiberwise-equiv
+            ( λ α' → is-equiv-concat right-unit α'))
+          ( is-contr-total-path α))
+
+  abstract
+    is-equiv-Eq-eq-free-loop :
+      (α α' : free-loop X) → is-equiv (Eq-eq-free-loop α α')
+    is-equiv-Eq-eq-free-loop α =
+      fundamental-theorem-id α
+        ( refl-Eq-free-loop α)
+        ( is-contr-total-Eq-free-loop α)
+        ( Eq-eq-free-loop α) 
 
 {- We introduce dependent free loops, which are used in the induction principle
    of the circle. -}
-   
-dependent-free-loops :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2) → UU l2
-dependent-free-loops l P =
-  Σ ( P (base-free-loop l))
-    ( λ p₀ → Id (tr P (loop-free-loop l) p₀) p₀)
 
-Eq-dependent-free-loops :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2) →
-  ( p p' : dependent-free-loops l P) → UU l2
-Eq-dependent-free-loops (pair x l) P (pair y p) p' =
-  Σ ( Id y (pr1 p'))
-    ( λ q → Id (p ∙ q) ((ap (tr P l) q) ∙ (pr2 p')))
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
+  where
+    
+  dependent-free-loop : UU l2
+  dependent-free-loop =
+    Σ ( P (base-free-loop α))
+      ( λ p₀ → Id (tr P (loop-free-loop α) p₀) p₀)
 
-reflexive-Eq-dependent-free-loops :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2) →
-  ( p : dependent-free-loops l P) → Eq-dependent-free-loops l P p p
-reflexive-Eq-dependent-free-loops (pair x l) P (pair y p) =
-  pair refl right-unit
+  Eq-dependent-free-loop : (p p' : dependent-free-loop) → UU l2
+  Eq-dependent-free-loop (pair y p) p' =
+    Σ ( Id y (pr1 p'))
+      ( λ q → Id (p ∙ q) ((ap (tr P (loop-free-loop α)) q) ∙ (pr2 p')))
 
-Eq-dependent-free-loops-eq :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2) →
-  ( p p' : dependent-free-loops l P) →
-  Id p p' → Eq-dependent-free-loops l P p p'
-Eq-dependent-free-loops-eq l P p .p refl =
-  reflexive-Eq-dependent-free-loops l P p
+  refl-Eq-dependent-free-loop :
+    (p : dependent-free-loop) → Eq-dependent-free-loop p p
+  pr1 (refl-Eq-dependent-free-loop (pair y p)) = refl
+  pr2 (refl-Eq-dependent-free-loop (pair y p)) = right-unit
 
-abstract
-  is-contr-total-Eq-dependent-free-loops :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2) →
-    ( p : dependent-free-loops l P) →
-    is-contr (Σ (dependent-free-loops l P) (Eq-dependent-free-loops l P p))
-  is-contr-total-Eq-dependent-free-loops (pair x l) P (pair y p) =
-    is-contr-total-Eq-structure
-      ( λ y' p' q → Id (p ∙ q) ((ap (tr P l) q) ∙ p'))
-      ( is-contr-total-path y)
-      ( pair y refl)
-      ( is-contr-is-equiv'
-        ( Σ (Id (tr P l y) y) (λ p' → Id p p'))
-        ( tot (λ p' α → right-unit ∙ α))
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ p' → is-equiv-concat right-unit p'))
-        ( is-contr-total-path p))
+  Eq-dependent-free-loop-eq :
+    ( p p' : dependent-free-loop) → Id p p' → Eq-dependent-free-loop p p'
+  Eq-dependent-free-loop-eq p .p refl = refl-Eq-dependent-free-loop p
 
-abstract
-  is-equiv-Eq-dependent-free-loops-eq :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2)
-    ( p p' : dependent-free-loops l P) →
-    is-equiv (Eq-dependent-free-loops-eq l P p p')
-  is-equiv-Eq-dependent-free-loops-eq l P p =
-    fundamental-theorem-id p
-      ( reflexive-Eq-dependent-free-loops l P p)
-      ( is-contr-total-Eq-dependent-free-loops l P p)
-      ( Eq-dependent-free-loops-eq l P p)
+  abstract
+    is-contr-total-Eq-dependent-free-loop :
+      ( p : dependent-free-loop) →
+      is-contr (Σ dependent-free-loop (Eq-dependent-free-loop p))
+    is-contr-total-Eq-dependent-free-loop (pair y p) =
+      is-contr-total-Eq-structure
+        ( λ y' p' q → Id (p ∙ q) ((ap (tr P (loop-free-loop α)) q) ∙ p'))
+        ( is-contr-total-path y)
+        ( pair y refl)
+        ( is-contr-is-equiv'
+          ( Σ (Id (tr P (loop-free-loop α) y) y) (λ p' → Id p p'))
+          ( tot (λ p' α → right-unit ∙ α))
+          ( is-equiv-tot-is-fiberwise-equiv
+            ( λ p' → is-equiv-concat right-unit p'))
+          ( is-contr-total-path p))
 
-eq-Eq-dependent-free-loops :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2)
-  ( p p' : dependent-free-loops l P) →
-  Eq-dependent-free-loops l P p p' → Id p p'
-eq-Eq-dependent-free-loops l P p p' =
-  map-inv-is-equiv (is-equiv-Eq-dependent-free-loops-eq l P p p')
+  abstract
+    is-equiv-Eq-dependent-free-loop-eq :
+      (p p' : dependent-free-loop) →
+      is-equiv (Eq-dependent-free-loop-eq p p')
+    is-equiv-Eq-dependent-free-loop-eq p =
+      fundamental-theorem-id p
+        ( refl-Eq-dependent-free-loop p)
+        ( is-contr-total-Eq-dependent-free-loop p)
+        ( Eq-dependent-free-loop-eq p)
+
+  eq-Eq-dependent-free-loop :
+    (p p' : dependent-free-loop) →
+    Eq-dependent-free-loop p p' → Id p p'
+  eq-Eq-dependent-free-loop p p' =
+    map-inv-is-equiv (is-equiv-Eq-dependent-free-loop-eq p p')
 
 {- We now define the induction principle of the circle. -}
 
-ev-free-loop' :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (P : X → UU l2) →
-  ( (x : X) → P x) → dependent-free-loops l P
-ev-free-loop' (pair x₀ p) P f = pair (f x₀) (apd f p)
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
+  where
 
-induction-principle-circle :
-  { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loops X) →
-  UU ((lsuc l2) ⊔ l1)
-induction-principle-circle l2 {X} l =
-  (P : X → UU l2) → sec (ev-free-loop' l P)
+  ev-free-loop' : ((x : X) → P x) → dependent-free-loop α P
+  pr1 (ev-free-loop' f) = f (base-free-loop α)
+  pr2 (ev-free-loop' f) = apd f (loop-free-loop α)
+
+module _
+  {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
+  where
+
+  induction-principle-circle : UU ((lsuc l2) ⊔ l1)
+  induction-principle-circle = (P : X → UU l2) → sec (ev-free-loop' α P)
 
 {- Section 11.2 The universal property of the circle -}
 
 {- We first state the universal property of the circle -}
 
-ev-free-loop :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (Y : UU l2) →
-  ( X → Y) → free-loops Y
-ev-free-loop l Y f = pair (f (pr1 l)) (ap f (pr2 l))
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
 
-universal-property-circle :
-  { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loops X) → UU _
-universal-property-circle l2 l =
-  ( Y : UU l2) → is-equiv (ev-free-loop l Y)
+  ev-free-loop : (X → Y) → free-loop Y
+  ev-free-loop f = pair (f (base-free-loop α)) (ap f (loop-free-loop α))
+
+module _
+  {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
+  where
+  
+  universal-property-circle : UU (l1 ⊔ lsuc l2)
+  universal-property-circle = (Y : UU l2) → is-equiv (ev-free-loop α Y)
 
 {- A fairly straightforward proof of the universal property of the circle
    factors through the dependent universal property of the circle. -}
 
-dependent-universal-property-circle :
-  { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loops X) →
-  UU ((lsuc l2) ⊔ l1)
-dependent-universal-property-circle l2 {X} l =
-  ( P : X → UU l2) → is-equiv (ev-free-loop' l P)
+module _
+  {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
+  where
+
+  dependent-universal-property-circle : UU ((lsuc l2) ⊔ l1)
+  dependent-universal-property-circle =
+    (P : X → UU l2) → is-equiv (ev-free-loop' α P)
 
 {- We first prove that the dependent universal property of the circle follows
    from the induction principle of the circle. To show this, we have to show
@@ -172,67 +175,69 @@ dependent-universal-property-circle l2 {X} l =
    is also by the induction principle of the circle, but it requires (a minimal
    amount of) preparations. -}
 
-Eq-subst :
-  { l1 l2 : Level} {X : UU l1} {P : X → UU l2} (f g : (x : X) → P x) →
-  X → UU _
-Eq-subst f g x = Id (f x) (g x)
+module _
+  {l1 l2 : Level} {X : UU l1} {P : X → UU l2} (f g : (x : X) → P x)
+  where
 
-tr-Eq-subst :
-  { l1 l2 : Level} {X : UU l1} {P : X → UU l2} (f g : (x : X) → P x)
-  { x y : X} (p : Id x y) (q : Id (f x) (g x)) (r : Id (f y) (g y))→
-  ( Id ((apd f p) ∙ r) ((ap (tr P p) q) ∙ (apd g p))) →
-  ( Id (tr (Eq-subst f g) p q) r)
-tr-Eq-subst f g refl q .((ap id q) ∙ refl) refl =
-  inv (right-unit ∙ (ap-id q))
+  Eq-subst : X → UU _
+  Eq-subst x = Id (f x) (g x)
 
-dependent-free-loops-htpy :
-  {l1 l2 : Level} {X : UU l1} {l : free-loops X} {P : X → UU l2}
-  {f g : (x : X) → P x} →
-  ( Eq-dependent-free-loops l P (ev-free-loop' l P f) (ev-free-loop' l P g)) →
-  ( dependent-free-loops l (λ x → Id (f x) (g x)))
-dependent-free-loops-htpy {l = (pair x l)} (pair p q) =
-  pair p (tr-Eq-subst _ _ l p p q)
+  tr-Eq-subst :
+    { x y : X} (p : Id x y) (q : Eq-subst x) (r : Eq-subst y)→
+    ( Id ((apd f p) ∙ r) ((ap (tr P p) q) ∙ (apd g p))) →
+    ( Id (tr Eq-subst p q) r)
+  tr-Eq-subst refl q .((ap id q) ∙ refl) refl = inv (right-unit ∙ (ap-id q))
 
-isretr-ind-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-  ( ind-circle : induction-principle-circle l2 l) (P : X → UU l2) →
-  ( (pr1 (ind-circle P)) ∘ (ev-free-loop' l P)) ~ id
-isretr-ind-circle l ind-circle P f =
-  eq-htpy
-    ( pr1
-      ( ind-circle
-        ( λ t → Id (pr1 (ind-circle P) (ev-free-loop' l P f) t) (f t)))
-      ( dependent-free-loops-htpy
-        ( Eq-dependent-free-loops-eq l P _ _
-          ( pr2 (ind-circle P) (ev-free-loop' l P f)))))
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
 
-abstract
-  dependent-universal-property-induction-principle-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-    induction-principle-circle l2 l → dependent-universal-property-circle l2 l
-  dependent-universal-property-induction-principle-circle l ind-circle P =
-    is-equiv-has-inverse
-      ( pr1 (ind-circle P))
-      ( pr2 (ind-circle P))
-      ( isretr-ind-circle l ind-circle P)
+  dependent-free-loop-htpy :
+    {l2 : Level} {P : X → UU l2} {f g : (x : X) → P x} →
+    ( Eq-dependent-free-loop α P (ev-free-loop' α P f) (ev-free-loop' α P g)) →
+    ( dependent-free-loop α (λ x → Id (f x) (g x)))
+  dependent-free-loop-htpy {l2} {P} {f} {g} (pair p q) =
+    pair p (tr-Eq-subst f g (loop-free-loop α) p p q)
 
-{- We use the dependent universal property to derive a uniqeness property of
-   dependent functions on the circle. -}
+  isretr-ind-circle :
+    ( ind-circle : {l : Level} → induction-principle-circle l α)
+    { l2 : Level} (P : X → UU l2) →
+    ( (pr1 (ind-circle P)) ∘ (ev-free-loop' α P)) ~ id
+  isretr-ind-circle ind-circle P f =
+    eq-htpy
+      ( pr1
+        ( ind-circle
+          ( λ t → Id (pr1 (ind-circle P) (ev-free-loop' α P f) t) (f t)))
+        ( dependent-free-loop-htpy
+          ( Eq-dependent-free-loop-eq α P _ _
+            ( pr2 (ind-circle P) (ev-free-loop' α P f)))))
 
-dependent-uniqueness-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-  dependent-universal-property-circle l2 l →
-  { P : X → UU l2} (k : dependent-free-loops l P) →
-  is-contr
-    ( Σ ( (x : X) → P x)
-        ( λ h → Eq-dependent-free-loops l P (ev-free-loop' l P h) k))
-dependent-uniqueness-circle l dup-circle {P} k =
-  is-contr-is-equiv'
-    ( fib (ev-free-loop' l P) k)
-    ( tot (λ h → Eq-dependent-free-loops-eq l P (ev-free-loop' l P h) k))
-    ( is-equiv-tot-is-fiberwise-equiv
-      (λ h → is-equiv-Eq-dependent-free-loops-eq l P (ev-free-loop' l P h) k))
-    ( is-contr-map-is-equiv (dup-circle P) k)
+  abstract
+    dependent-universal-property-induction-principle-circle :
+      ({l : Level} → induction-principle-circle l α) →
+      ({l : Level} → dependent-universal-property-circle l α)
+    dependent-universal-property-induction-principle-circle ind-circle P =
+      is-equiv-has-inverse
+        ( pr1 (ind-circle P))
+        ( pr2 (ind-circle P))
+        ( isretr-ind-circle ind-circle P)
+
+  {- We use the dependent universal property to derive a uniqeness property of
+     dependent functions on the circle. -}
+
+  uniqueness-dependent-universal-property-circle :
+    ({l : Level} → dependent-universal-property-circle l α) →
+    {l2 : Level} {P : X → UU l2} (k : dependent-free-loop α P) →
+    is-contr
+      ( Σ ( (x : X) → P x)
+          ( λ h → Eq-dependent-free-loop α P (ev-free-loop' α P h) k))
+  uniqueness-dependent-universal-property-circle dup-circle {l2} {P} k =
+    is-contr-is-equiv'
+      ( fib (ev-free-loop' α P) k)
+      ( tot (λ h → Eq-dependent-free-loop-eq α P (ev-free-loop' α P h) k))
+      ( is-equiv-tot-is-fiberwise-equiv
+        (λ h → is-equiv-Eq-dependent-free-loop-eq α P (ev-free-loop' α P h) k))
+      ( is-contr-map-is-equiv (dup-circle P) k)
 
 {- Now that we have established the dependent universal property, we can
    reduce the (non-dependent) universal property to the dependent case. We do
@@ -249,76 +254,71 @@ apd-const :
   (p : Id x y) → Id (apd f p) ((tr-const p (f x)) ∙ (ap f p))
 apd-const f refl = refl
 
-comparison-free-loops :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (Y : UU l2) →
-  free-loops Y → dependent-free-loops l (λ x → Y)
-comparison-free-loops l Y =
-  tot (λ y l' → (tr-const (pr2 l) y) ∙ l')
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
 
-abstract
-  is-equiv-comparison-free-loops :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) (Y : UU l2) →
-    is-equiv (comparison-free-loops l Y)
-  is-equiv-comparison-free-loops l Y =
-    is-equiv-tot-is-fiberwise-equiv
-      ( λ y → is-equiv-concat (tr-const (pr2 l) y) y)
+  compute-dependent-free-loop-const :
+    free-loop Y ≃ dependent-free-loop α (λ x → Y)
+  compute-dependent-free-loop-const =
+    equiv-tot (λ y → equiv-concat (tr-const (loop-free-loop α) y) y)
 
-triangle-comparison-free-loops :
-  { l1 l2 : Level} {X : UU l1} (l : free-loops X) (Y : UU l2) →
-  ( (comparison-free-loops l Y) ∘ (ev-free-loop l Y)) ~
-  ( ev-free-loop' l (λ x → Y))
-triangle-comparison-free-loops (pair x l) Y f =
-  eq-Eq-dependent-free-loops
-    ( pair x l)
-    ( λ x → Y)
-    ( comparison-free-loops (pair x l) Y (ev-free-loop (pair x l) Y f))
-    ( ev-free-loop' (pair x l) (λ x → Y) f)
-    ( pair refl (right-unit ∙ (inv (apd-const f l))))
+  map-compute-dependent-free-loop-const :
+    free-loop Y → dependent-free-loop α (λ x → Y)
+  map-compute-dependent-free-loop-const =
+    map-equiv compute-dependent-free-loop-const
 
-abstract
-  universal-property-dependent-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-    ( dependent-universal-property-circle l2 l) →
-    ( universal-property-circle l2 l)
-  universal-property-dependent-universal-property-circle l dup-circle Y =
-    is-equiv-right-factor
-      ( ev-free-loop' l (λ x → Y))
-      ( comparison-free-loops l Y)
-      ( ev-free-loop l Y)
-      ( inv-htpy (triangle-comparison-free-loops l Y))
-      ( is-equiv-comparison-free-loops l Y)
-      ( dup-circle (λ x → Y))
+  triangle-comparison-free-loop :
+    ( map-compute-dependent-free-loop-const ∘ (ev-free-loop α Y)) ~
+    ( ev-free-loop' α (λ x → Y))
+  triangle-comparison-free-loop f =
+    eq-Eq-dependent-free-loop α
+      ( λ x → Y)
+      ( map-compute-dependent-free-loop-const
+        ( ev-free-loop α Y f))
+      ( ev-free-loop' α (λ x → Y) f)
+      ( pair refl (right-unit ∙ (inv (apd-const f (loop-free-loop α)))))
 
-{- Now we get the universal property of the circle from the induction principle
-   of the circle by composing the earlier two proofs. -}
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
 
-abstract
-  universal-property-induction-principle-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-    induction-principle-circle l2 l → universal-property-circle l2 l
-  universal-property-induction-principle-circle l =
-    ( universal-property-dependent-universal-property-circle l) ∘
-    ( dependent-universal-property-induction-principle-circle l)
+  abstract
+    universal-property-dependent-universal-property-circle :
+      ({l : Level} → dependent-universal-property-circle l α) →
+      ({l : Level} → universal-property-circle l α)
+    universal-property-dependent-universal-property-circle dup-circle Y =
+      is-equiv-right-factor
+        ( ev-free-loop' α (λ x → Y))
+        ( map-compute-dependent-free-loop-const α Y)
+        ( ev-free-loop α Y)
+        ( inv-htpy (triangle-comparison-free-loop α Y))
+        ( is-equiv-map-equiv (compute-dependent-free-loop-const α Y))
+        ( dup-circle (λ x → Y))
 
-unique-mapping-property-circle :
-  { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loops X) →
-  UU (l1 ⊔ (lsuc l2))
-unique-mapping-property-circle l2 {X} l =
-  ( Y : UU l2) (l' : free-loops Y) →
-    is-contr (Σ (X → Y) (λ f → Eq-free-loops (ev-free-loop l Y f) l'))
+  {- Now we get the universal property of the circle from the induction
+     principle of the circle by composing the earlier two proofs. -}
 
-abstract
-  unique-mapping-property-universal-property-circle :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
-    universal-property-circle l2 l →
-    unique-mapping-property-circle l2 l
-  unique-mapping-property-universal-property-circle l up-circle Y l' =
-    is-contr-is-equiv'
-      ( fib (ev-free-loop l Y) l')
-      ( tot (λ f → Eq-free-loops-eq (ev-free-loop l Y f) l'))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ f → is-equiv-Eq-free-loops-eq (ev-free-loop l Y f) l'))
-      ( is-contr-map-is-equiv (up-circle Y) l')
+  abstract
+    universal-property-induction-principle-circle :
+      ({l : Level} → induction-principle-circle l α) →
+      ({l : Level} → universal-property-circle l α)
+    universal-property-induction-principle-circle X =
+      universal-property-dependent-universal-property-circle
+        ( dependent-universal-property-induction-principle-circle α X)
+
+  abstract
+    uniqueness-universal-property-circle :
+      ({l : Level} → universal-property-circle l α) →
+      {l2 : Level} (Y : UU l2) (α' : free-loop Y) →
+      is-contr (Σ (X → Y) (λ f → Eq-free-loop (ev-free-loop α Y f) α'))
+    uniqueness-universal-property-circle up-circle Y α' =
+      is-contr-is-equiv'
+        ( fib (ev-free-loop α Y) α')
+        ( tot (λ f → Eq-eq-free-loop (ev-free-loop α Y f) α'))
+        ( is-equiv-tot-is-fiberwise-equiv
+          ( λ f → is-equiv-Eq-eq-free-loop (ev-free-loop α Y f) α'))
+        ( is-contr-map-is-equiv (up-circle Y) α')
 
 {- We assume that we have a circle. -}
 
@@ -328,37 +328,90 @@ postulate base-𝕊¹ : 𝕊¹
 
 postulate loop-𝕊¹ : Id base-𝕊¹ base-𝕊¹
 
-free-loop-𝕊¹ : free-loops 𝕊¹
-free-loop-𝕊¹ = pair base-𝕊¹ loop-𝕊¹
+free-loop-𝕊¹ : free-loop 𝕊¹
+pr1 free-loop-𝕊¹ = base-𝕊¹
+pr2 free-loop-𝕊¹ = loop-𝕊¹
 
 postulate ind-𝕊¹ : {l : Level} → induction-principle-circle l free-loop-𝕊¹
 
-dependent-universal-property-𝕊¹ :
-  {l : Level} → dependent-universal-property-circle l free-loop-𝕊¹
-dependent-universal-property-𝕊¹ =
-  dependent-universal-property-induction-principle-circle free-loop-𝕊¹ ind-𝕊¹
+module _
+  where
+  
+  dependent-universal-property-𝕊¹ :
+    {l : Level} → dependent-universal-property-circle l free-loop-𝕊¹
+  dependent-universal-property-𝕊¹ =
+    dependent-universal-property-induction-principle-circle free-loop-𝕊¹ ind-𝕊¹
 
-apply-dependent-universal-property-𝕊¹ :
-  {l : Level} (P : 𝕊¹ → UU l) (p0 : P base-𝕊¹) (α : Id (tr P loop-𝕊¹ p0) p0) →
-  (x : 𝕊¹) → P x
-apply-dependent-universal-property-𝕊¹ P p0 α =
-  map-inv-is-equiv (dependent-universal-property-𝕊¹ P) (pair p0 α)
+  uniqueness-dependent-universal-property-𝕊¹ :
+    {l : Level} {P : 𝕊¹ → UU l} (k : dependent-free-loop free-loop-𝕊¹ P) →
+    is-contr
+      ( Σ ( (x : 𝕊¹) → P x)
+          ( λ h →
+            Eq-dependent-free-loop free-loop-𝕊¹ P
+              ( ev-free-loop' free-loop-𝕊¹ P h) k))
+  uniqueness-dependent-universal-property-𝕊¹ {l} {P} =
+    uniqueness-dependent-universal-property-circle
+      free-loop-𝕊¹
+      dependent-universal-property-𝕊¹
 
-dependent-uniqueness-𝕊¹ :
-  {l : Level} {P : 𝕊¹ → UU l} (k : dependent-free-loops free-loop-𝕊¹ P) →
-  is-contr
-    ( Σ ( (x : 𝕊¹) → P x)
-        ( λ h →
-          Eq-dependent-free-loops free-loop-𝕊¹ P (ev-free-loop' free-loop-𝕊¹ P h) k))
-dependent-uniqueness-𝕊¹ {l} {P} k =
-  dependent-uniqueness-circle free-loop-𝕊¹ dependent-universal-property-𝕊¹ k
+  module _
+    {l : Level} (P : 𝕊¹ → UU l) (p0 : P base-𝕊¹) (α : Id (tr P loop-𝕊¹ p0) p0)
+    where
+  
+    apply-dependent-universal-property-𝕊¹ : (x : 𝕊¹) → P x
+    apply-dependent-universal-property-𝕊¹ =
+      pr1 (center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α)))
 
-universal-property-𝕊¹ :
-  {l : Level} → universal-property-circle l free-loop-𝕊¹
-universal-property-𝕊¹ =
-  universal-property-dependent-universal-property-circle
-    free-loop-𝕊¹
-    dependent-universal-property-𝕊¹
+    base-dependent-universal-property-𝕊¹ :
+      Id (apply-dependent-universal-property-𝕊¹ base-𝕊¹) p0
+    base-dependent-universal-property-𝕊¹ =
+      pr1
+        ( pr2
+          ( center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))))
+
+    loop-dependent-universal-property-𝕊¹ :
+      Id ( apd apply-dependent-universal-property-𝕊¹ loop-𝕊¹ ∙
+           base-dependent-universal-property-𝕊¹)
+         ( ap (tr P loop-𝕊¹) base-dependent-universal-property-𝕊¹ ∙ α)
+    loop-dependent-universal-property-𝕊¹ =
+      pr2
+        ( pr2
+          ( center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))))
+
+  universal-property-𝕊¹ :
+    {l : Level} → universal-property-circle l free-loop-𝕊¹
+  universal-property-𝕊¹ =
+    universal-property-dependent-universal-property-circle
+      free-loop-𝕊¹
+      dependent-universal-property-𝕊¹
+
+  uniqueness-universal-property-𝕊¹ :
+    {l : Level} {X : UU l} (α : free-loop X) →
+    is-contr
+      ( Σ ( 𝕊¹ → X)
+          ( λ h → Eq-free-loop (ev-free-loop free-loop-𝕊¹ X h) α))
+  uniqueness-universal-property-𝕊¹ {l} {X} =
+    uniqueness-universal-property-circle free-loop-𝕊¹ universal-property-𝕊¹ X
+
+  module _
+    {l : Level} {X : UU l} (x : X) (α : Id x x)
+    where
+  
+    apply-universal-property-𝕊¹ : 𝕊¹ → X
+    apply-universal-property-𝕊¹ =
+      pr1 (center (uniqueness-universal-property-𝕊¹ (pair x α)))
+
+    base-universal-property-𝕊¹ :
+      Id (apply-universal-property-𝕊¹ base-𝕊¹) x
+    base-universal-property-𝕊¹ =
+      pr1 (pr2 (center (uniqueness-universal-property-𝕊¹ (pair x α))))
+
+    loop-universal-property-𝕊¹ :
+      Id ( ap apply-universal-property-𝕊¹ loop-𝕊¹ ∙
+           base-universal-property-𝕊¹)
+         ( base-universal-property-𝕊¹ ∙ α)
+    loop-universal-property-𝕊¹ =
+      pr2 (pr2 (center (uniqueness-universal-property-𝕊¹ (pair x α))))
 
 -- Section 14.3 Multiplication on the circle
 
@@ -373,7 +426,7 @@ universal-property-𝕊¹ =
 
 abstract
   is-connected-circle' :
-    { l1 l2 : Level} {X : UU l1} (l : free-loops X) →
+    { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
     ( dup-circle : dependent-universal-property-circle l2 l)
     ( P : X → UU l2) (is-prop-P : (x : X) → is-prop (P x)) →
     P (base-free-loop l) → (x : X) → P x
