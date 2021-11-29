@@ -39,4 +39,6 @@ open import foundations.26-id-pushout public
 open import foundations.27-sequences public
 
 open import foundations.W-types public
+open import foundations.pointed-maps public
+open import foundations.spaces public
 ```

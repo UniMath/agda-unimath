@@ -8,6 +8,7 @@ title: Formalisation of the Symmetry Book
 module the-circle.torsors where
 
 open import the-circle.universal-cover public
+open import the-circle.integers public
 
 Endo : (l : Level) → UU (lsuc l)
 Endo l = Σ (UU l) (λ X → X → X)
@@ -156,6 +157,10 @@ module _
   pr1 canonical-ℤ-Torsor = ℤ-Endo
   pr2 canonical-ℤ-Torsor = refl-mere-equiv-Endo ℤ-Endo
 
+  ℤ-Torsor-Pointed-Type : Pointed-Type (lsuc lzero)
+  pr1 ℤ-Torsor-Pointed-Type = ℤ-Torsor
+  pr2 ℤ-Torsor-Pointed-Type = canonical-ℤ-Torsor
+
   equiv-ℤ-Torsor : (T S : ℤ-Torsor) → UU lzero
   equiv-ℤ-Torsor = equiv-Endo-Torsor ℤ-Endo
 
@@ -176,5 +181,85 @@ module _
     (T : ℤ-Torsor) →
     is-equiv (equiv-eq-ℤ-Torsor (canonical-ℤ-Torsor) T)
   is-equiv-equiv-eq-ℤ-Torsor = is-equiv-equiv-eq-Endo-Torsor ℤ-Endo
+
+  equiv-equiv-eq-ℤ-Torsor :
+    (T : ℤ-Torsor) →
+    Id canonical-ℤ-Torsor T ≃ equiv-ℤ-Torsor canonical-ℤ-Torsor T
+  pr1 (equiv-equiv-eq-ℤ-Torsor T) = equiv-eq-ℤ-Torsor canonical-ℤ-Torsor T
+  pr2 (equiv-equiv-eq-ℤ-Torsor T) = is-equiv-equiv-eq-ℤ-Torsor T
+
+  map-left-factor-compute-Ω-ℤ-Torsor :
+    equiv-ℤ-Torsor canonical-ℤ-Torsor canonical-ℤ-Torsor → ℤ
+  map-left-factor-compute-Ω-ℤ-Torsor e = map-equiv (pr1 e) zero-ℤ
+
+  is-equiv-map-left-factor-compute-Ω-ℤ-Torsor :
+    is-equiv map-left-factor-compute-Ω-ℤ-Torsor
+  is-equiv-map-left-factor-compute-Ω-ℤ-Torsor =
+    is-equiv-is-contr-map
+      ( λ x →
+        is-contr-equiv
+          ( hom-Pointed-Type-With-Aut
+              ℤ-Pointed-Type-With-Aut
+              ℤ-Pointed-Type-With-Aut)
+          ( ( right-unit-law-Σ-is-contr
+              { B = λ f → is-equiv (pr1 f)}
+              ( λ f →
+                is-proof-irrelevant-is-prop
+                  ( is-subtype-is-equiv (pr1 f))
+                  ( is-equiv-htpy id
+                    ( htpy-eq
+                      ( ap
+                        ( pr1)
+                        { x = f}
+                        { y = pair id (pair refl refl-htpy)}
+                        ( eq-is-contr
+                          ( is-initial-ℤ-Pointed-Type-With-Aut
+                            ℤ-Pointed-Type-With-Aut))))
+                    ( is-equiv-id)))) ∘e
+            ( ( equiv-right-swap-Σ) ∘e
+              ( ( assoc-Σ
+                  ( ℤ ≃ ℤ)
+                  ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
+                  ( λ e →
+                    ( map-equiv (pr1 e) ∘ succ-ℤ) ~
+                    ( succ-ℤ ∘ map-equiv (pr1 e)))) ∘e
+                ( ( equiv-right-swap-Σ) ∘e
+                  ( equiv-Σ
+                    ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
+                    ( equiv-Σ
+                      ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
+                      ( equiv-postcomp-equiv (equiv-add-ℤ (neg-ℤ x)) ℤ)
+                      ( λ e →
+                        equiv-map-Π
+                          ( λ k →
+                             ( equiv-concat'
+                               ( add-ℤ (neg-ℤ x) (map-equiv e (succ-ℤ k)))
+                               ( right-successor-law-add-ℤ
+                                 ( neg-ℤ x)
+                                 ( map-equiv e k))) ∘e
+                             ( equiv-ap
+                               ( equiv-add-ℤ (neg-ℤ x))
+                               ( map-equiv e (succ-ℤ k))
+                               ( succ-ℤ (map-equiv e k))))))
+                    ( λ e →
+                      ( equiv-concat'
+                        ( add-ℤ (neg-ℤ x) (map-equiv (pr1 e) zero-ℤ))
+                        ( left-inverse-law-add-ℤ x)) ∘e
+                      ( equiv-ap
+                        ( equiv-add-ℤ (neg-ℤ x))
+                        ( map-equiv (pr1 e) zero-ℤ)
+                        ( x))))))))
+          ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))
+
+  equiv-left-factor-compute-Ω-ℤ-Torsor :
+    equiv-ℤ-Torsor canonical-ℤ-Torsor canonical-ℤ-Torsor ≃ ℤ
+  pr1 equiv-left-factor-compute-Ω-ℤ-Torsor = map-left-factor-compute-Ω-ℤ-Torsor
+  pr2 equiv-left-factor-compute-Ω-ℤ-Torsor =
+    is-equiv-map-left-factor-compute-Ω-ℤ-Torsor
+
+  compute-Ω-ℤ-Torsor : type-Ω ℤ-Torsor-Pointed-Type ≃ ℤ
+  compute-Ω-ℤ-Torsor =
+    ( equiv-left-factor-compute-Ω-ℤ-Torsor) ∘e
+    ( equiv-equiv-eq-ℤ-Torsor canonical-ℤ-Torsor)
 
 ```
