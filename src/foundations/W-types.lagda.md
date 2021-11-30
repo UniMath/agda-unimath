@@ -1366,16 +1366,17 @@ module _
 -- Exercise B.5 (b)
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (P : 𝕎 A B → UU l3)
   where
   
   -- We define an operation □-𝕎 that acts on families over 𝕎 A B.
 
-  □-𝕎 : (𝕎 A B → UU l3) → 𝕎 A B → UU (l1 ⊔ l2 ⊔ l3)
-  □-𝕎 P x = (y : 𝕎 A B) → (y le-𝕎 x) → P y
+  □-𝕎 : 𝕎 A B → UU (l1 ⊔ l2 ⊔ l3)
+  □-𝕎 x = (y : 𝕎 A B) → (y le-𝕎 x) → P y
 
-  variable
-    P : 𝕎 A B → UU l3
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {P : 𝕎 A B → UU l3}
+  where
 
   -- The unit of □-𝕎 takes sections of P to sections of □-𝕎 P
 

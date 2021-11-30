@@ -34,33 +34,29 @@ module _
 
   -- ref def:principaltorsor
   principal-torsor-group-actions : G -Set
-  principal-torsor-group-actions z =
-    pair ( Id shG z)
-         (
-           prop-on-classifying-type-Concrete-Group
-             G
-             ( λ x → is-set-Prop (Id shG x))
-             ( is-set-type-Concrete-Group G)
-             z
-         )
-
+  pr1 (principal-torsor-group-actions z) = Id shG z
+  pr2 (principal-torsor-group-actions z) =
+    prop-on-classifying-type-Concrete-Group
+      G
+      ( λ x → is-set-Prop (Id shG x))
+      ( is-set-type-Concrete-Group G)
+      z
+  
   Pr = principal-torsor-group-actions
 
   generalized-principal-torsor-group-actions : BG → G -Set
-  generalized-principal-torsor-group-actions y z =
-    pair ( Id y z)
-         (
-           prop-on-classifying-type-Concrete-Group
-             G
-             ( λ x → is-set-Prop (Id y x))
-             ( prop-on-classifying-type-Concrete-Group
-               G
-               ( λ x' → is-set-Prop (Id x' shG))
-               ( is-set-type-Concrete-Group G)
-               y
-             )
-             z
-         )
+  pr1 (generalized-principal-torsor-group-actions y z) = Id y z
+  pr2 (generalized-principal-torsor-group-actions y z) =
+    prop-on-classifying-type-Concrete-Group
+      G
+      ( λ x → is-set-Prop (Id y x))
+      ( prop-on-classifying-type-Concrete-Group
+        G
+        ( λ x' → is-set-Prop (Id x' shG))
+        ( is-set-type-Concrete-Group G)
+        y
+        )
+      z
 
   -- would like to make a shortname P as in the book, but P is already
   -- taken in W-types. Should we use private for such common name?

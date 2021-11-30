@@ -331,7 +331,7 @@ module _
  private shG = shape-Concrete-Group G
 
  prop-on-classifying-type-Concrete-Group :
-   {ℓ' : Level} (P : BG → UU-Prop ℓ') → (type-Prop (P shG)) → (∀ (z : BG) → type-Prop (P z))
+   {ℓ' : Level} (P : BG → UU-Prop ℓ') → (type-Prop (P shG)) → ((z : BG) → type-Prop (P z))
  prop-on-classifying-type-Concrete-Group P proof-P-shG z =
    apply-universal-property-trunc-Prop
      (mere-eq-classifying-type-Concrete-Group G shG z)
