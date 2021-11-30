@@ -88,6 +88,7 @@ jobs:
   website:
     needs: build
     runs-on: macOS-latest
+    if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     strategy:
       matrix:
         agda: ["v2.6.2"]
