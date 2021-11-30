@@ -16,4 +16,4 @@ This folder contains the material of Chapter 4
 
 ## The subgroups folder
 
-This folder contains the material of Chapter 5
+This folder contains the material of Chapter 5.
