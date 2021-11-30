@@ -1,3 +1,8 @@
+---
+title: Formalisation of the Symmetry Book
+---
+
+```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module groups.group-actions where
@@ -81,3 +86,4 @@ module _
 
   -- is-transitive-group-action : UU-Prop ℓ 
   -- is-transitive-group-action = 
+```
