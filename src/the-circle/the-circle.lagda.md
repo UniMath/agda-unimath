@@ -451,6 +451,12 @@ htpy-id-id-Π-𝕊¹ =
 htpy-id-id-𝕊¹ : (x : 𝕊¹) → Id x x
 htpy-id-id-𝕊¹ = pr1 htpy-id-id-Π-𝕊¹
 
+mul-Map-𝕊¹ : Map-𝕊¹ id (eq-htpy htpy-id-id-𝕊¹)
+mul-Map-𝕊¹ = apply-universal-property-𝕊¹ id (eq-htpy htpy-id-id-𝕊¹)
+
+mul-𝕊¹ : 𝕊¹ → 𝕊¹ → 𝕊¹
+mul-𝕊¹ = pr1 mul-Map-𝕊¹
+
 {- Exercises -}
 
 -- Exercise 11.1
