@@ -457,6 +457,26 @@ mul-Map-𝕊¹ = apply-universal-property-𝕊¹ id (eq-htpy htpy-id-id-𝕊¹)
 mul-𝕊¹ : 𝕊¹ → 𝕊¹ → 𝕊¹
 mul-𝕊¹ = pr1 mul-Map-𝕊¹
 
+left-unit-law-mul-𝕊¹ : (x : 𝕊¹) → Id (mul-𝕊¹ base-𝕊¹ x) x
+left-unit-law-mul-𝕊¹ = htpy-eq (pr1 (pr2 mul-Map-𝕊¹))
+
+Eq-right-unit-law-mul-𝕊¹ : 𝕊¹ → UU lzero
+Eq-right-unit-law-mul-𝕊¹ x = Id (mul-𝕊¹ x base-𝕊¹) x
+
+tr-Eq-right-unit-law-mul-𝕊¹ :
+  {x : 𝕊¹} (p : Id base-𝕊¹ x) (q : Id (mul-𝕊¹ base-𝕊¹ base-𝕊¹) base-𝕊¹)
+  (r : Id (mul-𝕊¹ x base-𝕊¹) x) →
+  Id (htpy-eq (ap mul-𝕊¹ p) base-𝕊¹ ∙ r) (q ∙ p) →
+  Id (tr (Eq-right-unit-law-mul-𝕊¹ p) q) r
+tr-Eq-right-unit-law-mul-𝕊¹ p q r s = ?
+
+right-unit-law-mul-Π-𝕊¹ :
+  Π-𝕊¹
+    ( Eq-right-unit-law-mul-𝕊¹)
+    ( left-unit-law-mul-𝕊¹ base-𝕊¹)
+    {!!}
+right-unit-law-mul-Π-𝕊¹ = {!!}
+
 {- Exercises -}
 
 -- Exercise 11.1
