@@ -357,26 +357,33 @@ module _
   module _
     {l : Level} (P : 𝕊¹ → UU l) (p0 : P base-𝕊¹) (α : Id (tr P loop-𝕊¹ p0) p0)
     where
-  
-    apply-dependent-universal-property-𝕊¹ : (x : 𝕊¹) → P x
+
+    Π-𝕊¹ : UU l
+    Π-𝕊¹ =
+      Σ ( (x : 𝕊¹) → P x)
+        ( λ h →
+          Eq-dependent-free-loop free-loop-𝕊¹ P
+            ( ev-free-loop' free-loop-𝕊¹ P h) (pair p0 α))
+
+    apply-dependent-universal-property-𝕊¹ : Π-𝕊¹
     apply-dependent-universal-property-𝕊¹ =
-      pr1 (center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α)))
+      center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))
+  
+    function-apply-dependent-universal-property-𝕊¹ : (x : 𝕊¹) → P x
+    function-apply-dependent-universal-property-𝕊¹ =
+      pr1 apply-dependent-universal-property-𝕊¹
 
     base-dependent-universal-property-𝕊¹ :
-      Id (apply-dependent-universal-property-𝕊¹ base-𝕊¹) p0
+      Id (function-apply-dependent-universal-property-𝕊¹ base-𝕊¹) p0
     base-dependent-universal-property-𝕊¹ =
-      pr1
-        ( pr2
-          ( center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))))
+      pr1 (pr2 apply-dependent-universal-property-𝕊¹)
 
     loop-dependent-universal-property-𝕊¹ :
-      Id ( apd apply-dependent-universal-property-𝕊¹ loop-𝕊¹ ∙
+      Id ( apd function-apply-dependent-universal-property-𝕊¹ loop-𝕊¹ ∙
            base-dependent-universal-property-𝕊¹)
          ( ap (tr P loop-𝕊¹) base-dependent-universal-property-𝕊¹ ∙ α)
     loop-dependent-universal-property-𝕊¹ =
-      pr2
-        ( pr2
-          ( center (uniqueness-dependent-universal-property-𝕊¹ (pair p0 α))))
+      pr2 (pr2 apply-dependent-universal-property-𝕊¹)
 
   universal-property-𝕊¹ :
     {l : Level} → universal-property-circle l free-loop-𝕊¹
@@ -396,24 +403,53 @@ module _
   module _
     {l : Level} {X : UU l} (x : X) (α : Id x x)
     where
-  
-    apply-universal-property-𝕊¹ : 𝕊¹ → X
+
+    Map-𝕊¹ : UU l
+    Map-𝕊¹ =
+      Σ ( 𝕊¹ → X)
+        ( λ h → Eq-free-loop (ev-free-loop free-loop-𝕊¹ X h) (pair x α))
+
+    apply-universal-property-𝕊¹ : Map-𝕊¹
     apply-universal-property-𝕊¹ =
-      pr1 (center (uniqueness-universal-property-𝕊¹ (pair x α)))
+      center (uniqueness-universal-property-𝕊¹ (pair x α))
+      
+    map-apply-universal-property-𝕊¹ : 𝕊¹ → X
+    map-apply-universal-property-𝕊¹ =
+      pr1 apply-universal-property-𝕊¹
 
     base-universal-property-𝕊¹ :
-      Id (apply-universal-property-𝕊¹ base-𝕊¹) x
+      Id (map-apply-universal-property-𝕊¹ base-𝕊¹) x
     base-universal-property-𝕊¹ =
-      pr1 (pr2 (center (uniqueness-universal-property-𝕊¹ (pair x α))))
+      pr1 (pr2 apply-universal-property-𝕊¹)
 
     loop-universal-property-𝕊¹ :
-      Id ( ap apply-universal-property-𝕊¹ loop-𝕊¹ ∙
+      Id ( ap map-apply-universal-property-𝕊¹ loop-𝕊¹ ∙
            base-universal-property-𝕊¹)
          ( base-universal-property-𝕊¹ ∙ α)
     loop-universal-property-𝕊¹ =
-      pr2 (pr2 (center (uniqueness-universal-property-𝕊¹ (pair x α))))
+      pr2 (pr2 apply-universal-property-𝕊¹)
 
 -- Section 14.3 Multiplication on the circle
+
+tr-Eq-subst-id-id :
+  {l1 : Level} {A : UU l1} →
+  {a b : A} (p : Id a b) (q : Id a a) (r : Id b b) →
+  Id (p ∙ r) (q ∙ p) → Id (tr (Eq-subst (id {A = A}) (id {A = A})) p q) r
+tr-Eq-subst-id-id refl q r s = inv (s ∙ right-unit)
+
+htpy-id-id-Π-𝕊¹ :
+  Π-𝕊¹
+    ( Eq-subst id id)
+    ( loop-𝕊¹)
+    ( tr-Eq-subst-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+htpy-id-id-Π-𝕊¹ =
+  apply-dependent-universal-property-𝕊¹
+    ( Eq-subst id id)
+    ( loop-𝕊¹)
+    ( tr-Eq-subst-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+
+htpy-id-id-𝕊¹ : (x : 𝕊¹) → Id x x
+htpy-id-id-𝕊¹ = pr1 htpy-id-id-Π-𝕊¹
 
 {- Exercises -}
 
@@ -441,9 +477,9 @@ abstract
 
 mere-eq-𝕊¹ : (x y : 𝕊¹) → mere-eq x y
 mere-eq-𝕊¹ =
-  apply-dependent-universal-property-𝕊¹
+  function-apply-dependent-universal-property-𝕊¹
     ( λ x → (y : 𝕊¹) → mere-eq x y)
-    ( apply-dependent-universal-property-𝕊¹
+    ( function-apply-dependent-universal-property-𝕊¹
       ( mere-eq base-𝕊¹)
       ( refl-mere-eq)
       ( eq-is-prop is-prop-type-trunc-Prop))
