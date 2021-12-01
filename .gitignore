@@ -5,6 +5,7 @@ MAlonzo/**
 _build/**
 src/agdaFiles
 docs/dependency.dot
+docs/graph.png
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
