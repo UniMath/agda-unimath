@@ -76,6 +76,10 @@ module _
       classifying-type-Concrete-Group
       is-1-type-classifying-type-Concrete-Group
 
+  Id-BG-Set :
+    (X Y : classifying-type-Concrete-Group) → UU-Set l
+  Id-BG-Set X Y = Id-Set classifying-1-type-Concrete-Group X Y
+
   unit-Concrete-Group : type-Concrete-Group
   unit-Concrete-Group = unit-∞-Group ∞-group-Concrete-Group
 
