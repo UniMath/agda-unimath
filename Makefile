@@ -1,8 +1,8 @@
 
-checkOpts :="--without-K --exact-split"
-everythingOpts +="--allow-unsolved-metas"
-htmlOpts= "--html --html-highlight=code --html-dir=docs --css=docs/Agda.css"
-AGDA ?="agda"
+checkOpts=--without-K --exact-split
+everythingOpts+=--allow-unsolved-metas
+htmlOpts=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
+AGDA ?=agda
 
 src/everything.lagda.md :
 	@rm -rf $@
@@ -24,13 +24,13 @@ src/everything.lagda.md :
 
 .PHONY : check
 check : src/everything.lagda.md 
-	@$(AGDA) $?
+	${AGDA} $?
 
 html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
-	$(AGDA) $(flagsHTML) src/everything.lagda.md 
-	$(AGDA) $(flagsHTML) --dependency-graph=docs/dependency.dot -v0 src/README.lagda.md\
+	${AGDA} ${htmlOpts} src/everything.lagda.md 
+	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot -v0 src/README.lagda.md\
 	cd docs/; \
 	dot -Tpng -o graph.png dependency.dot; \
 	sh conv.sh; \
