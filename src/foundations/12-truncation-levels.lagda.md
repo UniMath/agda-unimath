@@ -611,6 +611,10 @@ abstract
     {l : Level} (A : UU-1-Type l) → is-1-type (type-1-Type A)
   is-1-type-type-1-Type = pr2
 
+Id-Set : {l : Level} (X : UU-1-Type l) (x y : type-1-Type X) → UU-Set l
+pr1 (Id-Set X x y) = Id x y
+pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
+
 -- We introduce some notation for the special case of 2-types --
 
 is-2-type : {l : Level} → UU l → UU l
