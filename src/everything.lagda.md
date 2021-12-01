@@ -1,11 +1,8 @@
----
-title: Formalisation of the Symmetry Book
----
-
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 module everything where
 
+open import README
 open import foundations
 open import foundations.00-preamble
 open import foundations.02-pi
@@ -42,10 +39,13 @@ open import groups.abstract-abelian-groups
 open import groups.abstract-groups
 open import groups.concrete-groups
 open import groups.examples-higher-groups
+open import groups.group-actions
 open import groups.higher-groups
 open import subgroups
 open import subgroups.abstract-subgroups
 open import the-circle
+open import the-circle.integers
 open import the-circle.the-circle
+open import the-circle.torsors
 open import the-circle.universal-cover
-```
+```agda

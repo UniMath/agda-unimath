@@ -1,3 +1,8 @@
+---
+title: Formalisation of the Symmetry Book
+---
+
+```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module the-circle.integers where
@@ -589,3 +594,4 @@ move-five-mul-ℤ {a} {b} {c} {d} =
   ( ( ap (λ t → mul-ℤ t (mul-ℤ b d)) (commutative-mul-ℤ a c)) ∙
     ( ( interchange-2-3-mul-ℤ {c}) ∙
       ( ap (λ t → mul-ℤ t (mul-ℤ a d)) (commutative-mul-ℤ c b))))
+```
