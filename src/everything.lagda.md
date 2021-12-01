@@ -36,10 +36,11 @@ open import foundations.pointed-maps
 open import foundations.spaces
 open import groups
 open import groups.abstract-abelian-groups
+open import groups.abstract-group-actions
 open import groups.abstract-groups
+open import groups.concrete-group-actions
 open import groups.concrete-groups
 open import groups.examples-higher-groups
-open import groups.group-actions
 open import groups.higher-groups
 open import subgroups
 open import subgroups.abstract-subgroups
@@ -48,4 +49,4 @@ open import the-circle.integers
 open import the-circle.the-circle
 open import the-circle.torsors
 open import the-circle.universal-cover
-```agda
+```

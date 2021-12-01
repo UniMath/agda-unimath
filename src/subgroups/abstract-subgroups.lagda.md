@@ -3,8 +3,6 @@ title: Formalisation of the Symmetry Book
 ---
 
 
-Testing
-
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
