@@ -194,7 +194,7 @@ module _
   where
   
   id-hom-∞-Group : hom-∞-Group G G
-  id-hom-∞-Group = id-pointed-map (classifying-pointed-type-∞-Group G)
+  id-hom-∞-Group = id-pointed-map
 
 module _
   {l1 l2 l3 : Level} (G : ∞-Group l1) (H : ∞-Group l2) (K : ∞-Group l3)
