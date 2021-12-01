@@ -8,14 +8,16 @@ htmlOpts=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 AGDA ?=agda -v$(agdaVerbose)
 TIME ?=time
 
-gen-file-list : agdaFiles
+.PHONY : agdaFiles
+agdaFiles : 
+	@rm -rf $@
 	@rm -rf src/everything.lagda.md ;\
-	find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $?; \
-	sort -o $? $?; \
-	wc -l $?
+	find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $@; \
+	sort -o $@ $@; \
+	wc -l $@
 
 .PHONY : src/everything.lagda.md
-src/everything.lagda.md : gen-file-list
+src/everything.lagda.md : agdaFiles
 	@echo "\`\`\`agda" > $@ ;\
 	echo "{-# OPTIONS $(everythingOpts) #-}" >> $@ ;\
 	echo "module everything where" >> $@ ;\
@@ -30,7 +32,7 @@ src/everything.lagda.md : gen-file-list
 
 .PHONY : check
 check : src/everything.lagda.md
-	@${TIME} ${AGDA} $?
+	${TIME} ${AGDA} $?
 
 html: src/everything.lagda.md
 	mkdir -p docs
