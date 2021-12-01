@@ -36,49 +36,43 @@ module _
   principal-torsor-group-actions : G -Set
   pr1 (principal-torsor-group-actions z) = Id shG z
   pr2 (principal-torsor-group-actions z) =
-    prop-on-classifying-type-Concrete-Group
-      G
+    elim-prop-classifying-type-Concrete-Group G
       ( λ x → is-set-Prop (Id shG x))
       ( is-set-type-Concrete-Group G)
-      z
+      ( z)
   
   Pr = principal-torsor-group-actions
 
   generalized-principal-torsor-group-actions : BG → G -Set
   pr1 (generalized-principal-torsor-group-actions y z) = Id y z
   pr2 (generalized-principal-torsor-group-actions y z) =
-    prop-on-classifying-type-Concrete-Group
-      G
+    elim-prop-classifying-type-Concrete-Group G
       ( λ x → is-set-Prop (Id y x))
-      ( prop-on-classifying-type-Concrete-Group
-        G
-        ( λ x' → is-set-Prop (Id x' shG))
+      ( elim-prop-classifying-type-Concrete-Group G
+        ( λ z → is-set-Prop (Id z shG))
         ( is-set-type-Concrete-Group G)
-        y
-        )
-      z
+        ( y))
+      ( z)
 
   -- would like to make a shortname P as in the book, but P is already
   -- taken in W-types. Should we use private for such common name?
 
   -- ref def:adjointrep
   adjoint-rep-group-actions : G -Set
-  adjoint-rep-group-actions z =
-    pair ( Id z z)
-         ( prop-on-classifying-type-Concrete-Group
-           G
-           ( λ x → is-set-Prop (Id x x))
-           ( is-set-type-Concrete-Group G)
-           z
-         )
-
+  pr1 (adjoint-rep-group-actions z) = Id z z
+  pr2 (adjoint-rep-group-actions z) =
+    elim-prop-classifying-type-Concrete-Group G
+      ( λ x → is-set-Prop (Id x x))
+      ( is-set-type-Concrete-Group G)
+      ( z)
+  
   Ad = adjoint-rep-group-actions
 
   k = pr1 (ind-𝕊¹ (λ _ → BG))
 
   free-loop-from-adjoint-rep : Σ (BG) (λ z → type-Set (Ad z)) → (𝕊¹ → BG)
   free-loop-from-adjoint-rep (pair z l) =
-    apply-universal-property-𝕊¹ z l
+    map-apply-universal-property-𝕊¹ z l
 
   -- is-transitive-group-action : UU-Prop ℓ 
   -- is-transitive-group-action = 

@@ -37,6 +37,15 @@ module _
     mere-eq-is-path-connected
       is-path-connected-classifying-type-∞-Group
 
+  elim-prop-classifying-type-∞-Group :
+    {l2 : Level} (P : classifying-type-∞-Group → UU-Prop l2) →
+    type-Prop (P shape-∞-Group) →
+    ((X : classifying-type-∞-Group) → type-Prop (P X))
+  elim-prop-classifying-type-∞-Group =
+    apply-dependent-universal-property-is-path-connected
+      shape-∞-Group
+      is-path-connected-classifying-type-∞-Group
+
   type-∞-Group : UU l
   type-∞-Group = type-Ω classifying-pointed-type-∞-Group
 
