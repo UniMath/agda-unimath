@@ -30,7 +30,7 @@ html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
 	${AGDA} ${htmlOpts} src/everything.lagda.md 
-	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot -v0 src/README.lagda.md\
+	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot -v0 src/README.lagda.md
 	cd docs/; \
 	dot -Tpng -o graph.png dependency.dot; \
 	sh conv.sh; \
