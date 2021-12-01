@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.group-actions where
+module groups.concrete-group-actions where
 
 open import groups.concrete-groups public
 open import the-circle.the-circle public
