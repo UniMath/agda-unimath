@@ -2573,6 +2573,43 @@ abstract
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
 
+is-path-connected-is-surjective-pt :
+  {l1 : Level} {A : UU l1} (a : A) →
+  is-surjective (pt a) → is-path-connected A
+is-path-connected-is-surjective-pt a H =
+  is-path-connected-mere-eq a
+    ( λ x →
+      apply-universal-property-trunc-Prop
+        ( H x)
+        ( mere-eq-Prop a x)
+        ( λ u → unit-trunc-Prop (pr2 u)))
+
+is-surjective-pt-is-path-connected :
+  {l1 : Level} {A : UU l1} (a : A) →
+  is-path-connected A → is-surjective (pt a)
+is-surjective-pt-is-path-connected a H x =
+  apply-universal-property-trunc-Prop
+    ( mere-eq-is-path-connected H a x)
+    ( trunc-Prop (fib (pt a) x))
+    ( λ {refl → unit-trunc-Prop (pair star refl)})
+
+equiv-dependent-universal-property-is-path-connected :
+  {l1 : Level} {A : UU l1} (a : A) → is-path-connected A →
+  ( {l : Level} (P : A → UU-Prop l) →
+    ((x : A) → type-Prop (P x)) ≃ type-Prop (P a))
+equiv-dependent-universal-property-is-path-connected a H P =
+  ( equiv-universal-property-unit (type-Prop (P a))) ∘e
+  ( equiv-dependent-universal-property-surj-is-surjective
+    ( pt a)
+    ( is-surjective-pt-is-path-connected a H)
+    ( P))
+
+apply-dependent-universal-property-is-path-connected :
+  {l1 : Level} {A : UU l1} (a : A) → is-path-connected A →
+  {l : Level} (P : A → UU-Prop l) → type-Prop (P a) → (x : A) → type-Prop (P x)
+apply-dependent-universal-property-is-path-connected a H P =
+  map-inv-equiv (equiv-dependent-universal-property-is-path-connected a H P)
+
 abstract
   is-surjective-fiber-inclusion :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →

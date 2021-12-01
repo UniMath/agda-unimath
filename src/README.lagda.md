@@ -70,3 +70,8 @@ open import groups.examples-higher-groups public
 ```agda
 open import subgroups.abstract-subgroups public
 ```
+
+### Everything
+
+See [everything](everything.html)
+

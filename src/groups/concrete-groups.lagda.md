@@ -42,6 +42,13 @@ module _
   mere-eq-classifying-type-Concrete-Group =
     mere-eq-classifying-type-∞-Group ∞-group-Concrete-Group
 
+  elim-prop-classifying-type-Concrete-Group :
+    {l2 : Level} (P : classifying-type-Concrete-Group → UU-Prop l2) →
+    type-Prop (P shape-Concrete-Group) →
+    ((X : classifying-type-Concrete-Group) → type-Prop (P X))
+  elim-prop-classifying-type-Concrete-Group =
+    elim-prop-classifying-type-∞-Group ∞-group-Concrete-Group
+
   type-Concrete-Group : UU l
   type-Concrete-Group = type-∞-Group ∞-group-Concrete-Group
 
@@ -68,6 +75,10 @@ module _
     pair
       classifying-type-Concrete-Group
       is-1-type-classifying-type-Concrete-Group
+
+  Id-BG-Set :
+    (X Y : classifying-type-Concrete-Group) → UU-Set l
+  Id-BG-Set X Y = Id-Set classifying-1-type-Concrete-Group X Y
 
   unit-Concrete-Group : type-Concrete-Group
   unit-Concrete-Group = unit-∞-Group ∞-group-Concrete-Group
@@ -320,21 +331,4 @@ module _
     right-unit-law-comp-hom-∞-Group
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
-
--- Proving proposition of the classifying type of a goup need only to be checked on the shape.
-
-module _
- {ℓ : Level} (G : Concrete-Group ℓ)
- where
-
- private BG = classifying-type-Concrete-Group G
- private shG = shape-Concrete-Group G
-
- prop-on-classifying-type-Concrete-Group :
-   {ℓ' : Level} (P : BG → UU-Prop ℓ') → (type-Prop (P shG)) → ((z : BG) → type-Prop (P z))
- prop-on-classifying-type-Concrete-Group P proof-P-shG z =
-   apply-universal-property-trunc-Prop
-     (mere-eq-classifying-type-Concrete-Group G shG z)
-     (P z)
-     (λ p → tr (λ x → type-Prop (P x)) p proof-P-shG)
 ```
