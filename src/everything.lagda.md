@@ -1,5 +1,5 @@
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --allow-unsolved-metas #-}
 module everything where
 
 open import README

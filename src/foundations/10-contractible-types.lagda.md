@@ -36,7 +36,7 @@ eq-is-contr' (pair c C) x y = (inv (C x)) ∙ (C y)
 
 eq-is-contr :
   {l : Level} {A : UU l} → is-contr A → {x y : A} → Id x y
-eq-is-contr (pair c C) {x} {y} = (inv (C x)) ∙ (C y)
+eq-is-contr C {x} {y} = eq-is-contr' C x y
 
 abstract
   contraction :

@@ -101,6 +101,10 @@ mul-Monoid :
   {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
 mul-Monoid M = mul-Semi-Group (semi-group-Monoid M)
 
+mul-Monoid' :
+  {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
+mul-Monoid' M y x = mul-Monoid M x y
+
 is-associative-mul-Monoid :
   {l : Level} (M : Monoid l) (x y z : type-Monoid M) →
   Id (mul-Monoid M (mul-Monoid M x y) z) (mul-Monoid M x (mul-Monoid M y z))
@@ -144,40 +148,81 @@ abstract
     is-prop-all-elements-equal (all-elements-equal-is-unital G)
 
 is-unital-Prop : {l : Level} (G : Semi-Group l) → UU-Prop l
-is-unital-Prop G = pair (is-unital G) (is-prop-is-unital G)
+pr1 (is-unital-Prop G) = is-unital G
+pr2 (is-unital-Prop G) = is-prop-is-unital G
 
 --------------------------------------------------------------------------------
 
 {- We introduce invertible elements of a monoid -}
 
-is-invertible-Monoid :
-  {l : Level} (M : Monoid l) → type-Monoid M → UU l
-is-invertible-Monoid M x =
-  Σ ( type-Monoid M)
-    ( λ y →
-      Id (mul-Monoid M y x) (unit-Monoid M) ×
-      Id (mul-Monoid M x y) (unit-Monoid M))
+module _
+  {l : Level} (M : Monoid l)
+  where
 
-all-elements-equal-is-invertible-Monoid :
-  {l : Level} (M : Monoid l) (x : type-Monoid M) →
-  all-elements-equal (is-invertible-Monoid M x)
-all-elements-equal-is-invertible-Monoid M x (pair y (pair p q)) (pair y' (pair p' q')) =
-  eq-subtype
-    ( ( λ z →
-      is-prop-prod
-        ( is-set-type-Monoid M (mul-Monoid M z x) (unit-Monoid M))
-        ( is-set-type-Monoid M (mul-Monoid M x z) (unit-Monoid M))))
-    ( ( inv (left-unit-law-Monoid M y)) ∙
-      ( ( inv (ap (λ z → mul-Monoid M z y) p')) ∙
-        ( ( is-associative-mul-Monoid M y' x y) ∙
-          ( ( ap (mul-Monoid M y') q) ∙
-            ( right-unit-law-Monoid M y')))))
+  is-invertible-Monoid : type-Monoid M → UU l
+  is-invertible-Monoid x =
+    Σ ( type-Monoid M)
+      ( λ y →
+        Id (mul-Monoid M y x) (unit-Monoid M) ×
+        Id (mul-Monoid M x y) (unit-Monoid M))
+  
+  all-elements-equal-is-invertible-Monoid :
+    (x : type-Monoid M) → all-elements-equal (is-invertible-Monoid x)
+  all-elements-equal-is-invertible-Monoid x
+    (pair y (pair p q)) (pair y' (pair p' q')) =
+    eq-subtype
+      ( ( λ z →
+        is-prop-prod
+          ( is-set-type-Monoid M (mul-Monoid M z x) (unit-Monoid M))
+          ( is-set-type-Monoid M (mul-Monoid M x z) (unit-Monoid M))))
+      ( ( inv (left-unit-law-Monoid M y)) ∙
+        ( ( inv (ap (λ z → mul-Monoid M z y) p')) ∙
+          ( ( is-associative-mul-Monoid M y' x y) ∙
+            ( ( ap (mul-Monoid M y') q) ∙
+              ( right-unit-law-Monoid M y')))))
+  
+  is-prop-is-invertible-Monoid :
+    (x : type-Monoid M) → is-prop (is-invertible-Monoid x)
+  is-prop-is-invertible-Monoid x =
+    is-prop-all-elements-equal (all-elements-equal-is-invertible-Monoid x)
 
-is-prop-is-invertible-Monoid :
-  {l : Level} (M : Monoid l) (x : type-Monoid M) →
-  is-prop (is-invertible-Monoid M x)
-is-prop-is-invertible-Monoid M x =
-  is-prop-all-elements-equal (all-elements-equal-is-invertible-Monoid M x)
+  has-right-inverse-Monoid : type-Monoid M → UU l
+  has-right-inverse-Monoid x =
+    Σ ( type-Monoid M)
+      ( λ y → Id (mul-Monoid M x y) (unit-Monoid M))
+
+  is-contr-has-right-inverse-Monoid :
+    (x : type-Monoid M) → is-invertible-Monoid x →
+    is-contr (has-right-inverse-Monoid x)
+  pr1 (pr1 (is-contr-has-right-inverse-Monoid x (pair y (pair p q)))) = y
+  pr2 (pr1 (is-contr-has-right-inverse-Monoid x (pair y (pair p q)))) = q
+  pr2 (is-contr-has-right-inverse-Monoid x (pair y (pair p q))) (pair y' q') =
+    eq-subtype
+      ( λ u → is-set-type-Monoid M (mul-Monoid M x u) (unit-Monoid M))
+      ( ( inv (right-unit-law-Monoid M y)) ∙
+        ( ( ap (mul-Monoid M y) (inv q')) ∙
+          ( ( inv (is-associative-mul-Monoid M y x y')) ∙
+            ( ( ap (mul-Monoid' M y') p) ∙
+              ( left-unit-law-Monoid M y')))))
+
+  has-left-inverse-Monoid : type-Monoid M → UU l
+  has-left-inverse-Monoid x =
+    Σ ( type-Monoid M)
+      ( λ y → Id (mul-Monoid M y x) (unit-Monoid M))
+
+  is-contr-has-left-inverse-Monoid :
+    (x : type-Monoid M) → is-invertible-Monoid x →
+    is-contr (has-left-inverse-Monoid x)
+  pr1 (pr1 (is-contr-has-left-inverse-Monoid x (pair y (pair p q)))) = y
+  pr2 (pr1 (is-contr-has-left-inverse-Monoid x (pair y (pair p q)))) = p
+  pr2 (is-contr-has-left-inverse-Monoid x (pair y (pair p q))) (pair y' p') =
+    eq-subtype
+      ( λ u → is-set-type-Monoid M (mul-Monoid M u x) (unit-Monoid M))
+      ( ( inv (left-unit-law-Monoid M y)) ∙
+        ( ( ap (mul-Monoid' M y) (inv p')) ∙
+          ( ( is-associative-mul-Monoid M y' x y) ∙
+            ( ( ap (mul-Monoid M y') q) ∙
+              ( right-unit-law-Monoid M y')))))
 
 --------------------------------------------------------------------------------
 
@@ -229,6 +274,11 @@ module _
   
   mul-Group : type-Group → type-Group → type-Group
   mul-Group = pr1 associative-mul-Group
+
+  ap-mul-Group :
+    {x x' y y' : type-Group} (p : Id x x') (q : Id y y') →
+    Id (mul-Group x y) (mul-Group x' y')
+  ap-mul-Group p q = ap-binary mul-Group p q
   
   mul-Group' : type-Group → type-Group → type-Group
   mul-Group' x y = mul-Group y x
@@ -243,6 +293,10 @@ module _
   
   is-unital-Group : is-unital semi-group-Group
   is-unital-Group = pr1 is-group-Group
+
+  monoid-Group : Monoid l
+  pr1 monoid-Group = semi-group-Group
+  pr2 monoid-Group = is-unital-Group
   
   unit-Group : type-Group
   unit-Group = pr1 is-unital-Group
@@ -268,7 +322,7 @@ module _
   right-inverse-law-Group :
     (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
   right-inverse-law-Group = pr2 (pr2 has-inverses-Group)
-  
+
   is-equiv-mul-Group : (x : type-Group) → is-equiv (mul-Group x)
   is-equiv-mul-Group x =
     is-equiv-has-inverse
@@ -283,7 +337,8 @@ module _
           ( left-unit-law-Group y)))
   
   equiv-mul-Group : (x : type-Group) → type-Group ≃ type-Group
-  equiv-mul-Group x = pair (mul-Group x) (is-equiv-mul-Group x)
+  pr1 (equiv-mul-Group x) = mul-Group x
+  pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
   
   is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
   is-equiv-mul-Group' x =
@@ -299,7 +354,44 @@ module _
           ( right-unit-law-Group y)))
   
   equiv-mul-Group' : (x : type-Group) → type-Group ≃ type-Group
-  equiv-mul-Group' x = pair (mul-Group' x) (is-equiv-mul-Group' x)
+  pr1 (equiv-mul-Group' x) = mul-Group' x
+  pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
+
+  equiv-conjugation-Group : (x : type-Group) → type-Group ≃ type-Group
+  equiv-conjugation-Group x =
+    equiv-mul-Group' (inv-Group x) ∘e equiv-mul-Group x
+
+  distributive-inv-mul-Group :
+    (x y : type-Group) →
+    Id (inv-Group (mul-Group x y)) (mul-Group (inv-Group y) (inv-Group x))
+  distributive-inv-mul-Group x y =
+    ap pr1
+      ( eq-is-contr'
+        ( is-contr-has-left-inverse-Monoid monoid-Group
+          ( mul-Group x y)
+          ( pair
+            ( inv-Group (mul-Group x y))
+            ( pair
+              ( left-inverse-law-Group (mul-Group x y))
+              ( right-inverse-law-Group (mul-Group x y)))))
+        ( pair
+            ( inv-Group (mul-Group x y))
+            ( left-inverse-law-Group (mul-Group x y)))
+        ( pair
+            ( mul-Group (inv-Group y) (inv-Group x))
+            ( ( is-associative-mul-Group
+                ( inv-Group y)
+                ( inv-Group x)
+                ( mul-Group x y)) ∙
+              ( ( ap
+                  ( mul-Group (inv-Group y))
+                  ( ( inv (is-associative-mul-Group (inv-Group x) x y)) ∙
+                    ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
+                      ( left-unit-law-Group y)))) ∙
+                ( left-inverse-law-Group y)))))
+
+  conjugation-Group : (x : type-Group) → type-Group → type-Group
+  conjugation-Group x = map-equiv (equiv-conjugation-Group x)
 
 --------------------------------------------------------------------------------
 
@@ -337,7 +429,8 @@ abstract
         is-prop-all-elements-equal (all-elements-equal-is-group G e))
 
 is-group-Prop : {l : Level} (G : Semi-Group l) → UU-Prop l
-is-group-Prop G = pair (is-group G) (is-prop-is-group G)
+pr1 (is-group-Prop G) = is-group G
+pr2 (is-group-Prop G) = is-prop-is-group G
 
 --------------------------------------------------------------------------------
 
@@ -347,15 +440,18 @@ is-group-Prop G = pair (is-group G) (is-prop-is-group G)
 {- The group of integers. -}
 
 ℤ-Semi-Group : Semi-Group lzero
-ℤ-Semi-Group = pair ℤ-Set (pair add-ℤ associative-add-ℤ)
+pr1 ℤ-Semi-Group = ℤ-Set
+pr1 (pr2 ℤ-Semi-Group) = add-ℤ
+pr2 (pr2 ℤ-Semi-Group) = associative-add-ℤ
 
 ℤ-Group : Group lzero
-ℤ-Group =
-  pair
-    ( ℤ-Semi-Group)
-    ( pair
-      ( pair zero-ℤ (pair left-unit-law-add-ℤ right-unit-law-add-ℤ))
-      ( pair neg-ℤ (pair left-inverse-law-add-ℤ right-inverse-law-add-ℤ)))
+pr1 ℤ-Group = ℤ-Semi-Group
+pr1 (pr1 (pr2 ℤ-Group)) = zero-ℤ
+pr1 (pr2 (pr1 (pr2 ℤ-Group))) = left-unit-law-add-ℤ
+pr2 (pr2 (pr1 (pr2 ℤ-Group))) = right-unit-law-add-ℤ
+pr1 (pr2 (pr2 ℤ-Group)) = neg-ℤ
+pr1 (pr2 (pr2 (pr2 ℤ-Group))) = left-inverse-law-add-ℤ
+pr2 (pr2 (pr2 (pr2 ℤ-Group))) = right-inverse-law-add-ℤ
 
 --------------------------------------------------------------------------------
 
@@ -367,23 +463,24 @@ loop-space a = Id a a
 
 loop-space-Set :
   {l : Level} (A : UU l) (a : A) (is-set-Ω : is-set (Id a a)) → UU-Set l
-loop-space-Set A a is-set-Ω = pair (Id a a) is-set-Ω
+pr1 (loop-space-Set A a is-set-Ω) = Id a a
+pr2 (loop-space-Set A a is-set-Ω) = is-set-Ω
 
 loop-space-Semi-Group :
   {l : Level} (A : UU l) (a : A) (is-set-Ω : is-set (Id a a)) → Semi-Group l
-loop-space-Semi-Group A a is-set-Ω =
-  pair
-    ( loop-space-Set A a is-set-Ω)
-    ( pair (λ p q → p ∙ q) assoc)
+pr1 (loop-space-Semi-Group A a is-set-Ω) = loop-space-Set A a is-set-Ω
+pr1 (pr2 (loop-space-Semi-Group A a is-set-Ω)) p q = p ∙ q
+pr2 (pr2 (loop-space-Semi-Group A a is-set-Ω)) = assoc
 
 loop-space-Group :
   {l : Level} (A : UU l) (a : A) (is-set-Ω : is-set (Id a a)) → Group l
-loop-space-Group A a is-set-Ω =
-  pair
-    ( loop-space-Semi-Group A a is-set-Ω)
-    ( pair
-      ( pair refl (pair (λ q → left-unit) (λ p → right-unit)))
-      ( pair inv (pair left-inv right-inv)))
+pr1 (loop-space-Group A a is-set-Ω) = loop-space-Semi-Group A a is-set-Ω
+pr1 (pr1 (pr2 (loop-space-Group A a is-set-Ω))) = refl
+pr1 (pr2 (pr1 (pr2 (loop-space-Group A a is-set-Ω)))) q = left-unit
+pr2 (pr2 (pr1 (pr2 (loop-space-Group A a is-set-Ω)))) p = right-unit
+pr1 (pr2 (pr2 (loop-space-Group A a is-set-Ω))) = inv
+pr1 (pr2 (pr2 (pr2 (loop-space-Group A a is-set-Ω)))) = left-inv
+pr2 (pr2 (pr2 (pr2 (loop-space-Group A a is-set-Ω)))) = right-inv
 
 loop-space-1-type-Set :
   {l : Level} (A : UU-1-Type l) (a : type-1-Type A) → UU-Set l
@@ -416,17 +513,13 @@ associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
 
 has-associative-mul-aut-Set :
   {l : Level} (X : UU-Set l) → has-associative-mul-Set (aut-Set X)
-has-associative-mul-aut-Set X =
-  pair
-    ( λ f e → f ∘e e)
-    ( λ e f g → associative-comp-equiv g f e)
+pr1 (has-associative-mul-aut-Set X) f e = f ∘e e
+pr2 (has-associative-mul-aut-Set X) e f g = associative-comp-equiv g f e
 
 symmetric-Semi-Group :
   {l : Level} (X : UU-Set l) → Semi-Group l
-symmetric-Semi-Group X =
-  pair
-    ( aut-Set X)
-    ( has-associative-mul-aut-Set X)
+pr1 (symmetric-Semi-Group X) = aut-Set X
+pr2 (symmetric-Semi-Group X) = has-associative-mul-aut-Set X
 
 left-unit-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
@@ -440,12 +533,9 @@ right-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 is-unital-symmetric-Semi-Group :
   {l : Level} (X : UU-Set l) → is-unital (symmetric-Semi-Group X)
-is-unital-symmetric-Semi-Group X =
-  pair
-    ( equiv-id)
-    ( pair
-      ( left-unit-law-equiv)
-      ( right-unit-law-equiv))
+pr1 (is-unital-symmetric-Semi-Group X) = equiv-id
+pr1 (pr2 (is-unital-symmetric-Semi-Group X)) = left-unit-law-equiv
+pr2 (pr2 (is-unital-symmetric-Semi-Group X)) = right-unit-law-equiv
 
 left-inverse-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
@@ -462,19 +552,15 @@ right-inverse-law-equiv e =
 is-group-symmetric-Semi-Group' :
   {l : Level} (X : UU-Set l) →
   is-group' (symmetric-Semi-Group X) (is-unital-symmetric-Semi-Group X)
-is-group-symmetric-Semi-Group' X =
-  pair
-    ( inv-equiv)
-    ( pair left-inverse-law-equiv right-inverse-law-equiv)
+pr1 (is-group-symmetric-Semi-Group' X) = inv-equiv
+pr1 (pr2 (is-group-symmetric-Semi-Group' X)) = left-inverse-law-equiv
+pr2 (pr2 (is-group-symmetric-Semi-Group' X)) = right-inverse-law-equiv
 
 symmetric-Group :
   {l : Level} → UU-Set l → Group l
-symmetric-Group X =
-  pair
-    ( symmetric-Semi-Group X)
-    ( pair
-      ( is-unital-symmetric-Semi-Group X)
-      ( is-group-symmetric-Semi-Group' X))
+pr1 (symmetric-Group X) = symmetric-Semi-Group X
+pr1 (pr2 (symmetric-Group X)) = is-unital-symmetric-Semi-Group X
+pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semi-Group' X
 
 --------------------------------------------------------------------------------
 
@@ -718,43 +804,41 @@ preserves-mul-id (pair (pair G is-set-G) (pair μ-G assoc-G)) x y = refl
 
 id-hom-Semi-Group :
   {l : Level} (G : Semi-Group l) → hom-Semi-Group G G
-id-hom-Semi-Group G =
-  pair id (preserves-mul-id G)
+pr1 (id-hom-Semi-Group G) = id
+pr2 (id-hom-Semi-Group G) = preserves-mul-id G
 
 preserves-unit-id-hom-Semi-Group :
   { l : Level} (M : Monoid l) →
   preserves-unit-hom-Semi-Group M M (id-hom-Semi-Group (semi-group-Monoid M))
 preserves-unit-id-hom-Semi-Group M = refl
 
-id-Monoid :
+id-hom-Monoid :
   {l : Level} (M : Monoid l) → hom-Monoid M M
-id-Monoid M =
-  pair ( id-hom-Semi-Group (semi-group-Monoid M))
-       ( preserves-unit-id-hom-Semi-Group M)
+pr1 (id-hom-Monoid M) = id-hom-Semi-Group (semi-group-Monoid M)
+pr2 (id-hom-Monoid M) = preserves-unit-id-hom-Semi-Group M
 
-id-Group :
+id-hom-Group :
   {l : Level} (G : Group l) → hom-Group G G
-id-Group G = id-hom-Semi-Group (semi-group-Group G)
+id-hom-Group G = id-hom-Semi-Group (semi-group-Group G)
 
-comp-Semi-Group :
+comp-hom-Semi-Group :
   {l1 l2 l3 : Level} →
   (G : Semi-Group l1) (H : Semi-Group l2) (K : Semi-Group l3) →
   (hom-Semi-Group H K) → (hom-Semi-Group G H) → (hom-Semi-Group G K)
-comp-Semi-Group G H K g f =
-  pair
-    ( (map-hom-Semi-Group H K g) ∘ (map-hom-Semi-Group G H f))
-    ( λ x y →
-      ( ap ( map-hom-Semi-Group H K g)
-           ( preserves-mul-hom-Semi-Group G H f x y)) ∙
-      ( preserves-mul-hom-Semi-Group H K g
-        ( map-hom-Semi-Group G H f x)
-        ( map-hom-Semi-Group G H f y)))
+pr1 (comp-hom-Semi-Group G H K g f) =
+  (map-hom-Semi-Group H K g) ∘ (map-hom-Semi-Group G H f)
+pr2 (comp-hom-Semi-Group G H K g f) x y =
+  ( ap ( map-hom-Semi-Group H K g)
+       ( preserves-mul-hom-Semi-Group G H f x y)) ∙
+  ( preserves-mul-hom-Semi-Group H K g
+    ( map-hom-Semi-Group G H f x)
+    ( map-hom-Semi-Group G H f y))
 
-comp-Group :
+comp-hom-Group :
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3) →
   (hom-Group H K) → (hom-Group G H) → (hom-Group G K)
-comp-Group G H K =
-  comp-Semi-Group
+comp-hom-Group G H K =
+  comp-hom-Semi-Group
     ( semi-group-Group G)
     ( semi-group-Group H)
     ( semi-group-Group K)
@@ -767,32 +851,32 @@ comp-Group G H K =
    the identity type of the types of semi-group homomorphisms and group 
    homomorphisms. -}
 
-associative-Semi-Group :
+associative-hom-Semi-Group :
   { l1 l2 l3 l4 : Level} (G : Semi-Group l1) (H : Semi-Group l2)
   ( K : Semi-Group l3) (L : Semi-Group l4) (h : hom-Semi-Group K L) →
   ( g : hom-Semi-Group H K) (f : hom-Semi-Group G H) →
-  Id ( comp-Semi-Group G H L
-       ( comp-Semi-Group H K L h g) f)
-     ( comp-Semi-Group G K L h
-       ( comp-Semi-Group G H K g f))
-associative-Semi-Group G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
+  Id ( comp-hom-Semi-Group G H L
+       ( comp-hom-Semi-Group H K L h g) f)
+     ( comp-hom-Semi-Group G K L h
+       ( comp-hom-Semi-Group G H K g f))
+associative-hom-Semi-Group G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
   eq-htpy-hom-Semi-Group G L refl-htpy
 
-left-unit-law-Semi-Group :
+left-unit-law-hom-Semi-Group :
   { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2)
   ( f : hom-Semi-Group G H) →
-  Id ( comp-Semi-Group G H H (id-hom-Semi-Group H) f) f
-left-unit-law-Semi-Group G
+  Id ( comp-hom-Semi-Group G H H (id-hom-Semi-Group H) f) f
+left-unit-law-hom-Semi-Group G
   (pair (pair H is-set-H) (pair μ-H assoc-H)) (pair f μ-f) =
   eq-htpy-hom-Semi-Group G
     ( pair (pair H is-set-H) (pair μ-H assoc-H))
     ( refl-htpy)
 
-right-unit-law-Semi-Group :
+right-unit-law-hom-Semi-Group :
   { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2)
   ( f : hom-Semi-Group G H) →
-  Id ( comp-Semi-Group G G H f (id-hom-Semi-Group G)) f
-right-unit-law-Semi-Group
+  Id ( comp-hom-Semi-Group G G H f (id-hom-Semi-Group G)) f
+right-unit-law-hom-Semi-Group
   (pair (pair G is-set-G) (pair μ-G assoc-G)) H (pair f μ-f) =
   eq-htpy-hom-Semi-Group
     ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy
@@ -807,8 +891,8 @@ is-iso-hom-Semi-Group :
   ( f : hom-Semi-Group G H) → UU (l1 ⊔ l2)
 is-iso-hom-Semi-Group G H f =
   Σ ( hom-Semi-Group H G) (λ g →
-    ( Id (comp-Semi-Group H G H f g) (id-hom-Semi-Group H)) ×
-    ( Id (comp-Semi-Group G H G g f) (id-hom-Semi-Group G)))
+    ( Id (comp-hom-Semi-Group H G H f g) (id-hom-Semi-Group H)) ×
+    ( Id (comp-hom-Semi-Group G H G g f) (id-hom-Semi-Group G)))
 
 inv-is-iso-hom-Semi-Group :
   { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2) →
@@ -851,16 +935,16 @@ abstract
       ( λ h →
         is-prop-prod
           ( is-set-hom-Semi-Group H H
-            ( comp-Semi-Group H G H f h)
+            ( comp-hom-Semi-Group H G H f h)
             ( id-hom-Semi-Group H))
           ( is-set-hom-Semi-Group G G
-            ( comp-Semi-Group G H G h f)
+            ( comp-hom-Semi-Group G H G h f)
             ( id-hom-Semi-Group G)))
-      ( ( inv (left-unit-law-Semi-Group H G g)) ∙
-        ( ( inv (ap (λ h → comp-Semi-Group H G G h g) isretr')) ∙
-          ( ( associative-Semi-Group H G H G g' f g) ∙
-            ( ( ap (comp-Semi-Group H H G g') issec) ∙
-              ( right-unit-law-Semi-Group H G g')))))
+      ( ( inv (left-unit-law-hom-Semi-Group H G g)) ∙
+        ( ( inv (ap (λ h → comp-hom-Semi-Group H G G h g) isretr')) ∙
+          ( ( associative-hom-Semi-Group H G H G g' f g) ∙
+            ( ( ap (comp-hom-Semi-Group H H G g') issec) ∙
+              ( right-unit-law-hom-Semi-Group H G g')))))
 
 abstract
   is-prop-is-iso-hom-Semi-Group :
@@ -889,33 +973,55 @@ abstract
             ( ap
               ( μ-H (f (map-inv-is-equiv is-equiv-f x)))
               ( inv (issec-map-inv-is-equiv is-equiv-f y))))) ∙
-        ( inv (μ-f (map-inv-is-equiv is-equiv-f x) (map-inv-is-equiv is-equiv-f y))))
+        ( inv
+          ( μ-f
+            ( map-inv-is-equiv is-equiv-f x)
+            ( map-inv-is-equiv is-equiv-f y))))
 
 abstract
   is-iso-is-equiv-hom-Semi-Group :
     { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2) →
     ( f : hom-Semi-Group G H) (is-equiv-f : is-equiv (pr1 f)) →
     is-iso-hom-Semi-Group G H f
-  is-iso-is-equiv-hom-Semi-Group
-    ( pair (pair G is-set-G) (pair μ-G assoc-G))
-    ( pair (pair H is-set-H) (pair μ-H assoc-H))
-    ( pair f μ-f) is-equiv-f =
-    pair
-      ( pair
-        ( map-inv-is-equiv is-equiv-f)
-        ( preserves-mul-map-inv-is-equiv-Semi-Group
-          ( pair (pair G is-set-G) (pair μ-G assoc-G))
-          ( pair (pair H is-set-H) (pair μ-H assoc-H))
-          ( pair f μ-f) is-equiv-f))
-      ( pair
-        ( eq-htpy-hom-Semi-Group
-          ( pair (pair H is-set-H) (pair μ-H assoc-H))
-          ( pair (pair H is-set-H) (pair μ-H assoc-H))
-          ( issec-map-inv-is-equiv is-equiv-f))
-        ( eq-htpy-hom-Semi-Group
-          ( pair (pair G is-set-G) (pair μ-G assoc-G))
-          ( pair (pair G is-set-G) (pair μ-G assoc-G))
-          ( isretr-map-inv-is-equiv is-equiv-f)))
+  pr1
+    ( pr1
+      ( is-iso-is-equiv-hom-Semi-Group
+        ( pair (pair G is-set-G) (pair μ-G assoc-G))
+        ( pair (pair H is-set-H) (pair μ-H assoc-H))
+        ( pair f μ-f) is-equiv-f)) =
+    map-inv-is-equiv is-equiv-f
+  pr2
+    ( pr1
+      ( is-iso-is-equiv-hom-Semi-Group
+        ( pair (pair G is-set-G) (pair μ-G assoc-G))
+        ( pair (pair H is-set-H) (pair μ-H assoc-H))
+        ( pair f μ-f) is-equiv-f)) =
+    preserves-mul-map-inv-is-equiv-Semi-Group
+      ( pair (pair G is-set-G) (pair μ-G assoc-G))
+      ( pair (pair H is-set-H) (pair μ-H assoc-H))
+      ( pair f μ-f)
+      ( is-equiv-f)
+  pr1
+    ( pr2
+      ( is-iso-is-equiv-hom-Semi-Group
+        ( pair (pair G is-set-G) (pair μ-G assoc-G))
+        ( pair (pair H is-set-H) (pair μ-H assoc-H))
+        ( pair f μ-f) is-equiv-f)) =
+    eq-htpy-hom-Semi-Group
+      ( pair (pair H is-set-H) (pair μ-H assoc-H))
+      ( pair (pair H is-set-H) (pair μ-H assoc-H))
+      ( issec-map-inv-is-equiv is-equiv-f)
+  pr2
+    ( pr2
+      ( is-iso-is-equiv-hom-Semi-Group
+        ( pair (pair G is-set-G) (pair μ-G assoc-G))
+        ( pair (pair H is-set-H) (pair μ-H assoc-H))
+        ( pair f μ-f)
+        ( is-equiv-f))) =
+    eq-htpy-hom-Semi-Group
+      ( pair (pair G is-set-G) (pair μ-G assoc-G))
+      ( pair (pair G is-set-G) (pair μ-G assoc-G))
+      ( isretr-map-inv-is-equiv is-equiv-f)         
 
 abstract
   is-equiv-hom-is-iso-hom-Semi-Group :
@@ -984,8 +1090,17 @@ center-total-preserves-mul-id :
   { l1 : Level} (G : Semi-Group l1) →
   Σ ( has-associative-mul (type-Semi-Group G))
     ( λ μ → preserves-mul-Semi-Group G (pair (pr1 G) μ) id)
-center-total-preserves-mul-id (pair (pair G is-set-G) (pair μ-G assoc-G)) =
-  pair (pair μ-G assoc-G) (λ x y → refl)
+pr1
+  ( pr1
+    ( center-total-preserves-mul-id
+      ( pair (pair G is-set-G) (pair μ-G assoc-G)))) = μ-G
+pr2
+  ( pr1
+    ( center-total-preserves-mul-id
+      ( pair (pair G is-set-G) (pair μ-G assoc-G)))) = assoc-G
+pr2
+  ( center-total-preserves-mul-id
+    ( pair (pair G is-set-G) (pair μ-G assoc-G))) x y = refl
 
 contraction-total-preserves-mul-id :
   { l1 : Level} (G : Semi-Group l1) →
@@ -1013,10 +1128,8 @@ is-contr-total-preserves-mul-id :
   is-contr
     ( Σ ( has-associative-mul (type-Semi-Group G))
         ( λ μ → preserves-mul-Semi-Group G (pair (pr1 G) μ) id))
-is-contr-total-preserves-mul-id G =
-  pair
-    ( center-total-preserves-mul-id G)
-    ( contraction-total-preserves-mul-id G)
+pr1 (is-contr-total-preserves-mul-id G) = center-total-preserves-mul-id G
+pr2 (is-contr-total-preserves-mul-id G) = contraction-total-preserves-mul-id G
 
 is-contr-total-equiv-Semi-Group :
   { l1 : Level} (G : Semi-Group l1) →
@@ -1044,14 +1157,12 @@ is-contr-total-iso-Semi-Group {l1} G =
 
 iso-id-Semi-Group :
   { l1 : Level} (G : Semi-Group l1) → iso-Semi-Group G G
-iso-id-Semi-Group G =
-  pair
-    ( id-hom-Semi-Group G)
-    ( pair
-      ( id-hom-Semi-Group G)
-      ( pair
-        ( left-unit-law-Semi-Group G G (id-hom-Semi-Group G))
-        ( right-unit-law-Semi-Group G G (id-hom-Semi-Group G))))
+pr1 (iso-id-Semi-Group G) = id-hom-Semi-Group G
+pr1 (pr2 (iso-id-Semi-Group G)) = id-hom-Semi-Group G
+pr1 (pr2 (pr2 (iso-id-Semi-Group G))) =
+  left-unit-law-hom-Semi-Group G G (id-hom-Semi-Group G)
+pr2 (pr2 (pr2 (iso-id-Semi-Group G))) =
+  right-unit-law-hom-Semi-Group G G (id-hom-Semi-Group G)
 
 iso-eq-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → Id G H → iso-Semi-Group G H
@@ -1067,8 +1178,8 @@ is-equiv-iso-eq-Semi-Group G =
 
 equiv-iso-eq-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → Id G H ≃ iso-Semi-Group G H
-equiv-iso-eq-Semi-Group G H =
-  pair (iso-eq-Semi-Group G H) (is-equiv-iso-eq-Semi-Group G H)
+pr1 (equiv-iso-eq-Semi-Group G H) = iso-eq-Semi-Group G H
+pr2 (equiv-iso-eq-Semi-Group G H) = is-equiv-iso-eq-Semi-Group G H
 
 eq-iso-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → iso-Semi-Group G H → Id G H
@@ -1116,13 +1227,13 @@ inv-hom-iso-Group G H f =
     ( hom-iso-Group G H f)
     ( is-iso-hom-iso-Group G H f)
 
-iso-id-Group :
+iso-id-hom-Group :
   { l1 : Level} (G : Group l1) → iso-Group G G
-iso-id-Group G = iso-id-Semi-Group (semi-group-Group G)
+iso-id-hom-Group G = iso-id-Semi-Group (semi-group-Group G)
 
 iso-eq-Group :
   { l1 : Level} (G H : Group l1) → Id G H → iso-Group G H
-iso-eq-Group G .G refl = iso-id-Group G
+iso-eq-Group G .G refl = iso-id-hom-Group G
 
 abstract
   equiv-iso-eq-Group' :
@@ -1146,7 +1257,7 @@ is-equiv-iso-eq-Group :
   { l1 : Level} (G H : Group l1) → is-equiv (iso-eq-Group G H)
 is-equiv-iso-eq-Group G =
   fundamental-theorem-id G
-    ( iso-id-Group G)
+    ( iso-id-hom-Group G)
     ( is-contr-total-iso-Group G)
     ( iso-eq-Group G)
 
@@ -1289,23 +1400,30 @@ preserves-unit G H f =
   Id (map-hom-Group G H f (unit-Group G)) (unit-Group H)
 
 abstract
-  preserves-unit-group-hom :
+  preserves-unit-hom-Group :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
     ( f : hom-Group G H) → preserves-unit G H f
-  preserves-unit-group-hom
-    ( pair ( pair (pair G is-set-G) (pair μ-G assoc-G))
-           ( pair ( pair e-G (pair left-unit-G right-unit-G))
-                  ( pair i-G (pair left-inv-G right-inv-G))))
-    ( pair ( pair (pair H is-set-H) (pair μ-H assoc-H))
-           ( pair ( pair e-H (pair left-unit-H right-unit-H))
-                  ( pair i-H (pair left-inv-H right-inv-H))))
-    ( pair f μ-f) =
-    ( inv (left-unit-H (f e-G))) ∙
-    ( ( ap (λ x → μ-H x (f e-G)) (inv (left-inv-H (f e-G)))) ∙
-      ( ( assoc-H (i-H (f e-G)) (f e-G) (f e-G)) ∙
-        ( ( ap (μ-H (i-H (f e-G))) (inv (μ-f e-G e-G))) ∙
-          ( ( ap (λ x → μ-H (i-H (f e-G)) (f x)) (left-unit-G e-G)) ∙
-            ( left-inv-H (f e-G))))))
+  preserves-unit-hom-Group G H f =
+    ( inv (left-unit-law-Group H (map-hom-Group G H f (unit-Group G)))) ∙
+    ( ( ap ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
+           ( inv
+             ( left-inverse-law-Group H
+               ( map-hom-Group G H f (unit-Group G))))) ∙
+      ( ( is-associative-mul-Group H
+          ( inv-Group H (map-hom-Group G H f (unit-Group G)))
+          ( map-hom-Group G H f (unit-Group G))
+          ( map-hom-Group G H f (unit-Group G))) ∙
+        ( ( ap
+            ( mul-Group H (inv-Group H (map-hom-Group G H f (unit-Group G))))
+            ( inv
+              ( preserves-mul-hom-Group G H f (unit-Group G) (unit-Group G)))) ∙
+          ( ( ap
+              ( λ x →
+                mul-Group H
+                  ( inv-Group H (map-hom-Group G H f (unit-Group G)))
+                  ( map-hom-Group G H f x))
+              ( left-unit-law-Group G (unit-Group G))) ∙
+            ( left-inverse-law-Group H (map-hom-Group G H f (unit-Group G)))))))
 
 {- We show that group homomorphisms preserve inverses. -}
 
@@ -1318,11 +1436,11 @@ preserves-inverses G H f =
      ( inv-Group H (map-hom-Group G H f x))
 
 abstract
-  preserves-inverses-group-hom' :
+  preserves-inverses-hom-Group' :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
     ( f : hom-Group G H) →
     preserves-unit G H f → preserves-inverses G H f
-  preserves-inverses-group-hom'
+  preserves-inverses-hom-Group'
     ( pair ( pair (pair G is-set-G) (pair μ-G assoc-G))
            ( pair ( pair e-G (pair left-unit-G right-unit-G))
                   ( pair i-G (pair left-inv-G right-inv-G))))
@@ -1341,11 +1459,11 @@ abstract
               ( left-unit-H (i-H (f x))))))))
 
 abstract
-  preserves-inverses-group-hom :
+  preserves-inverses-hom-Group :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
     ( f : hom-Group G H) → preserves-inverses G H f
-  preserves-inverses-group-hom G H f =
-    preserves-inverses-group-hom' G H f (preserves-unit-group-hom G H f)
+  preserves-inverses-hom-Group G H f =
+    preserves-inverses-hom-Group' G H f (preserves-unit-hom-Group G H f)
 
 hom-Group' :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) → UU (l1 ⊔ l2)
@@ -1353,14 +1471,14 @@ hom-Group' G H =
   Σ ( hom-Group G H) (λ f →
     ( preserves-unit G H f) × (preserves-inverses G H f))
 
-preserves-all-hom-Group :
+preserves-group-structure-hom-Group :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
   hom-Group G H → hom-Group' G H
-preserves-all-hom-Group G H f =
-  pair f
-    ( pair
-      ( preserves-unit-group-hom G H f)
-      ( preserves-inverses-group-hom G H f))
+pr1 (preserves-group-structure-hom-Group G H f) = f
+pr1 (pr2 (preserves-group-structure-hom-Group G H f)) =
+  preserves-unit-hom-Group G H f
+pr2 (pr2 (preserves-group-structure-hom-Group G H f)) =
+  preserves-inverses-hom-Group G H f
 
 --------------------------------------------------------------------------------
 
