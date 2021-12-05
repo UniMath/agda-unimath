@@ -130,16 +130,16 @@ htpy-hom-Ab :
   ( f g : hom-Ab A B) → UU (l1 ⊔ l2)
 htpy-hom-Ab A B f g = htpy-hom-Group (group-Ab A) (group-Ab B) f g
 
-reflexive-htpy-hom-Ab :
+refl-htpy-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
   ( f : hom-Ab A B) → htpy-hom-Ab A B f f
-reflexive-htpy-hom-Ab A B f =
-  reflexive-htpy-hom-Group (group-Ab A) (group-Ab B) f
+refl-htpy-hom-Ab A B f =
+  refl-htpy-hom-Group (group-Ab A) (group-Ab B) f
 
-htpy-hom-Ab-eq :
+htpy-eq-hom-Ab :
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
   (f g : hom-Ab A B) → Id f g → htpy-hom-Ab A B f g
-htpy-hom-Ab-eq A B f g = htpy-hom-Group-eq (group-Ab A) (group-Ab B) f g
+htpy-eq-hom-Ab A B f g = htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
 abstract
   is-contr-total-htpy-hom-Ab :
@@ -150,11 +150,11 @@ abstract
     is-contr-total-htpy-hom-Group (group-Ab A) (group-Ab B) f
 
 abstract
-  is-equiv-htpy-hom-Ab-eq :
+  is-equiv-htpy-eq-hom-Ab :
     { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-    ( f g : hom-Ab A B) → is-equiv (htpy-hom-Ab-eq A B f g)
-  is-equiv-htpy-hom-Ab-eq A B f g =
-    is-equiv-htpy-hom-Group-eq (group-Ab A) (group-Ab B) f g
+    ( f g : hom-Ab A B) → is-equiv (htpy-eq-hom-Ab A B f g)
+  is-equiv-htpy-eq-hom-Ab A B f g =
+    is-equiv-htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
 eq-htpy-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
@@ -236,7 +236,7 @@ is-sec-map-inv-is-iso-hom-Ab :
   ( (map-hom-Ab A B f) ∘ (map-hom-Ab B A (inv-is-iso-hom-Ab A B f is-iso-f))) ~
   id
 is-sec-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  htpy-hom-Ab-eq B B
+  htpy-eq-hom-Ab B B
     ( comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f))
     ( id-hom-Ab B)
     ( is-sec-inv-is-iso-hom-Ab A B f is-iso-f)
@@ -252,7 +252,7 @@ is-retr-map-inv-is-iso-hom-Ab :
   ( is-iso-f : is-iso-hom-Ab A B f) →
   ( (map-inv-is-iso-hom-Ab A B f is-iso-f) ∘ (map-hom-Ab A B f)) ~ id
 is-retr-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  htpy-hom-Ab-eq A A
+  htpy-eq-hom-Ab A A
     ( comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f)
     ( id-hom-Ab A)
     ( is-retr-inv-is-iso-hom-Ab A B f is-iso-f)
