@@ -524,6 +524,49 @@ eq-equiv-subuniverse :
 eq-equiv-subuniverse P {s} {t} =
   map-inv-is-equiv (is-equiv-equiv-eq-subuniverse P s t)
 
+-- Bureaucracy
+
+module _
+  {l : Level} (X : UU-Set l)
+  where
+
+  equiv-eq-Set : (Y : UU-Set l) → Id X Y → type-equiv-Set X Y
+  equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
+  
+  abstract
+    is-contr-total-equiv-Set : is-contr (Σ (UU-Set l) (type-equiv-Set X))
+    is-contr-total-equiv-Set =
+      is-contr-total-equiv-subuniverse is-set-Prop X
+
+  abstract
+    is-equiv-equiv-eq-Set : (Y : UU-Set l) → is-equiv (equiv-eq-Set Y)
+    is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
+
+  eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → Id X Y
+  eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
+
+module _
+  {l : Level} (X : UU-1-Type l)
+  where
+
+  type-equiv-1-Type : {l2 : Level} (Y : UU-1-Type l2) → UU (l ⊔ l2)
+  type-equiv-1-Type Y = type-1-Type X ≃ type-1-Type Y
+
+  equiv-eq-1-Type : (Y : UU-1-Type l) → Id X Y → type-equiv-1-Type Y
+  equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
+  
+  abstract
+    is-contr-total-equiv-1-Type : is-contr (Σ (UU-1-Type l) type-equiv-1-Type)
+    is-contr-total-equiv-1-Type =
+      is-contr-total-equiv-subuniverse is-1-type-Prop X
+
+  abstract
+    is-equiv-equiv-eq-1-Type : (Y : UU-1-Type l) → is-equiv (equiv-eq-1-Type Y)
+    is-equiv-equiv-eq-1-Type = is-equiv-equiv-eq-subuniverse is-1-type-Prop X
+
+  eq-equiv-1-Type : (Y : UU-1-Type l) → type-equiv-1-Type Y → Id X Y
+  eq-equiv-1-Type Y = eq-equiv-subuniverse is-1-type-Prop
+
 -- Connected components of the universe
 
 component-UU-Level :
