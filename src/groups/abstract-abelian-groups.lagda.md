@@ -173,13 +173,13 @@ preserves-add-id A = preserves-mul-id (semi-group-Ab A)
 
 id-hom-Ab :
   { l1 : Level} (A : Ab l1) → hom-Ab A A
-id-hom-Ab A = id-Group (group-Ab A)
+id-hom-Ab A = id-hom-Group (group-Ab A)
 
 comp-hom-Ab :
   { l1 l2 l3 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) →
   ( hom-Ab B C) → (hom-Ab A B) → (hom-Ab A C)
 comp-hom-Ab A B C =
-  comp-Group (group-Ab A) (group-Ab B) (group-Ab C)
+  comp-hom-Group (group-Ab A) (group-Ab B) (group-Ab C)
 
 is-associative-comp-hom-Ab :
   { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
@@ -187,7 +187,7 @@ is-associative-comp-hom-Ab :
   Id (comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
      (comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
 is-associative-comp-hom-Ab A B C D =
-  associative-Semi-Group
+  associative-hom-Semi-Group
     ( semi-group-Ab A)
     ( semi-group-Ab B)
     ( semi-group-Ab C)
@@ -197,13 +197,13 @@ left-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   ( f : hom-Ab A B) → Id (comp-hom-Ab A B B (id-hom-Ab B) f) f
 left-unit-law-comp-hom-Ab A B =
-  left-unit-law-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  left-unit-law-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
 
 right-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   ( f : hom-Ab A B) → Id (comp-hom-Ab A A B f (id-hom-Ab A)) f
 right-unit-law-comp-hom-Ab A B =
-  right-unit-law-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  right-unit-law-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
 
 {- Isomorphisms of abelian groups -}
 
@@ -287,7 +287,7 @@ inv-hom-iso-Ab A B f =
 
 id-iso-Ab :
   {l1 : Level} (A : Ab l1) → iso-Ab A A
-id-iso-Ab A = iso-id-Group (group-Ab A)
+id-iso-Ab A = iso-id-hom-Group (group-Ab A)
 
 iso-eq-Ab :
   { l1 : Level} (A B : Ab l1) → Id A B → iso-Ab A B
