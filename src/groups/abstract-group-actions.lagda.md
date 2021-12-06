@@ -95,6 +95,14 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
+  hom-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
+  hom-Abstract-Group-Action =
+    Σ ( type-Set (pr1 X) → type-Set (pr1 Y))
+      ( λ f →
+        ( g : type-Group G) →
+        ( f ∘ mul-Abstract-Group-Action G X g) ~
+        ( mul-Abstract-Group-Action G Y g ∘ f))
+
   equiv-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
   equiv-Abstract-Group-Action =
     Σ ( type-Set (pr1 X) ≃ type-Set (pr1 Y))
@@ -104,6 +112,10 @@ module _
           ( e ∘e equiv-mul-Abstract-Group-Action G X g)
           ( equiv-mul-Abstract-Group-Action G Y g ∘e e))
 
+  hom-equiv-Abstract-Group-Action :
+    equiv-Abstract-Group-Action → hom-Abstract-Group-Action
+  hom-equiv-Abstract-Group-Action (pair e H) = pair (map-equiv e) H
+
   mere-equiv-Abstract-Group-Action-Prop : UU-Prop (l1 ⊔ l2 ⊔ l3)
   mere-equiv-Abstract-Group-Action-Prop =
     trunc-Prop equiv-Abstract-Group-Action
@@ -111,6 +123,139 @@ module _
   mere-equiv-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
   mere-equiv-Abstract-Group-Action =
     type-Prop mere-equiv-Abstract-Group-Action-Prop
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3) (f : hom-Abstract-Group-Action G X Y)
+  where
+
+  htpy-hom-Abstract-Group-Action :
+    (g : hom-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
+  htpy-hom-Abstract-Group-Action g = pr1 f ~ pr1 g
+
+  refl-htpy-hom-Abstract-Group-Action : htpy-hom-Abstract-Group-Action f
+  refl-htpy-hom-Abstract-Group-Action = refl-htpy
+
+  htpy-eq-hom-Abstract-Group-Action :
+    (g : hom-Abstract-Group-Action G X Y) →
+    Id f g → htpy-hom-Abstract-Group-Action g
+  htpy-eq-hom-Abstract-Group-Action .f refl =
+    refl-htpy-hom-Abstract-Group-Action
+
+  is-contr-total-htpy-hom-Abstract-Group-Action :
+    is-contr
+      ( Σ ( hom-Abstract-Group-Action G X Y)
+          ( htpy-hom-Abstract-Group-Action))
+  is-contr-total-htpy-hom-Abstract-Group-Action =
+    is-contr-total-Eq-substructure
+      ( is-contr-total-htpy (pr1 f))
+      ( λ g →
+        is-prop-Π
+          ( λ x →
+            is-prop-Π
+              ( λ y →
+                is-set-type-Set
+                  ( set-Abstract-Group-Action G Y)
+                  ( g (mul-Abstract-Group-Action G X x y))
+                  ( mul-Abstract-Group-Action G Y x (g y)))))
+      ( pr1 f)
+      ( refl-htpy)
+      ( pr2 f)
+
+  is-equiv-htpy-eq-hom-Abstract-Group-Action :
+    (g : hom-Abstract-Group-Action G X Y) →
+    is-equiv (htpy-eq-hom-Abstract-Group-Action g)
+  is-equiv-htpy-eq-hom-Abstract-Group-Action =
+    fundamental-theorem-id f
+      refl-htpy-hom-Abstract-Group-Action
+      is-contr-total-htpy-hom-Abstract-Group-Action
+      htpy-eq-hom-Abstract-Group-Action
+
+  extensionality-hom-Abstract-Group-Action :
+    (g : hom-Abstract-Group-Action G X Y) →
+    Id f g ≃ htpy-hom-Abstract-Group-Action g
+  pr1 (extensionality-hom-Abstract-Group-Action g) =
+    htpy-eq-hom-Abstract-Group-Action g
+  pr2 (extensionality-hom-Abstract-Group-Action g) =
+    is-equiv-htpy-eq-hom-Abstract-Group-Action g
+
+  eq-htpy-hom-Abstract-Group-Action :
+    (g : hom-Abstract-Group-Action G X Y) →
+    htpy-hom-Abstract-Group-Action g → Id f g
+  eq-htpy-hom-Abstract-Group-Action g =
+    map-inv-is-equiv (is-equiv-htpy-eq-hom-Abstract-Group-Action g)
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3) (e : equiv-Abstract-Group-Action G X Y)
+  where
+  
+  htpy-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
+  htpy-equiv-Abstract-Group-Action f =
+    htpy-hom-Abstract-Group-Action G X Y
+      ( hom-equiv-Abstract-Group-Action G X Y e)
+      ( hom-equiv-Abstract-Group-Action G X Y f)
+
+  refl-htpy-equiv-Abstract-Group-Action : htpy-equiv-Abstract-Group-Action e
+  refl-htpy-equiv-Abstract-Group-Action =
+    refl-htpy-hom-Abstract-Group-Action G X Y
+      ( hom-equiv-Abstract-Group-Action G X Y e)
+
+  htpy-eq-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    Id e f → htpy-equiv-Abstract-Group-Action f
+  htpy-eq-equiv-Abstract-Group-Action .e refl =
+    refl-htpy-equiv-Abstract-Group-Action 
+
+  is-contr-total-htpy-equiv-Abstract-Group-Action :
+    is-contr
+      ( Σ ( equiv-Abstract-Group-Action G X Y)
+          ( htpy-equiv-Abstract-Group-Action))
+  is-contr-total-htpy-equiv-Abstract-Group-Action =
+    is-contr-equiv
+      ( Σ ( Σ ( hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
+          ( λ f →
+            htpy-hom-Abstract-Group-Action G X Y
+              ( hom-equiv-Abstract-Group-Action G X Y e)
+              ( pr1 f)))
+      ( equiv-Σ
+        ( λ f →
+          htpy-hom-Abstract-Group-Action G X Y
+            ( hom-equiv-Abstract-Group-Action G X Y e)
+            ( pr1 f))
+        ( equiv-right-swap-Σ)
+        ( λ { (pair (pair f E) H) → equiv-id}))
+      ( is-contr-total-Eq-substructure
+        ( is-contr-total-htpy-hom-Abstract-Group-Action G X Y
+          ( hom-equiv-Abstract-Group-Action G X Y e))
+        ( λ f → is-subtype-is-equiv (pr1 f))
+        ( hom-equiv-Abstract-Group-Action G X Y e)
+        ( refl-htpy)
+        ( is-equiv-map-equiv (pr1 e)))
+
+  is-equiv-htpy-eq-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    is-equiv (htpy-eq-equiv-Abstract-Group-Action f)
+  is-equiv-htpy-eq-equiv-Abstract-Group-Action =
+    fundamental-theorem-id e
+      refl-htpy-equiv-Abstract-Group-Action
+      is-contr-total-htpy-equiv-Abstract-Group-Action
+      htpy-eq-equiv-Abstract-Group-Action
+
+  extensionality-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    Id e f ≃ htpy-equiv-Abstract-Group-Action f
+  pr1 (extensionality-equiv-Abstract-Group-Action f) =
+    htpy-eq-equiv-Abstract-Group-Action f
+  pr2 (extensionality-equiv-Abstract-Group-Action f) =
+    is-equiv-htpy-eq-equiv-Abstract-Group-Action f
+
+  eq-htpy-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    htpy-equiv-Abstract-Group-Action f → Id e f
+  eq-htpy-equiv-Abstract-Group-Action f =
+    map-inv-is-equiv (is-equiv-htpy-eq-equiv-Abstract-Group-Action f)
 
 module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
