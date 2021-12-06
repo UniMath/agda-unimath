@@ -297,7 +297,7 @@ abstract
   equiv-iso-eq-Ab' :
     {l1 : Level} (A B : Ab l1) → Id A B ≃ iso-Ab A B
   equiv-iso-eq-Ab' A B =
-    ( equiv-iso-eq-Group' (group-Ab A) (group-Ab B)) ∘e
+    ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
     ( equiv-ap-pr1 is-prop-is-abelian-Group {A} {B})
 
 abstract
