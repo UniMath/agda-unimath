@@ -51,7 +51,7 @@ open import foundations.spaces
 ```agda
 open import the-circle.the-circle public
 open import the-circle.integers public
-open import the-circle.torsors public
+open import the-circle.infinite-cyclic-types public
 ```
 
 ## Chapter 4 : Groups 
@@ -60,6 +60,7 @@ open import the-circle.torsors public
 open import groups.abstract-groups public
 open import groups.abstract-abelian-groups public
 open import groups.abstract-group-actions public
+open import groups.abstract-group-torsors public
 open import groups.higher-groups public
 open import groups.concrete-groups public
 open import groups.examples-higher-groups public

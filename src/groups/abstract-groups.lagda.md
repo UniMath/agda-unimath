@@ -622,15 +622,15 @@ htpy-hom-Semi-Group :
 htpy-hom-Semi-Group G H f g =
   (map-hom-Semi-Group G H f) ~ (map-hom-Semi-Group G H g)
 
-reflexive-htpy-hom-Semi-Group :
+refl-htpy-hom-Semi-Group :
   { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2) →
   ( f : hom-Semi-Group G H) → htpy-hom-Semi-Group G H f f
-reflexive-htpy-hom-Semi-Group G H f = refl-htpy
+refl-htpy-hom-Semi-Group G H f = refl-htpy
 
-htpy-hom-Semi-Group-eq :
+htpy-eq-hom-Semi-Group :
   { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2) →
   ( f g : hom-Semi-Group G H) → Id f g → htpy-hom-Semi-Group G H f g
-htpy-hom-Semi-Group-eq G H f .f refl = reflexive-htpy-hom-Semi-Group G H f 
+htpy-eq-hom-Semi-Group G H f .f refl = refl-htpy-hom-Semi-Group G H f 
 
 abstract
   is-contr-total-htpy-hom-Semi-Group :
@@ -646,20 +646,20 @@ abstract
       ( preserves-mul-hom-Semi-Group G H f)
 
 abstract
-  is-equiv-htpy-hom-Semi-Group-eq :
+  is-equiv-htpy-eq-hom-Semi-Group :
     { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2) →
-    ( f g : hom-Semi-Group G H) → is-equiv (htpy-hom-Semi-Group-eq G H f g)
-  is-equiv-htpy-hom-Semi-Group-eq G H f =
+    ( f g : hom-Semi-Group G H) → is-equiv (htpy-eq-hom-Semi-Group G H f g)
+  is-equiv-htpy-eq-hom-Semi-Group G H f =
     fundamental-theorem-id f
-      ( reflexive-htpy-hom-Semi-Group G H f)
+      ( refl-htpy-hom-Semi-Group G H f)
       ( is-contr-total-htpy-hom-Semi-Group G H f)
-      ( htpy-hom-Semi-Group-eq G H f)
+      ( htpy-eq-hom-Semi-Group G H f)
 
 eq-htpy-hom-Semi-Group :
   { l1 l2 : Level} (G : Semi-Group l1) (H : Semi-Group l2) →
   { f g : hom-Semi-Group G H} → htpy-hom-Semi-Group G H f g → Id f g
 eq-htpy-hom-Semi-Group G H {f} {g} =
-  map-inv-is-equiv (is-equiv-htpy-hom-Semi-Group-eq G H f g)
+  map-inv-is-equiv (is-equiv-htpy-eq-hom-Semi-Group G H f g)
 
 --------------------------------------------------------------------------------
 
@@ -671,7 +671,7 @@ is-set-hom-Semi-Group :
   is-set (hom-Semi-Group G H)
 is-set-hom-Semi-Group G H (pair f μ-f) (pair g μ-g) =
   is-prop-is-equiv
-    ( is-equiv-htpy-hom-Semi-Group-eq G H (pair f μ-f) (pair g μ-g))
+    ( is-equiv-htpy-eq-hom-Semi-Group G H (pair f μ-f) (pair g μ-g))
     ( is-prop-Π (λ x → is-set-type-Semi-Group H (f x) (g x)))
 
 --------------------------------------------------------------------------------
@@ -746,19 +746,19 @@ htpy-hom-Group G H =
     ( semi-group-Group G)
     ( semi-group-Group H)
 
-reflexive-htpy-hom-Group :
+refl-htpy-hom-Group :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
   ( f : hom-Group G H) → htpy-hom-Group G H f f
-reflexive-htpy-hom-Group G H =
-  reflexive-htpy-hom-Semi-Group
+refl-htpy-hom-Group G H =
+  refl-htpy-hom-Semi-Group
     ( semi-group-Group G)
     ( semi-group-Group H)
 
-htpy-hom-Group-eq :
+htpy-eq-hom-Group :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
   ( f g : hom-Group G H) → Id f g → htpy-hom-Group G H f g
-htpy-hom-Group-eq G H =
-  htpy-hom-Semi-Group-eq
+htpy-eq-hom-Group G H =
+  htpy-eq-hom-Semi-Group
     ( semi-group-Group G)
     ( semi-group-Group H)
 
@@ -773,13 +773,19 @@ abstract
       ( semi-group-Group H)
 
 abstract
-  is-equiv-htpy-hom-Group-eq :
+  is-equiv-htpy-eq-hom-Group :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-    ( f g : hom-Group G H) → is-equiv (htpy-hom-Group-eq G H f g)
-  is-equiv-htpy-hom-Group-eq G H =
-    is-equiv-htpy-hom-Semi-Group-eq
+    ( f g : hom-Group G H) → is-equiv (htpy-eq-hom-Group G H f g)
+  is-equiv-htpy-eq-hom-Group G H =
+    is-equiv-htpy-eq-hom-Semi-Group
       ( semi-group-Group G)
       ( semi-group-Group H)
+
+extensionality-hom-Group :
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f g : hom-Group G H) →
+  Id f g ≃ htpy-hom-Group G H f g
+pr1 (extensionality-hom-Group G H f g) = htpy-eq-hom-Group G H f g
+pr2 (extensionality-hom-Group G H f g) = is-equiv-htpy-eq-hom-Group G H f g
 
 eq-htpy-hom-Group :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
@@ -1176,10 +1182,10 @@ is-equiv-iso-eq-Semi-Group G =
     ( is-contr-total-iso-Semi-Group G)
     ( iso-eq-Semi-Group G)
 
-equiv-iso-eq-Semi-Group :
+extensionality-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → Id G H ≃ iso-Semi-Group G H
-pr1 (equiv-iso-eq-Semi-Group G H) = iso-eq-Semi-Group G H
-pr2 (equiv-iso-eq-Semi-Group G H) = is-equiv-iso-eq-Semi-Group G H
+pr1 (extensionality-Semi-Group G H) = iso-eq-Semi-Group G H
+pr2 (extensionality-Semi-Group G H) = is-equiv-iso-eq-Semi-Group G H
 
 eq-iso-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → iso-Semi-Group G H → Id G H
@@ -1236,10 +1242,10 @@ iso-eq-Group :
 iso-eq-Group G .G refl = iso-id-hom-Group G
 
 abstract
-  equiv-iso-eq-Group' :
+  extensionality-Group' :
     { l1 : Level} (G H : Group l1) → Id G H ≃ iso-Group G H
-  equiv-iso-eq-Group' G H =
-    ( equiv-iso-eq-Semi-Group
+  extensionality-Group' G H =
+    ( extensionality-Semi-Group
       ( semi-group-Group G)
       ( semi-group-Group H)) ∘e
     ( equiv-ap-pr1 is-prop-is-group {s = G} {t = H})
@@ -1250,7 +1256,7 @@ abstract
   is-contr-total-iso-Group {l1} G =
     is-contr-equiv'
       ( Σ (Group l1) (Id G))
-      ( equiv-tot (λ H → equiv-iso-eq-Group' G H))
+      ( equiv-tot (λ H → extensionality-Group' G H))
       ( is-contr-total-path G)
 
 is-equiv-iso-eq-Group :

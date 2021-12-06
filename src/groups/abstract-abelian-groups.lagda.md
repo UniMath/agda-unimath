@@ -130,16 +130,16 @@ htpy-hom-Ab :
   ( f g : hom-Ab A B) → UU (l1 ⊔ l2)
 htpy-hom-Ab A B f g = htpy-hom-Group (group-Ab A) (group-Ab B) f g
 
-reflexive-htpy-hom-Ab :
+refl-htpy-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
   ( f : hom-Ab A B) → htpy-hom-Ab A B f f
-reflexive-htpy-hom-Ab A B f =
-  reflexive-htpy-hom-Group (group-Ab A) (group-Ab B) f
+refl-htpy-hom-Ab A B f =
+  refl-htpy-hom-Group (group-Ab A) (group-Ab B) f
 
-htpy-hom-Ab-eq :
+htpy-eq-hom-Ab :
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
   (f g : hom-Ab A B) → Id f g → htpy-hom-Ab A B f g
-htpy-hom-Ab-eq A B f g = htpy-hom-Group-eq (group-Ab A) (group-Ab B) f g
+htpy-eq-hom-Ab A B f g = htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
 abstract
   is-contr-total-htpy-hom-Ab :
@@ -150,11 +150,11 @@ abstract
     is-contr-total-htpy-hom-Group (group-Ab A) (group-Ab B) f
 
 abstract
-  is-equiv-htpy-hom-Ab-eq :
+  is-equiv-htpy-eq-hom-Ab :
     { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-    ( f g : hom-Ab A B) → is-equiv (htpy-hom-Ab-eq A B f g)
-  is-equiv-htpy-hom-Ab-eq A B f g =
-    is-equiv-htpy-hom-Group-eq (group-Ab A) (group-Ab B) f g
+    ( f g : hom-Ab A B) → is-equiv (htpy-eq-hom-Ab A B f g)
+  is-equiv-htpy-eq-hom-Ab A B f g =
+    is-equiv-htpy-eq-hom-Group (group-Ab A) (group-Ab B) f g
 
 eq-htpy-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
@@ -173,13 +173,13 @@ preserves-add-id A = preserves-mul-id (semi-group-Ab A)
 
 id-hom-Ab :
   { l1 : Level} (A : Ab l1) → hom-Ab A A
-id-hom-Ab A = id-Group (group-Ab A)
+id-hom-Ab A = id-hom-Group (group-Ab A)
 
 comp-hom-Ab :
   { l1 l2 l3 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) →
   ( hom-Ab B C) → (hom-Ab A B) → (hom-Ab A C)
 comp-hom-Ab A B C =
-  comp-Group (group-Ab A) (group-Ab B) (group-Ab C)
+  comp-hom-Group (group-Ab A) (group-Ab B) (group-Ab C)
 
 is-associative-comp-hom-Ab :
   { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
@@ -187,7 +187,7 @@ is-associative-comp-hom-Ab :
   Id (comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
      (comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
 is-associative-comp-hom-Ab A B C D =
-  associative-Semi-Group
+  associative-hom-Semi-Group
     ( semi-group-Ab A)
     ( semi-group-Ab B)
     ( semi-group-Ab C)
@@ -197,13 +197,13 @@ left-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   ( f : hom-Ab A B) → Id (comp-hom-Ab A B B (id-hom-Ab B) f) f
 left-unit-law-comp-hom-Ab A B =
-  left-unit-law-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  left-unit-law-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
 
 right-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   ( f : hom-Ab A B) → Id (comp-hom-Ab A A B f (id-hom-Ab A)) f
 right-unit-law-comp-hom-Ab A B =
-  right-unit-law-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  right-unit-law-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
 
 {- Isomorphisms of abelian groups -}
 
@@ -236,7 +236,7 @@ is-sec-map-inv-is-iso-hom-Ab :
   ( (map-hom-Ab A B f) ∘ (map-hom-Ab B A (inv-is-iso-hom-Ab A B f is-iso-f))) ~
   id
 is-sec-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  htpy-hom-Ab-eq B B
+  htpy-eq-hom-Ab B B
     ( comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f))
     ( id-hom-Ab B)
     ( is-sec-inv-is-iso-hom-Ab A B f is-iso-f)
@@ -252,7 +252,7 @@ is-retr-map-inv-is-iso-hom-Ab :
   ( is-iso-f : is-iso-hom-Ab A B f) →
   ( (map-inv-is-iso-hom-Ab A B f is-iso-f) ∘ (map-hom-Ab A B f)) ~ id
 is-retr-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  htpy-hom-Ab-eq A A
+  htpy-eq-hom-Ab A A
     ( comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f)
     ( id-hom-Ab A)
     ( is-retr-inv-is-iso-hom-Ab A B f is-iso-f)
@@ -287,7 +287,7 @@ inv-hom-iso-Ab A B f =
 
 id-iso-Ab :
   {l1 : Level} (A : Ab l1) → iso-Ab A A
-id-iso-Ab A = iso-id-Group (group-Ab A)
+id-iso-Ab A = iso-id-hom-Group (group-Ab A)
 
 iso-eq-Ab :
   { l1 : Level} (A B : Ab l1) → Id A B → iso-Ab A B
