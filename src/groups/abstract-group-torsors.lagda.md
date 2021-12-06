@@ -137,6 +137,56 @@ module _
     is-equiv-equiv-eq-Torsor-Abstract-Group Y
 
 module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Torsor-Abstract-Group G l2)
+  (Y : Torsor-Abstract-Group G l3) (e : equiv-Torsor-Abstract-Group G X Y)
+  where
+
+  htpy-equiv-Torsor-Abstract-Group :
+    equiv-Torsor-Abstract-Group G X Y → UU (l2 ⊔ l3)
+  htpy-equiv-Torsor-Abstract-Group =
+    htpy-equiv-Abstract-Group-Action G
+      ( action-Torsor-Abstract-Group G X)
+      ( action-Torsor-Abstract-Group G Y)
+      ( e)
+
+  refl-htpy-equiv-Torsor-Abstract-Group : htpy-equiv-Torsor-Abstract-Group e
+  refl-htpy-equiv-Torsor-Abstract-Group =
+    refl-htpy-equiv-Abstract-Group-Action G
+      ( action-Torsor-Abstract-Group G X)
+      ( action-Torsor-Abstract-Group G Y)
+      ( e)
+
+  htpy-eq-equiv-Torsor-Abstract-Group :
+    (f : equiv-Torsor-Abstract-Group G X Y) →
+    Id e f → htpy-equiv-Torsor-Abstract-Group f
+  htpy-eq-equiv-Torsor-Abstract-Group .e refl =
+    refl-htpy-equiv-Torsor-Abstract-Group
+
+  is-contr-total-htpy-equiv-Torsor-Abstract-Group :
+    is-contr ( Σ ( equiv-Torsor-Abstract-Group G X Y)
+                 ( htpy-equiv-Torsor-Abstract-Group))
+  is-contr-total-htpy-equiv-Torsor-Abstract-Group =
+    is-contr-total-htpy-equiv-Abstract-Group-Action G
+      ( action-Torsor-Abstract-Group G X)
+      ( action-Torsor-Abstract-Group G Y)
+      ( e)
+
+  is-equiv-htpy-eq-equiv-Torsor-Abstract-Group :
+    (f : equiv-Torsor-Abstract-Group G X Y) →
+    is-equiv (htpy-eq-equiv-Torsor-Abstract-Group f)
+  is-equiv-htpy-eq-equiv-Torsor-Abstract-Group =
+    fundamental-theorem-id e
+      refl-htpy-equiv-Torsor-Abstract-Group
+      is-contr-total-htpy-equiv-Torsor-Abstract-Group
+      htpy-eq-equiv-Torsor-Abstract-Group
+
+  eq-htpy-equiv-Torsor-Abstract-Group :
+    (f : equiv-Torsor-Abstract-Group G X Y) →
+    htpy-equiv-Torsor-Abstract-Group f → Id e f
+  eq-htpy-equiv-Torsor-Abstract-Group f =
+    map-inv-is-equiv (is-equiv-htpy-eq-equiv-Torsor-Abstract-Group f)
+  
+module _
   {l1 l2 l3 l4 : Level} (G : Group l1)
   (X : Torsor-Abstract-Group G l2) (Y : Torsor-Abstract-Group G l3)
   (Z : Torsor-Abstract-Group G l4)
@@ -238,20 +288,16 @@ module _
       Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G)) ~
     ( id)
   isretr-equiv-Eq-Torsor-Abstract-Group e =
-    eq-subtype
-      ( λ f →
-        is-prop-Π
-          ( λ g →
-            is-prop-Π
-              ( λ x →
-                is-set-type-Group G
-                  ( map-equiv f (mul-Group G g x))
-                  ( mul-Group G g (map-equiv f x)))))
-      ( eq-htpy-equiv
-        ( λ g →
-          ( inv (pr2 e g (unit-Group G))) ∙
-          ( ap (map-equiv (pr1 e)) (right-unit-law-Group G g))))
-
+    eq-htpy-equiv-Torsor-Abstract-Group G
+      ( principal-Torsor-Abstract-Group G)
+      ( principal-Torsor-Abstract-Group G)
+      ( equiv-Eq-Torsor-Abstract-Group
+        ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) e))
+      ( e)
+      ( λ g →
+        ( inv (pr2 e g (unit-Group G))) ∙
+        ( ap (map-equiv (pr1 e)) (right-unit-law-Group G g)))
+  
   abstract
     is-equiv-Eq-equiv-Torsor-Abstract-Group :
       (X : Torsor-Abstract-Group G l1) →
