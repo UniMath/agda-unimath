@@ -113,6 +113,44 @@ module _
     type-Prop mere-equiv-Abstract-Group-Action-Prop
 
 module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3)
+  where
+
+  inv-equiv-Abstract-Group-Action :
+    equiv-Abstract-Group-Action G X Y → equiv-Abstract-Group-Action G Y X
+  pr1 (inv-equiv-Abstract-Group-Action (pair e H)) = inv-equiv e
+  pr2 (inv-equiv-Abstract-Group-Action (pair e H)) g =
+    coherence-square-inv-horizontal
+      ( e)
+      ( mul-Abstract-Group-Action G X g)
+      ( mul-Abstract-Group-Action G Y g)
+      ( e)
+      ( H g)
+
+module _
+  {l1 l2 l3 l4 : Level} (G : Group l1)
+  (X : Abstract-Group-Action G l2) (Y : Abstract-Group-Action G l3)
+  (Z : Abstract-Group-Action G l4)
+  where
+
+  comp-equiv-Abstract-Group-Action :
+    equiv-Abstract-Group-Action G Y Z → equiv-Abstract-Group-Action G X Y →
+    equiv-Abstract-Group-Action G X Z
+  pr1 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) = f ∘e e
+  pr2 (comp-equiv-Abstract-Group-Action (pair f K) (pair e H)) g =
+    coherence-square-comp-horizontal
+      ( map-equiv e)
+      ( map-equiv f)
+      ( mul-Abstract-Group-Action G X g)
+      ( mul-Abstract-Group-Action G Y g)
+      ( mul-Abstract-Group-Action G Z g)
+      ( map-equiv e)
+      ( map-equiv f)
+      ( H g)
+      ( K g)
+
+module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
 
