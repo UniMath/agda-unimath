@@ -781,11 +781,11 @@ abstract
       ( semi-group-Group G)
       ( semi-group-Group H)
 
-equiv-htpy-eq-hom-Group :
+extensionality-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f g : hom-Group G H) →
   Id f g ≃ htpy-hom-Group G H f g
-pr1 (equiv-htpy-eq-hom-Group G H f g) = htpy-eq-hom-Group G H f g
-pr2 (equiv-htpy-eq-hom-Group G H f g) = is-equiv-htpy-eq-hom-Group G H f g
+pr1 (extensionality-hom-Group G H f g) = htpy-eq-hom-Group G H f g
+pr2 (extensionality-hom-Group G H f g) = is-equiv-htpy-eq-hom-Group G H f g
 
 eq-htpy-hom-Group :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
@@ -1182,10 +1182,10 @@ is-equiv-iso-eq-Semi-Group G =
     ( is-contr-total-iso-Semi-Group G)
     ( iso-eq-Semi-Group G)
 
-equiv-iso-eq-Semi-Group :
+extensionality-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → Id G H ≃ iso-Semi-Group G H
-pr1 (equiv-iso-eq-Semi-Group G H) = iso-eq-Semi-Group G H
-pr2 (equiv-iso-eq-Semi-Group G H) = is-equiv-iso-eq-Semi-Group G H
+pr1 (extensionality-Semi-Group G H) = iso-eq-Semi-Group G H
+pr2 (extensionality-Semi-Group G H) = is-equiv-iso-eq-Semi-Group G H
 
 eq-iso-Semi-Group :
   { l1 : Level} (G H : Semi-Group l1) → iso-Semi-Group G H → Id G H
@@ -1242,10 +1242,10 @@ iso-eq-Group :
 iso-eq-Group G .G refl = iso-id-hom-Group G
 
 abstract
-  equiv-iso-eq-Group' :
+  extensionality-Group' :
     { l1 : Level} (G H : Group l1) → Id G H ≃ iso-Group G H
-  equiv-iso-eq-Group' G H =
-    ( equiv-iso-eq-Semi-Group
+  extensionality-Group' G H =
+    ( extensionality-Semi-Group
       ( semi-group-Group G)
       ( semi-group-Group H)) ∘e
     ( equiv-ap-pr1 is-prop-is-group {s = G} {t = H})
@@ -1256,7 +1256,7 @@ abstract
   is-contr-total-iso-Group {l1} G =
     is-contr-equiv'
       ( Σ (Group l1) (Id G))
-      ( equiv-tot (λ H → equiv-iso-eq-Group' G H))
+      ( equiv-tot (λ H → extensionality-Group' G H))
       ( is-contr-total-path G)
 
 is-equiv-iso-eq-Group :

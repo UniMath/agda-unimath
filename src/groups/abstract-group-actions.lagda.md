@@ -171,6 +171,14 @@ module _
   eq-equiv-Abstract-Group-Action Y =
     map-inv-is-equiv (is-equiv-equiv-eq-Abstract-Group-Action Y)
 
+  extensionality-Abstract-Group-Action :
+    (Y : Abstract-Group-Action G l2) →
+    Id X Y ≃ equiv-Abstract-Group-Action G X Y
+  pr1 (extensionality-Abstract-Group-Action Y) =
+    equiv-eq-Abstract-Group-Action Y
+  pr2 (extensionality-Abstract-Group-Action Y) =
+    is-equiv-equiv-eq-Abstract-Group-Action Y
+
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
