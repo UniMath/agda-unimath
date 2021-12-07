@@ -225,6 +225,12 @@ module _
       ( action-Torsor-Abstract-Group G Y)
       ( action-Torsor-Abstract-Group G Z)
 
+  comp-equiv-Torsor-Abstract-Group' :
+    equiv-Torsor-Abstract-Group G X Y → equiv-Torsor-Abstract-Group G Y Z →
+    equiv-Torsor-Abstract-Group G X Z
+  comp-equiv-Torsor-Abstract-Group' e f =
+    comp-equiv-Torsor-Abstract-Group f e
+
 module _
   {l1 l2 l3 : Level} (G : Group l1)
   (X : Torsor-Abstract-Group G l2) (Y : Torsor-Abstract-Group G l3)
