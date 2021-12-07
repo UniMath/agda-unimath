@@ -13,7 +13,7 @@ Furstenberg-Group : (l : Level) → UU (lsuc l)
 Furstenberg-Group l =
   Σ ( UU-Set l)
     ( λ X →
-      ( type-Set X) ×
+      ( type-trunc-Prop (type-Set X)) ×
       ( Σ ( type-Set X → type-Set X → type-Set X)
           ( λ μ →
             ( (x y z : type-Set X) → Id (μ (μ x z) (μ y z)) (μ x y)) ×

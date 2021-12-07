@@ -591,7 +591,7 @@ module _
 
   map-Torsor-Abstract-Group :
     hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
-  pr1 (pr1 (map-Torsor-Abstract-Group f X)) = ?
-  pr2 (pr1 (map-Torsor-Abstract-Group f X)) = ?
+  pr1 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
+  pr2 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (map-Torsor-Abstract-Group f X) = {!!}
 ```
