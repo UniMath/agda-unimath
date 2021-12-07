@@ -1012,8 +1012,8 @@ module _
   preserves-mul-equiv-Semi-Group e =
     preserves-mul-equiv (mul-Semi-Group G) (mul-Semi-Group H) e
 
-  equiv-iso-Semi-Group-equiv-Semi-Group : equiv-Semi-Group ≃ iso-Semi-Group
-  equiv-iso-Semi-Group-equiv-Semi-Group =
+  equiv-iso-equiv-Semi-Group : equiv-Semi-Group ≃ iso-Semi-Group
+  equiv-iso-equiv-Semi-Group =
     ( ( equiv-total-subtype
         ( λ f → is-subtype-is-equiv (map-hom-Semi-Group G H f))
         ( is-prop-is-iso-hom-Semi-Group)
@@ -1089,7 +1089,7 @@ module _
   is-contr-total-iso-Semi-Group =
     is-contr-equiv'
       ( Σ (Semi-Group l) (equiv-Semi-Group G))
-      ( equiv-tot (equiv-iso-Semi-Group-equiv-Semi-Group G))
+      ( equiv-tot (equiv-iso-equiv-Semi-Group G))
       ( is-contr-total-equiv-Semi-Group)
 
   iso-id-Semi-Group : iso-Semi-Group G G
@@ -1152,6 +1152,16 @@ module _
     inv-is-iso-hom-Group
       ( hom-iso-Group f)
       ( is-iso-hom-iso-Group f)
+
+  equiv-Group : UU (l1 ⊔ l2)
+  equiv-Group = equiv-Semi-Group (semi-group-Group G) (semi-group-Group H)
+
+  equiv-iso-equiv-Group : equiv-Group ≃ iso-Group
+  equiv-iso-equiv-Group =
+    equiv-iso-equiv-Semi-Group (semi-group-Group G) (semi-group-Group H)
+
+  iso-equiv-Group : equiv-Group → iso-Group
+  iso-equiv-Group = map-equiv equiv-iso-equiv-Group
 
 iso-id-hom-Group :
   { l1 : Level} (G : Group l1) → iso-Group G G

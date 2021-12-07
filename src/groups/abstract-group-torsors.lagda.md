@@ -575,5 +575,13 @@ module _
       ( is-set-type-Group G)
 
   abstract-group-concrete-group-Group :
-    abstract-group-Concrete-Group concrete-group-Group
+    iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
+  abstract-group-concrete-group-Group =
+    iso-equiv-Group
+      ( abstract-group-Concrete-Group concrete-group-Group)
+      ( G)
+      ( pair
+        ( equiv-Eq-equiv-Torsor-Abstract-Group
+          ( principal-Torsor-Abstract-Group G))
+        ( preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group))
 ```
