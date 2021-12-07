@@ -6,7 +6,10 @@ title : Book labels
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module labels where
-open import everything
+open import foundations
+open import the-circle
+open import groups
+open import subgroups
 ```
 
 The following names are taken from the Latex code of the book using the regex `\\label\{((\w|\d|:|-)+)\}`.
