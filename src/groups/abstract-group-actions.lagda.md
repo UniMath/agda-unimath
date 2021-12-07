@@ -67,7 +67,7 @@ module _
   pr1 principal-Abstract-Group-Action = set-Group G
   pr1 (pr2 principal-Abstract-Group-Action) g = equiv-mul-Group G g
   pr2 (pr2 principal-Abstract-Group-Action) g h =
-    eq-htpy-equiv (is-associative-mul-Group G g h)
+    eq-htpy-equiv (assoc-mul-Group G g h)
   
   conjugation-Abstract-Group-Action : Abstract-Group-Action G l1
   pr1 conjugation-Abstract-Group-Action = set-Group G
@@ -76,16 +76,16 @@ module _
     eq-htpy-equiv
       ( λ x →
         ( ap-mul-Group G
-          ( is-associative-mul-Group G g h x)
+          ( assoc-mul-Group G g h x)
           ( distributive-inv-mul-Group G g h)) ∙
         ( ( inv
-            ( is-associative-mul-Group G
+            ( assoc-mul-Group G
               ( mul-Group G g (mul-Group G h x))
               ( inv-Group G h)
               ( inv-Group G g))) ∙
           ( ap
             ( mul-Group' G (inv-Group G g))
-            ( is-associative-mul-Group G g
+            ( assoc-mul-Group G g
               ( mul-Group G h x)
               ( inv-Group G h)))))
 

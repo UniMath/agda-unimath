@@ -62,8 +62,8 @@ module _
   mul-hom-Torsor-Abstract-Group X = pr2 (action-Torsor-Abstract-Group X)
 
   equiv-mul-Torsor-Abstract-Group :
-    {l : Level} (X : Torsor-Abstract-Group l) →
-    type-Group G → (type-Torsor-Abstract-Group X ≃ type-Torsor-Abstract-Group X)
+    {l : Level} (X : Torsor-Abstract-Group l) → type-Group G →
+    (type-Torsor-Abstract-Group X ≃ type-Torsor-Abstract-Group X)
   equiv-mul-Torsor-Abstract-Group X =
     equiv-mul-Abstract-Group-Action G (action-Torsor-Abstract-Group X)
 
@@ -427,7 +427,7 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (equiv-Eq-Torsor-Abstract-Group u) = equiv-mul-Group' G u
-  pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = is-associative-mul-Group G g x u
+  pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = assoc-mul-Group G g x u
 
   issec-equiv-Eq-Torsor-Abstract-Group :
     ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) ∘
@@ -479,6 +479,28 @@ module _
     ( extensionality-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( X))
+
+  preserves-mul-equiv-Eq-Torsor-Abstract-Group :
+    (x y : type-Group G) →
+    Id ( equiv-Eq-Torsor-Abstract-Group (mul-Group G x y))
+       ( comp-equiv-Torsor-Abstract-Group G
+         ( principal-Torsor-Abstract-Group G)
+         ( principal-Torsor-Abstract-Group G)
+         ( principal-Torsor-Abstract-Group G)
+         ( equiv-Eq-Torsor-Abstract-Group y)
+         ( equiv-Eq-Torsor-Abstract-Group x))
+  preserves-mul-equiv-Eq-Torsor-Abstract-Group x y =
+    eq-htpy-equiv-Torsor-Abstract-Group G
+      ( principal-Torsor-Abstract-Group G)
+      ( principal-Torsor-Abstract-Group G)
+      ( equiv-Eq-Torsor-Abstract-Group (mul-Group G x y))
+      ( comp-equiv-Torsor-Abstract-Group G
+        ( principal-Torsor-Abstract-Group G)
+        ( principal-Torsor-Abstract-Group G)
+        ( principal-Torsor-Abstract-Group G)
+        ( equiv-Eq-Torsor-Abstract-Group y)
+        ( equiv-Eq-Torsor-Abstract-Group x))
+      ( λ z → inv (assoc-mul-Group G z x y))
 
   concrete-group-Group : Concrete-Group (lsuc l1)
   pr1 (pr1 (pr1 concrete-group-Group)) = Torsor-Abstract-Group G l1
