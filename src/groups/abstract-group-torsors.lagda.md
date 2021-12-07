@@ -573,4 +573,7 @@ module _
       ( equiv-Eq-equiv-Torsor-Abstract-Group
         ( principal-Torsor-Abstract-Group G))
       ( is-set-type-Group G)
+
+  abstract-group-concrete-group-Group :
+    abstract-group-Concrete-Group concrete-group-Group
 ```
