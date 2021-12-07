@@ -508,10 +508,13 @@ module _
         ( equiv-Eq-Torsor-Abstract-Group x))
       ( λ z → inv (assoc-mul-Group G z x y))
 
+  ∞-group-Group : ∞-Group (lsuc l1)
+  pr1 (pr1 ∞-group-Group) = Torsor-Abstract-Group G l1
+  pr2 (pr1 ∞-group-Group) = principal-Torsor-Abstract-Group G
+  pr2 ∞-group-Group = is-path-connected-Torsor-Abstract-Group G
+
   concrete-group-Group : Concrete-Group (lsuc l1)
-  pr1 (pr1 (pr1 concrete-group-Group)) = Torsor-Abstract-Group G l1
-  pr2 (pr1 (pr1 concrete-group-Group)) = principal-Torsor-Abstract-Group G
-  pr2 (pr1 concrete-group-Group) = is-path-connected-Torsor-Abstract-Group G
+  pr1 concrete-group-Group = ∞-group-Group
   pr2 concrete-group-Group =
     is-set-equiv
       ( type-Group G)
