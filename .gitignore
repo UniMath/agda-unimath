@@ -3,7 +3,7 @@
 *.agdai
 MAlonzo/**
 _build/**
-src/agdaFiles
+agdaFiles
 docs/dependency.dot
 docs/graph.png
 

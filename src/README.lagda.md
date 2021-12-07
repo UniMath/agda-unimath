@@ -50,7 +50,6 @@ open import foundations.spaces
 
 ```agda
 open import the-circle.the-circle public
-open import the-circle.universal-cover public
 open import the-circle.integers public
 open import the-circle.infinite-cyclic-types public
 ```
@@ -76,5 +75,5 @@ open import subgroups.abstract-subgroups public
 
 ### Everything
 
-See [everything](everything.html)
+See the list of all Agda modules [here](everything.html).
 

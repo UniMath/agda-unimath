@@ -23,3 +23,4 @@ This folder contains the material of Chapter 5.
 1. The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
 2. Names are lowercase, with words split by hyphens
 3. Names describe the object that is constructed first. For some theorems, the later part of a name contains descriptions of the hypotheses. 
+4. The symbol for path concatenation is obtained by typing `\.`
