@@ -328,6 +328,22 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
+  concat-equiv-eq-Torsor-Abstract-Group :
+    {l2 : Level} (X Y Z : Torsor-Abstract-Group G l2)
+    (p : Id X Y) (q : Id Y Z) →
+    Id ( equiv-eq-Torsor-Abstract-Group G X Z (p ∙ q))
+       ( comp-equiv-Torsor-Abstract-Group G X Y Z
+         ( equiv-eq-Torsor-Abstract-Group G Y Z q)
+         ( equiv-eq-Torsor-Abstract-Group G X Y p))
+  concat-equiv-eq-Torsor-Abstract-Group X .X Z refl q =
+    inv
+      ( right-unit-law-comp-equiv-Torsor-Abstract-Group G X Z
+        ( equiv-eq-Torsor-Abstract-Group G X Z q))
+
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
   aut-principal-Torsor-Abstract-Group : Group l1
   pr1 (pr1 (pr1 aut-principal-Torsor-Abstract-Group)) =
     equiv-Torsor-Abstract-Group G
