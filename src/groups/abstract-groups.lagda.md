@@ -62,11 +62,11 @@ mul-Semi-Group :
     type-Semi-Group G → type-Semi-Group G
 mul-Semi-Group G = pr1 (associative-mul-Semi-Group G)
 
-is-associative-mul-Semi-Group :
+assoc-mul-Semi-Group :
   {l : Level} (G : Semi-Group l) (x y z : type-Semi-Group G) →
   Id ( mul-Semi-Group G (mul-Semi-Group G x y) z)
      ( mul-Semi-Group G x (mul-Semi-Group G y z))
-is-associative-mul-Semi-Group G = pr2 (associative-mul-Semi-Group G)
+assoc-mul-Semi-Group G = pr2 (associative-mul-Semi-Group G)
 
 --------------------------------------------------------------------------------
 
@@ -105,11 +105,11 @@ mul-Monoid' :
   {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
 mul-Monoid' M y x = mul-Monoid M x y
 
-is-associative-mul-Monoid :
+assoc-mul-Monoid :
   {l : Level} (M : Monoid l) (x y z : type-Monoid M) →
   Id (mul-Monoid M (mul-Monoid M x y) z) (mul-Monoid M x (mul-Monoid M y z))
-is-associative-mul-Monoid M =
-  is-associative-mul-Semi-Group (semi-group-Monoid M)
+assoc-mul-Monoid M =
+  assoc-mul-Semi-Group (semi-group-Monoid M)
 
 unit-Monoid :
   {l : Level} (M : Monoid l) → type-Monoid M
@@ -177,7 +177,7 @@ module _
           ( is-set-type-Monoid M (mul-Monoid M x z) (unit-Monoid M))))
       ( ( inv (left-unit-law-Monoid M y)) ∙
         ( ( inv (ap (λ z → mul-Monoid M z y) p')) ∙
-          ( ( is-associative-mul-Monoid M y' x y) ∙
+          ( ( assoc-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-Monoid M y')))))
   
@@ -201,7 +201,7 @@ module _
       ( λ u → is-set-type-Monoid M (mul-Monoid M x u) (unit-Monoid M))
       ( ( inv (right-unit-law-Monoid M y)) ∙
         ( ( ap (mul-Monoid M y) (inv q')) ∙
-          ( ( inv (is-associative-mul-Monoid M y x y')) ∙
+          ( ( inv (assoc-mul-Monoid M y x y')) ∙
             ( ( ap (mul-Monoid' M y') p) ∙
               ( left-unit-law-Monoid M y')))))
 
@@ -220,7 +220,7 @@ module _
       ( λ u → is-set-type-Monoid M (mul-Monoid M u x) (unit-Monoid M))
       ( ( inv (left-unit-law-Monoid M y)) ∙
         ( ( ap (mul-Monoid' M y) (inv p')) ∙
-          ( ( is-associative-mul-Monoid M y' x y) ∙
+          ( ( assoc-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-Monoid M y')))))
 
@@ -283,10 +283,10 @@ module _
   mul-Group' : type-Group → type-Group → type-Group
   mul-Group' x y = mul-Group y x
   
-  is-associative-mul-Group :
+  assoc-mul-Group :
     (x y z : type-Group) →
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
-  is-associative-mul-Group = pr2 associative-mul-Group
+  assoc-mul-Group = pr2 associative-mul-Group
     
   is-group-Group : is-group semi-group-Group
   is-group-Group = pr2 G
@@ -328,11 +328,11 @@ module _
     is-equiv-has-inverse
       ( mul-Group (inv-Group x))
       ( λ y →
-        ( inv (is-associative-mul-Group _ _ _)) ∙
+        ( inv (assoc-mul-Group _ _ _)) ∙
         ( ( ap (mul-Group' y) (right-inverse-law-Group x)) ∙
           ( left-unit-law-Group y)))
       ( λ y →
-        ( inv (is-associative-mul-Group _ _ _)) ∙
+        ( inv (assoc-mul-Group _ _ _)) ∙
         ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
           ( left-unit-law-Group y)))
   
@@ -345,11 +345,11 @@ module _
     is-equiv-has-inverse
     ( mul-Group' (inv-Group x))
       ( λ y →
-        ( is-associative-mul-Group _ _ _) ∙
+        ( assoc-mul-Group _ _ _) ∙
         ( ( ap (mul-Group y) (left-inverse-law-Group x)) ∙
           ( right-unit-law-Group y)))
       ( λ y →
-        ( is-associative-mul-Group _ _ _) ∙
+        ( assoc-mul-Group _ _ _) ∙
         ( ( ap (mul-Group y) (right-inverse-law-Group x)) ∙
           ( right-unit-law-Group y)))
   
@@ -379,13 +379,13 @@ module _
             ( left-inverse-law-Group (mul-Group x y)))
         ( pair
             ( mul-Group (inv-Group y) (inv-Group x))
-            ( ( is-associative-mul-Group
+            ( ( assoc-mul-Group
                 ( inv-Group y)
                 ( inv-Group x)
                 ( mul-Group x y)) ∙
               ( ( ap
                   ( mul-Group (inv-Group y))
-                  ( ( inv (is-associative-mul-Group (inv-Group x) x y)) ∙
+                  ( ( inv (assoc-mul-Group (inv-Group x) x y)) ∙
                     ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
                       ( left-unit-law-Group y)))) ∙
                 ( left-inverse-law-Group y)))))
@@ -1362,12 +1362,12 @@ composition-Precat :
 composition-Precat C {x} {y} {z} =
   pr1 (associative-composition-Precat C) x y z
 
-is-associative-composition-Precat :
+assoc-composition-Precat :
   { l1 l2 : Level} (C : Precategory l1 l2) {x y z w : obj-Precat C} →
   ( f : hom-Precat C x y) (g : hom-Precat C y z) (h : hom-Precat C z w) →
   Id (composition-Precat C (composition-Precat C f g) h)
      (composition-Precat C f (composition-Precat C g h))
-is-associative-composition-Precat C {x} {y} {z} {w} =
+assoc-composition-Precat C {x} {y} {z} {w} =
   pr2 (associative-composition-Precat C) x y z w
 
 is-unital-Precat :
@@ -1415,7 +1415,7 @@ abstract
            ( inv
              ( left-inverse-law-Group H
                ( map-hom-Group G H f (unit-Group G))))) ∙
-      ( ( is-associative-mul-Group H
+      ( ( assoc-mul-Group H
           ( inv-Group H (map-hom-Group G H f (unit-Group G)))
           ( map-hom-Group G H f (unit-Group G))
           ( map-hom-Group G H f (unit-Group G))) ∙
@@ -1501,7 +1501,7 @@ module _
   preserves-mul-map-Cayleys-theorem :
     preserves-mul-Group G (symmetric-Group (set-Group G)) map-Cayleys-theorem
   preserves-mul-map-Cayleys-theorem x y =
-    eq-htpy-equiv (λ z → is-associative-mul-Group G x y z)
+    eq-htpy-equiv (λ z → assoc-mul-Group G x y z)
 
   hom-Cayleys-theorem : hom-Group G (symmetric-Group (set-Group G))
   hom-Cayleys-theorem =

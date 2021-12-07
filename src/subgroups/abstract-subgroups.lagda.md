@@ -178,13 +178,13 @@ inv-group-Subgroup :
 inv-group-Subgroup G P x =
   pair (inv-Group G (pr1 x)) (closed-under-inv-Subgroup G P (pr1 x) (pr2 x))
 
-is-associative-mul-group-Subgroup :
+assoc-mul-group-Subgroup :
   {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
   ( x y z : type-group-Subgroup G P) →
   Id (mul-group-Subgroup G P (mul-group-Subgroup G P x y) z)
      (mul-group-Subgroup G P x (mul-group-Subgroup G P y z))
-is-associative-mul-group-Subgroup G P x y z =
-  eq-subgroup-eq-group G P (is-associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
+assoc-mul-group-Subgroup G P x y z =
+  eq-subgroup-eq-group G P (assoc-mul-Group G (pr1 x) (pr1 y) (pr1 z))
 
 left-unit-law-group-Subgroup :
   {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
@@ -224,7 +224,7 @@ group-Subgroup G P =
       ( set-group-Subgroup G P)
       ( pair
         ( mul-group-Subgroup G P)
-        ( is-associative-mul-group-Subgroup G P)))
+        ( assoc-mul-group-Subgroup G P)))
     ( pair
       ( pair
         ( unit-group-Subgroup G P)

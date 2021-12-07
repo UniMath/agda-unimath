@@ -41,10 +41,10 @@ add-Ab :
   {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
 add-Ab A = mul-Group (group-Ab A)
 
-is-associative-add-Ab :
+assoc-add-Ab :
   {l : Level} (A : Ab l) (x y z : type-Ab A) →
   Id (add-Ab A (add-Ab A x y) z) (add-Ab A x (add-Ab A y z))
-is-associative-add-Ab A = is-associative-mul-Group (group-Ab A)
+assoc-add-Ab A = assoc-mul-Group (group-Ab A)
 
 semi-group-Ab :
   {l : Level} (A : Ab l) → Semi-Group l
@@ -181,12 +181,12 @@ comp-hom-Ab :
 comp-hom-Ab A B C =
   comp-hom-Group (group-Ab A) (group-Ab B) (group-Ab C)
 
-is-associative-comp-hom-Ab :
+associative-comp-hom-Ab :
   { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
   ( h : hom-Ab C D) (g : hom-Ab B C) (f : hom-Ab A B) →
   Id (comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
      (comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
-is-associative-comp-hom-Ab A B C D =
+associative-comp-hom-Ab A B C D =
   associative-hom-Semi-Group
     ( semi-group-Ab A)
     ( semi-group-Ab B)

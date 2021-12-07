@@ -67,7 +67,7 @@ module _
   pr1 principal-Abstract-Group-Action = set-Group G
   pr1 (pr2 principal-Abstract-Group-Action) g = equiv-mul-Group G g
   pr2 (pr2 principal-Abstract-Group-Action) g h =
-    eq-htpy-equiv (is-associative-mul-Group G g h)
+    eq-htpy-equiv (assoc-mul-Group G g h)
   
   conjugation-Abstract-Group-Action : Abstract-Group-Action G l1
   pr1 conjugation-Abstract-Group-Action = set-Group G
@@ -76,16 +76,16 @@ module _
     eq-htpy-equiv
       ( λ x →
         ( ap-mul-Group G
-          ( is-associative-mul-Group G g h x)
+          ( assoc-mul-Group G g h x)
           ( distributive-inv-mul-Group G g h)) ∙
         ( ( inv
-            ( is-associative-mul-Group G
+            ( assoc-mul-Group G
               ( mul-Group G g (mul-Group G h x))
               ( inv-Group G h)
               ( inv-Group G g))) ∙
           ( ap
             ( mul-Group' G (inv-Group G g))
-            ( is-associative-mul-Group G g
+            ( assoc-mul-Group G g
               ( mul-Group G h x)
               ( inv-Group G h)))))
 
@@ -114,7 +114,8 @@ module _
 
   hom-equiv-Abstract-Group-Action :
     equiv-Abstract-Group-Action → hom-Abstract-Group-Action
-  hom-equiv-Abstract-Group-Action (pair e H) = pair (map-equiv e) H
+  pr1 (hom-equiv-Abstract-Group-Action e) = map-equiv (pr1 e)
+  pr2 (hom-equiv-Abstract-Group-Action e) = pr2 e
 
   mere-equiv-Abstract-Group-Action-Prop : UU-Prop (l1 ⊔ l2 ⊔ l3)
   mere-equiv-Abstract-Group-Action-Prop =
@@ -184,6 +185,90 @@ module _
     htpy-hom-Abstract-Group-Action g → Id f g
   eq-htpy-hom-Abstract-Group-Action g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Abstract-Group-Action g)
+
+module _
+  {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  where
+
+  id-hom-Abstract-Group-Action : hom-Abstract-Group-Action G X X
+  pr1 id-hom-Abstract-Group-Action = id
+  pr2 id-hom-Abstract-Group-Action g = refl-htpy
+
+module _
+  {l1 l2 l3 l4 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3) (Z : Abstract-Group-Action G l4)
+  where
+
+  comp-hom-Abstract-Group-Action :
+    hom-Abstract-Group-Action G Y Z → hom-Abstract-Group-Action G X Y →
+    hom-Abstract-Group-Action G X Z
+  pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
+  pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
+    coherence-square-comp-horizontal
+      ( f)
+      ( g)
+      ( mul-Abstract-Group-Action G X x)
+      ( mul-Abstract-Group-Action G Y x)
+      ( mul-Abstract-Group-Action G Z x)
+      ( f)
+      ( g)
+      ( H x)
+      ( K x)
+
+module _
+  {l1 l2 l3 l4 l5 : Level} (G : Group l1) (X1 : Abstract-Group-Action G l2)
+  (X2 : Abstract-Group-Action G l3) (X3 : Abstract-Group-Action G l4)
+  (X4 : Abstract-Group-Action G l5)
+  where
+
+  associative-comp-hom-Abstract-Group-Action :
+    (h : hom-Abstract-Group-Action G X3 X4)
+    (g : hom-Abstract-Group-Action G X2 X3)
+    (f : hom-Abstract-Group-Action G X1 X2) →
+    Id ( comp-hom-Abstract-Group-Action G X1 X2 X4
+         ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
+         ( f))
+       ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
+         ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
+  associative-comp-hom-Abstract-Group-Action h g f =
+    eq-htpy-hom-Abstract-Group-Action G X1 X4
+      ( comp-hom-Abstract-Group-Action G X1 X2 X4
+        ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
+        ( f))
+      ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
+        ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
+      ( refl-htpy)
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3)
+  where
+
+  left-unit-law-comp-hom-Abstract-Group-Action :
+    (f : hom-Abstract-Group-Action G X Y) →
+    Id ( comp-hom-Abstract-Group-Action G X Y Y
+         ( id-hom-Abstract-Group-Action G Y)
+         ( f))
+       ( f)
+  left-unit-law-comp-hom-Abstract-Group-Action f =
+    eq-htpy-hom-Abstract-Group-Action G X Y
+      ( comp-hom-Abstract-Group-Action G X Y Y
+        ( id-hom-Abstract-Group-Action G Y)
+        ( f))
+      ( f)
+      ( refl-htpy)
+
+  right-unit-law-comp-hom-Abstract-Group-Action :
+    (f : hom-Abstract-Group-Action G X Y) →
+    Id ( comp-hom-Abstract-Group-Action G X X Y f
+         ( id-hom-Abstract-Group-Action G X))
+       ( f)
+  right-unit-law-comp-hom-Abstract-Group-Action f =
+    eq-htpy-hom-Abstract-Group-Action G X Y
+      ( comp-hom-Abstract-Group-Action G X X Y f
+        ( id-hom-Abstract-Group-Action G X))
+      ( f)
+      ( refl-htpy)
 
 module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
@@ -361,6 +446,87 @@ module _
     equiv-eq-Abstract-Group-Action Y
   pr2 (extensionality-Abstract-Group-Action Y) =
     is-equiv-equiv-eq-Abstract-Group-Action Y
+
+module _
+  {l1 l2 l3 l4 l5 : Level} (G : Group l1) (X1 : Abstract-Group-Action G l2)
+  (X2 : Abstract-Group-Action G l3) (X3 : Abstract-Group-Action G l4)
+  (X4 : Abstract-Group-Action G l5)
+  where
+
+  associative-comp-equiv-Abstract-Group-Action :
+    (h : equiv-Abstract-Group-Action G X3 X4)
+    (g : equiv-Abstract-Group-Action G X2 X3)
+    (f : equiv-Abstract-Group-Action G X1 X2) →
+    Id ( comp-equiv-Abstract-Group-Action G X1 X2 X4
+         ( comp-equiv-Abstract-Group-Action G X2 X3 X4 h g)
+         ( f))
+       ( comp-equiv-Abstract-Group-Action G X1 X3 X4 h
+         ( comp-equiv-Abstract-Group-Action G X1 X2 X3 g f))
+  associative-comp-equiv-Abstract-Group-Action h g f =
+    eq-htpy-equiv-Abstract-Group-Action G X1 X4
+      ( comp-equiv-Abstract-Group-Action G X1 X2 X4
+        ( comp-equiv-Abstract-Group-Action G X2 X3 X4 h g)
+        ( f))
+      ( comp-equiv-Abstract-Group-Action G X1 X3 X4 h
+        ( comp-equiv-Abstract-Group-Action G X1 X2 X3 g f))
+      ( refl-htpy)
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3)
+  where
+
+  left-unit-law-comp-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    Id ( comp-equiv-Abstract-Group-Action G X Y Y
+         ( equiv-id-Abstract-Group-Action G Y)
+         ( f))
+       ( f)
+  left-unit-law-comp-equiv-Abstract-Group-Action f =
+    eq-htpy-equiv-Abstract-Group-Action G X Y
+      ( comp-equiv-Abstract-Group-Action G X Y Y
+        ( equiv-id-Abstract-Group-Action G Y)
+        ( f))
+      ( f)
+      ( refl-htpy)
+
+  right-unit-law-comp-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    Id ( comp-equiv-Abstract-Group-Action G X X Y f
+         ( equiv-id-Abstract-Group-Action G X))
+       ( f)
+  right-unit-law-comp-equiv-Abstract-Group-Action f =
+    eq-htpy-equiv-Abstract-Group-Action G X Y
+      ( comp-equiv-Abstract-Group-Action G X X Y f
+        ( equiv-id-Abstract-Group-Action G X))
+      ( f)
+      ( refl-htpy)
+
+  left-inverse-law-comp-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    Id ( comp-equiv-Abstract-Group-Action G X Y X
+         ( inv-equiv-Abstract-Group-Action G X Y f)
+         ( f))
+       ( equiv-id-Abstract-Group-Action G X)
+  left-inverse-law-comp-equiv-Abstract-Group-Action f =
+    eq-htpy-equiv-Abstract-Group-Action G X X
+      ( comp-equiv-Abstract-Group-Action G X Y X
+        ( inv-equiv-Abstract-Group-Action G X Y f)
+        ( f))
+      ( equiv-id-Abstract-Group-Action G X)
+      ( isretr-map-inv-equiv (pr1 f))
+
+  right-inverse-law-comp-equiv-Abstract-Group-Action :
+    (f : equiv-Abstract-Group-Action G X Y) →
+    Id ( comp-equiv-Abstract-Group-Action G Y X Y f
+         ( inv-equiv-Abstract-Group-Action G X Y f))
+       ( equiv-id-Abstract-Group-Action G Y)
+  right-inverse-law-comp-equiv-Abstract-Group-Action f =
+    eq-htpy-equiv-Abstract-Group-Action G Y Y
+      ( comp-equiv-Abstract-Group-Action G Y X Y f
+        ( inv-equiv-Abstract-Group-Action G X Y f))
+      ( equiv-id-Abstract-Group-Action G Y)
+      ( issec-map-inv-equiv (pr1 f))
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
