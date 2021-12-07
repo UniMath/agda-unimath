@@ -1,5 +1,5 @@
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 module everything where
 
 open import README
@@ -43,6 +43,7 @@ open import groups.concrete-group-actions
 open import groups.concrete-groups
 open import groups.examples-higher-groups
 open import groups.higher-groups
+open import labels
 open import subgroups
 open import subgroups.abstract-subgroups
 open import the-circle
