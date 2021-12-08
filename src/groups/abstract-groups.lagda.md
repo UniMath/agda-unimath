@@ -523,29 +523,29 @@ pr2 (symmetric-Semi-Group X) = has-associative-mul-aut-Set X
 
 left-unit-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (equiv-id ∘e e) e
+  Id (id-equiv ∘e e) e
 left-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 right-unit-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e equiv-id) e
+  Id (e ∘e id-equiv) e
 right-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 is-unital-symmetric-Semi-Group :
   {l : Level} (X : UU-Set l) → is-unital (symmetric-Semi-Group X)
-pr1 (is-unital-symmetric-Semi-Group X) = equiv-id
+pr1 (is-unital-symmetric-Semi-Group X) = id-equiv
 pr1 (pr2 (is-unital-symmetric-Semi-Group X)) = left-unit-law-equiv
 pr2 (pr2 (is-unital-symmetric-Semi-Group X)) = right-unit-law-equiv
 
 left-inverse-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id ((inv-equiv e) ∘e e) equiv-id
+  Id ((inv-equiv e) ∘e e) id-equiv
 left-inverse-law-equiv e =
   eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
 
 right-inverse-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e (inv-equiv e)) equiv-id
+  Id (e ∘e (inv-equiv e)) id-equiv
 right-inverse-law-equiv e =
   eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
@@ -1080,9 +1080,9 @@ module _
         ( is-contr-total-equiv (type-Semi-Group G))
         ( is-prop-is-set)
         ( type-Semi-Group G)
-        ( equiv-id)
+        ( id-equiv)
         ( is-set-type-Semi-Group G))
-      ( pair (set-Semi-Group G) equiv-id)
+      ( pair (set-Semi-Group G) id-equiv)
       ( is-contr-total-preserves-mul-id)
 
   is-contr-total-iso-Semi-Group : is-contr (Σ (Semi-Group l) (iso-Semi-Group G))
@@ -1092,22 +1092,22 @@ module _
       ( equiv-tot (equiv-iso-equiv-Semi-Group G))
       ( is-contr-total-equiv-Semi-Group)
 
-  iso-id-Semi-Group : iso-Semi-Group G G
-  pr1 iso-id-Semi-Group = id-hom-Semi-Group G
-  pr1 (pr2 iso-id-Semi-Group) = id-hom-Semi-Group G
-  pr1 (pr2 (pr2 iso-id-Semi-Group)) =
+  id-iso-Semi-Group : iso-Semi-Group G G
+  pr1 id-iso-Semi-Group = id-hom-Semi-Group G
+  pr1 (pr2 id-iso-Semi-Group) = id-hom-Semi-Group G
+  pr1 (pr2 (pr2 id-iso-Semi-Group)) =
     left-unit-law-hom-Semi-Group G G (id-hom-Semi-Group G)
-  pr2 (pr2 (pr2 iso-id-Semi-Group)) =
+  pr2 (pr2 (pr2 id-iso-Semi-Group)) =
     right-unit-law-hom-Semi-Group G G (id-hom-Semi-Group G)
 
   iso-eq-Semi-Group : (H : Semi-Group l) → Id G H → iso-Semi-Group G H
-  iso-eq-Semi-Group .G refl = iso-id-Semi-Group
+  iso-eq-Semi-Group .G refl = id-iso-Semi-Group
 
   is-equiv-iso-eq-Semi-Group :
     (H : Semi-Group l) → is-equiv (iso-eq-Semi-Group H)
   is-equiv-iso-eq-Semi-Group =
     fundamental-theorem-id G
-      ( iso-id-Semi-Group)
+      ( id-iso-Semi-Group)
       ( is-contr-total-iso-Semi-Group)
       ( iso-eq-Semi-Group)
 
@@ -1163,13 +1163,13 @@ module _
   iso-equiv-Group : equiv-Group → iso-Group
   iso-equiv-Group = map-equiv equiv-iso-equiv-Group
 
-iso-id-hom-Group :
+id-iso-Group :
   { l1 : Level} (G : Group l1) → iso-Group G G
-iso-id-hom-Group G = iso-id-Semi-Group (semi-group-Group G)
+id-iso-Group G = id-iso-Semi-Group (semi-group-Group G)
 
 iso-eq-Group :
   { l1 : Level} (G H : Group l1) → Id G H → iso-Group G H
-iso-eq-Group G .G refl = iso-id-hom-Group G
+iso-eq-Group G .G refl = id-iso-Group G
 
 abstract
   extensionality-Group' :
@@ -1193,128 +1193,13 @@ is-equiv-iso-eq-Group :
   { l1 : Level} (G H : Group l1) → is-equiv (iso-eq-Group G H)
 is-equiv-iso-eq-Group G =
   fundamental-theorem-id G
-    ( iso-id-hom-Group G)
+    ( id-iso-Group G)
     ( is-contr-total-iso-Group G)
     ( iso-eq-Group G)
 
 eq-iso-Group :
   { l1 : Level} (G H : Group l1) → iso-Group G H → Id G H
 eq-iso-Group G H = map-inv-is-equiv (is-equiv-iso-eq-Group G H)
-
---------------------------------------------------------------------------------
-
--- Categories
-
-underlying-type-Set :
-  {l : Level} → UU-Set l → UU l
-underlying-type-Set A = pr1 A
-
-is-set-underlying-type-Set :
-  {l : Level} (A : UU-Set l) → is-set (underlying-type-Set A)
-is-set-underlying-type-Set A = pr2 A
-
-associative-composition-structure :
-  {l1 l2 : Level} (A : UU l1) (hom : A → A → UU-Set l2) → UU (l1 ⊔ l2)
-associative-composition-structure A hom =
-  Σ ( (x y z : A)
-      → underlying-type-Set (hom x y)
-      → underlying-type-Set (hom y z)
-      → underlying-type-Set (hom x z))
-    ( λ μ → (x y z w : A) (f : underlying-type-Set (hom x y)) (g : underlying-type-Set (hom y z)) (h : underlying-type-Set (hom z w)) →
-      Id (μ x z w (μ x y z f g) h) (μ x y w f (μ y z w g h)))
-
-is-unital-composition-structure :
-  {l1 l2 : Level} (A : UU l1) (hom : A → A → UU-Set l2) →
-  associative-composition-structure A hom → UU _
-is-unital-composition-structure A hom (pair μ assoc-μ) =
-  Σ ( (x : A) → underlying-type-Set (hom x x))
-    ( λ e →
-      ( (x y : A) (f : underlying-type-Set (hom x y)) → Id (μ x x y (e x) f) f)
-      × ( (x y : A) (f : underlying-type-Set (hom x y)) → Id (μ x y y f (e y)) f))
-
-all-elements-equal-is-unital-composition-structure :
-  {l1 l2 : Level} (A : UU l1) (hom : A → A → UU-Set l2) →
-  ( μ : associative-composition-structure A hom) →
-  all-elements-equal (is-unital-composition-structure A hom μ)
-all-elements-equal-is-unital-composition-structure A hom
-  ( pair μ assoc-μ)
-  ( pair e (pair left-unit-law-e right-unit-law-e))
-  ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
-  eq-subtype
-    ( λ x →
-      is-prop-prod
-        ( is-prop-Π
-          ( λ a → is-prop-Π
-            ( λ b → is-prop-Π
-              ( λ f' →
-                is-set-underlying-type-Set (hom a b) (μ a a b (x a) f') f'))))
-        ( is-prop-Π
-          ( λ a → is-prop-Π
-            ( λ b → is-prop-Π
-              ( λ f' →
-                is-set-underlying-type-Set (hom a b) (μ a b b f' (x b)) f')))))
-    ( eq-htpy
-      ( λ x → (inv (left-unit-law-e' x x (e x))) ∙ right-unit-law-e x x (e' x)))
-
-Precategory :
-  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Precategory l1 l2 =
-  Σ ( UU l1) (λ A →
-    Σ (A → A → UU-Set l2) (λ hom →
-      Σ ( associative-composition-structure A hom)
-        ( is-unital-composition-structure A hom)))
-
-obj-Precat :
-  {l1 l2 : Level} → Precategory l1 l2 → UU l1
-obj-Precat C = pr1 C
-
-hom-Set-Precat :
-  {l1 l2 : Level} (C : Precategory l1 l2) (x y : obj-Precat C) → UU-Set l2
-hom-Set-Precat C = pr1 (pr2 C)
-
-hom-Precat :
-  {l1 l2 : Level} (C : Precategory l1 l2) (x y : obj-Precat C) → UU l2
-hom-Precat C x y = pr1 (hom-Set-Precat C x y)
-
-is-set-hom-Precat :
-  {l1 l2 : Level} (C : Precategory l1 l2) (x y : obj-Precat C) →
-  is-set (hom-Precat C x y)
-is-set-hom-Precat C x y = pr2 (hom-Set-Precat C x y)
-
-associative-composition-Precat :
-  {l1 l2 : Level} (C : Precategory l1 l2) →
-  associative-composition-structure (obj-Precat C) (hom-Set-Precat C)
-associative-composition-Precat C = pr1 (pr2 (pr2 C))
-
-composition-Precat :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y z : obj-Precat C} →
-  hom-Precat C x y → hom-Precat C y z → hom-Precat C x z
-composition-Precat C {x} {y} {z} =
-  pr1 (associative-composition-Precat C) x y z
-
-assoc-composition-Precat :
-  { l1 l2 : Level} (C : Precategory l1 l2) {x y z w : obj-Precat C} →
-  ( f : hom-Precat C x y) (g : hom-Precat C y z) (h : hom-Precat C z w) →
-  Id (composition-Precat C (composition-Precat C f g) h)
-     (composition-Precat C f (composition-Precat C g h))
-assoc-composition-Precat C {x} {y} {z} {w} =
-  pr2 (associative-composition-Precat C) x y z w
-
-is-unital-Precat :
-  { l1 l2 : Level} (C : Precategory l1 l2) →
-  is-unital-composition-structure
-    ( obj-Precat C)
-    ( hom-Set-Precat C)
-    ( associative-composition-Precat C)
-is-unital-Precat C = pr2 (pr2 (pr2 C))
-
-{-
-id-Precat :
-  { l1 l2 : Level} (C : Precategory l1 l2) {x : obj-Precat C} →
-  hom-Precat C x x
-id-Precat (pair A (pair hom (pair (pair μ assoc-μ) t))) {x} =
-  pr1 (is-unital-Precat {!!}) x
--}
 
 --------------------------------------------------------------------------------
 

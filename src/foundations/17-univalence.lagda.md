@@ -22,7 +22,7 @@ open import foundations.16-finite-types public
 -- Theorem 17.1.1 Condition (i)
 
 equiv-eq : {i : Level} {A : UU i} {B : UU i} → Id A B → A ≃ B
-equiv-eq refl = equiv-id
+equiv-eq refl = id-equiv
 
 UNIVALENCE : {i : Level} (A B : UU i) → UU (lsuc i)
 UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
@@ -33,7 +33,7 @@ abstract
   is-contr-total-equiv-UNIVALENCE : {i : Level} (A : UU i) →
     ((B : UU i) → UNIVALENCE A B) → is-contr (Σ (UU i) (λ X → A ≃ X))
   is-contr-total-equiv-UNIVALENCE A UA =
-    fundamental-theorem-id' A equiv-id (λ B → equiv-eq) UA
+    fundamental-theorem-id' A id-equiv (λ B → equiv-eq) UA
 
 -- Theorem 17.1.1 (ii) implies (i)
 
@@ -41,7 +41,7 @@ abstract
   UNIVALENCE-is-contr-total-equiv : {i : Level} (A : UU i) →
     is-contr (Σ (UU i) (λ X → A ≃ X)) → (B : UU i) → UNIVALENCE A B
   UNIVALENCE-is-contr-total-equiv A c =
-    fundamental-theorem-id A equiv-id c (λ B → equiv-eq)
+    fundamental-theorem-id A id-equiv c (λ B → equiv-eq)
 
 -- Theorem 17.1.1 Condition (iii)
 
@@ -51,8 +51,8 @@ module _
 
   ev-id :
     { l : Level} (P : (B : UU l1) → (A ≃ B) → UU l) →
-    ( (B : UU l1) (e : A ≃ B) → P B e) → P A equiv-id
-  ev-id P f = f A equiv-id
+    ( (B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
+  ev-id P f = f A id-equiv
   
   IND-EQUIV : {l : Level} (P : (B : UU l1) (e : A ≃ B) → UU l) → UU _
   IND-EQUIV P = sec (ev-id P)
@@ -60,7 +60,7 @@ module _
   triangle-ev-id :
     { l : Level}
     ( P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
-    ( ev-pt (pair A equiv-id) P) ~
+    ( ev-pt (pair A id-equiv) P) ~
     ( ( ev-id (λ X e → P (pair X e))) ∘
       ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P}))
   triangle-ev-id P f = refl
@@ -74,16 +74,16 @@ module _
       (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) → IND-EQUIV (λ B e → P (pair B e))
     IND-EQUIV-is-contr-total-equiv c P =
       section-comp
-        ( ev-pt (pair A equiv-id) P)
+        ( ev-pt (pair A id-equiv) P)
         ( ev-id (λ X e → P (pair X e)))
         ( ev-pair)
         ( triangle-ev-id P)
         ( pair ind-Σ refl-htpy)
         ( is-singleton-is-contr
-          ( pair A equiv-id)
+          ( pair A id-equiv)
           ( pair
-            ( pair A equiv-id)
-            ( λ t →  ( inv (contraction c (pair A equiv-id))) ∙
+            ( pair A id-equiv)
+            ( λ t →  ( inv (contraction c (pair A id-equiv))) ∙
                      ( contraction c t)))
           ( P))
 
@@ -97,9 +97,9 @@ module _
     is-contr-total-equiv-IND-EQUIV ind =
       is-contr-is-singleton
         ( Σ (UU l1) (λ X → A ≃ X))
-        ( pair A equiv-id)
+        ( pair A id-equiv)
         ( λ P → section-comp'
-          ( ev-pt (pair A equiv-id) P)
+          ( ev-pt (pair A id-equiv) P)
           ( ev-id (λ X e → P (pair X e)))
           ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
           ( triangle-ev-id P)
@@ -141,7 +141,7 @@ abstract
     ( λ t → P (pr1 t) (pr2 t))
 
 ind-equiv : {i j : Level} (A : UU i) (P : (B : UU i) (e : A ≃ B) → UU j) →
-  P A equiv-id → {B : UU i} (e : A ≃ B) → P B e
+  P A id-equiv → {B : UU i} (e : A ≃ B) → P B e
 ind-equiv A P p {B} = pr1 (Ind-equiv A P) p B
 
 -- Some immediate consequences of the univalence axiom
@@ -151,13 +151,13 @@ equiv-fam :
   UU (l1 ⊔ l2 ⊔ l3)
 equiv-fam {A = A} B C = (a : A) → B a ≃ C a
 
-equiv-id-fam :
+id-equiv-fam :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → equiv-fam B B
-equiv-id-fam B a = equiv-id
+id-equiv-fam B a = id-equiv
 
 equiv-eq-fam :
   {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → Id B C → equiv-fam B C
-equiv-eq-fam B .B refl = equiv-id-fam B
+equiv-eq-fam B .B refl = id-equiv-fam B
 
 abstract
   is-contr-total-equiv-fam :
@@ -173,7 +173,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
   is-equiv-equiv-eq-fam B =
     fundamental-theorem-id B
-      ( equiv-id-fam B)
+      ( id-equiv-fam B)
       ( is-contr-total-equiv-fam B)
       ( equiv-eq-fam B)
 
@@ -198,7 +198,7 @@ abstract
         ( is-contr-total-equiv (type-Prop P))
         ( is-prop-is-prop)
         ( type-Prop P)
-        ( equiv-id)
+        ( id-equiv)
         ( is-prop-type-Prop P))
 
 abstract
@@ -492,7 +492,7 @@ equiv-subuniverse P X Y = (pr1 X) ≃ (pr1 Y)
 equiv-eq-subuniverse :
   {l1 l2 : Level} (P : subuniverse l1 l2) →
   (s t : total-subuniverse P) → Id s t → equiv-subuniverse P s t
-equiv-eq-subuniverse P (pair X p) .(pair X p) refl = equiv-id
+equiv-eq-subuniverse P (pair X p) .(pair X p) refl = id-equiv
 
 abstract
   is-contr-total-equiv-subuniverse :
@@ -504,7 +504,7 @@ abstract
       ( is-contr-total-equiv X)
       ( is-subtype-subuniverse P)
       ( X)
-      ( equiv-id)
+      ( id-equiv)
       ( p)
 
 abstract
@@ -514,7 +514,7 @@ abstract
   is-equiv-equiv-eq-subuniverse P (pair X p) =
     fundamental-theorem-id
       ( pair X p)
-      ( equiv-id)
+      ( id-equiv)
       ( is-contr-total-equiv-subuniverse P (pair X p))
       ( equiv-eq-subuniverse P (pair X p))
 
@@ -606,7 +606,7 @@ equiv-component-UU-Level X Y =
 id-equiv-component-UU-Level :
   {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
   equiv-component-UU-Level X X
-id-equiv-component-UU-Level X = equiv-id
+id-equiv-component-UU-Level X = id-equiv
 
 equiv-eq-component-UU-Level :
   {l1 l2 : Level} {A : UU l2} {X Y : component-UU-Level l1 A} →
@@ -623,7 +623,7 @@ abstract
       ( is-contr-total-equiv (type-component-UU-Level X))
       ( λ Y → is-prop-mere-equiv _ Y)
       ( type-component-UU-Level X)
-      ( equiv-id)
+      ( id-equiv)
       ( mere-equiv-component-UU-Level X)
 
 abstract
@@ -816,12 +816,12 @@ module _
   equiv-slice' : (f g : slice-UU l2 A) → UU (l1 ⊔ l2)
   equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
   
-  equiv-id-slice-UU : (f : slice-UU l2 A) → equiv-slice' f f
-  pr1 (equiv-id-slice-UU f) = equiv-id
-  pr2 (equiv-id-slice-UU f) = refl-htpy
+  id-equiv-slice-UU : (f : slice-UU l2 A) → equiv-slice' f f
+  pr1 (id-equiv-slice-UU f) = id-equiv
+  pr2 (id-equiv-slice-UU f) = refl-htpy
 
   equiv-eq-slice-UU : (f g : slice-UU l2 A) → Id f g → equiv-slice' f g
-  equiv-eq-slice-UU f .f refl = equiv-id-slice-UU f
+  equiv-eq-slice-UU f .f refl = id-equiv-slice-UU f
 
   abstract
     is-contr-total-equiv-slice' :
@@ -830,7 +830,7 @@ module _
       is-contr-total-Eq-structure
         ( λ Y g e → f ~ (g ∘ map-equiv e))
         ( is-contr-total-equiv X)
-        ( pair X equiv-id)
+        ( pair X id-equiv)
         ( is-contr-total-htpy f)
 
   abstract
@@ -838,7 +838,7 @@ module _
       (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
     is-equiv-equiv-eq-slice-UU f =
       fundamental-theorem-id f
-        ( equiv-id-slice-UU f)
+        ( id-equiv-slice-UU f)
         ( is-contr-total-equiv-slice' f)
         ( equiv-eq-slice-UU f)
 
@@ -913,7 +913,7 @@ equiv-Fib-structure {l1} {l3} l P B =
     ( equiv-Σ
       ( λ C → (b : B) → P (C b))
       ( equiv-Fib l B)
-      ( λ f → equiv-map-Π (λ b → equiv-id)))) ∘e
+      ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
   ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
 
 -- Corollary 17.3.3
@@ -942,7 +942,7 @@ ev-zero-equiv-Fin-two-ℕ e = map-equiv e zero-Fin
 
 inv-ev-zero-equiv-Fin-two-ℕ' :
   Fin two-ℕ → (Fin two-ℕ ≃ Fin two-ℕ)
-inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = equiv-id
+inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = id-equiv
 inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = equiv-succ-Fin
 
 abstract
@@ -1242,7 +1242,7 @@ equiv-Fib-decidable-Prop l A =
       equiv-tot
         ( λ f →
           ( inv-equiv equiv-choice-∞) ∘e
-          ( equiv-prod (equiv-is-prop-map-is-emb f) equiv-id))))
+          ( equiv-prod (equiv-is-prop-map-is-emb f) id-equiv))))
 
 abstract
   is-decidable-emb-is-equiv :
@@ -1593,11 +1593,11 @@ abstract
                       ( mere-equiv-Prop B (Σ A _))
                       ( functor-trunc-Prop (equiv-equiv-Maybe))
                       ( functor-trunc-Prop
-                        ( λ e → equiv-coprod e equiv-id))) ∘e
+                        ( λ e → equiv-coprod e id-equiv))) ∘e
                     ( equiv-trunc-Prop
                       ( equiv-postcomp-equiv
                         ( equiv-coprod
-                          ( equiv-id)
+                          ( id-equiv)
                           ( equiv-is-contr is-contr-raise-unit is-contr-unit))
                         ( Maybe B)))) ∘e
                   ( left-unit-law-Σ-is-contr
@@ -1642,7 +1642,7 @@ abstract
                 ( λ Q →
                   ind-Σ
                     ( λ H →
-                      ind-coprod _ ( λ q → equiv-id) (λ q → equiv-id)))))))) ∘e
+                      ind-coprod _ ( λ q → id-equiv) (λ q → id-equiv)))))))) ∘e
       ( assoc-Σ
         ( A → decidable-Prop _)
         ( λ a → decidable-Prop _)
@@ -1664,7 +1664,7 @@ abstract
         equiv-trunc-Prop
           ( equiv-postcomp-equiv
             ( ( equiv-coprod
-                ( equiv-id)
+                ( id-equiv)
                 ( left-unit-law-Σ (λ y → type-decidable-Prop (u (inr y))))) ∘e
               ( right-distributive-Σ-coprod A unit
                 ( λ x → type-decidable-Prop (u x))))
@@ -1931,7 +1931,7 @@ triangle-ev-true A = refl-htpy
 {-
 aut-bool-bool :
   bool → (bool ≃ bool)
-aut-bool-bool true = equiv-id
+aut-bool-bool true = id-equiv
 aut-bool-bool false = equiv-neg-𝟚
 
 bool-aut-bool :

@@ -54,7 +54,7 @@ module _
 
 count-Fin : (k : ℕ) → count (Fin k)
 pr1 (count-Fin k) = k
-pr2 (count-Fin k) = equiv-id
+pr2 (count-Fin k) = id-equiv
 
 -- Types equipped with countings are closed under equivalences
 
@@ -258,11 +258,11 @@ count-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e f =
       ( ( inv-equiv
           ( right-distributive-Σ-coprod (Fin k) unit (B ∘ map-equiv e))) ∘e
         ( equiv-coprod
-          ( equiv-id)
+          ( id-equiv)
           ( inv-equiv
             ( left-unit-law-Σ (B ∘ (map-equiv e ∘ inr)))))))
     ( count-coprod
-      ( count-Σ' k equiv-id (λ x → f (map-equiv e (inl x))))
+      ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star))))
 
 abstract
@@ -326,11 +326,11 @@ abstract
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coprod
-      ( count-Σ' k equiv-id (λ x → f (map-equiv e (inl x))))
+      ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star)))) ∙
     ( ap
       ( add-ℕ' (number-of-elements-count (f (map-equiv e (inr star)))))
-      ( number-of-elements-count-Σ' k equiv-id (λ x → f (map-equiv e (inl x)))))
+      ( number-of-elements-count-Σ' k id-equiv (λ x → f (map-equiv e (inl x)))))
 
 abstract
   number-of-elements-count-Σ :
@@ -1019,7 +1019,7 @@ abstract
     {l : Level} {A : UU l} (count-A count-A' : count A) →
     Id (number-of-elements-count count-A) (number-of-elements-count count-A')
   double-counting count-A count-A' =
-    double-counting-equiv count-A count-A' equiv-id
+    double-counting-equiv count-A count-A' id-equiv
 
 -- Some immediate corollaries and bureacracy
 
@@ -1253,7 +1253,7 @@ abstract
 abstract
   refl-mere-equiv :
     {l1 : Level} (X : UU l1) → mere-equiv X X
-  refl-mere-equiv X = unit-trunc-Prop equiv-id
+  refl-mere-equiv X = unit-trunc-Prop id-equiv
 
 abstract
   symmetric-mere-equiv :
@@ -1318,7 +1318,7 @@ pr2 empty-𝔽 = is-finite-is-empty id
 
 empty-UU-Fin : UU-Fin zero-ℕ
 pr1 empty-UU-Fin = empty
-pr2 empty-UU-Fin = unit-trunc-Prop equiv-id
+pr2 empty-UU-Fin = unit-trunc-Prop id-equiv
 
 abstract
   is-finite-unit : is-finite unit
@@ -1356,7 +1356,7 @@ pr2 (Fin-𝔽 k) = is-finite-Fin
 
 Fin-UU-Fin : (k : ℕ) → UU-Fin k
 pr1 (Fin-UU-Fin k) = Fin k
-pr2 (Fin-UU-Fin k) = unit-trunc-Prop equiv-id
+pr2 (Fin-UU-Fin k) = unit-trunc-Prop id-equiv
 
 raise-Fin : (l : Level) (k : ℕ) → UU l
 raise-Fin l k = raise l (Fin k)
@@ -1579,7 +1579,7 @@ module _
 
 has-finite-cardinality-empty : has-finite-cardinality empty
 pr1 has-finite-cardinality-empty = zero-ℕ
-pr2 has-finite-cardinality-empty = unit-trunc-Prop equiv-id
+pr2 has-finite-cardinality-empty = unit-trunc-Prop id-equiv
 
 has-finite-cardinality-is-empty :
   {l1 : Level} {X : UU l1} → is-empty X → has-finite-cardinality X
@@ -2433,7 +2433,7 @@ is-decidable-Π-count :
 is-decidable-Π-count e d =
   is-decidable-Π-equiv
     ( equiv-count e)
-    ( λ x → equiv-id)
+    ( λ x → id-equiv)
     ( is-decidable-Π-Fin (λ x → d (map-equiv-count e x)))
 
 is-decidable-Π-is-finite :
@@ -2505,7 +2505,7 @@ is-decidable-Σ-count :
 is-decidable-Σ-count e d =
   is-decidable-Σ-equiv
     ( equiv-count e)
-    ( λ x → equiv-id)
+    ( λ x → id-equiv)
     ( is-decidable-Σ-Fin (λ x → d (map-equiv-count e x)))
 
 -- There is no way to construct a function is-decidable-Σ-is-finite. This would
@@ -2574,7 +2574,7 @@ Fin-exp-ℕ n zero-ℕ =
   equiv-is-contr is-contr-Fin-one-ℕ (universal-property-empty' (Fin n))
 Fin-exp-ℕ n (succ-ℕ m) =
   ( ( inv-equiv equiv-universal-property-Maybe) ∘e
-    ( equiv-prod (Fin-exp-ℕ n m) equiv-id)) ∘e
+    ( equiv-prod (Fin-exp-ℕ n m) id-equiv)) ∘e
   ( Fin-mul-ℕ (exp-ℕ n m) n)
 
 -- Exercise 16.4 (b)

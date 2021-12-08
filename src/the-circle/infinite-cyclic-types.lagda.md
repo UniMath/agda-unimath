@@ -45,28 +45,28 @@ module _
   {l1 : Level} (X : Endo l1)
   where
 
-  equiv-id-Endo : equiv-Endo X X
-  pr1 equiv-id-Endo = equiv-id
-  pr2 equiv-id-Endo = refl-htpy
+  id-equiv-Endo : equiv-Endo X X
+  pr1 id-equiv-Endo = id-equiv
+  pr2 id-equiv-Endo = refl-htpy
   
   refl-mere-equiv-Endo : mere-equiv-Endo X X
-  refl-mere-equiv-Endo = unit-trunc-Prop equiv-id-Endo
+  refl-mere-equiv-Endo = unit-trunc-Prop id-equiv-Endo
 
   equiv-eq-Endo : (Y : Endo l1) → Id X Y → equiv-Endo X Y
-  equiv-eq-Endo .X refl = equiv-id-Endo
+  equiv-eq-Endo .X refl = id-equiv-Endo
   
   is-contr-total-equiv-Endo : is-contr (Σ (Endo l1) (equiv-Endo X))
   is-contr-total-equiv-Endo =
     is-contr-total-Eq-structure
       ( λ Y f e → (map-equiv e ∘ endomorphism-Endo X) ~ (f ∘ map-equiv e))
       ( is-contr-total-equiv (type-Endo X))
-      ( pair (type-Endo X) equiv-id)
+      ( pair (type-Endo X) id-equiv)
       ( is-contr-total-htpy (endomorphism-Endo X))
 
   is-equiv-equiv-eq-Endo : (Y : Endo l1) → is-equiv (equiv-eq-Endo Y)
   is-equiv-equiv-eq-Endo =
     fundamental-theorem-id X
-      equiv-id-Endo
+      id-equiv-Endo
       is-contr-total-equiv-Endo
       equiv-eq-Endo
 
@@ -106,11 +106,11 @@ module _
   equiv-Component-Endo T S =
     equiv-Endo (endo-Component-Endo X T) (endo-Component-Endo X S)
 
-  equiv-id-Component-Endo : (T : Component-Endo X) → equiv-Component-Endo T T
-  equiv-id-Component-Endo T = equiv-id-Endo (endo-Component-Endo X T)
+  id-equiv-Component-Endo : (T : Component-Endo X) → equiv-Component-Endo T T
+  id-equiv-Component-Endo T = id-equiv-Endo (endo-Component-Endo X T)
 
   equiv-eq-Component-Endo : (T S : Component-Endo X) → Id T S → equiv-Component-Endo T S
-  equiv-eq-Component-Endo T .T refl = equiv-id-Component-Endo T
+  equiv-eq-Component-Endo T .T refl = id-equiv-Component-Endo T
   
   is-contr-total-equiv-Component-Endo :
     is-contr
@@ -121,7 +121,7 @@ module _
       ( is-contr-total-equiv-Endo X)
       ( λ Y → is-prop-type-trunc-Prop)
       ( X)
-      ( equiv-id-Endo X)
+      ( id-equiv-Endo X)
       ( refl-mere-equiv-Endo X)
 
   is-equiv-equiv-eq-Component-Endo :
@@ -130,7 +130,7 @@ module _
   is-equiv-equiv-eq-Component-Endo =
     fundamental-theorem-id
       ( canonical-Component-Endo X)
-      ( equiv-id-Component-Endo (canonical-Component-Endo X))
+      ( id-equiv-Component-Endo (canonical-Component-Endo X))
       ( is-contr-total-equiv-Component-Endo)
       ( equiv-eq-Component-Endo (canonical-Component-Endo X))
 
@@ -165,9 +165,9 @@ module _
   equiv-UU-Infinite-Cyclic : (T S : UU-Infinite-Cyclic) → UU lzero
   equiv-UU-Infinite-Cyclic = equiv-Component-Endo ℤ-Endo
 
-  equiv-id-UU-Infinite-Cyclic :
+  id-equiv-UU-Infinite-Cyclic :
     (T : UU-Infinite-Cyclic) → equiv-UU-Infinite-Cyclic T T
-  equiv-id-UU-Infinite-Cyclic = equiv-id-Component-Endo ℤ-Endo
+  id-equiv-UU-Infinite-Cyclic = id-equiv-Component-Endo ℤ-Endo
 
   equiv-eq-UU-Infinite-Cyclic :
     (T S : UU-Infinite-Cyclic) → Id T S → equiv-UU-Infinite-Cyclic T S

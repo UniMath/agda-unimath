@@ -559,7 +559,7 @@ module _
   where
   
   id-pointed-equiv : A ≃* A
-  id-pointed-equiv = pair equiv-id refl
+  id-pointed-equiv = pair id-equiv refl
 
   pointed-equiv-eq : (B : Pointed-Type l1) → Id A B → A ≃* B
   pointed-equiv-eq .A refl = id-pointed-equiv
@@ -570,7 +570,7 @@ module _
       ( λ X x (e : type-Pointed-Type A ≃ X) →
         Id (map-equiv e (pt-Pointed-Type A)) x)
       ( is-contr-total-equiv (type-Pointed-Type A))
-      ( pair (type-Pointed-Type A) equiv-id)
+      ( pair (type-Pointed-Type A) id-equiv)
       ( is-contr-total-path (pt-Pointed-Type A))
 
   is-equiv-pointed-equiv-eq :
@@ -868,7 +868,7 @@ module _
   where
 
   equiv-tr-Ω : Id x y → Ω (pair A x) ≃* Ω (pair A y)
-  equiv-tr-Ω refl = pair equiv-id refl
+  equiv-tr-Ω refl = pair id-equiv refl
   
   equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
   equiv-tr-type-Ω p =

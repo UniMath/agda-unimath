@@ -2234,7 +2234,7 @@ module _
                          ( equiv-trunc-Set (equiv-precomp-Π e B))
                          ( unit-trunc-Set h)))
                      ( map-Π (λ x → unit-trunc-Set) (λ x → h (map-equiv e x))))
-                ( equiv-Π B e (λ x → equiv-id))
+                ( equiv-Π B e (λ x → id-equiv))
                 ( λ h →
                   ( ( inv-equiv equiv-funext) ∘e
                     ( equiv-Π
@@ -2243,29 +2243,29 @@ module _
                              ( map-equiv-trunc-Set
                                ( equiv-precomp-Π e B)
                                ( unit-trunc-Set
-                                 ( map-equiv-Π B e (λ x → equiv-id) h)))
+                                 ( map-equiv-Π B e (λ x → id-equiv) h)))
                              ( x))
                            ( unit-trunc-Set
                              ( map-equiv-Π B e
-                               ( λ z → equiv-id)
+                               ( λ z → id-equiv)
                                ( h)
                                ( map-equiv e x))))
-                      ( equiv-id)
+                      ( id-equiv)
                       ( λ x →
                         ( equiv-concat
                           ( ap
                             ( λ t → map-equiv f t x)
                             ( ( naturality-trunc-Set (precomp-Π (map-equiv e) B)
-                                ( map-equiv-Π B e (λ _ → equiv-id) h)) ∙
+                                ( map-equiv-Π B e (λ _ → id-equiv) h)) ∙
                               ( ap
                                 ( unit-trunc-Set)
                                 ( eq-htpy
                                   ( compute-map-equiv-Π B e
-                                    ( λ _ → equiv-id)
+                                    ( λ _ → id-equiv)
                                     ( h))))))
                           ( unit-trunc-Set
                             ( map-equiv-Π B e
-                              ( λ _ → equiv-id)
+                              ( λ _ → id-equiv)
                               ( h)
                               ( map-equiv e x)))) ∘e
                         ( equiv-concat'
@@ -2273,7 +2273,7 @@ module _
                           ( ap unit-trunc-Set
                             ( inv
                               ( compute-map-equiv-Π B e
-                                ( λ _ → equiv-id)
+                                ( λ _ → id-equiv)
                                 ( h)
                                 ( x)))))))) ∘e
                   ( equiv-funext))))

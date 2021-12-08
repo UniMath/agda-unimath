@@ -57,6 +57,7 @@ open import the-circle.infinite-cyclic-types public
 ## Chapter 4 : Groups 
 
 ```agda
+open import groups.categories public
 open import groups.abstract-groups public
 open import groups.abstract-abelian-groups public
 open import groups.abstract-group-actions public
@@ -65,6 +66,8 @@ open import groups.higher-groups public
 open import groups.concrete-groups public
 open import groups.examples-higher-groups public
 open import groups.concrete-group-actions public
+open import groups.sheargroups public
+open import groups.furstenberg-groups public
 ```
 
 ## Chapter 5 : Subgroups

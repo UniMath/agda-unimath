@@ -358,7 +358,7 @@ module _
   where
 
   emb-id : A ↪ A
-  emb-id = emb-equiv equiv-id
+  emb-id = emb-equiv id-equiv
 
   is-emb-id : is-emb (id {A = A})
   is-emb-id = is-emb-map-emb emb-id
@@ -445,7 +445,7 @@ module _
             ( equiv-tot (λ y → equiv-raise _ empty)))
           ( is-contr-equiv
             ( coprod (Σ A (Id x)) empty)
-            ( equiv-coprod equiv-id (right-absorption-Σ B))
+            ( equiv-coprod id-equiv (right-absorption-Σ B))
             ( is-contr-equiv'
               ( Σ A (Id x))
               ( inv-right-unit-law-coprod (Σ A (Id x)))
@@ -467,7 +467,7 @@ module _
             ( equiv-tot (λ y → equiv-raise _ (Id x y))))
           ( is-contr-equiv
             ( coprod empty (Σ B (Id x)))
-            ( equiv-coprod (right-absorption-Σ A) equiv-id)
+            ( equiv-coprod (right-absorption-Σ A) id-equiv)
             ( is-contr-equiv'
               ( Σ B (Id x))
               ( inv-left-unit-law-coprod (Σ B (Id x)))

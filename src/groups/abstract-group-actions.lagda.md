@@ -310,7 +310,7 @@ module _
             ( hom-equiv-Abstract-Group-Action G X Y e)
             ( pr1 f))
         ( equiv-right-swap-Σ)
-        ( λ { (pair (pair f E) H) → equiv-id}))
+        ( λ { (pair (pair f E) H) → id-equiv}))
       ( is-contr-total-Eq-substructure
         ( is-contr-total-htpy-hom-Abstract-Group-Action G X Y
           ( hom-equiv-Abstract-Group-Action G X Y e))
@@ -384,15 +384,15 @@ module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
 
-  equiv-id-Abstract-Group-Action :
+  id-equiv-Abstract-Group-Action :
     equiv-Abstract-Group-Action G X X
-  pr1 equiv-id-Abstract-Group-Action = equiv-id
-  pr2 equiv-id-Abstract-Group-Action g = refl-htpy
+  pr1 id-equiv-Abstract-Group-Action = id-equiv
+  pr2 id-equiv-Abstract-Group-Action g = refl-htpy
 
   equiv-eq-Abstract-Group-Action :
     (Y : Abstract-Group-Action G l2) →
     Id X Y → equiv-Abstract-Group-Action G X Y
-  equiv-eq-Abstract-Group-Action .X refl = equiv-id-Abstract-Group-Action
+  equiv-eq-Abstract-Group-Action .X refl = id-equiv-Abstract-Group-Action
 
   abstract
     is-contr-total-equiv-Abstract-Group-Action :
@@ -407,7 +407,7 @@ module _
             ( e ∘e map-hom-Group G (symmetric-Group (pr1 X)) (pr2 X) g)
             ( map-hom-Group G (symmetric-Group Y) ν g ∘e e))
         ( is-contr-total-equiv-Set (pr1 X))
-        ( pair (pr1 X) equiv-id)
+        ( pair (pr1 X) id-equiv)
         ( is-contr-equiv
           ( Σ ( hom-Group G (symmetric-Group (pr1 X)))
               ( htpy-hom-Group G (symmetric-Group (pr1 X)) (pr2 X)))
@@ -429,7 +429,7 @@ module _
       is-equiv (equiv-eq-Abstract-Group-Action Y)
     is-equiv-equiv-eq-Abstract-Group-Action =
       fundamental-theorem-id X
-        equiv-id-Abstract-Group-Action
+        id-equiv-Abstract-Group-Action
         is-contr-total-equiv-Abstract-Group-Action
         equiv-eq-Abstract-Group-Action
 
@@ -479,13 +479,13 @@ module _
   left-unit-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
     Id ( comp-equiv-Abstract-Group-Action G X Y Y
-         ( equiv-id-Abstract-Group-Action G Y)
+         ( id-equiv-Abstract-Group-Action G Y)
          ( f))
        ( f)
   left-unit-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X Y
       ( comp-equiv-Abstract-Group-Action G X Y Y
-        ( equiv-id-Abstract-Group-Action G Y)
+        ( id-equiv-Abstract-Group-Action G Y)
         ( f))
       ( f)
       ( refl-htpy)
@@ -493,12 +493,12 @@ module _
   right-unit-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
     Id ( comp-equiv-Abstract-Group-Action G X X Y f
-         ( equiv-id-Abstract-Group-Action G X))
+         ( id-equiv-Abstract-Group-Action G X))
        ( f)
   right-unit-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X Y
       ( comp-equiv-Abstract-Group-Action G X X Y f
-        ( equiv-id-Abstract-Group-Action G X))
+        ( id-equiv-Abstract-Group-Action G X))
       ( f)
       ( refl-htpy)
 
@@ -507,25 +507,25 @@ module _
     Id ( comp-equiv-Abstract-Group-Action G X Y X
          ( inv-equiv-Abstract-Group-Action G X Y f)
          ( f))
-       ( equiv-id-Abstract-Group-Action G X)
+       ( id-equiv-Abstract-Group-Action G X)
   left-inverse-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X X
       ( comp-equiv-Abstract-Group-Action G X Y X
         ( inv-equiv-Abstract-Group-Action G X Y f)
         ( f))
-      ( equiv-id-Abstract-Group-Action G X)
+      ( id-equiv-Abstract-Group-Action G X)
       ( isretr-map-inv-equiv (pr1 f))
 
   right-inverse-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
     Id ( comp-equiv-Abstract-Group-Action G Y X Y f
          ( inv-equiv-Abstract-Group-Action G X Y f))
-       ( equiv-id-Abstract-Group-Action G Y)
+       ( id-equiv-Abstract-Group-Action G Y)
   right-inverse-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G Y Y
       ( comp-equiv-Abstract-Group-Action G Y X Y f
         ( inv-equiv-Abstract-Group-Action G X Y f))
-      ( equiv-id-Abstract-Group-Action G Y)
+      ( id-equiv-Abstract-Group-Action G Y)
       ( issec-map-inv-equiv (pr1 f))
 
 module _
@@ -547,5 +547,4 @@ module _
     type-Abstract-Group-Action G X → UU (l1 ⊔ l2)
   type-stabilizer-Abstract-Group-Action x =
     Σ (type-Group G) (λ g → Id (mul-Abstract-Group-Action G X g x) x)
-
 ```
