@@ -39,10 +39,13 @@ open import groups.abstract-abelian-groups
 open import groups.abstract-group-actions
 open import groups.abstract-group-torsors
 open import groups.abstract-groups
+open import groups.categories
 open import groups.concrete-group-actions
 open import groups.concrete-groups
 open import groups.examples-higher-groups
+open import groups.furstenberg-groups
 open import groups.higher-groups
+open import groups.sheargroups
 open import labels
 open import subgroups
 open import subgroups.abstract-subgroups
