@@ -34,92 +34,95 @@ module _
         ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ (e y) f) f) ×
         ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ f (e x)) f))
 
-  all-elements-equal-is-unital-composition-structure-Set :
-    ( μ : associative-composition-structure-Set) →
-    all-elements-equal (is-unital-composition-structure-Set μ)
-  all-elements-equal-is-unital-composition-structure-Set
-    ( pair μ assoc-μ)
-    ( pair e (pair left-unit-law-e right-unit-law-e))
-    ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
-    eq-subtype
-      ( λ x →
-        is-prop-prod
-          ( is-prop-Π'
-            ( λ a →
-               is-prop-Π'
-                 ( λ b →
-                   is-prop-Π
-                     ( λ f' → is-set-type-Set (hom a b) (μ (x b) f') f'))))
-          ( is-prop-Π'
-            ( λ a →
-              is-prop-Π'
-                ( λ b →
-                  is-prop-Π
-                  ( λ f' →
-                    is-set-type-Set (hom a b) (μ f' (x a)) f')))))
-      (eq-htpy
-        ( λ x → (inv (left-unit-law-e' (e x))) ∙ right-unit-law-e (e' x)))
+  abstract
+    all-elements-equal-is-unital-composition-structure-Set :
+      ( μ : associative-composition-structure-Set) →
+      all-elements-equal (is-unital-composition-structure-Set μ)
+    all-elements-equal-is-unital-composition-structure-Set
+      ( pair μ assoc-μ)
+      ( pair e (pair left-unit-law-e right-unit-law-e))
+      ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
+      eq-subtype
+        ( λ x →
+          is-prop-prod
+            ( is-prop-Π'
+              ( λ a →
+                is-prop-Π'
+                  ( λ b →
+                    is-prop-Π
+                      ( λ f' → is-set-type-Set (hom a b) (μ (x b) f') f'))))
+            ( is-prop-Π'
+              ( λ a →
+                is-prop-Π'
+                  ( λ b →
+                    is-prop-Π
+                    ( λ f' →
+                      is-set-type-Set (hom a b) (μ f' (x a)) f')))))
+        ( eq-htpy
+          ( λ x → (inv (left-unit-law-e' (e x))) ∙ right-unit-law-e (e' x)))
 
--- Precategory :
---   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
--- Precategory l1 l2 =
---   Σ ( UU l1) (λ A →
---     Σ (A → A → UU-Set l2) (λ hom →
---       Σ ( associative-composition-structure A hom)
---         ( is-unital-composition-structure A hom)))
+    is-prop-is-unital-composition-structure-Set :
+      ( μ : associative-composition-structure-Set) →
+      is-prop (is-unital-composition-structure-Set μ)
+    is-prop-is-unital-composition-structure-Set μ =
+      is-prop-all-elements-equal
+        ( all-elements-equal-is-unital-composition-structure-Set μ)
 
--- obj-Precat :
---   {l1 l2 : Level} → Precategory l1 l2 → UU l1
--- obj-Precat C = pr1 C
+Precat :
+  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Precat l1 l2 =
+  Σ ( UU l1)
+    ( λ A →
+      Σ ( A → A → UU-Set l2)
+        ( λ hom →
+          Σ ( associative-composition-structure-Set hom)
+            ( is-unital-composition-structure-Set hom)))
 
--- hom-Set-Precat :
---   {l1 l2 : Level} (C : Precategory l1 l2) (x y : obj-Precat C) → UU-Set l2
--- hom-Set-Precat C = pr1 (pr2 C)
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  where
+  
+  obj-Precat : UU l1
+  obj-Precat = pr1 C
+  
+  hom-Precat-Set : (x y : obj-Precat) → UU-Set l2
+  hom-Precat-Set = pr1 (pr2 C)
 
--- hom-Precat :
---   {l1 l2 : Level} (C : Precategory l1 l2) (x y : obj-Precat C) → UU l2
--- hom-Precat C x y = pr1 (hom-Set-Precat C x y)
+  hom-Precat : (x y : obj-Precat) → UU l2
+  hom-Precat x y = type-Set (hom-Precat-Set x y)
 
--- is-set-hom-Precat :
---   {l1 l2 : Level} (C : Precategory l1 l2) (x y : obj-Precat C) →
---   is-set (hom-Precat C x y)
--- is-set-hom-Precat C x y = pr2 (hom-Set-Precat C x y)
+  is-set-hom-Precat : (x y : obj-Precat) → is-set (hom-Precat x y)
+  is-set-hom-Precat x y = is-set-type-Set (hom-Precat-Set x y)
 
--- associative-composition-Precat :
---   {l1 l2 : Level} (C : Precategory l1 l2) →
---   associative-composition-structure (obj-Precat C) (hom-Set-Precat C)
--- associative-composition-Precat C = pr1 (pr2 (pr2 C))
+  associative-composition-Precat :
+    associative-composition-structure-Set hom-Precat-Set
+  associative-composition-Precat = pr1 (pr2 (pr2 C))
 
--- composition-Precat :
---   {l1 l2 : Level} (C : Precategory l1 l2) {x y z : obj-Precat C} →
---   hom-Precat C x y → hom-Precat C y z → hom-Precat C x z
--- composition-Precat C {x} {y} {z} =
---   pr1 (associative-composition-Precat C) x y z
+  composition-Precat :
+    {x y z : obj-Precat} → hom-Precat y z → hom-Precat x y → hom-Precat x z
+  composition-Precat = pr1 associative-composition-Precat
 
--- assoc-composition-Precat :
---   { l1 l2 : Level} (C : Precategory l1 l2) {x y z w : obj-Precat C} →
---   ( f : hom-Precat C x y) (g : hom-Precat C y z) (h : hom-Precat C z w) →
---   Id (composition-Precat C (composition-Precat C f g) h)
---      (composition-Precat C f (composition-Precat C g h))
--- assoc-composition-Precat C {x} {y} {z} {w} =
---   pr2 (associative-composition-Precat C) x y z w
+  assoc-composition-Precat :
+    {x y z w : obj-Precat} (h : hom-Precat z w) (g : hom-Precat y z)
+    (f : hom-Precat x y) →
+    Id (composition-Precat (composition-Precat h g) f)
+      (composition-Precat h (composition-Precat g f))
+  assoc-composition-Precat = pr2 associative-composition-Precat
 
--- is-unital-Precat :
---   { l1 l2 : Level} (C : Precategory l1 l2) →
---   is-unital-composition-structure
---     ( obj-Precat C)
---     ( hom-Set-Precat C)
---     ( associative-composition-Precat C)
--- is-unital-Precat C = pr2 (pr2 (pr2 C))
+  is-unital-Precat :
+    is-unital-composition-structure-Set
+      hom-Precat-Set
+      associative-composition-Precat
+  is-unital-Precat = pr2 (pr2 (pr2 C))
 
--- {-
--- id-Precat :
---   { l1 l2 : Level} (C : Precategory l1 l2) {x : obj-Precat C} →
---   hom-Precat C x x
--- id-Precat (pair A (pair hom (pair (pair μ assoc-μ) t))) {x} =
---   pr1 (is-unital-Precat {!!}) x
--- -}
+{-
+id-Precat :
+  { l1 l2 : Level} (C : Precat l1 l2) {x : obj-Precat C} →
+  hom-Precat C x x
+id-Precat (pair A (pair hom (pair (pair μ assoc-μ) t))) {x} =
+  pr1 (is-unital-Precat {!!}) x
+-}
 
 
 
--- ```
+```
