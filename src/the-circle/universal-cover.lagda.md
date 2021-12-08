@@ -29,7 +29,7 @@ Eq-Fam-circle P Q =
 reflexive-Eq-Fam-circle :
   { l1 : Level} (P : Fam-circle l1) → Eq-Fam-circle P P
 reflexive-Eq-Fam-circle (pair X e) =
-  pair equiv-id refl-htpy
+  pair id-equiv refl-htpy
 
 Eq-Fam-circle-eq :
   { l1 : Level} (P Q : Fam-circle l1) → Id P Q → Eq-Fam-circle P Q
@@ -44,7 +44,7 @@ abstract
       ( λ Y f h →
         ((map-equiv h) ∘ (map-equiv e)) ~ ((map-equiv f) ∘ (map-equiv h)))
       ( is-contr-total-equiv X)
-      ( pair X equiv-id)
+      ( pair X id-equiv)
     ( is-contr-total-htpy-equiv e)
 
 abstract
@@ -85,7 +85,7 @@ triangle-comparison-fam-circle l P =
   eq-Eq-Fam-circle
     ( ev-fam-circle l P)
     ( comparison-fam-circle _ (ev-free-loop l (UU _) P))
-    ( pair equiv-id (inv-htpy (tr-equiv-eq-ap (pr2 l))))
+    ( pair id-equiv (inv-htpy (tr-equiv-eq-ap (pr2 l))))
 
 abstract
   is-equiv-ev-fam-circle-universal-property-circle :

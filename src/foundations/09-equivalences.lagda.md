@@ -209,9 +209,9 @@ module _
   pr1 (pr2 is-equiv-id) = id
   pr2 (pr2 is-equiv-id) = refl-htpy
   
-  equiv-id : A ≃ A
-  pr1 equiv-id = id
-  pr2 equiv-id = is-equiv-id
+  id-equiv : A ≃ A
+  pr1 id-equiv = id
+  pr2 id-equiv = is-equiv-id
 
 -- Example 9.2.4
 
@@ -2280,7 +2280,7 @@ coprod-Fin :
   (k l : ℕ) → coprod (Fin k) (Fin l) ≃ Fin (add-ℕ k l)
 coprod-Fin k zero-ℕ = right-unit-law-coprod (Fin k)
 coprod-Fin k (succ-ℕ l) =
-  (equiv-coprod (coprod-Fin k l) equiv-id) ∘e inv-assoc-coprod
+  (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-assoc-coprod
 
 Fin-add-ℕ :
   (k l : ℕ) → Fin (add-ℕ k l) ≃ coprod (Fin k) (Fin l)

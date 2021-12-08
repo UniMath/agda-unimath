@@ -688,7 +688,7 @@ abstract
                   ( ( equiv-Π
                       ( λ (d : D c) → fib (map-𝕎 D f e) (γ d))
                       ( (equiv-tr D p) ∘e (e a))
-                      ( λ b → equiv-id)) ∘e
+                      ( λ b → id-equiv)) ∘e
                     ( equiv-inv-choice-∞
                       ( λ b w →
                         Id ( map-𝕎 D f e w)
@@ -799,7 +799,7 @@ module _
   
   extensional-Eq-eq-𝕎 : 
     {x y : 𝕎 A B} → Id x y → (z : 𝕎 A B) → (z ∈-𝕎 x) ≃ (z ∈-𝕎 y)
-  extensional-Eq-eq-𝕎 refl z = equiv-id
+  extensional-Eq-eq-𝕎 refl z = id-equiv
 
 is-extensional-𝕎 :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
@@ -861,7 +861,7 @@ module _
   Eq-ext-𝕎 x y = (z : 𝕎 A B) → (z ∈-𝕎 x) ≃ (z ∈-𝕎 y)
 
   refl-Eq-ext-𝕎 : (x : 𝕎 A B) → Eq-ext-𝕎 x x
-  refl-Eq-ext-𝕎 x z = equiv-id
+  refl-Eq-ext-𝕎 x z = id-equiv
 
   Eq-ext-eq-𝕎 : {x y : 𝕎 A B} → Id x y → Eq-ext-𝕎 x y
   Eq-ext-eq-𝕎 {x} refl = refl-Eq-ext-𝕎 x
@@ -937,7 +937,7 @@ module _
           ( tree-𝕎
             ( pr1 (map-equiv inv-equiv-structure-𝕎-Alg z))
             ( pr2 (map-equiv inv-equiv-structure-𝕎-Alg z)))
-    H (tree-𝕎 b g) = equiv-id
+    H (tree-𝕎 b g) = id-equiv
 
   is-contr-total-Eq-ext-is-univalent-𝕎 :
     is-univalent B → (x : 𝕎 A B) → is-contr (Σ (𝕎 A B) (Eq-ext-𝕎 x))
@@ -945,13 +945,13 @@ module _
     is-contr-equiv
       ( Σ A (λ x → B a ≃ B x))
       ( equiv-total-Eq-ext-𝕎 (tree-𝕎 a f))
-      ( fundamental-theorem-id' a equiv-id (λ x → equiv-tr B) (H a))
+      ( fundamental-theorem-id' a id-equiv (λ x → equiv-tr B) (H a))
 
   is-extensional-is-univalent-𝕎 :
     is-univalent B → is-extensional-𝕎 A B
   is-extensional-is-univalent-𝕎 H x =
     fundamental-theorem-id x
-      ( λ z → equiv-id)
+      ( λ z → id-equiv)
       ( is-contr-total-Eq-ext-is-univalent-𝕎 H x)
       ( λ y → extensional-Eq-eq-𝕎 {y = y})
 
@@ -962,13 +962,13 @@ module _
       ( Π-Prop A (λ y → is-equiv-Prop (λ (γ : Id x y) → equiv-tr B γ)))
       ( λ w →
         fundamental-theorem-id x
-          ( equiv-id)
+          ( id-equiv)
           ( is-contr-equiv'
             ( Σ (𝕎 A B) (Eq-ext-𝕎 (tree-𝕎 x (λ y → w))))
             ( equiv-total-Eq-ext-𝕎 (tree-𝕎 x (λ y → w)))
             ( fundamental-theorem-id'
               ( tree-𝕎 x (λ y → w))
-              ( λ z → equiv-id)
+              ( λ z → id-equiv)
               ( λ z → extensional-Eq-eq-𝕎)
               ( H (tree-𝕎 x (λ y → w)))))
           ( λ y →  equiv-tr B {y = y}))
@@ -1270,7 +1270,7 @@ paradox-Russell {l} H =
   where
   
   K : is-small-universe l l
-  K = pair H (λ X → pair X equiv-id)
+  K = pair H (λ X → pair X id-equiv)
 
   R : 𝕍 (lsuc l)
   R = Russell l
@@ -1303,7 +1303,7 @@ paradox-Russell {l} H =
                 ( λ t →
                   ( commutative-prod) ∘e
                   ( equiv-prod
-                    ( equiv-id)
+                    ( id-equiv)
                     ( inv-equiv
                       ( ( equiv-concat'
                           _ ( p)) ∘e

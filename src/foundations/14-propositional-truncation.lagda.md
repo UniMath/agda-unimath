@@ -1605,7 +1605,7 @@ abstract
           ( ( ( right-unit-law-coprod-is-empty
                 ( Σ (Fin k) (B ∘ inl))
                 ( B (inr star)) f) ∘e
-              ( equiv-coprod equiv-id (left-unit-law-Σ (B ∘ inr)))) ∘e
+              ( equiv-coprod id-equiv (left-unit-law-Σ (B ∘ inr)))) ∘e
             ( right-distributive-Σ-coprod (Fin k) unit B))
           ( y)))
 ```

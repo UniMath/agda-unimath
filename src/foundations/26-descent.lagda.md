@@ -875,9 +875,9 @@ reflexive-equiv-Fam-pushout :
   equiv-Fam-pushout P P
 reflexive-equiv-Fam-pushout (pair PA (pair PB PS)) =
   pair
-    ( λ a → equiv-id)
+    ( λ a → id-equiv)
     ( pair
-      ( λ b → equiv-id)
+      ( λ b → id-equiv)
       ( λ s → refl-htpy))
 
 equiv-Fam-pushout-eq :
@@ -899,15 +899,15 @@ is-contr-total-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
     ( is-contr-total-Eq-Π
       ( λ a X → (pr1 P a) ≃ X)
       ( λ a → is-contr-total-equiv (pr1 P a)))
-    ( pair (pr1 P) (λ a → equiv-id))
+    ( pair (pr1 P) (λ a → id-equiv))
     ( is-contr-total-Eq-structure
       ( λ PB' PS' eB →
         coherence-equiv-Fam-pushout
-          P (pair (pr1 P) (pair PB' PS')) (λ a → equiv-id) eB)
+          P (pair (pr1 P) (pair PB' PS')) (λ a → id-equiv) eB)
       ( is-contr-total-Eq-Π
         ( λ b Y → (pr1 (pr2 P) b) ≃ Y)
         ( λ b → is-contr-total-equiv (pr1 (pr2 P) b)))
-      ( pair (pr1 (pr2 P)) (λ b → equiv-id))
+      ( pair (pr1 (pr2 P)) (λ b → id-equiv))
       ( is-contr-total-Eq-Π
         ( λ s e → (map-equiv (pr2 (pr2 P) s)) ~ (map-equiv e))
         ( λ s → is-contr-total-htpy-equiv (pr2 (pr2 P) s))))
@@ -992,7 +992,7 @@ htpy-equiv-eq-ap-fam :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : Id x y) →
   htpy-equiv (equiv-tr B p) (equiv-eq (ap B p))
 htpy-equiv-eq-ap-fam B {x} {.x} refl =
-  refl-htpy-equiv equiv-id
+  refl-htpy-equiv id-equiv
 
 triangle-desc-fam :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -1002,9 +1002,9 @@ triangle-desc-fam :
 triangle-desc-fam {l = l} {S} {A} {B} {X} (pair i (pair j H)) P =
   eq-equiv-Fam-pushout
     ( pair
-      ( λ a → equiv-id)
+      ( λ a → id-equiv)
       ( pair
-        ( λ b → equiv-id)
+        ( λ b → id-equiv)
         ( λ s → htpy-equiv-eq-ap-fam P (H s))))
 
 is-equiv-desc-fam :

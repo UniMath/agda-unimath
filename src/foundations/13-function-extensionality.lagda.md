@@ -762,7 +762,7 @@ module _
     ( equiv-Σ
       ( λ s → pr1 s ~ id)
       ( equiv-choice-∞)
-      ( λ s → equiv-id))
+      ( λ s → id-equiv))
       
 -- Theorem 13.2.4
 

@@ -382,7 +382,7 @@ comparison-suspension-cocone X Z =
       equiv-Σ
         ( λ z2 → (x : X) → Id (z1 star) z2)
         ( equiv-universal-property-unit Z)
-        ( λ z2 → equiv-id))
+        ( λ z2 → id-equiv))
 
 map-comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →

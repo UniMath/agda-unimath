@@ -1471,7 +1471,7 @@ module _
 
 id-map-equiv-Π :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-  ( map-equiv-Π B (equiv-id {A = A}) (λ a → equiv-id {A = B a})) ~ id
+  ( map-equiv-Π B (id-equiv {A = A}) (λ a → id-equiv {A = B a})) ~ id
 id-map-equiv-Π B = refl-htpy
 
 -- Exercise 13.9 (b)

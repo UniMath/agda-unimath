@@ -523,29 +523,29 @@ pr2 (symmetric-Semi-Group X) = has-associative-mul-aut-Set X
 
 left-unit-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (equiv-id ∘e e) e
+  Id (id-equiv ∘e e) e
 left-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 right-unit-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e equiv-id) e
+  Id (e ∘e id-equiv) e
 right-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 is-unital-symmetric-Semi-Group :
   {l : Level} (X : UU-Set l) → is-unital (symmetric-Semi-Group X)
-pr1 (is-unital-symmetric-Semi-Group X) = equiv-id
+pr1 (is-unital-symmetric-Semi-Group X) = id-equiv
 pr1 (pr2 (is-unital-symmetric-Semi-Group X)) = left-unit-law-equiv
 pr2 (pr2 (is-unital-symmetric-Semi-Group X)) = right-unit-law-equiv
 
 left-inverse-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id ((inv-equiv e) ∘e e) equiv-id
+  Id ((inv-equiv e) ∘e e) id-equiv
 left-inverse-law-equiv e =
   eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
 
 right-inverse-law-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e (inv-equiv e)) equiv-id
+  Id (e ∘e (inv-equiv e)) id-equiv
 right-inverse-law-equiv e =
   eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
@@ -1080,9 +1080,9 @@ module _
         ( is-contr-total-equiv (type-Semi-Group G))
         ( is-prop-is-set)
         ( type-Semi-Group G)
-        ( equiv-id)
+        ( id-equiv)
         ( is-set-type-Semi-Group G))
-      ( pair (set-Semi-Group G) equiv-id)
+      ( pair (set-Semi-Group G) id-equiv)
       ( is-contr-total-preserves-mul-id)
 
   is-contr-total-iso-Semi-Group : is-contr (Σ (Semi-Group l) (iso-Semi-Group G))
@@ -1092,22 +1092,22 @@ module _
       ( equiv-tot (equiv-iso-equiv-Semi-Group G))
       ( is-contr-total-equiv-Semi-Group)
 
-  iso-id-Semi-Group : iso-Semi-Group G G
-  pr1 iso-id-Semi-Group = id-hom-Semi-Group G
-  pr1 (pr2 iso-id-Semi-Group) = id-hom-Semi-Group G
-  pr1 (pr2 (pr2 iso-id-Semi-Group)) =
+  id-iso-Semi-Group : iso-Semi-Group G G
+  pr1 id-iso-Semi-Group = id-hom-Semi-Group G
+  pr1 (pr2 id-iso-Semi-Group) = id-hom-Semi-Group G
+  pr1 (pr2 (pr2 id-iso-Semi-Group)) =
     left-unit-law-hom-Semi-Group G G (id-hom-Semi-Group G)
-  pr2 (pr2 (pr2 iso-id-Semi-Group)) =
+  pr2 (pr2 (pr2 id-iso-Semi-Group)) =
     right-unit-law-hom-Semi-Group G G (id-hom-Semi-Group G)
 
   iso-eq-Semi-Group : (H : Semi-Group l) → Id G H → iso-Semi-Group G H
-  iso-eq-Semi-Group .G refl = iso-id-Semi-Group
+  iso-eq-Semi-Group .G refl = id-iso-Semi-Group
 
   is-equiv-iso-eq-Semi-Group :
     (H : Semi-Group l) → is-equiv (iso-eq-Semi-Group H)
   is-equiv-iso-eq-Semi-Group =
     fundamental-theorem-id G
-      ( iso-id-Semi-Group)
+      ( id-iso-Semi-Group)
       ( is-contr-total-iso-Semi-Group)
       ( iso-eq-Semi-Group)
 
@@ -1163,13 +1163,13 @@ module _
   iso-equiv-Group : equiv-Group → iso-Group
   iso-equiv-Group = map-equiv equiv-iso-equiv-Group
 
-iso-id-hom-Group :
+id-iso-Group :
   { l1 : Level} (G : Group l1) → iso-Group G G
-iso-id-hom-Group G = iso-id-Semi-Group (semi-group-Group G)
+id-iso-Group G = id-iso-Semi-Group (semi-group-Group G)
 
 iso-eq-Group :
   { l1 : Level} (G H : Group l1) → Id G H → iso-Group G H
-iso-eq-Group G .G refl = iso-id-hom-Group G
+iso-eq-Group G .G refl = id-iso-Group G
 
 abstract
   extensionality-Group' :
@@ -1193,7 +1193,7 @@ is-equiv-iso-eq-Group :
   { l1 : Level} (G H : Group l1) → is-equiv (iso-eq-Group G H)
 is-equiv-iso-eq-Group G =
   fundamental-theorem-id G
-    ( iso-id-hom-Group G)
+    ( id-iso-Group G)
     ( is-contr-total-iso-Group G)
     ( iso-eq-Group G)
 

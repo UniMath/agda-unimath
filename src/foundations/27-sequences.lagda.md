@@ -44,7 +44,7 @@ reflexive-equiv-Seq :
   { l1 : Level} (A : Sequence l1) → equiv-Seq A A
 reflexive-equiv-Seq A =
   pair
-    ( λ n → equiv-id)
+    ( λ n → id-equiv)
     ( λ n → refl-htpy)
 
 equiv-eq-Seq :
@@ -61,7 +61,7 @@ is-contr-total-equiv-Seq A =
     ( is-contr-total-Eq-Π
       ( λ n X → type-seq A n ≃ X)
       ( λ n → is-contr-total-equiv (type-seq A n)))
-    ( pair (type-seq A) (λ n → equiv-id))
+    ( pair (type-seq A) (λ n → id-equiv))
     ( is-contr-total-Eq-Π
       ( λ n h → h ~ (map-seq A n))
       ( λ n → is-contr-total-htpy' (map-seq A n)))

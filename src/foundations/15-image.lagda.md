@@ -471,7 +471,7 @@ module _
                 ( comp-hom-slice f (map-emb i) (map-emb i') (pr1 h) q)
                 ( q'))
             ( equiv-right-swap-Σ)
-            ( λ { (pair (pair e E) H) → equiv-id})))
+            ( λ { (pair (pair e E) H) → id-equiv})))
         ( is-contr-equiv
           ( is-equiv
             ( map-hom-slice-universal-property-image f i q Hi i' q'))

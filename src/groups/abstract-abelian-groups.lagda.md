@@ -287,7 +287,7 @@ inv-hom-iso-Ab A B f =
 
 id-iso-Ab :
   {l1 : Level} (A : Ab l1) → iso-Ab A A
-id-iso-Ab A = iso-id-hom-Group (group-Ab A)
+id-iso-Ab A = id-iso-Group (group-Ab A)
 
 iso-eq-Ab :
   { l1 : Level} (A B : Ab l1) → Id A B → iso-Ab A B

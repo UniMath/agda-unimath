@@ -3,7 +3,7 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module groups.abstract-group-torsors where
 
@@ -82,7 +82,7 @@ module _
   pr1 principal-Torsor-Abstract-Group = principal-Abstract-Group-Action G
   pr2 principal-Torsor-Abstract-Group =
     unit-trunc-Prop
-      ( equiv-id-Abstract-Group-Action G (principal-Abstract-Group-Action G))
+      ( id-equiv-Abstract-Group-Action G (principal-Abstract-Group-Action G))
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Torsor-Abstract-Group G l2)
@@ -95,14 +95,14 @@ module _
       ( action-Torsor-Abstract-Group G X)
       ( action-Torsor-Abstract-Group G Y)
 
-  equiv-id-Torsor-Abstract-Group : equiv-Torsor-Abstract-Group X
-  equiv-id-Torsor-Abstract-Group =
-    equiv-id-Abstract-Group-Action G (action-Torsor-Abstract-Group G X)
+  id-equiv-Torsor-Abstract-Group : equiv-Torsor-Abstract-Group X
+  id-equiv-Torsor-Abstract-Group =
+    id-equiv-Abstract-Group-Action G (action-Torsor-Abstract-Group G X)
 
   equiv-eq-Torsor-Abstract-Group :
     (Y : Torsor-Abstract-Group G l2) → Id X Y → equiv-Torsor-Abstract-Group Y
   equiv-eq-Torsor-Abstract-Group .X refl =
-    equiv-id-Torsor-Abstract-Group
+    id-equiv-Torsor-Abstract-Group
 
   is-contr-total-equiv-Torsor-Abstract-Group :
     is-contr (Σ (Torsor-Abstract-Group G l2) (equiv-Torsor-Abstract-Group))
@@ -112,7 +112,7 @@ module _
         ( action-Torsor-Abstract-Group G X))
       ( is-prop-is-torsor-Abstract-Group G)
       ( action-Torsor-Abstract-Group G X)
-      ( equiv-id-Torsor-Abstract-Group)
+      ( id-equiv-Torsor-Abstract-Group)
       ( is-torsor-action-Torsor-Abstract-Group G X)
 
   is-equiv-equiv-eq-Torsor-Abstract-Group :
@@ -120,7 +120,7 @@ module _
     is-equiv (equiv-eq-Torsor-Abstract-Group Y)
   is-equiv-equiv-eq-Torsor-Abstract-Group =
     fundamental-theorem-id X
-      equiv-id-Torsor-Abstract-Group
+      id-equiv-Torsor-Abstract-Group
       is-contr-total-equiv-Torsor-Abstract-Group
       equiv-eq-Torsor-Abstract-Group
 
@@ -275,13 +275,13 @@ module _
   left-unit-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
     Id ( comp-equiv-Torsor-Abstract-Group G X Y Y
-         ( equiv-id-Torsor-Abstract-Group G Y)
+         ( id-equiv-Torsor-Abstract-Group G Y)
          ( f))
        ( f)
   left-unit-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X Y
       ( comp-equiv-Torsor-Abstract-Group G X Y Y
-        ( equiv-id-Torsor-Abstract-Group G Y)
+        ( id-equiv-Torsor-Abstract-Group G Y)
         ( f))
       ( f)
       ( refl-htpy)
@@ -289,12 +289,12 @@ module _
   right-unit-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
     Id ( comp-equiv-Torsor-Abstract-Group G X X Y f
-         ( equiv-id-Torsor-Abstract-Group G X))
+         ( id-equiv-Torsor-Abstract-Group G X))
        ( f)
   right-unit-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X Y
       ( comp-equiv-Torsor-Abstract-Group G X X Y f
-        ( equiv-id-Torsor-Abstract-Group G X))
+        ( id-equiv-Torsor-Abstract-Group G X))
       ( f)
       ( refl-htpy)
 
@@ -303,25 +303,25 @@ module _
     Id ( comp-equiv-Torsor-Abstract-Group G X Y X
          ( inv-equiv-Torsor-Abstract-Group G X Y f)
          ( f))
-       ( equiv-id-Torsor-Abstract-Group G X)
+       ( id-equiv-Torsor-Abstract-Group G X)
   left-inverse-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X X
       ( comp-equiv-Torsor-Abstract-Group G X Y X
         ( inv-equiv-Torsor-Abstract-Group G X Y f)
         ( f))
-      ( equiv-id-Torsor-Abstract-Group G X)
+      ( id-equiv-Torsor-Abstract-Group G X)
       ( isretr-map-inv-equiv (pr1 f))
 
   right-inverse-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
     Id ( comp-equiv-Torsor-Abstract-Group G Y X Y f
          ( inv-equiv-Torsor-Abstract-Group G X Y f))
-       ( equiv-id-Torsor-Abstract-Group G Y)
+       ( id-equiv-Torsor-Abstract-Group G Y)
   right-inverse-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G Y Y
       ( comp-equiv-Torsor-Abstract-Group G Y X Y f
         ( inv-equiv-Torsor-Abstract-Group G X Y f))
-      ( equiv-id-Torsor-Abstract-Group G Y)
+      ( id-equiv-Torsor-Abstract-Group G Y)
       ( issec-map-inv-equiv (pr1 f))
 
 module _
@@ -364,7 +364,7 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (pr1 (pr2 aut-principal-Torsor-Abstract-Group)) =
-    equiv-id-Torsor-Abstract-Group G (principal-Torsor-Abstract-Group G)
+    id-equiv-Torsor-Abstract-Group G (principal-Torsor-Abstract-Group G)
   pr1 (pr2 (pr1 (pr2 aut-principal-Torsor-Abstract-Group))) =
     left-unit-law-comp-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
