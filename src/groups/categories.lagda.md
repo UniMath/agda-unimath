@@ -175,4 +175,22 @@ module _
   pr1 (pr2 (is-iso-id-Precat {x})) = left-unit-law-Precat (id-Precat x)
   pr2 (pr2 (is-iso-id-Precat {x})) = left-unit-law-Precat (id-Precat x)
 
+  id-iso-Precat : {x : obj-Precat} → iso-Precat x x
+  pr1 (id-iso-Precat {x}) = id-Precat x
+  pr2 (id-iso-Precat {x}) = is-iso-id-Precat
+
+  iso-eq-Precat : {x y : obj-Precat} → Id x y → iso-Precat x y
+  iso-eq-Precat refl = id-iso-Precat
+
+  is-category-Precat-Prop : UU-Prop (l1 ⊔ l2)
+  is-category-Precat-Prop =
+    Π-Prop obj-Precat
+      ( λ x → Π-Prop obj-Precat (λ y → is-equiv-Prop (iso-eq-Precat {x} {y})))
+
+  is-category-Precat : UU (l1 ⊔ l2)
+  is-category-Precat = type-Prop is-category-Precat-Prop
+
+Cat : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Cat l1 l2 = Σ (Precat l1 l2) is-category-Precat
+
 ```
