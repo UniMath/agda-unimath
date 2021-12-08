@@ -11,50 +11,54 @@ open import foundations public
 
 -- Categories
 
-associative-composition-structure :
-  {l1 l2 : Level} (A : UU l1) (hom : A → A → UU-Set l2) → UU (l1 ⊔ l2)
-associative-composition-structure A hom =
-  Σ ( {x y z : A}
-      → type-Set (hom y z)
-      → type-Set (hom x y)
-      → type-Set (hom x z))
-    ( λ μ →
-      {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
-      (f : type-Set (hom x y)) →
-      Id (μ (μ h g) f) (μ h (μ g f)))
+module _
+  {l1 l2 : Level} {A : UU l1} (hom : A → A → UU-Set l2)
+  where
+  
+  associative-composition-structure-Set : UU (l1 ⊔ l2)
+  associative-composition-structure-Set =
+    Σ ( {x y z : A}
+        → type-Set (hom y z)
+        → type-Set (hom x y)
+        → type-Set (hom x z))
+      ( λ μ →
+        {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
+        (f : type-Set (hom x y)) →
+        Id (μ (μ h g) f) (μ h (μ g f)))
 
-is-unital-composition-structure :
-  {l1 l2 : Level} (A : UU l1) (hom : A → A → UU-Set l2) →
-  associative-composition-structure A hom → UU _
-is-unital-composition-structure A hom (pair μ assoc-μ) =
-  Σ ( (x : A) → type-Set (hom x x))
-    ( λ e →
-      ( {x y : A} (f : type-Set (hom x y)) → Id (μ (e y) f) f) ×
-      ( {x y : A} (f : type-Set (hom x y)) → Id (μ f (e x)) f))
+  is-unital-composition-structure-Set :
+    associative-composition-structure-Set → UU (l1 ⊔ l2)
+  is-unital-composition-structure-Set μ =
+    Σ ( (x : A) → type-Set (hom x x))
+      ( λ e →
+        ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ (e y) f) f) ×
+        ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ f (e x)) f))
 
--- all-elements-equal-is-unital-composition-structure :
---   {l1 l2 : Level} (A : UU l1) (hom : A → A → UU-Set l2) →
---   ( μ : associative-composition-structure A hom) →
---   all-elements-equal (is-unital-composition-structure A hom μ)
--- all-elements-equal-is-unital-composition-structure A hom
---   ( pair μ assoc-μ)
---   ( pair e (pair left-unit-law-e right-unit-law-e))
---   ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
---   eq-subtype
---     ( λ x →
---       is-prop-prod
---         ( is-prop-Π
---           ( λ a → is-prop-Π
---             ( λ b → is-prop-Π
---               ( λ f' →
---                 is-set-type-Set (hom a b) (μ a a b (x a) f') f'))))
---         ( is-prop-Π
---           ( λ a → is-prop-Π
---             ( λ b → is-prop-Π
---               ( λ f' →
---                 is-set-type-Set (hom a b) (μ a b b f' (x b)) f')))))
---     ( eq-htpy
---       ( λ x → (inv (left-unit-law-e' x x (e x))) ∙ right-unit-law-e x x (e' x)))
+  all-elements-equal-is-unital-composition-structure-Set :
+    ( μ : associative-composition-structure-Set) →
+    all-elements-equal (is-unital-composition-structure-Set μ)
+  all-elements-equal-is-unital-composition-structure-Set
+    ( pair μ assoc-μ)
+    ( pair e (pair left-unit-law-e right-unit-law-e))
+    ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
+    eq-subtype
+      ( λ x →
+        is-prop-prod
+          ( is-prop-Π'
+            ( λ a →
+               is-prop-Π'
+                 ( λ b →
+                   is-prop-Π
+                     ( λ f' → is-set-type-Set (hom a b) (μ (x b) f') f'))))
+          ( is-prop-Π'
+            ( λ a →
+              is-prop-Π'
+                ( λ b →
+                  is-prop-Π
+                  ( λ f' →
+                    is-set-type-Set (hom a b) (μ f' (x a)) f')))))
+      (eq-htpy
+        ( λ x → (inv (left-unit-law-e' (e x))) ∙ right-unit-law-e (e' x)))
 
 -- Precategory :
 --   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
