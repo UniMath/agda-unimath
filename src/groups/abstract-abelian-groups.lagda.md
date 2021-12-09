@@ -47,7 +47,7 @@ assoc-add-Ab :
 assoc-add-Ab A = assoc-mul-Group (group-Ab A)
 
 semi-group-Ab :
-  {l : Level} (A : Ab l) → Semi-Group l
+  {l : Level} (A : Ab l) → Semigroup l
 semi-group-Ab A = semi-group-Group (group-Ab A)
 
 is-group-Ab :
@@ -107,7 +107,7 @@ is-prop-is-abelian-Group G =
 preserves-add :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
   (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
-preserves-add A B = preserves-mul-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+preserves-add A B = preserves-mul-Semigroup (semi-group-Ab A) (semi-group-Ab B)
 
 hom-Ab :
   {l1 l2 : Level} → Ab l1 → Ab l2 → UU (l1 ⊔ l2)
@@ -169,7 +169,7 @@ is-set-hom-Ab A B = is-set-hom-Group (group-Ab A) (group-Ab B)
 
 preserves-add-id :
   {l : Level} (A : Ab l) → preserves-add A A id
-preserves-add-id A = preserves-mul-id (semi-group-Ab A)
+preserves-add-id A = preserves-mul-id-Semigroup (semi-group-Ab A)
 
 id-hom-Ab :
   { l1 : Level} (A : Ab l1) → hom-Ab A A
@@ -187,7 +187,7 @@ associative-comp-hom-Ab :
   Id (comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
      (comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
 associative-comp-hom-Ab A B C D =
-  associative-hom-Semi-Group
+  associative-comp-hom-Semigroup
     ( semi-group-Ab A)
     ( semi-group-Ab B)
     ( semi-group-Ab C)
@@ -197,13 +197,13 @@ left-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   ( f : hom-Ab A B) → Id (comp-hom-Ab A B B (id-hom-Ab B) f) f
 left-unit-law-comp-hom-Ab A B =
-  left-unit-law-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  left-unit-law-comp-hom-Semigroup (semi-group-Ab A) (semi-group-Ab B)
 
 right-unit-law-comp-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   ( f : hom-Ab A B) → Id (comp-hom-Ab A A B f (id-hom-Ab A)) f
 right-unit-law-comp-hom-Ab A B =
-  right-unit-law-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  right-unit-law-comp-hom-Semigroup (semi-group-Ab A) (semi-group-Ab B)
 
 {- Isomorphisms of abelian groups -}
 
@@ -211,7 +211,7 @@ is-iso-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
   ( f : hom-Ab A B) → UU (l1 ⊔ l2)
 is-iso-hom-Ab A B =
-  is-iso-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B)
+  is-iso-hom-Semigroup (semi-group-Ab A) (semi-group-Ab B)
 
 inv-is-iso-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
@@ -261,7 +261,7 @@ is-prop-is-iso-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
   is-prop (is-iso-hom-Ab A B f)
 is-prop-is-iso-hom-Ab A B f =
-  is-prop-is-iso-hom-Semi-Group (semi-group-Ab A) (semi-group-Ab B) f
+  is-prop-is-iso-hom-Semigroup (semi-group-Ab A) (semi-group-Ab B) f
 
 iso-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) → UU (l1 ⊔ l2)
