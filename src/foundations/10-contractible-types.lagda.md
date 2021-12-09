@@ -293,6 +293,15 @@ module _
       ( isretr-inv-is-coherently-invertible H)
   coh-inv-is-coherently-invertible H = pr2 (pr2 (pr2 H))
 
+  has-inverse-is-coherently-invertible :
+    is-coherently-invertible f → has-inverse f
+  pr1 (has-inverse-is-coherently-invertible H) =
+    inv-is-coherently-invertible H
+  pr1 (pr2 (has-inverse-is-coherently-invertible H)) =
+    issec-inv-is-coherently-invertible H
+  pr2 (pr2 (has-inverse-is-coherently-invertible H)) =
+    isretr-inv-is-coherently-invertible H
+
   {- Proposition 10.4.2 -}
   
   abstract
