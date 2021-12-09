@@ -15,7 +15,7 @@ module _
 
   Abstract-Group-Action : (l : Level) → UU (l1 ⊔ lsuc l)
   Abstract-Group-Action l =
-    Σ (UU-Set l) (λ X → hom-Group G (symmetric-Group X))
+    Σ (UU-Set l) (λ X → type-hom-Group G (symmetric-Group X))
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
@@ -409,7 +409,7 @@ module _
         ( is-contr-total-equiv-Set (pr1 X))
         ( pair (pr1 X) id-equiv)
         ( is-contr-equiv
-          ( Σ ( hom-Group G (symmetric-Group (pr1 X)))
+          ( Σ ( type-hom-Group G (symmetric-Group (pr1 X)))
               ( htpy-hom-Group G (symmetric-Group (pr1 X)) (pr2 X)))
           ( equiv-tot
             ( λ f →
