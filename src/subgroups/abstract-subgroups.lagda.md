@@ -245,7 +245,7 @@ preserves-mul-incl-group-Subgroup G P (pair x p) (pair y q) = refl
 
 hom-group-Subgroup :
   { l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  hom-Group (group-Subgroup G P) G
+  type-hom-Group (group-Subgroup G P) G
 hom-group-Subgroup G P =
   pair (incl-group-Subgroup G P) (preserves-mul-incl-group-Subgroup G P)
 

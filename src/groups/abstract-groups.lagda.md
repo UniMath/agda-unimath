@@ -15,11 +15,11 @@ open import groups.categories public
 
 --------------------------------------------------------------------------------
 
-{- We first introduce semi-groups, and then groups. We do this because the
-   category of groups is a full subcategory of the category of semi-groups.
-   In particular, it is a proposition for a semi-group to be a group. Therefore
+{- We first introduce semigroups, and then groups. We do this because the
+   category of groups is a full subcategory of the category of semigroups.
+   In particular, it is a proposition for a semigroup to be a group. Therefore
    this approach gives us in a straightforward way that equality of groups is 
-   equality of semi-groups. This will be useful in showing that group 
+   equality of semigroups. This will be useful in showing that group 
    isomorphisms are equivalent to identifications of groups. -}
 
 has-associative-mul : {l : Level} (X : UU l) → UU l
@@ -60,8 +60,8 @@ module _
        ( mul-Semigroup x (mul-Semigroup y z))
   assoc-mul-Semigroup = pr2 associative-mul-Semigroup
 
-{- Now we introduce homomorphisms of semi-groups. Group homomorphisms are just
-    homomorphisms between their underlying semi-groups. -}
+{- Now we introduce homomorphisms of semigroups. Group homomorphisms are just
+    homomorphisms between their underlying semigroups. -}
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -112,7 +112,7 @@ module _
     (f : type-hom-Semigroup) → preserves-mul-Semigroup (map-hom-Semigroup f)
   preserves-mul-hom-Semigroup f = pr2 f
 
-  {- We characterize the identity type of the semi-group homomorphisms. -}
+  {- We characterize the identity type of the semigroup homomorphisms. -}
 
   htpy-hom-Semigroup : (f g : type-hom-Semigroup) → UU (l1 ⊔ l2)
   htpy-hom-Semigroup f g = map-hom-Semigroup f ~ map-hom-Semigroup g
@@ -191,7 +191,7 @@ pr2 (comp-hom-Semigroup G H K g f) x y =
 {- Next, we prove the that the laws for a category hold for group homomorphisms,
    i.e., we show that composition is associative and satisfies the left and
    right unit laws. Before we show that these laws hold, we will characterize
-   the identity type of the types of semi-group homomorphisms and group 
+   the identity type of the types of semigroup homomorphisms and group 
    homomorphisms. -}
 
 associative-comp-hom-Semigroup :
@@ -262,8 +262,8 @@ module _
     (f : iso-Semigroup) → is-iso-hom-Semigroup (hom-iso-Semigroup f)
   is-iso-hom-iso-Semigroup = pr2
 
-  inv-hom-iso-Semigroup : iso-Semigroup → type-hom-Semigroup H G
-  inv-hom-iso-Semigroup f =
+  hom-inv-iso-Semigroup : iso-Semigroup → type-hom-Semigroup H G
+  hom-inv-iso-Semigroup f =
     inv-is-iso-hom-Semigroup
       ( hom-iso-Semigroup f)
       ( is-iso-hom-iso-Semigroup f)
@@ -447,8 +447,7 @@ pr2 (Semigroup-Cat l) = is-category-Semigroup
 
 --------------------------------------------------------------------------------
 
-{- The property that a semi-group is a monoid is just that the semi-group 
-   possesses a unit that satisfies the left and right unit laws. -}
+{- A semigroup is a monoid if it possesses a unit satisfying unit laws. -}
 
 is-unital :
   {l : Level} → Semigroup l → UU l
@@ -462,21 +461,21 @@ Monoid :
   (l : Level) → UU (lsuc l)
 Monoid l = Σ (Semigroup l) is-unital
 
-semi-group-Monoid :
+semigroup-Monoid :
   {l : Level} (M : Monoid l) → Semigroup l
-semi-group-Monoid M = pr1 M
+semigroup-Monoid M = pr1 M
 
 type-Monoid :
   {l : Level} (M : Monoid l) → UU l
-type-Monoid M = type-Semigroup (semi-group-Monoid M)
+type-Monoid M = type-Semigroup (semigroup-Monoid M)
 
 is-set-type-Monoid :
   {l : Level} (M : Monoid l) → is-set (type-Monoid M)
-is-set-type-Monoid M = is-set-type-Semigroup (semi-group-Monoid M)
+is-set-type-Monoid M = is-set-type-Semigroup (semigroup-Monoid M)
 
 mul-Monoid :
   {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
-mul-Monoid M = mul-Semigroup (semi-group-Monoid M)
+mul-Monoid M = mul-Semigroup (semigroup-Monoid M)
 
 mul-Monoid' :
   {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
@@ -486,7 +485,7 @@ assoc-mul-Monoid :
   {l : Level} (M : Monoid l) (x y z : type-Monoid M) →
   Id (mul-Monoid M (mul-Monoid M x y) z) (mul-Monoid M x (mul-Monoid M y z))
 assoc-mul-Monoid M =
-  assoc-mul-Semigroup (semi-group-Monoid M)
+  assoc-mul-Semigroup (semigroup-Monoid M)
 
 unit-Monoid :
   {l : Level} (M : Monoid l) → type-Monoid M
@@ -501,8 +500,6 @@ right-unit-law-Monoid :
   {l : Level} (M : Monoid l) (x : type-Monoid M) →
   Id (mul-Monoid M x (unit-Monoid M)) x
 right-unit-law-Monoid M = pr2 (pr2 (pr2 M))
-
---------------------------------------------------------------------------------
 
 {- We show that is-unital is a proposition. -}
 
@@ -528,9 +525,36 @@ is-unital-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
 pr1 (is-unital-Prop G) = is-unital G
 pr2 (is-unital-Prop G) = is-prop-is-unital G
 
---------------------------------------------------------------------------------
+{- We introduce monoid homomorphisms. -}
 
-{- We introduce invertible elements of a monoid -}
+preserves-unit-hom-Semigroup :
+  { l1 l2 : Level} (M1 : Monoid l1) (M2 : Monoid l2) →
+  ( type-hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2)) → UU l2
+preserves-unit-hom-Semigroup M1 M2 f =
+  Id ( map-hom-Semigroup
+       ( semigroup-Monoid M1)
+       ( semigroup-Monoid M2)
+       ( f)
+       ( unit-Monoid M1))
+     ( unit-Monoid M2)
+
+hom-Monoid :
+  { l1 l2 : Level} (M1 : Monoid l1) (M2 : Monoid l2) → UU (l1 ⊔ l2)
+hom-Monoid M1 M2 =
+  Σ ( type-hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2))
+    ( preserves-unit-hom-Semigroup M1 M2)
+
+preserves-unit-id-hom-Monoid :
+  { l : Level} (M : Monoid l) →
+  preserves-unit-hom-Semigroup M M (id-hom-Semigroup (semigroup-Monoid M))
+preserves-unit-id-hom-Monoid M = refl
+
+id-hom-Monoid :
+  {l : Level} (M : Monoid l) → hom-Monoid M M
+pr1 (id-hom-Monoid M) = id-hom-Semigroup (semigroup-Monoid M)
+pr2 (id-hom-Monoid M) = preserves-unit-id-hom-Monoid M
+
+{- Invertible elements in monoids -}
 
 module _
   {l : Level} (M : Monoid l)
@@ -626,19 +650,17 @@ Group :
   (l : Level) → UU (lsuc l)
 Group l = Σ (Semigroup l) is-group
 
---------------------------------------------------------------------------------
-
 {- Some bureaucracy of Groups. -}
 
 module _
   {l : Level} (G : Group l)
   where
   
-  semi-group-Group : Semigroup l
-  semi-group-Group = pr1 G
+  semigroup-Group : Semigroup l
+  semigroup-Group = pr1 G
   
   set-Group : UU-Set l
-  set-Group = pr1 semi-group-Group
+  set-Group = pr1 semigroup-Group
   
   type-Group : UU l
   type-Group = pr1 set-Group
@@ -647,7 +669,7 @@ module _
   is-set-type-Group = pr2 set-Group
   
   associative-mul-Group : has-associative-mul type-Group
-  associative-mul-Group = pr2 semi-group-Group
+  associative-mul-Group = pr2 semigroup-Group
   
   mul-Group : type-Group → type-Group → type-Group
   mul-Group = pr1 associative-mul-Group
@@ -665,14 +687,14 @@ module _
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
   assoc-mul-Group = pr2 associative-mul-Group
     
-  is-group-Group : is-group semi-group-Group
+  is-group-Group : is-group semigroup-Group
   is-group-Group = pr2 G
   
-  is-unital-Group : is-unital semi-group-Group
+  is-unital-Group : is-unital semigroup-Group
   is-unital-Group = pr1 is-group-Group
 
   monoid-Group : Monoid l
-  pr1 monoid-Group = semi-group-Group
+  pr1 monoid-Group = semigroup-Group
   pr2 monoid-Group = is-unital-Group
   
   unit-Group : type-Group
@@ -686,7 +708,7 @@ module _
     (x : type-Group) → Id (mul-Group x unit-Group) x
   right-unit-law-Group = pr2 (pr2 is-unital-Group)
   
-  has-inverses-Group : is-group' semi-group-Group is-unital-Group
+  has-inverses-Group : is-group' semigroup-Group is-unital-Group
   has-inverses-Group = pr2 is-group-Group
   
   inv-Group : type-Group → type-Group
@@ -770,10 +792,8 @@ module _
   conjugation-Group : (x : type-Group) → type-Group → type-Group
   conjugation-Group x = map-equiv (equiv-conjugation-Group x)
 
---------------------------------------------------------------------------------
-
-{- We show that being a group is a proposition. -}
-
+  {- We show that being a group is a proposition. -}
+  
 abstract
   all-elements-equal-is-group :
     {l : Level} (G : Semigroup l) (e : is-unital G) →
@@ -809,10 +829,224 @@ is-group-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
 pr1 (is-group-Prop G) = is-group G
 pr2 (is-group-Prop G) = is-prop-is-group G
 
+{- We introduce group homomorphisms. -}
+
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2)
+  where
+
+  preserves-mul-Group : (type-Group G → type-Group H) → UU (l1 ⊔ l2)
+  preserves-mul-Group f =
+    preserves-mul-Semigroup (semigroup-Group G) (semigroup-Group H) f
+
+  type-hom-Group : UU (l1 ⊔ l2)
+  type-hom-Group =
+    type-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+
+  {- Bureaucracy of group homomorphisms. -}
+  
+  map-hom-Group : type-hom-Group → type-Group G → type-Group H
+  map-hom-Group = pr1
+
+  preserves-mul-hom-Group :
+    (f : type-hom-Group) →
+    preserves-mul-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+      ( map-hom-Group f)
+  preserves-mul-hom-Group = pr2
+
+  emb-Group : UU (l1 ⊔ l2)
+  emb-Group = Σ type-hom-Group (λ h → is-emb (map-hom-Group h))
+
+  {- We characterize the identity type of the group homomorphisms. -}
+
+  htpy-hom-Group : (f g : type-hom-Group) → UU (l1 ⊔ l2)
+  htpy-hom-Group = htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  refl-htpy-hom-Group : (f : type-hom-Group) → htpy-hom-Group f f
+  refl-htpy-hom-Group =
+    refl-htpy-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+
+  htpy-eq-hom-Group : (f g : type-hom-Group) → Id f g → htpy-hom-Group f g
+  htpy-eq-hom-Group =
+    htpy-eq-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+
+  abstract
+    is-contr-total-htpy-hom-Group :
+      ( f : type-hom-Group) →
+      is-contr (Σ type-hom-Group (htpy-hom-Group f))
+    is-contr-total-htpy-hom-Group =
+      is-contr-total-htpy-hom-Semigroup
+        ( semigroup-Group G)
+        ( semigroup-Group H)
+
+  abstract
+    is-equiv-htpy-eq-hom-Group :
+      (f g : type-hom-Group) → is-equiv (htpy-eq-hom-Group f g)
+    is-equiv-htpy-eq-hom-Group =
+      is-equiv-htpy-eq-hom-Semigroup
+        ( semigroup-Group G)
+        ( semigroup-Group H)
+
+  extensionality-hom-Group : (f g : type-hom-Group) → Id f g ≃ htpy-hom-Group f g
+  pr1 (extensionality-hom-Group f g) = htpy-eq-hom-Group f g
+  pr2 (extensionality-hom-Group f g) = is-equiv-htpy-eq-hom-Group f g
+
+  eq-htpy-hom-Group : {f g : type-hom-Group} → htpy-hom-Group f g → Id f g
+  eq-htpy-hom-Group =
+    eq-htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  is-set-type-hom-Group : is-set type-hom-Group
+  is-set-type-hom-Group =
+    is-set-type-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  hom-Group : UU-Set (l1 ⊔ l2)
+  pr1 hom-Group = type-hom-Group
+  pr2 hom-Group = is-set-type-hom-Group
+
+{- We define the precategory of groups -}
+
+id-hom-Group : {l : Level} (G : Group l) → type-hom-Group G G
+id-hom-Group G = id-hom-Semigroup (semigroup-Group G)
+
+comp-hom-Group :
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3) →
+  type-hom-Group H K → type-hom-Group G H → type-hom-Group G K
+comp-hom-Group G H K =
+  comp-hom-Semigroup
+    ( semigroup-Group G)
+    ( semigroup-Group H)
+    ( semigroup-Group K)
+
+associative-comp-hom-Group :
+  {l1 l2 l3 l4 : Level}
+  (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
+  (h : type-hom-Group K L) (g : type-hom-Group H K) (f : type-hom-Group G H) →
+  Id ( comp-hom-Group G H L (comp-hom-Group H K L h g) f)
+     ( comp-hom-Group G K L h (comp-hom-Group G H K g f))
+associative-comp-hom-Group G H K L =
+  associative-comp-hom-Semigroup
+    ( semigroup-Group G)
+    ( semigroup-Group H)
+    ( semigroup-Group K)
+    ( semigroup-Group L)
+
+left-unit-law-comp-hom-Group :
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H) →
+  Id (comp-hom-Group G H H (id-hom-Group H) f) f
+left-unit-law-comp-hom-Group G H =
+  left-unit-law-comp-hom-Semigroup
+    ( semigroup-Group G)
+    ( semigroup-Group H)
+
+right-unit-law-comp-hom-Group :
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H) →
+  Id (comp-hom-Group G G H f (id-hom-Group G)) f
+right-unit-law-comp-hom-Group G H =
+  right-unit-law-comp-hom-Semigroup
+    ( semigroup-Group G)
+    ( semigroup-Group H)
+
+Group-Precat : (l : Level) → Precat (lsuc l) l
+pr1 (Group-Precat l) = Group l
+pr1 (pr2 (Group-Precat l)) = hom-Group
+pr1 (pr1 (pr2 (pr2 (Group-Precat l)))) = comp-hom-Group
+pr2 (pr1 (pr2 (pr2 (Group-Precat l)))) = associative-comp-hom-Group
+pr1 (pr2 (pr2 (pr2 (Group-Precat l)))) = id-hom-Group
+pr1 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) = left-unit-law-comp-hom-Group
+pr2 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) = right-unit-law-comp-hom-Group
+
+{- We show that the precategory of groups is a category -}
+
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2)
+  where
+  
+  is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
+  is-iso-hom-Group =
+    is-iso-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+
+  inv-is-iso-hom-Group :
+    (f : type-hom-Group G H) → is-iso-hom-Group f → type-hom-Group H G
+  inv-is-iso-hom-Group f = pr1
+
+  iso-Group : UU (l1 ⊔ l2)
+  iso-Group = iso-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  hom-iso-Group : iso-Group → type-hom-Group G H
+  hom-iso-Group = pr1
+
+  is-iso-hom-iso-Group : (f : iso-Group) → is-iso-hom-Group (hom-iso-Group f)
+  is-iso-hom-iso-Group = pr2
+
+  hom-inv-iso-Group : iso-Group → type-hom-Group H G
+  hom-inv-iso-Group f =
+    inv-is-iso-hom-Group
+      ( hom-iso-Group f)
+      ( is-iso-hom-iso-Group f)
+
+  equiv-Group : UU (l1 ⊔ l2)
+  equiv-Group = equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  equiv-iso-equiv-Group : equiv-Group ≃ iso-Group
+  equiv-iso-equiv-Group =
+    equiv-iso-equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  iso-equiv-Group : equiv-Group → iso-Group
+  iso-equiv-Group = map-equiv equiv-iso-equiv-Group
+
+module _
+  {l : Level} (G : Group l)
+  where
+
+  id-iso-Group : iso-Group G G
+  id-iso-Group = id-iso-Semigroup (semigroup-Group G)
+
+  iso-eq-Group : (H : Group l) → Id G H → iso-Group G H
+  iso-eq-Group = iso-eq-Precat (Group-Precat l) G
+
+  abstract
+    extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
+    extensionality-Group' H =
+      ( extensionality-Semigroup
+        ( semigroup-Group G)
+        ( semigroup-Group H)) ∘e
+      ( equiv-ap-pr1 is-prop-is-group {s = G} {t = H})
+
+  abstract
+    is-contr-total-iso-Group : is-contr (Σ (Group l) (iso-Group G))
+    is-contr-total-iso-Group =
+      is-contr-equiv'
+        ( Σ (Group l) (Id G))
+        ( equiv-tot extensionality-Group')
+        ( is-contr-total-path G)
+
+  is-category-Group : (H : Group l) → is-equiv (iso-eq-Group H)
+  is-category-Group =
+    fundamental-theorem-id G
+      id-iso-Group
+      is-contr-total-iso-Group
+      iso-eq-Group
+
+  eq-iso-Group : (H : Group l) → iso-Group G H → Id G H
+  eq-iso-Group H = map-inv-is-equiv (is-category-Group H)
+
+Group-Cat : (l : Level) → Cat (lsuc l) l
+pr1 (Group-Cat l) = Group-Precat l
+pr2 (Group-Cat l) = is-category-Group
+
 --------------------------------------------------------------------------------
 
-{- We give two examples of groups. The first is the group ℤ of integers. The
-   second is the loop space of a pointed 1-type.  -}
+{- Examples of group  -}
 
 {- The group of integers. -}
 
@@ -941,237 +1175,6 @@ pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semigroup' X
 
 --------------------------------------------------------------------------------
 
-{- We introduce monoid homomorphisms. -}
-
-preserves-unit-hom-Semigroup :
-  { l1 l2 : Level} (M1 : Monoid l1) (M2 : Monoid l2) →
-  ( type-hom-Semigroup (semi-group-Monoid M1) (semi-group-Monoid M2)) → UU l2
-preserves-unit-hom-Semigroup M1 M2 f =
-  Id ( map-hom-Semigroup
-       ( semi-group-Monoid M1)
-       ( semi-group-Monoid M2)
-       ( f)
-       ( unit-Monoid M1))
-     ( unit-Monoid M2)
-
-hom-Monoid :
-  { l1 l2 : Level} (M1 : Monoid l1) (M2 : Monoid l2) → UU (l1 ⊔ l2)
-hom-Monoid M1 M2 =
-  Σ ( type-hom-Semigroup (semi-group-Monoid M1) (semi-group-Monoid M2))
-    ( preserves-unit-hom-Semigroup M1 M2)
-
---------------------------------------------------------------------------------
-
-{- We introduce group homomorphisms. -}
-
-preserves-mul-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  (type-Group G → type-Group H) → UU (l1 ⊔ l2)
-preserves-mul-Group G H f =
-  preserves-mul-Semigroup (semi-group-Group G) (semi-group-Group H) f
-
-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) → UU (l1 ⊔ l2)
-hom-Group G H =
-  type-hom-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)
-
---------------------------------------------------------------------------------
-
-{- Bureaucracy of group homomorphisms. -}
-
-map-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  ( hom-Group G H) →
-  ( type-Group G) → (type-Group H)
-map-hom-Group G H = pr1
-
-preserves-mul-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  ( f : hom-Group G H) →
-  preserves-mul-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)
-    ( map-hom-Group G H f)
-preserves-mul-hom-Group G H = pr2
-
-emb-Group : {l1 l2 : Level} → Group l1 → Group l2 → UU (l1 ⊔ l2)
-emb-Group G H = Σ (hom-Group G H) (λ h → is-emb (map-hom-Group G H h))
-
---------------------------------------------------------------------------------
-
-{- We characterize the identity type of the group homomorphisms. -}
-
-htpy-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2)
-  (f g : hom-Group G H) → UU (l1 ⊔ l2)
-htpy-hom-Group G H =
-  htpy-hom-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)
-
-refl-htpy-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  ( f : hom-Group G H) → htpy-hom-Group G H f f
-refl-htpy-hom-Group G H =
-  refl-htpy-hom-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)
-
-htpy-eq-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  ( f g : hom-Group G H) → Id f g → htpy-hom-Group G H f g
-htpy-eq-hom-Group G H =
-  htpy-eq-hom-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)
-
-abstract
-  is-contr-total-htpy-hom-Group :
-    { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-    ( f : hom-Group G H) →
-    is-contr (Σ (hom-Group G H) (htpy-hom-Group G H f))
-  is-contr-total-htpy-hom-Group G H =
-    is-contr-total-htpy-hom-Semigroup
-      ( semi-group-Group G)
-      ( semi-group-Group H)
-
-abstract
-  is-equiv-htpy-eq-hom-Group :
-    { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-    ( f g : hom-Group G H) → is-equiv (htpy-eq-hom-Group G H f g)
-  is-equiv-htpy-eq-hom-Group G H =
-    is-equiv-htpy-eq-hom-Semigroup
-      ( semi-group-Group G)
-      ( semi-group-Group H)
-
-extensionality-hom-Group :
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f g : hom-Group G H) →
-  Id f g ≃ htpy-hom-Group G H f g
-pr1 (extensionality-hom-Group G H f g) = htpy-eq-hom-Group G H f g
-pr2 (extensionality-hom-Group G H f g) = is-equiv-htpy-eq-hom-Group G H f g
-
-eq-htpy-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  { f g : hom-Group G H} → htpy-hom-Group G H f g → Id f g
-eq-htpy-hom-Group G H =
-  eq-htpy-hom-Semigroup (semi-group-Group G) (semi-group-Group H)
-
-is-set-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  is-set (hom-Group G H)
-is-set-hom-Group G H =
-  is-set-type-hom-Semigroup (semi-group-Group G) (semi-group-Group H)
-
---------------------------------------------------------------------------------
-
-preserves-id-hom-Monoid :
-  { l : Level} (M : Monoid l) →
-  preserves-unit-hom-Semigroup M M (id-hom-Semigroup (semi-group-Monoid M))
-preserves-id-hom-Monoid M = refl
-
-id-hom-Monoid :
-  {l : Level} (M : Monoid l) → hom-Monoid M M
-pr1 (id-hom-Monoid M) = id-hom-Semigroup (semi-group-Monoid M)
-pr2 (id-hom-Monoid M) = preserves-id-hom-Monoid M
-
-id-hom-Group :
-  {l : Level} (G : Group l) → hom-Group G G
-id-hom-Group G = id-hom-Semigroup (semi-group-Group G)
-
-comp-hom-Group :
-  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3) →
-  (hom-Group H K) → (hom-Group G H) → (hom-Group G K)
-comp-hom-Group G H K =
-  comp-hom-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)
-    ( semi-group-Group K)
-
---------------------------------------------------------------------------------
-
-{- Finally we show that isomorphic groups are equal. -}
-
-module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2)
-  where
-  
-  is-iso-hom-Group : hom-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-Group =
-    is-iso-hom-Semigroup
-      ( semi-group-Group G)
-      ( semi-group-Group H)
-
-  inv-is-iso-hom-Group :
-    (f : hom-Group G H) → is-iso-hom-Group f → hom-Group H G
-  inv-is-iso-hom-Group f = pr1
-
-  iso-Group : UU (l1 ⊔ l2)
-  iso-Group = iso-Semigroup (semi-group-Group G) (semi-group-Group H)
-
-  hom-iso-Group : iso-Group → hom-Group G H
-  hom-iso-Group = pr1
-
-  is-iso-hom-iso-Group : (f : iso-Group) → is-iso-hom-Group (hom-iso-Group f)
-  is-iso-hom-iso-Group = pr2
-
-  inv-hom-iso-Group : iso-Group → hom-Group H G
-  inv-hom-iso-Group f =
-    inv-is-iso-hom-Group
-      ( hom-iso-Group f)
-      ( is-iso-hom-iso-Group f)
-
-  equiv-Group : UU (l1 ⊔ l2)
-  equiv-Group = equiv-Semigroup (semi-group-Group G) (semi-group-Group H)
-
-  equiv-iso-equiv-Group : equiv-Group ≃ iso-Group
-  equiv-iso-equiv-Group =
-    equiv-iso-equiv-Semigroup (semi-group-Group G) (semi-group-Group H)
-
-  iso-equiv-Group : equiv-Group → iso-Group
-  iso-equiv-Group = map-equiv equiv-iso-equiv-Group
-
-id-iso-Group :
-  { l1 : Level} (G : Group l1) → iso-Group G G
-id-iso-Group G = id-iso-Semigroup (semi-group-Group G)
-
-iso-eq-Group :
-  { l1 : Level} (G H : Group l1) → Id G H → iso-Group G H
-iso-eq-Group G .G refl = id-iso-Group G
-
-abstract
-  extensionality-Group' :
-    { l1 : Level} (G H : Group l1) → Id G H ≃ iso-Group G H
-  extensionality-Group' G H =
-    ( extensionality-Semigroup
-      ( semi-group-Group G)
-      ( semi-group-Group H)) ∘e
-    ( equiv-ap-pr1 is-prop-is-group {s = G} {t = H})
-
-abstract
-  is-contr-total-iso-Group :
-    { l1 : Level} (G : Group l1) → is-contr (Σ (Group l1) (iso-Group G))
-  is-contr-total-iso-Group {l1} G =
-    is-contr-equiv'
-      ( Σ (Group l1) (Id G))
-      ( equiv-tot (λ H → extensionality-Group' G H))
-      ( is-contr-total-path G)
-
-is-equiv-iso-eq-Group :
-  { l1 : Level} (G H : Group l1) → is-equiv (iso-eq-Group G H)
-is-equiv-iso-eq-Group G =
-  fundamental-theorem-id G
-    ( id-iso-Group G)
-    ( is-contr-total-iso-Group G)
-    ( iso-eq-Group G)
-
-eq-iso-Group :
-  { l1 : Level} (G H : Group l1) → iso-Group G H → Id G H
-eq-iso-Group G H = map-inv-is-equiv (is-equiv-iso-eq-Group G H)
-
---------------------------------------------------------------------------------
-
 -- Exercises
 
 --------------------------------------------------------------------------------
@@ -1183,8 +1186,8 @@ eq-iso-Group G H = map-inv-is-equiv (is-equiv-iso-eq-Group G H)
 preserves-unit :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
   ( f : type-hom-Semigroup
-    ( semi-group-Group G)
-    ( semi-group-Group H)) →
+    ( semigroup-Group G)
+    ( semigroup-Group H)) →
   UU l2
 preserves-unit G H f =
   Id (map-hom-Group G H f (unit-Group G)) (unit-Group H)
@@ -1192,7 +1195,7 @@ preserves-unit G H f =
 abstract
   preserves-unit-hom-Group :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-    ( f : hom-Group G H) → preserves-unit G H f
+    ( f : type-hom-Group G H) → preserves-unit G H f
   preserves-unit-hom-Group G H f =
     ( inv (left-unit-law-Group H (map-hom-Group G H f (unit-Group G)))) ∙
     ( ( ap ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
@@ -1219,7 +1222,7 @@ abstract
 
 preserves-inverses :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  ( f : hom-Group G H) → UU (l1 ⊔ l2)
+  ( f : type-hom-Group G H) → UU (l1 ⊔ l2)
 preserves-inverses G H f =
   ( x : type-Group G) →
   Id ( map-hom-Group G H f (inv-Group G x))
@@ -1228,7 +1231,7 @@ preserves-inverses G H f =
 abstract
   preserves-inverses-hom-Group' :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-    ( f : hom-Group G H) →
+    ( f : type-hom-Group G H) →
     preserves-unit G H f → preserves-inverses G H f
   preserves-inverses-hom-Group'
     ( pair ( pair (pair G is-set-G) (pair μ-G assoc-G))
@@ -1251,19 +1254,19 @@ abstract
 abstract
   preserves-inverses-hom-Group :
     { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-    ( f : hom-Group G H) → preserves-inverses G H f
+    ( f : type-hom-Group G H) → preserves-inverses G H f
   preserves-inverses-hom-Group G H f =
     preserves-inverses-hom-Group' G H f (preserves-unit-hom-Group G H f)
 
 hom-Group' :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) → UU (l1 ⊔ l2)
 hom-Group' G H =
-  Σ ( hom-Group G H) (λ f →
+  Σ ( type-hom-Group G H) (λ f →
     ( preserves-unit G H f) × (preserves-inverses G H f))
 
 preserves-group-structure-hom-Group :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  hom-Group G H → hom-Group' G H
+  type-hom-Group G H → hom-Group' G H
 pr1 (preserves-group-structure-hom-Group G H f) = f
 pr1 (pr2 (preserves-group-structure-hom-Group G H f)) =
   preserves-unit-hom-Group G H f
@@ -1287,7 +1290,7 @@ module _
   preserves-mul-map-Cayleys-theorem x y =
     eq-htpy-equiv (λ z → assoc-mul-Group G x y z)
 
-  hom-Cayleys-theorem : hom-Group G (symmetric-Group (set-Group G))
+  hom-Cayleys-theorem : type-hom-Group G (symmetric-Group (set-Group G))
   hom-Cayleys-theorem =
     pair map-Cayleys-theorem preserves-mul-map-Cayleys-theorem
 
