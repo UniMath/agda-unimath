@@ -2094,62 +2094,68 @@ abstract
 
 -- Exercise 13.18
 
-set-isomorphism :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU (l1 ⊔ l2)
-set-isomorphism A B =
-  Σ ((pr1 A) → (pr1 B)) has-inverse
+module _
+  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
+  where
 
-has-inverse-is-coherently-invertible :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-coherently-invertible f → has-inverse f
-has-inverse-is-coherently-invertible f =
-  tot (λ g → tot (λ G → pr1))
+  is-iso-Set : (f : type-hom-Set A B) → UU (l1 ⊔ l2)
+  is-iso-Set f = Σ (type-hom-Set B A) (λ g → (Id (f ∘ g) id) × (Id (g ∘ f) id))
 
-set-isomorphism-equiv-fiberwise :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
-  (f : (pr1 A) → (pr1 B)) → is-equiv f → has-inverse f
-set-isomorphism-equiv-fiberwise A B f =
-  ( has-inverse-is-coherently-invertible f) ∘
-  ( is-coherently-invertible-is-equiv f)
+  iso-Set : UU (l1 ⊔ l2)
+  iso-Set = Σ (type-hom-Set A B) is-iso-Set
 
-abstract
-  is-equiv-has-inverse-is-coherently-invertible-is-set :
-    {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) (f : (pr1 A) → (pr1 B)) →
-    is-equiv (has-inverse-is-coherently-invertible f)
-  is-equiv-has-inverse-is-coherently-invertible-is-set
-    (pair A is-set-A) (pair B is-set-B) f =
-    is-equiv-tot-is-fiberwise-equiv
-      ( λ g → is-equiv-tot-is-fiberwise-equiv
-        ( λ G → is-equiv-pr1-is-contr
-          ( λ H → is-contr-Π
-            ( λ x → is-set-B _ _ (G (f x)) (ap f (H x))))))
+  map-iso-Set : iso-Set → type-Set A → type-Set B
+  map-iso-Set = pr1
 
-abstract
-  is-fiberwise-equiv-set-isomorphism-equiv-fiberwise :
-    {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
-    is-fiberwise-equiv (set-isomorphism-equiv-fiberwise A B)
-  is-fiberwise-equiv-set-isomorphism-equiv-fiberwise A B f =
-    is-equiv-comp
-      ( set-isomorphism-equiv-fiberwise A B f)
-      ( has-inverse-is-coherently-invertible f)
-      ( is-coherently-invertible-is-equiv f)
-      ( refl-htpy)
-      ( is-equiv-is-coherently-invertible-is-equiv f)
-      ( is-equiv-has-inverse-is-coherently-invertible-is-set A B f)
+  is-iso-map-iso-Set : (f : iso-Set) → is-iso-Set (map-iso-Set f)
+  is-iso-map-iso-Set = pr2
 
-set-isomorphism-equiv :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
-  ((pr1 A) ≃ (pr1 B)) → set-isomorphism A B
-set-isomorphism-equiv A B =
-  tot (set-isomorphism-equiv-fiberwise A B)
+  is-proof-irrelevant-is-iso-Set :
+    (f : type-hom-Set A B) → is-proof-irrelevant (is-iso-Set f)
+  pr1 (is-proof-irrelevant-is-iso-Set f H) = H
+  pr2
+    ( is-proof-irrelevant-is-iso-Set f
+      ( pair g (pair p q)))
+      ( pair g' (pair p' q')) =
+    eq-subtype
+      ( λ h →
+        is-prop-prod
+          ( is-set-type-hom-Set B B (f ∘ h) id)
+          ( is-set-type-hom-Set A A (h ∘ f) id))
+      ( ( ap (λ h → g ∘ h) (inv p')) ∙
+        ( ap (λ h → h ∘ g') q))
 
-abstract
-  is-equiv-set-isomorphism-equiv :
-    {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
-    is-equiv (set-isomorphism-equiv A B)
-  is-equiv-set-isomorphism-equiv A B =
-    is-equiv-tot-is-fiberwise-equiv
-      ( is-fiberwise-equiv-set-isomorphism-equiv-fiberwise A B)
+  is-prop-is-iso-Set : (f : type-hom-Set A B) → is-prop (is-iso-Set f)
+  is-prop-is-iso-Set f =
+    is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Set f)
+
+  is-iso-is-equiv-Set : {f : type-hom-Set A B} → is-equiv f → is-iso-Set f
+  pr1 (is-iso-is-equiv-Set H) = map-inv-is-equiv H
+  pr1 (pr2 (is-iso-is-equiv-Set H)) = eq-htpy (issec-map-inv-is-equiv H)
+  pr2 (pr2 (is-iso-is-equiv-Set H)) = eq-htpy (isretr-map-inv-is-equiv H)
+
+  is-equiv-is-iso-Set : {f : type-hom-Set A B} → is-iso-Set f → is-equiv f
+  is-equiv-is-iso-Set H =
+    is-equiv-has-inverse
+      ( pr1 H)
+      ( htpy-eq (pr1 (pr2 H)))
+      ( htpy-eq (pr2 (pr2 H)))
+
+  iso-equiv-Set : type-equiv-Set A B → iso-Set
+  pr1 (iso-equiv-Set e) = map-equiv e
+  pr2 (iso-equiv-Set e) = is-iso-is-equiv-Set (is-equiv-map-equiv e)
+
+  equiv-iso-Set : iso-Set → type-equiv-Set A B
+  pr1 (equiv-iso-Set f) = map-iso-Set f
+  pr2 (equiv-iso-Set f) = is-equiv-is-iso-Set (is-iso-map-iso-Set f)
+
+  equiv-iso-equiv-Set : type-equiv-Set A B ≃ iso-Set
+  equiv-iso-equiv-Set =
+    equiv-total-subtype
+      ( is-subtype-is-equiv)
+      ( is-prop-is-iso-Set)
+      ( λ f → is-iso-is-equiv-Set)
+      ( λ f → is-equiv-is-iso-Set)
 
 -- Exercise 13.19
 
