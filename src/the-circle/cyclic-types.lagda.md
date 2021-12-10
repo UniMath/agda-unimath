@@ -21,4 +21,22 @@ Fin-Cyclic : (k : ℕ) → Cyclic lzero (succ-ℕ k)
 pr1 (Fin-Cyclic k) = Fin-Endo (succ-ℕ k)
 pr2 (Fin-Cyclic k) = refl-mere-equiv-Endo (Fin-Endo (succ-ℕ k))
 
+module _
+  {l : Level}
+  where
+
+  endo-Cyclic : (k : ℕ) → Cyclic l k → Endo l
+  endo-Cyclic zero-ℕ = pr1
+  endo-Cyclic (succ-ℕ k) = pr1
+  
+  type-Cyclic : (k : ℕ) → Cyclic l k → UU l
+  type-Cyclic zero-ℕ = type-Endo ∘ endo-Cyclic zero-ℕ
+  type-Cyclic (succ-ℕ k) = type-Endo ∘ endo-Cyclic (succ-ℕ k)
+  
+  endomorphism-Cyclic :
+    (k : ℕ) (X : Cyclic l k) → type-Cyclic k X → type-Cyclic k X
+  endomorphism-Cyclic zero-ℕ X = endomorphism-Endo (endo-Cyclic zero-ℕ X)
+  endomorphism-Cyclic (succ-ℕ k) X =
+    endomorphism-Endo (endo-Cyclic (succ-ℕ k) X)
+
 ```
