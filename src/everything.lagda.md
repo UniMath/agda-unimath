@@ -50,6 +50,7 @@ open import labels
 open import subgroups
 open import subgroups.abstract-subgroups
 open import the-circle
+open import the-circle.cyclic-types
 open import the-circle.infinite-cyclic-types
 open import the-circle.integers
 open import the-circle.the-circle
