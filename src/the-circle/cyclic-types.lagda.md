@@ -80,4 +80,11 @@ eq-equiv-Cyclic :
 eq-equiv-Cyclic k X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-Cyclic k X Y)
 
+comp-equiv-Cyclic :
+  {l1 l2 l3 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k)
+  (Z : Cyclic l3 k) →
+  equiv-Cyclic k Y Z → equiv-Cyclic k X Y → equiv-Cyclic k X Z
+comp-equiv-Cyclic k X Y Z =
+  {!comp-equiv-Endo ? ? ?!}
+
 ```
