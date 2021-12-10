@@ -1,3 +1,4 @@
+
 ---
 title: Formalisation of the Symmetry Book
 ---
@@ -109,7 +110,8 @@ module _
   id-equiv-Component-Endo : (T : Component-Endo X) → equiv-Component-Endo T T
   id-equiv-Component-Endo T = id-equiv-Endo (endo-Component-Endo X T)
 
-  equiv-eq-Component-Endo : (T S : Component-Endo X) → Id T S → equiv-Component-Endo T S
+  equiv-eq-Component-Endo :
+    (T S : Component-Endo X) → Id T S → equiv-Component-Endo T S
   equiv-eq-Component-Endo T .T refl = id-equiv-Component-Endo T
   
   is-contr-total-equiv-Component-Endo :
@@ -134,78 +136,97 @@ module _
       ( is-contr-total-equiv-Component-Endo)
       ( equiv-eq-Component-Endo (canonical-Component-Endo X))
 
-UU-Infinite-Cyclic : UU (lsuc lzero)
-UU-Infinite-Cyclic = Component-Endo ℤ-Endo
+Infinite-Cyclic : (l : Level) → UU (lsuc l)
+Infinite-Cyclic l = Σ (Endo l) (λ X → mere-equiv-Endo ℤ-Endo X)
+
+ℤ-Infinite-Cyclic : Infinite-Cyclic lzero
+pr1 ℤ-Infinite-Cyclic = ℤ-Endo
+pr2 ℤ-Infinite-Cyclic = refl-mere-equiv-Endo ℤ-Endo
+
+Infinite-Cyclic-Pointed-Type : Pointed-Type (lsuc lzero)
+pr1 Infinite-Cyclic-Pointed-Type = Infinite-Cyclic lzero
+pr2 Infinite-Cyclic-Pointed-Type = ℤ-Infinite-Cyclic
 
 module _
-  (X : UU-Infinite-Cyclic)
+  {l : Level} (X : Infinite-Cyclic l)
   where
 
-  endo-UU-Infinite-Cyclic : Endo lzero
-  endo-UU-Infinite-Cyclic = pr1 X
+  endo-Infinite-Cyclic : Endo l
+  endo-Infinite-Cyclic = pr1 X
   
-  type-UU-Infinite-Cyclic : UU lzero
-  type-UU-Infinite-Cyclic = pr1 (pr1 X)
+  type-Infinite-Cyclic : UU l
+  type-Infinite-Cyclic = pr1 (pr1 X)
   
-  endomorphism-UU-Infinite-Cyclic :
-    type-UU-Infinite-Cyclic → type-UU-Infinite-Cyclic
-  endomorphism-UU-Infinite-Cyclic = pr2 (pr1 X)
+  endomorphism-Infinite-Cyclic :
+    type-Infinite-Cyclic → type-Infinite-Cyclic
+  endomorphism-Infinite-Cyclic = pr2 (pr1 X)
+
+  mere-equiv-ℤ-Infinite-Cyclic : mere-equiv-Endo ℤ-Endo endo-Infinite-Cyclic
+  mere-equiv-ℤ-Infinite-Cyclic = pr2 X
   
 module _
+  (l : Level)
   where
 
-  canonical-UU-Infinite-Cyclic : UU-Infinite-Cyclic
-  pr1 canonical-UU-Infinite-Cyclic = ℤ-Endo
-  pr2 canonical-UU-Infinite-Cyclic = refl-mere-equiv-Endo ℤ-Endo
+  point-Infinite-Cyclic : Infinite-Cyclic l
+  pr1 (pr1 point-Infinite-Cyclic) = raise l ℤ
+  pr2 (pr1 point-Infinite-Cyclic) = (map-raise ∘ succ-ℤ) ∘ map-inv-raise
+  pr2 point-Infinite-Cyclic =
+    unit-trunc-Prop (pair (equiv-raise l ℤ) refl-htpy)
 
-  UU-Infinite-Cyclic-Pointed-Type : Pointed-Type (lsuc lzero)
-  pr1 UU-Infinite-Cyclic-Pointed-Type = UU-Infinite-Cyclic
-  pr2 UU-Infinite-Cyclic-Pointed-Type = canonical-UU-Infinite-Cyclic
+  Infinite-Cyclic-Pointed-Type-Level : Pointed-Type (lsuc l)
+  pr1 Infinite-Cyclic-Pointed-Type-Level = Infinite-Cyclic l
+  pr2 Infinite-Cyclic-Pointed-Type-Level = point-Infinite-Cyclic
 
-  equiv-UU-Infinite-Cyclic : (T S : UU-Infinite-Cyclic) → UU lzero
-  equiv-UU-Infinite-Cyclic = equiv-Component-Endo ℤ-Endo
-
-  id-equiv-UU-Infinite-Cyclic :
-    (T : UU-Infinite-Cyclic) → equiv-UU-Infinite-Cyclic T T
-  id-equiv-UU-Infinite-Cyclic = id-equiv-Component-Endo ℤ-Endo
-
-  equiv-eq-UU-Infinite-Cyclic :
-    (T S : UU-Infinite-Cyclic) → Id T S → equiv-UU-Infinite-Cyclic T S
-  equiv-eq-UU-Infinite-Cyclic = equiv-eq-Component-Endo ℤ-Endo
+module _
+  {l1 : Level} (X : Infinite-Cyclic l1) 
+  where
   
-  is-contr-total-equiv-UU-Infinite-Cyclic :
-    is-contr
-      ( Σ ( UU-Infinite-Cyclic)
-          ( λ T →
-            equiv-UU-Infinite-Cyclic (canonical-UU-Infinite-Cyclic) T))
-  is-contr-total-equiv-UU-Infinite-Cyclic =
-    is-contr-total-equiv-Component-Endo ℤ-Endo
+  equiv-Infinite-Cyclic : {l2 : Level} → Infinite-Cyclic l2 → UU (l1 ⊔ l2)
+  equiv-Infinite-Cyclic Y =
+    equiv-Endo (endo-Infinite-Cyclic X) (endo-Infinite-Cyclic Y)
 
-  is-equiv-equiv-eq-UU-Infinite-Cyclic :
-    (T : UU-Infinite-Cyclic) →
-    is-equiv (equiv-eq-UU-Infinite-Cyclic (canonical-UU-Infinite-Cyclic) T)
-  is-equiv-equiv-eq-UU-Infinite-Cyclic =
-    is-equiv-equiv-eq-Component-Endo ℤ-Endo
+  id-equiv-Infinite-Cyclic : equiv-Infinite-Cyclic X
+  id-equiv-Infinite-Cyclic = id-equiv-Endo (endo-Infinite-Cyclic X)
 
-  equiv-equiv-eq-UU-Infinite-Cyclic :
-    (T : UU-Infinite-Cyclic) →
-    Id canonical-UU-Infinite-Cyclic T ≃
-    equiv-UU-Infinite-Cyclic canonical-UU-Infinite-Cyclic T
-  pr1 (equiv-equiv-eq-UU-Infinite-Cyclic T) =
-    equiv-eq-UU-Infinite-Cyclic canonical-UU-Infinite-Cyclic T
-  pr2 (equiv-equiv-eq-UU-Infinite-Cyclic T) =
-    is-equiv-equiv-eq-UU-Infinite-Cyclic T
+  equiv-eq-Infinite-Cyclic :
+    (Y : Infinite-Cyclic l1) → Id X Y → equiv-Infinite-Cyclic Y
+  equiv-eq-Infinite-Cyclic .X refl = id-equiv-Infinite-Cyclic
+  
+  is-contr-total-equiv-Infinite-Cyclic :
+    is-contr (Σ (Infinite-Cyclic l1) equiv-Infinite-Cyclic)
+  is-contr-total-equiv-Infinite-Cyclic =
+    is-contr-total-Eq-substructure
+      ( is-contr-total-equiv-Endo (endo-Infinite-Cyclic X))
+      ( λ Y → is-prop-type-trunc-Prop)
+      ( endo-Infinite-Cyclic X)
+      ( id-equiv-Endo (endo-Infinite-Cyclic X))
+      ( mere-equiv-ℤ-Infinite-Cyclic X)
 
-  map-left-factor-compute-Ω-UU-Infinite-Cyclic :
-    ( equiv-UU-Infinite-Cyclic
-        canonical-UU-Infinite-Cyclic
-        canonical-UU-Infinite-Cyclic) → ℤ
-  map-left-factor-compute-Ω-UU-Infinite-Cyclic e = map-equiv (pr1 e) zero-ℤ
+  is-equiv-equiv-eq-Infinite-Cyclic :
+    (Y : Infinite-Cyclic l1) → is-equiv (equiv-eq-Infinite-Cyclic Y)
+  is-equiv-equiv-eq-Infinite-Cyclic =
+    fundamental-theorem-id X
+      id-equiv-Infinite-Cyclic
+      is-contr-total-equiv-Infinite-Cyclic
+      equiv-eq-Infinite-Cyclic
+
+  extensionality-Infinite-Cyclic :
+    (Y : Infinite-Cyclic l1) → Id X Y ≃ equiv-Infinite-Cyclic Y
+  pr1 (extensionality-Infinite-Cyclic Y) = equiv-eq-Infinite-Cyclic Y
+  pr2 (extensionality-Infinite-Cyclic Y) = is-equiv-equiv-eq-Infinite-Cyclic Y
+
+module _
+  where
+  
+  map-left-factor-compute-Ω-Infinite-Cyclic :
+    equiv-Infinite-Cyclic ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic → ℤ
+  map-left-factor-compute-Ω-Infinite-Cyclic e = map-equiv (pr1 e) zero-ℤ
 
   abstract
-    is-equiv-map-left-factor-compute-Ω-UU-Infinite-Cyclic :
-      is-equiv map-left-factor-compute-Ω-UU-Infinite-Cyclic
-    is-equiv-map-left-factor-compute-Ω-UU-Infinite-Cyclic =
+    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic :
+      is-equiv map-left-factor-compute-Ω-Infinite-Cyclic
+    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic =
       is-equiv-is-contr-map
         ( λ x →
           is-contr-equiv
@@ -262,23 +283,23 @@ module _
                           ( x))))))))
             ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))
 
-  equiv-left-factor-compute-Ω-UU-Infinite-Cyclic :
-    equiv-UU-Infinite-Cyclic
-      canonical-UU-Infinite-Cyclic
-      canonical-UU-Infinite-Cyclic ≃ ℤ
-  pr1 equiv-left-factor-compute-Ω-UU-Infinite-Cyclic =
-    map-left-factor-compute-Ω-UU-Infinite-Cyclic
-  pr2 equiv-left-factor-compute-Ω-UU-Infinite-Cyclic =
-    is-equiv-map-left-factor-compute-Ω-UU-Infinite-Cyclic
+  equiv-left-factor-compute-Ω-Infinite-Cyclic :
+    equiv-Infinite-Cyclic
+      ℤ-Infinite-Cyclic
+      ℤ-Infinite-Cyclic ≃ ℤ
+  pr1 equiv-left-factor-compute-Ω-Infinite-Cyclic =
+    map-left-factor-compute-Ω-Infinite-Cyclic
+  pr2 equiv-left-factor-compute-Ω-Infinite-Cyclic =
+    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic
 
-  compute-Ω-UU-Infinite-Cyclic : type-Ω UU-Infinite-Cyclic-Pointed-Type ≃ ℤ
-  compute-Ω-UU-Infinite-Cyclic =
-    ( equiv-left-factor-compute-Ω-UU-Infinite-Cyclic) ∘e
-    ( equiv-equiv-eq-UU-Infinite-Cyclic canonical-UU-Infinite-Cyclic)
+  compute-Ω-Infinite-Cyclic : type-Ω (Infinite-Cyclic-Pointed-Type) ≃ ℤ
+  compute-Ω-Infinite-Cyclic =
+    ( equiv-left-factor-compute-Ω-Infinite-Cyclic) ∘e
+    ( extensionality-Infinite-Cyclic ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic)
 
--- UU-Infinite-Cyclic-𝕊¹ : 𝕊¹ → UU-Infinite-Cyclic
--- pr1 (pr1 (UU-Infinite-Cyclic-𝕊¹ x)) = Id x x
--- pr2 (pr1 (UU-Infinite-Cyclic-𝕊¹ x)) = {!!}
--- pr2 (UU-Infinite-Cyclic-𝕊¹ x) = {!!}
+-- Infinite-Cyclic-𝕊¹ : 𝕊¹ → Infinite-Cyclic
+-- pr1 (pr1 (Infinite-Cyclic-𝕊¹ x)) = Id x x
+-- pr2 (pr1 (Infinite-Cyclic-𝕊¹ x)) = {!!}
+-- pr2 (Infinite-Cyclic-𝕊¹ x) = {!!}
 
 ```
