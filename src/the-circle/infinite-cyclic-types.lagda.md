@@ -74,6 +74,22 @@ module _
   eq-equiv-Endo : (Y : Endo l1) → equiv-Endo X Y → Id X Y
   eq-equiv-Endo Y = map-inv-is-equiv (is-equiv-equiv-eq-Endo Y)
 
+comp-equiv-Endo :
+  {l1 l2 l3 : Level} (X : Endo l1) (Y : Endo l2) (Z : Endo l3) →
+  equiv-Endo Y Z → equiv-Endo X Y → equiv-Endo X Z
+pr1 (comp-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
+pr2 (comp-equiv-Endo X Y Z f e) =
+  coherence-square-comp-horizontal
+    ( map-equiv (pr1 e))
+    ( map-equiv (pr1 f))
+    ( endomorphism-Endo X)
+    ( endomorphism-Endo Y)
+    ( endomorphism-Endo Z)
+    ( map-equiv (pr1 e))
+    ( map-equiv (pr1 f))
+    ( pr2 e)
+    ( pr2 f)
+
 module _
   {l1 : Level} (X : Endo l1)
   where
