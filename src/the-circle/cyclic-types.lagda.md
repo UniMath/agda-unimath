@@ -3,7 +3,7 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module the-circle.cyclic-types where
 
@@ -85,6 +85,9 @@ comp-equiv-Cyclic :
   (Z : Cyclic l3 k) →
   equiv-Cyclic k Y Z → equiv-Cyclic k X Y → equiv-Cyclic k X Z
 comp-equiv-Cyclic k X Y Z =
-  {!comp-equiv-Endo ? ? ?!}
+  comp-equiv-Endo
+    ( endo-Cyclic k X)
+    ( endo-Cyclic k Y)
+    ( endo-Cyclic k Z)
 
 ```
