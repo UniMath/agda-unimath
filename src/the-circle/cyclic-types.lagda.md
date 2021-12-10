@@ -13,13 +13,12 @@ Fin-Endo : ℕ → Endo lzero
 pr1 (Fin-Endo k) = Fin k
 pr2 (Fin-Endo k) = succ-Fin
 
-Cyclic : (l : Level) → ℕ → UU (lsuc lzero)
-Cyclic l zero-ℕ = Infinite-Cyclic
-Cyclic l (succ-ℕ k) =
-  Σ (Endo lzero) (λ X → mere-equiv-Endo (Fin-Endo (succ-ℕ k)) X)
+Cyclic : (l : Level) → ℕ → UU (lsuc l)
+Cyclic l zero-ℕ = Infinite-Cyclic l
+Cyclic l (succ-ℕ k) = Σ (Endo l) (mere-equiv-Endo (Fin-Endo (succ-ℕ k)))
 
-Fin-Cyclic : (k : ℕ) → Cyclic lzero k
-Fin-Cyclic zero-ℕ = {!ℤ-Infinite-Cyclic!}
-Fin-Cyclic (succ-ℕ k) = {!!}
+Fin-Cyclic : (k : ℕ) → Cyclic lzero (succ-ℕ k)
+pr1 (Fin-Cyclic k) = Fin-Endo (succ-ℕ k)
+pr2 (Fin-Cyclic k) = refl-mere-equiv-Endo (Fin-Endo (succ-ℕ k))
 
 ```
