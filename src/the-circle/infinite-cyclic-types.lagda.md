@@ -42,6 +42,21 @@ module _
           ( endomorphism-Endo Y)
           ( map-equiv e))
 
+  equiv-equiv-Endo : equiv-Endo → type-Endo X ≃ type-Endo Y
+  equiv-equiv-Endo e = pr1 e
+  
+  map-equiv-Endo : equiv-Endo → type-Endo X → type-Endo Y
+  map-equiv-Endo e = map-equiv (equiv-equiv-Endo e)
+
+  coherence-square-equiv-Endo :
+    (e : equiv-Endo) →
+    coherence-square
+      ( map-equiv-Endo e)
+      ( endomorphism-Endo X)
+      ( endomorphism-Endo Y)
+      ( map-equiv-Endo e)
+  coherence-square-equiv-Endo e = pr2 e
+
   mere-equiv-Endo : UU (l1 ⊔ l2)
   mere-equiv-Endo = type-trunc-Prop equiv-Endo
 
@@ -83,15 +98,26 @@ comp-equiv-Endo :
 pr1 (comp-equiv-Endo X Y Z f e) = pr1 f ∘e pr1 e
 pr2 (comp-equiv-Endo X Y Z f e) =
   coherence-square-comp-horizontal
-    ( map-equiv (pr1 e))
-    ( map-equiv (pr1 f))
+    ( map-equiv-Endo X Y e)
+    ( map-equiv-Endo Y Z f)
     ( endomorphism-Endo X)
     ( endomorphism-Endo Y)
     ( endomorphism-Endo Z)
-    ( map-equiv (pr1 e))
-    ( map-equiv (pr1 f))
-    ( pr2 e)
-    ( pr2 f)
+    ( map-equiv-Endo X Y e)
+    ( map-equiv-Endo Y Z f)
+    ( coherence-square-equiv-Endo X Y e)
+    ( coherence-square-equiv-Endo Y Z f)
+
+inv-equiv-Endo :
+  {l1 l2 : Level} (X : Endo l1) (Y : Endo l2) → equiv-Endo X Y → equiv-Endo Y X
+pr1 (inv-equiv-Endo X Y e) = inv-equiv (equiv-equiv-Endo X Y e)
+pr2 (inv-equiv-Endo X Y e) =
+  coherence-square-inv-horizontal
+    ( equiv-equiv-Endo X Y e)
+    ( endomorphism-Endo X)
+    ( endomorphism-Endo Y)
+    ( equiv-equiv-Endo X Y e)
+    ( coherence-square-equiv-Endo X Y e)
 
 module _
   {l1 l2 : Level} (X : Endo l1) (Y : Endo l2)
@@ -162,8 +188,8 @@ module _
   eq-htpy-hom-Endo f g = map-inv-equiv (extensionality-hom-Endo f g)
 
   hom-equiv-Endo : equiv-Endo X Y → hom-Endo
-  pr1 (hom-equiv-Endo e) = map-equiv (pr1 e)
-  pr2 (hom-equiv-Endo e) = pr2 e
+  pr1 (hom-equiv-Endo e) = map-equiv-Endo X Y e
+  pr2 (hom-equiv-Endo e) = coherence-square-equiv-Endo X Y e
 
   htpy-equiv-Endo : (e f : equiv-Endo X Y) → UU (l1 ⊔ l2)
   htpy-equiv-Endo e f = htpy-hom-Endo (hom-equiv-Endo e) (hom-equiv-Endo f)
@@ -216,7 +242,10 @@ module _
       ( e)
       ( pair
         ( refl-htpy)
-        ( λ x → inv (right-unit ∙ (right-unit ∙ ap-id (pr2 e x)))))
+        ( λ x →
+          inv
+            ( ( right-unit) ∙
+              ( right-unit ∙ ap-id (coherence-square-equiv-Endo X Y e x)))))
 
   right-unit-law-comp-equiv-Endo :
     (e : equiv-Endo X Y) → Id (comp-equiv-Endo X X Y e (id-equiv-Endo X)) e
@@ -386,7 +415,8 @@ module _
   
   map-left-factor-compute-Ω-Infinite-Cyclic :
     equiv-Infinite-Cyclic ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic → ℤ
-  map-left-factor-compute-Ω-Infinite-Cyclic e = map-equiv (pr1 e) zero-ℤ
+  map-left-factor-compute-Ω-Infinite-Cyclic e =
+    map-equiv-Endo ℤ-Endo ℤ-Endo e zero-ℤ
 
   abstract
     is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic :
