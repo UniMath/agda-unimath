@@ -1067,16 +1067,23 @@ pr1 empty-Set = empty
 pr2 empty-Set = is-set-empty
 
 abstract
-  is-set-Fin :
-    (n : ℕ) → is-set (Fin n)
+  is-set-Fin : (n : ℕ) → is-set (Fin n)
   is-set-Fin zero-ℕ = is-set-empty
   is-set-Fin (succ-ℕ n) =
     is-set-coprod (is-set-Fin n) is-set-unit
 
-Fin-Set :
-  (n : ℕ) → UU-Set lzero
+Fin-Set : (n : ℕ) → UU-Set lzero
 pr1 (Fin-Set n) = Fin n
 pr2 (Fin-Set n) = is-set-Fin n
+
+abstract
+  is-set-ℤ-Mod : (k : ℕ) → is-set (ℤ-Mod k)
+  is-set-ℤ-Mod zero-ℕ = is-set-ℤ
+  is-set-ℤ-Mod (succ-ℕ k) = is-set-Fin (succ-ℕ k)
+
+ℤ-Mod-Set : (k : ℕ) → UU-Set lzero
+pr1 (ℤ-Mod-Set k) = ℤ-Mod k
+pr2 (ℤ-Mod-Set k) = is-set-ℤ-Mod k    
 
 -- Exercise 12.4
 

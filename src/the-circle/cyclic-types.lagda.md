@@ -35,9 +35,9 @@ standard-Cyclic (succ-ℕ k) = Fin-Cyclic k
 type-standard-Cyclic : (k : ℕ) → UU lzero
 type-standard-Cyclic k = type-Cyclic k (standard-Cyclic k)
 
-pt-standard-Cyclic : (k : ℕ) → type-standard-Cyclic k
-pt-standard-Cyclic zero-ℕ = zero-ℤ
-pt-standard-Cyclic (succ-ℕ k) = zero-Fin
+zero-standard-Cyclic : (k : ℕ) → type-standard-Cyclic k
+zero-standard-Cyclic zero-ℕ = zero-ℤ
+zero-standard-Cyclic (succ-ℕ k) = zero-Fin
 
 is-set-type-standard-Cyclic : (k : ℕ) → is-set (type-standard-Cyclic k)
 is-set-type-standard-Cyclic zero-ℕ = is-set-ℤ
@@ -223,13 +223,13 @@ Eq-Cyclic : (k : ℕ) → Cyclic lzero k → UU lzero
 Eq-Cyclic k X = type-Cyclic k X
 
 refl-Eq-Cyclic : (k : ℕ) → Eq-Cyclic k (standard-Cyclic k)
-refl-Eq-Cyclic k = pt-standard-Cyclic k
+refl-Eq-Cyclic k = zero-standard-Cyclic k
 
 Eq-equiv-Cyclic :
   (k : ℕ) (X : Cyclic lzero k) →
   equiv-Cyclic k (standard-Cyclic k) X → Eq-Cyclic k X
 Eq-equiv-Cyclic k X e =
-  map-equiv-Cyclic k (standard-Cyclic k) X e (pt-standard-Cyclic k)
+  map-equiv-Cyclic k (standard-Cyclic k) X e (zero-standard-Cyclic k)
 
 equiv-Eq-Cyclic :
   (k : ℕ) → Eq-Cyclic k (standard-Cyclic k) →
@@ -337,5 +337,48 @@ equiv-compute-Ω-Cyclic k =
     ( Eq-equiv-Cyclic k (standard-Cyclic k))
     ( is-equiv-Eq-equiv-Cyclic k (standard-Cyclic k))) ∘e
   ( extensionality-Cyclic k (standard-Cyclic k) (standard-Cyclic k))
+
+add-standard-Cyclic :
+  (k : ℕ) (x y : type-standard-Cyclic k) → type-standard-Cyclic k
+add-standard-Cyclic zero-ℕ = add-ℤ
+add-standard-Cyclic (succ-ℕ k) = add-Fin
+
+neg-standard-Cyclic :
+  (k : ℕ) → type-standard-Cyclic k → type-standard-Cyclic k
+neg-standard-Cyclic zero-ℕ = neg-ℤ
+neg-standard-Cyclic (succ-ℕ k) = neg-Fin
+
+associative-add-standard-Cyclic :
+  (k : ℕ) (x y z : type-standard-Cyclic k) →
+  Id (add-standard-Cyclic k (add-standard-Cyclic k x y) z)
+     (add-standard-Cyclic k x (add-standard-Cyclic k y z))
+associative-add-standard-Cyclic zero-ℕ = associative-add-ℤ
+associative-add-standard-Cyclic (succ-ℕ k) = associative-add-Fin
+
+left-unit-law-add-standard-Cyclic :
+  (k : ℕ) (x : type-standard-Cyclic k) →
+  Id (add-standard-Cyclic k (zero-standard-Cyclic k) x) x
+left-unit-law-add-standard-Cyclic zero-ℕ = left-unit-law-add-ℤ
+left-unit-law-add-standard-Cyclic (succ-ℕ k) = left-unit-law-add-Fin
+
+right-unit-law-add-standard-Cyclic :
+  (k : ℕ) (x : type-standard-Cyclic k) →
+  Id (add-standard-Cyclic k x (zero-standard-Cyclic k)) x
+right-unit-law-add-standard-Cyclic zero-ℕ = right-unit-law-add-ℤ
+right-unit-law-add-standard-Cyclic (succ-ℕ k) = right-unit-law-add-Fin
+
+left-inverse-law-add-Cyclic :
+  (k : ℕ) (x : type-standard-Cyclic k) →
+  Id ( add-standard-Cyclic k (neg-standard-Cyclic k x) x)
+     ( zero-standard-Cyclic k)
+left-inverse-law-add-Cyclic zero-ℕ = left-inverse-law-add-ℤ
+left-inverse-law-add-Cyclic (succ-ℕ k) = left-inverse-law-add-Fin
+
+right-inverse-law-add-Cyclic :
+  (k : ℕ) (x : type-standard-Cyclic k) →
+  Id ( add-standard-Cyclic k x (neg-standard-Cyclic k x))
+     ( zero-standard-Cyclic k)
+right-inverse-law-add-Cyclic zero-ℕ = right-inverse-law-add-ℤ
+right-inverse-law-add-Cyclic (succ-ℕ k) = right-inverse-law-add-Fin
 
 ```

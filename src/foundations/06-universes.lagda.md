@@ -75,26 +75,34 @@ is-not-injective f = ¬ (is-injective f)
 is-injective-id : {l1 : Level} {A : UU l1} → is-injective (id {A = A})
 is-injective-id p = p
 
-is-injective-is-injective-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → C)
-  (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
-  is-injective f → is-injective h
-is-injective-is-injective-comp f g h H is-inj-f {x} {x'} p =
-  is-inj-f {x} {x'} ((H x) ∙ ((ap g p) ∙ (inv (H x'))))
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+  
+  is-injective-is-injective-comp :
+    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
+    is-injective f → is-injective h
+  is-injective-is-injective-comp f g h H is-inj-f {x} {x'} p =
+    is-inj-f {x} {x'} ((H x) ∙ ((ap g p) ∙ (inv (H x'))))
 
-is-injective-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → C)
-  (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
-  is-injective h → is-injective g → is-injective f
-is-injective-comp f g h H is-inj-h is-inj-g {x} {x'} p =
-  is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
+  is-injective-comp :
+    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
+    is-injective h → is-injective g → is-injective f
+  is-injective-comp f g h H is-inj-h is-inj-g {x} {x'} p =
+    is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
+
+  is-injective-comp' :
+    {g : B → C} {h : A → B} →
+    is-injective h → is-injective g → is-injective (g ∘ h)
+  is-injective-comp' {g} {h} H G =
+    is-injective-comp (g ∘ h) g h (λ x → refl) H G
 
 is-injective-succ-ℕ : is-injective succ-ℕ
 is-injective-succ-ℕ {x} {y} e = eq-Eq-ℕ x y (Eq-eq-ℕ e)
 
 is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
-  inv (left-inverse-pred-ℤ x) ∙ (ap pred-ℤ p ∙ left-inverse-pred-ℤ y)
+  inv (isretr-pred-ℤ x) ∙ (ap pred-ℤ p ∙ isretr-pred-ℤ y)
 
 Peano-7 :
   (x y : ℕ) → (Id x y) ↔ (Id (succ-ℕ x) (succ-ℕ y))

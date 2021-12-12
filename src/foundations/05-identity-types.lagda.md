@@ -439,21 +439,21 @@ right-two-law-mul-ℕ x =
 -- Exercise 5.6
 
 abstract
-  left-inverse-pred-ℤ :
+  isretr-pred-ℤ :
     (k : ℤ) → Id (pred-ℤ (succ-ℤ k)) k
-  left-inverse-pred-ℤ (inl zero-ℕ) = refl
-  left-inverse-pred-ℤ (inl (succ-ℕ x)) = refl
-  left-inverse-pred-ℤ (inr (inl star)) = refl
-  left-inverse-pred-ℤ (inr (inr zero-ℕ)) = refl
-  left-inverse-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+  isretr-pred-ℤ (inl zero-ℕ) = refl
+  isretr-pred-ℤ (inl (succ-ℕ x)) = refl
+  isretr-pred-ℤ (inr (inl star)) = refl
+  isretr-pred-ℤ (inr (inr zero-ℕ)) = refl
+  isretr-pred-ℤ (inr (inr (succ-ℕ x))) = refl
   
-  right-inverse-pred-ℤ :
+  issec-pred-ℤ :
     (k : ℤ) → Id (succ-ℤ (pred-ℤ k)) k
-  right-inverse-pred-ℤ (inl zero-ℕ) = refl
-  right-inverse-pred-ℤ (inl (succ-ℕ x)) = refl
-  right-inverse-pred-ℤ (inr (inl star)) = refl
-  right-inverse-pred-ℤ (inr (inr zero-ℕ)) = refl
-  right-inverse-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+  issec-pred-ℤ (inl zero-ℕ) = refl
+  issec-pred-ℤ (inl (succ-ℕ x)) = refl
+  issec-pred-ℤ (inr (inl star)) = refl
+  issec-pred-ℤ (inr (inr zero-ℕ)) = refl
+  issec-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
 -- Exercise 5.7
 
@@ -482,11 +482,11 @@ abstract
   left-predecessor-law-add-ℤ (inl n) y = refl
   left-predecessor-law-add-ℤ (inr (inl star)) y = refl
   left-predecessor-law-add-ℤ (inr (inr zero-ℕ)) y =
-    ( ap (add-ℤ' y) (left-inverse-pred-ℤ zero-ℤ)) ∙ 
-    ( inv (left-inverse-pred-ℤ y))
+    ( ap (add-ℤ' y) (isretr-pred-ℤ zero-ℤ)) ∙ 
+    ( inv (isretr-pred-ℤ y))
   left-predecessor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
-    ( ap (add-ℤ' y) (left-inverse-pred-ℤ (inr (inr x)))) ∙
-    ( inv (left-inverse-pred-ℤ (add-ℤ (inr (inr x)) y)))
+    ( ap (add-ℤ' y) (isretr-pred-ℤ (inr (inr x)))) ∙
+    ( inv (isretr-pred-ℤ (add-ℤ (inr (inr x)) y)))
 
   right-predecessor-law-add-ℤ :
     (x y : ℤ) → Id (add-ℤ x (pred-ℤ y)) (pred-ℤ (add-ℤ x y))
@@ -495,20 +495,20 @@ abstract
     ap pred-ℤ (right-predecessor-law-add-ℤ (inl m) n)
   right-predecessor-law-add-ℤ (inr (inl star)) n = refl
   right-predecessor-law-add-ℤ (inr (inr zero-ℕ)) n =
-    (right-inverse-pred-ℤ n) ∙ (inv (left-inverse-pred-ℤ n))
+    (issec-pred-ℤ n) ∙ (inv (isretr-pred-ℤ n))
   right-predecessor-law-add-ℤ (inr (inr (succ-ℕ x))) n =
     ( ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) n)) ∙
-    ( ( right-inverse-pred-ℤ (add-ℤ (inr (inr x)) n)) ∙ 
-      ( inv (left-inverse-pred-ℤ (add-ℤ (inr (inr x)) n))))
+    ( ( issec-pred-ℤ (add-ℤ (inr (inr x)) n)) ∙ 
+      ( inv (isretr-pred-ℤ (add-ℤ (inr (inr x)) n))))
 
 abstract
   left-successor-law-add-ℤ :
     (x y : ℤ) → Id (add-ℤ (succ-ℤ x) y) (succ-ℤ (add-ℤ x y))
   left-successor-law-add-ℤ (inl zero-ℕ) y =
-    ( ap (add-ℤ' y) (right-inverse-pred-ℤ zero-ℤ)) ∙
-    ( inv (right-inverse-pred-ℤ y))
+    ( ap (add-ℤ' y) (issec-pred-ℤ zero-ℤ)) ∙
+    ( inv (issec-pred-ℤ y))
   left-successor-law-add-ℤ (inl (succ-ℕ x)) y =
-    ( inv (right-inverse-pred-ℤ (add-ℤ (inl x) y))) ∙
+    ( inv (issec-pred-ℤ (add-ℤ (inl x) y))) ∙
     ( ap succ-ℤ (inv (left-predecessor-law-add-ℤ (inl x) y)))
   left-successor-law-add-ℤ (inr (inl star)) y = refl
   left-successor-law-add-ℤ (inr (inr x)) y = refl
@@ -516,11 +516,11 @@ abstract
   right-successor-law-add-ℤ :
     (x y : ℤ) → Id (add-ℤ x (succ-ℤ y)) (succ-ℤ (add-ℤ x y))
   right-successor-law-add-ℤ (inl zero-ℕ) y =
-    (left-inverse-pred-ℤ y) ∙ (inv (right-inverse-pred-ℤ y))
+    (isretr-pred-ℤ y) ∙ (inv (issec-pred-ℤ y))
   right-successor-law-add-ℤ (inl (succ-ℕ x)) y =
     ( ap pred-ℤ (right-successor-law-add-ℤ (inl x) y)) ∙
-    ( ( left-inverse-pred-ℤ (add-ℤ (inl x) y)) ∙
-      ( inv (right-inverse-pred-ℤ (add-ℤ (inl x) y))))
+    ( ( isretr-pred-ℤ (add-ℤ (inl x) y)) ∙
+      ( inv (issec-pred-ℤ (add-ℤ (inl x) y))))
   right-successor-law-add-ℤ (inr (inl star)) y = refl
   right-successor-law-add-ℤ (inr (inr zero-ℕ)) y = refl
   right-successor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
@@ -579,7 +579,7 @@ abstract
   left-inverse-law-add-ℤ (inl zero-ℕ) = refl
   left-inverse-law-add-ℤ (inl (succ-ℕ x)) =
     ( ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) (inl x))) ∙ 
-    ( ( right-inverse-pred-ℤ (add-ℤ (inr (inr x)) (inl x))) ∙
+    ( ( issec-pred-ℤ (add-ℤ (inr (inr x)) (inl x))) ∙
       ( left-inverse-law-add-ℤ (inl x))) 
   left-inverse-law-add-ℤ (inr (inl star)) = refl
   left-inverse-law-add-ℤ (inr (inr x)) =
@@ -758,7 +758,7 @@ right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
                 ( ap
                   ( add-ℤ (inl (succ-ℕ n)))
                   ( ( ap succ-ℤ (inv (pred-neg-ℤ l))) ∙
-                    ( right-inverse-pred-ℤ (neg-ℤ l)))))))) ∙
+                    ( issec-pred-ℤ (neg-ℤ l)))))))) ∙
         ( associative-add-ℤ (inl (succ-ℕ n)) (neg-ℤ l) (mul-ℤ (inl n) l)))))
 right-successor-law-mul-ℤ (inr (inl star)) l = refl
 right-successor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
