@@ -548,6 +548,154 @@ pr2 (sim-unit-abs-ℤ (inl x) f) = refl
 sim-unit-abs-ℤ (inr (inl star)) = refl-sim-unit-ℤ zero-ℤ
 sim-unit-abs-ℤ (inr (inr x)) = refl-sim-unit-ℤ (inr (inr x))
 
+-- Modular arithmetic on ℤ
+
+ℤ-Mod : (k : ℕ) → UU lzero
+ℤ-Mod zero-ℕ = ℤ
+ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
+
+zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k
+zero-ℤ-Mod zero-ℕ = zero-ℤ
+zero-ℤ-Mod (succ-ℕ k) = zero-Fin
+
+neg-one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
+neg-one-ℤ-Mod zero-ℕ = neg-one-ℤ
+neg-one-ℤ-Mod (succ-ℕ k) = neg-one-Fin
+
+one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
+one-ℤ-Mod zero-ℕ = one-ℤ
+one-ℤ-Mod (succ-ℕ k) = one-Fin
+
+is-zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
+is-zero-ℤ-Mod k x = Id x (zero-ℤ-Mod k)
+
+is-nonzero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
+is-nonzero-ℤ-Mod k x = ¬ (is-zero-ℤ-Mod k x)
+
+succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
+succ-ℤ-Mod zero-ℕ = succ-ℤ
+succ-ℤ-Mod (succ-ℕ k) = succ-Fin
+
+pred-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
+pred-ℤ-Mod zero-ℕ = pred-ℤ
+pred-ℤ-Mod (succ-ℕ k) = pred-Fin
+
+issec-pred-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → Id (succ-ℤ-Mod k (pred-ℤ-Mod k x)) x
+issec-pred-ℤ-Mod zero-ℕ = issec-pred-ℤ
+issec-pred-ℤ-Mod (succ-ℕ k) = issec-pred-Fin
+
+isretr-pred-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → Id (pred-ℤ-Mod k (succ-ℤ-Mod k x)) x
+isretr-pred-ℤ-Mod zero-ℕ = isretr-pred-ℤ
+isretr-pred-ℤ-Mod (succ-ℕ k) = isretr-pred-Fin
+
+add-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+add-ℤ-Mod zero-ℕ = add-ℤ
+add-ℤ-Mod (succ-ℕ k) = add-Fin
+
+add-ℤ-Mod' : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+add-ℤ-Mod' k x y = add-ℤ-Mod k y x
+
+neg-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
+neg-ℤ-Mod zero-ℕ = neg-ℤ
+neg-ℤ-Mod (succ-ℕ k) = neg-Fin
+
+associative-add-ℤ-Mod :
+  (k : ℕ) (x y z : ℤ-Mod k) →
+  Id (add-ℤ-Mod k (add-ℤ-Mod k x y) z) (add-ℤ-Mod k x (add-ℤ-Mod k y z))
+associative-add-ℤ-Mod zero-ℕ = associative-add-ℤ
+associative-add-ℤ-Mod (succ-ℕ k) = associative-add-Fin
+
+commutative-add-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) → Id (add-ℤ-Mod k x y) (add-ℤ-Mod k y x)
+commutative-add-ℤ-Mod zero-ℕ = commutative-add-ℤ
+commutative-add-ℤ-Mod (succ-ℕ k) = commutative-add-Fin
+
+left-unit-law-add-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (add-ℤ-Mod k (zero-ℤ-Mod k) x) x
+left-unit-law-add-ℤ-Mod zero-ℕ = left-unit-law-add-ℤ
+left-unit-law-add-ℤ-Mod (succ-ℕ k) = left-unit-law-add-Fin
+
+right-unit-law-add-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (add-ℤ-Mod k x (zero-ℤ-Mod k)) x
+right-unit-law-add-ℤ-Mod zero-ℕ = right-unit-law-add-ℤ
+right-unit-law-add-ℤ-Mod (succ-ℕ k) = right-unit-law-add-Fin
+
+left-inverse-law-add-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (add-ℤ-Mod k (neg-ℤ-Mod k x) x) (zero-ℤ-Mod k)
+left-inverse-law-add-ℤ-Mod zero-ℕ = left-inverse-law-add-ℤ
+left-inverse-law-add-ℤ-Mod (succ-ℕ k) = left-inverse-law-add-Fin
+
+right-inverse-law-add-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (add-ℤ-Mod k x (neg-ℤ-Mod k x)) (zero-ℤ-Mod k)
+right-inverse-law-add-ℤ-Mod zero-ℕ = right-inverse-law-add-ℤ
+right-inverse-law-add-ℤ-Mod (succ-ℕ k) = right-inverse-law-add-Fin
+
+mul-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+mul-ℤ-Mod zero-ℕ = mul-ℤ
+mul-ℤ-Mod (succ-ℕ k) = mul-Fin
+
+mul-ℤ-Mod' : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+mul-ℤ-Mod' k x y = mul-ℤ-Mod k y x
+
+associative-mul-ℤ-Mod :
+  (k : ℕ) (x y z : ℤ-Mod k) →
+  Id (mul-ℤ-Mod k (mul-ℤ-Mod k x y) z) (mul-ℤ-Mod k x (mul-ℤ-Mod k y z))
+associative-mul-ℤ-Mod zero-ℕ = associative-mul-ℤ
+associative-mul-ℤ-Mod (succ-ℕ k) = associative-mul-Fin
+
+commutative-mul-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) → Id (mul-ℤ-Mod k x y) (mul-ℤ-Mod k y x)
+commutative-mul-ℤ-Mod zero-ℕ = commutative-mul-ℤ
+commutative-mul-ℤ-Mod (succ-ℕ k) = commutative-mul-Fin
+
+left-unit-law-mul-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (mul-ℤ-Mod k (one-ℤ-Mod k) x) x
+left-unit-law-mul-ℤ-Mod zero-ℕ = left-unit-law-mul-ℤ
+left-unit-law-mul-ℤ-Mod (succ-ℕ k) = left-unit-law-mul-Fin
+
+right-unit-law-mul-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (mul-ℤ-Mod k x (one-ℤ-Mod k)) x
+right-unit-law-mul-ℤ-Mod zero-ℕ = right-unit-law-mul-ℤ
+right-unit-law-mul-ℤ-Mod (succ-ℕ k) = right-unit-law-mul-Fin
+
+left-distributive-mul-add-ℤ-Mod :
+  (k : ℕ) (x y z : ℤ-Mod k) →
+  Id ( mul-ℤ-Mod k x (add-ℤ-Mod k y z))
+     ( add-ℤ-Mod k (mul-ℤ-Mod k x y) (mul-ℤ-Mod k x z))
+left-distributive-mul-add-ℤ-Mod zero-ℕ = left-distributive-mul-add-ℤ
+left-distributive-mul-add-ℤ-Mod (succ-ℕ k) = left-distributive-mul-add-Fin
+
+right-distributive-mul-add-ℤ-Mod :
+  (k : ℕ) (x y z : ℤ-Mod k) →
+  Id ( mul-ℤ-Mod k (add-ℤ-Mod k x y) z)
+     ( add-ℤ-Mod k (mul-ℤ-Mod k x z) (mul-ℤ-Mod k y z))
+right-distributive-mul-add-ℤ-Mod zero-ℕ = right-distributive-mul-add-ℤ
+right-distributive-mul-add-ℤ-Mod (succ-ℕ k) = right-distributive-mul-add-Fin
+
+mod-ℕ : (k : ℕ) → ℕ → ℤ-Mod k
+mod-ℕ zero-ℕ x = int-ℕ x
+mod-ℕ (succ-ℕ k) x = mod-succ-ℕ k x
+
+mod-ℤ : (k : ℕ) → ℤ → ℤ-Mod k
+mod-ℤ k (inl zero-ℕ) = neg-one-ℤ-Mod k
+mod-ℤ k (inl (succ-ℕ x)) = pred-ℤ-Mod k (mod-ℤ k (inl x))
+mod-ℤ k (inr (inl x)) = zero-ℤ-Mod k
+mod-ℤ k (inr (inr zero-ℕ)) = one-ℤ-Mod k
+mod-ℤ k (inr (inr (succ-ℕ x))) = succ-ℤ-Mod k (mod-ℤ k (inr (inr x)))
+
+int-ℤ-Mod : {k : ℕ} → ℤ-Mod k → ℤ
+int-ℤ-Mod {zero-ℕ} x = x
+int-ℤ-Mod {succ-ℕ k} x = int-ℕ (nat-Fin x)
+
+is-injective-nat-ℤ-Mod : {k : ℕ} → is-injective (int-ℤ-Mod {k})
+is-injective-nat-ℤ-Mod {zero-ℕ} = is-injective-id
+is-injective-nat-ℤ-Mod {succ-ℕ k} =
+  is-injective-comp' is-injective-nat-Fin is-injective-int-ℕ
+
+is-zero-int-zero-ℤ-Mod : {k : ℕ} → is-zero-ℤ (int-ℤ-Mod {k} (zero-ℤ-Mod k))
+is-zero-int-zero-ℤ-Mod {zero-ℕ} = refl
+is-zero-int-zero-ℤ-Mod {succ-ℕ k} = ap int-ℕ (is-zero-nat-zero-Fin {k})
+
 -- We introduce the condition on ℤ of being a gcd.
 
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero

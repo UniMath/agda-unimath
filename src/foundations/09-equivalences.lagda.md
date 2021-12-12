@@ -233,9 +233,9 @@ pr2 equiv-neg-𝟚 = is-equiv-neg-𝟚
 abstract
   is-equiv-succ-ℤ : is-equiv succ-ℤ
   pr1 (pr1 is-equiv-succ-ℤ) = pred-ℤ
-  pr2 (pr1 is-equiv-succ-ℤ) = right-inverse-pred-ℤ
+  pr2 (pr1 is-equiv-succ-ℤ) = issec-pred-ℤ
   pr1 (pr2 is-equiv-succ-ℤ) = pred-ℤ
-  pr2 (pr2 is-equiv-succ-ℤ) = left-inverse-pred-ℤ
+  pr2 (pr2 is-equiv-succ-ℤ) = isretr-pred-ℤ
 
 equiv-succ-ℤ : ℤ ≃ ℤ
 pr1 equiv-succ-ℤ = succ-ℤ
@@ -246,9 +246,9 @@ pr2 equiv-succ-ℤ = is-equiv-succ-ℤ
 abstract
   is-equiv-pred-ℤ : is-equiv pred-ℤ
   pr1 (pr1 is-equiv-pred-ℤ) = succ-ℤ
-  pr2 (pr1 is-equiv-pred-ℤ) = left-inverse-pred-ℤ
+  pr2 (pr1 is-equiv-pred-ℤ) = isretr-pred-ℤ
   pr1 (pr2 is-equiv-pred-ℤ) = succ-ℤ
-  pr2 (pr2 is-equiv-pred-ℤ) = right-inverse-pred-ℤ
+  pr2 (pr2 is-equiv-pred-ℤ) = issec-pred-ℤ
 
 equiv-pred-ℤ : ℤ ≃ ℤ
 pr1 equiv-pred-ℤ = pred-ℤ
@@ -309,9 +309,9 @@ pr2 equiv-neg-ℤ = is-equiv-neg-ℤ
 
 is-equiv-succ-Fin : {k : ℕ} → is-equiv (succ-Fin {k})
 pr1 (pr1 is-equiv-succ-Fin) = pred-Fin
-pr2 (pr1 is-equiv-succ-Fin) = succ-pred-Fin
+pr2 (pr1 is-equiv-succ-Fin) = issec-pred-Fin
 pr1 (pr2 is-equiv-succ-Fin) = pred-Fin
-pr2 (pr2 is-equiv-succ-Fin) = pred-succ-Fin
+pr2 (pr2 is-equiv-succ-Fin) = isretr-pred-Fin
 
 equiv-succ-Fin : {k : ℕ} → Fin k ≃ Fin k
 pr1 equiv-succ-Fin = succ-Fin
@@ -321,9 +321,9 @@ pr2 equiv-succ-Fin = is-equiv-succ-Fin
 
 is-equiv-pred-Fin : {k : ℕ} → is-equiv (pred-Fin {k})
 pr1 (pr1 is-equiv-pred-Fin) = succ-Fin
-pr2 (pr1 is-equiv-pred-Fin) = pred-succ-Fin
+pr2 (pr1 is-equiv-pred-Fin) = isretr-pred-Fin
 pr1 (pr2 is-equiv-pred-Fin) = succ-Fin
-pr2 (pr2 is-equiv-pred-Fin) = succ-pred-Fin
+pr2 (pr2 is-equiv-pred-Fin) = issec-pred-Fin
 
 equiv-pred-Fin : {k : ℕ} → Fin k ≃ Fin k
 pr1 equiv-pred-Fin = pred-Fin
@@ -393,6 +393,53 @@ equiv-neg-Fin :
   {k : ℕ} → Fin k ≃ Fin k
 pr1 equiv-neg-Fin = neg-Fin
 pr2 equiv-neg-Fin = is-equiv-neg-Fin
+
+-- We record the analogous equivalences on ℤ-Mod
+
+abstract
+  is-equiv-succ-ℤ-Mod : (k : ℕ) → is-equiv (succ-ℤ-Mod k)
+  is-equiv-succ-ℤ-Mod zero-ℕ = is-equiv-succ-ℤ
+  is-equiv-succ-ℤ-Mod (succ-ℕ k) = is-equiv-succ-Fin
+
+equiv-succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-succ-ℤ-Mod k) = succ-ℤ-Mod k
+pr2 (equiv-succ-ℤ-Mod k) = is-equiv-succ-ℤ-Mod k
+
+abstract
+  is-equiv-pred-ℤ-Mod : (k : ℕ) → is-equiv (pred-ℤ-Mod k)
+  is-equiv-pred-ℤ-Mod zero-ℕ = is-equiv-pred-ℤ
+  is-equiv-pred-ℤ-Mod (succ-ℕ k) = is-equiv-pred-Fin
+
+equiv-pred-ℤ-Mod : (k : ℕ) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-pred-ℤ-Mod k) = pred-ℤ-Mod k
+pr2 (equiv-pred-ℤ-Mod k) = is-equiv-pred-ℤ-Mod k
+
+abstract
+  is-equiv-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod k x)
+  is-equiv-add-ℤ-Mod zero-ℕ = is-equiv-add-ℤ
+  is-equiv-add-ℤ-Mod (succ-ℕ k) = is-equiv-add-Fin
+
+equiv-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-add-ℤ-Mod k x) = add-ℤ-Mod k x
+pr2 (equiv-add-ℤ-Mod k x) = is-equiv-add-ℤ-Mod k x
+
+abstract
+  is-equiv-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod' k x)
+  is-equiv-add-ℤ-Mod' zero-ℕ = is-equiv-add-ℤ'
+  is-equiv-add-ℤ-Mod' (succ-ℕ k) = is-equiv-add-Fin'
+
+equiv-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-add-ℤ-Mod' k x) = add-ℤ-Mod' k x
+pr2 (equiv-add-ℤ-Mod' k x) = is-equiv-add-ℤ-Mod' k x
+
+abstract
+  is-equiv-neg-ℤ-Mod : (k : ℕ) → is-equiv (neg-ℤ-Mod k)
+  is-equiv-neg-ℤ-Mod zero-ℕ = is-equiv-neg-ℤ
+  is-equiv-neg-ℤ-Mod (succ-ℕ k) = is-equiv-neg-Fin
+
+equiv-neg-ℤ-Mod : (k : ℕ) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-neg-ℤ-Mod k) = neg-ℤ-Mod k
+pr2 (equiv-neg-ℤ-Mod k) = is-equiv-neg-ℤ-Mod k
 
 -- Further examples
 

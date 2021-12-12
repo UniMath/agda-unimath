@@ -302,7 +302,8 @@ concatenate-eq-cong-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
   Id x1 x2 → cong-ℕ k x2 x3 → Id x3 x4 →
   cong-ℕ k x4 x5 → Id x5 x6 → cong-ℕ k x1 x6
-concatenate-eq-cong-eq-cong-eq-ℕ k {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
+concatenate-eq-cong-eq-cong-eq-ℕ k
+  {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
   trans-cong-ℕ k x y z H K
 
 --------------------------------------------------------------------------------
@@ -330,12 +331,6 @@ neg-one-Fin {k} = inr star
 is-neg-one-Fin : {k : ℕ} → Fin k → UU lzero
 is-neg-one-Fin {succ-ℕ k} x = Id x neg-one-Fin
 
--- We also define the type ℤ-Mod
-
-ℤ-Mod : (k : ℕ) → UU lzero
-ℤ-Mod zero-ℕ = ℕ
-ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
-
 {- Definition 7.3.4 -}
 
 -- We define the inclusion of Fin k into ℕ.
@@ -343,10 +338,6 @@ is-neg-one-Fin {succ-ℕ k} x = Id x neg-one-Fin
 nat-Fin : {k : ℕ} → Fin k → ℕ
 nat-Fin {succ-ℕ k} (inl x) = nat-Fin x
 nat-Fin {succ-ℕ k} (inr x) = k
-
-nat-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℕ
-nat-ℤ-Mod zero-ℕ x = x
-nat-ℤ-Mod (succ-ℕ k) x = nat-Fin x
 
 {- Lemma 7.3.5 -}
 
@@ -389,10 +380,6 @@ is-injective-nat-Fin {succ-ℕ k} {inr star} {inl y} p =
 is-injective-nat-Fin {succ-ℕ k} {inr star} {inr star} p =
   refl
 
-is-injective-nat-ℤ-Mod : {k : ℕ} → is-injective (nat-ℤ-Mod k)
-is-injective-nat-ℤ-Mod {zero-ℕ} = is-injective-id
-is-injective-nat-ℤ-Mod {succ-ℕ k} = is-injective-nat-Fin
-
 --------------------------------------------------------------------------------
 
 {- Section 7.4 The natural numbers modulo k+1 -}
@@ -432,22 +419,6 @@ succ-Fin : {k : ℕ} → Fin k → Fin k
 succ-Fin {succ-ℕ k} (inl x) = skip-zero-Fin x
 succ-Fin {succ-ℕ k} (inr star) = zero-Fin
 
--- The same for ℤ-Mod
-
-zero-ℤ-Mod : {k : ℕ} → ℤ-Mod k
-zero-ℤ-Mod {zero-ℕ} = zero-ℕ
-zero-ℤ-Mod {succ-ℕ k} = zero-Fin
-
-is-zero-ℤ-Mod : {k : ℕ} → ℤ-Mod k → UU lzero
-is-zero-ℤ-Mod {k} x = Id x (zero-ℤ-Mod {k})
-
-is-nonzero-ℤ-Mod : {k : ℕ} → ℤ-Mod k → UU lzero
-is-nonzero-ℤ-Mod {k} x = ¬ (is-zero-ℤ-Mod {k} x)
-
-succ-ℤ-Mod : {k : ℕ} → ℤ-Mod k → ℤ-Mod k
-succ-ℤ-Mod {zero-ℕ} = succ-ℕ
-succ-ℤ-Mod {succ-ℕ k} = succ-Fin {succ-ℕ k}
-
 {- Definition 7.4.3 -}
 
 -- We define the modulo function
@@ -462,10 +433,6 @@ mod-two-ℕ = mod-succ-ℕ one-ℕ
 mod-three-ℕ : ℕ → Fin three-ℕ
 mod-three-ℕ = mod-succ-ℕ two-ℕ
 
-mod-ℕ : (k : ℕ) → ℕ → ℤ-Mod k
-mod-ℕ zero-ℕ x = x
-mod-ℕ (succ-ℕ k) x = mod-succ-ℕ k x
-
 {- Lemma 7.4.4 -}
 
 -- We prove three things to help calculating with nat-Fin.
@@ -473,10 +440,6 @@ mod-ℕ (succ-ℕ k) x = mod-succ-ℕ k x
 is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (zero-Fin {k}))
 is-zero-nat-zero-Fin {zero-ℕ} = refl 
 is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
-
-is-zero-nat-zero-ℤ-Mod : {k : ℕ} → is-zero-ℕ (nat-ℤ-Mod k (zero-ℤ-Mod {k}))
-is-zero-nat-zero-ℤ-Mod {zero-ℕ} = refl
-is-zero-nat-zero-ℤ-Mod {succ-ℕ k} = is-zero-nat-zero-Fin {k}
 
 nat-skip-zero-Fin :
   {k : ℕ} (x : Fin k) → Id (nat-Fin (skip-zero-Fin x)) (succ-ℕ (nat-Fin x))
@@ -504,12 +467,6 @@ cong-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( is-zero-nat-zero-Fin {k})
     ( cong-zero-ℕ' (succ-ℕ k))
 
-cong-nat-succ-ℤ-Mod :
-  (k : ℕ) (x : ℤ-Mod k) →
-  cong-ℕ k (nat-ℤ-Mod k (succ-ℤ-Mod {k} x)) (succ-ℕ (nat-ℤ-Mod k x))
-cong-nat-succ-ℤ-Mod zero-ℕ x = refl-cong-ℕ zero-ℕ (succ-ℕ x)
-cong-nat-succ-ℤ-Mod (succ-ℕ k) x = cong-nat-succ-Fin (succ-ℕ k) x
-
 {- Proposition 7.4.5 -}
 
 -- We show that (nat-Fin (mod-succ-ℕ n x)) is congruent to x modulo n+1. --
@@ -526,10 +483,6 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( succ-ℕ x)
     ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x) )
     ( cong-nat-mod-succ-ℕ k x)
-
-cong-nat-mod-ℕ : (k x : ℕ) → cong-ℕ k (nat-ℤ-Mod k (mod-ℕ k x)) x
-cong-nat-mod-ℕ zero-ℕ x = refl-cong-ℕ zero-ℕ x
-cong-nat-mod-ℕ (succ-ℕ k) x = cong-nat-mod-succ-ℕ k x
 
 {- Proposition 7.4.6 -}
 
@@ -573,11 +526,6 @@ cong-eq-mod-succ-ℕ k x y p =
       ( cong-nat-mod-succ-ℕ k x))
     ( ap nat-Fin p)
     ( cong-nat-mod-succ-ℕ k y)
-
-cong-eq-mod-ℕ :
-  (k x y : ℕ) → Id (mod-ℕ k x) (mod-ℕ k y) → cong-ℕ k x y
-cong-eq-mod-ℕ zero-ℕ x y p = cong-identification-ℕ zero-ℕ p
-cong-eq-mod-ℕ (succ-ℕ k) x y p = cong-eq-mod-succ-ℕ k x y p
 
 eq-cong-nat-Fin :
   (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin x) (nat-Fin y) → Id x y
@@ -949,18 +897,6 @@ eq-cong-zero-ℕ : (x y : ℕ) → cong-ℕ zero-ℕ x y → Id x y
 eq-cong-zero-ℕ x y H =
   eq-dist-ℕ x y (is-zero-div-zero-ℕ (dist-ℕ x y) H)
 
-eq-cong-nat-ℤ-Mod :
-  (k : ℕ) (x y : ℤ-Mod k) →
-  cong-ℕ k (nat-ℤ-Mod k x) (nat-ℤ-Mod k y) → Id x y
-eq-cong-nat-ℤ-Mod zero-ℕ x y H =
-  eq-cong-zero-ℕ (nat-ℤ-Mod zero-ℕ x) (nat-ℤ-Mod zero-ℕ y) H
-eq-cong-nat-ℤ-Mod (succ-ℕ k) x y = eq-cong-nat-Fin (succ-ℕ k) x y
-
-eq-mod-cong-ℕ :
-  (k x y : ℕ) → cong-ℕ k x y → Id (mod-ℕ k x) (mod-ℕ k y)
-eq-mod-cong-ℕ zero-ℕ x y H = eq-cong-zero-ℕ x y H
-eq-mod-cong-ℕ (succ-ℕ k) x y = eq-mod-succ-cong-ℕ k x y
-
 {- Exercise 7.3 -}
 
 div-factorial-is-nonzero-ℕ :
@@ -1112,20 +1048,20 @@ succ-skip-neg-two-Fin {zero-ℕ} (inr star) = refl
 succ-skip-neg-two-Fin {succ-ℕ k} (inl x) = refl
 succ-skip-neg-two-Fin {succ-ℕ k} (inr star) = refl
 
-succ-pred-Fin :
+issec-pred-Fin :
   {k : ℕ} (x : Fin k) → Id (succ-Fin (pred-Fin x)) x
-succ-pred-Fin {succ-ℕ zero-ℕ} (inr star) = refl
-succ-pred-Fin {succ-ℕ (succ-ℕ k)} (inl x) =
-  succ-skip-neg-two-Fin (pred-Fin x) ∙ ap inl (succ-pred-Fin x)
-succ-pred-Fin {succ-ℕ (succ-ℕ k)} (inr star) = refl
+issec-pred-Fin {succ-ℕ zero-ℕ} (inr star) = refl
+issec-pred-Fin {succ-ℕ (succ-ℕ k)} (inl x) =
+  succ-skip-neg-two-Fin (pred-Fin x) ∙ ap inl (issec-pred-Fin x)
+issec-pred-Fin {succ-ℕ (succ-ℕ k)} (inr star) = refl
 
-pred-succ-Fin :
+isretr-pred-Fin :
   {k : ℕ} (x : Fin k) → Id (pred-Fin (succ-Fin x)) x
-pred-succ-Fin {succ-ℕ zero-ℕ} (inr star) = refl
-pred-succ-Fin {succ-ℕ (succ-ℕ k)} (inl (inl x)) =
-  ap skip-neg-two-Fin (pred-succ-Fin (inl x))
-pred-succ-Fin {succ-ℕ (succ-ℕ k)} (inl (inr star)) = refl
-pred-succ-Fin {succ-ℕ (succ-ℕ k)} (inr star) = pred-zero-Fin
+isretr-pred-Fin {succ-ℕ zero-ℕ} (inr star) = refl
+isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inl (inl x)) =
+  ap skip-neg-two-Fin (isretr-pred-Fin (inl x))
+isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inl (inr star)) = refl
+isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inr star) = pred-zero-Fin
 
 {- Exercise 7.7 -}
 
