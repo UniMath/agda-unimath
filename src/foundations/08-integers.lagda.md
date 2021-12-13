@@ -687,14 +687,21 @@ int-ℤ-Mod : {k : ℕ} → ℤ-Mod k → ℤ
 int-ℤ-Mod {zero-ℕ} x = x
 int-ℤ-Mod {succ-ℕ k} x = int-ℕ (nat-Fin x)
 
-is-injective-nat-ℤ-Mod : {k : ℕ} → is-injective (int-ℤ-Mod {k})
-is-injective-nat-ℤ-Mod {zero-ℕ} = is-injective-id
-is-injective-nat-ℤ-Mod {succ-ℕ k} =
+is-injective-int-ℤ-Mod : {k : ℕ} → is-injective (int-ℤ-Mod {k})
+is-injective-int-ℤ-Mod {zero-ℕ} = is-injective-id
+is-injective-int-ℤ-Mod {succ-ℕ k} =
   is-injective-comp' is-injective-nat-Fin is-injective-int-ℕ
 
 is-zero-int-zero-ℤ-Mod : {k : ℕ} → is-zero-ℤ (int-ℤ-Mod {k} (zero-ℤ-Mod k))
 is-zero-int-zero-ℤ-Mod {zero-ℕ} = refl
 is-zero-int-zero-ℤ-Mod {succ-ℕ k} = ap int-ℕ (is-zero-nat-zero-Fin {k})
+
+cong-ℤ : ℤ → ℤ → ℤ → UU lzero
+cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
+
+cong-int-cong-ℕ :
+  (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
+cong-int-cong-ℕ k x y H = ?
 
 -- We introduce the condition on ℤ of being a gcd.
 
