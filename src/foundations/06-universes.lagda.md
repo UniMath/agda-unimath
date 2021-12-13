@@ -1114,7 +1114,7 @@ decide-is-nonnegative-ℤ {inr x} = inl star
 -- We define the difference between two integers
 
 diff-ℤ : ℤ → ℤ → ℤ
-diff-ℤ k l = add-ℤ (neg-ℤ k) l
+diff-ℤ x y = add-ℤ x (neg-ℤ y)
 
 ap-diff-ℤ : {x x' y y' : ℤ} → Id x x' → Id y y' → Id (diff-ℤ x y) (diff-ℤ x' y')
 ap-diff-ℤ p q = ap-binary diff-ℤ p q
@@ -1122,102 +1122,103 @@ ap-diff-ℤ p q = ap-binary diff-ℤ p q
 eq-diff-ℤ : {x y : ℤ} → is-zero-ℤ (diff-ℤ x y) → Id x y
 eq-diff-ℤ {x} {y} H =
   ( inv (right-unit-law-add-ℤ x)) ∙
-  ( ( ap (add-ℤ x) (inv H)) ∙
-    ( ( inv (associative-add-ℤ x (neg-ℤ x) y)) ∙
-      ( ( ap (add-ℤ' y) (right-inverse-law-add-ℤ x)) ∙
+  ( ( ap (add-ℤ x) (inv (left-inverse-law-add-ℤ y))) ∙
+    ( ( inv (associative-add-ℤ x (neg-ℤ y) y)) ∙
+      ( ( ap (add-ℤ' y) H) ∙
         ( left-unit-law-add-ℤ y))))
 
 is-zero-diff-ℤ :
   {x y : ℤ} → Id x y → is-zero-ℤ (diff-ℤ x y)
-is-zero-diff-ℤ {x} {.x} refl = left-inverse-law-add-ℤ x
+is-zero-diff-ℤ {x} {.x} refl = right-inverse-law-add-ℤ x
 
 triangle-diff-ℤ :
-  (k l m : ℤ) → Id (add-ℤ (diff-ℤ k l) (diff-ℤ l m)) (diff-ℤ k m)
-triangle-diff-ℤ k l m =
-  ( associative-add-ℤ (neg-ℤ k) l (diff-ℤ l m)) ∙
+  (x y z : ℤ) → Id (add-ℤ (diff-ℤ x y) (diff-ℤ y z)) (diff-ℤ x z)
+triangle-diff-ℤ x y z =
+  ( associative-add-ℤ x (neg-ℤ y) (diff-ℤ y z)) ∙
   ( ap
-    ( add-ℤ (neg-ℤ k))
-    ( ( inv (associative-add-ℤ l (neg-ℤ l) m)) ∙
-      ( ( ap (λ x → add-ℤ x m) (right-inverse-law-add-ℤ l)) ∙
-        ( left-unit-law-add-ℤ m))))
+    ( add-ℤ x)
+    ( ( inv (associative-add-ℤ (neg-ℤ y) y (neg-ℤ z))) ∙
+      ( ( ap (add-ℤ' (neg-ℤ z)) (left-inverse-law-add-ℤ y)) ∙
+        ( left-unit-law-add-ℤ (neg-ℤ z)))))
 
 distributive-neg-diff-ℤ :
   (x y : ℤ) → Id (neg-ℤ (diff-ℤ x y)) (diff-ℤ y x)
 distributive-neg-diff-ℤ x y =
-  ( distributive-neg-add-ℤ (neg-ℤ x) y) ∙
-  ( ( ap (add-ℤ' (neg-ℤ y)) (neg-neg-ℤ x)) ∙
-    ( commutative-add-ℤ x (neg-ℤ y)))
+  ( distributive-neg-add-ℤ x (neg-ℤ y)) ∙
+  ( ( ap (add-ℤ (neg-ℤ x)) (neg-neg-ℤ y)) ∙
+    ( commutative-add-ℤ (neg-ℤ x) y))
+
+interchange-law-add-diff-ℤ : interchange-law add-ℤ diff-ℤ
+interchange-law-add-diff-ℤ x y u v =
+  ( interchange-law-add-add-ℤ x (neg-ℤ y) u (neg-ℤ v)) ∙
+  ( ap (add-ℤ (add-ℤ x u)) (inv (distributive-neg-add-ℤ y v)))
+
+interchange-law-diff-add-ℤ : interchange-law diff-ℤ add-ℤ
+interchange-law-diff-add-ℤ x y u v = inv (interchange-law-add-diff-ℤ x u y v)
 
 left-translation-diff-ℤ :
-  {x y z : ℤ} → Id (diff-ℤ (add-ℤ z x) (add-ℤ z y)) (diff-ℤ x y)
-left-translation-diff-ℤ {x} {y} {z} =
-  ( ap (add-ℤ' (add-ℤ z y)) (distributive-neg-add-ℤ z x)) ∙
-  ( ( associative-add-ℤ (neg-ℤ z) (neg-ℤ x) (add-ℤ z y)) ∙
-    ( ( ap ( add-ℤ (neg-ℤ z))
-           ( ( commutative-add-ℤ (neg-ℤ x) (add-ℤ z y)) ∙
-             ( ( associative-add-ℤ z y (neg-ℤ x)) ∙
-               ( ap (add-ℤ z) (commutative-add-ℤ y (neg-ℤ x)))))) ∙
-      ( ( inv (associative-add-ℤ (neg-ℤ z) z (add-ℤ (neg-ℤ x) y))) ∙
-        ( ( ap (add-ℤ' (diff-ℤ x y)) (left-inverse-law-add-ℤ z)) ∙
-          ( left-unit-law-add-ℤ (diff-ℤ x y))))))
+  (x y z : ℤ) → Id (diff-ℤ (add-ℤ z x) (add-ℤ z y)) (diff-ℤ x y)
+left-translation-diff-ℤ x y z =
+  ( interchange-law-diff-add-ℤ z x z y) ∙
+  ( ( ap (add-ℤ' (diff-ℤ x y)) (right-inverse-law-add-ℤ z)) ∙
+    ( left-unit-law-add-ℤ (diff-ℤ x y)))
 
 right-translation-diff-ℤ :
-  {x y z : ℤ} → Id (diff-ℤ (add-ℤ x z) (add-ℤ y z)) (diff-ℤ x y)
-right-translation-diff-ℤ {x} {y} {z} =
+  (x y z : ℤ) → Id (diff-ℤ (add-ℤ x z) (add-ℤ y z)) (diff-ℤ x y)
+right-translation-diff-ℤ x y z =
   ( ap-diff-ℤ (commutative-add-ℤ x z) (commutative-add-ℤ y z)) ∙
-  ( left-translation-diff-ℤ {x} {y} {z})
+  ( left-translation-diff-ℤ x y z)
 
 linear-diff-ℤ :
-  (x y z : ℤ) → Id (diff-ℤ (mul-ℤ z x) (mul-ℤ z y)) (mul-ℤ z (diff-ℤ x y))
-linear-diff-ℤ x y z =
-  ( ap (add-ℤ' (mul-ℤ z y)) (inv (right-negative-law-mul-ℤ z x))) ∙
-  ( inv (left-distributive-mul-add-ℤ z (neg-ℤ x) y))
+  (z x y : ℤ) → Id (diff-ℤ (mul-ℤ z x) (mul-ℤ z y)) (mul-ℤ z (diff-ℤ x y))
+linear-diff-ℤ z x y =
+  ( ap (add-ℤ (mul-ℤ z x)) (inv (right-negative-law-mul-ℤ z y))) ∙
+  ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
 
 linear-diff-ℤ' :
   (x y z : ℤ) → Id (diff-ℤ (mul-ℤ x z) (mul-ℤ y z)) (mul-ℤ (diff-ℤ x y) z)
 linear-diff-ℤ' x y z =
-  ( ap (add-ℤ' (mul-ℤ y z)) (inv (left-negative-law-mul-ℤ x z))) ∙
-  ( inv (right-distributive-mul-add-ℤ (neg-ℤ x) y z))
+  ( ap (add-ℤ (mul-ℤ x z)) (inv (left-negative-law-mul-ℤ y z))) ∙
+  ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
 
 -- We define the ordering of the integers
 
 leq-ℤ : ℤ → ℤ → UU lzero
-leq-ℤ k l = is-nonnegative-ℤ (diff-ℤ k l)
+leq-ℤ x y = is-nonnegative-ℤ (diff-ℤ y x)
 
 refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
-refl-leq-ℤ k =
-  tr is-nonnegative-ℤ (inv (left-inverse-law-add-ℤ k)) star
+refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
 
 antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → Id x y
 antisymmetric-leq-ℤ {x} {y} H K =
   eq-diff-ℤ
-    ( is-zero-is-nonnegative-ℤ H
-      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) K))
+    ( is-zero-is-nonnegative-ℤ K
+      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
 
 trans-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
 trans-leq-ℤ k l m p q =
   tr is-nonnegative-ℤ
-    ( triangle-diff-ℤ k l m)
+    ( triangle-diff-ℤ m l k)
     ( is-nonnegative-add-ℤ
-      ( add-ℤ (neg-ℤ k) l)
-      ( add-ℤ (neg-ℤ l) m)
-      ( p)
-      ( q))
+      ( add-ℤ m (neg-ℤ l))
+      ( add-ℤ l (neg-ℤ k))
+      ( q)
+      ( p))
 
 decide-leq-ℤ :
   {x y : ℤ} → coprod (leq-ℤ x y) (leq-ℤ y x)
 decide-leq-ℤ {x} {y} =
   map-coprod
     ( id)
-    ( is-nonnegative-eq-ℤ (distributive-neg-diff-ℤ x y))
-    ( decide-is-nonnegative-ℤ {diff-ℤ x y})
+    ( is-nonnegative-eq-ℤ (distributive-neg-diff-ℤ y x))
+    ( decide-is-nonnegative-ℤ {diff-ℤ y x})
 
 succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
 succ-leq-ℤ k =
   is-nonnegative-eq-ℤ
     ( inv
-      ( ( right-successor-law-add-ℤ (neg-ℤ k) k) ∙
-        ( ap succ-ℤ (left-inverse-law-add-ℤ k))))
+      ( ( left-successor-law-add-ℤ k (neg-ℤ k)) ∙
+        ( ap succ-ℤ (right-inverse-law-add-ℤ k))))
     ( star)
 
 leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)

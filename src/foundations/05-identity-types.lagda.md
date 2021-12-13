@@ -283,6 +283,31 @@ right-two-law-add-ℕ :
   (x : ℕ) → Id (add-ℕ x two-ℕ) (succ-ℕ (succ-ℕ x))
 right-two-law-add-ℕ x = refl
 
+module _
+  {l : Level} {X : UU l} (μ : X → X → X)
+  where
+  
+  interchange-law : (X → X → X) → UU l
+  interchange-law ν = (x y u v : X) → Id (μ (ν x y) (ν u v)) (ν (μ x u) (μ y v))
+
+  interchange-law-commutative-and-associative :
+    ((x y : X) → Id (μ x y) (μ y x)) →
+    ((x y z : X ) → Id (μ (μ x y) z) (μ x (μ y z))) →
+    interchange-law μ
+  interchange-law-commutative-and-associative C A x y u v =
+    ( A x y (μ u v)) ∙
+    ( ( ap
+        ( μ x)
+        ( (inv (A y u v)) ∙ ((ap (λ z → μ z v) (C y u)) ∙ (A u y v)))) ∙
+      ( inv (A x u (μ y v))))
+
+interchange-law-add-add-ℕ : interchange-law add-ℕ add-ℕ
+interchange-law-add-add-ℕ =
+  interchange-law-commutative-and-associative
+    add-ℕ
+    commutative-add-ℕ
+    associative-add-ℕ
+
 --------------------------------------------------------------------------------
 
 -- Exercises
@@ -435,6 +460,13 @@ right-two-law-mul-ℕ :
 right-two-law-mul-ℕ x =
   ( right-successor-law-mul-ℕ x one-ℕ) ∙
   ( ap (add-ℕ x) (right-unit-law-mul-ℕ x))
+
+interchange-law-mul-mul-ℕ : interchange-law mul-ℕ mul-ℕ
+interchange-law-mul-mul-ℕ =
+  interchange-law-commutative-and-associative
+    mul-ℕ
+    commutative-mul-ℕ
+    associative-mul-ℕ
 
 -- Exercise 5.6
 
@@ -616,6 +648,15 @@ isretr-add-neg-ℤ' x y =
   ( associative-add-ℤ y x (neg-ℤ x)) ∙
   ( ( ap (add-ℤ y) (right-inverse-law-add-ℤ x)) ∙
     ( right-unit-law-add-ℤ y))
+
+-- Some immediate consequences
+
+interchange-law-add-add-ℤ : interchange-law add-ℤ add-ℤ
+interchange-law-add-add-ℤ =
+  interchange-law-commutative-and-associative
+    add-ℤ
+    commutative-add-ℤ
+    associative-add-ℤ
 
 -- Exercise 5.8
 
@@ -892,6 +933,13 @@ right-negative-law-mul-ℤ k l =
   ( ( commutative-mul-ℤ k (neg-ℤ l)) ∙
     ( left-negative-law-mul-ℤ l k)) ∙
   ( ap neg-ℤ (commutative-mul-ℤ l k))
+
+interchange-law-mul-mul-ℤ : interchange-law mul-ℤ mul-ℤ
+interchange-law-mul-mul-ℤ =
+  interchange-law-commutative-and-associative
+    mul-ℤ
+    commutative-mul-ℤ
+    associative-mul-ℤ
 
 --------------------------------------------------------------------------------
 

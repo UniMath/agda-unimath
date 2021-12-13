@@ -13,13 +13,22 @@ Fin-Endo : ℕ → Endo lzero
 pr1 (Fin-Endo k) = Fin k
 pr2 (Fin-Endo k) = succ-Fin
 
+ℤ-Mod-Endo : (k : ℕ) → Endo lzero
+pr1 (ℤ-Mod-Endo k) = ℤ-Mod k
+pr2 (ℤ-Mod-Endo k) = succ-ℤ-Mod k
+
+is-cyclic-Endo : {l : Level} → ℕ → Endo l → UU l
+is-cyclic-Endo k X = mere-equiv-Endo (ℤ-Mod-Endo k) X
+
 Cyclic : (l : Level) → ℕ → UU (lsuc l)
-Cyclic l zero-ℕ = Infinite-Cyclic l
-Cyclic l (succ-ℕ k) = Σ (Endo l) (mere-equiv-Endo (Fin-Endo (succ-ℕ k)))
+Cyclic l k = Σ (Endo l) (is-cyclic-Endo k)
+
+ℤ-Mod-Cyclic : (k : ℕ) → Cyclic lzero k
+pr1 (ℤ-Mod-Cyclic k) = ℤ-Mod-Endo k
+pr2 (ℤ-Mod-Cyclic k) = refl-mere-equiv-Endo (ℤ-Mod-Endo k)
 
 endo-Cyclic : {l : Level} (k : ℕ) → Cyclic l k → Endo l
-endo-Cyclic zero-ℕ = pr1
-endo-Cyclic (succ-ℕ k) = pr1
+endo-Cyclic k = pr1
 
 type-Cyclic : {l : Level} (k : ℕ) → Cyclic l k → UU l
 type-Cyclic k X = type-Endo (endo-Cyclic k X)
@@ -28,27 +37,12 @@ Fin-Cyclic : (k : ℕ) → Cyclic lzero (succ-ℕ k)
 pr1 (Fin-Cyclic k) = Fin-Endo (succ-ℕ k)
 pr2 (Fin-Cyclic k) = refl-mere-equiv-Endo (Fin-Endo (succ-ℕ k))
 
-standard-Cyclic : (k : ℕ) → Cyclic lzero k
-standard-Cyclic zero-ℕ = ℤ-Infinite-Cyclic
-standard-Cyclic (succ-ℕ k) = Fin-Cyclic k
-
-type-standard-Cyclic : (k : ℕ) → UU lzero
-type-standard-Cyclic k = type-Cyclic k (standard-Cyclic k)
-
-zero-standard-Cyclic : (k : ℕ) → type-standard-Cyclic k
-zero-standard-Cyclic zero-ℕ = zero-ℤ
-zero-standard-Cyclic (succ-ℕ k) = zero-Fin
-
-is-set-type-standard-Cyclic : (k : ℕ) → is-set (type-standard-Cyclic k)
-is-set-type-standard-Cyclic zero-ℕ = is-set-ℤ
-is-set-type-standard-Cyclic (succ-ℕ k) = is-set-Fin (succ-ℕ k)
-
-endo-standard-Cyclic : (k : ℕ) → Endo lzero
-endo-standard-Cyclic k = endo-Cyclic k (standard-Cyclic k)
+endo-ℤ-Mod-Cyclic : (k : ℕ) → Endo lzero
+endo-ℤ-Mod-Cyclic k = endo-Cyclic k (ℤ-Mod-Cyclic k)
 
 mere-equiv-endo-Cyclic :
   {l : Level} (k : ℕ) (X : Cyclic l k) →
-  mere-equiv-Endo (endo-standard-Cyclic k) (endo-Cyclic k X)
+  mere-equiv-Endo (endo-ℤ-Mod-Cyclic k) (endo-Cyclic k X)
 mere-equiv-endo-Cyclic zero-ℕ X = pr2 X
 mere-equiv-endo-Cyclic (succ-ℕ k) X = pr2 X
 
@@ -89,9 +83,9 @@ module _
       ( is-set-Prop (type-Cyclic k X))
       ( λ e →
         is-set-equiv'
-          ( type-standard-Cyclic k)
-          ( equiv-equiv-Cyclic k (standard-Cyclic k) X e)
-          ( is-set-type-standard-Cyclic k))
+          ( ℤ-Mod k)
+          ( equiv-equiv-Cyclic k (ℤ-Mod-Cyclic k) X e)
+          ( is-set-ℤ-Mod k))
 
   id-equiv-Cyclic : equiv-Cyclic k X X
   id-equiv-Cyclic = id-equiv-Endo (endo-Cyclic k X)
@@ -210,45 +204,45 @@ mere-eq-Cyclic k X Y =
         ( λ f →
           unit-trunc-Prop
             ( eq-equiv-Cyclic k X Y
-              ( comp-equiv-Cyclic k X (standard-Cyclic k) Y f
-                ( inv-equiv-Cyclic k (standard-Cyclic k) X e)))))
+              ( comp-equiv-Cyclic k X (ℤ-Mod-Cyclic k) Y f
+                ( inv-equiv-Cyclic k (ℤ-Mod-Cyclic k) X e)))))
 
 is-path-connected-Cyclic : (k : ℕ) → is-path-connected (Cyclic lzero k)
 is-path-connected-Cyclic k =
   is-path-connected-mere-eq
-    ( standard-Cyclic k)
-    ( mere-eq-Cyclic k (standard-Cyclic k))
+    ( ℤ-Mod-Cyclic k)
+    ( mere-eq-Cyclic k (ℤ-Mod-Cyclic k))
 
 Eq-Cyclic : (k : ℕ) → Cyclic lzero k → UU lzero
 Eq-Cyclic k X = type-Cyclic k X
 
-refl-Eq-Cyclic : (k : ℕ) → Eq-Cyclic k (standard-Cyclic k)
-refl-Eq-Cyclic k = zero-standard-Cyclic k
+refl-Eq-Cyclic : (k : ℕ) → Eq-Cyclic k (ℤ-Mod-Cyclic k)
+refl-Eq-Cyclic k = zero-ℤ-Mod k
 
 Eq-equiv-Cyclic :
   (k : ℕ) (X : Cyclic lzero k) →
-  equiv-Cyclic k (standard-Cyclic k) X → Eq-Cyclic k X
+  equiv-Cyclic k (ℤ-Mod-Cyclic k) X → Eq-Cyclic k X
 Eq-equiv-Cyclic k X e =
-  map-equiv-Cyclic k (standard-Cyclic k) X e (zero-standard-Cyclic k)
+  map-equiv-Cyclic k (ℤ-Mod-Cyclic k) X e (zero-ℤ-Mod k)
 
 equiv-Eq-Cyclic :
-  (k : ℕ) → Eq-Cyclic k (standard-Cyclic k) →
-  equiv-Cyclic k (standard-Cyclic k) (standard-Cyclic k)
+  (k : ℕ) → Eq-Cyclic k (ℤ-Mod-Cyclic k) →
+  equiv-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k)
 pr1 (equiv-Eq-Cyclic zero-ℕ x) = equiv-add-ℤ' x
 pr2 (equiv-Eq-Cyclic zero-ℕ x) y = left-successor-law-add-ℤ y x
 pr1 (equiv-Eq-Cyclic (succ-ℕ k) x) = equiv-add-Fin' x
 pr2 (equiv-Eq-Cyclic (succ-ℕ k) x) y = left-successor-law-add-Fin y x
 
 issec-equiv-Eq-Cyclic :
-  (k : ℕ) → (Eq-equiv-Cyclic k (standard-Cyclic k) ∘ equiv-Eq-Cyclic k) ~ id
+  (k : ℕ) → (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) ∘ equiv-Eq-Cyclic k) ~ id
 issec-equiv-Eq-Cyclic zero-ℕ x = left-unit-law-add-ℤ x
 issec-equiv-Eq-Cyclic (succ-ℕ k) x = left-unit-law-add-Fin x
 
 preserves-pred-preserves-succ-map-ℤ :
   (f : ℤ → ℤ) → (f ∘ succ-ℤ) ~ (succ-ℤ ∘ f) → (f ∘ pred-ℤ) ~ (pred-ℤ ∘ f)
 preserves-pred-preserves-succ-map-ℤ f H x =
-  ( inv (left-inverse-pred-ℤ (f (pred-ℤ x)))) ∙
-  ( ( ap pred-ℤ (inv (H (pred-ℤ x)) ∙ ( ap f (right-inverse-pred-ℤ x)))))
+  ( inv (isretr-pred-ℤ (f (pred-ℤ x)))) ∙
+  ( ( ap pred-ℤ (inv (H (pred-ℤ x)) ∙ ( ap f (issec-pred-ℤ x)))))
 
 preserves-add-preserves-succ-map-ℤ :
   (f : ℤ → ℤ) → (f ∘ succ-ℤ) ~ (succ-ℤ ∘ f) →
@@ -285,100 +279,70 @@ compute-map-preserves-succ-map-Fin f H x =
     ( ap (add-Fin' (f zero-Fin)) (issec-nat-Fin x)))
 
 isretr-equiv-Eq-Cyclic :
-  (k : ℕ) → (equiv-Eq-Cyclic k ∘ Eq-equiv-Cyclic k (standard-Cyclic k)) ~ id
-isretr-equiv-Eq-Cyclic zero-ℕ e =
-  eq-htpy-equiv-Cyclic zero-ℕ
-    ( ℤ-Infinite-Cyclic)
-    ( ℤ-Infinite-Cyclic)
-    ( equiv-Eq-Cyclic zero-ℕ (Eq-equiv-Cyclic zero-ℕ ℤ-Infinite-Cyclic e))
+  (k : ℕ) → (equiv-Eq-Cyclic k ∘ Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k)) ~ id
+isretr-equiv-Eq-Cyclic k e =
+  eq-htpy-equiv-Cyclic k
+    ( ℤ-Mod-Cyclic k)
+    ( ℤ-Mod-Cyclic k)
+    ( equiv-Eq-Cyclic k (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e))
     ( e)
     ( λ x →
       ( inv
-        ( preserves-add-preserves-succ-map-ℤ
-          ( map-equiv-Cyclic zero-ℕ ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic e)
-          ( coherence-square-equiv-Cyclic zero-ℕ
-              ℤ-Infinite-Cyclic
-              ℤ-Infinite-Cyclic
-              e) x zero-ℤ)) ∙
-      ( ap (map-equiv (pr1 e)) (right-unit-law-add-ℤ x)))
-isretr-equiv-Eq-Cyclic (succ-ℕ k) e =
-  eq-htpy-equiv-Cyclic
-    ( succ-ℕ k)
-    ( Fin-Cyclic k)
-    ( Fin-Cyclic k)
-    ( equiv-Eq-Cyclic (succ-ℕ k) (Eq-equiv-Cyclic (succ-ℕ k) (Fin-Cyclic k) e))
-    ( e)
-    ( inv-htpy
-        ( compute-map-preserves-succ-map-Fin
-          ( map-equiv-Cyclic (succ-ℕ k) (Fin-Cyclic k) (Fin-Cyclic k) e)
-          ( coherence-square-equiv-Cyclic
-            ( succ-ℕ k)
-            ( Fin-Cyclic k)
-            ( Fin-Cyclic k)
-            ( e))))
+        {! preserves-add-preserves-!}) ∙
+      {!!})
 
-is-equiv-Eq-equiv-Cyclic :
-  (k : ℕ) (X : Cyclic lzero k) → is-equiv (Eq-equiv-Cyclic k X)
-is-equiv-Eq-equiv-Cyclic k X =
-  apply-universal-property-trunc-Prop
-    ( mere-eq-Cyclic k (standard-Cyclic k) X)
-    ( is-equiv-Prop (Eq-equiv-Cyclic k X))
-    ( λ { refl →
-          is-equiv-has-inverse
-            ( equiv-Eq-Cyclic k)
-            ( issec-equiv-Eq-Cyclic k)
-            ( isretr-equiv-Eq-Cyclic k)})
+-- isretr-equiv-Eq-Cyclic :
+--   (k : ℕ) → (equiv-Eq-Cyclic k ∘ Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k)) ~ id
+-- isretr-equiv-Eq-Cyclic zero-ℕ e =
+--   eq-htpy-equiv-Cyclic zero-ℕ
+--     ( ℤ-Infinite-Cyclic)
+--     ( ℤ-Infinite-Cyclic)
+--     ( equiv-Eq-Cyclic zero-ℕ (Eq-equiv-Cyclic zero-ℕ ℤ-Infinite-Cyclic e))
+--     ( e)
+--     ( λ x →
+--       ( inv
+--         ( preserves-add-preserves-succ-map-ℤ
+--           ( map-equiv-Cyclic zero-ℕ ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic e)
+--           ( coherence-square-equiv-Cyclic zero-ℕ
+--               ℤ-Infinite-Cyclic
+--               ℤ-Infinite-Cyclic
+--               e) x zero-ℤ)) ∙
+--       ( ap (map-equiv (pr1 e)) (right-unit-law-add-ℤ x)))
+-- isretr-equiv-Eq-Cyclic (succ-ℕ k) e =
+--   eq-htpy-equiv-Cyclic
+--     ( succ-ℕ k)
+--     ( Fin-Cyclic k)
+--     ( Fin-Cyclic k)
+--     ( equiv-Eq-Cyclic (succ-ℕ k) (Eq-equiv-Cyclic (succ-ℕ k) (Fin-Cyclic k) e))
+--     ( e)
+--     ( inv-htpy
+--         ( compute-map-preserves-succ-map-Fin
+--           ( map-equiv-Cyclic (succ-ℕ k) (Fin-Cyclic k) (Fin-Cyclic k) e)
+--           ( coherence-square-equiv-Cyclic
+--             ( succ-ℕ k)
+--             ( Fin-Cyclic k)
+--             ( Fin-Cyclic k)
+--             ( e))))
 
-equiv-compute-Ω-Cyclic :
-  (k : ℕ) →
-  type-Ω (pair (Cyclic lzero k) (standard-Cyclic k)) ≃ type-standard-Cyclic k
-equiv-compute-Ω-Cyclic k =
-  ( pair
-    ( Eq-equiv-Cyclic k (standard-Cyclic k))
-    ( is-equiv-Eq-equiv-Cyclic k (standard-Cyclic k))) ∘e
-  ( extensionality-Cyclic k (standard-Cyclic k) (standard-Cyclic k))
+-- is-equiv-Eq-equiv-Cyclic :
+--   (k : ℕ) (X : Cyclic lzero k) → is-equiv (Eq-equiv-Cyclic k X)
+-- is-equiv-Eq-equiv-Cyclic k X =
+--   apply-universal-property-trunc-Prop
+--     ( mere-eq-Cyclic k (ℤ-Mod-Cyclic k) X)
+--     ( is-equiv-Prop (Eq-equiv-Cyclic k X))
+--     ( λ { refl →
+--           is-equiv-has-inverse
+--             ( equiv-Eq-Cyclic k)
+--             ( issec-equiv-Eq-Cyclic k)
+--             ( isretr-equiv-Eq-Cyclic k)})
 
-add-standard-Cyclic :
-  (k : ℕ) (x y : type-standard-Cyclic k) → type-standard-Cyclic k
-add-standard-Cyclic zero-ℕ = add-ℤ
-add-standard-Cyclic (succ-ℕ k) = add-Fin
+-- equiv-compute-Ω-Cyclic :
+--   (k : ℕ) →
+--   type-Ω (pair (Cyclic lzero k) (ℤ-Mod-Cyclic k)) ≃ ℤ-Mod k
+-- equiv-compute-Ω-Cyclic k =
+--   ( pair
+--     ( Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k))
+--     ( is-equiv-Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k))) ∘e
+--   ( extensionality-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k))
 
-neg-standard-Cyclic :
-  (k : ℕ) → type-standard-Cyclic k → type-standard-Cyclic k
-neg-standard-Cyclic zero-ℕ = neg-ℤ
-neg-standard-Cyclic (succ-ℕ k) = neg-Fin
-
-associative-add-standard-Cyclic :
-  (k : ℕ) (x y z : type-standard-Cyclic k) →
-  Id (add-standard-Cyclic k (add-standard-Cyclic k x y) z)
-     (add-standard-Cyclic k x (add-standard-Cyclic k y z))
-associative-add-standard-Cyclic zero-ℕ = associative-add-ℤ
-associative-add-standard-Cyclic (succ-ℕ k) = associative-add-Fin
-
-left-unit-law-add-standard-Cyclic :
-  (k : ℕ) (x : type-standard-Cyclic k) →
-  Id (add-standard-Cyclic k (zero-standard-Cyclic k) x) x
-left-unit-law-add-standard-Cyclic zero-ℕ = left-unit-law-add-ℤ
-left-unit-law-add-standard-Cyclic (succ-ℕ k) = left-unit-law-add-Fin
-
-right-unit-law-add-standard-Cyclic :
-  (k : ℕ) (x : type-standard-Cyclic k) →
-  Id (add-standard-Cyclic k x (zero-standard-Cyclic k)) x
-right-unit-law-add-standard-Cyclic zero-ℕ = right-unit-law-add-ℤ
-right-unit-law-add-standard-Cyclic (succ-ℕ k) = right-unit-law-add-Fin
-
-left-inverse-law-add-Cyclic :
-  (k : ℕ) (x : type-standard-Cyclic k) →
-  Id ( add-standard-Cyclic k (neg-standard-Cyclic k x) x)
-     ( zero-standard-Cyclic k)
-left-inverse-law-add-Cyclic zero-ℕ = left-inverse-law-add-ℤ
-left-inverse-law-add-Cyclic (succ-ℕ k) = left-inverse-law-add-Fin
-
-right-inverse-law-add-Cyclic :
-  (k : ℕ) (x : type-standard-Cyclic k) →
-  Id ( add-standard-Cyclic k x (neg-standard-Cyclic k x))
-     ( zero-standard-Cyclic k)
-right-inverse-law-add-Cyclic zero-ℕ = right-inverse-law-add-ℤ
-right-inverse-law-add-Cyclic (succ-ℕ k) = right-inverse-law-add-Fin
-
-```
+-- ```

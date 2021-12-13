@@ -1064,6 +1064,22 @@ pr1 (pr2 (pr2 ℤ-Group)) = neg-ℤ
 pr1 (pr2 (pr2 (pr2 ℤ-Group))) = left-inverse-law-add-ℤ
 pr2 (pr2 (pr2 (pr2 ℤ-Group))) = right-inverse-law-add-ℤ
 
+{- The group of integers modulo k -}
+
+ℤ-Mod-Semigroup : (k : ℕ) → Semigroup lzero
+pr1 (ℤ-Mod-Semigroup k) = ℤ-Mod-Set k
+pr1 (pr2 (ℤ-Mod-Semigroup k)) = add-ℤ-Mod k
+pr2 (pr2 (ℤ-Mod-Semigroup k)) = associative-add-ℤ-Mod k
+
+ℤ-Mod-Group : (k : ℕ) → Group lzero
+pr1 (ℤ-Mod-Group k) = ℤ-Mod-Semigroup k
+pr1 (pr1 (pr2 (ℤ-Mod-Group k))) = zero-ℤ-Mod k
+pr1 (pr2 (pr1 (pr2 (ℤ-Mod-Group k)))) = left-unit-law-add-ℤ-Mod k
+pr2 (pr2 (pr1 (pr2 (ℤ-Mod-Group k)))) = right-unit-law-add-ℤ-Mod k
+pr1 (pr2 (pr2 (ℤ-Mod-Group k))) = neg-ℤ-Mod k
+pr1 (pr2 (pr2 (pr2 (ℤ-Mod-Group k)))) = left-inverse-law-add-ℤ-Mod k
+pr2 (pr2 (pr2 (pr2 (ℤ-Mod-Group k)))) = right-inverse-law-add-ℤ-Mod k
+
 --------------------------------------------------------------------------------
 
 {- The loop space of a 1-type as a group. -}
