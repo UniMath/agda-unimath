@@ -287,7 +287,8 @@ isretr-equiv-Eq-Cyclic k e =
     ( equiv-Eq-Cyclic k (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e))
     ( e)
     ( λ x →
-      {!( inv ?)!} ∙
+      ( inv
+        {! preserves-add-preserves-!}) ∙
       {!!})
 
 -- isretr-equiv-Eq-Cyclic :

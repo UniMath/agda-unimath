@@ -701,7 +701,7 @@ cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
 
 cong-int-cong-ℕ :
   (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
-cong-int-cong-ℕ k x y H = ?
+cong-int-cong-ℕ k x y H = {!!}
 
 -- We introduce the condition on ℤ of being a gcd.
 
