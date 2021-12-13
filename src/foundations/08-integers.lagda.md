@@ -274,6 +274,49 @@ is-zero-div-zero-ℤ :
   (x : ℤ) → div-ℤ zero-ℤ x → is-zero-ℤ x
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 
+div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (add-ℤ y z)
+pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = add-ℤ d e
+pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
+  ( right-distributive-mul-add-ℤ d e x) ∙
+  ( ap-add-ℤ p q)
+
+div-neg-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ x (neg-ℤ y)
+pr1 (div-neg-ℤ x y (pair d p)) = neg-ℤ d
+pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ p
+
+-- Comparison of divisibility on ℕ and on ℤ
+
+div-int-div-ℕ :
+  {x y : ℕ} → div-ℕ x y → div-ℤ (int-ℕ x) (int-ℕ y)
+pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
+pr2 (div-int-div-ℕ {x} {y} (pair d p)) = mul-int-ℕ d x ∙ ap int-ℕ p
+
+int-abs-is-nonnegative-ℤ :
+  (x : ℤ) → is-nonnegative-ℤ x → Id (int-abs-ℤ x) x
+int-abs-is-nonnegative-ℤ (inr (inl star)) star = refl
+int-abs-is-nonnegative-ℤ (inr (inr x)) star = refl
+
+div-div-int-ℕ :
+  {x y : ℕ} → div-ℤ (int-ℕ x) (int-ℕ y) → div-ℕ x y
+div-div-int-ℕ {zero-ℕ} {y} (pair d p) =
+  div-eq-ℕ zero-ℕ y
+    ( inv (is-injective-int-ℕ (is-zero-div-zero-ℤ (int-ℕ y) (pair d p))))
+pr1 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) = abs-ℤ d
+pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
+  is-injective-int-ℕ
+    ( ( inv (mul-int-ℕ (abs-ℤ d) (succ-ℕ x))) ∙
+      ( ( ap
+          ( mul-ℤ' (inr (inr x)))
+          { int-abs-ℤ d}
+          { d}
+          ( int-abs-is-nonnegative-ℤ d
+            ( is-nonnegative-left-factor-mul-ℤ
+              { d}
+              { inr (inr x)}
+              ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
+              ( star)))) ∙
+        ( p)))
+
 -- We introduce units
 
 is-unit-ℤ : ℤ → UU lzero
@@ -683,25 +726,57 @@ mod-ℤ k (inr (inl x)) = zero-ℤ-Mod k
 mod-ℤ k (inr (inr zero-ℕ)) = one-ℤ-Mod k
 mod-ℤ k (inr (inr (succ-ℕ x))) = succ-ℤ-Mod k (mod-ℤ k (inr (inr x)))
 
-int-ℤ-Mod : {k : ℕ} → ℤ-Mod k → ℤ
-int-ℤ-Mod {zero-ℕ} x = x
-int-ℤ-Mod {succ-ℕ k} x = int-ℕ (nat-Fin x)
+int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
+int-ℤ-Mod zero-ℕ x = x
+int-ℤ-Mod (succ-ℕ k) x = int-ℕ (nat-Fin x)
 
-is-injective-int-ℤ-Mod : {k : ℕ} → is-injective (int-ℤ-Mod {k})
-is-injective-int-ℤ-Mod {zero-ℕ} = is-injective-id
-is-injective-int-ℤ-Mod {succ-ℕ k} =
+is-injective-int-ℤ-Mod : (k : ℕ) → is-injective (int-ℤ-Mod k)
+is-injective-int-ℤ-Mod zero-ℕ = is-injective-id
+is-injective-int-ℤ-Mod (succ-ℕ k) =
   is-injective-comp' is-injective-nat-Fin is-injective-int-ℕ
 
-is-zero-int-zero-ℤ-Mod : {k : ℕ} → is-zero-ℤ (int-ℤ-Mod {k} (zero-ℤ-Mod k))
-is-zero-int-zero-ℤ-Mod {zero-ℕ} = refl
-is-zero-int-zero-ℤ-Mod {succ-ℕ k} = ap int-ℕ (is-zero-nat-zero-Fin {k})
+is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
+is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
+is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
 
 cong-ℤ : ℤ → ℤ → ℤ → UU lzero
 cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
 
--- cong-int-cong-ℕ :
---   (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
--- cong-int-cong-ℕ k x y H = {!!}
+is-indiscrete-cong-ℤ : (k : ℤ) → is-unit-ℤ k → (x y : ℤ) → cong-ℤ k x y
+is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (diff-ℤ x y) H
+
+is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ k x y → Id x y
+is-discrete-cong-ℤ .zero-ℤ refl x y K =
+  eq-diff-ℤ (is-zero-div-zero-ℤ (diff-ℤ x y) K)
+
+refl-cong-ℤ : (k x : ℤ) → cong-ℤ k x x
+pr1 (refl-cong-ℤ k x) = zero-ℤ
+pr2 (refl-cong-ℤ k x) = left-zero-law-mul-ℤ k ∙ inv (is-zero-diff-ℤ' x)
+
+symmetric-cong-ℤ : (k x y : ℤ) → cong-ℤ k x y → cong-ℤ k y x
+pr1 (symmetric-cong-ℤ k x y (pair d p)) = neg-ℤ d
+pr2 (symmetric-cong-ℤ k x y (pair d p)) =
+  ( left-negative-law-mul-ℤ d k) ∙
+  ( ( ap neg-ℤ p) ∙
+    ( distributive-neg-diff-ℤ x y))
+
+transitive-cong-ℤ : (k x y z : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k x z
+pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = add-ℤ d e
+pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
+  ( right-distributive-mul-add-ℤ d e k) ∙
+  ( ( ap-add-ℤ p q) ∙
+    ( triangle-diff-ℤ x y z))
+
+{-
+cong-int-cong-ℕ :
+  (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
+cong-int-cong-ℕ k x y H = {!div-int-div-ℕ!}
+
+cong-int-succ-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) →
+  cong-ℤ (int-ℕ k) (int-ℤ-Mod k (succ-ℤ-Mod k x)) (succ-ℤ (int-ℤ-Mod k x))
+cong-int-succ-ℤ-Mod k x = {!!}
+-}
 
 -- We introduce the condition on ℤ of being a gcd.
 
@@ -713,37 +788,6 @@ is-gcd-ℤ x y d =
   is-nonnegative-ℤ d × ((k : ℤ) → is-common-divisor-ℤ x y k ↔ div-ℤ k d)
 
 -- We relate divisibility and being a gcd on ℕ and on ℤ
-
-div-int-div-ℕ :
-  {x y : ℕ} → div-ℕ x y → div-ℤ (int-ℕ x) (int-ℕ y)
-pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
-pr2 (div-int-div-ℕ {x} {y} (pair d p)) = mul-int-ℕ d x ∙ ap int-ℕ p
-
-int-abs-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → Id (int-abs-ℤ x) x
-int-abs-is-nonnegative-ℤ (inr (inl star)) star = refl
-int-abs-is-nonnegative-ℤ (inr (inr x)) star = refl
-
-div-div-int-ℕ :
-  {x y : ℕ} → div-ℤ (int-ℕ x) (int-ℕ y) → div-ℕ x y
-div-div-int-ℕ {zero-ℕ} {y} (pair d p) =
-  div-eq-ℕ zero-ℕ y
-    ( inv (is-injective-int-ℕ (is-zero-div-zero-ℤ (int-ℕ y) (pair d p))))
-pr1 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) = abs-ℤ d
-pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
-  is-injective-int-ℕ
-    ( ( inv (mul-int-ℕ (abs-ℤ d) (succ-ℕ x))) ∙
-      ( ( ap
-          ( mul-ℤ' (inr (inr x)))
-          { int-abs-ℤ d}
-          { d}
-          ( int-abs-is-nonnegative-ℤ d
-            ( is-nonnegative-left-factor-mul-ℤ
-              { d}
-              { inr (inr x)}
-              ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
-              ( star)))) ∙
-        ( p)))
 
 is-common-divisor-int-is-common-divisor-ℕ :
   {x y d : ℕ} →

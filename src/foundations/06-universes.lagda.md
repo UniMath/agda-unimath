@@ -1127,9 +1127,12 @@ eq-diff-ℤ {x} {y} H =
       ( ( ap (add-ℤ' y) H) ∙
         ( left-unit-law-add-ℤ y))))
 
+is-zero-diff-ℤ' : (x : ℤ) → is-zero-ℤ (diff-ℤ x x)
+is-zero-diff-ℤ' x = right-inverse-law-add-ℤ x
+
 is-zero-diff-ℤ :
   {x y : ℤ} → Id x y → is-zero-ℤ (diff-ℤ x y)
-is-zero-diff-ℤ {x} {.x} refl = right-inverse-law-add-ℤ x
+is-zero-diff-ℤ {x} {.x} refl = is-zero-diff-ℤ' x
 
 triangle-diff-ℤ :
   (x y z : ℤ) → Id (add-ℤ (diff-ℤ x y) (diff-ℤ y z)) (diff-ℤ x z)
