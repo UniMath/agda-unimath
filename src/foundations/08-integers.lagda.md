@@ -755,11 +755,10 @@ mod-ℕ zero-ℕ x = int-ℕ x
 mod-ℕ (succ-ℕ k) x = mod-succ-ℕ k x
 
 mod-ℤ : (k : ℕ) → ℤ → ℤ-Mod k
-mod-ℤ k (inl zero-ℕ) = neg-one-ℤ-Mod k
-mod-ℤ k (inl (succ-ℕ x)) = pred-ℤ-Mod k (mod-ℤ k (inl x))
-mod-ℤ k (inr (inl x)) = zero-ℤ-Mod k
-mod-ℤ k (inr (inr zero-ℕ)) = one-ℤ-Mod k
-mod-ℤ k (inr (inr (succ-ℕ x))) = succ-ℤ-Mod k (mod-ℤ k (inr (inr x)))
+mod-ℤ zero-ℕ x = x
+mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-ℕ (succ-ℕ k) (succ-ℕ x))
+mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin
+mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-ℕ (succ-ℕ k) (succ-ℕ x)
 
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
 int-ℤ-Mod zero-ℕ x = x
@@ -801,6 +800,23 @@ pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙
     ( triangle-diff-ℤ x y z))
+
+cong-cong-neg-ℤ : (k x y : ℤ) → cong-ℤ k (neg-ℤ x) (neg-ℤ y) → cong-ℤ k x y
+pr1 (cong-cong-neg-ℤ k x y (pair d p)) = neg-ℤ d
+pr2 (cong-cong-neg-ℤ k x y (pair d p)) =
+  ( left-negative-law-mul-ℤ d k) ∙
+  ( ( ap neg-ℤ p) ∙
+    ( ( distributive-neg-add-ℤ (neg-ℤ x) (neg-ℤ (neg-ℤ y))) ∙
+      ( ap-add-ℤ (neg-neg-ℤ x) (neg-neg-ℤ (neg-ℤ y)))))
+
+cong-neg-cong-ℤ : (k x y : ℤ) → cong-ℤ k x y → cong-ℤ k (neg-ℤ x) (neg-ℤ y)
+pr1 (cong-neg-cong-ℤ k x y (pair d p)) = neg-ℤ d
+pr2 (cong-neg-cong-ℤ k x y (pair d p)) =
+  ( left-negative-law-mul-ℤ d k) ∙
+  ( ( ap neg-ℤ p) ∙
+    ( distributive-neg-add-ℤ x (neg-ℤ y)))
+
+-- The distance between two integers
 
 dist-ℤ : ℤ → ℤ → ℕ
 dist-ℤ x y = abs-ℤ (diff-ℤ x y)
@@ -859,13 +875,40 @@ cong-cong-int-ℕ k x y H =
         ( symm-sim-unit-ℤ (sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y))))
         ( H)))
 
-{-
-cong-int-succ-ℤ-Mod :
-  (k : ℕ) (x : ℤ-Mod k) →
-  cong-ℤ (int-ℕ k) (int-ℤ-Mod k (succ-ℤ-Mod k x)) (succ-ℤ (int-ℤ-Mod k x))
-cong-int-succ-ℤ-Mod k x = {!!}
--}
+cong-int-mod-ℕ :
+  (k x : ℕ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℕ k x)) (int-ℕ x)
+cong-int-mod-ℕ zero-ℕ x = refl-cong-ℤ zero-ℤ (int-ℕ x)
+cong-int-mod-ℕ (succ-ℕ k) x =
+  cong-int-cong-ℕ
+    ( succ-ℕ k)
+    ( nat-Fin (mod-succ-ℕ k x))
+    ( x)
+    ( cong-nat-mod-succ-ℕ k x)
 
+cong-int-mod-ℤ :
+  (k : ℕ) (x : ℤ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℤ k x)) x
+cong-int-mod-ℤ zero-ℕ x = refl-cong-ℤ zero-ℤ x
+cong-int-mod-ℤ (succ-ℕ k) (inl x) =
+  cong-cong-neg-ℤ
+    ( int-ℕ (succ-ℕ k))
+    ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x)))
+    ( inl x)
+    ( transitive-cong-ℤ
+      ( int-ℕ (succ-ℕ k))
+      ( neg-ℤ (int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))))
+      ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inr (inr x))))
+      ( inr (inr x))
+      {!!}
+      ( cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)))
+cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) = cong-int-mod-ℕ (succ-ℕ k) zero-ℕ
+cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)
+
+{-
+int-ℕ
+  ( nat-Fin
+    ( mod-succ-ℕ k
+      ( dist-ℕ (nat-Fin (succ-Fin (mod-succ-ℕ k x))) (succ-ℕ k))))
+-}
 -- We introduce the condition on ℤ of being a gcd.
 
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero
