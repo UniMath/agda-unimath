@@ -143,7 +143,7 @@ is-injective-mul-ℤ x f {y} {z} p =
       ( f)
       ( is-zero-is-zero-mul-ℤ x
         ( diff-ℤ y z)
-        ( inv (linear-diff-ℤ y z x) ∙ is-zero-diff-ℤ p)))
+        ( inv (linear-diff-ℤ x y z) ∙ is-zero-diff-ℤ p)))
 
 is-injective-mul-ℤ' :
   (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ' x)
@@ -195,12 +195,12 @@ is-nonnegative-right-factor-mul-ℤ {x} {y} H =
 preserves-order-add-ℤ' :
   {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ x z) (add-ℤ y z)
 preserves-order-add-ℤ' {x} {y} z =
-  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ {x} {y} {z}))
+  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
 preserves-order-add-ℤ :
   {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ z x) (add-ℤ z y)
 preserves-order-add-ℤ {x} {y} z =
-  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ {x} {y} {z}))
+  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
 preserves-leq-add-ℤ :
   {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (add-ℤ a c) (add-ℤ b d)
@@ -215,12 +215,12 @@ preserves-leq-add-ℤ {a} {b} {c} {d} H K =
 reflects-order-add-ℤ' :
   {x y z : ℤ} → leq-ℤ (add-ℤ x z) (add-ℤ y z) → leq-ℤ x y
 reflects-order-add-ℤ' {x} {y} {z} =
-  is-nonnegative-eq-ℤ (right-translation-diff-ℤ {x} {y} {z})
+  is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
 
 reflects-order-add-ℤ :
   {x y z : ℤ} → leq-ℤ (add-ℤ z x) (add-ℤ z y) → leq-ℤ x y
 reflects-order-add-ℤ {x} {y} {z} =
-  is-nonnegative-eq-ℤ (left-translation-diff-ℤ {x} {y} {z})
+  is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 
 preserves-leq-mul-ℤ :
   (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (mul-ℤ z x) (mul-ℤ z y)
@@ -699,9 +699,9 @@ is-zero-int-zero-ℤ-Mod {succ-ℕ k} = ap int-ℕ (is-zero-nat-zero-Fin {k})
 cong-ℤ : ℤ → ℤ → ℤ → UU lzero
 cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
 
-cong-int-cong-ℕ :
-  (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
-cong-int-cong-ℕ k x y H = {!!}
+-- cong-int-cong-ℕ :
+--   (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
+-- cong-int-cong-ℕ k x y H = {!!}
 
 -- We introduce the condition on ℤ of being a gcd.
 
