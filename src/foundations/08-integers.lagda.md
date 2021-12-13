@@ -591,6 +591,41 @@ pr2 (sim-unit-abs-ℤ (inl x) f) = refl
 sim-unit-abs-ℤ (inr (inl star)) = refl-sim-unit-ℤ zero-ℤ
 sim-unit-abs-ℤ (inr (inr x)) = refl-sim-unit-ℤ (inr (inr x))
 
+div-presim-unit-ℤ :
+  {x y x' y' : ℤ} → presim-unit-ℤ x x' → presim-unit-ℤ y y' →
+  div-ℤ x y → div-ℤ x' y'
+pr1 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
+  mul-ℤ (mul-ℤ (int-unit-ℤ v) d) (int-unit-ℤ u)
+pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
+  ( ap (mul-ℤ (mul-ℤ (mul-ℤ (int-unit-ℤ v) d) (int-unit-ℤ u))) (inv q)) ∙
+  ( ( associative-mul-ℤ
+      ( mul-ℤ (int-unit-ℤ v) d)
+      ( int-unit-ℤ u)
+      ( mul-ℤ (int-unit-ℤ u) x)) ∙
+    ( ( ap
+        ( mul-ℤ (mul-ℤ (int-unit-ℤ v) d))
+        ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
+          ( ap (mul-ℤ' x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
+      ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
+        ( ( ap (mul-ℤ (int-unit-ℤ v)) p) ∙
+          ( r)))))
+
+div-sim-unit-ℤ :
+  {x y x' y' : ℤ} → sim-unit-ℤ x x' → sim-unit-ℤ y y' →
+  div-ℤ x y → div-ℤ x' y'
+div-sim-unit-ℤ {x} {y} {x'} {y'} H K =
+  div-presim-unit-ℤ (presim-unit-sim-unit-ℤ H) (presim-unit-sim-unit-ℤ K)
+
+div-int-abs-div-ℤ :
+  {x y : ℤ} → div-ℤ x y → div-ℤ (int-abs-ℤ x) y
+div-int-abs-div-ℤ {x} {y} =
+  div-sim-unit-ℤ (symm-sim-unit-ℤ (sim-unit-abs-ℤ x)) (refl-sim-unit-ℤ y)
+
+div-div-int-abs-ℤ :
+  {x y : ℤ} → div-ℤ (int-abs-ℤ x) y → div-ℤ x y
+div-div-int-abs-ℤ {x} {y} =
+  div-sim-unit-ℤ (sim-unit-abs-ℤ x) (refl-sim-unit-ℤ y)
+
 -- Modular arithmetic on ℤ
 
 ℤ-Mod : (k : ℕ) → UU lzero
@@ -767,11 +802,64 @@ pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
   ( ( ap-add-ℤ p q) ∙
     ( triangle-diff-ℤ x y z))
 
-{-
+dist-ℤ : ℤ → ℤ → ℕ
+dist-ℤ x y = abs-ℤ (diff-ℤ x y)
+
+ap-dist-ℤ :
+  {x x' y y' : ℤ} (p : Id x x') (q : Id y y') → Id (dist-ℤ x y) (dist-ℤ x' y')
+ap-dist-ℤ p q = ap-binary dist-ℤ p q
+
+left-zero-law-dist-ℤ : (x : ℤ) → Id (dist-ℤ zero-ℤ x) (abs-ℤ x)
+left-zero-law-dist-ℤ x = ap abs-ℤ (left-zero-law-diff-ℤ x) ∙ abs-neg-ℤ x
+
+right-zero-law-dist-ℤ : (x : ℤ) → Id (dist-ℤ x zero-ℤ) (abs-ℤ x)
+right-zero-law-dist-ℤ x = ap abs-ℤ (right-zero-law-diff-ℤ x)
+
+diff-succ-ℤ : (x y : ℤ) → Id (diff-ℤ (succ-ℤ x) (succ-ℤ y)) (diff-ℤ x y)
+diff-succ-ℤ x y =
+  ( ap (add-ℤ (succ-ℤ x)) (neg-succ-ℤ y)) ∙
+  ( ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
+    ( ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
+      ( issec-pred-ℤ (diff-ℤ x y))))
+
+int-succ-ℕ : (x : ℕ) → Id (int-ℕ (succ-ℕ x)) (succ-ℤ (int-ℕ x))
+int-succ-ℕ zero-ℕ = refl
+int-succ-ℕ (succ-ℕ x) = refl
+
+dist-int-ℕ :
+  (x y : ℕ) → Id (dist-ℤ (int-ℕ x) (int-ℕ y)) (dist-ℕ x y)
+dist-int-ℕ zero-ℕ zero-ℕ = refl
+dist-int-ℕ zero-ℕ (succ-ℕ y) = left-zero-law-dist-ℤ (int-ℕ (succ-ℕ y))
+dist-int-ℕ (succ-ℕ x) zero-ℕ = right-zero-law-dist-ℤ (int-ℕ (succ-ℕ x))
+dist-int-ℕ (succ-ℕ x) (succ-ℕ y) =
+  ( ( ap-dist-ℤ (int-succ-ℕ x) (int-succ-ℕ y)) ∙
+    ( ap abs-ℤ (diff-succ-ℤ (int-ℕ x) (int-ℕ y)))) ∙
+  ( dist-int-ℕ x y)
+
 cong-int-cong-ℕ :
   (k x y : ℕ) → cong-ℕ k x y → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y)
-cong-int-cong-ℕ k x y H = {!div-int-div-ℕ!}
+cong-int-cong-ℕ k x y H =
+  div-sim-unit-ℤ
+    ( refl-sim-unit-ℤ (int-ℕ k))
+    ( sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y)))
+    ( tr
+      ( div-ℤ (int-ℕ k))
+      ( inv (ap int-ℕ (dist-int-ℕ x y)))
+      ( div-int-div-ℕ H))
 
+cong-cong-int-ℕ :
+  (k x y : ℕ) → cong-ℤ (int-ℕ k) (int-ℕ x) (int-ℕ y) → cong-ℕ k x y
+cong-cong-int-ℕ k x y H =
+  div-div-int-ℕ
+    ( tr
+      ( div-ℤ (int-ℕ k))
+      ( ap int-ℕ (dist-int-ℕ x y))
+      ( div-sim-unit-ℤ
+        ( refl-sim-unit-ℤ (int-ℕ k))
+        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y))))
+        ( H)))
+
+{-
 cong-int-succ-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) →
   cong-ℤ (int-ℕ k) (int-ℤ-Mod k (succ-ℤ-Mod k x)) (succ-ℤ (int-ℤ-Mod k x))
@@ -800,41 +888,6 @@ is-common-divisor-is-common-divisor-int-ℕ :
   is-common-divisor-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d) → is-common-divisor-ℕ x y d
 is-common-divisor-is-common-divisor-int-ℕ {x} {y} {d} =
   map-prod div-div-int-ℕ div-div-int-ℕ
-
-div-presim-unit-ℤ :
-  {x y x' y' : ℤ} → presim-unit-ℤ x x' → presim-unit-ℤ y y' →
-  div-ℤ x y → div-ℤ x' y'
-pr1 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  mul-ℤ (mul-ℤ (int-unit-ℤ v) d) (int-unit-ℤ u)
-pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  ( ap (mul-ℤ (mul-ℤ (mul-ℤ (int-unit-ℤ v) d) (int-unit-ℤ u))) (inv q)) ∙
-  ( ( associative-mul-ℤ
-      ( mul-ℤ (int-unit-ℤ v) d)
-      ( int-unit-ℤ u)
-      ( mul-ℤ (int-unit-ℤ u) x)) ∙
-    ( ( ap
-        ( mul-ℤ (mul-ℤ (int-unit-ℤ v) d))
-        ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
-          ( ap (mul-ℤ' x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
-      ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
-        ( ( ap (mul-ℤ (int-unit-ℤ v)) p) ∙
-          ( r)))))
-
-div-sim-unit-ℤ :
-  {x y x' y' : ℤ} → sim-unit-ℤ x x' → sim-unit-ℤ y y' →
-  div-ℤ x y → div-ℤ x' y'
-div-sim-unit-ℤ {x} {y} {x'} {y'} H K =
-  div-presim-unit-ℤ (presim-unit-sim-unit-ℤ H) (presim-unit-sim-unit-ℤ K)
-
-div-int-abs-div-ℤ :
-  {x y : ℤ} → div-ℤ x y → div-ℤ (int-abs-ℤ x) y
-div-int-abs-div-ℤ {x} {y} =
-  div-sim-unit-ℤ (symm-sim-unit-ℤ (sim-unit-abs-ℤ x)) (refl-sim-unit-ℤ y)
-
-div-div-int-abs-ℤ :
-  {x y : ℤ} → div-ℤ (int-abs-ℤ x) y → div-ℤ x y
-div-div-int-abs-ℤ {x} {y} =
-  div-sim-unit-ℤ (sim-unit-abs-ℤ x) (refl-sim-unit-ℤ y)
 
 is-common-divisor-sim-unit-ℤ :
   {x x' y y' d d' : ℤ} → sim-unit-ℤ x x' → sim-unit-ℤ y y' → sim-unit-ℤ d d' →

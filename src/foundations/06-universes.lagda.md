@@ -877,6 +877,15 @@ abs-ℤ (inr (inr x)) = succ-ℕ x
 int-abs-ℤ : ℤ → ℤ
 int-abs-ℤ = int-ℕ ∘ abs-ℤ
 
+abs-int-ℕ : (x : ℕ) → Id (abs-ℤ (int-ℕ x)) x
+abs-int-ℕ zero-ℕ = refl
+abs-int-ℕ (succ-ℕ x) = refl
+
+abs-neg-ℤ : (x : ℤ) → Id (abs-ℤ (neg-ℤ x)) (abs-ℤ x)
+abs-neg-ℤ (inl x) = refl
+abs-neg-ℤ (inr (inl star)) = refl
+abs-neg-ℤ (inr (inr x)) = refl
+
 is-injective-int-ℕ : is-injective int-ℕ
 is-injective-int-ℕ {zero-ℕ} {zero-ℕ} p = refl
 is-injective-int-ℕ {succ-ℕ x} {succ-ℕ y} p =
@@ -1133,6 +1142,30 @@ is-zero-diff-ℤ' x = right-inverse-law-add-ℤ x
 is-zero-diff-ℤ :
   {x y : ℤ} → Id x y → is-zero-ℤ (diff-ℤ x y)
 is-zero-diff-ℤ {x} {.x} refl = is-zero-diff-ℤ' x
+
+left-zero-law-diff-ℤ : (x : ℤ) → Id (diff-ℤ zero-ℤ x) (neg-ℤ x)
+left-zero-law-diff-ℤ x = left-unit-law-add-ℤ (neg-ℤ x)
+
+right-zero-law-diff-ℤ : (x : ℤ) → Id (diff-ℤ x zero-ℤ) x
+right-zero-law-diff-ℤ x = right-unit-law-add-ℤ x
+
+left-successor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ (succ-ℤ x) y) (succ-ℤ (diff-ℤ x y))
+left-successor-law-diff-ℤ x y = left-successor-law-add-ℤ x (neg-ℤ y)
+
+right-successor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ x (succ-ℤ y)) (pred-ℤ (diff-ℤ x y))
+right-successor-law-diff-ℤ x y =
+  ap (add-ℤ x) (neg-succ-ℤ y) ∙ right-predecessor-law-add-ℤ x (neg-ℤ y)
+
+left-predecessor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ (pred-ℤ x) y) (pred-ℤ (diff-ℤ x y))
+left-predecessor-law-diff-ℤ x y = left-predecessor-law-add-ℤ x (neg-ℤ y)
+
+right-predecessor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ x (pred-ℤ y)) (succ-ℤ (diff-ℤ x y))
+right-predecessor-law-diff-ℤ x y =
+  ap (add-ℤ x) (neg-pred-ℤ y) ∙ right-successor-law-add-ℤ x (neg-ℤ y)
 
 triangle-diff-ℤ :
   (x y z : ℤ) → Id (add-ℤ (diff-ℤ x y) (diff-ℤ y z)) (diff-ℤ x z)
