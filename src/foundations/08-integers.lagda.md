@@ -760,6 +760,20 @@ mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-ℕ (succ-ℕ k) (succ-ℕ x))
 mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin
 mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-ℕ (succ-ℕ k) (succ-ℕ x)
 
+mod-zero-ℤ : (k : ℕ) → Id (mod-ℤ k zero-ℤ) (zero-ℤ-Mod k)
+mod-zero-ℤ zero-ℕ = refl
+mod-zero-ℤ (succ-ℕ k) = refl
+
+{-
+mod-succ-ℤ :
+  (k : ℕ) (x : ℤ) → Id (mod-ℤ k (succ-ℤ x)) (succ-ℤ-Mod k (mod-ℤ k x))
+mod-succ-ℤ zero-ℕ x = refl
+mod-succ-ℤ (succ-ℕ k) (inl zero-ℕ) = {!!}
+mod-succ-ℤ (succ-ℕ k) (inl (succ-ℕ x)) = {!!}
+mod-succ-ℤ (succ-ℕ k) (inr (inl star)) = refl
+mod-succ-ℤ (succ-ℕ k) (inr (inr x)) = refl
+-}
+
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
 int-ℤ-Mod zero-ℕ x = x
 int-ℤ-Mod (succ-ℕ k) x = int-ℕ (nat-Fin x)
@@ -885,6 +899,12 @@ cong-int-mod-ℕ (succ-ℕ k) x =
     ( x)
     ( cong-nat-mod-succ-ℕ k x)
 
+{-
+neg-int-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) →
+  Id (neg-ℤ (int-ℤ-Mod k x)) (diff-ℤ (int-ℕ k) (int-ℤ-Mod k x))
+neg-int-ℤ-Mod k x = {!le-dist-ℕ!}
+
 cong-int-mod-ℤ :
   (k : ℕ) (x : ℤ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℤ k x)) x
 cong-int-mod-ℤ zero-ℕ x = refl-cong-ℤ zero-ℤ x
@@ -898,10 +918,11 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
       ( neg-ℤ (int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))))
       ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inr (inr x))))
       ( inr (inr x))
-      {!!}
+      ( {!!})
       ( cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)))
 cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) = cong-int-mod-ℕ (succ-ℕ k) zero-ℕ
 cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)
+-}
 
 {-
 int-ℕ
