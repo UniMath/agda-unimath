@@ -14,6 +14,8 @@ The Agda source of the library can be found in the folder `src`. This folder con
 4. The `subgroups` folder contains the material for Chapter 5.
 Although the folders are roughly organised according to the chapters of the Symmetry Book, we don't commit to closely following the sectioning in the book.
 
+The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
+
 ## Conventions
 
 ### Names in the library
