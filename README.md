@@ -30,10 +30,11 @@ Names may also refer to types of the hypotheses used in the construction. Since 
 4. The symbol for path concatenation is obtained by typing `\.`
 
 ### Characterizing identity types
-Identity types are characterized using `fundamental-theorem-id`, which can be found in `foundations.11-fundamental-theorem`. This theorem uses an implicit family `B` over a type `a`. The user must provide:
-1. An element of type `B a`.
-2. A proof that `Σ A B` is contractible.
-3. A family of maps (x : A) → Id a x → B x.
+Identity types are characterized using `fundamental-theorem-id`, which can be found in `foundations.11-fundamental-theorem`. This theorem uses an implicit family `B` over a type `a`. The user must provide four arguments:
+1. The base element `a:A`.
+2. An element of type `B a`.
+3. A proof that `Σ A B` is contractible.
+4. A family of maps (x : A) → Id a x → B x.
 
 The characterization of an identity type therefore revolves around the proof of contractibility of a total space. In order to give proofs of contractibility efficiently, the following theorems are often used:
 1. `is-contr-equiv` and `is-contr-equiv'`. These are used to show that the asserted type is equivalent to a contractible type and therefore contractible. The `'` just switches the direction of the equivalence, so that it doesn't have to be manually inverted.
