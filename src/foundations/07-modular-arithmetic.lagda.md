@@ -1390,6 +1390,11 @@ is-mul-neg-one-neg-Fin x =
           ( right-distributive-mul-add-Fin one-Fin neg-one-Fin x)) ∙
         ( ap (add-Fin' (mul-Fin neg-one-Fin x)) (left-unit-law-mul-Fin x))))
 
+neg-zero-Fin : {k : ℕ} → Id (neg-Fin (zero-Fin {k})) zero-Fin
+neg-zero-Fin {k} =
+  ( inv (left-unit-law-add-Fin (neg-Fin zero-Fin))) ∙
+  ( right-inverse-law-add-Fin zero-Fin)
+
 neg-succ-Fin :
   {k : ℕ} (x : Fin k) → Id (neg-Fin (succ-Fin x)) (pred-Fin (neg-Fin x))
 neg-succ-Fin {succ-ℕ k} x =
@@ -1420,6 +1425,23 @@ distributive-neg-add-Fin {succ-ℕ k} x y =
   ( is-mul-neg-one-neg-Fin (add-Fin x y)) ∙
   ( ( left-distributive-mul-add-Fin neg-one-Fin x y) ∙
     ( inv (ap-add-Fin (is-mul-neg-one-neg-Fin x) (is-mul-neg-one-neg-Fin y))))
+
+left-predecessor-law-add-Fin :
+  {k : ℕ} (x y : Fin k) → Id (add-Fin (pred-Fin x) y) (pred-Fin (add-Fin x y))
+left-predecessor-law-add-Fin {succ-ℕ k} x y =
+  ( ap
+    ( add-Fin' y)
+    ( is-add-neg-one-pred-Fin x ∙ commutative-add-Fin x neg-one-Fin)) ∙
+  ( ( associative-add-Fin neg-one-Fin x y) ∙
+    ( ( commutative-add-Fin neg-one-Fin (add-Fin x y)) ∙
+      ( inv (is-add-neg-one-pred-Fin (add-Fin x y)))))
+
+right-predecessor-law-add-Fin :
+  {k : ℕ} (x y : Fin k) → Id (add-Fin x (pred-Fin y)) (pred-Fin (add-Fin x y))
+right-predecessor-law-add-Fin {succ-ℕ k} x y =
+  ( ap (add-Fin x) (is-add-neg-one-pred-Fin y)) ∙
+  ( ( inv (associative-add-Fin x y neg-one-Fin)) ∙
+    ( inv (is-add-neg-one-pred-Fin (add-Fin x y))))
 
 left-negative-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →

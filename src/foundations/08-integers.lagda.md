@@ -756,9 +756,9 @@ mod-ℕ (succ-ℕ k) x = mod-succ-ℕ k x
 
 mod-ℤ : (k : ℕ) → ℤ → ℤ-Mod k
 mod-ℤ zero-ℕ x = x
-mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-ℕ (succ-ℕ k) (succ-ℕ x))
+mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-succ-ℕ k (succ-ℕ x))
 mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin
-mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-ℕ (succ-ℕ k) (succ-ℕ x)
+mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-succ-ℕ k (succ-ℕ x)
 
 mod-zero-ℕ : (k : ℕ) → Id (mod-ℕ k zero-ℕ) (zero-ℤ-Mod k)
 mod-zero-ℕ zero-ℕ = refl
@@ -776,23 +776,71 @@ mod-zero-ℤ (succ-ℕ k) = refl
 
 preserves-successor-mod-ℤ :
   (k : ℕ) (x : ℤ) → Id (mod-ℤ k (succ-ℤ x)) (succ-ℤ-Mod k (mod-ℤ k x))
-preserves-successor-mod-ℤ zero-ℕ (inl zero-ℕ) = refl
-preserves-successor-mod-ℤ zero-ℕ (inl (succ-ℕ x)) = refl
-preserves-successor-mod-ℤ zero-ℕ (inr (inl star)) = refl
-preserves-successor-mod-ℤ zero-ℕ (inr (inr x)) = refl
+preserves-successor-mod-ℤ zero-ℕ x = refl
 preserves-successor-mod-ℤ (succ-ℕ k) (inl zero-ℕ) =
   inv (ap succ-Fin is-neg-one-neg-one-Fin)
 preserves-successor-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) =
-  ( ap neg-Fin (preserves-successor-mod-ℕ (succ-ℕ k) x)) ∙
-  {!!}
-{-
-  is-injective-add-Fin
-    ( mod-succ-ℕ k (succ-ℕ x))
-    ( -- ( right-inverse-law-add-Fin (mod-succ-ℕ k (succ-ℕ x))) ∙
-      {! refl!})
-      -}
+  ( ap neg-Fin (inv (isretr-pred-Fin (succ-Fin (mod-succ-ℕ k x))))) ∙
+  ( neg-pred-Fin (succ-Fin (succ-Fin (mod-succ-ℕ k x))))
 preserves-successor-mod-ℤ (succ-ℕ k) (inr (inl star)) = refl
 preserves-successor-mod-ℤ (succ-ℕ k) (inr (inr x)) = refl
+
+preserves-predecessor-mod-ℤ :
+  (k : ℕ) (x : ℤ) → Id (mod-ℤ k (pred-ℤ x)) (pred-ℤ-Mod k (mod-ℤ k x))
+preserves-predecessor-mod-ℤ zero-ℕ x = refl
+preserves-predecessor-mod-ℤ (succ-ℕ k) (inl x) =
+  neg-succ-Fin (succ-Fin (mod-succ-ℕ k x))
+preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inl star)) =
+  ( is-neg-one-neg-one-Fin) ∙
+  ( ( inv (left-unit-law-add-Fin neg-one-Fin)) ∙
+    ( inv (is-add-neg-one-pred-Fin zero-Fin)))
+preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) =
+  inv
+    ( ( ap pred-Fin (preserves-successor-mod-ℤ (succ-ℕ k) zero-ℤ)) ∙
+      ( isretr-pred-Fin zero-Fin))
+preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) =
+  inv (isretr-pred-Fin (succ-Fin (mod-succ-ℕ k x)))
+
+mod-neg-one-ℤ : (k : ℕ) → Id (mod-ℤ k neg-one-ℤ) (neg-one-ℤ-Mod k)
+mod-neg-one-ℤ zero-ℕ = refl
+mod-neg-one-ℤ (succ-ℕ k) =
+  ( neg-succ-Fin zero-Fin) ∙
+  ( ( ap pred-Fin neg-zero-Fin) ∙
+    ( ( is-add-neg-one-pred-Fin zero-Fin) ∙
+      ( left-unit-law-add-Fin neg-one-Fin)))
+
+preserves-add-mod-ℤ :
+  (k : ℕ) (x y : ℤ) →
+  Id (mod-ℤ k (add-ℤ x y)) (add-ℤ-Mod k (mod-ℤ k x) (mod-ℤ k y))
+preserves-add-mod-ℤ zero-ℕ x y = refl
+preserves-add-mod-ℤ (succ-ℕ k) (inl zero-ℕ) y =
+  ( preserves-predecessor-mod-ℤ (succ-ℕ k) y) ∙
+  ( ( is-add-neg-one-pred-Fin (mod-ℤ (succ-ℕ k) y)) ∙
+    ( ( commutative-add-Fin (mod-ℤ (succ-ℕ k) y) neg-one-Fin) ∙
+      ( ap (add-Fin' (mod-ℤ (succ-ℕ k) y)) (inv (mod-neg-one-ℤ (succ-ℕ k))))))
+preserves-add-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) y =
+  ( preserves-predecessor-mod-ℤ (succ-ℕ k) (add-ℤ (inl x) y)) ∙
+  ( ( ap pred-Fin (preserves-add-mod-ℤ (succ-ℕ k) (inl x) y)) ∙
+    ( ( inv
+        ( left-predecessor-law-add-Fin
+          ( mod-ℤ (succ-ℕ k) (inl x))
+          ( mod-ℤ (succ-ℕ k) y))) ∙
+      ( ap
+        ( add-Fin' (mod-ℤ (succ-ℕ k) y))
+        ( inv (preserves-predecessor-mod-ℤ (succ-ℕ k) (inl x))))))
+preserves-add-mod-ℤ (succ-ℕ k) (inr (inl star)) y =
+  inv (left-unit-law-add-Fin (mod-ℤ (succ-ℕ k) y))
+preserves-add-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) y =
+  ( preserves-successor-mod-ℤ (succ-ℕ k) y) ∙
+  ( ( ap succ-Fin (inv (left-unit-law-add-Fin (mod-ℤ (succ-ℕ k) y)))) ∙
+    ( inv (left-successor-law-add-Fin zero-Fin (mod-ℤ (succ-ℕ k) y))))
+preserves-add-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) y =
+  ( preserves-successor-mod-ℤ (succ-ℕ k) (add-ℤ (inr (inr x)) y)) ∙
+  ( ( ap succ-Fin (preserves-add-mod-ℤ (succ-ℕ k) (inr (inr x)) y)) ∙
+    ( inv
+      ( left-successor-law-add-Fin
+        ( mod-ℤ (succ-ℕ k) (inr (inr x)))
+        ( mod-ℤ (succ-ℕ k) y))))
 
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
 int-ℤ-Mod zero-ℕ x = x
