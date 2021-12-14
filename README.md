@@ -12,6 +12,7 @@ The Agda source of the library can be found in the folder `src`. This folder con
 2. The `the-circle` folder contains the material for Chapter 3.
 3. The `groups` folder contains the material for Chapter 4.
 4. The `subgroups` folder contains the material for Chapter 5.
+
 Although the folders are roughly organised according to the chapters of the Symmetry Book, we don't commit to closely following the sectioning in the book.
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
@@ -33,11 +34,13 @@ Identity types are characterized using `fundamental-theorem-id`, which can be fo
 1. An element of type `B a`.
 2. A proof that `Σ A B` is contractible.
 3. A family of maps (x : A) → Id a x → B x.
+
 The characterization of an identity type therefore revolves around the proof of contractibility of a total space. In order to give proofs of contractibility efficiently, the following theorems are often used:
 1. `is-contr-equiv` and `is-contr-equiv'`. These are used to show that the asserted type is equivalent to a contractible type and therefore contractible. The `'` just switches the direction of the equivalence, so that it doesn't have to be manually inverted.
 2. The structure identity principle `is-contr-total-Eq-structure`.
 3. The substructure identity principle `is-contr-total-Eq-substructure`.
 4. The identity principle for Π-types `is-contr-total-Eq-Π`.
+
 A typical example is the characterization of the identity type of the type of equivalences:
 
 ```
