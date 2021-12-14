@@ -2,6 +2,9 @@
 
 This repository is for a formalisation project in Agda of the symmetry book.
 
+## Members of the formalisation project 
+Elisabeth Bonnevier, Pierre Cagne, Jonathan Cubides Prieto, Egbert Rijke.
+
 ## Structure of the library
 
 The Agda source of the library can be found in the folder `src`. This folder contains several subfolders:
