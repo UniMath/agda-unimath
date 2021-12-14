@@ -1342,6 +1342,46 @@ mul-neg-one-Fin {k} x =
             ( left-zero-law-mul-Fin x)))) ∙
       ( inv (right-inverse-law-add-Fin x)))
 
+-- We show that pred-Fin is adding neg-one-Fin
+
+is-one-neg-neg-one-Fin :
+  {k : ℕ} → is-one-Fin {succ-ℕ k} (neg-Fin neg-one-Fin)
+is-one-neg-neg-one-Fin {k} =
+  eq-mod-succ-cong-ℕ k
+    ( dist-ℕ k (succ-ℕ k))
+    ( one-ℕ)
+    ( cong-identification-ℕ
+      ( succ-ℕ k)
+      ( is-one-dist-succ-ℕ k))
+
+is-neg-one-neg-one-Fin :
+  {k : ℕ} → Id (neg-Fin {succ-ℕ k} one-Fin) neg-one-Fin
+is-neg-one-neg-one-Fin {k} =
+  is-injective-add-Fin one-Fin
+    ( ( right-inverse-law-add-Fin one-Fin) ∙
+      ( ( inv (left-inverse-law-add-Fin neg-one-Fin)) ∙
+        ( ap (add-Fin' neg-one-Fin) is-one-neg-neg-one-Fin)))
+
+is-add-neg-one-pred-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (pred-Fin x) (add-Fin x neg-one-Fin)
+is-add-neg-one-pred-Fin {k} x =
+  is-injective-succ-Fin
+    ( ( issec-pred-Fin x) ∙
+      ( ( ( ( inv (right-unit-law-add-Fin x)) ∙
+            ( ap
+              ( add-Fin x)
+              ( inv
+                ( ( ap (add-Fin' one-Fin) (inv is-neg-one-neg-one-Fin)) ∙
+                  ( left-inverse-law-add-Fin one-Fin))))) ∙
+          ( inv (associative-add-Fin x neg-one-Fin one-Fin))) ∙
+        ( inv (is-add-one-succ-Fin (add-Fin x neg-one-Fin)))))
+
+neg-succ-Fin :
+  (k : ℕ) (x : Fin k) → Id (neg-Fin (succ-Fin x)) (pred-Fin (neg-Fin x))
+neg-succ-Fin (succ-ℕ k) x =
+  ( ap neg-Fin (is-add-one-succ-Fin x)) ∙
+  {! distributive-neg-add-Fin!}
+
 {- Exercise 7.9 -}
 
 -- We first prove two lemmas
@@ -1625,4 +1665,5 @@ map-extended-euclidean-algorithm : ℕ × ℕ → ℕ × ℕ
 pr1 (map-extended-euclidean-algorithm (pair x y)) = y
 pr2 (map-extended-euclidean-algorithm (pair x y)) =
   remainder-euclidean-division-ℕ y x
+
 ```

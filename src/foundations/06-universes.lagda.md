@@ -649,19 +649,24 @@ ap-dist-ℕ p q = ap-binary dist-ℕ p q
 {- We show that two natural numbers are equal if and only if their distance is
    zero. -}
 
-eq-dist-ℕ :
-  (m n : ℕ) → is-zero-ℕ (dist-ℕ m n) → Id m n
+eq-dist-ℕ : (m n : ℕ) → is-zero-ℕ (dist-ℕ m n) → Id m n
 eq-dist-ℕ zero-ℕ zero-ℕ p = refl
 eq-dist-ℕ (succ-ℕ m) (succ-ℕ n) p = ap succ-ℕ (eq-dist-ℕ m n p)
 
-dist-eq-ℕ' :
-  (n : ℕ) → is-zero-ℕ (dist-ℕ n n)
+dist-eq-ℕ' : (n : ℕ) → is-zero-ℕ (dist-ℕ n n)
 dist-eq-ℕ' zero-ℕ = refl
 dist-eq-ℕ' (succ-ℕ n) = dist-eq-ℕ' n
 
-dist-eq-ℕ :
-  (m n : ℕ) → Id m n → is-zero-ℕ (dist-ℕ m n)
+dist-eq-ℕ : (m n : ℕ) → Id m n → is-zero-ℕ (dist-ℕ m n)
 dist-eq-ℕ m .m refl = dist-eq-ℕ' m
+
+is-one-dist-succ-ℕ : (x : ℕ) → is-one-ℕ (dist-ℕ x (succ-ℕ x))
+is-one-dist-succ-ℕ zero-ℕ = refl
+is-one-dist-succ-ℕ (succ-ℕ x) = is-one-dist-succ-ℕ x
+
+is-one-dist-succ-ℕ' : (x : ℕ) → is-one-ℕ (dist-ℕ (succ-ℕ x) x)
+is-one-dist-succ-ℕ' zero-ℕ = refl
+is-one-dist-succ-ℕ' (succ-ℕ x) = is-one-dist-succ-ℕ' x
 
 -- The distance function is symmetric --
 

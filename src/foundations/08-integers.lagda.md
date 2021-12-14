@@ -760,19 +760,39 @@ mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-ℕ (succ-ℕ k) (succ-ℕ x))
 mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin
 mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-ℕ (succ-ℕ k) (succ-ℕ x)
 
+mod-zero-ℕ : (k : ℕ) → Id (mod-ℕ k zero-ℕ) (zero-ℤ-Mod k)
+mod-zero-ℕ zero-ℕ = refl
+mod-zero-ℕ (succ-ℕ k) = refl
+
+preserves-successor-mod-ℕ :
+  (k x : ℕ) → Id (mod-ℕ k (succ-ℕ x)) (succ-ℤ-Mod k (mod-ℕ k x))
+preserves-successor-mod-ℕ zero-ℕ zero-ℕ = refl
+preserves-successor-mod-ℕ zero-ℕ (succ-ℕ x) = refl
+preserves-successor-mod-ℕ (succ-ℕ k) x = refl
+
 mod-zero-ℤ : (k : ℕ) → Id (mod-ℤ k zero-ℤ) (zero-ℤ-Mod k)
 mod-zero-ℤ zero-ℕ = refl
 mod-zero-ℤ (succ-ℕ k) = refl
 
-{-
-mod-succ-ℤ :
+preserves-successor-mod-ℤ :
   (k : ℕ) (x : ℤ) → Id (mod-ℤ k (succ-ℤ x)) (succ-ℤ-Mod k (mod-ℤ k x))
-mod-succ-ℤ zero-ℕ x = refl
-mod-succ-ℤ (succ-ℕ k) (inl zero-ℕ) = {!!}
-mod-succ-ℤ (succ-ℕ k) (inl (succ-ℕ x)) = {!!}
-mod-succ-ℤ (succ-ℕ k) (inr (inl star)) = refl
-mod-succ-ℤ (succ-ℕ k) (inr (inr x)) = refl
--}
+preserves-successor-mod-ℤ zero-ℕ (inl zero-ℕ) = refl
+preserves-successor-mod-ℤ zero-ℕ (inl (succ-ℕ x)) = refl
+preserves-successor-mod-ℤ zero-ℕ (inr (inl star)) = refl
+preserves-successor-mod-ℤ zero-ℕ (inr (inr x)) = refl
+preserves-successor-mod-ℤ (succ-ℕ k) (inl zero-ℕ) =
+  inv (ap succ-Fin is-neg-one-neg-one-Fin)
+preserves-successor-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) =
+  ( ap neg-Fin (preserves-successor-mod-ℕ (succ-ℕ k) x)) ∙
+  {!!}
+{-
+  is-injective-add-Fin
+    ( mod-succ-ℕ k (succ-ℕ x))
+    ( -- ( right-inverse-law-add-Fin (mod-succ-ℕ k (succ-ℕ x))) ∙
+      {! refl!})
+      -}
+preserves-successor-mod-ℤ (succ-ℕ k) (inr (inl star)) = refl
+preserves-successor-mod-ℤ (succ-ℕ k) (inr (inr x)) = refl
 
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
 int-ℤ-Mod zero-ℕ x = x
