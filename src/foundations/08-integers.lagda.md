@@ -948,6 +948,23 @@ pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
   ( ( ap-add-ℤ p q) ∙
     ( triangle-diff-ℤ x y z))
 
+concatenate-eq-cong-ℤ :
+  {k x x' y : ℤ} → Id x x' → cong-ℤ k x' y → cong-ℤ k x y
+concatenate-eq-cong-ℤ refl = id
+
+concatenate-cong-eq-ℤ :
+  {k x y y' : ℤ} → cong-ℤ k x y → Id y y' → cong-ℤ k x y'
+concatenate-cong-eq-ℤ H refl = H
+
+concatenate-eq-cong-eq-ℤ :
+  {k x x' y' y : ℤ} → Id x x' → cong-ℤ k x' y' → Id y' y → cong-ℤ k x y
+concatenate-eq-cong-eq-ℤ refl H refl = H
+
+concatenate-cong-eq-cong-ℤ :
+  {k x y y' z : ℤ} → cong-ℤ k x y → Id y y' → cong-ℤ k y' z → cong-ℤ k x z
+concatenate-cong-eq-cong-ℤ {k} {x} {y} {.y} {z} H refl K =
+  transitive-cong-ℤ k x y z H K
+
 cong-cong-neg-ℤ : (k x y : ℤ) → cong-ℤ k (neg-ℤ x) (neg-ℤ y) → cong-ℤ k x y
 pr1 (cong-cong-neg-ℤ k x y (pair d p)) = neg-ℤ d
 pr2 (cong-cong-neg-ℤ k x y (pair d p)) =
@@ -1031,6 +1048,24 @@ cong-int-mod-ℕ (succ-ℕ k) x =
     ( nat-Fin (mod-succ-ℕ k x))
     ( x)
     ( cong-nat-mod-succ-ℕ k x)
+
+cong-int-mod-ℤ :
+  (k : ℕ) (x : ℤ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℤ k x)) x
+cong-int-mod-ℤ zero-ℕ x = refl-cong-ℤ zero-ℤ x
+cong-int-mod-ℤ (succ-ℕ k) (inl x) =
+  cong-cong-neg-ℤ
+    ( int-ℕ (succ-ℕ k))
+    ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x)))
+    ( inl x)
+    ( transitive-cong-ℤ
+      ( int-ℕ (succ-ℕ k))
+      ( neg-ℤ (int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))))
+      ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inr (inr x))))
+      ( inr (inr x))
+      ( {!!})
+      ( cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)))
+cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) = cong-int-mod-ℕ (succ-ℕ k) zero-ℕ
+cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)
 
 {-
 neg-int-ℤ-Mod :
