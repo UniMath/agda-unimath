@@ -1327,6 +1327,12 @@ is-injective-add-Fin {k} x {y} {z} p =
   ( ( ap (add-Fin (neg-Fin x)) p) ∙
     ( add-neg-add-Fin x z))
 
+is-injective-add-Fin' :
+  {k : ℕ} (x : Fin k) → is-injective (add-Fin' x)
+is-injective-add-Fin' {k} x {y} {z} p =
+  is-injective-add-Fin x
+    (commutative-add-Fin x y ∙ (p ∙ commutative-add-Fin z x))
+
 mul-neg-one-Fin :
   {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mul-Fin neg-one-Fin x) (neg-Fin x)
 mul-neg-one-Fin {k} x =
@@ -1458,6 +1464,44 @@ right-negative-law-mul-Fin {succ-ℕ k} x y =
   ( commutative-mul-Fin x (neg-Fin y)) ∙
   ( ( left-negative-law-mul-Fin y x) ∙
     ( ap neg-Fin (commutative-mul-Fin y x)))
+
+left-successor-law-mul-Fin :
+  {k : ℕ} (x y : Fin k) →
+  Id (mul-Fin (succ-Fin x) y) (add-Fin y (mul-Fin x y))
+left-successor-law-mul-Fin {succ-ℕ k} x y =
+  ( ap (mul-Fin' y) (is-add-one-succ-Fin x ∙ commutative-add-Fin x one-Fin)) ∙
+  ( ( right-distributive-mul-add-Fin one-Fin x y) ∙
+    ( ap (add-Fin' (mul-Fin x y)) (left-unit-law-mul-Fin y)))
+
+right-successor-law-mul-Fin :
+  {k : ℕ} (x y : Fin k) →
+  Id (mul-Fin x (succ-Fin y)) (add-Fin x (mul-Fin x y))
+right-successor-law-mul-Fin {succ-ℕ k} x y =
+  ( ap (mul-Fin x) (is-add-one-succ-Fin y ∙ commutative-add-Fin y one-Fin)) ∙
+  ( ( left-distributive-mul-add-Fin x one-Fin y) ∙
+    ( ap (add-Fin' (mul-Fin x y)) (right-unit-law-mul-Fin x)))
+
+left-predecessor-law-mul-Fin :
+  {k : ℕ} (x y : Fin k) →
+  Id (mul-Fin (pred-Fin x) y) (add-Fin (neg-Fin y) (mul-Fin x y))
+left-predecessor-law-mul-Fin {succ-ℕ k} x y =
+  ( ap
+    ( mul-Fin' y)
+    ( is-add-neg-one-pred-Fin x ∙ commutative-add-Fin x neg-one-Fin)) ∙
+  ( ( right-distributive-mul-add-Fin neg-one-Fin x y) ∙
+    ( ap (add-Fin' (mul-Fin x y)) (inv (is-mul-neg-one-neg-Fin y))))
+
+right-predecessor-law-mul-Fin :
+  {k : ℕ} (x y : Fin k) →
+  Id (mul-Fin x (pred-Fin y)) (add-Fin (neg-Fin x) (mul-Fin x y))
+right-predecessor-law-mul-Fin {succ-ℕ k} x y =
+  ( ap
+    ( mul-Fin x)
+    ( is-add-neg-one-pred-Fin y ∙ commutative-add-Fin y neg-one-Fin)) ∙
+  ( ( left-distributive-mul-add-Fin x neg-one-Fin y) ∙
+    ( ap
+      ( add-Fin' (mul-Fin x y))
+      ( commutative-mul-Fin x neg-one-Fin ∙ inv (is-mul-neg-one-neg-Fin x))))
 
 {- Exercise 7.9 -}
 
