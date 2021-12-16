@@ -649,19 +649,24 @@ ap-dist-ℕ p q = ap-binary dist-ℕ p q
 {- We show that two natural numbers are equal if and only if their distance is
    zero. -}
 
-eq-dist-ℕ :
-  (m n : ℕ) → is-zero-ℕ (dist-ℕ m n) → Id m n
+eq-dist-ℕ : (m n : ℕ) → is-zero-ℕ (dist-ℕ m n) → Id m n
 eq-dist-ℕ zero-ℕ zero-ℕ p = refl
 eq-dist-ℕ (succ-ℕ m) (succ-ℕ n) p = ap succ-ℕ (eq-dist-ℕ m n p)
 
-dist-eq-ℕ' :
-  (n : ℕ) → is-zero-ℕ (dist-ℕ n n)
+dist-eq-ℕ' : (n : ℕ) → is-zero-ℕ (dist-ℕ n n)
 dist-eq-ℕ' zero-ℕ = refl
 dist-eq-ℕ' (succ-ℕ n) = dist-eq-ℕ' n
 
-dist-eq-ℕ :
-  (m n : ℕ) → Id m n → is-zero-ℕ (dist-ℕ m n)
+dist-eq-ℕ : (m n : ℕ) → Id m n → is-zero-ℕ (dist-ℕ m n)
 dist-eq-ℕ m .m refl = dist-eq-ℕ' m
+
+is-one-dist-succ-ℕ : (x : ℕ) → is-one-ℕ (dist-ℕ x (succ-ℕ x))
+is-one-dist-succ-ℕ zero-ℕ = refl
+is-one-dist-succ-ℕ (succ-ℕ x) = is-one-dist-succ-ℕ x
+
+is-one-dist-succ-ℕ' : (x : ℕ) → is-one-ℕ (dist-ℕ (succ-ℕ x) x)
+is-one-dist-succ-ℕ' zero-ℕ = refl
+is-one-dist-succ-ℕ' (succ-ℕ x) = is-one-dist-succ-ℕ' x
 
 -- The distance function is symmetric --
 
@@ -876,6 +881,15 @@ abs-ℤ (inr (inr x)) = succ-ℕ x
 
 int-abs-ℤ : ℤ → ℤ
 int-abs-ℤ = int-ℕ ∘ abs-ℤ
+
+abs-int-ℕ : (x : ℕ) → Id (abs-ℤ (int-ℕ x)) x
+abs-int-ℕ zero-ℕ = refl
+abs-int-ℕ (succ-ℕ x) = refl
+
+abs-neg-ℤ : (x : ℤ) → Id (abs-ℤ (neg-ℤ x)) (abs-ℤ x)
+abs-neg-ℤ (inl x) = refl
+abs-neg-ℤ (inr (inl star)) = refl
+abs-neg-ℤ (inr (inr x)) = refl
 
 is-injective-int-ℕ : is-injective int-ℕ
 is-injective-int-ℕ {zero-ℕ} {zero-ℕ} p = refl
@@ -1127,9 +1141,36 @@ eq-diff-ℤ {x} {y} H =
       ( ( ap (add-ℤ' y) H) ∙
         ( left-unit-law-add-ℤ y))))
 
+is-zero-diff-ℤ' : (x : ℤ) → is-zero-ℤ (diff-ℤ x x)
+is-zero-diff-ℤ' x = right-inverse-law-add-ℤ x
+
 is-zero-diff-ℤ :
   {x y : ℤ} → Id x y → is-zero-ℤ (diff-ℤ x y)
-is-zero-diff-ℤ {x} {.x} refl = right-inverse-law-add-ℤ x
+is-zero-diff-ℤ {x} {.x} refl = is-zero-diff-ℤ' x
+
+left-zero-law-diff-ℤ : (x : ℤ) → Id (diff-ℤ zero-ℤ x) (neg-ℤ x)
+left-zero-law-diff-ℤ x = left-unit-law-add-ℤ (neg-ℤ x)
+
+right-zero-law-diff-ℤ : (x : ℤ) → Id (diff-ℤ x zero-ℤ) x
+right-zero-law-diff-ℤ x = right-unit-law-add-ℤ x
+
+left-successor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ (succ-ℤ x) y) (succ-ℤ (diff-ℤ x y))
+left-successor-law-diff-ℤ x y = left-successor-law-add-ℤ x (neg-ℤ y)
+
+right-successor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ x (succ-ℤ y)) (pred-ℤ (diff-ℤ x y))
+right-successor-law-diff-ℤ x y =
+  ap (add-ℤ x) (neg-succ-ℤ y) ∙ right-predecessor-law-add-ℤ x (neg-ℤ y)
+
+left-predecessor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ (pred-ℤ x) y) (pred-ℤ (diff-ℤ x y))
+left-predecessor-law-diff-ℤ x y = left-predecessor-law-add-ℤ x (neg-ℤ y)
+
+right-predecessor-law-diff-ℤ :
+  (x y : ℤ) → Id (diff-ℤ x (pred-ℤ y)) (succ-ℤ (diff-ℤ x y))
+right-predecessor-law-diff-ℤ x y =
+  ap (add-ℤ x) (neg-pred-ℤ y) ∙ right-successor-law-add-ℤ x (neg-ℤ y)
 
 triangle-diff-ℤ :
   (x y z : ℤ) → Id (add-ℤ (diff-ℤ x y) (diff-ℤ y z)) (diff-ℤ x z)

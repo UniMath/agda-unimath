@@ -693,12 +693,17 @@ neg-neg-ℤ (inl n) = refl
 neg-neg-ℤ (inr (inl star)) = refl
 neg-neg-ℤ (inr (inr n)) = refl
 
-neg-pred-ℤ :
-  (k : ℤ) → Id (neg-ℤ (pred-ℤ k)) (succ-ℤ (neg-ℤ k))
+neg-pred-ℤ : (k : ℤ) → Id (neg-ℤ (pred-ℤ k)) (succ-ℤ (neg-ℤ k))
 neg-pred-ℤ (inl x) = refl
 neg-pred-ℤ (inr (inl star)) = refl
 neg-pred-ℤ (inr (inr zero-ℕ)) = refl
 neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+
+neg-succ-ℤ : (x : ℤ) → Id (neg-ℤ (succ-ℤ x)) (pred-ℤ (neg-ℤ x))
+neg-succ-ℤ (inl zero-ℕ) = refl
+neg-succ-ℤ (inl (succ-ℕ x)) = refl
+neg-succ-ℤ (inr (inl star)) = refl
+neg-succ-ℤ (inr (inr x)) = refl
 
 pred-neg-ℤ :
   (k : ℤ) → Id (pred-ℤ (neg-ℤ k)) (neg-ℤ (succ-ℤ k))
