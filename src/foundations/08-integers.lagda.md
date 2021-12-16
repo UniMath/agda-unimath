@@ -1053,51 +1053,52 @@ cong-int-mod-ℤ :
   (k : ℕ) (x : ℤ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℤ k x)) x
 cong-int-mod-ℤ zero-ℕ x = refl-cong-ℤ zero-ℤ x
 cong-int-mod-ℤ (succ-ℕ k) (inl x) =
-  cong-cong-neg-ℤ
-    ( int-ℕ (succ-ℕ k))
-    ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x)))
-    ( inl x)
+  concatenate-eq-cong-ℤ
+    { int-ℕ (succ-ℕ k)}
+    { int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))}
+    { int-ℕ (nat-Fin (mul-Fin neg-one-Fin (mod-succ-ℕ k (succ-ℕ x))))}
+    { inl x}
+    ( ap
+      ( int-ℤ-Mod (succ-ℕ k))
+      ( preserves-mul-mod-ℤ (succ-ℕ k) neg-one-ℤ (inr (inr x)) ∙
+        ap (mul-Fin' (mod-succ-ℕ k (succ-ℕ x))) (mod-neg-one-ℤ (succ-ℕ k))))
     ( transitive-cong-ℤ
       ( int-ℕ (succ-ℕ k))
-      ( neg-ℤ (int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))))
-      ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inr (inr x))))
-      ( inr (inr x))
-      ( {!!})
-      ( cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)))
+      ( int-ℕ (nat-Fin (mul-Fin neg-one-Fin (mod-succ-ℕ k (succ-ℕ x)))))
+      ( int-ℕ (mul-ℕ k (nat-Fin (mod-succ-ℕ k (succ-ℕ x)))))
+      ( inl x)
+      ( cong-int-cong-ℕ
+        ( succ-ℕ k)
+        ( nat-Fin (mul-Fin neg-one-Fin (mod-succ-ℕ k (succ-ℕ x))))
+        ( mul-ℕ k (nat-Fin (mod-succ-ℕ k (succ-ℕ x))))
+        ( cong-mul-Fin neg-one-Fin (mod-succ-ℕ k (succ-ℕ x))))
+      ( transitive-cong-ℤ
+        ( int-ℕ (succ-ℕ k))
+        ( int-ℕ (mul-ℕ k (nat-Fin (mod-succ-ℕ k (succ-ℕ x)))))
+        ( int-ℕ (mul-ℕ k (succ-ℕ x)))
+        ( inl x)
+        ( cong-int-cong-ℕ
+          ( succ-ℕ k)
+          ( mul-ℕ k (nat-Fin (mod-succ-ℕ k (succ-ℕ x))))
+          ( mul-ℕ k (succ-ℕ x))
+          ( congruence-mul-ℕ
+            ( succ-ℕ k)
+            {k} {nat-Fin (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
+            ( refl-cong-ℕ (succ-ℕ k) k)
+            ( cong-nat-mod-succ-ℕ k (succ-ℕ x))))
+        ( pair
+          ( inr (inr x))
+          ( ( commutative-mul-ℤ (inr (inr x)) (inr (inr k))) ∙
+            ( ( ap
+                ( mul-ℤ' (inr (inr x)))
+                ( inv (succ-int-ℕ k) ∙ commutative-add-ℤ one-ℤ (int-ℕ k))) ∙
+              ( ( right-distributive-mul-add-ℤ (int-ℕ k) one-ℤ (inr (inr x))) ∙
+                ( ap-add-ℤ
+                  ( mul-int-ℕ k (succ-ℕ x))
+                  ( left-unit-law-mul-ℤ (inr (inr x))))))))))
 cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) = cong-int-mod-ℕ (succ-ℕ k) zero-ℕ
 cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)
 
-{-
-neg-int-ℤ-Mod :
-  (k : ℕ) (x : ℤ-Mod k) →
-  Id (neg-ℤ (int-ℤ-Mod k x)) (diff-ℤ (int-ℕ k) (int-ℤ-Mod k x))
-neg-int-ℤ-Mod k x = {!le-dist-ℕ!}
-
-cong-int-mod-ℤ :
-  (k : ℕ) (x : ℤ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℤ k x)) x
-cong-int-mod-ℤ zero-ℕ x = refl-cong-ℤ zero-ℤ x
-cong-int-mod-ℤ (succ-ℕ k) (inl x) =
-  cong-cong-neg-ℤ
-    ( int-ℕ (succ-ℕ k))
-    ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x)))
-    ( inl x)
-    ( transitive-cong-ℤ
-      ( int-ℕ (succ-ℕ k))
-      ( neg-ℤ (int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))))
-      ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inr (inr x))))
-      ( inr (inr x))
-      ( {!!})
-      ( cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)))
-cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) = cong-int-mod-ℕ (succ-ℕ k) zero-ℕ
-cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)
--}
-
-{-
-int-ℕ
-  ( nat-Fin
-    ( mod-succ-ℕ k
-      ( dist-ℕ (nat-Fin (succ-Fin (mod-succ-ℕ k x))) (succ-ℕ k))))
--}
 -- We introduce the condition on ℤ of being a gcd.
 
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero
