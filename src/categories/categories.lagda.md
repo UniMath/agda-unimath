@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.categories where
+module categories.categories where
 
 open import foundations public
 
