@@ -762,7 +762,7 @@ cong-cong-int-ℕ k x y H =
 
 -- Modular arithmetic on ℤ
 
-ℤ-Mod : (k : ℕ) → UU lzero
+ℤ-Mod : ℕ → UU lzero
 ℤ-Mod zero-ℕ = ℤ
 ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
 
@@ -777,6 +777,10 @@ neg-one-ℤ-Mod (succ-ℕ k) = neg-one-Fin
 one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
 one-ℤ-Mod zero-ℕ = one-ℤ
 one-ℤ-Mod (succ-ℕ k) = one-Fin
+
+has-decidable-equality-ℤ-Mod : (k : ℕ) → has-decidable-equality (ℤ-Mod k)
+has-decidable-equality-ℤ-Mod zero-ℕ = has-decidable-equality-ℤ
+has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin
 
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
 int-ℤ-Mod zero-ℕ x = x
