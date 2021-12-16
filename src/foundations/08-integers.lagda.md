@@ -923,6 +923,17 @@ is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
 cong-ℤ : ℤ → ℤ → ℤ → UU lzero
 cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
 
+is-cong-zero-ℤ : ℤ → ℤ → UU lzero
+is-cong-zero-ℤ k x = cong-ℤ k x zero-ℤ
+
+is-cong-zero-div-ℤ : (k x : ℤ) → div-ℤ k x → is-cong-zero-ℤ k x
+pr1 (is-cong-zero-div-ℤ k x (pair d p)) = d
+pr2 (is-cong-zero-div-ℤ k x (pair d p)) = p ∙ inv (right-unit-law-add-ℤ x)
+
+div-is-cong-zero-ℤ : (k x : ℤ) → is-cong-zero-ℤ k x → div-ℤ k x
+pr1 (div-is-cong-zero-ℤ k x (pair d p)) = d
+pr2 (div-is-cong-zero-ℤ k x (pair d p)) = p ∙ right-unit-law-add-ℤ x
+
 is-indiscrete-cong-ℤ : (k : ℤ) → is-unit-ℤ k → (x y : ℤ) → cong-ℤ k x y
 is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (diff-ℤ x y) H
 
@@ -949,21 +960,27 @@ pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
     ( triangle-diff-ℤ x y z))
 
 concatenate-eq-cong-ℤ :
-  {k x x' y : ℤ} → Id x x' → cong-ℤ k x' y → cong-ℤ k x y
-concatenate-eq-cong-ℤ refl = id
+  (k x x' y : ℤ) → Id x x' → cong-ℤ k x' y → cong-ℤ k x y
+concatenate-eq-cong-ℤ k x .x y refl = id
 
 concatenate-cong-eq-ℤ :
-  {k x y y' : ℤ} → cong-ℤ k x y → Id y y' → cong-ℤ k x y'
-concatenate-cong-eq-ℤ H refl = H
+  (k x y y' : ℤ) → cong-ℤ k x y → Id y y' → cong-ℤ k x y'
+concatenate-cong-eq-ℤ k x y .y H refl = H
 
 concatenate-eq-cong-eq-ℤ :
-  {k x x' y' y : ℤ} → Id x x' → cong-ℤ k x' y' → Id y' y → cong-ℤ k x y
-concatenate-eq-cong-eq-ℤ refl H refl = H
+  (k x x' y' y : ℤ) → Id x x' → cong-ℤ k x' y' → Id y' y → cong-ℤ k x y
+concatenate-eq-cong-eq-ℤ k x .x y .y refl H refl = H
 
 concatenate-cong-eq-cong-ℤ :
-  {k x y y' z : ℤ} → cong-ℤ k x y → Id y y' → cong-ℤ k y' z → cong-ℤ k x z
-concatenate-cong-eq-cong-ℤ {k} {x} {y} {.y} {z} H refl K =
+  (k x y y' z : ℤ) → cong-ℤ k x y → Id y y' → cong-ℤ k y' z → cong-ℤ k x z
+concatenate-cong-eq-cong-ℤ k x y .y z H refl K =
   transitive-cong-ℤ k x y z H K
+
+concatenate-cong-cong-cong-ℤ :
+  (k x y z w : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k z w → cong-ℤ k x w
+concatenate-cong-cong-cong-ℤ k x y z w H K L =
+  transitive-cong-ℤ k x y w H
+    ( transitive-cong-ℤ k y z w K L)
 
 cong-cong-neg-ℤ : (k x y : ℤ) → cong-ℤ k (neg-ℤ x) (neg-ℤ y) → cong-ℤ k x y
 pr1 (cong-cong-neg-ℤ k x y (pair d p)) = neg-ℤ d
@@ -1054,10 +1071,10 @@ cong-int-mod-ℤ :
 cong-int-mod-ℤ zero-ℕ x = refl-cong-ℤ zero-ℤ x
 cong-int-mod-ℤ (succ-ℕ k) (inl x) =
   concatenate-eq-cong-ℤ
-    { int-ℕ (succ-ℕ k)}
-    { int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x))}
-    { int-ℕ (nat-Fin (mul-Fin neg-one-Fin (mod-succ-ℕ k (succ-ℕ x))))}
-    { inl x}
+    ( int-ℕ (succ-ℕ k))
+    ( int-ℤ-Mod (succ-ℕ k) (mod-ℤ (succ-ℕ k) (inl x)))
+    ( int-ℕ (nat-Fin (mul-Fin neg-one-Fin (mod-succ-ℕ k (succ-ℕ x)))))
+    ( inl x)
     ( ap
       ( int-ℤ-Mod (succ-ℕ k))
       ( preserves-mul-mod-ℤ (succ-ℕ k) neg-one-ℤ (inr (inr x)) ∙
@@ -1098,6 +1115,77 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
                   ( left-unit-law-mul-ℤ (inr (inr x))))))))))
 cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) = cong-int-mod-ℕ (succ-ℕ k) zero-ℕ
 cong-int-mod-ℤ (succ-ℕ k) (inr (inr x)) = cong-int-mod-ℕ (succ-ℕ k) (succ-ℕ x)
+
+cong-eq-mod-ℤ :
+  (k : ℕ) (x y : ℤ) → Id (mod-ℤ k x) (mod-ℤ k y) → cong-ℤ (int-ℕ k) x y
+cong-eq-mod-ℤ k x y p =
+  concatenate-cong-eq-cong-ℤ
+    ( int-ℕ k)
+    ( x)
+    ( int-ℤ-Mod k (mod-ℤ k x))
+    ( int-ℤ-Mod k (mod-ℤ k y))
+    ( y)
+    ( symmetric-cong-ℤ
+      (int-ℕ k)
+      (int-ℤ-Mod k (mod-ℤ k x))
+      ( x)
+      ( cong-int-mod-ℤ k x))
+    ( ap (int-ℤ-Mod k) p)
+    ( cong-int-mod-ℤ k y)
+
+eq-cong-int-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) →
+  cong-ℤ (int-ℕ k) (int-ℤ-Mod k x) (int-ℤ-Mod k y) → Id x y
+eq-cong-int-ℤ-Mod zero-ℕ = is-discrete-cong-ℤ zero-ℤ refl
+eq-cong-int-ℤ-Mod (succ-ℕ k) x y H =
+  eq-cong-nat-Fin (succ-ℕ k) x y
+    ( cong-cong-int-ℕ (succ-ℕ k) (nat-Fin x) (nat-Fin y) H)
+
+eq-mod-cong-ℤ :
+  (k : ℕ) (x y : ℤ) → cong-ℤ (int-ℕ k) x y → Id (mod-ℤ k x) (mod-ℤ k y)
+eq-mod-cong-ℤ k x y H =
+  eq-cong-int-ℤ-Mod k
+    ( mod-ℤ k x)
+    ( mod-ℤ k y)
+    ( concatenate-cong-cong-cong-ℤ
+      ( int-ℕ k)
+      ( int-ℤ-Mod k (mod-ℤ k x))
+      ( x)
+      ( y)
+      ( int-ℤ-Mod k (mod-ℤ k y))
+      ( cong-int-mod-ℤ k x)
+      ( H)
+      ( symmetric-cong-ℤ
+        ( int-ℕ k)
+        ( int-ℤ-Mod k (mod-ℤ k y))
+        ( y)
+        ( cong-int-mod-ℤ k y)))
+
+is-zero-mod-div-ℤ :
+  (k : ℕ) (x : ℤ) → div-ℤ (int-ℕ k) x → is-zero-ℤ-Mod k (mod-ℤ k x)
+is-zero-mod-div-ℤ zero-ℕ x d = is-zero-div-zero-ℤ x d
+is-zero-mod-div-ℤ (succ-ℕ k) x H =
+  eq-mod-cong-ℤ
+    ( succ-ℕ k)
+    ( x)
+    ( zero-ℤ)
+    ( is-cong-zero-div-ℤ (int-ℕ (succ-ℕ k)) x H)
+
+div-is-zero-mod-ℤ :
+  (k : ℕ) (x : ℤ) → is-zero-ℤ-Mod k (mod-ℤ k x) → div-ℤ (int-ℕ k) x
+div-is-zero-mod-ℤ zero-ℕ .zero-ℤ refl = refl-div-ℤ zero-ℤ
+div-is-zero-mod-ℤ (succ-ℕ k) x p =
+  div-is-cong-zero-ℤ
+    ( int-ℕ (succ-ℕ k))
+    ( x)
+    ( cong-eq-mod-ℤ (succ-ℕ k) x zero-ℤ p)
+
+issec-int-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → Id (mod-ℤ k (int-ℤ-Mod k x)) x
+issec-int-ℤ-Mod k x =
+  eq-cong-int-ℤ-Mod k
+    ( mod-ℤ k (int-ℤ-Mod k x))
+    ( x)
+    ( cong-int-mod-ℤ k (int-ℤ-Mod k x))
 
 -- We introduce the condition on ℤ of being a gcd.
 
