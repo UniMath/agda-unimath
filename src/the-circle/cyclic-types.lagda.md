@@ -238,6 +238,23 @@ issec-equiv-Eq-Cyclic :
 issec-equiv-Eq-Cyclic zero-ℕ x = left-unit-law-add-ℤ x
 issec-equiv-Eq-Cyclic (succ-ℕ k) x = left-unit-law-add-Fin x
 
+preserves-pred-preserves-succ-map-ℤ-Mod :
+  (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →
+  (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) →
+  (f ∘ pred-ℤ-Mod k) ~ (pred-ℤ-Mod k ∘ f)
+preserves-pred-preserves-succ-map-ℤ-Mod k f H x =
+  ( inv (isretr-pred-ℤ-Mod k (f (pred-ℤ-Mod k x)))) ∙
+  ( ap
+    ( pred-ℤ-Mod k)
+    ( ( inv (H (pred-ℤ-Mod k x))) ∙
+      ( ap f (issec-pred-ℤ-Mod k x))))
+
+preserves-add-preserves-succ-map-ℤ-Mod :
+  (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →
+  (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) → (x : ℤ-Mod k) →
+  (f ∘ add-ℤ-Mod k x) ~ (add-ℤ-Mod k x ∘ f)
+preserves-add-preserves-succ-map-ℤ-Mod k f H x = {!!}
+
 preserves-pred-preserves-succ-map-ℤ :
   (f : ℤ → ℤ) → (f ∘ succ-ℤ) ~ (succ-ℤ ∘ f) → (f ∘ pred-ℤ) ~ (pred-ℤ ∘ f)
 preserves-pred-preserves-succ-map-ℤ f H x =
@@ -287,8 +304,6 @@ isretr-equiv-Eq-Cyclic k e =
     ( equiv-Eq-Cyclic k (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e))
     ( e)
     ( λ x →
-      ( inv
-        {! preserves-add-preserves-!}) ∙
       {!!})
 
 -- isretr-equiv-Eq-Cyclic :
