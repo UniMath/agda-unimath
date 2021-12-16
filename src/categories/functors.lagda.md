@@ -49,6 +49,29 @@ module _ {l1 l2 l3 l4 : Level}
                              → respects-id-Precat C D (obj-functor-Precat F) (hom-functor-Precat F)
   respects-id-functor-Precat F = pr2 (pr2 (pr2 F))
 
+module _ {l1 l2 l3 l4 : Level}
+  (C : Cat l1 l2)
+  (D : Cat l3 l4) where
+
+  functor-Cat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  functor-Cat = functor-Precat (precat-Cat C) (precat-Cat D)
+
+  obj-functor-Cat : functor-Cat → obj-Cat C → obj-Cat D
+  obj-functor-Cat = pr1
+
+  hom-functor-Cat : (F : functor-Cat)
+                  → (x y : obj-Cat C)
+                  → (f : type-hom-Cat C x y)
+                  → type-hom-Cat D (obj-functor-Cat F x) (obj-functor-Cat F y)
+  hom-functor-Cat F = pr1 (pr2 F)
+
+  respects-comp-functor-Cat : (F : functor-Cat)
+                            → respects-comp-Precat (precat-Cat C) (precat-Cat D) (obj-functor-Cat F) (hom-functor-Cat F)
+  respects-comp-functor-Cat F = respects-comp-functor-Precat (precat-Cat C) (precat-Cat D) F
+
+  respects-id-functor-Cat : (F : functor-Cat)
+                          → respects-id-Precat (precat-Cat C) (precat-Cat D) (obj-functor-Cat F) (hom-functor-Cat F)
+  respects-id-functor-Cat F = respects-id-functor-Precat (precat-Cat C) (precat-Cat D) F
 
 {-
 TODO:
