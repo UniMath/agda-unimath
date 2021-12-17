@@ -249,11 +249,25 @@ preserves-pred-preserves-succ-map-ℤ-Mod k f H x =
     ( ( inv (H (pred-ℤ-Mod k x))) ∙
       ( ap f (issec-pred-ℤ-Mod k x))))
 
-preserves-add-preserves-succ-map-ℤ-Mod :
+compute-map-preserves-succ-map-ℤ-Mod' :
+  (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) → (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) →
+  (x : ℤ) → Id (f (mod-ℤ k x)) (add-ℤ-Mod k (f (zero-ℤ-Mod k)) (mod-ℤ k x))
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inl zero-ℕ) =
+  ( ap f (preserves-predecessor-mod-ℤ k zero-ℤ)) ∙
+  ( ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k zero-ℤ)) ∙
+    ( ( ap (pred-ℤ-Mod k) (ap f (mod-zero-ℤ k) ∙ inv (left-unit-law-add-ℤ-Mod k (f (zero-ℤ-Mod k))))) ∙
+      {! is-add-neg-one-pred-ℤ-Mod!}))
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inl (succ-ℕ x)) = {!!}
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr x) = {!!}
+
+{-
+preserves-add-preserves-succ-map-ℤ-Mod' :
   (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →
-  (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) → (x : ℤ-Mod k) →
-  (f ∘ add-ℤ-Mod k x) ~ (add-ℤ-Mod k x ∘ f)
-preserves-add-preserves-succ-map-ℤ-Mod k f H x = {!!}
+  (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) → (x : ℤ) →
+  (f ∘ add-ℤ-Mod k (mod-ℤ k x)) ~ (add-ℤ-Mod k (mod-ℤ k x) ∘ f)
+preserves-add-preserves-succ-map-ℤ-Mod' k f H (inl x) y = {!x!}
+preserves-add-preserves-succ-map-ℤ-Mod' k f H (inr x) y = {!!}
+-}
 
 preserves-pred-preserves-succ-map-ℤ :
   (f : ℤ → ℤ) → (f ∘ succ-ℤ) ~ (succ-ℤ ∘ f) → (f ∘ pred-ℤ) ~ (pred-ℤ ∘ f)
@@ -304,7 +318,7 @@ isretr-equiv-Eq-Cyclic k e =
     ( equiv-Eq-Cyclic k (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e))
     ( e)
     ( λ x →
-      {!!})
+      {! !})
 
 -- isretr-equiv-Eq-Cyclic :
 --   (k : ℕ) → (equiv-Eq-Cyclic k ∘ Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k)) ~ id
