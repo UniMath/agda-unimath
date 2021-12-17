@@ -17,7 +17,7 @@ module _ {l1 l2 l3 l4 : Level}
 
   respects-comp-Precat : UU (l1 ⊔ l2 ⊔ l4)
   respects-comp-Precat = (x y z : obj-Precat C) (g : type-hom-Precat C y z) (f : type-hom-Precat C x y)
-                       → Id (Fmap x z (comp-Precat C x y z g f)) (comp-Precat D (F x) (F y) (F z) (Fmap y z g) (Fmap x y f))
+                       → Id (Fmap x z (g ∘⟦ C ⟧ f)) (Fmap y z g ∘⟦ D ⟧ Fmap x y f)
 
   respects-id-Precat : UU (l1 ⊔ l4)
   respects-id-Precat = (x : obj-Precat C) → Id (Fmap x x (id-Precat C x)) (id-Precat D (F x))
