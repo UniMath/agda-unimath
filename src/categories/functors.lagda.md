@@ -77,35 +77,47 @@ module _ {l1 l2 l3 l4 : Level}
 There is an identity functor on any category.
 
 ```agda
-functor-id-Cat : ∀ {l1 l2} (C : Cat l1 l2) → functor-Cat C C
-pr1 (functor-id-Cat C) = id
-pr1 (pr2 (functor-id-Cat C)) x y = id
-pr1 (pr2 (pr2 (functor-id-Cat C))) x y z g f = refl
-pr2 (pr2 (pr2 (functor-id-Cat C))) x = refl
+id-functor-Precat : ∀ {l1 l2} (C : Precat l1 l2) → functor-Precat C C
+pr1 (id-functor-Precat C) = id
+pr1 (pr2 (id-functor-Precat C)) x y = id
+pr1 (pr2 (pr2 (id-functor-Precat C))) x y z g f = refl
+pr2 (pr2 (pr2 (id-functor-Precat C))) x = refl
+
+id-functor-Cat : ∀ {l1 l2} (C : Cat l1 l2) → functor-Cat C C
+id-functor-Cat C = id-functor-Precat (precat-Cat C)
 ```
-  
+
 Two compatible functors can be composed.
 
 ```agda
-functor-comp-Cat : ∀ {l1 l2 l3 l4 l5 l6}
+comp-functor-Precat : ∀ {l1 l2 l3 l4 l5 l6}
+                    → (C : Precat l1 l2)
+                    → (D : Precat l3 l4)
+                    → (E : Precat l5 l6)
+                    → (G : functor-Precat D E)
+                    → (F : functor-Precat C D)
+                    → functor-Precat C E
+pr1 (comp-functor-Precat C D E G F) = obj-functor-Precat D E G ∘ obj-functor-Precat C D F
+pr1 (pr2 (comp-functor-Precat C D E G F)) x y =
+  hom-functor-Precat D E G (obj-functor-Precat C D F x) (obj-functor-Precat C D F y) ∘ hom-functor-Precat C D F x y
+pr1 (pr2 (pr2 (comp-functor-Precat C D E G F))) x y z g f =
+    ap (hom-functor-Precat D E G (obj-functor-Precat C D F x) (obj-functor-Precat C D F z))
+       (respects-comp-functor-Precat C D F x y z g f)
+  ∙ respects-comp-functor-Precat D E G (obj-functor-Precat C D F x) (obj-functor-Precat C D F y) (obj-functor-Precat C D F z)
+      (hom-functor-Precat C D F y z g) (hom-functor-Precat C D F x y f)
+pr2 (pr2 (pr2 (comp-functor-Precat C D E G F))) x =
+    ap (hom-functor-Precat D E G (obj-functor-Precat C D F x) (obj-functor-Precat C D F x))
+       (respects-id-functor-Precat C D F x)
+  ∙ respects-id-functor-Precat D E G (obj-functor-Precat C D F x)
+
+comp-functor-Cat : ∀ {l1 l2 l3 l4 l5 l6}
                  → (C : Cat l1 l2)
                  → (D : Cat l3 l4)
                  → (E : Cat l5 l6)
                  → (G : functor-Cat D E)
                  → (F : functor-Cat C D)
                  → functor-Cat C E
-pr1 (functor-comp-Cat C D E G F) = obj-functor-Cat D E G ∘ obj-functor-Cat C D F
-pr1 (pr2 (functor-comp-Cat C D E G F)) x y =
-  hom-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F y) ∘ hom-functor-Cat C D F x y
-pr1 (pr2 (pr2 (functor-comp-Cat C D E G F))) x y z g f =
-    ap (hom-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F z))
-       (respects-comp-functor-Cat C D F x y z g f)
-  ∙ respects-comp-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F y) (obj-functor-Cat C D F z)
-      (hom-functor-Cat C D F y z g) (hom-functor-Cat C D F x y f)
-pr2 (pr2 (pr2 (functor-comp-Cat C D E G F))) x =
-    ap (hom-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F x))
-       (respects-id-functor-Cat C D F x)
-  ∙ respects-id-functor-Cat D E G (obj-functor-Cat C D F x)
+comp-functor-Cat C D E G F = comp-functor-Precat (precat-Cat C) (precat-Cat D) (precat-Cat E) G F
 ```
 
 
