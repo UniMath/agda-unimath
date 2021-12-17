@@ -32,7 +32,7 @@ module _ {l1 l2 l3 l4}
   components-nat-trans-Precat = pr1
 
   is-nat-iso-Precat : nat-trans-Precat → UU (l1 ⊔ l4)
-  is-nat-iso-Precat γ = (x : obj-Precat C) → is-iso-Precat D (obj-functor-Precat C D F x) (obj-functor-Precat C D G x) (components-nat-trans-Precat γ x)
+  is-nat-iso-Precat γ = (x : obj-Precat C) → is-iso-Precat D (components-nat-trans-Precat γ x)
 
   nat-iso-Precat : UU (l1 ⊔ l2 ⊔ l4)
   nat-iso-Precat =
