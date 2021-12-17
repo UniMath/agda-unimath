@@ -21,6 +21,15 @@ module _ {l1 l2 l3 l4}
   is-nat-trans-Precat γ = {x y : obj-Precat C} (f : type-hom-Precat C x y)
                         → Id (hom-functor-Precat C D G f ∘⟦ D ⟧ γ x) (γ y ∘⟦ D ⟧ hom-functor-Precat C D F f)
 
+  is-prop-is-nat-trans-Precat : (γ : (x : obj-Precat C) → type-hom-Precat D (obj-functor-Precat C D F x) (obj-functor-Precat C D G x))
+                              → is-prop (is-nat-trans-Precat γ)
+  is-prop-is-nat-trans-Precat γ =
+    is-prop-Π' (λ x →
+      is-prop-Π' (λ y →
+        is-prop-Π (λ f →
+          is-set-type-hom-Precat D (obj-functor-Precat C D F x) (obj-functor-Precat C D G y)
+                                   (hom-functor-Precat C D G f ∘⟦ D ⟧ γ x) (γ y ∘⟦ D ⟧ hom-functor-Precat C D F f))))
+
   nat-trans-Precat : UU (l1 ⊔ l2 ⊔ l4)
   nat-trans-Precat =
     Σ ((x : obj-Precat C) → type-hom-Precat D (obj-functor-Precat C D F x) (obj-functor-Precat C D G x))
@@ -33,6 +42,10 @@ module _ {l1 l2 l3 l4}
 
   is-nat-iso-Precat : nat-trans-Precat → UU (l1 ⊔ l4)
   is-nat-iso-Precat γ = (x : obj-Precat C) → is-iso-Precat D (components-nat-trans-Precat γ x)
+
+  is-prop-is-nat-iso-Precat : (γ : nat-trans-Precat) → is-prop (is-nat-iso-Precat γ)
+  is-prop-is-nat-iso-Precat γ =
+    is-prop-Π (λ x → is-prop-is-iso-Precat D (components-nat-trans-Precat γ x))
 
   nat-iso-Precat : UU (l1 ⊔ l2 ⊔ l4)
   nat-iso-Precat =
