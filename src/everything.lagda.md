@@ -5,6 +5,7 @@ module everything where
 open import categories.categories
 open import categories.functors
 open import categories
+open import categories.natural-transformations
 open import foundations.00-preamble
 open import foundations.02-pi
 open import foundations.03-natural-numbers
