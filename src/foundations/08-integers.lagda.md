@@ -872,6 +872,50 @@ right-inverse-law-add-ℤ-Mod :
 right-inverse-law-add-ℤ-Mod zero-ℕ = right-inverse-law-add-ℤ
 right-inverse-law-add-ℤ-Mod (succ-ℕ k) = right-inverse-law-add-Fin
 
+left-successor-law-add-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) →
+  Id (add-ℤ-Mod k (succ-ℤ-Mod k x) y) (succ-ℤ-Mod k (add-ℤ-Mod k x y))
+left-successor-law-add-ℤ-Mod zero-ℕ = left-successor-law-add-ℤ
+left-successor-law-add-ℤ-Mod (succ-ℕ k) = left-successor-law-add-Fin
+
+right-successor-law-add-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) →
+  Id (add-ℤ-Mod k x (succ-ℤ-Mod k y)) (succ-ℤ-Mod k (add-ℤ-Mod k x y))
+right-successor-law-add-ℤ-Mod zero-ℕ = right-successor-law-add-ℤ
+right-successor-law-add-ℤ-Mod (succ-ℕ k) = right-successor-law-add-Fin
+
+left-predecessor-law-add-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) →
+  Id (add-ℤ-Mod k (pred-ℤ-Mod k x) y) (pred-ℤ-Mod k (add-ℤ-Mod k x y))
+left-predecessor-law-add-ℤ-Mod zero-ℕ = left-predecessor-law-add-ℤ
+left-predecessor-law-add-ℤ-Mod (succ-ℕ k) = left-predecessor-law-add-Fin
+
+right-predecessor-law-add-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) →
+  Id (add-ℤ-Mod k x (pred-ℤ-Mod k y)) (pred-ℤ-Mod k (add-ℤ-Mod k x y))
+right-predecessor-law-add-ℤ-Mod zero-ℕ = right-predecessor-law-add-ℤ
+right-predecessor-law-add-ℤ-Mod (succ-ℕ k) = right-predecessor-law-add-Fin
+
+is-add-one-succ-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (succ-ℤ-Mod k x) (add-ℤ-Mod k (one-ℤ-Mod k) x)
+is-add-one-succ-ℤ-Mod zero-ℕ = is-add-one-succ-ℤ
+is-add-one-succ-ℤ-Mod (succ-ℕ k) = is-add-one-succ-Fin
+
+is-add-one-succ-ℤ-Mod' :
+  (k : ℕ) (x : ℤ-Mod k) → Id (succ-ℤ-Mod k x) (add-ℤ-Mod k x (one-ℤ-Mod k))
+is-add-one-succ-ℤ-Mod' zero-ℕ = is-add-one-succ-ℤ'
+is-add-one-succ-ℤ-Mod' (succ-ℕ k) = is-add-one-succ-Fin'
+
+is-add-neg-one-pred-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (pred-ℤ-Mod k x) (add-ℤ-Mod k (neg-one-ℤ-Mod k) x)
+is-add-neg-one-pred-ℤ-Mod zero-ℕ = is-add-neg-one-pred-ℤ
+is-add-neg-one-pred-ℤ-Mod (succ-ℕ k) = is-add-neg-one-pred-Fin
+
+is-add-neg-one-pred-ℤ-Mod' :
+  (k : ℕ) (x : ℤ-Mod k) → Id (pred-ℤ-Mod k x) (add-ℤ-Mod k x (neg-one-ℤ-Mod k))
+is-add-neg-one-pred-ℤ-Mod' zero-ℕ = is-add-neg-one-pred-ℤ'
+is-add-neg-one-pred-ℤ-Mod' (succ-ℕ k) = is-add-neg-one-pred-Fin'
+
 mul-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
 mul-ℤ-Mod zero-ℕ = mul-ℤ
 mul-ℤ-Mod (succ-ℕ k) = mul-Fin
@@ -918,6 +962,16 @@ right-distributive-mul-add-ℤ-Mod :
      ( add-ℤ-Mod k (mul-ℤ-Mod k x z) (mul-ℤ-Mod k y z))
 right-distributive-mul-add-ℤ-Mod zero-ℕ = right-distributive-mul-add-ℤ
 right-distributive-mul-add-ℤ-Mod (succ-ℕ k) = right-distributive-mul-add-Fin
+
+is-mul-neg-one-neg-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (neg-ℤ-Mod k x) (mul-ℤ-Mod k (neg-one-ℤ-Mod k) x)
+is-mul-neg-one-neg-ℤ-Mod zero-ℕ = is-mul-neg-one-neg-ℤ
+is-mul-neg-one-neg-ℤ-Mod (succ-ℕ k) = is-mul-neg-one-neg-Fin
+
+is-mul-neg-one-neg-ℤ-Mod' :
+  (k : ℕ) (x : ℤ-Mod k) → Id (neg-ℤ-Mod k x) (mul-ℤ-Mod k x (neg-one-ℤ-Mod k))
+is-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-mul-neg-one-neg-ℤ'
+is-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin'
 
 -- We introduce the quotient map ℕ → ℤ-Mod k
 
@@ -966,7 +1020,7 @@ preserves-predecessor-mod-ℤ (succ-ℕ k) (inl x) =
 preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inl star)) =
   ( is-neg-one-neg-one-Fin) ∙
   ( ( inv (left-unit-law-add-Fin neg-one-Fin)) ∙
-    ( inv (is-add-neg-one-pred-Fin zero-Fin)))
+    ( inv (is-add-neg-one-pred-Fin' zero-Fin)))
 preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) =
   inv
     ( ( ap pred-Fin (preserves-successor-mod-ℤ (succ-ℕ k) zero-ℤ)) ∙
@@ -979,7 +1033,7 @@ mod-neg-one-ℤ zero-ℕ = refl
 mod-neg-one-ℤ (succ-ℕ k) =
   ( neg-succ-Fin zero-Fin) ∙
   ( ( ap pred-Fin neg-zero-Fin) ∙
-    ( ( is-add-neg-one-pred-Fin zero-Fin) ∙
+    ( ( is-add-neg-one-pred-Fin' zero-Fin) ∙
       ( left-unit-law-add-Fin neg-one-Fin)))
 
 preserves-add-mod-ℤ :
@@ -989,8 +1043,7 @@ preserves-add-mod-ℤ zero-ℕ x y = refl
 preserves-add-mod-ℤ (succ-ℕ k) (inl zero-ℕ) y =
   ( preserves-predecessor-mod-ℤ (succ-ℕ k) y) ∙
   ( ( is-add-neg-one-pred-Fin (mod-ℤ (succ-ℕ k) y)) ∙
-    ( ( commutative-add-Fin (mod-ℤ (succ-ℕ k) y) neg-one-Fin) ∙
-      ( ap (add-Fin' (mod-ℤ (succ-ℕ k) y)) (inv (mod-neg-one-ℤ (succ-ℕ k))))))
+    ( ap (add-Fin' (mod-ℤ (succ-ℕ k) y)) (inv (mod-neg-one-ℤ (succ-ℕ k)))))
 preserves-add-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) y =
   ( preserves-predecessor-mod-ℤ (succ-ℕ k) (add-ℤ (inl x) y)) ∙
   ( ( ap pred-Fin (preserves-add-mod-ℤ (succ-ℕ k) (inl x) y)) ∙

@@ -558,6 +558,24 @@ abstract
   right-successor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
     ap succ-ℤ (right-successor-law-add-ℤ (inr (inr x)) y)
 
+abstract
+  is-add-one-succ-ℤ' : (x : ℤ) → Id (succ-ℤ x) (add-ℤ x one-ℤ)
+  is-add-one-succ-ℤ' x =
+    inv (ap succ-ℤ (right-unit-law-add-ℤ x)) ∙
+    inv (right-successor-law-add-ℤ x zero-ℤ)
+
+  is-add-one-succ-ℤ : (x : ℤ) → Id (succ-ℤ x) (add-ℤ one-ℤ x)
+  is-add-one-succ-ℤ x = inv (left-successor-law-add-ℤ zero-ℤ x)
+
+  is-add-neg-one-pred-ℤ : (x : ℤ) → Id (pred-ℤ x) (add-ℤ neg-one-ℤ x)
+  is-add-neg-one-pred-ℤ x =
+    inv (left-predecessor-law-add-ℤ zero-ℤ x)
+
+  is-add-neg-one-pred-ℤ' : (x : ℤ) → Id (pred-ℤ x) (add-ℤ x neg-one-ℤ)
+  is-add-neg-one-pred-ℤ' x =
+    inv (ap pred-ℤ (right-unit-law-add-ℤ x)) ∙
+    inv (right-predecessor-law-add-ℤ x zero-ℤ)
+
 -- Exercise 5.7 (c)
 
 abstract
@@ -945,6 +963,13 @@ interchange-law-mul-mul-ℤ =
     mul-ℤ
     commutative-mul-ℤ
     associative-mul-ℤ
+
+is-mul-neg-one-neg-ℤ : (x : ℤ) → Id (neg-ℤ x) (mul-ℤ neg-one-ℤ x)
+is-mul-neg-one-neg-ℤ x = refl
+
+is-mul-neg-one-neg-ℤ' : (x : ℤ) → Id (neg-ℤ x) (mul-ℤ x neg-one-ℤ)
+is-mul-neg-one-neg-ℤ' x =
+  is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
 
 --------------------------------------------------------------------------------
 
