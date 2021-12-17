@@ -1001,6 +1001,18 @@ mod-zero-ℤ : (k : ℕ) → Id (mod-ℤ k zero-ℤ) (zero-ℤ-Mod k)
 mod-zero-ℤ zero-ℕ = refl
 mod-zero-ℤ (succ-ℕ k) = refl
 
+mod-one-ℤ : (k : ℕ) → Id (mod-ℤ k one-ℤ) (one-ℤ-Mod k)
+mod-one-ℤ zero-ℕ = refl
+mod-one-ℤ (succ-ℕ k) = refl
+
+mod-neg-one-ℤ : (k : ℕ) → Id (mod-ℤ k neg-one-ℤ) (neg-one-ℤ-Mod k)
+mod-neg-one-ℤ zero-ℕ = refl
+mod-neg-one-ℤ (succ-ℕ k) =
+  ( neg-succ-Fin zero-Fin) ∙
+  ( ( ap pred-Fin neg-zero-Fin) ∙
+    ( ( is-add-neg-one-pred-Fin' zero-Fin) ∙
+      ( left-unit-law-add-Fin neg-one-Fin)))
+
 preserves-successor-mod-ℤ :
   (k : ℕ) (x : ℤ) → Id (mod-ℤ k (succ-ℤ x)) (succ-ℤ-Mod k (mod-ℤ k x))
 preserves-successor-mod-ℤ zero-ℕ x = refl
@@ -1027,14 +1039,6 @@ preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) =
       ( isretr-pred-Fin zero-Fin))
 preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) =
   inv (isretr-pred-Fin (succ-Fin (mod-succ-ℕ k x)))
-
-mod-neg-one-ℤ : (k : ℕ) → Id (mod-ℤ k neg-one-ℤ) (neg-one-ℤ-Mod k)
-mod-neg-one-ℤ zero-ℕ = refl
-mod-neg-one-ℤ (succ-ℕ k) =
-  ( neg-succ-Fin zero-Fin) ∙
-  ( ( ap pred-Fin neg-zero-Fin) ∙
-    ( ( is-add-neg-one-pred-Fin' zero-Fin) ∙
-      ( left-unit-law-add-Fin neg-one-Fin)))
 
 preserves-add-mod-ℤ :
   (k : ℕ) (x y : ℤ) →

@@ -255,10 +255,29 @@ compute-map-preserves-succ-map-ℤ-Mod' :
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inl zero-ℕ) =
   ( ap f (preserves-predecessor-mod-ℤ k zero-ℤ)) ∙
   ( ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k zero-ℤ)) ∙
-    ( ( ap (pred-ℤ-Mod k) (ap f (mod-zero-ℤ k) ∙ inv (left-unit-law-add-ℤ-Mod k (f (zero-ℤ-Mod k))))) ∙
-      {! is-add-neg-one-pred-ℤ-Mod!}))
-compute-map-preserves-succ-map-ℤ-Mod' k f H (inl (succ-ℕ x)) = {!!}
-compute-map-preserves-succ-map-ℤ-Mod' k f H (inr x) = {!!}
+    ( ( ap (pred-ℤ-Mod k) (ap f (mod-zero-ℤ k))) ∙
+      ( ( is-add-neg-one-pred-ℤ-Mod' k (f (zero-ℤ-Mod k))) ∙
+        ( ap (add-ℤ-Mod k (f (zero-ℤ-Mod k))) (inv (mod-neg-one-ℤ k))))))
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inl (succ-ℕ x)) =
+  ( ap f (preserves-predecessor-mod-ℤ k (inl x))) ∙
+  ( ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k (inl x))) ∙
+    ( ( ap
+        ( pred-ℤ-Mod k)
+        ( compute-map-preserves-succ-map-ℤ-Mod' k f H (inl x))) ∙
+      ( ( inv
+          ( right-predecessor-law-add-ℤ-Mod k
+            ( f (zero-ℤ-Mod k))
+            ( mod-ℤ k (inl x)))) ∙
+        ( ap
+          ( add-ℤ-Mod k (f (zero-ℤ-Mod k)))
+          ( inv (preserves-predecessor-mod-ℤ k (inl x)))))))
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl star)) =
+  ( ap f (mod-zero-ℤ k)) ∙
+  ( ( inv (right-unit-law-add-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
+    ( ap (add-ℤ-Mod k (f (zero-ℤ-Mod k))) (inv (mod-zero-ℤ k))))
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr zero-ℕ)) =
+  {!( ap f (mod-one-ℤ k!}
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr (succ-ℕ x))) = {!!}
 
 {-
 preserves-add-preserves-succ-map-ℤ-Mod' :
