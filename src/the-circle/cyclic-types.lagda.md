@@ -276,17 +276,32 @@ compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl star)) =
   ( ( inv (right-unit-law-add-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
     ( ap (add-ℤ-Mod k (f (zero-ℤ-Mod k))) (inv (mod-zero-ℤ k))))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr zero-ℕ)) =
-  {!( ap f (mod-one-ℤ k!}
-compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr (succ-ℕ x))) = {!!}
+   ( ap f (preserves-successor-mod-ℤ k zero-ℤ)) ∙
+   ( ( H (mod-ℤ k zero-ℤ)) ∙
+     ( ( is-add-one-succ-ℤ-Mod' k (f (mod-ℤ k zero-ℤ))) ∙
+       ( ap-add-ℤ-Mod k (ap f (mod-zero-ℤ k)) (inv (mod-one-ℤ k)))))
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr (succ-ℕ x))) =
+  ( ap f (preserves-successor-mod-ℤ k (inr (inr x)))) ∙
+  ( ( H (mod-ℤ k (inr (inr x)))) ∙
+    ( ( ap
+        ( succ-ℤ-Mod k)
+        ( compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr x)))) ∙
+      ( ( inv
+          ( right-successor-law-add-ℤ-Mod k
+            ( f (zero-ℤ-Mod k))
+            ( mod-ℤ k (inr (inr x))))) ∙
+        ( ap
+          ( add-ℤ-Mod k (f (zero-ℤ-Mod k)))
+          ( inv (preserves-successor-mod-ℤ k (inr (inr x))))))))
 
-{-
-preserves-add-preserves-succ-map-ℤ-Mod' :
-  (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →
-  (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f) → (x : ℤ) →
-  (f ∘ add-ℤ-Mod k (mod-ℤ k x)) ~ (add-ℤ-Mod k (mod-ℤ k x) ∘ f)
-preserves-add-preserves-succ-map-ℤ-Mod' k f H (inl x) y = {!x!}
-preserves-add-preserves-succ-map-ℤ-Mod' k f H (inr x) y = {!!}
--}
+compute-map-preserves-succ-map-ℤ-Mod :
+  (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) (H : (f ∘ succ-ℤ-Mod k) ~ (succ-ℤ-Mod k ∘ f))
+  (x : ℤ-Mod k) →
+  Id (f x) (add-ℤ-Mod k (f (zero-ℤ-Mod k)) x)
+compute-map-preserves-succ-map-ℤ-Mod k f H x =
+  ( ap f (inv (issec-int-ℤ-Mod k x))) ∙
+  ( ( compute-map-preserves-succ-map-ℤ-Mod' k f H (int-ℤ-Mod k x)) ∙
+    ( ap (add-ℤ-Mod k (f (zero-ℤ-Mod k))) (issec-int-ℤ-Mod k x)))
 
 preserves-pred-preserves-succ-map-ℤ :
   (f : ℤ → ℤ) → (f ∘ succ-ℤ) ~ (succ-ℤ ∘ f) → (f ∘ pred-ℤ) ~ (pred-ℤ ∘ f)
@@ -337,7 +352,7 @@ isretr-equiv-Eq-Cyclic k e =
     ( equiv-Eq-Cyclic k (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e))
     ( e)
     ( λ x →
-      {! !})
+      inv (compute-map-preserves-succ-map-ℤ-Mod k {!map-equiv-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k) e!} {!!} {!!}) ∙ {!!})
 
 -- isretr-equiv-Eq-Cyclic :
 --   (k : ℕ) → (equiv-Eq-Cyclic k ∘ Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k)) ~ id
