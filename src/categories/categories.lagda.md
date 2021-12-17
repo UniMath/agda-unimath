@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.categories where
+module categories.categories where
 
 open import foundations public
 
@@ -283,7 +283,23 @@ module _
   obj-Cat-1-Type : UU-1-Type l1
   pr1 obj-Cat-1-Type = obj-Cat
   pr2 obj-Cat-1-Type = is-1-type-obj-Cat
+```
 
+Some convenient notation.
+
+```agda
+implicit-comp-Precat : ∀ {l1 l2} (C : Precat l1 l2) {X Y Z : obj-Precat C}
+                     → type-hom-Precat C Y Z
+                     → type-hom-Precat C X Y
+                     → type-hom-Precat C X Z
+implicit-comp-Precat C {X} {Y} {Z} = comp-Precat C X Y Z
+
+syntax implicit-comp-Precat C g f = g ∘⟦ C ⟧ f
+```
+
+The category of sets and functions.
+
+```agda
 Set-Precat : (l : Level) → Precat (lsuc l) l
 pr1 (Set-Precat l) = UU-Set l
 pr1 (pr2 (Set-Precat l)) = hom-Set

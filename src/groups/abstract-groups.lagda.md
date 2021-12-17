@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module groups.abstract-groups where
 
-open import groups.categories public
+open import categories.categories public
 
 --------------------------------------------------------------------------------
 

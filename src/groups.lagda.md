@@ -7,7 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module groups where
 
-open import groups.categories public
 open import groups.abstract-groups public
 open import groups.abstract-abelian-groups public
 open import groups.abstract-group-actions public
