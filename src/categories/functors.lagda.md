@@ -72,10 +72,40 @@ module _ {l1 l2 l3 l4 : Level}
   respects-id-functor-Cat : (F : functor-Cat)
                           → respects-id-Precat (precat-Cat C) (precat-Cat D) (obj-functor-Cat F) (hom-functor-Cat F)
   respects-id-functor-Cat F = respects-id-functor-Precat (precat-Cat C) (precat-Cat D) F
+```
 
-{-
-TODO:
-  * Identity functor
-  * Composition of functors
-  * When is a functor an equivalence
--}
+There is an identity functor on any category.
+
+```agda
+functor-id-Cat : ∀ {l1 l2} (C : Cat l1 l2) → functor-Cat C C
+pr1 (functor-id-Cat C) = id
+pr1 (pr2 (functor-id-Cat C)) x y = id
+pr1 (pr2 (pr2 (functor-id-Cat C))) x y z g f = refl
+pr2 (pr2 (pr2 (functor-id-Cat C))) x = refl
+```
+  
+Two compatible functors can be composed.
+
+```agda
+functor-comp-Cat : ∀ {l1 l2 l3 l4 l5 l6}
+                 → (C : Cat l1 l2)
+                 → (D : Cat l3 l4)
+                 → (E : Cat l5 l6)
+                 → (G : functor-Cat D E)
+                 → (F : functor-Cat C D)
+                 → functor-Cat C E
+pr1 (functor-comp-Cat C D E G F) = obj-functor-Cat D E G ∘ obj-functor-Cat C D F
+pr1 (pr2 (functor-comp-Cat C D E G F)) x y =
+  hom-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F y) ∘ hom-functor-Cat C D F x y
+pr1 (pr2 (pr2 (functor-comp-Cat C D E G F))) x y z g f =
+    ap (hom-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F z))
+       (respects-comp-functor-Cat C D F x y z g f)
+  ∙ respects-comp-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F y) (obj-functor-Cat C D F z)
+      (hom-functor-Cat C D F y z g) (hom-functor-Cat C D F x y f)
+pr2 (pr2 (pr2 (functor-comp-Cat C D E G F))) x =
+    ap (hom-functor-Cat D E G (obj-functor-Cat C D F x) (obj-functor-Cat C D F x))
+       (respects-id-functor-Cat C D F x)
+  ∙ respects-id-functor-Cat D E G (obj-functor-Cat C D F x)
+```
+
+

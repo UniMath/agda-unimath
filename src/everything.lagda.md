@@ -3,6 +3,7 @@
 module everything where
 
 open import categories.categories
+open import categories.functors
 open import categories
 open import foundations.00-preamble
 open import foundations.02-pi
