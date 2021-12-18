@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module groups.abstract-groups where
 
-open import groups.categories public
+open import categories.categories public
 
 --------------------------------------------------------------------------------
 
@@ -227,13 +227,13 @@ right-unit-law-comp-hom-Semigroup
 Semigroup-Precat : (l : Level) → Precat (lsuc l) l
 pr1 (Semigroup-Precat l) = Semigroup l
 pr1 (pr2 (Semigroup-Precat l)) = hom-Semigroup
-pr1 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) = comp-hom-Semigroup
-pr2 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) = associative-comp-hom-Semigroup
+pr1 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) {G} {H} {K} = comp-hom-Semigroup G H K
+pr2 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) {G} {H} {K} {L} = associative-comp-hom-Semigroup G H K L
 pr1 (pr2 (pr2 (pr2 (Semigroup-Precat l)))) = id-hom-Semigroup
-pr1 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) =
-  left-unit-law-comp-hom-Semigroup
-pr2 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) =
-  right-unit-law-comp-hom-Semigroup
+pr1 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) {G} {H} =
+  left-unit-law-comp-hom-Semigroup G H
+pr2 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) {G} {H} =
+  right-unit-law-comp-hom-Semigroup G H
 
 {- We show that the precategory of semigroups is a category -}
 
@@ -957,11 +957,11 @@ right-unit-law-comp-hom-Group G H =
 Group-Precat : (l : Level) → Precat (lsuc l) l
 pr1 (Group-Precat l) = Group l
 pr1 (pr2 (Group-Precat l)) = hom-Group
-pr1 (pr1 (pr2 (pr2 (Group-Precat l)))) = comp-hom-Group
-pr2 (pr1 (pr2 (pr2 (Group-Precat l)))) = associative-comp-hom-Group
+pr1 (pr1 (pr2 (pr2 (Group-Precat l)))) {G} {H} {K} = comp-hom-Group G H K
+pr2 (pr1 (pr2 (pr2 (Group-Precat l)))) {G} {H} {K} {L} = associative-comp-hom-Group G H K L
 pr1 (pr2 (pr2 (pr2 (Group-Precat l)))) = id-hom-Group
-pr1 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) = left-unit-law-comp-hom-Group
-pr2 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) = right-unit-law-comp-hom-Group
+pr1 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) {G} {H} = left-unit-law-comp-hom-Group G H
+pr2 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) {G} {H} = right-unit-law-comp-hom-Group G H
 
 {- We show that the precategory of groups is a category -}
 
