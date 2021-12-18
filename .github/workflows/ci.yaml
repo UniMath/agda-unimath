@@ -1,5 +1,6 @@
 # CI workflow summary:
 # - build
+#   0. Cancel Previous Runs
 #   1. Branch caching
 #   2. Setup Haskell
 #   3. Add .cabal/bin into PATH
@@ -30,6 +31,10 @@ jobs:
         ghc: ["8.10.7"]
 
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
       - uses: actions/cache@v2
         name: Caching
         id: cache
