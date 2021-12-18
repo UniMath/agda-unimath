@@ -31,7 +31,7 @@ jobs:
         ghc: ["8.10.7"]
 
     steps:
-      - name: Cancel Previous Runs
+      - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
