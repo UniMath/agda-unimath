@@ -6,6 +6,7 @@ open import README
 open import categories
 open import categories.categories
 open import categories.functors
+open import categories.natural-transformations
 open import foundations
 open import foundations.00-preamble
 open import foundations.02-pi

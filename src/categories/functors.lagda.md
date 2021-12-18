@@ -19,8 +19,22 @@ module _ {l1 l2 l3 l4 : Level}
   respects-comp-Precat = {x y z : obj-Precat C} (g : type-hom-Precat C y z) (f : type-hom-Precat C x y)
                        → Id (Fmap (g ∘⟦ C ⟧ f)) (Fmap g ∘⟦ D ⟧ Fmap f)
 
+  is-prop-respects-comp-Precat : is-prop respects-comp-Precat
+  is-prop-respects-comp-Precat =
+    is-prop-Π' (λ x →
+      is-prop-Π' (λ y →
+        is-prop-Π' λ z →
+          is-prop-Π (λ g →
+            is-prop-Π λ f →
+              is-set-type-hom-Precat D (F x) (F z) (Fmap (g ∘⟦ C ⟧ f)) (Fmap g ∘⟦ D ⟧ Fmap f))))
+
   respects-id-Precat : UU (l1 ⊔ l4)
   respects-id-Precat = (x : obj-Precat C) → Id (Fmap (id-Precat C x)) (id-Precat D (F x))
+
+  is-prop-respects-id-Precat : is-prop respects-id-Precat
+  is-prop-respects-id-Precat =
+    is-prop-Π (λ x →
+      is-set-type-hom-Precat D (F x) (F x) (Fmap (id-Precat C x)) (id-Precat D (F x)))
 
 module _ {l1 l2 l3 l4 : Level}
   (C : Precat l1 l2)
