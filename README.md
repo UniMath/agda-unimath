@@ -3,15 +3,16 @@
 This repository is for a formalisation project in Agda of the symmetry book.
 
 ## Members of the formalisation project 
-Elisabeth Bonnevier, Pierre Cagne, Jonathan Cubides Prieto, Egbert Rijke.
+Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
 
 ## Structure of the library
 
 The Agda source of the library can be found in the folder `src`. This folder contains several subfolders:
 1. The `foundations` folder contains a general development of the univalent foundations for mathematics. The material in this folder exceeds the material in Chapter 2 of the symmetry book. The files of this library originate from the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
-2. The `the-circle` folder contains the material for Chapter 3.
-3. The `groups` folder contains the material for Chapter 4.
-4. The `subgroups` folder contains the material for Chapter 5.
+2. The `categories` folder contains some category theory.
+3. The `the-circle` folder contains the material for Chapter 3.
+4. The `groups` folder contains the material for Chapter 4.
+5. The `subgroups` folder contains the material for Chapter 5.
 
 Although the folders are roughly organised according to the chapters of the Symmetry Book, we don't commit to closely following the sectioning in the book.
 
