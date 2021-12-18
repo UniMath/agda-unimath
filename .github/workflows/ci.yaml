@@ -1,6 +1,6 @@
 # CI workflow summary:
 # - build
-#   1. Caching
+#   1. Branch caching
 #   2. Setup Haskell
 #   3. Add .cabal/bin into PATH
 #   4. Checkout Agda repository
@@ -41,11 +41,11 @@ jobs:
             dist-newstyle
             agda
             main/_build
-          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**') }}
+          key: ${{ runner.os }}-build-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-
-            ${{ runner.os }}-build-${{ matrix.agda }}-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-
+            ${{ runner.os }}-build-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-build-${{ github.ref }}-
 
       - uses: haskell/actions/setup@v1
         name: Setup Haskell
