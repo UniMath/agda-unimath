@@ -1,4 +1,6 @@
-# Agda formalisation of the Symmetry Book [[![type checking](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml))
+# Agda formalisation of the Symmetry Book 
+
+[![CI](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/pages/pages-build-deployment)
 
 This repository is for a formalisation project in Agda of the Symmetry Book.
 
