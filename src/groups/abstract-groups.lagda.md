@@ -1043,13 +1043,12 @@ module _
 Group-Cat : (l : Level) → Cat (lsuc l) l
 pr1 (Group-Cat l) = Group-Precat l
 pr2 (Group-Cat l) = is-category-Group
+```
+### Examples of groups
 
---------------------------------------------------------------------------------
+#### The group of integers
 
-{- Examples of group  -}
-
-{- The group of integers. -}
-
+```agda
 ℤ-Semigroup : Semigroup lzero
 pr1 ℤ-Semigroup = ℤ-Set
 pr1 (pr2 ℤ-Semigroup) = add-ℤ
@@ -1063,9 +1062,11 @@ pr2 (pr2 (pr1 (pr2 ℤ-Group))) = right-unit-law-add-ℤ
 pr1 (pr2 (pr2 ℤ-Group)) = neg-ℤ
 pr1 (pr2 (pr2 (pr2 ℤ-Group))) = left-inverse-law-add-ℤ
 pr2 (pr2 (pr2 (pr2 ℤ-Group))) = right-inverse-law-add-ℤ
+```
 
-{- The group of integers modulo k -}
+#### The group of integers modulo k
 
+```agda
 ℤ-Mod-Semigroup : (k : ℕ) → Semigroup lzero
 pr1 (ℤ-Mod-Semigroup k) = ℤ-Mod-Set k
 pr1 (pr2 (ℤ-Mod-Semigroup k)) = add-ℤ-Mod k
@@ -1079,11 +1080,11 @@ pr2 (pr2 (pr1 (pr2 (ℤ-Mod-Group k)))) = right-unit-law-add-ℤ-Mod k
 pr1 (pr2 (pr2 (ℤ-Mod-Group k))) = neg-ℤ-Mod k
 pr1 (pr2 (pr2 (pr2 (ℤ-Mod-Group k)))) = left-inverse-law-add-ℤ-Mod k
 pr2 (pr2 (pr2 (pr2 (ℤ-Mod-Group k)))) = right-inverse-law-add-ℤ-Mod k
+```
 
---------------------------------------------------------------------------------
+#### The group of loops in a 1-type
 
-{- The loop space of a 1-type as a group. -}
-
+```agda
 loop-space :
   {l : Level} {A : UU l} → A → UU l
 loop-space a = Id a a
@@ -1123,20 +1124,20 @@ loop-space-1-type-Group :
   {l : Level} (A : UU-1-Type l) (a : type-1-Type A) → Group l
 loop-space-1-type-Group A a =
   loop-space-Group (type-1-Type A) a (is-1-type-type-1-Type A a a)
+```
 
---------------------------------------------------------------------------------
+#### The symmetric group on a set
 
-{- We introduce the automorphism group on a set X. -}
+```agda
+set-symmetric-Group : {l : Level} (X : UU-Set l) → UU-Set l
+set-symmetric-Group X = aut-Set X
 
-aut-Set :
-  {l : Level} (X : UU-Set l) → UU-Set l
-aut-Set X = equiv-Set X X
+type-symmetric-Group : {l : Level} (X : UU-Set l) → UU l
+type-symmetric-Group X = type-Set (set-symmetric-Group X)
 
-associative-comp-equiv :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
-  (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
-  Id ((g ∘e f) ∘e e) (g ∘e (f ∘e e))
-associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
+is-set-type-symmetric-Group :
+  {l : Level} (X : UU-Set l) → is-set (type-symmetric-Group X)
+is-set-type-symmetric-Group X = is-set-type-Set (set-symmetric-Group X)
 
 has-associative-mul-aut-Set :
   {l : Level} (X : UU-Set l) → has-associative-mul-Set (aut-Set X)
@@ -1145,36 +1146,14 @@ pr2 (has-associative-mul-aut-Set X) e f g = associative-comp-equiv g f e
 
 symmetric-Semigroup :
   {l : Level} (X : UU-Set l) → Semigroup l
-pr1 (symmetric-Semigroup X) = aut-Set X
+pr1 (symmetric-Semigroup X) = set-symmetric-Group X
 pr2 (symmetric-Semigroup X) = has-associative-mul-aut-Set X
-
-left-unit-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (id-equiv ∘e e) e
-left-unit-law-equiv e = eq-htpy-equiv refl-htpy
-
-right-unit-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e id-equiv) e
-right-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 is-unital-symmetric-Semigroup :
   {l : Level} (X : UU-Set l) → is-unital (symmetric-Semigroup X)
 pr1 (is-unital-symmetric-Semigroup X) = id-equiv
 pr1 (pr2 (is-unital-symmetric-Semigroup X)) = left-unit-law-equiv
 pr2 (pr2 (is-unital-symmetric-Semigroup X)) = right-unit-law-equiv
-
-left-inverse-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id ((inv-equiv e) ∘e e) id-equiv
-left-inverse-law-equiv e =
-  eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
-
-right-inverse-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e (inv-equiv e)) id-equiv
-right-inverse-law-equiv e =
-  eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
 is-group-symmetric-Semigroup' :
   {l : Level} (X : UU-Set l) →
