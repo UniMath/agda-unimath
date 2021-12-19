@@ -85,8 +85,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ macOS-latest , ubuntu-latest ]
         agda: ["v2.6.2"]
-        ghc: ["8.10.7"]  
+        ghc: ["8.10.7"]
     steps:
       - uses: actions/cache@v2 
         id: cache-build
