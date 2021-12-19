@@ -83,7 +83,7 @@ jobs:
   check:
     needs: build
     runs-on: ${{ matrix.os }}
-     strategy:
+    strategy:
       matrix:
         agda: ["v2.6.2"]
         ghc: ["8.10.7"]  
@@ -126,7 +126,7 @@ jobs:
           make check
 
   website:
-    needs: build
+    needs: check
     runs-on: macOS-latest
     if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     strategy:
@@ -140,12 +140,16 @@ jobs:
             ~/.cabal
             dist-newstyle
             agda
-            main/_build
           key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
       - name: Add .cabal/bin into PATH
         run:
           echo "$HOME/.cabal/bin" >> $GITHUB_PATH
         shell: bash
+      - uses: actions/cache@v2 
+        with:
+          path: main/_build
+          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
+
       - name: Checkout the main repository
         uses: actions/checkout@v2
         with:
@@ -160,7 +164,6 @@ jobs:
       - run: echo "# Test" | pandoc -t html
 
       - name: Generate HTML
-        if: steps.typecheck.outputs.cache-hit != 'true' 
         id: html
         run: |
           cd main
