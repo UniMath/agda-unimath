@@ -142,7 +142,7 @@ jobs:
             ~/.cabal
             dist-newstyle
             agda
-          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
+          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}
       - name: Add .cabal/bin into PATH
         run:
           echo "$HOME/.cabal/bin" >> $GITHUB_PATH
