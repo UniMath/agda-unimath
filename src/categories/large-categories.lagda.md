@@ -11,6 +11,7 @@ open import foundations public
 open import Agda.Primitive public
 
 record Large-Precat : Setω where
+  constructor make-Large-Precat
   field
     obj-Large-Precat :
       (l : Level) → UU (lsuc l)
