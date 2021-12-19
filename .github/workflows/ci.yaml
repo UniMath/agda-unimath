@@ -101,7 +101,10 @@ jobs:
         run:
           echo "$HOME/.cabal/bin" >> $GITHUB_PATH
         shell: bash
-
+      - name: Checkout the main repository
+        uses: actions/checkout@v2
+        with:
+          path: main
       - uses: actions/cache@v2
         if: steps.cache-agda-formalisation.outputs.cache-hit != 'true'
         env:
@@ -113,14 +116,8 @@ jobs:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-${{ github.ref }}-       
-
-      - name: Checkout the main repository
-        uses: actions/checkout@v2
-        with:
-          path: main
-
       - name: Verify the whole formalisation
-        if: steps.cache-build.outputs.cache-hit != 'true'
+        if: steps.cache-agda-formalisation.cache-hit != 'true'
         id: typecheck
         run: |
           cd main
@@ -135,6 +132,10 @@ jobs:
         agda: ["v2.6.2"]
         ghc: ["8.10.7"]  
     steps:
+      - name: Checkout the main repository
+        uses: actions/checkout@v2
+        with:
+          path: main
       - uses: actions/cache@v2 
         with:
           path: |
@@ -150,12 +151,6 @@ jobs:
         with:
           path: main/_build
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
-
-      - name: Checkout the main repository
-        uses: actions/checkout@v2
-        with:
-          path: main
-
       - name: Setup Graphviz to generate the Agda dependency graph
         uses: ts-graphviz/setup-graphviz@v1
 
