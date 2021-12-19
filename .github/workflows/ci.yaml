@@ -103,7 +103,7 @@ jobs:
         shell: bash
 
       - uses: actions/cache@v2
-        if: steps.cache-build.outputs.cache-hit != 'true'
+        if: steps.cache-agda-formalisation.outputs.cache-hit != 'true'
         env:
           cache-name: cache-agda-formalisation
         with:
