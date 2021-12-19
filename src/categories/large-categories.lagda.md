@@ -41,4 +41,14 @@ record Large-Precat : Setω where
       (f : type-Set (hom-Large-Precat X Y)) →
       Id ( comp-hom-Large-Precat X X Y f (id-hom-Large-Precat X)) f
 
+open Large-Precat public
+
+Set-Large-Precat : Large-Precat
+obj-Large-Precat Set-Large-Precat = UU-Set
+hom-Large-Precat Set-Large-Precat = hom-Set
+comp-hom-Large-Precat Set-Large-Precat X Y Z g f = g ∘ f
+id-hom-Large-Precat Set-Large-Precat X = id
+assocative-comp-hom-Large-Precat Set-Large-Precat X Y Z W h g f = refl
+left-unit-law-comp-hom-Large-Precat Set-Large-Precat X Y f = refl
+right-unit-law-comp-hom-Large-Precat Set-Large-Precat X Y f = refl
 ```
