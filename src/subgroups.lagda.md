@@ -7,5 +7,5 @@ title: Formalisation of the Symmetry Book
 
 module subgroups where
 
-open import subgroups.abstrZZZZZact-subgroups public
+open import subgroups.abstract-subgroups public
 ```
