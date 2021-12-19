@@ -35,23 +35,28 @@ open import foundations.15-image public
 open import foundations.16-finite-types public
 open import foundations.17-univalence public
 open import foundations.18-set-quotients public
-open import foundations.23-pullbacks
-open import foundations.24-pushouts
-open import foundations.25-cubical-diagrams
-open import foundations.26-descent
-open import foundations.26-id-pushout
-open import foundations.27-sequences
-open import foundations.W-types
-open import foundations.pointed-maps
-open import foundations.spaces
-open import categories
+open import foundations.23-pullbacks public
+open import foundations.24-pushouts public
+open import foundations.25-cubical-diagrams public
+open import foundations.26-descent public
+open import foundations.26-id-pushout public
+open import foundations.27-sequences public
+open import foundations.W-types public
+open import foundations.pointed-maps public
+open import foundations.spaces public
+open import categories.categories public
+open import categories.functors public
+open import categories.natural-transformations public
+open import categories.large-categories public
 ```
 
 ## Chapter 3 : The circle
 
 ```agda
 open import the-circle.the-circle public
+open import the-circle.universal-cover public
 open import the-circle.integers public
+open import the-circle.cyclic-types public
 open import the-circle.infinite-cyclic-types public
 ```
 
