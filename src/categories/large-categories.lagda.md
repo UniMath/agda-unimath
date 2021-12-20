@@ -125,7 +125,8 @@ module _
     is-prop-all-elements-equal (all-elements-equal-is-iso-hom-Large-Precat f)
 
   type-iso-Large-Precat : UU (l1 ⊔ l2)
-  type-iso-Large-Precat = Σ (type-hom-Large-Precat C X Y) is-iso-hom-Large-Precat
+  type-iso-Large-Precat =
+    Σ (type-hom-Large-Precat C X Y) is-iso-hom-Large-Precat
 
   is-set-type-iso-Large-Precat : is-set type-iso-Large-Precat
   is-set-type-iso-Large-Precat =
@@ -194,5 +195,7 @@ record Large-Cat : Setω where
   field
     precat-Large-Cat : Large-Precat
     is-category-Large-Cat : is-category-Large-Precat precat-Large-Cat
+
+open Large-Cat public
 
 ```

@@ -420,36 +420,31 @@ module _
       ( is-contr-total-equiv-Semigroup)
 
   id-iso-Semigroup : type-iso-Semigroup G G
-  pr1 id-iso-Semigroup = id-hom-Semigroup G
-  pr1 (pr2 id-iso-Semigroup) = id-hom-Semigroup G
-  pr1 (pr2 (pr2 id-iso-Semigroup)) =
-    left-unit-law-comp-hom-Semigroup G G (id-hom-Semigroup G)
-  pr2 (pr2 (pr2 id-iso-Semigroup)) =
-    right-unit-law-comp-hom-Semigroup G G (id-hom-Semigroup G)
+  id-iso-Semigroup = id-iso-Large-Precat Semigroup-Large-Precat G
 
   iso-eq-Semigroup : (H : Semigroup l) → Id G H → type-iso-Semigroup G H
-  iso-eq-Semigroup = iso-eq-Precat (Semigroup-Precat l) G
+  iso-eq-Semigroup = iso-eq-Large-Precat Semigroup-Large-Precat G
 
-  is-category-Semigroup :
-    (H : Semigroup l) → is-equiv (iso-eq-Semigroup H)
-  is-category-Semigroup =
-    fundamental-theorem-id G
-      ( id-iso-Semigroup)
-      ( is-contr-total-iso-Semigroup)
-      ( iso-eq-Semigroup)
+is-category-Semigroup :
+  is-category-Large-Precat Semigroup-Large-Precat
+is-category-Semigroup G =
+  fundamental-theorem-id G
+    ( id-iso-Semigroup G)
+    ( is-contr-total-iso-Semigroup G)
+    ( iso-eq-Semigroup G)
 
-  extensionality-Semigroup :
-    (H : Semigroup l) → Id G H ≃ type-iso-Semigroup G H
-  pr1 (extensionality-Semigroup H) = iso-eq-Semigroup H
-  pr2 (extensionality-Semigroup H) = is-category-Semigroup H
+extensionality-Semigroup :
+  {l : Level} (G H : Semigroup l) → Id G H ≃ type-iso-Semigroup G H
+pr1 (extensionality-Semigroup G H) = iso-eq-Semigroup G H
+pr2 (extensionality-Semigroup G H) = is-category-Semigroup G H
 
-  eq-iso-Semigroup :
-    (H : Semigroup l) → type-iso-Semigroup G H → Id G H
-  eq-iso-Semigroup H = map-inv-is-equiv (is-category-Semigroup H)
+eq-iso-Semigroup :
+  {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
+eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
-Semigroup-Cat : (l : Level) → Cat (lsuc l) l
-pr1 (Semigroup-Cat l) = Semigroup-Precat l
-pr2 (Semigroup-Cat l) = is-category-Semigroup
+Semigroup-Large-Cat : Large-Cat
+precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precat
+is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
 
 --------------------------------------------------------------------------------
 
