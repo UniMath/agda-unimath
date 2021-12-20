@@ -7,21 +7,14 @@ title: Formalisation of the Symmetry Book
 
 module groups.abstract-groups where
 
-open import categories.categories public
+open import categories public
+```
 
---------------------------------------------------------------------------------
+## Groups in Univalent Mathematics
 
--- Groups in univalent mathematics
+We first introduce semigroups, and then groups. We do this because the category of groups is a full subcategory of the category of semigroups. In particular, it is a proposition for a semigroup to be a group. Therefore this approach gives us in a straightforward way that equality of groups is equality of semigroups. This will be useful in showing that group isomorphisms are equivalent to identifications of groups.
 
---------------------------------------------------------------------------------
-
-{- We first introduce semigroups, and then groups. We do this because the
-   category of groups is a full subcategory of the category of semigroups.
-   In particular, it is a proposition for a semigroup to be a group. Therefore
-   this approach gives us in a straightforward way that equality of groups is 
-   equality of semigroups. This will be useful in showing that group 
-   isomorphisms are equivalent to identifications of groups. -}
-
+```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l
 has-associative-mul X =
   Σ (X → X → X) (λ μ → (x y z : X) → Id (μ (μ x y) z) (μ x (μ y z)))
@@ -224,15 +217,18 @@ right-unit-law-comp-hom-Semigroup
   eq-htpy-hom-Semigroup
     ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy
 
-Semigroup-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Semigroup-Precat l) = Semigroup l
-pr1 (pr2 (Semigroup-Precat l)) = hom-Semigroup
-pr1 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) {G} {H} {K} = comp-hom-Semigroup G H K
-pr2 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) {G} {H} {K} {L} = associative-comp-hom-Semigroup G H K L
-pr1 (pr2 (pr2 (pr2 (Semigroup-Precat l)))) = id-hom-Semigroup
-pr1 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) {G} {H} =
+Semigroup-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
+obj-Large-Precat Semigroup-Large-Precat = Semigroup
+hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
+comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} =
+  comp-hom-Semigroup G H K
+id-hom-Large-Precat Semigroup-Large-Precat {X = G} =
+  id-hom-Semigroup G
+associative-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-hom-Semigroup G H K L
+left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
   left-unit-law-comp-hom-Semigroup G H
-pr2 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) {G} {H} =
+right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
   right-unit-law-comp-hom-Semigroup G H
 
 {- We show that the precategory of semigroups is a category -}
@@ -242,57 +238,50 @@ module _
   where
   
   is-iso-hom-Semigroup : (f : type-hom-Semigroup G H) → UU (l1 ⊔ l2)
-  is-iso-hom-Semigroup f =
-    Σ ( type-hom-Semigroup H G) (λ g →
-      ( Id (comp-hom-Semigroup H G H f g) (id-hom-Semigroup H)) ×
-      ( Id (comp-hom-Semigroup G H G g f) (id-hom-Semigroup G)))
+  is-iso-hom-Semigroup f = is-iso-hom-Large-Precat Semigroup-Large-Precat G H f
 
   inv-is-iso-hom-Semigroup :
     (f : type-hom-Semigroup G H) →
     is-iso-hom-Semigroup f → type-hom-Semigroup H G
   inv-is-iso-hom-Semigroup f = pr1
 
-  iso-Semigroup : UU (l1 ⊔ l2)
-  iso-Semigroup = Σ (type-hom-Semigroup G H) is-iso-hom-Semigroup
+  type-iso-Semigroup : UU (l1 ⊔ l2)
+  type-iso-Semigroup = type-iso-Large-Precat Semigroup-Large-Precat G H
   
-  hom-iso-Semigroup : iso-Semigroup → type-hom-Semigroup G H
-  hom-iso-Semigroup = pr1
+  hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
+  hom-iso-Semigroup = hom-iso-Large-Precat Semigroup-Large-Precat G H
 
   is-iso-hom-iso-Semigroup :
-    (f : iso-Semigroup) → is-iso-hom-Semigroup (hom-iso-Semigroup f)
-  is-iso-hom-iso-Semigroup = pr2
+    (f : type-iso-Semigroup) → is-iso-hom-Semigroup (hom-iso-Semigroup f)
+  is-iso-hom-iso-Semigroup =
+    is-iso-hom-iso-Large-Precat Semigroup-Large-Precat G H
 
-  hom-inv-iso-Semigroup : iso-Semigroup → type-hom-Semigroup H G
-  hom-inv-iso-Semigroup f =
-    inv-is-iso-hom-Semigroup
-      ( hom-iso-Semigroup f)
-      ( is-iso-hom-iso-Semigroup f)
+  hom-inv-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup H G
+  hom-inv-iso-Semigroup = hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
-  abstract
-    all-elements-equal-is-iso-hom-Semigroup :
-      (f : type-hom-Semigroup G H) → all-elements-equal (is-iso-hom-Semigroup f)
-    all-elements-equal-is-iso-hom-Semigroup f
-      (pair g (pair issec isretr)) (pair g' (pair issec' isretr')) =
-      eq-subtype
-        ( λ h →
-          is-prop-prod
-            ( is-set-type-hom-Semigroup H H
-              ( comp-hom-Semigroup H G H f h)
-              ( id-hom-Semigroup H))
-            ( is-set-type-hom-Semigroup G G
-              ( comp-hom-Semigroup G H G h f)
-              ( id-hom-Semigroup G)))
-        ( ( inv (left-unit-law-comp-hom-Semigroup H G g)) ∙
-          ( ( inv (ap (λ h → comp-hom-Semigroup H G G h g) isretr')) ∙
-            ( ( associative-comp-hom-Semigroup H G H G g' f g) ∙
-              ( ( ap (comp-hom-Semigroup H H G g') issec) ∙
-                ( right-unit-law-comp-hom-Semigroup H G g')))))
+  issec-hom-inv-iso-Semigroup :
+    (f : type-iso-Semigroup) →
+    Id ( comp-hom-Semigroup H G H
+         ( hom-iso-Semigroup f)
+         ( hom-inv-iso-Semigroup f))
+       ( id-hom-Semigroup H)
+  issec-hom-inv-iso-Semigroup =
+    issec-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
+
+  isretr-hom-inv-iso-Semigroup :
+    (f : type-iso-Semigroup) →
+    Id ( comp-hom-Semigroup G H G
+         ( hom-inv-iso-Semigroup f)
+         ( hom-iso-Semigroup f))
+       ( id-hom-Semigroup G)
+  isretr-hom-inv-iso-Semigroup =
+    isretr-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
   abstract
     is-prop-is-iso-hom-Semigroup :
       (f : type-hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup f)
-    is-prop-is-iso-hom-Semigroup f =
-      is-prop-all-elements-equal (all-elements-equal-is-iso-hom-Semigroup f)
+    is-prop-is-iso-hom-Semigroup =
+      is-prop-is-iso-hom-Large-Precat Semigroup-Large-Precat G H
 
   abstract
     preserves-mul-map-inv-is-equiv-Semigroup :
@@ -344,7 +333,7 @@ module _
     Σ ( type-Semigroup G ≃ type-Semigroup H)
       ( preserves-mul-equiv-Semigroup G H)
 
-  equiv-iso-equiv-Semigroup : equiv-Semigroup ≃ iso-Semigroup
+  equiv-iso-equiv-Semigroup : equiv-Semigroup ≃ type-iso-Semigroup
   equiv-iso-equiv-Semigroup =
     ( equiv-total-subtype
       ( λ f → is-subtype-is-equiv (map-hom-Semigroup G H f))
@@ -406,44 +395,40 @@ module _
       ( pair (set-Semigroup G) id-equiv)
       ( is-contr-total-preserves-mul-id-Semigroup)
 
-  is-contr-total-iso-Semigroup : is-contr (Σ (Semigroup l) (iso-Semigroup G))
+  is-contr-total-iso-Semigroup :
+    is-contr (Σ (Semigroup l) (type-iso-Semigroup G))
   is-contr-total-iso-Semigroup =
     is-contr-equiv'
       ( Σ (Semigroup l) (equiv-Semigroup G))
       ( equiv-tot (equiv-iso-equiv-Semigroup G))
       ( is-contr-total-equiv-Semigroup)
 
-  id-iso-Semigroup : iso-Semigroup G G
-  pr1 id-iso-Semigroup = id-hom-Semigroup G
-  pr1 (pr2 id-iso-Semigroup) = id-hom-Semigroup G
-  pr1 (pr2 (pr2 id-iso-Semigroup)) =
-    left-unit-law-comp-hom-Semigroup G G (id-hom-Semigroup G)
-  pr2 (pr2 (pr2 id-iso-Semigroup)) =
-    right-unit-law-comp-hom-Semigroup G G (id-hom-Semigroup G)
+  id-iso-Semigroup : type-iso-Semigroup G G
+  id-iso-Semigroup = id-iso-Large-Precat Semigroup-Large-Precat G
 
-  iso-eq-Semigroup : (H : Semigroup l) → Id G H → iso-Semigroup G H
-  iso-eq-Semigroup = iso-eq-Precat (Semigroup-Precat l) G
+  iso-eq-Semigroup : (H : Semigroup l) → Id G H → type-iso-Semigroup G H
+  iso-eq-Semigroup = iso-eq-Large-Precat Semigroup-Large-Precat G
 
-  is-category-Semigroup :
-    (H : Semigroup l) → is-equiv (iso-eq-Semigroup H)
-  is-category-Semigroup =
-    fundamental-theorem-id G
-      ( id-iso-Semigroup)
-      ( is-contr-total-iso-Semigroup)
-      ( iso-eq-Semigroup)
+is-category-Semigroup :
+  is-category-Large-Precat Semigroup-Large-Precat
+is-category-Semigroup G =
+  fundamental-theorem-id G
+    ( id-iso-Semigroup G)
+    ( is-contr-total-iso-Semigroup G)
+    ( iso-eq-Semigroup G)
 
-  extensionality-Semigroup :
-    (H : Semigroup l) → Id G H ≃ iso-Semigroup G H
-  pr1 (extensionality-Semigroup H) = iso-eq-Semigroup H
-  pr2 (extensionality-Semigroup H) = is-category-Semigroup H
+extensionality-Semigroup :
+  {l : Level} (G H : Semigroup l) → Id G H ≃ type-iso-Semigroup G H
+pr1 (extensionality-Semigroup G H) = iso-eq-Semigroup G H
+pr2 (extensionality-Semigroup G H) = is-category-Semigroup G H
 
-  eq-iso-Semigroup :
-    (H : Semigroup l) → iso-Semigroup G H → Id G H
-  eq-iso-Semigroup H = map-inv-is-equiv (is-category-Semigroup H)
+eq-iso-Semigroup :
+  {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
+eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
-Semigroup-Cat : (l : Level) → Cat (lsuc l) l
-pr1 (Semigroup-Cat l) = Semigroup-Precat l
-pr2 (Semigroup-Cat l) = is-category-Semigroup
+Semigroup-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
+precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precat
+is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
 
 --------------------------------------------------------------------------------
 
@@ -954,14 +939,19 @@ right-unit-law-comp-hom-Group G H =
     ( semigroup-Group G)
     ( semigroup-Group H)
 
-Group-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Group-Precat l) = Group l
-pr1 (pr2 (Group-Precat l)) = hom-Group
-pr1 (pr1 (pr2 (pr2 (Group-Precat l)))) {G} {H} {K} = comp-hom-Group G H K
-pr2 (pr1 (pr2 (pr2 (Group-Precat l)))) {G} {H} {K} {L} = associative-comp-hom-Group G H K L
-pr1 (pr2 (pr2 (pr2 (Group-Precat l)))) = id-hom-Group
-pr1 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) {G} {H} = left-unit-law-comp-hom-Group G H
-pr2 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) {G} {H} = right-unit-law-comp-hom-Group G H
+Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
+obj-Large-Precat Group-Large-Precat = Group
+hom-Large-Precat Group-Large-Precat = hom-Group
+comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
+  comp-hom-Group G H K
+id-hom-Large-Precat Group-Large-Precat {X = G} =
+  id-hom-Group G
+associative-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-hom-Group G H K L
+left-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  left-unit-law-comp-hom-Group G H
+right-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  right-unit-law-comp-hom-Group G H
 
 {- We show that the precategory of groups is a category -}
 
@@ -970,52 +960,43 @@ module _
   where
   
   is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-Group =
-    is-iso-hom-Semigroup
-      ( semigroup-Group G)
-      ( semigroup-Group H)
+  is-iso-hom-Group = is-iso-hom-Large-Precat Group-Large-Precat G H
 
-  inv-is-iso-hom-Group :
-    (f : type-hom-Group G H) → is-iso-hom-Group f → type-hom-Group H G
-  inv-is-iso-hom-Group f = pr1
+  type-iso-Group : UU (l1 ⊔ l2)
+  type-iso-Group = type-iso-Large-Precat Group-Large-Precat G H
 
-  iso-Group : UU (l1 ⊔ l2)
-  iso-Group = iso-Semigroup (semigroup-Group G) (semigroup-Group H)
+  hom-iso-Group : type-iso-Group → type-hom-Group G H
+  hom-iso-Group = hom-iso-Large-Precat Group-Large-Precat G H
 
-  hom-iso-Group : iso-Group → type-hom-Group G H
-  hom-iso-Group = pr1
+  is-iso-hom-iso-Group :
+    (f : type-iso-Group) → is-iso-hom-Group (hom-iso-Group f)
+  is-iso-hom-iso-Group = is-iso-hom-iso-Large-Precat Group-Large-Precat G H
 
-  is-iso-hom-iso-Group : (f : iso-Group) → is-iso-hom-Group (hom-iso-Group f)
-  is-iso-hom-iso-Group = pr2
-
-  hom-inv-iso-Group : iso-Group → type-hom-Group H G
-  hom-inv-iso-Group f =
-    inv-is-iso-hom-Group
-      ( hom-iso-Group f)
-      ( is-iso-hom-iso-Group f)
+  hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
+  hom-inv-iso-Group = hom-inv-iso-Large-Precat Group-Large-Precat G H
 
   equiv-Group : UU (l1 ⊔ l2)
   equiv-Group = equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  equiv-iso-equiv-Group : equiv-Group ≃ iso-Group
+  equiv-iso-equiv-Group : equiv-Group ≃ type-iso-Group
   equiv-iso-equiv-Group =
     equiv-iso-equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  iso-equiv-Group : equiv-Group → iso-Group
+  iso-equiv-Group : equiv-Group → type-iso-Group
   iso-equiv-Group = map-equiv equiv-iso-equiv-Group
 
 module _
   {l : Level} (G : Group l)
   where
 
-  id-iso-Group : iso-Group G G
-  id-iso-Group = id-iso-Semigroup (semigroup-Group G)
+  id-iso-Group : type-iso-Group G G
+  id-iso-Group = id-iso-Large-Precat Group-Large-Precat G
 
-  iso-eq-Group : (H : Group l) → Id G H → iso-Group G H
-  iso-eq-Group = iso-eq-Precat (Group-Precat l) G
+  iso-eq-Group : (H : Group l) → Id G H → type-iso-Group G H
+  iso-eq-Group = iso-eq-Large-Precat Group-Large-Precat G
 
   abstract
-    extensionality-Group' : (H : Group l) → Id G H ≃ iso-Group G H
+    extensionality-Group' : (H : Group l) → Id G H ≃ type-iso-Group G H
     extensionality-Group' H =
       ( extensionality-Semigroup
         ( semigroup-Group G)
@@ -1023,33 +1004,32 @@ module _
       ( equiv-ap-pr1 is-prop-is-group {s = G} {t = H})
 
   abstract
-    is-contr-total-iso-Group : is-contr (Σ (Group l) (iso-Group G))
+    is-contr-total-iso-Group : is-contr (Σ (Group l) (type-iso-Group G))
     is-contr-total-iso-Group =
       is-contr-equiv'
         ( Σ (Group l) (Id G))
         ( equiv-tot extensionality-Group')
         ( is-contr-total-path G)
 
-  is-category-Group : (H : Group l) → is-equiv (iso-eq-Group H)
-  is-category-Group =
-    fundamental-theorem-id G
-      id-iso-Group
-      is-contr-total-iso-Group
-      iso-eq-Group
+is-category-Group : is-category-Large-Precat Group-Large-Precat
+is-category-Group G =
+  fundamental-theorem-id G
+    ( id-iso-Group G)
+    ( is-contr-total-iso-Group G)
+    ( iso-eq-Group G)
 
-  eq-iso-Group : (H : Group l) → iso-Group G H → Id G H
-  eq-iso-Group H = map-inv-is-equiv (is-category-Group H)
+eq-iso-Group : {l : Level} (G H : Group l) → type-iso-Group G H → Id G H
+eq-iso-Group G H = map-inv-is-equiv (is-category-Group G H)
 
-Group-Cat : (l : Level) → Cat (lsuc l) l
-pr1 (Group-Cat l) = Group-Precat l
-pr2 (Group-Cat l) = is-category-Group
+Group-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
+precat-Large-Cat Group-Large-Cat = Group-Large-Precat
+is-category-Large-Cat Group-Large-Cat = is-category-Group
+```
+### Examples of groups
 
---------------------------------------------------------------------------------
+#### The group of integers
 
-{- Examples of group  -}
-
-{- The group of integers. -}
-
+```agda
 ℤ-Semigroup : Semigroup lzero
 pr1 ℤ-Semigroup = ℤ-Set
 pr1 (pr2 ℤ-Semigroup) = add-ℤ
@@ -1063,9 +1043,11 @@ pr2 (pr2 (pr1 (pr2 ℤ-Group))) = right-unit-law-add-ℤ
 pr1 (pr2 (pr2 ℤ-Group)) = neg-ℤ
 pr1 (pr2 (pr2 (pr2 ℤ-Group))) = left-inverse-law-add-ℤ
 pr2 (pr2 (pr2 (pr2 ℤ-Group))) = right-inverse-law-add-ℤ
+```
 
-{- The group of integers modulo k -}
+#### The group of integers modulo k
 
+```agda
 ℤ-Mod-Semigroup : (k : ℕ) → Semigroup lzero
 pr1 (ℤ-Mod-Semigroup k) = ℤ-Mod-Set k
 pr1 (pr2 (ℤ-Mod-Semigroup k)) = add-ℤ-Mod k
@@ -1079,11 +1061,11 @@ pr2 (pr2 (pr1 (pr2 (ℤ-Mod-Group k)))) = right-unit-law-add-ℤ-Mod k
 pr1 (pr2 (pr2 (ℤ-Mod-Group k))) = neg-ℤ-Mod k
 pr1 (pr2 (pr2 (pr2 (ℤ-Mod-Group k)))) = left-inverse-law-add-ℤ-Mod k
 pr2 (pr2 (pr2 (pr2 (ℤ-Mod-Group k)))) = right-inverse-law-add-ℤ-Mod k
+```
 
---------------------------------------------------------------------------------
+#### The group of loops in a 1-type
 
-{- The loop space of a 1-type as a group. -}
-
+```agda
 loop-space :
   {l : Level} {A : UU l} → A → UU l
 loop-space a = Id a a
@@ -1123,20 +1105,20 @@ loop-space-1-type-Group :
   {l : Level} (A : UU-1-Type l) (a : type-1-Type A) → Group l
 loop-space-1-type-Group A a =
   loop-space-Group (type-1-Type A) a (is-1-type-type-1-Type A a a)
+```
 
---------------------------------------------------------------------------------
+#### The symmetric group on a set
 
-{- We introduce the automorphism group on a set X. -}
+```agda
+set-symmetric-Group : {l : Level} (X : UU-Set l) → UU-Set l
+set-symmetric-Group X = aut-Set X
 
-aut-Set :
-  {l : Level} (X : UU-Set l) → UU-Set l
-aut-Set X = equiv-Set X X
+type-symmetric-Group : {l : Level} (X : UU-Set l) → UU l
+type-symmetric-Group X = type-Set (set-symmetric-Group X)
 
-associative-comp-equiv :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
-  (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
-  Id ((g ∘e f) ∘e e) (g ∘e (f ∘e e))
-associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
+is-set-type-symmetric-Group :
+  {l : Level} (X : UU-Set l) → is-set (type-symmetric-Group X)
+is-set-type-symmetric-Group X = is-set-type-Set (set-symmetric-Group X)
 
 has-associative-mul-aut-Set :
   {l : Level} (X : UU-Set l) → has-associative-mul-Set (aut-Set X)
@@ -1145,36 +1127,14 @@ pr2 (has-associative-mul-aut-Set X) e f g = associative-comp-equiv g f e
 
 symmetric-Semigroup :
   {l : Level} (X : UU-Set l) → Semigroup l
-pr1 (symmetric-Semigroup X) = aut-Set X
+pr1 (symmetric-Semigroup X) = set-symmetric-Group X
 pr2 (symmetric-Semigroup X) = has-associative-mul-aut-Set X
-
-left-unit-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (id-equiv ∘e e) e
-left-unit-law-equiv e = eq-htpy-equiv refl-htpy
-
-right-unit-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e id-equiv) e
-right-unit-law-equiv e = eq-htpy-equiv refl-htpy
 
 is-unital-symmetric-Semigroup :
   {l : Level} (X : UU-Set l) → is-unital (symmetric-Semigroup X)
 pr1 (is-unital-symmetric-Semigroup X) = id-equiv
 pr1 (pr2 (is-unital-symmetric-Semigroup X)) = left-unit-law-equiv
 pr2 (pr2 (is-unital-symmetric-Semigroup X)) = right-unit-law-equiv
-
-left-inverse-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id ((inv-equiv e) ∘e e) id-equiv
-left-inverse-law-equiv e =
-  eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
-
-right-inverse-law-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  Id (e ∘e (inv-equiv e)) id-equiv
-right-inverse-law-equiv e =
-  eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
 is-group-symmetric-Semigroup' :
   {l : Level} (X : UU-Set l) →

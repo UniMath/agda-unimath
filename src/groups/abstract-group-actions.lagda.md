@@ -95,27 +95,84 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
-  hom-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
-  hom-Abstract-Group-Action =
+  type-hom-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
+  type-hom-Abstract-Group-Action =
     Σ ( type-Set (pr1 X) → type-Set (pr1 Y))
       ( λ f →
         ( g : type-Group G) →
-        ( f ∘ mul-Abstract-Group-Action G X g) ~
-        ( mul-Abstract-Group-Action G Y g ∘ f))
+        coherence-square
+          ( f)
+          ( mul-Abstract-Group-Action G X g)
+          ( mul-Abstract-Group-Action G Y g)
+          ( f))
+
+  map-hom-Abstract-Group-Action :
+    type-hom-Abstract-Group-Action → type-Set (pr1 X) → type-Set (pr1 Y)
+  map-hom-Abstract-Group-Action = pr1
+
+  coherence-square-hom-Abstract-Group-Action :
+    (f : type-hom-Abstract-Group-Action) (g : type-Group G) →
+    coherence-square
+      ( map-hom-Abstract-Group-Action f)
+      ( mul-Abstract-Group-Action G X g)
+      ( mul-Abstract-Group-Action G Y g)
+      ( map-hom-Abstract-Group-Action f)
+  coherence-square-hom-Abstract-Group-Action = pr2
+
+  is-equiv-hom-Abstract-Group-Action :
+    type-hom-Abstract-Group-Action → UU (l2 ⊔ l3)
+  is-equiv-hom-Abstract-Group-Action f =
+    is-equiv (map-hom-Abstract-Group-Action f)
 
   equiv-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
   equiv-Abstract-Group-Action =
-    Σ ( type-Set (pr1 X) ≃ type-Set (pr1 Y))
+    Σ ( type-Abstract-Group-Action G X ≃ type-Abstract-Group-Action G Y)
       ( λ e →
         ( g : type-Group G) →
-        htpy-equiv
-          ( e ∘e equiv-mul-Abstract-Group-Action G X g)
-          ( equiv-mul-Abstract-Group-Action G Y g ∘e e))
+        coherence-square
+          ( map-equiv e)
+          ( mul-Abstract-Group-Action G X g)
+          ( mul-Abstract-Group-Action G Y g)
+          ( map-equiv e))
+
+  equiv-equiv-Abstract-Group-Action :
+    equiv-Abstract-Group-Action →
+    type-Abstract-Group-Action G X ≃ type-Abstract-Group-Action G Y
+  equiv-equiv-Abstract-Group-Action = pr1
+
+  map-equiv-Abstract-Group-Action :
+    equiv-Abstract-Group-Action →
+    type-Abstract-Group-Action G X → type-Abstract-Group-Action G Y
+  map-equiv-Abstract-Group-Action e =
+    map-equiv (equiv-equiv-Abstract-Group-Action e)
+
+  is-equiv-map-equiv-Abstract-Group-Action :
+    (e : equiv-Abstract-Group-Action) →
+    is-equiv (map-equiv-Abstract-Group-Action e)
+  is-equiv-map-equiv-Abstract-Group-Action e =
+    is-equiv-map-equiv (equiv-equiv-Abstract-Group-Action e)
+
+  coherence-square-equiv-Abstract-Group-Action :
+    (e : equiv-Abstract-Group-Action) (g : type-Group G) →
+    coherence-square
+      ( map-equiv-Abstract-Group-Action e)
+      ( mul-Abstract-Group-Action G X g)
+      ( mul-Abstract-Group-Action G Y g)
+      ( map-equiv-Abstract-Group-Action e)
+  coherence-square-equiv-Abstract-Group-Action = pr2
 
   hom-equiv-Abstract-Group-Action :
-    equiv-Abstract-Group-Action → hom-Abstract-Group-Action
-  pr1 (hom-equiv-Abstract-Group-Action e) = map-equiv (pr1 e)
-  pr2 (hom-equiv-Abstract-Group-Action e) = pr2 e
+    equiv-Abstract-Group-Action → type-hom-Abstract-Group-Action
+  pr1 (hom-equiv-Abstract-Group-Action e) =
+    map-equiv-Abstract-Group-Action e
+  pr2 (hom-equiv-Abstract-Group-Action e) =
+    coherence-square-equiv-Abstract-Group-Action e
+
+  is-equiv-hom-equiv-Abstract-Group-Action :
+    (e : equiv-Abstract-Group-Action) →
+    is-equiv-hom-Abstract-Group-Action (hom-equiv-Abstract-Group-Action e)
+  is-equiv-hom-equiv-Abstract-Group-Action =
+    is-equiv-map-equiv-Abstract-Group-Action
 
   mere-equiv-Abstract-Group-Action-Prop : UU-Prop (l1 ⊔ l2 ⊔ l3)
   mere-equiv-Abstract-Group-Action-Prop =
@@ -127,25 +184,25 @@ module _
 
 module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
-  (Y : Abstract-Group-Action G l3) (f : hom-Abstract-Group-Action G X Y)
+  (Y : Abstract-Group-Action G l3) (f : type-hom-Abstract-Group-Action G X Y)
   where
 
   htpy-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
+    (g : type-hom-Abstract-Group-Action G X Y) → UU (l2 ⊔ l3)
   htpy-hom-Abstract-Group-Action g = pr1 f ~ pr1 g
 
   refl-htpy-hom-Abstract-Group-Action : htpy-hom-Abstract-Group-Action f
   refl-htpy-hom-Abstract-Group-Action = refl-htpy
 
   htpy-eq-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
+    (g : type-hom-Abstract-Group-Action G X Y) →
     Id f g → htpy-hom-Abstract-Group-Action g
   htpy-eq-hom-Abstract-Group-Action .f refl =
     refl-htpy-hom-Abstract-Group-Action
 
   is-contr-total-htpy-hom-Abstract-Group-Action :
     is-contr
-      ( Σ ( hom-Abstract-Group-Action G X Y)
+      ( Σ ( type-hom-Abstract-Group-Action G X Y)
           ( htpy-hom-Abstract-Group-Action))
   is-contr-total-htpy-hom-Abstract-Group-Action =
     is-contr-total-Eq-substructure
@@ -164,7 +221,7 @@ module _
       ( pr2 f)
 
   is-equiv-htpy-eq-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
+    (g : type-hom-Abstract-Group-Action G X Y) →
     is-equiv (htpy-eq-hom-Abstract-Group-Action g)
   is-equiv-htpy-eq-hom-Abstract-Group-Action =
     fundamental-theorem-id f
@@ -173,7 +230,7 @@ module _
       htpy-eq-hom-Abstract-Group-Action
 
   extensionality-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
+    (g : type-hom-Abstract-Group-Action G X Y) →
     Id f g ≃ htpy-hom-Abstract-Group-Action g
   pr1 (extensionality-hom-Abstract-Group-Action g) =
     htpy-eq-hom-Abstract-Group-Action g
@@ -181,16 +238,36 @@ module _
     is-equiv-htpy-eq-hom-Abstract-Group-Action g
 
   eq-htpy-hom-Abstract-Group-Action :
-    (g : hom-Abstract-Group-Action G X Y) →
+    (g : type-hom-Abstract-Group-Action G X Y) →
     htpy-hom-Abstract-Group-Action g → Id f g
   eq-htpy-hom-Abstract-Group-Action g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Abstract-Group-Action g)
 
 module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3)
+  where
+  
+  is-set-type-hom-Abstract-Group-Action :
+    is-set (type-hom-Abstract-Group-Action G X Y)
+  is-set-type-hom-Abstract-Group-Action f g =
+    is-prop-equiv
+      ( extensionality-hom-Abstract-Group-Action G X Y f g)
+      ( is-prop-Π
+        ( λ x →
+          is-set-type-Abstract-Group-Action G Y
+            ( map-hom-Abstract-Group-Action G X Y f x)
+            ( map-hom-Abstract-Group-Action G X Y g x)))
+
+  hom-Abstract-Group-Action : UU-Set (l1 ⊔ l2 ⊔ l3)
+  pr1 hom-Abstract-Group-Action = type-hom-Abstract-Group-Action G X Y
+  pr2 hom-Abstract-Group-Action = is-set-type-hom-Abstract-Group-Action
+
+module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
 
-  id-hom-Abstract-Group-Action : hom-Abstract-Group-Action G X X
+  id-hom-Abstract-Group-Action : type-hom-Abstract-Group-Action G X X
   pr1 id-hom-Abstract-Group-Action = id
   pr2 id-hom-Abstract-Group-Action g = refl-htpy
 
@@ -200,8 +277,9 @@ module _
   where
 
   comp-hom-Abstract-Group-Action :
-    hom-Abstract-Group-Action G Y Z → hom-Abstract-Group-Action G X Y →
-    hom-Abstract-Group-Action G X Z
+    type-hom-Abstract-Group-Action G Y Z →
+    type-hom-Abstract-Group-Action G X Y →
+    type-hom-Abstract-Group-Action G X Z
   pr1 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) = g ∘ f
   pr2 (comp-hom-Abstract-Group-Action (pair g K) (pair f H)) x =
     coherence-square-comp-horizontal
@@ -222,9 +300,9 @@ module _
   where
 
   associative-comp-hom-Abstract-Group-Action :
-    (h : hom-Abstract-Group-Action G X3 X4)
-    (g : hom-Abstract-Group-Action G X2 X3)
-    (f : hom-Abstract-Group-Action G X1 X2) →
+    (h : type-hom-Abstract-Group-Action G X3 X4)
+    (g : type-hom-Abstract-Group-Action G X2 X3)
+    (f : type-hom-Abstract-Group-Action G X1 X2) →
     Id ( comp-hom-Abstract-Group-Action G X1 X2 X4
          ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
          ( f))
@@ -245,7 +323,7 @@ module _
   where
 
   left-unit-law-comp-hom-Abstract-Group-Action :
-    (f : hom-Abstract-Group-Action G X Y) →
+    (f : type-hom-Abstract-Group-Action G X Y) →
     Id ( comp-hom-Abstract-Group-Action G X Y Y
          ( id-hom-Abstract-Group-Action G Y)
          ( f))
@@ -259,7 +337,7 @@ module _
       ( refl-htpy)
 
   right-unit-law-comp-hom-Abstract-Group-Action :
-    (f : hom-Abstract-Group-Action G X Y) →
+    (f : type-hom-Abstract-Group-Action G X Y) →
     Id ( comp-hom-Abstract-Group-Action G X X Y f
          ( id-hom-Abstract-Group-Action G X))
        ( f)
@@ -269,6 +347,44 @@ module _
         ( id-hom-Abstract-Group-Action G X))
       ( f)
       ( refl-htpy)
+
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  Abstract-Group-Action-Large-Precat :
+    Large-Precat (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  obj-Large-Precat Abstract-Group-Action-Large-Precat =
+    Abstract-Group-Action G
+  hom-Large-Precat Abstract-Group-Action-Large-Precat =
+    hom-Abstract-Group-Action G
+  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
+    comp-hom-Abstract-Group-Action G X Y Z
+  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
+    id-hom-Abstract-Group-Action G X
+  associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
+    {X = X} {Y} {Z} {W} =
+    associative-comp-hom-Abstract-Group-Action G X Y Z W
+  left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
+    {X = X} {Y} =
+    left-unit-law-comp-hom-Abstract-Group-Action G X Y
+  right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
+    {X = X} {Y} =
+    right-unit-law-comp-hom-Abstract-Group-Action G X Y
+  
+  Abstract-Group-Action-Precat : (l2 : Level) → Precat (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  pr1 (Abstract-Group-Action-Precat l2) = Abstract-Group-Action G l2
+  pr1 (pr2 (Abstract-Group-Action-Precat l2)) = hom-Abstract-Group-Action G
+  pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} =
+    comp-hom-Abstract-Group-Action G X Y Z
+  pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) {X} {Y} {Z} {W} =
+    associative-comp-hom-Abstract-Group-Action G X Y Z W
+  pr1 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2)))) =
+    id-hom-Abstract-Group-Action G
+  pr1 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =
+    left-unit-law-comp-hom-Abstract-Group-Action G X Y
+  pr2 (pr2 (pr2 (pr2 (pr2 (Abstract-Group-Action-Precat l2))))) {X} {Y} =
+    right-unit-law-comp-hom-Abstract-Group-Action G X Y
 
 module _
   {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
@@ -299,7 +415,7 @@ module _
           ( htpy-equiv-Abstract-Group-Action))
   is-contr-total-htpy-equiv-Abstract-Group-Action =
     is-contr-equiv
-      ( Σ ( Σ ( hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
+      ( Σ ( Σ ( type-hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
           ( λ f →
             htpy-hom-Abstract-Group-Action G X Y
               ( hom-equiv-Abstract-Group-Action G X Y e)
@@ -527,6 +643,100 @@ module _
         ( inv-equiv-Abstract-Group-Action G X Y f))
       ( id-equiv-Abstract-Group-Action G Y)
       ( issec-map-inv-equiv (pr1 f))
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
+  (Y : Abstract-Group-Action G l3)
+  where
+
+  is-iso-hom-Abstract-Group-Action :
+    (f : type-hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
+  is-iso-hom-Abstract-Group-Action =
+    is-iso-hom-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  type-iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
+  type-iso-Abstract-Group-Action =
+    type-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  hom-iso-Abstract-Group-Action :
+    type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
+  hom-iso-Abstract-Group-Action =
+    hom-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  map-iso-Abstract-Group-Action :
+    type-iso-Abstract-Group-Action →
+    type-Abstract-Group-Action G X → type-Abstract-Group-Action G Y
+  map-iso-Abstract-Group-Action f =
+    map-hom-Abstract-Group-Action G X Y (hom-iso-Abstract-Group-Action f)
+
+  coherence-square-iso-Abstract-Group-Action :
+    (f : type-iso-Abstract-Group-Action) (g : type-Group G) →
+    coherence-square
+      ( map-iso-Abstract-Group-Action f)
+      ( mul-Abstract-Group-Action G X g)
+      ( mul-Abstract-Group-Action G Y g)
+      ( map-iso-Abstract-Group-Action f)
+  coherence-square-iso-Abstract-Group-Action f =
+    coherence-square-hom-Abstract-Group-Action G X Y
+      ( hom-iso-Abstract-Group-Action f)
+
+  hom-inv-iso-Abstract-Group-Action :
+    type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G Y X
+  hom-inv-iso-Abstract-Group-Action =
+    hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  map-hom-inv-iso-Abstract-Group-Action :
+    type-iso-Abstract-Group-Action →
+    type-Abstract-Group-Action G Y → type-Abstract-Group-Action G X
+  map-hom-inv-iso-Abstract-Group-Action f =
+    map-hom-Abstract-Group-Action G Y X
+      ( hom-inv-iso-Abstract-Group-Action f)
+
+  issec-hom-inv-iso-Abstract-Group-Action :
+    (f : type-iso-Abstract-Group-Action) →
+    Id ( comp-hom-Abstract-Group-Action G Y X Y
+         ( hom-iso-Abstract-Group-Action f)
+         ( hom-inv-iso-Abstract-Group-Action f))
+       ( id-hom-Abstract-Group-Action G Y)
+  issec-hom-inv-iso-Abstract-Group-Action =
+    issec-hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  isretr-hom-inv-iso-Abstract-Group-Action :
+    (f : type-iso-Abstract-Group-Action) →
+    Id ( comp-hom-Abstract-Group-Action G X Y X
+         ( hom-inv-iso-Abstract-Group-Action f)
+         ( hom-iso-Abstract-Group-Action f))
+       ( id-hom-Abstract-Group-Action G X)
+  isretr-hom-inv-iso-Abstract-Group-Action =
+    isretr-hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  is-iso-hom-iso-Abstract-Group-Action :
+    (f : type-iso-Abstract-Group-Action) →
+    is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
+  is-iso-hom-iso-Abstract-Group-Action =
+    is-iso-hom-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+
+  equiv-iso-Abstract-Group-Action :
+    type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y
+  pr1 (pr1 (equiv-iso-Abstract-Group-Action f)) =
+    map-iso-Abstract-Group-Action f
+  pr2 (pr1 (equiv-iso-Abstract-Group-Action f)) =
+    is-equiv-has-inverse
+      ( map-hom-inv-iso-Abstract-Group-Action f)
+      ( htpy-eq-hom-Abstract-Group-Action G Y Y
+        ( comp-hom-Abstract-Group-Action G Y X Y
+          ( hom-iso-Abstract-Group-Action f)
+          ( hom-inv-iso-Abstract-Group-Action f))
+        ( id-hom-Abstract-Group-Action G Y)
+        ( issec-hom-inv-iso-Abstract-Group-Action f))
+      ( htpy-eq-hom-Abstract-Group-Action G X X
+        ( comp-hom-Abstract-Group-Action G X Y X
+          ( hom-inv-iso-Abstract-Group-Action f)
+          ( hom-iso-Abstract-Group-Action f))
+        ( id-hom-Abstract-Group-Action G X)
+        ( isretr-hom-inv-iso-Abstract-Group-Action f))
+  pr2 (equiv-iso-Abstract-Group-Action f) =
+    coherence-square-iso-Abstract-Group-Action f
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)

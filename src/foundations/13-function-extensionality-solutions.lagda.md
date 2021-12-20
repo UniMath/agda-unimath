@@ -489,33 +489,63 @@ pr1 (equiv-Prop P Q) = type-equiv-Prop P Q
 pr2 (equiv-Prop P Q) =
   is-prop-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
 
-type-equiv-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU (l1 ⊔ l2)
-type-equiv-Set A B = type-Set A ≃ type-Set B
+-- We prove basic corollaries of this exercise
 
-equiv-Set :
-  { l1 l2 : Level} → UU-Set l1 → UU-Set l2 → UU-Set (l1 ⊔ l2)
-pr1 (equiv-Set A B) = type-equiv-Set A B
-pr2 (equiv-Set A B) =
-  is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
+module _
+  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
+  where
+  
+  type-equiv-Set : UU (l1 ⊔ l2)
+  type-equiv-Set = type-Set A ≃ type-Set B
 
-inv-inv-equiv :
-  {i j : Level} {A : UU i} {B : UU j} (e : A ≃ B) →
-  Id (inv-equiv (inv-equiv e)) e
-inv-inv-equiv (pair f (pair (pair g G) (pair h H))) = eq-htpy-equiv refl-htpy
+  equiv-Set : UU-Set (l1 ⊔ l2)
+  pr1 equiv-Set = type-equiv-Set
+  pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 
-is-equiv-inv-equiv :
-  {i j : Level} {A : UU i} {B : UU j} → is-equiv (inv-equiv {A = A} {B = B})
-is-equiv-inv-equiv =
-  is-equiv-has-inverse
-    ( inv-equiv)
-    ( inv-inv-equiv)
-    ( inv-inv-equiv)
+aut-Set :
+  {l : Level} (X : UU-Set l) → UU-Set l
+aut-Set X = equiv-Set X X
 
-equiv-inv-equiv :
-  {i j : Level} {A : UU i} {B : UU j} → (A ≃ B) ≃ (B ≃ A)
-pr1 equiv-inv-equiv = inv-equiv
-pr2 equiv-inv-equiv = is-equiv-inv-equiv
+associative-comp-equiv :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
+  (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
+  Id ((g ∘e f) ∘e e) (g ∘e (f ∘e e))
+associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  left-unit-law-equiv : (e : X ≃ Y) → Id (id-equiv ∘e e) e
+  left-unit-law-equiv e = eq-htpy-equiv refl-htpy
+  
+  right-unit-law-equiv : (e : X ≃ Y) → Id (e ∘e id-equiv) e
+  right-unit-law-equiv e = eq-htpy-equiv refl-htpy
+  
+  left-inverse-law-equiv : (e : X ≃ Y) → Id ((inv-equiv e) ∘e e) id-equiv
+  left-inverse-law-equiv e =
+    eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
+  
+  right-inverse-law-equiv : (e : X ≃ Y) → Id (e ∘e (inv-equiv e)) id-equiv
+  right-inverse-law-equiv e =
+    eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
+
+  inv-inv-equiv : (e : X ≃ Y) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv e = eq-htpy-equiv refl-htpy
+
+  inv-inv-equiv' : (e : Y ≃ X) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv' e = eq-htpy-equiv refl-htpy
+
+  is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
+  is-equiv-inv-equiv =
+    is-equiv-has-inverse
+      ( inv-equiv)
+      ( inv-inv-equiv')
+      ( inv-inv-equiv)
+
+  equiv-inv-equiv : (X ≃ Y) ≃ (Y ≃ X)
+  pr1 equiv-inv-equiv = inv-equiv
+  pr2 equiv-inv-equiv = is-equiv-inv-equiv
 
 compose-inv-equiv-compose-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
