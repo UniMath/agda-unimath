@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module groups.abstract-groups where
 
-open import categories.categories public
+open import categories public
 
 --------------------------------------------------------------------------------
 
@@ -223,6 +223,15 @@ right-unit-law-comp-hom-Semigroup
   (pair (pair G is-set-G) (pair μ-G assoc-G)) H (pair f μ-f) =
   eq-htpy-hom-Semigroup
     ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy
+
+Semigroup-Large-Precat : Large-Precat
+obj-Large-Precat Semigroup-Large-Precat = Semigroup
+hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
+comp-hom-Large-Precat Semigroup-Large-Precat = comp-hom-Semigroup
+id-hom-Large-Precat Semigroup-Large-Precat = id-hom-Semigroup
+assocative-comp-hom-Large-Precat Semigroup-Large-Precat = associative-comp-hom-Semigroup
+left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat = left-unit-law-comp-hom-Semigroup
+right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat = {!right-unit-law-comp-hom-Semigroup!}
 
 Semigroup-Precat : (l : Level) → Precat (lsuc l) l
 pr1 (Semigroup-Precat l) = Semigroup l
