@@ -786,7 +786,7 @@ equiv-Ω-Cyclic-Group : (k : ℕ) → equiv-Group (Ω-Cyclic-Group k) (ℤ-Mod-G
 pr1 (equiv-Ω-Cyclic-Group k) = equiv-compute-Ω-Cyclic k
 pr2 (equiv-Ω-Cyclic-Group k) = preserves-concat-equiv-compute-Ω-Cyclic k
 
-iso-Ω-Cyclic-Group : (k : ℕ) → iso-Group (Ω-Cyclic-Group k) (ℤ-Mod-Group k)
+iso-Ω-Cyclic-Group : (k : ℕ) → type-iso-Group (Ω-Cyclic-Group k) (ℤ-Mod-Group k)
 iso-Ω-Cyclic-Group k =
   iso-equiv-Group
     ( Ω-Cyclic-Group k)

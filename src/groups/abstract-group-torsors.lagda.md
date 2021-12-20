@@ -575,7 +575,7 @@ module _
       ( is-set-type-Group G)
 
   abstract-group-concrete-group-Group :
-    iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
+    type-iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
   abstract-group-concrete-group-Group =
     iso-equiv-Group
       ( abstract-group-Concrete-Group concrete-group-Group)
