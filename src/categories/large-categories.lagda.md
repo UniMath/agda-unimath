@@ -164,4 +164,35 @@ module _
        ( id-hom-Large-Precat C X)
   isretr-hom-inv-iso-Large-Precat f = pr2 (pr2 (pr2 f))
 
+module _
+  (C : Large-Precat) {l1 : Level} (X : obj-Large-Precat C l1)
+  where
+
+  id-iso-Large-Precat : type-iso-Large-Precat C X X
+  pr1 id-iso-Large-Precat = id-hom-Large-Precat C X
+  pr1 (pr2 id-iso-Large-Precat) = id-hom-Large-Precat C X
+  pr1 (pr2 (pr2 id-iso-Large-Precat)) =
+    left-unit-law-comp-hom-Large-Precat C X X (id-hom-Large-Precat C X)
+  pr2 (pr2 (pr2 id-iso-Large-Precat)) =
+    left-unit-law-comp-hom-Large-Precat C X X (id-hom-Large-Precat C X)
+
+  iso-eq-Large-Precat :
+    (Y : obj-Large-Precat C l1) → Id X Y → type-iso-Large-Precat C X Y
+  iso-eq-Large-Precat .X refl = id-iso-Large-Precat
+
+module _
+  (C : Large-Precat)
+  where
+  
+  is-category-Large-Precat : Setω
+  is-category-Large-Precat =
+    {l : Level} (X Y : obj-Large-Precat C l) →
+    is-equiv (iso-eq-Large-Precat C X Y)
+
+record Large-Cat : Setω where
+  constructor make-Large-Cat
+  field
+    precat-Large-Cat : Large-Precat
+    is-category-Large-Cat : is-category-Large-Precat precat-Large-Cat
+
 ```
