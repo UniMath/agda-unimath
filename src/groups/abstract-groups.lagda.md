@@ -220,14 +220,16 @@ right-unit-law-comp-hom-Semigroup
 Semigroup-Large-Precat : Large-Precat
 obj-Large-Precat Semigroup-Large-Precat = Semigroup
 hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
-comp-hom-Large-Precat Semigroup-Large-Precat = comp-hom-Semigroup
-id-hom-Large-Precat Semigroup-Large-Precat = id-hom-Semigroup
-associative-comp-hom-Large-Precat Semigroup-Large-Precat =
-  associative-comp-hom-Semigroup
-left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat =
-  left-unit-law-comp-hom-Semigroup
-right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat =
-  right-unit-law-comp-hom-Semigroup
+comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} =
+  comp-hom-Semigroup G H K
+id-hom-Large-Precat Semigroup-Large-Precat {X = G} =
+  id-hom-Semigroup G
+associative-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-hom-Semigroup G H K L
+left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
+  left-unit-law-comp-hom-Semigroup G H
+right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
+  right-unit-law-comp-hom-Semigroup G H
 
 {- We show that the precategory of semigroups is a category -}
 
@@ -940,14 +942,16 @@ right-unit-law-comp-hom-Group G H =
 Group-Large-Precat : Large-Precat
 obj-Large-Precat Group-Large-Precat = Group
 hom-Large-Precat Group-Large-Precat = hom-Group
-comp-hom-Large-Precat Group-Large-Precat = comp-hom-Group
-id-hom-Large-Precat Group-Large-Precat = id-hom-Group
-associative-comp-hom-Large-Precat Group-Large-Precat =
-  associative-comp-hom-Group
-left-unit-law-comp-hom-Large-Precat Group-Large-Precat =
-  left-unit-law-comp-hom-Group
-right-unit-law-comp-hom-Large-Precat Group-Large-Precat =
-  right-unit-law-comp-hom-Group
+comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
+  comp-hom-Group G H K
+id-hom-Large-Precat Group-Large-Precat {X = G} =
+  id-hom-Group G
+associative-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-hom-Group G H K L
+left-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  left-unit-law-comp-hom-Group G H
+right-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  right-unit-law-comp-hom-Group G H
 
 {- We show that the precategory of groups is a category -}
 
