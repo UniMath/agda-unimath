@@ -8,20 +8,13 @@ title: Formalisation of the Symmetry Book
 module groups.abstract-groups where
 
 open import categories public
+```
 
---------------------------------------------------------------------------------
+## Groups in Univalent Mathematics
 
--- Groups in univalent mathematics
+We first introduce semigroups, and then groups. We do this because the category of groups is a full subcategory of the category of semigroups. In particular, it is a proposition for a semigroup to be a group. Therefore this approach gives us in a straightforward way that equality of groups is equality of semigroups. This will be useful in showing that group isomorphisms are equivalent to identifications of groups.
 
---------------------------------------------------------------------------------
-
-{- We first introduce semigroups, and then groups. We do this because the
-   category of groups is a full subcategory of the category of semigroups.
-   In particular, it is a proposition for a semigroup to be a group. Therefore
-   this approach gives us in a straightforward way that equality of groups is 
-   equality of semigroups. This will be useful in showing that group 
-   isomorphisms are equivalent to identifications of groups. -}
-
+```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l
 has-associative-mul X =
   Σ (X → X → X) (λ μ → (x y z : X) → Id (μ (μ x y) z) (μ x (μ y z)))
