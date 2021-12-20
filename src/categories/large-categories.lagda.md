@@ -92,17 +92,17 @@ module _
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
   
-  is-iso-Large-Precat : type-hom-Large-Precat C X Y → UU (l1 ⊔ l2)
-  is-iso-Large-Precat f =
+  is-iso-hom-Large-Precat : type-hom-Large-Precat C X Y → UU (l1 ⊔ l2)
+  is-iso-hom-Large-Precat f =
     Σ ( type-hom-Large-Precat C Y X)
       ( λ g →
         ( Id (comp-hom-Large-Precat C Y X Y f g) (id-hom-Large-Precat C Y)) ×
         ( Id (comp-hom-Large-Precat C X Y X g f) (id-hom-Large-Precat C X)))
 
-  all-elements-equal-is-iso-Large-Precat :
+  all-elements-equal-is-iso-hom-Large-Precat :
     (f : type-hom-Large-Precat C X Y)
-    (H K : is-iso-Large-Precat f) → Id H K
-  all-elements-equal-is-iso-Large-Precat f
+    (H K : is-iso-hom-Large-Precat f) → Id H K
+  all-elements-equal-is-iso-hom-Large-Precat f
     (pair g (pair p q)) (pair g' (pair p' q')) =
     eq-subtype
       ( λ g →
@@ -119,22 +119,49 @@ module _
             ( ( ap ( comp-hom-Large-Precat' C Y X X g') q) ∙
               ( left-unit-law-comp-hom-Large-Precat C Y X g')))))
 
-  is-prop-is-iso-Large-Precat :
-    (f : type-hom-Large-Precat C X Y) → is-prop (is-iso-Large-Precat f)
-  is-prop-is-iso-Large-Precat f =
-    is-prop-all-elements-equal (all-elements-equal-is-iso-Large-Precat f)
+  is-prop-is-iso-hom-Large-Precat :
+    (f : type-hom-Large-Precat C X Y) → is-prop (is-iso-hom-Large-Precat f)
+  is-prop-is-iso-hom-Large-Precat f =
+    is-prop-all-elements-equal (all-elements-equal-is-iso-hom-Large-Precat f)
 
   type-iso-Large-Precat : UU (l1 ⊔ l2)
-  type-iso-Large-Precat = Σ (type-hom-Large-Precat C X Y) is-iso-Large-Precat
+  type-iso-Large-Precat = Σ (type-hom-Large-Precat C X Y) is-iso-hom-Large-Precat
 
   is-set-type-iso-Large-Precat : is-set type-iso-Large-Precat
   is-set-type-iso-Large-Precat =
     is-set-subtype
-      ( is-prop-is-iso-Large-Precat)
+      ( is-prop-is-iso-hom-Large-Precat)
       ( is-set-type-hom-Large-Precat C X Y)
 
   iso-Large-Precat : UU-Set (l1 ⊔ l2)
   pr1 iso-Large-Precat = type-iso-Large-Precat
   pr2 iso-Large-Precat = is-set-type-iso-Large-Precat
+
+  hom-iso-Large-Precat : type-iso-Large-Precat → type-hom-Large-Precat C X Y
+  hom-iso-Large-Precat = pr1
+
+  is-iso-hom-iso-Large-Precat :
+    (f : type-iso-Large-Precat) →
+    is-iso-hom-Large-Precat (hom-iso-Large-Precat f)
+  is-iso-hom-iso-Large-Precat f = pr2 f
+
+  hom-inv-iso-Large-Precat : type-iso-Large-Precat → type-hom-Large-Precat C Y X
+  hom-inv-iso-Large-Precat f = pr1 (pr2 f)
+
+  issec-hom-inv-iso-Large-Precat :
+    (f : type-iso-Large-Precat) →
+    Id ( comp-hom-Large-Precat C Y X Y
+         ( hom-iso-Large-Precat f)
+         ( hom-inv-iso-Large-Precat f))
+       ( id-hom-Large-Precat C Y)
+  issec-hom-inv-iso-Large-Precat f = pr1 (pr2 (pr2 f))
+
+  isretr-hom-inv-iso-Large-Precat :
+    (f : type-iso-Large-Precat) →
+    Id ( comp-hom-Large-Precat C X Y X
+         ( hom-inv-iso-Large-Precat f)
+         ( hom-iso-Large-Precat f))
+       ( id-hom-Large-Precat C X)
+  isretr-hom-inv-iso-Large-Precat f = pr2 (pr2 (pr2 f))
 
 ```
