@@ -351,6 +351,16 @@ module _
 module _
   {l1 : Level} (G : Group l1)
   where
+
+  Abstract-Group-Action-Large-Precat : Large-Precat
+  obj-Large-Precat Abstract-Group-Action-Large-Precat =
+    {!Abstract-Group-Action G!}
+  hom-Large-Precat Abstract-Group-Action-Large-Precat = {!!}
+  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat = {!!}
+  id-hom-Large-Precat Abstract-Group-Action-Large-Precat = {!!}
+  associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat = {!!}
+  left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat = {!!}
+  right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat = {!!}
   
   Abstract-Group-Action-Precat : (l2 : Level) → Precat (l1 ⊔ lsuc l2) (l1 ⊔ l2)
   pr1 (Abstract-Group-Action-Precat l2) = Abstract-Group-Action G l2

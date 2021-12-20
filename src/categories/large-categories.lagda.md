@@ -10,14 +10,14 @@ module categories.large-categories where
 open import foundations.18-set-quotients public
 open import Agda.Primitive public
 
-record Large-Precat : Setω where
+record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Setω where
   constructor make-Large-Precat
   field
     obj-Large-Precat :
-      (l : Level) → UU (lsuc l)
+      (l : Level) → UU (α l)
     hom-Large-Precat :
       {l1 l2 : Level} → obj-Large-Precat l1 → obj-Large-Precat l2 →
-      UU-Set (l1 ⊔ l2)
+      UU-Set (β l1 l2)
     comp-hom-Large-Precat :
       {l1 l2 l3 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       {Z : obj-Large-Precat l3} →
@@ -44,7 +44,7 @@ record Large-Precat : Setω where
 
 open Large-Precat public
 
-Set-Large-Precat : Large-Precat
+Set-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
 obj-Large-Precat Set-Large-Precat = UU-Set
 hom-Large-Precat Set-Large-Precat = hom-Set
 comp-hom-Large-Precat Set-Large-Precat g f = g ∘ f
@@ -59,18 +59,20 @@ right-unit-law-comp-hom-Large-Precat Set-Large-Precat f = refl
 ```agda
 
 module _
-  (C : Large-Precat) {l1 l2 : Level}
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 : Level}
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
 
-  type-hom-Large-Precat : UU (l1 ⊔ l2)
+  type-hom-Large-Precat : UU (β l1 l2)
   type-hom-Large-Precat = type-Set (hom-Large-Precat C X Y)
 
   is-set-type-hom-Large-Precat : is-set type-hom-Large-Precat
   is-set-type-hom-Large-Precat = is-set-type-Set (hom-Large-Precat C X Y)
 
 module _
-  (C : Large-Precat) {l1 l2 l3 : Level}
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 l3 : Level}
   {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2}
   {Z : obj-Large-Precat C l3}
   where
@@ -88,11 +90,13 @@ module _
   comp-hom-Large-Precat' f g = comp-hom-Large-Precat C g f
 
 module _
-  (C : Large-Precat) {l1 l2 : Level}
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 : Level}
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
   
-  is-iso-hom-Large-Precat : type-hom-Large-Precat C X Y → UU (l1 ⊔ l2)
+  is-iso-hom-Large-Precat :
+    type-hom-Large-Precat C X Y → UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   is-iso-hom-Large-Precat f =
     Σ ( type-hom-Large-Precat C Y X)
       ( λ g →
@@ -124,7 +128,7 @@ module _
   is-prop-is-iso-hom-Large-Precat f =
     is-prop-all-elements-equal (all-elements-equal-is-iso-hom-Large-Precat f)
 
-  type-iso-Large-Precat : UU (l1 ⊔ l2)
+  type-iso-Large-Precat : UU (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   type-iso-Large-Precat =
     Σ (type-hom-Large-Precat C X Y) is-iso-hom-Large-Precat
 
@@ -134,7 +138,7 @@ module _
       ( is-prop-is-iso-hom-Large-Precat)
       ( is-set-type-hom-Large-Precat C X Y)
 
-  iso-Large-Precat : UU-Set (l1 ⊔ l2)
+  iso-Large-Precat : UU-Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   pr1 iso-Large-Precat = type-iso-Large-Precat
   pr2 iso-Large-Precat = is-set-type-iso-Large-Precat
 
@@ -166,7 +170,8 @@ module _
   isretr-hom-inv-iso-Large-Precat f = pr2 (pr2 (pr2 f))
 
 module _
-  (C : Large-Precat) {l1 : Level} (X : obj-Large-Precat C l1)
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 : Level} (X : obj-Large-Precat C l1)
   where
 
   id-iso-Large-Precat : type-iso-Large-Precat C X X
@@ -182,7 +187,8 @@ module _
   iso-eq-Large-Precat .X refl = id-iso-Large-Precat
 
 module _
-  (C : Large-Precat)
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β)
   where
   
   is-category-Large-Precat : Setω
@@ -190,10 +196,10 @@ module _
     {l : Level} (X Y : obj-Large-Precat C l) →
     is-equiv (iso-eq-Large-Precat C X Y)
 
-record Large-Cat : Setω where
+record Large-Cat (α : Level → Level) (β : Level → Level → Level) : Setω where
   constructor make-Large-Cat
   field
-    precat-Large-Cat : Large-Precat
+    precat-Large-Cat : Large-Precat α β
     is-category-Large-Cat : is-category-Large-Precat precat-Large-Cat
 
 open Large-Cat public
