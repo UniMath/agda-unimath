@@ -956,15 +956,6 @@ left-unit-law-comp-hom-Large-Precat Group-Large-Precat =
 right-unit-law-comp-hom-Large-Precat Group-Large-Precat =
   right-unit-law-comp-hom-Group
 
-Group-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Group-Precat l) = Group l
-pr1 (pr2 (Group-Precat l)) = hom-Group
-pr1 (pr1 (pr2 (pr2 (Group-Precat l)))) {G} {H} {K} = comp-hom-Group G H K
-pr2 (pr1 (pr2 (pr2 (Group-Precat l)))) {G} {H} {K} {L} = associative-comp-hom-Group G H K L
-pr1 (pr2 (pr2 (pr2 (Group-Precat l)))) = id-hom-Group
-pr1 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) {G} {H} = left-unit-law-comp-hom-Group G H
-pr2 (pr2 (pr2 (pr2 (pr2 (Group-Precat l))))) {G} {H} = right-unit-law-comp-hom-Group G H
-
 {- We show that the precategory of groups is a category -}
 
 module _
