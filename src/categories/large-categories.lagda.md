@@ -204,4 +204,64 @@ record Large-Cat (α : Level → Level) (β : Level → Level → Level) : Setω
 
 open Large-Cat public
 
+module _
+  {αC αD : Level → Level} {βC βD : Level → Level → Level}
+  (C : Large-Precat αC βC) (D : Large-Precat αD βD)
+  where
+
+  record functor-Large-Precat (γ : Level → Level) : Setω
+    where
+    constructor make-functor
+    field
+      obj-functor-Large-Precat :
+        {l1 : Level} → obj-Large-Precat C l1 → obj-Large-Precat D (γ l1)
+      hom-functor-Large-Precat :
+        {l1 l2 : Level}
+        {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2} →
+        type-hom-Large-Precat C X Y →
+        type-hom-Large-Precat D
+          ( obj-functor-Large-Precat X)
+          ( obj-functor-Large-Precat Y)
+      preserves-comp-functor-Large-Precat :
+        {l1 l2 l3 : Level} (X : obj-Large-Precat C l1)
+        (Y : obj-Large-Precat C l2) (Z : obj-Large-Precat C l3)
+        (g : type-hom-Large-Precat C Y Z) (f : type-hom-Large-Precat C X Y) →
+        Id ( hom-functor-Large-Precat (comp-hom-Large-Precat C g f))
+           ( comp-hom-Large-Precat D
+             ( hom-functor-Large-Precat g)
+             ( hom-functor-Large-Precat f))
+      preserves-id-functor-Large-Precat :
+        {l1 : Level} (X : obj-Large-Precat C l1) →
+        Id ( hom-functor-Large-Precat (id-hom-Large-Precat C {X = X}))
+           ( id-hom-Large-Precat D {X = obj-functor-Large-Precat X})
+
+open functor-Large-Precat public
+
+module _
+  {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
+  (C : Large-Precat αC βC) (D : Large-Precat αD βD)
+  (F : functor-Large-Precat C D γF) (G : functor-Large-Precat C D γG)
+  where
+  
+  record natural-transformation-Large-Precat : Setω
+    where
+    constructor make-natural-transformation
+    field
+      obj-natural-transformation-Large-Precat :
+        {l1 : Level} (X : obj-Large-Precat C l1) →
+        type-hom-Large-Precat D
+          ( obj-functor-Large-Precat F X)
+          ( obj-functor-Large-Precat G X)
+      coherence-square-natural-transformation-Large-Precat :
+        {l1 l2 : Level} {X : obj-Large-Precat C l1}
+        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
+        Id ( comp-hom-Large-Precat D
+             ( obj-natural-transformation-Large-Precat Y)
+             ( hom-functor-Large-Precat F f))
+           ( comp-hom-Large-Precat D
+             ( hom-functor-Large-Precat G f)
+             ( obj-natural-transformation-Large-Precat X))
+
+open natural-transformation-Large-Precat public
+
 ```
