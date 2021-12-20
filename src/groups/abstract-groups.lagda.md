@@ -236,17 +236,6 @@ left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat =
 right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat =
   right-unit-law-comp-hom-Semigroup
 
-Semigroup-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Semigroup-Precat l) = Semigroup l
-pr1 (pr2 (Semigroup-Precat l)) = hom-Semigroup
-pr1 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) {G} {H} {K} = comp-hom-Semigroup G H K
-pr2 (pr1 (pr2 (pr2 (Semigroup-Precat l)))) {G} {H} {K} {L} = associative-comp-hom-Semigroup G H K L
-pr1 (pr2 (pr2 (pr2 (Semigroup-Precat l)))) = id-hom-Semigroup
-pr1 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) {G} {H} =
-  left-unit-law-comp-hom-Semigroup G H
-pr2 (pr2 (pr2 (pr2 (pr2 (Semigroup-Precat l))))) {G} {H} =
-  right-unit-law-comp-hom-Semigroup G H
-
 {- We show that the precategory of semigroups is a category -}
 
 module _
@@ -955,6 +944,18 @@ right-unit-law-comp-hom-Group G H =
     ( semigroup-Group G)
     ( semigroup-Group H)
 
+Group-Large-Precat : Large-Precat
+obj-Large-Precat Group-Large-Precat = Group
+hom-Large-Precat Group-Large-Precat = hom-Group
+comp-hom-Large-Precat Group-Large-Precat = comp-hom-Group
+id-hom-Large-Precat Group-Large-Precat = id-hom-Group
+associative-comp-hom-Large-Precat Group-Large-Precat =
+  associative-comp-hom-Group
+left-unit-law-comp-hom-Large-Precat Group-Large-Precat =
+  left-unit-law-comp-hom-Group
+right-unit-law-comp-hom-Large-Precat Group-Large-Precat =
+  right-unit-law-comp-hom-Group
+
 Group-Precat : (l : Level) → Precat (lsuc l) l
 pr1 (Group-Precat l) = Group l
 pr1 (pr2 (Group-Precat l)) = hom-Group
@@ -971,30 +972,20 @@ module _
   where
   
   is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-Group =
-    is-iso-hom-Semigroup
-      ( semigroup-Group G)
-      ( semigroup-Group H)
-
-  inv-is-iso-hom-Group :
-    (f : type-hom-Group G H) → is-iso-hom-Group f → type-hom-Group H G
-  inv-is-iso-hom-Group f = pr1
+  is-iso-hom-Group = is-iso-hom-Large-Precat Group-Large-Precat G H
 
   type-iso-Group : UU (l1 ⊔ l2)
-  type-iso-Group = type-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
+  type-iso-Group = type-iso-Large-Precat Group-Large-Precat G H
 
   hom-iso-Group : type-iso-Group → type-hom-Group G H
-  hom-iso-Group = pr1
+  hom-iso-Group = hom-iso-Large-Precat Group-Large-Precat G H
 
   is-iso-hom-iso-Group :
     (f : type-iso-Group) → is-iso-hom-Group (hom-iso-Group f)
-  is-iso-hom-iso-Group = pr2
+  is-iso-hom-iso-Group = is-iso-hom-iso-Large-Precat Group-Large-Precat G H
 
   hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
-  hom-inv-iso-Group f =
-    inv-is-iso-hom-Group
-      ( hom-iso-Group f)
-      ( is-iso-hom-iso-Group f)
+  hom-inv-iso-Group = hom-inv-iso-Large-Precat Group-Large-Precat G H
 
   equiv-Group : UU (l1 ⊔ l2)
   equiv-Group = equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
@@ -1011,10 +1002,10 @@ module _
   where
 
   id-iso-Group : type-iso-Group G G
-  id-iso-Group = id-iso-Semigroup (semigroup-Group G)
+  id-iso-Group = id-iso-Large-Precat Group-Large-Precat G
 
   iso-eq-Group : (H : Group l) → Id G H → type-iso-Group G H
-  iso-eq-Group = iso-eq-Precat (Group-Precat l) G
+  iso-eq-Group = iso-eq-Large-Precat Group-Large-Precat G
 
   abstract
     extensionality-Group' : (H : Group l) → Id G H ≃ type-iso-Group G H
@@ -1032,19 +1023,19 @@ module _
         ( equiv-tot extensionality-Group')
         ( is-contr-total-path G)
 
-  is-category-Group : (H : Group l) → is-equiv (iso-eq-Group H)
-  is-category-Group =
-    fundamental-theorem-id G
-      id-iso-Group
-      is-contr-total-iso-Group
-      iso-eq-Group
+is-category-Group : is-category-Large-Precat Group-Large-Precat
+is-category-Group G =
+  fundamental-theorem-id G
+    ( id-iso-Group G)
+    ( is-contr-total-iso-Group G)
+    ( iso-eq-Group G)
 
-  eq-iso-Group : (H : Group l) → type-iso-Group G H → Id G H
-  eq-iso-Group H = map-inv-is-equiv (is-category-Group H)
+eq-iso-Group : {l : Level} (G H : Group l) → type-iso-Group G H → Id G H
+eq-iso-Group G H = map-inv-is-equiv (is-category-Group G H)
 
-Group-Cat : (l : Level) → Cat (lsuc l) l
-pr1 (Group-Cat l) = Group-Precat l
-pr2 (Group-Cat l) = is-category-Group
+Group-Large-Cat : Large-Cat
+precat-Large-Cat Group-Large-Cat = Group-Large-Precat
+is-category-Large-Cat Group-Large-Cat = is-category-Group
 ```
 ### Examples of groups
 
