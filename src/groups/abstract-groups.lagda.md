@@ -217,7 +217,7 @@ right-unit-law-comp-hom-Semigroup
   eq-htpy-hom-Semigroup
     ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy
 
-Semigroup-Large-Precat : Large-Precat
+Semigroup-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
 obj-Large-Precat Semigroup-Large-Precat = Semigroup
 hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
 comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} =
@@ -426,7 +426,7 @@ eq-iso-Semigroup :
   {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
 eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
-Semigroup-Large-Cat : Large-Cat
+Semigroup-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
 precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precat
 is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
 
@@ -939,7 +939,7 @@ right-unit-law-comp-hom-Group G H =
     ( semigroup-Group G)
     ( semigroup-Group H)
 
-Group-Large-Precat : Large-Precat
+Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
 obj-Large-Precat Group-Large-Precat = Group
 hom-Large-Precat Group-Large-Precat = hom-Group
 comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
@@ -1021,7 +1021,7 @@ is-category-Group G =
 eq-iso-Group : {l : Level} (G H : Group l) → type-iso-Group G H → Id G H
 eq-iso-Group G H = map-inv-is-equiv (is-category-Group G H)
 
-Group-Large-Cat : Large-Cat
+Group-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
 precat-Large-Cat Group-Large-Cat = Group-Large-Precat
 is-category-Large-Cat Group-Large-Cat = is-category-Group
 ```
