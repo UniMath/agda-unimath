@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundations.pointed-maps where
+module synthetic-homotopy-theory.pointed-maps where
 
-open import foundations.24-pushouts public
+open import synthetic-homotopy-theory.24-pushouts public
 
 -- The universe of pointed types
 

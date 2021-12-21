@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --allow-unsolved-metas --exact-split #-}
 
-module foundations.26-descent where
+module synthetic-homotopy-theory.26-descent where
 
-open import foundations.25-cubical-diagrams public
+open import synthetic-homotopy-theory.25-cubical-diagrams public
 
 -- Section 18.1 Five equivalent characterizations of pushouts
 

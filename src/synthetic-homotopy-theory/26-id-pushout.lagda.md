@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module foundations.26-id-pushout where
+module synthetic-homotopy-theory.26-id-pushout where
 
-open import foundations.26-descent public
+open import synthetic-homotopy-theory.26-descent public
 
 -- Section 19.1 Characterizing families of maps over pushouts
 

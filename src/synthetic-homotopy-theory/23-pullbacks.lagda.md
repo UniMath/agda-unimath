@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundations.23-pullbacks where
+module synthetic-homotopy-theory.23-pullbacks where
 
-open import foundations.18-set-quotients public
+open import univalent-foundations public
 
 -- Section 13.1 Cartesian squares
 

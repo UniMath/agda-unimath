@@ -9,11 +9,9 @@ title: Formalisation of the Symmetry Book
 {-# OPTIONS --without-K --exact-split #-}
 ```
 
-## Chapter 2: Univalent mathematics
-
+## Foundations
 
 ```agda
--- Formalization with --safe enabled
 open import foundations.00-preamble public
 open import foundations.02-pi public
 open import foundations.03-natural-numbers public
@@ -27,30 +25,31 @@ open import foundations.09-equivalences public
 open import foundations.10-contractible-types public
 open import foundations.11-fundamental-theorem public
 open import foundations.12-truncation-levels public
+```
 
--- Formalization with --safe disabled
-open import foundations.13-function-extensionality public
-open import foundations.14-propositional-truncation public
-open import foundations.15-image public
-open import foundations.16-finite-types public
-open import foundations.17-univalence public
-open import foundations.18-set-quotients public
-open import foundations.23-pullbacks public
-open import foundations.24-pushouts public
-open import foundations.25-cubical-diagrams public
-open import foundations.26-descent public
-open import foundations.26-id-pushout public
-open import foundations.27-sequences public
-open import foundations.W-types public
-open import foundations.pointed-maps public
-open import foundations.spaces public
+## Univalent Foundations
+
+```agda
+open import univalent-foundations.13-function-extensionality public
+open import univalent-foundations.13-function-extensionality-solutions public
+open import univalent-foundations.14-propositional-truncation public
+open import univalent-foundations.15-image public
+open import univalent-foundations.16-finite-types public
+open import univalent-foundations.17-univalence public
+open import univalent-foundations.18-set-quotients public
+open import univalent-foundations.W-types public
+```
+
+## Categories
+
+```agda
 open import categories.categories public
 open import categories.functors public
 open import categories.natural-transformations public
 open import categories.large-categories public
 ```
 
-## Chapter 3 : The circle
+## The circle
 
 ```agda
 open import the-circle.the-circle public
@@ -60,7 +59,20 @@ open import the-circle.cyclic-types public
 open import the-circle.infinite-cyclic-types public
 ```
 
-## Chapter 4 : Groups 
+## Synthetic Homotopy Theory
+
+```agda
+open import synthetic-homotopy-theory.23-pullbacks public
+open import synthetic-homotopy-theory.24-pushouts public
+open import synthetic-homotopy-theory.25-cubical-diagrams public
+open import synthetic-homotopy-theory.26-descent public
+open import synthetic-homotopy-theory.26-id-pushout public
+open import synthetic-homotopy-theory.27-sequences public
+open import synthetic-homotopy-theory.pointed-maps public
+open import synthetic-homotopy-theory.spaces public
+```
+
+## Groups 
 
 ```agda
 open import groups.abstract-groups public
@@ -75,7 +87,7 @@ open import groups.sheargroups public
 open import groups.furstenberg-groups public
 ```
 
-## Chapter 5 : Subgroups
+## Subgroups
 
 ```agda
 open import subgroups.abstract-subgroups public

@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundations.14-propositional-truncation where
+module univalent-foundations.14-propositional-truncation where
 
-open import foundations.13-function-extensionality-solutions public
+open import univalent-foundations.13-function-extensionality-solutions public
 
 --------------------------------------------------------------------------------
 

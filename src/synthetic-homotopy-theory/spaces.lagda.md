@@ -5,10 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundations.spaces where
+module synthetic-homotopy-theory.spaces where
 
-open import foundations.24-pushouts public
-open import foundations.pointed-maps public
+open import synthetic-homotopy-theory.24-pushouts public
+open import synthetic-homotopy-theory.pointed-maps public
 
 --------------------------------------------------------------------------------
 

@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module foundations.18-set-quotients where
+module univalent-foundations.18-set-quotients where
 
-open import foundations.17-univalence public
+open import univalent-foundations.17-univalence public
 
 --------------------------------------------------------------------------------
 
