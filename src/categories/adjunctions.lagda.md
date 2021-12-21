@@ -38,3 +38,13 @@ module _
           ( map-equiv (equiv-is-right-adjoint-functor-Large-Precat X1 Y1)))
 
   open is-right-adjoint-functor-Large-Precat public
+
+module _
+  {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
+  {C : Large-Precat αC βC} {D : Large-Precat αD βD}
+  (G : functor-Large-Precat D C γG) (F : functor-Large-Precat C D γF)
+  where
+
+  is-left-adjoint-functor-Large-Precat : Setω
+  is-left-adjoint-functor-Large-Precat =
+    is-right-adjoint-functor-Large-Precat F G
