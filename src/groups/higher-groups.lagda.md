@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module groups.higher-groups where
 
-open import foundations.pointed-maps public
+open import univalent-foundations public
 
 ∞-Group : (l : Level) → UU (lsuc l)
 ∞-Group l = Σ (Pointed-Type l) (λ X → is-path-connected (type-Pointed-Type X))

@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --allow-unsolved-metas --exact-split #-}
 
-module foundations.24-pushouts where
+module synthetic-homotopy-theory.24-pushouts where
 
-open import foundations.23-pullbacks public
+open import synthetic-homotopy-theory.23-pullbacks public
 
 -- Section 14.1
 

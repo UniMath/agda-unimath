@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module foundations.27-sequences where
+module synthetic-homotopy-theory.27-sequences where
 
-open import foundations.26-id-pushout public
+open import synthetic-homotopy-theory.26-id-pushout public
 
 {- We introduce two types of sequences: one with the arrows going up and one
    with the arrows going down. -}

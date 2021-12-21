@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module the-circle.integers where
 
-open import foundations public
+open import univalent-foundations public
 
 --------------------------------------------------------------------------------
 

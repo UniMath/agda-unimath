@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module categories.categories where
 
-open import foundations public
+open import univalent-foundations public
 
 module _
   {l1 l2 : Level} {A : UU l1} (hom : A → A → UU-Set l2)

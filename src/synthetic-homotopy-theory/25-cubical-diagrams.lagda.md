@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --allow-unsolved-metas --exact-split #-}
 
-module foundations.25-cubical-diagrams where
+module synthetic-homotopy-theory.25-cubical-diagrams where
 
-open import foundations.24-pushouts public
+open import synthetic-homotopy-theory.24-pushouts public
 
 -- Section 15.1 Commuting cubes
 
