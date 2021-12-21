@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module categories.large-categories where
 
-open import foundations.18-set-quotients public
+open import univalent-foundations public
 open import Agda.Primitive public
 
 record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Setω where

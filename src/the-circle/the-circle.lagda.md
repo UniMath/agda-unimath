@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module the-circle.the-circle where
 
-open import foundations public
+open import univalent-foundations public
 
 {- Section 11.1 The induction principle of the circle -}
 

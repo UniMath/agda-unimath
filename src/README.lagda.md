@@ -38,6 +38,8 @@ open import univalent-foundations.16-finite-types public
 open import univalent-foundations.17-univalence public
 open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.W-types public
+open import univalent-foundations.pointed-types public
+
 ```
 
 ## Categories
@@ -68,7 +70,6 @@ open import synthetic-homotopy-theory.25-cubical-diagrams public
 open import synthetic-homotopy-theory.26-descent public
 open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.27-sequences public
-open import synthetic-homotopy-theory.pointed-maps public
 open import synthetic-homotopy-theory.spaces public
 ```
 

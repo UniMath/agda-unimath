@@ -8,7 +8,6 @@ title: Formalisation of the Symmetry Book
 module synthetic-homotopy-theory.spaces where
 
 open import synthetic-homotopy-theory.24-pushouts public
-open import synthetic-homotopy-theory.pointed-maps public
 
 --------------------------------------------------------------------------------
 
