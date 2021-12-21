@@ -326,4 +326,17 @@ module _
                
   open natural-isomorphism-Large-Precat public
 
+  natural-transformation-natural-isomorphism-Large-Precat :
+    natural-isomorphism-Large-Precat → natural-transformation-Large-Precat
+  obj-natural-transformation-Large-Precat
+    ( natural-transformation-natural-isomorphism-Large-Precat f)
+    ( X) =
+    hom-iso-Large-Precat D
+      ( obj-functor-Large-Precat F X)
+      ( obj-functor-Large-Precat G X)
+      ( obj-natural-isomorphism-Large-Precat f X)
+  coherence-square-natural-transformation-Large-Precat
+    ( natural-transformation-natural-isomorphism-Large-Precat f) =
+    coherence-square-natural-isomorphism-Large-Precat f
+
 ```
