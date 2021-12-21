@@ -11,11 +11,15 @@ Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
 ## Structure of the library
 
 The Agda source of the library can be found in the folder `src`. This folder contains several subfolders:
-1. The `foundations` folder contains a general development of the univalent foundations for mathematics. The material in this folder exceeds the material in Chapter 2 of the Symmetry Book. The files of this library originate from the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
-2. The `categories` folder contains some category theory.
-3. The `the-circle` folder contains the material for Chapter 3.
-4. The `groups` folder contains the material for Chapter 4.
-5. The `subgroups` folder contains the material for Chapter 5.
+1. The `foundations` folder contains the basics of dependent type theory. This part of the formalisation runs in `--safe` agda.
+2. The `univalent-foundations` folder extends the type theory of Agda with function extensionality, propositional truncations, and the univalence axiom.
+4. The `categories` folder contains some category theory.
+6. The `the-circle` folder contains the material for Chapter 3.
+7. The `synthetic-homotopy-theory` folder contains the formalisation of pullbacks, pushouts, and (eventually) homotopy groups of types.
+8. The `groups` folder contains the material for Chapter 4 of the Symmetry book.
+9. The `subgroups` folder contains the material for Chapter 5 of the Symmetry book.
+
+This library is built on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
 
 Although the folders are roughly organised according to the chapters of the Symmetry Book, we don't commit to closely following the sectioning in the book.
 
