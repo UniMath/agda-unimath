@@ -100,57 +100,49 @@ module _
     associative-composition-structure-Set hom-Precat
   associative-composition-Precat = pr1 (pr2 (pr2 C))
 
-comp-Precat : ∀ {l1 l2} (C : Precat l1 l2) {x y z : obj-Precat C} →
-  type-hom-Precat C y z → type-hom-Precat C x y → type-hom-Precat C x z
-comp-Precat C = pr1 (associative-composition-Precat C)
+  comp-Precat : {x y z : obj-Precat} →
+    type-hom-Precat y z → type-hom-Precat x y → type-hom-Precat x z
+  comp-Precat = pr1 associative-composition-Precat
 
-syntax comp-Precat C g f = g ∘⟦ C ⟧ f
-
-comp-Precat' : ∀ {l1 l2} (C : Precat l1 l2) {x y z : obj-Precat C} →
-  type-hom-Precat C x y → type-hom-Precat C y z → type-hom-Precat C x z
-comp-Precat' C f g = comp-Precat C g f
-
-syntax comp-Precat' C f g = f ∙⟦ C ⟧ g
-
-module _
-  {l1 l2 : Level} (C : Precat l1 l2)
-  where
+  comp-Precat' : {x y z : obj-Precat} →
+    type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
+  comp-Precat' f g = comp-Precat g f
 
   assoc-comp-Precat :
-    {x y z w : obj-Precat C} (h : type-hom-Precat C z w) (g : type-hom-Precat C y z)
-    (f : type-hom-Precat C x y) →
-    Id ((h ∘⟦ C ⟧ g) ∘⟦ C ⟧ f)
-       (h ∘⟦ C ⟧ (g ∘⟦ C ⟧ f))
-  assoc-comp-Precat = pr2 (associative-composition-Precat C)
+    {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
+    (f : type-hom-Precat x y) →
+    Id (comp-Precat (comp-Precat h g) f)
+       (comp-Precat h (comp-Precat g f))
+  assoc-comp-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
     is-unital-composition-structure-Set
-      (hom-Precat C)
-      (associative-composition-Precat C)
+      hom-Precat
+      associative-composition-Precat
   is-unital-Precat = pr2 (pr2 (pr2 C))
 
-  id-Precat : (x : obj-Precat C) → type-hom-Precat C x x
-  id-Precat = pr1 is-unital-Precat
+  id-Precat : {x : obj-Precat} → type-hom-Precat x x
+  id-Precat {x} = pr1 is-unital-Precat x
 
   left-unit-law-comp-Precat :
-    {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-    Id ((id-Precat y) ∘⟦ C ⟧ f) f
+    {x y : obj-Precat} (f : type-hom-Precat x y) →
+    Id (comp-Precat id-Precat f) f
   left-unit-law-comp-Precat = pr1 (pr2 is-unital-Precat)
 
   right-unit-law-comp-Precat :
-    {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-    Id (f ∘⟦ C ⟧ (id-Precat x)) f
+    {x y : obj-Precat} (f : type-hom-Precat x y) →
+    Id (comp-Precat f id-Precat) f
   right-unit-law-comp-Precat = pr2 (pr2 is-unital-Precat)
 
-  is-iso-Precat : {x y : obj-Precat C} (f : type-hom-Precat C x y) → UU l2
+  is-iso-Precat : {x y : obj-Precat} (f : type-hom-Precat x y) → UU l2
   is-iso-Precat {x} {y} f =
-    Σ ( type-hom-Precat C y x)
-       ( λ g → Id (f ∘⟦ C ⟧ g) (id-Precat y) ×
-               Id (g ∘⟦ C ⟧ f) (id-Precat x))
+    Σ ( type-hom-Precat y x)
+       ( λ g → Id (comp-Precat f g) id-Precat ×
+               Id (comp-Precat g f) id-Precat)
 
   abstract
     is-proof-irrelevant-is-iso-Precat :
-      {x y : obj-Precat C} (f : type-hom-Precat C x y) →
+      {x y : obj-Precat} (f : type-hom-Precat x y) →
       is-proof-irrelevant (is-iso-Precat f)
     pr1 (is-proof-irrelevant-is-iso-Precat f H) = H
     pr2
@@ -160,49 +152,49 @@ module _
       eq-subtype
         ( λ h →
           is-prop-prod
-            ( is-set-type-hom-Precat C y y (f ∘⟦ C ⟧ h) (id-Precat y))
-            ( is-set-type-hom-Precat C x x (h ∘⟦ C ⟧ f) (id-Precat x)))
+            ( is-set-type-hom-Precat y y (comp-Precat f h) id-Precat)
+            ( is-set-type-hom-Precat x x (comp-Precat h f) id-Precat))
         ( ( inv (right-unit-law-comp-Precat g)) ∙
-          ( ( ap (comp-Precat C g) (inv p')) ∙
+          ( ( ap (comp-Precat g) (inv p')) ∙
             ( ( inv (assoc-comp-Precat g f g')) ∙
-              ( ( ap (comp-Precat' C g') q) ∙
+              ( ( ap (comp-Precat' g') q) ∙
                 ( left-unit-law-comp-Precat g')))))
 
     is-prop-is-iso-Precat :
-      {x y : obj-Precat C} (f : type-hom-Precat C x y) →
+      {x y : obj-Precat} (f : type-hom-Precat x y) →
       is-prop (is-iso-Precat f)
     is-prop-is-iso-Precat f =
       is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
 
-  iso-Precat : (x y : obj-Precat C) → UU l2
-  iso-Precat x y = Σ (type-hom-Precat C x y) is-iso-Precat
+  iso-Precat : (x y : obj-Precat) → UU l2
+  iso-Precat x y = Σ (type-hom-Precat x y) is-iso-Precat
 
-  is-set-iso-Precat : (x y : obj-Precat C) → is-set (iso-Precat x y)
+  is-set-iso-Precat : (x y : obj-Precat) → is-set (iso-Precat x y)
   is-set-iso-Precat x y =
     is-set-subtype
       is-prop-is-iso-Precat
-      (is-set-type-hom-Precat C x y)
+      (is-set-type-hom-Precat x y)
       
-  iso-Precat-Set : (x y : obj-Precat C) → UU-Set l2
+  iso-Precat-Set : (x y : obj-Precat) → UU-Set l2
   pr1 (iso-Precat-Set x y) = iso-Precat x y
   pr2 (iso-Precat-Set x y) = is-set-iso-Precat x y
 
-  is-iso-id-Precat : {x : obj-Precat C} → is-iso-Precat (id-Precat x)
-  pr1 (is-iso-id-Precat {x}) = id-Precat x
-  pr1 (pr2 (is-iso-id-Precat {x})) = left-unit-law-comp-Precat (id-Precat x)
-  pr2 (pr2 (is-iso-id-Precat {x})) = left-unit-law-comp-Precat (id-Precat x)
+  is-iso-id-Precat : {x : obj-Precat} → is-iso-Precat (id-Precat {x})
+  pr1 is-iso-id-Precat = id-Precat
+  pr1 (pr2 is-iso-id-Precat) = left-unit-law-comp-Precat id-Precat
+  pr2 (pr2 is-iso-id-Precat) = left-unit-law-comp-Precat id-Precat
 
-  id-iso-Precat : {x : obj-Precat C} → iso-Precat x x
-  pr1 (id-iso-Precat {x}) = id-Precat x
-  pr2 (id-iso-Precat {x}) = is-iso-id-Precat
+  id-iso-Precat : {x : obj-Precat} → iso-Precat x x
+  pr1 id-iso-Precat = id-Precat
+  pr2 id-iso-Precat = is-iso-id-Precat
 
-  iso-eq-Precat : (x y : obj-Precat C) → Id x y → iso-Precat x y
+  iso-eq-Precat : (x y : obj-Precat) → Id x y → iso-Precat x y
   iso-eq-Precat x .x refl = id-iso-Precat
 
   is-category-Precat-Prop : UU-Prop (l1 ⊔ l2)
   is-category-Precat-Prop =
-    Π-Prop (obj-Precat C)
-      ( λ x → Π-Prop (obj-Precat C) (λ y → is-equiv-Prop (iso-eq-Precat x y)))
+    Π-Prop obj-Precat
+      ( λ x → Π-Prop obj-Precat (λ y → is-equiv-Prop (iso-eq-Precat x y)))
 
   is-category-Precat : UU (l1 ⊔ l2)
   is-category-Precat = type-Prop is-category-Precat-Prop
@@ -239,15 +231,15 @@ module _
        ( comp-Cat h (comp-Cat g f))
   assoc-comp-Cat = assoc-comp-Precat precat-Cat
 
-  id-Cat : (x : obj-Cat) → type-hom-Cat x x
+  id-Cat : {x : obj-Cat} → type-hom-Cat x x
   id-Cat = id-Precat precat-Cat
 
   left-unit-law-comp-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-Cat (id-Cat y) f) f
+    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-Cat id-Cat f) f
   left-unit-law-comp-Cat = left-unit-law-comp-Precat precat-Cat
 
   right-unit-law-comp-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-Cat f (id-Cat x)) f
+    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-Cat f id-Cat) f
   right-unit-law-comp-Cat = right-unit-law-comp-Precat precat-Cat
 
   is-iso-Cat : {x y : obj-Cat} (f : type-hom-Cat x y) → UU l2
@@ -266,7 +258,7 @@ module _
   iso-Cat-Set : (x y : obj-Cat) → UU-Set l2
   iso-Cat-Set = iso-Precat-Set precat-Cat
 
-  is-iso-id-Cat : {x : obj-Cat} → is-iso-Cat (id-Cat x)
+  is-iso-id-Cat : {x : obj-Cat} → is-iso-Cat (id-Cat {x})
   is-iso-id-Cat = is-iso-id-Precat precat-Cat
 
   id-iso-Cat : {x : obj-Cat} → iso-Cat x x
