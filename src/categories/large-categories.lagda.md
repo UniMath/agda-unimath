@@ -299,4 +299,31 @@ module _
 
   open natural-transformation-Large-Precat public
 
+  record natural-isomorphism-Large-Precat : Setω
+    where
+    constructor make-natural-isomorphism
+    field
+      obj-natural-isomorphism-Large-Precat :
+        {l1 : Level} (X : obj-Large-Precat C l1) →
+        type-iso-Large-Precat D
+          ( obj-functor-Large-Precat F X)
+          ( obj-functor-Large-Precat G X)
+      coherence-square-natural-isomorphism-Large-Precat :
+        {l1 l2 : Level} {X : obj-Large-Precat C l1}
+        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
+        Id ( comp-hom-Large-Precat D
+             ( hom-iso-Large-Precat D
+               ( obj-functor-Large-Precat F Y)
+               ( obj-functor-Large-Precat G Y)
+               ( obj-natural-isomorphism-Large-Precat Y))
+             ( hom-functor-Large-Precat F f))
+           ( comp-hom-Large-Precat D
+             ( hom-functor-Large-Precat G f)
+             ( hom-iso-Large-Precat D
+               ( obj-functor-Large-Precat F X)
+               ( obj-functor-Large-Precat G X)
+               ( obj-natural-isomorphism-Large-Precat X)))
+               
+  open natural-isomorphism-Large-Precat public
+
 ```
