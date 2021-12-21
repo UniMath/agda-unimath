@@ -15,7 +15,8 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat D C γG)
   where
 
-  record is-right-adjoint-functor-Large-Precat : Setω where
+  record is-right-adjoint-functor-Large-Precat : Setω
+    where
     field
       equiv-is-right-adjoint-functor-Large-Precat :
         {l1 l2 : Level} (X : obj-Large-Precat C l1)
@@ -30,7 +31,8 @@ module _
         ( ( map-equiv (equiv-is-right-adjoint-functor-Large-Precat X2 Y2)) ∘
           ( λ h →
             comp-hom-Large-Precat C
-              ( comp-hom-Large-Precat C (hom-functor-Large-Precat G g) h) f)) ~
+              ( comp-hom-Large-Precat C (hom-functor-Large-Precat G g) h)
+              ( f))) ~
         ( ( λ h →
             comp-hom-Large-Precat D
               ( comp-hom-Large-Precat D g h)
@@ -48,3 +50,27 @@ module _
   is-left-adjoint-functor-Large-Precat : Setω
   is-left-adjoint-functor-Large-Precat =
     is-right-adjoint-functor-Large-Precat F G
+
+
+module _
+  {αC αD : Level → Level} {βC βD : Level → Level → Level}
+  (C : Large-Precat αC βC) (D : Large-Precat αD βD)
+  where
+
+  record Adjunction : Setω
+    where
+    field
+      level-left-adjoint-Adjunction :
+        Level → Level
+      left-adjoint-Adjunction :
+        functor-Large-Precat C D level-left-adjoint-Adjunction
+      level-right-adjoint-Adjunction :
+        Level → Level
+      right-adjoint-Adjunction :
+        functor-Large-Precat D C level-right-adjoint-Adjunction
+      is-right-adjoint-right-adjoint-Adjunction :
+        is-right-adjoint-functor-Large-Precat
+          left-adjoint-Adjunction
+          right-adjoint-Adjunction
+
+  open Adjunction public
