@@ -74,3 +74,20 @@ module _
           right-adjoint-Adjunction
 
   open Adjunction public
+
+  unit-Adjunction :
+    (A : Adjunction) →
+    natural-transformation-Large-Precat C C
+      ( id-functor-Large-Precat C)
+      ( comp-functor-Large-Precat
+        ( right-adjoint-Adjunction A)
+        ( left-adjoint-Adjunction A))
+  obj-natural-transformation-Large-Precat (unit-Adjunction A) X =
+    map-inv-equiv
+      ( equiv-is-right-adjoint-functor-Large-Precat
+        ( is-right-adjoint-right-adjoint-Adjunction A)
+        ( X)
+        ( obj-functor-Large-Precat (left-adjoint-Adjunction A) X))
+      ( id-hom-Large-Precat D)
+  coherence-square-natural-transformation-Large-Precat (unit-Adjunction A) f =
+    {!!}
