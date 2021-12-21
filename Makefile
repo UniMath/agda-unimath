@@ -1,8 +1,10 @@
 
 checkOpts :=--without-K --exact-split
 everythingOpts :=$(checkOpts) --allow-unsolved-metas
-agdaVerbose?=0
-# export agdaVerbose=20 if you want to see all
+agdaVerbose?=1
+# use "$ export agdaVerbose=20" if you want to see all
+AGDA_FILES := $(wildcard ./src/**/*.lagda.md)
+bar := $(foreach f,$(AGDA_FILES),$(shell wc -l $(f))"\n")
 
 htmlOpts=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 AGDA ?=agda -v$(agdaVerbose)
@@ -11,10 +13,15 @@ TIME ?=time
 .PHONY : agdaFiles
 agdaFiles : 
 	@rm -rf $@
-	@rm -rf src/everything.lagda.md ;\
-	find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $@; \
-	sort -o $@ $@; \
-	wc -l $@
+	@rm -rf src/everything.lagda.md
+	@find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $@
+	@sort -o $@ $@
+	@wc -l $@
+	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
+
+
+# for p in $(shell cat $@); do echo $(shell wc -l $p); done
+
 
 .PHONY : src/everything.lagda.md
 src/everything.lagda.md : agdaFiles
