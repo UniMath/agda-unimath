@@ -28,16 +28,17 @@ module _
         {X2 : obj-Large-Precat C l2} {Y1 : obj-Large-Precat D l3}
         {Y2 : obj-Large-Precat D l4} (f : type-hom-Large-Precat C X2 X1)
         (g : type-hom-Large-Precat D Y1 Y2) →
-        ( ( map-equiv (equiv-is-adjoint-pair-Large-Precat X2 Y2)) ∘
+        coherence-square
+          ( map-equiv (equiv-is-adjoint-pair-Large-Precat X1 Y1))
           ( λ h →
             comp-hom-Large-Precat C
               ( comp-hom-Large-Precat C (hom-functor-Large-Precat G g) h)
-              ( f))) ~
-        ( ( λ h →
+              ( f))
+          ( λ h →
             comp-hom-Large-Precat D
               ( comp-hom-Large-Precat D g h)
-              ( hom-functor-Large-Precat F f)) ∘
-          ( map-equiv (equiv-is-adjoint-pair-Large-Precat X1 Y1)))
+              ( hom-functor-Large-Precat F f))
+          ( map-equiv (equiv-is-adjoint-pair-Large-Precat X2 Y2))
 
   open is-adjoint-pair-Large-Precat public
 
