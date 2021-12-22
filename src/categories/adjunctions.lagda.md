@@ -125,26 +125,210 @@ module _
         Level → Level
       right-adjoint-Adjunction :
         functor-Large-Precat D C level-right-adjoint-Adjunction
-      is-adjoint-pair-right-adjoint-Adjunction :
+      is-adjoint-pair-Adjunction :
         is-adjoint-pair-Large-Precat
           left-adjoint-Adjunction
           right-adjoint-Adjunction
 
   open Adjunction public
 
+  obj-left-adjoint-Adjunction :
+    (FG : Adjunction) {l : Level} →
+    obj-Large-Precat C l →
+    obj-Large-Precat D (level-left-adjoint-Adjunction FG l)
+  obj-left-adjoint-Adjunction FG =
+    obj-functor-Large-Precat (left-adjoint-Adjunction FG)
+
+  hom-left-adjoint-Adjunction :
+    (FG : Adjunction) {l1 l2 : Level}
+    {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2} →
+    type-hom-Large-Precat C X Y →
+    type-hom-Large-Precat D
+      ( obj-left-adjoint-Adjunction FG X)
+      ( obj-left-adjoint-Adjunction FG Y)
+  hom-left-adjoint-Adjunction FG =
+    hom-functor-Large-Precat (left-adjoint-Adjunction FG)
+
+  preserves-id-left-adjoint-Adjunction :
+    (FG : Adjunction) {l1 : Level} (X : obj-Large-Precat C l1) →
+    Id ( hom-left-adjoint-Adjunction FG (id-hom-Large-Precat C {X = X}))
+       ( id-hom-Large-Precat D)
+  preserves-id-left-adjoint-Adjunction FG =
+    preserves-id-functor-Large-Precat (left-adjoint-Adjunction FG)
+
+  obj-right-adjoint-Adjunction :
+    (FG : Adjunction) {l1 : Level} →
+    obj-Large-Precat D l1 →
+    obj-Large-Precat C (level-right-adjoint-Adjunction FG l1)
+  obj-right-adjoint-Adjunction FG =
+    obj-functor-Large-Precat (right-adjoint-Adjunction FG)
+
+  hom-right-adjoint-Adjunction :
+    (FG : Adjunction) {l1 l2 : Level} {X : obj-Large-Precat D l1}
+    {Y : obj-Large-Precat D l2} →
+    type-hom-Large-Precat D X Y →
+    type-hom-Large-Precat C
+      ( obj-right-adjoint-Adjunction FG X)
+      ( obj-right-adjoint-Adjunction FG Y)
+  hom-right-adjoint-Adjunction FG =
+    hom-functor-Large-Precat (right-adjoint-Adjunction FG)
+
+  preserves-id-right-adjoint-Adjunction :
+    (FG : Adjunction) {l : Level} (Y : obj-Large-Precat D l) →
+    Id ( hom-right-adjoint-Adjunction FG (id-hom-Large-Precat D {X = Y}))
+       ( id-hom-Large-Precat C)
+  preserves-id-right-adjoint-Adjunction FG =
+    preserves-id-functor-Large-Precat (right-adjoint-Adjunction FG)
+
+  equiv-is-adjoint-pair-Adjunction :
+    (FG : Adjunction) {l1 l2 : Level} (X : obj-Large-Precat C l1)
+    (Y : obj-Large-Precat D l2) →
+    type-hom-Large-Precat C X (obj-right-adjoint-Adjunction FG Y) ≃
+    type-hom-Large-Precat D (obj-left-adjoint-Adjunction FG X) Y
+  equiv-is-adjoint-pair-Adjunction FG =
+    equiv-is-adjoint-pair-Large-Precat (is-adjoint-pair-Adjunction FG)
+
+  map-equiv-is-adjoint-pair-Adjunction :
+    (FG : Adjunction) {l1 l2 : Level} (X : obj-Large-Precat C l1)
+    (Y : obj-Large-Precat D l2) →
+    type-hom-Large-Precat C X (obj-right-adjoint-Adjunction FG Y) →
+    type-hom-Large-Precat D (obj-left-adjoint-Adjunction FG X) Y
+  map-equiv-is-adjoint-pair-Adjunction FG =
+    map-equiv-is-adjoint-pair-Large-Precat
+      ( left-adjoint-Adjunction FG)
+      ( right-adjoint-Adjunction FG)
+      ( is-adjoint-pair-Adjunction FG)
+
+  naturality-equiv-is-adjoint-pair-Adjunction :
+    (FG : Adjunction) {l1 l2 l3 l4 : Level}
+    {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}
+    {Y1 : obj-Large-Precat D l3} {Y2 : obj-Large-Precat D l4}
+    (f : type-hom-Large-Precat C X2 X1) (g : type-hom-Large-Precat D Y1 Y2) →
+    coherence-square
+      ( map-equiv-is-adjoint-pair-Adjunction FG X1 Y1)
+      ( λ h →
+        comp-hom-Large-Precat C
+          ( comp-hom-Large-Precat C (hom-right-adjoint-Adjunction FG g) h)
+          ( f))
+      ( λ h →
+        comp-hom-Large-Precat D
+          ( comp-hom-Large-Precat D g h)
+          ( hom-left-adjoint-Adjunction FG f))
+      ( map-equiv-is-adjoint-pair-Adjunction FG X2 Y2)
+  naturality-equiv-is-adjoint-pair-Adjunction FG =
+    naturality-equiv-is-adjoint-pair-Large-Precat
+      ( is-adjoint-pair-Adjunction FG)
+
+  inv-equiv-is-adjoint-pair-Adjunction :
+    (FG : Adjunction) {l1 l2 : Level} (X : obj-Large-Precat C l1)
+    (Y : obj-Large-Precat D l2) →
+    type-hom-Large-Precat D (obj-left-adjoint-Adjunction FG X) Y ≃
+    type-hom-Large-Precat C X (obj-right-adjoint-Adjunction FG Y)
+  inv-equiv-is-adjoint-pair-Adjunction FG X Y =
+    inv-equiv (equiv-is-adjoint-pair-Adjunction FG X Y)
+
+  map-inv-equiv-is-adjoint-pair-Adjunction :
+    (FG : Adjunction) {l1 l2 : Level} (X : obj-Large-Precat C l1)
+    (Y : obj-Large-Precat D l2) →
+    type-hom-Large-Precat D (obj-left-adjoint-Adjunction FG X) Y →
+    type-hom-Large-Precat C X (obj-right-adjoint-Adjunction FG Y)
+  map-inv-equiv-is-adjoint-pair-Adjunction FG X Y =
+    map-inv-equiv (equiv-is-adjoint-pair-Adjunction FG X Y)
+    
+  naturality-inv-equiv-is-adjoint-pair-Adjunction :
+    (FG : Adjunction) {l1 l2 l3 l4 : Level}
+    {X1 : obj-Large-Precat C l1} {X2 : obj-Large-Precat C l2}
+    {Y1 : obj-Large-Precat D l3} {Y2 : obj-Large-Precat D l4}
+    (f : type-hom-Large-Precat C X2 X1) (g : type-hom-Large-Precat D Y1 Y2) →
+    coherence-square
+      ( map-inv-equiv-is-adjoint-pair-Adjunction FG X1 Y1)
+      ( λ h →
+        comp-hom-Large-Precat D
+          ( comp-hom-Large-Precat D g h)
+          ( hom-left-adjoint-Adjunction FG f))
+      ( λ h →
+        comp-hom-Large-Precat C
+          ( comp-hom-Large-Precat C (hom-right-adjoint-Adjunction FG g) h)
+          ( f))
+      ( map-inv-equiv-is-adjoint-pair-Adjunction FG X2 Y2)
+  naturality-inv-equiv-is-adjoint-pair-Adjunction FG =
+    naturality-inv-equiv-is-adjoint-pair-Large-Precat
+      ( left-adjoint-Adjunction FG)
+      ( right-adjoint-Adjunction FG)
+      ( is-adjoint-pair-Adjunction FG)
+
   unit-Adjunction :
-    (A : Adjunction) →
+    (FG : Adjunction) →
     natural-transformation-Large-Precat C C
       ( id-functor-Large-Precat C)
       ( comp-functor-Large-Precat
-        ( right-adjoint-Adjunction A)
-        ( left-adjoint-Adjunction A))
-  obj-natural-transformation-Large-Precat (unit-Adjunction A) X =
-    map-inv-equiv
-      ( equiv-is-adjoint-pair-Large-Precat
-        ( is-adjoint-pair-right-adjoint-Adjunction A)
-        ( X)
-        ( obj-functor-Large-Precat (left-adjoint-Adjunction A) X))
+        ( right-adjoint-Adjunction FG)
+        ( left-adjoint-Adjunction FG))
+  obj-natural-transformation-Large-Precat (unit-Adjunction FG) X =
+    map-inv-equiv-is-adjoint-pair-Adjunction FG X
+      ( obj-left-adjoint-Adjunction FG X)
       ( id-hom-Large-Precat D)
-  coherence-square-natural-transformation-Large-Precat (unit-Adjunction A) f =
-    {!!}
+  coherence-square-natural-transformation-Large-Precat
+    ( unit-Adjunction FG) {X = X} {Y} f =
+    ( inv
+      ( left-unit-law-comp-hom-Large-Precat C
+        ( comp-hom-Large-Precat C (η Y) f))) ∙
+      ( ( ap
+          ( comp-hom-Large-Precat' C (comp-hom-Large-Precat C (η Y) f))
+          ( inv
+            ( preserves-id-right-adjoint-Adjunction FG
+              ( obj-left-adjoint-Adjunction FG Y)))) ∙
+        ( ( inv
+            ( associative-comp-hom-Large-Precat C
+              ( hom-right-adjoint-Adjunction FG (id-hom-Large-Precat D))
+              ( map-inv-equiv-is-adjoint-pair-Adjunction FG Y
+                ( obj-left-adjoint-Adjunction FG Y)
+                ( id-hom-Large-Precat D))
+              ( f))) ∙
+          ( ( inv
+              ( naturality-inv-equiv-is-adjoint-pair-Adjunction FG f
+                ( id-hom-Large-Precat D)
+                ( id-hom-Large-Precat D))) ∙
+            ( ( ap
+                ( map-inv-equiv-is-adjoint-pair-Adjunction FG X
+                  ( obj-left-adjoint-Adjunction FG Y))
+                  ( ( associative-comp-hom-Large-Precat D
+                      ( id-hom-Large-Precat D)
+                      ( id-hom-Large-Precat D)
+                      ( hom-left-adjoint-Adjunction FG f)) ∙
+                    ( ( left-unit-law-comp-hom-Large-Precat D
+                        ( comp-hom-Large-Precat D
+                          ( id-hom-Large-Precat D)
+                          ( hom-left-adjoint-Adjunction FG f))) ∙
+                      ( ( left-unit-law-comp-hom-Large-Precat D
+                          ( hom-left-adjoint-Adjunction FG f)) ∙
+                        ( ( inv
+                            ( right-unit-law-comp-hom-Large-Precat D
+                              ( hom-left-adjoint-Adjunction FG f))) ∙
+                          ( ( inv
+                              ( right-unit-law-comp-hom-Large-Precat D
+                                ( comp-hom-Large-Precat D
+                                  ( hom-left-adjoint-Adjunction FG f)
+                                  ( id-hom-Large-Precat D)))) ∙
+                            ( ap
+                              ( comp-hom-Large-Precat D
+                                ( comp-hom-Large-Precat D
+                                  ( hom-left-adjoint-Adjunction FG f)
+                                  ( id-hom-Large-Precat D)))
+                              ( inv
+                                ( preserves-id-left-adjoint-Adjunction FG X)
+                                )))))))) ∙
+              ( ( naturality-inv-equiv-is-adjoint-pair-Adjunction FG
+                  ( id-hom-Large-Precat C)
+                  ( hom-left-adjoint-Adjunction FG f)
+                  ( id-hom-Large-Precat D)) ∙
+                ( right-unit-law-comp-hom-Large-Precat C
+                  ( comp-hom-Large-Precat C
+                    ( hom-right-adjoint-Adjunction FG
+                      ( hom-left-adjoint-Adjunction FG f))
+                    ( η X))))))))
+    where
+    η : {l : Level} (X : obj-Large-Precat C l) →
+        type-hom-Large-Precat C X
+        ( obj-right-adjoint-Adjunction FG (obj-left-adjoint-Adjunction FG X))
+    η = obj-natural-transformation-Large-Precat (unit-Adjunction FG)

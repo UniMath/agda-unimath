@@ -4,6 +4,7 @@ module everything where
 
 open import README
 open import categories
+open import categories.adjunctions
 open import categories.categories
 open import categories.functors
 open import categories.large-categories
