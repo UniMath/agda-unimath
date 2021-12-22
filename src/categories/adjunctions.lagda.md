@@ -65,7 +65,38 @@ module _
     ( type-hom-Large-Precat C X (obj-functor-Large-Precat G Y))
   map-inv-equiv-is-adjoint-pair-Large-Precat H X Y =
     map-inv-equiv (equiv-is-adjoint-pair-Large-Precat H X Y)
-    
+
+  naturality-inv-equiv-is-adjoint-pair-Large-Precat :
+    (H : is-adjoint-pair-Large-Precat)
+    {l1 l2 l3 l4 : Level} {X1 : obj-Large-Precat C l1}
+    {X2 : obj-Large-Precat C l2} {Y1 : obj-Large-Precat D l3}
+    {Y2 : obj-Large-Precat D l4} (f : type-hom-Large-Precat C X2 X1)
+    (g : type-hom-Large-Precat D Y1 Y2) →
+    coherence-square
+      ( map-inv-equiv-is-adjoint-pair-Large-Precat H X1 Y1)
+      ( λ h →
+        comp-hom-Large-Precat D
+          ( comp-hom-Large-Precat D g h)
+          ( hom-functor-Large-Precat F f))
+      ( λ h →
+        comp-hom-Large-Precat C
+          ( comp-hom-Large-Precat C (hom-functor-Large-Precat G g) h)
+          ( f))
+      ( map-inv-equiv-is-adjoint-pair-Large-Precat H X2 Y2)
+  naturality-inv-equiv-is-adjoint-pair-Large-Precat
+    H {X1 = X1} {X2} {Y1} {Y2} f g =
+    coherence-square-inv-horizontal
+      ( equiv-is-adjoint-pair-Large-Precat H X1 Y1)
+      ( λ h →
+        comp-hom-Large-Precat C
+          ( comp-hom-Large-Precat C (hom-functor-Large-Precat G g) h)
+          ( f))
+      ( λ h →
+        comp-hom-Large-Precat D
+          ( comp-hom-Large-Precat D g h)
+          ( hom-functor-Large-Precat F f))
+      ( equiv-is-adjoint-pair-Large-Precat H X2 Y2)
+      ( naturality-equiv-is-adjoint-pair-Large-Precat H f g)
 
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
