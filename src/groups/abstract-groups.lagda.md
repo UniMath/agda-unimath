@@ -405,7 +405,7 @@ module _
       ( is-contr-total-equiv-Semigroup)
 
   id-iso-Semigroup : type-iso-Semigroup G G
-  id-iso-Semigroup = id-iso-Large-Precat Semigroup-Large-Precat G
+  id-iso-Semigroup = id-iso-Large-Precat Semigroup-Large-Precat {x = G}
 
   iso-eq-Semigroup : (H : Semigroup l) → Id G H → type-iso-Semigroup G H
   iso-eq-Semigroup = iso-eq-Large-Precat Semigroup-Large-Precat G
@@ -991,7 +991,7 @@ module _
   where
 
   id-iso-Group : type-iso-Group G G
-  id-iso-Group = id-iso-Large-Precat Group-Large-Precat G
+  id-iso-Group = id-iso-Large-Precat Group-Large-Precat {x = G}
 
   iso-eq-Group : (H : Group l) → Id G H → type-iso-Group G H
   iso-eq-Group = iso-eq-Large-Precat Group-Large-Precat G

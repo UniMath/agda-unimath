@@ -28,6 +28,15 @@ neg-neg-𝟚 false = refl
 
 -- Remark 9.1.4
 
+{- Commutativity of squares is expressed with a homotopy. -}
+
+coherence-square :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X) →
+  UU (l3 ⊔ l4)
+coherence-square top left right bottom =
+  (bottom ∘ left) ~ (right ∘ top)
+
 square :
   {l1 : Level} {A : UU l1} {x y1 y2 z : A}
   (p-left : Id x y1) (p-bottom : Id y1 z)
