@@ -358,18 +358,18 @@ module _
     Abstract-Group-Action G
   hom-Large-Precat Abstract-Group-Action-Large-Precat =
     hom-Abstract-Group-Action G
-  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
+  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {x = X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
-  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
+  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {x = X} =
     id-hom-Abstract-Group-Action G X
   associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {X = X} {Y} {Z} {W} =
+    {x = X} {Y} {Z} {W} =
     associative-comp-hom-Abstract-Group-Action G X Y Z W
   left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {X = X} {Y} =
+    {x = X} {Y} =
     left-unit-law-comp-hom-Abstract-Group-Action G X Y
   right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {X = X} {Y} =
+    {x = X} {Y} =
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
   
   Abstract-Group-Action-Precat : (l2 : Level) → Precat (l1 ⊔ lsuc l2) (l1 ⊔ l2)
