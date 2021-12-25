@@ -358,18 +358,18 @@ module _
     Abstract-Group-Action G
   hom-Large-Precat Abstract-Group-Action-Large-Precat =
     hom-Abstract-Group-Action G
-  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {x = X} {Y} {Z} =
+  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
-  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {x = X} =
+  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
     id-hom-Abstract-Group-Action G X
   associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {x = X} {Y} {Z} {W} =
+    {X = X} {Y} {Z} {W} =
     associative-comp-hom-Abstract-Group-Action G X Y Z W
   left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {x = X} {Y} =
+    {X = X} {Y} =
     left-unit-law-comp-hom-Abstract-Group-Action G X Y
   right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {x = X} {Y} =
+    {X = X} {Y} =
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
   
   Abstract-Group-Action-Precat : (l2 : Level) → Precat (l1 ⊔ lsuc l2) (l1 ⊔ l2)
@@ -649,19 +649,20 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
+  private
+    instance
+      ⦃C⦄ = Abstract-Group-Action-Large-Precat G
+
   is-iso-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
-  is-iso-hom-Abstract-Group-Action =
-    is-iso-hom-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  is-iso-hom-Abstract-Group-Action = is-iso-hom-Large-Precat X Y
 
   type-iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
-  type-iso-Abstract-Group-Action =
-    type-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  type-iso-Abstract-Group-Action = type-iso-Large-Precat X Y
 
   hom-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
-  hom-iso-Abstract-Group-Action =
-    hom-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  hom-iso-Abstract-Group-Action = hom-iso-Large-Precat X Y
 
   map-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -682,8 +683,7 @@ module _
 
   hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G Y X
-  hom-inv-iso-Abstract-Group-Action =
-    hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  hom-inv-iso-Abstract-Group-Action = hom-inv-iso-Large-Precat X Y
 
   map-hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -698,8 +698,7 @@ module _
          ( hom-iso-Abstract-Group-Action f)
          ( hom-inv-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G Y)
-  issec-hom-inv-iso-Abstract-Group-Action =
-    issec-hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  issec-hom-inv-iso-Abstract-Group-Action = issec-hom-inv-iso-Large-Precat X Y
 
   isretr-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
@@ -707,14 +706,12 @@ module _
          ( hom-inv-iso-Abstract-Group-Action f)
          ( hom-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G X)
-  isretr-hom-inv-iso-Abstract-Group-Action =
-    isretr-hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  isretr-hom-inv-iso-Abstract-Group-Action = isretr-hom-inv-iso-Large-Precat X Y
 
   is-iso-hom-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
     is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
-  is-iso-hom-iso-Abstract-Group-Action =
-    is-iso-hom-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  is-iso-hom-iso-Abstract-Group-Action = is-iso-hom-iso-Large-Precat X Y
 
   equiv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y
