@@ -745,34 +745,31 @@ module _
   equiv-conjugation-Group x =
     equiv-mul-Group' (inv-Group x) ∘e equiv-mul-Group x
 
+  transpose-eq-mul-Group :
+    {x y z : type-Group} →
+    Id (mul-Group x y) z → Id x (mul-Group z (inv-Group y))
+  transpose-eq-mul-Group {x} {y} {z} refl =
+    ( ( inv (right-unit-law-Group x)) ∙
+      ( ap (mul-Group x) (inv (right-inverse-law-Group y)))) ∙
+    ( inv (assoc-mul-Group x y (inv-Group y)))
+
+  transpose-eq-mul-Group' :
+    {x y z : type-Group} →
+    Id (mul-Group x y) z → Id y (mul-Group (inv-Group x) z)
+  transpose-eq-mul-Group' {x} {y} {z} refl =
+    ( ( inv (left-unit-law-Group y)) ∙
+      ( ap (mul-Group' y) (inv (left-inverse-law-Group x)))) ∙
+    ( assoc-mul-Group (inv-Group x) x y)
+
   distributive-inv-mul-Group :
     (x y : type-Group) →
     Id (inv-Group (mul-Group x y)) (mul-Group (inv-Group y) (inv-Group x))
   distributive-inv-mul-Group x y =
-    ap pr1
-      ( eq-is-contr'
-        ( is-contr-has-left-inverse-Monoid monoid-Group
-          ( mul-Group x y)
-          ( pair
-            ( inv-Group (mul-Group x y))
-            ( pair
-              ( left-inverse-law-Group (mul-Group x y))
-              ( right-inverse-law-Group (mul-Group x y)))))
-        ( pair
-            ( inv-Group (mul-Group x y))
-            ( left-inverse-law-Group (mul-Group x y)))
-        ( pair
-            ( mul-Group (inv-Group y) (inv-Group x))
-            ( ( assoc-mul-Group
-                ( inv-Group y)
-                ( inv-Group x)
-                ( mul-Group x y)) ∙
-              ( ( ap
-                  ( mul-Group (inv-Group y))
-                  ( ( inv (assoc-mul-Group (inv-Group x) x y)) ∙
-                    ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
-                      ( left-unit-law-Group y)))) ∙
-                ( left-inverse-law-Group y)))))
+    transpose-eq-mul-Group
+      ( ( transpose-eq-mul-Group
+          ( ( assoc-mul-Group (inv-Group (mul-Group x y)) x y) ∙
+            ( left-inverse-law-Group (mul-Group x y)))) ∙
+        ( left-unit-law-Group (inv-Group y)))
 
   conjugation-Group : (x : type-Group) → type-Group → type-Group
   conjugation-Group x = map-equiv (equiv-conjugation-Group x)

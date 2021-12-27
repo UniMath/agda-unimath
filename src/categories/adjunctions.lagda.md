@@ -410,3 +410,18 @@ module _
         ( obj-left-adjoint-Adjunction FG (obj-right-adjoint-Adjunction FG Y))
         ( Y)
     ε = obj-natural-transformation-Large-Precat (counit-Adjunction FG)
+      
+{-
+
+ε Y ∘ F (G f)
+≐ τ (G Y) Y id ∘ F (G f)
+= id ∘ (τ (G Y) Y id ∘ F (G f))
+= (id ∘ (τ (G Y) Y id)) ∘ F (G f)
+= τ _ _ ((G id ∘ id) ∘ G f)
+= τ _ _ ((id ∘ id) ∘ G f)
+= ...
+= τ _ _ ((G f ∘ id) ∘ id)
+= (f ∘ τ (G X) X id) ∘ F id
+= (f ∘ ε X) ∘ id
+= f ∘ ε X
+-}
