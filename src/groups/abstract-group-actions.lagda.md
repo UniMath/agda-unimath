@@ -40,6 +40,10 @@ module _
   mul-Abstract-Group-Action g =
     map-equiv (equiv-mul-Abstract-Group-Action g)
 
+  mul-Abstract-Group-Action' :
+    type-Abstract-Group-Action → type-Group G → type-Abstract-Group-Action
+  mul-Abstract-Group-Action' x g = mul-Abstract-Group-Action g x
+
   preserves-unit-mul-Abstract-Group-Action :
     (mul-Abstract-Group-Action (unit-Group G)) ~ id
   preserves-unit-mul-Abstract-Group-Action =
@@ -58,6 +62,17 @@ module _
       ( ap pr1
         ( preserves-mul-hom-Group G
           ( symmetric-Group set-Abstract-Group-Action) (pr2 X) g h))
+
+  transpose-eq-mul-Abstract-Group-Action :
+    (g : type-Group G) (x y : type-Abstract-Group-Action) →
+    Id (mul-Abstract-Group-Action g x) y →
+    Id x (mul-Abstract-Group-Action (inv-Group G g) y)
+  transpose-eq-mul-Abstract-Group-Action g x
+    .(mul-Abstract-Group-Action g x) refl =
+    ( inv
+      ( ( ap (mul-Abstract-Group-Action' x) (left-inverse-law-Group G g)) ∙
+        ( preserves-unit-mul-Abstract-Group-Action x))) ∙
+    ( preserves-mul-Abstract-Group-Action (inv-Group G g) g x)
 
 module _
   {l1 : Level} (G : Group l1)
@@ -358,18 +373,18 @@ module _
     Abstract-Group-Action G
   hom-Large-Precat Abstract-Group-Action-Large-Precat =
     hom-Abstract-Group-Action G
-  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {x = X} {Y} {Z} =
+  comp-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
-  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {x = X} =
+  id-hom-Large-Precat Abstract-Group-Action-Large-Precat {X = X} =
     id-hom-Abstract-Group-Action G X
   associative-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {x = X} {Y} {Z} {W} =
+    {X = X} {Y} {Z} {W} =
     associative-comp-hom-Abstract-Group-Action G X Y Z W
   left-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {x = X} {Y} =
+    {X = X} {Y} =
     left-unit-law-comp-hom-Abstract-Group-Action G X Y
   right-unit-law-comp-hom-Large-Precat Abstract-Group-Action-Large-Precat
-    {x = X} {Y} =
+    {X = X} {Y} =
     right-unit-law-comp-hom-Abstract-Group-Action G X Y
   
   Abstract-Group-Action-Precat : (l2 : Level) → Precat (l1 ⊔ lsuc l2) (l1 ⊔ l2)
@@ -649,19 +664,20 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
+  private
+    instance
+      ⦃C⦄ = Abstract-Group-Action-Large-Precat G
+
   is-iso-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
-  is-iso-hom-Abstract-Group-Action =
-    is-iso-hom-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  is-iso-hom-Abstract-Group-Action = is-iso-hom-Large-Precat X Y
 
   type-iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
-  type-iso-Abstract-Group-Action =
-    type-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  type-iso-Abstract-Group-Action = type-iso-Large-Precat X Y
 
   hom-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
-  hom-iso-Abstract-Group-Action =
-    hom-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  hom-iso-Abstract-Group-Action = hom-iso-Large-Precat X Y
 
   map-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -682,8 +698,7 @@ module _
 
   hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G Y X
-  hom-inv-iso-Abstract-Group-Action =
-    hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  hom-inv-iso-Abstract-Group-Action = hom-inv-iso-Large-Precat X Y
 
   map-hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -698,8 +713,7 @@ module _
          ( hom-iso-Abstract-Group-Action f)
          ( hom-inv-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G Y)
-  issec-hom-inv-iso-Abstract-Group-Action =
-    issec-hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  issec-hom-inv-iso-Abstract-Group-Action = issec-hom-inv-iso-Large-Precat X Y
 
   isretr-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
@@ -707,14 +721,12 @@ module _
          ( hom-inv-iso-Abstract-Group-Action f)
          ( hom-iso-Abstract-Group-Action f))
        ( id-hom-Abstract-Group-Action G X)
-  isretr-hom-inv-iso-Abstract-Group-Action =
-    isretr-hom-inv-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  isretr-hom-inv-iso-Abstract-Group-Action = isretr-hom-inv-iso-Large-Precat X Y
 
   is-iso-hom-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
     is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
-  is-iso-hom-iso-Abstract-Group-Action =
-    is-iso-hom-iso-Large-Precat (Abstract-Group-Action-Large-Precat G) X Y
+  is-iso-hom-iso-Abstract-Group-Action = is-iso-hom-iso-Large-Precat X Y
 
   equiv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y
@@ -737,7 +749,183 @@ module _
         ( isretr-hom-inv-iso-Abstract-Group-Action f))
   pr2 (equiv-iso-Abstract-Group-Action f) =
     coherence-square-iso-Abstract-Group-Action f
+```
 
+#### The substitution functor of group actions
+
+```agda
+module _
+  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : type-hom-Group G H)
+  where
+
+  obj-subst-Abstract-Group-Action :
+    {l3 : Level} → Abstract-Group-Action H l3 → Abstract-Group-Action G l3
+  pr1 (obj-subst-Abstract-Group-Action X) = set-Abstract-Group-Action H X
+  pr2 (obj-subst-Abstract-Group-Action X) =
+    comp-hom-Group G H
+      ( symmetric-Group (set-Abstract-Group-Action H X))
+      ( pr2 X)
+      ( f)
+
+  hom-subst-Abstract-Group-Action :
+    {l3 l4 : Level}
+    (X : Abstract-Group-Action H l3) (Y : Abstract-Group-Action H l4) →
+    type-hom-Abstract-Group-Action H X Y →
+    type-hom-Abstract-Group-Action G
+      ( obj-subst-Abstract-Group-Action X)
+      ( obj-subst-Abstract-Group-Action Y)
+  pr1 (hom-subst-Abstract-Group-Action X Y h) = pr1 h
+  pr2 (hom-subst-Abstract-Group-Action X Y h) x = pr2 h (map-hom-Group G H f x)
+
+  preserves-id-subst-Abstract-Group-Action :
+    {l3 : Level} (X : Abstract-Group-Action H l3) →
+    Id ( hom-subst-Abstract-Group-Action X X (id-hom-Abstract-Group-Action H X))
+       ( id-hom-Abstract-Group-Action G (obj-subst-Abstract-Group-Action X))
+  preserves-id-subst-Abstract-Group-Action X = refl
+
+  preserves-comp-subst-Abstract-Group-Action :
+    {l3 l4 l5 : Level} (X : Abstract-Group-Action H l3)
+    (Y : Abstract-Group-Action H l4) (Z : Abstract-Group-Action H l5)
+    (g : type-hom-Abstract-Group-Action H Y Z)
+    (f : type-hom-Abstract-Group-Action H X Y) →
+    Id ( hom-subst-Abstract-Group-Action X Z
+         ( comp-hom-Abstract-Group-Action H X Y Z g f))
+       ( comp-hom-Abstract-Group-Action G
+         ( obj-subst-Abstract-Group-Action X)
+         ( obj-subst-Abstract-Group-Action Y)
+         ( obj-subst-Abstract-Group-Action Z)
+         ( hom-subst-Abstract-Group-Action Y Z g)
+         ( hom-subst-Abstract-Group-Action X Y f))
+  preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
+
+  subst-Abstract-Group-Action :
+    functor-Large-Precat
+      ( Abstract-Group-Action-Large-Precat H)
+      ( Abstract-Group-Action-Large-Precat G)
+      ( λ l → l)
+  obj-functor-Large-Precat subst-Abstract-Group-Action =
+    obj-subst-Abstract-Group-Action
+  hom-functor-Large-Precat subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
+    hom-subst-Abstract-Group-Action X Y
+  preserves-comp-functor-Large-Precat subst-Abstract-Group-Action
+    {l1} {l2} {l3} {X} {Y} {Z} =
+    preserves-comp-subst-Abstract-Group-Action X Y Z
+  preserves-id-functor-Large-Precat subst-Abstract-Group-Action {l1} {X} =
+    preserves-id-subst-Abstract-Group-Action X
+
+```
+
+#### The left adjoint to the substitution functor on abstract group actions
+
+```agda
+module _
+  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : type-hom-Group G H)
+  where
+
+  preset-obj-left-adjoint-subst-Abstract-Group-Action :
+    {l3 : Level} → Abstract-Group-Action G l3 → UU-Set (l2 ⊔ l3)
+  preset-obj-left-adjoint-subst-Abstract-Group-Action X =
+    prod-Set (set-Group H) (set-Abstract-Group-Action G X)
+
+  pretype-obj-left-adjoint-subst-Abstract-Group-Action :
+    {l3 : Level} → Abstract-Group-Action G l3 → UU (l2 ⊔ l3)
+  pretype-obj-left-adjoint-subst-Abstract-Group-Action X =
+    type-Set (preset-obj-left-adjoint-subst-Abstract-Group-Action X)
+
+  is-set-pretype-obj-left-adjoint-subst-Abstract-Group-Action :
+    {l3 : Level} (X : Abstract-Group-Action G l3) →
+    is-set (pretype-obj-left-adjoint-subst-Abstract-Group-Action X)
+  is-set-pretype-obj-left-adjoint-subst-Abstract-Group-Action X =
+    is-set-type-Set (preset-obj-left-adjoint-subst-Abstract-Group-Action X)
+
+  Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action :
+    {l3 : Level} (X : Abstract-Group-Action G l3) →
+    Eq-Rel
+      ( l1 ⊔ l2 ⊔ l3)
+      ( pretype-obj-left-adjoint-subst-Abstract-Group-Action X)
+  pr1
+    ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+    ( pair h x)
+    ( pair h' x') =
+    ∃-Prop
+      ( λ g →
+        ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×
+        ( Id (mul-Abstract-Group-Action G X g x) x'))
+  pr1
+    ( pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X))
+    { pair h x} =
+    intro-∃
+      ( unit-Group G)
+      ( pair
+        ( ( ap (mul-Group' H h) (preserves-unit-hom-Group G H f)) ∙
+          ( left-unit-law-Group H h))
+        ( preserves-unit-mul-Abstract-Group-Action G X x))
+  pr1
+    ( pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
+    { pair h x} { pair h' x'} e =
+    apply-universal-property-trunc-Prop e
+      ( pr1
+        ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+        ( pair h' x')
+        ( pair h x))
+      ( λ { (pair g (pair p q)) →
+            intro-∃
+              ( inv-Group G g)
+              ( pair
+                ( ( ap
+                    ( mul-Group' H h')
+                    ( preserves-inverses-hom-Group G H f g)) ∙
+                  ( inv (transpose-eq-mul-Group' H p)))
+                ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
+  pr2 (pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
+    { pair h x} { pair h' x'} { pair h'' x''} e d =
+    apply-universal-property-trunc-Prop e
+      ( pr1
+        ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+        ( pair h x)
+        ( pair h'' x''))
+      ( λ { ( pair g (pair p q)) →
+            apply-universal-property-trunc-Prop d
+              ( pr1
+                ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+                ( pair h x)
+                ( pair h'' x''))
+              ( λ { ( pair g' (pair p' q')) →
+                    intro-∃
+                      ( mul-Group G g' g)
+                      ( pair
+                        ( ( ap
+                            ( mul-Group' H h)
+                            ( preserves-mul-hom-Group G H f g' g)) ∙
+                          ( ( assoc-mul-Group H
+                              ( map-hom-Group G H f g')
+                              ( map-hom-Group G H f g)
+                              ( h)) ∙
+                            ( ( ap ( mul-Group H (map-hom-Group G H f g')) p) ∙
+                              ( p'))))
+                        ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
+                          ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))})})
+  
+  set-left-adjoint-subst-Abstract-Group-Action :
+    {l3 : Level} → Abstract-Group-Action G l3 →
+    UU-Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  set-left-adjoint-subst-Abstract-Group-Action X =
+    quotient-Set (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+
+{-
+  obj-left-adjoint-subst-Abstract-Group-Action :
+    {l3 : Level} → Abstract-Group-Action G l3 →
+    Abstract-Group-Action H (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  pr1 (obj-left-adjoint-subst-Abstract-Group-Action X) =
+    set-left-adjoint-subst-Abstract-Group-Action X
+  pr1 (pr2 (obj-left-adjoint-subst-Abstract-Group-Action X)) h = {!!}
+  pr2 (pr2 (obj-left-adjoint-subst-Abstract-Group-Action X)) = {!!}
+-}
+```
+
+#### Orbits
+
+```agda
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
@@ -747,7 +935,11 @@ module _
     (x y : type-Abstract-Group-Action G X) → UU (l1 ⊔ l2)
   hom-orbit-Abstract-Group-Action x y =
     Σ (type-Group G) (λ g → Id (mul-Abstract-Group-Action G X g x) y)
+```
 
+#### The stabilizer subgroup
+
+```
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
