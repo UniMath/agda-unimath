@@ -28,7 +28,8 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 ## Conventions
 
 1. The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
-2. Extensive use of `where` in definitions seems to slow down agda, so we try to minimize its use.
+2. If the arguments of a function don't fit on the same line (80 characters), put the arguments each on their own line below the function.
+3. Extensive use of `where` in definitions seems to slow down agda, so we try to minimize its use.
 
 ### Names in the library
 
