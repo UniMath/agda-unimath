@@ -286,6 +286,10 @@ module _
     is-emb-pr1 H =
       is-emb-is-prop-map (λ x → is-prop-equiv (equiv-fib-pr1 B x) (H x))
 
+  emb-pr1 : is-subtype B → Σ A B ↪ A
+  pr1 (emb-pr1 H) = pr1
+  pr2 (emb-pr1 H) = is-emb-pr1 H
+
   equiv-ap-pr1 : is-subtype B → {s t : Σ A B} → Id s t ≃ Id (pr1 s) (pr1 t)
   pr1 (equiv-ap-pr1 is-subtype-B {s} {t}) = ap pr1
   pr2 (equiv-ap-pr1 is-subtype-B {s} {t}) = is-emb-pr1 is-subtype-B s t
