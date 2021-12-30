@@ -132,4 +132,9 @@ Graph-𝔽.edge (polygon-Graph-𝔽 k) p =
           ( Fin-𝔽 k)
           ( pair-unordered-pair p)
           ( succ-Fin (pair-unordered-pair p x)))
+
+Polygon : ℕ → UU (lsuc lzero)
+Polygon k = Σ Graph-𝔽 (λ G → type-trunc-Prop (Id (polygon-Graph-𝔽 k) G))
+
+-- Goal: To show that the loop space of Polygon k is the dihedral group D_k.
 ```
