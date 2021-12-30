@@ -36,6 +36,18 @@ module _
         edge-Undirected-Graph H (map-unordered-pair f p))
 
 module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
+  (K : Undirected-Graph l5 l6)
+  where
+
+  comp-hom-Undirected-Graph :
+    hom-Undirected-Graph H K → hom-Undirected-Graph G H →
+    hom-Undirected-Graph G K
+  pr1 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) = gV ∘ fV
+  pr2 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) = {!!}
+
+module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
