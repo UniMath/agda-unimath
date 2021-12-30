@@ -8,6 +8,7 @@ title: Formalisation of the Symmetry Book
 module univalent-combinatorics where
 
 open import univalent-combinatorics.unordered-pairs public
+open import univalent-combinatorics.graphs public
 open import univalent-combinatorics.finite-graphs public
 open import univalent-combinatorics.polygons public
 open import univalent-combinatorics.pi-finite-types public

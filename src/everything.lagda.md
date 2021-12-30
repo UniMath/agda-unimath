@@ -54,6 +54,7 @@ open import the-circle.universal-cover
 open import univalent-combinatorics
 open import univalent-combinatorics.finite-graphs
 open import univalent-combinatorics.finite-presentations
+open import univalent-combinatorics.graphs
 open import univalent-combinatorics.isolated-points
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.polygons
