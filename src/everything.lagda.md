@@ -51,6 +51,12 @@ open import the-circle.infinite-cyclic-types
 open import the-circle.integers
 open import the-circle.the-circle
 open import the-circle.universal-cover
+open import univalent-combinatorics
+open import univalent-combinatorics.finite-graphs
+open import univalent-combinatorics.finite-presentations
+open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.ramsey-theory
+open import univalent-combinatorics.unordered-pairs
 open import univalent-foundations
 open import univalent-foundations.13-function-extensionality-solutions
 open import univalent-foundations.13-function-extensionality
