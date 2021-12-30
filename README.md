@@ -17,7 +17,8 @@ The Agda source of the library can be found in the folder `src`. This folder con
 6. The `the-circle` folder contains the material for Chapter 3.
 7. The `synthetic-homotopy-theory` folder contains the formalisation of pullbacks, pushouts, and (eventually) homotopy groups of types.
 8. The `groups` folder contains the material for Chapter 4 of the Symmetry book.
-9. The `subgroups` folder contains the material for Chapter 5 of the Symmetry book.
+9. The `subgroups` folder contains the material for Chapter 5 of the Symmetry book. We plan to include quotient groups in this folder, and prove the isomorphism theorems.
+10. The `univalent-combinatorics` folder contains further development of univalent mathematics of finite structures, and provides a source of examples of concrete groups.
 
 This library is built on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
 
