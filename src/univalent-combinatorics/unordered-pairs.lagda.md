@@ -79,6 +79,12 @@ module _
   eq-Eq-unordered-pair p q =
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
+  isretr-eq-Eq-unordered-pair :
+    (p q : unordered-pair A) →
+    (eq-Eq-unordered-pair p q ∘ Eq-eq-unordered-pair p q) ~ id
+  isretr-eq-Eq-unordered-pair p q =
+    isretr-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
+
 map-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-pair A → unordered-pair B
@@ -95,6 +101,24 @@ preserves-id-map-unordered-pair :
   {l1 : Level} {A : UU l1} →
   map-unordered-pair (id {A = A}) ~ id
 preserves-id-map-unordered-pair = refl-htpy
+
+htpy-unordered-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+  (f ~ g) → (map-unordered-pair f ~ map-unordered-pair g)
+htpy-unordered-pair {f = f} {g = g} H (pair X p) =
+  eq-Eq-unordered-pair
+    ( map-unordered-pair f (pair X p))
+    ( map-unordered-pair g (pair X p))
+    ( pair id-equiv (H ·r p))
+
+preserves-refl-htpy-unordered-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  htpy-unordered-pair (refl-htpy {f = f}) ~ refl-htpy
+preserves-refl-htpy-unordered-pair f p =
+  isretr-eq-Eq-unordered-pair
+    ( map-unordered-pair f p)
+    ( map-unordered-pair f p)
+    ( refl)
 
 unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)

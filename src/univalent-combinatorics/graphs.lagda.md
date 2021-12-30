@@ -19,7 +19,11 @@ module _
   vertex-Undirected-Graph : UU l1
   vertex-Undirected-Graph = pr1 G
 
-  edge-Undirected-Graph : unordered-pair vertex-Undirected-Graph → UU l2
+  unordered-pair-vertices-Undirected-Graph : UU (lsuc lzero ⊔ l1)
+  unordered-pair-vertices-Undirected-Graph =
+    unordered-pair vertex-Undirected-Graph
+
+  edge-Undirected-Graph : unordered-pair-vertices-Undirected-Graph → UU l2
   edge-Undirected-Graph = pr2 G
 
 module _
@@ -31,9 +35,41 @@ module _
   hom-Undirected-Graph =
     Σ ( vertex-Undirected-Graph G → vertex-Undirected-Graph H)
       ( λ f →
-        ( p : unordered-pair (vertex-Undirected-Graph G)) →
+        ( p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p →
         edge-Undirected-Graph H (map-unordered-pair f p))
+
+  vertex-hom-Undirected-Graph :
+    hom-Undirected-Graph → vertex-Undirected-Graph G → vertex-Undirected-Graph H
+  vertex-hom-Undirected-Graph f = pr1 f
+
+  edge-hom-Undirected-Graph :
+    (f : hom-Undirected-Graph)
+    (p : unordered-pair-vertices-Undirected-Graph G) →
+    edge-Undirected-Graph G p →
+    edge-Undirected-Graph H
+      ( map-unordered-pair (vertex-hom-Undirected-Graph f) p)
+  edge-hom-Undirected-Graph f = pr2 f
+
+  htpy-hom-Undirected-Graph :
+    (f g : hom-Undirected-Graph) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-hom-Undirected-Graph f g =
+    Σ ( vertex-hom-Undirected-Graph f ~ vertex-hom-Undirected-Graph g)
+      ( λ α →
+        ( p : unordered-pair-vertices-Undirected-Graph G) →
+        ( e : edge-Undirected-Graph G p) →
+        Id ( tr
+             ( edge-Undirected-Graph H)
+             ( htpy-unordered-pair α p)
+             ( edge-hom-Undirected-Graph f p e))
+           ( edge-hom-Undirected-Graph g p e))
+
+  refl-htpy-hom-Undirected-Graph :
+    (f : hom-Undirected-Graph) → htpy-hom-Undirected-Graph f f
+  pr1 (refl-htpy-hom-Undirected-Graph f) = refl-htpy
+  pr2 (refl-htpy-hom-Undirected-Graph f) p e =
+    ap ( λ t → tr (edge-Undirected-Graph H) t (edge-hom-Undirected-Graph f p e))
+       ( preserves-refl-htpy-unordered-pair (vertex-hom-Undirected-Graph f) p)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -62,12 +98,12 @@ module _
 
   orientation-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
   orientation-Undirected-Graph =
-    ( p : unordered-pair (vertex-Undirected-Graph G)) →
+    ( p : unordered-pair-vertices-Undirected-Graph G) →
     edge-Undirected-Graph G p → type-UU-Fin (pr1 p)
 
   source-edge-orientation-Undirected-Graph :
     orientation-Undirected-Graph →
-    (p : unordered-pair (vertex-Undirected-Graph G)) →
+    (p : unordered-pair-vertices-Undirected-Graph G) →
     edge-Undirected-Graph G p → vertex-Undirected-Graph G
   source-edge-orientation-Undirected-Graph d (pair X p) e =
     p (d (pair X p) e)
@@ -80,11 +116,11 @@ module _
   is-simple-Undirected-Graph-Prop =
     prod-Prop
       ( Π-Prop
-        ( unordered-pair (vertex-Undirected-Graph G))
+        ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p →
           function-Prop (edge-Undirected-Graph G p) (is-emb-Prop (pr2 p))))
       ( Π-Prop
-        ( unordered-pair (vertex-Undirected-Graph G))
+        ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p → is-prop-Prop (edge-Undirected-Graph G p)))
 
   is-simple-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
