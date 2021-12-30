@@ -95,6 +95,16 @@ open import groups.furstenberg-groups public
 open import subgroups.abstract-subgroups public
 ```
 
+## Univalent Combinatorics
+
+```agda
+open import univalent-combinatorics.unordered-pairs public
+open import univalent-combinatorics.finite-graphs public
+open import univalent-combinatorics.pi-finite-types public
+open import univalent-combinatorics.finite-presentations public
+open import univalent-combinatorics.ramsey-theory public
+```
+
 ### Everything
 
 See the list of all Agda modules [here](everything.html).
