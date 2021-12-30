@@ -12,3 +12,6 @@ open import univalent-combinatorics.finite-graphs public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.ramsey-theory public
+open import univalent-combinatorics.isolated-points public
+open import univalent-combinatorics.quaternion-group public
+```
