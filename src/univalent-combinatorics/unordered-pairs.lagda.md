@@ -34,4 +34,14 @@ is-selfpairing-unordered-pair :
 is-selfpairing-unordered-pair p =
   (x y : type-unordered-pair p) →
   type-trunc-Prop (Id (pair-unordered-pair p x) (pair-unordered-pair p y))
+
+map-unordered-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  unordered-pair A → unordered-pair B
+pr1 (map-unordered-pair f (pair X p)) = X
+pr2 (map-unordered-pair f (pair X p)) = f ∘ p
+
+unordered-distinct-pair :
+  {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
+unordered-distinct-pair A = Σ (UU-Fin two-ℕ) (λ X → pr1 X ↪ A)
 ```
