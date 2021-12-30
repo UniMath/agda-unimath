@@ -45,7 +45,32 @@ module _
     hom-Undirected-Graph H K → hom-Undirected-Graph G H →
     hom-Undirected-Graph G K
   pr1 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) = gV ∘ fV
-  pr2 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) = {!!}
+  pr2 (comp-hom-Undirected-Graph (pair gV gE) (pair fV fE)) p e =
+    gE (map-unordered-pair fV p) (fE p e)
+
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2)
+  where
+
+  id-hom-Undirected-Graph : hom-Undirected-Graph G G
+  pr1 id-hom-Undirected-Graph = id
+  pr2 id-hom-Undirected-Graph p = id
+
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2)
+  where
+
+  orientation-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  orientation-Undirected-Graph =
+    ( p : unordered-pair (vertex-Undirected-Graph G)) →
+    edge-Undirected-Graph G p → type-UU-Fin (pr1 p)
+
+  source-edge-orientation-Undirected-Graph :
+    orientation-Undirected-Graph →
+    (p : unordered-pair (vertex-Undirected-Graph G)) →
+    edge-Undirected-Graph G p → vertex-Undirected-Graph G
+  source-edge-orientation-Undirected-Graph d (pair X p) e =
+    p (d (pair X p) e)
 
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)

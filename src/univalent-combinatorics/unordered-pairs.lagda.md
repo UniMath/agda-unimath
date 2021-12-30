@@ -79,7 +79,6 @@ module _
   eq-Eq-unordered-pair p q =
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
-
 map-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-pair A → unordered-pair B
@@ -90,7 +89,12 @@ preserves-comp-map-unordered-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-unordered-pair (g ∘ f) ~ (map-unordered-pair g ∘ map-unordered-pair f)
-preserves-comp-map-unordered-pair g f = {!!}
+preserves-comp-map-unordered-pair g f p = refl
+
+preserves-id-map-unordered-pair :
+  {l1 : Level} {A : UU l1} →
+  map-unordered-pair (id {A = A}) ~ id
+preserves-id-map-unordered-pair = refl-htpy
 
 unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
