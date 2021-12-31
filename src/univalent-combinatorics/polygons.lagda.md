@@ -21,10 +21,18 @@ pr1 (polygon-Undirected-Graph k) = ℤ-Mod k
 pr2 (polygon-Undirected-Graph k) p =
   Σ ( type-unordered-pair p)
     ( λ x →
-      fib (pair-unordered-pair p) (succ-ℤ-Mod k (pair-unordered-pair p x)))
+      fib
+        ( element-unordered-pair p)
+        ( succ-ℤ-Mod k (element-unordered-pair p x)))
 
 Polygon : ℕ → UU (lsuc lzero)
 Polygon k =
   Σ ( Undirected-Graph lzero lzero)
     ( λ G → type-trunc-Prop (Id (polygon-Undirected-Graph k) G))
+
+is-simple-polygon-Undirected-Graph :
+  (k : ℕ) → is-not-one-ℕ k →
+  is-simple-Undirected-Graph (polygon-Undirected-Graph k)
+pr1 (is-simple-polygon-Undirected-Graph k H) p (pair x (pair y α)) = {!!}
+pr2 (is-simple-polygon-Undirected-Graph k H) = {!!}
 ```

@@ -68,7 +68,7 @@ incident-edges-vertex-Graph-𝔽 :
   (G : Graph-𝔽) (x : type-𝔽 (Graph-𝔽.vertex G)) → UU (lsuc lzero)
 incident-edges-vertex-Graph-𝔽 G x =
   Σ ( unordered-pair (type-𝔽 (Graph-𝔽.vertex G)))
-    ( λ p → fib (pair-unordered-pair p) x)
+    ( λ p → fib (element-unordered-pair p) x)
 
 {-
 neighbor-Graph-𝔽 :
@@ -93,8 +93,8 @@ Graph-𝔽.edge (complete-multipartite-Graph-𝔽 X Y) p =
           Π-𝔽 ( two-element-type-𝔽 (pr1 p))
               ( λ y →
                 Id-𝔽 X
-                  ( pr1 (pair-unordered-pair p x))
-                  ( pr1 (pair-unordered-pair p y))))) →-𝔽
+                  ( pr1 (element-unordered-pair p x))
+                  ( pr1 (element-unordered-pair p y))))) →-𝔽
   empty-𝔽
 
 complete-Graph-𝔽 : 𝔽 → Graph-𝔽
@@ -108,13 +108,13 @@ Graph-𝔽.edge (complete-bipartite-Graph-𝔽 X Y) p =
              fib-𝔽
                ( two-element-type-𝔽 (pr1 p))
                ( coprod-𝔽 X Y)
-               ( pair-unordered-pair p)
+               ( element-unordered-pair p)
                ( inl x)))
          ( Σ-𝔽 Y
            ( λ y →
              fib-𝔽
                ( two-element-type-𝔽 (pr1 p))
                ( coprod-𝔽 X Y)
-               ( pair-unordered-pair p)
+               ( element-unordered-pair p)
                ( inr y)))
 ```
