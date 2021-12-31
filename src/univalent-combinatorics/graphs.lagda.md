@@ -372,4 +372,12 @@ module _
   is-prop-is-simple-Undirected-Graph : is-prop is-simple-Undirected-Graph
   is-prop-is-simple-Undirected-Graph =
     is-prop-type-Prop is-simple-Undirected-Graph-Prop
+
+Simple-Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Simple-Undirected-Graph l1 l2 =
+  Σ ( UU l1)
+    ( λ V →
+      Σ ( unordered-pair V → UU-Prop l2)
+        ( λ E →
+          (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin two-ℕ) (λ y → x))))))
 ```
