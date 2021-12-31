@@ -120,6 +120,22 @@ preserves-refl-htpy-unordered-pair f p =
     ( map-unordered-pair f p)
     ( refl)
 
+equiv-unordered-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (A ≃ B) → (unordered-pair A ≃ unordered-pair B)
+equiv-unordered-pair e = equiv-tot (λ X → equiv-postcomp (type-UU-Fin X) e)
+
+map-equiv-unordered-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (A ≃ B) → (unordered-pair A → unordered-pair B)
+map-equiv-unordered-pair e = map-equiv (equiv-unordered-pair e)
+
+is-equiv-map-equiv-unordered-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (e : A ≃ B) → is-equiv (map-equiv-unordered-pair e)
+is-equiv-map-equiv-unordered-pair e =
+  is-equiv-map-equiv (equiv-unordered-pair e)
+
 unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
 unordered-distinct-pair A = Σ (UU-Fin two-ℕ) (λ X → pr1 X ↪ A)

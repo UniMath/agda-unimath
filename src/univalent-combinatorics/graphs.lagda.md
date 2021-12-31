@@ -43,12 +43,19 @@ module _
     hom-Undirected-Graph → vertex-Undirected-Graph G → vertex-Undirected-Graph H
   vertex-hom-Undirected-Graph f = pr1 f
 
+  unordered-pair-vertices-hom-Undirected-Graph :
+    hom-Undirected-Graph →
+    unordered-pair-vertices-Undirected-Graph G →
+    unordered-pair-vertices-Undirected-Graph H
+  unordered-pair-vertices-hom-Undirected-Graph f =
+    map-unordered-pair (vertex-hom-Undirected-Graph f)
+
   edge-hom-Undirected-Graph :
     (f : hom-Undirected-Graph)
     (p : unordered-pair-vertices-Undirected-Graph G) →
     edge-Undirected-Graph G p →
     edge-Undirected-Graph H
-      ( map-unordered-pair (vertex-hom-Undirected-Graph f) p)
+      ( unordered-pair-vertices-hom-Undirected-Graph f p)
   edge-hom-Undirected-Graph f = pr2 f
 
   htpy-hom-Undirected-Graph :
@@ -70,6 +77,203 @@ module _
   pr2 (refl-htpy-hom-Undirected-Graph f) p e =
     ap ( λ t → tr (edge-Undirected-Graph H) t (edge-hom-Undirected-Graph f p e))
        ( preserves-refl-htpy-unordered-pair (vertex-hom-Undirected-Graph f) p)
+
+  htpy-eq-hom-Undirected-Graph :
+    (f g : hom-Undirected-Graph) → Id f g → htpy-hom-Undirected-Graph f g
+  htpy-eq-hom-Undirected-Graph f .f refl = refl-htpy-hom-Undirected-Graph f
+
+  abstract
+    is-contr-total-htpy-hom-Undirected-Graph :
+      (f : hom-Undirected-Graph) →
+      is-contr (Σ (hom-Undirected-Graph) (htpy-hom-Undirected-Graph f))
+    is-contr-total-htpy-hom-Undirected-Graph f =
+      is-contr-total-Eq-structure
+        ( λ gV gE α →
+          ( p : unordered-pair-vertices-Undirected-Graph G) →
+          ( e : edge-Undirected-Graph G p) →
+          Id ( tr
+               ( edge-Undirected-Graph H)
+               ( htpy-unordered-pair α p)
+               ( edge-hom-Undirected-Graph f p e))
+             ( gE p e))
+        ( is-contr-total-htpy (vertex-hom-Undirected-Graph f))
+        ( pair (vertex-hom-Undirected-Graph f) refl-htpy)
+        ( is-contr-equiv'
+          ( Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
+                edge-Undirected-Graph G p →
+                edge-Undirected-Graph H
+                  ( unordered-pair-vertices-hom-Undirected-Graph f p))
+              ( λ gE →
+                (p : unordered-pair-vertices-Undirected-Graph G) →
+                (e : edge-Undirected-Graph G p) →
+                Id (edge-hom-Undirected-Graph f p e) (gE p e)))
+          ( equiv-tot
+            ( λ gE →
+              equiv-map-Π
+                ( λ p →
+                  equiv-map-Π
+                    ( λ e →
+                      equiv-concat
+                        ( pr2 (refl-htpy-hom-Undirected-Graph f) p e)
+                        ( gE p e)))))
+          ( is-contr-total-Eq-Π
+            ( λ p gE →
+              ( e : edge-Undirected-Graph G p) →
+              Id (edge-hom-Undirected-Graph f p e) (gE e))
+            ( λ p → is-contr-total-htpy (edge-hom-Undirected-Graph f p))))
+
+  is-equiv-htpy-eq-hom-Undirected-Graph :
+    (f g : hom-Undirected-Graph) → is-equiv (htpy-eq-hom-Undirected-Graph f g)
+  is-equiv-htpy-eq-hom-Undirected-Graph f =
+    fundamental-theorem-id f
+      ( refl-htpy-hom-Undirected-Graph f)
+      ( is-contr-total-htpy-hom-Undirected-Graph f)
+      ( htpy-eq-hom-Undirected-Graph f)
+
+  extensionality-hom-Undirected-Graph :
+    (f g : hom-Undirected-Graph) → Id f g ≃ htpy-hom-Undirected-Graph f g
+  pr1 (extensionality-hom-Undirected-Graph f g) =
+    htpy-eq-hom-Undirected-Graph f g
+  pr2 (extensionality-hom-Undirected-Graph f g) =
+    is-equiv-htpy-eq-hom-Undirected-Graph f g
+
+  eq-htpy-hom-Undirected-Graph :
+    (f g : hom-Undirected-Graph) → htpy-hom-Undirected-Graph f g → Id f g
+  eq-htpy-hom-Undirected-Graph f g =
+    map-inv-is-equiv (is-equiv-htpy-eq-hom-Undirected-Graph f g)
+
+  equiv-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  equiv-Undirected-Graph =
+    Σ ( vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H)
+      ( λ f →
+        ( p : unordered-pair-vertices-Undirected-Graph G) →
+        edge-Undirected-Graph G p ≃
+        edge-Undirected-Graph H (map-equiv-unordered-pair f p))
+        
+  equiv-vertex-equiv-Undirected-Graph :
+    equiv-Undirected-Graph →
+    vertex-Undirected-Graph G ≃ vertex-Undirected-Graph H
+  equiv-vertex-equiv-Undirected-Graph f = pr1 f
+
+  vertex-equiv-Undirected-Graph :
+    equiv-Undirected-Graph →
+    vertex-Undirected-Graph G → vertex-Undirected-Graph H
+  vertex-equiv-Undirected-Graph f =
+    map-equiv (equiv-vertex-equiv-Undirected-Graph f)
+
+  equiv-unordered-pair-vertices-equiv-Undirected-Graph :
+    equiv-Undirected-Graph →
+    unordered-pair-vertices-Undirected-Graph G ≃
+    unordered-pair-vertices-Undirected-Graph H
+  equiv-unordered-pair-vertices-equiv-Undirected-Graph f =
+    equiv-unordered-pair (equiv-vertex-equiv-Undirected-Graph f)
+
+  unordered-pair-vertices-equiv-Undirected-Graph :
+    equiv-Undirected-Graph →
+    unordered-pair-vertices-Undirected-Graph G →
+    unordered-pair-vertices-Undirected-Graph H
+  unordered-pair-vertices-equiv-Undirected-Graph f =
+    map-equiv-unordered-pair (equiv-vertex-equiv-Undirected-Graph f)
+
+  equiv-edge-equiv-Undirected-Graph :
+    (f : equiv-Undirected-Graph)
+    (p : unordered-pair-vertices-Undirected-Graph G) →
+    edge-Undirected-Graph G p ≃
+    edge-Undirected-Graph H
+      ( unordered-pair-vertices-equiv-Undirected-Graph f p)
+  equiv-edge-equiv-Undirected-Graph f = pr2 f
+
+  edge-equiv-Undirected-Graph :
+    (f : equiv-Undirected-Graph)
+    (p : unordered-pair-vertices-Undirected-Graph G) →
+    edge-Undirected-Graph G p →
+    edge-Undirected-Graph H
+      ( unordered-pair-vertices-equiv-Undirected-Graph f p)
+  edge-equiv-Undirected-Graph f p =
+    map-equiv (equiv-edge-equiv-Undirected-Graph f p)
+
+  hom-equiv-Undirected-Graph :
+    equiv-Undirected-Graph → hom-Undirected-Graph
+  pr1 (hom-equiv-Undirected-Graph f) = vertex-equiv-Undirected-Graph f
+  pr2 (hom-equiv-Undirected-Graph f) = edge-equiv-Undirected-Graph f
+
+  htpy-equiv-Undirected-Graph :
+    (f g : equiv-Undirected-Graph) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-equiv-Undirected-Graph f g =
+    htpy-hom-Undirected-Graph
+      ( hom-equiv-Undirected-Graph f)
+      ( hom-equiv-Undirected-Graph g)
+
+  refl-htpy-equiv-Undirected-Graph :
+    (f : equiv-Undirected-Graph) → htpy-equiv-Undirected-Graph f f
+  refl-htpy-equiv-Undirected-Graph f =
+    refl-htpy-hom-Undirected-Graph (hom-equiv-Undirected-Graph f)
+
+  htpy-eq-equiv-Undirected-Graph :
+    (f g : equiv-Undirected-Graph) → Id f g → htpy-equiv-Undirected-Graph f g
+  htpy-eq-equiv-Undirected-Graph f .f refl = refl-htpy-equiv-Undirected-Graph f
+
+  is-contr-total-htpy-equiv-Undirected-Graph :
+    (f : equiv-Undirected-Graph) →
+    is-contr (Σ (equiv-Undirected-Graph) (htpy-equiv-Undirected-Graph f))
+  is-contr-total-htpy-equiv-Undirected-Graph f =
+    is-contr-total-Eq-structure
+      ( λ gV gE α →
+        ( p : unordered-pair-vertices-Undirected-Graph G) →
+          ( e : edge-Undirected-Graph G p) →
+          Id ( tr
+               ( edge-Undirected-Graph H)
+               ( htpy-unordered-pair α p)
+               ( edge-equiv-Undirected-Graph f p e))
+             ( map-equiv (gE p) e))
+      ( is-contr-total-htpy-equiv (equiv-vertex-equiv-Undirected-Graph f))
+      ( pair (equiv-vertex-equiv-Undirected-Graph f) refl-htpy)
+      ( is-contr-equiv'
+        ( Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
+              edge-Undirected-Graph G p ≃
+              edge-Undirected-Graph H
+                ( unordered-pair-vertices-equiv-Undirected-Graph f p))
+            ( λ gE →
+              (p : unordered-pair-vertices-Undirected-Graph G) →
+              (e : edge-Undirected-Graph G p) →
+              Id (edge-equiv-Undirected-Graph f p e) (map-equiv (gE p) e)))
+        ( equiv-tot
+          ( λ gE →
+            equiv-map-Π
+              ( λ p →
+                equiv-map-Π
+                  ( λ e →
+                    equiv-concat
+                      ( pr2 (refl-htpy-equiv-Undirected-Graph f) p e)
+                      ( map-equiv (gE p) e)))))
+        ( is-contr-total-Eq-Π
+          ( λ p e →
+            htpy-equiv
+              ( equiv-edge-equiv-Undirected-Graph f p)
+              ( e))
+          ( λ p →
+            is-contr-total-htpy-equiv (equiv-edge-equiv-Undirected-Graph f p))))
+
+  is-equiv-htpy-eq-equiv-Undirected-Graph :
+    (f g : equiv-Undirected-Graph) →
+    is-equiv (htpy-eq-equiv-Undirected-Graph f g)
+  is-equiv-htpy-eq-equiv-Undirected-Graph f =
+    fundamental-theorem-id f
+      ( refl-htpy-equiv-Undirected-Graph f)
+      ( is-contr-total-htpy-equiv-Undirected-Graph f)
+      ( htpy-eq-equiv-Undirected-Graph f)
+
+  extensionality-equiv-Undirected-Graph :
+    (f g : equiv-Undirected-Graph) → Id f g ≃ htpy-equiv-Undirected-Graph f g
+  pr1 (extensionality-equiv-Undirected-Graph f g) =
+    htpy-eq-equiv-Undirected-Graph f g
+  pr2 (extensionality-equiv-Undirected-Graph f g) =
+    is-equiv-htpy-eq-equiv-Undirected-Graph f g
+
+  eq-htpy-equiv-Undirected-Graph :
+    (f g : equiv-Undirected-Graph) → htpy-equiv-Undirected-Graph f g → Id f g
+  eq-htpy-equiv-Undirected-Graph f g =
+    map-inv-is-equiv (is-equiv-htpy-eq-equiv-Undirected-Graph f g)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
