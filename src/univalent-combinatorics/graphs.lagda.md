@@ -296,6 +296,45 @@ module _
   pr1 id-hom-Undirected-Graph = id
   pr2 id-hom-Undirected-Graph p = id
 
+  id-equiv-Undirected-Graph : equiv-Undirected-Graph G G
+  pr1 id-equiv-Undirected-Graph = id-equiv
+  pr2 id-equiv-Undirected-Graph p = id-equiv
+
+  equiv-eq-Undirected-Graph :
+    (H : Undirected-Graph l1 l2) → Id G H → equiv-Undirected-Graph G H
+  equiv-eq-Undirected-Graph .G refl = id-equiv-Undirected-Graph
+
+  is-contr-total-equiv-Undirected-Graph :
+    is-contr (Σ (Undirected-Graph l1 l2) (equiv-Undirected-Graph G))
+  is-contr-total-equiv-Undirected-Graph =
+    is-contr-total-Eq-structure
+      ( λ VH VE e →
+        ( p : unordered-pair-vertices-Undirected-Graph G) →
+        edge-Undirected-Graph G p ≃ VE (map-equiv-unordered-pair e p))
+      ( is-contr-total-equiv (vertex-Undirected-Graph G))
+      ( pair (vertex-Undirected-Graph G) id-equiv)
+      ( is-contr-total-Eq-Π
+        ( λ p X → (edge-Undirected-Graph G p) ≃ X)
+        ( λ p → is-contr-total-equiv (edge-Undirected-Graph G p)))
+
+  is-equiv-equiv-eq-Undirected-Graph :
+    (H : Undirected-Graph l1 l2) → is-equiv (equiv-eq-Undirected-Graph H)
+  is-equiv-equiv-eq-Undirected-Graph =
+    fundamental-theorem-id G
+      id-equiv-Undirected-Graph
+      is-contr-total-equiv-Undirected-Graph
+      equiv-eq-Undirected-Graph
+
+  extensionality-Undirected-Graph :
+    (H : Undirected-Graph l1 l2) → Id G H ≃ equiv-Undirected-Graph G H
+  pr1 (extensionality-Undirected-Graph H) = equiv-eq-Undirected-Graph H
+  pr2 (extensionality-Undirected-Graph H) = is-equiv-equiv-eq-Undirected-Graph H
+
+  eq-equiv-Undirected-Graph :
+    (H : Undirected-Graph l1 l2) → equiv-Undirected-Graph G H → Id G H
+  eq-equiv-Undirected-Graph H =
+    map-inv-is-equiv (is-equiv-equiv-eq-Undirected-Graph H)
+
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
