@@ -123,8 +123,20 @@ is-successor-ℕ n = Σ ℕ (λ y → Id n (succ-ℕ y))
 is-nonzero-ℕ : ℕ → UU lzero
 is-nonzero-ℕ n = ¬ (is-zero-ℕ n)
 
+is-one-ℕ : ℕ → UU lzero
+is-one-ℕ n = Id n one-ℕ
+
+is-one-ℕ' : ℕ → UU lzero
+is-one-ℕ' n = Id one-ℕ n
+
+is-not-one-ℕ : ℕ → UU lzero
+is-not-one-ℕ n = ¬ (is-one-ℕ n)
+
+is-not-one-ℕ' : ℕ → UU lzero
+is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
+
 Peano-8 : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
-Peano-8 x p = Eq-eq-ℕ p
+Peano-8 x = Eq-eq-ℕ
 
 is-nonzero-succ-ℕ : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
 is-nonzero-succ-ℕ = Peano-8
@@ -136,6 +148,20 @@ is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-�
 is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)
 pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
 pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
+
+is-nonzero-one-ℕ : is-nonzero-ℕ one-ℕ
+is-nonzero-one-ℕ = Peano-8 zero-ℕ
+
+is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
+is-not-one-zero-ℕ = is-nonzero-one-ℕ ∘ inv
+
+is-not-one-two-ℕ : is-not-one-ℕ two-ℕ
+is-not-one-two-ℕ = Eq-eq-ℕ
+
+has-no-fixed-points-succ-ℕ : (x : ℕ) → ¬ (Id (succ-ℕ x) x)
+has-no-fixed-points-succ-ℕ zero-ℕ = is-nonzero-succ-ℕ zero-ℕ
+has-no-fixed-points-succ-ℕ (succ-ℕ x) p =
+  has-no-fixed-points-succ-ℕ x (is-injective-succ-ℕ p)
 
 --------------------------------------------------------------------------------
 
@@ -202,21 +228,6 @@ is-nonzero-mul-ℕ x y H K p =
   K (is-injective-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
 
 -- We conclude that y = 1 if (x+1)y = x+1
-
-is-one-ℕ : ℕ → UU lzero
-is-one-ℕ n = Id n one-ℕ
-
-is-one-ℕ' : ℕ → UU lzero
-is-one-ℕ' n = Id one-ℕ n
-
-is-not-one-ℕ : ℕ → UU lzero
-is-not-one-ℕ n = ¬ (is-one-ℕ n)
-
-is-not-one-ℕ' : ℕ → UU lzero
-is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
-
-is-not-one-two-ℕ : is-not-one-ℕ two-ℕ
-is-not-one-two-ℕ = Eq-eq-ℕ
 
 is-one-is-right-unit-mul-ℕ :
   (x y : ℕ) → Id (mul-ℕ (succ-ℕ x) y) (succ-ℕ x) → is-one-ℕ y

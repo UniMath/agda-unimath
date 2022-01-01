@@ -410,6 +410,12 @@ idempotent-is-unit-ℤ {x} H =
   f (inl refl) = refl
   f (inr refl) = refl
 
+abstract
+  is-one-is-unit-int-ℕ : (x : ℕ) → is-unit-ℤ (int-ℕ x) → is-one-ℕ x
+  is-one-is-unit-int-ℕ x H with is-one-or-neg-one-is-unit-ℤ (int-ℕ x) H
+  ... | inl p = is-injective-int-ℕ p
+  ... | inr p = ex-falso (tr is-nonnegative-ℤ p (is-nonnegative-int-ℕ x))
+
 -- The product xy is a unit if and only if both x and y are units
 
 is-unit-mul-ℤ :
@@ -649,6 +655,25 @@ is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ 
 is-discrete-cong-ℤ .zero-ℤ refl x y K =
   eq-diff-ℤ (is-zero-div-zero-ℤ (diff-ℤ x y) K)
 
+is-unit-cong-succ-ℤ : (k x : ℤ) → cong-ℤ k x (succ-ℤ x) → is-unit-ℤ k
+pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
+pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
+  ( left-negative-law-mul-ℤ y k) ∙
+  ( is-injective-neg-ℤ
+    ( ( neg-neg-ℤ (mul-ℤ y k)) ∙
+      ( ( p) ∙
+        ( ( ap (add-ℤ x) (neg-succ-ℤ x)) ∙
+          ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙
+            ( ap pred-ℤ (right-inverse-law-add-ℤ x)))))))
+
+is-unit-cong-pred-ℤ : (k x : ℤ) → cong-ℤ k x (pred-ℤ x) → is-unit-ℤ k
+pr1 (is-unit-cong-pred-ℤ k x (pair y p)) = y
+pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
+  ( p) ∙
+  ( ( ap (add-ℤ x) (neg-pred-ℤ x)) ∙
+    ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
+      ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
+
 refl-cong-ℤ : (k x : ℤ) → cong-ℤ k x x
 pr1 (refl-cong-ℤ k x) = zero-ℤ
 pr2 (refl-cong-ℤ k x) = left-zero-law-mul-ℤ k ∙ inv (is-zero-diff-ℤ' x)
@@ -818,6 +843,7 @@ isretr-pred-ℤ-Mod zero-ℕ = isretr-pred-ℤ
 isretr-pred-ℤ-Mod (succ-ℕ k) = isretr-pred-Fin
 
 add-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+-- add-ℤ-Mod k x y = mod-ℤ k (add-ℤ (int-ℤ-Mod k x) (int-ℤ-Mod k y))
 add-ℤ-Mod zero-ℕ = add-ℤ
 add-ℤ-Mod (succ-ℕ k) = add-Fin
 
@@ -1262,6 +1288,36 @@ issec-int-ℤ-Mod k x =
     ( x)
     ( cong-int-mod-ℤ k (int-ℤ-Mod k x))
 
+is-one-is-fixed-point-succ-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → Id (succ-ℤ-Mod k x) x → is-one-ℕ k
+is-one-is-fixed-point-succ-ℤ-Mod k x p =
+  is-one-is-unit-int-ℕ k
+    ( is-unit-cong-succ-ℤ
+      ( int-ℕ k)
+      ( int-ℤ-Mod k x)
+      ( cong-eq-mod-ℤ k
+        ( int-ℤ-Mod k x)
+        ( succ-ℤ (int-ℤ-Mod k x))
+        ( ( issec-int-ℤ-Mod k x) ∙
+          ( ( inv p) ∙
+            ( inv
+              ( ( preserves-successor-mod-ℤ k (int-ℤ-Mod k x)) ∙
+                ( ap (succ-ℤ-Mod k) (issec-int-ℤ-Mod k x))))))))
+
+has-no-fixed-points-succ-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (Id (succ-ℤ-Mod k x) x)
+has-no-fixed-points-succ-ℤ-Mod k x =
+  functor-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
+
+has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (Id (succ-ℤ x) x)
+has-no-fixed-points-succ-ℤ x =
+  has-no-fixed-points-succ-ℤ-Mod zero-ℕ x is-not-one-zero-ℕ
+
+has-no-fixed-points-succ-Fin :
+  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → ¬ (Id (succ-Fin x) x)
+has-no-fixed-points-succ-Fin {succ-ℕ k} x =
+  has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
+  
 -- We introduce the condition on ℤ of being a gcd.
 
 is-common-divisor-ℤ : ℤ → ℤ → ℤ → UU lzero

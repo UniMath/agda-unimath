@@ -897,6 +897,10 @@ eq-cong-zero-ℕ : (x y : ℕ) → cong-ℕ zero-ℕ x y → Id x y
 eq-cong-zero-ℕ x y H =
   eq-dist-ℕ x y (is-zero-div-zero-ℕ (dist-ℕ x y) H)
 
+is-one-cong-succ-ℕ : {k : ℕ} (x : ℕ) → cong-ℕ k x (succ-ℕ x) → is-one-ℕ k
+is-one-cong-succ-ℕ {k} x H =
+  is-one-div-one-ℕ k (tr (div-ℕ k) (is-one-dist-succ-ℕ x) H)
+
 {- Exercise 7.3 -}
 
 div-factorial-is-nonzero-ℕ :
@@ -940,7 +944,7 @@ is-add-one-succ-Fin' {succ-ℕ k} x =
 
 is-add-one-succ-Fin :
   {k : ℕ} (x : Fin (succ-ℕ k)) → Id (succ-Fin x) (add-Fin one-Fin x)
-is-add-one-succ-Fin x = is-add-one-succ-Fin' x ∙ commutative-add-Fin x one-Fin  
+is-add-one-succ-Fin x = is-add-one-succ-Fin' x ∙ commutative-add-Fin x one-Fin
 
 -- We conclude the successor laws for addition on Fin k
 
