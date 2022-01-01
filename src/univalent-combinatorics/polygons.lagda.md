@@ -28,11 +28,11 @@ pr2 (polygon-Undirected-Graph k) p =
 Polygon : ℕ → UU (lsuc lzero)
 Polygon k =
   Σ ( Undirected-Graph lzero lzero)
-    ( λ G → type-trunc-Prop (Id (polygon-Undirected-Graph k) G))
+    ( mere-equiv-Undirected-Graph (polygon-Undirected-Graph k))
 
 is-simple-polygon-Undirected-Graph :
   (k : ℕ) → is-not-one-ℕ k →
   is-simple-Undirected-Graph (polygon-Undirected-Graph k)
 pr1 (is-simple-polygon-Undirected-Graph k H) p (pair x (pair y α)) = {!!}
-pr2 (is-simple-polygon-Undirected-Graph k H) = {!!}
+pr2 (is-simple-polygon-Undirected-Graph k H) p = {!!}
 ```
