@@ -7,23 +7,32 @@ title: Formalisation of the Symmetry Book
 
 module univalent-combinatorics.polygons where
 
+open import univalent-combinatorics.graphs public
 open import univalent-combinatorics.finite-graphs public
 ```
 
 We define the type of polygons. Our goal is show that the loop space of `Polygon k` is the dihedral group D_k.
 
+Our definition is such that polygons are always nonempty. Accordingly, the group D_0 is the infinite dihedral group.
+
 ```agda
-polygon-Graph-𝔽 : ℕ → Graph-𝔽
-Graph-𝔽.vertex (polygon-Graph-𝔽 k) = Fin-𝔽 k
-Graph-𝔽.edge (polygon-Graph-𝔽 k) p =
-  Σ-𝔽 ( two-element-type-𝔽 (pr1 p))
-      ( λ x →
-        fib-𝔽
-          ( two-element-type-𝔽 (pr1 p))
-          ( Fin-𝔽 k)
-          ( pair-unordered-pair p)
-          ( succ-Fin (pair-unordered-pair p x)))
+polygon-Undirected-Graph : ℕ → Undirected-Graph lzero lzero
+pr1 (polygon-Undirected-Graph k) = ℤ-Mod k
+pr2 (polygon-Undirected-Graph k) p =
+  Σ ( type-unordered-pair p)
+    ( λ x →
+      fib
+        ( element-unordered-pair p)
+        ( succ-ℤ-Mod k (element-unordered-pair p x)))
 
 Polygon : ℕ → UU (lsuc lzero)
-Polygon k = Σ Graph-𝔽 (λ G → type-trunc-Prop (Id (polygon-Graph-𝔽 k) G))
+Polygon k =
+  Σ ( Undirected-Graph lzero lzero)
+    ( mere-equiv-Undirected-Graph (polygon-Undirected-Graph k))
+
+is-simple-polygon-Undirected-Graph :
+  (k : ℕ) → is-not-one-ℕ k →
+  is-simple-Undirected-Graph (polygon-Undirected-Graph k)
+pr1 (is-simple-polygon-Undirected-Graph k H) p (pair x (pair y α)) = {!!}
+pr2 (is-simple-polygon-Undirected-Graph k H) p = {!!}
 ```

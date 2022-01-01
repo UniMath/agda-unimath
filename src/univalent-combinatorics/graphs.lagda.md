@@ -197,6 +197,15 @@ module _
   pr1 (hom-equiv-Undirected-Graph f) = vertex-equiv-Undirected-Graph f
   pr2 (hom-equiv-Undirected-Graph f) = edge-equiv-Undirected-Graph f
 
+  mere-equiv-Undirected-Graph-Prop : UU-Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  mere-equiv-Undirected-Graph-Prop = trunc-Prop equiv-Undirected-Graph
+
+  mere-equiv-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  mere-equiv-Undirected-Graph = type-Prop mere-equiv-Undirected-Graph-Prop
+
+  is-prop-mere-equiv-Undirected-Graph : is-prop mere-equiv-Undirected-Graph
+  is-prop-mere-equiv-Undirected-Graph = is-prop-type-Prop mere-equiv-Undirected-Graph-Prop
+
   htpy-equiv-Undirected-Graph :
     (f g : equiv-Undirected-Graph) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-equiv-Undirected-Graph f g =
@@ -300,6 +309,10 @@ module _
   pr1 id-equiv-Undirected-Graph = id-equiv
   pr2 id-equiv-Undirected-Graph p = id-equiv
 
+  refl-mere-equiv-Undirected-Graph : mere-equiv-Undirected-Graph G G
+  refl-mere-equiv-Undirected-Graph =
+    unit-trunc-Prop id-equiv-Undirected-Graph
+
   equiv-eq-Undirected-Graph :
     (H : Undirected-Graph l1 l2) → Id G H → equiv-Undirected-Graph G H
   equiv-eq-Undirected-Graph .G refl = id-equiv-Undirected-Graph
@@ -372,4 +385,12 @@ module _
   is-prop-is-simple-Undirected-Graph : is-prop is-simple-Undirected-Graph
   is-prop-is-simple-Undirected-Graph =
     is-prop-type-Prop is-simple-Undirected-Graph-Prop
+
+Simple-Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Simple-Undirected-Graph l1 l2 =
+  Σ ( UU l1)
+    ( λ V →
+      Σ ( unordered-pair V → UU-Prop l2)
+        ( λ E →
+          (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin two-ℕ) (λ y → x))))))
 ```

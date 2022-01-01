@@ -20,20 +20,20 @@ has-two-elements-type-unordered-pair :
   mere-equiv (Fin two-ℕ) (type-unordered-pair p)
 has-two-elements-type-unordered-pair p = pr2 (pr1 p)
 
-pair-unordered-pair :
+element-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) →
   type-unordered-pair p → A
-pair-unordered-pair p = pr2 p
+element-unordered-pair p = pr2 p
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
-is-in-unordered-pair p a = ∃ (λ x → Id (pair-unordered-pair p x) a)
+is-in-unordered-pair p a = ∃ (λ x → Id (element-unordered-pair p x) a)
 
 is-selfpairing-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) → UU l
 is-selfpairing-unordered-pair p =
   (x y : type-unordered-pair p) →
-  type-trunc-Prop (Id (pair-unordered-pair p x) (pair-unordered-pair p y))
+  type-trunc-Prop (Id (element-unordered-pair p x) (element-unordered-pair p y))
 
 module _
   {l1 : Level} {A : UU l1}
