@@ -118,7 +118,7 @@ is-simple-standard-polygon-Undirected-Graph :
   is-simple-Undirected-Graph (standard-polygon-Undirected-Graph k)
 pr1 (is-simple-standard-polygon-Undirected-Graph k H) p (pair x (pair y α)) =
   is-emb-is-injective
-    {!!}
+    {! !}
     {!!}
 pr2 (is-simple-standard-polygon-Undirected-Graph k H) p = {!!}
 ```

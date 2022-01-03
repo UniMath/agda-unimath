@@ -38,14 +38,16 @@ element-unordered-pair :
   type-unordered-pair p → A
 element-unordered-pair p = pr2 p
 
-{-
 is-injective-element-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) →
   Σ ( type-unordered-pair p)
     ( λ x →
       Σ ( type-unordered-pair p)
-        ( λ y → ¬ (Id 
--}
+        ( λ y →
+          ¬ (Id (element-unordered-pair p x) (element-unordered-pair p y)))) →
+  is-injective (element-unordered-pair p)
+is-injective-element-unordered-pair p (pair x (pair y f)) =
+  {!!}
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
