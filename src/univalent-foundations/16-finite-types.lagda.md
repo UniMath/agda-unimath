@@ -1275,6 +1275,30 @@ abstract
           ( mere-equiv-Prop X Z)
           ( λ f' → unit-trunc-Prop (f' ∘e e')))
 
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} 
+  where
+  
+  is-trunc-mere-equiv : (k : 𝕋) → mere-equiv X Y → is-trunc k Y → is-trunc k X
+  is-trunc-mere-equiv k e H =
+     apply-universal-property-trunc-Prop
+       ( e)
+       ( is-trunc-Prop k X)
+       ( λ f → is-trunc-equiv k Y f H)
+
+  is-trunc-mere-equiv' : (k : 𝕋) → mere-equiv X Y → is-trunc k X → is-trunc k Y
+  is-trunc-mere-equiv' k e H =
+    apply-universal-property-trunc-Prop
+      ( e)
+      ( is-trunc-Prop k Y)
+      ( λ f → is-trunc-equiv' k X f H)
+
+  is-set-mere-equiv : mere-equiv X Y → is-set Y → is-set X
+  is-set-mere-equiv = is-trunc-mere-equiv zero-𝕋
+
+  is-set-mere-equiv' : mere-equiv X Y → is-set X → is-set Y
+  is-set-mere-equiv' = is-trunc-mere-equiv' zero-𝕋
+
 has-cardinality-Prop :
   {l : Level} → UU l → ℕ → UU-Prop l
 has-cardinality-Prop X k = mere-equiv-Prop (Fin k) X
@@ -1350,9 +1374,18 @@ abstract
   is-finite-Fin : {k : ℕ} → is-finite (Fin k)
   is-finite-Fin {k} = is-finite-count (count-Fin k)
 
+abstract
+  is-finite-ℤ-Mod : {k : ℕ} → is-nonzero-ℕ k → is-finite (ℤ-Mod k)
+  is-finite-ℤ-Mod {zero-ℕ} H = ex-falso (H refl)
+  is-finite-ℤ-Mod {succ-ℕ k} H = is-finite-Fin
+
 Fin-𝔽 : ℕ → 𝔽
 pr1 (Fin-𝔽 k) = Fin k
 pr2 (Fin-𝔽 k) = is-finite-Fin
+
+ℤ-Mod-𝔽 : (k : ℕ) → is-nonzero-ℕ k → 𝔽
+pr1 (ℤ-Mod-𝔽 k H) = ℤ-Mod k
+pr2 (ℤ-Mod-𝔽 k H) = is-finite-ℤ-Mod H
 
 Fin-UU-Fin : (k : ℕ) → UU-Fin k
 pr1 (Fin-UU-Fin k) = Fin k
@@ -1465,6 +1498,24 @@ has-decidable-equality-has-cardinality {l1} {X} {k} H =
   apply-universal-property-trunc-Prop H
     ( has-decidable-equality-Prop X)
     ( λ e → has-decidable-equality-equiv' e has-decidable-equality-Fin)
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+  
+  has-decidable-equality-mere-equiv :
+    mere-equiv X Y → has-decidable-equality Y → has-decidable-equality X
+  has-decidable-equality-mere-equiv e d =
+    apply-universal-property-trunc-Prop e
+      ( has-decidable-equality-Prop X)
+      ( λ f → has-decidable-equality-equiv f d)
+
+  has-decidable-equality-mere-equiv' :
+    mere-equiv X Y → has-decidable-equality X → has-decidable-equality Y
+  has-decidable-equality-mere-equiv' e d =
+    apply-universal-property-trunc-Prop e
+      ( has-decidable-equality-Prop Y)
+      ( λ f → has-decidable-equality-equiv' f d)
 
 abstract
   is-finite-eq :

@@ -20,10 +20,32 @@ has-two-elements-type-unordered-pair :
   mere-equiv (Fin two-ℕ) (type-unordered-pair p)
 has-two-elements-type-unordered-pair p = pr2 (pr1 p)
 
+is-set-type-unordered-pair :
+  {l : Level} {A : UU l} (p : unordered-pair A) → is-set (type-unordered-pair p)
+is-set-type-unordered-pair p =
+  is-set-mere-equiv' (has-two-elements-type-unordered-pair p) (is-set-Fin two-ℕ)
+
+has-decidable-equality-type-unordered-pair :
+  {l : Level} {A : UU l} (p : unordered-pair A) →
+  has-decidable-equality (type-unordered-pair p)
+has-decidable-equality-type-unordered-pair p =
+  has-decidable-equality-mere-equiv'
+    ( has-two-elements-type-unordered-pair p)
+    ( has-decidable-equality-Fin)
+
 element-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) →
   type-unordered-pair p → A
 element-unordered-pair p = pr2 p
+
+{-
+is-injective-element-unordered-pair :
+  {l : Level} {A : UU l} (p : unordered-pair A) →
+  Σ ( type-unordered-pair p)
+    ( λ x →
+      Σ ( type-unordered-pair p)
+        ( λ y → ¬ (Id 
+-}
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
