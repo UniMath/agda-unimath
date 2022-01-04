@@ -204,7 +204,8 @@ module _
   mere-equiv-Undirected-Graph = type-Prop mere-equiv-Undirected-Graph-Prop
 
   is-prop-mere-equiv-Undirected-Graph : is-prop mere-equiv-Undirected-Graph
-  is-prop-mere-equiv-Undirected-Graph = is-prop-type-Prop mere-equiv-Undirected-Graph-Prop
+  is-prop-mere-equiv-Undirected-Graph =
+    is-prop-type-Prop mere-equiv-Undirected-Graph-Prop
 
   htpy-equiv-Undirected-Graph :
     (f g : equiv-Undirected-Graph) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
