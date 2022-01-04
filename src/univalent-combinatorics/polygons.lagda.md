@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module univalent-combinatorics.polygons where
 
-open import univalent-combinatorics.graphs public
+open import univalent-combinatorics.undirected-graphs public
 open import univalent-combinatorics.finite-graphs public
 ```
 

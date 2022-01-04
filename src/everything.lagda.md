@@ -54,12 +54,12 @@ open import the-circle.universal-cover
 open import univalent-combinatorics
 open import univalent-combinatorics.finite-graphs
 open import univalent-combinatorics.finite-presentations
-open import univalent-combinatorics.graphs
 open import univalent-combinatorics.isolated-points
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.polygons
 open import univalent-combinatorics.quaternion-group
 open import univalent-combinatorics.ramsey-theory
+open import univalent-combinatorics.undirected-graphs
 open import univalent-combinatorics.unordered-pairs
 open import univalent-foundations
 open import univalent-foundations.13-function-extensionality-solutions

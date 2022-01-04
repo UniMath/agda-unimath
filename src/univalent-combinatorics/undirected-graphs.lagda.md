@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.graphs where
+module univalent-combinatorics.undirected-graphs where
 
 open import univalent-combinatorics.unordered-pairs public
 

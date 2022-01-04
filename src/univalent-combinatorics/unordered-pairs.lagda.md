@@ -38,6 +38,7 @@ element-unordered-pair :
   type-unordered-pair p → A
 element-unordered-pair p = pr2 p
 
+{-
 module _
   {l : Level} {A : UU l}
   where
@@ -56,12 +57,13 @@ module _
     ¬ ( (x y : type-unordered-pair p) →
         Id (element-unordered-pair p x) (element-unordered-pair p y)) →
     is-injective (element-unordered-pair p)
-  is-injective-element-unordered-pair (pair X f) H {x} = is-injective-comp {!!} {!!} {!!} {!!} {!!} {!!}
+  is-injective-element-unordered-pair (pair X f) H {x} = {!!}
     where
     g : Fin two-ℕ → A
     g (inl (inr star)) = {!!}
     g (inr star) = {!!}
   
+-}
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
