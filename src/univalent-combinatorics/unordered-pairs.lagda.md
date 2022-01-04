@@ -38,16 +38,30 @@ element-unordered-pair :
   type-unordered-pair p → A
 element-unordered-pair p = pr2 p
 
-is-injective-element-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) →
-  Σ ( type-unordered-pair p)
-    ( λ x →
-      Σ ( type-unordered-pair p)
-        ( λ y →
-          ¬ (Id (element-unordered-pair p x) (element-unordered-pair p y)))) →
-  is-injective (element-unordered-pair p)
-is-injective-element-unordered-pair p (pair x (pair y f)) =
-  {!!}
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-injective-map-Fin-two-ℕ :
+    (f : Fin two-ℕ → A) →
+    ¬ (Id (f zero-Fin) (f one-Fin)) → is-injective f
+  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inl (inr star)} p = refl
+  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inr star} p = ex-falso (H p)
+  is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
+    ex-falso (H (inv p))
+  is-injective-map-Fin-two-ℕ f H {inr star} {inr star} p = refl
+  
+  is-injective-element-unordered-pair :
+    (p : unordered-pair A) →
+    ¬ ( (x y : type-unordered-pair p) →
+        Id (element-unordered-pair p x) (element-unordered-pair p y)) →
+    is-injective (element-unordered-pair p)
+  is-injective-element-unordered-pair (pair X f) H {x} = is-injective-comp {!!} {!!} {!!} {!!} {!!} {!!}
+    where
+    g : Fin two-ℕ → A
+    g (inl (inr star)) = {!!}
+    g (inr star) = {!!}
+  
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
