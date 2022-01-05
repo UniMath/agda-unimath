@@ -5,9 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.graphs where
+module univalent-combinatorics.undirected-graphs where
 
 open import univalent-combinatorics.unordered-pairs public
+open import univalent-combinatorics.directed-graphs public
 
 Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Undirected-Graph l1 l2 = Σ (UU l1) (λ V → unordered-pair V → UU l2)
@@ -204,7 +205,8 @@ module _
   mere-equiv-Undirected-Graph = type-Prop mere-equiv-Undirected-Graph-Prop
 
   is-prop-mere-equiv-Undirected-Graph : is-prop mere-equiv-Undirected-Graph
-  is-prop-mere-equiv-Undirected-Graph = is-prop-type-Prop mere-equiv-Undirected-Graph-Prop
+  is-prop-mere-equiv-Undirected-Graph =
+    is-prop-type-Prop mere-equiv-Undirected-Graph-Prop
 
   htpy-equiv-Undirected-Graph :
     (f g : equiv-Undirected-Graph) → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -363,6 +365,38 @@ module _
     edge-Undirected-Graph G p → vertex-Undirected-Graph G
   source-edge-orientation-Undirected-Graph d (pair X p) e =
     p (d (pair X p) e)
+
+module _
+  {l1 l2 : Level} (G : Graph l1 l2)
+  where
+
+  undirected-graph-Graph : Undirected-Graph l1 l2
+  pr1 undirected-graph-Graph = vertex-Graph G
+  pr2 undirected-graph-Graph p =
+    Σ ( type-unordered-pair p)
+      ( λ x →
+        Σ ( type-unordered-pair p)
+          ( λ y →
+            edge-Graph G
+              ( element-unordered-pair p x)
+              ( element-unordered-pair p y)))
+
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2)
+  where
+
+  graph-Undirected-Graph : Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
+  pr1 graph-Undirected-Graph = vertex-Undirected-Graph G
+  pr2 graph-Undirected-Graph x y =
+    Σ ( unordered-pair-vertices-Undirected-Graph G)
+      ( λ p →
+        ( mere-Eq-unordered-pair (standard-unordered-pair x y) p) × 
+        ( edge-Undirected-Graph G p))
+
+  graph-Undirected-Graph' : Graph l1 l2
+  pr1 graph-Undirected-Graph' = vertex-Undirected-Graph G
+  pr2 graph-Undirected-Graph' x y =
+    edge-Undirected-Graph G (standard-unordered-pair x y)
 
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
