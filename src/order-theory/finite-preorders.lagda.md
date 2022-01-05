@@ -154,3 +154,12 @@ module _
   pr2 is-finite-preorder-Finite-Preorder = is-decidable-leq-Finite-Preorder
 ```
 
+### Decidable sub-preorders of finite preorders
+
+```agda
+
+module _
+  {l : Level} (X : Finite-Preorder l)
+  where
+
+```

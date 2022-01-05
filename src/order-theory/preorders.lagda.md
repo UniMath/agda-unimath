@@ -151,6 +151,56 @@ module _
   pr2 (pr2 (pr2 sub-Preorder)) = transitive-leq-sub-Preorder
 ```
 
+### Decidable sub-preorders
+
+```agda
+
+module _
+  {l1 l2 l3 : Level} (X : Preorder l1 l2)
+  (S : element-Preorder X → decidable-Prop l3)
+  where
+
+  element-decidable-sub-Preorder : UU (l1 ⊔ l3)
+  element-decidable-sub-Preorder =
+    element-sub-Preorder X (subtype-decidable-subtype S)
+
+  eq-element-decidable-sub-Preorder :
+    (x y : element-decidable-sub-Preorder) →
+    Eq-total-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+  eq-element-decidable-sub-Preorder =
+    eq-element-sub-Preorder X (subtype-decidable-subtype S)
+
+  leq-decidable-sub-Preorder-Prop :
+    (x y : element-decidable-sub-Preorder) → UU-Prop l2
+  leq-decidable-sub-Preorder-Prop =
+    leq-sub-Preorder-Prop X (subtype-decidable-subtype S)
+
+  leq-decidable-sub-Preorder : (x y : element-decidable-sub-Preorder) → UU l2
+  leq-decidable-sub-Preorder =
+    leq-sub-Preorder X (subtype-decidable-subtype S)
+
+  is-prop-leq-decidable-sub-Preorder :
+    (x y : element-decidable-sub-Preorder) →
+    is-prop (leq-decidable-sub-Preorder x y)
+  is-prop-leq-decidable-sub-Preorder =
+    is-prop-leq-sub-Preorder X (subtype-decidable-subtype S)
+
+  refl-leq-decidable-sub-Preorder :
+    (x : element-decidable-sub-Preorder) → leq-decidable-sub-Preorder x x
+  refl-leq-decidable-sub-Preorder =
+    refl-leq-sub-Preorder X (subtype-decidable-subtype S)
+
+  transitive-leq-decidable-sub-Preorder :
+    (x y z : element-decidable-sub-Preorder) →
+    leq-decidable-sub-Preorder y z → leq-decidable-sub-Preorder x y →
+    leq-decidable-sub-Preorder x z
+  transitive-leq-decidable-sub-Preorder =
+    transitive-leq-sub-Preorder X (subtype-decidable-subtype S)
+
+  decidable-sub-Preorder : Preorder (l1 ⊔ l3) l2
+  decidable-sub-Preorder = sub-Preorder X (subtype-decidable-subtype S)
+```
+
 ### Inclusion of sub-preorders
 
 ```agda
