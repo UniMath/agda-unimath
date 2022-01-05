@@ -35,6 +35,8 @@ open import groups.furstenberg-groups
 open import groups.higher-groups
 open import groups.sheargroups
 open import labels
+open import order-theory.posets
+open import order-theory.preorders
 open import subgroups
 open import subgroups.abstract-subgroups
 open import synthetic-homotopy-theory
@@ -52,6 +54,8 @@ open import the-circle.integers
 open import the-circle.the-circle
 open import the-circle.universal-cover
 open import univalent-combinatorics
+open import univalent-combinatorics.abstract-polytopes
+open import univalent-combinatorics.directed-graphs
 open import univalent-combinatorics.finite-graphs
 open import univalent-combinatorics.finite-presentations
 open import univalent-combinatorics.isolated-points
@@ -59,6 +63,7 @@ open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.polygons
 open import univalent-combinatorics.quaternion-group
 open import univalent-combinatorics.ramsey-theory
+open import univalent-combinatorics.reflexive-graphs
 open import univalent-combinatorics.undirected-graphs
 open import univalent-combinatorics.unordered-pairs
 open import univalent-foundations

@@ -95,6 +95,13 @@ open import groups.furstenberg-groups public
 open import subgroups.abstract-subgroups public
 ```
 
+## Order Theory
+
+```agda
+open import order-theory.preorders public
+open import order-theory.posets public
+```
+
 ## Univalent Combinatorics
 
 ```agda
