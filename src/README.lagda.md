@@ -101,6 +101,8 @@ open import subgroups.abstract-subgroups public
 open import univalent-combinatorics.unordered-pairs public
 open import univalent-combinatorics.finite-graphs public
 open import univalent-combinatorics.undirected-graphs public
+open import univalent-combinatorics.directed-graphs public
+open import univalent-combinatorics.reflexive-graphs public
 open import univalent-combinatorics.polygons public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.finite-presentations public

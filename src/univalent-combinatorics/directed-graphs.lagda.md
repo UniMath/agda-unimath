@@ -22,8 +22,4 @@ module _
   edge-Graph : vertex-Graph → vertex-Graph → UU l2
   edge-Graph = pr2 G
 
-Reflexive-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Reflexive-Graph l1 l2 =
-  Σ (UU l1) (λ V → Σ (V → V → UU l2) (λ E → (v : V) → E v v))
-
 ```
