@@ -78,14 +78,35 @@ is-selfpairing-unordered-pair p =
 module _
   {l1 : Level} {A : UU l1}
   where
+
+  standard-unordered-pair : A → A → unordered-pair A
+  pr1 (standard-unordered-pair x y) = Fin-UU-Fin two-ℕ
+  pr2 (standard-unordered-pair x y) (inl (inr star)) = x
+  pr2 (standard-unordered-pair x y) (inr star) = y
   
   Eq-unordered-pair : (p q : unordered-pair A) → UU l1
   Eq-unordered-pair (pair X p) (pair Y q) =
     Σ (equiv-UU-Fin X Y) (λ e → p ~ (q ∘ map-equiv e))
 
+  mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → UU-Prop l1
+  mere-Eq-unordered-pair-Prop p q = trunc-Prop (Eq-unordered-pair p q)
+
+  mere-Eq-unordered-pair : (p q : unordered-pair A) → UU l1
+  mere-Eq-unordered-pair p q = type-Prop (mere-Eq-unordered-pair-Prop p q)
+
+  is-prop-mere-Eq-unordered-pair :
+    (p q : unordered-pair A) → is-prop (mere-Eq-unordered-pair p q)
+  is-prop-mere-Eq-unordered-pair p q =
+    is-prop-type-Prop (mere-Eq-unordered-pair-Prop p q)
+
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
   pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin X
   pr2 (refl-Eq-unordered-pair (pair X p)) = refl-htpy
+
+  refl-mere-Eq-unordered-pair :
+    (p : unordered-pair A) → mere-Eq-unordered-pair p p
+  refl-mere-Eq-unordered-pair p =
+    unit-trunc-Prop (refl-Eq-unordered-pair p)
 
   Eq-eq-unordered-pair :
     (p q : unordered-pair A) → Id p q → Eq-unordered-pair p q
