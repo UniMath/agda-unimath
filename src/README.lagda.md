@@ -99,7 +99,9 @@ open import subgroups.abstract-subgroups public
 
 ```agda
 open import order-theory.preorders public
+open import order-theory.finite-preorders public
 open import order-theory.posets public
+open import order-theory.finite-posets public
 ```
 
 ## Univalent Combinatorics
