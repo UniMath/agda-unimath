@@ -154,6 +154,21 @@ Finite-Preorder l =
             type-decidable-Prop (R y z) → type-decidable-Prop (R x y) →
             type-decidable-Prop (R x z))))
 
+finite-preorder-is-finite-Preorder :
+  {l : Level} (X : Preorder lzero l) → is-finite-Preorder X → Finite-Preorder l
+pr1 (pr1 (finite-preorder-is-finite-Preorder X H)) = element-Preorder X
+pr2 (pr1 (finite-preorder-is-finite-Preorder X H)) = pr1 H
+pr1 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y) =
+  leq-Preorder X x y
+pr1 (pr2 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y)) =
+  is-prop-leq-Preorder X x y
+pr2 (pr2 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y)) =
+  pr2 H x y
+pr1 (pr2 (pr2 (finite-preorder-is-finite-Preorder X H))) =
+  refl-leq-Preorder X
+pr2 (pr2 (pr2 (finite-preorder-is-finite-Preorder X H))) =
+  transitive-leq-Preorder X
+
 module _
   {l : Level} (X : Finite-Preorder l)
   where
@@ -211,6 +226,11 @@ module _
   is-prop-leq-Finite-Preorder x y =
     is-prop-type-decidable-Prop (leq-Finite-Preorder-decidable-Prop x y)
 
+  leq-Finite-Preorder-Prop :
+    (x y : element-Finite-Preorder) → UU-Prop l
+  pr1 (leq-Finite-Preorder-Prop x y) = leq-Finite-Preorder x y
+  pr2 (leq-Finite-Preorder-Prop x y) = is-prop-leq-Finite-Preorder x y
+
   refl-leq-Finite-Preorder :
     (x : element-Finite-Preorder) → leq-Finite-Preorder x x
   refl-leq-Finite-Preorder = pr1 (pr2 (pr2 X))
@@ -219,6 +239,17 @@ module _
     (x y z : element-Finite-Preorder) →
     leq-Finite-Preorder y z → leq-Finite-Preorder x y → leq-Finite-Preorder x z
   transitive-leq-Finite-Preorder = pr2 (pr2 (pr2 X))
+
+  preorder-Finite-Preorder : Preorder lzero l
+  pr1 preorder-Finite-Preorder = element-Finite-Preorder
+  pr1 (pr2 preorder-Finite-Preorder) = leq-Finite-Preorder-Prop
+  pr1 (pr2 (pr2 preorder-Finite-Preorder)) = refl-leq-Finite-Preorder
+  pr2 (pr2 (pr2 preorder-Finite-Preorder)) = transitive-leq-Finite-Preorder
+
+  is-finite-preorder-Finite-Preorder :
+    is-finite-Preorder preorder-Finite-Preorder
+  pr1 is-finite-preorder-Finite-Preorder = is-finite-element-Finite-Preorder
+  pr2 is-finite-preorder-Finite-Preorder = is-decidable-leq-Finite-Preorder
 ```
 
 ### Sub-preorders
