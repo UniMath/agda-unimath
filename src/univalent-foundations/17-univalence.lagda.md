@@ -238,24 +238,27 @@ prop-decidable-Prop :
 pr1 (prop-decidable-Prop P) = pr1 P
 pr2 (prop-decidable-Prop P) = pr1 (pr2 P)
 
-type-decidable-Prop :
-  {l : Level} → decidable-Prop l → UU l
-type-decidable-Prop P = type-Prop (prop-decidable-Prop P)
+module _
+  {l : Level} (P : decidable-Prop l)
+  where
+  
+  type-decidable-Prop : UU l
+  type-decidable-Prop = type-Prop (prop-decidable-Prop P)
 
-abstract
-  is-prop-type-decidable-Prop :
-    {l : Level} (P : decidable-Prop l) → is-prop (type-decidable-Prop P)
-  is-prop-type-decidable-Prop P = is-prop-type-Prop (prop-decidable-Prop P)
+  abstract
+    is-prop-type-decidable-Prop : is-prop type-decidable-Prop
+    is-prop-type-decidable-Prop = is-prop-type-Prop (prop-decidable-Prop P)
 
-is-decidable-type-decidable-Prop :
-  {l : Level} (P : decidable-Prop l) → is-decidable (type-decidable-Prop P)
-is-decidable-type-decidable-Prop P = pr2 (pr2 P)
+  is-decidable-type-decidable-Prop : is-decidable type-decidable-Prop
+  is-decidable-type-decidable-Prop = pr2 (pr2 P)
 
-is-decidable-prop-decidable-Prop :
-  {l : Level} (P : decidable-Prop l) → UU-Prop l
-pr1 (is-decidable-prop-decidable-Prop P) = is-decidable (type-decidable-Prop P)
-pr2 (is-decidable-prop-decidable-Prop P) =
-  is-prop-is-decidable (is-prop-type-decidable-Prop P)
+  is-decidable-prop-type-decidable-Prop : is-decidable-prop type-decidable-Prop
+  is-decidable-prop-type-decidable-Prop = pr2 P
+
+  is-decidable-prop-decidable-Prop : UU-Prop l
+  pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
+  pr2 is-decidable-prop-decidable-Prop =
+    is-prop-is-decidable is-prop-type-decidable-Prop
 
 abstract
   is-contr-raise-unit :
