@@ -36,6 +36,8 @@ open import groups.higher-groups
 open import groups.sheargroups
 open import labels
 open import order-theory
+open import order-theory.finite-posets
+open import order-theory.finite-preorders
 open import order-theory.posets
 open import order-theory.preorders
 open import subgroups

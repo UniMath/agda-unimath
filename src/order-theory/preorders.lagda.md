@@ -108,43 +108,6 @@ module _
   largest-element-Preorder = Σ (element-Preorder X) is-largest-element-Preorder
 ```
 
-### Finite preorders
-
-We say that a preorder X is finite if X has finitely many elements and the ordering relation on X is decidable.
-
-```agda
-module _
-  {l1 l2 : Level} (X : Preorder l1 l2)
-  where
-
-  is-finite-Preorder-Prop : UU-Prop (l1 ⊔ l2)
-  is-finite-Preorder-Prop =
-    prod-Prop
-      ( is-finite-Prop (element-Preorder X))
-      ( Π-Prop
-        ( element-Preorder X)
-        ( λ x →
-          Π-Prop
-            ( element-Preorder X)
-            ( λ y → is-decidable-Prop (leq-Preorder-Prop X x y))))
-
-  is-finite-Preorder : UU (l1 ⊔ l2)
-  is-finite-Preorder = type-Prop is-finite-Preorder-Prop
-
-  is-prop-is-finite-Preorder : is-prop is-finite-Preorder
-  is-prop-is-finite-Preorder = is-prop-type-Prop is-finite-Preorder-Prop
-
-  is-finite-element-is-finite-Preorder :
-    is-finite-Preorder → is-finite (element-Preorder X)
-  is-finite-element-is-finite-Preorder = pr1
-
-  is-decidable-leq-is-finite-Preorder :
-    is-finite-Preorder →
-    (x y : element-Preorder X) → is-decidable (leq-Preorder X x y)
-  is-decidable-leq-is-finite-Preorder H = pr2 H
-
-```
-
 ### Sub-preorders
 
 ```agda
