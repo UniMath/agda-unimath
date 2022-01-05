@@ -275,6 +275,16 @@ module _
   total-decidable-subtype : UU (l1 ⊔ l2)
   total-decidable-subtype = total-subtype subtype-decidable-subtype
 
+  abstract
+    is-finite-decidable-subtype :
+      is-finite X → is-finite total-decidable-subtype
+    is-finite-decidable-subtype H =
+      is-finite-Σ H
+        ( λ x →
+          is-finite-is-decidable-Prop
+            ( prop-decidable-Prop (P x))
+            ( is-decidable-type-decidable-Prop (P x)))
+
 abstract
   is-contr-raise-unit :
     {l1 : Level} → is-contr (raise-unit l1)
