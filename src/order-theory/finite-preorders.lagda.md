@@ -154,3 +154,59 @@ module _
   pr2 is-finite-preorder-Finite-Preorder = is-decidable-leq-Finite-Preorder
 ```
 
+### Decidable sub-preorders of finite preorders
+
+```agda
+
+module _
+  {l1 l2 : Level} (X : Finite-Preorder l1)
+  (S : element-Finite-Preorder X → decidable-Prop l2)
+  where
+
+  element-finite-sub-Preorder : UU l2
+  element-finite-sub-Preorder =
+    element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+
+  is-finite-element-finite-sub-Preorder : is-finite element-finite-sub-Preorder
+  is-finite-element-finite-sub-Preorder =
+    is-finite-decidable-subtype S (is-finite-element-Finite-Preorder X)
+
+  eq-element-finite-sub-Preorder :
+    (x y : element-finite-sub-Preorder) →
+    Eq-total-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+  eq-element-finite-sub-Preorder =
+    eq-element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+
+  leq-finite-sub-Preorder-decidable-Prop :
+    (x y : element-finite-sub-Preorder) → decidable-Prop l1
+  leq-finite-sub-Preorder-decidable-Prop x y =
+    leq-Finite-Preorder-decidable-Prop X (pr1 x) (pr1 y)
+
+  leq-finite-sub-Preorder-Prop :
+    (x y : element-finite-sub-Preorder) → UU-Prop l1
+  leq-finite-sub-Preorder-Prop =
+    leq-decidable-sub-Preorder-Prop (preorder-Finite-Preorder X) S
+
+  leq-finite-sub-Preorder : (x y : element-finite-sub-Preorder) → UU l1
+  leq-finite-sub-Preorder =
+    leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+
+  is-prop-leq-finite-sub-Preorder :
+    (x y : element-finite-sub-Preorder) →
+    is-prop (leq-finite-sub-Preorder x y)
+  is-prop-leq-finite-sub-Preorder =
+    is-prop-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+
+  refl-leq-finite-sub-Preorder :
+    (x : element-finite-sub-Preorder) → leq-finite-sub-Preorder x x
+  refl-leq-finite-sub-Preorder =
+    refl-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+
+  transitive-leq-finite-sub-Preorder :
+    (x y z : element-finite-sub-Preorder) →
+    leq-finite-sub-Preorder y z → leq-finite-sub-Preorder x y →
+    leq-finite-sub-Preorder x z
+  transitive-leq-finite-sub-Preorder =
+    transitive-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
+
+```

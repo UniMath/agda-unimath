@@ -233,21 +233,20 @@ decidable-Prop :
   (l : Level) → UU (lsuc l)
 decidable-Prop l = Σ (UU l) is-decidable-prop
 
-prop-decidable-Prop :
-  {l : Level} → decidable-Prop l → UU-Prop l
-pr1 (prop-decidable-Prop P) = pr1 P
-pr2 (prop-decidable-Prop P) = pr1 (pr2 P)
-
 module _
   {l : Level} (P : decidable-Prop l)
   where
-  
+
+  prop-decidable-Prop : UU-Prop l
+  pr1 prop-decidable-Prop = pr1 P
+  pr2 prop-decidable-Prop = pr1 (pr2 P)
+
   type-decidable-Prop : UU l
-  type-decidable-Prop = type-Prop (prop-decidable-Prop P)
+  type-decidable-Prop = type-Prop prop-decidable-Prop
 
   abstract
     is-prop-type-decidable-Prop : is-prop type-decidable-Prop
-    is-prop-type-decidable-Prop = is-prop-type-Prop (prop-decidable-Prop P)
+    is-prop-type-decidable-Prop = is-prop-type-Prop prop-decidable-Prop
 
   is-decidable-type-decidable-Prop : is-decidable type-decidable-Prop
   is-decidable-type-decidable-Prop = pr2 (pr2 P)
@@ -259,6 +258,32 @@ module _
   pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
   pr2 is-decidable-prop-decidable-Prop =
     is-prop-is-decidable is-prop-type-decidable-Prop
+
+decidable-subtype : {l1 : Level} (l : Level) (X : UU l1) → UU (l1 ⊔ lsuc l)
+decidable-subtype l X = X → decidable-Prop l
+
+module _
+  {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X)
+  where
+
+  subtype-decidable-subtype : X → UU-Prop l2
+  subtype-decidable-subtype = prop-decidable-Prop ∘ P
+
+  type-decidable-subtype : X → UU l2
+  type-decidable-subtype = type-decidable-Prop ∘ P
+
+  total-decidable-subtype : UU (l1 ⊔ l2)
+  total-decidable-subtype = total-subtype subtype-decidable-subtype
+
+  abstract
+    is-finite-decidable-subtype :
+      is-finite X → is-finite total-decidable-subtype
+    is-finite-decidable-subtype H =
+      is-finite-Σ H
+        ( λ x →
+          is-finite-is-decidable-Prop
+            ( prop-decidable-Prop (P x))
+            ( is-decidable-type-decidable-Prop (P x)))
 
 abstract
   is-contr-raise-unit :

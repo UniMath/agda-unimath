@@ -93,6 +93,7 @@ open import groups.furstenberg-groups public
 
 ```agda
 open import subgroups.abstract-subgroups public
+open import subgroups.abstract-abelian-subgroups public
 ```
 
 ## Order Theory
@@ -121,7 +122,18 @@ open import univalent-combinatorics.isolated-points public
 open import univalent-combinatorics.quaternion-group public
 ```
 
-### Everything
+## Rings
+
+```agda
+open import rings.rings public
+open import rings.rings-with-properties public
+open import rings.ideals public
+open import rings.localizations-rings public
+open import rings.eisenstein-integers public
+open import rings.gaussian-integers public
+```
+
+## Everything
 
 See the list of all Agda modules [here](everything.html).
 

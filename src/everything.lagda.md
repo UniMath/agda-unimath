@@ -40,7 +40,15 @@ open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import rings
+open import rings.eisenstein-integers
+open import rings.gaussian-integers
+open import rings.ideals
+open import rings.localizations-rings
+open import rings.rings-with-properties
+open import rings.rings
 open import subgroups
+open import subgroups.abstract-abelian-subgroups
 open import subgroups.abstract-subgroups
 open import synthetic-homotopy-theory
 open import synthetic-homotopy-theory.23-pullbacks
