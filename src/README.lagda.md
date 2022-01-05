@@ -104,6 +104,7 @@ open import univalent-combinatorics.undirected-graphs public
 open import univalent-combinatorics.directed-graphs public
 open import univalent-combinatorics.reflexive-graphs public
 open import univalent-combinatorics.polygons public
+open import univalent-combinatorics.abstract-polytopes public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.ramsey-theory public
