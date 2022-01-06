@@ -39,7 +39,6 @@ open import univalent-foundations.17-univalence public
 open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.W-types public
 open import univalent-foundations.pointed-types public
-
 ```
 
 ## Categories
@@ -93,13 +92,16 @@ open import groups.furstenberg-groups public
 
 ```agda
 open import subgroups.abstract-subgroups public
+open import subgroups.abstract-abelian-subgroups public
 ```
 
 ## Order Theory
 
 ```agda
 open import order-theory.preorders public
+open import order-theory.finite-preorders public
 open import order-theory.posets public
+open import order-theory.finite-posets public
 ```
 
 ## Univalent Combinatorics
@@ -119,7 +121,18 @@ open import univalent-combinatorics.isolated-points public
 open import univalent-combinatorics.quaternion-group public
 ```
 
-### Everything
+## Rings
+
+```agda
+open import rings.rings public
+open import rings.rings-with-properties public
+open import rings.ideals public
+open import rings.localizations-rings public
+open import rings.eisenstein-integers public
+open import rings.gaussian-integers public
+```
+
+## Everything
 
 See the list of all Agda modules [here](everything.html).
 

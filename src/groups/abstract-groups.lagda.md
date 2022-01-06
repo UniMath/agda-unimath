@@ -8,7 +8,7 @@ title: Formalisation of the Symmetry Book
 module groups.abstract-groups where
 
 open import categories public
-open import synthetic-homotopy-theory public
+open import univalent-foundations public
 ```
 
 ## Groups in Univalent Mathematics

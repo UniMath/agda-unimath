@@ -18,7 +18,8 @@ The Agda source of the library can be found in the folder `src`. This folder con
 7. The `synthetic-homotopy-theory` folder contains the formalisation of pullbacks, pushouts, and (eventually) homotopy groups of types.
 8. The `groups` folder contains the material for Chapter 4 of the Symmetry book.
 9. The `subgroups` folder contains the material for Chapter 5 of the Symmetry book. We plan to include quotient groups in this folder, and prove the isomorphism theorems.
-10. The `univalent-combinatorics` folder contains further development of univalent mathematics of finite structures, and provides a source of examples of concrete groups.
+10. The `order-theory` folder contains concepts of order theory.
+11. The `univalent-combinatorics` folder contains further development of univalent mathematics of finite structures, and provides a source of examples of concrete groups.
 
 This library is built on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
 
@@ -38,9 +39,10 @@ The naming convention in this library is such that the name of a construction cl
 
 Names may also refer to types of the hypotheses used in the construction. Since the first objective of a name is to describe the type of the constructed term, the description of the hypotheses comes after the description of the conclusion in a name. For example, the term `is-equiv-is-contr-map` is a function of type `is-contr-map f → is-equiv f`, where `f` is a function already assumed. This convention has the advantage that if we have `H : is-contr-map f`, then the term `is-equiv-is-contr-map H` contains the description `is-contr-map` closest to the variable `H` of which it is a description.
 
-1. Names are mostly in lowercase, with words split by hyphens.
-2. Names describe the object that is constructed first. For some theorems, the later part of a name contains descriptions of the hypotheses. 
-3. The symbol for path concatenation is obtained by typing `\.`
+1. Names are by default in lowercase, with words split by hyphens.
+2. Important concepts can be capitalized. Usually, capitalized concepts form categories. Examples include `UU`, `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`, `Precat`, `Cat`, `Graph`, `Undirected-Graph`.
+3. Names describe the object that is constructed first. For some theorems, the later part of a name contains descriptions of the hypotheses. 
+4. The symbol for path concatenation is obtained by typing `\.`
 
 ### Characterizing identity types
 
