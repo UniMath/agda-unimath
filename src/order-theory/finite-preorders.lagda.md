@@ -209,4 +209,18 @@ module _
   transitive-leq-finite-sub-Preorder =
     transitive-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 
+module _
+  {l : Level} (X : Finite-Preorder l)
+  (S : element-Finite-Preorder X → decidable-Prop lzero)
+  where
+
+  element-finite-sub-Preorder-𝔽 : 𝔽
+  pr1 element-finite-sub-Preorder-𝔽 = element-finite-sub-Preorder X S
+  pr2 element-finite-sub-Preorder-𝔽 = is-finite-element-finite-sub-Preorder X S
+  
+  finite-sub-Preorder : Finite-Preorder l
+  pr1 finite-sub-Preorder = element-finite-sub-Preorder-𝔽
+  pr1 (pr2 finite-sub-Preorder) = leq-finite-sub-Preorder-decidable-Prop X S
+  pr1 (pr2 (pr2 finite-sub-Preorder)) = refl-leq-finite-sub-Preorder X S
+  pr2 (pr2 (pr2 finite-sub-Preorder)) = transitive-leq-finite-sub-Preorder X S
 ```

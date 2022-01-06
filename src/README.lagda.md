@@ -39,7 +39,6 @@ open import univalent-foundations.17-univalence public
 open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.W-types public
 open import univalent-foundations.pointed-types public
-
 ```
 
 ## Categories

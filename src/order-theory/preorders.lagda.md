@@ -270,4 +270,16 @@ chain-Preorder :
   {l1 l2 : Level} (l : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
 chain-Preorder l X =
   Σ (element-Preorder X → UU-Prop l) (is-chain-sub-Preorder X)
+
+```
+
+### Maximal chains in preorders
+
+```agda
+
+module _
+  {l1 l2 l3 : Level} (X : Preorder l1 l2)
+  where
+
+
 ```
