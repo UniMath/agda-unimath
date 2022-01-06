@@ -280,6 +280,29 @@ module _
 
   element-chain-Preorder : UU (l1 ⊔ l3)
   element-chain-Preorder = total-subtype sub-preorder-chain-Preorder
+
+module _
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  where
+  
+  inclusion-chain-Preorder-Prop :
+    {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
+    UU-Prop (l1 ⊔ l3 ⊔ l4)
+  inclusion-chain-Preorder-Prop C D =
+    inclusion-sub-Preorder-Prop X
+      ( sub-preorder-chain-Preorder X C)
+      ( sub-preorder-chain-Preorder X D)
+
+  inclusion-chain-Preorder :
+    {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
+    UU (l1 ⊔ l3 ⊔ l4)
+  inclusion-chain-Preorder C D = type-Prop (inclusion-chain-Preorder-Prop C D)
+
+  is-prop-inclusion-chain-Preorder :
+    {l3 l4 : Level} (C : chain-Preorder l3 X) (D : chain-Preorder l4 X) →
+    is-prop (inclusion-chain-Preorder C D)
+  is-prop-inclusion-chain-Preorder C D =
+    is-prop-type-Prop (inclusion-chain-Preorder-Prop C D)
 ```
 
 ### Maximal chains in preorders
@@ -287,27 +310,26 @@ module _
 ```agda
 
 module _
-  {l1 l2 l3 : Level} (X : Preorder l1 l2)
+  {l1 l2 : Level} (X : Preorder l1 l2)
   where
   
   is-maximal-chain-Preorder-Prop :
-    chain-Preorder l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-Preorder-Prop C =
-    Π-Prop
-      ( chain-Preorder l3 X)
-      ( λ D →
-        inclusion-sub-Preorder-Prop X
-          ( sub-preorder-chain-Preorder X D)
-          ( sub-preorder-chain-Preorder X C))
+    {l3 : Level} → chain-Preorder l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-maximal-chain-Preorder-Prop {l3} C =
+    Π-Prop (chain-Preorder l3 X) (inclusion-chain-Preorder-Prop X C)
 
-  is-maximal-chain-Preorder : chain-Preorder l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
+  is-maximal-chain-Preorder :
+    {l3 : Level} → chain-Preorder l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-Preorder C = type-Prop (is-maximal-chain-Preorder-Prop C)
 
   is-prop-is-maximal-chain-Preorder :
-    (C : chain-Preorder l3 X) → is-prop (is-maximal-chain-Preorder C)
+    {l3 : Level} (C : chain-Preorder l3 X) →
+    is-prop (is-maximal-chain-Preorder C)
   is-prop-is-maximal-chain-Preorder C =
     is-prop-type-Prop (is-maximal-chain-Preorder-Prop C)
 
-  maximal-chain-Preorder : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  maximal-chain-Preorder = Σ (chain-Preorder l3 X) is-maximal-chain-Preorder
+maximal-chain-Preorder :
+  {l1 l2 : Level} (l3 : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+maximal-chain-Preorder l3 X =
+  Σ (chain-Preorder l3 X) (is-maximal-chain-Preorder X)
 ```

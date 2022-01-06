@@ -323,4 +323,60 @@ module _
 chain-Poset :
   {l1 l2 : Level} (l : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
 chain-Poset l X = chain-Preorder l (preorder-Poset X)
+
+module _
+  {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
+  where
+
+  sub-preorder-chain-Poset : element-Poset X → UU-Prop l3
+  sub-preorder-chain-Poset =
+    sub-preorder-chain-Preorder (preorder-Poset X) C
+
+  element-chain-Poset : UU (l1 ⊔ l3)
+  element-chain-Poset = element-chain-Preorder (preorder-Poset X) C
+
+module _
+  {l1 l2 : Level} (X : Poset l1 l2)
+  where
+  
+  inclusion-chain-Poset-Prop :
+    {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
+    UU-Prop (l1 ⊔ l3 ⊔ l4)
+  inclusion-chain-Poset-Prop = inclusion-chain-Preorder-Prop (preorder-Poset X)
+
+  inclusion-chain-Poset :
+    {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X → UU (l1 ⊔ l3 ⊔ l4)
+  inclusion-chain-Poset = inclusion-chain-Preorder (preorder-Poset X)
+
+  is-prop-inclusion-chain-Poset :
+    {l3 l4 : Level} (C : chain-Poset l3 X) (D : chain-Poset l4 X) →
+    is-prop (inclusion-chain-Poset C D)
+  is-prop-inclusion-chain-Poset =
+    is-prop-inclusion-chain-Preorder (preorder-Poset X)
 ```
+
+### Maximal chains in preorders
+
+```agda
+
+module _
+  {l1 l2 : Level} (X : Poset l1 l2)
+  where
+  
+  is-maximal-chain-Poset-Prop :
+    {l3 : Level} → chain-Poset l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-maximal-chain-Poset-Prop =
+    is-maximal-chain-Preorder-Prop (preorder-Poset X)
+
+  is-maximal-chain-Poset :
+    {l3 : Level} → chain-Poset l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
+  is-maximal-chain-Poset = is-maximal-chain-Preorder (preorder-Poset X)
+
+  is-prop-is-maximal-chain-Poset :
+    {l3 : Level} (C : chain-Poset l3 X) → is-prop (is-maximal-chain-Poset C)
+  is-prop-is-maximal-chain-Poset =
+    is-prop-is-maximal-chain-Preorder (preorder-Poset X)
+
+maximal-chain-Poset :
+  {l1 l2 : Level} (l3 : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+maximal-chain-Poset l3 X = maximal-chain-Preorder l3 (preorder-Poset X)
