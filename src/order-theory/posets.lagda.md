@@ -380,3 +380,19 @@ module _
 maximal-chain-Poset :
   {l1 l2 : Level} (l3 : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 maximal-chain-Poset l3 X = maximal-chain-Preorder l3 (preorder-Poset X)
+
+module _
+  {l1 l2 l3 : Level} (X : Poset l1 l2) (C : maximal-chain-Poset l3 X)
+  where
+
+  chain-maximal-chain-Poset : chain-Poset l3 X
+  chain-maximal-chain-Poset = chain-maximal-chain-Preorder (preorder-Poset X) C
+
+  is-maximal-chain-maximal-chain-Poset :
+    is-maximal-chain-Poset X chain-maximal-chain-Poset
+  is-maximal-chain-maximal-chain-Poset =
+    is-maximal-chain-maximal-chain-Preorder (preorder-Poset X) C
+
+  element-maximal-chain-Poset : UU (l1 ⊔ l3)
+  element-maximal-chain-Poset =
+    element-maximal-chain-Preorder (preorder-Poset X) C

@@ -332,4 +332,19 @@ maximal-chain-Preorder :
   {l1 l2 : Level} (l3 : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 maximal-chain-Preorder l3 X =
   Σ (chain-Preorder l3 X) (is-maximal-chain-Preorder X)
+
+module _
+  {l1 l2 l3 : Level} (X : Preorder l1 l2) (C : maximal-chain-Preorder l3 X)
+  where
+
+  chain-maximal-chain-Preorder : chain-Preorder l3 X
+  chain-maximal-chain-Preorder = pr1 C
+
+  is-maximal-chain-maximal-chain-Preorder :
+    is-maximal-chain-Preorder X chain-maximal-chain-Preorder
+  is-maximal-chain-maximal-chain-Preorder = pr2 C
+
+  element-maximal-chain-Preorder : UU (l1 ⊔ l3)
+  element-maximal-chain-Preorder =
+    element-chain-Preorder X chain-maximal-chain-Preorder
 ```
