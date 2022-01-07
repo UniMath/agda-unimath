@@ -38,6 +38,7 @@ open import labels
 open import order-theory
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
+open import order-theory.finitely-graded-posets
 open import order-theory.posets
 open import order-theory.preorders
 open import rings
