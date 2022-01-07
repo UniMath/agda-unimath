@@ -95,15 +95,6 @@ module _
           leq-Finitely-Graded-Poset (vertex-face-Finitely-Graded-Poset y) →
           leq-Finitely-Graded-Poset (vertex-face-Finitely-Graded-Poset z)
 
-{-
-    all-elements-equal-leq-Finitely-Graded-Poset :
-      (y : vertex-Finitely-Graded-Poset) →
-      all-elements-equal (leq-Finitely-Graded-Poset y)
-    all-elements-equal-leq-Finitely-Graded-Poset .x
-      refl-leq-Finitely-Graded-Poset K = {!K!}
-    all-elements-equal-leq-Finitely-Graded-Poset .(vertex-face-Finitely-Graded-Poset z) (cons-leq-Finitely-Graded-Poset y z x H) K = {!!}
--}
-
   transitive-leq-Finitely-Graded-Poset :
     (x y z : vertex-Finitely-Graded-Poset) →
     leq-Finitely-Graded-Poset y z → leq-Finitely-Graded-Poset x y →
@@ -118,3 +109,114 @@ module _
         ( vertex-face-Finitely-Graded-Poset w)
         ( H)
         ( K))
+
+  sim-Finitely-Graded-Poset :
+    (x y : vertex-Finitely-Graded-Poset) → UU (l1 ⊔ l2)
+  sim-Finitely-Graded-Poset x y =
+    leq-Finitely-Graded-Poset x y × leq-Finitely-Graded-Poset y x
+
+  refl-sim-Finitely-Graded-Poset :
+    (x : vertex-Finitely-Graded-Poset) → sim-Finitely-Graded-Poset x x
+  pr1 (refl-sim-Finitely-Graded-Poset x) = refl-leq-Finitely-Graded-Poset
+  pr2 (refl-sim-Finitely-Graded-Poset x) = refl-leq-Finitely-Graded-Poset
+
+  sim-eq-Finitely-Graded-Poset :
+    (x y : vertex-Finitely-Graded-Poset) →
+    Id x y → sim-Finitely-Graded-Poset x y
+  sim-eq-Finitely-Graded-Poset x .x refl = refl-sim-Finitely-Graded-Poset x
+```
+
+### Truncating finitely graded posets
+
+```agda
+
+module _
+  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 (succ-ℕ k))
+  where
+  
+  trunc-Finitely-Graded-Poset : Finitely-Graded-Poset l1 l2 k
+  pr1 trunc-Finitely-Graded-Poset i =
+    face-set-Finitely-Graded-Poset-Set (succ-ℕ k) X (inl-Fin (succ-ℕ k) i)
+  pr2 trunc-Finitely-Graded-Poset i =
+    adjacent-Finitely-Graded-Poset-Prop (succ-ℕ k) X (inl-Fin k i)
+
+  vertex-trunc-Finitely-Graded-Poset : UU l1
+  vertex-trunc-Finitely-Graded-Poset =
+    vertex-Finitely-Graded-Poset k trunc-Finitely-Graded-Poset
+
+  leq-trunc-Finitely-Graded-Poset :
+    (x y : vertex-trunc-Finitely-Graded-Poset) → UU (l1 ⊔ l2)
+  leq-trunc-Finitely-Graded-Poset =
+    leq-Finitely-Graded-Poset k trunc-Finitely-Graded-Poset
+
+  vertex-vertex-trunc-Finitely-Graded-Poset :
+    vertex-trunc-Finitely-Graded-Poset →
+    vertex-Finitely-Graded-Poset (succ-ℕ k) X
+  pr1 (vertex-vertex-trunc-Finitely-Graded-Poset (pair i x)) =
+    inl-Fin (succ-ℕ k) i
+  pr2 (vertex-vertex-trunc-Finitely-Graded-Poset (pair i x)) = x
+```
+
+### Antisymmetry of finitely graded posets
+
+```agda
+center-total-leq-Finitely-Graded-Poset :
+  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+  (i : Fin (succ-ℕ k)) (x : face-set-Finitely-Graded-Poset k X i) →
+  Σ ( vertex-Finitely-Graded-Poset k X)
+    ( λ y →
+      Id (type-vertex-Finitely-Graded-Poset k X y) i ×
+      leq-Finitely-Graded-Poset k X
+        ( vertex-face-Finitely-Graded-Poset k X x)
+        y)
+pr1 (center-total-leq-Finitely-Graded-Poset k X i x) =
+  vertex-face-Finitely-Graded-Poset k X x
+pr1 (pr2 (center-total-leq-Finitely-Graded-Poset k X i x)) = refl
+pr2 (pr2 (center-total-leq-Finitely-Graded-Poset k X i x)) =
+  refl-leq-Finitely-Graded-Poset
+
+contraction-total-leq-Finitely-Graded-Poset :
+  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+  (i : Fin (succ-ℕ k)) (x : face-set-Finitely-Graded-Poset k X i) →
+  ( p : Σ ( vertex-Finitely-Graded-Poset k X)
+          ( λ y →
+            Id (type-vertex-Finitely-Graded-Poset k X y) i ×
+            leq-Finitely-Graded-Poset k X
+              ( vertex-face-Finitely-Graded-Poset k X x)
+              ( y))) →
+  Id (center-total-leq-Finitely-Graded-Poset k X i x) p
+contraction-total-leq-Finitely-Graded-Poset zero-ℕ X (inr star) x
+  ( pair (pair .(inr star) .x) (pair p refl-leq-Finitely-Graded-Poset)) =
+  ap
+    ( pair (vertex-face-Finitely-Graded-Poset zero-ℕ X x))
+    ( ap
+      ( λ t → pair t refl-leq-Finitely-Graded-Poset)
+      ( eq-is-prop (is-set-Fin one-ℕ (inr star) (inr star))))
+contraction-total-leq-Finitely-Graded-Poset (succ-ℕ k) X i x (pair y H) = {!!}
+
+-- is-contr-total-leq-Finitely-Graded-Poset :
+--   {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+--   (i : Fin (succ-ℕ k)) (x : face-set-Finitely-Graded-Poset k X i) →
+--   is-contr
+--     ( Σ ( face-set-Finitely-Graded-Poset k X i)
+--         ( λ y →
+--           leq-Finitely-Graded-Poset k X
+--             ( vertex-face-Finitely-Graded-Poset k X x)
+--             ( vertex-face-Finitely-Graded-Poset k X y)))
+-- is-contr-total-leq-Finitely-Graded-Poset k X i x = {!!}
+
+-- contraction-total-sim-Finitely-Graded-Poset :
+--   {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+--   (x : vertex-Finitely-Graded-Poset k X) →
+--   (p : Σ (vertex-Finitely-Graded-Poset k X) (sim-Finitely-Graded-Poset k X x)) →
+--   Id (pair x (refl-sim-Finitely-Graded-Poset k X x)) p
+-- contraction-total-sim-Finitely-Graded-Poset zero-ℕ X (pair i x) (pair (pair .i .x) (pair refl-leq-Finitely-Graded-Poset K)) = {!!}
+-- contraction-total-sim-Finitely-Graded-Poset (succ-ℕ k) X x (pair y H) = {!!}
+
+-- is-contr-total-sim-Finitely-Graded-Poset :
+--   {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+--   (x : vertex-Finitely-Graded-Poset k X) →
+--   is-contr
+--     ( Σ ( vertex-Finitely-Graded-Poset k X) ( sim-Finitely-Graded-Poset k X x))
+-- is-contr-total-sim-Finitely-Graded-Poset k X x =
+--   {!!}
