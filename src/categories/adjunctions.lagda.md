@@ -101,12 +101,11 @@ module _
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
   {C : Large-Precat αC βC} {D : Large-Precat αD βD}
+  (G : functor-Large-Precat D C γG) (F : functor-Large-Precat C D γF)
   where
 
-  is-left-adjoint-functor-Large-Precat : functor-Large-Precat D C γG
-                                       → functor-Large-Precat C D γF
-                                       → Setω
-  is-left-adjoint-functor-Large-Precat G F =
+  is-left-adjoint-functor-Large-Precat : Setω
+  is-left-adjoint-functor-Large-Precat =
     is-adjoint-pair-Large-Precat F G
 
 module _
