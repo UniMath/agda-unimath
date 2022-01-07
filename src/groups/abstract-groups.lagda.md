@@ -13,7 +13,12 @@ open import univalent-foundations public
 
 ## Groups in Univalent Mathematics
 
-We first introduce semigroups, and then groups. We do this because the category of groups is a full subcategory of the category of semigroups. In particular, it is a proposition for a semigroup to be a group. Therefore this approach gives us in a straightforward way that equality of groups is equality of semigroups. This will be useful in showing that group isomorphisms are equivalent to identifications of groups.
+We first introduce semigroups, and then groups. We do this because the
+category of groups is a full subcategory of the category of semigroups.
+In particular, it is a proposition for a semigroup to be a group. Therefore
+this approach gives us in a straightforward way that equality of groups is
+equality of semigroups. This will be useful in showing that group isomorphisms
+are equivalent to identifications of groups.
 
 ```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l
@@ -240,7 +245,7 @@ module _
   where
   
   is-iso-hom-Semigroup : (f : type-hom-Semigroup G H) → UU (l1 ⊔ l2)
-  is-iso-hom-Semigroup f = is-iso-hom-Large-Precat G H f
+  is-iso-hom-Semigroup f = is-iso-hom-Large-Precat Semigroup-Large-Precat G H f
 
   inv-is-iso-hom-Semigroup :
     (f : type-hom-Semigroup G H) →
@@ -248,18 +253,18 @@ module _
   inv-is-iso-hom-Semigroup f = pr1
 
   type-iso-Semigroup : UU (l1 ⊔ l2)
-  type-iso-Semigroup = type-iso-Large-Precat G H
+  type-iso-Semigroup = type-iso-Large-Precat Semigroup-Large-Precat G H
   
   hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
-  hom-iso-Semigroup = hom-iso-Large-Precat G H
+  hom-iso-Semigroup = hom-iso-Large-Precat Semigroup-Large-Precat G H
 
   is-iso-hom-iso-Semigroup :
     (f : type-iso-Semigroup) → is-iso-hom-Semigroup (hom-iso-Semigroup f)
   is-iso-hom-iso-Semigroup =
-    is-iso-hom-iso-Large-Precat G H
+    is-iso-hom-iso-Large-Precat Semigroup-Large-Precat G H
 
   hom-inv-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup H G
-  hom-inv-iso-Semigroup = hom-inv-iso-Large-Precat G H
+  hom-inv-iso-Semigroup = hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
   issec-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
@@ -267,7 +272,7 @@ module _
          ( hom-iso-Semigroup f)
          ( hom-inv-iso-Semigroup f))
        ( id-hom-Semigroup H)
-  issec-hom-inv-iso-Semigroup = issec-hom-inv-iso-Large-Precat G H
+  issec-hom-inv-iso-Semigroup = issec-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
   isretr-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
@@ -275,13 +280,13 @@ module _
          ( hom-inv-iso-Semigroup f)
          ( hom-iso-Semigroup f))
        ( id-hom-Semigroup G)
-  isretr-hom-inv-iso-Semigroup = isretr-hom-inv-iso-Large-Precat G H
+  isretr-hom-inv-iso-Semigroup = isretr-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
   abstract
     is-prop-is-iso-hom-Semigroup :
       (f : type-hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup f)
     is-prop-is-iso-hom-Semigroup =
-      is-prop-is-iso-hom-Large-Precat G H
+      is-prop-is-iso-hom-Large-Precat Semigroup-Large-Precat G H
 
   abstract
     preserves-mul-map-inv-is-equiv-Semigroup :
@@ -958,20 +963,20 @@ module _
   where
   
   is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-Group = is-iso-hom-Large-Precat G H
+  is-iso-hom-Group = is-iso-hom-Large-Precat Group-Large-Precat G H
 
   type-iso-Group : UU (l1 ⊔ l2)
-  type-iso-Group = type-iso-Large-Precat G H
+  type-iso-Group = type-iso-Large-Precat Group-Large-Precat G H
 
   hom-iso-Group : type-iso-Group → type-hom-Group G H
-  hom-iso-Group = hom-iso-Large-Precat G H
+  hom-iso-Group = hom-iso-Large-Precat Group-Large-Precat G H
 
   is-iso-hom-iso-Group :
     (f : type-iso-Group) → is-iso-hom-Group (hom-iso-Group f)
-  is-iso-hom-iso-Group = is-iso-hom-iso-Large-Precat G H
+  is-iso-hom-iso-Group = is-iso-hom-iso-Large-Precat Group-Large-Precat G H
 
   hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
-  hom-inv-iso-Group = hom-inv-iso-Large-Precat G H
+  hom-inv-iso-Group = hom-inv-iso-Large-Precat Group-Large-Precat G H
 
   equiv-Group : UU (l1 ⊔ l2)
   equiv-Group = equiv-Semigroup (semigroup-Group G) (semigroup-Group H)

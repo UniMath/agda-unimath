@@ -48,14 +48,14 @@ open Large-Precat public
 Notation for composition in large categories
 
 ```agda
-_∘C_ : {α : Level → Level} {β : Level → Level → Level}
+_∘Precat_ : {α : Level → Level} {β : Level → Level → Level}
     → ⦃ C : Large-Precat α β ⦄ {l1 l2 l3 : Level}
     → {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2}
     → {Z : obj-Large-Precat C l3}
     → type-Set (hom-Large-Precat C Y Z)
     → type-Set (hom-Large-Precat C X Y)
     → type-Set (hom-Large-Precat C X Z)
-_∘C_ ⦃ C ⦄ = comp-hom-Large-Precat C
+_∘Precat_ ⦃ C ⦄ = comp-hom-Large-Precat C
 ```
 
 The large precategory of sets
@@ -77,7 +77,7 @@ right-unit-law-comp-hom-Large-Precat Set-Large-Precat f = refl
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
-  ⦃ C : Large-Precat α β ⦄ {l1 l2 : Level}
+  (C : Large-Precat α β) {l1 l2 : Level}
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
 
@@ -99,43 +99,47 @@ module _
       ⦃C⦄ = C
 
   ap-comp-hom-Large-Precat :
-    {g g' : type-hom-Large-Precat Y Z} (p : Id g g')
-    {f f' : type-hom-Large-Precat X Y} (q : Id f f') →
-    Id (g ∘C f) (g' ∘C f')
+    {g g' : type-hom-Large-Precat C Y Z} (p : Id g g')
+    {f f' : type-hom-Large-Precat C X Y} (q : Id f f') →
+    Id (g ∘Precat f) (g' ∘Precat f')
   ap-comp-hom-Large-Precat p q = ap-binary (comp-hom-Large-Precat C) p q
 
   comp-hom-Large-Precat' :
-    type-hom-Large-Precat X Y → type-hom-Large-Precat Y Z →
-    type-hom-Large-Precat X Z
-  comp-hom-Large-Precat' f g = g ∘C f
+    type-hom-Large-Precat C X Y → type-hom-Large-Precat C Y Z →
+    type-hom-Large-Precat C X Z
+  comp-hom-Large-Precat' f g = g ∘Precat f
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
-  ⦃ C : Large-Precat α β ⦄ {l1 l2 : Level}
+  (C : Large-Precat α β) {l1 l2 : Level}
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   where
 
+  private
+    instance
+      ⦃C⦄ = C
+
   is-iso-hom-Large-Precat :
-    type-hom-Large-Precat X Y → UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
+    type-hom-Large-Precat C X Y → UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   is-iso-hom-Large-Precat f =
-    Σ ( type-hom-Large-Precat Y X)
+    Σ ( type-hom-Large-Precat C Y X)
       ( λ g →
-        ( Id (f ∘C g) (id-hom-Large-Precat C)) ×
-        ( Id (g ∘C f) (id-hom-Large-Precat C)))
+        ( Id (f ∘Precat g) (id-hom-Large-Precat C)) ×
+        ( Id (g ∘Precat f) (id-hom-Large-Precat C)))
 
   all-elements-equal-is-iso-hom-Large-Precat :
-    (f : type-hom-Large-Precat X Y)
+    (f : type-hom-Large-Precat C X Y)
     (H K : is-iso-hom-Large-Precat f) → Id H K
   all-elements-equal-is-iso-hom-Large-Precat f
     (pair g (pair p q)) (pair g' (pair p' q')) =
     eq-subtype
       ( λ g →
         is-prop-prod
-          ( is-set-type-hom-Large-Precat Y Y
-            ( f ∘C g)
+          ( is-set-type-hom-Large-Precat C Y Y
+            ( f ∘Precat g)
             ( id-hom-Large-Precat C))
-          ( is-set-type-hom-Large-Precat X X
-            ( g ∘C f)
+          ( is-set-type-hom-Large-Precat C X X
+            ( g ∘Precat f)
             ( id-hom-Large-Precat C)))
       ( ( inv (right-unit-law-comp-hom-Large-Precat C g)) ∙
         ( ( ap ( comp-hom-Large-Precat C g) (inv p')) ∙
@@ -144,25 +148,25 @@ module _
               ( left-unit-law-comp-hom-Large-Precat C g')))))
 
   is-prop-is-iso-hom-Large-Precat :
-    (f : type-hom-Large-Precat X Y) → is-prop (is-iso-hom-Large-Precat f)
+    (f : type-hom-Large-Precat C X Y) → is-prop (is-iso-hom-Large-Precat f)
   is-prop-is-iso-hom-Large-Precat f =
     is-prop-all-elements-equal (all-elements-equal-is-iso-hom-Large-Precat f)
 
   type-iso-Large-Precat : UU (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   type-iso-Large-Precat =
-    Σ (type-hom-Large-Precat X Y) is-iso-hom-Large-Precat
+    Σ (type-hom-Large-Precat C X Y) is-iso-hom-Large-Precat
 
   is-set-type-iso-Large-Precat : is-set type-iso-Large-Precat
   is-set-type-iso-Large-Precat =
     is-set-subtype
       ( is-prop-is-iso-hom-Large-Precat)
-      ( is-set-type-hom-Large-Precat X Y)
+      ( is-set-type-hom-Large-Precat C X Y)
 
   iso-Large-Precat : UU-Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   pr1 iso-Large-Precat = type-iso-Large-Precat
   pr2 iso-Large-Precat = is-set-type-iso-Large-Precat
 
-  hom-iso-Large-Precat : type-iso-Large-Precat → type-hom-Large-Precat X Y
+  hom-iso-Large-Precat : type-iso-Large-Precat → type-hom-Large-Precat C X Y
   hom-iso-Large-Precat = pr1
 
   is-iso-hom-iso-Large-Precat :
@@ -170,18 +174,18 @@ module _
     is-iso-hom-Large-Precat (hom-iso-Large-Precat f)
   is-iso-hom-iso-Large-Precat f = pr2 f
 
-  hom-inv-iso-Large-Precat : type-iso-Large-Precat → type-hom-Large-Precat Y X
+  hom-inv-iso-Large-Precat : type-iso-Large-Precat → type-hom-Large-Precat C Y X
   hom-inv-iso-Large-Precat f = pr1 (pr2 f)
 
   issec-hom-inv-iso-Large-Precat :
     (f : type-iso-Large-Precat) →
-    Id ( ( hom-iso-Large-Precat f) ∘C ( hom-inv-iso-Large-Precat f))
+    Id ( ( hom-iso-Large-Precat f) ∘Precat ( hom-inv-iso-Large-Precat f))
        ( id-hom-Large-Precat C)
   issec-hom-inv-iso-Large-Precat f = pr1 (pr2 (pr2 f))
 
   isretr-hom-inv-iso-Large-Precat :
     (f : type-iso-Large-Precat) →
-    Id ( ( hom-inv-iso-Large-Precat f) ∘C ( hom-iso-Large-Precat f))
+    Id ( ( hom-inv-iso-Large-Precat f) ∘Precat ( hom-iso-Large-Precat f))
        ( id-hom-Large-Precat C)
   isretr-hom-inv-iso-Large-Precat f = pr2 (pr2 (pr2 f))
 
@@ -190,11 +194,7 @@ module _
   (C : Large-Precat α β) {l1 : Level} {X : obj-Large-Precat C l1}
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-
-  id-iso-Large-Precat : type-iso-Large-Precat X X
+  id-iso-Large-Precat : type-iso-Large-Precat C X X
   pr1 id-iso-Large-Precat = id-hom-Large-Precat C
   pr1 (pr2 id-iso-Large-Precat) = id-hom-Large-Precat C
   pr1 (pr2 (pr2 id-iso-Large-Precat)) =
@@ -207,12 +207,8 @@ module _
   (C : Large-Precat α β) {l1 : Level} (X : obj-Large-Precat C l1)
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-
   iso-eq-Large-Precat :
-    (Y : obj-Large-Precat C l1) → Id X Y → type-iso-Large-Precat X Y
+    (Y : obj-Large-Precat C l1) → Id X Y → type-iso-Large-Precat C X Y
   iso-eq-Large-Precat .X refl = id-iso-Large-Precat C
 
 module _
@@ -242,11 +238,6 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
-
   record functor-Large-Precat (γ : Level → Level) : Setω
     where
     constructor make-functor
@@ -256,14 +247,14 @@ module _
       hom-functor-Large-Precat :
         {l1 l2 : Level}
         {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2} →
-        type-hom-Large-Precat X Y →
-        type-hom-Large-Precat
+        type-hom-Large-Precat C X Y →
+        type-hom-Large-Precat D
           ( obj-functor-Large-Precat X)
           ( obj-functor-Large-Precat Y)
       preserves-comp-functor-Large-Precat :
         {l1 l2 l3 : Level} {X : obj-Large-Precat C l1}
         {Y : obj-Large-Precat C l2} {Z : obj-Large-Precat C l3}
-        (g : type-hom-Large-Precat Y Z) (f : type-hom-Large-Precat X Y) →
+        (g : type-hom-Large-Precat C Y Z) (f : type-hom-Large-Precat C X Y) →
         Id ( hom-functor-Large-Precat (comp-hom-Large-Precat C g f))
            ( comp-hom-Large-Precat D
              ( hom-functor-Large-Precat g)
@@ -284,21 +275,16 @@ module _
   {C : Large-Precat αC βC} {D : Large-Precat αD βD}
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
-
-  _⟨_⟩ :
+  _on-obj_ :
     functor-Large-Precat C D γ → {l1 : Level} →
     obj-Large-Precat C l1 → obj-Large-Precat D (γ l1)
-  _⟨_⟩ = obj-functor-Large-Precat
+  _on-obj_ = obj-functor-Large-Precat
 
-  _⟪_⟫ :
+  _on-mor_ :
     (F : functor-Large-Precat C D γ) {l1 l2 : Level}
     {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2} →
-    type-hom-Large-Precat X Y → type-hom-Large-Precat (F ⟨ X ⟩) (F ⟨ Y ⟩)
-  _⟪_⟫ = hom-functor-Large-Precat
+    type-hom-Large-Precat C X Y → type-hom-Large-Precat D (F on-obj X) (F on-obj Y)
+  _on-mor_ = hom-functor-Large-Precat
 ```
 
 Every category comes equipped with an identity functor.
@@ -343,10 +329,10 @@ module _
          ( preserves-id-functor-Large-Precat F)) ∙
     ( preserves-id-functor-Large-Precat G)
 
-  _∘F_ :
+  _∘Functor_ :
     functor-Large-Precat D E γG → functor-Large-Precat C D γF →
     functor-Large-Precat C E (γG ∘ γF)
-  _∘F_ = comp-functor-Large-Precat
+  _∘Functor_ = comp-functor-Large-Precat
 ```
 
 ### Natural transformations between functors
@@ -354,18 +340,22 @@ module _
 ```agda
 module _
   {αC : Level → Level} {βC : Level → Level → Level}
-  ⦃ C : Large-Precat αC βC ⦄
+  (C : Large-Precat αC βC)
   {l1 l2 l3 l4 : Level}
   {A : obj-Large-Precat C l1} {B : obj-Large-Precat C l2}
   {X : obj-Large-Precat C l3} {Y : obj-Large-Precat C l4}  
   where
 
+  private
+    instance
+      ⦃C⦄ = C
+
   square-Large-Precat :
-    (top : type-hom-Large-Precat A B) (left : type-hom-Large-Precat A X)
-    (right : type-hom-Large-Precat B Y) (bottom : type-hom-Large-Precat X Y) →
+    (top : type-hom-Large-Precat C A B) (left : type-hom-Large-Precat C A X)
+    (right : type-hom-Large-Precat C B Y) (bottom : type-hom-Large-Precat C X Y) →
     UU (βC l1 l4)
   square-Large-Precat top left right bottom =
-    Id (bottom ∘C left) (right ∘C top)
+    Id (bottom ∘Precat left) (right ∘Precat top)
 
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
@@ -373,24 +363,19 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat C D γG)
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
-  
   record natural-transformation-Large-Precat : Setω
     where
     constructor make-natural-transformation
     field
       obj-natural-transformation-Large-Precat :
         {l1 : Level} (X : obj-Large-Precat C l1) →
-        type-hom-Large-Precat
+        type-hom-Large-Precat D
           ( obj-functor-Large-Precat F X)
           ( obj-functor-Large-Precat G X)
       coherence-square-natural-transformation-Large-Precat :
         {l1 l2 : Level} {X : obj-Large-Precat C l1}
-        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat X Y) →
-        square-Large-Precat
+        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
+        square-Large-Precat D
           ( obj-natural-transformation-Large-Precat X)
           ( hom-functor-Large-Precat F f)
           ( hom-functor-Large-Precat G f)
@@ -404,20 +389,20 @@ module _
     field
       obj-natural-isomorphism-Large-Precat :
         {l1 : Level} (X : obj-Large-Precat C l1) →
-        type-iso-Large-Precat
+        type-iso-Large-Precat D
           ( obj-functor-Large-Precat F X)
           ( obj-functor-Large-Precat G X)
       coherence-square-natural-isomorphism-Large-Precat :
         {l1 l2 : Level} {X : obj-Large-Precat C l1}
-        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat X Y) →
-        square-Large-Precat
-          ( hom-iso-Large-Precat
+        {Y : obj-Large-Precat C l2} (f : type-hom-Large-Precat C X Y) →
+        square-Large-Precat D
+          ( hom-iso-Large-Precat D
             ( obj-functor-Large-Precat F X)
             ( obj-functor-Large-Precat G X)
             ( obj-natural-isomorphism-Large-Precat X))
           ( hom-functor-Large-Precat F f)
           ( hom-functor-Large-Precat G f)
-          ( hom-iso-Large-Precat
+          ( hom-iso-Large-Precat D
             ( obj-functor-Large-Precat F Y)
             ( obj-functor-Large-Precat G Y)
             ( obj-natural-isomorphism-Large-Precat Y))
@@ -429,7 +414,7 @@ module _
   obj-natural-transformation-Large-Precat
     ( natural-transformation-natural-isomorphism-Large-Precat f)
     ( X) =
-    hom-iso-Large-Precat
+    hom-iso-Large-Precat D
       ( obj-functor-Large-Precat F X)
       ( obj-functor-Large-Precat G X)
       ( obj-natural-isomorphism-Large-Precat f X)
@@ -442,22 +427,17 @@ module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
   {C : Large-Precat αC βC} {D : Large-Precat αD βD}
   where
-
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
       
   _⟹_ :
     (F : functor-Large-Precat C D γF) (G : functor-Large-Precat C D γG) →
     Setω
   _⟹_ = natural-transformation-Large-Precat
-  
-  _⟦_⟧ :
+
+  natural-transformation_at_ :
     {F : functor-Large-Precat C D γF} {G : functor-Large-Precat C D γG}
     (η : F ⟹ G) {l : Level} (X : obj-Large-Precat C l) →
-    type-hom-Large-Precat (F ⟨ X ⟩) (G ⟨ X ⟩)
-  _⟦_⟧ = obj-natural-transformation-Large-Precat
+    type-hom-Large-Precat D (F on-obj X) (G on-obj X)
+  natural-transformation_at_ = obj-natural-transformation-Large-Precat
 ```
 
 Every functor comes equipped with an identity natural transformation.
@@ -467,11 +447,6 @@ module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
   {C : Large-Precat αC βC} {D : Large-Precat αD βD}
   where
-
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
   
   id-natural-transformation-Large-Precat :
     (F : functor-Large-Precat C D γF) → natural-transformation-Large-Precat F F
@@ -480,8 +455,8 @@ module _
     id-hom-Large-Precat D
   coherence-square-natural-transformation-Large-Precat
     ( id-natural-transformation-Large-Precat F) f =
-    ( left-unit-law-comp-hom-Large-Precat D (F ⟪ f ⟫)) ∙
-    ( inv (right-unit-law-comp-hom-Large-Precat D (F ⟪ f ⟫)))
+    ( left-unit-law-comp-hom-Large-Precat D (F on-mor f)) ∙
+    ( inv (right-unit-law-comp-hom-Large-Precat D (F on-mor f)))
 ```
 
 ### The condition on natural transformations of being a natural isomorphism
@@ -493,20 +468,17 @@ module _
   {F : functor-Large-Precat C D γF} {G : functor-Large-Precat C D γG}
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
-
   is-iso-natural-transformation-Large-Precat : F ⟹ G → Setω
   is-iso-natural-transformation-Large-Precat η =
     {l : Level} (X : obj-Large-Precat C l) →
-    is-iso-hom-Large-Precat (F ⟨ X ⟩) (G ⟨ X ⟩) (η ⟦ X ⟧)
+    is-iso-hom-Large-Precat D (F on-obj X) (G on-obj X) (natural-transformation η at X)
 ```
 
 #### Homotopies of natural transformations
 
-In Setω the identity type is not available. If it were, we would be able to characterize the identity type of natural transformations from F to G as the type of homotopies of natural transformations.
+In Setω the identity type is not available. If it were, we would be able to characterize
+the identity type of natural transformations from F to G as the type of homotopies of
+natural transformations.
 
 ```agda
 module _
@@ -561,11 +533,6 @@ module _
   (C : Large-Precat αC βC) (D : Large-Precat αD βD)
   where
 
-  private
-    instance
-      ⦃C⦄ = C
-      ⦃D⦄ = D
-
   record equivalence-Large-Precat (γ-there γ-back : Level → Level) : Setω where
     constructor make-equivalence-Large-Precat
     field
@@ -573,10 +540,10 @@ module _
       back-equivalence-Large-Precat : functor-Large-Precat D C γ-back
       back-there-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          (back-equivalence-Large-Precat ∘F there-equivalence-Large-Precat)
+          (back-equivalence-Large-Precat ∘Functor there-equivalence-Large-Precat)
           (id-functor-Large-Precat)
       there-back-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          (there-equivalence-Large-Precat ∘F back-equivalence-Large-Precat)
+          (there-equivalence-Large-Precat ∘Functor back-equivalence-Large-Precat)
           (id-functor-Large-Precat)
 ```
