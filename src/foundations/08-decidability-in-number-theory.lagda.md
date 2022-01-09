@@ -1548,6 +1548,11 @@ concatenate-eq-leq-eq-Fin :
   Id x1 x2 → leq-Fin x2 x3 → Id x3 x4 → leq-Fin x1 x4
 concatenate-eq-leq-eq-Fin refl H refl = H
 
+leq-succ-Fin :
+  {k : ℕ} (x : Fin k) → leq-Fin (inl-Fin k x) (succ-Fin (inl-Fin k x))
+leq-succ-Fin {succ-ℕ k} (inl x) = leq-succ-Fin x
+leq-succ-Fin {succ-ℕ k} (inr star) = star
+
 preserves-leq-nat-Fin :
   {k : ℕ} {x y : Fin k} → leq-Fin x y → leq-ℕ (nat-Fin x) (nat-Fin y)
 preserves-leq-nat-Fin {succ-ℕ k} {inl x} {inl y} H =

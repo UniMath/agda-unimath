@@ -82,3 +82,7 @@ module _
   face-set-Prepolytope-Set : UU-Set l1
   face-set-Prepolytope-Set = element-poset-Set poset-Prepolytope
 ```
+
+### The diamond condition
+
+```agda
