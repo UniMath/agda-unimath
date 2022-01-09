@@ -730,6 +730,10 @@ module _
   pr1 emb-inr = inr
   pr2 emb-inr = is-emb-inr
 
+emb-inl-Fin : (k : ℕ) → Fin k ↪ Fin (succ-ℕ k)
+pr1 (emb-inl-Fin k) = inl-Fin k
+pr2 (emb-inl-Fin k) = is-emb-inl (Fin k) unit
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where

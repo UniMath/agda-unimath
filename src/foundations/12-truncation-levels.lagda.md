@@ -1783,13 +1783,23 @@ pr2 (equiv-total-subtype is-subtype-P is-subtype-Q f g) =
 {- We show that if f : A → B is an embedding, then the induced map
    Σ A (C ∘ f) → Σ A C is also an embedding. -}
 
-abstract
-  is-emb-map-Σ-map-base :
-    { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3) →
-    is-emb f → is-emb (map-Σ-map-base f C)
-  is-emb-map-Σ-map-base f C is-emb-f =
-    is-emb-is-prop-map
-      ( λ x →
-        is-prop-equiv'
-          ( equiv-fib-map-Σ-map-base-fib f C x)
-          ( is-prop-map-is-emb is-emb-f (pr1 x)))
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-emb-map-Σ-map-base :
+      (f : A → B) (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
+    is-emb-map-Σ-map-base f C is-emb-f =
+      is-emb-is-prop-map
+        ( λ x →
+          is-prop-equiv'
+            ( equiv-fib-map-Σ-map-base-fib f C x)
+            ( is-prop-map-is-emb is-emb-f (pr1 x)))
+
+  emb-Σ-emb-base :
+    (f : A ↪ B) (C : B → UU l3) → Σ A (λ a → C (map-emb f a)) ↪ Σ B C
+  pr1 (emb-Σ-emb-base f C) = map-Σ-map-base (map-emb f) C
+  pr2 (emb-Σ-emb-base f C) =
+    is-emb-map-Σ-map-base (map-emb f) C (is-emb-map-emb f)
+  

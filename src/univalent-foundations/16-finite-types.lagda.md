@@ -571,6 +571,10 @@ abstract
   is-emb-unit-Maybe : {l : Level} {X : UU l} → is-emb (unit-Maybe {X = X})
   is-emb-unit-Maybe {l} {X} = is-emb-inl X unit
 
+emb-unit-Maybe : {l : Level} (X : UU l) → X ↪ Maybe X
+pr1 (emb-unit-Maybe X) = unit-Maybe
+pr2 (emb-unit-Maybe X) = is-emb-unit-Maybe
+
 abstract
   is-injective-unit-Maybe :
     {l : Level} {X : UU l} → is-injective (unit-Maybe {X = X})
