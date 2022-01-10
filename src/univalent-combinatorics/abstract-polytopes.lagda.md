@@ -17,14 +17,14 @@ The first axiom of polytopes asserts that polytopes have a least and a largest e
 ```agda
 
 module _
-  {l1 l2 : Level} (X : Poset l1 l2)
+  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
   where
 
   P1-Polytope-Prop : UU-Prop (l1 ⊔ l2)
   P1-Polytope-Prop =
     prod-Prop
-      ( has-least-element-Poset-Prop X)
-      ( has-largest-element-Poset-Prop X)
+      ( least-element-Finitely-Graded-Poset-Prop X)
+      ( largest-element-Finitely-Graded-Poset-Prop X)
 
   P1-Polytope : UU (l1 ⊔ l2)
   P1-Polytope = type-Prop P1-Polytope-Prop
@@ -41,48 +41,81 @@ The second axiom of polytopes asserts that every maximal chain has k elements. H
 
 ```agda
 module _
-  {l1 l2 : Level} (l3 : Level) (k : ℕ) (X : Poset l1 l2)
-  where
-  
-  P2-Polytope-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  P2-Polytope-Prop =
-    Π-Prop
-      ( maximal-chain-Poset l3 X)
-      ( λ C → has-cardinality-Prop (element-maximal-chain-Poset X C) (succ-ℕ k))
-
-  P2-Polytope : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  P2-Polytope = type-Prop P2-Polytope-Prop
-
-  is-prop-P2-Polytope : is-prop P2-Polytope
-  is-prop-P2-Polytope = is-prop-type-Prop P2-Polytope-Prop
-
-Prepolytope : (l1 l2 l3 : Level) → ℕ → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Prepolytope l1 l2 l3 k =
-  Σ ( Poset l1 l2) (λ X → P1-Polytope X × P2-Polytope l3 k X)
-
-module _
-  {l1 l2 l3 : Level} (k : ℕ) (X : Prepolytope l1 l2 l3 k)
+  {l1 l2 : Level} (l3 : Level) (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
   where
 
-  poset-Prepolytope : Poset l1 l2
-  poset-Prepolytope = pr1 X
-
-  P1-polytope-Prepolytope : P1-Polytope poset-Prepolytope
-  P1-polytope-Prepolytope = pr1 (pr2 X)
-
-  P2-polytope-Prepolytope : P2-Polytope l3 k poset-Prepolytope
-  P2-polytope-Prepolytope = pr2 (pr2 X)
-
-  face-set-Prepolytope : UU l1
-  face-set-Prepolytope = element-Poset poset-Prepolytope
-
-  is-set-face-set-Prepolytope : is-set face-set-Prepolytope
-  is-set-face-set-Prepolytope = is-set-element-Poset poset-Prepolytope
-
-  face-set-Prepolytope-Set : UU-Set l1
-  face-set-Prepolytope-Set = element-poset-Set poset-Prepolytope
 ```
 
-### The diamond condition
+  (P4) We state the diamond condition
 
 ```agda
+
+diamond-condition-Finitely-Graded-Poset :
+  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k) →
+  UU-Prop (l1 ⊔ l2)
+diamond-condition-Finitely-Graded-Poset zero-ℕ X = raise-unit-Prop _
+diamond-condition-Finitely-Graded-Poset (succ-ℕ k) X =
+  Π-Prop
+    ( Fin k)
+    ( λ i →
+      Π-Prop
+        ( face-Finitely-Graded-Poset X (inl-Fin (succ-ℕ k) (inl-Fin k i)))
+        ( λ x →
+          Π-Prop
+            ( face-Finitely-Graded-Poset X
+              ( succ-Fin (succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
+            ( λ y →
+              has-cardinality-Prop
+                ( Σ ( face-Finitely-Graded-Poset X
+                      ( succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i))))
+                    ( λ z →
+                      adjacent-Finitely-Graded-Poset X (inl-Fin k i) x z ×
+                      adjacent-Finitely-Graded-Poset X
+                        ( succ-Fin (inl-Fin k i))
+                        ( z)
+                        ( y)))
+                ( two-ℕ))))
+  
+  
+--   P2-Polytope-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+--   P2-Polytope-Prop =
+--     Π-Prop
+--       ( maximal-chain-Finitely-Graded-Poset l3 X)
+--       ( λ C → has-cardinality-Prop (element-maximal-chain-Finitely-Graded-Poset X C) (succ-ℕ k))
+
+--   P2-Polytope : UU (l1 ⊔ l2 ⊔ lsuc l3)
+--   P2-Polytope = type-Prop P2-Polytope-Prop
+
+--   is-prop-P2-Polytope : is-prop P2-Polytope
+--   is-prop-P2-Polytope = is-prop-type-Prop P2-Polytope-Prop
+
+-- Prepolytope : (l1 l2 l3 : Level) → ℕ → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+-- Prepolytope l1 l2 l3 k =
+--   Σ ( Finitely-Graded-Poset l1 l2) (λ X → P1-Polytope X × P2-Polytope l3 k X)
+
+-- module _
+--   {l1 l2 l3 : Level} (k : ℕ) (X : Prepolytope l1 l2 l3 k)
+--   where
+
+--   poset-Prepolytope : Finitely-Graded-Poset l1 l2
+--   poset-Prepolytope = pr1 X
+
+--   P1-polytope-Prepolytope : P1-Polytope poset-Prepolytope
+--   P1-polytope-Prepolytope = pr1 (pr2 X)
+
+--   P2-polytope-Prepolytope : P2-Polytope l3 k poset-Prepolytope
+--   P2-polytope-Prepolytope = pr2 (pr2 X)
+
+--   face-set-Prepolytope : UU l1
+--   face-set-Prepolytope = element-Finitely-Graded-Poset poset-Prepolytope
+
+--   is-set-face-set-Prepolytope : is-set face-set-Prepolytope
+--   is-set-face-set-Prepolytope = is-set-element-Finitely-Graded-Poset poset-Prepolytope
+
+--   face-set-Prepolytope-Set : UU-Set l1
+--   face-set-Prepolytope-Set = element-poset-Set poset-Prepolytope
+-- ```
+
+-- ### The diamond condition
+
+-- ```agda

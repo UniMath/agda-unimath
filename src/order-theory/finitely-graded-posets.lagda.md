@@ -24,24 +24,24 @@ Finitely-Graded-Poset l1 l2 k =
       type-Set (X (succ-Fin (inl-Fin k i))) → UU-Prop l2)
 
 module _
-  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
 
   module _
     (i : Fin (succ-ℕ k))
     where
     
-    face-Finitely-Graded-Poset-Set : UU-Set l1
-    face-Finitely-Graded-Poset-Set = pr1 X i
+    face-set-Finitely-Graded-Poset : UU-Set l1
+    face-set-Finitely-Graded-Poset = pr1 X i
 
     face-Finitely-Graded-Poset : UU l1
     face-Finitely-Graded-Poset =
-      type-Set face-Finitely-Graded-Poset-Set
+      type-Set face-set-Finitely-Graded-Poset
 
     is-set-face-Finitely-Graded-Poset :
       is-set face-Finitely-Graded-Poset
     is-set-face-Finitely-Graded-Poset =
-      is-set-type-Set face-Finitely-Graded-Poset-Set
+      is-set-type-Set face-set-Finitely-Graded-Poset
 
   module _
     (i : Fin k) (y : face-Finitely-Graded-Poset (inl-Fin k i))
@@ -60,30 +60,30 @@ module _
     is-prop-adjacent-Finitely-Graded-Poset =
       is-prop-type-Prop adjacent-Finitely-Graded-Poset-Prop
 
-  vertex-Finitely-Graded-Poset-Set : UU-Set l1
-  vertex-Finitely-Graded-Poset-Set =
-    Σ-Set (Fin-Set (succ-ℕ k)) face-Finitely-Graded-Poset-Set
+  element-set-Finitely-Graded-Poset : UU-Set l1
+  element-set-Finitely-Graded-Poset =
+    Σ-Set (Fin-Set (succ-ℕ k)) face-set-Finitely-Graded-Poset
 
-  vertex-Finitely-Graded-Poset : UU l1
-  vertex-Finitely-Graded-Poset = type-Set vertex-Finitely-Graded-Poset-Set
+  element-Finitely-Graded-Poset : UU l1
+  element-Finitely-Graded-Poset = type-Set element-set-Finitely-Graded-Poset
 
-  is-set-vertex-Finitely-Graded-Poset : is-set vertex-Finitely-Graded-Poset
-  is-set-vertex-Finitely-Graded-Poset =
-    is-set-type-Set vertex-Finitely-Graded-Poset-Set
+  is-set-element-Finitely-Graded-Poset : is-set element-Finitely-Graded-Poset
+  is-set-element-Finitely-Graded-Poset =
+    is-set-type-Set element-set-Finitely-Graded-Poset
 
-  vertex-face-Finitely-Graded-Poset :
+  element-face-Finitely-Graded-Poset :
     {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset i →
-    vertex-Finitely-Graded-Poset
-  vertex-face-Finitely-Graded-Poset {i} x = pair i x
+    element-Finitely-Graded-Poset
+  element-face-Finitely-Graded-Poset {i} x = pair i x
 
-  type-vertex-Finitely-Graded-Poset :
-    vertex-Finitely-Graded-Poset → Fin (succ-ℕ k)
-  type-vertex-Finitely-Graded-Poset (pair i x) = i
+  type-element-Finitely-Graded-Poset :
+    element-Finitely-Graded-Poset → Fin (succ-ℕ k)
+  type-element-Finitely-Graded-Poset (pair i x) = i
 
-  face-vertex-Finitely-Graded-Poset :
-    (x : vertex-Finitely-Graded-Poset) →
-    face-Finitely-Graded-Poset (type-vertex-Finitely-Graded-Poset x)
-  face-vertex-Finitely-Graded-Poset (pair i x) = x
+  face-element-Finitely-Graded-Poset :
+    (x : element-Finitely-Graded-Poset) →
+    face-Finitely-Graded-Poset (type-element-Finitely-Graded-Poset x)
+  face-element-Finitely-Graded-Poset (pair i x) = x
 
   module _
     {i : Fin (succ-ℕ k)} (x : face-Finitely-Graded-Poset i)
@@ -130,17 +130,17 @@ module _
       ( concat-path-faces-Finitely-Graded-Poset H K)
 
   path-vertices-Finitely-Graded-Poset :
-    (x y : vertex-Finitely-Graded-Poset) → UU (l1 ⊔ l2)
+    (x y : element-Finitely-Graded-Poset) → UU (l1 ⊔ l2)
   path-vertices-Finitely-Graded-Poset (pair i x) (pair j y) =
     path-faces-Finitely-Graded-Poset x y
 
   refl-path-vertices-Finitely-Graded-Poset :
-    (x : vertex-Finitely-Graded-Poset) → path-vertices-Finitely-Graded-Poset x x
+    (x : element-Finitely-Graded-Poset) → path-vertices-Finitely-Graded-Poset x x
   refl-path-vertices-Finitely-Graded-Poset x =
     refl-path-faces-Finitely-Graded-Poset
 
   concat-path-vertices-Finitely-Graded-Poset :
-    (x y z : vertex-Finitely-Graded-Poset) →
+    (x y z : element-Finitely-Graded-Poset) →
     path-vertices-Finitely-Graded-Poset y z →
     path-vertices-Finitely-Graded-Poset x y →
     path-vertices-Finitely-Graded-Poset x z
@@ -164,14 +164,14 @@ module _
 
 ```agda
 eq-path-vertices-Finitely-Graded-Poset :
-  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
-  (x y : vertex-Finitely-Graded-Poset k X) →
-  (p : Id (type-vertex-Finitely-Graded-Poset k X x)
-          (type-vertex-Finitely-Graded-Poset k X y)) →
-  path-vertices-Finitely-Graded-Poset k X x y → Id x y
-eq-path-vertices-Finitely-Graded-Poset k X (pair i1 x) (pair .i1 .x) p
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  (x y : element-Finitely-Graded-Poset X) →
+  (p : Id (type-element-Finitely-Graded-Poset X x)
+          (type-element-Finitely-Graded-Poset X y)) →
+  path-vertices-Finitely-Graded-Poset X x y → Id x y
+eq-path-vertices-Finitely-Graded-Poset {k} X (pair i1 x) (pair .i1 .x) p
   refl-path-faces-Finitely-Graded-Poset = refl
-eq-path-vertices-Finitely-Graded-Poset (succ-ℕ k) X (pair i1 x)
+eq-path-vertices-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
   (pair .(succ-Fin (inl-Fin (succ-ℕ k) i2)) y) p
   (cons-path-faces-Finitely-Graded-Poset {i2} {z} H K) =
   ex-falso
@@ -187,40 +187,58 @@ eq-path-vertices-Finitely-Graded-Poset (succ-ℕ k) X (pair i1 x)
             ( leq-Fin (succ-Fin (inl-Fin (succ-ℕ k) i2)))
             ( inv p)
             ( refl-leq-Fin (succ-Fin (inl-Fin (succ-ℕ k) i2))))
-          ( leq-type-path-faces-Finitely-Graded-Poset
-            ( succ-ℕ k) X x z K))
+          ( leq-type-path-faces-Finitely-Graded-Poset X x z K))
         ( leq-succ-Fin i2)))
 
-antisymmetric-path-vertices-Finitely-Graded-Poset :
-  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k) →
-  (x y : vertex-Finitely-Graded-Poset k X) →
-  path-vertices-Finitely-Graded-Poset k X x y →
-  path-vertices-Finitely-Graded-Poset k X y x →
-  Id x y
-antisymmetric-path-vertices-Finitely-Graded-Poset
-  k X (pair i x) (pair j y) H K =
-  eq-path-vertices-Finitely-Graded-Poset k X (pair i x) (pair j y)
-    ( antisymmetric-leq-Fin
-      ( leq-type-path-faces-Finitely-Graded-Poset k X x y H)
-      ( leq-type-path-faces-Finitely-Graded-Poset k X y x K))
-    ( H)
+module _
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  where
+  
+  abstract
+    eq-path-faces-Finitely-Graded-Poset :
+      {i : Fin (succ-ℕ k)} (x y : face-Finitely-Graded-Poset X i) →
+      path-faces-Finitely-Graded-Poset X x y → Id x y
+    eq-path-faces-Finitely-Graded-Poset {i} x y H =
+      map-left-unit-law-Σ-is-contr
+        ( is-proof-irrelevant-is-prop
+          ( is-set-Fin (succ-ℕ k) i i)
+          ( refl))
+        ( refl)
+        ( pair-eq-Σ
+          ( eq-path-vertices-Finitely-Graded-Poset X
+            ( element-face-Finitely-Graded-Poset X x)
+            ( element-face-Finitely-Graded-Poset X y)
+            ( refl)
+            ( H)))
+
+  antisymmetric-path-vertices-Finitely-Graded-Poset :
+    (x y : element-Finitely-Graded-Poset X) →
+    path-vertices-Finitely-Graded-Poset X x y →
+    path-vertices-Finitely-Graded-Poset X y x →
+    Id x y
+  antisymmetric-path-vertices-Finitely-Graded-Poset (pair i x) (pair j y) H K =
+    eq-path-vertices-Finitely-Graded-Poset X (pair i x) (pair j y)
+      ( antisymmetric-leq-Fin
+        ( leq-type-path-faces-Finitely-Graded-Poset X x y H)
+        ( leq-type-path-faces-Finitely-Graded-Poset X y x K))
+      ( H)
 ```
 
-### Poset structure on vertex-Finitely-Graded-Poset
+### Poset structure on element-Finitely-Graded-Poset
 
 ```agda
 
 module _
-  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k)
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
 
   module _
-    (x y : vertex-Finitely-Graded-Poset k X)
+    (x y : element-Finitely-Graded-Poset X)
     where
     
     leq-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l2)
     leq-Finitely-Graded-Poset-Prop =
-      trunc-Prop (path-vertices-Finitely-Graded-Poset k X x y)
+      trunc-Prop (path-vertices-Finitely-Graded-Poset X x y)
 
     leq-Finitely-Graded-Poset : UU (l1 ⊔ l2)
     leq-Finitely-Graded-Poset = type-Prop leq-Finitely-Graded-Poset-Prop
@@ -230,12 +248,12 @@ module _
       is-prop-type-Prop leq-Finitely-Graded-Poset-Prop
 
   refl-leq-Finitely-Graded-Poset :
-    (x : vertex-Finitely-Graded-Poset k X) → leq-Finitely-Graded-Poset x x
+    (x : element-Finitely-Graded-Poset X) → leq-Finitely-Graded-Poset x x
   refl-leq-Finitely-Graded-Poset x =
-    unit-trunc-Prop (refl-path-vertices-Finitely-Graded-Poset k X x)
+    unit-trunc-Prop (refl-path-vertices-Finitely-Graded-Poset X x)
 
   transitive-leq-Finitely-Graded-Poset :
-    (x y z : vertex-Finitely-Graded-Poset k X) →
+    (x y z : element-Finitely-Graded-Poset X) →
     leq-Finitely-Graded-Poset y z → leq-Finitely-Graded-Poset x y →
     leq-Finitely-Graded-Poset x z
   transitive-leq-Finitely-Graded-Poset x y z H K =
@@ -246,22 +264,22 @@ module _
           ( leq-Finitely-Graded-Poset-Prop x z)
           ( λ M →
             unit-trunc-Prop
-              ( concat-path-vertices-Finitely-Graded-Poset k X x y z L M)))
+              ( concat-path-vertices-Finitely-Graded-Poset X x y z L M)))
 
   antisymmetric-leq-Finitely-Graded-Poset :
-    (x y : vertex-Finitely-Graded-Poset k X) →
+    (x y : element-Finitely-Graded-Poset X) →
     leq-Finitely-Graded-Poset x y → leq-Finitely-Graded-Poset y x → Id x y
   antisymmetric-leq-Finitely-Graded-Poset x y H K =
     apply-universal-property-trunc-Prop H
-      ( Id-Prop (vertex-Finitely-Graded-Poset-Set k X) x y)
+      ( Id-Prop (element-set-Finitely-Graded-Poset X) x y)
       ( λ L →
         apply-universal-property-trunc-Prop K
-          ( Id-Prop (vertex-Finitely-Graded-Poset-Set k X) x y)
+          ( Id-Prop (element-set-Finitely-Graded-Poset X) x y)
           ( λ M →
-            antisymmetric-path-vertices-Finitely-Graded-Poset k X x y L M))
+            antisymmetric-path-vertices-Finitely-Graded-Poset X x y L M))
   
   poset-Finitely-Graded-Poset : Poset l1 (l1 ⊔ l2)
-  pr1 poset-Finitely-Graded-Poset = vertex-Finitely-Graded-Poset k X
+  pr1 poset-Finitely-Graded-Poset = element-Finitely-Graded-Poset X
   pr1 (pr2 poset-Finitely-Graded-Poset) = leq-Finitely-Graded-Poset-Prop
   pr1 (pr1 (pr2 (pr2 poset-Finitely-Graded-Poset))) =
     refl-leq-Finitely-Graded-Poset
@@ -269,3 +287,384 @@ module _
     transitive-leq-Finitely-Graded-Poset
   pr2 (pr2 (pr2 poset-Finitely-Graded-Poset)) =
     antisymmetric-leq-Finitely-Graded-Poset
+```
+
+### Least and largest elements in finitely graded posets
+
+We make sure that the least element is a face of type zero-Fin, and that the largest element is a face of type neg-one-Fin.
+
+```agda
+module _
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  where
+
+  module _
+    (x : face-Finitely-Graded-Poset X zero-Fin)
+    where
+    
+    is-least-element-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l2)
+    is-least-element-Finitely-Graded-Poset-Prop =
+      is-least-element-Poset-Prop
+        ( poset-Finitely-Graded-Poset X)
+        ( element-face-Finitely-Graded-Poset X x)
+
+    is-least-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+    is-least-element-Finitely-Graded-Poset =
+      is-least-element-Poset
+        ( poset-Finitely-Graded-Poset X)
+        ( element-face-Finitely-Graded-Poset X x)
+
+    is-prop-is-least-element-Finitely-Graded-Poset :
+      is-prop is-least-element-Finitely-Graded-Poset
+    is-prop-is-least-element-Finitely-Graded-Poset =
+      is-prop-is-least-element-Poset
+        ( poset-Finitely-Graded-Poset X)
+        ( element-face-Finitely-Graded-Poset X x)
+
+  least-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+  least-element-Finitely-Graded-Poset =
+    Σ ( face-Finitely-Graded-Poset X zero-Fin)
+      ( is-least-element-Finitely-Graded-Poset)
+
+  all-elements-equal-least-element-Finitely-Graded-Poset :
+    all-elements-equal least-element-Finitely-Graded-Poset
+  all-elements-equal-least-element-Finitely-Graded-Poset (pair x H) (pair y K) =
+    eq-subtype
+      ( is-prop-is-least-element-Finitely-Graded-Poset)
+      ( apply-universal-property-trunc-Prop
+        ( H (element-face-Finitely-Graded-Poset X y))
+        ( Id-Prop (face-set-Finitely-Graded-Poset X zero-Fin) x y)
+        ( eq-path-faces-Finitely-Graded-Poset X x y))
+
+  is-prop-least-element-Finitely-Graded-Poset :
+    is-prop least-element-Finitely-Graded-Poset
+  is-prop-least-element-Finitely-Graded-Poset =
+    is-prop-all-elements-equal
+      all-elements-equal-least-element-Finitely-Graded-Poset
+
+  least-element-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 least-element-Finitely-Graded-Poset-Prop =
+    least-element-Finitely-Graded-Poset
+  pr2 least-element-Finitely-Graded-Poset-Prop =
+    is-prop-least-element-Finitely-Graded-Poset
+
+  module _
+    (x : face-Finitely-Graded-Poset X zero-Fin)
+    where
+    
+    is-largest-element-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l2)
+    is-largest-element-Finitely-Graded-Poset-Prop =
+      is-largest-element-Poset-Prop
+        ( poset-Finitely-Graded-Poset X)
+        ( element-face-Finitely-Graded-Poset X x)
+
+    is-largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+    is-largest-element-Finitely-Graded-Poset =
+      is-largest-element-Poset
+        ( poset-Finitely-Graded-Poset X)
+        ( element-face-Finitely-Graded-Poset X x)
+
+    is-prop-is-largest-element-Finitely-Graded-Poset :
+      is-prop is-largest-element-Finitely-Graded-Poset
+    is-prop-is-largest-element-Finitely-Graded-Poset =
+      is-prop-is-largest-element-Poset
+        ( poset-Finitely-Graded-Poset X)
+        ( element-face-Finitely-Graded-Poset X x)
+
+  largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+  largest-element-Finitely-Graded-Poset =
+    Σ ( face-Finitely-Graded-Poset X zero-Fin)
+      ( is-largest-element-Finitely-Graded-Poset)
+
+  all-elements-equal-largest-element-Finitely-Graded-Poset :
+    all-elements-equal largest-element-Finitely-Graded-Poset
+  all-elements-equal-largest-element-Finitely-Graded-Poset
+    (pair x H) (pair y K) =
+    eq-subtype
+      ( is-prop-is-largest-element-Finitely-Graded-Poset)
+      ( apply-universal-property-trunc-Prop
+        ( K (element-face-Finitely-Graded-Poset X x))
+        ( Id-Prop (face-set-Finitely-Graded-Poset X zero-Fin) x y)
+        ( eq-path-faces-Finitely-Graded-Poset X x y))
+
+  is-prop-largest-element-Finitely-Graded-Poset :
+    is-prop largest-element-Finitely-Graded-Poset
+  is-prop-largest-element-Finitely-Graded-Poset =
+    is-prop-all-elements-equal
+      all-elements-equal-largest-element-Finitely-Graded-Poset
+
+  largest-element-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 largest-element-Finitely-Graded-Poset-Prop =
+    largest-element-Finitely-Graded-Poset
+  pr2 largest-element-Finitely-Graded-Poset-Prop =
+    is-prop-largest-element-Finitely-Graded-Poset
+```
+
+## Finitely graded subposets
+
+```agda
+
+module _
+  {l1 l2 l3 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  (S : {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset X i → UU-Prop l3)
+  where
+
+  module _
+    (i : Fin (succ-ℕ k))
+    where
+    
+    face-set-Finitely-Graded-Subposet : UU-Set (l1 ⊔ l3)
+    face-set-Finitely-Graded-Subposet =
+      Σ-Set
+        ( face-set-Finitely-Graded-Poset X i)
+        ( λ x → set-Prop (S x))
+
+    face-Finitely-Graded-Subposet : UU (l1 ⊔ l3)
+    face-Finitely-Graded-Subposet = type-Set face-set-Finitely-Graded-Subposet
+
+    is-set-face-Finitely-Graded-Subposet : is-set face-Finitely-Graded-Subposet
+    is-set-face-Finitely-Graded-Subposet =
+      is-set-type-Set face-set-Finitely-Graded-Subposet
+
+    eq-face-Finitely-Graded-Subposet :
+      (x y : face-Finitely-Graded-Subposet) →
+      Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
+    eq-face-Finitely-Graded-Subposet x y =
+      eq-subtype (λ z → is-prop-type-Prop (S z))
+
+  element-set-Finitely-Graded-Subposet : UU-Set (l1 ⊔ l3)
+  element-set-Finitely-Graded-Subposet =
+    Σ-Set (Fin-Set (succ-ℕ k)) face-set-Finitely-Graded-Subposet
+
+  element-Finitely-Graded-Subposet : UU (l1 ⊔ l3)
+  element-Finitely-Graded-Subposet =
+    type-Set element-set-Finitely-Graded-Subposet
+
+  is-set-element-Finitely-Graded-Subposet :
+    is-set element-Finitely-Graded-Subposet
+  is-set-element-Finitely-Graded-Subposet =
+    is-set-type-Set element-set-Finitely-Graded-Subposet
+
+--   leq-sub-Poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
+--   leq-sub-Poset-Prop = leq-sub-Preorder-Prop (preorder-Poset X) S
+
+--   leq-sub-Poset : (x y : element-sub-Poset) → UU l2
+--   leq-sub-Poset = leq-sub-Preorder (preorder-Poset X) S
+
+--   is-prop-leq-sub-Poset :
+--     (x y : element-sub-Poset) → is-prop (leq-sub-Poset x y)
+--   is-prop-leq-sub-Poset = is-prop-leq-sub-Preorder (preorder-Poset X) S
+
+--   refl-leq-sub-Poset : (x : element-sub-Poset) → leq-sub-Poset x x
+--   refl-leq-sub-Poset = refl-leq-sub-Preorder (preorder-Poset X) S
+
+--   transitive-leq-sub-Poset :
+--     (x y z : element-sub-Poset) →
+--     leq-sub-Poset y z → leq-sub-Poset x y → leq-sub-Poset x z
+--   transitive-leq-sub-Poset = transitive-leq-sub-Preorder (preorder-Poset X) S
+
+--   antisymmetric-leq-sub-Poset :
+--     (x y : element-sub-Poset) → leq-sub-Poset x y → leq-sub-Poset y x → Id x y
+--   antisymmetric-leq-sub-Poset x y H K =
+--     eq-element-sub-Poset x y (antisymmetric-leq-Poset X (pr1 x) (pr1 y) H K)
+
+--   sub-Poset : Poset (l1 ⊔ l3) l2
+--   pr1 sub-Poset = element-sub-Poset
+--   pr1 (pr2 sub-Poset) = leq-sub-Poset-Prop
+--   pr1 (pr1 (pr2 (pr2 sub-Poset))) = refl-leq-sub-Poset
+--   pr2 (pr1 (pr2 (pr2 sub-Poset))) = transitive-leq-sub-Poset
+--   pr2 (pr2 (pr2 sub-Poset)) = antisymmetric-leq-sub-Poset
+  
+-- ```
+
+-- ### Decidable sub-posets
+
+-- ```agda
+
+-- module _
+--   {l1 l2 l3 : Level} (X : Poset l1 l2)
+--   (S : element-Poset X → decidable-Prop l3)
+--   where
+
+--   element-decidable-sub-Poset : UU (l1 ⊔ l3)
+--   element-decidable-sub-Poset =
+--     element-sub-Poset X (subtype-decidable-subtype S)
+
+--   eq-element-decidable-sub-Poset :
+--     (x y : element-decidable-sub-Poset) →
+--     Eq-total-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+--   eq-element-decidable-sub-Poset =
+--     eq-element-sub-Poset X (subtype-decidable-subtype S)
+
+--   leq-decidable-sub-Poset-Prop :
+--     (x y : element-decidable-sub-Poset) → UU-Prop l2
+--   leq-decidable-sub-Poset-Prop =
+--     leq-sub-Poset-Prop X (subtype-decidable-subtype S)
+
+--   leq-decidable-sub-Poset : (x y : element-decidable-sub-Poset) → UU l2
+--   leq-decidable-sub-Poset =
+--     leq-sub-Poset X (subtype-decidable-subtype S)
+
+--   is-prop-leq-decidable-sub-Poset :
+--     (x y : element-decidable-sub-Poset) →
+--     is-prop (leq-decidable-sub-Poset x y)
+--   is-prop-leq-decidable-sub-Poset =
+--     is-prop-leq-sub-Poset X (subtype-decidable-subtype S)
+
+--   refl-leq-decidable-sub-Poset :
+--     (x : element-decidable-sub-Poset) → leq-decidable-sub-Poset x x
+--   refl-leq-decidable-sub-Poset =
+--     refl-leq-sub-Poset X (subtype-decidable-subtype S)
+
+--   transitive-leq-decidable-sub-Poset :
+--     (x y z : element-decidable-sub-Poset) →
+--     leq-decidable-sub-Poset y z → leq-decidable-sub-Poset x y →
+--     leq-decidable-sub-Poset x z
+--   transitive-leq-decidable-sub-Poset =
+--     transitive-leq-sub-Poset X (subtype-decidable-subtype S)
+
+--   decidable-sub-Poset : Poset (l1 ⊔ l3) l2
+--   decidable-sub-Poset = sub-Poset X (subtype-decidable-subtype S)
+-- ```
+
+-- ### Inclusion of sub-posets
+
+-- ```agda
+-- module _
+--   {l1 l2 : Level} (X : Poset l1 l2)
+--   where
+
+--   module _
+--     {l3 l4 : Level} (S : element-Poset X → UU-Prop l3)
+--     (T : element-Poset X → UU-Prop l4)
+--     where
+    
+--     inclusion-sub-Poset-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
+--     inclusion-sub-Poset-Prop =
+--       inclusion-sub-Preorder-Prop (preorder-Poset X) S T
+
+--     inclusion-sub-Poset : UU (l1 ⊔ l3 ⊔ l4)
+--     inclusion-sub-Poset = inclusion-sub-Preorder (preorder-Poset X) S T
+
+--     is-prop-inclusion-sub-Poset : is-prop inclusion-sub-Poset
+--     is-prop-inclusion-sub-Poset =
+--       is-prop-inclusion-sub-Preorder (preorder-Poset X) S T
+
+--   refl-inclusion-sub-Poset :
+--     {l3 : Level} (S : element-Poset X → UU-Prop l3) →
+--     inclusion-sub-Poset S S
+--   refl-inclusion-sub-Poset = refl-inclusion-sub-Preorder (preorder-Poset X)
+
+--   transitive-inclusion-sub-Poset :
+--     {l3 l4 l5 : Level} (S : element-Poset X → UU-Prop l3)
+--     (T : element-Poset X → UU-Prop l4)
+--     (U : element-Poset X → UU-Prop l5) →
+--     inclusion-sub-Poset T U → inclusion-sub-Poset S T →
+--     inclusion-sub-Poset S U
+--   transitive-inclusion-sub-Poset =
+--     transitive-inclusion-sub-Preorder (preorder-Poset X) 
+
+--   sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
+--   pr1 (sub-poset-Preorder l) = element-Poset X → UU-Prop l
+--   pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-Poset-Prop
+--   pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-sub-Poset
+--   pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-sub-Poset
+
+-- ```
+
+-- ### Chains in preorders
+
+-- ```agda
+-- module _
+--   {l1 l2 : Level} (X : Poset l1 l2)
+--   where
+
+--   is-chain-sub-Poset-Prop :
+--     {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
+--   is-chain-sub-Poset-Prop = is-chain-sub-Preorder-Prop (preorder-Poset X)
+
+--   is-chain-sub-Poset :
+--     {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
+--   is-chain-sub-Poset = is-chain-sub-Preorder (preorder-Poset X)
+
+--   is-prop-is-chain-sub-Poset :
+--     {l3 : Level} (S : element-Poset X → UU-Prop l3) →
+--     is-prop (is-chain-sub-Poset S)
+--   is-prop-is-chain-sub-Poset = is-prop-is-chain-sub-Preorder (preorder-Poset X)
+
+-- chain-Poset :
+--   {l1 l2 : Level} (l : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
+-- chain-Poset l X = chain-Preorder l (preorder-Poset X)
+
+-- module _
+--   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
+--   where
+
+--   sub-preorder-chain-Poset : element-Poset X → UU-Prop l3
+--   sub-preorder-chain-Poset =
+--     sub-preorder-chain-Preorder (preorder-Poset X) C
+
+--   element-chain-Poset : UU (l1 ⊔ l3)
+--   element-chain-Poset = element-chain-Preorder (preorder-Poset X) C
+
+-- module _
+--   {l1 l2 : Level} (X : Poset l1 l2)
+--   where
+  
+--   inclusion-chain-Poset-Prop :
+--     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
+--     UU-Prop (l1 ⊔ l3 ⊔ l4)
+--   inclusion-chain-Poset-Prop = inclusion-chain-Preorder-Prop (preorder-Poset X)
+
+--   inclusion-chain-Poset :
+--     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X → UU (l1 ⊔ l3 ⊔ l4)
+--   inclusion-chain-Poset = inclusion-chain-Preorder (preorder-Poset X)
+
+--   is-prop-inclusion-chain-Poset :
+--     {l3 l4 : Level} (C : chain-Poset l3 X) (D : chain-Poset l4 X) →
+--     is-prop (inclusion-chain-Poset C D)
+--   is-prop-inclusion-chain-Poset =
+--     is-prop-inclusion-chain-Preorder (preorder-Poset X)
+-- ```
+
+-- ### Maximal chains in preorders
+
+-- ```agda
+
+-- module _
+--   {l1 l2 : Level} (X : Poset l1 l2)
+--   where
+  
+--   is-maximal-chain-Poset-Prop :
+--     {l3 : Level} → chain-Poset l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+--   is-maximal-chain-Poset-Prop =
+--     is-maximal-chain-Preorder-Prop (preorder-Poset X)
+
+--   is-maximal-chain-Poset :
+--     {l3 : Level} → chain-Poset l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
+--   is-maximal-chain-Poset = is-maximal-chain-Preorder (preorder-Poset X)
+
+--   is-prop-is-maximal-chain-Poset :
+--     {l3 : Level} (C : chain-Poset l3 X) → is-prop (is-maximal-chain-Poset C)
+--   is-prop-is-maximal-chain-Poset =
+--     is-prop-is-maximal-chain-Preorder (preorder-Poset X)
+
+-- maximal-chain-Poset :
+--   {l1 l2 : Level} (l3 : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
+-- maximal-chain-Poset l3 X = maximal-chain-Preorder l3 (preorder-Poset X)
+
+-- module _
+--   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : maximal-chain-Poset l3 X)
+--   where
+
+--   chain-maximal-chain-Poset : chain-Poset l3 X
+--   chain-maximal-chain-Poset = chain-maximal-chain-Preorder (preorder-Poset X) C
+
+--   is-maximal-chain-maximal-chain-Poset :
+--     is-maximal-chain-Poset X chain-maximal-chain-Poset
+--   is-maximal-chain-maximal-chain-Poset =
+--     is-maximal-chain-maximal-chain-Preorder (preorder-Poset X) C
+
+--   element-maximal-chain-Poset : UU (l1 ⊔ l3)
+--   element-maximal-chain-Poset =
+--     element-maximal-chain-Preorder (preorder-Poset X) C
