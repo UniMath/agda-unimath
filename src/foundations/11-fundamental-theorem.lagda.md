@@ -422,86 +422,34 @@ module _
 -- Section 11.4 Disjointness of coproducts
 
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   -- The identity types of coproducts
   
-  abstract
-    is-contr-total-Eq-coprod-inl :
-      (x : A) → is-contr (Σ (coprod A B) (Eq-coprod A B (inl x)))
-    is-contr-total-Eq-coprod-inl x =
-      is-contr-equiv
-        ( coprod
-          ( Σ A (λ y → Eq-coprod A B (inl x) (inl y)))
-          ( Σ B (λ y → Eq-coprod A B (inl x) (inr y))))
-        ( right-distributive-Σ-coprod A B (Eq-coprod A B (inl x)))
-        ( is-contr-equiv'
-          ( coprod
-            ( Σ A (Id x))
-            ( Σ B (λ y → empty)))
-          ( equiv-coprod
-            ( equiv-tot (λ y → equiv-raise _ (Id x y)))
-            ( equiv-tot (λ y → equiv-raise _ empty)))
-          ( is-contr-equiv
-            ( coprod (Σ A (Id x)) empty)
-            ( equiv-coprod id-equiv (right-absorption-Σ B))
-            ( is-contr-equiv'
-              ( Σ A (Id x))
-              ( inv-right-unit-law-coprod (Σ A (Id x)))
-              ( is-contr-total-path x))))
+  is-contr-total-Eq-coprod :
+    (x : coprod A B) → is-contr (Σ (coprod A B) (Eq-coprod x))
+  pr1 (pr1 (is-contr-total-Eq-coprod (inl x))) = inl x
+  pr2 (pr1 (is-contr-total-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
+  pr2
+    ( is-contr-total-Eq-coprod (inl x))
+    ( pair (inl .x) (Eq-eq-coprod-inl refl)) = refl
+  pr1 (pr1 (is-contr-total-Eq-coprod (inr x))) = inr x
+  pr2 (pr1 (is-contr-total-Eq-coprod (inr x))) = Eq-eq-coprod-inr refl
+  pr2
+    ( is-contr-total-Eq-coprod (inr x))
+    ( pair .(inr x) (Eq-eq-coprod-inr refl)) = refl
 
-  abstract
-    is-contr-total-Eq-coprod-inr :
-      (x : B) → is-contr (Σ (coprod A B) (Eq-coprod A B (inr x)))
-    is-contr-total-Eq-coprod-inr x =
-      is-contr-equiv
-        ( coprod
-          ( Σ A (λ y → Eq-coprod A B (inr x) (inl y)))
-          ( Σ B (λ y → Eq-coprod A B (inr x) (inr y))))
-        ( right-distributive-Σ-coprod A B (Eq-coprod A B (inr x)))
-        ( is-contr-equiv'
-          ( coprod (Σ A (λ y → empty)) (Σ B (Id x)))
-          ( equiv-coprod
-            ( equiv-tot (λ y → equiv-raise _ empty))
-            ( equiv-tot (λ y → equiv-raise _ (Id x y))))
-          ( is-contr-equiv
-            ( coprod empty (Σ B (Id x)))
-            ( equiv-coprod (right-absorption-Σ A) id-equiv)
-            ( is-contr-equiv'
-              ( Σ B (Id x))
-              ( inv-left-unit-law-coprod (Σ B (Id x)))
-              ( is-contr-total-path x))))
+  is-equiv-Eq-eq-coprod : (x y : coprod A B) → is-equiv (Eq-eq-coprod x y)
+  is-equiv-Eq-eq-coprod x =
+    fundamental-theorem-id x
+      ( refl-Eq-coprod x)
+      ( is-contr-total-Eq-coprod x)
+      ( Eq-eq-coprod x)
 
-  abstract
-    is-equiv-Eq-eq-coprod-inl :
-      (x : A) → is-fiberwise-equiv (Eq-eq-coprod A B (inl x))
-    is-equiv-Eq-eq-coprod-inl x =
-      fundamental-theorem-id
-        ( inl x)
-        ( reflexive-Eq-coprod A B (inl x))
-        ( is-contr-total-Eq-coprod-inl x)
-        ( Eq-eq-coprod A B (inl x))
-
-  abstract
-    is-equiv-Eq-eq-coprod-inr :
-      (x : B) → is-fiberwise-equiv (Eq-eq-coprod A B (inr x))
-    is-equiv-Eq-eq-coprod-inr x =
-      fundamental-theorem-id
-        ( inr x)
-        ( reflexive-Eq-coprod A B (inr x))
-        ( is-contr-total-Eq-coprod-inr x)
-        ( Eq-eq-coprod A B (inr x))
-
-  abstract
-    is-equiv-Eq-eq-coprod :
-      (s : coprod A B) → is-fiberwise-equiv (Eq-eq-coprod A B s)
-    is-equiv-Eq-eq-coprod (inl x) = is-equiv-Eq-eq-coprod-inl x
-    is-equiv-Eq-eq-coprod (inr x) = is-equiv-Eq-eq-coprod-inr x
-
-  equiv-Eq-eq-coprod : (x y : coprod A B) → Id x y ≃ Eq-coprod A B x y
-  pr1 (equiv-Eq-eq-coprod x y) = Eq-eq-coprod A B x y
-  pr2 (equiv-Eq-eq-coprod x y) = is-equiv-Eq-eq-coprod x y
+  extensionality-coprod : (x y : coprod A B) → Id x y ≃ Eq-coprod x y
+  pr1 (extensionality-coprod x y) = Eq-eq-coprod x y
+  pr2 (extensionality-coprod x y) = is-equiv-Eq-eq-coprod x y
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -510,50 +458,120 @@ module _
   -- It should be possible to make these definitions abstract,
   -- but currently that breaks something in 23-pullbacks
 
-  compute-eq-coprod-inl-inl :
-    (x x' : A) → (Id (inl {B = B} x) (inl x')) ≃ (Id x x')
-  compute-eq-coprod-inl-inl x x' =
-    ( inv-equiv (equiv-raise (l1 ⊔ l2) (Id x x'))) ∘e
-    ( equiv-Eq-eq-coprod A B (inl x) (inl x'))
+  module _
+    (x y : A)
+    where
+    
+    map-compute-Eq-coprod-inl-inl : Eq-coprod {B = B} (inl x) (inl y) → Id x y
+    map-compute-Eq-coprod-inl-inl (Eq-eq-coprod-inl p) = p
 
-  map-compute-eq-coprod-inl-inl :
-    (x x' : A) → Id (inl {B = B} x) (inl x') → Id x x'
-  map-compute-eq-coprod-inl-inl x x' =
-    map-equiv (compute-eq-coprod-inl-inl x x')
+    issec-Eq-eq-coprod-inl :
+      (map-compute-Eq-coprod-inl-inl ∘ Eq-eq-coprod-inl) ~ id
+    issec-Eq-eq-coprod-inl p = refl
 
-  compute-eq-coprod-inl-inr :
-    (x : A) (y' : B) → (Id (inl x) (inr y')) ≃ empty
-  compute-eq-coprod-inl-inr x y' =
-    ( inv-equiv (equiv-raise (l1 ⊔ l2) empty)) ∘e
-    ( equiv-Eq-eq-coprod A B (inl x) (inr y'))
+    isretr-Eq-eq-coprod-inl :
+      (Eq-eq-coprod-inl ∘ map-compute-Eq-coprod-inl-inl) ~ id
+    isretr-Eq-eq-coprod-inl (Eq-eq-coprod-inl p) = refl
 
-  is-empty-eq-coprod-inl-inr :
-    (x : A) (y' : B) → is-empty (Id (inl x) (inr y'))
-  is-empty-eq-coprod-inl-inr x y' =
-    map-equiv (compute-eq-coprod-inl-inr x y')
+    is-equiv-map-compute-Eq-coprod-inl-inl :
+      is-equiv map-compute-Eq-coprod-inl-inl
+    is-equiv-map-compute-Eq-coprod-inl-inl =
+      is-equiv-has-inverse
+        ( Eq-eq-coprod-inl)
+        ( issec-Eq-eq-coprod-inl)
+        ( isretr-Eq-eq-coprod-inl)
 
-  compute-eq-coprod-inr-inl :
-    (y : B) (x' : A) → (Id (inr y) (inl x')) ≃ empty
-  compute-eq-coprod-inr-inl y x' =
-    ( inv-equiv (equiv-raise (l1 ⊔ l2) empty)) ∘e
-    ( equiv-Eq-eq-coprod A B (inr y) (inl x'))
+    compute-Eq-coprod-inl-inl : Eq-coprod (inl x) (inl y) ≃ Id x y
+    pr1 compute-Eq-coprod-inl-inl = map-compute-Eq-coprod-inl-inl
+    pr2 compute-Eq-coprod-inl-inl = is-equiv-map-compute-Eq-coprod-inl-inl
 
-  is-empty-eq-coprod-inr-inl :
-    (y : B) (x' : A) → is-empty (Id (inr y) (inl x'))
-  is-empty-eq-coprod-inr-inl y x' =
-    map-equiv (compute-eq-coprod-inr-inl y x')
+    compute-eq-coprod-inl-inl : Id {A = coprod A B} (inl x) (inl y) ≃ Id x y
+    compute-eq-coprod-inl-inl =
+      compute-Eq-coprod-inl-inl ∘e extensionality-coprod (inl x) (inl y)
+      
+    map-compute-eq-coprod-inl-inl : Id {A = coprod A B} (inl x) (inl y) → Id x y
+    map-compute-eq-coprod-inl-inl = map-equiv compute-eq-coprod-inl-inl
 
-  compute-eq-coprod-inr-inr :
-    (y y' : B) → (Id (inr {A = A} y) (inr y')) ≃ (Id y y')
-  compute-eq-coprod-inr-inr y y' =
-    ( inv-equiv (equiv-raise (l1 ⊔ l2) (Id y y'))) ∘e
-    ( equiv-Eq-eq-coprod A B (inr y) (inr y'))
+  module _
+    (x : A) (y : B)
+    where
 
-  map-compute-eq-coprod-inr-inr :
-    (y y' : B) → Id (inr {A = A} y) (inr y') → Id y y'
-  map-compute-eq-coprod-inr-inr y y' =
-    map-equiv (compute-eq-coprod-inr-inr y y')
+    map-compute-Eq-coprod-inl-inr : Eq-coprod (inl x) (inr y) → empty
+    map-compute-Eq-coprod-inl-inr ()
 
+    is-equiv-map-compute-Eq-coprod-inl-inr :
+      is-equiv map-compute-Eq-coprod-inl-inr
+    is-equiv-map-compute-Eq-coprod-inl-inr =
+      is-equiv-is-empty' map-compute-Eq-coprod-inl-inr
+
+    compute-Eq-coprod-inl-inr : Eq-coprod (inl x) (inr y) ≃ empty
+    pr1 compute-Eq-coprod-inl-inr = map-compute-Eq-coprod-inl-inr
+    pr2 compute-Eq-coprod-inl-inr = is-equiv-map-compute-Eq-coprod-inl-inr
+
+    compute-eq-coprod-inl-inr : Id {A = coprod A B} (inl x) (inr y) ≃ empty
+    compute-eq-coprod-inl-inr =
+      compute-Eq-coprod-inl-inr ∘e extensionality-coprod (inl x) (inr y)
+      
+    is-empty-eq-coprod-inl-inr : is-empty (Id {A = coprod A B} (inl x) (inr y))
+    is-empty-eq-coprod-inl-inr = map-equiv compute-eq-coprod-inl-inr
+
+  module _
+    (x : B) (y : A)
+    where
+
+    map-compute-Eq-coprod-inr-inl : Eq-coprod (inr x) (inl y) → empty
+    map-compute-Eq-coprod-inr-inl ()
+
+    is-equiv-map-compute-Eq-coprod-inr-inl :
+      is-equiv map-compute-Eq-coprod-inr-inl
+    is-equiv-map-compute-Eq-coprod-inr-inl =
+      is-equiv-is-empty' map-compute-Eq-coprod-inr-inl
+
+    compute-Eq-coprod-inr-inl : Eq-coprod (inr x) (inl y) ≃ empty
+    pr1 compute-Eq-coprod-inr-inl = map-compute-Eq-coprod-inr-inl
+    pr2 compute-Eq-coprod-inr-inl = is-equiv-map-compute-Eq-coprod-inr-inl
+
+    compute-eq-coprod-inr-inl : Id {A = coprod A B} (inr x) (inl y) ≃ empty
+    compute-eq-coprod-inr-inl =
+      compute-Eq-coprod-inr-inl ∘e extensionality-coprod (inr x) (inl y)
+      
+    is-empty-eq-coprod-inr-inl : is-empty (Id {A = coprod A B} (inr x) (inl y))
+    is-empty-eq-coprod-inr-inl = map-equiv compute-eq-coprod-inr-inl
+
+  module _
+    (x y : B)
+    where
+    
+    map-compute-Eq-coprod-inr-inr : Eq-coprod {A = A} (inr x) (inr y) → Id x y
+    map-compute-Eq-coprod-inr-inr (Eq-eq-coprod-inr p) = p
+
+    issec-Eq-eq-coprod-inr :
+      (map-compute-Eq-coprod-inr-inr ∘ Eq-eq-coprod-inr) ~ id
+    issec-Eq-eq-coprod-inr p = refl
+
+    isretr-Eq-eq-coprod-inr :
+      (Eq-eq-coprod-inr ∘ map-compute-Eq-coprod-inr-inr) ~ id
+    isretr-Eq-eq-coprod-inr (Eq-eq-coprod-inr p) = refl
+
+    is-equiv-map-compute-Eq-coprod-inr-inr :
+      is-equiv map-compute-Eq-coprod-inr-inr
+    is-equiv-map-compute-Eq-coprod-inr-inr =
+      is-equiv-has-inverse
+        ( Eq-eq-coprod-inr)
+        ( issec-Eq-eq-coprod-inr)
+        ( isretr-Eq-eq-coprod-inr)
+
+    compute-Eq-coprod-inr-inr : Eq-coprod (inr x) (inr y) ≃ Id x y
+    pr1 compute-Eq-coprod-inr-inr = map-compute-Eq-coprod-inr-inr
+    pr2 compute-Eq-coprod-inr-inr = is-equiv-map-compute-Eq-coprod-inr-inr
+
+    compute-eq-coprod-inr-inr : Id {A = coprod A B} (inr x) (inr y) ≃ Id x y
+    compute-eq-coprod-inr-inr =
+      compute-Eq-coprod-inr-inr ∘e extensionality-coprod (inr x) (inr y)
+
+    map-compute-eq-coprod-inr-inr : Id {A = coprod A B} (inr x) (inr y) → Id x y
+    map-compute-eq-coprod-inr-inr = map-equiv compute-eq-coprod-inr-inr
+    
 --------------------------------------------------------------------------------
 
 -- Section 11.6 The structure identity principle
@@ -740,19 +758,17 @@ module _
 
   is-empty-right-summand-is-equiv : is-equiv (inl {A = A} {B = B}) → is-empty B
   is-empty-right-summand-is-equiv H b =
-    map-inv-raise
-      ( Eq-eq-coprod A B
-        ( inl (pr1 (center (is-contr-map-is-equiv H (inr b)))))
-        ( inr b)
-        ( pr2 (center (is-contr-map-is-equiv H (inr b)))))
+    is-empty-eq-coprod-inl-inr
+      ( map-inv-is-equiv H (inr b))
+      ( b)
+      ( issec-map-inv-is-equiv H (inr b))
 
   is-empty-left-summand-is-equiv : is-equiv (inr {A = A} {B = B}) → is-empty A
   is-empty-left-summand-is-equiv H a =
-    map-inv-raise
-      ( Eq-eq-coprod A B
-        ( inr (pr1 (center (is-contr-map-is-equiv H (inl a)))))
-        ( inl a)
-        ( pr2 (center (is-contr-map-is-equiv H (inl a)))))
+    is-empty-eq-coprod-inl-inr
+      ( a)
+      ( map-inv-is-equiv H (inl a))
+      ( inv (issec-map-inv-is-equiv H (inl a)))
 
 -- Exercise 11.2
 

@@ -341,7 +341,7 @@ htpy-nat H refl = right-unit
 left-unwhisk :
   {i : Level} {A : UU i} {x y z : A} (p : Id x y) {q r : Id y z} →
   Id (p ∙ q) (p ∙ r) → Id q r
-left-unwhisk refl s = (inv left-unit) ∙ (s ∙ left-unit)
+left-unwhisk refl s = s
 
 right-unwhisk :
   {i : Level} {A : UU i} {x y z : A} {p q : Id x y}
