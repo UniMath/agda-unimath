@@ -978,11 +978,7 @@ module _
     is-not-contractible-coprod-is-contr :
       is-contr A → is-contr B → ¬ (is-contr (coprod A B))
     is-not-contractible-coprod-is-contr HA HB HAB =
-      map-inv-raise
-        ( Eq-eq-coprod A B
-          ( inl (center HA))
-          ( inr (center HB))
-          ( eq-is-contr HAB))
+      is-empty-eq-coprod-inl-inr (center HA) (center HB) (eq-is-contr HAB)
 
 -- Exercise 12.3 (b)
 

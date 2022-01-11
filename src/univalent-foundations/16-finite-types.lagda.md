@@ -640,8 +640,7 @@ equiv-universal-property-Maybe {l1} {l2} {A} {B} =
 is-decidable-is-exception-Maybe :
   {l : Level} {X : UU l} (x : Maybe X) → is-decidable (is-exception-Maybe x)
 is-decidable-is-exception-Maybe {l} {X} (inl x) =
-  inr
-    (λ p → ex-falso (map-inv-raise (Eq-eq-coprod X unit (inl x) (inr star) p)))
+  inr (λ p → ex-falso (is-empty-eq-coprod-inl-inr x star p))
 is-decidable-is-exception-Maybe (inr star) = inl refl
 
 -- The is-not-exception predicate
