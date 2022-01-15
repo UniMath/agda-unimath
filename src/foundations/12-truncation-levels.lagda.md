@@ -1456,20 +1456,18 @@ module _
     is-trunc-tot-is-fiberwise-trunc :
       is-fiberwise-trunc → is-trunc-map k (tot f)
     is-trunc-tot-is-fiberwise-trunc is-fiberwise-trunc-f (pair x z) =
-      is-trunc-is-equiv k
+      is-trunc-equiv k
         ( fib (f x) z)
-        ( fib-ftr-fib-tot f (pair x z))
-        ( is-equiv-fib-ftr-fib-tot f (pair x z))
+        ( compute-fib-tot f (pair x z))
         ( is-fiberwise-trunc-f x z)
 
   abstract
     is-fiberwise-trunc-is-trunc-tot : 
       is-trunc-map k (tot f) → is-fiberwise-trunc
     is-fiberwise-trunc-is-trunc-tot is-trunc-tot-f x z =
-      is-trunc-is-equiv k
+      is-trunc-equiv k
         ( fib (tot f) (pair x z))
-        ( fib-tot-fib-ftr f (pair x z))
-        ( is-equiv-fib-tot-fib-ftr f (pair x z))
+        ( inv-compute-fib-tot f (pair x z))
         ( is-trunc-tot-f (pair x z))
 
 -- Exercise 12.11
@@ -1783,19 +1781,106 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   where
 
+  is-trunc-map-map-Σ-map-base :
+    (k : 𝕋) {f : A → B} (C : B → UU l3) →
+    is-trunc-map k f → is-trunc-map k (map-Σ-map-base f C)
+  is-trunc-map-map-Σ-map-base k {f} C H y =
+    is-trunc-equiv' k
+      ( fib f (pr1 y))
+      ( equiv-fib-map-Σ-map-base-fib f C y)
+      ( H (pr1 y))
+
+  is-prop-map-map-Σ-map-base :
+    {f : A → B} (C : B → UU l3) →
+    is-prop-map f → is-prop-map (map-Σ-map-base f C)
+  is-prop-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base neg-one-𝕋
+
   abstract
     is-emb-map-Σ-map-base :
       (f : A → B) (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
-    is-emb-map-Σ-map-base f C is-emb-f =
-      is-emb-is-prop-map
-        ( λ x →
-          is-prop-equiv'
-            ( equiv-fib-map-Σ-map-base-fib f C x)
-            ( is-prop-map-is-emb is-emb-f (pr1 x)))
+    is-emb-map-Σ-map-base f C H =
+      is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
 
   emb-Σ-emb-base :
     (f : A ↪ B) (C : B → UU l3) → Σ A (λ a → C (map-emb f a)) ↪ Σ B C
   pr1 (emb-Σ-emb-base f C) = map-Σ-map-base (map-emb f) C
   pr2 (emb-Σ-emb-base f C) =
     is-emb-map-Σ-map-base (map-emb f) C (is-emb-map-emb f)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  is-trunc-map-tot :
+    (k : 𝕋) {f : (x : A) → B x → C x} →
+    ((x : A) → is-trunc-map (succ-𝕋 k) (f x)) → is-trunc-map (succ-𝕋 k) (tot f)
+  is-trunc-map-tot k {f} H y =
+    is-trunc-equiv
+      ( succ-𝕋 k)
+      ( fib (f (pr1 y)) (pr2 y))
+      ( compute-fib-tot f y)
+      ( H (pr1 y) (pr2 y))
+
+  is-prop-map-tot : 
+    {f : (x : A) → B x → C x} →
+    ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
+  is-prop-map-tot = is-trunc-map-tot neg-two-𝕋
   
+  is-emb-tot : 
+    {f : (x : A) → B x → C x} → ((x : A) → is-emb (f x)) → is-emb (tot f)
+  is-emb-tot H =
+    is-emb-is-prop-map (is-prop-map-tot λ x → is-prop-map-is-emb (H x))
+
+  emb-tot : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
+  pr1 (emb-tot f) = tot (λ x → map-emb (f x))
+  pr2 (emb-tot f) = is-emb-tot (λ x → is-emb-map-emb (f x))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  where
+
+  is-contr-map-map-Σ :
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+    is-contr-map f → ((x : A) → is-contr-map (g x)) → is-contr-map (map-Σ D f g)
+  is-contr-map-map-Σ D H K =
+    is-contr-map-is-equiv
+      ( is-equiv-map-Σ D _ _
+        ( is-equiv-is-contr-map H)
+        ( λ x → is-equiv-is-contr-map (K x)))
+
+  is-trunc-map-map-Σ :
+    (k : 𝕋) (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+    is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
+    is-trunc-map k (map-Σ D f g)
+  is-trunc-map-map-Σ neg-two-𝕋 D {f} {g} H K = is-contr-map-map-Σ D H K
+  is-trunc-map-map-Σ (succ-𝕋 k) D {f} {g} H K = 
+    is-trunc-map-comp (succ-𝕋 k)
+      ( map-Σ D f g)
+      ( map-Σ-map-base f D)
+      ( tot g)
+      ( triangle-map-Σ D f g)
+      ( is-trunc-map-map-Σ-map-base (succ-𝕋 k) D H)
+      ( is-trunc-map-tot k K)
+
+  module _
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
+    where
+
+    is-prop-map-map-Σ :
+      is-prop-map f → ((x : A) → is-prop-map (g x)) → is-prop-map (map-Σ D f g)
+    is-prop-map-map-Σ = is-trunc-map-map-Σ neg-one-𝕋 D
+
+    is-emb-map-Σ :
+      is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
+    is-emb-map-Σ H K =
+      is-emb-is-prop-map
+        ( is-prop-map-map-Σ
+          ( is-prop-map-is-emb H)
+          ( λ x → is-prop-map-is-emb (K x)))
+
+  emb-Σ :
+    (D : B → UU l4) (f : A ↪ B) (g : (x : A) → C x ↪ D (map-emb f x)) →
+    Σ A C ↪ Σ B D
+  pr1 (emb-Σ D f g) = map-Σ D (map-emb f) (λ x → map-emb (g x))
+  pr2 (emb-Σ D f g) =
+    is-emb-map-Σ D (is-emb-map-emb f) (λ x → is-emb-map-emb (g x))

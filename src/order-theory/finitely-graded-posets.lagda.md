@@ -432,6 +432,38 @@ module _
     eq-face-Finitely-Graded-Subposet x y =
       eq-subtype (λ z → is-prop-type-Prop (S z))
 
+    emb-face-Finitely-Graded-Subposet :
+      face-Finitely-Graded-Subposet ↪ face-Finitely-Graded-Poset X i
+    emb-face-Finitely-Graded-Subposet = emb-pr1 (λ x → is-prop-type-Prop (S x))
+
+    map-emb-face-Finitely-Graded-Subposet :
+      face-Finitely-Graded-Subposet → face-Finitely-Graded-Poset X i
+    map-emb-face-Finitely-Graded-Subposet =
+      map-emb emb-face-Finitely-Graded-Subposet
+
+    is-emb-map-emb-face-Finitely-Graded-Subposet :
+      is-emb map-emb-face-Finitely-Graded-Subposet
+    is-emb-map-emb-face-Finitely-Graded-Subposet =
+      is-emb-map-emb emb-face-Finitely-Graded-Subposet
+
+  module _
+    (i : Fin k) (y : face-Finitely-Graded-Subposet (inl-Fin k i))
+    (z : face-Finitely-Graded-Subposet (succ-Fin (inl-Fin k i)))
+    where
+
+    adjacent-Finitely-Graded-Subposet-Prop : UU-Prop l2
+    adjacent-Finitely-Graded-Subposet-Prop =
+      adjacent-Finitely-Graded-Poset-Prop X i (pr1 y) (pr1 z)
+  
+    adjacent-Finitely-Graded-Subposet : UU l2
+    adjacent-Finitely-Graded-Subposet =
+      type-Prop adjacent-Finitely-Graded-Subposet-Prop
+
+    is-prop-adjacent-Finitely-Graded-Subposet :
+      is-prop adjacent-Finitely-Graded-Subposet
+    is-prop-adjacent-Finitely-Graded-Subposet =
+      is-prop-type-Prop adjacent-Finitely-Graded-Subposet-Prop
+
   element-set-Finitely-Graded-Subposet : UU-Set (l1 ⊔ l3)
   element-set-Finitely-Graded-Subposet =
     Σ-Set (Fin-Set (succ-ℕ k)) face-set-Finitely-Graded-Subposet
@@ -440,13 +472,31 @@ module _
   element-Finitely-Graded-Subposet =
     type-Set element-set-Finitely-Graded-Subposet
 
+  emb-element-Finitely-Graded-Subposet :
+    element-Finitely-Graded-Subposet ↪ element-Finitely-Graded-Poset X
+  emb-element-Finitely-Graded-Subposet = {!!}
+
+  map-emb-element-Finitely-Graded-Subposet :
+    element-Finitely-Graded-Subposet → element-Finitely-Graded-Poset X
+  pr1 (map-emb-element-Finitely-Graded-Subposet x) = pr1 x
+  pr2 (map-emb-element-Finitely-Graded-Subposet x) = pr1 (pr2 x)
+
   is-set-element-Finitely-Graded-Subposet :
     is-set element-Finitely-Graded-Subposet
   is-set-element-Finitely-Graded-Subposet =
     is-set-type-Set element-set-Finitely-Graded-Subposet
 
---   leq-sub-Poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
---   leq-sub-Poset-Prop = leq-sub-Preorder-Prop (preorder-Poset X) S
+  leq-Finitely-Graded-Subposet-Prop :
+    (x y : element-Finitely-Graded-Subposet) → UU-Prop (l1 ⊔ l2)
+  leq-Finitely-Graded-Subposet-Prop x y =
+    leq-Finitely-Graded-Poset-Prop X
+      ( map-emb-element-Finitely-Graded-Subposet x)
+      ( map-emb-element-Finitely-Graded-Subposet x)
+
+  leq-Finitely-Graded-Subposet :
+    (x y : element-Finitely-Graded-Subposet) → UU (l1 ⊔ l2)
+  leq-Finitely-Graded-Subposet x y =
+    type-Prop (leq-Finitely-Graded-Subposet-Prop x y)
 
 --   leq-sub-Poset : (x y : element-sub-Poset) → UU l2
 --   leq-sub-Poset = leq-sub-Preorder (preorder-Poset X) S

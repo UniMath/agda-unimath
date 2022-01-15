@@ -27,38 +27,47 @@ module _
   {- We show that for any family of maps, the fiber of the induced map on total
      spaces are equivalent to the fibers of the maps in the family. -}
    
-  fib-ftr-fib-tot : (t : Σ A C) → fib tot t → fib (f (pr1 t)) (pr2 t)
-  pr1 (fib-ftr-fib-tot .(tot (pair x y)) (pair (pair x y) refl)) = y
-  pr2 (fib-ftr-fib-tot .(tot (pair x y)) (pair (pair x y) refl)) = refl
+  map-compute-fib-tot : (t : Σ A C) → fib tot t → fib (f (pr1 t)) (pr2 t)
+  pr1 (map-compute-fib-tot .(tot (pair x y)) (pair (pair x y) refl)) = y
+  pr2 (map-compute-fib-tot .(tot (pair x y)) (pair (pair x y) refl)) = refl
 
-  fib-tot-fib-ftr : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib tot t
-  pr1 (pr1 (fib-tot-fib-ftr (pair a .(f a y)) (pair y refl))) = a
-  pr2 (pr1 (fib-tot-fib-ftr (pair a .(f a y)) (pair y refl))) = y
-  pr2 (fib-tot-fib-ftr (pair a .(f a y)) (pair y refl)) = refl
+  map-inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib tot t
+  pr1 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = a
+  pr2 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = y
+  pr2 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl)) = refl
 
-  issec-fib-tot-fib-ftr :
-    (t : Σ A C) → (fib-ftr-fib-tot t ∘ fib-tot-fib-ftr t) ~ id
-  issec-fib-tot-fib-ftr (pair x .(f x y)) (pair y refl) = refl
+  issec-map-inv-compute-fib-tot :
+    (t : Σ A C) → (map-compute-fib-tot t ∘ map-inv-compute-fib-tot t) ~ id
+  issec-map-inv-compute-fib-tot (pair x .(f x y)) (pair y refl) = refl
 
-  isretr-fib-tot-fib-ftr :
-    (t : Σ A C) → (fib-tot-fib-ftr t ∘ fib-ftr-fib-tot t) ~ id
-  isretr-fib-tot-fib-ftr .(pair x (f x y)) (pair (pair x y) refl) = refl
-
-  abstract
-    is-equiv-fib-ftr-fib-tot : (t : Σ A C) → is-equiv (fib-ftr-fib-tot t)
-    is-equiv-fib-ftr-fib-tot t =
-      is-equiv-has-inverse
-        ( fib-tot-fib-ftr t)
-        ( issec-fib-tot-fib-ftr t)
-        ( isretr-fib-tot-fib-ftr t)
+  isretr-map-inv-compute-fib-tot :
+    (t : Σ A C) → (map-inv-compute-fib-tot t ∘ map-compute-fib-tot t) ~ id
+  isretr-map-inv-compute-fib-tot .(pair x (f x y)) (pair (pair x y) refl) = refl
 
   abstract
-    is-equiv-fib-tot-fib-ftr : (t : Σ A C) → is-equiv (fib-tot-fib-ftr t)
-    is-equiv-fib-tot-fib-ftr t =
+    is-equiv-map-compute-fib-tot : (t : Σ A C) → is-equiv (map-compute-fib-tot t)
+    is-equiv-map-compute-fib-tot t =
       is-equiv-has-inverse
-        ( fib-ftr-fib-tot t)
-        ( isretr-fib-tot-fib-ftr t)
-        ( issec-fib-tot-fib-ftr t)
+        ( map-inv-compute-fib-tot t)
+        ( issec-map-inv-compute-fib-tot t)
+        ( isretr-map-inv-compute-fib-tot t)
+
+  compute-fib-tot : (t : Σ A C) → fib tot t ≃ fib (f (pr1 t)) (pr2 t)
+  pr1 (compute-fib-tot t) = map-compute-fib-tot t
+  pr2 (compute-fib-tot t) = is-equiv-map-compute-fib-tot t
+
+  abstract
+    is-equiv-map-inv-compute-fib-tot :
+      (t : Σ A C) → is-equiv (map-inv-compute-fib-tot t)
+    is-equiv-map-inv-compute-fib-tot t =
+      is-equiv-has-inverse
+        ( map-compute-fib-tot t)
+        ( isretr-map-inv-compute-fib-tot t)
+        ( issec-map-inv-compute-fib-tot t)
+
+  inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) ≃ fib tot t
+  pr1 (inv-compute-fib-tot t) = map-inv-compute-fib-tot t
+  pr2 (inv-compute-fib-tot t) = is-equiv-map-inv-compute-fib-tot t
 
   {- Now that we have shown that the fibers of the induced map on total spaces
      are equivalent to the fibers of the maps in the family, it follows that
@@ -80,8 +89,8 @@ module _
         ( λ t →
           is-contr-is-equiv
             ( fib (f (pr1 t)) (pr2 t))
-            ( fib-ftr-fib-tot f t)
-            ( is-equiv-fib-ftr-fib-tot f t)
+            ( map-compute-fib-tot f t)
+            ( is-equiv-map-compute-fib-tot f t)
             ( is-contr-map-is-equiv (H (pr1 t)) (pr2 t)))
 
   abstract
@@ -91,8 +100,8 @@ module _
         ( λ z →
           is-contr-is-equiv'
             ( fib (tot f) (pair x z))
-            ( fib-ftr-fib-tot f (pair x z))
-            ( is-equiv-fib-ftr-fib-tot f (pair x z))
+            ( map-compute-fib-tot f (pair x z))
+            ( is-equiv-map-compute-fib-tot f (pair x z))
             ( is-contr-map-is-equiv is-equiv-tot-f (pair x z)))
 
 module _

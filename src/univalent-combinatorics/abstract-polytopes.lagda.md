@@ -109,41 +109,35 @@ module _
     adjacent-Prepolytope : UU l2
     adjacent-Prepolytope =
       adjacent-Finitely-Graded-Poset finitely-graded-poset-Prepolytope i y z
+
+    is-prop-adjacent-Prepolytope : is-prop adjacent-Prepolytope
+    is-prop-adjacent-Prepolytope =
+      is-prop-adjacent-Finitely-Graded-Poset
+        ( finitely-graded-poset-Prepolytope)
+        ( i)
+        ( y)
+        ( z)
+
+  element-set-Prepolytope : UU-Set l1
+  element-set-Prepolytope =
+    element-set-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  element-Prepolytope : UU l1
+  element-Prepolytope =
+    element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  is-set-element-Prepolytope : is-set element-Prepolytope
+  is-set-element-Prepolytope =
+    is-set-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  element-face-Prepolytope :
+    {i : Fin (succ-ℕ k)} → face-Prepolytope i → element-Prepolytope
+  element-face-Prepolytope =
+    element-face-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+--------------------------------------------------------------------------------
     
 {-
-  module _
-    (i : Fin k) (y : face-Finitely-Graded-Poset (inl-Fin k i))
-    (z : face-Finitely-Graded-Poset (succ-Fin (inl-Fin k i)))
-    where
-
-    adjacent-Finitely-Graded-Poset-Prop : UU-Prop l2
-    adjacent-Finitely-Graded-Poset-Prop = pr2 X i y z
-  
-    adjacent-Finitely-Graded-Poset : UU l2
-    adjacent-Finitely-Graded-Poset =
-      type-Prop adjacent-Finitely-Graded-Poset-Prop
-
-    is-prop-adjacent-Finitely-Graded-Poset :
-      is-prop adjacent-Finitely-Graded-Poset
-    is-prop-adjacent-Finitely-Graded-Poset =
-      is-prop-type-Prop adjacent-Finitely-Graded-Poset-Prop
-
-  element-set-Finitely-Graded-Poset : UU-Set l1
-  element-set-Finitely-Graded-Poset =
-    Σ-Set (Fin-Set (succ-ℕ k)) face-set-Finitely-Graded-Poset
-
-  element-Finitely-Graded-Poset : UU l1
-  element-Finitely-Graded-Poset = type-Set element-set-Finitely-Graded-Poset
-
-  is-set-element-Finitely-Graded-Poset : is-set element-Finitely-Graded-Poset
-  is-set-element-Finitely-Graded-Poset =
-    is-set-type-Set element-set-Finitely-Graded-Poset
-
-  element-face-Finitely-Graded-Poset :
-    {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset i →
-    element-Finitely-Graded-Poset
-  element-face-Finitely-Graded-Poset {i} x = pair i x
-
   type-element-Finitely-Graded-Poset :
     element-Finitely-Graded-Poset → Fin (succ-ℕ k)
   type-element-Finitely-Graded-Poset (pair i x) = i
