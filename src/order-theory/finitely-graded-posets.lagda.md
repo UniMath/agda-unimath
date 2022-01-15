@@ -474,12 +474,18 @@ module _
 
   emb-element-Finitely-Graded-Subposet :
     element-Finitely-Graded-Subposet ↪ element-Finitely-Graded-Poset X
-  emb-element-Finitely-Graded-Subposet = {!!}
+  emb-element-Finitely-Graded-Subposet =
+    emb-tot emb-face-Finitely-Graded-Subposet
 
   map-emb-element-Finitely-Graded-Subposet :
     element-Finitely-Graded-Subposet → element-Finitely-Graded-Poset X
-  pr1 (map-emb-element-Finitely-Graded-Subposet x) = pr1 x
-  pr2 (map-emb-element-Finitely-Graded-Subposet x) = pr1 (pr2 x)
+  map-emb-element-Finitely-Graded-Subposet =
+    map-emb emb-element-Finitely-Graded-Subposet
+
+  is-emb-map-emb-element-Finitely-Graded-Subposet :
+    is-emb map-emb-element-Finitely-Graded-Subposet
+  is-emb-map-emb-element-Finitely-Graded-Subposet =
+    is-emb-map-emb emb-element-Finitely-Graded-Subposet
 
   is-set-element-Finitely-Graded-Subposet :
     is-set element-Finitely-Graded-Subposet
