@@ -158,7 +158,7 @@ module _
 
   is-set-type-iso-Large-Precat : is-set type-iso-Large-Precat
   is-set-type-iso-Large-Precat =
-    is-set-subtype
+    is-set-is-subtype
       ( is-prop-is-iso-hom-Large-Precat)
       ( is-set-type-hom-Large-Precat C X Y)
 

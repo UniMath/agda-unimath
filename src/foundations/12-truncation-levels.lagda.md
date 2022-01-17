@@ -599,6 +599,23 @@ module _
       (f : trunc-map k A B) → is-trunc-map k (map-trunc-map f)
     is-trunc-map-map-trunc-map = pr2
 
+module _
+  {l1 l2 : Level}
+  where
+
+  is-0-map : {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
+  is-0-map {A} {B} f = (y : B) → is-set (fib f y)
+
+  0-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+  0-map A B = Σ (A → B) is-0-map
+
+  map-0-map : {A : UU l1} {B : UU l2} → 0-map A B → A → B
+  map-0-map = pr1
+
+  is-0-map-map-0-map :
+    {A : UU l1} {B : UU l2} (f : 0-map A B) → is-0-map (map-0-map f)
+  is-0-map-map-0-map = pr2
+
 -- We introduce some notation for the special case of 1-types --
 
 is-1-type : {l : Level} → UU l → UU l
@@ -822,66 +839,124 @@ module _
   where
   
   abstract
-    is-trunc-map-is-trunc-ap :
+    is-trunc-map-is-trunc-map-ap :
       ((x y : A) → is-trunc-map k (ap f {x} {y})) → is-trunc-map (succ-𝕋 k) f
-    is-trunc-map-is-trunc-ap is-trunc-ap-f b (pair x p) (pair x' p') =
+    is-trunc-map-is-trunc-map-ap is-trunc-map-ap-f b (pair x p) (pair x' p') =
       is-trunc-is-equiv k
         ( fib (ap f) (p ∙ (inv p')))
         ( fib-ap-eq-fib f (pair x p) (pair x' p'))
         ( is-equiv-fib-ap-eq-fib f (pair x p) (pair x' p'))
-        ( is-trunc-ap-f x x' (p ∙ (inv p')))
+        ( is-trunc-map-ap-f x x' (p ∙ (inv p')))      
 
   abstract
-    is-trunc-ap-is-trunc-map :
+    is-trunc-map-ap-is-trunc-map :
       is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
-    is-trunc-ap-is-trunc-map is-trunc-map-f x y p =
+    is-trunc-map-ap-is-trunc-map is-trunc-map-f x y p =
       is-trunc-is-equiv' k
         ( Id (pair x p) (pair y refl))
         ( eq-fib-fib-ap f x y p)
         ( is-equiv-eq-fib-fib-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
 
--- 
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
 
-abstract
-  is-trunc-pr1-is-trunc-fam :
-    {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU j) →
-    ((x : A) → is-trunc k (B x)) → is-trunc-map k (pr1 {i} {j} {A} {B})
-  is-trunc-pr1-is-trunc-fam k B H x =
-    is-trunc-equiv k (B x) (equiv-fib-pr1 B x) (H x)
+  is-0-map-is-faithful : is-faithful f → is-0-map f
+  is-0-map-is-faithful H =
+    is-trunc-map-is-trunc-map-ap neg-one-𝕋 f
+      ( λ x y → is-prop-map-is-emb (H x y))
 
-trunc-pr1 :
-  {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU-Truncated-Type k j) →
-  trunc-map k (Σ A (λ x → pr1 (B x))) A
-pr1 (trunc-pr1 k B) = pr1
-pr2 (trunc-pr1 k B) =
-  is-trunc-pr1-is-trunc-fam k (λ x → pr1 (B x)) (λ x → pr2 (B x))
+  is-faithful-is-0-map : is-0-map f → is-faithful f
+  is-faithful-is-0-map H x y =
+    is-emb-is-prop-map (is-trunc-map-ap-is-trunc-map neg-one-𝕋 f H x y)
 
-abstract
-  is-trunc-fam-is-trunc-pr1 : {i j : Level} (k : 𝕋) {A : UU i} (B : A → UU j) →
-    is-trunc-map k (pr1 {i} {j} {A} {B}) → ((x : A) → is-trunc k (B x))
-  is-trunc-fam-is-trunc-pr1 k B is-trunc-pr1 x =
-    is-trunc-equiv k (fib pr1 x) (inv-equiv-fib-pr1 B x) (is-trunc-pr1 x)
+--
+
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1}
+  where
+
+  abstract
+    is-trunc-map-pr1 :
+      {B : A → UU l2} → ((x : A) → is-trunc k (B x)) →
+      is-trunc-map k (pr1 {l1} {l2} {A} {B})
+    is-trunc-map-pr1 {B} H x =
+      is-trunc-equiv k (B x) (equiv-fib-pr1 B x) (H x)
+
+  pr1-trunc-map :
+    (B : A → UU-Truncated-Type k l2) → trunc-map k (Σ A (λ x → pr1 (B x))) A
+  pr1 (pr1-trunc-map B) = pr1
+  pr2 (pr1-trunc-map B) = is-trunc-map-pr1 (λ x → pr2 (B x))
+
+  abstract
+    is-trunc-is-trunc-map-pr1 :
+      (B : A → UU l2) → is-trunc-map k (pr1 {l1} {l2} {A} {B}) →
+      ((x : A) → is-trunc k (B x))
+    is-trunc-is-trunc-map-pr1 B is-trunc-map-pr1 x =
+      is-trunc-equiv k (fib pr1 x) (inv-equiv-fib-pr1 B x) (is-trunc-map-pr1 x)
     
-abstract
-  is-trunc-succ-subtype :
-    {i j : Level} (k : 𝕋) {A : UU i} {P : A → UU j} →
-    ((x : A) → is-prop (P x)) →
-    is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (Σ A P)
-  is-trunc-succ-subtype k H is-trunc-A =
-    is-trunc-is-emb k pr1 (is-emb-pr1 H) is-trunc-A
+  abstract
+    is-trunc-is-subtype :
+      {P : A → UU l2} → is-subtype P → is-trunc (succ-𝕋 k) A →
+      is-trunc (succ-𝕋 k) (Σ A P)
+    is-trunc-is-subtype H is-trunc-A =
+      is-trunc-is-emb k pr1 (is-emb-pr1 H) is-trunc-A
 
-abstract
-  is-prop-subtype :
-    {i j : Level} {A : UU i} {P : A → UU j} →
-    ((x : A) → is-prop (P x)) → is-prop A → is-prop (Σ A P)
-  is-prop-subtype = is-trunc-succ-subtype neg-two-𝕋
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+  
+  abstract
+    is-0-map-pr1 :
+      {B : A → UU l2} → ((x : A) → is-set (B x)) → is-0-map (pr1 {B = B})
+    is-0-map-pr1 {B} H x =
+      is-set-equiv (B x) (equiv-fib-pr1 B x) (H x)
+                                                  
+  pr1-0-map :
+    (B : A → UU-Set l2) → 0-map (Σ A (λ x → type-Set (B x))) A
+  pr1 (pr1-0-map B) = pr1
+  pr2 (pr1-0-map B) = is-0-map-pr1 (λ x → is-set-type-Set (B x))
 
-abstract
-  is-set-subtype :
-    {i j : Level} {A : UU i} {P : A → UU j} →
-    ((x : A) → is-prop (P x)) → is-set A → is-set (Σ A P)
-  is-set-subtype = is-trunc-succ-subtype neg-one-𝕋
+  abstract
+    is-faithful-pr1 :
+      {B : A → UU l2} → ((x : A) → is-set (B x)) → is-faithful (pr1 {B = B})
+    is-faithful-pr1 H = is-faithful-is-0-map (is-0-map-pr1 H)
+
+  pr1-faithful-map :
+    (B : A → UU-Set l2) → faithful-map (Σ A (λ x → type-Set (B x))) A
+  pr1 (pr1-faithful-map B) = pr1
+  pr2 (pr1-faithful-map B) = is-faithful-pr1 (λ x → is-set-type-Set (B x))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
+  where
+  
+  abstract
+    is-prop-is-subtype : is-subtype P → is-prop A → is-prop (Σ A P)
+    is-prop-is-subtype = is-trunc-is-subtype neg-two-𝕋
+
+  abstract
+    is-set-is-subtype : is-subtype P → is-set A → is-set (Σ A P)
+    is-set-is-subtype = is-trunc-is-subtype neg-one-𝕋
+
+  abstract
+    is-1-type-is-subtype : is-subtype P → is-1-type A → is-1-type (Σ A P)
+    is-1-type-is-subtype = is-trunc-is-subtype zero-𝕋
+
+subprop-Prop :
+  {l1 l2 : Level} (A : UU-Prop l1) (P : (x : type-Prop A) → UU-Prop l2) →
+  UU-Prop (l1 ⊔ l2)
+pr1 (subprop-Prop A P) = Σ (type-Prop A) (λ x → type-Prop (P x))
+pr2 (subprop-Prop A P) =
+  is-prop-is-subtype (λ x → is-prop-type-Prop (P x)) (is-prop-type-Prop A)
+
+subset-Set :
+  {l1 l2 : Level} (A : UU-Set l1) (P : (x : type-Set A) → UU-Prop l2) →
+  UU-Set (l1 ⊔ l2)
+pr1 (subset-Set A P) = Σ (type-Set A) (λ x → type-Prop (P x))
+pr2 (subset-Set A P) =
+  is-set-is-subtype (λ x → is-prop-type-Prop (P x)) (is-set-type-Set A)
 
 --------------------------------------------------------------------------------
 
@@ -1130,28 +1205,84 @@ module _
 -- Exercise 12.4 (c)
 
 module _
-  {l : Level} (k : 𝕋) (A : UU l)
+  {l : Level} {A : UU l}
   where
   
   abstract
-    is-trunc-is-trunc-diagonal :
-      is-trunc-map k (diagonal A) → is-trunc (succ-𝕋 k) A
-    is-trunc-is-trunc-diagonal is-trunc-d x y =
+    is-trunc-is-trunc-map-diagonal :
+      (k : 𝕋) → is-trunc-map k (diagonal A) → is-trunc (succ-𝕋 k) A
+    is-trunc-is-trunc-map-diagonal k is-trunc-d x y =
       is-trunc-is-equiv' k
         ( fib (diagonal A) (pair x y))
         ( eq-fib-diagonal A (pair x y))
         ( is-equiv-eq-fib-diagonal A (pair x y))
         ( is-trunc-d (pair x y))
+
+  abstract
+    is-prop-is-contr-map-diagonal : is-contr-map (diagonal A) → is-prop A
+    is-prop-is-contr-map-diagonal = is-trunc-is-trunc-map-diagonal neg-two-𝕋
+
+  abstract
+    is-set-is-prop-map-diagonal : is-prop-map (diagonal A) → is-set A
+    is-set-is-prop-map-diagonal = is-trunc-is-trunc-map-diagonal neg-one-𝕋
+
+  abstract
+    is-set-is-emb-diagonal : is-emb (diagonal A) → is-set A
+    is-set-is-emb-diagonal H =
+      is-set-is-prop-map-diagonal (is-prop-map-is-emb H)
+
+  abstract
+    is-1-type-is-0-map-diagonal : is-0-map (diagonal A) → is-1-type A
+    is-1-type-is-0-map-diagonal = is-trunc-is-trunc-map-diagonal zero-𝕋
+
+  abstract
+    is-1-type-is-faithful-diagonal : is-faithful (diagonal A) → is-1-type A
+    is-1-type-is-faithful-diagonal H =
+      is-1-type-is-0-map-diagonal (is-0-map-is-faithful H)
   
   abstract
-    is-trunc-diagonal-is-trunc : 
-      is-trunc (succ-𝕋 k) A → is-trunc-map k (diagonal A)
-    is-trunc-diagonal-is-trunc is-trunc-A t =
+    is-trunc-map-diagonal-is-trunc : 
+      (k : 𝕋) → is-trunc (succ-𝕋 k) A → is-trunc-map k (diagonal A)
+    is-trunc-map-diagonal-is-trunc k is-trunc-A t =
       is-trunc-is-equiv k
         ( Id (pr1 t) (pr2 t))
         ( eq-fib-diagonal A t)
         ( is-equiv-eq-fib-diagonal A t)
-        ( is-trunc-A (pr1 t) (pr2 t))
+          ( is-trunc-A (pr1 t) (pr2 t))
+
+  abstract
+    is-contr-map-diagonal-is-prop : is-prop A → is-contr-map (diagonal A)
+    is-contr-map-diagonal-is-prop = is-trunc-map-diagonal-is-trunc neg-two-𝕋
+
+  abstract
+    is-prop-map-diagonal-is-set : is-set A → is-prop-map (diagonal A)
+    is-prop-map-diagonal-is-set = is-trunc-map-diagonal-is-trunc neg-one-𝕋
+
+  abstract
+    is-emb-diagonal-is-set : is-set A → is-emb (diagonal A)
+    is-emb-diagonal-is-set H =
+      is-emb-is-prop-map (is-prop-map-diagonal-is-set H)
+
+  abstract
+    is-0-map-diagonal-is-1-type : is-1-type A → is-0-map (diagonal A)
+    is-0-map-diagonal-is-1-type = is-trunc-map-diagonal-is-trunc zero-𝕋
+
+  abstract
+    is-faithful-diagonal-is-1-type : is-1-type A → is-faithful (diagonal A)
+    is-faithful-diagonal-is-1-type H =
+      is-faithful-is-0-map (is-0-map-diagonal-is-1-type H)
+
+diagonal-emb :
+  {l : Level} (A : UU-Set l) → (type-Set A) ↪ ((type-Set A) × (type-Set A))
+pr1 (diagonal-emb A) = diagonal (type-Set A)
+pr2 (diagonal-emb A) = is-emb-diagonal-is-set (is-set-type-Set A)
+
+diagonal-faithful-map :
+  {l : Level} (A : UU-1-Type l) →
+  faithful-map (type-1-Type A) (type-1-Type A × type-1-Type A)
+pr1 (diagonal-faithful-map A) = diagonal (type-1-Type A)
+pr2 (diagonal-faithful-map A) =
+  is-faithful-diagonal-is-1-type (is-1-type-type-1-Type A)
 
 -- Exercise 12.5
 
@@ -1334,27 +1465,112 @@ abstract
 
 -- Exercise 12.8
 
-fib-const :
-  {l : Level} {A : UU l} (x y : A) → fib (const unit A x) y ≃ (Id x y)
-fib-const x y = left-unit-law-prod
+module _
+  {l : Level} {A : UU l}
+  where
 
-abstract
-  is-trunc-const-is-trunc : {l : Level} (k : 𝕋) {A : UU l} →
-    is-trunc (succ-𝕋 k) A → (x : A) → is-trunc-map k (const unit A x)
-  is-trunc-const-is-trunc k is-trunc-A x y =
-    is-trunc-equiv k
-      ( Id x y)
-      ( fib-const x y)
-      ( is-trunc-A x y)
+  fib-const : (x y : A) → fib (const unit A x) y ≃ (Id x y)
+  fib-const x y = left-unit-law-prod
 
-abstract
-  is-trunc-is-trunc-const : {l : Level} (k : 𝕋) {A : UU l} →
-    ((x : A) → is-trunc-map k (const unit A x)) → is-trunc (succ-𝕋 k) A
-  is-trunc-is-trunc-const k is-trunc-const x y =
-    is-trunc-equiv' k
-      ( Σ unit (λ t → Id x y))
-      ( left-unit-law-Σ (λ t → Id x y))
-      ( is-trunc-const x y)
+  abstract
+    is-trunc-map-const-is-trunc :
+      (k : 𝕋) → is-trunc (succ-𝕋 k) A →
+      (x : A) → is-trunc-map k (const unit A x)
+    is-trunc-map-const-is-trunc k is-trunc-A x y =
+      is-trunc-equiv k
+        ( Id x y)
+        ( fib-const x y)
+        ( is-trunc-A x y)
+
+  abstract
+    is-contr-map-const-is-prop :
+      is-prop A → (x : A) → is-contr-map (const unit A x)
+    is-contr-map-const-is-prop = is-trunc-map-const-is-trunc neg-two-𝕋
+
+  abstract
+    is-equiv-const-is-prop :
+      is-prop A → (x : A) → is-equiv (const unit A x)
+    is-equiv-const-is-prop H x =
+      is-equiv-is-contr-map (is-contr-map-const-is-prop H x)
+
+  abstract
+    is-prop-map-const-is-set :
+      is-set A → (x : A) → is-prop-map (const unit A x)
+    is-prop-map-const-is-set = is-trunc-map-const-is-trunc neg-one-𝕋
+
+  abstract
+    is-emb-const-is-set : is-set A → (x : A) → is-emb (const unit A x)
+    is-emb-const-is-set H x = is-emb-is-prop-map (is-prop-map-const-is-set H x)
+
+  abstract
+    is-0-map-const-is-1-type : is-1-type A → (x : A) → is-0-map (const unit A x)
+    is-0-map-const-is-1-type = is-trunc-map-const-is-trunc zero-𝕋
+
+  abstract
+    is-faithful-const-is-1-type :
+      is-1-type A → (x : A) → is-faithful (const unit A x)
+    is-faithful-const-is-1-type H x =
+      is-faithful-is-0-map (is-0-map-const-is-1-type H x)
+
+  abstract
+    is-trunc-is-trunc-map-const :
+      (k : 𝕋) → ((x : A) → is-trunc-map k (const unit A x)) →
+      is-trunc (succ-𝕋 k) A
+    is-trunc-is-trunc-map-const k is-trunc-const x y =
+      is-trunc-equiv' k
+        ( Σ unit (λ t → Id x y))
+        ( left-unit-law-Σ (λ t → Id x y))
+        ( is-trunc-const x y)
+
+  abstract
+    is-prop-is-contr-map-const :
+      ((x : A) → is-contr-map (const unit A x)) → is-prop A
+    is-prop-is-contr-map-const = is-trunc-is-trunc-map-const neg-two-𝕋
+
+  abstract
+    is-prop-is-equiv-const :
+      ((x : A) → is-equiv (const unit A x)) → is-prop A
+    is-prop-is-equiv-const H =
+      is-prop-is-contr-map-const (λ x → is-contr-map-is-equiv (H x))
+
+  abstract
+    is-set-is-prop-map-const :
+      ((x : A) → is-prop-map (const unit A x)) → is-set A
+    is-set-is-prop-map-const = is-trunc-is-trunc-map-const neg-one-𝕋
+
+  abstract
+    is-set-is-emb-const :
+      ((x : A) → is-emb (const unit A x)) → is-set A
+    is-set-is-emb-const H =
+      is-set-is-prop-map-const (λ x → is-prop-map-is-emb (H x))
+
+  abstract
+    is-1-type-is-0-map-const :
+      ((x : A) → is-0-map (const unit A x)) → is-1-type A
+    is-1-type-is-0-map-const = is-trunc-is-trunc-map-const zero-𝕋
+
+  abstract
+    is-1-type-is-faithful-const :
+      ((x : A) → is-faithful (const unit A x)) → is-1-type A
+    is-1-type-is-faithful-const H =
+      is-1-type-is-0-map-const (λ x → is-0-map-is-faithful (H x))
+
+const-equiv :
+  {l : Level} (A : UU-Prop l) (x : type-Prop A) → unit ≃ type-Prop A
+pr1 (const-equiv A x) = const unit (type-Prop A) x
+pr2 (const-equiv A x) = is-equiv-const-is-prop (is-prop-type-Prop A) x
+
+const-emb :
+  {l : Level} (A : UU-Set l) (x : type-Set A) → unit ↪ type-Set A
+pr1 (const-emb A x) = const unit (type-Set A) x
+pr2 (const-emb A x) = is-emb-const-is-set (is-set-type-Set A) x
+
+const-faithful-map :
+  {l : Level} (A : UU-1-Type l) (x : type-1-Type A) →
+  faithful-map unit (type-1-Type A)
+pr1 (const-faithful-map A x) = const unit (type-1-Type A) x
+pr2 (const-faithful-map A x) =
+  is-faithful-const-is-1-type (is-1-type-type-1-Type A) x
 
 -- Exercise 12.9
 
@@ -1405,21 +1621,43 @@ abstract
       ( issec-inv-map-fib-comp g h x)
 
 abstract
-  is-trunc-map-htpy : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
-    (f g : A → B) → f ~ g → is-trunc-map k g → is-trunc-map k f
-  is-trunc-map-htpy k {A} f g H is-trunc-g b =
+  is-trunc-map-htpy :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+    {f g : A → B} → f ~ g → is-trunc-map k g → is-trunc-map k f
+  is-trunc-map-htpy k {A} {B} {f} {g} H is-trunc-g b =
     is-trunc-is-equiv k
       ( Σ A (λ z → Id (g z) b))
       ( fib-triangle f g id H b)
       ( is-fiberwise-equiv-is-equiv-triangle f g id H is-equiv-id b)
       ( is-trunc-g b)
 
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  where
+  
+  abstract
+    is-contr-map-htpy : is-contr-map g → is-contr-map f
+    is-contr-map-htpy = is-trunc-map-htpy neg-two-𝕋 H
+
+  abstract
+    is-prop-map-htpy : is-prop-map g → is-prop-map f
+    is-prop-map-htpy = is-trunc-map-htpy neg-one-𝕋 H
+
+  abstract
+    is-0-map-htpy : is-0-map g → is-0-map f
+    is-0-map-htpy = is-trunc-map-htpy zero-𝕋 H
+
+  abstract
+    is-faithful-htpy : is-faithful g → is-faithful f
+    is-faithful-htpy K =
+      is-faithful-is-0-map (is-0-map-htpy (is-0-map-is-faithful K))
+
 abstract
   is-trunc-map-comp : {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
     {X : UU l3} (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-trunc-map k g → is-trunc-map k h → is-trunc-map k f
   is-trunc-map-comp k f g h H is-trunc-g is-trunc-h =
-    is-trunc-map-htpy k f (g ∘ h) H
+    is-trunc-map-htpy k H
       ( λ x → is-trunc-is-equiv k
         ( Σ (fib g x) (λ t → fib h (pr1 t)))
         ( map-fib-comp g h x)
@@ -1427,6 +1665,29 @@ abstract
         ( is-trunc-Σ k
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t))))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
+
+  abstract
+    is-contr-map-comp : is-contr-map g → is-contr-map h → is-contr-map f
+    is-contr-map-comp = is-trunc-map-comp neg-two-𝕋 f g h H
+
+  abstract
+    is-prop-map-comp : is-prop-map g → is-prop-map h → is-prop-map f
+    is-prop-map-comp = is-trunc-map-comp neg-one-𝕋 f g h H
+
+  abstract
+    is-0-map-comp : is-0-map g → is-0-map h → is-0-map f
+    is-0-map-comp = is-trunc-map-comp zero-𝕋 f g h H
+
+  abstract
+    is-faithful-comp : is-faithful g → is-faithful h → is-faithful f
+    is-faithful-comp K L =
+      is-faithful-is-0-map
+        (is-0-map-comp (is-0-map-is-faithful K) (is-0-map-is-faithful L))
 
 abstract
   is-trunc-map-right-factor : {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
@@ -1439,85 +1700,176 @@ abstract
         ( Σ A (λ z → Id (g (h z)) (g b)))
         ( map-fib-comp g h (g b))
         ( is-equiv-map-fib-comp g h (g b))
-        ( is-trunc-map-htpy k (g ∘ h) f (inv-htpy H) is-trunc-f (g b)))
+        ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
       ( pair b refl)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
+
+  is-contr-map-right-factor : is-contr-map g → is-contr-map f → is-contr-map h
+  is-contr-map-right-factor = is-trunc-map-right-factor neg-two-𝕋 f g h H
+
+  is-prop-map-right-factor : is-prop-map g → is-prop-map f → is-prop-map h
+  is-prop-map-right-factor = is-trunc-map-right-factor neg-one-𝕋 f g h H
+
+  is-0-map-right-factor : is-0-map g → is-0-map f → is-0-map h
+  is-0-map-right-factor = is-trunc-map-right-factor zero-𝕋 f g h H
+
+  is-faithful-right-factor : is-faithful g → is-faithful f → is-faithful h
+  is-faithful-right-factor K L =
+    is-faithful-is-0-map
+      ( is-0-map-right-factor (is-0-map-is-faithful K) (is-0-map-is-faithful L))
 
 -- Exercise 12.10
 
 module _
   {l1 l2 l3 : Level} (k : 𝕋)  {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  (f : (x : A) → B x → C x)
+  {f : (x : A) → B x → C x}
   where
 
-  is-fiberwise-trunc : UU (l1 ⊔ l2 ⊔ l3)
-  is-fiberwise-trunc = (x : A) → is-trunc-map k (f x)
-
   abstract
-    is-trunc-tot-is-fiberwise-trunc :
-      is-fiberwise-trunc → is-trunc-map k (tot f)
-    is-trunc-tot-is-fiberwise-trunc is-fiberwise-trunc-f (pair x z) =
+    is-trunc-map-tot : ((x : A) → is-trunc-map k (f x)) → is-trunc-map k (tot f)
+    is-trunc-map-tot H y =
       is-trunc-equiv k
-        ( fib (f x) z)
-        ( compute-fib-tot f (pair x z))
-        ( is-fiberwise-trunc-f x z)
+        ( fib (f (pr1 y)) (pr2 y))
+        ( compute-fib-tot f y)
+        ( H (pr1 y) (pr2 y))
 
   abstract
-    is-fiberwise-trunc-is-trunc-tot : 
-      is-trunc-map k (tot f) → is-fiberwise-trunc
-    is-fiberwise-trunc-is-trunc-tot is-trunc-tot-f x z =
+    is-trunc-map-is-trunc-map-tot : 
+      is-trunc-map k (tot f) → ((x : A) → is-trunc-map k (f x))
+    is-trunc-map-is-trunc-map-tot is-trunc-tot-f x z =
       is-trunc-equiv k
         ( fib (tot f) (pair x z))
         ( inv-compute-fib-tot f (pair x z))
         ( is-trunc-tot-f (pair x z))
 
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  where
+
+  abstract
+    is-contr-map-tot :
+      ((x : A) → is-contr-map (f x)) → is-contr-map (tot f)
+    is-contr-map-tot =
+      is-trunc-map-tot neg-two-𝕋
+
+  abstract
+    is-prop-map-tot : ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
+    is-prop-map-tot = is-trunc-map-tot neg-one-𝕋
+
+  is-emb-tot : ((x : A) → is-emb (f x)) → is-emb (tot f)
+  is-emb-tot H =
+    is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
+
+  abstract
+    is-0-map-tot : ((x : A) → is-0-map (f x)) → is-0-map (tot f)
+    is-0-map-tot = is-trunc-map-tot zero-𝕋
+
+  is-faithful-tot : ((x : A) → is-faithful (f x)) → is-faithful (tot f)
+  is-faithful-tot H =
+    is-faithful-is-0-map (is-0-map-tot (λ x → is-0-map-is-faithful (H x)))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  tot-emb : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
+  pr1 (tot-emb f) = tot (λ x → map-emb (f x))
+  pr2 (tot-emb f) = is-emb-tot (λ x → is-emb-map-emb (f x))
+
+  tot-faithful-map :
+    ((x : A) → faithful-map (B x) (C x)) → faithful-map (Σ A B) (Σ A C)
+  pr1 (tot-faithful-map f) = tot (λ x → map-faithful-map (f x))
+  pr2 (tot-faithful-map f) =
+    is-faithful-tot (λ x → is-faithful-map-faithful-map (f x))
+
 -- Exercise 12.11
 
-fiber-inclusion :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (x : A) → B x → Σ A B
-pr1 (fiber-inclusion B x y) = x
-pr2 (fiber-inclusion B x y) = y
-
-fib-fiber-inclusion :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (t : Σ A B) →
-  fib (fiber-inclusion B a) t ≃ Id a (pr1 t)
-fib-fiber-inclusion B a t =
-  ( ( right-unit-law-Σ-is-contr
-      ( λ p → is-contr-map-is-equiv (is-equiv-tr B p) (pr2 t))) ∘e
-    ( equiv-left-swap-Σ)) ∘e
-  ( equiv-tot (λ b → equiv-pair-eq-Σ (pair a b) t))
-
-is-trunc-is-trunc-map-fiber-inclusion :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} →
-  ((B : A → UU l2) (a : A) → is-trunc-map k (fiber-inclusion B a)) →
-  is-trunc (succ-𝕋 k) A
-is-trunc-is-trunc-map-fiber-inclusion {l1} {l2} k {A} H x y =
-  is-trunc-equiv' k
-    ( fib (fiber-inclusion B x) (pair y raise-star))
-    ( fib-fiber-inclusion B x (pair y raise-star))
-    ( H B x (pair y raise-star))
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
-  B : A → UU l2
-  B a = raise-unit l2
+  
+  fiber-inclusion : (x : A) → B x → Σ A B
+  pr1 (fiber-inclusion x y) = x
+  pr2 (fiber-inclusion x y) = y
 
-is-trunc-map-fiber-inclusion-is-trunc :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : A → UU l2) (a : A) →
-  is-trunc (succ-𝕋 k) A → is-trunc-map k (fiber-inclusion B a)
-is-trunc-map-fiber-inclusion-is-trunc k B a H t =
-  is-trunc-equiv k
-    ( Id a (pr1 t))
-    ( fib-fiber-inclusion B a t)
-    ( H a (pr1 t))
+  fib-fiber-inclusion :
+    (a : A) (t : Σ A B) → fib (fiber-inclusion a) t ≃ Id a (pr1 t)
+  fib-fiber-inclusion a t =
+    ( ( right-unit-law-Σ-is-contr
+        ( λ p → is-contr-map-is-equiv (is-equiv-tr B p) (pr2 t))) ∘e
+      ( equiv-left-swap-Σ)) ∘e
+    ( equiv-tot (λ b → equiv-pair-eq-Σ (pair a b) t))
 
-is-emb-fiber-inclusion :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-  is-set A → (x : A) → is-emb (fiber-inclusion B x)
-is-emb-fiber-inclusion B H x =
-  is-emb-is-prop-map (is-trunc-map-fiber-inclusion-is-trunc neg-one-𝕋 B x H)
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1}
+  where
+  
+  is-trunc-is-trunc-map-fiber-inclusion :
+    ((B : A → UU l2) (a : A) → is-trunc-map k (fiber-inclusion B a)) →
+    is-trunc (succ-𝕋 k) A
+  is-trunc-is-trunc-map-fiber-inclusion H x y =
+    is-trunc-equiv' k
+      ( fib (fiber-inclusion B x) (pair y raise-star))
+      ( fib-fiber-inclusion B x (pair y raise-star))
+      ( H B x (pair y raise-star))
+    where
+    B : A → UU l2
+    B a = raise-unit l2
 
-emb-fiber-inclusion :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → is-set A → (x : A) → B x ↪ Σ A B
-pr1 (emb-fiber-inclusion B H x) = fiber-inclusion B x
-pr2 (emb-fiber-inclusion B H x) = is-emb-fiber-inclusion B H x
+  is-trunc-map-fiber-inclusion-is-trunc :
+    (B : A → UU l2) (a : A) →
+    is-trunc (succ-𝕋 k) A → is-trunc-map k (fiber-inclusion B a)
+  is-trunc-map-fiber-inclusion-is-trunc B a H t =
+    is-trunc-equiv k
+      ( Id a (pr1 t))
+      ( fib-fiber-inclusion B a t)
+      ( H a (pr1 t))
+
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  is-contr-map-fiber-inclusion :
+    (x : A) → is-prop A → is-contr-map (fiber-inclusion B x)
+  is-contr-map-fiber-inclusion =
+    is-trunc-map-fiber-inclusion-is-trunc neg-two-𝕋 B
+
+  is-prop-map-fiber-inclusion :
+    (x : A) → is-set A → is-prop-map (fiber-inclusion B x)
+  is-prop-map-fiber-inclusion =
+    is-trunc-map-fiber-inclusion-is-trunc neg-one-𝕋 B
+
+  is-0-map-fiber-inclusion :
+    (x : A) → is-1-type A → is-0-map (fiber-inclusion B x)
+  is-0-map-fiber-inclusion =
+    is-trunc-map-fiber-inclusion-is-trunc zero-𝕋 B
+
+  is-emb-fiber-inclusion : is-set A → (x : A) → is-emb (fiber-inclusion B x)
+  is-emb-fiber-inclusion H x =
+    is-emb-is-prop-map (is-prop-map-fiber-inclusion x H)
+
+  is-faithful-fiber-inclusion :
+    is-1-type A → (x : A) → is-faithful (fiber-inclusion B x)
+  is-faithful-fiber-inclusion H x =
+    is-faithful-is-0-map (is-0-map-fiber-inclusion x H)
+
+fiber-inclusion-emb :
+  {l1 l2 : Level} (A : UU-Set l1) (B : type-Set A → UU l2) →
+  (x : type-Set A) → B x ↪ Σ (type-Set A) B
+pr1 (fiber-inclusion-emb A B x) = fiber-inclusion B x
+pr2 (fiber-inclusion-emb A B x) = is-emb-fiber-inclusion B (is-set-type-Set A) x
+
+fiber-inclusion-faithful-map :
+  {l1 l2 : Level} (A : UU-1-Type l1) (B : type-1-Type A → UU l2) →
+  (x : type-1-Type A) → faithful-map (B x) (Σ (type-1-Type A) B)
+pr1 (fiber-inclusion-faithful-map A B x) = fiber-inclusion B x
+pr2 (fiber-inclusion-faithful-map A B x) =
+  is-faithful-fiber-inclusion B (is-1-type-type-1-Type A) x
 
 -- Exercise 12.12
 
@@ -1790,81 +2142,69 @@ module _
       ( equiv-fib-map-Σ-map-base-fib f C y)
       ( H (pr1 y))
 
-  is-prop-map-map-Σ-map-base :
-    {f : A → B} (C : B → UU l3) →
-    is-prop-map f → is-prop-map (map-Σ-map-base f C)
-  is-prop-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base neg-one-𝕋
+  module _
+    {f : A → B} (C : B → UU l3)
+    where
 
-  abstract
-    is-emb-map-Σ-map-base :
-      (f : A → B) (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
-    is-emb-map-Σ-map-base f C H =
-      is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
+    abstract
+      is-prop-map-map-Σ-map-base :
+        is-prop-map f → is-prop-map (map-Σ-map-base f C)
+      is-prop-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
+
+    abstract
+      is-emb-map-Σ-map-base : is-emb f → is-emb (map-Σ-map-base f C)
+      is-emb-map-Σ-map-base H =
+        is-emb-is-prop-map (is-prop-map-map-Σ-map-base (is-prop-map-is-emb H))
+
+    abstract
+      is-0-map-map-Σ-map-base : is-0-map f → is-0-map (map-Σ-map-base f C)
+      is-0-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base zero-𝕋 C
+
+    abstract
+      is-faithful-map-Σ-map-base :
+        is-faithful f → is-faithful (map-Σ-map-base f C)
+      is-faithful-map-Σ-map-base H =
+        is-faithful-is-0-map (is-0-map-map-Σ-map-base (is-0-map-is-faithful H))
 
   emb-Σ-emb-base :
     (f : A ↪ B) (C : B → UU l3) → Σ A (λ a → C (map-emb f a)) ↪ Σ B C
   pr1 (emb-Σ-emb-base f C) = map-Σ-map-base (map-emb f) C
   pr2 (emb-Σ-emb-base f C) =
-    is-emb-map-Σ-map-base (map-emb f) C (is-emb-map-emb f)
+    is-emb-map-Σ-map-base C (is-emb-map-emb f)
 
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  where
-
-  is-trunc-map-tot :
-    (k : 𝕋) {f : (x : A) → B x → C x} →
-    ((x : A) → is-trunc-map (succ-𝕋 k) (f x)) → is-trunc-map (succ-𝕋 k) (tot f)
-  is-trunc-map-tot k {f} H y =
-    is-trunc-equiv
-      ( succ-𝕋 k)
-      ( fib (f (pr1 y)) (pr2 y))
-      ( compute-fib-tot f y)
-      ( H (pr1 y) (pr2 y))
-
-  is-prop-map-tot : 
-    {f : (x : A) → B x → C x} →
-    ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
-  is-prop-map-tot = is-trunc-map-tot neg-two-𝕋
-  
-  is-emb-tot : 
-    {f : (x : A) → B x → C x} → ((x : A) → is-emb (f x)) → is-emb (tot f)
-  is-emb-tot H =
-    is-emb-is-prop-map (is-prop-map-tot λ x → is-prop-map-is-emb (H x))
-
-  emb-tot : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
-  pr1 (emb-tot f) = tot (λ x → map-emb (f x))
-  pr2 (emb-tot f) = is-emb-tot (λ x → is-emb-map-emb (f x))
-
+  faithful-map-Σ-faithful-map-base :
+    (f : faithful-map A B) (C : B → UU l3) →
+    faithful-map (Σ A (λ a → C (map-faithful-map f a))) (Σ B C)
+  pr1 (faithful-map-Σ-faithful-map-base f C) =
+    map-Σ-map-base (map-faithful-map f) C
+  pr2 (faithful-map-Σ-faithful-map-base f C) =
+    is-faithful-map-Σ-map-base C (is-faithful-map-faithful-map f)
+    
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   where
-
-  is-contr-map-map-Σ :
-    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
-    is-contr-map f → ((x : A) → is-contr-map (g x)) → is-contr-map (map-Σ D f g)
-  is-contr-map-map-Σ D H K =
-    is-contr-map-is-equiv
-      ( is-equiv-map-Σ D _ _
-        ( is-equiv-is-contr-map H)
-        ( λ x → is-equiv-is-contr-map (K x)))
 
   is-trunc-map-map-Σ :
     (k : 𝕋) (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
     is-trunc-map k f → ((x : A) → is-trunc-map k (g x)) →
     is-trunc-map k (map-Σ D f g)
-  is-trunc-map-map-Σ neg-two-𝕋 D {f} {g} H K = is-contr-map-map-Σ D H K
-  is-trunc-map-map-Σ (succ-𝕋 k) D {f} {g} H K = 
-    is-trunc-map-comp (succ-𝕋 k)
+  is-trunc-map-map-Σ k D {f} {g} H K = 
+    is-trunc-map-comp k
       ( map-Σ D f g)
       ( map-Σ-map-base f D)
       ( tot g)
       ( triangle-map-Σ D f g)
-      ( is-trunc-map-map-Σ-map-base (succ-𝕋 k) D H)
+      ( is-trunc-map-map-Σ-map-base k D H)
       ( is-trunc-map-tot k K)
 
   module _
     (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
     where
+
+    is-contr-map-map-Σ :
+      is-contr-map f → ((x : A) → is-contr-map (g x)) →
+      is-contr-map (map-Σ D f g)
+    is-contr-map-map-Σ = is-trunc-map-map-Σ neg-two-𝕋 D
 
     is-prop-map-map-Σ :
       is-prop-map f → ((x : A) → is-prop-map (g x)) → is-prop-map (map-Σ D f g)
@@ -1877,6 +2217,18 @@ module _
         ( is-prop-map-map-Σ
           ( is-prop-map-is-emb H)
           ( λ x → is-prop-map-is-emb (K x)))
+
+    is-0-map-map-Σ :
+      is-0-map f → ((x : A) → is-0-map (g x)) → is-0-map (map-Σ D f g)
+    is-0-map-map-Σ = is-trunc-map-map-Σ zero-𝕋 D
+
+    is-faithful-map-Σ :
+      is-faithful f → ((x : A) → is-faithful (g x)) → is-faithful (map-Σ D f g)
+    is-faithful-map-Σ H K =
+      is-faithful-is-0-map
+        ( is-0-map-map-Σ
+          ( is-0-map-is-faithful H)
+          ( λ x → is-0-map-is-faithful (K x)))
 
   emb-Σ :
     (D : B → UU l4) (f : A ↪ B) (g : (x : A) → C x ↪ D (map-emb f x)) →

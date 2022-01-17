@@ -944,10 +944,10 @@ abstract
 abstract
   is-image-has-section :
     (l : Level) {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
-    sec f → is-image l f emb-id (pair f refl-htpy)
+    sec f → is-image l f id-emb (pair f refl-htpy)
   is-image-has-section l f (pair g H) =
     is-image-is-image'
-      l f emb-id (pair f refl-htpy)
+      l f id-emb (pair f refl-htpy)
       ( λ B m h → pair ((pr1 h) ∘ g) ( λ x → (inv (H x)) ∙ (pr2 h (g x))))
 
 abstract

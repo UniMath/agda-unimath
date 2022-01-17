@@ -1833,7 +1833,7 @@ abstract
     is-trunc-is-equiv k (fib (ap f) p)
       ( fib-ap-fib-diagonal-map f (triple x y p))
       ( is-equiv-fib-ap-fib-diagonal-map f (triple x y p))
-      ( is-trunc-ap-is-trunc-map k f is-trunc-f x y p)
+      ( is-trunc-map-ap-is-trunc-map k f is-trunc-f x y p)
 
 abstract
   is-trunc-map-is-trunc-diagonal-map :

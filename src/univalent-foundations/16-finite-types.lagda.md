@@ -2035,7 +2035,7 @@ abstract
   choice-count-Σ-is-finite-fiber {l1} {l2} {A} {B} K e g H x =
     global-choice-count
       ( count-domain-emb-is-finite-domain-emb e
-        ( emb-fiber-inclusion B K x)
+        ( fiber-inclusion-emb (pair A K) B x)
         ( g x))
       ( H x)
 
@@ -2140,7 +2140,7 @@ abstract
             ( λ x → is-empty (B x)))))
       ( is-finite-coprod
         ( is-finite-base-is-finite-Σ-merely-inhabited
-          ( is-set-subtype (λ x → is-prop-type-trunc-Prop) K)
+          ( is-set-is-subtype (λ x → is-prop-type-trunc-Prop) K)
           ( λ t → pr2 t)
           ( is-finite-equiv
             ( equiv-right-swap-Σ)

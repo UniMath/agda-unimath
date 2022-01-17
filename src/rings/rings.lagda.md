@@ -320,7 +320,7 @@ eq-htpy-hom-Ring R1 R2 f g =
 is-set-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → is-set (hom-Ring R1 R2)
 is-set-hom-Ring R1 R2 =
-  is-trunc-succ-subtype
+  is-trunc-is-subtype
     ( neg-one-𝕋)
     ( is-prop-is-ring-homomorphism-hom-Ab R1 R2)
     ( is-set-hom-Ab (ab-Ring R1) (ab-Ring R2))

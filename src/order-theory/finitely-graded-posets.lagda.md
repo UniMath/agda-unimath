@@ -475,7 +475,7 @@ module _
   emb-element-Finitely-Graded-Subposet :
     element-Finitely-Graded-Subposet ↪ element-Finitely-Graded-Poset X
   emb-element-Finitely-Graded-Subposet =
-    emb-tot emb-face-Finitely-Graded-Subposet
+    tot-emb emb-face-Finitely-Graded-Subposet
 
   map-emb-element-Finitely-Graded-Subposet :
     element-Finitely-Graded-Subposet → element-Finitely-Graded-Poset X
