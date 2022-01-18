@@ -33,9 +33,9 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
   in this guide causes suboptimal readability of the code if applied, please
   notify us and we will try to improve this guide, and possibly our code.
 * The library uses a standard line length of 80 characters.
+* All module headers and standard term definitions should have a single empty line before and after them.
 * The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
 * The library is universe polymorphic. Whenever a type or type family is assumed, it is assigned its own universe level.
-
 
 ### Names
 
@@ -60,10 +60,6 @@ Names may also refer to types of the hypotheses used in the construction. Since 
 * If the variables of a module do not fit on a line, start the variable declarations on a new line, with an indentation of two spaces.
 * If the name of a construction does not fit on a single line with its type declaration, then we start the type declaration on a new line, with an indentation of two additional spaces. If the type specification of a construction then still does not fit on a single line of 80 characters, we start new lines in the type declaration using the same indentation level.
 * Function arrows at line breaks should always go at the end of the line rather than the beginning of the next line.
-
-### Empty lines
-
-* All module headers and standard term definitions should have a single empty line before and after them.
 
 ### Modules
 
