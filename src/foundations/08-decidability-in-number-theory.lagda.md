@@ -1071,89 +1071,65 @@ has-decidable-equality-right-factor d a x y with d (pair a x) (pair a y)
 
 -- We define observational equality of coproducts.
 
-Eq-coprod :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  coprod A B → coprod A B → UU (l1 ⊔ l2)
-Eq-coprod {l1} {l2} A B (inl x) (inl y) = raise (l1 ⊔ l2) (Id x y)
-Eq-coprod {l1} {l2} A B (inl x) (inr y) = raise-empty (l1 ⊔ l2)
-Eq-coprod {l1} {l2} A B (inr x) (inl y) = raise-empty (l1 ⊔ l2)
-Eq-coprod {l1} {l2} A B (inr x) (inr y) = raise (l1 ⊔ l2) (Id x y)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
--- Exercise 8.7 (a)
+  data Eq-coprod : coprod A B → coprod A B → UU (l1 ⊔ l2)
+    where
+    Eq-eq-coprod-inl : {x y : A} → Id x y → Eq-coprod (inl x) (inl y)
+    Eq-eq-coprod-inr : {x y : B} → Id x y → Eq-coprod (inr x) (inr y)
 
-reflexive-Eq-coprod :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  (t : coprod A B) → Eq-coprod A B t t
-reflexive-Eq-coprod {l1} {l2} A B (inl x) = map-raise refl
-reflexive-Eq-coprod {l1} {l2} A B (inr x) = map-raise refl
+  -- Exercise 8.7 (a)
 
-Eq-eq-coprod :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  (s t : coprod A B) → Id s t → Eq-coprod A B s t
-Eq-eq-coprod A B s .s refl = reflexive-Eq-coprod A B s
+  refl-Eq-coprod : (x : coprod A B) → Eq-coprod x x
+  refl-Eq-coprod (inl x) = Eq-eq-coprod-inl refl
+  refl-Eq-coprod (inr x) = Eq-eq-coprod-inr refl
 
-eq-Eq-coprod :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) (s t : coprod A B) →
-  Eq-coprod A B s t → Id s t
-eq-Eq-coprod A B (inl x) (inl x') = ap inl ∘ map-inv-raise
-eq-Eq-coprod A B (inl x) (inr y') = ex-falso ∘ map-inv-raise
-eq-Eq-coprod A B (inr y) (inl x') = ex-falso ∘ map-inv-raise
-eq-Eq-coprod A B (inr y) (inr y') = ap inr ∘ map-inv-raise
+  Eq-eq-coprod : (x y : coprod A B) → Id x y → Eq-coprod x y
+  Eq-eq-coprod x .x refl = refl-Eq-coprod x
 
-is-injective-inl :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-injective (inl {A = X} {B = Y})
-is-injective-inl {l1} {l2} {X} {Y} {x} {y} p =
-  map-inv-raise (Eq-eq-coprod X Y (inl x) (inl y) p)
+  eq-Eq-coprod : (x y : coprod A B) → Eq-coprod x y → Id x y
+  eq-Eq-coprod .(inl x) .(inl x) (Eq-eq-coprod-inl {x} {.x} refl) = refl
+  eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
 
-is-injective-inr :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-injective (inr {A = X} {B = Y})
-is-injective-inr {l1} {l2} {X} {Y} {x} {y} p =
-  map-inv-raise (Eq-eq-coprod X Y (inr x) (inr y) p)
+  is-injective-inl : is-injective {B = coprod A B} inl
+  is-injective-inl refl = refl
 
-neq-inl-inr :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (x : A) (y : B) →
-  ¬ (Id (inl x) (inr y))
-neq-inl-inr {l1} {l2} {A} {B} x y =
-  map-inv-raise ∘ Eq-eq-coprod A B (inl x) (inr y)
+  is-injective-inr : is-injective {B = coprod A B} inr
+  is-injective-inr refl = refl 
 
--- Exercise 8.7 (b)
+  neq-inl-inr :
+    (x : A) (y : B) → ¬ (Id (inl x) (inr y))
+  neq-inl-inr x y ()
 
-has-decidable-equality-coprod :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  has-decidable-equality A → has-decidable-equality B →
-  has-decidable-equality (coprod A B)
-has-decidable-equality-coprod {l1} {l2} {A} {B} d e (inl x) (inl x') =
-  is-decidable-iff
-    ( eq-Eq-coprod A B (inl x) (inl x') ∘ map-raise)
-    ( map-inv-raise ∘ Eq-eq-coprod A B (inl x) (inl x'))
-    ( d x x')
-has-decidable-equality-coprod {l1} {l2} {A} {B} d e (inl x) (inr y') =
-  inr (map-inv-raise ∘ (Eq-eq-coprod A B (inl x) (inr y')))
-has-decidable-equality-coprod {l1} {l2} {A} {B} d e (inr y) (inl x') =
-  inr (map-inv-raise ∘ (Eq-eq-coprod A B (inr y) (inl x')))
-has-decidable-equality-coprod {l1} {l2} {A} {B} d e (inr y) (inr y') =
-  is-decidable-iff
-    ( eq-Eq-coprod A B (inr y) (inr y') ∘ map-raise)
-    ( map-inv-raise ∘ Eq-eq-coprod A B (inr y) (inr y'))
-    ( e y y')
+  neq-inr-inl :
+    (x : B) (y : A) → ¬ (Id (inr x) (inl y))
+  neq-inr-inl x y ()
+  
+  -- Exercise 8.7 (b)
 
-has-decidable-equality-left-summand :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  has-decidable-equality (coprod A B) → has-decidable-equality A
-has-decidable-equality-left-summand {l1} {l2} {A} {B} d x y =
-  is-decidable-iff
-    ( map-inv-raise ∘ Eq-eq-coprod A B (inl x) (inl y))
-    ( eq-Eq-coprod A B (inl x) (inl y) ∘ map-raise)
-    ( d (inl x) (inl y))
+  has-decidable-equality-coprod :
+    has-decidable-equality A → has-decidable-equality B →
+    has-decidable-equality (coprod A B)
+  has-decidable-equality-coprod d e (inl x) (inl y) =
+    is-decidable-iff (ap inl) is-injective-inl (d x y)
+  has-decidable-equality-coprod d e (inl x) (inr y) =
+    inr (neq-inl-inr x y)
+  has-decidable-equality-coprod d e (inr x) (inl y) =
+    inr (neq-inr-inl x y)
+  has-decidable-equality-coprod d e (inr x) (inr y) =
+    is-decidable-iff (ap inr) is-injective-inr (e x y)
 
-has-decidable-equality-right-summand :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  has-decidable-equality (coprod A B) → has-decidable-equality B
-has-decidable-equality-right-summand {l1} {l2} {A} {B} d x y =
-  is-decidable-iff
-    ( map-inv-raise ∘ Eq-eq-coprod A B (inr x) (inr y))
-    ( eq-Eq-coprod A B (inr x) (inr y) ∘ map-raise)
-    ( d (inr x) (inr y))
+  has-decidable-equality-left-summand :
+    has-decidable-equality (coprod A B) → has-decidable-equality A
+  has-decidable-equality-left-summand d x y =
+    is-decidable-iff is-injective-inl (ap inl) (d (inl x) (inl y))
+
+  has-decidable-equality-right-summand :
+    has-decidable-equality (coprod A B) → has-decidable-equality B
+  has-decidable-equality-right-summand d x y =
+    is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
 
 has-decidable-equality-ℤ : has-decidable-equality ℤ
 has-decidable-equality-ℤ =

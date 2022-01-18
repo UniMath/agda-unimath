@@ -1266,7 +1266,7 @@ module _
     (i : I) (a : A i) →
     ( fib-square (f i) h (c i) a) ~
     ( ( fib-square (ind-Σ f) h cone-descent-Σ (pair i a)) ∘
-      ( fib-tot-fib-ftr (λ i → (pr1 (c i))) (pair i a)))
+      ( map-inv-compute-fib-tot (λ i → (pr1 (c i))) (pair i a)))
   triangle-descent-Σ i .(pr1 (c i) a') (pair a' refl) = refl
 
   abstract
@@ -1282,11 +1282,11 @@ module _
           ( λ i a → is-equiv-left-factor
             ( fib-square (f i) h (c i) a)
             ( fib-square (ind-Σ f) h cone-descent-Σ (pair i a))
-            ( fib-tot-fib-ftr (λ i → pr1 (c i)) (pair i a))
+            ( map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))
             ( triangle-descent-Σ i a)
             ( is-fiberwise-equiv-fib-square-is-pullback
               (f i) h (c i) (is-pb-c i) a)
-            ( is-equiv-fib-tot-fib-ftr (λ i → pr1 (c i)) (pair i a))))
+            ( is-equiv-map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))))
 
   abstract
     descent-Σ' : 
@@ -1297,9 +1297,9 @@ module _
         ( λ a → is-equiv-comp
           ( fib-square (f i) h (c i) a)
           ( fib-square (ind-Σ f) h cone-descent-Σ (pair i a))
-          ( fib-tot-fib-ftr (λ i → pr1 (c i)) (pair i a))
+          ( map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))
           ( triangle-descent-Σ i a)
-          ( is-equiv-fib-tot-fib-ftr (λ i → pr1 (c i)) (pair i a))
+          ( is-equiv-map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))
           ( is-fiberwise-equiv-fib-square-is-pullback
             ( ind-Σ f)
             ( h)
@@ -1833,7 +1833,7 @@ abstract
     is-trunc-is-equiv k (fib (ap f) p)
       ( fib-ap-fib-diagonal-map f (triple x y p))
       ( is-equiv-fib-ap-fib-diagonal-map f (triple x y p))
-      ( is-trunc-ap-is-trunc-map k f is-trunc-f x y p)
+      ( is-trunc-map-ap-is-trunc-map k f is-trunc-f x y p)
 
 abstract
   is-trunc-map-is-trunc-diagonal-map :

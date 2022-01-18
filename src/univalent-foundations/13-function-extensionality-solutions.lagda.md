@@ -642,84 +642,82 @@ abstract
 
 -- Bureaucracy
 
-is-prop-is-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → is-prop (is-emb f)
-is-prop-is-emb f =
-  is-prop-Π (λ x → is-prop-Π (λ y → is-subtype-is-equiv (ap f)))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  is-prop-is-injective :
+    is-set A → (f : A → B) → is-prop (is-injective f)
+  is-prop-is-injective H f =
+    is-prop-Π'
+      ( λ x →
+        is-prop-Π'
+          ( λ y → is-prop-function-type (H x y)))
 
-is-emb-Prop :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU-Prop (l1 ⊔ l2)
-pr1 (is-emb-Prop f) = is-emb f
-pr2 (is-emb-Prop f) = is-prop-is-emb f
+  is-injective-Prop : is-set A → (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-injective-Prop H f) = is-injective f
+  pr2 (is-injective-Prop H f) = is-prop-is-injective H f
+  
+  is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
+  is-prop-is-emb f =
+    is-prop-Π (λ x → is-prop-Π (λ y → is-subtype-is-equiv (ap f)))
 
-is-prop-is-trunc-map :
-  (k : 𝕋) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-trunc-map k f)
-is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fib f x))
+  is-emb-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-emb-Prop f) = is-emb f
+  pr2 (is-emb-Prop f) = is-prop-is-emb f
 
-is-prop-is-contr-map :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-contr-map f)
-is-prop-is-contr-map f = is-prop-is-trunc-map neg-two-𝕋 f
+  is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
+  is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fib f x))
 
-is-prop-is-prop-map :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → is-prop (is-prop-map f)
-is-prop-is-prop-map f = is-prop-is-trunc-map neg-one-𝕋 f
+  is-prop-is-contr-map : (f : A → B) → is-prop (is-contr-map f)
+  is-prop-is-contr-map f = is-prop-is-trunc-map neg-two-𝕋 f
 
-is-trunc-map-Prop :
-  (k : 𝕋) {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU-Prop (l1 ⊔ l2)
-pr1 (is-trunc-map-Prop k f) = is-trunc-map k f
-pr2 (is-trunc-map-Prop k f) = is-prop-is-trunc-map k f
+  is-prop-is-prop-map : (f : A → B) → is-prop (is-prop-map f)
+  is-prop-is-prop-map f = is-prop-is-trunc-map neg-one-𝕋 f
 
-is-contr-map-Prop :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU-Prop (l1 ⊔ l2)
-pr1 (is-contr-map-Prop f) = is-contr-map f
-pr2 (is-contr-map-Prop f) = is-prop-is-contr-map f
+  is-trunc-map-Prop : (k : 𝕋) → (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-trunc-map-Prop k f) = is-trunc-map k f
+  pr2 (is-trunc-map-Prop k f) = is-prop-is-trunc-map k f
 
-is-prop-map-Prop :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU-Prop (l1 ⊔ l2)
-pr1 (is-prop-map-Prop f) = is-prop-map f
-pr2 (is-prop-map-Prop f) = is-prop-is-prop-map f
+  is-contr-map-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-contr-map-Prop f) = is-contr-map f
+  pr2 (is-contr-map-Prop f) = is-prop-is-contr-map f
 
-equiv-is-equiv-is-contr-map :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-contr-map f ≃ is-equiv f
-equiv-is-equiv-is-contr-map f =
-  equiv-iff
-    ( is-contr-map-Prop f)
-    ( is-equiv-Prop f)
-    ( is-equiv-is-contr-map)
-    ( is-contr-map-is-equiv)
+  is-prop-map-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-prop-map-Prop f) = is-prop-map f
+  pr2 (is-prop-map-Prop f) = is-prop-is-prop-map f
 
-equiv-is-contr-map-is-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-equiv f ≃ is-contr-map f
-equiv-is-contr-map-is-equiv f =
-  equiv-iff
-    ( is-equiv-Prop f)
-    ( is-contr-map-Prop f)
-    ( is-contr-map-is-equiv)
-    ( is-equiv-is-contr-map)
+  equiv-is-equiv-is-contr-map : (f : A → B) → is-contr-map f ≃ is-equiv f
+  equiv-is-equiv-is-contr-map f =
+    equiv-iff
+      ( is-contr-map-Prop f)
+      ( is-equiv-Prop f)
+      ( is-equiv-is-contr-map)
+      ( is-contr-map-is-equiv)
 
-equiv-is-emb-is-prop-map :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop-map f ≃ is-emb f
-equiv-is-emb-is-prop-map f =
-  equiv-iff
-    ( is-prop-map-Prop f)
-    ( is-emb-Prop f)
-    ( is-emb-is-prop-map)
-    ( is-prop-map-is-emb)
+  equiv-is-contr-map-is-equiv : (f : A → B) → is-equiv f ≃ is-contr-map f
+  equiv-is-contr-map-is-equiv f =
+    equiv-iff
+      ( is-equiv-Prop f)
+      ( is-contr-map-Prop f)
+      ( is-contr-map-is-equiv)
+      ( is-equiv-is-contr-map)
 
-equiv-is-prop-map-is-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-emb f ≃ is-prop-map f
-equiv-is-prop-map-is-emb f =
-  equiv-iff
-    ( is-emb-Prop f)
-    ( is-prop-map-Prop f)
-    ( is-prop-map-is-emb)
-    ( is-emb-is-prop-map)
+  equiv-is-emb-is-prop-map : (f : A → B) → is-prop-map f ≃ is-emb f
+  equiv-is-emb-is-prop-map f =
+    equiv-iff
+      ( is-prop-map-Prop f)
+      ( is-emb-Prop f)
+      ( is-emb-is-prop-map)
+      ( is-prop-map-is-emb)
+
+  equiv-is-prop-map-is-emb : (f : A → B) → is-emb f ≃ is-prop-map f
+  equiv-is-prop-map-is-emb f =
+    equiv-iff
+      ( is-emb-Prop f)
+      ( is-prop-map-Prop f)
+      ( is-prop-map-is-emb)
+      ( is-emb-is-prop-map)
 
 equiv-subtype-equiv :
   {l1 l2 l3 l4 : Level}

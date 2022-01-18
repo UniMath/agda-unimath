@@ -171,7 +171,7 @@ module _
 
   is-set-iso-Precat : (x y : obj-Precat) → is-set (iso-Precat x y)
   is-set-iso-Precat x y =
-    is-set-subtype
+    is-set-is-subtype
       is-prop-is-iso-Precat
       (is-set-type-hom-Precat x y)
       

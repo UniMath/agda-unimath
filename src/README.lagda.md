@@ -102,6 +102,7 @@ open import order-theory.preorders public
 open import order-theory.finite-preorders public
 open import order-theory.posets public
 open import order-theory.finite-posets public
+open import order-theory.finitely-graded-posets public
 ```
 
 ## Univalent Combinatorics

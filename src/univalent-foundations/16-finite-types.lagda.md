@@ -640,8 +640,7 @@ equiv-universal-property-Maybe {l1} {l2} {A} {B} =
 is-decidable-is-exception-Maybe :
   {l : Level} {X : UU l} (x : Maybe X) → is-decidable (is-exception-Maybe x)
 is-decidable-is-exception-Maybe {l} {X} (inl x) =
-  inr
-    (λ p → ex-falso (map-inv-raise (Eq-eq-coprod X unit (inl x) (inr star) p)))
+  inr (λ p → ex-falso (is-empty-eq-coprod-inl-inr x star p))
 is-decidable-is-exception-Maybe (inr star) = inl refl
 
 -- The is-not-exception predicate
@@ -2036,7 +2035,7 @@ abstract
   choice-count-Σ-is-finite-fiber {l1} {l2} {A} {B} K e g H x =
     global-choice-count
       ( count-domain-emb-is-finite-domain-emb e
-        ( emb-fiber-inclusion B K x)
+        ( fiber-inclusion-emb (pair A K) B x)
         ( g x))
       ( H x)
 
@@ -2141,7 +2140,7 @@ abstract
             ( λ x → is-empty (B x)))))
       ( is-finite-coprod
         ( is-finite-base-is-finite-Σ-merely-inhabited
-          ( is-set-subtype (λ x → is-prop-type-trunc-Prop) K)
+          ( is-set-is-subtype (λ x → is-prop-type-trunc-Prop) K)
           ( λ t → pr2 t)
           ( is-finite-equiv
             ( equiv-right-swap-Σ)
