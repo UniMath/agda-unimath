@@ -187,17 +187,61 @@ module _
   leq-type-path-faces-Prepolytope =
     leq-type-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
+  chain-Prepolytope :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  chain-Prepolytope =
+    chain-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  flag-Prepolytope :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  flag-Prepolytope =
+    maximal-chain-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  subtype-flag-Prepolytope :
+    {l : Level} (F : flag-Prepolytope l) →
+    {i : Fin (succ-ℕ k)} → face-Prepolytope i → UU-Prop l
+  subtype-flag-Prepolytope =
+    subtype-maximal-chain-Finitely-Graded-Poset
+      finitely-graded-poset-Prepolytope
+
+```
+
+  (P3) Every flag has precisely one face in each dimension
+
+```agda
+
+module _
+  {l1 l2 l3 : Level} {k : ℕ} (X : Prepolytope l1 l2 l3 k)
+  where
+
+  P3-Polytope-Prop : (l : Level) → UU-Prop (l1 ⊔ l2 ⊔ lsuc l)
+  P3-Polytope-Prop l =
+    Π-Prop
+      ( flag-Prepolytope k X l)
+      ( λ F →
+        Π-Prop
+          ( Fin (succ-ℕ k))
+          ( λ i →
+            is-contr-Prop
+              ( Σ ( face-Prepolytope k X i)
+                  ( λ x → type-Prop (subtype-flag-Prepolytope k X F x)))))
+
+  P3-Polytope : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  P3-Polytope l = type-Prop (P3-Polytope-Prop l)
+
+  is-prop-P3-Polytope : (l : Level) → is-prop (P3-Polytope l)
+  is-prop-P3-Polytope l = is-prop-type-Prop (P3-Polytope-Prop l)
 ```
 
   (P4) We state the diamond condition
 
 ```agda
 
-diamond-condition-Finitely-Graded-Poset :
+diamond-condition-Finitely-Graded-Poset-Prop :
   {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k) →
   UU-Prop (l1 ⊔ l2)
-diamond-condition-Finitely-Graded-Poset zero-ℕ X = raise-unit-Prop _
-diamond-condition-Finitely-Graded-Poset (succ-ℕ k) X =
+diamond-condition-Finitely-Graded-Poset-Prop zero-ℕ X = raise-unit-Prop _
+diamond-condition-Finitely-Graded-Poset-Prop (succ-ℕ k) X =
   Π-Prop
     ( Fin k)
     ( λ i →
@@ -218,3 +262,17 @@ diamond-condition-Finitely-Graded-Poset (succ-ℕ k) X =
                         ( z)
                         ( y)))
                 ( two-ℕ))))
+
+```
+
+## The definition of abstract polytopes
+
+```agda
+
+Polytope :
+  (l1 l2 l3 l4 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4)
+Polytope l1 l2 l3 l4 k =
+  Σ ( Prepolytope l1 l2 l3 k)
+    ( λ X →
+      ( P3-Polytope X l4) ×
+      ( type-Prop (diamond-condition-Finitely-Graded-Poset-Prop k (pr1 X))))

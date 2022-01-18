@@ -614,100 +614,115 @@ module _
     transitive-inclusion-Finitely-Graded-Subposet
 ```
 
-### Chains in preorders
+### Chains in finitely graded posets
 
 ```agda
 
--- module _
---   {l1 l2 : Level} (X : Poset l1 l2)
---   where
+module _
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  where
 
---   is-chain-sub-Poset-Prop :
---     {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
---   is-chain-sub-Poset-Prop = is-chain-sub-Preorder-Prop (preorder-Poset X)
+  module _
+    {l3 : Level}
+    (S : {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset X i → UU-Prop l3)
+    where
+    
+    is-chain-Finitely-Graded-Subposet-Prop : UU-Prop (l1 ⊔ l2 ⊔ l3)
+    is-chain-Finitely-Graded-Subposet-Prop =
+      is-total-Poset-Prop (poset-Finitely-Graded-Subposet X S)
 
---   is-chain-sub-Poset :
---     {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
---   is-chain-sub-Poset = is-chain-sub-Preorder (preorder-Poset X)
+    is-chain-Finitely-Graded-Subposet : UU (l1 ⊔ l2 ⊔ l3)
+    is-chain-Finitely-Graded-Subposet =
+      type-Prop is-chain-Finitely-Graded-Subposet-Prop
+    
+    is-prop-is-chain-Finitely-Graded-Subposet :
+      is-prop is-chain-Finitely-Graded-Subposet
+    is-prop-is-chain-Finitely-Graded-Subposet =
+      is-prop-type-Prop is-chain-Finitely-Graded-Subposet-Prop
+      
+  chain-Finitely-Graded-Poset : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  chain-Finitely-Graded-Poset l = Σ _ (is-chain-Finitely-Graded-Subposet {l})
 
---   is-prop-is-chain-sub-Poset :
---     {l3 : Level} (S : element-Poset X → UU-Prop l3) →
---     is-prop (is-chain-sub-Poset S)
---   is-prop-is-chain-sub-Poset = is-prop-is-chain-sub-Preorder (preorder-Poset X)
+  module _
+    {l : Level} (C : chain-Finitely-Graded-Poset l)
+    where
 
--- chain-Poset :
---   {l1 l2 : Level} (l : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
--- chain-Poset l X = chain-Preorder l (preorder-Poset X)
+    subtype-chain-Finitely-Graded-Poset :
+      {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset X i → UU-Prop l
+    subtype-chain-Finitely-Graded-Poset = pr1 C
 
--- module _
---   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
---   where
+module _
+  {l1 l2 l3 l4 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  (C : chain-Finitely-Graded-Poset X l3) (D : chain-Finitely-Graded-Poset X l4)
+  where
 
---   sub-preorder-chain-Poset : element-Poset X → UU-Prop l3
---   sub-preorder-chain-Poset =
---     sub-preorder-chain-Preorder (preorder-Poset X) C
+  inclusion-chain-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
+  inclusion-chain-Finitely-Graded-Poset-Prop =
+    inclusion-Finitely-Graded-Subposet-Prop X
+      ( subtype-chain-Finitely-Graded-Poset X C)
+      ( subtype-chain-Finitely-Graded-Poset X D)
 
---   element-chain-Poset : UU (l1 ⊔ l3)
---   element-chain-Poset = element-chain-Preorder (preorder-Poset X) C
+  inclusion-chain-Finitely-Graded-Poset : UU (l1 ⊔ l3 ⊔ l4)
+  inclusion-chain-Finitely-Graded-Poset =
+    inclusion-Finitely-Graded-Subposet X
+      ( subtype-chain-Finitely-Graded-Poset X C)
+      ( subtype-chain-Finitely-Graded-Poset X D)
 
--- module _
---   {l1 l2 : Level} (X : Poset l1 l2)
---   where
-  
---   inclusion-chain-Poset-Prop :
---     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
---     UU-Prop (l1 ⊔ l3 ⊔ l4)
---   inclusion-chain-Poset-Prop = inclusion-chain-Preorder-Prop (preorder-Poset X)
+  is-prop-inclusion-chain-Finitely-Graded-Poset :
+    is-prop inclusion-chain-Finitely-Graded-Poset
+  is-prop-inclusion-chain-Finitely-Graded-Poset =
+    is-prop-inclusion-Finitely-Graded-Subposet X
+      ( subtype-chain-Finitely-Graded-Poset X C)
+      ( subtype-chain-Finitely-Graded-Poset X D) 
+```
 
---   inclusion-chain-Poset :
---     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X → UU (l1 ⊔ l3 ⊔ l4)
---   inclusion-chain-Poset = inclusion-chain-Preorder (preorder-Poset X)
+### Maximal chains in preorders
 
---   is-prop-inclusion-chain-Poset :
---     {l3 l4 : Level} (C : chain-Poset l3 X) (D : chain-Poset l4 X) →
---     is-prop (inclusion-chain-Poset C D)
---   is-prop-inclusion-chain-Poset =
---     is-prop-inclusion-chain-Preorder (preorder-Poset X)
--- ```
+```agda
 
--- ### Maximal chains in preorders
+module _
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
+  where
 
--- ```agda
+  module _
+    {l3 : Level} (C : chain-Finitely-Graded-Poset X l3)
+    where
 
--- module _
---   {l1 l2 : Level} (X : Poset l1 l2)
---   where
-  
---   is-maximal-chain-Poset-Prop :
---     {l3 : Level} → chain-Poset l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
---   is-maximal-chain-Poset-Prop =
---     is-maximal-chain-Preorder-Prop (preorder-Poset X)
+    is-maximal-chain-Finitely-Graded-Poset-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+    is-maximal-chain-Finitely-Graded-Poset-Prop =
+      Π-Prop
+        ( chain-Finitely-Graded-Poset X l3)
+        ( λ D → inclusion-chain-Finitely-Graded-Poset-Prop X D C)
 
---   is-maximal-chain-Poset :
---     {l3 : Level} → chain-Poset l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
---   is-maximal-chain-Poset = is-maximal-chain-Preorder (preorder-Poset X)
+    is-maximal-chain-Finitely-Graded-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
+    is-maximal-chain-Finitely-Graded-Poset =
+      type-Prop is-maximal-chain-Finitely-Graded-Poset-Prop
 
---   is-prop-is-maximal-chain-Poset :
---     {l3 : Level} (C : chain-Poset l3 X) → is-prop (is-maximal-chain-Poset C)
---   is-prop-is-maximal-chain-Poset =
---     is-prop-is-maximal-chain-Preorder (preorder-Poset X)
+    is-prop-is-maximal-chain-Finitely-Graded-Poset :
+      is-prop is-maximal-chain-Finitely-Graded-Poset
+    is-prop-is-maximal-chain-Finitely-Graded-Poset =
+      is-prop-type-Prop is-maximal-chain-Finitely-Graded-Poset-Prop
 
--- maximal-chain-Poset :
---   {l1 l2 : Level} (l3 : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)
--- maximal-chain-Poset l3 X = maximal-chain-Preorder l3 (preorder-Poset X)
+  maximal-chain-Finitely-Graded-Poset :
+    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  maximal-chain-Finitely-Graded-Poset l =
+    Σ _ (is-maximal-chain-Finitely-Graded-Poset {l})
 
--- module _
---   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : maximal-chain-Poset l3 X)
---   where
+  module _
+    {l3 : Level} (C : maximal-chain-Finitely-Graded-Poset l3)
+    where
 
---   chain-maximal-chain-Poset : chain-Poset l3 X
---   chain-maximal-chain-Poset = chain-maximal-chain-Preorder (preorder-Poset X) C
+    chain-maximal-chain-Finitely-Graded-Poset :
+      chain-Finitely-Graded-Poset X l3
+    chain-maximal-chain-Finitely-Graded-Poset = pr1 C
 
---   is-maximal-chain-maximal-chain-Poset :
---     is-maximal-chain-Poset X chain-maximal-chain-Poset
---   is-maximal-chain-maximal-chain-Poset =
---     is-maximal-chain-maximal-chain-Preorder (preorder-Poset X) C
+    is-maximal-chain-maximal-chain-Finitely-Graded-Poset :
+      is-maximal-chain-Finitely-Graded-Poset
+        chain-maximal-chain-Finitely-Graded-Poset
+    is-maximal-chain-maximal-chain-Finitely-Graded-Poset = pr2 C
 
---   element-maximal-chain-Poset : UU (l1 ⊔ l3)
---   element-maximal-chain-Poset =
---     element-maximal-chain-Preorder (preorder-Poset X) C
+    subtype-maximal-chain-Finitely-Graded-Poset :
+      {i : Fin (succ-ℕ k)} → face-Finitely-Graded-Poset X i → UU-Prop l3
+    subtype-maximal-chain-Finitely-Graded-Poset =
+      subtype-chain-Finitely-Graded-Poset X
+        chain-maximal-chain-Finitely-Graded-Poset
