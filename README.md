@@ -160,7 +160,7 @@ The characterization of an identity type therefore revolves around the proof of 
 
 A typical example is the characterization of the identity type of the type of equivalences:
 
-```
+```agda
   htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
   htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
 
