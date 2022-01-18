@@ -43,6 +43,8 @@ The naming convention in this library is such that the name of a construction cl
 
 Names may also refer to types of the hypotheses used in the construction. Since the first objective of a name is to describe the type of the constructed term, the description of the hypotheses comes after the description of the conclusion in a name. For example, the term `is-equiv-is-contr-map` is a function of type `is-contr-map f → is-equiv f`, where `f` is a function already assumed. This convention has the advantage that if we have `H : is-contr-map f`, then the term `is-equiv-is-contr-map H` contains the description `is-contr-map` closest to the variable `H` of which it is a description.
 
+Our naming conventions are not to ensure the shortest possible names, and neither to ensure the least amount of typing by the implementers of the library, but to display as accurately as possible what concepts are applied, and hence improve the readability.
+
 * We do not use name space overloading. Unique names should be given to each construction.
 * Names should describe in words the concept of its construction.
 * As a rule of thumb, names should be entirely lower case, with words separated by hyphens.
