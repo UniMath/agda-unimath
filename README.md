@@ -129,10 +129,11 @@ Names may also refer to types of the hypotheses used in the construction. Since 
     proof = some-very-long-proof
   ```
 
-### Function arguments
+### Functions
 
-* Function arguments should be given without extra alignment. We do not align the equality symbol in a function definition.
+* We do not align the arguments or the equality symbol in a function definition.
 * If an argument is unused in a function definition, an underscore may be used.
+* If a clause of a construction does not fit on the same line as the name and variable declaration, we start the definition on a new line with two spaces of additional indentation
 
 ### Types
 
