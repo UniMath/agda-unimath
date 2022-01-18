@@ -63,43 +63,7 @@ Names may also refer to types of the hypotheses used in the construction. Since 
 
 ### Empty lines
 
-* All module headers and standard term definitions should have a single empty line after them.
-* There should be _two_ empty lines between adjacent record or module definitions in order to better distinguish the end of the record or module, as they will already be using single empty lines between internal definitions.
-* For example:
-  ```agda
-  module Test1 where
-
-    def1 : ...
-    def1 = ...
-
-    def2 : ...
-    def2 = ...
-
-
-  module Test2 where
-
-    record Record1 : Set where
-      field
-        field1 : ...
-
-      aux1 : ...
-      aux1 = ...
-
-      aux2 : ...
-      aux2 = ...
-
-
-   record Record2 : Set where
-     field
-       field2 : ...
-
-
-   record1 : Record1
-   record1 = { field1 = ... }
-
-   record2 : Record2
-   record2 = { field2 = ... }
-  ```
+* All module headers and standard term definitions should have a single empty line before and after them.
 
 ### Modules
 
