@@ -20,8 +20,8 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-finite-Poset-Prop : UU-Prop (l1 ⊔ l2)
-  is-finite-Poset-Prop = is-finite-preorder-Prop (preorder-Poset X)
+  is-finite-poset-Prop : UU-Prop (l1 ⊔ l2)
+  is-finite-poset-Prop = is-finite-preorder-Prop (preorder-Poset X)
 
   is-finite-Poset : UU (l1 ⊔ l2)
   is-finite-Poset = is-finite-Preorder (preorder-Poset X)
