@@ -37,7 +37,7 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 * The library is universe polymorphic. Whenever a type or type family is assumed, it is assigned its own universe level.
 
 
-## Naming conventions
+### Names
 
 The naming convention in this library is such that the name of a construction closely matches the type of the construction. For example, the proof that the successor function on the integers is an equivalence has type `is-equiv succ-ℤ`. The name of the proof that the successor function on the integers is an equivalence is therefore `is-equiv-succ-ℤ`. Notice that most names are fully lowercase, and words are separated by hyphens. 
 
