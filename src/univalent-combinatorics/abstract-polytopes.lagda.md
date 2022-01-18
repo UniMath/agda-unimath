@@ -135,93 +135,57 @@ module _
   element-face-Prepolytope =
     element-face-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
---------------------------------------------------------------------------------
-    
-{-
-  type-element-Finitely-Graded-Poset :
-    element-Finitely-Graded-Poset → Fin (succ-ℕ k)
-  type-element-Finitely-Graded-Poset (pair i x) = i
+  type-element-Prepolytope :
+    element-Prepolytope → Fin (succ-ℕ k)
+  type-element-Prepolytope =
+    type-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  face-element-Finitely-Graded-Poset :
-    (x : element-Finitely-Graded-Poset) →
-    face-Finitely-Graded-Poset (type-element-Finitely-Graded-Poset x)
-  face-element-Finitely-Graded-Poset (pair i x) = x
+  face-element-Prepolytope :
+    (x : element-Prepolytope) → face-Prepolytope (type-element-Prepolytope x)
+  face-element-Prepolytope =
+    face-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  module _
-    {i : Fin (succ-ℕ k)} (x : face-Finitely-Graded-Poset i)
-    where
+  path-faces-Prepolytope :
+    {i j : Fin (succ-ℕ k)} →
+    face-Prepolytope i → face-Prepolytope j → UU (l1 ⊔ l2)
+  path-faces-Prepolytope x y =
+    path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope x y
 
-    {- If chains with jumps are never used, we'd like to call the following
-       chains. -}
+  tr-refl-path-faces-Preposet :
+    {i j : Fin (succ-ℕ k)} (p : Id j i) (x : face-Prepolytope j) →
+    path-faces-Prepolytope (tr face-Prepolytope p x) x
+  tr-refl-path-faces-Preposet =
+    tr-refl-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-    data
-      path-faces-Finitely-Graded-Poset :
-        {j : Fin (succ-ℕ k)} (y : face-Finitely-Graded-Poset j) →
-        UU (l1 ⊔ l2)
-        where
-        refl-path-faces-Finitely-Graded-Poset :
-          path-faces-Finitely-Graded-Poset x
-        cons-path-faces-Finitely-Graded-Poset :
-          {j : Fin k} {y : face-Finitely-Graded-Poset (inl-Fin k j)}
-          {z : face-Finitely-Graded-Poset (succ-Fin (inl-Fin k j))} →
-          adjacent-Finitely-Graded-Poset j y z →
-          path-faces-Finitely-Graded-Poset y →
-          path-faces-Finitely-Graded-Poset z
+  concat-path-faces-Prepolytope :
+    {i1 i2 i3 : Fin (succ-ℕ k)} {x : face-Prepolytope i1}
+    {y : face-Prepolytope i2} {z : face-Prepolytope i3} →
+    path-faces-Prepolytope y z → path-faces-Prepolytope x y →
+    path-faces-Prepolytope x z
+  concat-path-faces-Prepolytope =
+    concat-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  tr-refl-path-faces-Finitely-Graded-Poset :
-    {i j : Fin (succ-ℕ k)} (p : Id j i) (x : face-Finitely-Graded-Poset j) →
-    path-faces-Finitely-Graded-Poset
-      ( tr face-Finitely-Graded-Poset p x)
-      ( x)
-  tr-refl-path-faces-Finitely-Graded-Poset refl x =
-    refl-path-faces-Finitely-Graded-Poset
+  path-vertices-Prepolytope : (x y : element-Prepolytope) → UU (l1 ⊔ l2)
+  path-vertices-Prepolytope =
+    path-vertices-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  concat-path-faces-Finitely-Graded-Poset :
-    {i1 i2 i3 : Fin (succ-ℕ k)}
-    {x : face-Finitely-Graded-Poset i1}
-    {y : face-Finitely-Graded-Poset i2}
-    {z : face-Finitely-Graded-Poset i3} →
-    path-faces-Finitely-Graded-Poset y z →
-    path-faces-Finitely-Graded-Poset x y →
-    path-faces-Finitely-Graded-Poset x z
-  concat-path-faces-Finitely-Graded-Poset
-    refl-path-faces-Finitely-Graded-Poset K = K
-  concat-path-faces-Finitely-Graded-Poset
-    ( cons-path-faces-Finitely-Graded-Poset x H) K =
-    cons-path-faces-Finitely-Graded-Poset x
-      ( concat-path-faces-Finitely-Graded-Poset H K)
+  refl-path-vertices-Prepolytope :
+    (x : element-Prepolytope) → path-vertices-Prepolytope x x
+  refl-path-vertices-Prepolytope =
+    refl-path-vertices-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  path-vertices-Finitely-Graded-Poset :
-    (x y : element-Finitely-Graded-Poset) → UU (l1 ⊔ l2)
-  path-vertices-Finitely-Graded-Poset (pair i x) (pair j y) =
-    path-faces-Finitely-Graded-Poset x y
+  concat-path-vertices-Prepolytope :
+    (x y z : element-Prepolytope) →
+    path-vertices-Prepolytope y z → path-vertices-Prepolytope x y →
+    path-vertices-Prepolytope x z
+  concat-path-vertices-Prepolytope =
+    concat-path-vertices-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  refl-path-vertices-Finitely-Graded-Poset :
-    (x : element-Finitely-Graded-Poset) → path-vertices-Finitely-Graded-Poset x x
-  refl-path-vertices-Finitely-Graded-Poset x =
-    refl-path-faces-Finitely-Graded-Poset
-
-  concat-path-vertices-Finitely-Graded-Poset :
-    (x y z : element-Finitely-Graded-Poset) →
-    path-vertices-Finitely-Graded-Poset y z →
-    path-vertices-Finitely-Graded-Poset x y →
-    path-vertices-Finitely-Graded-Poset x z
-  concat-path-vertices-Finitely-Graded-Poset x y z =
-    concat-path-faces-Finitely-Graded-Poset
-
-  leq-type-path-faces-Finitely-Graded-Poset :
-    {i1 i2 : Fin (succ-ℕ k)} (x : face-Finitely-Graded-Poset i1)
-    (y : face-Finitely-Graded-Poset i2) →
-    path-faces-Finitely-Graded-Poset x y → leq-Fin i1 i2
-  leq-type-path-faces-Finitely-Graded-Poset {i1} x .x
-    refl-path-faces-Finitely-Graded-Poset = refl-leq-Fin i1
-  leq-type-path-faces-Finitely-Graded-Poset {i1} x y
-    ( cons-path-faces-Finitely-Graded-Poset {i3} {z} H K) =
-    transitive-leq-Fin {succ-ℕ k} {i1}
-      ( leq-type-path-faces-Finitely-Graded-Poset x z K)
-      ( leq-succ-Fin i3)
-      -}
-
+  leq-type-path-faces-Prepolytope :
+    {i1 i2 : Fin (succ-ℕ k)} (x : face-Prepolytope i1)
+    (y : face-Prepolytope i2) → path-faces-Prepolytope x y → leq-Fin i1 i2
+  leq-type-path-faces-Prepolytope =
+    leq-type-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
 ```
 
