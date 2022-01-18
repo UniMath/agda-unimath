@@ -45,28 +45,20 @@ Names may also refer to types of the hypotheses used in the construction. Since 
 
 * We do not use name space overloading. Unique names should be given to each
   construction.
-
 * As a rule of thumb, names should be entirely lower case, with words separated
   by hyphens.
-
 * Important concepts can be capitalized. Usually, capitalized concepts form
   categories. Examples include `UU`, `Prop`, `Set`, `Semigroup`, `Monoid`,
   `Group`, `Preorder`, `Poset`, `Precat`, `Cat`, `Graph`, `Undirected-Graph`.
-
 * Names should describe in words the concept of its construction.
-
 * Names describe the object that is constructed first. For some theorems, the
   later part of a name contains descriptions of the hypotheses.
-
 * Names never refer to variables.
-
 * Symbols can only be used in accordance with established mathematical practice.
-
 * If a symbol is not available, the concept is described in words. For example,
   the equality symbol = is not available to the user to assert an equality.
   Hence, we write Id x y to assert equality, referring to the identity type, and
   we do not use a new symbol.
-
 * Readability of the code has a high priority. Therefore we try to aviod
   subtly different variations of the same symbol.
 
