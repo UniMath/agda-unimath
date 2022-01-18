@@ -10,80 +10,102 @@ module univalent-combinatorics.abstract-polytopes where
 open import order-theory public
 ```
 
-## Axiom P1 of polytopes
+## The axioms of Abstract Polytopes
 
-The first axiom of polytopes asserts that polytopes have a least and a largest element.
+We define abstract polytopes as finitely graded posets satisfying certain axioms. In the classical definition, the grading is a consequence of the axioms. Here, we take finitely graded posets as our starting point
+
+The first axiom of polytopes asserts that polytopes have a least and a largest element. This is already defined as
+
+`least-and-largest-element-finitely-graded-poset-Prop`.
+
+Next, we assert the diamond condition for abstract polytopes.
 
 ```agda
+
+diamond-condition-finitely-graded-poset-Prop :
+  {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k) →
+  UU-Prop (l1 ⊔ l2)
+diamond-condition-finitely-graded-poset-Prop {k = zero-ℕ} X = raise-unit-Prop _
+diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
+  Π-Prop
+    ( Fin k)
+    ( λ i →
+      Π-Prop
+        ( face-Finitely-Graded-Poset X (inl-Fin (succ-ℕ k) (inl-Fin k i)))
+        ( λ x →
+          Π-Prop
+            ( face-Finitely-Graded-Poset X
+              ( succ-Fin (succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
+            ( λ y →
+              has-cardinality-Prop
+                ( Σ ( face-Finitely-Graded-Poset X
+                      ( succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i))))
+                    ( λ z →
+                      adjacent-Finitely-Graded-Poset X (inl-Fin k i) x z ×
+                      adjacent-Finitely-Graded-Poset X
+                        ( succ-Fin (inl-Fin k i))
+                        ( z)
+                        ( y)))
+                ( two-ℕ))))
 
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
   where
+  
+  diamond-condition-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+  diamond-condition-Finitely-Graded-Poset =
+    type-Prop (diamond-condition-finitely-graded-poset-Prop X)
 
-  P1-Polytope-Prop : UU-Prop (l1 ⊔ l2)
-  P1-Polytope-Prop =
-    prod-Prop
-      ( least-element-Finitely-Graded-Poset-Prop X)
-      ( largest-element-Finitely-Graded-Poset-Prop X)
-
-  P1-Polytope : UU (l1 ⊔ l2)
-  P1-Polytope = type-Prop P1-Polytope-Prop
-
-  is-prop-P1-Polytope : is-prop P1-Polytope
-  is-prop-P1-Polytope = is-prop-type-Prop P1-Polytope-Prop
+  is-prop-diamond-condition-Finitely-Graded-Poset :
+    is-prop diamond-condition-Finitely-Graded-Poset
+  is-prop-diamond-condition-Finitely-Graded-Poset =
+    is-prop-type-Prop (diamond-condition-finitely-graded-poset-Prop X)
 ```
 
-## Axiom P2 of polytopes
+## Some terminology of polytopes
 
-The second axiom of polytopes asserts that every maximal chain has k elements. Here, the natural number k is the rank of the polytope. In classical mathematics, this axiom implies that the underlying poset of a polytope is graded. Here, we will assume that polytopes come equipped with a grading.
-
-  (P2') The poset X is graded, and the maximal chains in X have exactly (k + 1) elements.
+We introduce the notion of prepolytopes to be finitely graded posets equipped with a least and a largest element, and satisfying the diamond condition. Before we state the remaining conditions of polytopes, we introduce some terminology
 
 ```agda
-module _
-  {l1 l2 : Level} (l3 : Level) {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
-  where  
-  
-  P2-Polytope-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  P2-Polytope-Prop =
-    Π-Prop
-      ( maximal-chain-Poset l3 (poset-Finitely-Graded-Poset X))
-      ( λ C →
-        has-cardinality-Prop
-          ( element-maximal-chain-Poset (poset-Finitely-Graded-Poset X) C)
-          ( succ-ℕ k))
 
-  P2-Polytope : UU (l1 ⊔ l2 ⊔ lsuc l3)
-  P2-Polytope = type-Prop P2-Polytope-Prop
-
-  is-prop-P2-Polytope : is-prop P2-Polytope
-  is-prop-P2-Polytope = is-prop-type-Prop P2-Polytope-Prop
-
-Prepolytope : (l1 l2 l3 : Level) → ℕ → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Prepolytope l1 l2 l3 k =
+Prepolytope : (l1 l2 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2)
+Prepolytope l1 l2 k =
   Σ ( Finitely-Graded-Poset l1 l2 k)
-    ( λ X → P1-Polytope X × P2-Polytope l3 X)
+    ( λ X →
+      least-and-largest-element-Finitely-Graded-Poset X ×
+      diamond-condition-Finitely-Graded-Poset X)
 
 module _
-  {l1 l2 l3 : Level} (k : ℕ) (X : Prepolytope l1 l2 l3 k)
+  {l1 l2 : Level} {k : ℕ} (X : Prepolytope l1 l2 k)
   where
 
   finitely-graded-poset-Prepolytope : Finitely-Graded-Poset l1 l2 k
   finitely-graded-poset-Prepolytope = pr1 X
 
-  P1-polytope-Prepolytope : P1-Polytope finitely-graded-poset-Prepolytope
-  P1-polytope-Prepolytope = pr1 (pr2 X)
+  least-and-largest-element-Prepolytope :
+    least-and-largest-element-Finitely-Graded-Poset
+      finitely-graded-poset-Prepolytope
+  least-and-largest-element-Prepolytope = pr1 (pr2 X)
 
-  P2-polytope-Prepolytope : P2-Polytope l3 finitely-graded-poset-Prepolytope
-  P2-polytope-Prepolytope = pr2 (pr2 X)
+  least-element-Prepolytope :
+    least-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  least-element-Prepolytope = pr1 least-and-largest-element-Prepolytope
+
+  largest-element-Prepolytope :
+    largest-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  largest-element-Prepolytope = pr2 least-and-largest-element-Prepolytope
+
+  diamond-condition-Prepolytope :
+    diamond-condition-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  diamond-condition-Prepolytope = pr2 (pr2 X)
 
   module _
     (i : Fin (succ-ℕ k))
     where
 
-    face-set-Prepolytope : UU-Set l1
-    face-set-Prepolytope =
-      face-set-Finitely-Graded-Poset finitely-graded-poset-Prepolytope i
+    face-prepolytope-Set : UU-Set l1
+    face-prepolytope-Set =
+      face-finitely-graded-poset-Set finitely-graded-poset-Prepolytope i
 
     face-Prepolytope : UU l1
     face-Prepolytope =
@@ -98,9 +120,9 @@ module _
     (z : face-Prepolytope (succ-Fin (inl-Fin k i)))
     where
 
-    adjacent-Prepolytope-Prop : UU-Prop l2
-    adjacent-Prepolytope-Prop =
-      adjacent-Finitely-Graded-Poset-Prop
+    adjancent-prepolytope-Prop : UU-Prop l2
+    adjancent-prepolytope-Prop =
+      adjacent-finitely-graded-poset-Prop
         ( finitely-graded-poset-Prepolytope)
         ( i)
         ( y)
@@ -118,9 +140,9 @@ module _
         ( y)
         ( z)
 
-  element-set-Prepolytope : UU-Set l1
-  element-set-Prepolytope =
-    element-set-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  element-prepolytope-Set : UU-Set l1
+  element-prepolytope-Set =
+    element-finitely-graded-poset-Set finitely-graded-poset-Prepolytope
 
   element-Prepolytope : UU l1
   element-Prepolytope =
@@ -165,21 +187,21 @@ module _
   concat-path-faces-Prepolytope =
     concat-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  path-vertices-Prepolytope : (x y : element-Prepolytope) → UU (l1 ⊔ l2)
-  path-vertices-Prepolytope =
-    path-vertices-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  path-elements-Prepolytope : (x y : element-Prepolytope) → UU (l1 ⊔ l2)
+  path-elements-Prepolytope =
+    path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  refl-path-vertices-Prepolytope :
-    (x : element-Prepolytope) → path-vertices-Prepolytope x x
-  refl-path-vertices-Prepolytope =
-    refl-path-vertices-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  refl-path-elements-Prepolytope :
+    (x : element-Prepolytope) → path-elements-Prepolytope x x
+  refl-path-elements-Prepolytope =
+    refl-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  concat-path-vertices-Prepolytope :
+  concat-path-elements-Prepolytope :
     (x y z : element-Prepolytope) →
-    path-vertices-Prepolytope y z → path-vertices-Prepolytope x y →
-    path-vertices-Prepolytope x z
-  concat-path-vertices-Prepolytope =
-    concat-path-vertices-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+    path-elements-Prepolytope y z → path-elements-Prepolytope x y →
+    path-elements-Prepolytope x z
+  concat-path-elements-Prepolytope =
+    concat-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
   leq-type-path-faces-Prepolytope :
     {i1 i2 : Fin (succ-ℕ k)} (x : face-Prepolytope i1)
@@ -187,13 +209,67 @@ module _
   leq-type-path-faces-Prepolytope =
     leq-type-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  chain-Prepolytope :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  eq-path-elements-Prepolytope :
+    (x y : element-Prepolytope)
+    (p : Id (type-element-Prepolytope x) (type-element-Prepolytope y)) →
+    path-elements-Prepolytope x y → Id x y
+  eq-path-elements-Prepolytope =
+    eq-path-elements-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  eq-path-faces-Prepolytope :
+    {i : Fin (succ-ℕ k)} (x y : face-Prepolytope i) →
+    path-faces-Prepolytope x y → Id x y
+  eq-path-faces-Prepolytope =
+    eq-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  antisymmetric-path-elements-Prepolytope :
+    (x y : element-Prepolytope) → path-elements-Prepolytope x y →
+    path-elements-Prepolytope y x → Id x y
+  antisymmetric-path-elements-Prepolytope =
+    antisymmetric-path-elements-Finitely-Graded-Poset
+      finitely-graded-poset-Prepolytope
+
+  module _
+    (x y : element-Prepolytope)
+    where
+
+    leq-prepolytope-Prop : UU-Prop (l1 ⊔ l2)
+    leq-prepolytope-Prop =
+      leq-finitely-graded-poset-Prop finitely-graded-poset-Prepolytope x y
+
+    leq-Prepolytope : UU (l1 ⊔ l2)
+    leq-Prepolytope =
+      leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope x y
+
+    is-prop-leq-Prepolytope : is-prop leq-Prepolytope
+    is-prop-leq-Prepolytope =
+      is-prop-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope x y
+
+  refl-leq-Prepolytope : (x : element-Prepolytope) → leq-Prepolytope x x
+  refl-leq-Prepolytope =
+    refl-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  transitive-leq-Prepolytope :
+    (x y z : element-Prepolytope) →
+    leq-Prepolytope y z → leq-Prepolytope x y → leq-Prepolytope x z
+  transitive-leq-Prepolytope =
+    transitive-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  antisymmetric-leq-Prepolytope :
+    (x y : element-Prepolytope) →
+    leq-Prepolytope x y → leq-Prepolytope y x → Id x y
+  antisymmetric-leq-Prepolytope =
+    antisymmetric-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+
+  poset-Prepolytope : Poset l1 (l1 ⊔ l2)
+  poset-Prepolytope =
+    poset-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+    
+  chain-Prepolytope : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
   chain-Prepolytope =
     chain-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  flag-Prepolytope :
-    (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  flag-Prepolytope : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
   flag-Prepolytope =
     maximal-chain-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
@@ -204,65 +280,90 @@ module _
     subtype-maximal-chain-Finitely-Graded-Poset
       finitely-graded-poset-Prepolytope
 
+  face-least-element-Prepolytope : face-Prepolytope zero-Fin
+  face-least-element-Prepolytope = pr1 least-element-Prepolytope
+
+  element-least-element-Prepolytope : element-Prepolytope
+  element-least-element-Prepolytope =
+    element-face-Prepolytope face-least-element-Prepolytope
+
+  is-least-element-least-element-Prepolytope :
+    (x : element-Prepolytope) →
+    leq-Prepolytope element-least-element-Prepolytope x
+  is-least-element-least-element-Prepolytope =
+    pr2 least-element-Prepolytope
+
+  face-largest-element-Prepolytope : face-Prepolytope neg-one-Fin
+  face-largest-element-Prepolytope = pr1 largest-element-Prepolytope
+
+  element-largest-element-Prepolytope : element-Prepolytope
+  element-largest-element-Prepolytope =
+    element-face-Prepolytope face-largest-element-Prepolytope
+
+  is-largest-element-largest-element-Prepolytope :
+    (x : element-Prepolytope) →
+    leq-Prepolytope x element-largest-element-Prepolytope
+  is-largest-element-largest-element-Prepolytope =
+    pr2 largest-element-Prepolytope
+
+  is-contr-face-bottom-dimension-Prepolytope :
+    is-contr (face-Prepolytope zero-Fin)
+  pr1 is-contr-face-bottom-dimension-Prepolytope =
+    face-least-element-Prepolytope
+  pr2 is-contr-face-bottom-dimension-Prepolytope x =
+    apply-universal-property-trunc-Prop
+      ( is-least-element-least-element-Prepolytope (element-face-Prepolytope x))
+      ( Id-Prop
+        ( face-prepolytope-Set zero-Fin)
+        ( face-least-element-Prepolytope)
+        ( x))
+      ( λ p → eq-path-faces-Prepolytope face-least-element-Prepolytope x p)
+
+  is-contr-face-top-dimension-Prepolytope :
+    is-contr (face-Prepolytope neg-one-Fin)
+  pr1 is-contr-face-top-dimension-Prepolytope =
+    face-largest-element-Prepolytope
+  pr2 is-contr-face-top-dimension-Prepolytope x =
+    apply-universal-property-trunc-Prop
+      ( is-largest-element-largest-element-Prepolytope
+        ( element-face-Prepolytope x))
+      ( Id-Prop
+        ( face-prepolytope-Set neg-one-Fin)
+        ( face-largest-element-Prepolytope)
+        ( x))
+      ( λ p →
+        inv (eq-path-faces-Prepolytope x face-largest-element-Prepolytope p))
 ```
 
-  (P3) Every flag has precisely one face in each dimension
+## Axiom P2 of polytopes
+
+The second axiom of polytopes asserts that every maximal chain has k elements. Here, we will assert that every maximal chain has exactly one face of each dimension.
+
 
 ```agda
 
 module _
-  {l1 l2 l3 : Level} {k : ℕ} (X : Prepolytope l1 l2 l3 k)
+  {l1 l2 : Level} (l : Level) {k : ℕ} (X : Prepolytope l1 l2 k)
   where
 
-  P3-Polytope-Prop : (l : Level) → UU-Prop (l1 ⊔ l2 ⊔ lsuc l)
-  P3-Polytope-Prop l =
+  condition-P2-prepolytope-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l)
+  condition-P2-prepolytope-Prop =
     Π-Prop
-      ( flag-Prepolytope k X l)
+      ( flag-Prepolytope X l)
       ( λ F →
         Π-Prop
           ( Fin (succ-ℕ k))
           ( λ i →
             is-contr-Prop
-              ( Σ ( face-Prepolytope k X i)
-                  ( λ x → type-Prop (subtype-flag-Prepolytope k X F x)))))
+              ( Σ ( face-Prepolytope X i)
+                  ( λ x → type-Prop (subtype-flag-Prepolytope X F x)))))
 
-  P3-Polytope : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  P3-Polytope l = type-Prop (P3-Polytope-Prop l)
+  condition-P2-Prepolytope : UU (l1 ⊔ l2 ⊔ lsuc l)
+  condition-P2-Prepolytope = type-Prop condition-P2-prepolytope-Prop
 
-  is-prop-P3-Polytope : (l : Level) → is-prop (P3-Polytope l)
-  is-prop-P3-Polytope l = is-prop-type-Prop (P3-Polytope-Prop l)
-```
-
-  (P4) We state the diamond condition
-
-```agda
-
-diamond-condition-Finitely-Graded-Poset-Prop :
-  {l1 l2 : Level} (k : ℕ) (X : Finitely-Graded-Poset l1 l2 k) →
-  UU-Prop (l1 ⊔ l2)
-diamond-condition-Finitely-Graded-Poset-Prop zero-ℕ X = raise-unit-Prop _
-diamond-condition-Finitely-Graded-Poset-Prop (succ-ℕ k) X =
-  Π-Prop
-    ( Fin k)
-    ( λ i →
-      Π-Prop
-        ( face-Finitely-Graded-Poset X (inl-Fin (succ-ℕ k) (inl-Fin k i)))
-        ( λ x →
-          Π-Prop
-            ( face-Finitely-Graded-Poset X
-              ( succ-Fin (succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
-            ( λ y →
-              has-cardinality-Prop
-                ( Σ ( face-Finitely-Graded-Poset X
-                      ( succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i))))
-                    ( λ z →
-                      adjacent-Finitely-Graded-Poset X (inl-Fin k i) x z ×
-                      adjacent-Finitely-Graded-Poset X
-                        ( succ-Fin (inl-Fin k i))
-                        ( z)
-                        ( y)))
-                ( two-ℕ))))
-
+  is-prop-condition-P2-Prepolytope : is-prop condition-P2-Prepolytope
+  is-prop-condition-P2-Prepolytope =
+    is-prop-type-Prop condition-P2-prepolytope-Prop
 ```
 
 ## The definition of abstract polytopes
@@ -270,9 +371,9 @@ diamond-condition-Finitely-Graded-Poset-Prop (succ-ℕ k) X =
 ```agda
 
 Polytope :
-  (l1 l2 l3 l4 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4)
-Polytope l1 l2 l3 l4 k =
-  Σ ( Prepolytope l1 l2 l3 k)
+  (l1 l2 l3 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+Polytope l1 l2 l3 k =
+  Σ ( Prepolytope l1 l2 k)
     ( λ X →
-      ( P3-Polytope X l4) ×
-      ( type-Prop (diamond-condition-Finitely-Graded-Poset-Prop k (pr1 X))))
+      ( condition-P2-Prepolytope l3 X) ×
+      unit)
