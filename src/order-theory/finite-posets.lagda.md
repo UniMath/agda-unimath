@@ -21,7 +21,7 @@ module _
   where
 
   is-finite-Poset-Prop : UU-Prop (l1 ⊔ l2)
-  is-finite-Poset-Prop = is-finite-Preorder-Prop (preorder-Poset X)
+  is-finite-Poset-Prop = is-finite-preorder-Prop (preorder-Poset X)
 
   is-finite-Poset : UU (l1 ⊔ l2)
   is-finite-Poset = is-finite-Preorder (preorder-Poset X)
