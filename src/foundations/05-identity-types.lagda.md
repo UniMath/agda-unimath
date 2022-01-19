@@ -7,84 +7,86 @@ title: Formalisation of the Symmetry Book
 
 module foundations.05-identity-types where
 
-import foundations.04-inductive-types
-open foundations.04-inductive-types public
+open import foundations.04-inductive-types public
+```
 
---------------------------------------------------------------------------------
+##  The identity type
 
--- Section 5.1
-
--- Definition 5.1.1
-
-{- We introduce the identity type. -}
-
+```agda
 data Id {i : Level} {A : UU i} (x : A) : A → UU i where
   refl : Id x x
 
-{- In the following definition we give a construction of path induction.
-   However, in the development of this library we will mostly use Agda's
-   built-in methods to give constructions by path induction. -}
+{-# BUILTIN EQUALITY Id  #-}
+```
 
+In the following definition we give a construction of path induction.
+However, in the development of this library we will mostly use Agda's
+built-in methods to give constructions by path induction.
+
+```agda
 ind-Id :
   {i j : Level} {A : UU i} (x : A) (B : (y : A) (p : Id x y) → UU j) →
   (B x refl) → (y : A) (p : Id x y) → B y p
 ind-Id x B b y refl = b
+```
 
---------------------------------------------------------------------------------
 
--- Section 5.2 The groupoidal structure of types
+## The groupoidal structure of types
 
--- Definition 5.2.1
-
+```agda
 _∙_ :
   {i : Level} {A : UU i} {x y z : A} → Id x y → Id y z → Id x z
 refl ∙ q = q
+```
 
+```agda
 concat :
   {i : Level} {A : UU i} {x y : A} → Id x y → (z : A) → Id y z → Id x z
 concat p z q = p ∙ q
+```
 
--- Definition 5.2.2
-
+```agda
 inv :
   {i : Level} {A : UU i} {x y : A} → Id x y → Id y x
 inv refl = refl
+```
 
--- Definition 5.2.3
-
+```agda
 assoc :
   {i : Level} {A : UU i} {x y z w : A} (p : Id x y) (q : Id y z)
   (r : Id z w) → Id ((p ∙ q) ∙ r) (p ∙ (q ∙ r))
 assoc refl q r = refl
+```
 
--- Definition 5.2.4
-
+```agda
 left-unit :
   {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (refl ∙ p) p
 left-unit = refl
+```
 
+```agda
 right-unit :
   {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (p ∙ refl) p
 right-unit {p = refl} = refl
+```
 
--- Definition 5.2.5
-
+```agda
 left-inv :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) →
   Id ((inv p) ∙ p) refl
 left-inv refl = refl
+```
 
+```agda
 right-inv :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) →
   Id (p ∙ (inv p)) refl
 right-inv refl = refl
+```
 
---------------------------------------------------------------------------------
+## The action on paths of functions
 
--- Section 5.3 The action on paths of functions
-
--- Definition 5.3.1
-
+```agda
 ap :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A} (p : Id x y) →
   Id (f x) (f y)
@@ -143,9 +145,9 @@ ap-add-ℤ p q = ap-binary add-ℤ p q
 ap-mul-ℤ :
   {x y x' y' : ℤ} → Id x x' → Id y y' → Id (mul-ℤ x y) (mul-ℤ x' y')
 ap-mul-ℤ p q = ap-binary mul-ℤ p q
+```
 
--- Definition 5.3.2
-
+```agda
 ap-refl :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) (x : A) →
   Id (ap f (refl {_} {_} {x})) refl
@@ -160,29 +162,31 @@ ap-inv :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
   (p : Id x y) → Id (ap f (inv p)) (inv (ap f p))
 ap-inv f refl = refl
+```
 
---------------------------------------------------------------------------------
+## Transport
 
--- Section 5.4 Transport
-
--- Definition 5.4.1
-
+```agda
 tr :
   {i j : Level} {A : UU i} (B : A → UU j) {x y : A} (p : Id x y) → B x → B y
 tr B refl b = b
+```
 
--- Definition 5.4.2
-
+```agda
 apd :
   {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) {x y : A}
   (p : Id x y) → Id (tr B p (f x)) (f y)
 apd f refl = refl
+```
 
+```agda
 path-over :
   {i j : Level} {A :  UU i} (B : A → UU j) {x x' : A} (p : Id x x') →
   B x → B x' → UU j
 path-over B p y y' = Id (tr B p y) y'
+```
 
+```agda
 refl-path-over :
   {i j : Level} {A : UU i} (B : A → UU j) (x : A) (y : B x) →
   path-over B refl y y

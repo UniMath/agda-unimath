@@ -96,7 +96,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
         ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
           ( commutative-add-ℕ
             ( mul-ℕ m (succ-ℕ d))
-            ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙ 
+            ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙
       ( ( ap
           ( mul-ℕ' (succ-ℕ d))
           ( is-additive-right-inverse-dist-ℕ m n
@@ -198,8 +198,8 @@ cong-zero-ℕ' :
 cong-zero-ℕ' k =
   symm-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
 
-{- Before we show that cong-ℕ is transitive, we give some lemmas that will help 
-   us showing that cong is an equivalence relation. They are basically 
+{- Before we show that cong-ℕ is transitive, we give some lemmas that will help
+   us showing that cong is an equivalence relation. They are basically
    bureaucracy, manipulating already known facts. -}
 
 -- Three elements can be ordered in 6 possible ways
@@ -230,11 +230,11 @@ order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
   order-three-elements-ℕ x y z
 
 {- We show that the distances of any three elements always add up, when they
-   are added up in the right way :) -} 
+   are added up in the right way :) -}
 
 cases-dist-ℕ :
   (x y z : ℕ) → UU lzero
-cases-dist-ℕ x y z = 
+cases-dist-ℕ x y z =
   coprod
     ( Id (add-ℕ (dist-ℕ x y) (dist-ℕ y z)) (dist-ℕ x z))
     ( coprod
@@ -246,7 +246,7 @@ is-total-dist-ℕ :
 is-total-dist-ℕ x y z with order-three-elements-ℕ x y z
 is-total-dist-ℕ x y z | inl (inl (pair H1 H2)) =
   inl (triangle-equality-dist-ℕ x y z H1 H2)
-is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) = 
+is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
   inr
     ( inl
       ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
@@ -263,7 +263,7 @@ is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
     ( inr
       ( ( ap (add-ℕ (dist-ℕ x z)) (symmetric-dist-ℕ x y)) ∙
         ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
-          ( triangle-equality-dist-ℕ y x z H1 H2)))) 
+          ( triangle-equality-dist-ℕ y x z H1 H2))))
 is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
   inr
     ( inr
@@ -297,7 +297,7 @@ concatenate-cong-eq-cong-ℕ :
   cong-ℕ k x1 x2 → Id x2 x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
 concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
   trans-cong-ℕ k x y z H K
-  
+
 concatenate-eq-cong-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
   Id x1 x2 → cong-ℕ k x2 x3 → Id x3 x4 →
@@ -428,17 +428,17 @@ mod-succ-ℕ k zero-ℕ = zero-Fin
 mod-succ-ℕ k (succ-ℕ n) = succ-Fin (mod-succ-ℕ k n)
 
 mod-two-ℕ : ℕ → Fin two-ℕ
-mod-two-ℕ = mod-succ-ℕ one-ℕ
+mod-two-ℕ = mod-succ-ℕ 1
 
-mod-three-ℕ : ℕ → Fin three-ℕ
-mod-three-ℕ = mod-succ-ℕ two-ℕ
+mod-three-ℕ : ℕ → Fin 3
+mod-three-ℕ = mod-succ-ℕ 2
 
 {- Lemma 7.4.4 -}
 
 -- We prove three things to help calculating with nat-Fin.
 
 is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (zero-Fin {k}))
-is-zero-nat-zero-Fin {zero-ℕ} = refl 
+is-zero-nat-zero-Fin {zero-ℕ} = refl
 is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
 
 nat-skip-zero-Fin :
@@ -630,7 +630,7 @@ cong-add-Fin {succ-ℕ k} x y =
 cong-neg-Fin :
   {k : ℕ} (x : Fin k) →
   cong-ℕ k (nat-Fin (neg-Fin x)) (dist-ℕ (nat-Fin x) k)
-cong-neg-Fin {succ-ℕ k} x = 
+cong-neg-Fin {succ-ℕ k} x =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin x) (succ-ℕ k))
 
 {- Proposition 7.5.3 -}
@@ -1647,7 +1647,7 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
       ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (succ-ℕ k))))
     ( left-unit-law-add-ℕ (nat-Fin x))
 
-{- Any natural number of the form constant-ℕ k x is strictly less than any 
+{- Any natural number of the form constant-ℕ k x is strictly less than any
    natural number of the form unary-op-ℕ k y m -}
 
 le-constant-unary-op-ℕ :
@@ -1718,7 +1718,7 @@ is-injective-convert-based-ℕ
            ( is-injective-add-ℕ' (nat-Fin x) p))))
 
 -- Exercise 7.10 (c)
-  
+
 {- We show that the map convert-based-ℕ has an inverse. -}
 
 -- The zero-element of the (k+1)-ary natural numbers
@@ -1735,7 +1735,7 @@ succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
   unary-op-based-ℕ (succ-ℕ k) (succ-Fin (inl x)) n
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr x) n) =
   unary-op-based-ℕ (succ-ℕ k) zero-Fin (succ-based-ℕ (succ-ℕ k) n)
-  
+
 -- The inverse map of convert-based-ℕ
 inv-convert-based-ℕ : (k : ℕ) → ℕ → based-ℕ (succ-ℕ k)
 inv-convert-based-ℕ k zero-ℕ =
@@ -1770,7 +1770,7 @@ convert-based-succ-based-ℕ
       ( commutative-add-ℕ
         ( succ-ℕ k)
         ( mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
-   
+
 issec-inv-convert-based-ℕ :
   (k n : ℕ) → Id (convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) n
 issec-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}

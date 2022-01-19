@@ -88,7 +88,7 @@ is-decidable-le-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-le-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-le-ℕ m n
 
 {- Definition 8.1.5 -}
-   
+
 has-decidable-equality : {l : Level} (A : UU l) → UU l
 has-decidable-equality A = (x y : A) → is-decidable (Id x y)
 
@@ -193,9 +193,9 @@ is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 {- Definition 8.2.2 -}
 
 collatz : ℕ → ℕ
-collatz n with is-decidable-div-ℕ two-ℕ n
+collatz n with is-decidable-div-ℕ 2 n
 ... | inl (pair y p) = y
-... | inr f = succ-ℕ (mul-ℕ three-ℕ n)
+... | inr f = succ-ℕ (mul-ℕ 3 n)
 
 {- Proposition 8.2.3 -}
 
@@ -331,7 +331,7 @@ is-minimal-element-succ-ℕ
     ( is-lower-bound-m zero-ℕ)
     ( n)
     ( psuccn)
-  
+
 well-ordering-principle-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
   (n : ℕ) (p : P (succ-ℕ n)) →
@@ -658,7 +658,7 @@ is-one-is-proper-divisor-ℕ n =
   (x : ℕ) → is-proper-divisor-ℕ n x → is-one-ℕ x
 
 is-prime-ℕ : ℕ → UU lzero
-is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x) 
+is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 
 {- Proposition 8.5.2 -}
 
@@ -779,7 +779,7 @@ leq-factorial-ℕ (succ-ℕ n) =
   leq-mul-is-nonzero-ℕ'
     ( factorial-ℕ n)
     ( succ-ℕ n)
-    ( is-nonzero-factorial-ℕ n) 
+    ( is-nonzero-factorial-ℕ n)
 
 in-sieve-of-eratosthenes-succ-factorial-ℕ :
   (n : ℕ) → in-sieve-of-eratosthenes-ℕ n (succ-ℕ (factorial-ℕ n))
@@ -792,7 +792,7 @@ pr1 (in-sieve-of-eratosthenes-succ-factorial-ℕ (succ-ℕ n)) =
   concatenate-leq-le-ℕ
     { succ-ℕ n}
     { factorial-ℕ (succ-ℕ n)}
-    { succ-ℕ (factorial-ℕ (succ-ℕ n))} 
+    { succ-ℕ (factorial-ℕ (succ-ℕ n))}
     ( leq-factorial-ℕ (succ-ℕ n))
     ( le-succ-ℕ {factorial-ℕ (succ-ℕ n)})
 pr2 (in-sieve-of-eratosthenes-succ-factorial-ℕ (succ-ℕ n)) x l (pair y p) with
@@ -935,7 +935,7 @@ boolean-reflection (inr f) p = ex-falso (Eq-eq-𝟚 p)
 
 {-
 four-hundred-and-nine-ℕ : ℕ
-four-hundred-and-nine-ℕ = add-ℕ (mul-ℕ twenty-ℕ twenty-ℕ) nine-ℕ
+four-hundred-and-nine-ℕ = add-ℕ (mul-ℕ 20 20) nine-ℕ
 
 is-prime-four-hundred-and-nine-ℕ : is-prime-ℕ four-hundred-and-nine-ℕ
 is-prime-four-hundred-and-nine-ℕ =
@@ -963,10 +963,10 @@ Goldbach-conjecture =
 is-twin-prime-ℕ : ℕ → UU lzero
 is-twin-prime-ℕ n = (is-prime-ℕ n) × (is-prime-ℕ (succ-ℕ (succ-ℕ n)))
 
-{- The twin prime conjecture asserts that there are infinitely many twin 
-   primes. We assert that there are infinitely twin primes by asserting that 
+{- The twin prime conjecture asserts that there are infinitely many twin
+   primes. We assert that there are infinitely twin primes by asserting that
    for every n : ℕ there is a twin prime that is larger than n. -}
-   
+
 Twin-prime-conjecture : UU lzero
 Twin-prime-conjecture =
   (n : ℕ) → Σ ℕ (λ p → (is-twin-prime-ℕ p) × (leq-ℕ n p))
@@ -1400,7 +1400,7 @@ pr2 (is-mod-unit-sim-unit-mod-succ-ℕ k x (pair u p)) =
       ( p))
 
 -- We now come back to the solution of the exercise
-  
+
 is-decidable-Σ-Fin :
   {l : Level} {k : ℕ} {P : Fin k → UU l} →
   ((x : Fin k) → is-decidable (P x)) → is-decidable (Σ (Fin k) P)
