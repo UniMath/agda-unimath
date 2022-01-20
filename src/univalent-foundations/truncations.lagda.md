@@ -71,37 +71,36 @@ module _
   triangle-is-truncation H C g =
     pr2 (center (universal-property-truncation-is-truncation H C g))
 
+-- If A is k-truncated, then id : A → A is a truncation
+
+abstract
+  is-truncation-id :
+    {l1 : Level} {k : 𝕋} {A : UU l1} (H : is-trunc k A) →
+    {l : Level} → is-truncation l (pair A H) id
+  is-truncation-id H B =
+    is-equiv-precomp-is-equiv id is-equiv-id (type-Truncated-Type B)
+
+abstract
+  is-truncation-equiv :
+    {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+    (e : A ≃ type-Truncated-Type B) →
+    {l : Level} → is-truncation l B (map-equiv e)
+  is-truncation-equiv B e C =
+    is-equiv-precomp-is-equiv
+      ( map-equiv e)
+      ( is-equiv-map-equiv e)
+      ( type-Truncated-Type C)
+
+-- The dependent universal property of truncations
+
+precomp-Π-Truncated-Type :
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : B → UU-Truncated-Type k l3) →
+  ((b : B) → type-Truncated-Type (C b)) →
+  ((a : A) → type-Truncated-Type (C (f a)))
+precomp-Π-Truncated-Type f C h a = h (f a)
+
 {-
-triangle-is-set-truncation :
-  {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-  (is-settr-f : {l : Level} → is-set-truncation l B f) →
-  (C : UU-Set l3) (g : A → type-Set C) →
-  ((map-is-set-truncation B f is-settr-f C g) ∘ f) ~ g
-triangle-is-set-truncation B f is-settr-f C g =
-  pr2
-    ( center
-      ( universal-property-is-set-truncation _ B f is-settr-f C g))
-
--- If A is a set, then id : A → A is a set truncation
-
-abstract
-  is-set-truncation-id :
-    {l1 : Level} {A : UU l1} (H : is-set A) →
-    {l2 : Level} → is-set-truncation l2 (pair A H) id
-  is-set-truncation-id H B =
-    is-equiv-precomp-is-equiv id is-equiv-id (type-Set B)
-
-abstract
-  is-set-truncation-equiv :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (e : A ≃ type-Set B) →
-    {l : Level} → is-set-truncation l2 B (map-equiv e)
-  is-set-truncation-equiv B e C =
-    is-equiv-precomp-is-equiv (map-equiv e) (is-equiv-map-equiv e) (type-Set C)
-
--- Theorem 18.5.2
-
--- Theorem 18.5.2 Condition (ii)
-
 precomp-Π-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU-Set l3) →
   ((b : B) → type-Set (C b)) → ((a : A) → type-Set (C (f a)))
