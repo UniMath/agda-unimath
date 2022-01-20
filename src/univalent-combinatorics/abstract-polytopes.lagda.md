@@ -173,6 +173,18 @@ module _
   path-faces-Prepolytope x y =
     path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope x y
 
+  refl-path-faces-Prepolytope :
+    {i : Fin (succ-ℕ k)} (x : face-Prepolytope i) → path-faces-Prepolytope x x
+  refl-path-faces-Prepolytope x = refl-path-faces-Finitely-Graded-Poset
+
+  cons-path-faces-Prepolytope :
+    {i : Fin (succ-ℕ k)} {x : face-Prepolytope i}
+    {j : Fin k} {y : face-Prepolytope (inl-Fin k j)}
+    {z : face-Prepolytope (succ-Fin (inl-Fin k j))} →
+    adjacent-Prepolytope j y z → path-faces-Prepolytope x y →
+    path-faces-Prepolytope x z
+  cons-path-faces-Prepolytope a p = cons-path-faces-Finitely-Graded-Poset a p
+
   tr-refl-path-faces-Preposet :
     {i j : Fin (succ-ℕ k)} (p : Id j i) (x : face-Prepolytope j) →
     path-faces-Prepolytope (tr face-Prepolytope p x) x
@@ -280,6 +292,17 @@ module _
     subtype-maximal-chain-Finitely-Graded-Poset
       finitely-graded-poset-Prepolytope
 
+  type-subtype-flag-Prepolytope :
+    {l : Level} (F : flag-Prepolytope l) →
+    {i : Fin (succ-ℕ k)} → face-Prepolytope i → UU l
+  type-subtype-flag-Prepolytope F x =
+    type-Prop (subtype-flag-Prepolytope F x)
+
+  face-flag-Prepolytope :
+    {l : Level} (F : flag-Prepolytope l) → Fin (succ-ℕ k) → UU (l1 ⊔ l)
+  face-flag-Prepolytope F i =
+    Σ (face-Prepolytope i) (type-subtype-flag-Prepolytope F)
+
   face-least-element-Prepolytope : face-Prepolytope zero-Fin
   face-least-element-Prepolytope = pr1 least-element-Prepolytope
 
@@ -333,11 +356,49 @@ module _
         ( x))
       ( λ p →
         inv (eq-path-faces-Prepolytope x face-largest-element-Prepolytope p))
+
+  -- Flags are equivalently described as paths from the least to the largest element
+
+  is-on-path-face-prepolytope-Prop :
+    {i1 i2 : Fin (succ-ℕ k)} {x : face-Prepolytope i1} {y : face-Prepolytope i2}
+    (p : path-faces-Prepolytope x y) →
+    {i3 : Fin (succ-ℕ k)} → face-Prepolytope i3 → UU-Prop l1
+  is-on-path-face-prepolytope-Prop
+    {x = x} refl-path-faces-Finitely-Graded-Poset z =
+    Id-Prop
+      ( element-prepolytope-Set)
+      ( element-face-Prepolytope x)
+      ( element-face-Prepolytope z)
+  is-on-path-face-prepolytope-Prop
+    ( cons-path-faces-Finitely-Graded-Poset {z = w} a p) z =
+    disj-Prop
+      ( is-on-path-face-prepolytope-Prop p z)
+      ( Id-Prop
+        ( element-prepolytope-Set)
+        ( element-face-Prepolytope w)
+        ( element-face-Prepolytope z))
+
+  module _
+    {i1 i2 i3 : Fin (succ-ℕ k)}
+    {x : face-Prepolytope i1} {y : face-Prepolytope i2}
+    where
+    
+    is-on-path-face-Prepolytope :
+      path-faces-Prepolytope x y → face-Prepolytope i3 → UU l1
+    is-on-path-face-Prepolytope p z =
+      type-Prop (is-on-path-face-prepolytope-Prop p z)
+
+    is-prop-is-on-path-face-Prepolytope :
+      (p : path-faces-Prepolytope x y) (z : face-Prepolytope i3) →
+      is-prop (is-on-path-face-Prepolytope p z)
+    is-prop-is-on-path-face-Prepolytope p z =
+      is-prop-type-Prop (is-on-path-face-prepolytope-Prop p z)
+
 ```
 
-## Axiom P2 of polytopes
+## Proof condition P2 of polytopes
 
-The second axiom of polytopes asserts that every maximal chain has k elements. Here, we will assert that every maximal chain has exactly one face of each dimension.
+The second axiom of polytopes asserts that every maximal chain has k elements. Note that every maximal chain is a path from the bottom element to the top element, which necessarily passes through all dimensions. Therefore, the second axiom follows from our setup. Note that we didn't start with general posets, but with finitely graded posets.
 
 
 ```agda
@@ -366,7 +427,11 @@ module _
     is-prop-type-Prop condition-P2-prepolytope-Prop
 ```
 
-## The definition of abstract polytopes
+## Strong connectedness of polytopes
+
+The strong connectedness condition for polytopes asserts that the unordered graph of flags of a polytope is connected. The edges in this graph are punctured flags, i.e., chains that have exactly one element in each dimension except in one dimension that is neither the top nor the bottom dimension. A punctured flag connects the two flags it is a subchain of.
+
+## The definition of polytopes
 
 ```agda
 
