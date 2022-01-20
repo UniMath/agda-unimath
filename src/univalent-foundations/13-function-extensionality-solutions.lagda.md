@@ -469,7 +469,7 @@ module _
   is-trunc-equiv-is-trunc neg-two-𝕋 is-trunc-A is-trunc-B =
     is-contr-equiv-is-contr is-trunc-A is-trunc-B
   is-trunc-equiv-is-trunc (succ-𝕋 k) is-trunc-A is-trunc-B = 
-    is-trunc-Σ (succ-𝕋 k)
+    is-trunc-Σ
       ( is-trunc-Π (succ-𝕋 k) (λ x → is-trunc-B))
       ( λ x → is-trunc-is-prop k (is-subtype-is-equiv x))
 

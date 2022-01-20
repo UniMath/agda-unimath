@@ -100,17 +100,34 @@ precomp-Π-Truncated-Type :
   ((a : A) → type-Truncated-Type (C (f a)))
 precomp-Π-Truncated-Type f C h a = h (f a)
 
-{-
-precomp-Π-Set :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU-Set l3) →
-  ((b : B) → type-Set (C b)) → ((a : A) → type-Set (C (f a)))
-precomp-Π-Set f C h a = h (f a)
+dependent-universal-property-truncation :
+  {l1 l2 : Level} (l : Level) {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+  (f : A → type-Truncated-Type B) → UU (l1 ⊔ l2 ⊔ lsuc l)
+dependent-universal-property-truncation l {k} B f =
+  (X : type-Truncated-Type B → UU-Truncated-Type k l) →
+  is-equiv (precomp-Π-Truncated-Type f X)
 
-dependent-universal-property-set-truncation :
-  {l1 l2 : Level} (l : Level) {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-  UU (l1 ⊔ l2 ⊔ lsuc l)
-dependent-universal-property-set-truncation l {A} B f =
-  (X : type-Set B → UU-Set l) → is-equiv (precomp-Π-Set f X)
+dependent-universal-property-truncation-is-truncation :
+  {l1 l2 : Level} {k : 𝕋}  {A : UU l1} (B : UU-Truncated-Type k l2)
+  (f : A → type-Truncated-Type B) →
+  ({l : Level} → is-truncation l B f) →
+  {l : Level} → dependent-universal-property-truncation l B f
+dependent-universal-property-truncation-is-truncation {A = A} B f H X =
+  is-fiberwise-equiv-is-equiv-map-Σ
+    ( λ (h : A → type-Truncated-Type B) →
+      (a : A) → type-Truncated-Type (X (h a)))
+    ( λ (g : type-Truncated-Type B → type-Truncated-Type B) → g ∘ f)
+    ( λ g (s : (b : type-Truncated-Type B) →
+      type-Truncated-Type (X (g b))) (a : A) → s (f a))
+    ( H B)
+    ( is-equiv-equiv
+      ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
+      ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
+      ( ind-Σ (λ g s → refl))
+      ( H (Σ-Truncated-Type B X)))
+    ( id)
+
+{-
 
 -- Theorem 18.5.2 Condition (iii)
 
@@ -119,26 +136,6 @@ mere-eq-Eq-Rel A =
   pair
     mere-eq-Prop
     ( pair refl-mere-eq (pair symm-mere-eq trans-mere-eq))
-
--- Theorem 18.5.2 (i) implies (ii)
-
-abstract
-  dependent-universal-property-is-set-truncation :
-    {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-    ({l : Level} → is-set-truncation l B f) →
-    dependent-universal-property-set-truncation l3 B f
-  dependent-universal-property-is-set-truncation {A = A} B f H X =
-    is-fiberwise-equiv-is-equiv-map-Σ
-      ( λ (h : A → type-Set B) → (a : A) → type-Set (X (h a)))
-      ( λ (g : type-Set B → type-Set B) → g ∘ f)
-      ( λ g (s : (b : type-Set B) → type-Set (X (g b))) (a : A) → s (f a))
-      ( H B)
-      ( is-equiv-equiv
-        ( equiv-inv-choice-∞ (λ x y → type-Set (X y)))
-        ( equiv-inv-choice-∞ (λ x y → type-Set (X y)))
-        ( ind-Σ (λ g s → refl))
-        ( H (Σ-Set B X)))
-      ( id)
 
 -- Theorem 18.5.2 (ii) implies (i)
 

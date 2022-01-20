@@ -1296,18 +1296,30 @@ pr2 (diagonal-faithful-map A) =
 -- Exercise 12.5 (a)
 
 abstract
-  is-trunc-Σ : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
+  is-trunc-Σ :
+    {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : A → UU l2} →
     is-trunc k A → ((x : A) → is-trunc k (B x)) → is-trunc k (Σ A B)
-  is-trunc-Σ neg-two-𝕋 is-trunc-A is-trunc-B =
+  is-trunc-Σ {k = neg-two-𝕋} is-trunc-A is-trunc-B =
     is-contr-Σ' is-trunc-A is-trunc-B
-  is-trunc-Σ (succ-𝕋 k) {B = B} is-trunc-A is-trunc-B s t =
+  is-trunc-Σ {k = succ-𝕋 k} {B = B} is-trunc-A is-trunc-B s t =
     is-trunc-is-equiv k
       ( Σ (Id (pr1 s) (pr1 t)) (λ p → Id (tr B p (pr2 s)) (pr2 t)))
       ( pair-eq-Σ)
       ( is-equiv-pair-eq-Σ s t)
-      ( is-trunc-Σ k
+      ( is-trunc-Σ
         ( is-trunc-A (pr1 s) (pr1 t))
         ( λ p → is-trunc-B (pr1 t) (tr B p (pr2 s)) (pr2 t)))
+
+Σ-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type k l1)
+  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  UU-Truncated-Type k (l1 ⊔ l2)
+pr1 (Σ-Truncated-Type A B) =
+  Σ (type-Truncated-Type A) (λ a → type-Truncated-Type (B a))
+pr2 (Σ-Truncated-Type A B) =
+  is-trunc-Σ
+    ( is-trunc-type-Truncated-Type A)
+    ( λ a → is-trunc-type-Truncated-Type (B a))
 
 -- Exercise 12.5 (b)
 
@@ -1316,7 +1328,7 @@ abstract
 abstract
   is-prop-Σ : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-prop A → is-subtype B → is-prop (Σ A B)
-  is-prop-Σ = is-trunc-Σ neg-one-𝕋
+  is-prop-Σ = is-trunc-Σ {k = neg-one-𝕋}
 
 Σ-Prop :
   {l1 l2 : Level} (P : UU-Prop l1) (Q : type-Prop P → UU-Prop l2) →
@@ -1331,7 +1343,7 @@ abstract
   is-set-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-set A → ((x : A) → is-set (B x)) → is-set (Σ A B)
-  is-set-Σ = is-trunc-Σ zero-𝕋
+  is-set-Σ = is-trunc-Σ {k = zero-𝕋}
 
 Σ-Set :
   {l1 l2 : Level} (A : UU-Set l1) (B : pr1 A → UU-Set l2) → UU-Set (l1 ⊔ l2)
@@ -1349,7 +1361,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1}
     {B : UU l2} {f : A → B} → is-trunc k A → is-trunc k B → is-trunc-map k f
   is-trunc-map-is-trunc-domain-codomain k {f = f} is-trunc-A is-trunc-B b =
-    is-trunc-Σ k is-trunc-A (λ x → is-trunc-Id k is-trunc-B (f x) b)
+    is-trunc-Σ is-trunc-A (λ x → is-trunc-Id k is-trunc-B (f x) b)
 
 -- Bureaucracy
 
@@ -1370,7 +1382,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k A → is-trunc k B → is-trunc k (A × B)
   is-trunc-prod k is-trunc-A is-trunc-B =
-    is-trunc-Σ k is-trunc-A (λ x → is-trunc-B)
+    is-trunc-Σ is-trunc-A (λ x → is-trunc-B)
 
 is-trunc-prod' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
@@ -1669,7 +1681,7 @@ abstract
         ( Σ (fib g x) (λ t → fib h (pr1 t)))
         ( map-fib-comp g h x)
         ( is-equiv-map-fib-comp g h x)
-        ( is-trunc-Σ k
+        ( is-trunc-Σ
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t))))
 
