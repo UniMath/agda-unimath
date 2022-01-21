@@ -16,20 +16,12 @@ open import foundations.03-natural-numbers public
 data unit : UU lzero where
   star : unit
 
-𝟙 = unit
-```
-
-```agda
 ind-unit : {l : Level} {P : unit → UU l} → P star → ((x : unit) → P x)
 ind-unit p star = p
-```
 
-```agda
 terminal-map : {l : Level} {A : UU l} → A → unit
 terminal-map a = star
-```
 
-```agda
 raise-unit : (l : Level) → UU l
 raise-unit l = raise l unit
 
@@ -39,42 +31,29 @@ raise-star = map-raise star
 
 ## The empty type
 
-
 ```agda
 data empty : UU lzero where
 
 𝟘 = empty
-```
 
-```agda
 ind-empty : {l : Level} {P : empty → UU l} → ((x : empty) → P x)
 ind-empty ()
-```
 
-```agda
 ex-falso : {l : Level} {A : UU l} → empty → A
 ex-falso = ind-empty
-```
 
-```agda
 raise-empty : (l : Level) → UU l
 raise-empty l = raise l empty
-```
 
-```agda
 ¬ : {l : Level} → UU l → UU l
 ¬ A = A → empty
-```
 
-```agda
 is-empty : {l : Level} → UU l → UU l
 is-empty = ¬
 
 is-nonempty : {l : Level} → UU l → UU l
 is-nonempty A = ¬ (is-empty A)
-```
 
-```agda
 functor-neg : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → Q) → (¬ Q → ¬ P)
 functor-neg f nq p = nq (f p)
@@ -91,26 +70,24 @@ data bool : UU lzero where
 {-# BUILTIN FALSE false #-}
 ```
 
-```agda
-neg-𝟚 : bool → bool
-neg-𝟚 true = false
-neg-𝟚 false = true
-```
+### The boolean operators
 
 ```agda
-conjunction-𝟚 : bool → (bool → bool)
-conjunction-𝟚 true true = true
-conjunction-𝟚 true false = false
-conjunction-𝟚 false true = false
-conjunction-𝟚 false false = false
-```
+neg-bool : bool → bool
+neg-bool true = false
+neg-bool false = true
 
-```agda
-disjunction-𝟚 : bool → (bool → bool)
-disjunction-𝟚 true true = true
-disjunction-𝟚 true false = true
-disjunction-𝟚 false true = true
-disjunction-𝟚 false false = false
+conjunction-bool : bool → (bool → bool)
+conjunction-bool true true = true
+conjunction-bool true false = false
+conjunction-bool false true = false
+conjunction-bool false false = false
+
+disjunction-bool : bool → (bool → bool)
+disjunction-bool true true = true
+disjunction-bool true false = true
+disjunction-bool false true = true
+disjunction-bool false false = false
 ```
 
 ## Coproducts
@@ -119,33 +96,25 @@ disjunction-𝟚 false false = false
 data coprod {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)  where
   inl : A → coprod A B
   inr : B → coprod A B
-```
 
-```agda
 ind-coprod :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : coprod A B → UU l3) →
   ((x : A) → C (inl x)) → ((y : B) → C (inr y)) →
   (t : coprod A B) → C t
 ind-coprod C f g (inl x) = f x
 ind-coprod C f g (inr x) = g x
-```
 
-```agda
 map-coprod :
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'} →
   (A → A') → (B → B') → coprod A B → coprod A' B'
 map-coprod f g (inl x) = inl (f x)
 map-coprod f g (inr y) = inr (g y)
-```
 
-```agda
 map-right-unit-law-coprod-is-empty :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty B → coprod A B → A
 map-right-unit-law-coprod-is-empty A B nb (inl a) = a
 map-right-unit-law-coprod-is-empty A B nb (inr b) = ex-falso (nb b)
-```
 
-```agda
 map-left-unit-law-coprod-is-empty :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty A → coprod A B → B
 map-left-unit-law-coprod-is-empty A B na (inl a) = ex-falso (na a)
@@ -162,45 +131,33 @@ record Σ {l1 l2} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
     pr2 : B pr1
 
 open Σ public
-```
 
-```agda
 {-# BUILTIN SIGMA Σ #-}
-```
 
-```agda
 ind-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
   ((x : A) (y : B x) → C (pair x y)) → ((t : Σ A B) → C t)
 ind-Σ f (pair x y) = f x y
-```
 
-```agda
 ev-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
   ((t : Σ A B) → C t) → (x : A) (y : B x) → C (pair x y)
 ev-pair f x y = f (pair x y)
 ```
 
-## Products
+## Cartesian products
 
 ```agda
 prod : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 prod A B = Σ A (λ a → B)
-```
 
-```agda
 pair' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → A → B → prod A B
 pair' = pair
-```
 
-```agda
 _×_ :  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A × B = prod A B
-```
 
-```agda
 map-prod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → C) (g : B → D) → (A × B) → (C × D)
@@ -276,28 +233,15 @@ ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (succ-ℕ x))) =
   pS x (ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (x))))
 ```
 
+- The successor and predecessor functions on ℤ
+
 ```agda
 succ-ℤ : ℤ → ℤ
 succ-ℤ (inl zero-ℕ) = zero-ℤ
 succ-ℤ (inl (succ-ℕ x)) = inl x
 succ-ℤ (inr (inl star)) = one-ℤ
 succ-ℤ (inr (inr x)) = inr (inr (succ-ℕ x))
-```
 
-##  Logical equivalence
-
-```agda
-_↔_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A ↔ B = (A → B) × (B → A)
-
-_∘iff_ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
-  (B ↔ C) → (A ↔ B) → (A ↔ C)
-pr1 (pair g1 g2 ∘iff pair f1 f2) = g1 ∘ f1
-pr2 (pair g1 g2 ∘iff pair f1 f2) = f2 ∘ g2
-```
-
-```agda
 pred-ℤ : ℤ → ℤ
 pred-ℤ (inl x) = inl (succ-ℕ x)
 pred-ℤ (inr (inl star)) = inl zero-ℕ
@@ -305,7 +249,7 @@ pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
 ```
 
-### Example of functions on the type of integers
+### Arithmetic operations on the integers
 
 - Addition on ℤ
 
@@ -330,6 +274,7 @@ neg-ℤ (inr (inl star)) = inr (inl star)
 neg-ℤ (inr (inr x)) = inl x
 ```
 
+- Multiplication of integers
 
 We give two definitions of multiplication on ℤ
 
@@ -343,9 +288,7 @@ mul-ℤ (inr (inr (succ-ℕ x))) l = add-ℤ l (mul-ℤ (inr (inr x)) l)
 
 mul-ℤ' : ℤ → ℤ → ℤ
 mul-ℤ' x y = mul-ℤ y x
-```
 
-```agda
 explicit-mul-ℤ : ℤ → ℤ → ℤ
 explicit-mul-ℤ (inl x) (inl y) = int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y))
 explicit-mul-ℤ (inl x) (inr (inl star)) = zero-ℤ
@@ -358,21 +301,40 @@ explicit-mul-ℤ (inr (inl star)) (inr (inl star)) = zero-ℤ
 explicit-mul-ℤ (inr (inl star)) (inr (inr y)) = zero-ℤ
 explicit-mul-ℤ (inr (inr x)) (inr (inl star)) = zero-ℤ
 explicit-mul-ℤ (inr (inr x)) (inr (inr y)) = int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y))
-```
 
-```agda
 explicit-mul-ℤ' : ℤ → ℤ → ℤ
 explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 ```
 
+##  Logical equivalence
+
+```agda
+_↔_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+A ↔ B = (A → B) × (B → A)
+
+_∘iff_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  (B ↔ C) → (A ↔ B) → (A ↔ C)
+pr1 (pair g1 g2 ∘iff pair f1 f2) = g1 ∘ f1
+pr2 (pair g1 g2 ∘iff pair f1 f2) = f2 ∘ g2
+```
+
+## Double negation
+
 ```agda
 ¬¬ : {l : Level} → UU l → UU l
 ¬¬ P = ¬ (¬ P)
-```
 
-```agda
 ¬¬¬ : {l : Level} → UU l → UU l
 ¬¬¬ P = ¬ (¬ (¬ P))
+
+intro-dn : {l : Level} {P : UU l} → P → ¬¬ P
+intro-dn p f = f p
+
+functor-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
+  (P → Q) → (¬¬ P → ¬¬ Q)
+functor-dn f = functor-neg (functor-neg f)
+
 ```
 
 ```agda
@@ -380,17 +342,6 @@ no-fixed-points-neg :
   {l : Level} (A : UU l) → ¬ ((A → ¬ A) × (¬ A → A))
 no-fixed-points-neg A (pair f g) =
   ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
-```
-
-```agda
-intro-dn : {l : Level} {P : UU l} → P → ¬¬ P
-intro-dn p f = f p
-```
-
-```agda
-functor-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  (P → Q) → (¬¬ P → ¬¬ Q)
-functor-dn f = functor-neg (functor-neg f)
 ```
 
 In this exercise we were asked to show that $A + ¬A$ implies $¬¬A → A$.
@@ -401,21 +352,19 @@ dn-elim-is-decidable :
   {l : Level} (P : UU l) → coprod P (¬ P) → (¬¬ P → P)
 dn-elim-is-decidable P (inl x) p = x
 dn-elim-is-decidable P (inr x) p = ex-falso (p x)
-```
 
-```agda
 dn-is-decidable : {l : Level} {P : UU l} → ¬¬ (coprod P (¬ P))
 dn-is-decidable {P = P} f =
   functor-neg (inr {A = P} {B = ¬ P}) f
     ( functor-neg (inl {A = P} {B = ¬ P}) f)
-```
 
-```agda
 dn-dn-elim : {l : Level} {P : UU l} → ¬¬ (¬¬ P → P)
 dn-dn-elim {P = P} f =
   ( λ (np : ¬ P) → f (λ (nnp : ¬¬ P) → ex-falso (nnp np)))
     ( λ (p : P) → f (λ (nnp : ¬¬ P) → p))
 ```
+
+## Double negations of classical laws
 
 ```agda
 Peirces-law :
@@ -424,9 +373,7 @@ Peirces-law :
 Peirces-law {P = P} {Q} f =
   ( λ (np : ¬ P) → f (λ h → h (λ p → ex-falso (np p))))
   ( λ (p : P) → f (λ h → p))
-```
 
-```agda
 dn-linearity-implication :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ (coprod (P → Q) (Q → P))
@@ -437,33 +384,31 @@ dn-linearity-implication {P = P} {Q = Q} f =
       functor-neg (inr {A = P → Q} {B = Q → P}) f (λ q → p))
 ```
 
+## Cases of double negation elimination
+
 ```agda
 dn-elim-neg : {l : Level} (P : UU l) → ¬¬¬ P → ¬ P
 dn-elim-neg P f p = f (λ g → g p)
-```
 
-```agda
 dn-extend :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
 dn-extend {P = P} {Q = Q} f = dn-elim-neg (¬ Q) ∘ (functor-dn f)
-```
 
-```agda
 dn-elim-exp :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ (P → ¬¬ Q) → (P → ¬¬ Q)
 dn-elim-exp {P = P} {Q = Q} f p =
   dn-elim-neg (¬ Q) (functor-dn (λ (g : P → ¬¬ Q) → g p) f)
-```
 
-```agda
 dn-elim-prod :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
 pr1 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ P) (functor-dn pr1 f)
 pr2 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ Q) (functor-dn pr2 f)
 ```
+
+## Lists
 
 ```agda
 data list {l : Level} (A : UU l) : UU l where
@@ -474,40 +419,30 @@ in-list : {l : Level} {A : UU l} → A → list A
 in-list a = cons a nil
 ```
 
+## Operations on lists
+
 ```agda
 fold-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
   list A → B
 fold-list b μ nil = b
 fold-list b μ (cons a l) = μ a (fold-list b μ l)
-```
 
-```agda
 length-list : {l : Level} {A : UU l} → list A → ℕ
 length-list = fold-list zero-ℕ (λ a → succ-ℕ)
-```
 
-```agda
 sum-list-ℕ : list ℕ → ℕ
 sum-list-ℕ = fold-list zero-ℕ add-ℕ
-```
 
-```agda
 product-list-ℕ : list ℕ → ℕ
 product-list-ℕ = fold-list one-ℕ mul-ℕ
-```
 
-```agda
 concat-list : {l : Level} {A : UU l} → list A → (list A → list A)
 concat-list {l} {A} = fold-list id (λ a f → (cons a) ∘ f)
-```
 
-```agda
 flatten-list : {l : Level} {A : UU l} → list (list A) → list A
 flatten-list = fold-list nil concat-list
-```
 
-```agda
 reverse-list : {l : Level} {A : UU l} → list A → list A
 reverse-list nil = nil
 reverse-list (cons a l) = concat-list (reverse-list l) (in-list a)

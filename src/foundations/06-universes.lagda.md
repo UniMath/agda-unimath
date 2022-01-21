@@ -300,36 +300,36 @@ neq-mul-ℕ m n p =
 
 -- Exercise 6.2 (a)
 
-Eq-𝟚 : bool → bool → UU lzero
-Eq-𝟚 true true = unit
-Eq-𝟚 true false = empty
-Eq-𝟚 false true = empty
-Eq-𝟚 false false = unit
+Eq-bool : bool → bool → UU lzero
+Eq-bool true true = unit
+Eq-bool true false = empty
+Eq-bool false true = empty
+Eq-bool false false = unit
 
 -- Exercise 6.2 (b)
 
-reflexive-Eq-𝟚 : (x : bool) → Eq-𝟚 x x
-reflexive-Eq-𝟚 true = star
-reflexive-Eq-𝟚 false = star
+reflexive-Eq-bool : (x : bool) → Eq-bool x x
+reflexive-Eq-bool true = star
+reflexive-Eq-bool false = star
 
-Eq-eq-𝟚 :
-  {x y : bool} → Id x y → Eq-𝟚 x y
-Eq-eq-𝟚 {x = x} refl = reflexive-Eq-𝟚 x
+Eq-eq-bool :
+  {x y : bool} → Id x y → Eq-bool x y
+Eq-eq-bool {x = x} refl = reflexive-Eq-bool x
 
-eq-Eq-𝟚 :
-  {x y : bool} → Eq-𝟚 x y → Id x y
-eq-Eq-𝟚 {true} {true} star = refl
-eq-Eq-𝟚 {false} {false} star = refl
+eq-Eq-bool :
+  {x y : bool} → Eq-bool x y → Id x y
+eq-Eq-bool {true} {true} star = refl
+eq-Eq-bool {false} {false} star = refl
 
 -- Exercise 6.2 (c)
 
-neq-neg-𝟚 : (b : bool) → ¬ (Id b (neg-𝟚 b))
-neq-neg-𝟚 true = Eq-eq-𝟚
-neq-neg-𝟚 false = Eq-eq-𝟚
+neq-neg-bool : (b : bool) → ¬ (Id b (neg-bool b))
+neq-neg-bool true = Eq-eq-bool
+neq-neg-bool false = Eq-eq-bool
 
-neq-false-true-𝟚 :
+neq-false-true-bool :
   ¬ (Id false true)
-neq-false-true-𝟚 = Eq-eq-𝟚
+neq-false-true-bool = Eq-eq-bool
 
 -- Exercise 6.3
 
