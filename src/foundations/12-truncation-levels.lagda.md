@@ -747,11 +747,25 @@ abstract
 -- Corollary 12.4.4
 
 abstract
-  is-trunc-Id : {l : Level} (k : 𝕋) {A : UU l} →
+  is-trunc-Id :
+    {l : Level} {k : 𝕋} {A : UU l} →
     is-trunc k A → (x y : A) → is-trunc k (Id x y)
-  is-trunc-Id neg-two-𝕋 is-trunc-A = is-prop-is-contr is-trunc-A
-  is-trunc-Id (succ-𝕋 k) is-trunc-A x y =
+  is-trunc-Id {k = neg-two-𝕋} is-trunc-A = is-prop-is-contr is-trunc-A
+  is-trunc-Id {k = succ-𝕋 k} is-trunc-A x y =
     is-trunc-succ-is-trunc k {A = Id x y} (is-trunc-A x y)
+
+Id-Truncated-Type :
+  {l : Level} {k : 𝕋} (A : UU-Truncated-Type (succ-𝕋 k) l) →
+  (x y : type-Truncated-Type A) → UU-Truncated-Type k l
+pr1 (Id-Truncated-Type A x y) = Id x y
+pr2 (Id-Truncated-Type A x y) = is-trunc-type-Truncated-Type A x y
+
+Id-Truncated-Type' :
+  {l : Level} {k : 𝕋} (A : UU-Truncated-Type k l) →
+  (x y : type-Truncated-Type A) → UU-Truncated-Type k l
+pr1 (Id-Truncated-Type' A x y) = Id x y
+pr2 (Id-Truncated-Type' A x y) =
+  is-trunc-Id (is-trunc-type-Truncated-Type A) x y
 
 -- Proposition 12.4.5
 
@@ -1321,6 +1335,14 @@ pr2 (Σ-Truncated-Type A B) =
     ( is-trunc-type-Truncated-Type A)
     ( λ a → is-trunc-type-Truncated-Type (B a))
 
+fib-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type k l1)
+  (B : UU-Truncated-Type k l2)
+  (f : type-Truncated-Type A → type-Truncated-Type B) →
+  type-Truncated-Type B → UU-Truncated-Type k (l1 ⊔ l2)
+fib-Truncated-Type A B f b =
+  Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
+
 -- Exercise 12.5 (b)
 
 -- Bureaucracy
@@ -1361,7 +1383,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1}
     {B : UU l2} {f : A → B} → is-trunc k A → is-trunc k B → is-trunc-map k f
   is-trunc-map-is-trunc-domain-codomain k {f = f} is-trunc-A is-trunc-B b =
-    is-trunc-Σ is-trunc-A (λ x → is-trunc-Id k is-trunc-B (f x) b)
+    is-trunc-Σ is-trunc-A (λ x → is-trunc-Id is-trunc-B (f x) b)
 
 -- Bureaucracy
 

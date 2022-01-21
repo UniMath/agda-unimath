@@ -8,7 +8,13 @@ title: Formalisation of the Symmetry Book
 module univalent-foundations.truncations where
 
 open import univalent-foundations.18-set-quotients public
+```
 
+# Truncations
+
+## The condition on a map to be a truncation
+
+```agda
 precomp-Trunc :
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   (C : UU-Truncated-Type k l3) →
@@ -21,7 +27,11 @@ is-truncation :
   UU (l1 ⊔ l2 ⊔ lsuc l)
 is-truncation l {k} B f =
   (C : UU-Truncated-Type k l) → is-equiv (precomp-Trunc f C)
+```
 
+## The universal property of truncations
+
+```agda
 universal-property-truncation :
   (l : Level) {l1 l2 : Level} {k : 𝕋} {A : UU l1}
   (B : UU-Truncated-Type k l2) (f : A → type-Truncated-Type B) →
@@ -70,9 +80,11 @@ module _
     (map-is-truncation H C g ∘ f) ~ g
   triangle-is-truncation H C g =
     pr2 (center (universal-property-truncation-is-truncation H C g))
+```
 
--- If A is k-truncated, then id : A → A is a truncation
+## Equivalences into k-truncated types are truncations
 
+```agda
 abstract
   is-truncation-id :
     {l1 : Level} {k : 𝕋} {A : UU l1} (H : is-trunc k A) →
@@ -90,9 +102,11 @@ abstract
       ( map-equiv e)
       ( is-equiv-map-equiv e)
       ( type-Truncated-Type C)
+```
 
--- The dependent universal property of truncations
+## The dependent universal property of truncations
 
+```
 precomp-Π-Truncated-Type :
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   (C : B → UU-Truncated-Type k l3) →
@@ -107,106 +121,113 @@ dependent-universal-property-truncation l {k} B f =
   (X : type-Truncated-Type B → UU-Truncated-Type k l) →
   is-equiv (precomp-Π-Truncated-Type f X)
 
-dependent-universal-property-truncation-is-truncation :
-  {l1 l2 : Level} {k : 𝕋}  {A : UU l1} (B : UU-Truncated-Type k l2)
-  (f : A → type-Truncated-Type B) →
-  ({l : Level} → is-truncation l B f) →
-  {l : Level} → dependent-universal-property-truncation l B f
-dependent-universal-property-truncation-is-truncation {A = A} B f H X =
-  is-fiberwise-equiv-is-equiv-map-Σ
-    ( λ (h : A → type-Truncated-Type B) →
-      (a : A) → type-Truncated-Type (X (h a)))
-    ( λ (g : type-Truncated-Type B → type-Truncated-Type B) → g ∘ f)
-    ( λ g (s : (b : type-Truncated-Type B) →
-      type-Truncated-Type (X (g b))) (a : A) → s (f a))
-    ( H B)
-    ( is-equiv-equiv
-      ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
-      ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
-      ( ind-Σ (λ g s → refl))
-      ( H (Σ-Truncated-Type B X)))
-    ( id)
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+  (f : A → type-Truncated-Type B)
+  where
+
+  abstract
+    dependent-universal-property-truncation-is-truncation :
+      ({l : Level} → is-truncation l B f) →
+      {l : Level} → dependent-universal-property-truncation l B f
+    dependent-universal-property-truncation-is-truncation H X =
+      is-fiberwise-equiv-is-equiv-map-Σ
+        ( λ (h : A → type-Truncated-Type B) →
+          (a : A) → type-Truncated-Type (X (h a)))
+        ( λ (g : type-Truncated-Type B → type-Truncated-Type B) → g ∘ f)
+        ( λ g (s : (b : type-Truncated-Type B) →
+          type-Truncated-Type (X (g b))) (a : A) → s (f a))
+        ( H B)
+        ( is-equiv-equiv
+          ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
+          ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
+          ( ind-Σ (λ g s → refl))
+          ( H (Σ-Truncated-Type B X)))
+        ( id)
+
+  abstract
+    is-truncation-dependent-universal-property-truncation :
+      ({l : Level} → dependent-universal-property-truncation l B f) →
+      {l : Level} → is-truncation l B f
+    is-truncation-dependent-universal-property-truncation H X =
+      H (λ b → X)
+
+  sec-is-truncation :
+    ({l : Level} → is-truncation l B f) →
+    {l3 : Level} (C : UU-Truncated-Type k l3)
+    (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
+    f ~ (g ∘ h) → sec g
+  sec-is-truncation H C h g K =
+    choice-∞
+      ( map-inv-is-equiv
+        ( dependent-universal-property-truncation-is-truncation H
+          ( fib-Truncated-Type C B g))
+        ( λ a → pair (h a) (inv (K a))))
+```
+
+## Uniqueness of truncations
+
+```agda
+module _
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1}
+  (B : UU-Truncated-Type k l2) (f : A → type-Truncated-Type B)
+  (C : UU-Truncated-Type k l3) (g : A → type-Truncated-Type C)
+  {h : type-hom-Truncated-Type k B C} (H : (h ∘ f) ~ g)
+  where
+
+  abstract
+    is-equiv-is-truncation-is-truncation :
+      ({l : Level} → is-truncation l B f) →
+      ({l : Level} → is-truncation l C g) →
+      is-equiv h
+    is-equiv-is-truncation-is-truncation H K =
+      pair
+        {! sec-is-truncation!}
+        {!!}
 
 {-
+      is-equiv-has-inverse 
+        ( pr1 (center K))
+        ( htpy-eq
+          ( is-injective-is-equiv
+            ( Ug C)
+            { h ∘ k}
+            { id}
+            ( ( precomp-comp-Set-Quotient R C g B k C h) ∙
+              ( ( ap (λ t → precomp-Set-Quotient R B t C h) α) ∙
+                ( ( eq-htpy-reflecting-map-Eq-Rel R C
+                    ( precomp-Set-Quotient R B f C h) g H) ∙
+                  ( inv (precomp-id-Set-Quotient R C g)))))))
+        ( htpy-eq
+          ( is-injective-is-equiv
+            ( Uf B)
+            { k ∘ h}
+            { id}
+            ( ( precomp-comp-Set-Quotient R B f C h B k) ∙
+              ( ( ap
+                  ( λ t → precomp-Set-Quotient R C t B k)
+                  ( eq-htpy-reflecting-map-Eq-Rel R C
+                    ( precomp-Set-Quotient R B f C h) g H)) ∙
+                ( ( α) ∙
+                  ( inv (precomp-id-Set-Quotient R B f)))))))
+      where
+      K : is-contr
+            ( Σ ( type-hom-Set C B)
+                ( λ h →
+                  ( h ∘ map-reflecting-map-Eq-Rel R g) ~
+                  ( map-reflecting-map-Eq-Rel R f)))
+      K = universal-property-set-quotient-is-set-quotient R C g Ug B f
+      k : type-Set C → type-Set B
+      k = pr1 (center K)
+      α : Id (precomp-Set-Quotient R C g B k) f
+      α = eq-htpy-reflecting-map-Eq-Rel R B
+            ( precomp-Set-Quotient R C g B k)
+            ( f)
+            ( pr2 (center K))
+            -}
 
--- Theorem 18.5.2 Condition (iii)
-
-mere-eq-Eq-Rel : {l1 : Level} (A : UU l1) → Eq-Rel l1 A
-mere-eq-Eq-Rel A =
-  pair
-    mere-eq-Prop
-    ( pair refl-mere-eq (pair symm-mere-eq trans-mere-eq))
-
--- Theorem 18.5.2 (ii) implies (i)
-
-abstract
-  is-set-truncation-dependent-universal-property :
-    {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-    ({l : Level} → dependent-universal-property-set-truncation l B f) →
-    is-set-truncation l3 B f
-  is-set-truncation-dependent-universal-property B f H X =
-    H (λ b → X)
-
--- Theorem 18.5.2 (iii) implies (i)
-
-reflects-mere-eq :
-  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X) →
-  reflects-Eq-Rel (mere-eq-Eq-Rel A) f
-reflects-mere-eq X f {x} {y} r =
-  apply-universal-property-trunc-Prop r
-    ( Id-Prop X (f x) (f y))
-    ( ap f)
-
-reflecting-map-mere-eq :
-  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X) →
-  reflecting-map-Eq-Rel (mere-eq-Eq-Rel A) (type-Set X)
-reflecting-map-mere-eq X f = pair f (reflects-mere-eq X f)
-
-abstract
-  is-set-truncation-is-set-quotient :
-    {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-    ( {l : Level} →
-      is-set-quotient l (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)) →
-    is-set-truncation l3 B f
-  is-set-truncation-is-set-quotient {A = A} B f H X =
-    is-equiv-comp
-      ( precomp-Set f X)
-      ( pr1)
-      ( precomp-Set-Quotient
-        ( mere-eq-Eq-Rel A)
-        ( B)
-        ( reflecting-map-mere-eq B f)
-        ( X))
-      ( refl-htpy)
-      ( H X)
-      ( is-equiv-pr1-is-contr
-        ( λ h →
-          is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Eq-Rel (mere-eq-Eq-Rel A) X h)
-            ( reflects-mere-eq X h)))
-
-abstract
-  is-set-quotient-is-set-truncation :
-    {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-    ( {l : Level} → is-set-truncation l B f) →
-    is-set-quotient l3 (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)
-  is-set-quotient-is-set-truncation {A = A} B f H X =
-    is-equiv-right-factor
-      ( precomp-Set f X)
-      ( pr1)
-      ( precomp-Set-Quotient
-        ( mere-eq-Eq-Rel A)
-        ( B)
-        ( reflecting-map-mere-eq B f)
-        ( X))
-      ( refl-htpy)
-      ( is-equiv-pr1-is-contr
-        ( λ h →
-          is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Eq-Rel (mere-eq-Eq-Rel A) X h)
-            ( reflects-mere-eq X h)))
-      ( H X)
-
+  
+{-
 -- Uniqueness of set truncations
 
 module _
@@ -295,6 +316,74 @@ module _
     (map-equiv-uniqueness-set-truncation ∘ f) ~ g
   triangle-uniqueness-set-truncation =
     pr2 (center uniqueness-set-truncation)
+
+-- Theorem 18.5.2 Condition (iii)
+
+mere-eq-Eq-Rel : {l1 : Level} (A : UU l1) → Eq-Rel l1 A
+mere-eq-Eq-Rel A =
+  pair
+    mere-eq-Prop
+    ( pair refl-mere-eq (pair symm-mere-eq trans-mere-eq))
+
+-- Theorem 18.5.2 (iii) implies (i)
+
+reflects-mere-eq :
+  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X) →
+  reflects-Eq-Rel (mere-eq-Eq-Rel A) f
+reflects-mere-eq X f {x} {y} r =
+  apply-universal-property-trunc-Prop r
+    ( Id-Prop X (f x) (f y))
+    ( ap f)
+
+reflecting-map-mere-eq :
+  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X) →
+  reflecting-map-Eq-Rel (mere-eq-Eq-Rel A) (type-Set X)
+reflecting-map-mere-eq X f = pair f (reflects-mere-eq X f)
+
+abstract
+  is-set-truncation-is-set-quotient :
+    {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
+    ( {l : Level} →
+      is-set-quotient l (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)) →
+    is-set-truncation l3 B f
+  is-set-truncation-is-set-quotient {A = A} B f H X =
+    is-equiv-comp
+      ( precomp-Set f X)
+      ( pr1)
+      ( precomp-Set-Quotient
+        ( mere-eq-Eq-Rel A)
+        ( B)
+        ( reflecting-map-mere-eq B f)
+        ( X))
+      ( refl-htpy)
+      ( H X)
+      ( is-equiv-pr1-is-contr
+        ( λ h →
+          is-proof-irrelevant-is-prop
+            ( is-prop-reflects-Eq-Rel (mere-eq-Eq-Rel A) X h)
+            ( reflects-mere-eq X h)))
+
+abstract
+  is-set-quotient-is-set-truncation :
+    {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
+    ( {l : Level} → is-set-truncation l B f) →
+    is-set-quotient l3 (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)
+  is-set-quotient-is-set-truncation {A = A} B f H X =
+    is-equiv-right-factor
+      ( precomp-Set f X)
+      ( pr1)
+      ( precomp-Set-Quotient
+        ( mere-eq-Eq-Rel A)
+        ( B)
+        ( reflecting-map-mere-eq B f)
+        ( X))
+      ( refl-htpy)
+      ( is-equiv-pr1-is-contr
+        ( λ h →
+          is-proof-irrelevant-is-prop
+            ( is-prop-reflects-Eq-Rel (mere-eq-Eq-Rel A) X h)
+            ( reflects-mere-eq X h)))
+      ( H X)
 
 -- Definition 18.5.3
 
