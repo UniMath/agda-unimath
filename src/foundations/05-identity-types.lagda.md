@@ -7,35 +7,32 @@ title: Formalisation of the Symmetry Book
 
 module foundations.05-identity-types where
 
-import foundations.04-inductive-types
-open foundations.04-inductive-types public
+open import foundations.04-inductive-types public
+```
 
---------------------------------------------------------------------------------
+##  The identity type
 
--- Section 5.1
-
--- Definition 5.1.1
-
-{- We introduce the identity type. -}
-
+```agda
 data Id {i : Level} {A : UU i} (x : A) : A → UU i where
   refl : Id x x
 
-{- In the following definition we give a construction of path induction.
-   However, in the development of this library we will mostly use Agda's
-   built-in methods to give constructions by path induction. -}
+{-# BUILTIN EQUALITY Id  #-}
+```
 
+In the following definition we give a construction of path induction.
+However, in the development of this library we will mostly use Agda's
+built-in methods to give constructions by path induction.
+
+```agda
 ind-Id :
   {i j : Level} {A : UU i} (x : A) (B : (y : A) (p : Id x y) → UU j) →
   (B x refl) → (y : A) (p : Id x y) → B y p
 ind-Id x B b y refl = b
+```
 
---------------------------------------------------------------------------------
+## The groupoidal structure of types
 
--- Section 5.2 The groupoidal structure of types
-
--- Definition 5.2.1
-
+```agda
 _∙_ :
   {i : Level} {A : UU i} {x y z : A} → Id x y → Id y z → Id x z
 refl ∙ q = q
@@ -44,20 +41,18 @@ concat :
   {i : Level} {A : UU i} {x y : A} → Id x y → (z : A) → Id y z → Id x z
 concat p z q = p ∙ q
 
--- Definition 5.2.2
-
 inv :
   {i : Level} {A : UU i} {x y : A} → Id x y → Id y x
 inv refl = refl
+```
 
--- Definition 5.2.3
+## The groupoidal laws for types
 
+```agda
 assoc :
   {i : Level} {A : UU i} {x y z w : A} (p : Id x y) (q : Id y z)
   (r : Id z w) → Id ((p ∙ q) ∙ r) (p ∙ (q ∙ r))
 assoc refl q r = refl
-
--- Definition 5.2.4
 
 left-unit :
   {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (refl ∙ p) p
@@ -66,8 +61,6 @@ left-unit = refl
 right-unit :
   {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (p ∙ refl) p
 right-unit {p = refl} = refl
-
--- Definition 5.2.5
 
 left-inv :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) →
@@ -78,13 +71,11 @@ right-inv :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) →
   Id (p ∙ (inv p)) refl
 right-inv refl = refl
+```
 
---------------------------------------------------------------------------------
+## The action on paths of functions
 
--- Section 5.3 The action on paths of functions
-
--- Definition 5.3.1
-
+```agda
 ap :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A} (p : Id x y) →
   Id (f x) (f y)
@@ -143,9 +134,9 @@ ap-add-ℤ p q = ap-binary add-ℤ p q
 ap-mul-ℤ :
   {x y x' y' : ℤ} → Id x x' → Id y y' → Id (mul-ℤ x y) (mul-ℤ x' y')
 ap-mul-ℤ p q = ap-binary mul-ℤ p q
+```
 
--- Definition 5.3.2
-
+```agda
 ap-refl :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) (x : A) →
   Id (ap f (refl {_} {_} {x})) refl
@@ -160,18 +151,14 @@ ap-inv :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
   (p : Id x y) → Id (ap f (inv p)) (inv (ap f p))
 ap-inv f refl = refl
+```
 
---------------------------------------------------------------------------------
+## Transport
 
--- Section 5.4 Transport
-
--- Definition 5.4.1
-
+```agda
 tr :
   {i j : Level} {A : UU i} (B : A → UU j) {x y : A} (p : Id x y) → B x → B y
 tr B refl b = b
-
--- Definition 5.4.2
 
 apd :
   {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) {x y : A}
@@ -187,9 +174,11 @@ refl-path-over :
   {i j : Level} {A : UU i} (B : A → UU j) (x : A) (y : B x) →
   path-over B refl y y
 refl-path-over B x y = refl
+```
 
--- Some laws for transport
+### laws for transport
 
+```agda
 tr-concat :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y z : A} (p : Id x y)
   (q : Id y z) (b : B x) → Id (tr B (p ∙ q) b) (tr B q (tr B p b))
@@ -210,22 +199,20 @@ eq-transpose-tr' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : Id x y)
   {u : B x} {v : B y} → Id (tr B p u) v → Id u (tr B (inv p) v)
 eq-transpose-tr' refl q = q
+```
 
---------------------------------------------------------------------------------
+## The uniqueness of refl
 
--- Section 5.5 The uniqueness of refl
-
+```agda
 uniqueness-refl :
   {i : Level} {A : UU i} (a : A) (x : A) (p : Id a x) →
   Id {A = Σ A (Id a)} (pair a refl) (pair x p)
 uniqueness-refl a a refl = refl
+```
 
---------------------------------------------------------------------------------
+## Section 5.6 The laws of addition on ℕ
 
--- Section 5.6 The laws of addition on ℕ
-
--- Proposition 5.6.1
-
+```agda
 right-unit-law-add-ℕ :
   (x : ℕ) → Id (add-ℕ x zero-ℕ) x
 right-unit-law-add-ℕ x = refl
@@ -234,8 +221,6 @@ left-unit-law-add-ℕ :
   (x : ℕ) → Id (add-ℕ zero-ℕ x) x
 left-unit-law-add-ℕ zero-ℕ = refl
 left-unit-law-add-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-add-ℕ x)
-
--- Proposition 5.6.2
 
 left-successor-law-add-ℕ :
   (x y : ℕ) → Id (add-ℕ (succ-ℕ x) y) (succ-ℕ (add-ℕ x y))
@@ -247,21 +232,15 @@ right-successor-law-add-ℕ :
   (x y : ℕ) → Id (add-ℕ x (succ-ℕ y)) (succ-ℕ (add-ℕ x y))
 right-successor-law-add-ℕ x y = refl
 
--- Proposition 5.6.3
-
 associative-add-ℕ :
   (x y z : ℕ) → Id (add-ℕ (add-ℕ x y) z) (add-ℕ x (add-ℕ y z))
 associative-add-ℕ x y zero-ℕ = refl 
 associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
 
--- Proposition 5.6.4
-
 commutative-add-ℕ : (x y : ℕ) → Id (add-ℕ x y) (add-ℕ y x)
 commutative-add-ℕ zero-ℕ y = left-unit-law-add-ℕ y
 commutative-add-ℕ (succ-ℕ x) y =
   (left-successor-law-add-ℕ x y) ∙ (ap succ-ℕ (commutative-add-ℕ x y))
-
--- We add some easy consequences that are mainly of bureaucratic nature
 
 left-one-law-add-ℕ :
   (x : ℕ) → Id (add-ℕ one-ℕ x) (succ-ℕ x)
@@ -307,20 +286,20 @@ interchange-law-add-add-ℕ =
     add-ℕ
     commutative-add-ℕ
     associative-add-ℕ
+```
 
---------------------------------------------------------------------------------
+## Distributivity of inv over concat
 
--- Exercises
-
--- Exercise 5.1
-
+```agda
 distributive-inv-concat :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A}
   (q : Id y z) → Id (inv (p ∙ q)) ((inv q) ∙ (inv p))
 distributive-inv-concat refl refl = refl
+```
 
--- Exercise 5.2
+## Transposing inverses
 
+```agda
 inv-con :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A} (q : Id y z)
   (r : Id x z) → (Id (p ∙ q) r) → Id q ((inv p) ∙ r)
@@ -331,16 +310,20 @@ con-inv :
   (r : Id x z) → (Id (p ∙ q) r) → Id p (r ∙ (inv q))
 con-inv p refl r =
   ( λ α → α ∙ (inv right-unit)) ∘ (concat (inv right-unit) r)
+```
 
--- Exercise 5.3
+## The path lifting property
 
+```agda
 lift :
   {i j : Level} {A : UU i} {B : A → UU j} {x y : A} (p : Id x y)
   (b : B x) → Id (pair x b) (pair y (tr B p b))
 lift refl b = refl
+```
 
--- Exercise 5.4
+## The Mac Lane pentagon for identity types
 
+```agda
 Mac-Lane-pentagon :
   {i : Level} {A : UU i} {a b c d e : A}
   (p : Id a b) (q : Id b c) (r : Id c d) (s : Id d e) →
@@ -352,11 +335,11 @@ Mac-Lane-pentagon :
   in
   Id ((α₁ ∙ α₂) ∙ α₃) (α₄ ∙ α₅)
 Mac-Lane-pentagon refl refl refl refl = refl
+```
 
--- Exercise 5.5
+## Laws for multiplication on ℕ
 
--- Exercise 5.5 (a)
-
+```agda
 abstract
   left-zero-law-mul-ℕ :
     (x : ℕ) → Id (mul-ℕ zero-ℕ x) zero-ℕ
@@ -392,16 +375,12 @@ abstract
       ( ap succ-ℕ (associative-add-ℕ x (mul-ℕ x y) y))) ∙
     ( inv (left-successor-law-add-ℕ x (add-ℕ (mul-ℕ x y) y)))
 
--- Immediate consequences
-
 square-succ-ℕ :
   (k : ℕ) →
   Id (square-ℕ (succ-ℕ k)) (succ-ℕ (mul-ℕ (succ-ℕ (succ-ℕ k)) k))
 square-succ-ℕ k =
   ( right-successor-law-mul-ℕ (succ-ℕ k) k) ∙
   ( commutative-add-ℕ (succ-ℕ k) (mul-ℕ (succ-ℕ k) k))
-
--- Exercise 5.5 (b)
 
 abstract
   commutative-mul-ℕ :
@@ -411,8 +390,6 @@ abstract
     ( commutative-add-ℕ (mul-ℕ x y) y) ∙ 
     ( ( ap (add-ℕ y) (commutative-mul-ℕ x y)) ∙
       ( inv (right-successor-law-mul-ℕ y x)))
-
--- Exercise 5.5 (c)
 
 abstract
   left-distributive-mul-add-ℕ :
@@ -437,8 +414,6 @@ abstract
       ( ( ap (add-ℕ' (mul-ℕ z y)) (commutative-mul-ℕ z x)) ∙ 
         ( ap (add-ℕ (mul-ℕ x z)) (commutative-mul-ℕ z y))))
 
--- Exercise 5.5 (d)
-
 abstract
   associative-mul-ℕ :
     (x y z : ℕ) → Id (mul-ℕ (mul-ℕ x y) z) (mul-ℕ x (mul-ℕ y z))
@@ -446,8 +421,6 @@ abstract
   associative-mul-ℕ (succ-ℕ x) y z =
     ( right-distributive-mul-add-ℕ (mul-ℕ x y) y z) ∙ 
     ( ap (add-ℕ' (mul-ℕ y z)) (associative-mul-ℕ x y z))
-
--- We add some convenient corollaries
 
 left-two-law-mul-ℕ :
   (x : ℕ) → Id (mul-ℕ two-ℕ x) (add-ℕ x x)
@@ -467,9 +440,11 @@ interchange-law-mul-mul-ℕ =
     mul-ℕ
     commutative-mul-ℕ
     associative-mul-ℕ
+```
 
--- Exercise 5.6
+## The successor and predecessor functions on ℤ are mutual inverses
 
+```agda
 abstract
   isretr-pred-ℤ :
     (k : ℤ) → Id (pred-ℤ (succ-ℤ k)) k
@@ -486,11 +461,11 @@ abstract
   issec-pred-ℤ (inr (inl star)) = refl
   issec-pred-ℤ (inr (inr zero-ℕ)) = refl
   issec-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+```
 
--- Exercise 5.7
+## Laws for addition and multiplication on ℤ
 
--- Exercise 5.7 (a)
-
+```agda
 abstract
   left-unit-law-add-ℤ :
     (k : ℤ) → Id (add-ℤ zero-ℤ k) k
@@ -505,8 +480,6 @@ abstract
   right-unit-law-add-ℤ (inr (inr zero-ℕ)) = refl
   right-unit-law-add-ℤ (inr (inr (succ-ℕ x))) =
     ap succ-ℤ (right-unit-law-add-ℤ (inr (inr x)))
-
--- Exercise 5.7 (b)
 
 abstract
   left-predecessor-law-add-ℤ :
@@ -576,8 +549,6 @@ abstract
     inv (ap pred-ℤ (right-unit-law-add-ℤ x)) ∙
     inv (right-predecessor-law-add-ℤ x zero-ℤ)
 
--- Exercise 5.7 (c)
-
 abstract
   associative-add-ℤ :
     (x y z : ℤ) → Id (add-ℤ (add-ℤ x y) z) (add-ℤ x (add-ℤ y z))
@@ -620,8 +591,6 @@ abstract
   commutative-add-ℤ (inr (inr (succ-ℕ x))) y =
     ( ap succ-ℤ (commutative-add-ℤ (inr (inr x)) y)) ∙ 
     ( inv (right-successor-law-add-ℤ y (inr (inr x))))
-
--- Exercise 5.7 (d)
 
 abstract
   left-inverse-law-add-ℤ :
@@ -667,18 +636,12 @@ isretr-add-neg-ℤ' x y =
   ( ( ap (add-ℤ y) (right-inverse-law-add-ℤ x)) ∙
     ( right-unit-law-add-ℤ y))
 
--- Some immediate consequences
-
 interchange-law-add-add-ℤ : interchange-law add-ℤ add-ℤ
 interchange-law-add-add-ℤ =
   interchange-law-commutative-and-associative
     add-ℤ
     commutative-add-ℤ
     associative-add-ℤ
-
--- Exercise 5.8
-
--- Exercise 5.8 (a)
 
 left-zero-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ zero-ℤ k) zero-ℤ
 left-zero-law-mul-ℤ k = refl
@@ -703,8 +666,6 @@ right-unit-law-mul-ℤ (inr (inl star)) = refl
 right-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (add-ℤ one-ℤ) (right-unit-law-mul-ℤ (inr (inr n)))
-
--- Exercise 5.8 (b)
 
 neg-neg-ℤ : (k : ℤ) → Id (neg-ℤ (neg-ℤ k)) k
 neg-neg-ℤ (inl n) = refl
@@ -873,8 +834,6 @@ right-predecessor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
               ( inv (left-predecessor-law-add-ℤ (inl n) l))))) ∙
         ( associative-add-ℤ (inl (succ-ℕ n)) l (mul-ℤ (inr (inr n)) l)))))
 
--- Exercise 5.8 (c)
-
 right-distributive-mul-add-ℤ :
   (k l m : ℤ) → Id (mul-ℤ (add-ℤ k l) m) (add-ℤ (mul-ℤ k m) (mul-ℤ l m))
 right-distributive-mul-add-ℤ (inl zero-ℕ) l m =
@@ -912,8 +871,6 @@ left-negative-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-predecessor-law-mul-ℤ (inl n) l) ∙
   ( ( ap (add-ℤ (neg-ℤ l)) (left-negative-law-mul-ℤ (inr (inr n)) l)) ∙
     ( inv (distributive-neg-add-ℤ l (mul-ℤ (in-pos n) l))))
-
--- Exercise 5.8 (d)
 
 associative-mul-ℤ :
   (k l m : ℤ) → Id (mul-ℤ (mul-ℤ k l) m) (mul-ℤ k (mul-ℤ l m))
@@ -971,8 +928,6 @@ is-mul-neg-one-neg-ℤ' : (x : ℤ) → Id (neg-ℤ x) (mul-ℤ x neg-one-ℤ)
 is-mul-neg-one-neg-ℤ' x =
   is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
 
---------------------------------------------------------------------------------
-
 negatives-add-ℤ :
   (x y : ℕ) → Id (add-ℤ (in-neg x) (in-neg y)) (in-neg (succ-ℕ (add-ℕ x y)))
 negatives-add-ℤ zero-ℕ y = ap (inl ∘ succ-ℕ) (inv (left-unit-law-add-ℕ y))
@@ -995,9 +950,11 @@ add-neg-one-left-ℤ x = refl
 add-neg-one-right-ℤ :
   (x : ℤ) → Id (add-ℤ x neg-one-ℤ) (pred-ℤ x)
 add-neg-one-right-ℤ x = commutative-add-ℤ x neg-one-ℤ
+```
 
---------------------------------------------------------------------------------
+## Compute division by two rounded down
 
+```agda
 comp-even-div-two-ℕ :
   (n : ℕ) → Id (div-two-ℕ (mul-ℕ two-ℕ n)) n
 comp-even-div-two-ℕ zero-ℕ = refl

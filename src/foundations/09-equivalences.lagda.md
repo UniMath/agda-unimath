@@ -22,9 +22,9 @@ f ~ g = (x : _) → Id (f x) (g x)
 
 -- Example 9.1.3
 
-neg-neg-𝟚 : (neg-𝟚 ∘ neg-𝟚) ~ id
-neg-neg-𝟚 true = refl
-neg-neg-𝟚 false = refl
+neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
+neg-neg-bool true = refl
+neg-neg-bool false = refl
 
 -- Remark 9.1.4
 
@@ -225,15 +225,15 @@ module _
 -- Example 9.2.4
 
 abstract
-  is-equiv-neg-𝟚 : is-equiv neg-𝟚
-  pr1 (pr1 is-equiv-neg-𝟚) = neg-𝟚
-  pr2 (pr1 is-equiv-neg-𝟚) = neg-neg-𝟚
-  pr1 (pr2 is-equiv-neg-𝟚) = neg-𝟚
-  pr2 (pr2 is-equiv-neg-𝟚) = neg-neg-𝟚
+  is-equiv-neg-bool : is-equiv neg-bool
+  pr1 (pr1 is-equiv-neg-bool) = neg-bool
+  pr2 (pr1 is-equiv-neg-bool) = neg-neg-bool
+  pr1 (pr2 is-equiv-neg-bool) = neg-bool
+  pr2 (pr2 is-equiv-neg-bool) = neg-neg-bool
 
-equiv-neg-𝟚 : bool ≃ bool
-pr1 equiv-neg-𝟚 = neg-𝟚
-pr2 equiv-neg-𝟚 = is-equiv-neg-𝟚
+equiv-neg-bool : bool ≃ bool
+pr1 equiv-neg-bool = neg-bool
+pr2 equiv-neg-bool = is-equiv-neg-bool
 
 -- Example 9.2.5
 
@@ -1694,9 +1694,9 @@ abstract
   not-equiv-const :
     (b : bool) → ¬ (is-equiv (const bool bool b))
   not-equiv-const true (pair (pair s issec) (pair r isretr)) =
-    neq-false-true-𝟚 (inv (issec false))
+    neq-false-true-bool (inv (issec false))
   not-equiv-const false (pair (pair s issec) (pair r isretr)) =
-    neq-false-true-𝟚 (issec true)
+    neq-false-true-bool (issec true)
 
 -- Exercise 9.3
 
