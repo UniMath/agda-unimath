@@ -1,445 +1,171 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Univalent Mathematics in Agda
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.05-identity-types where
+module foundations.integers where
 
-open import foundations.04-inductive-types public
+open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundations.functions using (_∘_)
+open import foundations.laws-for-operations using
+  ( interchange-law; interchange-law-commutative-and-associative)
+open import foundations.levels using (UU; Level; lzero)
+open import foundations.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; add-ℕ; mul-ℕ;
+    left-unit-law-add-ℕ; left-successor-law-add-ℕ)
+open import foundations.unit-type using (unit; star)
 ```
 
-##  The identity type
+## The type of integers
 
 ```agda
-data Id {i : Level} {A : UU i} (x : A) : A → UU i where
-  refl : Id x x
-
-{-# BUILTIN EQUALITY Id  #-}
+ℤ : UU lzero
+ℤ = coprod ℕ (coprod unit ℕ)
 ```
 
-In the following definition we give a construction of path induction.
-However, in the development of this library we will mostly use Agda's
-built-in methods to give constructions by path induction.
+- Inclusion of the negative integers
 
 ```agda
-ind-Id :
-  {i j : Level} {A : UU i} (x : A) (B : (y : A) (p : Id x y) → UU j) →
-  (B x refl) → (y : A) (p : Id x y) → B y p
-ind-Id x B b y refl = b
+in-neg : ℕ → ℤ
+in-neg n = inl n
 ```
 
-## The groupoidal structure of types
+- Negative one
 
 ```agda
-_∙_ :
-  {i : Level} {A : UU i} {x y z : A} → Id x y → Id y z → Id x z
-refl ∙ q = q
-
-concat :
-  {i : Level} {A : UU i} {x y : A} → Id x y → (z : A) → Id y z → Id x z
-concat p z q = p ∙ q
-
-inv :
-  {i : Level} {A : UU i} {x y : A} → Id x y → Id y x
-inv refl = refl
+neg-one-ℤ : ℤ
+neg-one-ℤ = in-neg zero-ℕ
 ```
 
-## The groupoidal laws for types
+- Zero
 
 ```agda
-assoc :
-  {i : Level} {A : UU i} {x y z w : A} (p : Id x y) (q : Id y z)
-  (r : Id z w) → Id ((p ∙ q) ∙ r) (p ∙ (q ∙ r))
-assoc refl q r = refl
-
-left-unit :
-  {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (refl ∙ p) p
-left-unit = refl
-
-right-unit :
-  {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (p ∙ refl) p
-right-unit {p = refl} = refl
-
-left-inv :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) →
-  Id ((inv p) ∙ p) refl
-left-inv refl = refl
-
-right-inv :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) →
-  Id (p ∙ (inv p)) refl
-right-inv refl = refl
+zero-ℤ : ℤ
+zero-ℤ = inr (inl star)
 ```
 
-## The action on paths of functions
+- One
 
 ```agda
-ap :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A} (p : Id x y) →
-  Id (f x) (f y)
-ap f refl = refl
+one-ℤ : ℤ
+one-ℤ = inr (inr zero-ℕ)
+```
 
-ap-id :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) → Id (ap id p) p
-ap-id refl = refl
+- Inclusion of the positive integers
 
-ap-comp :
-  {i j k : Level} {A : UU i} {B : UU j} {C : UU k} (g : B → C)
-  (f : A → B) {x y : A} (p : Id x y) → Id (ap (g ∘ f) p) (ap g (ap f p))
-ap-comp g f refl = refl
+```agda
+in-pos : ℕ → ℤ
+in-pos n = inr (inr n)
+```
 
-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y y' : B} (q : Id y y') → Id (f x y) (f x' y')
-ap-binary f refl refl = refl
+- Inclusion of the natural numbers
 
-triangle-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y y' : B} (q : Id y y') →
-  Id (ap-binary f p q) (ap (λ z → f z y) p ∙ ap (f x') q)
-triangle-ap-binary f refl refl = refl
+```agda
+int-ℕ : ℕ → ℤ
+int-ℕ zero-ℕ = zero-ℤ
+int-ℕ (succ-ℕ n) = in-pos n
+```
 
-triangle-ap-binary' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y y' : B} (q : Id y y') →
-  Id (ap-binary f p q) (ap (f x) q ∙ ap (λ z → f z y') p)
-triangle-ap-binary' f refl refl = refl
+- Induction principle on the type of integers
 
-left-unit-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x : A} {y y' : B} (q : Id y y') →
-  Id (ap-binary f refl q) (ap (f x) q)
-left-unit-ap-binary f refl = refl
+```agda
+ind-ℤ :
+  {l : Level} (P : ℤ → UU l) →
+  P neg-one-ℤ → ((n : ℕ) → P (inl n) → P (inl (succ-ℕ n))) →
+  P zero-ℤ →
+  P one-ℤ → ((n : ℕ) → P (inr (inr (n))) → P (inr (inr (succ-ℕ n)))) →
+  (k : ℤ) → P k
+ind-ℤ P p-1 p-S p0 p1 pS (inl zero-ℕ) = p-1
+ind-ℤ P p-1 p-S p0 p1 pS (inl (succ-ℕ x)) =
+  p-S x (ind-ℤ P p-1 p-S p0 p1 pS (inl x))
+ind-ℤ P p-1 p-S p0 p1 pS (inr (inl star)) = p0
+ind-ℤ P p-1 p-S p0 p1 pS (inr (inr zero-ℕ)) = p1
+ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (succ-ℕ x))) =
+  pS x (ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (x))))
+```
 
-right-unit-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y : B} →
-  Id (ap-binary f p refl) (ap (λ z → f z y) p)
-right-unit-ap-binary f refl = refl
+- The successor and predecessor functions on ℤ
 
-ap-add-ℕ :
-  {m n m' n' : ℕ} → Id m m' → Id n n' → Id (add-ℕ m n) (add-ℕ m' n')
-ap-add-ℕ p q = ap-binary add-ℕ p q
+```agda
+succ-ℤ : ℤ → ℤ
+succ-ℤ (inl zero-ℕ) = zero-ℤ
+succ-ℤ (inl (succ-ℕ x)) = inl x
+succ-ℤ (inr (inl star)) = one-ℤ
+succ-ℤ (inr (inr x)) = inr (inr (succ-ℕ x))
 
-ap-mul-ℕ :
-  {x y x' y' : ℕ} → Id x x' → Id y y' → Id (mul-ℕ x y) (mul-ℕ x' y')
-ap-mul-ℕ p q = ap-binary mul-ℕ p q
+pred-ℤ : ℤ → ℤ
+pred-ℤ (inl x) = inl (succ-ℕ x)
+pred-ℤ (inr (inl star)) = inl zero-ℕ
+pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
+pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
+```
+
+### Arithmetic operations on the integers
+
+- Addition on ℤ
+
+```agda
+add-ℤ : ℤ → ℤ → ℤ
+add-ℤ (inl zero-ℕ) l = pred-ℤ l
+add-ℤ (inl (succ-ℕ x)) l = pred-ℤ (add-ℤ (inl x) l)
+add-ℤ (inr (inl star)) l = l
+add-ℤ (inr (inr zero-ℕ)) l = succ-ℤ l
+add-ℤ (inr (inr (succ-ℕ x))) l = succ-ℤ (add-ℤ (inr (inr x)) l)
+
+add-ℤ' : ℤ → ℤ → ℤ
+add-ℤ' x y = add-ℤ y x
 
 ap-add-ℤ :
   {x y x' y' : ℤ} → Id x x' → Id y y' → Id (add-ℤ x y) (add-ℤ x' y')
 ap-add-ℤ p q = ap-binary add-ℤ p q
+```
+
+- The negative of an integer
+
+```agda
+neg-ℤ : ℤ → ℤ
+neg-ℤ (inl x) = inr (inr x)
+neg-ℤ (inr (inl star)) = inr (inl star)
+neg-ℤ (inr (inr x)) = inl x
+```
+
+- Multiplication of integers
+
+We give two definitions of multiplication on ℤ
+
+```agda
+mul-ℤ : ℤ → ℤ → ℤ
+mul-ℤ (inl zero-ℕ) l = neg-ℤ l
+mul-ℤ (inl (succ-ℕ x)) l = add-ℤ (neg-ℤ l) (mul-ℤ (inl x) l)
+mul-ℤ (inr (inl star)) l = zero-ℤ
+mul-ℤ (inr (inr zero-ℕ)) l = l
+mul-ℤ (inr (inr (succ-ℕ x))) l = add-ℤ l (mul-ℤ (inr (inr x)) l)
+
+mul-ℤ' : ℤ → ℤ → ℤ
+mul-ℤ' x y = mul-ℤ y x
 
 ap-mul-ℤ :
   {x y x' y' : ℤ} → Id x x' → Id y y' → Id (mul-ℤ x y) (mul-ℤ x' y')
 ap-mul-ℤ p q = ap-binary mul-ℤ p q
-```
 
-```agda
-ap-refl :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) (x : A) →
-  Id (ap f (refl {_} {_} {x})) refl
-ap-refl f x = refl
+explicit-mul-ℤ : ℤ → ℤ → ℤ
+explicit-mul-ℤ (inl x) (inl y) = int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y))
+explicit-mul-ℤ (inl x) (inr (inl star)) = zero-ℤ
+explicit-mul-ℤ (inl x) (inr (inr y)) =
+  neg-ℤ (int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)))
+explicit-mul-ℤ (inr (inl star)) (inl y) = zero-ℤ
+explicit-mul-ℤ (inr (inr x)) (inl y) =
+  neg-ℤ (int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)))
+explicit-mul-ℤ (inr (inl star)) (inr (inl star)) = zero-ℤ
+explicit-mul-ℤ (inr (inl star)) (inr (inr y)) = zero-ℤ
+explicit-mul-ℤ (inr (inr x)) (inr (inl star)) = zero-ℤ
+explicit-mul-ℤ (inr (inr x)) (inr (inr y)) = int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y))
 
-ap-concat :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
-  (p : Id x y) (q : Id y z) → Id (ap f (p ∙ q)) ((ap f p) ∙ (ap f q))
-ap-concat f refl q = refl
-
-ap-inv :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
-  (p : Id x y) → Id (ap f (inv p)) (inv (ap f p))
-ap-inv f refl = refl
-```
-
-## Transport
-
-```agda
-tr :
-  {i j : Level} {A : UU i} (B : A → UU j) {x y : A} (p : Id x y) → B x → B y
-tr B refl b = b
-
-apd :
-  {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) {x y : A}
-  (p : Id x y) → Id (tr B p (f x)) (f y)
-apd f refl = refl
-
-path-over :
-  {i j : Level} {A :  UU i} (B : A → UU j) {x x' : A} (p : Id x x') →
-  B x → B x' → UU j
-path-over B p y y' = Id (tr B p y) y'
-
-refl-path-over :
-  {i j : Level} {A : UU i} (B : A → UU j) (x : A) (y : B x) →
-  path-over B refl y y
-refl-path-over B x y = refl
-```
-
-### laws for transport
-
-```agda
-tr-concat :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y z : A} (p : Id x y)
-  (q : Id y z) (b : B x) → Id (tr B (p ∙ q) b) (tr B q (tr B p b))
-tr-concat refl q b = refl
-
-tr-ap :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
-  (f : A → C) (g : (x : A) → B x → D (f x)) {x y : A} (p : Id x y) (z : B x) →
-  Id (tr D (ap f p) (g x z)) (g y (tr B p z))
-tr-ap f g refl z = refl
-
-eq-transpose-tr :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : Id x y)
-  {u : B x} {v : B y} → Id v (tr B p u) → Id (tr B (inv p) v) u
-eq-transpose-tr refl q = q
-
-eq-transpose-tr' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : Id x y)
-  {u : B x} {v : B y} → Id (tr B p u) v → Id u (tr B (inv p) v)
-eq-transpose-tr' refl q = q
-```
-
-## The uniqueness of refl
-
-```agda
-uniqueness-refl :
-  {i : Level} {A : UU i} (a : A) (x : A) (p : Id a x) →
-  Id {A = Σ A (Id a)} (pair a refl) (pair x p)
-uniqueness-refl a a refl = refl
-```
-
-## The laws of addition on ℕ
-
-```agda
-right-unit-law-add-ℕ :
-  (x : ℕ) → Id (add-ℕ x zero-ℕ) x
-right-unit-law-add-ℕ x = refl
-
-left-unit-law-add-ℕ :
-  (x : ℕ) → Id (add-ℕ zero-ℕ x) x
-left-unit-law-add-ℕ zero-ℕ = refl
-left-unit-law-add-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-add-ℕ x)
-
-left-successor-law-add-ℕ :
-  (x y : ℕ) → Id (add-ℕ (succ-ℕ x) y) (succ-ℕ (add-ℕ x y))
-left-successor-law-add-ℕ x zero-ℕ = refl
-left-successor-law-add-ℕ x (succ-ℕ y) =
-  ap succ-ℕ (left-successor-law-add-ℕ x y)
-                                        
-right-successor-law-add-ℕ :
-  (x y : ℕ) → Id (add-ℕ x (succ-ℕ y)) (succ-ℕ (add-ℕ x y))
-right-successor-law-add-ℕ x y = refl
-
-associative-add-ℕ :
-  (x y z : ℕ) → Id (add-ℕ (add-ℕ x y) z) (add-ℕ x (add-ℕ y z))
-associative-add-ℕ x y zero-ℕ = refl 
-associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
-
-commutative-add-ℕ : (x y : ℕ) → Id (add-ℕ x y) (add-ℕ y x)
-commutative-add-ℕ zero-ℕ y = left-unit-law-add-ℕ y
-commutative-add-ℕ (succ-ℕ x) y =
-  (left-successor-law-add-ℕ x y) ∙ (ap succ-ℕ (commutative-add-ℕ x y))
-
-left-one-law-add-ℕ :
-  (x : ℕ) → Id (add-ℕ one-ℕ x) (succ-ℕ x)
-left-one-law-add-ℕ x =
-  ( left-successor-law-add-ℕ zero-ℕ x) ∙
-  ( ap succ-ℕ (left-unit-law-add-ℕ x))
-
-right-one-law-add-ℕ :
-  (x : ℕ) → Id (add-ℕ x one-ℕ) (succ-ℕ x)
-right-one-law-add-ℕ x = refl
-
-left-two-law-add-ℕ :
-  (x : ℕ) → Id (add-ℕ two-ℕ x) (succ-ℕ (succ-ℕ x))
-left-two-law-add-ℕ x =
-  ( left-successor-law-add-ℕ one-ℕ x) ∙
-  ( ap succ-ℕ (left-one-law-add-ℕ x))
-
-right-two-law-add-ℕ :
-  (x : ℕ) → Id (add-ℕ x two-ℕ) (succ-ℕ (succ-ℕ x))
-right-two-law-add-ℕ x = refl
-
-module _
-  {l : Level} {X : UU l} (μ : X → X → X)
-  where
-  
-  interchange-law : (X → X → X) → UU l
-  interchange-law ν = (x y u v : X) → Id (μ (ν x y) (ν u v)) (ν (μ x u) (μ y v))
-
-  interchange-law-commutative-and-associative :
-    ((x y : X) → Id (μ x y) (μ y x)) →
-    ((x y z : X ) → Id (μ (μ x y) z) (μ x (μ y z))) →
-    interchange-law μ
-  interchange-law-commutative-and-associative C A x y u v =
-    ( A x y (μ u v)) ∙
-    ( ( ap
-        ( μ x)
-        ( (inv (A y u v)) ∙ ((ap (λ z → μ z v) (C y u)) ∙ (A u y v)))) ∙
-      ( inv (A x u (μ y v))))
-
-interchange-law-add-add-ℕ : interchange-law add-ℕ add-ℕ
-interchange-law-add-add-ℕ =
-  interchange-law-commutative-and-associative
-    add-ℕ
-    commutative-add-ℕ
-    associative-add-ℕ
-```
-
-## Distributivity of inv over concat
-
-```agda
-distributive-inv-concat :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A}
-  (q : Id y z) → Id (inv (p ∙ q)) ((inv q) ∙ (inv p))
-distributive-inv-concat refl refl = refl
-```
-
-## Transposing inverses
-
-```agda
-inv-con :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A} (q : Id y z)
-  (r : Id x z) → (Id (p ∙ q) r) → Id q ((inv p) ∙ r)
-inv-con refl q r = id 
-
-con-inv :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A} (q : Id y z)
-  (r : Id x z) → (Id (p ∙ q) r) → Id p (r ∙ (inv q))
-con-inv p refl r =
-  ( λ α → α ∙ (inv right-unit)) ∘ (concat (inv right-unit) r)
-```
-
-## The path lifting property
-
-```agda
-lift :
-  {i j : Level} {A : UU i} {B : A → UU j} {x y : A} (p : Id x y)
-  (b : B x) → Id (pair x b) (pair y (tr B p b))
-lift refl b = refl
-```
-
-## The Mac Lane pentagon for identity types
-
-```agda
-Mac-Lane-pentagon :
-  {i : Level} {A : UU i} {a b c d e : A}
-  (p : Id a b) (q : Id b c) (r : Id c d) (s : Id d e) →
-  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
-      α₂ = (assoc p (q ∙ r) s)
-      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
-      α₄ = (assoc (p ∙ q) r s)
-      α₅ = (assoc p q (r ∙ s))
-  in
-  Id ((α₁ ∙ α₂) ∙ α₃) (α₄ ∙ α₅)
-Mac-Lane-pentagon refl refl refl refl = refl
-```
-
-## Laws for multiplication on ℕ
-
-```agda
-abstract
-  left-zero-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ zero-ℕ x) zero-ℕ
-  left-zero-law-mul-ℕ x = refl
-
-  right-zero-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ x zero-ℕ) zero-ℕ
-  right-zero-law-mul-ℕ zero-ℕ = refl
-  right-zero-law-mul-ℕ (succ-ℕ x) =
-    ( right-unit-law-add-ℕ (mul-ℕ x zero-ℕ)) ∙ (right-zero-law-mul-ℕ x)
-
-abstract
-  right-unit-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ x one-ℕ) x
-  right-unit-law-mul-ℕ zero-ℕ = refl
-  right-unit-law-mul-ℕ (succ-ℕ x) = ap succ-ℕ (right-unit-law-mul-ℕ x)
-
-  left-unit-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ one-ℕ x) x
-  left-unit-law-mul-ℕ zero-ℕ = refl
-  left-unit-law-mul-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-mul-ℕ x)
-
-abstract
-  left-successor-law-mul-ℕ :
-    (x y : ℕ) → Id (mul-ℕ (succ-ℕ x) y) (add-ℕ (mul-ℕ x y) y)
-  left-successor-law-mul-ℕ x y = refl
-
-  right-successor-law-mul-ℕ :
-    (x y : ℕ) → Id (mul-ℕ x (succ-ℕ y)) (add-ℕ x (mul-ℕ x y))
-  right-successor-law-mul-ℕ zero-ℕ y = refl
-  right-successor-law-mul-ℕ (succ-ℕ x) y =
-    ( ( ap (λ t → succ-ℕ (add-ℕ t y)) (right-successor-law-mul-ℕ x y)) ∙
-      ( ap succ-ℕ (associative-add-ℕ x (mul-ℕ x y) y))) ∙
-    ( inv (left-successor-law-add-ℕ x (add-ℕ (mul-ℕ x y) y)))
-
-square-succ-ℕ :
-  (k : ℕ) →
-  Id (square-ℕ (succ-ℕ k)) (succ-ℕ (mul-ℕ (succ-ℕ (succ-ℕ k)) k))
-square-succ-ℕ k =
-  ( right-successor-law-mul-ℕ (succ-ℕ k) k) ∙
-  ( commutative-add-ℕ (succ-ℕ k) (mul-ℕ (succ-ℕ k) k))
-
-abstract
-  commutative-mul-ℕ :
-    (x y : ℕ) → Id (mul-ℕ x y) (mul-ℕ y x)
-  commutative-mul-ℕ zero-ℕ y = inv (right-zero-law-mul-ℕ y)
-  commutative-mul-ℕ (succ-ℕ x) y =
-    ( commutative-add-ℕ (mul-ℕ x y) y) ∙ 
-    ( ( ap (add-ℕ y) (commutative-mul-ℕ x y)) ∙
-      ( inv (right-successor-law-mul-ℕ y x)))
-
-abstract
-  left-distributive-mul-add-ℕ :
-    (x y z : ℕ) → Id (mul-ℕ x (add-ℕ y z)) (add-ℕ (mul-ℕ x y) (mul-ℕ x z))
-  left-distributive-mul-add-ℕ zero-ℕ y z = refl
-  left-distributive-mul-add-ℕ (succ-ℕ x) y z =
-    ( left-successor-law-mul-ℕ x (add-ℕ y z)) ∙ 
-    ( ( ap (add-ℕ' (add-ℕ y z)) (left-distributive-mul-add-ℕ x y z)) ∙ 
-      ( ( associative-add-ℕ (mul-ℕ x y) (mul-ℕ x z) (add-ℕ y z)) ∙
-        ( ( ap ( add-ℕ (mul-ℕ x y)) 
-               ( ( inv (associative-add-ℕ (mul-ℕ x z) y z)) ∙
-                 ( ( ap (add-ℕ' z) (commutative-add-ℕ (mul-ℕ x z) y)) ∙
-                   ( associative-add-ℕ y (mul-ℕ x z) z)))) ∙ 
-          ( inv (associative-add-ℕ (mul-ℕ x y) y (add-ℕ (mul-ℕ x z) z))))))
-
-abstract
-  right-distributive-mul-add-ℕ :
-    (x y z : ℕ) → Id (mul-ℕ (add-ℕ x y) z) (add-ℕ (mul-ℕ x z) (mul-ℕ y z))
-  right-distributive-mul-add-ℕ x y z =
-    ( commutative-mul-ℕ (add-ℕ x y) z) ∙ 
-    ( ( left-distributive-mul-add-ℕ z x y) ∙ 
-      ( ( ap (add-ℕ' (mul-ℕ z y)) (commutative-mul-ℕ z x)) ∙ 
-        ( ap (add-ℕ (mul-ℕ x z)) (commutative-mul-ℕ z y))))
-
-abstract
-  associative-mul-ℕ :
-    (x y z : ℕ) → Id (mul-ℕ (mul-ℕ x y) z) (mul-ℕ x (mul-ℕ y z))
-  associative-mul-ℕ zero-ℕ y z = refl
-  associative-mul-ℕ (succ-ℕ x) y z =
-    ( right-distributive-mul-add-ℕ (mul-ℕ x y) y z) ∙ 
-    ( ap (add-ℕ' (mul-ℕ y z)) (associative-mul-ℕ x y z))
-
-left-two-law-mul-ℕ :
-  (x : ℕ) → Id (mul-ℕ two-ℕ x) (add-ℕ x x)
-left-two-law-mul-ℕ x =
-  ( left-successor-law-mul-ℕ one-ℕ x) ∙
-  ( ap (add-ℕ' x) (left-unit-law-mul-ℕ x))
-
-right-two-law-mul-ℕ :
-  (x : ℕ) → Id (mul-ℕ x two-ℕ) (add-ℕ x x)
-right-two-law-mul-ℕ x =
-  ( right-successor-law-mul-ℕ x one-ℕ) ∙
-  ( ap (add-ℕ x) (right-unit-law-mul-ℕ x))
-
-interchange-law-mul-mul-ℕ : interchange-law mul-ℕ mul-ℕ
-interchange-law-mul-mul-ℕ =
-  interchange-law-commutative-and-associative
-    mul-ℕ
-    commutative-mul-ℕ
-    associative-mul-ℕ
+explicit-mul-ℤ' : ℤ → ℤ → ℤ
+explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 ```
 
 ## The successor and predecessor functions on ℤ are mutual inverses
@@ -950,25 +676,4 @@ add-neg-one-left-ℤ x = refl
 add-neg-one-right-ℤ :
   (x : ℤ) → Id (add-ℤ x neg-one-ℤ) (pred-ℤ x)
 add-neg-one-right-ℤ x = commutative-add-ℤ x neg-one-ℤ
-```
-
-## Compute division by two rounded down
-
-```agda
-comp-even-div-two-ℕ :
-  (n : ℕ) → Id (div-two-ℕ (mul-ℕ two-ℕ n)) n
-comp-even-div-two-ℕ zero-ℕ = refl
-comp-even-div-two-ℕ (succ-ℕ n) =
-  ( ap div-two-ℕ (right-successor-law-mul-ℕ two-ℕ n)) ∙
-  ( ( ap div-two-ℕ (left-two-law-add-ℕ (mul-ℕ two-ℕ n))) ∙
-    ( ap succ-ℕ (comp-even-div-two-ℕ n)))
-
-comp-odd-div-two-ℕ :
-  (n : ℕ) → Id (div-two-ℕ (succ-ℕ (mul-ℕ two-ℕ n))) n
-comp-odd-div-two-ℕ zero-ℕ = refl
-comp-odd-div-two-ℕ (succ-ℕ n) =
-   ( ap ( div-two-ℕ ∘ succ-ℕ)
-        ( ( right-successor-law-mul-ℕ two-ℕ n) ∙
-          ( left-two-law-add-ℕ (mul-ℕ two-ℕ n)))) ∙
-   ( ap succ-ℕ (comp-odd-div-two-ℕ n))
 ```
