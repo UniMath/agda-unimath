@@ -308,13 +308,13 @@ Eq-bool false false = unit
 
 -- Exercise 6.2 (b)
 
-reflexive-Eq-bool : (x : bool) → Eq-bool x x
-reflexive-Eq-bool true = star
-reflexive-Eq-bool false = star
+refl-Eq-bool : (x : bool) → Eq-bool x x
+refl-Eq-bool true = star
+refl-Eq-bool false = star
 
 Eq-eq-bool :
   {x y : bool} → Id x y → Eq-bool x y
-Eq-eq-bool {x = x} refl = reflexive-Eq-bool x
+Eq-eq-bool {x = x} refl = refl-Eq-bool x
 
 eq-Eq-bool :
   {x y : bool} → Eq-bool x y → Id x y

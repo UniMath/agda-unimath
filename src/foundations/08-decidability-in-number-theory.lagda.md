@@ -931,7 +931,7 @@ inv-boolean-reflection (inr f) x = ex-falso (f x)
 boolean-reflection :
   {l : Level} {A : UU l} (d : is-decidable A) → Id (booleanization d) true → A
 boolean-reflection (inl a) p = a
-boolean-reflection (inr f) p = ex-falso (Eq-eq-𝟚 p)
+boolean-reflection (inr f) p = ex-falso (Eq-eq-bool p)
 
 {-
 four-hundred-and-nine-ℕ : ℕ
