@@ -1086,6 +1086,13 @@ module _
           ( eq-is-prop' is-prop-P)
           ( eq-is-prop' is-prop-Q))
 
+coprod-Prop :
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+  (type-Prop P → ¬ (type-Prop Q)) → UU-Prop (l1 ⊔ l2)
+pr1 (coprod-Prop P Q H) = coprod (type-Prop P) (type-Prop Q)
+pr2 (coprod-Prop P Q H) =
+  is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
 -- Exercise 12.3 (c)
 
 module _
