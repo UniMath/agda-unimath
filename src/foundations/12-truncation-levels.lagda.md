@@ -979,16 +979,20 @@ pr2 (subset-Set A P) =
 -- Exercise 12.1
 
 abstract
-  is-prop-Eq-𝟚 : (x y : bool) → is-prop (Eq-𝟚 x y)
-  is-prop-Eq-𝟚 true true = is-prop-unit
-  is-prop-Eq-𝟚 true false = is-prop-empty
-  is-prop-Eq-𝟚 false true = is-prop-empty
-  is-prop-Eq-𝟚 false false = is-prop-unit
+  is-prop-Eq-bool : (x y : bool) → is-prop (Eq-bool x y)
+  is-prop-Eq-bool true true = is-prop-unit
+  is-prop-Eq-bool true false = is-prop-empty
+  is-prop-Eq-bool false true = is-prop-empty
+  is-prop-Eq-bool false false = is-prop-unit
 
 abstract
   is-set-bool : is-set bool
   is-set-bool =
-    is-set-prop-in-id Eq-𝟚 is-prop-Eq-𝟚 reflexive-Eq-𝟚 (λ x y → eq-Eq-𝟚)
+    is-set-prop-in-id
+      ( Eq-bool)
+      ( is-prop-Eq-bool)
+      ( refl-Eq-bool)
+      ( λ x y → eq-Eq-bool)
 
 bool-Set : UU-Set lzero
 pr1 bool-Set = bool

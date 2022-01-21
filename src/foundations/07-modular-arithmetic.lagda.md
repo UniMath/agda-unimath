@@ -9,15 +9,13 @@ module foundations.07-modular-arithmetic where
 
 import foundations.06-universes
 open foundations.06-universes public
+```
 
---------------------------------------------------------------------------------
+# The Curry-Howard interpretation
 
-{- Section 7.1 The Curry-Howard interpretation -}
+## The divisibility relation on ℕ
 
-{- Definition 7.1.2 -}
-
--- We introduce the divisibility relation. --
-
+```agda
 div-ℕ : ℕ → ℕ → UU lzero
 div-ℕ m n = Σ ℕ (λ k → Id (mul-ℕ k m) n)
 
@@ -51,8 +49,6 @@ is-even-ℕ n = div-ℕ two-ℕ n
 is-odd-ℕ : ℕ → UU lzero
 is-odd-ℕ n = ¬ (is-even-ℕ n)
 
-{- Example 7.1.4 -}
-
 div-one-ℕ :
   (x : ℕ) → div-ℕ one-ℕ x
 pr1 (div-one-ℕ x) = x
@@ -70,12 +66,11 @@ pr2 (div-zero-ℕ k) = left-zero-law-mul-ℕ k
 div-is-zero-ℕ :
   (k x : ℕ) → is-zero-ℕ x → div-ℕ k x
 div-is-zero-ℕ k .zero-ℕ refl = div-zero-ℕ k
+```
 
-{- Proposition 7.1.5 -}
+## A three-for-two property of division
 
-{- In the following three constructions we show that if any two of the three
-   numbers x, y, and x + y, is divisible by d, then so is the third. -}
-
+```agda
 div-add-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (add-ℕ x y)
 pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = add-ℕ n m
@@ -96,7 +91,7 @@ pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
         ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
           ( commutative-add-ℕ
             ( mul-ℕ m (succ-ℕ d))
-            ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙ 
+            ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙
       ( ( ap
           ( mul-ℕ' (succ-ℕ d))
           ( is-additive-right-inverse-dist-ℕ m n
@@ -110,13 +105,11 @@ div-right-summand-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d (add-ℕ x y) → div-ℕ d y
 div-right-summand-ℕ d x y H1 H2 =
   div-left-summand-ℕ d y x H1 (concatenate-div-eq-ℕ H2 (commutative-add-ℕ x y))
+```
 
---------------------------------------------------------------------------------
+## The congruence relations on ℕ
 
-{- Section 7.2 The congruence relations -}
-
-{- Definition 7.2.1 -}
-
+```agda
 is-reflexive : {l1 l2 : Level} {A : UU l1} → (A → A → UU l2) → UU (l1 ⊔ l2)
 is-reflexive {A = A} R = (x : A) → R x x
 
@@ -125,11 +118,6 @@ is-symmetric {A = A} R = (x y : A) → R x y → R y x
 
 is-transitive : {l1 l2 : Level} {A : UU l1} → (A → A → UU l2) → UU (l1 ⊔ l2)
 is-transitive {A = A} R = (x y z : A) → R x y → R y z → R x z
-
-{- Definition 7.2.2 -}
-
-{- We define the congruence relation on ℕ and we do some bureaucracy that will
-   help us in calculations involving the congruence relations. -}
 
 cong-ℕ :
   ℕ → ℕ → ℕ → UU lzero
@@ -153,30 +141,20 @@ concatenate-cong-eq-ℕ :
   cong-ℕ k x1 x2 → Id x2 x3 → cong-ℕ k x1 x3
 concatenate-cong-eq-ℕ k H refl = H
 
--- We show that cong-ℕ one-ℕ is the indiscrete equivalence relation --
-
 is-indiscrete-cong-one-ℕ :
   (x y : ℕ) → cong-ℕ one-ℕ x y
 is-indiscrete-cong-one-ℕ x y = div-one-ℕ (dist-ℕ x y)
-
--- We show that the congruence relation modulo 0 is discrete
 
 is-discrete-cong-zero-ℕ :
   (x y : ℕ) → cong-ℕ zero-ℕ x y → Id x y
 is-discrete-cong-zero-ℕ x y (pair k p) =
   eq-dist-ℕ x y ((inv p) ∙ (right-zero-law-mul-ℕ k))
 
-{- Example 7.2.3 -}
-
 cong-zero-ℕ :
   (k : ℕ) → cong-ℕ k k zero-ℕ
 pr1 (cong-zero-ℕ k) = one-ℕ
 pr2 (cong-zero-ℕ k) =
   (left-unit-law-mul-ℕ k) ∙ (inv (right-unit-law-dist-ℕ k))
-
-{- Proposition 7.2.4 -}
-
--- We show that cong-ℕ is an equivalence relation.
 
 refl-cong-ℕ :
   (k x : ℕ) → cong-ℕ k x x
@@ -197,13 +175,13 @@ cong-zero-ℕ' :
   (k : ℕ) → cong-ℕ k zero-ℕ k
 cong-zero-ℕ' k =
   symm-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
+```
 
-{- Before we show that cong-ℕ is transitive, we give some lemmas that will help 
-   us showing that cong is an equivalence relation. They are basically 
-   bureaucracy, manipulating already known facts. -}
+### Transitivity of cong-ℕ
 
--- Three elements can be ordered in 6 possible ways
+Before we show that cong-ℕ is transitive, we give some lemmas that will help us showing that cong is an equivalence relation. They are basically bureaucracy, manipulating already known facts.
 
+```agda
 cases-order-three-elements-ℕ :
   (x y z : ℕ) → UU lzero
 cases-order-three-elements-ℕ x y z =
@@ -229,12 +207,9 @@ order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ =
 order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
   order-three-elements-ℕ x y z
 
-{- We show that the distances of any three elements always add up, when they
-   are added up in the right way :) -} 
-
 cases-dist-ℕ :
   (x y z : ℕ) → UU lzero
-cases-dist-ℕ x y z = 
+cases-dist-ℕ x y z =
   coprod
     ( Id (add-ℕ (dist-ℕ x y) (dist-ℕ y z)) (dist-ℕ x z))
     ( coprod
@@ -246,7 +221,7 @@ is-total-dist-ℕ :
 is-total-dist-ℕ x y z with order-three-elements-ℕ x y z
 is-total-dist-ℕ x y z | inl (inl (pair H1 H2)) =
   inl (triangle-equality-dist-ℕ x y z H1 H2)
-is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) = 
+is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
   inr
     ( inl
       ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
@@ -263,7 +238,7 @@ is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
     ( inr
       ( ( ap (add-ℕ (dist-ℕ x z)) (symmetric-dist-ℕ x y)) ∙
         ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
-          ( triangle-equality-dist-ℕ y x z H1 H2)))) 
+          ( triangle-equality-dist-ℕ y x z H1 H2))))
 is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
   inr
     ( inr
@@ -276,8 +251,6 @@ is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =
       ( ( commutative-add-ℕ (dist-ℕ y x) (dist-ℕ z y)) ∙
         ( ( triangle-equality-dist-ℕ z y x H1 H2) ∙
           ( symmetric-dist-ℕ z x))))
-
--- Finally, we show that cong-ℕ is transitive.
 
 trans-cong-ℕ :
   (k x y z : ℕ) →
@@ -297,7 +270,7 @@ concatenate-cong-eq-cong-ℕ :
   cong-ℕ k x1 x2 → Id x2 x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
 concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
   trans-cong-ℕ k x y z H K
-  
+
 concatenate-eq-cong-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
   Id x1 x2 → cong-ℕ k x2 x3 → Id x3 x4 →
@@ -305,17 +278,13 @@ concatenate-eq-cong-eq-cong-eq-ℕ :
 concatenate-eq-cong-eq-cong-eq-ℕ k
   {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
   trans-cong-ℕ k x y z H K
+```
 
---------------------------------------------------------------------------------
+## The standard finite types
 
-{- Section 7.3 The standard finite types -}
-
+```agda
 classical-Fin : ℕ → UU lzero
 classical-Fin k = Σ ℕ (λ x → le-ℕ x k)
-
-{- Definition 7.3.2 -}
-
--- We introduce the finite types as a family indexed by ℕ.
 
 Fin : ℕ → UU lzero
 Fin zero-ℕ = empty
@@ -330,18 +299,14 @@ neg-one-Fin {k} = inr star
 
 is-neg-one-Fin : {k : ℕ} → Fin k → UU lzero
 is-neg-one-Fin {succ-ℕ k} x = Id x neg-one-Fin
+```
 
-{- Definition 7.3.4 -}
+### The inclusion of Fin k into ℕ
 
--- We define the inclusion of Fin k into ℕ.
-
+```agda
 nat-Fin : {k : ℕ} → Fin k → ℕ
 nat-Fin {succ-ℕ k} (inl x) = nat-Fin x
 nat-Fin {succ-ℕ k} (inr x) = k
-
-{- Lemma 7.3.5 -}
-
--- We show that nat-Fin is bounded
 
 strict-upper-bound-nat-Fin : {k : ℕ} (x : Fin k) → le-ℕ (nat-Fin x) k
 strict-upper-bound-nat-Fin {succ-ℕ k} (inl x) =
@@ -354,17 +319,11 @@ strict-upper-bound-nat-Fin {succ-ℕ k} (inl x) =
 strict-upper-bound-nat-Fin {succ-ℕ k} (inr star) =
   succ-le-ℕ k
 
--- We also give a non-strict upper bound for convenience
-
 upper-bound-nat-Fin : {k : ℕ} (x : Fin (succ-ℕ k)) → leq-ℕ (nat-Fin x) k
 upper-bound-nat-Fin {zero-ℕ} (inr star) = star
 upper-bound-nat-Fin {succ-ℕ k} (inl x) =
   preserves-leq-succ-ℕ (nat-Fin x) k (upper-bound-nat-Fin x)
 upper-bound-nat-Fin {succ-ℕ k} (inr star) = refl-leq-ℕ (succ-ℕ k)
-
-{- Proposition 7.3.6 -}
-
--- We show that nat-Fin is an injective function
 
 neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (Id x y)
 neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = Peano-8 y ∘ inv
@@ -379,18 +338,14 @@ is-injective-nat-Fin {succ-ℕ k} {inr star} {inl y} p =
   ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin y) (inv p))
 is-injective-nat-Fin {succ-ℕ k} {inr star} {inr star} p =
   refl
+```
 
---------------------------------------------------------------------------------
+## The natural numbers modulo k+1
 
-{- Section 7.4 The natural numbers modulo k+1 -}
-
-{- Definition 7.4.1 -}
-
+```agda
 is-split-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-split-surjective {A = A} {B} f = (b : B) → Σ A (λ a → Id (f a) b)
-
-{- Definition 7.4.2 -}
 
 -- We define the zero element of Fin k.
 
@@ -428,17 +383,15 @@ mod-succ-ℕ k zero-ℕ = zero-Fin
 mod-succ-ℕ k (succ-ℕ n) = succ-Fin (mod-succ-ℕ k n)
 
 mod-two-ℕ : ℕ → Fin two-ℕ
-mod-two-ℕ = mod-succ-ℕ one-ℕ
+mod-two-ℕ = mod-succ-ℕ 1
 
-mod-three-ℕ : ℕ → Fin three-ℕ
-mod-three-ℕ = mod-succ-ℕ two-ℕ
-
-{- Lemma 7.4.4 -}
+mod-three-ℕ : ℕ → Fin 3
+mod-three-ℕ = mod-succ-ℕ 2
 
 -- We prove three things to help calculating with nat-Fin.
 
 is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (zero-Fin {k}))
-is-zero-nat-zero-Fin {zero-ℕ} = refl 
+is-zero-nat-zero-Fin {zero-ℕ} = refl
 is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
 
 nat-skip-zero-Fin :
@@ -467,8 +420,6 @@ cong-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( is-zero-nat-zero-Fin {k})
     ( cong-zero-ℕ' (succ-ℕ k))
 
-{- Proposition 7.4.5 -}
-
 -- We show that (nat-Fin (mod-succ-ℕ n x)) is congruent to x modulo n+1. --
 
 cong-nat-mod-succ-ℕ :
@@ -484,8 +435,6 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x) )
     ( cong-nat-mod-succ-ℕ k x)
 
-{- Proposition 7.4.6 -}
-
 is-zero-div-ℕ :
   (d x : ℕ) → le-ℕ x d → div-ℕ d x → is-zero-ℕ x
 is-zero-div-ℕ d zero-ℕ H D = refl
@@ -495,6 +444,10 @@ is-zero-div-ℕ d (succ-ℕ x) H (pair (succ-ℕ k) p) =
       ( succ-ℕ x) d H
       ( concatenate-leq-eq-ℕ d
         ( leq-add-ℕ' d (mul-ℕ k d)) p))
+
+cong-is-zero-nat-zero-Fin :
+  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (zero-Fin {k})) zero-ℕ
+cong-is-zero-nat-zero-Fin {k} = cong-nat-mod-succ-ℕ k zero-ℕ
 
 eq-cong-le-dist-ℕ :
   (k x y : ℕ) → le-ℕ (dist-ℕ x y) k → cong-ℕ k x y → Id x y
@@ -512,12 +465,11 @@ eq-cong-le-ℕ :
   (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → Id x y
 eq-cong-le-ℕ k x y H K =
   eq-cong-le-dist-ℕ k x y (strict-upper-bound-dist-ℕ k x y H K)
+```
 
-{- Theorem 7.4.7 -}
+We show that if mod-succ-ℕ k x = mod-succ-ℕ k y, then x and y must be congruent modulo succ-ℕ n. This is the forward direction of the theorem.
 
-{- We show that if mod-succ-ℕ k x = mod-succ-ℕ k y, then x and y must be
-   congruent modulo succ-ℕ n. This is the forward direction of the theorm. -}
-
+```agda
 cong-eq-mod-succ-ℕ :
   (k x y : ℕ) → Id (mod-succ-ℕ k x) (mod-succ-ℕ k y) → cong-ℕ (succ-ℕ k) x y
 cong-eq-mod-succ-ℕ k x y p =
@@ -553,8 +505,6 @@ eq-mod-succ-cong-ℕ k x y H =
         ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (mod-succ-ℕ k y)) y
           ( cong-nat-mod-succ-ℕ k y))))
 
--- We record some immediate corollaries
-
 is-zero-Fin-div-ℕ :
   (k x : ℕ) → div-ℕ (succ-ℕ k) x → is-zero-Fin (mod-succ-ℕ k x)
 is-zero-Fin-div-ℕ k x d =
@@ -567,9 +517,11 @@ div-ℕ-is-zero-Fin k x p =
   concatenate-div-eq-ℕ
     ( cong-eq-mod-succ-ℕ k x zero-ℕ p)
     ( right-unit-law-dist-ℕ x)
+```
 
-{- Theorem 7.4.8 -}
+### The inclusion of Fin k into ℕ is a section of mod-succ-ℕ
 
+```agda
 issec-nat-Fin :
   {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mod-succ-ℕ k (nat-Fin x)) x
 issec-nat-Fin {k} x =
@@ -586,57 +538,49 @@ is-split-surjective-mod-succ-ℕ :
   {k : ℕ} → is-split-surjective (mod-succ-ℕ k)
 pr1 (is-split-surjective-mod-succ-ℕ {k} x) = nat-Fin x
 pr2 (is-split-surjective-mod-succ-ℕ {k} x) = issec-nat-Fin x
+```
 
---------------------------------------------------------------------------------
+## The group structure on the standard finite types
 
-{- Section 7.5 The cyclic group structure on the finite types -}
+### Addition on finite sets
 
-{- Definition 7.5.1 -}
-
--- Addition on finite sets --
-
+```agda
 add-Fin : {k : ℕ} → Fin k → Fin k → Fin k
 add-Fin {succ-ℕ k} x y = mod-succ-ℕ k (add-ℕ (nat-Fin x) (nat-Fin y))
 
 add-Fin' : {k : ℕ} → Fin k → Fin k → Fin k
 add-Fin' x y = add-Fin y x
 
--- We define an action on paths of add-Fin on the two arguments at once.
-
 ap-add-Fin :
   {k : ℕ} {x y x' y' : Fin k} →
   Id x x' → Id y y' → Id (add-Fin x y) (add-Fin x' y')
 ap-add-Fin p q = ap-binary add-Fin p q
-
--- The negative of an element of Fin k --
-
-neg-Fin :
-  {k : ℕ} → Fin k → Fin k
-neg-Fin {succ-ℕ k} x =
-  mod-succ-ℕ k (dist-ℕ (nat-Fin x) (succ-ℕ k))
-
-{- Remark 7.5.2 -}
-
-cong-is-zero-nat-zero-Fin :
-  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (zero-Fin {k})) zero-ℕ
-cong-is-zero-nat-zero-Fin {k} = cong-nat-mod-succ-ℕ k zero-ℕ
 
 cong-add-Fin :
   {k : ℕ} (x y : Fin k) →
   cong-ℕ k (nat-Fin (add-Fin x y)) (add-ℕ (nat-Fin x) (nat-Fin y))
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin x) (nat-Fin y))
+```
+
+### The negative of an element of Fin k
+
+```agda
+neg-Fin :
+  {k : ℕ} → Fin k → Fin k
+neg-Fin {succ-ℕ k} x =
+  mod-succ-ℕ k (dist-ℕ (nat-Fin x) (succ-ℕ k))
 
 cong-neg-Fin :
   {k : ℕ} (x : Fin k) →
   cong-ℕ k (nat-Fin (neg-Fin x)) (dist-ℕ (nat-Fin x) k)
-cong-neg-Fin {succ-ℕ k} x = 
+cong-neg-Fin {succ-ℕ k} x =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin x) (succ-ℕ k))
+```
 
-{- Proposition 7.5.3 -}
+## That congruence is translation invariant
 
--- We show that congruence is translation invariant --
-
+```agda
 translation-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ z x) (add-ℕ z y)
 pr1 (translation-invariant-cong-ℕ k x y z (pair d p)) = d
@@ -669,9 +613,9 @@ reflects-cong-add-ℕ' {k} x {y} {z} H =
       ( commutative-add-ℕ x y)
       ( H)
       ( commutative-add-ℕ z x))
+```
 
--- We show that addition respects the congruence relation --
-
+```agda
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (add-ℕ x y) (add-ℕ x' y')
@@ -697,16 +641,14 @@ mod-succ-add-ℕ k x y =
         ( cong-nat-mod-succ-ℕ k x))
       ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (mod-succ-ℕ k y)) y
         ( cong-nat-mod-succ-ℕ k y)))
+```
 
-{- Theorem 7.5.4 -}
+## Laws for addition on Fin k
 
--- We show that addition is commutative --
-
+```agda
 commutative-add-Fin : {k : ℕ} (x y : Fin k) → Id (add-Fin x y) (add-Fin y x)
 commutative-add-Fin {succ-ℕ k} x y =
   ap (mod-succ-ℕ k) (commutative-add-ℕ (nat-Fin x) (nat-Fin y))
-
--- We show that addition is associative --
 
 associative-add-Fin :
   {k : ℕ} (x y z : Fin k) →
@@ -742,8 +684,6 @@ associative-add-Fin {succ-ℕ k} x y z =
           ( add-ℕ (nat-Fin y) (nat-Fin z))
           ( cong-add-Fin y z))))
 
--- We show that addition satisfies the right unit law --
-
 right-unit-law-add-Fin :
   {k : ℕ} (x : Fin (succ-ℕ k)) → Id (add-Fin x zero-Fin) x
 right-unit-law-add-Fin {k} x =
@@ -765,8 +705,6 @@ left-unit-law-add-Fin :
 left-unit-law-add-Fin {k} x =
   ( commutative-add-Fin zero-Fin x) ∙
   ( right-unit-law-add-Fin x)
-
--- We show that addition satisfies the left inverse law --
 
 left-inverse-law-add-Fin :
   {k : ℕ} (x : Fin (succ-ℕ k)) → is-zero-Fin (add-Fin (neg-Fin x) x)
@@ -1647,7 +1585,7 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
       ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (succ-ℕ k))))
     ( left-unit-law-add-ℕ (nat-Fin x))
 
-{- Any natural number of the form constant-ℕ k x is strictly less than any 
+{- Any natural number of the form constant-ℕ k x is strictly less than any
    natural number of the form unary-op-ℕ k y m -}
 
 le-constant-unary-op-ℕ :
@@ -1718,7 +1656,7 @@ is-injective-convert-based-ℕ
            ( is-injective-add-ℕ' (nat-Fin x) p))))
 
 -- Exercise 7.10 (c)
-  
+
 {- We show that the map convert-based-ℕ has an inverse. -}
 
 -- The zero-element of the (k+1)-ary natural numbers
@@ -1735,7 +1673,7 @@ succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
   unary-op-based-ℕ (succ-ℕ k) (succ-Fin (inl x)) n
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr x) n) =
   unary-op-based-ℕ (succ-ℕ k) zero-Fin (succ-based-ℕ (succ-ℕ k) n)
-  
+
 -- The inverse map of convert-based-ℕ
 inv-convert-based-ℕ : (k : ℕ) → ℕ → based-ℕ (succ-ℕ k)
 inv-convert-based-ℕ k zero-ℕ =
@@ -1770,7 +1708,7 @@ convert-based-succ-based-ℕ
       ( commutative-add-ℕ
         ( succ-ℕ k)
         ( mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
-   
+
 issec-inv-convert-based-ℕ :
   (k n : ℕ) → Id (convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) n
 issec-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}

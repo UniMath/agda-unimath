@@ -954,7 +954,7 @@ module _
   refl-Ω² = refl
   
   Ω³ : Pointed-Type l → Pointed-Type l
-  Ω³ A = iterated-loop-space three-ℕ A
+  Ω³ A = iterated-loop-space 3 A
   
   type-Ω³ : {A : UU l} (a : A) → UU l
   type-Ω³ a = Id (refl-Ω² {a = a}) (refl-Ω² {a = a})

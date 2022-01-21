@@ -1,13 +1,13 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Univalent Mathematics in Agda
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.02-pi where
+module foundations.functions where
 
-open import foundations.00-preamble public
+open import foundations.levels using (Level; UU)
 ```
 
 ## Basic functions
