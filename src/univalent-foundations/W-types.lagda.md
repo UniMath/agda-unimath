@@ -61,7 +61,7 @@ module _
 -- Example B.1.5
 
 Nat-𝕎 : UU lzero
-Nat-𝕎 = 𝕎 bool (Eq-𝟚 true)
+Nat-𝕎 = 𝕎 bool (Eq-bool true)
 
 zero-Nat-𝕎 : Nat-𝕎
 zero-Nat-𝕎 = constant-𝕎 false id
