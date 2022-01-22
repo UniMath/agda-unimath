@@ -203,7 +203,7 @@ module _
       ( Eq-𝕎 (tree-𝕎 x α) (tree-𝕎 y β))
       ( Eq-𝕎-eq (tree-𝕎 x α) (tree-𝕎 y β))
       ( is-equiv-Eq-𝕎-eq (tree-𝕎 x α) (tree-𝕎 y β))
-      ( is-trunc-Σ k
+      ( is-trunc-Σ
         ( is-trunc-A x y)
         ( λ p → is-trunc-Π k
           ( λ z →
@@ -740,7 +740,7 @@ is-trunc-map-map-𝕎 k D f e H (tree-𝕎 c γ) =
   is-trunc-equiv k
     ( fib-map-𝕎 D f e (tree-𝕎 c γ))
     ( equiv-fib-map-𝕎 D f e (tree-𝕎 c γ))
-    ( is-trunc-Σ k
+    ( is-trunc-Σ
       ( H c)
       ( λ t → is-trunc-Π k (λ d → is-trunc-map-map-𝕎 k D f e H (γ d))))
 

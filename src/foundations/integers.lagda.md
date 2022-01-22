@@ -7,15 +7,21 @@ title: Univalent Mathematics in Agda
 
 module foundations.integers where
 
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.addition-natural-numbers using
+  (add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)  
+open import foundations.coproduct-types using (coprod; inl; inr) public
+open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.empty-type using (empty; ex-falso)
+open import foundations.functions using (id; _∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundations.functions using (_∘_)
+open import foundations.injective-maps using (is-injective)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundations.levels using (UU; Level; lzero)
+open import foundations.multiplication-natural-numbers using (mul-ℕ)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; add-ℕ; mul-ℕ;
-    left-unit-law-add-ℕ; left-successor-law-add-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-nonzero-ℕ)
+open import foundations.negation using (¬)
 open import foundations.unit-type using (unit; star)
 ```
 
@@ -26,39 +32,69 @@ open import foundations.unit-type using (unit; star)
 ℤ = coprod ℕ (coprod unit ℕ)
 ```
 
-- Inclusion of the negative integers
+### Observational equality on ℤ
+
+```agda
+Eq-ℤ : ℤ → ℤ → UU lzero
+Eq-ℤ (inl x) (inl y) = Eq-ℕ x y
+Eq-ℤ (inl x) (inr y) = empty
+Eq-ℤ (inr x) (inl y) = empty
+Eq-ℤ (inr (inl x)) (inr (inl y)) = unit
+Eq-ℤ (inr (inl x)) (inr (inr y)) = empty
+Eq-ℤ (inr (inr x)) (inr (inl y)) = empty
+Eq-ℤ (inr (inr x)) (inr (inr y)) = Eq-ℕ x y
+
+refl-Eq-ℤ : (x : ℤ) → Eq-ℤ x x
+refl-Eq-ℤ (inl x) = refl-Eq-ℕ x
+refl-Eq-ℤ (inr (inl x)) = star
+refl-Eq-ℤ (inr (inr x)) = refl-Eq-ℕ x
+
+Eq-eq-ℤ : {x y : ℤ} → Id x y → Eq-ℤ x y
+Eq-eq-ℤ {x} {.x} refl = refl-Eq-ℤ x
+
+eq-Eq-ℤ : (x y : ℤ) → Eq-ℤ x y → Id x y
+eq-Eq-ℤ (inl x) (inl y) e = ap inl (eq-Eq-ℕ x y e)
+eq-Eq-ℤ (inr (inl star)) (inr (inl star)) e = refl
+eq-Eq-ℤ (inr (inr x)) (inr (inr y)) e = ap (inr ∘ inr) (eq-Eq-ℕ x y e)
+```
+
+## Inclusion of the negative integers
 
 ```agda
 in-neg : ℕ → ℤ
 in-neg n = inl n
-```
 
-- Negative one
-
-```agda
 neg-one-ℤ : ℤ
 neg-one-ℤ = in-neg zero-ℕ
+
+is-neg-one-ℤ : ℤ → UU lzero
+is-neg-one-ℤ x = Id x neg-one-ℤ
 ```
 
-- Zero
+## Zero
 
 ```agda
 zero-ℤ : ℤ
 zero-ℤ = inr (inl star)
+
+is-zero-ℤ : ℤ → UU lzero
+is-zero-ℤ x = Id x zero-ℤ
+
+is-nonzero-ℤ : ℤ → UU lzero
+is-nonzero-ℤ k = ¬ (is-zero-ℤ k)
 ```
 
-- One
-
-```agda
-one-ℤ : ℤ
-one-ℤ = inr (inr zero-ℕ)
-```
-
-- Inclusion of the positive integers
+## Inclusion of the positive integers
 
 ```agda
 in-pos : ℕ → ℤ
 in-pos n = inr (inr n)
+
+one-ℤ : ℤ
+one-ℤ = in-pos zero-ℕ
+
+is-one-ℤ : ℤ → UU lzero
+is-one-ℤ x = Id x one-ℤ
 ```
 
 - Inclusion of the natural numbers
@@ -67,6 +103,13 @@ in-pos n = inr (inr n)
 int-ℕ : ℕ → ℤ
 int-ℕ zero-ℕ = zero-ℤ
 int-ℕ (succ-ℕ n) = in-pos n
+
+is-injective-int-ℕ : is-injective int-ℕ
+is-injective-int-ℕ {zero-ℕ} {zero-ℕ} refl = refl
+is-injective-int-ℕ {succ-ℕ x} {succ-ℕ y} refl = refl
+
+is-nonzero-int-ℕ : (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℤ (int-ℕ n)
+is-nonzero-int-ℕ zero-ℕ H p = H refl
 ```
 
 - Induction principle on the type of integers
@@ -189,7 +232,15 @@ abstract
   issec-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 ```
 
-## Laws for addition and multiplication on ℤ
+### The successor function on ℤ is injective
+
+```agda
+  is-injective-succ-ℤ : is-injective succ-ℤ
+  is-injective-succ-ℤ {x} {y} p =
+    inv (isretr-pred-ℤ x) ∙ (ap pred-ℤ p ∙ isretr-pred-ℤ y)
+```
+
+## Laws for addition on ℤ
 
 ```agda
 abstract
@@ -369,6 +420,22 @@ interchange-law-add-add-ℤ =
     commutative-add-ℤ
     associative-add-ℤ
 
+is-injective-add-ℤ' : (x : ℤ) → is-injective (add-ℤ' x)
+is-injective-add-ℤ' x {y} {z} p =
+  ( inv (isretr-add-neg-ℤ' x y)) ∙
+  ( ( ap (add-ℤ' (neg-ℤ x)) p) ∙
+    ( isretr-add-neg-ℤ' x z))
+
+is-injective-add-ℤ : (x : ℤ) → is-injective (add-ℤ x)
+is-injective-add-ℤ x {y} {z} p =
+  ( inv (isretr-add-neg-ℤ x y)) ∙
+  ( ( ap (add-ℤ (neg-ℤ x)) p) ∙
+    ( isretr-add-neg-ℤ x z))
+```
+
+## Laws for multiplication on ℤ
+
+```agda
 left-zero-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ zero-ℤ k) zero-ℤ
 left-zero-law-mul-ℤ k = refl
 
@@ -676,4 +743,140 @@ add-neg-one-left-ℤ x = refl
 add-neg-one-right-ℤ :
   (x : ℤ) → Id (add-ℤ x neg-one-ℤ) (pred-ℤ x)
 add-neg-one-right-ℤ x = commutative-add-ℤ x neg-one-ℤ
+```
+
+## Negative and positive integers
+
+```
+is-nonnegative-ℤ : ℤ → UU lzero
+is-nonnegative-ℤ (inl x) = empty
+is-nonnegative-ℤ (inr k) = unit
+
+is-nonnegative-eq-ℤ :
+  {x y : ℤ} → Id x y → is-nonnegative-ℤ x → is-nonnegative-ℤ y
+is-nonnegative-eq-ℤ refl = id
+
+is-zero-is-nonnegative-ℤ :
+  {x : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-nonnegative-ℤ {inr (inl star)} H K = refl
+
+is-nonnegative-succ-ℤ :
+  (k : ℤ) → is-nonnegative-ℤ k → is-nonnegative-ℤ (succ-ℤ k)
+is-nonnegative-succ-ℤ (inr (inl star)) p = star
+is-nonnegative-succ-ℤ (inr (inr x)) p = star
+
+is-nonnegative-add-ℤ :
+  (k l : ℤ) →
+  is-nonnegative-ℤ k → is-nonnegative-ℤ l → is-nonnegative-ℤ (add-ℤ k l)
+is-nonnegative-add-ℤ (inr (inl star)) (inr (inl star)) p q = star
+is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
+is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
+is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inl star)) star star =
+  is-nonnegative-succ-ℤ
+    ( add-ℤ (inr (inr n)) (inr (inl star)))
+    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inl star)) star star)
+is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inr m)) star star = star
+is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
+  is-nonnegative-succ-ℤ
+    ( add-ℤ (inr (inr n)) (inr (inr m)))
+    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inr m)) star star)
+
+-- We introduce positive integers
+
+is-positive-ℤ : ℤ → UU lzero
+is-positive-ℤ (inl x) = empty
+is-positive-ℤ (inr (inl x)) = empty
+is-positive-ℤ (inr (inr x)) = unit
+
+positive-ℤ : UU lzero
+positive-ℤ = Σ ℤ is-positive-ℤ
+
+is-nonnegative-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ x
+is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
+
+is-nonzero-is-positive-ℤ : (x : ℤ) → is-positive-ℤ x → is-nonzero-ℤ x
+is-nonzero-is-positive-ℤ (inr (inr x)) H p = Eq-eq-ℤ p
+
+is-positive-eq-ℤ : {x y : ℤ} → Id x y → is-positive-ℤ x → is-positive-ℤ y
+is-positive-eq-ℤ {x} refl = id
+
+is-positive-one-ℤ : is-positive-ℤ one-ℤ
+is-positive-one-ℤ = star
+
+one-positive-ℤ : positive-ℤ
+pr1 one-positive-ℤ = one-ℤ
+pr2 one-positive-ℤ = is-positive-one-ℤ
+
+is-positive-succ-ℤ : {x : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ (succ-ℤ x)
+is-positive-succ-ℤ {inr (inl star)} H = is-positive-one-ℤ
+is-positive-succ-ℤ {inr (inr x)} H = star
+
+is-positive-add-ℤ :
+  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (add-ℤ x y)
+is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
+is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
+  is-positive-succ-ℤ
+    ( is-nonnegative-is-positive-ℤ
+      ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} star star))
+
+is-positive-mul-ℤ :
+  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (mul-ℤ x y)
+is-positive-mul-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
+is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
+  is-positive-add-ℤ {inr (inr y)} K
+    ( is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} H K)
+
+is-positive-int-ℕ :
+  (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
+is-positive-int-ℕ zero-ℕ H = ex-falso (H refl)
+is-positive-int-ℕ (succ-ℕ x) H = star
+
+-- Basics of nonnegative integers
+
+nonnegative-ℤ : UU lzero
+nonnegative-ℤ = Σ ℤ is-nonnegative-ℤ
+
+int-nonnegative-ℤ : nonnegative-ℤ → ℤ
+int-nonnegative-ℤ = pr1
+
+is-nonnegative-int-nonnegative-ℤ :
+  (x : nonnegative-ℤ) → is-nonnegative-ℤ (int-nonnegative-ℤ x)
+is-nonnegative-int-nonnegative-ℤ = pr2
+
+is-injective-int-nonnegative-ℤ : is-injective int-nonnegative-ℤ
+is-injective-int-nonnegative-ℤ {pair (inr x) star} {pair (inr .x) star} refl =
+  refl
+
+is-nonnegative-int-ℕ : (n : ℕ) → is-nonnegative-ℤ (int-ℕ n)
+is-nonnegative-int-ℕ zero-ℕ = star
+is-nonnegative-int-ℕ (succ-ℕ n) = star
+
+nonnegative-int-ℕ : ℕ → nonnegative-ℤ
+pr1 (nonnegative-int-ℕ n) = int-ℕ n
+pr2 (nonnegative-int-ℕ n) = is-nonnegative-int-ℕ n
+
+nat-nonnegative-ℤ : nonnegative-ℤ → ℕ
+nat-nonnegative-ℤ (pair (inr (inl x)) H) = zero-ℕ
+nat-nonnegative-ℤ (pair (inr (inr x)) H) = succ-ℕ x
+
+issec-nat-nonnegative-ℤ :
+  (x : nonnegative-ℤ) → Id (nonnegative-int-ℕ (nat-nonnegative-ℤ x)) x
+issec-nat-nonnegative-ℤ (pair (inr (inl star)) star) = refl
+issec-nat-nonnegative-ℤ (pair (inr (inr x)) star) = refl
+
+isretr-nat-nonnegative-ℤ :
+  (n : ℕ) → Id (nat-nonnegative-ℤ (nonnegative-int-ℕ n)) n
+isretr-nat-nonnegative-ℤ zero-ℕ = refl
+isretr-nat-nonnegative-ℤ (succ-ℕ n) = refl
+
+is-injective-nonnegative-int-ℕ : is-injective nonnegative-int-ℕ
+is-injective-nonnegative-int-ℕ {x} {y} p =
+  ( inv (isretr-nat-nonnegative-ℤ x)) ∙
+  ( ( ap nat-nonnegative-ℤ p) ∙
+    ( isretr-nat-nonnegative-ℤ y))
+
+decide-is-nonnegative-ℤ :
+  {x : ℤ} → coprod (is-nonnegative-ℤ x) (is-nonnegative-ℤ (neg-ℤ x))
+decide-is-nonnegative-ℤ {inl x} = inr star
+decide-is-nonnegative-ℤ {inr x} = inl star
 ```

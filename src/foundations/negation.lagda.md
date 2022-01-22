@@ -5,10 +5,10 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.logic-curry-howard where
+module foundations.negation where
 
 open import foundations.cartesian-product-types using (_×_)
-open import foundations.coproducts using (coprod; inl; inr)
+open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using (pr1; pr2; pair)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.functions using (_∘_)
@@ -64,20 +64,7 @@ no-fixed-points-neg A (pair f g) =
   ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
 ```
 
-In this exercise we were asked to show that $A + ¬A$ implies $¬¬A → A$.
-We get double negation elimination for the types that are  decidable.
-
 ```agda
-dn-elim-is-decidable :
-  {l : Level} (P : UU l) → coprod P (¬ P) → (¬¬ P → P)
-dn-elim-is-decidable P (inl x) p = x
-dn-elim-is-decidable P (inr x) p = ex-falso (p x)
-
-dn-is-decidable : {l : Level} {P : UU l} → ¬¬ (coprod P (¬ P))
-dn-is-decidable {P = P} f =
-  functor-neg (inr {A = P} {B = ¬ P}) f
-    ( functor-neg (inl {A = P} {B = ¬ P}) f)
-
 dn-dn-elim : {l : Level} {P : UU l} → ¬¬ (¬¬ P → P)
 dn-dn-elim {P = P} f =
   ( λ (np : ¬ P) → f (λ (nnp : ¬¬ P) → ex-falso (nnp np)))

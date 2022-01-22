@@ -23,6 +23,20 @@ open import foundations.09-equivalences
 open import foundations.10-contractible-types
 open import foundations.11-fundamental-theorem
 open import foundations.12-truncation-levels
+open import foundations.booleans
+open import foundations.cartesian-product-types
+open import foundations.coproduct-types
+open import foundations.dependent-pair-types
+open import foundations.empty-type
+open import foundations.functions
+open import foundations.identity-types
+open import foundations.integers
+open import foundations.laws-for-operations
+open import foundations.levels
+open import foundations.lists
+open import foundations.logic-curry-howard
+open import foundations.natural-numbers
+open import foundations.unit-type
 open import groups
 open import groups.abstract-abelian-groups
 open import groups.abstract-group-actions
@@ -88,4 +102,5 @@ open import univalent-foundations.17-univalence
 open import univalent-foundations.18-set-quotients
 open import univalent-foundations.W-types
 open import univalent-foundations.pointed-types
+open import univalent-foundations.truncations
 ```
