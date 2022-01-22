@@ -7,18 +7,13 @@ title: Univalent Mathematics in Agda
 
 module foundations.integers where
 
-open import foundations.addition-natural-numbers using
-  (add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)  
-open import foundations.coproduct-types using (coprod; inl; inr) public
+open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.functions using (id; _∘_)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.injective-maps using (is-injective)
-open import foundations.laws-for-operations using
-  ( interchange-law; interchange-law-commutative-and-associative)
 open import foundations.levels using (UU; Level; lzero)
-open import foundations.multiplication-natural-numbers using (mul-ℕ)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-nonzero-ℕ)
 open import foundations.negation using (¬)
