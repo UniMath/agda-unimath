@@ -7,15 +7,18 @@ title: Univalent Mathematics in Agda
 
 module foundations.difference-integers where
 
+open import foundations.addition-integers using
+  ( add-ℤ; right-unit-law-add-ℤ; left-inverse-law-add-ℤ; associative-add-ℤ;
+    add-ℤ'; left-unit-law-add-ℤ; right-inverse-law-add-ℤ;
+    right-predecessor-law-add-ℤ; left-predecessor-law-add-ℤ;
+    right-successor-law-add-ℤ; distributive-neg-add-ℤ; commutative-add-ℤ;
+    left-successor-law-add-ℤ; interchange-law-add-add-ℤ)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.integers using
-  ( ℤ; add-ℤ; neg-ℤ; is-zero-ℤ; right-unit-law-add-ℤ; left-inverse-law-add-ℤ;
-    associative-add-ℤ; add-ℤ'; left-unit-law-add-ℤ; right-inverse-law-add-ℤ;
-    zero-ℤ; succ-ℤ; left-successor-law-add-ℤ; pred-ℤ; neg-succ-ℤ;
-    right-predecessor-law-add-ℤ; left-predecessor-law-add-ℤ; neg-pred-ℤ;
-    right-successor-law-add-ℤ; distributive-neg-add-ℤ; neg-neg-ℤ;
-    commutative-add-ℤ; interchange-law-add-add-ℤ; mul-ℤ;
-    right-negative-law-mul-ℤ; left-distributive-mul-add-ℤ;
+  ( ℤ; neg-ℤ; is-zero-ℤ; zero-ℤ; succ-ℤ; pred-ℤ;
+    neg-succ-ℤ; neg-pred-ℤ; neg-neg-ℤ)
+open import foundations.multiplication-integers using
+  ( mul-ℤ; right-negative-law-mul-ℤ; left-distributive-mul-add-ℤ;
     left-negative-law-mul-ℤ; right-distributive-mul-add-ℤ)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
