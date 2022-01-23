@@ -505,15 +505,15 @@ eq-mod-succ-cong-ℕ k x y H =
         ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (mod-succ-ℕ k y)) y
           ( cong-nat-mod-succ-ℕ k y))))
 
-is-zero-Fin-div-ℕ :
+is-zero-mod-succ-ℕ :
   (k x : ℕ) → div-ℕ (succ-ℕ k) x → is-zero-Fin (mod-succ-ℕ k x)
-is-zero-Fin-div-ℕ k x d =
+is-zero-mod-succ-ℕ k x d =
   eq-mod-succ-cong-ℕ k x zero-ℕ
     ( concatenate-div-eq-ℕ d (inv (right-unit-law-dist-ℕ x)))
 
-div-ℕ-is-zero-Fin :
+div-is-zero-mod-succ-ℕ :
   (k x : ℕ) → is-zero-Fin (mod-succ-ℕ k x) → div-ℕ (succ-ℕ k) x
-div-ℕ-is-zero-Fin k x p =
+div-is-zero-mod-succ-ℕ k x p =
   concatenate-div-eq-ℕ
     ( cong-eq-mod-succ-ℕ k x zero-ℕ p)
     ( right-unit-law-dist-ℕ x)

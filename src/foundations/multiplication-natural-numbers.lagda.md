@@ -54,14 +54,6 @@ cube-ℕ : ℕ → ℕ
 cube-ℕ x = mul-ℕ (square-ℕ x) x
 ```
 
-## Factorials
-
-```agda
-factorial-ℕ : ℕ → ℕ
-factorial-ℕ 0 = 1
-factorial-ℕ (succ-ℕ m) = mul-ℕ (factorial-ℕ m) (succ-ℕ m)
-```
-
 ## Laws for multiplication on ℕ
 
 ```agda

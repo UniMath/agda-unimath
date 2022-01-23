@@ -8,11 +8,7 @@ title: Univalent Mathematics in Agda
 module foundations.cartesian-product-types where
 
 open import foundations.levels using (Level; UU; _⊔_)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2) public
-
--- The dependent-pair-types module is opened publicly, because if one imports
--- the module cartesian-product-types, one may reasonably expect pair, pr1, and
--- pr2 to be there.
+open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 ```
 
 ## Cartesian products

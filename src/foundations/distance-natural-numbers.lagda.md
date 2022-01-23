@@ -10,12 +10,16 @@ module foundations.distance-natural-numbers where
 open import foundations.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; ap-add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ;
     commutative-add-ℕ)
+open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.dependent-pair-types using (pair)
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using
   ( Id; refl; _∙_; inv; ap; ap-binary; tr)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; _≤-ℕ_; refl-leq-ℕ; concatenate-eq-leq-eq-ℕ; concatenate-leq-eq-ℕ;
-    transitive-leq-ℕ; succ-leq-ℕ)
+    transitive-leq-ℕ; succ-leq-ℕ; order-three-elements-ℕ; le-ℕ;
+    preserves-le-succ-ℕ)
+open import foundations.levels using (UU; lzero)
 open import foundations.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
 open import foundations.natural-numbers using
@@ -26,6 +30,8 @@ open import foundations.unit-type using (star)
 # Distance between natural numbers
 
 ```agda
+-- We define a distance function on ℕ --
+
 dist-ℕ : ℕ → ℕ → ℕ
 dist-ℕ zero-ℕ n = n
 dist-ℕ (succ-ℕ m) zero-ℕ = succ-ℕ m
@@ -247,4 +253,60 @@ is-difference-dist-ℕ' :
 is-difference-dist-ℕ' x y H =
   ( commutative-add-ℕ (dist-ℕ x y) x) ∙
   ( is-difference-dist-ℕ x y H)
+```
+
+```agda
+cases-dist-ℕ :
+  (x y z : ℕ) → UU lzero
+cases-dist-ℕ x y z =
+  coprod
+    ( Id (add-ℕ (dist-ℕ x y) (dist-ℕ y z)) (dist-ℕ x z))
+    ( coprod
+      ( Id (add-ℕ (dist-ℕ y z) (dist-ℕ x z)) (dist-ℕ x y))
+      ( Id (add-ℕ (dist-ℕ x z) (dist-ℕ x y)) (dist-ℕ y z)))
+
+is-total-dist-ℕ :
+  (x y z : ℕ) → cases-dist-ℕ x y z
+is-total-dist-ℕ x y z with order-three-elements-ℕ x y z
+is-total-dist-ℕ x y z | inl (inl (pair H1 H2)) =
+  inl (triangle-equality-dist-ℕ x y z H1 H2)
+is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
+  inr
+    ( inl
+      ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
+        ( ( ap (add-ℕ (dist-ℕ x z)) (symmetric-dist-ℕ y z)) ∙
+          ( triangle-equality-dist-ℕ x z y H1 H2))))
+is-total-dist-ℕ x y z | inr (inl (inl (pair H1 H2))) =
+  inr
+    ( inl
+      ( ( ap (add-ℕ (dist-ℕ y z)) (symmetric-dist-ℕ x z)) ∙
+        ( ( triangle-equality-dist-ℕ y z x H1 H2) ∙
+          ( symmetric-dist-ℕ y x))))
+is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
+  inr
+    ( inr
+      ( ( ap (add-ℕ (dist-ℕ x z)) (symmetric-dist-ℕ x y)) ∙
+        ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
+          ( triangle-equality-dist-ℕ y x z H1 H2))))
+is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
+  inr
+    ( inr
+      ( ( ap (add-ℕ' (dist-ℕ x y)) (symmetric-dist-ℕ x z)) ∙
+        ( ( triangle-equality-dist-ℕ z x y H1 H2) ∙
+          ( symmetric-dist-ℕ z y))))
+is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =
+  inl
+    ( ( ap-add-ℕ (symmetric-dist-ℕ x y) (symmetric-dist-ℕ y z)) ∙
+      ( ( commutative-add-ℕ (dist-ℕ y x) (dist-ℕ z y)) ∙
+        ( ( triangle-equality-dist-ℕ z y x H1 H2) ∙
+          ( symmetric-dist-ℕ z x))))
+```
+
+```agda
+strict-upper-bound-dist-ℕ :
+  (b x y : ℕ) → le-ℕ x b → le-ℕ y b → le-ℕ (dist-ℕ x y) b
+strict-upper-bound-dist-ℕ (succ-ℕ b) zero-ℕ y H K = K
+strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) zero-ℕ H K = H
+strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) (succ-ℕ y) H K =
+  preserves-le-succ-ℕ (dist-ℕ x y) b (strict-upper-bound-dist-ℕ b x y H K)
 ```

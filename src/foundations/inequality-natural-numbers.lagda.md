@@ -9,10 +9,11 @@ module foundations.inequality-natural-numbers where
 
 open import foundations.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
+open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr; map-coprod)
 open import foundations.dependent-pair-types using (pair)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.functions using (id)
+open import foundations.functions using (id; _∘_)
 open import foundations.identity-types using (Id; refl; inv; ap; tr)
 open import foundations.levels using (UU; lzero)
 open import foundations.multiplication-natural-numbers using
@@ -20,7 +21,7 @@ open import foundations.multiplication-natural-numbers using
     right-successor-law-mul-ℕ)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ;
-    is-successor-is-nonzero-ℕ)
+    is-successor-is-nonzero-ℕ; Peano-8; is-injective-succ-ℕ)
 open import foundations.negation using (¬)
 open import foundations.unit-type using (unit; star)
 ```
@@ -244,6 +245,31 @@ leq-right-leq-max-ℕ k (succ-ℕ m) zero-ℕ H = star
 leq-right-leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
   leq-right-leq-max-ℕ k m n H
 
+cases-order-three-elements-ℕ :
+  (x y z : ℕ) → UU lzero
+cases-order-three-elements-ℕ x y z =
+  coprod
+    ( coprod ((leq-ℕ x y) × (leq-ℕ y z)) ((leq-ℕ x z) × (leq-ℕ z y)))
+    ( coprod
+      ( coprod ((leq-ℕ y z) × (leq-ℕ z x)) ((leq-ℕ y x) × (leq-ℕ x z)))
+      ( coprod ((leq-ℕ z x) × (leq-ℕ x y)) ((leq-ℕ z y) × (leq-ℕ y x))))
+
+order-three-elements-ℕ :
+  (x y z : ℕ) → cases-order-three-elements-ℕ x y z
+order-three-elements-ℕ zero-ℕ zero-ℕ zero-ℕ = inl (inl (pair star star))
+order-three-elements-ℕ zero-ℕ zero-ℕ (succ-ℕ z) = inl (inl (pair star star))
+order-three-elements-ℕ zero-ℕ (succ-ℕ y) zero-ℕ = inl (inr (pair star star))
+order-three-elements-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) =
+  inl (map-coprod (pair star) (pair star) (decide-leq-ℕ y z))
+order-three-elements-ℕ (succ-ℕ x) zero-ℕ zero-ℕ =
+  inr (inl (inl (pair star star)))
+order-three-elements-ℕ (succ-ℕ x) zero-ℕ (succ-ℕ z) =
+  inr (inl (map-coprod (pair star) (pair star) (decide-leq-ℕ z x)))
+order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ =
+  inr (inr (map-coprod (pair star) (pair star) (decide-leq-ℕ x y)))
+order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
+  order-three-elements-ℕ x y z
+
 -- Exercise 6.4
 
 -- The definition of <
@@ -424,4 +450,10 @@ leq-leq-mul-ℕ' m n x H =
       ( commutative-mul-ℕ (succ-ℕ x) m)
       ( H)
       ( commutative-mul-ℕ n (succ-ℕ x)))
+```
+
+```agda
+neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (Id x y)
+neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = Peano-8 y ∘ inv
+neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
 ```

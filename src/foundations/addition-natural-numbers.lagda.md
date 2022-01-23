@@ -7,7 +7,8 @@ title: Univalent Mathematics in Agda
 
 module foundations.addition-natural-numbers where
 
-open import foundations.cartesian-product-types using (_×_; pair)
+open import foundations.cartesian-product-types using (_×_)
+open import foundations.dependent-pair-types using (pair)
 open import foundations.empty-type using (ex-falso)
 open import foundations.functions using (id)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
