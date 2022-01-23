@@ -10,10 +10,11 @@ module foundations.well-ordering-principle-natural-numbers where
 open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
-  ( is-decidable; is-decidable-fam; is-decidable-function-type)
+  ( is-decidable; is-decidable-fam; is-decidable-function-type;
+    is-decidable-prod)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (ex-falso)
-open import foundations.functions using (id)
+open import foundations.empty-type using (empty; ex-falso)
+open import foundations.functions using (id; _∘_)
 open import foundations.identity-types using (Id; refl)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
@@ -21,6 +22,7 @@ open import foundations.inequality-natural-numbers using
 open import foundations.levels using (UU; Level)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
 open import foundations.negation using (¬)
+open import foundations.unit-type using (star)
 ```
 
 # Decidable type families on the natural numbers
@@ -200,4 +202,74 @@ is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
       ( λ z → P (succ-ℕ z))
       ( λ x → d (succ-ℕ x))
       ( pair m p))
+```
+
+```agda
+is-decidable-Σ-ℕ :
+  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
+  is-decidable (Σ ℕ (λ x → (leq-ℕ m x) × (P x))) → is-decidable (Σ ℕ P)
+is-decidable-Σ-ℕ m P d (inl (pair x (pair l p))) = inl (pair x p)
+is-decidable-Σ-ℕ zero-ℕ P d (inr f) =
+  inr (λ p → f (pair (pr1 p) (pair star (pr2 p))))
+is-decidable-Σ-ℕ (succ-ℕ m) P d (inr f) with d zero-ℕ
+... | inl p = inl (pair zero-ℕ p)
+... | inr g with
+  is-decidable-Σ-ℕ m
+    ( P ∘ succ-ℕ)
+    ( λ x → d (succ-ℕ x))
+    ( inr (λ p → f (pair (succ-ℕ (pr1 p)) (pr2 p))))
+... | inl p = inl (pair (succ-ℕ (pr1 p)) (pr2 p))
+... | inr h = inr α
+  where
+  α : Σ ℕ P → empty
+  α (pair zero-ℕ p) = g p
+  α (pair (succ-ℕ x) p) = h (pair x p)
+
+is-decidable-bounded-Σ-ℕ :
+  {l1 l2 : Level} (m : ℕ) (P : ℕ → UU l1) (Q : ℕ → UU l2)
+  (dP : is-decidable-fam P) (dQ : is-decidable-fam Q)
+  (H : is-upper-bound-ℕ P m) → is-decidable (Σ ℕ (λ x → (P x) × (Q x)))
+is-decidable-bounded-Σ-ℕ m P Q dP dQ H =
+  is-decidable-Σ-ℕ
+    ( succ-ℕ m)
+    ( λ x → (P x) × (Q x))
+    ( λ x → is-decidable-prod (dP x) (dQ x))
+    ( inr
+      ( λ p →
+        contradiction-leq-ℕ
+          ( pr1 p)
+          ( m)
+          ( H (pr1 p) (pr1 (pr2 (pr2 p))))
+          ( pr1 (pr2 p))))
+
+is-decidable-bounded-Σ-ℕ' :
+  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
+  is-decidable (Σ ℕ (λ x → (leq-ℕ x m) × (P x)))
+is-decidable-bounded-Σ-ℕ' m P d =
+  is-decidable-bounded-Σ-ℕ m
+    ( λ x → leq-ℕ x m)
+    ( P)
+    ( λ x → is-decidable-leq-ℕ x m)
+    ( d)
+    ( λ x → id)
+
+is-decidable-strictly-bounded-Σ-ℕ :
+  {l1 l2 : Level} (m : ℕ) (P : ℕ → UU l1) (Q : ℕ → UU l2)
+  (dP : is-decidable-fam P) (dQ : is-decidable-fam Q)
+  (H : is-strict-upper-bound-ℕ P m) →
+  is-decidable (Σ ℕ (λ x → (P x) × (Q x)))
+is-decidable-strictly-bounded-Σ-ℕ m P Q dP dQ H =
+  is-decidable-bounded-Σ-ℕ m P Q dP dQ
+    ( is-upper-bound-is-strict-upper-bound-ℕ P m H)
+
+is-decidable-strictly-bounded-Σ-ℕ' :
+  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
+  is-decidable (Σ ℕ (λ x → (le-ℕ x m) × (P x)))
+is-decidable-strictly-bounded-Σ-ℕ' m P d =
+  is-decidable-strictly-bounded-Σ-ℕ m
+    ( λ x → le-ℕ x m)
+    ( P)
+    ( λ x → is-decidable-le-ℕ x m)
+    ( d)
+    ( λ x → id)
 ```

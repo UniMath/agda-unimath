@@ -8,9 +8,11 @@ title: Univalent Mathematics in Agda
 module foundations.collatz-conjecture where
 
 open import foundations.coproduct-types using (inl; inr)
-open import foundations.dependent-pair-types using (pair)
+open import foundations.dependent-pair-types using (Σ; pair)
+open import foundations.levels using (UU; lzero)
 open import foundations.multiplication-natural-numbers using (mul-ℕ)
-open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import foundations.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-one-ℕ)
 open import foundations.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
 ```
@@ -22,4 +24,12 @@ collatz : ℕ → ℕ
 collatz n with is-decidable-div-ℕ 2 n
 ... | inl (pair y p) = y
 ... | inr f = succ-ℕ (mul-ℕ 3 n)
+
+iterate-collatz : ℕ → ℕ → ℕ
+iterate-collatz zero-ℕ n = n
+iterate-collatz (succ-ℕ k) n = collatz (iterate-collatz k n)
+
+Collatz-conjecture : UU lzero
+Collatz-conjecture =
+  (n : ℕ) → is-nonzero-ℕ n → Σ ℕ (λ k → is-one-ℕ (iterate-collatz k n))
 ```

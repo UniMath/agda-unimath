@@ -9,7 +9,7 @@ module foundations.greatest-common-divisor-natural-numbers where
 
 open import foundations.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import foundations.cartesian-product-types using (_×_)
+open import foundations.cartesian-product-types using (_×_; map-prod)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
@@ -23,7 +23,7 @@ open import foundations.distance-natural-numbers using
 open import foundations.divisibility-natural-numbers using
   ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
     div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
-    leq-div-succ-ℕ)
+    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ)
 open import foundations.empty-type using (ex-falso)
 open import foundations.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
@@ -281,4 +281,23 @@ is-commutative-gcd-ℕ a b =
   σ : {A B : UU lzero} → A × B → B × A
   pr1 (σ (pair x y)) = y
   pr2 (σ (pair x y)) = x
+```
+
+```agda
+preserves-is-common-divisor-mul-ℕ :
+  (k a b d : ℕ) → is-common-divisor-ℕ a b d →
+  is-common-divisor-ℕ (mul-ℕ k a) (mul-ℕ k b) (mul-ℕ k d)
+preserves-is-common-divisor-mul-ℕ k a b d =
+  map-prod
+    ( preserves-div-mul-ℕ k d a)
+    ( preserves-div-mul-ℕ k d b)
+
+reflects-is-common-divisor-mul-ℕ :
+  (k a b d : ℕ) → is-nonzero-ℕ k →
+  is-common-divisor-ℕ (mul-ℕ k a) (mul-ℕ k b) (mul-ℕ k d) →
+  is-common-divisor-ℕ a b d
+reflects-is-common-divisor-mul-ℕ k a b d H =
+  map-prod
+    ( reflects-div-mul-ℕ k d a H)
+    ( reflects-div-mul-ℕ k d b H)
 ```
