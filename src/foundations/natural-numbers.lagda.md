@@ -135,13 +135,14 @@ is-injective-succ-ℕ refl = refl
 ## Peano's 7th and 8th axioms
 
 ```agda
-Peano-7 :
-  (x y : ℕ) → (Id x y) ↔ (Id (succ-ℕ x) (succ-ℕ y))
-pr1 (Peano-7 x y) = ap succ-ℕ
-pr2 (Peano-7 x y) = is-injective-succ-ℕ
-
-Peano-8 : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
-Peano-8 x ()
+private 
+  Peano-7 :
+    (x y : ℕ) → (Id x y) ↔ (Id (succ-ℕ x) (succ-ℕ y))
+  pr1 (Peano-7 x y) = ap succ-ℕ
+  pr2 (Peano-7 x y) = is-injective-succ-ℕ
+  
+  Peano-8 : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
+  Peano-8 x ()
 
 is-nonzero-succ-ℕ : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
 is-nonzero-succ-ℕ x ()

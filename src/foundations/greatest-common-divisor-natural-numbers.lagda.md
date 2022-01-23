@@ -14,7 +14,7 @@ open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
     is-decidable-neg; dn-elim-is-decidable)
-open import foundations.decidable-families-on-natural-numbers using
+open import foundations.well-ordering-principle-natural-numbers using
   ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
     is-lower-bound-ℕ)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
@@ -22,7 +22,8 @@ open import foundations.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ)
 open import foundations.divisibility-natural-numbers using
   ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
-    div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ)
+    div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
+    leq-div-succ-ℕ)
 open import foundations.empty-type using (ex-falso)
 open import foundations.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
@@ -84,14 +85,6 @@ is-multiple-of-gcd-ℕ a b n =
   (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)
 
 {- Proposition 8.4.4 -}
-
-leq-div-succ-ℕ : (d x : ℕ) → div-ℕ d (succ-ℕ x) → leq-ℕ d (succ-ℕ x)
-leq-div-succ-ℕ d x (pair (succ-ℕ k) p) =
-  concatenate-leq-eq-ℕ d (leq-mul-ℕ' k d) p
-
-leq-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → leq-ℕ d x
-leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
-... | (pair y refl) = leq-div-succ-ℕ d y H
 
 leq-sum-is-common-divisor-ℕ' :
   (a b d : ℕ) →

@@ -14,10 +14,11 @@ open import foundations.divisibility-natural-numbers using
 open import foundations.empty-type using (ex-falso)
 open import foundations.identity-types using (refl)
 open import foundations.inequality-natural-numbers using
-  ( leq-ℕ; decide-leq-succ-ℕ)
+  ( leq-ℕ; decide-leq-succ-ℕ; leq-zero-ℕ; leq-mul-is-nonzero-ℕ')
 open import foundations.multiplication-natural-numbers using
-  ( mul-ℕ; commutative-mul-ℕ)
-open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
+  ( mul-ℕ; commutative-mul-ℕ; is-nonzero-mul-ℕ)
+open import foundations.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; Eq-eq-ℕ; is-nonzero-succ-ℕ)
 ```
 
 # Factorials
@@ -29,16 +30,37 @@ factorial-ℕ (succ-ℕ m) = mul-ℕ (factorial-ℕ m) (succ-ℕ m)
 ```
 
 ```agda
-div-factorial-is-nonzero-ℕ :
+div-factorial-ℕ :
   (n x : ℕ) → leq-ℕ x n → is-nonzero-ℕ x → div-ℕ x (factorial-ℕ n)
-div-factorial-is-nonzero-ℕ zero-ℕ zero-ℕ l H = ex-falso (H refl)
-div-factorial-is-nonzero-ℕ (succ-ℕ n) x l H with
+div-factorial-ℕ zero-ℕ zero-ℕ l H = ex-falso (H refl)
+div-factorial-ℕ (succ-ℕ n) x l H with
   decide-leq-succ-ℕ x n l
 ... | inl l' =
   transitive-div-ℕ x
     ( factorial-ℕ n)
     ( factorial-ℕ (succ-ℕ n))
-    ( div-factorial-is-nonzero-ℕ n x l' H)
+    ( div-factorial-ℕ n x l' H)
     ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (factorial-ℕ n)))
 ... | inr refl = pair (factorial-ℕ n) refl
+```
+
+```agda
+is-nonzero-factorial-ℕ :
+  (x : ℕ) → is-nonzero-ℕ (factorial-ℕ x)
+is-nonzero-factorial-ℕ zero-ℕ = Eq-eq-ℕ
+is-nonzero-factorial-ℕ (succ-ℕ x) =
+  is-nonzero-mul-ℕ
+    ( factorial-ℕ x)
+    ( succ-ℕ x)
+    ( is-nonzero-factorial-ℕ x)
+    ( is-nonzero-succ-ℕ x)
+
+leq-factorial-ℕ :
+  (n : ℕ) → leq-ℕ n (factorial-ℕ n)
+leq-factorial-ℕ zero-ℕ = leq-zero-ℕ 1
+leq-factorial-ℕ (succ-ℕ n) =
+  leq-mul-is-nonzero-ℕ'
+    ( factorial-ℕ n)
+    ( succ-ℕ n)
+    ( is-nonzero-factorial-ℕ n)
 ```

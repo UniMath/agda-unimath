@@ -16,7 +16,7 @@ open import foundations.injective-maps using (is-injective)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; Peano-8)
+  ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ)
 open import foundations.negation using (¬)
 ```
 
@@ -123,7 +123,8 @@ is-injective-add-ℕ k {x} {y} p =
 is-zero-right-is-zero-add-ℕ :
   (x y : ℕ) → is-zero-ℕ (add-ℕ x y) → is-zero-ℕ y
 is-zero-right-is-zero-add-ℕ x zero-ℕ p = refl
-is-zero-right-is-zero-add-ℕ x (succ-ℕ y) p = ex-falso (Peano-8 (add-ℕ x y) p)
+is-zero-right-is-zero-add-ℕ x (succ-ℕ y) p =
+  ex-falso (is-nonzero-succ-ℕ (add-ℕ x y) p)
 
 is-zero-left-is-zero-add-ℕ :
   (x y : ℕ) → is-zero-ℕ (add-ℕ x y) → is-zero-ℕ x

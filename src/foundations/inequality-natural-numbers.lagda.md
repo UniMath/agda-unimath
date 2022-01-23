@@ -22,7 +22,7 @@ open import foundations.multiplication-natural-numbers using
     right-successor-law-mul-ℕ)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ;
-    is-successor-is-nonzero-ℕ; Peano-8; is-injective-succ-ℕ)
+    is-successor-is-nonzero-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
 open import foundations.negation using (¬)
 open import foundations.unit-type using (unit; star)
 ```
@@ -469,6 +469,6 @@ leq-leq-mul-ℕ' m n x H =
 
 ```agda
 neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (Id x y)
-neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = Peano-8 y ∘ inv
+neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
 neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
 ```

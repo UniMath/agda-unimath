@@ -16,7 +16,7 @@ open import foundations.empty-type using (ex-falso)
 open import foundations.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; leq-leq-mul-ℕ'; concatenate-eq-leq-eq-ℕ; leq-add-ℕ'; le-ℕ;
-    contradiction-le-ℕ; concatenate-leq-eq-ℕ)
+    contradiction-le-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ')
 open import foundations.levels using (UU; lzero)
 open import foundations.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; commutative-mul-ℕ; right-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
@@ -24,7 +24,8 @@ open import foundations.multiplication-natural-numbers using
     is-one-right-is-one-mul-ℕ; is-one-is-left-unit-mul-ℕ; associative-mul-ℕ;
     is-injective-mul-ℕ)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
+    is-successor-is-nonzero-ℕ)
 open import foundations.negation using (¬)
 ```
 
@@ -219,4 +220,20 @@ is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
 
 div-eq-ℕ : (x y : ℕ) → Id x y → div-ℕ x y
 div-eq-ℕ x .x refl = refl-div-ℕ x
+```
+
+```agda
+leq-div-succ-ℕ : (d x : ℕ) → div-ℕ d (succ-ℕ x) → leq-ℕ d (succ-ℕ x)
+leq-div-succ-ℕ d x (pair (succ-ℕ k) p) =
+  concatenate-leq-eq-ℕ d (leq-mul-ℕ' k d) p
+
+leq-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → leq-ℕ d x
+leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
+... | (pair y refl) = leq-div-succ-ℕ d y H
+```
+
+```agda
+is-one-is-divisor-below-ℕ : ℕ → ℕ → UU lzero
+is-one-is-divisor-below-ℕ n a =
+  (x : ℕ) → leq-ℕ x n → div-ℕ x a → is-one-ℕ x
 ```

@@ -7,6 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.cartesian-product-types where
 
+open import foundations.empty-type using (is-empty)
 open import foundations.levels using (Level; UU; _⊔_)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 ```
@@ -29,4 +30,12 @@ map-prod :
   (f : A → C) (g : B → D) → (A × B) → (C × D)
 pr1 (map-prod f g (pair a b)) = f a
 pr2 (map-prod f g (pair a b)) = g b
+
+is-empty-left-factor-is-empty-prod :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
+is-empty-left-factor-is-empty-prod f b a = f (pair a b)
+
+is-empty-right-factor-is-empty-prod :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → A → is-empty B
+is-empty-right-factor-is-empty-prod f a b = f (pair a b)
 ```

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.decidable-families-on-natural-numbers where
+module foundations.well-ordering-principle-natural-numbers where
 
 open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
