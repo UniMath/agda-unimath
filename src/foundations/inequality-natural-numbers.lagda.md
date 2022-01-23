@@ -11,6 +11,7 @@ open import foundations.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
 open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr; map-coprod)
+open import foundations.decidable-types using (is-decidable)
 open import foundations.dependent-pair-types using (pair)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.functions using (id; _∘_)
@@ -69,6 +70,13 @@ concatenate-leq-eq-ℕ m H refl = H
 concatenate-eq-leq-ℕ :
   {m m' : ℕ} (n : ℕ) → Id m' m → m ≤-ℕ n → m' ≤-ℕ n
 concatenate-eq-leq-ℕ n refl H = H
+
+is-decidable-leq-ℕ :
+  (m n : ℕ) → is-decidable (leq-ℕ m n)
+is-decidable-leq-ℕ zero-ℕ zero-ℕ = inl star
+is-decidable-leq-ℕ zero-ℕ (succ-ℕ n) = inl star
+is-decidable-leq-ℕ (succ-ℕ m) zero-ℕ = inr id
+is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 
 decide-leq-succ-ℕ :
   (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → coprod (m ≤-ℕ n) (Id m (succ-ℕ n))
@@ -302,6 +310,13 @@ preserves-le-succ-ℕ m n H =
 anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → Id m n
 anti-symmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (anti-symmetric-le-ℕ m n p q)
+
+is-decidable-le-ℕ :
+  (m n : ℕ) → is-decidable (le-ℕ m n)
+is-decidable-le-ℕ zero-ℕ zero-ℕ = inr id
+is-decidable-le-ℕ zero-ℕ (succ-ℕ n) = inl star
+is-decidable-le-ℕ (succ-ℕ m) zero-ℕ = inr id
+is-decidable-le-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-le-ℕ m n
 
 contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
 contradiction-le-ℕ zero-ℕ (succ-ℕ n) H K = K

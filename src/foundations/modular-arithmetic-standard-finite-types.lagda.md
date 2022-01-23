@@ -16,12 +16,16 @@ open import foundations.congruence-natural-numbers using
     refl-cong-ℕ; congruence-mul-ℕ; translation-invariant-cong-ℕ;
     translation-invariant-cong-ℕ')
 open import foundations.coproduct-types using (inl; inr)
+open import foundations.decidable-types using
+  ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ; translation-invariant-dist-ℕ;
     is-difference-dist-ℕ'; is-one-dist-succ-ℕ)
 open import foundations.divisibility-natural-numbers using
-  ( div-ℕ; concatenate-div-eq-ℕ)
+  ( div-ℕ; concatenate-div-eq-ℕ; div-eq-ℕ; is-zero-div-zero-ℕ; is-even-ℕ;
+    is-odd-ℕ)
+open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; concatenate-eq-leq-ℕ; refl-leq-ℕ; transitive-leq-ℕ)
@@ -29,13 +33,15 @@ open import foundations.injective-maps using (is-injective)
 open import foundations.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; associative-mul-ℕ; commutative-mul-ℕ; left-unit-law-mul-ℕ;
     left-distributive-mul-add-ℕ)
-open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import foundations.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-decidable-is-zero-ℕ')
 open import foundations.split-surjective-maps using (is-split-surjective)
 open import foundations.standard-finite-types using
   ( Fin; zero-Fin; succ-Fin; nat-Fin; nat-succ-Fin; is-zero-nat-zero-Fin;
     is-zero-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
     upper-bound-nat-Fin; one-Fin; is-one-nat-one-Fin; neg-one-Fin; is-one-Fin;
-    pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin)
+    pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin;
+    is-decidable-is-zero-Fin)
 open import foundations.unit-type using (star)
 ```
 
@@ -705,4 +711,26 @@ leq-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( succ-ℕ x)
     ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( leq-nat-mod-succ-ℕ k x)
+```
+
+## Decidability of division
+
+```agda
+is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)
+is-decidable-div-ℕ zero-ℕ x =
+  is-decidable-iff
+    ( div-eq-ℕ zero-ℕ x)
+    ( inv ∘ (is-zero-div-zero-ℕ x))
+    ( is-decidable-is-zero-ℕ' x)
+is-decidable-div-ℕ (succ-ℕ d) x =
+  is-decidable-iff
+    ( div-is-zero-mod-succ-ℕ d x)
+    ( is-zero-mod-succ-ℕ d x)
+    ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
+
+is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
+is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
+
+is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
+is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 ```

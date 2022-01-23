@@ -7,7 +7,9 @@ title: Univalent Mathematics in Agda
 
 module foundations.standard-finite-types where
 
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.coproduct-types using (coprod; inl; inr; map-coprod)
+open import foundations.decidable-types using
+  ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
@@ -18,7 +20,7 @@ open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
-open import foundations.negation using (¬)
+open import foundations.negation using (¬; functor-neg)
 open import foundations.unit-type using (unit; star)
 ```
 
@@ -159,6 +161,32 @@ eq-Eq-Fin :
   {k : ℕ} {x y : Fin k} → Eq-Fin k x y → Id x y
 eq-Eq-Fin {succ-ℕ k} {inl x} {inl y} e = ap inl (eq-Eq-Fin e)
 eq-Eq-Fin {succ-ℕ k} {inr star} {inr star} star = refl
+
+is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
+is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-Eq-Fin k x y
+is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inr y) = is-decidable-empty
+is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-decidable-empty
+is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
+
+has-decidable-equality-Fin :
+  {k : ℕ} (x y : Fin k) → is-decidable (Id x y)
+has-decidable-equality-Fin {k} x y =
+  map-coprod eq-Eq-Fin (functor-neg Eq-Fin-eq) (is-decidable-Eq-Fin k x y)
+
+is-decidable-is-zero-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin x)
+is-decidable-is-zero-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin x zero-Fin
+
+is-decidable-is-neg-one-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-neg-one-Fin x)
+is-decidable-is-neg-one-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin x neg-one-Fin
+
+is-decidable-is-one-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin x)
+is-decidable-is-one-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin x one-Fin
 
 -- Exercise 7.5 (b)
 

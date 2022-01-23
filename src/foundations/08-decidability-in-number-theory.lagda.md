@@ -176,8 +176,8 @@ is-decidable-div-ℕ zero-ℕ x =
     ( is-decidable-is-zero-ℕ' x)
 is-decidable-div-ℕ (succ-ℕ d) x =
   is-decidable-iff
-    ( div-ℕ-is-zero-Fin d x)
-    ( is-zero-Fin-div-ℕ d x)
+    ( div-is-zero-mod-succ-ℕ d x)
+    ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
 
 is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
