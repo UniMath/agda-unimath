@@ -27,6 +27,8 @@ open import foundations.divisibility-natural-numbers using
     is-odd-ℕ)
 open import foundations.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ')
+open import foundations.equality-standard-finite-types using
+  ( is-decidable-is-zero-Fin)
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.inequality-natural-numbers using
@@ -41,8 +43,7 @@ open import foundations.standard-finite-types using
   ( Fin; zero-Fin; succ-Fin; nat-Fin; nat-succ-Fin; is-zero-nat-zero-Fin;
     is-zero-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
     upper-bound-nat-Fin; one-Fin; is-one-nat-one-Fin; neg-one-Fin; is-one-Fin;
-    pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin;
-    is-decidable-is-zero-Fin)
+    pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin)
 open import foundations.unit-type using (star)
 ```
 

@@ -12,16 +12,30 @@ open import foundations.addition-integers using
     associative-add-ℤ; right-unit-law-add-ℤ; left-inverse-law-add-ℤ;
     right-successor-law-add-ℤ; commutative-add-ℤ; left-successor-law-add-ℤ;
     left-predecessor-law-add-ℤ; right-negative-law-add-ℤ;
-    distributive-neg-add-ℤ; is-positive-add-ℤ)
-open import foundations.coproduct-types using (inl; inr)
+    distributive-neg-add-ℤ; is-positive-add-ℤ; add-int-ℕ)
+open import foundations.addition-natural-numbers using
+  ( add-ℕ; add-ℕ'; commutative-add-ℕ; left-unit-law-add-ℕ;
+    left-successor-law-add-ℕ)
+open import foundations.coproduct-types using
+  ( coprod; inl; inr; map-left-unit-law-coprod-is-empty)
+open import foundations.difference-integers using
+  ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ)
+open import foundations.empty-type using (ex-falso)
+open import foundations.equality-integers using (Eq-eq-ℤ)
+open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundations.inequality-integers using
+  ( leq-ℤ; preserves-leq-add-ℤ; concatenate-eq-leq-eq-ℤ)
+open import foundations.injective-maps using (is-injective)
 open import foundations.integers using
   ( ℤ; neg-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; int-ℕ; succ-ℤ; pred-ℤ;
-    in-pos; pred-neg-ℤ; issec-pred-ℤ; neg-pred-ℤ; neg-neg-ℤ; is-positive-ℤ)
+    in-pos; pred-neg-ℤ; issec-pred-ℤ; neg-pred-ℤ; neg-neg-ℤ; is-positive-ℤ;
+    succ-int-ℕ; is-zero-ℤ; is-nonzero-ℤ; is-positive-eq-ℤ; is-nonnegative-ℤ;
+    is-nonnegative-eq-ℤ)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundations.multiplication-natural-numbers using
-  (mul-ℕ)
+  (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundations.unit-type using (star)
 ```
@@ -303,4 +317,179 @@ is-positive-mul-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
 is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
   is-positive-add-ℤ {inr (inr y)} K
     ( is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} H K)
+```
+
+```agda
+mul-int-ℕ : (x y : ℕ) → Id (mul-ℤ (int-ℕ x) (int-ℕ y)) (int-ℕ (mul-ℕ x y))
+mul-int-ℕ zero-ℕ y = refl
+mul-int-ℕ (succ-ℕ x) y =
+  ( ap (mul-ℤ' (int-ℕ y)) (inv (succ-int-ℕ x))) ∙
+  ( ( left-successor-law-mul-ℤ (int-ℕ x) (int-ℕ y)) ∙
+    ( ( ( ap (add-ℤ (int-ℕ y)) (mul-int-ℕ x y)) ∙
+        ( add-int-ℕ y (mul-ℕ x y))) ∙
+      ( ap int-ℕ (commutative-add-ℕ y (mul-ℕ x y)))))
+
+compute-mul-ℤ : (x y : ℤ) → Id (mul-ℤ x y) (explicit-mul-ℤ x y)
+compute-mul-ℤ (inl zero-ℕ) (inl y) =
+  inv (ap int-ℕ (left-unit-law-mul-ℕ (succ-ℕ y)))
+compute-mul-ℤ (inl (succ-ℕ x)) (inl y) =
+  ( ( ap (add-ℤ (int-ℕ (succ-ℕ y))) (compute-mul-ℤ (inl x) (inl y))) ∙
+    ( commutative-add-ℤ
+      ( int-ℕ (succ-ℕ y))
+      ( int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y))))) ∙
+  ( add-int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)) (succ-ℕ y))
+compute-mul-ℤ (inl zero-ℕ) (inr (inl star)) = refl
+compute-mul-ℤ (inl zero-ℕ) (inr (inr x)) = ap inl (inv (left-unit-law-add-ℕ x))
+compute-mul-ℤ (inl (succ-ℕ x)) (inr (inl star)) = right-zero-law-mul-ℤ (inl x)
+compute-mul-ℤ (inl (succ-ℕ x)) (inr (inr y)) =
+  ( ( ( ap (add-ℤ (inl y)) (compute-mul-ℤ (inl x) (inr (inr y)))) ∙
+      ( inv
+        ( distributive-neg-add-ℤ
+          ( inr (inr y))
+          ( int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)))))) ∙
+    ( ap
+      ( neg-ℤ)
+      ( commutative-add-ℤ
+        ( int-ℕ (succ-ℕ y))
+        ( int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)))))) ∙
+  ( ap neg-ℤ (add-int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y)) (succ-ℕ y)))
+compute-mul-ℤ (inr (inl star)) (inl y) = refl
+compute-mul-ℤ (inr (inr zero-ℕ)) (inl y) = ap inl (inv (left-unit-law-add-ℕ y))
+compute-mul-ℤ (inr (inr (succ-ℕ x))) (inl y) =
+  ( ap (add-ℤ (inl y)) (compute-mul-ℤ (inr (inr x)) (inl y))) ∙
+  ( ( ( inv
+        ( distributive-neg-add-ℤ
+          ( inr (inr y))
+          ( inr (inr (add-ℕ (mul-ℕ x (succ-ℕ y)) y))))) ∙
+      ( ap
+        ( neg-ℤ)
+        ( ( add-int-ℕ (succ-ℕ y) (mul-ℕ (succ-ℕ x) (succ-ℕ y))) ∙
+          ( ap
+            ( inr ∘ inr)
+            ( left-successor-law-add-ℕ y (add-ℕ (mul-ℕ x (succ-ℕ y)) y)))))) ∙
+    ( ap inl (commutative-add-ℕ y (mul-ℕ (succ-ℕ x) (succ-ℕ y)))))
+compute-mul-ℤ (inr (inl star)) (inr (inl star)) = refl
+compute-mul-ℤ (inr (inl star)) (inr (inr y)) = refl
+compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inl star)) = refl
+compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inl star)) =
+  right-zero-law-mul-ℤ (inr (inr (succ-ℕ x)))
+compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inr y)) =
+  ap ( inr ∘ inr)
+     ( inv
+       ( ( ap (add-ℕ' y) (left-zero-law-mul-ℕ (succ-ℕ y))) ∙
+         ( left-unit-law-add-ℕ y)))
+compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
+  ( ap (add-ℤ (inr (inr y))) (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) ∙
+  ( ( add-int-ℕ (succ-ℕ y) (mul-ℕ (succ-ℕ x) (succ-ℕ y))) ∙
+    ( ap int-ℕ (commutative-add-ℕ (succ-ℕ y) (mul-ℕ (succ-ℕ x) (succ-ℕ y)))))
+```
+
+```agda
+linear-diff-ℤ :
+  (z x y : ℤ) → Id (diff-ℤ (mul-ℤ z x) (mul-ℤ z y)) (mul-ℤ z (diff-ℤ x y))
+linear-diff-ℤ z x y =
+  ( ap (add-ℤ (mul-ℤ z x)) (inv (right-negative-law-mul-ℤ z y))) ∙
+  ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
+
+linear-diff-ℤ' :
+  (x y z : ℤ) → Id (diff-ℤ (mul-ℤ x z) (mul-ℤ y z)) (mul-ℤ (diff-ℤ x y) z)
+linear-diff-ℤ' x y z =
+  ( ap (add-ℤ (mul-ℤ x z)) (inv (left-negative-law-mul-ℤ y z))) ∙
+  ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
+```
+
+```agda
+is-zero-is-zero-mul-ℤ :
+  (x y : ℤ) → is-zero-ℤ (mul-ℤ x y) → coprod (is-zero-ℤ x) (is-zero-ℤ y)
+is-zero-is-zero-mul-ℤ (inl x) (inl y) H =
+  ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inl x) (inl y)) ∙ H))
+is-zero-is-zero-mul-ℤ (inl x) (inr (inl star)) H = inr refl
+is-zero-is-zero-mul-ℤ (inl x) (inr (inr y)) H =
+  ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inl x) (inr (inr y))) ∙ H))
+is-zero-is-zero-mul-ℤ (inr (inl star)) y H = inl refl
+is-zero-is-zero-mul-ℤ (inr (inr x)) (inl y) H =
+  ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inl y)) ∙ H))
+is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inl star)) H = inr refl
+is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inr y)) H =
+  ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y))) ∙ H))
+
+is-injective-mul-ℤ :
+  (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ x)
+is-injective-mul-ℤ x f {y} {z} p =
+  eq-diff-ℤ
+    ( map-left-unit-law-coprod-is-empty
+      ( is-zero-ℤ x)
+      ( is-zero-ℤ (diff-ℤ y z))
+      ( f)
+      ( is-zero-is-zero-mul-ℤ x
+        ( diff-ℤ y z)
+        ( inv (linear-diff-ℤ x y z) ∙ is-zero-diff-ℤ p)))
+
+is-injective-mul-ℤ' :
+  (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ' x)
+is-injective-mul-ℤ' x f {y} {z} p =
+  is-injective-mul-ℤ x f (commutative-mul-ℤ x y ∙ (p ∙ commutative-mul-ℤ z x))
+```
+
+```agda
+-- Lemmas about positive integers
+
+is-positive-left-factor-mul-ℤ :
+  {x y : ℤ} → is-positive-ℤ (mul-ℤ x y) → is-positive-ℤ y → is-positive-ℤ x
+is-positive-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
+  is-positive-eq-ℤ (compute-mul-ℤ (inl x) (inr (inr y))) H
+is-positive-left-factor-mul-ℤ {inr (inl star)} {inr (inr y)} H K =
+  is-positive-eq-ℤ (compute-mul-ℤ zero-ℤ (inr (inr y))) H
+is-positive-left-factor-mul-ℤ {inr (inr x)} {inr (inr y)} H K = star
+
+is-positive-right-factor-mul-ℤ :
+  {x y : ℤ} → is-positive-ℤ (mul-ℤ x y) → is-positive-ℤ x → is-positive-ℤ y
+is-positive-right-factor-mul-ℤ {x} {y} H =
+  is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
+
+-- Lemmas about nonnegative integers
+
+is-nonnegative-mul-ℤ :
+  {x y : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ y →
+  is-nonnegative-ℤ (mul-ℤ x y)
+is-nonnegative-mul-ℤ {inr (inl star)} {y} H K = star
+is-nonnegative-mul-ℤ {inr (inr x)} {inr (inl star)} H K =
+  is-nonnegative-eq-ℤ (inv (right-zero-law-mul-ℤ (inr (inr x)))) star
+is-nonnegative-mul-ℤ {inr (inr x)} {inr (inr y)} H K =
+  is-nonnegative-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) star
+
+is-nonnegative-left-factor-mul-ℤ :
+  {x y : ℤ} →
+  is-nonnegative-ℤ (mul-ℤ x y) → is-positive-ℤ y → is-nonnegative-ℤ x
+is-nonnegative-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
+  ex-falso (is-nonnegative-eq-ℤ (compute-mul-ℤ (inl x) (inr (inr y))) H)
+is-nonnegative-left-factor-mul-ℤ {inr x} {inr y} H K = star
+
+is-nonnegative-right-factor-mul-ℤ :
+  {x y : ℤ} →
+  is-nonnegative-ℤ (mul-ℤ x y) → is-positive-ℤ x → is-nonnegative-ℤ y
+is-nonnegative-right-factor-mul-ℤ {x} {y} H =
+  is-nonnegative-left-factor-mul-ℤ
+    ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
+```
+
+```agda
+preserves-leq-mul-ℤ :
+  (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (mul-ℤ z x) (mul-ℤ z y)
+preserves-leq-mul-ℤ x y (inr (inl star)) star K = star
+preserves-leq-mul-ℤ x y (inr (inr zero-ℕ)) star K = K
+preserves-leq-mul-ℤ x y (inr (inr (succ-ℕ n))) star K =
+  preserves-leq-add-ℤ {x} {y}
+    { mul-ℤ (inr (inr n)) x}
+    { mul-ℤ (inr (inr n)) y}
+    ( K)
+    ( preserves-leq-mul-ℤ x y (inr (inr n)) star K)
+
+preserves-leq-mul-ℤ' :
+  (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (mul-ℤ x z) (mul-ℤ y z)
+preserves-leq-mul-ℤ' x y z H K =
+  concatenate-eq-leq-eq-ℤ
+    ( commutative-mul-ℤ x z)
+    ( preserves-leq-mul-ℤ x y z H K)
+    ( commutative-mul-ℤ z y)
 ```

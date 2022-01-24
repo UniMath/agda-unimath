@@ -14,9 +14,6 @@ open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
     is-decidable-neg; dn-elim-is-decidable)
-open import foundations.well-ordering-principle-natural-numbers using
-  ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
-    is-lower-bound-ℕ)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ)
@@ -25,6 +22,7 @@ open import foundations.divisibility-natural-numbers using
     div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
     leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ)
 open import foundations.empty-type using (ex-falso)
+open import foundations.equality-natural-numbers using (is-decidable-is-zero-ℕ)
 open import foundations.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
     eq-quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ;
@@ -40,7 +38,10 @@ open import foundations.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ;
-    is-decidable-is-zero-ℕ; is-zero-ℕ)
+    is-zero-ℕ)
+open import foundations.well-ordering-principle-natural-numbers using
+  ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
+    is-lower-bound-ℕ)
 ```
 
 # The greatest common divisor of two natural numbers

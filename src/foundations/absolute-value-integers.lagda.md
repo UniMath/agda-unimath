@@ -11,6 +11,7 @@ open import foundations.addition-integers using
   ( add-ℤ; add-neg-one-right-ℤ; right-predecessor-law-add-ℤ;
     right-unit-law-add-ℤ; add-one-right-ℤ; right-successor-law-add-ℤ)
 open import foundations.addition-natural-numbers using (add-ℕ)
+open import foundations.coproduct-types using (inl; inr)
 open import foundations.empty-type using (ex-falso)
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; ap)
@@ -18,7 +19,7 @@ open import foundations.inequality-natural-numbers using
   (_≤-ℕ_; refl-leq-ℕ; preserves-leq-succ-ℕ; succ-leq-ℕ;
     concatenate-eq-leq-eq-ℕ; transitive-leq-ℕ)
 open import foundations.integers using
-  ( ℤ; inl; inr; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ)
+  ( ℤ; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ)
 open import foundations.unit-type using (star)

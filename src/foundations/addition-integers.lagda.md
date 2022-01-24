@@ -17,7 +17,7 @@ open import foundations.integers using
   ( ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; succ-ℤ; pred-ℤ; isretr-pred-ℤ;
     issec-pred-ℤ; neg-ℤ; pred-neg-ℤ; neg-pred-ℤ; in-pos; in-neg;
     is-nonnegative-ℤ; is-nonnegative-succ-ℤ; is-positive-ℤ; is-positive-succ-ℤ;
-    is-nonnegative-is-positive-ℤ)
+    is-nonnegative-is-positive-ℤ; int-ℕ; succ-int-ℕ; is-zero-ℤ)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
@@ -25,6 +25,8 @@ open import foundations.unit-type using (star)
 ```
 
 # Addition on the integers
+
+We introduce addition on the integers and derive its basic properties with respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to inequality are derived in `inequality-integers`.
 
 ```agda
 add-ℤ : ℤ → ℤ → ℤ
@@ -319,4 +321,30 @@ is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
   is-positive-succ-ℤ
     ( is-nonnegative-is-positive-ℤ
       ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} star star))
+```
+
+```agda
+add-int-ℕ : (x y : ℕ) → Id (add-ℤ (int-ℕ x) (int-ℕ y)) (int-ℕ (add-ℕ x y))
+add-int-ℕ x zero-ℕ = right-unit-law-add-ℤ (int-ℕ x)
+add-int-ℕ x (succ-ℕ y) =
+  ( ap (add-ℤ (int-ℕ x)) (inv (succ-int-ℕ y))) ∙
+  ( ( right-successor-law-add-ℤ (int-ℕ x) (int-ℕ y)) ∙
+    ( ( ap succ-ℤ (add-int-ℕ x y)) ∙
+      ( succ-int-ℕ (add-ℕ x y))))
+```
+
+```agda
+is-zero-add-ℤ :
+  (x y : ℤ) → Id (add-ℤ x y) y → is-zero-ℤ x
+is-zero-add-ℤ x y H =
+  ( inv (right-unit-law-add-ℤ x)) ∙
+  ( ( inv (ap (add-ℤ x) (right-inverse-law-add-ℤ y))) ∙
+    ( ( inv (associative-add-ℤ x y (neg-ℤ y))) ∙
+      ( ( ap (add-ℤ' (neg-ℤ y)) H) ∙
+        ( right-inverse-law-add-ℤ y))))
+
+is-zero-add-ℤ' :
+  (x y : ℤ) → Id (add-ℤ x y) x → is-zero-ℤ y
+is-zero-add-ℤ' x y H =
+  is-zero-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```

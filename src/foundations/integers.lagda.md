@@ -282,3 +282,18 @@ decide-is-nonnegative-ℤ :
 decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 ```
+
+```agda
+succ-int-ℕ : (x : ℕ) → Id (succ-ℤ (int-ℕ x)) (int-ℕ (succ-ℕ x))
+succ-int-ℕ zero-ℕ = refl
+succ-int-ℕ (succ-ℕ x) = refl
+```
+
+```agda
+is-injective-neg-ℤ : is-injective neg-ℤ
+is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ (ap neg-ℤ p ∙ neg-neg-ℤ y)
+
+is-zero-is-zero-neg-ℤ :
+  (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
+```

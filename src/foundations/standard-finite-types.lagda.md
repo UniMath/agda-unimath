@@ -140,58 +140,8 @@ is-one-nat-one-Fin (succ-ℕ k) = is-one-nat-one-Fin k
 ```
 
 ```agda
--- We introduce the observational equality on finite sets.
-
-Eq-Fin : (k : ℕ) → Fin k → Fin k → UU lzero
-Eq-Fin (succ-ℕ k) (inl x) (inl y) = Eq-Fin k x y
-Eq-Fin (succ-ℕ k) (inl x) (inr y) = empty
-Eq-Fin (succ-ℕ k) (inr x) (inl y) = empty
-Eq-Fin (succ-ℕ k) (inr x) (inr y) = unit
-
--- Exercise 7.5 (a)
-
-refl-Eq-Fin : {k : ℕ} (x : Fin k) → Eq-Fin k x x
-refl-Eq-Fin {succ-ℕ k} (inl x) = refl-Eq-Fin x
-refl-Eq-Fin {succ-ℕ k} (inr x) = star
-
-Eq-Fin-eq : {k : ℕ} {x y : Fin k} → Id x y → Eq-Fin k x y
-Eq-Fin-eq {k} refl = refl-Eq-Fin {k} _
-
-eq-Eq-Fin :
-  {k : ℕ} {x y : Fin k} → Eq-Fin k x y → Id x y
-eq-Eq-Fin {succ-ℕ k} {inl x} {inl y} e = ap inl (eq-Eq-Fin e)
-eq-Eq-Fin {succ-ℕ k} {inr star} {inr star} star = refl
-
-is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
-is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-Eq-Fin k x y
-is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inr y) = is-decidable-empty
-is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-decidable-empty
-is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
-
-has-decidable-equality-Fin :
-  {k : ℕ} (x y : Fin k) → is-decidable (Id x y)
-has-decidable-equality-Fin {k} x y =
-  map-coprod eq-Eq-Fin (functor-neg Eq-Fin-eq) (is-decidable-Eq-Fin k x y)
-
-is-decidable-is-zero-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin x)
-is-decidable-is-zero-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin x zero-Fin
-
-is-decidable-is-neg-one-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-neg-one-Fin x)
-is-decidable-is-neg-one-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin x neg-one-Fin
-
-is-decidable-is-one-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin x)
-is-decidable-is-one-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin x one-Fin
-
--- Exercise 7.5 (b)
-
 is-injective-inl-Fin : {k : ℕ} → is-injective (inl-Fin k)
-is-injective-inl-Fin p = eq-Eq-Fin (Eq-Fin-eq p)
+is-injective-inl-Fin refl = refl
 
 -- Exercise 7.5 (c)
 
@@ -199,18 +149,15 @@ neq-zero-succ-Fin :
   {k : ℕ} {x : Fin k} → is-nonzero-Fin (succ-Fin (inl-Fin k x))
 neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
   neq-zero-succ-Fin (is-injective-inl-Fin p)
-neq-zero-succ-Fin {succ-ℕ k} {inr star} p =
-  Eq-Fin-eq {succ-ℕ (succ-ℕ k)} {inr star} {zero-Fin} p
+neq-zero-succ-Fin {succ-ℕ k} {inr star} ()
 
 -- Exercise 7.5 (d)
 
 is-injective-skip-zero-Fin : {k : ℕ} → is-injective (skip-zero-Fin {k})
 is-injective-skip-zero-Fin {succ-ℕ k} {inl x} {inl y} p =
   ap inl (is-injective-skip-zero-Fin (is-injective-inl-Fin p))
-is-injective-skip-zero-Fin {succ-ℕ k} {inl x} {inr star} p =
-  ex-falso (Eq-Fin-eq p)
-is-injective-skip-zero-Fin {succ-ℕ k} {inr star} {inl y} p =
-  ex-falso (Eq-Fin-eq p)
+is-injective-skip-zero-Fin {succ-ℕ k} {inl x} {inr star} ()
+is-injective-skip-zero-Fin {succ-ℕ k} {inr star} {inl y} ()
 is-injective-skip-zero-Fin {succ-ℕ k} {inr star} {inr star} p = refl
 
 is-injective-succ-Fin : {k : ℕ} → is-injective (succ-Fin {k})

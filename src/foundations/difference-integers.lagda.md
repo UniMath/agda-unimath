@@ -15,17 +15,16 @@ open import foundations.addition-integers using
     left-successor-law-add-ℤ; interchange-law-add-add-ℤ)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.integers using
-  ( ℤ; neg-ℤ; is-zero-ℤ; zero-ℤ; succ-ℤ; pred-ℤ;
+  ( ℤ; neg-ℤ; is-zero-ℤ; zero-ℤ; succ-ℤ; pred-ℤ; issec-pred-ℤ;
     neg-succ-ℤ; neg-pred-ℤ; neg-neg-ℤ)
-open import foundations.multiplication-integers using
-  ( mul-ℤ; right-negative-law-mul-ℤ; left-distributive-mul-add-ℤ;
-    left-negative-law-mul-ℤ; right-distributive-mul-add-ℤ)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 
 ```
 
 # The difference between integers
+
+Since integers of the form `x - y` occur often, we introduce them here and derive their basic properties relative to `succ-ℤ`, `neg-ℤ`, and `add-ℤ`. The file `multiplication-integers` imports `difference-integers` and more properties are derived there.
 
 ```
 diff-ℤ : ℤ → ℤ → ℤ
@@ -110,16 +109,13 @@ right-translation-diff-ℤ :
 right-translation-diff-ℤ x y z =
   ( ap-diff-ℤ (commutative-add-ℤ x z) (commutative-add-ℤ y z)) ∙
   ( left-translation-diff-ℤ x y z)
+```
 
-linear-diff-ℤ :
-  (z x y : ℤ) → Id (diff-ℤ (mul-ℤ z x) (mul-ℤ z y)) (mul-ℤ z (diff-ℤ x y))
-linear-diff-ℤ z x y =
-  ( ap (add-ℤ (mul-ℤ z x)) (inv (right-negative-law-mul-ℤ z y))) ∙
-  ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
-
-linear-diff-ℤ' :
-  (x y z : ℤ) → Id (diff-ℤ (mul-ℤ x z) (mul-ℤ y z)) (mul-ℤ (diff-ℤ x y) z)
-linear-diff-ℤ' x y z =
-  ( ap (add-ℤ (mul-ℤ x z)) (inv (left-negative-law-mul-ℤ y z))) ∙
-  ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
+```agda
+diff-succ-ℤ : (x y : ℤ) → Id (diff-ℤ (succ-ℤ x) (succ-ℤ y)) (diff-ℤ x y)
+diff-succ-ℤ x y =
+  ( ap (add-ℤ (succ-ℤ x)) (neg-succ-ℤ y)) ∙
+  ( ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
+    ( ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
+      ( issec-pred-ℤ (diff-ℤ x y))))
 ```

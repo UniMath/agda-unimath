@@ -22,20 +22,15 @@ open import foundations.unit-type using (unit; star)
 # Inequality on the standard finite types
 
 ```agda
-leq-Fin :
-  {k : ℕ} → Fin k → Fin k → UU lzero
+leq-Fin : {k : ℕ} → Fin k → Fin k → UU lzero
+leq-Fin {succ-ℕ k} x (inr y) = unit
 leq-Fin {succ-ℕ k} (inl x) (inl y) = leq-Fin x y
 leq-Fin {succ-ℕ k} (inr x) (inl y) = empty
-leq-Fin {succ-ℕ k} (inl x) (inr y) = unit
-leq-Fin {succ-ℕ k} (inr x) (inr y) = unit
 
-leq-neg-one-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → leq-Fin x neg-one-Fin
-leq-neg-one-Fin (inl x) = star
-leq-neg-one-Fin (inr x) = star
+leq-neg-one-Fin : {k : ℕ} (x : Fin (succ-ℕ k)) → leq-Fin x neg-one-Fin
+leq-neg-one-Fin x = star
 
-refl-leq-Fin :
-  {k : ℕ} (x : Fin k) → leq-Fin x x
+refl-leq-Fin : {k : ℕ} (x : Fin k) → leq-Fin x x
 refl-leq-Fin {succ-ℕ k} (inl x) = refl-leq-Fin x
 refl-leq-Fin {succ-ℕ k} (inr star) = star
 

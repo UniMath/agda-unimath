@@ -7,16 +7,19 @@ title: Univalent Mathematics in Agda
 
 module foundations.inequality-integers where
 
+open import foundations.addition-integers using
+  ( right-inverse-law-add-ℤ; is-nonnegative-add-ℤ; add-ℤ;
+    left-successor-law-add-ℤ)
 open import foundations.coproduct-types using (coprod; map-coprod; inl; inr)
 open import foundations.difference-integers using
-  ( diff-ℤ; eq-diff-ℤ; distributive-neg-diff-ℤ; triangle-diff-ℤ)
+  ( diff-ℤ; eq-diff-ℤ; distributive-neg-diff-ℤ; triangle-diff-ℤ;
+    right-translation-diff-ℤ; left-translation-diff-ℤ)
 open import foundations.empty-type using (empty)
 open import foundations.functions using (id)
 open import foundations.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import foundations.integers using
-  ( ℤ; is-nonnegative-ℤ; right-inverse-law-add-ℤ; is-zero-is-nonnegative-ℤ;
-    is-nonnegative-eq-ℤ; is-nonnegative-add-ℤ; add-ℤ; neg-ℤ;
-    decide-is-nonnegative-ℤ; succ-ℤ; left-successor-law-add-ℤ)
+  ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
+    is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ)
 open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundations.unit-type using (unit; star)
@@ -79,22 +82,45 @@ concatenate-leq-eq-ℤ x H refl = H
 concatenate-eq-leq-ℤ :
   {x x' : ℤ} (y : ℤ) → Id x' x → leq-ℤ x y → leq-ℤ x' y
 concatenate-eq-leq-ℤ y refl H = H
+```
 
--- The strict ordering on ℤ
+## The strict ordering on ℤ
 
+```agda
 le-ℤ : ℤ → ℤ → UU lzero
-le-ℤ (inl zero-ℕ) (inl x) = empty
-le-ℤ (inl zero-ℕ) (inr y) = unit
-le-ℤ (inl (succ-ℕ x)) (inl zero-ℕ) = unit
-le-ℤ (inl (succ-ℕ x)) (inl (succ-ℕ y)) = le-ℤ (inl x) (inl y)
-le-ℤ (inl (succ-ℕ x)) (inr y) = unit
-le-ℤ (inr x) (inl y) = empty
-le-ℤ (inr (inl star)) (inr (inl star)) = empty
-le-ℤ (inr (inl star)) (inr (inr x)) = unit
-le-ℤ (inr (inr x)) (inr (inl star)) = empty
-le-ℤ (inr (inr zero-ℕ)) (inr (inr zero-ℕ)) = empty
-le-ℤ (inr (inr zero-ℕ)) (inr (inr (succ-ℕ y))) = unit
-le-ℤ (inr (inr (succ-ℕ x))) (inr (inr zero-ℕ)) = empty
-le-ℤ (inr (inr (succ-ℕ x))) (inr (inr (succ-ℕ y))) =
-  le-ℤ (inr (inr x)) (inr (inr y))
+le-ℤ x y = is-positive-ℤ (diff-ℤ x y)
+```
+
+```agda
+-- We show that ℤ is an ordered ring
+
+preserves-order-add-ℤ' :
+  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ x z) (add-ℤ y z)
+preserves-order-add-ℤ' {x} {y} z =
+  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
+
+preserves-order-add-ℤ :
+  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (add-ℤ z x) (add-ℤ z y)
+preserves-order-add-ℤ {x} {y} z =
+  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
+
+preserves-leq-add-ℤ :
+  {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (add-ℤ a c) (add-ℤ b d)
+preserves-leq-add-ℤ {a} {b} {c} {d} H K =
+  trans-leq-ℤ
+    ( add-ℤ a c)
+    ( add-ℤ b c)
+    ( add-ℤ b d)
+    ( preserves-order-add-ℤ' {a} {b} c H)
+    ( preserves-order-add-ℤ b K)
+
+reflects-order-add-ℤ' :
+  {x y z : ℤ} → leq-ℤ (add-ℤ x z) (add-ℤ y z) → leq-ℤ x y
+reflects-order-add-ℤ' {x} {y} {z} =
+  is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
+
+reflects-order-add-ℤ :
+  {x y z : ℤ} → leq-ℤ (add-ℤ z x) (add-ℤ z y) → leq-ℤ x y
+reflects-order-add-ℤ {x} {y} {z} =
+  is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
