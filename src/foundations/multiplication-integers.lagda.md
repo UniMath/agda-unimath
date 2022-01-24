@@ -13,9 +13,10 @@ open import foundations.addition-integers using
     right-successor-law-add-ℤ; commutative-add-ℤ; left-successor-law-add-ℤ;
     left-predecessor-law-add-ℤ; right-negative-law-add-ℤ;
     distributive-neg-add-ℤ; is-positive-add-ℤ)
+open import foundations.coproduct-types using (inl; inr)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.integers using
-  ( ℤ; inl; inr; neg-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; int-ℕ; succ-ℤ; pred-ℤ;
+  ( ℤ; neg-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; int-ℕ; succ-ℤ; pred-ℤ;
     in-pos; pred-neg-ℤ; issec-pred-ℤ; neg-pred-ℤ; neg-neg-ℤ; is-positive-ℤ)
 open import foundations.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)

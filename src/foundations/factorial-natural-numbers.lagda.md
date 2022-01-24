@@ -12,13 +12,14 @@ open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.divisibility-natural-numbers using
   ( div-ℕ; transitive-div-ℕ)
 open import foundations.empty-type using (ex-falso)
+open import foundations.equality-natural-numbers using (Eq-eq-ℕ)
 open import foundations.identity-types using (refl)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; decide-leq-succ-ℕ; leq-zero-ℕ; leq-mul-is-nonzero-ℕ')
 open import foundations.multiplication-natural-numbers using
   ( mul-ℕ; commutative-mul-ℕ; is-nonzero-mul-ℕ)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; Eq-eq-ℕ; is-nonzero-succ-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ)
 ```
 
 # Factorials

@@ -10,12 +10,12 @@ module foundations.integers where
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.functions using (id; _∘_)
+open import foundations.functions using (id)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (UU; Level; lzero)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-nonzero-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
 open import foundations.negation using (¬)
 open import foundations.unit-type using (unit; star)
 ```
@@ -25,32 +25,6 @@ open import foundations.unit-type using (unit; star)
 ```agda
 ℤ : UU lzero
 ℤ = coprod ℕ (coprod unit ℕ)
-```
-
-### Observational equality on ℤ
-
-```agda
-Eq-ℤ : ℤ → ℤ → UU lzero
-Eq-ℤ (inl x) (inl y) = Eq-ℕ x y
-Eq-ℤ (inl x) (inr y) = empty
-Eq-ℤ (inr x) (inl y) = empty
-Eq-ℤ (inr (inl x)) (inr (inl y)) = unit
-Eq-ℤ (inr (inl x)) (inr (inr y)) = empty
-Eq-ℤ (inr (inr x)) (inr (inl y)) = empty
-Eq-ℤ (inr (inr x)) (inr (inr y)) = Eq-ℕ x y
-
-refl-Eq-ℤ : (x : ℤ) → Eq-ℤ x x
-refl-Eq-ℤ (inl x) = refl-Eq-ℕ x
-refl-Eq-ℤ (inr (inl x)) = star
-refl-Eq-ℤ (inr (inr x)) = refl-Eq-ℕ x
-
-Eq-eq-ℤ : {x y : ℤ} → Id x y → Eq-ℤ x y
-Eq-eq-ℤ {x} {.x} refl = refl-Eq-ℤ x
-
-eq-Eq-ℤ : (x y : ℤ) → Eq-ℤ x y → Id x y
-eq-Eq-ℤ (inl x) (inl y) e = ap inl (eq-Eq-ℕ x y e)
-eq-Eq-ℤ (inr (inl star)) (inr (inl star)) e = refl
-eq-Eq-ℤ (inr (inr x)) (inr (inr y)) e = ap (inr ∘ inr) (eq-Eq-ℕ x y e)
 ```
 
 ## Inclusion of the negative integers
@@ -238,7 +212,7 @@ is-nonnegative-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonnegat
 is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
 
 is-nonzero-is-positive-ℤ : (x : ℤ) → is-positive-ℤ x → is-nonzero-ℤ x
-is-nonzero-is-positive-ℤ (inr (inr x)) H p = Eq-eq-ℤ p
+is-nonzero-is-positive-ℤ (inr (inr x)) H ()
 
 is-positive-eq-ℤ : {x y : ℤ} → Id x y → is-positive-ℤ x → is-positive-ℤ y
 is-positive-eq-ℤ {x} refl = id

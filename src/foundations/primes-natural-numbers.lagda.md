@@ -15,17 +15,19 @@ open import foundations.decidable-types using
     is-decidable-function-type)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.divisibility-natural-numbers using
-  ( div-ℕ; div-one-ℕ; div-zero-ℕ; leq-div-succ-ℕ; is-zero-is-zero-div-ℕ;
-    is-one-div-ℕ; leq-div-ℕ; transitive-div-ℕ; is-one-is-divisor-below-ℕ)
+  ( div-ℕ; div-one-ℕ; leq-div-succ-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
+    transitive-div-ℕ; is-one-is-divisor-below-ℕ)
 open import foundations.empty-type using (ex-falso)
+open import foundations.equality-natural-numbers using
+  ( is-decidable-is-one-ℕ; Eq-eq-ℕ; is-decidable-is-zero-ℕ)
 open import foundations.factorial-natural-numbers using
   ( factorial-ℕ; div-factorial-ℕ; leq-factorial-ℕ)
 open import foundations.functions using (id)
-open import foundations.identity-types using (Id; refl; _∙_; inv)
+open import foundations.identity-types using (refl; _∙_; inv)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; is-decidable-le-ℕ; is-decidable-leq-ℕ;
     is-zero-leq-zero-ℕ; concatenate-leq-le-ℕ; le-succ-ℕ;
-    is-nonzero-le-ℕ; neq-le-ℕ; le-leq-neq-ℕ; contradiction-le-ℕ; leq-not-le-ℕ)
+    is-nonzero-le-ℕ; neq-le-ℕ; contradiction-le-ℕ; leq-not-le-ℕ)
 open import foundations.levels using (UU; lzero)
 open import foundations.logical-equivalence using (_↔_)
 open import foundations.modular-arithmetic-standard-finite-types using
@@ -33,10 +35,12 @@ open import foundations.modular-arithmetic-standard-finite-types using
 open import foundations.multiplication-natural-numbers using
   ( right-zero-law-mul-ℕ)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; has-decidable-equality-ℕ;
-    is-nonzero-succ-ℕ; is-not-one-two-ℕ; is-decidable-is-one-ℕ; Eq-eq-ℕ;
-    is-nonzero-ℕ; is-decidable-is-zero-ℕ; is-successor-is-nonzero-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-nonzero-succ-ℕ;
+    is-not-one-two-ℕ; is-nonzero-ℕ; is-successor-is-nonzero-ℕ)
 open import foundations.negation using (¬)
+open import foundations.proper-divisors-natural-numbers using
+  ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
+    is-decidable-is-proper-divisor-ℕ; le-is-proper-divisor-ℕ)
 open import foundations.unit-type using (star)
 open import foundations.well-ordering-principle-natural-numbers using
   ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
@@ -46,11 +50,6 @@ open import foundations.well-ordering-principle-natural-numbers using
 # Prime numbers
 
 ```agda
-{- Definition 8.5.1 -}
-
-is-proper-divisor-ℕ : ℕ → ℕ → UU lzero
-is-proper-divisor-ℕ n d = ¬ (Id d n) × div-ℕ d n
-
 is-one-is-proper-divisor-ℕ : ℕ → UU lzero
 is-one-is-proper-divisor-ℕ n =
   (x : ℕ) → is-proper-divisor-ℕ n x → is-one-ℕ x
@@ -74,17 +73,6 @@ is-prime-is-prime-easy-ℕ : (n : ℕ) → is-prime-easy-ℕ n → is-prime-ℕ 
 pr1 (is-prime-is-prime-easy-ℕ n H x) = pr2 H x
 pr1 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) q = pr1 H (inv q)
 pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-ℕ n
-
-is-decidable-is-proper-divisor-ℕ :
-  (n d : ℕ) → is-decidable (is-proper-divisor-ℕ n d)
-is-decidable-is-proper-divisor-ℕ n d =
-  is-decidable-prod
-    ( is-decidable-neg (has-decidable-equality-ℕ d n))
-    ( is-decidable-div-ℕ d n)
-
-is-proper-divisor-zero-succ-ℕ : (n : ℕ) → is-proper-divisor-ℕ zero-ℕ (succ-ℕ n)
-pr1 (is-proper-divisor-zero-succ-ℕ n) = is-nonzero-succ-ℕ n
-pr2 (is-proper-divisor-zero-succ-ℕ n) = div-zero-ℕ (succ-ℕ n)
 
 is-decidable-is-prime-easy-ℕ : (n : ℕ) → is-decidable (is-prime-easy-ℕ n)
 is-decidable-is-prime-easy-ℕ zero-ℕ =
@@ -117,7 +105,7 @@ is-one-is-proper-divisor-two-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) (pair f H) =
   ex-falso (f refl)
 is-one-is-proper-divisor-two-ℕ (succ-ℕ (succ-ℕ (succ-ℕ x))) (pair f H) =
   ex-falso (leq-div-succ-ℕ (succ-ℕ (succ-ℕ (succ-ℕ x))) 1 H)
-
+  
 is-prime-easy-two-ℕ : is-prime-easy-ℕ 2
 pr1 is-prime-easy-two-ℕ = Eq-eq-ℕ
 pr2 is-prime-easy-two-ℕ = is-one-is-proper-divisor-two-ℕ
@@ -228,11 +216,6 @@ is-not-one-larger-prime-ℕ n H p with is-successor-is-nonzero-ℕ H
     ( concatenate-leq-le-ℕ {1} {succ-ℕ k} {larger-prime-ℕ n} star
       ( le-larger-prime-ℕ (succ-ℕ k)))
     ( inv p)
-
-le-is-proper-divisor-ℕ :
-  (x y : ℕ) → is-nonzero-ℕ y → is-proper-divisor-ℕ y x → le-ℕ x y
-le-is-proper-divisor-ℕ x y H K =
-  le-leq-neq-ℕ (leq-div-ℕ x y H (pr2 K)) (pr1 K)
 
 not-in-sieve-of-eratosthenes-is-proper-divisor-larger-prime-ℕ :
   (n x : ℕ) → is-proper-divisor-ℕ (larger-prime-ℕ n) x →

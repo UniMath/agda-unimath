@@ -25,6 +25,8 @@ open import foundations.distance-natural-numbers using
 open import foundations.divisibility-natural-numbers using
   ( div-ℕ; concatenate-div-eq-ℕ; div-eq-ℕ; is-zero-div-zero-ℕ; is-even-ℕ;
     is-odd-ℕ)
+open import foundations.equality-natural-numbers using
+  ( is-decidable-is-zero-ℕ')
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.inequality-natural-numbers using
@@ -33,8 +35,7 @@ open import foundations.injective-maps using (is-injective)
 open import foundations.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; associative-mul-ℕ; commutative-mul-ℕ; left-unit-law-mul-ℕ;
     left-distributive-mul-add-ℕ)
-open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-decidable-is-zero-ℕ')
+open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundations.split-surjective-maps using (is-split-surjective)
 open import foundations.standard-finite-types using
   ( Fin; zero-Fin; succ-Fin; nat-Fin; nat-succ-Fin; is-zero-nat-zero-Fin;

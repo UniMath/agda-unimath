@@ -9,11 +9,12 @@ module foundations.addition-integers where
 
 open import foundations.addition-natural-numbers using
   ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
+open import foundations.coproduct-types using (inl; inr)
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.injective-maps using (is-injective)
 open import foundations.integers using
-  ( ℤ; inl; inr; zero-ℤ; one-ℤ; neg-one-ℤ; succ-ℤ; pred-ℤ; isretr-pred-ℤ;
+  ( ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; succ-ℤ; pred-ℤ; isretr-pred-ℤ;
     issec-pred-ℤ; neg-ℤ; pred-neg-ℤ; neg-pred-ℤ; in-pos; in-neg;
     is-nonnegative-ℤ; is-nonnegative-succ-ℤ; is-positive-ℤ; is-positive-succ-ℤ;
     is-nonnegative-is-positive-ℤ)
