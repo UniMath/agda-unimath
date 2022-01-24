@@ -8,13 +8,16 @@ title: Univalent Mathematics in Agda
 module foundations.equivalences where
 
 open import foundations.cartesian-product-types using (_×_)
+open import foundations.coherently-invertible-maps using
+  ( is-coherently-invertible)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.functions using (id; _∘_)
 open import foundations.homotopies using
-  ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_)
+  ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; htpy-red; htpy-nat;
+    htpy-right-whisk)
 open import foundations.identity-types using
   ( Id; refl; concat; concat'; _∙_; inv; ap; tr; inv-inv; inv-con; con-inv;
-    right-unit)
+    right-unit; sq-top-whisk; ap-comp)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; UU; _⊔_)
 ```
@@ -130,23 +133,84 @@ module _
   pr1 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) = G
   pr2 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) =
     (((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H
+```
 
-  map-inv-is-equiv : is-equiv f → B → A
-  map-inv-is-equiv H = pr1 (has-inverse-is-equiv H)
+## Invertible maps are coherenctly invertible
 
-  issec-map-inv-is-equiv' :
-    (H : is-equiv f) → (f ∘ (map-inv-is-equiv H)) ~ id
-  issec-map-inv-is-equiv' H = pr1 (pr2 (has-inverse-is-equiv H))
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : has-inverse f)
+  where
+  
+  inv-has-inverse : B → A
+  inv-has-inverse = pr1 H
+  
+  issec-inv-has-inverse : (f ∘ inv-has-inverse) ~ id
+  issec-inv-has-inverse y =
+    ( inv (pr1 (pr2 H) (f (inv-has-inverse y)))) ∙
+    ( ap f (pr2 (pr2 H) (inv-has-inverse y)) ∙ (pr1 (pr2 H) y))
+  
+  isretr-inv-has-inverse : (inv-has-inverse ∘ f) ~ id
+  isretr-inv-has-inverse = pr2 (pr2 H)
+  
+  coherence-inv-has-inverse :
+    (issec-inv-has-inverse ·r f) ~ (f ·l isretr-inv-has-inverse)
+  coherence-inv-has-inverse x =
+    inv
+      ( inv-con
+        ( pr1 (pr2 H) (f (inv-has-inverse (f x))))
+        ( ap f (pr2 (pr2 H) x))
+        ( (ap f (pr2 (pr2 H) (inv-has-inverse (f x)))) ∙ (pr1 (pr2 H) (f x)))
+        ( sq-top-whisk
+          ( pr1 (pr2 H) (f (inv-has-inverse (f x))))
+          ( ap f (pr2 (pr2 H) x))
+          ( (ap (f ∘ (inv-has-inverse ∘ f)) (pr2 (pr2 H) x)))
+          ( ( ap-comp f (inv-has-inverse ∘ f) (pr2 (pr2 H) x)) ∙
+            ( inv (ap (ap f) (htpy-red (pr2 (pr2 H)) x))))
+          ( pr1 (pr2 H) (f x))
+          ( htpy-nat (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
 
-  isretr-map-inv-is-equiv' :
-    (H : is-equiv f) → ((map-inv-is-equiv H) ∘ f) ~ id
-  isretr-map-inv-is-equiv' H = pr2 (pr2 (has-inverse-is-equiv H))
+  is-coherently-invertible-has-inverse : is-coherently-invertible f
+  pr1 is-coherently-invertible-has-inverse = inv-has-inverse
+  pr1 (pr2 is-coherently-invertible-has-inverse) = issec-inv-has-inverse
+  pr1 (pr2 (pr2 is-coherently-invertible-has-inverse)) = isretr-inv-has-inverse
+  pr2 (pr2 (pr2 is-coherently-invertible-has-inverse)) =
+    coherence-inv-has-inverse
 
-  is-equiv-map-inv-is-equiv : (H : is-equiv f) → is-equiv (map-inv-is-equiv H)
-  is-equiv-map-inv-is-equiv H =
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+  
+  is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
+  is-coherently-invertible-is-equiv =
+    is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-equiv f)
+  where
+
+  map-inv-is-equiv : B → A
+  map-inv-is-equiv = pr1 (has-inverse-is-equiv H)
+
+  issec-map-inv-is-equiv : (f ∘ map-inv-is-equiv) ~ id
+  issec-map-inv-is-equiv = issec-inv-has-inverse (has-inverse-is-equiv H)
+
+  isretr-map-inv-is-equiv : (map-inv-is-equiv ∘ f) ~ id
+  isretr-map-inv-is-equiv =
+    isretr-inv-has-inverse (has-inverse-is-equiv H)
+  
+  coherence-map-inv-is-equiv :
+    ( issec-map-inv-is-equiv ·r f) ~ (f ·l isretr-map-inv-is-equiv)
+  coherence-map-inv-is-equiv =
+    coherence-inv-has-inverse (has-inverse-is-equiv H)
+
+  is-equiv-map-inv-is-equiv : is-equiv map-inv-is-equiv
+  is-equiv-map-inv-is-equiv =
     is-equiv-has-inverse f
-      ( isretr-map-inv-is-equiv' H)
-      ( issec-map-inv-is-equiv' H)
+      ( isretr-map-inv-is-equiv)
+      ( issec-map-inv-is-equiv)
 ```
 
 ## The inverse of an equivalence
@@ -156,20 +220,27 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
 
-  map-inv-equiv' : (B → A)
-  map-inv-equiv' = map-inv-is-equiv (is-equiv-map-equiv e)
+  map-inv-equiv : B → A
+  map-inv-equiv = map-inv-is-equiv (is-equiv-map-equiv e)
 
-  issec-map-inv-equiv' : (map-equiv e ∘ map-inv-equiv') ~ id
-  issec-map-inv-equiv' = issec-map-inv-is-equiv' (is-equiv-map-equiv e)
+  issec-map-inv-equiv : ((map-equiv e) ∘ map-inv-equiv) ~ id
+  issec-map-inv-equiv = issec-map-inv-is-equiv (is-equiv-map-equiv e)
 
-  isretr-map-inv-equiv' : (map-inv-equiv' ∘ map-equiv e) ~ id
-  isretr-map-inv-equiv' = isretr-map-inv-is-equiv' (is-equiv-map-equiv e)
+  isretr-map-inv-equiv : (map-inv-equiv ∘ (map-equiv e)) ~ id
+  isretr-map-inv-equiv =
+    isretr-map-inv-is-equiv (is-equiv-map-equiv e)
+  
+  coherence-map-inv-equiv :
+    ( issec-map-inv-equiv ·r (map-equiv e)) ~
+    ( (map-equiv e) ·l isretr-map-inv-equiv)
+  coherence-map-inv-equiv =
+    coherence-map-inv-is-equiv (is-equiv-map-equiv e)
 
-  is-equiv-map-inv-equiv : is-equiv map-inv-equiv'
+  is-equiv-map-inv-equiv : is-equiv map-inv-equiv
   is-equiv-map-inv-equiv = is-equiv-map-inv-is-equiv (is-equiv-map-equiv e)
 
   inv-equiv : (B ≃ A)
-  pr1 inv-equiv = map-inv-equiv'
+  pr1 inv-equiv = map-inv-equiv
   pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
 
@@ -183,9 +254,9 @@ module _
   abstract
     is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
     is-injective-is-equiv H {x} {y} p =
-      ( inv (isretr-map-inv-is-equiv' H x)) ∙
+      ( inv (isretr-map-inv-is-equiv H x)) ∙
       ( ( ap (map-inv-is-equiv H) p) ∙
-        ( isretr-map-inv-is-equiv' H y))
+        ( isretr-map-inv-is-equiv H y))
 
   abstract
     is-injective-map-equiv : (e : A ≃ B) → is-injective (map-equiv e)
@@ -196,7 +267,7 @@ module _
   where
   
   abstract
-    is-injective-map-inv-equiv : (e : A ≃ B) → is-injective (map-inv-equiv' e)
+    is-injective-map-inv-equiv : (e : A ≃ B) → is-injective (map-inv-equiv e)
     is-injective-map-inv-equiv e =
       is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
@@ -241,10 +312,10 @@ module _
     (map-inv-is-equiv H) ~ (map-inv-is-equiv K)
   inv-htpy-is-equiv G H K b =
     ( inv
-      ( isretr-map-inv-is-equiv' K (map-inv-is-equiv H b))) ∙
+      ( isretr-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
     ( ap (map-inv-is-equiv K)
       ( ( inv (G (map-inv-is-equiv H b))) ∙
-        ( issec-map-inv-is-equiv' H b)))
+        ( issec-map-inv-is-equiv H b)))
 ```
 
 ## The 3-for-2 property of equivalences

@@ -7,11 +7,12 @@ title: Univalent Mathematics in Agda
 
 module foundations.homotopies where
 
-open import foundations.functions using (_∘_)
+open import foundations.functions using (_∘_; id)
 open import foundations.levels using (UU; Level; _⊔_)
 open import foundations.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
-    right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv)
+    right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
+    ap-id)
 ```
 
 # Homotopies
@@ -154,4 +155,30 @@ module _
     {g g' : B → C} (H : g ~ g') (f : A → B) →
     ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
   htpy-right-whisk-inv-htpy H f = refl-htpy
+```
+
+```agda
+htpy-nat :
+  {i j : Level} {A : UU i} {B : UU j} {f g : A → B} (H : f ~ g)
+  {x y : A} (p : Id x y) →
+  Id ((H x) ∙ (ap g p)) ((ap f p) ∙ (H y))
+htpy-nat H refl = right-unit
+
+left-unwhisk :
+  {i : Level} {A : UU i} {x y z : A} (p : Id x y) {q r : Id y z} →
+  Id (p ∙ q) (p ∙ r) → Id q r
+left-unwhisk refl s = s
+
+right-unwhisk :
+  {i : Level} {A : UU i} {x y z : A} {p q : Id x y}
+  (r : Id y z) → Id (p ∙ r) (q ∙ r) → Id p q
+right-unwhisk refl s = (inv right-unit) ∙ (s ∙ right-unit)
+
+htpy-red :
+  {i : Level} {A : UU i} {f : A → A} (H : f ~ id) →
+  (x : A) → Id (H (f x)) (ap f (H x))
+htpy-red {_} {A} {f} H x =
+  right-unwhisk (H x)
+    ( ( ap (concat (H (f x)) x) (inv (ap-id (H x)))) ∙
+      ( htpy-nat H (H x)))
 ```

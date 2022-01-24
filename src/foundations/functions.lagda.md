@@ -24,6 +24,10 @@ _∘_ :
 const : {i j : Level} (A : UU i) (B : UU j) (b : B) → A → B
 const A B b x = b
 
+ev-pt :
+  {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
+ev-pt a B f = f a
+
 Π-swap : {i j k : Level} {A : UU i} {B : UU j} {C : A → (B → UU k)} →
   ((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)
 Π-swap f y x = f x y
