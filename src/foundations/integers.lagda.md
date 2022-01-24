@@ -10,7 +10,9 @@ module foundations.integers where
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.functions using (id)
+open import foundations.equivalences using (is-equiv; _≃_)
+open import foundations.functions using (id; _∘_)
+open import foundations.homotopies using (_~_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (UU; Level; lzero)
@@ -127,36 +129,72 @@ neg-ℤ (inr (inr x)) = inl x
 
 ```agda
 abstract
-  isretr-pred-ℤ :
-    (k : ℤ) → Id (pred-ℤ (succ-ℤ k)) k
+  isretr-pred-ℤ : (pred-ℤ ∘ succ-ℤ) ~ id
   isretr-pred-ℤ (inl zero-ℕ) = refl
   isretr-pred-ℤ (inl (succ-ℕ x)) = refl
   isretr-pred-ℤ (inr (inl star)) = refl
   isretr-pred-ℤ (inr (inr zero-ℕ)) = refl
   isretr-pred-ℤ (inr (inr (succ-ℕ x))) = refl
   
-  issec-pred-ℤ :
-    (k : ℤ) → Id (succ-ℤ (pred-ℤ k)) k
+  issec-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
   issec-pred-ℤ (inl zero-ℕ) = refl
   issec-pred-ℤ (inl (succ-ℕ x)) = refl
   issec-pred-ℤ (inr (inl star)) = refl
   issec-pred-ℤ (inr (inr zero-ℕ)) = refl
   issec-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+
+abstract
+  is-equiv-succ-ℤ : is-equiv succ-ℤ
+  pr1 (pr1 is-equiv-succ-ℤ) = pred-ℤ
+  pr2 (pr1 is-equiv-succ-ℤ) = issec-pred-ℤ
+  pr1 (pr2 is-equiv-succ-ℤ) = pred-ℤ
+  pr2 (pr2 is-equiv-succ-ℤ) = isretr-pred-ℤ
+
+equiv-succ-ℤ : ℤ ≃ ℤ
+pr1 equiv-succ-ℤ = succ-ℤ
+pr2 equiv-succ-ℤ = is-equiv-succ-ℤ
+
+abstract
+  is-equiv-pred-ℤ : is-equiv pred-ℤ
+  pr1 (pr1 is-equiv-pred-ℤ) = succ-ℤ
+  pr2 (pr1 is-equiv-pred-ℤ) = isretr-pred-ℤ
+  pr1 (pr2 is-equiv-pred-ℤ) = succ-ℤ
+  pr2 (pr2 is-equiv-pred-ℤ) = issec-pred-ℤ
+
+equiv-pred-ℤ : ℤ ≃ ℤ
+pr1 equiv-pred-ℤ = pred-ℤ
+pr2 equiv-pred-ℤ = is-equiv-pred-ℤ
 ```
 
-### The successor function on ℤ is injective
+### The successor function on ℤ is injective and has no fixed points
 
 ```agda
-  is-injective-succ-ℤ : is-injective succ-ℤ
-  is-injective-succ-ℤ {x} {y} p =
-    inv (isretr-pred-ℤ x) ∙ (ap pred-ℤ p ∙ isretr-pred-ℤ y)
+is-injective-succ-ℤ : is-injective succ-ℤ
+is-injective-succ-ℤ {x} {y} p =
+  inv (isretr-pred-ℤ x) ∙ (ap pred-ℤ p ∙ isretr-pred-ℤ y)
+
+has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (Id (succ-ℤ x) x)
+has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
+has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
+has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ```
 
 ```agda
-neg-neg-ℤ : (k : ℤ) → Id (neg-ℤ (neg-ℤ k)) k
+neg-neg-ℤ : (neg-ℤ ∘ neg-ℤ) ~ id
 neg-neg-ℤ (inl n) = refl
 neg-neg-ℤ (inr (inl star)) = refl
 neg-neg-ℤ (inr (inr n)) = refl
+
+abstract
+  is-equiv-neg-ℤ : is-equiv neg-ℤ
+  pr1 (pr1 is-equiv-neg-ℤ) = neg-ℤ
+  pr2 (pr1 is-equiv-neg-ℤ) = neg-neg-ℤ
+  pr1 (pr2 is-equiv-neg-ℤ) = neg-ℤ
+  pr2 (pr2 is-equiv-neg-ℤ) = neg-neg-ℤ
+
+equiv-neg-ℤ : ℤ ≃ ℤ
+pr1 equiv-neg-ℤ = neg-ℤ
+pr2 equiv-neg-ℤ = is-equiv-neg-ℤ
 
 neg-pred-ℤ : (k : ℤ) → Id (neg-ℤ (pred-ℤ k)) (succ-ℤ (neg-ℤ k))
 neg-pred-ℤ (inl x) = refl

@@ -7,7 +7,11 @@ title: Univalent Mathematics in Agda
 
 module foundations.booleans where
 
+open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.empty-type using (empty)
+open import foundations.equivalences using (is-equiv; _≃_)
+open import foundations.functions using (id; _∘_)
+open import foundations.homotopies using (_~_)
 open import foundations.identity-types using (Id; refl)
 open import foundations.levels using (lzero; UU)
 open import foundations.negation using (¬)
@@ -72,4 +76,21 @@ neq-neg-bool false = Eq-eq-bool
 neq-false-true-bool :
   ¬ (Id false true)
 neq-false-true-bool = Eq-eq-bool
+```
+
+```agda
+neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
+neg-neg-bool true = refl
+neg-neg-bool false = refl
+
+abstract
+  is-equiv-neg-bool : is-equiv neg-bool
+  pr1 (pr1 is-equiv-neg-bool) = neg-bool
+  pr2 (pr1 is-equiv-neg-bool) = neg-neg-bool
+  pr1 (pr2 is-equiv-neg-bool) = neg-bool
+  pr2 (pr2 is-equiv-neg-bool) = neg-neg-bool
+
+equiv-neg-bool : bool ≃ bool
+pr1 equiv-neg-bool = neg-bool
+pr2 equiv-neg-bool = is-equiv-neg-bool
 ```

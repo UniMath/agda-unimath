@@ -10,6 +10,8 @@ module foundations.addition-integers where
 open import foundations.addition-natural-numbers using
   ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
 open import foundations.coproduct-types using (inl; inr)
+open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundations.equivalences using (is-equiv; _≃_)
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.injective-maps using (is-injective)
@@ -347,4 +349,40 @@ is-zero-add-ℤ' :
   (x y : ℤ) → Id (add-ℤ x y) x → is-zero-ℤ y
 is-zero-add-ℤ' x y H =
   is-zero-add-ℤ y x (commutative-add-ℤ y x ∙ H)
+```
+
+```agda
+abstract
+  is-equiv-add-ℤ : (x : ℤ) → is-equiv (add-ℤ x)
+  pr1 (pr1 (is-equiv-add-ℤ x)) = add-ℤ (neg-ℤ x)
+  pr2 (pr1 (is-equiv-add-ℤ x)) y =
+    ( inv (associative-add-ℤ x (neg-ℤ x) y)) ∙
+    ( ( ap (add-ℤ' y) (right-inverse-law-add-ℤ x)) ∙
+      ( left-unit-law-add-ℤ y))
+  pr1 (pr2 (is-equiv-add-ℤ x)) = add-ℤ (neg-ℤ x)
+  pr2 (pr2 (is-equiv-add-ℤ x)) y =
+    ( inv (associative-add-ℤ (neg-ℤ x) x y)) ∙
+    ( ( ap (add-ℤ' y) (left-inverse-law-add-ℤ x)) ∙
+      ( left-unit-law-add-ℤ y))
+
+equiv-add-ℤ : ℤ → (ℤ ≃ ℤ)
+pr1 (equiv-add-ℤ x) = add-ℤ x
+pr2 (equiv-add-ℤ x) = is-equiv-add-ℤ x
+
+abstract
+  is-equiv-add-ℤ' : (y : ℤ) → is-equiv (add-ℤ' y)
+  pr1 (pr1 (is-equiv-add-ℤ' y)) = add-ℤ' (neg-ℤ y)
+  pr2 (pr1 (is-equiv-add-ℤ' y)) x =
+    ( associative-add-ℤ x (neg-ℤ y) y) ∙
+    ( ( ap (add-ℤ x) (left-inverse-law-add-ℤ y)) ∙
+      ( right-unit-law-add-ℤ x))
+  pr1 (pr2 (is-equiv-add-ℤ' y)) = add-ℤ' (neg-ℤ y)
+  pr2 (pr2 (is-equiv-add-ℤ' y)) x =
+    ( associative-add-ℤ x y (neg-ℤ y)) ∙
+    ( ( ap (add-ℤ x) (right-inverse-law-add-ℤ y)) ∙
+      ( right-unit-law-add-ℤ x))
+
+equiv-add-ℤ' : ℤ → (ℤ ≃ ℤ)
+pr1 (equiv-add-ℤ' y) = add-ℤ' y
+pr2 (equiv-add-ℤ' y) = is-equiv-add-ℤ' y
 ```

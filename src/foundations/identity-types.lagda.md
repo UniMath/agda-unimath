@@ -233,3 +233,26 @@ Mac-Lane-pentagon :
   Id ((α₁ ∙ α₂) ∙ α₃) (α₄ ∙ α₅)
 Mac-Lane-pentagon refl refl refl refl = refl
 ```
+
+## Commuting squares of identifications
+
+```agda
+square :
+  {l1 : Level} {A : UU l1} {x y1 y2 z : A}
+  (p-left : Id x y1) (p-bottom : Id y1 z)
+  (p-top : Id x y2) (p-right : Id y2 z) → UU l1
+square p-left p-bottom p-top p-right = Id (p-left ∙ p-bottom) (p-top ∙ p-right)
+
+sq-left-whisk :
+  {i : Level} {A : UU i} {x y1 y2 z : A} {p1 p1' : Id x y1}
+  (s : Id p1 p1') {q1 : Id y1 z} {p2 : Id x y2} {q2 : Id y2 z} →
+  square p1 q1 p2 q2 → square p1' q1 p2 q2
+sq-left-whisk refl sq = sq
+
+sq-top-whisk :
+  {i : Level} {A : UU i} {x y1 y2 z : A}
+  (p1 : Id x y1) (q1 : Id y1 z)
+  (p2 : Id x y2) {p2' : Id x y2} (s : Id p2 p2') (q2 : Id y2 z) →
+  square p1 q1 p2 q2 → square p1 q1 p2' q2
+sq-top-whisk p1 q1 p2 refl q2 sq = sq
+```

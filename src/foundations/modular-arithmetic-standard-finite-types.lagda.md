@@ -29,6 +29,7 @@ open import foundations.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ')
 open import foundations.equality-standard-finite-types using
   ( is-decidable-is-zero-Fin)
+open import foundations.equivalences using (is-equiv; _≃_)
 open import foundations.functions using (_∘_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.inequality-natural-numbers using
@@ -517,6 +518,44 @@ add-neg-add-Fin {succ-ℕ k} x y =
   ( ( ap (add-Fin' y) (left-inverse-law-add-Fin x)) ∙
     ( left-unit-law-add-Fin y))
 
+is-equiv-add-Fin :
+  {k : ℕ} (x : Fin k) → is-equiv (add-Fin x)
+pr1 (pr1 (is-equiv-add-Fin x)) = add-Fin (neg-Fin x)
+pr2 (pr1 (is-equiv-add-Fin x)) = add-add-neg-Fin x
+pr1 (pr2 (is-equiv-add-Fin x)) = add-Fin (neg-Fin x)
+pr2 (pr2 (is-equiv-add-Fin x)) = add-neg-add-Fin x
+
+equiv-add-Fin :
+  {k : ℕ} (x : Fin k) → Fin k ≃ Fin k
+pr1 (equiv-add-Fin x) = add-Fin x
+pr2 (equiv-add-Fin x) = is-equiv-add-Fin x
+
+add-add-neg-Fin' :
+  {k : ℕ} (x y : Fin k) → Id (add-Fin' x (add-Fin' (neg-Fin x) y)) y
+add-add-neg-Fin' {succ-ℕ k} x y =
+  ( associative-add-Fin y (neg-Fin x) x) ∙
+  ( ( ap (add-Fin y) (left-inverse-law-add-Fin x)) ∙
+    ( right-unit-law-add-Fin y))
+
+add-neg-add-Fin' :
+  {k : ℕ} (x y : Fin k) → Id (add-Fin' (neg-Fin x) (add-Fin' x y)) y
+add-neg-add-Fin' {succ-ℕ k} x y =
+  ( associative-add-Fin y x (neg-Fin x)) ∙
+  ( ( ap (add-Fin y) (right-inverse-law-add-Fin x)) ∙
+    ( right-unit-law-add-Fin y))
+
+is-equiv-add-Fin' :
+  {k : ℕ} (x : Fin k) → is-equiv (add-Fin' x)
+pr1 (pr1 (is-equiv-add-Fin' x)) = add-Fin' (neg-Fin x)
+pr2 (pr1 (is-equiv-add-Fin' x)) = add-add-neg-Fin' x
+pr1 (pr2 (is-equiv-add-Fin' x)) = add-Fin' (neg-Fin x)
+pr2 (pr2 (is-equiv-add-Fin' x)) = add-neg-add-Fin' x
+
+equiv-add-Fin' :
+  {k : ℕ} (x : Fin k) → Fin k ≃ Fin k
+pr1 (equiv-add-Fin' x) = add-Fin' x
+pr2 (equiv-add-Fin' x) = is-equiv-add-Fin' x
+
 is-injective-add-Fin :
   {k : ℕ} (x : Fin k) → is-injective (add-Fin x)
 is-injective-add-Fin {k} x {y} {z} p =
@@ -735,4 +774,27 @@ is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
 
 is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
 is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
+```
+
+```agda
+neg-neg-Fin :
+  {k : ℕ} (x : Fin k) → Id (neg-Fin (neg-Fin x)) x
+neg-neg-Fin {succ-ℕ k} x =
+  ( inv (right-unit-law-add-Fin (neg-Fin (neg-Fin x)))) ∙
+  ( ( ap (add-Fin (neg-Fin (neg-Fin x))) (inv (left-inverse-law-add-Fin x))) ∙
+    ( ( inv (associative-add-Fin (neg-Fin (neg-Fin x)) (neg-Fin x) x)) ∙
+      ( ( ap (add-Fin' x) (left-inverse-law-add-Fin (neg-Fin x))) ∙
+        ( left-unit-law-add-Fin x))))
+
+is-equiv-neg-Fin :
+  {k : ℕ} → is-equiv (neg-Fin {k})
+pr1 (pr1 is-equiv-neg-Fin) = neg-Fin
+pr2 (pr1 is-equiv-neg-Fin) = neg-neg-Fin
+pr1 (pr2 is-equiv-neg-Fin) = neg-Fin
+pr2 (pr2 is-equiv-neg-Fin) = neg-neg-Fin
+
+equiv-neg-Fin :
+  {k : ℕ} → Fin k ≃ Fin k
+pr1 equiv-neg-Fin = neg-Fin
+pr2 equiv-neg-Fin = is-equiv-neg-Fin
 ```

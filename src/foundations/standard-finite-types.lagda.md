@@ -12,6 +12,7 @@ open import foundations.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
+open import foundations.equivalences using (is-equiv; _≃_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
@@ -219,6 +220,26 @@ isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inl (inl x)) =
   ap skip-neg-two-Fin (isretr-pred-Fin (inl x))
 isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inl (inr star)) = refl
 isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inr star) = pred-zero-Fin
+
+is-equiv-succ-Fin : {k : ℕ} → is-equiv (succ-Fin {k})
+pr1 (pr1 is-equiv-succ-Fin) = pred-Fin
+pr2 (pr1 is-equiv-succ-Fin) = issec-pred-Fin
+pr1 (pr2 is-equiv-succ-Fin) = pred-Fin
+pr2 (pr2 is-equiv-succ-Fin) = isretr-pred-Fin
+
+equiv-succ-Fin : {k : ℕ} → Fin k ≃ Fin k
+pr1 equiv-succ-Fin = succ-Fin
+pr2 equiv-succ-Fin = is-equiv-succ-Fin
+
+is-equiv-pred-Fin : {k : ℕ} → is-equiv (pred-Fin {k})
+pr1 (pr1 is-equiv-pred-Fin) = succ-Fin
+pr2 (pr1 is-equiv-pred-Fin) = isretr-pred-Fin
+pr1 (pr2 is-equiv-pred-Fin) = succ-Fin
+pr2 (pr2 is-equiv-pred-Fin) = issec-pred-Fin
+
+equiv-pred-Fin : {k : ℕ} → Fin k ≃ Fin k
+pr1 equiv-pred-Fin = pred-Fin
+pr2 equiv-pred-Fin = is-equiv-pred-Fin
 ```
 
 ```agda

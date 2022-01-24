@@ -14,7 +14,7 @@ open import foundations.addition-integers using
     left-successor-law-add-ℤ; right-successor-law-add-ℤ;
     left-predecessor-law-add-ℤ; right-predecessor-law-add-ℤ;
     is-add-one-succ-ℤ; is-add-one-succ-ℤ'; is-add-neg-one-pred-ℤ;
-    is-add-neg-one-pred-ℤ')
+    is-add-neg-one-pred-ℤ'; is-equiv-add-ℤ; is-equiv-add-ℤ')
 open import foundations.congruence-integers using
   ( cong-ℤ; refl-cong-ℤ; cong-int-cong-ℕ; concatenate-eq-cong-ℤ;
     transitive-cong-ℤ; concatenate-cong-eq-cong-ℤ; symmetric-cong-ℤ;
@@ -32,12 +32,14 @@ open import foundations.equality-integers using
   ( has-decidable-equality-ℤ)
 open import foundations.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
+open import foundations.equivalences using (is-equiv; _≃_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundations.injective-maps using
   ( is-injective; is-injective-id; is-injective-comp')
 open import foundations.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
-    pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ)
+    pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
+    is-equiv-pred-ℤ; is-equiv-neg-ℤ)
 open import foundations.levels using (UU; lzero)
 open import foundations.modular-arithmetic-standard-finite-types
 open import foundations.multiplication-integers using
@@ -51,7 +53,8 @@ open import foundations.natural-numbers using
 open import foundations.negation using (¬; functor-neg)
 open import foundations.standard-finite-types using
   ( Fin; zero-Fin; neg-one-Fin; one-Fin; nat-Fin; is-injective-nat-Fin;
-    is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin)
+    is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin;
+    is-equiv-succ-Fin; is-equiv-pred-Fin)
 open import foundations.unit-type using (star)
 ```
 
@@ -63,10 +66,20 @@ Some modular arithmetic was already defined in `modular-arithmetic-standard-fini
 ℤ-Mod : ℕ → UU lzero
 ℤ-Mod zero-ℕ = ℤ
 ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
+```
 
+## Important integers modulo k
+
+```agda
 zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k
 zero-ℤ-Mod zero-ℕ = zero-ℤ
 zero-ℤ-Mod (succ-ℕ k) = zero-Fin
+
+is-zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
+is-zero-ℤ-Mod k x = Id x (zero-ℤ-Mod k)
+
+is-nonzero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
+is-nonzero-ℤ-Mod k x = ¬ (is-zero-ℤ-Mod k x)
 
 neg-one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
 neg-one-ℤ-Mod zero-ℕ = neg-one-ℤ
@@ -75,11 +88,19 @@ neg-one-ℤ-Mod (succ-ℕ k) = neg-one-Fin
 one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
 one-ℤ-Mod zero-ℕ = one-ℤ
 one-ℤ-Mod (succ-ℕ k) = one-Fin
+```
 
+## The integers modulo k have decidable equality
+
+```agda
 has-decidable-equality-ℤ-Mod : (k : ℕ) → has-decidable-equality (ℤ-Mod k)
 has-decidable-equality-ℤ-Mod zero-ℕ = has-decidable-equality-ℤ
 has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin
+```
 
+## The inclusion of the integers modulo k into ℤ
+
+```agda
 int-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ
 int-ℤ-Mod zero-ℕ x = x
 int-ℤ-Mod (succ-ℕ k) x = int-ℕ (nat-Fin x)
@@ -89,19 +110,26 @@ is-injective-int-ℤ-Mod zero-ℕ = is-injective-id
 is-injective-int-ℤ-Mod (succ-ℕ k) =
   is-injective-comp' is-injective-nat-Fin is-injective-int-ℕ
 
-is-zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
-is-zero-ℤ-Mod k x = Id x (zero-ℤ-Mod k)
-
 is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
 is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
 is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
+```
 
-is-nonzero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
-is-nonzero-ℤ-Mod k x = ¬ (is-zero-ℤ-Mod k x)
+## The successor and predecessor functions on the integers modulo k
 
+```agda
 succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 succ-ℤ-Mod zero-ℕ = succ-ℤ
 succ-ℤ-Mod (succ-ℕ k) = succ-Fin
+
+abstract
+  is-equiv-succ-ℤ-Mod : (k : ℕ) → is-equiv (succ-ℤ-Mod k)
+  is-equiv-succ-ℤ-Mod zero-ℕ = is-equiv-succ-ℤ
+  is-equiv-succ-ℤ-Mod (succ-ℕ k) = is-equiv-succ-Fin
+
+equiv-succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-succ-ℤ-Mod k) = succ-ℤ-Mod k
+pr2 (equiv-succ-ℤ-Mod k) = is-equiv-succ-ℤ-Mod k
 
 pred-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 pred-ℤ-Mod zero-ℕ = pred-ℤ
@@ -115,8 +143,20 @@ isretr-pred-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → Id (pred-ℤ-Mod k (succ-ℤ
 isretr-pred-ℤ-Mod zero-ℕ = isretr-pred-ℤ
 isretr-pred-ℤ-Mod (succ-ℕ k) = isretr-pred-Fin
 
+abstract
+  is-equiv-pred-ℤ-Mod : (k : ℕ) → is-equiv (pred-ℤ-Mod k)
+  is-equiv-pred-ℤ-Mod zero-ℕ = is-equiv-pred-ℤ
+  is-equiv-pred-ℤ-Mod (succ-ℕ k) = is-equiv-pred-Fin
+
+equiv-pred-ℤ-Mod : (k : ℕ) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-pred-ℤ-Mod k) = pred-ℤ-Mod k
+pr2 (equiv-pred-ℤ-Mod k) = is-equiv-pred-ℤ-Mod k
+```
+
+## Addition on the integers modulo k
+
+```
 add-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
--- add-ℤ-Mod k x y = mod-ℤ k (add-ℤ (int-ℤ-Mod k x) (int-ℤ-Mod k y))
 add-ℤ-Mod zero-ℕ = add-ℤ
 add-ℤ-Mod (succ-ℕ k) = add-Fin
 
@@ -128,6 +168,24 @@ ap-add-ℤ-Mod :
   Id x x' → Id y y' → Id (add-ℤ-Mod k x y) (add-ℤ-Mod k x' y')
 ap-add-ℤ-Mod k p q = ap-binary (add-ℤ-Mod k) p q
 
+abstract
+  is-equiv-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod k x)
+  is-equiv-add-ℤ-Mod zero-ℕ = is-equiv-add-ℤ
+  is-equiv-add-ℤ-Mod (succ-ℕ k) = is-equiv-add-Fin
+
+equiv-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-add-ℤ-Mod k x) = add-ℤ-Mod k x
+pr2 (equiv-add-ℤ-Mod k x) = is-equiv-add-ℤ-Mod k x
+
+abstract
+  is-equiv-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-equiv (add-ℤ-Mod' k x)
+  is-equiv-add-ℤ-Mod' zero-ℕ = is-equiv-add-ℤ'
+  is-equiv-add-ℤ-Mod' (succ-ℕ k) = is-equiv-add-Fin'
+
+equiv-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-add-ℤ-Mod' k x) = add-ℤ-Mod' k x
+pr2 (equiv-add-ℤ-Mod' k x) = is-equiv-add-ℤ-Mod' k x
+
 is-injective-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod k x)
 is-injective-add-ℤ-Mod zero-ℕ = is-injective-add-ℤ
 is-injective-add-ℤ-Mod (succ-ℕ k) = is-injective-add-Fin
@@ -135,11 +193,28 @@ is-injective-add-ℤ-Mod (succ-ℕ k) = is-injective-add-Fin
 is-injective-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod' k x)
 is-injective-add-ℤ-Mod' zero-ℕ = is-injective-add-ℤ'
 is-injective-add-ℤ-Mod' (succ-ℕ k) = is-injective-add-Fin'
+```
 
+## The negative of an integer modulo k
+
+```agda
 neg-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 neg-ℤ-Mod zero-ℕ = neg-ℤ
 neg-ℤ-Mod (succ-ℕ k) = neg-Fin
 
+abstract
+  is-equiv-neg-ℤ-Mod : (k : ℕ) → is-equiv (neg-ℤ-Mod k)
+  is-equiv-neg-ℤ-Mod zero-ℕ = is-equiv-neg-ℤ
+  is-equiv-neg-ℤ-Mod (succ-ℕ k) = is-equiv-neg-Fin
+
+equiv-neg-ℤ-Mod : (k : ℕ) → ℤ-Mod k ≃ ℤ-Mod k
+pr1 (equiv-neg-ℤ-Mod k) = neg-ℤ-Mod k
+pr2 (equiv-neg-ℤ-Mod k) = is-equiv-neg-ℤ-Mod k
+```
+
+## Laws of addition modulo k
+
+```agda
 associative-add-ℤ-Mod :
   (k : ℕ) (x y z : ℤ-Mod k) →
   Id (add-ℤ-Mod k (add-ℤ-Mod k x y) z) (add-ℤ-Mod k x (add-ℤ-Mod k y z))
@@ -214,7 +289,11 @@ is-add-neg-one-pred-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → Id (pred-ℤ-Mod k x) (add-ℤ-Mod k x (neg-one-ℤ-Mod k))
 is-add-neg-one-pred-ℤ-Mod' zero-ℕ = is-add-neg-one-pred-ℤ'
 is-add-neg-one-pred-ℤ-Mod' (succ-ℕ k) = is-add-neg-one-pred-Fin'
+```
 
+## Multiplication modulo k
+
+```agda
 mul-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
 mul-ℤ-Mod zero-ℕ = mul-ℤ
 mul-ℤ-Mod (succ-ℕ k) = mul-Fin
@@ -226,7 +305,11 @@ ap-mul-ℤ-Mod :
   (k : ℕ) {x x' y y' : ℤ-Mod k} →
   Id x x' → Id y y' → Id (mul-ℤ-Mod k x y) (mul-ℤ-Mod k x' y')
 ap-mul-ℤ-Mod k p q = ap-binary (mul-ℤ-Mod k) p q
+```
 
+## Laws of multiplication modulo k
+
+```agda
 associative-mul-ℤ-Mod :
   (k : ℕ) (x y z : ℤ-Mod k) →
   Id (mul-ℤ-Mod k (mul-ℤ-Mod k x y) z) (mul-ℤ-Mod k x (mul-ℤ-Mod k y z))
@@ -271,13 +354,25 @@ is-mul-neg-one-neg-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → Id (neg-ℤ-Mod k x) (mul-ℤ-Mod k x (neg-one-ℤ-Mod k))
 is-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-mul-neg-one-neg-ℤ'
 is-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin'
+```
 
--- We introduce the quotient map ℕ → ℤ-Mod k
+## Congruence classes of integers modulo k
 
+```agda
 mod-ℕ : (k : ℕ) → ℕ → ℤ-Mod k
 mod-ℕ zero-ℕ x = int-ℕ x
 mod-ℕ (succ-ℕ k) x = mod-succ-ℕ k x
 
+mod-ℤ : (k : ℕ) → ℤ → ℤ-Mod k
+mod-ℤ zero-ℕ x = x
+mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-succ-ℕ k (succ-ℕ x))
+mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin
+mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-succ-ℕ k (succ-ℕ x)
+```
+
+## Preservation laws of congruence classes
+
+```agda
 mod-zero-ℕ : (k : ℕ) → Id (mod-ℕ k zero-ℕ) (zero-ℤ-Mod k)
 mod-zero-ℕ zero-ℕ = refl
 mod-zero-ℕ (succ-ℕ k) = refl
@@ -287,14 +382,6 @@ preserves-successor-mod-ℕ :
 preserves-successor-mod-ℕ zero-ℕ zero-ℕ = refl
 preserves-successor-mod-ℕ zero-ℕ (succ-ℕ x) = refl
 preserves-successor-mod-ℕ (succ-ℕ k) x = refl
-
--- We introduce the quotient map ℤ → ℤ-Mod k
-
-mod-ℤ : (k : ℕ) → ℤ → ℤ-Mod k
-mod-ℤ zero-ℕ x = x
-mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (mod-succ-ℕ k (succ-ℕ x))
-mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin
-mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-succ-ℕ k (succ-ℕ x)
 
 mod-zero-ℤ : (k : ℕ) → Id (mod-ℤ k zero-ℤ) (zero-ℤ-Mod k)
 mod-zero-ℤ zero-ℕ = refl
@@ -417,9 +504,9 @@ preserves-mul-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) y =
       ( left-successor-law-mul-Fin
         ( mod-ℤ (succ-ℕ k) (inr (inr x)))
         ( mod-ℤ (succ-ℕ k) y))))
+```
 
--- We prove that mod-ℤ is an effective quotient map and a section of int-ℤ-Mod
-
+```agda
 cong-int-mod-ℕ :
   (k x : ℕ) → cong-ℤ (int-ℕ k) (int-ℤ-Mod k (mod-ℕ k x)) (int-ℕ x)
 cong-int-mod-ℕ zero-ℕ x = refl-cong-ℤ zero-ℤ (int-ℕ x)
@@ -581,4 +668,9 @@ has-no-fixed-points-succ-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (Id (succ-ℤ-Mod k x) x)
 has-no-fixed-points-succ-ℤ-Mod k x =
   functor-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
+
+has-no-fixed-points-succ-Fin :
+  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → ¬ (Id (succ-Fin x) x)
+has-no-fixed-points-succ-Fin {succ-ℕ k} x =
+  has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
 ```

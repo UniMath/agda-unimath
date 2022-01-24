@@ -1,0 +1,106 @@
+---
+title: Univalent Mathematics in Agda
+---
+
+```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
+module foundations.homotopies where
+
+open import foundations.functions using (_∘_)
+open import foundations.levels using (UU; Level; _⊔_)
+open import foundations.identity-types using
+  ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
+    right-inv; ap)
+```
+
+# Homotopies
+
+```agda
+_~_ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (f g : (x : A) → B x) → UU (l1 ⊔ l2)
+f ~ g = (x : _) → Id (f x) (g x)
+
+refl-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x} → f ~ f
+refl-htpy x = refl
+
+{- Most of the time we get by with refl-htpy. However, sometimes Agda wants us
+   to specify the implicit argument. The it is easier to call refl-htpy' than
+   to use Agda's {f = ?} notation. -}
+   
+refl-htpy' :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) → f ~ f
+refl-htpy' f = refl-htpy
+
+inv-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
+  (f ~ g) → (g ~ f)
+inv-htpy H x = inv (H x)
+
+_∙h_ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x} →
+  (f ~ g) → (g ~ h) → (f ~ h)
+_∙h_ H K x = (H x) ∙ (K x)
+
+concat-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
+  (f ~ g) → (h : (x : A) → B x) → (g ~ h) → (f ~ h)
+concat-htpy H h K x = concat (H x) (h x) (K x)
+
+concat-htpy' :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (f : (x : A) → B x) {g h : (x : A) → B x} →
+  (g ~ h) → (f ~ g) → (f ~ h)
+concat-htpy' f K H = H ∙h K
+
+assoc-htpy :
+  {i j : Level} {A : UU i} {B : A → UU j} {f g h k : (x : A) → B x} →
+  (H : f ~ g) → (K : g ~ h) → (L : h ~ k) →
+  ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
+assoc-htpy H K L x = assoc (H x) (K x) (L x)
+
+left-unit-htpy :
+  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  {H : f ~ g} → (refl-htpy ∙h H) ~ H
+left-unit-htpy x = left-unit
+
+right-unit-htpy :
+  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  {H : f ~ g} → (H ∙h refl-htpy) ~ H
+right-unit-htpy x = right-unit
+
+left-inv-htpy :
+  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  (H : f ~ g) → ((inv-htpy H) ∙h H) ~ refl-htpy
+left-inv-htpy H x = left-inv (H x)
+
+right-inv-htpy :
+  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  (H : f ~ g) → (H ∙h (inv-htpy H)) ~ refl-htpy
+right-inv-htpy H x = right-inv (H x)
+
+htpy-left-whisk :
+  {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
+  (h : B → C) {f g : A → B} → (f ~ g) → ((h ∘ f) ~ (h ∘ g))
+htpy-left-whisk h H x = ap h (H x)
+
+_·l_ = htpy-left-whisk
+
+htpy-right-whisk :
+  {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
+  {g h : B → C} (H : g ~ h) (f : A → B) → ((g ∘ f) ~ (h ∘ f))
+htpy-right-whisk H f x = H (f x)
+
+_·r_ = htpy-right-whisk
+```
+
+```agda
+coherence-square :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X) →
+  UU (l3 ⊔ l4)
+coherence-square top left right bottom =
+  (bottom ∘ left) ~ (right ∘ top)
+```
