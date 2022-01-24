@@ -9,14 +9,15 @@ module foundations.decidable-types where
 
 open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using
-  ( coprod; inl; inr; ind-coprod; map-coprod;
-    map-right-unit-law-coprod-is-empty)
+  ( coprod; inl; inr; ind-coprod; map-coprod)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.functions using (id; _∘_)
 open import foundations.identity-types using (Id; refl; ap)
 open import foundations.levels using (UU; Level; _⊔_)
 open import foundations.negation using (¬; ¬¬; functor-neg)
+open import foundations.type-arithmetic using
+  ( map-right-unit-law-coprod-is-empty)
 open import foundations.unit-type using (unit; star)
 ```
 

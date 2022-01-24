@@ -33,3 +33,19 @@ ev-pair :
   ((t : Σ A B) → C t) → (x : A) (y : B x) → C (pair x y)
 ev-pair f x y = f (pair x y)
 ```
+
+```agda
+triple :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
+  (a : A) (b : B a) → C a b → Σ A (λ x → Σ (B x) (C x))
+pr1 (triple a b c) = a
+pr1 (pr2 (triple a b c)) = b
+pr2 (pr2 (triple a b c)) = c
+
+triple' :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  (a : A) (b : B a) → C (pair a b) → Σ (Σ A B) C
+pr1 (pr1 (triple' a b c)) = a
+pr2 (pr1 (triple' a b c)) = b
+pr2 (triple' a b c) = c
+```

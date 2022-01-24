@@ -309,6 +309,22 @@ isretr-nat-nonnegative-ℤ :
 isretr-nat-nonnegative-ℤ zero-ℕ = refl
 isretr-nat-nonnegative-ℤ (succ-ℕ n) = refl
 
+is-equiv-nat-nonnegative-ℤ : is-equiv nat-nonnegative-ℤ
+pr1 (pr1 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
+pr2 (pr1 is-equiv-nat-nonnegative-ℤ) = isretr-nat-nonnegative-ℤ
+pr1 (pr2 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
+pr2 (pr2 is-equiv-nat-nonnegative-ℤ) = issec-nat-nonnegative-ℤ
+
+is-equiv-nonnegative-int-ℕ : is-equiv nonnegative-int-ℕ
+pr1 (pr1 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
+pr2 (pr1 is-equiv-nonnegative-int-ℕ) = issec-nat-nonnegative-ℤ
+pr1 (pr2 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
+pr2 (pr2 is-equiv-nonnegative-int-ℕ) = isretr-nat-nonnegative-ℤ
+
+equiv-nonnegative-int-ℕ : ℕ ≃ nonnegative-ℤ
+pr1 equiv-nonnegative-int-ℕ = nonnegative-int-ℕ
+pr2 equiv-nonnegative-int-ℕ = is-equiv-nonnegative-int-ℕ
+
 is-injective-nonnegative-int-ℕ : is-injective nonnegative-int-ℕ
 is-injective-nonnegative-int-ℕ {x} {y} p =
   ( inv (isretr-nat-nonnegative-ℤ x)) ∙

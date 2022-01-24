@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.empty-type where
 
-open import foundations.levels using (Level; lzero; UU; raise)
+open import foundations.levels using (Level; lzero; UU)
 ```
 
 # The empty type
@@ -20,9 +20,6 @@ ind-empty ()
 
 ex-falso : {l : Level} {A : UU l} → empty → A
 ex-falso = ind-empty
-
-raise-empty : (l : Level) → UU l
-raise-empty l = raise l empty
 
 is-empty : {l : Level} → UU l → UU l
 is-empty A = A → empty

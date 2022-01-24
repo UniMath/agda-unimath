@@ -16,8 +16,7 @@ open import foundations.addition-integers using
 open import foundations.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; commutative-add-ℕ; left-unit-law-add-ℕ;
     left-successor-law-add-ℕ)
-open import foundations.coproduct-types using
-  ( coprod; inl; inr; map-left-unit-law-coprod-is-empty)
+open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ)
 open import foundations.empty-type using (ex-falso)
@@ -37,6 +36,8 @@ open import foundations.laws-for-operations using
 open import foundations.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import foundations.type-arithmetic using
+  ( map-left-unit-law-coprod-is-empty)
 open import foundations.unit-type using (star)
 ```
 

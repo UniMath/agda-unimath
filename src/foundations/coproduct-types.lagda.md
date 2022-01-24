@@ -8,7 +8,6 @@ title: Univalent Mathematics in Agda
 module foundations.coproduct-types where
 
 open import foundations.levels using (Level; lzero; _⊔_; UU)
-open import foundations.empty-type using (is-empty; ex-falso)
 ```
 
 ## Coproducts
@@ -30,14 +29,4 @@ map-coprod :
   (A → A') → (B → B') → coprod A B → coprod A' B'
 map-coprod f g (inl x) = inl (f x)
 map-coprod f g (inr y) = inr (g y)
-
-map-right-unit-law-coprod-is-empty :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty B → coprod A B → A
-map-right-unit-law-coprod-is-empty A B nb (inl a) = a
-map-right-unit-law-coprod-is-empty A B nb (inr b) = ex-falso (nb b)
-
-map-left-unit-law-coprod-is-empty :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-empty A → coprod A B → B
-map-left-unit-law-coprod-is-empty A B na (inl a) = ex-falso (na a)
-map-left-unit-law-coprod-is-empty A B na (inr b) = b
 ```

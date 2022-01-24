@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.unit-type where
 
-open import foundations.levels using (Level; lzero; UU; raise; map-raise)
+open import foundations.levels using (Level; lzero; UU)
 ```
 
 ## The unit type
@@ -21,10 +21,4 @@ ind-unit p star = p
 
 terminal-map : {l : Level} {A : UU l} → A → unit
 terminal-map a = star
-
-raise-unit : (l : Level) → UU l
-raise-unit l = raise l unit
-
-raise-star : {l : Level} → raise l unit
-raise-star = map-raise star
 ```
