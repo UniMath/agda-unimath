@@ -7,8 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.primes-natural-numbers where
 
-open import foundations.cartesian-product-types using
-  ( _×_; is-empty-left-factor-is-empty-prod)
+open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg; is-decidable-iff;
@@ -41,6 +40,8 @@ open import foundations.negation using (¬)
 open import foundations.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
     is-decidable-is-proper-divisor-ℕ; le-is-proper-divisor-ℕ)
+open import foundations.type-arithmetic using
+  ( is-empty-left-factor-is-empty-prod)
 open import foundations.unit-type using (star)
 open import foundations.well-ordering-principle-natural-numbers using
   ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;

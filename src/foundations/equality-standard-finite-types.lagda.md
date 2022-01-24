@@ -7,10 +7,11 @@ title: Univalent Mathematics in Agda
 
 module foundations.equality-standard-finite-types where
 
-open import foundations.coproduct-types using (inl; inr; map-coprod)
+open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundations.empty-type using (empty)
+open import foundations.functoriality-coproduct-types using (map-coprod)
 open import foundations.identity-types using (Id; refl; ap)
 open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)

@@ -11,7 +11,7 @@ open import foundations.functions using (_∘_)
 open import foundations.levels using (UU; Level; _⊔_)
 open import foundations.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
-    right-inv; ap)
+    right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv)
 ```
 
 # Homotopies
@@ -103,4 +103,55 @@ coherence-square :
   UU (l3 ⊔ l4)
 coherence-square top left right bottom =
   (bottom ∘ left) ~ (right ∘ top)
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  inv-htpy-con :
+    (H : f ~ g) (K : g ~ h) (L : f ~ h) → (H ∙h K) ~ L → K ~ ((inv-htpy H) ∙h L)
+  inv-htpy-con H K L M x = inv-con (H x) (K x) (L x) (M x)
+
+  htpy-con-inv :
+    (H : f ~ g) (K : g ~ h) (L : f ~ h) → (H ∙h K) ~ L → H ~ (L ∙h (inv-htpy K))
+  htpy-con-inv H K L M x = con-inv (H x) (K x) (L x) (M x)
+
+  htpy-ap-concat :
+    (H : f ~ g) (K K' : g ~ h) → K ~ K' → (H ∙h K) ~ (H ∙h K')
+  htpy-ap-concat H K K' L x = ap (concat (H x) (h x)) (L x)
+
+  htpy-ap-concat' :
+    (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
+  htpy-ap-concat' H H' K L x =
+    ap (concat' _ (K x)) (L x)
+
+  htpy-distributive-inv-concat :
+    (H : f ~ g) (K : g ~ h) →
+    (inv-htpy (H ∙h K)) ~ ((inv-htpy K) ∙h (inv-htpy H))
+  htpy-distributive-inv-concat H K x = distributive-inv-concat (H x) (K x)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  {H H' : f ~ g}
+  where
+
+  htpy-ap-inv :
+    H ~ H' → (inv-htpy H) ~ (inv-htpy H')
+  htpy-ap-inv K x = ap inv (K x)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+  
+  htpy-left-whisk-inv-htpy :
+    {f f' : A → B} (g : B → C) (H : f ~ f') →
+    (g ·l (inv-htpy H)) ~ inv-htpy (g ·l H)
+  htpy-left-whisk-inv-htpy g H x = ap-inv g (H x)
+
+  htpy-right-whisk-inv-htpy :
+    {g g' : B → C} (H : g ~ g') (f : A → B) →
+    ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
+  htpy-right-whisk-inv-htpy H f = refl-htpy
 ```

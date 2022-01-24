@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.standard-finite-types where
 
-open import foundations.coproduct-types using (coprod; inl; inr; map-coprod)
+open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)

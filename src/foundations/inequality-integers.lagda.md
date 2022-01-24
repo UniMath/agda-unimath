@@ -10,12 +10,13 @@ module foundations.inequality-integers where
 open import foundations.addition-integers using
   ( right-inverse-law-add-ℤ; is-nonnegative-add-ℤ; add-ℤ;
     left-successor-law-add-ℤ)
-open import foundations.coproduct-types using (coprod; map-coprod; inl; inr)
+open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; distributive-neg-diff-ℤ; triangle-diff-ℤ;
     right-translation-diff-ℤ; left-translation-diff-ℤ)
 open import foundations.empty-type using (empty)
 open import foundations.functions using (id)
+open import foundations.functoriality-coproduct-types using (map-coprod)
 open import foundations.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import foundations.integers using
   ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;

@@ -1,0 +1,99 @@
+---
+title: Univalent Mathematics in Agda
+---
+
+```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
+module foundations.functoriality-coproduct-types where
+
+open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundations.equivalences using (is-equiv; _≃_)
+open import foundations.functions using (id; _∘_)
+open import foundations.homotopies using (_~_; inv-htpy; _∙h_)
+open import foundations.identity-types using (refl; ap)
+open import foundations.levels using (Level; UU)
+```
+
+# Functoriality of coproduct types
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+  
+  map-coprod : (A → A') → (B → B') → coprod A B → coprod A' B'
+  map-coprod f g (inl x) = inl (f x)
+  map-coprod f g (inr y) = inr (g y)
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+  
+  id-map-coprod : (map-coprod (id {A = A}) (id {A = B})) ~ id
+  id-map-coprod (inl x) = refl
+  id-map-coprod (inr x) = refl
+
+module _
+  {l1 l2 l1' l2' l1'' l2'' : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  {A'' : UU l1''} {B'' : UU l2''}
+  (f : A → A') (f' : A' → A'') (g : B → B') (g' : B' → B'')
+  where
+  
+  compose-map-coprod :
+    (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
+  compose-map-coprod (inl x) = refl
+  compose-map-coprod (inr y) = refl
+
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  {f f' : A → A'} (H : f ~ f') {g g' : B → B'} (K : g ~ g')
+  where
+  
+  htpy-map-coprod : (map-coprod f g) ~ (map-coprod f' g')
+  htpy-map-coprod (inl x) = ap inl (H x)
+  htpy-map-coprod (inr y) = ap inr (K y)
+
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  {f : A → A'} {g : B → B'}
+  where
+
+  abstract
+    is-equiv-map-coprod : is-equiv f → is-equiv g → is-equiv (map-coprod f g)
+    pr1
+      ( pr1
+        ( is-equiv-map-coprod
+          ( pair (pair sf Sf) (pair rf Rf))
+          ( pair (pair sg Sg) (pair rg Rg)))) = map-coprod sf sg
+    pr2
+      ( pr1
+        ( is-equiv-map-coprod
+          ( pair (pair sf Sf) (pair rf Rf))
+          ( pair (pair sg Sg) (pair rg Rg)))) =
+      ( ( inv-htpy (compose-map-coprod sf f sg g)) ∙h
+        ( htpy-map-coprod Sf Sg)) ∙h
+      ( id-map-coprod A' B')
+    pr1
+      ( pr2
+        ( is-equiv-map-coprod
+          ( pair (pair sf Sf) (pair rf Rf))
+          ( pair (pair sg Sg) (pair rg Rg)))) = map-coprod rf rg
+    pr2
+      ( pr2
+        ( is-equiv-map-coprod
+          ( pair (pair sf Sf) (pair rf Rf))
+          ( pair (pair sg Sg) (pair rg Rg)))) =
+      ( ( inv-htpy (compose-map-coprod f rf g rg)) ∙h
+        ( htpy-map-coprod Rf Rg)) ∙h
+      ( id-map-coprod A B)
+  
+equiv-coprod :
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'} →
+  (A ≃ A') → (B ≃ B') → (coprod A B) ≃ (coprod A' B')
+pr1 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) = map-coprod e f
+pr2 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) =
+  is-equiv-map-coprod is-equiv-e is-equiv-f
+```

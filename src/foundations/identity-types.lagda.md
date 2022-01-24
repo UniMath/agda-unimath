@@ -34,45 +34,53 @@ ind-Id x B b y refl = b
 
 ## The groupoidal structure of types
 
+We introduce the groupoidal operations on identity types. The fact that they
+are equivalences is recorded in `equivalences`.
+
 ```agda
-_∙_ :
-  {i : Level} {A : UU i} {x y z : A} → Id x y → Id y z → Id x z
-refl ∙ q = q
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  _∙_ : {x y z : A} → Id x y → Id y z → Id x z
+  refl ∙ q = q
 
-concat :
-  {i : Level} {A : UU i} {x y : A} → Id x y → (z : A) → Id y z → Id x z
-concat p z q = p ∙ q
+  concat : {x y : A} → Id x y → (z : A) → Id y z → Id x z
+  concat p z q = p ∙ q
 
-inv :
-  {i : Level} {A : UU i} {x y : A} → Id x y → Id y x
-inv refl = refl
+  concat' : (x : A) {y z : A} → Id y z → Id x y → Id x z
+  concat' x q p = p ∙ q
+
+  inv : {x y : A} → Id x y → Id y x
+  inv refl = refl
 ```
 
 ## The groupoidal laws for types
 
 ```agda
-assoc :
-  {i : Level} {A : UU i} {x y z w : A} (p : Id x y) (q : Id y z)
-  (r : Id z w) → Id ((p ∙ q) ∙ r) (p ∙ (q ∙ r))
-assoc refl q r = refl
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  assoc :
+    {x y z w : A} (p : Id x y) (q : Id y z) (r : Id z w) →
+    Id ((p ∙ q) ∙ r) (p ∙ (q ∙ r))
+  assoc refl q r = refl
 
-left-unit :
-  {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (refl ∙ p) p
-left-unit = refl
-
-right-unit :
-  {i : Level} {A : UU i} {x y : A} {p : Id x y} → Id (p ∙ refl) p
-right-unit {p = refl} = refl
-
-left-inv :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) →
-  Id ((inv p) ∙ p) refl
-left-inv refl = refl
-
-right-inv :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) →
-  Id (p ∙ (inv p)) refl
-right-inv refl = refl
+  left-unit : {x y : A} {p : Id x y} → Id (refl ∙ p) p
+  left-unit = refl
+  
+  right-unit : {x y : A} {p : Id x y} → Id (p ∙ refl) p
+  right-unit {p = refl} = refl
+  
+  left-inv : {x y : A} (p : Id x y) → Id ((inv p) ∙ p) refl
+  left-inv refl = refl
+  
+  right-inv : {x y : A} (p : Id x y) → Id (p ∙ (inv p)) refl
+  right-inv refl = refl
+  
+  inv-inv : {x y : A} (p : Id x y) → Id (inv (inv p)) p
+  inv-inv refl = refl
 ```
 
 ## The action on paths of functions
@@ -139,6 +147,8 @@ ap-inv f refl = refl
 
 ## Transport
 
+We introduce transport. The fact that `tr B p` is an equivalence is recorded in `equivalences`.
+
 ```agda
 tr :
   {i j : Level} {A : UU i} (B : A → UU j) {x y : A} (p : Id x y) → B x → B y
@@ -195,6 +205,8 @@ distributive-inv-concat refl refl = refl
 ```
 
 ## Transposing inverses
+
+The fact that `inv-con` and `con-inv` are equivalences is recorded in `equivalences`.
 
 ```agda
 inv-con :

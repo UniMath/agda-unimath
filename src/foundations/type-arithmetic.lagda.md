@@ -13,7 +13,7 @@ open import foundations.dependent-pair-types using
   ( Σ; pair; pr1; pr2; triple; triple')
 open import foundations.empty-type using (empty; is-empty; ex-falso)
 open import foundations.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
+  ( is-equiv; _≃_; is-equiv-has-inverse; inv-equiv; _∘e_)
 open import foundations.functions using (id; _∘_)
 open import foundations.homotopies using (_~_; refl-htpy)
 open import foundations.identity-types using (refl)
@@ -342,6 +342,12 @@ abstract
   is-equiv-is-empty' :
     {l : Level} {A : UU l} (f : is-empty A) → is-equiv f
   is-equiv-is-empty' f = is-equiv-is-empty f id
+
+equiv-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → is-empty B → A ≃ B
+equiv-is-empty f g =
+  ( inv-equiv (pair g (is-equiv-is-empty g id))) ∘e
+  ( pair f (is-equiv-is-empty f id))
 ```
 
 ## Right absorption law for dependent pair types and for cartesian products
@@ -369,6 +375,10 @@ module _
   
   right-absorption-prod : (A × empty) ≃ empty
   right-absorption-prod = right-absorption-Σ
+
+is-empty-right-factor-is-empty-prod :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → A → is-empty B
+is-empty-right-factor-is-empty-prod f a b = f (pair a b)
 ```
 
 ## Left absorption law for dependent pair types
@@ -406,6 +416,10 @@ module _
     
   left-absorption-prod : (empty × A) ≃ empty
   left-absorption-prod = left-absorption-Σ (λ x → A)
+
+is-empty-left-factor-is-empty-prod :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
+is-empty-left-factor-is-empty-prod f b a = f (pair a b)
 ```
 
 ## Left unit law for dependent pair types

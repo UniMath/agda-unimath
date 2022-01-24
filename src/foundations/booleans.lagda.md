@@ -10,9 +10,9 @@ module foundations.booleans where
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.empty-type using (empty)
 open import foundations.equivalences using (is-equiv; _≃_)
-open import foundations.functions using (id; _∘_)
+open import foundations.functions using (id; _∘_; const)
 open import foundations.homotopies using (_~_)
-open import foundations.identity-types using (Id; refl)
+open import foundations.identity-types using (Id; refl; inv)
 open import foundations.levels using (lzero; UU)
 open import foundations.negation using (¬)
 open import foundations.unit-type using (unit; star)
@@ -93,4 +93,14 @@ abstract
 equiv-neg-bool : bool ≃ bool
 pr1 equiv-neg-bool = neg-bool
 pr2 equiv-neg-bool = is-equiv-neg-bool
+```
+
+```agda
+abstract
+  not-equiv-const :
+    (b : bool) → ¬ (is-equiv (const bool bool b))
+  not-equiv-const true (pair (pair g G) (pair h H)) =
+    neq-false-true-bool (inv (G false))
+  not-equiv-const false (pair (pair g G) (pair h H)) =
+    neq-false-true-bool (G true)
 ```
