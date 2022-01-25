@@ -344,3 +344,50 @@ module _
       isretr-map-inv-assoc-Σ'
       issec-map-inv-assoc-Σ'
 ```
+
+## An interchange law for Σ over Σ
+
+```
+module _
+  { l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  ( D : (x : A) → B x → C x → UU l4)
+  where
+    
+  map-interchange-Σ-Σ :
+    Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))) →
+    Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
+  pr1 (pr1 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = a
+  pr2 (pr1 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = c
+  pr1 (pr2 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = b
+  pr2 (pr2 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = d
+
+  map-inv-interchange-Σ-Σ :
+    Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) →
+    Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
+  pr1 (pr1 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = a
+  pr2 (pr1 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = b
+  pr1 (pr2 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = c
+  pr2 (pr2 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = d
+  
+  issec-map-inv-interchange-Σ-Σ :
+    ( map-interchange-Σ-Σ ∘ map-inv-interchange-Σ-Σ) ~ id
+  issec-map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)) = refl
+
+  isretr-map-inv-interchange-Σ-Σ :
+    ( map-inv-interchange-Σ-Σ ∘ map-interchange-Σ-Σ) ~ id
+  isretr-map-inv-interchange-Σ-Σ (pair (pair a b) (pair c d)) = refl
+
+  abstract
+    is-equiv-map-interchange-Σ-Σ : is-equiv map-interchange-Σ-Σ
+    is-equiv-map-interchange-Σ-Σ =
+      is-equiv-has-inverse
+        map-inv-interchange-Σ-Σ
+        issec-map-inv-interchange-Σ-Σ
+        isretr-map-inv-interchange-Σ-Σ
+
+  interchange-Σ-Σ :
+    Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))) ≃
+    Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
+  pr1 interchange-Σ-Σ = map-interchange-Σ-Σ
+  pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
+```

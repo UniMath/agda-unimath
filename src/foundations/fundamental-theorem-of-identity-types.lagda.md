@@ -8,13 +8,16 @@ title: Univalent Mathematics in Agda
 module foundations.fundamental-theorem-of-identity-types where
 
 open import foundations.contractible-types using
-  ( is-contr; is-equiv-is-contr; is-contr-total-path; is-contr-is-equiv')
+  ( is-contr; is-equiv-is-contr; is-contr-total-path; is-contr-is-equiv';
+    is-contr-equiv; is-contr-Σ)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.equivalences using (is-equiv; is-fiberwise-equiv)
 open import foundations.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundations.identity-types using (Id; ind-Id)
 open import foundations.levels using (Level; UU)
+open import foundations.type-arithmetic-dependent-pair-types using
+  ( interchange-Σ-Σ)
 ```
 
 # The fundamental theorem of identity types
@@ -68,4 +71,24 @@ module _
         ( tot (ind-Id a (λ x p → B x) b))
         ( is-equiv-tot-is-fiberwise-equiv H)
         ( is-contr-total-path a)
+```
+
+## Structure identity principle
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  ( D : (x : A) → B x → C x → UU l4)
+  where
+    
+  abstract
+    is-contr-total-Eq-structure :
+      (is-contr-AC : is-contr (Σ A C)) (t : Σ A C) →
+      is-contr (Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) →
+      is-contr (Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))))
+    is-contr-total-Eq-structure is-contr-AC t is-contr-BD =
+      is-contr-equiv
+        ( Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))))
+        ( interchange-Σ-Σ D)
+        ( is-contr-Σ is-contr-AC t is-contr-BD)
 ```

@@ -15,9 +15,10 @@ open import foundations.functoriality-coproduct-types using (equiv-coprod)
 open import foundations.multiplication-natural-numbers using (mul-ℕ)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundations.standard-finite-types using (Fin)
-open import foundations.type-arithmetic using
-  ( right-unit-law-coprod; inv-assoc-coprod; left-absorption-prod;
-    left-unit-law-prod; right-distributive-prod-coprod)
+open import foundations.type-arithmetic-cartesian-product-types using
+  ( left-absorption-prod; left-unit-law-prod)
+open import foundations.type-arithmetic-coproduct-types using
+  ( right-unit-law-coprod; inv-assoc-coprod; right-distributive-prod-coprod)
 open import foundations.unit-type using (unit)
 ```
 

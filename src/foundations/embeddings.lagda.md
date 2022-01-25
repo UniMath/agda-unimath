@@ -8,8 +8,13 @@ title: Univalent Mathematics in Agda
 module foundations.embeddings where
 
 open import foundations.contractible-maps using (is-contr-map-is-equiv)
-open import foundations.contractible-types using (is-contr-equiv)
+open import foundations.contractible-types using
+  ( is-contr-equiv; is-contr-total-path)
+open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.empty-type using (ex-falso; empty)
+open import foundations.equality-coproduct-types using
+  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
 open import foundations.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; equiv-inv; map-equiv; is-equiv-map-equiv;
     id-equiv)
@@ -85,3 +90,56 @@ module _
   is-emb-id : is-emb (id {A = A})
   is-emb-id = is-emb-map-emb id-emb
 ```
+
+## The map `ex-falso` is an embedding
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-emb-ex-falso : is-emb (ex-falso {A = A})
+    is-emb-ex-falso ()
+
+  ex-falso-emb : empty ↪ A
+  pr1 ex-falso-emb = ex-falso
+  pr2 ex-falso-emb = is-emb-ex-falso
+```
+
+## The left and right inclusions into a coproduct are embeddings
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+  
+  abstract
+    is-emb-inl : is-emb (inl {A = A} {B = B})
+    is-emb-inl x =
+      fundamental-theorem-id x refl
+        ( is-contr-equiv
+          ( Σ A (Id x))
+          ( equiv-tot (compute-eq-coprod-inl-inl x))
+          ( is-contr-total-path x))
+        ( λ y → ap inl)
+
+  emb-inl : A ↪ coprod A B
+  pr1 emb-inl = inl
+  pr2 emb-inl = is-emb-inl
+
+  abstract
+    is-emb-inr : is-emb (inr {A = A} {B = B})
+    is-emb-inr x =
+      fundamental-theorem-id x refl
+        ( is-contr-equiv
+          ( Σ B (Id x))
+          ( equiv-tot (compute-eq-coprod-inr-inr x))
+          ( is-contr-total-path x))
+        ( λ y → ap inr)
+
+  emb-inr : B ↪ coprod A B
+  pr1 emb-inr = inr
+  pr2 emb-inr = is-emb-inr
+```
+

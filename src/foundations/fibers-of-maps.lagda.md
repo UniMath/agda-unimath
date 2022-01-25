@@ -8,10 +8,13 @@ title: Univalent Mathematics in Agda
 module foundations.fibers-of-maps where
 
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.equivalences using (is-equiv; is-equiv-has-inverse; _≃_)
+open import foundations.equivalences using
+  ( is-equiv; is-equiv-has-inverse; _≃_; is-fiberwise-equiv; is-equiv-comp;
+    is-equiv-concat; is-equiv-inv)
 open import foundations.functions using (_∘_; id)
-open import foundations.homotopies using (_~_)
-open import foundations.identity-types using (Id; refl; ap; _∙_; tr; inv)
+open import foundations.homotopies using (_~_; refl-htpy)
+open import foundations.identity-types using
+  ( Id; refl; ap; _∙_; tr; inv; concat; right-unit; right-inv)
 open import foundations.levels using (Level; UU; _⊔_)
 ```
 

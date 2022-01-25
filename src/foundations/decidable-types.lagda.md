@@ -11,13 +11,14 @@ open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using
   ( coprod; inl; inr; ind-coprod)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundations.double-negation using (¬¬)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.functions using (id; _∘_)
 open import foundations.functoriality-coproduct-types using (map-coprod)
 open import foundations.identity-types using (Id; refl; ap)
 open import foundations.levels using (UU; Level; _⊔_)
-open import foundations.negation using (¬; ¬¬; functor-neg)
-open import foundations.type-arithmetic using
+open import foundations.negation using (¬; functor-neg)
+open import foundations.type-arithmetic-coproduct-types using
   ( map-right-unit-law-coprod-is-empty)
 open import foundations.unit-type using (unit; star)
 ```

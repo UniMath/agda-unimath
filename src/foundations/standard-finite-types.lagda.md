@@ -10,14 +10,14 @@ module foundations.standard-finite-types where
 open import foundations.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-unit; is-not-contractible;
     is-not-contractible-empty; eq-is-contr')
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.coproduct-types using (coprod; inl; inr; neq-inl-inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.functions using (_∘_; id)
+open import foundations.embeddings using (_↪_; is-emb-inl)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.equality-coproduct-types using (neq-inl-inr)
 open import foundations.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
+open import foundations.functions using (_∘_; id)
 open import foundations.homotopies using (_~_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.inequality-natural-numbers using
@@ -41,6 +41,10 @@ Fin (succ-ℕ k) = coprod (Fin k) unit
 inl-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inl-Fin k = inl
+
+emb-inl-Fin : (k : ℕ) → Fin k ↪ Fin (succ-ℕ k)
+pr1 (emb-inl-Fin k) = inl-Fin k
+pr2 (emb-inl-Fin k) = is-emb-inl (Fin k) unit
 
 neg-one-Fin : {k : ℕ} → Fin (succ-ℕ k)
 neg-one-Fin {k} = inr star

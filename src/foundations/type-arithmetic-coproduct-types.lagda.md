@@ -8,10 +8,11 @@ title: Univalent Mathematics in Agda
 module foundations.type-arithmetic-coproduct-types where
 
 open import foundations.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.coproduct-types using (coprod; inl; inr; neq-inl-inr; neq-inr-inl)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; is-empty; ex-falso)
-open import foundations.equivalences using (is-equiv; is-equiv-has-inverse; _≃_)
+open import foundations.equivalences using
+  ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
 open import foundations.functions using (_∘_; id)
 open import foundations.homotopies using (_~_; refl-htpy)
 open import foundations.identity-types using (refl)
@@ -66,6 +67,14 @@ module _
       ( map-left-unit-law-coprod-is-empty)
       ( isretr-map-inv-left-unit-law-coprod-is-empty)
       ( issec-map-inv-left-unit-law-coprod-is-empty)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-empty-left-summand-is-equiv : is-equiv (inr {A = A} {B = B}) → is-empty A
+  is-empty-left-summand-is-equiv H a =
+    neq-inr-inl (issec-map-inv-is-equiv H (inl a))
 
 module _
   {l : Level} (B : UU l)
@@ -150,6 +159,14 @@ module _
       ( map-right-unit-law-coprod-is-empty)
       ( isretr-map-inv-right-unit-law-coprod-is-empty)
       ( issec-map-inv-right-unit-law-coprod-is-empty)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-empty-right-summand-is-equiv : is-equiv (inl {A = A} {B = B}) → is-empty B
+  is-empty-right-summand-is-equiv H b =
+    neq-inl-inr (issec-map-inv-is-equiv H (inr b))
 
 module _
   {l : Level} (A : UU l)
