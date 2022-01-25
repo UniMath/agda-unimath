@@ -1,0 +1,346 @@
+---
+title: Univalent Mathematics in Agda
+---
+
+```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
+module foundations.type-arithmetic-dependent-pair-types where
+
+open import foundations.contractible-maps using
+  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
+open import foundations.contractible-types using
+  ( is-contr; is-contr-equiv; center; is-contr-equiv')
+open import foundations.dependent-pair-types using
+  ( Σ; pair; pr1; pr2; ind-Σ; triple; triple')
+open import foundations.empty-type using (empty)
+open import foundations.equivalences using
+  ( is-equiv; is-equiv-is-empty'; _≃_; is-equiv-has-inverse;
+    is-equiv-right-factor; is-equiv-id; is-equiv-left-factor)
+open import foundations.fibers-of-maps using (equiv-fib-pr1; fib)
+open import foundations.functions using (_∘_; id)
+open import foundations.homotopies using (_~_)
+open import foundations.identity-types using (Id; refl; ap)
+open import foundations.levels using (Level; UU)
+open import foundations.singleton-induction using
+  ( ind-singleton-is-contr; comp-singleton-is-contr)
+open import foundations.unit-type using (unit; star)
+```
+
+# Type arithmetic of dependent pair types
+
+In this file we prove arithmetical laws for Σ-types. We restrict our attention to pure Σ-types, and prove the arithmetical laws involving cartesian products and coproducts to `type-arithmetic-cartesian-product-types` and `type-arithmetic-coproduct-types`.
+
+## Right absorption law for dependent pair types and for cartesian products
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+  
+  map-right-absorption-Σ : Σ A (λ x → empty) → empty
+  map-right-absorption-Σ (pair x ())
+  
+  is-equiv-map-right-absorption-Σ : is-equiv map-right-absorption-Σ
+  is-equiv-map-right-absorption-Σ = is-equiv-is-empty' map-right-absorption-Σ
+
+  right-absorption-Σ : Σ A (λ x → empty) ≃ empty
+  right-absorption-Σ =
+    pair map-right-absorption-Σ is-equiv-map-right-absorption-Σ
+```
+
+## Left absorption law for dependent pair types
+
+```agda
+module _
+  {l : Level} (A : empty → UU l)
+  where
+
+  map-left-absorption-Σ : Σ empty A → empty
+  map-left-absorption-Σ = pr1
+  
+  is-equiv-map-left-absorption-Σ : is-equiv map-left-absorption-Σ
+  is-equiv-map-left-absorption-Σ =
+    is-equiv-is-empty' map-left-absorption-Σ
+  
+  left-absorption-Σ : Σ empty A ≃ empty
+  pr1 left-absorption-Σ = map-left-absorption-Σ
+  pr2 left-absorption-Σ = is-equiv-map-left-absorption-Σ
+```
+
+## Left unit law for dependent pair types
+
+```agda
+module _
+  {l : Level} (A : unit → UU l)
+  where
+
+  map-left-unit-law-Σ : Σ unit A → A star
+  map-left-unit-law-Σ (pair star a) = a
+
+  map-inv-left-unit-law-Σ : A star → Σ unit A
+  pr1 (map-inv-left-unit-law-Σ a) = star
+  pr2 (map-inv-left-unit-law-Σ a) = a
+
+  issec-map-inv-left-unit-law-Σ :
+    ( map-left-unit-law-Σ ∘ map-inv-left-unit-law-Σ) ~ id
+  issec-map-inv-left-unit-law-Σ a = refl
+
+  isretr-map-inv-left-unit-law-Σ :
+    ( map-inv-left-unit-law-Σ ∘ map-left-unit-law-Σ) ~ id
+  isretr-map-inv-left-unit-law-Σ (pair star a) = refl
+
+  is-equiv-map-left-unit-law-Σ : is-equiv map-left-unit-law-Σ
+  is-equiv-map-left-unit-law-Σ =
+    is-equiv-has-inverse
+      map-inv-left-unit-law-Σ
+      issec-map-inv-left-unit-law-Σ
+      isretr-map-inv-left-unit-law-Σ
+
+  left-unit-law-Σ : Σ unit A ≃ A star
+  pr1 left-unit-law-Σ = map-left-unit-law-Σ
+  pr2 left-unit-law-Σ = is-equiv-map-left-unit-law-Σ
+  
+  is-equiv-map-inv-left-unit-law-Σ : is-equiv map-inv-left-unit-law-Σ
+  is-equiv-map-inv-left-unit-law-Σ =
+    is-equiv-has-inverse
+      map-left-unit-law-Σ
+      isretr-map-inv-left-unit-law-Σ
+      issec-map-inv-left-unit-law-Σ
+
+  inv-left-unit-law-Σ : A star ≃ Σ unit A
+  pr1 inv-left-unit-law-Σ = map-inv-left-unit-law-Σ
+  pr2 inv-left-unit-law-Σ = is-equiv-map-inv-left-unit-law-Σ
+```
+
+## The left unit law for Σ using a contractible base type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (C : is-contr A) (a : A)
+  where
+
+  map-inv-left-unit-law-Σ-is-contr : B a → Σ A B
+  pr1 (map-inv-left-unit-law-Σ-is-contr b) = a
+  pr2 (map-inv-left-unit-law-Σ-is-contr b) = b
+
+  map-left-unit-law-Σ-is-contr : Σ A B → B a
+  map-left-unit-law-Σ-is-contr =
+    ind-Σ
+      ( ind-singleton-is-contr a C
+        ( λ x → B x → B a)
+        ( id))
+
+  issec-map-inv-left-unit-law-Σ-is-contr :
+    ( map-left-unit-law-Σ-is-contr ∘ map-inv-left-unit-law-Σ-is-contr) ~ id
+  issec-map-inv-left-unit-law-Σ-is-contr b =
+    ap ( λ (f : B a → B a) → f b)
+       ( comp-singleton-is-contr a C (λ x → B x → B a) id)
+  
+  isretr-map-inv-left-unit-law-Σ-is-contr :
+    ( map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr) ~ id
+  isretr-map-inv-left-unit-law-Σ-is-contr = 
+    ind-Σ
+      ( ind-singleton-is-contr a C
+        ( λ x →
+          ( y : B x) →
+            Id ( ( map-inv-left-unit-law-Σ-is-contr ∘
+                   map-left-unit-law-Σ-is-contr)
+                 ( pair x y))
+               ( pair x y))
+        ( λ y → ap
+          ( map-inv-left-unit-law-Σ-is-contr)
+          ( ap ( λ f → f y)
+               ( comp-singleton-is-contr a C (λ x → B x → B a) id))))
+
+  abstract
+    is-equiv-map-left-unit-law-Σ-is-contr :
+      is-equiv map-left-unit-law-Σ-is-contr
+    is-equiv-map-left-unit-law-Σ-is-contr =
+      is-equiv-has-inverse
+        map-inv-left-unit-law-Σ-is-contr
+        issec-map-inv-left-unit-law-Σ-is-contr
+        isretr-map-inv-left-unit-law-Σ-is-contr
+
+  left-unit-law-Σ-is-contr : Σ A B ≃ B a
+  pr1 left-unit-law-Σ-is-contr = map-left-unit-law-Σ-is-contr
+  pr2 left-unit-law-Σ-is-contr = is-equiv-map-left-unit-law-Σ-is-contr
+
+  abstract
+    is-equiv-map-inv-left-unit-law-Σ-is-contr :
+      is-equiv map-inv-left-unit-law-Σ-is-contr
+    is-equiv-map-inv-left-unit-law-Σ-is-contr =
+      is-equiv-has-inverse
+        map-left-unit-law-Σ-is-contr
+        isretr-map-inv-left-unit-law-Σ-is-contr
+        issec-map-inv-left-unit-law-Σ-is-contr
+  
+  inv-left-unit-law-Σ-is-contr : B a ≃ Σ A B
+  pr1 inv-left-unit-law-Σ-is-contr = map-inv-left-unit-law-Σ-is-contr
+  pr2 inv-left-unit-law-Σ-is-contr = is-equiv-map-inv-left-unit-law-Σ-is-contr
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-contr-Σ' :
+      is-contr A → ((x : A) → is-contr (B x)) → is-contr (Σ A B)
+    is-contr-Σ' is-contr-A is-contr-B =
+      is-contr-equiv
+        ( B (center is-contr-A))
+        ( left-unit-law-Σ-is-contr is-contr-A (center is-contr-A))
+        ( is-contr-B (center is-contr-A))
+```
+
+# Right unit law for dependent pair types
+
+```
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-equiv-pr1-is-contr : ((a : A) → is-contr (B a)) → is-equiv (pr1 {B = B})
+    is-equiv-pr1-is-contr is-contr-B =
+      is-equiv-is-contr-map
+        ( λ x → is-contr-equiv
+          ( B x)
+          ( equiv-fib-pr1 B x)
+          ( is-contr-B x))
+
+  equiv-pr1 : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
+  pr1 (equiv-pr1 is-contr-B) = pr1
+  pr2 (equiv-pr1 is-contr-B) = is-equiv-pr1-is-contr is-contr-B
+
+  right-unit-law-Σ-is-contr : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
+  right-unit-law-Σ-is-contr = equiv-pr1
+
+  abstract
+    is-contr-is-equiv-pr1 : is-equiv (pr1 {B = B}) → ((a : A) → is-contr (B a))
+    is-contr-is-equiv-pr1 is-equiv-pr1-B a =
+      is-contr-equiv'
+        ( fib pr1 a)
+        ( equiv-fib-pr1 B a)
+        ( is-contr-map-is-equiv is-equiv-pr1-B a)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  map-section : ((x : A) → B x) → (A → Σ A B)
+  pr1 (map-section b a) = a
+  pr2 (map-section b a) = b a
+
+  htpy-map-section :
+    (b : (x : A) → B x) → (pr1 ∘ map-section b) ~ id
+  htpy-map-section b a = refl
+
+  is-equiv-map-section :
+    (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → is-equiv (map-section b)
+  is-equiv-map-section b C =
+    is-equiv-right-factor
+      ( id)
+      ( pr1)
+      ( map-section b)
+      ( htpy-map-section b)
+      ( is-equiv-pr1-is-contr C)
+      ( is-equiv-id)
+
+  equiv-section :
+    (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → A ≃ Σ A B
+  equiv-section b C = pair (map-section b) (is-equiv-map-section b C)
+
+  is-contr-fam-is-equiv-map-section :
+    (b : (x : A) → B x) → is-equiv (map-section b) → ((x : A) → is-contr (B x))
+  is-contr-fam-is-equiv-map-section b H =
+    is-contr-is-equiv-pr1
+      ( is-equiv-left-factor id pr1
+        ( map-section b)
+        ( htpy-map-section b)
+        ( is-equiv-id)
+        ( H))
+```
+
+## Associativity of dependent pair types
+
+There are two ways to express associativity for dependent pair types. We formalize both ways.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : Σ A B → UU l3)
+  where
+
+  map-assoc-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
+  map-assoc-Σ (pair (pair x y) z) = triple x y z
+
+  map-inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) → Σ (Σ A B) C
+  map-inv-assoc-Σ (pair x (pair y z)) = triple' x y z
+  -- map-inv-assoc-Σ t = triple' (pr1 t) (pr1 (pr2 t)) (pr2 (pr2 t))
+
+  isretr-map-inv-assoc-Σ : (map-inv-assoc-Σ ∘ map-assoc-Σ) ~ id
+  isretr-map-inv-assoc-Σ (pair (pair x y) z) = refl
+  
+  issec-map-inv-assoc-Σ : (map-assoc-Σ ∘ map-inv-assoc-Σ) ~ id
+  issec-map-inv-assoc-Σ (pair x (pair y z)) = refl
+
+  abstract
+    is-equiv-map-assoc-Σ : is-equiv map-assoc-Σ
+    is-equiv-map-assoc-Σ =
+      is-equiv-has-inverse
+        map-inv-assoc-Σ
+        issec-map-inv-assoc-Σ
+        isretr-map-inv-assoc-Σ
+
+  assoc-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
+  pr1 assoc-Σ = map-assoc-Σ
+  pr2 assoc-Σ = is-equiv-map-assoc-Σ
+
+  inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
+  pr1 inv-assoc-Σ = map-inv-assoc-Σ
+  pr2 inv-assoc-Σ =
+    is-equiv-has-inverse
+      map-assoc-Σ
+      isretr-map-inv-assoc-Σ
+      issec-map-inv-assoc-Σ
+```
+
+The following block contains a second formalization of associativity for dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : (x : A) → B x → UU l3)
+  where
+  
+  map-assoc-Σ' : Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) → Σ A (λ x → Σ (B x) (C x))
+  map-assoc-Σ' (pair (pair x y) z) = triple x y z
+
+  map-inv-assoc-Σ' :
+    Σ A (λ x → Σ (B x) (C x)) → Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
+  map-inv-assoc-Σ' (pair x (pair y z)) = triple' x y z
+
+  issec-map-inv-assoc-Σ' : (map-assoc-Σ' ∘ map-inv-assoc-Σ') ~ id
+  issec-map-inv-assoc-Σ' (pair x (pair y z)) = refl
+
+  isretr-map-inv-assoc-Σ' : ( map-inv-assoc-Σ' ∘ map-assoc-Σ') ~ id
+  isretr-map-inv-assoc-Σ' (pair (pair x y) z) = refl
+
+  is-equiv-map-assoc-Σ' : is-equiv map-assoc-Σ'
+  is-equiv-map-assoc-Σ' =
+    is-equiv-has-inverse
+      map-inv-assoc-Σ'
+      issec-map-inv-assoc-Σ'
+      isretr-map-inv-assoc-Σ'
+
+  assoc-Σ' : Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) ≃ Σ A (λ x → Σ (B x) (C x))
+  pr1 assoc-Σ' = map-assoc-Σ'
+  pr2 assoc-Σ' = is-equiv-map-assoc-Σ'
+
+  inv-assoc-Σ' : Σ A (λ x → Σ (B x) (C x)) ≃ Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
+  pr1 inv-assoc-Σ' = map-inv-assoc-Σ'
+  pr2 inv-assoc-Σ' =
+    is-equiv-has-inverse
+      map-assoc-Σ'
+      isretr-map-inv-assoc-Σ'
+      issec-map-inv-assoc-Σ'
+```
