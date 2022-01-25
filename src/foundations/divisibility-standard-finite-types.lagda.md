@@ -12,6 +12,8 @@ open import foundations.congruence-natural-numbers using
 open import foundations.decidable-types using (is-decidable)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.distance-natural-numbers using (right-unit-law-dist-ℕ)
+open import foundations.equality-standard-finite-types using
+  ( has-decidable-equality-Fin)
 open import foundations.identity-types using (Id; _∙_; inv; ap)
 open import foundations.levels using (UU; lzero)
 open import foundations.modular-arithmetic-standard-finite-types using
@@ -23,8 +25,7 @@ open import foundations.multiplication-natural-numbers using
   ( mul-ℕ; square-succ-ℕ; commutative-mul-ℕ)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundations.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin; is-zero-Fin; neg-one-Fin; nat-Fin;
-    has-decidable-equality-Fin)
+  ( Fin; zero-Fin; one-Fin; is-zero-Fin; neg-one-Fin; nat-Fin)
 open import foundations.well-ordering-principle-standard-finite-types using
   ( is-decidable-Σ-Fin)
 ```

@@ -11,6 +11,7 @@ open import foundations.cartesian-product-types using (_×_)
 open import foundations.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.empty-type using (is-empty; empty; ex-falso)
 open import foundations.functions using (id; _∘_)
 open import foundations.homotopies using
   ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; htpy-red; htpy-nat;
@@ -61,6 +62,13 @@ module _
   
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = sec f × retr f
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+  
+  is-fiberwise-equiv : (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
+  is-fiberwise-equiv f = (x : A) → is-equiv (f x)
 
 _≃_ :
   {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
@@ -643,4 +651,29 @@ module _
     (p : Id x y) (q : Id y z) (r : Id x z) → Id (p ∙ q) r ≃ Id p (r ∙ (inv q))
   pr1 (equiv-con-inv p q r) = con-inv p q r
   pr2 (equiv-con-inv p q r) = is-equiv-con-inv p q r
+```
+
+## Any map into an empty type is an equivalence
+
+```agda
+abstract
+  is-equiv-is-empty :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-empty B → is-equiv f
+  is-equiv-is-empty f H =
+    is-equiv-has-inverse
+      ( ex-falso ∘ H)
+      ( λ y → ex-falso (H y))
+      ( λ x → ex-falso (H (f x)))
+
+abstract
+  is-equiv-is-empty' :
+    {l : Level} {A : UU l} (f : is-empty A) → is-equiv f
+  is-equiv-is-empty' f = is-equiv-is-empty f id
+
+equiv-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → is-empty B → A ≃ B
+equiv-is-empty f g =
+  ( inv-equiv (pair g (is-equiv-is-empty g id))) ∘e
+  ( pair f (is-equiv-is-empty f id))
 ```

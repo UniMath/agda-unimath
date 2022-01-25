@@ -11,10 +11,11 @@ open import foundations.absolute-value-integers using
   ( abs-ℤ; int-abs-ℤ; is-nonzero-abs-ℤ)
 open import foundations.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import foundations.cartesian-product-types using (_×_; map-prod)
+open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.functions using (_∘_)
+open import foundations.functoriality-cartesian-product-types using (map-prod)
 open import foundations.divisibility-integers using
   ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
     symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;

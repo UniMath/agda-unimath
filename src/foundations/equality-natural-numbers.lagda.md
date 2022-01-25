@@ -7,11 +7,16 @@ title: Univalent Mathematics in Agda
 
 module foundations.equality-natural-numbers where
 
+open import foundations.contractible-types using (is-contr)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; has-decidable-equality; is-decidable-iff; is-decidable-neg)
+open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty)
+open import foundations.equivalences using (is-equiv)
 open import foundations.functions using (id)
+open import foundations.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
 open import foundations.identity-types using (Id; refl; ap)
 open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using
@@ -73,4 +78,30 @@ is-decidable-is-not-one-ℕ :
   (x : ℕ) → is-decidable (is-not-one-ℕ x)
 is-decidable-is-not-one-ℕ x =
   is-decidable-neg (is-decidable-is-one-ℕ x)
+```
+
+## The full characterization of the identity type of ℕ
+
+```agda
+map-total-Eq-ℕ :
+  (m : ℕ) → Σ ℕ (Eq-ℕ m) → Σ ℕ (Eq-ℕ (succ-ℕ m))
+pr1 (map-total-Eq-ℕ m (pair n e)) = succ-ℕ n
+pr2 (map-total-Eq-ℕ m (pair n e)) = e
+
+is-contr-total-Eq-ℕ :
+  (m : ℕ) → is-contr (Σ ℕ (Eq-ℕ m))
+pr1 (pr1 (is-contr-total-Eq-ℕ m)) = m
+pr2 (pr1 (is-contr-total-Eq-ℕ m)) = refl-Eq-ℕ m
+pr2 (is-contr-total-Eq-ℕ zero-ℕ) (pair zero-ℕ star) = refl
+pr2 (is-contr-total-Eq-ℕ (succ-ℕ m)) (pair (succ-ℕ n) e) =
+  ap (map-total-Eq-ℕ m) (pr2 (is-contr-total-Eq-ℕ m) (pair n e))
+
+is-equiv-Eq-eq-ℕ :
+  {m n : ℕ} → is-equiv (Eq-eq-ℕ {m} {n})
+is-equiv-Eq-eq-ℕ {m} {n} =
+  fundamental-theorem-id m
+    ( refl-Eq-ℕ m)
+    ( is-contr-total-Eq-ℕ m)
+    ( λ y → Eq-eq-ℕ {m} {y})
+    ( n)
 ```

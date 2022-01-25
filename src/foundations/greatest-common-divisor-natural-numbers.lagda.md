@@ -9,7 +9,7 @@ module foundations.greatest-common-divisor-natural-numbers where
 
 open import foundations.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import foundations.cartesian-product-types using (_×_; map-prod)
+open import foundations.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
@@ -27,6 +27,7 @@ open import foundations.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
     eq-quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ;
     strict-upper-bound-remainder-euclidean-division-ℕ)
+open import foundations.functoriality-cartesian-product-types using (map-prod)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
