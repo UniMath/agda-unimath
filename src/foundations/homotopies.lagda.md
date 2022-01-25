@@ -98,15 +98,6 @@ _·r_ = htpy-right-whisk
 ```
 
 ```agda
-coherence-square :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
-  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X) →
-  UU (l3 ⊔ l4)
-coherence-square top left right bottom =
-  (bottom ∘ left) ~ (right ∘ top)
-```
-
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
   where

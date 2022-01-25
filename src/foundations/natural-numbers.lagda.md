@@ -8,7 +8,7 @@ title: Univalent Mathematics in Agda
 module foundations.natural-numbers where
 
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (empty; ex-falso)
+open import foundations.empty-type using (ex-falso)
 open import foundations.identity-types using (Id; refl)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; lzero; UU)

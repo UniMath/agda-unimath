@@ -17,12 +17,17 @@ open import foundations.equality-coproduct-types using
   ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
 open import foundations.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; equiv-inv; map-equiv; is-equiv-map-equiv;
-    id-equiv)
+    id-equiv; map-inv-equiv; inv-equiv; _∘e_; equiv-concat';
+    issec-map-inv-equiv)
 open import foundations.fibers-of-maps using (fib)
 open import foundations.functions using (id)
 open import foundations.functoriality-dependent-pair-types using (equiv-tot)
 open import foundations.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
+open import foundations.homotopies using (_~_)
+open import foundations.identity-types using
+  ( inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
+    distributive-inv-concat; con-inv; inv-inv; ap-inv)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; UU; _⊔_)
 open import foundations.identity-types using (Id; refl; ap)
@@ -143,3 +148,178 @@ module _
   pr2 emb-inr = is-emb-inr
 ```
 
+## Transposing equalities along equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  eq-transpose-equiv :
+    (x : A) (y : B) → (Id (map-equiv e x) y) ≃ (Id x (map-inv-equiv e y))
+  eq-transpose-equiv x y =
+    ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
+    ( equiv-concat'
+      ( map-equiv e x)
+      ( inv (issec-map-inv-equiv e y)))
+
+  map-eq-transpose-equiv :
+    {x : A} {y : B} → Id (map-equiv e x) y → Id x (map-inv-equiv e y)
+  map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
+
+  inv-map-eq-transpose-equiv :
+    {x : A} {y : B} → Id x (map-inv-equiv e y) → Id (map-equiv e x) y
+  inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
+
+  triangle-eq-transpose-equiv :
+    {x : A} {y : B} (p : Id (map-equiv e x) y) →
+    Id ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
+         ( issec-map-inv-equiv e y))
+       ( p)
+  triangle-eq-transpose-equiv {x} {y} p =
+    ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+         ( issec-map-inv-equiv
+           ( equiv-ap e x (map-inv-equiv e y))
+           ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
+    ( ( assoc p (inv (issec-map-inv-equiv e y)) (issec-map-inv-equiv e y)) ∙
+      ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
+  
+  map-eq-transpose-equiv' :
+    {a : A} {b : B} → Id b (map-equiv e a) → Id (map-inv-equiv e b) a
+  map-eq-transpose-equiv' p = inv (map-eq-transpose-equiv (inv p))
+
+  inv-map-eq-transpose-equiv' :
+    {a : A} {b : B} → Id (map-inv-equiv e b) a → Id b (map-equiv e a)
+  inv-map-eq-transpose-equiv' p =
+    inv (inv-map-eq-transpose-equiv (inv p))
+
+  triangle-eq-transpose-equiv' :
+    {x : A} {y : B} (p : Id y (map-equiv e x)) →
+    Id ( (issec-map-inv-equiv e y) ∙ p)
+      ( ap (map-equiv e) (map-eq-transpose-equiv' p))
+  triangle-eq-transpose-equiv' {x} {y} p =
+    map-inv-equiv
+      ( equiv-ap
+        ( equiv-inv (map-equiv e (map-inv-equiv e y)) (map-equiv e x))
+        ( (issec-map-inv-equiv e y) ∙ p)
+        ( ap (map-equiv e) (map-eq-transpose-equiv' p)))
+      ( ( distributive-inv-concat (issec-map-inv-equiv e y) p) ∙
+        ( ( inv
+            ( con-inv
+              ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
+              ( issec-map-inv-equiv e y)
+              ( inv p)
+              ( ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+                     ( ap ( ap (map-equiv e))
+                          ( inv-inv
+                            ( map-inv-equiv
+                              ( equiv-ap e x (map-inv-equiv e y))
+                              ( ( inv p) ∙
+                                ( inv (issec-map-inv-equiv e y))))))) ∙
+                ( triangle-eq-transpose-equiv (inv p))))) ∙
+          ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
+```
+
+# Embeddings are closed under homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B) (H : f ~ g)
+  where
+
+  abstract
+    is-emb-htpy : is-emb g → is-emb f
+    is-emb-htpy is-emb-g x y =
+      is-equiv-top-is-equiv-left-square
+        ( ap g)
+        ( concat' (f x) (H y))
+        ( ap f)
+        ( concat (H x) (g y))
+        ( htpy-nat H)
+        ( is-equiv-concat (H x) (g y))
+        ( is-emb-g x y)
+        ( is-equiv-concat' (f x) (H y))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B) (H : f ~ g)
+  where
+  
+  abstract
+    is-emb-htpy' : is-emb f → is-emb g
+    is-emb-htpy' is-emb-f =
+      is-emb-htpy g f (inv-htpy H) is-emb-f
+```
+
+## Composites of embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  abstract
+    is-emb-comp :
+      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
+      is-emb h → is-emb f
+    is-emb-comp f g h H is-emb-g is-emb-h =
+      is-emb-htpy f (g ∘ h) H
+        ( λ x y → is-equiv-comp (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
+          ( is-emb-h x y)
+          ( is-emb-g (h x) (h y)))
+
+  abstract
+    is-emb-comp' :
+      (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
+    is-emb-comp' g h = is-emb-comp (g ∘ h) g h refl-htpy
+
+    comp-emb :
+      (B ↪ C) → (A ↪ B) → (A ↪ C)
+    pr1 (comp-emb (pair g H) (pair f K)) = g ∘ f
+    pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
+```
+
+## The right factor of a composed embedding is an embedding
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  abstract
+    is-emb-right-factor :
+      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
+      is-emb f → is-emb h
+    is-emb-right-factor f g h H is-emb-g is-emb-f x y =
+      is-equiv-right-factor
+        ( ap (g ∘ h))
+        ( ap g)
+        ( ap h)
+        ( ap-comp g h)
+        ( is-emb-g (h x) (h y))
+        ( is-emb-htpy (g ∘ h) f (inv-htpy H) is-emb-f x y)
+
+  abstract
+    is-emb-triangle-is-equiv :
+      (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
+      is-equiv e → is-emb g → is-emb f
+    is-emb-triangle-is-equiv f g e H is-equiv-e is-emb-g =
+      is-emb-comp f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  abstract
+    is-emb-triangle-is-equiv' :
+      (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
+      is-equiv e → is-emb f → is-emb g
+    is-emb-triangle-is-equiv' f g e H is-equiv-e is-emb-f =
+      is-emb-triangle-is-equiv g f
+        ( map-inv-is-equiv is-equiv-e)
+        ( triangle-section f g e H
+          ( pair
+            ( map-inv-is-equiv is-equiv-e)
+            ( issec-map-inv-is-equiv is-equiv-e)))
+        ( is-equiv-map-inv-is-equiv is-equiv-e)
+        ( is-emb-f)
+```
