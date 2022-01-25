@@ -8,16 +8,24 @@ title: Univalent Mathematics in Agda
 module foundations.type-arithmetic where
 
 open import foundations.cartesian-product-types using (_×_)
+open import foundations.contractible-maps using
+  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
+open import foundations.contractible-types using
+  ( is-contr; is-contr-equiv; center; is-contr-equiv')
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; triple; triple')
+  ( Σ; pair; pr1; pr2; triple; triple'; ind-Σ)
+open import foundations.fibers-of-maps using (equiv-fib-pr1; fib)
 open import foundations.empty-type using (empty; is-empty; ex-falso)
 open import foundations.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; inv-equiv; _∘e_)
+  ( is-equiv; _≃_; is-equiv-has-inverse; inv-equiv; _∘e_; is-equiv-right-factor;
+    is-equiv-id; is-equiv-left-factor)
 open import foundations.functions using (id; _∘_)
 open import foundations.homotopies using (_~_; refl-htpy)
-open import foundations.identity-types using (refl)
+open import foundations.identity-types using (Id; refl; ap)
 open import foundations.levels using (Level; UU)
+open import foundations.singleton-induction using
+  ( ind-singleton-is-contr; comp-singleton-is-contr)
 open import foundations.unit-type using (unit; star)
 ```
 
@@ -536,6 +544,170 @@ module _
   right-unit-law-prod : (A × unit) ≃ A
   pr1 right-unit-law-prod = map-right-unit-law-prod
   pr2 right-unit-law-prod = is-equiv-map-right-unit-law-prod
+```
+
+## The left unit law for Σ using a contractible base type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (C : is-contr A) (a : A)
+  where
+
+  map-inv-left-unit-law-Σ-is-contr : B a → Σ A B
+  pr1 (map-inv-left-unit-law-Σ-is-contr b) = a
+  pr2 (map-inv-left-unit-law-Σ-is-contr b) = b
+
+  map-left-unit-law-Σ-is-contr : Σ A B → B a
+  map-left-unit-law-Σ-is-contr =
+    ind-Σ
+      ( ind-singleton-is-contr a C
+        ( λ x → B x → B a)
+        ( id))
+
+  issec-map-inv-left-unit-law-Σ-is-contr :
+    ( map-left-unit-law-Σ-is-contr ∘ map-inv-left-unit-law-Σ-is-contr) ~ id
+  issec-map-inv-left-unit-law-Σ-is-contr b =
+    ap ( λ (f : B a → B a) → f b)
+       ( comp-singleton-is-contr a C (λ x → B x → B a) id)
+  
+  isretr-map-inv-left-unit-law-Σ-is-contr :
+    ( map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr) ~ id
+  isretr-map-inv-left-unit-law-Σ-is-contr = 
+    ind-Σ
+      ( ind-singleton-is-contr a C
+        ( λ x →
+          ( y : B x) →
+            Id ( ( map-inv-left-unit-law-Σ-is-contr ∘
+                   map-left-unit-law-Σ-is-contr)
+                 ( pair x y))
+               ( pair x y))
+        ( λ y → ap
+          ( map-inv-left-unit-law-Σ-is-contr)
+          ( ap ( λ f → f y)
+               ( comp-singleton-is-contr a C (λ x → B x → B a) id))))
+
+  abstract
+    is-equiv-map-left-unit-law-Σ-is-contr :
+      is-equiv map-left-unit-law-Σ-is-contr
+    is-equiv-map-left-unit-law-Σ-is-contr =
+      is-equiv-has-inverse
+        map-inv-left-unit-law-Σ-is-contr
+        issec-map-inv-left-unit-law-Σ-is-contr
+        isretr-map-inv-left-unit-law-Σ-is-contr
+
+  left-unit-law-Σ-is-contr : Σ A B ≃ B a
+  pr1 left-unit-law-Σ-is-contr = map-left-unit-law-Σ-is-contr
+  pr2 left-unit-law-Σ-is-contr = is-equiv-map-left-unit-law-Σ-is-contr
+
+  abstract
+    is-equiv-map-inv-left-unit-law-Σ-is-contr :
+      is-equiv map-inv-left-unit-law-Σ-is-contr
+    is-equiv-map-inv-left-unit-law-Σ-is-contr =
+      is-equiv-has-inverse
+        map-left-unit-law-Σ-is-contr
+        isretr-map-inv-left-unit-law-Σ-is-contr
+        issec-map-inv-left-unit-law-Σ-is-contr
+  
+  inv-left-unit-law-Σ-is-contr : B a ≃ Σ A B
+  pr1 inv-left-unit-law-Σ-is-contr = map-inv-left-unit-law-Σ-is-contr
+  pr2 inv-left-unit-law-Σ-is-contr = is-equiv-map-inv-left-unit-law-Σ-is-contr
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-contr-Σ' :
+      is-contr A → ((x : A) → is-contr (B x)) → is-contr (Σ A B)
+    is-contr-Σ' is-contr-A is-contr-B =
+      is-contr-equiv
+        ( B (center is-contr-A))
+        ( left-unit-law-Σ-is-contr is-contr-A (center is-contr-A))
+        ( is-contr-B (center is-contr-A))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (C : is-contr A)
+  where
+  
+  left-unit-law-prod-is-contr : (A × B) ≃ B
+  left-unit-law-prod-is-contr =
+    left-unit-law-Σ-is-contr C (center C)
+```
+
+# Right unit law for dependent pair types
+
+```
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-equiv-pr1-is-contr : ((a : A) → is-contr (B a)) → is-equiv (pr1 {B = B})
+    is-equiv-pr1-is-contr is-contr-B =
+      is-equiv-is-contr-map
+        ( λ x → is-contr-equiv
+          ( B x)
+          ( equiv-fib-pr1 B x)
+          ( is-contr-B x))
+
+  equiv-pr1 : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
+  pr1 (equiv-pr1 is-contr-B) = pr1
+  pr2 (equiv-pr1 is-contr-B) = is-equiv-pr1-is-contr is-contr-B
+
+  right-unit-law-Σ-is-contr : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
+  right-unit-law-Σ-is-contr = equiv-pr1
+
+  abstract
+    is-contr-is-equiv-pr1 : is-equiv (pr1 {B = B}) → ((a : A) → is-contr (B a))
+    is-contr-is-equiv-pr1 is-equiv-pr1-B a =
+      is-contr-equiv'
+        ( fib pr1 a)
+        ( equiv-fib-pr1 B a)
+        ( is-contr-map-is-equiv is-equiv-pr1-B a)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  right-unit-law-prod-is-contr : is-contr B → (A × B) ≃ A
+  right-unit-law-prod-is-contr H = right-unit-law-Σ-is-contr (λ a → H)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  map-section : ((x : A) → B x) → (A → Σ A B)
+  pr1 (map-section b a) = a
+  pr2 (map-section b a) = b a
+
+  htpy-map-section :
+    (b : (x : A) → B x) → (pr1 ∘ map-section b) ~ id
+  htpy-map-section b a = refl
+
+  is-equiv-map-section :
+    (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → is-equiv (map-section b)
+  is-equiv-map-section b C =
+    is-equiv-right-factor
+      ( id)
+      ( pr1)
+      ( map-section b)
+      ( htpy-map-section b)
+      ( is-equiv-pr1-is-contr C)
+      ( is-equiv-id)
+
+  equiv-section :
+    (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → A ≃ Σ A B
+  equiv-section b C = pair (map-section b) (is-equiv-map-section b C)
+
+  is-contr-fam-is-equiv-map-section :
+    (b : (x : A) → B x) → is-equiv (map-section b) → ((x : A) → is-contr (B x))
+  is-contr-fam-is-equiv-map-section b H =
+    is-contr-is-equiv-pr1
+      ( is-equiv-left-factor id pr1
+        ( map-section b)
+        ( htpy-map-section b)
+        ( is-equiv-id)
+        ( H))
 ```
 
 ## Associativity of dependent pair types

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.equality-dependent-pair-type where
+module foundations.equality-dependent-pair-types where
 
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)

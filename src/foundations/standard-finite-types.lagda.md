@@ -7,12 +7,18 @@ title: Univalent Mathematics in Agda
 
 module foundations.standard-finite-types where
 
+open import foundations.contractible-types using
+  ( is-contr; is-contr-equiv; is-contr-unit; is-not-contractible;
+    is-not-contractible-empty; eq-is-contr')
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.functions using (_∘_; id)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.equivalences using (is-equiv; _≃_)
+open import foundations.equality-coproduct-types using (neq-inl-inr)
+open import foundations.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
+open import foundations.homotopies using (_~_)
 open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
@@ -20,7 +26,7 @@ open import foundations.inequality-natural-numbers using
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
 open import foundations.negation using (¬; functor-neg)
 open import foundations.unit-type using (unit; star)
 ```
@@ -41,6 +47,50 @@ neg-one-Fin {k} = inr star
 
 is-neg-one-Fin : {k : ℕ} → Fin k → UU lzero
 is-neg-one-Fin {succ-ℕ k} x = Id x neg-one-Fin
+
+neg-two-Fin :
+  {k : ℕ} → Fin (succ-ℕ k)
+neg-two-Fin {zero-ℕ} = inr star
+neg-two-Fin {succ-ℕ k} = inl (inr star)
+```
+
+## Fin 1 is contractible
+
+```agda
+map-equiv-Fin-one-ℕ : Fin 1 → unit
+map-equiv-Fin-one-ℕ (inr star) = star
+
+inv-map-equiv-Fin-one-ℕ : unit → Fin 1
+inv-map-equiv-Fin-one-ℕ star = inr star
+
+issec-inv-map-equiv-Fin-one-ℕ :
+  ( map-equiv-Fin-one-ℕ ∘ inv-map-equiv-Fin-one-ℕ) ~ id
+issec-inv-map-equiv-Fin-one-ℕ star = refl
+
+isretr-inv-map-equiv-Fin-one-ℕ :
+  ( inv-map-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
+isretr-inv-map-equiv-Fin-one-ℕ (inr star) = refl
+
+is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
+is-equiv-map-equiv-Fin-one-ℕ =
+  is-equiv-has-inverse
+    inv-map-equiv-Fin-one-ℕ
+    issec-inv-map-equiv-Fin-one-ℕ
+    isretr-inv-map-equiv-Fin-one-ℕ
+
+equiv-Fin-one-ℕ : Fin 1 ≃ unit
+pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ
+pr2 equiv-Fin-one-ℕ = is-equiv-map-equiv-Fin-one-ℕ
+
+is-contr-Fin-one-ℕ : is-contr (Fin 1)
+is-contr-Fin-one-ℕ = is-contr-equiv unit equiv-Fin-one-ℕ is-contr-unit
+
+is-not-contractible-Fin :
+  (k : ℕ) → is-not-one-ℕ k → is-not-contractible (Fin k)
+is-not-contractible-Fin zero-ℕ f = is-not-contractible-empty
+is-not-contractible-Fin (succ-ℕ zero-ℕ) f C = f refl
+is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
+  neq-inl-inr (eq-is-contr' C neg-two-Fin neg-one-Fin)
 ```
 
 ### The inclusion of Fin k into ℕ
@@ -172,13 +222,6 @@ is-injective-succ-Fin {succ-ℕ k} {inr star} {inr star} p = refl
 ```
 
 ```agda
--- We define the negative two element of Fin k.
-
-neg-two-Fin :
-  {k : ℕ} → Fin (succ-ℕ k)
-neg-two-Fin {zero-ℕ} = inr star
-neg-two-Fin {succ-ℕ k} = inl (inr star)
-
 -- We define a function skip-neg-two-Fin in order to define pred-Fin.
 
 skip-neg-two-Fin :

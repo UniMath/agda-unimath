@@ -45,13 +45,11 @@ module _
   is-injective-inr : is-injective {B = coprod A B} inr
   is-injective-inr refl = refl 
 
-  neq-inl-inr :
-    (x : A) (y : B) → ¬ (Id (inl x) (inr y))
-  neq-inl-inr x y ()
+  neq-inl-inr : {x : A} {y : B} → ¬ (Id (inl x) (inr y))
+  neq-inl-inr ()
 
-  neq-inr-inl :
-    (x : B) (y : A) → ¬ (Id (inr x) (inl y))
-  neq-inr-inl x y ()
+  neq-inr-inl : {x : B} {y : A} → ¬ (Id (inr x) (inl y))
+  neq-inr-inl ()
   
   has-decidable-equality-coprod :
     has-decidable-equality A → has-decidable-equality B →
@@ -59,9 +57,9 @@ module _
   has-decidable-equality-coprod d e (inl x) (inl y) =
     is-decidable-iff (ap inl) is-injective-inl (d x y)
   has-decidable-equality-coprod d e (inl x) (inr y) =
-    inr (neq-inl-inr x y)
+    inr neq-inl-inr
   has-decidable-equality-coprod d e (inr x) (inl y) =
-    inr (neq-inr-inl x y)
+    inr neq-inr-inl
   has-decidable-equality-coprod d e (inr x) (inr y) =
     is-decidable-iff (ap inr) is-injective-inr (e x y)
 

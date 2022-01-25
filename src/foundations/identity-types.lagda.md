@@ -173,26 +173,30 @@ refl-path-over B x y = refl
 ### laws for transport
 
 ```agda
-tr-concat :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y z : A} (p : Id x y)
-  (q : Id y z) (b : B x) → Id (tr B (p ∙ q) b) (tr B q (tr B p b))
-tr-concat refl q b = refl
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+  
+  tr-concat :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y z : A} (p : Id x y)
+    (q : Id y z) (b : B x) → Id (tr B (p ∙ q) b) (tr B q (tr B p b))
+  tr-concat refl q b = refl
+
+  eq-transpose-tr :
+    {x y : A} (p : Id x y) {u : B x} {v : B y} →
+    Id v (tr B p u) → Id (tr B (inv p) v) u
+  eq-transpose-tr refl q = q
+
+  eq-transpose-tr' :
+    {x y : A} (p : Id x y) {u : B x} {v : B y} →
+    Id (tr B p u) v → Id u (tr B (inv p) v)
+  eq-transpose-tr' refl q = q
 
 tr-ap :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
   (f : A → C) (g : (x : A) → B x → D (f x)) {x y : A} (p : Id x y) (z : B x) →
   Id (tr D (ap f p) (g x z)) (g y (tr B p z))
 tr-ap f g refl z = refl
-
-eq-transpose-tr :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : Id x y)
-  {u : B x} {v : B y} → Id v (tr B p u) → Id (tr B (inv p) v) u
-eq-transpose-tr refl q = q
-
-eq-transpose-tr' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : Id x y)
-  {u : B x} {v : B y} → Id (tr B p u) v → Id u (tr B (inv p) v)
-eq-transpose-tr' refl q = q
 ```
 
 ## Distributivity of inv over concat
