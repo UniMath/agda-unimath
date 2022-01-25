@@ -10,7 +10,7 @@ module foundations.embeddings where
 open import foundations.contractible-maps using (is-contr-map-is-equiv)
 open import foundations.contractible-types using
   ( is-contr-equiv; is-contr-total-path)
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundations.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (ex-falso; empty)
 open import foundations.equality-coproduct-types using
@@ -18,19 +18,23 @@ open import foundations.equality-coproduct-types using
 open import foundations.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; equiv-inv; map-equiv; is-equiv-map-equiv;
     id-equiv; map-inv-equiv; inv-equiv; _∘e_; equiv-concat';
-    issec-map-inv-equiv)
+    issec-map-inv-equiv; is-equiv-top-is-equiv-left-square; is-equiv-concat;
+    is-equiv-concat'; is-equiv-comp; is-equiv-right-factor; triangle-section;
+    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-equiv-left-factor;
+    is-equiv-is-empty; sec)
 open import foundations.fibers-of-maps using (fib)
-open import foundations.functions using (id)
+open import foundations.functions using (id; _∘_)
 open import foundations.functoriality-dependent-pair-types using (equiv-tot)
 open import foundations.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundations.homotopies using (_~_)
+  ( fundamental-theorem-id; fundamental-theorem-id-sec)
+open import foundations.homotopies using
+  ( _~_; coherence-square; _·l_; _·r_; _∙h_; htpy-nat; inv-htpy; refl-htpy)
 open import foundations.identity-types using
-  ( inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
-    distributive-inv-concat; con-inv; inv-inv; ap-inv)
+  ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
+    distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; UU; _⊔_)
-open import foundations.identity-types using (Id; refl; ap)
+open import foundations.negation using (¬)
 ```
 
 # Embeddings
@@ -220,7 +224,60 @@ module _
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
 ```
 
-# Embeddings are closed under homotopies
+## Composing and inverting squares horizontally and vertically
+
+```agda
+coherence-square-comp-horizontal :
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (top-left : A → B) (top-right : B → C)
+  (left : A → X) (mid : B → Y) (right : C → Z)
+  (bottom-left : X → Y) (bottom-right : Y → Z) →
+  coherence-square top-left left mid bottom-left →
+  coherence-square top-right mid right bottom-right →
+  coherence-square
+    (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
+coherence-square-comp-horizontal
+  top-left top-right left mid right bottom-left bottom-right sq-left sq-right =
+  (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
+
+coherence-square-inv-horizontal :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A ≃ B) (left : A → X) (right : B → Y) (bottom : X ≃ Y) →
+  coherence-square (map-equiv top) left right (map-equiv bottom) →
+  coherence-square (map-inv-equiv top) right left (map-inv-equiv bottom)
+coherence-square-inv-horizontal top left right bottom H b =
+  map-eq-transpose-equiv' bottom
+    ( ( ap right (inv (issec-map-inv-equiv top b))) ∙
+      ( inv (H (map-inv-equiv top b))))
+
+coherence-square-comp-vertical :
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (top : A → X)
+  (left-top : A → B) (right-top : X → Y)
+  (mid : B → Y)
+  (left-bottom : B → C) (right-bottom : Y → Z)
+  (bottom : C → Z) →
+  coherence-square top left-top right-top mid →
+  coherence-square mid left-bottom right-bottom bottom →
+  coherence-square
+    top (left-bottom ∘ left-top) (right-bottom ∘ right-top) bottom
+coherence-square-comp-vertical
+  top left-top right-top mid left-bottom right-bottom bottom sq-top sq-bottom =
+  (sq-bottom ·r left-top) ∙h (right-bottom ·l sq-top)
+
+coherence-square-inv-vertical :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A → B) (left : A ≃ X) (right : B ≃ Y) (bottom : X → Y) →
+  coherence-square top (map-equiv left) (map-equiv right) bottom →
+  coherence-square bottom (map-inv-equiv left) (map-inv-equiv right) top
+coherence-square-inv-vertical top left right bottom H x =
+  map-eq-transpose-equiv right
+    ( inv (H (map-inv-equiv left x)) ∙ ap bottom (issec-map-inv-equiv left x))
+```
+
+## Embeddings are closed under homotopies
 
 ```agda
 module _
@@ -322,4 +379,46 @@ module _
             ( issec-map-inv-is-equiv is-equiv-e)))
         ( is-equiv-map-inv-is-equiv is-equiv-e)
         ( is-emb-f)
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → C} {g : B → C}
+  where
+
+  is-emb-coprod :
+    is-emb f → is-emb g → ((a : A) (b : B) → ¬ (Id (f a) (g b))) →
+    is-emb (ind-coprod (λ x → C) f g)
+  is-emb-coprod H K L (inl a) (inl a') =
+    is-equiv-left-factor
+      ( ap f)
+      ( ap (ind-coprod (λ x → C) f g))
+      ( ap inl)
+      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inl p)
+      ( H a a')
+      ( is-emb-inl A B a a')
+  is-emb-coprod H K L (inl a) (inr b') =
+    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a b')
+  is-emb-coprod H K L (inr b) (inl a') =
+    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a' b ∘ inv)
+  is-emb-coprod H K L (inr b) (inr b') =
+    is-equiv-left-factor
+      ( ap g)
+      ( ap (ind-coprod (λ x → C) f g))
+      ( ap inr)
+      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inr p)
+      ( K b b')
+      ( is-emb-inr A B b b')
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+  
+  abstract
+    is-emb-sec-ap :
+      ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
+    is-emb-sec-ap sec-ap-f x y =
+      fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
 ```

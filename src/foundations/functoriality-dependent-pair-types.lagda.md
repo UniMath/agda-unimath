@@ -12,13 +12,16 @@ open import foundations.contractible-maps using
 open import foundations.contractible-types using
   ( is-contr-is-equiv; is-contr-is-equiv')
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundations.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; map-equiv; is-equiv-map-equiv;
-    is-equiv-comp; is-equiv-right-factor; is-fiberwise-equiv)
-open import foundations.fibers-of-maps using (fib)
+    is-equiv-comp; is-equiv-right-factor; is-fiberwise-equiv;
+    is-equiv-top-is-equiv-bottom-square; is-equiv-bottom-is-equiv-top-square)
+open import foundations.fibers-of-maps using
+  ( fib; map-equiv-total-fib; is-equiv-map-equiv-total-fib)
 open import foundations.functions using (_∘_; id)
 open import foundations.homotopies using (_~_)
-open import foundations.identity-types using (refl)
+open import foundations.identity-types using (refl; inv)
 open import foundations.levels using (Level; UU; _⊔_)
 ```
 
@@ -64,7 +67,8 @@ module _
   isretr-map-inv-compute-fib-tot .(pair x (f x y)) (pair (pair x y) refl) = refl
 
   abstract
-    is-equiv-map-compute-fib-tot : (t : Σ A C) → is-equiv (map-compute-fib-tot t)
+    is-equiv-map-compute-fib-tot :
+      (t : Σ A C) → is-equiv (map-compute-fib-tot t)
     is-equiv-map-compute-fib-tot t =
       is-equiv-has-inverse
         ( map-inv-compute-fib-tot t)
@@ -87,6 +91,23 @@ module _
   inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) ≃ fib tot t
   pr1 (inv-compute-fib-tot t) = map-inv-compute-fib-tot t
   pr2 (inv-compute-fib-tot t) = is-equiv-map-inv-compute-fib-tot t
+
+tot-htpy :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
+tot-htpy H (pair x y) = eq-pair-Σ refl (H x y)
+
+tot-id :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
+  (tot (λ x (y : B x) → y)) ~ id
+tot-id B (pair x y) = refl
+
+tot-comp :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
+  (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
+  tot (λ x → (g x) ∘ (f x)) ~ ((tot g) ∘ (tot f))
+tot-comp f g (pair x y) = refl
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
@@ -250,4 +271,49 @@ module _
           ( triangle-map-Σ f g)
           ( is-equiv-map-Σ-map-base f D H)
           ( K))
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
+  
+  fib-triangle :
+    (x : X) → (fib f x) → (fib g x)
+  pr1 (fib-triangle .(f a) (pair a refl)) = h a
+  pr2 (fib-triangle .(f a) (pair a refl)) = inv (H a)
+
+  square-tot-fib-triangle :
+    (h ∘ (map-equiv-total-fib f)) ~ (map-equiv-total-fib g ∘ tot fib-triangle)
+  square-tot-fib-triangle (pair .(f a) (pair a refl)) = refl
+
+  abstract
+    is-fiberwise-equiv-is-equiv-triangle :
+      (E : is-equiv h) → is-fiberwise-equiv fib-triangle
+    is-fiberwise-equiv-is-equiv-triangle E =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-top-is-equiv-bottom-square
+          ( map-equiv-total-fib f)
+          ( map-equiv-total-fib g)
+          ( tot fib-triangle)
+          ( h)
+          ( square-tot-fib-triangle)
+          ( is-equiv-map-equiv-total-fib f)
+          ( is-equiv-map-equiv-total-fib g)
+          ( E))
+
+  abstract
+    is-equiv-triangle-is-fiberwise-equiv :
+      is-fiberwise-equiv fib-triangle → is-equiv h
+    is-equiv-triangle-is-fiberwise-equiv E =
+      is-equiv-bottom-is-equiv-top-square
+        ( map-equiv-total-fib f)
+        ( map-equiv-total-fib g)
+        ( tot fib-triangle)
+        ( h)
+        ( square-tot-fib-triangle)
+        ( is-equiv-map-equiv-total-fib f)
+        ( is-equiv-map-equiv-total-fib g)
+        ( is-equiv-tot-is-fiberwise-equiv E)
 ```

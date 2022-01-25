@@ -9,11 +9,14 @@ module foundations.fundamental-theorem-of-identity-types where
 
 open import foundations.contractible-types using
   ( is-contr; is-equiv-is-contr; is-contr-total-path; is-contr-is-equiv';
-    is-contr-equiv; is-contr-Σ)
+    is-contr-equiv; is-contr-Σ; is-contr-retract-of)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.equivalences using (is-equiv; is-fiberwise-equiv)
+open import foundations.equivalences using
+  ( is-equiv; is-fiberwise-equiv; retr; sec; is-equiv-sec-is-equiv)
 open import foundations.functoriality-dependent-pair-types using
-  ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv)
+  ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv;
+    tot-comp; tot-htpy; tot-id)
+open import foundations.homotopies using (inv-htpy; _∙h_)
 open import foundations.identity-types using (Id; ind-Id)
 open import foundations.levels using (Level; UU)
 open import foundations.type-arithmetic-dependent-pair-types using
@@ -71,6 +74,50 @@ module _
         ( tot (ind-Id a (λ x p → B x) b))
         ( is-equiv-tot-is-fiberwise-equiv H)
         ( is-contr-total-path a)
+```
+
+# Retracts of the identity type are equivalent to the identity type
+
+```agda
+module _
+  {i j : Level} {A : UU i} {B : A → UU j} (a : A)
+  where
+
+  abstract
+    fundamental-theorem-id-retr :
+      (i : (x : A) → B x → Id a x) → (R : (x : A) → retr (i x)) →
+      is-fiberwise-equiv i
+    fundamental-theorem-id-retr i R =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-is-contr (tot i)
+          ( is-contr-retract-of (Σ _ (λ y → Id a y))
+            ( pair (tot i)
+              ( pair (tot λ x → pr1 (R x))
+                ( ( inv-htpy (tot-comp i (λ x → pr1 (R x)))) ∙h
+                  ( ( tot-htpy λ x → pr2 (R x)) ∙h (tot-id B)))))
+            ( is-contr-total-path a))
+          ( is-contr-total-path a))
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
+  where
+
+  abstract
+    fundamental-theorem-id-sec :
+      (f : (x : A) → Id a x → B x) → ((x : A) → sec (f x)) →
+      is-fiberwise-equiv f
+    fundamental-theorem-id-sec f sec-f x =
+      is-equiv-sec-is-equiv (f x) (sec-f x) (is-fiberwise-equiv-i x)
+      where
+        i : (x : A) → B x → Id a x
+        i = λ x → pr1 (sec-f x)
+        retr-i : (x : A) → retr (i x)
+        pr1 (retr-i x) = f x
+        pr2 (retr-i x) = pr2 (sec-f x)
+        is-fiberwise-equiv-i : is-fiberwise-equiv i
+        is-fiberwise-equiv-i = fundamental-theorem-id-retr a i retr-i
 ```
 
 ## Structure identity principle

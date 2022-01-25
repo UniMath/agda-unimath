@@ -2,6 +2,10 @@
 title: Univalent Mathematics in Agda
 ---
 
+# Equivalences
+
+In this file we introduce equivalences, and prove some basic properties. Further properties that rely on the fact that equivalences are embeddings are proven in `embeddings`.
+
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
@@ -23,7 +27,7 @@ open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; UU; _⊔_)
 ```
 
-# Equivalences
+## Defining equivalences
 
 ```agda
 module _
@@ -58,10 +62,12 @@ module _
     (retraction-retract-of R ∘ section-retract-of R) ~ id
   is-retr-retraction-retract-of R = pr2 (retr-section-retract-of R)
 
-  -- Definition 9.2.1 (ii)
-  
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = sec f × retr f
+
+_≃_ :
+  {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
+A ≃ B = Σ (A → B) (λ f → is-equiv f)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
@@ -69,10 +75,6 @@ module _
   
   is-fiberwise-equiv : (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
   is-fiberwise-equiv f = (x : A) → is-equiv (f x)
-
-_≃_ :
-  {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
-A ≃ B = Σ (A → B) (λ f → is-equiv f)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -128,14 +130,6 @@ module _
   is-equiv-has-inverse g H K =
     is-equiv-has-inverse' (pair g (pair H K))
 
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  where
-  
-  htpy-section-retraction : (H : is-equiv f) → ((pr1 (pr1 H))) ~ (pr1 (pr2 H))
-  htpy-section-retraction (pair (pair g G) (pair h H)) =
-    (inv-htpy (H ·r g)) ∙h (h ·l G)
-
   has-inverse-is-equiv : is-equiv f → has-inverse f
   pr1 (has-inverse-is-equiv  (pair (pair g G) (pair h H))) = g
   pr1 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) = G
@@ -147,52 +141,53 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : has-inverse f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
   
-  inv-has-inverse : B → A
-  inv-has-inverse = pr1 H
+  inv-has-inverse : has-inverse f → B → A
+  inv-has-inverse H = pr1 H
   
-  issec-inv-has-inverse : (f ∘ inv-has-inverse) ~ id
-  issec-inv-has-inverse y =
-    ( inv (pr1 (pr2 H) (f (inv-has-inverse y)))) ∙
-    ( ap f (pr2 (pr2 H) (inv-has-inverse y)) ∙ (pr1 (pr2 H) y))
+  issec-inv-has-inverse : (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
+  issec-inv-has-inverse H y =
+    ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
+    ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
   
-  isretr-inv-has-inverse : (inv-has-inverse ∘ f) ~ id
-  isretr-inv-has-inverse = pr2 (pr2 H)
+  isretr-inv-has-inverse : (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
+  isretr-inv-has-inverse H = pr2 (pr2 H)
   
   coherence-inv-has-inverse :
-    (issec-inv-has-inverse ·r f) ~ (f ·l isretr-inv-has-inverse)
-  coherence-inv-has-inverse x =
+    (H : has-inverse f) →
+    (issec-inv-has-inverse H ·r f) ~ (f ·l isretr-inv-has-inverse H)
+  coherence-inv-has-inverse H x =
     inv
       ( inv-con
-        ( pr1 (pr2 H) (f (inv-has-inverse (f x))))
+        ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
         ( ap f (pr2 (pr2 H) x))
-        ( (ap f (pr2 (pr2 H) (inv-has-inverse (f x)))) ∙ (pr1 (pr2 H) (f x)))
+        ( (ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙ (pr1 (pr2 H) (f x)))
         ( sq-top-whisk
-          ( pr1 (pr2 H) (f (inv-has-inverse (f x))))
+          ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
           ( ap f (pr2 (pr2 H) x))
-          ( (ap (f ∘ (inv-has-inverse ∘ f)) (pr2 (pr2 H) x)))
-          ( ( ap-comp f (inv-has-inverse ∘ f) (pr2 (pr2 H) x)) ∙
+          ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
+          ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
             ( inv (ap (ap f) (htpy-red (pr2 (pr2 H)) x))))
           ( pr1 (pr2 H) (f x))
           ( htpy-nat (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
 
-  is-coherently-invertible-has-inverse : is-coherently-invertible f
-  pr1 is-coherently-invertible-has-inverse = inv-has-inverse
-  pr1 (pr2 is-coherently-invertible-has-inverse) = issec-inv-has-inverse
-  pr1 (pr2 (pr2 is-coherently-invertible-has-inverse)) = isretr-inv-has-inverse
-  pr2 (pr2 (pr2 is-coherently-invertible-has-inverse)) =
-    coherence-inv-has-inverse
+  is-coherently-invertible-has-inverse :
+    (H : has-inverse f) → is-coherently-invertible f
+  pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
+  pr1 (pr2 (is-coherently-invertible-has-inverse H)) = issec-inv-has-inverse H
+  pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
+    isretr-inv-has-inverse H
+  pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
+    coherence-inv-has-inverse H
 
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  where
-  
   is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
   is-coherently-invertible-is-equiv =
     is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
 ```
+
+## Some useful terminology for equivalences
 
 ```agda
 module _
@@ -247,7 +242,7 @@ module _
   is-equiv-map-inv-equiv : is-equiv map-inv-equiv
   is-equiv-map-inv-equiv = is-equiv-map-inv-is-equiv (is-equiv-map-equiv e)
 
-  inv-equiv : (B ≃ A)
+  inv-equiv : B ≃ A
   pr1 inv-equiv = map-inv-equiv
   pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
@@ -444,6 +439,21 @@ abstract
     is-equiv f  → (g ∘ f) ~ id → is-equiv g
   is-equiv-is-retraction-is-equiv {A = A} {f = f} {g = g} is-equiv-f H =
     is-equiv-left-factor id g f (inv-htpy H) is-equiv-id is-equiv-f
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-sec-is-equiv : (sec-f : sec f) → is-equiv (pr1 sec-f) → is-equiv f
+    is-equiv-sec-is-equiv (pair g issec-g) is-equiv-sec-f =
+      is-equiv-htpy h
+        ( ( f ·l (inv-htpy (issec-map-inv-is-equiv is-equiv-sec-f))) ∙h
+          ( htpy-right-whisk issec-g h))
+        ( is-equiv-map-inv-is-equiv is-equiv-sec-f)
+      where
+      h : A → B
+      h = map-inv-is-equiv is-equiv-sec-f
 
 is-equiv-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
