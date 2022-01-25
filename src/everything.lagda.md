@@ -2,6 +2,8 @@
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 module everything where
 
+open import foundations.1-types
+open import foundations.2-types
 open import foundations.absolute-value-integers
 open import foundations.addition-integers
 open import foundations.addition-natural-numbers
@@ -17,6 +19,7 @@ open import foundations.congruence-natural-numbers
 open import foundations.contractible-maps
 open import foundations.contractible-types
 open import foundations.coproduct-types
+open import foundations.decidable-equality
 open import foundations.decidable-types
 open import foundations.dependent-pair-types
 open import foundations.difference-integers
@@ -71,13 +74,20 @@ open import foundations.multiplication-integers
 open import foundations.multiplication-natural-numbers
 open import foundations.natural-numbers
 open import foundations.negation
+open import foundations.path-split-maps
 open import foundations.primes-natural-numbers
 open import foundations.proper-divisors-natural-numbers
+open import foundations.propositional-maps
 open import foundations.propositions
 open import foundations.raising-universe-levels
+open import foundations.sets
 open import foundations.singleton-induction
 open import foundations.split-surjective-maps
 open import foundations.standard-finite-types
+open import foundations.subtypes
+open import foundations.truncated-maps
+open import foundations.truncated-types
+open import foundations.truncation-levels
 open import foundations.twin-prime-conjecture
 open import foundations.type-arithmetic-cartesian-product-types
 open import foundations.type-arithmetic-coproduct-types

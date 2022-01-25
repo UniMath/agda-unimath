@@ -40,7 +40,7 @@ open import foundations.negation using (¬)
 open import foundations.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
     is-decidable-is-proper-divisor-ℕ; le-is-proper-divisor-ℕ)
-open import foundations.type-arithmetic using
+open import foundations.type-arithmetic-cartesian-product-types using
   ( is-empty-left-factor-is-empty-prod)
 open import foundations.unit-type using (star)
 open import foundations.well-ordering-principle-natural-numbers using
