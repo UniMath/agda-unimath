@@ -8,8 +8,9 @@ title: Univalent Mathematics in Agda
 module foundations.equality-integers where
 
 open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using
-  ( is-decidable; has-decidable-equality; has-decidable-equality-unit)
+open import foundations.decidable-equality using
+  ( has-decidable-equality; has-decidable-equality-unit)
+open import foundations.decidable-types using (is-decidable)
 open import foundations.empty-type using (empty)
 open import foundations.equality-coproduct-types using
   ( has-decidable-equality-coprod)

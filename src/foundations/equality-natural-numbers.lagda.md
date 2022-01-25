@@ -9,8 +9,9 @@ module foundations.equality-natural-numbers where
 
 open import foundations.contractible-types using (is-contr)
 open import foundations.coproduct-types using (inl; inr)
+open import foundations.decidable-equality using (has-decidable-equality)
 open import foundations.decidable-types using
-  ( is-decidable; has-decidable-equality; is-decidable-iff; is-decidable-neg)
+  ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty)
 open import foundations.equivalences using (is-equiv)
@@ -22,6 +23,9 @@ open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
     is-not-one-ℕ)
+open import foundations.propositions using
+  ( is-prop; is-prop-unit; is-prop-empty)
+open import foundations.sets using (is-set; is-set-prop-in-id; UU-Set)
 open import foundations.unit-type using (unit; star)
 ```
 
@@ -36,6 +40,14 @@ Eq-ℕ zero-ℕ (succ-ℕ n) = empty
 Eq-ℕ (succ-ℕ m) zero-ℕ = empty
 Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
 
+abstract
+  is-prop-Eq-ℕ :
+    (n m : ℕ) → is-prop (Eq-ℕ n m)
+  is-prop-Eq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+  is-prop-Eq-ℕ zero-ℕ (succ-ℕ m) = is-prop-empty
+  is-prop-Eq-ℕ (succ-ℕ n) zero-ℕ = is-prop-empty
+  is-prop-Eq-ℕ (succ-ℕ n) (succ-ℕ m) = is-prop-Eq-ℕ n m
+
 refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
 refl-Eq-ℕ zero-ℕ = star
 refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
@@ -46,6 +58,19 @@ Eq-eq-ℕ {x} {.x} refl = refl-Eq-ℕ x
 eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → Id x y
 eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
 eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
+
+abstract
+  is-set-ℕ : is-set ℕ
+  is-set-ℕ =
+    is-set-prop-in-id
+      Eq-ℕ
+      is-prop-Eq-ℕ
+      refl-Eq-ℕ
+      eq-Eq-ℕ
+
+ℕ-Set : UU-Set lzero
+pr1 ℕ-Set = ℕ
+pr2 ℕ-Set = is-set-ℕ
 
 is-decidable-Eq-ℕ :
   (m n : ℕ) → is-decidable (Eq-ℕ m n)

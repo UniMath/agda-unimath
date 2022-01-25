@@ -11,8 +11,8 @@ open import foundations.contractible-types using (is-contr)
 open import foundations.coproduct-types using
   ( coprod; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
     neq-inr-inl)
-open import foundations.decidable-types using
-  ( has-decidable-equality; is-decidable-iff)
+open import foundations.decidable-equality using (has-decidable-equality)
+open import foundations.decidable-types using (is-decidable-iff)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; is-empty)
 open import foundations.equivalences using

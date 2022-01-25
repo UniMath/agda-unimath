@@ -23,8 +23,7 @@ open import foundations.congruence-integers using
 open import foundations.congruence-natural-numbers using
   ( refl-cong-ℕ; congruence-mul-ℕ; eq-cong-nat-Fin)
 open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using
-  ( has-decidable-equality)
+open import foundations.decidable-equality using (has-decidable-equality)
 open import foundations.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)

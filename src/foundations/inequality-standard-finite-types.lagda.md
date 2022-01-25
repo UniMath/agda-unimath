@@ -8,12 +8,15 @@ title: Univalent Mathematics in Agda
 module foundations.inequality-standard-finite-types where
 
 open import foundations.coproduct-types using (inl; inr)
+open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.identity-types using (Id; refl; ap)
 open import foundations.inequality-natural-numbers using
   ( leq-ℕ; leq-le-ℕ; refl-leq-ℕ; contradiction-le-ℕ)
 open import foundations.levels using (UU; lzero)
 open import foundations.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import foundations.propositions using
+  ( is-prop; is-prop-unit; is-prop-empty; UU-Prop)
 open import foundations.standard-finite-types using
   ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
 open import foundations.unit-type using (unit; star)
@@ -26,6 +29,18 @@ leq-Fin : {k : ℕ} → Fin k → Fin k → UU lzero
 leq-Fin {succ-ℕ k} x (inr y) = unit
 leq-Fin {succ-ℕ k} (inl x) (inl y) = leq-Fin x y
 leq-Fin {succ-ℕ k} (inr x) (inl y) = empty
+
+abstract
+  is-prop-leq-Fin :
+    {k : ℕ} (x y : Fin k) → is-prop (leq-Fin x y)
+  is-prop-leq-Fin {succ-ℕ k} (inl x) (inl y) = is-prop-leq-Fin x y
+  is-prop-leq-Fin {succ-ℕ k} (inl x) (inr star) = is-prop-unit
+  is-prop-leq-Fin {succ-ℕ k} (inr star) (inl y) = is-prop-empty
+  is-prop-leq-Fin {succ-ℕ k} (inr star) (inr star) = is-prop-unit
+
+leq-fin-Prop : {k : ℕ} → Fin k → Fin k → UU-Prop lzero
+pr1 (leq-fin-Prop x y) = leq-Fin x y
+pr2 (leq-fin-Prop x y) = is-prop-leq-Fin x y
 
 leq-neg-one-Fin : {k : ℕ} (x : Fin (succ-ℕ k)) → leq-Fin x neg-one-Fin
 leq-neg-one-Fin x = star

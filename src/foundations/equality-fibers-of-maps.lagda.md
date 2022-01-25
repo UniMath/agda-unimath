@@ -12,7 +12,7 @@ open import foundations.equality-dependent-pair-types using
   ( pair-eq-Σ; is-equiv-pair-eq-Σ)
 open import foundations.equivalences using
   ( is-fiberwise-equiv; is-equiv-comp; is-equiv-concat; is-equiv-inv; is-equiv;
-    is-equiv-tr)
+    is-equiv-tr; _≃_)
 open import foundations.fibers-of-maps using (fib)
 open import foundations.functions using (_∘_)
 open import foundations.functoriality-dependent-pair-types using
@@ -77,6 +77,12 @@ module _
         ( is-equiv-pair-eq-Σ s t)
         ( is-equiv-tot-is-fiberwise-equiv
           ( is-fiberwise-equiv-fib-ap-eq-fib-fiberwise s t))
+
+  equiv-fib-ap-eq-fib :
+    (s t : fib f b) →
+    Id s t ≃ fib (ap f {x = pr1 s} {y = pr1 t}) ((pr2 s) ∙ (inv (pr2 t)))
+  pr1 (equiv-fib-ap-eq-fib s t) = fib-ap-eq-fib s t
+  pr2 (equiv-fib-ap-eq-fib s t) = is-equiv-fib-ap-eq-fib s t
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)
