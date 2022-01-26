@@ -9,19 +9,19 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.well-ordering-principle-natural-numbers where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-function-type;
     is-decidable-prod)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.functions using (id; _∘_)
-open import foundations.identity-types using (Id; refl)
+open import foundation.functions using (id; _∘_)
+open import foundation.identity-types using (Id; refl)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
     is-decidable-le-ℕ)
-open import foundations.levels using (UU; Level)
+open import foundation.levels using (UU; Level)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
 open import foundations.negation using (¬)

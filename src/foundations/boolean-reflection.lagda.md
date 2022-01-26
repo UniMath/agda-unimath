@@ -11,8 +11,8 @@ open import foundations.booleans using (bool; true; false; Eq-eq-bool)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using (is-decidable)
 open import foundations.empty-type using (ex-falso)
-open import foundations.identity-types using (Id; refl)
-open import foundations.levels using (Level; UU)
+open import foundation.identity-types using (Id; refl)
+open import foundation.levels using (Level; UU)
 ```
 
 # Boolean reflection

@@ -7,16 +7,16 @@ title: Univalent Mathematics in Agda
 
 module foundations.type-arithmetic-coproduct-types where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr; neq-inl-inr; neq-inr-inl)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (empty; is-empty; ex-falso)
-open import foundations.equivalences using
+open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
-open import foundations.functions using (_∘_; id)
-open import foundations.homotopies using (_~_; refl-htpy)
-open import foundations.identity-types using (refl)
-open import foundations.levels using (Level; UU)
+open import foundation.functions using (_∘_; id)
+open import foundation.homotopies using (_~_; refl-htpy)
+open import foundation.identity-types using (refl)
+open import foundation.levels using (Level; UU)
 ```
 
 # Type arithmetic for coproduct types

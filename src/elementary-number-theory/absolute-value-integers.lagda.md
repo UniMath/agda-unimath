@@ -15,8 +15,8 @@ open import elementary-number-theory.addition-integers using
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.empty-type using (ex-falso)
-open import foundations.functions using (_∘_)
-open import foundations.identity-types using (Id; refl; ap)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (Id; refl; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   (_≤-ℕ_; refl-leq-ℕ; preserves-leq-succ-ℕ; succ-leq-ℕ;
     concatenate-eq-leq-eq-ℕ; transitive-leq-ℕ)

@@ -12,23 +12,23 @@ module elementary-number-theory.divisibility-integers where
 open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ; int-abs-ℤ)
 open import elementary-number-theory.addition-integers using (add-ℤ; ap-add-ℤ)
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; dn-elim-is-decidable)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-eq-ℕ)
 open import foundations.empty-type using (ex-falso)
 open import elementary-number-theory.equality-integers using
   ( Eq-eq-ℤ; has-decidable-equality-ℤ; is-decidable-is-zero-ℤ)
-open import foundations.functions using (_∘_)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap; tr)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; one-ℤ; is-zero-ℤ; neg-ℤ; int-ℕ; is-nonnegative-ℤ; is-one-ℤ;
     is-injective-int-ℕ; is-nonnegative-eq-ℤ; is-nonnegative-int-ℕ; is-neg-one-ℤ;
     neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;

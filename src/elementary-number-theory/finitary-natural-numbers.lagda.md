@@ -15,15 +15,15 @@ open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; concatenate-cong-eq-ℕ; translation-invariant-cong-ℕ';
     eq-cong-le-ℕ; concatenate-cong-eq-cong-ℕ; symm-cong-ℕ)
 open import foundations.coproduct-types using (inl; inr)
-open import foundations.dependent-pair-types using (pair)
+open import foundation.dependent-pair-types using (pair)
 open import foundations.empty-type using (is-empty; ex-falso)
-open import foundations.functions using (_∘_)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( le-ℕ; concatenate-le-leq-ℕ; transitive-leq-ℕ; leq-mul-ℕ; leq-add-ℕ;
     neq-le-ℕ)
-open import foundations.injective-maps using (is-injective)
-open import foundations.levels using (UU; lzero)
+open import foundation.injective-maps using (is-injective)
+open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; commutative-mul-ℕ; is-injective-mul-succ-ℕ; right-unit-law-mul-ℕ;
     right-successor-law-mul-ℕ)

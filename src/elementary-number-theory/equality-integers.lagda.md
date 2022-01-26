@@ -18,11 +18,11 @@ open import foundations.equality-coproduct-types using
   ( has-decidable-equality-coprod)
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ)
-open import foundations.functions using (_∘_)
-open import foundations.identity-types using (Id; refl; ap)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (Id; refl; ap)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import foundations.unit-type using (unit; star)
 ```
 

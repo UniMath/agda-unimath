@@ -10,12 +10,12 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.factorial-natural-numbers where
 
 open import foundations.coproduct-types using (inl; inr)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; transitive-div-ℕ)
 open import foundations.empty-type using (ex-falso)
 open import elementary-number-theory.equality-natural-numbers using (Eq-eq-ℕ)
-open import foundations.identity-types using (refl)
+open import foundation.identity-types using (refl)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; decide-leq-succ-ℕ; leq-zero-ℕ; leq-mul-is-nonzero-ℕ')
 open import elementary-number-theory.multiplication-natural-numbers using

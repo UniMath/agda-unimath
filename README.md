@@ -8,10 +8,19 @@ This repository is for a formalisation project in Agda of the Symmetry Book.
 
 Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
 
-## Structure of the library
+## Design of the library
 
-The Agda source of the library can be found in the folder `src`. This folder contains several subfolders:
-1. The `foundations` folder contains the basics of dependent type theory. Every file in this folder has the options `--safe`, `--exact-split`, and `--without-K` turned on. In particular, there are no postulates in this folder.
+### Structure of the library
+
+1. Files have one single goal. Usually it is to introduce one new concept, one new definition, or to reach one theorem. The contents of the file must be focused on that one concept or theorem. For example, the file `addition-natural-numbers` introduces addition on the natural numbers, and derives its basic properties.
+2. A file name should be a recognizable name or description, usually in the form of a noun or noun phrase, of the topic of that file that is natural, sufficiently precise, concise, and consistent with those of related files. File names are in lower case, with words separated by hyphens. Words in file names should not be abbreviated unless the abbreviated term is a widely accepted mathematical term, e.g., `poset`.
+3. The files are organized by mathematical subject. The folder names describe them.
+4. All the files and folders can be found in the folder `src`.
+
+### Folders in the library
+
+We give brief descriptions of the folders in the library.
+1. The folder named `foundation` contains the core of the library. This folder contains type theory restricted to dependent function types, dependent pair types, cartesian product types, identity types, and universes. Every file in this folder has the options `--safe`, `--exact-split`, and `--without-K` turned on. In particular, there are no postulates in this folder.
 2. The `univalent-foundations` folder extends the type theory of Agda with function extensionality, propositional truncations, and the univalence axiom.
 4. The `categories` folder contains some category theory.
 6. The `the-circle` folder contains the material for Chapter 3.
@@ -27,7 +36,7 @@ Although the folders are roughly organised according to the chapters of the Symm
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
 
-## Library conventions
+### Library conventions
 
 * This style guide is here to improve the readability of the code. If an item
   in this guide causes suboptimal readability of the code if applied, please
@@ -37,7 +46,7 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 * The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
 * The library is universe polymorphic. Whenever a type or type family is assumed, it is assigned its own universe level.
 
-### Names
+#### Names
 
 The naming convention in this library is such that the name of a construction closely matches the type of the construction. For example, the proof that the successor function on the integers is an equivalence has type `is-equiv succ-ℤ`. The name of the proof that the successor function on the integers is an equivalence is therefore `is-equiv-succ-ℤ`. Notice that most names are fully lowercase, and words are separated by hyphens. 
 
@@ -57,7 +66,7 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 * If a symbol is not available, the concept is described in words or abbreviated words. For example, the equality symbol = is not available to the user to assert an equality. Hence, we write Id x y to assert equality, referring to the identity type, and we do not use a new symbol.
 * Readability of the code has a high priority. Therefore we try to aviod subtly different variations of the same symbol.
 
-### Indentation
+#### Indentation
 
 * The contents of a top-level module should have zero indentation.
 * Every subsequent nested scope should then be indented by an additional two spaces.
@@ -65,7 +74,7 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 * If the name of a construction does not fit on a single line with its type declaration, then we start the type declaration on a new line, with an indentation of two additional spaces. If the type specification of a construction then still does not fit on a single line of 80 characters, we start new lines in the type declaration using the same indentation level.
 * Function arrows at line breaks should always go at the end of the line rather than the beginning of the next line.
 
-### Modules
+#### Modules
 
 * As a rule of thumb, there should only be one named module per file.
 * There should always be a single blank line after a module declaration.
@@ -79,7 +88,7 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
     where
   ```
   
-### Layout of `where` blocks
+#### Layout of `where` blocks
 
 * `where` blocks are preferred rather than the `let` construction.
 * `where` blocks should be indented by two spaces and their contents should be aligned with the `where`.
@@ -93,21 +102,21 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
     proof = some-very-long-proof
   ```
 
-### Functions
+#### Functions
 
 * We do not align the arguments or the equality symbol in a function definition.
 * If an argument is unused in a function definition, an underscore may be used.
 * If a clause of a construction does not fit on the same line as the name and variable declaration, we start the definition on a new line with two spaces of additional indentation
 
-### Types
+#### Types
 
 * Function arguments should be implicit if they can "almost always" be inferred within proofs. It is often harder for Agda to infer an argument in a type declaration, but we prioritize usage in proofs in our decision to make an argument implicit.
 * If there are lots of implicit arguments that are common to a collection of proofs they should be extracted by using an anonymous module.
 * The library doesn't use variables at the moment. All variables are declared either as parameters of an anonymous module or in the type declaration of a construction.
 
-## Coding sample
+### Coding sample
 
-### Characterizing identity types
+#### Characterizing identity types
 
 Identity types are characterized using `fundamental-theorem-id`, which can be found in `foundations.11-fundamental-theorem`. This theorem uses an implicit family `B` over a type `a`. The user must provide four arguments:
 

@@ -7,11 +7,12 @@ title: Univalent Mathematics in Agda
 
 module foundations.lists where
 
-open import foundations.addition-natural-numbers using (add-ℕ)
-open import foundations.functions using (id; _∘_)
-open import foundations.levels using (UU; Level)
-open import foundations.multiplication-natural-numbers using (mul-ℕ)
-open import foundations.natural-numbers using (ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
+open import foundation.functions using (id; _∘_)
+open import foundation.levels using (UU; Level)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( mul-ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ)
 ```
 
 ```agda

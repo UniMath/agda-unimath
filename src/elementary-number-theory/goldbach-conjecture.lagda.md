@@ -10,13 +10,13 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.goldbach-conjecture where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import foundations.cartesian-product-types using (_×_)
-open import foundations.dependent-pair-types using (Σ)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (Σ)
 open import
   elementary-number-theory.divisibility-natural-numbers using (is-even-ℕ)
-open import foundations.identity-types using (Id)
+open import foundation.identity-types using (Id)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ)
 open import elementary-number-theory.primes-natural-numbers using (is-prime-ℕ)
 ```

@@ -11,10 +11,10 @@ module elementary-number-theory.classical-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers using
   ( eq-cong-le-ℕ)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.identity-types using (Id; refl)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.identity-types using (Id; refl)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mod-succ-ℕ; issec-nat-Fin; cong-nat-mod-succ-ℕ)

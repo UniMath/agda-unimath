@@ -9,14 +9,14 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.finitely-cyclic-maps where
 
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.equivalences using (is-equiv; is-equiv-has-inverse)
-open import foundations.functions using (id; _∘_)
-open import foundations.homotopies using (_~_)
-open import foundations.identity-types using (Id; _∙_; inv; ap)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
+open import foundation.functions using (id; _∘_)
+open import foundation.homotopies using (_~_)
+open import foundation.identity-types using (Id; _∙_; inv; ap)
 open import elementary-number-theory.iterating-functions using
   ( iterate; iterate-succ-ℕ; iterate-iterate)
-open import foundations.levels using (Level; UU)
+open import foundation.levels using (Level; UU)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin; mod-succ-ℕ; right-unit-law-add-Fin; right-successor-law-add-Fin;

@@ -15,11 +15,11 @@ open import elementary-number-theory.addition-integers using
     right-predecessor-law-add-ℤ; left-predecessor-law-add-ℤ;
     right-successor-law-add-ℤ; distributive-neg-add-ℤ; commutative-add-ℤ;
     left-successor-law-add-ℤ; interchange-law-add-add-ℤ)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import elementary-number-theory.integers using
   ( ℤ; neg-ℤ; is-zero-ℤ; zero-ℤ; succ-ℤ; pred-ℤ; issec-pred-ℤ;
     neg-succ-ℤ; neg-pred-ℤ; neg-neg-ℤ)
-open import foundations.laws-for-operations using
+open import foundation.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 
 ```

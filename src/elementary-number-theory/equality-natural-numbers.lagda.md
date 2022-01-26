@@ -9,26 +9,25 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.equality-natural-numbers where
 
-open import foundations.contractible-types using (is-contr)
+open import foundation.contractible-types using (is-contr)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-equality using (has-decidable-equality)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (empty)
-open import foundations.equivalences using (is-equiv)
-open import foundations.functions using (id)
-open import foundations.fundamental-theorem-of-identity-types using
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.empty-type using (empty; is-prop-empty)
+open import foundation.equivalences using (is-equiv)
+open import foundation.functions using (id)
+open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundations.identity-types using (Id; refl; ap)
-open import foundations.levels using (UU; lzero)
+open import foundation.identity-types using (Id; refl; ap)
+open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
     is-not-one-ℕ)
-open import foundations.propositions using
-  ( is-prop; is-prop-unit; is-prop-empty)
-open import foundations.sets using (is-set; is-set-prop-in-id; UU-Set)
-open import foundations.unit-type using (unit; star)
+open import foundation.propositions using (is-prop)
+open import foundation.sets using (is-set; is-set-prop-in-id; UU-Set)
+open import foundations.unit-type using (unit; star; is-prop-unit)
 ```
 
 # Equality on the natural numbers

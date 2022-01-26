@@ -9,27 +9,28 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.primes-natural-numbers where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg; is-decidable-iff;
     is-decidable-function-type)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-one-ℕ; leq-div-succ-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
     transitive-div-ℕ; is-one-is-divisor-below-ℕ)
-open import foundations.empty-type using (ex-falso)
+open import foundations.empty-type using
+  ( ex-falso; is-empty-left-factor-is-empty-prod)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-one-ℕ; Eq-eq-ℕ; is-decidable-is-zero-ℕ)
 open import elementary-number-theory.factorial-natural-numbers using
   ( factorial-ℕ; div-factorial-ℕ; leq-factorial-ℕ)
-open import foundations.functions using (id)
-open import foundations.identity-types using (refl; _∙_; inv)
+open import foundation.functions using (id)
+open import foundation.identity-types using (refl; _∙_; inv)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; is-decidable-le-ℕ; is-decidable-leq-ℕ;
     is-zero-leq-zero-ℕ; concatenate-leq-le-ℕ; le-succ-ℕ;
     is-nonzero-le-ℕ; neq-le-ℕ; contradiction-le-ℕ; leq-not-le-ℕ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import foundations.logical-equivalence using (_↔_)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
@@ -43,8 +44,6 @@ open import foundations.negation using (¬)
 open import elementary-number-theory.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
     is-decidable-is-proper-divisor-ℕ; le-is-proper-divisor-ℕ)
-open import foundations.type-arithmetic-cartesian-product-types using
-  ( is-empty-left-factor-is-empty-prod)
 open import foundations.unit-type using (star)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using

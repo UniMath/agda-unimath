@@ -9,18 +9,18 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.proper-divisors-natural-numbers where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-zero-ℕ; leq-div-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ)
-open import foundations.identity-types using (Id)
+open import foundation.identity-types using (Id)
 open import elementary-number-theory.inequality-natural-numbers using
   ( le-ℕ; le-leq-neq-ℕ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)

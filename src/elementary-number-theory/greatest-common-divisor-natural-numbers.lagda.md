@@ -11,12 +11,12 @@ module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
     is-decidable-neg; dn-elim-is-decidable)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
@@ -30,12 +30,12 @@ open import elementary-number-theory.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
     eq-quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ;
     strict-upper-bound-remainder-euclidean-division-ℕ)
-open import foundations.functoriality-cartesian-product-types using (map-prod)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.functoriality-cartesian-product-types using (map-prod)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
     contradiction-le-ℕ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import foundations.logical-equivalence using (_↔_)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)

@@ -7,27 +7,27 @@ title: Univalent Mathematics in Agda
 
 module foundations.equality-coproduct-types where
 
-open import foundations.contractible-types using
+open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path)
 open import foundations.coproduct-types using
   ( coprod; inl; inr; ind-coprod;
     is-injective-inl; is-injective-inr; neq-inl-inr; neq-inr-inl)
 open import foundations.decidable-equality using (has-decidable-equality)
 open import foundations.decidable-types using (is-decidable-iff)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.embeddings using (is-emb; _↪_)
-open import foundations.empty-type using (empty; is-empty)
-open import foundations.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; _∘e_; map-equiv; is-equiv-is-empty';
-    is-equiv-left-factor; is-equiv-is-empty)
-open import foundations.functions using (_∘_; id)
-open import foundations.functoriality-dependent-pair-types using (equiv-tot)
-open import foundations.fundamental-theorem-of-identity-types using
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (is-emb; _↪_)
+open import foundations.empty-type using
+  ( empty; is-empty; is-equiv-is-empty'; is-equiv-is-empty)
+open import foundation.equivalences using
+  ( is-equiv; _≃_; is-equiv-has-inverse; _∘e_; map-equiv; is-equiv-left-factor)
+open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundations.homotopies using (_~_)
-open import foundations.levels using (Level; UU; _⊔_)
-open import foundations.identity-types using (Id; refl; ap; ap-comp; inv)
-open import foundations.injective-maps using (is-injective)
+open import foundation.homotopies using (_~_)
+open import foundation.identity-types using (Id; refl; ap; ap-comp; inv)
+open import foundation.injective-maps using (is-injective)
+open import foundation.levels using (Level; UU; _⊔_)
 open import foundations.negation using (¬)
 ```
 

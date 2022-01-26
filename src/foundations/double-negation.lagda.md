@@ -7,12 +7,12 @@ title: Univalent Mathematics in Agda
 
 module foundations.double-negation where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.empty-type using (ex-falso)
-open import foundations.functions using (_∘_)
-open import foundations.levels using (Level; UU)
+open import foundation.functions using (_∘_)
+open import foundation.levels using (Level; UU)
 open import foundations.negation using (¬; functor-neg)
 ```
 

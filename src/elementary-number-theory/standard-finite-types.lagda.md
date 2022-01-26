@@ -9,29 +9,30 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.standard-finite-types where
 
-open import foundations.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-unit; is-not-contractible;
-    is-not-contractible-empty; eq-is-contr')
+open import foundation.contractible-types using
+  ( is-contr; is-contr-equiv; eq-is-contr')
 open import foundations.coproduct-types using (coprod; inl; inr; neq-inl-inr)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.embeddings using (_↪_)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (_↪_)
 open import foundations.empty-type using (empty; ex-falso)
 open import foundations.equality-coproduct-types using (is-emb-inl)
-open import foundations.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
-open import foundations.functions using (_∘_; id)
-open import foundations.homotopies using (_~_)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
+open import foundation.functions using (_∘_; id)
+open import foundation.homotopies using (_~_)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.injective-maps using (is-injective)
+open import foundation.levels using (UU; lzero)
+open import foundations.non-contractible-types using
+  ( is-not-contractible; is-not-contractible-empty)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
     leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
-open import foundations.injective-maps using (is-injective)
-open import foundations.levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
 open import foundations.negation using (¬; functor-neg)
-open import foundations.unit-type using (unit; star)
+open import foundations.unit-type using (unit; star; is-contr-unit)
 ```
 
 # The standard finite types

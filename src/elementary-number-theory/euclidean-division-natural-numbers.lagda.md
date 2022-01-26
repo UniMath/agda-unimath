@@ -11,14 +11,14 @@ module elementary-number-theory.euclidean-division-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; left-unit-law-add-ℕ)
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; refl-cong-ℕ; symm-cong-ℕ)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; symmetric-dist-ℕ; is-difference-dist-ℕ')
 open import foundations.empty-type using (ex-falso)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using

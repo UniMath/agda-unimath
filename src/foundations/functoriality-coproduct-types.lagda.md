@@ -8,12 +8,12 @@ title: Univalent Mathematics in Agda
 module foundations.functoriality-coproduct-types where
 
 open import foundations.coproduct-types using (coprod; inl; inr)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
-open import foundations.equivalences using (is-equiv; _≃_)
-open import foundations.functions using (id; _∘_)
-open import foundations.homotopies using (_~_; inv-htpy; _∙h_)
-open import foundations.identity-types using (refl; ap)
-open import foundations.levels using (Level; UU)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.functions using (id; _∘_)
+open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
+open import foundation.identity-types using (refl; ap)
+open import foundation.levels using (Level; UU)
 ```
 
 # Functoriality of coproduct types

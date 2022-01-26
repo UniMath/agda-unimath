@@ -9,13 +9,13 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.addition-natural-numbers where
 
-open import foundations.cartesian-product-types using (_×_)
-open import foundations.dependent-pair-types using (pair)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (pair)
 open import foundations.empty-type using (ex-falso)
-open import foundations.functions using (id)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundations.injective-maps using (is-injective)
-open import foundations.laws-for-operations using
+open import foundation.functions using (id)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.injective-maps using (is-injective)
+open import foundation.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ)

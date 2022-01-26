@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.binary-relations where
 
-open import foundations.levels using (UU; Level; _⊔_)
+open import foundation.levels using (UU; Level; _⊔_)
 ```
 
 # Properties of binary relations

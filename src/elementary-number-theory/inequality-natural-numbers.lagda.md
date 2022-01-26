@@ -11,15 +11,15 @@ module elementary-number-theory.inequality-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr)
 open import foundations.decidable-types using (is-decidable)
-open import foundations.dependent-pair-types using (pair)
+open import foundation.dependent-pair-types using (pair)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.functions using (id; _∘_)
+open import foundation.functions using (id; _∘_)
 open import foundations.functoriality-coproduct-types using (map-coprod)
-open import foundations.identity-types using (Id; refl; inv; ap; tr)
-open import foundations.levels using (UU; lzero)
+open import foundation.identity-types using (Id; refl; inv; ap; tr)
+open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; commutative-mul-ℕ; right-unit-law-mul-ℕ; right-zero-law-mul-ℕ;
     right-successor-law-mul-ℕ)

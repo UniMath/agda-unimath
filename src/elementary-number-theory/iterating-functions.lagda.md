@@ -11,8 +11,8 @@ module elementary-number-theory.iterating-functions where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap)
-open import foundations.levels using (Level; UU)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.levels using (Level; UU)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 ```
 

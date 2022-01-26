@@ -12,13 +12,13 @@ module elementary-number-theory.divisibility-standard-finite-types where
 open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; concatenate-eq-cong-ℕ; scalar-invariant-cong-ℕ; symm-cong-ℕ)
 open import foundations.decidable-types using (is-decidable)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( right-unit-law-dist-ℕ)
 open import elementary-number-theory.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
-open import foundations.identity-types using (Id; _∙_; inv; ap)
-open import foundations.levels using (UU; lzero)
+open import foundation.identity-types using (Id; _∙_; inv; ap)
+open import foundation.levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin; mul-Fin'; left-unit-law-mul-Fin; associative-mul-Fin;

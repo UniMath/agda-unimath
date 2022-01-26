@@ -7,13 +7,13 @@ title: Univalent Mathematics in Agda
 
 module foundations.decidable-types where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (coprod; inl; inr; ind-coprod)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundations.double-negation using (¬¬)
 open import foundations.empty-type using (empty; ex-falso)
-open import foundations.functions using (id; _∘_)
-open import foundations.levels using (UU; Level; _⊔_)
+open import foundation.functions using (id; _∘_)
+open import foundation.levels using (UU; Level; _⊔_)
 open import foundations.negation using (¬; functor-neg)
 open import foundations.unit-type using (unit; star)
 ```

@@ -12,17 +12,17 @@ module elementary-number-theory.addition-integers where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
 open import foundations.coproduct-types using (inl; inr)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
-open import foundations.equivalences using (is-equiv; _≃_)
-open import foundations.functions using (_∘_)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundations.injective-maps using (is-injective)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.injective-maps using (is-injective)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; succ-ℤ; pred-ℤ; isretr-pred-ℤ;
     issec-pred-ℤ; neg-ℤ; pred-neg-ℤ; neg-pred-ℤ; in-pos; in-neg;
     is-nonnegative-ℤ; is-nonnegative-succ-ℤ; is-positive-ℤ; is-positive-succ-ℤ;
     is-nonnegative-is-positive-ℤ; int-ℕ; succ-int-ℕ; is-zero-ℤ)
-open import foundations.laws-for-operations using
+open import foundation.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundations.unit-type using (star)

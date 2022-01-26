@@ -11,16 +11,16 @@ module
   elementary-number-theory.well-ordering-principle-standard-finite-types
   where
 
-open import foundations.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_)
 open import foundations.coproduct-types using (inl; inr; ind-coprod)
 open import foundations.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
-open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (ex-falso; ind-empty)
-open import foundations.functions using (_∘_)
+open import foundation.functions using (_∘_)
 open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin; leq-neg-one-Fin; refl-leq-Fin)
-open import foundations.levels using (Level; UU)
+open import foundation.levels using (Level; UU)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; inl-Fin; neg-one-Fin)

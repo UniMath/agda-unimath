@@ -26,22 +26,22 @@ open import elementary-number-theory.congruence-natural-numbers using
   ( refl-cong-ℕ; congruence-mul-ℕ; eq-cong-nat-Fin)
 open import foundations.coproduct-types using (inl; inr)
 open import foundations.decidable-equality using (has-decidable-equality)
-open import foundations.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)
 open import elementary-number-theory.equality-integers using
   ( has-decidable-equality-ℤ)
 open import elementary-number-theory.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
-open import foundations.equivalences using (is-equiv; _≃_)
-open import foundations.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundations.injective-maps using
+open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.injective-maps using
   ( is-injective; is-injective-id; is-injective-comp')
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
     is-equiv-pred-ℤ; is-equiv-neg-ℤ)
-open import foundations.levels using (UU; lzero)
+open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; left-zero-law-mul-ℤ;
