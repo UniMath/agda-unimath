@@ -7,6 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundations.coproduct-types where
 
+open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.identity-types using (Id; refl)
 open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; lzero; _⊔_; UU)

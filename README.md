@@ -11,7 +11,7 @@ Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
 ## Structure of the library
 
 The Agda source of the library can be found in the folder `src`. This folder contains several subfolders:
-1. The `foundations` folder contains the basics of dependent type theory. This part of the formalisation runs in `--safe` agda.
+1. The `foundations` folder contains the basics of dependent type theory. Every file in this folder has the options `--safe`, `--exact-split`, and `--without-K` turned on. In particular, there are no postulates in this folder.
 2. The `univalent-foundations` folder extends the type theory of Agda with function extensionality, propositional truncations, and the univalence axiom.
 4. The `categories` folder contains some category theory.
 6. The `the-circle` folder contains the material for Chapter 3.

@@ -7,22 +7,26 @@ title: Univalent Mathematics in Agda
 
 module foundations.equality-coproduct-types where
 
-open import foundations.contractible-types using (is-contr)
+open import foundations.contractible-types using
+  ( is-contr; is-contr-equiv; is-contr-total-path)
 open import foundations.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
-    neq-inr-inl)
+  ( coprod; inl; inr; ind-coprod;
+    is-injective-inl; is-injective-inr; neq-inl-inr; neq-inr-inl)
 open import foundations.decidable-equality using (has-decidable-equality)
 open import foundations.decidable-types using (is-decidable-iff)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundations.embeddings using (is-emb; _↪_)
 open import foundations.empty-type using (empty; is-empty)
 open import foundations.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; _∘e_; map-equiv; is-equiv-is-empty')
+  ( is-equiv; _≃_; is-equiv-has-inverse; _∘e_; map-equiv; is-equiv-is-empty';
+    is-equiv-left-factor; is-equiv-is-empty)
 open import foundations.functions using (_∘_; id)
+open import foundations.functoriality-dependent-pair-types using (equiv-tot)
 open import foundations.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundations.homotopies using (_~_)
 open import foundations.levels using (Level; UU; _⊔_)
-open import foundations.identity-types using (Id; refl; ap)
+open import foundations.identity-types using (Id; refl; ap; ap-comp; inv)
 open import foundations.injective-maps using (is-injective)
 open import foundations.negation using (¬)
 ```
@@ -226,4 +230,70 @@ module _
 
     map-compute-eq-coprod-inr-inr : Id {A = coprod A B} (inr x) (inr y) → Id x y
     map-compute-eq-coprod-inr-inr = map-equiv compute-eq-coprod-inr-inr
+```
+
+## The left and right inclusions into a coproduct are embeddings
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+  
+  abstract
+    is-emb-inl : is-emb (inl {A = A} {B = B})
+    is-emb-inl x =
+      fundamental-theorem-id x refl
+        ( is-contr-equiv
+          ( Σ A (Id x))
+          ( equiv-tot (compute-eq-coprod-inl-inl x))
+          ( is-contr-total-path x))
+        ( λ y → ap inl)
+
+  emb-inl : A ↪ coprod A B
+  pr1 emb-inl = inl
+  pr2 emb-inl = is-emb-inl
+
+  abstract
+    is-emb-inr : is-emb (inr {A = A} {B = B})
+    is-emb-inr x =
+      fundamental-theorem-id x refl
+        ( is-contr-equiv
+          ( Σ B (Id x))
+          ( equiv-tot (compute-eq-coprod-inr-inr x))
+          ( is-contr-total-path x))
+        ( λ y → ap inr)
+
+  emb-inr : B ↪ coprod A B
+  pr1 emb-inr = inr
+  pr2 emb-inr = is-emb-inr
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → C} {g : B → C}
+  where
+
+  is-emb-coprod :
+    is-emb f → is-emb g → ((a : A) (b : B) → ¬ (Id (f a) (g b))) →
+    is-emb (ind-coprod (λ x → C) f g)
+  is-emb-coprod H K L (inl a) (inl a') =
+    is-equiv-left-factor
+      ( ap f)
+      ( ap (ind-coprod (λ x → C) f g))
+      ( ap inl)
+      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inl p)
+      ( H a a')
+      ( is-emb-inl A B a a')
+  is-emb-coprod H K L (inl a) (inr b') =
+    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a b')
+  is-emb-coprod H K L (inr b) (inl a') =
+    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a' b ∘ inv)
+  is-emb-coprod H K L (inr b) (inr b') =
+    is-equiv-left-factor
+      ( ap g)
+      ( ap (ind-coprod (λ x → C) f g))
+      ( ap inr)
+      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inr p)
+      ( K b b')
+      ( is-emb-inr A B b b')
 ```

@@ -10,11 +10,8 @@ module foundations.embeddings where
 open import foundations.contractible-maps using (is-contr-map-is-equiv)
 open import foundations.contractible-types using
   ( is-contr-equiv; is-contr-total-path)
-open import foundations.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundations.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundations.empty-type using (ex-falso; empty)
-open import foundations.equality-coproduct-types using
-  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
 open import foundations.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; equiv-inv; map-equiv; is-equiv-map-equiv;
     id-equiv; map-inv-equiv; inv-equiv; _∘e_; equiv-concat';
@@ -32,7 +29,6 @@ open import foundations.homotopies using
 open import foundations.identity-types using
   ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
     distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp)
-open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; UU; _⊔_)
 open import foundations.negation using (¬)
 ```
@@ -64,12 +60,6 @@ module _
   equiv-ap-emb : (e : A ↪ B) {x y : A} → Id x y ≃ Id (map-emb e x) (map-emb e y)
   pr1 (equiv-ap-emb e {x} {y}) = ap (map-emb e)
   pr2 (equiv-ap-emb e {x} {y}) = is-emb-map-emb e x y
-
-  is-injective-is-emb : {f : A → B} → is-emb f → is-injective f
-  is-injective-is-emb is-emb-f {x} {y} = map-inv-is-equiv (is-emb-f x y)
-
-  is-injective-emb : (e : A ↪ B) → is-injective (map-emb e)
-  is-injective-emb e {x} {y} = map-inv-is-equiv (is-emb-map-emb e x y)
 
   is-emb-is-equiv : {f : A → B} → is-equiv f → is-emb f
   is-emb-is-equiv {f} is-equiv-f x =
@@ -114,42 +104,6 @@ module _
   ex-falso-emb : empty ↪ A
   pr1 ex-falso-emb = ex-falso
   pr2 ex-falso-emb = is-emb-ex-falso
-```
-
-## The left and right inclusions into a coproduct are embeddings
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
-  where
-  
-  abstract
-    is-emb-inl : is-emb (inl {A = A} {B = B})
-    is-emb-inl x =
-      fundamental-theorem-id x refl
-        ( is-contr-equiv
-          ( Σ A (Id x))
-          ( equiv-tot (compute-eq-coprod-inl-inl x))
-          ( is-contr-total-path x))
-        ( λ y → ap inl)
-
-  emb-inl : A ↪ coprod A B
-  pr1 emb-inl = inl
-  pr2 emb-inl = is-emb-inl
-
-  abstract
-    is-emb-inr : is-emb (inr {A = A} {B = B})
-    is-emb-inr x =
-      fundamental-theorem-id x refl
-        ( is-contr-equiv
-          ( Σ B (Id x))
-          ( equiv-tot (compute-eq-coprod-inr-inr x))
-          ( is-contr-total-path x))
-        ( λ y → ap inr)
-
-  emb-inr : B ↪ coprod A B
-  pr1 emb-inr = inr
-  pr2 emb-inr = is-emb-inr
 ```
 
 ## Transposing equalities along equivalences
@@ -379,36 +333,6 @@ module _
             ( issec-map-inv-is-equiv is-equiv-e)))
         ( is-equiv-map-inv-is-equiv is-equiv-e)
         ( is-emb-f)
-```
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → C} {g : B → C}
-  where
-
-  is-emb-coprod :
-    is-emb f → is-emb g → ((a : A) (b : B) → ¬ (Id (f a) (g b))) →
-    is-emb (ind-coprod (λ x → C) f g)
-  is-emb-coprod H K L (inl a) (inl a') =
-    is-equiv-left-factor
-      ( ap f)
-      ( ap (ind-coprod (λ x → C) f g))
-      ( ap inl)
-      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inl p)
-      ( H a a')
-      ( is-emb-inl A B a a')
-  is-emb-coprod H K L (inl a) (inr b') =
-    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a b')
-  is-emb-coprod H K L (inr b) (inl a') =
-    is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a' b ∘ inv)
-  is-emb-coprod H K L (inr b) (inr b') =
-    is-equiv-left-factor
-      ( ap g)
-      ( ap (ind-coprod (λ x → C) f g))
-      ( ap inr)
-      ( λ p → ap-comp (ind-coprod (λ x → C) f g) inr p)
-      ( K b b')
-      ( is-emb-inr A B b b')
 ```
 
 ```agda

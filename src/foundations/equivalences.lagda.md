@@ -23,7 +23,6 @@ open import foundations.homotopies using
 open import foundations.identity-types using
   ( Id; refl; concat; concat'; _∙_; inv; ap; tr; inv-inv; inv-con; con-inv;
     right-unit; sq-top-whisk; ap-comp)
-open import foundations.injective-maps using (is-injective)
 open import foundations.levels using (Level; UU; _⊔_)
 ```
 
@@ -245,38 +244,6 @@ module _
   inv-equiv : B ≃ A
   pr1 inv-equiv = map-inv-equiv
   pr2 inv-equiv = is-equiv-map-inv-equiv
-```
-
-## Equivalences are injective
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
-    is-injective-is-equiv H {x} {y} p =
-      ( inv (isretr-map-inv-is-equiv H x)) ∙
-      ( ( ap (map-inv-is-equiv H) p) ∙
-        ( isretr-map-inv-is-equiv H y))
-
-  abstract
-    is-injective-map-equiv : (e : A ≃ B) → is-injective (map-equiv e)
-    is-injective-map-equiv (pair f H) = is-injective-is-equiv H
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-  
-  abstract
-    is-injective-map-inv-equiv : (e : A ≃ B) → is-injective (map-inv-equiv e)
-    is-injective-map-inv-equiv e =
-      is-injective-is-equiv (is-equiv-map-inv-equiv e)
-
-  is-equiv-is-injective : {f : A → B} → sec f → is-injective f → is-equiv f
-  is-equiv-is-injective {f} (pair g G) H =
-    is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```
 
 ## Equivalences are closed under homotopies
