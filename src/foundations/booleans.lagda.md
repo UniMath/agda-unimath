@@ -15,6 +15,9 @@ open import foundations.homotopies using (_~_)
 open import foundations.identity-types using (Id; refl; inv)
 open import foundations.levels using (lzero; UU)
 open import foundations.negation using (¬)
+open import foundations.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundations.propositions using
+  ( is-prop; is-prop-unit; is-prop-empty)
 open import foundations.unit-type using (unit; star)
 ```
 
@@ -103,4 +106,28 @@ abstract
     neq-false-true-bool (inv (G false))
   not-equiv-const false (pair (pair g G) (pair h H)) =
     neq-false-true-bool (G true)
+```
+
+## The booleans are a set
+
+```agda
+abstract
+  is-prop-Eq-bool : (x y : bool) → is-prop (Eq-bool x y)
+  is-prop-Eq-bool true true = is-prop-unit
+  is-prop-Eq-bool true false = is-prop-empty
+  is-prop-Eq-bool false true = is-prop-empty
+  is-prop-Eq-bool false false = is-prop-unit
+
+abstract
+  is-set-bool : is-set bool
+  is-set-bool =
+    is-set-prop-in-id
+      ( Eq-bool)
+      ( is-prop-Eq-bool)
+      ( refl-Eq-bool)
+      ( λ x y → eq-Eq-bool)
+
+bool-Set : UU-Set lzero
+pr1 bool-Set = bool
+pr2 bool-Set = is-set-bool
 ```
