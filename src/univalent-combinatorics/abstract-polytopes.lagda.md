@@ -46,7 +46,7 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
                         ( succ-Fin (inl-Fin k i))
                         ( z)
                         ( y)))
-                ( two-ℕ))))
+                ( 2))))
 
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)

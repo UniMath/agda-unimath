@@ -812,7 +812,7 @@ abstract
 abstract
   is-equiv-is-coherently-invertible-is-equiv :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-equiv (is-coherently-invertible-is-equiv f)
+    is-equiv (is-coherently-invertible-is-equiv {f = f})
   is-equiv-is-coherently-invertible-is-equiv f =
     is-equiv-is-prop
       ( is-subtype-is-equiv f)
@@ -1324,7 +1324,7 @@ le-zero-ℕ zero-ℕ ()
 le-zero-ℕ (succ-ℕ m) ()
 
 le-one-ℕ :
-  (n : ℕ) → le-ℕ (succ-ℕ n) one-ℕ → empty
+  (n : ℕ) → le-ℕ (succ-ℕ n) 1 → empty
 le-one-ℕ zero-ℕ ()
 le-one-ℕ (succ-ℕ n) ()
 
@@ -1703,7 +1703,7 @@ is-prop-is-one-Fin :
 is-prop-is-one-Fin {k} x = is-set-Fin (succ-ℕ k) x one-Fin
 
 is-prop-is-zero-or-one-Fin-two-ℕ :
-  (x : Fin two-ℕ) → is-prop (coprod (is-zero-Fin x) (is-one-Fin x))
+  (x : Fin 2) → is-prop (coprod (is-zero-Fin x) (is-one-Fin x))
 is-prop-is-zero-or-one-Fin-two-ℕ x =
   is-prop-coprod
     ( λ p q → Eq-Fin-eq (inv p ∙ q))
@@ -1711,30 +1711,30 @@ is-prop-is-zero-or-one-Fin-two-ℕ x =
     ( is-prop-is-one-Fin x)
 
 is-contr-is-zero-or-one-Fin-two-ℕ :
-  (x : Fin two-ℕ) → is-contr (coprod (is-zero-Fin x) (is-one-Fin x))
+  (x : Fin 2) → is-contr (coprod (is-zero-Fin x) (is-one-Fin x))
 is-contr-is-zero-or-one-Fin-two-ℕ x =
   is-proof-irrelevant-is-prop
     ( is-prop-is-zero-or-one-Fin-two-ℕ x)
     ( is-zero-or-one-Fin-two-ℕ x)
 
--- We express coproducts as Σ-types over Fin two-ℕ
+-- We express coproducts as Σ-types over Fin 2
 
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
   
   fam-coprod :
-    Fin two-ℕ → UU (l1 ⊔ l2)
+    Fin 2  → UU (l1 ⊔ l2)
   fam-coprod (inl (inr star)) = raise l2 A
   fam-coprod (inr star) = raise l1 B
   
   map-compute-total-fam-coprod :
-    Σ (Fin two-ℕ) fam-coprod → coprod A B
+    Σ (Fin 2) fam-coprod → coprod A B
   map-compute-total-fam-coprod (pair (inl (inr star)) y) = inl (map-inv-raise y)
   map-compute-total-fam-coprod (pair (inr star) y) = inr (map-inv-raise y)
 
   map-inv-compute-total-fam-coprod :
-    coprod A B → Σ (Fin two-ℕ) fam-coprod
+    coprod A B → Σ (Fin 2) fam-coprod
   pr1 (map-inv-compute-total-fam-coprod (inl x)) = zero-Fin
   pr2 (map-inv-compute-total-fam-coprod (inl x)) = map-raise x
   pr1 (map-inv-compute-total-fam-coprod (inr x)) = one-Fin
@@ -1763,12 +1763,12 @@ module _
       isretr-map-inv-compute-total-fam-coprod
   
   compute-total-fam-coprod :
-    (Σ (Fin two-ℕ) fam-coprod) ≃ coprod A B
+    (Σ (Fin 2) fam-coprod) ≃ coprod A B
   pr1 compute-total-fam-coprod = map-compute-total-fam-coprod
   pr2 compute-total-fam-coprod = is-equiv-map-compute-total-fam-coprod
 
   inv-compute-total-fam-coprod :
-    coprod A B ≃ Σ (Fin two-ℕ) fam-coprod
+    coprod A B ≃ Σ (Fin 2) fam-coprod
   inv-compute-total-fam-coprod =
     inv-equiv compute-total-fam-coprod
   
@@ -1778,7 +1778,7 @@ module _
 
   type-distributive-Π-coprod : UU (l1 ⊔ l2 ⊔ l3)
   type-distributive-Π-coprod =
-    Σ ( X → Fin two-ℕ)
+    Σ ( X → Fin 2)
       ( λ f → ((x : X) (p : is-zero-Fin (f x)) → A x) ×
               ((x : X) (p : is-one-Fin (f x)) → B x))
 

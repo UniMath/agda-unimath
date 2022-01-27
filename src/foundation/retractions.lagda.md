@@ -23,9 +23,6 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
   
-  sec : (f : A → B) → UU (l1 ⊔ l2)
-  sec f = Σ (B → A) (λ g → (f ∘ g) ~ id)
-
   retr : (f : A → B) → UU (l1 ⊔ l2)
   retr f = Σ (B → A) (λ g → (g ∘ f) ~ id)
 

@@ -945,7 +945,7 @@ module _
   iterated-loop-space (succ-ℕ n) A = Ω (iterated-loop-space n A)
   
   Ω² : Pointed-Type l → Pointed-Type l
-  Ω² A = iterated-loop-space two-ℕ A
+  Ω² A = iterated-loop-space 2 A
   
   type-Ω² : {A : UU l} (a : A) → UU l
   type-Ω² a = Id (refl {x = a}) (refl {x = a})

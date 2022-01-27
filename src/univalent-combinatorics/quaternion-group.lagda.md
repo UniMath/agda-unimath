@@ -916,7 +916,7 @@ has-finite-cardinality-Q8 = pair 8 has-cardinality-eight-Q8
 -- We define the concrete group Q8
 
 cube : ℕ → UU (lsuc lzero)
-cube k = Σ (UU-Fin k) (λ X → type-UU-Fin X → UU-Fin two-ℕ)
+cube k = Σ (UU-Fin k) (λ X → type-UU-Fin X → UU-Fin 2)
 
 dim-cube-UU-Fin : {k : ℕ} (X : cube k) → UU-Fin k
 dim-cube-UU-Fin X = pr1 X
@@ -940,20 +940,20 @@ is-finite-dim-cube X =
   is-finite-has-finite-cardinality (has-finite-cardinality-dim-cube X)
 
 axis-cube-UU-2 :
-  {k : ℕ} (X : cube k) → dim-cube X → UU-Fin two-ℕ
+  {k : ℕ} (X : cube k) → dim-cube X → UU-Fin 2
 axis-cube-UU-2 X = pr2 X
 
 axis-cube : {k : ℕ} (X : cube k) → dim-cube X → UU lzero
 axis-cube X d = type-UU-Fin (axis-cube-UU-2 X d)
 
 has-cardinality-axis-cube :
-  {k : ℕ} (X : cube k) (d : dim-cube X) → has-cardinality (axis-cube X d) two-ℕ
+  {k : ℕ} (X : cube k) (d : dim-cube X) → has-cardinality (axis-cube X d) 2
 has-cardinality-axis-cube X d = pr2 (axis-cube-UU-2 X d)
 
 has-finite-cardinality-axis-cube :
   {k : ℕ} (X : cube k) (d : dim-cube X) → has-finite-cardinality (axis-cube X d)
 has-finite-cardinality-axis-cube X d =
-  pair two-ℕ (has-cardinality-axis-cube X d)
+  pair 2 (has-cardinality-axis-cube X d)
 
 is-finite-axis-cube :
   {k : ℕ} (X : cube k) (d : dim-cube X) → is-finite (axis-cube X d)
@@ -996,13 +996,13 @@ is-contr-total-equiv-cube :
   {k : ℕ} (X : cube k) → is-contr (Σ (cube k) (equiv-cube X))
 is-contr-total-equiv-cube X =
   is-contr-total-Eq-structure
-    ( λ D (A : type-UU-Fin D → UU-Fin two-ℕ)
+    ( λ D (A : type-UU-Fin D → UU-Fin 2)
           (e : equiv-UU-Fin (dim-cube-UU-Fin X) D) →
           (i : dim-cube X) → axis-cube X i ≃ pr1 (A (map-equiv e i)))
     ( is-contr-total-equiv-UU-Fin (dim-cube-UU-Fin X))
     ( pair (dim-cube-UU-Fin X) (id-equiv-UU-Fin (dim-cube-UU-Fin X)))
     ( is-contr-total-Eq-Π
-      ( λ i (A : UU-Fin two-ℕ) → equiv-UU-Fin (axis-cube-UU-2 X i) A)
+      ( λ i (A : UU-Fin 2) → equiv-UU-Fin (axis-cube-UU-2 X i) A)
       ( λ i → is-contr-total-equiv-UU-Fin (axis-cube-UU-2 X i)))
 
 is-equiv-equiv-eq-cube :
@@ -1079,8 +1079,8 @@ dim-standard-cube-UU-Fin k = Fin-UU-Fin k
 dim-standard-cube : ℕ → UU lzero
 dim-standard-cube k = type-UU-Fin (dim-standard-cube-UU-Fin k)
 
-axis-standard-cube-UU-Fin : (k : ℕ) → dim-standard-cube k → UU-Fin two-ℕ
-axis-standard-cube-UU-Fin k d = Fin-UU-Fin two-ℕ
+axis-standard-cube-UU-Fin : (k : ℕ) → dim-standard-cube k → UU-Fin 2
+axis-standard-cube-UU-Fin k d = Fin-UU-Fin 2
 
 axis-standard-cube : (k : ℕ) → dim-standard-cube k → UU lzero
 axis-standard-cube k d = type-UU-Fin (axis-standard-cube-UU-Fin k d)
@@ -1102,7 +1102,7 @@ labelling-cube {k} X = equiv-cube (standard-cube k) X
 
 orientation-cube : {k : ℕ} → cube k → UU (lzero)
 orientation-cube {k} X =
-  Σ ( vertex-cube X → Fin two-ℕ)
+  Σ ( vertex-cube X → Fin 2)
     ( λ h →
       ( x y : vertex-cube X) →
         Id ( iterate

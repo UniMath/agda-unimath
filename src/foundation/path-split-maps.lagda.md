@@ -68,10 +68,4 @@ module _
     is-equiv-is-path-split : is-path-split → is-equiv f
     is-equiv-is-path-split =
       is-equiv-is-coherently-invertible ∘ is-coherently-invertible-is-path-split
-
-  abstract
-    is-coherently-invertible-is-equiv :
-      is-equiv f → is-coherently-invertible f
-    is-coherently-invertible-is-equiv =
-      is-coherently-invertible-is-path-split ∘ is-path-split-is-equiv
 ```

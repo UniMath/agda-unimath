@@ -120,7 +120,7 @@ count-empty = count-Fin zero-ℕ
 
 count-is-contr :
   {l : Level} {X : UU l} → is-contr X → count X
-pr1 (count-is-contr H) = one-ℕ
+pr1 (count-is-contr H) = 1
 pr2 (count-is-contr H) = equiv-is-contr is-contr-Fin-one-ℕ H
 
 abstract
@@ -128,7 +128,7 @@ abstract
     {l : Level} {X : UU l} (e : count X) →
     is-one-ℕ (number-of-elements-count e) → is-contr X
   is-contr-is-one-number-of-elements-count (pair .(succ-ℕ zero-ℕ) e) refl =
-    is-contr-equiv' (Fin one-ℕ) e is-contr-Fin-one-ℕ
+    is-contr-equiv' (Fin 1) e is-contr-Fin-one-ℕ
 
 abstract
   is-one-number-of-elements-count-is-contr :
@@ -199,8 +199,8 @@ count-eq d x y = cases-count-eq d (d x y)
 cases-number-of-elements-count-eq' :
   {l : Level} {X : UU l} {x y : X} →
   is-decidable (Id x y) → ℕ
-cases-number-of-elements-count-eq' (inl p) = one-ℕ
-cases-number-of-elements-count-eq' (inr f) = zero-ℕ
+cases-number-of-elements-count-eq' (inl p) = 1
+cases-number-of-elements-count-eq' (inr f) = 0
 
 number-of-elements-count-eq' :
   {l : Level} {X : UU l} (d : has-decidable-equality X) (x y : X) → ℕ
@@ -473,7 +473,7 @@ equiv-left-summand :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Σ (coprod X Y) is-left) ≃ X
 equiv-left-summand {l1} {l2} {X} {Y} =
   ( ( right-unit-law-coprod X) ∘e
-    ( equiv-coprod right-unit-law-prod (right-absorption-prod Y))) ∘e
+    ( equiv-coprod right-unit-law-prod right-absorption-prod)) ∘e
   ( right-distributive-Σ-coprod X Y is-left)
 
 count-is-left :
@@ -493,7 +493,7 @@ equiv-right-summand :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Σ (coprod X Y) is-right) ≃ Y
 equiv-right-summand {l1} {l2} {X} {Y} =
   ( ( left-unit-law-coprod Y) ∘e
-    ( equiv-coprod (right-absorption-prod X) right-unit-law-prod)) ∘e
+    ( equiv-coprod right-absorption-prod right-unit-law-prod)) ∘e
     ( right-distributive-Σ-coprod X Y is-right)
 
 count-is-right :
@@ -650,7 +650,7 @@ is-not-exception-Maybe x = ¬ (is-exception-Maybe x)
 abstract
   is-not-exception-unit-Maybe :
     {l : Level} {X : UU l} (x : X) → is-not-exception-Maybe (unit-Maybe x)
-  is-not-exception-unit-Maybe {l} {X} x = neq-inl-inr x star
+  is-not-exception-unit-Maybe {l} {X} x ()
 
 -- The is-not-exception predicate is decidable
 is-decidable-is-not-exception-Maybe :
@@ -1355,7 +1355,7 @@ unit-𝔽 : 𝔽
 pr1 unit-𝔽 = unit
 pr2 unit-𝔽 = is-finite-unit
 
-unit-UU-Fin : UU-Fin one-ℕ
+unit-UU-Fin : UU-Fin 1
 pr1 unit-UU-Fin = unit
 pr2 unit-UU-Fin = unit-trunc-Prop (left-unit-law-coprod unit)
 
@@ -2153,7 +2153,7 @@ abstract
 --------------------------------------------------------------------------------
 
 Π-ℕ : (k : ℕ) → (Fin k → ℕ) → ℕ
-Π-ℕ zero-ℕ x = one-ℕ
+Π-ℕ zero-ℕ x = 1
 Π-ℕ (succ-ℕ k) x = mul-ℕ (Π-ℕ k (λ i → x (inl i))) (x (inr star))
 
 count-Π-Fin :
@@ -2636,9 +2636,9 @@ Fin-exp-ℕ n (succ-ℕ m) =
 -- The number falling-factorial-ℕ n m is the number (n)_m from combinatorics
 
 falling-factorial-ℕ : ℕ → ℕ → ℕ
-falling-factorial-ℕ zero-ℕ zero-ℕ = one-ℕ
-falling-factorial-ℕ zero-ℕ (succ-ℕ m) = zero-ℕ
-falling-factorial-ℕ (succ-ℕ n) zero-ℕ = one-ℕ
+falling-factorial-ℕ zero-ℕ zero-ℕ = 1
+falling-factorial-ℕ zero-ℕ (succ-ℕ m) = 0
+falling-factorial-ℕ (succ-ℕ n) zero-ℕ = 1
 falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
   mul-ℕ (succ-ℕ n) (falling-factorial-ℕ n m)
 
@@ -2695,9 +2695,9 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
 -- Exercise 16.4 (d)
 
 stirling-number-second-kind : ℕ → ℕ → ℕ
-stirling-number-second-kind zero-ℕ zero-ℕ = one-ℕ
-stirling-number-second-kind zero-ℕ (succ-ℕ n) = zero-ℕ
-stirling-number-second-kind (succ-ℕ m) zero-ℕ = zero-ℕ
+stirling-number-second-kind zero-ℕ zero-ℕ = 1
+stirling-number-second-kind zero-ℕ (succ-ℕ n) = 0
+stirling-number-second-kind (succ-ℕ m) zero-ℕ = 0
 stirling-number-second-kind (succ-ℕ m) (succ-ℕ n) =
   add-ℕ
     ( mul-ℕ (succ-ℕ n) (stirling-number-second-kind m (succ-ℕ n)))
@@ -2932,13 +2932,13 @@ abstract
 
 abstract
   is-not-injective-le-Fin :
-    {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → is-not-injective f
+    {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-injective f)
   is-not-injective-le-Fin {k} {l} f p =
     functor-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin f p)
 
 abstract
   is-not-injective-map-Fin-succ-Fin :
-    {k : ℕ} (f : Fin (succ-ℕ k) → Fin k) → is-not-injective f 
+    {k : ℕ} (f : Fin (succ-ℕ k) → Fin k) → ¬ (is-injective f)
   is-not-injective-map-Fin-succ-Fin {k} f =
     is-not-injective-le-Fin f (le-succ-ℕ {k})
 
@@ -2995,7 +2995,7 @@ module _
     is-not-injective-le-count :
       (f : A → B) →
       le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
-      is-not-injective f
+      ¬ (is-injective f)
     is-not-injective-le-count f p H =
       is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
 
@@ -3066,7 +3066,7 @@ module _
     is-not-injective-le-is-finite :
       (f : A → B) →
       le-ℕ (number-of-elements-is-finite K) (number-of-elements-is-finite H) →
-      is-not-injective f
+      ¬ (is-injective f)
     is-not-injective-le-is-finite f p I =
       is-not-emb-le-is-finite f p (is-emb-is-injective (is-set-is-finite K) I)
 

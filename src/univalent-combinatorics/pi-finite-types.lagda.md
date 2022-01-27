@@ -15,6 +15,10 @@ open import groups public
 
 -------------------------------------------------------------------------------}
 
+truncation-level-ℕ : ℕ → 𝕋
+truncation-level-ℕ zero-ℕ = zero-𝕋
+truncation-level-ℕ (succ-ℕ n) = succ-𝕋 (truncation-level-ℕ n)
+
 -- Section 1. π-Finiteness
 
 -- Definition 1.3
@@ -319,7 +323,7 @@ is-π-finite-is-π-finite-succ-ℕ :
   {l : Level} (k : ℕ) {A : UU l} →
   is-π-finite (succ-ℕ k) A → is-π-finite k A
 is-π-finite-is-π-finite-succ-ℕ zero-ℕ H =
-  has-finite-connected-components-is-π-finite one-ℕ H
+  has-finite-connected-components-is-π-finite 1 H
 pr1 (is-π-finite-is-π-finite-succ-ℕ (succ-ℕ k) H) =
   has-finite-connected-components-is-π-finite (succ-ℕ (succ-ℕ k)) H
 pr2 (is-π-finite-is-π-finite-succ-ℕ (succ-ℕ k) H) x y =
@@ -327,7 +331,7 @@ pr2 (is-π-finite-is-π-finite-succ-ℕ (succ-ℕ k) H) x y =
 
 is-π-finite-one-is-π-finite-succ-ℕ :
   {l : Level} (k : ℕ) {A : UU l} →
-  is-π-finite (succ-ℕ k) A → is-π-finite one-ℕ A
+  is-π-finite (succ-ℕ k) A → is-π-finite 1 A
 is-π-finite-one-is-π-finite-succ-ℕ zero-ℕ H = H
 is-π-finite-one-is-π-finite-succ-ℕ (succ-ℕ k) H =
   is-π-finite-one-is-π-finite-succ-ℕ k
@@ -445,7 +449,7 @@ is-locally-finite-Σ {B = B} H K (pair x y) (pair x' y') =
 
 has-finite-connected-components-Σ-is-path-connected :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-path-connected A → is-π-finite one-ℕ A →
+  is-path-connected A → is-π-finite 1 A →
   ((x : A) → has-finite-connected-components (B x)) →
   has-finite-connected-components (Σ A B)
 has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
@@ -774,7 +778,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
     h = pair i (is-equiv-is-emb-is-surjective is-surjective-i is-emb-i)
 
 has-finite-connected-components-Σ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-π-finite one-ℕ A →
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-π-finite 1 A →
   ((x : A) → has-finite-connected-components (B x)) →
   has-finite-connected-components (Σ A B)
 has-finite-connected-components-Σ {l1} {l2} {A} {B} H K =

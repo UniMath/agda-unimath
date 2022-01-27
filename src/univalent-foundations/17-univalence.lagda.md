@@ -368,7 +368,7 @@ split-decidable-Prop {l} =
   ( inv-assoc-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
 
 equiv-Fin-two-ℕ-decidable-Prop :
-  {l1 : Level} → decidable-Prop l1 ≃ Fin two-ℕ
+  {l1 : Level} → decidable-Prop l1 ≃ Fin 2
 equiv-Fin-two-ℕ-decidable-Prop {l1} =
   ( equiv-coprod
     ( equiv-is-contr
@@ -388,16 +388,16 @@ abstract
     equiv-is-contr
       ( is-proof-irrelevant-is-prop H p)
       ( is-proof-irrelevant-is-prop
-        ( is-set-Fin two-ℕ _ zero-Fin)
+        ( is-set-Fin 2 _ zero-Fin)
         ( ap inl (eq-is-contr is-contr-Fin-one-ℕ)))
   compute-equiv-Fin-two-ℕ-decidable-Prop (pair P (pair H (inr f))) =
     equiv-is-empty f Eq-Fin-eq
 
-bool-Fin-two-ℕ : Fin two-ℕ → bool
+bool-Fin-two-ℕ : Fin 2 → bool
 bool-Fin-two-ℕ (inl (inr star)) = true
 bool-Fin-two-ℕ (inr star) = false
 
-Fin-two-ℕ-bool : bool → Fin two-ℕ
+Fin-two-ℕ-bool : bool → Fin 2
 Fin-two-ℕ-bool true = inl (inr star)
 Fin-two-ℕ-bool false = inr star
 
@@ -411,7 +411,7 @@ abstract
   issec-Fin-two-ℕ-bool true = refl
   issec-Fin-two-ℕ-bool false = refl
 
-equiv-bool-Fin-two-ℕ : Fin two-ℕ ≃ bool
+equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
 pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
 pr2 equiv-bool-Fin-two-ℕ =
   is-equiv-has-inverse
@@ -965,11 +965,11 @@ equiv-Fib-Prop l A =
 -- Proposition 17.4.1
 
 ev-zero-equiv-Fin-two-ℕ :
-  {l1 : Level} {X : UU l1} → (Fin two-ℕ ≃ X) → X
+  {l1 : Level} {X : UU l1} → (Fin 2 ≃ X) → X
 ev-zero-equiv-Fin-two-ℕ e = map-equiv e zero-Fin
 
 inv-ev-zero-equiv-Fin-two-ℕ' :
-  Fin two-ℕ → (Fin two-ℕ ≃ Fin two-ℕ)
+  Fin 2 → (Fin 2 ≃ Fin 2)
 inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = id-equiv
 inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = equiv-succ-Fin
 
@@ -980,7 +980,7 @@ abstract
   issec-inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = refl
 
   aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
-    (e : Fin two-ℕ ≃ Fin two-ℕ) (x y : Fin two-ℕ) →
+    (e : Fin 2 ≃ Fin 2) (x y : Fin 2) →
     Id (map-equiv e zero-Fin) x →
     Id (map-equiv e one-Fin) y → htpy-equiv (inv-ev-zero-equiv-Fin-two-ℕ' x) e
   aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
@@ -1015,7 +1015,7 @@ abstract
 
 abstract
   is-equiv-ev-zero-equiv-Fin-two-ℕ' :
-    is-equiv (ev-zero-equiv-Fin-two-ℕ {lzero} {Fin two-ℕ})
+    is-equiv (ev-zero-equiv-Fin-two-ℕ {lzero} {Fin 2})
   is-equiv-ev-zero-equiv-Fin-two-ℕ' =
     is-equiv-has-inverse
       inv-ev-zero-equiv-Fin-two-ℕ'
@@ -1024,7 +1024,7 @@ abstract
 
 abstract
   is-equiv-ev-zero-equiv-Fin-two-ℕ :
-    {l1 : Level} {X : UU l1} → mere-equiv (Fin two-ℕ) X →
+    {l1 : Level} {X : UU l1} → mere-equiv (Fin 2) X →
     is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {X})
   is-equiv-ev-zero-equiv-Fin-two-ℕ {l1} {X} H =
     apply-universal-property-trunc-Prop H
@@ -1032,94 +1032,93 @@ abstract
       ( λ α →
         is-equiv-left-factor'
           ( ev-zero-equiv-Fin-two-ℕ)
-          ( map-equiv (equiv-postcomp-equiv α (Fin two-ℕ)))
+          ( map-equiv (equiv-postcomp-equiv α (Fin 2)))
           ( is-equiv-comp
             ( ( ev-zero-equiv-Fin-two-ℕ) ∘
-              ( map-equiv (equiv-postcomp-equiv α (Fin two-ℕ))))
+              ( map-equiv (equiv-postcomp-equiv α (Fin 2))))
             ( map-equiv α)
             ( ev-zero-equiv-Fin-two-ℕ)
             ( refl-htpy)
             ( is-equiv-ev-zero-equiv-Fin-two-ℕ')
             ( is-equiv-map-equiv α))
-          ( is-equiv-comp-equiv α (Fin two-ℕ)))
+          ( is-equiv-comp-equiv α (Fin 2)))
 
 equiv-ev-zero-equiv-Fin-two-ℕ :
-  {l1 : Level} {X : UU l1} → mere-equiv (Fin two-ℕ) X →
-  (Fin two-ℕ ≃ X) ≃ X
+  {l1 : Level} {X : UU l1} → mere-equiv (Fin 2) X → (Fin 2 ≃ X) ≃ X
 pr1 (equiv-ev-zero-equiv-Fin-two-ℕ e) = ev-zero-equiv-Fin-two-ℕ
 pr2 (equiv-ev-zero-equiv-Fin-two-ℕ e) = is-equiv-ev-zero-equiv-Fin-two-ℕ e
 
 abstract
   is-contr-total-UU-Fin-Level-two-ℕ :
-    {l : Level} → is-contr (Σ (UU-Fin-Level l two-ℕ) type-UU-Fin-Level)
+    {l : Level} → is-contr (Σ (UU-Fin-Level l 2) type-UU-Fin-Level)
   is-contr-total-UU-Fin-Level-two-ℕ {l} =
     is-contr-equiv'
-      ( Σ ( UU-Fin-Level l two-ℕ)
-          ( λ X → raise-Fin l two-ℕ ≃ type-UU-Fin-Level X))
+      ( Σ ( UU-Fin-Level l 2)
+          ( λ X → raise-Fin l 2 ≃ type-UU-Fin-Level X))
       ( equiv-tot
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ (pr2 X)) ∘e
-          ( equiv-precomp-equiv (equiv-raise-Fin l two-ℕ) (pr1 X))))
+          ( equiv-precomp-equiv (equiv-raise-Fin l 2) (pr1 X))))
       ( is-contr-total-equiv-subuniverse
-        ( mere-equiv-Prop (Fin two-ℕ))
-        ( Fin-UU-Fin-Level l two-ℕ))
+        ( mere-equiv-Prop (Fin 2))
+        ( Fin-UU-Fin-Level l 2))
 
 abstract
   is-contr-total-UU-Fin-two-ℕ :
-    is-contr (Σ (UU-Fin two-ℕ) (λ X → type-UU-Fin X))
+    is-contr (Σ (UU-Fin 2) (λ X → type-UU-Fin X))
   is-contr-total-UU-Fin-two-ℕ = is-contr-total-UU-Fin-Level-two-ℕ
 
 point-eq-UU-Fin-Level-two-ℕ :
-  {l : Level} {X : UU-Fin-Level l two-ℕ} →
-  Id (Fin-UU-Fin-Level l two-ℕ) X → type-UU-Fin-Level X
+  {l : Level} {X : UU-Fin-Level l 2} →
+  Id (Fin-UU-Fin-Level l 2) X → type-UU-Fin-Level X
 point-eq-UU-Fin-Level-two-ℕ refl = map-raise zero-Fin
 
 abstract
   is-equiv-point-eq-UU-Fin-Level-two-ℕ :
-    {l : Level} (X : UU-Fin-Level l two-ℕ) →
+    {l : Level} (X : UU-Fin-Level l 2) →
     is-equiv (point-eq-UU-Fin-Level-two-ℕ {l} {X})
   is-equiv-point-eq-UU-Fin-Level-two-ℕ {l} =
     fundamental-theorem-id
-      ( Fin-UU-Fin-Level l two-ℕ)
+      ( Fin-UU-Fin-Level l 2)
       ( map-raise zero-Fin)
       ( is-contr-total-UU-Fin-Level-two-ℕ)
       ( λ X → point-eq-UU-Fin-Level-two-ℕ {l} {X})
 
 equiv-point-eq-UU-Fin-Level-two-ℕ :
-  {l : Level} {X : UU-Fin-Level l two-ℕ} →
-  Id (Fin-UU-Fin-Level l two-ℕ) X ≃ type-UU-Fin-Level X
+  {l : Level} {X : UU-Fin-Level l 2} →
+  Id (Fin-UU-Fin-Level l 2) X ≃ type-UU-Fin-Level X
 pr1 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
   point-eq-UU-Fin-Level-two-ℕ
 pr2 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
   is-equiv-point-eq-UU-Fin-Level-two-ℕ X
 
 eq-point-UU-Fin-Level-two-ℕ :
-  {l : Level} {X : UU-Fin-Level l two-ℕ} →
-  type-UU-Fin-Level X → Id (Fin-UU-Fin-Level l two-ℕ) X
+  {l : Level} {X : UU-Fin-Level l 2} →
+  type-UU-Fin-Level X → Id (Fin-UU-Fin-Level l 2) X
 eq-point-UU-Fin-Level-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ
 
 point-eq-UU-Fin-two-ℕ :
-  {X : UU-Fin two-ℕ} → Id (Fin-UU-Fin two-ℕ) X → type-UU-Fin X
+  {X : UU-Fin 2} → Id (Fin-UU-Fin 2) X → type-UU-Fin X
 point-eq-UU-Fin-two-ℕ refl = zero-Fin
 
 abstract
   is-equiv-point-eq-UU-Fin-two-ℕ :
-    (X : UU-Fin two-ℕ) → is-equiv (point-eq-UU-Fin-two-ℕ {X})
+    (X : UU-Fin 2) → is-equiv (point-eq-UU-Fin-two-ℕ {X})
   is-equiv-point-eq-UU-Fin-two-ℕ =
     fundamental-theorem-id
-      ( Fin-UU-Fin two-ℕ)
+      ( Fin-UU-Fin 2)
       ( zero-Fin)
       ( is-contr-total-UU-Fin-two-ℕ)
       ( λ X → point-eq-UU-Fin-two-ℕ {X})
 
 equiv-point-eq-UU-Fin-two-ℕ :
-  {X : UU-Fin two-ℕ} → Id (Fin-UU-Fin two-ℕ) X ≃ type-UU-Fin X
+  {X : UU-Fin 2} → Id (Fin-UU-Fin 2) X ≃ type-UU-Fin X
 pr1 (equiv-point-eq-UU-Fin-two-ℕ {X}) = point-eq-UU-Fin-two-ℕ
 pr2 (equiv-point-eq-UU-Fin-two-ℕ {X}) = is-equiv-point-eq-UU-Fin-two-ℕ X
 
 eq-point-UU-Fin-two-ℕ :
-  {X : UU-Fin two-ℕ} → type-UU-Fin X → Id (Fin-UU-Fin two-ℕ) X
+  {X : UU-Fin 2} → type-UU-Fin X → Id (Fin-UU-Fin 2) X
 eq-point-UU-Fin-two-ℕ {X} =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 
@@ -1127,24 +1126,24 @@ eq-point-UU-Fin-two-ℕ {X} =
 
 abstract
   no-section-type-UU-Fin-Level-two-ℕ :
-    {l : Level} → ¬ ((X : UU-Fin-Level l two-ℕ) → type-UU-Fin-Level X)
+    {l : Level} → ¬ ((X : UU-Fin-Level l 2) → type-UU-Fin-Level X)
   no-section-type-UU-Fin-Level-two-ℕ {l} f =
-    is-not-contractible-Fin two-ℕ
+    is-not-contractible-Fin 2
       ( Eq-eq-ℕ)
       ( is-contr-equiv
-        ( Id (Fin-UU-Fin-Level l two-ℕ) (Fin-UU-Fin-Level l two-ℕ))
+        ( Id (Fin-UU-Fin-Level l 2) (Fin-UU-Fin-Level l 2))
         ( ( inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ) ∘e
-          ( equiv-raise-Fin l two-ℕ))
+          ( equiv-raise-Fin l 2))
         ( is-prop-is-contr
           ( pair
-            ( Fin-UU-Fin-Level l two-ℕ)
+            ( Fin-UU-Fin-Level l 2)
             ( λ X → eq-point-UU-Fin-Level-two-ℕ (f X)))
-          ( Fin-UU-Fin-Level l two-ℕ)
-          ( Fin-UU-Fin-Level l two-ℕ)))
+          ( Fin-UU-Fin-Level l 2)
+          ( Fin-UU-Fin-Level l 2)))
 
 abstract
   no-section-type-UU-Fin-two-ℕ :
-    ¬ ((X : UU-Fin two-ℕ) → type-UU-Fin X)
+    ¬ ((X : UU-Fin 2) → type-UU-Fin X)
   no-section-type-UU-Fin-two-ℕ f =
     no-section-type-UU-Fin-Level-two-ℕ f
 
@@ -1171,7 +1170,7 @@ AC l1 l2 =
 abstract
   is-not-decidable-type-UU-Fin-Level-two-ℕ :
     {l : Level} →
-    ¬ ((X : UU-Fin-Level l two-ℕ) → is-decidable (type-UU-Fin-Level X))
+    ¬ ((X : UU-Fin-Level l 2) → is-decidable (type-UU-Fin-Level X))
   is-not-decidable-type-UU-Fin-Level-two-ℕ {l} d =
     no-section-type-UU-Fin-Level-two-ℕ
       ( λ X →
@@ -1571,7 +1570,7 @@ abstract
 abstract
   is-decidable-emb-ex-falso :
     {l : Level} {X : UU l} → is-decidable-emb (ex-falso {l} {X})
-  pr1 (is-decidable-emb-ex-falso {l} {X}) = is-emb-ex-falso X
+  pr1 (is-decidable-emb-ex-falso {l} {X}) = is-emb-ex-falso
   pr2 (is-decidable-emb-ex-falso {l} {X}) x = inr pr1
 
 abstract

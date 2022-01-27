@@ -13,7 +13,7 @@ open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.classical-finite-types public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.congruence-integers public
-open import elementary-number-theory.congruence-natural-numbes public
+open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
