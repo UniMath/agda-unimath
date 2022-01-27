@@ -81,9 +81,9 @@ neighbor-Graph-𝔽 G x = Σ (vertices-Graph-𝔽 G) (λ y → type-trunc-Prop {
 {- We formalize the definitions of complete multipartite graphs, complete
    graphs, and complete bipartite graphs. -}
 
-two-element-type-𝔽 : UU-Fin two-ℕ → 𝔽
+two-element-type-𝔽 : UU-Fin 2 → 𝔽
 two-element-type-𝔽 X =
-  pair (pr1 X) (is-finite-has-finite-cardinality (pair two-ℕ (pr2 X)))
+  pair (pr1 X) (is-finite-has-finite-cardinality (pair 2 (pr2 X)))
 
 complete-multipartite-Graph-𝔽 : (X : 𝔽) (Y : type-𝔽 X → 𝔽) → Graph-𝔽
 Graph-𝔽.vertex (complete-multipartite-Graph-𝔽 X Y) = Σ-𝔽 X Y

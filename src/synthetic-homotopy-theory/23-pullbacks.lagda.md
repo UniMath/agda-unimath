@@ -2290,10 +2290,8 @@ map-cone-pair {A' = A'} {B'} f g f' g' =
       ( tot
         ( λ s →
           ( eq-pair' ∘ (map-cone-pair' f g f' g' t s)))) ∘
-      ( map-swap-total-Eq-structure
-        ( λ y p y' → Id (f' (pr2 t)) (g' y'))))) ∘
-  ( map-swap-total-Eq-structure
-    ( λ x t x' → Σ _ (λ y' → Id (f' x') (g' y'))))
+      ( map-interchange-Σ-Σ (λ y p y' → Id (f' (pr2 t)) (g' y'))))) ∘
+  ( map-interchange-Σ-Σ (λ x t x' → Σ _ (λ y' → Id (f' x') (g' y'))))
 
 triangle-map-cone-pair :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
@@ -2321,24 +2319,24 @@ abstract
         ( tot
           ( λ s →
             ( eq-pair' ∘ (map-cone-pair' f g f' g' t s)))) ∘
-        ( map-swap-total-Eq-structure _)))
-      ( map-swap-total-Eq-structure _)
+        ( map-interchange-Σ-Σ _)))
+      ( map-interchange-Σ-Σ _)
       ( refl-htpy)
-      ( is-equiv-map-swap-total-Eq-structure _)
+      ( is-equiv-map-interchange-Σ-Σ _)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ t → is-equiv-comp
           ( ( tot
               ( λ s →
                 ( eq-pair' ∘ (map-cone-pair' f g f' g' t s)))) ∘
-            ( map-swap-total-Eq-structure
+            ( map-interchange-Σ-Σ
               ( λ y p y' → Id (f' (pr2 t)) (g' y'))))
           ( tot
             ( λ s →
               ( eq-pair' ∘ (map-cone-pair' f g f' g' t s))))
-          ( map-swap-total-Eq-structure
+          ( map-interchange-Σ-Σ
             ( λ y p y' → Id (f' (pr2 t)) (g' y')))
           ( refl-htpy)
-          ( is-equiv-map-swap-total-Eq-structure _)
+          ( is-equiv-map-interchange-Σ-Σ _)
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ s → is-equiv-comp
               ( eq-pair' ∘ (map-cone-pair' f g f' g' t s))

@@ -10,20 +10,20 @@ module univalent-combinatorics.unordered-pairs where
 open import univalent-foundations public
 
 unordered-pair : {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-pair A = Σ (UU-Fin two-ℕ) (λ X → pr1 X → A)
+unordered-pair A = Σ (UU-Fin 2) (λ X → pr1 X → A)
 
 type-unordered-pair : {l : Level} {A : UU l} → unordered-pair A → UU lzero
 type-unordered-pair p = pr1 (pr1 p)
 
 has-two-elements-type-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) →
-  mere-equiv (Fin two-ℕ) (type-unordered-pair p)
+  mere-equiv (Fin 2) (type-unordered-pair p)
 has-two-elements-type-unordered-pair p = pr2 (pr1 p)
 
 is-set-type-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) → is-set (type-unordered-pair p)
 is-set-type-unordered-pair p =
-  is-set-mere-equiv' (has-two-elements-type-unordered-pair p) (is-set-Fin two-ℕ)
+  is-set-mere-equiv' (has-two-elements-type-unordered-pair p) (is-set-Fin 2)
 
 has-decidable-equality-type-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) →
@@ -80,7 +80,7 @@ module _
   where
 
   standard-unordered-pair : A → A → unordered-pair A
-  pr1 (standard-unordered-pair x y) = Fin-UU-Fin two-ℕ
+  pr1 (standard-unordered-pair x y) = Fin-UU-Fin 2
   pr2 (standard-unordered-pair x y) (inl (inr star)) = x
   pr2 (standard-unordered-pair x y) (inr star) = y
   
@@ -199,5 +199,5 @@ is-equiv-map-equiv-unordered-pair e =
 
 unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-distinct-pair A = Σ (UU-Fin two-ℕ) (λ X → pr1 X ↪ A)
+unordered-distinct-pair A = Σ (UU-Fin 2) (λ X → pr1 X ↪ A)
 ```

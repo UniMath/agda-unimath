@@ -19,8 +19,8 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-finite-Preorder-Prop : UU-Prop (l1 ⊔ l2)
-  is-finite-Preorder-Prop =
+  is-finite-preorder-Prop : UU-Prop (l1 ⊔ l2)
+  is-finite-preorder-Prop =
     prod-Prop
       ( is-finite-Prop (element-Preorder X))
       ( Π-Prop
@@ -28,13 +28,13 @@ module _
         ( λ x →
           Π-Prop
             ( element-Preorder X)
-            ( λ y → is-decidable-Prop (leq-Preorder-Prop X x y))))
+            ( λ y → is-decidable-Prop (leq-preorder-Prop X x y))))
 
   is-finite-Preorder : UU (l1 ⊔ l2)
-  is-finite-Preorder = type-Prop is-finite-Preorder-Prop
+  is-finite-Preorder = type-Prop is-finite-preorder-Prop
 
   is-prop-is-finite-Preorder : is-prop is-finite-Preorder
-  is-prop-is-finite-Preorder = is-prop-type-Prop is-finite-Preorder-Prop
+  is-prop-is-finite-Preorder = is-prop-type-Prop is-finite-preorder-Prop
 
   is-finite-element-is-finite-Preorder :
     is-finite-Preorder → is-finite (element-Preorder X)
@@ -103,35 +103,35 @@ module _
   has-decidable-equality-element-Finite-Preorder =
     has-decidable-equality-is-finite is-finite-element-Finite-Preorder
 
-  leq-Finite-Preorder-decidable-Prop :
+  leq-finite-preorder-decidable-Prop :
     (x y : element-Finite-Preorder) → decidable-Prop l
-  leq-Finite-Preorder-decidable-Prop = pr1 (pr2 X)
+  leq-finite-preorder-decidable-Prop = pr1 (pr2 X)
 
   leq-Finite-Preorder : (x y : element-Finite-Preorder) → UU l
   leq-Finite-Preorder x y =
-    type-decidable-Prop (leq-Finite-Preorder-decidable-Prop x y)
+    type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
 
   is-decidable-prop-leq-Finite-Preorder :
     (x y : element-Finite-Preorder) →
     is-decidable-prop (leq-Finite-Preorder x y)
   is-decidable-prop-leq-Finite-Preorder x y =
     is-decidable-prop-type-decidable-Prop
-      ( leq-Finite-Preorder-decidable-Prop x y)
+      ( leq-finite-preorder-decidable-Prop x y)
 
   is-decidable-leq-Finite-Preorder :
     (x y : element-Finite-Preorder) → is-decidable (leq-Finite-Preorder x y)
   is-decidable-leq-Finite-Preorder x y =
-    is-decidable-type-decidable-Prop (leq-Finite-Preorder-decidable-Prop x y)
+    is-decidable-type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
 
   is-prop-leq-Finite-Preorder :
     (x y : element-Finite-Preorder) → is-prop (leq-Finite-Preorder x y)
   is-prop-leq-Finite-Preorder x y =
-    is-prop-type-decidable-Prop (leq-Finite-Preorder-decidable-Prop x y)
+    is-prop-type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
 
-  leq-Finite-Preorder-Prop :
+  leq-Finite-preorder-Prop :
     (x y : element-Finite-Preorder) → UU-Prop l
-  pr1 (leq-Finite-Preorder-Prop x y) = leq-Finite-Preorder x y
-  pr2 (leq-Finite-Preorder-Prop x y) = is-prop-leq-Finite-Preorder x y
+  pr1 (leq-Finite-preorder-Prop x y) = leq-Finite-Preorder x y
+  pr2 (leq-Finite-preorder-Prop x y) = is-prop-leq-Finite-Preorder x y
 
   refl-leq-Finite-Preorder :
     (x : element-Finite-Preorder) → leq-Finite-Preorder x x
@@ -144,7 +144,7 @@ module _
 
   preorder-Finite-Preorder : Preorder lzero l
   pr1 preorder-Finite-Preorder = element-Finite-Preorder
-  pr1 (pr2 preorder-Finite-Preorder) = leq-Finite-Preorder-Prop
+  pr1 (pr2 preorder-Finite-Preorder) = leq-Finite-preorder-Prop
   pr1 (pr2 (pr2 preorder-Finite-Preorder)) = refl-leq-Finite-Preorder
   pr2 (pr2 (pr2 preorder-Finite-Preorder)) = transitive-leq-Finite-Preorder
 
@@ -180,12 +180,12 @@ module _
   leq-finite-sub-Preorder-decidable-Prop :
     (x y : element-finite-sub-Preorder) → decidable-Prop l1
   leq-finite-sub-Preorder-decidable-Prop x y =
-    leq-Finite-Preorder-decidable-Prop X (pr1 x) (pr1 y)
+    leq-finite-preorder-decidable-Prop X (pr1 x) (pr1 y)
 
-  leq-finite-sub-Preorder-Prop :
+  leq-finite-sub-preorder-Prop :
     (x y : element-finite-sub-Preorder) → UU-Prop l1
-  leq-finite-sub-Preorder-Prop =
-    leq-decidable-sub-Preorder-Prop (preorder-Finite-Preorder X) S
+  leq-finite-sub-preorder-Prop =
+    leq-decidable-sub-preorder-Prop (preorder-Finite-Preorder X) S
 
   leq-finite-sub-Preorder : (x y : element-finite-sub-Preorder) → UU l1
   leq-finite-sub-Preorder =

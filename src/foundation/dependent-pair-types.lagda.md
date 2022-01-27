@@ -1,0 +1,51 @@
+---
+title: Univalent Mathematics in Agda
+---
+
+```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
+module foundation.dependent-pair-types where
+
+open import foundation.universe-levels using (UU; Level; _⊔_)
+```
+
+## Dependent pair types
+
+```agda
+record Σ {l1 l2} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
+  constructor pair
+  field
+    pr1 : A
+    pr2 : B pr1
+
+open Σ public
+
+{-# BUILTIN SIGMA Σ #-}
+
+ind-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  ((x : A) (y : B x) → C (pair x y)) → ((t : Σ A B) → C t)
+ind-Σ f (pair x y) = f x y
+
+ev-pair :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  ((t : Σ A B) → C t) → (x : A) (y : B x) → C (pair x y)
+ev-pair f x y = f (pair x y)
+```
+
+```agda
+triple :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
+  (a : A) (b : B a) → C a b → Σ A (λ x → Σ (B x) (C x))
+pr1 (triple a b c) = a
+pr1 (pr2 (triple a b c)) = b
+pr2 (pr2 (triple a b c)) = c
+
+triple' :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  (a : A) (b : B a) → C (pair a b) → Σ (Σ A B) C
+pr1 (pr1 (triple' a b c)) = a
+pr2 (pr1 (triple' a b c)) = b
+pr2 (triple' a b c) = c
+```

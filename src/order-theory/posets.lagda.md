@@ -31,14 +31,14 @@ module _
   element-Poset : UU l1
   element-Poset = pr1 X
 
-  leq-Poset-Prop : (x y : element-Poset) → UU-Prop l2
-  leq-Poset-Prop = pr1 (pr2 X)
+  leq-poset-Prop : (x y : element-Poset) → UU-Prop l2
+  leq-poset-Prop = pr1 (pr2 X)
 
   leq-Poset : (x y : element-Poset) →  UU l2
-  leq-Poset x y = type-Prop (leq-Poset-Prop x y)
+  leq-Poset x y = type-Prop (leq-poset-Prop x y)
 
   is-prop-leq-Poset : (x y : element-Poset) → is-prop (leq-Poset x y)
-  is-prop-leq-Poset x y = is-prop-type-Prop (leq-Poset-Prop x y)
+  is-prop-leq-Poset x y = is-prop-type-Prop (leq-poset-Prop x y)
 
   refl-leq-Poset : (x : element-Poset) → leq-Poset x x
   refl-leq-Poset = pr1 (pr1 (pr2 (pr2 X)))
@@ -49,7 +49,7 @@ module _
 
   preorder-Poset : Preorder l1 l2
   pr1 preorder-Poset = element-Poset
-  pr1 (pr2 preorder-Poset) = leq-Poset-Prop
+  pr1 (pr2 preorder-Poset) = leq-poset-Prop
   pr1 (pr2 (pr2 preorder-Poset)) = refl-leq-Poset
   pr2 (pr2 (pr2 preorder-Poset)) = transitive-leq-Poset
 
@@ -69,8 +69,8 @@ module _
   pr1 element-poset-Set = element-Poset
   pr2 element-poset-Set = is-set-element-Poset
 
-  incident-Poset-Prop : (x y : element-Poset) → UU-Prop l2
-  incident-Poset-Prop = incident-Preorder-Prop preorder-Poset
+  incident-poset-Prop : (x y : element-Poset) → UU-Prop l2
+  incident-poset-Prop = incident-preorder-Prop preorder-Poset
 
   incident-Poset : (x y : element-Poset) → UU l2
   incident-Poset = incident-Preorder preorder-Poset
@@ -78,8 +78,8 @@ module _
   is-prop-incident-Poset : (x y : element-Poset) → is-prop (incident-Poset x y)
   is-prop-incident-Poset = is-prop-incident-Preorder preorder-Poset
 
-  is-total-Poset-Prop : UU-Prop (l1 ⊔ l2)
-  is-total-Poset-Prop = is-total-Preorder-Prop preorder-Poset
+  is-total-poset-Prop : UU-Prop (l1 ⊔ l2)
+  is-total-poset-Prop = is-total-preorder-Prop preorder-Poset
 
   is-total-Poset : UU (l1 ⊔ l2)
   is-total-Poset = is-total-Preorder preorder-Poset
@@ -95,9 +95,9 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-least-element-Poset-Prop : element-Poset X → UU-Prop (l1 ⊔ l2)
-  is-least-element-Poset-Prop =
-    is-least-element-Preorder-Prop (preorder-Poset X)
+  is-least-element-poset-Prop : element-Poset X → UU-Prop (l1 ⊔ l2)
+  is-least-element-poset-Prop =
+    is-least-element-preorder-Prop (preorder-Poset X)
 
   is-least-element-Poset : element-Poset X → UU (l1 ⊔ l2)
   is-least-element-Poset = is-least-element-Preorder (preorder-Poset X)
@@ -121,13 +121,13 @@ module _
   is-prop-least-element-Poset =
     is-prop-all-elements-equal all-elements-equal-least-element-Poset
 
-  has-least-element-Poset-Prop : UU-Prop (l1 ⊔ l2)
-  pr1 has-least-element-Poset-Prop = least-element-Poset
-  pr2 has-least-element-Poset-Prop = is-prop-least-element-Poset
+  has-least-element-poset-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 has-least-element-poset-Prop = least-element-Poset
+  pr2 has-least-element-poset-Prop = is-prop-least-element-Poset
 
-  is-largest-element-Poset-Prop : element-Poset X → UU-Prop (l1 ⊔ l2)
-  is-largest-element-Poset-Prop =
-    is-largest-element-Preorder-Prop (preorder-Poset X)
+  is-largest-element-poset-Prop : element-Poset X → UU-Prop (l1 ⊔ l2)
+  is-largest-element-poset-Prop =
+    is-largest-element-preorder-Prop (preorder-Poset X)
 
   is-largest-element-Poset : element-Poset X → UU (l1 ⊔ l2)
   is-largest-element-Poset = is-largest-element-Preorder (preorder-Poset X)
@@ -151,9 +151,9 @@ module _
   is-prop-largest-element-Poset =
     is-prop-all-elements-equal all-elements-equal-largest-element-Poset
 
-  has-largest-element-Poset-Prop : UU-Prop (l1 ⊔ l2)
-  pr1 has-largest-element-Poset-Prop = largest-element-Poset
-  pr2 has-largest-element-Poset-Prop = is-prop-largest-element-Poset
+  has-largest-element-poset-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 has-largest-element-poset-Prop = largest-element-Poset
+  pr2 has-largest-element-poset-Prop = is-prop-largest-element-Poset
 
 ```
 
@@ -173,8 +173,8 @@ module _
     Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
   eq-element-sub-Poset = eq-element-sub-Preorder (preorder-Poset X) S
 
-  leq-sub-Poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
-  leq-sub-Poset-Prop = leq-sub-Preorder-Prop (preorder-Poset X) S
+  leq-sub-poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
+  leq-sub-poset-Prop = leq-sub-preorder-Prop (preorder-Poset X) S
 
   leq-sub-Poset : (x y : element-sub-Poset) → UU l2
   leq-sub-Poset = leq-sub-Preorder (preorder-Poset X) S
@@ -198,7 +198,7 @@ module _
 
   sub-Poset : Poset (l1 ⊔ l3) l2
   pr1 sub-Poset = element-sub-Poset
-  pr1 (pr2 sub-Poset) = leq-sub-Poset-Prop
+  pr1 (pr2 sub-Poset) = leq-sub-poset-Prop
   pr1 (pr1 (pr2 (pr2 sub-Poset))) = refl-leq-sub-Poset
   pr2 (pr1 (pr2 (pr2 sub-Poset))) = transitive-leq-sub-Poset
   pr2 (pr2 (pr2 sub-Poset)) = antisymmetric-leq-sub-Poset
@@ -224,10 +224,10 @@ module _
   eq-element-decidable-sub-Poset =
     eq-element-sub-Poset X (subtype-decidable-subtype S)
 
-  leq-decidable-sub-Poset-Prop :
+  leq-decidable-sub-poset-Prop :
     (x y : element-decidable-sub-Poset) → UU-Prop l2
-  leq-decidable-sub-Poset-Prop =
-    leq-sub-Poset-Prop X (subtype-decidable-subtype S)
+  leq-decidable-sub-poset-Prop =
+    leq-sub-poset-Prop X (subtype-decidable-subtype S)
 
   leq-decidable-sub-Poset : (x y : element-decidable-sub-Poset) → UU l2
   leq-decidable-sub-Poset =
@@ -267,9 +267,9 @@ module _
     (T : element-Poset X → UU-Prop l4)
     where
     
-    inclusion-sub-Poset-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-Poset-Prop =
-      inclusion-sub-Preorder-Prop (preorder-Poset X) S T
+    inclusion-sub-poset-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-sub-poset-Prop =
+      inclusion-sub-preorder-Prop (preorder-Poset X) S T
 
     inclusion-sub-Poset : UU (l1 ⊔ l3 ⊔ l4)
     inclusion-sub-Poset = inclusion-sub-Preorder (preorder-Poset X) S T
@@ -294,7 +294,7 @@ module _
 
   sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
   pr1 (sub-poset-Preorder l) = element-Poset X → UU-Prop l
-  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-Poset-Prop
+  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-poset-Prop
   pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-sub-Poset
   pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-sub-Poset
 
@@ -307,9 +307,9 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-chain-sub-Poset-Prop :
+  is-chain-sub-poset-Prop :
     {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-Poset-Prop = is-chain-sub-Preorder-Prop (preorder-Poset X)
+  is-chain-sub-poset-Prop = is-chain-sub-preorder-Prop (preorder-Poset X)
 
   is-chain-sub-Poset :
     {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
@@ -339,10 +339,10 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
   
-  inclusion-chain-Poset-Prop :
+  inclusion-chain-poset-Prop :
     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
     UU-Prop (l1 ⊔ l3 ⊔ l4)
-  inclusion-chain-Poset-Prop = inclusion-chain-Preorder-Prop (preorder-Poset X)
+  inclusion-chain-poset-Prop = inclusion-chain-preorder-Prop (preorder-Poset X)
 
   inclusion-chain-Poset :
     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X → UU (l1 ⊔ l3 ⊔ l4)
@@ -363,10 +363,10 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
   
-  is-maximal-chain-Poset-Prop :
+  is-maximal-chain-poset-Prop :
     {l3 : Level} → chain-Poset l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-Poset-Prop =
-    is-maximal-chain-Preorder-Prop (preorder-Poset X)
+  is-maximal-chain-poset-Prop =
+    is-maximal-chain-preorder-Prop (preorder-Poset X)
 
   is-maximal-chain-Poset :
     {l3 : Level} → chain-Poset l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)

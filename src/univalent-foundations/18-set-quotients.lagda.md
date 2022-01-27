@@ -151,9 +151,9 @@ equiv-UU-is-small l1 l2 =
 abstract
   is-small-decidable-Prop :
     (l1 l2 : Level) → is-small l2 (decidable-Prop l1)
-  pr1 (is-small-decidable-Prop l1 l2) = raise-Fin l2 two-ℕ
+  pr1 (is-small-decidable-Prop l1 l2) = raise-Fin l2 2
   pr2 (is-small-decidable-Prop l1 l2) =
-    equiv-raise l2 (Fin two-ℕ) ∘e equiv-Fin-two-ℕ-decidable-Prop
+    equiv-raise l2 (Fin 2) ∘e equiv-Fin-two-ℕ-decidable-Prop
 
 -- Proposition 18.0.3
 

@@ -30,14 +30,14 @@ module _
   element-Preorder : UU l1
   element-Preorder = pr1 X
 
-  leq-Preorder-Prop : (x y : element-Preorder) → UU-Prop l2
-  leq-Preorder-Prop = pr1 (pr2 X)
+  leq-preorder-Prop : (x y : element-Preorder) → UU-Prop l2
+  leq-preorder-Prop = pr1 (pr2 X)
 
   leq-Preorder : (x y : element-Preorder) → UU l2
-  leq-Preorder x y = type-Prop (leq-Preorder-Prop x y)
+  leq-Preorder x y = type-Prop (leq-preorder-Prop x y)
 
   is-prop-leq-Preorder : (x y : element-Preorder) → is-prop (leq-Preorder x y)
-  is-prop-leq-Preorder x y = is-prop-type-Prop (leq-Preorder-Prop x y)
+  is-prop-leq-Preorder x y = is-prop-type-Prop (leq-preorder-Prop x y)
 
   refl-leq-Preorder : (x : element-Preorder) → leq-Preorder x x
   refl-leq-Preorder = pr1 (pr2 (pr2 X))
@@ -47,27 +47,27 @@ module _
     leq-Preorder y z → leq-Preorder x y → leq-Preorder x z
   transitive-leq-Preorder = pr2 (pr2 (pr2 X))
 
-  incident-Preorder-Prop : (x y : element-Preorder) → UU-Prop l2
-  incident-Preorder-Prop x y =
-    disj-Prop (leq-Preorder-Prop x y) (leq-Preorder-Prop y x)
+  incident-preorder-Prop : (x y : element-Preorder) → UU-Prop l2
+  incident-preorder-Prop x y =
+    disj-Prop (leq-preorder-Prop x y) (leq-preorder-Prop y x)
 
   incident-Preorder : (x y : element-Preorder) → UU l2
-  incident-Preorder x y = type-Prop (incident-Preorder-Prop x y)
+  incident-Preorder x y = type-Prop (incident-preorder-Prop x y)
 
   is-prop-incident-Preorder :
     (x y : element-Preorder) → is-prop (incident-Preorder x y)
-  is-prop-incident-Preorder x y = is-prop-type-Prop (incident-Preorder-Prop x y)
+  is-prop-incident-Preorder x y = is-prop-type-Prop (incident-preorder-Prop x y)
 
-  is-total-Preorder-Prop : UU-Prop (l1 ⊔ l2)
-  is-total-Preorder-Prop =
+  is-total-preorder-Prop : UU-Prop (l1 ⊔ l2)
+  is-total-preorder-Prop =
     Π-Prop element-Preorder
-      ( λ x → Π-Prop element-Preorder (λ y → incident-Preorder-Prop x y))
+      ( λ x → Π-Prop element-Preorder (λ y → incident-preorder-Prop x y))
 
   is-total-Preorder : UU (l1 ⊔ l2)
-  is-total-Preorder = type-Prop is-total-Preorder-Prop
+  is-total-Preorder = type-Prop is-total-preorder-Prop
 
   is-prop-is-total-Preorder : is-prop is-total-Preorder
-  is-prop-is-total-Preorder = is-prop-type-Prop is-total-Preorder-Prop
+  is-prop-is-total-Preorder = is-prop-type-Prop is-total-preorder-Prop
 ```
 
 ### Least and largest elements in preorders
@@ -77,32 +77,32 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-least-element-Preorder-Prop : element-Preorder X → UU-Prop (l1 ⊔ l2)
-  is-least-element-Preorder-Prop x =
-    Π-Prop (element-Preorder X) (leq-Preorder-Prop X x)
+  is-least-element-preorder-Prop : element-Preorder X → UU-Prop (l1 ⊔ l2)
+  is-least-element-preorder-Prop x =
+    Π-Prop (element-Preorder X) (leq-preorder-Prop X x)
 
   is-least-element-Preorder : element-Preorder X → UU (l1 ⊔ l2)
-  is-least-element-Preorder x = type-Prop (is-least-element-Preorder-Prop x)
+  is-least-element-Preorder x = type-Prop (is-least-element-preorder-Prop x)
 
   is-prop-is-least-element-Preorder :
     (x : element-Preorder X) → is-prop (is-least-element-Preorder x)
   is-prop-is-least-element-Preorder x =
-    is-prop-type-Prop (is-least-element-Preorder-Prop x)
+    is-prop-type-Prop (is-least-element-preorder-Prop x)
 
   least-element-Preorder : UU (l1 ⊔ l2)
   least-element-Preorder = Σ (element-Preorder X) is-least-element-Preorder
 
-  is-largest-element-Preorder-Prop : element-Preorder X → UU-Prop (l1 ⊔ l2)
-  is-largest-element-Preorder-Prop x =
-    Π-Prop (element-Preorder X) (λ y → leq-Preorder-Prop X y x)
+  is-largest-element-preorder-Prop : element-Preorder X → UU-Prop (l1 ⊔ l2)
+  is-largest-element-preorder-Prop x =
+    Π-Prop (element-Preorder X) (λ y → leq-preorder-Prop X y x)
 
   is-largest-element-Preorder : element-Preorder X → UU (l1 ⊔ l2)
-  is-largest-element-Preorder x = type-Prop (is-largest-element-Preorder-Prop x)
+  is-largest-element-Preorder x = type-Prop (is-largest-element-preorder-Prop x)
 
   is-prop-is-largest-element-Preorder :
     (x : element-Preorder X) → is-prop (is-largest-element-Preorder x)
   is-prop-is-largest-element-Preorder x =
-    is-prop-type-Prop (is-largest-element-Preorder-Prop x)
+    is-prop-type-Prop (is-largest-element-preorder-Prop x)
 
   largest-element-Preorder : UU (l1 ⊔ l2)
   largest-element-Preorder = Σ (element-Preorder X) is-largest-element-Preorder
@@ -124,16 +124,16 @@ module _
     Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
   eq-element-sub-Preorder x y = eq-subtype (λ x → is-prop-type-Prop (S x))
 
-  leq-sub-Preorder-Prop : (x y : element-sub-Preorder) → UU-Prop l2
-  leq-sub-Preorder-Prop x y = leq-Preorder-Prop X (pr1 x) (pr1 y)
+  leq-sub-preorder-Prop : (x y : element-sub-Preorder) → UU-Prop l2
+  leq-sub-preorder-Prop x y = leq-preorder-Prop X (pr1 x) (pr1 y)
 
   leq-sub-Preorder : (x y : element-sub-Preorder) → UU l2
-  leq-sub-Preorder x y = type-Prop (leq-sub-Preorder-Prop x y)
+  leq-sub-Preorder x y = type-Prop (leq-sub-preorder-Prop x y)
 
   is-prop-leq-sub-Preorder :
     (x y : element-sub-Preorder) → is-prop (leq-sub-Preorder x y)
   is-prop-leq-sub-Preorder x y =
-    is-prop-type-Prop (leq-sub-Preorder-Prop x y)
+    is-prop-type-Prop (leq-sub-preorder-Prop x y)
 
   refl-leq-sub-Preorder : (x : element-sub-Preorder) → leq-sub-Preorder x x
   refl-leq-sub-Preorder x = refl-leq-Preorder X (pr1 x)
@@ -146,7 +146,7 @@ module _
 
   sub-Preorder : Preorder (l1 ⊔ l3) l2
   pr1 sub-Preorder = element-sub-Preorder
-  pr1 (pr2 sub-Preorder) = leq-sub-Preorder-Prop
+  pr1 (pr2 sub-Preorder) = leq-sub-preorder-Prop
   pr1 (pr2 (pr2 sub-Preorder)) = refl-leq-sub-Preorder
   pr2 (pr2 (pr2 sub-Preorder)) = transitive-leq-sub-Preorder
 ```
@@ -170,10 +170,10 @@ module _
   eq-element-decidable-sub-Preorder =
     eq-element-sub-Preorder X (subtype-decidable-subtype S)
 
-  leq-decidable-sub-Preorder-Prop :
+  leq-decidable-sub-preorder-Prop :
     (x y : element-decidable-sub-Preorder) → UU-Prop l2
-  leq-decidable-sub-Preorder-Prop =
-    leq-sub-Preorder-Prop X (subtype-decidable-subtype S)
+  leq-decidable-sub-preorder-Prop =
+    leq-sub-preorder-Prop X (subtype-decidable-subtype S)
 
   leq-decidable-sub-Preorder : (x y : element-decidable-sub-Preorder) → UU l2
   leq-decidable-sub-Preorder =
@@ -213,16 +213,16 @@ module _
     (T : element-Preorder X → UU-Prop l4)
     where
     
-    inclusion-sub-Preorder-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-Preorder-Prop =
+    inclusion-sub-preorder-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-sub-preorder-Prop =
       Π-Prop (element-Preorder X) (λ x → hom-Prop (S x) (T x))
 
     inclusion-sub-Preorder : UU (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-Preorder = type-Prop inclusion-sub-Preorder-Prop
+    inclusion-sub-Preorder = type-Prop inclusion-sub-preorder-Prop
 
     is-prop-inclusion-sub-Preorder : is-prop inclusion-sub-Preorder
     is-prop-inclusion-sub-Preorder =
-      is-prop-type-Prop inclusion-sub-Preorder-Prop
+      is-prop-type-Prop inclusion-sub-preorder-Prop
 
   refl-inclusion-sub-Preorder :
     {l3 : Level} (S : element-Preorder X → UU-Prop l3) →
@@ -239,7 +239,7 @@ module _
 
   Sub-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
   pr1 (Sub-Preorder l) = element-Preorder X → UU-Prop l
-  pr1 (pr2 (Sub-Preorder l)) = inclusion-sub-Preorder-Prop
+  pr1 (pr2 (Sub-Preorder l)) = inclusion-sub-preorder-Prop
   pr1 (pr2 (pr2 (Sub-Preorder l))) = refl-inclusion-sub-Preorder
   pr2 (pr2 (pr2 (Sub-Preorder l))) = transitive-inclusion-sub-Preorder
 
@@ -252,19 +252,19 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-chain-sub-Preorder-Prop :
+  is-chain-sub-preorder-Prop :
     {l3 : Level} (S : element-Preorder X → UU-Prop l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-Preorder-Prop S = is-total-Preorder-Prop (sub-Preorder X S)
+  is-chain-sub-preorder-Prop S = is-total-preorder-Prop (sub-Preorder X S)
 
   is-chain-sub-Preorder :
     {l3 : Level} (S : element-Preorder X → UU-Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
-  is-chain-sub-Preorder S = type-Prop (is-chain-sub-Preorder-Prop S)
+  is-chain-sub-Preorder S = type-Prop (is-chain-sub-preorder-Prop S)
 
   is-prop-is-chain-sub-Preorder :
     {l3 : Level} (S : element-Preorder X → UU-Prop l3) →
     is-prop (is-chain-sub-Preorder S)
   is-prop-is-chain-sub-Preorder S =
-    is-prop-type-Prop (is-chain-sub-Preorder-Prop S)
+    is-prop-type-Prop (is-chain-sub-preorder-Prop S)
 
 chain-Preorder :
   {l1 l2 : Level} (l : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
@@ -285,24 +285,24 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
   
-  inclusion-chain-Preorder-Prop :
+  inclusion-chain-preorder-Prop :
     {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
     UU-Prop (l1 ⊔ l3 ⊔ l4)
-  inclusion-chain-Preorder-Prop C D =
-    inclusion-sub-Preorder-Prop X
+  inclusion-chain-preorder-Prop C D =
+    inclusion-sub-preorder-Prop X
       ( sub-preorder-chain-Preorder X C)
       ( sub-preorder-chain-Preorder X D)
 
   inclusion-chain-Preorder :
     {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
     UU (l1 ⊔ l3 ⊔ l4)
-  inclusion-chain-Preorder C D = type-Prop (inclusion-chain-Preorder-Prop C D)
+  inclusion-chain-Preorder C D = type-Prop (inclusion-chain-preorder-Prop C D)
 
   is-prop-inclusion-chain-Preorder :
     {l3 l4 : Level} (C : chain-Preorder l3 X) (D : chain-Preorder l4 X) →
     is-prop (inclusion-chain-Preorder C D)
   is-prop-inclusion-chain-Preorder C D =
-    is-prop-type-Prop (inclusion-chain-Preorder-Prop C D)
+    is-prop-type-Prop (inclusion-chain-preorder-Prop C D)
 ```
 
 ### Maximal chains in preorders
@@ -313,20 +313,20 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
   
-  is-maximal-chain-Preorder-Prop :
+  is-maximal-chain-preorder-Prop :
     {l3 : Level} → chain-Preorder l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-Preorder-Prop {l3} C =
-    Π-Prop (chain-Preorder l3 X) (inclusion-chain-Preorder-Prop X C)
+  is-maximal-chain-preorder-Prop {l3} C =
+    Π-Prop (chain-Preorder l3 X) (inclusion-chain-preorder-Prop X C)
 
   is-maximal-chain-Preorder :
     {l3 : Level} → chain-Preorder l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)
-  is-maximal-chain-Preorder C = type-Prop (is-maximal-chain-Preorder-Prop C)
+  is-maximal-chain-Preorder C = type-Prop (is-maximal-chain-preorder-Prop C)
 
   is-prop-is-maximal-chain-Preorder :
     {l3 : Level} (C : chain-Preorder l3 X) →
     is-prop (is-maximal-chain-Preorder C)
   is-prop-is-maximal-chain-Preorder C =
-    is-prop-type-Prop (is-maximal-chain-Preorder-Prop C)
+    is-prop-type-Prop (is-maximal-chain-preorder-Prop C)
 
 maximal-chain-Preorder :
   {l1 l2 : Level} (l3 : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l3)

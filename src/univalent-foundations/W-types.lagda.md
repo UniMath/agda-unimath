@@ -203,7 +203,7 @@ module _
       ( Eq-𝕎 (tree-𝕎 x α) (tree-𝕎 y β))
       ( Eq-𝕎-eq (tree-𝕎 x α) (tree-𝕎 y β))
       ( is-equiv-Eq-𝕎-eq (tree-𝕎 x α) (tree-𝕎 y β))
-      ( is-trunc-Σ k
+      ( is-trunc-Σ
         ( is-trunc-A x y)
         ( λ p → is-trunc-Π k
           ( λ z →
@@ -740,7 +740,7 @@ is-trunc-map-map-𝕎 k D f e H (tree-𝕎 c γ) =
   is-trunc-equiv k
     ( fib-map-𝕎 D f e (tree-𝕎 c γ))
     ( equiv-fib-map-𝕎 D f e (tree-𝕎 c γ))
-    ( is-trunc-Σ k
+    ( is-trunc-Σ
       ( H c)
       ( λ t → is-trunc-Π k (λ d → is-trunc-map-map-𝕎 k D f e H (γ d))))
 
@@ -1435,8 +1435,8 @@ no-infinite-descent-𝕎 {A = A} {B} f =
     ( λ x → (f : ℕ → 𝕎 A B) (p : Id (f zero-ℕ) x) →
             ¬ ((n : ℕ) → (f (succ-ℕ n)) le-𝕎 (f n)))
     ( λ x IH f p H →
-      IH ( f one-ℕ)
-         ( tr (λ t → (f one-ℕ) le-𝕎 t) p (H zero-ℕ))
+      IH ( f 1)
+         ( tr (λ t → (f 1) le-𝕎 t) p (H zero-ℕ))
          ( f ∘ succ-ℕ)
          ( refl)
          ( λ n → H (succ-ℕ n)))

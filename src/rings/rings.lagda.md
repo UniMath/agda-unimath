@@ -750,11 +750,7 @@ equiv-iso-Ab-iso-Ring R1 R2 =
           ( hom-Ab (ab-Ring R1) (ab-Ring R2))
           ( is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2))
           ( λ f → is-ring-homomorphism-hom-Ab R1 R2 (pr1 f)))) ∘e
-      ( equiv-tot
-        ( λ f →
-          equiv-swap-prod
-            ( is-ring-homomorphism-hom-Ab R1 R2 f)
-            ( is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f)))) ∘e
+      ( equiv-tot (λ f → commutative-prod))) ∘e
     ( assoc-Σ
       ( hom-Ab (ab-Ring R1) (ab-Ring R2))
       ( is-ring-homomorphism-hom-Ab R1 R2)
