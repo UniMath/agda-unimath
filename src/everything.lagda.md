@@ -77,7 +77,7 @@ open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.laws-for-operations
-open import foundation.levels
+open import foundation.universe-levels
 open import foundation.lists
 open import foundation.logical-equivalence
 open import foundation.negation

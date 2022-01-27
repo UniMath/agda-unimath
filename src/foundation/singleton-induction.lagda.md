@@ -14,7 +14,7 @@ open import foundation.functions using (ev-pt; _∘_; id)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using
   ( Id; refl; tr; inv; _∙_; ap; left-inv; ind-Id)
-open import foundation.levels using (Level; UU; lsuc; _⊔_)
+open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
 # Singleton induction

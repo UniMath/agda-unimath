@@ -11,7 +11,7 @@ module elementary-number-theory.collatz-conjecture where
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using

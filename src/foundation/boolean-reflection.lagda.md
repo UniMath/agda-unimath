@@ -12,7 +12,7 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.empty-type using (ex-falso)
 open import foundation.identity-types using (Id; refl)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # Boolean reflection

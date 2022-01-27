@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundation.functions where
 
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 ## Basic functions

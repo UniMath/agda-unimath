@@ -22,7 +22,7 @@ open import elementary-number-theory.divisibility-natural-numbers using
     div-left-summand-ℕ; is-zero-div-ℕ; is-zero-div-zero-ℕ; is-one-div-one-ℕ)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
     associative-mul-ℕ; commutative-mul-ℕ)

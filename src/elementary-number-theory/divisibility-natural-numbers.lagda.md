@@ -19,7 +19,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-leq-mul-ℕ'; concatenate-eq-leq-eq-ℕ; leq-add-ℕ'; le-ℕ;
     contradiction-le-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ')
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; commutative-mul-ℕ; right-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
     right-distributive-mul-add-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ;

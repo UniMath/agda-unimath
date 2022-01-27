@@ -30,7 +30,7 @@ open import foundation.identity-types using (Id; ap)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
     is-positive-ℤ; is-positive-int-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import foundation.logical-equivalence using (_↔_)
 open import elementary-number-theory.natural-numbers using (ℕ; is-zero-ℕ)
 ```

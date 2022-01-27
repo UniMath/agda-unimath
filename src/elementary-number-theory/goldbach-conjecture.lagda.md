@@ -16,7 +16,7 @@ open import
   elementary-number-theory.divisibility-natural-numbers using (is-even-ℕ)
 open import foundation.identity-types using (Id)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ)
 open import elementary-number-theory.primes-natural-numbers using (is-prime-ℕ)
 ```

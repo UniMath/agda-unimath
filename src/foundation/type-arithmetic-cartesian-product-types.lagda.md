@@ -15,7 +15,7 @@ open import foundation.equivalences using
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (refl)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 open import foundation.type-arithmetic-dependent-pair-types
 ```
 

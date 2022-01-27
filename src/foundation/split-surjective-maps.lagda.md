@@ -9,7 +9,7 @@ module foundation.split-surjective-maps where
 
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.identity-types using (Id)
-open import foundation.levels using (UU; Level; _⊔_)
+open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
 # Split surjective maps

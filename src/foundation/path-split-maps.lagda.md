@@ -16,7 +16,7 @@ open import foundation.equivalences using
   ( sec; is-equiv; is-equiv-has-inverse)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (ap; inv)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 # Path-split maps

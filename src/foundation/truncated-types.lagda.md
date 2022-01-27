@@ -16,7 +16,7 @@ open import foundation.embeddings using
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
 open import foundation.identity-types using (Id; ap)
-open import foundation.levels using (Level; UU; lsuc)
+open import foundation.universe-levels using (Level; UU; lsuc)
 open import foundation.propositions using
   ( is-prop-is-contr; is-prop; UU-Prop)
 open import foundation.truncation-levels using

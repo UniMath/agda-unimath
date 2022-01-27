@@ -23,7 +23,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
     is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.unit-type using (unit; star)
 ```

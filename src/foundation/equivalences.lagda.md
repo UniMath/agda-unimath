@@ -22,7 +22,7 @@ open import foundation.homotopies using
 open import foundation.identity-types using
   ( Id; refl; concat; concat'; _∙_; inv; ap; tr; inv-inv; inv-con; con-inv;
     right-unit; sq-top-whisk; ap-comp)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Defining equivalences

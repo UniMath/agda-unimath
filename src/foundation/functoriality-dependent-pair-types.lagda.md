@@ -22,7 +22,7 @@ open import foundation.fibers-of-maps using
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (refl; inv)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 # Functoriality of dependent pair types

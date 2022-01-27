@@ -18,7 +18,7 @@ open import foundation.functions using (const; id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
   ( Id; refl; inv; _∙_; left-inv; ap; tr; eq-transpose-tr)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # Contractible types

@@ -16,7 +16,7 @@ open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; _∙_; inv; ap)
 open import elementary-number-theory.iterating-functions using
   ( iterate; iterate-succ-ℕ; iterate-iterate)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin; mod-succ-ℕ; right-unit-law-add-Fin; right-successor-law-add-Fin;

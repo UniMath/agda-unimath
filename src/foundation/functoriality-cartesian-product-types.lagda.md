@@ -14,7 +14,7 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
 open import foundation.identity-types using (refl)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # Functoriality of cartesian product types

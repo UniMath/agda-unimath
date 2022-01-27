@@ -28,7 +28,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; neg-ℤ; is-injective-neg-ℤ; neg-neg-ℤ; int-ℕ;
     neg-succ-ℤ; pred-ℤ; neg-pred-ℤ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; left-negative-law-mul-ℤ; left-zero-law-mul-ℤ;
     right-distributive-mul-add-ℤ)

@@ -20,7 +20,7 @@ open import foundation.empty-type using (ex-falso; ind-empty)
 open import foundation.functions using (_∘_)
 open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin; leq-neg-one-Fin; refl-leq-Fin)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; inl-Fin; neg-one-Fin)

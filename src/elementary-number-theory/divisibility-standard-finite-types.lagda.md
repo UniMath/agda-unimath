@@ -18,7 +18,7 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import foundation.identity-types using (Id; _∙_; inv; ap)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin; mul-Fin'; left-unit-law-mul-Fin; associative-mul-Fin;

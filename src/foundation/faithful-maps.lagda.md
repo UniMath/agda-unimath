@@ -14,7 +14,7 @@ open import foundation.equivalences using
   ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
 open import foundation.functions using (id)
 open import foundation.identity-types using (Id; ap)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)

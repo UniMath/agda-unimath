@@ -10,7 +10,7 @@ module foundation.non-contractible-types where
 open import foundation.contractible-types using (is-contr; center; contraction)
 open import foundation.empty-type using (is-empty; empty)
 open import foundation.functions using (id)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 open import foundation.negation using (¬)
 ```
 

@@ -21,7 +21,7 @@ open import foundation.identity-types using (Id; refl)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
     is-decidable-le-ℕ)
-open import foundation.levels using (UU; Level)
+open import foundation.universe-levels using (UU; Level)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
 open import foundation.negation using (¬)

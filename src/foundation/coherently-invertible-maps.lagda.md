@@ -12,7 +12,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_; _·r_; _·l_)
 open import foundation.identity-types using
   ( inv; _∙_; ap; inv-con)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 # Coherently invertible maps

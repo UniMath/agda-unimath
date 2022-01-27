@@ -14,7 +14,7 @@ open import foundation.contractible-types using
 open import foundation.embeddings using (is-emb; is-emb-is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; ap)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant; all-elements-equal; is-emb-is-emb;
     is-proof-irrelevant-all-elements-equal; eq-is-prop'; is-prop-is-contr)

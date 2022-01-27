@@ -10,7 +10,7 @@ module foundation.logical-equivalence where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
-open import foundation.levels using (UU; Level; _⊔_)
+open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
 # Logical Equivalence

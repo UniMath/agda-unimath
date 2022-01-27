@@ -10,7 +10,7 @@ title: Univalent Mathematics in Agda
 
 module foundation.truncation-levels where
 
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 ## The type of truncation levels

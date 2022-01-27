@@ -15,7 +15,7 @@ open import foundation.equality-fibers-of-maps using
 open import foundation.fibers-of-maps using
   ( fib; equiv-fib-pr1; inv-equiv-fib-pr1)
 open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation.sets using

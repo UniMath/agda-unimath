@@ -13,7 +13,7 @@ open import foundation.equivalences using
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 # Raising universe levels

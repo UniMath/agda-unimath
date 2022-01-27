@@ -20,7 +20,7 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.homotopies using (refl-htpy; _~_)
 open import foundation.identity-types using
   ( Id; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl)
-open import foundation.levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # Equality in the fibers of a map

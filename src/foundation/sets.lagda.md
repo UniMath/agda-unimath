@@ -15,7 +15,7 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-retr)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ind-Id)
-open import foundation.levels using (Level; UU; lsuc; lzero)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 open import foundation.propositions using
   ( is-prop; UU-Prop; all-elements-equal; is-prop-all-elements-equal;
     is-proof-irrelevant-is-prop; eq-is-prop; is-prop-is-equiv')

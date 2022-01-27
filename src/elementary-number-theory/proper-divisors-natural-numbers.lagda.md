@@ -20,7 +20,7 @@ open import elementary-number-theory.equality-natural-numbers using
 open import foundation.identity-types using (Id)
 open import elementary-number-theory.inequality-natural-numbers using
   ( le-ℕ; le-leq-neq-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)

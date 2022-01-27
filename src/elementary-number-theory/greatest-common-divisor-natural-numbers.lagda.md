@@ -35,7 +35,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
     contradiction-le-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import foundation.logical-equivalence using (_↔_)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)

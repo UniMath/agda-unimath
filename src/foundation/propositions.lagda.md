@@ -15,7 +15,7 @@ open import foundation.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse; is-equiv-map-inv-is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; left-inv; inv; _∙_; ap)
-open import foundation.levels using (Level; UU; lsuc; lzero)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 ```
 
 # Propositions

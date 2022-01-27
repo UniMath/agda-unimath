@@ -15,7 +15,7 @@ open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-type using (empty)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.levels using (Level; UU; lzero)
+open import foundation.universe-levels using (Level; UU; lzero)
 open import foundation.unit-type using (unit; star)
 ```
 

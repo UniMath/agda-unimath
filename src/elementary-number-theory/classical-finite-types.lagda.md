@@ -14,7 +14,7 @@ open import elementary-number-theory.congruence-natural-numbers using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; refl)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mod-succ-ℕ; issec-nat-Fin; cong-nat-mod-succ-ℕ)

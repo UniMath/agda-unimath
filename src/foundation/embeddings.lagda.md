@@ -27,7 +27,7 @@ open import foundation.homotopies using
 open import foundation.identity-types using
   ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
     distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 # Embeddings

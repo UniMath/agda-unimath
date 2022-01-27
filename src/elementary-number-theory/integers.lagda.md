@@ -17,7 +17,7 @@ open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
-open import foundation.levels using (UU; Level; lzero)
+open import foundation.universe-levels using (UU; Level; lzero)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
 open import foundation.negation using (¬)

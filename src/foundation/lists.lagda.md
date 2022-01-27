@@ -9,7 +9,7 @@ module foundation.lists where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import foundation.functions using (id; _∘_)
-open import foundation.levels using (UU; Level)
+open import foundation.universe-levels using (UU; Level)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ)

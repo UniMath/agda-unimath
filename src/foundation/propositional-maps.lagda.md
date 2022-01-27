@@ -21,7 +21,7 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation.identity-types using (Id; refl; ap; inv)
-open import foundation.levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; is-prop-is-proof-irrelevant; UU-Prop)
 ```

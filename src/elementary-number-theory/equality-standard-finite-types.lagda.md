@@ -15,7 +15,7 @@ open import foundation.decidable-types using
 open import foundation.empty-type using (empty)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.negation using (functor-neg)
 open import elementary-number-theory.standard-finite-types using

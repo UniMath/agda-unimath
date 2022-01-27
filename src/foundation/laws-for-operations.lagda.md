@@ -8,7 +8,7 @@ title: Univalent Mathematics in Agda
 module foundation.laws-for-operations where
 
 open import foundation.identity-types using (Id; _∙_; inv; ap)
-open import foundation.levels using (UU; Level)
+open import foundation.universe-levels using (UU; Level)
 ```
 
 ## Specifications of laws for operations

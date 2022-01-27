@@ -41,7 +41,7 @@ open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
     is-equiv-pred-ℤ; is-equiv-neg-ℤ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; left-zero-law-mul-ℤ;

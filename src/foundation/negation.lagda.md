@@ -8,7 +8,7 @@ title: Univalent Mathematics in Agda
 module foundation.negation where
 
 open import foundation.empty-type using (empty)
-open import foundation.levels using (UU; Level)
+open import foundation.universe-levels using (UU; Level)
 ```
 
 # Negation

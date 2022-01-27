@@ -9,7 +9,7 @@ module foundation.identity-types where
 
 open import foundation.dependent-pair-types using (Σ; pair)
 open import foundation.functions using (id; _∘_)
-open import foundation.levels using (UU; Level)
+open import foundation.universe-levels using (UU; Level)
 ```
 
 ##  The identity type

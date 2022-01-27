@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 
 module foundation.dependent-pair-types where
 
-open import foundation.levels using (UU; Level; _⊔_)
+open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
 ## Dependent pair types

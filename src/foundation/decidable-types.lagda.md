@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
 open import foundation.empty-type using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
-open import foundation.levels using (UU; Level; _⊔_)
+open import foundation.universe-levels using (UU; Level; _⊔_)
 open import foundation.negation using (¬; functor-neg)
 open import foundation.unit-type using (unit; star)
 ```

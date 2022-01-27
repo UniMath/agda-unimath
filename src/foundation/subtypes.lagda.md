@@ -19,7 +19,7 @@ open import foundation.fibers-of-maps using (equiv-fib-pr1)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.levels using (Level; UU; _⊔_; lsuc)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 open import foundation.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.propositions using

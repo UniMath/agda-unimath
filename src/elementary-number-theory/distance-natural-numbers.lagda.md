@@ -21,7 +21,7 @@ open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; _≤-ℕ_; refl-leq-ℕ; concatenate-eq-leq-eq-ℕ; concatenate-leq-eq-ℕ;
     transitive-leq-ℕ; succ-leq-ℕ; order-three-elements-ℕ; le-ℕ;
     preserves-le-succ-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
 open import elementary-number-theory.natural-numbers using

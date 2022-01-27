@@ -15,7 +15,7 @@ open import foundation.empty-type using (empty; ex-falso; is-prop-empty)
 open import foundation.identity-types using (Id; refl; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-le-ℕ; refl-leq-ℕ; contradiction-le-ℕ)
-open import foundation.levels using (UU; lzero)
+open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import elementary-number-theory.standard-finite-types using
