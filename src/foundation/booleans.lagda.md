@@ -14,6 +14,7 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv)
+open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
@@ -130,4 +131,14 @@ abstract
 bool-Set : UU-Set lzero
 pr1 bool-Set = bool
 pr2 bool-Set = is-set-bool
+```
+
+```agda
+abstract
+  is-injective-const-true : is-injective (const unit bool true)
+  is-injective-const-true {star} {star} p = refl
+
+abstract
+  is-injective-const-false : is-injective (const unit bool false)
+  is-injective-const-false {star} {star} p = refl
 ```

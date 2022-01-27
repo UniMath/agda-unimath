@@ -19,10 +19,13 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ'; pair-eq-Σ)
-open import foundation.fibers-of-maps using (equiv-fib-pr1)
+open import foundation.fibers-of-maps using
+  ( equiv-fib-pr1; equiv-total-fib)
 open import foundation.identity-types using (Id; refl; ap; tr)
+open import foundation.injective-maps using (is-prop-map-is-injective)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant-is-prop)
+open import foundation.sections using (map-section; is-injective-map-section)
 open import foundation.sets using (is-set; is-set-prop-in-id)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr)
@@ -128,4 +131,22 @@ abstract
         ( λ t →
           has-decidable-equality-is-prop
             ( is-set-has-decidable-equality dA (pr1 t) x)))
+```
+
+```agda
+abstract
+  has-decidable-equality-base-has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+    has-decidable-equality (Σ A B) → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality A
+  has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
+    has-decidable-equality-equiv'
+      ( equiv-total-fib (map-section b))
+      ( has-decidable-equality-Σ dΣ
+        ( λ t →
+          has-decidable-equality-is-prop
+            ( is-prop-map-is-injective
+              ( is-set-has-decidable-equality dΣ)
+              ( is-injective-map-section b)
+              ( t))))
 ```
