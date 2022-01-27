@@ -7,15 +7,19 @@ title: Univalent Mathematics in Agda
 
 module foundation.propositions where
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
-  ( is-contr; eq-is-contr; is-contr-is-equiv)
+  ( is-contr; eq-is-contr; is-contr-is-equiv; is-contr-equiv'; is-contr-Σ')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; is-emb-is-equiv)
+open import foundation.equality-dependent-pair-types using
+  ( Eq-Σ; equiv-eq-pair-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse; is-equiv-map-inv-is-equiv)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; left-inv; inv; _∙_; ap)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+open import foundation.identity-types using
+  ( Id; refl; left-inv; inv; _∙_; ap; tr)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 ```
 
 # Propositions
@@ -160,4 +164,42 @@ module _
   abstract
     is-prop-equiv' : A ≃ B → is-prop A → is-prop B
     is-prop-equiv' (pair f is-equiv-f) = is-prop-is-equiv' is-equiv-f
+```
+
+### Propositions are closed under dependent pair types
+
+```agda
+abstract
+  is-prop-Σ : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-prop A → ((x : A) → is-prop (B x)) → is-prop (Σ A B)
+  is-prop-Σ H K x y =
+    is-contr-equiv'
+      ( Eq-Σ x y)
+      ( equiv-eq-pair-Σ x y)
+      ( is-contr-Σ'
+        ( H (pr1 x) (pr1 y))
+        ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
+
+Σ-Prop :
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : type-Prop P → UU-Prop l2) →
+  UU-Prop (l1 ⊔ l2)
+pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
+pr2 (Σ-Prop P Q) =
+  is-prop-Σ
+    ( is-prop-type-Prop P)
+    ( λ p → is-prop-type-Prop (Q p))
+```
+
+### Propositions are closed under cartesian product types
+
+```agda
+abstract
+  is-prop-prod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-prop A → is-prop B → is-prop (A × B)
+  is-prop-prod H K = is-prop-Σ H (λ x → K)
+
+prod-Prop : {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+pr1 (prod-Prop P Q) = type-Prop P × type-Prop Q
+pr2 (prod-Prop P Q) = is-prop-prod (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```

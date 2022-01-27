@@ -15,6 +15,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
+open import foundation.sets using (is-set; UU-Set)
 open import foundation.truncated-types using (is-trunc; is-trunc-is-prop)
 open import foundation.truncation-levels using (𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; lzero; UU)
@@ -79,6 +80,8 @@ equiv-is-empty f g =
   ( pair f (is-equiv-is-empty f id))
 ```
 
+### The empty type is a proposition
+
 ```agda
 abstract
   is-prop-empty : is-prop empty
@@ -87,6 +90,17 @@ abstract
 empty-Prop : UU-Prop lzero
 pr1 empty-Prop = empty
 pr2 empty-Prop = is-prop-empty
+```
+
+### The empty type is a set
+
+```agda
+is-set-empty : is-set empty
+is-set-empty ()
+
+empty-Set : UU-Set lzero
+pr1 empty-Set = empty
+pr2 empty-Set = is-set-empty
 ```
 
 ```agda

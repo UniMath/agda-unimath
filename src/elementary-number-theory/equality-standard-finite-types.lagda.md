@@ -16,11 +16,14 @@ open import elementary-number-theory.standard-finite-types using
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
-open import foundation.empty-type using (empty)
+open import foundation.dependent-pair-types using (pr1; pr2)
+open import foundation.empty-type using (empty; is-set-empty)
+open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.negation using (functor-neg)
-open import foundation.unit-type using (unit; star)
+open import foundation.sets using (is-set; UU-Set)
+open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -70,4 +73,18 @@ is-decidable-is-one-Fin :
   {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin x)
 is-decidable-is-one-Fin {succ-ℕ k} x =
   has-decidable-equality-Fin x one-Fin
+```
+
+### The standard finite types are sets
+
+```agda
+abstract
+  is-set-Fin : (n : ℕ) → is-set (Fin n)
+  is-set-Fin zero-ℕ = is-set-empty
+  is-set-Fin (succ-ℕ n) =
+    is-set-coprod (is-set-Fin n) is-set-unit
+
+Fin-Set : (n : ℕ) → UU-Set lzero
+pr1 (Fin-Set n) = Fin n
+pr2 (Fin-Set n) = is-set-Fin n
 ```

@@ -12,12 +12,13 @@ open import foundation.contractible-types using
     is-contr-equiv; is-contr-Σ; is-contr-retract-of)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-equiv; is-fiberwise-equiv; retr; sec; is-equiv-sec-is-equiv)
+  ( is-equiv; is-fiberwise-equiv; sec; is-equiv-sec-is-equiv)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv;
     tot-comp; tot-htpy; tot-id)
 open import foundation.homotopies using (inv-htpy; _∙h_)
 open import foundation.identity-types using (Id; ind-Id)
+open import foundation.retractions using (retr)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( interchange-Σ-Σ)
 open import foundation.universe-levels using (Level; UU)

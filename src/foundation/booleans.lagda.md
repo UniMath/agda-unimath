@@ -7,10 +7,11 @@ title: Univalent Mathematics in Agda
 
 module foundation.booleans where
 
+open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-type using (empty; is-prop-empty)
 open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (id; _∘_; const)
+open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv)
 open import foundation.negation using (¬)

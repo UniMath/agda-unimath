@@ -17,7 +17,8 @@ open import foundation.decidable-types using (is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-type using
-  ( empty; is-empty; is-equiv-is-empty'; is-equiv-is-empty)
+  ( empty; is-empty; is-equiv-is-empty'; is-equiv-is-empty; is-trunc-is-empty;
+    ex-falso)
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse; _∘e_; map-equiv; is-equiv-left-factor)
 open import foundation.functions using (_∘_; id)
@@ -28,6 +29,12 @@ open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; ap; ap-comp; inv)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
+open import foundation.propositions using
+  ( all-elements-equal; is-prop; is-prop-all-elements-equal; UU-Prop;
+    eq-is-prop'; type-Prop; is-prop-type-Prop)
+open import foundation.sets using (is-set; UU-Set)
+open import foundation.truncated-types using (is-trunc; is-trunc-equiv)
+open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -296,4 +303,78 @@ module _
       ( λ p → ap-comp (ind-coprod (λ x → C) f g) inr p)
       ( K b b')
       ( is-emb-inr A B b b')
+```
+
+### Coproducts of mutually exclusive propositions are propositions
+
+```agda
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
+
+  abstract
+    all-elements-equal-coprod :
+      (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
+      all-elements-equal (coprod P Q)
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inl p') =
+      ap inl (is-prop-P p p')
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inr q') =
+      ex-falso (f p q')
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inl p') =
+      ex-falso (f p' q)
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inr q') =
+      ap inr (is-prop-Q q q')
+  
+  abstract
+    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (coprod P Q)
+    is-prop-coprod f is-prop-P is-prop-Q =
+      is-prop-all-elements-equal
+        ( all-elements-equal-coprod f
+          ( eq-is-prop' is-prop-P)
+          ( eq-is-prop' is-prop-Q))
+
+coprod-Prop :
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+  (type-Prop P → ¬ (type-Prop Q)) → UU-Prop (l1 ⊔ l2)
+pr1 (coprod-Prop P Q H) = coprod (type-Prop P) (type-Prop Q)
+pr2 (coprod-Prop P Q H) =
+  is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)
+```
+
+### Coproducts of (k+2)-truncated types are (k+2)-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-trunc-coprod :
+      is-trunc (succ-𝕋 (succ-𝕋 k)) A → is-trunc (succ-𝕋 (succ-𝕋 k)) B →
+      is-trunc (succ-𝕋 (succ-𝕋 k)) (coprod A B)
+    is-trunc-coprod is-trunc-A is-trunc-B (inl x) (inl y) =
+      is-trunc-equiv (succ-𝕋 k)
+        ( Id x y)
+        ( compute-eq-coprod-inl-inl x y)
+        ( is-trunc-A x y)
+    is-trunc-coprod is-trunc-A is-trunc-B (inl x) (inr y) =
+      is-trunc-is-empty k (is-empty-eq-coprod-inl-inr x y)
+    is-trunc-coprod is-trunc-A is-trunc-B (inr x) (inl y) =
+      is-trunc-is-empty k (is-empty-eq-coprod-inr-inl x y)
+    is-trunc-coprod is-trunc-A is-trunc-B (inr x) (inr y) =
+      is-trunc-equiv (succ-𝕋 k)
+        ( Id x y)
+        ( compute-eq-coprod-inr-inr x y)
+        ( is-trunc-B x y)
+
+abstract
+  is-set-coprod : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-set A → is-set B → is-set (coprod A B)
+  is-set-coprod = is-trunc-coprod neg-two-𝕋
+
+coprod-Set :
+  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
+pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = coprod A B
+pr2 (coprod-Set (pair A is-set-A) (pair B is-set-B)) =
+  is-set-coprod is-set-A is-set-B
 ```

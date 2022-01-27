@@ -21,7 +21,7 @@ open import foundation.sets using
   ( is-set; is-set-equiv; UU-Set; type-Set; is-set-type-Set)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-succ-is-trunc; is-trunc-equiv; UU-Truncated-Type;
-    is-trunc-is-equiv')
+    is-trunc-is-equiv'; is-trunc-Σ; is-trunc-Id; is-trunc-equiv')
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -142,4 +142,29 @@ module _
     (B : A → UU-Set l2) → 0-map (Σ A (λ x → type-Set (B x))) A
   pr1 (pr1-0-map B) = pr1
   pr2 (pr1-0-map B) = is-0-map-pr1 (λ x → is-set-type-Set (B x))
+```
+
+### Any map between k-truncated types is k-truncated
+
+```agda
+abstract
+  is-trunc-map-is-trunc-domain-codomain :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1}
+    {B : UU l2} {f : A → B} → is-trunc k A → is-trunc k B → is-trunc-map k f
+  is-trunc-map-is-trunc-domain-codomain k {f = f} is-trunc-A is-trunc-B b =
+    is-trunc-Σ is-trunc-A (λ x → is-trunc-Id is-trunc-B (f x) b)
+```
+
+### A type family over a k-truncated type A is a family of k-truncated types if its total space is k-truncated
+
+```agda
+abstract
+  is-trunc-fam-is-trunc-Σ :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
+    is-trunc k A → is-trunc k (Σ A B) → (x : A) → is-trunc k (B x)
+  is-trunc-fam-is-trunc-Σ k {B = B} is-trunc-A is-trunc-ΣAB x =
+    is-trunc-equiv' k
+      ( fib pr1 x)
+      ( equiv-fib-pr1 B x)
+      ( is-trunc-map-is-trunc-domain-codomain k is-trunc-ΣAB is-trunc-A x)
 ```

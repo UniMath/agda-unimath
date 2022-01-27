@@ -9,6 +9,7 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.standard-finite-types where
 
+open import elementary-number-theory.equality-natural-numbers using (is-set-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
     leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
@@ -20,14 +21,14 @@ open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_)
+open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-type using (empty; ex-falso)
 open import foundation.equality-coproduct-types using (is-emb-inl)
 open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
-open import foundation.injective-maps using (is-injective)
+open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.negation using (¬; functor-neg)
 open import foundation.non-contractible-types using
   ( is-not-contractible; is-not-contractible-empty)
@@ -134,6 +135,13 @@ is-injective-nat-Fin {succ-ℕ k} {inr star} {inl y} p =
   ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin y) (inv p))
 is-injective-nat-Fin {succ-ℕ k} {inr star} {inr star} p =
   refl
+
+is-emb-nat-Fin : {k : ℕ} → is-emb (nat-Fin {k})
+is-emb-nat-Fin {k} = is-emb-is-injective is-set-ℕ is-injective-nat-Fin
+
+emb-nat-Fin : (k : ℕ) → Fin k ↪ ℕ
+pr1 (emb-nat-Fin k) = nat-Fin
+pr2 (emb-nat-Fin k) = is-emb-nat-Fin
 ```
 
 ## The zero elements in the standard finite types

@@ -9,18 +9,25 @@ title: Univalent Mathematics in Agda
 
 module foundation.truncated-types where
 
-open import foundation.contractible-types using (is-contr; is-contr-is-equiv)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.contractible-types using
+  ( is-contr; is-contr-is-equiv; is-contr-Σ'; is-contr-left-factor-prod;
+    is-contr-right-factor-prod; is-contr-retract-of)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb-is-equiv; is-emb; _↪_; map-emb; is-emb-map-emb)
+open import foundation.equality-cartesian-product-types using
+  ( Eq-prod; equiv-pair-eq)
+open import foundation.equality-dependent-pair-types using (equiv-pair-eq-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
-open import foundation.identity-types using (Id; ap)
+open import foundation.identity-types using (Id; ap; tr; refl)
 open import foundation.propositions using
   ( is-prop-is-contr; is-prop; UU-Prop)
+open import foundation.retractions using (_retract-of_; retract-eq)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; succ-𝕋; one-𝕋; neg-one-𝕋; zero-𝕋)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
 ```agda
@@ -166,4 +173,99 @@ abstract
     {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A ↪ B) →
     is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
+```
+
+### Truncated types are closed under dependent pair types
+
+```agda
+abstract
+  is-trunc-Σ :
+    {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : A → UU l2} →
+    is-trunc k A → ((x : A) → is-trunc k (B x)) → is-trunc k (Σ A B)
+  is-trunc-Σ {k = neg-two-𝕋} is-trunc-A is-trunc-B =
+    is-contr-Σ' is-trunc-A is-trunc-B
+  is-trunc-Σ {k = succ-𝕋 k} {B = B} is-trunc-A is-trunc-B s t =
+    is-trunc-equiv k
+      ( Σ (Id (pr1 s) (pr1 t)) (λ p → Id (tr B p (pr2 s)) (pr2 t)))
+      ( equiv-pair-eq-Σ s t)
+      ( is-trunc-Σ
+        ( is-trunc-A (pr1 s) (pr1 t))
+        ( λ p → is-trunc-B (pr1 t) (tr B p (pr2 s)) (pr2 t)))
+
+Σ-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type k l1)
+  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  UU-Truncated-Type k (l1 ⊔ l2)
+pr1 (Σ-Truncated-Type A B) =
+  Σ (type-Truncated-Type A) (λ a → type-Truncated-Type (B a))
+pr2 (Σ-Truncated-Type A B) =
+  is-trunc-Σ
+    ( is-trunc-type-Truncated-Type A)
+    ( λ a → is-trunc-type-Truncated-Type (B a))
+
+fib-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type k l1)
+  (B : UU-Truncated-Type k l2)
+  (f : type-Truncated-Type A → type-Truncated-Type B) →
+  type-Truncated-Type B → UU-Truncated-Type k (l1 ⊔ l2)
+fib-Truncated-Type A B f b =
+  Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
+
+
+-- Exercise 12.6
+
+abstract
+  is-trunc-prod :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+    is-trunc k A → is-trunc k B → is-trunc k (A × B)
+  is-trunc-prod k is-trunc-A is-trunc-B =
+    is-trunc-Σ is-trunc-A (λ x → is-trunc-B)
+
+is-trunc-prod' :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  (B → is-trunc (succ-𝕋 k) A) → (A → is-trunc (succ-𝕋 k) B) →
+  is-trunc (succ-𝕋 k) (A × B)
+is-trunc-prod' k f g (pair a b) (pair a' b') =
+  is-trunc-equiv k
+    ( Eq-prod (pair a b) (pair a' b'))
+    ( equiv-pair-eq (pair a b) (pair a' b'))
+    ( is-trunc-prod k (f b a a') (g a b b'))
+
+is-trunc-left-factor-prod :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  is-trunc k (A × B) → B → is-trunc k A
+is-trunc-left-factor-prod neg-two-𝕋 {A} {B} H b =
+  is-contr-left-factor-prod A B H
+is-trunc-left-factor-prod (succ-𝕋 k) H b a a' =
+  is-trunc-left-factor-prod k {A = Id a a'} {B = Id b b}
+    ( is-trunc-equiv' k
+      ( Id (pair a b) (pair a' b))
+      ( equiv-pair-eq (pair a b) (pair a' b))
+      ( H (pair a b) (pair a' b)))
+    ( refl)
+
+is-trunc-right-factor-prod :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  is-trunc k (A × B) → A → is-trunc k B
+is-trunc-right-factor-prod neg-two-𝕋 {A} {B} H a =
+  is-contr-right-factor-prod A B H
+is-trunc-right-factor-prod (succ-𝕋 k) {A} {B} H a b b' =
+  is-trunc-right-factor-prod k {A = Id a a} {B = Id b b'}
+    ( is-trunc-equiv' k
+      ( Id (pair a b) (pair a b'))
+      ( equiv-pair-eq (pair a b) (pair a b'))
+      ( H (pair a b) (pair a b')))
+    ( refl)
+```
+
+```agda
+abstract
+  is-trunc-retract-of : {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+    A retract-of B → is-trunc k B → is-trunc k A
+  is-trunc-retract-of neg-two-𝕋 (pair i (pair r H)) is-trunc-B =
+    is-contr-retract-of _ (pair i (pair r H)) is-trunc-B
+  is-trunc-retract-of (succ-𝕋 k) (pair i retr-i) is-trunc-B x y =
+    is-trunc-retract-of k
+      ( retract-eq (pair i retr-i) x y)
+      ( is-trunc-B (i x) (i y))
 ```

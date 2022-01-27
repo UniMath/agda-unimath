@@ -27,9 +27,9 @@ open import elementary-number-theory.congruence-natural-numbers using
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)
 open import elementary-number-theory.equality-integers using
-  ( has-decidable-equality-ℤ)
+  ( has-decidable-equality-ℤ; is-set-ℤ)
 open import elementary-number-theory.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
+  ( has-decidable-equality-Fin; is-set-Fin)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
@@ -56,6 +56,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary
 open import foundation.injective-maps using
   ( is-injective; is-injective-id; is-injective-comp')
 open import foundation.negation using (¬; functor-neg)
+open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -96,6 +97,19 @@ one-ℤ-Mod (succ-ℕ k) = one-Fin
 has-decidable-equality-ℤ-Mod : (k : ℕ) → has-decidable-equality (ℤ-Mod k)
 has-decidable-equality-ℤ-Mod zero-ℕ = has-decidable-equality-ℤ
 has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin
+```
+
+### The integers modulo k form a set
+
+```agda
+abstract
+  is-set-ℤ-Mod : (k : ℕ) → is-set (ℤ-Mod k)
+  is-set-ℤ-Mod zero-ℕ = is-set-ℤ
+  is-set-ℤ-Mod (succ-ℕ k) = is-set-Fin (succ-ℕ k)
+
+ℤ-Mod-Set : (k : ℕ) → UU-Set lzero
+pr1 (ℤ-Mod-Set k) = ℤ-Mod k
+pr2 (ℤ-Mod-Set k) = is-set-ℤ-Mod k
 ```
 
 ## The inclusion of the integers modulo k into ℤ

@@ -12,12 +12,13 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-cartesian-product-types using (eq-pair)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
-  ( _retract-of_; is-equiv; is-equiv-comp'; _≃_; map-inv-is-equiv;
+  ( is-equiv; is-equiv-comp'; _≃_; map-inv-is-equiv;
     is-equiv-map-inv-is-equiv; is-equiv-has-inverse; isretr-map-inv-is-equiv)
-open import foundation.functions using (const; id; _∘_)
+open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
   ( Id; refl; inv; _∙_; left-inv; ap; tr; eq-transpose-tr)
+open import foundation.retractions using (_retract-of_)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -47,7 +48,7 @@ eq-is-contr C {x} {y} = eq-is-contr' C x y
 abstract
   contraction :
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
-    (const A A (center is-contr-A) ~ id)
+    (x : A) → Id (center is-contr-A) x
   contraction C x = eq-is-contr C
   
   coh-contraction :
@@ -137,7 +138,7 @@ module _
       (f : A → B) → is-contr A → is-contr B → is-equiv f
     is-equiv-is-contr f is-contr-A is-contr-B =
       is-equiv-has-inverse
-        ( const B A (center is-contr-A))
+        ( λ y → center is-contr-A)
         ( λ y → eq-is-contr is-contr-B)
         ( contraction is-contr-A)
 

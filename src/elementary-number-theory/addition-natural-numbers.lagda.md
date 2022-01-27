@@ -9,14 +9,16 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.addition-natural-numbers where
 
+open import elementary-number-theory.equality-natural-numbers using (is-set-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair)
+open import foundation.embeddings using (is-emb)
 open import foundation.empty-type using (ex-falso)
 open import foundation.functions using (id)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundation.injective-maps using (is-injective)
+open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.negation using (¬)
@@ -121,6 +123,12 @@ is-injective-add-ℕ' (succ-ℕ k) p = is-injective-add-ℕ' k (is-injective-suc
 is-injective-add-ℕ : (k : ℕ) → is-injective (add-ℕ k)
 is-injective-add-ℕ k {x} {y} p =
   is-injective-add-ℕ' k (commutative-add-ℕ x k ∙ (p ∙ commutative-add-ℕ k y))
+
+is-emb-add-ℕ : (x : ℕ) → is-emb (add-ℕ x)
+is-emb-add-ℕ x = is-emb-is-injective is-set-ℕ (is-injective-add-ℕ x)
+
+is-emb-add-ℕ' : (x : ℕ) → is-emb (add-ℕ' x)
+is-emb-add-ℕ' x = is-emb-is-injective is-set-ℕ (is-injective-add-ℕ' x)
 
 is-zero-right-is-zero-add-ℕ :
   (x y : ℕ) → is-zero-ℕ (add-ℕ x y) → is-zero-ℕ y

@@ -22,6 +22,7 @@ open import foundation.homotopies using
 open import foundation.identity-types using
   ( Id; refl; concat; concat'; _∙_; inv; ap; tr; inv-inv; inv-con; con-inv;
     right-unit; sq-top-whisk; ap-comp)
+open import foundation.retractions using (retr)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -34,31 +35,6 @@ module _
   
   sec : (f : A → B) → UU (l1 ⊔ l2)
   sec f = Σ (B → A) (λ g → (f ∘ g) ~ id)
-
-  retr : (f : A → B) → UU (l1 ⊔ l2)
-  retr f = Σ (B → A) (λ g → (g ∘ f) ~ id)
-
-_retract-of_ :
-  {i j : Level} → UU i → UU j → UU (i ⊔ j)
-A retract-of B = Σ (A → B) retr
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-  
-  section-retract-of : A retract-of B → A → B
-  section-retract-of = pr1
-
-  retr-section-retract-of : (R : A retract-of B) → retr (section-retract-of R)
-  retr-section-retract-of = pr2
-
-  retraction-retract-of : (A retract-of B) → B → A
-  retraction-retract-of R = pr1 (retr-section-retract-of R)
-
-  is-retr-retraction-retract-of :
-    (R : A retract-of B) →
-    (retraction-retract-of R ∘ section-retract-of R) ~ id
-  is-retr-retraction-retract-of R = pr2 (retr-section-retract-of R)
 
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = sec f × retr f

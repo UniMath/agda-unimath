@@ -9,6 +9,7 @@ title: Univalent Mathematics in Agda
 
 module foundation.sets where
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; contraction)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
@@ -21,9 +22,9 @@ open import foundation.propositions using
 open import foundation.truncated-types using
   ( is-trunc-succ-is-trunc; truncated-type-succ-Truncated-Type;
     is-trunc-is-contr; is-trunc-is-equiv; is-trunc-equiv; is-trunc-is-equiv';
-    is-trunc-equiv')
+    is-trunc-equiv'; is-trunc-Σ; is-trunc-prod)
 open import foundation.truncation-levels using (neg-one-𝕋; zero-𝕋)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 ```
 
 A type is a set if its identity types are propositions
@@ -145,4 +146,33 @@ abstract
     {i j : Level} (A : UU i) {B : UU j} (e : A ≃ B) →
     is-set A → is-set B
   is-set-equiv' = is-trunc-equiv' zero-𝕋
+```
+
+### Sets are closed under dependent pair types
+
+```agda
+abstract
+  is-set-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-set A → ((x : A) → is-set (B x)) → is-set (Σ A B)
+  is-set-Σ = is-trunc-Σ {k = zero-𝕋}
+
+Σ-Set :
+  {l1 l2 : Level} (A : UU-Set l1) (B : pr1 A → UU-Set l2) → UU-Set (l1 ⊔ l2)
+pr1 (Σ-Set A B) = Σ (type-Set A) (λ x → (type-Set (B x)))
+pr2 (Σ-Set A B) = is-set-Σ (is-set-type-Set A) (λ x → is-set-type-Set (B x))
+```
+
+### Sets are closed under cartesian product types
+
+```agda
+abstract
+  is-set-prod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-set A → is-set B → is-set (A × B)
+  is-set-prod = is-trunc-prod zero-𝕋
+  
+prod-Set :
+  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
+prod-Set A B = Σ-Set A (λ x → B)
 ```
