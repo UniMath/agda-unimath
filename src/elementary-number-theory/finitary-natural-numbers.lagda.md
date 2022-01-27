@@ -14,9 +14,9 @@ open import elementary-number-theory.addition-natural-numbers using
 open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; concatenate-cong-eq-ℕ; translation-invariant-cong-ℕ';
     eq-cong-le-ℕ; concatenate-cong-eq-cong-ℕ; symm-cong-ℕ)
-open import foundations.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair)
-open import foundations.empty-type using (is-empty; ex-falso)
+open import foundation.empty-type using (is-empty; ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -32,7 +32,7 @@ open import elementary-number-theory.natural-numbers using
 open import elementary-number-theory.standard-finite-types using
   ( Fin; nat-Fin; strict-upper-bound-nat-Fin; is-injective-nat-Fin; zero-Fin;
     succ-Fin; nat-succ-Fin; is-zero-nat-zero-Fin)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # The finitary natural numbers

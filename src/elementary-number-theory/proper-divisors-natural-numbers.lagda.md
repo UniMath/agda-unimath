@@ -10,7 +10,7 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.proper-divisors-natural-numbers where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.decidable-types using
+open import foundation.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
@@ -26,7 +26,7 @@ open import
   ( is-decidable-div-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ)
-open import foundations.negation using (¬)
+open import foundation.negation using (¬)
 ```
 
 # Proper divisors of natural numbers

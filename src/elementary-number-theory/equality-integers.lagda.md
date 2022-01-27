@@ -9,12 +9,12 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.equality-integers where
 
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-equality using
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-unit)
-open import foundations.decidable-types using (is-decidable)
-open import foundations.empty-type using (empty)
-open import foundations.equality-coproduct-types using
+open import foundation.decidable-types using (is-decidable)
+open import foundation.empty-type using (empty)
+open import foundation.equality-coproduct-types using
   ( has-decidable-equality-coprod)
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ)
@@ -23,7 +23,7 @@ open import foundation.identity-types using (Id; refl; ap)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ)
 open import foundation.levels using (UU; lzero)
-open import foundations.unit-type using (unit; star)
+open import foundation.unit-type using (unit; star)
 ```
 
 ### Observational equality on ℤ

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.unit-type where
+module foundation.unit-type where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using

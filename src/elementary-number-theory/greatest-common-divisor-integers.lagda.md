@@ -14,7 +14,7 @@ open import elementary-number-theory.absolute-value-integers using
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
@@ -31,7 +31,7 @@ open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
     is-positive-ℤ; is-positive-int-ℕ)
 open import foundation.levels using (UU; lzero)
-open import foundations.logical-equivalence using (_↔_)
+open import foundation.logical-equivalence using (_↔_)
 open import elementary-number-theory.natural-numbers using (ℕ; is-zero-ℕ)
 ```
 

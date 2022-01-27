@@ -11,7 +11,7 @@ module elementary-number-theory.congruence-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; commutative-add-ℕ)
-open import foundations.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; eq-dist-ℕ; right-unit-law-dist-ℕ; dist-eq-ℕ; symmetric-dist-ℕ;

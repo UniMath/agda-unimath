@@ -9,9 +9,9 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.inequality-standard-finite-types where
 
-open import foundations.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (empty; ex-falso; is-prop-empty)
+open import foundation.empty-type using (empty; ex-falso; is-prop-empty)
 open import foundation.identity-types using (Id; refl; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-le-ℕ; refl-leq-ℕ; contradiction-le-ℕ)
@@ -20,7 +20,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.propositions using (is-prop; UU-Prop)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
-open import foundations.unit-type using (unit; star; is-prop-unit)
+open import foundation.unit-type using (unit; star; is-prop-unit)
 ```
 
 # Inequality on the standard finite types

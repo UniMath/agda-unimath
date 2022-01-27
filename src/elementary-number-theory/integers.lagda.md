@@ -9,9 +9,9 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.integers where
 
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (empty; ex-falso)
+open import foundation.empty-type using (empty; ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
@@ -20,8 +20,8 @@ open import foundation.injective-maps using (is-injective)
 open import foundation.levels using (UU; Level; lzero)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
-open import foundations.negation using (¬)
-open import foundations.unit-type using (unit; star)
+open import foundation.negation using (¬)
+open import foundation.unit-type using (unit; star)
 ```
 
 ## The type of integers

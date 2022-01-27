@@ -14,7 +14,7 @@ open import elementary-number-theory.addition-natural-numbers using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; is-additive-right-inverse-dist-ℕ)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-leq-mul-ℕ'; concatenate-eq-leq-eq-ℕ; leq-add-ℕ'; le-ℕ;
@@ -28,7 +28,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ)
-open import foundations.negation using (¬)
+open import foundation.negation using (¬)
 ```
 
 # Divisibility on the natural numbers

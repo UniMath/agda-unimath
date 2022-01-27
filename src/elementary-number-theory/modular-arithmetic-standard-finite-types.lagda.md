@@ -17,8 +17,8 @@ open import elementary-number-theory.congruence-natural-numbers using
     cong-is-zero-nat-zero-Fin; eq-cong-le-ℕ; concatenate-eq-cong-eq-ℕ;
     refl-cong-ℕ; congruence-mul-ℕ; translation-invariant-cong-ℕ;
     translation-invariant-cong-ℕ')
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
@@ -47,7 +47,7 @@ open import elementary-number-theory.standard-finite-types using
     is-zero-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
     upper-bound-nat-Fin; one-Fin; is-one-nat-one-Fin; neg-one-Fin; is-one-Fin;
     pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # Modular arithmetic

@@ -11,17 +11,17 @@ module elementary-number-theory.equivalences-standard-finite-types where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (coprod)
-open import foundations.empty-type using (left-absorption-prod)
+open import foundation.coproduct-types using (coprod)
+open import foundation.empty-type using (left-absorption-prod)
 open import foundation.equivalences using (_≃_; id-equiv; _∘e_; inv-equiv)
-open import foundations.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import elementary-number-theory.standard-finite-types using (Fin)
-open import foundations.type-arithmetic-coproduct-types using
+open import foundation.type-arithmetic-coproduct-types using
   ( right-unit-law-coprod; inv-assoc-coprod; right-distributive-prod-coprod)
-open import foundations.unit-type using (unit; left-unit-law-prod)
+open import foundation.unit-type using (unit; left-unit-law-prod)
 ```
 
 # Equivalences between standard finite types

@@ -11,7 +11,7 @@ module elementary-number-theory.addition-natural-numbers where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import foundation.functions using (id)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)
@@ -19,7 +19,7 @@ open import foundation.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ)
-open import foundations.negation using (¬)
+open import foundation.negation using (¬)
 ```
 
 ##  Addition and multiplication on ℕ

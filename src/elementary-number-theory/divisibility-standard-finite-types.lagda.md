@@ -11,7 +11,7 @@ module elementary-number-theory.divisibility-standard-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; concatenate-eq-cong-ℕ; scalar-invariant-cong-ℕ; symm-cong-ℕ)
-open import foundations.decidable-types using (is-decidable)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( right-unit-law-dist-ℕ)

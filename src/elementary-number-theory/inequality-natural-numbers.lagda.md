@@ -12,12 +12,12 @@ module elementary-number-theory.inequality-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (coprod; inl; inr)
-open import foundations.decidable-types using (is-decidable)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pair)
-open import foundations.empty-type using (empty; ex-falso)
+open import foundation.empty-type using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
-open import foundations.functoriality-coproduct-types using (map-coprod)
+open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; inv; ap; tr)
 open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
@@ -26,8 +26,8 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
-open import foundations.negation using (¬)
-open import foundations.unit-type using (unit; star)
+open import foundation.negation using (¬)
+open import foundation.unit-type using (unit; star)
 ```
 
 # Inequality on the natural numbers

@@ -18,10 +18,10 @@ open import elementary-number-theory.addition-integers using
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; commutative-add-ℕ; left-unit-law-add-ℕ;
     left-successor-law-add-ℕ)
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import elementary-number-theory.equality-integers using (Eq-eq-ℤ)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
@@ -38,9 +38,9 @@ open import foundation.laws-for-operations using
 open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import foundations.type-arithmetic-coproduct-types using
+open import foundation.type-arithmetic-coproduct-types using
   ( map-left-unit-law-coprod-is-empty)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # Multiplication of integers

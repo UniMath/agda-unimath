@@ -9,7 +9,7 @@ module foundation.equality-coproduct-types where
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path)
-open import foundations.coproduct-types using
+open import foundation.coproduct-types using
   ( coprod; inl; inr; ind-coprod;
     is-injective-inl; is-injective-inr; neq-inl-inr; neq-inr-inl)
 open import foundation.decidable-equality using (has-decidable-equality)

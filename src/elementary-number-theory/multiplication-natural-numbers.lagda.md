@@ -14,7 +14,7 @@ open import elementary-number-theory.addition-natural-numbers using
     left-successor-law-add-ℕ; commutative-add-ℕ; is-injective-add-ℕ';
     is-zero-right-is-zero-add-ℕ; neq-add-ℕ)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)
 open import foundation.laws-for-operations using
@@ -22,7 +22,7 @@ open import foundation.laws-for-operations using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-nonzero-ℕ; is-successor-is-nonzero-ℕ;
     is-injective-succ-ℕ)
-open import foundations.negation using (¬)
+open import foundation.negation using (¬)
 ```
 
 # Multiplication on the natural numbers

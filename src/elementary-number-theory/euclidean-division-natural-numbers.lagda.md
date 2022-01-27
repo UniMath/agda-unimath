@@ -17,7 +17,7 @@ open import elementary-number-theory.congruence-natural-numbers using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; symmetric-dist-ℕ; is-difference-dist-ℕ')
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
 open import

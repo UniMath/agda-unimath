@@ -9,11 +9,11 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.factorial-natural-numbers where
 
-open import foundations.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; transitive-div-ℕ)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import elementary-number-theory.equality-natural-numbers using (Eq-eq-ℕ)
 open import foundation.identity-types using (refl)
 open import elementary-number-theory.inequality-natural-numbers using

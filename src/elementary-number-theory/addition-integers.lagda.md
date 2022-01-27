@@ -11,7 +11,7 @@ module elementary-number-theory.addition-integers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
-open import foundations.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (_∘_)
@@ -25,7 +25,7 @@ open import elementary-number-theory.integers using
 open import foundation.laws-for-operations using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # Addition on the integers

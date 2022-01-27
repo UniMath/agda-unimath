@@ -13,8 +13,8 @@ open import elementary-number-theory.addition-integers using
   ( add-ℤ; add-neg-one-right-ℤ; right-predecessor-law-add-ℤ;
     right-unit-law-add-ℤ; add-one-right-ℤ; right-successor-law-add-ℤ)
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.empty-type using (ex-falso)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.empty-type using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; ap)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -24,7 +24,7 @@ open import elementary-number-theory.integers using
   ( ℤ; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # The absolute value of integers

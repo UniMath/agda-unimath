@@ -12,20 +12,20 @@ module elementary-number-theory.inequality-integers where
 open import elementary-number-theory.addition-integers using
   ( right-inverse-law-add-ℤ; is-nonnegative-add-ℤ; add-ℤ;
     left-successor-law-add-ℤ)
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; distributive-neg-diff-ℤ; triangle-diff-ℤ;
     right-translation-diff-ℤ; left-translation-diff-ℤ)
-open import foundations.empty-type using (empty)
+open import foundation.empty-type using (empty)
 open import foundation.functions using (id)
-open import foundations.functoriality-coproduct-types using (map-coprod)
+open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
     is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ)
 open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import foundations.unit-type using (unit; star)
+open import foundation.unit-type using (unit; star)
 ```
 
 # Inequality on the integers

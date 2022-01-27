@@ -12,7 +12,7 @@ module elementary-number-theory.distance-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; ap-add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ;
     commutative-add-ℕ)
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using
@@ -26,7 +26,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # Distance between natural numbers

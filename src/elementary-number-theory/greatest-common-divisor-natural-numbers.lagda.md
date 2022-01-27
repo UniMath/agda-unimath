@@ -12,8 +12,8 @@ module elementary-number-theory.greatest-common-divisor-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
     is-decidable-neg; dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
@@ -23,7 +23,7 @@ open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
     div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
     leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ)
 open import elementary-number-theory.euclidean-division-natural-numbers using
@@ -36,7 +36,7 @@ open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
     contradiction-le-ℕ)
 open import foundation.levels using (UU; lzero)
-open import foundations.logical-equivalence using (_↔_)
+open import foundation.logical-equivalence using (_↔_)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import

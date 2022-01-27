@@ -22,7 +22,7 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; nat-Fin; strict-upper-bound-nat-Fin)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 # The classical finite types

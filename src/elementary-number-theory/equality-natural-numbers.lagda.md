@@ -10,12 +10,12 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.equality-natural-numbers where
 
 open import foundation.contractible-types using (is-contr)
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-equality using (has-decidable-equality)
-open import foundations.decidable-types using
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-equality using (has-decidable-equality)
+open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (empty; is-prop-empty)
+open import foundation.empty-type using (empty; is-prop-empty)
 open import foundation.equivalences using (is-equiv)
 open import foundation.functions using (id)
 open import foundation.fundamental-theorem-of-identity-types using
@@ -27,7 +27,7 @@ open import elementary-number-theory.natural-numbers using
     is-not-one-ℕ)
 open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; is-set-prop-in-id; UU-Set)
-open import foundations.unit-type using (unit; star; is-prop-unit)
+open import foundation.unit-type using (unit; star; is-prop-unit)
 ```
 
 # Equality on the natural numbers

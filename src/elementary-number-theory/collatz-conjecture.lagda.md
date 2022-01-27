@@ -9,7 +9,7 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.collatz-conjecture where
 
-open import foundations.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair)
 open import foundation.levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using

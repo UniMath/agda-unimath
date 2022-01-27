@@ -24,8 +24,8 @@ open import elementary-number-theory.congruence-integers using
     is-cong-zero-div-ℤ; div-is-cong-zero-ℤ; is-unit-cong-succ-ℤ)
 open import elementary-number-theory.congruence-natural-numbers using
   ( refl-cong-ℕ; congruence-mul-ℕ; eq-cong-nat-Fin)
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-equality using (has-decidable-equality)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)
@@ -52,12 +52,12 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ)
-open import foundations.negation using (¬; functor-neg)
+open import foundation.negation using (¬; functor-neg)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; neg-one-Fin; one-Fin; nat-Fin; is-injective-nat-Fin;
     is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin;
     is-equiv-succ-Fin; is-equiv-pred-Fin)
-open import foundations.unit-type using (star)
+open import foundation.unit-type using (star)
 ```
 
 Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.

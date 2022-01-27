@@ -10,12 +10,12 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.natural-numbers where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import foundation.identity-types using (Id; refl)
 open import foundation.injective-maps using (is-injective)
 open import foundation.levels using (Level; lzero; UU)
-open import foundations.logical-equivalence using (_↔_)
-open import foundations.negation using (¬)
+open import foundation.logical-equivalence using (_↔_)
+open import foundation.negation using (¬)
 ```
 
 # The type of natural numbers

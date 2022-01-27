@@ -13,13 +13,13 @@ open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ; int-abs-ℤ)
 open import elementary-number-theory.addition-integers using (add-ℤ; ap-add-ℤ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (coprod; inl; inr)
-open import foundations.decidable-types using
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.decidable-types using
   ( is-decidable; dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-eq-ℕ)
-open import foundations.empty-type using (ex-falso)
+open import foundation.empty-type using (ex-falso)
 open import elementary-number-theory.equality-integers using
   ( Eq-eq-ℤ; has-decidable-equality-ℤ; is-decidable-is-zero-ℤ)
 open import foundation.functions using (_∘_)
@@ -36,8 +36,8 @@ open import elementary-number-theory.multiplication-integers using
     compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
-open import foundations.negation using (¬)
-open import foundations.unit-type using (star)
+open import foundation.negation using (¬)
+open import foundation.unit-type using (star)
 ```
 
 # Divisibility of integers
