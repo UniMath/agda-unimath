@@ -126,43 +126,6 @@ module _
         ( fib pr1 a)
         ( equiv-fib-pr1 B a)
         ( is-contr-map-is-equiv is-equiv-pr1-B a)
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  map-section : ((x : A) → B x) → (A → Σ A B)
-  pr1 (map-section b a) = a
-  pr2 (map-section b a) = b a
-
-  htpy-map-section :
-    (b : (x : A) → B x) → (pr1 ∘ map-section b) ~ id
-  htpy-map-section b a = refl
-
-  is-equiv-map-section :
-    (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → is-equiv (map-section b)
-  is-equiv-map-section b C =
-    is-equiv-right-factor
-      ( id)
-      ( pr1)
-      ( map-section b)
-      ( htpy-map-section b)
-      ( is-equiv-pr1-is-contr C)
-      ( is-equiv-id)
-
-  equiv-section :
-    (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → A ≃ Σ A B
-  equiv-section b C = pair (map-section b) (is-equiv-map-section b C)
-
-  is-contr-fam-is-equiv-map-section :
-    (b : (x : A) → B x) → is-equiv (map-section b) → ((x : A) → is-contr (B x))
-  is-contr-fam-is-equiv-map-section b H =
-    is-contr-is-equiv-pr1
-      ( is-equiv-left-factor id pr1
-        ( map-section b)
-        ( htpy-map-section b)
-        ( is-equiv-id)
-        ( H))
 ```
 
 ## Associativity of dependent pair types
