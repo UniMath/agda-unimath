@@ -16,6 +16,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.equivalences using (is-equiv; _≃_; map-inv-is-equiv)
 open import foundation.fibers-of-maps using (equiv-fib-pr1)
+open import foundation.functoriality-dependent-pair-types using
+  ( tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; ap)
@@ -23,7 +25,7 @@ open import foundation.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.propositions using
   ( is-prop; UU-Prop; is-proof-irrelevant-is-prop; is-prop-equiv;
-    is-prop-equiv'; type-Prop; is-prop-type-Prop)
+    is-prop-equiv'; type-Prop; is-prop-type-Prop; is-equiv-is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.truncated-types using (is-trunc; is-trunc-is-emb)
 open import foundation.truncation-levels using
@@ -192,4 +194,17 @@ subset-Set :
 pr1 (subset-Set A P) = Σ (type-Set A) (λ x → type-Prop (P x))
 pr2 (subset-Set A P) =
   is-set-is-subtype (λ x → is-prop-type-Prop (P x)) (is-set-type-Set A)
+```
+
+```agda
+equiv-total-subtype :
+  { l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3} →
+  ( is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q) →
+  ( f : (x : A) → P x → Q x) →
+  ( g : (x : A) → Q x → P x) →
+  ( Σ A P) ≃ (Σ A Q)
+pr1 (equiv-total-subtype is-subtype-P is-subtype-Q f g) = tot f
+pr2 (equiv-total-subtype is-subtype-P is-subtype-Q f g) =
+  is-equiv-tot-is-fiberwise-equiv {f = f}
+    ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x))
 ```

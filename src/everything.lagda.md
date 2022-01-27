@@ -43,6 +43,7 @@ open import elementary-number-theory.standard-finite-types
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
 open import foundation.binary-relations
@@ -50,12 +51,15 @@ open import foundation.boolean-reflection
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coherently-invertible-maps
+open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
+open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-map-of-a-type
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-type
@@ -65,6 +69,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
 open import foundation.equivalences
 open import foundation.faithful-maps
+open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -77,7 +82,7 @@ open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.universe-levels
+open import foundation.isolated-points
 open import foundation.lists
 open import foundation.logical-equivalence
 open import foundation.negation
@@ -86,6 +91,8 @@ open import foundation.path-split-maps
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.singleton-induction
 open import foundation.split-surjective-maps
@@ -97,5 +104,8 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universe-levels
 ```

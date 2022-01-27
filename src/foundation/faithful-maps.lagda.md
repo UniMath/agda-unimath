@@ -7,22 +7,25 @@ title: Univalent Mathematics in Agda
 
 module foundation.faithful-maps where
 
+open import foundation.0-maps using
+  ( is-0-map;  is-0-map-pr1; is-0-map-htpy; is-0-map-comp;
+    is-0-map-right-factor; is-0-map-tot; is-0-map-map-Σ-map-base;
+    is-0-map-map-Σ)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb; _↪_; is-emb-is-equiv; map-emb; is-emb-map-emb; id-emb)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
 open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using (tot)
+open import foundation.functoriality-dependent-pair-types using
+  ( tot; map-Σ-map-base; map-Σ)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap)
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.truncated-maps using
-  ( is-0-map; is-trunc-map-is-trunc-map-ap; is-trunc-map-ap-is-trunc-map;
-    is-0-map-pr1; is-0-map-htpy; is-0-map-comp; is-0-map-right-factor;
-    is-0-map-tot)
+  ( is-trunc-map-is-trunc-map-ap; is-trunc-map-ap-is-trunc-map)
 open import foundation.truncation-levels using (neg-one-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -186,4 +189,40 @@ module _
   pr1 (tot-faithful-map f) = tot (λ x → map-faithful-map (f x))
   pr2 (tot-faithful-map f) =
     is-faithful-tot (λ x → is-faithful-map-faithful-map (f x))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  module _
+    {f : A → B} (C : B → UU l3)
+    where
+    
+    abstract
+      is-faithful-map-Σ-map-base :
+        is-faithful f → is-faithful (map-Σ-map-base f C)
+      is-faithful-map-Σ-map-base H =
+        is-faithful-is-0-map
+          ( is-0-map-map-Σ-map-base C (is-0-map-is-faithful H))
+
+  faithful-map-Σ-faithful-map-base :
+    (f : faithful-map A B) (C : B → UU l3) →
+    faithful-map (Σ A (λ a → C (map-faithful-map f a))) (Σ B C)
+  pr1 (faithful-map-Σ-faithful-map-base f C) =
+    map-Σ-map-base (map-faithful-map f) C
+  pr2 (faithful-map-Σ-faithful-map-base f C) =
+    is-faithful-map-Σ-map-base C (is-faithful-map-faithful-map f)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
+  where
+
+  is-faithful-map-Σ :
+    is-faithful f → ((x : A) → is-faithful (g x)) → is-faithful (map-Σ D f g)
+  is-faithful-map-Σ H K =
+    is-faithful-is-0-map
+      ( is-0-map-map-Σ D
+        ( is-0-map-is-faithful H)
+        ( λ x → is-0-map-is-faithful (K x)))
 ```

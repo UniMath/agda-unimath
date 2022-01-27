@@ -1,4 +1,4 @@
---
+---
 title: Univalent Mathematics in Agda
 ---
 
@@ -9,6 +9,7 @@ title: Univalent Mathematics in Agda
 
 module foundation.fiber-inclusions where
 
+open import foundation.0-maps using (is-0-map)
 open import foundation.1-types using
   ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation.contractible-maps using
@@ -30,7 +31,7 @@ open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.type-arithmetic-cartesian-product-types using
   ( equiv-left-swap-Σ)
-open import foundation.truncated-maps using (is-trunc-map; is-0-map)
+open import foundation.truncated-maps using (is-trunc-map)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-equiv'; is-trunc-equiv)
 open import foundation.truncation-levels using
