@@ -12,14 +12,17 @@ open import foundation.embeddings using
   ( is-emb; _↪_; is-emb-is-equiv; map-emb; is-emb-map-emb; id-emb)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
-open import foundation.functions using (id)
+open import foundation.functions using (id; _∘_)
+open import foundation.functoriality-dependent-pair-types using (tot)
+open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap)
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.truncated-maps using
   ( is-0-map; is-trunc-map-is-trunc-map-ap; is-trunc-map-ap-is-trunc-map;
-    is-0-map-pr1)
+    is-0-map-pr1; is-0-map-htpy; is-0-map-comp; is-0-map-right-factor;
+    is-0-map-tot)
 open import foundation.truncation-levels using (neg-one-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -114,4 +117,73 @@ module _
     (B : A → UU-Set l2) → faithful-map (Σ A (λ x → type-Set (B x))) A
   pr1 (pr1-faithful-map B) = pr1
   pr2 (pr1-faithful-map B) = is-faithful-pr1 (λ x → is-set-type-Set (B x))
+```
+
+### Faithful maps are closed under homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  where
+
+  abstract
+    is-faithful-htpy : is-faithful g → is-faithful f
+    is-faithful-htpy K =
+      is-faithful-is-0-map (is-0-map-htpy H (is-0-map-is-faithful K))
+```
+
+### Faithful maps are closed under composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
+  
+  abstract
+    is-faithful-comp : is-faithful g → is-faithful h → is-faithful f
+    is-faithful-comp K L =
+      is-faithful-is-0-map
+        ( is-0-map-comp f g h H
+          ( is-0-map-is-faithful K)
+          ( is-0-map-is-faithful L))
+```
+
+### If a composite is faithful, then its right factor is faithful
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
+  
+  is-faithful-right-factor : is-faithful g → is-faithful f → is-faithful h
+  is-faithful-right-factor K L =
+    is-faithful-is-0-map
+      ( is-0-map-right-factor f g h H
+        ( is-0-map-is-faithful K)
+        ( is-0-map-is-faithful L))
+```
+
+### The map on total spaces induced by a family of truncated maps is truncated
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  where
+
+  is-faithful-tot : ((x : A) → is-faithful (f x)) → is-faithful (tot f)
+  is-faithful-tot H =
+    is-faithful-is-0-map (is-0-map-tot (λ x → is-0-map-is-faithful (H x)))
+    
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+  
+  tot-faithful-map :
+    ((x : A) → faithful-map (B x) (C x)) → faithful-map (Σ A B) (Σ A C)
+  pr1 (tot-faithful-map f) = tot (λ x → map-faithful-map (f x))
+  pr2 (tot-faithful-map f) =
+    is-faithful-tot (λ x → is-faithful-map-faithful-map (f x))
 ```

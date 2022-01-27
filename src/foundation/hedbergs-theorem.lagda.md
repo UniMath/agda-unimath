@@ -10,12 +10,22 @@ title: Univalent Mathematics in Agda
 module foundation.hedbergs-theorem where
 
 open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.decidable-types using (is-decidable)
+open import foundation.decidable-equality using
+  ( has-decidable-equality; has-decidable-equality-equiv';
+    has-decidable-equality-is-prop)
+open import foundation.decidable-types using
+  ( is-decidable; is-decidable-iff; is-decidable-equiv)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using (is-prop)
+open import foundation.equality-dependent-pair-types using
+  ( eq-pair-Σ'; pair-eq-Σ)
+open import foundation.fibers-of-maps using (equiv-fib-pr1)
+open import foundation.identity-types using (Id; refl; ap; tr)
+open import foundation.propositions using
+  ( is-prop; is-proof-irrelevant-is-prop)
 open import foundation.sets using (is-set; is-set-prop-in-id)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( left-unit-law-Σ-is-contr)
 open import foundation.unit-type using (unit; is-prop-unit; star)
 open import foundation.universe-levels using (Level; UU; lzero)
 ```
@@ -87,4 +97,35 @@ module _
         ( λ x y → is-prop-Eq-has-decidable-equality d)
         ( λ x → refl-Eq-has-decidable-equality d x)
         ( λ x y → eq-Eq-has-decidable-equality d)
+```
+
+```agda
+abstract
+  has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality (Σ A B)
+  has-decidable-equality-Σ dA dB (pair x y) (pair x' y') with dA x x'
+  ... | inr np = inr (λ r → np (ap pr1 r))
+  ... | inl p =
+    is-decidable-iff eq-pair-Σ' pair-eq-Σ
+      ( is-decidable-equiv
+        ( left-unit-law-Σ-is-contr
+          ( is-proof-irrelevant-is-prop
+            ( is-set-has-decidable-equality dA x x') p)
+          ( p))
+        ( dB x' (tr _ p y) y'))
+
+abstract
+  has-decidable-equality-fiber-has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → has-decidable-equality (Σ A B) →
+    (x : A) → has-decidable-equality (B x)
+  has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
+    has-decidable-equality-equiv'
+      ( equiv-fib-pr1 B x)
+      ( has-decidable-equality-Σ dΣ
+        ( λ t →
+          has-decidable-equality-is-prop
+            ( is-set-has-decidable-equality dA (pr1 t) x)))
 ```
