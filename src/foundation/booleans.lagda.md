@@ -5,19 +5,19 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.booleans where
+module foundation.booleans where
 
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundations.empty-type using (empty; is-prop-empty)
+open import foundation.empty-type using (empty; is-prop-empty)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_; const)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv)
 open import foundation.levels using (lzero; UU)
-open import foundations.negation using (¬)
+open import foundation.negation using (¬)
 open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
 open import foundation.propositions using (is-prop)
-open import foundations.unit-type using (unit; star; is-prop-unit)
+open import foundation.unit-type using (unit; star; is-prop-unit)
 ```
 
 ## The booleans

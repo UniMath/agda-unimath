@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.logical-equivalence where
+module foundation.logical-equivalence where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)

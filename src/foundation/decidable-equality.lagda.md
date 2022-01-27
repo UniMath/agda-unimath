@@ -7,16 +7,16 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.decidable-equality where
+module foundation.decidable-equality where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using (is-decidable)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundations.empty-type using (empty)
+open import foundation.empty-type using (empty)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.levels using (Level; UU; lzero)
-open import foundations.unit-type using (unit; star)
+open import foundation.unit-type using (unit; star)
 ```
 
 ## Decidable equality

@@ -7,17 +7,17 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.hedbergs-theorem where
+module foundation.hedbergs-theorem where
 
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using (is-decidable)
-open import foundations.empty-type using (empty; is-prop-empty; ex-falso)
-open import foundations.decidable-equality using (has-decidable-equality)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using (is-decidable)
+open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
+open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.identity-types using (Id; refl)
 open import foundation.levels using (Level; UU; lzero)
 open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; is-set-prop-in-id)
-open import foundations.unit-type using (unit; is-prop-unit; star)
+open import foundation.unit-type using (unit; is-prop-unit; star)
 ```
 
 ## Hedberg's theorem

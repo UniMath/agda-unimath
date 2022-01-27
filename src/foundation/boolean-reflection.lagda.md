@@ -5,12 +5,12 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.boolean-reflection where
+module foundation.boolean-reflection where
 
-open import foundations.booleans using (bool; true; false; Eq-eq-bool)
-open import foundations.coproduct-types using (inl; inr)
-open import foundations.decidable-types using (is-decidable)
-open import foundations.empty-type using (ex-falso)
+open import foundation.booleans using (bool; true; false; Eq-eq-bool)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using (is-decidable)
+open import foundation.empty-type using (ex-falso)
 open import foundation.identity-types using (Id; refl)
 open import foundation.levels using (Level; UU)
 ```

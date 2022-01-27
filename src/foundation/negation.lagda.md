@@ -5,9 +5,9 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.negation where
+module foundation.negation where
 
-open import foundations.empty-type using (empty)
+open import foundation.empty-type using (empty)
 open import foundation.levels using (UU; Level)
 ```
 

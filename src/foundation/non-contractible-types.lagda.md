@@ -5,13 +5,13 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.non-contractible-types where
+module foundation.non-contractible-types where
 
 open import foundation.contractible-types using (is-contr; center; contraction)
-open import foundations.empty-type using (is-empty; empty)
+open import foundation.empty-type using (is-empty; empty)
 open import foundation.functions using (id)
 open import foundation.levels using (Level; UU)
-open import foundations.negation using (¬)
+open import foundation.negation using (¬)
 ```
 
 ```agda

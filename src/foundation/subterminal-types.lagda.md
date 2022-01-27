@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.subterminal-types where
+module foundation.subterminal-types where
 
 open import foundation.contractible-types using
   ( is-equiv-is-contr; is-contr-is-equiv)
@@ -18,7 +18,7 @@ open import foundation.levels using (Level; UU)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant; all-elements-equal; is-emb-is-emb;
     is-proof-irrelevant-all-elements-equal; eq-is-prop'; is-prop-is-contr)
-open import foundations.unit-type using (star; terminal-map; is-contr-unit)
+open import foundation.unit-type using (star; terminal-map; is-contr-unit)
 ```
 
 ```agda

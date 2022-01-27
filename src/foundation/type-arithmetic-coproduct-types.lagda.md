@@ -5,12 +5,12 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.type-arithmetic-coproduct-types where
+module foundation.type-arithmetic-coproduct-types where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundations.coproduct-types using (coprod; inl; inr; neq-inl-inr; neq-inr-inl)
+open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr; neq-inr-inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundations.empty-type using (empty; is-empty; ex-falso)
+open import foundation.empty-type using (empty; is-empty; ex-falso)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
 open import foundation.functions using (_∘_; id)

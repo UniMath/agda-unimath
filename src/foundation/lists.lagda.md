@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.lists where
+module foundation.lists where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import foundation.functions using (id; _∘_)

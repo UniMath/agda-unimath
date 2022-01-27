@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.binary-relations where
+module foundation.binary-relations where
 
 open import foundation.levels using (UU; Level; _⊔_)
 ```

@@ -5,9 +5,9 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundations.functoriality-coproduct-types where
+module foundation.functoriality-coproduct-types where
 
-open import foundations.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_)
