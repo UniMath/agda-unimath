@@ -12,7 +12,7 @@ Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
 
 ### Structure of the library
 
-1. Files have one single goal. Usually it is to introduce one new concept, one new definition, or to reach one theorem. The contents of the file must be focused on that one concept or theorem. For example, the file `addition-natural-numbers` introduces addition on the natural numbers, and derives its basic properties.
+1. Files have one single goal. Usually it is to introduce one new concept, one new definition, or to reach one theorem. The contents of the file should be focused on that one concept or theorem. For example, the file `addition-natural-numbers` introduces addition on the natural numbers, and derives its basic properties.
 2. A file name should be a recognizable name or description, usually in the form of a noun or noun phrase, of the topic of that file that is natural, sufficiently precise, concise, and consistent with those of related files. File names are in lower case, with words separated by hyphens. Words in file names should not be abbreviated unless the abbreviated term is a widely accepted mathematical term, e.g., `poset`.
 3. The files are organized by mathematical subject. The folder names describe them.
 4. All the files and folders can be found in the folder `src`.
@@ -20,8 +20,9 @@ Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
 ### Folders in the library
 
 We give brief descriptions of the folders in the library.
-1. The folder named `foundation` contains the core of the library. This folder contains type theory restricted to dependent function types, dependent pair types, cartesian product types, identity types, and universes. Every file in this folder has the options `--safe`, `--exact-split`, and `--without-K` turned on. In particular, there are no postulates in this folder.
-2. The `univalent-foundations` folder extends the type theory of Agda with function extensionality, propositional truncations, and the univalence axiom.
+1. The folder named `foundation` contains the core of the library. The rest of the library is built on top of this foundation. Every file in this folder has the options `--safe`, `--exact-split`, and `--without-K` turned on. In particular, there are no postulates in this folder.
+2. The `elementary-number-theory` folder contains the definitions of the types of natural numbers, integers, and the standard finite types, and develops elementary number theory from them.
+3. The `univalent-foundations` folder extends the type theory of Agda with function extensionality, propositional truncations, and the univalence axiom.
 4. The `categories` folder contains some category theory.
 6. The `the-circle` folder contains the material for Chapter 3.
 7. The `synthetic-homotopy-theory` folder contains the formalisation of pullbacks, pushouts, and (eventually) homotopy groups of types.
