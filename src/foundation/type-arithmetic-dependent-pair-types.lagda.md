@@ -20,9 +20,9 @@ open import foundation.fibers-of-maps using (equiv-fib-pr1; fib)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.universe-levels using (Level; UU)
 open import foundation.singleton-induction using
   ( ind-singleton-is-contr; comp-singleton-is-contr)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # Type arithmetic of dependent pair types

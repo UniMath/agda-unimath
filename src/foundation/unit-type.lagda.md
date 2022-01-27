@@ -13,10 +13,10 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (const; _∘_; id)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.identity-types using (Id; refl)
-open import foundation.universe-levels using (Level; lzero; UU)
 open import foundation.propositions using (is-prop; is-prop-is-contr; UU-Prop)
 open import foundation.raising-universe-levels using
   ( raise; equiv-raise; map-raise)
+open import foundation.universe-levels using (Level; lzero; UU)
 ```
 
 ## The unit type

@@ -8,11 +8,11 @@ title: Univalent Mathematics in Agda
 module foundation.homotopies where
 
 open import foundation.functions using (_∘_; id)
-open import foundation.universe-levels using (UU; Level; _⊔_)
 open import foundation.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
     right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
     ap-id)
+open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
 # Homotopies

@@ -11,37 +11,26 @@ module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
-    is-decidable-neg; dn-elim-is-decidable)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
     div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
     leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ)
-open import foundation.empty-type using (ex-falso)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ)
 open import elementary-number-theory.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
     eq-quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ;
     strict-upper-bound-remainder-euclidean-division-ℕ)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
     contradiction-le-ℕ)
-open import foundation.universe-levels using (UU; lzero)
-open import foundation.logical-equivalence using (_↔_)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ;
     is-zero-ℕ)
@@ -49,6 +38,17 @@ open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
     is-lower-bound-ℕ)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using
+  ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
+    is-decidable-neg; dn-elim-is-decidable)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.empty-type using (ex-falso)
+open import foundation.functoriality-cartesian-product-types using (map-prod)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.logical-equivalence using (_↔_)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # The greatest common divisor of two natural numbers

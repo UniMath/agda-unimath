@@ -9,12 +9,12 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.twin-prime-conjecture where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ)
 open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
-open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ)
 open import elementary-number-theory.primes-natural-numbers using (is-prime-ℕ)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (Σ)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # The twin prime conjecture

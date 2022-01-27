@@ -15,8 +15,8 @@ open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl)
-open import foundation.universe-levels using (Level; UU)
 open import foundation.unit-type using (unit; star)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 This file contains arithmetical equivalences of types involving the unit type.

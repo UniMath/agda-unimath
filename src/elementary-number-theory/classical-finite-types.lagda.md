@@ -11,10 +11,7 @@ module elementary-number-theory.classical-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers using
   ( eq-cong-le-ℕ)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundation.universe-levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mod-succ-ℕ; issec-nat-Fin; cong-nat-mod-succ-ℕ)
@@ -22,7 +19,10 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; nat-Fin; strict-upper-bound-nat-Fin)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.identity-types using (Id; refl)
 open import foundation.unit-type using (star)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # The classical finite types

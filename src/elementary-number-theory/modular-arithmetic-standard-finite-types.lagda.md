@@ -17,10 +17,6 @@ open import elementary-number-theory.congruence-natural-numbers using
     cong-is-zero-nat-zero-Fin; eq-cong-le-ℕ; concatenate-eq-cong-eq-ℕ;
     refl-cong-ℕ; congruence-mul-ℕ; translation-invariant-cong-ℕ;
     translation-invariant-cong-ℕ')
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-neg)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ; translation-invariant-dist-ℕ;
     is-difference-dist-ℕ'; is-one-dist-succ-ℕ)
@@ -31,22 +27,26 @@ open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ')
 open import elementary-number-theory.equality-standard-finite-types using
   ( is-decidable-is-zero-Fin)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; concatenate-eq-leq-ℕ; refl-leq-ℕ; transitive-leq-ℕ)
-open import foundation.injective-maps using (is-injective)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; associative-mul-ℕ; commutative-mul-ℕ; left-unit-law-mul-ℕ;
     left-distributive-mul-add-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import foundation.split-surjective-maps using (is-split-surjective)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; succ-Fin; nat-Fin; nat-succ-Fin; is-zero-nat-zero-Fin;
     is-zero-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
     upper-bound-nat-Fin; one-Fin; is-one-nat-one-Fin; neg-one-Fin; is-one-Fin;
     pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using
+  ( is-decidable; is-decidable-iff; is-decidable-neg)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.injective-maps using (is-injective)
+open import foundation.split-surjective-maps using (is-split-surjective)
 open import foundation.unit-type using (star)
 ```
 

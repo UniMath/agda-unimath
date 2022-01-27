@@ -13,11 +13,11 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_; const)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv)
-open import foundation.universe-levels using (lzero; UU)
 open import foundation.negation using (¬)
-open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
 open import foundation.propositions using (is-prop)
+open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
 open import foundation.unit-type using (unit; star; is-prop-unit)
+open import foundation.universe-levels using (lzero; UU)
 ```
 
 ## The booleans

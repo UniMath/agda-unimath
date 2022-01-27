@@ -15,7 +15,6 @@ open import foundation.equality-fibers-of-maps using
 open import foundation.fibers-of-maps using
   ( fib; equiv-fib-pr1; inv-equiv-fib-pr1)
 open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
-open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation.sets using
@@ -25,6 +24,7 @@ open import foundation.truncated-types using
     is-trunc-is-equiv')
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ```agda

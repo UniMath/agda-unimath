@@ -15,7 +15,6 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-retr)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ind-Id)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 open import foundation.propositions using
   ( is-prop; UU-Prop; all-elements-equal; is-prop-all-elements-equal;
     is-proof-irrelevant-is-prop; eq-is-prop; is-prop-is-equiv')
@@ -24,6 +23,7 @@ open import foundation.truncated-types using
     is-trunc-is-contr; is-trunc-is-equiv; is-trunc-equiv; is-trunc-is-equiv';
     is-trunc-equiv')
 open import foundation.truncation-levels using (neg-one-𝕋; zero-𝕋)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 ```
 
 A type is a set if its identity types are propositions

@@ -13,11 +13,6 @@ open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ; int-abs-ℤ; is-nonzero-abs-ℤ)
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
     symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;
@@ -26,13 +21,18 @@ open import
   elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
     is-commutative-gcd-ℕ)
-open import foundation.identity-types using (Id; ap)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
     is-positive-ℤ; is-positive-int-ℕ)
-open import foundation.universe-levels using (UU; lzero)
-open import foundation.logical-equivalence using (_↔_)
 open import elementary-number-theory.natural-numbers using (ℕ; is-zero-ℕ)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.functions using (_∘_)
+open import foundation.functoriality-cartesian-product-types using (map-prod)
+open import foundation.identity-types using (Id; ap)
+open import foundation.logical-equivalence using (_↔_)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # Greatest common divisors of integers

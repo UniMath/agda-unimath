@@ -18,9 +18,9 @@ open import foundation.functoriality-dependent-pair-types using
     tot-comp; tot-htpy; tot-id)
 open import foundation.homotopies using (inv-htpy; _∙h_)
 open import foundation.identity-types using (Id; ind-Id)
-open import foundation.universe-levels using (Level; UU)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( interchange-Σ-Σ)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # The fundamental theorem of identity types

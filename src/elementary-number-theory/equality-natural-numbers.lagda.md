@@ -9,6 +9,9 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.equality-natural-numbers where
 
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
+    is-not-one-ℕ)
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using (has-decidable-equality)
@@ -21,13 +24,10 @@ open import foundation.functions using (id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.universe-levels using (UU; lzero)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
-    is-not-one-ℕ)
 open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; is-set-prop-in-id; UU-Set)
 open import foundation.unit-type using (unit; star; is-prop-unit)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # Equality on the natural numbers

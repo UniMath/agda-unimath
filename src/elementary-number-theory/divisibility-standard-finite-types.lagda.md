@@ -11,14 +11,10 @@ module elementary-number-theory.divisibility-standard-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; concatenate-eq-cong-ℕ; scalar-invariant-cong-ℕ; symm-cong-ℕ)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( right-unit-law-dist-ℕ)
 open import elementary-number-theory.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
-open import foundation.identity-types using (Id; _∙_; inv; ap)
-open import foundation.universe-levels using (UU; lzero)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin; mul-Fin'; left-unit-law-mul-Fin; associative-mul-Fin;
@@ -33,6 +29,10 @@ open import elementary-number-theory.standard-finite-types using
 open import
   elementary-number-theory.well-ordering-principle-standard-finite-types using
   ( is-decidable-Σ-Fin)
+open import foundation.decidable-types using (is-decidable)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.identity-types using (Id; _∙_; inv; ap)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # Divisibility on the standard finite types

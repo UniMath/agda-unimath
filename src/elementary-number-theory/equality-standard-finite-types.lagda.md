@@ -9,19 +9,19 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.equality-standard-finite-types where
 
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.standard-finite-types using
+  ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
+    is-neg-one-Fin)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.empty-type using (empty)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.universe-levels using (UU; lzero)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.negation using (functor-neg)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
-    is-neg-one-Fin)
 open import foundation.unit-type using (unit; star)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # Equality of the standard finite types

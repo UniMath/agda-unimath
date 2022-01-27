@@ -12,21 +12,21 @@ module elementary-number-theory.distance-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; ap-add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ;
     commutative-add-ℕ)
+open import elementary-number-theory.inequality-natural-numbers using
+  ( leq-ℕ; _≤-ℕ_; refl-leq-ℕ; concatenate-eq-leq-eq-ℕ; concatenate-leq-eq-ℕ;
+    transitive-leq-ℕ; succ-leq-ℕ; order-three-elements-ℕ; le-ℕ;
+    preserves-le-succ-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using
   ( Id; refl; _∙_; inv; ap; ap-binary; tr)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; _≤-ℕ_; refl-leq-ℕ; concatenate-eq-leq-eq-ℕ; concatenate-leq-eq-ℕ;
-    transitive-leq-ℕ; succ-leq-ℕ; order-three-elements-ℕ; le-ℕ;
-    preserves-le-succ-ℕ)
-open import foundation.universe-levels using (UU; lzero)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
 open import foundation.unit-type using (star)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # Distance between natural numbers

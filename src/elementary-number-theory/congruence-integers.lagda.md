@@ -12,27 +12,27 @@ module elementary-number-theory.congruence-integers where
 open import elementary-number-theory.addition-integers using
   ( add-ℤ; ap-add-ℤ; right-unit-law-add-ℤ; right-predecessor-law-add-ℤ;
     right-inverse-law-add-ℤ; right-successor-law-add-ℤ; distributive-neg-add-ℤ)
-open import foundation.cartesian-product-types using (_×_)
 open import elementary-number-theory.congruence-natural-numbers using (cong-ℕ)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ'; distributive-neg-diff-ℤ;
     triangle-diff-ℤ)
+open import elementary-number-theory.distance-integers using (dist-int-ℕ)
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-unit-ℤ; div-is-unit-ℤ; is-zero-div-zero-ℤ; div-sim-unit-ℤ;
     refl-sim-unit-ℤ; sim-unit-abs-ℤ; div-int-div-ℕ; div-div-int-ℕ;
     symm-sim-unit-ℤ)
-open import elementary-number-theory.distance-integers using (dist-int-ℕ)
-open import foundation.functions using (id)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; neg-ℤ; is-injective-neg-ℤ; neg-neg-ℤ; int-ℕ;
     neg-succ-ℤ; pred-ℤ; neg-pred-ℤ)
-open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; left-negative-law-mul-ℤ; left-zero-law-mul-ℤ;
     right-distributive-mul-add-ℤ)
 open import elementary-number-theory.natural-numbers using (ℕ)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.functions using (id)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # The congruence relations on the integers

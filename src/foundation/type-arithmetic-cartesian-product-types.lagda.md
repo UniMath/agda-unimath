@@ -7,16 +7,16 @@ title: Univalent Mathematics in Agda
 
 module foundation.type-arithmetic-cartesian-product-types where
 
-open import foundation.contractible-types using (is-contr; center)
 open import foundation.cartesian-product-types using (_×_)
+open import foundation.contractible-types using (is-contr; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels using (Level; UU)
 ```
 
 # Type arithmetic for cartesian product types

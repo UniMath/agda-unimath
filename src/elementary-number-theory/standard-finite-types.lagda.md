@@ -9,6 +9,11 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.standard-finite-types where
 
+open import elementary-number-theory.inequality-natural-numbers using
+  ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
+    leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
@@ -23,16 +28,11 @@ open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.negation using (¬; functor-neg)
 open import foundation.non-contractible-types using
   ( is-not-contractible; is-not-contractible-empty)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
-    leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
-open import foundation.negation using (¬; functor-neg)
 open import foundation.unit-type using (unit; star; is-contr-unit)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # The standard finite types

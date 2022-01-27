@@ -11,8 +11,6 @@ module elementary-number-theory.congruence-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; commutative-add-ℕ)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; eq-dist-ℕ; right-unit-law-dist-ℕ; dist-eq-ℕ; symmetric-dist-ℕ;
     is-total-dist-ℕ; strict-upper-bound-dist-ℕ; is-one-dist-succ-ℕ;
@@ -20,9 +18,7 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-one-ℕ; concatenate-div-eq-ℕ; div-add-ℕ; div-right-summand-ℕ;
     div-left-summand-ℕ; is-zero-div-ℕ; is-zero-div-zero-ℕ; is-one-div-one-ℕ)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import foundation.universe-levels using (UU; lzero)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
     associative-mul-ℕ; commutative-mul-ℕ)
@@ -31,6 +27,10 @@ open import elementary-number-theory.natural-numbers using
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; nat-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
     is-zero-nat-zero-Fin)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 # The congruence relations on the natural numbers

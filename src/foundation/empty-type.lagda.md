@@ -13,11 +13,11 @@ open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.universe-levels using (Level; lzero; UU)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.truncated-types using (is-trunc; is-trunc-is-prop)
 open import foundation.truncation-levels using (𝕋; succ-𝕋)
+open import foundation.universe-levels using (Level; lzero; UU)
 ```
 
 # The empty type

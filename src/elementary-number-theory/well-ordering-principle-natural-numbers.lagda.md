@@ -9,6 +9,11 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.well-ordering-principle-natural-numbers where
 
+open import elementary-number-theory.inequality-natural-numbers using
+  ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
+    is-decidable-le-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
@@ -18,14 +23,9 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-type using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
-    is-decidable-le-ℕ)
-open import foundation.universe-levels using (UU; Level)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
 open import foundation.negation using (¬)
 open import foundation.unit-type using (star)
+open import foundation.universe-levels using (UU; Level)
 ```
 
 # Decidable type families on the natural numbers

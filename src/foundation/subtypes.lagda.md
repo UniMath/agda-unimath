@@ -19,7 +19,6 @@ open import foundation.fibers-of-maps using (equiv-fib-pr1)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 open import foundation.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.propositions using
@@ -33,6 +32,7 @@ open import foundation.type-arithmetic-cartesian-product-types using
   ( equiv-right-swap-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
 ```agda

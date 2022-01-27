@@ -14,10 +14,10 @@ open import elementary-number-theory.absolute-value-integers using
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; left-zero-law-diff-ℤ; right-zero-law-diff-ℤ; diff-succ-ℤ)
 open import elementary-number-theory.distance-natural-numbers using (dist-ℕ)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; int-ℕ; succ-int-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 ```
 
 # Distance between integers

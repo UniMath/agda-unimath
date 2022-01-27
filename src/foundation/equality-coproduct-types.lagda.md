@@ -27,8 +27,8 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; ap; ap-comp; inv)
 open import foundation.injective-maps using (is-injective)
-open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.negation using (¬)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Observational equality of coproduct types
