@@ -76,7 +76,7 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.laws-for-operations
+open import foundation.interchange-law
 open import foundation.universe-levels
 open import foundation.lists
 open import foundation.logical-equivalence

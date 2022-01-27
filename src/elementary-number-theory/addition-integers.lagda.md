@@ -23,7 +23,7 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)
-open import foundation.laws-for-operations using
+open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.unit-type using (star)
 ```

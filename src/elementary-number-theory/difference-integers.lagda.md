@@ -19,7 +19,7 @@ open import elementary-number-theory.integers using
   ( ℤ; neg-ℤ; is-zero-ℤ; zero-ℤ; succ-ℤ; pred-ℤ; issec-pred-ℤ;
     neg-succ-ℤ; neg-pred-ℤ; neg-neg-ℤ)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundation.laws-for-operations using
+open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 
 ```
