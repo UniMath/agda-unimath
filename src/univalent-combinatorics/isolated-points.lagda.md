@@ -211,7 +211,7 @@ equiv-neg {l1} {l2} {X} {Y} e =
   equiv-iff'
     ( neg-Prop' X)
     ( neg-Prop' Y)
-    ( pair (functor-neg (map-inv-equiv e)) (functor-neg (map-equiv e)))
+    ( pair (map-neg (map-inv-equiv e)) (map-neg (map-equiv e)))
 
 equiv-complement-isolated-point :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-point X)

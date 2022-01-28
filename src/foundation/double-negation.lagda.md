@@ -12,7 +12,7 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-type using (ex-falso)
 open import foundation.functions using (_∘_)
-open import foundation.negation using (¬; functor-neg)
+open import foundation.negation using (¬; map-neg)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -30,7 +30,7 @@ intro-dn p f = f p
 
 functor-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → Q) → (¬¬ P → ¬¬ Q)
-functor-dn f = functor-neg (functor-neg f)
+functor-dn f = map-neg (map-neg f)
 
 ```
 
@@ -63,9 +63,9 @@ dn-linearity-implication :
   ¬¬ (coprod (P → Q) (Q → P))
 dn-linearity-implication {P = P} {Q = Q} f =
   ( λ (np : ¬ P) →
-    functor-neg (inl {A = P → Q} {B = Q → P}) f (λ p → ex-falso (np p)))
+    map-neg (inl {A = P → Q} {B = Q → P}) f (λ p → ex-falso (np p)))
     ( λ (p : P) →
-      functor-neg (inr {A = P → Q} {B = Q → P}) f (λ q → p))
+      map-neg (inr {A = P → Q} {B = Q → P}) f (λ q → p))
 ```
 
 ## Cases of double negation elimination

@@ -21,7 +21,7 @@ open import foundation.empty-type using (empty; is-set-empty)
 open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap)
-open import foundation.negation using (functor-neg)
+open import foundation.negation using (map-neg)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; lzero)
@@ -57,7 +57,7 @@ is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
 has-decidable-equality-Fin :
   {k : ℕ} (x y : Fin k) → is-decidable (Id x y)
 has-decidable-equality-Fin {k} x y =
-  map-coprod eq-Eq-Fin (functor-neg Eq-Fin-eq) (is-decidable-Eq-Fin k x y)
+  map-coprod eq-Eq-Fin (map-neg Eq-Fin-eq) (is-decidable-Eq-Fin k x y)
 
 is-decidable-is-zero-Fin :
   {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin x)
