@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # 1-Types
 
 ```agda
@@ -18,7 +14,9 @@ open import foundation.truncation-levels using (one-𝕋; zero-𝕋)
 open import foundation.universe-levels using (Level; UU; lsuc)
 ```
 
-## 1-Types
+## Definition
+
+A 1-type is a type that is 1-truncated.
 
 ```agda
 is-1-type : {l : Level} → UU l → UU l
@@ -34,11 +32,21 @@ abstract
   is-1-type-type-1-Type :
     {l : Level} (A : UU-1-Type l) → is-1-type (type-1-Type A)
   is-1-type-type-1-Type = pr2
+```
 
+## Properties
+
+### The identity type of a 1-type takes values in sets
+
+```agda
 Id-Set : {l : Level} (X : UU-1-Type l) (x y : type-1-Type X) → UU-Set l
 pr1 (Id-Set X x y) = Id x y
 pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
+```
 
+### Any set is a 1-type
+
+```agda
 1-type-Set :
   {l : Level} → UU-Set l → UU-1-Type l
 1-type-Set A = truncated-type-succ-Truncated-Type zero-𝕋 A
