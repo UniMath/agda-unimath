@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Decidable equality
 
 ```agda
@@ -15,23 +11,41 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap)
-open import foundation.empty-type using (empty)
+open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
+open import foundation.equality-dependent-pair-types using
+  ( eq-pair-Σ'; pair-eq-Σ)
 open import foundation.equivalences using (_≃_; map-equiv; inv-equiv)
-open import foundation.identity-types using (Id; refl; ap)
-open import foundation.propositions using (is-prop; eq-is-prop)
+open import foundation.fibers-of-maps using (equiv-fib-pr1; equiv-total-fib)
+open import foundation.identity-types using (Id; refl; ap; tr)
+open import foundation.injective-maps using (is-prop-map-is-injective)
+open import foundation.propositions using
+  ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop)
 open import foundation.retractions using (_retract-of_; retract-eq)
-open import foundation.unit-type using (unit; star)
+open import foundation.sections using (map-section; is-injective-map-section)
+open import foundation.sets using (is-set; is-set-prop-in-id)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( left-unit-law-Σ-is-contr)
+open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (Level; UU; lzero)
 ```
 
-## Decidable equality
+## Definition
 
-Here we prove only very basic things about decidable equality. Hedberg's theorem, asserting that types with decidable equality are sets, is in `sets`.
+A type `A` is said to have decidable equality if `Id x y` is a decidable type for every `x y : A`.
 
-```
+```agda
 has-decidable-equality : {l : Level} (A : UU l) → UU l
 has-decidable-equality A = (x y : A) → is-decidable (Id x y)
+```
 
+## Examples
+
+```agda
+abstract
+  has-decidable-equality-is-prop :
+    {l1 : Level} {A : UU l1} → is-prop A → has-decidable-equality A
+  has-decidable-equality-is-prop H x y = inl (eq-is-prop H)
+  
 has-decidable-equality-empty : has-decidable-equality empty
 has-decidable-equality-empty ()
 
@@ -72,6 +86,8 @@ has-decidable-equality-right-factor d a x y with d (pair a x) (pair a y)
 ... | inr np = inr (λ q → np (ap (pair a) q))
 ```
 
+## Properties
+
 ### Types with decidable equality are closed under retracts
 
 ```agda
@@ -85,12 +101,9 @@ abstract
       ( d (i x) (i y))
 ```
 
-```agda
-abstract
-  has-decidable-equality-is-prop :
-    {l1 : Level} {A : UU l1} → is-prop A → has-decidable-equality A
-  has-decidable-equality-is-prop H x y = inl (eq-is-prop H)
+### Types with decidable equality are closed under equivalences
 
+```agda
 abstract
   has-decidable-equality-equiv :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
@@ -103,4 +116,130 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
     has-decidable-equality A → has-decidable-equality B
   has-decidable-equality-equiv' e = has-decidable-equality-equiv (inv-equiv e)
+```
+
+### Hedberg's theorem
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  Eq-has-decidable-equality' :
+    (x y : A) → is-decidable (Id x y) → UU lzero
+  Eq-has-decidable-equality' x y (inl p) = unit
+  Eq-has-decidable-equality' x y (inr f) = empty
+
+  Eq-has-decidable-equality :
+    (d : has-decidable-equality A) → A → A → UU lzero
+  Eq-has-decidable-equality d x y = Eq-has-decidable-equality' x y (d x y)
+
+  abstract
+    is-prop-Eq-has-decidable-equality' :
+      (x y : A) (t : is-decidable (Id x y)) →
+      is-prop (Eq-has-decidable-equality' x y t)
+    is-prop-Eq-has-decidable-equality' x y (inl p) = is-prop-unit
+    is-prop-Eq-has-decidable-equality' x y (inr f) = is-prop-empty
+
+  abstract
+    is-prop-Eq-has-decidable-equality :
+      (d : has-decidable-equality A)
+      {x y : A} → is-prop (Eq-has-decidable-equality d x y)
+    is-prop-Eq-has-decidable-equality d {x} {y} =
+      is-prop-Eq-has-decidable-equality' x y (d x y)
+
+  abstract
+    refl-Eq-has-decidable-equality :
+      (d : has-decidable-equality A) (x : A) →
+      Eq-has-decidable-equality d x x 
+    refl-Eq-has-decidable-equality d x with d x x
+    ... | inl α = star
+    ... | inr f = f refl
+
+  abstract
+    Eq-has-decidable-equality-eq :
+      (d : has-decidable-equality A) {x y : A} →
+      Id x y → Eq-has-decidable-equality d x y
+    Eq-has-decidable-equality-eq d {x} {.x} refl =
+      refl-Eq-has-decidable-equality d x
+
+  abstract
+    eq-Eq-has-decidable-equality' :
+      (x y : A) (t : is-decidable (Id x y)) →
+      Eq-has-decidable-equality' x y t → Id x y
+    eq-Eq-has-decidable-equality' x y (inl p) t = p
+    eq-Eq-has-decidable-equality' x y (inr f) t = ex-falso t
+
+  abstract
+    eq-Eq-has-decidable-equality :
+      (d : has-decidable-equality A) {x y : A} →
+      Eq-has-decidable-equality d x y → Id x y
+    eq-Eq-has-decidable-equality d {x} {y} =
+      eq-Eq-has-decidable-equality' x y (d x y)
+
+  abstract
+    is-set-has-decidable-equality : has-decidable-equality A → is-set A
+    is-set-has-decidable-equality d =
+      is-set-prop-in-id
+        ( λ x y → Eq-has-decidable-equality d x y)
+        ( λ x y → is-prop-Eq-has-decidable-equality d)
+        ( λ x → refl-Eq-has-decidable-equality d x)
+        ( λ x y → eq-Eq-has-decidable-equality d)
+```
+
+### Types with decidable equality are closed under dependent pair types
+
+```agda
+abstract
+  has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality (Σ A B)
+  has-decidable-equality-Σ dA dB (pair x y) (pair x' y') with dA x x'
+  ... | inr np = inr (λ r → np (ap pr1 r))
+  ... | inl p =
+    is-decidable-iff eq-pair-Σ' pair-eq-Σ
+      ( is-decidable-equiv
+        ( left-unit-law-Σ-is-contr
+          ( is-proof-irrelevant-is-prop
+            ( is-set-has-decidable-equality dA x x') p)
+          ( p))
+        ( dB x' (tr _ p y) y'))
+```
+
+### A family of types over a type with decidable equality and decidable total space is a family of types with decidable equality
+
+```agda
+abstract
+  has-decidable-equality-fiber-has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → has-decidable-equality (Σ A B) →
+    (x : A) → has-decidable-equality (B x)
+  has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
+    has-decidable-equality-equiv'
+      ( equiv-fib-pr1 B x)
+      ( has-decidable-equality-Σ dΣ
+        ( λ t →
+          has-decidable-equality-is-prop
+            ( is-set-has-decidable-equality dA (pr1 t) x)))
+```
+
+### If B is a family of types with decidable equality, the total space has decidable equality, and B has a section, then the base type has decidable equality
+
+```agda
+abstract
+  has-decidable-equality-base-has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+    has-decidable-equality (Σ A B) → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality A
+  has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
+    has-decidable-equality-equiv'
+      ( equiv-total-fib (map-section b))
+      ( has-decidable-equality-Σ dΣ
+        ( λ t →
+          has-decidable-equality-is-prop
+            ( is-prop-map-is-injective
+              ( is-set-has-decidable-equality dΣ)
+              ( is-injective-map-section b)
+              ( t))))
 ```

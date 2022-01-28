@@ -2928,13 +2928,13 @@ abstract
   is-not-emb-le-Fin :
     {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
   is-not-emb-le-Fin {k} {l} f p =
-    functor-neg (leq-is-emb-Fin) (contradiction-le-ℕ l k p)
+    map-neg (leq-is-emb-Fin) (contradiction-le-ℕ l k p)
 
 abstract
   is-not-injective-le-Fin :
     {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-injective f)
   is-not-injective-le-Fin {k} {l} f p =
-    functor-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin f p)
+    map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin f p)
 
 abstract
   is-not-injective-map-Fin-succ-Fin :

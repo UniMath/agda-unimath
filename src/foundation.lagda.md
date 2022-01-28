@@ -1,53 +1,10 @@
----
-title: Formalisation of the Symmetry Book
----
+# Foundation
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundations where
+module foundation where
 
-open import elementary-number-theory.absolute-value-integers public
-open import elementary-number-theory.addition-integers public
-open import elementary-number-theory.addition-natural-numbers public
-open import elementary-number-theory.classical-finite-types public
-open import elementary-number-theory.collatz-conjecture public
-open import elementary-number-theory.congruence-integers public
-open import elementary-number-theory.congruence-natural-numbers public
-open import elementary-number-theory.difference-integers public
-open import elementary-number-theory.distance-integers public
-open import elementary-number-theory.distance-natural-numbers public
-open import elementary-number-theory.divisibility-integers public
-open import elementary-number-theory.divisibility-natural-numbers public
-open import elementary-number-theory.divisibility-standard-finite-types public
-open import elementary-number-theory.equality-integers public
-open import elementary-number-theory.equality-natural-numbers public
-open import elementary-number-theory.equality-standard-finite-types public
-open import elementary-number-theory.equivalences-standard-finite-types public
-open import elementary-number-theory.euclidean-division-natural-numbers public
-open import elementary-number-theory.factorial-natural-numbers public
-open import elementary-number-theory.fibonacci-sequence public
-open import elementary-number-theory.finitary-natural-numbers public
-open import elementary-number-theory.finitely-cyclic-maps public
-open import elementary-number-theory.goldbach-conjecture public
-open import elementary-number-theory.greatest-common-divisor-integers public
-open import elementary-number-theory.greatest-common-divisor-natural-numbers public
-open import elementary-number-theory.inequality-integers public
-open import elementary-number-theory.inequality-natural-numbers public
-open import elementary-number-theory.inequality-standard-finite-types public
-open import elementary-number-theory.integers public
-open import elementary-number-theory.iterating-functions public
-open import elementary-number-theory.modular-arithmetic-standard-finite-types public
-open import elementary-number-theory.modular-arithmetic public
-open import elementary-number-theory.multiplication-integers public
-open import elementary-number-theory.multiplication-natural-numbers public
-open import elementary-number-theory.natural-numbers public
-open import elementary-number-theory.primes-natural-numbers public
-open import elementary-number-theory.proper-divisors-natural-numbers public
-open import elementary-number-theory.standard-finite-types public
-open import elementary-number-theory.twin-prime-conjecture public
-open import elementary-number-theory.well-ordering-principle-natural-numbers public
-open import elementary-number-theory.well-ordering-principle-standard-finite-types public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
@@ -81,7 +38,6 @@ open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-pair-types public
 open import foundation.fundamental-theorem-of-identity-types public
-open import foundation.hedbergs-theorem public
 open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public

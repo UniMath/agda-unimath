@@ -15,7 +15,7 @@ open import foundation.empty-type using (empty; ex-falso)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-equiv; map-equiv; inv-equiv)
 open import foundation.functions using (id; _∘_)
-open import foundation.negation using (¬; functor-neg)
+open import foundation.negation using (¬; map-neg)
 open import foundation.retractions using (_retract-of_)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; Level; _⊔_)
@@ -131,8 +131,8 @@ dn-elim-is-decidable P (inr x) p = ex-falso (p x)
 
 dn-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
 dn-is-decidable {P = P} f =
-  functor-neg (inr {A = P} {B = ¬ P}) f
-    ( functor-neg (inl {A = P} {B = ¬ P}) f)
+  map-neg (inr {A = P} {B = ¬ P}) f
+    ( map-neg (inl {A = P} {B = ¬ P}) f)
 
 idempotent-is-decidable :
   {l : Level} (P : UU l) → is-decidable (is-decidable P) → is-decidable P

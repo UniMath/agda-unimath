@@ -6,7 +6,7 @@ title : Book labels
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module labels where
-open import foundations
+open import foundation
 open import the-circle
 open import groups
 open import subgroups

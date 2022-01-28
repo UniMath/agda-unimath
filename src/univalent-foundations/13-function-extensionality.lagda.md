@@ -7,7 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations.13-function-extensionality where
 
-open import foundations public
+open import foundation public
+open import elementary-number-theory public
 
 --------------------------------------------------------------------------------
 

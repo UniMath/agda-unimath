@@ -12,7 +12,7 @@ title: Formalisation of the Symmetry Book
 ## Foundations
 
 ```agda
-open import foundations public
+open import foundation public
 ```
 
 ## Univalent Foundations

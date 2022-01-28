@@ -55,7 +55,7 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using
   ( is-injective; is-injective-id; is-injective-comp')
-open import foundation.negation using (¬; functor-neg)
+open import foundation.negation using (¬; map-neg)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
@@ -681,7 +681,7 @@ is-one-is-fixed-point-succ-ℤ-Mod k x p =
 has-no-fixed-points-succ-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (Id (succ-ℤ-Mod k x) x)
 has-no-fixed-points-succ-ℤ-Mod k x =
-  functor-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
+  map-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
 
 has-no-fixed-points-succ-Fin :
   {k : ℕ} (x : Fin k) → is-not-one-ℕ k → ¬ (Id (succ-Fin x) x)
