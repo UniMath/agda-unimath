@@ -22,7 +22,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-type using (empty; ex-falso)
+open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equality-coproduct-types using (is-emb-inl)
 open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation.functions using (_∘_; id)

@@ -20,7 +20,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-function-type;
     is-decidable-prod)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (empty; ex-falso)
+open import foundation.empty-types using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl)
 open import foundation.negation using (¬)

@@ -1,13 +1,9 @@
----
-title: Univalent Mathematics in Agda
----
-
-# The diagonal map of a type
+# Diagonal maps of types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundation.diagonal-map-of-a-type where
+module foundation.diagonal-maps-of-types where
 
 open import foundation.0-maps using (is-0-map)
 open import foundation.1-types using
@@ -38,6 +34,12 @@ open import foundation.truncation-levels using
 open import foundation.universe-levels using (Level; UU)
 ```
 
+## Idea
+
+The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the diagonal into `A × A`.
+
+## Definition
+
 ```agda
 module _
   {l : Level} (A : UU l)
@@ -46,20 +48,37 @@ module _
   diagonal : A → A × A
   pr1 (diagonal x) = x
   pr2 (diagonal x) = x
+```
 
-  -- Exercise 12.4 (a)
-  
+## Properties
+
+### If the diagonal of `A` is an equivalence, then `A` is a proposition.
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
   abstract
-    is-prop-is-equiv-diagonal : is-equiv diagonal → is-prop A
+    is-prop-is-equiv-diagonal : is-equiv (diagonal A) → is-prop A
     is-prop-is-equiv-diagonal is-equiv-d =
-      is-prop-all-elements-equal ( λ x y →
-        let α = issec-map-inv-is-equiv is-equiv-d (pair x y) in
-        ( inv (ap pr1 α)) ∙ (ap pr2 α))
-  
-  eq-fib-diagonal : (t : A × A) → fib diagonal t → Id (pr1 t) (pr2 t)
+      is-prop-all-elements-equal
+        ( λ x y →
+          ( inv (ap pr1 (issec-map-inv-is-equiv is-equiv-d (pair x y)))) ∙
+          ( ap pr2 (issec-map-inv-is-equiv is-equiv-d (pair x y))))
+```
+
+### The fibers of the diagonal map
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  eq-fib-diagonal : (t : A × A) → fib (diagonal A) t → Id (pr1 t) (pr2 t)
   eq-fib-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
   
-  fib-diagonal-eq : (t : A × A) → Id (pr1 t) (pr2 t) → fib diagonal t
+  fib-diagonal-eq : (t : A × A) → Id (pr1 t) (pr2 t) → fib (diagonal A) t
   pr1 (fib-diagonal-eq (pair x y) β) = x
   pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
   
@@ -78,9 +97,11 @@ module _
         ( fib-diagonal-eq t)
         ( issec-fib-diagonal-eq t)
         ( isretr-fib-diagonal-eq t)
+```
 
--- Exercise 12.4 (c)
+### A type is (k+1)-truncated if and only if the diagonal is k-truncated
 
+```agda
 module _
   {l : Level} {A : UU l}
   where

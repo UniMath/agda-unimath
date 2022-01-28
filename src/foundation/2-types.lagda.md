@@ -1,8 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
-
-# 1-Types
+# 2-Types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -17,7 +13,9 @@ open import foundation.truncation-levels using (two-𝕋)
 open import foundation.universe-levels using (Level; UU; lsuc)
 ```
 
-## 2-types
+## Definition
+
+A 2-type is a type that is 2-truncated
 
 ```
 is-2-type : {l : Level} → UU l → UU l

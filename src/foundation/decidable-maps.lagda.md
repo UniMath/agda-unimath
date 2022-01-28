@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Decidable maps
 
 ```agda
@@ -16,7 +12,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 ## Definition
 
-A map is said to be decidable if its fibers are decidable types
+A map is said to be decidable if its fibers are decidable types.
 
 ```agda
 module _

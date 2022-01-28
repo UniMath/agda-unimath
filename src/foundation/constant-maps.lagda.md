@@ -1,8 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
-
-# Truncated maps
+# Constant maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

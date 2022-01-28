@@ -25,7 +25,7 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import foundation.negation using (¬)
 open import foundation.universe-levels using (UU; lzero)

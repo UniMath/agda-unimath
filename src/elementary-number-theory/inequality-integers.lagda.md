@@ -20,7 +20,7 @@ open import elementary-number-theory.integers using
     is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.coproduct-types using (coprod; inl; inr)
-open import foundation.empty-type using (empty)
+open import foundation.empty-types using (empty)
 open import foundation.functions using (id)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)

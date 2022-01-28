@@ -21,7 +21,7 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ)
 open import foundation.coproduct-types using (inl; inr)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.unit-type using (star)

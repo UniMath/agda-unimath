@@ -21,7 +21,7 @@ open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso; ind-empty)
+open import foundation.empty-types using (ex-falso; ind-empty)
 open import foundation.functions using (_∘_)
 open import foundation.negation using (¬)
 open import foundation.unit-type using (star; ind-unit)

@@ -16,7 +16,7 @@ open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-types using (is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-type using
+open import foundation.empty-types using
   ( empty; is-empty; is-equiv-is-empty'; is-equiv-is-empty; is-trunc-is-empty;
     ex-falso)
 open import foundation.equivalences using

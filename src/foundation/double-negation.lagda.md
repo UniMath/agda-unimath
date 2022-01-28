@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Double negation
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -10,13 +8,15 @@ module foundation.double-negation where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.negation using (¬; map-neg)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Double negation
+## Definition
+
+We define double negation and triple negation
 
 ```agda
 ¬¬ : {l : Level} → UU l → UU l
@@ -24,37 +24,33 @@ open import foundation.universe-levels using (Level; UU)
 
 ¬¬¬ : {l : Level} → UU l → UU l
 ¬¬¬ P = ¬ (¬ (¬ P))
+```
 
+We also define the introduction rule for double negation, and the action on maps of double negation.
+
+```agda
 intro-dn : {l : Level} {P : UU l} → P → ¬¬ P
 intro-dn p f = f p
 
-functor-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
+map-dn : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → Q) → (¬¬ P → ¬¬ Q)
-functor-dn f = map-neg (map-neg f)
-
+map-dn f = map-neg (map-neg f)
 ```
 
-```agda
-no-fixed-points-neg :
-  {l : Level} (A : UU l) → ¬ ((A → ¬ A) × (¬ A → A))
-no-fixed-points-neg A (pair f g) =
-  ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
-```
+## Properties
+
+### Double negations of classical laws
 
 ```agda
 dn-dn-elim : {l : Level} {P : UU l} → ¬¬ (¬¬ P → P)
 dn-dn-elim {P = P} f =
   ( λ (np : ¬ P) → f (λ (nnp : ¬¬ P) → ex-falso (nnp np)))
     ( λ (p : P) → f (λ (nnp : ¬¬ P) → p))
-```
 
-## Double negations of classical laws
-
-```agda
-Peirces-law :
+dn-Peirces-law :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ (((P → Q) → P) → P)
-Peirces-law {P = P} {Q} f =
+dn-Peirces-law {P = P} {Q} f =
   ( λ (np : ¬ P) → f (λ h → h (λ p → ex-falso (np p))))
   ( λ (p : P) → f (λ h → p))
 
@@ -68,26 +64,36 @@ dn-linearity-implication {P = P} {Q = Q} f =
       map-neg (inr {A = P → Q} {B = Q → P}) f (λ q → p))
 ```
 
-## Cases of double negation elimination
+### Cases of double negation elimination
 
 ```agda
 dn-elim-neg : {l : Level} (P : UU l) → ¬¬¬ P → ¬ P
 dn-elim-neg P f p = f (λ g → g p)
 
-dn-extend :
+dn-elim-prod :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
-dn-extend {P = P} {Q = Q} f = dn-elim-neg (¬ Q) ∘ (functor-dn f)
+  ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
+pr1 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ P) (map-dn pr1 f)
+pr2 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ Q) (map-dn pr2 f)
 
 dn-elim-exp :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ (P → ¬¬ Q) → (P → ¬¬ Q)
 dn-elim-exp {P = P} {Q = Q} f p =
-  dn-elim-neg (¬ Q) (functor-dn (λ (g : P → ¬¬ Q) → g p) f)
+  dn-elim-neg (¬ Q) (map-dn (λ (g : P → ¬¬ Q) → g p) f)
 
-dn-elim-prod :
+dn-elim-forall :
+  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
+  ¬¬ ((p : P) → ¬¬ (Q p)) → (p : P) → ¬¬ (Q p)
+dn-elim-forall {P = P} {Q = Q} f p =
+  dn-elim-neg (¬ (Q p)) (map-dn (λ (g : (u : P) → ¬¬ (Q u)) → g p) f)
+```
+
+### Maps into double negations extend along `intro-dn`
+
+```agda
+dn-extend :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
-pr1 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ P) (functor-dn pr1 f)
-pr2 (dn-elim-prod {P = P} {Q = Q} f) = dn-elim-neg (¬ Q) (functor-dn pr2 f)
+  (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
+dn-extend {P = P} {Q = Q} f = dn-elim-neg (¬ Q) ∘ (map-dn f)
 ```

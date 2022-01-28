@@ -27,7 +27,7 @@ open import elementary-number-theory.standard-finite-types using
   ( nat-Fin; strict-upper-bound-nat-Fin)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 ```
 

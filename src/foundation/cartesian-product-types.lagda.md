@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Cartesian product types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -11,7 +9,9 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-## Cartesian products
+## Definition
+
+Cartesian products of types are defined as dependent pair types, using a constant type family.
 
 ```agda
 prod : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)

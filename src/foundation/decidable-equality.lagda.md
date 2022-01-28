@@ -11,7 +11,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap)
-open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
+open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ'; pair-eq-Σ)
 open import foundation.equivalences using (_≃_; map-equiv; inv-equiv)
@@ -40,19 +40,35 @@ has-decidable-equality A = (x y : A) → is-decidable (Id x y)
 
 ## Examples
 
+### Any proposition has decidable equality
+
 ```agda
 abstract
   has-decidable-equality-is-prop :
     {l1 : Level} {A : UU l1} → is-prop A → has-decidable-equality A
   has-decidable-equality-is-prop H x y = inl (eq-is-prop H)
-  
+```
+
+### The empty type has decidable equality
+
+```agda
 has-decidable-equality-empty : has-decidable-equality empty
 has-decidable-equality-empty ()
+```
 
+### The unit type has decidable equality
+
+```agda
 has-decidable-equality-unit :
   has-decidable-equality unit
 has-decidable-equality-unit star star = inl refl
+```
 
+## Properties
+
+### A product of types with decidable equality has decidable equality
+
+```agda
 has-decidable-equality-prod' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (f : B → has-decidable-equality A) (g : A → has-decidable-equality B) →
@@ -70,7 +86,13 @@ has-decidable-equality-prod :
   has-decidable-equality (A × B)
 has-decidable-equality-prod d e =
   has-decidable-equality-prod' (λ y → d) (λ x → e)
+```
 
+### Decidability of equality of the factors of a cartesian product.
+
+If `A × B` has decidable equality and `B` has an element, then `A` has decidable equality; and vice versa.
+
+```agda
 has-decidable-equality-left-factor :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality (A × B) → B → has-decidable-equality A
@@ -85,8 +107,6 @@ has-decidable-equality-right-factor d a x y with d (pair a x) (pair a y)
 ... | inl p = inl (ap pr2 p)
 ... | inr np = inr (λ q → np (ap (pair a) q))
 ```
-
-## Properties
 
 ### Types with decidable equality are closed under retracts
 

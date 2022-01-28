@@ -32,7 +32,7 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import foundation.negation using (¬)

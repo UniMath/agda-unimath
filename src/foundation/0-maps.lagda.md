@@ -1,10 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
-
 # 0-Maps
-
-We define 0-maps to be 0-truncated maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -25,6 +19,10 @@ open import foundation.truncated-maps using
 open import foundation.truncation-levels using (zero-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
+
+## Definition
+
+Maps `f : A → B` of which the fibers are sets, i.e., 0-truncated types, are called 0-maps. We will show in `foundation.faithful-maps` that a map f is a 0-map if and only if f is faithful, i.e., f induces embeddings on identity types.
 
 ```agda
 module _
@@ -116,7 +114,9 @@ module _
     is-0-map-tot = is-trunc-map-tot zero-𝕋
 ```
 
-### For any type family over the codomain, a 0-map induces a 0-map on total spaces. In other words, 0-maps are stable under pullbacks. We will come to this point when we introduce homotopy pullbacks.
+### For any type family over the codomain, a 0-map induces a 0-map on total spaces.
+
+In other words, 0-maps are stable under pullbacks. We will come to this point when we introduce homotopy pullbacks.
 
 ```agda
 module _
@@ -128,7 +128,7 @@ module _
     is-0-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base zero-𝕋 C
 ```
 
-### A family of 0-maps over a 0-map induce a 0-map on total spaces
+### The functorial action of `Σ` preserves 0-maps.
 
 ```agda
 module _

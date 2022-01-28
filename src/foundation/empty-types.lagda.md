@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundation.empty-type where
+module foundation.empty-types where
 
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)

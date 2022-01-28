@@ -13,7 +13,7 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (empty; ex-falso)
+open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)

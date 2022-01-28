@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Coproduct types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -17,7 +15,11 @@ open import foundation.non-contractible-types using (is-not-contractible)
 open import foundation.universe-levels using (Level; lzero; _⊔_; UU)
 ```
 
-## Coproducts
+## Idea
+
+The coproduct of two types `A` and `B` can be thought of as the disjoint union of `A` and `B`. 
+
+## Definition
 
 ```agda
 data coprod {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)  where
@@ -31,6 +33,10 @@ ind-coprod :
 ind-coprod C f g (inl x) = f x
 ind-coprod C f g (inr x) = g x
 ```
+
+## Properties
+
+### The left and right inclusions are injective
 
 ```agda
 module _

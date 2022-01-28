@@ -21,10 +21,10 @@ open import foundation.decidable-equality public
 open import foundation.decidable-maps public
 open import foundation.decidable-types public
 open import foundation.dependent-pair-types public
-open import foundation.diagonal-map-of-a-type public
+open import foundation.diagonal-maps-of-types public
 open import foundation.double-negation public
 open import foundation.embeddings public
-open import foundation.empty-type public
+open import foundation.empty-types public
 open import foundation.equality-cartesian-product-types public
 open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-pair-types public

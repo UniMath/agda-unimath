@@ -8,7 +8,7 @@ title: Univalent Mathematics in Agda
 module foundation.non-contractible-types where
 
 open import foundation.contractible-types using (is-contr; center; contraction)
-open import foundation.empty-type using (is-empty; empty)
+open import foundation.empty-types using (is-empty; empty)
 open import foundation.functions using (id)
 open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; UU)

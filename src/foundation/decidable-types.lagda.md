@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Decidable types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -11,7 +9,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
-open import foundation.empty-type using (empty; ex-falso)
+open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-equiv; map-equiv; inv-equiv)
 open import foundation.functions using (id; _∘_)
@@ -21,7 +19,7 @@ open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
-# Decidable types
+## Definition
 
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l
@@ -32,7 +30,9 @@ is-decidable-fam :
 is-decidable-fam {A = A} P = (x : A) → is-decidable (P x)
 ```
 
-## Examples of decidable types
+## Examples
+
+The unit type and the empty type are decidable, and indeed any type equipped with a point is decidable.
 
 ```
 is-decidable-unit : is-decidable unit
@@ -40,14 +40,24 @@ is-decidable-unit = inl star
 
 is-decidable-empty : is-decidable empty
 is-decidable-empty = inr id
+```
 
+## Properties
+
+### Coproducts of decidable types are decidable
+
+```agda
 is-decidable-coprod :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (coprod A B)
 is-decidable-coprod (inl a) y = inl (inl a)
 is-decidable-coprod (inr na) (inl b) = inl (inr b)
 is-decidable-coprod (inr na) (inr nb) = inr (ind-coprod (λ x → empty) na nb)
+```
 
+### Cartesian products of decidable types are decidable
+
+```agda
 is-decidable-prod :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A × B)
@@ -63,7 +73,11 @@ is-decidable-prod' (inl a) d with d a
 ... | inl b = inl (pair a b)
 ... | inr nb = inr (nb ∘ pr2)
 is-decidable-prod' (inr na) d = inr (na ∘ pr1)
+```
 
+### Function types of decidable types are decidable
+
+```agda
 is-decidable-function-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A → B)
@@ -79,7 +93,11 @@ is-decidable-function-type' (inl a) d with d a
 ... | inl b = inl (λ x → b)
 ... | inr nb = inr (λ f → nb (f a))
 is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
+```
 
+### The negation of a decidable type is decidable
+
+```agda
 is-decidable-neg :
   {l : Level} {A : UU l} → is-decidable A → is-decidable (¬ A)
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
@@ -121,19 +139,27 @@ is-decidable-equiv' :
 is-decidable-equiv' e = is-decidable-equiv (inv-equiv e)
 ```
 
-## Decidability implies double negation elimination
+### Decidability implies double negation elimination
 
-```
+```agda
 dn-elim-is-decidable :
   {l : Level} (P : UU l) → is-decidable P → (¬¬ P → P)
 dn-elim-is-decidable P (inl x) p = x
 dn-elim-is-decidable P (inr x) p = ex-falso (p x)
+```
 
+### The double negation of `is-decidable` is always provable
+
+```agda
 dn-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
 dn-is-decidable {P = P} f =
   map-neg (inr {A = P} {B = ¬ P}) f
     ( map-neg (inl {A = P} {B = ¬ P}) f)
+```
 
+### `is-decidable` is an idempotent operation
+
+```agda
 idempotent-is-decidable :
   {l : Level} (P : UU l) → is-decidable (is-decidable P) → is-decidable P
 idempotent-is-decidable P (inl (inl p)) = inl p
