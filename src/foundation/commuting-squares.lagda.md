@@ -14,12 +14,14 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 A square of maps
 
+```md
   A ------> X
   |         |
   |         |
   |         |
   V         V
   B ------> Y
+```
 
 is said to commute if there is a homotopy between both composites.
 
