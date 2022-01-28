@@ -9,6 +9,7 @@ open import categories.categories
 open import categories.functors
 open import categories.large-categories
 open import categories.natural-transformations
+open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
@@ -27,7 +28,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.equality-standard-finite-types
 open import elementary-number-theory.equivalences-standard-finite-types
 open import elementary-number-theory.euclidean-division-natural-numbers
-open import elementary-number-theory.factorial-natural-numbers
+open import elementary-number-theory.factorials
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.finitary-natural-numbers
 open import elementary-number-theory.finitely-cyclic-maps
@@ -50,6 +51,7 @@ open import elementary-number-theory.standard-finite-types
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import foundation
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
@@ -115,7 +117,6 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundations
 open import groups
 open import groups.abstract-abelian-groups
 open import groups.abstract-group-actions

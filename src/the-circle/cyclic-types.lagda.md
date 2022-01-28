@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module the-circle.cyclic-types where
 
-open import foundations public
+open import foundation public
 open import groups public
 
 Endo : (l : Level) → UU (lsuc l)
