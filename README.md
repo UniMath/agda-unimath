@@ -56,7 +56,7 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 Ideally the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept. We suggest to follow the following template:
 
-```
+```md
 # Title
 
 [ options
