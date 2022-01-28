@@ -44,7 +44,7 @@ open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.primes-natural-numbers
+open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.standard-finite-types
 open import elementary-number-theory.twin-prime-conjecture

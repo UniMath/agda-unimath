@@ -25,7 +25,7 @@ open import elementary-number-theory.equality-natural-numbers public
 open import elementary-number-theory.equality-standard-finite-types public
 open import elementary-number-theory.equivalences-standard-finite-types public
 open import elementary-number-theory.euclidean-division-natural-numbers public
-open import elementary-number-theory.factorial-natural-numbers public
+open import elementary-number-theory.factorials public
 open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
@@ -42,7 +42,7 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.natural-numbers public
-open import elementary-number-theory.primes-natural-numbers public
+open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.standard-finite-types public
 open import elementary-number-theory.twin-prime-conjecture public

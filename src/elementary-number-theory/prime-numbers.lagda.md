@@ -7,14 +7,14 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module elementary-number-theory.primes-natural-numbers where
+module elementary-number-theory.prime-numbers where
 
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-one-ℕ; leq-div-succ-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
     transitive-div-ℕ; is-one-is-divisor-below-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-one-ℕ; Eq-eq-ℕ; is-decidable-is-zero-ℕ)
-open import elementary-number-theory.factorial-natural-numbers using
+open import elementary-number-theory.factorials using
   ( factorial-ℕ; div-factorial-ℕ; leq-factorial-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; is-decidable-le-ℕ; is-decidable-leq-ℕ;

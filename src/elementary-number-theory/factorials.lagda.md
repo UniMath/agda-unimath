@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module elementary-number-theory.factorial-natural-numbers where
+module elementary-number-theory.factorials where
 
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; transitive-div-ℕ)
