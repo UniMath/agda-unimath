@@ -174,13 +174,3 @@ htpy-red {_} {A} {f} H x =
       ( htpy-nat H (H x)))
 ```
 
-## Commuting squares
-
-```agda
-coherence-square :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
-  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X) →
-  UU (l3 ⊔ l4)
-coherence-square top left right bottom =
-  (bottom ∘ left) ~ (right ∘ top)
-```
