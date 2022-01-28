@@ -85,7 +85,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.hedbergs-theorem
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types

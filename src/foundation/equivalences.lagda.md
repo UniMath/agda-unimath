@@ -120,45 +120,49 @@ module _
   
   inv-has-inverse : has-inverse f → B → A
   inv-has-inverse H = pr1 H
+
+  abstract
+    issec-inv-has-inverse : (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
+    issec-inv-has-inverse H y =
+      ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
+      ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
   
-  issec-inv-has-inverse : (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
-  issec-inv-has-inverse H y =
-    ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
-    ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
+    isretr-inv-has-inverse : (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
+    isretr-inv-has-inverse H = pr2 (pr2 H)
   
-  isretr-inv-has-inverse : (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
-  isretr-inv-has-inverse H = pr2 (pr2 H)
-  
-  coherence-inv-has-inverse :
-    (H : has-inverse f) →
-    (issec-inv-has-inverse H ·r f) ~ (f ·l isretr-inv-has-inverse H)
-  coherence-inv-has-inverse H x =
-    inv
-      ( inv-con
-        ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
-        ( ap f (pr2 (pr2 H) x))
-        ( (ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙ (pr1 (pr2 H) (f x)))
-        ( sq-top-whisk
+    coherence-inv-has-inverse :
+      (H : has-inverse f) →
+      (issec-inv-has-inverse H ·r f) ~ (f ·l isretr-inv-has-inverse H)
+    coherence-inv-has-inverse H x =
+      inv
+        ( inv-con
           ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
           ( ap f (pr2 (pr2 H) x))
-          ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
-          ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
-            ( inv (ap (ap f) (htpy-red (pr2 (pr2 H)) x))))
-          ( pr1 (pr2 H) (f x))
-          ( htpy-nat (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
+          ( ( ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙
+            ( pr1 (pr2 H) (f x)))
+          ( sq-top-whisk
+            ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
+            ( ap f (pr2 (pr2 H) x))
+            ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
+            ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
+              ( inv (ap (ap f) (htpy-red (pr2 (pr2 H)) x))))
+            ( pr1 (pr2 H) (f x))
+            ( htpy-nat (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
 
-  is-coherently-invertible-has-inverse :
-    (H : has-inverse f) → is-coherently-invertible f
-  pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
-  pr1 (pr2 (is-coherently-invertible-has-inverse H)) = issec-inv-has-inverse H
-  pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-    isretr-inv-has-inverse H
-  pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-    coherence-inv-has-inverse H
+  abstract
+    is-coherently-invertible-has-inverse :
+      (H : has-inverse f) → is-coherently-invertible f
+    pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
+    pr1 (pr2 (is-coherently-invertible-has-inverse H)) = issec-inv-has-inverse H
+    pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
+      isretr-inv-has-inverse H
+    pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
+      coherence-inv-has-inverse H
 
-  is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
-  is-coherently-invertible-is-equiv =
-    is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
+  abstract
+    is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
+    is-coherently-invertible-is-equiv =
+      is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
 ```
 
 ## Some useful terminology for equivalences
