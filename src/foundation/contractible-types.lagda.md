@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Contractible types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -22,9 +20,11 @@ open import foundation.retractions using (_retract-of_)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Contractible types
+## Idea
 
-In this file we introduce the concept of contractibility, and study its basic properties. Contractibility results with respect to `Σ`, `×`, are in this file.
+Contractible types are types that have, up to identification, exactly one element.
+
+## Definition
 
 ```agda
 is-contr :
@@ -36,7 +36,6 @@ abstract
     {l : Level} {A : UU l} → is-contr A → A
   center (pair c is-contr-A) = c
   
--- We make sure that the contraction is coherent in a straightforward way
 eq-is-contr' :
   {l : Level} {A : UU l} → is-contr A → (x y : A) → Id x y
 eq-is-contr' (pair c C) x y = (inv (C x)) ∙ (C y)
@@ -57,7 +56,11 @@ abstract
   coh-contraction (pair c C) = left-inv (C c)
 ```
 
-## Examples of contractible types
+## Examples
+
+### The total space of the identity type based at a point is contractible
+
+We prove two cases of this fact: the first keeping the left-hand side fixed, and the second keeping the right-hand side fixed.
 
 ```agda
 module _
@@ -77,7 +80,9 @@ module _
     pr2 (is-contr-total-path' a) (pair .a refl) = refl
 ```
 
-## Retracts of contractible types are contractible
+## Properties
+
+### Retracts of contractible types are contractible
 
 ```agda
 module _
@@ -91,7 +96,7 @@ module _
       ap r (contraction H (i x)) ∙ (isretr x)
 ```
 
-## Contractible types are closed under equivalences
+### Contractible types are closed under equivalences
 
 ```agda
 module _
@@ -148,7 +153,11 @@ module _
     is-equiv-is-contr _ is-contr-A is-contr-B
 ```
 
-## Contractibility of cartesian product types
+### Contractibility of cartesian product types
+
+Given two types `A` and `B`, the following are equivalent:
+1. The type `A × B` is contractible.
+2. Both `A` and `B` are contractible.
 
 ```agda
 module _
@@ -190,7 +199,7 @@ module _
     pr2 (is-contr-prod (pair a C) (pair b D)) (pair x y) = eq-pair (C x) (D y)
 ```
 
-## Contractibility of Σ-types
+### Contractibility of Σ-types
 
 ```agda
 module _

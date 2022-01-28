@@ -7,6 +7,8 @@ title: Univalent Mathematics in Agda
 
 module foundation.negation where
 
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (pair)
 open import foundation.empty-types using (empty)
 open import foundation.universe-levels using (UU; Level)
 ```
@@ -22,4 +24,15 @@ Here we introduce the negation operation, following the Curry-Howard interpretat
 map-neg : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
+```
+
+## Properties
+
+### Negation has no fixed points
+
+```agda
+no-fixed-points-neg :
+  {l : Level} (A : UU l) → ¬ ((A → ¬ A) × (¬ A → A))
+no-fixed-points-neg A (pair f g) =
+  ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
 ```

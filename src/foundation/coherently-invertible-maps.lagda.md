@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Coherently invertible maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -15,9 +13,11 @@ open import foundation.identity-types using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-# Coherently invertible maps
+## Idea
 
-In this file we introduce coherently invertible maps, which are also known as half-adjoint equivalences. We will show that any equivalence is coherently invertible in `equivalences`.
+A coherently invertible map `f : A → B` is a map equipped with a two-sided inverse and an additional coherence law. They are also called half-adjoint equivalences.
+
+## Definition
 
 ```agda
 module _

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Embeddings
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -30,7 +28,11 @@ open import foundation.identity-types using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-# Embeddings
+## Idea
+
+An embedding from one type into another is a map that induces equivalences on identity types. In other words, the identitifications `Id (f x) (f y)` for an embedding `f : A → B` are in one-to-one correspondence with the identitifications `Id x y`. Embeddings are better behaved homotopically than injective maps, because the condition of being an equivalence is a property under function extensionality.
+
+## Definition
 
 ```agda
 module _
@@ -57,6 +59,16 @@ module _
   equiv-ap-emb : (e : A ↪ B) {x y : A} → Id x y ≃ Id (map-emb e x) (map-emb e y)
   pr1 (equiv-ap-emb e {x} {y}) = ap (map-emb e)
   pr2 (equiv-ap-emb e {x} {y}) = is-emb-map-emb e x y
+```
+
+## Examples
+
+### Any equivalence is an embedding
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
   is-emb-is-equiv : {f : A → B} → is-equiv f → is-emb f
   is-emb-is-equiv {f} is-equiv-f x =
@@ -75,7 +87,11 @@ module _
     (e : A ≃ B) (x y : A) → (Id x y) ≃ (Id (map-equiv e x) (map-equiv e y))
   pr1 (equiv-ap e x y) = ap (map-equiv e) {x} {y}
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
+```
 
+### The identity map is an embedding
+
+```agda
 module _
   {l : Level} {A : UU l}
   where
@@ -87,7 +103,7 @@ module _
   is-emb-id = is-emb-map-emb id-emb
 ```
 
-## Transposing equalities along equivalences
+### Transposing equalities along equivalences
 
 ```agda
 module _

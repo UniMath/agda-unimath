@@ -71,7 +71,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.double-negation
 open import foundation.embeddings
-open import foundation.empty-type
+open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types

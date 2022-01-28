@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Contractible maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -23,7 +21,11 @@ open import foundation.identity-types using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-# Contractible maps
+## Idea
+
+A map is often said to satisfy a property `P` if each of its fibers satisfy property `P`. Thus, we define contractible maps to be maps of which each fiber is contractible. In other words, contractible maps are maps `f : A → B` such that for each element `b : B` there is a unique `a : A` equipped with an identification `Id (f a) b`, i.e., contractible maps are the type theoretic bijections.
+
+## Definition
 
 ```agda
 module _
@@ -34,7 +36,9 @@ module _
   is-contr-map f = (y : B) → is-contr (fib f y)
 ```
 
-## Any contractible map is an equivalence
+## Properties
+
+### Any contractible map is an equivalence
 
 ```agda
 module _
@@ -69,7 +73,7 @@ module _
         ( isretr-map-inv-is-contr-map H)
 ```
 
-## Any coherently invertible map is a contractible map
+### Any coherently invertible map is a contractible map
 
 ```agda
 module _
@@ -101,7 +105,7 @@ module _
     contraction-fib-is-coherently-invertible H y
 ```
 
-## Any equivalence is a contractible map
+### Any equivalence is a contractible map
 
 ```agda
 module _
