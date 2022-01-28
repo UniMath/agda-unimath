@@ -20,6 +20,7 @@ open import foundation.boolean-reflection
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coherently-invertible-maps
+open import foundation.commuting-squares
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
