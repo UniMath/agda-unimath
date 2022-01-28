@@ -6,7 +6,9 @@
 module foundation.decidable-equality where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.coproduct-types using
+  ( coprod; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
+    neq-inr-inl)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -262,4 +264,34 @@ abstract
               ( is-set-has-decidable-equality dΣ)
               ( is-injective-map-section b)
               ( t))))
+```
+
+### If `A` and `B` have decidable equality, then so does their coproduct
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  has-decidable-equality-coprod :
+    has-decidable-equality A → has-decidable-equality B →
+    has-decidable-equality (coprod A B)
+  has-decidable-equality-coprod d e (inl x) (inl y) =
+    is-decidable-iff (ap inl) is-injective-inl (d x y)
+  has-decidable-equality-coprod d e (inl x) (inr y) =
+    inr neq-inl-inr
+  has-decidable-equality-coprod d e (inr x) (inl y) =
+    inr neq-inr-inl
+  has-decidable-equality-coprod d e (inr x) (inr y) =
+    is-decidable-iff (ap inr) is-injective-inr (e x y)
+
+  has-decidable-equality-left-summand :
+    has-decidable-equality (coprod A B) → has-decidable-equality A
+  has-decidable-equality-left-summand d x y =
+    is-decidable-iff is-injective-inl (ap inl) (d (inl x) (inl y))
+
+  has-decidable-equality-right-summand :
+    has-decidable-equality (coprod A B) → has-decidable-equality B
+  has-decidable-equality-right-summand d x y =
+    is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
 ```

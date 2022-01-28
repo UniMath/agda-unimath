@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Equality of cartesian product types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -16,9 +14,11 @@ open import foundation.identity-types using (Id; refl; ap)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
-# The identity type of a cartesian product
+## Idea
 
-In this file we characterize the identity type of a cartesian product
+Identifications `Id (pair x y) (pair x' y')` in a cartesian product are equivalently described as pairs of identifications `Id x x'` and `Id y y'`. This provides us with a characterization of the identity type of cartesian product types.
+
+## Definition
 
 ```agda
 module _
@@ -27,7 +27,17 @@ module _
   
   Eq-prod : (s t : A × B) → UU (l1 ⊔ l2)
   Eq-prod s t = (Id (pr1 s) (pr1 t)) × (Id (pr2 s) (pr2 t))
+```
 
+## Properties
+
+### The type `Eq-prod s t` is equivalent to `Id s t`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
   eq-pair' : {s t : A × B} → Eq-prod s t → Id s t
   eq-pair' {pair x y} {pair .x .y} (pair refl refl) = refl
 

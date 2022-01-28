@@ -203,7 +203,9 @@ coherence-square-inv-vertical top left right bottom H x =
     ( inv (H (map-inv-equiv left x)) ∙ ap bottom (issec-map-inv-equiv left x))
 ```
 
-## Embeddings are closed under homotopies
+## Properties
+
+### Embeddings are closed under homotopies
 
 ```agda
 module _
@@ -233,7 +235,7 @@ module _
       is-emb-htpy g f (inv-htpy H) is-emb-f
 ```
 
-## Composites of embeddings
+### Embeddings are closed under composition
 
 ```agda
 module _
@@ -261,7 +263,7 @@ module _
     pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
 ```
 
-## The right factor of a composed embedding is an embedding
+### The right factor of a composed embedding is an embedding
 
 ```agda
 module _
@@ -306,6 +308,8 @@ module _
         ( is-equiv-map-inv-is-equiv is-equiv-e)
         ( is-emb-f)
 ```
+
+### If the action on identifications has a section, then f is an embedding
 
 ```agda
 module _

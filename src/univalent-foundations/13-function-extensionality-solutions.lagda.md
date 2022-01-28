@@ -1132,7 +1132,7 @@ abstract
     is-equiv (pt x) →
     ({l2 : Level} (Y : UU l2) → is-equiv (λ y → const X Y y))
   is-equiv-diagonal-is-equiv-pt {X = X} x is-equiv-pt Y =
-    is-equiv-is-section-is-equiv
+    is-equiv-is-section
       ( universal-property-unit-is-equiv-pt x is-equiv-pt Y)
       ( refl-htpy)
   

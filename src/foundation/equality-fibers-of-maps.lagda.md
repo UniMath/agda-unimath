@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Equality in the fibers of a map
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -23,17 +21,24 @@ open import foundation.identity-types using
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Equality in the fibers of a map
+## Idea
 
-## Second characterization of equality in the fibers of a map
+In the file `foundation.fibers-of-a-map` we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+
+## Theorem
+
+For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an equivalence
+
+```md
+Id x y ≃ fib (ap f) ((pr2 x) ∙ (inv (pr2 y)))
+```
+
+### Proof
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {b : B}
   where
-
-  -- Characterizing the identity type of a fiber as the fiber of the action on
-  -- paths
 
   fib-ap-eq-fib-fiberwise :
     (s t : fib f b) (p : Id (pr1 s) (pr1 t)) →

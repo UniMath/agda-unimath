@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Equality of dependent pair types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -15,9 +13,11 @@ open import foundation.identity-types using (Id; refl; tr)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
-# The identity type of a dependent pair type
+## Idea
 
-In this file we characterize the identity type of a dependent pair type.
+An identification `Id (pair x y) (pair x' y')` in a dependent pair type `Σ A B` is equivalently described as a pair `pair α β` consisting of an identification `α : Id x x'` and an identification `β : Id (tr B α y) y'`. 
+
+## Definition
 
 ```agda
 
@@ -27,7 +27,13 @@ module _
 
   Eq-Σ : (s t : Σ A B) → UU (l1 ⊔ l2)
   Eq-Σ s t = Σ (Id (pr1 s) (pr1 t)) (λ α → Id (tr B α (pr2 s)) (pr2 t))
+```
 
+## Properties
+
+### The type `Id s t` is equivalent to `Eq-Σ s t` for any `s t : Σ A B`.
+
+```agda
   refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s
   pr1 (refl-Eq-Σ (pair a b)) = refl
   pr2 (refl-Eq-Σ (pair a b)) = refl
