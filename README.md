@@ -51,8 +51,54 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 1. Every file should begin with a markdown header of level `#`.
 2. Immediately after the header there should be a block of agda code which loads the options, declares the present module, and performs all the imports. In particular, there should be no further imports later on in the file.
-3. The rest of the files is devided into sections, subsections and possibly subsubsections. Each section should have a markdown header of level `##`, and the title of each header should be generic, such as `Idea`, `Definition`, `Example`, `Properties`, and so on. Ideally the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept.
+3. The rest of the files is devided into sections, subsections and possibly subsubsections. Each section should have a markdown header of level `##`, and the title of each header should be generic, such as `Idea`, `Definition`, `Example`, `Properties`, and so on. 
 4. The subsections should have a markdown header of level `###` and they should concisely describe the content of the block of code that follows.
+
+Ideally the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept. We suggest to follow the following template:
+
+```
+# Title
+
+[ options
+  module declaration
+  imports]
+
+## Idea
+
+( Informal description of the idea)
+
+## Definition
+
+[ formalization of the definition and immediately related structure]
+
+## Examples
+
+### X is an example
+
+( informal explanation)
+
+[ formalization that X is an example]
+
+### Y is an example
+
+( informal explanation)
+
+[ formalization that Y is an example]
+
+## Properties
+
+### Concise descrition of property 1
+
+( informal explanation)
+
+[ formalization of property 1]
+
+### Concise description of property 2
+
+( informal explanation)
+
+[ formalization of property 2]
+```
 
 #### Names
 
