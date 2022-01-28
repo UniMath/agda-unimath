@@ -32,7 +32,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.coproduct-types using (coprod; inl; inr)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)

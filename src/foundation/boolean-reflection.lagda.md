@@ -10,7 +10,7 @@ module foundation.boolean-reflection where
 open import foundation.booleans using (bool; true; false; Eq-eq-bool)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; refl)
 open import foundation.universe-levels using (Level; UU)
 ```

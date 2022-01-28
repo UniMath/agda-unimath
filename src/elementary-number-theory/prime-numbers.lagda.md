@@ -41,7 +41,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg; is-decidable-iff;
     is-decidable-function-type)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (id)
 open import foundation.identity-types using (refl; _∙_; inv)
 open import foundation.logical-equivalence using (_↔_)

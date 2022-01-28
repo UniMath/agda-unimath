@@ -17,7 +17,7 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (pr1; pr2)
-open import foundation.empty-type using (empty; is-set-empty)
+open import foundation.empty-types using (empty; is-set-empty)
 open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap)

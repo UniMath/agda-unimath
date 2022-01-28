@@ -7,7 +7,7 @@ title: Univalent Mathematics in Agda
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
 
-module foundation.diagonal-map-of-a-type where
+module foundation.diagonal-maps-of-types where
 
 open import foundation.0-maps using (is-0-map)
 open import foundation.1-types using

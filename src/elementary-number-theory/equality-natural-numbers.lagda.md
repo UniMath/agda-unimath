@@ -18,7 +18,7 @@ open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (empty; is-prop-empty)
+open import foundation.empty-types using (empty; is-prop-empty)
 open import foundation.equivalences using (is-equiv)
 open import foundation.functions using (id)
 open import foundation.fundamental-theorem-of-identity-types using

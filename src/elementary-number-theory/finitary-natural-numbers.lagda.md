@@ -27,7 +27,7 @@ open import elementary-number-theory.standard-finite-types using
     succ-Fin; nat-succ-Fin; is-zero-nat-zero-Fin)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair)
-open import foundation.empty-type using (is-empty; ex-falso)
+open import foundation.empty-types using (is-empty; ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)

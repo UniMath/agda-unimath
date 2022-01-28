@@ -11,7 +11,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
-open import foundation.empty-type using (empty; ex-falso)
+open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-equiv; map-equiv; inv-equiv)
 open import foundation.functions using (id; _∘_)

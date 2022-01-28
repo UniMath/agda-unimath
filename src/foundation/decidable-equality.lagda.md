@@ -11,7 +11,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap)
-open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
+open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ'; pair-eq-Σ)
 open import foundation.equivalences using (_≃_; map-equiv; inv-equiv)

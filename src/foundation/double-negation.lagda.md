@@ -10,7 +10,7 @@ module foundation.double-negation where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.negation using (¬; map-neg)
 open import foundation.universe-levels using (Level; UU)

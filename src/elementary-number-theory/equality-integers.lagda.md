@@ -18,7 +18,7 @@ open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-unit)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pr1; pr2)
-open import foundation.empty-type using (empty)
+open import foundation.empty-types using (empty)
 open import foundation.equality-coproduct-types using
   ( has-decidable-equality-coprod; is-set-coprod)
 open import foundation.functions using (_∘_)

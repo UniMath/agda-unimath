@@ -16,7 +16,7 @@ open import elementary-number-theory.standard-finite-types using
   ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using (empty; ex-falso; is-prop-empty)
+open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)

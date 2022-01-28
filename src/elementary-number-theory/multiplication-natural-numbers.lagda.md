@@ -19,7 +19,7 @@ open import elementary-number-theory.natural-numbers using
     is-injective-succ-ℕ)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
-open import foundation.empty-type using (ex-falso)
+open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.interchange-law using

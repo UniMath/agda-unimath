@@ -18,7 +18,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-equiv; is-decidable-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
-open import foundation.empty-type using (empty; is-prop-empty; ex-falso)
+open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)

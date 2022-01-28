@@ -13,7 +13,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
   ( coprod; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-type using
+open import foundation.empty-types using
   ( empty; is-empty; is-equiv-is-empty'; ex-falso)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
