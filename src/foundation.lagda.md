@@ -13,6 +13,7 @@ open import foundation.boolean-reflection public
 open import foundation.booleans public
 open import foundation.cartesian-product-types public
 open import foundation.coherently-invertible-maps public
+open import foundation.commuting-squares public
 open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public

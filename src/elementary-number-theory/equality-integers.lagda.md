@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Equality of integers
 
 ```agda
@@ -15,12 +11,13 @@ open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-unit)
+  ( has-decidable-equality; has-decidable-equality-unit;
+    has-decidable-equality-coprod)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pr1; pr2)
 open import foundation.empty-types using (empty)
 open import foundation.equality-coproduct-types using
-  ( has-decidable-equality-coprod; is-set-coprod)
+  ( is-set-coprod)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.sets using (is-set; UU-Set)
@@ -28,7 +25,11 @@ open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
-### Observational equality on ℤ
+## Idea
+
+An equality predicate is defined by pattern matching on the integers. Then we show that this predicate characterizes the identit type of the integers
+
+## Definition
 
 ```agda
 Eq-ℤ : ℤ → ℤ → UU lzero
@@ -54,7 +55,9 @@ eq-Eq-ℤ (inr (inl star)) (inr (inl star)) e = refl
 eq-Eq-ℤ (inr (inr x)) (inr (inr y)) e = ap (inr ∘ inr) (eq-Eq-ℕ x y e)
 ```
 
-# The identity type of the integers
+## Properties
+
+### Equality on the integers is decidable
 
 ```agda
 has-decidable-equality-ℤ : has-decidable-equality ℤ
@@ -77,6 +80,8 @@ is-decidable-is-neg-one-ℤ :
   (x : ℤ) → is-decidable (is-neg-one-ℤ x)
 is-decidable-is-neg-one-ℤ x = has-decidable-equality-ℤ x neg-one-ℤ
 ```
+
+### The type of integers is a set
 
 ```agda
 abstract

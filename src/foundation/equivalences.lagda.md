@@ -1,10 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Equivalences
-
-In this file we introduce equivalences, and prove some basic properties. Further properties that rely on the fact that equivalences are embeddings are proven in `embeddings`.
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -26,7 +20,13 @@ open import foundation.retractions using (retr)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-## Defining equivalences
+## Idea
+
+An equivalence is a map that has a section and a (separate) retraction. This may look odd: Why not say that an equivalence is a map that has a 2-sided inverse? The reason is that the latter requirement would put nontrivial structure on the map, whereas having the section and retraction separate yields a property. To quickly see this: if `f` is an equivalence, then it has up to homotopy only one section, and it has up to homotopy only one retraction. 
+
+## Definition
+
+### Ordinary equivalences
 
 ```agda
 module _
@@ -42,14 +42,22 @@ module _
 _≃_ :
   {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
 A ≃ B = Σ (A → B) (λ f → is-equiv f)
+```
 
+### Families of equivalences
+
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
   
   is-fiberwise-equiv : (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
   is-fiberwise-equiv f = (x : A) → is-equiv (f x)
+```
 
+### Immediate structure of equivalences
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -61,7 +69,9 @@ module _
   is-equiv-map-equiv e = pr2 e
 ```
 
-## The identity map is an equivalence
+## Examples
+
+### The identity map is an equivalence
 
 ```agda
 module _
@@ -79,7 +89,7 @@ module _
   pr2 id-equiv = is-equiv-id
 ```
 
-## A map has an two-sided inverse if and only if it is an equivalence
+### A map has an two-sided inverse if and only if it is an equivalence
 
 ```agda
 module _
@@ -111,7 +121,9 @@ module _
     (((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H
 ```
 
-## Invertible maps are coherenctly invertible
+## Properties
+
+### Invertible maps are coherenctly invertible
 
 ```agda
 module _
@@ -165,7 +177,7 @@ module _
       is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
 ```
 
-## Some useful terminology for equivalences
+### Structure obtained from being coherently invertible
 
 ```agda
 module _
@@ -194,7 +206,7 @@ module _
       ( issec-map-inv-is-equiv)
 ```
 
-## The inverse of an equivalence
+### The inverse of an equivalence is an equivalence
 
 ```agda
 module _
@@ -225,7 +237,7 @@ module _
   pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
 
-## Equivalences are closed under homotopies
+### Equivalences are closed under homotopies
 
 We show that if `f ~ g`, then `f` is an equivalence if and only if `g` is an equivalence. Furthermore, we show that if `f` and `g` are homotopic equivaleces, then their inverses are also homotopic.
 
@@ -267,7 +279,9 @@ module _
         ( issec-map-inv-is-equiv H b)))
 ```
 
-## The 3-for-2 property of equivalences
+### The 3-for-2 property of equivalences
+
+#### Composites of equivalences are equivalences
 
 ```agda
 module _
@@ -311,6 +325,26 @@ module _
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  where
+
+  abstract
+    is-equiv-comp' :
+      (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
+    is-equiv-comp' g h = is-equiv-comp (g ∘ h) g h refl-htpy
+
+  equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
+  pr1 (equiv-comp g h) = (pr1 g) ∘ (pr1 h)
+  pr2 (equiv-comp g h) = is-equiv-comp' (pr1 g) (pr1 h) (pr2 h) (pr2 g)
+
+  _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
+  _∘e_ = equiv-comp
+```
+
+#### If a composite and its right factor are equivalences, then so is its left factor
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
   
@@ -329,6 +363,15 @@ module _
         ( triangle-section f g h H (pair sh sh-issec))
         ( retr-f)
         ( pair h sh-issec)
+```
+
+#### If a composite and its left factor are equivalences, then so is its right factor
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
 
   abstract
     is-equiv-right-factor : is-equiv g → is-equiv f → is-equiv h
@@ -345,22 +388,12 @@ module _
         ( pair sec-g (pair rg rg-isretr))
         ( pair sec-f retr-f)) =
       retraction-comp f g h H (pair rg rg-isretr) retr-f
+```
 
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
-
-  abstract
-    is-equiv-comp' :
-      (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    is-equiv-comp' g h = is-equiv-comp (g ∘ h) g h refl-htpy
-
-  equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
-  pr1 (equiv-comp g h) = (pr1 g) ∘ (pr1 h)
-  pr2 (equiv-comp g h) = is-equiv-comp' (pr1 g) (pr1 h) (pr2 h) (pr2 g)
-
-  _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
-  _∘e_ = equiv-comp
 
   abstract
     is-equiv-left-factor' :
@@ -371,21 +404,33 @@ module _
     is-equiv-right-factor' :
       (g : B → X) (h : A → B) → is-equiv g → is-equiv (g ∘ h) → is-equiv h
     is-equiv-right-factor' g h = is-equiv-right-factor (g ∘ h) g h refl-htpy
+```
 
-abstract
-  is-equiv-is-section-is-equiv :
-    {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
-    is-equiv f → (f ∘ g) ~ id → is-equiv g
-  is-equiv-is-section-is-equiv {B = B} {f = f} {g = g} is-equiv-f H =
-    is-equiv-right-factor id f g (inv-htpy H) is-equiv-f is-equiv-id
+### Any retraction of an equivalence is an equivalence
 
+```agda
 abstract
-  is-equiv-is-retraction-is-equiv :
+  is-equiv-is-retraction :
     {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
     is-equiv f  → (g ∘ f) ~ id → is-equiv g
-  is-equiv-is-retraction-is-equiv {A = A} {f = f} {g = g} is-equiv-f H =
+  is-equiv-is-retraction {A = A} {f = f} {g = g} is-equiv-f H =
     is-equiv-left-factor id g f (inv-htpy H) is-equiv-id is-equiv-f
+```
 
+### Any section of an equivalence is an equivalence
+
+```agda
+abstract
+  is-equiv-is-section :
+    {i j : Level} {A : UU i} {B : UU j} {f : A → B} {g : B → A} →
+    is-equiv f → (f ∘ g) ~ id → is-equiv g
+  is-equiv-is-section {B = B} {f = f} {g = g} is-equiv-f H =
+    is-equiv-right-factor id f g (inv-htpy H) is-equiv-f is-equiv-id
+```
+
+### If a section of `f` is an equivalence, then `f` is an equivalence
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -400,7 +445,11 @@ module _
       where
       h : A → B
       h = map-inv-is-equiv is-equiv-sec-f
+```
 
+### Equivalences in commuting squares
+
+```agda
 is-equiv-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   {f : A → B} {g : X → Y} (i : A ≃ X) (j : B ≃ Y)
@@ -434,7 +483,9 @@ is-equiv-equiv' {f = f} {g} i j H K =
       ( K)
       ( is-equiv-map-equiv j))
     ( is-equiv-map-equiv i)
+```
 
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
@@ -483,7 +534,9 @@ module _
       is-equiv-left-factor (i ∘ f) g h H (is-equiv-comp' i f Ef Ei) Eh
 ```
 
-## The groupoidal operations on identity types are equivalences
+## Examples
+
+### The groupoidal operations on identity types are equivalences
 
 ```agda
 module _

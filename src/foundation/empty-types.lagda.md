@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Empty types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -16,12 +14,17 @@ open import foundation.homotopies using (_~_)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.sets using (is-set; UU-Set)
-open import foundation.truncated-types using (is-trunc; is-trunc-is-prop)
+open import foundation.truncated-types using
+  ( is-trunc; is-trunc-is-prop; UU-Truncated-Type)
 open import foundation.truncation-levels using (𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; lzero; UU)
 ```
 
-# The empty type
+## Idea
+
+An empty type is a type with no elements. The (standard) empty type is introduces as an inductive type with no constructors. With the standard empty type available, we will say that a type is empty if it maps into the standard empty type.
+
+## Definition
 
 ```agda
 data empty : UU lzero where
@@ -39,7 +42,19 @@ is-nonempty : {l : Level} → UU l → UU l
 is-nonempty A = is-empty (is-empty A)
 ```
 
-## The map `ex-falso` is an embedding
+We raise the empty type to an arbitrary universe level
+
+```agda
+raise-empty : (l : Level) → UU l
+raise-empty l = raise l empty
+
+equiv-raise-empty : (l : Level) → empty ≃ raise-empty l
+equiv-raise-empty l = equiv-raise l empty
+```
+
+## Properties
+
+### The map `ex-falso` is an embedding
 
 ```agda
 module _
@@ -55,7 +70,7 @@ module _
   pr2 ex-falso-emb = is-emb-ex-falso
 ```
 
-## Any map into an empty type is an equivalence
+### Any map into an empty type is an equivalence
 
 ```agda
 abstract
@@ -103,18 +118,16 @@ pr1 empty-Set = empty
 pr2 empty-Set = is-set-empty
 ```
 
-```agda
-raise-empty : (l : Level) → UU l
-raise-empty l = raise l empty
-
-equiv-raise-empty : (l : Level) → empty ≃ raise-empty l
-equiv-raise-empty l = equiv-raise l empty
-```
+### The empty type is k-truncated for any k ≥ 1
 
 ```agda
 abstract
   is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
   is-trunc-empty k ()
+
+empty-Truncated-Type : (k : 𝕋) → UU-Truncated-Type (succ-𝕋 k) lzero
+pr1 (empty-Truncated-Type k) = empty
+pr2 (empty-Truncated-Type k) = is-trunc-empty k
 
 abstract
   is-trunc-is-empty :

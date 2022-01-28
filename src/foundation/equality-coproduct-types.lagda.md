@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Equality of coproduct types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -38,7 +36,11 @@ open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-## Observational equality of coproduct types
+## Idea
+
+In order to construct an identification `Id x y` in a coproduct `coprod A B`, both `x` and `y` must be of the form `inl _` or of the form `inr _`. If that is the case, then an identification can be constructed by constructin an identification in A or in B, according to the case. This leads to the characterization of identity types of coproducts.
+
+## Definition
 
 ```agda
 module _
@@ -49,6 +51,18 @@ module _
     where
     Eq-eq-coprod-inl : {x y : A} → Id x y → Eq-coprod (inl x) (inl y)
     Eq-eq-coprod-inr : {x y : B} → Id x y → Eq-coprod (inr x) (inr y)
+```
+
+## Properties
+
+### The type `Eq-coprod x y` is equivalent to `Id x y`.
+
+We will use the fundamental theorem of identity types.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
   refl-Eq-coprod : (x : coprod A B) → Eq-coprod x x
   refl-Eq-coprod (inl x) = Eq-eq-coprod-inl refl
@@ -60,38 +74,6 @@ module _
   eq-Eq-coprod : (x y : coprod A B) → Eq-coprod x y → Id x y
   eq-Eq-coprod .(inl x) .(inl x) (Eq-eq-coprod-inl {x} {.x} refl) = refl
   eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
-
-  has-decidable-equality-coprod :
-    has-decidable-equality A → has-decidable-equality B →
-    has-decidable-equality (coprod A B)
-  has-decidable-equality-coprod d e (inl x) (inl y) =
-    is-decidable-iff (ap inl) is-injective-inl (d x y)
-  has-decidable-equality-coprod d e (inl x) (inr y) =
-    inr neq-inl-inr
-  has-decidable-equality-coprod d e (inr x) (inl y) =
-    inr neq-inr-inl
-  has-decidable-equality-coprod d e (inr x) (inr y) =
-    is-decidable-iff (ap inr) is-injective-inr (e x y)
-
-  has-decidable-equality-left-summand :
-    has-decidable-equality (coprod A B) → has-decidable-equality A
-  has-decidable-equality-left-summand d x y =
-    is-decidable-iff is-injective-inl (ap inl) (d (inl x) (inl y))
-
-  has-decidable-equality-right-summand :
-    has-decidable-equality (coprod A B) → has-decidable-equality B
-  has-decidable-equality-right-summand d x y =
-    is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
-```
-
-## The disjointness of coproducts
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  -- The identity types of coproducts
   
   is-contr-total-Eq-coprod :
     (x : coprod A B) → is-contr (Σ (coprod A B) (Eq-coprod x))
@@ -116,13 +98,14 @@ module _
   extensionality-coprod : (x y : coprod A B) → Id x y ≃ Eq-coprod x y
   pr1 (extensionality-coprod x y) = Eq-eq-coprod x y
   pr2 (extensionality-coprod x y) = is-equiv-Eq-eq-coprod x y
+```
 
+Now we use the characterization of the identity type to obtain the desired equivalences.
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-
-  -- It should be possible to make these definitions abstract,
-  -- but currently that breaks something in 23-pullbacks
 
   module _
     (x y : A)
@@ -239,7 +222,7 @@ module _
     map-compute-eq-coprod-inr-inr = map-equiv compute-eq-coprod-inr-inr
 ```
 
-## The left and right inclusions into a coproduct are embeddings
+### The left and right inclusions into a coproduct are embeddings
 
 ```agda
 module _
@@ -274,6 +257,8 @@ module _
   pr1 emb-inr = inr
   pr2 emb-inr = is-emb-inr
 ```
+
+### A map `coprod A B → C` defined by maps `f : A → C` and `B → C` is an embedding if both `f` and `g` are embeddings and they don't overlap
 
 ```agda
 module _
@@ -366,7 +351,11 @@ module _
         ( Id x y)
         ( compute-eq-coprod-inr-inr x y)
         ( is-trunc-B x y)
+```
 
+### Coproducts of sets are sets
+
+```agda
 abstract
   is-set-coprod : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-set A → is-set B → is-set (coprod A B)

@@ -5,6 +5,7 @@
 
 module foundation.embeddings where
 
+open import foundation.commuting-squares using (coherence-square)
 open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using
   ( is-contr-equiv; is-contr-total-path)
@@ -21,7 +22,7 @@ open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id-sec)
 open import foundation.homotopies using
-  ( _~_; coherence-square; _·l_; _·r_; _∙h_; htpy-nat; inv-htpy; refl-htpy)
+  ( _~_; _·l_; _·r_; _∙h_; htpy-nat; inv-htpy; refl-htpy)
 open import foundation.identity-types using
   ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
     distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp)
@@ -105,6 +106,8 @@ module _
 
 ### Transposing equalities along equivalences
 
+The fact that equivalences are embeddings has many important consequences, we will use some of these consequences in order to derive basic properties of embeddings.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
@@ -177,21 +180,9 @@ module _
 
 ## Composing and inverting squares horizontally and vertically
 
-```agda
-coherence-square-comp-horizontal :
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  (top-left : A → B) (top-right : B → C)
-  (left : A → X) (mid : B → Y) (right : C → Z)
-  (bottom-left : X → Y) (bottom-right : Y → Z) →
-  coherence-square top-left left mid bottom-left →
-  coherence-square top-right mid right bottom-right →
-  coherence-square
-    (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
-coherence-square-comp-horizontal
-  top-left top-right left mid right bottom-left bottom-right sq-left sq-right =
-  (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
+If the horizontal/vertical maps in a commuting square are both equivalences, then the square remains commuting if we invert those equivalences.
 
+```agda
 coherence-square-inv-horizontal :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (top : A ≃ B) (left : A → X) (right : B → Y) (bottom : X ≃ Y) →
@@ -201,22 +192,6 @@ coherence-square-inv-horizontal top left right bottom H b =
   map-eq-transpose-equiv' bottom
     ( ( ap right (inv (issec-map-inv-equiv top b))) ∙
       ( inv (H (map-inv-equiv top b))))
-
-coherence-square-comp-vertical :
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  (top : A → X)
-  (left-top : A → B) (right-top : X → Y)
-  (mid : B → Y)
-  (left-bottom : B → C) (right-bottom : Y → Z)
-  (bottom : C → Z) →
-  coherence-square top left-top right-top mid →
-  coherence-square mid left-bottom right-bottom bottom →
-  coherence-square
-    top (left-bottom ∘ left-top) (right-bottom ∘ right-top) bottom
-coherence-square-comp-vertical
-  top left-top right-top mid left-bottom right-bottom bottom sq-top sq-bottom =
-  (sq-bottom ·r left-top) ∙h (right-bottom ·l sq-top)
 
 coherence-square-inv-vertical :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -228,7 +203,9 @@ coherence-square-inv-vertical top left right bottom H x =
     ( inv (H (map-inv-equiv left x)) ∙ ap bottom (issec-map-inv-equiv left x))
 ```
 
-## Embeddings are closed under homotopies
+## Properties
+
+### Embeddings are closed under homotopies
 
 ```agda
 module _
@@ -258,7 +235,7 @@ module _
       is-emb-htpy g f (inv-htpy H) is-emb-f
 ```
 
-## Composites of embeddings
+### Embeddings are closed under composition
 
 ```agda
 module _
@@ -286,7 +263,7 @@ module _
     pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
 ```
 
-## The right factor of a composed embedding is an embedding
+### The right factor of a composed embedding is an embedding
 
 ```agda
 module _
@@ -331,6 +308,8 @@ module _
         ( is-equiv-map-inv-is-equiv is-equiv-e)
         ( is-emb-f)
 ```
+
+### If the action on identifications has a section, then f is an embedding
 
 ```agda
 module _
