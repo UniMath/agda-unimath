@@ -904,7 +904,7 @@ abstract
 abstract
   dn-type-trunc-Prop-dn :
     {l : Level} {A : UU l} → ¬¬ A → ¬¬ (type-trunc-Prop A)
-  dn-type-trunc-Prop-dn = functor-dn unit-trunc-Prop
+  dn-type-trunc-Prop-dn = map-dn unit-trunc-Prop
 
 -- Exercise 14.2
 
