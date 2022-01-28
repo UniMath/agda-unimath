@@ -47,6 +47,13 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 * The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
 * The library is universe polymorphic. Whenever a type or type family is assumed, it is assigned its own universe level.
 
+#### Layout of a file
+
+1. Every file should begin with a markdown header of level `#`.
+2. Immediately after the header there should be a block of agda code which loads the options, declares the present module, and performs all the imports. In particular, there should be no further imports later on in the file.
+3. The rest of the files is devided into sections, subsections and possibly subsubsections. Each section should have a markdown header of level `##`, and the title of each header should be generic, such as `Idea`, `Definition`, `Example`, `Properties`, and so on. Ideally the first section of a file explains the idea, then proceeds to give the main definition that is the focus of the current file, then proceeds possibly with examples and by deriving basic properties of the defined concept.
+4. The subsections should have a markdown header of level `###` and they should concisely describe the content of the block of code that follows.
+
 #### Names
 
 The naming convention in this library is such that the name of a construction closely matches the type of the construction. For example, the proof that the successor function on the integers is an equivalence has type `is-equiv succ-ℤ`. The name of the proof that the successor function on the integers is an equivalence is therefore `is-equiv-succ-ℤ`. Notice that most names are fully lowercase, and words are separated by hyphens. 
