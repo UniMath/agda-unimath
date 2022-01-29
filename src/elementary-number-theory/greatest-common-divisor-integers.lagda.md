@@ -31,7 +31,7 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.identity-types using (Id; ap)
-open import foundation.logical-equivalence using (_↔_)
+open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
 

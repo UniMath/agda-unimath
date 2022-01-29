@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Truncated maps
 
 ```agda
@@ -37,6 +33,12 @@ open import foundation.truncation-levels using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
+## Idea
+
+A map is k-truncated if its fibers are k-truncated.
+
+## Definition
+
 ```agda
 module _
   {l1 l2 : Level} (k : 𝕋)
@@ -61,7 +63,9 @@ module _
     is-trunc-map-map-trunc-map = pr2
 ```
 
-## If a map is k-truncated, then it is (k+1)-truncated
+## Properties
+
+### If a map is k-truncated, then it is (k+1)-truncated
 
 ```agda
 abstract
@@ -71,6 +75,8 @@ abstract
   is-trunc-map-succ-is-trunc-map k f is-trunc-f b =
     is-trunc-succ-is-trunc k (is-trunc-f b)
 ```
+
+### A map is (k+1)-truncated if and only if its action on identifications is k-truncated
 
 ```agda
 module _
@@ -95,7 +101,11 @@ module _
         ( eq-fib-fib-ap f x y p)
         ( is-equiv-eq-fib-fib-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
+```
 
+### A family of types is a family of k-truncated types if and only of the projection map is k-truncated
+
+```agda
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1}
   where

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Lists
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -15,6 +13,12 @@ open import foundation.functions using (id; _∘_)
 open import foundation.universe-levels using (UU; Level)
 ```
 
+## Idea
+
+The type of lists of elements of a type `A` is defined inductively, with an empty list and an operation that extends a list with one element from `A`.
+
+## Definition
+
 ```agda
 data list {l : Level} (A : UU l) : UU l where
   nil : list A
@@ -24,7 +28,7 @@ in-list : {l : Level} {A : UU l} → A → list A
 in-list a = cons a nil
 ```
 
-## Operations on lists
+## Operations
 
 ```agda
 fold-list :

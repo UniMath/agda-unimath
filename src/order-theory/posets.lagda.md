@@ -170,7 +170,7 @@ module _
 
   eq-element-sub-Poset :
     (x y : element-sub-Poset) →
-    Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
+    Eq-type-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
   eq-element-sub-Poset = eq-element-sub-Preorder (preorder-Poset X) S
 
   leq-sub-poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
@@ -220,7 +220,7 @@ module _
 
   eq-element-decidable-sub-Poset :
     (x y : element-decidable-sub-Poset) →
-    Eq-total-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+    Eq-type-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
   eq-element-decidable-sub-Poset =
     eq-element-sub-Poset X (subtype-decidable-subtype S)
 

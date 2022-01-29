@@ -443,7 +443,7 @@ module _
 
     eq-face-Finitely-Graded-Subposet :
       (x y : face-Finitely-Graded-Subposet) →
-      Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
+      Eq-type-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
     eq-face-Finitely-Graded-Subposet x y =
       eq-subtype (λ z → is-prop-type-Prop (S z))
 

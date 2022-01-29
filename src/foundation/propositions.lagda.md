@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Propositions
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -22,7 +20,11 @@ open import foundation.identity-types using
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 ```
 
-# Propositions
+## Idea
+
+A type is considered to be a proposition if its identity types are contractible. This condition is equivalent to the condition that it has up to identification at most one element.
+
+## Definition
 
 ```agda
 is-prop :
@@ -58,7 +60,9 @@ module _
     pr2 (is-prop-is-contr H x y) = contraction-is-prop-is-contr H
 ```
 
-## Equivalent characterizations of propositions
+## Properties
+
+### Equivalent characterizations of propositions
 
 ```agda
 module _
@@ -113,7 +117,7 @@ module _
     is-emb-is-emb H x y = H x x y
 ```
 
-## A map between propositions is an equivalence if there is a map in the reverse direction
+### A map between propositions is an equivalence if there is a map in the reverse direction
 
 ```agda
 module _
@@ -136,7 +140,7 @@ module _
       is-equiv-is-prop is-prop-A is-prop-B g
 ```
 
-## Propositions are closed under equivalences
+### Propositions are closed under equivalences
 
 ```agda
 module _

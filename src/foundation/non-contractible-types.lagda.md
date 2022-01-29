@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Non-contractible types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -14,10 +12,20 @@ open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; UU)
 ```
 
+## Idea
+
+A type `X` is non-contractible if it comes equipped with an element of type `¬ (is-contr X)`.
+
+## Definition
+
 ```agda
 is-not-contractible : {l : Level} → UU l → UU l
 is-not-contractible X = ¬ (is-contr X)
 ```
+
+## Properties
+
+### Empty types are non-contractible
 
 ```agda
 is-not-contractible-is-empty :

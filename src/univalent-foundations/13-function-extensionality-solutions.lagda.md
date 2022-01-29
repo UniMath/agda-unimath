@@ -724,7 +724,7 @@ equiv-subtype-equiv :
   {A : UU l1} {B : UU l2} (e : A ≃ B)
   (C : A → UU-Prop l3) (D : B → UU-Prop l4) →
   ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
-  total-subtype C ≃ total-subtype D
+  type-subtype C ≃ type-subtype D
 equiv-subtype-equiv e C D H =
   equiv-Σ (λ y → type-Prop (D y)) e
     ( λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
@@ -2179,7 +2179,7 @@ module _
 
   equiv-iso-equiv-Set : type-equiv-Set A B ≃ iso-Set
   equiv-iso-equiv-Set =
-    equiv-total-subtype
+    equiv-type-subtype
       ( is-subtype-is-equiv)
       ( is-prop-is-iso-Set)
       ( λ f → is-iso-is-equiv-Set)

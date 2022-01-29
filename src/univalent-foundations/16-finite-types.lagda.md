@@ -2003,10 +2003,10 @@ abstract
           ( map-inv-equiv-total-fib (map-emb f))
           ( t)))
 
-count-total-subtype-is-finite-total-subtype :
+count-type-subtype-is-finite-type-subtype :
   {l1 l2 : Level} {A : UU l1} (e : count A) (P : A → UU-Prop l2) →
   is-finite (Σ A (λ x → type-Prop (P x))) → count (Σ A (λ x → type-Prop (P x)))
-count-total-subtype-is-finite-total-subtype {l1} {l2} {A} e P f =
+count-type-subtype-is-finite-type-subtype {l1} {l2} {A} e P f =
   count-decidable-subtype P d e
   where
   d : (x : A) → is-decidable (type-Prop (P x))
@@ -2021,7 +2021,7 @@ count-domain-emb-is-finite-domain-emb :
 count-domain-emb-is-finite-domain-emb e f H =
   count-equiv
     ( equiv-total-fib (map-emb f))
-    ( count-total-subtype-is-finite-total-subtype e
+    ( count-type-subtype-is-finite-type-subtype e
       ( λ x → pair (fib (map-emb f) x) (is-prop-map-emb f x))
       ( is-finite-equiv'
         ( equiv-total-fib (map-emb f))
@@ -2729,7 +2729,7 @@ abstract
       ( is-surjective-map-unit-im f)
       ( λ x y →
         is-decidable-equiv
-          ( equiv-Eq-eq-total-subtype (λ u → is-prop-type-trunc-Prop) x y)
+          ( equiv-Eq-eq-type-subtype (λ u → is-prop-type-trunc-Prop) x y)
           ( d (pr1 x) (pr1 y)))
 
 -- Exercise 16.15

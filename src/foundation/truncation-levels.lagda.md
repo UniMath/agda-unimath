@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Truncation levels
 
 
@@ -13,7 +9,11 @@ module foundation.truncation-levels where
 open import foundation.universe-levels using (UU; lzero)
 ```
 
-## The type of truncation levels
+## Idea
+
+The type of truncation levels is a type similar to the type of natural numbers, but starting the count at -2, so that sets have truncation level 0.
+
+## Definition
 
 ```agda
 data 𝕋 : UU lzero where

@@ -117,11 +117,11 @@ module _
   where
 
   element-sub-Preorder : UU (l1 ⊔ l3)
-  element-sub-Preorder = total-subtype S
+  element-sub-Preorder = type-subtype S
 
   eq-element-sub-Preorder :
     (x y : element-sub-Preorder) →
-    Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
+    Eq-type-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
   eq-element-sub-Preorder x y = eq-subtype (λ x → is-prop-type-Prop (S x))
 
   leq-sub-preorder-Prop : (x y : element-sub-Preorder) → UU-Prop l2
@@ -166,7 +166,7 @@ module _
 
   eq-element-decidable-sub-Preorder :
     (x y : element-decidable-sub-Preorder) →
-    Eq-total-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+    Eq-type-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
   eq-element-decidable-sub-Preorder =
     eq-element-sub-Preorder X (subtype-decidable-subtype S)
 
@@ -279,7 +279,7 @@ module _
   sub-preorder-chain-Preorder = pr1 C
 
   element-chain-Preorder : UU (l1 ⊔ l3)
-  element-chain-Preorder = total-subtype sub-preorder-chain-Preorder
+  element-chain-Preorder = type-subtype sub-preorder-chain-Preorder
 
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)

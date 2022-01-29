@@ -273,7 +273,7 @@ module _
   type-decidable-subtype = type-decidable-Prop ∘ P
 
   total-decidable-subtype : UU (l1 ⊔ l2)
-  total-decidable-subtype = total-subtype subtype-decidable-subtype
+  total-decidable-subtype = type-subtype subtype-decidable-subtype
 
   abstract
     is-finite-decidable-subtype :

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Injective maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -20,25 +18,53 @@ open import foundation.sets using (is-set; is-set-prop-in-id)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
-## Injective maps
+## Idea
+
+A map `f : A → B` is injective if `Id (f x) (f y)` implies `Id x y`.
+
+## Warning
+
+The notion of injective map is, however, not homotopically coherent. It is fine to use injectivity for maps between sets, but for maps between general types it is recommended to use the notion of embedding.
+
+## Definition
 
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-injective {l1} {l2} {A} {B} f = ({x y : A} → Id (f x) (f y) → Id x y)
+```
 
+## Examples
+
+### The identity function is injective
+
+```agda
 is-injective-id : {l1 : Level} {A : UU l1} → is-injective (id {A = A})
 is-injective-id p = p
+```
 
+## Properties
+
+### If a composite is injective, then so is its right factor
+
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
   
-  is-injective-is-injective-comp :
+  is-injective-right-factor :
     (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
     is-injective f → is-injective h
-  is-injective-is-injective-comp f g h H is-inj-f {x} {x'} p =
+  is-injective-right-factor f g h H is-inj-f {x} {x'} p =
     is-inj-f {x} {x'} ((H x) ∙ ((ap g p) ∙ (inv (H x'))))
+```
 
+### Injective maps are closed under composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+  
   is-injective-comp :
     (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
     is-injective h → is-injective g → is-injective f
@@ -52,7 +78,7 @@ module _
     is-injective-comp (g ∘ h) g h (λ x → refl) H G
 ```
 
-## Equivalences are injective
+### Equivalences are injective
 
 ```agda
 module _
@@ -84,7 +110,7 @@ module _
     is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```
 
-## Any embedding is injective
+### Any embedding is injective
 
 ```agda
 module _
@@ -98,7 +124,7 @@ module _
   is-injective-emb e {x} {y} = map-inv-is-equiv (is-emb-map-emb e x y)
 ```
 
-## Any injective map between sets is an embedding
+### Any injective map between sets is an embedding
 
 ```agda
 abstract

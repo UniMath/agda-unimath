@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Singleton induction
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -17,7 +15,11 @@ open import foundation.identity-types using
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
-# Singleton induction
+## Idea
+
+Singleton induction on a type `A` equipped with a point `a : A` is a principle analogous to the induction principle of the unit type. A type satisfies singleton induction if and only if it is contractible.
+
+## Definition
 
 ```agda
 is-singleton :
@@ -34,7 +36,13 @@ comp-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) (H : {l : Level} → is-singleton l A a) →
   (B : A → UU l2) → (ev-pt a B ∘ ind-is-singleton a H B) ~ id
 comp-is-singleton a H B = pr2 (H B)
+```
 
+## Properties
+
+### A type satisfies singleton induction if and only if it is contractible
+
+```agda
 abstract
   ind-singleton-is-contr :
     {i j : Level} {A : UU i} (a : A) (is-contr-A : is-contr A) (B : A → UU j) →
@@ -67,7 +75,13 @@ abstract
     {i : Level} (A : UU i) (a : A) →
     ({l : Level} → is-singleton l A a) → is-contr A
   is-contr-is-singleton A a S = is-contr-ind-singleton A a (λ P → pr1 (S P))
+```
 
+## Examples
+
+### The total space of an identity type satisfies singleton induction
+
+```agda
 abstract
   is-singleton-total-path :
     {i l : Level} (A : UU i) (a : A) →

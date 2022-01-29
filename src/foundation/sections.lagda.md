@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Sections of type families
 
 ```agda
@@ -22,6 +18,11 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.universe-levels using (Level; UU)
 ```
 
+## Idea
+
+Any dependent function induces a section of the projection map
+
+## Definition
 
 ```agda
 module _
@@ -35,6 +36,16 @@ module _
   htpy-map-section :
     (b : (x : A) → B x) → (pr1 ∘ map-section b) ~ id
   htpy-map-section b a = refl
+```
+
+## Properties
+
+### Any section of a type family is an equivalence if and only if each type in the family is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
   is-equiv-map-section :
     (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → is-equiv (map-section b)
@@ -60,7 +71,11 @@ module _
         ( htpy-map-section b)
         ( is-equiv-id)
         ( H))
+```
 
+### Any section of a type family is an injective map
+
+```agda
 is-injective-map-section :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   is-injective (map-section b)

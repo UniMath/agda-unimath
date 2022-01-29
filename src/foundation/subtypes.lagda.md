@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Subtypes
 
 ```agda
@@ -37,6 +33,12 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
+## Idea
+
+A subtype of a type `A` is a family of propositions over `A`. The underlying type of a subtype `P` of `A` is the total space `Σ A B`. 
+
+## Definition
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
@@ -55,11 +57,13 @@ module _
   {l1 l2 : Level} {A : UU l1}
   where
 
-  total-subtype : subtype l2 A → UU (l1 ⊔ l2)
-  total-subtype P = Σ A (λ x → pr1 (P x))
+  type-subtype : subtype l2 A → UU (l1 ⊔ l2)
+  type-subtype P = Σ A (λ x → pr1 (P x))
 ```
 
-## Equality in subtypes
+## Properties
+
+### Equality in subtypes
 
 ```agda
 module _
@@ -92,40 +96,42 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (H : is-subtype B)
   where
 
-  Eq-total-subtype : (Σ A B) → (Σ A B) → UU l1
-  Eq-total-subtype p p' = Id (pr1 p) (pr1 p') 
+  Eq-type-subtype : (Σ A B) → (Σ A B) → UU l1
+  Eq-type-subtype p p' = Id (pr1 p) (pr1 p') 
 
-  refl-Eq-total-subtype : (p : Σ A B) → Eq-total-subtype p p
-  refl-Eq-total-subtype (pair x y) = refl
+  refl-Eq-type-subtype : (p : Σ A B) → Eq-type-subtype p p
+  refl-Eq-type-subtype (pair x y) = refl
 
-  Eq-eq-total-subtype : (p p' : Σ A B) → Id p p' → Eq-total-subtype p p'
-  Eq-eq-total-subtype p .p refl = refl-Eq-total-subtype p
+  Eq-eq-type-subtype : (p p' : Σ A B) → Id p p' → Eq-type-subtype p p'
+  Eq-eq-type-subtype p .p refl = refl-Eq-type-subtype p
 
   abstract
-    is-contr-total-Eq-total-subtype :
-      (p : Σ A B) → is-contr (Σ (Σ A B) (Eq-total-subtype p))
-    is-contr-total-Eq-total-subtype (pair x y) =
+    is-contr-total-Eq-type-subtype :
+      (p : Σ A B) → is-contr (Σ (Σ A B) (Eq-type-subtype p))
+    is-contr-total-Eq-type-subtype (pair x y) =
       is-contr-total-Eq-substructure (is-contr-total-path x) H x refl y
 
   abstract
-    is-equiv-Eq-eq-total-subtype :
-      (p p' : Σ A B) → is-equiv (Eq-eq-total-subtype p p')
-    is-equiv-Eq-eq-total-subtype p =
+    is-equiv-Eq-eq-type-subtype :
+      (p p' : Σ A B) → is-equiv (Eq-eq-type-subtype p p')
+    is-equiv-Eq-eq-type-subtype p =
       fundamental-theorem-id p
-        ( refl-Eq-total-subtype p)
-        ( is-contr-total-Eq-total-subtype p)
-        ( Eq-eq-total-subtype p)
+        ( refl-Eq-type-subtype p)
+        ( is-contr-total-Eq-type-subtype p)
+        ( Eq-eq-type-subtype p)
 
-  equiv-Eq-eq-total-subtype :
-    (p p' : Σ A B) → (Id p p') ≃ (Eq-total-subtype p p')
-  pr1 (equiv-Eq-eq-total-subtype p p') = Eq-eq-total-subtype p p'
-  pr2 (equiv-Eq-eq-total-subtype p p') = is-equiv-Eq-eq-total-subtype p p'
+  equiv-Eq-eq-type-subtype :
+    (p p' : Σ A B) → (Id p p') ≃ (Eq-type-subtype p p')
+  pr1 (equiv-Eq-eq-type-subtype p p') = Eq-eq-type-subtype p p'
+  pr2 (equiv-Eq-eq-type-subtype p p') = is-equiv-Eq-eq-type-subtype p p'
 
   eq-subtype :
-    {p p' : Σ A B} → Eq-total-subtype p p' → Id p p'
+    {p p' : Σ A B} → Eq-type-subtype p p' → Id p p'
   eq-subtype {p} {p'} =
-    map-inv-is-equiv (is-equiv-Eq-eq-total-subtype p p')
+    map-inv-is-equiv (is-equiv-Eq-eq-type-subtype p p')
 ```
+
+### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is an embedding
 
 ```agda
 module _
@@ -151,6 +157,8 @@ module _
       is-prop-equiv' (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
 ```
 
+### A subtype of a (k+1)-truncated type is (k+1)-truncated.
+
 ```agda
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1}
@@ -162,9 +170,7 @@ module _
       is-trunc (succ-𝕋 k) (Σ A P)
     is-trunc-is-subtype H is-trunc-A =
       is-trunc-is-emb k pr1 (is-emb-pr1 H) is-trunc-A
-```
 
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
   where
@@ -196,15 +202,17 @@ pr2 (subset-Set A P) =
   is-set-is-subtype (λ x → is-prop-type-Prop (P x)) (is-set-type-Set A)
 ```
 
+### Logically equivalent subtypes induce equivalences on the underlying type of a subtype
+
 ```agda
-equiv-total-subtype :
+equiv-type-subtype :
   { l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3} →
   ( is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q) →
   ( f : (x : A) → P x → Q x) →
   ( g : (x : A) → Q x → P x) →
   ( Σ A P) ≃ (Σ A Q)
-pr1 (equiv-total-subtype is-subtype-P is-subtype-Q f g) = tot f
-pr2 (equiv-total-subtype is-subtype-P is-subtype-Q f g) =
+pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
+pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
   is-equiv-tot-is-fiberwise-equiv {f = f}
     ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x))
 ```

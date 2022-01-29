@@ -755,7 +755,7 @@ equiv-iso-Ab-iso-Ring R1 R2 =
       ( hom-Ab (ab-Ring R1) (ab-Ring R2))
       ( is-ring-homomorphism-hom-Ab R1 R2)
       ( λ f → is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) (pr1 f)))) ∘e
-  ( equiv-total-subtype
+  ( equiv-type-subtype
     ( is-prop-is-iso-hom-Ring R1 R2)
     ( λ f →
       is-prop-is-iso-hom-Ab

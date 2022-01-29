@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The interchange law
 
 ```agda
@@ -13,9 +9,13 @@ open import foundation.identity-types using (Id; _∙_; inv; ap)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
+## Idea
+
 The interchange law shows up in many variations in type theory. The interchange law for Σ-types is useful in characterizations of identity types; the interchange law for higher identity types is used in the Eckmann-Hilton argument to show that the higher homotopy groups of a type are abelian, and the interchange law for binary operations in rings are useful in computations. We first define a fully generalized interchange law, and then we specialize it to make it more directly applicable.
 
-## The fully generalized interchange law
+## Definition
+
+### The fully generalized interchange law
 
 ```agda
 module _
@@ -37,7 +37,7 @@ module _
     R (μ3 (μ1 a b) (μ2 a b c d)) (μ6 (μ4 a c) (μ5 a c b d))
 ```
 
-## Specifications of laws for operations
+### The interchange law for two binary operations on a type
 
 ```agda
 module _

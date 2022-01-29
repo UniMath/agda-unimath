@@ -123,6 +123,20 @@ module _
 
 ## Properties
 
+### Coherently invertible maps are equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  abstract
+    is-equiv-is-coherently-invertible :
+      is-coherently-invertible f → is-equiv f
+    is-equiv-is-coherently-invertible (pair g (pair G (pair H K))) =
+      is-equiv-has-inverse g G H
+```
+
 ### Invertible maps are coherenctly invertible
 
 ```agda

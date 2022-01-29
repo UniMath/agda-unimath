@@ -46,7 +46,7 @@ open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.isolated-points public
 open import foundation.lists public
-open import foundation.logical-equivalence public
+open import foundation.logical-equivalences public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.path-split-maps public

@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Truncated types
 
 ```agda
@@ -30,13 +26,21 @@ open import foundation.truncation-levels using
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
+## Idea
+
+The truncatedness of a type is a measure of the complexity of its identity types. The simplest case is a contractible type. This is the base case of the inductive definition of truncatedness for types. A type is (k+1)-truncated if its identity types are k-truncated.
+
+## Definition
+
+### The condition of truncatedness
+
 ```agda
 is-trunc : {i : Level} (k : 𝕋) → UU i → UU i
 is-trunc neg-two-𝕋 A = is-contr A
 is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (Id x y)
 ```
 
-## The universe of truncated types
+### The universe of truncated types
 
 ```agda
 UU-Truncated-Type : 𝕋 → (l : Level) → UU (lsuc l)
@@ -55,7 +59,9 @@ module _
     is-trunc-type-Truncated-Type = pr2
 ```
 
-## If a type is k-truncated, then it is (k+1)-truncated. --
+## Properties
+
+### If a type is k-truncated, then it is (k+1)-truncated.
 
 ```agda
 abstract
@@ -71,7 +77,7 @@ pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
 ```
 
-## Contractible types are k-truncated for any k.
+### Contractible types are k-truncated for any k.
 
 ```agda
 abstract
@@ -82,7 +88,7 @@ abstract
     is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
 ```
 
-## Propositions are (k+1)-truncated for any k.
+### Propositions are (k+1)-truncated for any k.
 
 ```agda
 abstract
@@ -91,7 +97,7 @@ abstract
   is-trunc-is-prop k is-prop-A x y = is-trunc-is-contr k (is-prop-A x y)
 ```
 
-## The identity type of a k-truncated type is k-truncated
+### The identity type of a k-truncated type is k-truncated
 
 ```agda
 abstract
@@ -116,7 +122,7 @@ pr2 (Id-Truncated-Type' A x y) =
   is-trunc-Id (is-trunc-type-Truncated-Type A) x y
 ```
 
-## k-truncated types are closed under equivalences
+### k-truncated types are closed under equivalences
 
 ```agda
 abstract
@@ -158,7 +164,7 @@ abstract
 
 ```
 
-## If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
+### If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
 
 ```agda
 abstract
@@ -210,10 +216,11 @@ fib-Truncated-Type :
   type-Truncated-Type B → UU-Truncated-Type k (l1 ⊔ l2)
 fib-Truncated-Type A B f b =
   Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
+```
 
+### Products of truncated types are truncated
 
--- Exercise 12.6
-
+```agda
 abstract
   is-trunc-prod :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
@@ -257,6 +264,8 @@ is-trunc-right-factor-prod (succ-𝕋 k) {A} {B} H a b b' =
       ( H (pair a b) (pair a b')))
     ( refl)
 ```
+
+### Retracts of truncated types are truncated
 
 ```agda
 abstract

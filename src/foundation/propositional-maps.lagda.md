@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Propositional maps
 
 ```agda
@@ -26,6 +22,12 @@ open import foundation.propositions using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
+## Idea
+
+A map is said to be propositional if its fibers are propositions. This condition is equivalent to being an embedding.
+
+## Definition
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -35,7 +37,9 @@ module _
   is-prop-map f = (b : B) → is-prop (fib f b)
 ```
 
-## The fibers of a map are propositions if and only if it is an embedding
+## Properties
+
+### The fibers of a map are propositions if and only if it is an embedding
 
 ```agda
 module _

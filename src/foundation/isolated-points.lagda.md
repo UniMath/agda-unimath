@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Isolated points
 
 ```agda
@@ -32,9 +28,11 @@ open import foundation.unit-type using (unit; is-prop-unit; star)
 open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
 ```
 
-## Definition
+## Idea
 
-A point `a : A` is said to be isolated if `Id a x` is decidable for any `x`.
+A point `a : A` is considered to be isolated if `Id a x` is decidable for any `x`.
+
+## Definition
 
 ```agda
 is-isolated :
@@ -55,8 +53,6 @@ module _
   {l1 : Level} {A : UU l1} (a : A)
   where
   
-  -- Exercise 12.12 (a)
-  
   is-decidable-map-const-is-isolated :
     is-isolated a → is-decidable-map (const unit A a)
   is-decidable-map-const-is-isolated d x =
@@ -67,8 +63,6 @@ module _
   is-isolated-is-decidable-map-const d x =
     is-decidable-equiv' (fib-const a x) (d x)
 
-  -- Exercise 12.12 (b)
-  
   cases-Eq-isolated-point :
     is-isolated a → (x : A) → is-decidable (Id a x) → UU lzero
   cases-Eq-isolated-point H x (inl p) = unit
