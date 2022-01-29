@@ -155,9 +155,13 @@ module _
     refl-path-faces-Finitely-Graded-Poset = refl-leq-Fin i1
   leq-type-path-faces-Finitely-Graded-Poset {i1} x y
     ( cons-path-faces-Finitely-Graded-Poset {i3} {z} H K) =
-    transitive-leq-Fin {succ-ℕ k} {i1}
-      ( leq-type-path-faces-Finitely-Graded-Poset x z K)
-      ( leq-succ-Fin i3)
+     transitive-leq-Fin
+       { succ-ℕ k}
+       { i1}
+       { inl-Fin k i3}
+       { succ-Fin (inl-Fin k i3)}
+       ( leq-type-path-faces-Finitely-Graded-Poset x z K)
+       ( leq-succ-Fin {k} i3)
 ```
 
 ### Antisymmetry of path-elements-Finitely-Graded-Poset
@@ -176,13 +180,19 @@ eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
   (cons-path-faces-Finitely-Graded-Poset {i2} {z} H K) =
   ex-falso
     ( has-no-fixed-points-succ-Fin
+      { succ-ℕ (succ-ℕ k)}
       ( inl-Fin (succ-ℕ k) i2)
-      ( λ q → is-nonzero-succ-ℕ k (is-injective-succ-ℕ q))
+      ( λ (q : is-one-ℕ (succ-ℕ (succ-ℕ k))) →
+        is-nonzero-succ-ℕ k (is-injective-succ-ℕ q))
       ( antisymmetric-leq-Fin
+        { succ-ℕ (succ-ℕ k)}
+        { succ-Fin (inl-Fin (succ-ℕ k) i2)}
+        { inl-Fin (succ-ℕ k) i2}
         ( transitive-leq-Fin
-          { k = succ-ℕ (succ-ℕ k)}
-          { x = succ-Fin (inl-Fin (succ-ℕ k) i2)}
+          { succ-ℕ (succ-ℕ k)}
+          { skip-zero-Fin i2}
           { i1}
+          { inl i2}
           ( tr
             ( leq-Fin (succ-Fin (inl-Fin (succ-ℕ k) i2)))
             ( inv p)

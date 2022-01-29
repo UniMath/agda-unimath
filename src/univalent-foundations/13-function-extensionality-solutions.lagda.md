@@ -803,7 +803,7 @@ abstract
                       ( (G H) (f x))))))))
     where
     E : is-coherently-invertible f → is-equiv f
-    E H = is-equiv-is-coherently-invertible f H
+    E H = is-equiv-is-coherently-invertible H
     g : is-coherently-invertible f → (B → A)
     g H = pr1 H
     G : (H : is-coherently-invertible f) → (f ∘ g H) ~ id
@@ -817,7 +817,7 @@ abstract
     is-equiv-is-prop
       ( is-subtype-is-equiv f)
       ( is-prop-is-coherently-invertible f)
-      ( is-equiv-is-coherently-invertible f)
+      ( is-equiv-is-coherently-invertible)
 
 -- Exercise 13.15 (b)
 
