@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Functoriality of coproduct types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -16,7 +14,11 @@ open import foundation.identity-types using (refl; ap)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Functoriality of coproduct types
+## Idea
+
+Any two maps `f : A → B` and `g : C → D` induce a map `map-coprod f g : coprod A B → coprod C D`.
+
+## Definition
 
 ```agda
 module _
@@ -26,7 +28,13 @@ module _
   map-coprod : (A → A') → (B → B') → coprod A B → coprod A' B'
   map-coprod f g (inl x) = inl (f x)
   map-coprod f g (inr y) = inr (g y)
+```
 
+## Properties
+
+### Functoriality of coproducts preserves identity maps
+
+```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
@@ -34,7 +42,11 @@ module _
   id-map-coprod : (map-coprod (id {A = A}) (id {A = B})) ~ id
   id-map-coprod (inl x) = refl
   id-map-coprod (inr x) = refl
+```
 
+### Functoriality of coproducts preserves composition
+
+```agda
 module _
   {l1 l2 l1' l2' l1'' l2'' : Level}
   {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
@@ -46,7 +58,11 @@ module _
     (map-coprod (f' ∘ f) (g' ∘ g)) ~ ((map-coprod f' g') ∘ (map-coprod f g))
   compose-map-coprod (inl x) = refl
   compose-map-coprod (inr y) = refl
+```
 
+### Functoriality of coproducts preserves homotopies
+
+```agda
 module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   {f f' : A → A'} (H : f ~ f') {g g' : B → B'} (K : g ~ g')
@@ -55,7 +71,11 @@ module _
   htpy-map-coprod : (map-coprod f g) ~ (map-coprod f' g')
   htpy-map-coprod (inl x) = ap inl (H x)
   htpy-map-coprod (inr y) = ap inr (K y)
+```
 
+### Functoriality of coproducts preserves equivalences
+
+```agda
 module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   {f : A → A'} {g : B → B'}
