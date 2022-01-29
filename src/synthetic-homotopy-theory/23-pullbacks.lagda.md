@@ -1452,8 +1452,8 @@ htpy-square-refl-htpy-htpy-cone f g
   (pair p (pair q H)) (pair p' (pair q' H')) =
   tot
     ( λ K → tot
-      ( λ L M → ( htpy-ap-concat H _ _ right-unit-htpy) ∙h
-        ( M ∙h htpy-ap-concat' _ _ H' (inv-htpy right-unit-htpy))))
+      ( λ L M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
+        ( M ∙h ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
 
 abstract
   is-equiv-htpy-square-refl-htpy-htpy-cone :
@@ -1466,15 +1466,15 @@ abstract
     is-equiv-tot-is-fiberwise-equiv
       ( λ K → is-equiv-tot-is-fiberwise-equiv
         ( λ L → is-equiv-comp
-          ( λ M → ( htpy-ap-concat H _ _ right-unit-htpy) ∙h
+          ( λ M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
             ( M ∙h
-              ( htpy-ap-concat' _ _ H' (inv-htpy right-unit-htpy))))
+              ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
           ( concat-htpy
-            ( htpy-ap-concat H _ _ right-unit-htpy)
+            ( ap-concat-htpy H _ _ right-unit-htpy)
             ( ((f ·l K) ∙h refl-htpy) ∙h H'))
           ( concat-htpy'
             ( H ∙h (g ·l L))
-            ( htpy-ap-concat' _ _ H' (inv-htpy right-unit-htpy)))
+            ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy)))
           ( refl-htpy)
           ( is-equiv-concat-htpy'
             ( H ∙h (g ·l L))

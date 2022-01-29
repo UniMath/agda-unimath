@@ -105,6 +105,7 @@ open import foundation.sections
 open import foundation.sets
 open import foundation.singleton-induction
 open import foundation.split-surjective-maps
+open import foundation.structure-identity-principle
 open import foundation.subterminal-types
 open import foundation.subtypes
 open import foundation.truncated-maps
