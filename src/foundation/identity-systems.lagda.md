@@ -9,7 +9,7 @@ module foundation.identity-systems where
 
 open import foundation.contractible-types using
   ( is-contr; eq-is-contr; eq-is-contr')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; fam-Σ)
 open import foundation.equivalences using (sec; is-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
@@ -29,13 +29,6 @@ module _
   IND-identity-system =
     ( P : (x : A) (y : B x) → UU l) →
       sec (λ (h : (x : A) (y : B x) → P x y) → h a b)
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  fam-Σ : ((x : A) → B x → UU l3) → Σ A B → UU l3
-  fam-Σ C (pair x y) = C x y
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
