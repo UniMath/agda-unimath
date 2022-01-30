@@ -235,6 +235,10 @@ abstract
           ( refl-htpy)))
       ( is-prop-Π H)
 
+Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → UU-Prop (l1 ⊔ l2)
+pr1 (Π-Prop' A P) = {x : A} → type-Prop (P x)
+pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
+
 abstract
   is-set-Π :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →

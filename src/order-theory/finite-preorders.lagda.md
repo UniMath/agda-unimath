@@ -172,8 +172,7 @@ module _
     is-finite-decidable-subtype S (is-finite-element-Finite-Preorder X)
 
   eq-element-finite-sub-Preorder :
-    (x y : element-finite-sub-Preorder) →
-    Eq-type-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+    (x y : element-finite-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-finite-sub-Preorder =
     eq-element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 

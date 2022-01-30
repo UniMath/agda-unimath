@@ -2147,9 +2147,9 @@ module _
       ( pair g' (pair p' q')) =
     eq-subtype
       ( λ h →
-        is-prop-prod
-          ( is-set-type-hom-Set B B (f ∘ h) id)
-          ( is-set-type-hom-Set A A (h ∘ f) id))
+        prod-Prop
+          ( Id-Prop (hom-Set B B) (f ∘ h) id)
+          ( Id-Prop (hom-Set A A) (h ∘ f) id))
       ( ( ap (λ h → g ∘ h) (inv p')) ∙
         ( ap (λ h → h ∘ g') q))
 

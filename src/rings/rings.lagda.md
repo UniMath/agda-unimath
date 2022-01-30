@@ -325,6 +325,11 @@ is-set-hom-Ring R1 R2 =
     ( is-prop-is-ring-homomorphism-hom-Ab R1 R2)
     ( is-set-hom-Ab (ab-Ring R1) (ab-Ring R2))
 
+hom-ring-Set :
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → UU-Set (l1 ⊔ l2)
+pr1 (hom-ring-Set R1 R2) = hom-Ring R1 R2
+pr2 (hom-ring-Set R1 R2) = is-set-hom-Ring R1 R2
+
 {- We define the categorical structure of rings -}
 
 preserves-mul-id-hom-Ring :
@@ -514,9 +519,15 @@ all-elements-equal-is-iso-hom-Ring :
 all-elements-equal-is-iso-hom-Ring R1 R2 f inv-f inv-f' =
   eq-subtype
     ( λ g →
-      is-prop-prod
-        ( is-set-hom-Ring R2 R2 (comp-hom-Ring R2 R1 R2 f g) (id-hom-Ring R2))
-        ( is-set-hom-Ring R1 R1 (comp-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
+      prod-Prop
+        ( Id-Prop
+          ( hom-ring-Set R2 R2)
+          ( comp-hom-Ring R2 R1 R2 f g)
+          ( id-hom-Ring R2))
+        ( Id-Prop
+          ( hom-ring-Set R1 R1)
+          ( comp-hom-Ring R1 R2 R1 g f)
+          ( id-hom-Ring R1)))
     ( eq-htpy-hom-Ring R2 R1
       ( inv-is-iso-hom-Ring R1 R2 f inv-f)
       ( inv-is-iso-hom-Ring R1 R2 f inv-f')

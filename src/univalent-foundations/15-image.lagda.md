@@ -781,7 +781,7 @@ abstract
     where
     α : fib f y → type-Prop (trunc-Prop (fib (map-unit-im f) (pair y z)))
     α (pair x p) =
-      unit-trunc-Prop (pair x (eq-subtype (λ z → is-prop-type-trunc-Prop) p))
+      unit-trunc-Prop (pair x (eq-subtype (λ z → trunc-Prop (fib f z)) p))
 
 -- Theorem 15.2.5 (ii) implies (i)
 

@@ -20,7 +20,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; tr; ap)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop)
+  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop)
 open import foundation.subtypes using (eq-subtype)
 open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-prod)
@@ -84,6 +84,10 @@ module _
     is-prop-Eq-isolated-point d x =
       is-prop-cases-Eq-isolated-point d x (d x)
 
+  Eq-isolated-point-Prop : is-isolated a → A → UU-Prop lzero
+  pr1 (Eq-isolated-point-Prop d x) = Eq-isolated-point d x
+  pr2 (Eq-isolated-point-Prop d x) = is-prop-Eq-isolated-point d x
+
   decide-reflexivity :
     (d : is-decidable (Id a a)) → Σ (Id a a) (λ p → Id (inl p) d)
   pr1 (decide-reflexivity (inl p)) = p
@@ -118,7 +122,7 @@ module _
       Id (center-total-Eq-isolated-point d) t
     contraction-total-Eq-isolated-point d (pair x e) =
       eq-subtype
-        ( is-prop-Eq-isolated-point d)
+        ( Eq-isolated-point-Prop d)
         ( cases-contraction-total-Eq-isolated-point d x (d x) e)
 
     is-contr-total-Eq-isolated-point :

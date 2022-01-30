@@ -134,11 +134,13 @@ module _
     (pair g (pair p q)) (pair g' (pair p' q')) =
     eq-subtype
       ( λ g →
-        is-prop-prod
-          ( is-set-type-hom-Large-Precat C Y Y
+        prod-Prop
+          ( Id-Prop
+            ( hom-Large-Precat C Y Y)
             ( f ∘Precat g)
             ( id-hom-Large-Precat C))
-          ( is-set-type-hom-Large-Precat C X X
+          ( Id-Prop
+            ( hom-Large-Precat C X X)
             ( g ∘Precat f)
             ( id-hom-Large-Precat C)))
       ( ( inv (right-unit-law-comp-hom-Large-Precat C g)) ∙

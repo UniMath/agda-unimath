@@ -549,13 +549,17 @@ module _
     is-prop-is-lower-bound-ℕ x =
       is-prop-Π (λ y → is-prop-function-type (is-prop-leq-ℕ x y))
 
+  is-lower-bound-ℕ-Prop : (x : ℕ) → UU-Prop l1
+  pr1 (is-lower-bound-ℕ-Prop x) = is-lower-bound-ℕ P x
+  pr2 (is-lower-bound-ℕ-Prop x) = is-prop-is-lower-bound-ℕ x
+
   abstract
     all-elements-equal-minimal-element-ℕ :
       ((x : ℕ) → is-prop (P x)) → all-elements-equal (minimal-element-ℕ P)
     all-elements-equal-minimal-element-ℕ H
       (pair x (pair p l)) (pair y (pair q k)) =
       eq-subtype
-        ( λ n → is-prop-prod (H n) (is-prop-is-lower-bound-ℕ n))
+        ( λ n → prod-Prop (pair _ (H n)) (is-lower-bound-ℕ-Prop n))
         ( antisymmetric-leq-ℕ x y (l y q) (k x p))
 
   abstract
@@ -599,6 +603,11 @@ abstract
   is-prop-is-lower-bound-Fin x =
     is-prop-Π (λ y → is-prop-function-type (is-prop-leq-Fin x y))
 
+  is-lower-bound-fin-Prop :
+    {l : Level} {k : ℕ} (P : Fin k → UU l) (x : Fin k) → UU-Prop l
+  pr1 (is-lower-bound-fin-Prop P x) = is-lower-bound-Fin P x
+  pr2 (is-lower-bound-fin-Prop P x) = is-prop-is-lower-bound-Fin x
+
 abstract
   all-elements-equal-minimal-element-Fin :
     {l : Level} {k : ℕ} (P : Fin k → UU l) →
@@ -606,7 +615,7 @@ abstract
   all-elements-equal-minimal-element-Fin P H
     (pair x (pair p l)) (pair y (pair q m)) =
     eq-subtype
-      ( λ t → is-prop-prod (H t) (is-prop-is-lower-bound-Fin t))
+      ( λ t → prod-Prop (pair _ (H t)) (is-lower-bound-fin-Prop P t))
       ( antisymmetric-leq-Fin (l y q) (m x p))
 
 abstract
@@ -658,12 +667,18 @@ is-weakly-constant-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-weakly-constant-map {A = A} f = (x y : A) → Id (f x) (f y)
 
-abstract
-  is-prop-is-weakly-constant-map-Set :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-    is-prop (is-weakly-constant-map f)
-  is-prop-is-weakly-constant-map-Set B f =
-    is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set B (f x) (f y)))
+module _
+  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  where
+  
+  abstract
+    is-prop-is-weakly-constant-map-Set : is-prop (is-weakly-constant-map f)
+    is-prop-is-weakly-constant-map-Set =
+      is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set B (f x) (f y)))
+  
+  is-weakly-constant-map-set-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 is-weakly-constant-map-set-Prop = is-weakly-constant-map f
+  pr2 is-weakly-constant-map-set-Prop = is-prop-is-weakly-constant-map-Set
 
 -- Lemma 14.4.4
 
@@ -691,7 +706,7 @@ abstract
     all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fib f b)))
   all-elements-equal-image-is-weakly-constant-map B f H (pair x s) (pair y t) =
     eq-subtype
-      ( λ b → is-prop-type-trunc-Prop)
+      ( λ b → trunc-Prop (fib f b))
       ( apply-universal-property-trunc-Prop s
         ( Id-Prop B x y)
         ( λ u →
@@ -752,7 +767,7 @@ abstract
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
   issec-map-universal-property-set-quotient-trunc-Prop B (pair f H) =
     eq-subtype
-      ( is-prop-is-weakly-constant-map-Set B)
+      ( is-weakly-constant-map-set-Prop B)
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 
   isretr-map-universal-property-set-quotient-trunc-Prop :

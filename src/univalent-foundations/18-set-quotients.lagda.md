@@ -469,7 +469,7 @@ module _
       Id center-total-class-Eq-Rel t
     contraction-total-class-Eq-Rel (pair (pair P p) H) =
       eq-subtype
-        ( λ Q → is-prop-type-class-large-set-quotient R Q a)
+        ( λ Q → class-large-set-quotient R Q a)
         ( apply-universal-property-trunc-Prop
           ( p)
           ( Id-Prop
@@ -481,7 +481,7 @@ module _
       α : fib (pr1 R) P → Id (quotient-map-large-set-quotient R a) (pair P p)
       α (pair x refl) =
         eq-subtype
-          ( λ z → is-prop-type-trunc-Prop)
+          ( λ z → trunc-Prop (fib (prop-Eq-Rel R) z))
           ( eq-htpy
             ( λ y →
               eq-iff
@@ -518,10 +518,12 @@ module _
     pr1 (effective-quotient' q) = related-eq-quotient q
     pr2 (effective-quotient' q) = is-equiv-related-eq-quotient q
 
+{-
   abstract
     is-locally-small-large-set-quotient :
       is-locally-small l2 (large-set-quotient R)
     is-locally-small-large-set-quotient = {!!}
+-}
 
   abstract
     eq-effective-quotient' :
@@ -1208,8 +1210,7 @@ module _
       contraction-total-P :
         (u : Σ (type-Set B) (λ b → type-Prop (P b))) → Id center-total-P u
       contraction-total-P (pair b p) =
-        eq-subtype
-          ( λ z → is-prop-type-Prop (P z))
+        eq-subtype P
           ( apply-universal-property-trunc-Prop
             ( is-surjective-is-set-quotient H Q b)
             ( Id-Prop B (q x) b)
@@ -1267,7 +1268,7 @@ module _
         (b : type-Set B) → all-elements-equal (Σ (type-Set X) (P b))
       all-elements-equal-total-P b x y =
         eq-subtype
-          ( λ x → is-prop-type-Prop (P-Prop b x))
+          ( P-Prop b)
           ( apply-universal-property-trunc-Prop
             ( pr2 x)
             ( Id-Prop X (pr1 x) (pr1 y))
@@ -1327,7 +1328,7 @@ module _
           ( pair
             ( λ b → pr1 (α E X f b))
             ( eq-subtype
-              ( is-prop-reflects-Eq-Rel R X)
+              ( reflects-Eq-Rel-Prop R X)
               ( eq-htpy (λ a → ap pr1 (β E X f a))))))
 
   abstract

@@ -120,9 +120,8 @@ module _
   element-sub-Preorder = type-subtype S
 
   eq-element-sub-Preorder :
-    (x y : element-sub-Preorder) →
-    Eq-type-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
-  eq-element-sub-Preorder x y = eq-subtype (λ x → is-prop-type-Prop (S x))
+    (x y : element-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
+  eq-element-sub-Preorder x y = eq-subtype S
 
   leq-sub-preorder-Prop : (x y : element-sub-Preorder) → UU-Prop l2
   leq-sub-preorder-Prop x y = leq-preorder-Prop X (pr1 x) (pr1 y)
@@ -165,8 +164,7 @@ module _
     element-sub-Preorder X (subtype-decidable-subtype S)
 
   eq-element-decidable-sub-Preorder :
-    (x y : element-decidable-sub-Preorder) →
-    Eq-type-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+    (x y : element-decidable-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-decidable-sub-Preorder =
     eq-element-sub-Preorder X (subtype-decidable-subtype S)
 

@@ -1557,7 +1557,7 @@ abstract
     {l1 : Level} {X : UU l1} → all-elements-equal (has-finite-cardinality X)
   all-elements-equal-has-finite-cardinality {l1} {X} (pair k K) (pair l L) =
     eq-subtype
-      ( λ k → is-prop-type-trunc-Prop)
+      ( λ k → mere-equiv-Prop (Fin k) X)
       ( apply-universal-property-trunc-Prop K
         ( pair (Id k l) (is-set-ℕ k l))
         ( λ (e : Fin k ≃ X) →
@@ -2729,7 +2729,7 @@ abstract
       ( is-surjective-map-unit-im f)
       ( λ x y →
         is-decidable-equiv
-          ( equiv-Eq-eq-type-subtype (λ u → is-prop-type-trunc-Prop) x y)
+          ( extensionality-type-subtype (λ u → trunc-Prop (fib f u)) x y)
           ( d (pr1 x) (pr1 y)))
 
 -- Exercise 16.15

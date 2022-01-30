@@ -10,7 +10,8 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.equivalences using (is-equiv; _≃_; map-inv-is-equiv)
+open import foundation.equivalences using
+  ( is-equiv; _≃_; map-inv-is-equiv; id-equiv; map-inv-equiv)
 open import foundation.fibers-of-maps using (equiv-fib-pr1)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv)
@@ -24,7 +25,7 @@ open import foundation.propositions using
     is-prop-equiv'; type-Prop; is-prop-type-Prop; is-equiv-is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
+  ( is-contr-total-Eq-subtype; extensionality-subtype)
 open import foundation.truncated-types using (is-trunc; is-trunc-is-emb)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
@@ -67,44 +68,18 @@ module _
 
 ### Equality in subtypes
 
-```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (H : is-subtype B)
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
-  Eq-type-subtype : (Σ A B) → (Σ A B) → UU l1
-  Eq-type-subtype p p' = Id (pr1 p) (pr1 p') 
-
-  refl-Eq-type-subtype : (p : Σ A B) → Eq-type-subtype p p
-  refl-Eq-type-subtype (pair x y) = refl
-
-  Eq-eq-type-subtype : (p p' : Σ A B) → Id p p' → Eq-type-subtype p p'
-  Eq-eq-type-subtype p .p refl = refl-Eq-type-subtype p
-
-  abstract
-    is-contr-total-Eq-type-subtype :
-      (p : Σ A B) → is-contr (Σ (Σ A B) (Eq-type-subtype p))
-    is-contr-total-Eq-type-subtype (pair x y) =
-      is-contr-total-Eq-subtype (is-contr-total-path x) H x refl y
-
-  abstract
-    is-equiv-Eq-eq-type-subtype :
-      (p p' : Σ A B) → is-equiv (Eq-eq-type-subtype p p')
-    is-equiv-Eq-eq-type-subtype p =
-      fundamental-theorem-id p
-        ( refl-Eq-type-subtype p)
-        ( is-contr-total-Eq-type-subtype p)
-        ( Eq-eq-type-subtype p)
-
-  equiv-Eq-eq-type-subtype :
-    (p p' : Σ A B) → (Id p p') ≃ (Eq-type-subtype p p')
-  pr1 (equiv-Eq-eq-type-subtype p p') = Eq-eq-type-subtype p p'
-  pr2 (equiv-Eq-eq-type-subtype p p') = is-equiv-Eq-eq-type-subtype p p'
+  extensionality-type-subtype :
+    (a b : type-subtype P) → (Id a b) ≃ Id (pr1 a) (pr1 b)
+  extensionality-type-subtype (pair a p) =
+    extensionality-subtype P p refl (λ x → id-equiv)
 
   eq-subtype :
-    {p p' : Σ A B} → Eq-type-subtype p p' → Id p p'
-  eq-subtype {p} {p'} =
-    map-inv-is-equiv (is-equiv-Eq-eq-type-subtype p p')
+    {a b : type-subtype P} → Id (pr1 a) (pr1 b) → Id a b
+  eq-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype a b)
 ```
 
 ### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is an embedding

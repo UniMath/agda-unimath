@@ -340,7 +340,7 @@ module _
     all-elements-equal least-element-Finitely-Graded-Poset
   all-elements-equal-least-element-Finitely-Graded-Poset (pair x H) (pair y K) =
     eq-subtype
-      ( is-prop-is-least-element-Finitely-Graded-Poset)
+      ( is-least-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( H (element-face-Finitely-Graded-Poset X y))
         ( Id-Prop (face-finitely-graded-poset-Set X zero-Fin) x y)
@@ -391,7 +391,7 @@ module _
   all-elements-equal-largest-element-Finitely-Graded-Poset
     (pair x H) (pair y K) =
     eq-subtype
-      ( is-prop-is-largest-element-Finitely-Graded-Poset)
+      ( is-largest-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( K (element-face-Finitely-Graded-Poset X x))
         ( Id-Prop (face-finitely-graded-poset-Set X neg-one-Fin) x y)
@@ -452,10 +452,8 @@ module _
       is-set-type-Set face-set-Finitely-Graded-Subposet
 
     eq-face-Finitely-Graded-Subposet :
-      (x y : face-Finitely-Graded-Subposet) →
-      Eq-type-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
-    eq-face-Finitely-Graded-Subposet x y =
-      eq-subtype (λ z → is-prop-type-Prop (S z))
+      (x y : face-Finitely-Graded-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+    eq-face-Finitely-Graded-Subposet x y = eq-subtype S
 
     emb-face-Finitely-Graded-Subposet :
       face-Finitely-Graded-Subposet ↪ face-Finitely-Graded-Poset X i
