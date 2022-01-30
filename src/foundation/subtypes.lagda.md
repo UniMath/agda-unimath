@@ -73,6 +73,9 @@ module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
+  Eq-type-subtype : (x y : type-subtype P) → UU l1
+  Eq-type-subtype x y = Id (pr1 x) (pr1 y)
+
   extensionality-type-subtype :
     (a b : type-subtype P) → (Id a b) ≃ Id (pr1 a) (pr1 b)
   extensionality-type-subtype (pair a p) =
