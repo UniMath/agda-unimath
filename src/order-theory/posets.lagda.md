@@ -114,7 +114,7 @@ module _
     all-elements-equal least-element-Poset
   all-elements-equal-least-element-Poset (pair x H) (pair y K) =
     eq-subtype
-      ( is-prop-is-least-element-Poset)
+      ( is-least-element-poset-Prop)
       ( antisymmetric-leq-Poset X x y (H y) (K x))
 
   is-prop-least-element-Poset : is-prop least-element-Poset
@@ -144,7 +144,7 @@ module _
     all-elements-equal largest-element-Poset
   all-elements-equal-largest-element-Poset (pair x H) (pair y K) =
     eq-subtype
-      ( is-prop-is-largest-element-Poset)
+      ( is-largest-element-poset-Prop)
       ( antisymmetric-leq-Poset X x y (K x) (H y))
 
   is-prop-largest-element-Poset : is-prop largest-element-Poset
@@ -169,8 +169,7 @@ module _
   element-sub-Poset = element-sub-Preorder (preorder-Poset X) S
 
   eq-element-sub-Poset :
-    (x y : element-sub-Poset) →
-    Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
+    (x y : element-sub-Poset) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-sub-Poset = eq-element-sub-Preorder (preorder-Poset X) S
 
   leq-sub-poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
@@ -219,8 +218,7 @@ module _
     element-sub-Poset X (subtype-decidable-subtype S)
 
   eq-element-decidable-sub-Poset :
-    (x y : element-decidable-sub-Poset) →
-    Eq-total-subtype (λ z → is-prop-type-decidable-Prop (S z)) x y → Id x y
+    (x y : element-decidable-sub-Poset) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-decidable-sub-Poset =
     eq-element-sub-Poset X (subtype-decidable-subtype S)
 

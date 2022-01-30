@@ -22,7 +22,7 @@ open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id-sec)
 open import foundation.homotopies using
-  ( _~_; _·l_; _·r_; _∙h_; htpy-nat; inv-htpy; refl-htpy)
+  ( _~_; _·l_; _·r_; _∙h_; nat-htpy; inv-htpy; refl-htpy)
 open import foundation.identity-types using
   ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
     distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp)
@@ -205,6 +205,18 @@ coherence-square-inv-vertical top left right bottom H x =
 
 ## Properties
 
+### To prove that a map is an embedding, a point in the domain may be assumed
+
+```agda
+module _
+  {l : Level} {A : UU l} {l2 : Level} {B : UU l2} {f : A → B}
+  where
+  
+  abstract
+    is-emb-is-emb : (A → is-emb f) → is-emb f
+    is-emb-is-emb H x y = H x x y
+```
+
 ### Embeddings are closed under homotopies
 
 ```agda
@@ -220,7 +232,7 @@ module _
         ( concat' (f x) (H y))
         ( ap f)
         ( concat (H x) (g y))
-        ( htpy-nat H)
+        ( nat-htpy H)
         ( is-equiv-concat (H x) (g y))
         ( is-emb-g x y)
         ( is-equiv-concat' (f x) (H y))

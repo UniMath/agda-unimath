@@ -423,7 +423,7 @@ map-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' α =
           ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
           ( h))) ∙ 
       ( ( eq-htpy
-          ( htpy-con-inv h
+          ( con-inv-htpy h
             ( segment-Σ refl f e e' H)
             ( precomp-Π
               ( map-equiv f)
@@ -451,7 +451,7 @@ equiv-path-over-contraction-total-space' :
   ( path-over-contraction-total-space' c p f e e' H h h')
 equiv-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' =
   ( inv-equiv
-    ( equiv-htpy-con-inv h
+    ( equiv-con-inv-htpy h
       ( segment-Σ refl f e e' H)
       ( precomp-Π
         ( map-equiv f)
@@ -745,9 +745,9 @@ abstract
         ( is-contr-is-equiv'
           ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))
               ( λ β → β ~ (pr2 (pr2 s))))
-          ( tot (λ β → htpy-con-inv refl-htpy β (pr2 (pr2 s))))
+          ( tot (λ β → con-inv-htpy refl-htpy β (pr2 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
-            ( λ β → is-equiv-htpy-con-inv refl-htpy β (pr2 (pr2 s))))
+            ( λ β → is-equiv-con-inv-htpy refl-htpy β (pr2 (pr2 s))))
           ( is-contr-total-htpy' (pr2 (pr2 s)))))
 
 abstract

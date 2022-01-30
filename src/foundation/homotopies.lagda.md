@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Homotopies
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -11,35 +9,49 @@ open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
     right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
-    ap-id)
+    ap-id; is-injective-concat')
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
-# Homotopies
+## Idea
+
+A homotopy of identifications is a pointwise equality between dependent functions.
+
+## Definition
 
 ```agda
 _~_ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (f g : (x : A) → B x) → UU (l1 ⊔ l2)
 f ~ g = (x : _) → Id (f x) (g x)
+```
 
+## Properties
+
+### Reflexivity
+
+```
 refl-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x} → f ~ f
 refl-htpy x = refl
 
-{- Most of the time we get by with refl-htpy. However, sometimes Agda wants us
-   to specify the implicit argument. The it is easier to call refl-htpy' than
-   to use Agda's {f = ?} notation. -}
-   
 refl-htpy' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) → f ~ f
 refl-htpy' f = refl-htpy
+```
 
+### Inverting homotopies
+
+```agda
 inv-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
   (f ~ g) → (g ~ f)
 inv-htpy H x = inv (H x)
+```
 
+### Concatenating homotopies
+
+```agda
 _∙h_ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x} →
   (f ~ g) → (g ~ h) → (f ~ h)
@@ -55,13 +67,21 @@ concat-htpy' :
   (f : (x : A) → B x) {g h : (x : A) → B x} →
   (g ~ h) → (f ~ g) → (f ~ h)
 concat-htpy' f K H = H ∙h K
+```
 
+### Associativity of concatenation of homotopies
+
+```agda
 assoc-htpy :
   {i j : Level} {A : UU i} {B : A → UU j} {f g h k : (x : A) → B x} →
   (H : f ~ g) → (K : g ~ h) → (L : h ~ k) →
   ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
 assoc-htpy H K L x = assoc (H x) (K x) (L x)
+```
 
+### Unit laws for homotopies
+
+```agda
 left-unit-htpy :
   {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
   {H : f ~ g} → (refl-htpy ∙h H) ~ H
@@ -71,7 +91,11 @@ right-unit-htpy :
   {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
   {H : f ~ g} → (H ∙h refl-htpy) ~ H
 right-unit-htpy x = right-unit
+```
 
+### Inverse laws for homotopies
+
+```agda
 left-inv-htpy :
   {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
   (H : f ~ g) → ((inv-htpy H) ∙h H) ~ refl-htpy
@@ -81,7 +105,11 @@ right-inv-htpy :
   {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
   (H : f ~ g) → (H ∙h (inv-htpy H)) ~ refl-htpy
 right-inv-htpy H x = right-inv (H x)
+```
 
+### Whiskering of homotopies
+
+```agda
 htpy-left-whisk :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
   (h : B → C) {f g : A → B} → (f ~ g) → ((h ∘ f) ~ (h ∘ g))
@@ -97,80 +125,98 @@ htpy-right-whisk H f x = H (f x)
 _·r_ = htpy-right-whisk
 ```
 
+### Distributivity of `inv` over `concat` for homotopies
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
   where
 
-  inv-htpy-con :
-    (H : f ~ g) (K : g ~ h) (L : f ~ h) → (H ∙h K) ~ L → K ~ ((inv-htpy H) ∙h L)
-  inv-htpy-con H K L M x = inv-con (H x) (K x) (L x) (M x)
-
-  htpy-con-inv :
-    (H : f ~ g) (K : g ~ h) (L : f ~ h) → (H ∙h K) ~ L → H ~ (L ∙h (inv-htpy K))
-  htpy-con-inv H K L M x = con-inv (H x) (K x) (L x) (M x)
-
-  htpy-ap-concat :
-    (H : f ~ g) (K K' : g ~ h) → K ~ K' → (H ∙h K) ~ (H ∙h K')
-  htpy-ap-concat H K K' L x = ap (concat (H x) (h x)) (L x)
-
-  htpy-ap-concat' :
-    (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
-  htpy-ap-concat' H H' K L x =
-    ap (concat' _ (K x)) (L x)
-
-  htpy-distributive-inv-concat :
+  distributive-inv-concat-htpy :
     (H : f ~ g) (K : g ~ h) →
     (inv-htpy (H ∙h K)) ~ ((inv-htpy K) ∙h (inv-htpy H))
-  htpy-distributive-inv-concat H K x = distributive-inv-concat (H x) (K x)
+  distributive-inv-concat-htpy H K x = distributive-inv-concat (H x) (K x)
+```
 
+### Transpositions of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  inv-con-htpy :
+    (H : f ~ g) (K : g ~ h) (L : f ~ h) → (H ∙h K) ~ L → K ~ ((inv-htpy H) ∙h L)
+  inv-con-htpy H K L M x = inv-con (H x) (K x) (L x) (M x)
+
+  con-inv-htpy :
+    (H : f ~ g) (K : g ~ h) (L : f ~ h) → (H ∙h K) ~ L → H ~ (L ∙h (inv-htpy K))
+  con-inv-htpy H K L M x = con-inv (H x) (K x) (L x) (M x)
+```
+
+### Homotopies preserve the laws of the acion on identity types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  ap-concat-htpy :
+    (H : f ~ g) (K K' : g ~ h) → K ~ K' → (H ∙h K) ~ (H ∙h K')
+  ap-concat-htpy H K K' L x = ap (concat (H x) (h x)) (L x)
+
+  ap-concat-htpy' :
+    (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
+  ap-concat-htpy' H H' K L x =
+    ap (concat' _ (K x)) (L x)
+    
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   {H H' : f ~ g}
   where
 
-  htpy-ap-inv :
+  ap-inv-htpy :
     H ~ H' → (inv-htpy H) ~ (inv-htpy H')
-  htpy-ap-inv K x = ap inv (K x)
+  ap-inv-htpy K x = ap inv (K x)
+```
 
+### Whiskering an inverted homotopy
+
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
   
-  htpy-left-whisk-inv-htpy :
+  left-whisk-inv-htpy :
     {f f' : A → B} (g : B → C) (H : f ~ f') →
     (g ·l (inv-htpy H)) ~ inv-htpy (g ·l H)
-  htpy-left-whisk-inv-htpy g H x = ap-inv g (H x)
+  left-whisk-inv-htpy g H x = ap-inv g (H x)
 
-  htpy-right-whisk-inv-htpy :
+  right-whisk-inv-htpy :
     {g g' : B → C} (H : g ~ g') (f : A → B) →
     ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
-  htpy-right-whisk-inv-htpy H f = refl-htpy
+  right-whisk-inv-htpy H f = refl-htpy
 ```
 
+### Naturality of homotopies with respect to identifications
+
 ```agda
-htpy-nat :
+nat-htpy :
   {i j : Level} {A : UU i} {B : UU j} {f g : A → B} (H : f ~ g)
   {x y : A} (p : Id x y) →
   Id ((H x) ∙ (ap g p)) ((ap f p) ∙ (H y))
-htpy-nat H refl = right-unit
+nat-htpy H refl = right-unit
+```
 
-left-unwhisk :
-  {i : Level} {A : UU i} {x y z : A} (p : Id x y) {q r : Id y z} →
-  Id (p ∙ q) (p ∙ r) → Id q r
-left-unwhisk refl s = s
+### A coherence for homotopies to an identity map
 
-right-unwhisk :
-  {i : Level} {A : UU i} {x y z : A} {p q : Id x y}
-  (r : Id y z) → Id (p ∙ r) (q ∙ r) → Id p q
-right-unwhisk refl s = (inv right-unit) ∙ (s ∙ right-unit)
-
-htpy-red :
+```agda
+coh-is-coherently-invertible-id :
   {i : Level} {A : UU i} {f : A → A} (H : f ~ id) →
   (x : A) → Id (H (f x)) (ap f (H x))
-htpy-red {_} {A} {f} H x =
-  right-unwhisk (H x)
+coh-is-coherently-invertible-id {_} {A} {f} H x =
+  is-injective-concat' (H x)
     ( ( ap (concat (H (f x)) x) (inv (ap-id (H x)))) ∙
-      ( htpy-nat H (H x)))
+      ( nat-htpy H (H x)))
 ```
 

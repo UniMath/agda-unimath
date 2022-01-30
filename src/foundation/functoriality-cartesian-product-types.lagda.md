@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Functoriality of cartesian product types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -17,7 +15,11 @@ open import foundation.identity-types using (refl)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Functoriality of cartesian product types
+## Idea
+
+Any two maps `f : A → B` and `g : C → D` induce a map `map-prod : A × B → C × D`.
+
+## Definition
 
 ```agda
 module _
@@ -35,28 +37,43 @@ module _
   map-prod-pr2 :
     (f : A → C) (g : B → D) → (pr2 ∘ (map-prod f g)) ~ (g ∘ pr2)
   map-prod-pr2 f g (pair a b) = refl
+```
 
-{- For our convenience we show that the functorial action of cartesian products
-   preserves identity maps, compositions, homotopies, and equivalences. -}
+## Properties
 
+### Functoriality of products preserves identity maps
+
+```agda
 map-prod-id :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (map-prod (id {A = A}) (id {A = B})) ~ id
 map-prod-id (pair a b) = refl
+```
 
+### Functoriality of products preserves composition
+
+```agda
 map-prod-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {E : UU l5} {F : UU l6} (f : A → C) (g : B → D) (h : C → E) (k : D → F) →
   map-prod (h ∘ f) (k ∘ g) ~ ((map-prod h k) ∘ (map-prod f g))
 map-prod-comp f g h k (pair a b) = refl
+```
 
+### Functoriality of products preserves homotopies
+
+```agda
 htpy-map-prod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {f f' : A → C} (H : f ~ f') {g g' : B → D} (K : g ~ g') →
   map-prod f g ~ map-prod f' g'
 htpy-map-prod {f = f} {f'} H {g} {g'} K (pair a b) =
   eq-pair (H a) (K b)
+```
 
+### Functoriality of products preserves equivalences
+
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where

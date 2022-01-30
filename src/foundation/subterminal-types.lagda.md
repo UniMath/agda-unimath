@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Subterminal types
 
 ```agda
@@ -11,15 +7,21 @@ module foundation.subterminal-types where
 
 open import foundation.contractible-types using
   ( is-equiv-is-contr; is-contr-is-equiv)
-open import foundation.embeddings using (is-emb; is-emb-is-equiv)
+open import foundation.embeddings using (is-emb; is-emb-is-equiv; is-emb-is-emb)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; ap)
 open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant; all-elements-equal; is-emb-is-emb;
+  ( is-prop; is-proof-irrelevant; all-elements-equal;
     is-proof-irrelevant-all-elements-equal; eq-is-prop'; is-prop-is-contr)
 open import foundation.unit-type using (star; terminal-map; is-contr-unit)
 open import foundation.universe-levels using (Level; UU)
 ```
+
+## Idea
+
+A type is said to be subterminal if it embeds into the unit type. A type is subterminal if and only if it is a proposition.
+
+## Definition
 
 ```agda
 module _
@@ -29,6 +31,10 @@ module _
   is-subterminal : UU l
   is-subterminal = is-emb (terminal-map {A = A})
 ```
+
+## Properties
+
+### A type is subterminal if and only if it is a proposition
 
 ```agda
 module _

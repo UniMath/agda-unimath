@@ -44,7 +44,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (id)
 open import foundation.identity-types using (refl; _∙_; inv)
-open import foundation.logical-equivalence using (_↔_)
+open import foundation.logical-equivalences using (_↔_)
 open import foundation.negation using (¬)
 open import foundation.type-arithmetic-empty-type using
   ( is-empty-left-factor-is-empty-prod)

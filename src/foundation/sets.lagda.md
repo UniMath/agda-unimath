@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Sets
 
 ```agda
@@ -27,7 +23,11 @@ open import foundation.truncation-levels using (neg-one-𝕋; zero-𝕋)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 ```
 
-A type is a set if its identity types are propositions
+## Idea
+
+A type is a set if its identity types are propositions.
+
+## Definition
 
 ```agda
 is-set :
@@ -54,7 +54,9 @@ module _
   pr2 (Id-Prop x y) = is-set-type-Set x y
 ```
 
-## Streicher's axiom K
+## Properties
+
+### A type is a set if and only if it satisfies Streicher's axiom K
 
 ```agda
 axiom-K :
@@ -81,7 +83,7 @@ module _
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 
-## If a reflexive binary relation maps into the identity type of A, then A is a set
+### If a reflexive binary relation maps into the identity type of A, then A is a set
 
 ```
 module _
@@ -104,6 +106,8 @@ module _
     is-set-prop-in-id x y = is-prop-is-equiv' (is-equiv-prop-in-id x y) (p x y)
 ```
 
+### Any proposition is a set
+
 ```agda
 abstract
   is-set-is-prop :
@@ -115,12 +119,16 @@ set-Prop :
 set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 ```
 
+### Any contractible type is a set
+
 ```agda
 abstract
   is-set-is-contr :
     {l : Level} {A : UU l} → is-contr A → is-set A
   is-set-is-contr = is-trunc-is-contr zero-𝕋
 ```
+
+### Sets are closed under equivalences
 
 ```agda
 abstract

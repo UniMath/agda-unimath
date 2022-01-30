@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Faithful maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -30,9 +28,11 @@ open import foundation.truncation-levels using (neg-one-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-# Faithful maps
+## Idea
 
-We introduce faithful maps. In analogy to faithful functors, faithful maps are maps that induce embeddings on identity types.
+Since we sometimes think of types as ∞-groupoids, with the groupoid structure provided implicitly by the identity type and its induction principle, we can think of maps as functors of ∞-groupoids. We borrow some terminology of functors, and call a map faithful if it induces embeddings on identity types.
+
+## Definition
 
 ```agda
 module _
@@ -79,7 +79,13 @@ module _
   emb-ap : (f : A ↪ B) (x y : A) → Id x y ↪ Id (map-emb f x) (map-emb f y)
   pr1 (emb-ap f x y) = ap (map-emb f) {x} {y}
   pr2 (emb-ap f x y) = is-faithful-is-emb (is-emb-map-emb f) x y
+```
 
+## Examples
+
+### The identity map is faithful
+
+```agda
 module _
   {l : Level} {A : UU l}
   where
@@ -90,6 +96,8 @@ module _
   is-faithful-id-faithful-map : is-faithful (id {A = A})
   is-faithful-id-faithful-map = is-faithful-map-faithful-map id-faithful-map
 ```
+
+### Any 0-map is faithful
 
 ```agda
 module _
@@ -105,6 +113,10 @@ module _
   is-faithful-is-0-map H x y =
     is-emb-is-prop-map (is-trunc-map-ap-is-trunc-map neg-one-𝕋 f H x y)
 ```
+
+## Properties
+
+### The projection map of a family of sets is faithful
 
 ```agda
 module _
@@ -179,7 +191,7 @@ module _
   is-faithful-tot : ((x : A) → is-faithful (f x)) → is-faithful (tot f)
   is-faithful-tot H =
     is-faithful-is-0-map (is-0-map-tot (λ x → is-0-map-is-faithful (H x)))
-    
+
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where

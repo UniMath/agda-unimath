@@ -11,8 +11,8 @@ open import foundation.coherently-invertible-maps using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using
-  ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; htpy-red; htpy-nat;
-    htpy-right-whisk)
+  ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; coh-is-coherently-invertible-id;
+    nat-htpy; htpy-right-whisk)
 open import foundation.identity-types using
   ( Id; refl; concat; concat'; _∙_; inv; ap; tr; inv-inv; inv-con; con-inv;
     right-unit; sq-top-whisk; ap-comp)
@@ -123,6 +123,20 @@ module _
 
 ## Properties
 
+### Coherently invertible maps are equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  abstract
+    is-equiv-is-coherently-invertible :
+      is-coherently-invertible f → is-equiv f
+    is-equiv-is-coherently-invertible (pair g (pair G (pair H K))) =
+      is-equiv-has-inverse g G H
+```
+
 ### Invertible maps are coherenctly invertible
 
 ```agda
@@ -157,9 +171,10 @@ module _
             ( ap f (pr2 (pr2 H) x))
             ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
             ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
-              ( inv (ap (ap f) (htpy-red (pr2 (pr2 H)) x))))
+              ( inv
+                ( ap (ap f) (coh-is-coherently-invertible-id (pr2 (pr2 H)) x))))
             ( pr1 (pr2 H) (f x))
-            ( htpy-nat (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
+            ( nat-htpy (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
 
   abstract
     is-coherently-invertible-has-inverse :

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Identity systems
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -9,7 +7,7 @@ module foundation.identity-systems where
 
 open import foundation.contractible-types using
   ( is-contr; eq-is-contr; eq-is-contr')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; fam-Σ)
 open import foundation.equivalences using (sec; is-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
@@ -18,7 +16,9 @@ open import foundation.propositions using (is-prop-is-contr)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
-# Identity systems
+## Idea
+
+A unary identity system on a type `A` equipped with a point `a : A` consists of a type family `B` over `A` equipped with a point `b : B a` that satisfies an induction principle analogous to the induction principle of the identity type at `a`.
 
 ```agda
 module _
@@ -29,14 +29,13 @@ module _
   IND-identity-system =
     ( P : (x : A) (y : B x) → UU l) →
       sec (λ (h : (x : A) (y : B x) → P x y) → h a b)
+```
 
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  where
+## Properties
 
-  fam-Σ : ((x : A) → B x → UU l3) → Σ A B → UU l3
-  fam-Σ C (pair x y) = C x y
+### A type family over `A` is an identity system if and only if it is equivalent to the identity type
 
+```
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where

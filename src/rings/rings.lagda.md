@@ -284,7 +284,7 @@ is-contr-total-htpy-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : hom-Ring R1 R2) →
   is-contr (Σ (hom-Ring R1 R2) (htpy-hom-Ring R1 R2 f))
 is-contr-total-htpy-hom-Ring R1 R2 f =
-  is-contr-total-Eq-substructure
+  is-contr-total-Eq-subtype
     ( is-contr-total-htpy-hom-Ab
       ( ab-Ring R1)
       ( ab-Ring R2)
@@ -324,6 +324,11 @@ is-set-hom-Ring R1 R2 =
     ( neg-one-𝕋)
     ( is-prop-is-ring-homomorphism-hom-Ab R1 R2)
     ( is-set-hom-Ab (ab-Ring R1) (ab-Ring R2))
+
+hom-ring-Set :
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → UU-Set (l1 ⊔ l2)
+pr1 (hom-ring-Set R1 R2) = hom-Ring R1 R2
+pr2 (hom-ring-Set R1 R2) = is-set-hom-Ring R1 R2
 
 {- We define the categorical structure of rings -}
 
@@ -514,9 +519,15 @@ all-elements-equal-is-iso-hom-Ring :
 all-elements-equal-is-iso-hom-Ring R1 R2 f inv-f inv-f' =
   eq-subtype
     ( λ g →
-      is-prop-prod
-        ( is-set-hom-Ring R2 R2 (comp-hom-Ring R2 R1 R2 f g) (id-hom-Ring R2))
-        ( is-set-hom-Ring R1 R1 (comp-hom-Ring R1 R2 R1 g f) (id-hom-Ring R1)))
+      prod-Prop
+        ( Id-Prop
+          ( hom-ring-Set R2 R2)
+          ( comp-hom-Ring R2 R1 R2 f g)
+          ( id-hom-Ring R2))
+        ( Id-Prop
+          ( hom-ring-Set R1 R1)
+          ( comp-hom-Ring R1 R2 R1 g f)
+          ( id-hom-Ring R1)))
     ( eq-htpy-hom-Ring R2 R1
       ( inv-is-iso-hom-Ring R1 R2 f inv-f)
       ( inv-is-iso-hom-Ring R1 R2 f inv-f')
@@ -755,7 +766,7 @@ equiv-iso-Ab-iso-Ring R1 R2 =
       ( hom-Ab (ab-Ring R1) (ab-Ring R2))
       ( is-ring-homomorphism-hom-Ab R1 R2)
       ( λ f → is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) (pr1 f)))) ∘e
-  ( equiv-total-subtype
+  ( equiv-type-subtype
     ( is-prop-is-iso-hom-Ring R1 R2)
     ( λ f →
       is-prop-is-iso-hom-Ab
@@ -779,7 +790,7 @@ abstract
         ( pair (ab-Ring R) (id-iso-Ab (ab-Ring R)))
         ( is-contr-total-Eq-structure
           ( λ μ H pres-mul → Id (unit-Ring R) (pr1 (pr1 H)))
-          ( is-contr-total-Eq-substructure
+          ( is-contr-total-Eq-subtype
             ( is-contr-total-Eq-Π
               ( λ x m → (y : type-Ring R) → Id (mul-Ring R x y) (m y))
               ( λ x → is-contr-total-htpy (mul-Ring R x)))
@@ -789,8 +800,8 @@ abstract
             ( λ x y → refl)
             ( is-associative-mul-Ring R))
           ( pair (pair (mul-Ring R) (is-associative-mul-Ring R)) (λ x y → refl))
-          ( is-contr-total-Eq-substructure
-            ( is-contr-total-Eq-substructure
+          ( is-contr-total-Eq-subtype
+            ( is-contr-total-Eq-subtype
               ( is-contr-total-path (unit-Ring R))
               ( λ x →
                 is-prop-prod

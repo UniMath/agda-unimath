@@ -592,7 +592,7 @@ coherence-triangle-precompose-lifts-refl-htpy :
 coherence-triangle-precompose-lifts-refl-htpy P f h =
   ( htpy-eq (htpy-eq (compute-triangle-precompose-lifts P f) h)) ∙h
   ( ( ( inv-htpy right-unit-htpy) ∙h
-      ( htpy-ap-concat
+      ( ap-concat-htpy
         ( λ h' → tr-eq-htpy-fam-lifts-refl-htpy P h f (λ a → h' (f a)))
         ( refl-htpy)
         ( triangle-precompose-lifts' P refl-htpy h)
@@ -714,14 +714,14 @@ coherence-inv-htpy-choice-∞-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   (f : A → B) → COHERENCE-INV-HTPY-CHOICE-∞ P (refl-htpy' f)
 coherence-inv-htpy-choice-∞-refl-htpy {X = X} P f =
-  ( htpy-ap-concat
+  ( ap-concat-htpy
     ( coherence-square-inv-choice-∞ P f)
     ( inv-choice-∞ ·l ( htpy-precompose-total-lifts P refl-htpy))
     ( refl-htpy)
     ( λ h →
       ap (ap inv-choice-∞) (compute-htpy-precompose-total-lifts P f h))) ∙h
   ( inv-htpy
-    ( htpy-ap-concat'
+    ( ap-concat-htpy'
       ( ( htpy-precomp refl-htpy (Σ X P)) ·r inv-choice-∞)
       ( refl-htpy)
       ( refl-htpy)

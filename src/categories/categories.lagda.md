@@ -42,21 +42,23 @@ module _
       ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
       eq-subtype
         ( λ x →
-          is-prop-prod
-            ( is-prop-Π'
+          prod-Prop
+            ( Π-Prop' A
               ( λ a →
-                is-prop-Π'
+                Π-Prop' A
                   ( λ b →
-                    is-prop-Π
+                    Π-Prop
+                      ( type-Set (hom a b))
                       ( λ f' →
-                        is-set-type-Set (hom a b) (μ (x b) f') f'))))
-            ( is-prop-Π'
+                        Id-Prop (hom a b) (μ (x b) f') f'))))
+            ( Π-Prop' A
               ( λ a →
-                is-prop-Π'
+                Π-Prop' A
                   ( λ b →
-                    is-prop-Π
-                    ( λ f' →
-                      is-set-type-Set (hom a b) (μ f' (x a)) f')))))
+                    Π-Prop
+                      ( type-Set (hom a b))
+                      ( λ f' →
+                        Id-Prop (hom a b) (μ f' (x a)) f')))))
         ( eq-htpy
           ( λ x →
             ( inv (left-unit-law-e' (e x))) ∙
@@ -151,9 +153,9 @@ module _
         ( pair g' (pair p' q')) =
       eq-subtype
         ( λ h →
-          is-prop-prod
-            ( is-set-type-hom-Precat y y (comp-Precat f h) id-Precat)
-            ( is-set-type-hom-Precat x x (comp-Precat h f) id-Precat))
+          prod-Prop
+            ( Id-Prop (hom-Precat y y) (comp-Precat f h) id-Precat)
+            ( Id-Prop (hom-Precat x x) (comp-Precat h f) id-Precat))
         ( ( inv (right-unit-law-comp-Precat g)) ∙
           ( ( ap (comp-Precat g) (inv p')) ∙
             ( ( inv (assoc-comp-Precat g f g')) ∙

@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; refl)
 open import foundation.injective-maps using (is-injective)
-open import foundation.logical-equivalence using (_↔_)
+open import foundation.logical-equivalences using (_↔_)
 open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; lzero; UU)
 ```

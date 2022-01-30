@@ -53,7 +53,7 @@ open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
 open import foundation.lists
-open import foundation.logical-equivalence
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
@@ -65,7 +65,9 @@ open import foundation.sections
 open import foundation.sets
 open import foundation.singleton-induction
 open import foundation.split-surjective-maps
+open import foundation.structure-identity-principle
 open import foundation.subterminal-types
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.truncated-maps
 open import foundation.truncated-types

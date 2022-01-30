@@ -619,12 +619,12 @@ coherence-htpy-square-is-pullback-bottom-is-pullback-top-cube-is-equiv
         ( h ·l (inv-htpy back-left))
         ( bottom ·r hA)
         ( (k ·l back-right) ∙h (refl-htpy' (k ∘ (hC ∘ g'))))))) ∙h
-  ( ( htpy-ap-concat'
+  ( ( ap-concat-htpy'
       ( h ·l (inv-htpy back-left))
       ( inv-htpy (h ·l back-left))
       ( _)
-      ( htpy-left-whisk-inv-htpy h back-left)) ∙h
-      ( inv-htpy (inv-htpy-con (h ·l back-left) _ _
+      ( left-whisk-inv-htpy h back-left)) ∙h
+      ( inv-htpy (inv-con-htpy (h ·l back-left) _ _
         ( ( ( inv-htpy (assoc-htpy (h ·l back-left) (front-left ·r f') _)) ∙h
             ( ( inv-htpy
                 ( assoc-htpy
@@ -632,10 +632,10 @@ coherence-htpy-square-is-pullback-bottom-is-pullback-top-cube-is-equiv
                   ( hD ·l top)
                   ( (inv-htpy front-right) ·r g'))) ∙h
               inv-htpy
-              ( htpy-con-inv _ (front-right ·r g') _
+              ( con-inv-htpy _ (front-right ·r g') _
                 ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy (c)))))) ∙h
           ( inv-htpy
-            ( htpy-ap-concat (bottom ·r hA) _ _ right-unit-htpy))))))
+            ( ap-concat-htpy (bottom ·r hA) _ _ right-unit-htpy))))))
 
 is-pullback-bottom-is-pullback-top-cube-is-equiv :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
@@ -746,7 +746,7 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
                 ( inv-htpy c)) ∙h
               ( assoc-htpy
                   ( h ·l back-left) (front-left ·r f') (hD ·l top))) ∙h
-            ( htpy-ap-concat'
+            ( ap-concat-htpy'
               ( h ·l back-left)
               ( (h ·l back-left) ∙h refl-htpy)
               ( (front-left ·r f') ∙h (hD ·l top))
@@ -1060,7 +1060,7 @@ cone-ap f g (pair p (pair q H)) c1 c2 =
       ( ap q)
       ( λ γ →
         ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
-        ( ( inv (htpy-nat H γ)) ∙
+        ( ( inv (nat-htpy H γ)) ∙
           ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ)))))
 
 tr-id-right :
@@ -1087,7 +1087,7 @@ cone-ap' f g (pair p (pair q H)) c1 c2 =
       ( λ γ →
         ( tr-id-right (H c2) (ap f (ap p γ))) ∙
         ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
-          ( ( inv (htpy-nat H γ)) ∙
+          ( ( inv (nat-htpy H γ)) ∙
             ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ))))))
 
 is-pullback-cone-ap :

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Negation
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -13,9 +11,11 @@ open import foundation.empty-types using (empty)
 open import foundation.universe-levels using (UU; Level)
 ```
 
-# Negation
+## Idea
 
-Here we introduce the negation operation, following the Curry-Howard interpretation of logic into type theory. Properties of double negation are proven in `double-negation`.
+The Curry-Howard interpretation of negation in type theory is the interpretation of the proposition `P ⇒ ⊥` using propositions as types. Thus, the negation of a type `A` is the type `A → empty`.
+
+## Definition
 
 ```agda
 ¬ : {l : Level} → UU l → UU l

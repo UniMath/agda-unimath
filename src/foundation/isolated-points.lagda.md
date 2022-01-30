@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Isolated points
 
 ```agda
@@ -24,7 +20,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; tr; ap)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop)
+  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop)
 open import foundation.subtypes using (eq-subtype)
 open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-prod)
@@ -32,9 +28,11 @@ open import foundation.unit-type using (unit; is-prop-unit; star)
 open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
 ```
 
-## Definition
+## Idea
 
-A point `a : A` is said to be isolated if `Id a x` is decidable for any `x`.
+A point `a : A` is considered to be isolated if `Id a x` is decidable for any `x`.
+
+## Definition
 
 ```agda
 is-isolated :
@@ -55,8 +53,6 @@ module _
   {l1 : Level} {A : UU l1} (a : A)
   where
   
-  -- Exercise 12.12 (a)
-  
   is-decidable-map-const-is-isolated :
     is-isolated a → is-decidable-map (const unit A a)
   is-decidable-map-const-is-isolated d x =
@@ -67,8 +63,6 @@ module _
   is-isolated-is-decidable-map-const d x =
     is-decidable-equiv' (fib-const a x) (d x)
 
-  -- Exercise 12.12 (b)
-  
   cases-Eq-isolated-point :
     is-isolated a → (x : A) → is-decidable (Id a x) → UU lzero
   cases-Eq-isolated-point H x (inl p) = unit
@@ -89,6 +83,10 @@ module _
       (d : is-isolated a) (x : A) → is-prop (Eq-isolated-point d x)
     is-prop-Eq-isolated-point d x =
       is-prop-cases-Eq-isolated-point d x (d x)
+
+  Eq-isolated-point-Prop : is-isolated a → A → UU-Prop lzero
+  pr1 (Eq-isolated-point-Prop d x) = Eq-isolated-point d x
+  pr2 (Eq-isolated-point-Prop d x) = is-prop-Eq-isolated-point d x
 
   decide-reflexivity :
     (d : is-decidable (Id a a)) → Σ (Id a a) (λ p → Id (inl p) d)
@@ -124,7 +122,7 @@ module _
       Id (center-total-Eq-isolated-point d) t
     contraction-total-Eq-isolated-point d (pair x e) =
       eq-subtype
-        ( is-prop-Eq-isolated-point d)
+        ( Eq-isolated-point-Prop d)
         ( cases-contraction-total-Eq-isolated-point d x (d x) e)
 
     is-contr-total-Eq-isolated-point :

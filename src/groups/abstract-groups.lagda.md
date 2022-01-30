@@ -77,26 +77,36 @@ module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   where
   
+  preserves-mul-semigroup-Prop :
+    (type-Semigroup G → type-Semigroup H) → UU-Prop (l1 ⊔ l2)
+  preserves-mul-semigroup-Prop f =
+    Π-Prop
+      ( type-Semigroup G)
+      ( λ x →
+        Π-Prop
+          ( type-Semigroup G)
+          ( λ y →
+            Id-Prop
+              ( set-Semigroup H)
+              ( f (mul-Semigroup G x y))
+              ( mul-Semigroup H (f x) (f y))))
+
   preserves-mul-Semigroup :
     (type-Semigroup G → type-Semigroup H) → UU (l1 ⊔ l2)
   preserves-mul-Semigroup f =
-    preserves-mul (mul-Semigroup G) (mul-Semigroup H) f
-
-  preserves-mul-equiv-Semigroup :
-    (type-Semigroup G ≃ type-Semigroup H) → UU (l1 ⊔ l2)
-  preserves-mul-equiv-Semigroup e =
-    preserves-mul-equiv (mul-Semigroup G) (mul-Semigroup H) e
+    type-Prop (preserves-mul-semigroup-Prop f)
 
   abstract
     is-prop-preserves-mul-Semigroup :
       ( f : type-Semigroup G → type-Semigroup H) →
       is-prop (preserves-mul-Semigroup f)
     is-prop-preserves-mul-Semigroup f =
-      is-prop-Π (λ x →
-        is-prop-Π (λ y →
-          is-set-type-Semigroup H
-            ( f (mul-Semigroup G x y))
-            ( mul-Semigroup H (f x) (f y))))
+      is-prop-type-Prop (preserves-mul-semigroup-Prop f)
+
+  preserves-mul-equiv-Semigroup :
+    (type-Semigroup G ≃ type-Semigroup H) → UU (l1 ⊔ l2)
+  preserves-mul-equiv-Semigroup e =
+    preserves-mul-equiv (mul-Semigroup G) (mul-Semigroup H) e
 
   type-hom-Semigroup : UU (l1 ⊔ l2)
   type-hom-Semigroup =
@@ -128,7 +138,7 @@ module _
       (f : type-hom-Semigroup) →
       is-contr (Σ type-hom-Semigroup (htpy-hom-Semigroup f))
     is-contr-total-htpy-hom-Semigroup f =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( is-contr-total-htpy (map-hom-Semigroup f))
         ( is-prop-preserves-mul-Semigroup)
         ( map-hom-Semigroup f)
@@ -340,7 +350,7 @@ module _
 
   equiv-iso-equiv-Semigroup : equiv-Semigroup ≃ type-iso-Semigroup
   equiv-iso-equiv-Semigroup =
-    ( equiv-total-subtype
+    ( equiv-type-subtype
       ( λ f → is-subtype-is-equiv (map-hom-Semigroup G H f))
       ( is-prop-is-iso-hom-Semigroup)
       ( is-iso-is-equiv-hom-Semigroup)
@@ -367,14 +377,21 @@ module _
     (pair (pair μ-G' assoc-G') μ-id) =
     eq-subtype
       ( λ μ →
-        is-prop-preserves-mul-Semigroup G
-          ( pair (pair (type-Semigroup G) (is-set-type-Semigroup G)) μ) id)
+        preserves-mul-semigroup-Prop G (pair (set-Semigroup G) μ) id)
       ( eq-subtype
         ( λ μ →
-          is-prop-Π (λ x →
-            is-prop-Π (λ y →
-              is-prop-Π (λ z →
-                is-set-type-Semigroup G (μ (μ x y) z) (μ x (μ y z))))))
+          Π-Prop
+            ( type-Semigroup G)
+            ( λ x →
+              Π-Prop
+                ( type-Semigroup G)
+                ( λ y →
+                  Π-Prop
+                    ( type-Semigroup G)
+                    ( λ z →
+                      Id-Prop
+                        ( set-Semigroup G)
+                        ( μ (μ x y) z) (μ x (μ y z))))))
         ( eq-htpy (λ x → eq-htpy (λ y → μ-id x y))))
 
   is-contr-total-preserves-mul-id-Semigroup :
@@ -391,7 +408,7 @@ module _
   is-contr-total-equiv-Semigroup =
     is-contr-total-Eq-structure
       ( λ H μH → preserves-mul-equiv-Semigroup G (pair H μH))
-      ( is-contr-total-Eq-substructure
+      ( is-contr-total-Eq-subtype
         ( is-contr-total-equiv (type-Semigroup G))
         ( is-prop-is-set)
         ( type-Semigroup G)
@@ -455,9 +472,11 @@ semigroup-Monoid :
   {l : Level} (M : Monoid l) → Semigroup l
 semigroup-Monoid M = pr1 M
 
-type-Monoid :
-  {l : Level} (M : Monoid l) → UU l
+type-Monoid : {l : Level} (M : Monoid l) → UU l
 type-Monoid M = type-Semigroup (semigroup-Monoid M)
+
+set-Monoid : {l : Level} (M : Monoid l) → UU-Set l
+set-Monoid M = set-Semigroup (semigroup-Monoid M)
 
 is-set-type-Monoid :
   {l : Level} (M : Monoid l) → is-set (type-Monoid M)
@@ -496,13 +515,14 @@ right-unit-law-Monoid M = pr2 (pr2 (pr2 M))
 abstract
   all-elements-equal-is-unital :
     {l : Level} (G : Semigroup l) → all-elements-equal (is-unital G)
-  all-elements-equal-is-unital (pair (pair X is-set-X) (pair μ assoc-μ))
+  all-elements-equal-is-unital (pair X (pair μ assoc-μ))
     (pair e (pair left-unit-e right-unit-e))
     (pair e' (pair left-unit-e' right-unit-e')) =
     eq-subtype
-      ( λ e → is-prop-prod
-        ( is-prop-Π (λ y → is-set-X (μ e y) y))
-        ( is-prop-Π (λ x → is-set-X (μ x e) x)))
+      ( λ e →
+        prod-Prop
+          ( Π-Prop (type-Set X) (λ y → Id-Prop X (μ e y) y))
+          ( Π-Prop (type-Set X) (λ x → Id-Prop X (μ x e) x)))
       ( (inv (left-unit-e' e)) ∙ (right-unit-e e'))
 
 abstract
@@ -562,10 +582,10 @@ module _
   all-elements-equal-is-invertible-Monoid x
     (pair y (pair p q)) (pair y' (pair p' q')) =
     eq-subtype
-      ( ( λ z →
-        is-prop-prod
-          ( is-set-type-Monoid M (mul-Monoid M z x) (unit-Monoid M))
-          ( is-set-type-Monoid M (mul-Monoid M x z) (unit-Monoid M))))
+      ( λ z →
+        prod-Prop
+          ( Id-Prop (set-Monoid M) (mul-Monoid M z x) (unit-Monoid M))
+          ( Id-Prop (set-Monoid M) (mul-Monoid M x z) (unit-Monoid M)))
       ( ( inv (left-unit-law-Monoid M y)) ∙
         ( ( inv (ap (λ z → mul-Monoid M z y) p')) ∙
           ( ( assoc-mul-Monoid M y' x y) ∙
@@ -589,7 +609,7 @@ module _
   pr2 (pr1 (is-contr-has-right-inverse-Monoid x (pair y (pair p q)))) = q
   pr2 (is-contr-has-right-inverse-Monoid x (pair y (pair p q))) (pair y' q') =
     eq-subtype
-      ( λ u → is-set-type-Monoid M (mul-Monoid M x u) (unit-Monoid M))
+      ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M x u) (unit-Monoid M))
       ( ( inv (right-unit-law-Monoid M y)) ∙
         ( ( ap (mul-Monoid M y) (inv q')) ∙
           ( ( inv (assoc-mul-Monoid M y x y')) ∙
@@ -608,7 +628,7 @@ module _
   pr2 (pr1 (is-contr-has-left-inverse-Monoid x (pair y (pair p q)))) = p
   pr2 (is-contr-has-left-inverse-Monoid x (pair y (pair p q))) (pair y' p') =
     eq-subtype
-      ( λ u → is-set-type-Monoid M (mul-Monoid M u x) (unit-Monoid M))
+      ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M u x) (unit-Monoid M))
       ( ( inv (left-unit-law-Monoid M y)) ∙
         ( ( ap (mul-Monoid' M y) (inv p')) ∙
           ( ( assoc-mul-Monoid M y' x y) ∙
@@ -786,15 +806,15 @@ abstract
     {l : Level} (G : Semigroup l) (e : is-unital G) →
     all-elements-equal (is-group' G e)
   all-elements-equal-is-group
-    ( pair (pair G is-set-G) (pair μ assoc-G))
+    ( pair G (pair μ assoc-G))
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
     eq-subtype
       ( λ i →
-        is-prop-prod
-          ( is-prop-Π (λ x → is-set-G (μ (i x) x) e))
-          ( is-prop-Π (λ x → is-set-G (μ x (i x)) e)))
+        prod-Prop
+          ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
+          ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
         ( λ x →                                             -- ix
           ( inv (left-unit-G (i x))) ∙                      -- = 1·(ix)

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Type arithmetic for dependent pair types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -25,11 +23,22 @@ open import foundation.singleton-induction using
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Type arithmetic of dependent pair types
+## Idea
 
-In this file we prove arithmetical laws for Σ-types. We restrict our attention to pure Σ-types, and prove the arithmetical laws involving cartesian products and coproducts to `type-arithmetic-cartesian-product-types` and `type-arithmetic-coproduct-types`.
+We prove laws for the manipulation dependent pair types with respect to itself. The arithmetical laws involving cartesian product types, coproduct types, the unit type, and the empty type are proven in
 
-## The left unit law for Σ using a contractible base type
+```md
+type-arithmetic-cartesian-products
+type-arithmetic-coproducts
+type-arithmetic-unit-type
+type-arithmetic-empty-type
+```
+
+However, we do prove arithmetical laws with respect to contractible types.
+
+## Properties
+
+### The left unit law for Σ using a contractible base type
 
 ```agda
 module _
@@ -96,7 +105,7 @@ module _
   pr2 inv-left-unit-law-Σ-is-contr = is-equiv-map-inv-left-unit-law-Σ-is-contr
 ```
 
-# Right unit law for dependent pair types
+### Right unit law for dependent pair types
 
 ```
 module _
@@ -128,7 +137,7 @@ module _
         ( is-contr-map-is-equiv is-equiv-pr1-B a)
 ```
 
-## Associativity of dependent pair types
+### Associativity of dependent pair types
 
 There are two ways to express associativity for dependent pair types. We formalize both ways.
 
@@ -171,7 +180,7 @@ module _
       issec-map-inv-assoc-Σ
 ```
 
-The following block contains a second formalization of associativity for dependent pair types
+### Associativity, second formulation
 
 ```agda
 module _
@@ -211,7 +220,7 @@ module _
       issec-map-inv-assoc-Σ'
 ```
 
-## An interchange law for Σ over Σ
+### The interchange law
 
 ```
 module _

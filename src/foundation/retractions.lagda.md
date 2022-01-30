@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Retractions
 
 ```agda
@@ -16,7 +12,11 @@ open import foundation.identity-types using (Id; inv; _∙_; ap; left-inv; refl)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-### Definition
+## Idea
+
+A retraction is a map that has a section
+
+## Definition
 
 ```agda
 module _
@@ -48,6 +48,8 @@ module _
     (retraction-retract-of R ∘ section-retract-of R) ~ id
   is-retr-retraction-retract-of R = pr2 (retr-section-retract-of R)
 ```
+
+## Properties
 
 ### If A is a retraction of B, then the identity types of A are retractions of the identity types of B
 

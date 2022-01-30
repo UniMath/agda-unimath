@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Type arithmetic for coproduct types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -18,11 +16,13 @@ open import foundation.identity-types using (refl)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Type arithmetic for coproduct types
+## Idea
 
-In this file we prove arithmetical laws for cartesian product types, including laws that also involve dependent pair types and cartesian product types
+We prove laws for the manipulation of coproduct types with respect to itself, cartesian products, and dependent pair types. The arithmetical laws involving the unit type and the empty type are proven in `type-arithmetic-unit-type` and `type-arithmetic-empty-type` respectively.
 
-## Commutativity of coproducts
+## Laws
+
+### Commutativity of coproducts
 
 ```agda
 module _
@@ -55,7 +55,7 @@ module _
       isretr-map-inv-commutative-coprod
 ```
 
-## Associativity of coproducts
+### Associativity of coproducts
 
 ```agda
 module _
@@ -105,7 +105,7 @@ module _
   pr2 inv-assoc-coprod = is-equiv-map-inv-assoc-coprod
 ```
 
-## Right distributivity of Σ over coproducts
+### Right distributivity of Σ over coproducts
 
 ```agda
 module _
@@ -151,7 +151,7 @@ module _
   pr2 right-distributive-Σ-coprod = is-equiv-map-right-distributive-Σ-coprod
 ```
 
-## Left distributivity of Σ over coproducts
+### Left distributivity of Σ over coproducts
 
 ```agda
 module _
@@ -194,7 +194,7 @@ module _
   pr2 left-distributive-Σ-coprod = is-equiv-map-left-distributive-Σ-coprod
 ```
 
-## Right distributivity of products over coproducts
+### Right distributivity of products over coproducts
 
 ```agda
 module _
@@ -232,7 +232,7 @@ module _
   right-distributive-prod-coprod = right-distributive-Σ-coprod A B (λ x → C)
 ```
 
-## Left distributivity of products over coproducts
+### Left distributivity of products over coproducts
 
 ```
 module _

@@ -49,3 +49,14 @@ pr1 (pr1 (triple' a b c)) = a
 pr2 (pr1 (triple' a b c)) = b
 pr2 (triple' a b c) = c
 ```
+
+### Families on dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  fam-Σ : ((x : A) → B x → UU l3) → Σ A B → UU l3
+  fam-Σ C (pair x y) = C x y
+```

@@ -20,17 +20,22 @@ is-prop-is-invertible-Ring R =
 
 {- We introduce homomorphism that invert specific elements -}
 
-inverts-element-hom-Ring :
-  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (x : type-Ring R1) →
-  (f : hom-Ring R1 R2) → UU l2
-inverts-element-hom-Ring R1 R2 x f =
-  is-invertible-Ring R2 (map-hom-Ring R1 R2 f x)
+module _
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (x : type-Ring R1)
+  (f : hom-Ring R1 R2)
+  where
+  
+  inverts-element-hom-Ring : UU l2
+  inverts-element-hom-Ring =
+    is-invertible-Ring R2 (map-hom-Ring R1 R2 f x)
 
-is-prop-inverts-element-hom-Ring :
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (x : type-Ring R)
-  (f : hom-Ring R S) → is-prop (inverts-element-hom-Ring R S x f)
-is-prop-inverts-element-hom-Ring R S x f =
-  is-prop-is-invertible-Ring S (map-hom-Ring R S f x)
+  is-prop-inverts-element-hom-Ring : is-prop inverts-element-hom-Ring
+  is-prop-inverts-element-hom-Ring =
+    is-prop-is-invertible-Ring R2 (map-hom-Ring R1 R2 f x)
+
+  inverts-element-hom-ring-Prop : UU-Prop l2
+  pr1 inverts-element-hom-ring-Prop = inverts-element-hom-Ring
+  pr2 inverts-element-hom-ring-Prop = is-prop-inverts-element-hom-Ring
 
 inv-inverts-element-hom-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (x : type-Ring R)
@@ -109,8 +114,8 @@ unique-extension-universal-property-localization-Ring R S T x f H up-f h K =
     ( fib (precomp-universal-property-localization-Ring R S T x f H) (pair h K))
     ( equiv-tot ( λ g →
       ( equiv-htpy-hom-Ring-eq R T (comp-hom-Ring R S T g f) h) ∘e
-      ( equiv-Eq-eq-total-subtype
-        ( is-prop-inverts-element-hom-Ring R T x)
+      ( extensionality-type-subtype
+        ( inverts-element-hom-ring-Prop R T x)
         ( precomp-universal-property-localization-Ring R S T x f H g)
         ( pair h K))))
     ( is-contr-map-is-equiv (up-f T) (pair h K))
@@ -148,6 +153,7 @@ htpy-universal-property-localization-Ring R S T x f H up-f h K =
 {- We show that the type of localizations of a ring R at an element x is
    contractible. -}
 
+{-
 is-equiv-up-localization-up-localization-Ring :
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3) (x : type-Ring R)
   (f : hom-Ring R S) (inverts-f : inverts-element-hom-Ring R S x f) →
@@ -157,7 +163,7 @@ is-equiv-up-localization-up-localization-Ring :
   ({l : Level} → universal-property-localization-Ring l R T x g inverts-g) →
   is-iso-hom-Ring S T h
 is-equiv-up-localization-up-localization-Ring R S T x f inverts-f g inverts-g h H up-f up-g = {!is-iso-is-equiv-hom-Ring!}
-
+-}
 --------------------------------------------------------------------------------
 
 {- We introduce homomorphisms that invert all elements of a subset of a ring -}

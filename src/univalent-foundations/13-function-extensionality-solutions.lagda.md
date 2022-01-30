@@ -410,7 +410,7 @@ module _
     is-contr-total-htpy-equiv :
       (e : A ≃ B) → is-contr (Σ (A ≃ B) (λ e' → htpy-equiv e e'))
     is-contr-total-htpy-equiv (pair f is-equiv-f) =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( is-contr-total-htpy f)
         ( is-subtype-is-equiv)
         ( f)
@@ -724,7 +724,7 @@ equiv-subtype-equiv :
   {A : UU l1} {B : UU l2} (e : A ≃ B)
   (C : A → UU-Prop l3) (D : B → UU-Prop l4) →
   ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
-  total-subtype C ≃ total-subtype D
+  type-subtype C ≃ type-subtype D
 equiv-subtype-equiv e C D H =
   equiv-Σ (λ y → type-Prop (D y)) e
     ( λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
@@ -803,7 +803,7 @@ abstract
                       ( (G H) (f x))))))))
     where
     E : is-coherently-invertible f → is-equiv f
-    E H = is-equiv-is-coherently-invertible f H
+    E H = is-equiv-is-coherently-invertible H
     g : is-coherently-invertible f → (B → A)
     g H = pr1 H
     G : (H : is-coherently-invertible f) → (f ∘ g H) ~ id
@@ -817,7 +817,7 @@ abstract
     is-equiv-is-prop
       ( is-subtype-is-equiv f)
       ( is-prop-is-coherently-invertible f)
-      ( is-equiv-is-coherently-invertible f)
+      ( is-equiv-is-coherently-invertible)
 
 -- Exercise 13.15 (b)
 
@@ -1643,7 +1643,7 @@ isretr-section-comp f g h H (pair k K) (pair l L) =
           ( inv-htpy (H ·r (k ∘ l)))
           ( H ·r (k ∘ l))
           ( (g ·l (K ·r l)) ∙h L))) ∙h
-      ( htpy-ap-concat'
+      ( ap-concat-htpy'
         ( (inv-htpy (H ·r (k ∘ l))) ∙h (H ·r (k ∘ l)))
         ( refl-htpy)
         ( (g ·l (K ·r l)) ∙h L)
@@ -1673,7 +1673,7 @@ isretr-retraction-comp f g h H (pair l L) (pair k K) =
             ( inv-htpy ((k ∘ l) ·l H))
             ( (k ∘ l) ·l H)
             ( (k ·l (L ·r h)) ∙h K))) ∙h
-        ( htpy-ap-concat'
+        ( ap-concat-htpy'
           ( (inv-htpy ((k ∘ l) ·l H)) ∙h ((k ∘ l) ·l H))
           ( refl-htpy)
           ( (k ·l (L ·r h)) ∙h K)
@@ -2147,9 +2147,9 @@ module _
       ( pair g' (pair p' q')) =
     eq-subtype
       ( λ h →
-        is-prop-prod
-          ( is-set-type-hom-Set B B (f ∘ h) id)
-          ( is-set-type-hom-Set A A (h ∘ f) id))
+        prod-Prop
+          ( Id-Prop (hom-Set B B) (f ∘ h) id)
+          ( Id-Prop (hom-Set A A) (h ∘ f) id))
       ( ( ap (λ h → g ∘ h) (inv p')) ∙
         ( ap (λ h → h ∘ g') q))
 
@@ -2179,7 +2179,7 @@ module _
 
   equiv-iso-equiv-Set : type-equiv-Set A B ≃ iso-Set
   equiv-iso-equiv-Set =
-    equiv-total-subtype
+    equiv-type-subtype
       ( is-subtype-is-equiv)
       ( is-prop-is-iso-Set)
       ( λ f → is-iso-is-equiv-Set)
@@ -2235,34 +2235,34 @@ pr2 (converse-weak-funext d (pair x H) i) y =
 {- Some lemmas about equivalences on Π-types -}
 
 abstract
-  is-equiv-inv-htpy-con :
+  is-equiv-inv-con-htpy :
     { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
     ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
-    is-equiv (inv-htpy-con H K L)
-  is-equiv-inv-htpy-con H K L =
+    is-equiv (inv-con-htpy H K L)
+  is-equiv-inv-con-htpy H K L =
     is-equiv-map-Π _ (λ x → is-equiv-inv-con (H x) (K x) (L x))
 
-equiv-inv-htpy-con :
+equiv-inv-con-htpy :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
   ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
   ( (H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
-pr1 (equiv-inv-htpy-con H K L) = inv-htpy-con H K L
-pr2 (equiv-inv-htpy-con H K L) = is-equiv-inv-htpy-con H K L
+pr1 (equiv-inv-con-htpy H K L) = inv-con-htpy H K L
+pr2 (equiv-inv-con-htpy H K L) = is-equiv-inv-con-htpy H K L
 
 abstract
-  is-equiv-htpy-con-inv :
+  is-equiv-con-inv-htpy :
     { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
     ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
-    is-equiv (htpy-con-inv H K L)
-  is-equiv-htpy-con-inv H K L =
+    is-equiv (con-inv-htpy H K L)
+  is-equiv-con-inv-htpy H K L =
     is-equiv-map-Π _ (λ x → is-equiv-con-inv (H x) (K x) (L x))
 
-equiv-htpy-con-inv :
+equiv-con-inv-htpy :
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
   ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
   ( (H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
-pr1 (equiv-htpy-con-inv H K L) = htpy-con-inv H K L
-pr2 (equiv-htpy-con-inv H K L) = is-equiv-htpy-con-inv H K L
+pr1 (equiv-con-inv-htpy H K L) = con-inv-htpy H K L
+pr2 (equiv-con-inv-htpy H K L) = is-equiv-con-inv-htpy H K L
 
 HTPY-map-equiv-Π :
   { l1 l2 l3 l4 : Level}

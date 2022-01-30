@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Type arithmetic for cartesian product types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -19,11 +17,13 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels using (Level; UU)
 ```
 
-# Type arithmetic for cartesian product types
+## Idea
 
-In this file we prove arithmetical laws for cartesian product types, including laws that also involve dependent pair types. The arithmetical laws involving coproduct types are proven in `type-arithmetic-coproduct-types`.
+We prove laws for the manipulation of cartesian products with respect to itself and dependent pair types. The arithmetical laws involving coproduct types are proven in `type-arithmetic-coproduct-types`, and the laws involving the unit type and the empty type are proven in `type-arithmetic-unit-type` and `type-arithmetic-empty-type` respectively.
 
-## Commutativity of cartesian products
+## Laws
+
+### Commutativity of cartesian products
 
 ```agda
 module _
@@ -58,7 +58,7 @@ module _
   pr2 commutative-prod = is-equiv-map-commutative-prod
 ```
 
-## Associativity of cartesian products
+### Associativity of cartesian products
 
 ```agda
 module _
@@ -84,7 +84,7 @@ module _
   assoc-prod = assoc-Σ A (λ x → B) (λ w → C)
 ```
 
-## The unit laws of cartesian product types with respect to contractible types
+### The unit laws of cartesian product types with respect to contractible types
 
 ```agda
 module _
@@ -103,7 +103,7 @@ module _
     left-unit-law-Σ-is-contr C (center C)
 ```
 
-## Swapping a cartesian product inside a Σ-type
+### Swapping a cartesian product inside a Σ-type, on the left
 
 ```agda
 module _
@@ -139,6 +139,8 @@ module _
   pr1 equiv-left-swap-Σ = map-left-swap-Σ
   pr2 equiv-left-swap-Σ = is-equiv-map-left-swap-Σ
 ```
+
+### Swapping a cartesian product inside a Σ-type, on the right
 
 ```agda
 module _

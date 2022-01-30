@@ -984,17 +984,15 @@ module _
 
 -- Definition B.5.2
 
-is-small-𝕍 :
-  (l : Level) {l1 : Level} → 𝕍 l1 → UU (l1 ⊔ lsuc l)
-is-small-𝕍 l (tree-𝕎 A α) =
-  is-small l A × ((x : A) → is-small-𝕍 l (α x))
+is-small-𝕍-Prop : (l : Level) {l1 : Level} → 𝕍 l1 → UU-Prop (l1 ⊔ lsuc l)
+is-small-𝕍-Prop l (tree-𝕎 A α) =
+  prod-Prop (is-small-Prop l A) (Π-Prop A (λ x → is-small-𝕍-Prop l (α x)))
 
-is-prop-is-small-𝕍 :
-  {l l1 : Level} (X : 𝕍 l1) → is-prop (is-small-𝕍 l X)
-is-prop-is-small-𝕍 {l} (tree-𝕎 A α) =
-  is-prop-prod
-    ( is-prop-is-small l A)
-    ( is-prop-Π (λ x → is-prop-is-small-𝕍 (α x)))
+is-small-𝕍 : (l : Level) {l1 : Level} → 𝕍 l1 → UU (l1 ⊔ lsuc l)
+is-small-𝕍 l X = type-Prop (is-small-𝕍-Prop l X)
+
+is-prop-is-small-𝕍 : {l l1 : Level} (X : 𝕍 l1) → is-prop (is-small-𝕍 l X)
+is-prop-is-small-𝕍 {l} X = is-prop-type-Prop (is-small-𝕍-Prop l X)
 
 -- Lemma B.5.3
 
@@ -1057,9 +1055,9 @@ is-small-∈-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} H (pair (pair Y f) K)
 is-small-∉-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
   is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ∉-𝕍 Y)
-is-small-∉-𝕍 l H K =
+is-small-∉-𝕍 l {l1} {X} {Y} H K =
   is-small-Π l
-    ( is-small-∈-𝕍 l H K)
+    ( is-small-∈-𝕍 l {l1} {X} {Y} H K)
     ( λ x → pair (raise-empty l) (equiv-raise-empty l))
 
 -- Definition B.5.3
@@ -1126,9 +1124,9 @@ abstract
 abstract
   resize-resize-𝕍' :
     {l1 l2 : Level} → (resize-𝕍' {l2} {l1} ∘ resize-𝕍' {l1} {l2}) ~ id
-  resize-resize-𝕍' (pair X H) =
+  resize-resize-𝕍' {l1} {l2} (pair X H) =
     eq-subtype
-      ( is-prop-is-small-𝕍)
+      ( is-small-𝕍-Prop l2)
       ( resize-resize-𝕍 H)
 
 is-equiv-resize-𝕍' :
@@ -1146,15 +1144,15 @@ equiv-resize-𝕍' {l1} {l2} = pair resize-𝕍' is-equiv-resize-𝕍'
 eq-resize-𝕍 :
   {l1 l2 : Level} {x y : 𝕍 l1} (H : is-small-𝕍 l2 x) (K : is-small-𝕍 l2 y) →
   Id x y ≃ Id (resize-𝕍 x H) (resize-𝕍 y K)
-eq-resize-𝕍 H K =
-  ( equiv-Eq-eq-total-subtype
-    ( is-prop-is-small-𝕍)
+eq-resize-𝕍 {l1} {l2} H K =
+  ( extensionality-type-subtype
+    ( is-small-𝕍-Prop l1)
     ( resize-𝕍' (pair _ H))
     ( resize-𝕍' (pair _ K))) ∘e
   ( ( equiv-ap (equiv-resize-𝕍') (pair _ H) (pair _ K)) ∘e
     ( inv-equiv
-      ( equiv-Eq-eq-total-subtype
-        ( is-prop-is-small-𝕍)
+      ( extensionality-type-subtype
+        ( is-small-𝕍-Prop l2)
         ( pair _ H)
         ( pair _ K))))
 
@@ -1239,8 +1237,11 @@ is-small-Russell :
   {l1 l2 : Level} → is-small-universe l2 l1 → is-small-𝕍 l2 (Russell l1)
 is-small-Russell {l1} {l2} H =
   is-small-comprehension-𝕍 l2
+    { lsuc l1}
+    { universal-tree-𝕍 l1}
+    { λ z → z ∉-𝕍 z}
     ( is-small-universal-tree-𝕍 l2 H)
-    ( λ X → is-small-∉-𝕍 l2 (K X) (K X))
+    ( λ X → is-small-∉-𝕍 l2 {l1} {X} {X} (K X) (K X))
   where
   K = is-small-multiset-𝕍 (λ A → pr2 H A)
 

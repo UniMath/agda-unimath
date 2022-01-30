@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Propositions
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -9,25 +7,31 @@ module foundation.propositions where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
-  ( is-contr; eq-is-contr; is-contr-is-equiv; is-contr-equiv'; is-contr-Σ')
+  ( is-contr; is-contr-is-equiv; is-contr-equiv'; is-contr-Σ')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; is-emb-is-equiv)
 open import foundation.equality-dependent-pair-types using
   ( Eq-Σ; equiv-eq-pair-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse; is-equiv-map-inv-is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using
-  ( Id; refl; left-inv; inv; _∙_; ap; tr)
+  ( Id; refl; left-inv; inv; _∙_; tr)
+open import foundation.truncated-types using
+  ( is-trunc; is-trunc-is-contr; is-trunc-Id)
+open import foundation.truncation-levels using (𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 ```
 
-# Propositions
+## Idea
+
+A type is considered to be a proposition if its identity types are contractible. This condition is equivalent to the condition that it has up to identification at most one element.
+
+## Definition
 
 ```agda
 is-prop :
   {i : Level} (A : UU i) → UU i
-is-prop A = (x y : A) → is-contr (Id x y)
+is-prop A = is-trunc neg-one-𝕋 A
 
 UU-Prop :
   (l : Level) → UU (lsuc l)
@@ -43,22 +47,37 @@ module _
   abstract
     is-prop-type-Prop : (P : UU-Prop l) → is-prop (type-Prop P)
     is-prop-type-Prop P = pr2 P
-
-module _
-  {l : Level} {A : UU l}
-  where
-  
-  contraction-is-prop-is-contr :
-    (H : is-contr A) {x y : A} (p : Id x y) → Id (eq-is-contr H) p
-  contraction-is-prop-is-contr (pair c C) {x} refl = left-inv (C x)
-
-  abstract
-    is-prop-is-contr : is-contr A → is-prop A
-    pr1 (is-prop-is-contr H x y) = eq-is-contr H
-    pr2 (is-prop-is-contr H x y) = contraction-is-prop-is-contr H
 ```
 
-## Equivalent characterizations of propositions
+## Examples
+
+We prove here only that any contractible type is a proposition. The fact that the empty type and the unit type are propositions can be found in
+
+```md
+foundation.empty-types
+foundation.unit-type
+```
+
+### Any contractible type is a proposition
+
+```agda
+abstract
+  is-prop-is-contr : {l : Level} {A : UU l} → is-contr A → is-prop A
+  is-prop-is-contr = is-trunc-Id
+```
+
+## Properties
+
+### Propositions are (k+1)-truncated for any k.
+
+```agda
+abstract
+  is-trunc-is-prop :
+    { l : Level} (k : 𝕋) {A : UU l} → is-prop A → is-trunc (succ-𝕋 k) A
+  is-trunc-is-prop k is-prop-A x y = is-trunc-is-contr k (is-prop-A x y)
+```
+
+### Equivalent characterizations of propositions
 
 ```agda
 module _
@@ -106,14 +125,9 @@ module _
   abstract
     eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
     eq-is-proof-irrelevant H = eq-is-prop' (is-prop-is-proof-irrelevant H)
-
-  abstract
-    is-emb-is-emb :
-      {l2 : Level} {B : UU l2} {f : A → B} → (A → is-emb f) → is-emb f
-    is-emb-is-emb H x y = H x x y
 ```
 
-## A map between propositions is an equivalence if there is a map in the reverse direction
+### A map between propositions is an equivalence if there is a map in the reverse direction
 
 ```agda
 module _
@@ -136,7 +150,7 @@ module _
       is-equiv-is-prop is-prop-A is-prop-B g
 ```
 
-## Propositions are closed under equivalences
+### Propositions are closed under equivalences
 
 ```agda
 module _
@@ -145,8 +159,9 @@ module _
 
   abstract
     is-prop-is-equiv : {f : A → B} → is-equiv f → is-prop B → is-prop A
-    is-prop-is-equiv {f} E H x y =
-      is-contr-is-equiv _ (ap f {x} {y}) (is-emb-is-equiv E x y) (H (f x) (f y))
+    is-prop-is-equiv {f} E H =
+      is-prop-is-proof-irrelevant
+        ( λ a → is-contr-is-equiv B f E (is-proof-irrelevant-is-prop H (f a)))
 
   abstract
     is-prop-equiv : A ≃ B → is-prop B → is-prop A

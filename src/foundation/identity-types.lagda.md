@@ -83,6 +83,22 @@ module _
   inv-inv refl = refl
 ```
 
+### Concatenation is injective
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+  
+  is-injective-concat :
+    {x y z : A} (p : Id x y) {q r : Id y z} → Id (p ∙ q) (p ∙ r) → Id q r
+  is-injective-concat refl s = s
+
+  is-injective-concat' :
+    {x y z : A} (r : Id y z) {p q : Id x y} → Id (p ∙ r) (q ∙ r) → Id p q
+  is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
+```
+
 ## The action on paths of functions
 
 ```agda

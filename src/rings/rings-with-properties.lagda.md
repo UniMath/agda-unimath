@@ -51,7 +51,7 @@ is-contr-total-iso-Comm-Ring :
   { l1 : Level} (R1 : Comm-Ring l1) →
   is-contr (Σ (Comm-Ring l1) (iso-Comm-Ring R1))
 is-contr-total-iso-Comm-Ring R1 =
-  is-contr-total-Eq-substructure
+  is-contr-total-Eq-subtype
     ( is-contr-total-iso-Ring (ring-Comm-Ring R1))
     ( is-prop-is-commutative-Ring)
     ( ring-Comm-Ring R1)

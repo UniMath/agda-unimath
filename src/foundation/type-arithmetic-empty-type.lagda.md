@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Type arithmetic with the empty type
 
 ```agda
@@ -23,7 +19,13 @@ open import foundation.identity-types using (refl)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-## Left zero law for cartesian products
+## Idea
+
+We prove arithmetical laws involving the empty type.
+
+## Laws
+
+### Left zero law for cartesian products
 
 ```agda
 module _
@@ -51,7 +53,7 @@ module _
   pr2 left-zero-law-prod = is-equiv-pr1-prod-empty
 ```
 
-## Right zero law for cartesian products
+### Right zero law for cartesian products
 
 ```agda
 module _
@@ -79,7 +81,7 @@ module _
   pr2 right-zero-law-prod = is-equiv-pr2-prod-empty
 ```
 
-## Right absorption law for dependent pair types and for cartesian products
+### Right absorption law for dependent pair types and for cartesian products
 
 ```agda
 module _
@@ -97,7 +99,7 @@ module _
     pair map-right-absorption-Σ is-equiv-map-right-absorption-Σ
 ```
 
-## Left absorption law for dependent pair types
+### Left absorption law for dependent pair types
 
 ```agda
 module _
@@ -116,7 +118,7 @@ module _
   pr2 left-absorption-Σ = is-equiv-map-left-absorption-Σ
 ```
 
-## Right absorption law for cartesian product types
+### Right absorption law for cartesian product types
 
 ```agda
 module _
@@ -137,7 +139,7 @@ is-empty-right-factor-is-empty-prod :
 is-empty-right-factor-is-empty-prod f a b = f (pair a b)
 ```
 
-## Left absorption law for cartesian products
+### Left absorption law for cartesian products
 
 ```agda
 module _
@@ -159,7 +161,7 @@ is-empty-left-factor-is-empty-prod :
 is-empty-left-factor-is-empty-prod f b a = f (pair a b)
 ```
 
-## Left unit law for coproducts
+### Left unit law for coproducts
 
 ```agda
 module _
@@ -243,7 +245,7 @@ module _
   inv-left-unit-law-coprod = inv-left-unit-law-coprod-is-empty empty B id
 ```
 
-## Right unit law for coproducts
+### Right unit law for coproducts
 
 ```agda
 module _

@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Raising universe levels
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -16,9 +14,11 @@ open import foundation.identity-types using (Id; refl)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
-# Raising universe levels
+## Idea
 
-This file contains the equivalence from any type A : UU l1 to a larger universe UU (l1 ⊔ l2)
+In Agda, types have a designated universe levels, and universes in Agda don't overlap. Using `data` types we can construct for any type `A` of universe level `l` an equivalent type in any higher universe.
+
+## Definition
 
 ```agda
 data raise (l : Level) {l1 : Level} (A : UU l1) : UU (l1 ⊔ l) where

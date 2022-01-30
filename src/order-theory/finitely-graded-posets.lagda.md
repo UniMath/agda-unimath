@@ -155,9 +155,13 @@ module _
     refl-path-faces-Finitely-Graded-Poset = refl-leq-Fin i1
   leq-type-path-faces-Finitely-Graded-Poset {i1} x y
     ( cons-path-faces-Finitely-Graded-Poset {i3} {z} H K) =
-    transitive-leq-Fin {succ-ℕ k} {i1}
-      ( leq-type-path-faces-Finitely-Graded-Poset x z K)
-      ( leq-succ-Fin i3)
+     transitive-leq-Fin
+       { succ-ℕ k}
+       { i1}
+       { inl-Fin k i3}
+       { succ-Fin (inl-Fin k i3)}
+       ( leq-type-path-faces-Finitely-Graded-Poset x z K)
+       ( leq-succ-Fin {k} i3)
 ```
 
 ### Antisymmetry of path-elements-Finitely-Graded-Poset
@@ -176,13 +180,19 @@ eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
   (cons-path-faces-Finitely-Graded-Poset {i2} {z} H K) =
   ex-falso
     ( has-no-fixed-points-succ-Fin
+      { succ-ℕ (succ-ℕ k)}
       ( inl-Fin (succ-ℕ k) i2)
-      ( λ q → is-nonzero-succ-ℕ k (is-injective-succ-ℕ q))
+      ( λ (q : is-one-ℕ (succ-ℕ (succ-ℕ k))) →
+        is-nonzero-succ-ℕ k (is-injective-succ-ℕ q))
       ( antisymmetric-leq-Fin
+        { succ-ℕ (succ-ℕ k)}
+        { succ-Fin (inl-Fin (succ-ℕ k) i2)}
+        { inl-Fin (succ-ℕ k) i2}
         ( transitive-leq-Fin
-          { k = succ-ℕ (succ-ℕ k)}
-          { x = succ-Fin (inl-Fin (succ-ℕ k) i2)}
+          { succ-ℕ (succ-ℕ k)}
+          { skip-zero-Fin i2}
           { i1}
+          { inl i2}
           ( tr
             ( leq-Fin (succ-Fin (inl-Fin (succ-ℕ k) i2)))
             ( inv p)
@@ -330,7 +340,7 @@ module _
     all-elements-equal least-element-Finitely-Graded-Poset
   all-elements-equal-least-element-Finitely-Graded-Poset (pair x H) (pair y K) =
     eq-subtype
-      ( is-prop-is-least-element-Finitely-Graded-Poset)
+      ( is-least-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( H (element-face-Finitely-Graded-Poset X y))
         ( Id-Prop (face-finitely-graded-poset-Set X zero-Fin) x y)
@@ -381,7 +391,7 @@ module _
   all-elements-equal-largest-element-Finitely-Graded-Poset
     (pair x H) (pair y K) =
     eq-subtype
-      ( is-prop-is-largest-element-Finitely-Graded-Poset)
+      ( is-largest-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( K (element-face-Finitely-Graded-Poset X x))
         ( Id-Prop (face-finitely-graded-poset-Set X neg-one-Fin) x y)
@@ -442,10 +452,8 @@ module _
       is-set-type-Set face-set-Finitely-Graded-Subposet
 
     eq-face-Finitely-Graded-Subposet :
-      (x y : face-Finitely-Graded-Subposet) →
-      Eq-total-subtype (λ z → is-prop-type-Prop (S z)) x y → Id x y
-    eq-face-Finitely-Graded-Subposet x y =
-      eq-subtype (λ z → is-prop-type-Prop (S z))
+      (x y : face-Finitely-Graded-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+    eq-face-Finitely-Graded-Subposet x y = eq-subtype S
 
     emb-face-Finitely-Graded-Subposet :
       face-Finitely-Graded-Subposet ↪ face-Finitely-Graded-Poset X i
