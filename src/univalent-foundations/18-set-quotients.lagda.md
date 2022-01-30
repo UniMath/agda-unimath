@@ -640,7 +640,7 @@ module _
       is-contr
         ( Σ (reflecting-map-Eq-Rel R (type-Set B)) htpy-reflecting-map-Eq-Rel)
     is-contr-total-htpy-reflecting-map-Eq-Rel =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( is-contr-total-htpy (pr1 f))
         ( is-prop-reflects-Eq-Rel R B)
         ( pr1 f)
@@ -883,7 +883,7 @@ module _
               ( map-equiv e ∘ map-reflecting-map-Eq-Rel R f) ~
               ( map-reflecting-map-Eq-Rel R g)))
     uniqueness-set-quotient =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( universal-property-set-quotient-is-set-quotient R B f Uf C g)
         ( is-subtype-is-equiv)
         ( map-universal-property-set-quotient-is-set-quotient R B f Uf C g)

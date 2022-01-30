@@ -151,7 +151,7 @@ abstract
     ({l : Level} → is-propositional-truncation l P' f') →
     is-contr (Σ (type-equiv-Prop P P') (λ e → (map-equiv e ∘ f) ~ f'))
   is-uniquely-unique-propositional-truncation P P' f f' is-ptr-f is-ptr-f' =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( universal-property-is-propositional-truncation _ P f is-ptr-f P' f')
       ( is-subtype-is-equiv)
       ( map-is-propositional-truncation P f is-ptr-f P' f')

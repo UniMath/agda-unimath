@@ -220,7 +220,7 @@ module _
       ( Σ ( type-hom-Abstract-Group-Action G X Y)
           ( htpy-hom-Abstract-Group-Action))
   is-contr-total-htpy-hom-Abstract-Group-Action =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( is-contr-total-htpy (pr1 f))
       ( λ g →
         is-prop-Π
@@ -442,7 +442,7 @@ module _
             ( pr1 f))
         ( equiv-right-swap-Σ)
         ( λ { (pair (pair f E) H) → id-equiv}))
-      ( is-contr-total-Eq-substructure
+      ( is-contr-total-Eq-subtype
         ( is-contr-total-htpy-hom-Abstract-Group-Action G X Y
           ( hom-equiv-Abstract-Group-Action G X Y e))
         ( λ f → is-subtype-is-equiv (pr1 f))

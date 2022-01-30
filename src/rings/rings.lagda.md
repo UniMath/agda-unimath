@@ -284,7 +284,7 @@ is-contr-total-htpy-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : hom-Ring R1 R2) →
   is-contr (Σ (hom-Ring R1 R2) (htpy-hom-Ring R1 R2 f))
 is-contr-total-htpy-hom-Ring R1 R2 f =
-  is-contr-total-Eq-substructure
+  is-contr-total-Eq-subtype
     ( is-contr-total-htpy-hom-Ab
       ( ab-Ring R1)
       ( ab-Ring R2)
@@ -779,7 +779,7 @@ abstract
         ( pair (ab-Ring R) (id-iso-Ab (ab-Ring R)))
         ( is-contr-total-Eq-structure
           ( λ μ H pres-mul → Id (unit-Ring R) (pr1 (pr1 H)))
-          ( is-contr-total-Eq-substructure
+          ( is-contr-total-Eq-subtype
             ( is-contr-total-Eq-Π
               ( λ x m → (y : type-Ring R) → Id (mul-Ring R x y) (m y))
               ( λ x → is-contr-total-htpy (mul-Ring R x)))
@@ -789,8 +789,8 @@ abstract
             ( λ x y → refl)
             ( is-associative-mul-Ring R))
           ( pair (pair (mul-Ring R) (is-associative-mul-Ring R)) (λ x y → refl))
-          ( is-contr-total-Eq-substructure
-            ( is-contr-total-Eq-substructure
+          ( is-contr-total-Eq-subtype
+            ( is-contr-total-Eq-subtype
               ( is-contr-total-path (unit-Ring R))
               ( λ x →
                 is-prop-prod

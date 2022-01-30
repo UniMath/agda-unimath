@@ -209,7 +209,7 @@ module _
         ( λ f → htpy-hom-Endo (hom-equiv-Endo e) (pr1 f))
         ( equiv-right-swap-Σ)
         ( λ f → id-equiv))
-      ( is-contr-total-Eq-substructure
+      ( is-contr-total-Eq-subtype
         ( is-contr-total-htpy-hom-Endo (hom-equiv-Endo e))
         ( λ f → is-subtype-is-equiv (pr1 f))
         ( hom-equiv-Endo e)
@@ -312,7 +312,7 @@ module _
       ( Σ ( Component-Endo X)
           ( λ T → equiv-Component-Endo (canonical-Component-Endo X) T))
   is-contr-total-equiv-Component-Endo =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( is-contr-total-equiv-Endo X)
       ( λ Y → is-prop-type-trunc-Prop)
       ( X)
@@ -421,7 +421,7 @@ is-contr-total-equiv-Cyclic :
   {l1 : Level} (k : ℕ) (X : Cyclic l1 k) →
   is-contr (Σ (Cyclic l1 k) (equiv-Cyclic k X))
 is-contr-total-equiv-Cyclic k X =
-  is-contr-total-Eq-substructure
+  is-contr-total-Eq-subtype
     ( is-contr-total-equiv-Endo (endo-Cyclic k X))
     ( λ Y → is-prop-type-trunc-Prop)
     ( endo-Cyclic k X)

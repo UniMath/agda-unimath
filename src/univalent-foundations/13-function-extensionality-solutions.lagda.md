@@ -410,7 +410,7 @@ module _
     is-contr-total-htpy-equiv :
       (e : A ≃ B) → is-contr (Σ (A ≃ B) (λ e' → htpy-equiv e e'))
     is-contr-total-htpy-equiv (pair f is-equiv-f) =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( is-contr-total-htpy f)
         ( is-subtype-is-equiv)
         ( f)

@@ -218,7 +218,7 @@ module _
     is-contr-total-Eq-im :
       (x : im) → is-contr (Σ im (Eq-im x))
     is-contr-total-Eq-im x =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( is-contr-total-path (pr1 x))
         ( λ x → is-prop-type-trunc-Prop)
         ( pr1 x)

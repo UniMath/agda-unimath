@@ -107,7 +107,7 @@ module _
   is-contr-total-equiv-Torsor-Abstract-Group :
     is-contr (Σ (Torsor-Abstract-Group G l2) (equiv-Torsor-Abstract-Group))
   is-contr-total-equiv-Torsor-Abstract-Group =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( is-contr-total-equiv-Abstract-Group-Action G
         ( action-Torsor-Abstract-Group G X))
       ( is-prop-is-torsor-Abstract-Group G)

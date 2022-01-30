@@ -128,7 +128,7 @@ module _
       (f : type-hom-Semigroup) →
       is-contr (Σ type-hom-Semigroup (htpy-hom-Semigroup f))
     is-contr-total-htpy-hom-Semigroup f =
-      is-contr-total-Eq-substructure
+      is-contr-total-Eq-subtype
         ( is-contr-total-htpy (map-hom-Semigroup f))
         ( is-prop-preserves-mul-Semigroup)
         ( map-hom-Semigroup f)
@@ -391,7 +391,7 @@ module _
   is-contr-total-equiv-Semigroup =
     is-contr-total-Eq-structure
       ( λ H μH → preserves-mul-equiv-Semigroup G (pair H μH))
-      ( is-contr-total-Eq-substructure
+      ( is-contr-total-Eq-subtype
         ( is-contr-total-equiv (type-Semigroup G))
         ( is-prop-is-set)
         ( type-Semigroup G)

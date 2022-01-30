@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Type arithmetic with the unit type
 
 ```agda
@@ -19,9 +15,13 @@ open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU)
 ```
 
-This file contains arithmetical equivalences of types involving the unit type.
+## Idea
 
-## Left unit law for dependent pair types
+We prove arithmetical laws involving the unit type
+
+## Laws
+
+### Left unit law for dependent pair types
 
 ```agda
 module _
@@ -66,7 +66,7 @@ module _
   pr2 inv-left-unit-law-Σ = is-equiv-map-inv-left-unit-law-Σ
 ```
 
-## Left unit law for cartesian products
+### Left unit law for cartesian products
 
 ```agda
 module _
@@ -111,7 +111,7 @@ module _
   pr2 inv-left-unit-law-prod = is-equiv-map-inv-left-unit-law-prod
 ```
 
-# The right unit law for cartesian products
+### The right unit law for cartesian products
 
 ```agda
   map-right-unit-law-prod : A × unit → A

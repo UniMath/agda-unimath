@@ -194,7 +194,7 @@ abstract
     is-contr-equiv
       ( Σ (UU-Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
       ( equiv-tot (equiv-equiv-iff P))
-      ( is-contr-total-Eq-substructure
+      ( is-contr-total-Eq-subtype
         ( is-contr-total-equiv (type-Prop P))
         ( is-prop-is-prop)
         ( type-Prop P)
@@ -528,7 +528,7 @@ abstract
     (s : total-subuniverse P) →
     is-contr (Σ (total-subuniverse P) (λ t → equiv-subuniverse P s t))
   is-contr-total-equiv-subuniverse P (pair X p) =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( is-contr-total-equiv X)
       ( is-subtype-subuniverse P)
       ( X)
@@ -647,7 +647,7 @@ abstract
     {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
     is-contr (Σ (component-UU-Level l1 A) (equiv-component-UU-Level X))
   is-contr-total-equiv-component-UU-Level X =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( is-contr-total-equiv (type-component-UU-Level X))
       ( λ Y → is-prop-mere-equiv _ Y)
       ( type-component-UU-Level X)
@@ -1368,7 +1368,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪d B) →
     is-contr (Σ (A ↪d B) (htpy-decidable-emb f))
   is-contr-total-htpy-decidable-emb f =
-    is-contr-total-Eq-substructure
+    is-contr-total-Eq-subtype
       ( is-contr-total-htpy (map-decidable-emb f))
       ( is-prop-is-decidable-emb)
       ( map-decidable-emb f)

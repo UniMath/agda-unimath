@@ -23,6 +23,8 @@ open import foundation.propositions using
   ( is-prop; UU-Prop; is-proof-irrelevant-is-prop; is-prop-equiv;
     is-prop-equiv'; type-Prop; is-prop-type-Prop; is-equiv-is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation.subtype-identity-principle using
+  ( is-contr-total-Eq-subtype)
 open import foundation.truncated-types using (is-trunc; is-trunc-is-emb)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
@@ -67,32 +69,6 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-{- The following is a general construction that will help us show that
-   the identity type of a subtype agrees with the identity type of the 
-   original type. We already know that the first projection of a family of
-   propositions is an embedding, but the following lemma still has its uses. -}
-
-  abstract
-    is-contr-total-Eq-substructure :
-      {l3 : Level} {P : A → UU l3} →
-      is-contr (Σ A B) → (is-subtype P) → (a : A) (b : B a) (p : P a) →
-      is-contr (Σ (Σ A P) (λ t → B (pr1 t)))
-    is-contr-total-Eq-substructure {l3} {P}
-      is-contr-AB is-subtype-P a b p =
-      is-contr-equiv
-        ( Σ (Σ A B) (λ t → P (pr1 t)))
-        ( equiv-right-swap-Σ)
-        ( is-contr-equiv
-          ( P a)
-          ( left-unit-law-Σ-is-contr
-            ( is-contr-AB)
-            ( pair a b))
-          ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
-
-module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (H : is-subtype B)
   where
 
@@ -109,7 +85,7 @@ module _
     is-contr-total-Eq-type-subtype :
       (p : Σ A B) → is-contr (Σ (Σ A B) (Eq-type-subtype p))
     is-contr-total-Eq-type-subtype (pair x y) =
-      is-contr-total-Eq-substructure (is-contr-total-path x) H x refl y
+      is-contr-total-Eq-subtype (is-contr-total-path x) H x refl y
 
   abstract
     is-equiv-Eq-eq-type-subtype :
