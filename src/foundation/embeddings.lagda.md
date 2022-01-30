@@ -205,6 +205,18 @@ coherence-square-inv-vertical top left right bottom H x =
 
 ## Properties
 
+### To prove that a map is an embedding, a point in the domain may be assumed
+
+```agda
+module _
+  {l : Level} {A : UU l} {l2 : Level} {B : UU l2} {f : A → B}
+  where
+  
+  abstract
+    is-emb-is-emb : (A → is-emb f) → is-emb f
+    is-emb-is-emb H x y = H x x y
+```
+
 ### Embeddings are closed under homotopies
 
 ```agda

@@ -60,8 +60,8 @@ open import foundation.singleton-induction public
 open import foundation.split-surjective-maps public
 open import foundation.structure-identity-principle public
 open import foundation.subterminal-types public
-open import foundation.subtypes public
 open import foundation.subtype-identity-principle public
+open import foundation.subtypes public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
 open import foundation.truncation-levels public

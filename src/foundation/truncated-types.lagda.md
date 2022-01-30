@@ -8,7 +8,7 @@ module foundation.truncated-types where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-is-equiv; is-contr-Σ'; is-contr-left-factor-prod;
-    is-contr-right-factor-prod; is-contr-retract-of)
+    is-contr-right-factor-prod; is-contr-retract-of; eq-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb-is-equiv; is-emb; _↪_; map-emb; is-emb-map-emb)
@@ -17,9 +17,7 @@ open import foundation.equality-cartesian-product-types using
 open import foundation.equality-dependent-pair-types using (equiv-pair-eq-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
-open import foundation.identity-types using (Id; ap; tr; refl)
-open import foundation.propositions using
-  ( is-prop-is-contr; is-prop; UU-Prop)
+open import foundation.identity-types using (Id; ap; tr; refl; left-inv)
 open import foundation.retractions using (_retract-of_; retract-eq)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; succ-𝕋; one-𝕋; neg-one-𝕋; zero-𝕋)
@@ -67,7 +65,8 @@ module _
 abstract
   is-trunc-succ-is-trunc :
     (k : 𝕋) {i : Level} {A : UU i} → is-trunc k A → is-trunc (succ-𝕋 k) A
-  is-trunc-succ-is-trunc neg-two-𝕋 H = is-prop-is-contr H
+  pr1 (is-trunc-succ-is-trunc neg-two-𝕋 H x y) = eq-is-contr H
+  pr2 (is-trunc-succ-is-trunc neg-two-𝕋 H x .x) refl = left-inv (pr2 H x)
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y = is-trunc-succ-is-trunc k (H x y)
 
 truncated-type-succ-Truncated-Type :
@@ -88,15 +87,6 @@ abstract
     is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
 ```
 
-### Propositions are (k+1)-truncated for any k.
-
-```agda
-abstract
-  is-trunc-is-prop :
-    { l : Level} (k : 𝕋) {A : UU l} → is-prop A → is-trunc (succ-𝕋 k) A
-  is-trunc-is-prop k is-prop-A x y = is-trunc-is-contr k (is-prop-A x y)
-```
-
 ### The identity type of a k-truncated type is k-truncated
 
 ```agda
@@ -104,9 +94,7 @@ abstract
   is-trunc-Id :
     {l : Level} {k : 𝕋} {A : UU l} →
     is-trunc k A → (x y : A) → is-trunc k (Id x y)
-  is-trunc-Id {k = neg-two-𝕋} is-trunc-A = is-prop-is-contr is-trunc-A
-  is-trunc-Id {k = succ-𝕋 k} is-trunc-A x y =
-    is-trunc-succ-is-trunc k {A = Id x y} (is-trunc-A x y)
+  is-trunc-Id {l} {k}= is-trunc-succ-is-trunc k
 
 Id-Truncated-Type :
   {l : Level} {k : 𝕋} (A : UU-Truncated-Type (succ-𝕋 k) l) →
