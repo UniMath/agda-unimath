@@ -68,6 +68,7 @@ module _
 
 ### Equality in subtypes
 
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
