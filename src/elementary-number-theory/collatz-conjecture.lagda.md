@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The Collatz conjecture
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.collatz-conjecture where
 

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Finitely cyclic maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.finitely-cyclic-maps where
 

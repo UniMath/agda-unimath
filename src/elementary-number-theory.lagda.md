@@ -33,6 +33,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers pub
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
+open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.integers public
 open import elementary-number-theory.iterating-functions public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
@@ -43,6 +44,7 @@ open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.standard-finite-types public
+open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public

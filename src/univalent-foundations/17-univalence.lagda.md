@@ -937,7 +937,7 @@ equiv-Fib-structure :
   {l1 l3 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l3) (B : UU l1) →
   slice-UU-structure (l1 ⊔ l) P B ≃ fam-structure P B
 equiv-Fib-structure {l1} {l3} l P B =
-  ( ( equiv-inv-choice-∞ (λ x → P)) ∘e
+  ( ( inv-distributive-Π-Σ) ∘e
     ( equiv-Σ
       ( λ C → (b : B) → P (C b))
       ( equiv-Fib l B)
@@ -1268,7 +1268,7 @@ equiv-Fib-decidable-Prop l A =
     ( λ X →
       equiv-tot
         ( λ f →
-          ( inv-equiv equiv-choice-∞) ∘e
+          ( inv-distributive-Π-Σ) ∘e
           ( equiv-prod (equiv-is-prop-map-is-emb f) id-equiv))))
 
 abstract

@@ -325,12 +325,12 @@ module _
     universal-property-pullback-canonical-pullback C =
       is-equiv-comp
         ( cone-map f g cone-canonical-pullback)
-        ( tot (λ p → choice-∞))
+        ( tot (λ p → map-distributive-Π-Σ))
         ( mapping-into-Σ)
         ( refl-htpy)
         ( is-equiv-mapping-into-Σ)
         ( is-equiv-tot-is-fiberwise-equiv
-          ( λ p → is-equiv-choice-∞))
+          ( λ p → is-equiv-map-distributive-Π-Σ))
 
   {- We characterize the identity type of the canonical pullback. -}
   

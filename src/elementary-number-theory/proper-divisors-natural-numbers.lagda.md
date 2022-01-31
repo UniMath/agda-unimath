@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Proper divisors of natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.proper-divisors-natural-numbers where
 

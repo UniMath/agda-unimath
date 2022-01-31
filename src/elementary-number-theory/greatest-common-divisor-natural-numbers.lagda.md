@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The greatest common divisor of natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Euclidean division on the natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.euclidean-division-natural-numbers where
 

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The absolute value function on the integers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.absolute-value-integers where
 

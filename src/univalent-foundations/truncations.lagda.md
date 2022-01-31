@@ -139,8 +139,8 @@ module _
           type-Truncated-Type (X (g b))) (a : A) → s (f a))
         ( H B)
         ( is-equiv-equiv
-          ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
-          ( equiv-inv-choice-∞ (λ x y → type-Truncated-Type (X y)))
+          ( inv-distributive-Π-Σ)
+          ( inv-distributive-Π-Σ)
           ( ind-Σ (λ g s → refl))
           ( H (Σ-Truncated-Type B X)))
         ( id)
@@ -158,7 +158,7 @@ module _
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
     f ~ (g ∘ h) → sec g
   sec-is-truncation H C h g K =
-    choice-∞
+    map-distributive-Π-Σ
       ( map-inv-is-equiv
         ( dependent-universal-property-truncation-is-truncation H
           ( fib-Truncated-Type C B g))

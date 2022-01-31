@@ -626,7 +626,7 @@ abstract
 total-lifts :
   {l1 l2 l3 : Level} (A : UU l1) {X : UU l2} (P : X → UU l3) →
   UU _
-total-lifts A {X} P = type-choice-∞ {A = A} {B = λ a → X} (λ a → P)
+total-lifts A {X} P = universally-structured-Π {A = A} {B = λ a → X} (λ a → P)
 
 precompose-total-lifts :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -638,15 +638,15 @@ precompose-total-lifts {A = A} P f =
     ( λ h → h ∘ f)
     ( precompose-lifts P f)
 
-coherence-square-inv-choice-∞ :
+coherence-square-map-inv-distributive-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) (f : A → B) →
   coherence-square
     ( precompose-total-lifts P f)
-    ( inv-choice-∞ {A = B} {B = λ x → X} {C = λ x y → P y})
-    ( inv-choice-∞)
+    ( map-inv-distributive-Π-Σ {A = B} {B = λ x → X} {C = λ x y → P y})
+    ( map-inv-distributive-Π-Σ)
     ( λ h → h ∘ f)
-coherence-square-inv-choice-∞ P f = refl-htpy
+coherence-square-map-inv-distributive-Π-Σ P f = refl-htpy
 
 {- Our goal is now to produce a homotopy between (precompose-total-lifts P f) 
    and (precompose-total-lifts P g) for homotopic maps f and g, and a coherence
@@ -701,40 +701,40 @@ compute-htpy-precompose-total-lifts {A = A} P f (pair h h') =
               ( htpy-eq (compute-triangle-precompose-lifts P f) h) h')) ∙
           ( left-inv (triangle-precompose-lifts-refl-htpy P f h h')))))
 
-COHERENCE-INV-HTPY-CHOICE-∞ :
+COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   {f g : A → B} (H : f ~ g) → UU _
-COHERENCE-INV-HTPY-CHOICE-∞ P {f} {g} H =
-  ( ( coherence-square-inv-choice-∞ P f) ∙h
-    ( inv-choice-∞ ·l ( htpy-precompose-total-lifts P H))) ~
-  ( ( ( λ h → eq-htpy (h ·l H)) ·r inv-choice-∞) ∙h
-    ( coherence-square-inv-choice-∞ P g))
+COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P {f} {g} H =
+  ( ( coherence-square-map-inv-distributive-Π-Σ P f) ∙h
+    ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P H))) ~
+  ( ( ( λ h → eq-htpy (h ·l H)) ·r map-inv-distributive-Π-Σ) ∙h
+    ( coherence-square-map-inv-distributive-Π-Σ P g))
 
-coherence-inv-htpy-choice-∞-refl-htpy :
+coherence-inv-htpy-distributive-Π-Σ-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
-  (f : A → B) → COHERENCE-INV-HTPY-CHOICE-∞ P (refl-htpy' f)
-coherence-inv-htpy-choice-∞-refl-htpy {X = X} P f =
+  (f : A → B) → COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P (refl-htpy' f)
+coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
   ( ap-concat-htpy
-    ( coherence-square-inv-choice-∞ P f)
-    ( inv-choice-∞ ·l ( htpy-precompose-total-lifts P refl-htpy))
+    ( coherence-square-map-inv-distributive-Π-Σ P f)
+    ( map-inv-distributive-Π-Σ ·l ( htpy-precompose-total-lifts P refl-htpy))
     ( refl-htpy)
     ( λ h →
-      ap (ap inv-choice-∞) (compute-htpy-precompose-total-lifts P f h))) ∙h
+      ap (ap map-inv-distributive-Π-Σ) (compute-htpy-precompose-total-lifts P f h))) ∙h
   ( inv-htpy
     ( ap-concat-htpy'
-      ( ( htpy-precomp refl-htpy (Σ X P)) ·r inv-choice-∞)
+      ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
       ( refl-htpy)
       ( refl-htpy)
-      ( λ h → compute-htpy-precomp f (Σ X P) (inv-choice-∞ h))))
+      ( λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
 
 abstract
-  coherence-inv-htpy-choice-∞ :
+  coherence-inv-htpy-distributive-Π-Σ :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
-    {f g : A → B} (H : f ~ g) → COHERENCE-INV-HTPY-CHOICE-∞ P H
-  coherence-inv-htpy-choice-∞ P {f} =
+    {f g : A → B} (H : f ~ g) → COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P H
+  coherence-inv-htpy-distributive-Π-Σ P {f} =
     ind-htpy f
-      ( λ g H → COHERENCE-INV-HTPY-CHOICE-∞ P H)
-      ( coherence-inv-htpy-choice-∞-refl-htpy P f)
+      ( λ g H → COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P H)
+      ( coherence-inv-htpy-distributive-Π-Σ-refl-htpy P f)
     
 cone-family-dependent-pullback-property :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -781,21 +781,21 @@ is-pullback-cone-family-dependent-pullback-property {S = S} {A} {B} {X}
       ( map-Σ (fam-lifts B P) (precomp j X) (precompose-lifts P j))
       ( map-Σ (fam-lifts S P) (precomp f X) (precompose-lifts P f))
       ( map-Σ (fam-lifts S P) (precomp g X) (precompose-lifts P g))
-      ( inv-choice-∞) 
-      ( inv-choice-∞)
-      ( inv-choice-∞)
-      ( inv-choice-∞)
+      ( map-inv-distributive-Π-Σ) 
+      ( map-inv-distributive-Π-Σ)
+      ( map-inv-distributive-Π-Σ)
+      ( map-inv-distributive-Π-Σ)
       ( htpy-precompose-total-lifts P H)
       ( refl-htpy)
       ( refl-htpy)
       ( refl-htpy)
       ( refl-htpy)
       ( htpy-precomp H (Σ X P))
-      ( coherence-inv-htpy-choice-∞ P H)
-      ( is-equiv-inv-choice-∞)
-      ( is-equiv-inv-choice-∞)
-      ( is-equiv-inv-choice-∞)
-      ( is-equiv-inv-choice-∞)
+      ( coherence-inv-htpy-distributive-Π-Σ P H)
+      ( is-equiv-map-inv-distributive-Π-Σ)
+      ( is-equiv-map-inv-distributive-Π-Σ)
+      ( is-equiv-map-inv-distributive-Π-Σ)
+      ( is-equiv-map-inv-distributive-Π-Σ)
       ( pb-c _ (Σ X P)))
     
 dependent-pullback-property-pullback-property-pushout :

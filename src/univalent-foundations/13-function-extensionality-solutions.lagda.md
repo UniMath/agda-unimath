@@ -9,82 +9,6 @@ module univalent-foundations.13-function-extensionality-solutions where
 
 open import univalent-foundations.13-function-extensionality public
 
---------------------------------------------------------------------------------
-
--- Exercises
-
--- Exercise 13.1
-
-abstract
-  is-equiv-inv-htpy :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-    (f g : (x : A) → B x) → is-equiv (inv-htpy {f = f} {g = g})
-  is-equiv-inv-htpy f g =
-    is-equiv-has-inverse
-      ( inv-htpy)
-      ( λ H → eq-htpy (λ x → inv-inv (H x)))
-      ( λ H → eq-htpy (λ x → inv-inv (H x)))
-
-equiv-inv-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f g : (x : A) → B x) → (f ~ g) ≃ (g ~ f)
-pr1 (equiv-inv-htpy f g) = inv-htpy
-pr2 (equiv-inv-htpy f g) = is-equiv-inv-htpy f g
-
-abstract
-  is-equiv-concat-htpy :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-    {f g : (x : A) → B x} (H : f ~ g) →
-    (h : (x : A) → B x) → is-equiv (concat-htpy H h)
-  is-equiv-concat-htpy {A = A} {B = B} {f} =
-    ind-htpy f
-      ( λ g H → (h : (x : A) → B x) → is-equiv (concat-htpy H h))
-      ( λ h → is-equiv-id)
-
-equiv-concat-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  {f g : (x : A) → B x} (H : f ~ g) (h : (x : A) → B x) →
-  (g ~ h) ≃ (f ~ h)
-pr1 (equiv-concat-htpy H h) = concat-htpy H h
-pr2 (equiv-concat-htpy H h) = is-equiv-concat-htpy H h
-
-inv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} →
-  (g ~ h) → (f ~ h) → (f ~ g)
-inv-concat-htpy' f K = concat-htpy' f (inv-htpy K)
-
-issec-inv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x}
-  (K : g ~ h) → ((concat-htpy' f K) ∘ (inv-concat-htpy' f K)) ~ id
-issec-inv-concat-htpy' f K L =
-  eq-htpy (λ x → issec-inv-concat' (f x) (K x) (L x))
-
-isretr-inv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x}
-  (K : g ~ h) → ((inv-concat-htpy' f K) ∘ (concat-htpy' f K)) ~ id
-isretr-inv-concat-htpy' f K L =
-  eq-htpy (λ x → isretr-inv-concat' (f x) (K x) (L x))
-
-is-equiv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} (K : g ~ h) →
-  is-equiv (concat-htpy' f K)
-is-equiv-concat-htpy' f K =
-  is-equiv-has-inverse
-    ( inv-concat-htpy' f K)
-    ( issec-inv-concat-htpy' f K)
-    ( isretr-inv-concat-htpy' f K)
-
-equiv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} (K : g ~ h) →
-  (f ~ g) ≃ (f ~ h)
-pr1 (equiv-concat-htpy' f K) = concat-htpy' f K
-pr2 (equiv-concat-htpy' f K) = is-equiv-concat-htpy' f K
-
 -- Bureaucracy
 
 is-contr-total-htpy' :
@@ -356,7 +280,7 @@ module _
   is-contr-sec-is-equiv {f} is-equiv-f =
     is-contr-equiv'
       ( (b : B) → fib f b)
-      ( equiv-choice-∞) 
+      ( distributive-Π-Σ) 
       ( is-contr-Π (is-contr-map-is-equiv is-equiv-f))
 
   -- Exercise 13.4 (b)
@@ -791,7 +715,7 @@ abstract
               ( (x : A) →
                 Σ ( Id (g H (f x)) x)
                   ( λ p → Id (G H (f x)) (ap f p)))
-              ( equiv-choice-∞)
+              ( distributive-Π-Σ)
               ( is-contr-Π
                 ( λ x →
                   is-contr-equiv'
@@ -1406,7 +1330,7 @@ equiv-fib-map-Π :
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
   ((i : I) → fib (f i) (h i)) ≃ fib (map-Π f) h
 equiv-fib-map-Π f h =
-  equiv-tot (λ x → equiv-eq-htpy) ∘e equiv-choice-∞
+  equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
 
 is-trunc-map-map-Π :
   (k : 𝕋) {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -1510,7 +1434,7 @@ equiv-fib-map-Π' :
   (h : (j : J) → B (α j)) →
   ((j : J) → fib (f (α j)) (h j)) ≃ fib (map-Π' α f) h
 equiv-fib-map-Π' α f h =
-  equiv-tot (λ x → equiv-eq-htpy) ∘e equiv-choice-∞
+  equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
 
 is-trunc-map-map-Π-is-trunc-map' :
   (k : 𝕋) {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -1800,7 +1724,7 @@ module _
                     ( λ p →
                       ( inv-equiv (equiv-raise l2 (B x))) ∘e
                       ( equiv-tr (fam-coprod (A x) (B x)) p))))) ∘e
-            ( equiv-choice-∞)) ∘e
+            ( distributive-Π-Σ)) ∘e
           ( equiv-map-Π
             ( λ x →
               ( equiv-universal-property-coprod
@@ -1808,7 +1732,7 @@ module _
               ( equiv-diagonal-is-contr
                 ( fam-coprod (A x) (B x) (f x))
                 ( is-contr-is-zero-or-one-Fin-two-ℕ (f x))))))) ∘e
-      ( equiv-choice-∞)) ∘e
+      ( distributive-Π-Σ)) ∘e
     ( equiv-map-Π
       ( λ x → inv-compute-total-fam-coprod (A x) (B x)))
 
@@ -2043,7 +1967,7 @@ equiv-fam-equiv-equiv-slice :
   (f : A → X) (g : B → X) →
   equiv-slice f g ≃ ((x : X) → (fib f x) ≃ (fib g x))
 equiv-fam-equiv-equiv-slice f g =
-  ( equiv-inv-choice-∞ (λ x → is-equiv)) ∘e
+  ( inv-distributive-Π-Σ) ∘e
   ( equiv-fiberwise-equiv-equiv-slice f g)
 
 -- Exercise 13.17

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Modular arithmetic on the standard finite types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
 

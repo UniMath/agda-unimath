@@ -38,6 +38,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.integers
 open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
@@ -183,6 +184,14 @@ open import univalent-foundations.16-finite-types
 open import univalent-foundations.17-univalence
 open import univalent-foundations.18-set-quotients
 open import univalent-foundations.W-types
+open import univalent-foundations.functoriality-loop-spaces
+open import univalent-foundations.iterated-loop-spaces
+open import univalent-foundations.loop-spaces
+open import univalent-foundations.pointed-dependent-functions
+open import univalent-foundations.pointed-equivalences
+open import univalent-foundations.pointed-families-of-types
+open import univalent-foundations.pointed-homotopies
+open import univalent-foundations.pointed-maps
 open import univalent-foundations.pointed-types
 open import univalent-foundations.truncations
 ```

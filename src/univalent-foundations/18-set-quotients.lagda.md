@@ -1505,8 +1505,8 @@ abstract
       ( λ g (s : (b : type-Set B) → type-Set (X (g b))) (a : A) → s (f a))
       ( H B)
       ( is-equiv-equiv
-        ( equiv-inv-choice-∞ (λ x y → type-Set (X y)))
-        ( equiv-inv-choice-∞ (λ x y → type-Set (X y)))
+        ( inv-distributive-Π-Σ)
+        ( inv-distributive-Π-Σ)
         ( ind-Σ (λ g s → refl))
         ( H (Σ-Set B X)))
       ( id)

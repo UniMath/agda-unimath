@@ -172,7 +172,10 @@ module _
   contraction-total-Eq-𝕎
     ( tree-𝕎 x α) (pair (tree-𝕎 .x β) (pair refl e)) =
     ap ( ( aux-total-Eq-𝕎 x α) ∘
-         ( choice-∞ {A = B x} {B = λ y → 𝕎 A B} {C = λ y → Eq-𝕎 (α y)}))
+         ( map-distributive-Π-Σ
+           { A = B x}
+           { B = λ y → 𝕎 A B}
+           { C = λ y → Eq-𝕎 (α y)}))
        { x = λ y → pair (α y) (refl-Eq-𝕎 (α y))}
        { y = λ y → pair (β y) (e y)}
        ( eq-htpy (λ y → contraction-total-Eq-𝕎 (α y) (pair (β y) (e y))))
@@ -689,10 +692,7 @@ abstract
                       ( λ (d : D c) → fib (map-𝕎 D f e) (γ d))
                       ( (equiv-tr D p) ∘e (e a))
                       ( λ b → id-equiv)) ∘e
-                    ( equiv-inv-choice-∞
-                      ( λ b w →
-                        Id ( map-𝕎 D f e w)
-                           ( γ (tr D p (map-equiv (e a) b)))))) ∘e 
+                    ( inv-distributive-Π-Σ)) ∘e 
                   ( equiv-tot
                     ( λ α →
                       equiv-Π

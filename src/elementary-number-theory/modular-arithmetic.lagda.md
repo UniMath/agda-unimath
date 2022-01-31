@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Modular arithmetic
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.modular-arithmetic where
 

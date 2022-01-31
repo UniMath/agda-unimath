@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The classical definition of the finite types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.classical-finite-types where
 

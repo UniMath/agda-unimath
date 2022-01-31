@@ -30,23 +30,29 @@ open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import
+  foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
 open import foundation.equivalences
+open import foundation.equivalences-on-homotopies
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -57,6 +63,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
+open import foundation.precomposition
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.raising-universe-levels
@@ -78,7 +85,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-identity-types
 open import foundation.universe-levels
+open import foundation.weak-function-extensionality
 ```
 
 ## Elementary number theory
@@ -112,6 +122,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.integers
 open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
@@ -122,6 +133,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.standard-finite-types
+open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
@@ -138,6 +150,13 @@ open import univalent-foundations.16-finite-types public
 open import univalent-foundations.17-univalence public
 open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.W-types public
+open import univalent-foundations.functoriality-loop-spaces public
+open import univalent-foundations.iterated-loop-spaces public
+open import univalent-foundations.loop-spaces public
+open import univalent-foundations.pointed-dependent-functions public
+open import univalent-foundations.pointed-families-of-types public
+open import univalent-foundations.pointed-homotopies public
+open import univalent-foundations.pointed-maps public
 open import univalent-foundations.pointed-types public
 ```
 

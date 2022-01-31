@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Inequality on the standard finite types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.inequality-standard-finite-types where
 
