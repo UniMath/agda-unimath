@@ -1148,9 +1148,9 @@ abstract
       ( λ h → precomp-Π f (λ p → type-Prop (Q (h p))))
       ( is-ptr-f P)
       ( is-equiv-top-is-equiv-bottom-square
-        ( inv-choice-∞
+        ( map-inv-distributive-Π-Σ
           { C = λ (x : type-Prop P) (p : type-Prop P) → type-Prop (Q p)})
-        ( inv-choice-∞
+        ( map-inv-distributive-Π-Σ
           { C = λ (x : A) (p : type-Prop P) → type-Prop (Q p)})
         ( map-Σ
           ( λ (g : A → type-Prop P) → (x : A) → type-Prop (Q (g x)))
@@ -1158,8 +1158,8 @@ abstract
           ( λ h → precomp-Π f (λ p → type-Prop (Q (h p)))))
         ( precomp f (Σ (type-Prop P) (λ p → type-Prop (Q p))))
         ( ind-Σ (λ h h' → refl))
-        ( is-equiv-inv-choice-∞)
-        ( is-equiv-inv-choice-∞)
+        ( is-equiv-map-inv-distributive-Π-Σ)
+        ( is-equiv-map-inv-distributive-Π-Σ)
         ( is-ptr-f (Σ-Prop P Q)))
       ( id {A = type-Prop P})
 

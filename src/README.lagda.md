@@ -41,6 +41,7 @@ open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -75,6 +76,7 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type

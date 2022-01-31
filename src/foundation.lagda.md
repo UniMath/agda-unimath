@@ -34,12 +34,14 @@ open import foundation.equivalences public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibers-of-maps public
+open import foundation.function-extensionality public
 open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-pair-types public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.homotopies public
+open import foundation.homotopy-induction public
 open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.injective-maps public
@@ -68,8 +70,10 @@ open import foundation.truncation-levels public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-pair-types public
+open import foundation.type-arithmetic-dependent-function-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.unit-type public
 open import foundation.universe-levels public
+open import foundation.weak-function-extensionality public
 ```
