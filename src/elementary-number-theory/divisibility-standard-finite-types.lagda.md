@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The divisibility relation on the standard finite types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.divisibility-standard-finite-types where
 

@@ -23,6 +23,8 @@ open import foundation.decidable-maps public
 open import foundation.decidable-types public
 open import foundation.dependent-pair-types public
 open import foundation.diagonal-maps-of-types public
+open import
+  foundation.distributivity-of-dependent-functions-over-dependent-pairs public
 open import foundation.double-negation public
 open import foundation.embeddings public
 open import foundation.empty-types public
@@ -31,6 +33,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
 open import foundation.equivalences public
+open import foundation.equivalences-on-homotopies public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibers-of-maps public
@@ -52,6 +55,7 @@ open import foundation.logical-equivalences public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.path-split-maps public
+open import foundation.precomposition public
 open import foundation.propositional-maps public
 open import foundation.propositions public
 open import foundation.raising-universe-levels public
@@ -70,10 +74,11 @@ open import foundation.truncation-levels public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-pair-types public
-open import foundation.type-arithmetic-dependent-function-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.unit-type public
+open import foundation.universal-property-dependent-pair-types public
+open import foundation.universal-property-identity-types public
 open import foundation.universe-levels public
 open import foundation.weak-function-extensionality public
 ```

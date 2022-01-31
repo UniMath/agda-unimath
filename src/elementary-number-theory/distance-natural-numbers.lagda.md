@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The distance between natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.distance-natural-numbers where
 

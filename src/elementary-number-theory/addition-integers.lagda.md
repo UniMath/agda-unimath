@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Addition on the integers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.addition-integers where
 

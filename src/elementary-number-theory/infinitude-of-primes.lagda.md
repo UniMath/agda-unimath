@@ -1,7 +1,7 @@
 # The infinitude of primes
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.infinitude-of-primes where
 

@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Equivalences between standard finite types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.equivalences-standard-finite-types where
 

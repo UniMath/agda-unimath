@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The Well-Ordering Principle of the standard finite types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module
   elementary-number-theory.well-ordering-principle-standard-finite-types

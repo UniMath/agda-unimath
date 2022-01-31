@@ -3,7 +3,8 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.type-arithmetic-dependent-function-types where
+module foundation.distributivity-of-dependent-functions-over-dependent-pairs
+  where
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-total-path)
@@ -27,9 +28,9 @@ open import foundation.weak-function-extensionality using (is-contr-Π)
 
 ## Idea
 
-We prove arithmetical laws involving dependent function types.
+A dependent function taking values in a dependent pair type is equivalently described as a pair of dependent functions. This equivalence, which gives the distributivity of Π over Σ, is also known as the type theoretic principle of choice. Indeed, it is the Curry-Howard interpretation of (one formulation of) the axiom of choice.
 
-## Laws
+## Definitions
 
 ### Distributivity of Π over Σ
 
@@ -44,7 +45,13 @@ universally-structured-Π :
   (C : (x : A) → B x → UU l3) → UU (l1 ⊔ (l2 ⊔ l3))
 universally-structured-Π {A = A} {B} C =
   Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
+```
 
+## Properties
+
+### Characterizing the identity type of `universally-structured-Π`
+
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
   where
@@ -57,7 +64,8 @@ module _
         Id (tr (C x) p ((pr2 t) x)) ((pr2 t') x))
 
   extensionality-universally-structured-Π :
-    (t t' : universally-structured-Π C) → Id t t' ≃ htpy-universally-structured-Π t t'
+    (t t' : universally-structured-Π C) →
+    Id t t' ≃ htpy-universally-structured-Π t t'
   extensionality-universally-structured-Π (pair f g) =
     extensionality-Σ
       ( λ {f'} g' (H : f ~ f') → (x : A) → Id (tr (C x) (H x) (g x)) (g' x))
@@ -66,10 +74,15 @@ module _
       ( λ g' → equiv-funext)
 
   eq-htpy-universally-structured-Π :
-    {t t' : universally-structured-Π C} → htpy-universally-structured-Π t t' → Id t t'
+    {t t' : universally-structured-Π C} →
+    htpy-universally-structured-Π t t' → Id t t'
   eq-htpy-universally-structured-Π {t} {t'} =
     map-inv-equiv (extensionality-universally-structured-Π t t')
+```
 
+### The distributivity of Π over Σ
+
+```agda
 map-distributive-Π-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
   Π-total-fam C → universally-structured-Π C
@@ -129,20 +142,9 @@ pr1 inv-distributive-Π-Σ = map-inv-distributive-Π-Σ
 pr2 inv-distributive-Π-Σ = is-equiv-map-inv-distributive-Π-Σ
 ```
 
-### Ordinary functions into a Σ-type
+## Consequences
 
-```agda
-mapping-into-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
-  (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
-mapping-into-Σ {B = B} = map-distributive-Π-Σ {B = λ x → B}
-
-abstract
-  is-equiv-mapping-into-Σ :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-    {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
-  is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
-```
+### Characterizing the identity type of `Π-total-fam`
 
 ```agda
 Eq-Π-total-fam :
@@ -167,3 +169,19 @@ eq-Eq-Π-total-fam :
   (f g : (a : A) → Σ (B a) (C a)) → Eq-Π-total-fam C f g → Id f g
 eq-Eq-Π-total-fam C f g = map-inv-equiv (extensionality-Π-total-fam C f g)
 ```
+
+### Ordinary functions into a Σ-type
+
+```agda
+mapping-into-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
+  (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
+mapping-into-Σ {B = B} = map-distributive-Π-Σ {B = λ x → B}
+
+abstract
+  is-equiv-mapping-into-Σ :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+    {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
+  is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
+```
+

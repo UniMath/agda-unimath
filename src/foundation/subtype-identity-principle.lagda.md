@@ -39,7 +39,8 @@ module _
   abstract
     is-contr-total-Eq-subtype :
       {l3 : Level} {P : A → UU l3} →
-      is-contr (Σ A B) → ((x : A) → is-prop (P x)) → (a : A) (b : B a) (p : P a) →
+      is-contr (Σ A B) → ((x : A) → is-prop (P x)) →
+      (a : A) (b : B a) (p : P a) →
       is-contr (Σ (Σ A P) (λ t → B (pr1 t)))
     is-contr-total-Eq-subtype {l3} {P}
       is-contr-AB is-subtype-P a b p =

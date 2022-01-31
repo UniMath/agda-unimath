@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Inequality of natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.inequality-natural-numbers where
 
@@ -20,13 +20,14 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (pair)
-open import foundation.empty-types using (empty; ex-falso)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; inv; ap; tr)
 open import foundation.negation using (¬)
-open import foundation.unit-type using (unit; star)
+open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -474,4 +475,40 @@ leq-leq-mul-ℕ' m n x H =
 neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (Id x y)
 neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
 neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
+```
+
+## Inequality on ℕ is a proposition
+
+```agda
+is-prop-leq-ℕ :
+  (m n : ℕ) → is-prop (leq-ℕ m n)
+is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
+is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
+is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
+
+leq-ℕ-Prop : ℕ → ℕ → UU-Prop lzero
+pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
+pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
+
+neg-succ-leq-ℕ :
+  (n : ℕ) → ¬ (leq-ℕ (succ-ℕ n) n)
+neg-succ-leq-ℕ zero-ℕ = id
+neg-succ-leq-ℕ (succ-ℕ n) = neg-succ-leq-ℕ n
+
+leq-eq-left-ℕ :
+  {m m' : ℕ} → Id m m' → (n : ℕ) → leq-ℕ m n → leq-ℕ m' n
+leq-eq-left-ℕ refl n = id
+
+leq-eq-right-ℕ :
+  (m : ℕ) {n n' : ℕ} → Id n n' → leq-ℕ m n → leq-ℕ m n'
+leq-eq-right-ℕ m refl = id
+
+cases-leq-succ-ℕ :
+  {m n : ℕ} → leq-ℕ m (succ-ℕ n) → coprod (leq-ℕ m n) (Id m (succ-ℕ n))
+cases-leq-succ-ℕ {zero-ℕ} {n} star = inl star
+cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
+  inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))
+cases-leq-succ-ℕ {succ-ℕ m} {succ-ℕ n} p =
+  map-coprod id (ap succ-ℕ) (cases-leq-succ-ℕ p)
 ```

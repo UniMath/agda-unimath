@@ -44,6 +44,7 @@ open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.standard-finite-types public
+open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public

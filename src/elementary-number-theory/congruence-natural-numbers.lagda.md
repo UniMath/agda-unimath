@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # The congruence relations on the natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.congruence-natural-numbers where
 

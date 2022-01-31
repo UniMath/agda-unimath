@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Divisibility of natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.divisibility-natural-numbers where
 
