@@ -22,7 +22,7 @@ open import foundation.universe-levels using (Level; lzero; UU)
 
 ## Idea
 
-An empty type is a type with no elements. The (standard) empty type is introduces as an inductive type with no constructors. With the standard empty type available, we will say that a type is empty if it maps into the standard empty type.
+An empty type is a type with no elements. The (standard) empty type is introduced as an inductive type with no constructors. With the standard empty type available, we will say that a type is empty if it maps into the standard empty type.
 
 ## Definition
 
