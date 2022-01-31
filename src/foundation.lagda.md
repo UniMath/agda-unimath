@@ -30,6 +30,7 @@ open import foundation.embeddings public
 open import foundation.empty-types public
 open import foundation.equality-cartesian-product-types public
 open import foundation.equality-coproduct-types public
+open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
 open import foundation.equivalences public
