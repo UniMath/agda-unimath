@@ -71,6 +71,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.singleton-induction
+open import foundation.slice
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subterminal-types

@@ -123,7 +123,7 @@ module _
         ( fib (precomp-emb f i q j) r)
         ( equiv-tot
           ( λ h →
-            equiv-htpy-eq-hom-slice f (map-emb j) (precomp-emb f i q j h) r))
+            extensionality-hom-slice f (map-emb j) (precomp-emb f i q j h) r))
         ( is-contr-map-is-equiv (H C j) r)
                                       
   hom-slice-universal-property-image : hom-slice (map-emb i) (map-emb j)
