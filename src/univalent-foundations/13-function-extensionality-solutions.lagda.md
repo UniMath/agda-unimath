@@ -11,71 +11,9 @@ open import univalent-foundations.13-function-extensionality public
 
 {- We characterize the identity type of the type of sections of a map -}
 
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  htpy-sec : (s t : sec f) → UU (l1 ⊔ l2)
-  htpy-sec s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
-
-  refl-htpy-sec : (s : sec f) → htpy-sec s s
-  pr1 (refl-htpy-sec s) = refl-htpy
-  pr2 (refl-htpy-sec s) = refl-htpy
-
-  htpy-eq-sec : (s t : sec f) → Id s t → htpy-sec s t
-  htpy-eq-sec s .s refl = refl-htpy-sec s
-
-  abstract
-    is-contr-total-htpy-sec : (s : sec f) → is-contr (Σ (sec f) (htpy-sec s))
-    is-contr-total-htpy-sec s =
-      is-contr-total-Eq-structure
-        ( λ g G H → pr2 s ~ ((f ·l H) ∙h G))
-        ( is-contr-total-htpy (pr1 s))
-        ( pair (pr1 s) refl-htpy)
-        ( is-contr-total-htpy (pr2 s))
-  abstract
-    is-equiv-htpy-eq-sec :
-      (s t : sec f) → is-equiv (htpy-eq-sec s t)
-    is-equiv-htpy-eq-sec s =
-      fundamental-theorem-id s
-        ( refl-htpy-sec s)
-        ( is-contr-total-htpy-sec s)
-        ( htpy-eq-sec s)
-
-  equiv-htpy-eq-sec : (s t : sec f) → Id s t ≃ htpy-sec s t
-  pr1 (equiv-htpy-eq-sec s t) = htpy-eq-sec s t
-  pr2 (equiv-htpy-eq-sec s t) = is-equiv-htpy-eq-sec s t
-
-eq-htpy-sec :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (s t : sec f) →
-  (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) →
-  Id s t
-eq-htpy-sec {f = f} s t H K =
-  map-inv-is-equiv (is-equiv-htpy-eq-sec f s t) (pair H K)
-
 -- Exercise 13.2 (b)
 
 -- We introduce the type hom-coslice
-
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : X → A) (g : X → B)
-  where
-
-  hom-coslice = Σ (A → B) (λ h → (h ∘ f) ~ g)
-
-  map-hom-coslice : hom-coslice → (A → B)
-  map-hom-coslice = pr1
-
-  triangle-map-hom-coslice : (h : hom-coslice) → ((map-hom-coslice h) ∘ f) ~ g
-  triangle-map-hom-coslice = pr2
-
-{-
-  htpy-hom-coslice :
-    (h k : hom-coslice) → UU (l1 ⊔ l2 ⊔ l3)
-  htpy-hom-coslice h k =
-    Σ ( map-hom-coslice h ~ map-hom-coslice k)
-      ( λ H → {!!})
--}
 
 {- We characterize the identity type of the type of retractions of f -}
 

@@ -13,18 +13,21 @@ open import
   ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
-    sec; _∘e_; id-equiv)
+    sec; _∘e_; id-equiv; map-inv-equiv)
+open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
-open import foundation.homotopies using (_~_; refl-htpy)
+open import foundation.homotopies using (_~_; refl-htpy; _·l_; _∙h_)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.injective-maps using (is-injective)
+open import foundation.structure-identity-principle using
+  ( extensionality-Σ)
 open import foundation.type-arithmetic-cartesian-product-types using
   ( equiv-right-swap-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.weak-function-extensionality using (is-contr-Π)
 ```
 
@@ -110,4 +113,64 @@ module _
       ( λ s → pr1 s ~ id)
       ( distributive-Π-Σ)
       ( λ s → id-equiv))
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  htpy-sec : (s t : sec f) → UU (l1 ⊔ l2)
+  htpy-sec s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
+
+  extensionality-sec : (s t : sec f) → Id s t ≃ htpy-sec s t
+  extensionality-sec (pair s H) =
+    extensionality-Σ
+      ( λ {s'} H' K → H ~ ((f ·l K) ∙h H'))
+      ( refl-htpy)
+      ( λ s' → equiv-funext)
+      ( λ H' → equiv-funext)
+
+  eq-htpy-sec :
+    (s t : sec f)
+    (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) → Id s t
+  eq-htpy-sec s t H K =
+    map-inv-equiv (extensionality-sec s t) (pair H K)
+
+{-
+  refl-htpy-sec : (s : sec f) → htpy-sec s s
+  pr1 (refl-htpy-sec s) = refl-htpy
+  pr2 (refl-htpy-sec s) = refl-htpy
+
+  htpy-eq-sec : (s t : sec f) → Id s t → htpy-sec s t
+  htpy-eq-sec s .s refl = refl-htpy-sec s
+
+  abstract
+    is-contr-total-htpy-sec : (s : sec f) → is-contr (Σ (sec f) (htpy-sec s))
+    is-contr-total-htpy-sec s =
+      is-contr-total-Eq-structure
+        ( λ g G H → pr2 s ~ ((f ·l H) ∙h G))
+        ( is-contr-total-htpy (pr1 s))
+        ( pair (pr1 s) refl-htpy)
+        ( is-contr-total-htpy (pr2 s))
+  abstract
+    is-equiv-htpy-eq-sec :
+      (s t : sec f) → is-equiv (htpy-eq-sec s t)
+    is-equiv-htpy-eq-sec s =
+      fundamental-theorem-id s
+        ( refl-htpy-sec s)
+        ( is-contr-total-htpy-sec s)
+        ( htpy-eq-sec s)
+
+  equiv-htpy-eq-sec : (s t : sec f) → Id s t ≃ htpy-sec s t
+  pr1 (equiv-htpy-eq-sec s t) = htpy-eq-sec s t
+  pr2 (equiv-htpy-eq-sec s t) = is-equiv-htpy-eq-sec s t
+
+eq-htpy-sec :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (s t : sec f) →
+  (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) →
+  Id s t
+eq-htpy-sec {f = f} s t H K =
+  map-inv-is-equiv (is-equiv-htpy-eq-sec f s t) (pair H K)
+  -}
 ```

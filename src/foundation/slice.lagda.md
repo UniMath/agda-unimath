@@ -77,6 +77,7 @@ module _
   eq-htpy-hom-slice :
     (h h' : hom-slice f g) → htpy-hom-slice h h' → Id h h'
   eq-htpy-hom-slice h h' = map-inv-equiv (extensionality-hom-slice h h')
+  
 {-    
   refl-htpy-hom-slice : (h : hom-slice f g) → htpy-hom-slice h h
   pr1 (refl-htpy-hom-slice h) = refl-htpy
