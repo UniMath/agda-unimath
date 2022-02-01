@@ -67,6 +67,7 @@ open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.coslice
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types

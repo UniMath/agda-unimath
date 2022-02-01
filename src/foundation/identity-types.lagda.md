@@ -1,6 +1,4 @@
----
-title: Univalent Mathematics in Agda
----
+# Identity types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -12,7 +10,11 @@ open import foundation.functions using (id; _∘_)
 open import foundation.universe-levels using (UU; Level)
 ```
 
-##  The identity type
+## Idea
+
+The equality relation on a type is a reflexive relation, with the universal property that it maps uniquely into any other reflexive relation. In type theory, we introduce the identity type as an inductive family of types, where the induction principle can be understood as expressing that the identity type is the least reflexive relation.
+
+## Defnition
 
 ```agda
 data Id {i : Level} {A : UU i} (x : A) : A → UU i where
@@ -21,9 +23,11 @@ data Id {i : Level} {A : UU i} (x : A) : A → UU i where
 {-# BUILTIN EQUALITY Id  #-}
 ```
 
-In the following definition we give a construction of path induction.
-However, in the development of this library we will mostly use Agda's
-built-in methods to give constructions by path induction.
+## Properties
+
+### The induction principle
+
+Agda's pattern matching machinery allows us to define many operations on the identity type directly. However, sometimes it is useful to explicitly have the induction principle of the identity type.
 
 ```agda
 ind-Id :
@@ -32,10 +36,9 @@ ind-Id :
 ind-Id x B b y refl = b
 ```
 
-## The groupoidal structure of types
+### The groupoidal structure of types
 
-We introduce the groupoidal operations on identity types. The fact that they
-are equivalences is recorded in `equivalences`.
+#### Concatenation of identifications
 
 ```agda
 module _
@@ -50,12 +53,20 @@ module _
 
   concat' : (x : A) {y z : A} → Id y z → Id x y → Id x z
   concat' x q p = p ∙ q
+```
+
+#### Inverting identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   inv : {x y : A} → Id x y → Id y x
   inv refl = refl
 ```
 
-## The groupoidal laws for types
+### The groupoidal laws for types
 
 ```agda
 module _
@@ -81,6 +92,11 @@ module _
   
   inv-inv : {x y : A} (p : Id x y) → Id (inv (inv p)) p
   inv-inv refl = refl
+
+  distributive-inv-concat :
+    {x y : A} (p : Id x y) {z : A} (q : Id y z) →
+    Id (inv (p ∙ q)) ((inv q) ∙ (inv p))
+  distributive-inv-concat refl refl = refl
 ```
 
 ### Concatenation is injective
@@ -99,7 +115,7 @@ module _
   is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
 ```
 
-## The action on paths of functions
+### The action on paths of functions
 
 ```agda
 ap :
@@ -161,7 +177,7 @@ ap-inv :
 ap-inv f refl = refl
 ```
 
-## Transport
+### Transport
 
 We introduce transport. The fact that `tr B p` is an equivalence is recorded in `equivalences`.
 
@@ -192,7 +208,11 @@ refl-path-over B x y = refl
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
+  lift :
+    {x y : A} (p : Id x y) (b : B x) → Id (pair x b) (pair y (tr B p b))
+  lift refl b = refl
+
   tr-concat :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y z : A} (p : Id x y)
     (q : Id y z) (b : B x) → Id (tr B (p ∙ q) b) (tr B q (tr B p b))
@@ -215,16 +235,7 @@ tr-ap :
 tr-ap f g refl z = refl
 ```
 
-## Distributivity of inv over concat
-
-```agda
-distributive-inv-concat :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A}
-  (q : Id y z) → Id (inv (p ∙ q)) ((inv q) ∙ (inv p))
-distributive-inv-concat refl refl = refl
-```
-
-## Transposing inverses
+### Transposing inverses
 
 The fact that `inv-con` and `con-inv` are equivalences is recorded in `equivalences`.
 
@@ -241,16 +252,7 @@ con-inv p refl r =
   ( λ α → α ∙ (inv right-unit)) ∘ (concat (inv right-unit) r)
 ```
 
-## The path lifting property
-
-```agda
-lift :
-  {i j : Level} {A : UU i} {B : A → UU j} {x y : A} (p : Id x y)
-  (b : B x) → Id (pair x b) (pair y (tr B p b))
-lift refl b = refl
-```
-
-## The Mac Lane pentagon for identity types
+### The Mac Lane pentagon for identity types
 
 ```agda
 Mac-Lane-pentagon :
@@ -266,7 +268,7 @@ Mac-Lane-pentagon :
 Mac-Lane-pentagon refl refl refl refl = refl
 ```
 
-## Commuting squares of identifications
+### Commuting squares of identifications
 
 ```agda
 square :

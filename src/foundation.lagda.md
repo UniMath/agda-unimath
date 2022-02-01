@@ -18,6 +18,7 @@ open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
 open import foundation.coproduct-types public
+open import foundation.coslice public
 open import foundation.decidable-equality public
 open import foundation.decidable-maps public
 open import foundation.decidable-types public

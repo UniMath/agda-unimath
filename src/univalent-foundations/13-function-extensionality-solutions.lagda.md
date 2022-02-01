@@ -1390,19 +1390,22 @@ isretr-retraction-comp :
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (retr-g : retr g) →
   ((retraction-comp f g h H retr-g) ∘ (retraction-comp' f g h H retr-g)) ~ id
 isretr-retraction-comp f g h H (pair l L) (pair k K) =
-  eq-htpy-retr h
-    ( pair
-      ( k ·l L)
-      ( ( inv-htpy
-          ( assoc-htpy
-            ( inv-htpy ((k ∘ l) ·l H))
-            ( (k ∘ l) ·l H)
-            ( (k ·l (L ·r h)) ∙h K))) ∙h
-        ( ap-concat-htpy'
-          ( (inv-htpy ((k ∘ l) ·l H)) ∙h ((k ∘ l) ·l H))
-          ( refl-htpy)
-          ( (k ·l (L ·r h)) ∙h K)
-          ( left-inv-htpy ((k ∘ l) ·l H)))))
+  eq-htpy-retr
+    ( ( retraction-comp f g h H (pair l L)
+        ( retraction-comp' f g h H (pair l L)
+          ( pair k K))))
+    ( pair k K)
+    ( k ·l L)
+    ( ( inv-htpy
+        ( assoc-htpy
+          ( inv-htpy ((k ∘ l) ·l H))
+          ( (k ∘ l) ·l H)
+          ( (k ·l (L ·r h)) ∙h K))) ∙h
+      ( ap-concat-htpy'
+        ( (inv-htpy ((k ∘ l) ·l H)) ∙h ((k ∘ l) ·l H))
+        ( refl-htpy)
+        ( (k ·l (L ·r h)) ∙h K)
+        ( left-inv-htpy ((k ∘ l) ·l H))))
   
 sec-right-factor-retract-of-sec-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
