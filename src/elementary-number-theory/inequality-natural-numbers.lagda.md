@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Inequality of natural numbers
 
 ```agda

@@ -11,6 +11,7 @@ open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_)
 open import foundation.homotopies using (_~_; _·r_; _∙h_; refl-htpy)
 open import foundation.identity-types using (Id)
+open import foundation.retractions using (retr)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -71,4 +72,23 @@ module _
     Id h k
   eq-htpy-hom-coslice h k H K =
     map-inv-equiv (extensionality-hom-coslice h k) (pair H K)
+```
+
+### Characterizing the identity type of `retr f`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+  
+  htpy-retr : retr f → retr f → UU (l1 ⊔ l2)
+  htpy-retr = htpy-hom-coslice
+
+  extensionality-retr : (g h : retr f) → Id g h ≃ htpy-retr g h
+  extensionality-retr g h = extensionality-hom-coslice g h
+
+  eq-htpy-retr :
+    ( g h : retr f) (H : pr1 g ~ pr1 h) (K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
+    Id g h
+  eq-htpy-retr g h = eq-htpy-hom-coslice g h 
 ```
