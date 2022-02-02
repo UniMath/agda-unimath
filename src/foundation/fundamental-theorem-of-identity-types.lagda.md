@@ -1,21 +1,25 @@
 # The fundamental theorem of identity types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.fundamental-theorem-of-identity-types where
 
 open import foundation.contractible-types using
   ( is-contr; is-equiv-is-contr; is-contr-total-path; is-contr-is-equiv';
-    is-contr-equiv; is-contr-Σ; is-contr-retract-of)
+    is-contr-equiv; is-contr-Σ; is-contr-retract-of; eq-is-contr;
+    is-contr-equiv'; is-contr-total-path')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-equiv; is-fiberwise-equiv; sec; is-equiv-sec-is-equiv)
+  ( is-equiv; is-fiberwise-equiv; sec; is-equiv-sec-is-equiv; _∘e_; equiv-inv;
+    inv-equiv)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv;
-    tot-comp; tot-htpy; tot-id)
-open import foundation.homotopies using (inv-htpy; _∙h_)
-open import foundation.identity-types using (Id; ind-Id)
+    tot-comp; tot-htpy; tot-id; equiv-tot)
+open import foundation.function-extensionality using
+  ( htpy-eq; funext; equiv-funext)
+open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _∙h_)
+open import foundation.identity-types using (Id; ind-Id; inv; _∙_)
 open import foundation.retractions using (retr)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( interchange-Σ-Σ)
@@ -123,4 +127,28 @@ module _
         pr2 (retr-i x) = pr2 (sec-f x)
         is-fiberwise-equiv-i : is-fiberwise-equiv i
         is-fiberwise-equiv-i = fundamental-theorem-id-retr a i retr-i
+```
+
+### The total space of homotopies is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
+  where
+  
+  abstract
+    is-contr-total-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
+    is-contr-total-htpy =
+      is-contr-equiv'
+        ( Σ ((x : A) → B x) (Id f))
+        ( equiv-tot (λ g → equiv-funext))
+        ( is-contr-total-path f)
+
+  abstract
+    is-contr-total-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
+    is-contr-total-htpy' =
+      is-contr-equiv'
+        ( Σ ((x : A) → B x) (λ g → Id g f))
+        ( equiv-tot (λ g → equiv-funext))
+        ( is-contr-total-path' f)
 ```

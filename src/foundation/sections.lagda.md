@@ -128,6 +128,7 @@ module _
     extensionality-Σ
       ( λ {s'} H' K → H ~ ((f ·l K) ∙h H'))
       ( refl-htpy)
+      ( refl-htpy)
       ( λ s' → equiv-funext)
       ( λ H' → equiv-funext)
 

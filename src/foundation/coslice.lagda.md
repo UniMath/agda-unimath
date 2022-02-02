@@ -61,8 +61,8 @@ module _
   extensionality-hom-coslice (pair h H) =
     extensionality-Σ
       ( λ {h' : A → B} (H' : (h' ∘ f) ~ g) (K : h ~ h') → H ~ ((K ·r f) ∙h H'))
-      { refl-A = refl-htpy}
-      ( refl-htpy {f = H})
+      ( refl-htpy)
+      ( refl-htpy)
       ( λ h' → equiv-funext)
       ( λ H' → equiv-funext)
 

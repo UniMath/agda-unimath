@@ -1,14 +1,15 @@
 # Truncated types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.truncated-types where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-is-equiv; is-contr-Σ'; is-contr-left-factor-prod;
-    is-contr-right-factor-prod; is-contr-retract-of; eq-is-contr)
+    is-contr-right-factor-prod; is-contr-retract-of; eq-is-contr;
+    is-subtype-is-contr; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb-is-equiv; is-emb; _↪_; map-emb; is-emb-map-emb)
@@ -17,6 +18,8 @@ open import foundation.equality-cartesian-product-types using
 open import foundation.equality-dependent-pair-types using (equiv-pair-eq-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
+open import foundation.function-extensionality using (htpy-eq; funext)
+open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap; tr; refl; left-inv)
 open import foundation.retractions using (_retract-of_; retract-eq)
 open import foundation.truncation-levels using
@@ -266,3 +269,118 @@ abstract
       ( retract-eq (pair i retr-i) x y)
       ( is-trunc-B (i x) (i y))
 ```
+
+### Products of families of truncated types are truncated
+
+```agda
+abstract
+  is-trunc-Π :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-trunc k (B x)) → is-trunc k ((x : A) → B x)
+  is-trunc-Π neg-two-𝕋 is-trunc-B = is-contr-Π is-trunc-B
+  is-trunc-Π (succ-𝕋 k) is-trunc-B f g =
+    is-trunc-is-equiv k (f ~ g) htpy-eq
+      ( funext f g)
+      ( is-trunc-Π k (λ x → is-trunc-B x (f x) (g x)))
+
+type-Π-Truncated-Type' :
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
+  UU (l1 ⊔ l2)
+type-Π-Truncated-Type' k A B = (x : A) → type-Truncated-Type (B x)
+
+is-trunc-type-Π-Truncated-Type' :
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
+  is-trunc k (type-Π-Truncated-Type' k A B)
+is-trunc-type-Π-Truncated-Type' k A B =
+  is-trunc-Π k (λ x → is-trunc-type-Truncated-Type (B x))
+
+Π-Truncated-Type' :
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
+  UU-Truncated-Type k (l1 ⊔ l2)
+pr1 (Π-Truncated-Type' k A B) = type-Π-Truncated-Type' k A B
+pr2 (Π-Truncated-Type' k A B) = is-trunc-type-Π-Truncated-Type' k A B
+
+type-Π-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
+  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  UU (l1 ⊔ l2)
+type-Π-Truncated-Type k A B =
+  type-Π-Truncated-Type' k (type-Truncated-Type A) B
+
+is-trunc-type-Π-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
+  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  is-trunc k (type-Π-Truncated-Type k A B)
+is-trunc-type-Π-Truncated-Type k A B =
+  is-trunc-type-Π-Truncated-Type' k (type-Truncated-Type A) B
+
+Π-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
+  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  UU-Truncated-Type k (l1 ⊔ l2)
+Π-Truncated-Type k A B =
+  Π-Truncated-Type' k (type-Truncated-Type A) B
+```
+
+### The type of functions into a truncated type is truncated
+
+```agda
+abstract
+  is-trunc-function-type :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+    is-trunc k B → is-trunc k (A → B)
+  is-trunc-function-type k {A} {B} is-trunc-B =
+    is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
+
+type-hom-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
+  (B : UU-Truncated-Type k l2) → UU (l1 ⊔ l2)
+type-hom-Truncated-Type k A B =
+  type-Truncated-Type A → type-Truncated-Type B
+
+is-trunc-type-hom-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
+  (B : UU-Truncated-Type k l2) →
+  is-trunc k (type-hom-Truncated-Type k A B)
+is-trunc-type-hom-Truncated-Type k A B =
+  is-trunc-function-type k (is-trunc-type-Truncated-Type B)
+
+hom-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
+  (B : UU-Truncated-Type k l2) → UU-Truncated-Type k (l1 ⊔ l2)
+pr1 (hom-Truncated-Type k A B) = type-hom-Truncated-Type k A B
+pr2 (hom-Truncated-Type k A B) = is-trunc-type-hom-Truncated-Type k A B
+```
+
+### Being truncated is a property
+
+```agda
+abstract
+  is-prop-is-trunc :
+    {l : Level} (k : 𝕋) (A : UU l) → is-trunc neg-one-𝕋 (is-trunc k A)
+  is-prop-is-trunc neg-two-𝕋 A = is-subtype-is-contr
+  is-prop-is-trunc (succ-𝕋 k) A =
+    is-trunc-Π neg-one-𝕋
+      ( λ x → is-trunc-Π neg-one-𝕋 (λ y → is-prop-is-trunc k (Id x y)))
+
+is-trunc-Prop : {l : Level} (k : 𝕋) (A : UU l) → Σ (UU l) (is-trunc neg-one-𝕋)
+pr1 (is-trunc-Prop k A) = is-trunc k A
+pr2 (is-trunc-Prop k A) = is-prop-is-trunc k A
+```
+
+### The type of equivalences between truncated types is truncated
+
+-- ```agda
+-- module _
+--   {l1 l2 : Level} {A : UU l1} {B : UU l2}
+--   where
+
+--   is-trunc-equiv-is-trunc :
+--     (k : 𝕋) → is-trunc k A → is-trunc k B → is-trunc k (A ≃ B)
+--   is-trunc-equiv-is-trunc neg-two-𝕋 is-trunc-A is-trunc-B =
+--     is-contr-equiv-is-contr is-trunc-A is-trunc-B
+--   is-trunc-equiv-is-trunc (succ-𝕋 k) is-trunc-A is-trunc-B = 
+--     is-trunc-Σ
+--       ( is-trunc-Π (succ-𝕋 k) (λ x → is-trunc-B))
+--       ( λ x → is-trunc-is-prop k (is-subtype-is-equiv x))
+-- ```

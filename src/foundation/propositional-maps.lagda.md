@@ -1,7 +1,7 @@
 # Propositional maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.propositional-maps where
 

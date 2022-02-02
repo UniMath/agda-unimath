@@ -5,19 +5,13 @@
 
 module foundation.function-extensionality where
 
-open import foundation.contractible-types using
-  ( is-contr; contraction; is-contr-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-fiberwise-equiv; _≃_; map-inv-is-equiv; issec-map-inv-is-equiv;
-    isretr-map-inv-is-equiv; is-equiv; is-equiv-map-inv-is-equiv; _∘e_;
-    equiv-inv; inv-equiv)
+  ( _≃_; is-fiberwise-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
+    isretr-map-inv-is-equiv; is-equiv; is-equiv-map-inv-is-equiv)
 open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id')
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_)
+open import foundation.identity-types using (Id; refl)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -80,41 +74,4 @@ equiv-eq-htpy :
   (f ~ g) ≃ Id f g
 pr1 (equiv-eq-htpy {f = f} {g}) = eq-htpy
 pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
-```
-
-## Properties
-
-### Funext is equivalent to the total space of homotopies being contractible
-
-```agda
-abstract
-  is-contr-total-htpy-FUNEXT :
-    {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) →
-    FUNEXT f → is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
-  is-contr-total-htpy-FUNEXT f funext-f =
-    fundamental-theorem-id' f refl-htpy (λ g → htpy-eq {g = g}) funext-f
-
-abstract
-  is-contr-total-htpy :
-    {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) →
-    is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
-  pr1 (pr1 (is-contr-total-htpy f)) = f
-  pr2 (pr1 (is-contr-total-htpy f)) = refl-htpy
-  pr2 (is-contr-total-htpy f) t =
-    ( inv
-      ( contraction
-        ( is-contr-total-htpy-FUNEXT f (funext f))
-        ( pair f refl-htpy))) ∙
-    ( contraction (is-contr-total-htpy-FUNEXT f (funext f)) t)
-
-abstract
-  is-contr-total-htpy' :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
-  is-contr-total-htpy' {l1} {l2} {A} {B} f =
-    is-contr-equiv
-      ( Σ ((x : A) → B x) (λ g → f ~ g))
-      ( equiv-tot
-        ( λ g → (equiv-funext ∘e equiv-inv g f) ∘e (inv-equiv equiv-funext)))
-      ( is-contr-total-htpy f)
 ```

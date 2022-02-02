@@ -39,6 +39,18 @@ map-dn f = map-neg (map-neg f)
 
 ## Properties
 
+### The double negation of a type is a proposition
+
+```agda
+dn-Prop' :
+  {l : Level} (A : UU l) → UU-Prop l
+dn-Prop' A = neg-Prop' (¬ A)
+
+dn-Prop :
+  {l : Level} (P : UU-Prop l) → UU-Prop l
+dn-Prop P = dn-Prop' (type-Prop P)
+```
+
 ### Double negations of classical laws
 
 ```agda

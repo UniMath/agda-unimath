@@ -1,7 +1,7 @@
 # The unit type
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.unit-type where
 

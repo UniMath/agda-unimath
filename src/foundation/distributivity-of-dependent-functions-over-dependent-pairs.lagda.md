@@ -70,6 +70,7 @@ module _
     extensionality-Σ
       ( λ {f'} g' (H : f ~ f') → (x : A) → Id (tr (C x) (H x) (g x)) (g' x))
       ( refl-htpy)
+      ( refl-htpy)
       ( λ f' → equiv-funext)
       ( λ g' → equiv-funext)
 

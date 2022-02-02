@@ -53,7 +53,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {Eq-A : A → UU l3}
   (Eq-B : {x : A} → B x → Eq-A x → UU l4)
-  {a : A} {b : B a} {refl-A : Eq-A a} (refl-B : Eq-B b refl-A)
+  {a : A} {b : B a} (refl-A : Eq-A a) (refl-B : Eq-B b refl-A)
   where
 
   abstract

@@ -72,3 +72,31 @@ module _
         ( is-contr-total-space-IND-identity-system ind)
         ( f)
 ```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  abstract
+    Ind-htpy-equiv :
+      {l3 : Level} (e : A ≃ B)
+      (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
+      sec ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
+            h e (refl-htpy-equiv e))
+    Ind-htpy-equiv e =
+      Ind-identity-system e
+        ( refl-htpy-equiv e)
+        ( is-contr-total-htpy-equiv e)
+  
+  ind-htpy-equiv :
+    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
+    P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
+  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
+  
+  comp-htpy-equiv :
+    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
+    (p : P e (refl-htpy-equiv e)) →
+    Id (ind-htpy-equiv e P p e (refl-htpy-equiv e)) p
+  comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+```

@@ -1,7 +1,7 @@
 # Empty types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.empty-types where
 
@@ -11,7 +11,8 @@ open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.propositions using (is-prop; UU-Prop; is-trunc-is-prop)
+open import foundation.propositions using
+  ( is-prop; UU-Prop; is-trunc-is-prop; is-prop-function-type)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.truncated-types using
@@ -133,4 +134,15 @@ abstract
   is-trunc-is-empty :
     {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
   is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
+```
+
+### Being empty is a proposition
+
+```agda
+is-prop-is-empty : {l : Level} {A : UU l} → is-prop (is-empty A)
+is-prop-is-empty = is-prop-function-type is-prop-empty
+
+is-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+pr1 (is-empty-Prop A) = is-empty A
+pr2 (is-empty-Prop A) = is-prop-is-empty
 ```

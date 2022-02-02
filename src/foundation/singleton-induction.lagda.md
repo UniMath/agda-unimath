@@ -1,7 +1,7 @@
 # Singleton induction
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.singleton-induction where
 
