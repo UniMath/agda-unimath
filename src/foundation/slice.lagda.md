@@ -13,9 +13,11 @@ open import foundation.equivalences using
 open import foundation.equivalences-on-homotopies using
   ( equiv-concat-htpy)
 open import foundation.function-extensionality using
-  ( equiv-funext; is-contr-total-htpy)
+  ( equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( is-contr-total-htpy)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy)
 open import foundation.identity-types using (Id; refl)

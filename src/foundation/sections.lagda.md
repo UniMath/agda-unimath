@@ -6,7 +6,7 @@
 module foundation.sections where
 
 open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-total-path')
+  ( is-contr; is-contr-equiv; is-contr-total-path'; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
@@ -28,7 +28,6 @@ open import foundation.type-arithmetic-cartesian-product-types using
 open import foundation.type-arithmetic-dependent-pair-types using
   ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.weak-function-extensionality using (is-contr-Π)
 ```
 
 ## Idea

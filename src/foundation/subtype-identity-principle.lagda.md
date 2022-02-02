@@ -12,7 +12,7 @@ open import foundation.equivalences using
   ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
+  ( fundamental-theorem-id; fundamental-theorem-id'; is-contr-total-htpy)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.propositions using
@@ -106,49 +106,4 @@ module _
       ( map-extensionality-subtype f)
       ( λ x → is-equiv-map-equiv (f x))
       ( z)
-```
-
-### Characterizing the identity type of equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
-  htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
-
-  refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
-  refl-htpy-equiv e = refl-htpy
-
-  htpy-eq-equiv : {e e' : A ≃ B} (p : Id e e') → htpy-equiv e e'
-  htpy-eq-equiv {e = e} {.e} refl =
-    refl-htpy-equiv e
-
-  abstract
-    is-contr-total-htpy-equiv :
-      (e : A ≃ B) → is-contr (Σ (A ≃ B) (λ e' → htpy-equiv e e'))
-    is-contr-total-htpy-equiv (pair f is-equiv-f) =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-htpy f)
-        ( is-subtype-is-equiv)
-        ( f)
-        ( refl-htpy)
-        ( is-equiv-f)
-
-  is-equiv-htpy-eq-equiv :
-    (e e' : A ≃ B) → is-equiv (htpy-eq-equiv {e = e} {e'})
-  is-equiv-htpy-eq-equiv e =
-    fundamental-theorem-id e
-      ( refl-htpy-equiv e)
-      ( is-contr-total-htpy-equiv e)
-      ( λ e' → htpy-eq-equiv {e = e} {e'})
-
-  equiv-htpy-eq-equiv :
-    (e e' : A ≃ B) → Id e e' ≃ (htpy-equiv e e')
-  pr1 (equiv-htpy-eq-equiv e e') = htpy-eq-equiv
-  pr2 (equiv-htpy-eq-equiv e e') = is-equiv-htpy-eq-equiv e e'
-
-  eq-htpy-equiv : {e e' : A ≃ B} → ( htpy-equiv e e') → Id e e'
-  eq-htpy-equiv {e = e} {e'} = map-inv-is-equiv (is-equiv-htpy-eq-equiv e e')
 ```

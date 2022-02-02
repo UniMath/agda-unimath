@@ -25,13 +25,13 @@ open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.coslice
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
@@ -40,8 +40,9 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
-open import foundation.equivalences
 open import foundation.equivalences-on-homotopies
+open import foundation.equivalences-with-function-extensionality
+open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps

@@ -84,27 +84,3 @@ abstract
           ( λ x → is-contr-total-path (f x))))
       ( λ g → htpy-eq {g = g})
 ```
-
-### Products of families of contractible types are contractible
-
-Since we assumed function extensionality, we can conclude weak function extensionality.
-
-```agda
-abstract
-  is-contr-Π :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
-  is-contr-Π {A = A} {B = B} = WEAK-FUNEXT-FUNEXT (λ X Y → funext) A B
-
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-contr-equiv-is-contr :
-    is-contr A → is-contr B → is-contr (A ≃ B)
-  pr1 (is-contr-equiv-is-contr is-contr-A is-contr-B) =
-    equiv-is-contr is-contr-A is-contr-B
-  pr2 (is-contr-equiv-is-contr is-contr-A is-contr-B) e =
-    eq-htpy-equiv (λ x → eq-is-contr is-contr-B)
-```

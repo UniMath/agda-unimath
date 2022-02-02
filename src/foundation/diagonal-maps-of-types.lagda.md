@@ -1,7 +1,7 @@
 # Diagonal maps of types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.diagonal-maps-of-types where
 

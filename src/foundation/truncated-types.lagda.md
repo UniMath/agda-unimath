@@ -9,7 +9,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-is-equiv; is-contr-Σ'; is-contr-left-factor-prod;
     is-contr-right-factor-prod; is-contr-retract-of; eq-is-contr;
-    is-subtype-is-contr; is-contr-Π)
+    is-subtype-is-contr; is-contr-Π; is-contr-equiv-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb-is-equiv; is-emb; _↪_; map-emb; is-emb-map-emb)
@@ -18,6 +18,8 @@ open import foundation.equality-cartesian-product-types using
 open import foundation.equality-dependent-pair-types using (equiv-pair-eq-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
+open import foundation.equivalences-with-function-extensionality using
+  ( is-subtype-is-equiv)
 open import foundation.function-extensionality using (htpy-eq; funext)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap; tr; refl; left-inv)
@@ -82,12 +84,23 @@ pr2 (truncated-type-succ-Truncated-Type k A) =
 ### Contractible types are k-truncated for any k.
 
 ```agda
-abstract
-  is-trunc-is-contr :
-    {l : Level} (k : 𝕋) {A : UU l} → is-contr A → is-trunc k A
-  is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
-  is-trunc-is-contr (succ-𝕋 k) is-contr-A =
-    is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-trunc-is-contr : (k : 𝕋) → is-contr A → is-trunc k A
+    is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
+    is-trunc-is-contr (succ-𝕋 k) is-contr-A =
+      is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
+
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-trunc-is-prop : (k : 𝕋) → is-trunc neg-one-𝕋 A → is-trunc (succ-𝕋 k) A
+    is-trunc-is-prop k H x y = is-trunc-is-contr k (H x y)
 ```
 
 ### The identity type of a k-truncated type is k-truncated
@@ -370,17 +383,17 @@ pr2 (is-trunc-Prop k A) = is-prop-is-trunc k A
 
 ### The type of equivalences between truncated types is truncated
 
--- ```agda
--- module _
---   {l1 l2 : Level} {A : UU l1} {B : UU l2}
---   where
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
---   is-trunc-equiv-is-trunc :
---     (k : 𝕋) → is-trunc k A → is-trunc k B → is-trunc k (A ≃ B)
---   is-trunc-equiv-is-trunc neg-two-𝕋 is-trunc-A is-trunc-B =
---     is-contr-equiv-is-contr is-trunc-A is-trunc-B
---   is-trunc-equiv-is-trunc (succ-𝕋 k) is-trunc-A is-trunc-B = 
---     is-trunc-Σ
---       ( is-trunc-Π (succ-𝕋 k) (λ x → is-trunc-B))
---       ( λ x → is-trunc-is-prop k (is-subtype-is-equiv x))
--- ```
+  is-trunc-equiv-is-trunc :
+    (k : 𝕋) → is-trunc k A → is-trunc k B → is-trunc k (A ≃ B)
+  is-trunc-equiv-is-trunc neg-two-𝕋 is-trunc-A is-trunc-B =
+    is-contr-equiv-is-contr is-trunc-A is-trunc-B
+  is-trunc-equiv-is-trunc (succ-𝕋 k) is-trunc-A is-trunc-B = 
+    is-trunc-Σ
+      ( is-trunc-Π (succ-𝕋 k) (λ x → is-trunc-B))
+      ( λ x → is-trunc-is-prop k (is-subtype-is-equiv x))
+```

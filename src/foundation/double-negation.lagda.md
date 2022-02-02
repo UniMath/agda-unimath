@@ -1,7 +1,7 @@
 # Double negation
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.double-negation where
 
@@ -10,7 +10,9 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
-open import foundation.negation using (¬; map-neg)
+open import foundation.negation using (¬; map-neg; neg-Prop')
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU)
 ```
 

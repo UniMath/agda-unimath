@@ -1,18 +1,17 @@
 # Identity systems
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.identity-systems where
 
 open import foundation.contractible-types using
-  ( is-contr; eq-is-contr; eq-is-contr')
+  ( is-contr; eq-is-contr; eq-is-contr'; is-prop-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; fam-Σ)
-open import foundation.equivalences using (sec; is-equiv)
+open import foundation.equivalences using (sec; is-equiv; _≃_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (tr; ap; refl; Id)
-open import foundation.propositions using (is-prop-is-contr)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
@@ -71,32 +70,4 @@ module _
       fundamental-theorem-id a b
         ( is-contr-total-space-IND-identity-system ind)
         ( f)
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-  
-  abstract
-    Ind-htpy-equiv :
-      {l3 : Level} (e : A ≃ B)
-      (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-      sec ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
-            h e (refl-htpy-equiv e))
-    Ind-htpy-equiv e =
-      Ind-identity-system e
-        ( refl-htpy-equiv e)
-        ( is-contr-total-htpy-equiv e)
-  
-  ind-htpy-equiv :
-    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-    P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
-  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
-  
-  comp-htpy-equiv :
-    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
-    (p : P e (refl-htpy-equiv e)) →
-    Id (ind-htpy-equiv e P p e (refl-htpy-equiv e)) p
-  comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```

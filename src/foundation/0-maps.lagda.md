@@ -1,7 +1,7 @@
 # 0-Maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.0-maps where
 

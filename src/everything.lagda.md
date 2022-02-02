@@ -83,6 +83,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
 open import foundation.equivalences-on-homotopies
+open import foundation.equivalences-with-function-extensionality
 open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions

@@ -6,7 +6,7 @@
 module foundation.equality-dependent-function-types where
 
 open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-total-path)
+  ( is-contr; is-contr-equiv'; is-contr-total-path; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
@@ -18,7 +18,6 @@ open import foundation.identity-types using (Id; tr; refl)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.weak-function-extensionality using (is-contr-Π)
 ```
 
 ```agda

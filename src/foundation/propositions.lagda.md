@@ -7,7 +7,7 @@ module foundation.propositions where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
-  ( is-contr; is-contr-is-equiv; is-contr-equiv'; is-contr-Σ')
+  ( is-contr; is-contr-is-equiv; is-contr-equiv'; is-contr-Σ'; is-prop-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
   ( Eq-Σ; equiv-eq-pair-Σ)
@@ -58,14 +58,6 @@ We prove here only that any contractible type is a proposition. The fact that th
 ```md
 foundation.empty-types
 foundation.unit-type
-```
-
-### Any contractible type is a proposition
-
-```agda
-abstract
-  is-prop-is-contr : {l : Level} {A : UU l} → is-contr A → is-prop A
-  is-prop-is-contr = is-trunc-Id
 ```
 
 ## Properties

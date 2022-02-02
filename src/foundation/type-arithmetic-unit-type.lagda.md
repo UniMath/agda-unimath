@@ -1,7 +1,7 @@
 # Type arithmetic with the unit type
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.type-arithmetic-unit-type where
 

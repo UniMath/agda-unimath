@@ -1,7 +1,7 @@
 # Path-split maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.path-split-maps where
 
