@@ -207,15 +207,3 @@ nat-htpy :
 nat-htpy H refl = right-unit
 ```
 
-### A coherence for homotopies to an identity map
-
-```agda
-coh-is-coherently-invertible-id :
-  {i : Level} {A : UU i} {f : A → A} (H : f ~ (λ x → x)) →
-  (x : A) → Id (H (f x)) (ap f (H x))
-coh-is-coherently-invertible-id {_} {A} {f} H x =
-  is-injective-concat' (H x)
-    ( ( ap (concat (H (f x)) x) (inv (ap-id (H x)))) ∙
-      ( nat-htpy H (H x)))
-```
-

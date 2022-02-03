@@ -7,16 +7,17 @@ module foundation.equivalences where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coherently-invertible-maps using
-  ( is-coherently-invertible)
+  ( has-inverse; is-coherently-invertible; is-coherently-invertible-has-inverse;
+    issec-inv-has-inverse; isretr-inv-has-inverse; coherence-inv-has-inverse)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.function-extensionality using ()
 open import foundation.functions using (id; _∘_)
+open import foundation.foundation-base using ([is-equiv]; _[≃]_; [sec])
 open import foundation.homotopies using
-  ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; coh-is-coherently-invertible-id;
-    nat-htpy; htpy-right-whisk)
+  ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; htpy-right-whisk)
 open import foundation.identity-types using
   ( Id; refl; concat; concat'; _∙_; inv; ap; tr; inv-inv; inv-con; con-inv;
-    right-unit; sq-top-whisk; ap-comp)
+    right-unit)
 open import foundation.retractions using (retr)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -27,22 +28,19 @@ An equivalence is a map that has a section and a (separate) retraction. This may
 
 ## Definition
 
-### Ordinary equivalences
+### Equivalences
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
   
-  sec : (f : A → B) → UU (l1 ⊔ l2)
-  sec f = Σ (B → A) (λ g → (f ∘ g) ~ id)
-
   is-equiv : (A → B) → UU (l1 ⊔ l2)
-  is-equiv f = sec f × retr f
+  is-equiv = [is-equiv]
 
 _≃_ :
   {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
-A ≃ B = Σ (A → B) (λ f → is-equiv f)
+A ≃ B = A [≃] B
 ```
 
 ### Families of equivalences
@@ -94,13 +92,6 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  has-inverse : (A → B) → UU (l1 ⊔ l2)
-  has-inverse f = Σ (B → A) (λ g → ((f ∘ g) ~ id) × ((g ∘ f) ~ id))
-
-module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
@@ -132,65 +123,15 @@ module _
   where
 
   abstract
+    is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
+    is-coherently-invertible-is-equiv =
+      is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
+
+  abstract
     is-equiv-is-coherently-invertible :
       is-coherently-invertible f → is-equiv f
     is-equiv-is-coherently-invertible (pair g (pair G (pair H K))) =
       is-equiv-has-inverse g G H
-```
-
-### Invertible maps are coherenctly invertible
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  where
-  
-  inv-has-inverse : has-inverse f → B → A
-  inv-has-inverse H = pr1 H
-
-  abstract
-    issec-inv-has-inverse : (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
-    issec-inv-has-inverse H y =
-      ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
-      ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
-  
-    isretr-inv-has-inverse : (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
-    isretr-inv-has-inverse H = pr2 (pr2 H)
-  
-    coherence-inv-has-inverse :
-      (H : has-inverse f) →
-      (issec-inv-has-inverse H ·r f) ~ (f ·l isretr-inv-has-inverse H)
-    coherence-inv-has-inverse H x =
-      inv
-        ( inv-con
-          ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
-          ( ap f (pr2 (pr2 H) x))
-          ( ( ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙
-            ( pr1 (pr2 H) (f x)))
-          ( sq-top-whisk
-            ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
-            ( ap f (pr2 (pr2 H) x))
-            ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
-            ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
-              ( inv
-                ( ap (ap f) (coh-is-coherently-invertible-id (pr2 (pr2 H)) x))))
-            ( pr1 (pr2 H) (f x))
-            ( nat-htpy (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
-
-  abstract
-    is-coherently-invertible-has-inverse :
-      (H : has-inverse f) → is-coherently-invertible f
-    pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
-    pr1 (pr2 (is-coherently-invertible-has-inverse H)) = issec-inv-has-inverse H
-    pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      isretr-inv-has-inverse H
-    pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      coherence-inv-has-inverse H
-
-  abstract
-    is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
-    is-coherently-invertible-is-equiv =
-      is-coherently-invertible-has-inverse ∘ has-inverse-is-equiv
 ```
 
 ### Structure obtained from being coherently invertible
@@ -305,14 +246,14 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  triangle-section : (S : sec h) → g ~ (f ∘ (pr1 S))
+  triangle-section : (S : [sec] h) → g ~ (f ∘ (pr1 S))
   triangle-section (pair s issec) = inv-htpy ((H ·r s) ∙h (g ·l issec))
 
-  section-comp : sec h → sec f → sec g
+  section-comp : [sec] h → [sec] f → [sec] g
   pr1 (section-comp sec-h sec-f) = h ∘ (pr1 sec-f)
   pr2 (section-comp sec-h sec-f) = (inv-htpy (H ·r (pr1 sec-f))) ∙h (pr2 sec-f)
   
-  section-comp' : sec h → sec g → sec f
+  section-comp' : [sec] h → [sec] g → [sec] f
   pr1 (section-comp' sec-h sec-g) = (pr1 sec-h) ∘ (pr1 sec-g)
   pr2 (section-comp' sec-h sec-g) =
     ( H ·r ((pr1 sec-h) ∘ (pr1 sec-g))) ∙h
@@ -452,7 +393,8 @@ module _
   where
 
   abstract
-    is-equiv-sec-is-equiv : (sec-f : sec f) → is-equiv (pr1 sec-f) → is-equiv f
+    is-equiv-sec-is-equiv :
+      ( sec-f : [sec] f) → is-equiv (pr1 sec-f) → is-equiv f
     is-equiv-sec-is-equiv (pair g issec-g) is-equiv-sec-f =
       is-equiv-htpy h
         ( ( f ·l (inv-htpy (issec-map-inv-is-equiv is-equiv-sec-f))) ∙h
