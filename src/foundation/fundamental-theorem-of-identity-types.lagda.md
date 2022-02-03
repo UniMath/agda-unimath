@@ -11,8 +11,9 @@ open import foundation.contractible-types using
     is-contr-equiv'; is-contr-total-path')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-equiv; is-fiberwise-equiv; sec; is-equiv-sec-is-equiv; _∘e_; equiv-inv;
+  ( is-equiv; is-fiberwise-equiv; is-equiv-sec-is-equiv; _∘e_; equiv-inv;
     inv-equiv)
+open import foundation.foundation-base using ([sec])
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv;
     tot-comp; tot-htpy; tot-id; equiv-tot)
@@ -115,7 +116,7 @@ module _
 
   abstract
     fundamental-theorem-id-sec :
-      (f : (x : A) → Id a x → B x) → ((x : A) → sec (f x)) →
+      (f : (x : A) → Id a x → B x) → ((x : A) → [sec] (f x)) →
       is-fiberwise-equiv f
     fundamental-theorem-id-sec f sec-f x =
       is-equiv-sec-is-equiv (f x) (sec-f x) (is-fiberwise-equiv-i x)

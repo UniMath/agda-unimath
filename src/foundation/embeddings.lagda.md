@@ -12,11 +12,12 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; equiv-inv; map-equiv; is-equiv-map-equiv;
-    id-equiv; map-inv-equiv; inv-equiv; _∘e_; equiv-concat'; sec;
+    id-equiv; map-inv-equiv; inv-equiv; _∘e_; equiv-concat';
     issec-map-inv-equiv; is-equiv-top-is-equiv-left-square; is-equiv-concat;
     is-equiv-concat'; is-equiv-comp; is-equiv-right-factor; triangle-section;
     issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-equiv-left-factor)
 open import foundation.fibers-of-maps using (fib)
+open import foundation.foundation-base using ([sec])
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
@@ -330,7 +331,7 @@ module _
   
   abstract
     is-emb-sec-ap :
-      ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
+      ((x y : A) → [sec] (ap f {x = x} {y = y})) → is-emb f
     is-emb-sec-ap sec-ap-f x y =
       fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
 ```

@@ -1,7 +1,7 @@
 # Fibers of maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.fibers-of-maps where
 

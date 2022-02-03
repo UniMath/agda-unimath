@@ -7,7 +7,7 @@ module foundation.singleton-induction where
 
 open import foundation.contractible-types using (is-contr; contraction)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.equivalences using (sec)
+open import foundation.foundation-base using ([sec])
 open import foundation.functions using (ev-pt; _∘_; id)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using
@@ -24,7 +24,7 @@ Singleton induction on a type `A` equipped with a point `a : A` is a principle a
 ```agda
 is-singleton :
   (l : Level) {i : Level} (A : UU i) → A → UU (lsuc l ⊔ i)
-is-singleton l A a = (B : A → UU l) → sec (ev-pt a B)
+is-singleton l A a = (B : A → UU l) → [sec] (ev-pt a B)
 
 ind-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) →

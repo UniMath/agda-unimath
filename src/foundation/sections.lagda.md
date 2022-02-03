@@ -14,6 +14,7 @@ open import
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
     sec; _∘e_; id-equiv; map-inv-equiv)
+open import foundation.foundation-base using ([sec])
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
@@ -37,6 +38,13 @@ Any dependent function induces a section of the projection map
 ## Definition
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  sec : (A → B) → UU (l1 ⊔ l2)
+  sec f = [sec] f
+  
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
