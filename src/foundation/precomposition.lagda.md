@@ -7,7 +7,6 @@ module foundation.precomposition where
 
 open import foundation.coherently-invertible-maps using
   ( is-coherently-invertible)
-open import foundation.constant-maps using (const)
 open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using (center; eq-is-contr')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -16,19 +15,16 @@ open import foundation.equivalences using
     map-inv-is-equiv; issec-map-inv-is-equiv)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.functions using (id; _∘_)
+open import foundation.foundation-base using
+  ( [is-trunc]; [UU-Truncated-Type]; [type-Truncated-Type]; [is-prop];
+    [UU-Prop]; [type-Prop]; [is-set]; [UU-Set]; [type-Set])
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; tr; ap; _∙_; apd)
 open import foundation.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
-open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation.sets using (UU-Set; type-Set; is-set-type-Set; is-set)
-open import foundation.truncated-types using
-  ( UU-Truncated-Type; type-Truncated-Type; is-trunc-type-Truncated-Type;
-    is-trunc)
 open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; lzero)
+-- open import foundation.unit-type using (unit; star)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea
@@ -183,44 +179,48 @@ abstract
 Now we prove the usual statement, without the subuniverse
 
 ```agda
-abstract
-  is-equiv-is-equiv-precomp :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    ((l : Level) (C : UU l) → is-equiv (precomp f C)) → is-equiv f
-  is-equiv-is-equiv-precomp {A = A} {B = B} f is-equiv-precomp-f =
-    is-equiv-is-equiv-precomp-subuniverse
-      ( const Level Level lzero)
-      ( λ l X → unit)
-      ( pair A star)
-      ( pair B star)
-      ( f)
-      ( λ l C → is-equiv-precomp-f l (pr1 C))
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  abstract
+    is-equiv-is-equiv-precomp :
+      (f : A → B) → ((l : Level) (C : UU l) → is-equiv (precomp f C)) →
+      is-equiv f
+    is-equiv-is-equiv-precomp f is-equiv-precomp-f =
+      is-equiv-is-equiv-precomp-subuniverse
+        ( λ l → l1 ⊔ l2)
+        ( λ l X → A → B)
+        ( pair A f)
+        ( pair B f)
+        ( f)
+        ( λ l C → is-equiv-precomp-f l (pr1 C))
 ```
 
 ```agda
 is-equiv-is-equiv-precomp-Prop :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
-  (f : type-Prop P → type-Prop Q) →
-  ({l : Level} (R : UU-Prop l) → is-equiv (precomp f (type-Prop R))) →
+  {l1 l2 : Level} (P : [UU-Prop] l1) (Q : [UU-Prop] l2)
+  (f : [type-Prop] P → [type-Prop] Q) →
+  ({l : Level} (R : [UU-Prop] l) → is-equiv (precomp f ([type-Prop] R))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Prop P Q f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-prop) P Q f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse id (λ l → [is-prop]) P Q f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
-  (f : type-Set A → type-Set B) →
-  ({l : Level} (C : UU-Set l) → is-equiv (precomp f (type-Set C))) →
+  {l1 l2 : Level} (A : [UU-Set] l1) (B : [UU-Set] l2)
+  (f : [type-Set] A → [type-Set] B) →
+  ({l : Level} (C : [UU-Set] l) → is-equiv (precomp f ([type-Set] C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Set A B f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-set) A B f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse id (λ l → [is-set]) A B f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋)
-  (A : UU-Truncated-Type k l1) (B : UU-Truncated-Type k l2)
-  (f : type-Truncated-Type A → type-Truncated-Type B) →
-  ({l : Level} (C : UU-Truncated-Type k l) → is-equiv (precomp f (pr1 C))) →
+  (A : [UU-Truncated-Type] l1 k) (B : [UU-Truncated-Type] l2 k)
+  (f : [type-Truncated-Type] A → [type-Truncated-Type] B) →
+  ({l : Level} (C : [UU-Truncated-Type] l k) → is-equiv (precomp f (pr1 C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Truncated-Type k A B f H =
-    is-equiv-is-equiv-precomp-subuniverse id (λ l → is-trunc k) A B f
+    is-equiv-is-equiv-precomp-subuniverse id (λ l → [is-trunc] k) A B f
       ( λ l → H {l})
 ```

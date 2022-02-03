@@ -1,7 +1,7 @@
 # Raising universe levels
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.raising-universe-levels where
 

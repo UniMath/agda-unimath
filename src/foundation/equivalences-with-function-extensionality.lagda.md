@@ -15,8 +15,9 @@ open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( distributive-Π-Σ)
 open import foundation.equivalences using
-  ( is-equiv; sec; _≃_; map-equiv; map-inv-is-equiv)
+  ( is-equiv; _≃_; map-equiv; map-inv-is-equiv)
 open import foundation.fibers-of-maps using (fib)
+open import foundation.foundation-base using ([sec])
 open import foundation.function-extensionality using (htpy-eq; funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
@@ -45,7 +46,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-sec-is-equiv : {f : A → B} → is-equiv f → is-contr (sec f)
+  is-contr-sec-is-equiv : {f : A → B} → is-equiv f → is-contr ([sec] f)
   is-contr-sec-is-equiv {f} is-equiv-f =
     is-contr-equiv'
       ( (b : B) → fib f b)

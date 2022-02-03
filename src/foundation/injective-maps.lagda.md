@@ -9,7 +9,8 @@ open import foundation.dependent-pair-types using (pair)
 open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation.equivalences using
   ( is-equiv; isretr-map-inv-is-equiv; map-inv-is-equiv; _≃_; map-equiv;
-    map-inv-equiv; is-equiv-map-inv-equiv; sec; is-equiv-has-inverse)
+    map-inv-equiv; is-equiv-map-inv-equiv; is-equiv-has-inverse)
+open import foundation.foundation-base using ([sec])
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.propositional-maps using (is-prop-map; is-prop-map-is-emb)
@@ -105,7 +106,7 @@ module _
     is-injective-map-inv-equiv e =
       is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
-  is-equiv-is-injective : {f : A → B} → sec f → is-injective f → is-equiv f
+  is-equiv-is-injective : {f : A → B} → [sec] f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =
     is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```

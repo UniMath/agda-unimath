@@ -11,10 +11,12 @@ open import foundation.coherently-invertible-maps using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb-is-equiv; is-emb)
 open import foundation.equivalences using
-  ( sec; is-equiv; is-equiv-has-inverse; is-equiv-is-coherently-invertible)
+  ( is-equiv; is-equiv-has-inverse; is-equiv-is-coherently-invertible)
+open import foundation.foundation-base using ([sec])
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-sec)
+open import foundation.foundation-base using ([sec])
 open import foundation.identity-types using (ap; inv)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -31,7 +33,7 @@ module _
   where
 
   is-path-split : UU (l1 ⊔ l2)
-  is-path-split = sec f × ((x y : A) → sec (ap f {x = x} {y = y}))
+  is-path-split = [sec] f × ((x y : A) → [sec] (ap f {x = x} {y = y}))
 ```
 
 ## Properties

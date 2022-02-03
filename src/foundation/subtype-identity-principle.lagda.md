@@ -10,13 +10,14 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
+open import foundation.foundation-base using
+  ( [is-prop]; [is-proof-irrelevant-is-prop]; [UU-Prop]; [type-Prop];
+    [is-prop-type-Prop])
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id'; is-contr-total-htpy)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.type-arithmetic-cartesian-product-types using
   ( equiv-right-swap-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -40,7 +41,7 @@ module _
   abstract
     is-contr-total-Eq-subtype :
       {l3 : Level} {P : A → UU l3} →
-      is-contr (Σ A B) → ((x : A) → is-prop (P x)) →
+      is-contr (Σ A B) → ((x : A) → [is-prop] (P x)) →
       (a : A) (b : B a) (p : P a) →
       is-contr (Σ (Σ A P) (λ t → B (pr1 t)))
     is-contr-total-Eq-subtype {l3} {P}
@@ -53,7 +54,7 @@ module _
           ( left-unit-law-Σ-is-contr
             ( is-contr-AB)
             ( pair a b))
-          ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
+          ( [is-proof-irrelevant-is-prop] (is-subtype-P a) p))
 ```
 
 ## Theorem
@@ -63,7 +64,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2}
-  (is-prop-P : (x : A) → is-prop (P x)) {Eq-A : A → UU l3}
+  (is-prop-P : (x : A) → [is-prop] (P x)) {Eq-A : A → UU l3}
   {a : A} (p : P a) (refl-A : Eq-A a)
   where
 
@@ -85,22 +86,22 @@ module _
         ( h)
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (P : A → UU-Prop l2) {Eq-A : A → UU l3}
-  {a : A} (p : type-Prop (P a)) (refl-A : Eq-A a)
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → [UU-Prop] l2) {Eq-A : A → UU l3}
+  {a : A} (p : [type-Prop] (P a)) (refl-A : Eq-A a)
   where
 
   map-extensionality-subtype :
     (f : (x : A) → Id a x ≃ Eq-A x) →
-    (z : Σ A (type-Prop ∘ P)) → Id (pair a p) z → Eq-A (pr1 z)
+    (z : Σ A ([type-Prop] ∘ P)) → Id (pair a p) z → Eq-A (pr1 z)
   map-extensionality-subtype f .(pair a p) refl = refl-A
 
   extensionality-subtype :
     (f : (x : A) → Id a x ≃ Eq-A x) →
-    (z : Σ A (type-Prop ∘ P)) → Id (pair a p) z ≃ Eq-A (pr1 z)
+    (z : Σ A ([type-Prop] ∘ P)) → Id (pair a p) z ≃ Eq-A (pr1 z)
   pr1 (extensionality-subtype f z) = map-extensionality-subtype f z
   pr2 (extensionality-subtype f z) =
     subtype-identity-principle
-      ( λ x → is-prop-type-Prop (P x))
+      ( λ x → [is-prop-type-Prop] (P x))
       ( p)
       ( refl-A)
       ( map-extensionality-subtype f)

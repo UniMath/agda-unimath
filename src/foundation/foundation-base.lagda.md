@@ -11,7 +11,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (Id; refl; inv; ap; _∙_)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
 ## Idea
@@ -86,4 +86,31 @@ module _
 
   [is-set] : UU l → UU l
   [is-set] = [is-trunc] zero-𝕋
+
+[UU-Truncated-Type] : (l : Level) (k : 𝕋) → UU (lsuc l)
+[UU-Truncated-Type] l k = Σ (UU l) ([is-trunc] k)
+
+[type-Truncated-Type] : {l : Level} {k : 𝕋} → [UU-Truncated-Type] l k → UU l
+[type-Truncated-Type] = pr1
+
+[UU-Set] : (l : Level) → UU (lsuc l)
+[UU-Set] l = [UU-Truncated-Type] l zero-𝕋
+
+[type-Set] : {l : Level} → [UU-Set] l → UU l
+[type-Set] = [type-Truncated-Type]
+
+[UU-Prop] : (l : Level) → UU (lsuc l)
+[UU-Prop] l = [UU-Truncated-Type] l neg-one-𝕋
+
+[type-Prop] : {l : Level} → [UU-Prop] l → UU l
+[type-Prop] = [type-Truncated-Type]
+
+[is-prop-type-Prop] :
+  {l : Level} (P : [UU-Prop] l) → [is-prop] ([type-Prop] P)
+[is-prop-type-Prop] = pr2
+
+[is-proof-irrelevant-is-prop] :
+  {l : Level} {A : UU l} → [is-prop] A → (x : A) → [is-contr] A
+pr1 ([is-proof-irrelevant-is-prop] H x) = x
+pr2 ([is-proof-irrelevant-is-prop] H x) y = pr1 (H x y)
 ```
