@@ -5,6 +5,7 @@
 
 module foundation.coherently-invertible-maps where
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_; _·r_; _·l_)
@@ -21,19 +22,19 @@ A coherently invertible map `f : A → B` is a map equipped with a two-sided inv
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
   
   coherence-is-coherently-invertible :
-    (g : B → A) (G : (f ∘ g) ~ id) (H : (g ∘ f) ~ id) → UU (l1 ⊔ l2)
-  coherence-is-coherently-invertible g G H = (G ·r f) ~ (f ·l H)
+    (f : A → B) (g : B → A) (G : (f ∘ g) ~ id) (H : (g ∘ f) ~ id) → UU (l1 ⊔ l2)
+  coherence-is-coherently-invertible f g G H = (G ·r f) ~ (f ·l H)
 
-  is-coherently-invertible : UU (l1 ⊔ l2)
-  is-coherently-invertible =
+  is-coherently-invertible : (A → B) → UU (l1 ⊔ l2)
+  is-coherently-invertible f =
     Σ ( B → A)
       ( λ g → Σ ((f ∘ g) ~ id)
         ( λ G → Σ ((g ∘ f) ~ id)
-          (λ H → coherence-is-coherently-invertible g G H)))
+          (λ H → coherence-is-coherently-invertible f g G H)))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}

@@ -1,7 +1,7 @@
 # Equivalences
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.equivalences where
 
@@ -9,6 +9,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.function-extensionality using ()
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _∙h_; inv-htpy; _·r_; _·l_; coh-is-coherently-invertible-id;

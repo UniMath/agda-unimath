@@ -5,7 +5,6 @@
 
 module foundation.homotopies where
 
-open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
     right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
@@ -112,14 +111,14 @@ right-inv-htpy H x = right-inv (H x)
 ```agda
 htpy-left-whisk :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
-  (h : B → C) {f g : A → B} → (f ~ g) → ((h ∘ f) ~ (h ∘ g))
+  (h : B → C) {f g : A → B} → (f ~ g) → ((λ x → h (f x)) ~ (λ x → h (g x)))
 htpy-left-whisk h H x = ap h (H x)
 
 _·l_ = htpy-left-whisk
 
 htpy-right-whisk :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
-  {g h : B → C} (H : g ~ h) (f : A → B) → ((g ∘ f) ~ (h ∘ f))
+  {g h : B → C} (H : g ~ h) (f : A → B) → ((λ x → g (f x)) ~ (λ x → h (f x)))
 htpy-right-whisk H f x = H (f x)
 
 _·r_ = htpy-right-whisk
@@ -212,7 +211,7 @@ nat-htpy H refl = right-unit
 
 ```agda
 coh-is-coherently-invertible-id :
-  {i : Level} {A : UU i} {f : A → A} (H : f ~ id) →
+  {i : Level} {A : UU i} {f : A → A} (H : f ~ (λ x → x)) →
   (x : A) → Id (H (f x)) (ap f (H x))
 coh-is-coherently-invertible-id {_} {A} {f} H x =
   is-injective-concat' (H x)

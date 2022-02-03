@@ -12,8 +12,7 @@ open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-comp'; _≃_; map-inv-is-equiv;
     is-equiv-map-inv-is-equiv; is-equiv-has-inverse; isretr-map-inv-is-equiv)
-open import foundation.function-extensionality using
-  ( FUNEXT; funext)
+open import foundation.function-extensionality using (funext)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using

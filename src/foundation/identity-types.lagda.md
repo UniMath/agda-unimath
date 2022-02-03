@@ -6,7 +6,6 @@
 module foundation.identity-types where
 
 open import foundation.dependent-pair-types using (Σ; pair)
-open import foundation.functions using (id; _∘_)
 open import foundation.universe-levels using (UU; Level)
 ```
 
@@ -124,12 +123,12 @@ ap :
 ap f refl = refl
 
 ap-id :
-  {i : Level} {A : UU i} {x y : A} (p : Id x y) → Id (ap id p) p
+  {i : Level} {A : UU i} {x y : A} (p : Id x y) → Id (ap (λ x → x) p) p
 ap-id refl = refl
 
 ap-comp :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k} (g : B → C)
-  (f : A → B) {x y : A} (p : Id x y) → Id (ap (g ∘ f) p) (ap g (ap f p))
+  (f : A → B) {x y : A} (p : Id x y) → Id (ap (λ x → g (f x)) p) (ap g (ap f p))
 ap-comp g f refl = refl
 
 ap-binary :
@@ -243,13 +242,12 @@ The fact that `inv-con` and `con-inv` are equivalences is recorded in `equivalen
 inv-con :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A} (q : Id y z)
   (r : Id x z) → (Id (p ∙ q) r) → Id q ((inv p) ∙ r)
-inv-con refl q r = id 
+inv-con refl q r s = s 
 
 con-inv :
   {i : Level} {A : UU i} {x y : A} (p : Id x y) {z : A} (q : Id y z)
   (r : Id x z) → (Id (p ∙ q) r) → Id p (r ∙ (inv q))
-con-inv p refl r =
-  ( λ α → α ∙ (inv right-unit)) ∘ (concat (inv right-unit) r)
+con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
 
 ### The Mac Lane pentagon for identity types
