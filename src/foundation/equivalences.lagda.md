@@ -5,7 +5,8 @@
 
 module foundation.equivalences where
 
-open import foundation.cartesian-product-types using (_×_)
+open import foundation-core.equivalences public
+
 open import foundation.coherently-invertible-maps using
   ( has-inverse; is-coherently-invertible; is-coherently-invertible-has-inverse;
     issec-inv-has-inverse; isretr-inv-has-inverse; coherence-inv-has-inverse)
@@ -25,23 +26,6 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 ## Idea
 
 An equivalence is a map that has a section and a (separate) retraction. This may look odd: Why not say that an equivalence is a map that has a 2-sided inverse? The reason is that the latter requirement would put nontrivial structure on the map, whereas having the section and retraction separate yields a property. To quickly see this: if `f` is an equivalence, then it has up to homotopy only one section, and it has up to homotopy only one retraction. 
-
-## Definition
-
-### Equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-  
-  is-equiv : (A → B) → UU (l1 ⊔ l2)
-  is-equiv = [is-equiv]
-
-_≃_ :
-  {i j : Level} (A : UU i) (B : UU j) → UU (i ⊔ j)
-A ≃ B = A [≃] B
-```
 
 ### Families of equivalences
 

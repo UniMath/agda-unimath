@@ -1,0 +1,50 @@
+# Retractions
+
+```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
+module foundation-core.retractions where
+
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.functions using (_∘_; id)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (Id; inv; _∙_; ap; refl)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+```
+
+## Idea
+
+A retraction is a map that has a section
+
+## Definition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  retr : (f : A → B) → UU (l1 ⊔ l2)
+  retr f = Σ (B → A) (λ g → (g ∘ f) ~ id)
+
+_retract-of_ :
+  {i j : Level} → UU i → UU j → UU (i ⊔ j)
+A retract-of B = Σ (A → B) retr
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  section-retract-of : A retract-of B → A → B
+  section-retract-of = pr1
+
+  retr-section-retract-of : (R : A retract-of B) → retr (section-retract-of R)
+  retr-section-retract-of = pr2
+
+  retraction-retract-of : (A retract-of B) → B → A
+  retraction-retract-of R = pr1 (retr-section-retract-of R)
+
+  is-retr-retraction-retract-of :
+    (R : A retract-of B) →
+    (retraction-retract-of R ∘ section-retract-of R) ~ id
+  is-retr-retraction-retract-of R = pr2 (retr-section-retract-of R)
+```

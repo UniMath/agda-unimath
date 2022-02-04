@@ -5,6 +5,8 @@
 
 module foundation.sections where
 
+open import foundation-core.sections public
+
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path'; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -14,7 +16,6 @@ open import
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
     _∘e_; id-equiv; map-inv-equiv)
-open import foundation.foundation-base using ([sec])
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
@@ -35,16 +36,11 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 Any dependent function induces a section of the projection map
 
-## Definition
+## Properties
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
+### Sections of the projection map
 
-  sec : (A → B) → UU (l1 ⊔ l2)
-  sec f = [sec] f
-  
+```agda  
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -56,9 +52,11 @@ module _
   htpy-map-section :
     (b : (x : A) → B x) → (pr1 ∘ map-section b) ~ id
   htpy-map-section b a = refl
-```
 
-## Properties
+  sec-dependent-function : ((x : A) → B x) → sec (pr1 {B = B})
+  pr1 (sec-dependent-function b) = map-section b
+  pr2 (sec-dependent-function b) = htpy-map-section b
+```
 
 ### Any section of a type family is an equivalence if and only if each type in the family is contractible
 
