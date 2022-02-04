@@ -15,21 +15,20 @@ open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( distributive-Π-Σ)
 open import foundation.equivalences using
-  ( is-equiv; _≃_; map-equiv; map-inv-is-equiv)
+  ( is-equiv; _≃_; map-equiv; map-inv-equiv)
 open import foundation.fibers-of-maps using (fib)
-open import foundation.foundation-base using ([sec])
-open import foundation.function-extensionality using (htpy-eq; funext)
+open import foundation.foundation-base using ([sec]; [is-contr])
+open import foundation.function-extensionality using
+  ( htpy-eq; funext; equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( is-contr-total-htpy; fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.precomposition using (is-equiv-precomp-is-equiv)
 open import foundation.retractions using (retr)
 open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
+  ( extensionality-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -46,7 +45,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-sec-is-equiv : {f : A → B} → is-equiv f → is-contr ([sec] f)
+  is-contr-sec-is-equiv : {f : A → B} → is-equiv f → [is-contr] ([sec] f)
   is-contr-sec-is-equiv {f} is-equiv-f =
     is-contr-equiv'
       ( (b : B) → fib f b)
@@ -112,37 +111,17 @@ module _
   htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
   htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
 
+  extensionality-equiv : (f g : A ≃ B) → Id f g ≃ htpy-equiv f g
+  extensionality-equiv f =
+    extensionality-subtype
+      ( is-equiv-Prop)
+      ( pr2 f)
+      ( refl-htpy {f = pr1 f})
+      ( λ g → equiv-funext)
+  
   refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
   refl-htpy-equiv e = refl-htpy
 
-  htpy-eq-equiv : {e e' : A ≃ B} (p : Id e e') → htpy-equiv e e'
-  htpy-eq-equiv {e = e} {.e} refl =
-    refl-htpy-equiv e
-
-  abstract
-    is-contr-total-htpy-equiv :
-      (e : A ≃ B) → is-contr (Σ (A ≃ B) (λ e' → htpy-equiv e e'))
-    is-contr-total-htpy-equiv (pair f is-equiv-f) =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-htpy f)
-        ( is-subtype-is-equiv)
-        ( f)
-        ( refl-htpy)
-        ( is-equiv-f)
-
-  is-equiv-htpy-eq-equiv :
-    (e e' : A ≃ B) → is-equiv (htpy-eq-equiv {e = e} {e'})
-  is-equiv-htpy-eq-equiv e =
-    fundamental-theorem-id e
-      ( refl-htpy-equiv e)
-      ( is-contr-total-htpy-equiv e)
-      ( λ e' → htpy-eq-equiv {e = e} {e'})
-
-  equiv-htpy-eq-equiv :
-    (e e' : A ≃ B) → Id e e' ≃ (htpy-equiv e e')
-  pr1 (equiv-htpy-eq-equiv e e') = htpy-eq-equiv
-  pr2 (equiv-htpy-eq-equiv e e') = is-equiv-htpy-eq-equiv e e'
-
-  eq-htpy-equiv : {e e' : A ≃ B} → ( htpy-equiv e e') → Id e e'
-  eq-htpy-equiv {e = e} {e'} = map-inv-is-equiv (is-equiv-htpy-eq-equiv e e')
+  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → Id e e'
+  eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
 ```

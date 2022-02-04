@@ -15,8 +15,6 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.equivalences using (is-equiv; map-inv-is-equiv)
 open import foundation.identity-types using (Id; tr; refl)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 

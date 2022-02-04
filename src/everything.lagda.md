@@ -88,6 +88,7 @@ open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
+open import foundation.foundation-base
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types

@@ -17,7 +17,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (refl-htpy; _~_)
 open import foundation.identity-types using (Id; refl; tr)
 open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure; extensionality-Σ)
+  ( extensionality-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 

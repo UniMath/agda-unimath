@@ -99,8 +99,8 @@ module _
   where
   
   abstract
-    is-trunc-is-prop : (k : 𝕋) → is-trunc neg-one-𝕋 A → is-trunc (succ-𝕋 k) A
-    is-trunc-is-prop k H x y = is-trunc-is-contr k (H x y)
+    [is-trunc-is-prop] : (k : 𝕋) → is-trunc neg-one-𝕋 A → is-trunc (succ-𝕋 k) A
+    [is-trunc-is-prop] k H x y = is-trunc-is-contr k (H x y)
 ```
 
 ### The identity type of a k-truncated type is k-truncated
@@ -395,5 +395,5 @@ module _
   is-trunc-equiv-is-trunc (succ-𝕋 k) is-trunc-A is-trunc-B = 
     is-trunc-Σ
       ( is-trunc-Π (succ-𝕋 k) (λ x → is-trunc-B))
-      ( λ x → is-trunc-is-prop k (is-subtype-is-equiv x))
+      ( λ x → [is-trunc-is-prop] k (is-subtype-is-equiv x))
 ```
