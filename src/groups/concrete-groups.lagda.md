@@ -227,44 +227,17 @@ module _
       ( ∞-group-Concrete-Group H)
       ( f)
 
-  refl-htpy-hom-Concrete-Group : htpy-hom-Concrete-Group f
-  refl-htpy-hom-Concrete-Group =
-    refl-htpy-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( f)
-
-  htpy-eq-hom-Concrete-Group :
-    (g : hom-Concrete-Group G H) → Id f g → htpy-hom-Concrete-Group g
-  htpy-eq-hom-Concrete-Group =
-    htpy-eq-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( f)
-
-  is-contr-total-htpy-hom-Concrete-Group :
-    is-contr (Σ (hom-Concrete-Group G H) htpy-hom-Concrete-Group)
-  is-contr-total-htpy-hom-Concrete-Group =
-    is-contr-total-htpy-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( f)
-
-  is-equiv-htpy-eq-hom-Concrete-Group :
-    (g : hom-Concrete-Group G H) → is-equiv (htpy-eq-hom-Concrete-Group g)
-  is-equiv-htpy-eq-hom-Concrete-Group =
-    is-equiv-htpy-eq-hom-∞-Group
+  extensionality-hom-Concrete-Group :
+    (g : hom-Concrete-Group G H) → Id f g ≃ htpy-hom-Concrete-Group g
+  extensionality-hom-Concrete-Group =
+    extensionality-hom-∞-Group
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
       ( f)
 
   eq-htpy-hom-Concrete-Group :
     (g : hom-Concrete-Group G H) → (htpy-hom-Concrete-Group g) → Id f g
-  eq-htpy-hom-Concrete-Group =
-    eq-htpy-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( f)
+  eq-htpy-hom-Concrete-Group g = map-inv-equiv (extensionality-hom-Concrete-Group g)
 
 -- Category structure on concrete groups
 
