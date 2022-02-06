@@ -218,17 +218,17 @@ module _
   {l1 : Level} (A : Pointed-Type l1)
   where
   
-  extensionality-pointed-equiv : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
-  extensionality-pointed-equiv =
+  extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
+  extensionality-Pointed-Type =
     extensionality-Σ
-      ( λ {B} b e → Id (map-equiv e (pt-Pointed-Type A)) b)
+      ( λ b e → Id (map-equiv e (pt-Pointed-Type A)) b)
       { refl-A = id-equiv {A = pr1 A}}
       ( refl)
       ( λ B → equiv-univalence)
       ( λ a → id-equiv)
 
   eq-pointed-equiv : (B : Pointed-Type l1) → A ≃* B → Id A B
-  eq-pointed-equiv B = map-inv-equiv (extensionality-pointed-equiv B)
+  eq-pointed-equiv B = map-inv-equiv (extensionality-Pointed-Type B)
 
 -- Precomposing by pointed equivalences
 
