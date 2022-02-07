@@ -140,7 +140,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.13-function-extensionality public
 open import univalent-foundations.13-function-extensionality-solutions public
 open import univalent-foundations.14-propositional-truncation public
 open import univalent-foundations.15-image public
