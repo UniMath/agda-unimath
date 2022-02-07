@@ -5,14 +5,14 @@
 
 module foundation.function-extensionality where
 
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.foundation-base using
-  ( _[~]_; [refl-htpy]; _[≃]_; [is-equiv]; [map-inv-is-equiv];
-    [issec-map-inv-is-equiv]; [isretr-map-inv-is-equiv];
-    [is-equiv-map-inv-is-equiv])
-open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (Id; refl)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
+open import foundation-core.equivalences using
+  ( is-equiv; _≃_; map-inv-is-equiv; issec-map-inv-is-equiv;
+    isretr-map-inv-is-equiv; is-equiv-map-inv-is-equiv)
+open import foundation-core.functions using (_∘_; id)
+open import foundation-core.homotopies using (_~_; refl-htpy)
+open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea
@@ -26,11 +26,11 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
   
-  htpy-eq : {f g : (x : A) → B x} → (Id f g) → (f [~] g)
-  htpy-eq refl = [refl-htpy]
+  htpy-eq : {f g : (x : A) → B x} → (Id f g) → (f ~ g)
+  htpy-eq refl = refl-htpy
 
   FUNEXT : (f : (x : A) → B x) → UU (l1 ⊔ l2)
-  FUNEXT f = (g : (x : A) → B x) → [is-equiv] (htpy-eq {f} {g})
+  FUNEXT f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
 ```
 
 ## Postulate
@@ -42,31 +42,31 @@ module _
   
   postulate funext : (f : (x : A) → B x) → FUNEXT f
 
-  equiv-funext : {f g : (x : A) → B x} → (Id f g) [≃] (f [~] g)
+  equiv-funext : {f g : (x : A) → B x} → (Id f g) ≃ (f ~ g)
   pr1 (equiv-funext {f = f} {g}) = htpy-eq
   pr2 (equiv-funext {f = f} {g}) = funext f g
 
   abstract
-    eq-htpy : {f g : (x : A) → B x} → (f [~] g) → Id f g
-    eq-htpy = [map-inv-is-equiv] (funext _ _)
+    eq-htpy : {f g : (x : A) → B x} → (f ~ g) → Id f g
+    eq-htpy = map-inv-is-equiv (funext _ _)
   
     issec-eq-htpy :
-      {f g : (x : A) → B x} → (htpy-eq ∘ (eq-htpy {f = f} {g = g})) [~] id
-    issec-eq-htpy = [issec-map-inv-is-equiv] (funext _ _)
+      {f g : (x : A) → B x} → (htpy-eq ∘ (eq-htpy {f = f} {g = g})) ~ id
+    issec-eq-htpy = issec-map-inv-is-equiv (funext _ _)
   
     isretr-eq-htpy :
-      {f g : (x : A) → B x} → (eq-htpy ∘ (htpy-eq {f = f} {g = g})) [~] id
-    isretr-eq-htpy = [isretr-map-inv-is-equiv] (funext _ _)
+      {f g : (x : A) → B x} → (eq-htpy ∘ (htpy-eq {f = f} {g = g})) ~ id
+    isretr-eq-htpy = isretr-map-inv-is-equiv (funext _ _)
 
     is-equiv-eq-htpy :
-      (f g : (x : A) → B x) → [is-equiv] (eq-htpy {f = f} {g = g})
-    is-equiv-eq-htpy f g = [is-equiv-map-inv-is-equiv] (funext _ _)
+      (f g : (x : A) → B x) → is-equiv (eq-htpy {f = f} {g = g})
+    is-equiv-eq-htpy f g = is-equiv-map-inv-is-equiv (funext _ _)
 
     eq-htpy-refl-htpy :
-      (f : (x : A) → B x) → Id (eq-htpy ([refl-htpy] {f = f})) refl
+      (f : (x : A) → B x) → Id (eq-htpy (refl-htpy {f = f})) refl
     eq-htpy-refl-htpy f = isretr-eq-htpy refl
 
-  equiv-eq-htpy : {f g : (x : A) → B x} → (f [~] g) [≃] Id f g
+  equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ Id f g
   pr1 (equiv-eq-htpy {f = f} {g}) = eq-htpy
   pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
 ```

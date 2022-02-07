@@ -10,14 +10,13 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; _≃_; _∘e_; map-inv-equiv)
-open import foundation.equivalences-on-homotopies using
-  ( equiv-concat-htpy)
 open import foundation.function-extensionality using
   ( equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.homotopies using
-  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy)
+  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy;
+    equiv-concat-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)

@@ -8,6 +8,8 @@ module foundation-core.truncated-types where
 open import foundation-core.contractible-types using
   ( is-contr; eq-is-contr; is-contr-is-equiv; is-contr-retract-of)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.embeddings using
+  ( is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation-core.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
 open import foundation-core.identity-types using (Id; refl; left-inv; ap)
@@ -33,19 +35,19 @@ is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (Id x y)
 ### The universe of truncated types
 
 ```agda
-UU-Truncated-Type : 𝕋 → (l : Level) → UU (lsuc l)
-UU-Truncated-Type k l = Σ (UU l) (is-trunc k)
+UU-Truncated-Type : (l : Level) → 𝕋 → UU (lsuc l)
+UU-Truncated-Type l k = Σ (UU l) (is-trunc k)
 
 module _
   {k : 𝕋} {l : Level}
   where
   
-  type-Truncated-Type : UU-Truncated-Type k l → UU l
+  type-Truncated-Type : UU-Truncated-Type l k → UU l
   type-Truncated-Type = pr1
 
   abstract
     is-trunc-type-Truncated-Type :
-      (A : UU-Truncated-Type k l) → is-trunc k (type-Truncated-Type A)
+      (A : UU-Truncated-Type l k) → is-trunc k (type-Truncated-Type A)
     is-trunc-type-Truncated-Type = pr2
 ```
 
@@ -62,7 +64,7 @@ abstract
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y = is-trunc-succ-is-trunc k (H x y)
 
 truncated-type-succ-Truncated-Type :
-  (k : 𝕋) {l : Level} → UU-Truncated-Type k l → UU-Truncated-Type (succ-𝕋 k) l
+  (k : 𝕋) {l : Level} → UU-Truncated-Type l k → UU-Truncated-Type l (succ-𝕋 k)
 pr1 (truncated-type-succ-Truncated-Type k A) = type-Truncated-Type A
 pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
@@ -78,14 +80,14 @@ abstract
   is-trunc-Id {l} {k}= is-trunc-succ-is-trunc k
 
 Id-Truncated-Type :
-  {l : Level} {k : 𝕋} (A : UU-Truncated-Type (succ-𝕋 k) l) →
-  (x y : type-Truncated-Type A) → UU-Truncated-Type k l
+  {l : Level} {k : 𝕋} (A : UU-Truncated-Type l (succ-𝕋 k)) →
+  (x y : type-Truncated-Type A) → UU-Truncated-Type l k
 pr1 (Id-Truncated-Type A x y) = Id x y
 pr2 (Id-Truncated-Type A x y) = is-trunc-type-Truncated-Type A x y
 
 Id-Truncated-Type' :
-  {l : Level} {k : 𝕋} (A : UU-Truncated-Type k l) →
-  (x y : type-Truncated-Type A) → UU-Truncated-Type k l
+  {l : Level} {k : 𝕋} (A : UU-Truncated-Type l k) →
+  (x y : type-Truncated-Type A) → UU-Truncated-Type l k
 pr1 (Id-Truncated-Type' A x y) = Id x y
 pr2 (Id-Truncated-Type' A x y) =
   is-trunc-Id (is-trunc-type-Truncated-Type A) x y
@@ -140,4 +142,21 @@ abstract
   is-trunc-equiv' k A (pair f is-equiv-f) =
     is-trunc-is-equiv' k A f is-equiv-f
 
+```
+
+### If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
+
+```agda
+abstract
+  is-trunc-is-emb :
+    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A → B) →
+    is-emb f → is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
+  is-trunc-is-emb k f Ef H x y =
+    is-trunc-is-equiv k (Id (f x) (f y)) (ap f {x} {y}) (Ef x y) (H (f x) (f y))
+
+abstract
+  is-trunc-emb :
+    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A ↪ B) →
+    is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
+  is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
 ```

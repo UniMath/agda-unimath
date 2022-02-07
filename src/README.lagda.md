@@ -40,8 +40,6 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
-open import foundation.equivalences-on-homotopies
-open import foundation.equivalences-with-function-extensionality
 open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
@@ -53,7 +51,6 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -64,7 +61,6 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
-open import foundation.precomposition
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.raising-universe-levels

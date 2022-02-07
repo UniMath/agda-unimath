@@ -15,7 +15,6 @@ open import foundation-core.equality-cartesian-product-types using
   ( Eq-prod; equiv-pair-eq)
 open import foundation-core.equality-dependent-pair-types using
   ( equiv-pair-eq-Σ)
-open import foundation-core.equivalences using (_≃_; map-equiv)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (Id; refl; ap; tr)
 open import foundation-core.propositions using (is-prop)
@@ -27,29 +26,12 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 open import foundation.contractible-types using
   ( is-contr-Σ'; is-contr-left-factor-prod; is-contr-right-factor-prod;
     is-contr-Π; is-subtype-is-contr; is-contr-equiv-is-contr)
-open import foundation.equivalences-with-function-extensionality using
-  ( htpy-equiv; extensionality-equiv)
+open import foundation.equivalences using
+  ( _≃_; map-equiv; htpy-equiv; extensionality-equiv)
 open import foundation.function-extensionality using (htpy-eq; funext)
 ```
 
 ## Properties
-
-### If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
-
-```agda
-abstract
-  is-trunc-is-emb :
-    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A → B) →
-    is-emb f → is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
-  is-trunc-is-emb k f Ef H x y =
-    is-trunc-is-equiv k (Id (f x) (f y)) (ap f {x} {y}) (Ef x y) (H (f x) (f y))
-
-abstract
-  is-trunc-emb :
-    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A ↪ B) →
-    is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
-  is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
-```
 
 ### Truncated types are closed under dependent pair types
 
@@ -69,9 +51,9 @@ abstract
         ( λ p → is-trunc-B (pr1 t) (tr B p (pr2 s)) (pr2 t)))
 
 Σ-Truncated-Type :
-  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type k l1)
-  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
-  UU-Truncated-Type k (l1 ⊔ l2)
+  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type l1 k)
+  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
+  UU-Truncated-Type (l1 ⊔ l2) k
 pr1 (Σ-Truncated-Type A B) =
   Σ (type-Truncated-Type A) (λ a → type-Truncated-Type (B a))
 pr2 (Σ-Truncated-Type A B) =
@@ -80,10 +62,10 @@ pr2 (Σ-Truncated-Type A B) =
     ( λ a → is-trunc-type-Truncated-Type (B a))
 
 fib-Truncated-Type :
-  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type k l1)
-  (B : UU-Truncated-Type k l2)
+  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type l1 k)
+  (B : UU-Truncated-Type l2 k)
   (f : type-Truncated-Type A → type-Truncated-Type B) →
-  type-Truncated-Type B → UU-Truncated-Type k (l1 ⊔ l2)
+  type-Truncated-Type B → UU-Truncated-Type (l1 ⊔ l2) k
 fib-Truncated-Type A B f b =
   Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
 ```
@@ -149,40 +131,40 @@ abstract
       ( is-trunc-Π k (λ x → is-trunc-B x (f x) (g x)))
 
 type-Π-Truncated-Type' :
-  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type l2 k) →
   UU (l1 ⊔ l2)
 type-Π-Truncated-Type' k A B = (x : A) → type-Truncated-Type (B x)
 
 is-trunc-type-Π-Truncated-Type' :
-  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type l2 k) →
   is-trunc k (type-Π-Truncated-Type' k A B)
 is-trunc-type-Π-Truncated-Type' k A B =
   is-trunc-Π k (λ x → is-trunc-type-Truncated-Type (B x))
 
 Π-Truncated-Type' :
-  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type k l2) →
-  UU-Truncated-Type k (l1 ⊔ l2)
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type l2 k) →
+  UU-Truncated-Type (l1 ⊔ l2) k
 pr1 (Π-Truncated-Type' k A B) = type-Π-Truncated-Type' k A B
 pr2 (Π-Truncated-Type' k A B) = is-trunc-type-Π-Truncated-Type' k A B
 
 type-Π-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
-  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
+  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
   UU (l1 ⊔ l2)
 type-Π-Truncated-Type k A B =
   type-Π-Truncated-Type' k (type-Truncated-Type A) B
 
 is-trunc-type-Π-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
-  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
+  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
   is-trunc k (type-Π-Truncated-Type k A B)
 is-trunc-type-Π-Truncated-Type k A B =
   is-trunc-type-Π-Truncated-Type' k (type-Truncated-Type A) B
 
 Π-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
-  (B : type-Truncated-Type A → UU-Truncated-Type k l2) →
-  UU-Truncated-Type k (l1 ⊔ l2)
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
+  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
+  UU-Truncated-Type (l1 ⊔ l2) k
 Π-Truncated-Type k A B =
   Π-Truncated-Type' k (type-Truncated-Type A) B
 ```
@@ -198,21 +180,21 @@ abstract
     is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
 
 type-hom-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
-  (B : UU-Truncated-Type k l2) → UU (l1 ⊔ l2)
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
+  (B : UU-Truncated-Type l2 k) → UU (l1 ⊔ l2)
 type-hom-Truncated-Type k A B =
   type-Truncated-Type A → type-Truncated-Type B
 
 is-trunc-type-hom-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
-  (B : UU-Truncated-Type k l2) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
+  (B : UU-Truncated-Type l2 k) →
   is-trunc k (type-hom-Truncated-Type k A B)
 is-trunc-type-hom-Truncated-Type k A B =
   is-trunc-function-type k (is-trunc-type-Truncated-Type B)
 
 hom-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type k l1)
-  (B : UU-Truncated-Type k l2) → UU-Truncated-Type k (l1 ⊔ l2)
+  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
+  (B : UU-Truncated-Type l2 k) → UU-Truncated-Type (l1 ⊔ l2) k
 pr1 (hom-Truncated-Type k A B) = type-hom-Truncated-Type k A B
 pr2 (hom-Truncated-Type k A B) = is-trunc-type-hom-Truncated-Type k A B
 ```

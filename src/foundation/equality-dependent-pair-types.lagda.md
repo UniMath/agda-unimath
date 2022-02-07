@@ -5,12 +5,13 @@
 
 module foundation.equality-dependent-pair-types where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; tr)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
+  ( is-equiv; _≃_; is-equiv-has-inverse)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (Id; refl; tr)
+open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
 ## Idea

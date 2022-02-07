@@ -5,18 +5,18 @@
 
 module foundation.injective-maps where
 
-open import foundation.dependent-pair-types using (pair)
-open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation.equivalences using
+open import foundation-core.dependent-pair-types using (pair)
+open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
+open import foundation-core.equivalences using
   ( is-equiv; isretr-map-inv-is-equiv; map-inv-is-equiv; _≃_; map-equiv;
     map-inv-equiv; is-equiv-map-inv-equiv; is-equiv-has-inverse)
-open import foundation.foundation-base using ([sec])
-open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
-open import foundation.propositional-maps using (is-prop-map; is-prop-map-is-emb)
-open import foundation.propositions using (is-equiv-is-prop)
-open import foundation.sets using (is-set; is-set-prop-in-id)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation-core.propositional-maps using (is-prop-map; is-prop-map-is-emb)
+open import foundation-core.propositions using (is-equiv-is-prop)
+open import foundation-core.sections using (sec)
+open import foundation-core.sets using (is-set; is-set-prop-in-id)
+open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
 ## Idea
@@ -106,7 +106,7 @@ module _
     is-injective-map-inv-equiv e =
       is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
-  is-equiv-is-injective : {f : A → B} → [sec] f → is-injective f → is-equiv f
+  is-equiv-is-injective : {f : A → B} → sec f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =
     is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```

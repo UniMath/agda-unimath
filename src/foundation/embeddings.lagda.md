@@ -7,31 +7,21 @@ module foundation.embeddings where
 
 open import foundation-core.embeddings public
 
-open import foundation.commuting-squares using (coherence-square)
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr-equiv; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; map-equiv; is-equiv-map-equiv;
-    id-equiv; map-inv-equiv; inv-equiv; _∘e_;
-    issec-map-inv-equiv; is-equiv-top-is-equiv-left-square;
-    is-equiv-comp; is-equiv-right-factor; triangle-section;
-    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-equiv-left-factor;
-    is-emb-is-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.foundation-base using ([sec])
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id-sec)
-open import foundation.homotopies using
-  ( _~_; _·l_; _·r_; _∙h_; nat-htpy; inv-htpy; refl-htpy)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
+  ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
+    is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
+    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv)
+open import foundation-core.functions using (_∘_)
+open import foundation-core.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id-sec)
+open import foundation-core.homotopies using
+  ( _~_; nat-htpy; inv-htpy; refl-htpy)
+open import foundation-core.sections using (sec)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
 open import foundation.identity-types using
-  ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
-    distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp;
-    is-equiv-concat; is-equiv-concat')
-open import foundation.universe-levels using (Level; UU; _⊔_)
+  ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
 ```
 
 ## Properties
@@ -149,7 +139,7 @@ module _
   
   abstract
     is-emb-sec-ap :
-      ((x y : A) → [sec] (ap f {x = x} {y = y})) → is-emb f
+      ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
     is-emb-sec-ap sec-ap-f x y =
       fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
 ```

@@ -6,19 +6,20 @@
 module foundation.distributivity-of-dependent-functions-over-dependent-pairs
   where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation-core.equivalences using
   ( is-equiv; map-inv-equiv; is-equiv-has-inverse; _≃_; map-inv-is-equiv; _∘e_;
     equiv-ap)
+open import foundation-core.functions using (_∘_; id)
+open import foundation-core.homotopies using (refl-htpy; _~_)
+open import foundation-core.identity-types using (Id; refl; tr)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
 open import foundation.function-extensionality using
   ( eq-htpy; equiv-funext)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using (Id; refl; tr)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea

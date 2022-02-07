@@ -126,7 +126,7 @@ abstract
   is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
   is-trunc-empty k ()
 
-empty-Truncated-Type : (k : 𝕋) → UU-Truncated-Type (succ-𝕋 k) lzero
+empty-Truncated-Type : (k : 𝕋) → UU-Truncated-Type lzero (succ-𝕋 k)
 pr1 (empty-Truncated-Type k) = empty
 pr2 (empty-Truncated-Type k) = is-trunc-empty k
 

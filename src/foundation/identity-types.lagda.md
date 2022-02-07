@@ -21,65 +21,6 @@ The equality relation on a type is a reflexive relation, with the universal prop
 
 ## Properties
 
-### The binary action on paths
-
-```agda
-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y y' : B} (q : Id y y') → Id (f x y) (f x' y')
-ap-binary f refl refl = refl
-
-triangle-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y y' : B} (q : Id y y') →
-  Id (ap-binary f p q) (ap (λ z → f z y) p ∙ ap (f x') q)
-triangle-ap-binary f refl refl = refl
-
-triangle-ap-binary' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y y' : B} (q : Id y y') →
-  Id (ap-binary f p q) (ap (f x) q ∙ ap (λ z → f z y') p)
-triangle-ap-binary' f refl refl = refl
-
-left-unit-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x : A} {y y' : B} (q : Id y y') →
-  Id (ap-binary f refl q) (ap (f x) q)
-left-unit-ap-binary f refl = refl
-
-right-unit-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : Id x x') {y : B} →
-  Id (ap-binary f p refl) (ap (λ z → f z y) p)
-right-unit-ap-binary f refl = refl
-
-ap-refl :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) (x : A) →
-  Id (ap f (refl {_} {_} {x})) refl
-ap-refl f x = refl
-
-ap-concat :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
-  (p : Id x y) (q : Id y z) → Id (ap f (p ∙ q)) ((ap f p) ∙ (ap f q))
-ap-concat f refl q = refl
-
-ap-inv :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
-  (p : Id x y) → Id (ap f (inv p)) (inv (ap f p))
-ap-inv f refl = refl
-```
-
-### Action on identifications of dependent functions
-
-```agda
-apd :
-  {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) {x y : A}
-  (p : Id x y) → Id (tr B p (f x)) (f y)
-apd f refl = refl
-```
-
-## Examples
-
 ### The groupoidal operations on identity types are equivalences
 
 ```agda

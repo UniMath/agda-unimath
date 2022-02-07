@@ -37,3 +37,17 @@ ev-pt :
   {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
 ev-pt a B f = f a
 ```
+
+### Precomposition
+
+```agda
+precomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3) →
+  ((b : B) → C b) → ((a : A) → C (f a))
+precomp-Π f C h a = h (f a)
+
+precomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
+  (B → C) → (A → C)
+precomp f C = precomp-Π f (λ b → C)
+```

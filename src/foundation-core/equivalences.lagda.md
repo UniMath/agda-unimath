@@ -12,8 +12,10 @@ open import foundation-core.coherently-invertible-maps using
 open import foundation-core.dependent-pair-types using (Σ; pr1; pr2; pair)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using
-  ( _~_; refl-htpy; inv-htpy; _·r_; _·l_; _∙h_; htpy-right-whisk)
-open import foundation-core.identity-types using (inv; _∙_; ap)
+  ( _~_; refl-htpy; inv-htpy; _·r_; _·l_; _∙h_; htpy-right-whisk; nat-htpy)
+open import foundation-core.identity-types using
+  ( Id; refl; inv; _∙_; ap; ap-concat; ap-binary; ap-inv; ap-id; ap-comp;
+    inv-con; left-inv)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
@@ -487,4 +489,52 @@ module _
       is-equiv h → is-equiv i → is-equiv f → is-equiv g
     is-equiv-right-is-equiv-left-square Eh Ei Ef =
       is-equiv-left-factor (i ∘ f) g h H (is-equiv-comp' i f Ef Ei) Eh
+```
+
+### Equivalences are embeddings
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-emb-is-equiv :
+    {f : A → B} → is-equiv f → (x y : A) → is-equiv (ap f {x} {y})
+  is-emb-is-equiv {f} H x y =
+    is-equiv-has-inverse
+      ( λ p →
+        ( inv (isretr-map-inv-is-equiv H x)) ∙
+        ( ( ap (map-inv-is-equiv H) p) ∙
+          ( isretr-map-inv-is-equiv H y)))
+      ( λ p →
+        ( ap-concat f
+          ( inv (isretr-map-inv-is-equiv H x))
+          ( ap (map-inv-is-equiv H) p ∙ isretr-map-inv-is-equiv H y)) ∙
+        ( ( ap-binary
+            ( λ u v → u ∙ v)
+            ( ap-inv f (isretr-map-inv-is-equiv H x))
+            ( ( ap-concat f
+                ( ap (map-inv-is-equiv H) p)
+                ( isretr-map-inv-is-equiv H y)) ∙
+              ( ap-binary
+                ( λ u v → u ∙ v)
+                ( inv (ap-comp f (map-inv-is-equiv H) p))
+                ( inv (coherence-map-inv-is-equiv H y))))) ∙
+          ( inv
+            ( inv-con
+              ( ap f (isretr-map-inv-is-equiv H x))
+              ( p)
+              ( ( ap (f ∘ map-inv-is-equiv H) p) ∙
+                ( issec-map-inv-is-equiv H (f y)))
+              ( ( ap-binary
+                  ( λ u v → u ∙ v)
+                  ( inv (coherence-map-inv-is-equiv H x))
+                  ( inv (ap-id p))) ∙
+                ( nat-htpy (issec-map-inv-is-equiv H) p))))))
+      ( λ {refl → left-inv (isretr-map-inv-is-equiv H x)})
+
+  equiv-ap :
+    (e : A ≃ B) (x y : A) → (Id x y) ≃ (Id (map-equiv e x) (map-equiv e y))
+  pr1 (equiv-ap e x y) = ap (map-equiv e)
+  pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 ```

@@ -118,7 +118,7 @@ module _
       is-trunc-equiv k (B x) (equiv-fib-pr1 B x) (H x)
 
   pr1-trunc-map :
-    (B : A → UU-Truncated-Type k l2) → trunc-map k (Σ A (λ x → pr1 (B x))) A
+    (B : A → UU-Truncated-Type l2 k) → trunc-map k (Σ A (λ x → pr1 (B x))) A
   pr1 (pr1-trunc-map B) = pr1
   pr2 (pr1-trunc-map B) = is-trunc-map-pr1 (λ x → pr2 (B x))
 
