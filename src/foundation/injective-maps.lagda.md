@@ -5,7 +5,7 @@
 
 module foundation.injective-maps where
 
-open import foundation-core.dependent-pair-types using (pair)
+open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation-core.equivalences using
   ( is-equiv; isretr-map-inv-is-equiv; map-inv-is-equiv; _≃_; map-equiv;
@@ -13,10 +13,13 @@ open import foundation-core.equivalences using
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation-core.propositional-maps using (is-prop-map; is-prop-map-is-emb)
-open import foundation-core.propositions using (is-equiv-is-prop)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (is-set; is-set-prop-in-id)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
+
+open import foundation.propositions using
+  ( is-prop; is-equiv-is-prop; is-prop-Π'; is-prop-function-type; UU-Prop)
+
 ```
 
 ## Idea
@@ -159,4 +162,24 @@ abstract
     is-set B → is-injective f → is-prop-map f
   is-prop-map-is-injective {f = f} H I =
     is-prop-map-is-emb (is-emb-is-injective H I)
+```
+
+### For a map between sets, being injective is a property
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-prop-is-injective :
+    is-set A → (f : A → B) → is-prop (is-injective f)
+  is-prop-is-injective H f =
+    is-prop-Π'
+      ( λ x →
+        is-prop-Π'
+          ( λ y → is-prop-function-type (H x y)))
+
+  is-injective-Prop : is-set A → (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-injective-Prop H f) = is-injective f
+  pr2 (is-injective-Prop H f) = is-prop-is-injective H f
 ```

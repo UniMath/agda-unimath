@@ -8,10 +8,6 @@ module foundation.embeddings where
 open import foundation-core.embeddings public
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
-    is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
-    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv)
 open import foundation-core.functions using (_∘_)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-sec)
@@ -20,11 +16,33 @@ open import foundation-core.homotopies using
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
+open import foundation.equivalences using
+  ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
+    is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
+    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-subtype-is-equiv)
 open import foundation.identity-types using
   ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
+open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
+
 ```
 
 ## Properties
+
+### Being an embedding is a property
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
+  is-prop-is-emb f =
+    is-prop-Π (λ x → is-prop-Π (λ y → is-subtype-is-equiv (ap f)))
+
+  is-emb-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-emb-Prop f) = is-emb f
+  pr2 (is-emb-Prop f) = is-prop-is-emb f
+```
 
 ### Embeddings are closed under homotopies
 

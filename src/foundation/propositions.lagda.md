@@ -9,12 +9,15 @@ open import foundation-core.propositions public
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv-has-inverse; _≃_)
+open import foundation-core.functions using (id)
 open import foundation-core.homotopies using (refl-htpy)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
-open import foundation.contractible-types using (is-trunc-is-contr)
+open import foundation.contractible-types using
+  ( is-contr; is-trunc-is-contr; eq-is-contr)
+open import foundation.function-extensionality using (htpy-eq)
 open import foundation.truncated-types using
   ( is-trunc; is-prop-is-trunc; is-trunc-Π; is-trunc-function-type;
     is-trunc-equiv-is-trunc)
@@ -157,9 +160,31 @@ type-equiv-Prop :
   { l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → UU (l1 ⊔ l2)
 type-equiv-Prop P Q = (type-Prop P) ≃ (type-Prop Q)
 
+abstract
+  is-prop-type-equiv-Prop :
+    {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+    is-prop (type-equiv-Prop P Q)
+  is-prop-type-equiv-Prop P Q =
+    is-prop-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
 equiv-Prop :
   { l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
 pr1 (equiv-Prop P Q) = type-equiv-Prop P Q
-pr2 (equiv-Prop P Q) =
-  is-prop-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
+pr2 (equiv-Prop P Q) = is-prop-type-equiv-Prop P Q
+```
+
+### A type is a proposition if and only if the type of its endomaps is contractible
+
+```agda
+abstract
+  is-prop-is-contr-endomaps :
+    {l : Level} (P : UU l) → is-contr (P → P) → is-prop P
+  is-prop-is-contr-endomaps P H =
+    is-prop-all-elements-equal (λ x → htpy-eq (eq-is-contr H))
+
+abstract
+  is-contr-endomaps-is-prop :
+    {l : Level} (P : UU l) → is-prop P → is-contr (P → P)
+  is-contr-endomaps-is-prop P is-prop-P =
+    is-proof-irrelevant-is-prop (is-prop-function-type is-prop-P) id
 ```

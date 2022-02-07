@@ -5,32 +5,34 @@
 
 module foundation.truncated-maps where
 
-open import foundation.contractible-maps using (is-contr-map)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation.equality-fibers-of-maps using
-  ( equiv-fib-ap-eq-fib; eq-fib-fib-ap; is-equiv-eq-fib-fib-ap)
-open import foundation.equivalences using (is-equiv-id)
-open import foundation.fibers-of-maps using
+open import foundation-core.contractible-maps using (is-contr-map)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
+open import foundation-core.equivalences using (is-equiv-id)
+open import foundation-core.fibers-of-maps using
   ( fib; equiv-fib-pr1; inv-equiv-fib-pr1; map-fib-comp; is-equiv-map-fib-comp)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.functoriality-dependent-pair-types using
   ( tot; compute-fib-tot; inv-compute-fib-tot; fib-triangle;
     is-fiberwise-equiv-is-equiv-triangle; map-Σ-map-base;
     equiv-fib-map-Σ-map-base-fib; map-Σ; triangle-map-Σ)
-open import foundation.homotopies using (_~_; inv-htpy)
-open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
-open import foundation.propositional-maps using
+open import foundation-core.homotopies using (_~_; inv-htpy)
+open import foundation-core.identity-types using (Id; refl; ap; _∙_; inv)
+open import foundation-core.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map; is-prop-map)
-open import foundation.sets using
+open import foundation-core.sets using
   ( is-set; is-set-equiv; UU-Set; type-Set; is-set-type-Set)
+open import foundation-core.truncation-levels using
+  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
+open import foundation.equality-fibers-of-maps using
+  ( equiv-fib-ap-eq-fib; eq-fib-fib-ap; is-equiv-eq-fib-fib-ap)
+open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-succ-is-trunc; is-trunc-equiv; UU-Truncated-Type;
     is-trunc-is-equiv'; is-trunc-Σ; is-trunc-Id; is-trunc-equiv';
-    is-trunc-is-equiv)
-open import foundation.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+    is-trunc-is-equiv; is-prop-is-trunc)
 ```
 
 ## Idea
@@ -64,6 +66,21 @@ module _
 ```
 
 ## Properties
+
+### Being a truncated map is a property
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
+  is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fib f x))
+
+  is-trunc-map-Prop : (k : 𝕋) → (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-trunc-map-Prop k f) = is-trunc-map k f
+  pr2 (is-trunc-map-Prop k f) = is-prop-is-trunc-map k f
+```
 
 ### If a map is k-truncated, then it is (k+1)-truncated
 

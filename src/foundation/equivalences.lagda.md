@@ -10,7 +10,8 @@ open import foundation-core.equivalences public
 open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.commuting-squares using (coherence-square)
-open import foundation-core.contractible-maps using (is-contr-map-is-equiv)
+open import foundation-core.contractible-maps using
+  ( is-contr-map-is-equiv; is-contr-map)
 open import foundation-core.contractible-types using (center; eq-is-contr')
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
@@ -21,6 +22,8 @@ open import foundation-core.functoriality-dependent-pair-types using
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation-core.homotopies using (_~_; refl-htpy)
+open import foundation-core.path-split-maps using
+  ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation-core.retractions using (retr)
@@ -45,8 +48,6 @@ open import foundation.identity-types using
   ( Id; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
-open import foundation.path-split-maps using
-  ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
 ```
@@ -446,4 +447,78 @@ module _
     (p : P e (refl-htpy-equiv e)) →
     Id (ind-htpy-equiv e P p e (refl-htpy-equiv e)) p
   comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+```
+
+### The groupoid laws for equivalences
+
+```agda
+associative-comp-equiv :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
+  (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
+  Id ((g ∘e f) ∘e e) (g ∘e (f ∘e e))
+associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  left-unit-law-equiv : (e : X ≃ Y) → Id (id-equiv ∘e e) e
+  left-unit-law-equiv e = eq-htpy-equiv refl-htpy
+  
+  right-unit-law-equiv : (e : X ≃ Y) → Id (e ∘e id-equiv) e
+  right-unit-law-equiv e = eq-htpy-equiv refl-htpy
+  
+  left-inverse-law-equiv : (e : X ≃ Y) → Id ((inv-equiv e) ∘e e) id-equiv
+  left-inverse-law-equiv e =
+    eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
+  
+  right-inverse-law-equiv : (e : X ≃ Y) → Id (e ∘e (inv-equiv e)) id-equiv
+  right-inverse-law-equiv e =
+    eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
+
+  inv-inv-equiv : (e : X ≃ Y) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv e = eq-htpy-equiv refl-htpy
+
+  inv-inv-equiv' : (e : Y ≃ X) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv' e = eq-htpy-equiv refl-htpy
+
+  is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
+  is-equiv-inv-equiv =
+    is-equiv-has-inverse
+      ( inv-equiv)
+      ( inv-inv-equiv')
+      ( inv-inv-equiv)
+
+  equiv-inv-equiv : (X ≃ Y) ≃ (Y ≃ X)
+  pr1 equiv-inv-equiv = inv-equiv
+  pr2 equiv-inv-equiv = is-equiv-inv-equiv
+
+compose-inv-equiv-compose-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : B ≃ C) (e : A ≃ B) →
+  Id (inv-equiv f ∘e (f ∘e e)) e
+compose-inv-equiv-compose-equiv f e =
+  eq-htpy-equiv (λ x → isretr-map-inv-equiv f (map-equiv e x))
+
+compose-equiv-compose-inv-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : B ≃ C) (e : A ≃ C) →
+  Id (f ∘e (inv-equiv f ∘e e)) e
+compose-equiv-compose-inv-equiv f e =
+  eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
+
+is-equiv-comp-equiv :
+  {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}
+  (f : B ≃ C) (A : UU l1) → is-equiv (λ (e : A ≃ B) → f ∘e e)
+is-equiv-comp-equiv f A =
+  is-equiv-has-inverse
+    ( λ e → inv-equiv f ∘e e)
+    ( compose-equiv-compose-inv-equiv f)
+    ( compose-inv-equiv-compose-equiv f)
+
+equiv-postcomp-equiv :
+  {l1 l2 l3 : Level} {B : UU l2} {C : UU l3} →
+  (f : B ≃ C) → (A : UU l1) → (A ≃ B) ≃ (A ≃ C)
+pr1 (equiv-postcomp-equiv f A) e = f ∘e e
+pr2 (equiv-postcomp-equiv f A) = is-equiv-comp-equiv f A
 ```

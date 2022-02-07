@@ -5,115 +5,55 @@
 
 module foundation.contractible-maps where
 
-open import foundation.coherently-invertible-maps using
-  ( is-coherently-invertible; inv-is-coherently-invertible;
-    issec-inv-is-coherently-invertible; isretr-inv-is-coherently-invertible;
-    coh-inv-is-coherently-invertible)
-open import foundation.contractible-types using (is-contr; center; contraction)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; is-coherently-invertible-is-equiv)
-open import foundation.fibers-of-maps using (fib; eq-Eq-fib)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; _·r_; _·l_)
-open import foundation.identity-types using
-  ( Id; ap; inv; _∙_; refl; right-unit)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-maps public
+
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.truncation-levels using (neg-two-𝕋)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
+open import foundation.equivalences using (_≃_; is-equiv; is-equiv-Prop)
+open import foundation.logical-equivalences using (equiv-iff)
+open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.truncated-maps using (is-prop-is-trunc-map)
 ```
 
-## Idea
+## Properties
 
-A map is often said to satisfy a property `P` if each of its fibers satisfy property `P`. Thus, we define contractible maps to be maps of which each fiber is contractible. In other words, contractible maps are maps `f : A → B` such that for each element `b : B` there is a unique `a : A` equipped with an identification `Id (f a) b`, i.e., contractible maps are the type theoretic bijections.
-
-## Definition
+### Being a contractible map is a property
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
+  
+  is-prop-is-contr-map : (f : A → B) → is-prop (is-contr-map f)
+  is-prop-is-contr-map f = is-prop-is-trunc-map neg-two-𝕋 f
 
-  is-contr-map : (A → B) → UU (l1 ⊔ l2)
-  is-contr-map f = (y : B) → is-contr (fib f y)
+  is-contr-map-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-contr-map-Prop f) = is-contr-map f
+  pr2 (is-contr-map-Prop f) = is-prop-is-contr-map f
 ```
 
-## Properties
-
-### Any contractible map is an equivalence
+### Being a contractible map is equivalent to being an equivalence
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
   
-  map-inv-is-contr-map : is-contr-map f → B → A
-  map-inv-is-contr-map H y = pr1 (center (H y))
+  equiv-is-equiv-is-contr-map : (f : A → B) → is-contr-map f ≃ is-equiv f
+  equiv-is-equiv-is-contr-map f =
+    equiv-iff
+      ( is-contr-map-Prop f)
+      ( is-equiv-Prop f)
+      ( is-equiv-is-contr-map)
+      ( is-contr-map-is-equiv)
 
-  issec-map-inv-is-contr-map :
-    (H : is-contr-map f) → (f ∘ (map-inv-is-contr-map H)) ~ id
-  issec-map-inv-is-contr-map H y = pr2 (center (H y))
-
-  isretr-map-inv-is-contr-map :
-    (H : is-contr-map f) → ((map-inv-is-contr-map H) ∘ f) ~ id
-  isretr-map-inv-is-contr-map H x =
-    ap ( pr1 {B = λ z → Id (f z) (f x)})
-       ( ( inv
-           ( contraction
-             ( H (f x))
-             ( pair
-               ( map-inv-is-contr-map H (f x))
-               ( issec-map-inv-is-contr-map H (f x))))) ∙
-         ( contraction (H (f x)) (pair x refl)))
-
-  abstract
-    is-equiv-is-contr-map : is-contr-map f → is-equiv f
-    is-equiv-is-contr-map H =
-      is-equiv-has-inverse
-        ( map-inv-is-contr-map H)
-        ( issec-map-inv-is-contr-map H)
-        ( isretr-map-inv-is-contr-map H)
-```
-
-### Any coherently invertible map is a contractible map
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  where
-
-  abstract
-    center-fib-is-coherently-invertible :
-      is-coherently-invertible f → (y : B) → fib f y
-    pr1 (center-fib-is-coherently-invertible H y) =
-      inv-is-coherently-invertible H y
-    pr2 (center-fib-is-coherently-invertible H y) =
-      issec-inv-is-coherently-invertible H y
-
-    contraction-fib-is-coherently-invertible :
-      (H : is-coherently-invertible f) → (y : B) → (t : fib f y) →
-      Id (center-fib-is-coherently-invertible H y) t
-    contraction-fib-is-coherently-invertible H y (pair x refl) =
-      eq-Eq-fib f y
-        ( isretr-inv-is-coherently-invertible H x)
-        ( ( right-unit) ∙
-          ( inv ( coh-inv-is-coherently-invertible H x)))
-
-  is-contr-map-is-coherently-invertible : 
-    is-coherently-invertible f → is-contr-map f
-  pr1 (is-contr-map-is-coherently-invertible H y) =
-    center-fib-is-coherently-invertible H y
-  pr2 (is-contr-map-is-coherently-invertible H y) =
-    contraction-fib-is-coherently-invertible H y
-```
-
-### Any equivalence is a contractible map
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  where
-  
-  abstract
-    is-contr-map-is-equiv : is-equiv f → is-contr-map f
-    is-contr-map-is-equiv =
-      is-contr-map-is-coherently-invertible ∘ is-coherently-invertible-is-equiv
+  equiv-is-contr-map-is-equiv : (f : A → B) → is-equiv f ≃ is-contr-map f
+  equiv-is-contr-map-is-equiv f =
+    equiv-iff
+      ( is-equiv-Prop f)
+      ( is-contr-map-Prop f)
+      ( is-contr-map-is-equiv)
+      ( is-equiv-is-contr-map)
 ```
