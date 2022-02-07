@@ -1,13 +1,15 @@
 # Negation
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.negation where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (pair)
-open import foundation.empty-types using (empty)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.empty-types using (empty; is-prop-empty)
+open import foundation.propositions using
+  ( is-prop; is-prop-function-type; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (UU; Level)
 ```
 
@@ -27,6 +29,20 @@ map-neg f nq p = nq (f p)
 ```
 
 ## Properties
+
+### The negation of a type is a proposition
+
+```agda
+is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
+is-prop-neg {A = A} = is-prop-function-type is-prop-empty
+
+neg-Prop' : {l1 : Level} → UU l1 → UU-Prop l1
+pr1 (neg-Prop' A) = ¬ A
+pr2 (neg-Prop' A) = is-prop-neg
+
+neg-Prop : {l1 : Level} → UU-Prop l1 → UU-Prop l1
+neg-Prop P = neg-Prop' (type-Prop P)
+```
 
 ### Negation has no fixed points
 

@@ -1,7 +1,7 @@
 # Equality in the fibers of a map
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.equality-fibers-of-maps where
 
@@ -9,15 +9,15 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
   ( pair-eq-Σ; is-equiv-pair-eq-Σ)
 open import foundation.equivalences using
-  ( is-fiberwise-equiv; is-equiv-comp; is-equiv-concat; is-equiv-inv; is-equiv;
-    is-equiv-tr; _≃_)
+  ( is-fiberwise-equiv; is-equiv-comp; is-equiv; _≃_)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation.homotopies using (refl-htpy; _~_)
 open import foundation.identity-types using
-  ( Id; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl)
+  ( Id; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl; is-equiv-concat;
+    is-equiv-inv; is-equiv-tr)
 open import foundation.universe-levels using (Level; UU)
 ```
 

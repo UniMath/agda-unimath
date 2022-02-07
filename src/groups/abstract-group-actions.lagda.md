@@ -547,7 +547,7 @@ module _
               equiv-map-Π
                 ( λ g →
                   inv-equiv
-                    ( equiv-htpy-eq-equiv
+                    ( extensionality-equiv
                       ( map-hom-Group G (symmetric-Group (pr1 X)) (pr2 X) g)
                       ( map-hom-Group G (symmetric-Group (pr1 X)) f g)))))
           ( is-contr-total-htpy-hom-Group G

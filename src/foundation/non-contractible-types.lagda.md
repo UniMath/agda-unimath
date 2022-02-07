@@ -1,7 +1,7 @@
 # Non-contractible types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.non-contractible-types where
 

@@ -1,18 +1,19 @@
 # Singleton induction
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.singleton-induction where
 
-open import foundation.contractible-types using (is-contr; contraction)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.equivalences using (sec)
-open import foundation.functions using (ev-pt; _∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using
+open import foundation-core.contractible-types using (is-contr; contraction)
+open import foundation-core.dependent-pair-types using
+  ( Σ; pair; pr1; pr2; ind-Σ)
+open import foundation-core.functions using (ev-pt; _∘_; id)
+open import foundation-core.homotopies using (_~_; refl-htpy)
+open import foundation-core.identity-types using
   ( Id; refl; tr; inv; _∙_; ap; left-inv; ind-Id)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.sections using (sec)
+open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
 ## Idea

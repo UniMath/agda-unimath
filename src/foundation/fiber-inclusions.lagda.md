@@ -1,7 +1,7 @@
 # Fiber inclusions
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.fiber-inclusions where
 
@@ -14,13 +14,13 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.equality-dependent-pair-types using
   ( equiv-pair-eq-Σ)
-open import foundation.equivalences using (_≃_; is-equiv-tr; _∘e_)
+open import foundation.equivalences using (_≃_; _∘e_)
 open import foundation.faithful-maps using
   ( is-faithful; is-faithful-is-0-map; faithful-map)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (Id; is-equiv-tr)
 open import foundation.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map)
 open import foundation.propositions using (is-prop)

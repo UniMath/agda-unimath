@@ -5,7 +5,7 @@ title: Univalent Mathematics in Agda
 # Natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.natural-numbers where
 

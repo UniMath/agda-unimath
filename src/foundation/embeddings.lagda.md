@@ -1,220 +1,47 @@
 # Embeddings
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.embeddings where
 
-open import foundation.commuting-squares using (coherence-square)
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr-equiv; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.embeddings public
+
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.functions using (_∘_)
+open import foundation-core.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id-sec)
+open import foundation-core.homotopies using
+  ( _~_; nat-htpy; inv-htpy; refl-htpy)
+open import foundation-core.sections using (sec)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
 open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; equiv-inv; map-equiv; is-equiv-map-equiv;
-    id-equiv; map-inv-equiv; inv-equiv; _∘e_; equiv-concat'; sec;
-    issec-map-inv-equiv; is-equiv-top-is-equiv-left-square; is-equiv-concat;
-    is-equiv-concat'; is-equiv-comp; is-equiv-right-factor; triangle-section;
-    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-equiv-left-factor)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id-sec)
-open import foundation.homotopies using
-  ( _~_; _·l_; _·r_; _∙h_; nat-htpy; inv-htpy; refl-htpy)
+  ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
+    is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
+    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-subtype-is-equiv)
 open import foundation.identity-types using
-  ( Id; refl; ap; inv; _∙_; concat'; assoc; concat; left-inv; right-unit;
-    distributive-inv-concat; con-inv; inv-inv; ap-inv; ap-comp)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-```
+  ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
+open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
 
-## Idea
-
-An embedding from one type into another is a map that induces equivalences on identity types. In other words, the identitifications `Id (f x) (f y)` for an embedding `f : A → B` are in one-to-one correspondence with the identitifications `Id x y`. Embeddings are better behaved homotopically than injective maps, because the condition of being an equivalence is a property under function extensionality.
-
-## Definition
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-emb : (A → B) → UU (l1 ⊔ l2)
-  is-emb f = (x y : A) → is-equiv (ap f {x} {y})
-
-_↪_ :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A ↪ B = Σ (A → B) is-emb
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  map-emb : A ↪ B → A → B
-  map-emb f = pr1 f
-
-  is-emb-map-emb : (f : A ↪ B) → is-emb (map-emb f)
-  is-emb-map-emb f = pr2 f
-
-  equiv-ap-emb : (e : A ↪ B) {x y : A} → Id x y ≃ Id (map-emb e x) (map-emb e y)
-  pr1 (equiv-ap-emb e {x} {y}) = ap (map-emb e)
-  pr2 (equiv-ap-emb e {x} {y}) = is-emb-map-emb e x y
-```
-
-## Examples
-
-### Any equivalence is an embedding
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-emb-is-equiv : {f : A → B} → is-equiv f → is-emb f
-  is-emb-is-equiv {f} is-equiv-f x =
-    fundamental-theorem-id x refl
-      ( is-contr-equiv
-        ( fib f (f x))
-        ( equiv-tot (λ y → equiv-inv (f x) (f y)))
-        ( is-contr-map-is-equiv is-equiv-f (f x)))
-      ( λ y p → ap f p)
-
-  emb-equiv : (A ≃ B) → (A ↪ B)
-  pr1 (emb-equiv e) = map-equiv e
-  pr2 (emb-equiv e) = is-emb-is-equiv (is-equiv-map-equiv e)
-
-  equiv-ap :
-    (e : A ≃ B) (x y : A) → (Id x y) ≃ (Id (map-equiv e x) (map-equiv e y))
-  pr1 (equiv-ap e x y) = ap (map-equiv e) {x} {y}
-  pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
-```
-
-### The identity map is an embedding
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  id-emb : A ↪ A
-  id-emb = emb-equiv id-equiv
-
-  is-emb-id : is-emb (id {A = A})
-  is-emb-id = is-emb-map-emb id-emb
-```
-
-### Transposing equalities along equivalences
-
-The fact that equivalences are embeddings has many important consequences, we will use some of these consequences in order to derive basic properties of embeddings.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
-  where
-
-  eq-transpose-equiv :
-    (x : A) (y : B) → (Id (map-equiv e x) y) ≃ (Id x (map-inv-equiv e y))
-  eq-transpose-equiv x y =
-    ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
-    ( equiv-concat'
-      ( map-equiv e x)
-      ( inv (issec-map-inv-equiv e y)))
-
-  map-eq-transpose-equiv :
-    {x : A} {y : B} → Id (map-equiv e x) y → Id x (map-inv-equiv e y)
-  map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
-
-  inv-map-eq-transpose-equiv :
-    {x : A} {y : B} → Id x (map-inv-equiv e y) → Id (map-equiv e x) y
-  inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
-
-  triangle-eq-transpose-equiv :
-    {x : A} {y : B} (p : Id (map-equiv e x) y) →
-    Id ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
-         ( issec-map-inv-equiv e y))
-       ( p)
-  triangle-eq-transpose-equiv {x} {y} p =
-    ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-         ( issec-map-inv-equiv
-           ( equiv-ap e x (map-inv-equiv e y))
-           ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
-    ( ( assoc p (inv (issec-map-inv-equiv e y)) (issec-map-inv-equiv e y)) ∙
-      ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
-  
-  map-eq-transpose-equiv' :
-    {a : A} {b : B} → Id b (map-equiv e a) → Id (map-inv-equiv e b) a
-  map-eq-transpose-equiv' p = inv (map-eq-transpose-equiv (inv p))
-
-  inv-map-eq-transpose-equiv' :
-    {a : A} {b : B} → Id (map-inv-equiv e b) a → Id b (map-equiv e a)
-  inv-map-eq-transpose-equiv' p =
-    inv (inv-map-eq-transpose-equiv (inv p))
-
-  triangle-eq-transpose-equiv' :
-    {x : A} {y : B} (p : Id y (map-equiv e x)) →
-    Id ( (issec-map-inv-equiv e y) ∙ p)
-      ( ap (map-equiv e) (map-eq-transpose-equiv' p))
-  triangle-eq-transpose-equiv' {x} {y} p =
-    map-inv-equiv
-      ( equiv-ap
-        ( equiv-inv (map-equiv e (map-inv-equiv e y)) (map-equiv e x))
-        ( (issec-map-inv-equiv e y) ∙ p)
-        ( ap (map-equiv e) (map-eq-transpose-equiv' p)))
-      ( ( distributive-inv-concat (issec-map-inv-equiv e y) p) ∙
-        ( ( inv
-            ( con-inv
-              ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
-              ( issec-map-inv-equiv e y)
-              ( inv p)
-              ( ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-                     ( ap ( ap (map-equiv e))
-                          ( inv-inv
-                            ( map-inv-equiv
-                              ( equiv-ap e x (map-inv-equiv e y))
-                              ( ( inv p) ∙
-                                ( inv (issec-map-inv-equiv e y))))))) ∙
-                ( triangle-eq-transpose-equiv (inv p))))) ∙
-          ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
-```
-
-## Composing and inverting squares horizontally and vertically
-
-If the horizontal/vertical maps in a commuting square are both equivalences, then the square remains commuting if we invert those equivalences.
-
-```agda
-coherence-square-inv-horizontal :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (top : A ≃ B) (left : A → X) (right : B → Y) (bottom : X ≃ Y) →
-  coherence-square (map-equiv top) left right (map-equiv bottom) →
-  coherence-square (map-inv-equiv top) right left (map-inv-equiv bottom)
-coherence-square-inv-horizontal top left right bottom H b =
-  map-eq-transpose-equiv' bottom
-    ( ( ap right (inv (issec-map-inv-equiv top b))) ∙
-      ( inv (H (map-inv-equiv top b))))
-
-coherence-square-inv-vertical :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (top : A → B) (left : A ≃ X) (right : B ≃ Y) (bottom : X → Y) →
-  coherence-square top (map-equiv left) (map-equiv right) bottom →
-  coherence-square bottom (map-inv-equiv left) (map-inv-equiv right) top
-coherence-square-inv-vertical top left right bottom H x =
-  map-eq-transpose-equiv right
-    ( inv (H (map-inv-equiv left x)) ∙ ap bottom (issec-map-inv-equiv left x))
 ```
 
 ## Properties
 
-### To prove that a map is an embedding, a point in the domain may be assumed
+### Being an embedding is a property
 
 ```agda
 module _
-  {l : Level} {A : UU l} {l2 : Level} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
   
-  abstract
-    is-emb-is-emb : (A → is-emb f) → is-emb f
-    is-emb-is-emb H x y = H x x y
+  is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
+  is-prop-is-emb f =
+    is-prop-Π (λ x → is-prop-Π (λ y → is-subtype-is-equiv (ap f)))
+
+  is-emb-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  pr1 (is-emb-Prop f) = is-emb f
+  pr2 (is-emb-Prop f) = is-prop-is-emb f
 ```
 
 ### Embeddings are closed under homotopies

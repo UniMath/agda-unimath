@@ -1,7 +1,7 @@
 # Constant maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.constant-maps where
 

@@ -1,7 +1,7 @@
 # 2-Types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.2-types where
 

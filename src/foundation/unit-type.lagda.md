@@ -1,16 +1,16 @@
 # The unit type
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.unit-type where
 
 open import foundation.contractible-types using
-  ( is-contr; center; contraction)
+  ( is-contr; center; contraction; is-prop-is-contr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using (is-prop; is-prop-is-contr; UU-Prop)
+open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.raising-universe-levels using
   ( raise; equiv-raise; map-raise)
 open import foundation.sets using (is-set; UU-Set)

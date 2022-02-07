@@ -1,18 +1,19 @@
 # Subterminal types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.subterminal-types where
 
 open import foundation.contractible-types using
-  ( is-equiv-is-contr; is-contr-is-equiv)
-open import foundation.embeddings using (is-emb; is-emb-is-equiv; is-emb-is-emb)
+  ( is-equiv-is-contr; is-contr-is-equiv; is-prop-is-contr)
+open import foundation.embeddings using (is-emb; is-emb-is-emb)
+open import foundation.equivalences using (is-emb-is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; ap)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant; all-elements-equal;
-    is-proof-irrelevant-all-elements-equal; eq-is-prop'; is-prop-is-contr)
+    is-proof-irrelevant-all-elements-equal; eq-is-prop')
 open import foundation.unit-type using (star; terminal-map; is-contr-unit)
 open import foundation.universe-levels using (Level; UU)
 ```

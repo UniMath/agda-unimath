@@ -12,11 +12,10 @@ open import foundation.coproduct-types using
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (equiv-ap)
 open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ'; pair-eq-Σ)
-open import foundation.equivalences using (_≃_; map-equiv; inv-equiv)
+open import foundation.equivalences using (_≃_; map-equiv; inv-equiv; equiv-ap)
 open import foundation.fibers-of-maps using (equiv-fib-pr1; equiv-total-fib)
 open import foundation.identity-types using (Id; refl; ap; tr)
 open import foundation.injective-maps using (is-prop-map-is-injective)

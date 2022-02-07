@@ -1,24 +1,24 @@
 # The structure identity principle
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.structure-identity-principle where
 
-open import foundation.contractible-types using
+open import foundation-core.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-Σ)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using (pair-eq-Σ)
-open import foundation.equivalences using
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equality-dependent-pair-types using (pair-eq-Σ)
+open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-map-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using (map-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
+open import foundation-core.functions using (_∘_)
+open import foundation-core.functoriality-dependent-pair-types using (map-Σ)
+open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation.identity-types using (Id; refl; tr)
-open import foundation.type-arithmetic-dependent-pair-types using
+open import foundation-core.identity-types using (Id; refl; tr)
+open import foundation-core.type-arithmetic-dependent-pair-types using
   ( interchange-Σ-Σ)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.universe-levels using (Level; UU)
 ```
 
 ## Idea
@@ -53,7 +53,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {Eq-A : A → UU l3}
   (Eq-B : {x : A} → B x → Eq-A x → UU l4)
-  {a : A} {b : B a} {refl-A : Eq-A a} (refl-B : Eq-B b refl-A)
+  {a : A} {b : B a} (refl-A : Eq-A a) (refl-B : Eq-B b refl-A)
   where
 
   abstract

@@ -222,7 +222,7 @@ module _
   extensionality-Pointed-Type =
     extensionality-Σ
       ( λ b e → Id (map-equiv e (pt-Pointed-Type A)) b)
-      { refl-A = id-equiv {A = pr1 A}}
+      ( id-equiv)
       ( refl)
       ( λ B → equiv-univalence)
       ( λ a → id-equiv)

@@ -1,7 +1,7 @@
 # Faithful maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.faithful-maps where
 
@@ -11,9 +11,9 @@ open import foundation.0-maps using
     is-0-map-map-Σ)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
-  ( is-emb; _↪_; is-emb-is-equiv; map-emb; is-emb-map-emb; id-emb)
+  ( is-emb; _↪_; map-emb; is-emb-map-emb; id-emb)
 open import foundation.equivalences using
-  ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
+  ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv; is-emb-is-equiv)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; map-Σ-map-base; map-Σ)

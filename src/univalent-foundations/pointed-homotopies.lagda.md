@@ -50,7 +50,7 @@ module _
       ( λ {g} q H →
           Id (H (pt-Pointed-Type A))
              (preserves-point-function-pointed-Π A B f ∙ inv (preserves-point-function-pointed-Π A B (pair g q))))
-      { refl-A = refl-htpy {f = pr1 f}}
+      ( refl-htpy)
       ( inv (right-inv (preserves-point-function-pointed-Π A B f)))
       ( λ g → equiv-funext)
       ( λ p →  equiv-con-inv refl p (preserves-point-function-pointed-Π A B f)
