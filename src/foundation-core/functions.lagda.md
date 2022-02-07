@@ -29,3 +29,11 @@ _∘_ :
   ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)
 (g ∘ f) a = g (f a)
 ```
+
+### Evaluating at a point
+
+```agda
+ev-pt :
+  {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
+ev-pt a B f = f a
+```

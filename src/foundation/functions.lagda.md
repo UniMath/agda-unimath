@@ -14,14 +14,6 @@ open import foundation.universe-levels using (Level; UU)
 
 Functions are primitive in Agda. Here we construct some basic functions
 
-### Evaluating at a point
-
-```agda
-ev-pt :
-  {l1 l2 : Level} {A : UU l1} (a : A) (B : A → UU l2) → ((x : A) → B x) → B a
-ev-pt a B f = f a
-```
-
 ### Swapping the order of two variables
 
 ```agda

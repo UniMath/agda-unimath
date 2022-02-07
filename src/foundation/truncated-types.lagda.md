@@ -5,8 +5,8 @@
 
 module foundation.truncated-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
+open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.contractible-types using
   ( is-contr; is-contr-is-equiv; is-contr-Σ'; is-contr-left-factor-prod;
     is-contr-right-factor-prod; is-contr-retract-of; eq-is-contr;
     is-subtype-is-contr; is-contr-Π; is-contr-equiv-is-contr)

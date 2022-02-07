@@ -1,12 +1,18 @@
 # Homotopies
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.homotopies where
 
 open import foundation-core.homotopies public
 
+open import foundation-core.contractible-types using
+  ( is-contr; is-contr-equiv'; is-contr-total-path; is-contr-total-path')
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
+
+open import foundation.function-extensionality using (equiv-funext)
 open import foundation.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
     right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
@@ -17,77 +23,6 @@ open import foundation.universe-levels using (UU; Level; _⊔_)
 ## Idea
 
 A homotopy of identifications is a pointwise equality between dependent functions.
-
-## Properties
-
-### Associativity of concatenation of homotopies
-
-```agda
-assoc-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g h k : (x : A) → B x} →
-  (H : f ~ g) → (K : g ~ h) → (L : h ~ k) →
-  ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
-assoc-htpy H K L x = assoc (H x) (K x) (L x)
-```
-
-### Unit laws for homotopies
-
-```agda
-left-unit-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
-  {H : f ~ g} → (refl-htpy ∙h H) ~ H
-left-unit-htpy x = left-unit
-
-right-unit-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
-  {H : f ~ g} → (H ∙h refl-htpy) ~ H
-right-unit-htpy x = right-unit
-```
-
-### Inverse laws for homotopies
-
-```agda
-left-inv-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
-  (H : f ~ g) → ((inv-htpy H) ∙h H) ~ refl-htpy
-left-inv-htpy H x = left-inv (H x)
-
-right-inv-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
-  (H : f ~ g) → (H ∙h (inv-htpy H)) ~ refl-htpy
-right-inv-htpy H x = right-inv (H x)
-```
-
-### Whiskering of homotopies
-
-```agda
-htpy-left-whisk :
-  {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
-  (h : B → C) {f g : A → B} → (f ~ g) → ((λ x → h (f x)) ~ (λ x → h (g x)))
-htpy-left-whisk h H x = ap h (H x)
-
-_·l_ = htpy-left-whisk
-
-htpy-right-whisk :
-  {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
-  {g h : B → C} (H : g ~ h) (f : A → B) → ((λ x → g (f x)) ~ (λ x → h (f x)))
-htpy-right-whisk H f x = H (f x)
-
-_·r_ = htpy-right-whisk
-```
-
-### Distributivity of `inv` over `concat` for homotopies
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-  where
-
-  distributive-inv-concat-htpy :
-    (H : f ~ g) (K : g ~ h) →
-    (inv-htpy (H ∙h K)) ~ ((inv-htpy K) ∙h (inv-htpy H))
-  distributive-inv-concat-htpy H K x = distributive-inv-concat (H x) (K x)
-```
 
 ### Transpositions of homotopies
 
@@ -149,13 +84,26 @@ module _
   right-whisk-inv-htpy H f = refl-htpy
 ```
 
-### Naturality of homotopies with respect to identifications
+### The total space of homotopies is contractible
 
 ```agda
-nat-htpy :
-  {i j : Level} {A : UU i} {B : UU j} {f g : A → B} (H : f ~ g)
-  {x y : A} (p : Id x y) →
-  Id ((H x) ∙ (ap g p)) ((ap f p) ∙ (H y))
-nat-htpy H refl = right-unit
-```
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
+  where
+  
+  abstract
+    is-contr-total-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
+    is-contr-total-htpy =
+      is-contr-equiv'
+        ( Σ ((x : A) → B x) (Id f))
+        ( equiv-tot (λ g → equiv-funext))
+        ( is-contr-total-path f)
 
+  abstract
+    is-contr-total-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
+    is-contr-total-htpy' =
+      is-contr-equiv'
+        ( Σ ((x : A) → B x) (λ g → Id g f))
+        ( equiv-tot (λ g → equiv-funext))
+        ( is-contr-total-path' f)
+```

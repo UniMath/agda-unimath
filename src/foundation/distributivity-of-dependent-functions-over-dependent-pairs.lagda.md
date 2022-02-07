@@ -7,10 +7,10 @@ module foundation.distributivity-of-dependent-functions-over-dependent-pairs
   where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (equiv-ap)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
-  ( is-equiv; map-inv-equiv; is-equiv-has-inverse; _≃_; map-inv-is-equiv; _∘e_)
+  ( is-equiv; map-inv-equiv; is-equiv-has-inverse; _≃_; map-inv-is-equiv; _∘e_;
+    equiv-ap)
 open import foundation.function-extensionality using
   ( eq-htpy; equiv-funext)
 open import foundation.functions using (_∘_; id)
