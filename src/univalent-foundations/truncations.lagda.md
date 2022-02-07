@@ -17,16 +17,16 @@ open import univalent-foundations.18-set-quotients public
 ```agda
 precomp-Trunc :
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : UU-Truncated-Type k l3) →
+  (C : UU-Truncated-Type l3 k) →
   (B → type-Truncated-Type C) → (A → type-Truncated-Type C)
 precomp-Trunc f C = precomp f (type-Truncated-Type C)
 
 is-truncation :
   {l1 l2 : Level} (l : Level) {k : 𝕋} {A : UU l1}
-  (B : UU-Truncated-Type k l2) → (A → type-Truncated-Type B) →
+  (B : UU-Truncated-Type l2 k) → (A → type-Truncated-Type B) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
 is-truncation l {k} B f =
-  (C : UU-Truncated-Type k l) → is-equiv (precomp-Trunc f C)
+  (C : UU-Truncated-Type l k) → is-equiv (precomp-Trunc f C)
 ```
 
 ## The universal property of truncations
@@ -34,14 +34,14 @@ is-truncation l {k} B f =
 ```agda
 universal-property-truncation :
   (l : Level) {l1 l2 : Level} {k : 𝕋} {A : UU l1}
-  (B : UU-Truncated-Type k l2) (f : A → type-Truncated-Type B) →
+  (B : UU-Truncated-Type l2 k) (f : A → type-Truncated-Type B) →
   UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-truncation l {k = k} {A} B f =
-  (C : UU-Truncated-Type k l) (g : A → type-Truncated-Type C) →
+  (C : UU-Truncated-Type l k) (g : A → type-Truncated-Type C) →
   is-contr (Σ (type-hom-Truncated-Type k B C) (λ h → (h ∘ f) ~ g))
 
 module _
-  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type l2 k)
   (f : A → type-Truncated-Type B)
   where
 
@@ -69,14 +69,14 @@ module _
 
   map-is-truncation :
     ({l : Level} → is-truncation l B f) →
-    ({l : Level} (C : UU-Truncated-Type k l) (g : A → type-Truncated-Type C) →
+    ({l : Level} (C : UU-Truncated-Type l k) (g : A → type-Truncated-Type C) →
     type-hom-Truncated-Type k B C)
   map-is-truncation H C g =
     pr1 (center (universal-property-truncation-is-truncation H C g))
 
   triangle-is-truncation :
     (H : {l : Level} → is-truncation l B f) →
-    {l : Level} (C : UU-Truncated-Type k l) (g : A → type-Truncated-Type C) →
+    {l : Level} (C : UU-Truncated-Type l k) (g : A → type-Truncated-Type C) →
     (map-is-truncation H C g ∘ f) ~ g
   triangle-is-truncation H C g =
     pr2 (center (universal-property-truncation-is-truncation H C g))
@@ -94,7 +94,7 @@ abstract
 
 abstract
   is-truncation-equiv :
-    {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+    {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type l2 k)
     (e : A ≃ type-Truncated-Type B) →
     {l : Level} → is-truncation l B (map-equiv e)
   is-truncation-equiv B e C =
@@ -109,20 +109,20 @@ abstract
 ```
 precomp-Π-Truncated-Type :
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : B → UU-Truncated-Type k l3) →
+  (C : B → UU-Truncated-Type l3 k) →
   ((b : B) → type-Truncated-Type (C b)) →
   ((a : A) → type-Truncated-Type (C (f a)))
 precomp-Π-Truncated-Type f C h a = h (f a)
 
 dependent-universal-property-truncation :
-  {l1 l2 : Level} (l : Level) {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+  {l1 l2 : Level} (l : Level) {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type l2 k)
   (f : A → type-Truncated-Type B) → UU (l1 ⊔ l2 ⊔ lsuc l)
 dependent-universal-property-truncation l {k} B f =
-  (X : type-Truncated-Type B → UU-Truncated-Type k l) →
+  (X : type-Truncated-Type B → UU-Truncated-Type l k) →
   is-equiv (precomp-Π-Truncated-Type f X)
 
 module _
-  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type k l2)
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : UU-Truncated-Type l2 k)
   (f : A → type-Truncated-Type B)
   where
 
@@ -154,7 +154,7 @@ module _
 
   sec-is-truncation :
     ({l : Level} → is-truncation l B f) →
-    {l3 : Level} (C : UU-Truncated-Type k l3)
+    {l3 : Level} (C : UU-Truncated-Type l3 k)
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
     f ~ (g ∘ h) → sec g
   sec-is-truncation H C h g K =
@@ -170,8 +170,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1}
-  (B : UU-Truncated-Type k l2) (f : A → type-Truncated-Type B)
-  (C : UU-Truncated-Type k l3) (g : A → type-Truncated-Type C)
+  (B : UU-Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  (C : UU-Truncated-Type l3 k) (g : A → type-Truncated-Type C)
   {h : type-hom-Truncated-Type k B C} (H : (h ∘ f) ~ g)
   where
 
