@@ -27,8 +27,6 @@ equiv-precomp-equiv e C =
           is-equiv-left-factor'
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))
 
--- Exercise 13.6
-
 -- Exercise 13.5
 
 module _

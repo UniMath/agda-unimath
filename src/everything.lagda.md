@@ -157,6 +157,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-empty-type
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 open import foundation.weak-function-extensionality
@@ -217,7 +218,6 @@ open import univalent-combinatorics.undirected-graphs
 open import univalent-combinatorics.unordered-pairs
 open import univalent-foundations
 open import univalent-foundations.13-function-extensionality-solutions
-open import univalent-foundations.13-function-extensionality
 open import univalent-foundations.14-propositional-truncation
 open import univalent-foundations.15-image
 open import univalent-foundations.16-finite-types
