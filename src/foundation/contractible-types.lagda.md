@@ -7,32 +7,18 @@ module foundation.contractible-types where
 
 open import foundation-core.contractible-types public
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-comp'; _≃_; map-inv-is-equiv;
-    is-equiv-map-inv-is-equiv; is-equiv-has-inverse; isretr-map-inv-is-equiv)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using (map-inv-is-equiv; _≃_)
+open import foundation-core.identity-types using (Id; left-inv; refl)
+open import foundation-core.truncated-types using
+  ( is-trunc; is-trunc-succ-is-trunc)
+open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
 open import foundation.function-extensionality using (funext)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( Id; refl; inv; _∙_; left-inv; ap; tr; eq-transpose-tr)
-open import foundation.retractions using (_retract-of_)
-open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Properties
-
-### Contractible types are propositions
-
-```agda
-is-prop-is-contr :
-  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (Id x y)
-pr1 (is-prop-is-contr H x y) = eq-is-contr H
-pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
-```
 
 ### Products of families of contractible types are contractible
 
@@ -95,4 +81,18 @@ is-contr-Prop :
   {l : Level} → UU l → Σ (UU l) (λ X → (x y : X) → is-contr (Id x y))
 pr1 (is-contr-Prop A) = is-contr A
 pr2 (is-contr-Prop A) = is-subtype-is-contr
+```
+
+### Contractible types are k-truncated for any k.
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-trunc-is-contr : (k : 𝕋) → is-contr A → is-trunc k A
+    is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
+    is-trunc-is-contr (succ-𝕋 k) is-contr-A =
+      is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
 ```

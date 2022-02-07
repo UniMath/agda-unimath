@@ -16,10 +16,8 @@ open import foundation.function-extensionality using
   ( equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( is-contr-total-htpy)
 open import foundation.homotopies using
-  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy)
+  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)

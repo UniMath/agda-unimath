@@ -8,15 +8,15 @@ module foundation.propositional-maps where
 open import foundation.contractible-types using (is-contr-equiv; is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation.equivalences using
-  ( equiv-inv; is-equiv-comp'; is-equiv-inv; _≃_)
+open import foundation.equivalences using (is-equiv-comp'; _≃_)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation.identity-types using (Id; refl; ap; inv)
+open import foundation.identity-types using
+  ( Id; refl; ap; inv; equiv-inv; is-equiv-inv)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; is-prop-is-proof-irrelevant; UU-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)

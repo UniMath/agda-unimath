@@ -7,14 +7,14 @@ module foundation.equivalences-on-homotopies where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; is-equiv-id; issec-inv-concat';
-    isretr-inv-concat')
+  ( is-equiv; is-equiv-has-inverse; _≃_; is-equiv-id)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using
   ( inv-htpy; _~_; concat-htpy; concat-htpy')
 open import foundation.homotopy-induction using (ind-htpy)
-open import foundation.identity-types using (inv-inv)
+open import foundation.identity-types using
+  ( inv-inv; issec-inv-concat'; isretr-inv-concat')
 open import foundation.universe-levels using (Level; UU)
 ```
 

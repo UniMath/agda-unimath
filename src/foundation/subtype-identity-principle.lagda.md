@@ -15,7 +15,7 @@ open import foundation.foundation-base using
     [is-prop-type-Prop])
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id'; is-contr-total-htpy)
+  ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.type-arithmetic-cartesian-product-types using

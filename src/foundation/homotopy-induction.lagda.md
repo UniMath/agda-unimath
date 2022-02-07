@@ -5,18 +5,19 @@
 
 module foundation.homotopy-induction where
 
+open import foundation-core.sections using (sec)
+
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv; map-inv-is-equiv)
-open import foundation.foundation-base using ([sec])
 open import foundation.function-extensionality using
   ( FUNEXT; htpy-eq; funext)
 open import foundation.fundamental-theorem-of-identity-types using
-  ( is-contr-total-htpy; fundamental-theorem-id)
+  ( fundamental-theorem-id)
 open import foundation.equivalences-with-function-extensionality using
   ( is-subtype-is-equiv; htpy-equiv; refl-htpy-equiv; is-contr-total-htpy-equiv)
-open import foundation.homotopies using (_~_; refl-htpy)
+open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
 open import foundation.identity-systems using
   ( Ind-identity-system; fundamental-theorem-id-IND-identity-system)
 open import foundation.identity-types using (Id; refl)
@@ -38,7 +39,7 @@ IND-HTPY :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → UU _
 IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → (f ~ g) → UU l3) → [sec] (ev-refl-htpy f C)
+  (C : (g : (x : A) → B x) → (f ~ g) → UU l3) → sec (ev-refl-htpy f C)
 ```
 
 ## Properties
@@ -96,7 +97,7 @@ module _
     Ind-htpy-equiv :
       {l3 : Level} (e : A ≃ B)
       (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-      [sec]
+      sec
         ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
           h e (refl-htpy-equiv e))
     Ind-htpy-equiv e =

@@ -7,7 +7,8 @@ module foundation.subterminal-types where
 
 open import foundation.contractible-types using
   ( is-equiv-is-contr; is-contr-is-equiv; is-prop-is-contr)
-open import foundation.embeddings using (is-emb; is-emb-is-equiv; is-emb-is-emb)
+open import foundation.embeddings using (is-emb; is-emb-is-emb)
+open import foundation.equivalences using (is-emb-is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; ap)
 open import foundation.propositions using

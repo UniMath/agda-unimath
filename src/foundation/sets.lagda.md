@@ -6,7 +6,8 @@
 module foundation.sets where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; contraction)
+open import foundation.contractible-types using
+  ( is-contr; contraction; is-trunc-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fundamental-theorem-of-identity-types using
@@ -17,9 +18,9 @@ open import foundation.propositions using
     is-proof-irrelevant-is-prop; eq-is-prop; is-prop-is-equiv')
 open import foundation.truncated-types using
   ( is-trunc-succ-is-trunc; truncated-type-succ-Truncated-Type;
-    is-trunc-is-contr; is-trunc-is-equiv; is-trunc-equiv; is-trunc-is-equiv';
+    is-trunc-is-equiv; is-trunc-equiv; is-trunc-is-equiv';
     is-trunc-equiv'; is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
-    is-trunc-function-type)
+    is-trunc-function-type; is-trunc-equiv-is-trunc)
 open import foundation.truncation-levels using (neg-one-𝕋; zero-𝕋)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 ```
@@ -265,26 +266,26 @@ pr2 (hom-Set A B) = is-set-type-hom-Set A B
 
 ### The type of equivalences between sets is a set
 
--- ```agda
--- module _
---   {l1 l2 : Level} {A : UU l1} {B : UU l2}
---   where
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
---   is-set-equiv-is-set : is-set A → is-set B → is-set (A ≃ B)
---   is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
+  is-set-equiv-is-set : is-set A → is-set B → is-set (A ≃ B)
+  is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
 
--- module _
---   {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
---   where
+module _
+  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
+  where
   
---   type-equiv-Set : UU (l1 ⊔ l2)
---   type-equiv-Set = type-Set A ≃ type-Set B
+  type-equiv-Set : UU (l1 ⊔ l2)
+  type-equiv-Set = type-Set A ≃ type-Set B
 
---   equiv-Set : UU-Set (l1 ⊔ l2)
---   pr1 equiv-Set = type-equiv-Set
---   pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
+  equiv-Set : UU-Set (l1 ⊔ l2)
+  pr1 equiv-Set = type-equiv-Set
+  pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 
--- aut-Set :
---   {l : Level} (X : UU-Set l) → UU-Set l
--- aut-Set X = equiv-Set X X
--- ```
+aut-Set :
+  {l : Level} (X : UU-Set l) → UU-Set l
+aut-Set X = equiv-Set X X
+```

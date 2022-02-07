@@ -15,7 +15,7 @@ open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( distributive-Π-Σ)
 open import foundation.equivalences using
-  ( is-equiv; _≃_; map-equiv; map-inv-equiv)
+  ( is-equiv; _≃_; map-equiv; map-inv-equiv; is-equiv-map-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.foundation-base using ([sec]; [is-contr])
 open import foundation.function-extensionality using
@@ -23,6 +23,8 @@ open import foundation.function-extensionality using
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id')
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.precomposition using (is-equiv-precomp-is-equiv)
@@ -122,6 +124,18 @@ module _
   refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
   refl-htpy-equiv e = refl-htpy
 
+  abstract
+    is-contr-total-htpy-equiv :
+      (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
+    is-contr-total-htpy-equiv e =
+      fundamental-theorem-id' e
+        ( refl-htpy-equiv e)
+        ( λ f → map-equiv (extensionality-equiv e f))
+        ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
+
   eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → Id e e'
   eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
+
+  htpy-eq-equiv : {e e' : A ≃ B} → Id e e' → htpy-equiv e e'
+  htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
 ```

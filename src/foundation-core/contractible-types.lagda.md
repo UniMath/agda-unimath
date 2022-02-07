@@ -224,3 +224,12 @@ module _
         ( inv (eq-is-contr H))
         ( eq-transpose-tr (eq-is-contr H) (eq-is-contr K))
 ```
+
+### Contractible types are propositions
+
+```agda
+is-prop-is-contr :
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (Id x y)
+pr1 (is-prop-is-contr H x y) = eq-is-contr H
+pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
+```
