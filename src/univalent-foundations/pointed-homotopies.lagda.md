@@ -7,21 +7,19 @@ module univalent-foundations.pointed-homotopies where
 
 open import univalent-foundations.17-univalence
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.homotopies using (refl-htpy; _~_)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using (Id; refl; _∙_; inv; right-inv)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
+open import foundation.structure-identity-principle using ( extensionality-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import univalent-foundations.pointed-dependent-functions using
   ( pointed-Π; function-pointed-Π; preserves-point-function-pointed-Π)
 open import univalent-foundations.pointed-families-of-types using
-  ( Pointed-Fam; fam-Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
+  ( Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
 open import univalent-foundations.pointed-maps using
   (_→*_; comp-pointed-map; id-pointed-map; map-pointed-map)
 open import univalent-foundations.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+  ( Pointed-Type; pt-Pointed-Type)
 ```
 
 ## Idea
@@ -46,42 +44,21 @@ module _
         ( ( preserves-point-function-pointed-Π A B f) ∙
           ( inv (preserves-point-function-pointed-Π A B g))))
 
-  refl-htpy-pointed-Π : htpy-pointed-Π f
-  refl-htpy-pointed-Π =
-    pair refl-htpy (inv (right-inv (preserves-point-function-pointed-Π A B f)))
-
-  htpy-eq-pointed-Π :
-    (g : pointed-Π A B) → Id f g → htpy-pointed-Π g
-  htpy-eq-pointed-Π .f refl = refl-htpy-pointed-Π
-
-  is-contr-total-htpy-pointed-Π : is-contr (Σ (pointed-Π A B) htpy-pointed-Π)
-  is-contr-total-htpy-pointed-Π =
-    is-contr-total-Eq-structure
-      ( λ g β (H : function-pointed-Π A B f ~ g) →
-          Id ( H (pt-Pointed-Type A))
-             ( (preserves-point-function-pointed-Π A B f) ∙ (inv β)))
-      ( is-contr-total-htpy (function-pointed-Π A B f))
-      ( pair (function-pointed-Π A B f) refl-htpy)
-      ( is-contr-equiv'
-        ( Σ ( Id ( function-pointed-Π A B f (pt-Pointed-Type A))
-                 ( pt-Pointed-Fam A B))
-            ( λ β → Id β (preserves-point-function-pointed-Π A B f)))
-        ( equiv-tot
-          ( λ β →
-            equiv-con-inv refl β (preserves-point-function-pointed-Π A B f)))
-        ( is-contr-total-path' (preserves-point-function-pointed-Π A B f)))
-
-  is-equiv-htpy-eq-pointed-Π :
-    (g : pointed-Π A B) → is-equiv (htpy-eq-pointed-Π g)
-  is-equiv-htpy-eq-pointed-Π =
-    fundamental-theorem-id f
-      ( refl-htpy-pointed-Π)
-      ( is-contr-total-htpy-pointed-Π)
-      ( htpy-eq-pointed-Π)
+  extensionality-pointed-Π : (g : pointed-Π A B) → Id f g ≃ htpy-pointed-Π g
+  extensionality-pointed-Π =
+    extensionality-Σ
+      ( λ {g} q H →
+          Id (H (pt-Pointed-Type A))
+             (preserves-point-function-pointed-Π A B f ∙ inv (preserves-point-function-pointed-Π A B (pair g q))))
+      ( refl-htpy)
+      ( inv (right-inv (preserves-point-function-pointed-Π A B f)))
+      ( λ g → equiv-funext)
+      ( λ p →  equiv-con-inv refl p (preserves-point-function-pointed-Π A B f)
+               ∘e equiv-inv (preserves-point-function-pointed-Π A B f) p)
 
   eq-htpy-pointed-Π :
     (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g
-  eq-htpy-pointed-Π g = map-inv-is-equiv (is-equiv-htpy-eq-pointed-Π g)
+  eq-htpy-pointed-Π g = map-inv-equiv (extensionality-pointed-Π g)
 ```
 
 ## Properties
@@ -98,25 +75,14 @@ module _
   htpy-pointed-map : (g : A →* B) → UU (l1 ⊔ l2)
   htpy-pointed-map = htpy-pointed-Π A (constant-Pointed-Fam A B) f
 
-  refl-htpy-pointed-map : htpy-pointed-map f
-  refl-htpy-pointed-map = refl-htpy-pointed-Π A (constant-Pointed-Fam A B) f
-
-  htpy-eq-pointed-map :
-    (g : A →* B) → Id f g → htpy-pointed-map g
-  htpy-eq-pointed-map = htpy-eq-pointed-Π A (constant-Pointed-Fam A B) f
-
-  is-contr-total-htpy-pointed-map : is-contr (Σ (A →* B) htpy-pointed-map)
-  is-contr-total-htpy-pointed-map =
-    is-contr-total-htpy-pointed-Π A (constant-Pointed-Fam A B) f
-
-  is-equiv-htpy-eq-pointed-map :
-    (g : A →* B) → is-equiv (htpy-eq-pointed-map g)
-  is-equiv-htpy-eq-pointed-map =
-    is-equiv-htpy-eq-pointed-Π A (constant-Pointed-Fam A B) f
+  extensionality-pointed-map :
+    (g : A →* B) → Id f g ≃ (htpy-pointed-map g)
+  extensionality-pointed-map =
+    extensionality-pointed-Π A (constant-Pointed-Fam A B) f
 
   eq-htpy-pointed-map :
     (g : A →* B) → (htpy-pointed-map g) → Id f g
-  eq-htpy-pointed-map = eq-htpy-pointed-Π A (constant-Pointed-Fam A B) f
+  eq-htpy-pointed-map g = map-inv-equiv (extensionality-pointed-map g)
 
 -- The category laws for pointed maps
 

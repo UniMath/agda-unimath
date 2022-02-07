@@ -19,7 +19,7 @@ open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import univalent-foundations.pointed-homotopies using
-  ( htpy-pointed-map; htpy-eq-pointed-map; eq-htpy-pointed-map;
+  ( htpy-pointed-map; extensionality-pointed-map; eq-htpy-pointed-map;
     concat-htpy-pointed-map; assoc-comp-pointed-map;
     left-whisker-htpy-pointed-map; right-unit-law-comp-pointed-map;
     left-unit-law-comp-pointed-map; inv-assoc-comp-pointed-map;
@@ -218,37 +218,17 @@ module _
   {l1 : Level} (A : Pointed-Type l1)
   where
   
-  id-pointed-equiv : A ≃* A
-  id-pointed-equiv = pair id-equiv refl
-
-  pointed-equiv-eq : (B : Pointed-Type l1) → Id A B → A ≃* B
-  pointed-equiv-eq .A refl = id-pointed-equiv
-
-  is-contr-total-pointed-equiv : is-contr (Σ (Pointed-Type l1) (λ B → A ≃* B))
-  is-contr-total-pointed-equiv =
-    is-contr-total-Eq-structure
-      ( λ X x (e : type-Pointed-Type A ≃ X) →
-        Id (map-equiv e (pt-Pointed-Type A)) x)
-      ( is-contr-total-equiv (type-Pointed-Type A))
-      ( pair (type-Pointed-Type A) id-equiv)
-      ( is-contr-total-path (pt-Pointed-Type A))
-
-  is-equiv-pointed-equiv-eq :
-    (B : Pointed-Type l1) → is-equiv (pointed-equiv-eq B)
-  is-equiv-pointed-equiv-eq =
-    fundamental-theorem-id A
-      ( id-pointed-equiv)
-      ( is-contr-total-pointed-equiv)
-      ( pointed-equiv-eq)
-
-  equiv-pointed-equiv-eq :
-    (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
-  equiv-pointed-equiv-eq B =
-    pair (pointed-equiv-eq B) (is-equiv-pointed-equiv-eq B)
+  extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
+  extensionality-Pointed-Type =
+    extensionality-Σ
+      ( λ b e → Id (map-equiv e (pt-Pointed-Type A)) b)
+      ( id-equiv)
+      ( refl)
+      ( λ B → equiv-univalence)
+      ( λ a → id-equiv)
 
   eq-pointed-equiv : (B : Pointed-Type l1) → A ≃* B → Id A B
-  eq-pointed-equiv B =
-    map-inv-is-equiv (is-equiv-pointed-equiv-eq B)
+  eq-pointed-equiv B = map-inv-equiv (extensionality-Pointed-Type B)
 
 -- Precomposing by pointed equivalences
 
@@ -304,10 +284,11 @@ module _
     g : B →* A
     g = pr1 (center (is-contr-map-is-equiv (H A) id-pointed-map))
     G : htpy-pointed-map A A (comp-pointed-map A B A g f) id-pointed-map
-    G = htpy-eq-pointed-map A A
-          ( comp-pointed-map A B A g f)
-          ( id-pointed-map)
-          ( pr2 (center (is-contr-map-is-equiv (H A) id-pointed-map)))
+    G = map-equiv
+          ( extensionality-pointed-map A A
+            ( comp-pointed-map A B A g f)
+              id-pointed-map)
+        ( pr2 (center (is-contr-map-is-equiv (H A) id-pointed-map)))
 
   is-equiv-precomp-is-equiv-pointed-map :
     is-equiv-pointed-map A B f →
@@ -414,10 +395,11 @@ module _
     g : B →* A
     g = pr1 (center (is-contr-map-is-equiv (H B) id-pointed-map))
     G : htpy-pointed-map B B (comp-pointed-map B A B f g) id-pointed-map
-    G = htpy-eq-pointed-map B B
-          ( comp-pointed-map B A B f g)
-          ( id-pointed-map)
-          ( pr2 (center (is-contr-map-is-equiv (H B) id-pointed-map)))
+    G = map-equiv
+          ( extensionality-pointed-map B B
+            ( comp-pointed-map B A B f g)
+              id-pointed-map)
+        ( pr2 (center (is-contr-map-is-equiv (H B) id-pointed-map)))
 
   is-equiv-comp-is-equiv-pointed-map :
     is-equiv-pointed-map A B f →
