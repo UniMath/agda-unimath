@@ -126,6 +126,7 @@ open import foundation.equality-fibers-of-maps
 open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
+open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
@@ -141,6 +142,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
+open import foundation.isomorphisms-of-sets
 open import foundation.lists
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -231,7 +233,6 @@ open import univalent-combinatorics.reflexive-graphs
 open import univalent-combinatorics.undirected-graphs
 open import univalent-combinatorics.unordered-pairs
 open import univalent-foundations
-open import univalent-foundations.13-function-extensionality-solutions
 open import univalent-foundations.14-propositional-truncation
 open import univalent-foundations.15-image
 open import univalent-foundations.16-finite-types

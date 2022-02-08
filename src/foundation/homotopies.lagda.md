@@ -19,12 +19,15 @@ open import foundation-core.universe-levels using (UU; Level; _⊔_)
 
 open import foundation.function-extensionality using
   ( equiv-funext; eq-htpy; FUNEXT; htpy-eq; funext)
+open import foundation.functoriality-dependent-function-types using
+  ( is-equiv-map-Π)
 open import foundation.identity-systems using
   ( Ind-identity-system; fundamental-theorem-id-IND-identity-system)
 open import foundation.identity-types using
   ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
     right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
-    ap-id; is-injective-concat'; inv-inv; issec-inv-concat'; isretr-inv-concat')
+    ap-id; is-injective-concat'; inv-inv; issec-inv-concat'; isretr-inv-concat';
+    is-equiv-inv-con; is-equiv-con-inv)
 ```
 
 ## Idea
@@ -247,4 +250,38 @@ equiv-concat-htpy' :
   (f ~ g) ≃ (f ~ h)
 pr1 (equiv-concat-htpy' f K) = concat-htpy' f K
 pr2 (equiv-concat-htpy' f K) = is-equiv-concat-htpy' f K
+```
+
+### Transposing homotopies
+
+```agda
+abstract
+  is-equiv-inv-con-htpy :
+    { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+    ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
+    is-equiv (inv-con-htpy H K L)
+  is-equiv-inv-con-htpy H K L =
+    is-equiv-map-Π _ (λ x → is-equiv-inv-con (H x) (K x) (L x))
+
+equiv-inv-con-htpy :
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
+  ( (H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
+pr1 (equiv-inv-con-htpy H K L) = inv-con-htpy H K L
+pr2 (equiv-inv-con-htpy H K L) = is-equiv-inv-con-htpy H K L
+
+abstract
+  is-equiv-con-inv-htpy :
+    { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+    ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
+    is-equiv (con-inv-htpy H K L)
+  is-equiv-con-inv-htpy H K L =
+    is-equiv-map-Π _ (λ x → is-equiv-con-inv (H x) (K x) (L x))
+
+equiv-con-inv-htpy :
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
+  ( (H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
+pr1 (equiv-con-inv-htpy H K L) = con-inv-htpy H K L
+pr2 (equiv-con-inv-htpy H K L) = is-equiv-con-inv-htpy H K L
 ```

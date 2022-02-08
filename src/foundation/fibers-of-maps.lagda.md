@@ -7,13 +7,15 @@ module foundation.fibers-of-maps where
 
 open import foundation-core.fibers-of-maps public
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; is-equiv-has-inverse; _≃_)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
+  ( is-equiv; is-equiv-has-inverse; _≃_)
+open import foundation-core.functions using (_∘_; id)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (refl)
+open import foundation-core.universe-levels using (Level; UU)
+
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
 ```
 
 ## Properties
