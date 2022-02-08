@@ -41,7 +41,9 @@ open import foundation.function-extensionality public
 open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
+open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
+open import foundation.functoriality-function-types public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.homotopies public
 open import foundation.identity-systems public
@@ -76,9 +78,11 @@ open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.unit-type public
+open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-identity-types public
+open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.weak-function-extensionality public
 ```

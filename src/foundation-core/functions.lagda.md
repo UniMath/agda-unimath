@@ -38,7 +38,7 @@ ev-pt :
 ev-pt a B f = f a
 ```
 
-### Precomposition
+### Precomposition functions
 
 ```agda
 precomp-Π :
@@ -50,4 +50,25 @@ precomp :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
   (B → C) → (A → C)
 precomp f C = precomp-Π f (λ b → C)
+```
+
+### Postcomposition functions
+
+```agda
+postcomp :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
+  (X → Y) → (A → X) → (A → Y)
+postcomp A f h = f ∘ h
+
+map-Π :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i) →
+  ((i : I) → A i) → ((i : I) → B i)
+map-Π f h i = f i (h i)
+
+map-Π' :
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  {J : UU l4} (α : J → I) → 
+  ((i : I) → A i → B i) → ((j : J) → A (α j)) → ((j : J) → B (α j))
+map-Π' α f = map-Π (λ j → f (α j))
 ```
