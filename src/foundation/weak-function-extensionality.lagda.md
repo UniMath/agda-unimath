@@ -9,9 +9,13 @@ open import foundation.1-types using
   ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation.contractible-types using
   ( is-contr; center; contraction; is-contr-retract-of; is-contr-total-path)
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-equality using
+  ( has-decidable-equality; is-set-has-decidable-equality)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
-  ( is-prop-empty; is-empty)
+  ( is-prop-empty; is-empty; ex-falso)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse)
@@ -21,10 +25,10 @@ open import foundation.functions using (_∘_; id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.negation using (¬)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; is-prop-equiv; UU-Prop; type-Prop; is-prop-type-Prop; eq-is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using (is-subtype)
 open import foundation.truncated-types using
@@ -83,4 +87,45 @@ abstract
           ( λ x → Σ (B x) (λ b → Id (f x) b))
           ( λ x → is-contr-total-path (f x))))
       ( λ g → htpy-eq {g = g})
+```
+
+### A partial converse to weak function extensionality
+
+```agda
+cases-function-converse-weak-funext :
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
+  (H : is-contr ((i : I) → A i)) (i : I) (x : A i)
+  (j : I) (e : is-decidable (Id i j)) → A j
+cases-function-converse-weak-funext d H i x .i (inl refl) = x
+cases-function-converse-weak-funext d H i x j (inr f) = center H j
+
+function-converse-weak-funext :
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
+  (H : is-contr ((i : I) → A i)) (i : I) (x : A i) (j : I) → A j
+function-converse-weak-funext d H i x j =
+  cases-function-converse-weak-funext d H i x j (d i j)
+
+cases-eq-function-converse-weak-funext :
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
+  (H : is-contr ((i : I) → A i)) (i : I) (x : A i) (e : is-decidable (Id i i)) →
+  Id (cases-function-converse-weak-funext d H i x i e) x
+cases-eq-function-converse-weak-funext d H i x (inl p) =
+  ap ( λ t → cases-function-converse-weak-funext d H i x i (inl t))
+     ( eq-is-prop (is-set-has-decidable-equality d i i) {p} {refl})
+cases-eq-function-converse-weak-funext d H i x (inr f) = ex-falso (f refl)
+
+eq-function-converse-weak-funext :
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
+  (H : is-contr ((i : I) → A i)) (i : I) (x : A i) →
+  Id (function-converse-weak-funext d H i x i) x
+eq-function-converse-weak-funext d H i x =
+  cases-eq-function-converse-weak-funext d H i x (d i i)
+
+converse-weak-funext :
+  {l1 l2 : Level} {I : UU l1} {A : I → UU l2} →
+  has-decidable-equality I → is-contr ((i : I) → A i) → (i : I) → is-contr (A i)
+pr1 (converse-weak-funext d (pair x H) i) = x i
+pr2 (converse-weak-funext d (pair x H) i) y =
+  ( htpy-eq (H (function-converse-weak-funext d (pair x H) i y)) i) ∙
+  ( eq-function-converse-weak-funext d (pair x H) i y)
 ```

@@ -7,6 +7,8 @@ module foundation.sections where
 
 open import foundation-core.sections public
 
+open import foundation-core.retractions using (_retract-of_)
+
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path'; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -15,12 +17,14 @@ open import
   ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
-    _∘e_; id-equiv; map-inv-equiv)
+    _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
-open import foundation.homotopies using (_~_; refl-htpy; _·l_; _∙h_)
+open import foundation.homotopies using
+  ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy; assoc-htpy; ap-concat-htpy';
+    left-inv-htpy)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.structure-identity-principle using
@@ -142,4 +146,41 @@ module _
     (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) → Id s t
   eq-htpy-sec s t H K =
     map-inv-equiv (extensionality-sec s t) (pair H K)
+```
+
+### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite.
+
+```agda
+isretr-section-comp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (sec-h : sec h) →
+  ((section-comp f g h H sec-h) ∘ (section-comp' f g h H sec-h)) ~ id
+isretr-section-comp f g h H (pair k K) (pair l L) =
+  eq-htpy-sec
+    ( ( section-comp f g h H (pair k K) ∘
+        section-comp' f g h H (pair k K))
+      ( pair l L))
+    ( pair l L)
+    ( K ·r l)
+    ( ( inv-htpy
+        ( assoc-htpy
+          ( inv-htpy (H ·r (k ∘ l)))
+          ( H ·r (k ∘ l))
+          ( (g ·l (K ·r l)) ∙h L))) ∙h
+      ( ap-concat-htpy'
+        ( (inv-htpy (H ·r (k ∘ l))) ∙h (H ·r (k ∘ l)))
+        ( refl-htpy)
+        ( (g ·l (K ·r l)) ∙h L)
+        ( left-inv-htpy (H ·r (k ∘ l)))))
+
+sec-left-factor-retract-of-sec-composition :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+  sec h → (sec g) retract-of (sec f)
+pr1 (sec-left-factor-retract-of-sec-composition {X = X} f g h H sec-h) =
+  section-comp' f g h H sec-h
+pr1 (pr2 (sec-left-factor-retract-of-sec-composition {X = X} f g h H sec-h)) =
+  section-comp f g h H sec-h
+pr2 (pr2 (sec-left-factor-retract-of-sec-composition {X = X} f g h H sec-h)) =
+  isretr-section-comp f g h H sec-h
 ```

@@ -5,6 +5,8 @@
 
 module foundation.functoriality-dependent-function-types where
 
+open import foundation-core.homotopies using (_~_; _·l_; _·r_)
+
 open import foundation.constant-maps using (const)
 open import foundation.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
@@ -17,13 +19,13 @@ open import foundation.equivalences using
     issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
     isretr-map-inv-equiv; is-equiv-comp'; issec-map-inv-is-equiv;
     map-inv-is-equiv; is-equiv-precomp-Π-is-equiv; is-equiv-map-inv-is-equiv;
-    id-equiv; equiv-ap)
+    id-equiv; equiv-ap; htpy-equiv; refl-htpy-equiv; ind-htpy-equiv;
+    comp-htpy-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy; equiv-eq-htpy)
 open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; equiv-Σ)
-open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
   ( Id; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
 open import foundation.truncated-maps using (is-trunc-map)
@@ -32,7 +34,7 @@ open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation.unit-type using (unit)
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea
@@ -220,4 +222,79 @@ is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
         ( map-Π (λ x → f i) h)
         ( const unit (B i) b)))
     ( H (λ x → i) (const unit (B i) b))
+```
+
+```agda
+HTPY-map-equiv-Π :
+  { l1 l2 l3 l4 : Level}
+  { A' : UU l1} (B' : A' → UU l2) {A : UU l3} (B : A → UU l4)
+  ( e e' : A' ≃ A) (H : htpy-equiv e e') →
+  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+HTPY-map-equiv-Π {A' = A'} B' {A} B e e' H =
+  ( f : (a' : A') → B' a' ≃ B (map-equiv e a')) →
+  ( f' : (a' : A') → B' a' ≃ B (map-equiv e' a')) →
+  ( K : (a' : A') →
+        ((tr B (H a')) ∘ (map-equiv (f a'))) ~ (map-equiv (f' a'))) →
+  ( map-equiv-Π B e f) ~ (map-equiv-Π B e' f')
+
+htpy-map-equiv-Π-refl-htpy :
+  { l1 l2 l3 l4 : Level}
+  { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
+  ( e : A' ≃ A) →
+  HTPY-map-equiv-Π B' B e e (refl-htpy-equiv e)
+htpy-map-equiv-Π-refl-htpy {B' = B'} B e f f' K =
+  ( htpy-map-Π
+    ( λ a →
+      ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a)) ·l
+      ( K (map-inv-is-equiv (is-equiv-map-equiv e) a)))) ·r
+  ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
+
+abstract
+  htpy-map-equiv-Π :
+    { l1 l2 l3 l4 : Level}
+    { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
+    ( e e' : A' ≃ A) (H : htpy-equiv e e') →
+    HTPY-map-equiv-Π B' B e e' H
+  htpy-map-equiv-Π {B' = B'} B e e' H f f' K =
+    ind-htpy-equiv e
+      ( HTPY-map-equiv-Π B' B e)
+      ( htpy-map-equiv-Π-refl-htpy B e)
+      e' H f f' K
+  
+  comp-htpy-map-equiv-Π :
+    { l1 l2 l3 l4 : Level}
+    { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
+    ( e : A' ≃ A) →
+    Id ( htpy-map-equiv-Π {B' = B'} B e e (refl-htpy-equiv e))
+      ( ( htpy-map-equiv-Π-refl-htpy B e))
+  comp-htpy-map-equiv-Π {B' = B'} B e =
+    comp-htpy-equiv e
+      ( HTPY-map-equiv-Π B' B e)
+      ( htpy-map-equiv-Π-refl-htpy B e)
+
+map-automorphism-Π :
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  ( e : A ≃ A) (f : (a : A) → B a ≃ B (map-equiv e a)) →
+  ( (a : A) → B a) → ((a : A) → B a)
+map-automorphism-Π {B = B} e f =
+  ( map-Π (λ a → (map-inv-is-equiv (is-equiv-map-equiv (f a))))) ∘
+  ( precomp-Π (map-equiv e) B)
+
+abstract
+  is-equiv-map-automorphism-Π :
+    { l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+    ( e : A ≃ A) (f : (a : A) → B a ≃ B (map-equiv e a)) →
+    is-equiv (map-automorphism-Π e f)
+  is-equiv-map-automorphism-Π {B = B} e f =
+    is-equiv-comp' _ _
+      ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
+      ( is-equiv-map-Π _
+        ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))
+
+automorphism-Π :
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  ( e : A ≃ A) (f : (a : A) → B a ≃ B (map-equiv e a)) →
+  ( (a : A) → B a) ≃ ((a : A) → B a)
+pr1 (automorphism-Π e f) = map-automorphism-Π e f
+pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
 ```

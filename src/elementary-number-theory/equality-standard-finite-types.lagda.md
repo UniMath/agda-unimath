@@ -12,16 +12,19 @@ module elementary-number-theory.equality-standard-finite-types where
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
-    is-neg-one-Fin)
-open import foundation.coproduct-types using (inl; inr)
+    is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ)
+open import foundation.contractible-types using (is-contr)
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (pr1; pr2)
 open import foundation.empty-types using (empty; is-set-empty)
-open import foundation.equality-coproduct-types using (is-set-coprod)
+open import foundation.equality-coproduct-types using
+  ( is-set-coprod; is-prop-coprod)
 open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (Id; refl; ap; inv; _∙_)
 open import foundation.negation using (map-neg)
+open import foundation.propositions using (is-prop; is-proof-irrelevant-is-prop)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; lzero)
@@ -87,4 +90,35 @@ abstract
 Fin-Set : (n : ℕ) → UU-Set lzero
 pr1 (Fin-Set n) = Fin n
 pr2 (Fin-Set n) = is-set-Fin n
+```
+
+### Being zero or being one is a proposition
+
+```agda
+is-prop-is-zero-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → is-prop (is-zero-Fin x)
+is-prop-is-zero-Fin {k} x = is-set-Fin (succ-ℕ k) x zero-Fin
+
+is-prop-is-one-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → is-prop (is-one-Fin x)
+is-prop-is-one-Fin {k} x = is-set-Fin (succ-ℕ k) x one-Fin
+
+is-prop-is-zero-or-one-Fin-two-ℕ :
+  (x : Fin 2) → is-prop (coprod (is-zero-Fin x) (is-one-Fin x))
+is-prop-is-zero-or-one-Fin-two-ℕ x =
+  is-prop-coprod
+    ( λ p q → Eq-Fin-eq (inv p ∙ q))
+    ( is-prop-is-zero-Fin x)
+    ( is-prop-is-one-Fin x)
+```
+
+### Every element in the standard two-element type is either 0 or 1.
+
+```agda
+is-contr-is-zero-or-one-Fin-two-ℕ :
+  (x : Fin 2) → is-contr (coprod (is-zero-Fin x) (is-one-Fin x))
+is-contr-is-zero-or-one-Fin-two-ℕ x =
+  is-proof-irrelevant-is-prop
+    ( is-prop-is-zero-or-one-Fin-two-ℕ x)
+    ( is-zero-or-one-Fin-two-ℕ x)
 ```

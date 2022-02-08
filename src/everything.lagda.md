@@ -113,6 +113,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.distributivity-of-dependent-functions-over-coproduct-types
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.embeddings
@@ -125,6 +126,7 @@ open import foundation.equality-fibers-of-maps
 open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
+open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
@@ -140,6 +142,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
+open import foundation.isomorphisms-of-sets
 open import foundation.lists
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -230,7 +233,6 @@ open import univalent-combinatorics.reflexive-graphs
 open import univalent-combinatorics.undirected-graphs
 open import univalent-combinatorics.unordered-pairs
 open import univalent-foundations
-open import univalent-foundations.13-function-extensionality-solutions
 open import univalent-foundations.14-propositional-truncation
 open import univalent-foundations.15-image
 open import univalent-foundations.16-finite-types

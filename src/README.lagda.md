@@ -67,6 +67,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.distributivity-of-dependent-functions-over-coproduct-types
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.embeddings
@@ -79,12 +80,15 @@ open import foundation.equality-fibers-of-maps
 open import foundation.equivalences
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
+open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-systems
@@ -92,6 +96,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
+open import foundation.isomorphisms-of-sets
 open import foundation.lists
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -119,9 +124,11 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-identity-types
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.weak-function-extensionality
 ```
@@ -177,7 +184,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.13-function-extensionality-solutions public
 open import univalent-foundations.14-propositional-truncation public
 open import univalent-foundations.15-image public
 open import univalent-foundations.16-finite-types public
