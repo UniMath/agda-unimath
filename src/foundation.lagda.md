@@ -24,6 +24,7 @@ open import foundation.decidable-maps public
 open import foundation.decidable-types public
 open import foundation.dependent-pair-types public
 open import foundation.diagonal-maps-of-types public
+open import foundation.distributivity-of-dependent-functions-over-coproduct-types public
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs public
 open import foundation.double-negation public
 open import foundation.embeddings public
@@ -36,6 +37,7 @@ open import foundation.equality-fibers-of-maps public
 open import foundation.equivalences public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
+open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
 open import foundation.function-extensionality public
 open import foundation.functions public
@@ -51,6 +53,7 @@ open import foundation.identity-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.isolated-points public
+open import foundation.isomorphisms-of-sets public
 open import foundation.lists public
 open import foundation.logical-equivalences public
 open import foundation.negation public

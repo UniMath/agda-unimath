@@ -2621,16 +2621,6 @@ is-decidable-is-equiv-is-finite f HA HB =
 
 -- Exercise 16.4
 
--- Exercise 16.4 (a)
-
-Fin-exp-ℕ : (n m : ℕ) → Fin (exp-ℕ n m) ≃ (Fin m → Fin n)
-Fin-exp-ℕ n zero-ℕ =
-  equiv-is-contr is-contr-Fin-one-ℕ (universal-property-empty' (Fin n))
-Fin-exp-ℕ n (succ-ℕ m) =
-  ( ( inv-equiv equiv-universal-property-Maybe) ∘e
-    ( equiv-prod (Fin-exp-ℕ n m) id-equiv)) ∘e
-  ( Fin-mul-ℕ (exp-ℕ n m) n)
-
 -- Exercise 16.4 (b)
 
 -- The number falling-factorial-ℕ n m is the number (n)_m from combinatorics
