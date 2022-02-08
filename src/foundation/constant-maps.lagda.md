@@ -5,40 +5,36 @@
 
 module foundation.constant-maps where
 
-open import foundation.0-maps using (is-0-map)
-open import foundation.1-types using
+open import foundation-core.constant-maps public
+
+open import foundation-core.0-maps using (is-0-map)
+open import foundation-core.1-types using
   ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.contractible-maps using
+open import foundation-core.contractible-maps using
   ( is-contr-map; is-equiv-is-contr-map; is-contr-map-is-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.equivalences using (_≃_; is-equiv)
-open import foundation.faithful-maps using
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.embeddings using (is-emb; _↪_)
+open import foundation-core.equivalences using (_≃_; is-equiv)
+open import foundation-core.faithful-maps using
   ( is-faithful; is-faithful-is-0-map; is-0-map-is-faithful; faithful-map)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.identity-types using (Id)
-open import foundation.propositional-maps using
+open import foundation-core.fibers-of-maps using (fib)
+open import foundation-core.identity-types using (Id)
+open import foundation-core.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map; is-prop-map-is-emb)
-open import foundation.propositions using
+open import foundation-core.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
-open import foundation.sets using
+open import foundation-core.sets using
   ( is-set; UU-Set; type-Set; is-set-type-Set)
-open import foundation.truncated-maps using (is-trunc-map)
-open import foundation.truncated-types using
+open import foundation-core.truncated-maps using (is-trunc-map)
+open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-equiv; is-trunc-equiv')
-open import foundation.truncation-levels using
+open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
+open import foundation-core.universe-levels using (Level; UU)
+
 open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-prod; left-unit-law-Σ)
 open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU)
-```
-
-## Definition
-
-```agda
-const : {i j : Level} (A : UU i) (B : UU j) (b : B) → A → B
-const A B b x = b
 ```
 
 ## Properties

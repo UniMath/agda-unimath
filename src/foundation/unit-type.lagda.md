@@ -5,18 +5,19 @@
 
 module foundation.unit-type where
 
-open import foundation.contractible-types using
+open import foundation-core.contractible-types using
   ( is-contr; center; contraction; is-prop-is-contr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
+open import foundation-core.equivalences using (is-equiv; _≃_)
+open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.propositions using (is-prop; UU-Prop)
+open import foundation-core.sets using (is-set; UU-Set)
+open import foundation-core.truncated-types using (is-trunc-succ-is-trunc)
+open import foundation-core.truncation-levels using (neg-one-𝕋)
+open import foundation-core.universe-levels using (Level; lzero; UU)
+
 open import foundation.raising-universe-levels using
   ( raise; equiv-raise; map-raise)
-open import foundation.sets using (is-set; UU-Set)
-open import foundation.truncated-types using (is-trunc-succ-is-trunc)
-open import foundation.truncation-levels using (neg-one-𝕋)
-open import foundation.universe-levels using (Level; lzero; UU)
 ```
 
 ## Idea

@@ -5,14 +5,16 @@
 
 module foundation.type-arithmetic-unit-type where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
+open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
+  ( is-equiv; _≃_; is-equiv-has-inverse)
+open import foundation-core.functions using (_∘_; id)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.universe-levels using (Level; UU)
+
 open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU)
 ```
 
 ## Idea
