@@ -78,6 +78,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-maps
@@ -89,7 +90,9 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.global-choice
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
@@ -103,6 +106,7 @@ open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
 open import foundation.propositional-maps
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.retractions
@@ -128,6 +132,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-identity-types
+open import foundation.universal-property-propositional-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.weak-function-extensionality

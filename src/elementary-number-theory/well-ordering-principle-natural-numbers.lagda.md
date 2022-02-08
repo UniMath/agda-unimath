@@ -11,7 +11,7 @@ module elementary-number-theory.well-ordering-principle-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
-    is-decidable-le-ℕ)
+    is-decidable-le-ℕ; is-prop-leq-ℕ; antisymmetric-leq-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
 open import foundation.cartesian-product-types using (_×_)
@@ -24,6 +24,10 @@ open import foundation.empty-types using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl)
 open import foundation.negation using (¬)
+open import foundation.propositions using
+  ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
+    type-Prop; prod-Prop; is-prop-type-Prop; is-prop-all-elements-equal)
+open import foundation.subtypes using (eq-subtype)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; Level)
 ```
@@ -119,11 +123,50 @@ is-lower-bound-ℕ :
 is-lower-bound-ℕ P n =
   (m : ℕ) → P m → leq-ℕ n m
 
+module _
+  {l1 : Level} {P : ℕ → UU l1}
+  where
+
+  abstract
+    is-prop-is-lower-bound-ℕ : (x : ℕ) → is-prop (is-lower-bound-ℕ P x)
+    is-prop-is-lower-bound-ℕ x =
+      is-prop-Π (λ y → is-prop-function-type (is-prop-leq-ℕ x y))
+
+  is-lower-bound-ℕ-Prop : (x : ℕ) → UU-Prop l1
+  pr1 (is-lower-bound-ℕ-Prop x) = is-lower-bound-ℕ P x
+  pr2 (is-lower-bound-ℕ-Prop x) = is-prop-is-lower-bound-ℕ x
+
 {- Theorem 8.3.3 (The well-ordering principle of ℕ) -}
 
 minimal-element-ℕ :
   {l : Level} (P : ℕ → UU l) → UU l
 minimal-element-ℕ P = Σ ℕ (λ n → (P n) × (is-lower-bound-ℕ P n))
+
+module _
+  {l1 : Level} (P : ℕ → UU-Prop l1)
+  where
+
+  abstract
+    all-elements-equal-minimal-element-ℕ :
+      all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
+    all-elements-equal-minimal-element-ℕ
+      (pair x (pair p l)) (pair y (pair q k)) =
+      eq-subtype
+        ( λ n →
+          prod-Prop
+            ( pair _ (is-prop-type-Prop (P n)))
+            ( is-lower-bound-ℕ-Prop n))
+        ( antisymmetric-leq-ℕ x y (l y q) (k x p))
+
+  abstract
+    is-prop-minimal-element-ℕ :
+      is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
+    is-prop-minimal-element-ℕ =
+      is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
+
+  minimal-element-ℕ-Prop : UU-Prop l1
+  pr1 minimal-element-ℕ-Prop = minimal-element-ℕ (λ n → type-Prop (P n))
+  pr2 minimal-element-ℕ-Prop = is-prop-minimal-element-ℕ
 
 is-minimal-element-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
