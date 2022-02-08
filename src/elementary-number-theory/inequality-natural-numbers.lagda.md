@@ -298,6 +298,28 @@ transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
 transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
 
+contradiction-le-zero-ℕ :
+  (m : ℕ) → (le-ℕ m zero-ℕ) → empty
+contradiction-le-zero-ℕ zero-ℕ ()
+contradiction-le-zero-ℕ (succ-ℕ m) ()
+
+contradiction-le-one-ℕ :
+  (n : ℕ) → le-ℕ (succ-ℕ n) 1 → empty
+contradiction-le-one-ℕ zero-ℕ ()
+contradiction-le-one-ℕ (succ-ℕ n) ()
+
+transitive-le-ℕ' :
+  (k l m : ℕ) → (le-ℕ k l) → (le-ℕ l (succ-ℕ m)) → le-ℕ k m
+transitive-le-ℕ' zero-ℕ zero-ℕ m () s
+transitive-le-ℕ' (succ-ℕ k) zero-ℕ m () s
+transitive-le-ℕ' zero-ℕ (succ-ℕ l) zero-ℕ star s =
+  ex-falso (contradiction-le-one-ℕ l s)
+transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) zero-ℕ t s =
+  ex-falso (contradiction-le-one-ℕ l s)
+transitive-le-ℕ' zero-ℕ (succ-ℕ l) (succ-ℕ m) star s = star
+transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) (succ-ℕ m) t s =
+  transitive-le-ℕ' k l m t s
+
 succ-le-ℕ : (n : ℕ) → le-ℕ n (succ-ℕ n)
 succ-le-ℕ zero-ℕ = star
 succ-le-ℕ (succ-ℕ n) = succ-le-ℕ n

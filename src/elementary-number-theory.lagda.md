@@ -41,6 +41,7 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.standard-finite-types public

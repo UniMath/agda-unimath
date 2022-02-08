@@ -15,8 +15,7 @@ open import foundation-core.propositions using (UU-Prop; type-Prop)
 open import foundation-core.truncation-levels using (𝕋; zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU)
 
-open import foundation.1-types using (is-1-type)
-open import foundation.logical-equivalences using (_↔_; equiv-iff')
+open import foundation-core.logical-equivalences using (_↔_; equiv-iff')
 ```
 
 ### Equivalences of subtypes
@@ -31,14 +30,4 @@ equiv-subtype-equiv :
 equiv-subtype-equiv e C D H =
   equiv-Σ (λ y → type-Prop (D y)) e
     ( λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
-  where
-
-  abstract
-    is-1-type-is-subtype : is-subtype P → is-1-type A → is-1-type (Σ A P)
-    is-1-type-is-subtype = is-trunc-is-subtype zero-𝕋
 ```

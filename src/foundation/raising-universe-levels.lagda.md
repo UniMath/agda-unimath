@@ -5,13 +5,13 @@
 
 module foundation.raising-universe-levels where
 
-open import foundation.dependent-pair-types using (Σ; pr1; pr2)
-open import foundation.equivalences using
+open import foundation-core.dependent-pair-types using (Σ; pr1; pr2)
+open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea

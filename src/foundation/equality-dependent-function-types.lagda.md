@@ -12,11 +12,18 @@ open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( Π-total-fam; distributive-Π-Σ)
 open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.equivalences using (is-equiv; map-inv-is-equiv)
+  ( fundamental-theorem-id; fundamental-theorem-id')
+open import foundation.equivalences using
+  ( is-equiv; map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
 open import foundation.identity-types using (Id; tr; refl)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
+
+## Idea
+
+Given a family of types `B` over `A`, if we can characterize the identity types of each `B x`, then we can characterize the identity types of `(x : A) → B x`.
+
+### Contractibility
 
 ```agda
 is-contr-total-Eq-Π :
@@ -30,16 +37,39 @@ is-contr-total-Eq-Π {A = A} {B} C is-contr-total-C =
     ( is-contr-Π is-contr-total-C)
 ```
 
+### Extensionality
+
 ```agda
-{-
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (Eq-B : {x : A} → B x → B x → UU l3)
   (f : (x : A) → B x)
+  (Eq-B : (x : A) → B x → UU l3)
   where
+
+  map-extensionality-Π :
+    ( (x : A) (y : B x) → Id (f x) y ≃ Eq-B x y) →
+    ( g : (x : A) → B x) → Id f g → ((x : A) → Eq-B x (g x))
+  map-extensionality-Π e .f refl x = map-equiv (e x (f x)) refl
+
+  abstract
+    is-equiv-map-extensionality-Π :
+      (e : (x : A) (y : B x) → Id (f x) y ≃ Eq-B x y) →
+      (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
+    is-equiv-map-extensionality-Π e =
+      fundamental-theorem-id f
+        ( map-extensionality-Π e f refl)
+        ( is-contr-total-Eq-Π Eq-B
+          ( λ x →
+            fundamental-theorem-id'
+              ( f x)
+              ( map-equiv (e x (f x)) refl)
+              ( λ y → map-equiv (e x y))
+              ( λ y → is-equiv-map-equiv (e x y))))
+        ( map-extensionality-Π e)
   
-extensionality-Π :
-  ( (x : A) (y : B x) → Id (f x) y ≃ Eq-B y) →
-  ( g : (x : A) → B x) → Id f g ≃ ((x : A) → Eq-B (g x))
-  -}
+  extensionality-Π :
+    ( (x : A) (y : B x) → Id (f x) y ≃ Eq-B x y) →
+    ( g : (x : A) → B x) → Id f g ≃ ((x : A) → Eq-B x (g x))
+  pr1 (extensionality-Π e g) = map-extensionality-Π e g
+  pr2 (extensionality-Π e g) = is-equiv-map-extensionality-Π e g
 ```

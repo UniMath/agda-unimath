@@ -29,7 +29,6 @@ open import foundation-core.propositions using
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
-open import foundation-core.subtypes using (is-emb-pr1)
 open import foundation-core.truncated-types using
   ( UU-Truncated-Type; type-Truncated-Type; is-trunc)
 open import foundation-core.truncation-levels using (𝕋)
@@ -50,6 +49,7 @@ open import foundation.identity-types using
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
+open import foundation.subtypes using (is-emb-pr1; equiv-subtype-equiv)
 ```
 
 ## Properties
@@ -521,4 +521,21 @@ equiv-postcomp-equiv :
   (f : B ≃ C) → (A : UU l1) → (A ≃ B) ≃ (A ≃ C)
 pr1 (equiv-postcomp-equiv f A) e = f ∘e e
 pr2 (equiv-postcomp-equiv f A) = is-equiv-comp-equiv f A
+```
+
+```agda
+equiv-precomp-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
+  (A ≃ B) → (C : UU l3) → (B ≃ C) ≃ (A ≃ C)
+equiv-precomp-equiv e C =
+  equiv-subtype-equiv
+    ( equiv-precomp e C)
+    ( is-equiv-Prop)
+    ( is-equiv-Prop)
+    ( λ g →
+      pair
+        ( is-equiv-comp' g (map-equiv e) (is-equiv-map-equiv e))
+        ( λ is-equiv-eg →
+          is-equiv-left-factor'
+            g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))
 ```
