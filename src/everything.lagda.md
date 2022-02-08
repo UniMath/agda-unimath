@@ -113,6 +113,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.distributivity-of-dependent-functions-over-coproduct-types
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.embeddings

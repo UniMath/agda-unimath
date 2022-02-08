@@ -8,18 +8,29 @@ module foundation.slice where
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import
+  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  ( inv-distributive-Π-Σ)
+open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
-  ( is-equiv; _≃_; _∘e_; map-inv-equiv)
+  ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
+    is-fiberwise-equiv; is-subtype-is-equiv)
+open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using
-  ( equiv-funext)
+  ( equiv-funext; eq-htpy)
 open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-tot; fib-triangle; is-fiberwise-equiv-is-equiv-triangle;
+    is-equiv-triangle-is-fiberwise-equiv; equiv-Σ)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy;
     equiv-concat-htpy)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (Id; refl; inv; inv-inv)
+open import foundation.propositions using (equiv-prop; is-prop-Π)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
+open import foundation.type-arithmetic-cartesian-product-types using
+  ( equiv-right-swap-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -77,4 +88,143 @@ module _
   eq-htpy-hom-slice :
     (h h' : hom-slice f g) → htpy-hom-slice h h' → Id h h'
   eq-htpy-hom-slice h h' = map-inv-equiv (extensionality-hom-slice h h')
+```
+
+```agda
+fiberwise-hom-hom-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  hom-slice f g → (x : X) → (fib f x) → (fib g x)
+fiberwise-hom-hom-slice f g (pair h H) = fib-triangle f g h H
+
+hom-slice-fiberwise-hom :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  ((x : X) → (fib f x) → (fib g x)) → hom-slice f g
+pr1 (hom-slice-fiberwise-hom f g α) a = pr1 (α (f a) (pair a refl))
+pr2 (hom-slice-fiberwise-hom f g α) a = inv (pr2 (α (f a) (pair a refl)))
+
+issec-hom-slice-fiberwise-hom-eq-htpy :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) (α : (x : X) → (fib f x) → (fib g x)) (x : X) →
+  (fiberwise-hom-hom-slice f g (hom-slice-fiberwise-hom f g α) x) ~ (α x)
+issec-hom-slice-fiberwise-hom-eq-htpy f g α .(f a) (pair a refl) =
+  eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+
+issec-hom-slice-fiberwise-hom :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  ((fiberwise-hom-hom-slice f g) ∘ (hom-slice-fiberwise-hom f g)) ~ id
+issec-hom-slice-fiberwise-hom f g α =
+  eq-htpy (λ x → eq-htpy (issec-hom-slice-fiberwise-hom-eq-htpy f g α x))
+
+isretr-hom-slice-fiberwise-hom :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  ((hom-slice-fiberwise-hom f g) ∘ (fiberwise-hom-hom-slice f g)) ~ id
+isretr-hom-slice-fiberwise-hom f g (pair h H) =
+  eq-pair-Σ refl (eq-htpy (λ a → (inv-inv (H a))))
+
+abstract
+  is-equiv-fiberwise-hom-hom-slice :
+    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+    (f : A → X) (g : B → X) →
+    is-equiv (fiberwise-hom-hom-slice f g)
+  is-equiv-fiberwise-hom-hom-slice f g =
+    is-equiv-has-inverse
+      ( hom-slice-fiberwise-hom f g)
+      ( issec-hom-slice-fiberwise-hom f g)
+      ( isretr-hom-slice-fiberwise-hom f g)
+
+equiv-fiberwise-hom-hom-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  hom-slice f g ≃ ((x : X) → fib f x → fib g x)
+pr1 (equiv-fiberwise-hom-hom-slice f g) = fiberwise-hom-hom-slice f g
+pr2 (equiv-fiberwise-hom-hom-slice f g) = is-equiv-fiberwise-hom-hom-slice f g
+
+abstract
+  is-equiv-hom-slice-fiberwise-hom :
+    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+    (f : A → X) (g : B → X) →
+    is-equiv (hom-slice-fiberwise-hom f g)
+  is-equiv-hom-slice-fiberwise-hom f g =
+    is-equiv-has-inverse
+      ( fiberwise-hom-hom-slice f g)
+      ( isretr-hom-slice-fiberwise-hom f g)
+      ( issec-hom-slice-fiberwise-hom f g)
+
+equiv-hom-slice-fiberwise-hom :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  ((x : X) → fib f x → fib g x) ≃ hom-slice f g
+pr1 (equiv-hom-slice-fiberwise-hom f g) = hom-slice-fiberwise-hom f g
+pr2 (equiv-hom-slice-fiberwise-hom f g) = is-equiv-hom-slice-fiberwise-hom f g
+
+equiv-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) → UU (l1 ⊔ (l2 ⊔ l3))
+equiv-slice {A = A} {B} f g = Σ (A ≃ B) (λ e → f ~ (g ∘ (map-equiv e)))
+
+hom-equiv-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  equiv-slice f g → hom-slice f g
+pr1 (hom-equiv-slice f g e) = pr1 (pr1 e)
+pr2 (hom-equiv-slice f g e) = pr2 e
+```
+
+```agda
+abstract
+  is-fiberwise-equiv-fiberwise-equiv-equiv-slice :
+    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+    (f : A → X) (g : B → X)
+    (t : hom-slice f g) → is-equiv (pr1 t) →
+    is-fiberwise-equiv (fiberwise-hom-hom-slice f g t)
+  is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g (pair h H) =
+    is-fiberwise-equiv-is-equiv-triangle f g h H
+
+abstract
+  is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice :
+    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+    (f : A → X) (g : B → X) →
+    (t : hom-slice f g) →
+    ((x : X) → is-equiv (fiberwise-hom-hom-slice f g t x)) →
+    is-equiv (pr1 t)
+  is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice
+    f g (pair h H) =
+    is-equiv-triangle-is-fiberwise-equiv f g h H
+
+equiv-fiberwise-equiv-equiv-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  equiv-slice f g ≃ Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
+equiv-fiberwise-equiv-equiv-slice f g =
+  equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
+  equiv-right-swap-Σ
+  where
+  α   : ( h : hom-slice f g) →
+        is-equiv (pr1 h) ≃
+        is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+  α h = equiv-prop
+          ( is-subtype-is-equiv _)
+          ( is-prop-Π (λ x → is-subtype-is-equiv _))
+          ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g h)
+          ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice
+            f g h)
+
+fiberwise-equiv-equiv-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  equiv-slice f g → Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
+fiberwise-equiv-equiv-slice f g =
+  map-equiv (equiv-fiberwise-equiv-equiv-slice f g)
+    
+equiv-fam-equiv-equiv-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) →
+  equiv-slice f g ≃ ((x : X) → (fib f x) ≃ (fib g x))
+equiv-fam-equiv-equiv-slice f g =
+  ( inv-distributive-Π-Σ) ∘e
+  ( equiv-fiberwise-equiv-equiv-slice f g)
 ```
