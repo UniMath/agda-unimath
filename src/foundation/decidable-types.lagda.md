@@ -6,20 +6,36 @@
 module foundation.decidable-types where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using
+  ( coprod; inl; inr; ind-coprod; is-prop-coprod)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.double-negation using (¬¬)
-open import foundation.empty-types using (empty; ex-falso)
+open import foundation.double-negation using (¬¬; intro-dn)
+open import foundation.empty-types using
+  ( empty; ex-falso; is-empty; empty-Prop; is-nonempty-is-inhabited)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-equiv; map-equiv; inv-equiv)
 open import foundation.functions using (id; _∘_)
-open import foundation.negation using (¬; map-neg)
+open import foundation.negation using (¬; map-neg; is-prop-neg)
 open import foundation.retractions using (_retract-of_)
+open import foundation.propositions using
+  ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+open import foundation.propositional-truncations using
+  ( type-trunc-Prop; apply-universal-property-trunc-Prop;
+    is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
+    map-universal-property-trunc-Prop)
+open import foundation.type-arithmetic-empty-type using
+  ( right-unit-law-coprod-is-empty)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
+## Idea
+
+A type is said to be decidable if we can either construct an element, or we can prove that it is empty. In other words, we interpret decidability via the Curry-Howard interpretation of logic into type theory. A related concept is that a type is either inhabited or empty, where inhabitedness of a type is expressed using the propositional truncation.
+
 ## Definition
+
+### The Curry-Howard interpretation of decidability
 
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l
@@ -28,6 +44,24 @@ is-decidable A = coprod A (¬ A)
 is-decidable-fam :
   {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
 is-decidable-fam {A = A} P = (x : A) → is-decidable (P x)
+```
+
+### The predicate that a type is inhabited or empty
+
+```agda
+is-inhabited-or-empty : {l1 : Level} → UU l1 → UU l1
+is-inhabited-or-empty A = coprod (type-trunc-Prop A) (is-empty A)
+```
+
+### A type `A` is said to be merely decidable if it comes equipped with an element of `type-trunc-Prop (is-decidable A)`.
+
+```agda
+is-merely-decidable-Prop :
+  {l : Level} → UU l → UU-Prop l
+is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
+
+is-merely-decidable : {l : Level} → UU l → UU l
+is-merely-decidable A = type-trunc-Prop (is-decidable A)
 ```
 
 ## Examples
@@ -165,4 +199,77 @@ idempotent-is-decidable :
 idempotent-is-decidable P (inl (inl p)) = inl p
 idempotent-is-decidable P (inl (inr np)) = inr np
 idempotent-is-decidable P (inr np) = inr (λ p → np (inl p))
+```
+
+### Being inhabited or empty is a proposition
+
+```agda
+abstract
+  is-prop-is-inhabited-or-empty :
+    {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
+  is-prop-is-inhabited-or-empty A =
+    is-prop-coprod
+      ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
+      ( is-prop-type-trunc-Prop)
+      ( is-prop-neg)
+
+is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
+pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
+
+abstract
+  is-prop-is-decidable :
+    {l : Level} {A : UU l} → is-prop A → is-prop (is-decidable A)
+  is-prop-is-decidable is-prop-A =
+    is-prop-coprod intro-dn is-prop-A is-prop-neg
+
+is-decidable-Prop :
+  {l : Level} → UU-Prop l → UU-Prop l
+pr1 (is-decidable-Prop P) = is-decidable (type-Prop P)
+pr2 (is-decidable-Prop P) = is-prop-is-decidable (is-prop-type-Prop P)
+```
+
+### Decidability of a propositional truncation
+
+```agda
+abstract
+  is-prop-is-decidable-trunc-Prop :
+    {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
+  is-prop-is-decidable-trunc-Prop A =
+    is-prop-is-decidable is-prop-type-trunc-Prop
+    
+is-decidable-trunc-Prop : {l : Level} → UU l → UU-Prop l
+pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
+pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A
+
+is-decidable-trunc-Prop-is-merely-decidable :
+  {l : Level} (A : UU l) →
+  is-merely-decidable A → is-decidable (type-trunc-Prop A)
+is-decidable-trunc-Prop-is-merely-decidable A =
+  map-universal-property-trunc-Prop
+    ( is-decidable-trunc-Prop A)
+    ( f)
+  where
+  f : is-decidable A → type-Prop (is-decidable-trunc-Prop A)
+  f (inl a) = inl (unit-trunc-Prop a)
+  f (inr f) = inr (map-universal-property-trunc-Prop empty-Prop f)
+
+is-merely-decidable-is-decidable-trunc-Prop :
+  {l : Level} (A : UU l) →
+  is-decidable (type-trunc-Prop A) → is-merely-decidable A
+is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
+   apply-universal-property-trunc-Prop x
+     ( is-merely-decidable-Prop A)
+     ( unit-trunc-Prop ∘ inl)
+is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
+  unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
+```
+
+### Any inhabited type is a fixed point for `is-decidable`
+
+```agda
+is-fixed-point-is-decidable-is-inhabited :
+  {l : Level} {X : UU l} → type-trunc-Prop X → is-decidable X ≃ X
+is-fixed-point-is-decidable-is-inhabited {l} {X} t =
+  right-unit-law-coprod-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```

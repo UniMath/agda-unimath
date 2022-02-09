@@ -11,6 +11,8 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.negation using (¬; map-neg; neg-Prop')
+open import foundation.propositional-truncations using
+  ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU)
@@ -110,4 +112,19 @@ dn-extend :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
 dn-extend {P = P} {Q = Q} f = dn-elim-neg (¬ Q) ∘ (map-dn f)
+```
+
+### A double negation of a type is logially equivalent to the double negation of its propositional truncation
+
+```agda
+abstract
+  dn-dn-type-trunc-Prop :
+    {l : Level} (A : UU l) → ¬¬ (type-trunc-Prop A) → ¬¬ A
+  dn-dn-type-trunc-Prop A =
+    dn-extend (map-universal-property-trunc-Prop (dn-Prop' A) intro-dn)
+
+abstract
+  dn-type-trunc-Prop-dn :
+    {l : Level} {A : UU l} → ¬¬ A → ¬¬ (type-trunc-Prop A)
+  dn-type-trunc-Prop-dn = map-dn unit-trunc-Prop
 ```

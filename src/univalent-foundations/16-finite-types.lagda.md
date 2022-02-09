@@ -1957,15 +1957,14 @@ abstract
 
 abstract
   global-choice-decidable-subtype-count :
-    {l1 l2 : Level} {A : UU l1} (e : count A) {P : A → UU l2} →
-    ((x : A) → is-decidable (P x)) → ((x : A) → is-prop (P x)) →
-    global-choice (Σ A P)
-  global-choice-decidable-subtype-count e {P} d H =
+    {l1 l2 : Level} {A : UU l1} (e : count A) (P : A → UU-Prop l2) →
+    ((x : A) → is-decidable (type-Prop (P x))) →
+    global-choice (type-subtype P)
+  global-choice-decidable-subtype-count e P d =
     global-choice-equiv
-      ( equiv-Σ-equiv-base P (equiv-count e))
+      ( equiv-Σ-equiv-base (type-Prop ∘ P) (equiv-count e))
       ( global-choice-decidable-subtype-Fin
         ( λ x → P (map-equiv-count e x))
-        ( λ x → H (map-equiv-count e x))
         ( λ x → d (map-equiv-count e x)))
 
 is-inhabited-or-empty-count :
@@ -1997,8 +1996,9 @@ abstract
   global-choice-emb-count e f d t =
     map-equiv-total-fib
       ( map-emb f)
-      ( global-choice-decidable-subtype-count e d
-        ( is-prop-map-emb f)
+      ( global-choice-decidable-subtype-count e
+        ( fib-emb-Prop f)
+        ( d)
         ( functor-trunc-Prop
           ( map-inv-equiv-total-fib (map-emb f))
           ( t)))

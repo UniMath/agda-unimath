@@ -8,10 +8,14 @@ module foundation.coproduct-types where
 open import foundation.contractible-types using
   ( is-contr; eq-is-contr; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl)
+open import foundation.empty-types using (ex-falso)
+open import foundation.identity-types using (Id; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.non-contractible-types using (is-not-contractible)
+open import foundation.propositions using
+  ( all-elements-equal; is-prop; is-prop-all-elements-equal; eq-is-prop';
+    UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; lzero; _⊔_; UU)
 ```
 
@@ -68,4 +72,40 @@ module _
       is-contr A → is-contr B → is-not-contractible (coprod A B)
     is-not-contractible-coprod-is-contr HA HB HAB =
       neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr  HAB)
+```
+
+### Coproducts of mutually exclusive propositions are propositions
+
+```agda
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
+
+  abstract
+    all-elements-equal-coprod :
+      (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
+      all-elements-equal (coprod P Q)
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inl p') =
+      ap inl (is-prop-P p p')
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inr q') =
+      ex-falso (f p q')
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inl p') =
+      ex-falso (f p' q)
+    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inr q') =
+      ap inr (is-prop-Q q q')
+  
+  abstract
+    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (coprod P Q)
+    is-prop-coprod f is-prop-P is-prop-Q =
+      is-prop-all-elements-equal
+        ( all-elements-equal-coprod f
+          ( eq-is-prop' is-prop-P)
+          ( eq-is-prop' is-prop-Q))
+
+coprod-Prop :
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+  (type-Prop P → ¬ (type-Prop Q)) → UU-Prop (l1 ⊔ l2)
+pr1 (coprod-Prop P Q H) = coprod (type-Prop P) (type-Prop Q)
+pr2 (coprod-Prop P Q H) =
+  is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```

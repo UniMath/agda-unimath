@@ -11,6 +11,8 @@ open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
+open import foundation.propositional-truncations using
+  ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
   ( is-prop; UU-Prop; is-trunc-is-prop; is-prop-function-type)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
@@ -145,4 +147,31 @@ is-prop-is-empty = is-prop-function-type is-prop-empty
 is-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
 pr1 (is-empty-Prop A) = is-empty A
 pr2 (is-empty-Prop A) = is-prop-is-empty
+
+is-nonempty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+pr1 (is-nonempty-Prop A) = is-nonempty A
+pr2 (is-nonempty-Prop A) = is-prop-is-empty
+```
+
+```agda
+abstract
+  is-empty-type-trunc-Prop :
+    {l1 : Level} {X : UU l1} → is-empty X → is-empty (type-trunc-Prop X)
+  is-empty-type-trunc-Prop f =
+    map-universal-property-trunc-Prop empty-Prop f
+
+abstract
+  is-empty-type-trunc-Prop' :
+    {l1 : Level} {X : UU l1} → is-empty (type-trunc-Prop X) → is-empty X
+  is-empty-type-trunc-Prop' f = f ∘ unit-trunc-Prop
+```
+
+### Any inhabited type is nonempty
+
+```agda
+abstract
+  is-nonempty-is-inhabited :
+    {l : Level} {X : UU l} → type-trunc-Prop X → is-nonempty X
+  is-nonempty-is-inhabited {l} {X} =
+    map-universal-property-trunc-Prop (is-nonempty-Prop X) (λ x f → f x)
 ```
