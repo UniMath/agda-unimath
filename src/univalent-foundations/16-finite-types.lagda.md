@@ -7,7 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations.16-finite-types where
 
-open import univalent-foundations.15-image public
+open import foundation public
+open import elementary-number-theory public
 
 --------------------------------------------------------------------------------
 

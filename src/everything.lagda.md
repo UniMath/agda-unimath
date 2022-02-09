@@ -100,6 +100,7 @@ open import foundation.2-types
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
+open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.coherently-invertible-maps
 open import foundation.commuting-squares
@@ -144,12 +145,14 @@ open import foundation.global-choice
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.images
 open import foundation.impredicative-encodings
 open import foundation.induction-principle-propositional-truncation
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
+open import foundation.lawveres-fixed-point-theorem
 open import foundation.lists
 open import foundation.logical-equivalences
 open import foundation.mere-equality
@@ -170,6 +173,7 @@ open import foundation.structure-identity-principle
 open import foundation.subterminal-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -183,6 +187,7 @@ open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-identity-types
+open import foundation.universal-property-image
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universal-property-propositional-truncation
 open import foundation.universal-property-unit-type

@@ -11,6 +11,7 @@ open import foundation.2-types public
 open import foundation.binary-relations public
 open import foundation.boolean-reflection public
 open import foundation.booleans public
+open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.coherently-invertible-maps public
 open import foundation.commuting-squares public
@@ -55,12 +56,14 @@ open import foundation.global-choice public
 open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
+open import foundation.images public
 open import foundation.impredicative-encodings public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
+open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lists public
 open import foundation.logical-equivalences public
 open import foundation.mere-equality public
@@ -81,6 +84,7 @@ open import foundation.structure-identity-principle public
 open import foundation.subterminal-types public
 open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
+open import foundation.surjective-maps public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
 open import foundation.truncation-levels public
@@ -94,6 +98,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-identity-types public
+open import foundation.universal-property-image public
 open import foundation.universal-property-propositional-truncation public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
