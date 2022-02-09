@@ -9,6 +9,8 @@ open import foundation-core.logical-equivalences public
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv; _≃_)
+open import foundation-core.functions using (id)
+open import foundation-core.identity-types using (Id; refl)
 open import foundation-core.universe-levels using (Level; UU)
 
 open import foundation.propositions using
@@ -17,6 +19,15 @@ open import foundation.propositions using
 ```
 
 ## Properties
+
+### Two equal propositions are logically equivalent
+
+```agda
+iff-eq :
+  {l1 : Level} {P Q : UU-Prop l1} → Id P Q → P ⇔ Q
+pr1 (iff-eq refl) = id
+pr2 (iff-eq refl) = id
+```
 
 ### The type of logical equivalences between propositions is a proposition
 

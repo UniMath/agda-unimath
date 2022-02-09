@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( inv-distributive-Π-Σ)
+open import foundation.embeddings using (_↪_; map-emb; is-emb-map-emb)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
@@ -23,10 +24,13 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; fib-triangle; is-fiberwise-equiv-is-equiv-triangle;
     is-equiv-triangle-is-fiberwise-equiv; equiv-Σ)
 open import foundation.homotopies using
-  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy;
+  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy; _·r_;
     equiv-concat-htpy)
-open import foundation.identity-types using (Id; refl; inv; inv-inv)
-open import foundation.propositions using (equiv-prop; is-prop-Π)
+open import foundation.identity-types using (Id; refl; inv; inv-inv; _∙_)
+open import foundation.injective-maps using (is-injective-emb)
+open import foundation.propositional-maps using (is-prop-map-is-emb)
+open import foundation.propositions using
+  ( equiv-prop; is-prop-Π; is-prop; is-prop-is-equiv)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
 open import foundation.type-arithmetic-cartesian-product-types using
@@ -89,6 +93,29 @@ module _
     (h h' : hom-slice f g) → htpy-hom-slice h h' → Id h h'
   eq-htpy-hom-slice h h' = map-inv-equiv (extensionality-hom-slice h h')
 ```
+
+```agda
+comp-hom-slice :
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (h : C → X) →
+  hom-slice g h → hom-slice f g → hom-slice f h
+pr1 (comp-hom-slice f g h j i) = map-hom-slice g h j ∘ map-hom-slice f g i
+pr2 (comp-hom-slice f g h j i) =
+  ( triangle-hom-slice f g i) ∙h
+  ( (triangle-hom-slice g h j) ·r (map-hom-slice f g i))
+
+id-hom-slice :
+  {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) → hom-slice f f
+pr1 (id-hom-slice f) = id
+pr2 (id-hom-slice f) = refl-htpy
+
+is-equiv-hom-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) → hom-slice f g → UU (l2 ⊔ l3)
+is-equiv-hom-slice f g h = is-equiv (map-hom-slice f g h)
+```
+
+### Morphisms in the slice are equivalently described as families of maps between fibers
 
 ```agda
 fiberwise-hom-hom-slice :
@@ -227,4 +254,54 @@ equiv-fam-equiv-equiv-slice :
 equiv-fam-equiv-equiv-slice f g =
   ( inv-distributive-Π-Σ) ∘e
   ( equiv-fiberwise-equiv-equiv-slice f g)
+```
+
+### The type of slice morphisms into an embedding is a proposition
+
+```agda
+abstract
+  is-prop-hom-slice :
+    { l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
+    { B : UU l3} (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
+  is-prop-hom-slice {X = X} f i =
+    is-prop-is-equiv
+      ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))
+      ( is-prop-Π
+        ( λ x → is-prop-Π
+          ( λ p → is-prop-map-is-emb (is-emb-map-emb i) x)))
+```
+
+```agda
+abstract
+  is-equiv-hom-slice-emb :
+    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+    (f : A ↪ X) (g : B ↪ X) (h : hom-slice (map-emb f) (map-emb g)) →
+    hom-slice (map-emb g) (map-emb f) →
+    is-equiv-hom-slice (map-emb f) (map-emb g) h
+  is-equiv-hom-slice-emb f g h i =
+    is-equiv-has-inverse
+      ( map-hom-slice (map-emb g) (map-emb f) i)
+      ( λ y →
+        is-injective-emb g
+        ( inv
+          ( ( triangle-hom-slice
+              ( map-emb g)
+              ( map-emb f)
+              ( i)
+              ( y)) ∙
+            ( triangle-hom-slice
+              ( map-emb f)
+              ( map-emb g)
+              ( h)
+              ( map-hom-slice (map-emb g) (map-emb f) i y)))))
+      ( λ x →
+        is-injective-emb f
+        ( inv
+          ( ( triangle-hom-slice (map-emb f) (map-emb g) h x) ∙
+            ( triangle-hom-slice (map-emb g) (map-emb f) i
+              ( map-hom-slice
+                ( map-emb f)
+                ( map-emb g)
+                ( h)
+                ( x))))))
 ```
