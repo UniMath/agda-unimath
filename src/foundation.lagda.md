@@ -55,12 +55,15 @@ open import foundation.global-choice public
 open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
+open import foundation.impredicative-encodings public
+open import foundation.induction-principle-propositional-truncation public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
 open import foundation.lists public
 open import foundation.logical-equivalences public
+open import foundation.mere-equality public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.path-split-maps public
@@ -95,4 +98,5 @@ open import foundation.universal-property-propositional-truncation public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.weak-function-extensionality public
+open import foundation.weakly-constant-maps public
 ```

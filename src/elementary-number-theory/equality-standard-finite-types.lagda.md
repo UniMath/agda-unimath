@@ -14,13 +14,13 @@ open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
     is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ)
 open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (pr1; pr2)
 open import foundation.empty-types using (empty; is-set-empty)
 open import foundation.equality-coproduct-types using
-  ( is-set-coprod; is-prop-coprod)
+  ( is-set-coprod)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap; inv; _∙_)
 open import foundation.negation using (map-neg)

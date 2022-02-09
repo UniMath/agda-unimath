@@ -96,12 +96,15 @@ open import foundation.global-choice
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.impredicative-encodings
+open import foundation.induction-principle-propositional-truncation
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
 open import foundation.lists
 open import foundation.logical-equivalences
+open import foundation.mere-equality
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
@@ -136,6 +139,7 @@ open import foundation.universal-property-propositional-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.weak-function-extensionality
+open import foundation.weakly-constant-maps
 ```
 
 ## Elementary number theory
@@ -189,7 +193,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.14-propositional-truncation public
 open import univalent-foundations.15-image public
 open import univalent-foundations.16-finite-types public
 open import univalent-foundations.17-univalence public
@@ -228,6 +231,7 @@ open import the-circle.infinite-cyclic-types public
 ## Synthetic homotopy theory
 
 ```agda
+open import synthetic-homotopy-theory.interval-type public
 open import synthetic-homotopy-theory.23-pullbacks public
 open import synthetic-homotopy-theory.24-pushouts public
 open import synthetic-homotopy-theory.25-cubical-diagrams public

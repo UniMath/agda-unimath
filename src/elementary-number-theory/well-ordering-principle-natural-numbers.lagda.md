@@ -22,12 +22,16 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
+open import foundation.functoriality-dependent-pair-types using (tot)
+open import foundation.global-choice using (global-choice)
 open import foundation.identity-types using (Id; refl)
 open import foundation.negation using (¬)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
     type-Prop; prod-Prop; is-prop-type-Prop; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-subtype; type-subtype)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; Level)
 ```
@@ -318,4 +322,18 @@ is-decidable-strictly-bounded-Σ-ℕ' m P d =
     ( λ x → is-decidable-le-ℕ x m)
     ( d)
     ( λ x → id)
+```
+
+### Global choice
+
+```agda
+global-choice-decidable-subtype-ℕ :
+  {l1 : Level} (P : ℕ → UU-Prop l1)
+  (d : (x : ℕ) → is-decidable (type-Prop (P x))) →
+  global-choice (type-subtype P)
+global-choice-decidable-subtype-ℕ {l1} P d t =
+  tot ( λ x → pr1)
+      ( apply-universal-property-trunc-Prop t
+        ( minimal-element-ℕ-Prop P)
+        ( well-ordering-principle-ℕ (λ x → type-Prop (P x)) d))
 ```

@@ -7,7 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations.15-image where
 
-open import univalent-foundations.14-propositional-truncation public
+open import foundation public
+open import elementary-number-theory public
 
 --------------------------------------------------------------------------------
 

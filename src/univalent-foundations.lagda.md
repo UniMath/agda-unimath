@@ -7,7 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations where
 
-open import univalent-foundations.14-propositional-truncation public
 open import univalent-foundations.15-image public
 open import univalent-foundations.16-finite-types public
 open import univalent-foundations.17-univalence public
