@@ -226,39 +226,6 @@ eq-equiv-Prop e =
 
 -- Corollary 17.1.4
 
-is-decidable-prop : {l : Level} → UU l → UU l
-is-decidable-prop A = is-prop A × is-decidable A
-
-decidable-Prop :
-  (l : Level) → UU (lsuc l)
-decidable-Prop l = Σ (UU l) is-decidable-prop
-
-module _
-  {l : Level} (P : decidable-Prop l)
-  where
-
-  prop-decidable-Prop : UU-Prop l
-  pr1 prop-decidable-Prop = pr1 P
-  pr2 prop-decidable-Prop = pr1 (pr2 P)
-
-  type-decidable-Prop : UU l
-  type-decidable-Prop = type-Prop prop-decidable-Prop
-
-  abstract
-    is-prop-type-decidable-Prop : is-prop type-decidable-Prop
-    is-prop-type-decidable-Prop = is-prop-type-Prop prop-decidable-Prop
-
-  is-decidable-type-decidable-Prop : is-decidable type-decidable-Prop
-  is-decidable-type-decidable-Prop = pr2 (pr2 P)
-
-  is-decidable-prop-type-decidable-Prop : is-decidable-prop type-decidable-Prop
-  is-decidable-prop-type-decidable-Prop = pr2 P
-
-  is-decidable-prop-decidable-Prop : UU-Prop l
-  pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
-  pr2 is-decidable-prop-decidable-Prop =
-    is-prop-is-decidable is-prop-type-decidable-Prop
-
 decidable-subtype : {l1 : Level} (l : Level) (X : UU l1) → UU (l1 ⊔ lsuc l)
 decidable-subtype l X = X → decidable-Prop l
 
@@ -286,23 +253,6 @@ module _
             ( is-decidable-type-decidable-Prop (P x)))
 
 abstract
-  is-contr-raise-unit :
-    {l1 : Level} → is-contr (raise-unit l1)
-  is-contr-raise-unit {l1} =
-    is-contr-equiv' unit (equiv-raise l1 unit) is-contr-unit
-
-abstract
-  is-prop-raise-unit :
-    {l1 : Level} → is-prop (raise-unit l1)
-  is-prop-raise-unit {l1} =
-    is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
-
-raise-unit-Prop :
-  (l1 : Level) → UU-Prop l1
-pr1 (raise-unit-Prop l1) = raise-unit l1
-pr2 (raise-unit-Prop l1) = is-prop-raise-unit
-
-abstract
   is-contr-total-true-Prop :
     {l1 : Level} → is-contr (Σ (UU-Prop l1) (λ P → type-Prop P))
   is-contr-total-true-Prop {l1} =
@@ -322,24 +272,6 @@ abstract
                       ( is-prop-raise-unit)
                       ( raise-star)))))))
       ( is-contr-total-iff (raise-unit-Prop l1))
-
-abstract
-  is-prop-raise-empty :
-    {l1 : Level} → is-prop (raise-empty l1)
-  is-prop-raise-empty {l1} =
-    is-prop-equiv'
-      ( equiv-raise l1 empty)
-      ( is-prop-empty)
-
-raise-empty-Prop :
-  (l1 : Level) → UU-Prop l1
-pr1 (raise-empty-Prop l1) = raise-empty l1
-pr2 (raise-empty-Prop l1) = is-prop-raise-empty
-
-abstract
-  is-empty-raise-empty :
-    {l1 : Level} → is-empty (raise-empty l1)
-  is-empty-raise-empty {l1} = map-inv-equiv (equiv-raise-empty l1)
 
 abstract
   is-contr-total-false-Prop :
@@ -438,38 +370,6 @@ decidable-Eq-Fin :
 pr1 (decidable-Eq-Fin n i j) = Id i j
 pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
 pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin i j
-
-abstract
-  is-prop-is-decidable-prop :
-    {l : Level} (X : UU l) → is-prop (is-decidable-prop X)
-  is-prop-is-decidable-prop X =
-    is-prop-is-inhabited
-      ( λ H →
-        is-prop-prod
-          ( is-prop-is-prop X)
-          ( is-prop-is-decidable (pr1 H)))
-
-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
-is-decidable-prop-map {Y = Y} f = (y : Y) → is-decidable-prop (fib f y)
-
-abstract
-  is-prop-map-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-    is-decidable-prop-map f → is-prop-map f
-  is-prop-map-is-decidable-prop-map H y = pr1 (H y)
-
-is-decidable-map-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-  is-decidable-prop-map f → is-decidable-map f
-is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
-
-abstract
-  is-prop-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    is-prop (is-decidable-prop-map f)
-  is-prop-is-decidable-prop-map f =
-    is-prop-Π (λ y → is-prop-is-decidable-prop (fib f y))
 
 -- Subuniverses
 
@@ -1199,63 +1099,6 @@ LEM l = (P : UU-Prop l) → is-decidable (type-Prop P)
 -- Section 17.5 The binomial types
 
 -- Definition 17.5.1
-
-is-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
-is-decidable-emb {Y = Y} f = is-emb f × is-decidable-map f
-
-abstract
-  is-emb-is-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-    is-decidable-emb f → is-emb f
-  is-emb-is-decidable-emb H = pr1 H
-
-is-decidable-map-is-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-  is-decidable-emb f → is-decidable-map f
-is-decidable-map-is-decidable-emb H = pr2 H
-
-abstract
-  is-decidable-emb-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    is-decidable-prop-map f → is-decidable-emb f
-  pr1 (is-decidable-emb-is-decidable-prop-map f H) =
-    is-emb-is-prop-map (is-prop-map-is-decidable-prop-map H)
-  pr2 (is-decidable-emb-is-decidable-prop-map f H) =
-    is-decidable-map-is-decidable-prop-map H
-
-_↪d_ :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-X ↪d Y = Σ (X → Y) is-decidable-emb
-
-map-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪d Y → X → Y
-map-decidable-emb e = pr1 e
-
-abstract
-  is-decidable-emb-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
-    is-decidable-emb (map-decidable-emb e)
-  is-decidable-emb-map-decidable-emb e = pr2 e
-
-abstract
-  is-emb-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
-    is-emb (map-decidable-emb e)
-  is-emb-map-decidable-emb e =
-    is-emb-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
-
-abstract
-  is-decidable-map-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
-    is-decidable-map (map-decidable-emb e)
-  is-decidable-map-map-decidable-emb e =
-    is-decidable-map-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
-
-emb-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪d Y → X ↪ Y
-pr1 (emb-decidable-emb e) = map-decidable-emb e
-pr2 (emb-decidable-emb e) = is-emb-map-decidable-emb e
 
 -- Bureaucracy
 

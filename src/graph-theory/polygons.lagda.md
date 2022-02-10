@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.polygons where
+module graph-theory.polygons where
 
 open import univalent-combinatorics.undirected-graphs public
 open import univalent-combinatorics.finite-graphs public

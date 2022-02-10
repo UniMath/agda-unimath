@@ -61,6 +61,15 @@ foundation.unit-type
 
 ## Properties
 
+### To show that a type is a proposition, we may assume it is inhabited
+
+```
+abstract
+  is-prop-is-inhabited :
+    {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X
+  is-prop-is-inhabited f x y = f x x y
+```
+
 ### Equivalent characterizations of propositions
 
 ```agda

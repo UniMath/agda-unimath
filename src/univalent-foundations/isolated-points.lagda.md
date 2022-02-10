@@ -1,13 +1,11 @@
----
-title: Formalisation of the Symmetry Book
----
+# Isolated points
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
-module univalent-combinatorics.isolated-points where
+module univalent-foundations.isolated-points where
 
-open import univalent-foundations public
+open import univalent-foundations.17-univalence
 
 {-------------------------------------------------------------------------------
 
@@ -19,34 +17,6 @@ open import univalent-foundations public
 -------------------------------------------------------------------------------}
 
 -- Being isolated is a proposition
-
-is-prop-is-isolated :
-  {l1 : Level} {A : UU l1} (a : A) → is-prop (is-isolated a)
-is-prop-is-isolated a =
-  is-prop-is-inhabited
-    ( λ H →
-      is-prop-Π (λ x → is-prop-is-decidable (is-prop-eq-isolated-point a H x)))
-
-has-decidable-equality-isolated-point :
-  {l1 : Level} (A : UU l1) → has-decidable-equality (isolated-point A)
-has-decidable-equality-isolated-point A (pair x dx) (pair y dy) =
-  is-decidable-equiv
-    ( equiv-ap-pr1 is-prop-is-isolated)
-    ( dx y)
-
-is-set-isolated-point :
-  {l1 : Level} (A : UU l1) → is-set (isolated-point A)
-is-set-isolated-point A =
-  is-set-has-decidable-equality (has-decidable-equality-isolated-point A)
-
-decidable-emb-isolated-point :
-  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪d A
-decidable-emb-isolated-point {l1} {A} a =
-  pair
-    ( const unit A (pr1 a))
-    ( pair
-      {! is-emb-is-injective!}
-      ( λ x → {!!}))
 
 --------------------------------------------------------------------------------
 
@@ -112,13 +82,14 @@ is-contr-fib-map-coprod {A = A} {B} {C} {D} f g =
       ( pair f refl-htpy)
       ( is-contr-total-htpy' g))
 
+{-
 is-emb-map-coprod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} → 
   is-emb (λ (fg : (A → B) × (C → D)) → map-coprod (pr1 fg) (pr2 fg))
 is-emb-map-coprod (pair f g) =
   fundamental-theorem-id (pair f g)
-    {!!}
-    {! is-contr-total-path (pair f g)!}
+    ( refl)
+    {! is-contr-fib-map-coprod f g!}
     {!!}
 
 is-contr-total-equiv-maybe-structure :
@@ -130,6 +101,7 @@ is-contr-total-equiv-maybe-structure Y =
     ( is-contr-total-equiv (pr1 Y))
     ( pair (pr1 Y) id-equiv)
     {!!}
+-}
 
 map-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →

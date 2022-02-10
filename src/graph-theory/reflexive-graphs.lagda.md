@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.reflexive-graphs where
+module graph-theory.reflexive-graphs where
 
 open import univalent-foundations public
 

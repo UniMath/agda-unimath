@@ -1,16 +1,14 @@
----
-title: Formalisation of the Symmetry Book
----
+# Abstract polytopes
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.abstract-polytopes where
+module polytopes.abstract-polytopes where
 
 open import order-theory public
 ```
 
-## The axioms of Abstract Polytopes
+### The axioms of Abstract Polytopes
 
 We define abstract polytopes as finitely graded posets satisfying certain axioms. In the classical definition, the grading is a consequence of the axioms. Here, we take finitely graded posets as our starting point
 
@@ -62,7 +60,7 @@ module _
     is-prop-type-Prop (diamond-condition-finitely-graded-poset-Prop X)
 ```
 
-## Some terminology of polytopes
+### Some terminology of polytopes
 
 We introduce the notion of prepolytopes to be finitely graded posets equipped with a least and a largest element, and satisfying the diamond condition. Before we state the remaining conditions of polytopes, we introduce some terminology
 
@@ -396,7 +394,7 @@ module _
 
 ```
 
-## Proof condition P2 of polytopes
+### Proof condition P2 of polytopes
 
 The second axiom of polytopes asserts that every maximal chain has k elements. Note that every maximal chain is a path from the bottom element to the top element, which necessarily passes through all dimensions. Therefore, the second axiom follows from our setup. Note that we didn't start with general posets, but with finitely graded posets.
 
@@ -427,11 +425,11 @@ module _
     is-prop-type-Prop condition-P2-prepolytope-Prop
 ```
 
-## Strong connectedness of polytopes
+### Strong connectedness of polytopes
 
 The strong connectedness condition for polytopes asserts that the unordered graph of flags of a polytope is connected. The edges in this graph are punctured flags, i.e., chains that have exactly one element in each dimension except in one dimension that is neither the top nor the bottom dimension. A punctured flag connects the two flags it is a subchain of.
 
-## The definition of polytopes
+### The definition of polytopes
 
 ```agda
 
@@ -442,3 +440,4 @@ Polytope l1 l2 l3 k =
     ( λ X →
       ( condition-P2-Prepolytope l3 X) ×
       unit)
+```

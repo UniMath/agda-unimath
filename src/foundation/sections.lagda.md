@@ -18,6 +18,7 @@ open import
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
     _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
+open import foundation.fibers-of-maps using (fib; equiv-total-fib)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
@@ -93,6 +94,13 @@ module _
         ( htpy-map-section b)
         ( is-equiv-id)
         ( H))
+```
+
+```agda
+equiv-total-fib-map-section :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+  Σ (Σ A B) (fib (map-section b)) ≃ A
+equiv-total-fib-map-section b = equiv-total-fib (map-section b)
 ```
 
 ### Any section of a type family is an injective map

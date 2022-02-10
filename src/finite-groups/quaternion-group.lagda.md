@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.quaternion-group where
+module finite-groups.quaternion-group where
 
 open import groups public
 open import univalent-combinatorics.isolated-points public

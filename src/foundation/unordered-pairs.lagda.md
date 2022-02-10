@@ -1,17 +1,33 @@
----
-title: Formalisation of the Symmetry Book
----
+# Unordered pairs of elements in a type
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.unordered-pairs where
+module foundation.unordered-pairs where
 
-open import univalent-foundations public
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
+open import univalent-foundations.16-finite-types
+open import univalent-foundations.17-univalence
+```
+
+## Idea
+
+An unordered pair of elements in a type `A` consists of a 2-element type `X` and a map `X → A`.
+
+## Definition
+
+### The definition of unordered pairs
+
+```
 unordered-pair : {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
 unordered-pair A = Σ (UU-Fin 2) (λ X → pr1 X → A)
+```
 
+### Immediate structure on the type of unordered pairs
+
+```agda
 type-unordered-pair : {l : Level} {A : UU l} → unordered-pair A → UU lzero
 type-unordered-pair p = pr1 (pr1 p)
 
@@ -37,44 +53,31 @@ element-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) →
   type-unordered-pair p → A
 element-unordered-pair p = pr2 p
+```
 
-{-
-module _
-  {l : Level} {A : UU l}
-  where
+### The predicate of being in an unodered pair
 
-  is-injective-map-Fin-two-ℕ :
-    (f : Fin two-ℕ → A) →
-    ¬ (Id (f zero-Fin) (f one-Fin)) → is-injective f
-  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inl (inr star)} p = refl
-  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inr star} p = ex-falso (H p)
-  is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
-    ex-falso (H (inv p))
-  is-injective-map-Fin-two-ℕ f H {inr star} {inr star} p = refl
-  
-  is-injective-element-unordered-pair :
-    (p : unordered-pair A) →
-    ¬ ( (x y : type-unordered-pair p) →
-        Id (element-unordered-pair p x) (element-unordered-pair p y)) →
-    is-injective (element-unordered-pair p)
-  is-injective-element-unordered-pair (pair X f) H {x} = {!!}
-    where
-    g : Fin two-ℕ → A
-    g (inl (inr star)) = {!!}
-    g (inr star) = {!!}
-  
--}
-
+```agda
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
 is-in-unordered-pair p a = ∃ (λ x → Id (element-unordered-pair p x) a)
+```
 
+### The condition of being a self-pairing
+
+```agda
 is-selfpairing-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) → UU l
 is-selfpairing-unordered-pair p =
   (x y : type-unordered-pair p) →
   type-trunc-Prop (Id (element-unordered-pair p x) (element-unordered-pair p y))
+```
 
+### Standard unordered pairs
+
+Any two elements `x` and `y` in a type `A` define a standard unordered pair
+
+```agda
 module _
   {l1 : Level} {A : UU l1}
   where
@@ -83,30 +86,24 @@ module _
   pr1 (standard-unordered-pair x y) = Fin-UU-Fin 2
   pr2 (standard-unordered-pair x y) (inl (inr star)) = x
   pr2 (standard-unordered-pair x y) (inr star) = y
-  
+```
+
+## Properties
+
+### Equality of unordered pairs
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
   Eq-unordered-pair : (p q : unordered-pair A) → UU l1
   Eq-unordered-pair (pair X p) (pair Y q) =
     Σ (equiv-UU-Fin X Y) (λ e → p ~ (q ∘ map-equiv e))
 
-  mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → UU-Prop l1
-  mere-Eq-unordered-pair-Prop p q = trunc-Prop (Eq-unordered-pair p q)
-
-  mere-Eq-unordered-pair : (p q : unordered-pair A) → UU l1
-  mere-Eq-unordered-pair p q = type-Prop (mere-Eq-unordered-pair-Prop p q)
-
-  is-prop-mere-Eq-unordered-pair :
-    (p q : unordered-pair A) → is-prop (mere-Eq-unordered-pair p q)
-  is-prop-mere-Eq-unordered-pair p q =
-    is-prop-type-Prop (mere-Eq-unordered-pair-Prop p q)
-
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
   pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin X
   pr2 (refl-Eq-unordered-pair (pair X p)) = refl-htpy
-
-  refl-mere-Eq-unordered-pair :
-    (p : unordered-pair A) → mere-Eq-unordered-pair p p
-  refl-mere-Eq-unordered-pair p =
-    unit-trunc-Prop (refl-Eq-unordered-pair p)
 
   Eq-eq-unordered-pair :
     (p q : unordered-pair A) → Id p q → Eq-unordered-pair p q
@@ -145,7 +142,35 @@ module _
     (eq-Eq-unordered-pair p q ∘ Eq-eq-unordered-pair p q) ~ id
   isretr-eq-Eq-unordered-pair p q =
     isretr-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
+```
 
+### Mere equality of unordered pairs
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+  
+  mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → UU-Prop l1
+  mere-Eq-unordered-pair-Prop p q = trunc-Prop (Eq-unordered-pair p q)
+
+  mere-Eq-unordered-pair : (p q : unordered-pair A) → UU l1
+  mere-Eq-unordered-pair p q = type-Prop (mere-Eq-unordered-pair-Prop p q)
+
+  is-prop-mere-Eq-unordered-pair :
+    (p q : unordered-pair A) → is-prop (mere-Eq-unordered-pair p q)
+  is-prop-mere-Eq-unordered-pair p q =
+    is-prop-type-Prop (mere-Eq-unordered-pair-Prop p q)
+
+  refl-mere-Eq-unordered-pair :
+    (p : unordered-pair A) → mere-Eq-unordered-pair p p
+  refl-mere-Eq-unordered-pair p =
+    unit-trunc-Prop (refl-Eq-unordered-pair p)
+```
+
+### Functoriality of unordered pairs
+
+```agda
 map-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-pair A → unordered-pair B
@@ -201,3 +226,30 @@ unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
 unordered-distinct-pair A = Σ (UU-Fin 2) (λ X → pr1 X ↪ A)
 ```
+
+{-
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-injective-map-Fin-two-ℕ :
+    (f : Fin two-ℕ → A) →
+    ¬ (Id (f zero-Fin) (f one-Fin)) → is-injective f
+  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inl (inr star)} p = refl
+  is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inr star} p = ex-falso (H p)
+  is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
+    ex-falso (H (inv p))
+  is-injective-map-Fin-two-ℕ f H {inr star} {inr star} p = refl
+  
+  is-injective-element-unordered-pair :
+    (p : unordered-pair A) →
+    ¬ ( (x y : type-unordered-pair p) →
+        Id (element-unordered-pair p x) (element-unordered-pair p y)) →
+    is-injective (element-unordered-pair p)
+  is-injective-element-unordered-pair (pair X f) H {x} = {!!}
+    where
+    g : Fin two-ℕ → A
+    g (inl (inr star)) = {!!}
+    g (inr star) = {!!}
+  
+-}
