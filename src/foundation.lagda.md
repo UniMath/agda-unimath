@@ -73,6 +73,7 @@ open import foundation.path-split-maps public
 open import foundation.propositional-maps public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
+open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
 open import foundation.retractions public
 open import foundation.sections public
@@ -94,12 +95,16 @@ open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.unit-type public
+open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
+open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public
 open import foundation.universal-property-propositional-truncation public
+open import foundation.universal-property-propositional-truncation-into-sets public
+open import foundation.universal-property-pullbacks public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.weak-function-extensionality public

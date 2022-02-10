@@ -114,6 +114,7 @@ open import foundation.path-split-maps
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
@@ -141,6 +142,8 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-identity-types
 open import foundation.universal-property-image
 open import foundation.universal-property-propositional-truncation
+open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.universal-property-pullbacks
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.weak-function-extensionality
