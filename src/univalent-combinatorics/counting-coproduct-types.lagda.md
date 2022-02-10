@@ -4,7 +4,33 @@
 {-# OPTIONS --without-K --exact-split #-}
 
 module univalent-combinatorics.counting-coproduct-types where
+
+open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
+open import elementary-number-theory.equivalences-standard-finite-types using
+  ( coprod-Fin)
+
+open import foundation.coproduct-types using
+  ( coprod; inl; inr; is-left-Prop; is-right-Prop; equiv-left-summand;
+    equiv-right-summand)
+open import foundation.decidable-types using
+  ( is-decidable-is-left; is-decidable-is-right)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalences using (_∘e_; inv-equiv; _≃_)
+open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.identity-types using (Id; refl)
+open import foundation.universe-levels using (Level; UU; lzero)
+
+open import univalent-combinatorics.counting using
+  ( count; number-of-elements-count; count-unit; count-empty; count-equiv)
+open import univalent-combinatorics.counting-decidable-subtypes using
+  ( count-decidable-subtype)
 ```
+
+## Idea
+
+A coproduct `X + Y` has a count if and only if both `X` and `Y` have a count
+
+## Properties
 
 ### Types equipped with a count are closed under coproducts
 
@@ -24,47 +50,20 @@ abstract
   number-of-elements-count-coprod (pair k e) (pair l f) = refl
 ```
 
-## A coproduct X + Y has a count if and only if both X and Y have a count.
+### If `X + Y` has a count, then both `X` and `Y` have a count
 
 ```agda
-is-left : {l1 l2 : Level} {X : UU l1} {Y : UU l2} → coprod X Y → UU lzero
-is-left (inl x) = unit
-is-left (inr x) = empty
-
-equiv-left-summand :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Σ (coprod X Y) is-left) ≃ X
-equiv-left-summand {l1} {l2} {X} {Y} =
-  ( ( right-unit-law-coprod X) ∘e
-    ( equiv-coprod right-unit-law-prod right-absorption-prod)) ∘e
-  ( right-distributive-Σ-coprod X Y is-left)
-
-count-is-left :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (t : coprod X Y) → count (is-left t)
-count-is-left (inl x) = count-unit
-count-is-left (inr x) = count-empty
-
-count-left-coprod :
+count-left-summand :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (coprod X Y) → count X
-count-left-coprod e = count-equiv equiv-left-summand (count-Σ e count-is-left)
+count-left-summand e =
+  count-equiv
+    ( equiv-left-summand)
+    ( count-decidable-subtype is-left-Prop is-decidable-is-left e)
 
-is-right : {l1 l2 : Level} {X : UU l1} {Y : UU l2} → coprod X Y → UU lzero
-is-right (inl x) = empty
-is-right (inr x) = unit
-
-equiv-right-summand :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Σ (coprod X Y) is-right) ≃ Y
-equiv-right-summand {l1} {l2} {X} {Y} =
-  ( ( left-unit-law-coprod Y) ∘e
-    ( equiv-coprod right-absorption-prod right-unit-law-prod)) ∘e
-    ( right-distributive-Σ-coprod X Y is-right)
-
-count-is-right :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (t : coprod X Y) → count (is-right t)
-count-is-right (inl x) = count-empty
-count-is-right (inr x) = count-unit
-
-count-right-coprod :
+count-right-summand :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (coprod X Y) → count Y
-count-right-coprod e =
-  count-equiv equiv-right-summand (count-Σ e count-is-right)
+count-right-summand e =
+  count-equiv
+    ( equiv-right-summand)
+    ( count-decidable-subtype is-right-Prop is-decidable-is-right e)
 ```

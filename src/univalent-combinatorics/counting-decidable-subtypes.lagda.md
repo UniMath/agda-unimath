@@ -5,30 +5,36 @@
 
 module univalent-combinatorics.counting-decidable-subtypes where
 
-open import foundation
-open import elementary-number-theory
-open import univalent-combinatorics.counting
-
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( zero-Fin)
+open import elementary-number-theory.standard-finite-types using (zero-Fin; Fin)
 
+open import foundation.contractible-types using (equiv-is-contr; is-contr-Σ)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (map-equiv)
+open import foundation.equivalences using (map-equiv; _≃_; id-equiv)
+open import foundation.fibers-of-maps using (equiv-fib-pr1)
 open import foundation.functions using (_∘_)
+open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.identity-types using (Id; refl)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+open import foundation.subtypes using (type-subtype)
+open import foundation.type-arithmetic-coproduct-types using
+  ( right-distributive-Σ-coprod)
+open import foundation.type-arithmetic-empty-type using
+  ( right-unit-law-coprod-is-empty)
+open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; is-empty-is-zero-number-of-elements-count; count-is-contr;
-    count-is-empty; number-of-elements-count;
-    is-zero-number-of-elements-count-is-empty)
+    count-is-empty; number-of-elements-count; count-equiv; count-equiv';
+    is-zero-number-of-elements-count-is-empty; equiv-count; is-set-count;
+    has-decidable-equality-count)
 ```
 
 ### Propositions have countings if and only if they are decidable
@@ -99,11 +105,13 @@ abstract
     cases-number-of-elements-count-eq d (d x y)
 ```
 
+### The elements of a decidable subtype of a type equipped with a counting can be counted
+
 ```agda
 count-decidable-subtype' :
   {l1 l2 : Level} {X : UU l1} (P : X → UU-Prop l2) →
   ((x : X) → is-decidable (type-Prop (P x))) →
-  (k : ℕ) (e : Fin k ≃ X) → count (Σ X (λ x → type-Prop (P x)))
+  (k : ℕ) (e : Fin k ≃ X) → count (type-subtype P)
 count-decidable-subtype' P d zero-ℕ e =
   count-is-empty
     ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl ∘ pr1)
@@ -166,14 +174,20 @@ count-decidable-subtype P d e =
   count-decidable-subtype' P d
     ( number-of-elements-count e)
     ( equiv-count e)
+```
 
+### If the elements of a subtype of a type equipped with a counting can be counted, then the subtype is decidable
 
---   count-Σ e (λ x → count-decidable-Prop (P x) (d x))
--- ```
-
--- ```agda
--- is-decidable-count-subtype :
---   {l1 l2 : Level} {X : UU l1} (P : X → UU-Prop l2) → count X →
---   count (Σ X (λ x → type-Prop (P x))) → (x : X) → is-decidable (type-Prop (P x))
--- is-decidable-count-subtype P = is-decidable-count-Σ
--- ```
+```agda
+is-decidable-count-subtype :
+  {l1 l2 : Level} {X : UU l1} (P : X → UU-Prop l2) → count X →
+  count (type-subtype P) → (x : X) → is-decidable (type-Prop (P x))
+is-decidable-count-subtype P e f x =
+  is-decidable-count
+    ( count-equiv
+      ( equiv-fib-pr1 (type-Prop ∘ P) x)
+      ( count-decidable-subtype
+        ( λ y → pair (Id (pr1 y) x) (is-set-count e (pr1 y) x))
+        ( λ y → has-decidable-equality-count e (pr1 y) x)
+        ( f)))
+```

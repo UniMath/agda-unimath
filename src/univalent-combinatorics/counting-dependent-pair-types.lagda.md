@@ -4,7 +4,61 @@
 {-# OPTIONS --without-K --exact-split #-}
 
 module univalent-combinatorics.counting-dependent-pair-types where
+
+open import elementary-number-theory.addition-natural-numbers using (add-ℕ')
+open import elementary-number-theory.equality-natural-numbers using
+  ( is-decidable-is-zero-ℕ; has-decidable-equality-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-successor-is-nonzero-ℕ)
+open import elementary-number-theory.standard-finite-types using (Fin; zero-Fin)
+open import elementary-number-theory.sums-of-natural-numbers using
+  ( sum-Fin-ℕ; sum-count-ℕ)
+
+open import foundation.contractible-types using (is-contr-total-path')
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.decidable-types using (is-decidable)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equality-dependent-pair-types using
+  ( equiv-pair-eq-Σ)
+open import foundation.equivalences using
+  ( _≃_; _∘e_; inv-equiv; map-equiv; id-equiv)
+open import foundation.fibers-of-maps using (equiv-fib-pr1; fib)
+open import foundation.functions using (_∘_)
+open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-Σ-equiv-base; equiv-tot)
+open import foundation.identity-types using (refl; Id; _∙_; ap; tr; inv)
+open import foundation.sections using (map-section; equiv-total-fib-map-section)
+open import foundation.type-arithmetic-coproduct-types using
+  ( right-distributive-Σ-coprod; left-distributive-Σ-coprod)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( left-unit-law-Σ-is-contr; inv-assoc-Σ)
+open import foundation.type-arithmetic-unit-type using
+  ( left-unit-law-Σ)
+open import foundation.unit-type using (unit; star)
+open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.counting using
+  ( count; count-is-empty; is-empty-is-zero-number-of-elements-count;
+    count-equiv; number-of-elements-count; has-decidable-equality-count;
+    count-equiv'; map-equiv-count)
+open import univalent-combinatorics.counting-coproduct-types using
+  ( count-coprod; number-of-elements-count-coprod)
+open import univalent-combinatorics.counting-decidable-subtypes using
+  ( count-eq; is-decidable-count)
 ```
+
+## Idea
+
+Consider a type family `B` over `A`, and consider the following statements
+
+1. The elements of `A` can be counted.
+2. For each `x : A`, the elements of `B x` can be counted
+3. The elements of `Σ A B` can be counted.
+
+If 1 holds, then 2 holds if and only if 3 holds. Furthermore if 2 and 3 hold, then 1 holds if and only if the elements of `Σ A (¬ ∘ B)` can be counted, i.e., if the elements in the complement of `B` can be counted.
+
+## Proofs
 
 ### `Σ A B` can be counted if `A` can be counted and if each `B x` can be counted
 

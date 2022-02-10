@@ -4,6 +4,36 @@
 {-# OPTIONS --without-K --exact-split #-}
 
 module univalent-combinatorics.counting-cartesian-product-types where
+
+open import elementary-number-theory.equivalences-standard-finite-types using
+  ( prod-Fin)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( mul-ℕ)
+
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.contractible-types using
+  ( equiv-is-contr; is-contr-total-path')
+open import foundation.decidable-equality using
+  ( has-decidable-equality-right-factor)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalences using (_∘e_; inv-equiv; _≃_)
+open import foundation.functoriality-cartesian-product-types using
+  ( equiv-prod)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.identity-types using (Id; refl)
+open import foundation.type-arithmetic-cartesian-product-types using
+  ( commutative-prod)
+open import foundation.type-arithmetic-dependent-pair-types using (assoc-Σ)
+open import foundation.type-arithmetic-unit-type using (right-unit-law-prod)
+open import foundation.unit-type using (is-contr-unit)
+open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.counting using
+  ( count; number-of-elements-count; count-equiv; has-decidable-equality-count)
+open import univalent-combinatorics.counting-decidable-subtypes using
+  ( count-eq)
+open import univalent-combinatorics.counting-dependent-pair-types using
+  ( count-Σ)
 ```
 
 ```agda
