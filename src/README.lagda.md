@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+# Univalent mathematics in Agda
 
 [![build](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml)
 
