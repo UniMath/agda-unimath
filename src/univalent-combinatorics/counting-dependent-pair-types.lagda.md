@@ -46,6 +46,7 @@ open import univalent-combinatorics.counting-coproduct-types using
   ( count-coprod; number-of-elements-count-coprod)
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-eq; is-decidable-count)
+open import univalent-combinatorics.double-counting using (double-counting)
 ```
 
 ## Idea
@@ -211,4 +212,36 @@ is-decidable-count-Σ :
   count X → count (Σ X P) → (x : X) → is-decidable (P x)
 is-decidable-count-Σ e f x =
   is-decidable-count (count-fiber-count-Σ e f x)
+```
+
+```agda
+abstract
+  double-counting-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
+    (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) →
+    Id ( number-of-elements-count count-C)
+       ( sum-count-ℕ count-A (λ x → number-of-elements-count (count-B x)))
+  double-counting-Σ count-A count-B count-C =
+    ( double-counting count-C (count-Σ count-A count-B)) ∙
+    ( number-of-elements-count-Σ count-A count-B)
+
+abstract
+  sum-number-of-elements-count-fiber-count-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
+    (f : count (Σ A B)) →
+    Id ( sum-count-ℕ e
+         ( λ x → number-of-elements-count (count-fiber-count-Σ e f x)))
+       ( number-of-elements-count f)
+  sum-number-of-elements-count-fiber-count-Σ e f =
+    ( inv (number-of-elements-count-Σ e (λ x → count-fiber-count-Σ e f x))) ∙
+    ( double-counting (count-Σ e (λ x → count-fiber-count-Σ e f x)) f)
+
+abstract
+  double-counting-fiber-count-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
+    (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) (x : A) →
+    Id ( number-of-elements-count (count-B x))
+       ( number-of-elements-count (count-fiber-count-Σ count-A count-C x))
+  double-counting-fiber-count-Σ count-A count-B count-C x =
+    double-counting (count-B x) (count-fiber-count-Σ count-A count-C x)
 ```

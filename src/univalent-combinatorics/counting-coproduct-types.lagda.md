@@ -17,13 +17,14 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_∘e_; inv-equiv; _≃_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (Id; refl; _∙_)
 open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; count-unit; count-empty; count-equiv)
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-decidable-subtype)
+open import univalent-combinatorics.double-counting using (double-counting)
 ```
 
 ## Idea
@@ -66,4 +67,20 @@ count-right-summand e =
   count-equiv
     ( equiv-right-summand)
     ( count-decidable-subtype is-right-Prop is-decidable-is-right e)
+```
+
+### If each of `A`, `B`, and `A + B` come equipped with countings, then the number of elements of `A` and of `B` add up to the number of elements of `A + B`
+
+```agda
+abstract
+  double-counting-coprod :
+    { l1 l2 : Level} {A : UU l1} {B : UU l2}
+    ( count-A : count A) (count-B : count B) (count-C : count (coprod A B)) →
+    Id ( number-of-elements-count count-C)
+       ( add-ℕ
+         ( number-of-elements-count count-A)
+         ( number-of-elements-count count-B))
+  double-counting-coprod count-A count-B count-C =
+    ( double-counting count-C (count-coprod count-A count-B)) ∙
+    ( number-of-elements-count-coprod count-A count-B)
 ```

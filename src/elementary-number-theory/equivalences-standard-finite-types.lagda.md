@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Equivalences between standard finite types
 
 ```agda
@@ -13,17 +9,21 @@ open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( exp-ℕ; mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
-open import foundation.type-arithmetic-coproduct-types using
-  ( inv-assoc-coprod; right-distributive-prod-coprod)
+open import elementary-number-theory.standard-finite-types using (Fin; zero-Fin)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr)
 open import foundation.coproduct-types using (coprod)
-open import foundation.equivalences using (_≃_; id-equiv; _∘e_; inv-equiv)
+open import foundation.empty-types using (ex-falso)
+open import foundation.equivalences using
+  ( _≃_; id-equiv; _∘e_; inv-equiv; map-inv-equiv; map-equiv)
+open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
 open import foundation.functoriality-cartesian-product-types using
   ( equiv-prod)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.identity-types using (Id; refl; ap)
+open import foundation.type-arithmetic-coproduct-types using
+  ( inv-assoc-coprod; right-distributive-prod-coprod)
 open import foundation.type-arithmetic-empty-type using
   ( right-unit-law-coprod; left-absorption-prod; inv-left-unit-law-coprod)
 open import foundation.type-arithmetic-unit-type using (left-unit-law-prod)
@@ -36,7 +36,23 @@ open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 ```
 
-# Equivalences between standard finite types
+## Idea
+
+We construct equivalences between (types built out of) standard finite types.
+
+### Fin is injective
+
+```agda
+abstract
+  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → Id k l
+  is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
+  is-injective-Fin {zero-ℕ} {succ-ℕ l} e = ex-falso (map-inv-equiv e zero-Fin)
+  is-injective-Fin {succ-ℕ k} {zero-ℕ} e = ex-falso (map-equiv e zero-Fin)
+  is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+    ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
+```
+
+### The standard finite types are closed under coproducts
 
 ```agda
 coprod-Fin :
@@ -48,7 +64,11 @@ coprod-Fin k (succ-ℕ l) =
 Fin-add-ℕ :
   (k l : ℕ) → Fin (add-ℕ k l) ≃ coprod (Fin k) (Fin l)
 Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
+```
 
+### The standard finite types are closed under cartesian products
+
+```
 prod-Fin : (k l : ℕ) → ((Fin k) × (Fin l)) ≃ Fin (mul-ℕ k l)
 prod-Fin zero-ℕ l = left-absorption-prod (Fin l)
 prod-Fin (succ-ℕ k) l =
@@ -58,7 +78,11 @@ prod-Fin (succ-ℕ k) l =
 
 Fin-mul-ℕ : (k l : ℕ) → (Fin (mul-ℕ k l)) ≃ ((Fin k) × (Fin l))
 Fin-mul-ℕ k l = inv-equiv (prod-Fin k l)
+```
 
+### The standard finite types are closed under function types
+
+```agda
 function-Fin :
   (k l : ℕ) → (Fin k → Fin l) ≃ Fin (exp-ℕ l k)
 function-Fin zero-ℕ l =
