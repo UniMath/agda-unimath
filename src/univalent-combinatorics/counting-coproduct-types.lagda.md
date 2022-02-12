@@ -17,7 +17,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_∘e_; inv-equiv; _≃_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.identity-types using (Id; refl; _∙_)
+open import foundation.identity-types using (Id; refl; _∙_; inv)
 open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.counting using
@@ -83,4 +83,20 @@ abstract
   double-counting-coprod count-A count-B count-C =
     ( double-counting count-C (count-coprod count-A count-B)) ∙
     ( number-of-elements-count-coprod count-A count-B)
+
+abstract
+  sum-number-of-elements-coprod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (coprod A B)) →
+    Id ( add-ℕ ( number-of-elements-count (count-left-summand e))
+               ( number-of-elements-count (count-right-summand e)))
+       ( number-of-elements-count e)
+  sum-number-of-elements-coprod e =
+    ( inv
+      ( number-of-elements-count-coprod
+        ( count-left-summand e)
+        ( count-right-summand e))) ∙
+    ( inv
+      ( double-counting-coprod
+        ( count-left-summand e)
+        ( count-right-summand e) e))
 ```

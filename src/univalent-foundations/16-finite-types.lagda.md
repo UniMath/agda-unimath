@@ -10,122 +10,6 @@ module univalent-foundations.16-finite-types where
 open import foundation public
 open import elementary-number-theory public
 
--- Double counting in several specific situations
-
-abstract
-  sum-number-of-elements-count-fib :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    (count-A : count A) (count-B : count B) →
-    Id ( sum-count-ℕ count-B
-         ( λ x → number-of-elements-count (count-fib f count-A count-B x)))
-       ( number-of-elements-count count-A)
-  sum-number-of-elements-count-fib f count-A count-B =
-    sum-number-of-elements-count-fiber-count-Σ count-B
-      ( count-equiv' (equiv-total-fib f) count-A)
-
-abstract
-  double-counting-fib :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (count-A : count A) →
-    (count-B : count B) (count-fib-f : (y : B) → count (fib f y)) (y : B) →
-    Id ( number-of-elements-count (count-fib-f y))
-       ( number-of-elements-count (count-fib f count-A count-B y))
-  double-counting-fib f count-A count-B count-fib-f y =
-    double-counting (count-fib-f y) (count-fib f count-A count-B y)
-
-abstract
-  sum-number-of-elements-count-base-count-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
-    (count-ΣAB : count (Σ A B)) (count-B : (x : A) → count (B x)) →
-    Id ( sum-count-ℕ
-         ( count-base-count-Σ b count-ΣAB count-B)
-         ( λ x → number-of-elements-count (count-B x)))
-       ( number-of-elements-count count-ΣAB)
-  sum-number-of-elements-count-base-count-Σ b count-ΣAB count-B =
-    ( inv
-      ( number-of-elements-count-Σ
-        ( count-base-count-Σ b count-ΣAB count-B)
-        ( count-B))) ∙
-    ( double-counting
-      ( count-Σ (count-base-count-Σ b count-ΣAB count-B) count-B)
-      ( count-ΣAB))
-
-abstract
-  double-counting-base-count-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
-    (count-A : count A) (count-B : (x : A) → count (B x))
-    (count-ΣAB : count (Σ A B)) →
-    Id ( number-of-elements-count (count-base-count-Σ b count-ΣAB count-B))
-       ( number-of-elements-count count-A)
-  double-counting-base-count-Σ b count-A count-B count-ΣAB =
-    double-counting (count-base-count-Σ b count-ΣAB count-B) count-A
-
-abstract
-  sum-number-of-elements-count-base-count-Σ' :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-ΣAB : count (Σ A B)) →
-    ( count-B : (x : A) → count (B x)) →
-    ( count-nB :
-      count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    Id ( sum-count-ℕ
-         ( count-base-count-Σ' count-ΣAB count-B count-nB)
-         ( λ x → number-of-elements-count (count-B x)))
-       ( number-of-elements-count count-ΣAB)
-  sum-number-of-elements-count-base-count-Σ' count-ΣAB count-B count-nB =
-    ( inv
-      ( number-of-elements-count-Σ
-        ( count-base-count-Σ' count-ΣAB count-B count-nB)
-        ( count-B))) ∙
-    ( double-counting
-      ( count-Σ
-        ( count-base-count-Σ' count-ΣAB count-B count-nB)
-        ( count-B))
-      ( count-ΣAB))
-
-abstract
-  double-counting-base-count-Σ' :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
-    ( count-B : (x : A) → count (B x)) (count-ΣAB : count (Σ A B)) →
-    ( count-nB :
-      count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    Id ( number-of-elements-count
-         ( count-base-count-Σ' count-ΣAB count-B count-nB))
-       ( number-of-elements-count count-A)
-  double-counting-base-count-Σ' count-A count-B count-ΣAB count-nB =
-    double-counting (count-base-count-Σ' count-ΣAB count-B count-nB) count-A
-
-abstract
-  sum-number-of-elements-coprod :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (coprod A B)) →
-    Id ( add-ℕ ( number-of-elements-count (count-left-coprod e))
-               ( number-of-elements-count (count-right-coprod e)))
-       ( number-of-elements-count e)
-  sum-number-of-elements-coprod e =
-    ( inv
-      ( number-of-elements-count-coprod
-        ( count-left-coprod e)
-        ( count-right-coprod e))) ∙
-    ( inv
-      ( double-counting-coprod (count-left-coprod e) (count-right-coprod e) e))
-
-abstract
-  product-number-of-elements-prod :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
-    (a : A) (b : B) →
-    Id ( mul-ℕ ( number-of-elements-count (count-left-factor count-AB b))
-               ( number-of-elements-count (count-right-factor count-AB a)))
-       ( number-of-elements-count count-AB)
-  product-number-of-elements-prod count-AB a b =
-    ( inv
-      ( number-of-elements-count-prod
-        ( count-left-factor count-AB b)
-        ( count-right-factor count-AB a))) ∙
-    ( double-counting
-      ( count-prod
-        ( count-left-factor count-AB b)
-        ( count-right-factor count-AB a))
-      ( count-AB))
-
---------------------------------------------------------------------------------
-
 -- Section 16.3 Finite types
 
 -- Definition 16.3.1
@@ -157,68 +41,6 @@ type-𝔽 X = pr1 X
 abstract
   is-finite-type-𝔽 : (X : 𝔽) → is-finite (type-𝔽 X)
   is-finite-type-𝔽 X = pr2 X
-
-mere-equiv-Prop :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU-Prop (l1 ⊔ l2)
-mere-equiv-Prop X Y = trunc-Prop (X ≃ Y)
-
-mere-equiv :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-mere-equiv X Y = type-Prop (mere-equiv-Prop X Y)
-
-abstract
-  is-prop-mere-equiv :
-    {l1 l2 : Level} (X : UU l1) (Y : UU l2) → is-prop (mere-equiv X Y)
-  is-prop-mere-equiv X Y = is-prop-type-Prop (mere-equiv-Prop X Y)
-
-abstract
-  refl-mere-equiv :
-    {l1 : Level} (X : UU l1) → mere-equiv X X
-  refl-mere-equiv X = unit-trunc-Prop id-equiv
-
-abstract
-  symmetric-mere-equiv :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} → mere-equiv X Y → mere-equiv Y X
-  symmetric-mere-equiv {l1} {l2} {X} {Y} =
-    map-universal-property-trunc-Prop
-      ( mere-equiv-Prop Y X)
-      ( λ e → unit-trunc-Prop (inv-equiv e))
-
-abstract
-  transitive-mere-equiv :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} →
-    mere-equiv X Y → mere-equiv Y Z → mere-equiv X Z
-  transitive-mere-equiv {X = X} {Y} {Z} e f =
-    apply-universal-property-trunc-Prop e
-      ( mere-equiv-Prop X Z)
-      ( λ e' →
-        apply-universal-property-trunc-Prop f
-          ( mere-equiv-Prop X Z)
-          ( λ f' → unit-trunc-Prop (f' ∘e e')))
-
-module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} 
-  where
-  
-  is-trunc-mere-equiv : (k : 𝕋) → mere-equiv X Y → is-trunc k Y → is-trunc k X
-  is-trunc-mere-equiv k e H =
-     apply-universal-property-trunc-Prop
-       ( e)
-       ( is-trunc-Prop k X)
-       ( λ f → is-trunc-equiv k Y f H)
-
-  is-trunc-mere-equiv' : (k : 𝕋) → mere-equiv X Y → is-trunc k X → is-trunc k Y
-  is-trunc-mere-equiv' k e H =
-    apply-universal-property-trunc-Prop
-      ( e)
-      ( is-trunc-Prop k Y)
-      ( λ f → is-trunc-equiv' k X f H)
-
-  is-set-mere-equiv : mere-equiv X Y → is-set Y → is-set X
-  is-set-mere-equiv = is-trunc-mere-equiv zero-𝕋
-
-  is-set-mere-equiv' : mere-equiv X Y → is-set X → is-set Y
-  is-set-mere-equiv' = is-trunc-mere-equiv' zero-𝕋
 
 has-cardinality-Prop :
   {l : Level} → UU l → ℕ → UU-Prop l
@@ -379,26 +201,6 @@ abstract
       ( is-set-Prop X)
       ( λ e → is-set-count e)
 
-abstract
-  is-prop-has-decidable-equality :
-    {l1 : Level} {X : UU l1} → is-prop (has-decidable-equality X)
-  is-prop-has-decidable-equality {l1} {X} =
-    is-prop-is-inhabited
-      ( λ d →
-        is-prop-Π
-        ( λ x →
-          is-prop-Π
-          ( λ y →
-            is-prop-coprod
-            ( intro-dn)
-            ( is-set-has-decidable-equality d x y)
-            ( is-prop-neg))))
-
-has-decidable-equality-Prop :
-  {l1 : Level} (X : UU l1) → UU-Prop l1
-pr1 (has-decidable-equality-Prop X) = has-decidable-equality X
-pr2 (has-decidable-equality-Prop X) = is-prop-has-decidable-equality
-
 has-decidable-equality-is-finite :
   {l1 : Level} {X : UU l1} → is-finite X → has-decidable-equality X
 has-decidable-equality-is-finite {l1} {X} is-finite-X =
@@ -414,24 +216,6 @@ has-decidable-equality-has-cardinality {l1} {X} {k} H =
   apply-universal-property-trunc-Prop H
     ( has-decidable-equality-Prop X)
     ( λ e → has-decidable-equality-equiv' e has-decidable-equality-Fin)
-
-module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
-  where
-  
-  has-decidable-equality-mere-equiv :
-    mere-equiv X Y → has-decidable-equality Y → has-decidable-equality X
-  has-decidable-equality-mere-equiv e d =
-    apply-universal-property-trunc-Prop e
-      ( has-decidable-equality-Prop X)
-      ( λ f → has-decidable-equality-equiv f d)
-
-  has-decidable-equality-mere-equiv' :
-    mere-equiv X Y → has-decidable-equality X → has-decidable-equality Y
-  has-decidable-equality-mere-equiv' e d =
-    apply-universal-property-trunc-Prop e
-      ( has-decidable-equality-Prop Y)
-      ( λ f → has-decidable-equality-equiv' f d)
 
 abstract
   is-finite-eq :

@@ -244,4 +244,64 @@ abstract
        ( number-of-elements-count (count-fiber-count-Σ count-A count-C x))
   double-counting-fiber-count-Σ count-A count-B count-C x =
     double-counting (count-B x) (count-fiber-count-Σ count-A count-C x)
+
+abstract
+  sum-number-of-elements-count-base-count-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+    (count-ΣAB : count (Σ A B)) (count-B : (x : A) → count (B x)) →
+    Id ( sum-count-ℕ
+         ( count-base-count-Σ b count-ΣAB count-B)
+         ( λ x → number-of-elements-count (count-B x)))
+       ( number-of-elements-count count-ΣAB)
+  sum-number-of-elements-count-base-count-Σ b count-ΣAB count-B =
+    ( inv
+      ( number-of-elements-count-Σ
+        ( count-base-count-Σ b count-ΣAB count-B)
+        ( count-B))) ∙
+    ( double-counting
+      ( count-Σ (count-base-count-Σ b count-ΣAB count-B) count-B)
+      ( count-ΣAB))
+
+abstract
+  double-counting-base-count-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+    (count-A : count A) (count-B : (x : A) → count (B x))
+    (count-ΣAB : count (Σ A B)) →
+    Id ( number-of-elements-count (count-base-count-Σ b count-ΣAB count-B))
+       ( number-of-elements-count count-A)
+  double-counting-base-count-Σ b count-A count-B count-ΣAB =
+    double-counting (count-base-count-Σ b count-ΣAB count-B) count-A
+
+abstract
+  sum-number-of-elements-count-base-count-Σ' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-ΣAB : count (Σ A B)) →
+    ( count-B : (x : A) → count (B x)) →
+    ( count-nB :
+      count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
+    Id ( sum-count-ℕ
+         ( count-base-count-Σ' count-ΣAB count-B count-nB)
+         ( λ x → number-of-elements-count (count-B x)))
+       ( number-of-elements-count count-ΣAB)
+  sum-number-of-elements-count-base-count-Σ' count-ΣAB count-B count-nB =
+    ( inv
+      ( number-of-elements-count-Σ
+        ( count-base-count-Σ' count-ΣAB count-B count-nB)
+        ( count-B))) ∙
+    ( double-counting
+      ( count-Σ
+        ( count-base-count-Σ' count-ΣAB count-B count-nB)
+        ( count-B))
+      ( count-ΣAB))
+
+abstract
+  double-counting-base-count-Σ' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
+    ( count-B : (x : A) → count (B x)) (count-ΣAB : count (Σ A B)) →
+    ( count-nB :
+      count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
+    Id ( number-of-elements-count
+         ( count-base-count-Σ' count-ΣAB count-B count-nB))
+       ( number-of-elements-count count-A)
+  double-counting-base-count-Σ' count-A count-B count-ΣAB count-nB =
+    double-counting (count-base-count-Σ' count-ΣAB count-B count-nB) count-A
 ```

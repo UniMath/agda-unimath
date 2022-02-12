@@ -20,7 +20,7 @@ open import foundation.equivalences using (_∘e_; inv-equiv; _≃_)
 open import foundation.functoriality-cartesian-product-types using
   ( equiv-prod)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (Id; refl; inv; _∙_)
 open import foundation.type-arithmetic-cartesian-product-types using
   ( commutative-prod)
 open import foundation.type-arithmetic-dependent-pair-types using (assoc-Σ)
@@ -34,6 +34,7 @@ open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-eq)
 open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-Σ)
+open import univalent-combinatorics.double-counting using (double-counting)
 ```
 
 ```agda
@@ -83,4 +84,24 @@ count-right-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → X → count Y
 count-right-factor e x =
   count-left-factor (count-equiv commutative-prod e) x
+```
+
+```agda
+abstract
+  product-number-of-elements-prod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
+    (a : A) (b : B) →
+    Id ( mul-ℕ ( number-of-elements-count (count-left-factor count-AB b))
+               ( number-of-elements-count (count-right-factor count-AB a)))
+       ( number-of-elements-count count-AB)
+  product-number-of-elements-prod count-AB a b =
+    ( inv
+      ( number-of-elements-count-prod
+        ( count-left-factor count-AB b)
+        ( count-right-factor count-AB a))) ∙
+    ( double-counting
+      ( count-prod
+        ( count-left-factor count-AB b)
+        ( count-right-factor count-AB a))
+      ( count-AB))
 ```
