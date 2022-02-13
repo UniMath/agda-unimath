@@ -12,14 +12,20 @@ open import foundation.contractible-types using (equiv-is-contr; is-contr-Σ)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-types using (is-decidable)
+open import foundation.decidable-types using
+  ( is-decidable; is-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using (map-equiv; _≃_; id-equiv)
-open import foundation.fibers-of-maps using (equiv-fib-pr1)
+open import foundation.fibers-of-maps using
+  ( equiv-fib-pr1; equiv-total-fib; fib)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.identity-types using (Id; refl)
+open import foundation.propositional-maps using (is-prop-map-emb)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.subtypes using (type-subtype)
@@ -35,6 +41,8 @@ open import univalent-combinatorics.counting using
     count-is-empty; number-of-elements-count; count-equiv; count-equiv';
     is-zero-number-of-elements-count-is-empty; equiv-count; is-set-count;
     has-decidable-equality-count)
+open import univalent-combinatorics.finite-types using
+  ( is-finite; is-finite-equiv')
 ```
 
 ### Propositions have countings if and only if they are decidable
@@ -190,4 +198,36 @@ is-decidable-count-subtype P e f x =
         ( λ y → pair (Id (pr1 y) x) (is-set-count e (pr1 y) x))
         ( λ y → has-decidable-equality-count e (pr1 y) x)
         ( f)))
+```
+
+### If a subtype of a type equipped with a counting is finite, then its elements can be counted
+
+```agda
+count-type-subtype-is-finite-type-subtype :
+  {l1 l2 : Level} {A : UU l1} (e : count A) (P : A → UU-Prop l2) →
+  is-finite (type-subtype P) → count (type-subtype P)
+count-type-subtype-is-finite-type-subtype {l1} {l2} {A} e P f =
+  count-decidable-subtype P d e
+  where
+  d : (x : A) → is-decidable (type-Prop (P x))
+  d x =
+    apply-universal-property-trunc-Prop f
+      ( is-decidable-Prop (P x))
+      ( λ g → is-decidable-count-subtype P e g x)
+```
+
+### For any embedding `B ↪ A` into a type `A` equipped with a counting, if `B` is finite then its elements can be counted
+
+```agda
+count-domain-emb-is-finite-domain-emb :
+  {l1 l2 : Level} {A : UU l1} (e : count A) {B : UU l2} (f : B ↪ A) →
+  is-finite B → count B
+count-domain-emb-is-finite-domain-emb e f H =
+  count-equiv
+    ( equiv-total-fib (map-emb f))
+    ( count-type-subtype-is-finite-type-subtype e
+      ( λ x → pair (fib (map-emb f) x) (is-prop-map-emb f x))
+      ( is-finite-equiv'
+        ( equiv-total-fib (map-emb f))
+        ( H)))
 ```

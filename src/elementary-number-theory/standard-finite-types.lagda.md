@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The standard finite types
 
 ```agda
@@ -32,11 +28,19 @@ open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.negation using (¬; map-neg)
 open import foundation.non-contractible-types using
   ( is-not-contractible; is-not-contractible-empty)
+open import foundation.raising-universe-levels using
+  ( raise; equiv-raise; map-raise)
 open import foundation.unit-type using (unit; star; is-contr-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.universe-levels using (Level; UU; lzero)
 ```
 
-# The standard finite types
+## Idea
+
+The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (n+1) := (Fin n) + 1`.
+
+## Definition
+
+### The standard finite types in universe level zero.
 
 ```agda
 Fin : ℕ → UU lzero
@@ -63,7 +67,22 @@ neg-two-Fin {zero-ℕ} = inr star
 neg-two-Fin {succ-ℕ k} = inl (inr star)
 ```
 
-## Fin 1 is contractible
+### The standard finite types in an arbitrary universe
+
+```agda
+raise-Fin : (l : Level) (k : ℕ) → UU l
+raise-Fin l k = raise l (Fin k)
+
+equiv-raise-Fin : (l : Level) (k : ℕ) → Fin k ≃ raise-Fin l k
+equiv-raise-Fin l k = equiv-raise l (Fin k)
+
+map-raise-Fin : (l : Level) (k : ℕ) → Fin k → raise-Fin l k
+map-raise-Fin l k = map-raise
+```
+
+## Properties
+
+### Fin 1 is contractible
 
 ```agda
 map-equiv-Fin-one-ℕ : Fin 1 → unit
@@ -144,7 +163,7 @@ pr1 (emb-nat-Fin k) = nat-Fin
 pr2 (emb-nat-Fin k) = is-emb-nat-Fin
 ```
 
-## The zero elements in the standard finite types
+### The zero elements in the standard finite types
 
 ```agda
 zero-Fin : {k : ℕ} → Fin (succ-ℕ k)
@@ -161,7 +180,7 @@ is-nonzero-Fin : {k : ℕ} → Fin k → UU lzero
 is-nonzero-Fin {succ-ℕ k} x = ¬ (is-zero-Fin x)
 ```
 
-## The successor function on the standard finite types
+### The successor function on the standard finite types
 
 ```agda
 skip-zero-Fin : {k : ℕ} → Fin k → Fin (succ-ℕ k)

@@ -14,15 +14,20 @@ open import elementary-number-theory.standard-finite-types using
 
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-equiv'; center; eq-is-contr')
+open import foundation.coproduct-types using (inr; inl)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-equiv')
+open import foundation.decidable-types using (is-inhabited-or-empty)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
-  ( is-empty; ex-falso; is-equiv-is-empty'; empty)
+  ( is-empty; ex-falso; is-equiv-is-empty'; empty; is-empty-type-trunc-Prop)
 open import foundation.equivalences using
   ( _≃_; map-equiv; map-inv-equiv; inv-equiv; id-equiv; _∘e_; is-equiv)
 open import foundation.identity-types using (Id; refl)
 open import foundation.injective-maps using (is-injective-map-equiv)
+open import foundation.propositional-truncations using
+  ( unit-trunc-Prop; type-trunc-Prop; is-prop-type-trunc-Prop)
+open import foundation.propositions using (is-proof-irrelevant-is-prop)
 open import foundation.sets using (is-set; is-set-equiv')
 open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universe-levels using (UU; Level)
@@ -175,4 +180,31 @@ has-decidable-equality-count :
   {l : Level} {X : UU l} → count X → has-decidable-equality X
 has-decidable-equality-count (pair k e) =
   has-decidable-equality-equiv' e has-decidable-equality-Fin
+```
+
+### This with a count are either inhabited or empty
+
+```agda
+is-inhabited-or-empty-count :
+  {l1 : Level} {A : UU l1} → count A → is-inhabited-or-empty A
+is-inhabited-or-empty-count (pair zero-ℕ e) =
+  inr (is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
+is-inhabited-or-empty-count (pair (succ-ℕ k) e) =
+  inl (unit-trunc-Prop (map-equiv e zero-Fin))
+```
+
+### If the elements of a type can be counted, then the elements of its propositional truncation can be counted
+
+```agda
+count-type-trunc-Prop :
+  {l1 : Level} {A : UU l1} → count A → count (type-trunc-Prop A)
+count-type-trunc-Prop (pair zero-ℕ e) =
+  count-is-empty
+    ( is-empty-type-trunc-Prop
+      ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl))
+count-type-trunc-Prop (pair (succ-ℕ k) e) =
+  count-is-contr
+    ( is-proof-irrelevant-is-prop
+      ( is-prop-type-trunc-Prop)
+      ( unit-trunc-Prop (map-equiv e zero-Fin)))
 ```
