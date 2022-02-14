@@ -13,6 +13,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (_∘_; id)
 open import foundation.equivalences using
   ( retraction-comp; retraction-comp'; _≃_)
+open import foundation.identity-types using (inv; _∙_; ap)
+open import foundation.injective-maps using (is-injective)
 open import foundation.homotopies using
   ( _~_; _·l_; inv-htpy; assoc-htpy; _·r_; _∙h_; ap-concat-htpy'; refl-htpy;
     left-inv-htpy)
@@ -76,4 +78,12 @@ pr1 (pr2 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g)) =
   retraction-comp f g h H retr-g
 pr2 (pr2 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g)) =
   isretr-retraction-comp f g h H retr-g
+```
+
+```agda
+abstract
+  is-injective-retr :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → retr f →
+    is-injective f
+  is-injective-retr f (pair h H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
 ```

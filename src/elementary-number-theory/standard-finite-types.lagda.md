@@ -14,8 +14,6 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (empty; ex-falso)
