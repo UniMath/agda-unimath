@@ -84,31 +84,3 @@ abstract
     Id (sum-count-ℕ e (const A ℕ n)) (mul-ℕ (number-of-elements-count e) n)
   constant-sum-count-ℕ (pair m e) n = constant-sum-Fin-ℕ m n
 ```
-
-### Finite sums are associative
-
-```agda
-abstract
-  associative-sum-count-ℕ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
-    (count-B : (x : A) → count (B x)) (f : (x : A) → B x → ℕ) →
-    Id ( sum-count-ℕ count-A (λ x → sum-count-ℕ (count-B x) (f x)))
-      ( sum-count-ℕ (count-Σ count-A count-B) (ind-Σ f))
-  associative-sum-count-ℕ {l1} {l2} {A} {B} count-A count-B f =
-    ( ( ap-sum-count-ℕ count-A
-        ( λ x →
-          inv
-          ( number-of-elements-count-Σ
-            ( count-B x)
-            ( λ y → count-Fin (f x y))))) ∙
-      ( inv
-        ( number-of-elements-count-Σ count-A
-          ( λ x → count-Σ (count-B x) (λ y → count-Fin (f x y)))))) ∙
-    ( ( double-counting-equiv
-        ( count-Σ count-A (λ x → count-Σ (count-B x) (λ y → count-Fin (f x y))))
-        ( count-Σ (count-Σ count-A count-B) (λ x → count-Fin (ind-Σ f x)))
-        ( inv-assoc-Σ A B (λ x → Fin (ind-Σ f x)))) ∙
-      ( number-of-elements-count-Σ
-        ( count-Σ count-A count-B)
-        ( λ x → (count-Fin (ind-Σ f x)))))
-```
