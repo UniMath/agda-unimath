@@ -5,14 +5,15 @@
 
 module univalent-combinatorics.decidable-dependent-pair-types where
 
-open import foundation.decidable-dependent-pair-types public
+open import elementary-number-theory.decidable-dependent-pair-types public
 
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (id-equiv)
 open import foundation.universe-levels using (Level; UU)
 
-open import univalent-combinatorics.counting using (count; equiv-count)
+open import univalent-combinatorics.counting using
+  ( count; equiv-count; map-equiv-count)
 ```
 
 ## Idea

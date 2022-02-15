@@ -5,6 +5,8 @@
 
 module elementary-number-theory.infinitude-of-primes where
 
+open import elementary-number-theory.decidable-dependent-function-types using
+  ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( is-one-is-divisor-below-ℕ; div-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
     transitive-div-ℕ)
@@ -16,6 +18,8 @@ open import elementary-number-theory.inequality-natural-numbers using
   ( le-ℕ; is-decidable-le-ℕ; leq-ℕ; is-decidable-leq-ℕ; is-zero-leq-zero-ℕ;
     concatenate-leq-le-ℕ; le-succ-ℕ; is-nonzero-le-ℕ; neq-le-ℕ; leq-not-le-ℕ;
     contradiction-le-ℕ)
+open import elementary-number-theory.lower-bounds-natural-numbers using
+  ( is-lower-bound-ℕ)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
@@ -31,8 +35,7 @@ open import elementary-number-theory.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; le-is-proper-divisor-ℕ)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
-    is-lower-bound-ℕ)
+  ( minimal-element-ℕ; well-ordering-principle-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using

@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Equality on the standard finite types
 
 ```agda
@@ -13,8 +9,10 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
     is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ)
+    
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod)
+open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (pr1; pr2)
@@ -121,4 +119,12 @@ is-contr-is-zero-or-one-Fin-two-ℕ x =
   is-proof-irrelevant-is-prop
     ( is-prop-is-zero-or-one-Fin-two-ℕ x)
     ( is-zero-or-one-Fin-two-ℕ x)
+```
+
+```agda
+decidable-Eq-Fin :
+  (n : ℕ) (i j : Fin n) → decidable-Prop lzero
+pr1 (decidable-Eq-Fin n i j) = Id i j
+pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
+pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin i j
 ```

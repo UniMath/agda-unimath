@@ -33,12 +33,6 @@ open import univalent-foundations.16-finite-types public
 
 -- Bureaucracy
 
-decidable-Eq-Fin :
-  (n : ℕ) (i j : Fin n) → decidable-Prop lzero
-pr1 (decidable-Eq-Fin n i j) = Id i j
-pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
-pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin i j
-
 -- Subuniverses
 
 is-subuniverse :
