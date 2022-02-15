@@ -6,8 +6,10 @@
 module elementary-number-theory.equivalences-standard-finite-types where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
+open import elementary-number-theory.exponentiation-natural-numbers using
+  ( exp-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
-  ( exp-ℕ; mul-ℕ)
+  ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import elementary-number-theory.standard-finite-types using (Fin; zero-Fin)
 
