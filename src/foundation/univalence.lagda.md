@@ -1,0 +1,96 @@
+# The univalence axiom
+
+```agda
+{-# OPTIONS --without-K --exact-split #-}
+
+module foundation.univalence where
+
+open import foundation-core.univalence public
+
+open import foundation.contractible-types using (is-contr; is-contr-equiv)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equality-dependent-function-types using
+  ( is-contr-total-Eq-Π)
+open import foundation.equivalences using
+  ( _≃_; map-inv-is-equiv; equiv-inv-equiv; id-equiv; is-equiv)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
+open import foundation.identity-types using (Id; refl)
+open import foundation.universe-levels using (Level; UU; _⊔_)
+```
+
+## Idea
+
+The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
+
+## Postulates
+
+```agda
+postulate univalence : {i : Level} (A B : UU i) → UNIVALENCE A B
+```
+
+## Properties
+
+```agda
+eq-equiv : {i : Level} (A B : UU i) → (A ≃ B) → Id A B
+eq-equiv A B = map-inv-is-equiv (univalence A B)
+
+equiv-univalence :
+  {i : Level} {A B : UU i} → Id A B ≃ (A ≃ B)
+pr1 equiv-univalence = equiv-eq
+pr2 equiv-univalence = univalence _ _
+
+abstract
+  is-contr-total-equiv : {i : Level} (A : UU i) →
+    is-contr (Σ (UU i) (λ X → A ≃ X))
+  is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
+
+abstract
+  is-contr-total-equiv' : {i : Level} (A : UU i) →
+    is-contr (Σ (UU i) (λ X → X ≃ A))
+  is-contr-total-equiv' A =
+    is-contr-equiv
+      ( Σ (UU _) (λ X → A ≃ X))
+      ( equiv-tot (λ X → equiv-inv-equiv))
+      ( is-contr-total-equiv A)
+```
+
+### Univalence for type families
+
+```agda
+equiv-fam :
+  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3) →
+  UU (l1 ⊔ l2 ⊔ l3)
+equiv-fam {A = A} B C = (a : A) → B a ≃ C a
+
+id-equiv-fam :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → equiv-fam B B
+id-equiv-fam B a = id-equiv
+
+equiv-eq-fam :
+  {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → Id B C → equiv-fam B C
+equiv-eq-fam B .B refl = id-equiv-fam B
+
+abstract
+  is-contr-total-equiv-fam :
+    {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
+    is-contr (Σ (A → UU l2) (equiv-fam B))
+  is-contr-total-equiv-fam B =
+    is-contr-total-Eq-Π
+      ( λ x X → (B x) ≃ X)
+      ( λ x → is-contr-total-equiv (B x))
+
+abstract
+  is-equiv-equiv-eq-fam :
+    {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
+  is-equiv-equiv-eq-fam B =
+    fundamental-theorem-id B
+      ( id-equiv-fam B)
+      ( is-contr-total-equiv-fam B)
+      ( equiv-eq-fam B)
+
+eq-equiv-fam :
+  {l1 l2 : Level} {A : UU l1} {B C : A → UU l2} → equiv-fam B C → Id B C
+eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
+```
