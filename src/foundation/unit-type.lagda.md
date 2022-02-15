@@ -64,7 +64,7 @@ abstract
   pr2 is-contr-unit star = refl
 ```
 
-### Any contractible type is equivalent to the unit typep
+### Any contractible type is equivalent to the unit type
 
 ```agda
 module _

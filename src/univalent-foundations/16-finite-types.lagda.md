@@ -10,21 +10,9 @@ module univalent-foundations.16-finite-types where
 open import foundation public
 open import elementary-number-theory public
 
--- Remark: The analogous development for Σ-types stops at is-decidable-Σ-count
-
--- There is no way to construct a function is-decidable-Σ-is-finite. This would
--- contradict the univalence axiom.
-
--- Exercise 16.2 (b)
-
 -- Exercise 16.2 (c)
 
-is-decidable-is-surjective-is-finite :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-finite A → is-finite B → is-decidable (is-surjective f)
-is-decidable-is-surjective-is-finite f HA HB =
-  is-decidable-Π-is-finite HB
-    ( λ y → is-decidable-type-trunc-Prop-is-finite (is-finite-fib f HA HB y))
+
 
 -- Exercise 16.2 (d)
 
@@ -44,13 +32,6 @@ is-decidable-is-equiv-is-finite f HA HB =
 -- Exercise 16.4 (b)
 
 -- The number falling-factorial-ℕ n m is the number (n)_m from combinatorics
-
-falling-factorial-ℕ : ℕ → ℕ → ℕ
-falling-factorial-ℕ zero-ℕ zero-ℕ = 1
-falling-factorial-ℕ zero-ℕ (succ-ℕ m) = 0
-falling-factorial-ℕ (succ-ℕ n) zero-ℕ = 1
-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
-  mul-ℕ (succ-ℕ n) (falling-factorial-ℕ n m)
 
 {-
 Fin-falling-factorial-ℕ :
@@ -103,15 +84,6 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
 -}
 
 -- Exercise 16.4 (d)
-
-stirling-number-second-kind : ℕ → ℕ → ℕ
-stirling-number-second-kind zero-ℕ zero-ℕ = 1
-stirling-number-second-kind zero-ℕ (succ-ℕ n) = 0
-stirling-number-second-kind (succ-ℕ m) zero-ℕ = 0
-stirling-number-second-kind (succ-ℕ m) (succ-ℕ n) =
-  add-ℕ
-    ( mul-ℕ (succ-ℕ n) (stirling-number-second-kind m (succ-ℕ n)))
-    ( stirling-number-second-kind m n)
 
 -- Exercise 16.8
 
