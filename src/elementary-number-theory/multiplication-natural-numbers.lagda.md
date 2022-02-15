@@ -241,4 +241,27 @@ neq-mul-ℕ m n p =
     ( ( p) ∙
       ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
         ( ap (add-ℕ (succ-ℕ m)) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
+
+annihilation-law-exp-ℕ : (n : ℕ) → Id (exp-ℕ 1 n) 1
+annihilation-law-exp-ℕ zero-ℕ = refl
+annihilation-law-exp-ℕ (succ-ℕ n) = right-unit-law-mul-ℕ (exp-ℕ 1 n) ∙ annihilation-law-exp-ℕ n
+
+left-distributive-exp-add-ℕ : (x y z : ℕ) → Id (exp-ℕ x (add-ℕ y z)) (mul-ℕ (exp-ℕ x y) (exp-ℕ x z))
+left-distributive-exp-add-ℕ x y zero-ℕ = inv (right-unit-law-mul-ℕ (exp-ℕ x y))
+left-distributive-exp-add-ℕ x y (succ-ℕ z) =
+  ( ap (mul-ℕ' x) (left-distributive-exp-add-ℕ x y z) ) ∙
+  ( associative-mul-ℕ (exp-ℕ x y) (exp-ℕ x z) x )
+
+right-distributive-exp-mul-ℕ : (x y z : ℕ) → Id (exp-ℕ (mul-ℕ x y) z) (mul-ℕ (exp-ℕ x z) (exp-ℕ y z))
+right-distributive-exp-mul-ℕ x y zero-ℕ = refl
+right-distributive-exp-mul-ℕ x y (succ-ℕ z) =
+  ( ap (mul-ℕ' (mul-ℕ x y)) (right-distributive-exp-mul-ℕ x y z) ) ∙
+  ( interchange-law-mul-mul-ℕ (exp-ℕ x z) (exp-ℕ y z) x y )
+
+exp-mul-ℕ : (x y z : ℕ) → Id (exp-ℕ (exp-ℕ x y) z) (exp-ℕ x (mul-ℕ y z))
+exp-mul-ℕ x zero-ℕ z = annihilation-law-exp-ℕ z
+exp-mul-ℕ x (succ-ℕ y) z =
+  ( right-distributive-exp-mul-ℕ (exp-ℕ x y) x z) ∙
+  ( (ap (mul-ℕ' (exp-ℕ x z)) (exp-mul-ℕ x y z) ) ∙
+    (inv (left-distributive-exp-add-ℕ x (mul-ℕ y z) z)))
 ```
