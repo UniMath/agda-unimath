@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (empty; ex-falso)
@@ -63,6 +64,14 @@ neg-two-Fin :
   {k : ℕ} → Fin (succ-ℕ k)
 neg-two-Fin {zero-ℕ} = inr star
 neg-two-Fin {succ-ℕ k} = inl (inr star)
+
+is-inl-Fin : {k : ℕ} → Fin (succ-ℕ k) → UU lzero
+is-inl-Fin {k} x = Σ (Fin k) (λ y → Id (inl y) x)
+
+is-neg-one-is-not-inl-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → ¬ (is-inl-Fin x) → is-neg-one-Fin x
+is-neg-one-is-not-inl-Fin (inl x) H = ex-falso (H (pair x refl))
+is-neg-one-is-not-inl-Fin (inr star) H = refl
 ```
 
 ### The standard finite types in an arbitrary universe
@@ -79,6 +88,18 @@ map-raise-Fin l k = map-raise
 ```
 
 ## Properties
+
+### Being on the left is decidable
+
+```agda
+is-decidable-is-inl-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin x)
+is-decidable-is-inl-Fin (inl x) = inl (pair x refl)
+is-decidable-is-inl-Fin (inr star) = inr α
+  where
+  α : is-inl-Fin (inr star) → empty
+  α (pair y ())
+```
 
 ### Fin 1 is contractible
 
