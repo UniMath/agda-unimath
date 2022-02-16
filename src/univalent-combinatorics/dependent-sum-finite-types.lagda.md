@@ -25,12 +25,11 @@ open import foundation.sections using
   ( equiv-total-fib-map-section; map-section)
 open import foundation.sets using (is-set)
 open import foundation.subtypes using (is-set-is-subtype)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( equiv-right-swap-Σ)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
 open import foundation.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ; inv-left-unit-law-Σ-is-contr; right-unit-law-Σ-is-contr)
+  ( assoc-Σ; inv-left-unit-law-Σ-is-contr; right-unit-law-Σ-is-contr;
+    equiv-right-swap-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import univalent-combinatorics.coproduct-finite-types using

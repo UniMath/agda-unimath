@@ -39,6 +39,7 @@ open import elementary-number-theory.falling-factorials
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.finitary-natural-numbers
 open import elementary-number-theory.finitely-cyclic-maps
+open import elementary-number-theory.fractions
 open import elementary-number-theory.goldbach-conjecture
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
@@ -156,7 +157,9 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.equivalence-classes
 open import foundation.equivalence-induction
+open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -187,6 +190,7 @@ open import foundation.isomorphisms-of-sets
 open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.lists
+open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equality
@@ -205,6 +209,8 @@ open import foundation.sections
 open import foundation.sets
 open import foundation.singleton-induction
 open import foundation.slice
+open import foundation.small-maps
+open import foundation.small-types
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.structure
@@ -236,6 +242,7 @@ open import foundation.universal-property-maybe
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universal-property-propositional-truncation
 open import foundation.universal-property-pullbacks
+open import foundation.universal-property-set-quotients
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs

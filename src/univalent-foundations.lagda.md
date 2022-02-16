@@ -7,8 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations where
 
-open import univalent-foundations.16-finite-types public
-open import univalent-foundations.17-univalence public
 open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.functoriality-loop-spaces public
 open import univalent-foundations.iterated-loop-spaces public

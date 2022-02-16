@@ -47,7 +47,9 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equivalence-classes public
 open import foundation.equivalence-induction public
+open import foundation.equivalence-relations public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences public
 open import foundation.existential-quantification public
@@ -78,6 +80,7 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lists public
+open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maybe public
 open import foundation.mere-equality public
@@ -96,6 +99,8 @@ open import foundation.sections public
 open import foundation.sets public
 open import foundation.singleton-induction public
 open import foundation.slice public
+open import foundation.small-maps public
+open import foundation.small-types public
 open import foundation.split-surjective-maps public
 open import foundation.structure-identity-principle public
 open import foundation.structure public
@@ -127,6 +132,7 @@ open import foundation.universal-property-maybe public
 open import foundation.universal-property-propositional-truncation-into-sets public
 open import foundation.universal-property-propositional-truncation public
 open import foundation.universal-property-pullbacks public
+open import foundation.universal-property-set-quotients public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
