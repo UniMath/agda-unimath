@@ -9,13 +9,17 @@ open import foundation-core.sets public
 
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (_≃_)
+open import foundation-core.equivalences using (_≃_; is-equiv)
+open import foundation-core.identity-types using (Id)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.truncation-levels using (zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
   ( is-contr; is-trunc-is-contr)
+open import foundation.subuniverses using
+  ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
+    is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
 open import foundation.truncated-types using
   ( is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
     is-trunc-function-type; is-trunc-equiv-is-trunc)
@@ -160,4 +164,25 @@ module _
 aut-Set :
   {l : Level} (X : UU-Set l) → UU-Set l
 aut-Set X = equiv-Set X X
+```
+
+```agda
+module _
+  {l : Level} (X : UU-Set l)
+  where
+
+  equiv-eq-Set : (Y : UU-Set l) → Id X Y → type-equiv-Set X Y
+  equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
+  
+  abstract
+    is-contr-total-equiv-Set : is-contr (Σ (UU-Set l) (type-equiv-Set X))
+    is-contr-total-equiv-Set =
+      is-contr-total-equiv-subuniverse is-set-Prop X
+
+  abstract
+    is-equiv-equiv-eq-Set : (Y : UU-Set l) → is-equiv (equiv-eq-Set Y)
+    is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
+
+  eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → Id X Y
+  eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
 ```

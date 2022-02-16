@@ -7,17 +7,19 @@ module foundation.univalence where
 
 open import foundation-core.univalence public
 
-open import foundation.contractible-types using (is-contr; is-contr-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.contractible-types using (is-contr; is-contr-equiv)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.functoriality-dependent-pair-types using
+  ( equiv-tot)
+open import foundation-core.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
+open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
   ( _≃_; map-inv-is-equiv; equiv-inv-equiv; id-equiv; is-equiv)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl)
-open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea

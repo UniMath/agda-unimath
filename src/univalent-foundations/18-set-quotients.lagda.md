@@ -7,7 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations.18-set-quotients where
 
-open import univalent-foundations.17-univalence public
+open import foundation public
+open import elementary-number-theory public
 
 --------------------------------------------------------------------------------
 

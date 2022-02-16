@@ -1,15 +1,46 @@
 # Unordered pairs of elements in a type
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.unordered-pairs where
 
+open import elementary-number-theory.equality-standard-finite-types using
+  ( is-set-Fin; has-decidable-equality-Fin)
+open import elementary-number-theory.standard-finite-types using (Fin)
+
+open import foundation.contractible-types using (is-contr)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (_↪_)
+open import foundation.equivalences using
+  ( map-equiv; is-equiv; _≃_; map-inv-is-equiv; isretr-map-inv-is-equiv;
+    id-equiv; is-equiv-map-equiv)
+open import foundation.existential-quantification using (∃)
+open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-function-types using (equiv-postcomp)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
+open import foundation.homotopies using
+  ( _~_; refl-htpy; is-contr-total-htpy; _·r_)
+open import foundation.identity-types using (Id; refl)
+open import foundation.mere-equivalences using
+  ( mere-equiv; is-set-mere-equiv'; has-decidable-equality-mere-equiv')
+open import foundation.propositional-truncations using
+  ( type-trunc-Prop; trunc-Prop; unit-trunc-Prop)
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.sets using (is-set)
+open import foundation.structure-identity-principle using
+  ( is-contr-total-Eq-structure)
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
-open import univalent-foundations.16-finite-types
-open import univalent-foundations.17-univalence
+open import univalent-combinatorics.finite-types using
+  ( UU-Fin; Fin-UU-Fin; equiv-UU-Fin; id-equiv-UU-Fin;
+    is-contr-total-equiv-UU-Fin; type-UU-Fin)
 ```
 
 ## Idea

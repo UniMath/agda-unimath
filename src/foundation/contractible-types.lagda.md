@@ -7,6 +7,7 @@ module foundation.contractible-types where
 
 open import foundation-core.contractible-types public
 
+open import foundation-core.constant-maps using (const)
 open import foundation-core.contractible-maps using
   ( is-contr-map-is-equiv)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -22,7 +23,6 @@ open import foundation-core.truncated-types using
 open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 
-open import foundation.constant-maps using (const)
 open import foundation.function-extensionality using
   ( funext; htpy-eq; eq-htpy)
 ```

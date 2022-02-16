@@ -1,24 +1,33 @@
 # Subuniverse
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.subuniverses where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
   ( _≃_; id-equiv; is-equiv; map-inv-is-equiv)
-open import foundation.fundamental-theorem-of-identity-types using
+open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; tr; inv; refl)
-open import foundation.propositions using
-  ( is-prop; type-Prop; is-prop-type-Prop)
-open import foundation.subtype-identity-principle using
+open import foundation-core.identity-types using (Id; tr; inv; refl; ap)
+open import foundation-core.propositions using
+  ( is-prop; type-Prop; is-prop-type-Prop; UU-Prop)
+open import foundation-core.sets using (is-set; UU-Set)
+open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (is-subtype; subtype)
-open import foundation.univalence using (eq-equiv; is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.subtypes using (is-subtype; subtype; is-emb-pr1)
+open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
+
+open import foundation.contractible-types using
+  ( is-contr; is-contr-Prop; equiv-is-contr)
+open import foundation.truncated-types using
+  ( is-trunc; is-trunc-is-equiv; is-prop-is-trunc; is-trunc-equiv-is-trunc)
+open import foundation.truncation-levels using
+  ( 𝕋; neg-two-𝕋; succ-𝕋; neg-one-𝕋)
+open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
+open import foundation.univalence using
+  ( eq-equiv; is-contr-total-equiv; equiv-eq; univalence)
 ```
 
 ## Idea
@@ -104,4 +113,84 @@ eq-equiv-subuniverse :
   {s t : total-subuniverse P} → equiv-subuniverse P s t → Id s t
 eq-equiv-subuniverse P {s} {t} =
   map-inv-is-equiv (is-equiv-equiv-eq-subuniverse P s t)
+```
+
+```agda
+UU-Contr : (l : Level) → UU (lsuc l)
+UU-Contr l = total-subuniverse is-contr-Prop
+
+type-UU-Contr : {l : Level} → UU-Contr l → UU l
+type-UU-Contr A = pr1 A
+
+abstract
+  is-contr-type-UU-Contr :
+    {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
+  is-contr-type-UU-Contr A = pr2 A
+
+equiv-UU-Contr :
+  {l1 l2 : Level} (X : UU-Contr l1) (Y : UU-Contr l2) → UU (l1 ⊔ l2)
+equiv-UU-Contr X Y = type-UU-Contr X ≃ type-UU-Contr Y
+
+equiv-eq-UU-Contr :
+  {l1 : Level} (X Y : UU-Contr l1) → Id X Y → equiv-UU-Contr X Y
+equiv-eq-UU-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
+
+abstract
+  is-equiv-equiv-eq-UU-Contr :
+    {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
+  is-equiv-equiv-eq-UU-Contr X Y =
+    is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
+
+eq-equiv-UU-Contr :
+  {l1 : Level} {X Y : UU-Contr l1} → equiv-UU-Contr X Y → Id X Y
+eq-equiv-UU-Contr = eq-equiv-subuniverse is-contr-Prop
+
+abstract
+  center-UU-contr : (l : Level) → UU-Contr l
+  center-UU-contr l = pair (raise-unit l) is-contr-raise-unit
+  
+  contraction-UU-contr :
+    {l : Level} (A : UU-Contr l) → Id (center-UU-contr l) A
+  contraction-UU-contr A =
+    eq-equiv-UU-Contr
+      ( equiv-is-contr is-contr-raise-unit (is-contr-type-UU-Contr A))
+
+abstract
+  is-contr-UU-Contr : (l : Level) → is-contr (UU-Contr l)
+  is-contr-UU-Contr l = pair (center-UU-contr l) contraction-UU-contr
+```
+
+```agda
+UU-Trunc : (k : 𝕋) (l : Level) → UU (lsuc l)
+UU-Trunc k l = Σ (UU l) (is-trunc k)
+
+type-UU-Trunc : {k : 𝕋} {l : Level} → UU-Trunc k l → UU l
+type-UU-Trunc A = pr1 A
+
+abstract
+  is-trunc-type-UU-Trunc :
+    {k : 𝕋} {l : Level} (A : UU-Trunc k l) → is-trunc k (type-UU-Trunc A)
+  is-trunc-type-UU-Trunc A = pr2 A
+
+abstract
+  is-trunc-UU-Trunc :
+    (k : 𝕋) (l : Level) → is-trunc (succ-𝕋 k) (UU-Trunc k l)
+  is-trunc-UU-Trunc k l X Y =
+    is-trunc-is-equiv k
+      ( Id (pr1 X) (pr1 Y))
+      ( ap pr1)
+      ( is-emb-pr1
+        ( is-prop-is-trunc k) X Y)
+      ( is-trunc-is-equiv k
+        ( (pr1 X) ≃ (pr1 Y))
+        ( equiv-eq)
+        ( univalence (pr1 X) (pr1 Y))
+        ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
+
+abstract
+  is-set-UU-Prop : (l : Level) → is-set (UU-Prop l)
+  is-set-UU-Prop l = is-trunc-UU-Trunc (neg-one-𝕋) l
+
+UU-Prop-Set : (l : Level) → UU-Set (lsuc l)
+UU-Prop-Set l = pair (UU-Prop l) (is-set-UU-Prop l)
 ```

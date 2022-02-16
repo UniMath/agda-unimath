@@ -26,10 +26,8 @@ open import foundation.slice using
   ( hom-slice; map-hom-slice; triangle-hom-slice; is-prop-hom-slice;
     htpy-hom-slice; comp-hom-slice; extensionality-hom-slice;
     is-equiv-hom-slice-emb; equiv-slice; hom-equiv-slice)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( equiv-right-swap-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr)
+  ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 

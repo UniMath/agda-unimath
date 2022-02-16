@@ -30,10 +30,9 @@ open import foundation.identity-types using (Id; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( equiv-right-swap-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
-  ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr)
+  ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr;
+    equiv-right-swap-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 

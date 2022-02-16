@@ -17,6 +17,12 @@ open import elementary-number-theory.natural-numbers using
 open import elementary-number-theory.standard-finite-types using
   ( Fin; raise-Fin; equiv-raise-Fin)
 
+open import foundation.connected-components-universes using
+  ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
+    id-equiv-component-UU; equiv-eq-component-UU-Level; equiv-eq-component-UU;
+    is-contr-total-equiv-component-UU-Level; is-contr-total-equiv-component-UU;
+    is-equiv-equiv-eq-component-UU-Level; is-equiv-equiv-eq-component-UU;
+    eq-equiv-component-UU-Level; eq-equiv-component-UU)
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
@@ -47,7 +53,7 @@ open import foundation.propositions using
     equiv-prop)
 open import foundation.sets using (is-set; is-set-Prop; Id-Prop)
 open import foundation.subtypes using (eq-subtype)
-open import foundation.type-arithmetic-cartesian-product-types using
+open import foundation.type-arithmetic-dependent-pair-types using
   ( equiv-left-swap-Σ)
 open import foundation.type-arithmetic-empty-type using
   ( left-unit-law-coprod)
@@ -414,4 +420,75 @@ abstract
 trunc-Prop-𝔽 : 𝔽 → 𝔽
 pr1 (trunc-Prop-𝔽 A) = type-trunc-Prop (type-𝔽 A)
 pr2 (trunc-Prop-𝔽 A) = is-finite-type-trunc-Prop (is-finite-type-𝔽 A)
+```
+
+```agda
+equiv-UU-Fin-Level : {l : Level} {k : ℕ} → (X Y : UU-Fin-Level l k) → UU l
+equiv-UU-Fin-Level X Y = equiv-component-UU-Level X Y
+
+equiv-UU-Fin : {k : ℕ} (X Y : UU-Fin k) → UU lzero
+equiv-UU-Fin X Y = equiv-component-UU X Y
+
+id-equiv-UU-Fin-Level :
+  {l : Level} {k : ℕ} (X : UU-Fin-Level l k) → equiv-UU-Fin-Level X X
+id-equiv-UU-Fin-Level X = id-equiv-component-UU-Level X
+
+id-equiv-UU-Fin :
+  {k : ℕ} (X : UU-Fin k) → equiv-UU-Fin X X
+id-equiv-UU-Fin X = id-equiv-component-UU X
+
+equiv-eq-UU-Fin-Level :
+  {l : Level} {k : ℕ} {X Y : UU-Fin-Level l k} → Id X Y → equiv-UU-Fin-Level X Y
+equiv-eq-UU-Fin-Level p = equiv-eq-component-UU-Level p
+
+equiv-eq-UU-Fin :
+  {k : ℕ} {X Y : UU-Fin k} → Id X Y → equiv-UU-Fin X Y
+equiv-eq-UU-Fin p = equiv-eq-component-UU p
+
+abstract
+  is-contr-total-equiv-UU-Fin-Level :
+    {l : Level} {k : ℕ} (X : UU-Fin-Level l k) →
+    is-contr (Σ (UU-Fin-Level l k) (equiv-UU-Fin-Level X))
+  is-contr-total-equiv-UU-Fin-Level {l} {k} X =
+    is-contr-total-equiv-component-UU-Level X
+
+abstract
+  is-contr-total-equiv-UU-Fin :
+    {k : ℕ} (X : UU-Fin k) → is-contr (Σ (UU-Fin k) (equiv-UU-Fin X))
+  is-contr-total-equiv-UU-Fin X =
+    is-contr-total-equiv-component-UU X
+
+abstract
+  is-equiv-equiv-eq-UU-Fin-Level :
+    {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
+    is-equiv (equiv-eq-UU-Fin-Level {X = X} {Y})
+  is-equiv-equiv-eq-UU-Fin-Level X =
+    is-equiv-equiv-eq-component-UU-Level X
+
+abstract
+  is-equiv-equiv-eq-UU-Fin :
+    {k : ℕ} (X Y : UU-Fin k) → is-equiv (equiv-eq-UU-Fin {X = X} {Y})
+  is-equiv-equiv-eq-UU-Fin X =
+    is-equiv-equiv-eq-component-UU X
+
+eq-equiv-UU-Fin-Level :
+  {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
+  equiv-UU-Fin-Level X Y → Id X Y
+eq-equiv-UU-Fin-Level X Y =
+  eq-equiv-component-UU-Level X Y
+
+eq-equiv-UU-Fin :
+  {k : ℕ} (X Y : UU-Fin k) → equiv-UU-Fin X Y → Id X Y
+eq-equiv-UU-Fin X Y = eq-equiv-component-UU X Y
+
+equiv-equiv-eq-UU-Fin-Level :
+  {l : Level} {k : ℕ} (X Y : UU-Fin-Level l k) →
+  Id X Y ≃ equiv-UU-Fin-Level X Y
+pr1 (equiv-equiv-eq-UU-Fin-Level X Y) = equiv-eq-UU-Fin-Level
+pr2 (equiv-equiv-eq-UU-Fin-Level X Y) = is-equiv-equiv-eq-UU-Fin-Level X Y
+
+equiv-equiv-eq-UU-Fin :
+  {k : ℕ} (X Y : UU-Fin k) → Id X Y ≃ equiv-UU-Fin X Y
+pr1 (equiv-equiv-eq-UU-Fin X Y) = equiv-eq-UU-Fin
+pr2 (equiv-equiv-eq-UU-Fin X Y) = is-equiv-equiv-eq-UU-Fin X Y
 ```

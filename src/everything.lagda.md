@@ -13,6 +13,7 @@ open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.classical-finite-types
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
@@ -65,6 +66,7 @@ open import elementary-number-theory.standard-finite-types
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.triangular-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.universal-property-natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
@@ -115,6 +117,7 @@ open import foundation
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
+open import foundation.axiom-of-choice
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
@@ -124,6 +127,8 @@ open import foundation.coherently-invertible-maps
 open import foundation.commuting-squares
 open import foundation.complements
 open import foundation.conjunction
+open import foundation.connected-components-universes
+open import foundation.connected-components
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -145,6 +150,7 @@ open import foundation.distributivity-of-dependent-functions-over-dependent-pair
 open import foundation.double-negation
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.epimorphisms-of-sets
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
@@ -178,6 +184,7 @@ open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
+open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.lists
 open import foundation.logical-equivalences
@@ -200,9 +207,11 @@ open import foundation.singleton-induction
 open import foundation.slice
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
+open import foundation.structure
 open import foundation.subterminal-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.truncated-maps
 open import foundation.truncated-types
@@ -213,7 +222,9 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
+open import foundation.universal-property-booleans
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
@@ -280,6 +291,8 @@ open import the-circle.integers
 open import the-circle.the-circle
 open import the-circle.universal-cover
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-finite-types
 open import univalent-combinatorics.coproduct-finite-types
 open import univalent-combinatorics.counting-cartesian-product-types
@@ -308,6 +321,7 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
+open import univalent-combinatorics.maybe
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.ramsey-theory
@@ -315,9 +329,6 @@ open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-foundations
-open import univalent-foundations.15-image
-open import univalent-foundations.16-finite-types
-open import univalent-foundations.17-univalence
 open import univalent-foundations.18-set-quotients
 open import univalent-foundations.W-types
 open import univalent-foundations.functoriality-loop-spaces
