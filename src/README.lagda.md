@@ -290,7 +290,7 @@ open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.ramsey-theory public
 ```
 
-## Graph theoty
+## Graph theory
 
 ```agda
 open import graph-theory.finite-graphs public
