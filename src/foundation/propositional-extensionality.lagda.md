@@ -21,12 +21,13 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id)
 open import foundation.logical-equivalences using
-  ( _⇔_; equiv-equiv-iff; iff-eq)
+  ( _⇔_; equiv-equiv-iff; iff-eq; is-prop-logical-equivalence)
 open import foundation.negation using (neg-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop-is-prop; is-prop-type-Prop;
-    is-proof-irrelevant-is-prop)
+    is-proof-irrelevant-is-prop; is-prop-equiv)
 open import foundation.raising-universe-levels using (equiv-raise)
+open import foundation.sets using (is-set; UU-Set)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.type-arithmetic-cartesian-product-types using
@@ -36,7 +37,7 @@ open import foundation.unit-type using
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universal-property-empty-type using
   ( universal-property-empty-is-empty)
-open import foundation.universe-levels using (Level)
+open import foundation.universe-levels using (Level; lsuc)
 ```
 
 ## Idea
@@ -74,6 +75,11 @@ module _
         ( is-contr-total-iff P)
         ( λ Q → iff-eq {P = P} {Q})
 
+  propositional-extensionality :
+    (P Q : UU-Prop l1) → Id P Q ≃ (P ⇔ Q)
+  pr1 (propositional-extensionality P Q) = iff-eq
+  pr2 (propositional-extensionality P Q) = is-equiv-iff-eq P Q
+
   eq-iff' : (P Q : UU-Prop l1) → P ⇔ Q → Id P Q
   eq-iff' P Q = map-inv-is-equiv (is-equiv-iff-eq P Q)
 
@@ -86,6 +92,20 @@ module _
     {P Q : UU-Prop l1} → (type-Prop P ≃ type-Prop Q) → Id P Q
   eq-equiv-Prop e =
     eq-iff (map-equiv e) (map-inv-equiv e)
+```
+
+### The type of propositions is a set
+
+```agda
+is-set-UU-Prop : {l : Level} → is-set (UU-Prop l)
+is-set-UU-Prop {l} P Q =
+  is-prop-equiv
+    ( propositional-extensionality P Q)
+    ( is-prop-logical-equivalence P Q)
+
+UU-Prop-Set : (l : Level) → UU-Set (lsuc l)
+pr1 (UU-Prop-Set l) = UU-Prop l
+pr2 (UU-Prop-Set l) = is-set-UU-Prop
 ```
 
 ### The type of true propositions is contractible

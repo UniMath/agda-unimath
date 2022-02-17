@@ -11,7 +11,7 @@ open import foundation.contractible-maps using
 open import foundation.contractible-types using (is-equiv-diagonal-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
-  ( _↪_; map-emb; is-emb; is-emb-comp'; is-emb-map-emb)
+  ( _↪_; map-emb; is-emb)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; is-equiv-comp'; _≃_; map-equiv; _∘e_; inv-equiv)
 open import foundation.fibers-of-maps using
@@ -22,7 +22,6 @@ open import foundation.functoriality-dependent-function-types using
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (refl; _∙_; inv; equiv-tr)
 open import foundation.injective-maps using (is-injective-is-emb)
-open import foundation.images using (map-unit-im)
 open import foundation.propositional-maps using
   ( is-prop-map-emb; is-prop-map-is-emb; fib-emb-Prop)
 open import foundation.propositional-truncations using
@@ -35,9 +34,6 @@ open import foundation.sections using (sec)
 open import foundation.slice using
   ( hom-slice; map-hom-slice; equiv-hom-slice-fiberwise-hom;
     equiv-fiberwise-hom-hom-slice)
-open import foundation.subtypes using (is-emb-pr1; eq-subtype)
-open import foundation.universal-property-image using
-  ( is-image; is-image'; is-image-is-image')
 open import foundation.universal-property-propositional-truncation using
   ( dependent-universal-property-propositional-truncation)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
@@ -160,86 +156,6 @@ abstract
     {l : Level} → dependent-universal-property-propositional-truncation l P f
   is-propsitional-truncation-is-surjective f is-surj-f =
     dependent-universal-property-surj-is-surjective f is-surj-f
-```
-
-### A factorization of a map through an embedding is the image factorization if and only if the right factor is surjective
-
-```agda
-abstract
-  is-surjective-is-image :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
-    ({l : Level} → is-image l f i q) →
-    is-surjective (map-hom-slice f (map-emb i) q)
-  is-surjective-is-image {A = A} {B} {X} f i q up-i b =
-    apply-universal-property-trunc-Prop β
-      ( trunc-Prop (fib (map-hom-slice f (map-emb i) q) b))
-      ( γ)
-    where
-    g : Σ B (λ b → type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) b)) → X
-    g = map-emb i ∘ pr1
-    is-emb-g : is-emb g
-    is-emb-g = is-emb-comp' (map-emb i) pr1
-      ( is-emb-map-emb i)
-      ( is-emb-pr1 (λ x → is-prop-type-trunc-Prop))
-    α : hom-slice (map-emb i) g
-    α = map-inv-is-equiv
-          ( up-i
-            ( Σ B ( λ b →
-                    type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) b)))
-            ( pair g is-emb-g))
-          ( pair (map-unit-im (pr1 q)) (pr2 q))
-    β : type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
-    β = pr2 (pr1 α b)
-    γ : fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
-        type-Prop (trunc-Prop (fib (pr1 q) b))
-    γ (pair a p) =
-      unit-trunc-Prop
-        ( pair a (p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b))))
-
-abstract
-  is-surjective-map-unit-im :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-surjective (map-unit-im f)
-  is-surjective-map-unit-im f (pair y z) =
-    apply-universal-property-trunc-Prop z
-      ( trunc-Prop (fib (map-unit-im f) (pair y z)))
-      ( α)
-    where
-    α : fib f y → type-Prop (trunc-Prop (fib (map-unit-im f) (pair y z)))
-    α (pair x p) =
-      unit-trunc-Prop (pair x (eq-subtype (λ z → trunc-Prop (fib f z)) p))
-
-abstract
-  is-image-is-surjective' :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
-    is-surjective (map-hom-slice f (map-emb i) q) →
-    ({l : Level} → is-image' l f i q)
-  is-image-is-surjective' f i q H B' m =
-    map-equiv
-      ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
-        ( ( inv-equiv (reduce-Π-fib (map-emb i) (fib (map-emb m)))) ∘e
-          ( inv-equiv
-            ( equiv-dependent-universal-property-surj-is-surjective
-              ( pr1 q)
-              ( H)
-              ( λ b →
-                pair ( fib (map-emb m) (pr1 i b))
-                     ( is-prop-map-emb m (pr1 i b)))) ∘e
-            ( ( equiv-map-Π (λ a → equiv-tr (fib (map-emb m)) (pr2 q a))) ∘e
-              ( ( reduce-Π-fib f (fib (map-emb m))) ∘e
-                ( equiv-fiberwise-hom-hom-slice f (map-emb m)))))))
-
-abstract
-  is-image-is-surjective :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (i : B ↪ X) (q : hom-slice f (map-emb i)) →
-    is-surjective (map-hom-slice f (map-emb i) q) →
-    ({l : Level} → is-image l f i q)
-  is-image-is-surjective f i q H {l} =
-    is-image-is-image' l f i q
-      ( is-image-is-surjective' f i q H)
 ```
 
 ### A map that is both surjective and an embedding is an equivalence

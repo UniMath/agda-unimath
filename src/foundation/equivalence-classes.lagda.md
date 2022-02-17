@@ -7,6 +7,8 @@ module foundation.equivalence-classes where
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.effective-maps-equivalence-relations using
+  ( is-effective; is-surjective-and-effective)
 open import foundation.equivalence-relations using
   ( Eq-Rel; type-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel;
     equiv-symm-Eq-Rel)
@@ -21,28 +23,31 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl)
 open import foundation.images using
-  ( im; map-unit-im; emb-im; is-set-im; unit-im; is-image-im)
-open import foundation.propositional-extensionality using (eq-iff)
+  ( im; map-unit-im; emb-im; is-set-im; unit-im; is-surjective-map-unit-im)
+open import foundation.propositional-extensionality using
+  ( eq-iff; is-set-UU-Prop)
 open import foundation.propositional-truncations using
   ( trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.reflecting-maps-equivalence-relations using
+  ( reflecting-map-Eq-Rel)
 open import foundation.sets using
   ( is-set; is-set-function-type; UU-Set; Id-Prop)
 open import foundation.slice using (hom-slice)
 open import foundation.subtypes using (eq-subtype)
-open import foundation.subuniverses using (is-set-UU-Prop)
 open import foundation.surjective-maps using
-  ( is-surjective; is-surjective-map-unit-im)
-open import foundation.universal-property-image using (is-image)
-open import foundation.universal-property-set-quotients using
-  ( reflecting-map-Eq-Rel)
+  ( is-surjective)
+open import foundation.universal-property-image using
+  ( is-image; is-image-im)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
 ## Idea
 
-An equivalence class of an equivalence relation `R` on `A` is a subtype of `A` that is merely equivalent to a subtype of the form `R x`.
+An equivalence class of an equivalence relation `R` on `A` is a subtype of `A` that is merely equivalent to a subtype of the form `R x`. The type of equivalence classes of an equivalence relation satisfies the universal property of the set quotient.
+
+## Definition
 
 ```agda
 module _
@@ -81,7 +86,7 @@ module _
   abstract
     is-set-large-set-quotient : is-set large-set-quotient
     is-set-large-set-quotient =
-      is-set-im (prop-Eq-Rel R) (is-set-function-type (is-set-UU-Prop l2))
+      is-set-im (prop-Eq-Rel R) (is-set-function-type is-set-UU-Prop)
 
   large-quotient-Set : UU-Set (l1 ⊔ lsuc l2)
   pr1 large-quotient-Set = large-set-quotient
@@ -100,9 +105,13 @@ module _
     is-surjective quotient-map-large-set-quotient
   is-surjective-quotient-map-large-set-quotient =
     is-surjective-map-unit-im (prop-Eq-Rel R)
-  
--- Proposition 18.1.3
+```
 
+## Properties
+
+### We characterize the identity type of the large set quotient
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) (a : A)
   where
@@ -180,15 +189,11 @@ module _
       (q : large-set-quotient R) → type-class-large-set-quotient R q a →
       Id (quotient-map-large-set-quotient R a) q
     eq-effective-quotient' q = map-inv-is-equiv (is-equiv-related-eq-quotient q)
+```
 
--- Corollary 18.1.4
+### The quotient map into the large set quotient is effective
 
-is-effective :
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3}
-  (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
-is-effective {A = A} R f =
-  (x y : A) → Id (f x) (f y) ≃ type-Eq-Rel R x y
-
+```
 module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
@@ -216,11 +221,34 @@ module _
          ( quotient-map-large-set-quotient R y)
     apply-effectiveness-quotient-map-large-set-quotient' {x} {y} =
       map-inv-equiv (is-effective-quotient-map-large-set-quotient x y)
+```
+
+### The quotient map into the large set quotient is surjective and effective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  is-surjective-and-effective-quotient-map-large-set-quotient :
+    is-surjective-and-effective R (quotient-map-large-set-quotient R)
+  pr1 is-surjective-and-effective-quotient-map-large-set-quotient =
+    is-surjective-quotient-map-large-set-quotient R
+  pr2 is-surjective-and-effective-quotient-map-large-set-quotient =
+    is-effective-quotient-map-large-set-quotient R
+```
+
+### The quotient map into the large set quotient is a reflecting map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
 
   quotient-reflecting-map-large-set-quotient :
     reflecting-map-Eq-Rel R (large-set-quotient R)
   pr1 quotient-reflecting-map-large-set-quotient =
     quotient-map-large-set-quotient R
   pr2 quotient-reflecting-map-large-set-quotient =
-    apply-effectiveness-quotient-map-large-set-quotient'
+    apply-effectiveness-quotient-map-large-set-quotient' R
 ```

@@ -186,11 +186,4 @@ abstract
         ( equiv-eq)
         ( univalence (pr1 X) (pr1 Y))
         ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
-
-abstract
-  is-set-UU-Prop : (l : Level) → is-set (UU-Prop l)
-  is-set-UU-Prop l = is-trunc-UU-Trunc (neg-one-𝕋) l
-
-UU-Prop-Set : (l : Level) → UU-Set (lsuc l)
-UU-Prop-Set l = pair (UU-Prop l) (is-set-UU-Prop l)
 ```

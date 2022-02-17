@@ -39,9 +39,10 @@ open import foundation.disjunction public
 open import foundation.distributivity-of-dependent-functions-over-coproduct-types public
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs public
 open import foundation.double-negation public
+open import foundation.effective-maps-equivalence-relations public
 open import foundation.embeddings public
 open import foundation.empty-types public
-open import foundation.epimorphisms-of-sets public
+open import foundation.epimorphisms-with-respect-to-sets public
 open import foundation.equality-cartesian-product-types public
 open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
@@ -65,6 +66,7 @@ open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
+open import foundation.functoriality-set-quotients public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.homotopies public
@@ -94,6 +96,7 @@ open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
+open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.retractions public
 open import foundation.sections public
 open import foundation.sets public
@@ -117,6 +120,8 @@ open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
+open import foundation.uniqueness-image public
+open import foundation.uniqueness-set-quotients public
 open import foundation.unit-type public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalence public

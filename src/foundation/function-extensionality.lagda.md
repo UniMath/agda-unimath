@@ -9,9 +9,9 @@ open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; issec-map-inv-is-equiv;
     isretr-map-inv-is-equiv; is-equiv-map-inv-is-equiv)
-open import foundation-core.functions using (_∘_; id)
+open import foundation-core.functions using (_∘_; id; precomp)
 open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.identity-types using (Id; refl; ap)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -69,4 +69,13 @@ module _
   equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ Id f g
   pr1 (equiv-eq-htpy {f = f} {g}) = eq-htpy
   pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
+```
+
+```agda
+square-htpy-eq :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
+  ( g h : B → C) →
+  ( (λ (p : (y : B) → Id (g y) (h y)) (x : A) → p (f x)) ∘ htpy-eq) ~
+  ( htpy-eq ∘ (ap (precomp f C)))
+square-htpy-eq f g .g refl = refl
 ```
