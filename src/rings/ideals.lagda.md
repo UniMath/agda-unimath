@@ -10,6 +10,12 @@ module rings.ideals where
 open import subgroups public
 open import rings.rings public
 
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
+open import univalent-foundations
+
+
 {- Subsets of rings -}
 
 subset-Ring :
@@ -19,7 +25,7 @@ subset-Ring l R = type-Ring R → UU-Prop l
 is-set-subset-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → is-set (subset-Ring l R)
 is-set-subset-Ring l R =
-  is-set-function-type (is-set-UU-Prop l)
+  is-set-function-type is-set-UU-Prop
 
 {- Closure properties of subsets of rings -}
 

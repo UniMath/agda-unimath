@@ -6,6 +6,12 @@
 module polytopes.abstract-polytopes where
 
 open import order-theory public
+
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
+open import univalent-foundations
+
 ```
 
 ### The axioms of Abstract Polytopes

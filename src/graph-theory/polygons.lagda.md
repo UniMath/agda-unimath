@@ -7,8 +7,13 @@ title: Formalisation of the Symmetry Book
 
 module graph-theory.polygons where
 
-open import univalent-combinatorics.undirected-graphs public
-open import univalent-combinatorics.finite-graphs public
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
+open import univalent-foundations
+
+open import graph-theory.finite-graphs public
+open import graph-theory.undirected-graphs public
 ```
 
 We define the type of polygons. Our goal is show that the loop space of `Polygon k` is the dihedral group D_k.

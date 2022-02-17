@@ -7,7 +7,11 @@ title: Formalisation of the Symmetry Book
 
 module graph-theory.finite-graphs where
 
-open import univalent-combinatorics.unordered-pairs public
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
+open import univalent-foundations
+open import graph-theory.directed-graphs
 
 record Graph-Fin : UU (lsuc lzero)
   where

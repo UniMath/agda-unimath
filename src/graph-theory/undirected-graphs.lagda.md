@@ -7,8 +7,11 @@ title: Formalisation of the Symmetry Book
 
 module graph-theory.undirected-graphs where
 
-open import univalent-combinatorics.unordered-pairs public
-open import univalent-combinatorics.directed-graphs public
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
+open import univalent-foundations
+open import graph-theory.directed-graphs
 
 Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Undirected-Graph l1 l2 = Σ (UU l1) (λ V → unordered-pair V → UU l2)
