@@ -32,9 +32,11 @@ open import univalent-combinatorics.equality-finite-types public
 open import univalent-combinatorics.equivalences public
 open import univalent-combinatorics.fibers-of-maps-between-finite-types public
 open import univalent-combinatorics.finite-choice public
+open import univalent-combinatorics.finite-connected-components public
 open import univalent-combinatorics.finite-function-types public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.finite-types public
+open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.injective-maps public

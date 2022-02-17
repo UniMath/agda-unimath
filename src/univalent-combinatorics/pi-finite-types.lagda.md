@@ -8,14 +8,45 @@ title: Formalisation of the Symmetry Book
 module univalent-combinatorics.pi-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.standard-finite-types using (Fin)
 
+open import foundation.contractible-types using (is-contr; is-prop-is-contr)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.decidable-equality using
+  ( has-decidable-equality)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.empty-types using (is-empty; ex-falso; empty; ind-empty)
+open import foundation.equality-coproduct-types using
+  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inl-inr;
+    compute-eq-coprod-inr-inl; compute-eq-coprod-inr-inr)
+open import foundation.equivalences using
+  ( _≃_; equiv-ap; map-equiv; inv-equiv)
+open import foundation.functions using (id)
+open import foundation.functoriality-set-truncation using
+  ( equiv-trunc-Set)
 open import foundation.identity-types using (Id)
+open import foundation.maybe using (Maybe)
+open import foundation.mere-equivalences using (mere-equiv)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop)
+open import foundation.set-truncations using
+  ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
+    is-contr-trunc-Set; equiv-distributive-trunc-coprod-Set)
 open import foundation.truncation-levels using (𝕋; zero-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.unit-type using (unit; is-contr-unit)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
-open import univalent-combinatorics.finite-types using (is-finite-Prop)
+open import univalent-combinatorics.coproduct-finite-types using
+  ( is-finite-coprod)
+open import univalent-combinatorics.counting using (count)
+open import univalent-combinatorics.equality-finite-types using
+  ( is-finite-eq)
+open import univalent-combinatorics.finite-types using
+  ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
+    is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
+    is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽)
 
 {-------------------------------------------------------------------------------
 

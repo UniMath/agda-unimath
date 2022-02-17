@@ -101,6 +101,7 @@ open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.retractions public
 open import foundation.sections public
+open import foundation.set-presented-types public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.singleton-induction public
