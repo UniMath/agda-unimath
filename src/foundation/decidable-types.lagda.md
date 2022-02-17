@@ -7,7 +7,7 @@ module foundation.decidable-types where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; ind-coprod; is-prop-coprod)
+  ( coprod; inl; inr; ind-coprod; is-prop-coprod; is-left; is-right)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.double-negation using (¬¬; intro-dn)
 open import foundation.empty-types using
@@ -66,7 +66,8 @@ is-merely-decidable A = type-trunc-Prop (is-decidable A)
 
 ## Examples
 
-The unit type and the empty type are decidable, and indeed any type equipped with a point is decidable.
+
+### The unit type and the empty type are decidable
 
 ```
 is-decidable-unit : is-decidable unit
@@ -74,6 +75,22 @@ is-decidable-unit = inl star
 
 is-decidable-empty : is-decidable empty
 is-decidable-empty = inr id
+```
+
+### Being on the left or on the right in a coproduct is decidable
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+  
+  is-decidable-is-left : (x : coprod X Y) → is-decidable (is-left x)
+  is-decidable-is-left (inl x) = is-decidable-unit
+  is-decidable-is-left (inr x) = is-decidable-empty
+
+  is-decidable-is-right : (x : coprod X Y) → is-decidable (is-right x)
+  is-decidable-is-right (inl x) = is-decidable-empty
+  is-decidable-is-right (inr x) = is-decidable-unit
 ```
 
 ## Properties

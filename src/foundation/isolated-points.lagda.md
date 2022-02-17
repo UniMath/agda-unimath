@@ -8,20 +8,26 @@ module foundation.isolated-points where
 open import foundation.constant-maps using (const; fib-const)
 open import foundation.contractible-types using (is-contr; is-contr-equiv)
 open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using (has-decidable-equality)
+open import foundation.decidable-embeddings using (_↪d_)
+open import foundation.decidable-equality using
+  ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-maps using (is-decidable-map)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-equiv; is-decidable-equiv')
+  ( is-decidable; is-decidable-equiv; is-decidable-equiv';
+    is-prop-is-decidable; is-decidable-prod; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
+open import foundation.embeddings using (is-emb; is-emb-comp')
 open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; tr; ap)
+open import foundation.injective-maps using (is-emb-is-injective)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop)
-open import foundation.subtypes using (eq-subtype)
+  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop;
+    is-prop-is-inhabited; is-prop-Π)
+open import foundation.sets using (is-set)
+open import foundation.subtypes using (eq-subtype; is-emb-pr1; equiv-ap-pr1)
 open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-prod)
 open import foundation.unit-type using (unit; is-prop-unit; star)
@@ -165,4 +171,50 @@ module _
             ( is-prop-eq-isolated-point d a)
             ( refl)))
         ( λ x → ap (λ y → a))
+```
+
+### Being an isolated point is a property
+
+```agda
+is-prop-is-isolated :
+  {l1 : Level} {A : UU l1} (a : A) → is-prop (is-isolated a)
+is-prop-is-isolated a =
+  is-prop-is-inhabited
+    ( λ H →
+      is-prop-Π (λ x → is-prop-is-decidable (is-prop-eq-isolated-point a H x)))
+
+inclusion-isolated-point :
+  {l1 : Level} (A : UU l1) → isolated-point A → A
+inclusion-isolated-point A = pr1
+
+is-emb-inclusion-isolated-point :
+  {l1 : Level} (A : UU l1) → is-emb (inclusion-isolated-point A)
+is-emb-inclusion-isolated-point A = is-emb-pr1 is-prop-is-isolated
+
+has-decidable-equality-isolated-point :
+  {l1 : Level} (A : UU l1) → has-decidable-equality (isolated-point A)
+has-decidable-equality-isolated-point A (pair x dx) (pair y dy) =
+  is-decidable-equiv
+    ( equiv-ap-pr1 is-prop-is-isolated)
+    ( dx y)
+
+is-set-isolated-point :
+  {l1 : Level} (A : UU l1) → is-set (isolated-point A)
+is-set-isolated-point A =
+  is-set-has-decidable-equality (has-decidable-equality-isolated-point A)
+
+decidable-emb-isolated-point :
+  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪d A
+decidable-emb-isolated-point {l1} {A} a =
+  pair
+    ( const unit A (pr1 a))
+    ( pair
+      ( is-emb-comp'
+        ( inclusion-isolated-point A)
+        ( const unit (isolated-point A) a)
+        ( is-emb-inclusion-isolated-point A)
+        ( is-emb-is-injective
+          ( is-set-isolated-point A)
+           λ { {star} {star} p → refl}))
+      ( λ x → is-decidable-prod is-decidable-unit (pr2 a x)))
 ```

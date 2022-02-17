@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The standard finite types
 
 ```agda
@@ -17,9 +13,10 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
+
+open import foundation.booleans using (bool; true; false)
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-empty; is-decidable-unit)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (empty; ex-falso)
@@ -32,11 +29,19 @@ open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.negation using (¬; map-neg)
 open import foundation.non-contractible-types using
   ( is-not-contractible; is-not-contractible-empty)
+open import foundation.raising-universe-levels using
+  ( raise; equiv-raise; map-raise)
 open import foundation.unit-type using (unit; star; is-contr-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.universe-levels using (Level; UU; lzero)
 ```
 
-# The standard finite types
+## Idea
+
+The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (n+1) := (Fin n) + 1`.
+
+## Definition
+
+### The standard finite types in universe level zero.
 
 ```agda
 Fin : ℕ → UU lzero
@@ -61,9 +66,44 @@ neg-two-Fin :
   {k : ℕ} → Fin (succ-ℕ k)
 neg-two-Fin {zero-ℕ} = inr star
 neg-two-Fin {succ-ℕ k} = inl (inr star)
+
+is-inl-Fin : {k : ℕ} → Fin (succ-ℕ k) → UU lzero
+is-inl-Fin {k} x = Σ (Fin k) (λ y → Id (inl y) x)
+
+is-neg-one-is-not-inl-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → ¬ (is-inl-Fin x) → is-neg-one-Fin x
+is-neg-one-is-not-inl-Fin (inl x) H = ex-falso (H (pair x refl))
+is-neg-one-is-not-inl-Fin (inr star) H = refl
 ```
 
-## Fin 1 is contractible
+### The standard finite types in an arbitrary universe
+
+```agda
+raise-Fin : (l : Level) (k : ℕ) → UU l
+raise-Fin l k = raise l (Fin k)
+
+equiv-raise-Fin : (l : Level) (k : ℕ) → Fin k ≃ raise-Fin l k
+equiv-raise-Fin l k = equiv-raise l (Fin k)
+
+map-raise-Fin : (l : Level) (k : ℕ) → Fin k → raise-Fin l k
+map-raise-Fin l k = map-raise
+```
+
+## Properties
+
+### Being on the left is decidable
+
+```agda
+is-decidable-is-inl-Fin :
+  {k : ℕ} (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin x)
+is-decidable-is-inl-Fin (inl x) = inl (pair x refl)
+is-decidable-is-inl-Fin (inr star) = inr α
+  where
+  α : is-inl-Fin (inr star) → empty
+  α (pair y ())
+```
+
+### Fin 1 is contractible
 
 ```agda
 map-equiv-Fin-one-ℕ : Fin 1 → unit
@@ -100,6 +140,36 @@ is-not-contractible-Fin zero-ℕ f = is-not-contractible-empty
 is-not-contractible-Fin (succ-ℕ zero-ℕ) f C = f refl
 is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C neg-two-Fin neg-one-Fin)
+```
+
+### `Fin 2` is equivalent to `bool`
+
+```agda
+bool-Fin-two-ℕ : Fin 2 → bool
+bool-Fin-two-ℕ (inl (inr star)) = true
+bool-Fin-two-ℕ (inr star) = false
+
+Fin-two-ℕ-bool : bool → Fin 2
+Fin-two-ℕ-bool true = inl (inr star)
+Fin-two-ℕ-bool false = inr star
+
+abstract
+  isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
+  isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
+  isretr-Fin-two-ℕ-bool (inr star) = refl
+
+abstract
+  issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
+  issec-Fin-two-ℕ-bool true = refl
+  issec-Fin-two-ℕ-bool false = refl
+
+equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
+pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
+pr2 equiv-bool-Fin-two-ℕ =
+  is-equiv-has-inverse
+    ( Fin-two-ℕ-bool)
+    ( issec-Fin-two-ℕ-bool)
+    ( isretr-Fin-two-ℕ-bool)
 ```
 
 ### The inclusion of Fin k into ℕ
@@ -144,7 +214,7 @@ pr1 (emb-nat-Fin k) = nat-Fin
 pr2 (emb-nat-Fin k) = is-emb-nat-Fin
 ```
 
-## The zero elements in the standard finite types
+### The zero elements in the standard finite types
 
 ```agda
 zero-Fin : {k : ℕ} → Fin (succ-ℕ k)
@@ -161,7 +231,7 @@ is-nonzero-Fin : {k : ℕ} → Fin k → UU lzero
 is-nonzero-Fin {succ-ℕ k} x = ¬ (is-zero-Fin x)
 ```
 
-## The successor function on the standard finite types
+### The successor function on the standard finite types
 
 ```agda
 skip-zero-Fin : {k : ℕ} → Fin k → Fin (succ-ℕ k)

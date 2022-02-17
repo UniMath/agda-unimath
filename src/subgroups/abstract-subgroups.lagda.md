@@ -19,7 +19,7 @@ subset-Group l G = type-Group G → UU-Prop l
 is-set-subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
 is-set-subset-Group l G =
-  is-set-function-type (is-set-UU-Prop l)
+  is-set-function-type is-set-UU-Prop
 
 {- Defining subgroups -}
 

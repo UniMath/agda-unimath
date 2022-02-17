@@ -7,7 +7,11 @@ title: Formalisation of the Symmetry Book
 
 module univalent-foundations.truncations where
 
-open import univalent-foundations.18-set-quotients public
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
+open import univalent-foundations
+
 ```
 
 # Truncations

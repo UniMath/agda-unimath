@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The Well-Ordering Principle of the natural numbers
 
 ```agda
@@ -12,8 +8,11 @@ module elementary-number-theory.well-ordering-principle-natural-numbers where
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-zero-ℕ; le-ℕ; leq-le-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ;
     is-decidable-le-ℕ; is-prop-leq-ℕ; antisymmetric-leq-ℕ)
+open import elementary-number-theory.lower-bounds-natural-numbers using
+  ( is-lower-bound-ℕ; is-lower-bound-ℕ-Prop)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
+  
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
@@ -36,112 +35,13 @@ open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; Level)
 ```
 
-# Decidable type families on the natural numbers
+## Idea
+
+The well-ordering principle of the natural numbers asserts that for every family of decidable types over ℕ equipped with a natural number `n` and an element `p : P n`, we can find a least natural number `n₀` with an element `p₀ : P n₀`. 
+
+## Theorem
 
 ```agda
-is-decidable-Π-ℕ :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) (m : ℕ) →
-  is-decidable ((x : ℕ) → (leq-ℕ m x) → P x) → is-decidable ((x : ℕ) → P x)
-is-decidable-Π-ℕ P d zero-ℕ (inr nH) = inr (λ f → nH (λ x y → f x))
-is-decidable-Π-ℕ P d zero-ℕ (inl H) = inl (λ x → H x (leq-zero-ℕ x))
-is-decidable-Π-ℕ P d (succ-ℕ m) (inr nH) = inr (λ f → nH (λ x y → f x))
-is-decidable-Π-ℕ P d (succ-ℕ m) (inl H) with d zero-ℕ
-... | inr np = inr (λ f → np (f zero-ℕ))
-... | inl p with
-  is-decidable-Π-ℕ
-    ( λ x → P (succ-ℕ x))
-    ( λ x → d (succ-ℕ x))
-    ( m)
-    ( inl (λ x → H (succ-ℕ x)))
-... | inl g = inl (ind-ℕ p (λ x y → g x))
-... | inr ng = inr (λ f → ng (λ x → f (succ-ℕ x)))
-
-{- Corollary 8.2.5 and some variations -}
-
-is-upper-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
-is-upper-bound-ℕ P n =
-  (m : ℕ) → P m → leq-ℕ m n
-
-is-strict-upper-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
-is-strict-upper-bound-ℕ P n =
-  (m : ℕ) → P m → le-ℕ m n
-
-is-upper-bound-is-strict-upper-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) →
-  is-strict-upper-bound-ℕ P n → is-upper-bound-ℕ P n
-is-upper-bound-is-strict-upper-bound-ℕ P n H x p =
-  leq-le-ℕ {x} {n} (H x p)
-
-is-decidable-bounded-Π-ℕ :
-  {l1 l2 : Level} (P : ℕ → UU l1) (Q : ℕ → UU l2) (dP : is-decidable-fam P) →
-  (dQ : is-decidable-fam Q) (m : ℕ) (H : is-upper-bound-ℕ P m) →
-  is-decidable ((x : ℕ) → P x → Q x)
-is-decidable-bounded-Π-ℕ P Q dP dQ m H =
-  is-decidable-Π-ℕ
-    ( λ x → P x → Q x)
-    ( λ x → is-decidable-function-type (dP x) (dQ x))
-    ( succ-ℕ m)
-    ( inl (λ x l p → ex-falso (contradiction-leq-ℕ x m (H x p) l)))
-
-is-decidable-bounded-Π-ℕ' :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) (m : ℕ) →
-  is-decidable ((x : ℕ) → (leq-ℕ x m) → P x)
-is-decidable-bounded-Π-ℕ' P d m =
-  is-decidable-bounded-Π-ℕ
-    ( λ x → leq-ℕ x m)
-    ( P)
-    ( λ x → is-decidable-leq-ℕ x m)
-    ( d)
-    ( m)
-    ( λ x → id)
-
-is-decidable-strictly-bounded-Π-ℕ :
-  {l1 l2 : Level} (P : ℕ → UU l1) (Q : ℕ → UU l2) (dP : is-decidable-fam P) →
-  (dQ : is-decidable-fam Q) (m : ℕ) (H : is-strict-upper-bound-ℕ P m) →
-  is-decidable ((x : ℕ) → P x → Q x)
-is-decidable-strictly-bounded-Π-ℕ P Q dP dQ m H =
-  is-decidable-bounded-Π-ℕ P Q dP dQ m (λ x p → leq-le-ℕ {x} {m} (H x p))
-
-is-decidable-strictly-bounded-Π-ℕ' :
-  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) (m : ℕ) →
-  is-decidable ((x : ℕ) → le-ℕ x m → P x)
-is-decidable-strictly-bounded-Π-ℕ' P d m =
-  is-decidable-strictly-bounded-Π-ℕ
-    ( λ x → le-ℕ x m)
-    ( P)
-    ( λ x → is-decidable-le-ℕ x m)
-    ( d)
-    ( m)
-    ( λ x → id)
-```
-
-## The well-ordering principle of the natural numbers
-
-```agda
-{- Definition 8.3.2 -}
-
-is-lower-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
-is-lower-bound-ℕ P n =
-  (m : ℕ) → P m → leq-ℕ n m
-
-module _
-  {l1 : Level} {P : ℕ → UU l1}
-  where
-
-  abstract
-    is-prop-is-lower-bound-ℕ : (x : ℕ) → is-prop (is-lower-bound-ℕ P x)
-    is-prop-is-lower-bound-ℕ x =
-      is-prop-Π (λ y → is-prop-function-type (is-prop-leq-ℕ x y))
-
-  is-lower-bound-ℕ-Prop : (x : ℕ) → UU-Prop l1
-  pr1 (is-lower-bound-ℕ-Prop x) = is-lower-bound-ℕ P x
-  pr2 (is-lower-bound-ℕ-Prop x) = is-prop-is-lower-bound-ℕ x
-
-{- Theorem 8.3.3 (The well-ordering principle of ℕ) -}
-
 minimal-element-ℕ :
   {l : Level} (P : ℕ → UU l) → UU l
 minimal-element-ℕ P = Σ ℕ (λ n → (P n) × (is-lower-bound-ℕ P n))
@@ -252,76 +152,6 @@ is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
       ( λ z → P (succ-ℕ z))
       ( λ x → d (succ-ℕ x))
       ( pair m p))
-```
-
-```agda
-is-decidable-Σ-ℕ :
-  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
-  is-decidable (Σ ℕ (λ x → (leq-ℕ m x) × (P x))) → is-decidable (Σ ℕ P)
-is-decidable-Σ-ℕ m P d (inl (pair x (pair l p))) = inl (pair x p)
-is-decidable-Σ-ℕ zero-ℕ P d (inr f) =
-  inr (λ p → f (pair (pr1 p) (pair star (pr2 p))))
-is-decidable-Σ-ℕ (succ-ℕ m) P d (inr f) with d zero-ℕ
-... | inl p = inl (pair zero-ℕ p)
-... | inr g with
-  is-decidable-Σ-ℕ m
-    ( P ∘ succ-ℕ)
-    ( λ x → d (succ-ℕ x))
-    ( inr (λ p → f (pair (succ-ℕ (pr1 p)) (pr2 p))))
-... | inl p = inl (pair (succ-ℕ (pr1 p)) (pr2 p))
-... | inr h = inr α
-  where
-  α : Σ ℕ P → empty
-  α (pair zero-ℕ p) = g p
-  α (pair (succ-ℕ x) p) = h (pair x p)
-
-is-decidable-bounded-Σ-ℕ :
-  {l1 l2 : Level} (m : ℕ) (P : ℕ → UU l1) (Q : ℕ → UU l2)
-  (dP : is-decidable-fam P) (dQ : is-decidable-fam Q)
-  (H : is-upper-bound-ℕ P m) → is-decidable (Σ ℕ (λ x → (P x) × (Q x)))
-is-decidable-bounded-Σ-ℕ m P Q dP dQ H =
-  is-decidable-Σ-ℕ
-    ( succ-ℕ m)
-    ( λ x → (P x) × (Q x))
-    ( λ x → is-decidable-prod (dP x) (dQ x))
-    ( inr
-      ( λ p →
-        contradiction-leq-ℕ
-          ( pr1 p)
-          ( m)
-          ( H (pr1 p) (pr1 (pr2 (pr2 p))))
-          ( pr1 (pr2 p))))
-
-is-decidable-bounded-Σ-ℕ' :
-  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
-  is-decidable (Σ ℕ (λ x → (leq-ℕ x m) × (P x)))
-is-decidable-bounded-Σ-ℕ' m P d =
-  is-decidable-bounded-Σ-ℕ m
-    ( λ x → leq-ℕ x m)
-    ( P)
-    ( λ x → is-decidable-leq-ℕ x m)
-    ( d)
-    ( λ x → id)
-
-is-decidable-strictly-bounded-Σ-ℕ :
-  {l1 l2 : Level} (m : ℕ) (P : ℕ → UU l1) (Q : ℕ → UU l2)
-  (dP : is-decidable-fam P) (dQ : is-decidable-fam Q)
-  (H : is-strict-upper-bound-ℕ P m) →
-  is-decidable (Σ ℕ (λ x → (P x) × (Q x)))
-is-decidable-strictly-bounded-Σ-ℕ m P Q dP dQ H =
-  is-decidable-bounded-Σ-ℕ m P Q dP dQ
-    ( is-upper-bound-is-strict-upper-bound-ℕ P m H)
-
-is-decidable-strictly-bounded-Σ-ℕ' :
-  {l : Level} (m : ℕ) (P : ℕ → UU l) (d : is-decidable-fam P) →
-  is-decidable (Σ ℕ (λ x → (le-ℕ x m) × (P x)))
-is-decidable-strictly-bounded-Σ-ℕ' m P d =
-  is-decidable-strictly-bounded-Σ-ℕ m
-    ( λ x → le-ℕ x m)
-    ( P)
-    ( λ x → is-decidable-le-ℕ x m)
-    ( d)
-    ( λ x → id)
 ```
 
 ### Global choice

@@ -9,13 +9,18 @@ open import foundation-core.sets public
 
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (_≃_)
+open import foundation-core.equivalences using (_≃_; is-equiv)
+open import foundation-core.functions using (precomp)
+open import foundation-core.identity-types using (Id)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.truncation-levels using (zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
   ( is-contr; is-trunc-is-contr)
+open import foundation.subuniverses using
+  ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
+    is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
 open import foundation.truncated-types using
   ( is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
     is-trunc-function-type; is-trunc-equiv-is-trunc)
@@ -134,6 +139,11 @@ hom-Set :
   {l1 l2 : Level} → UU-Set l1 → UU-Set l2 → UU-Set (l1 ⊔ l2)
 pr1 (hom-Set A B) = type-hom-Set A B
 pr2 (hom-Set A B) = is-set-type-hom-Set A B
+
+precomp-Set :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU-Set l3) →
+  (B → type-Set C) → (A → type-Set C)
+precomp-Set f C = precomp f (type-Set C)
 ```
 
 ### The type of equivalences between sets is a set
@@ -160,4 +170,25 @@ module _
 aut-Set :
   {l : Level} (X : UU-Set l) → UU-Set l
 aut-Set X = equiv-Set X X
+```
+
+```agda
+module _
+  {l : Level} (X : UU-Set l)
+  where
+
+  equiv-eq-Set : (Y : UU-Set l) → Id X Y → type-equiv-Set X Y
+  equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
+  
+  abstract
+    is-contr-total-equiv-Set : is-contr (Σ (UU-Set l) (type-equiv-Set X))
+    is-contr-total-equiv-Set =
+      is-contr-total-equiv-subuniverse is-set-Prop X
+
+  abstract
+    is-equiv-equiv-eq-Set : (Y : UU-Set l) → is-equiv (equiv-eq-Set Y)
+    is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
+
+  eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → Id X Y
+  eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
 ```

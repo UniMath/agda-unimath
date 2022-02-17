@@ -5,18 +5,19 @@
 
 module foundation.equality-dependent-function-types where
 
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id; fundamental-theorem-id')
+open import foundation-core.equivalences using
+  ( is-equiv; map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
+open import foundation-core.identity-types using (Id; tr; refl)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
+
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-total-path; is-contr-Π)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( Π-total-fam; distributive-Π-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
-open import foundation.identity-types using (Id; tr; refl)
-open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea

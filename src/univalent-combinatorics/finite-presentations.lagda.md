@@ -7,8 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module univalent-combinatorics.finite-presentations where
 
-open import univalent-foundations public
-
 {-------------------------------------------------------------------------------
 
   Finitely presented types are types A equipped with a map f : Fin k → A such

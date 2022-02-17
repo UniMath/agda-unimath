@@ -6,11 +6,12 @@
 module foundation.unit-type where
 
 open import foundation-core.contractible-types using
-  ( is-contr; center; contraction; is-prop-is-contr)
+  ( is-contr; center; contraction; is-prop-is-contr; is-contr-equiv')
 open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.identity-types using (Id; refl)
-open import foundation-core.propositions using (is-prop; UU-Prop)
+open import foundation-core.propositions using
+  ( is-prop; UU-Prop; is-prop-equiv')
 open import foundation-core.sets using (is-set; UU-Set)
 open import foundation-core.truncated-types using (is-trunc-succ-is-trunc)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
@@ -63,7 +64,7 @@ abstract
   pr2 is-contr-unit star = refl
 ```
 
-### Any contractible type is equivalent to the unit typep
+### Any contractible type is equivalent to the unit type
 
 ```agda
 module _
@@ -106,4 +107,23 @@ abstract
 unit-Set : UU-Set lzero
 pr1 unit-Set = unit
 pr2 unit-Set = is-set-unit
+```
+
+```agda
+abstract
+  is-contr-raise-unit :
+    {l1 : Level} → is-contr (raise-unit l1)
+  is-contr-raise-unit {l1} =
+    is-contr-equiv' unit (equiv-raise l1 unit) is-contr-unit
+
+abstract
+  is-prop-raise-unit :
+    {l1 : Level} → is-prop (raise-unit l1)
+  is-prop-raise-unit {l1} =
+    is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
+
+raise-unit-Prop :
+  (l1 : Level) → UU-Prop l1
+pr1 (raise-unit-Prop l1) = raise-unit l1
+pr2 (raise-unit-Prop l1) = is-prop-raise-unit
 ```

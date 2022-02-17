@@ -7,12 +7,18 @@ module foundation.1-types where
 
 open import foundation-core.1-types public
 
+open import foundation-core.contractible-types using (is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using (_≃_; is-equiv)
+open import foundation-core.identity-types using (Id)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.subtypes using (is-subtype; is-trunc-is-subtype)
 open import foundation-core.truncation-levels using (one-𝕋; zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
+open import foundation.subuniverses using
+   ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
+     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
 open import foundation.truncated-types using
   ( is-prop-is-trunc; is-trunc-Π; is-trunc-function-type)
 ```
@@ -108,4 +114,28 @@ module _
   abstract
     is-1-type-is-subtype : is-subtype P → is-1-type A → is-1-type (Σ A P)
     is-1-type-is-subtype = is-trunc-is-subtype zero-𝕋
+```
+
+```agda
+module _
+  {l : Level} (X : UU-1-Type l)
+  where
+
+  type-equiv-1-Type : {l2 : Level} (Y : UU-1-Type l2) → UU (l ⊔ l2)
+  type-equiv-1-Type Y = type-1-Type X ≃ type-1-Type Y
+
+  equiv-eq-1-Type : (Y : UU-1-Type l) → Id X Y → type-equiv-1-Type Y
+  equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
+  
+  abstract
+    is-contr-total-equiv-1-Type : is-contr (Σ (UU-1-Type l) type-equiv-1-Type)
+    is-contr-total-equiv-1-Type =
+      is-contr-total-equiv-subuniverse is-1-type-Prop X
+
+  abstract
+    is-equiv-equiv-eq-1-Type : (Y : UU-1-Type l) → is-equiv (equiv-eq-1-Type Y)
+    is-equiv-equiv-eq-1-Type = is-equiv-equiv-eq-subuniverse is-1-type-Prop X
+
+  eq-equiv-1-Type : (Y : UU-1-Type l) → type-equiv-1-Type Y → Id X Y
+  eq-equiv-1-Type Y = eq-equiv-subuniverse is-1-type-Prop
 ```

@@ -7,6 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module order-theory.finite-posets where
 
+open import univalent-combinatorics
+
 open import order-theory.posets
 open import order-theory.finite-preorders public
 ```

@@ -6,7 +6,8 @@
 
 module univalent-foundations.pointed-equivalences where
 
-open import univalent-foundations.17-univalence
+open import foundation public
+open import elementary-number-theory public
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.cartesian-product-types using (_×_)

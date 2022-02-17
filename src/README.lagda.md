@@ -1,9 +1,8 @@
----
-title: Formalisation of the Symmetry Book
----
+# Univalent mathematics in Agda
+
+Welcome to the online version of the Agda library for univalent mathematics.
 
 [![build](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml)
-
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -114,6 +113,7 @@ open import foundation.path-split-maps
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.retractions
 open import foundation.sections
@@ -141,6 +141,8 @@ open import foundation.universal-property-empty-type
 open import foundation.universal-property-identity-types
 open import foundation.universal-property-image
 open import foundation.universal-property-propositional-truncation
+open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.universal-property-pullbacks
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.weak-function-extensionality
@@ -198,9 +200,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.16-finite-types public
-open import univalent-foundations.17-univalence public
-open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.W-types public
 open import univalent-foundations.functoriality-loop-spaces public
 open import univalent-foundations.iterated-loop-spaces public
@@ -267,6 +266,12 @@ open import subgroups.abstract-subgroups public
 open import subgroups.abstract-abelian-subgroups public
 ```
 
+## Finite groups
+
+```agda
+open import finite-groups.quaternion-group public
+```
+
 ## Order theory
 
 ```agda
@@ -280,19 +285,27 @@ open import order-theory.finitely-graded-posets public
 ## Univalent combinatorics
 
 ```agda
-open import univalent-combinatorics.unordered-pairs public
-open import univalent-combinatorics.finite-graphs public
-open import univalent-combinatorics.undirected-graphs public
-open import univalent-combinatorics.directed-graphs public
-open import univalent-combinatorics.reflexive-graphs public
-open import univalent-combinatorics.polygons public
-open import univalent-combinatorics.abstract-polytopes public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.ramsey-theory public
-open import univalent-combinatorics.isolated-points public
-open import univalent-combinatorics.quaternion-group public
 ```
+
+## Graph theory
+
+```agda
+open import graph-theory.finite-graphs public
+open import graph-theory.undirected-graphs public
+open import graph-theory.directed-graphs public
+open import graph-theory.reflexive-graphs public
+open import graph-theory.polygons public
+```
+
+## Polytopes
+
+```agda
+open import polytopes.abstract-polytopes public
+```
+
 
 ## Rings
 

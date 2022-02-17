@@ -11,6 +11,8 @@ module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
+open import elementary-number-theory.decidable-dependent-function-types using
+  ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
@@ -26,6 +28,8 @@ open import elementary-number-theory.euclidean-division-natural-numbers using
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
     contradiction-le-ℕ)
+open import elementary-number-theory.lower-bounds-natural-numbers using
+  ( is-lower-bound-ℕ)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
@@ -36,8 +40,7 @@ open import elementary-number-theory.natural-numbers using
     is-zero-ℕ)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( is-decidable-bounded-Π-ℕ; minimal-element-ℕ; well-ordering-principle-ℕ;
-    is-lower-bound-ℕ)
+  ( minimal-element-ℕ; well-ordering-principle-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using

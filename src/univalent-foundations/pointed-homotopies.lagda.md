@@ -5,7 +5,8 @@
 
 module univalent-foundations.pointed-homotopies where
 
-open import univalent-foundations.17-univalence
+open import foundation public
+open import elementary-number-theory public
 
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.homotopies using (refl-htpy)

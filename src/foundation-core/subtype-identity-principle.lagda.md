@@ -17,10 +17,8 @@ open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using (Id; refl)
 open import foundation-core.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
-open import foundation-core.type-arithmetic-cartesian-product-types using
-  ( equiv-right-swap-Σ)
 open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr)
+  ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 

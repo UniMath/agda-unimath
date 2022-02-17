@@ -28,10 +28,8 @@ open import foundation-core.subtype-identity-principle using
 open import foundation-core.truncated-types using (is-trunc; is-trunc-is-emb)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation-core.type-arithmetic-cartesian-product-types using
-  ( equiv-right-swap-Σ)
 open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr)
+  ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
