@@ -10,43 +10,120 @@ module univalent-combinatorics.pi-finite-types where
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import elementary-number-theory.standard-finite-types using (Fin)
 
-open import foundation.contractible-types using (is-contr; is-prop-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.connected-types using
+  ( is-path-connected; mere-eq-is-path-connected; is-surjective-fiber-inclusion;
+    is-inhabited-is-path-connected)
+open import foundation.constant-maps using (const)
+open import foundation.contractible-types using
+  ( is-contr; is-prop-is-contr; center; is-contr-equiv'; is-contr-Prop)
+open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
+open import foundation.decidable-types using
+  ( is-decidable; is-decidable-Prop; is-decidable-equiv'; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (is-empty; ex-falso; empty; ind-empty)
+open import foundation.embeddings using
+  ( is-emb; is-emb-right-factor; is-emb-comp'; equiv-ap-emb)
+open import foundation.empty-types using
+  ( is-empty; ex-falso; empty; ind-empty; empty-Prop)
 open import foundation.equality-coproduct-types using
   ( compute-eq-coprod-inl-inl; compute-eq-coprod-inl-inr;
-    compute-eq-coprod-inr-inl; compute-eq-coprod-inr-inr)
+    compute-eq-coprod-inr-inl; compute-eq-coprod-inr-inr; is-emb-coprod;
+    is-empty-eq-coprod-inl-inr; is-emb-inl)
+open import foundation.equality-cartesian-product-types using
+  ( equiv-eq-pair)
+open import foundation.equality-dependent-pair-types using
+  ( equiv-pair-eq-Σ; eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; equiv-ap; map-equiv; inv-equiv)
-open import foundation.functions using (id)
+  ( _≃_; equiv-ap; map-equiv; inv-equiv; equiv-precomp-Π; map-inv-equiv;
+    is-equiv-map-equiv; issec-map-inv-equiv; is-equiv; id-equiv; _∘e_;
+    is-emb-is-equiv)
+open import foundation.fiber-inclusions using (fiber-inclusion)
+open import foundation.fibers-of-maps using (fib)
+open import foundation.function-extensionality using (equiv-funext)
+open import foundation.functions using (id; _∘_)
+open import foundation.functoriality-coproduct-types using (map-coprod)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-Σ)
 open import foundation.functoriality-set-truncation using
-  ( equiv-trunc-Set)
-open import foundation.identity-types using (Id)
+  ( equiv-trunc-Set; is-surjective-map-trunc-Set; map-trunc-Set;
+    equiv-trunc-im-Set; inclusion-trunc-im-Set; naturality-trunc-Set;
+    is-emb-inclusion-trunc-im-Set)
+open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·r_)
+open import foundation.identity-types using (Id; tr; ap; refl; inv; _∙_)
+open import foundation.images using
+  ( im; map-unit-im; im-Set; eq-Eq-im; is-surjective-map-unit-im;
+    inclusion-im; equiv-Eq-eq-im)
+open import foundation.injective-maps using (is-injective-is-equiv)
+open import foundation.logical-equivalences using (equiv-iff)
 open import foundation.maybe using (Maybe)
+open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
 open import foundation.mere-equivalences using (mere-equiv)
+open import foundation.propositional-extensionality using
+  ( UU-Prop-Set)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
+  ( apply-universal-property-trunc-Prop; trunc-Prop; type-trunc-Prop;
+    unit-trunc-Prop; is-prop-type-trunc-Prop;
+    apply-dependent-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop)
+  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop;
+    type-hom-Prop; function-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
-    is-contr-trunc-Set; equiv-distributive-trunc-coprod-Set)
+    is-contr-trunc-Set; equiv-distributive-trunc-coprod-Set;
+    equiv-unit-trunc-Set; unit-trunc-Set; trunc-Set;
+    universal-property-trunc-Set; apply-dependent-universal-property-trunc-Set;
+    is-effective-unit-trunc-Set; apply-effectiveness-unit-trunc-Set;
+    equiv-unit-trunc-unit-Set; is-empty-is-empty-trunc-Set;
+    is-surjective-unit-trunc-Set)
+open import foundation.sets using
+  ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; UU-Set; type-Set)
+open import foundation.subtypes using (is-emb-pr1)
+open import foundation.surjective-maps using
+  ( is-surjective; is-equiv-is-emb-is-surjective; is-surjective-comp')
+open import foundation.truncated-types using (is-trunc)
 open import foundation.truncation-levels using (𝕋; zero-𝕋; succ-𝕋)
-open import foundation.unit-type using (unit; is-contr-unit)
+open import foundation.type-arithmetic-coproduct-types using
+  ( right-distributive-Σ-coprod)
+open import foundation.unit-type using (unit; is-contr-unit; star)
+open import foundation.univalence using (equiv-eq)
+open import foundation.universal-property-coproduct-types using
+  ( equiv-dependent-universal-property-coprod)
+open import foundation.universal-property-empty-type using
+  ( dependent-universal-property-empty')
+open import foundation.universal-property-unit-type using
+  ( equiv-dependent-universal-property-unit)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
+open import univalent-combinatorics.cartesian-product-finite-types using
+  ( is-finite-prod)
 open import univalent-combinatorics.coproduct-finite-types using
   ( is-finite-coprod)
 open import univalent-combinatorics.counting using (count)
+open import univalent-combinatorics.dependent-product-finite-types using
+  ( is-finite-Π)
+open import univalent-combinatorics.dependent-sum-finite-types using
+  ( is-finite-Σ)
+open import
+  univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
+  using
+  ( equiv-distributive-trunc-Π-is-finite-Set)
 open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq)
+  ( is-finite-eq; is-set-is-finite; has-decidable-equality-is-finite)
+open import univalent-combinatorics.finite-function-types using
+  ( is-finite-≃)
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
-    is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽)
+    is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
+    is-path-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
+    is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
+    is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
+    is-finite-is-decidable-Prop)
+open import univalent-combinatorics.finitely-presented-types using
+  ( has-finite-presentation-has-cardinality-components)
+open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 
 {-------------------------------------------------------------------------------
 
@@ -854,139 +931,4 @@ pr2 (π-Finite-Σ k A B) =
   is-π-finite-Σ k
     ( is-π-finite-type-π-Finite (succ-ℕ k) A)
     ( λ x → is-π-finite-type-π-Finite k (B x))
-
---------------------------------------------------------------------------------
-
--- We show that there are finitely many semi-groups of order n
-
-Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
-Semigroup-of-Order' l n =
-  Σ ( UU-Fin-Level l n)
-    ( λ X → has-associative-mul (type-UU-Fin-Level X))
-
-Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
-Semigroup-of-Order l n =
-  Σ (Semigroup l) (λ G → mere-equiv (Fin n) (type-Semigroup G))
-
-is-finite-has-associative-mul :
-  {l : Level} {X : UU l} → is-finite X → is-finite (has-associative-mul X)
-is-finite-has-associative-mul H =
-  is-finite-Σ
-    ( is-finite-function-type H (is-finite-function-type H H))
-    ( λ μ →
-      is-finite-Π H
-        ( λ x →
-          is-finite-Π H
-            ( λ y →
-              is-finite-Π H
-                ( λ z →
-                  is-finite-eq (has-decidable-equality-is-finite H)))))
-
-is-π-finite-Semigroup-of-Order' :
-  {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order' l n)
-is-π-finite-Semigroup-of-Order' k n =
-  is-π-finite-Σ k
-    ( is-π-finite-UU-Fin-Level (succ-ℕ k) n)
-    ( λ x →
-      is-π-finite-is-finite k
-        ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin-Level x)))
-
-is-π-finite-Semigroup-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order l n)
-is-π-finite-Semigroup-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Semigroup-of-Order' k n)
-  where
-  e : Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
-  e = ( equiv-Σ
-        ( has-associative-mul ∘ type-UU-Fin-Level)
-        ( ( right-unit-law-Σ-is-contr
-            ( λ X →
-              is-proof-irrelevant-is-prop
-                ( is-prop-is-set _)
-                ( is-set-is-finite
-                  ( is-finite-has-cardinality (pr2 X))))) ∘e
-          ( equiv-right-swap-Σ))
-        ( λ X → id-equiv)) ∘e
-      ( equiv-right-swap-Σ
-        { A = UU-Set l}
-        { B = has-associative-mul-Set}
-        { C = mere-equiv (Fin n) ∘ type-Set})
-
-number-of-semi-groups-of-order : ℕ → ℕ
-number-of-semi-groups-of-order n =
-  number-of-connected-components
-    ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
-
-mere-equiv-number-of-semi-groups-of-order :
-  (n : ℕ) →
-  mere-equiv
-    ( Fin (number-of-semi-groups-of-order n))
-    ( type-trunc-Set (Semigroup-of-Order lzero n))
-mere-equiv-number-of-semi-groups-of-order n =
-  mere-equiv-number-of-connected-components
-    ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
-
--- We show that there are finitely many monoids of order n
-
-Monoid-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
-Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M))
-
-is-finite-is-unital :
-  {l : Level} {n : ℕ} (X : Semigroup-of-Order l n) →
-  is-finite (is-unital (pr1 X))
-is-finite-is-unital {l} {n} X =
-  apply-universal-property-trunc-Prop
-    ( pr2 X)
-    ( is-finite-Prop _)
-    ( λ e →
-      is-finite-is-decidable-Prop
-        ( is-unital-Prop (pr1 X))
-        ( is-decidable-Σ-count
-          ( pair n e)
-          ( λ u →
-            is-decidable-prod
-              ( is-decidable-Π-count
-                ( pair n e)
-                ( λ x →
-                  has-decidable-equality-count
-                    ( pair n e)
-                    ( mul-Semigroup (pr1 X) u x)
-                    ( x)))
-              ( is-decidable-Π-count
-                ( pair n e)
-                ( λ x →
-                  has-decidable-equality-count
-                    ( pair n e)
-                    ( mul-Semigroup (pr1 X) x u)
-                    ( x))))))
-
-is-π-finite-Monoid-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Monoid-of-Order l n)
-is-π-finite-Monoid-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Σ k
-      ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
-      ( λ X →
-        is-π-finite-is-finite k
-          ( is-finite-is-unital X)))
-  where
-  e : Monoid-of-Order l n ≃
-      Σ (Semigroup-of-Order l n) (λ X → is-unital (pr1 X))
-  e = equiv-right-swap-Σ
-
-number-of-monoids-of-order : ℕ → ℕ
-number-of-monoids-of-order n =
-  number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
-
-mere-equiv-number-of-monoids-of-order :
-  (n : ℕ) →
-  mere-equiv
-    ( Fin (number-of-monoids-of-order n))
-    ( type-trunc-Set (Monoid-of-Order lzero n))
-mere-equiv-number-of-monoids-of-order n =
-  mere-equiv-number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
 ```

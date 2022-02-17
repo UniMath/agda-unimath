@@ -5,7 +5,8 @@
 
 module univalent-foundations.pointed-types where
 
-open import univalent-foundations.17-univalence public
+open import foundation public
+open import elementary-number-theory public
 
 -- The universe of pointed types
 

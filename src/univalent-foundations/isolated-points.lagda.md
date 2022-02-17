@@ -5,7 +5,9 @@
 
 module univalent-foundations.isolated-points where
 
-open import univalent-foundations.17-univalence
+open import foundation
+open import elementary-number-theory
+open import univalent-combinatorics
 
 {-------------------------------------------------------------------------------
 

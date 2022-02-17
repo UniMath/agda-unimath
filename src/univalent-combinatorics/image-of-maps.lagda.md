@@ -15,8 +15,7 @@ open import foundation.fibers-of-maps using (equiv-total-fib; fib)
 open import foundation.propositional-truncations using (trunc-Prop)
 open import foundation.subtypes using
   ( extensionality-type-subtype)
-open import foundation.surjective-maps using
-  ( is-surjective; is-surjective-map-unit-im)
+open import foundation.surjective-maps using (is-surjective)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.equality-finite-types using

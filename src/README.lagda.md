@@ -200,9 +200,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.16-finite-types public
-open import univalent-foundations.17-univalence public
-open import univalent-foundations.18-set-quotients public
 open import univalent-foundations.W-types public
 open import univalent-foundations.functoriality-loop-spaces public
 open import univalent-foundations.iterated-loop-spaces public
@@ -269,6 +266,12 @@ open import subgroups.abstract-subgroups public
 open import subgroups.abstract-abelian-subgroups public
 ```
 
+## Finite groups
+
+```agda
+open import finite-groups.quaternion-group public
+```
+
 ## Order theory
 
 ```agda
@@ -282,19 +285,27 @@ open import order-theory.finitely-graded-posets public
 ## Univalent combinatorics
 
 ```agda
-open import univalent-combinatorics.unordered-pairs public
-open import univalent-combinatorics.finite-graphs public
-open import univalent-combinatorics.undirected-graphs public
-open import univalent-combinatorics.directed-graphs public
-open import univalent-combinatorics.reflexive-graphs public
-open import univalent-combinatorics.polygons public
-open import univalent-combinatorics.abstract-polytopes public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.ramsey-theory public
-open import univalent-combinatorics.isolated-points public
-open import univalent-combinatorics.quaternion-group public
 ```
+
+## Graph theoty
+
+```agda
+open import graph-theory.finite-graphs public
+open import graph-theory.undirected-graphs public
+open import graph-theory.directed-graphs public
+open import graph-theory.reflexive-graphs public
+open import graph-theory.polygons public
+```
+
+## Polytopes
+
+```agda
+open import polytopes.abstract-polytopes public
+```
+
 
 ## Rings
 

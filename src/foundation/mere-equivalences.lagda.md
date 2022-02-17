@@ -9,6 +9,9 @@ open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-Prop;
     has-decidable-equality-equiv; has-decidable-equality-equiv')
 open import foundation.equivalences using (_≃_; id-equiv; inv-equiv; _∘e_)
+open import foundation.functoriality-propositional-truncation using
+  ( functor-trunc-Prop)
+open import foundation.mere-equality using (mere-eq)
 open import foundation.propositional-truncations using
   ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
     apply-universal-property-trunc-Prop)
@@ -18,6 +21,7 @@ open import foundation.sets using (is-set)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-Prop; is-trunc-equiv; is-trunc-equiv')
 open import foundation.truncation-levels using (𝕋; zero-𝕋)
+open import foundation.univalence using (eq-equiv)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -137,4 +141,13 @@ module _
     apply-universal-property-trunc-Prop e
       ( has-decidable-equality-Prop Y)
       ( λ f → has-decidable-equality-equiv' f d)
+```
+
+### Mere equivalence implies mere equality
+
+```agda
+abstract
+  mere-eq-mere-equiv :
+    {l : Level} {A B : UU l} → mere-equiv A B → mere-eq A B
+  mere-eq-mere-equiv {l} {A} {B} = functor-trunc-Prop (eq-equiv A B)
 ```

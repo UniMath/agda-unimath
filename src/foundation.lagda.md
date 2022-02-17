@@ -19,6 +19,7 @@ open import foundation.coherently-invertible-maps public
 open import foundation.commuting-squares public
 open import foundation.complements public
 open import foundation.conjunction public
+open import foundation.connected-types public
 open import foundation.connected-components-universes public
 open import foundation.connected-components public
 open import foundation.constant-maps public
@@ -74,6 +75,7 @@ open import foundation.global-choice public
 open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
+open import foundation.isolated-points public
 open import foundation.images public
 open import foundation.impredicative-encodings public
 open import foundation.induction-principle-propositional-truncation public

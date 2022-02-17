@@ -8,7 +8,10 @@ title: Formalisation of the Symmetry Book
 module finite-groups.quaternion-group where
 
 open import groups public
-open import univalent-combinatorics.isolated-points public
+
+open import foundation
+open import univalent-combinatorics
+open import univalent-foundations
 
 --------------------------------------------------------------------------------
 
@@ -1130,6 +1133,7 @@ face-cube X d a =
            ( inclusion-complement-point-UU-Fin
              ( pair (dim-cube-UU-Fin X) d) d'))
 
+{-
 equiv-face-standard-cube :
   {k : ℕ} (d : dim-standard-cube (succ-ℕ k))
   (a : axis-standard-cube (succ-ℕ k) d) →
@@ -1139,6 +1143,7 @@ equiv-face-standard-cube {zero-ℕ} d a =
     {! is-equiv-is-empty!}
     {!!}
 equiv-face-standard-cube {succ-ℕ k} d a = {!!}
+-}
 
 equiv-face-cube :
   {k : ℕ} (X Y : cube (succ-ℕ k)) (e : equiv-cube X Y) (d : dim-cube X)

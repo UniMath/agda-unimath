@@ -5,17 +5,21 @@
 
 module foundation.connected-components-universes where
 
+open import foundation.connected-types using
+  ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; equiv-is-empty; empty-Prop; raise-empty)
 open import foundation.equivalences using
   ( _≃_; id-equiv; is-equiv; map-inv-is-equiv; map-inv-equiv)
+open import foundation.functoriality-propositional-truncation using
+  ( functor-trunc-Prop)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl)
 open import foundation.mere-equivalences using
-  ( mere-equiv-Prop; mere-equiv; is-prop-mere-equiv)
+  ( mere-equiv-Prop; mere-equiv; is-prop-mere-equiv; refl-mere-equiv)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.raising-universe-levels using (equiv-raise)
@@ -173,4 +177,19 @@ abstract
   is-contr-component-UU-empty : is-contr (component-UU empty)
   is-contr-component-UU-empty =
     is-contr-component-UU-Level-empty lzero
+```
+
+### The connected components of universes are path connected
+
+```agda
+abstract
+  is-path-connected-component-UU :
+    {l : Level} (X : UU l) → is-path-connected (component-UU X)
+  is-path-connected-component-UU X =
+    is-path-connected-mere-eq
+      ( pair X (refl-mere-equiv X))
+      ( λ Y →
+        functor-trunc-Prop
+          ( eq-equiv-component-UU (pair X (refl-mere-equiv X)) Y)
+          ( mere-equiv-component-UU Y))
 ```

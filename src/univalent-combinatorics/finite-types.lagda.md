@@ -23,6 +23,8 @@ open import foundation.connected-components-universes using
     is-contr-total-equiv-component-UU-Level; is-contr-total-equiv-component-UU;
     is-equiv-equiv-eq-component-UU-Level; is-equiv-equiv-eq-component-UU;
     eq-equiv-component-UU-Level; eq-equiv-component-UU)
+open import foundation.connected-types using
+  ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
@@ -34,7 +36,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; is-empty; ex-falso; is-empty-Prop; empty-Prop)
 open import foundation.equivalences using
-  ( id-equiv; _≃_; is-equiv; inv-equiv; _∘e_)
+  ( id-equiv; _≃_; is-equiv; inv-equiv; _∘e_; map-equiv; equiv-precomp-equiv)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.functoriality-dependent-pair-types using
@@ -51,6 +53,7 @@ open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
     all-elements-equal; is-prop-all-elements-equal; eq-is-prop; eq-is-prop';
     equiv-prop)
+open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using (is-set; is-set-Prop; Id-Prop)
 open import foundation.subtypes using (eq-subtype)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -491,4 +494,31 @@ equiv-equiv-eq-UU-Fin :
   {k : ℕ} (X Y : UU-Fin k) → Id X Y ≃ equiv-UU-Fin X Y
 pr1 (equiv-equiv-eq-UU-Fin X Y) = equiv-eq-UU-Fin
 pr2 (equiv-equiv-eq-UU-Fin X Y) = is-equiv-equiv-eq-UU-Fin X Y
+```
+
+### The types `UU-Fin-Level` and `UU-Fin` are connected
+
+```agda
+abstract
+  is-path-connected-UU-Fin-Level :
+    {l : Level} (n : ℕ) → is-path-connected (UU-Fin-Level l n)
+  is-path-connected-UU-Fin-Level {l} n =
+    is-path-connected-mere-eq
+      ( Fin-UU-Fin-Level l n)
+      ( λ A →
+        functor-trunc-Prop
+          ( ( eq-equiv-UU-Fin-Level (Fin-UU-Fin-Level l n) A) ∘
+            ( map-equiv
+              ( equiv-precomp-equiv
+                ( inv-equiv (equiv-raise l (Fin n)))
+                ( type-UU-Fin-Level A))))
+          ( pr2 A))
+
+abstract
+  is-path-connected-UU-Fin :
+    (n : ℕ) → is-path-connected (UU-Fin n)
+  is-path-connected-UU-Fin n =
+    is-path-connected-mere-eq
+      ( Fin-UU-Fin n)
+      ( λ A → functor-trunc-Prop (eq-equiv-UU-Fin (Fin-UU-Fin n) A) (pr2 A))
 ```
