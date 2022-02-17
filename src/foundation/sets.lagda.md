@@ -10,6 +10,7 @@ open import foundation-core.sets public
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_; is-equiv)
+open import foundation-core.functions using (precomp)
 open import foundation-core.identity-types using (Id)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.truncation-levels using (zero-𝕋)
@@ -138,6 +139,11 @@ hom-Set :
   {l1 l2 : Level} → UU-Set l1 → UU-Set l2 → UU-Set (l1 ⊔ l2)
 pr1 (hom-Set A B) = type-hom-Set A B
 pr2 (hom-Set A B) = is-set-type-hom-Set A B
+
+precomp-Set :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU-Set l3) →
+  (B → type-Set C) → (A → type-Set C)
+precomp-Set f C = precomp f (type-Set C)
 ```
 
 ### The type of equivalences between sets is a set

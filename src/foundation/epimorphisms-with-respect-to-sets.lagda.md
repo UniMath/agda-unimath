@@ -22,7 +22,8 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using (UU-Prop)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set-type-Set; is-set-function-type; Id-Prop)
+  ( UU-Set; type-Set; is-set-type-Set; is-set-function-type; Id-Prop;
+    precomp-Set)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.unit-type using (raise-unit-Prop; raise-star)
 open import foundation.univalence using (equiv-eq)
@@ -36,11 +37,6 @@ An epimorphism with respect to maps into sets are maps `f : A → B` suc that fo
 ## Definition
 
 ```agda
-precomp-Set :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU-Set l3) →
-  (B → type-Set C) → (A → type-Set C)
-precomp-Set f C = precomp f (type-Set C)
-
 is-epimorphism-Set :
   {l1 l2 : Level} (l : Level) {A : UU l1} {B : UU l2}
   (f : A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)

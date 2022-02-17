@@ -5,13 +5,18 @@
 
 module foundation.mere-equality where
 
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
-open import foundation.identity-types using (Id; refl; inv; _∙_)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.reflecting-maps-equivalence-relations using
+  ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 open import foundation.propositional-truncations using
   ( trunc-Prop; type-trunc-Prop; unit-trunc-Prop;
     apply-universal-property-trunc-Prop)
 open import foundation.propositions using (UU-Prop)
+open import foundation.sets using (UU-Set; type-Set; Id-Prop)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -62,4 +67,32 @@ abstract
     apply-universal-property-trunc-Prop p
       ( mere-eq-Prop x z)
       ( λ p' → functor-trunc-Prop (λ q' → p' ∙ q') q)
+```
+
+### Mere equality is an equivalence relation
+
+```agda
+mere-eq-Eq-Rel : {l1 : Level} (A : UU l1) → Eq-Rel l1 A
+pr1 (mere-eq-Eq-Rel A) = mere-eq-Prop
+pr1 (pr2 (mere-eq-Eq-Rel A)) = refl-mere-eq
+pr1 (pr2 (pr2 (mere-eq-Eq-Rel A))) = symm-mere-eq
+pr2 (pr2 (pr2 (mere-eq-Eq-Rel A))) = trans-mere-eq
+```
+
+### Any map into a set reflects mere equality
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X)
+  where
+  
+  reflects-mere-eq : reflects-Eq-Rel (mere-eq-Eq-Rel A) f
+  reflects-mere-eq {x} {y} r =
+    apply-universal-property-trunc-Prop r
+      ( Id-Prop X (f x) (f y))
+      ( ap f)
+
+  reflecting-map-mere-eq : reflecting-map-Eq-Rel (mere-eq-Eq-Rel A) (type-Set X)
+  pr1 reflecting-map-mere-eq = f
+  pr2 reflecting-map-mere-eq = reflects-mere-eq
 ```
