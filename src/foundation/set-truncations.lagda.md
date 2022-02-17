@@ -5,16 +5,28 @@
 
 module foundation.set-truncations where
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ev-pair)
 open import foundation.effective-maps-equivalence-relations using
   ( is-surjective-and-effective; is-effective)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.empty-types using (empty; empty-Set; is-empty)
+open import foundation.equality-coproduct-types using
+  ( coprod-Set)
 open import foundation.equivalences using
-  ( _≃_; is-equiv; map-inv-equiv; map-equiv)
+  ( _≃_; is-equiv; map-inv-equiv; map-equiv; is-equiv-right-factor';
+    is-equiv-comp'; is-equiv-htpy-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-cartesian-product-types using
+  ( map-prod; is-equiv-map-prod)
+open import foundation.functoriality-coproduct-types using (map-coprod)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-map-Π)
+open import foundation.functoriality-dependent-pair-types using (tot)
+open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id)
 open import foundation.mere-equality using
@@ -24,7 +36,7 @@ open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel)
 open import foundation.sets using
   ( is-set; type-Set; UU-Set; precomp-Set; type-hom-Set; is-set-type-Set;
-    is-set-is-contr)
+    is-set-is-contr; type-equiv-Set; prod-Set; Π-Set')
 open import foundation.slice using
   ( hom-slice)
 open import foundation.surjective-maps using (is-surjective)
@@ -33,6 +45,10 @@ open import foundation.uniqueness-set-truncations using
     is-set-truncation-is-equiv-is-set-truncation;
     is-set-truncation-is-set-truncation-is-equiv; uniqueness-set-truncation)
 open import foundation.unit-type using (unit; unit-Set)
+open import foundation.universal-property-coproduct-types using
+  ( ev-inl-inr; universal-property-coprod)
+open import foundation.universal-property-dependent-pair-types using
+  ( is-equiv-ev-pair; equiv-ev-pair)
 open import foundation.universal-property-image using (is-image)
 open import foundation.universal-property-set-quotients using
   ( is-set-quotient; is-surjective-and-effective-is-set-quotient;
@@ -400,4 +416,147 @@ module _
     (map-equiv-uniqueness-trunc-Set' ∘ f) ~ unit-trunc-Set
   triangle-uniqueness-trunc-Set' =
     pr2 (center uniqueness-trunc-Set')
+```
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  abstract
+    distributive-trunc-coprod-Set :
+      is-contr
+        ( Σ ( type-equiv-Set
+              ( trunc-Set (coprod A B))
+              ( coprod-Set (trunc-Set A) (trunc-Set B)))
+            ( λ e →
+              ( map-equiv e ∘ unit-trunc-Set) ~
+              ( map-coprod unit-trunc-Set unit-trunc-Set)))
+    distributive-trunc-coprod-Set =
+      uniqueness-trunc-Set
+        ( coprod-Set (trunc-Set A) (trunc-Set B))
+        ( map-coprod unit-trunc-Set unit-trunc-Set)
+        ( λ {l} C →
+          is-equiv-right-factor'
+            ( ev-inl-inr (λ x → type-Set C))
+            ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
+            ( universal-property-coprod (type-Set C))
+            ( is-equiv-comp'
+              ( map-prod
+                ( precomp-Set unit-trunc-Set C)
+                ( precomp-Set unit-trunc-Set C))
+              ( ev-inl-inr (λ x → type-Set C))
+              ( universal-property-coprod (type-Set C))
+              ( is-equiv-map-prod
+                ( precomp-Set unit-trunc-Set C)
+                ( precomp-Set unit-trunc-Set C)
+                ( is-set-truncation-trunc-Set A C)
+                ( is-set-truncation-trunc-Set B C))))
+
+  equiv-distributive-trunc-coprod-Set :
+    type-equiv-Set
+      ( trunc-Set (coprod A B))
+      ( coprod-Set (trunc-Set A) (trunc-Set B))
+  equiv-distributive-trunc-coprod-Set =
+    pr1 (center distributive-trunc-coprod-Set)
+
+  map-equiv-distributive-trunc-coprod-Set :
+    type-hom-Set
+      ( trunc-Set (coprod A B))
+      ( coprod-Set (trunc-Set A) (trunc-Set B))
+  map-equiv-distributive-trunc-coprod-Set =
+    map-equiv equiv-distributive-trunc-coprod-Set
+
+  triangle-distributive-trunc-coprod-Set :
+    ( map-equiv-distributive-trunc-coprod-Set ∘ unit-trunc-Set) ~
+    ( map-coprod unit-trunc-Set unit-trunc-Set)
+  triangle-distributive-trunc-coprod-Set =
+    pr2 (center distributive-trunc-coprod-Set)
+
+-- Set truncations of Σ-types
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  abstract
+    trunc-Σ-Set :
+      is-contr
+        ( Σ ( type-trunc-Set (Σ A B) ≃
+              type-trunc-Set (Σ A (λ x → type-trunc-Set (B x))))
+            ( λ e →
+              ( map-equiv e ∘ unit-trunc-Set) ~
+              ( unit-trunc-Set ∘ tot (λ x → unit-trunc-Set))))
+    trunc-Σ-Set =
+      uniqueness-trunc-Set
+        ( trunc-Set (Σ A (λ x → type-trunc-Set (B x))))
+        ( unit-trunc-Set ∘ tot (λ x → unit-trunc-Set))
+        ( λ {l} C →
+          is-equiv-right-factor'
+            ( ev-pair)
+            ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
+            ( is-equiv-ev-pair)
+            ( is-equiv-htpy-equiv
+              ( ( equiv-map-Π
+                  ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
+                ( ( equiv-ev-pair) ∘e
+                  ( equiv-universal-property-trunc-Set
+                    ( Σ A (type-trunc-Set ∘ B)) C)))
+              ( refl-htpy)))
+
+  equiv-trunc-Σ-Set :
+    type-trunc-Set (Σ A B) ≃ type-trunc-Set (Σ A (λ x → type-trunc-Set (B x)))
+  equiv-trunc-Σ-Set =
+    pr1 (center trunc-Σ-Set)
+
+  map-equiv-trunc-Σ-Set :
+    type-trunc-Set (Σ A B) → type-trunc-Set (Σ A (λ x → type-trunc-Set (B x)))
+  map-equiv-trunc-Σ-Set =
+    map-equiv equiv-trunc-Σ-Set
+
+-- trunc-Set distributes over products
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  abstract
+    distributive-trunc-prod-Set :
+      is-contr
+        ( Σ ( type-trunc-Set (A × B) ≃ ( type-trunc-Set A × type-trunc-Set B))
+            ( λ e →
+              ( map-equiv e ∘ unit-trunc-Set) ~
+              ( map-prod unit-trunc-Set unit-trunc-Set)))
+    distributive-trunc-prod-Set =
+      uniqueness-trunc-Set
+        ( prod-Set (trunc-Set A) (trunc-Set B))
+        ( map-prod unit-trunc-Set unit-trunc-Set)
+        ( λ {l} C →
+          is-equiv-right-factor'
+            ( ev-pair)
+            ( precomp-Set (map-prod unit-trunc-Set unit-trunc-Set) C)
+            ( is-equiv-ev-pair)
+            ( is-equiv-htpy-equiv
+              ( ( equiv-universal-property-trunc-Set A (Π-Set' B (λ y → C))) ∘e
+                ( ( equiv-postcomp
+                    ( type-trunc-Set A)
+                    (equiv-universal-property-trunc-Set B C)) ∘e
+                  ( equiv-ev-pair)))
+              ( refl-htpy)))
+
+  equiv-distributive-trunc-prod-Set :
+    type-trunc-Set (A × B) ≃ ( type-trunc-Set A × type-trunc-Set B)
+  equiv-distributive-trunc-prod-Set =
+    pr1 (center distributive-trunc-prod-Set)
+
+  map-equiv-distributive-trunc-prod-Set :
+    type-trunc-Set (A × B) → type-trunc-Set A × type-trunc-Set B
+  map-equiv-distributive-trunc-prod-Set =
+    map-equiv equiv-distributive-trunc-prod-Set
+
+  triangle-distributive-trunc-prod-Set :
+    ( map-equiv-distributive-trunc-prod-Set ∘ unit-trunc-Set) ~
+    ( map-prod unit-trunc-Set unit-trunc-Set)
+  triangle-distributive-trunc-prod-Set =
+    pr2 (center distributive-trunc-prod-Set)
 ```

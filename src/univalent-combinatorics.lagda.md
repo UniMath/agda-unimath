@@ -25,6 +25,7 @@ open import univalent-combinatorics.decidable-dependent-pair-types public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dependent-product-finite-types public
 open import univalent-combinatorics.dependent-sum-finite-types public
+open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
 open import univalent-combinatorics.embeddings public
 open import univalent-combinatorics.equality-finite-types public

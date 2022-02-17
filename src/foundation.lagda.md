@@ -14,6 +14,7 @@ open import foundation.boolean-reflection public
 open import foundation.booleans public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
+open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
 open import foundation.commuting-squares public
 open import foundation.complements public
@@ -67,6 +68,7 @@ open import foundation.functoriality-dependent-pair-types public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
+open import foundation.functoriality-set-truncation
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.homotopies public
