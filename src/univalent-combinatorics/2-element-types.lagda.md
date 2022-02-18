@@ -327,17 +327,17 @@ module _
 ### The swapping equivalence is an involution
 
 ```agda
-involution-succ-Fin-two-ℕ : ((succ-Fin {2}) ∘ (succ-Fin {2})) ~ id
-involution-succ-Fin-two-ℕ (inl (inr star)) = refl
-involution-succ-Fin-two-ℕ (inr star) = refl
+is-involution-succ-Fin-two-ℕ : ((succ-Fin {2}) ∘ (succ-Fin {2})) ~ id
+is-involution-succ-Fin-two-ℕ (inl (inr star)) = refl
+is-involution-succ-Fin-two-ℕ (inr star) = refl
 
 module _
   {l : Level} {X : UU l} (H : has-cardinality X 2)
   where
 
-  involution-swap-two-elements :
+  is-involution-swap-two-elements :
     Id (swap-two-elements H ∘e swap-two-elements H) id-equiv
-  involution-swap-two-elements = eq-htpy-equiv refl-htpy ∙
+  is-involution-swap-two-elements = eq-htpy-equiv refl-htpy ∙
     ( ( ap
         ( λ x →
           ( equiv1 ∘e equiv2) ∘e (x ∘e (equiv2 ∘e equiv3)))
@@ -353,7 +353,7 @@ module _
                 ( λ f →
                   eq-htpy-equiv
                     ( λ x →
-                      ap (map-equiv f) (involution-succ-Fin-two-ℕ x)))))) ∙
+                      ap (map-equiv f) (is-involution-succ-Fin-two-ℕ x)))))) ∙
           ( ( ap (λ x → equiv1 ∘e x) (left-unit-law-equiv equiv3)) ∙
             ( right-inverse-law-equiv equiv1)))))
     where

@@ -351,6 +351,7 @@ open import subgroups.abstract-subgroups
 ```agda
 open import finite-groups.finite-groups
 open import finite-groups.quaternion-group
+open import finite-groups.transpositions
 ```
 
 ## Order theory

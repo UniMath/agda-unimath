@@ -32,32 +32,32 @@ module _
   map-transposition x =
     map-transposition' x (is-decidable-type-decidable-Prop (P x))
 
-  involution-map-transposition' :
+  is-involution-map-transposition' :
     (x : X) (d : is-decidable (type-decidable-Prop (P x)))
     (d' : is-decidable (type-decidable-Prop (P (map-transposition' x d)))) →
     Id (map-transposition' (map-transposition' x d) d') x
-  involution-map-transposition' x (inl p) (inl p') =
+  is-involution-map-transposition' x (inl p) (inl p') =
     ( ap
       ( λ y → map-transposition' (map-transposition' x (inl p)) (inl y))
       ( eq-is-prop (pr1 (pr2 (P (map-transposition' x (inl p))))))) ∙
     ( ap pr1 (htpy-eq-equiv (involution-swap-two-elements H) (pair x p)))
-  involution-map-transposition' x (inl p) (inr np') =
+  is-involution-map-transposition' x (inl p) (inr np') =
     ex-falso (np' (pr2 (map-equiv (swap-two-elements H) (pair x p))))
-  involution-map-transposition' x (inr np) (inl p') = ex-falso (np p')
-  involution-map-transposition' x (inr np) (inr np') = refl
+  is-involution-map-transposition' x (inr np) (inl p') = ex-falso (np p')
+  is-involution-map-transposition' x (inr np) (inr np') = refl
 
-  involution-map-transposition : (map-transposition ∘ map-transposition) ~ id
-  involution-map-transposition x =
-    involution-map-transposition' x
+  is-involution-map-transposition : (map-transposition ∘ map-transposition) ~ id
+  is-involution-map-transposition x =
+    is-involution-map-transposition' x
       ( is-decidable-type-decidable-Prop (P x))
       ( is-decidable-type-decidable-Prop
         ( P (map-transposition' x (is-decidable-type-decidable-Prop (P x)))))
 
   is-equiv-map-transposition : is-equiv map-transposition
   pr1 (pr1 is-equiv-map-transposition) = map-transposition
-  pr2 (pr1 is-equiv-map-transposition) = involution-map-transposition
+  pr2 (pr1 is-equiv-map-transposition) = is-involution-map-transposition
   pr1 (pr2 is-equiv-map-transposition) = map-transposition
-  pr2 (pr2 is-equiv-map-transposition) = involution-map-transposition
+  pr2 (pr2 is-equiv-map-transposition) = is-involution-map-transposition
 
   is-not-identity-map-transposition : Id map-transposition id → empty
   is-not-identity-map-transposition f =
