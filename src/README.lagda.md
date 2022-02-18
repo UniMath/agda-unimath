@@ -1,8 +1,8 @@
 # Univalent mathematics in Agda
 
-Welcome to the online version of the Agda library for univalent mathematics.
+Welcome to the website of the `agda-unimath` formalization project.
 
-[![build](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml)
+[![build](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
