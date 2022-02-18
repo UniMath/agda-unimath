@@ -305,6 +305,10 @@ is-injective-succ-Fin {succ-ℕ k} {inl x} {inr star} p =
 is-injective-succ-Fin {succ-ℕ k} {inr star} {inl y} p =
   ex-falso (neq-zero-succ-Fin {succ-ℕ k} {inl y} (ap inl (inv p)))
 is-injective-succ-Fin {succ-ℕ k} {inr star} {inr star} p = refl
+
+involution-succ-Fin-two-ℕ : ((succ-Fin {2}) ∘ (succ-Fin {2})) ~ id
+involution-succ-Fin-two-ℕ (inl (inr star)) = refl
+involution-succ-Fin-two-ℕ (inr star) = refl
 ```
 
 ```agda
