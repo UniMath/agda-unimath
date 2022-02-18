@@ -40,7 +40,7 @@ module _
     ( ap
       ( λ y → map-transposition' (map-transposition' x (inl p)) (inl y))
       ( eq-is-prop (pr1 (pr2 (P (map-transposition' x (inl p))))))) ∙
-    ( ap pr1 (htpy-eq-equiv (involution-swap-two-elements H) (pair x p)))
+    ( ap pr1 (htpy-eq-equiv (is-involution-swap-two-elements H) (pair x p)))
   is-involution-map-transposition' x (inl p) (inr np') =
     ex-falso (np' (pr2 (map-equiv (swap-two-elements H) (pair x p))))
   is-involution-map-transposition' x (inr np) (inl p') = ex-falso (np p')
