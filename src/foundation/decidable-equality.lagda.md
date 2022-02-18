@@ -8,10 +8,11 @@ module foundation.decidable-equality where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
-    neq-inr-inl)
+    neq-inr-inl; is-prop-coprod)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.double-negation using (intro-dn)
 open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ'; pair-eq-Σ)
@@ -19,8 +20,10 @@ open import foundation.equivalences using (_≃_; map-equiv; inv-equiv; equiv-ap
 open import foundation.fibers-of-maps using (equiv-fib-pr1; equiv-total-fib)
 open import foundation.identity-types using (Id; refl; ap; tr)
 open import foundation.injective-maps using (is-prop-map-is-injective)
+open import foundation.negation using (is-prop-neg)
 open import foundation.propositions using
-  ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop)
+  ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop; UU-Prop;
+    is-prop-is-inhabited; is-prop-Π)
 open import foundation.retractions using (_retract-of_; retract-eq)
 open import foundation.sections using (map-section; is-injective-map-section)
 open import foundation.sets using (is-set; is-set-prop-in-id)
@@ -206,6 +209,30 @@ module _
         ( λ x y → is-prop-Eq-has-decidable-equality d)
         ( λ x → refl-Eq-has-decidable-equality d x)
         ( λ x y → eq-Eq-has-decidable-equality d)
+```
+
+### Having decidable equality is a property
+
+```agda
+abstract
+  is-prop-has-decidable-equality :
+    {l1 : Level} {X : UU l1} → is-prop (has-decidable-equality X)
+  is-prop-has-decidable-equality {l1} {X} =
+    is-prop-is-inhabited
+      ( λ d →
+        is-prop-Π
+        ( λ x →
+          is-prop-Π
+          ( λ y →
+            is-prop-coprod
+            ( intro-dn)
+            ( is-set-has-decidable-equality d x y)
+            ( is-prop-neg))))
+            
+has-decidable-equality-Prop :
+  {l1 : Level} (X : UU l1) → UU-Prop l1
+pr1 (has-decidable-equality-Prop X) = has-decidable-equality X
+pr2 (has-decidable-equality-Prop X) = is-prop-has-decidable-equality
 ```
 
 ### Types with decidable equality are closed under dependent pair types

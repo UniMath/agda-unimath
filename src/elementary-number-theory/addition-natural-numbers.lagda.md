@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Addition on the natural numbers
 
 ```agda
@@ -37,24 +33,6 @@ add-ℕ' m n = add-ℕ n m
 ap-add-ℕ :
   {m n m' n' : ℕ} → Id m m' → Id n n' → Id (add-ℕ m n) (add-ℕ m' n')
 ap-add-ℕ p q = ap-binary add-ℕ p q
-```
-
-## The triangular numbers
-
-```agda
-triangular-number-ℕ : ℕ → ℕ
-triangular-number-ℕ 0 = 0
-triangular-number-ℕ (succ-ℕ n) = add-ℕ (triangular-number-ℕ n) (succ-ℕ n)
-```
-
-## Binomial coefficients
-
-```agda
-_choose-ℕ_ : ℕ → ℕ → ℕ
-0 choose-ℕ 0 = 1
-0 choose-ℕ succ-ℕ k = 0
-(succ-ℕ n) choose-ℕ 0 = 1
-(succ-ℕ n) choose-ℕ (succ-ℕ k) = add-ℕ (n choose-ℕ k) (n choose-ℕ (succ-ℕ k))
 ```
 
 ## The laws of addition on ℕ

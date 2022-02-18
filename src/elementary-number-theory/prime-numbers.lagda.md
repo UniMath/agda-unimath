@@ -5,6 +5,8 @@
 
 module elementary-number-theory.prime-numbers where
 
+open import elementary-number-theory.decidable-dependent-function-types using
+  ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-one-ℕ; leq-div-succ-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
@@ -16,9 +18,7 @@ open import elementary-number-theory.natural-numbers using
 open import elementary-number-theory.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
     is-decidable-is-proper-divisor-ℕ)
-open import
-  elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( is-decidable-bounded-Π-ℕ)
+    
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)

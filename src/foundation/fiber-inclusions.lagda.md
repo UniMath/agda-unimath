@@ -25,15 +25,13 @@ open import foundation.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map)
 open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( equiv-left-swap-Σ)
 open import foundation.truncated-maps using (is-trunc-map)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-equiv'; is-trunc-equiv)
 open import foundation.truncation-levels using
   ( 𝕋; succ-𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋)
 open import foundation.type-arithmetic-dependent-pair-types using
-  ( right-unit-law-Σ-is-contr)
+  ( right-unit-law-Σ-is-contr; equiv-left-swap-Σ)
 open import foundation.unit-type using (raise-unit; raise-star)
 open import foundation.universe-levels using (Level; UU)
 ```

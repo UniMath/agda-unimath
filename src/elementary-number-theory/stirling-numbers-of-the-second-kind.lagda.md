@@ -1,0 +1,29 @@
+# Stirling numbers of the second kind
+
+```agda
+{-# OPTIONS --without-K --exact-split #-}
+
+module elementary-number-theory.stirling-numbers-of-the-second-kind where
+
+open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( mul-ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+```
+
+## Idea
+
+The stirling number of the second kind `{n m}` is the number of surjective maps from the standard `n`-element set to the standard `m`-element set
+
+## Definition
+
+```agda
+stirling-number-second-kind : ℕ → ℕ → ℕ
+stirling-number-second-kind zero-ℕ zero-ℕ = 1
+stirling-number-second-kind zero-ℕ (succ-ℕ n) = 0
+stirling-number-second-kind (succ-ℕ m) zero-ℕ = 0
+stirling-number-second-kind (succ-ℕ m) (succ-ℕ n) =
+  add-ℕ
+    ( mul-ℕ (succ-ℕ n) (stirling-number-second-kind m (succ-ℕ n)))
+    ( stirling-number-second-kind m n)
+```

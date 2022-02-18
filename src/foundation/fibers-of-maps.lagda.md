@@ -7,12 +7,18 @@ module foundation.fibers-of-maps where
 
 open import foundation-core.fibers-of-maps public
 
+open import foundation-core.contractible-types using (is-contr-total-path)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_)
+  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; inv-equiv)
 open import foundation-core.functions using (_∘_; id)
+open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl)
+open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.type-arithmetic-cartesian-product-types using
+  ( commutative-prod)
+open import foundation-core.type-arithmetic-dependent-pair-types using
+  ( equiv-left-swap-Σ; inv-assoc-Σ; assoc-Σ; left-unit-law-Σ-is-contr)
 open import foundation-core.universe-levels using (Level; UU)
 
 open import foundation.function-extensionality using (eq-htpy)
@@ -76,4 +82,21 @@ reduce-Π-fib :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   (C : B → UU l3) → ((y : B) → fib f y → C y) ≃ ((x : A) → C (f x))
 reduce-Π-fib f C = reduce-Π-fib' f (λ y z → C y)
+```
+
+```agda
+fib-comp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C) (f : A → B)
+  (c : C) → fib (g ∘ f) c ≃ Σ (fib g c) (λ t → fib f (pr1 t))
+fib-comp {A = A} {B} {C} g f c =
+  ( equiv-left-swap-Σ) ∘e
+  ( equiv-tot
+    ( λ a →
+      ( inv-assoc-Σ B (λ b → Id (g b) c) (λ u → Id (f a) (pr1 u))) ∘e
+      ( ( equiv-tot (λ b → commutative-prod)) ∘e
+        ( ( assoc-Σ B (Id (f a)) ( λ u → Id (g (pr1 u)) c)) ∘e
+          ( inv-equiv
+            ( left-unit-law-Σ-is-contr
+              ( is-contr-total-path (f a))
+              ( pair (f a) refl)))))))
 ```

@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The integers
 
 ```agda
@@ -24,14 +20,20 @@ open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; Level; lzero)
 ```
 
-## The type of integers
+## Idea
+
+The type of integers is an extension of the type of natural numbers including negative whole numbers.
+
+## Definition
+
+### The type of integers
 
 ```agda
 ℤ : UU lzero
 ℤ = coprod ℕ (coprod unit ℕ)
 ```
 
-## Inclusion of the negative integers
+### Inclusion of the negative integers
 
 ```agda
 in-neg : ℕ → ℤ
@@ -44,7 +46,7 @@ is-neg-one-ℤ : ℤ → UU lzero
 is-neg-one-ℤ x = Id x neg-one-ℤ
 ```
 
-## Zero
+### Zero
 
 ```agda
 zero-ℤ : ℤ
@@ -57,7 +59,7 @@ is-nonzero-ℤ : ℤ → UU lzero
 is-nonzero-ℤ k = ¬ (is-zero-ℤ k)
 ```
 
-## Inclusion of the positive integers
+### Inclusion of the positive integers
 
 ```agda
 in-pos : ℕ → ℤ
@@ -70,7 +72,7 @@ is-one-ℤ : ℤ → UU lzero
 is-one-ℤ x = Id x one-ℤ
 ```
 
-- Inclusion of the natural numbers
+### Inclusion of the natural numbers
 
 ```agda
 int-ℕ : ℕ → ℤ
@@ -85,7 +87,7 @@ is-nonzero-int-ℕ : (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℤ (int-ℕ 
 is-nonzero-int-ℕ zero-ℕ H p = H refl
 ```
 
-- Induction principle on the type of integers
+### Induction principle on the type of integers
 
 ```agda
 ind-ℤ :
@@ -103,7 +105,7 @@ ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (succ-ℕ x))) =
   pS x (ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (x))))
 ```
 
-- The successor and predecessor functions on ℤ
+### The successor and predecessor functions on ℤ
 
 ```agda
 succ-ℤ : ℤ → ℤ
@@ -118,7 +120,8 @@ pred-ℤ (inr (inl star)) = inl zero-ℕ
 pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
 ```
-- The negative of an integer
+
+### The negative of an integer
 
 ```agda
 neg-ℤ : ℤ → ℤ
@@ -127,7 +130,7 @@ neg-ℤ (inr (inl star)) = inr (inl star)
 neg-ℤ (inr (inr x)) = inl x
 ```
 
-## The successor and predecessor functions on ℤ are mutual inverses
+### The successor and predecessor functions on ℤ are mutual inverses
 
 ```agda
 abstract
@@ -181,6 +184,8 @@ has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
 has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ```
 
+### The negative function is an involution
+
 ```agda
 neg-neg-ℤ : (neg-ℤ ∘ neg-ℤ) ~ id
 neg-neg-ℤ (inl n) = refl
@@ -218,9 +223,9 @@ pred-neg-ℤ (inr (inl star)) = refl
 pred-neg-ℤ (inr (inr x)) = refl
 ```
 
-## Negative and positive integers
+### Nonnegative integers
 
-```
+```agda
 is-nonnegative-ℤ : ℤ → UU lzero
 is-nonnegative-ℤ (inl x) = empty
 is-nonnegative-ℤ (inr k) = unit
@@ -237,9 +242,11 @@ is-nonnegative-succ-ℤ :
   (k : ℤ) → is-nonnegative-ℤ k → is-nonnegative-ℤ (succ-ℤ k)
 is-nonnegative-succ-ℤ (inr (inl star)) p = star
 is-nonnegative-succ-ℤ (inr (inr x)) p = star
+```
 
--- We introduce positive integers
+### The positive integers
 
+```agda
 is-positive-ℤ : ℤ → UU lzero
 is-positive-ℤ (inl x) = empty
 is-positive-ℤ (inr (inl x)) = empty
@@ -272,9 +279,11 @@ is-positive-int-ℕ :
   (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
 is-positive-int-ℕ zero-ℕ H = ex-falso (H refl)
 is-positive-int-ℕ (succ-ℕ x) H = star
+```
 
--- Basics of nonnegative integers
+### Properties of nonnegative integers
 
+```agda
 nonnegative-ℤ : UU lzero
 nonnegative-ℤ = Σ ℤ is-nonnegative-ℤ
 

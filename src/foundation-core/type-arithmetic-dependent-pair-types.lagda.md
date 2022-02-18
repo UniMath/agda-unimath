@@ -266,3 +266,75 @@ module _
   pr1 interchange-Σ-Σ = map-interchange-Σ-Σ
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
 ```
+
+### Swapping the order of quantification in a Σ-type, on the left
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : A → B → UU l3}
+  where
+
+  map-left-swap-Σ : Σ A (λ x → Σ B (C x)) → Σ B (λ y → Σ A (λ x → C x y))
+  pr1 (map-left-swap-Σ (pair a (pair b c))) = b
+  pr1 (pr2 (map-left-swap-Σ (pair a (pair b c)))) = a
+  pr2 (pr2 (map-left-swap-Σ (pair a (pair b c)))) = c
+  
+  map-inv-left-swap-Σ :
+    Σ B (λ y → Σ A (λ x → C x y)) → Σ A (λ x → Σ B (C x))
+  pr1 (map-inv-left-swap-Σ (pair b (pair a c))) = a
+  pr1 (pr2 (map-inv-left-swap-Σ (pair b (pair a c)))) = b
+  pr2 (pr2 (map-inv-left-swap-Σ (pair b (pair a c)))) = c
+  
+  isretr-map-inv-left-swap-Σ : (map-inv-left-swap-Σ ∘ map-left-swap-Σ) ~ id
+  isretr-map-inv-left-swap-Σ (pair a (pair b c)) = refl
+
+  issec-map-inv-left-swap-Σ : (map-left-swap-Σ ∘ map-inv-left-swap-Σ) ~ id
+  issec-map-inv-left-swap-Σ (pair b (pair a c)) = refl
+  
+  abstract
+    is-equiv-map-left-swap-Σ : is-equiv map-left-swap-Σ
+    is-equiv-map-left-swap-Σ =
+      is-equiv-has-inverse
+        map-inv-left-swap-Σ
+        issec-map-inv-left-swap-Σ
+        isretr-map-inv-left-swap-Σ
+  
+  equiv-left-swap-Σ : Σ A (λ a → Σ B (C a)) ≃ Σ B (λ b → Σ A (λ a → C a b))
+  pr1 equiv-left-swap-Σ = map-left-swap-Σ
+  pr2 equiv-left-swap-Σ = is-equiv-map-left-swap-Σ
+```
+
+### Swapping the order of quantification in a Σ-type, on the right
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  map-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) → Σ (Σ A C) (B ∘ pr1)
+  pr1 (pr1 (map-right-swap-Σ (pair (pair a b) c))) = a
+  pr2 (pr1 (map-right-swap-Σ (pair (pair a b) c))) = c
+  pr2 (map-right-swap-Σ (pair (pair a b) c)) = b
+
+  map-inv-right-swap-Σ : Σ (Σ A C) (B ∘ pr1) → Σ (Σ A B) (C ∘ pr1)
+  pr1 (pr1 (map-inv-right-swap-Σ (pair (pair a c) b))) = a
+  pr2 (pr1 (map-inv-right-swap-Σ (pair (pair a c) b))) = b
+  pr2 (map-inv-right-swap-Σ (pair (pair a c) b)) = c
+
+  issec-map-inv-right-swap-Σ : (map-right-swap-Σ ∘ map-inv-right-swap-Σ) ~ id
+  issec-map-inv-right-swap-Σ (pair (pair x y) z) = refl
+
+  isretr-map-inv-right-swap-Σ : (map-inv-right-swap-Σ ∘ map-right-swap-Σ) ~ id
+  isretr-map-inv-right-swap-Σ (pair (pair x z) y) = refl
+
+  is-equiv-map-right-swap-Σ : is-equiv map-right-swap-Σ
+  is-equiv-map-right-swap-Σ =
+    is-equiv-has-inverse
+      map-inv-right-swap-Σ
+      issec-map-inv-right-swap-Σ
+      isretr-map-inv-right-swap-Σ
+
+  equiv-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) ≃ Σ (Σ A C) (B ∘ pr1)
+  pr1 equiv-right-swap-Σ = map-right-swap-Σ
+  pr2 equiv-right-swap-Σ = is-equiv-map-right-swap-Σ
+```

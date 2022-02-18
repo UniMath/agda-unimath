@@ -19,12 +19,14 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; is-prop-empty)
-open import foundation.equivalences using (is-equiv)
+open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl; ap)
 open import foundation.propositions using (is-prop)
+open import foundation.set-truncations using
+  ( type-trunc-Set; equiv-unit-trunc-Set)
 open import foundation.sets using (is-set; is-set-prop-in-id; UU-Set)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
@@ -130,4 +132,11 @@ is-equiv-Eq-eq-ℕ {m} {n} =
     ( is-contr-total-Eq-ℕ m)
     ( λ y → Eq-eq-ℕ {m} {y})
     ( n)
+```
+
+### The type of natural numbers is its own set truncation
+
+```agda
+equiv-unit-trunc-ℕ-Set : ℕ ≃ type-trunc-Set ℕ
+equiv-unit-trunc-ℕ-Set = equiv-unit-trunc-Set ℕ-Set
 ```

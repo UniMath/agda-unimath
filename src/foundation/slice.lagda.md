@@ -15,27 +15,37 @@ open import foundation.embeddings using (_↪_; map-emb; is-emb-map-emb)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
-    is-fiberwise-equiv; is-subtype-is-equiv)
-open import foundation.fibers-of-maps using (fib)
+    is-fiberwise-equiv; is-subtype-is-equiv; id-equiv; map-inv-is-equiv)
+open import foundation.fibers-of-maps using
+  ( fib; equiv-fib-pr1; equiv-total-fib; triangle-map-equiv-total-fib)
 open import foundation.function-extensionality using
   ( equiv-funext; eq-htpy)
 open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-map-Π)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; fib-triangle; is-fiberwise-equiv-is-equiv-triangle;
     is-equiv-triangle-is-fiberwise-equiv; equiv-Σ)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy; _·r_;
     equiv-concat-htpy)
 open import foundation.identity-types using (Id; refl; inv; inv-inv; _∙_)
 open import foundation.injective-maps using (is-injective-emb)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
+open import foundation.propositional-maps using
+  ( is-prop-map-is-emb; equiv-is-prop-map-is-emb)
 open import foundation.propositions using
-  ( equiv-prop; is-prop-Π; is-prop; is-prop-is-equiv)
+  ( equiv-prop; is-prop-Π; is-prop; is-prop-is-equiv; UU-Prop)
+open import foundation.structure using
+  ( hom-structure; fam-structure; structure-map)
 open import foundation.structure-identity-principle using
-  ( extensionality-Σ)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( equiv-right-swap-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+  ( extensionality-Σ; is-contr-total-Eq-structure)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( inv-assoc-Σ; equiv-right-swap-Σ)
+open import foundation.univalence using
+  ( is-contr-total-equiv; eq-equiv-fam)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
 ## Idea
@@ -43,6 +53,22 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 The slice of a category over an object X is the category of morphisms into X. A morphism in the slice from `f : A → X` to `g : B → X` consists of a function `h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these definitions for types.
 
 ## Definition
+
+### The objects of the slice category of types
+
+```agda
+slice-UU : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
+slice-UU l A = Σ (UU l) (λ X → X → A)
+
+Fib : {l l1 : Level} (A : UU l1) → slice-UU l A → A → UU (l1 ⊔ l)
+Fib A f = fib (pr2 f)
+
+Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → slice-UU (l1 ⊔ l) A
+pr1 (Pr1 A B) = Σ A B
+pr2 (Pr1 A B) = pr1
+```
+
+### The morphisms of the slice category of types
 
 ```agda
 hom-slice :
@@ -304,4 +330,108 @@ abstract
                 ( map-emb g)
                 ( h)
                 ( x))))))
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  equiv-slice' : (f g : slice-UU l2 A) → UU (l1 ⊔ l2)
+  equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
+  
+  id-equiv-slice-UU : (f : slice-UU l2 A) → equiv-slice' f f
+  pr1 (id-equiv-slice-UU f) = id-equiv
+  pr2 (id-equiv-slice-UU f) = refl-htpy
+
+  equiv-eq-slice-UU : (f g : slice-UU l2 A) → Id f g → equiv-slice' f g
+  equiv-eq-slice-UU f .f refl = id-equiv-slice-UU f
+
+  abstract
+    is-contr-total-equiv-slice' :
+      (f : slice-UU l2 A) → is-contr (Σ (slice-UU l2 A) (equiv-slice' f))
+    is-contr-total-equiv-slice' (pair X f) =
+      is-contr-total-Eq-structure
+        ( λ Y g e → f ~ (g ∘ map-equiv e))
+        ( is-contr-total-equiv X)
+        ( pair X id-equiv)
+        ( is-contr-total-htpy f)
+
+  abstract
+    is-equiv-equiv-eq-slice-UU :
+      (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
+    is-equiv-equiv-eq-slice-UU f =
+      fundamental-theorem-id f
+        ( id-equiv-slice-UU f)
+        ( is-contr-total-equiv-slice' f)
+        ( equiv-eq-slice-UU f)
+
+  eq-equiv-slice :
+    (f g : slice-UU l2 A) → equiv-slice' f g → Id f g
+  eq-equiv-slice f g =
+    map-inv-is-equiv (is-equiv-equiv-eq-slice-UU f g)
+
+abstract
+  issec-Pr1 :
+    {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
+  issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
+                           
+  isretr-Pr1 :
+    {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
+  isretr-Pr1 {A = A} (pair X f) =
+    eq-equiv-slice
+      ( Pr1 A (Fib A (pair X f)))
+      ( pair X f)
+      ( pair (equiv-total-fib f) (triangle-map-equiv-total-fib f))
+
+  is-equiv-Fib :
+    {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
+  is-equiv-Fib l2 A =
+    is-equiv-has-inverse (Pr1 A) (issec-Pr1 {l2 = l2}) (isretr-Pr1 {l2 = l2})
+
+equiv-Fib :
+  {l1 : Level} (l2 : Level) (A : UU l1) → slice-UU (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
+pr1 (equiv-Fib l2 A) = Fib A
+pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
+
+abstract
+  is-equiv-Pr1 :
+    {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
+  is-equiv-Pr1 {l1} l2 A =
+    is-equiv-has-inverse (Fib A) (isretr-Pr1 {l2 = l2}) (issec-Pr1 {l2 = l2})
+
+equiv-Pr1 :
+  {l1 : Level} (l2 : Level) (A : UU l1) → (A → UU (l1 ⊔ l2)) ≃ slice-UU (l1 ⊔ l2) A
+pr1 (equiv-Pr1 l2 A) = Pr1 A
+pr2 (equiv-Pr1 l2 A) = is-equiv-Pr1 l2 A
+```
+
+```agda
+slice-UU-structure :
+  {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
+  UU (l1 ⊔ l2 ⊔ lsuc l)
+slice-UU-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
+
+equiv-Fib-structure :
+  {l1 l3 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l3) (B : UU l1) →
+  slice-UU-structure (l1 ⊔ l) P B ≃ fam-structure P B
+equiv-Fib-structure {l1} {l3} l P B =
+  ( ( inv-distributive-Π-Σ) ∘e
+    ( equiv-Σ
+      ( λ C → (b : B) → P (C b))
+      ( equiv-Fib l B)
+      ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
+  ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
+```
+
+```agda
+slice-UU-emb : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+slice-UU-emb l A = Σ (UU l) (λ X → X ↪ A)
+
+equiv-Fib-Prop :
+  (l : Level) {l1 : Level} (A : UU l1) →
+  slice-UU-emb (l1 ⊔ l) A ≃ (A → UU-Prop (l1 ⊔ l))
+equiv-Fib-Prop l A =
+  ( equiv-Fib-structure l is-prop A) ∘e
+  ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))
 ```

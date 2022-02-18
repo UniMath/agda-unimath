@@ -18,8 +18,11 @@ open import foundation.dependent-pair-types using (pr1; pr2)
 open import foundation.empty-types using (empty)
 open import foundation.equality-coproduct-types using
   ( is-set-coprod)
+open import foundation.equivalences using (_≃_)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; ap)
+open import foundation.set-truncations using
+  ( type-trunc-Set; equiv-unit-trunc-Set)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; lzero)
@@ -91,4 +94,11 @@ abstract
 ℤ-Set : UU-Set lzero
 pr1 ℤ-Set = ℤ
 pr2 ℤ-Set = is-set-ℤ
+```
+
+### The type of integers is its own set truncation
+
+```agda
+equiv-unit-trunc-ℤ-Set : ℤ ≃ type-trunc-Set ℤ
+equiv-unit-trunc-ℤ-Set = equiv-unit-trunc-Set ℤ-Set
 ```

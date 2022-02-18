@@ -60,3 +60,14 @@ equiv-equiv-iff :
 pr1 (equiv-equiv-iff P Q) = equiv-iff' P Q
 pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
 ```
+
+### The type of logical equivalences between propositions is a proposition
+
+```agda
+is-prop-logical-equivalence :
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → is-prop (P ⇔ Q)
+is-prop-logical-equivalence P Q =
+  is-prop-prod
+    ( is-prop-function-type (is-prop-type-Prop Q))
+    ( is-prop-function-type (is-prop-type-Prop P))
+```

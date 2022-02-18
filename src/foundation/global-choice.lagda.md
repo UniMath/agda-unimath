@@ -5,16 +5,24 @@
 
 module foundation.global-choice where
 
+open import elementary-number-theory.standard-finite-types using
+  ( zero-Fin)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equivalences using (_≃_; map-equiv; map-inv-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
+open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
+
+open import univalent-combinatorics.2-element-types using
+  ( no-section-type-UU-Fin-Level-two-ℕ)
 ```
 
 ## Idea
@@ -49,4 +57,14 @@ elim-trunc-Prop-is-decidable :
 elim-trunc-Prop-is-decidable (inl a) x = a
 elim-trunc-Prop-is-decidable (inr f) x =
   ex-falso (apply-universal-property-trunc-Prop x empty-Prop f)
+```
+
+```agda
+abstract
+  no-global-section :
+    {l : Level} → ¬ ((X : UU l) → type-trunc-Prop X → X)
+  no-global-section f =
+    no-section-type-UU-Fin-Level-two-ℕ
+      ( λ X →
+        f (pr1 X) (functor-trunc-Prop (λ e → map-equiv e zero-Fin) (pr2 X)))
 ```

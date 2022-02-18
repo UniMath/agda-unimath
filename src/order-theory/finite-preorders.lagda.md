@@ -7,6 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module order-theory.finite-preorders where
 
+open import univalent-combinatorics
+
 open import order-theory.preorders public
 ```
 

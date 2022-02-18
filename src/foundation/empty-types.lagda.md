@@ -8,13 +8,13 @@ module foundation.empty-types where
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
+  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; map-inv-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; UU-Prop; is-trunc-is-prop; is-prop-function-type)
+  ( is-prop; UU-Prop; is-trunc-is-prop; is-prop-function-type; is-prop-equiv')
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.truncated-types using
@@ -174,4 +174,24 @@ abstract
     {l : Level} {X : UU l} → type-trunc-Prop X → is-nonempty X
   is-nonempty-is-inhabited {l} {X} =
     map-universal-property-trunc-Prop (is-nonempty-Prop X) (λ x f → f x)
+```
+
+```agda
+abstract
+  is-prop-raise-empty :
+    {l1 : Level} → is-prop (raise-empty l1)
+  is-prop-raise-empty {l1} =
+    is-prop-equiv'
+      ( equiv-raise l1 empty)
+      ( is-prop-empty)
+
+raise-empty-Prop :
+  (l1 : Level) → UU-Prop l1
+pr1 (raise-empty-Prop l1) = raise-empty l1
+pr2 (raise-empty-Prop l1) = is-prop-raise-empty
+
+abstract
+  is-empty-raise-empty :
+    {l1 : Level} → is-empty (raise-empty l1)
+  is-empty-raise-empty {l1} = map-inv-equiv (equiv-raise-empty l1)
 ```

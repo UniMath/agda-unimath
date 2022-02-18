@@ -7,6 +7,8 @@ module
   elementary-number-theory.well-ordering-principle-standard-finite-types
   where
 
+open import elementary-number-theory.decidable-dependent-pair-types using
+  ( is-decidable-Σ-Fin)
 open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin; leq-neg-one-Fin; refl-leq-Fin; is-prop-leq-Fin;
     antisymmetric-leq-Fin)
@@ -18,6 +20,7 @@ open import elementary-number-theory.standard-finite-types using
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( global-choice-decidable-subtype-ℕ)
+
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-types using
@@ -66,24 +69,6 @@ exists-not-not-forall-Fin {l} {succ-ℕ k} {P} d H with d (inr star)
   T : Σ (Fin k) (λ x → ¬ (P (inl x))) → Σ (Fin (succ-ℕ k)) (λ x → ¬ (P x))
   T z = pair (inl (pr1 z)) (pr2 z)
 ... | inr f = pair (inr star) f
-```
-
-```agda
-is-decidable-Σ-Fin :
-  {l : Level} {k : ℕ} {P : Fin k → UU l} →
-  ((x : Fin k) → is-decidable (P x)) → is-decidable (Σ (Fin k) P)
-is-decidable-Σ-Fin {l} {zero-ℕ} {P} d = inr pr1
-is-decidable-Σ-Fin {l} {succ-ℕ k} {P} d with d (inr star)
-... | inl p = inl (pair (inr star) p)
-... | inr f =
-  is-decidable-iff
-    ( λ t → pair (inl (pr1 t)) (pr2 t))
-    ( g)
-    ( is-decidable-Σ-Fin {l} {k} {P ∘ inl} (λ x → d (inl x)))
-  where
-  g : Σ (Fin (succ-ℕ k)) P → Σ (Fin k) (P ∘ inl)
-  g (pair (inl x) p) = pair x p
-  g (pair (inr star) p) = ex-falso (f p)
 ```
 
 ```agda

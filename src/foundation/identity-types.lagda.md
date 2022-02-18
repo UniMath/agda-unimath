@@ -86,10 +86,10 @@ module _
   pr1 (equiv-concat' x q) = concat' x q
   pr2 (equiv-concat' x q) = is-equiv-concat' x q
 
-convert-eq-values-htpy :
+convert-eq-values :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   (x y : A) → Id (f x) (f y) ≃ Id (g x) (g y)
-convert-eq-values-htpy {f = f} {g} H x y =
+convert-eq-values {f = f} {g} H x y =
   ( equiv-concat' (g x) (H y)) ∘e (equiv-concat (inv (H x)) (f y))
 
 module _

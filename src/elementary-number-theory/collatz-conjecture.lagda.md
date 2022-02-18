@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The Collatz conjecture
 
 ```agda
