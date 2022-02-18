@@ -1,6 +1,6 @@
 # Univalent mathematics in Agda
 
-[![CI](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/SymmetryBookFormalization/actions/workflows/pages/pages-build-deployment)
+[![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment)
 
 This repository is for a formalisation project for univalent mathematics in Agda.
 
