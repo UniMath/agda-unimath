@@ -11,26 +11,30 @@ open import elementary-number-theory.equality-standard-finite-types using
   ( Eq-Fin-eq)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
-    is-not-contractible-Fin)
+    is-not-contractible-Fin; succ-Fin)
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (coprod; inl; inr; neq-inr-inl)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
-open import foundation.empty-types using (ex-falso)
+open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equivalences using
   ( _≃_; map-equiv; id-equiv; htpy-equiv; eq-htpy-equiv; is-equiv;
     is-equiv-has-inverse; is-equiv-Prop; is-equiv-left-factor';
     equiv-postcomp-equiv; is-equiv-comp; is-equiv-map-equiv;
-    is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv)
+    is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv;
+    left-inverse-law-equiv; left-unit-law-equiv; right-inverse-law-equiv;
+    is-emb-is-equiv; htpy-eq-equiv; right-unit-law-equiv; equiv-precomp;
+    isretr-map-inv-equiv; issec-map-inv-equiv)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.mere-equivalences using (mere-equiv; mere-equiv-Prop)
 open import foundation.negation using (¬)
@@ -45,7 +49,7 @@ open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
-    Fin-UU-Fin)
+    Fin-UU-Fin; has-cardinality)
 ```
 
 ## Idea
@@ -56,65 +60,77 @@ open import univalent-combinatorics.finite-types using
 
 ### Characterization of the identity type of the type of 2-element types
 
+#### Evaluating an equivalence and an automorphism at `0 : Fin 2`
+
 ```agda
 ev-zero-equiv-Fin-two-ℕ :
   {l1 : Level} {X : UU l1} → (Fin 2 ≃ X) → X
 ev-zero-equiv-Fin-two-ℕ e = map-equiv e zero-Fin
 
-inv-ev-zero-equiv-Fin-two-ℕ' :
+ev-zero-aut-Fin-two-ℕ : (Fin 2 ≃ Fin 2) → Fin 2
+ev-zero-aut-Fin-two-ℕ = ev-zero-equiv-Fin-two-ℕ
+```
+
+#### Evaluating an automorphism at `0 : Fin 2` is an equivalence
+
+```agda
+inv-ev-zero-aut-Fin-two-ℕ :
   Fin 2 → (Fin 2 ≃ Fin 2)
-inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = id-equiv
-inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = equiv-succ-Fin
+inv-ev-zero-aut-Fin-two-ℕ (inl (inr star)) = id-equiv
+inv-ev-zero-aut-Fin-two-ℕ (inr star) = equiv-succ-Fin
 
 abstract
-  issec-inv-ev-zero-equiv-Fin-two-ℕ' :
-    (ev-zero-equiv-Fin-two-ℕ ∘ inv-ev-zero-equiv-Fin-two-ℕ') ~ id
-  issec-inv-ev-zero-equiv-Fin-two-ℕ' (inl (inr star)) = refl
-  issec-inv-ev-zero-equiv-Fin-two-ℕ' (inr star) = refl
+  issec-inv-ev-zero-aut-Fin-two-ℕ :
+    (ev-zero-aut-Fin-two-ℕ ∘ inv-ev-zero-aut-Fin-two-ℕ) ~ id
+  issec-inv-ev-zero-aut-Fin-two-ℕ (inl (inr star)) = refl
+  issec-inv-ev-zero-aut-Fin-two-ℕ (inr star) = refl
 
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' :
     (e : Fin 2 ≃ Fin 2) (x y : Fin 2) →
     Id (map-equiv e zero-Fin) x →
-    Id (map-equiv e one-Fin) y → htpy-equiv (inv-ev-zero-equiv-Fin-two-ℕ' x) e
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+    Id (map-equiv e one-Fin) y → htpy-equiv (inv-ev-zero-aut-Fin-two-ℕ x) e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inr star) =
     ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inr star) = inv q
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inr star) (inl (inr star)) p q (inl (inr star)) = inv p
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inr star) (inl (inr star)) p q (inr star) = inv q
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inr star) (inr star) p q (inl (inr star)) =
     ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
-  aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+  isretr-inv-ev-zero-aut-Fin-two-ℕ' e
     (inr star) (inr star) p q (inr star) =
     ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
 
-  isretr-inv-ev-zero-equiv-Fin-two-ℕ' :
-    (inv-ev-zero-equiv-Fin-two-ℕ' ∘ ev-zero-equiv-Fin-two-ℕ) ~ id
-  isretr-inv-ev-zero-equiv-Fin-two-ℕ' e =
+  isretr-inv-ev-zero-aut-Fin-two-ℕ :
+    (inv-ev-zero-aut-Fin-two-ℕ ∘ ev-zero-aut-Fin-two-ℕ) ~ id
+  isretr-inv-ev-zero-aut-Fin-two-ℕ e =
     eq-htpy-equiv
-      ( aux-isretr-inv-ev-zero-equiv-Fin-two-ℕ' e
+      ( isretr-inv-ev-zero-aut-Fin-two-ℕ' e
         ( map-equiv e zero-Fin)
         ( map-equiv e one-Fin)
         ( refl)
         ( refl))
 
 abstract
-  is-equiv-ev-zero-equiv-Fin-two-ℕ' :
-    is-equiv (ev-zero-equiv-Fin-two-ℕ {lzero} {Fin 2})
-  is-equiv-ev-zero-equiv-Fin-two-ℕ' =
+  is-equiv-ev-zero-aut-Fin-two-ℕ : is-equiv ev-zero-aut-Fin-two-ℕ
+  is-equiv-ev-zero-aut-Fin-two-ℕ =
     is-equiv-has-inverse
-      inv-ev-zero-equiv-Fin-two-ℕ'
-      issec-inv-ev-zero-equiv-Fin-two-ℕ'
-      isretr-inv-ev-zero-equiv-Fin-two-ℕ'
+      inv-ev-zero-aut-Fin-two-ℕ
+      issec-inv-ev-zero-aut-Fin-two-ℕ
+      isretr-inv-ev-zero-aut-Fin-two-ℕ
+```
 
+#### If `X` is a 2-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
+
+```agda
 abstract
   is-equiv-ev-zero-equiv-Fin-two-ℕ :
     {l1 : Level} {X : UU l1} → mere-equiv (Fin 2) X →
@@ -132,7 +148,7 @@ abstract
             ( map-equiv α)
             ( ev-zero-equiv-Fin-two-ℕ)
             ( refl-htpy)
-            ( is-equiv-ev-zero-equiv-Fin-two-ℕ')
+            ( is-equiv-ev-zero-aut-Fin-two-ℕ)
             ( is-equiv-map-equiv α))
           ( is-equiv-comp-equiv α (Fin 2)))
 
@@ -140,7 +156,11 @@ equiv-ev-zero-equiv-Fin-two-ℕ :
   {l1 : Level} {X : UU l1} → mere-equiv (Fin 2) X → (Fin 2 ≃ X) ≃ X
 pr1 (equiv-ev-zero-equiv-Fin-two-ℕ e) = ev-zero-equiv-Fin-two-ℕ
 pr2 (equiv-ev-zero-equiv-Fin-two-ℕ e) = is-equiv-ev-zero-equiv-Fin-two-ℕ e
+```
 
+#### The type of pointed 2-element types of any universe level is contractible
+
+```agda
 abstract
   is-contr-total-UU-Fin-Level-two-ℕ :
     {l : Level} → is-contr (Σ (UU-Fin-Level l 2) type-UU-Fin-Level)
@@ -155,12 +175,20 @@ abstract
       ( is-contr-total-equiv-subuniverse
         ( mere-equiv-Prop (Fin 2))
         ( Fin-UU-Fin-Level l 2))
+```
 
+#### The type of pointed 2-element types of universe level `lzero` is contractible
+
+```agda
 abstract
   is-contr-total-UU-Fin-two-ℕ :
     is-contr (Σ (UU-Fin 2) (λ X → type-UU-Fin X))
   is-contr-total-UU-Fin-two-ℕ = is-contr-total-UU-Fin-Level-two-ℕ
+```
 
+#### Completing the characterization of the identity type of the type of 2-element types of arbitrary universe level
+
+```agda
 point-eq-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l 2} →
   Id (Fin-UU-Fin-Level l 2) X → type-UU-Fin-Level X
@@ -190,7 +218,11 @@ eq-point-UU-Fin-Level-two-ℕ :
   type-UU-Fin-Level X → Id (Fin-UU-Fin-Level l 2) X
 eq-point-UU-Fin-Level-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ
+```
 
+#### Completing the characterization of the identity type of the type of 2-element types of universe level `lzero`
+
+```agda
 point-eq-UU-Fin-two-ℕ :
   {X : UU-Fin 2} → Id (Fin-UU-Fin 2) X → type-UU-Fin X
 point-eq-UU-Fin-two-ℕ refl = zero-Fin
@@ -214,9 +246,11 @@ eq-point-UU-Fin-two-ℕ :
   {X : UU-Fin 2} → type-UU-Fin X → Id (Fin-UU-Fin 2) X
 eq-point-UU-Fin-two-ℕ {X} =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
+```
 
--- Corollary 17.4.2
+### The canonical type family on the type of 2-element types has no section
 
+```agda
 abstract
   no-section-type-UU-Fin-Level-two-ℕ :
     {l : Level} → ¬ ((X : UU-Fin-Level l 2) → type-UU-Fin-Level X)
@@ -241,6 +275,8 @@ abstract
     no-section-type-UU-Fin-Level-two-ℕ f
 ```
 
+### There is no decidability procedure that proves that an arbitrary 2-element type is decidable
+
 ```agda
 abstract
   is-not-decidable-type-UU-Fin-Level-two-ℕ :
@@ -257,4 +293,111 @@ abstract
             ( dn-Prop' (pr1 X))
             ( λ e → intro-dn {l} (map-equiv e zero-Fin)))
           ( d X))
+```
+
+### Any automorphism on a 2-element set is an involution
+
+```agda
+{-
+module _
+  {l : Level} {X : UU l} (H : has-cardinality X 2)
+  where
+  
+  is-involution-aut-2-element-type : (e : X ≃ X) → htpy-equiv (e ∘e e) id-equiv
+  is-involution-aut-2-element-type e = {!!}
+-}
+```
+
+### The elements of an arbitrary 2-element type can be swapped
+
+#### The successor function on `Fin 2` is an involution
+
+#### The swapping equivalence
+
+```agda
+module _
+  {l : Level} {X : UU l} (H : has-cardinality X 2)
+  where
+
+  swap-two-elements : X ≃ X
+  swap-two-elements =
+    ( equiv-ev-zero-equiv-Fin-two-ℕ H) ∘e
+    ( ( equiv-precomp-equiv equiv-succ-Fin X) ∘e
+      ( inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H)))
+```
+
+### The swapping equivalence is an involution
+
+```agda
+is-involution-succ-Fin-two-ℕ : ((succ-Fin {2}) ∘ (succ-Fin {2})) ~ id
+is-involution-succ-Fin-two-ℕ (inl (inr star)) = refl
+is-involution-succ-Fin-two-ℕ (inr star) = refl
+
+module _
+  {l : Level} {X : UU l} (H : has-cardinality X 2)
+  where
+
+  is-involution-swap-two-elements :
+    htpy-equiv (swap-two-elements H ∘e swap-two-elements H) id-equiv
+  is-involution-swap-two-elements x =
+    ( ap
+      ( ev-zero-equiv-Fin-two-ℕ)
+      ( ap
+        ( map-equiv (equiv-precomp-equiv equiv-succ-Fin X))
+        ( isretr-map-inv-equiv
+          ( equiv-ev-zero-equiv-Fin-two-ℕ H)
+          ( map-equiv
+            ( equiv-precomp-equiv equiv-succ-Fin X)
+            ( map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))))) ∙
+    ( ( ap
+        ( map-equiv (map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))
+        ( is-involution-succ-Fin-two-ℕ zero-Fin)) ∙
+      ( issec-map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))
+
+  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
+    ¬ (Id (equiv-precomp-equiv (equiv-succ-Fin {2}) X) id-equiv)
+  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
+    apply-universal-property-trunc-Prop
+      ( H)
+      ( empty-Prop)
+      ( λ f →
+        neq-inr-inl
+          ( map-inv-equiv
+            ( pair
+              ( ap (map-equiv f))
+              ( is-emb-is-equiv
+                ( pr2 f)
+                ( inr star)
+                ( zero-Fin)))
+            ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
+```
+
+### The swapping equivalence is not the identity equivalence
+
+```agda
+module _
+  {l : Level} {X : UU l} (H : has-cardinality X 2)
+  where
+
+  is-not-identity-swap-two-elements : ¬ (Id (swap-two-elements H) id-equiv)
+  is-not-identity-swap-two-elements p =
+    is-not-identity-equiv-precomp-equiv-equiv-succ-Fin H
+      ( ( ( inv (left-unit-law-equiv equiv1)) ∙
+          ( ap (λ x → x ∘e equiv1) (inv (left-inverse-law-equiv equiv2)))) ∙
+        ( ( inv
+            ( right-unit-law-equiv ((inv-equiv equiv2 ∘e equiv2) ∘e equiv1))) ∙
+          ( ( ap
+              ( λ x → ((inv-equiv equiv2 ∘e equiv2) ∘e equiv1) ∘e x)
+              ( inv (left-inverse-law-equiv equiv2))) ∙
+          ( ( ( eq-htpy-equiv refl-htpy) ∙
+              ( ap (λ x → inv-equiv equiv2 ∘e (x ∘e equiv2)) p)) ∙
+            ( ( ap
+                ( λ x → inv-equiv equiv2 ∘e x)
+                ( left-unit-law-equiv equiv2)) ∙
+              ( left-inverse-law-equiv equiv2))))))
+    where
+    equiv1 : (Fin 2 ≃ X) ≃ (Fin 2 ≃ X)
+    equiv1 = equiv-precomp-equiv (equiv-succ-Fin {2}) X
+    equiv2 : (Fin 2 ≃ X) ≃ X
+    equiv2 = equiv-ev-zero-equiv-Fin-two-ℕ H
 ```
