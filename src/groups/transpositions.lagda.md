@@ -6,6 +6,7 @@
 
 module groups.transpositions where
 
+open import univalent-combinatorics
 open import univalent-foundations public
 ```
 
