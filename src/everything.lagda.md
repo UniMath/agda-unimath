@@ -77,6 +77,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 open import finite-groups.finite-groups
 open import finite-groups.quaternion-group
+open import finite-groups.transpositions
 open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types

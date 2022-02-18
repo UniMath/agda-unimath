@@ -26,8 +26,10 @@ open import foundation.equivalences using
     equiv-postcomp-equiv; is-equiv-comp; is-equiv-map-equiv;
     is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv;
     left-inverse-law-equiv; left-unit-law-equiv; right-inverse-law-equiv;
-    is-emb-is-equiv; htpy-eq-equiv; right-unit-law-equiv)
+    is-emb-is-equiv; htpy-eq-equiv; right-unit-law-equiv; equiv-precomp;
+    isretr-map-inv-equiv; issec-map-inv-equiv)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
@@ -336,33 +338,21 @@ module _
   where
 
   is-involution-swap-two-elements :
-    Id (swap-two-elements H ∘e swap-two-elements H) id-equiv
-  is-involution-swap-two-elements = eq-htpy-equiv refl-htpy ∙
+    htpy-equiv (swap-two-elements H ∘e swap-two-elements H) id-equiv
+  is-involution-swap-two-elements x =
+    ( ap
+      ( ev-zero-equiv-Fin-two-ℕ)
+      ( ap
+        ( map-equiv (equiv-precomp-equiv equiv-succ-Fin X))
+        ( isretr-map-inv-equiv
+          ( equiv-ev-zero-equiv-Fin-two-ℕ H)
+          ( map-equiv
+            ( equiv-precomp-equiv equiv-succ-Fin X)
+            ( map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))))) ∙
     ( ( ap
-        ( λ x →
-          ( equiv1 ∘e equiv2) ∘e (x ∘e (equiv2 ∘e equiv3)))
-        ( left-inverse-law-equiv equiv1)) ∙
-      ( ( ap
-          ( λ x → (equiv1 ∘e equiv2) ∘e x)
-          ( left-unit-law-equiv (equiv2 ∘e equiv3))) ∙
-        ( ( ( eq-htpy-equiv refl-htpy) ∙
-            ( ap
-              ( λ x → equiv1 ∘e (x ∘e equiv3))
-              ( eq-htpy-equiv
-                { e = equiv2 ∘e equiv2}
-                ( λ f →
-                  eq-htpy-equiv
-                    ( λ x →
-                      ap (map-equiv f) (is-involution-succ-Fin-two-ℕ x)))))) ∙
-          ( ( ap (λ x → equiv1 ∘e x) (left-unit-law-equiv equiv3)) ∙
-            ( right-inverse-law-equiv equiv1)))))
-    where
-    equiv1 : (Fin 2 ≃ X) ≃ X
-    equiv1 = equiv-ev-zero-equiv-Fin-two-ℕ H
-    equiv2 : (Fin 2 ≃ X) ≃ (Fin 2 ≃ X)
-    equiv2 = equiv-precomp-equiv equiv-succ-Fin X
-    equiv3 : X ≃ (Fin 2 ≃ X)
-    equiv3 = inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H)
+        ( map-equiv (map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))
+        ( is-involution-succ-Fin-two-ℕ zero-Fin)) ∙
+      ( issec-map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))
 
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
     ¬ (Id (equiv-precomp-equiv (equiv-succ-Fin {2}) X) id-equiv)
