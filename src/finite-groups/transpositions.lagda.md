@@ -7,7 +7,7 @@
 module finite-groups.transpositions where
 
 open import univalent-combinatorics
-open import univalent-foundations public
+open import univalent-foundations
 ```
 
 ## Idea
@@ -41,7 +41,7 @@ module _
       ( λ y → map-transposition' (map-transposition' x (inl p)) (inl y))
       ( eq-is-prop
         ( is-prop-type-decidable-Prop (P (map-transposition' x (inl p)))))) ∙
-    ( ap pr1 (is-involution-swap-two-elements H (pair x p)))
+    ( ap pr1 (is-involution-aut-2-element-type H (swap-two-elements H) (pair x p)))
   is-involution-map-transposition' x (inl p) (inr np') =
     ex-falso (np' (pr2 (map-equiv (swap-two-elements H) (pair x p))))
   is-involution-map-transposition' x (inr np) (inl p') = ex-falso (np p')

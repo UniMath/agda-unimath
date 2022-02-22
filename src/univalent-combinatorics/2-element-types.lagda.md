@@ -8,7 +8,7 @@ module univalent-combinatorics.2-element-types where
 open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ)
 open import elementary-number-theory.equality-standard-finite-types using
-  ( Eq-Fin-eq)
+  ( Eq-Fin-eq; is-set-Fin)
 open import elementary-number-theory.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
     is-not-contractible-Fin; succ-Fin)
@@ -36,7 +36,8 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.mere-equivalences using (mere-equiv; mere-equiv-Prop)
+open import foundation.mere-equivalences using
+  ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
@@ -46,6 +47,8 @@ open import foundation.type-arithmetic-empty-type using
   ( map-right-unit-law-coprod-is-empty)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero)
+
+open import foundation-core.sets using (Id-Prop)
 
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
@@ -295,20 +298,64 @@ abstract
           ( d X))
 ```
 
+### Any automorphism on `Fin 2` is an involution
+
+```agda
+is-involution-aut-Fin-two-ℕ : (e : Fin 2 ≃ Fin 2) → htpy-equiv (e ∘e e) id-equiv
+is-involution-aut-Fin-two-ℕ e x =
+  cases-is-involution-aut-Fin-two-ℕ x (map-equiv e x) (map-equiv (e ∘e e) x) refl refl
+  where
+  cases-is-involution-aut-Fin-two-ℕ : (x y z : Fin 2) (p : Id (map-equiv e x) y)
+    (q : Id (map-equiv e y) z) → Id (map-equiv (e ∘e e) x) x
+  cases-is-involution-aut-Fin-two-ℕ (inl (inr star)) (inl (inr star)) z p q = ap (map-equiv e) p ∙ p
+  cases-is-involution-aut-Fin-two-ℕ (inl (inr star)) (inr star) (inl (inr star)) p q = ap (map-equiv e) p ∙ q
+  cases-is-involution-aut-Fin-two-ℕ (inl (inr star)) (inr star) (inr star) p q =
+    ex-falso
+      ( neq-inr-inl
+        ( map-inv-equiv
+          ( pair
+            ( ap (map-equiv e))
+            ( is-emb-is-equiv (pr2 e) (inr star) zero-Fin))
+          ( q ∙ inv p)))
+  cases-is-involution-aut-Fin-two-ℕ (inr star) (inl (inr star)) (inl (inr star)) p q =
+    ex-falso
+      ( neq-inr-inl
+        ( map-inv-equiv
+          ( pair
+            ( ap (map-equiv e))
+            ( is-emb-is-equiv (pr2 e) (inr star) zero-Fin))
+          ( p ∙ inv q)))
+  cases-is-involution-aut-Fin-two-ℕ (inr star) (inl (inr star)) (inr star) p q = ap (map-equiv e) p ∙ q
+  cases-is-involution-aut-Fin-two-ℕ (inr star) (inr star) z p q = ap (map-equiv e) p ∙ p
+```
+
 ### Any automorphism on a 2-element set is an involution
 
 ```agda
-{-
 module _
   {l : Level} {X : UU l} (H : has-cardinality X 2)
   where
   
   is-involution-aut-2-element-type : (e : X ≃ X) → htpy-equiv (e ∘e e) id-equiv
-  is-involution-aut-2-element-type e = {!!}
--}
+  is-involution-aut-2-element-type e x =
+    apply-universal-property-trunc-Prop
+      H
+
+
+
+      ( Id-Prop
+        ( pair X (is-set-mere-equiv (symmetric-mere-equiv H) (is-set-Fin 2)))
+        ( map-equiv (e ∘e e) x)
+        ( x))
+      ( λ h →
+        ( inv ((ap (λ y → map-equiv y (map-equiv (e ∘e e) x)) (right-inverse-law-equiv h)))) ∙
+        ( (inv (ap (λ y → map-equiv (((h ∘e inv-equiv h) ∘e (e ∘e e)) ∘e y) x) (right-inverse-law-equiv h))) ∙
+          ( (inv (ap (λ y → map-equiv (((h ∘e inv-equiv h) ∘e (e ∘e (y ∘e e))) ∘e (h ∘e inv-equiv h)) x) (right-inverse-law-equiv h))) ∙
+            ( (ap (map-equiv h) (is-involution-aut-Fin-two-ℕ (((inv-equiv h) ∘e e) ∘e h) (map-equiv (inv-equiv h) x))) ∙
+              (ap (λ y → map-equiv y x) (right-inverse-law-equiv h))))))
 ```
 
-### The elements of an arbitrary 2-element type can be swapped
+### The elements of an arbitrary 2-element type can be swapped (inv )
 
 #### The successor function on `Fin 2` is an involution
 
@@ -329,30 +376,9 @@ module _
 ### The swapping equivalence is an involution
 
 ```agda
-is-involution-succ-Fin-two-ℕ : ((succ-Fin {2}) ∘ (succ-Fin {2})) ~ id
-is-involution-succ-Fin-two-ℕ (inl (inr star)) = refl
-is-involution-succ-Fin-two-ℕ (inr star) = refl
-
 module _
   {l : Level} {X : UU l} (H : has-cardinality X 2)
   where
-
-  is-involution-swap-two-elements :
-    htpy-equiv (swap-two-elements H ∘e swap-two-elements H) id-equiv
-  is-involution-swap-two-elements x =
-    ( ap
-      ( ev-zero-equiv-Fin-two-ℕ)
-      ( ap
-        ( map-equiv (equiv-precomp-equiv equiv-succ-Fin X))
-        ( isretr-map-inv-equiv
-          ( equiv-ev-zero-equiv-Fin-two-ℕ H)
-          ( map-equiv
-            ( equiv-precomp-equiv equiv-succ-Fin X)
-            ( map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))))) ∙
-    ( ( ap
-        ( map-equiv (map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))
-        ( is-involution-succ-Fin-two-ℕ zero-Fin)) ∙
-      ( issec-map-inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H) x))
 
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
     ¬ (Id (equiv-precomp-equiv (equiv-succ-Fin {2}) X) id-equiv)
