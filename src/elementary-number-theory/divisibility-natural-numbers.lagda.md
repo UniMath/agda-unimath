@@ -20,14 +20,17 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; commutative-mul-ℕ; right-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
     right-distributive-mul-add-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ;
     is-one-right-is-one-mul-ℕ; is-one-is-left-unit-mul-ℕ; associative-mul-ℕ;
-    is-injective-mul-ℕ)
+    is-injective-mul-ℕ; is-emb-mul-ℕ')
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ)
+    
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
 open import foundation.negation using (¬)
+open import foundation.propositional-maps using (is-prop-map-is-emb)
+open import foundation.propositions using (is-prop)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -84,6 +87,13 @@ pr2 (div-zero-ℕ k) = left-zero-law-mul-ℕ k
 div-is-zero-ℕ :
   (k x : ℕ) → is-zero-ℕ x → div-ℕ k x
 div-is-zero-ℕ k .zero-ℕ refl = div-zero-ℕ k
+```
+
+## Divisibility by a nonzero natural number is a property
+
+```agda
+is-prop-div-ℕ : (k x : ℕ) → is-nonzero-ℕ k → is-prop (div-ℕ k x)
+is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-mul-ℕ' k f) x
 ```
 
 ## A three-for-two property of division

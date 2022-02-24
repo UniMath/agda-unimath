@@ -64,7 +64,7 @@ module _
 
 ## Properties
 
-###
+### Pointed homotopies are equivalent to identifications of pointed maps
 
 ```agda
 module _
@@ -240,4 +240,4 @@ module _
     (f g h : A →* B) → htpy-pointed-map A B f g → htpy-pointed-map A B g h →
     htpy-pointed-map A B f h
   concat-htpy-pointed-map = concat-htpy-pointed-Π A (constant-Pointed-Fam A B)
-```
+```  

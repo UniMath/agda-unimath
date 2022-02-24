@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Multiplication of integers
 
 ```agda
@@ -20,7 +16,7 @@ open import elementary-number-theory.addition-natural-numbers using
     left-successor-law-add-ℕ)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ)
-open import elementary-number-theory.equality-integers using (Eq-eq-ℤ)
+open import elementary-number-theory.equality-integers using (Eq-eq-ℤ; is-set-ℤ)
 open import elementary-number-theory.inequality-integers using
   ( leq-ℤ; preserves-leq-add-ℤ; concatenate-eq-leq-eq-ℤ)
 open import elementary-number-theory.integers using
@@ -31,11 +27,14 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+
 open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
-open import foundation.injective-maps using (is-injective)
+open import foundation.injective-maps using
+  ( is-injective; is-emb-is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.type-arithmetic-empty-type using
@@ -43,9 +42,11 @@ open import foundation.type-arithmetic-empty-type using
 open import foundation.unit-type using (star)
 ```
 
-# Multiplication of integers
+## Idea
 
-We give two definitions of multiplication on ℤ
+## Definitions
+
+### The standard definition of multiplication on ℤ
 
 ```agda
 mul-ℤ : ℤ → ℤ → ℤ
@@ -61,7 +62,11 @@ mul-ℤ' x y = mul-ℤ y x
 ap-mul-ℤ :
   {x y x' y' : ℤ} → Id x x' → Id y y' → Id (mul-ℤ x y) (mul-ℤ x' y')
 ap-mul-ℤ p q = ap-binary mul-ℤ p q
+```
 
+### A definition of multiplication that connects with multiplication on ℕ
+
+```agda
 explicit-mul-ℤ : ℤ → ℤ → ℤ
 explicit-mul-ℤ (inl x) (inl y) = int-ℕ (mul-ℕ (succ-ℕ x) (succ-ℕ y))
 explicit-mul-ℤ (inl x) (inr (inl star)) = zero-ℤ
@@ -79,7 +84,9 @@ explicit-mul-ℤ' : ℤ → ℤ → ℤ
 explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 ```
 
-## Laws for multiplication on ℤ
+## Properties
+
+### Laws for multiplication on ℤ
 
 ```agda
 left-zero-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ zero-ℤ k) zero-ℤ
@@ -313,6 +320,8 @@ is-mul-neg-one-neg-ℤ' x =
   is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
 ```
 
+### Positivity of multiplication
+
 ```agda
 is-positive-mul-ℤ :
   {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (mul-ℤ x y)
@@ -321,6 +330,8 @@ is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
   is-positive-add-ℤ {inr (inr y)} K
     ( is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} H K)
 ```
+
+### Computing multiplication of integers that come from natural numbers
 
 ```agda
 mul-int-ℕ : (x y : ℕ) → Id (mul-ℤ (int-ℕ x) (int-ℕ y)) (int-ℕ (mul-ℕ x y))
@@ -387,6 +398,8 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
     ( ap int-ℕ (commutative-add-ℕ (succ-ℕ y) (mul-ℕ (succ-ℕ x) (succ-ℕ y)))))
 ```
 
+### Linearity of the difference
+
 ```agda
 linear-diff-ℤ :
   (z x y : ℤ) → Id (diff-ℤ (mul-ℤ z x) (mul-ℤ z y)) (mul-ℤ z (diff-ℤ x y))
@@ -415,7 +428,11 @@ is-zero-is-zero-mul-ℤ (inr (inr x)) (inl y) H =
 is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inl star)) H = inr refl
 is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inr y)) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y))) ∙ H))
+```
 
+### Injectivity of multiplication
+
+```agda
 is-injective-mul-ℤ :
   (x : ℤ) → is-nonzero-ℤ x → is-injective (mul-ℤ x)
 is-injective-mul-ℤ x f {y} {z} p =
@@ -434,9 +451,17 @@ is-injective-mul-ℤ' x f {y} {z} p =
   is-injective-mul-ℤ x f (commutative-mul-ℤ x y ∙ (p ∙ commutative-mul-ℤ z x))
 ```
 
-```agda
--- Lemmas about positive integers
+### Multiplication by a nonzero integer is an embedding
 
+```agda
+is-emb-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ x)
+is-emb-mul-ℤ x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ x f)
+
+is-emb-mul-ℤ' : (x : ℤ) → is-nonzero-ℤ x → is-emb (mul-ℤ' x)
+is-emb-mul-ℤ' x f = is-emb-is-injective is-set-ℤ (is-injective-mul-ℤ' x f)  
+```
+
+```agda
 is-positive-left-factor-mul-ℤ :
   {x y : ℤ} → is-positive-ℤ (mul-ℤ x y) → is-positive-ℤ y → is-positive-ℤ x
 is-positive-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =

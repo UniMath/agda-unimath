@@ -10,7 +10,7 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.proper-divisors-natural-numbers where
 
 open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; div-zero-ℕ; leq-div-ℕ)
+  ( div-ℕ; div-zero-ℕ; leq-div-ℕ; is-prop-div-ℕ; is-zero-div-zero-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -20,12 +20,16 @@ open import
   ( is-decidable-div-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ)
+  
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.negation using (¬)
+open import foundation.empty-types using (ex-falso)
+open import foundation.identity-types using (Id; refl; inv)
+open import foundation.negation using (¬; is-prop-neg)
+open import foundation.propositions using
+  ( is-prop; is-prop-prod)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -50,4 +54,16 @@ le-is-proper-divisor-ℕ :
   (x y : ℕ) → is-nonzero-ℕ y → is-proper-divisor-ℕ y x → le-ℕ x y
 le-is-proper-divisor-ℕ x y H K =
   le-leq-neq-ℕ (leq-div-ℕ x y H (pr2 K)) (pr1 K)
+```
+
+## Properties
+
+### Being a proper divisor is a property
+
+```agda
+is-prop-is-proper-divisor-ℕ : (n d : ℕ) → is-prop (is-proper-divisor-ℕ n d)
+is-prop-is-proper-divisor-ℕ n zero-ℕ (pair f g) =
+  ex-falso (f (inv (is-zero-div-zero-ℕ n g)))
+is-prop-is-proper-divisor-ℕ n (succ-ℕ d) =
+  is-prop-prod is-prop-neg (is-prop-div-ℕ (succ-ℕ d) n (is-nonzero-succ-ℕ d))
 ```

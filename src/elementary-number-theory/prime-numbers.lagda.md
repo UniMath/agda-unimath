@@ -10,14 +10,14 @@ open import elementary-number-theory.decidable-dependent-function-types using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-one-ℕ; leq-div-succ-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ; Eq-eq-ℕ)
+  ( is-decidable-is-one-ℕ; Eq-eq-ℕ; is-set-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( right-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-not-one-two-ℕ)
 open import elementary-number-theory.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
-    is-decidable-is-proper-divisor-ℕ)
+    is-decidable-is-proper-divisor-ℕ; is-prop-is-proper-divisor-ℕ)
     
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr)
@@ -31,6 +31,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation.identity-types using (refl; inv; _∙_)
 open import foundation.logical-equivalences using (_↔_)
+open import foundation.propositions using (is-equiv-is-prop)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -86,16 +87,13 @@ pr1 (is-prime-is-prime-easy-ℕ n H x) = pr2 H x
 pr1 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) q = pr1 H (inv q)
 pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-ℕ n
 
-{-
--- This proof requires function extensionality
 has-unique-proper-divisor-is-prime-ℕ :
   (n : ℕ) → is-prime-ℕ n → has-unique-proper-divisor-ℕ n
 has-unique-proper-divisor-is-prime-ℕ n H =
   fundamental-theorem-id' 1
     ( pr2 (H 1) refl)
-    ( λ x → pr2 (H x) ∘ inv)
-    ( λ x → {!is-equiv-is-prop!})
-    -}
+    ( λ x p → pr2 (H x) (inv p))
+    ( λ x → is-equiv-is-prop (is-set-ℕ 1 x) (is-prop-is-proper-divisor-ℕ n x) (λ p → inv (pr1 (H x) p)))
 ```
 
 ### Being a prime is decidable

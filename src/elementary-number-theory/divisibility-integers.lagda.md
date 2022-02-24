@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Divisibility of integers
 
 ```agda
@@ -24,9 +20,11 @@ open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
     left-negative-law-mul-ℤ; mul-int-ℕ; is-nonnegative-left-factor-mul-ℤ;
-    compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ)
+    compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ;
+    is-emb-mul-ℤ')
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
+  
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using
@@ -36,18 +34,28 @@ open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import foundation.negation using (¬)
+open import foundation.propositional-maps using (is-prop-map-is-emb)
+open import foundation.propositions using (is-prop)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
-# Divisibility of integers
+## Idea
+
+An integer `d` divides an integer `x` if there is an integer `k` such that `mul-ℤ k d = x`. In other words, the type `div-ℤ d x` is the fiber `fib (mul-ℤ' d) x`.
+
+## Definition
 
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
 div-ℤ d x = Σ ℤ (λ k → Id (mul-ℤ k d) x)
+```
 
--- The divisibility relation is a preorder
+## Properties
 
+### The divisibility relation is a preorder
+
+```agda
 refl-div-ℤ : (x : ℤ) → div-ℤ x x
 pr1 (refl-div-ℤ x) = one-ℤ
 pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
@@ -59,33 +67,60 @@ pr2 (trans-div-ℤ x y z (pair d p) (pair e q)) =
   ( associative-mul-ℤ e d x) ∙
     ( ( ap (mul-ℤ e) p) ∙
       ( q))
+```
 
--- Basic properties of divisibility
+### Divisibility by a nonzero integer is a property
 
+```agda
+is-prop-div-ℤ : (d x : ℤ) → is-nonzero-ℤ d → is-prop (div-ℤ d x)
+is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-mul-ℤ' d f) x
+```
+
+### Every integer is divisible by 1
+
+```agda
 div-one-ℤ : (x : ℤ) → div-ℤ one-ℤ x
 pr1 (div-one-ℤ x) = x
 pr2 (div-one-ℤ x) = right-unit-law-mul-ℤ x
+```
 
+### Every integer divides 0
+
+```agda
 div-zero-ℤ : (x : ℤ) → div-ℤ x zero-ℤ
 pr1 (div-zero-ℤ x) = zero-ℤ
 pr2 (div-zero-ℤ x) = left-zero-law-mul-ℤ x
+```
 
+### Every integer that is divisible by 0 is 0.
+
+```agda
 is-zero-div-zero-ℤ :
   (x : ℤ) → div-ℤ zero-ℤ x → is-zero-ℤ x
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
+```
 
+### If `x` divides both `y` and `z`, then it divides `y + z`
+
+```agda
 div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (add-ℤ y z)
 pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = add-ℤ d e
 pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e x) ∙
   ( ap-add-ℤ p q)
+```
 
+### If `x` divides `y` then it divides `-y`
+
+```agda
 div-neg-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ x (neg-ℤ y)
 pr1 (div-neg-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ p
+```
 
--- Comparison of divisibility on ℕ and on ℤ
+### Comparison of divisibility on ℕ and on ℤ
 
+```agda
 div-int-div-ℕ :
   {x y : ℕ} → div-ℕ x y → div-ℤ (int-ℕ x) (int-ℕ y)
 pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
@@ -116,9 +151,11 @@ pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
               ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
               ( star)))) ∙
         ( p)))
+```
 
--- We introduce units
+### We introduce units
 
+```agda
 is-unit-ℤ : ℤ → UU lzero
 is-unit-ℤ x = div-ℤ x one-ℤ
 
