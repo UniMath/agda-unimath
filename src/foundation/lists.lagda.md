@@ -37,6 +37,11 @@ fold-list :
 fold-list b μ nil = b
 fold-list b μ (cons a l) = μ a (fold-list b μ l)
 
+map-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  list A → list B
+map-list f = fold-list nil (λ a → cons (f a)) 
+
 length-list : {l : Level} {A : UU l} → list A → ℕ
 length-list = fold-list 0 (λ a → succ-ℕ)
 

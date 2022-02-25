@@ -339,10 +339,7 @@ module _
   is-involution-aut-2-element-type : (e : X ≃ X) → htpy-equiv (e ∘e e) id-equiv
   is-involution-aut-2-element-type e x =
     apply-universal-property-trunc-Prop
-      H
-
-
-
+      ( H)
       ( Id-Prop
         ( pair X (is-set-mere-equiv (symmetric-mere-equiv H) (is-set-Fin 2)))
         ( map-equiv (e ∘e e) x)
@@ -371,11 +368,7 @@ module _
     ( equiv-ev-zero-equiv-Fin-two-ℕ H) ∘e
     ( ( equiv-precomp-equiv equiv-succ-Fin X) ∘e
       ( inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H)))
-```
 
-### The swapping equivalence is an involution
-
-```agda
 module _
   {l : Level} {X : UU l} (H : has-cardinality X 2)
   where
