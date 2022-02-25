@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Proper divisors of natural numbers
 
 ```agda
@@ -10,7 +6,8 @@ title: Univalent Mathematics in Agda
 module elementary-number-theory.proper-divisors-natural-numbers where
 
 open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; div-zero-ℕ; leq-div-ℕ; is-prop-div-ℕ; is-zero-div-zero-ℕ)
+  ( div-ℕ; div-zero-ℕ; leq-div-ℕ; is-prop-div-ℕ; is-zero-div-zero-ℕ;
+    is-one-div-one-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -18,6 +15,8 @@ open import elementary-number-theory.inequality-natural-numbers using
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( right-unit-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ)
   
@@ -33,7 +32,9 @@ open import foundation.propositions using
 open import foundation.universe-levels using (UU; lzero)
 ```
 
-# Proper divisors of natural numbers
+## Idea
+
+ A proper divisor of a natural number `n` is a natural number `d ≠ n` that divides `n`.
 
 ```agda
 is-proper-divisor-ℕ : ℕ → ℕ → UU lzero
@@ -66,4 +67,16 @@ is-prop-is-proper-divisor-ℕ n zero-ℕ (pair f g) =
   ex-falso (f (inv (is-zero-div-zero-ℕ n g)))
 is-prop-is-proper-divisor-ℕ n (succ-ℕ d) =
   is-prop-prod is-prop-neg (is-prop-div-ℕ (succ-ℕ d) n (is-nonzero-succ-ℕ d))
+```
+
+### If a natural number has a proper divisor, then `1` is a proper divisor
+
+```agda
+is-proper-divisor-one-is-proper-divisor-ℕ :
+  {n x : ℕ} → is-proper-divisor-ℕ n x → is-proper-divisor-ℕ n 1
+pr1 (is-proper-divisor-one-is-proper-divisor-ℕ {.1} {x} H) refl =
+  pr1 H (is-one-div-one-ℕ x (pr2 H))
+pr1 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) = n
+pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
+  right-unit-law-mul-ℕ n
 ```
