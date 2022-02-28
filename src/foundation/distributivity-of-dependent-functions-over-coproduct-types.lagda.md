@@ -7,11 +7,6 @@ module
   foundation.distributivity-of-dependent-functions-over-coproduct-types
   where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( is-contr-is-zero-or-one-Fin-two-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin; is-zero-Fin; is-one-Fin)
-
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-diagonal-is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
@@ -36,6 +31,11 @@ open import foundation.unit-type using (star)
 open import foundation.universal-property-coproduct-types using
   ( equiv-universal-property-coprod)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( is-contr-is-zero-or-one-Fin-two-ℕ)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; zero-Fin; one-Fin; is-zero-Fin; is-one-Fin)
 ```
 
 ## Idea

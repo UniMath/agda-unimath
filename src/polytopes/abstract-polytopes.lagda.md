@@ -18,8 +18,6 @@ open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; inl-Fin; succ-Fin; zero-Fin; neg-one-Fin)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-Prop)
@@ -64,6 +62,8 @@ open import order-theory.finitely-graded-posets using
 open import order-theory.posets using (Poset)
 
 open import univalent-combinatorics.finite-types using (has-cardinality-Prop)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; inl-Fin; succ-Fin; zero-Fin; neg-one-Fin)
 ```
 
 ## Idea

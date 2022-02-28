@@ -7,11 +7,6 @@ module univalent-combinatorics.2-element-types where
 
 open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ)
-open import elementary-number-theory.equality-standard-finite-types using
-  ( Eq-Fin-eq)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
-    is-not-contractible-Fin; succ-Fin)
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr)
@@ -47,9 +42,14 @@ open import foundation.type-arithmetic-empty-type using
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero)
 
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( Eq-Fin-eq)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
     Fin-UU-Fin; has-cardinality)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
+    is-not-contractible-Fin; succ-Fin)
 ```
 
 ## Idea

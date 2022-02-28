@@ -12,7 +12,6 @@ open import elementary-number-theory.inequality-natural-numbers using
     is-decidable-le-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 open import elementary-number-theory.upper-bounds-natural-numbers using
   ( is-upper-bound-ℕ; is-strict-upper-bound-ℕ)
 
@@ -23,6 +22,8 @@ open import foundation.empty-types using (ind-empty; ex-falso)
 open import foundation.functions using (id)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

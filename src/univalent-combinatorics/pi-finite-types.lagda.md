@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+# π-finite types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
@@ -8,7 +6,6 @@ title: Formalisation of the Symmetry Book
 module univalent-combinatorics.pi-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.connected-types using
@@ -124,13 +121,14 @@ open import univalent-combinatorics.finite-types using
 open import univalent-combinatorics.finitely-presented-types using
   ( has-finite-presentation-has-cardinality-components)
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
+open import univalent-combinatorics.standard-finite-types using (Fin)
+```
 
-{-------------------------------------------------------------------------------
+## Idea
 
-  Univalent combinatorics
+A type is `π_n`-finite if it has finitely many connected components and all of its homotopy groups up to level `n` at all base points are finite.
 
--------------------------------------------------------------------------------}
-
+```agda
 truncation-level-ℕ : ℕ → 𝕋
 truncation-level-ℕ zero-ℕ = zero-𝕋
 truncation-level-ℕ (succ-ℕ n) = succ-𝕋 (truncation-level-ℕ n)

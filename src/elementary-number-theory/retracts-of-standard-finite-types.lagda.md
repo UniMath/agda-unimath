@@ -5,15 +5,16 @@
 
 module elementary-number-theory.retracts-of-standard-finite-types where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.decidable-maps using
   ( is-decidable-map; is-decidable-map-retr)
 open import foundation.retractions using (retr)
 open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( has-decidable-equality-Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea
