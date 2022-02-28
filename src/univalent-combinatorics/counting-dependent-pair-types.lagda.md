@@ -10,7 +10,6 @@ open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ; has-decidable-equality-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-successor-is-nonzero-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin; zero-Fin)
 open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-Fin-ℕ; sum-count-ℕ)
 
@@ -47,6 +46,7 @@ open import univalent-combinatorics.counting-coproduct-types using
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-eq; is-decidable-count)
 open import univalent-combinatorics.double-counting using (double-counting)
+open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)
 ```
 
 ## Idea

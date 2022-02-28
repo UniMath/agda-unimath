@@ -6,7 +6,6 @@
 module wild-algebra.magmas where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
@@ -18,6 +17,7 @@ open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import univalent-combinatorics.counting using (count; map-equiv-count)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

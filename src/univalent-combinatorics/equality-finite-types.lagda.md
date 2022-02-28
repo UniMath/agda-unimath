@@ -5,8 +5,6 @@
 
 module univalent-combinatorics.equality-finite-types where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.decidable-equality using
@@ -23,6 +21,8 @@ open import univalent-combinatorics.counting using
   ( is-set-count; equiv-count)
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-eq)
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; has-cardinality; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽)
 ```

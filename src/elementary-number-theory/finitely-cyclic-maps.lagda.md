@@ -17,14 +17,16 @@ open import
     neg-Fin; issec-nat-Fin; commutative-add-Fin; associative-add-Fin;
     left-inverse-law-add-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; succ-Fin; nat-Fin)
+
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; _∙_; inv; ap)
 open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; succ-Fin; nat-Fin)
 ```
 
 # Finitely cyclic maps

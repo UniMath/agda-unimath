@@ -5,8 +5,6 @@
 
 module univalent-combinatorics.counting-cartesian-product-types where
 
-open import elementary-number-theory.equivalences-standard-finite-types using
-  ( prod-Fin)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 
@@ -35,6 +33,8 @@ open import univalent-combinatorics.counting-decidable-subtypes using
 open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-Σ)
 open import univalent-combinatorics.double-counting using (double-counting)
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( prod-Fin)
 ```
 
 ```agda

@@ -17,12 +17,14 @@ open import
   ( mod-succ-ℕ; issec-nat-Fin; cong-nat-mod-succ-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; nat-Fin; strict-upper-bound-nat-Fin)
+
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; refl)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; nat-Fin; strict-upper-bound-nat-Fin)
 ```
 
 # The classical finite types

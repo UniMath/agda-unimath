@@ -5,10 +5,7 @@
 
 module univalent-combinatorics.finitely-presented-types where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( Fin-Set)
 open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-equiv; is-equiv-htpy-equiv)
@@ -22,9 +19,12 @@ open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
 open import foundation.universe-levels using (Level; UU)
 
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( Fin-Set)
 open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
 open import univalent-combinatorics.finite-connected-components using
   ( has-cardinality-components; has-cardinality-components-Prop)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

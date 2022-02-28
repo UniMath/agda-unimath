@@ -5,16 +5,68 @@
 
 module polytopes.abstract-polytopes where
 
-open import order-theory public
+-- open import order-theory public
 
+{-
 open import foundation
 open import elementary-number-theory
 open import univalent-combinatorics
 open import univalent-foundations
+-}
 
+open import elementary-number-theory.inequality-standard-finite-types using
+  ( leq-Fin)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ)
+
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.contractible-types using (is-contr; is-contr-Prop)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.disjunction using (disj-Prop)
+open import foundation.identity-types using (Id; tr; inv)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
+open import foundation.propositions using
+  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.sets using (UU-Set; is-set; Id-Prop)
+open import foundation.unit-type using (raise-unit-Prop; unit; star)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import order-theory.finitely-graded-posets using
+  ( Finitely-Graded-Poset; face-Finitely-Graded-Poset;
+    adjacent-Finitely-Graded-Poset; least-element-Finitely-Graded-Poset;
+    least-and-largest-element-Finitely-Graded-Poset;
+    largest-element-Finitely-Graded-Poset; face-finitely-graded-poset-Set;
+    is-set-face-Finitely-Graded-Poset; adjacent-finitely-graded-poset-Prop;
+    is-prop-adjacent-Finitely-Graded-Poset; element-finitely-graded-poset-Set;
+    element-Finitely-Graded-Poset; is-set-element-Finitely-Graded-Poset;
+    element-face-Finitely-Graded-Poset; type-element-Finitely-Graded-Poset;
+    face-element-Finitely-Graded-Poset; path-faces-Finitely-Graded-Poset;
+    refl-path-faces-Finitely-Graded-Poset;
+    cons-path-faces-Finitely-Graded-Poset;
+    tr-refl-path-faces-Finitely-Graded-Poset;
+    concat-path-faces-Finitely-Graded-Poset;
+    path-elements-Finitely-Graded-Poset;
+    refl-path-elements-Finitely-Graded-Poset;
+    concat-path-elements-Finitely-Graded-Poset;
+    leq-type-path-faces-Finitely-Graded-Poset;
+    eq-path-elements-Finitely-Graded-Poset;
+    eq-path-faces-Finitely-Graded-Poset;
+    antisymmetric-path-elements-Finitely-Graded-Poset;
+    leq-finitely-graded-poset-Prop; leq-Finitely-Graded-Poset;
+    is-prop-leq-Finitely-Graded-Poset; refl-leq-Finitely-Graded-Poset;
+    transitive-leq-Finitely-Graded-Poset;
+    antisymmetric-leq-Finitely-Graded-Poset; poset-Finitely-Graded-Poset;
+    chain-Finitely-Graded-Poset; maximal-chain-Finitely-Graded-Poset;
+    subtype-maximal-chain-Finitely-Graded-Poset)
+open import order-theory.posets using (Poset)
+
+open import univalent-combinatorics.finite-types using (has-cardinality-Prop)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; inl-Fin; succ-Fin; zero-Fin; neg-one-Fin)
 ```
 
-### The axioms of Abstract Polytopes
+## Idea
 
 We define abstract polytopes as finitely graded posets satisfying certain axioms. In the classical definition, the grading is a consequence of the axioms. Here, we take finitely graded posets as our starting point
 
@@ -23,6 +75,10 @@ The first axiom of polytopes asserts that polytopes have a least and a largest e
 `least-and-largest-element-finitely-graded-poset-Prop`.
 
 Next, we assert the diamond condition for abstract polytopes.
+
+## Definition
+
+### The diamond condition
 
 ```agda
 
@@ -66,7 +122,7 @@ module _
     is-prop-type-Prop (diamond-condition-finitely-graded-poset-Prop X)
 ```
 
-### Some terminology of polytopes
+### Prepolytopes
 
 We introduce the notion of prepolytopes to be finitely graded posets equipped with a least and a largest element, and satisfying the diamond condition. Before we state the remaining conditions of polytopes, we introduce some terminology
 
@@ -78,7 +134,13 @@ Prepolytope l1 l2 k =
     ( λ X →
       least-and-largest-element-Finitely-Graded-Poset X ×
       diamond-condition-Finitely-Graded-Poset X)
+```
 
+## Properties
+
+### Basic structure of prepolytopes
+
+```agda
 module _
   {l1 l2 : Level} {k : ℕ} (X : Prepolytope l1 l2 k)
   where

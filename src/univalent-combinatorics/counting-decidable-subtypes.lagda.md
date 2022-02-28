@@ -6,7 +6,6 @@
 module univalent-combinatorics.counting-decidable-subtypes where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (zero-Fin; Fin)
 
 open import foundation.contractible-types using (equiv-is-contr; is-contr-Σ)
 open import foundation.coproduct-types using (inl; inr)
@@ -43,6 +42,7 @@ open import univalent-combinatorics.counting using
     has-decidable-equality-count)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-equiv')
+open import univalent-combinatorics.standard-finite-types using (zero-Fin; Fin)
 ```
 
 ### Propositions have countings if and only if they are decidable

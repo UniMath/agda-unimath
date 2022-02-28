@@ -5,9 +5,6 @@
 
 module foundation.global-choice where
 
-open import elementary-number-theory.standard-finite-types using
-  ( zero-Fin)
-
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -23,6 +20,8 @@ open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import univalent-combinatorics.2-element-types using
   ( no-section-type-UU-Fin-Level-two-ℕ)
+open import univalent-combinatorics.standard-finite-types using
+  ( zero-Fin)
 ```
 
 ## Idea

@@ -7,10 +7,7 @@ module
   univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
   where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( Fin-Set)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.contractible-types using
   ( is-contr; is-equiv-is-contr; center; is-contr-equiv; is-contr-equiv';
@@ -51,7 +48,10 @@ open import foundation.universal-property-maybe using
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using (count)
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( Fin-Set)
 open import univalent-combinatorics.finite-types using (is-finite)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ```agda

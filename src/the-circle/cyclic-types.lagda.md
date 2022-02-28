@@ -9,6 +9,7 @@ module the-circle.cyclic-types where
 
 open import foundation public
 open import groups public
+open import univalent-combinatorics public
 
 Endo : (l : Level) → UU (lsuc l)
 Endo l = Σ (UU l) (λ X → X → X)

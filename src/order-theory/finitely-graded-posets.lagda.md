@@ -8,6 +8,7 @@ title: Formalisation of the Symmetry Book
 module order-theory.finitely-graded-posets where
 
 open import order-theory.posets public
+open import univalent-combinatorics public
 ```
 
 ## Finitely Graded Posets

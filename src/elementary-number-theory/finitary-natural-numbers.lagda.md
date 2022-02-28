@@ -22,9 +22,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
     right-successor-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; nat-Fin; strict-upper-bound-nat-Fin; is-injective-nat-Fin; zero-Fin;
-    succ-Fin; nat-succ-Fin; is-zero-nat-zero-Fin)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair)
 open import foundation.empty-types using (is-empty; ex-falso)
@@ -33,6 +31,10 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; nat-Fin; strict-upper-bound-nat-Fin; is-injective-nat-Fin; zero-Fin;
+    succ-Fin; nat-succ-Fin; is-zero-nat-zero-Fin)
 ```
 
 # The finitary natural numbers

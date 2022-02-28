@@ -6,7 +6,6 @@
 module univalent-combinatorics.finite-choice where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin; zero-Fin)
 open import
   elementary-number-theory.well-ordering-principle-standard-finite-types using
   ( global-choice-decidable-subtype-Fin)
@@ -48,6 +47,7 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-domain-emb-is-finite-domain-emb)
 open import univalent-combinatorics.finite-types using (is-finite)
+open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)
 ```
 
 ## Idea

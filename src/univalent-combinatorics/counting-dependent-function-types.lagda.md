@@ -6,7 +6,6 @@
 module univalent-combinatorics.counting-dependent-function-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.equivalences using (equiv-precomp-Π)
@@ -24,6 +23,7 @@ open import univalent-combinatorics.counting using
   ( count; count-is-contr; count-equiv'; equiv-count; map-equiv-count)
 open import univalent-combinatorics.counting-cartesian-product-types using
   ( count-prod)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

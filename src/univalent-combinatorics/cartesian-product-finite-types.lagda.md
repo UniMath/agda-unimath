@@ -5,12 +5,9 @@
 
 module univalent-combinatorics.cartesian-product-finite-types where
 
-open import elementary-number-theory.equivalences-standard-finite-types using
-  ( prod-Fin)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -27,9 +24,12 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import univalent-combinatorics.counting using (count)
 open import univalent-combinatorics.counting-cartesian-product-types using
   ( count-prod; count-left-factor; count-right-factor)
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( prod-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
     UU-Fin-Level; UU-Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

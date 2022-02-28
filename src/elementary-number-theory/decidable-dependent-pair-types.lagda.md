@@ -10,7 +10,6 @@ open import foundation.decidable-dependent-pair-types public
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ; le-ℕ; is-decidable-le-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 open import elementary-number-theory.upper-bounds-natural-numbers using
   ( is-upper-bound-ℕ; is-strict-upper-bound-ℕ;
     is-upper-bound-is-strict-upper-bound-ℕ)
@@ -24,6 +23,8 @@ open import foundation.empty-types using (empty; ex-falso)
 open import foundation.functions using (_∘_; id)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

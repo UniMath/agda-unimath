@@ -8,7 +8,6 @@ module univalent-combinatorics.inequality-types-with-counting where
 open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin; refl-leq-Fin; antisymmetric-leq-Fin; transitive-leq-Fin;
     concatenate-eq-leq-eq-Fin)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
@@ -20,6 +19,7 @@ open import foundation.universe-levels using (Level; UU; lzero)
 open import univalent-combinatorics.counting using
   ( count; map-inv-equiv-count; number-of-elements-count; map-equiv-count;
     equiv-count)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

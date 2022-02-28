@@ -5,17 +5,11 @@
 
 module univalent-combinatorics.pigeonhole-principle where
 
-open import elementary-number-theory.embeddings-standard-finite-types using
-  ( reduce-emb-Fin)
-open import elementary-number-theory.equality-standard-finite-types using
-  ( is-set-Fin)
 open import elementary-number-theory.inequality-natural-numbers using
   ( _≤-ℕ_; refl-leq-ℕ; leq-zero-ℕ; le-ℕ; contradiction-le-ℕ; le-succ-ℕ;
     contradiction-leq-ℕ; leq-ℕ-Prop; concatenate-eq-leq-eq-ℕ;
     concatenate-eq-le-eq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; emb-nat-Fin)
 
 open import foundation.coproduct-types using (coprod; inr; inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -35,11 +29,17 @@ open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; inv-equiv-count; equiv-count; is-set-count)
+open import univalent-combinatorics.embeddings-standard-finite-types using
+  ( reduce-emb-Fin)
 open import univalent-combinatorics.equality-finite-types using
   ( is-set-is-finite)
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( is-set-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; number-of-elements-is-finite;
     compute-number-of-elements-is-finite)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; emb-nat-Fin)
 ```
 
 ## Idea

@@ -5,10 +5,9 @@
 
 module univalent-combinatorics.sums-of-natural-numbers where
 
-open import elementary-number-theory.sums-of-natural-numbers public
 
 open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
+open import elementary-number-theory.sums-of-natural-numbers public
 
 open import foundation.dependent-pair-types using (ind-Σ)
 open import foundation.identity-types using (Id; inv; _∙_)
@@ -21,6 +20,7 @@ open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-Σ; number-of-elements-count-Σ)
 open import univalent-combinatorics.double-counting using
   ( double-counting-equiv)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

@@ -15,8 +15,6 @@ open import elementary-number-theory.inequality-standard-finite-types using
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
   using (mod-succ-ℕ; issec-nat-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; inl-Fin; neg-one-Fin; nat-Fin)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( global-choice-decidable-subtype-ℕ)
@@ -51,6 +49,9 @@ open import foundation.type-arithmetic-empty-type using
 open import foundation.type-arithmetic-unit-type using (left-unit-law-Σ)
 open import foundation.unit-type using (unit; star; ind-unit)
 open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; inl-Fin; neg-one-Fin; nat-Fin)
 ```
 
 # The well-ordering principle on the standard finite types

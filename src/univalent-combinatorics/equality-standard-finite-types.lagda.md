@@ -3,12 +3,9 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module elementary-number-theory.equality-standard-finite-types where
+module univalent-combinatorics.equality-standard-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
-    is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ)
     
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod)
@@ -29,6 +26,10 @@ open import foundation.set-truncations using
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
+    is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ)
 ```
 
 ## Idea
