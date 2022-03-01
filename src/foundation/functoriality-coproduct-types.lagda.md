@@ -5,12 +5,16 @@
 
 module foundation.functoriality-coproduct-types where
 
-open import foundation.coproduct-types using (coprod; inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.coproduct-types using (coprod; inl; inr; is-injective-inl; neq-inr-inl)
+open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
+open import foundation.equivalences using
+  ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; is-emb-is-equiv;
+    map-equiv; map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_)
+open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
-open import foundation.identity-types using (refl; ap)
+open import foundation.identity-types using (Id; inv; refl; ap; _∙_)
+open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -116,4 +120,82 @@ equiv-coprod :
 pr1 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) = map-coprod e f
 pr2 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) =
   is-equiv-map-coprod is-equiv-e is-equiv-f
+```
+
+### If there exist `f : A 
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} 
+  where
+
+  equiv-coproduct-induce-equiv-disjoint : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) (x : A) (y : B) → ¬ (Id (map-equiv f (inl x)) (inr y))
+  equiv-coproduct-induce-equiv-disjoint f g p x y q =
+    neq-inr-inl
+      ( map-inv-equiv
+        ( pair
+          ( ap (map-equiv f))
+          ( is-emb-is-equiv (pr2 f) (inr (map-inv-equiv g y)) (inl x)))
+        ( ( p (map-equiv (inv-equiv g) y) ∙
+          ( (ap (λ z → inr (map-equiv z y)) (right-inverse-law-equiv g)) ∙ inv q))))
+
+  inv-commutative-square-inr : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) → (b : B) → Id (map-inv-equiv f (inr b)) (inr (map-inv-equiv g b)) 
+  inv-commutative-square-inr f g p b =
+    map-inv-equiv
+      ( pair (ap (map-equiv f)) (is-emb-is-equiv (pr2 f) (map-inv-equiv f (inr b)) (inr (map-inv-equiv g b))))
+      ( (ap (λ z → map-equiv z (inr b)) (right-inverse-law-equiv f)) ∙
+        ( inv (ap (λ z → inr (map-equiv z b)) (right-inverse-law-equiv g)) ∙ inv (p (map-inv-equiv g b))))
+  
+  cases-retr-equiv-coprod : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) (x : A) (y : coprod A B) → Id (map-equiv f (inl x)) y → A
+  cases-retr-equiv-coprod f g p x (inl y) q = y
+  cases-retr-equiv-coprod f g p x (inr y) q = ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
+  
+  inv-cases-retr-equiv-coprod : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) (x : A) (y : coprod A B) → Id (map-inv-equiv f (inl x)) y → A
+  inv-cases-retr-equiv-coprod f g p = cases-retr-equiv-coprod (inv-equiv f) (inv-equiv g) (inv-commutative-square-inr f g p)
+
+  retr-cases-retr-equiv-coprod : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) (x : A) (y z : coprod A B) →
+    (q : Id (map-equiv f (inl x)) y) → (r : Id (map-inv-equiv f (inl (cases-retr-equiv-coprod f g p x y q))) z) →
+    Id (inv-cases-retr-equiv-coprod f g p (cases-retr-equiv-coprod f g p x y q) z r) x   
+  retr-cases-retr-equiv-coprod f g p x (inl y) (inl z) q r =
+    is-injective-inl (inv r ∙ (ap (map-inv-equiv f) (inv q) ∙ ap (λ w → map-equiv w (inl x)) (left-inverse-law-equiv f)))
+  retr-cases-retr-equiv-coprod f g p x (inl y) (inr z) q r =
+    ex-falso
+      ( equiv-coproduct-induce-equiv-disjoint (inv-equiv f) (inv-equiv g) (inv-commutative-square-inr f g p) y z r) 
+  retr-cases-retr-equiv-coprod f g p x (inr y) z q r = ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
+
+  sec-cases-retr-equiv-coprod : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) (x : A) (y z : coprod A B) →
+    (q : Id (map-inv-equiv f (inl x)) y) → (r : Id (map-equiv f (inl (inv-cases-retr-equiv-coprod f g p x y q))) z) →
+    Id (cases-retr-equiv-coprod f g p (inv-cases-retr-equiv-coprod f g p x y q) z r) x   
+  sec-cases-retr-equiv-coprod f g p x (inl y) (inl z) q r =
+    is-injective-inl (inv r ∙ (ap (map-equiv f) (inv q) ∙ ap (λ w → map-equiv w (inl x)) (right-inverse-law-equiv f)))
+  sec-cases-retr-equiv-coprod f g p x (inl y) (inr z) q r = ex-falso (equiv-coproduct-induce-equiv-disjoint f g p y z r)
+  sec-cases-retr-equiv-coprod f g p x (inr y) z q r =
+    ex-falso
+      ( equiv-coproduct-induce-equiv-disjoint (inv-equiv f) (inv-equiv g) (inv-commutative-square-inr f g p) x y q)
+
+  retr-equiv-coprod : (f : coprod A B ≃ coprod A B) (g : B ≃ B) (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) →
+    Σ (A ≃ A) (λ h → htpy-equiv f (equiv-coprod h g))
+  pr1 (pr1 (retr-equiv-coprod f g p)) x = cases-retr-equiv-coprod f g p x (map-equiv f (inl x)) refl
+  pr2 (pr1 (retr-equiv-coprod f g p)) =
+    is-equiv-has-inverse
+      ( λ x → inv-cases-retr-equiv-coprod f g p x (map-inv-equiv f (inl x)) refl)
+      (λ x →
+        sec-cases-retr-equiv-coprod f g p x (map-inv-equiv f (inl x))
+          ( map-equiv f (inl (inv-cases-retr-equiv-coprod f g p x (map-inv-equiv f (inl x)) refl))) refl refl)
+      (λ x →
+        retr-cases-retr-equiv-coprod f g p x (map-equiv f (inl x))
+          (map-inv-equiv f (inl (cases-retr-equiv-coprod f g p x (map-equiv f (inl x)) refl))) refl refl)
+  pr2 (retr-equiv-coprod f g p) (inl x) = commutative-square-inl-retr-equiv-coprod x (map-equiv f (inl x)) refl
+    where
+    commutative-square-inl-retr-equiv-coprod : (x : A) (y : coprod A B) (q : Id (map-equiv f (inl x)) y) →
+      Id (map-equiv f (inl x)) (inl (cases-retr-equiv-coprod f g p x y q))
+    commutative-square-inl-retr-equiv-coprod x (inl y) q = q
+    commutative-square-inl-retr-equiv-coprod x (inr y) q = ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
+  pr2 (retr-equiv-coprod f g p) (inr x) = p x
 ```
