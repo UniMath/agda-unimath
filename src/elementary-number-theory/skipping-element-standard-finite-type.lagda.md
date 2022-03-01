@@ -5,11 +5,7 @@
 
 module elementary-number-theory.skipping-element-standard-finite-type where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( is-set-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin)
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -19,6 +15,11 @@ open import foundation.identity-types using (ap; refl)
 open import foundation.injective-maps using
   ( is-injective; is-injective-is-emb; is-emb-is-injective)
 open import foundation.unit-type using (star; unit)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( is-set-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin)
 ```
 
 ```agda

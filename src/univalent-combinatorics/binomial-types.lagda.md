@@ -6,11 +6,7 @@
 module univalent-combinatorics.binomial-types where
 
 open import elementary-number-theory.binomial-coefficients using (_choose-ℕ_)
-open import elementary-number-theory.equivalences-standard-finite-types using
-  ( Fin-add-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; is-contr-Fin-one-ℕ)
 
 open import foundation.booleans using (bool; true; false)
 open import foundation.connected-components-universes using
@@ -73,12 +69,16 @@ open import foundation.universal-property-maybe using
   ( equiv-universal-property-Maybe)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( Fin-add-ℕ)
 open import univalent-combinatorics.finite-types using
   ( Fin-UU-Fin-Level; has-cardinality; has-cardinality-Prop; UU-Fin-Level;
     type-UU-Fin-Level; mere-equiv-UU-Fin-Level; UU-Fin; type-UU-Fin;
     mere-equiv-UU-Fin; has-finite-cardinality; is-finite;
     is-finite-has-finite-cardinality; has-finite-cardinality-is-finite; 𝔽;
     type-𝔽; is-finite-type-𝔽; is-finite-equiv)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; is-contr-Fin-one-ℕ)
 ```
 
 ## Idea

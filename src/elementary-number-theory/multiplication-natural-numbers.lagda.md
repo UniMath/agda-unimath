@@ -166,8 +166,7 @@ is-injective-mul-succ-ℕ' k {succ-ℕ m} {succ-ℕ n} p =
           ( ( p) ∙
             ( left-successor-law-mul-ℕ n (succ-ℕ k))))))
 
-is-injective-mul-ℕ' :
-  (k : ℕ) → is-nonzero-ℕ k → is-injective (mul-ℕ' k)
+is-injective-mul-ℕ' : (k : ℕ) → is-nonzero-ℕ k → is-injective (mul-ℕ' k)
 is-injective-mul-ℕ' k H p with
   is-successor-is-nonzero-ℕ H
 ... | pair l refl = is-injective-mul-succ-ℕ' l p

@@ -5,10 +5,7 @@
 
 module elementary-number-theory.repeating-element-standard-finite-type where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( Eq-Fin-eq)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-injective-inl)
@@ -16,6 +13,10 @@ open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (Id; ap; refl; inv)
 open import foundation.negation using (¬)
 open import foundation.unit-type using (star)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( Eq-Fin-eq)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ```agda

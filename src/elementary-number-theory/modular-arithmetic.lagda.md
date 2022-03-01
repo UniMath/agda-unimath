@@ -28,8 +28,6 @@ open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)
 open import elementary-number-theory.equality-integers using
   ( has-decidable-equality-ℤ; is-set-ℤ)
-open import elementary-number-theory.equality-standard-finite-types using
-  ( has-decidable-equality-Fin; is-set-Fin)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
@@ -44,10 +42,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; neg-one-Fin; one-Fin; nat-Fin; is-injective-nat-Fin;
-    is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin;
-    is-equiv-succ-Fin; is-equiv-pred-Fin)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
@@ -59,6 +54,13 @@ open import foundation.negation using (¬; map-neg)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( has-decidable-equality-Fin; is-set-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; zero-Fin; neg-one-Fin; one-Fin; nat-Fin; is-injective-nat-Fin;
+    is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin;
+    is-equiv-succ-Fin; is-equiv-pred-Fin)
 ```
 
 Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.

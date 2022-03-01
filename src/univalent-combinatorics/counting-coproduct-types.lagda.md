@@ -6,8 +6,6 @@
 module univalent-combinatorics.counting-coproduct-types where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.equivalences-standard-finite-types using
-  ( coprod-Fin)
 
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-left-Prop; is-right-Prop; equiv-left-summand;
@@ -25,6 +23,8 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-decidable-subtype)
 open import univalent-combinatorics.double-counting using (double-counting)
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( coprod-Fin)
 ```
 
 ## Idea

@@ -5,10 +5,6 @@
 
 module foundation.unordered-pairs where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( is-set-Fin; has-decidable-equality-Fin)
-open import elementary-number-theory.standard-finite-types using (Fin)
-
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using (has-decidable-equality)
@@ -38,9 +34,12 @@ open import foundation.structure-identity-principle using
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( is-set-Fin; has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin; Fin-UU-Fin; equiv-UU-Fin; id-equiv-UU-Fin;
     is-contr-total-equiv-UU-Fin; type-UU-Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

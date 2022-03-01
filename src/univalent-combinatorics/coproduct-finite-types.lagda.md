@@ -6,10 +6,7 @@
 module univalent-combinatorics.coproduct-finite-types where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.equivalences-standard-finite-types using
-  ( coprod-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -26,9 +23,12 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import univalent-combinatorics.counting using (count)
 open import univalent-combinatorics.counting-coproduct-types using
   ( count-coprod; count-left-summand; count-right-summand)
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( coprod-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
     UU-Fin-Level; UU-Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea

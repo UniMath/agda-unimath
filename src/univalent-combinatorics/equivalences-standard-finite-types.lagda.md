@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module elementary-number-theory.equivalences-standard-finite-types where
+module univalent-combinatorics.equivalences-standard-finite-types where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.exponentiation-natural-numbers using
@@ -11,7 +11,6 @@ open import elementary-number-theory.exponentiation-natural-numbers using
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin; zero-Fin)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr)
@@ -36,6 +35,8 @@ open import foundation.universal-property-empty-type using
   ( universal-property-empty')
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
+
+open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)
 ```
 
 ## Idea

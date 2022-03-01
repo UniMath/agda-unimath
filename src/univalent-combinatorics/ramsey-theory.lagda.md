@@ -8,7 +8,6 @@ title: Formalisation of the Symmetry Book
 module univalent-combinatorics.ramsey-theory where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using (Fin)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
@@ -18,6 +17,7 @@ open import foundation.universe-levels using (Level; UU; lzero; lsuc)
 
 open import univalent-combinatorics.finite-types using
   ( 𝔽; type-𝔽; has-cardinality)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 
 coloring : {l : Level} (k : ℕ) → UU l → UU l
 coloring k X = X → Fin k

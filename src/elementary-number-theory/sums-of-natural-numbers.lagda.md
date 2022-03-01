@@ -10,8 +10,6 @@ open import elementary-number-theory.addition-natural-numbers using
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin)
 
 open import foundation.constant-maps using (const)
 open import foundation.coproduct-types using (inl; inr)
@@ -25,6 +23,8 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin)
 ```
 
 ## Idea

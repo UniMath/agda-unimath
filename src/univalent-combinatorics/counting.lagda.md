@@ -5,12 +5,8 @@
 
 module univalent-combinatorics.counting where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( is-set-Fin; Eq-Fin-eq; has-decidable-equality-Fin)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; is-contr-Fin-one-ℕ; neg-one-Fin)
 
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-equiv'; center; eq-is-contr')
@@ -31,6 +27,11 @@ open import foundation.propositions using (is-proof-irrelevant-is-prop)
 open import foundation.sets using (is-set; is-set-equiv')
 open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universe-levels using (UU; Level)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( is-set-Fin; Eq-Fin-eq; has-decidable-equality-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; zero-Fin; is-contr-Fin-one-ℕ; neg-one-Fin)
 ```
 
 ## Idea

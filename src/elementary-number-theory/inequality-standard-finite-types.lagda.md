@@ -12,8 +12,7 @@ module elementary-number-theory.inequality-standard-finite-types where
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-le-ℕ; refl-leq-ℕ; contradiction-le-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
@@ -21,6 +20,9 @@ open import foundation.identity-types using (Id; refl; ap)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
 ```
 
 # Inequality on the standard finite types

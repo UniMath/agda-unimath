@@ -7,15 +7,9 @@ module univalent-combinatorics.finite-types where
 
 open import elementary-number-theory.equality-natural-numbers using
   ( is-set-ℕ; ℕ-Set)
-open import elementary-number-theory.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import elementary-number-theory.equivalences-standard-finite-types using
-  ( is-injective-Fin)
 open import elementary-number-theory.modular-arithmetic using (ℤ-Mod)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; raise-Fin; equiv-raise-Fin)
 
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
@@ -68,6 +62,12 @@ open import univalent-combinatorics.counting using
     count-equiv; is-set-count; equiv-count; number-of-elements-count;
     is-empty-is-zero-number-of-elements-count; is-inhabited-or-empty-count;
     count-type-trunc-Prop)
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( has-decidable-equality-Fin)
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( is-injective-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; raise-Fin; equiv-raise-Fin)
 ```
 
 ## Idea

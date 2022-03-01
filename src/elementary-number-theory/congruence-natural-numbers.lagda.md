@@ -24,13 +24,15 @@ open import elementary-number-theory.multiplication-natural-numbers using
     associative-mul-ℕ; commutative-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; zero-Fin; nat-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
-    is-zero-nat-zero-Fin)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; zero-Fin; nat-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
+    is-zero-nat-zero-Fin)
 ```
 
 # The congruence relations on the natural numbers

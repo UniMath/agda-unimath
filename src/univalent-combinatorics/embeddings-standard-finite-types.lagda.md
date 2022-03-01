@@ -3,17 +3,12 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module elementary-number-theory.embeddings-standard-finite-types where
+module univalent-combinatorics.embeddings-standard-finite-types where
 
-open import elementary-number-theory.equality-standard-finite-types using
-  ( Eq-Fin-eq; is-set-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import
   elementary-number-theory.repeating-element-standard-finite-type using
   ( repeat-Fin; is-almost-injective-repeat-Fin)
-open import elementary-number-theory.standard-finite-types using
-  ( Fin; is-inl-Fin; is-neg-one-Fin; is-neg-one-is-not-inl-Fin;
-    is-decidable-is-inl-Fin)
 
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-injective-inl)
@@ -25,6 +20,12 @@ open import foundation.identity-types using (inv; _∙_; Id; ap)
 open import foundation.injective-maps using
   ( is-injective-emb; is-injective-is-emb; is-injective; is-emb-is-injective)
 open import foundation.unit-type using (unit; star)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( Eq-Fin-eq; is-set-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; is-inl-Fin; is-neg-one-Fin; is-neg-one-is-not-inl-Fin;
+    is-decidable-is-inl-Fin)
 ```
 
 ## Idea

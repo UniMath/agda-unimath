@@ -223,11 +223,8 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.divisibility-standard-finite-types
-open import elementary-number-theory.embeddings-standard-finite-types
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.equality-standard-finite-types
-open import elementary-number-theory.equivalences-standard-finite-types
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
@@ -261,7 +258,6 @@ open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
 open import elementary-number-theory.retracts-of-standard-finite-types
 open import elementary-number-theory.skipping-element-standard-finite-type
-open import elementary-number-theory.standard-finite-types
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
@@ -388,8 +384,11 @@ open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.embeddings
+open import univalent-combinatorics.embeddings-standard-finite-types
 open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences
+open import univalent-combinatorics.equivalences-standard-finite-types
 open import univalent-combinatorics.fibers-of-maps-between-finite-types
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-connected-components
@@ -405,6 +404,7 @@ open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 ```
