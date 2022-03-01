@@ -151,11 +151,13 @@ module _
   hom-Concrete-Group =
     hom-∞-Group (∞-group-Concrete-Group G) (∞-group-Concrete-Group H)
 
+{-
   is-set-hom-Concrete-Group : is-set hom-Concrete-Group
   is-set-hom-Concrete-Group = {!!}
 
   hom-Concrete-Group-Set : UU-Set (l1 ⊔ l2)
   hom-Concrete-Group-Set = pair hom-Concrete-Group is-set-hom-Concrete-Group
+-}
 
   classifying-map-hom-Concrete-Group :
     hom-Concrete-Group →
@@ -298,6 +300,7 @@ module _
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
 
+{-
 instance
   Concrete-Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
   obj-Large-Precat Concrete-Group-Large-Precat = Concrete-Group
@@ -311,4 +314,5 @@ instance
     eq-htpy-hom-Concrete-Group G H _ _ (left-unit-law-comp-hom-Concrete-Group G H f)
   right-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} f =
     eq-htpy-hom-Concrete-Group G H _ _ (right-unit-law-comp-hom-Concrete-Group G H f)
+-}
 ```
