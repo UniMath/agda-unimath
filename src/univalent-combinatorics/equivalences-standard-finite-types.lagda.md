@@ -14,21 +14,23 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr)
-open import foundation.coproduct-types using (coprod)
+open import foundation.coproduct-types using (coprod; inr)
+open import foundation.dependent-pair-types using (pr1; pr2; Σ)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equivalences using
-  ( _≃_; id-equiv; _∘e_; inv-equiv; map-inv-equiv; map-equiv)
+  ( eq-htpy-equiv; _≃_; id-equiv; is-equiv-has-inverse;
+    _∘e_; inv-equiv; map-inv-equiv; map-equiv)
 open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
 open import foundation.functoriality-cartesian-product-types using
   ( equiv-prod)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.functoriality-coproduct-types using (equiv-coprod; retr-equiv-coprod)
+open import foundation.identity-types using (Id; inv; refl; ap)
 open import foundation.type-arithmetic-coproduct-types using
   ( inv-assoc-coprod; right-distributive-prod-coprod)
 open import foundation.type-arithmetic-empty-type using
   ( right-unit-law-coprod; left-absorption-prod; inv-left-unit-law-coprod)
 open import foundation.type-arithmetic-unit-type using (left-unit-law-prod)
-open import foundation.unit-type using (unit; is-contr-unit)
+open import foundation.unit-type using (unit; is-contr-unit; star)
 open import foundation.universal-property-coproduct-types using
   ( equiv-universal-property-coprod)
 open import foundation.universal-property-empty-type using
@@ -36,7 +38,13 @@ open import foundation.universal-property-empty-type using
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 
+open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation-core.homotopies using (refl-htpy)
+open import foundation-core.propositions using (eq-is-prop)
+open import foundation-core.sets using (Id-Prop)
+
 open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)
+open import univalent-combinatorics.equality-standard-finite-types using (Fin-Set)
 ```
 
 ## Idea
@@ -98,4 +106,25 @@ function-Fin (succ-ℕ k) l =
 
 Fin-exp-ℕ : (k l : ℕ) → Fin (exp-ℕ l k) ≃ (Fin k → Fin l)
 Fin-exp-ℕ k l = inv-equiv (function-Fin k l)
+```
+
+### The type of automorphisms on `Fin n` is equivalent to the type of automorphisms on `Fin (succ-ℕ n)` that fix `inr star`
+
+```agda
+extend-permutation-Fin-n : (n : ℕ) →
+  (Fin n ≃ Fin n) ≃ (Σ (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) (λ e → Id (map-equiv e (inr star)) (inr star)))
+pr1 (pr1 (extend-permutation-Fin-n n) f) = equiv-coprod f id-equiv
+pr2 (pr1 (extend-permutation-Fin-n n) f) = refl
+pr2 (extend-permutation-Fin-n n) =
+  is-equiv-has-inverse
+    ( λ f → pr1 (retr-equiv-coprod (pr1 f) id-equiv (p f)))
+    ( λ f →
+      ( eq-pair-Σ
+        ( inv (eq-htpy-equiv (pr2 (retr-equiv-coprod (pr1 f) id-equiv (p f)))))
+        ( eq-is-prop (pr2 (Id-Prop (Fin-Set (succ-ℕ n)) (map-equiv (pr1 f) (inr star)) (inr star))))))
+    ( λ f → eq-htpy-equiv refl-htpy)
+  where
+  p : (f : (Σ (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) (λ e → Id (map-equiv e (inr star)) (inr star))))
+    (b : unit) → Id (map-equiv (pr1 f) (inr b)) (inr b) 
+  p f star = pr2 f
 ```
