@@ -369,6 +369,24 @@ module _
     ( ( equiv-precomp-equiv equiv-succ-Fin X) ∘e
       ( inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ H)))
 
+  computation-swap-two-elements' : (x y : X) → ¬ (Id x y) → (z : Fin 2) →
+    Id (pr1 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x))) y) z → Id (map-equiv swap-two-elements x) y
+  computation-swap-two-elements' x y p (inl (inr star)) q =
+    ex-falso
+      (p
+      ( (inv (pr2 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x)) ∙
+        ( (ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x)) (inv q)) ∙
+          (pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x))) y))))
+  computation-swap-two-elements' x y p (inr star) q =
+    ( ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x)) (inv q)) ∙
+    pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x))) y
+
+  computation-swap-two-elements : (x y : X) → ¬ (Id x y) →
+    Id (map-equiv swap-two-elements x) y
+  computation-swap-two-elements x y p =
+    computation-swap-two-elements' x y p
+      (pr1 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ H)) x))) y) refl
+
 module _
   {l : Level} {X : UU l} (H : has-cardinality X 2)
   where
