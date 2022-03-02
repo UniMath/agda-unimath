@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Addition on the integers
 
 ```agda
@@ -19,7 +15,8 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.embeddings using (is-emb)
+open import foundation.equivalences using (is-equiv; _≃_; is-emb-is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)
@@ -28,9 +25,11 @@ open import foundation.interchange-law using
 open import foundation.unit-type using (star)
 ```
 
-# Addition on the integers
+## Idea
 
 We introduce addition on the integers and derive its basic properties with respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to inequality are derived in `inequality-integers`.
+
+## Definition
 
 ```agda
 add-ℤ : ℤ → ℤ → ℤ
@@ -48,7 +47,9 @@ ap-add-ℤ :
 ap-add-ℤ p q = ap-binary add-ℤ p q
 ```
 
-## Laws for addition on ℤ
+## Properties
+
+### Laws for addition on ℤ
 
 ```agda
 abstract
@@ -241,6 +242,7 @@ is-injective-add-ℤ x {y} {z} p =
     ( isretr-add-neg-ℤ x z))
 ```
 
+
 ```agda
 right-negative-law-add-ℤ :
   (k l : ℤ) → Id (add-ℤ k (neg-ℤ l)) (neg-ℤ (add-ℤ (neg-ℤ k) l))
@@ -353,6 +355,8 @@ is-zero-add-ℤ' x y H =
   is-zero-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
 
+### Addition by an integer is an equivalence
+
 ```agda
 abstract
   is-equiv-add-ℤ : (x : ℤ) → is-equiv (add-ℤ x)
@@ -387,4 +391,17 @@ abstract
 equiv-add-ℤ' : ℤ → (ℤ ≃ ℤ)
 pr1 (equiv-add-ℤ' y) = add-ℤ' y
 pr2 (equiv-add-ℤ' y) = is-equiv-add-ℤ' y
+```
+
+### Addition by an integer is an embedding
+
+```agda
+is-emb-add-ℤ :
+  (x : ℤ) → is-emb (add-ℤ x)
+is-emb-add-ℤ x =
+  is-emb-is-equiv (is-equiv-add-ℤ x)
+
+is-emb-add-ℤ' :
+  (y : ℤ) → is-emb (add-ℤ' y)
+is-emb-add-ℤ' y = is-emb-is-equiv (is-equiv-add-ℤ' y)
 ```

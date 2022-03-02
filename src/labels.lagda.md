@@ -7,7 +7,6 @@ title : Book labels
 
 module labels where
 open import foundation
-open import the-circle
 open import groups
 open import subgroups
 ```

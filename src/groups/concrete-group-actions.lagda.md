@@ -8,7 +8,7 @@ title: Formalisation of the Symmetry Book
 module groups.concrete-group-actions where
 
 open import groups.concrete-groups public
-open import the-circle.the-circle public
+open import synthetic-homotopy-theory.circle public
 
 -- ref sec:gsets
 

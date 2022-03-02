@@ -8,6 +8,7 @@ module foundation where
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.binary-relations public
 open import foundation.boolean-reflection public

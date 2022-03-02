@@ -8,49 +8,89 @@ Welcome to the website of the `agda-unimath` formalization project.
 {-# OPTIONS --without-K --exact-split #-}
 ```
 
-## Foundation Core
+## Categories
 
 ```agda
-open import foundation-core.0-maps
-open import foundation-core.1-types
-open import foundation-core.cartesian-product-types
-open import foundation-core.coherently-invertible-maps
-open import foundation-core.commuting-squares
-open import foundation-core.constant-maps
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
-open import foundation-core.equality-cartesian-product-types
-open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equality-fibers-of-maps
-open import foundation-core.equivalence-induction
-open import foundation-core.equivalences
-open import foundation-core.faithful-maps
-open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-systems
-open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
-open import foundation-core.path-split-maps
-open import foundation-core.propositional-maps
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
-open import foundation-core.sets
-open import foundation-core.singleton-induction
-open import foundation-core.subtype-identity-principle
-open import foundation-core.subtypes
-open import foundation-core.truncated-maps
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.univalence
-open import foundation-core.universe-levels
+open import categories
+open import categories.adjunctions
+open import categories.categories
+open import categories.functors
+open import categories.large-categories
+open import categories.natural-transformations
+```
+
+## Elementary number theory
+
+```agda
+open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.classical-finite-types
+open import elementary-number-theory.collatz-bijection
+open import elementary-number-theory.collatz-conjecture
+open import elementary-number-theory.congruence-integers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.decidable-dependent-function-types
+open import elementary-number-theory.decidable-dependent-pair-types
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.distance-integers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.divisibility-standard-finite-types
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.factorials
+open import elementary-number-theory.falling-factorials
+open import elementary-number-theory.fibonacci-sequence
+open import elementary-number-theory.finitary-natural-numbers
+open import elementary-number-theory.finitely-cyclic-maps
+open import elementary-number-theory.fractions
+open import elementary-number-theory.goldbach-conjecture
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.infinitude-of-primes
+open import elementary-number-theory.integers
+open import elementary-number-theory.iterating-functions
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.ordinal-induction-natural-numbers
+open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.products-of-natural-numbers
+open import elementary-number-theory.proper-divisors-natural-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.relatively-prime-integers
+open import elementary-number-theory.repeating-element-standard-finite-type
+open import elementary-number-theory.retracts-of-natural-numbers
+open import elementary-number-theory.retracts-of-standard-finite-types
+open import elementary-number-theory.skipping-element-standard-finite-type
+open import elementary-number-theory.stirling-numbers-of-the-second-kind
+open import elementary-number-theory.strong-induction-natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.triangular-numbers
+open import elementary-number-theory.twin-prime-conjecture
+open import elementary-number-theory.universal-property-natural-numbers
+open import elementary-number-theory.upper-bounds-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
+```
+
+## Finite groups
+
+```agda
+open import finite-groups.finite-groups
+open import finite-groups.quaternion-group
+open import finite-groups.transpositions
 ```
 
 ## Foundation
@@ -141,6 +181,7 @@ open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
+open import foundation.monomorphisms
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
@@ -203,121 +244,59 @@ open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
 ```
 
-## Elementary number theory
+## Foundation Core
 
 ```agda
-open import elementary-number-theory.absolute-value-integers
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.classical-finite-types
-open import elementary-number-theory.collatz-bijection
-open import elementary-number-theory.collatz-conjecture
-open import elementary-number-theory.congruence-integers
-open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.decidable-dependent-function-types
-open import elementary-number-theory.decidable-dependent-pair-types
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.distance-integers
-open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.divisibility-integers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.divisibility-standard-finite-types
-open import elementary-number-theory.equality-integers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.euclidean-division-natural-numbers
-open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.factorials
-open import elementary-number-theory.falling-factorials
-open import elementary-number-theory.fibonacci-sequence
-open import elementary-number-theory.finitary-natural-numbers
-open import elementary-number-theory.finitely-cyclic-maps
-open import elementary-number-theory.fractions
-open import elementary-number-theory.goldbach-conjecture
-open import elementary-number-theory.greatest-common-divisor-integers
-open import elementary-number-theory.greatest-common-divisor-natural-numbers
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.infinitude-of-primes
-open import elementary-number-theory.integers
-open import elementary-number-theory.iterating-functions
-open import elementary-number-theory.lower-bounds-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.multiplication-integers
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.ordinal-induction-natural-numbers
-open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.products-of-natural-numbers
-open import elementary-number-theory.proper-divisors-natural-numbers
-open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.relatively-prime-integers
-open import elementary-number-theory.repeating-element-standard-finite-type
-open import elementary-number-theory.retracts-of-natural-numbers
-open import elementary-number-theory.retracts-of-standard-finite-types
-open import elementary-number-theory.skipping-element-standard-finite-type
-open import elementary-number-theory.stirling-numbers-of-the-second-kind
-open import elementary-number-theory.strong-induction-natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers
-open import elementary-number-theory.triangular-numbers
-open import elementary-number-theory.twin-prime-conjecture
-open import elementary-number-theory.universal-property-natural-numbers
-open import elementary-number-theory.upper-bounds-natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
-open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import foundation-core.0-maps
+open import foundation-core.1-types
+open import foundation-core.cartesian-product-types
+open import foundation-core.coherently-invertible-maps
+open import foundation-core.commuting-squares
+open import foundation-core.constant-maps
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equality-fibers-of-maps
+open import foundation-core.equivalence-induction
+open import foundation-core.equivalences
+open import foundation-core.faithful-maps
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-systems
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.path-split-maps
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.sets
+open import foundation-core.singleton-induction
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.type-arithmetic-cartesian-product-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.univalence
+open import foundation-core.universe-levels
 ```
 
-## Univalent foundation
+## Graph theory
 
 ```agda
-open import univalent-foundations.W-types
-open import univalent-foundations.functoriality-loop-spaces
-open import univalent-foundations.isolated-points
-open import univalent-foundations.iterated-loop-spaces
-open import univalent-foundations.loop-spaces
-open import univalent-foundations.pointed-dependent-functions
-open import univalent-foundations.pointed-equivalences
-open import univalent-foundations.pointed-families-of-types
-open import univalent-foundations.pointed-homotopies
-open import univalent-foundations.pointed-maps
-open import univalent-foundations.pointed-types
-open import univalent-foundations.truncations
-```
-
-## Categories
-
-```agda
-open import categories
-open import categories.adjunctions
-open import categories.categories
-open import categories.functors
-open import categories.large-categories
-open import categories.natural-transformations
-```
-
-## The circle
-
-```agda
-open import the-circle.cyclic-types
-open import the-circle.infinite-cyclic-types
-open import the-circle.integers
-open import the-circle.the-circle
-open import the-circle.universal-cover
-```
-
-## Synthetic homotopy theory
-
-```agda
-open import synthetic-homotopy-theory.23-pullbacks
-open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.25-cubical-diagrams
-open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.26-id-pushout
-open import synthetic-homotopy-theory.27-sequences
-open import synthetic-homotopy-theory.interval-type
-open import synthetic-homotopy-theory.spaces
+open import graph-theory.directed-graphs
+open import graph-theory.finite-graphs
+open import graph-theory.polygons
+open import graph-theory.reflexive-graphs
+open import graph-theory.undirected-graphs
 ```
 
 ## Groups 
@@ -335,21 +314,6 @@ open import groups.higher-groups
 open import groups.sheargroups
 ```
 
-## Subgroups
-
-```agda
-open import subgroups.abstract-abelian-subgroups
-open import subgroups.abstract-subgroups
-```
-
-## Finite groups
-
-```agda
-open import finite-groups.finite-groups
-open import finite-groups.quaternion-group
-open import finite-groups.transpositions
-```
-
 ## Order theory
 
 ```agda
@@ -358,6 +322,47 @@ open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
 open import order-theory.preorders
+```
+
+## Polytopes
+
+```agda
+open import polytopes.abstract-polytopes public
+```
+
+## Rings
+
+```agda
+open import rings.eisenstein-integers
+open import rings.gaussian-integers
+open import rings.ideals
+open import rings.localizations-rings
+open import rings.rings-with-properties
+open import rings.rings
+```
+
+## Subgroups
+
+```agda
+open import subgroups.abstract-abelian-subgroups
+open import subgroups.abstract-subgroups
+```
+
+## Synthetic homotopy theory
+
+```agda
+open import synthetic-homotopy-theory.23-pullbacks
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.25-cubical-diagrams
+open import synthetic-homotopy-theory.26-descent
+open import synthetic-homotopy-theory.26-id-pushout
+open import synthetic-homotopy-theory.27-sequences
+open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.cyclic-types
+open import synthetic-homotopy-theory.infinite-cyclic-types
+open import synthetic-homotopy-theory.interval-type
+open import synthetic-homotopy-theory.spaces
+open import synthetic-homotopy-theory.universal-cover-circle
 ```
 
 ## Univalent combinatorics
@@ -409,32 +414,21 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 ```
 
-## Graph theory
+## Univalent foundation
 
 ```agda
-open import graph-theory.directed-graphs
-open import graph-theory.finite-graphs
-open import graph-theory.polygons
-open import graph-theory.reflexive-graphs
-open import graph-theory.undirected-graphs
-```
-
-## Polytopes
-
-```agda
-open import polytopes.abstract-polytopes public
-```
-
-
-## Rings
-
-```agda
-open import rings.eisenstein-integers
-open import rings.gaussian-integers
-open import rings.ideals
-open import rings.localizations-rings
-open import rings.rings-with-properties
-open import rings.rings
+open import univalent-foundations.W-types
+open import univalent-foundations.functoriality-loop-spaces
+open import univalent-foundations.isolated-points
+open import univalent-foundations.iterated-loop-spaces
+open import univalent-foundations.loop-spaces
+open import univalent-foundations.pointed-dependent-functions
+open import univalent-foundations.pointed-equivalences
+open import univalent-foundations.pointed-families-of-types
+open import univalent-foundations.pointed-homotopies
+open import univalent-foundations.pointed-maps
+open import univalent-foundations.pointed-types
+open import univalent-foundations.truncations
 ```
 
 ## Everything

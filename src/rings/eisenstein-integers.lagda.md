@@ -7,7 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module rings.eisenstein-integers where
 
-open import the-circle.integers public
 open import groups public
 open import rings.rings public
 
@@ -187,7 +186,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                 ( neg-ℤ (mul-ℤ a (mul-ℤ d f)))
                 ( neg-ℤ (mul-ℤ b (mul-ℤ c f)))
                 ( neg-ℤ (neg-ℤ (mul-ℤ b (mul-ℤ d f))))))))) ∙
-      ( ( interchange-2-3-add-ℤ
+      ( ( interchange-law-add-add-ℤ
           ( mul-ℤ a (mul-ℤ c e))
           ( neg-ℤ (mul-ℤ b (mul-ℤ d e)))
           ( neg-ℤ (mul-ℤ a (mul-ℤ d f)))
@@ -272,7 +271,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
                   ( mul-ℤ a ed)
                   ( mul-ℤ ce b)
                   ( neg-ℤ (mul-ℤ b ed)))))) ∙
-          ( ( interchange-2-3-add-ℤ
+          ( ( interchange-law-add-add-ℤ
               ( mul-ℤ a cf)
               ( mul-ℤ (neg-ℤ df) b)
               ( mul-ℤ a ed)
@@ -355,7 +354,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
             ( neg-ℤ (mul-ℤ b (add-ℤ cf (neg-ℤ df)))))) ∙
         ( ( ( ap
               ( add-ℤ (mul-ℤ (add-ℤ ce (neg-ℤ df)) b))
-              ( ( interchange-2-3-add-ℤ
+              ( ( interchange-law-add-add-ℤ
                   ( mul-ℤ a (add-ℤ cf ed))
                   ( neg-ℤ (mul-ℤ b ed))
                   ( mul-ℤ a (neg-ℤ df))
@@ -410,7 +409,7 @@ left-distributive-mul-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
             ( neg-ℤ)
             ( left-distributive-mul-add-ℤ b d f)) ∙
           ( distributive-neg-add-ℤ (mul-ℤ b d) (mul-ℤ b f)))) ∙
-      ( interchange-2-3-add-ℤ
+      ( interchange-law-add-add-ℤ
         ( mul-ℤ a c)
         ( mul-ℤ a e)
         ( neg-ℤ (mul-ℤ b d))
@@ -419,14 +418,14 @@ left-distributive-mul-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
         ( ( ap-add-ℤ
             ( left-distributive-mul-add-ℤ a d f)
             ( right-distributive-mul-add-ℤ c e b)) ∙
-          ( interchange-2-3-add-ℤ
+          ( interchange-law-add-add-ℤ
             ( mul-ℤ a d)
             ( mul-ℤ a f)
             ( mul-ℤ c b)
             ( mul-ℤ e b)))
         ( ( ap neg-ℤ (left-distributive-mul-add-ℤ b d f)) ∙
           ( distributive-neg-add-ℤ (mul-ℤ b d) (mul-ℤ b f)))) ∙
-      ( interchange-2-3-add-ℤ
+      ( interchange-law-add-add-ℤ
         ( add-ℤ (mul-ℤ a d) (mul-ℤ c b))
         ( add-ℤ (mul-ℤ a f) (mul-ℤ e b))
         ( neg-ℤ (mul-ℤ b d))
