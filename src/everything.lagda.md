@@ -212,6 +212,7 @@ open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.replacement
 open import foundation.retractions
 open import foundation.sections
 open import foundation.set-presented-types

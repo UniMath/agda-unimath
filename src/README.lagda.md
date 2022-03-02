@@ -99,6 +99,7 @@ open import finite-groups.transpositions
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
+open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.binary-relations
 open import foundation.boolean-reflection
@@ -192,6 +193,7 @@ open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.replacement
 open import foundation.retractions
 open import foundation.sections
 open import foundation.set-presented-types

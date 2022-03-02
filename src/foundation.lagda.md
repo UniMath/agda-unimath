@@ -103,6 +103,7 @@ open import foundation.propositions public
 open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
+open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.sections public
 open import foundation.set-presented-types public
