@@ -242,6 +242,7 @@ is-injective-add-ℤ x {y} {z} p =
     ( isretr-add-neg-ℤ x z))
 ```
 
+### Negative laws for addition
 
 ```agda
 right-negative-law-add-ℤ :
@@ -259,7 +260,11 @@ right-negative-law-add-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-successor-law-add-ℤ (in-pos n) (neg-ℤ l)) ∙
   ( ( ap succ-ℤ (right-negative-law-add-ℤ (inr (inr n)) l)) ∙
     ( inv (neg-pred-ℤ (add-ℤ (inl n) l))))
+```
 
+### Distributivity of negatives over addition
+
+```agda
 distributive-neg-add-ℤ :
   (k l : ℤ) → Id (neg-ℤ (add-ℤ k l)) (add-ℤ (neg-ℤ k) (neg-ℤ l))
 distributive-neg-add-ℤ (inl zero-ℕ) l =
@@ -328,6 +333,8 @@ is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
     ( is-nonnegative-is-positive-ℤ
       ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} star star))
 ```
+
+### The inclusion of ℕ into ℤ preserves addition
 
 ```agda
 add-int-ℕ : (x y : ℕ) → Id (add-ℤ (int-ℕ x) (int-ℕ y)) (int-ℕ (add-ℕ x y))

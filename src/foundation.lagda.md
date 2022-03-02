@@ -8,6 +8,7 @@ module foundation where
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.algebras-polynomial-endofunctors public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.binary-relations public
@@ -96,6 +97,7 @@ open import foundation.monomorphisms public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.path-split-maps public
+open import foundation.polynomial-endofunctors public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public
 open import foundation.propositional-truncations public
@@ -152,6 +154,7 @@ open import foundation.universal-property-set-truncation public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
+open import foundation.W-types public
 open import foundation.weak-function-extensionality public
 open import foundation.weakly-constant-maps public
 ```
