@@ -5,15 +5,11 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module the-circle.universal-cover where
+module synthetic-homotopy-theory.universal-cover-circle where
 
-open import the-circle.the-circle public
+open import synthetic-homotopy-theory.circle public
 
 {- Section 12.1 Families over the circle -}
-
-Aut :
-  { l1 : Level} → UU l1 → UU l1
-Aut Y = Y ≃ Y
 
 Fam-circle :
   ( l1 : Level) → UU (lsuc l1)

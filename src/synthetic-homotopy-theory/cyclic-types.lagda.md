@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module the-circle.cyclic-types where
+module synthetic-homotopy-theory.cyclic-types where
 
 open import foundation public
 open import groups public

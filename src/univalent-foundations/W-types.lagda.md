@@ -1320,6 +1320,16 @@ paradox-Russell {l} H =
                              ( is-small-multiset-𝕍 is-small-lsuc (pr1 t)))
                            ( R))))))
 
+-- Corollary
+
+no-surjection-onto-universe :
+  {l : Level} → Replacement l → {A : UU l} (f : A → UU l) → ¬ (is-surjective f)
+no-surjection-onto-universe R {A} f H =
+  paradox-Russell
+    ( is-small-codomain-by-replacement R H
+      ( pair A id-equiv)
+      ( is-locally-small-UU))
+
 --------------------------------------------------------------------------------
 
 -- Exercises

@@ -7,7 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module rings.gaussian-integers where
 
-open import the-circle.integers public
 open import groups public
 open import rings.rings public
 
@@ -153,7 +152,7 @@ associative-mul-ℤ[i] (pair a b) (pair c d) (pair e f) =
               ( neg-one-ℤ)
               ( mul-ℤ a (mul-ℤ d f))
               ( mul-ℤ c (mul-ℤ b f)))))) ∙
-      ( ( interchange-2-3-add-ℤ
+      ( ( interchange-law-add-add-ℤ
           ( mul-ℤ a (mul-ℤ c e))
           ( neg-ℤ (mul-ℤ b (mul-ℤ e d)))
           ( neg-ℤ (mul-ℤ a (mul-ℤ d f)))
@@ -200,7 +199,7 @@ associative-mul-ℤ[i] (pair a b) (pair c d) (pair e f) =
                 ( ap (mul-ℤ a) (commutative-mul-ℤ d e))))
             ( ( inv (associative-mul-ℤ e c b)) ∙
               ( ap (mul-ℤ' b) (commutative-mul-ℤ e c)))))) ∙
-      ( ( interchange-2-3-add-ℤ
+      ( ( interchange-law-add-add-ℤ
           ( mul-ℤ (mul-ℤ a c) f)
           ( neg-ℤ (mul-ℤ (mul-ℤ b d) f))
           ( mul-ℤ a (mul-ℤ e d))
@@ -234,7 +233,7 @@ left-distributive-mul-add-ℤ[i] (pair a b) (pair c d) (pair e f) =
         ( left-distributive-mul-add-ℤ a c e)
         ( ( ap neg-ℤ (left-distributive-mul-add-ℤ b d f)) ∙
           ( left-distributive-mul-add-ℤ neg-one-ℤ (mul-ℤ b d) (mul-ℤ b f)))) ∙
-      ( interchange-2-3-add-ℤ
+      ( interchange-law-add-add-ℤ
         ( mul-ℤ a c)
         ( mul-ℤ a e)
         ( neg-ℤ (mul-ℤ b d))
@@ -242,7 +241,11 @@ left-distributive-mul-add-ℤ[i] (pair a b) (pair c d) (pair e f) =
     ( ( ap-add-ℤ
         ( left-distributive-mul-add-ℤ a d f)
         ( right-distributive-mul-add-ℤ c e b)) ∙
-      ( interchange-2-3-add-ℤ (mul-ℤ a d) (mul-ℤ a f) (mul-ℤ c b) (mul-ℤ e b)))
+      ( interchange-law-add-add-ℤ
+        ( mul-ℤ a d)
+        ( mul-ℤ a f)
+        ( mul-ℤ c b)
+        ( mul-ℤ e b)))
 
 right-distributive-mul-add-ℤ[i] :
   (x y z : ℤ[i]) →

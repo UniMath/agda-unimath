@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module the-circle.the-circle where
+module synthetic-homotopy-theory.circle where
 
 open import univalent-foundations public
 

@@ -8,6 +8,7 @@ module foundation where
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.binary-relations public
 open import foundation.boolean-reflection public
@@ -102,6 +103,7 @@ open import foundation.propositions public
 open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
+open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.sections public
 open import foundation.set-presented-types public
