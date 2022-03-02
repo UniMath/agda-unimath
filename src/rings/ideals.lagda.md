@@ -7,7 +7,7 @@ title: Formalisation of the Symmetry Book
 
 module rings.ideals where
 
-open import subgroups public
+open import groups public
 open import rings.rings public
 
 open import foundation

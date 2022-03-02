@@ -346,8 +346,9 @@ open import rings.rings
 ## Subgroups
 
 ```agda
-open import subgroups.abstract-abelian-subgroups
-open import subgroups.abstract-subgroups
+open import groups.abstract-abelian-subgroups
+open import groups.abstract-subgroups
+open import groups.concrete-subgroups
 ```
 
 ## Synthetic homotopy theory

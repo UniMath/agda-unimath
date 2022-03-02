@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module subgroups.concrete-subgroups where
+module groups.concrete-subgroups where
 
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.embeddings using (is-emb-Prop)

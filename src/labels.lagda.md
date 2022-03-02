@@ -8,7 +8,6 @@ title : Book labels
 module labels where
 open import foundation
 open import groups
-open import subgroups
 ```
 
 The following names are taken from the Latex code of the book using the regex `\\label\{((\w|\d|:|-)+)\}`.

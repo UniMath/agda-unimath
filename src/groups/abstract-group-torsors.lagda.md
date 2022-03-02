@@ -3,12 +3,13 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module groups.abstract-group-torsors where
 
 open import groups.abstract-group-actions public
 open import groups.concrete-groups public
+open import groups.higher-groups using (∞-Group)
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
