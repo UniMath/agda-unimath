@@ -6,9 +6,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module subgroups.abstract-subgroups where
+module groups.abstract-subgroups where
 
-open import groups public
+open import groups.abstract-groups public
 
 {- Subsets of groups -}
 

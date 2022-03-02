@@ -7,8 +7,39 @@ title: Formalisation of the Symmetry Book
 
 module groups.concrete-groups where
 
-open import groups.higher-groups public
-open import groups.abstract-groups public
+open import foundation.1-types using (Id-Set)
+open import foundation.connected-types using (is-path-connected)
+open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
+open import foundation.equivalences using (_≃_; map-inv-equiv)
+open import foundation.identity-types using (Id; refl)
+open import foundation.mere-equality using (mere-eq)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
+open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.sets using (is-set; UU-Set; is-set-Prop)
+open import foundation.subuniverses using (UU-Trunc)
+open import foundation.truncated-types using (is-trunc)
+open import foundation.truncation-levels using (one-𝕋)
+open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import groups.abstract-groups using (Group; type-hom-Group)
+open import groups.higher-groups using
+  ( ∞-Group; type-∞-Group; classifying-pointed-type-∞-Group;
+    classifying-type-∞-Group; shape-∞-Group;
+    is-path-connected-classifying-type-∞-Group;
+    mere-eq-classifying-type-∞-Group;
+    elim-prop-classifying-type-∞-Group;
+    unit-∞-Group; mul-∞-Group; assoc-mul-∞-Group;
+    left-unit-law-mul-∞-Group; right-unit-law-mul-∞-Group;
+    coherence-unit-laws-mul-∞-Group; inv-∞-Group;
+    left-inverse-law-mul-∞-Group; right-inverse-law-mul-∞-Group;
+    hom-∞-Group; classifying-map-hom-∞-Group;
+    preserves-point-classifying-map-hom-∞-Group;
+    map-hom-∞-Group; preserves-unit-map-hom-∞-Group;
+    preserves-mul-map-hom-∞-Group; preserves-inv-map-hom-∞-Group;
+    htpy-hom-∞-Group; extensionality-hom-∞-Group;
+    id-hom-∞-Group; comp-hom-∞-Group; assoc-comp-hom-∞-Group;
+    left-unit-law-comp-hom-∞-Group; right-unit-law-comp-hom-∞-Group)
+open import univalent-foundations.pointed-types using (Pointed-Type)
 
 Concrete-Group : (l : Level) → UU (lsuc l)
 Concrete-Group l = Σ (∞-Group l) (λ G → is-set (type-∞-Group G))
