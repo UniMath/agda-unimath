@@ -3,11 +3,35 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module groups.higher-groups where
 
-open import univalent-foundations public
+open import foundation.connected-types using
+  ( is-path-connected; mere-eq-is-path-connected;
+    apply-dependent-universal-property-is-path-connected)
+open import foundation.dependent-pair-types using (Σ; pr1; pr2)
+open import foundation.equivalences using (_≃_; map-inv-equiv)
+open import foundation.identity-types using (Id; refl)
+open import foundation.mere-equality using (mere-eq)
+open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import univalent-foundations.functoriality-loop-spaces using
+  ( map-Ω; preserves-refl-map-Ω; preserves-mul-map-Ω;
+    preserves-inv-map-Ω)
+open import univalent-foundations.loop-spaces using
+  ( type-Ω; refl-Ω; mul-Ω; associative-mul-Ω; left-unit-law-mul-Ω;
+    right-unit-law-mul-Ω; inv-Ω; left-inverse-law-mul-Ω;
+    right-inverse-law-mul-Ω)
+open import univalent-foundations.pointed-homotopies using
+  ( htpy-pointed-map; extensionality-pointed-map;
+    assoc-comp-pointed-map; left-unit-law-comp-pointed-map;
+    right-unit-law-comp-pointed-map)
+open import univalent-foundations.pointed-maps using
+  ( _→*_; map-pointed-map; preserves-point-map-pointed-map;
+    id-pointed-map; comp-pointed-map)
+open import univalent-foundations.pointed-types using
+  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 
 ∞-Group : (l : Level) → UU (lsuc l)
 ∞-Group l = Σ (Pointed-Type l) (λ X → is-path-connected (type-Pointed-Type X))

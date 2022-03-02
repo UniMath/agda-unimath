@@ -7,7 +7,13 @@ title: Formalisation of the Symmetry Book
 
 module subgroups.concrete-subgroups where
 
-open import groups.concrete-groups public
+open import foundation.dependent-pair-types using (Σ)
+open import foundation.embeddings using (is-emb-Prop)
+open import foundation.propositions using
+  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import groups.concrete-groups using
+  ( Concrete-Group; hom-Concrete-Group; comp-hom-Concrete-Group)
 
 module _ {l1 l2 : Level} (l3 : Level)
   (G : Concrete-Group l1) (H : Concrete-Group l2)
@@ -29,8 +35,3 @@ module _ {l1 : Level} (l2 : Level) (G : Concrete-Group l1) where
   mono-Concrete-Group =
     Σ (Concrete-Group l2) (λ H → Σ (hom-Concrete-Group H G) λ f → is-mono-hom-Concrete-Group l2 H G f)
 ```
-
-TODO:
-  * prove that mono-Concrete-Group is a set
-  * define type of subgroups using G-sets
-  * prove that the two types are equivalent
