@@ -9,4 +9,5 @@ module subgroups where
 
 open import subgroups.abstract-subgroups public
 open import subgroups.abstract-abelian-subgroups public
+open import subgroups.concrete-subgroups public
 ```

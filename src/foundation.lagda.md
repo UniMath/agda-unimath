@@ -91,6 +91,7 @@ open import foundation.logical-equivalences public
 open import foundation.maybe public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
+open import foundation.monomorphisms public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.path-split-maps public

@@ -203,7 +203,30 @@ module _
     left-unit-law-comp-hom-Large-Precat C (id-hom-Large-Precat C)
   pr2 (pr2 (pr2 id-iso-Large-Precat)) =
     left-unit-law-comp-hom-Large-Precat C (id-hom-Large-Precat C)
+```
 
+### Monomorphisms
+
+```agda
+module _ {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 : Level} (l3 : Level)
+  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
+  (f : type-hom-Large-Precat C X Y) where
+
+  is-mono-hom-Large-Precat-Prop : UU-Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
+  is-mono-hom-Large-Precat-Prop =
+    Π-Prop (obj-Large-Precat C l3) (λ Z → is-emb-Prop (comp-hom-Large-Precat C {X = Z} f))
+
+  is-mono-hom-Large-Precat : UU (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
+  is-mono-hom-Large-Precat = type-Prop is-mono-hom-Large-Precat-Prop
+
+  is-prop-is-mono-hom-Large-Precat : is-prop is-mono-hom-Large-Precat
+  is-prop-is-mono-hom-Large-Precat = is-prop-type-Prop is-mono-hom-Large-Precat-Prop
+```
+
+### Categories
+
+```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precat α β) {l1 : Level} (X : obj-Large-Precat C l1)

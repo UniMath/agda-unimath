@@ -151,6 +151,14 @@ module _
   hom-Concrete-Group =
     hom-∞-Group (∞-group-Concrete-Group G) (∞-group-Concrete-Group H)
 
+{-
+  is-set-hom-Concrete-Group : is-set hom-Concrete-Group
+  is-set-hom-Concrete-Group = {!!}
+
+  hom-Concrete-Group-Set : UU-Set (l1 ⊔ l2)
+  hom-Concrete-Group-Set = pair hom-Concrete-Group is-set-hom-Concrete-Group
+-}
+
   classifying-map-hom-Concrete-Group :
     hom-Concrete-Group →
     classifying-type-Concrete-Group G → classifying-type-Concrete-Group H
@@ -241,45 +249,32 @@ module _
 
 -- Category structure on concrete groups
 
-module _
-  {l : Level} (G : Concrete-Group l)
-  where
-  
-  id-hom-Concrete-Group : hom-Concrete-Group G G
-  id-hom-Concrete-Group =
-    id-hom-∞-Group ( ∞-group-Concrete-Group G)
+id-hom-Concrete-Group : {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
+id-hom-Concrete-Group G = id-hom-∞-Group ( ∞-group-Concrete-Group G)
 
-module _
-  {l1 l2 l3 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
-  (K : Concrete-Group l3)
-  where
+comp-hom-Concrete-Group : {l1 l2 l3 : Level}
+  (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3) →
+  hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
+comp-hom-Concrete-Group G H K =
+  comp-hom-∞-Group
+    ( ∞-group-Concrete-Group G)
+    ( ∞-group-Concrete-Group H)
+    ( ∞-group-Concrete-Group K)
 
-  comp-hom-Concrete-Group :
-    hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
-  comp-hom-Concrete-Group =
-    comp-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( ∞-group-Concrete-Group K)
-
-module _
-  {l1 l2 l3 l4 : Level}
-  (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3)
-  (L : Concrete-Group l4)
-  where
-
-  assoc-comp-hom-Concrete-Group :
-    (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
-    (f : hom-Concrete-Group G H) →
-    htpy-hom-Concrete-Group G L
-      ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
-      ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
-  assoc-comp-hom-Concrete-Group =
-    assoc-comp-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( ∞-group-Concrete-Group K)
-      ( ∞-group-Concrete-Group L)
+assoc-comp-hom-Concrete-Group : {l1 l2 l3 l4 : Level}
+  (G : Concrete-Group l1) (H : Concrete-Group l2)
+  (K : Concrete-Group l3) (L : Concrete-Group l4)
+  (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
+  (f : hom-Concrete-Group G H) →
+  htpy-hom-Concrete-Group G L
+    ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
+    ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
+assoc-comp-hom-Concrete-Group G H K L =
+  assoc-comp-hom-∞-Group
+    ( ∞-group-Concrete-Group G)
+    ( ∞-group-Concrete-Group H)
+    ( ∞-group-Concrete-Group K)
+    ( ∞-group-Concrete-Group L)
 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
@@ -304,4 +299,20 @@ module _
     right-unit-law-comp-hom-∞-Group
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
+
+{-
+instance
+  Concrete-Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
+  obj-Large-Precat Concrete-Group-Large-Precat = Concrete-Group
+  hom-Large-Precat Concrete-Group-Large-Precat = hom-Concrete-Group-Set
+  comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} {Z = K} =
+    comp-hom-Concrete-Group G H K
+  id-hom-Large-Precat Concrete-Group-Large-Precat {X = G} = id-hom-Concrete-Group G
+  associative-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} {Z = K} {W = L} h g f =
+    eq-htpy-hom-Concrete-Group G L _ _ (assoc-comp-hom-Concrete-Group G H K L h g f) 
+  left-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} f =
+    eq-htpy-hom-Concrete-Group G H _ _ (left-unit-law-comp-hom-Concrete-Group G H f)
+  right-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} f =
+    eq-htpy-hom-Concrete-Group G H _ _ (right-unit-law-comp-hom-Concrete-Group G H f)
+-}
 ```
