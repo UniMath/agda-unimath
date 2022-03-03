@@ -71,6 +71,13 @@ UU-is-small l1 l2 = Σ (UU l2) (is-small l1)
 
 ## Properties
 
+### Every type of universe level `l` is `UU (lsuc l)`-small
+
+```agda
+is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
+is-small-lsuc X = pair (raise _ X) (equiv-raise _ X)
+```
+
 ### Small types are closed under equivalences
 
 ```agda
