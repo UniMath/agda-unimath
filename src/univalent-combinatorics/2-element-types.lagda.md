@@ -10,7 +10,7 @@ open import elementary-number-theory.equality-natural-numbers using
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inr-inl)
+open import foundation.coproduct-types using (coprod; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
@@ -29,7 +29,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.mere-equivalences using
   ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv)
@@ -391,6 +391,23 @@ module _
   {l : Level} {X : UU l} (H : has-cardinality X 2)
   where
 
+  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin' :
+    ¬ (Id (equiv-precomp-equiv (equiv-succ-Fin {2}) X) id-equiv)
+  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin' p' =
+    apply-universal-property-trunc-Prop
+      ( H)
+      ( empty-Prop)
+      ( λ f →
+        neq-inr-inl
+          ( map-inv-equiv
+            ( pair
+              ( ap (map-equiv f))
+              ( is-emb-is-equiv
+                ( pr2 f)
+                ( inr star)
+                ( zero-Fin)))
+            ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
+
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
     ¬ (Id (equiv-precomp-equiv (equiv-succ-Fin {2}) X) id-equiv)
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
@@ -437,4 +454,83 @@ module _
     equiv1 = equiv-precomp-equiv (equiv-succ-Fin {2}) X
     equiv2 : (Fin 2 ≃ X) ≃ X
     equiv2 = equiv-ev-zero-equiv-Fin-two-ℕ H
+```
+
+### The swapping equivalence has no fixpoints
+
+```agda
+  has-no-fixpoints-swap-two-elements : (x : X) →
+    ¬ (Id (map-equiv (swap-two-elements H) x) x)
+  has-no-fixpoints-swap-two-elements x P =
+    apply-universal-property-trunc-Prop
+      ( H)
+      ( empty-Prop)
+      ( λ h →
+        is-not-identity-swap-two-elements
+          (eq-htpy-equiv
+            (λ y →
+              f
+                ( inv-equiv h)
+                ( y)
+                ( map-inv-equiv h x)
+                ( map-inv-equiv h y)
+                ( map-inv-equiv h (map-equiv (swap-two-elements H) y))
+                ( refl)
+                ( refl)
+                ( refl))))
+    where
+    f : (h : X ≃ Fin 2) → (y : X) → (k1 k2 k3 : Fin 2) →
+      Id (map-equiv h x) k1 → Id (map-equiv h y) k2 →
+      Id (map-equiv h (map-equiv (swap-two-elements H) y)) k3 →
+      Id (map-equiv (swap-two-elements H) y) y
+    f h y (inl (inr star)) (inl (inr star)) k3 p q r =
+      tr
+        ( λ z → Id (map-equiv (swap-two-elements H) z) z)
+        ( map-inv-equiv
+          (pair
+            (ap (map-equiv h))
+            (is-emb-is-equiv (pr2 h) x y))
+          (p ∙ inv q))
+        ( P)
+    f h y (inl (inr star)) (inr star) (inl (inr star)) p q r =
+      ex-falso
+        ( neq-inl-inr
+          ( inv p ∙ (ap (map-equiv h) (inv P) ∙
+            ( ap
+              ( map-equiv (h ∘e (swap-two-elements H)))
+              ( map-inv-equiv
+                ( pair (ap (map-equiv h)) (is-emb-is-equiv (pr2 h) x (map-equiv (swap-two-elements H) y)))
+                (p ∙ inv r)) ∙
+              (ap (map-equiv h) (is-involution-aut-2-element-type H (swap-two-elements H) y) ∙ q)))))
+    f h y (inl (inr star)) (inr star) (inr star) p q r =
+      ( map-inv-equiv
+        (pair
+          (ap (map-equiv h))
+          (is-emb-is-equiv (pr2 h) (map-equiv (swap-two-elements H) y) y))
+        (r ∙ inv q))
+    f h y (inr star) (inl (inr star)) (inl (inr star)) p q r =
+      ( map-inv-equiv
+        (pair
+          (ap (map-equiv h))
+          (is-emb-is-equiv (pr2 h) (map-equiv (swap-two-elements H) y) y))
+        (r ∙ inv q))
+    f h y (inr star) (inl (inr star)) (inr star) p q r =
+      ex-falso
+        ( neq-inr-inl
+          ( inv p ∙ (ap (map-equiv h) (inv P) ∙
+            ( ap
+              ( map-equiv (h ∘e (swap-two-elements H)))
+              ( map-inv-equiv
+                ( pair (ap (map-equiv h)) (is-emb-is-equiv (pr2 h) x (map-equiv (swap-two-elements H) y)))
+                (p ∙ inv r)) ∙
+              (ap (map-equiv h) (is-involution-aut-2-element-type H (swap-two-elements H) y) ∙ q)))))
+    f h y (inr star) (inr star) k3 p q r =
+      tr
+        ( λ z → Id (map-equiv (swap-two-elements H) z) z)
+        ( map-inv-equiv
+          (pair
+            (ap (map-equiv h))
+            (is-emb-is-equiv (pr2 h) x y))
+          (p ∙ inv q))
+        ( P)
 ```

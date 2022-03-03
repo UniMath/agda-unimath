@@ -14,17 +14,18 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr)
-open import foundation.coproduct-types using (coprod; inr)
-open import foundation.dependent-pair-types using (pr1; pr2; Σ)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equivalences using
-  ( eq-htpy-equiv; _≃_; id-equiv; is-equiv-has-inverse;
+  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv; _≃_; id-equiv; is-equiv-has-inverse;
     _∘e_; inv-equiv; map-inv-equiv; map-equiv)
 open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
 open import foundation.functoriality-cartesian-product-types using
   ( equiv-prod)
-open import foundation.functoriality-coproduct-types using (equiv-coprod; retr-equiv-coprod)
-open import foundation.identity-types using (Id; inv; refl; ap)
+open import foundation.functoriality-coproduct-types using
+  ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)
+open import foundation.identity-types using (Id; inv; refl; ap; _∙_)
 open import foundation.type-arithmetic-coproduct-types using
   ( inv-assoc-coprod; right-distributive-prod-coprod)
 open import foundation.type-arithmetic-empty-type using
@@ -38,7 +39,9 @@ open import foundation.universal-property-empty-type using
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 
-open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation-core.equality-dependent-pair-types using
+  ( eq-pair-Σ; pair-eq-Σ)
+open import foundation-core.functions using (id)
 open import foundation-core.homotopies using (refl-htpy)
 open import foundation-core.propositions using (eq-is-prop)
 open import foundation-core.sets using (Id-Prop)
@@ -127,4 +130,20 @@ pr2 (extend-permutation-Fin-n n) =
   p : (f : (Σ (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) (λ e → Id (map-equiv e (inr star)) (inr star))))
     (b : unit) → Id (map-equiv (pr1 f) (inr b)) (inr b) 
   p f star = pr2 f
+
+computation-extend-permutation-Fin-n : (n : ℕ) → (f : Fin n ≃ Fin n) → (x y : Fin n) →
+  Id (map-equiv f x) y → Id (map-equiv (pr1 (map-equiv (extend-permutation-Fin-n n) f)) (inl x)) (inl y)
+computation-extend-permutation-Fin-n n f x y p = ap inl p
+
+computation-inv-extend-permutation-Fin-n : (n : ℕ) → (f : Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) →
+  (p : Id (map-equiv f (inr star)) (inr star)) → (x : Fin n) →
+  Id (inl (map-equiv (map-inv-equiv (extend-permutation-Fin-n n) (pair f p)) x)) (map-equiv f (inl x))
+computation-inv-extend-permutation-Fin-n n f p x =
+  htpy-eq-equiv (pr1 (pair-eq-Σ (pr2 (pr1 (pr2 (extend-permutation-Fin-n n))) (pair f p)))) (inl x)
+
+comp-extend-permutation-Fin-n : (n : ℕ) (f g : Fin n ≃ Fin n) →
+  htpy-equiv
+    ( pr1 (map-equiv (extend-permutation-Fin-n n) (f ∘e g)))
+    ( (pr1 (map-equiv (extend-permutation-Fin-n n) f)) ∘e (pr1 (map-equiv (extend-permutation-Fin-n n) g)))
+comp-extend-permutation-Fin-n n f g = compose-map-coprod (map-equiv g) (map-equiv f) id id
 ```
