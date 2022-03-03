@@ -118,6 +118,8 @@ open import foundation
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
+open import foundation.W-types
+open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.binary-relations
@@ -205,6 +207,7 @@ open import foundation.monomorphisms
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
+open import foundation.polynomial-endofunctors
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
@@ -287,6 +290,7 @@ open import order-theory
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
 open import polytopes.abstract-polytopes
