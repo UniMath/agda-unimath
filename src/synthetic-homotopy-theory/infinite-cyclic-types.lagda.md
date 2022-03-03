@@ -6,10 +6,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module the-circle.infinite-cyclic-types where
+module synthetic-homotopy-theory.infinite-cyclic-types where
 
-open import the-circle.cyclic-types public
-open import the-circle.integers public
+open import synthetic-homotopy-theory.cyclic-types public
 
 Infinite-Cyclic : (l : Level) → UU (lsuc l)
 Infinite-Cyclic l = Cyclic l zero-ℕ 

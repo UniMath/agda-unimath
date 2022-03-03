@@ -7,9 +7,7 @@ title : Book labels
 
 module labels where
 open import foundation
-open import the-circle
 open import groups
-open import subgroups
 ```
 
 The following names are taken from the Latex code of the book using the regex `\\label\{((\w|\d|:|-)+)\}`.
@@ -406,7 +404,7 @@ sec:thierrysdelooping = {!!}
 sec:absconctorsor = {!!}
 sec:monoepi = {!!}
 lem:injofsetsaremono = {!!}
-def:monomorphism = {!!}
+def:monomorphism = is-mono
 def:epimorphism = {!!}
 lem:eq-mono-cover = {!!}
 lem:eq-epi-conn = {!!}
@@ -461,7 +459,7 @@ xca:heap-variety = {!!}
 ch:subgroups = {!!}
 sec:subgp-overview = {!!}
 sec:subgroups = {!!}
-def:typeofmono = {!!}
+def:typeofmono = mono-Concrete-Group
 ex:sigma2inSigma3 = {!!}
 ex:prodinclismono = {!!}
 lem:setofsubgroups = {!!}

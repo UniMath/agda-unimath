@@ -8,7 +8,7 @@ title: Formalisation of the Symmetry Book
 module groups.examples-higher-groups where
 
 open import groups.higher-groups public
-open import the-circle.the-circle public
+open import synthetic-homotopy-theory.circle public
 
 module _
   where

@@ -10,7 +10,6 @@ open import foundation.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
 open import foundation.contractible-types using (center; eq-is-contr')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; map-inv-is-equiv; issec-map-inv-is-equiv;
     isretr-map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
@@ -21,10 +20,8 @@ open import foundation.functoriality-dependent-function-types using
     is-trunc-map-is-trunc-map-map-Π')
 open import foundation.homotopies using (htpy-right-whisk)
 open import foundation.identity-types using (ap; refl)
-open import foundation.propositional-maps using
-  ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.truncated-maps using (is-trunc-map)
-open import foundation.truncation-levels using (𝕋; neg-two-𝕋; neg-one-𝕋)
+open import foundation.truncation-levels using (𝕋; neg-two-𝕋)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU)
 ```
@@ -97,20 +94,4 @@ equiv-postcomp :
 pr1 (equiv-postcomp A e) = postcomp A (map-equiv e)
 pr2 (equiv-postcomp A e) =
   is-equiv-postcomp-is-equiv (map-equiv e) (is-equiv-map-equiv e) A
-
-is-emb-postcomp-is-emb :
-  {l1 l2 l3 : Level} (A : UU l3) {X : UU l1} {Y : UU l2} (f : X → Y) →
-  is-emb f → is-emb (postcomp A f)
-is-emb-postcomp-is-emb A f is-emb-f =
-  is-emb-is-prop-map
-    ( is-trunc-map-postcomp-is-trunc-map neg-one-𝕋 A f
-      ( is-prop-map-is-emb is-emb-f))
-
-is-emb-is-emb-postcomp :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-  ({l : Level} (A : UU l) → is-emb (postcomp A f)) → is-emb f
-is-emb-is-emb-postcomp f is-emb-post-f =
-  is-emb-is-prop-map
-    ( is-trunc-map-is-trunc-map-postcomp neg-one-𝕋 f
-      ( λ A → is-prop-map-is-emb (is-emb-post-f A)))
 ```

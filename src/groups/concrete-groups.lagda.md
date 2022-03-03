@@ -7,8 +7,39 @@ title: Formalisation of the Symmetry Book
 
 module groups.concrete-groups where
 
-open import groups.higher-groups public
-open import groups.abstract-groups public
+open import foundation.1-types using (Id-Set)
+open import foundation.connected-types using (is-path-connected)
+open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
+open import foundation.equivalences using (_≃_; map-inv-equiv)
+open import foundation.identity-types using (Id; refl)
+open import foundation.mere-equality using (mere-eq)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
+open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.sets using (is-set; UU-Set; is-set-Prop)
+open import foundation.subuniverses using (UU-Trunc)
+open import foundation.truncated-types using (is-trunc)
+open import foundation.truncation-levels using (one-𝕋)
+open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import groups.abstract-groups using (Group; type-hom-Group)
+open import groups.higher-groups using
+  ( ∞-Group; type-∞-Group; classifying-pointed-type-∞-Group;
+    classifying-type-∞-Group; shape-∞-Group;
+    is-path-connected-classifying-type-∞-Group;
+    mere-eq-classifying-type-∞-Group;
+    elim-prop-classifying-type-∞-Group;
+    unit-∞-Group; mul-∞-Group; assoc-mul-∞-Group;
+    left-unit-law-mul-∞-Group; right-unit-law-mul-∞-Group;
+    coherence-unit-laws-mul-∞-Group; inv-∞-Group;
+    left-inverse-law-mul-∞-Group; right-inverse-law-mul-∞-Group;
+    hom-∞-Group; classifying-map-hom-∞-Group;
+    preserves-point-classifying-map-hom-∞-Group;
+    map-hom-∞-Group; preserves-unit-map-hom-∞-Group;
+    preserves-mul-map-hom-∞-Group; preserves-inv-map-hom-∞-Group;
+    htpy-hom-∞-Group; extensionality-hom-∞-Group;
+    id-hom-∞-Group; comp-hom-∞-Group; assoc-comp-hom-∞-Group;
+    left-unit-law-comp-hom-∞-Group; right-unit-law-comp-hom-∞-Group)
+open import univalent-foundations.pointed-types using (Pointed-Type)
 
 Concrete-Group : (l : Level) → UU (lsuc l)
 Concrete-Group l = Σ (∞-Group l) (λ G → is-set (type-∞-Group G))
@@ -151,6 +182,14 @@ module _
   hom-Concrete-Group =
     hom-∞-Group (∞-group-Concrete-Group G) (∞-group-Concrete-Group H)
 
+{-
+  is-set-hom-Concrete-Group : is-set hom-Concrete-Group
+  is-set-hom-Concrete-Group = {!!}
+
+  hom-Concrete-Group-Set : UU-Set (l1 ⊔ l2)
+  hom-Concrete-Group-Set = pair hom-Concrete-Group is-set-hom-Concrete-Group
+-}
+
   classifying-map-hom-Concrete-Group :
     hom-Concrete-Group →
     classifying-type-Concrete-Group G → classifying-type-Concrete-Group H
@@ -241,45 +280,32 @@ module _
 
 -- Category structure on concrete groups
 
-module _
-  {l : Level} (G : Concrete-Group l)
-  where
-  
-  id-hom-Concrete-Group : hom-Concrete-Group G G
-  id-hom-Concrete-Group =
-    id-hom-∞-Group ( ∞-group-Concrete-Group G)
+id-hom-Concrete-Group : {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
+id-hom-Concrete-Group G = id-hom-∞-Group ( ∞-group-Concrete-Group G)
 
-module _
-  {l1 l2 l3 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
-  (K : Concrete-Group l3)
-  where
+comp-hom-Concrete-Group : {l1 l2 l3 : Level}
+  (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3) →
+  hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
+comp-hom-Concrete-Group G H K =
+  comp-hom-∞-Group
+    ( ∞-group-Concrete-Group G)
+    ( ∞-group-Concrete-Group H)
+    ( ∞-group-Concrete-Group K)
 
-  comp-hom-Concrete-Group :
-    hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
-  comp-hom-Concrete-Group =
-    comp-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( ∞-group-Concrete-Group K)
-
-module _
-  {l1 l2 l3 l4 : Level}
-  (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3)
-  (L : Concrete-Group l4)
-  where
-
-  assoc-comp-hom-Concrete-Group :
-    (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
-    (f : hom-Concrete-Group G H) →
-    htpy-hom-Concrete-Group G L
-      ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
-      ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
-  assoc-comp-hom-Concrete-Group =
-    assoc-comp-hom-∞-Group
-      ( ∞-group-Concrete-Group G)
-      ( ∞-group-Concrete-Group H)
-      ( ∞-group-Concrete-Group K)
-      ( ∞-group-Concrete-Group L)
+assoc-comp-hom-Concrete-Group : {l1 l2 l3 l4 : Level}
+  (G : Concrete-Group l1) (H : Concrete-Group l2)
+  (K : Concrete-Group l3) (L : Concrete-Group l4)
+  (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
+  (f : hom-Concrete-Group G H) →
+  htpy-hom-Concrete-Group G L
+    ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
+    ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
+assoc-comp-hom-Concrete-Group G H K L =
+  assoc-comp-hom-∞-Group
+    ( ∞-group-Concrete-Group G)
+    ( ∞-group-Concrete-Group H)
+    ( ∞-group-Concrete-Group K)
+    ( ∞-group-Concrete-Group L)
 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
@@ -304,4 +330,20 @@ module _
     right-unit-law-comp-hom-∞-Group
       ( ∞-group-Concrete-Group G)
       ( ∞-group-Concrete-Group H)
+
+{-
+instance
+  Concrete-Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
+  obj-Large-Precat Concrete-Group-Large-Precat = Concrete-Group
+  hom-Large-Precat Concrete-Group-Large-Precat = hom-Concrete-Group-Set
+  comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} {Z = K} =
+    comp-hom-Concrete-Group G H K
+  id-hom-Large-Precat Concrete-Group-Large-Precat {X = G} = id-hom-Concrete-Group G
+  associative-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} {Z = K} {W = L} h g f =
+    eq-htpy-hom-Concrete-Group G L _ _ (assoc-comp-hom-Concrete-Group G H K L h g f) 
+  left-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} f =
+    eq-htpy-hom-Concrete-Group G H _ _ (left-unit-law-comp-hom-Concrete-Group G H f)
+  right-unit-law-comp-hom-Large-Precat Concrete-Group-Large-Precat {X = G} {Y = H} f =
+    eq-htpy-hom-Concrete-Group G H _ _ (right-unit-law-comp-hom-Concrete-Group G H f)
+-}
 ```
