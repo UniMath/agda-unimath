@@ -92,7 +92,6 @@ exists-not-not-forall-count {l1} {l2} {X} P p e =
   g : Σ (Fin k) (λ x → ¬ (P' x)) → Σ X (λ x → ¬ (P x))
   pr1 (g (pair l np)) = map-equiv (pr2 e) l
   pr2 (g (pair l np)) x = np x
-
 ```
 
 ```agda
