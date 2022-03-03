@@ -99,6 +99,7 @@ open import finite-groups.transpositions
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
+open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.binary-relations
@@ -186,6 +187,7 @@ open import foundation.monomorphisms
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
+open import foundation.polynomial-endofunctors
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
@@ -242,6 +244,7 @@ open import foundation.universal-property-set-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+open import foundation.W-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
 ```
@@ -305,11 +308,14 @@ open import graph-theory.undirected-graphs
 
 ```agda
 open import groups.abstract-abelian-groups
+open import groups.abstract-abelian-subgroups
 open import groups.abstract-group-actions
 open import groups.abstract-group-torsors
 open import groups.abstract-groups
+open import groups.abstract-subgroups
 open import groups.concrete-group-actions
 open import groups.concrete-groups
+open import groups.concrete-subgroups
 open import groups.examples-higher-groups
 open import groups.furstenberg-groups
 open import groups.higher-groups
@@ -341,14 +347,6 @@ open import rings.ideals
 open import rings.localizations-rings
 open import rings.rings-with-properties
 open import rings.rings
-```
-
-## Subgroups
-
-```agda
-open import groups.abstract-abelian-subgroups
-open import groups.abstract-subgroups
-open import groups.concrete-subgroups
 ```
 
 ## Synthetic homotopy theory

@@ -31,13 +31,11 @@ open import foundation.universe-levels using (Level; UU)
 
 For any two types `X` and `Y`, we have `(X ≃ Y) ↔ (Maybe X ≃ Maybe Y)`.
 
+## Properties
+
+### If `f : Maybe X → Maybe Y` is an injective map and f (inl x) is an exception, then f exception is not an exception.
 
 ```agda
--- Proposition 16.2.1 Step (i) of the proof
-
--- If f is an injective map and f (inl x) is an exception, then f exception is
--- not an exception.
-
 abstract
   is-not-exception-injective-map-exception-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
@@ -54,7 +52,18 @@ abstract
   is-not-exception-map-equiv-exception-Maybe e =
     is-not-exception-injective-map-exception-Maybe (is-injective-map-equiv e)
 
--- If f is injective and f (inl x) is an exception, then f exception is a value
+abstract
+  is-not-exception-emb-exception-Maybe :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ↪ Maybe Y)
+    (x : X) → is-exception-Maybe (map-emb e (inl x)) →
+    is-not-exception-Maybe (map-emb e exception-Maybe)
+  is-not-exception-emb-exception-Maybe e =
+    is-not-exception-injective-map-exception-Maybe (is-injective-emb e)
+```
+
+### If f is injective and f (inl x) is an exception, then f exception is a value
+
+```agda
 is-value-injective-map-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   is-injective f → (x : X) → is-exception-Maybe (f (inl x)) →
@@ -81,16 +90,11 @@ comp-injective-map-exception-Maybe {f = f} is-inj-f x H =
   eq-is-value-Maybe
     ( f exception-Maybe)
     ( is-value-injective-map-exception-Maybe is-inj-f x H)
+```
 
-abstract
-  is-not-exception-emb-exception-Maybe :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ↪ Maybe Y)
-    (x : X) → is-exception-Maybe (map-emb e (inl x)) →
-    is-not-exception-Maybe (map-emb e exception-Maybe)
-  is-not-exception-emb-exception-Maybe e =
-    is-not-exception-injective-map-exception-Maybe (is-injective-emb e)
+### For any equivalence `e : Maybe X ≃ Maybe Y`, if `e (inl x)` is an exception, then `e exception` is a value
 
--- If e (inl x) is an exception, then e exception is a value
+```agda
 is-value-map-equiv-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
   is-exception-Maybe (map-equiv e (inl x)) →
@@ -117,9 +121,11 @@ comp-map-equiv-exception-Maybe e x H =
   eq-is-value-Maybe
     ( map-equiv e exception-Maybe)
     ( is-value-map-equiv-exception-Maybe e x H)
+```
 
--- Proposition 16.2.1 Step (ii) of the proof
+### Injective maps `Maybe X → Maybe Y` can be restricted to maps `X → Y`
 
+```agda
 restrict-injective-map-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   is-injective f → (x : X) (u : Maybe Y) (p : Id (f (inl x)) u) → Y
@@ -167,13 +173,13 @@ comp-restrict-injective-map-is-not-exception-Maybe :
 comp-restrict-injective-map-is-not-exception-Maybe {f = f} is-inj-f x =
   comp-restrict-injective-map-is-not-exception-Maybe' is-inj-f x (f (inl x))
     refl
+```
 
--- An equivalence e : Maybe X ≃ Maybe Y induces a map X → Y. We don't use
--- with-abstraction to keep full control over the definitional equalities, so
--- we give the definition in two steps. After the definition is complete, we
--- also prove two computation rules. Since we will prove computation rules, we
--- make the definition abstract.
+### Any equivalence `Maybe X ≃ Maybe Y` induces a map `X → Y`
 
+We don't use with-abstraction to keep full control over the definitional equalities, so we give the definition in two steps. After the definition is complete, we also prove two computation rules. Since we will prove computation rules, we make the definition abstract.
+
+```agda
 map-equiv-equiv-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y)
   (x : X) (u : Maybe Y) (p : Id (map-equiv e (inl x)) u) → Y
@@ -216,11 +222,11 @@ comp-map-equiv-equiv-is-not-exception-Maybe :
   Id (inl (map-equiv-equiv-Maybe e x)) (map-equiv e (inl x))
 comp-map-equiv-equiv-is-not-exception-Maybe e x =
   comp-map-equiv-equiv-is-not-exception-Maybe' e x (map-equiv e (inl x)) refl
+```
 
--- Proposition 16.2.1 Step (iii) of the proof
+### Any equivalence `Maybe X ≃ Maybe Y` induces a map `Y → X`
 
--- An equivalence e : Maybe X ≃ Maybe Y induces a map Y → X
-
+```agda
 map-inv-equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) → Y → X
 map-inv-equiv-equiv-Maybe e =
@@ -239,11 +245,11 @@ comp-map-inv-equiv-equiv-is-not-exception-Maybe :
   Id (inl (map-inv-equiv-equiv-Maybe e y)) (map-inv-equiv e (inl y))
 comp-map-inv-equiv-equiv-is-not-exception-Maybe e =
   comp-map-equiv-equiv-is-not-exception-Maybe (inv-equiv e)
-
--- Proposition 16.2.1 Step (iv) of the proof
+```
     
--- map-inv-equiv-equiv-Maybe e is a section of map-equiv-equiv-Maybe e.
+### The map `map-inv-equiv-equiv-Maybe e` is a section of `map-equiv-equiv-Maybe e`
 
+```agda
 abstract
   issec-map-inv-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
@@ -276,9 +282,11 @@ abstract
             ( map-equiv e)
             ( comp-map-inv-equiv-equiv-is-not-exception-Maybe e y f)) ∙
           ( issec-map-inv-equiv e (inl y))))
+```
 
--- The map map-inv-equiv-equiv e is a retraction of the map map-equiv-equiv
+### The map `map-inv-equiv-equiv-Maybe e` is a retraction of the map `map-equiv-equiv-Maybe e`
 
+```agda
 abstract
   isretr-map-inv-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
@@ -308,11 +316,11 @@ abstract
         ( ( ap ( map-inv-equiv e)
                ( comp-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
           ( isretr-map-inv-equiv e (inl x))))
+```
 
--- Proposition 16.2.1 Conclusion of the proof
+### The function `map-equiv-equiv-Maybe` is an equivalence
 
--- The function map-equiv-equiv-Maybe is an equivalence
-
+```agda
 abstract
   is-equiv-map-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
