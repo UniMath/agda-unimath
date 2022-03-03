@@ -20,57 +20,6 @@ open import elementary-number-theory public
 
 -- Example B.1.5
 
-Nat-𝕎 : UU lzero
-Nat-𝕎 = 𝕎 bool (Eq-bool true)
-
-zero-Nat-𝕎 : Nat-𝕎
-zero-Nat-𝕎 = constant-𝕎 false id
-
-succ-Nat-𝕎 : Nat-𝕎 → Nat-𝕎
-succ-Nat-𝕎 x = tree-𝕎 true (λ y → x)
-
-Nat-𝕎-ℕ : ℕ → Nat-𝕎
-Nat-𝕎-ℕ zero-ℕ = zero-Nat-𝕎
-Nat-𝕎-ℕ (succ-ℕ x) = succ-Nat-𝕎 (Nat-𝕎-ℕ x)
-
-ℕ-Nat-𝕎 : Nat-𝕎 → ℕ
-ℕ-Nat-𝕎 (tree-𝕎 true α) = succ-ℕ (ℕ-Nat-𝕎 (α star))
-ℕ-Nat-𝕎 (tree-𝕎 false α) = zero-ℕ
-
-issec-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
-issec-ℕ-Nat-𝕎 (tree-𝕎 true α) =
-  ap ( tree-𝕎 true)
-     ( eq-htpy H)
-  where
-  H : (z : unit) → Id (Nat-𝕎-ℕ (ℕ-Nat-𝕎 (α star))) (α z)
-  H star = issec-ℕ-Nat-𝕎 (α star)
-issec-ℕ-Nat-𝕎 (tree-𝕎 false α) =
-  ap (tree-𝕎 false) (eq-is-contr (universal-property-empty' Nat-𝕎))
-
-isretr-ℕ-Nat-𝕎 : (ℕ-Nat-𝕎 ∘ Nat-𝕎-ℕ) ~ id
-isretr-ℕ-Nat-𝕎 zero-ℕ = refl
-isretr-ℕ-Nat-𝕎 (succ-ℕ x) = ap succ-ℕ (isretr-ℕ-Nat-𝕎 x)
-
-is-equiv-Nat-𝕎-ℕ : is-equiv Nat-𝕎-ℕ
-is-equiv-Nat-𝕎-ℕ =
-  is-equiv-has-inverse
-    ℕ-Nat-𝕎
-    issec-ℕ-Nat-𝕎
-    isretr-ℕ-Nat-𝕎
-
-equiv-Nat-𝕎-ℕ : ℕ ≃ Nat-𝕎
-equiv-Nat-𝕎-ℕ = pair Nat-𝕎-ℕ is-equiv-Nat-𝕎-ℕ
-
-is-equiv-ℕ-Nat-𝕎 : is-equiv ℕ-Nat-𝕎
-is-equiv-ℕ-Nat-𝕎 =
-  is-equiv-has-inverse
-    Nat-𝕎-ℕ
-    isretr-ℕ-Nat-𝕎
-    issec-ℕ-Nat-𝕎
-
-equiv-ℕ-Nat-𝕎 : Nat-𝕎 ≃ ℕ
-equiv-ℕ-Nat-𝕎 = pair ℕ-Nat-𝕎 is-equiv-ℕ-Nat-𝕎
-
 -- Example B.1.6
 
 data Planar-Bin-Tree : UU lzero where
@@ -102,21 +51,6 @@ Planar-Bin-Tree-PBT-𝕎 (tree-𝕎 true α) =
     ( Planar-Bin-Tree-PBT-𝕎 (α false))
 Planar-Bin-Tree-PBT-𝕎 (tree-𝕎 false α) = {!!}
 -}
-
---------------------------------------------------------------------------------
-
--- Section B.2 Observational equality of W-types
-  
---------------------------------------------------------------------------------
-  
--- Section B.3 W-types as initial algebras
-                                          
-
-
-                                                                          
---------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
 
 -- Section B.4 Functoriality of 𝕎
 
