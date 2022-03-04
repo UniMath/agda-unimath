@@ -118,6 +118,7 @@ open import foundation
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
+open import foundation.Russells-paradox
 open import foundation.W-types
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
@@ -155,6 +156,7 @@ open import foundation.distributivity-of-dependent-functions-over-coproduct-type
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.effective-maps-equivalence-relations
+open import foundation.elementhood-relation-W-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.epimorphisms-with-respect-to-sets
@@ -169,12 +171,14 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.extensional-W-types
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.functoriality-W-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
@@ -190,7 +194,10 @@ open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.images
 open import foundation.impredicative-encodings
+open import foundation.indexed-W-types
+open import foundation.induction-W-types
 open import foundation.induction-principle-propositional-truncation
+open import foundation.inequality-W-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
@@ -204,6 +211,7 @@ open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.monomorphisms
+open import foundation.multisets
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.path-split-maps
@@ -214,6 +222,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
+open import foundation.ranks-of-elements-W-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.replacement
 open import foundation.retractions
@@ -224,7 +233,9 @@ open import foundation.sets
 open import foundation.singleton-induction
 open import foundation.slice
 open import foundation.small-maps
+open import foundation.small-multisets
 open import foundation.small-types
+open import foundation.small-universes
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.structure
@@ -247,6 +258,8 @@ open import foundation.uniqueness-set-truncations
 open import foundation.unit-type
 open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
+open import foundation.univalent-type-families
+open import foundation.universal-multiset
 open import foundation.universal-property-booleans
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
@@ -361,7 +374,6 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-foundations
 open import univalent-foundations.18-set-quotients
-open import univalent-foundations.W-types
 open import univalent-foundations.functoriality-loop-spaces
 open import univalent-foundations.isolated-points
 open import univalent-foundations.iterated-loop-spaces
