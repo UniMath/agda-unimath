@@ -175,6 +175,7 @@ open import foundation.impredicative-encodings
 open import foundation.indexed-W-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-W-types
+open import foundation.inequality-W-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.isolated-points
@@ -428,7 +429,6 @@ open import univalent-combinatorics.surjective-maps
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.W-types
 open import univalent-foundations.functoriality-loop-spaces
 open import univalent-foundations.isolated-points
 open import univalent-foundations.iterated-loop-spaces
