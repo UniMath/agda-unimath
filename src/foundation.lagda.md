@@ -44,6 +44,7 @@ open import foundation.distributivity-of-dependent-functions-over-coproduct-type
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs public
 open import foundation.double-negation public
 open import foundation.effective-maps-equivalence-relations public
+open import foundation.elementhood-relation-W-types public
 open import foundation.embeddings public
 open import foundation.empty-types public
 open import foundation.epimorphisms-with-respect-to-sets public
@@ -58,6 +59,7 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences public
 open import foundation.existential-quantification public
+open import foundation.extensional-W-types public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-maps public
@@ -72,15 +74,17 @@ open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation
+open import foundation.functoriality-W-types public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
-open import foundation.isolated-points public
 open import foundation.images public
 open import foundation.impredicative-encodings public
+open import foundation.indexed-W-types public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.induction-W-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.isolated-points public
@@ -94,6 +98,7 @@ open import foundation.maybe public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.multisets public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.path-split-maps public
@@ -107,6 +112,7 @@ open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.replacement public
 open import foundation.retractions public
+open import foundation.Russells-paradox public
 open import foundation.sections public
 open import foundation.set-presented-types public
 open import foundation.set-truncations public
@@ -114,7 +120,9 @@ open import foundation.sets public
 open import foundation.singleton-induction public
 open import foundation.slice public
 open import foundation.small-maps public
+open import foundation.small-multisets public
 open import foundation.small-types public
+open import foundation.small-universes public
 open import foundation.split-surjective-maps public
 open import foundation.structure-identity-principle public
 open import foundation.structure public
@@ -137,6 +145,7 @@ open import foundation.uniqueness-set-truncations public
 open import foundation.unit-type public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalence public
+open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public
 open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-coproduct-types public
