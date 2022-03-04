@@ -122,7 +122,7 @@ pr2 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) =
   is-equiv-map-coprod is-equiv-e is-equiv-f
 ```
 
-### If there exist `f : A 
+### If there exist `f : coprod A B ≃ coprod A B` and `g : B ≃ B` such that `f` and `g` coincide on `B`, then there exists `h : A ≃ A` such that `htpy-equiv (equiv-coprod h d) f`
 
 ```agda
 module _

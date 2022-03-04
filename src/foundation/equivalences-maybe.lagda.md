@@ -9,11 +9,15 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.empty-types using (ex-falso)
+open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; inv-equiv; map-inv-equiv; issec-map-inv-equiv;
-    isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse)
+  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; map-inv-equiv;
+    issec-map-inv-equiv; isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse;
+    htpy-eq-equiv; htpy-equiv; id-equiv)
 open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
+open import foundation.functoriality-coproduct-types using
+  ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)
+open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; _∙_; inv; refl; ap)
 open import foundation.injective-maps using
   ( is-injective; is-injective-map-equiv; is-injective-emb)
@@ -23,8 +27,14 @@ open import foundation.maybe using
     is-value-is-not-exception-Maybe; eq-is-value-Maybe;
     is-decidable-is-exception-Maybe; is-injective-unit-Maybe;
     is-not-exception-is-value-Maybe)
-open import foundation.unit-type using (unit; star)
+open import foundation.unit-type using (is-set-unit; unit; star)
 open import foundation.universe-levels using (Level; UU)
+open import foundation.sets using
+  ( Id-Prop; UU-Set; type-Set; is-set-type-Set)
+
+open import foundation-core.equality-dependent-pair-types using
+  ( eq-pair-Σ; pair-eq-Σ)
+open import foundation-core.propositions using (eq-is-prop)
 ```
 
 ## Idea
@@ -335,4 +345,49 @@ equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Maybe X ≃ Maybe Y) → (X ≃ Y)
 pr1 (equiv-equiv-Maybe e) = map-equiv-equiv-Maybe e
 pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
+```
+
+### For `X` a set, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception.
+
+```agda
+module _
+  {l : Level} (X : UU-Set l) 
+  where
+  
+  extend-equiv-Maybe :
+    (type-Set X ≃ type-Set X) ≃ (Σ (Maybe (type-Set X) ≃ Maybe (type-Set X)) (λ e → Id (map-equiv e (inr star)) (inr star)))
+  pr1 (pr1 extend-equiv-Maybe f) = equiv-coprod f id-equiv
+  pr2 (pr1 extend-equiv-Maybe f) = refl
+  pr2 extend-equiv-Maybe =
+    is-equiv-has-inverse
+      ( λ f → pr1 (retr-equiv-coprod (pr1 f) id-equiv (p f)))
+      ( λ f →
+        ( eq-pair-Σ
+          ( inv (eq-htpy-equiv (pr2 (retr-equiv-coprod (pr1 f) id-equiv (p f)))))
+          ( eq-is-prop
+            ( pr2
+              ( Id-Prop
+                ( pair (Maybe (type-Set X)) (is-set-coprod (is-set-type-Set X) is-set-unit))
+                ( map-equiv (pr1 f) (inr star))
+                ( inr star))))))
+      ( λ f → eq-htpy-equiv refl-htpy)
+    where
+    p : (f : (Σ (Maybe (type-Set X) ≃ Maybe (type-Set X)) (λ e → Id (map-equiv e (inr star)) (inr star))))
+      (b : unit) → Id (map-equiv (pr1 f) (inr b)) (inr b) 
+    p f star = pr2 f
+
+  computation-extend-equiv-Maybe : (f : type-Set X ≃ type-Set X) → (x y : type-Set X) →
+    Id (map-equiv f x) y → Id (map-equiv (pr1 (map-equiv extend-equiv-Maybe f)) (inl x)) (inl y)
+  computation-extend-equiv-Maybe f x y p = ap inl p
+
+  computation-inv-extend-equiv-Maybe : (f : Maybe (type-Set X) ≃ Maybe (type-Set X)) → (p : Id (map-equiv f (inr star)) (inr star)) →
+    (x : type-Set X) → Id (inl (map-equiv (map-inv-equiv extend-equiv-Maybe (pair f p)) x)) (map-equiv f (inl x))
+  computation-inv-extend-equiv-Maybe f p x =
+    htpy-eq-equiv (pr1 (pair-eq-Σ (pr2 (pr1 (pr2 extend-equiv-Maybe)) (pair f p)))) (inl x)
+
+  comp-extend-equiv-Maybe : (f g : type-Set X ≃ type-Set X) →
+    htpy-equiv
+      ( pr1 (map-equiv extend-equiv-Maybe (f ∘e g)))
+      ( (pr1 (map-equiv extend-equiv-Maybe f)) ∘e (pr1 (map-equiv extend-equiv-Maybe g)))
+  comp-extend-equiv-Maybe f g = compose-map-coprod (map-equiv g) (map-equiv f) id id
 ```

@@ -26,7 +26,8 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( ex-falso; ind-empty; empty-Prop; is-empty-type-trunc-Prop)
-open import foundation.equivalences using (_∘e_; id-equiv)
+open import foundation.equivalences using
+  ( _∘e_; htpy-eq-equiv; id-equiv; map-equiv; map-inv-equiv; right-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
@@ -52,6 +53,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; inl-Fin; neg-one-Fin; nat-Fin)
+open import univalent-combinatorics.counting using (count; number-of-elements-count)
 ```
 
 # The well-ordering principle on the standard finite types
@@ -70,6 +72,26 @@ exists-not-not-forall-Fin {l} {succ-ℕ k} {P} d H with d (inr star)
   T : Σ (Fin k) (λ x → ¬ (P (inl x))) → Σ (Fin (succ-ℕ k)) (λ x → ¬ (P x))
   T z = pair (inl (pr1 z)) (pr2 z)
 ... | inr f = pair (inr star) f
+
+exists-not-not-forall-count :
+  {l1 l2 : Level} {X : UU l1} (P : X → UU l2) →
+  (is-decidable-fam P) → count X →
+  ¬ ((x : X) → P x) → Σ X (λ x → ¬ (P x))
+exists-not-not-forall-count {l1} {l2} {X} P p e =
+  g ∘ ((exists-not-not-forall-Fin (p ∘ (map-equiv (pr2 e)) )) ∘ f)
+  where
+  k : ℕ
+  k = number-of-elements-count e
+  P' : Fin k → UU l2
+  P' = P ∘ map-equiv (pr2 e)
+  f : ¬ ((x : X) → P x) → ¬ ((x : Fin k) → P' x)
+  f nf f' =
+    nf
+      ( λ x →
+        tr P (htpy-eq-equiv (right-inverse-law-equiv (pr2 e)) x) (f' (map-inv-equiv (pr2 e) x)))
+  g : Σ (Fin k) (λ x → ¬ (P' x)) → Σ X (λ x → ¬ (P x))
+  pr1 (g (pair l np)) = map-equiv (pr2 e) l
+  pr2 (g (pair l np)) x = np x
 ```
 
 ```agda
