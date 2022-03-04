@@ -1,0 +1,161 @@
+# Precategories
+
+```agda
+{-# OPTIONS --without-K --exact-split #-}
+
+module categories.precategories where
+
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.function-extensionality using (eq-htpy)
+open import foundation.identity-types using (Id; inv; _∙_)
+open import foundation.propositions using
+  ( all-elements-equal; prod-Prop; Π-Prop; Π-Prop'; is-prop;
+    is-prop-all-elements-equal)
+open import foundation.sets using
+  ( UU-Set; type-Set; Id-Prop; is-set; is-set-type-Set)
+open import foundation.subtypes using (eq-subtype)
+open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+```
+
+## Idea
+
+A precategory in Homotopy Type Theory consists of:
+- a type of objects,
+- for each pair of objects, a set of morphisms,
+together with a composition operation (on compatible morphisms) that is:
+- associative,
+- unital (for each object there is a morphism that is both left and right neutral with respect to composition).
+
+The reason this is called a *pre*category and not a category in Homotopy Type Theory is that we want to reserve that name for precategories where the identities between the objects are exactly the isomorphisms.
+
+## Definition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (hom : A → A → UU-Set l2)
+  where
+  
+  associative-composition-structure-Set : UU (l1 ⊔ l2)
+  associative-composition-structure-Set =
+    Σ ( {x y z : A}
+        → type-Set (hom y z)
+        → type-Set (hom x y)
+        → type-Set (hom x z))
+      ( λ μ →
+        {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
+        (f : type-Set (hom x y)) →
+        Id (μ (μ h g) f) (μ h (μ g f)))
+
+  is-unital-composition-structure-Set :
+    associative-composition-structure-Set → UU (l1 ⊔ l2)
+  is-unital-composition-structure-Set μ =
+    Σ ( (x : A) → type-Set (hom x x))
+      ( λ e →
+        ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ (e y) f) f) ×
+        ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ f (e x)) f))
+
+  abstract
+    all-elements-equal-is-unital-composition-structure-Set :
+      ( μ : associative-composition-structure-Set) →
+      all-elements-equal (is-unital-composition-structure-Set μ)
+    all-elements-equal-is-unital-composition-structure-Set
+      ( pair μ assoc-μ)
+      ( pair e (pair left-unit-law-e right-unit-law-e))
+      ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
+      eq-subtype
+        ( λ x →
+          prod-Prop
+            ( Π-Prop' A
+              ( λ a →
+                Π-Prop' A
+                  ( λ b →
+                    Π-Prop
+                      ( type-Set (hom a b))
+                      ( λ f' →
+                        Id-Prop (hom a b) (μ (x b) f') f'))))
+            ( Π-Prop' A
+              ( λ a →
+                Π-Prop' A
+                  ( λ b →
+                    Π-Prop
+                      ( type-Set (hom a b))
+                      ( λ f' →
+                        Id-Prop (hom a b) (μ f' (x a)) f')))))
+        ( eq-htpy
+          ( λ x →
+            ( inv (left-unit-law-e' (e x))) ∙
+            ( right-unit-law-e (e' x))))
+
+
+    is-prop-is-unital-composition-structure-Set :
+      ( μ : associative-composition-structure-Set) →
+      is-prop (is-unital-composition-structure-Set μ)
+    is-prop-is-unital-composition-structure-Set μ =
+      is-prop-all-elements-equal
+        ( all-elements-equal-is-unital-composition-structure-Set μ)
+
+Precat :
+  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Precat l1 l2 =
+  Σ ( UU l1)
+    ( λ A →
+      Σ ( A → A → UU-Set l2)
+        ( λ hom →
+          Σ ( associative-composition-structure-Set hom)
+            ( is-unital-composition-structure-Set hom)))
+
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  where
+  
+  obj-Precat : UU l1
+  obj-Precat = pr1 C
+  
+  hom-Precat : (x y : obj-Precat) → UU-Set l2
+  hom-Precat = pr1 (pr2 C)
+
+  type-hom-Precat : (x y : obj-Precat) → UU l2
+  type-hom-Precat x y = type-Set (hom-Precat x y)
+
+  is-set-type-hom-Precat : (x y : obj-Precat) → is-set (type-hom-Precat x y)
+  is-set-type-hom-Precat x y = is-set-type-Set (hom-Precat x y)
+
+  associative-composition-Precat :
+    associative-composition-structure-Set hom-Precat
+  associative-composition-Precat = pr1 (pr2 (pr2 C))
+
+  comp-Precat : {x y z : obj-Precat} →
+    type-hom-Precat y z → type-hom-Precat x y → type-hom-Precat x z
+  comp-Precat = pr1 associative-composition-Precat
+
+  comp-Precat' : {x y z : obj-Precat} →
+    type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
+  comp-Precat' f g = comp-Precat g f
+
+  assoc-comp-Precat :
+    {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
+    (f : type-hom-Precat x y) →
+    Id (comp-Precat (comp-Precat h g) f)
+       (comp-Precat h (comp-Precat g f))
+  assoc-comp-Precat = pr2 associative-composition-Precat
+
+  is-unital-Precat :
+    is-unital-composition-structure-Set
+      hom-Precat
+      associative-composition-Precat
+  is-unital-Precat = pr2 (pr2 (pr2 C))
+
+  id-Precat : {x : obj-Precat} → type-hom-Precat x x
+  id-Precat {x} = pr1 is-unital-Precat x
+
+  left-unit-law-comp-Precat :
+    {x y : obj-Precat} (f : type-hom-Precat x y) →
+    Id (comp-Precat id-Precat f) f
+  left-unit-law-comp-Precat = pr1 (pr2 is-unital-Precat)
+
+  right-unit-law-comp-Precat :
+    {x y : obj-Precat} (f : type-hom-Precat x y) →
+    Id (comp-Precat f id-Precat) f
+  right-unit-law-comp-Precat = pr2 (pr2 is-unital-Precat)
+```
