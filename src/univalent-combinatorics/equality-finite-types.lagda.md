@@ -68,7 +68,7 @@ has-decidable-equality-is-finite {l1} {X} is-finite-X =
 
 ```agda
 is-set-has-cardinality :
-  {l1 : Level} {X : UU l1} {k : ℕ} → has-cardinality X k → is-set X
+  {l1 : Level} {X : UU l1} {k : ℕ} → has-cardinality k X → is-set X
 is-set-has-cardinality H = is-set-mere-equiv' H (is-set-Fin _)
 
 set-UU-Fin-Level : {l1 : Level} {k : ℕ} → UU-Fin-Level l1 k → UU-Set l1
@@ -84,7 +84,7 @@ set-UU-Fin X = set-UU-Fin-Level X
 ```agda
 has-decidable-equality-has-cardinality :
   {l1 : Level} {X : UU l1} {k : ℕ} →
-  has-cardinality X k → has-decidable-equality X
+  has-cardinality k X → has-decidable-equality X
 has-decidable-equality-has-cardinality {l1} {X} {k} H =
   apply-universal-property-trunc-Prop H
     ( has-decidable-equality-Prop X)

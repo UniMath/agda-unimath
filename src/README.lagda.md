@@ -88,8 +88,9 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Finite groups
 
 ```agda
+open import finite-groups.abstract-quaternion-group
 open import finite-groups.finite-groups
-open import finite-groups.quaternion-group
+open import finite-groups.concrete-quaternion-group
 open import finite-groups.transpositions
 ```
 

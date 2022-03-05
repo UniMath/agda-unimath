@@ -61,7 +61,7 @@ Transpositions are permutations of two elements
 ```agda
 module _
   {l1 l2 : Level} (X : UU l1) (P : X → decidable-Prop l2)
-  (H : has-cardinality (Σ X (λ x → type-decidable-Prop (P x))) 2)
+  (H : has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x))))
   where
 
   map-transposition' :
@@ -126,7 +126,8 @@ module _
   where
 
   transposition-two-elements : (x y : X) → ¬ (Id x y) →
-    Σ (X → decidable-Prop l) (λ P → has-cardinality (Σ X (λ x → type-decidable-Prop (P x))) 2)
+    Σ ( X → decidable-Prop l)
+      ( λ P → has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x))))
   pr1 (pr1 (transposition-two-elements x y p) z) = coprod (Id x z) (Id y z)
   pr1 (pr2 (pr1 (transposition-two-elements x y p) z)) =
     is-prop-coprod
@@ -219,7 +220,7 @@ module _
     ( list
       ( Σ
         ( X → decidable-Prop l2)
-        ( λ P → has-cardinality (Σ X (λ x → type-decidable-Prop (P x))) 2))) →
+        ( λ P → has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))) →
     ( X ≃ X)
   permutation-list-transpositions =
     fold-list id-equiv λ (pair P H) e → (transposition X P H) ∘e e
@@ -227,10 +228,12 @@ module _
 Fin-succ-Fin-transposition : (n : ℕ) → 
   ( Σ
     ( Fin n → decidable-Prop lzero)
-    ( λ P → has-cardinality (Σ (Fin n) (λ x → type-decidable-Prop (P x))) 2)) → 
+    ( λ P → has-cardinality 2 (Σ (Fin n) (λ x → type-decidable-Prop (P x))))) → 
     ( Σ
       ( Fin (succ-ℕ n) → decidable-Prop lzero)
-      ( λ P → has-cardinality (Σ (Fin (succ-ℕ n)) (λ x → type-decidable-Prop (P x))) 2))
+      ( λ P →
+        has-cardinality 2
+          ( Σ (Fin (succ-ℕ n)) (λ x → type-decidable-Prop (P x)))))
 pr1 (Fin-succ-Fin-transposition n (pair P H)) (inl x) = P x
 pr1 (Fin-succ-Fin-transposition n (pair P H)) (inr x) =
   pair empty (pair is-prop-empty is-decidable-empty)
@@ -238,11 +241,12 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
   apply-universal-property-trunc-Prop
     ( H)
     ( pair
-      ( has-cardinality
+      ( has-cardinality 2
         ( Σ
           ( Fin (succ-ℕ n))
-          ( λ x → type-decidable-Prop (pr1 (Fin-succ-Fin-transposition n (pair P H)) x)))
-        ( 2))
+          ( λ x →
+            type-decidable-Prop
+              ( pr1 (Fin-succ-Fin-transposition n (pair P H)) x))))
       ( is-prop-type-trunc-Prop))
     ( λ h →
       unit-trunc-Prop
@@ -274,7 +278,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
 correct-Fin-succ-Fin-transposition : (n : ℕ) → 
   (t : Σ
     ( Fin n → decidable-Prop lzero)
-    ( λ P → has-cardinality (Σ (Fin n) (λ x → type-decidable-Prop (P x))) 2)) → 
+    ( λ P → has-cardinality 2 (Σ (Fin n) (λ x → type-decidable-Prop (P x))))) → 
   htpy-equiv
     ( transposition
       ( Fin (succ-ℕ n))
@@ -308,7 +312,8 @@ correct-Fin-succ-Fin-transposition-list : (n : ℕ) →
   (l : list
     ( Σ
       ( Fin n → decidable-Prop lzero)
-      ( λ P → has-cardinality (Σ (Fin n) (λ x → type-decidable-Prop (P x))) 2))) →
+      ( λ P →
+        has-cardinality 2 (Σ (Fin n) (λ x → type-decidable-Prop (P x)))))) →
   htpy-equiv
     ( permutation-list-transpositions (Fin (succ-ℕ n)) (map-list (Fin-succ-Fin-transposition n) l))
     ( pr1
@@ -336,7 +341,9 @@ list-transpositions-permutation-Fin' : (n : ℕ) → (f : Fin (succ-ℕ n) ≃ F
   ( list
     ( Σ
       ( Fin (succ-ℕ n) → decidable-Prop lzero)
-      ( λ P → has-cardinality (Σ (Fin (succ-ℕ n)) (λ x → type-decidable-Prop (P x))) 2)))
+      ( λ P →
+        has-cardinality 2
+          ( Σ (Fin (succ-ℕ n)) (λ x → type-decidable-Prop (P x))))))
 list-transpositions-permutation-Fin' zero-ℕ f x p = nil
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   cons
@@ -347,7 +354,9 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
   where
   t : ( Σ
     ( Fin (succ-ℕ (succ-ℕ n)) → decidable-Prop lzero)
-    ( λ P → has-cardinality (Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x))) 2))
+    ( λ P →
+      has-cardinality 2
+        ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
   t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
   f' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
   f' =
@@ -369,7 +378,8 @@ list-transpositions-permutation-Fin : (n : ℕ) → (f : Fin n ≃ Fin n) →
   ( list
     ( Σ
       ( Fin n → decidable-Prop lzero)
-      ( λ P → has-cardinality (Σ (Fin n) (λ x → type-decidable-Prop (P x))) 2)))
+      ( λ P →
+        has-cardinality 2 (Σ (Fin n) (λ x → type-decidable-Prop (P x))))))
 list-transpositions-permutation-Fin zero-ℕ f = nil
 list-transpositions-permutation-Fin (succ-ℕ n) f = list-transpositions-permutation-Fin' n f (map-equiv f (inr star)) refl
 
@@ -412,7 +422,9 @@ retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inl 
   where
   t : ( Σ
     ( Fin (succ-ℕ (succ-ℕ n)) → decidable-Prop lzero)
-    ( λ P → has-cardinality (Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x))) 2))
+    ( λ P →
+      has-cardinality 2
+        ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
   t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
   P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
   P = pair
@@ -480,7 +492,9 @@ retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inr 
   where
   t : ( Σ
     ( Fin (succ-ℕ (succ-ℕ n)) → decidable-Prop lzero)
-    ( λ P → has-cardinality (Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x))) 2))
+    ( λ P →
+      has-cardinality 2
+        ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
   t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
   P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
   P = pair
@@ -517,7 +531,9 @@ retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inr star) z 
   where
   t : ( Σ
     ( Fin (succ-ℕ (succ-ℕ n)) → decidable-Prop lzero)
-    ( λ P → has-cardinality (Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x))) 2))
+    ( λ P →
+      has-cardinality 2
+        ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
   t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
   F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
   F' =

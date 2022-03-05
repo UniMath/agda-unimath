@@ -398,8 +398,8 @@ binomial-type-Fin (succ-ℕ n) (succ-ℕ m) =
 
 has-cardinality-binomial-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {n m : ℕ} →
-  has-cardinality A n → has-cardinality B m →
-  has-cardinality (binomial-type A B) (n choose-ℕ m)
+  has-cardinality n A → has-cardinality m B →
+  has-cardinality (n choose-ℕ m) (binomial-type A B)
 has-cardinality-binomial-type {A = A} {B} {n} {m} H K =
   apply-universal-property-trunc-Prop H
     ( has-cardinality-Prop (binomial-type A B) (n choose-ℕ m))

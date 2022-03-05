@@ -120,8 +120,8 @@ has-cardinality-Prop :
 has-cardinality-Prop X k = mere-equiv-Prop (Fin k) X
 
 has-cardinality :
-  {l : Level} → UU l → ℕ → UU l
-has-cardinality X k = mere-equiv (Fin k) X
+  {l : Level} → ℕ → UU l → UU l
+has-cardinality k X = mere-equiv (Fin k) X
 ```
 
 ### The type of all types of cardinality k of a given universe leve l
@@ -160,7 +160,7 @@ abstract
 ```agda
 has-finite-cardinality :
   {l : Level} → UU l → UU l
-has-finite-cardinality X = Σ ℕ (has-cardinality X)
+has-finite-cardinality X = Σ ℕ (λ k → has-cardinality k X)
 
 number-of-elements-has-finite-cardinality :
   {l : Level} {X : UU l} → has-finite-cardinality X → ℕ
@@ -390,7 +390,7 @@ module _
         ( is-finite-count ∘ (pair k))
 
   abstract
-    is-finite-has-cardinality : {k : ℕ} → has-cardinality X k → is-finite X
+    is-finite-has-cardinality : {k : ℕ} → has-cardinality k X → is-finite X
     is-finite-has-cardinality {k} H =
       is-finite-has-finite-cardinality (pair k H)
 
