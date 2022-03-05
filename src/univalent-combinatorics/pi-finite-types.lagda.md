@@ -80,7 +80,8 @@ open import foundation.subtypes using (is-emb-pr1)
 open import foundation.surjective-maps using
   ( is-surjective; is-equiv-is-emb-is-surjective; is-surjective-comp')
 open import foundation.truncated-types using (is-trunc)
-open import foundation.truncation-levels using (𝕋; zero-𝕋; succ-𝕋)
+open import foundation.truncation-levels using
+  ( 𝕋; zero-𝕋; succ-𝕋; truncation-level-ℕ)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
 open import foundation.unit-type using (unit; is-contr-unit; star)
@@ -119,7 +120,7 @@ open import univalent-combinatorics.finite-types using
     is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
     is-finite-is-decidable-Prop)
 open import univalent-combinatorics.finitely-presented-types using
-  ( has-finite-presentation-has-cardinality-components)
+  ( has-presentation-of-cardinality-has-cardinality-components)
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
@@ -129,9 +130,6 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 A type is `π_n`-finite if it has finitely many connected components and all of its homotopy groups up to level `n` at all base points are finite.
 
 ```agda
-truncation-level-ℕ : ℕ → 𝕋
-truncation-level-ℕ zero-ℕ = zero-𝕋
-truncation-level-ℕ (succ-ℕ n) = succ-𝕋 (truncation-level-ℕ n)
 
 -- Section 1. π-Finiteness
 
@@ -818,7 +816,8 @@ has-finite-connected-components-Σ' zero-ℕ e H K =
     ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
 has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
   apply-universal-property-trunc-Prop
-    ( has-finite-presentation-has-cardinality-components (unit-trunc-Prop e))
+    ( has-presentation-of-cardinality-has-cardinality-components
+      ( unit-trunc-Prop e))
     ( has-finite-connected-components-Prop (Σ A B))
     ( α)
   where

@@ -5,10 +5,11 @@
 
 module elementary-number-theory.natural-numbers where
 
+open import foundation-core.empty-types using (ex-falso)
+
 open import foundation.booleans using (bool; Eq-bool; true; false)
 open import foundation.contractible-types using (eq-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_)
 open import foundation.function-extensionality using (eq-htpy)

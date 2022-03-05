@@ -84,6 +84,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
+open import foundation-core.empty-types
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equality-fibers-of-maps
@@ -98,6 +99,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-systems
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
+open import foundation-core.negation
 open import foundation-core.path-split-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
