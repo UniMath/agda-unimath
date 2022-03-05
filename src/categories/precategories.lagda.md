@@ -21,11 +21,11 @@ open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ## Idea
 
 A precategory in Homotopy Type Theory consists of:
-- a type of objects,
-- for each pair of objects, a set of morphisms,
-together with a composition operation (on compatible morphisms) that is:
-- associative,
-- unital (for each object there is a morphism that is both left and right neutral with respect to composition).
+- a type `A` of objects,
+- for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
+together with a composition operation `comp : hom y z → hom x y → hom x z` such that:
+- `comp (comp h g) f = comp h (comp g f)` for any morphisms `h : hom z w`, `g : hom y z` and `f : hom x y`,
+- for each object `x : A` there is a morphism `id_x : hom x x` such that `comp id_x f = f` and `comp g id_x = g` for any morphisms `f : hom x y` and `g : hom z x`.
 
 The reason this is called a *pre*category and not a category in Homotopy Type Theory is that we want to reserve that name for precategories where the identities between the objects are exactly the isomorphisms.
 
@@ -54,46 +54,6 @@ module _
       ( λ e →
         ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ (e y) f) f) ×
         ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ f (e x)) f))
-
-  abstract
-    all-elements-equal-is-unital-composition-structure-Set :
-      ( μ : associative-composition-structure-Set) →
-      all-elements-equal (is-unital-composition-structure-Set μ)
-    all-elements-equal-is-unital-composition-structure-Set
-      ( pair μ assoc-μ)
-      ( pair e (pair left-unit-law-e right-unit-law-e))
-      ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
-      eq-subtype
-        ( λ x →
-          prod-Prop
-            ( Π-Prop' A
-              ( λ a →
-                Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom a b))
-                      ( λ f' →
-                        Id-Prop (hom a b) (μ (x b) f') f'))))
-            ( Π-Prop' A
-              ( λ a →
-                Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom a b))
-                      ( λ f' →
-                        Id-Prop (hom a b) (μ f' (x a)) f')))))
-        ( eq-htpy
-          ( λ x →
-            ( inv (left-unit-law-e' (e x))) ∙
-            ( right-unit-law-e (e' x))))
-
-
-    is-prop-is-unital-composition-structure-Set :
-      ( μ : associative-composition-structure-Set) →
-      is-prop (is-unital-composition-structure-Set μ)
-    is-prop-is-unital-composition-structure-Set μ =
-      is-prop-all-elements-equal
-        ( all-elements-equal-is-unital-composition-structure-Set μ)
 
 Precat :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -158,4 +118,57 @@ module _
     {x y : obj-Precat} (f : type-hom-Precat x y) →
     Id (comp-Precat f id-Precat) f
   right-unit-law-comp-Precat = pr2 (pr2 is-unital-Precat)
+```
+
+## Properties
+
+### The property of having identity morphisms is a proposition
+
+Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to `comp`. It is enough to show that `e = e'` since the right and left unit laws are propositions (because all hom-types are sets). By function extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by the unit laws we have the following chain of equalities:
+`e x = comp (e' x) (e x) = e' x.`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (hom : A → A → UU-Set l2)
+  where
+
+  abstract
+    all-elements-equal-is-unital-composition-structure-Set :
+      ( μ : associative-composition-structure-Set hom) →
+      all-elements-equal (is-unital-composition-structure-Set hom μ)
+    all-elements-equal-is-unital-composition-structure-Set
+      ( pair μ assoc-μ)
+      ( pair e (pair left-unit-law-e right-unit-law-e))
+      ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
+      eq-subtype
+        ( λ x →
+          prod-Prop
+            ( Π-Prop' A
+              ( λ a →
+                Π-Prop' A
+                  ( λ b →
+                    Π-Prop
+                      ( type-Set (hom a b))
+                      ( λ f' →
+                        Id-Prop (hom a b) (μ (x b) f') f'))))
+            ( Π-Prop' A
+              ( λ a →
+                Π-Prop' A
+                  ( λ b →
+                    Π-Prop
+                      ( type-Set (hom a b))
+                      ( λ f' →
+                        Id-Prop (hom a b) (μ f' (x a)) f')))))
+        ( eq-htpy
+          ( λ x →
+            ( inv (left-unit-law-e' (e x))) ∙
+            ( right-unit-law-e (e' x))))
+
+
+    is-prop-is-unital-composition-structure-Set :
+      ( μ : associative-composition-structure-Set hom) →
+      is-prop (is-unital-composition-structure-Set hom μ)
+    is-prop-is-unital-composition-structure-Set μ =
+      is-prop-all-elements-equal
+        ( all-elements-equal-is-unital-composition-structure-Set μ)
 ```
