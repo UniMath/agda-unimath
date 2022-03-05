@@ -230,33 +230,75 @@ abstract
 #### If `X` is a 2-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
 
 ```agda
-abstract
-  is-equiv-ev-zero-equiv-Fin-two-ℕ :
-    {l1 : Level} (X : 2-Element-Type l1) →
-    is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {type-2-Element-Type X})
-  is-equiv-ev-zero-equiv-Fin-two-ℕ X =
-    apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
-      ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
-      ( λ α →
-        is-equiv-left-factor'
-          ( ev-zero-equiv-Fin-two-ℕ)
-          ( map-equiv (equiv-postcomp-equiv α (Fin 2)))
-          ( is-equiv-comp
-            ( ( ev-zero-equiv-Fin-two-ℕ) ∘
-              ( map-equiv (equiv-postcomp-equiv α (Fin 2))))
-            ( map-equiv α)
+module _
+  {l1 : Level} (X : 2-Element-Type l1)
+  where
+  
+  abstract
+    is-equiv-ev-zero-equiv-Fin-two-ℕ :
+      is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {type-2-Element-Type X})
+    is-equiv-ev-zero-equiv-Fin-two-ℕ =
+      apply-universal-property-trunc-Prop
+        ( mere-equiv-2-Element-Type X)
+        ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
+        ( λ α →
+          is-equiv-left-factor'
             ( ev-zero-equiv-Fin-two-ℕ)
-            ( refl-htpy)
-            ( is-equiv-ev-zero-aut-Fin-two-ℕ)
-            ( is-equiv-map-equiv α))
-          ( is-equiv-comp-equiv α (Fin 2)))
+            ( map-equiv (equiv-postcomp-equiv α (Fin 2)))
+            ( is-equiv-comp
+              ( ( ev-zero-equiv-Fin-two-ℕ) ∘
+                ( map-equiv (equiv-postcomp-equiv α (Fin 2))))
+              ( map-equiv α)
+              ( ev-zero-equiv-Fin-two-ℕ)
+              ( refl-htpy)
+              ( is-equiv-ev-zero-aut-Fin-two-ℕ)
+              ( is-equiv-map-equiv α))
+            ( is-equiv-comp-equiv α (Fin 2)))
 
-equiv-ev-zero-equiv-Fin-two-ℕ :
-  {l1 : Level} (X : 2-Element-Type l1) →
-  (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X
-pr1 (equiv-ev-zero-equiv-Fin-two-ℕ X) = ev-zero-equiv-Fin-two-ℕ
-pr2 (equiv-ev-zero-equiv-Fin-two-ℕ X) = is-equiv-ev-zero-equiv-Fin-two-ℕ X
+  equiv-ev-zero-equiv-Fin-two-ℕ :
+    (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X
+  pr1 equiv-ev-zero-equiv-Fin-two-ℕ = ev-zero-equiv-Fin-two-ℕ
+  pr2 equiv-ev-zero-equiv-Fin-two-ℕ = is-equiv-ev-zero-equiv-Fin-two-ℕ
+
+  equiv-point-2-Element-Type :
+    type-2-Element-Type X → Fin 2 ≃ type-2-Element-Type X
+  equiv-point-2-Element-Type =
+    map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
+
+  map-equiv-point-2-Element-Type :
+    type-2-Element-Type X → Fin 2 → type-2-Element-Type X
+  map-equiv-point-2-Element-Type x = map-equiv (equiv-point-2-Element-Type x)
+
+  map-inv-equiv-point-2-Element-Type :
+    type-2-Element-Type X → type-2-Element-Type X → Fin 2
+  map-inv-equiv-point-2-Element-Type x =
+    map-inv-equiv (equiv-point-2-Element-Type x)
+
+  issec-map-inv-equiv-point-2-Element-Type :
+    (x : type-2-Element-Type X) →
+    (map-equiv-point-2-Element-Type x ∘ map-inv-equiv-point-2-Element-Type x) ~
+    id
+  issec-map-inv-equiv-point-2-Element-Type x =
+    issec-map-inv-equiv (equiv-point-2-Element-Type x)
+
+  isretr-map-inv-equiv-point-2-Element-Type :
+    (x : type-2-Element-Type X) →
+    (map-inv-equiv-point-2-Element-Type x ∘ map-equiv-point-2-Element-Type x) ~
+    id
+  isretr-map-inv-equiv-point-2-Element-Type x =
+    isretr-map-inv-equiv (equiv-point-2-Element-Type x)
+
+  compute-map-equiv-point-2-Element-Type :
+    (x : type-2-Element-Type X) →
+    Id (map-equiv-point-2-Element-Type x zero-Fin) x
+  compute-map-equiv-point-2-Element-Type =
+    issec-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
+
+  is-unique-equiv-point-2-Element-Type :
+    (e : Fin 2 ≃ type-2-Element-Type X) →
+    htpy-equiv (equiv-point-2-Element-Type (map-equiv e zero-Fin)) e
+  is-unique-equiv-point-2-Element-Type e =
+    htpy-eq-equiv (isretr-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
 ```
 
 #### The type of pointed 2-element types of any universe level is contractible
@@ -472,17 +514,14 @@ module _
 
   compute-swap-2-Element-Type' :
     (x y : type-2-Element-Type X) → ¬ (Id x y) → (z : Fin 2) →
-    Id ( map-inv-equiv
-         ( map-inv-is-equiv (is-equiv-ev-zero-equiv-Fin-two-ℕ X) x)
-         ( y))
-       ( z) →
+    Id ( map-inv-equiv-point-2-Element-Type X x y) z →
     Id ( map-swap-2-Element-Type x) y
   compute-swap-2-Element-Type' x y p (inl (inr star)) q =
     ex-falso
-      (p
-      ( (inv (pr2 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x)) ∙
-        ( (ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x)) (inv q)) ∙
-          (pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x))) y))))
+      ( p
+        ( (inv (compute-map-equiv-point-2-Element-Type X x)) ∙
+          ( (ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x)) (inv q)) ∙
+            (pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x))) y))))
   compute-swap-2-Element-Type' x y p (inr star) q =
     ( ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x)) (inv q)) ∙
     pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x))) y
@@ -592,10 +631,11 @@ module _
                 ( refl)
                 ( refl))))
     where
-    f : (h : type-2-Element-Type X ≃ Fin 2) → (y : type-2-Element-Type X) → (k1 k2 k3 : Fin 2) →
-      Id (map-equiv h x) k1 → Id (map-equiv h y) k2 →
-      Id (map-equiv h (map-equiv (swap-2-Element-Type X) y)) k3 →
-      Id (map-equiv (swap-2-Element-Type X) y) y
+    f : (h : type-2-Element-Type X ≃ Fin 2) → (y : type-2-Element-Type X) →
+        ( k1 k2 k3 : Fin 2) →
+        Id (map-equiv h x) k1 → Id (map-equiv h y) k2 →
+        Id (map-equiv h (map-equiv (swap-2-Element-Type X) y)) k3 →
+        Id (map-equiv (swap-2-Element-Type X) y) y
     f h y (inl (inr star)) (inl (inr star)) k3 p q r =
       tr
         ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
@@ -612,9 +652,18 @@ module _
             ( ap
               ( map-equiv (h ∘e (swap-2-Element-Type X)))
               ( map-inv-equiv
-                ( pair (ap (map-equiv h)) (is-emb-is-equiv (pr2 h) x (map-equiv (swap-2-Element-Type X) y)))
-                (p ∙ inv r)) ∙
-              (ap (map-equiv h) (is-involution-aut-2-element-type X (swap-2-Element-Type X) y) ∙ q)))))
+                ( pair
+                  ( ap (map-equiv h))
+                  ( is-emb-is-equiv
+                    ( pr2 h)
+                    ( x)
+                    ( map-equiv (swap-2-Element-Type X) y)))
+                ( p ∙ inv r)) ∙
+              ( ( ap
+                  ( map-equiv h)
+                  ( is-involution-aut-2-element-type X
+                    ( swap-2-Element-Type X) y)) ∙
+                ( q))))))
     f h y (inl (inr star)) (inr star) (inr star) p q r =
       ( map-inv-equiv
         (pair
@@ -634,9 +683,19 @@ module _
             ( ap
               ( map-equiv (h ∘e (swap-2-Element-Type X)))
               ( map-inv-equiv
-                ( pair (ap (map-equiv h)) (is-emb-is-equiv (pr2 h) x (map-equiv (swap-2-Element-Type X) y)))
-                (p ∙ inv r)) ∙
-              (ap (map-equiv h) (is-involution-aut-2-element-type X (swap-2-Element-Type X) y) ∙ q)))))
+                ( pair
+                  ( ap (map-equiv h))
+                  ( is-emb-is-equiv
+                    ( pr2 h)
+                    ( x)
+                    ( map-equiv (swap-2-Element-Type X) y)))
+                ( p ∙ inv r)) ∙
+              ( ( ap
+                  ( map-equiv h)
+                  ( is-involution-aut-2-element-type X
+                    ( swap-2-Element-Type X)
+                    ( y))) ∙
+                ( q))))))
     f h y (inr star) (inr star) k3 p q r =
       tr
         ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
