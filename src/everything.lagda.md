@@ -71,8 +71,9 @@ open import elementary-number-theory.universal-property-natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
+open import finite-groups.abstract-quaternion-group
+open import finite-groups.concrete-quaternion-group
 open import finite-groups.finite-groups
-open import finite-groups.quaternion-group
 open import finite-groups.transpositions
 open import foundation-core.0-maps
 open import foundation-core.1-types
@@ -202,6 +203,7 @@ open import foundation.induction-principle-propositional-truncation
 open import foundation.inequality-W-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.involutions
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
 open import foundation.law-of-excluded-middle
