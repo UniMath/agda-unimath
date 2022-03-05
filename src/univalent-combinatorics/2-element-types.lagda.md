@@ -516,22 +516,23 @@ module _
     (x y : type-2-Element-Type X) → ¬ (Id x y) → (z : Fin 2) →
     Id ( map-inv-equiv-point-2-Element-Type X x y) z →
     Id ( map-swap-2-Element-Type x) y
-  compute-swap-2-Element-Type' x y p (inl (inr star)) q =
+  compute-swap-2-Element-Type' x y f (inl (inr star)) q =
     ex-falso
-      ( p
+      ( f
         ( (inv (compute-map-equiv-point-2-Element-Type X x)) ∙
-          ( (ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x)) (inv q)) ∙
-            (pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x))) y))))
+          ( ( ap (map-equiv-point-2-Element-Type X x) (inv q)) ∙
+            ( issec-map-inv-equiv-point-2-Element-Type X x y))))
   compute-swap-2-Element-Type' x y p (inr star) q =
-    ( ap (map-equiv (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x)) (inv q)) ∙
-    pr2 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x))) y
+    ( ap (map-equiv-point-2-Element-Type X x) (inv q)) ∙
+    ( issec-map-inv-equiv-point-2-Element-Type X x y)
 
   compute-swap-2-Element-Type :
     (x y : type-2-Element-Type X) → ¬ (Id x y) →
     Id (map-swap-2-Element-Type x) y
   compute-swap-2-Element-Type x y p =
     compute-swap-2-Element-Type' x y p
-      (pr1 (pr1 (pr2 (pr1 (pr1 (is-equiv-ev-zero-equiv-Fin-two-ℕ X)) x))) y) refl
+      ( map-inv-equiv-point-2-Element-Type X x y)
+      ( refl)
 
 module _
   {l : Level} (X : 2-Element-Type l)
@@ -546,13 +547,7 @@ module _
       ( empty-Prop)
       ( λ f →
         neq-inr-inl
-          ( map-inv-equiv
-            ( pair
-              ( ap (map-equiv f))
-              ( is-emb-is-equiv
-                ( pr2 f)
-                ( inr star)
-                ( zero-Fin)))
+          ( is-injective-map-equiv f
             ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
 
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
@@ -564,13 +559,7 @@ module _
       ( empty-Prop)
       ( λ f →
         neq-inr-inl
-          ( map-inv-equiv
-            ( pair
-              ( ap (map-equiv f))
-              ( is-emb-is-equiv
-                ( pr2 f)
-                ( inr star)
-                ( zero-Fin)))
+          ( is-injective-map-equiv f
             ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
 ```
 

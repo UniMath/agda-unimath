@@ -179,7 +179,7 @@ open import foundation.induction-W-types
 open import foundation.inequality-W-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundaiton.involutions
+open import foundation.involutions
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
 open import foundation.law-of-excluded-middle
