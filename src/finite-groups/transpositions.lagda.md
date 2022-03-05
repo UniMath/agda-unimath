@@ -1,6 +1,5 @@
 # Transpositions
 
-
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
@@ -29,6 +28,7 @@ open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functoriality-coproduct-types using (id-map-coprod; map-coprod)
 open import foundation.homotopies using (comp-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.involutions using (is-involution; is-equiv-is-involution)
 open import foundation.lists using (cons; list; fold-list; map-list; nil)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
@@ -43,8 +43,9 @@ open import foundation-core.propositions using (eq-is-prop)
 open import foundation-core.homotopies using (_~_; refl-htpy; inv-htpy)
 
 open import univalent-combinatorics.2-element-types using
-  ( computation-swap-two-elements; is-involution-aut-2-element-type;
-    has-no-fixpoints-swap-two-elements; swap-two-elements; is-not-identity-swap-two-elements)
+  ( compute-swap-2-Element-Type; is-involution-aut-2-element-type;
+    has-no-fixpoints-swap-2-Element-Type; swap-2-Element-Type;
+    is-not-identity-swap-2-Element-Type; map-swap-2-Element-Type)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; Fin-Set)
 open import univalent-combinatorics.finite-types using (has-cardinality)
@@ -66,7 +67,7 @@ module _
   map-transposition' :
     (x : X) (d : is-decidable (type-decidable-Prop (P x))) → X
   map-transposition' x (inl p) =
-    pr1 (map-equiv (swap-two-elements (pair _ H)) (pair x p))
+    pr1 (map-swap-2-Element-Type (pair _ H) (pair x p))
   map-transposition' x (inr np) = x
 
   map-transposition : X → X
@@ -82,32 +83,30 @@ module _
       ( λ y → map-transposition' (map-transposition' x (inl p)) (inl y))
       ( eq-is-prop
         ( is-prop-type-decidable-Prop (P (map-transposition' x (inl p)))))) ∙
-    ( ap pr1 (is-involution-aut-2-element-type (pair _ H) (swap-two-elements (pair _ H)) (pair x p)))
+    ( ap pr1 (is-involution-aut-2-element-type (pair _ H) (swap-2-Element-Type (pair _ H)) (pair x p)))
   is-involution-map-transposition' x (inl p) (inr np') =
-    ex-falso (np' (pr2 (map-equiv (swap-two-elements (pair _ H)) (pair x p))))
+    ex-falso (np' (pr2 (map-swap-2-Element-Type (pair _ H) (pair x p))))
   is-involution-map-transposition' x (inr np) (inl p') = ex-falso (np p')
   is-involution-map-transposition' x (inr np) (inr np') = refl
 
-  is-involution-map-transposition : (map-transposition ∘ map-transposition) ~ id
+  is-involution-map-transposition : is-involution map-transposition
   is-involution-map-transposition x =
     is-involution-map-transposition' x
       ( is-decidable-type-decidable-Prop (P x))
       ( is-decidable-type-decidable-Prop
         ( P (map-transposition' x (is-decidable-type-decidable-Prop (P x)))))
 
-  is-transposition : is-equiv map-transposition
-  pr1 (pr1 is-transposition) = map-transposition
-  pr2 (pr1 is-transposition) = is-involution-map-transposition
-  pr1 (pr2 is-transposition) = map-transposition
-  pr2 (pr2 is-transposition) = is-involution-map-transposition
+  is-equiv-map-transposition : is-equiv map-transposition
+  is-equiv-map-transposition =
+    is-equiv-is-involution is-involution-map-transposition
 
   transposition : X ≃ X
   pr1 transposition = map-transposition
-  pr2 transposition = is-transposition
+  pr2 transposition = is-equiv-map-transposition
 
   is-not-identity-map-transposition : Id map-transposition id → empty
   is-not-identity-map-transposition f =
-    is-not-identity-swap-two-elements
+    is-not-identity-swap-2-Element-Type
       ( pair _ H)
       ( eq-htpy-equiv
         ( λ { (pair x p) →
@@ -165,7 +164,7 @@ module _
   ... | inl pp =
     ap
       pr1
-      ( computation-swap-two-elements
+      ( compute-swap-2-Element-Type
         ( pair _ (pr2 (transposition-two-elements x y p)))
         ( pair x pp)
         ( pair y (inr refl))
@@ -185,7 +184,7 @@ module _
   ... | inl pp =
     ap
       pr1
-      ( computation-swap-two-elements
+      ( compute-swap-2-Element-Type
         ( pair _ (pr2 (transposition-two-elements x y p)))
         ( pair y pp)
         ( pair x (inl refl))
@@ -289,14 +288,14 @@ correct-Fin-succ-Fin-transposition n t (inl x) with is-decidable-type-decidable-
 correct-Fin-succ-Fin-transposition n t (inl x) | inl p =
     ap
       ( pr1)
-      ( computation-swap-two-elements
+      ( compute-swap-2-Element-Type
         ( pair _ (pr2 (Fin-succ-Fin-transposition n t)))
         ( pair (inl x) p)
         ( pair
-          ( inl (pr1 (map-equiv (swap-two-elements (pair _ (pr2 t))) (pair x p))))
-          ( pr2 (map-equiv (swap-two-elements (pair _ (pr2 t))) (pair x p))))
+          ( inl (pr1 (map-swap-2-Element-Type (pair _ (pr2 t)) (pair x p))))
+          ( pr2 (map-swap-2-Element-Type (pair _ (pr2 t)) (pair x p))))
         ( λ eq →
-          has-no-fixpoints-swap-two-elements
+          has-no-fixpoints-swap-2-Element-Type
             ( pair _ (pr2 t))
             ( pair x p)
             ( eq-pair-Σ
