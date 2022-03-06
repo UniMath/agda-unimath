@@ -51,12 +51,18 @@ module _
 For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism from `x` to `x` since `comp id_x id_x = id_x` (it is its own inverse).
 
 ```agda
-is-iso-id-Precat :
-  {l1 l2 : Level} (C : Precat l1 l2) →
-  {x : obj-Precat C} → is-iso-Precat C (id-Precat C {x})
-pr1 (is-iso-id-Precat C) = id-Precat C
-pr1 (pr2 (is-iso-id-Precat C)) = left-unit-law-comp-Precat C (id-Precat C)
-pr2 (pr2 (is-iso-id-Precat C)) = left-unit-law-comp-Precat C (id-Precat C)
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  where
+
+  is-iso-id-Precat : {x : obj-Precat C} → is-iso-Precat C (id-Precat C {x})
+  pr1 is-iso-id-Precat = id-Precat C
+  pr1 (pr2 is-iso-id-Precat) = left-unit-law-comp-Precat C (id-Precat C)
+  pr2 (pr2 is-iso-id-Precat) = left-unit-law-comp-Precat C (id-Precat C)
+
+  id-iso-Precat : {x : obj-Precat C} → iso-Precat C x x
+  pr1 id-iso-Precat = id-Precat C
+  pr2 id-iso-Precat = is-iso-id-Precat
 ```
 
 ## Properties
@@ -106,7 +112,7 @@ module _
     is-set-is-subtype
       is-prop-is-iso-Precat
       (is-set-type-hom-Precat C x y)
-      
+
   iso-Precat-Set : (x y : obj-Precat C) → UU-Set l2
   pr1 (iso-Precat-Set x y) = iso-Precat C x y
   pr2 (iso-Precat-Set x y) = is-set-iso-Precat x y
