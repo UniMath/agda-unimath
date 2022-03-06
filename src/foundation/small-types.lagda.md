@@ -12,7 +12,7 @@ open import foundation.decidable-propositions using
   ( decidable-Prop; equiv-bool-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv-map-equiv; map-inv-equiv; _∘e_;
+  ( _≃_; map-equiv; is-equiv-map-equiv; map-inv-equiv; _∘e_; inv-equiv;
     isretr-map-inv-equiv; equiv-inv-equiv; equiv-precomp-equiv)
 open import foundation.functoriality-dependent-function-types using
   ( equiv-Π)
@@ -71,6 +71,13 @@ UU-is-small l1 l2 = Σ (UU l2) (is-small l1)
 
 ## Properties
 
+### Every type of universe level `l` is `UU (lsuc l)`-small
+
+```agda
+is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
+is-small-lsuc X = pair (raise _ X) (equiv-raise _ X)
+```
+
 ### Small types are closed under equivalences
 
 ```agda
@@ -80,6 +87,12 @@ abstract
     A ≃ B → is-small l B → is-small l A
   pr1 (is-small-equiv l B e (pair X h)) = X
   pr2 (is-small-equiv l B e (pair X h)) = h ∘e e
+
+abstract
+  is-small-equiv' :
+    (l : Level) {l1 l2 : Level} (A : UU l1) {B : UU l2} →
+    A ≃ B → is-small l A → is-small l B
+  is-small-equiv' l A e = is-small-equiv l A (inv-equiv e)
 
 abstract
   is-small-Σ :

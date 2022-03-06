@@ -5,10 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module subgroups.abstract-abelian-subgroups where
+module groups.abstract-abelian-subgroups where
 
-open import groups public
-open import subgroups.abstract-subgroups public
+open import groups.abstract-abelian-groups public
+open import groups.abstract-subgroups public
 
 {- Subsets of abelian groups -}
 

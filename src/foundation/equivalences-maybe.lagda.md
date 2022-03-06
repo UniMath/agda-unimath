@@ -9,11 +9,15 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.empty-types using (ex-falso)
+open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; inv-equiv; map-inv-equiv; issec-map-inv-equiv;
-    isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse)
+  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; map-inv-equiv;
+    issec-map-inv-equiv; isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse;
+    htpy-eq-equiv; htpy-equiv; id-equiv)
 open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
+open import foundation.functoriality-coproduct-types using
+  ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)
+open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; _∙_; inv; refl; ap)
 open import foundation.injective-maps using
   ( is-injective; is-injective-map-equiv; is-injective-emb)
@@ -23,21 +27,25 @@ open import foundation.maybe using
     is-value-is-not-exception-Maybe; eq-is-value-Maybe;
     is-decidable-is-exception-Maybe; is-injective-unit-Maybe;
     is-not-exception-is-value-Maybe)
-open import foundation.unit-type using (unit; star)
+open import foundation.unit-type using (is-set-unit; unit; star)
 open import foundation.universe-levels using (Level; UU)
+open import foundation.sets using
+  ( Id-Prop; UU-Set; type-Set; is-set-type-Set)
+
+open import foundation-core.equality-dependent-pair-types using
+  ( eq-pair-Σ; pair-eq-Σ)
+open import foundation-core.propositions using (eq-is-prop)
 ```
 
 ## Idea
 
 For any two types `X` and `Y`, we have `(X ≃ Y) ↔ (Maybe X ≃ Maybe Y)`.
 
+## Properties
+
+### If `f : Maybe X → Maybe Y` is an injective map and f (inl x) is an exception, then f exception is not an exception.
 
 ```agda
--- Proposition 16.2.1 Step (i) of the proof
-
--- If f is an injective map and f (inl x) is an exception, then f exception is
--- not an exception.
-
 abstract
   is-not-exception-injective-map-exception-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
@@ -54,7 +62,18 @@ abstract
   is-not-exception-map-equiv-exception-Maybe e =
     is-not-exception-injective-map-exception-Maybe (is-injective-map-equiv e)
 
--- If f is injective and f (inl x) is an exception, then f exception is a value
+abstract
+  is-not-exception-emb-exception-Maybe :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ↪ Maybe Y)
+    (x : X) → is-exception-Maybe (map-emb e (inl x)) →
+    is-not-exception-Maybe (map-emb e exception-Maybe)
+  is-not-exception-emb-exception-Maybe e =
+    is-not-exception-injective-map-exception-Maybe (is-injective-emb e)
+```
+
+### If f is injective and f (inl x) is an exception, then f exception is a value
+
+```agda
 is-value-injective-map-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   is-injective f → (x : X) → is-exception-Maybe (f (inl x)) →
@@ -81,16 +100,11 @@ comp-injective-map-exception-Maybe {f = f} is-inj-f x H =
   eq-is-value-Maybe
     ( f exception-Maybe)
     ( is-value-injective-map-exception-Maybe is-inj-f x H)
+```
 
-abstract
-  is-not-exception-emb-exception-Maybe :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ↪ Maybe Y)
-    (x : X) → is-exception-Maybe (map-emb e (inl x)) →
-    is-not-exception-Maybe (map-emb e exception-Maybe)
-  is-not-exception-emb-exception-Maybe e =
-    is-not-exception-injective-map-exception-Maybe (is-injective-emb e)
+### For any equivalence `e : Maybe X ≃ Maybe Y`, if `e (inl x)` is an exception, then `e exception` is a value
 
--- If e (inl x) is an exception, then e exception is a value
+```agda
 is-value-map-equiv-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
   is-exception-Maybe (map-equiv e (inl x)) →
@@ -117,9 +131,11 @@ comp-map-equiv-exception-Maybe e x H =
   eq-is-value-Maybe
     ( map-equiv e exception-Maybe)
     ( is-value-map-equiv-exception-Maybe e x H)
+```
 
--- Proposition 16.2.1 Step (ii) of the proof
+### Injective maps `Maybe X → Maybe Y` can be restricted to maps `X → Y`
 
+```agda
 restrict-injective-map-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   is-injective f → (x : X) (u : Maybe Y) (p : Id (f (inl x)) u) → Y
@@ -167,13 +183,13 @@ comp-restrict-injective-map-is-not-exception-Maybe :
 comp-restrict-injective-map-is-not-exception-Maybe {f = f} is-inj-f x =
   comp-restrict-injective-map-is-not-exception-Maybe' is-inj-f x (f (inl x))
     refl
+```
 
--- An equivalence e : Maybe X ≃ Maybe Y induces a map X → Y. We don't use
--- with-abstraction to keep full control over the definitional equalities, so
--- we give the definition in two steps. After the definition is complete, we
--- also prove two computation rules. Since we will prove computation rules, we
--- make the definition abstract.
+### Any equivalence `Maybe X ≃ Maybe Y` induces a map `X → Y`
 
+We don't use with-abstraction to keep full control over the definitional equalities, so we give the definition in two steps. After the definition is complete, we also prove two computation rules. Since we will prove computation rules, we make the definition abstract.
+
+```agda
 map-equiv-equiv-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y)
   (x : X) (u : Maybe Y) (p : Id (map-equiv e (inl x)) u) → Y
@@ -216,11 +232,11 @@ comp-map-equiv-equiv-is-not-exception-Maybe :
   Id (inl (map-equiv-equiv-Maybe e x)) (map-equiv e (inl x))
 comp-map-equiv-equiv-is-not-exception-Maybe e x =
   comp-map-equiv-equiv-is-not-exception-Maybe' e x (map-equiv e (inl x)) refl
+```
 
--- Proposition 16.2.1 Step (iii) of the proof
+### Any equivalence `Maybe X ≃ Maybe Y` induces a map `Y → X`
 
--- An equivalence e : Maybe X ≃ Maybe Y induces a map Y → X
-
+```agda
 map-inv-equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) → Y → X
 map-inv-equiv-equiv-Maybe e =
@@ -239,11 +255,11 @@ comp-map-inv-equiv-equiv-is-not-exception-Maybe :
   Id (inl (map-inv-equiv-equiv-Maybe e y)) (map-inv-equiv e (inl y))
 comp-map-inv-equiv-equiv-is-not-exception-Maybe e =
   comp-map-equiv-equiv-is-not-exception-Maybe (inv-equiv e)
-
--- Proposition 16.2.1 Step (iv) of the proof
+```
     
--- map-inv-equiv-equiv-Maybe e is a section of map-equiv-equiv-Maybe e.
+### The map `map-inv-equiv-equiv-Maybe e` is a section of `map-equiv-equiv-Maybe e`
 
+```agda
 abstract
   issec-map-inv-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
@@ -276,9 +292,11 @@ abstract
             ( map-equiv e)
             ( comp-map-inv-equiv-equiv-is-not-exception-Maybe e y f)) ∙
           ( issec-map-inv-equiv e (inl y))))
+```
 
--- The map map-inv-equiv-equiv e is a retraction of the map map-equiv-equiv
+### The map `map-inv-equiv-equiv-Maybe e` is a retraction of the map `map-equiv-equiv-Maybe e`
 
+```agda
 abstract
   isretr-map-inv-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
@@ -308,11 +326,11 @@ abstract
         ( ( ap ( map-inv-equiv e)
                ( comp-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
           ( isretr-map-inv-equiv e (inl x))))
+```
 
--- Proposition 16.2.1 Conclusion of the proof
+### The function `map-equiv-equiv-Maybe` is an equivalence
 
--- The function map-equiv-equiv-Maybe is an equivalence
-
+```agda
 abstract
   is-equiv-map-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
@@ -327,4 +345,49 @@ equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Maybe X ≃ Maybe Y) → (X ≃ Y)
 pr1 (equiv-equiv-Maybe e) = map-equiv-equiv-Maybe e
 pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
+```
+
+### For `X` a set, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception.
+
+```agda
+module _
+  {l : Level} (X : UU-Set l) 
+  where
+  
+  extend-equiv-Maybe :
+    (type-Set X ≃ type-Set X) ≃ (Σ (Maybe (type-Set X) ≃ Maybe (type-Set X)) (λ e → Id (map-equiv e (inr star)) (inr star)))
+  pr1 (pr1 extend-equiv-Maybe f) = equiv-coprod f id-equiv
+  pr2 (pr1 extend-equiv-Maybe f) = refl
+  pr2 extend-equiv-Maybe =
+    is-equiv-has-inverse
+      ( λ f → pr1 (retr-equiv-coprod (pr1 f) id-equiv (p f)))
+      ( λ f →
+        ( eq-pair-Σ
+          ( inv (eq-htpy-equiv (pr2 (retr-equiv-coprod (pr1 f) id-equiv (p f)))))
+          ( eq-is-prop
+            ( pr2
+              ( Id-Prop
+                ( pair (Maybe (type-Set X)) (is-set-coprod (is-set-type-Set X) is-set-unit))
+                ( map-equiv (pr1 f) (inr star))
+                ( inr star))))))
+      ( λ f → eq-htpy-equiv refl-htpy)
+    where
+    p : (f : (Σ (Maybe (type-Set X) ≃ Maybe (type-Set X)) (λ e → Id (map-equiv e (inr star)) (inr star))))
+      (b : unit) → Id (map-equiv (pr1 f) (inr b)) (inr b) 
+    p f star = pr2 f
+
+  computation-extend-equiv-Maybe : (f : type-Set X ≃ type-Set X) → (x y : type-Set X) →
+    Id (map-equiv f x) y → Id (map-equiv (pr1 (map-equiv extend-equiv-Maybe f)) (inl x)) (inl y)
+  computation-extend-equiv-Maybe f x y p = ap inl p
+
+  computation-inv-extend-equiv-Maybe : (f : Maybe (type-Set X) ≃ Maybe (type-Set X)) → (p : Id (map-equiv f (inr star)) (inr star)) →
+    (x : type-Set X) → Id (inl (map-equiv (map-inv-equiv extend-equiv-Maybe (pair f p)) x)) (map-equiv f (inl x))
+  computation-inv-extend-equiv-Maybe f p x =
+    htpy-eq-equiv (pr1 (pair-eq-Σ (pr2 (pr1 (pr2 extend-equiv-Maybe)) (pair f p)))) (inl x)
+
+  comp-extend-equiv-Maybe : (f g : type-Set X ≃ type-Set X) →
+    htpy-equiv
+      ( pr1 (map-equiv extend-equiv-Maybe (f ∘e g)))
+      ( (pr1 (map-equiv extend-equiv-Maybe f)) ∘e (pr1 (map-equiv extend-equiv-Maybe g)))
+  comp-extend-equiv-Maybe f g = compose-map-coprod (map-equiv g) (map-equiv f) id id
 ```

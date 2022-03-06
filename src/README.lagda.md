@@ -8,199 +8,15 @@ Welcome to the website of the `agda-unimath` formalization project.
 {-# OPTIONS --without-K --exact-split #-}
 ```
 
-## Foundation Core
+## Categories
 
 ```agda
-open import foundation-core.0-maps
-open import foundation-core.1-types
-open import foundation-core.cartesian-product-types
-open import foundation-core.coherently-invertible-maps
-open import foundation-core.commuting-squares
-open import foundation-core.constant-maps
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
-open import foundation-core.equality-cartesian-product-types
-open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equality-fibers-of-maps
-open import foundation-core.equivalence-induction
-open import foundation-core.equivalences
-open import foundation-core.faithful-maps
-open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
-open import foundation-core.identity-systems
-open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
-open import foundation-core.path-split-maps
-open import foundation-core.propositional-maps
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
-open import foundation-core.sets
-open import foundation-core.singleton-induction
-open import foundation-core.subtype-identity-principle
-open import foundation-core.subtypes
-open import foundation-core.truncated-maps
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.univalence
-open import foundation-core.universe-levels
-```
-
-## Foundation
-
-```agda
-open import foundation.0-maps
-open import foundation.1-types
-open import foundation.2-types
-open import foundation.axiom-of-choice
-open import foundation.binary-relations
-open import foundation.boolean-reflection
-open import foundation.booleans
-open import foundation.cantors-diagonal-argument
-open import foundation.cartesian-product-types
-open import foundation.choice-of-representatives-equivalence-relation
-open import foundation.coherently-invertible-maps
-open import foundation.commuting-squares
-open import foundation.complements
-open import foundation.conjunction
-open import foundation.connected-components-universes
-open import foundation.connected-components
-open import foundation.connected-types
-open import foundation.constant-maps
-open import foundation.contractible-maps
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.coslice
-open import foundation.decidable-dependent-function-types
-open import foundation.decidable-dependent-pair-types
-open import foundation.decidable-embeddings
-open import foundation.decidable-equality
-open import foundation.decidable-maps
-open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
-open import foundation.disjunction
-open import foundation.distributivity-of-dependent-functions-over-coproduct-types
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
-open import foundation.double-negation
-open import foundation.effective-maps-equivalence-relations
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.epimorphisms-with-respect-to-sets
-open import foundation.equality-cartesian-product-types
-open import foundation.equality-coproduct-types
-open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equality-fibers-of-maps
-open import foundation.equivalence-classes
-open import foundation.equivalence-induction
-open import foundation.equivalence-relations
-open import foundation.equivalences-maybe
-open import foundation.equivalences
-open import foundation.existential-quantification
-open import foundation.faithful-maps
-open import foundation.fiber-inclusions
-open import foundation.fibered-maps
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
-open import foundation.functoriality-propositional-truncation
-open import foundation.functoriality-set-quotients
-open import foundation.functoriality-set-truncation
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.global-choice
-open import foundation.homotopies
-open import foundation.identity-systems
-open import foundation.identity-types
-open import foundation.images
-open import foundation.impredicative-encodings
-open import foundation.induction-principle-propositional-truncation
-open import foundation.injective-maps
-open import foundation.interchange-law
-open import foundation.isolated-points
-open import foundation.isomorphisms-of-sets
-open import foundation.law-of-excluded-middle
-open import foundation.lawveres-fixed-point-theorem
-open import foundation.lists
-open import foundation.locally-small-types
-open import foundation.logical-equivalences
-open import foundation.maybe
-open import foundation.mere-equality
-open import foundation.mere-equivalences
-open import foundation.negation
-open import foundation.non-contractible-types
-open import foundation.path-split-maps
-open import foundation.propositional-extensionality
-open import foundation.propositional-maps
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.pullbacks
-open import foundation.raising-universe-levels
-open import foundation.reflecting-maps-equivalence-relations
-open import foundation.retractions
-open import foundation.sections
-open import foundation.set-presented-types
-open import foundation.set-truncations
-open import foundation.sets
-open import foundation.singleton-induction
-open import foundation.slice
-open import foundation.small-maps
-open import foundation.small-types
-open import foundation.split-surjective-maps
-open import foundation.structure-identity-principle
-open import foundation.structure
-open import foundation.subterminal-types
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
-open import foundation.subuniverses
-open import foundation.surjective-maps
-open import foundation.truncated-maps
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-arithmetic-empty-type
-open import foundation.type-arithmetic-unit-type
-open import foundation.uniqueness-image
-open import foundation.uniqueness-set-quotients
-open import foundation.uniqueness-set-truncations
-open import foundation.unit-type
-open import foundation.univalence-implies-function-extensionality
-open import foundation.univalence
-open import foundation.universal-property-booleans
-open import foundation.universal-property-cartesian-product-types
-open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-empty-type
-open import foundation.universal-property-fiber-products
-open import foundation.universal-property-identity-types
-open import foundation.universal-property-image
-open import foundation.universal-property-maybe
-open import foundation.universal-property-propositional-truncation-into-sets
-open import foundation.universal-property-propositional-truncation
-open import foundation.universal-property-pullbacks
-open import foundation.universal-property-set-quotients
-open import foundation.universal-property-set-truncation
-open import foundation.universal-property-unit-type
-open import foundation.universe-levels
-open import foundation.unordered-pairs
-open import foundation.weak-function-extensionality
-open import foundation.weakly-constant-maps
+open import categories
+open import categories.adjunctions
+open import categories.categories
+open import categories.functors
+open import categories.large-categories
+open import categories.natural-transformations
 ```
 
 ## Elementary number theory
@@ -269,42 +85,279 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
 
-## Univalent foundation
+## Finite groups
 
 ```agda
-open import univalent-foundations.W-types
-open import univalent-foundations.functoriality-loop-spaces
-open import univalent-foundations.isolated-points
-open import univalent-foundations.iterated-loop-spaces
-open import univalent-foundations.loop-spaces
-open import univalent-foundations.pointed-dependent-functions
-open import univalent-foundations.pointed-equivalences
-open import univalent-foundations.pointed-families-of-types
-open import univalent-foundations.pointed-homotopies
-open import univalent-foundations.pointed-maps
-open import univalent-foundations.pointed-types
-open import univalent-foundations.truncations
+open import finite-groups.finite-groups
+open import finite-groups.quaternion-group
+open import finite-groups.transpositions
 ```
 
-## Categories
+## Foundation
 
 ```agda
-open import categories
-open import categories.adjunctions
-open import categories.categories
-open import categories.functors
-open import categories.large-categories
-open import categories.natural-transformations
+open import foundation.0-maps
+open import foundation.1-types
+open import foundation.2-types
+open import foundation.algebras-polynomial-endofunctors
+open import foundation.automorphisms
+open import foundation.axiom-of-choice
+open import foundation.binary-relations
+open import foundation.boolean-reflection
+open import foundation.booleans
+open import foundation.cantors-diagonal-argument
+open import foundation.cartesian-product-types
+open import foundation.choice-of-representatives-equivalence-relation
+open import foundation.coherently-invertible-maps
+open import foundation.commuting-squares
+open import foundation.complements
+open import foundation.conjunction
+open import foundation.connected-components-universes
+open import foundation.connected-components
+open import foundation.connected-types
+open import foundation.constant-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.coslice
+open import foundation.decidable-dependent-function-types
+open import foundation.decidable-dependent-pair-types
+open import foundation.decidable-embeddings
+open import foundation.decidable-equality
+open import foundation.decidable-maps
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
+open import foundation.disjunction
+open import foundation.distributivity-of-dependent-functions-over-coproduct-types
+open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.double-negation
+open import foundation.effective-maps-equivalence-relations
+open import foundation.elementhood-relation-W-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.epimorphisms-with-respect-to-sets
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-function-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equality-fibers-of-maps
+open import foundation.equivalence-classes
+open import foundation.equivalence-induction
+open import foundation.equivalence-relations
+open import foundation.equivalences-maybe
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.extensional-W-types
+open import foundation.faithful-maps
+open import foundation.fiber-inclusions
+open import foundation.fibered-maps
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.functoriality-set-quotients
+open import foundation.functoriality-set-truncation
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.global-choice
+open import foundation.homotopies
+open import foundation.identity-systems
+open import foundation.identity-types
+open import foundation.images
+open import foundation.impredicative-encodings
+open import foundation.indexed-W-types
+open import foundation.induction-principle-propositional-truncation
+open import foundation.induction-W-types
+open import foundation.inequality-W-types
+open import foundation.injective-maps
+open import foundation.interchange-law
+open import foundation.isolated-points
+open import foundation.isomorphisms-of-sets
+open import foundation.law-of-excluded-middle
+open import foundation.lawveres-fixed-point-theorem
+open import foundation.lists
+open import foundation.locally-small-types
+open import foundation.logical-equivalences
+open import foundation.maybe
+open import foundation.mere-equality
+open import foundation.mere-equivalences
+open import foundation.monomorphisms
+open import foundation.multisets
+open import foundation.negation
+open import foundation.non-contractible-types
+open import foundation.path-split-maps
+open import foundation.polynomial-endofunctors
+open import foundation.propositional-extensionality
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.pullbacks
+open import foundation.raising-universe-levels
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.replacement
+open import foundation.retractions
+open import foundation.Russells-paradox
+open import foundation.sections
+open import foundation.set-presented-types
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.singleton-induction
+open import foundation.slice
+open import foundation.small-maps
+open import foundation.small-multisets
+open import foundation.small-types
+open import foundation.small-universes
+open import foundation.split-surjective-maps
+open import foundation.structure-identity-principle
+open import foundation.structure
+open import foundation.subterminal-types
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.subuniverses
+open import foundation.surjective-maps
+open import foundation.truncated-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
+open import foundation.uniqueness-image
+open import foundation.uniqueness-set-quotients
+open import foundation.uniqueness-set-truncations
+open import foundation.unit-type
+open import foundation.univalence-implies-function-extensionality
+open import foundation.univalence
+open import foundation.univalent-type-families
+open import foundation.universal-property-booleans
+open import foundation.universal-property-cartesian-product-types
+open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-fiber-products
+open import foundation.universal-property-identity-types
+open import foundation.universal-property-image
+open import foundation.universal-property-maybe
+open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.universal-property-propositional-truncation
+open import foundation.universal-property-pullbacks
+open import foundation.universal-property-set-quotients
+open import foundation.universal-property-set-truncation
+open import foundation.universal-property-unit-type
+open import foundation.universe-levels
+open import foundation.unordered-pairs
+open import foundation.W-types
+open import foundation.weak-function-extensionality
+open import foundation.weakly-constant-maps
 ```
 
-## The circle
+## Foundation Core
 
 ```agda
-open import the-circle.cyclic-types
-open import the-circle.infinite-cyclic-types
-open import the-circle.integers
-open import the-circle.the-circle
-open import the-circle.universal-cover
+open import foundation-core.0-maps
+open import foundation-core.1-types
+open import foundation-core.cartesian-product-types
+open import foundation-core.coherently-invertible-maps
+open import foundation-core.commuting-squares
+open import foundation-core.constant-maps
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equality-fibers-of-maps
+open import foundation-core.equivalence-induction
+open import foundation-core.equivalences
+open import foundation-core.faithful-maps
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-systems
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.path-split-maps
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.sets
+open import foundation-core.singleton-induction
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.type-arithmetic-cartesian-product-types
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.univalence
+open import foundation-core.universe-levels
+```
+
+## Graph theory
+
+```agda
+open import graph-theory.directed-graphs
+open import graph-theory.finite-graphs
+open import graph-theory.polygons
+open import graph-theory.reflexive-graphs
+open import graph-theory.undirected-graphs
+```
+
+## Groups 
+
+```agda
+open import groups.abstract-abelian-groups
+open import groups.abstract-abelian-subgroups
+open import groups.abstract-group-actions
+open import groups.abstract-group-torsors
+open import groups.abstract-groups
+open import groups.abstract-subgroups
+open import groups.concrete-group-actions
+open import groups.concrete-groups
+open import groups.concrete-subgroups
+open import groups.examples-higher-groups
+open import groups.furstenberg-groups
+open import groups.higher-groups
+open import groups.sheargroups
+```
+
+## Order theory
+
+```agda
+open import order-theory.finite-posets
+open import order-theory.finite-preorders
+open import order-theory.finitely-graded-posets
+open import order-theory.planar-binary-trees
+open import order-theory.posets
+open import order-theory.preorders
+```
+
+## Polytopes
+
+```agda
+open import polytopes.abstract-polytopes
+```
+
+## Rings
+
+```agda
+open import rings.eisenstein-integers
+open import rings.gaussian-integers
+open import rings.ideals
+open import rings.localizations-rings
+open import rings.rings-with-properties
+open import rings.rings
 ```
 
 ## Synthetic homotopy theory
@@ -316,48 +369,12 @@ open import synthetic-homotopy-theory.25-cubical-diagrams
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
+open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.cyclic-types
+open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.spaces
-```
-
-## Groups 
-
-```agda
-open import groups.abstract-abelian-groups
-open import groups.abstract-group-actions
-open import groups.abstract-group-torsors
-open import groups.abstract-groups
-open import groups.concrete-group-actions
-open import groups.concrete-groups
-open import groups.examples-higher-groups
-open import groups.furstenberg-groups
-open import groups.higher-groups
-open import groups.sheargroups
-```
-
-## Subgroups
-
-```agda
-open import subgroups.abstract-abelian-subgroups
-open import subgroups.abstract-subgroups
-```
-
-## Finite groups
-
-```agda
-open import finite-groups.finite-groups
-open import finite-groups.quaternion-group
-open import finite-groups.transpositions
-```
-
-## Order theory
-
-```agda
-open import order-theory.finite-posets
-open import order-theory.finite-preorders
-open import order-theory.finitely-graded-posets
-open import order-theory.posets
-open import order-theory.preorders
+open import synthetic-homotopy-theory.universal-cover-circle
 ```
 
 ## Univalent combinatorics
@@ -409,32 +426,20 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 ```
 
-## Graph theory
+## Univalent foundation
 
 ```agda
-open import graph-theory.directed-graphs
-open import graph-theory.finite-graphs
-open import graph-theory.polygons
-open import graph-theory.reflexive-graphs
-open import graph-theory.undirected-graphs
-```
-
-## Polytopes
-
-```agda
-open import polytopes.abstract-polytopes public
-```
-
-
-## Rings
-
-```agda
-open import rings.eisenstein-integers
-open import rings.gaussian-integers
-open import rings.ideals
-open import rings.localizations-rings
-open import rings.rings-with-properties
-open import rings.rings
+open import univalent-foundations.functoriality-loop-spaces
+open import univalent-foundations.isolated-points
+open import univalent-foundations.iterated-loop-spaces
+open import univalent-foundations.loop-spaces
+open import univalent-foundations.pointed-dependent-functions
+open import univalent-foundations.pointed-equivalences
+open import univalent-foundations.pointed-families-of-types
+open import univalent-foundations.pointed-homotopies
+open import univalent-foundations.pointed-maps
+open import univalent-foundations.pointed-types
+open import univalent-foundations.truncations
 ```
 
 ## Everything
