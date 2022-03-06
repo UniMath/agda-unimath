@@ -30,11 +30,12 @@ open import foundation.identity-types using
   ( Id; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
 open import foundation.truncated-maps using (is-trunc-map)
 open import foundation.truncated-types using (is-trunc-equiv'; is-trunc-Π)
-open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation.unit-type using (unit)
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 ```
 
 ## Idea
