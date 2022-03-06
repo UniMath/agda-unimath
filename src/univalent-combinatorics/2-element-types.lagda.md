@@ -533,34 +533,6 @@ module _
     compute-swap-2-Element-Type' x y p
       ( map-inv-equiv-point-2-Element-Type X x y)
       ( refl)
-
-module _
-  {l : Level} (X : 2-Element-Type l)
-  where
-
-  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin' :
-    ¬ ( Id ( equiv-precomp-equiv (equiv-succ-Fin {2}) (type-2-Element-Type X))
-           ( id-equiv))
-  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin' p' =
-    apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
-      ( empty-Prop)
-      ( λ f →
-        neq-inr-inl
-          ( is-injective-map-equiv f
-            ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
-
-  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
-    ¬ ( Id (equiv-precomp-equiv (equiv-succ-Fin {2}) (type-2-Element-Type X))
-           ( id-equiv))
-  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
-    apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
-      ( empty-Prop)
-      ( λ f →
-        neq-inr-inl
-          ( is-injective-map-equiv f
-            ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
 ```
 
 ### The swapping equivalence is not the identity equivalence
@@ -570,9 +542,21 @@ module _
   {l : Level} (X : 2-Element-Type l)
   where
 
+  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
+    ¬ ( Id ( equiv-precomp-equiv (equiv-succ-Fin {2}) (type-2-Element-Type X))
+           ( id-equiv))
+  is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
+    apply-universal-property-trunc-Prop
+      ( mere-equiv-2-Element-Type X)
+      ( empty-Prop)
+      ( λ f →
+        neq-inr-inl
+          ( is-injective-map-equiv f
+            ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
+
   is-not-identity-swap-2-Element-Type : ¬ (Id (swap-2-Element-Type X) id-equiv)
   is-not-identity-swap-2-Element-Type p =
-    is-not-identity-equiv-precomp-equiv-equiv-succ-Fin X
+    is-not-identity-equiv-precomp-equiv-equiv-succ-Fin
       ( ( ( inv (left-unit-law-equiv equiv1)) ∙
           ( ap (λ x → x ∘e equiv1) (inv (left-inverse-law-equiv equiv2)))) ∙
         ( ( inv
