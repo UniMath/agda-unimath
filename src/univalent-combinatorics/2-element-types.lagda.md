@@ -492,11 +492,7 @@ module _
               ( issec-map-inv-equiv h x)))))
 ```
 
-### The elements of an arbitrary 2-element type can be swapped (inv )
-
-#### The successor function on `Fin 2` is an involution
-
-#### The swapping equivalence
+### The swapping equivalence on arbitrary 2-element types
 
 ```agda
 module _
