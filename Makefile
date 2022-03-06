@@ -47,7 +47,6 @@ html: src/everything.lagda.md
 	${AGDA} ${htmlOpts} src/everything.lagda.md 
 	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot src/README.lagda.md
 	cd docs/; \
-	dot -Tpng -o graph.png dependency.dot; \
 	sh conv.sh; \
 	cp README.html index.html
 
