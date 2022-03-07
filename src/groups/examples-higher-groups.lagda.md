@@ -10,6 +10,8 @@ module groups.examples-higher-groups where
 open import groups.higher-groups public
 open import synthetic-homotopy-theory.circle public
 
+open import synthetic-homotopy-theory.pointed-types
+
 module _
   where
 

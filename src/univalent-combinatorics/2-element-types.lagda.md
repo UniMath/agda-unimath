@@ -74,7 +74,7 @@ open import univalent-combinatorics.standard-finite-types using
 
 ```agda
 has-two-elements-Prop : {l : Level} → UU l → UU-Prop l
-has-two-elements-Prop X = has-cardinality-Prop X 2
+has-two-elements-Prop X = has-cardinality-Prop 2 X
 
 has-two-elements : {l : Level} → UU l → UU l
 has-two-elements X = type-Prop (has-two-elements-Prop X)

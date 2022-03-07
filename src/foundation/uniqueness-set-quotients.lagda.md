@@ -11,7 +11,7 @@ open import foundation.equivalence-relations using
   ( Eq-Rel)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; is-equiv-comp; is-equiv-precomp-is-equiv;
-    is-equiv-left-factor; _≃_; map-equiv; is-subtype-is-equiv)
+    is-equiv-left-factor; _≃_; map-equiv; is-property-is-equiv)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using  (_∘_; id; precomp)
 open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·l_)
@@ -158,7 +158,7 @@ module _
     uniqueness-set-quotient =
       is-contr-total-Eq-subtype
         ( universal-property-set-quotient-is-set-quotient R B f Uf C g)
-        ( is-subtype-is-equiv)
+        ( is-property-is-equiv)
         ( map-universal-property-set-quotient-is-set-quotient R B f Uf C g)
         ( triangle-universal-property-set-quotient-is-set-quotient R B f Uf C g)
         ( is-equiv-is-set-quotient-is-set-quotient R B f C g

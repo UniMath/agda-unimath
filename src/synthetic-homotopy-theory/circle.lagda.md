@@ -9,6 +9,10 @@ module synthetic-homotopy-theory.circle where
 
 open import univalent-foundations public
 
+open import synthetic-homotopy-theory.pointed-homotopies
+open import synthetic-homotopy-theory.pointed-maps
+open import synthetic-homotopy-theory.pointed-types
+
 {- Section 11.1 The induction principle of the circle -}
 
 free-loop : {l1 : Level} (X : UU l1) → UU l1

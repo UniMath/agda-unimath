@@ -9,7 +9,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.identity-types using (Id; refl)
 open import foundation.universe-levels using (Level; UU)
 open import univalent-foundations.loop-spaces using (Ω)
-open import univalent-foundations.pointed-types using (Pointed-Type)
+open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
 ```
 
 ```agda

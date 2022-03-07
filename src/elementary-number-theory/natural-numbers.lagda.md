@@ -23,7 +23,7 @@ open import foundation.unit-type using (star; unit)
 open import foundation.universal-property-empty-type using
   ( universal-property-empty')
 open import foundation.universe-levels using (Level; lzero; UU)
-open import foundation.W-types using (𝕎; constant-𝕎; tree-𝕎)
+open import foundation.w-types using (𝕎; constant-𝕎; tree-𝕎)
 ```
 
 ## Idea

@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; triangle-section; issec-map-inv-is-equiv; _∘e_;
-    id-equiv; is-subtype-is-equiv; is-equiv-map-equiv; _≃_)
+    id-equiv; is-property-is-equiv; is-equiv-map-equiv; _≃_)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
@@ -133,7 +133,7 @@ module _
             ( universal-property-image f i q Hi i' q')
             ( center (universal-property-image f i q Hi i' q')))
           ( is-proof-irrelevant-is-prop
-            ( is-subtype-is-equiv
+            ( is-property-is-equiv
               ( map-hom-slice-universal-property-image f i q Hi i' q'))
             ( is-equiv-is-image-is-image f i q i' q'
               ( hom-slice-universal-property-image f i q Hi i' q')

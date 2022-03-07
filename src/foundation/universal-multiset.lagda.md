@@ -8,7 +8,7 @@ module foundation.universal-multiset where
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _∘e_; inv-equiv; map-inv-equiv; _≃_; isretr-map-inv-equiv)
-open import foundation.functoriality-W-types using (equiv-𝕎)
+open import foundation.functoriality-w-types using (equiv-𝕎)
 open import foundation.identity-types using (tr; inv)
 open import foundation.multisets using (𝕍)
 open import foundation.raising-universe-levels using
@@ -19,7 +19,7 @@ open import foundation.small-types using
   ( is-small-lsuc; type-is-small; equiv-is-small)
 open import foundation.small-universes using (is-small-universe)
 open import foundation.universe-levels using (Level; lsuc)
-open import foundation.W-types using (tree-𝕎; 𝕎)
+open import foundation.w-types using (tree-𝕎; 𝕎)
 ```
 
 ## Idea

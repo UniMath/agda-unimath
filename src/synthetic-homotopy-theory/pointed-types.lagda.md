@@ -3,13 +3,21 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module univalent-foundations.pointed-types where
+module synthetic-homotopy-theory.pointed-types where
 
-open import foundation public
-open import elementary-number-theory public
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.universe-levels using (Level; UU; lsuc)
+```
 
--- The universe of pointed types
+## Idea
 
+A pointed type is a type `A` equipped with an element `a : A`.
+
+## Definition
+
+### The universe of pointed types
+
+```agda
 Pointed-Type : (l : Level) → UU (lsuc l)
 Pointed-Type l = Σ (UU l) (λ X → X)
 

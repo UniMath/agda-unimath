@@ -402,10 +402,10 @@ has-cardinality-binomial-type :
   has-cardinality (n choose-ℕ m) (binomial-type A B)
 has-cardinality-binomial-type {A = A} {B} {n} {m} H K =
   apply-universal-property-trunc-Prop H
-    ( has-cardinality-Prop (binomial-type A B) (n choose-ℕ m))
+    ( has-cardinality-Prop (n choose-ℕ m) (binomial-type A B))
     ( λ e →
       apply-universal-property-trunc-Prop K
-        ( has-cardinality-Prop (binomial-type A B) (n choose-ℕ m))
+        ( has-cardinality-Prop (n choose-ℕ m) (binomial-type A B))
         ( λ f →
           unit-trunc-Prop
             ( inv-equiv

@@ -27,7 +27,8 @@ open import foundation.equivalence-relations using
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse; is-equiv-comp;
     is-equiv-precomp-is-equiv; is-equiv-left-factor; map-equiv;
-    is-subtype-is-equiv; _∘e_; inv-equiv; map-inv-equiv; issec-map-inv-is-equiv)
+    is-property-is-equiv; _∘e_; inv-equiv; map-inv-equiv;
+    issec-map-inv-is-equiv)
 open import foundation.existential-quantification using (∃-Prop)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (htpy-eq; eq-htpy)

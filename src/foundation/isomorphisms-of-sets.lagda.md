@@ -10,7 +10,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv; isretr-map-inv-is-equiv;
     is-equiv-has-inverse; map-equiv; is-equiv-map-equiv; _≃_;
-    is-subtype-is-equiv)
+    is-property-is-equiv)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (Id; ap; inv; _∙_)
@@ -86,7 +86,7 @@ module _
   equiv-iso-equiv-Set : type-equiv-Set A B ≃ iso-Set
   equiv-iso-equiv-Set =
     equiv-type-subtype
-      ( is-subtype-is-equiv)
+      ( is-property-is-equiv)
       ( is-prop-is-iso-Set)
       ( λ f → is-iso-is-equiv-Set)
       ( λ f → is-equiv-is-iso-Set)

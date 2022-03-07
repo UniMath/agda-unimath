@@ -15,7 +15,7 @@ open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( map-inv-distributive-Π-Σ; is-equiv-map-inv-distributive-Π-Σ)
 open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; map-equiv; is-subtype-is-equiv;
+  ( is-equiv; map-inv-is-equiv; map-equiv; is-property-is-equiv;
     is-equiv-top-is-equiv-bottom-square; is-equiv-precomp-is-equiv;
     is-equiv-map-equiv; is-equiv-is-equiv-precomp-Prop; is-equiv-id;
     is-equiv-comp')
@@ -211,7 +211,7 @@ abstract
   is-uniquely-unique-propositional-truncation P P' f f' is-ptr-f is-ptr-f' =
     is-contr-total-Eq-subtype
       ( universal-property-is-propositional-truncation _ P f is-ptr-f P' f')
-      ( is-subtype-is-equiv)
+      ( is-property-is-equiv)
       ( map-is-propositional-truncation P f is-ptr-f P' f')
       ( htpy-is-propositional-truncation P f is-ptr-f P' f')
       ( is-equiv-is-ptruncation-is-ptruncation  P P' f f'

@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.Russells-paradox where
+module foundation.russells-paradox where
 
 open import foundation.contractible-types using (is-contr-total-path')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

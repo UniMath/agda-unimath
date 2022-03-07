@@ -351,7 +351,7 @@ module _
   equiv-iso-equiv-Semigroup : equiv-Semigroup ≃ type-iso-Semigroup
   equiv-iso-equiv-Semigroup =
     ( equiv-type-subtype
-      ( λ f → is-subtype-is-equiv (map-hom-Semigroup G H f))
+      ( λ f → is-property-is-equiv (map-hom-Semigroup G H f))
       ( is-prop-is-iso-hom-Semigroup)
       ( is-iso-is-equiv-hom-Semigroup)
       ( is-equiv-is-iso-hom-Semigroup)) ∘e

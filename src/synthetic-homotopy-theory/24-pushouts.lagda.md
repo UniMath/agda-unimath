@@ -243,7 +243,7 @@ uniquely-unique-pushout :
 uniquely-unique-pushout f g c d up-c up-d =
   is-contr-total-Eq-subtype
     ( uniqueness-map-universal-property-pushout f g c up-c d)
-    ( is-subtype-is-equiv)
+    ( is-property-is-equiv)
     ( map-universal-property-pushout f g c up-c d)
     ( htpy-cocone-map-universal-property-pushout f g c up-c d)
     ( is-equiv-up-pushout-up-pushout f g c d
@@ -255,13 +255,25 @@ uniquely-unique-pushout f g c d up-c up-d =
 {- We will assume that every span has a pushout. Moreover, we will introduce
    some further terminology to facilitate working with these pushouts. -}
 
-postulate pushout : {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B) → UU (l1 ⊔ l2 ⊔ l3)
+postulate
+  pushout :
+    {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+    (f : S → A) (g : S → B) → UU (l1 ⊔ l2 ⊔ l3)
 
-postulate inl-pushout : {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B) → A → pushout f g
+postulate
+  inl-pushout :
+    {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+    (f : S → A) (g : S → B) → A → pushout f g
 
-postulate inr-pushout : {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B) → B → pushout f g
+postulate
+  inr-pushout :
+    {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+    (f : S → A) (g : S → B) → B → pushout f g
 
-postulate glue-pushout : {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B) → ((inl-pushout f g) ∘ f) ~ ((inr-pushout f g) ∘ g)
+postulate
+  glue-pushout :
+    {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+    (f : S → A) (g : S → B) → ((inl-pushout f g) ∘ f) ~ ((inr-pushout f g) ∘ g)
 
 cocone-pushout :
   {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -273,7 +285,11 @@ cocone-pushout f g =
       ( inr-pushout f g)
       ( glue-pushout f g))
 
-postulate up-pushout : {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B) → universal-property-pushout l4 f g (cocone-pushout f g)
+postulate
+  up-pushout :
+    {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+    (f : S → A) (g : S → B) →
+    universal-property-pushout l4 f g (cocone-pushout f g)
 
 cogap :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}

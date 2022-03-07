@@ -39,7 +39,7 @@ open import groups.higher-groups using
     htpy-hom-∞-Group; extensionality-hom-∞-Group;
     id-hom-∞-Group; comp-hom-∞-Group; assoc-comp-hom-∞-Group;
     left-unit-law-comp-hom-∞-Group; right-unit-law-comp-hom-∞-Group)
-open import univalent-foundations.pointed-types using (Pointed-Type)
+open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
 
 Concrete-Group : (l : Level) → UU (lsuc l)
 Concrete-Group l = Σ (∞-Group l) (λ G → is-set (type-∞-Group G))

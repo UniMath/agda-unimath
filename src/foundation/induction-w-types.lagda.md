@@ -3,22 +3,22 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.induction-W-types where
+module foundation.induction-w-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-W-types using (_∈-𝕎_)
+open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
 open import foundation.equivalences using (_≃_; id-equiv; is-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.identity-types using (Id; ap; refl; tr)
-open import foundation.inequality-W-types using
+open import foundation.inequality-w-types using
   ( _le-𝕎_; le-∈-𝕎; propagate-le-𝕎)
 open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.W-types using (𝕎; component-𝕎; tree-𝕎)
+open import foundation.w-types using (𝕎; component-𝕎; tree-𝕎)
 ```
 
 ## Idea

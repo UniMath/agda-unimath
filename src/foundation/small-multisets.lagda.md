@@ -26,7 +26,7 @@ open import foundation.subtypes using
   ( eq-subtype; extensionality-type-subtype)
 open import foundation.univalence using (equiv-univalence)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
-open import foundation.W-types using
+open import foundation.w-types using
   ( tree-𝕎; symbol-𝕎; Eq-𝕎; equiv-Eq-𝕎-eq; eq-Eq-𝕎; Eq-𝕎-eq;
     component-𝕎)
 ```

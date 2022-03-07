@@ -9,13 +9,14 @@ open import elementary-number-theory.equality-natural-numbers using (ℕ-Set)
 open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv; is-equiv-htpy-equiv)
+open import foundation.equivalences using
+  ( _≃_; map-equiv; is-equiv-htpy-equiv; _∘e_; inv-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; all-elements-equal)
+  ( UU-Prop; type-Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
 open import foundation.set-presented-types using (has-set-presentation-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
@@ -25,9 +26,12 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Fin-Set)
+open import univalent-combinatorics.equivalences-standard-finite-types using
+  ( is-injective-Fin)
 open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
 open import univalent-combinatorics.finite-connected-components using
   ( has-cardinality-components; has-cardinality-components-Prop)
+open import univalent-combinatorics.finite-types using (eq-cardinality)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -102,11 +106,16 @@ all-elements-equal-is-finitely-presented :
 all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
   eq-subtype
     ( λ n → has-set-presentation-Prop (Fin-Set n) A)
-    ( apply-universal-property-trunc-Prop K
-      ( Id-Prop ℕ-Set k l)
-      ( λ f →
-        {!apply-universal-property-trunc-Prop !}))
+    ( eq-cardinality
+      ( has-cardinality-components-has-presentation-of-cardinality K)
+      ( has-cardinality-components-has-presentation-of-cardinality L))
 
 is-prop-is-finitely-presented :
   {l1 : Level} {A : UU l1} → is-prop (is-finitely-presented A)
-is-prop-is-finitely-presented {l1} {A} = {!!}
+is-prop-is-finitely-presented =
+  is-prop-all-elements-equal all-elements-equal-is-finitely-presented
+
+is-finitely-presented-Prop : {l : Level} (A : UU l) → UU-Prop l
+pr1 (is-finitely-presented-Prop A) = is-finitely-presented A
+pr2 (is-finitely-presented-Prop A) = is-prop-is-finitely-presented
+```
