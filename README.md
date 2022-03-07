@@ -6,10 +6,6 @@ This repository is for a formalisation project for univalent mathematics in Agda
 
 [![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
 
-## Founding members of the agda-unimath formalisation project 
-
-Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
-
 ## Design of the library
 
 ### Structure of the library
