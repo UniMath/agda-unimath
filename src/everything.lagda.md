@@ -223,7 +223,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
-open import foundation.ranks-of-elements-W-types
+open import foundation.ranks-of-elements-w-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.replacement
 open import foundation.retractions

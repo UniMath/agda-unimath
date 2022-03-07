@@ -109,6 +109,7 @@ open import foundation.propositional-maps public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullbacks public
+open import foundation.ranks-of-elements-w-types public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.replacement public
