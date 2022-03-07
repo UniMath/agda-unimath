@@ -12,10 +12,9 @@
 #   6. Checkout the main repository
 #   7. Verify the whole formalisation
 # - html
-#   8. Setup Graphviz to generate the Agda dependency graph
-#   9. Setup Pandoc using setup-pandoc 
-#   10. Generate HTML
-#   11. Deploy HTML to github pages
+#   8. Setup Pandoc using setup-pandoc 
+#   9. Generate HTML
+#   10. Deploy HTML to github pages
 
 name: CI
 on:
@@ -150,9 +149,6 @@ jobs:
         with:
           path: main/_build
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
-      - name: Setup Graphviz to generate the Agda dependency graph
-        uses: ts-graphviz/setup-graphviz@v1
-
       - uses: r-lib/actions/setup-pandoc@v1
         with:
           pandoc-version: '2.13'
