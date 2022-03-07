@@ -29,7 +29,6 @@ open import foundation.functoriality-coproduct-types using (id-map-coprod; map-c
 open import foundation.homotopies using (comp-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
-open import foundation.lists using (cons; list; fold-list; map-list; nil)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop)
@@ -49,6 +48,8 @@ open import univalent-combinatorics.2-element-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; Fin-Set)
 open import univalent-combinatorics.finite-types using (has-cardinality)
+open import univalent-combinatorics.lists using
+  (cons; list; fold-list; map-list; nil)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 

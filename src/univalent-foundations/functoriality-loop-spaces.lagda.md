@@ -12,9 +12,9 @@ open import foundation.universe-levels using (Level; UU)
 open import univalent-foundations.loop-spaces using
   ( type-Ω; tr-type-Ω; preserves-refl-tr-Ω; Ω; mul-Ω; preserves-mul-tr-Ω; inv-Ω;
     preserves-inv-tr-Ω)
-open import univalent-foundations.pointed-maps using
+open import synthetic-homotopy-theory.pointed-maps using
   ( _→*_; preserves-point-map-pointed-map; map-pointed-map)
-open import univalent-foundations.pointed-types using
+open import synthetic-homotopy-theory.pointed-types using
   ( Pointed-Type)
 ```
 

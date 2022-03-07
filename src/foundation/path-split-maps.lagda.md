@@ -14,7 +14,7 @@ open import foundation-core.universe-levels using (Level; UU)
 open import foundation.contractible-types using
   ( is-contr-prod; is-contr-Π)
 open import foundation.equivalences using
-  ( is-contr-sec-is-equiv; is-emb-is-equiv; is-equiv; is-subtype-is-equiv)
+  ( is-contr-sec-is-equiv; is-emb-is-equiv; is-equiv; is-property-is-equiv)
 ```
 
 ## Properties
@@ -41,7 +41,7 @@ abstract
     is-equiv (is-path-split-is-equiv f)
   is-equiv-is-path-split-is-equiv f =
     is-equiv-is-prop
-      ( is-subtype-is-equiv f)
+      ( is-property-is-equiv f)
       ( is-prop-is-path-split f)
       ( is-equiv-is-path-split f)
 ```

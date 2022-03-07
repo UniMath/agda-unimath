@@ -11,7 +11,7 @@ open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using (is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
 open import foundation.equivalences using
-  ( is-equiv; is-subtype-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
+  ( is-equiv; is-property-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
     _≃_; is-equiv-right-factor; is-equiv-comp; is-equiv-left-factor; map-equiv;
     id-equiv; _∘e_; map-inv-equiv; is-equiv-map-equiv)
 open import foundation.function-extensionality using (equiv-funext)
@@ -118,7 +118,7 @@ module _
     is-prop-universal-property-pullback :
       is-prop (universal-property-pullback l5 f g c)
     is-prop-universal-property-pullback =
-      is-prop-Π (λ C' → is-subtype-is-equiv (cone-map f g c))
+      is-prop-Π (λ C' → is-property-is-equiv (cone-map f g c))
 
   map-universal-property-pullback :
     ({l : Level} → universal-property-pullback l f g c) →
@@ -323,7 +323,7 @@ module _
     uniquely-unique-pullback c' c up-c' up-c =
       is-contr-total-Eq-subtype
         ( uniqueness-universal-property-pullback f g c up-c C' c')
-        ( is-subtype-is-equiv)
+        ( is-property-is-equiv)
         ( map-universal-property-pullback f g c up-c c')
         ( htpy-cone-map-universal-property-pullback f g c up-c c')
         ( is-equiv-up-pullback-up-pullback c c'

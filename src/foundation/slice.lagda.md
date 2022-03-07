@@ -15,7 +15,7 @@ open import foundation.embeddings using (_↪_; map-emb; is-emb-map-emb)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
-    is-fiberwise-equiv; is-subtype-is-equiv; id-equiv; map-inv-is-equiv)
+    is-fiberwise-equiv; is-property-is-equiv; id-equiv; map-inv-is-equiv)
 open import foundation.fibers-of-maps using
   ( fib; equiv-fib-pr1; equiv-total-fib; triangle-map-equiv-total-fib)
 open import foundation.function-extensionality using
@@ -260,8 +260,8 @@ equiv-fiberwise-equiv-equiv-slice f g =
         is-equiv (pr1 h) ≃
         is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
   α h = equiv-prop
-          ( is-subtype-is-equiv _)
-          ( is-prop-Π (λ x → is-subtype-is-equiv _))
+          ( is-property-is-equiv _)
+          ( is-prop-Π (λ x → is-property-is-equiv _))
           ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice f g h)
           ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice
             f g h)

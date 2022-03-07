@@ -445,7 +445,7 @@ module _
       ( is-contr-total-Eq-subtype
         ( is-contr-total-htpy-hom-Abstract-Group-Action G X Y
           ( hom-equiv-Abstract-Group-Action G X Y e))
-        ( λ f → is-subtype-is-equiv (pr1 f))
+        ( λ f → is-property-is-equiv (pr1 f))
         ( hom-equiv-Abstract-Group-Action G X Y e)
         ( refl-htpy)
         ( is-equiv-map-equiv (pr1 e)))

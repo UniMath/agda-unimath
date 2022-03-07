@@ -1,6 +1,5 @@
 # Loop spaces
 
-
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
@@ -12,9 +11,10 @@ open import foundation.equivalences using
 open import foundation.identity-types using
   ( Id; refl; _∙_; inv; assoc; left-unit; right-unit; left-inv; right-inv)
 open import foundation.universe-levels using (Level; UU)
-open import univalent-foundations.pointed-equivalences using
+
+open import synthetic-homotopy-theory.pointed-equivalences using
   ( _≃*_; equiv-pointed-equiv)
-open import univalent-foundations.pointed-types using
+open import synthetic-homotopy-theory.pointed-types using
   ( Pointed-Type; pt-Pointed-Type; type-Pointed-Type)
 ```
 

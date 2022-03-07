@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.lists where
+module univalent-combinatorics.lists where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using

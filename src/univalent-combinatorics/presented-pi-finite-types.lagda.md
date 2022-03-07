@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module univalent-combinatorics.finitely-pi-presented-types where
+module univalent-combinatorics.presented-pi-finite-types where
 ```
 
 ## Idea

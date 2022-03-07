@@ -9,7 +9,7 @@ open import foundation.booleans using (bool; false; true)
 open import foundation.empty-types using (empty)
 open import foundation.functions using (id)
 open import foundation.universe-levels using (UU; lzero)
-open import foundation.W-types using (𝕎; constant-𝕎; tree-𝕎)
+open import foundation.w-types using (𝕎; constant-𝕎; tree-𝕎)
 ```
 
 ## Idea

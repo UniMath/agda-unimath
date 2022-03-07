@@ -366,19 +366,19 @@ module _
       ( is-contr-retr-is-equiv is-equiv-f)
 
   abstract
-    is-subtype-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (Id H K)
-    is-subtype-is-equiv f H =
+    is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (Id H K)
+    is-property-is-equiv f H =
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
   is-equiv-Prop :
     (f : A → B) → Σ (UU (l1 ⊔ l2)) (λ X → (x y : X) → is-contr (Id x y))
   pr1 (is-equiv-Prop f) = is-equiv f
-  pr2 (is-equiv-Prop f) = is-subtype-is-equiv f
+  pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
   abstract
     is-emb-map-equiv :
       is-emb (map-equiv {A = A} {B = B})
-    is-emb-map-equiv = is-emb-pr1 is-subtype-is-equiv
+    is-emb-map-equiv = is-emb-pr1 is-property-is-equiv
 ```
 
 ### Characterizing the identity type of equivalences

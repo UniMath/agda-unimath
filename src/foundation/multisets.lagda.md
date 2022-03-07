@@ -6,11 +6,11 @@
 module foundation.multisets where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-W-types using (_∈-𝕎_)
+open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
 open import foundation.empty-types using (is-empty)
 open import foundation.functions using (_∘_)
 open import foundation.universe-levels using (Level; UU; lsuc)
-open import foundation.W-types using (𝕎; symbol-𝕎; tree-𝕎; component-𝕎)
+open import foundation.w-types using (𝕎; symbol-𝕎; tree-𝕎; component-𝕎)
 ```
 
 ## Idea

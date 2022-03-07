@@ -44,7 +44,7 @@ open import foundation.distributivity-of-dependent-functions-over-coproduct-type
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs public
 open import foundation.double-negation public
 open import foundation.effective-maps-equivalence-relations public
-open import foundation.elementhood-relation-W-types public
+open import foundation.elementhood-relation-w-types public
 open import foundation.embeddings public
 open import foundation.empty-types public
 open import foundation.epimorphisms-with-respect-to-sets public
@@ -59,7 +59,7 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences public
 open import foundation.existential-quantification public
-open import foundation.extensional-W-types public
+open import foundation.extensional-w-types public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-maps public
@@ -74,7 +74,7 @@ open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation
-open import foundation.functoriality-W-types public
+open import foundation.functoriality-w-types public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.homotopies public
@@ -82,10 +82,10 @@ open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.impredicative-encodings public
-open import foundation.indexed-W-types public
+open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
-open import foundation.induction-W-types public
-open import foundation.inequality-W-types public
+open import foundation.induction-w-types public
+open import foundation.inequality-w-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.involutions public
@@ -93,7 +93,6 @@ open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
-open import foundation.lists public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maybe public
@@ -114,7 +113,7 @@ open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.replacement public
 open import foundation.retractions public
-open import foundation.Russells-paradox public
+open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.set-presented-types public
 open import foundation.set-truncations public
@@ -165,7 +164,7 @@ open import foundation.universal-property-set-truncation public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
-open import foundation.W-types public
+open import foundation.w-types public
 open import foundation.weak-function-extensionality public
 open import foundation.weakly-constant-maps public
 ```

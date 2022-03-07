@@ -1,34 +1,47 @@
 # Pointed equivalences
 
-
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module univalent-foundations.pointed-equivalences where
+module synthetic-homotopy-theory.pointed-equivalences where
 
-open import foundation public
-open import elementary-number-theory public
-
-open import foundation.contractible-types using (is-contr)
+open import foundation.contractible-maps using (is-contr-map-is-equiv)
+open import foundation.contractible-types using
+  ( is-contr; is-contr-equiv; is-contr-prod; center; eq-is-contr)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv)
+open import foundation.equivalences using
+  ( is-equiv; is-contr-sec-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
+    _∘e_; is-emb-is-equiv; is-contr-retr-is-equiv; isretr-map-inv-is-equiv;
+    is-equiv-comp'; _≃_; is-property-is-equiv; map-equiv; id-equiv;
+    map-inv-equiv; is-equiv-has-inverse)
+open import foundation.fibers-of-maps using (fib)
+open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; ap; inv; _∙_)
+open import foundation.identity-types using
+  ( Id; refl; ap; inv; _∙_; equiv-con-inv; equiv-inv; equiv-concat'; right-unit;
+    is-equiv-concat; is-equiv-concat')
+open import foundation.propositions using
+  ( is-prop; is-prop-is-proof-irrelevant; is-equiv-is-prop)
 open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
+  ( is-contr-total-Eq-structure; extensionality-Σ)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( equiv-right-swap-Σ)
+open import foundation.univalence using (equiv-univalence)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import univalent-foundations.pointed-homotopies using
+
+open import synthetic-homotopy-theory.pointed-homotopies using
   ( htpy-pointed-map; extensionality-pointed-map; eq-htpy-pointed-map;
     concat-htpy-pointed-map; assoc-comp-pointed-map;
     left-whisker-htpy-pointed-map; right-unit-law-comp-pointed-map;
     left-unit-law-comp-pointed-map; inv-assoc-comp-pointed-map;
     right-whisker-htpy-pointed-map)
-open import univalent-foundations.pointed-maps using
+open import synthetic-homotopy-theory.pointed-maps using
   ( _→*_; comp-pointed-map; id-pointed-map; map-pointed-map;
     preserves-point-map-pointed-map; precomp-pointed-map)
-open import univalent-foundations.pointed-types using
+open import synthetic-homotopy-theory.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 ```
 
@@ -180,7 +193,7 @@ module _
     pair
       ( is-iso-is-equiv-pointed-map)
       ( is-equiv-is-prop
-        ( is-subtype-is-equiv (map-pointed-map A B f))
+        ( is-property-is-equiv (map-pointed-map A B f))
         ( is-prop-is-iso-pointed-map)
         ( is-equiv-is-iso-pointed-map))
 

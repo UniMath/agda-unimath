@@ -13,6 +13,8 @@ open import foundation
 open import univalent-combinatorics
 open import univalent-foundations
 
+open import univalent-foundations.isolated-points
+
 --------------------------------------------------------------------------------
 
 -- We define the concrete group Q8

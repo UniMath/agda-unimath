@@ -136,7 +136,7 @@ open import foundation.distributivity-of-dependent-functions-over-coproduct-type
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.effective-maps-equivalence-relations
-open import foundation.elementhood-relation-W-types
+open import foundation.elementhood-relation-w-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.epimorphisms-with-respect-to-sets
@@ -151,7 +151,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.extensional-W-types
+open import foundation.extensional-w-types
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-maps
@@ -173,10 +173,10 @@ open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.images
 open import foundation.impredicative-encodings
-open import foundation.indexed-W-types
+open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
-open import foundation.induction-W-types
-open import foundation.inequality-W-types
+open import foundation.induction-w-types
+open import foundation.inequality-w-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.involutions
@@ -184,7 +184,6 @@ open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
 open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
-open import foundation.lists
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.maybe
@@ -205,7 +204,7 @@ open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.replacement
 open import foundation.retractions
-open import foundation.Russells-paradox
+open import foundation.russells-paradox
 open import foundation.sections
 open import foundation.set-presented-types
 open import foundation.set-truncations
@@ -256,7 +255,7 @@ open import foundation.universal-property-set-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import foundation.W-types
+open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
 ```
@@ -375,6 +374,12 @@ open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
+open import synthetic-homotopy-theory.pointed-dependent-functions
+open import synthetic-homotopy-theory.pointed-equivalences
+open import synthetic-homotopy-theory.pointed-families-of-types
+open import synthetic-homotopy-theory.pointed-homotopies
+open import synthetic-homotopy-theory.pointed-maps
+open import synthetic-homotopy-theory.pointed-types
 open import synthetic-homotopy-theory.spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 ```
@@ -418,6 +423,7 @@ open import univalent-combinatorics.finitely-presented-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
+open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
@@ -435,12 +441,6 @@ open import univalent-foundations.functoriality-loop-spaces
 open import univalent-foundations.isolated-points
 open import univalent-foundations.iterated-loop-spaces
 open import univalent-foundations.loop-spaces
-open import univalent-foundations.pointed-dependent-functions
-open import univalent-foundations.pointed-equivalences
-open import univalent-foundations.pointed-families-of-types
-open import univalent-foundations.pointed-homotopies
-open import univalent-foundations.pointed-maps
-open import univalent-foundations.pointed-types
 open import univalent-foundations.truncations
 ```
 

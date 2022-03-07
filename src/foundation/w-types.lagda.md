@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module foundation.W-types where
+module foundation.w-types where
 
 open import foundation.algebras-polynomial-endofunctors using
   ( algebra-polynomial-endofunctor-UU; type-algebra-polynomial-endofunctor;
