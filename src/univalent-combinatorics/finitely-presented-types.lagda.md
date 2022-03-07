@@ -31,6 +31,7 @@ open import univalent-combinatorics.equivalences-standard-finite-types using
 open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
 open import univalent-combinatorics.finite-connected-components using
   ( has-cardinality-components; has-cardinality-components-Prop)
+open import univalent-combinatorics.finite-types using (eq-cardinality)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -105,16 +106,9 @@ all-elements-equal-is-finitely-presented :
 all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
   eq-subtype
     ( λ n → has-set-presentation-Prop (Fin-Set n) A)
-    ( apply-universal-property-trunc-Prop K
-      ( Id-Prop ℕ-Set k l)
-      ( λ { ( pair f H) →
-            apply-universal-property-trunc-Prop L
-              ( Id-Prop ℕ-Set k l)
-              ( λ { ( pair g G) →
-                    is-injective-Fin
-                      ( ( inv-equiv
-                          ( pair (unit-trunc-Set ∘ g) G)) ∘e
-                        ( pair (unit-trunc-Set ∘ f) H))})}))
+    ( eq-cardinality
+      ( has-cardinality-components-has-presentation-of-cardinality K)
+      ( has-cardinality-components-has-presentation-of-cardinality L))
 
 is-prop-is-finitely-presented :
   {l1 : Level} {A : UU l1} → is-prop (is-finitely-presented A)
