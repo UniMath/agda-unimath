@@ -116,8 +116,8 @@ abstract
 
 ```agda
 has-cardinality-Prop :
-  {l : Level} → UU l → ℕ → UU-Prop l
-has-cardinality-Prop X k = mere-equiv-Prop (Fin k) X
+  {l : Level} → ℕ → UU l → UU-Prop l
+has-cardinality-Prop k X = mere-equiv-Prop (Fin k) X
 
 has-cardinality :
   {l : Level} → ℕ → UU l → UU l

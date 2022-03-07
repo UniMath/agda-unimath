@@ -30,7 +30,7 @@ has-finite-components A = type-Prop (has-finite-components-Prop A)
 
 has-cardinality-components-Prop : {l : Level} (k : ℕ) → UU l → UU-Prop l
 has-cardinality-components-Prop k A =
-  has-cardinality-Prop (type-trunc-Set A) k
+  has-cardinality-Prop k (type-trunc-Set A)
 
 has-cardinality-components : {l : Level} (k : ℕ) → UU l → UU l
 has-cardinality-components k A =
