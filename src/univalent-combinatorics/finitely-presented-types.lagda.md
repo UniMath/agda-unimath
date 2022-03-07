@@ -1,10 +1,11 @@
 # Finitely presented types
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module univalent-combinatorics.finitely-presented-types where
 
+open import elementary-number-theory.equality-natural-numbers using (ℕ-Set)
 open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -13,10 +14,13 @@ open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop; all-elements-equal)
 open import foundation.set-presented-types using (has-set-presentation-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
+open import foundation.sets using (Id-Prop)
+open import foundation.subtypes using (eq-subtype)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.equality-standard-finite-types using
@@ -31,26 +35,43 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 
 A type is said to be finitely presented if it is presented by a standard finite type.
 
+## Definition
+
+### To have a presentation of cardinality `k`
+
 ```agda
-has-finite-presentation-Prop :
+has-presentation-of-cardinality-Prop :
   {l1 : Level} (k : ℕ) (A : UU l1) → UU-Prop l1
-has-finite-presentation-Prop k A =
+has-presentation-of-cardinality-Prop k A =
   has-set-presentation-Prop (Fin-Set k) A
 
-has-finite-presentation :
-  {l1 : Level} (k : ℕ) (A : UU l1) → UU l1
-has-finite-presentation k A = type-Prop (has-finite-presentation-Prop k A)
-  
-has-finite-presentation-has-cardinality-components :
+has-presentation-of-cardinality : {l1 : Level} (k : ℕ) (A : UU l1) → UU l1
+has-presentation-of-cardinality k A = type-Prop (has-presentation-of-cardinality-Prop k A)
+```
+
+### Finitely presented types
+
+```agda
+is-finitely-presented : {l1 : Level} → UU l1 → UU l1
+is-finitely-presented A =
+  Σ ℕ (λ k → has-presentation-of-cardinality k A)
+```
+
+## Properties
+
+### A type has finitely many connected components if and only if it has a finite presentation
+
+```agda
+has-presentation-of-cardinality-has-cardinality-components :
   {l : Level} {k : ℕ} {A : UU l} → has-cardinality-components k A →
-  has-finite-presentation k A
-has-finite-presentation-has-cardinality-components {l} {k} {A} H =
+  has-presentation-of-cardinality k A
+has-presentation-of-cardinality-has-cardinality-components {l} {k} {A} H =
   apply-universal-property-trunc-Prop H
-    ( has-finite-presentation-Prop k A)
+    ( has-presentation-of-cardinality-Prop k A)
     ( λ e →
       apply-universal-property-trunc-Prop
         ( P2 e)
-        ( has-finite-presentation-Prop k A)
+        ( has-presentation-of-cardinality-Prop k A)
         ( λ g →
           unit-trunc-Prop
             ( pair
@@ -64,11 +85,28 @@ has-finite-presentation-has-cardinality-components {l} {k} {A} H =
        type-trunc-Prop ((x : Fin k) → fib unit-trunc-Set (map-equiv e x))
   P2 e = finite-choice-Fin (P1 e)
 
-has-cardinality-components-has-finite-presentation :
-  {l : Level} {k : ℕ} {A : UU l} → has-finite-presentation k A →
+has-cardinality-components-has-presentation-of-cardinality :
+  {l : Level} {k : ℕ} {A : UU l} → has-presentation-of-cardinality k A →
   has-cardinality-components k A
-has-cardinality-components-has-finite-presentation {l} {k} {A} H =
+has-cardinality-components-has-presentation-of-cardinality {l} {k} {A} H =
   apply-universal-property-trunc-Prop H
     ( has-cardinality-components-Prop k A)
     ( λ { (pair f E) → unit-trunc-Prop (pair (unit-trunc-Set ∘ f) E)})
 ```
+
+### To be finitely presented is a property
+
+```agda
+all-elements-equal-is-finitely-presented :
+  {l1 : Level} {A : UU l1} → all-elements-equal (is-finitely-presented A)
+all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
+  eq-subtype
+    ( λ n → has-set-presentation-Prop (Fin-Set n) A)
+    ( apply-universal-property-trunc-Prop K
+      ( Id-Prop ℕ-Set k l)
+      ( λ f →
+        {!apply-universal-property-trunc-Prop !}))
+
+is-prop-is-finitely-presented :
+  {l1 : Level} {A : UU l1} → is-prop (is-finitely-presented A)
+is-prop-is-finitely-presented {l1} {A} = {!!}

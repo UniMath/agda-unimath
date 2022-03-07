@@ -18,6 +18,5 @@ open import univalent-foundations.pointed-families-of-types public
 open import univalent-foundations.pointed-homotopies public
 open import univalent-foundations.pointed-maps public
 open import univalent-foundations.pointed-types public
-open import univalent-foundations.W-types public
 open import univalent-foundations.isolated-points public
 ```

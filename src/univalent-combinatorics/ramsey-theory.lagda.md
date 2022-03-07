@@ -28,7 +28,7 @@ full-subset X x = unit-Prop
 subset-of-size : (k : ℕ) → 𝔽 → UU (lsuc lzero)
 subset-of-size k X =
   Σ ( type-𝔽 X → UU-Prop lzero)
-    ( λ P → has-cardinality (Σ (type-𝔽 X) (λ x → type-Prop (P x))) k)
+    ( λ P → has-cardinality k (Σ (type-𝔽 X) (λ x → type-Prop (P x))))
 
 is-ramsey-set : {k : ℕ} (q : Fin k → ℕ) (r : ℕ) (A : 𝔽) → UU (lsuc lzero)
 is-ramsey-set {k} q r A =

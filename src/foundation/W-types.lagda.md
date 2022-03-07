@@ -35,8 +35,9 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-is-equiv; is-trunc-Σ; is-trunc-Π; is-trunc-is-equiv')
-open import foundation.truncation-levels using (𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
 ```
 
 ## Idea

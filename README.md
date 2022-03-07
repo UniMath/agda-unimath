@@ -2,11 +2,9 @@
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment)
 
-This repository is for a formalisation project for univalent mathematics in Agda.
+This repository is for a formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics could be useful, informative resources for mathematicians. The `agda-unimath` library is designed to work towards this goal. We warmly welcome any contributions. If you would like to contribute, please join the `#unimath` stream of the Agda community chat at
 
-## Members of the formalisation project 
-
-Elisabeth Bonnevier, Pierre Cagne, Jonathan Prieto-Cubides, Egbert Rijke.
+[![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
 
 ## Design of the library
 

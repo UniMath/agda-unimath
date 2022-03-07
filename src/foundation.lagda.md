@@ -85,8 +85,10 @@ open import foundation.impredicative-encodings public
 open import foundation.indexed-W-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-W-types public
+open import foundation.inequality-W-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
+open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
 open import foundation.law-of-excluded-middle public

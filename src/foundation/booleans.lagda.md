@@ -5,19 +5,19 @@
 
 module foundation.booleans where
 
-open import foundation.constant-maps using (const)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (empty; is-prop-empty)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; inv)
+open import foundation-core.constant-maps using (const)
+open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
+open import foundation-core.empty-types using (empty; is-prop-empty)
+open import foundation-core.equivalences using (is-equiv; _≃_)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (Id; refl; inv)
 open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation-core.negation using (¬)
+open import foundation-core.propositions using (is-prop)
+open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
 open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation.universe-levels using (lzero; UU)
+open import foundation-core.universe-levels using (lzero; UU)
 ```
 
 ## Idea
