@@ -29,6 +29,7 @@ open import foundation.functoriality-coproduct-types using (id-map-coprod; map-c
 open import foundation.homotopies using (comp-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
+open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.lists using (cons; list; fold-list; map-list; nil)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
@@ -446,11 +447,7 @@ retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inl 
           ( neq-inr-inl)
           ( λ r →
             neq-inr-inl
-              ( map-inv-equiv
-                ( pair
-                  ( ap (map-equiv f))
-                  ( is-emb-is-equiv (pr2 f) (inr star) (inl y)))
-                (p ∙ (r ∙ inv q))))
+              ( is-injective-map-equiv f (p ∙ (r ∙ inv q))))
   lemma : Id (map-equiv (pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) (inl y)) (inl z)
   lemma =
     ( ap (λ e → map-equiv (pr1 (map-equiv e P)) (inl y)) (right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
@@ -564,9 +561,7 @@ retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inl y) (i
 retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inl y) (inr star) q =
   ex-falso
     ( neq-inr-inl
-      ( map-inv-equiv
-        ( pair (ap (map-equiv f)) (is-emb-is-equiv (pr2 f) (inr star) (inl y)))
-        ( p ∙ inv q)))
+      ( is-injective-map-equiv f (p ∙ inv q)))
 retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inr star) z q =
   ap 
     (λ w →

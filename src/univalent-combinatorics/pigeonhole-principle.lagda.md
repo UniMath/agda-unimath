@@ -21,11 +21,11 @@ open import foundation.embeddings using
   ( _↪_; map-emb; is-emb-map-emb; is-emb; comp-emb)
 open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equivalences using
-  (emb-equiv; id-equiv; is-emb-is-equiv; map-equiv; map-inv-equiv)
+  (emb-equiv; id-equiv; map-equiv; map-inv-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (inv; Id; ap)
 open import foundation.injective-maps using
-  ( is-injective; is-emb-is-injective)
+  ( is-injective; is-emb-is-injective; is-injective-map-equiv)
 open import foundation.negation using (¬; map-neg)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
@@ -204,22 +204,11 @@ module _
         ( pair
           ( map-equiv (equiv-count eA) (pr1 (pr2 G)))
           ( pair
-            ( map-inv-equiv
-              ( pair
-                ( ap (map-equiv (inv-equiv-count eB)))
-                ( is-emb-is-equiv
-                  ( pr2 (inv-equiv-count eB))
-                  ( f (map-equiv (equiv-count eA) (pr1 G)))
-                  ( f (map-equiv (equiv-count eA) (pr1 (pr2 G))))))
-              ( pr1 (pr2 (pr2 G))))
+            ( is-injective-map-equiv (inv-equiv-count eB) (pr1 (pr2 (pr2 G))))
             ( λ q →
               pr2
                 ( pr2 (pr2 G))
-                ( map-inv-equiv
-                  ( pair
-                    ( ap (map-equiv (equiv-count eA)))
-                    ( is-emb-is-equiv (pr2 (equiv-count eA)) (pr1 G) (pr1 (pr2 G))))
-                  ( q)))))
+                ( is-injective-map-equiv (equiv-count eA) q))))
       where
       h : Fin (number-of-elements-count eA) → Fin (number-of-elements-count eB)
       h = (map-equiv (inv-equiv-count eB)) ∘ (f ∘ (map-equiv (equiv-count eA)))

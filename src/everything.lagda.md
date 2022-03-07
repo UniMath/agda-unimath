@@ -73,11 +73,8 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 open import finite-groups.abstract-quaternion-group
 open import finite-groups.concrete-quaternion-group
 open import finite-groups.finite-groups
-<<<<<<< HEAD
 open import finite-groups.orbits
 open import finite-groups.quaternion-group
-=======
->>>>>>> master
 open import finite-groups.transpositions
 open import foundation.0-maps
 open import foundation.1-types
@@ -144,8 +141,6 @@ open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.univalence
 open import foundation-core.universe-levels
-<<<<<<< HEAD
-=======
 open import foundation
 open import foundation.0-maps
 open import foundation.1-types
@@ -172,7 +167,6 @@ open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
->>>>>>> master
 open import foundation.coslice
 open import foundation.decidable-dependent-function-types
 open import foundation.decidable-dependent-pair-types

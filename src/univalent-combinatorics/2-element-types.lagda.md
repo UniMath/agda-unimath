@@ -608,11 +608,7 @@ module _
     f h y (inl (inr star)) (inl (inr star)) k3 p q r =
       tr
         ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
-        ( map-inv-equiv
-          (pair
-            (ap (map-equiv h))
-            (is-emb-is-equiv (pr2 h) x y))
-          (p ∙ inv q))
+        ( is-injective-map-equiv h (p ∙ inv q))
         ( P)
     f h y (inl (inr star)) (inr star) (inl (inr star)) p q r =
       ex-falso
@@ -620,45 +616,23 @@ module _
           ( inv p ∙ (ap (map-equiv h) (inv P) ∙
             ( ap
               ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( map-inv-equiv
-                ( pair
-                  ( ap (map-equiv h))
-                  ( is-emb-is-equiv
-                    ( pr2 h)
-                    ( x)
-                    ( map-equiv (swap-2-Element-Type X) y)))
-                ( p ∙ inv r)) ∙
+              ( is-injective-map-equiv h (p ∙ inv r)) ∙
               ( ( ap
                   ( map-equiv h)
                   ( is-involution-aut-2-element-type X
                     ( swap-2-Element-Type X) y)) ∙
                 ( q))))))
     f h y (inl (inr star)) (inr star) (inr star) p q r =
-      ( map-inv-equiv
-        (pair
-          (ap (map-equiv h))
-          (is-emb-is-equiv (pr2 h) (map-equiv (swap-2-Element-Type X) y) y))
-        (r ∙ inv q))
+      ( is-injective-map-equiv h (r ∙ inv q))
     f h y (inr star) (inl (inr star)) (inl (inr star)) p q r =
-      ( map-inv-equiv
-        (pair
-          (ap (map-equiv h))
-          (is-emb-is-equiv (pr2 h) (map-equiv (swap-2-Element-Type X) y) y))
-        (r ∙ inv q))
+      ( is-injective-map-equiv h (r ∙ inv q))
     f h y (inr star) (inl (inr star)) (inr star) p q r =
       ex-falso
         ( neq-inr-inl
           ( inv p ∙ (ap (map-equiv h) (inv P) ∙
             ( ap
               ( map-equiv (h ∘e (swap-2-Element-Type X)))
-              ( map-inv-equiv
-                ( pair
-                  ( ap (map-equiv h))
-                  ( is-emb-is-equiv
-                    ( pr2 h)
-                    ( x)
-                    ( map-equiv (swap-2-Element-Type X) y)))
-                ( p ∙ inv r)) ∙
+              ( is-injective-map-equiv h (p ∙ inv r)) ∙
               ( ( ap
                   ( map-equiv h)
                   ( is-involution-aut-2-element-type X
@@ -668,10 +642,6 @@ module _
     f h y (inr star) (inr star) k3 p q r =
       tr
         ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
-        ( map-inv-equiv
-          (pair
-            (ap (map-equiv h))
-            (is-emb-is-equiv (pr2 h) x y))
-          (p ∙ inv q))
+        ( is-injective-map-equiv h (p ∙ inv q))
         ( P)
 ```
