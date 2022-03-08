@@ -10,6 +10,8 @@ module synthetic-homotopy-theory.infinite-cyclic-types where
 
 open import synthetic-homotopy-theory.cyclic-types public
 
+open import synthetic-homotopy-theory.pointed-types
+
 Infinite-Cyclic : (l : Level) → UU (lsuc l)
 Infinite-Cyclic l = Cyclic l zero-ℕ 
 
@@ -98,7 +100,7 @@ module _
                 { B = λ f → is-equiv (pr1 f)}
                 ( λ f →
                   is-proof-irrelevant-is-prop
-                    ( is-subtype-is-equiv (pr1 f))
+                    ( is-property-is-equiv (pr1 f))
                     ( is-equiv-htpy id
                       ( htpy-eq
                         ( ap

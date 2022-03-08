@@ -45,10 +45,13 @@ html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
 	${AGDA} ${htmlOpts} src/everything.lagda.md 
-	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot src/README.lagda.md
 	cd docs/; \
 	sh conv.sh; \
 	cp README.html index.html
+
+.PHONY : graph
+graph:
+	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot src/README.lagda.md
 
 .PHONY : clean
 clean:

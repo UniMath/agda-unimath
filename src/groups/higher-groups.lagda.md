@@ -23,14 +23,14 @@ open import univalent-foundations.loop-spaces using
   ( type-Ω; refl-Ω; mul-Ω; associative-mul-Ω; left-unit-law-mul-Ω;
     right-unit-law-mul-Ω; inv-Ω; left-inverse-law-mul-Ω;
     right-inverse-law-mul-Ω)
-open import univalent-foundations.pointed-homotopies using
+open import synthetic-homotopy-theory.pointed-homotopies using
   ( htpy-pointed-map; extensionality-pointed-map;
     assoc-comp-pointed-map; left-unit-law-comp-pointed-map;
     right-unit-law-comp-pointed-map)
-open import univalent-foundations.pointed-maps using
+open import synthetic-homotopy-theory.pointed-maps using
   ( _→*_; map-pointed-map; preserves-point-map-pointed-map;
     id-pointed-map; comp-pointed-map)
-open import univalent-foundations.pointed-types using
+open import synthetic-homotopy-theory.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 
 ∞-Group : (l : Level) → UU (lsuc l)

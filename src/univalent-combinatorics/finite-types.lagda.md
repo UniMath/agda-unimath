@@ -116,8 +116,8 @@ abstract
 
 ```agda
 has-cardinality-Prop :
-  {l : Level} → UU l → ℕ → UU-Prop l
-has-cardinality-Prop X k = mere-equiv-Prop (Fin k) X
+  {l : Level} → ℕ → UU l → UU-Prop l
+has-cardinality-Prop k X = mere-equiv-Prop (Fin k) X
 
 has-cardinality :
   {l : Level} → ℕ → UU l → UU l
@@ -421,8 +421,10 @@ module _
       Id (number-of-elements-count e) (number-of-elements-is-finite f)
     compute-number-of-elements-is-finite e f =
       ind-trunc-Prop
-        ( λ g → Id-Prop ℕ-Set ( number-of-elements-count e)
-                              ( number-of-elements-is-finite g))
+        ( λ g →
+          Id-Prop ℕ-Set
+            ( number-of-elements-count e)
+            ( number-of-elements-is-finite g))
         ( λ g →
           ( is-injective-Fin ((inv-equiv (equiv-count g)) ∘e (equiv-count e))) ∙
           ( ap pr1
@@ -432,7 +434,22 @@ module _
         ( f)
 ```
 
-### A finit etype is empty if and only if it has 0 elemeents
+### If a type has cardinality `k` and cardinality `l`, then `k = l`.
+
+```agda
+eq-cardinality :
+  {l1 : Level} {k l : ℕ} {A : UU l1} →
+  has-cardinality k A → has-cardinality l A → Id k l
+eq-cardinality H K =
+  apply-universal-property-trunc-Prop H
+    ( Id-Prop ℕ-Set _ _)
+    ( λ e →
+      apply-universal-property-trunc-Prop K
+        ( Id-Prop ℕ-Set _ _)
+        ( λ f → is-injective-Fin (inv-equiv f ∘e e)))
+```
+
+### A finite type is empty if and only if it has 0 elemeents
 
 ```agda
 abstract

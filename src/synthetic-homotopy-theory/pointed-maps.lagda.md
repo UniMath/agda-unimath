@@ -3,18 +3,19 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module univalent-foundations.pointed-maps where
+module synthetic-homotopy-theory.pointed-maps where
 
 open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (Id; refl; tr; inv; apd; _∙_; ap)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import univalent-foundations.pointed-dependent-functions using
+
+open import synthetic-homotopy-theory.pointed-dependent-functions using
   ( pointed-Π; function-pointed-Π; preserves-point-function-pointed-Π)
-open import univalent-foundations.pointed-families-of-types using
+open import synthetic-homotopy-theory.pointed-families-of-types using
   ( Pointed-Fam; fam-Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
-open import univalent-foundations.pointed-types using
+open import synthetic-homotopy-theory.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 ```
 

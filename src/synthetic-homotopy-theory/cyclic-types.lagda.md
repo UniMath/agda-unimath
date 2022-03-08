@@ -11,6 +11,8 @@ open import foundation public
 open import groups public
 open import univalent-combinatorics public
 
+open import synthetic-homotopy-theory.pointed-types
+
 Endo : (l : Level) → UU (lsuc l)
 Endo l = Σ (UU l) (λ X → X → X)
 
@@ -212,7 +214,7 @@ module _
         ( λ f → id-equiv))
       ( is-contr-total-Eq-subtype
         ( is-contr-total-htpy-hom-Endo (hom-equiv-Endo e))
-        ( λ f → is-subtype-is-equiv (pr1 f))
+        ( λ f → is-property-is-equiv (pr1 f))
         ( hom-equiv-Endo e)
         ( refl-htpy-hom-Endo (hom-equiv-Endo e))
         ( pr2 (pr1 e)))

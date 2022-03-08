@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.functoriality-W-types where
+module foundation.functoriality-w-types where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-maps using
@@ -32,7 +32,7 @@ open import foundation.truncation-levels using (𝕋; neg-two-𝕋; neg-one-𝕋
 open import foundation.type-arithmetic-dependent-pair-types using
   ( assoc-Σ; equiv-left-swap-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.W-types using
+open import foundation.w-types using
   ( 𝕎; tree-𝕎; equiv-Eq-𝕎-eq; structure-𝕎-Alg; inv-equiv-structure-𝕎-Alg;
     issec-map-inv-structure-𝕎-Alg)
 ```

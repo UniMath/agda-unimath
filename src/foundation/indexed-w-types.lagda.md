@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.indexed-W-types where
+module foundation.indexed-w-types where
 
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```

@@ -3,17 +3,17 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.ranks-of-elements-W-types where
+module foundation.ranks-of-elements-w-types where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-W-types using (_∈-𝕎_)
+open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
 open import foundation.empty-types using
   ( empty; empty-Prop; is-empty; ex-falso)
 open import foundation.existential-quantification using
   ( exists-Prop; exists; intro-exists; ∃; intro-∃)
 open import foundation.identity-types using (tr; inv; refl)
-open import foundation.inequality-W-types using
+open import foundation.inequality-w-types using
   ( _le-𝕎_; le-∈-𝕎; propagate-le-𝕎)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
@@ -21,7 +21,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( UU-Prop; Π-Prop; type-Prop; prod-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.W-types using (𝕎; tree-𝕎; constant-𝕎; is-constant-𝕎)
+open import foundation.w-types using (𝕎; tree-𝕎; constant-𝕎; is-constant-𝕎)
 ```
 
 ## Idea

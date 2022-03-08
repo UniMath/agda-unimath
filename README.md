@@ -6,6 +6,10 @@ This repository is for a formalisation project for univalent mathematics in Agda
 
 [![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
 
+This library is based on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
+
+The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
+
 ## Design of the library
 
 ### Structure of the library
@@ -14,26 +18,6 @@ This repository is for a formalisation project for univalent mathematics in Agda
 2. A file name should be a recognizable name or description, usually in the form of a noun or noun phrase, of the topic of that file that is natural, sufficiently precise, concise, and consistent with those of related files. File names are in lower case, with words separated by hyphens. Words in file names should not be abbreviated unless the abbreviated term is a widely accepted mathematical term, e.g., `poset`.
 3. The files are organized by mathematical subject. The folder names describe them.
 4. All the files and folders can be found in the folder `src`.
-
-### Folders in the library
-
-We give brief descriptions of the folders in the library.
-1. The folder named `foundation` contains the core of the library. The rest of the library is built on top of this foundation. Every file in this folder has the options `--safe`, `--exact-split`, and `--without-K` turned on. In particular, there are no postulates in this folder.
-2. The `elementary-number-theory` folder contains the definitions of the types of natural numbers, integers, and the standard finite types, and develops elementary number theory from them.
-3. The `univalent-foundations` folder extends the type theory of Agda with function extensionality, propositional truncations, and the univalence axiom.
-4. The `categories` folder contains some category theory.
-6. The `the-circle` folder contains the material for Chapter 3.
-7. The `synthetic-homotopy-theory` folder contains the formalisation of pullbacks, pushouts, and (eventually) homotopy groups of types.
-8. The `groups` folder contains the material for Chapter 4 of the Symmetry book.
-9. The `subgroups` folder contains the material for Chapter 5 of the Symmetry book. We plan to include quotient groups in this folder, and prove the isomorphism theorems.
-10. The `order-theory` folder contains concepts of order theory.
-11. The `univalent-combinatorics` folder contains further development of univalent mathematics of finite structures, and provides a source of examples of concrete groups.
-
-This library is built on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
-
-Although the folders are roughly organised according to the chapters of the Symmetry Book, we don't commit to closely following the sectioning in the book.
-
-The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
 
 ### Library conventions
 

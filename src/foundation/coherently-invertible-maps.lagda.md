@@ -29,7 +29,7 @@ open import
   ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-is-coherently-invertible; is-contr-sec-is-equiv;
-    is-emb-is-equiv; is-coherently-invertible-is-equiv; is-subtype-is-equiv;
+    is-emb-is-equiv; is-coherently-invertible-is-equiv; is-property-is-equiv;
     is-equiv-id; is-equiv-comp)
 open import foundation.identity-types using (Id; ap; equiv-inv; refl)
 ```
@@ -85,7 +85,7 @@ abstract
     is-equiv (is-coherently-invertible-is-equiv {f = f})
   is-equiv-is-coherently-invertible-is-equiv f =
     is-equiv-is-prop
-      ( is-subtype-is-equiv f)
+      ( is-property-is-equiv f)
       ( is-prop-is-coherently-invertible f)
       ( is-equiv-is-coherently-invertible)
 ```

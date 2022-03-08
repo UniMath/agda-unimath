@@ -3,14 +3,14 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.elementhood-relation-W-types where
+module foundation.elementhood-relation-w-types where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (is-empty)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.identity-types using (tr; inv; refl)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.W-types using (𝕎; component-𝕎; tree-𝕎)
+open import foundation.w-types using (𝕎; component-𝕎; tree-𝕎)
 ```
 
 ## Idea

@@ -97,7 +97,7 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
             ( face-Finitely-Graded-Poset X
               ( succ-Fin (succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
             ( λ y →
-              has-cardinality-Prop
+              has-cardinality-Prop 2
                 ( Σ ( face-Finitely-Graded-Poset X
                       ( succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i))))
                     ( λ z →
@@ -105,8 +105,7 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
                       adjacent-Finitely-Graded-Poset X
                         ( succ-Fin (inl-Fin k i))
                         ( z)
-                        ( y)))
-                ( 2))))
+                        ( y))))))
 
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)

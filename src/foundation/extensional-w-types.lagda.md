@@ -3,12 +3,12 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.extensional-W-types where
+module foundation.extensional-w-types where
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-W-types using (_∈-𝕎_)
+open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
@@ -33,7 +33,7 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( right-unit-law-Σ-is-contr; equiv-left-swap-Σ; assoc-Σ)
 open import foundation.univalent-type-families using (is-univalent)
 open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.W-types using
+open import foundation.w-types using
   ( 𝕎; tree-𝕎; symbol-𝕎; inv-equiv-structure-𝕎-Alg)
 ```
 
