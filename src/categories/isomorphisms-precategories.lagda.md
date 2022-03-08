@@ -12,7 +12,7 @@ open import categories.precategories using
     is-set-type-hom-Precat)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; inv; _∙_; ap)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.propositions using
   ( is-proof-irrelevant; prod-Prop; is-prop;
     is-prop-is-proof-irrelevant)
@@ -65,6 +65,17 @@ module _
   pr2 id-iso-Precat = is-iso-id-Precat
 ```
 
+### Equalities give rise to isomorphisms
+
+An equality between objects `x y : A` gives rise to an isomorphism between them. This is because by the J-rule, it is enough to construct an isomorphism given `refl : Id x x`, from `x` to itself. We take the identity morphism as such an isomorphism.
+
+```agda
+iso-eq-Precat :
+  {l1 l2 : Level} (C : Precat l1 l2) →
+  (x y : obj-Precat C) → Id x y → iso-Precat C x y
+iso-eq-Precat C x .x refl = id-iso-Precat C
+```
+
 ## Properties
 
 ### The property of being an isomorphism is a proposition
@@ -106,11 +117,21 @@ module _
       is-prop (is-iso-Precat C f)
     is-prop-is-iso-Precat f =
       is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
+```
+
+### The type of isomorphisms form a set
+
+The type of isomorphisms between objects `x y : A` is a subtype of the set `hom x y` since being an isomorphism is a proposition.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  where
 
   is-set-iso-Precat : (x y : obj-Precat C) → is-set (iso-Precat C x y)
   is-set-iso-Precat x y =
     is-set-is-subtype
-      is-prop-is-iso-Precat
+      (is-prop-is-iso-Precat C)
       (is-set-type-hom-Precat C x y)
 
   iso-Precat-Set : (x y : obj-Precat C) → UU-Set l2
