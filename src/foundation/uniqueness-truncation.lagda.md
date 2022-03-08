@@ -1,7 +1,7 @@
 # Uniqueness of the truncations
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.uniqueness-truncation where
 
