@@ -9,7 +9,7 @@ open import foundation-core.negation public
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (empty; is-prop-empty)
+open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.logical-equivalences using (_⇔_; _↔_)
 open import foundation.propositions using
   ( is-prop; is-prop-function-type; UU-Prop; type-Prop; is-prop-type-Prop)
@@ -34,6 +34,13 @@ pr2 (neg-Prop' A) = is-prop-neg
 
 neg-Prop : {l1 : Level} → UU-Prop l1 → UU-Prop l1
 neg-Prop P = neg-Prop' (type-Prop P)
+```
+
+### Reductio ad absurdum
+
+```agda
+reductio-ad-absurdum : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → P → ¬ P → Q
+reductio-ad-absurdum p np = ex-falso (np p)
 ```
 
 ### Negation has no fixed points

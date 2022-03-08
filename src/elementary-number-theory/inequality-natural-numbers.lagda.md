@@ -6,7 +6,7 @@
 module elementary-number-theory.inequality-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; commutative-add-ℕ)
+  ( add-ℕ; commutative-add-ℕ; left-unit-law-add-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; commutative-mul-ℕ; right-unit-law-mul-ℕ; right-zero-law-mul-ℕ;
     right-successor-law-mul-ℕ)
@@ -16,7 +16,7 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
@@ -188,6 +188,17 @@ leq-mul-is-nonzero-ℕ' :
   (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (mul-ℕ k x)
 leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 ... | pair l refl = leq-mul-ℕ' l x
+
+subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → Id (add-ℕ l n) m)
+subtraction-leq-ℕ zero-ℕ m p = pair m refl
+subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (ap succ-ℕ (pr2 P))
+  where
+  P : Σ ℕ (λ l' → Id (add-ℕ l' n) m)
+  P = subtraction-leq-ℕ n m p
+
+leq-subtraction-ℕ : (n m l : ℕ) → Id (add-ℕ l n) m → n ≤-ℕ m
+leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
+leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p = leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
 ```
 
 ## Min and max on ℕ
