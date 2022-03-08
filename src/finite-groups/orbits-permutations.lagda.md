@@ -1,10 +1,10 @@
-# Orbits
+# Orbits of permutations
 
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module finite-groups.orbits where
+module finite-groups.orbits-permutations where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using (mul-ℕ)
