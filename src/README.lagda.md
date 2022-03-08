@@ -234,6 +234,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations
+open import foundation.uniqueness-truncation
 open import foundation.unit-type
 open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
@@ -252,6 +253,7 @@ open import foundation.universal-property-propositional-truncation
 open import foundation.universal-property-pullbacks
 open import foundation.universal-property-set-quotients
 open import foundation.universal-property-set-truncation
+open import foundation.universal-property-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -441,7 +443,6 @@ open import univalent-foundations.functoriality-loop-spaces
 open import univalent-foundations.isolated-points
 open import univalent-foundations.iterated-loop-spaces
 open import univalent-foundations.loop-spaces
-open import univalent-foundations.truncations
 ```
 
 ## Everything
