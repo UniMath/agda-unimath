@@ -10,31 +10,42 @@ open import elementary-number-theory.inequality-natural-numbers using
     contradiction-leq-ℕ; leq-ℕ-Prop; concatenate-eq-leq-eq-ℕ;
     concatenate-eq-le-eq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.well-ordering-principle-standard-finite-types using
+  (exists-not-not-forall-Fin; exists-not-not-forall-count)
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inr; inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.decidable-types using (is-decidable-function-type)
 open import foundation.embeddings using
   ( _↪_; map-emb; is-emb-map-emb; is-emb; comp-emb)
 open import foundation.empty-types using (ex-falso; empty-Prop)
-open import foundation.equivalences using (emb-equiv)
-open import foundation.identity-types using (inv)
+open import foundation.equivalences using
+  (emb-equiv; id-equiv; map-equiv; map-inv-equiv)
+open import foundation.functions using (_∘_)
+open import foundation.identity-types using (inv; Id; ap)
 open import foundation.injective-maps using
-  ( is-injective; is-emb-is-injective)
+  ( is-injective; is-emb-is-injective; is-injective-map-equiv)
 open import foundation.negation using (¬; map-neg)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using (UU-Prop)
+open import foundation.sets using (Id-Prop)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; inv-equiv-count; equiv-count; is-set-count)
+open import univalent-combinatorics.counting-decidable-subtypes using
+  ( count-is-decidable-is-prop)
+open import univalent-combinatorics.decidable-dependent-function-types using
+  ( is-decidable-Π-is-finite; is-decidable-Π-count)
 open import univalent-combinatorics.embeddings-standard-finite-types using
   ( reduce-emb-Fin)
 open import univalent-combinatorics.equality-finite-types using
   ( is-set-is-finite)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( is-set-Fin)
+  ( is-set-Fin; has-decidable-equality-Fin; Fin-Set)
 open import univalent-combinatorics.finite-types using
   ( is-finite; number-of-elements-is-finite;
     compute-number-of-elements-is-finite)
@@ -86,6 +97,42 @@ abstract
     {k : ℕ} (f : Fin (succ-ℕ k) → Fin k) → ¬ (is-injective f)
   is-not-injective-map-Fin-succ-Fin {k} f =
     is-not-injective-le-Fin f (le-succ-ℕ {k})
+
+abstract
+  two-points-same-image-le-Fin : {k l : ℕ} (f : Fin k → Fin l) →
+    le-ℕ l k → Σ (Fin k) (λ x → Σ (Fin k) (λ y → (Id (f x) (f y)) × ¬ (Id x y)))
+  two-points-same-image-le-Fin {k} {l} f p =
+    pair
+      ( pr1 point1)
+      ( pair
+        ( pr1 point2)
+        ( exists-not-not-forall-count
+          ( λ q → Id (pr1 point1) (pr1 point2))
+          ( λ q → has-decidable-equality-Fin (pr1 point1) (pr1 point2))
+          ( count-is-decidable-is-prop
+            ( pr2 (Id-Prop (Fin-Set l) (f (pr1 point1)) (f (pr1 point2))))
+            ( has-decidable-equality-Fin (f (pr1 point1)) (f (pr1 point2))))
+          ( pr2 point2)))
+    where
+    point1 : Σ (Fin k) (λ x → ¬ ((y : Fin k) → Id (f x) (f y) → Id x y))
+    point1 =
+      exists-not-not-forall-Fin
+        (λ x →
+          is-decidable-Π-count
+            (pair k id-equiv)
+            (λ y →
+              is-decidable-function-type
+                (has-decidable-equality-Fin (f x) (f y))
+                (has-decidable-equality-Fin x y)))
+        (λ q → is-not-injective-le-Fin f p (λ {x} {y} r → q x y r))
+    point2 : Σ (Fin k) (λ y → ¬ (Id (f (pr1 point1)) (f y) → Id (pr1 point1) y))
+    point2 =
+      exists-not-not-forall-Fin
+        (λ y →
+          is-decidable-function-type
+            (has-decidable-equality-Fin (f (pr1 point1)) (f y))
+            (has-decidable-equality-Fin (pr1 point1) y))
+        (pr2 point1)
 
 abstract
   no-embedding-ℕ-Fin :
@@ -145,6 +192,30 @@ module _
       ¬ (is-injective f)
     is-not-injective-le-count f p H =
       is-not-emb-le-count f p (is-emb-is-injective (is-set-count eB) H)
+
+  abstract
+    two-points-same-image-le-count :
+      (f : A → B) →
+      le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
+      Σ A (λ x → Σ A (λ y → (Id (f x) (f y)) × ¬ (Id x y)))
+    two-points-same-image-le-count f p =
+      pair
+        ( map-equiv (equiv-count eA) (pr1 G))
+        ( pair
+          ( map-equiv (equiv-count eA) (pr1 (pr2 G)))
+          ( pair
+            ( is-injective-map-equiv (inv-equiv-count eB) (pr1 (pr2 (pr2 G))))
+            ( λ q →
+              pr2
+                ( pr2 (pr2 G))
+                ( is-injective-map-equiv (equiv-count eA) q))))
+      where
+      h : Fin (number-of-elements-count eA) → Fin (number-of-elements-count eB)
+      h = (map-equiv (inv-equiv-count eB)) ∘ (f ∘ (map-equiv (equiv-count eA)))
+      G : Σ
+        ( Fin (number-of-elements-count eA))
+        ( λ x → Σ (Fin (number-of-elements-count eA)) (λ y → (Id (h x) (h y)) × ¬ (Id x y)))
+      G = two-points-same-image-le-Fin h p
 
 abstract
   no-embedding-ℕ-count :

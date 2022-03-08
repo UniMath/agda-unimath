@@ -8,12 +8,13 @@ module foundation.functoriality-coproduct-types where
 open import foundation.coproduct-types using (coprod; inl; inr; is-injective-inl; neq-inr-inl)
 open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.equivalences using
-  ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; is-emb-is-equiv;
-    map-equiv; map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_)
+  ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
+    map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
 open import foundation.identity-types using (Id; inv; refl; ap; _∙_)
+open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; UU)
 ```
@@ -133,18 +134,14 @@ module _
     (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) (x : A) (y : B) → ¬ (Id (map-equiv f (inl x)) (inr y))
   equiv-coproduct-induce-equiv-disjoint f g p x y q =
     neq-inr-inl
-      ( map-inv-equiv
-        ( pair
-          ( ap (map-equiv f))
-          ( is-emb-is-equiv (pr2 f) (inr (map-inv-equiv g y)) (inl x)))
+      ( is-injective-map-equiv f
         ( ( p (map-equiv (inv-equiv g) y) ∙
           ( (ap (λ z → inr (map-equiv z y)) (right-inverse-law-equiv g)) ∙ inv q))))
 
   inv-commutative-square-inr : (f : coprod A B ≃ coprod A B) (g : B ≃ B)
     (p : (b : B) → Id (map-equiv f (inr b)) (inr (map-equiv g b))) → (b : B) → Id (map-inv-equiv f (inr b)) (inr (map-inv-equiv g b)) 
   inv-commutative-square-inr f g p b =
-    map-inv-equiv
-      ( pair (ap (map-equiv f)) (is-emb-is-equiv (pr2 f) (map-inv-equiv f (inr b)) (inr (map-inv-equiv g b))))
+    is-injective-map-equiv f
       ( (ap (λ z → map-equiv z (inr b)) (right-inverse-law-equiv f)) ∙
         ( inv (ap (λ z → inr (map-equiv z b)) (right-inverse-law-equiv g)) ∙ inv (p (map-inv-equiv g b))))
   
