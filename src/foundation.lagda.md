@@ -144,6 +144,7 @@ open import foundation.type-arithmetic-unit-type public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-set-quotients public
 open import foundation.uniqueness-set-truncations public
+open import foundation.uniqueness-truncation public
 open import foundation.unit-type public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalence public
@@ -162,6 +163,7 @@ open import foundation.universal-property-propositional-truncation public
 open import foundation.universal-property-pullbacks public
 open import foundation.universal-property-set-quotients public
 open import foundation.universal-property-set-truncation public
+open import foundation.universal-property-truncation public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
