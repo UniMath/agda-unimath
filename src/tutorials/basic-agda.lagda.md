@@ -120,15 +120,6 @@ commutative-add-ℕ x (succ-ℕ y) =
     ( cgr succ-ℕ (commutative-add-ℕ x y))
     ( inv (left-successor-law-add-ℕ y x))
 
-another-add-is-add-ℕ : (x y : ℕ) → Id (another-add-ℕ x y) (add-ℕ x y)
-another-add-is-add-ℕ zero-ℕ zero-ℕ = refl
-another-add-is-add-ℕ zero-ℕ (succ-ℕ y) = inv (cgr succ-ℕ (left-unit-law-add-ℕ y))
-another-add-is-add-ℕ (succ-ℕ x) zero-ℕ = refl
-another-add-is-add-ℕ (succ-ℕ x) (succ-ℕ y) = {!!}
-
--- We will apply the left and the right unit laws
--- (x+0) = x = (0+x)
-
 ```
 
-###
+### 
