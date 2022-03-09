@@ -7,9 +7,11 @@ module categories.large-precategories where
 
 open import Agda.Primitive using (Setω)
 open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (Id; refl)
-open import foundation.sets using (UU-Set; type-Set; hom-Set)
-open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
+open import foundation.identity-types using (Id; refl; ap-binary)
+open import foundation.sets using
+  ( UU-Set; type-Set; hom-Set; is-set; is-set-type-Set)
+open import foundation.universe-levels using
+  ( UU; Level; lsuc; _⊔_)
 ```
 
 ## Idea
@@ -50,6 +52,36 @@ record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Se
       Id ( comp-Large-Precat f id-Large-Precat) f
 
 open Large-Precat public
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 : Level}
+  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
+  where
+
+  type-hom-Large-Precat : UU (β l1 l2)
+  type-hom-Large-Precat = type-Set (hom-Large-Precat C X Y)
+
+  is-set-type-hom-Large-Precat : is-set type-hom-Large-Precat
+  is-set-type-hom-Large-Precat = is-set-type-Set (hom-Large-Precat C X Y)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2}
+  {Z : obj-Large-Precat C l3}
+  where
+
+  ap-comp-Large-Precat :
+    {g g' : type-hom-Large-Precat C Y Z} (p : Id g g')
+    {f f' : type-hom-Large-Precat C X Y} (q : Id f f') →
+    Id (comp-Large-Precat C g f) (comp-Large-Precat C g' f')
+  ap-comp-Large-Precat p q = ap-binary (comp-Large-Precat C) p q
+
+  comp-Large-Precat' :
+    type-hom-Large-Precat C X Y → type-hom-Large-Precat C Y Z →
+    type-hom-Large-Precat C X Z
+  comp-Large-Precat' f g = comp-Large-Precat C g f
 ```
 
 ## Examples

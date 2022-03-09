@@ -14,7 +14,7 @@ open import categories.large-precategories using
     is-set-type-hom-Large-Precat)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; inv; _∙_; ap)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.propositions using
   ( prod-Prop; is-prop; is-prop-all-elements-equal)
 open import foundation.sets using (Id-Prop; is-set; UU-Set)
@@ -95,6 +95,19 @@ module _
     left-unit-law-comp-Large-Precat C (id-Large-Precat C)
   pr2 (pr2 (pr2 id-iso-Large-Precat)) =
     left-unit-law-comp-Large-Precat C (id-Large-Precat C)
+```
+
+### Equalities give rise to isomorphisms
+
+An equality between objects `x y : A` gives rise to an isomorphism between them. This is because by the J-rule, it is enough to construct an isomorphism given `refl : Id x x`, from `x` to itself. We take the identity morphism as such an isomorphism.
+
+```agda
+iso-eq-Large-Precat :
+  {α : Level → Level} {β : Level → Level → Level} →
+  (C : Large-Precat α β) {l1 : Level}
+  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l1) →
+  Id X Y → iso-Large-Precat C X Y
+iso-eq-Large-Precat C X .X refl = id-iso-Large-Precat C
 ```
 
 ## Properties
