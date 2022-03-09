@@ -100,7 +100,7 @@ module _
 
 ### The category of sets and functions
 
-The precategory of sets and functions is a category.
+The precategory of sets and functions in a given universe is a category.
 
 ```agda
 Set-Precat : (l : Level) → Precat (lsuc l) l
