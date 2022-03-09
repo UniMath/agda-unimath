@@ -32,8 +32,6 @@ data ℕ : Set where
 
 In emacs mode, the symbol ℕ for the natural numbers is obtained by typing `\bN`. Likewise, the arrow is obtained by typing `\to`. The emacs mode has support for many unicode characters. The [official documentation](https://agda.readthedocs.io/en/v2.6.2.1/tools/emacs-mode.html#unicode-input) explains how to use them.
 
-The line `{-# BUILTIN NATURAL ℕ #-}` allows us to write `0`, `1`, `2`, ... for natural numbers.
-
 ### Defining basic operations on natural numbers
 
 ```agda
