@@ -1,7 +1,7 @@
 # The universal property of truncations
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.universal-property-truncation where
 
@@ -274,97 +274,6 @@ abstract
       ( H X)
 
 -- Definition 18.5.3
-
--- We postulate the existence of set truncations
-
-postulate type-trunc-Set : {l : Level} → UU l → UU l
-
-postulate
-  is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
-
-trunc-Set : {l : Level} → UU l → UU-Set l
-trunc-Set A = pair (type-trunc-Set A) is-set-type-trunc-Set
-
-postulate unit-trunc-Set : {l : Level} {A : UU l} → A → type-Set (trunc-Set A)
-
-postulate
-  is-set-truncation-trunc-Set :
-    {l1 l2 : Level} (A : UU l1) →
-    is-set-truncation l2 (trunc-Set A) unit-trunc-Set
-
-equiv-universal-property-trunc-Set :
-  {l1 l2 : Level} (A : UU l1) (B : UU-Set l2) →
-  (type-trunc-Set A → type-Set B) ≃ (A → type-Set B)
-equiv-universal-property-trunc-Set A B =
-  pair
-    ( precomp-Set unit-trunc-Set B)
-    ( is-set-truncation-trunc-Set A B)
-
-abstract
-  universal-property-trunc-Set : {l1 l2 : Level} (A : UU l1) →
-    universal-property-set-truncation l2
-      ( trunc-Set A)
-      ( unit-trunc-Set)
-  universal-property-trunc-Set A =
-    universal-property-is-set-truncation _
-      ( trunc-Set A)
-      ( unit-trunc-Set)
-      ( is-set-truncation-trunc-Set A)
-
-map-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
-  (A → type-Set B) → type-hom-Set (trunc-Set A) B
-map-universal-property-trunc-Set {A = A} B f =
-  map-is-set-truncation
-    ( trunc-Set A)
-    ( unit-trunc-Set)
-    ( is-set-truncation-trunc-Set A)
-    ( B)
-    ( f)
-
-triangle-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
-  (f : A → type-Set B) →
-  (map-universal-property-trunc-Set B f ∘ unit-trunc-Set) ~ f
-triangle-universal-property-trunc-Set {A = A} B f =
-  triangle-is-set-truncation
-    ( trunc-Set A)
-    ( unit-trunc-Set)
-    ( is-set-truncation-trunc-Set A)
-    ( B)
-    ( f)
-
-apply-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (t : type-trunc-Set A) (B : UU-Set l2) →
-  (A → type-Set B) → type-Set B
-apply-universal-property-trunc-Set t B f =
-  map-universal-property-trunc-Set B f t
-
-abstract
-  dependent-universal-property-trunc-Set :
-    {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → UU-Set l2) → 
-    is-equiv (precomp-Π-Set unit-trunc-Set B)
-  dependent-universal-property-trunc-Set {A = A} =
-    dependent-universal-property-is-set-truncation
-      ( trunc-Set A)
-      ( unit-trunc-Set)
-      ( λ {l} → is-set-truncation-trunc-Set A)
-
-equiv-dependent-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → UU-Set l2) →
-  ((x : type-trunc-Set A) → type-Set (B x)) ≃
-  ((a : A) → type-Set (B (unit-trunc-Set a)))
-equiv-dependent-universal-property-trunc-Set B =
-  pair ( precomp-Π-Set unit-trunc-Set B)
-       ( dependent-universal-property-trunc-Set B)
-
-apply-dependent-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1}
-  (B : type-trunc-Set A → UU-Set l2) →
-  ((x : A) → type-Set (B (unit-trunc-Set x))) →
-  (x : type-trunc-Set A) → type-Set (B x)
-apply-dependent-universal-property-trunc-Set B =
-  map-inv-equiv (equiv-dependent-universal-property-trunc-Set B)
 
 -- Corollary 18.5.4
 
