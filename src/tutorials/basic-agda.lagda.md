@@ -28,8 +28,6 @@ This tutorial is written in a literate Agda file. In our case, the file is named
 data ℕ : Set where
   zero-ℕ : ℕ
   succ-ℕ : ℕ → ℕ
-
-{-# BUILTIN NATURAL ℕ #-}
 ```
 
 In emacs mode, the symbol ℕ for the natural numbers is obtained by typing `\bN`. Likewise, the arrow is obtained by typing `\to`. The emacs mode has support for many unicode characters. The [official documentation](https://agda.readthedocs.io/en/v2.6.2.1/tools/emacs-mode.html#unicode-input) explains how to use them.
