@@ -39,11 +39,29 @@ add-ℕ : ℕ → ℕ → ℕ
 add-ℕ x zero-ℕ = x
 add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 
-mul-ℕ : ℕ → ℕ → ℕ
-mul-ℕ = {!!}
+another-add-ℕ : ℕ → ℕ → ℕ
+another-add-ℕ zero-ℕ zero-ℕ = zero-ℕ
+another-add-ℕ zero-ℕ (succ-ℕ y) = succ-ℕ y
+another-add-ℕ (succ-ℕ x) zero-ℕ = succ-ℕ x
+another-add-ℕ (succ-ℕ x) (succ-ℕ y) = succ-ℕ (succ-ℕ (another-add-ℕ x y))
 
-exp-ℕ : ℕ → ℕ → ℕ
-exp-ℕ = {!!}
+mul-ℕ : ℕ → ℕ → ℕ
+mul-ℕ x zero-ℕ = zero-ℕ
+mul-ℕ x (succ-ℕ y) = add-ℕ (mul-ℕ x y) x
+
+-- idea:
+-- add-ℕ x 0 := x
+-- add-ℕ x (y+1) := (x+y)+1
+
+-- idea:
+-- mul-ℕ x zero-ℕ := zero-ℕ
+-- mul-ℕ x (y+1) := (mul-ℕ x y) + x
+
+-- use C-c C-c to case-split
+-- use C-c C-e to ask agda about the assumption in the current context
+-- use C-c C-Space to evaluate the answer
+
+-- Laws are equations like x+y = y+x
 ```
 
 ### Equality in Agda
@@ -51,14 +69,66 @@ exp-ℕ = {!!}
 Equality in a proof assistant is expressed by the identity type
 
 ```agda
+-- Id x y expresses that x and y are identical elements of type X
+-- "The identity relation is the least reflexive relation on X"
+
 data Id {X : Set} (x : X) : X → Set where
   refl : Id x x
 ```
 
 ### Equality is an equivalence relation
 
+```agda
+inv : {X : Set} {x y : X} → Id x y → Id y x
+inv refl = refl
+
+concat : {X : Set} {x y z : X} → Id x y → Id y z → Id x z
+concat refl refl = refl
+```
+
 ### Every function preserves equality
 
+```agda
+cgr : {X Y : Set} (f : X → Y) {x y : X} → Id x y → Id (f x) (f y)
+cgr f refl = refl
+```
+
 ### Addition on ℕ satisfies the usual laws
+
+```agda
+right-unit-law-add-ℕ : (x : ℕ) → Id (add-ℕ x zero-ℕ) x
+right-unit-law-add-ℕ x = refl
+
+left-unit-law-add-ℕ : (x : ℕ) → Id (add-ℕ zero-ℕ x) x
+left-unit-law-add-ℕ zero-ℕ = refl
+left-unit-law-add-ℕ (succ-ℕ x) = cgr succ-ℕ (left-unit-law-add-ℕ x)
+
+left-successor-law-add-ℕ :
+  (x y : ℕ) → Id (add-ℕ (succ-ℕ x) y) (succ-ℕ (add-ℕ x y))
+left-successor-law-add-ℕ x zero-ℕ = refl
+left-successor-law-add-ℕ x (succ-ℕ y) = cgr succ-ℕ (left-successor-law-add-ℕ x y)
+
+-- add-ℕ (succ-ℕ x) (succ-ℕ y)
+-- := succ-ℕ (add-ℕ (succ-ℕ x) y)
+-- = succ-ℕ (succ-ℕ (add-ℕ x y))
+-- := succ-ℕ (add-ℕ x (succ-ℕ y))
+
+commutative-add-ℕ : (x y : ℕ) → Id (add-ℕ x y) (add-ℕ y x)
+commutative-add-ℕ x zero-ℕ = inv (left-unit-law-add-ℕ x)
+commutative-add-ℕ x (succ-ℕ y) =
+  concat
+    ( cgr succ-ℕ (commutative-add-ℕ x y))
+    ( inv (left-successor-law-add-ℕ y x))
+
+another-add-is-add-ℕ : (x y : ℕ) → Id (another-add-ℕ x y) (add-ℕ x y)
+another-add-is-add-ℕ zero-ℕ zero-ℕ = refl
+another-add-is-add-ℕ zero-ℕ (succ-ℕ y) = inv (cgr succ-ℕ (left-unit-law-add-ℕ y))
+another-add-is-add-ℕ (succ-ℕ x) zero-ℕ = refl
+another-add-is-add-ℕ (succ-ℕ x) (succ-ℕ y) = {!!}
+
+-- We will apply the left and the right unit laws
+-- (x+0) = x = (0+x)
+
+```
 
 ###
