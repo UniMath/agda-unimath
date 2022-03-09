@@ -7,6 +7,8 @@ module elementary-number-theory.sums-of-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; ap-add-ℕ; add-ℕ')
+open import elementary-number-theory.inequality-natural-numbers using
+  ( le-ℕ; preserves-le-succ-ℕ; le-succ-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
@@ -46,6 +48,17 @@ sum-Fin-ℕ {succ-ℕ k} f = add-ℕ (sum-Fin-ℕ (λ x → f (inl x))) (f (inr 
 ```agda
 sum-count-ℕ : {l : Level} {A : UU l} (e : count A) → (f : A → ℕ) → ℕ
 sum-count-ℕ (pair k e) f = sum-Fin-ℕ (f ∘ (map-equiv e))
+```
+
+### Bounded sums of natural numbers
+
+```agda
+bounded-sum-ℕ : (u : ℕ) → ((x : ℕ) → le-ℕ x u → ℕ) → ℕ
+bounded-sum-ℕ zero-ℕ f = zero-ℕ
+bounded-sum-ℕ (succ-ℕ u) f =
+  add-ℕ
+    ( bounded-sum-ℕ u (λ x H → f x (preserves-le-succ-ℕ x u H)))
+    ( f u (le-succ-ℕ {u}))
 ```
 
 ## Properties
