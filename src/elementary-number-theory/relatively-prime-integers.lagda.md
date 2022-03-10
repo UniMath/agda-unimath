@@ -22,3 +22,5 @@ Two integers are said to be relatively prime if their greatest common divisor is
 is-relative-prime-ℤ : ℤ → ℤ → UU lzero
 is-relative-prime-ℤ x y = is-one-ℤ (gcd-ℤ x y)
 ```
+
+## Properties

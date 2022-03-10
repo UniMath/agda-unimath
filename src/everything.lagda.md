@@ -30,6 +30,7 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.falling-factorials
@@ -58,6 +59,7 @@ open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.relatively-prime-integers
+open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
 open import elementary-number-theory.retracts-of-standard-finite-types
@@ -345,6 +347,7 @@ open import synthetic-homotopy-theory.pointed-maps
 open import synthetic-homotopy-theory.pointed-types
 open import synthetic-homotopy-theory.spaces
 open import synthetic-homotopy-theory.universal-cover-circle
+open import tutorials.basic-agda
 open import univalent-combinatorics
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
