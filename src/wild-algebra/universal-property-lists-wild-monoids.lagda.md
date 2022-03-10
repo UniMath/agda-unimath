@@ -31,7 +31,11 @@ open import wild-algebra.wild-unital-magmas using
 
 ## Idea
 
-The type of lists of elements of `A` is the initial wild monoid equipped with a map from `A` into it.
+The type of lists of elements of `X` is the initial wild monoid equipped with a map from `X` into it.
+
+## Definition
+
+### The wild unital magma of lists of elements of `X`
 
 ```agda
 list-Wild-Unital-Magma :
@@ -46,9 +50,9 @@ list-Wild-Unital-Magma X =
         ( pair right-unit-law-concat-list refl)))
 ```
 
-```agda
--- We introduce the wild monoid of lists of elements of X.
+### The wild monoid of lists of elements of `X`
 
+```agda
 unit-law-011-assoc-concat-list :
   {l1 : Level} {X : UU l1} (y z : list X) →
   Id ( ( assoc-concat-list nil y z) ∙
@@ -103,7 +107,13 @@ list-Wild-Monoid X =
         ( pair
           ( unit-law-101-assoc-concat-list)
           ( pair unit-law-110-assoc-concat-list star))))
+```
 
+## Properties
+
+### For any wild monoid `M` with a map `X → M` there is a morphism of wild monoids `list X → M`
+
+```agda
 module _
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2) (f : X → type-Wild-Monoid M)
   where
@@ -271,7 +281,11 @@ elim-list-Wild-Monoid M f =
         ( pair
           ( preserves-right-unit-law-map-elim-list-Wild-Monoid M f)
           ( preserves-coh-unit-laws-map-elim-list-Wild-Monoid M f))))
+```
 
+### Contractibility of the type `hom (list X) M` of morphisms of wild monoids
+
+```
 -- htpy-elim-list-Wild-Monoid :
 --   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
 --   (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
