@@ -1,7 +1,7 @@
 # The interchange law
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.interchange-law where
 

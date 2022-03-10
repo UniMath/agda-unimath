@@ -17,13 +17,18 @@ open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.27-sequences public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cyclic-types public
+open import synthetic-homotopy-theory.double-loop-spaces public
+open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.infinite-cyclic-types public
 open import synthetic-homotopy-theory.interval-type public
+open import synthetic-homotopy-theory.iterated-loop-spaces public
+open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.pointed-dependent-functions public
 open import synthetic-homotopy-theory.pointed-families-of-types public
 open import synthetic-homotopy-theory.pointed-homotopies public
 open import synthetic-homotopy-theory.pointed-maps public
 open import synthetic-homotopy-theory.pointed-types public
 open import synthetic-homotopy-theory.spaces public
+open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 ```

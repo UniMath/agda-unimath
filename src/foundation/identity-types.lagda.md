@@ -1,18 +1,20 @@
 # Identity types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.identity-types where
 
 open import foundation-core.identity-types public
 
+open import foundation.binary-equivalences using (is-binary-equiv)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.universe-levels using (UU; Level)
+
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp')
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (UU; Level)
 ```
 
 ## Idea
@@ -85,6 +87,12 @@ module _
     (x : A) {y z : A} (q : Id y z) → Id x y ≃ Id x z
   pr1 (equiv-concat' x q) = concat' x q
   pr2 (equiv-concat' x q) = is-equiv-concat' x q
+
+is-binary-equiv-concat :
+  {l : Level} {A : UU l} {x y z : A} →
+  is-binary-equiv (λ (p : Id x y) (q : Id y z) → p ∙ q)
+is-binary-equiv-concat {l} {A} {x} {y} {z} =
+  pair (λ q → is-equiv-concat' x q) (λ p → is-equiv-concat p z)
 
 convert-eq-values :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
