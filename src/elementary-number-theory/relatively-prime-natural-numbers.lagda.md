@@ -1,7 +1,7 @@
 # Relatively prime natural numbers
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module elementary-number-theory.relatively-prime-natural-numbers where
 
@@ -58,3 +58,5 @@ pr1 (is-decidable-prop-relatively-prime-ℕ x y) =
 pr2 (is-decidable-prop-relatively-prime-ℕ x y) =
   is-decidable-relatively-prime-ℕ x y
 ```
+
+### A number y is relatively prime to x if and only if `[y] mod x` is a unit in `ℤ-Mod x`
