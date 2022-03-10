@@ -374,8 +374,11 @@ open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
+open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.pointed-dependent-functions
 open import synthetic-homotopy-theory.pointed-equivalences
 open import synthetic-homotopy-theory.pointed-families-of-types
@@ -439,10 +442,7 @@ open import univalent-combinatorics.surjective-maps
 ## Univalent foundation
 
 ```agda
-open import univalent-foundations.functoriality-loop-spaces
 open import univalent-foundations.isolated-points
-open import univalent-foundations.iterated-loop-spaces
-open import univalent-foundations.loop-spaces
 ```
 
 ## Everything
