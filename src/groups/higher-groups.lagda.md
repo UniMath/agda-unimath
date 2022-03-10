@@ -16,10 +16,11 @@ open import foundation.identity-types using (Id; refl)
 open import foundation.mere-equality using (mere-eq)
 open import foundation.propositions using (UU-Prop; type-Prop)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
-open import univalent-foundations.functoriality-loop-spaces using
+
+open import synthetic-homotopy-theory.functoriality-loop-spaces using
   ( map-Ω; preserves-refl-map-Ω; preserves-mul-map-Ω;
     preserves-inv-map-Ω)
-open import univalent-foundations.loop-spaces using
+open import synthetic-homotopy-theory.loop-spaces using
   ( type-Ω; refl-Ω; mul-Ω; associative-mul-Ω; left-unit-law-mul-Ω;
     right-unit-law-mul-Ω; inv-Ω; left-inverse-law-mul-Ω;
     right-inverse-law-mul-Ω)

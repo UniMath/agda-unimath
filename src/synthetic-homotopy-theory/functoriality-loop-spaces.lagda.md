@@ -3,13 +3,14 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module univalent-foundations.functoriality-loop-spaces where
+module synthetic-homotopy-theory.functoriality-loop-spaces where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using
   ( Id; refl; ap; ap-concat; _∙_; ap-inv)
 open import foundation.universe-levels using (Level; UU)
-open import univalent-foundations.loop-spaces using
+
+open import synthetic-homotopy-theory.loop-spaces using
   ( type-Ω; tr-type-Ω; preserves-refl-tr-Ω; Ω; mul-Ω; preserves-mul-tr-Ω; inv-Ω;
     preserves-inv-tr-Ω)
 open import synthetic-homotopy-theory.pointed-maps using

@@ -30,6 +30,7 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.falling-factorials
@@ -58,6 +59,7 @@ open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.relatively-prime-integers
+open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
 open import elementary-number-theory.retracts-of-standard-finite-types
@@ -125,6 +127,8 @@ open import foundation.2-types
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
@@ -216,6 +220,7 @@ open import foundation.monomorphisms
 open import foundation.multisets
 open import foundation.negation
 open import foundation.non-contractible-types
+open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-extensionality
@@ -250,6 +255,7 @@ open import foundation.surjective-maps
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -305,6 +311,8 @@ open import groups.furstenberg-groups
 open import groups.higher-groups
 open import groups.sheargroups
 open import labels
+open import linear-algebra.matrices
+open import linear-algebra.vectors
 open import order-theory
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
@@ -329,8 +337,12 @@ open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
+open import synthetic-homotopy-theory.double-loop-spaces
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
+open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.pointed-dependent-functions
 open import synthetic-homotopy-theory.pointed-equivalences
 open import synthetic-homotopy-theory.pointed-families-of-types
@@ -338,7 +350,9 @@ open import synthetic-homotopy-theory.pointed-homotopies
 open import synthetic-homotopy-theory.pointed-maps
 open import synthetic-homotopy-theory.pointed-types
 open import synthetic-homotopy-theory.spaces
+open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
+open import tutorials.basic-agda
 open import univalent-combinatorics
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
@@ -389,9 +403,10 @@ open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-foundations
-open import univalent-foundations.functoriality-loop-spaces
 open import univalent-foundations.isolated-points
-open import univalent-foundations.iterated-loop-spaces
-open import univalent-foundations.loop-spaces
 open import wild-algebra.magmas
+open import wild-algebra.universal-property-lists-wild-monoids
+open import wild-algebra.wild-groups
+open import wild-algebra.wild-monoids
+open import wild-algebra.wild-unital-magmas
 ```
