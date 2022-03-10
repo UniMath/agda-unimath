@@ -6,10 +6,18 @@
 module wild-algebra.wild-unital-magmas where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.functions using (id)
+open import foundation.homotopies using (nat-htpy; _~_)
 open import foundation.identity-types using
-  ( Id; refl; ap-binary; _∙_; left-unit; right-unit)
-open import foundation.universe-levels using (UU; Level; lsuc)
+  ( Id; refl; ap-binary; _∙_; left-unit; right-unit; ap; concat; inv; ap-id;
+    assoc; triangle-ap-binary; triangle-ap-binary')
+open import foundation.path-algebra using
+  ( horizontal-concat-Id²)
+open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
 
+open import groups.abstract-groups using (preserves-mul)
+
+open import synthetic-homotopy-theory.pointed-maps using (_→*_)
 open import synthetic-homotopy-theory.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 open import synthetic-homotopy-theory.loop-spaces using (Ω)
@@ -183,7 +191,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
            ( ( ap
                ( λ t →
                  ( μf eM eM ∙ ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef) ∙ t)
-               ( htpy-nat lN ef)) ∙
+               ( nat-htpy lN ef)) ∙
              ( ( inv
                  ( assoc
                    ( μf eM eM ∙ ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef)
@@ -212,7 +220,7 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                ( ap id ef)) ∙
              ( ( ap
                  ( λ t → (μf eM eM ∙ ap (μN (pr1 f eM)) ef) ∙ t)
-                 ( htpy-nat rN ef)) ∙
+                 ( nat-htpy rN ef)) ∙
                ( ( inv
                    ( assoc
                      ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)

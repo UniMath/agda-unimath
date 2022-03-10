@@ -127,6 +127,8 @@ open import foundation.2-types
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
@@ -218,6 +220,7 @@ open import foundation.monomorphisms
 open import foundation.multisets
 open import foundation.negation
 open import foundation.non-contractible-types
+open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-extensionality
@@ -334,6 +337,7 @@ open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
+open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
@@ -346,6 +350,7 @@ open import synthetic-homotopy-theory.pointed-homotopies
 open import synthetic-homotopy-theory.pointed-maps
 open import synthetic-homotopy-theory.pointed-types
 open import synthetic-homotopy-theory.spaces
+open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 open import tutorials.basic-agda
 open import univalent-combinatorics
@@ -400,7 +405,6 @@ open import univalent-combinatorics.surjective-maps
 open import univalent-foundations
 open import univalent-foundations.isolated-points
 open import wild-algebra.magmas
-open import wild-algebra.path-algebra
 open import wild-algebra.universal-property-lists-wild-monoids
 open import wild-algebra.wild-groups
 open import wild-algebra.wild-monoids

@@ -1,18 +1,75 @@
----
-title: Formalisation of the Symmetry Book
----
+# Cyclic types
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module synthetic-homotopy-theory.cyclic-types where
 
-open import foundation public
-open import groups public
-open import univalent-combinatorics public
+open import elementary-number-theory.addition-integers using
+  ( left-unit-law-add-ℤ)
+open import elementary-number-theory.integers using (ℤ; succ-ℤ; zero-ℤ)
+open import elementary-number-theory.modular-arithmetic using
+  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; zero-ℤ-Mod; equiv-add-ℤ-Mod';
+    left-successor-law-add-ℤ-Mod; pred-ℤ-Mod; isretr-pred-ℤ-Mod;
+    issec-pred-ℤ-Mod; add-ℤ-Mod; mod-ℤ; add-ℤ-Mod'; mod-neg-one-ℤ;
+    is-add-neg-one-pred-ℤ-Mod; mod-zero-ℤ; preserves-predecessor-mod-ℤ;
+    left-predecessor-law-add-ℤ-Mod; left-unit-law-add-ℤ-Mod; ap-add-ℤ-Mod;
+    mod-one-ℤ; is-add-one-succ-ℤ-Mod; preserves-successor-mod-ℤ;
+    issec-int-ℤ-Mod; int-ℤ-Mod)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+  using (left-unit-law-add-Fin)
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import synthetic-homotopy-theory.pointed-types
+open import foundation.commuting-squares using
+  ( coherence-square; coherence-square-comp-horizontal;
+    coherence-square-inv-horizontal)
+open import foundation.connected-types using
+  ( is-path-connected; is-path-connected-mere-eq)
+open import foundation.contractible-types using
+  ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalences using
+  ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_; inv-equiv;
+    map-inv-equiv; is-property-is-equiv; isretr-map-inv-equiv;
+    issec-map-inv-equiv; is-equiv-Prop; is-equiv-has-inverse)
+open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-tot; equiv-Σ)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
+open import foundation.homotopies using
+  ( refl-htpy; _~_; is-contr-total-htpy; _·r_; _∙h_; _·l_; inv-htpy;
+    right-unit-htpy; equiv-concat-htpy'; is-contr-total-htpy')
+open import foundation.identity-types using
+  ( Id; inv; right-unit; _∙_; ap-id; ap; refl)
+open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
+open import foundation.propositional-truncations using
+  ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
+    apply-universal-property-trunc-Prop)
+open import foundation.sets using
+  ( is-set; is-set-Prop; is-set-equiv'; is-set-equiv)
+open import foundation.structure-identity-principle using
+  ( is-contr-total-Eq-structure)
+open import foundation.subtype-identity-principle using
+  ( is-contr-total-Eq-subtype)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( equiv-right-swap-Σ; right-unit-law-Σ-is-contr)
+open import foundation.unit-type using (star)
+open import foundation.univalence using (is-contr-total-equiv)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
+open import groups.abstract-groups using
+  ( Group; loop-space-Group; equiv-Group; ℤ-Mod-Group; type-iso-Group;
+    iso-equiv-Group)
+
+open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
+
+open import univalent-combinatorics.standard-finite-types using (Fin; succ-Fin)
+```
+
+```agda
 Endo : (l : Level) → UU (lsuc l)
 Endo l = Σ (UU l) (λ X → X → X)
 

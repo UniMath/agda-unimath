@@ -22,6 +22,7 @@ open import categories.natural-transformations
 ## Elementary number theory
 
 ```agda
+open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
@@ -42,6 +43,7 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
 open import elementary-number-theory.falling-factorials
@@ -70,6 +72,7 @@ open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.relatively-prime-integers
+open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
 open import elementary-number-theory.retracts-of-standard-finite-types
@@ -89,20 +92,24 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 
 ```agda
 open import finite-groups.abstract-quaternion-group
-open import finite-groups.finite-groups
 open import finite-groups.concrete-quaternion-group
+open import finite-groups.finite-groups
+open import finite-groups.orbits-permutations
 open import finite-groups.transpositions
 ```
 
 ## Foundation
 
 ```agda
+open import foundation
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
@@ -166,6 +173,7 @@ open import foundation.functoriality-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
 open import foundation.functoriality-set-truncation
+open import foundation.functoriality-w-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.global-choice
 open import foundation.homotopies
@@ -193,6 +201,7 @@ open import foundation.monomorphisms
 open import foundation.multisets
 open import foundation.negation
 open import foundation.non-contractible-types
+open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-extensionality
@@ -201,6 +210,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
+open import foundation.ranks-of-elements-w-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.replacement
 open import foundation.retractions
@@ -226,6 +236,7 @@ open import foundation.surjective-maps
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -239,6 +250,7 @@ open import foundation.unit-type
 open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
 open import foundation.univalent-type-families
+open import foundation.universal-multiset
 open import foundation.universal-property-booleans
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
@@ -275,6 +287,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
+open import foundation-core.empty-types
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equality-fibers-of-maps
@@ -289,6 +302,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-systems
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
+open import foundation-core.negation
 open import foundation-core.path-split-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -320,6 +334,7 @@ open import graph-theory.undirected-graphs
 ## Groups 
 
 ```agda
+open import groups
 open import groups.abstract-abelian-groups
 open import groups.abstract-abelian-subgroups
 open import groups.abstract-group-actions
@@ -335,9 +350,17 @@ open import groups.higher-groups
 open import groups.sheargroups
 ```
 
+## Linear algebra
+
+```agda
+open import linear-algebra.matrices
+open import linear-algebra.vectors
+```
+
 ## Order theory
 
 ```agda
+open import order-theory
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
@@ -355,6 +378,7 @@ open import polytopes.abstract-polytopes
 ## Rings
 
 ```agda
+open import rings
 open import rings.eisenstein-integers
 open import rings.gaussian-integers
 open import rings.ideals
@@ -366,6 +390,7 @@ open import rings.rings
 ## Synthetic homotopy theory
 
 ```agda
+open import synthetic-homotopy-theory
 open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.25-cubical-diagrams
@@ -374,6 +399,7 @@ open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
+open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
@@ -386,12 +412,20 @@ open import synthetic-homotopy-theory.pointed-homotopies
 open import synthetic-homotopy-theory.pointed-maps
 open import synthetic-homotopy-theory.pointed-types
 open import synthetic-homotopy-theory.spaces
+open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
+```
+
+## Tutorials
+
+```agda
+open import tutorials.basic-agda
 ```
 
 ## Univalent combinatorics
 
 ```agda
+open import univalent-combinatorics
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-finite-types
@@ -412,12 +446,12 @@ open import univalent-combinatorics.dependent-product-finite-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.double-counting
-open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.embeddings-standard-finite-types
+open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.equivalences-standard-finite-types
+open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.fibers-of-maps-between-finite-types
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-connected-components
@@ -432,8 +466,11 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
+open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.standard-finite-pruned-trees
+open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
@@ -443,6 +480,16 @@ open import univalent-combinatorics.surjective-maps
 
 ```agda
 open import univalent-foundations.isolated-points
+```
+
+### Wild algebra
+
+```agda
+open import wild-algebra.magmas
+open import wild-algebra.universal-property-lists-wild-monoids
+open import wild-algebra.wild-groups
+open import wild-algebra.wild-monoids
+open import wild-algebra.wild-unital-magmas
 ```
 
 ## Everything
