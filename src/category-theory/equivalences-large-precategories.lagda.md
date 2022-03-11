@@ -3,15 +3,15 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.equivalences-large-precategories where
+module category-theory.equivalences-large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import categories.functors-large-precategories using
+open import category-theory.functors-large-precategories using
   ( functor-Large-Precat; comp-functor-Large-Precat;
     id-functor-Large-Precat)
-open import categories.natural-isomorphisms-large-precategories using
+open import category-theory.natural-isomorphisms-large-precategories using
   ( natural-isomorphism-Large-Precat)
-open import categories.large-precategories using
+open import category-theory.large-precategories using
   ( Large-Precat)
 open import foundation.universe-levels using (Level)
 ```

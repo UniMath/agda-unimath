@@ -3,13 +3,13 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.natural-transformations-categories where
+module category-theory.natural-transformations-categories where
 
-open import categories.categories using
+open import category-theory.categories using
   ( Cat; obj-Cat; type-hom-Cat; precat-Cat)
-open import categories.functors-categories using
+open import category-theory.functors-categories using
   ( functor-Cat; obj-functor-Cat)
-open import categories.natural-transformations-precategories using
+open import category-theory.natural-transformations-precategories using
   ( is-nat-trans-Precat; nat-trans-Precat; components-nat-trans-Precat)
 open import foundation.universe-levels using (UU; _⊔_)
 ```

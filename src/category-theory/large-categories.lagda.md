@@ -3,12 +3,12 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.large-categories where
+module category-theory.large-categories where
 
 open import Agda.Primitive using (Setω)
-open import categories.isomorphisms-large-precategories using
+open import category-theory.isomorphisms-large-precategories using
   ( iso-eq-Large-Precat)
-open import categories.large-precategories using
+open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat)
 open import foundation.equivalences using (is-equiv)
 open import foundation.universe-levels using (Level)

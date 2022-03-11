@@ -3,11 +3,11 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.functors-categories where
+module category-theory.functors-categories where
 
-open import categories.categories using
+open import category-theory.categories using
   ( Cat; precat-Cat; obj-Cat; type-hom-Cat; comp-Cat; id-Cat)
-open import categories.functors-precategories using
+open import category-theory.functors-precategories using
   ( functor-Precat; respects-comp-functor-Precat;
     respects-id-functor-Precat; id-functor-Precat;
     comp-functor-Precat)

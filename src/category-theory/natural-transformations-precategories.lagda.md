@@ -3,11 +3,11 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.natural-transformations-precategories where
+module category-theory.natural-transformations-precategories where
 
-open import categories.functors-precategories using
+open import category-theory.functors-precategories using
   (functor-Precat; obj-functor-Precat; hom-functor-Precat)
-open import categories.precategories using
+open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-Precat;
     is-set-type-hom-Precat)
 open import foundation.dependent-pair-types using (Σ; pr1)

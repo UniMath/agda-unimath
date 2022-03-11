@@ -3,13 +3,13 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.natural-transformations-large-precategories where
+module category-theory.natural-transformations-large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import categories.functors-large-precategories using
+open import category-theory.functors-large-precategories using
   ( functor-Large-Precat; obj-functor-Large-Precat;
     hom-functor-Large-Precat)
-open import categories.large-precategories using
+open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
     comp-Large-Precat; id-Large-Precat;
     left-unit-law-comp-Large-Precat;

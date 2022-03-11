@@ -3,14 +3,14 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.natural-isomorphisms-precategories where
+module category-theory.natural-isomorphisms-precategories where
 
-open import categories.functors-precategories using (functor-Precat)
-open import categories.isomorphisms-precategories using
+open import category-theory.functors-precategories using (functor-Precat)
+open import category-theory.isomorphisms-precategories using
   ( is-iso-Precat; is-prop-is-iso-Precat)
-open import categories.natural-transformations-precategories using
+open import category-theory.natural-transformations-precategories using
   ( nat-trans-Precat; components-nat-trans-Precat)
-open import categories.precategories using (Precat; obj-Precat)
+open import category-theory.precategories using (Precat; obj-Precat)
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.propositions using (is-prop; is-prop-Π)
 open import foundation.universe-levels using (UU; _⊔_)

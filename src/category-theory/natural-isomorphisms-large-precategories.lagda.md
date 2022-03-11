@@ -3,17 +3,17 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.natural-isomorphisms-large-precategories where
+module category-theory.natural-isomorphisms-large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import categories.functors-large-precategories using
+open import category-theory.functors-large-precategories using
   ( functor-Large-Precat; obj-functor-Large-Precat;
     hom-functor-Large-Precat)
-open import categories.isomorphisms-large-precategories using
+open import category-theory.isomorphisms-large-precategories using
   ( iso-Large-Precat; hom-iso-Large-Precat)
-open import categories.large-precategories using
+open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat)
-open import categories.natural-transformations-large-precategories using
+open import category-theory.natural-transformations-large-precategories using
   ( square-Large-Precat; natural-transformation-Large-Precat;
     obj-natural-transformation-Large-Precat;
     coherence-square-natural-transformation-Large-Precat)

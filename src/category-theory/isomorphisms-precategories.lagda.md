@@ -3,9 +3,9 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.isomorphisms-precategories where
+module category-theory.isomorphisms-precategories where
 
-open import categories.precategories using
+open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-Precat;
     id-Precat; hom-Precat; right-unit-law-comp-Precat;
     left-unit-law-comp-Precat; assoc-comp-Precat; comp-Precat';

@@ -3,9 +3,9 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.functors-precategories where
+module category-theory.functors-precategories where
 
-open import categories.precategories using
+open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-Precat;
     id-Precat; is-set-type-hom-Precat)
 open import foundation.cartesian-product-types using (_×_)

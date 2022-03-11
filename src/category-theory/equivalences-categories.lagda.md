@@ -3,12 +3,12 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.equivalences-categories where
+module category-theory.equivalences-categories where
 
-open import categories.categories using (Cat; precat-Cat)
-open import categories.equivalences-precategories using
+open import category-theory.categories using (Cat; precat-Cat)
+open import category-theory.equivalences-precategories using
   ( is-equiv-functor-Precat; equiv-Precat)
-open import categories.functors-categories using (functor-Cat)
+open import category-theory.functors-categories using (functor-Cat)
 open import foundation.universe-levels using (UU; _⊔_)
 ```
 

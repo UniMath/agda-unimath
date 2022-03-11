@@ -3,19 +3,19 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.adjunctions-large-precategories where
+module category-theory.adjunctions-large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import categories.functors-large-precategories using
+open import category-theory.functors-large-precategories using
   ( functor-Large-Precat; obj-functor-Large-Precat;
     hom-functor-Large-Precat; preserves-id-functor-Large-Precat;
     id-functor-Large-Precat; comp-functor-Large-Precat)
-open import categories.large-precategories using
+open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
     comp-Large-Precat; id-Large-Precat; left-unit-law-comp-Large-Precat;
     comp-Large-Precat'; associative-comp-Large-Precat;
     right-unit-law-comp-Large-Precat)
-open import categories.natural-transformations-large-precategories using
+open import category-theory.natural-transformations-large-precategories using
   ( natural-transformation-Large-Precat;
     obj-natural-transformation-Large-Precat;
     coherence-square-natural-transformation-Large-Precat)

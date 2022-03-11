@@ -3,11 +3,11 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.isomorphisms-categories where
+module category-theory.isomorphisms-categories where
 
-open import categories.categories using
+open import category-theory.categories using
   ( Cat; obj-Cat; type-hom-Cat; precat-Cat; id-Cat)
-open import categories.isomorphisms-precategories using
+open import category-theory.isomorphisms-precategories using
   ( is-iso-Precat; iso-Precat; is-prop-is-iso-Precat;
     is-set-iso-Precat; iso-Precat-Set; is-iso-id-Precat;
     id-iso-Precat; iso-eq-Precat)

@@ -3,12 +3,12 @@
 module everything where
 
 open import README
-open import categories
-open import categories.adjunctions
-open import categories.categories
-open import categories.functors
-open import categories.large-categories
-open import categories.natural-transformations
+open import category-theory
+open import category-theory.adjunctions
+open import category-theory.categories
+open import category-theory.functors
+open import category-theory.large-categories
+open import category-theory.natural-transformations
 open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers

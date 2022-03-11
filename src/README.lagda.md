@@ -11,12 +11,12 @@ Welcome to the website of the `agda-unimath` formalization project.
 ## Categories
 
 ```agda
-open import categories
-open import categories.adjunctions
-open import categories.categories
-open import categories.functors
-open import categories.large-categories
-open import categories.natural-transformations
+open import category-theory
+open import category-theory.adjunctions
+open import category-theory.categories
+open import category-theory.functors
+open import category-theory.large-categories
+open import category-theory.natural-transformations
 ```
 
 ## Elementary number theory

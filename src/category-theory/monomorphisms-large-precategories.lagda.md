@@ -3,9 +3,9 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.monomorphisms-large-precategories where
+module category-theory.monomorphisms-large-precategories where
 
-open import categories.large-precategories using
+open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
     comp-Large-Precat)
 open import foundation.embeddings using (is-emb-Prop)

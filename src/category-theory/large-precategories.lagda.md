@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module categories.large-precategories where
+module category-theory.large-precategories where
 
 open import Agda.Primitive using (Setω)
 open import foundation.functions using (_∘_; id)
