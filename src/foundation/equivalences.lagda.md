@@ -30,7 +30,7 @@ open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
 open import foundation-core.truncated-types using
-  ( UU-Truncated-Type; type-Truncated-Type; is-trunc)
+  ( Truncated-Type; type-Truncated-Type; is-trunc)
 open import foundation-core.truncation-levels using (𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
@@ -311,9 +311,9 @@ is-equiv-is-equiv-precomp-Set A B f H =
 
 is-equiv-is-equiv-precomp-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋)
-  (A : UU-Truncated-Type l1 k) (B : UU-Truncated-Type l2 k)
+  (A : Truncated-Type l1 k) (B : Truncated-Type l2 k)
   (f : type-Truncated-Type A → type-Truncated-Type B) →
-  ({l : Level} (C : UU-Truncated-Type l k) → is-equiv (precomp f (pr1 C))) →
+  ({l : Level} (C : Truncated-Type l k) → is-equiv (precomp f (pr1 C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Truncated-Type k A B f H =
     is-equiv-is-equiv-precomp-subuniverse id (λ l → is-trunc k) A B f

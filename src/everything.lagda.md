@@ -77,6 +77,7 @@ open import finite-groups.abstract-quaternion-group
 open import finite-groups.concrete-quaternion-group
 open import finite-groups.finite-groups
 open import finite-groups.orbits-permutations
+open import finite-groups.permutations
 open import finite-groups.transpositions
 open import foundation-core.0-maps
 open import foundation-core.1-types

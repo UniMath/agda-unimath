@@ -30,7 +30,7 @@ open import foundation-core.equality-fibers-of-maps using
   ( equiv-fib-ap-eq-fib; eq-fib-fib-ap; is-equiv-eq-fib-fib-ap)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.truncated-types using
-  ( is-trunc; is-trunc-succ-is-trunc; is-trunc-equiv; UU-Truncated-Type;
+  ( is-trunc; is-trunc-succ-is-trunc; is-trunc-equiv; Truncated-Type;
     is-trunc-is-equiv'; is-trunc-Σ; is-trunc-Id; is-trunc-equiv';
     is-trunc-is-equiv)
 ```
@@ -120,7 +120,7 @@ module _
       is-trunc-equiv k (B x) (equiv-fib-pr1 B x) (H x)
 
   pr1-trunc-map :
-    (B : A → UU-Truncated-Type l2 k) → trunc-map k (Σ A (λ x → pr1 (B x))) A
+    (B : A → Truncated-Type l2 k) → trunc-map k (Σ A (λ x → pr1 (B x))) A
   pr1 (pr1-trunc-map B) = pr1
   pr2 (pr1-trunc-map B) = is-trunc-map-pr1 (λ x → pr2 (B x))
 

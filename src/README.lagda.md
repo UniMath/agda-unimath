@@ -482,7 +482,7 @@ open import univalent-combinatorics.surjective-maps
 open import univalent-foundations.isolated-points
 ```
 
-### Wild algebra
+## Wild algebra
 
 ```agda
 open import wild-algebra.magmas

@@ -32,7 +32,7 @@ open import foundation.propositions using
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using (is-subtype)
 open import foundation.truncated-types using
-  ( is-trunc; is-trunc-is-equiv; UU-Truncated-Type; type-Truncated-Type;
+  ( is-trunc; is-trunc-is-equiv; Truncated-Type; type-Truncated-Type;
     is-trunc-type-Truncated-Type)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; one-𝕋; succ-𝕋)
