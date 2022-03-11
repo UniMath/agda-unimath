@@ -237,15 +237,15 @@ instance
   Semigroup-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
   obj-Large-Precat Semigroup-Large-Precat = Semigroup
   hom-Large-Precat Semigroup-Large-Precat = hom-Semigroup
-  comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} =
+  comp-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} =
     comp-hom-Semigroup G H K
-  id-hom-Large-Precat Semigroup-Large-Precat {X = G} =
+  id-Large-Precat Semigroup-Large-Precat {X = G} =
     id-hom-Semigroup G
-  associative-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-Large-Precat Semigroup-Large-Precat {X = G} {H} {K} {L} =
     associative-comp-hom-Semigroup G H K L
-  left-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
+  left-unit-law-comp-Large-Precat Semigroup-Large-Precat {X = G} {H} =
     left-unit-law-comp-hom-Semigroup G H
-  right-unit-law-comp-hom-Large-Precat Semigroup-Large-Precat {X = G} {H} =
+  right-unit-law-comp-Large-Precat Semigroup-Large-Precat {X = G} {H} =
     right-unit-law-comp-hom-Semigroup G H
 
 {- We show that the precategory of semigroups is a category -}
@@ -255,7 +255,7 @@ module _
   where
   
   is-iso-hom-Semigroup : (f : type-hom-Semigroup G H) → UU (l1 ⊔ l2)
-  is-iso-hom-Semigroup f = is-iso-hom-Large-Precat Semigroup-Large-Precat G H f
+  is-iso-hom-Semigroup f = is-iso-Large-Precat Semigroup-Large-Precat {X = G} {Y = H} f
 
   inv-is-iso-hom-Semigroup :
     (f : type-hom-Semigroup G H) →
@@ -263,7 +263,7 @@ module _
   inv-is-iso-hom-Semigroup f = pr1
 
   type-iso-Semigroup : UU (l1 ⊔ l2)
-  type-iso-Semigroup = type-iso-Large-Precat Semigroup-Large-Precat G H
+  type-iso-Semigroup = iso-Large-Precat Semigroup-Large-Precat G H
   
   hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
   hom-iso-Semigroup = hom-iso-Large-Precat Semigroup-Large-Precat G H
@@ -282,7 +282,7 @@ module _
          ( hom-iso-Semigroup f)
          ( hom-inv-iso-Semigroup f))
        ( id-hom-Semigroup H)
-  issec-hom-inv-iso-Semigroup = issec-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
+  issec-hom-inv-iso-Semigroup = is-sec-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
   isretr-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
@@ -290,13 +290,13 @@ module _
          ( hom-inv-iso-Semigroup f)
          ( hom-iso-Semigroup f))
        ( id-hom-Semigroup G)
-  isretr-hom-inv-iso-Semigroup = isretr-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
+  isretr-hom-inv-iso-Semigroup = is-retr-hom-inv-iso-Large-Precat Semigroup-Large-Precat G H
 
   abstract
     is-prop-is-iso-hom-Semigroup :
       (f : type-hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup f)
     is-prop-is-iso-hom-Semigroup =
-      is-prop-is-iso-hom-Large-Precat Semigroup-Large-Precat G H
+      is-prop-is-iso-Large-Precat Semigroup-Large-Precat G H
 
   abstract
     preserves-mul-map-inv-is-equiv-Semigroup :
@@ -965,15 +965,15 @@ instance
   Group-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
   obj-Large-Precat Group-Large-Precat = Group
   hom-Large-Precat Group-Large-Precat = hom-Group
-  comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} =
+  comp-Large-Precat Group-Large-Precat {X = G} {H} {K} =
     comp-hom-Group G H K
-  id-hom-Large-Precat Group-Large-Precat {X = G} =
+  id-Large-Precat Group-Large-Precat {X = G} =
     id-hom-Group G
-  associative-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
+  associative-comp-Large-Precat Group-Large-Precat {X = G} {H} {K} {L} =
     associative-comp-hom-Group G H K L
-  left-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  left-unit-law-comp-Large-Precat Group-Large-Precat {X = G} {H} =
     left-unit-law-comp-hom-Group G H
-  right-unit-law-comp-hom-Large-Precat Group-Large-Precat {X = G} {H} =
+  right-unit-law-comp-Large-Precat Group-Large-Precat {X = G} {H} =
     right-unit-law-comp-hom-Group G H
 
 {- We show that the precategory of groups is a category -}
@@ -983,10 +983,10 @@ module _
   where
   
   is-iso-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-Group = is-iso-hom-Large-Precat Group-Large-Precat G H
+  is-iso-hom-Group = is-iso-Large-Precat Group-Large-Precat {X = G} {Y = H}
 
   type-iso-Group : UU (l1 ⊔ l2)
-  type-iso-Group = type-iso-Large-Precat Group-Large-Precat G H
+  type-iso-Group = iso-Large-Precat Group-Large-Precat G H
 
   hom-iso-Group : type-iso-Group → type-hom-Group G H
   hom-iso-Group = hom-iso-Large-Precat Group-Large-Precat G H

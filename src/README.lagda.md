@@ -11,12 +11,28 @@ Welcome to the website of the `agda-unimath` formalization project.
 ## Categories
 
 ```agda
-open import category-theory
-open import category-theory.adjunctions
+open import category-theory.adjunctions-large-precategories
 open import category-theory.categories
-open import category-theory.functors
+open import category-theory.equivalences-categories
+open import category-theory.equivalences-large-precategories
+open import category-theory.equivalences-precategories
+open import category-theory.functors-categories
+open import category-theory.functors-large-precategories
+open import category-theory.functors-precategories
+open import category-theory.homotopies-natural-transformations-large-precategories
+open import category-theory.isomorphisms-categories
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-precategories
 open import category-theory.large-categories
-open import category-theory.natural-transformations
+open import category-theory.large-precategories
+open import category-theory.monomorphisms-large-precategories
+open import category-theory.natural-isomorphisms-categories
+open import category-theory.natural-isomorphisms-large-precategories
+open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-transformations-categories
+open import category-theory.natural-transformations-large-precategories
+open import category-theory.natural-transformations-precategories
+open import category-theory.precategories
 ```
 
 ## Elementary number theory
