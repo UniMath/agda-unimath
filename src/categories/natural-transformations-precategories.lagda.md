@@ -24,6 +24,8 @@ Given precategories `C` and `D`, a natural transformation from a functor `F : C 
 such that the following identity holds:
 - `comp (G f) (γ x) = comp (γ y) (F f)`, for all `f : hom x y`.
 
+## Definition
+
 ```agda
 module _ {l1 l2 l3 l4}
   (C : Precat l1 l2)

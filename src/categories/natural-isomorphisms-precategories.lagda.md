@@ -20,6 +20,8 @@ open import foundation.universe-levels using (UU; _⊔_)
 
 A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is an isomorphism, for every object `x` in `C`.
 
+## Definition
+
 ```agda
 module _ {l1 l2 l3 l4}
   (C : Precat l1 l2)

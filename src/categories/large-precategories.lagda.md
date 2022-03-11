@@ -18,6 +18,8 @@ open import foundation.universe-levels using
 
 A large precategory is a precategory where we don't fix a universe for the type of objects or morphisms. (This cannot be done with Σ-types, we must use a record type.)
 
+## Definition
+
 ```agda
 record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Setω where
   constructor make-Large-Precat

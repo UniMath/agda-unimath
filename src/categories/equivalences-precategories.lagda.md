@@ -21,6 +21,8 @@ A functor `F : C → D` is an equivalence of categories if there is a functor `G
 - `comp G F` is naturally isomorphic to the identity functor on `C`,
 - `comp F G` is naturally isomorphic to the identity functor on `D`.
 
+## Definition
+
 ```agda
 module _ {l1 l2 l3 l4}
   (C : Precat l1 l2)

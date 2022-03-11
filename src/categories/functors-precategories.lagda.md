@@ -26,6 +26,8 @@ such that the following identities hold:
 - `Fmap id_x = id_(F x)`,
 - `Fmap (comp g f) = comp (F g) (F f)`.
 
+## Definition
+
 ```agda
 module _ {l1 l2 l3 l4 : Level}
   (C : Precat l1 l2)

@@ -18,6 +18,8 @@ open import foundation.universe-levels using (UU; _⊔_)
 
 A natural transformation between functors on categories is a natural transformation between the functors on the underlying precategories.
 
+## Definition
+
 ```agda
 module _ {l1 l2 l3 l4}
   (C : Cat l1 l2)

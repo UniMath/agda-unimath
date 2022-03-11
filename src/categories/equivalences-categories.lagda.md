@@ -16,6 +16,8 @@ open import foundation.universe-levels using (UU; _⊔_)
 
 A functor `F : C → D` on categories is an equivalence if it is an equivalence on the underlying precategories.
 
+## Definition
+
 ```agda
 module _ {l1 l2 l3 l4}
   (C : Cat l1 l2)
