@@ -11,7 +11,8 @@ open import finite-groups.transpositions using
   ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
     left-computation-transposition-two-elements; map-transposition;
     not-computation-transposition-two-elements; permutation-list-transpositions;
-    right-computation-transposition-two-elements; transposition; transposition-two-elements)
+    right-computation-transposition-two-elements; transposition; transposition-two-elements;
+    transposition-conjugation-equiv; correct-transposition-conjugation-equiv-list)
 
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl)
@@ -25,8 +26,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; htpy-equiv; id-equiv; is-emb-is-equiv; is-equiv;
-    is-equiv-has-inverse; right-inverse-law-equiv; map-equiv; map-inv-equiv)
+  ( _≃_; _∘e_; eq-htpy-equiv; htpy-equiv; id-equiv; inv-equiv; is-emb-is-equiv; is-equiv;
+    is-equiv-has-inverse; left-inverse-law-equiv; right-inverse-law-equiv; map-equiv; map-inv-equiv; htpy-eq-equiv)
 open import foundation.equivalences-maybe using
   ( extend-equiv-Maybe; comp-extend-equiv-Maybe; computation-inv-extend-equiv-Maybe)
 open import foundation.functions using (_∘_; id)
@@ -321,7 +322,35 @@ retr-permutation-list-transpositions-Fin (succ-ℕ n) f y =
 
 ```agda
 module _
-  {l : Level} (X : UU l) (eX : count X)
+  {l1 : Level} (X : UU l1) (eX : count X) (f : X ≃ X)
   where
 
+  list-transpositions-permutation-count :
+    list
+      ( Σ
+        ( X → decidable-Prop lzero)
+        ( λ P →
+          has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))
+  list-transpositions-permutation-count =
+    map-list
+      ( transposition-conjugation-equiv (Fin (number-of-elements-count eX)) X (equiv-count eX))
+      ( list-transpositions-permutation-Fin (number-of-elements-count eX) ((inv-equiv-count eX ∘e f) ∘e equiv-count eX))
+
+  retr-permutation-list-transpositions-count :
+    htpy-equiv (permutation-list-transpositions X list-transpositions-permutation-count) f
+  retr-permutation-list-transpositions-count x =
+    ( correct-transposition-conjugation-equiv-list
+      ( Fin (number-of-elements-count eX))
+      ( X)
+      ( equiv-count eX)
+      ( list-transpositions-permutation-Fin (number-of-elements-count eX) ((inv-equiv-count eX ∘e f) ∘e equiv-count eX))
+      ( x)) ∙
+      ( (ap
+        ( map-equiv-count eX)
+        ( retr-permutation-list-transpositions-Fin
+          ( number-of-elements-count eX)
+          ( (inv-equiv-count eX ∘e f) ∘e equiv-count eX)
+          ( map-inv-equiv-count eX x))) ∙
+        ( (htpy-eq-equiv (right-inverse-law-equiv (equiv-count eX)) (map-equiv ((f ∘e (equiv-count eX)) ∘e inv-equiv-count eX) x)) ∙
+          ap (λ g → map-equiv (f ∘e g) x) (right-inverse-law-equiv (equiv-count eX))))
 ```

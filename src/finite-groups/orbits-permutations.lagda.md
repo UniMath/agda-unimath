@@ -316,6 +316,59 @@ module _
               ( (iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
                 ( (ap (iterate k2 (map-equiv f)) p ∙ q)))))))
 
+  is-decidable-same-orbits : (a b : type-UU-Fin-Level X) → is-decidable (type-Eq-Rel same-orbits a b) 
+  is-decidable-same-orbits a b =
+    apply-universal-property-trunc-Prop
+      ( mere-equiv-UU-Fin-Level X)
+      ( is-decidable-Prop (prop-Eq-Rel same-orbits a b))
+      ( λ h → is-decidable-trunc-Prop-is-merely-decidable
+        ( Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
+        ( unit-trunc-Prop
+          ( is-decidable-iterate-is-decidable-bounded h a b
+            ( is-decidable-bounded-Σ-ℕ n (λ z → z ≤-ℕ n) (λ z → Id (iterate z (map-equiv f) a) b)
+              ( λ z → is-decidable-leq-ℕ z n)
+              ( λ z → has-decidable-equality-equiv (inv-equiv h) has-decidable-equality-Fin (iterate z (map-equiv f) a) b)
+              ( λ m p → p)))))
+    where
+    is-decidable-iterate-is-decidable-bounded : (Fin n ≃ type-UU-Fin-Level X) → (a b : type-UU-Fin-Level X) →
+      is-decidable (Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
+      is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
+    is-decidable-iterate-is-decidable-bounded h a b (inl p) = inl (pair (pr1 p) (pr2 (pr2 p)))
+    is-decidable-iterate-is-decidable-bounded h a b (inr np) =
+      inr (λ p → np
+        (pair
+          ( remainder-euclidean-division-ℕ m (pr1 p))
+          (pair
+            ( leq-le-ℕ
+              { x = remainder-euclidean-division-ℕ m (pr1 p)}
+              ( concatenate-le-leq-ℕ
+                { y = m}
+                ( strict-upper-bound-remainder-euclidean-division-ℕ
+                  ( m)
+                  ( pr1 p)
+                  ( pr1 (pr2 (has-finite-orbits (type-UU-Fin-Level X) (pair n h) f a))))
+              ( leq-has-finite-orbits-number-elements (type-UU-Fin-Level X) (pair n h) f a)))
+            ( (ap
+               ( iterate (remainder-euclidean-division-ℕ m (pr1 p)) (map-equiv f))
+               ( inv
+                 ( mult-has-finite-orbits (type-UU-Fin-Level X) (pair n h) f a (quotient-euclidean-division-ℕ m (pr1 p))))) ∙
+              ( (inv
+                ( iterate-add-ℕ
+                  ( remainder-euclidean-division-ℕ m (pr1 p))
+                  ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)
+                  ( map-equiv f)
+                  ( a))) ∙
+                ( (ap
+                  ( λ x → iterate x (map-equiv f) a)
+                  ( (commutative-add-ℕ
+                    ( remainder-euclidean-division-ℕ m (pr1 p))
+                    ( mul-ℕ (quotient-euclidean-division-ℕ m (pr1 p)) m)) ∙
+                    ( eq-euclidean-division-ℕ m (pr1 p)))) ∙
+                  ( pr2 p)))))))
+      where
+      m : ℕ
+      m = pr1 (has-finite-orbits (type-UU-Fin-Level X) (pair n h) f a)
+
   has-finite-number-orbits : is-finite (large-set-quotient same-orbits)
   has-finite-number-orbits =
     is-finite-codomain
@@ -336,22 +389,7 @@ module _
               ( λ (pair t2 p2) →
                ( cases-decidable-type-class-large-set-quotient T2 t1 t2
                  ( eq-pair-Σ (inv p2) (all-elements-equal-type-trunc-Prop _ _))
-                 ( is-decidable-trunc-Prop-is-merely-decidable
-                   ( Σ ℕ (λ k → Id (iterate k (map-equiv f) t2) t1))
-                   ( unit-trunc-Prop
-                   ( is-decidable-iterate-is-decidable-bounded h t1 t2
-                     ( is-decidable-bounded-Σ-ℕ
-                       ( n)
-                       ( λ z → z ≤-ℕ n)
-                       ( λ z → Id (iterate z (map-equiv f) t2) t1)
-                       ( λ z → is-decidable-leq-ℕ z n)
-                       ( λ x →
-                         has-decidable-equality-equiv
-                           ( inv-equiv h)
-                           ( has-decidable-equality-Fin)
-                           ( iterate x (map-equiv f) t2)
-                           ( t1))
-                       ( λ m p → p))))))))))))
+                 ( is-decidable-same-orbits t2 t1))))))))
     where
     cases-decidable-equality :
       (T1 T2 : large-set-quotient same-orbits) (t1 : type-UU-Fin-Level X) →
