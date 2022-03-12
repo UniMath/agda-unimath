@@ -104,7 +104,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
 
-## Finite groups
+## Finite group theory
 
 ```agda
 open import finite-group-theory.abstract-quaternion-group
@@ -391,7 +391,7 @@ open import order-theory.preorders
 open import polytopes.abstract-polytopes
 ```
 
-## Rings
+## Ring theory
 
 ```agda
 open import ring-theory
