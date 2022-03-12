@@ -11,6 +11,7 @@ Welcome to the website of the `agda-unimath` formalization project.
 ## Category theory
 
 ```agda
+open import category-theory
 open import category-theory.adjunctions-large-precategories
 open import category-theory.categories
 open import category-theory.equivalences-categories
@@ -340,6 +341,7 @@ open import foundation-core.universe-levels
 ## Graph theory
 
 ```agda
+open import graph-theory
 open import graph-theory.directed-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.polygons
@@ -369,6 +371,7 @@ open import group-theory.sheargroups
 ## Linear algebra
 
 ```agda
+open import linear-algebra
 open import linear-algebra.matrices
 open import linear-algebra.vectors
 ```
@@ -388,6 +391,7 @@ open import order-theory.preorders
 ## Polytopes
 
 ```agda
+open import polytopes
 open import polytopes.abstract-polytopes
 ```
 
@@ -501,6 +505,7 @@ open import univalent-foundations.isolated-points
 ## Wild algebra
 
 ```agda
+open import wild-algebra
 open import wild-algebra.magmas
 open import wild-algebra.universal-property-lists-wild-monoids
 open import wild-algebra.wild-groups
