@@ -14,20 +14,10 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 ### Structure of the library
 
-1. Files have one single goal. Usually it is to introduce one new concept, one new definition, or to reach one theorem. The contents of the file should be focused on that one concept or theorem. For example, the file `addition-natural-numbers` introduces addition on the natural numbers, and derives its basic properties.
-2. A file name should be a recognizable name or description, usually in the form of a noun or noun phrase, of the topic of that file that is natural, sufficiently precise, concise, and consistent with those of related files. File names are in lower case, with words separated by hyphens. Words in file names should not be abbreviated unless the abbreviated term is a widely accepted mathematical term, e.g., `poset`.
-3. The files are organized by mathematical subject. The folder names describe them.
-4. All the files and folders can be found in the folder `src`.
-
-### Library conventions
-
-* This style guide is here to improve the readability of the code. If an item
-  in this guide causes suboptimal readability of the code if applied, please
-  notify us and we will try to improve this guide, and possibly our code.
-* The library uses a standard line length of 80 characters.
-* All module headers and standard term definitions should have a single empty line before and after them.
-* The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
-* The library is universe polymorphic. Whenever a type or type family is assumed, it is assigned its own universe level.
+1. The source code of the formalisation can be found in the folder `src`.
+2. The library is organized by mathematical subject, with one folder per mathemtical subject. For each folder there is also an Agda file of the same name, which lists the files in that folder by importing them publicly.
+3. The files focus sharply on one topic, and don't try to do everything. Typically, a file begins by introducing one new concept, possibly in several equivalent ways, and develop the most basic properties thereof. Alternatively, a file could have the goal to prove an important theorem, and derive immediate corollaries thereof.
+4. File names are descriptive of the concept it introduces, or the main theorem it proves. The file names could be considered indexing terms, with the list of files functioning much like the index in the back of a book. Usually, file names consist of a noun or a noun phrase. File names should be natural, sufficiently precise, concise, and consistent with those of related files. File names are entirely in lower case, with words separated by hyphens. Words in file names should not be abbreviated unless the abbreviated term is a widely accepted mathematical term, e.g., `poset`.
 
 #### Layout of a file
 
@@ -81,6 +71,16 @@ Ideally the first section of a file explains the idea, then proceeds to give the
 
 [ formalization of property 2]
 ```
+
+### Library conventions
+
+* This style guide is here to improve the readability of the code. If an item
+  in this guide causes suboptimal readability of the code if applied, please
+  notify us and we will try to improve this guide, and possibly our code.
+* The library uses a standard line length of 80 characters.
+* All module headers and standard term definitions should have a single empty line before and after them.
+* The library uses Lisp style parentheses, and indent arguments of functions if they are on their own line.
+* The library is universe polymorphic. Whenever a type or type family is assumed, it is assigned its own universe level.
 
 #### Names
 
