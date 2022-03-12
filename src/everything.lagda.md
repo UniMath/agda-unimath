@@ -309,6 +309,7 @@ open import foundation.unordered-pairs
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
+open import graph-theory
 open import graph-theory.directed-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.polygons
@@ -329,6 +330,7 @@ open import group-theory.furstenberg-groups
 open import group-theory.higher-groups
 open import group-theory.sheargroups
 open import labels
+open import linear-algebra
 open import linear-algebra.matrices
 open import linear-algebra.vectors
 open import order-theory
@@ -338,6 +340,7 @@ open import order-theory.finitely-graded-posets
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
+open import polytopes
 open import polytopes.abstract-polytopes
 open import ring-theory
 open import ring-theory.eisenstein-integers
@@ -422,6 +425,7 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-foundations
 open import univalent-foundations.isolated-points
+open import wild-algebra
 open import wild-algebra.magmas
 open import wild-algebra.universal-property-lists-wild-monoids
 open import wild-algebra.wild-groups
