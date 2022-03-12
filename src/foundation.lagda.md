@@ -139,6 +139,7 @@ open import foundation.surjective-maps public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
 open import foundation.truncation-levels public
+open import foundation.truncations public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-pair-types public

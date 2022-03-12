@@ -3,9 +3,9 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.concrete-group-actions where
+module group-theory.concrete-group-actions where
 
-open import groups.concrete-groups public
+open import group-theory.concrete-groups public
 open import synthetic-homotopy-theory.circle public
 ```
 

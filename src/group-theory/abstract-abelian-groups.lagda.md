@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.abstract-abelian-groups where
+module group-theory.abstract-abelian-groups where
 
-open import groups.abstract-groups public
+open import group-theory.abstract-groups public
 
 is-abelian-Group :
   {l : Level} (G : Group l) → UU l
@@ -95,7 +95,7 @@ is-commutative-add-Ab :
   Id (add-Ab A x y) (add-Ab A y x)
 is-commutative-add-Ab A = pr2 A
 
-{- So far the basic interface of abelian groups. -}
+{- So far the basic interface of abelian groups -}
 
 is-prop-is-abelian-Group :
   {l : Level} (G : Group l) → is-prop (is-abelian-Group G)

@@ -47,40 +47,40 @@ abstract
       ( is-trunc-Π k (λ x → is-trunc-B x (f x) (g x)))
 
 type-Π-Truncated-Type' :
-  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type l2 k) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → Truncated-Type l2 k) →
   UU (l1 ⊔ l2)
 type-Π-Truncated-Type' k A B = (x : A) → type-Truncated-Type (B x)
 
 is-trunc-type-Π-Truncated-Type' :
-  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type l2 k) →
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → Truncated-Type l2 k) →
   is-trunc k (type-Π-Truncated-Type' k A B)
 is-trunc-type-Π-Truncated-Type' k A B =
   is-trunc-Π k (λ x → is-trunc-type-Truncated-Type (B x))
 
 Π-Truncated-Type' :
-  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → UU-Truncated-Type l2 k) →
-  UU-Truncated-Type (l1 ⊔ l2) k
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
 pr1 (Π-Truncated-Type' k A B) = type-Π-Truncated-Type' k A B
 pr2 (Π-Truncated-Type' k A B) = is-trunc-type-Π-Truncated-Type' k A B
 
 type-Π-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
-  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
   UU (l1 ⊔ l2)
 type-Π-Truncated-Type k A B =
   type-Π-Truncated-Type' k (type-Truncated-Type A) B
 
 is-trunc-type-Π-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
-  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
   is-trunc k (type-Π-Truncated-Type k A B)
 is-trunc-type-Π-Truncated-Type k A B =
   is-trunc-type-Π-Truncated-Type' k (type-Truncated-Type A) B
 
 Π-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
-  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
-  UU-Truncated-Type (l1 ⊔ l2) k
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
 Π-Truncated-Type k A B =
   Π-Truncated-Type' k (type-Truncated-Type A) B
 ```
@@ -96,21 +96,21 @@ abstract
     is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
 
 type-hom-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
-  (B : UU-Truncated-Type l2 k) → UU (l1 ⊔ l2)
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k) → UU (l1 ⊔ l2)
 type-hom-Truncated-Type k A B =
   type-Truncated-Type A → type-Truncated-Type B
 
 is-trunc-type-hom-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
-  (B : UU-Truncated-Type l2 k) →
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k) →
   is-trunc k (type-hom-Truncated-Type k A B)
 is-trunc-type-hom-Truncated-Type k A B =
   is-trunc-function-type k (is-trunc-type-Truncated-Type B)
 
 hom-Truncated-Type :
-  (k : 𝕋) {l1 l2 : Level} (A : UU-Truncated-Type l1 k)
-  (B : UU-Truncated-Type l2 k) → UU-Truncated-Type (l1 ⊔ l2) k
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k) → Truncated-Type (l1 ⊔ l2) k
 pr1 (hom-Truncated-Type k A B) = type-hom-Truncated-Type k A B
 pr2 (hom-Truncated-Type k A B) = is-trunc-type-hom-Truncated-Type k A B
 ```

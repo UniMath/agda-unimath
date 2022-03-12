@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.examples-higher-groups where
+module group-theory.examples-higher-groups where
 
-open import groups.higher-groups public
+open import group-theory.higher-groups public
 open import synthetic-homotopy-theory.circle public
 
 open import synthetic-homotopy-theory.pointed-types

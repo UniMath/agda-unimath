@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module finite-groups.abstract-quaternion-group where
+module finite-group-theory.abstract-quaternion-group where
 
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
@@ -22,7 +22,7 @@ open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; lzero)
 
-open import groups.abstract-groups using (Semigroup; Group)
+open import group-theory.abstract-groups using (Semigroup; Group)
 
 open import univalent-combinatorics.counting using (count)
 open import univalent-combinatorics.finite-types using

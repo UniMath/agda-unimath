@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module rings.rings where
+module ring-theory.rings where
 
-open import groups public
+open import group-theory public
 
 has-mul-Ab :
   { l1 : Level} (A : Ab l1) → UU l1

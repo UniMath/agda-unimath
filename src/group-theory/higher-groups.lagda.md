@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.higher-groups where
+module group-theory.higher-groups where
 
 open import foundation.connected-types using
   ( is-path-connected; mere-eq-is-path-connected;

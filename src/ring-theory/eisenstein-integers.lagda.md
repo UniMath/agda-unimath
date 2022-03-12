@@ -5,10 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module rings.eisenstein-integers where
+module ring-theory.eisenstein-integers where
 
-open import groups public
-open import rings.rings public
+open import group-theory public
+open import ring-theory.rings public
 
 {-------------------------------------------------------------------------------
 

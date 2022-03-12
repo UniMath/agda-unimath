@@ -37,7 +37,7 @@ open import foundation.unit-type using
   ( raise-unit; raise-star; is-contr-raise-unit; unit; star)
 open import foundation.universe-levels using (UU; Level)
 
-open import groups.abstract-groups using (Monoid)
+open import group-theory.abstract-groups using (Monoid)
 ```
 
 ## Idea
@@ -87,6 +87,10 @@ flatten-list = fold-list nil concat-list
 reverse-list : {l : Level} {A : UU l} → list A → list A
 reverse-list nil = nil
 reverse-list (cons a l) = concat-list (reverse-list l) (in-list a)
+
+data _∈-list_ {l : Level} {A : UU l} : A → list A → UU l where
+  is-head : (a : A) (l : list A) → a ∈-list (cons a l)
+  is-in-tail : (a x : A) (l : list A) → a ∈-list l → a ∈-list (cons x l)
 ```
 
 ```agda
