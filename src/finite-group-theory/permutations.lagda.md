@@ -3,11 +3,11 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module finite-groups.permutations where
+module finite-group-theory.permutations where
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 
-open import finite-groups.transpositions using
+open import finite-group-theory.transpositions using
   ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
     left-computation-transposition-two-elements; map-transposition;
     not-computation-transposition-two-elements; permutation-list-transpositions;

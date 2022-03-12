@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.abstract-group-actions where
+module group-theory.abstract-group-actions where
 
-open import groups.abstract-groups public
+open import group-theory.abstract-groups public
 
 module _
   {l1 : Level} (G : Group l1)

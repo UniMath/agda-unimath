@@ -4,7 +4,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module finite-groups.orbits-permutations where
+module finite-group-theory.orbits-permutations where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)

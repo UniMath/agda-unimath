@@ -8,7 +8,7 @@ Welcome to the website of the `agda-unimath` formalization project.
 {-# OPTIONS --without-K --exact-split #-}
 ```
 
-## Categories
+## Category theory
 
 ```agda
 open import category-theory.adjunctions-large-precategories
@@ -107,11 +107,11 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Finite groups
 
 ```agda
-open import finite-groups.abstract-quaternion-group
-open import finite-groups.concrete-quaternion-group
-open import finite-groups.finite-groups
-open import finite-groups.orbits-permutations
-open import finite-groups.transpositions
+open import finite-group-theory.abstract-quaternion-group
+open import finite-group-theory.concrete-quaternion-group
+open import finite-group-theory.finite-groups
+open import finite-group-theory.orbits-permutations
+open import finite-group-theory.transpositions
 ```
 
 ## Foundation
@@ -347,23 +347,23 @@ open import graph-theory.reflexive-graphs
 open import graph-theory.undirected-graphs
 ```
 
-## Groups 
+## Group theory
 
 ```agda
-open import groups
-open import groups.abstract-abelian-groups
-open import groups.abstract-abelian-subgroups
-open import groups.abstract-group-actions
-open import groups.abstract-group-torsors
-open import groups.abstract-groups
-open import groups.abstract-subgroups
-open import groups.concrete-group-actions
-open import groups.concrete-groups
-open import groups.concrete-subgroups
-open import groups.examples-higher-groups
-open import groups.furstenberg-groups
-open import groups.higher-groups
-open import groups.sheargroups
+open import group-theory
+open import group-theory.abstract-abelian-groups
+open import group-theory.abstract-abelian-subgroups
+open import group-theory.abstract-group-actions
+open import group-theory.abstract-group-torsors
+open import group-theory.abstract-groups
+open import group-theory.abstract-subgroups
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.concrete-subgroups
+open import group-theory.examples-higher-groups
+open import group-theory.furstenberg-groups
+open import group-theory.higher-groups
+open import group-theory.sheargroups
 ```
 
 ## Linear algebra
@@ -394,13 +394,13 @@ open import polytopes.abstract-polytopes
 ## Rings
 
 ```agda
-open import rings
-open import rings.eisenstein-integers
-open import rings.gaussian-integers
-open import rings.ideals
-open import rings.localizations-rings
-open import rings.rings-with-properties
-open import rings.rings
+open import ring-theory
+open import ring-theory.eisenstein-integers
+open import ring-theory.gaussian-integers
+open import ring-theory.ideals
+open import ring-theory.localizations-rings
+open import ring-theory.rings-with-properties
+open import ring-theory.rings
 ```
 
 ## Synthetic homotopy theory

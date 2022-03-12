@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.furstenberg-groups where
+module group-theory.furstenberg-groups where
 
-open import groups.abstract-groups public
+open import group-theory.abstract-groups public
 
 Furstenberg-Group : (l : Level) → UU (lsuc l)
 Furstenberg-Group l =

@@ -5,14 +5,14 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.concrete-subgroups where
+module group-theory.concrete-subgroups where
 
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.embeddings using (is-emb-Prop)
 open import foundation.propositions using
   ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
-open import groups.concrete-groups using
+open import group-theory.concrete-groups using
   ( Concrete-Group; hom-Concrete-Group; comp-hom-Concrete-Group)
 
 module _ {l1 l2 : Level} (l3 : Level)

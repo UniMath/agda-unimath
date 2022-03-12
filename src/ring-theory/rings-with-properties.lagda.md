@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module rings.rings-with-properties where
+module ring-theory.rings-with-properties where
 
-open import rings.rings public
+open import ring-theory.rings public
 
 --------------------------------------------------------------------------------
 

@@ -7,7 +7,7 @@ title : Book labels
 
 module labels where
 open import foundation
-open import groups
+open import group-theory
 ```
 
 The following names are taken from the Latex code of the book using the regex `\\label\{((\w|\d|:|-)+)\}`.

@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.abstract-groups where
+module group-theory.abstract-groups where
 
 open import category-theory public
 open import univalent-foundations public
@@ -660,7 +660,7 @@ Group :
   (l : Level) → UU (lsuc l)
 Group l = Σ (Semigroup l) is-group
 
-{- Some bureaucracy of Groups. -}
+{- Some bureaucracy of groups -}
 
 module _
   {l : Level} (G : Group l)

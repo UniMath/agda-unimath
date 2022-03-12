@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module finite-groups.transpositions where
+module finite-group-theory.transpositions where
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 

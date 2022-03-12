@@ -5,10 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module rings.ideals where
+module ring-theory.ideals where
 
-open import groups public
-open import rings.rings public
+open import group-theory public
+open import ring-theory.rings public
 
 open import foundation
 open import elementary-number-theory

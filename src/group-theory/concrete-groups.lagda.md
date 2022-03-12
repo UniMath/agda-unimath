@@ -5,7 +5,7 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.concrete-groups where
+module group-theory.concrete-groups where
 
 open import foundation.1-types using (Id-Set)
 open import foundation.connected-types using (is-path-connected)
@@ -21,8 +21,8 @@ open import foundation.subuniverses using (UU-Trunc)
 open import foundation.truncated-types using (is-trunc)
 open import foundation.truncation-levels using (one-𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
-open import groups.abstract-groups using (Group; type-hom-Group)
-open import groups.higher-groups using
+open import group-theory.abstract-groups using (Group; type-hom-Group)
+open import group-theory.higher-groups using
   ( ∞-Group; type-∞-Group; classifying-pointed-type-∞-Group;
     classifying-type-∞-Group; shape-∞-Group;
     is-path-connected-classifying-type-∞-Group;

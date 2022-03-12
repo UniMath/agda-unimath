@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module finite-groups.concrete-quaternion-group where
+module finite-group-theory.concrete-quaternion-group where
 
-open import groups public
+open import group-theory public
 
 open import foundation
 open import univalent-combinatorics

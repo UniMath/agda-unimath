@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module finite-groups.finite-groups where
+module finite-group-theory.finite-groups where
 
 open import elementary-number-theory.natural-numbers using (ℕ)
 
@@ -11,7 +11,7 @@ open import foundation
 open import elementary-number-theory
 open import univalent-combinatorics
 
-open import groups
+open import group-theory
 ```
 
 ```agda

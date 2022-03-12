@@ -5,10 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module rings.localizations-rings where
+module ring-theory.localizations-rings where
 
-open import rings.ideals public
-open import rings.rings-with-properties public
+open import ring-theory.ideals public
+open import ring-theory.rings-with-properties public
 
 is-prop-is-invertible-Ring :
   {l1 : Level} (R : Ring l1) (x : type-Ring R) →

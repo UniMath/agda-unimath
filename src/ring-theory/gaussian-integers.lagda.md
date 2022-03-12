@@ -5,10 +5,10 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module rings.gaussian-integers where
+module ring-theory.gaussian-integers where
 
-open import groups public
-open import rings.rings public
+open import group-theory public
+open import ring-theory.rings public
 
 {-------------------------------------------------------------------------------
 

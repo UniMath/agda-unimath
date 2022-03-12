@@ -59,7 +59,7 @@ open import foundation.unit-type using (star)
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
-open import groups.abstract-groups using
+open import group-theory.abstract-groups using
   ( Group; loop-space-Group; equiv-Group; ℤ-Mod-Group; type-iso-Group;
     iso-equiv-Group)
 

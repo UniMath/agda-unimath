@@ -5,9 +5,9 @@ title: Formalisation of the Symmetry Book
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module groups.sheargroups where
+module group-theory.sheargroups where
 
-open import groups.abstract-groups public
+open import group-theory.abstract-groups public
 
 Sheargroup : (l : Level) → UU (lsuc l)
 Sheargroup l =
