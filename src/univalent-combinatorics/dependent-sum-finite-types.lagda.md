@@ -32,7 +32,7 @@ open import foundation.type-arithmetic-dependent-pair-types using
     equiv-right-swap-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import univalent-combinatorics.coproduct-finite-types using
+open import univalent-combinatorics.coproduct-types using
   ( is-finite-coprod)
 open import univalent-combinatorics.counting using
   ( count; count-equiv)

@@ -21,7 +21,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import univalent-combinatorics.counting using
   ( count; count-is-contr; count-equiv'; equiv-count; map-equiv-count)
-open import univalent-combinatorics.counting-cartesian-product-types using
+open import univalent-combinatorics.cartesian-product-types using
   ( count-prod)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```

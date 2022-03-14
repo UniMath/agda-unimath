@@ -9,11 +9,9 @@ module univalent-combinatorics where
 
 open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
-open import univalent-combinatorics.cartesian-product-finite-types public
+open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types
-open import univalent-combinatorics.coproduct-finite-types public
-open import univalent-combinatorics.counting-cartesian-product-types public
-open import univalent-combinatorics.counting-coproduct-types public
+open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-function-types public
 open import univalent-combinatorics.counting-dependent-pair-types public
@@ -51,6 +49,7 @@ open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
+open import univalent-combinatorics.skipping-element-standard-finite-types public
 open import univalent-combinatorics.standard-finite-pruned-trees public
 open import univalent-combinatorics.standard-finite-trees public
 open import univalent-combinatorics.standard-finite-types public

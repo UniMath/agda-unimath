@@ -69,7 +69,7 @@ open import foundation.universal-property-maybe using
   ( equiv-universal-property-Maybe)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
-open import univalent-combinatorics.equivalences-standard-finite-types using
+open import univalent-combinatorics.coproduct-types using
   ( Fin-add-ℕ)
 open import univalent-combinatorics.finite-types using
   ( Fin-UU-Fin-Level; has-cardinality; has-cardinality-Prop; UU-Fin-Level;

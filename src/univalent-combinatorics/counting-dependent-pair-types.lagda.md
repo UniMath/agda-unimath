@@ -41,7 +41,7 @@ open import univalent-combinatorics.counting using
   ( count; count-is-empty; is-empty-is-zero-number-of-elements-count;
     count-equiv; number-of-elements-count; has-decidable-equality-count;
     count-equiv'; map-equiv-count)
-open import univalent-combinatorics.counting-coproduct-types using
+open import univalent-combinatorics.coproduct-types using
   ( count-coprod; number-of-elements-count-coprod)
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-eq; is-decidable-count)
