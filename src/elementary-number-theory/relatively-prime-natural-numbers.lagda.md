@@ -60,3 +60,8 @@ pr2 (is-decidable-prop-relatively-prime-ℕ x y) =
 ```
 
 ### A number y is relatively prime to x if and only if `[y] mod x` is a unit in `ℤ-Mod x`
+
+```agda
+-- relatively-prime-is-unit-mod-ℕ :
+--   (x y : ℕ) → is-unit-ℤ-Mod x (mod-ℕ y) → relatively-prime-ℕ x y
+-- relatively-prime-is-unit-mod-ℕ x y H = ?

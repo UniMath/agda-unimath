@@ -11,7 +11,7 @@ module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import elementary-number-theory.decidable-dependent-function-types using
+open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; right-unit-law-dist-ℕ)

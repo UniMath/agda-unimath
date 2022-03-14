@@ -7,8 +7,6 @@ module
   elementary-number-theory.well-ordering-principle-standard-finite-types
   where
 
-open import elementary-number-theory.decidable-dependent-pair-types using
-  ( is-decidable-Σ-Fin)
 open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin; leq-neg-one-Fin; refl-leq-Fin; is-prop-leq-Fin;
     antisymmetric-leq-Fin)
@@ -51,6 +49,8 @@ open import foundation.type-arithmetic-unit-type using (left-unit-law-Σ)
 open import foundation.unit-type using (unit; star; ind-unit)
 open import foundation.universe-levels using (Level; UU)
 
+open import univalent-combinatorics.decidable-dependent-pair-types using
+  ( is-decidable-Σ-Fin)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; inl-Fin; neg-one-Fin; nat-Fin)
 open import univalent-combinatorics.counting using (count; number-of-elements-count)

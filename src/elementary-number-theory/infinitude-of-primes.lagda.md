@@ -5,7 +5,7 @@
 
 module elementary-number-theory.infinitude-of-primes where
 
-open import elementary-number-theory.decidable-dependent-function-types using
+open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( is-one-is-divisor-below-ℕ; div-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;

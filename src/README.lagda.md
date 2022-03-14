@@ -44,17 +44,16 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.classical-finite-types
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
 open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.decidable-dependent-function-types
-open import elementary-number-theory.decidable-dependent-pair-types
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.divisibility-modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.equality-integers
@@ -92,7 +91,6 @@ open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
-open import elementary-number-theory.retracts-of-standard-finite-types
 open import elementary-number-theory.skipping-element-standard-finite-type
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
@@ -101,6 +99,8 @@ open import elementary-number-theory.triangular-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.universal-property-natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
+open import elementary-number-theory.unit-elements-standard-finite-types
+open import elementary-number-theory.unit-similarity-standard-finite-types
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
@@ -108,6 +108,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ## Finite group theory
 
 ```agda
+open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
@@ -250,6 +251,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.surjective-maps
+open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -449,6 +451,7 @@ open import univalent-combinatorics
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-finite-types
+open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.coproduct-finite-types
 open import univalent-combinatorics.counting-cartesian-product-types
 open import univalent-combinatorics.counting-coproduct-types

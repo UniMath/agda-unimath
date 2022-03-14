@@ -10,6 +10,7 @@ module univalent-combinatorics where
 open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.cartesian-product-finite-types public
+open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.coproduct-finite-types public
 open import univalent-combinatorics.counting-cartesian-product-types public
 open import univalent-combinatorics.counting-coproduct-types public
