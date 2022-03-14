@@ -42,6 +42,28 @@ module _
 
   iso-Precat : (x y : obj-Precat C) → UU l2
   iso-Precat x y = Σ (type-hom-Precat C x y) is-iso-Precat
+
+  hom-iso-Precat :
+    {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C x y
+  hom-iso-Precat f = pr1 f
+
+  is-iso-hom-iso-Precat :
+    {x y : obj-Precat C} (f : iso-Precat x y) → is-iso-Precat (hom-iso-Precat f)
+  is-iso-hom-iso-Precat f = pr2 f
+
+  hom-inv-iso-Precat :
+    {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C y x
+  hom-inv-iso-Precat f = pr1 (is-iso-hom-iso-Precat f)
+
+  issec-hom-inv-iso-Precat :
+    {x y : obj-Precat C} (f : iso-Precat x y) →
+    Id (comp-Precat C (hom-iso-Precat f) (hom-inv-iso-Precat f)) (id-Precat C)
+  issec-hom-inv-iso-Precat f = pr1 (pr2 (is-iso-hom-iso-Precat f))
+
+  isretr-hom-inv-iso-Precat :
+    {x y : obj-Precat C} (f : iso-Precat x y) →
+    Id (comp-Precat C (hom-inv-iso-Precat f) (hom-iso-Precat f)) (id-Precat C)
+  isretr-hom-inv-iso-Precat f = pr2 (pr2 (is-iso-hom-iso-Precat f))
 ```
 
 ## Examples
