@@ -5,8 +5,9 @@
 
 module category-theory where
 
-open import category-theory.adjunctions-large-precategories public
 open import category-theory.categories public
+open import category-theory.anafunctors public
+open import category-theory.adjunctions-large-precategories public
 open import category-theory.equivalences-categories public
 open import category-theory.equivalences-large-precategories public
 open import category-theory.equivalences-precategories public
