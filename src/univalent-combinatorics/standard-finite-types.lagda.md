@@ -21,11 +21,13 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equality-coproduct-types using (is-emb-inl)
-open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
+open import foundation.equivalences using
+  ( is-equiv; _≃_; is-equiv-has-inverse; map-inv-equiv; map-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective; is-emb-is-injective)
+open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
 open import foundation.negation using (¬; map-neg)
 open import foundation.non-contractible-types using
   ( is-not-contractible; is-not-contractible-empty)
@@ -384,4 +386,16 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( succ-ℕ (nat-Fin (inr star)))
     ( is-zero-nat-zero-Fin {succ-ℕ k})
     ( leq-zero-ℕ (succ-ℕ (nat-Fin {succ-ℕ k} (inr star))))
+```
+
+### Fin is injective
+
+```agda
+abstract
+  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → Id k l
+  is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
+  is-injective-Fin {zero-ℕ} {succ-ℕ l} e = ex-falso (map-inv-equiv e zero-Fin)
+  is-injective-Fin {succ-ℕ k} {zero-ℕ} e = ex-falso (map-equiv e zero-Fin)
+  is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
+    ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
 ```

@@ -5,33 +5,17 @@
 
 module univalent-combinatorics.equivalences-standard-finite-types where
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.exponentiation-natural-numbers using
   ( exp-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 
-open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equivalences using
-  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv; _≃_; id-equiv; is-equiv-has-inverse;
-    _∘e_; inv-equiv; map-inv-equiv; map-equiv)
-open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
+open import foundation.equivalences using (_≃_; _∘e_; inv-equiv)
 open import foundation.functoriality-cartesian-product-types using
   ( equiv-prod)
-open import foundation.functoriality-coproduct-types using
-  ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)
-open import foundation.identity-types using (Id; inv; refl; ap; _∙_)
-open import foundation.type-arithmetic-coproduct-types using
-  ( inv-assoc-coprod; right-distributive-prod-coprod)
 open import foundation.type-arithmetic-empty-type using
-  ( right-unit-law-coprod; left-absorption-prod; inv-left-unit-law-coprod)
-open import foundation.type-arithmetic-unit-type using (left-unit-law-prod)
-open import foundation.unit-type using (unit; is-contr-unit; star)
+  ( inv-left-unit-law-coprod)
+open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universal-property-coproduct-types using
   ( equiv-universal-property-coprod)
 open import foundation.universal-property-empty-type using
@@ -39,60 +23,14 @@ open import foundation.universal-property-empty-type using
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 
-open import foundation-core.equality-dependent-pair-types using
-  ( eq-pair-Σ; pair-eq-Σ)
-open import foundation-core.functions using (id)
-open import foundation-core.homotopies using (refl-htpy)
-open import foundation-core.propositions using (eq-is-prop)
-open import foundation-core.sets using (Id-Prop)
-
-open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)
-open import univalent-combinatorics.equality-standard-finite-types using (Fin-Set)
+open import univalent-combinatorics.cartesian-product-types using (prod-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin)
 ```
 
 ## Idea
 
 We construct equivalences between (types built out of) standard finite types.
-
-### Fin is injective
-
-```agda
-abstract
-  is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → Id k l
-  is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
-  is-injective-Fin {zero-ℕ} {succ-ℕ l} e = ex-falso (map-inv-equiv e zero-Fin)
-  is-injective-Fin {succ-ℕ k} {zero-ℕ} e = ex-falso (map-equiv e zero-Fin)
-  is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
-    ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
-```
-
-### The standard finite types are closed under coproducts
-
-```agda
-coprod-Fin :
-  (k l : ℕ) → coprod (Fin k) (Fin l) ≃ Fin (add-ℕ k l)
-coprod-Fin k zero-ℕ = right-unit-law-coprod (Fin k)
-coprod-Fin k (succ-ℕ l) =
-  (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-assoc-coprod
-
-Fin-add-ℕ :
-  (k l : ℕ) → Fin (add-ℕ k l) ≃ coprod (Fin k) (Fin l)
-Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
-```
-
-### The standard finite types are closed under cartesian products
-
-```
-prod-Fin : (k l : ℕ) → ((Fin k) × (Fin l)) ≃ Fin (mul-ℕ k l)
-prod-Fin zero-ℕ l = left-absorption-prod (Fin l)
-prod-Fin (succ-ℕ k) l =
-  ( ( coprod-Fin (mul-ℕ k l) l) ∘e
-    ( equiv-coprod (prod-Fin k l) left-unit-law-prod)) ∘e
-  ( right-distributive-prod-coprod (Fin k) unit (Fin l))
-
-Fin-mul-ℕ : (k l : ℕ) → (Fin (mul-ℕ k l)) ≃ ((Fin k) × (Fin l))
-Fin-mul-ℕ k l = inv-equiv (prod-Fin k l)
-```
 
 ### The standard finite types are closed under function types
 

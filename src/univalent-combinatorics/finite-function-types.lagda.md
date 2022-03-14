@@ -9,7 +9,7 @@ open import foundation.dependent-pair-types using (pr1; pr2)
 open import foundation.equivalences using (_≃_)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import univalent-combinatorics.cartesian-product-finite-types using
+open import univalent-combinatorics.cartesian-product-types using
   ( is-finite-prod)
 open import univalent-combinatorics.dependent-product-finite-types using
   ( is-finite-Π)

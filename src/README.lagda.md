@@ -13,6 +13,7 @@ Welcome to the website of the `agda-unimath` formalization project.
 ```agda
 open import category-theory
 open import category-theory.adjunctions-large-precategories
+open import category-theory.anafunctors
 open import category-theory.categories
 open import category-theory.equivalences-categories
 open import category-theory.equivalences-large-precategories
@@ -91,7 +92,6 @@ open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
-open import elementary-number-theory.skipping-element-standard-finite-type
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
@@ -450,11 +450,9 @@ open import tutorials.basic-agda
 open import univalent-combinatorics
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
-open import univalent-combinatorics.cartesian-product-finite-types
+open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.classical-finite-types
-open import univalent-combinatorics.coproduct-finite-types
-open import univalent-combinatorics.counting-cartesian-product-types
-open import univalent-combinatorics.counting-coproduct-types
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-function-types
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -492,6 +490,7 @@ open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.standard-finite-pruned-trees
 open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types

@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module elementary-number-theory.skipping-element-standard-finite-type where
+module univalent-combinatorics.skipping-element-standard-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 

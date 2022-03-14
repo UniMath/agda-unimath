@@ -12,7 +12,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count)
-open import univalent-combinatorics.equivalences-standard-finite-types using
+open import univalent-combinatorics.standard-finite-types using
   ( is-injective-Fin)
 ```
 

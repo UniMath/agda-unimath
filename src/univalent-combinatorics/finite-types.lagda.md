@@ -64,10 +64,8 @@ open import univalent-combinatorics.counting using
     count-type-trunc-Prop)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
-open import univalent-combinatorics.equivalences-standard-finite-types using
-  ( is-injective-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; raise-Fin; equiv-raise-Fin)
+  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin)
 ```
 
 ## Idea
