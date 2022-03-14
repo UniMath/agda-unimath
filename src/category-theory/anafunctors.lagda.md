@@ -18,7 +18,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 ## Idea
 
-An anafunctor is a functor that is only defined up to isomorphism. We show that the type of anafunctors between (Rezk complete) categories is equivalent to the type of functors between them.
+An anafunctor is a functor that is only defined up to isomorphism.
 
 ## Definition
 
