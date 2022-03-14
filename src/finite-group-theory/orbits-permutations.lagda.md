@@ -14,7 +14,7 @@ open import elementary-number-theory.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; strict-upper-bound-remainder-euclidean-division-ℕ;
     quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using (mul-ℕ)
-open import elementary-number-theory.decidable-dependent-pair-types using
+open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Σ-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( contradiction-le-ℕ; concatenate-leq-le-ℕ; concatenate-le-leq-ℕ; le-ℕ; succ-le-ℕ; _≤-ℕ_;

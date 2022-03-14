@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+# Category theory
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

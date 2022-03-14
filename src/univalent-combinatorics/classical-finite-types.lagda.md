@@ -1,13 +1,9 @@
----
-title: Univalent Mathematics in Agda
----
-
 # The classical definition of the finite types
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module elementary-number-theory.classical-finite-types where
+module univalent-combinatorics.classical-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers using
   ( eq-cong-le-ℕ)
@@ -27,15 +23,31 @@ open import univalent-combinatorics.standard-finite-types using
   ( Fin; nat-Fin; strict-upper-bound-nat-Fin)
 ```
 
-# The classical finite types
+## Idea
+
+Classically, the standard type with n elements is defined to be `{0,1,...,n-1}`, i.e., it is the type of natural numbers strictly less than n.
+
+## Definitions
+
+### The classical definition of the finite types
 
 ```agda
 classical-Fin : ℕ → UU lzero
 classical-Fin k = Σ ℕ (λ x → le-ℕ x k)
+```
 
+### The inclusion from `classical-Fin` to ℕ
+
+```agda
 nat-classical-Fin : (k : ℕ) → classical-Fin k → ℕ
 nat-classical-Fin k = pr1
+```
 
+## Properties
+
+### Characterization of equality
+
+```agda
 Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
 Eq-classical-Fin k x y = Id (nat-classical-Fin k x) (nat-classical-Fin k y)
 
@@ -54,10 +66,13 @@ eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
     ( pair x p)
     ( pair y q)
     ( eq-Eq-classical-Fin k (pair x p) (pair y q) (is-injective-succ-ℕ e))
+```
 
-{- We define maps back and forth between the standard finite sets and the
-   bounded natural numbers -}
+### The classical finite types are equivalent to the standard finite types
 
+#### We define maps back and forth between the standard finite sets and the bounded natural numbers
+
+```agda
 standard-classical-Fin : {k : ℕ} → classical-Fin k → Fin k
 standard-classical-Fin {succ-ℕ k} (pair x H) = mod-succ-ℕ k x
 
@@ -65,9 +80,11 @@ classical-standard-Fin :
   (k : ℕ) → Fin k → classical-Fin k
 pr1 (classical-standard-Fin k x) = nat-Fin x
 pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin x
+```
 
-{- We show that these maps are mutual inverses -}
+#### We show that these maps are mutual inverses
 
+```agda
 issec-classical-standard-Fin :
   {k : ℕ} (x : Fin k) →
   Id (standard-classical-Fin (classical-standard-Fin k x)) x

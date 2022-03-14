@@ -205,14 +205,6 @@ module _
 
 {-
 
--- Theorem 18.5.2 Condition (iii)
-
-mere-eq-Eq-Rel : {l1 : Level} (A : UU l1) → Eq-Rel l1 A
-mere-eq-Eq-Rel A =
-  pair
-    mere-eq-Prop
-    ( pair refl-mere-eq (pair symm-mere-eq trans-mere-eq))
-
 -- Theorem 18.5.2 (iii) implies (i)
 
 reflects-mere-eq :

@@ -5,7 +5,7 @@
 
 module elementary-number-theory.prime-numbers where
 
-open import elementary-number-theory.decidable-dependent-function-types using
+open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-one-ℕ; leq-div-succ-ℕ)
