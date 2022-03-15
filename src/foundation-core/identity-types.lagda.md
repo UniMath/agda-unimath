@@ -149,7 +149,6 @@ con-inv :
   (r : Id x z) → (Id (p ∙ q) r) → Id p (r ∙ (inv q))
 con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
-
 ### Commuting squares of identifications
 
 ```agda
