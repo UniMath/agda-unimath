@@ -46,6 +46,7 @@ open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.rational-numbers public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
+open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.unit-elements-standard-finite-types public
