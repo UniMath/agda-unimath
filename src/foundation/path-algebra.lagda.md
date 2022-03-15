@@ -321,3 +321,37 @@ interchange-y-z-concat-Id³ :
        ( y-concat-Id³ (z-concat-Id³ σ υ) (z-concat-Id³ τ ϕ)))
 interchange-y-z-concat-Id³ refl refl refl refl = inv right-unit
 ```
+
+### Commuting cubes
+
+```agda
+module _
+  {l : Level} {A : UU l} {x000 x001 x010 x100 x011 x101 x110 x111 : A}
+  where
+  
+  cube :
+    (p000̂ : Id x000 x001) (p00̂0 : Id x000 x010) (p0̂00 : Id x000 x100)
+    (p00̂1 : Id x001 x011) (p0̂01 : Id x001 x101) (p010̂ : Id x010 x011)
+    (p0̂10 : Id x010 x110) (p100̂ : Id x100 x101) (p10̂0 : Id x100 x110)
+    (p0̂11 : Id x011 x111) (p10̂1 : Id x101 x111) (p110̂ : Id x110 x111)
+    (p00̂0̂ : square p000̂ p00̂1 p00̂0 p010̂)
+    (p0̂00̂ : square p000̂ p0̂01 p0̂00 p100̂)
+    (p0̂0̂0 : square p00̂0 p0̂10 p0̂00 p10̂0)
+    (p0̂0̂1 : square p00̂1 p0̂11 p0̂01 p10̂1)
+    (p0̂10̂ : square p010̂ p0̂11 p0̂10 p110̂)
+    (p10̂0̂ : square p100̂ p10̂1 p10̂0 p110̂) → UU l
+  cube
+    p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
+    p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
+    Id ( ( ap (concat' x000 p0̂11) p00̂0̂) ∙
+         ( ( assoc p00̂0 p010̂ p0̂11) ∙
+           ( ( ap (concat p00̂0 x111) p0̂10̂) ∙
+             ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
+               ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
+                 ( assoc p0̂00 p10̂0 p110̂))))))
+       ( ( assoc p000̂ p00̂1 p0̂11) ∙
+         (  ( ap (concat p000̂ x111) p0̂0̂1) ∙
+           ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
+             ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
+               ( ( assoc p0̂00 p100̂ p10̂1) ∙
+                 ( ( ap (concat p0̂00 x111) p10̂0̂)))))))
