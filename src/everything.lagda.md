@@ -5,6 +5,7 @@ module everything where
 open import README
 open import category-theory
 open import category-theory.adjunctions-large-precategories
+open import category-theory.anafunctors
 open import category-theory.categories
 open import category-theory.equivalences-categories
 open import category-theory.equivalences-large-precategories
