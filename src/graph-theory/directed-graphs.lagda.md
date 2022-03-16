@@ -1,14 +1,20 @@
----
-title: Formalisation of the Symmetry Book
----
+# Directed graphs
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module graph-theory.directed-graphs where
 
 open import univalent-foundations public
+```
 
+## Idea
+
+A graph consists of a type of vertices equipped with a binary, type valued relation of edges.
+
+## Definition
+
+```agda
 Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Graph l1 l2 = Σ (UU l1) (λ V → V → V → UU l2)
 
@@ -21,5 +27,4 @@ module _
 
   edge-Graph : vertex-Graph → vertex-Graph → UU l2
   edge-Graph = pr2 G
-
 ```
