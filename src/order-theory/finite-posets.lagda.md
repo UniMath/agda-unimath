@@ -1,16 +1,21 @@
----
-title: Formalisation of the Symmetry Book
----
+# Finite posets
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module order-theory.finite-posets where
 
-open import univalent-combinatorics
+open import foundation.decidable-types using (is-decidable)
+open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import order-theory.posets
-open import order-theory.finite-preorders public
+open import order-theory.finite-preorders using
+  ( is-finite-preorder-Prop; is-finite-Preorder; is-prop-is-finite-Preorder;
+    is-finite-element-is-finite-Preorder; is-decidable-leq-is-finite-Preorder)
+open import order-theory.posets using
+  ( Poset; preorder-Poset; element-Poset; leq-Poset)
+
+open import univalent-combinatorics.finite-types using (is-finite)
 ```
 
 ## Finite Posets

@@ -385,12 +385,27 @@ open import linear-algebra.vectors
 
 ```agda
 open import order-theory
+open import order-theory.chains-posets
+open import order-theory.chains-preorders
+open import order-theory.decidable-subposets
+open import order-theory.decidable-subpreorders
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.largest-elements-posets
+open import order-theory.largest-elements-preorders
+open import order-theory.least-elements-posets
+open import order-theory.least-elements-preorders
+open import order-theory.locally-finite-posets
+open import order-theory.maximal-chains-posets
+open import order-theory.maximal-chains-preorders
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.subposets
+open import order-theory.subpreorders
+open import order-theory.total-posets
+open import order-theory.total-preorders
 ```
 
 ## Polytopes
