@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module graph-theory.connected-graphs where
+module graph-theory.connected-undirected-graphs where
 
 open import foundation.propositional-truncations using (type-trunc-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)

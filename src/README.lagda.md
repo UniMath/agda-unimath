@@ -345,8 +345,10 @@ open import foundation-core.universe-levels
 
 ```agda
 open import graph-theory
+open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.undirected-graphs

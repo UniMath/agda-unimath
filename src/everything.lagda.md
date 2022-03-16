@@ -80,6 +80,7 @@ open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
+open import elementary-number-theory.square-free-natural-numbers
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
@@ -313,8 +314,10 @@ open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
 open import graph-theory
+open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.undirected-graphs
