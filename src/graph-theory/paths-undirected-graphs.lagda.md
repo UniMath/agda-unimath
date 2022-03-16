@@ -31,7 +31,7 @@ module _
       cons-path-Undirected-Graph :
         (p : unordered-pair (vertex-Undirected-Graph G)) →
         (e : edge-Undirected-Graph G p) → 
-        (y : type-unordered-pair p) →
+        {y : type-unordered-pair p} →
         path-Undirected-Graph x (element-unordered-pair p y) →
         path-Undirected-Graph x (other-element-unordered-pair p y)
 ```

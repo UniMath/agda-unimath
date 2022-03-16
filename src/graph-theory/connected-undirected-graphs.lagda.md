@@ -25,8 +25,8 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  is-connected-undirected-graph : UU (l1 ⊔ l2 ⊔ lsuc lzero)
-  is-connected-undirected-graph =
+  is-connected-Undirected-Graph : UU (l1 ⊔ l2 ⊔ lsuc lzero)
+  is-connected-Undirected-Graph =
     (x y : vertex-Undirected-Graph G) →
     type-trunc-Prop (path-Undirected-Graph G x y)
 ```
