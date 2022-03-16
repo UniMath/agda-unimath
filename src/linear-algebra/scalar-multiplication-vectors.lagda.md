@@ -20,8 +20,8 @@ Any operation `B → A → A` for some type `B` of formal scalars induces an ope
 ## Definition
 
 ```agda
-mul-scalar-vector :
+scalar-mul-vec :
   {l1 l2 : Level} {B : UU l1} {A : UU l2} {n : ℕ} →
   (B → A → A) → B → vec A n → vec A n
-mul-scalar-vector μ x = map-vec (μ x)
+scalar-mul-vec μ x = map-vec (μ x)
 ```
