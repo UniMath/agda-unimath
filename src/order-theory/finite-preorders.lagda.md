@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+# Finite preorders
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

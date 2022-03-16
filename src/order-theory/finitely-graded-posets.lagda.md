@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+# Finitely graded posets
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
@@ -52,9 +50,9 @@ open import univalent-combinatorics.standard-finite-types using
   ( Fin; inl-Fin; succ-Fin; skip-zero-Fin; zero-Fin; neg-one-Fin)
 ```
 
-## Finitely Graded Posets
+## Idea
 
-The indexing number of a finitely graded poset is called its rank.
+A finitely graded poset consists of a family of types indexed by `Fin (succ-ℕ k)` equipped with an ordering relation from `Fin (inl i)` to `Fin (succ-Fin (inl i))` for each `i : Fin k`.
 
 ```agda
 
