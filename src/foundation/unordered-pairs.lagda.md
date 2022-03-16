@@ -34,6 +34,8 @@ open import foundation.structure-identity-principle using
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
+open import univalent-combinatorics.2-element-types using
+  ( 2-Element-Type; type-2-Element-Type; map-swap-2-Element-Type)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( is-set-Fin; has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
@@ -52,37 +54,44 @@ An unordered pair of elements in a type `A` consists of a 2-element type `X` and
 
 ```
 unordered-pair : {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-pair A = Σ (UU-Fin 2) (λ X → pr1 X → A)
+unordered-pair A = Σ (2-Element-Type lzero) (λ X → type-2-Element-Type X → A)
 ```
 
 ### Immediate structure on the type of unordered pairs
 
 ```agda
-type-unordered-pair : {l : Level} {A : UU l} → unordered-pair A → UU lzero
-type-unordered-pair p = pr1 (pr1 p)
+module _
+  {l : Level} {A : UU l} (p : unordered-pair A)
+  where
+  
+  2-element-type-unordered-pair : 2-Element-Type lzero
+  2-element-type-unordered-pair = pr1 p
 
-has-two-elements-type-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) →
-  mere-equiv (Fin 2) (type-unordered-pair p)
-has-two-elements-type-unordered-pair p = pr2 (pr1 p)
+  type-unordered-pair : UU lzero
+  type-unordered-pair = type-2-Element-Type 2-element-type-unordered-pair
 
-is-set-type-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) → is-set (type-unordered-pair p)
-is-set-type-unordered-pair p =
-  is-set-mere-equiv' (has-two-elements-type-unordered-pair p) (is-set-Fin 2)
+  has-two-elements-type-unordered-pair :
+    mere-equiv (Fin 2) type-unordered-pair
+  has-two-elements-type-unordered-pair = pr2 (pr1 p)
 
-has-decidable-equality-type-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) →
-  has-decidable-equality (type-unordered-pair p)
-has-decidable-equality-type-unordered-pair p =
-  has-decidable-equality-mere-equiv'
-    ( has-two-elements-type-unordered-pair p)
-    ( has-decidable-equality-Fin)
+  is-set-type-unordered-pair : is-set type-unordered-pair
+  is-set-type-unordered-pair =
+    is-set-mere-equiv' has-two-elements-type-unordered-pair (is-set-Fin 2)
 
-element-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) →
-  type-unordered-pair p → A
-element-unordered-pair p = pr2 p
+  has-decidable-equality-type-unordered-pair :
+    has-decidable-equality type-unordered-pair
+  has-decidable-equality-type-unordered-pair =
+    has-decidable-equality-mere-equiv'
+      has-two-elements-type-unordered-pair
+      has-decidable-equality-Fin
+
+  element-unordered-pair : type-unordered-pair → A
+  element-unordered-pair = pr2 p
+
+  other-element-unordered-pair : type-unordered-pair → A
+  other-element-unordered-pair x =
+    element-unordered-pair
+      ( map-swap-2-Element-Type 2-element-type-unordered-pair x)
 ```
 
 ### The predicate of being in an unodered pair
