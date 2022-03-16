@@ -1,6 +1,4 @@
----
-title: Formalisation of the Symmetry Book
----
+# Order theory
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
