@@ -1,19 +1,58 @@
----
-title: Formalisation of the Symmetry Book
----
+# Finitely graded posets
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module order-theory.finitely-graded-posets where
 
-open import order-theory.posets public
-open import univalent-combinatorics public
+open import elementary-number-theory.inequality-standard-finite-types using
+  ( leq-Fin; refl-leq-Fin; transitive-leq-Fin; leq-succ-Fin;
+    antisymmetric-leq-Fin)
+open import elementary-number-theory.modular-arithmetic using
+  ( has-no-fixed-points-succ-Fin)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
+
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using ( _↪_; map-emb; is-emb; is-emb-map-emb)
+open import foundation.empty-types using (ex-falso)
+open import foundation.equality-dependent-pair-types using (pair-eq-Σ)
+open import foundation.functions using (id; _∘_)
+open import foundation.identity-types using (Id; tr; refl; inv)
+open import foundation.injective-maps using (is-injective; is-injective-is-emb)
+open import foundation.propositional-truncations using
+  ( trunc-Prop; unit-trunc-Prop; apply-universal-property-trunc-Prop)
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
+    all-elements-equal; is-prop-all-elements-equal; prod-Prop; Π-Prop; hom-Prop)
+open import foundation.sets using
+  ( UU-Set; type-Set; is-set; is-set-type-Set; Σ-Set; Id-Prop; set-Prop)
+open import foundation.subtypes using (eq-subtype; emb-pr1)
+open import foundation.truncated-maps using (tot-emb)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( map-left-unit-law-Σ-is-contr)
+open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+
+open import order-theory.largest-elements-posets using
+  ( is-largest-element-poset-Prop; is-largest-element-Poset;
+    is-prop-is-largest-element-Poset)
+open import order-theory.least-elements-posets using
+  ( is-least-element-poset-Prop; is-least-element-Poset;
+    is-prop-is-least-element-Poset)
+open import order-theory.preorders using (Preorder)
+open import order-theory.posets using (Poset)
+open import order-theory.total-posets using (is-total-poset-Prop)
+
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( Fin-Set; is-set-Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; inl-Fin; succ-Fin; skip-zero-Fin; zero-Fin; neg-one-Fin)
 ```
 
-## Finitely Graded Posets
+## Idea
 
-The indexing number of a finitely graded poset is called its rank.
+A finitely graded poset consists of a family of types indexed by `Fin (succ-ℕ k)` equipped with an ordering relation from `Fin (inl i)` to `Fin (succ-Fin (inl i))` for each `i : Fin k`.
 
 ```agda
 
