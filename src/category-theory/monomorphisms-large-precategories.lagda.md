@@ -7,7 +7,7 @@ module category-theory.monomorphisms-large-precategories where
 
 open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-Large-Precat)
+    comp-hom-Large-Precat)
 open import foundation.embeddings using (is-emb-Prop)
 open import foundation.propositions using
   ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
@@ -28,7 +28,9 @@ module _ {α : Level → Level} {β : Level → Level → Level}
 
   is-mono-Large-Precat-Prop : UU-Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
   is-mono-Large-Precat-Prop =
-    Π-Prop (obj-Large-Precat C l3) (λ Z → is-emb-Prop (comp-Large-Precat C {X = Z} f))
+    Π-Prop
+      ( obj-Large-Precat C l3)
+      ( λ Z → is-emb-Prop (comp-hom-Large-Precat C {X = Z} f))
 
   is-mono-Large-Precat : UU (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
   is-mono-Large-Precat = type-Prop is-mono-Large-Precat-Prop
