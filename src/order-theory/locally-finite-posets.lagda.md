@@ -11,9 +11,9 @@ open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
+open import order-theory.finite-posets using (is-finite-poset-Prop)
+open import order-theory.interval-subposets using (interval-sub-Poset)
 open import order-theory.posets using (Poset; element-Poset; leq-Poset)
-
-open import univalent-combinatorics.finite-types using (is-finite-Prop)
 ```
 
 ## Idea
@@ -35,8 +35,7 @@ module _
         Π-Prop
           ( element-Poset X)
           ( λ y →
-            is-finite-Prop
-              ( Σ (element-Poset X) (λ z → leq-Poset X x z × leq-Poset X z y))))
+            is-finite-poset-Prop (interval-sub-Poset X x y)))
 
   is-locally-finite-Poset : UU (l1 ⊔ l2)
   is-locally-finite-Poset = type-Prop is-locally-finite-poset-Prop
