@@ -66,6 +66,7 @@ open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.integers
 open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.mersenne-primes
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
