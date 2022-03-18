@@ -316,8 +316,10 @@ open import foundation.weakly-constant-maps
 open import graph-theory
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
+open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.incidence-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
