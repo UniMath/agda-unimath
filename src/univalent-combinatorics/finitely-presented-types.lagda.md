@@ -26,13 +26,12 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Fin-Set)
-open import univalent-combinatorics.equivalences-standard-finite-types using
-  ( is-injective-Fin)
 open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
 open import univalent-combinatorics.finite-connected-components using
   ( has-cardinality-components; has-cardinality-components-Prop)
 open import univalent-combinatorics.finite-types using (eq-cardinality)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; is-injective-Fin)
 ```
 
 ## Idea

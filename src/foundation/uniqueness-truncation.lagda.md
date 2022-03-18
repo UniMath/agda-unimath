@@ -10,7 +10,7 @@ open import foundation.equivalences using (is-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.truncated-types using
-  ( UU-Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type)
+  ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type)
 open import foundation.truncation-levels using (𝕋)
 open import foundation.universal-property-truncation using
   ( is-truncation)
@@ -24,8 +24,8 @@ The universal property of n-truncations implies that n-truncations are determine
 ```agda
 module _
   {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1}
-  (B : UU-Truncated-Type l2 k) (f : A → type-Truncated-Type B)
-  (C : UU-Truncated-Type l3 k) (g : A → type-Truncated-Type C)
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  (C : Truncated-Type l3 k) (g : A → type-Truncated-Type C)
   {h : type-hom-Truncated-Type k B C} (H : (h ∘ f) ~ g)
   where
 

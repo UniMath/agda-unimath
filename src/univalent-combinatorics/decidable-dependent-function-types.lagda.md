@@ -7,8 +7,12 @@ module univalent-combinatorics.decidable-dependent-function-types where
 
 open import elementary-number-theory.decidable-dependent-function-types public
 
+open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
+
+open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-Prop)
+open import foundation.empty-types using (ind-empty)
 open import foundation.equivalences using (id-equiv)
 open import foundation.functions using (map-Π)
 open import foundation.global-choice using (elim-trunc-Prop-is-decidable)
@@ -16,17 +20,30 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; map-universal-property-trunc-Prop; trunc-Prop;
     unit-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using (Π-Prop)
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; equiv-count; map-equiv-count)
 open import univalent-combinatorics.finite-choice using (finite-choice)
 open import univalent-combinatorics.finite-types using (is-finite)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea
 
 We describe conditions under which dependent products are decidable.
+
+```agda
+is-decidable-Π-Fin :
+  {l1 : Level} {k : ℕ} {B : Fin k → UU l1} →
+  ((x : Fin k) → is-decidable (B x)) → is-decidable ((x : Fin k) → B x)
+is-decidable-Π-Fin {l1} {zero-ℕ} {B} d = inl ind-empty
+is-decidable-Π-Fin {l1} {succ-ℕ k} {B} d =
+  is-decidable-Π-Maybe
+    ( is-decidable-Π-Fin (λ x → d (inl x)))
+    ( d (inr star))
+```
 
 ```agda
 is-decidable-Π-count :

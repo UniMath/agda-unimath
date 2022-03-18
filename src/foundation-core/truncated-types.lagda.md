@@ -41,19 +41,19 @@ is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (Id x y)
 ### The universe of truncated types
 
 ```agda
-UU-Truncated-Type : (l : Level) → 𝕋 → UU (lsuc l)
-UU-Truncated-Type l k = Σ (UU l) (is-trunc k)
+Truncated-Type : (l : Level) → 𝕋 → UU (lsuc l)
+Truncated-Type l k = Σ (UU l) (is-trunc k)
 
 module _
   {k : 𝕋} {l : Level}
   where
   
-  type-Truncated-Type : UU-Truncated-Type l k → UU l
+  type-Truncated-Type : Truncated-Type l k → UU l
   type-Truncated-Type = pr1
 
   abstract
     is-trunc-type-Truncated-Type :
-      (A : UU-Truncated-Type l k) → is-trunc k (type-Truncated-Type A)
+      (A : Truncated-Type l k) → is-trunc k (type-Truncated-Type A)
     is-trunc-type-Truncated-Type = pr2
 ```
 
@@ -70,7 +70,7 @@ abstract
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y = is-trunc-succ-is-trunc k (H x y)
 
 truncated-type-succ-Truncated-Type :
-  (k : 𝕋) {l : Level} → UU-Truncated-Type l k → UU-Truncated-Type l (succ-𝕋 k)
+  (k : 𝕋) {l : Level} → Truncated-Type l k → Truncated-Type l (succ-𝕋 k)
 pr1 (truncated-type-succ-Truncated-Type k A) = type-Truncated-Type A
 pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
@@ -86,14 +86,14 @@ abstract
   is-trunc-Id {l} {k}= is-trunc-succ-is-trunc k
 
 Id-Truncated-Type :
-  {l : Level} {k : 𝕋} (A : UU-Truncated-Type l (succ-𝕋 k)) →
-  (x y : type-Truncated-Type A) → UU-Truncated-Type l k
+  {l : Level} {k : 𝕋} (A : Truncated-Type l (succ-𝕋 k)) →
+  (x y : type-Truncated-Type A) → Truncated-Type l k
 pr1 (Id-Truncated-Type A x y) = Id x y
 pr2 (Id-Truncated-Type A x y) = is-trunc-type-Truncated-Type A x y
 
 Id-Truncated-Type' :
-  {l : Level} {k : 𝕋} (A : UU-Truncated-Type l k) →
-  (x y : type-Truncated-Type A) → UU-Truncated-Type l k
+  {l : Level} {k : 𝕋} (A : Truncated-Type l k) →
+  (x y : type-Truncated-Type A) → Truncated-Type l k
 pr1 (Id-Truncated-Type' A x y) = Id x y
 pr2 (Id-Truncated-Type' A x y) =
   is-trunc-Id (is-trunc-type-Truncated-Type A) x y
@@ -185,9 +185,9 @@ abstract
         ( λ p → is-trunc-B (pr1 t) (tr B p (pr2 s)) (pr2 t)))
 
 Σ-Truncated-Type :
-  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type l1 k)
-  (B : type-Truncated-Type A → UU-Truncated-Type l2 k) →
-  UU-Truncated-Type (l1 ⊔ l2) k
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
 pr1 (Σ-Truncated-Type A B) =
   Σ (type-Truncated-Type A) (λ a → type-Truncated-Type (B a))
 pr2 (Σ-Truncated-Type A B) =
@@ -196,10 +196,10 @@ pr2 (Σ-Truncated-Type A B) =
     ( λ a → is-trunc-type-Truncated-Type (B a))
 
 fib-Truncated-Type :
-  {l1 l2 : Level} {k : 𝕋} (A : UU-Truncated-Type l1 k)
-  (B : UU-Truncated-Type l2 k)
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k)
   (f : type-Truncated-Type A → type-Truncated-Type B) →
-  type-Truncated-Type B → UU-Truncated-Type (l1 ⊔ l2) k
+  type-Truncated-Type B → Truncated-Type (l1 ⊔ l2) k
 fib-Truncated-Type A B f b =
   Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
 ```

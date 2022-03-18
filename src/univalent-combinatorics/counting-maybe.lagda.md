@@ -17,7 +17,7 @@ open import foundation.universe-levels using (Level; UU)
 open import univalent-combinatorics.counting using
   ( count; count-unit; number-of-elements-count;
     is-empty-is-zero-number-of-elements-count)
-open import univalent-combinatorics.counting-coproduct-types using
+open import univalent-combinatorics.coproduct-types using
   ( count-coprod)
 ```
 

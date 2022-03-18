@@ -19,6 +19,7 @@ open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
 
 ## Idea
+
 A function `f : A → B` is a monomorphism if whenever we have two functions `g h : X → A` such that `f ∘ g = f ∘ h`, then in fact `g = h`. The way to state this in Homotopy Type Theory is to say that postcomposition by `f` is an embedding.
 
 ## Definition

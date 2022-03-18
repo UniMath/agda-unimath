@@ -8,15 +8,33 @@ Welcome to the website of the `agda-unimath` formalization project.
 {-# OPTIONS --without-K --exact-split #-}
 ```
 
-## Categories
+## Category theory
 
 ```agda
-open import categories
-open import categories.adjunctions
-open import categories.categories
-open import categories.functors
-open import categories.large-categories
-open import categories.natural-transformations
+open import category-theory
+open import category-theory.adjunctions-large-precategories
+open import category-theory.anafunctors
+open import category-theory.categories
+open import category-theory.equivalences-categories
+open import category-theory.equivalences-large-precategories
+open import category-theory.equivalences-precategories
+open import category-theory.functors-categories
+open import category-theory.functors-large-precategories
+open import category-theory.functors-precategories
+open import category-theory.homotopies-natural-transformations-large-precategories
+open import category-theory.isomorphisms-categories
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-precategories
+open import category-theory.large-categories
+open import category-theory.large-precategories
+open import category-theory.monomorphisms-large-precategories
+open import category-theory.natural-isomorphisms-categories
+open import category-theory.natural-isomorphisms-large-precategories
+open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-transformations-categories
+open import category-theory.natural-transformations-large-precategories
+open import category-theory.natural-transformations-precategories
+open import category-theory.precategories
 ```
 
 ## Elementary number theory
@@ -27,17 +45,16 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
-open import elementary-number-theory.classical-finite-types
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
 open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.decidable-dependent-function-types
-open import elementary-number-theory.decidable-dependent-pair-types
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.divisibility-modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.equality-integers
@@ -75,8 +92,7 @@ open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 open import elementary-number-theory.retracts-of-natural-numbers
-open import elementary-number-theory.retracts-of-standard-finite-types
-open import elementary-number-theory.skipping-element-standard-finite-type
+open import elementary-number-theory.square-free-natural-numbers
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
@@ -84,18 +100,21 @@ open import elementary-number-theory.triangular-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.universal-property-natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
+open import elementary-number-theory.unit-elements-standard-finite-types
+open import elementary-number-theory.unit-similarity-standard-finite-types
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
 
-## Finite groups
+## Finite group theory
 
 ```agda
-open import finite-groups.abstract-quaternion-group
-open import finite-groups.concrete-quaternion-group
-open import finite-groups.finite-groups
-open import finite-groups.orbits-permutations
-open import finite-groups.transpositions
+open import finite-group-theory
+open import finite-group-theory.abstract-quaternion-group
+open import finite-group-theory.concrete-quaternion-group
+open import finite-group-theory.finite-groups
+open import finite-group-theory.orbits-permutations
+open import finite-group-theory.transpositions
 ```
 
 ## Foundation
@@ -233,6 +252,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.surjective-maps
+open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -324,35 +344,39 @@ open import foundation-core.universe-levels
 ## Graph theory
 
 ```agda
+open import graph-theory
+open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.undirected-graphs
 ```
 
-## Groups 
+## Group theory
 
 ```agda
-open import groups
-open import groups.abstract-abelian-groups
-open import groups.abstract-abelian-subgroups
-open import groups.abstract-group-actions
-open import groups.abstract-group-torsors
-open import groups.abstract-groups
-open import groups.abstract-subgroups
-open import groups.concrete-group-actions
-open import groups.concrete-groups
-open import groups.concrete-subgroups
-open import groups.examples-higher-groups
-open import groups.furstenberg-groups
-open import groups.higher-groups
-open import groups.sheargroups
+open import group-theory
+open import group-theory.abstract-abelian-groups
+open import group-theory.abstract-abelian-subgroups
+open import group-theory.abstract-group-actions
+open import group-theory.abstract-group-torsors
+open import group-theory.abstract-groups
+open import group-theory.abstract-subgroups
+open import group-theory.concrete-group-actions
+open import group-theory.concrete-groups
+open import group-theory.concrete-subgroups
+open import group-theory.examples-higher-groups
+open import group-theory.furstenberg-groups
+open import group-theory.higher-groups
+open import group-theory.sheargroups
 ```
 
 ## Linear algebra
 
 ```agda
+open import linear-algebra
 open import linear-algebra.matrices
 open import linear-algebra.vectors
 ```
@@ -361,30 +385,47 @@ open import linear-algebra.vectors
 
 ```agda
 open import order-theory
+open import order-theory.chains-posets
+open import order-theory.chains-preorders
+open import order-theory.decidable-subposets
+open import order-theory.decidable-subpreorders
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.interval-subposets
+open import order-theory.largest-elements-posets
+open import order-theory.largest-elements-preorders
+open import order-theory.least-elements-posets
+open import order-theory.least-elements-preorders
+open import order-theory.locally-finite-posets
+open import order-theory.maximal-chains-posets
+open import order-theory.maximal-chains-preorders
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.subposets
+open import order-theory.subpreorders
+open import order-theory.total-posets
+open import order-theory.total-preorders
 ```
 
 ## Polytopes
 
 ```agda
+open import polytopes
 open import polytopes.abstract-polytopes
 ```
 
-## Rings
+## Ring theory
 
 ```agda
-open import rings
-open import rings.eisenstein-integers
-open import rings.gaussian-integers
-open import rings.ideals
-open import rings.localizations-rings
-open import rings.rings-with-properties
-open import rings.rings
+open import ring-theory
+open import ring-theory.eisenstein-integers
+open import ring-theory.gaussian-integers
+open import ring-theory.ideals
+open import ring-theory.localizations-rings
+open import ring-theory.rings-with-properties
+open import ring-theory.rings
 ```
 
 ## Synthetic homotopy theory
@@ -428,10 +469,9 @@ open import tutorials.basic-agda
 open import univalent-combinatorics
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
-open import univalent-combinatorics.cartesian-product-finite-types
-open import univalent-combinatorics.coproduct-finite-types
-open import univalent-combinatorics.counting-cartesian-product-types
-open import univalent-combinatorics.counting-coproduct-types
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-function-types
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -469,6 +509,7 @@ open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.standard-finite-pruned-trees
 open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
@@ -482,9 +523,10 @@ open import univalent-combinatorics.surjective-maps
 open import univalent-foundations.isolated-points
 ```
 
-### Wild algebra
+## Wild algebra
 
 ```agda
+open import wild-algebra
 open import wild-algebra.magmas
 open import wild-algebra.universal-property-lists-wild-monoids
 open import wild-algebra.wild-groups

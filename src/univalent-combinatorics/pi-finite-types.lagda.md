@@ -94,9 +94,9 @@ open import foundation.universal-property-unit-type using
   ( equiv-dependent-universal-property-unit)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
-open import univalent-combinatorics.cartesian-product-finite-types using
+open import univalent-combinatorics.cartesian-product-types using
   ( is-finite-prod)
-open import univalent-combinatorics.coproduct-finite-types using
+open import univalent-combinatorics.coproduct-types using
   ( is-finite-coprod)
 open import univalent-combinatorics.counting using (count)
 open import univalent-combinatorics.dependent-product-finite-types using

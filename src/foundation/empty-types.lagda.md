@@ -15,7 +15,7 @@ open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.sets using (is-set; UU-Set)
 open import foundation-core.truncated-types using
-  ( is-trunc; UU-Truncated-Type)
+  ( is-trunc; Truncated-Type)
 open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; lzero; UU)
 

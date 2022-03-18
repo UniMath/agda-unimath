@@ -8,14 +8,15 @@ module elementary-number-theory where
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
-open import elementary-number-theory.classical-finite-types public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
+open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
 open import elementary-number-theory.divisibility-integers public
+open import elementary-number-theory.divisibility-modular-arithmetic public
 open import elementary-number-theory.divisibility-natural-numbers public
 open import elementary-number-theory.divisibility-standard-finite-types public
 open import elementary-number-theory.equality-integers public
@@ -45,7 +46,10 @@ open import elementary-number-theory.proper-divisors-natural-numbers public
 open import elementary-number-theory.rational-numbers public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
+open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
+open import elementary-number-theory.unit-elements-standard-finite-types public
+open import elementary-number-theory.unit-similarity-standard-finite-types public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public

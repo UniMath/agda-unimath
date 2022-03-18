@@ -1,0 +1,46 @@
+# Total preorders
+
+```agda
+{-# OPTIONS --without-K --exact-split #-}
+
+module order-theory.total-preorders where
+
+open import foundation.disjunction using (disj-Prop)
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
+open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import order-theory.preorders using
+  ( Preorder; element-Preorder; leq-preorder-Prop)
+```
+
+## Definition
+
+```agda
+module _
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  where
+
+  incident-preorder-Prop : (x y : element-Preorder X) → UU-Prop l2
+  incident-preorder-Prop x y =
+    disj-Prop (leq-preorder-Prop X x y) (leq-preorder-Prop X y x)
+
+  incident-Preorder : (x y : element-Preorder X) → UU l2
+  incident-Preorder x y = type-Prop (incident-preorder-Prop x y)
+
+  is-prop-incident-Preorder :
+    (x y : element-Preorder X) → is-prop (incident-Preorder x y)
+  is-prop-incident-Preorder x y = is-prop-type-Prop (incident-preorder-Prop x y)
+
+  is-total-preorder-Prop : UU-Prop (l1 ⊔ l2)
+  is-total-preorder-Prop =
+    Π-Prop
+      ( element-Preorder X)
+      ( λ x → Π-Prop ( element-Preorder X) (λ y → incident-preorder-Prop x y))
+
+  is-total-Preorder : UU (l1 ⊔ l2)
+  is-total-Preorder = type-Prop is-total-preorder-Prop
+
+  is-prop-is-total-Preorder : is-prop is-total-Preorder
+  is-prop-is-total-Preorder = is-prop-type-Prop is-total-preorder-Prop
+```

@@ -5,6 +5,8 @@
 
 module univalent-combinatorics.retracts-of-finite-types where
 
+open import elementary-number-theory.natural-numbers using (ℕ)
+
 open import foundation.decidable-maps using
   ( is-decidable-map; is-decidable-map-retr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -24,13 +26,25 @@ open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-decidable-subtype)
 open import univalent-combinatorics.equality-finite-types using
   ( has-decidable-equality-is-finite)
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
-## Idea
+## Properties
 
-If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite.
+### If a map `i : A → Fin k` has a retraction, then it is a decidable map
+
+```agda
+is-decidable-map-retr-Fin :
+  {l1 : Level} {k : ℕ} {A : UU l1} (i : A → Fin k) → retr i → is-decidable-map i
+is-decidable-map-retr-Fin =
+  is-decidable-map-retr has-decidable-equality-Fin
+```
+
+### If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite.
 
 ```agda
 is-decidable-map-retr-count :

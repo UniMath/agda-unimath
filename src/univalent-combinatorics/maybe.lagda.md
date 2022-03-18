@@ -11,7 +11,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import foundation.universe-levels using (Level)
 
-open import univalent-combinatorics.coproduct-finite-types using
+open import univalent-combinatorics.coproduct-types using
   ( coprod-UU-Fin-Level)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; UU-Fin; unit-UU-Fin)
