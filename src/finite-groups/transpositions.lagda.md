@@ -184,14 +184,12 @@ module _
     sec-f (inl (inr star)) = refl
     sec-f (inr star) = refl
 
+  equiv-transposition-two-elements : (x y : X) → ¬ (Id x y) → (X ≃ X)
+  equiv-transposition-two-elements x y p =
+    transposition X (pr1 (transposition-two-elements x y p)) (pr2 (transposition-two-elements x y p))
+
   left-computation-transposition-two-elements : (x y : X) (p : ¬ (Id x y)) →
-    Id
-      ( map-transposition
-        ( X)
-        ( pr1 (transposition-two-elements x y p))
-        ( pr2 (transposition-two-elements x y p))
-        ( x))
-      ( y)
+    Id (map-equiv (equiv-transposition-two-elements x y p) x) y
   left-computation-transposition-two-elements x y p
     with is-decidable-type-decidable-Prop (pr1 (transposition-two-elements x y p) x) 
   ... | inl pp =
@@ -205,13 +203,7 @@ module _
   ... | inr np = ex-falso (np (inl refl))
 
   right-computation-transposition-two-elements : (x y : X) (p : ¬ (Id x y)) →
-    Id
-      ( map-transposition
-        ( X)
-        ( pr1 (transposition-two-elements x y p))
-        ( pr2 (transposition-two-elements x y p))
-        ( y))
-      ( x)
+    Id (map-equiv (equiv-transposition-two-elements x y p) y) x
   right-computation-transposition-two-elements x y p
     with is-decidable-type-decidable-Prop (pr1 (transposition-two-elements x y p) y) 
   ... | inl pp =
@@ -226,13 +218,7 @@ module _
 
   not-computation-transposition-two-elements : (x y z : X) (p : ¬ (Id x y)) →
     ¬ (Id x z) → ¬ (Id y z) →
-    Id
-      ( map-transposition
-        ( X)
-        ( pr1 (transposition-two-elements x y p))
-        ( pr2 (transposition-two-elements x y p))
-        ( z))
-      ( z)
+    Id (map-equiv (equiv-transposition-two-elements x y p) z) z
   not-computation-transposition-two-elements x y z p q r 
     with is-decidable-type-decidable-Prop (pr1 (transposition-two-elements x y p) z) 
   ... | inl (inl h) = ex-falso (q h)

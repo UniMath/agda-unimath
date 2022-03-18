@@ -7,6 +7,7 @@ module foundation.equivalence-classes where
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.effective-maps-equivalence-relations using
   ( is-effective; is-surjective-and-effective)
 open import foundation.equivalence-relations using
@@ -21,13 +22,13 @@ open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (Id; refl; tr; inv)
 open import foundation.images using
   ( im; map-unit-im; emb-im; is-set-im; unit-im; is-surjective-map-unit-im)
 open import foundation.propositional-extensionality using
   ( eq-iff; is-set-UU-Prop)
 open import foundation.propositional-truncations using
-  ( trunc-Prop; apply-universal-property-trunc-Prop)
+  ( trunc-Prop; apply-universal-property-trunc-Prop; all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.reflecting-maps-equivalence-relations using
@@ -251,4 +252,32 @@ module _
     quotient-map-large-set-quotient R
   pr2 quotient-reflecting-map-large-set-quotient =
     apply-effectiveness-quotient-map-large-set-quotient' R
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  transitive-type-class-large-set-quotient : (P : large-set-quotient R) (a b : A) →
+    type-class-large-set-quotient R P a → type-Eq-Rel R a b →
+    type-class-large-set-quotient R P b
+  transitive-type-class-large-set-quotient P a b p q =
+    apply-universal-property-trunc-Prop
+      ( pr2 P)
+      ( class-large-set-quotient R P b)
+      ( λ (pair x T) →
+        tr
+          ( λ Z → type-class-large-set-quotient R Z b)
+          { x = quotient-map-large-set-quotient R x} {y = P}
+          ( eq-pair-Σ
+            ( T)
+            ( all-elements-equal-type-trunc-Prop _ _))
+          ( trans-Eq-Rel R
+            ( tr
+              ( λ Z → type-class-large-set-quotient R Z a)
+              { x = P} {y = quotient-map-large-set-quotient R x}
+              ( eq-pair-Σ (inv T) (all-elements-equal-type-trunc-Prop _ _))
+              ( p))
+            q))
 ```

@@ -424,6 +424,21 @@ linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
 linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
 linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
   map-coprod id (map-coprod (ap succ-ℕ) id) (linear-le-ℕ x y)
+
+le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
+le-is-nonzero-ℕ zero-ℕ H = H refl
+le-is-nonzero-ℕ (succ-ℕ n) H = concatenate-leq-le-ℕ {x = zero-ℕ} {y = n} {z = succ-ℕ n} (leq-zero-ℕ n) (succ-le-ℕ n)
+
+subtraction-le-ℕ : (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (Id (add-ℕ l n) m))
+subtraction-le-ℕ zero-ℕ m p = pair m (pair (is-nonzero-le-ℕ zero-ℕ m p) refl)
+subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (pair (pr1 (pr2 P)) (ap succ-ℕ (pr2 (pr2 P))))
+  where
+  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (Id (add-ℕ l' n) m))
+  P = subtraction-le-ℕ n m p
+
+le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → Id (add-ℕ l n) m → le-ℕ n m
+le-subtraction-ℕ zero-ℕ m l q p = tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
+le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p = le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
 ```
 
 ```agda
