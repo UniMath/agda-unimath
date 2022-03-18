@@ -6,7 +6,7 @@
 
 module finite-group-theory.orbits-permutations where
 
-open import finite-groups.transpositions using
+open import finite-group-theory.transpositions using
   ( transposition; equiv-transposition-two-elements; transposition-two-elements; not-computation-transposition-two-elements;
     right-computation-transposition-two-elements; left-computation-transposition-two-elements;
     is-involution-map-transposition)
