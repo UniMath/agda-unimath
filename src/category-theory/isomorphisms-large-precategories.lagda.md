@@ -7,10 +7,10 @@ module category-theory.isomorphisms-large-precategories where
 
 open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-Large-Precat; id-Large-Precat;
-    right-unit-law-comp-Large-Precat;
-    associative-comp-Large-Precat; comp-Large-Precat';
-    left-unit-law-comp-Large-Precat; hom-Large-Precat;
+    comp-hom-Large-Precat; id-hom-Large-Precat;
+    right-unit-law-comp-hom-Large-Precat;
+    associative-comp-hom-Large-Precat; comp-hom-Large-Precat';
+    left-unit-law-comp-hom-Large-Precat; hom-Large-Precat;
     is-set-type-hom-Large-Precat)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -39,8 +39,8 @@ is-iso-Large-Precat :
 is-iso-Large-Precat C {X = X} {Y = Y} f =
   Σ ( type-hom-Large-Precat C Y X)
     ( λ g →
-      ( Id (comp-Large-Precat C f g) (id-Large-Precat C)) ×
-      ( Id (comp-Large-Precat C g f) (id-Large-Precat C)))
+      ( Id (comp-hom-Large-Precat C f g) (id-hom-Large-Precat C)) ×
+      ( Id (comp-hom-Large-Precat C g f) (id-hom-Large-Precat C)))
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
@@ -65,14 +65,16 @@ module _
 
   is-sec-hom-inv-iso-Large-Precat :
     (f : iso-Large-Precat) →
-    Id ( comp-Large-Precat C (hom-iso-Large-Precat f) (hom-inv-iso-Large-Precat f))
-       ( id-Large-Precat C)
+    Id ( comp-hom-Large-Precat C
+         ( hom-iso-Large-Precat f)
+         ( hom-inv-iso-Large-Precat f))
+       ( id-hom-Large-Precat C)
   is-sec-hom-inv-iso-Large-Precat f = pr1 (pr2 (pr2 f))
 
   is-retr-hom-inv-iso-Large-Precat :
     (f : iso-Large-Precat) →
-    Id ( comp-Large-Precat C (hom-inv-iso-Large-Precat f) (hom-iso-Large-Precat f))
-       ( id-Large-Precat C)
+    Id ( comp-hom-Large-Precat C (hom-inv-iso-Large-Precat f) (hom-iso-Large-Precat f))
+       ( id-hom-Large-Precat C)
   is-retr-hom-inv-iso-Large-Precat f = pr2 (pr2 (pr2 f))
 ```
 
@@ -89,12 +91,12 @@ module _
   where
 
   id-iso-Large-Precat : iso-Large-Precat C X X
-  pr1 id-iso-Large-Precat = id-Large-Precat C
-  pr1 (pr2 id-iso-Large-Precat) = id-Large-Precat C
+  pr1 id-iso-Large-Precat = id-hom-Large-Precat C
+  pr1 (pr2 id-iso-Large-Precat) = id-hom-Large-Precat C
   pr1 (pr2 (pr2 id-iso-Large-Precat)) =
-    left-unit-law-comp-Large-Precat C (id-Large-Precat C)
+    left-unit-law-comp-hom-Large-Precat C (id-hom-Large-Precat C)
   pr2 (pr2 (pr2 id-iso-Large-Precat)) =
-    left-unit-law-comp-Large-Precat C (id-Large-Precat C)
+    left-unit-law-comp-hom-Large-Precat C (id-hom-Large-Precat C)
 ```
 
 ### Equalities give rise to isomorphisms
@@ -138,17 +140,17 @@ module _
         prod-Prop
           ( Id-Prop
             ( hom-Large-Precat C Y Y)
-            ( comp-Large-Precat C f g)
-            ( id-Large-Precat C))
+            ( comp-hom-Large-Precat C f g)
+            ( id-hom-Large-Precat C))
           ( Id-Prop
             ( hom-Large-Precat C X X)
-            ( comp-Large-Precat C g f)
-            ( id-Large-Precat C)))
-      ( ( inv (right-unit-law-comp-Large-Precat C g)) ∙
-        ( ( ap ( comp-Large-Precat C g) (inv p')) ∙
-          ( ( inv (associative-comp-Large-Precat C g f g')) ∙
-            ( ( ap ( comp-Large-Precat' C g') q) ∙
-              ( left-unit-law-comp-Large-Precat C g')))))
+            ( comp-hom-Large-Precat C g f)
+            ( id-hom-Large-Precat C)))
+      ( ( inv (right-unit-law-comp-hom-Large-Precat C g)) ∙
+        ( ( ap ( comp-hom-Large-Precat C g) (inv p')) ∙
+          ( ( inv (associative-comp-hom-Large-Precat C g f g')) ∙
+            ( ( ap ( comp-hom-Large-Precat' C g') q) ∙
+              ( left-unit-law-comp-hom-Large-Precat C g')))))
 
   is-prop-is-iso-Large-Precat :
     (f : type-hom-Large-Precat C X Y) → is-prop (is-iso-Large-Precat C f)

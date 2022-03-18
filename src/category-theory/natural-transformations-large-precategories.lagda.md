@@ -11,9 +11,9 @@ open import category-theory.functors-large-precategories using
     hom-functor-Large-Precat)
 open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-Large-Precat; id-Large-Precat;
-    left-unit-law-comp-Large-Precat;
-    right-unit-law-comp-Large-Precat)
+    comp-hom-Large-Precat; id-hom-Large-Precat;
+    left-unit-law-comp-hom-Large-Precat;
+    right-unit-law-comp-hom-Large-Precat)
 open import foundation.identity-types using (Id; _∙_; inv)
 open import foundation.universe-levels using (UU; Level)
 ```
@@ -38,7 +38,7 @@ square-Large-Precat :
   (right : type-hom-Large-Precat C B Y) (bottom : type-hom-Large-Precat C X Y) →
   UU (βC l1 l4)
 square-Large-Precat C top left right bottom =
-  Id (comp-Large-Precat C bottom left) (comp-Large-Precat C right top)
+  Id (comp-hom-Large-Precat C bottom left) (comp-hom-Large-Precat C right top)
 
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
@@ -80,9 +80,11 @@ id-natural-transformation-Large-Precat :
   (F : functor-Large-Precat C D γF) → natural-transformation-Large-Precat F F
 obj-natural-transformation-Large-Precat
   (id-natural-transformation-Large-Precat {D = D} F) X =
-    id-Large-Precat D
+    id-hom-Large-Precat D
 coherence-square-natural-transformation-Large-Precat
   (id-natural-transformation-Large-Precat {D = D} F) f =
-    ( left-unit-law-comp-Large-Precat D (hom-functor-Large-Precat F f)) ∙
-    ( inv (right-unit-law-comp-Large-Precat D (hom-functor-Large-Precat F f)))
+    ( left-unit-law-comp-hom-Large-Precat D (hom-functor-Large-Precat F f)) ∙
+    ( inv
+      ( right-unit-law-comp-hom-Large-Precat D
+        ( hom-functor-Large-Precat F f)))
 ```

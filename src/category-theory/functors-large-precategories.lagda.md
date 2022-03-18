@@ -8,7 +8,7 @@ module category-theory.functors-large-precategories where
 open import Agda.Primitive using (Setω)
 open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-Large-Precat; id-Large-Precat)
+    comp-hom-Large-Precat; id-hom-Large-Precat)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl; ap; _∙_)
 open import foundation.universe-levels using (Level)
@@ -48,14 +48,14 @@ module _
         {l1 l2 l3 : Level} {X : obj-Large-Precat C l1}
         {Y : obj-Large-Precat C l2} {Z : obj-Large-Precat C l3}
         (g : type-hom-Large-Precat C Y Z) (f : type-hom-Large-Precat C X Y) →
-        Id ( hom-functor-Large-Precat (comp-Large-Precat C g f))
-           ( comp-Large-Precat D
+        Id ( hom-functor-Large-Precat (comp-hom-Large-Precat C g f))
+           ( comp-hom-Large-Precat D
              ( hom-functor-Large-Precat g)
              ( hom-functor-Large-Precat f))
       preserves-id-functor-Large-Precat :
         {l1 : Level} {X : obj-Large-Precat C l1} →
-        Id ( hom-functor-Large-Precat (id-Large-Precat C {X = X}))
-           ( id-Large-Precat D {X = obj-functor-Large-Precat X})
+        Id ( hom-functor-Large-Precat (id-hom-Large-Precat C {X = X}))
+           ( id-hom-Large-Precat D {X = obj-functor-Large-Precat X})
 
   open functor-Large-Precat public
 ```

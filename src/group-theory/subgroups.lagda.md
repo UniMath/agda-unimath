@@ -1,17 +1,36 @@
----
-title: Formalisation of the Symmetry Book
----
-
+# Subgroups
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.abstract-subgroups where
+module group-theory.subgroups where
 
-open import group-theory.abstract-groups public
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (is-emb)
+open import foundation.equivalences using (map-inv-is-equiv)
+open import foundation.identity-types using (Id; refl)
+open import foundation.propositional-extensionality using (is-set-UU-Prop)
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
+    is-prop-function-type; is-prop-prod; is-prop-is-equiv)
+open import foundation.sets using (is-set; is-set-function-type; UU-Set)
+open import foundation.subtypes using (is-emb-pr1)
+open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
-{- Subsets of groups -}
+open import group-theory.groups using
+  ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
+    assoc-mul-Group; left-unit-law-Group; right-unit-law-Group;
+    left-inverse-law-Group; right-inverse-law-Group)
+open import group-theory.homomorphisms-groups using
+  ( preserves-mul-Group; type-hom-Group)
+```
 
+## Definitions
+
+### Subsets of subgroups
+
+```agda
 subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
 subset-Group l G = type-Group G → UU-Prop l
@@ -20,9 +39,11 @@ is-set-subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
 is-set-subset-Group l G =
   is-set-function-type is-set-UU-Prop
+```
 
-{- Defining subgroups -}
+### Subgroups
 
+```agda
 contains-unit-subset-Group :
   {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) → UU l2
 contains-unit-subset-Group G P = type-Prop (P (unit-Group G))
@@ -77,8 +98,6 @@ is-prop-is-subgroup-Group G P =
       ( is-prop-closed-under-mul-subset-Group G P)
       ( is-prop-closed-under-inv-subset-Group G P))
 
-{- Introducing the type of all subgroups of a group G -}
-
 Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
 Subgroup l G = Σ (type-Group G → UU-Prop l) (is-subgroup-Group G)
@@ -122,9 +141,11 @@ closed-under-inv-Subgroup :
   {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
   closed-under-inv-subset-Group G (subset-Subgroup G P)
 closed-under-inv-Subgroup G P = pr2 (pr2 (is-subgroup-Subgroup G P))
+```
 
-{- Given a subgroup, we construct a group -}
+### The underlying group of a subgroup
 
+```agda
 type-group-Subgroup :
   {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) → UU (l1 ⊔ l2)
 type-group-Subgroup G P =
@@ -234,10 +255,11 @@ group-Subgroup G P =
         ( pair
           ( left-inverse-law-group-Subgroup G P)
           ( right-inverse-law-group-Subgroup G P))))
+```
 
-{- We show that the inclusion from group-Subgroup G P → G is a group 
-   homomorphism -}
+### The inclusion of the underlying group of a subgroup into the ambient group
 
+```agda
 preserves-mul-incl-group-Subgroup :
   { l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
   preserves-mul-Group (group-Subgroup G P) G (incl-group-Subgroup G P)
@@ -248,21 +270,4 @@ hom-group-Subgroup :
   type-hom-Group (group-Subgroup G P) G
 hom-group-Subgroup G P =
   pair (incl-group-Subgroup G P) (preserves-mul-incl-group-Subgroup G P)
-
-{- We define another type of subgroups of G as the type of group inclusions -}
-
-emb-Group-Slice :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-emb-Group-Slice l G =
-  Σ ( Group l) (λ H → emb-Group H G)
-
-emb-group-slice-Subgroup :
-  { l1 l2 : Level} (G : Group l1) →
-  Subgroup l2 G → emb-Group-Slice (l1 ⊔ l2) G
-emb-group-slice-Subgroup G P =
-  pair
-    ( group-Subgroup G P)
-    ( pair
-      ( hom-group-Subgroup G P)
-      ( is-emb-incl-group-Subgroup G P))
 ```
