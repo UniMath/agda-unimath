@@ -1,15 +1,45 @@
----
-title: Formalisation of the Symmetry Book
----
+# Finite preorders
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module order-theory.finite-preorders where
 
-open import univalent-combinatorics
+open import elementary-number-theory.natural-numbers using (ℕ)
 
-open import order-theory.preorders public
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.decidable-equality using (has-decidable-equality)
+open import foundation.decidable-propositions using
+  ( decidable-Prop; type-decidable-Prop; is-decidable-prop;
+    is-decidable-prop-type-decidable-Prop; is-decidable-type-decidable-Prop;
+    is-prop-type-decidable-Prop)
+open import foundation.decidable-types using (is-decidable-Prop; is-decidable)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.identity-types using (Id)
+open import foundation.mere-equivalences using (mere-equiv)
+open import foundation.propositions using
+  ( UU-Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.sets using (is-set)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
+
+open import order-theory.decidable-subpreorders using
+  ( element-decidable-sub-Preorder; eq-element-decidable-sub-Preorder;
+    leq-decidable-sub-preorder-Prop; leq-decidable-sub-Preorder;
+    is-prop-leq-decidable-sub-Preorder; refl-leq-decidable-sub-Preorder;
+    transitive-leq-decidable-sub-Preorder)
+open import order-theory.preorders using
+  ( Preorder; element-Preorder; leq-preorder-Prop; leq-Preorder;
+    is-prop-leq-Preorder; refl-leq-Preorder; transitive-leq-Preorder)
+
+open import univalent-combinatorics.decidable-subtypes using
+  ( is-finite-decidable-subtype)
+open import univalent-combinatorics.equality-finite-types using
+  ( is-set-is-finite; has-decidable-equality-is-finite)
+open import univalent-combinatorics.finite-types using
+  ( is-finite-Prop; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽;
+    number-of-elements-is-finite; mere-equiv-is-finite)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin)
 ```
 
 ## Finite preorders

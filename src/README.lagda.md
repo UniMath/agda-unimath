@@ -78,6 +78,7 @@ open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.integers
 open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.mersenne-primes
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
@@ -347,10 +348,17 @@ open import foundation-core.universe-levels
 open import graph-theory
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
+open import graph-theory.edge-coloured-undirected-graphs
+open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.incidence-undirected-graphs
+open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
+open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
 
@@ -400,12 +408,28 @@ open import linear-algebra.vectors
 
 ```agda
 open import order-theory
+open import order-theory.chains-posets
+open import order-theory.chains-preorders
+open import order-theory.decidable-subposets
+open import order-theory.decidable-subpreorders
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.interval-subposets
+open import order-theory.largest-elements-posets
+open import order-theory.largest-elements-preorders
+open import order-theory.least-elements-posets
+open import order-theory.least-elements-preorders
+open import order-theory.locally-finite-posets
+open import order-theory.maximal-chains-posets
+open import order-theory.maximal-chains-preorders
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.subposets
+open import order-theory.subpreorders
+open import order-theory.total-posets
+open import order-theory.total-preorders
 ```
 
 ## Polytopes

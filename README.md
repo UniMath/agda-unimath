@@ -2,13 +2,17 @@
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment)
 
-This repository is for a formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics could be useful, informative resources for mathematicians. The `agda-unimath` library is designed to work towards this goal. We warmly welcome any contributions. If you would like to contribute, please join the `#unimath` stream of the Agda community chat at
-
-[![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
+This repository is for a formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics could be useful, informative resources for mathematicians. The `agda-unimath` library is designed to work towards this goal.
 
 This library is based on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
+
+## Contributions and chat
+
+The `agda-unimath` library is a new Agda library for univalent mathematics. We warmly welcome any contributions. To chat with us about anything related to univalent mathematics or the library, please join the `#unimath` stream of the Agda community chat at
+
+[![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
 
 ## Design of the library
 
