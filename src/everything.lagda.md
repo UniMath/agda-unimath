@@ -316,10 +316,15 @@ open import foundation.weakly-constant-maps
 open import graph-theory
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
+open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
+open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 open import group-theory
 open import group-theory.abstract-abelian-groups
