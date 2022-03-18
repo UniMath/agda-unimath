@@ -23,7 +23,7 @@ open import group-theory.groups using
     assoc-mul-Group; left-unit-law-Group; right-unit-law-Group;
     left-inverse-law-Group; right-inverse-law-Group)
 open import group-theory.homomorphisms-groups using
-  ( preserves-mul-Group; type-hom-Group; emb-Group)
+  ( preserves-mul-Group; type-hom-Group)
 ```
 
 ## Definitions
@@ -270,23 +270,4 @@ hom-group-Subgroup :
   type-hom-Group (group-Subgroup G P) G
 hom-group-Subgroup G P =
   pair (incl-group-Subgroup G P) (preserves-mul-incl-group-Subgroup G P)
-```
-
-### The type of all embeddings into a group
-
-```agda
-emb-Group-Slice :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-emb-Group-Slice l G =
-  Σ ( Group l) (λ H → emb-Group H G)
-
-emb-group-slice-Subgroup :
-  { l1 l2 : Level} (G : Group l1) →
-  Subgroup l2 G → emb-Group-Slice (l1 ⊔ l2) G
-emb-group-slice-Subgroup G P =
-  pair
-    ( group-Subgroup G P)
-    ( pair
-      ( hom-group-Subgroup G P)
-      ( is-emb-incl-group-Subgroup G P))
 ```

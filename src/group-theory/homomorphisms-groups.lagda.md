@@ -8,7 +8,6 @@ module group-theory.homomorphisms-groups where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.identity-types using (Id; inv; _∙_; ap)
 open import foundation.sets using (is-set; UU-Set)
@@ -47,8 +46,6 @@ module _
       ( semigroup-Group G)
       ( semigroup-Group H)
 
-  {- Bureaucracy of group homomorphisms. -}
-  
   map-hom-Group : type-hom-Group → type-Group G → type-Group H
   map-hom-Group = pr1
 
@@ -59,65 +56,18 @@ module _
       ( semigroup-Group H)
       ( map-hom-Group f)
   preserves-mul-hom-Group = pr2
+```
 
-  emb-Group : UU (l1 ⊔ l2)
-  emb-Group = Σ type-hom-Group (λ h → is-emb (map-hom-Group h))
+### The identity group homomorphism
 
-  {- We characterize the identity type of the group homomorphisms. -}
-
-  htpy-hom-Group : (f g : type-hom-Group) → UU (l1 ⊔ l2)
-  htpy-hom-Group = htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
-
-  refl-htpy-hom-Group : (f : type-hom-Group) → htpy-hom-Group f f
-  refl-htpy-hom-Group =
-    refl-htpy-hom-Semigroup
-      ( semigroup-Group G)
-      ( semigroup-Group H)
-
-  htpy-eq-hom-Group : (f g : type-hom-Group) → Id f g → htpy-hom-Group f g
-  htpy-eq-hom-Group =
-    htpy-eq-hom-Semigroup
-      ( semigroup-Group G)
-      ( semigroup-Group H)
-
-  abstract
-    is-contr-total-htpy-hom-Group :
-      ( f : type-hom-Group) →
-      is-contr (Σ type-hom-Group (htpy-hom-Group f))
-    is-contr-total-htpy-hom-Group =
-      is-contr-total-htpy-hom-Semigroup
-        ( semigroup-Group G)
-        ( semigroup-Group H)
-
-  abstract
-    is-equiv-htpy-eq-hom-Group :
-      (f g : type-hom-Group) → is-equiv (htpy-eq-hom-Group f g)
-    is-equiv-htpy-eq-hom-Group =
-      is-equiv-htpy-eq-hom-Semigroup
-        ( semigroup-Group G)
-        ( semigroup-Group H)
-
-  extensionality-hom-Group : (f g : type-hom-Group) → Id f g ≃ htpy-hom-Group f g
-  pr1 (extensionality-hom-Group f g) = htpy-eq-hom-Group f g
-  pr2 (extensionality-hom-Group f g) = is-equiv-htpy-eq-hom-Group f g
-
-  eq-htpy-hom-Group : {f g : type-hom-Group} → htpy-hom-Group f g → Id f g
-  eq-htpy-hom-Group =
-    eq-htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
-
-  is-set-type-hom-Group : is-set type-hom-Group
-  is-set-type-hom-Group =
-    is-set-type-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
-
-  hom-Group : UU-Set (l1 ⊔ l2)
-  pr1 hom-Group = type-hom-Group
-  pr2 hom-Group = is-set-type-hom-Group
-
-{- We define the precategory of groups -}
-
+```agda
 id-hom-Group : {l : Level} (G : Group l) → type-hom-Group G G
 id-hom-Group G = id-hom-Semigroup (semigroup-Group G)
+```
 
+### Composition of group homomorphisms
+
+```agda
 comp-hom-Group :
   {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3) →
   type-hom-Group H K → type-hom-Group G H → type-hom-Group G K
@@ -126,7 +76,70 @@ comp-hom-Group G H K =
     ( semigroup-Group G)
     ( semigroup-Group H)
     ( semigroup-Group K)
+```
 
+## Properties
+
+### Characterization of the identity type of group homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2)
+  where
+
+  htpy-hom-Group : (f g : type-hom-Group G H) → UU (l1 ⊔ l2)
+  htpy-hom-Group = htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  refl-htpy-hom-Group : (f : type-hom-Group G H) → htpy-hom-Group f f
+  refl-htpy-hom-Group =
+    refl-htpy-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+
+  htpy-eq-hom-Group : (f g : type-hom-Group G H) → Id f g → htpy-hom-Group f g
+  htpy-eq-hom-Group =
+    htpy-eq-hom-Semigroup
+      ( semigroup-Group G)
+      ( semigroup-Group H)
+
+  abstract
+    is-contr-total-htpy-hom-Group :
+      ( f : type-hom-Group G H) →
+      is-contr (Σ (type-hom-Group G H) (htpy-hom-Group f))
+    is-contr-total-htpy-hom-Group =
+      is-contr-total-htpy-hom-Semigroup
+        ( semigroup-Group G)
+        ( semigroup-Group H)
+
+  abstract
+    is-equiv-htpy-eq-hom-Group :
+      (f g : type-hom-Group G H) → is-equiv (htpy-eq-hom-Group f g)
+    is-equiv-htpy-eq-hom-Group =
+      is-equiv-htpy-eq-hom-Semigroup
+        ( semigroup-Group G)
+        ( semigroup-Group H)
+
+  extensionality-hom-Group :
+    (f g : type-hom-Group G H) → Id f g ≃ htpy-hom-Group f g
+  pr1 (extensionality-hom-Group f g) = htpy-eq-hom-Group f g
+  pr2 (extensionality-hom-Group f g) = is-equiv-htpy-eq-hom-Group f g
+
+  eq-htpy-hom-Group : {f g : type-hom-Group G H} → htpy-hom-Group f g → Id f g
+  eq-htpy-hom-Group =
+    eq-htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  is-set-type-hom-Group : is-set (type-hom-Group G H)
+  is-set-type-hom-Group =
+    is-set-type-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  hom-Group : UU-Set (l1 ⊔ l2)
+  pr1 hom-Group = type-hom-Group G H
+  pr2 hom-Group = is-set-type-hom-Group
+```
+
+### Associativity of composition of group homomorphisms
+
+```agda
 associative-comp-hom-Group :
   {l1 l2 l3 l4 : Level}
   (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
@@ -139,7 +152,11 @@ associative-comp-hom-Group G H K L =
     ( semigroup-Group H)
     ( semigroup-Group K)
     ( semigroup-Group L)
+```
 
+### The left and right unit laws for composition of group homomorphisms
+
+```agda
 left-unit-law-comp-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H) →
   Id (comp-hom-Group G H H (id-hom-Group H) f) f
@@ -157,7 +174,7 @@ right-unit-law-comp-hom-Group G H =
     ( semigroup-Group H)
 ```
 
-## Properties
+### Group homomorphisms preserve the unit element
 
 ```agda
 preserves-unit :
@@ -194,9 +211,11 @@ abstract
                   ( map-hom-Group G H f x))
               ( left-unit-law-Group G (unit-Group G))) ∙
             ( left-inverse-law-Group H (map-hom-Group G H f (unit-Group G)))))))
+```
 
-{- We show that group homomorphisms preserve inverses. -}
+### Group homomorphisms preserve inverses
 
+```agda
 preserves-inverses :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) →
   ( f : type-hom-Group G H) → UU (l1 ⊔ l2)
@@ -234,7 +253,11 @@ abstract
     ( f : type-hom-Group G H) → preserves-inverses G H f
   preserves-inverses-hom-Group G H f =
     preserves-inverses-hom-Group' G H f (preserves-unit-hom-Group G H f)
+```
 
+### Group homomorphisms preserve all group structure
+
+```agda
 hom-Group' :
   { l1 l2 : Level} (G : Group l1) (H : Group l2) → UU (l1 ⊔ l2)
 hom-Group' G H =
