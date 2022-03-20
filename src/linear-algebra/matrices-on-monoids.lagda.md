@@ -4,6 +4,14 @@
 {-# OPTIONS --without-K --exact-split #-}
 
 module linear-algebra.matrices-on-monoids where
+
+open import elementary-number-theory.natural-numbers
+
+open import foundation.identity-types
+open import foundation.universe-levels
+
+open import linear-algebra.matrices
+open import linear-algebra.matrices-on-magmas
 ```
 
 ```agda

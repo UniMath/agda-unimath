@@ -18,14 +18,21 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; is-emb-comp')
 open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
-open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.equivalences using
+  (is-equiv; _≃_; is-equiv-has-inverse; map-equiv; _∘e_; equiv-ap)
+open import foundation.functions using (_∘_; id)
+open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl; tr; ap)
+open import foundation.homotopies using (_~_)
+open import foundation.identity-types using
+  ( Id; refl; tr; ap; equiv-concat; inv)
 open import foundation.injective-maps using (is-emb-is-injective)
+open import foundation.maybe using (Maybe; maybe-structure)
+open import foundation.negation using (¬; equiv-neg)
 open import foundation.propositions using
   ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop;
-    is-prop-is-inhabited; is-prop-Π)
+    is-prop-is-inhabited; is-prop-Π; eq-is-prop)
 open import foundation.sets using (is-set)
 open import foundation.subtypes using (eq-subtype; is-emb-pr1; equiv-ap-pr1)
 open import foundation.type-arithmetic-unit-type using
@@ -38,7 +45,9 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
 
 A point `a : A` is considered to be isolated if `Id a x` is decidable for any `x`.
 
-## Definition
+## Definitions
+
+### Isolated points
 
 ```agda
 is-isolated :
@@ -48,6 +57,15 @@ is-isolated {l1} {X} a = (x : X) → is-decidable (Id a x)
 isolated-point :
   {l1 : Level} (X : UU l1) → UU l1
 isolated-point X = Σ X is-isolated
+```
+
+### Complements of isolated points
+
+```agda
+complement-isolated-point :
+  {l1 : Level} (X : UU l1) → isolated-point X → UU l1
+complement-isolated-point X x =
+  Σ X (λ y → ¬ (Id (pr1 x) y))
 ```
 
 ## Properties
@@ -217,4 +235,95 @@ decidable-emb-isolated-point {l1} {A} a =
           ( is-set-isolated-point A)
            λ { {star} {star} p → refl}))
       ( λ x → is-decidable-prod is-decidable-unit (pr2 a x)))
+```
+
+### Types with isolated points can be equipped with a Maybe-structure
+
+```agda
+map-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  Maybe (complement-isolated-point X x) → X
+map-maybe-structure-isolated-point X (pair x d) (inl (pair y f)) = y
+map-maybe-structure-isolated-point X (pair x d) (inr star) = x
+
+cases-map-inv-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  (y : X) → is-decidable (Id (pr1 x) y) → Maybe (complement-isolated-point X x)
+cases-map-inv-maybe-structure-isolated-point X (pair x dx) y (inl p) =
+  inr star
+cases-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
+  inl (pair y f)
+
+map-inv-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  X → Maybe (complement-isolated-point X x)
+map-inv-maybe-structure-isolated-point X (pair x d) y =
+  cases-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
+
+cases-issec-map-inv-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  (y : X) (d : is-decidable (Id (pr1 x) y)) →
+  Id ( map-maybe-structure-isolated-point X x
+       ( cases-map-inv-maybe-structure-isolated-point X x y d))
+     ( y)
+cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) .x (inl refl) =
+  refl
+cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
+  refl
+
+issec-map-inv-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  ( map-maybe-structure-isolated-point X x ∘
+    map-inv-maybe-structure-isolated-point X x) ~ id
+issec-map-inv-maybe-structure-isolated-point X (pair x d) y =
+  cases-issec-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
+
+isretr-map-inv-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  ( map-inv-maybe-structure-isolated-point X x ∘
+    map-maybe-structure-isolated-point X x) ~ id
+isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inl (pair y f)) =
+  ap ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) y)
+     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx y)))
+isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inr star) =
+  ap ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) x)
+     { x = dx (map-maybe-structure-isolated-point X (pair x dx) (inr star))}
+     { y = inl refl}
+     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx x)))
+
+is-equiv-map-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  is-equiv (map-maybe-structure-isolated-point X x)
+is-equiv-map-maybe-structure-isolated-point X x =
+  is-equiv-has-inverse
+    ( map-inv-maybe-structure-isolated-point X x)
+    ( issec-map-inv-maybe-structure-isolated-point X x)
+    ( isretr-map-inv-maybe-structure-isolated-point X x)
+
+equiv-maybe-structure-isolated-point :
+  {l1 : Level} (X : UU l1) (x : isolated-point X) →
+  Maybe (complement-isolated-point X x) ≃ X
+equiv-maybe-structure-isolated-point X x =
+  pair ( map-maybe-structure-isolated-point X x)
+       ( is-equiv-map-maybe-structure-isolated-point X x)
+
+maybe-structure-isolated-point :
+  {l1 : Level} {X : UU l1} → isolated-point X → maybe-structure X
+maybe-structure-isolated-point {l1} {X} x =
+  pair ( complement-isolated-point X x)
+       ( equiv-maybe-structure-isolated-point X x)
+```
+
+```agda
+equiv-complement-isolated-point :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-point X)
+  (y : isolated-point Y) (p : Id (map-equiv e (pr1 x)) (pr1 y)) →
+  complement-isolated-point X x ≃ complement-isolated-point Y y
+equiv-complement-isolated-point e x y p =
+  equiv-Σ
+    ( λ z → ¬ (Id (pr1 y) z))
+    ( e)
+    ( λ z →
+      equiv-neg
+        ( equiv-concat (inv p) (map-equiv e z) ∘e (equiv-ap e (pr1 x) z)))
 ```

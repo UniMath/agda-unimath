@@ -7,7 +7,18 @@ title: Formalisation of the Symmetry Book
 
 module ring-theory.rings-with-properties where
 
-open import ring-theory.rings public
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
+
+open import ring-theory.isomorphisms-rings
+open import ring-theory.ring-homomorphisms
+open import ring-theory.rings
 
 --------------------------------------------------------------------------------
 

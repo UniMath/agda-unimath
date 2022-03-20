@@ -7,7 +7,32 @@ title: Formalisation of the Symmetry Book
 
 module synthetic-homotopy-theory.26-descent where
 
-open import synthetic-homotopy-theory.25-cubical-diagrams public
+open import foundation.commuting-squares
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.equality-dependent-function-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.pullbacks
+open import foundation.sections
+open import foundation.structure-identity-principle
+open import foundation.univalence
+open import foundation.universal-property-pullbacks
+open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.23-pullbacks
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.25-cubical-diagrams
 
 -- Section 18.1 Five equivalent characterizations of pushouts
 

@@ -15,7 +15,7 @@ open import foundation.path-algebra using
   ( horizontal-concat-Id²)
 open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
 
-open import group-theory.abstract-groups using (preserves-mul)
+open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
 open import synthetic-homotopy-theory.pointed-maps using (_→*_)
 open import synthetic-homotopy-theory.pointed-types using

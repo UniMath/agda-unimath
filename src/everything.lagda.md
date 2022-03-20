@@ -333,9 +333,8 @@ open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 open import group-theory
 open import group-theory.abelian-groups
-open import group-theory.abstract-abelian-subgroups
+open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
-open import group-theory.abstract-subgroups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
@@ -343,6 +342,7 @@ open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.concrete-subgroups
 open import group-theory.conjugation
+open import group-theory.embeddings-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
 open import group-theory.examples-higher-groups
@@ -370,8 +370,10 @@ open import group-theory.principal-group-actions
 open import group-theory.semigroups
 open import group-theory.sheargroups
 open import group-theory.stabilizer-groups
+open import group-theory.subgroups
 open import group-theory.substitution-functor-group-actions
 open import group-theory.symmetric-groups
+open import group-theory.transitive-group-actions
 open import labels
 open import linear-algebra
 open import linear-algebra.diagonal-vectors
@@ -455,6 +457,7 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-function-types
@@ -463,6 +466,7 @@ open import univalent-combinatorics.counting-fibers-of-maps
 open import univalent-combinatorics.counting-function-types
 open import univalent-combinatorics.counting-maybe
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.cubes
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-subtypes
@@ -474,6 +478,7 @@ open import univalent-combinatorics.embeddings-standard-finite-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.equivalences-cubes
 open import univalent-combinatorics.equivalences-standard-finite-types
 open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.fibers-of-maps-between-finite-types
@@ -488,6 +493,7 @@ open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
+open import univalent-combinatorics.orientations-cubes
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types
@@ -499,8 +505,6 @@ open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
-open import univalent-foundations
-open import univalent-foundations.isolated-points
 open import wild-algebra
 open import wild-algebra.magmas
 open import wild-algebra.universal-property-lists-wild-monoids

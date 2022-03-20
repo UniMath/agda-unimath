@@ -1,14 +1,21 @@
----
-title: Formalisation of the Symmetry Book
----
+# Furstenberg groups
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module group-theory.furstenberg-groups where
 
-open import group-theory.abstract-groups public
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (Σ)
+open import foundation.identity-types using (Id)
+open import foundation.propositional-truncations using (type-trunc-Prop)
+open import foundation.sets using (UU-Set; type-Set)
+open import foundation.universe-levels using (Level; UU; lsuc)
+```
 
+## Definition
+
+```agda
 Furstenberg-Group : (l : Level) → UU (lsuc l)
 Furstenberg-Group l =
   Σ ( UU-Set l)

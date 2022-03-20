@@ -7,7 +7,27 @@ title: Formalisation of the Symmetry Book
 
 module synthetic-homotopy-theory.26-id-pushout where
 
-open import synthetic-homotopy-theory.26-descent public
+open import foundation.cartesian-product-types
+open import foundation.commuting-squares
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universal-property-identity-types
+open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.23-pullbacks
+open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.25-cubical-diagrams
+open import synthetic-homotopy-theory.26-descent
 
 -- Section 19.1 Characterizing families of maps over pushouts
 

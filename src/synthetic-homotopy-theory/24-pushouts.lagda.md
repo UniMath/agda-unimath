@@ -7,7 +7,31 @@ title: Formalisation of the Symmetry Book
 
 module synthetic-homotopy-theory.24-pushouts where
 
-open import synthetic-homotopy-theory.23-pullbacks public
+open import elementary-number-theory.natural-numbers
+
+open import foundation.booleans
+open import foundation.constant-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.pullbacks
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.unit-type
+open import foundation.universal-property-pullbacks
+open import foundation.universal-property-unit-type
+open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.23-pullbacks
 
 -- Section 14.1
 

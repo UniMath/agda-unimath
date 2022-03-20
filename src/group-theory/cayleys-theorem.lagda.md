@@ -13,11 +13,12 @@ open import foundation.identity-types using (inv; _∙_)
 open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.universe-levels using (Level)
 
-open import group-theory.abstract-groups using
+open import group-theory.embeddings-groups using (emb-Group)
+open import group-theory.groups using
   ( Group; type-Group; set-Group; equiv-mul-Group; assoc-mul-Group;
     right-unit-law-Group; unit-Group; is-set-type-Group)
 open import group-theory.homomorphisms-groups using
-  ( preserves-mul-Group; type-hom-Group; emb-Group)
+  ( preserves-mul-Group; type-hom-Group)
 open import group-theory.symmetric-groups using (symmetric-Group)
 ```
 

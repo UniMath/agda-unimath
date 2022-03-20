@@ -7,7 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module graph-theory.reflexive-graphs where
 
-open import univalent-foundations public
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 Reflexive-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Reflexive-Graph l1 l2 =

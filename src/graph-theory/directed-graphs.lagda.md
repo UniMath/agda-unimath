@@ -5,7 +5,8 @@
 
 module graph-theory.directed-graphs where
 
-open import univalent-foundations public
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 ```
 
 ## Idea

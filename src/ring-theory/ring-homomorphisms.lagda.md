@@ -4,6 +4,25 @@
 {-# OPTIONS --without-K --exact-split #-}
 
 module ring-theory.ring-homomorphisms where
+
+open import foundation.contractible-types
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.truncation-levels
+open import foundation.universe-levels
+
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
+
+open import ring-theory.rings
 ```
 
 ## Definition
@@ -273,5 +292,32 @@ right-unit-law-comp-hom-Ring R1 R2 f =
   eq-htpy-hom-Ring R1 R2
     ( comp-hom-Ring R1 R1 R2 f (id-hom-Ring R1))
     ( f)
+    ( refl-htpy)
+```
+
+```agda
+id-law-ab-Ring :
+  { l1 : Level} (R1 : Ring l1) →
+  Id (hom-Ab-hom-Ring R1 R1 (id-hom-Ring R1)) (id-hom-Ab (ab-Ring R1))
+id-law-ab-Ring R1 =
+  eq-htpy-hom-Ab
+    ( ab-Ring R1)
+    ( ab-Ring R1)
+    ( refl-htpy)
+
+comp-law-ab-Ring :
+  { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
+  ( g : hom-Ring R2 R3) (f : hom-Ring R1 R2) →
+  Id ( hom-Ab-hom-Ring R1 R3 (comp-hom-Ring R1 R2 R3 g f))
+     ( comp-hom-Ab
+       ( ab-Ring R1)
+       ( ab-Ring R2)
+       ( ab-Ring R3)
+       ( hom-Ab-hom-Ring R2 R3 g)
+       ( hom-Ab-hom-Ring R1 R2 f))
+comp-law-ab-Ring R1 R2 R3 g f =
+  eq-htpy-hom-Ab
+    ( ab-Ring R1)
+    ( ab-Ring R3)
     ( refl-htpy)
 ```

@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.cyclic-types where
 
 open import elementary-number-theory.addition-integers using
   ( left-unit-law-add-ℤ)
+open import elementary-number-theory.groups-of-modular-arithmetic using
+  ( ℤ-Mod-Group)
 open import elementary-number-theory.integers using (ℤ; succ-ℤ; zero-ℤ)
 open import elementary-number-theory.modular-arithmetic using
   ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; zero-ℤ-Mod; equiv-add-ℤ-Mod';
@@ -59,10 +61,12 @@ open import foundation.unit-type using (star)
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
-open import group-theory.abstract-groups using
-  ( Group; loop-space-Group; equiv-Group; ℤ-Mod-Group; type-iso-Group;
-    iso-equiv-Group)
+open import group-theory.groups using (Group)
+open import group-theory.isomorphisms-groups using
+  ( type-iso-Group; iso-equiv-Group; equiv-Group)
 
+open import synthetic-homotopy-theory.groups-of-loops-in-1-types using
+  ( loop-space-Group)
 open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
 open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
 
@@ -840,7 +844,9 @@ is-set-type-Ω-Cyclic k =
 
 Ω-Cyclic-Group : (k : ℕ) → Group (lsuc lzero)
 Ω-Cyclic-Group k =
-  loop-space-Group (Cyclic lzero k) (ℤ-Mod-Cyclic k) (is-set-type-Ω-Cyclic k)
+  loop-space-Group
+    ( pair (Cyclic lzero k) (ℤ-Mod-Cyclic k))
+    ( is-set-type-Ω-Cyclic k)
 
 equiv-Ω-Cyclic-Group : (k : ℕ) → equiv-Group (Ω-Cyclic-Group k) (ℤ-Mod-Group k)
 pr1 (equiv-Ω-Cyclic-Group k) = equiv-compute-Ω-Cyclic k

@@ -7,8 +7,25 @@ title: Formalisation of the Symmetry Book
 
 module ring-theory.localizations-rings where
 
-open import ring-theory.ideals public
-open import ring-theory.rings-with-properties public
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.universe-levels
+
+open import group-theory.invertible-elements-monoids
+
+open import ring-theory.ideals
+open import ring-theory.ring-homomorphisms
+open import ring-theory.rings
+open import ring-theory.rings-with-properties
+
 
 is-prop-is-invertible-Ring :
   {l1 : Level} (R : Ring l1) (x : type-Ring R) →

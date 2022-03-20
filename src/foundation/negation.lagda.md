@@ -10,7 +10,8 @@ open import foundation-core.negation public
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
-open import foundation.logical-equivalences using (_⇔_; _↔_)
+open import foundation.equivalences using (_≃_; map-inv-equiv; map-equiv)
+open import foundation.logical-equivalences using (_⇔_; _↔_; equiv-iff')
 open import foundation.propositions using
   ( is-prop; is-prop-function-type; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (UU; Level)
@@ -41,6 +42,19 @@ neg-Prop P = neg-Prop' (type-Prop P)
 ```agda
 reductio-ad-absurdum : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → P → ¬ P → Q
 reductio-ad-absurdum p np = ex-falso (np p)
+```
+
+### Equivalent types have equivalent negations
+
+```agda
+equiv-neg :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+  (X ≃ Y) → (¬ X ≃ ¬ Y)
+equiv-neg {l1} {l2} {X} {Y} e =
+  equiv-iff'
+    ( neg-Prop' X)
+    ( neg-Prop' Y)
+    ( pair (map-neg (map-inv-equiv e)) (map-neg (map-equiv e)))
 ```
 
 ### Negation has no fixed points

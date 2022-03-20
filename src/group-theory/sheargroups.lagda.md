@@ -1,14 +1,20 @@
----
-title: Formalisation of the Symmetry Book
----
+# Sheargroups
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module group-theory.sheargroups where
 
-open import group-theory.abstract-groups public
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.dependent-pair-types using (Σ)
+open import foundation.identity-types using (Id)
+open import foundation.sets using (UU-Set; type-Set)
+open import foundation.universe-levels using (Level; UU; lsuc)
+```
 
+## Definition
+
+```agda
 Sheargroup : (l : Level) → UU (lsuc l)
 Sheargroup l =
   Σ ( UU-Set l)

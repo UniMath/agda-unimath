@@ -13,7 +13,7 @@ open import foundation.identity-types using
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.universe-levels using (Level; UU)
 
-open import group-theory.abstract-groups using (Group)
+open import group-theory.groups using (Group)
 open import group-theory.semigroups using (Semigroup)
 
 open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
