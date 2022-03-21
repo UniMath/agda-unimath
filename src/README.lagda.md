@@ -22,6 +22,7 @@ open import category-theory.functors-categories
 open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
 open import category-theory.homotopies-natural-transformations-large-precategories
+open import category-theory.initial-objects-precategories
 open import category-theory.isomorphisms-categories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.isomorphisms-precategories
@@ -35,6 +36,7 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.terminal-objects-precategories
 ```
 
 ## Elementary number theory
@@ -214,6 +216,7 @@ open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
+open ipmort foundation.lower-types-w-types
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
@@ -472,11 +475,19 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
+open import ring-theory.commutative-rings
+open import ring-theory.discrete-fields
+open import ring-theory.division-rings
 open import ring-theory.eisenstein-integers
 open import ring-theory.gaussian-integers
+open import ring-theory.homomorphisms-commutative-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals
+open import ring-theory.invertible-elements-rings
+open import ring-theory.isomorphisms-commutative-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
+open import ring-theory.nontrivial-rings
 open import ring-theory.rings-with-properties
 open import ring-theory.rings
 ```
