@@ -45,6 +45,7 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
 open import elementary-number-theory.congruence-integers
