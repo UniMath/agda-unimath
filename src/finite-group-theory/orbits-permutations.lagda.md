@@ -50,7 +50,7 @@ open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; htpy-equiv; map-equiv; inv-equiv; map-inv-is-equiv; is-equiv-has-inverse; eq-htpy-equiv;
-    left-inverse-law-equiv; right-inverse-law-equiv; map-inv-equiv; id-equiv)
+    left-inverse-law-equiv; right-inverse-law-equiv; map-inv-equiv; id-equiv; htpy-eq-equiv)
 open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; refl-Eq-Rel; symm-Eq-Rel; trans-Eq-Rel)
 open import foundation.equivalence-classes using
@@ -79,6 +79,7 @@ open import foundation.univalence using (eq-equiv)
 open import foundation.universal-property-propositional-truncation using (htpy-is-propositional-truncation)
 open import foundation.universe-levels using (Level; UU; lzero)
 
+open import univalent-combinatorics.2-element-types using (is-involution-aut-Fin-two-ℕ)
 open import univalent-combinatorics.counting using
   ( count; count-Fin; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
     number-of-elements-count; has-decidable-equality-count)
@@ -90,7 +91,7 @@ open import univalent-combinatorics.finite-types using
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 open import univalent-combinatorics.pigeonhole-principle using (two-points-same-image-le-count)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin; zero-Fin)
+  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin; zero-Fin; equiv-succ-Fin)
 ```
 
 ## Idea
@@ -1273,7 +1274,7 @@ module _
               ap number-of-elements-is-finite (eq-is-prop is-prop-type-trunc-Prop)))))
 
   same-orbits-transposition-not-same-orbits : (g : X ≃ X) →
-    (NP : ¬ (type-Eq-Rel (same-orbits-permutation (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g) a b)) →
+    (NP : ¬ (type-Eq-Rel (same-orbits-permutation-count g) a b)) →
     type-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) a b
   same-orbits-transposition-not-same-orbits g NP =
     unit-trunc-Prop (pair (pr1 minimal-element-iterate-repeating) lemma)
@@ -1344,4 +1345,27 @@ module _
         ( number-orbits-composition-transposition
           ( composition-transposition-a-b g)
           ( same-orbits-transposition-not-same-orbits g NP)))
+
+  opposite-sign-composition-transposition : (g : X ≃ X) →
+    Id
+      (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g)
+      (succ-Fin (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+        (composition-transposition-a-b g)))
+  opposite-sign-composition-transposition g =
+    cases-opposite-sign-composition-transposition
+      (is-decidable-same-orbits-permutation (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g a b)
+    where
+    cases-opposite-sign-composition-transposition : is-decidable (type-Eq-Rel (same-orbits-permutation-count g) a b) →
+      Id
+        (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g)
+        (succ-Fin (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+          (composition-transposition-a-b g)))
+    cases-opposite-sign-composition-transposition (inl P) =
+      inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin
+        (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g)) ∙
+        ap (λ k → succ-Fin (iterate (add-ℕ (number-of-elements-count eX) k) succ-Fin zero-Fin))
+          (number-orbits-composition-transposition g P)
+    cases-opposite-sign-composition-transposition (inr NP) =
+      ap (λ k → iterate (add-ℕ (number-of-elements-count eX) k) succ-Fin zero-Fin)
+        ( number-orbits-composition-transposition' g NP)
 ```
