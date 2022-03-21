@@ -30,18 +30,20 @@ We take the binary operations in K as arguments.
 For vector-matrix and matrix-matrix multiplication we also need a zero element, assumed to be the additive identity in K.
 
 ```agda
-type-Mat-Magma :
-  {l : Level} (M : Magma l) → ℕ → ℕ → UU l
-type-Mat-Magma M = Mat (type-Magma M)
-
-mul-Mat-Magma :
-  {l : Level} (M : Magma l) → {m n : ℕ} →
-  type-Mat-Magma M m n → type-Mat-Magma M m n → type-Mat-Magma M m n
-mul-Mat-Magma M = map-binary-vec (mul-vec-Magma M)
-
-Mat-Magma : {l : Level} → Magma l → ℕ → ℕ → Magma l
-pr1 (Mat-Magma M m n) = type-Mat-Magma M m n
-pr2 (Mat-Magma M m n) = mul-Mat-Magma M
+module _
+  {l : Level} (M : Magma l)
+  where
+  
+  type-Mat-Magma : ℕ → ℕ → UU l
+  type-Mat-Magma = Mat (type-Magma M)
+  
+  pointwise-mul-Mat-Magma :
+    {m n : ℕ} → type-Mat-Magma m n → type-Mat-Magma m n → type-Mat-Magma m n
+  pointwise-mul-Mat-Magma = map-binary-vec (mul-vec-Magma M)
+  
+  Mat-Magma : ℕ → ℕ → Magma l
+  pr1 (Mat-Magma m n) = type-Mat-Magma m n
+  pr2 (Mat-Magma m n) = pointwise-mul-Mat-Magma
 ```
 
 ## Properties
