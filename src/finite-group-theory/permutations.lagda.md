@@ -33,26 +33,20 @@ open import foundation.equivalences-maybe using
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functoriality-coproduct-types using (id-map-coprod; map-coprod)
-open import foundation.homotopies using (comp-htpy)
+open import foundation.homotopies using (_~_; comp-htpy; refl-htpy; inv-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop)
+open import foundation.propositions using (eq-is-prop)
 open import foundation.sets using (is-set-type-Set; Id-Prop)
 open import foundation.type-arithmetic-empty-type using
   ( inv-right-unit-law-coprod-is-empty; map-right-absorption-prod)
 open import foundation.unit-type using (star; unit)
 open import foundation.universe-levels using (Level; UU; lzero)
 
-open import foundation-core.propositions using (eq-is-prop)
-open import foundation-core.homotopies using (_~_; refl-htpy; inv-htpy)
-
-open import univalent-combinatorics.2-element-types using
-  ( compute-swap-2-Element-Type; is-involution-aut-2-element-type;
-    has-no-fixpoints-swap-2-Element-Type; swap-2-Element-Type;
-    is-not-identity-swap-2-Element-Type; map-swap-2-Element-Type)
 open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count; number-of-elements-count)
 open import univalent-combinatorics.equality-standard-finite-types using
