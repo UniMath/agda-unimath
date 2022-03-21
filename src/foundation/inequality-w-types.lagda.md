@@ -70,6 +70,10 @@ module _
 ### The strict ordering on W-types is transitive
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
   transitive-le-𝕎 : {x y z : 𝕎 A B} → y le-𝕎 z → x le-𝕎 y → x le-𝕎 z
   transitive-le-𝕎 {x = x} {y} {z} (le-∈-𝕎 H) K =
     propagate-le-𝕎 H K
@@ -80,6 +84,10 @@ module _
 ### The strict ordering on W-types is irreflexive
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
   irreflexive-le-𝕎 :
     {x : 𝕎 A B} → ¬ (x le-𝕎 x)
   irreflexive-le-𝕎 {x = x} (le-∈-𝕎 H) = irreflexive-∈-𝕎 x H
@@ -90,6 +98,10 @@ module _
 ### The strict ordering on W-types is asymmetric
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
   asymmetric-le-𝕎 :
     {x y : 𝕎 A B} → x le-𝕎 y → y le-𝕎 x → empty
   asymmetric-le-𝕎 H K = irreflexive-le-𝕎 (transitive-le-𝕎 H K)
