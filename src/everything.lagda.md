@@ -422,6 +422,7 @@ open import ring-theory
 open import ring-theory.eisenstein-integers
 open import ring-theory.gaussian-integers
 open import ring-theory.ideals
+open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
 open import ring-theory.ring-homomorphisms
 open import ring-theory.rings-with-properties
