@@ -14,6 +14,7 @@ open import category-theory.functors-categories
 open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
 open import category-theory.homotopies-natural-transformations-large-precategories
+open import category-theory.initial-object-precategories
 open import category-theory.isomorphisms-categories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.isomorphisms-precategories
@@ -27,11 +28,13 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.terminal-object-precategories
 open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
 open import elementary-number-theory.congruence-integers
@@ -237,6 +240,7 @@ open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
+open import foundation.lower-types-W-types
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
@@ -454,6 +458,7 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 open import tutorials.basic-agda
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-types
