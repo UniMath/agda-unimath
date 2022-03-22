@@ -316,13 +316,13 @@ retr-permutation-list-transpositions-Fin (succ-ℕ n) f y =
 
 ```agda
 module _
-  {l1 : Level} (X : UU l1) (eX : count X) (f : X ≃ X)
+  {l1 l2 : Level} (X : UU l1) (eX : count X) (f : X ≃ X)
   where
 
   list-transpositions-permutation-count :
     list
       ( Σ
-        ( X → decidable-Prop lzero)
+        ( X → decidable-Prop l2)
         ( λ P →
           has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))
   list-transpositions-permutation-count =

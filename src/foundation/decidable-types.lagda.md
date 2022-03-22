@@ -23,6 +23,7 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop;
     is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
     map-universal-property-trunc-Prop)
+open import foundation.raising-universe-levels using (raise; map-inv-raise; map-raise)
 open import foundation.type-arithmetic-empty-type using
   ( right-unit-law-coprod-is-empty)
 open import foundation.unit-type using (unit; star)
@@ -290,3 +291,14 @@ is-fixed-point-is-decidable-is-inhabited :
 is-fixed-point-is-decidable-is-inhabited {l} {X} t =
   right-unit-law-coprod-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```
+
+### Raising types converves decidability
+
+```agda
+module _
+  (l : Level) {l1 : Level} (A : UU l1)
+  where
+
+  is-decidable-raise : is-decidable A → is-decidable (raise l A)
+  is-decidable-raise (inl p) = inl (map-raise p)
+  is-decidable-raise (inr np) = inr (λ p' → np (map-inv-raise p'))
