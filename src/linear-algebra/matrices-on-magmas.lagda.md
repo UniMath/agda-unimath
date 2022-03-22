@@ -49,6 +49,10 @@ module _
 ## Properties
 
 ```agda
+module _
+  {l : Level} (M : Magma l)
+  where
+  
 {-TODO:
 add-transpose :
   {l : Level} → {K : UU l} → {m n : ℕ} →
