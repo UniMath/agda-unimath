@@ -20,7 +20,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; commutative-mul-ℕ; right-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
     right-distributive-mul-add-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ;
     is-one-right-is-one-mul-ℕ; is-one-is-left-unit-mul-ℕ; associative-mul-ℕ;
-    is-injective-mul-ℕ; is-emb-mul-ℕ')
+    is-injective-mul-ℕ; is-emb-mul-ℕ'; is-nonzero-left-factor-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ)
@@ -147,6 +147,8 @@ is-zero-div-ℕ d (succ-ℕ x) H (pair (succ-ℕ k) p) =
         ( leq-add-ℕ' d (mul-ℕ k d)) p))
 ```
 
+### The divisibility relation is a partial order on the natural numbers
+
 ```agda
 refl-div-ℕ : (x : ℕ) → div-ℕ x x
 pr1 (refl-div-ℕ x) = 1
@@ -174,12 +176,20 @@ transitive-div-ℕ :
 pr1 (transitive-div-ℕ x y z (pair k p) (pair l q)) = mul-ℕ l k
 pr2 (transitive-div-ℕ x y z (pair k p) (pair l q)) =
   associative-mul-ℕ l k x ∙ (ap (mul-ℕ l) p ∙ q)
+```
 
+### If `x` divides `y` then `x` divides any multiple of `y`
+
+```agda
 div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (mul-ℕ k y)
 div-mul-ℕ k x y H =
   transitive-div-ℕ x y (mul-ℕ k y) H (pair k refl)
+```
 
+### Multiplication preserves divisibility
+
+```agda
 preserves-div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ (mul-ℕ k x) (mul-ℕ k y)
 pr1 (preserves-div-mul-ℕ k x y (pair q p)) = q
@@ -188,7 +198,11 @@ pr2 (preserves-div-mul-ℕ k x y (pair q p)) =
     ( ( ap (mul-ℕ' x) (commutative-mul-ℕ q k)) ∙
       ( ( associative-mul-ℕ k q x) ∙
         ( ap (mul-ℕ k) p)))
+```
 
+### Multiplication by a nonzero number reflects divisibility
+
+```agda
 reflects-div-mul-ℕ :
   (k x y : ℕ) → is-nonzero-ℕ k → div-ℕ (mul-ℕ k x) (mul-ℕ k y) → div-ℕ x y
 pr1 (reflects-div-mul-ℕ k x y H (pair q p)) = q
@@ -198,7 +212,11 @@ pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
       ( ( ap (mul-ℕ' x) (commutative-mul-ℕ k q)) ∙
         ( ( associative-mul-ℕ q k x) ∙
           ( p))))
+```
 
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+
+```agda
 div-quotient-div-div-ℕ :
   (x y d : ℕ) (H : div-ℕ d y) → is-nonzero-ℕ d →
   div-ℕ (mul-ℕ d x) y → div-ℕ x (quotient-div-ℕ d y H)
@@ -215,9 +233,11 @@ div-div-quotient-div-ℕ x y d H K =
   tr ( div-ℕ (mul-ℕ d x))
      ( eq-quotient-div-ℕ' d y H)
      ( preserves-div-mul-ℕ d x (quotient-div-ℕ d y H) K)
+```
 
--- We conclude that 0 | x implies x = 0 and x | 1 implies x = 1.
+### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
 
+```agda
 is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
 is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
 
@@ -248,4 +268,14 @@ leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
 is-one-is-divisor-below-ℕ : ℕ → ℕ → UU lzero
 is-one-is-divisor-below-ℕ n a =
   (x : ℕ) → leq-ℕ x n → div-ℕ x a → is-one-ℕ x
+```
+
+### If `d` divides a nonzero number `x`, then the quotient `x/d` is also nonzero
+
+```agda
+is-nonzero-quotient-div-ℕ :
+  {d x : ℕ} (H : div-ℕ d x) →
+  is-nonzero-ℕ x → is-nonzero-ℕ (quotient-div-ℕ d x H)
+is-nonzero-quotient-div-ℕ {d} {.(mul-ℕ k d)} (pair k refl) =
+  is-nonzero-left-factor-mul-ℕ k d
 ```

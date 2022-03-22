@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers using
     is-not-one-ℕ)
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
@@ -85,6 +86,11 @@ is-decidable-Eq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-Eq-ℕ m n
 has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
+
+decidable-eq-ℕ : ℕ → ℕ → decidable-Prop lzero
+pr1 (decidable-eq-ℕ m n) = Id m n
+pr1 (pr2 (decidable-eq-ℕ m n)) = is-set-ℕ m n
+pr2 (pr2 (decidable-eq-ℕ m n)) = has-decidable-equality-ℕ m n
 
 is-decidable-is-zero-ℕ : (n : ℕ) → is-decidable (is-zero-ℕ n)
 is-decidable-is-zero-ℕ n = has-decidable-equality-ℕ n zero-ℕ
