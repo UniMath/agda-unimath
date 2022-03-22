@@ -1,20 +1,36 @@
----
-title: Formalisation of the Symmetry Book
----
+# The circle
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module synthetic-homotopy-theory.circle where
 
-open import univalent-foundations public
+open import foundation.connected-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sections
+open import foundation.structure-identity-principle
+open import foundation.universal-property-propositional-truncation
+open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.pointed-homotopies
 open import synthetic-homotopy-theory.pointed-maps
 open import synthetic-homotopy-theory.pointed-types
+```
 
-{- Section 11.1 The induction principle of the circle -}
-
+```agda
 free-loop : {l1 : Level} (X : UU l1) → UU l1
 free-loop X = Σ X (λ x → Id x x)
 

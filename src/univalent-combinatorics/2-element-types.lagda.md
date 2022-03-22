@@ -467,11 +467,7 @@ is-involution-aut-Fin-two-ℕ e x =
     ( map-equiv (e ∘e e) x)
     ( refl)
     ( refl)
-```
 
-### Any automorphism on a 2-element set is an involution
-
-```agda
 module _
   {l : Level} (X : 2-Element-Type l)
   where

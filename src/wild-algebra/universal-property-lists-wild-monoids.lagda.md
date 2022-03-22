@@ -12,7 +12,7 @@ open import foundation.identity-types using
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU)
 
-open import group-theory.abstract-groups using (preserves-mul)
+open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
 open import univalent-combinatorics.lists using
   ( list; nil; cons; concat-list; left-unit-law-concat-list;

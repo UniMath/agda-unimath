@@ -7,9 +7,52 @@ title: Formalisation of the Symmetry Book
 
 module group-theory.abstract-group-torsors where
 
-open import group-theory.abstract-group-actions public
-open import group-theory.concrete-groups public
+open import foundation.connected-types using
+  ( is-path-connected; is-path-connected-mere-eq)
+open import foundation.contractible-types using (is-contr)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalences using
+  ( _≃_; is-equiv; map-inv-is-equiv; map-equiv; isretr-map-inv-equiv;
+    issec-map-inv-equiv; is-equiv-Prop; is-equiv-has-inverse; _∘e_)
+open import foundation.functions using (_∘_; id)
+open import foundation.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
+open import foundation.homotopies using (refl-htpy; _~_)
+open import foundation.identity-types using (Id; _∙_; inv; ap; tr; refl)
+open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
+open import foundation.propositional-truncations using
+  ( unit-trunc-Prop; apply-universal-property-trunc-Prop)
+open import foundation.propositions using
+  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-equiv; is-prop-Π)
+open import foundation.sets using
+  ( UU-Set; type-Set; is-set-type-Set; is-set; is-set-equiv)
+open import foundation.subtype-identity-principle using
+  ( is-contr-total-Eq-subtype)
+open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import group-theory.group-actions using
+  ( Abstract-Group-Action; set-Abstract-Group-Action;
+    equiv-mul-Abstract-Group-Action; mul-Abstract-Group-Action)
+open import group-theory.concrete-groups using
+  ( Concrete-Group; abstract-group-Concrete-Group)
+open import group-theory.equivalences-group-actions using
+  ( id-equiv-Abstract-Group-Action; equiv-Abstract-Group-Action;
+    is-contr-total-equiv-Abstract-Group-Action;
+    htpy-equiv-Abstract-Group-Action; refl-htpy-equiv-Abstract-Group-Action;
+    is-contr-total-htpy-equiv-Abstract-Group-Action;
+    comp-equiv-Abstract-Group-Action; inv-equiv-Abstract-Group-Action)
+open import group-theory.groups using
+  ( Group; type-Group; unit-Group; mul-Group; right-unit-law-Group;
+    equiv-mul-Group'; associative-mul-Group; left-unit-law-Group; is-set-type-Group)
 open import group-theory.higher-groups using (∞-Group)
+open import group-theory.homomorphisms-groups using (type-hom-Group)
+open import group-theory.isomorphisms-groups using
+  ( type-iso-Group; iso-equiv-Group)
+open import group-theory.mere-equivalences-group-actions using
+  ( mere-equiv-Abstract-Group-Action-Prop)
+open import group-theory.principal-group-actions using
+  ( principal-Abstract-Group-Action)
+open import group-theory.symmetric-groups using (symmetric-Group)
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
@@ -474,7 +517,7 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (equiv-Eq-Torsor-Abstract-Group u) = equiv-mul-Group' G u
-  pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = assoc-mul-Group G g x u
+  pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = associative-mul-Group G g x u
 
   issec-equiv-Eq-Torsor-Abstract-Group :
     ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) ∘

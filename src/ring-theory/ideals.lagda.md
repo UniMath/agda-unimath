@@ -7,14 +7,17 @@ title: Formalisation of the Symmetry Book
 
 module ring-theory.ideals where
 
-open import group-theory public
-open import ring-theory.rings public
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositional-extensionality
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import foundation
-open import elementary-number-theory
-open import univalent-combinatorics
-open import univalent-foundations
+open import group-theory.abelian-groups
+open import group-theory.abelian-subgroups
 
+open import ring-theory.rings
 
 {- Subsets of rings -}
 

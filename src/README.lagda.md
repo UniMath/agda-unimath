@@ -22,6 +22,7 @@ open import category-theory.functors-categories
 open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
 open import category-theory.homotopies-natural-transformations-large-precategories
+open import category-theory.initial-objects-precategories
 open import category-theory.isomorphisms-categories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.isomorphisms-precategories
@@ -35,6 +36,7 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.terminal-objects-precategories
 ```
 
 ## Elementary number theory
@@ -215,6 +217,7 @@ open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
+open import foundation.lower-types-w-types
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
@@ -367,26 +370,65 @@ open import graph-theory.undirected-graphs
 
 ```agda
 open import group-theory
-open import group-theory.abstract-abelian-groups
-open import group-theory.abstract-abelian-subgroups
-open import group-theory.abstract-group-actions
+open import group-theory.abelian-groups
+open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
-open import group-theory.abstract-groups
-open import group-theory.abstract-subgroups
+open import group-theory.category-of-groups
+open import group-theory.category-of-semigroups
+open import group-theory.cayleys-theorem
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.concrete-subgroups
+open import group-theory.conjugation
+open import group-theory.embeddings-groups
+open import group-theory.equivalences-group-actions
+open import group-theory.equivalences-semigroups
 open import group-theory.examples-higher-groups
 open import group-theory.furstenberg-groups
+open import group-theory.group-actions
+open import group-theory.groups
 open import group-theory.higher-groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-monoids
+open import group-theory.homomorphisms-semigroups
+open import group-theory.invertible-elements-monoids
+open import group-theory.isomorphisms-abelian-groups
+open import group-theory.isomorphisms-group-actions
+open import group-theory.isomorphisms-groups
+open import group-theory.isomorphisms-semigroups
+open import group-theory.mere-equivalences-group-actions
+open import group-theory.monoids
+open import group-theory.orbits-group-actions
+open import group-theory.precategory-of-group-actions
+open import group-theory.precategory-of-groups
+open import group-theory.precategory-of-semigroups
+open import group-theory.principal-group-actions
+open import group-theory.semigroups
 open import group-theory.sheargroups
+open import group-theory.stabilizer-groups
+open import group-theory.subgroups
+open import group-theory.substitution-functor-group-actions
+open import group-theory.symmetric-groups
+open import group-theory.transitive-group-actions
 ```
 
 ## Linear algebra
 
 ```agda
 open import linear-algebra
+open import linear-algebra.constant-matrices
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-matrices
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.matrices-on-rings
 open import linear-algebra.matrices
+open import linear-algebra.multiplication-matrices
+open import linear-algebra.scalar-multiplication-matrices
+open import linear-algebra.scalar-multiplication-vectors
+open import linear-algebra.transposition-matrices
+open import linear-algebra.vectors-on-rings
 open import linear-algebra.vectors
 ```
 
@@ -429,11 +471,19 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
+open import ring-theory.commutative-rings
+open import ring-theory.discrete-fields
+open import ring-theory.division-rings
 open import ring-theory.eisenstein-integers
 open import ring-theory.gaussian-integers
+open import ring-theory.homomorphisms-commutative-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals
+open import ring-theory.invertible-elements-rings
+open import ring-theory.isomorphisms-commutative-rings
+open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
-open import ring-theory.rings-with-properties
+open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 ```
 
@@ -488,6 +538,7 @@ open import univalent-combinatorics.counting-fibers-of-maps
 open import univalent-combinatorics.counting-function-types
 open import univalent-combinatorics.counting-maybe
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.cubes
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-subtypes
@@ -499,6 +550,7 @@ open import univalent-combinatorics.embeddings-standard-finite-types
 open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.equivalences-cubes
 open import univalent-combinatorics.equivalences-standard-finite-types
 open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.fibers-of-maps-between-finite-types
@@ -513,6 +565,7 @@ open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
+open import univalent-combinatorics.orientations-cubes
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types
@@ -524,12 +577,6 @@ open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
-```
-
-## Univalent foundation
-
-```agda
-open import univalent-foundations.isolated-points
 ```
 
 ## Wild algebra

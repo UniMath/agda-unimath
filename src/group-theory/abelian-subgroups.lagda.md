@@ -1,17 +1,45 @@
----
-title: Formalisation of the Symmetry Book
----
+# Subgroups of abelian groups
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.abstract-abelian-subgroups where
+module group-theory.abelian-subgroups where
 
-open import group-theory.abstract-abelian-groups public
-open import group-theory.abstract-subgroups public
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (is-emb)
+open import foundation.identity-types using (Id)
+open import foundation.propositions using (is-prop)
+open import foundation.sets using (is-set; UU-Set)
+open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
-{- Subsets of abelian groups -}
+open import group-theory.abelian-groups using
+  ( Ab; group-Ab; type-Ab; is-commutative-add-Ab)
+open import group-theory.embeddings-groups using
+  ( emb-Group; emb-Group-Slice; emb-group-slice-Subgroup)
+open import group-theory.homomorphisms-abelian-groups using
+  ( preserves-add; hom-Ab)
+open import group-theory.subgroups using
+  ( subset-Group; is-set-subset-Group; contains-unit-subset-Group;
+    is-prop-contains-unit-subset-Group; closed-under-mul-subset-Group;
+    is-prop-closed-under-mul-subset-Group; closed-under-inv-subset-Group;
+    is-prop-closed-under-inv-subset-Group; is-subgroup-Group;
+    is-prop-is-subgroup-Group; Subgroup; subset-Subgroup;
+    is-emb-subset-Subgroup; type-subset-Subgroup; is-prop-type-subset-Subgroup;
+    is-subgroup-Subgroup; contains-unit-Subgroup; closed-under-mul-Subgroup;
+    closed-under-inv-Subgroup; type-group-Subgroup; incl-group-Subgroup;
+    is-emb-incl-group-Subgroup; eq-subgroup-eq-group; set-group-Subgroup;
+    unit-group-Subgroup; mul-group-Subgroup; inv-group-Subgroup;
+    associative-mul-group-Subgroup; left-unit-law-group-Subgroup;
+    right-unit-law-group-Subgroup; left-inverse-law-group-Subgroup;
+    right-inverse-law-group-Subgroup; group-Subgroup;
+    preserves-mul-incl-group-Subgroup; hom-group-Subgroup)
+```
 
+## Definitions
+
+### Subsets of abelian groups
+
+```agda
 subset-Ab :
   (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
 subset-Ab l A = subset-Group l (group-Ab A)
@@ -19,9 +47,11 @@ subset-Ab l A = subset-Group l (group-Ab A)
 is-set-subset-Ab :
   (l : Level) {l1 : Level} (A : Ab l1) → is-set (subset-Ab l A)
 is-set-subset-Ab l A = is-set-subset-Group l (group-Ab A)
+```
 
-{- Defining subgroups -}
+### Subgroups of abelian groups
 
+```agda
 contains-zero-subset-Ab :
   {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) → UU l2
 contains-zero-subset-Ab A = contains-unit-subset-Group (group-Ab A)
@@ -62,9 +92,11 @@ is-prop-is-subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) →
   is-prop (is-subgroup-Ab A P)
 is-prop-is-subgroup-Ab A = is-prop-is-subgroup-Group (group-Ab A)
+```
 
-{- Introducing the type of all subgroups of a group G -}
+### The type of all subgroups of an abelian group
 
+```agda
 Subgroup-Ab :
   (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
 Subgroup-Ab l A = Subgroup l (group-Ab A)
@@ -108,9 +140,11 @@ closed-under-neg-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
   closed-under-neg-subset-Ab A (subset-Subgroup-Ab A P)
 closed-under-neg-Subgroup-Ab A = closed-under-inv-Subgroup (group-Ab A)
+```
 
-{- Given a subgroup of an abelian group, we construct an abelian group -}
+### The underlying abelian group of a subgroup of an abelian group
 
+```agda
 type-ab-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) → UU (l1 ⊔ l2)
 type-ab-Subgroup-Ab A =  type-group-Subgroup (group-Ab A)
@@ -156,7 +190,7 @@ is-associative-add-ab-Subgroup-Ab :
   Id (add-ab-Subgroup-Ab A P (add-ab-Subgroup-Ab A P x y) z)
      (add-ab-Subgroup-Ab A P x (add-ab-Subgroup-Ab A P y z))
 is-associative-add-ab-Subgroup-Ab A =
-  assoc-mul-group-Subgroup (group-Ab A)
+  associative-mul-group-Subgroup (group-Ab A)
 
 left-zero-law-ab-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
@@ -199,10 +233,12 @@ ab-Subgroup-Ab :
 ab-Subgroup-Ab A P =
   pair
     (group-Subgroup (group-Ab A) P) (is-commutative-add-ab-Subgroup-Ab A P)
+```
 
-{- We show that the inclusion from ab-Subgroup-Ab A P → A is a group 
-   homomorphism -}
+### The inclusion of the underlying group of a subgroup into the ambient abelian group
 
+
+```agda
 preserves-add-incl-ab-Subgroup-Ab :
   { l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
   preserves-add (ab-Subgroup-Ab A P) A (incl-ab-Subgroup-Ab A P)
@@ -213,9 +249,11 @@ hom-ab-Subgroup-Ab :
   { l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
   hom-Ab (ab-Subgroup-Ab A P) A
 hom-ab-Subgroup-Ab A = hom-group-Subgroup (group-Ab A)
+```
 
-{- We define another type of subgroups of A as the type of group inclusions -}
+### The type of all abelian groups equipped with an embedding into the ambient abelian group
 
+```agda
 emb-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) → UU (l1 ⊔ l2)
 emb-Ab A B = emb-Group (group-Ab A) (group-Ab B)

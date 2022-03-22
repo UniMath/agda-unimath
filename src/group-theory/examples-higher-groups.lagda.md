@@ -7,11 +7,19 @@ title: Formalisation of the Symmetry Book
 
 module group-theory.examples-higher-groups where
 
-open import group-theory.higher-groups public
-open import synthetic-homotopy-theory.circle public
+open import foundation.connected-components-universes
+open import foundation.connected-types
+open import foundation.dependent-pair-types
+open import foundation.mere-equivalences
+open import foundation.universe-levels
 
+open import group-theory.higher-groups
+
+open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.pointed-types
+```
 
+```agda
 module _
   where
 

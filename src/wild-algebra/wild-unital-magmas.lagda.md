@@ -15,7 +15,7 @@ open import foundation.path-algebra using
   ( horizontal-concat-Id²)
 open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
 
-open import group-theory.abstract-groups using (preserves-mul)
+open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
 open import synthetic-homotopy-theory.pointed-maps using (_→*_)
 open import synthetic-homotopy-theory.pointed-types using
@@ -291,5 +291,6 @@ preserves-left-unit-law-mul-htpy :
   (lf : preserves-left-unit-law-mul μA lA μB lB f pf μf)
   {g : A → B} {pg : Id (g eA) eB} (μg : preserves-mul μA μB g)
   (lg : preserves-left-unit-law-mul μA lA μB lB g pg μg) →
-  {H : f ~ g} (μH : preserves-mul-htpy μA μB μf μg H) → UU (l1 ⊔ l2)
-preserves-left-unit-law-mul-htpy μA lA μB lB μf lf μg lg μH = {!!}
+  {H : f ~ g} (μH : preserves-mul-htpy μA μB μf μg H) (pH : Id pf (H eA ∙ pg)) →
+  UU (l1 ⊔ l2)
+preserves-left-unit-law-mul-htpy μA lA μB lB μf lf μg lg μH pH = {!!}

@@ -11,6 +11,7 @@ open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.complements-isolated-points public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-function-types public
@@ -19,6 +20,7 @@ open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-function-types public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.counting public
+open import univalent-combinatorics.cubes public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
 open import univalent-combinatorics.decidable-subtypes public
@@ -30,8 +32,9 @@ open import univalent-combinatorics.embeddings public
 open import univalent-combinatorics.embeddings-standard-finite-types public
 open import univalent-combinatorics.equality-finite-types public
 open import univalent-combinatorics.equality-standard-finite-types public
-open import univalent-combinatorics.equivalences public
+open import univalent-combinatorics.equivalences-cubes public
 open import univalent-combinatorics.equivalences-standard-finite-types public
+open import univalent-combinatorics.equivalences public
 open import univalent-combinatorics.fibers-of-maps-between-finite-types public
 open import univalent-combinatorics.finite-choice public
 open import univalent-combinatorics.finite-connected-components public
@@ -45,6 +48,7 @@ open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.lists public
 open import univalent-combinatorics.maybe public
+open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.ramsey-theory public

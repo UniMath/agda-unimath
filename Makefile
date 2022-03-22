@@ -11,7 +11,7 @@ AGDA ?=agda -v$(agdaVerbose)
 TIME ?=time
 
 .PHONY : agdaFiles
-agdaFiles : 
+agdaFiles :
 	@rm -rf $@
 	@rm -rf src/everything.lagda.md
 	@find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $@
@@ -44,7 +44,7 @@ check : src/everything.lagda.md
 html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
-	${AGDA} ${htmlOpts} src/everything.lagda.md 
+	${AGDA} ${htmlOpts} src/everything.lagda.md
 	cd docs/; \
 	sh conv.sh; \
 	cp README.html index.html

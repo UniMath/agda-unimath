@@ -97,6 +97,7 @@ open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.lower-types-w-types public
 open import foundation.maybe public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
