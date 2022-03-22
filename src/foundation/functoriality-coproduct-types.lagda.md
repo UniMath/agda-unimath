@@ -5,17 +5,32 @@
 
 module foundation.functoriality-coproduct-types where
 
+open import foundation.cartesian-product-types using (_×_)
+open import foundation.contractible-types using (is-contr; is-contr-equiv)
 open import foundation.coproduct-types using (coprod; inl; inr; is-injective-inl; neq-inr-inl)
 open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
+open import foundation.equality-coproduct-types using
+  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
 open import foundation.equivalences using
   ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
-    map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_)
+    map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_)
 open import foundation.empty-types using (ex-falso)
+open import foundation.fibers-of-maps using (fib)
+open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
+open import foundation.functoriality-cartesian-product-types using (equiv-prod)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-map-Π)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.homotopies using
+  ( _~_; inv-htpy; _∙h_; is-contr-total-htpy'; refl-htpy)
 open import foundation.identity-types using (Id; inv; refl; ap; _∙_)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.negation using (¬)
+open import foundation.structure-identity-principle using
+  ( is-contr-total-Eq-structure)
+open import foundation.universal-property-coproduct-types using
+  ( equiv-dependent-universal-property-coprod)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -23,7 +38,9 @@ open import foundation.universe-levels using (Level; UU)
 
 Any two maps `f : A → B` and `g : C → D` induce a map `map-coprod f g : coprod A B → coprod C D`.
 
-## Definition
+## Definitions
+
+### The functorial action of the coproduct operation 
 
 ```agda
 module _
@@ -121,6 +138,49 @@ equiv-coprod :
 pr1 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) = map-coprod e f
 pr2 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) =
   is-equiv-map-coprod is-equiv-e is-equiv-f
+```
+
+### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`.
+
+```agda
+is-contr-fib-map-coprod :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D) →
+  is-contr
+    ( fib ( λ (fg' : (A → B) × (C → D)) → map-coprod (pr1 fg') (pr2 fg'))
+          ( map-coprod f g))
+is-contr-fib-map-coprod {A = A} {B} {C} {D} f g =
+  is-contr-equiv
+    ( Σ ( (A → B) × (C → D))
+        ( λ fg' → ((a : A) → Id (pr1 fg' a) (f a)) ×
+                  ((c : C) → Id (pr2 fg' c) (g c))))
+    ( equiv-tot
+      ( λ fg' →
+        ( ( equiv-prod
+            ( equiv-map-Π
+              ( λ a → compute-eq-coprod-inl-inl (pr1 fg' a) (f a)))
+            ( equiv-map-Π
+              ( λ c → compute-eq-coprod-inr-inr (pr2 fg' c) (g c)))) ∘e
+          ( equiv-dependent-universal-property-coprod
+            ( λ x →
+              Id (map-coprod (pr1 fg') (pr2 fg') x) (map-coprod f g x)))) ∘e
+        ( equiv-funext)))
+    ( is-contr-total-Eq-structure
+      ( λ f' g' (H : f' ~ f) → (c : C) → Id (g' c) (g c))
+      ( is-contr-total-htpy' f)
+      ( pair f refl-htpy)
+      ( is-contr-total-htpy' g))
+
+{-
+is-emb-map-coprod :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} → 
+  is-emb (λ (fg : (A → B) × (C → D)) → map-coprod (pr1 fg) (pr2 fg))
+is-emb-map-coprod (pair f g) =
+  fundamental-theorem-id (pair f g)
+    ( refl)
+    {! is-contr-fib-map-coprod f g!}
+    {!!}
+-}
 ```
 
 ### If there exist `f : coprod A B ≃ coprod A B` and `g : B ≃ B` such that `f` and `g` coincide on `B`, then there exists `h : A ≃ A` such that `htpy-equiv (equiv-coprod h d) f`

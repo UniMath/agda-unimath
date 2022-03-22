@@ -7,7 +7,41 @@ title: Formalisation of the Symmetry Book
 
 module synthetic-homotopy-theory.23-pullbacks where
 
-open import univalent-foundations public
+open import foundation.cartesian-product-types
+open import foundation.commuting-squares
+open import foundation.constant-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equality-fibers-of-maps
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.pullbacks
+open import foundation.truncated-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universal-property-pullbacks
+open import foundation.universe-levels
 
 -- Section 13.1 Cartesian squares
 

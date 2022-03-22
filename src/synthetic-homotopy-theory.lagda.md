@@ -1,13 +1,9 @@
----
-title: Formalisation of the Symmetry Book
----
+# Synthetic homotopy theory
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module synthetic-homotopy-theory where
-
-open import univalent-foundations public
 
 open import synthetic-homotopy-theory.23-pullbacks public
 open import synthetic-homotopy-theory.24-pushouts public

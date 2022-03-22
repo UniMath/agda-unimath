@@ -23,10 +23,10 @@ The type of edges incident to a vertex `x` of an undirected graph is the total s
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
-  
+
   incidence-Undirected-Graph : vertex-Undirected-Graph G → UU (l1 ⊔ l2)
   incidence-Undirected-Graph x =
     Σ ( vertex-Undirected-Graph G)
       ( λ y → edge-Undirected-Graph G (standard-unordered-pair x y))
 ```
-    
+

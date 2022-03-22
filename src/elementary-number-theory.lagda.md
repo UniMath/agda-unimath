@@ -8,6 +8,7 @@ module elementary-number-theory where
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
+open import elementary-number-theory.catalan-numbers public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public

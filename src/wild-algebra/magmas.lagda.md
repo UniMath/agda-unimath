@@ -24,66 +24,90 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 
 A magma is a type equipped with a binary operation.
 
-```agda
-Magma-UU : (l : Level) → UU (lsuc l)
-Magma-UU l = Σ (UU l) (λ A → A → A → A)
+## Definition
 
-type-Magma : {l : Level} → Magma-UU l → UU l
+```agda
+Magma : (l : Level) → UU (lsuc l)
+Magma l = Σ (UU l) (λ A → A → A → A)
+
+type-Magma : {l : Level} → Magma l → UU l
 type-Magma M = pr1 M
 
-μ-Magma :
-  {l : Level} (M : Magma-UU l) → type-Magma M → type-Magma M → type-Magma M
-μ-Magma M = pr2 M
+mul-Magma :
+  {l : Level} (M : Magma l) → type-Magma M → type-Magma M → type-Magma M
+mul-Magma M = pr2 M
+```
 
-fold-Fin-μ-Magma :
-  {l : Level} (M : Magma-UU l) → type-Magma M →
+## Structures
+
+### The fold operation on magmas
+
+```agda
+fold-Fin-mul-Magma :
+  {l : Level} (M : Magma l) → type-Magma M →
   {k : ℕ} → (Fin k → type-Magma M) → type-Magma M
-fold-Fin-μ-Magma M m {zero-ℕ} f = m
-fold-Fin-μ-Magma M m {succ-ℕ k} f =
-  μ-Magma M (fold-Fin-μ-Magma M m (f ∘ inl)) (f (inr star))
+fold-Fin-mul-Magma M m {zero-ℕ} f = m
+fold-Fin-mul-Magma M m {succ-ℕ k} f =
+  mul-Magma M (fold-Fin-mul-Magma M m (f ∘ inl)) (f (inr star))
 
-fold-count-μ-Magma' :
-  {l1 l2 : Level} (M : Magma-UU l1) → type-Magma M →
+fold-count-mul-Magma' :
+  {l1 l2 : Level} (M : Magma l1) → type-Magma M →
   {A : UU l2} {k : ℕ} → (Fin k ≃ A) → (A → type-Magma M) → type-Magma M
-fold-count-μ-Magma' M m e f = fold-Fin-μ-Magma M m (f ∘ map-equiv e)
+fold-count-mul-Magma' M m e f = fold-Fin-mul-Magma M m (f ∘ map-equiv e)
 
-fold-count-μ-Magma :
-  {l1 l2 : Level} (M : Magma-UU l1) → type-Magma M →
+fold-count-mul-Magma :
+  {l1 l2 : Level} (M : Magma l1) → type-Magma M →
   {A : UU l2} → count A → (A → type-Magma M) → type-Magma M
-fold-count-μ-Magma M m e f = fold-Fin-μ-Magma M m (f ∘ map-equiv-count e)
+fold-count-mul-Magma M m e f = fold-Fin-mul-Magma M m (f ∘ map-equiv-count e)
+```
 
-is-unital-Magma : {l : Level} (M : Magma-UU l) → UU l
+### Unital magmas
+
+```agda
+is-unital-Magma : {l : Level} (M : Magma l) → UU l
 is-unital-Magma M =
   Σ ( type-Magma M)
     ( λ e →
-      ( (x : type-Magma M) → Id (μ-Magma M e x) x) ×
-      ( (x : type-Magma M) → Id (μ-Magma M x e) x))
+      ( (x : type-Magma M) → Id (mul-Magma M e x) x) ×
+      ( (x : type-Magma M) → Id (mul-Magma M x e) x))
 
-Unital-Magma-UU : (l : Level) → UU (lsuc l)
-Unital-Magma-UU l = Σ (Magma-UU l) is-unital-Magma
+Unital-Magma : (l : Level) → UU (lsuc l)
+Unital-Magma l = Σ (Magma l) is-unital-Magma
 
 magma-Unital-Magma :
-  {l : Level} → Unital-Magma-UU l → Magma-UU l
+  {l : Level} → Unital-Magma l → Magma l
 magma-Unital-Magma M = pr1 M
   
 is-unital-magma-Unital-Magma :
-  {l : Level} (M : Unital-Magma-UU l) → is-unital-Magma (magma-Unital-Magma M)
+  {l : Level} (M : Unital-Magma l) → is-unital-Magma (magma-Unital-Magma M)
 is-unital-magma-Unital-Magma M = pr2 M
+```
 
-is-semigroup-Magma : {l : Level} → Magma-UU l → UU l
+### Semigroups
+
+```agda
+is-semigroup-Magma : {l : Level} → Magma l → UU l
 is-semigroup-Magma M =
   (x y z : type-Magma M) →
-  Id (μ-Magma M (μ-Magma M x y) z) (μ-Magma M x (μ-Magma M y z))
+  Id (mul-Magma M (mul-Magma M x y) z) (mul-Magma M x (mul-Magma M y z))
+```
 
-is-commutative-Magma : {l : Level} → Magma-UU l → UU l
+### Commutative magmas
+
+```agda
+is-commutative-Magma : {l : Level} → Magma l → UU l
 is-commutative-Magma M =
-  (x y : type-Magma M) → Id (μ-Magma M x y) (μ-Magma M y x)
+  (x y : type-Magma M) → Id (mul-Magma M x y) (mul-Magma M y x)
+```
 
-is-commutative-monoid-Magma : {l : Level} → Magma-UU l → UU l
+### The structure of a commutative monoid on magmas
+
+```agda
+is-commutative-monoid-Magma : {l : Level} → Magma l → UU l
 is-commutative-monoid-Magma M =
   ((is-semigroup-Magma M) × (is-unital-Magma M)) × (is-commutative-Magma M)
 
 unit-is-commutative-monoid-Magma :
-  {l : Level} (M : Magma-UU l) → is-commutative-monoid-Magma M → type-Magma M
+  {l : Level} (M : Magma l) → is-commutative-monoid-Magma M → type-Magma M
 unit-is-commutative-monoid-Magma M H = pr1 (pr2 (pr1 H))
 ```

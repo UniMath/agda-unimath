@@ -7,7 +7,19 @@ title: Formalisation of the Symmetry Book
 
 module synthetic-homotopy-theory.27-sequences where
 
-open import synthetic-homotopy-theory.26-id-pushout public
+open import elementary-number-theory.natural-numbers
+
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.univalence
+open import foundation.universe-levels
 
 {- We introduce two types of sequences: one with the arrows going up and one
    with the arrows going down. -}

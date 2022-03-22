@@ -29,29 +29,29 @@ record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Se
     hom-Large-Precat :
       {l1 l2 : Level} → obj-Large-Precat l1 → obj-Large-Precat l2 →
       UU-Set (β l1 l2)
-    comp-Large-Precat :
+    comp-hom-Large-Precat :
       {l1 l2 l3 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       {Z : obj-Large-Precat l3} →
       type-Set (hom-Large-Precat Y Z) → type-Set (hom-Large-Precat X Y) →
       type-Set (hom-Large-Precat X Z)
-    id-Large-Precat :
+    id-hom-Large-Precat :
       {l1 : Level} {X : obj-Large-Precat l1} → type-Set (hom-Large-Precat X X)
-    associative-comp-Large-Precat :
+    associative-comp-hom-Large-Precat :
       {l1 l2 l3 l4 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       {Z : obj-Large-Precat l3} {W : obj-Large-Precat l4} →
       (h : type-Set (hom-Large-Precat Z W))
       (g : type-Set (hom-Large-Precat Y Z))
       (f : type-Set (hom-Large-Precat X Y)) →
-      Id ( comp-Large-Precat (comp-Large-Precat h g) f)
-         ( comp-Large-Precat h (comp-Large-Precat g f))
-    left-unit-law-comp-Large-Precat :
+      Id ( comp-hom-Large-Precat (comp-hom-Large-Precat h g) f)
+         ( comp-hom-Large-Precat h (comp-hom-Large-Precat g f))
+    left-unit-law-comp-hom-Large-Precat :
       {l1 l2 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       (f : type-Set (hom-Large-Precat X Y)) →
-      Id ( comp-Large-Precat id-Large-Precat f) f
-    right-unit-law-comp-Large-Precat :
+      Id ( comp-hom-Large-Precat id-hom-Large-Precat f) f
+    right-unit-law-comp-hom-Large-Precat :
       {l1 l2 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       (f : type-Set (hom-Large-Precat X Y)) →
-      Id ( comp-Large-Precat f id-Large-Precat) f
+      Id ( comp-hom-Large-Precat f id-hom-Large-Precat) f
 
 open Large-Precat public
 
@@ -74,16 +74,16 @@ module _
   {Z : obj-Large-Precat C l3}
   where
 
-  ap-comp-Large-Precat :
+  ap-comp-hom-Large-Precat :
     {g g' : type-hom-Large-Precat C Y Z} (p : Id g g')
     {f f' : type-hom-Large-Precat C X Y} (q : Id f f') →
-    Id (comp-Large-Precat C g f) (comp-Large-Precat C g' f')
-  ap-comp-Large-Precat p q = ap-binary (comp-Large-Precat C) p q
+    Id (comp-hom-Large-Precat C g f) (comp-hom-Large-Precat C g' f')
+  ap-comp-hom-Large-Precat p q = ap-binary (comp-hom-Large-Precat C) p q
 
-  comp-Large-Precat' :
+  comp-hom-Large-Precat' :
     type-hom-Large-Precat C X Y → type-hom-Large-Precat C Y Z →
     type-hom-Large-Precat C X Z
-  comp-Large-Precat' f g = comp-Large-Precat C g f
+  comp-hom-Large-Precat' f g = comp-hom-Large-Precat C g f
 ```
 
 ## Examples
@@ -96,9 +96,9 @@ The sets and functions, of all universes, form a precategory.
 Set-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
 obj-Large-Precat Set-Large-Precat = UU-Set
 hom-Large-Precat Set-Large-Precat = hom-Set
-comp-Large-Precat Set-Large-Precat g f = g ∘ f
-id-Large-Precat Set-Large-Precat = id
-associative-comp-Large-Precat Set-Large-Precat h g f = refl
-left-unit-law-comp-Large-Precat Set-Large-Precat f = refl
-right-unit-law-comp-Large-Precat Set-Large-Precat f = refl
+comp-hom-Large-Precat Set-Large-Precat g f = g ∘ f
+id-hom-Large-Precat Set-Large-Precat = id
+associative-comp-hom-Large-Precat Set-Large-Precat h g f = refl
+left-unit-law-comp-hom-Large-Precat Set-Large-Precat f = refl
+right-unit-law-comp-hom-Large-Precat Set-Large-Precat f = refl
 ```

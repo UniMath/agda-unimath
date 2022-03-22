@@ -26,8 +26,9 @@ open import foundation.maybe using
     is-not-exception-unit-Maybe; is-value-Maybe; value-is-value-Maybe;
     is-value-is-not-exception-Maybe; eq-is-value-Maybe;
     is-decidable-is-exception-Maybe; is-injective-unit-Maybe;
-    is-not-exception-is-value-Maybe)
+    is-not-exception-is-value-Maybe; maybe-structure)
 open import foundation.unit-type using (is-set-unit; unit; star)
+open import foundation.universal-property-maybe using (ind-Maybe)
 open import foundation.universe-levels using (Level; UU)
 open import foundation.sets using
   ( Id-Prop; UU-Set; type-Set; is-set-type-Set)
@@ -40,6 +41,35 @@ open import foundation-core.propositions using (eq-is-prop)
 ## Idea
 
 For any two types `X` and `Y`, we have `(X ≃ Y) ↔ (Maybe X ≃ Maybe Y)`.
+
+## Definition
+
+### The action of the Maybe modality on equivalences
+
+```agda
+equiv-Maybe :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) → Maybe X ≃ Maybe Y
+equiv-Maybe e = equiv-coprod e id-equiv
+```
+
+### Equivalences of Maybe-structures on a type
+
+```agda
+equiv-maybe-structure :
+  {l1 : Level} {X : UU l1} (Y Z : maybe-structure X) → UU l1
+equiv-maybe-structure Y Z =
+  Σ (pr1 Y ≃ pr1 Z) (λ e → htpy-equiv (pr2 Y) (pr2 Z ∘e equiv-Maybe e))
+
+id-equiv-maybe-structure :
+  {l1 : Level} {X : UU l1} (Y : maybe-structure X) → equiv-maybe-structure Y Y
+id-equiv-maybe-structure Y =
+  pair id-equiv (ind-Maybe (pair refl-htpy refl))
+
+equiv-eq-maybe-structure :
+  {l1 : Level} {X : UU l1} (Y Z : maybe-structure X) →
+  Id Y Z → equiv-maybe-structure Y Z
+equiv-eq-maybe-structure Y .Y refl = id-equiv-maybe-structure Y
+```
 
 ## Properties
 

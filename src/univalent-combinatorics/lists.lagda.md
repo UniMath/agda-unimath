@@ -37,7 +37,7 @@ open import foundation.unit-type using
   ( raise-unit; raise-star; is-contr-raise-unit; unit; star)
 open import foundation.universe-levels using (UU; Level)
 
-open import group-theory.abstract-groups using (Monoid)
+open import group-theory.monoids using (Monoid)
 ```
 
 ## Idea

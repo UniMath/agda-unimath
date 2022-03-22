@@ -22,7 +22,8 @@ open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; lzero)
 
-open import group-theory.abstract-groups using (Semigroup; Group)
+open import group-theory.groups using (Group)
+open import group-theory.semigroups using (Semigroup)
 
 open import univalent-combinatorics.counting using (count)
 open import univalent-combinatorics.finite-types using

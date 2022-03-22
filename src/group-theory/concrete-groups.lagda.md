@@ -21,7 +21,8 @@ open import foundation.subuniverses using (UU-Trunc)
 open import foundation.truncated-types using (is-trunc)
 open import foundation.truncation-levels using (one-𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
-open import group-theory.abstract-groups using (Group; type-hom-Group)
+
+open import group-theory.groups using (Group)
 open import group-theory.higher-groups using
   ( ∞-Group; type-∞-Group; classifying-pointed-type-∞-Group;
     classifying-type-∞-Group; shape-∞-Group;
@@ -39,6 +40,8 @@ open import group-theory.higher-groups using
     htpy-hom-∞-Group; extensionality-hom-∞-Group;
     id-hom-∞-Group; comp-hom-∞-Group; assoc-comp-hom-∞-Group;
     left-unit-law-comp-hom-∞-Group; right-unit-law-comp-hom-∞-Group)
+open import group-theory.homomorphisms-groups using (type-hom-Group)
+
 open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
 
 Concrete-Group : (l : Level) → UU (lsuc l)
