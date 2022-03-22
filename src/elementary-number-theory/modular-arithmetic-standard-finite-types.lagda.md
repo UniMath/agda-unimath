@@ -22,7 +22,7 @@ open import elementary-number-theory.distance-natural-numbers using
     is-difference-dist-ℕ'; is-one-dist-succ-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; concatenate-div-eq-ℕ; div-eq-ℕ; is-zero-div-zero-ℕ; is-even-ℕ;
-    is-odd-ℕ)
+    is-odd-ℕ; is-prop-div-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ')
 open import elementary-number-theory.inequality-natural-numbers using
@@ -30,9 +30,11 @@ open import elementary-number-theory.inequality-natural-numbers using
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; mul-ℕ'; associative-mul-ℕ; commutative-mul-ℕ; left-unit-law-mul-ℕ;
     left-distributive-mul-add-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
 
 open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
@@ -42,6 +44,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary
 open import foundation.injective-maps using (is-injective)
 open import foundation.split-surjective-maps using (is-split-surjective)
 open import foundation.unit-type using (star)
+open import foundation.universe-levels using (lzero)
 
 open import univalent-combinatorics.equality-standard-finite-types using
   ( is-decidable-is-zero-Fin)
@@ -772,6 +775,11 @@ is-decidable-div-ℕ (succ-ℕ d) x =
     ( div-is-zero-mod-succ-ℕ d x)
     ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
+
+div-ℕ-decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → decidable-Prop lzero
+pr1 (div-ℕ-decidable-Prop d x H) = div-ℕ d x
+pr1 (pr2 (div-ℕ-decidable-Prop d x H)) = is-prop-div-ℕ d x H
+pr2 (pr2 (div-ℕ-decidable-Prop d x H)) = is-decidable-div-ℕ d x
 
 is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
 is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x

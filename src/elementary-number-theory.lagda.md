@@ -8,12 +8,15 @@ module elementary-number-theory where
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
+open import elementary-number-theory.arithmetic-functions public
+open import elementary-number-theory.bounded-sums-arithmetic-functions public
 open import elementary-number-theory.catalan-numbers public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
+open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
 open import elementary-number-theory.divisibility-integers public
@@ -42,6 +45,7 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public

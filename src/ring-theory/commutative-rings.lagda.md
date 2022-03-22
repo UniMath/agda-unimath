@@ -11,7 +11,7 @@ open import foundation.propositions using (is-prop; is-prop-Π)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import ring-theory.rings using
-  ( Ring; type-Ring; mul-Ring; is-set-type-Ring)
+  ( Ring; type-Ring; mul-Ring; is-set-type-Ring; zero-Ring; add-Ring; neg-Ring)
 ```
 
 ## Idea
@@ -39,11 +39,25 @@ Comm-Ring :
   ( l : Level) → UU (lsuc l)
 Comm-Ring l = Σ (Ring l) is-commutative-Ring
 
-ring-Comm-Ring :
-  { l : Level} → Comm-Ring l → Ring l
-ring-Comm-Ring = pr1
+module _
+  {l : Level} (R : Comm-Ring l)
+  where
+  
+  ring-Comm-Ring : Ring l
+  ring-Comm-Ring = pr1 R
 
-is-commutative-Comm-Ring :
-  { l : Level} (R : Comm-Ring l) → is-commutative-Ring (ring-Comm-Ring R)
-is-commutative-Comm-Ring = pr2
+  is-commutative-Comm-Ring : is-commutative-Ring ring-Comm-Ring
+  is-commutative-Comm-Ring = pr2 R
+
+  type-Comm-Ring : UU l
+  type-Comm-Ring = type-Ring ring-Comm-Ring
+
+  zero-Comm-Ring : type-Comm-Ring
+  zero-Comm-Ring = zero-Ring ring-Comm-Ring
+
+  add-Comm-Ring : type-Comm-Ring → type-Comm-Ring → type-Comm-Ring
+  add-Comm-Ring = add-Ring ring-Comm-Ring
+
+  neg-Comm-Ring : type-Comm-Ring → type-Comm-Ring
+  neg-Comm-Ring = neg-Ring ring-Comm-Ring
 ```
