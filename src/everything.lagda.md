@@ -34,6 +34,7 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
 open import elementary-number-theory.congruence-integers
@@ -379,7 +380,7 @@ open import group-theory.symmetric-groups
 open import group-theory.transitive-group-actions
 open import labels
 open import linear-algebra
-open import linear-algebra.diagonal-vectors
+open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices-on-commutative-monoids
 open import linear-algebra.matrices-on-magmas
@@ -463,6 +464,7 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 open import tutorials.basic-agda
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-types
