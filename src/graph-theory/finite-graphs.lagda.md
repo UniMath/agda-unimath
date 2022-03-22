@@ -7,8 +7,6 @@ title: Formalisation of the Symmetry Book
 
 module graph-theory.finite-graphs where
 
-open import elementary-number-theory.natural-numbers
-
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -18,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+open import elementary-number-theory.natural-numbers
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -79,9 +78,9 @@ record Graph-𝔽' : UU (lsuc lzero)
     edge : type-𝔽 vertex → type-𝔽 vertex → 𝔽
     σ : (x y : type-𝔽 vertex) → type-𝔽 (edge x y) ≃ type-𝔽 (edge y x)
     σ² : (x y : type-𝔽 vertex) → map-equiv ((σ y x) ∘e (σ x y)) ~ id
-  
+
 {- The degree of a vertex x of a graph G is the set of occurences of x as an
-   endpoint of x. Note that the unordered pair {x,x} adds two elements to the 
+   endpoint of x. Note that the unordered pair {x,x} adds two elements to the
    degree of x.  -}
 
 incident-edges-vertex-Graph-𝔽 :

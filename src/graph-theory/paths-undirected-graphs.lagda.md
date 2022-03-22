@@ -19,6 +19,8 @@ open import graph-theory.undirected-graphs using
 A path in an undirected graph consists of a list of edges that connect the starting point with the end point
 
 ```agda
+-- TODO: I would rather use the notion of a walk, as a path is often a walk without repeated vertices.
+
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
@@ -30,7 +32,7 @@ module _
       refl-path-Undirected-Graph : path-Undirected-Graph x x
       cons-path-Undirected-Graph :
         (p : unordered-pair (vertex-Undirected-Graph G)) →
-        (e : edge-Undirected-Graph G p) → 
+        (e : edge-Undirected-Graph G p) →
         {y : type-unordered-pair p} →
         path-Undirected-Graph x (element-unordered-pair p y) →
         path-Undirected-Graph x (other-element-unordered-pair p y)

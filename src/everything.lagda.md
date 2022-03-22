@@ -328,6 +328,7 @@ open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.incidence-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
