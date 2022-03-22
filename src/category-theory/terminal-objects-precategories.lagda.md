@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module category-theory.terminal-object-precategories where
+module category-theory.terminal-objects-precategories where
 
 open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat)

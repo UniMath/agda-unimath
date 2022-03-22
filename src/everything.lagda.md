@@ -14,7 +14,7 @@ open import category-theory.functors-categories
 open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
 open import category-theory.homotopies-natural-transformations-large-precategories
-open import category-theory.initial-object-precategories
+open import category-theory.initial-objects-precategories
 open import category-theory.isomorphisms-categories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.isomorphisms-precategories
@@ -28,7 +28,7 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
-open import category-theory.terminal-object-precategories
+open import category-theory.terminal-objects-precategories
 open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
@@ -240,7 +240,7 @@ open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
-open import foundation.lower-types-W-types
+open import foundation.lower-types-w-types
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
@@ -380,7 +380,7 @@ open import group-theory.symmetric-groups
 open import group-theory.transitive-group-actions
 open import labels
 open import linear-algebra
-open import linear-algebra.diagonal-vectors
+open import linear-algebra.constant-vectors
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices-on-commutative-monoids
 open import linear-algebra.matrices-on-magmas
@@ -423,13 +423,19 @@ open import order-theory.total-preorders
 open import polytopes
 open import polytopes.abstract-polytopes
 open import ring-theory
+open import ring-theory.commutative-rings
+open import ring-theory.discrete-fields
+open import ring-theory.division-rings
 open import ring-theory.eisenstein-integers
 open import ring-theory.gaussian-integers
+open import ring-theory.homomorphisms-commutative-rings
+open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals
+open import ring-theory.invertible-elements-rings
+open import ring-theory.isomorphisms-commutative-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
-open import ring-theory.ring-homomorphisms
-open import ring-theory.rings-with-properties
+open import ring-theory.nontrivial-rings
 open import ring-theory.rings
 open import synthetic-homotopy-theory
 open import synthetic-homotopy-theory.23-pullbacks
