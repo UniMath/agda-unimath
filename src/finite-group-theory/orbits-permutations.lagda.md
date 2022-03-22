@@ -9,7 +9,7 @@ module finite-group-theory.orbits-permutations where
 open import finite-group-theory.transpositions using
   ( transposition; equiv-transposition-two-elements; transposition-two-elements; not-computation-transposition-two-elements;
     right-computation-transposition-two-elements; left-computation-transposition-two-elements;
-    is-involution-map-transposition)
+    is-involution-map-transposition; permutation-list-transpositions; two-elements-transposition)
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
@@ -18,6 +18,7 @@ open import elementary-number-theory.equality-natural-numbers using
 open import elementary-number-theory.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ; strict-upper-bound-remainder-euclidean-division-ℕ;
     quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using (mod-two-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using (mul-ℕ)
 open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Σ-ℕ)
@@ -43,6 +44,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-Prop; is-decidable-trunc-Prop-is-merely-decidable; is-decidable-coprod;
     is-decidable-prod; is-decidable-neg; is-prop-is-decidable)
 open import foundation.decidable-maps using (is-decidable-map)
+open import foundation.decidable-propositions using (decidable-Prop; type-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
 open import foundation.embeddings using (is-emb)
@@ -87,8 +89,9 @@ open import univalent-combinatorics.equality-standard-finite-types using (has-de
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-type-UU-Fin-Level; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level;
     number-of-elements-is-finite; number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
-    has-finite-cardinality-count; all-elements-equal-has-finite-cardinality)
+    has-finite-cardinality-count; all-elements-equal-has-finite-cardinality; has-cardinality)
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
+open import univalent-combinatorics.lists using (list; length-list; cons; nil)
 open import univalent-combinatorics.pigeonhole-principle using (two-points-same-image-le-count)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin; zero-Fin; equiv-succ-Fin)
@@ -1367,4 +1370,38 @@ module _
     cases-opposite-sign-composition-transposition (inr NP) =
       ap (λ k → iterate (add-ℕ (number-of-elements-count eX) k) succ-Fin zero-Fin)
         ( number-orbits-composition-transposition' g NP)
+
+module _
+  {l : Level} (X : UU l) (eX : count X)
+  where
+  
+  sign-list-transpositions-count :
+    ( li : list (Σ (X → decidable-Prop l) (λ P → has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))) →
+    Id
+      ( iterate (length-list li) succ-Fin
+        ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) id-equiv))
+      ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+        ( permutation-list-transpositions X li))
+  sign-list-transpositions-count nil = refl
+  sign-list-transpositions-count (cons t li) =
+    ap succ-Fin
+      ( (sign-list-transpositions-count li) ∙
+        opposite-sign-composition-transposition-count X eX (pr1 two-elements-t) (pr1 (pr2 two-elements-t))
+          ( pr1 (pr2 (pr2 two-elements-t))) (permutation-list-transpositions X li )) ∙
+      ( is-involution-aut-Fin-two-ℕ equiv-succ-Fin
+        (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+          (permutation-list-transpositions X
+            (cons (transposition-two-elements (has-decidable-equality-count eX)
+              ( pr1 two-elements-t) (pr1 (pr2 two-elements-t)) (pr1 (pr2 (pr2 two-elements-t)))) li))) ∙
+        ( ap
+          ( λ g → sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+            (permutation-list-transpositions X (cons g li)))
+          { x = transposition-two-elements (has-decidable-equality-count eX) (pr1 two-elements-t) (pr1 (pr2 two-elements-t))
+            (pr1 (pr2 (pr2 two-elements-t)))}
+          { y = t}
+          ( pr2 (pr2 (pr2 two-elements-t)))))
+    where
+    two-elements-t :
+      Σ X (λ x → Σ X (λ y → Σ (¬ (Id x y)) (λ np → Id (transposition-two-elements (has-decidable-equality-count eX) x y np) t)))
+    two-elements-t = two-elements-transposition eX t
 ```
