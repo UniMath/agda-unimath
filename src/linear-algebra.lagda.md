@@ -7,7 +7,7 @@ module linear-algebra where
 ```
 
 ```agda
-open import linear-algebra.diagonal-vectors public
+open import linear-algebra.constant-vectors public
 open import linear-algebra.functoriality-vectors public
 open import linear-algebra.matrices-on-commutative-monoids public
 open import linear-algebra.matrices-on-magmas public
