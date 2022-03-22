@@ -24,9 +24,8 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.unordered-pairs using
   ( map-unordered-pair; htpy-unordered-pair; preserves-refl-htpy-unordered-pair)
 
-open import graph-theory.graphs using
-  ( Graph; vertex-Graph; edge-Graph;
-    unordered-pair-vertices-Graph)
+open import graph-theory.directed-graphs using
+  ( Graph; vertex-Graph; edge-Graph)
 ```
 
 ## Definitions
@@ -34,6 +33,7 @@ open import graph-theory.graphs using
 ### Morphisms graphs
 
 ```agda
+{-
 module _
   {l1 l2 l3 l4 : Level}
   (G : Graph l1 l2) (H : Graph l3 l4)
@@ -65,11 +65,13 @@ module _
     edge-Graph H
       ( unordered-pair-vertices-hom-Graph f p)
   edge-hom-Graph f = pr2 f
+-}
 ```
 
 ### Composition of morphisms graphs
 
 ```agda
+{-
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (G : Graph l1 l2) (H : Graph l3 l4)
@@ -82,11 +84,13 @@ module _
   pr1 (comp-hom-Graph (pair gV gE) (pair fV fE)) = gV ∘ fV
   pr2 (comp-hom-Graph (pair gV gE) (pair fV fE)) p e =
     gE (map-unordered-pair fV p) (fE p e)
+-}
 ```
 
 ### Identity morphisms graphs
 
 ```agda
+{-
 module _
   {l1 l2 : Level} (G : Graph l1 l2)
   where
@@ -94,6 +98,7 @@ module _
   id-hom-Graph : hom-Graph G G
   pr1 id-hom-Graph = id
   pr2 id-hom-Graph p = id
+-}
 ```
 
 
@@ -102,6 +107,7 @@ module _
 ### Characterizing the identity type of morphisms graphs
 
 ```agda
+{-
 module _
   {l1 l2 l3 l4 : Level}
   (G : Graph l1 l2) (H : Graph l3 l4)
@@ -193,4 +199,5 @@ module _
     (f g : hom-Graph G H) → htpy-hom-Graph f g → Id f g
   eq-htpy-hom-Graph f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Graph f g)
+-}
 ```

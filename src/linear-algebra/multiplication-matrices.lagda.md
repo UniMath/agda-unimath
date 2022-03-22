@@ -4,11 +4,25 @@
 {-# OPTIONS --without-K --exact-split #-}
 
 module linear-algebra.multiplication-matrices where
+
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+
+open import foundation.universe-levels using (Level; UU)
+
+open import linear-algebra.constant-vectors using (constant-vec)
+open import linear-algebra.matrices-on-rings using (matrix-Ring)
+open import linear-algebra.vectors using (empty-vec; _∷_)
+open import linear-algebra.vectors-on-rings using (vec-Ring)
+
+open import ring-theory.rings using (Ring; type-Ring)
 ```
 
 ## Definition
 
+### Multiplication of matrices
+
 ```agda
+{-
 mul-vector-matrix : {l : Level} → {K : UU l} → {m n : ℕ} →
                      (K → K → K) → (K → K → K) → K →
                      vec K m → Mat K m n → vec K n
@@ -24,6 +38,7 @@ mul-Mat _ _ zero empty-vec _ = empty-vec
 mul-Mat mulK addK zero (v ∷ vs) m =
   mul-vector-matrix mulK addK zero v m
     ∷ mul-Mat mulK addK zero vs m
+-}
 ```
 
 ## Properties
@@ -48,6 +63,7 @@ mul-transpose mulK-comm (a ∷ as) b = {!!}
  - identity (TODO)
 
 ```agda
+{-
 module _
   {l : Level}
   {K : UU l}
@@ -109,6 +125,7 @@ module _
       ∙ ap (_∷_ (add-vec addK (mul-vector-matrix mulK addK zero a b)
                               (mul-vector-matrix mulK addK zero a c)))
           (left-distributive-matrices id-vec k-distr addK-comm addK-assoc as b c)
+-}
 
 {- TODO: right distributivity
   right-distributive-matrices :

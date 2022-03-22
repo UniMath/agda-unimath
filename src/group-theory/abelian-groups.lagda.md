@@ -14,7 +14,7 @@ open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.groups using
   ( Group; type-Group; mul-Group; set-Group; is-set-type-Group;
-    associative-mul-Group; assoc-mul-Group; semigroup-Group; is-group;
+    associative-mul-Group; has-associative-mul-Group; semigroup-Group; is-group;
     is-group-Group; is-unital-Group; unit-Group; left-unit-law-Group;
     right-unit-law-Group; inv-Group; left-inverse-law-Group;
     right-inverse-law-Group; is-group'; has-inverses-Group)
@@ -65,18 +65,18 @@ is-set-type-Ab :
   {l : Level} (A : Ab l) → is-set (type-Ab A)
 is-set-type-Ab A = is-set-type-Group (group-Ab A)
 
-associative-add-Ab :
+has-associative-add-Ab :
   {l : Level} (A : Ab l) → has-associative-mul-Set (set-Ab A)
-associative-add-Ab A = associative-mul-Group (group-Ab A)
+has-associative-add-Ab A = has-associative-mul-Group (group-Ab A)
 
 add-Ab :
   {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
 add-Ab A = mul-Group (group-Ab A)
 
-assoc-add-Ab :
+associative-add-Ab :
   {l : Level} (A : Ab l) (x y z : type-Ab A) →
   Id (add-Ab A (add-Ab A x y) z) (add-Ab A x (add-Ab A y z))
-assoc-add-Ab A = assoc-mul-Group (group-Ab A)
+associative-add-Ab A = associative-mul-Group (group-Ab A)
 
 semigroup-Ab :
   {l : Level} (A : Ab l) → Semigroup l

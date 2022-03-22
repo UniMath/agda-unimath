@@ -11,7 +11,7 @@ open import foundation.universe-levels using (Level)
 
 open import group-theory.group-actions using (Abstract-Group-Action)
 open import group-theory.groups using
-  ( Group; set-Group; equiv-mul-Group; assoc-mul-Group)
+  ( Group; set-Group; equiv-mul-Group; associative-mul-Group)
 ```
 
 ## Idea
@@ -29,5 +29,5 @@ module _
   pr1 principal-Abstract-Group-Action = set-Group G
   pr1 (pr2 principal-Abstract-Group-Action) g = equiv-mul-Group G g
   pr2 (pr2 principal-Abstract-Group-Action) g h =
-    eq-htpy-equiv (assoc-mul-Group G g h)
+    eq-htpy-equiv (associative-mul-Group G g h)
 ```

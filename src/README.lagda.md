@@ -418,22 +418,17 @@ open import group-theory.transitive-group-actions
 
 ```agda
 open import linear-algebra
-open import linear-algebra.diagonal-vectors
+open import linear-algebra.constant-matrices
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-matrices
 open import linear-algebra.functoriality-vectors
-open import linear-algebra.matrices-on-commutative-monoids
-open import linear-algebra.matrices-on-magmas
-open import linear-algebra.matrices-on-monoids
-open import linear-algebra.matrices-on-wild-unital-magmas
+open import linear-algebra.matrices-on-rings
 open import linear-algebra.matrices
 open import linear-algebra.multiplication-matrices
 open import linear-algebra.scalar-multiplication-matrices
 open import linear-algebra.scalar-multiplication-vectors
 open import linear-algebra.transposition-matrices
-open import linear-algebra.vectors-on-commutative-monoids
-open import linear-algebra.vectors-on-magmas
-open import linear-algebra.vectors-on-monoids
 open import linear-algebra.vectors-on-rings
-open import linear-algebra.vectors-on-wild-unital-magmas
 open import linear-algebra.vectors
 ```
 
@@ -489,7 +484,6 @@ open import ring-theory.isomorphisms-commutative-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
 open import ring-theory.nontrivial-rings
-open import ring-theory.rings-with-properties
 open import ring-theory.rings
 ```
 

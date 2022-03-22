@@ -17,7 +17,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; left-inverse-law-Group;
-    set-Group; equiv-mul-Group; assoc-mul-Group)
+    set-Group; equiv-mul-Group; associative-mul-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group; preserves-unit-hom-Group;
     preserves-mul-hom-Group)

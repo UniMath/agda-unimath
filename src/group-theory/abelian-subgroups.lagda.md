@@ -29,7 +29,7 @@ open import group-theory.subgroups using
     closed-under-inv-Subgroup; type-group-Subgroup; incl-group-Subgroup;
     is-emb-incl-group-Subgroup; eq-subgroup-eq-group; set-group-Subgroup;
     unit-group-Subgroup; mul-group-Subgroup; inv-group-Subgroup;
-    assoc-mul-group-Subgroup; left-unit-law-group-Subgroup;
+    associative-mul-group-Subgroup; left-unit-law-group-Subgroup;
     right-unit-law-group-Subgroup; left-inverse-law-group-Subgroup;
     right-inverse-law-group-Subgroup; group-Subgroup;
     preserves-mul-incl-group-Subgroup; hom-group-Subgroup)
@@ -190,7 +190,7 @@ is-associative-add-ab-Subgroup-Ab :
   Id (add-ab-Subgroup-Ab A P (add-ab-Subgroup-Ab A P x y) z)
      (add-ab-Subgroup-Ab A P x (add-ab-Subgroup-Ab A P y z))
 is-associative-add-ab-Subgroup-Ab A =
-  assoc-mul-group-Subgroup (group-Ab A)
+  associative-mul-group-Subgroup (group-Ab A)
 
 left-zero-law-ab-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →

@@ -15,7 +15,7 @@ open import foundation.universe-levels using (Level)
 
 open import group-theory.embeddings-groups using (emb-Group)
 open import group-theory.groups using
-  ( Group; type-Group; set-Group; equiv-mul-Group; assoc-mul-Group;
+  ( Group; type-Group; set-Group; equiv-mul-Group; associative-mul-Group;
     right-unit-law-Group; unit-Group; is-set-type-Group)
 open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group)
@@ -34,7 +34,7 @@ module _
   preserves-mul-map-Cayleys-theorem :
     preserves-mul-Group G (symmetric-Group (set-Group G)) map-Cayleys-theorem
   preserves-mul-map-Cayleys-theorem x y =
-    eq-htpy-equiv (λ z → assoc-mul-Group G x y z)
+    eq-htpy-equiv (λ z → associative-mul-Group G x y z)
 
   hom-Cayleys-theorem : type-hom-Group G (symmetric-Group (set-Group G))
   pr1 hom-Cayleys-theorem = map-Cayleys-theorem

@@ -20,7 +20,7 @@ open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
-    assoc-mul-Group; left-unit-law-Group; right-unit-law-Group;
+    associative-mul-Group; left-unit-law-Group; right-unit-law-Group;
     left-inverse-law-Group; right-inverse-law-Group)
 open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group)
@@ -197,13 +197,13 @@ inv-group-Subgroup :
 inv-group-Subgroup G P x =
   pair (inv-Group G (pr1 x)) (closed-under-inv-Subgroup G P (pr1 x) (pr2 x))
 
-assoc-mul-group-Subgroup :
+associative-mul-group-Subgroup :
   {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
   ( x y z : type-group-Subgroup G P) →
   Id (mul-group-Subgroup G P (mul-group-Subgroup G P x y) z)
      (mul-group-Subgroup G P x (mul-group-Subgroup G P y z))
-assoc-mul-group-Subgroup G P x y z =
-  eq-subgroup-eq-group G P (assoc-mul-Group G (pr1 x) (pr1 y) (pr1 z))
+associative-mul-group-Subgroup G P x y z =
+  eq-subgroup-eq-group G P (associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
 
 left-unit-law-group-Subgroup :
   {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
@@ -243,7 +243,7 @@ group-Subgroup G P =
       ( set-group-Subgroup G P)
       ( pair
         ( mul-group-Subgroup G P)
-        ( assoc-mul-group-Subgroup G P)))
+        ( associative-mul-group-Subgroup G P)))
     ( pair
       ( pair
         ( unit-group-Subgroup G P)

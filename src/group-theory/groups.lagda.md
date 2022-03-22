@@ -79,11 +79,11 @@ module _
   is-set-type-Group : is-set type-Group
   is-set-type-Group = pr2 set-Group
   
-  associative-mul-Group : has-associative-mul type-Group
-  associative-mul-Group = pr2 semigroup-Group
+  has-associative-mul-Group : has-associative-mul type-Group
+  has-associative-mul-Group = pr2 semigroup-Group
   
   mul-Group : type-Group → type-Group → type-Group
-  mul-Group = pr1 associative-mul-Group
+  mul-Group = pr1 has-associative-mul-Group
 
   ap-mul-Group :
     {x x' y y' : type-Group} (p : Id x x') (q : Id y y') →
@@ -93,10 +93,10 @@ module _
   mul-Group' : type-Group → type-Group → type-Group
   mul-Group' x y = mul-Group y x
   
-  assoc-mul-Group :
+  associative-mul-Group :
     (x y z : type-Group) →
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
-  assoc-mul-Group = pr2 associative-mul-Group
+  associative-mul-Group = pr2 has-associative-mul-Group
     
   is-group-Group : is-group semigroup-Group
   is-group-Group = pr2 G
@@ -138,11 +138,11 @@ module _
     is-equiv-has-inverse
       ( mul-Group (inv-Group x))
       ( λ y →
-        ( inv (assoc-mul-Group _ _ _)) ∙
+        ( inv (associative-mul-Group _ _ _)) ∙
         ( ( ap (mul-Group' y) (right-inverse-law-Group x)) ∙
           ( left-unit-law-Group y)))
       ( λ y →
-        ( inv (assoc-mul-Group _ _ _)) ∙
+        ( inv (associative-mul-Group _ _ _)) ∙
         ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
           ( left-unit-law-Group y)))
   
@@ -155,11 +155,11 @@ module _
     is-equiv-has-inverse
     ( mul-Group' (inv-Group x))
       ( λ y →
-        ( assoc-mul-Group _ _ _) ∙
+        ( associative-mul-Group _ _ _) ∙
         ( ( ap (mul-Group y) (left-inverse-law-Group x)) ∙
           ( right-unit-law-Group y)))
       ( λ y →
-        ( assoc-mul-Group _ _ _) ∙
+        ( associative-mul-Group _ _ _) ∙
         ( ( ap (mul-Group y) (right-inverse-law-Group x)) ∙
           ( right-unit-law-Group y)))
   
@@ -173,7 +173,7 @@ module _
   transpose-eq-mul-Group {x} {y} {z} refl =
     ( ( inv (right-unit-law-Group x)) ∙
       ( ap (mul-Group x) (inv (right-inverse-law-Group y)))) ∙
-    ( inv (assoc-mul-Group x y (inv-Group y)))
+    ( inv (associative-mul-Group x y (inv-Group y)))
 
   transpose-eq-mul-Group' :
     {x y z : type-Group} →
@@ -181,7 +181,7 @@ module _
   transpose-eq-mul-Group' {x} {y} {z} refl =
     ( ( inv (left-unit-law-Group y)) ∙
       ( ap (mul-Group' y) (inv (left-inverse-law-Group x)))) ∙
-    ( assoc-mul-Group (inv-Group x) x y)
+    ( associative-mul-Group (inv-Group x) x y)
 
   distributive-inv-mul-Group :
     (x y : type-Group) →
@@ -189,7 +189,7 @@ module _
   distributive-inv-mul-Group x y =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
-          ( ( assoc-mul-Group (inv-Group (mul-Group x y)) x y) ∙
+          ( ( associative-mul-Group (inv-Group (mul-Group x y)) x y) ∙
             ( left-inverse-law-Group (mul-Group x y)))) ∙
         ( left-unit-law-Group (inv-Group y)))
 ```

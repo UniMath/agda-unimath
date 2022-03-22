@@ -398,8 +398,8 @@ abstract
               is-set-type-Ring R (μ (μ x y) z) (μ x (μ y z))))))
             ( mul-Ring R)
             ( λ x y → refl)
-            ( is-associative-mul-Ring R))
-          ( pair (pair (mul-Ring R) (is-associative-mul-Ring R)) (λ x y → refl))
+            ( associative-mul-Ring R))
+          ( pair (pair (mul-Ring R) (associative-mul-Ring R)) (λ x y → refl))
           ( is-contr-total-Eq-subtype
             ( is-contr-total-Eq-subtype
               ( is-contr-total-path (unit-Ring R))

@@ -12,8 +12,9 @@ open import foundation.sets using (UU-Set; is-set)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.abelian-groups using
-  ( Ab; set-Ab; type-Ab; add-Ab; group-Ab; is-set-type-Ab; associative-add-Ab;
-    assoc-add-Ab; semigroup-Ab; is-group-Ab; has-zero-Ab; zero-Ab;
+  ( Ab; set-Ab; type-Ab; add-Ab; group-Ab; is-set-type-Ab;
+    has-associative-add-Ab; associative-add-Ab; semigroup-Ab; is-group-Ab;
+    has-zero-Ab; zero-Ab;
     left-unit-law-add-Ab; right-unit-law-add-Ab; has-negatives-Ab; neg-Ab;
     left-inverse-law-add-Ab; right-inverse-law-add-Ab; is-commutative-add-Ab)
 open import group-theory.groups using (Group; is-group; is-group')
@@ -62,18 +63,18 @@ is-set-type-Ring :
   {l : Level} (R : Ring l) → is-set (type-Ring R)
 is-set-type-Ring R = is-set-type-Ab (ab-Ring R)
 
-associative-add-Ring :
+has-associative-add-Ring :
   {l : Level} (R : Ring l) → has-associative-mul-Set (set-Ring R)
-associative-add-Ring R = associative-add-Ab (ab-Ring R)
+has-associative-add-Ring R = has-associative-add-Ab (ab-Ring R)
 
 add-Ring :
   {l : Level} (R : Ring l) → type-Ring R → type-Ring R → type-Ring R
 add-Ring R = add-Ab (ab-Ring R)
 
-is-associative-add-Ring :
+associative-add-Ring :
   {l : Level} (R : Ring l) (x y z : type-Ring R) →
   Id (add-Ring R (add-Ring R x y) z) (add-Ring R x (add-Ring R y z))
-is-associative-add-Ring R = assoc-add-Ab (ab-Ring R)
+associative-add-Ring R = associative-add-Ab (ab-Ring R)
 
 additive-semigroup-Ring :
   {l : Level} (R : Ring l) → Semigroup l
@@ -120,10 +121,10 @@ right-inverse-law-add-Ring :
   Id (add-Ring R x (neg-Ring R x)) (zero-Ring R)
 right-inverse-law-add-Ring R = right-inverse-law-add-Ab (ab-Ring R)
 
-is-commutative-add-Ring :
+commutative-add-Ring :
   {l : Level} (R : Ring l) (x y : type-Ring R) →
   Id (add-Ring R x y) (add-Ring R y x)
-is-commutative-add-Ring R = is-commutative-add-Ab (ab-Ring R)
+commutative-add-Ring R = is-commutative-add-Ab (ab-Ring R)
 
 has-associative-mul-Ring :
   {l : Level} (R : Ring l) → has-associative-mul-Set (set-Ring R)
@@ -133,10 +134,10 @@ mul-Ring :
   {l : Level} (R : Ring l) → type-Ring R → type-Ring R → type-Ring R
 mul-Ring R = pr1 (has-associative-mul-Ring R)
 
-is-associative-mul-Ring :
+associative-mul-Ring :
   {l : Level} (R : Ring l) (x y z : type-Ring R) →
   Id (mul-Ring R (mul-Ring R x y) z) (mul-Ring R x (mul-Ring R y z))
-is-associative-mul-Ring R = pr2 (has-associative-mul-Ring R)
+associative-mul-Ring R = pr2 (has-associative-mul-Ring R)
 
 multiplicative-semigroup-Ring :
   {l : Level} (R : Ring l) → Semigroup l

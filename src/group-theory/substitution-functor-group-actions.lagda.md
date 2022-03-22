@@ -30,7 +30,7 @@ open import group-theory.group-actions using
     transpose-eq-mul-Abstract-Group-Action; preserves-mul-Abstract-Group-Action)
 open import group-theory.groups using
   ( Group; set-Group; mul-Group; unit-Group; mul-Group'; left-unit-law-Group;
-    inv-Group; transpose-eq-mul-Group'; assoc-mul-Group)
+    inv-Group; transpose-eq-mul-Group'; associative-mul-Group)
 open import group-theory.homomorphisms-group-actions using
   ( type-hom-Abstract-Group-Action; id-hom-Abstract-Group-Action;
     comp-hom-Abstract-Group-Action)
@@ -191,7 +191,7 @@ module _
                         ( ( ap
                             ( mul-Group' H h)
                             ( preserves-mul-hom-Group G H f g' g)) ∙
-                          ( ( assoc-mul-Group H
+                          ( ( associative-mul-Group H
                               ( map-hom-Group G H f g')
                               ( map-hom-Group G H f g)
                               ( h)) ∙

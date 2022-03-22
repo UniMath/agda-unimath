@@ -14,7 +14,7 @@ open import elementary-number-theory.integers using (zero-ℤ; neg-ℤ)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (lzero)
 
-open import group-theory.abstract-groups using (Group)
+open import group-theory.groups using (Group)
 open import group-theory.semigroups using (Semigroup)
 ```
 

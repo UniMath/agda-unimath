@@ -15,7 +15,7 @@ open import group-theory.group-actions using
   ( Abstract-Group-Action)
 open import group-theory.groups using
   ( Group; type-Group; equiv-mul-Group'; inv-Group; equiv-mul-Group; set-Group;
-    ap-mul-Group; assoc-mul-Group; distributive-inv-mul-Group; mul-Group;
+    ap-mul-Group; associative-mul-Group; distributive-inv-mul-Group; mul-Group;
     mul-Group')
 ```
 
@@ -54,16 +54,16 @@ module _
     eq-htpy-equiv
       ( λ x →
         ( ap-mul-Group G
-          ( assoc-mul-Group G g h x)
+          ( associative-mul-Group G g h x)
           ( distributive-inv-mul-Group G g h)) ∙
         ( ( inv
-            ( assoc-mul-Group G
+            ( associative-mul-Group G
               ( mul-Group G g (mul-Group G h x))
               ( inv-Group G h)
               ( inv-Group G g))) ∙
           ( ap
             ( mul-Group' G (inv-Group G g))
-            ( assoc-mul-Group G g
+            ( associative-mul-Group G g
               ( mul-Group G h x)
               ( inv-Group G h)))))
 ```

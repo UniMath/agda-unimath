@@ -43,7 +43,7 @@ open import group-theory.equivalences-group-actions using
     comp-equiv-Abstract-Group-Action; inv-equiv-Abstract-Group-Action)
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; right-unit-law-Group;
-    equiv-mul-Group'; assoc-mul-Group; left-unit-law-Group; is-set-type-Group)
+    equiv-mul-Group'; associative-mul-Group; left-unit-law-Group; is-set-type-Group)
 open import group-theory.higher-groups using (∞-Group)
 open import group-theory.homomorphisms-groups using (type-hom-Group)
 open import group-theory.isomorphisms-groups using
@@ -517,7 +517,7 @@ module _
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
   pr1 (equiv-Eq-Torsor-Abstract-Group u) = equiv-mul-Group' G u
-  pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = assoc-mul-Group G g x u
+  pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = associative-mul-Group G g x u
 
   issec-equiv-Eq-Torsor-Abstract-Group :
     ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) ∘

@@ -13,7 +13,8 @@ open import foundation.identity-types using (Id; refl; ap-binary)
 open import foundation.universe-levels using (UU; Level)
 
 open import linear-algebra.functoriality-vectors using (map-vec)
-open import linear-algebra.vectors using (vec; _∷_; empty-vec; head; tail)
+open import linear-algebra.vectors using
+  ( vec; _∷_; empty-vec; head-vec; tail-vec)
 ```
 
 ## Idea
@@ -41,7 +42,7 @@ top-row-matrix (v ∷ M) = v
 ```agda
 left-column-matrix :
   {l : Level} {m n : ℕ} {A : UU l} → matrix A m (succ-ℕ n) → vec A m
-left-column-matrix = map-vec head
+left-column-matrix = map-vec head-vec
 ```
 
 ### The vertical tail of a matrix
@@ -49,7 +50,7 @@ left-column-matrix = map-vec head
 ```agda
 vertical-tail-matrix :
   {l : Level} {m n : ℕ} {A : UU l} → matrix A (succ-ℕ m) n → matrix A m n
-vertical-tail-matrix M = tail M
+vertical-tail-matrix M = tail-vec M
 ```
 
 ### The horizontal tail of a matrix
@@ -57,7 +58,7 @@ vertical-tail-matrix M = tail M
 ```agda
 horizontal-tail-matrix :
   {l : Level} {m n : ℕ} {A : UU l} → matrix A m (succ-ℕ n) → matrix A m n
-horizontal-tail-matrix = map-vec tail
+horizontal-tail-matrix = map-vec tail-vec
 ```
 
 ### The vertically empty matrix

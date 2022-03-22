@@ -15,7 +15,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.groups using
   ( Group; type-Group; semigroup-Group; unit-Group; left-unit-law-Group;
-    mul-Group; left-inverse-law-Group; assoc-mul-Group; inv-Group)
+    mul-Group; left-inverse-law-Group; associative-mul-Group; inv-Group)
 open import group-theory.homomorphisms-semigroups using
   ( preserves-mul-Semigroup; type-hom-Semigroup; htpy-hom-Semigroup;
     refl-htpy-hom-Semigroup; htpy-eq-hom-Semigroup;
@@ -196,7 +196,7 @@ abstract
            ( inv
              ( left-inverse-law-Group H
                ( map-hom-Group G H f (unit-Group G))))) ∙
-      ( ( assoc-mul-Group H
+      ( ( associative-mul-Group H
           ( inv-Group H (map-hom-Group G H f (unit-Group G)))
           ( map-hom-Group G H f (unit-Group G))
           ( map-hom-Group G H f (unit-Group G))) ∙
