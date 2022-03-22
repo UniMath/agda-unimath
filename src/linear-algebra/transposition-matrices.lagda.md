@@ -23,8 +23,8 @@ The transposition of a matrix is the operation that turns rows into columns and 
 ## Definition
 
 ```agda
-transpose-matrix : {l : Level} → {K : UU l} → {m n : ℕ} →
-            Mat K m n → Mat K n m
+transpose-matrix :
+  {l : Level} → {K : UU l} → {m n : ℕ} → Mat K m n → Mat K n m
 transpose-matrix {n = zero-ℕ} x = empty-vec
 transpose-matrix {n = succ-ℕ n} x =
   map-vec head x ∷ transpose-matrix (map-vec tail x)
