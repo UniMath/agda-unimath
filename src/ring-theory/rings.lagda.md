@@ -91,15 +91,15 @@ zero-Ring :
   {l : Level} (R : Ring l) → type-Ring R
 zero-Ring R = zero-Ab (ab-Ring R)
 
-left-zero-law-add-Ring :
+left-unit-law-add-Ring :
   {l : Level} (R : Ring l) (x : type-Ring R) →
   Id (add-Ring R (zero-Ring R) x) x
-left-zero-law-add-Ring R = left-unit-law-add-Ab (ab-Ring R)
+left-unit-law-add-Ring R = left-unit-law-add-Ab (ab-Ring R)
 
-right-zero-law-add-Ring :
+right-unit-law-add-Ring :
   {l : Level} (R : Ring l) (x : type-Ring R) →
   Id (add-Ring R x (zero-Ring R)) x
-right-zero-law-add-Ring R = right-unit-law-add-Ab (ab-Ring R)
+right-unit-law-add-Ring R = right-unit-law-add-Ab (ab-Ring R)
 
 has-negatives-Ring :
   {l : Level} (R : Ring l) →
@@ -110,15 +110,15 @@ neg-Ring :
   {l : Level} (R : Ring l) → type-Ring R → type-Ring R
 neg-Ring R = neg-Ab (ab-Ring R)
 
-left-negative-law-Ring :
+left-inverse-law-add-Ring :
   {l : Level} (R : Ring l) (x : type-Ring R) →
   Id (add-Ring R (neg-Ring R x) x) (zero-Ring R)
-left-negative-law-Ring R = left-inverse-law-add-Ab (ab-Ring R)
+left-inverse-law-add-Ring R = left-inverse-law-add-Ab (ab-Ring R)
 
-right-negative-law-Ring :
+right-inverse-law-add-Ring :
   {l : Level} (R : Ring l) (x : type-Ring R) →
   Id (add-Ring R x (neg-Ring R x)) (zero-Ring R)
-right-negative-law-Ring R = right-inverse-law-add-Ab (ab-Ring R)
+right-inverse-law-add-Ring R = right-inverse-law-add-Ab (ab-Ring R)
 
 is-commutative-add-Ring :
   {l : Level} (R : Ring l) (x y : type-Ring R) →

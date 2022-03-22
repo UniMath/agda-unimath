@@ -25,74 +25,74 @@ An `(m × n)`-matrix of elements in `A` is an arrangement of elements of A with 
 ### Matrices
 
 ```agda
-Mat : {l : Level} (A : UU l) → ℕ → ℕ → UU l
-Mat A m n = vec (vec A n) m
+matrix : {l : Level} (A : UU l) → ℕ → ℕ → UU l
+matrix A m n = vec (vec A n) m
 ```
 
 ### The top row of a matrix
 
 ```agda
-top-row-Mat : {l : Level} {m n : ℕ} {A : UU l} → Mat A (succ-ℕ m) n → vec A n
-top-row-Mat (v ∷ M) = v
+top-row-matrix : {l : Level} {m n : ℕ} {A : UU l} → matrix A (succ-ℕ m) n → vec A n
+top-row-matrix (v ∷ M) = v
 ```
 
 ### The left column of a matrix
 
 ```agda
-left-column-Mat :
-  {l : Level} {m n : ℕ} {A : UU l} → Mat A m (succ-ℕ n) → vec A m
-left-column-Mat = map-vec head
+left-column-matrix :
+  {l : Level} {m n : ℕ} {A : UU l} → matrix A m (succ-ℕ n) → vec A m
+left-column-matrix = map-vec head
 ```
 
 ### The vertical tail of a matrix
 
 ```agda
-vertical-tail-Mat :
-  {l : Level} {m n : ℕ} {A : UU l} → Mat A (succ-ℕ m) n → Mat A m n
-vertical-tail-Mat M = tail M
+vertical-tail-matrix :
+  {l : Level} {m n : ℕ} {A : UU l} → matrix A (succ-ℕ m) n → matrix A m n
+vertical-tail-matrix M = tail M
 ```
 
 ### The horizontal tail of a matrix
 
 ```agda
-horizontal-tail-Mat :
-  {l : Level} {m n : ℕ} {A : UU l} → Mat A m (succ-ℕ n) → Mat A m n
-horizontal-tail-Mat = map-vec tail
+horizontal-tail-matrix :
+  {l : Level} {m n : ℕ} {A : UU l} → matrix A m (succ-ℕ n) → matrix A m n
+horizontal-tail-matrix = map-vec tail
 ```
 
 ### The vertically empty matrix
 
 ```agda
-vertically-empty-Mat :
-  {l : Level} {n : ℕ} {A : UU l} → Mat A 0 n
-vertically-empty-Mat = empty-vec
+vertically-empty-matrix :
+  {l : Level} {n : ℕ} {A : UU l} → matrix A 0 n
+vertically-empty-matrix = empty-vec
 
-eq-vertically-empty-Mat :
-  {l : Level} {n : ℕ} {A : UU l} (x : Mat A 0 n) → Id vertically-empty-Mat x
-eq-vertically-empty-Mat empty-vec = refl
+eq-vertically-empty-matrix :
+  {l : Level} {n : ℕ} {A : UU l} (x : matrix A 0 n) → Id vertically-empty-matrix x
+eq-vertically-empty-matrix empty-vec = refl
 
-is-contr-Mat-zero-ℕ :
-  {l : Level} {n : ℕ} {A : UU l} → is-contr (Mat A 0 n)
-pr1 is-contr-Mat-zero-ℕ = vertically-empty-Mat
-pr2 is-contr-Mat-zero-ℕ = eq-vertically-empty-Mat
+is-contr-matrix-zero-ℕ :
+  {l : Level} {n : ℕ} {A : UU l} → is-contr (matrix A 0 n)
+pr1 is-contr-matrix-zero-ℕ = vertically-empty-matrix
+pr2 is-contr-matrix-zero-ℕ = eq-vertically-empty-matrix
 ```
 
 ### The horizontally empty matrix
 
 ```agda
-horizontally-empty-Mat :
-  {l : Level} {m : ℕ} {A : UU l} → Mat A m 0
-horizontally-empty-Mat {m = zero-ℕ} = empty-vec
-horizontally-empty-Mat {m = succ-ℕ m} = empty-vec ∷ horizontally-empty-Mat
+horizontally-empty-matrix :
+  {l : Level} {m : ℕ} {A : UU l} → matrix A m 0
+horizontally-empty-matrix {m = zero-ℕ} = empty-vec
+horizontally-empty-matrix {m = succ-ℕ m} = empty-vec ∷ horizontally-empty-matrix
 
-eq-horizontally-empty-Mat :
-  {l : Level} {m : ℕ} {A : UU l} (x : Mat A m 0) → Id horizontally-empty-Mat x
-eq-horizontally-empty-Mat {m = zero-ℕ} empty-vec = refl
-eq-horizontally-empty-Mat {m = succ-ℕ m} (empty-vec ∷ M) =
-  ap-binary _∷_ refl (eq-horizontally-empty-Mat M)
+eq-horizontally-empty-matrix :
+  {l : Level} {m : ℕ} {A : UU l} (x : matrix A m 0) → Id horizontally-empty-matrix x
+eq-horizontally-empty-matrix {m = zero-ℕ} empty-vec = refl
+eq-horizontally-empty-matrix {m = succ-ℕ m} (empty-vec ∷ M) =
+  ap-binary _∷_ refl (eq-horizontally-empty-matrix M)
 
-is-contr-Mat-zero-ℕ' :
-  {l : Level} {m : ℕ} {A : UU l} → is-contr (Mat A m 0)
-pr1 is-contr-Mat-zero-ℕ' = horizontally-empty-Mat
-pr2 is-contr-Mat-zero-ℕ' = eq-horizontally-empty-Mat
+is-contr-matrix-zero-ℕ' :
+  {l : Level} {m : ℕ} {A : UU l} → is-contr (matrix A m 0)
+pr1 is-contr-matrix-zero-ℕ' = horizontally-empty-matrix
+pr2 is-contr-matrix-zero-ℕ' = eq-horizontally-empty-matrix
 ```

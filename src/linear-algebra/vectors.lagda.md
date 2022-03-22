@@ -24,9 +24,9 @@ data vec {l : Level} (A : UU l) : ℕ → UU l where
   empty-vec : vec A zero-ℕ
   _∷_ : ∀ {n} → A → vec A n → vec A (succ-ℕ n)
 
-head : {l : Level} {A : UU l} {n : ℕ} → vec A (succ-ℕ n) → A
-head (x ∷ v) = x
+head-vec : {l : Level} {A : UU l} {n : ℕ} → vec A (succ-ℕ n) → A
+head-vec (x ∷ v) = x
 
-tail : {l : Level} {A : UU l} {n : ℕ} → vec A (succ-ℕ n) → vec A n
-tail (x ∷ v) = v
+tail-vec : {l : Level} {A : UU l} {n : ℕ} → vec A (succ-ℕ n) → vec A n
+tail-vec (x ∷ v) = v
 ```
