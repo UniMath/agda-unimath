@@ -217,7 +217,7 @@ open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
-open ipmort foundation.lower-types-w-types
+open import foundation.lower-types-w-types
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences

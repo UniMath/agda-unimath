@@ -68,7 +68,7 @@ module _
   pr2 graph-Undirected-Graph x y =
     Σ ( unordered-pair-vertices-Undirected-Graph G)
       ( λ p →
-        ( mere-Eq-unordered-pair (standard-unordered-pair x y) p) × 
+        ( mere-Eq-unordered-pair (standard-unordered-pair x y) p) ×
         ( edge-Undirected-Graph G p))
 
   graph-Undirected-Graph' : Graph l1 l2
