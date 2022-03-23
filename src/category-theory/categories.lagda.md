@@ -8,9 +8,9 @@ module category-theory.categories where
 open import category-theory.isomorphisms-precategories using
   ( iso-Precat; id-iso-Precat; iso-eq-Precat; is-set-iso-Precat)
 open import category-theory.precategories using
-  ( Precat; obj-Precat; id-Precat; hom-Precat; type-hom-Precat;
-    is-set-type-hom-Precat; comp-Precat; assoc-comp-Precat;
-    left-unit-law-comp-Precat; right-unit-law-comp-Precat)
+  ( Precat; obj-Precat; id-hom-Precat; hom-Precat; type-hom-Precat;
+    is-set-type-hom-Precat; comp-hom-Precat; assoc-comp-hom-Precat;
+    left-unit-law-comp-hom-Precat; right-unit-law-comp-hom-Precat)
 open import foundation.1-types using (is-1-type; UU-1-Type)
 open import foundation.contractible-types using (is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)
@@ -44,7 +44,8 @@ module _
   is-category-Precat-Prop : UU-Prop (l1 ⊔ l2)
   is-category-Precat-Prop =
     Π-Prop (obj-Precat C)
-      ( λ x → Π-Prop (obj-Precat C) (λ y → is-equiv-Prop (iso-eq-Precat C x y)))
+      ( λ x →
+        Π-Prop (obj-Precat C) (λ y → is-equiv-Prop (iso-eq-Precat C x y)))
 
   is-category-Precat : UU (l1 ⊔ l2)
   is-category-Precat = type-Prop is-category-Precat-Prop
@@ -71,26 +72,26 @@ module _
   is-set-type-hom-Cat : (x y : obj-Cat) → is-set (type-hom-Cat x y)
   is-set-type-hom-Cat = is-set-type-hom-Precat precat-Cat
 
-  comp-Cat : {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
-  comp-Cat = comp-Precat precat-Cat
+  comp-hom-Cat : {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
+  comp-hom-Cat = comp-hom-Precat precat-Cat
 
-  assoc-comp-Cat :
+  assoc-comp-hom-Cat :
     {x y z w : obj-Cat}
     (h : type-hom-Cat z w) (g : type-hom-Cat y z) (f : type-hom-Cat x y) →
-    Id ( comp-Cat (comp-Cat h g) f)
-       ( comp-Cat h (comp-Cat g f))
-  assoc-comp-Cat = assoc-comp-Precat precat-Cat
+    Id ( comp-hom-Cat (comp-hom-Cat h g) f)
+       ( comp-hom-Cat h (comp-hom-Cat g f))
+  assoc-comp-hom-Cat = assoc-comp-hom-Precat precat-Cat
 
-  id-Cat : {x : obj-Cat} → type-hom-Cat x x
-  id-Cat = id-Precat precat-Cat
+  id-hom-Cat : {x : obj-Cat} → type-hom-Cat x x
+  id-hom-Cat = id-hom-Precat precat-Cat
 
-  left-unit-law-comp-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-Cat id-Cat f) f
-  left-unit-law-comp-Cat = left-unit-law-comp-Precat precat-Cat
+  left-unit-law-comp-hom-Cat :
+    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-hom-Cat id-hom-Cat f) f
+  left-unit-law-comp-hom-Cat = left-unit-law-comp-hom-Precat precat-Cat
 
-  right-unit-law-comp-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-Cat f id-Cat) f
-  right-unit-law-comp-Cat = right-unit-law-comp-Precat precat-Cat
+  right-unit-law-comp-hom-Cat :
+    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-hom-Cat f id-hom-Cat) f
+  right-unit-law-comp-hom-Cat = right-unit-law-comp-hom-Precat precat-Cat
 
   is-category-Cat : is-category-Precat precat-Cat
   is-category-Cat = pr2 C
