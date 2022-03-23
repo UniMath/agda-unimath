@@ -71,6 +71,31 @@ module _
     unordered-pair-vertices-Edge-Coloured-Undirected-Graph → UU l3
   edge-Edge-Coloured-Undirected-Graph =
     edge-Undirected-Graph undirected-graph-Edge-Coloured-Undirected-Graph
+
+  incidence-Edge-Coloured-Undirected-Graph :
+    vertex-Edge-Coloured-Undirected-Graph → UU (l2 ⊔ l3)
+  incidence-Edge-Coloured-Undirected-Graph =
+    incidence-Undirected-Graph undirected-graph-Edge-Coloured-Undirected-Graph
+
+  colouring-Edge-Coloured-Undirected-Graph :
+    (p : unordered-pair-vertices-Edge-Coloured-Undirected-Graph) →
+    edge-Edge-Coloured-Undirected-Graph p → C
+  colouring-Edge-Coloured-Undirected-Graph =
+    pr1 (pr2 G)
+
+  incidence-colouring-Edge-Coloured-Undirected-Graph :
+    (x : vertex-Edge-Coloured-Undirected-Graph) →
+    incidence-Edge-Coloured-Undirected-Graph x → C
+  incidence-colouring-Edge-Coloured-Undirected-Graph =
+    incidence-edge-colouring-Undirected-Graph C
+      undirected-graph-Edge-Coloured-Undirected-Graph
+      colouring-Edge-Coloured-Undirected-Graph
+
+  is-emb-colouring-Edge-Coloured-Undirected-Graph :
+    (x : vertex-Edge-Coloured-Undirected-Graph) →
+    is-emb (incidence-colouring-Edge-Coloured-Undirected-Graph x)
+  is-emb-colouring-Edge-Coloured-Undirected-Graph =
+    pr2 (pr2 G)
 ```
 
 ## Properties
