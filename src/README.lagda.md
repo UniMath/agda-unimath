@@ -37,6 +37,7 @@ open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
+open import category-theory.slice-precategories
 ```
 
 ## Elementary number theory
