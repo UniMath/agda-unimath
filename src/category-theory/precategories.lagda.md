@@ -85,20 +85,20 @@ module _
     associative-composition-structure-Set hom-Precat
   associative-composition-Precat = pr1 (pr2 (pr2 C))
 
-  comp-Precat : {x y z : obj-Precat} →
+  comp-hom-Precat : {x y z : obj-Precat} →
     type-hom-Precat y z → type-hom-Precat x y → type-hom-Precat x z
-  comp-Precat = pr1 associative-composition-Precat
+  comp-hom-Precat = pr1 associative-composition-Precat
 
-  comp-Precat' : {x y z : obj-Precat} →
+  comp-hom-Precat' : {x y z : obj-Precat} →
     type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
-  comp-Precat' f g = comp-Precat g f
+  comp-hom-Precat' f g = comp-hom-Precat g f
 
-  assoc-comp-Precat :
+  assoc-comp-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
-    Id (comp-Precat (comp-Precat h g) f)
-       (comp-Precat h (comp-Precat g f))
-  assoc-comp-Precat = pr2 associative-composition-Precat
+    Id (comp-hom-Precat (comp-hom-Precat h g) f)
+       (comp-hom-Precat h (comp-hom-Precat g f))
+  assoc-comp-hom-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
     is-unital-composition-structure-Set
@@ -106,18 +106,18 @@ module _
       associative-composition-Precat
   is-unital-Precat = pr2 (pr2 (pr2 C))
 
-  id-Precat : {x : obj-Precat} → type-hom-Precat x x
-  id-Precat {x} = pr1 is-unital-Precat x
+  id-hom-Precat : {x : obj-Precat} → type-hom-Precat x x
+  id-hom-Precat {x} = pr1 is-unital-Precat x
 
-  left-unit-law-comp-Precat :
+  left-unit-law-comp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    Id (comp-Precat id-Precat f) f
-  left-unit-law-comp-Precat = pr1 (pr2 is-unital-Precat)
+    Id (comp-hom-Precat id-hom-Precat f) f
+  left-unit-law-comp-hom-Precat = pr1 (pr2 is-unital-Precat)
 
-  right-unit-law-comp-Precat :
+  right-unit-law-comp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    Id (comp-Precat f id-Precat) f
-  right-unit-law-comp-Precat = pr2 (pr2 is-unital-Precat)
+    Id (comp-hom-Precat f id-hom-Precat) f
+  right-unit-law-comp-hom-Precat = pr2 (pr2 is-unital-Precat)
 ```
 
 ## Properties
