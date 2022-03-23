@@ -50,4 +50,27 @@ Edge-Coloured-Undirected-Graph :
 Edge-Coloured-Undirected-Graph l1 l2 C =
   Σ ( Undirected-Graph l1 l2)
     ( edge-colouring-Undirected-Graph C)
+
+module _
+  {l1 l2 l3 : Level} {C : UU l1} (G : Edge-Coloured-Undirected-Graph l2 l3 C)
+  where
+  
+  undirected-graph-Edge-Coloured-Undirected-Graph : Undirected-Graph l2 l3
+  undirected-graph-Edge-Coloured-Undirected-Graph = pr1 G
+
+  vertex-Edge-Coloured-Undirected-Graph : UU l2
+  vertex-Edge-Coloured-Undirected-Graph =
+    vertex-Undirected-Graph undirected-graph-Edge-Coloured-Undirected-Graph
+
+  unordered-pair-vertices-Edge-Coloured-Undirected-Graph : UU (lsuc lzero ⊔ l2)
+  unordered-pair-vertices-Edge-Coloured-Undirected-Graph =
+    unordered-pair-vertices-Undirected-Graph
+      undirected-graph-Edge-Coloured-Undirected-Graph
+
+  edge-Edge-Coloured-Undirected-Graph :
+    unordered-pair-vertices-Edge-Coloured-Undirected-Graph → UU l3
+  edge-Edge-Coloured-Undirected-Graph =
+    edge-Undirected-Graph undirected-graph-Edge-Coloured-Undirected-Graph
 ```
+
+## Properties
