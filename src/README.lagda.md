@@ -127,6 +127,7 @@ open import finite-group-theory.abstract-quaternion-group
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.orbits-permutations
+open import finite-group-theory.permutations
 open import finite-group-theory.transpositions
 ```
 
@@ -366,11 +367,13 @@ open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.incidence-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
+open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
@@ -510,6 +513,7 @@ open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.groups-of-loops-in-1-types
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
@@ -535,10 +539,12 @@ open import tutorials.basic-agda
 
 ```agda
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-function-types
@@ -581,6 +587,7 @@ open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.skipping-element-standard-finite-types
+open import univalent-combinatorics.species
 open import univalent-combinatorics.standard-finite-pruned-trees
 open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
