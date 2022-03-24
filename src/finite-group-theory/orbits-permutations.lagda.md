@@ -124,8 +124,6 @@ open import univalent-combinatorics.standard-finite-types using
 
 The orbit of a point `x` for a permutation `f` is the set of point obtained by iterating `f` on `x`.
 
-...
-
 ## Properties
 
 ### For type equipped with a counting, orbits of permutations are finite
