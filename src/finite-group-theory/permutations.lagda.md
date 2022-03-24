@@ -5,16 +5,16 @@
 
 module finite-group-theory.permutations where
 
+open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.iterating-functions using (iterate; iterate-involution)
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using (mod-two-ℕ; add-Fin)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using (mod-two-ℕ; add-Fin; mod-succ-add-ℕ)
 
 open import finite-group-theory.transpositions using
-  ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
-    left-computation-transposition-two-elements; map-transposition;
-    not-computation-transposition-two-elements; permutation-list-transpositions;
-    right-computation-transposition-two-elements; transposition; transposition-two-elements;
-    transposition-conjugation-equiv; correct-transposition-conjugation-equiv-list)
+  ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition; left-computation-transposition-two-elements;
+    map-transposition; not-computation-transposition-two-elements; permutation-list-transpositions;
+    eq-concat-permutation-list-transpositions; right-computation-transposition-two-elements; transposition;
+    transposition-two-elements; transposition-conjugation-equiv; correct-transposition-conjugation-equiv-list)
 open import finite-group-theory.orbits-permutations using
   ( sign-list-transpositions-count; sign-permutation-orbit)
 
@@ -70,7 +70,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
 open import univalent-combinatorics.finite-types using
   ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level)
 open import univalent-combinatorics.lists using
-  (cons; list; fold-list; map-list; nil; length-list; concat-list)
+  (cons; list; fold-list; map-list; nil; length-list; concat-list; length-concat-list)
 open import univalent-combinatorics.standard-finite-types using (Fin; nat-Fin; succ-Fin; equiv-succ-Fin; zero-Fin)
 ```
 
@@ -388,8 +388,8 @@ module _
             ( λ li → Id k (mod-two-ℕ (length-list li)) × Id f (permutation-list-transpositions (type-UU-Fin-Level X) li))))
 
     abstract
-      is-contr-parity-transposition-parmutation : is-contr parity-transposition-permutation
-      is-contr-parity-transposition-parmutation =
+      is-contr-parity-transposition-permutation : is-contr parity-transposition-permutation
+      is-contr-parity-transposition-permutation =
         apply-universal-property-trunc-Prop
           ( mere-equiv-UU-Fin-Level X)
           ( is-trunc-Prop neg-two-𝕋 parity-transposition-permutation)
@@ -444,7 +444,7 @@ module _
         is-injective-iterate-involution (inr star) (inr star) x p = refl
 
     sign-homomorphism-Fin-two : Fin 2
-    sign-homomorphism-Fin-two = pr1 (center is-contr-parity-transposition-parmutation)
+    sign-homomorphism-Fin-two = pr1 (center is-contr-parity-transposition-permutation)
 
   preserves-add-sign-homomorphism-Fin-two : (f g : (type-UU-Fin-Level X) ≃ (type-UU-Fin-Level X)) →
     Id (sign-homomorphism-Fin-two (f ∘e g)) (add-Fin (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
@@ -454,20 +454,40 @@ module _
       ( Id-Prop (Fin-Set 2)
         (sign-homomorphism-Fin-two (f ∘e g)) (add-Fin (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g)))
       ( λ h →
-        (ap pr1 (eq-is-contr (is-contr-parity-transposition-parmutation (f ∘e g))
-          {y = pair (mod-two-ℕ (length-list (list-comp-f-g h)))
-            (unit-trunc-Prop (pair (list-comp-f-g h) (pair refl (eq-list-comp-f-g h))))})) ∙
-          {!refl!})
+        ( ap pr1 (eq-is-contr (is-contr-parity-transposition-permutation (f ∘e g))
+          { x = center (is-contr-parity-transposition-permutation (f ∘e g))}
+          { y = pair (mod-two-ℕ (length-list (list-comp-f-g h)))
+            ( unit-trunc-Prop (pair (list-comp-f-g h) (pair refl (eq-list-comp-f-g h))))})) ∙
+          ( ap mod-two-ℕ
+            ( length-concat-list (list-trans f h) (list-trans g h)) ∙
+            ( mod-succ-add-ℕ 1 (length-list (list-trans f h)) (length-list (list-trans g h)) ∙
+              ( ap (λ P → add-Fin (pr1 P) (mod-two-ℕ (length-list (list-trans g h))))
+                { x = pair (mod-two-ℕ (length-list (list-trans f h)))
+                  (unit-trunc-Prop (pair (list-trans f h) (pair refl
+                    ( inv
+                      ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) f))))))}
+                { y = center (is-contr-parity-transposition-permutation f)}
+                ( eq-is-contr (is-contr-parity-transposition-permutation f)) ∙
+                ( ap (λ P → add-Fin (sign-homomorphism-Fin-two f) (pr1 P))
+                  { x = pair (mod-two-ℕ (length-list (list-trans g h)))
+                    (unit-trunc-Prop (pair (list-trans g h) (pair refl
+                      ( inv
+                        ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) g))))))}
+                  { y = center (is-contr-parity-transposition-permutation g)}
+                  (eq-is-contr (is-contr-parity-transposition-permutation g)))))))
     where
+    list-trans : (f' : (type-UU-Fin-Level X) ≃ (type-UU-Fin-Level X)) (h : Fin n ≃ type-UU-Fin-Level X) →
+      list
+        ( Σ
+          ((type-UU-Fin-Level X) → decidable-Prop l)
+          ( λ P → has-cardinality 2 (Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x)))))
+    list-trans f' h = list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) f'
     list-comp-f-g : (h : Fin n ≃ type-UU-Fin-Level X) →
       list
         ( Σ
           ((type-UU-Fin-Level X) → decidable-Prop l)
           ( λ P → has-cardinality 2 (Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x)))))
-    list-comp-f-g h =
-      concat-list
-        ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) f)
-        ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) g)
+    list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g : (h : Fin n ≃ type-UU-Fin-Level X) →
       Id (f ∘e g) (permutation-list-transpositions (type-UU-Fin-Level X) (list-comp-f-g h))
     eq-list-comp-f-g h =
@@ -475,9 +495,9 @@ module _
         ( λ x → (inv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) f (map-equiv g x))) ∙
           ap
             (map-equiv
-              (permutation-list-transpositions (type-UU-Fin-Level X)
-                (list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) f)))
-            ( inv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) g x))) ∙ {!!}
+              (permutation-list-transpositions (type-UU-Fin-Level X) (list-trans f h)))
+            ( inv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) g x))) ∙
+              ( eq-concat-permutation-list-transpositions (type-UU-Fin-Level X) (list-trans f h) (list-trans g h))
 ```
 
 ```agda

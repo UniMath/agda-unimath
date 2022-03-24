@@ -19,7 +19,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; htpy-equiv; id-equiv; inv-equiv; is-emb-is-equiv; is-equiv;
+  ( _≃_; _∘e_; eq-htpy-equiv; htpy-eq-equiv; htpy-equiv; id-equiv; inv-equiv; is-emb-is-equiv; is-equiv;
     is-equiv-has-inverse; left-inverse-law-equiv; right-inverse-law-equiv; map-equiv; map-inv-equiv)
 open import foundation.equivalences-maybe using
   ( extend-equiv-Maybe; comp-extend-equiv-Maybe; computation-inv-extend-equiv-Maybe)
@@ -54,7 +54,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; Fin-Set)
 open import univalent-combinatorics.finite-types using (has-cardinality; has-cardinality-Prop)
 open import univalent-combinatorics.lists using
-  (cons; list; fold-list; map-list; nil)
+  (cons; list; fold-list; map-list; nil; concat-list)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -130,6 +130,20 @@ module _
     ( X ≃ X)
   permutation-list-transpositions =
     fold-list id-equiv λ (pair P H) e → (transposition X P H) ∘e e
+
+  eq-concat-permutation-list-transpositions : 
+    (li li' : list
+      ( Σ
+        ( X → decidable-Prop l2)
+        ( λ P → has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))) →
+    Id ((permutation-list-transpositions li) ∘e (permutation-list-transpositions li'))
+      (permutation-list-transpositions (concat-list li li'))
+  eq-concat-permutation-list-transpositions nil li' = eq-htpy-equiv refl-htpy
+  eq-concat-permutation-list-transpositions (cons (pair P H) li) li' =
+    eq-htpy-equiv
+      (λ x → ap
+        ( map-equiv (transposition X P H))
+        ( htpy-eq-equiv (eq-concat-permutation-list-transpositions li li') x))
 ```
 
 ## Properties
