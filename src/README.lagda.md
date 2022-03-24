@@ -37,6 +37,7 @@ open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
+open import category-theory.slice-precategories
 ```
 
 ## Elementary number theory
@@ -46,14 +47,18 @@ open import elementary-number-theory
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.arithmetic-functions
 open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.bounded-sums-arithmetic-functions
 open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.collatz-conjecture
 open import elementary-number-theory.congruence-integers
 open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.decidable-dependent-function-types
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.difference-integers
+open import elementary-number-theory.dirichlet-convolution
 open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-integers
@@ -74,6 +79,8 @@ open import elementary-number-theory.fractions
 open import elementary-number-theory.goldbach-conjecture
 open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-standard-finite-types
@@ -81,12 +88,15 @@ open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.integers
 open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.mersenne-primes
+open import elementary-number-theory.minimum-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.ordinal-induction-natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.products-of-natural-numbers
@@ -102,10 +112,10 @@ open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 open import elementary-number-theory.triangular-numbers
 open import elementary-number-theory.twin-prime-conjecture
-open import elementary-number-theory.universal-property-natural-numbers
-open import elementary-number-theory.upper-bounds-natural-numbers
 open import elementary-number-theory.unit-elements-standard-finite-types
 open import elementary-number-theory.unit-similarity-standard-finite-types
+open import elementary-number-theory.universal-property-natural-numbers
+open import elementary-number-theory.upper-bounds-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 ```
@@ -118,6 +128,7 @@ open import finite-group-theory.abstract-quaternion-group
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.orbits-permutations
+open import finite-group-theory.permutations
 open import finite-group-theory.transpositions
 ```
 
@@ -357,11 +368,13 @@ open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.incidence-undirected-graphs
 open import graph-theory.mere-equivalences-undirected-graphs
+open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
+open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
 ```
@@ -501,6 +514,7 @@ open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.groups-of-loops-in-1-types
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
@@ -526,10 +540,12 @@ open import tutorials.basic-agda
 
 ```agda
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.classical-finite-types
+open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-function-types
@@ -572,6 +588,7 @@ open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.skipping-element-standard-finite-types
+open import univalent-combinatorics.species
 open import univalent-combinatorics.standard-finite-pruned-trees
 open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types

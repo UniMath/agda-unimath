@@ -6,10 +6,10 @@
 module category-theory.isomorphisms-categories where
 
 open import category-theory.categories using
-  ( Cat; obj-Cat; type-hom-Cat; precat-Cat; id-Cat)
+  ( Cat; obj-Cat; type-hom-Cat; precat-Cat; id-hom-Cat)
 open import category-theory.isomorphisms-precategories using
   ( is-iso-Precat; iso-Precat; is-prop-is-iso-Precat;
-    is-set-iso-Precat; iso-Precat-Set; is-iso-id-Precat;
+    is-set-iso-Precat; iso-Precat-Set; is-iso-id-hom-Precat;
     id-iso-Precat; iso-eq-Precat)
 open import foundation.identity-types using (Id)
 open import foundation.propositions using (is-prop)
@@ -44,8 +44,8 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
 
-  is-iso-id-Cat : {x : obj-Cat C} → is-iso-Cat C (id-Cat C {x})
-  is-iso-id-Cat = is-iso-id-Precat (precat-Cat C)
+  is-iso-id-hom-Cat : {x : obj-Cat C} → is-iso-Cat C (id-hom-Cat C {x})
+  is-iso-id-hom-Cat = is-iso-id-hom-Precat (precat-Cat C)
 
   id-iso-Cat : {x : obj-Cat C} → iso-Cat C x x
   id-iso-Cat = id-iso-Precat (precat-Cat C)
