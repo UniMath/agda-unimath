@@ -1,7 +1,3 @@
----
-title: Univalent Mathematics in Agda
----
-
 # Iterating functions
 
 ```agda
@@ -11,9 +7,17 @@ module elementary-number-theory.iterating-functions where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using
+  ( mod-two-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.involutions using (is-involution)
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU)
+
+open import univalent-combinatorics.standard-finite-types using (nat-Fin; Fin; succ-Fin)
 ```
 
 # Iterating functions
@@ -47,4 +51,24 @@ module _
     ( inv (iterate-add-ℕ k l f x)) ∙
     ( ( ap (λ t → iterate t f x) (commutative-add-ℕ k l)) ∙
       ( iterate-add-ℕ l k f x))
+```
+
+### Iteration of involution
+
+```agda
+module _
+  {l : Level} {X : UU l} (f : X → X) (P : is-involution f)
+  where
+  
+  iterate-involution : (n : ℕ) (x : X) → Id (iterate n f x) (iterate (nat-Fin (mod-two-ℕ n)) f x)
+  iterate-involution zero-ℕ x = refl
+  iterate-involution (succ-ℕ n) x =
+    ap f (iterate-involution n x) ∙ (cases-iterate-involution (mod-two-ℕ n))
+    where
+    cases-iterate-involution : (k : Fin 2) →
+      Id (f (iterate (nat-Fin k) f x)) (iterate (nat-Fin (succ-Fin k)) f x) 
+    cases-iterate-involution (inl (inr star)) = refl
+    cases-iterate-involution (inr star) = P x
+    
+
 ```
