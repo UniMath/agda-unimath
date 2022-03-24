@@ -128,6 +128,9 @@ open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-monoids
+open import finite-group-theory.finite-semigroups
+open import finite-group-theory.groups-of-order-2
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
