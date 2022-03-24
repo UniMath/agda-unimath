@@ -37,16 +37,17 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
-open import foundation.identity-types using (refl; Id; _∙_; ap)
+open import foundation.identity-types using (refl; Id; _∙_; ap; tr)
 open import foundation.mere-equivalences using
   ( mere-equiv-Prop; mere-equiv)
 open import foundation.propositional-truncations using
   ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
-    apply-universal-property-trunc-Prop; type-trunc-Prop; ind-trunc-Prop)
+    apply-universal-property-trunc-Prop; type-trunc-Prop; ind-trunc-Prop;
+    is-prop-type-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
     all-elements-equal; is-prop-all-elements-equal; eq-is-prop; eq-is-prop';
-    equiv-prop)
+    equiv-prop; is-equiv-is-prop)
 open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using (is-set; is-set-Prop; Id-Prop)
 open import foundation.subtypes using (eq-subtype)
@@ -621,4 +622,22 @@ abstract
     is-path-connected-mere-eq
       ( Fin-UU-Fin n)
       ( λ A → functor-trunc-Prop (eq-equiv-UU-Fin (Fin-UU-Fin n) A) (pr2 A))
+```
+
+```agda
+  equiv-has-cardinality-id-number-of-elements-is-finite :
+    {l : Level} (X : UU l) ( H : is-finite X) (n : ℕ) →
+    ( has-cardinality n X ≃ Id (number-of-elements-is-finite H) n)
+  pr1 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) Q =
+    ap
+      ( number-of-elements-has-finite-cardinality)
+      ( all-elements-equal-has-finite-cardinality
+        ( has-finite-cardinality-is-finite H)
+        ( pair n Q))
+  pr2 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) =
+    is-equiv-is-prop
+      ( is-prop-type-trunc-Prop)
+      ( is-set-ℕ (number-of-elements-is-finite H) n)
+      ( λ p →
+        tr ( λ m → has-cardinality m X) p (pr2 (has-finite-cardinality-is-finite H)))
 ```
