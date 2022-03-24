@@ -5,6 +5,9 @@
 
 module univalent-combinatorics.2-element-types where
 
+open import
+  elementary-number-theory.modular-arithmetic-standard-finite-types using
+  ( add-Fin)
 open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ)
 
@@ -641,3 +644,21 @@ module _
         ( is-injective-map-equiv h (p ∙ inv q))
         ( P)
 ```
+
+### Evaluating an automorphism at `0 : Fin 2` is a group homomorphism
+
+```agda
+preserves-add-aut-point-Fin-two-ℕ :
+  (a b : Fin 2) →
+  Id ( aut-point-Fin-two-ℕ (add-Fin a b))
+     ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
+preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inl (inr star)) =
+  eq-htpy-equiv refl-htpy
+preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inr star) =
+  eq-htpy-equiv refl-htpy
+preserves-add-aut-point-Fin-two-ℕ (inr star) (inl (inr star)) =
+  eq-htpy-equiv refl-htpy
+preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
+  eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin x))
+```
+

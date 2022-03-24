@@ -34,10 +34,12 @@ open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level)
 
 open import group-theory.homomorphisms-groups using (type-hom-Group)
+open import group-theory.homomorphisms-semigroups using (preserves-mul)
 open import group-theory.symmetric-groups using (symmetric-Group)
 
 open import univalent-combinatorics.2-element-types using
-  ( aut-point-Fin-two-ℕ; is-involution-aut-Fin-two-ℕ)
+  ( aut-point-Fin-two-ℕ; is-involution-aut-Fin-two-ℕ;
+    preserves-add-aut-point-Fin-two-ℕ)
 open import univalent-combinatorics.equality-finite-types using
   ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
@@ -56,7 +58,7 @@ The sign of a permutation is defined as the parity of the length of the decompos
 
 ## Definitions
 
-### The sign homomorphism...
+### The sign homomorphism into ℤ/2
 
 ```agda
 module _
@@ -188,43 +190,33 @@ module _
                 ( list-trans g h))
 ```
 
-### The sign homomorphism
+### The sign homomorphism into the symmetric group S₂
 
 ```agda
 module _
   {l : Level} (n : ℕ) (X : UU-Fin-Level l n)
   where
 
+  map-sign-homomorphism : Aut (type-UU-Fin-Level X) → Aut (Fin 2)
+  map-sign-homomorphism f =
+    aut-point-Fin-two-ℕ (sign-homomorphism-Fin-two n X f)
+
+  preserves-comp-map-sign-homomorphism :
+    preserves-mul _∘e_ _∘e_ map-sign-homomorphism
+  preserves-comp-map-sign-homomorphism f g =
+    ( ap
+      ( aut-point-Fin-two-ℕ)
+      ( preserves-add-sign-homomorphism-Fin-two n X f g)) ∙
+    ( preserves-add-aut-point-Fin-two-ℕ
+      ( sign-homomorphism-Fin-two n X f)
+      ( sign-homomorphism-Fin-two n X g))
+  
+
   sign-homomorphism :
     type-hom-Group
       ( symmetric-Group (set-UU-Fin-Level X))
       ( symmetric-Group (Fin-Set 2))
-  pr1 sign-homomorphism f =
-    aut-point-Fin-two-ℕ (sign-homomorphism-Fin-two n X f)
-  pr2 sign-homomorphism f g =
-    ( ap
-      ( aut-point-Fin-two-ℕ)
-      { x = sign-homomorphism-Fin-two n X (f ∘e g)}
-      { y =
-        add-Fin
-          ( sign-homomorphism-Fin-two n X f)
-          ( sign-homomorphism-Fin-two n X g)}
-      ( preserves-add-sign-homomorphism-Fin-two n X f g)) ∙
-    ( cases-add-Fin-aut-point
-      ( sign-homomorphism-Fin-two n X f)
-      ( sign-homomorphism-Fin-two n X g))
-    where
-    cases-add-Fin-aut-point :
-      (a b : Fin 2) →
-      Id ( aut-point-Fin-two-ℕ (add-Fin a b))
-         ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
-    cases-add-Fin-aut-point (inl (inr star)) (inl (inr star)) =
-      eq-htpy-equiv refl-htpy
-    cases-add-Fin-aut-point (inl (inr star)) (inr star) =
-      eq-htpy-equiv refl-htpy
-    cases-add-Fin-aut-point (inr star) (inl (inr star)) =
-      eq-htpy-equiv refl-htpy
-    cases-add-Fin-aut-point (inr star) (inr star) =
-      eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin x))
+  pr1 sign-homomorphism = map-sign-homomorphism
+  pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
 ```
 

@@ -1,4 +1,4 @@
-# Matrices on rings
+# Diagonal matrices on rings
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
