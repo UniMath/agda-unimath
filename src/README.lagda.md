@@ -36,8 +36,8 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
-open import category-theory.terminal-objects-precategories
 open import category-theory.slice-precategories
+open import category-theory.terminal-objects-precategories
 ```
 
 ## Elementary number theory
@@ -129,6 +129,7 @@ open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
+open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 ```
 
