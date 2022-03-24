@@ -7,94 +7,117 @@
 module finite-group-theory.orbits-permutations where
 
 open import finite-group-theory.transpositions using
-  ( transposition; equiv-transposition-two-elements; transposition-two-elements; not-computation-transposition-two-elements;
-    right-computation-transposition-two-elements; left-computation-transposition-two-elements;
-    is-involution-map-transposition; permutation-list-transpositions; two-elements-transposition)
+  ( transposition; equiv-transposition-two-elements; transposition-two-elements;
+    not-computation-transposition-two-elements;
+    right-computation-transposition-two-elements;
+    left-computation-transposition-two-elements;
+    is-involution-map-transposition; permutation-list-transpositions;
+    two-elements-transposition)
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
+open import elementary-number-theory.decidable-types using
+  ( is-decidable-bounded-Σ-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ; ℕ-Set)
 open import elementary-number-theory.euclidean-division-natural-numbers using
-  ( remainder-euclidean-division-ℕ; strict-upper-bound-remainder-euclidean-division-ℕ;
+  ( remainder-euclidean-division-ℕ;
+    strict-upper-bound-remainder-euclidean-division-ℕ;
     quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ)
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using (mod-two-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using (mul-ℕ)
-open import elementary-number-theory.decidable-types using
-  ( is-decidable-bounded-Σ-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
-  ( contradiction-le-ℕ; concatenate-leq-le-ℕ; concatenate-le-leq-ℕ; le-ℕ; succ-le-ℕ; _≤-ℕ_;
-    is-nonzero-le-ℕ; is-decidable-le-ℕ; is-decidable-leq-ℕ; decide-leq-ℕ; le-leq-neq-ℕ; leq-le-ℕ;
-    leq-le-succ-ℕ; subtraction-leq-ℕ; transitive-leq-ℕ; leq-mul-is-nonzero-ℕ; subtraction-le-ℕ;
-    le-subtraction-ℕ; transitive-le-ℕ; le-succ-ℕ)
+  ( contradiction-le-ℕ; concatenate-leq-le-ℕ; concatenate-le-leq-ℕ; le-ℕ;
+    succ-le-ℕ; _≤-ℕ_; is-nonzero-le-ℕ; is-decidable-le-ℕ; is-decidable-leq-ℕ;
+    decide-leq-ℕ; le-leq-neq-ℕ; leq-le-ℕ; leq-le-succ-ℕ; subtraction-leq-ℕ;
+    transitive-leq-ℕ; leq-mul-is-nonzero-ℕ; subtraction-le-ℕ; le-subtraction-ℕ;
+    transitive-le-ℕ; le-succ-ℕ)
 open import elementary-number-theory.iterating-functions using
   ( iterate; iterate-add-ℕ)
-open import elementary-number-theory.lower-bounds-natural-numbers using (is-lower-bound-ℕ)
+open import elementary-number-theory.lower-bounds-natural-numbers using
+  ( is-lower-bound-ℕ)
+open import
+  elementary-number-theory.modular-arithmetic-standard-finite-types using
+  ( mod-two-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers using
+  ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; succ-ℕ; zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ; is-zero-ℕ)
-open import elementary-number-theory.well-ordering-principle-natural-numbers using
+  ( ℕ; succ-ℕ; zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ; is-successor-ℕ;
+    is-successor-is-nonzero-ℕ; is-zero-ℕ)
+open import
+  elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ; minimal-element-ℕ-Prop)
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inr-inl; coprod-Prop)
+open import foundation.coproduct-types using
+  ( coprod; inl; inr; neq-inr-inl; coprod-Prop)
 open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-equiv; is-prop-has-decidable-equality;
-    has-decidable-equality-Σ)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-Prop; is-decidable-trunc-Prop-is-merely-decidable; is-decidable-coprod;
-    is-decidable-prod; is-decidable-neg; is-prop-is-decidable)
+  ( has-decidable-equality; has-decidable-equality-equiv;
+    is-prop-has-decidable-equality; has-decidable-equality-Σ)
 open import foundation.decidable-maps using (is-decidable-map)
-open import foundation.decidable-propositions using (decidable-Prop; type-decidable-Prop)
+open import foundation.decidable-propositions using
+  ( decidable-Prop; type-decidable-Prop)
+open import foundation.decidable-types using
+  ( is-decidable; is-decidable-Prop;
+    is-decidable-trunc-Prop-is-merely-decidable; is-decidable-coprod;
+    is-decidable-prod; is-decidable-neg; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; htpy-equiv; map-equiv; inv-equiv; map-inv-is-equiv; is-equiv-has-inverse; eq-htpy-equiv;
-    left-inverse-law-equiv; right-inverse-law-equiv; map-inv-equiv; id-equiv; htpy-eq-equiv)
-open import foundation.equivalence-relations using
-  ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; refl-Eq-Rel; symm-Eq-Rel; trans-Eq-Rel)
 open import foundation.equivalence-classes using
   ( large-set-quotient; large-quotient-Set; quotient-map-large-set-quotient;
-    is-surjective-quotient-map-large-set-quotient; type-class-large-set-quotient;
-    class-large-set-quotient; related-eq-quotient; is-equiv-related-eq-quotient;
+    is-surjective-quotient-map-large-set-quotient;
+    type-class-large-set-quotient; class-large-set-quotient;
+    related-eq-quotient; is-equiv-related-eq-quotient;
     transitive-type-class-large-set-quotient; eq-effective-quotient';
     is-prop-type-class-large-set-quotient)
+open import foundation.equivalence-relations using
+  ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; refl-Eq-Rel; symm-Eq-Rel; trans-Eq-Rel)
+open import foundation.equivalences using
+  ( _≃_; _∘e_; htpy-equiv; map-equiv; inv-equiv; map-inv-is-equiv;
+    is-equiv-has-inverse; eq-htpy-equiv; left-inverse-law-equiv;
+    right-inverse-law-equiv; map-inv-equiv; id-equiv; htpy-eq-equiv)
 open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy)
+open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.negation using (¬; reductio-ad-absurdum)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
+    trunc-Prop; unit-trunc-Prop; all-elements-equal-type-trunc-Prop;
+    type-trunc-Prop; universal-property-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
     is-prop; is-prop-Σ)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
-    trunc-Prop; unit-trunc-Prop; all-elements-equal-type-trunc-Prop; type-trunc-Prop;
-    universal-property-trunc-Prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.unit-type using (star; unit)
 open import foundation.univalence using (eq-equiv)
-open import foundation.universal-property-propositional-truncation using (htpy-is-propositional-truncation)
+open import foundation.universal-property-propositional-truncation using
+  ( htpy-is-propositional-truncation)
 open import foundation.universe-levels using (Level; UU; lzero)
 
-open import univalent-combinatorics.2-element-types using (is-involution-aut-Fin-two-ℕ)
+open import univalent-combinatorics.2-element-types using
+  ( is-involution-aut-Fin-two-ℕ)
 open import univalent-combinatorics.counting using
-  ( count; count-Fin; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
-    number-of-elements-count; has-decidable-equality-count)
-open import univalent-combinatorics.equality-standard-finite-types using (has-decidable-equality-Fin)
+  ( count; count-Fin; equiv-count; inv-equiv-count; map-equiv-count;
+    map-inv-equiv-count; number-of-elements-count; has-decidable-equality-count)
+open import univalent-combinatorics.equality-standard-finite-types using
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-type-UU-Fin-Level; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level;
-    number-of-elements-is-finite; number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
-    has-finite-cardinality-count; all-elements-equal-has-finite-cardinality; has-cardinality)
+  ( is-finite; is-finite-type-UU-Fin-Level; UU-Fin-Level; type-UU-Fin-Level;
+    mere-equiv-UU-Fin-Level; number-of-elements-is-finite;
+    number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
+    has-finite-cardinality-count; all-elements-equal-has-finite-cardinality;
+    has-cardinality)
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 open import univalent-combinatorics.lists using (list; length-list; cons; nil)
-open import univalent-combinatorics.pigeonhole-principle using (two-points-same-image-le-count)
+open import univalent-combinatorics.pigeonhole-principle using
+  ( two-points-same-image-le-count)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin; zero-Fin; equiv-succ-Fin)
+  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin;
+    zero-Fin; equiv-succ-Fin)
 ```
 
 ## Idea
