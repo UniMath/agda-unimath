@@ -5,150 +5,47 @@
 
 module finite-group-theory.finite-groups where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 
-open import foundation
-open import elementary-number-theory
-open import univalent-combinatorics
+open import finite-group-theory.finite-semigroups using
+  ( Semigroup-of-Order; is-π-finite-Semigroup-of-Order)
 
-open import group-theory
+open import foundation.decidable-types using (is-decidable-prod)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equivalences using (_≃_)
+open import foundation.mere-equivalences using (mere-equiv)
+open import foundation.propositional-truncations using
+  ( apply-universal-property-trunc-Prop)
+open import foundation.set-truncations using (type-trunc-Set)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( equiv-right-swap-Σ)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+
+open import group-theory.groups using
+  ( Group; type-Group; is-group; is-group-Prop)
+open import group-theory.semigroups using (Semigroup; mul-Semigroup)
+
+open import univalent-combinatorics.cartesian-product-types using (count-prod)
+open import univalent-combinatorics.counting using
+  ( has-decidable-equality-count)
+open import univalent-combinatorics.counting-decidable-subtypes using (count-eq)
+open import univalent-combinatorics.counting-dependent-function-types using
+  ( count-Π)
+open import univalent-combinatorics.counting-dependent-pair-types using
+  ( count-Σ)
+open import univalent-combinatorics.counting-function-types using
+  ( count-function-type)
+open import univalent-combinatorics.decidable-dependent-function-types using
+  ( is-decidable-Π-count)
+open import univalent-combinatorics.decidable-dependent-pair-types using
+  ( is-decidable-Σ-count)
+open import univalent-combinatorics.finite-types using
+  ( is-finite; is-finite-Prop; is-finite-is-decidable-Prop)
+open import univalent-combinatorics.pi-finite-types using
+  ( is-π-finite; is-π-finite-equiv; is-π-finite-Σ; is-π-finite-is-finite;
+    number-of-connected-components; mere-equiv-number-of-connected-components)
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
-
-```agda
--- We show that there are finitely many semi-groups of order n
-
-Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
-Semigroup-of-Order' l n =
-  Σ ( UU-Fin-Level l n)
-    ( λ X → has-associative-mul (type-UU-Fin-Level X))
-
-Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
-Semigroup-of-Order l n =
-  Σ (Semigroup l) (λ G → mere-equiv (Fin n) (type-Semigroup G))
-
-is-finite-has-associative-mul :
-  {l : Level} {X : UU l} → is-finite X → is-finite (has-associative-mul X)
-is-finite-has-associative-mul H =
-  is-finite-Σ
-    ( is-finite-function-type H (is-finite-function-type H H))
-    ( λ μ →
-      is-finite-Π H
-        ( λ x →
-          is-finite-Π H
-            ( λ y →
-              is-finite-Π H
-                ( λ z →
-                  is-finite-eq (has-decidable-equality-is-finite H)))))
-
-is-π-finite-Semigroup-of-Order' :
-  {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order' l n)
-is-π-finite-Semigroup-of-Order' k n =
-  is-π-finite-Σ k
-    ( is-π-finite-UU-Fin-Level (succ-ℕ k) n)
-    ( λ x →
-      is-π-finite-is-finite k
-        ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin-Level x)))
-
-is-π-finite-Semigroup-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order l n)
-is-π-finite-Semigroup-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Semigroup-of-Order' k n)
-  where
-  e : Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
-  e = ( equiv-Σ
-        ( has-associative-mul ∘ type-UU-Fin-Level)
-        ( ( right-unit-law-Σ-is-contr
-            ( λ X →
-              is-proof-irrelevant-is-prop
-                ( is-prop-is-set _)
-                ( is-set-is-finite
-                  ( is-finite-has-cardinality (pr2 X))))) ∘e
-          ( equiv-right-swap-Σ))
-        ( λ X → id-equiv)) ∘e
-      ( equiv-right-swap-Σ
-        { A = UU-Set l}
-        { B = has-associative-mul-Set}
-        { C = mere-equiv (Fin n) ∘ type-Set})
-
-number-of-semi-groups-of-order : ℕ → ℕ
-number-of-semi-groups-of-order n =
-  number-of-connected-components
-    ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
-
-mere-equiv-number-of-semi-groups-of-order :
-  (n : ℕ) →
-  mere-equiv
-    ( Fin (number-of-semi-groups-of-order n))
-    ( type-trunc-Set (Semigroup-of-Order lzero n))
-mere-equiv-number-of-semi-groups-of-order n =
-  mere-equiv-number-of-connected-components
-    ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
-
--- We show that there are finitely many monoids of order n
-
-Monoid-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
-Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M))
-
-is-finite-is-unital :
-  {l : Level} {n : ℕ} (X : Semigroup-of-Order l n) →
-  is-finite (is-unital (pr1 X))
-is-finite-is-unital {l} {n} X =
-  apply-universal-property-trunc-Prop
-    ( pr2 X)
-    ( is-finite-Prop _)
-    ( λ e →
-      is-finite-is-decidable-Prop
-        ( is-unital-Prop (pr1 X))
-        ( is-decidable-Σ-count
-          ( pair n e)
-          ( λ u →
-            is-decidable-prod
-              ( is-decidable-Π-count
-                ( pair n e)
-                ( λ x →
-                  has-decidable-equality-count
-                    ( pair n e)
-                    ( mul-Semigroup (pr1 X) u x)
-                    ( x)))
-              ( is-decidable-Π-count
-                ( pair n e)
-                ( λ x →
-                  has-decidable-equality-count
-                    ( pair n e)
-                    ( mul-Semigroup (pr1 X) x u)
-                    ( x))))))
-
-is-π-finite-Monoid-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Monoid-of-Order l n)
-is-π-finite-Monoid-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Σ k
-      ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
-      ( λ X →
-        is-π-finite-is-finite k
-          ( is-finite-is-unital X)))
-  where
-  e : Monoid-of-Order l n ≃
-      Σ (Semigroup-of-Order l n) (λ X → is-unital (pr1 X))
-  e = equiv-right-swap-Σ
-
-number-of-monoids-of-order : ℕ → ℕ
-number-of-monoids-of-order n =
-  number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
-
-mere-equiv-number-of-monoids-of-order :
-  (n : ℕ) →
-  mere-equiv
-    ( Fin (number-of-monoids-of-order n))
-    ( type-trunc-Set (Monoid-of-Order lzero n))
-mere-equiv-number-of-monoids-of-order n =
-  mere-equiv-number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
-```
-
 
 ```agda
 Group-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
