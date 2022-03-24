@@ -433,6 +433,7 @@ open import group-theory.transitive-group-actions
 open import linear-algebra
 open import linear-algebra.constant-matrices
 open import linear-algebra.constant-vectors
+open import linear-algebra.diagonal-matrices-on-rings
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices-on-rings
