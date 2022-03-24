@@ -211,7 +211,6 @@ module _
       ( sign-homomorphism-Fin-two n X f)
       ( sign-homomorphism-Fin-two n X g))
   
-
   sign-homomorphism :
     type-hom-Group
       ( symmetric-Group (set-UU-Fin-Level X))
