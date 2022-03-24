@@ -16,7 +16,11 @@ open import foundation.identity-types using (Id; tr; ap; _∙_)
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; UU-Prop; type-Prop;
     eq-is-prop; is-prop-type-Prop; is-prop-Π; type-hom-Prop; is-equiv-is-prop;
-    type-equiv-Prop; prod-Prop; is-prop-prod)
+    type-equiv-Prop; prod-Prop; is-prop-prod; eq-is-prop')
+open import foundation-core.truncation-levels using (neg-one-𝕋)
+open import foundation.truncations using
+  ( type-trunc; unit-trunc; is-trunc-type-trunc; trunc;
+    apply-dependent-universal-property-trunc)
 open import foundation.universal-property-propositional-truncation using
   ( is-propositional-truncation; is-propositional-truncation-extension-property;
     universal-property-propositional-truncation; 
@@ -31,39 +35,25 @@ open import foundation.universe-levels using (Level; UU)
 
 ## Idea
 
-We have specified what it means to be a propositional truncation in the file `foundation.universal-property-propositional-truncation`. Here we postulate the existence of propositional truncations.
+We have specified what it means to be a propositional truncation in the file `foundation.universal-property-propositional-truncation`. Here we use the postulate of the existence of truncations at all levels, found in the file `foundation.truncations`, to show that propositional truncations exist.
 
-## Postulates
+## Definition
 
 ```agda
-postulate type-trunc-Prop : {l : Level} → UU l → UU l
+type-trunc-Prop : {l : Level} → UU l → UU l
+type-trunc-Prop = type-trunc neg-one-𝕋
 
-postulate unit-trunc-Prop : {l : Level} {A : UU l} → A → type-trunc-Prop A
+unit-trunc-Prop : {l : Level} {A : UU l} → A → type-trunc-Prop A
+unit-trunc-Prop = unit-trunc
 
-postulate
-  all-elements-equal-type-trunc-Prop :
-    {l : Level} {A : UU l} → all-elements-equal (type-trunc-Prop A)
+is-prop-type-trunc-Prop : {l : Level} {A : UU l} → is-prop (type-trunc-Prop A)
+is-prop-type-trunc-Prop = is-trunc-type-trunc
 
-abstract
-  is-prop-type-trunc-Prop : {l : Level} {A : UU l} → is-prop (type-trunc-Prop A)
-  is-prop-type-trunc-Prop {l} {A} =
-    is-prop-all-elements-equal all-elements-equal-type-trunc-Prop
+all-elements-equal-type-trunc-Prop : {l : Level} {A : UU l} → all-elements-equal (type-trunc-Prop A)
+all-elements-equal-type-trunc-Prop {l} {A} = eq-is-prop' (is-prop-type-trunc-Prop {l} {A})
 
 trunc-Prop : {l : Level} → UU l → UU-Prop l
-pr1 (trunc-Prop A) = type-trunc-Prop A
-pr2 (trunc-Prop A) = is-prop-type-trunc-Prop
-```
-
-### The induction principle of propositional truncations
-
-```agda
-postulate
-  ind-trunc-Prop' :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → UU l)
-    (f : (x : A) → P (unit-trunc-Prop x))
-    (g : (x y : type-trunc-Prop A) (u : P x) (v : P y) →
-         Id (tr P (all-elements-equal-type-trunc-Prop x y) u) v) →
-    (x : type-trunc-Prop A) → P x
+trunc-Prop = trunc neg-one-𝕋
 ```
 
 ## Properties
@@ -85,6 +75,21 @@ abstract
         ( H x x u v))
 ```
 
+### The induction principle of propositional truncations
+
+```agda
+ind-trunc-Prop' :
+  {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → UU l)
+  (f : (x : A) → P (unit-trunc-Prop x))
+  (H : (x y : type-trunc-Prop A) (u : P x) (v : P y) →
+       Id (tr P (all-elements-equal-type-trunc-Prop x y) u) v) →
+  (x : type-trunc-Prop A) → P x
+ind-trunc-Prop' P f H =
+  apply-dependent-universal-property-trunc
+    ( λ x → pair (P x) (is-prop-condition-ind-trunc-Prop' H x))
+    ( f)
+```
+
 ### Simplified form of the induction principle for propositional truncations
 
 ```agda
@@ -104,7 +109,7 @@ abstract
     eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
 ```
 
-### The prostulated propositional truncations are propositional truncations
+### The defined propositional truncations are propositional truncations
 
 ```agda
 abstract
@@ -118,7 +123,7 @@ abstract
       ( λ {l} Q → ind-trunc-Prop (λ x → Q))
 ```
 
-### The postulated propositional truncations satisfy the universal property of propositional truncations
+### The defined propositional truncations satisfy the universal property of propositional truncations
 
 ```agda
 abstract
@@ -224,7 +229,7 @@ module _
     (y : type-trunc-Prop A) → ((x : A) → type-Prop (P (unit-trunc-Prop x))) →
     type-Prop (P y)
   apply-dependent-universal-property-trunc-Prop y f =
-    map-inv-equiv equiv-dependent-universal-property-trunc-Prop f y    
+    map-inv-equiv equiv-dependent-universal-property-trunc-Prop f y
 ```
 
 ### Propositional truncations distribute over cartesian products

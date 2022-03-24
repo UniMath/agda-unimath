@@ -11,7 +11,7 @@ open import foundation.functions using (_∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.truncated-types using
   ( is-trunc; Truncated-Type; type-Truncated-Type)
-open import foundation.truncation-levels using (𝕋)
+open import foundation-core.truncation-levels using (𝕋)
 open import foundation.universal-property-truncation using
   ( is-truncation; precomp-Trunc; universal-property-truncation;
     universal-property-truncation-is-truncation; map-is-truncation;

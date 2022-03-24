@@ -26,7 +26,7 @@ open import foundation.sections using (sec)
 open import foundation.truncated-types using
   ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type;
     Σ-Truncated-Type; fib-Truncated-Type; is-trunc)
-open import foundation.truncation-levels using (𝕋)
+open import foundation-core.truncation-levels using (𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
 
