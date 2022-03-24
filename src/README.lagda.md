@@ -111,6 +111,7 @@ open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 open import elementary-number-theory.triangular-numbers
+open import elementary-number-theory.telephone-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.unit-elements-standard-finite-types
 open import elementary-number-theory.unit-similarity-standard-finite-types
