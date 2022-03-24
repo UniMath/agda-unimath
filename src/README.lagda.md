@@ -459,6 +459,7 @@ open import order-theory.decidable-subpreorders
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.greatest-lower-bounds-posets
 open import order-theory.interval-subposets
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
@@ -467,6 +468,7 @@ open import order-theory.least-elements-preorders
 open import order-theory.locally-finite-posets
 open import order-theory.maximal-chains-posets
 open import order-theory.maximal-chains-preorders
+open import order-theory.meet-semilattices
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
