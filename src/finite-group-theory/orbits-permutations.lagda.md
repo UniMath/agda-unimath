@@ -470,7 +470,8 @@ module _
   number-of-orbits-permutation = number-of-elements-is-finite has-finite-number-orbits-permutation
 
   sign-permutation-orbit : Fin 2
-  sign-permutation-orbit = iterate (add-ℕ n number-of-orbits-permutation) (succ-Fin {k = 2}) zero-Fin
+  sign-permutation-orbit =
+    iterate (add-ℕ n number-of-orbits-permutation) (succ-Fin {k = 2}) zero-Fin
 ```
 
 ```agda
