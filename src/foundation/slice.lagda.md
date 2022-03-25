@@ -272,7 +272,7 @@ fiberwise-equiv-equiv-slice :
   equiv-slice f g → Σ ((x : X) → (fib f x) → (fib g x)) is-fiberwise-equiv
 fiberwise-equiv-equiv-slice f g =
   map-equiv (equiv-fiberwise-equiv-equiv-slice f g)
-    
+
 equiv-fam-equiv-equiv-slice :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (f : A → X) (g : B → X) →
@@ -339,7 +339,7 @@ module _
 
   equiv-slice' : (f g : slice-UU l2 A) → UU (l1 ⊔ l2)
   equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
-  
+
   id-equiv-slice-UU : (f : slice-UU l2 A) → equiv-slice' f f
   pr1 (id-equiv-slice-UU f) = id-equiv
   pr2 (id-equiv-slice-UU f) = refl-htpy
@@ -375,7 +375,7 @@ abstract
   issec-Pr1 :
     {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
   issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
-                           
+
   isretr-Pr1 :
     {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
   isretr-Pr1 {A = A} (pair X f) =
