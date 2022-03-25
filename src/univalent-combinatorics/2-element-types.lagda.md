@@ -228,6 +228,10 @@ abstract
       aut-point-Fin-two-ℕ
       issec-aut-point-Fin-two-ℕ
       isretr-aut-point-Fin-two-ℕ
+
+equiv-ev-zero-aut-Fin-two-ℕ : (Fin 2 ≃ Fin 2) ≃ Fin 2
+pr1 equiv-ev-zero-aut-Fin-two-ℕ = ev-zero-aut-Fin-two-ℕ
+pr2 equiv-ev-zero-aut-Fin-two-ℕ = is-equiv-ev-zero-aut-Fin-two-ℕ
 ```
 
 #### If `X` is a 2-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
