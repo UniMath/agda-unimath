@@ -35,7 +35,7 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.homomorphisms-abelian-groups using
-  ( hom-Ab; map-hom-Ab; htpy-eq-hom-Ab; id-hom-Ab)
+  ( type-hom-Ab; map-hom-Ab; htpy-eq-hom-Ab; id-hom-Ab)
 open import group-theory.isomorphisms-abelian-groups using
   ( is-iso-hom-Ab; inv-is-iso-hom-Ab; map-inv-is-iso-hom-Ab;
     is-sec-map-inv-is-iso-hom-Ab; is-retr-map-inv-is-iso-hom-Ab;
@@ -206,7 +206,7 @@ is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f =
 abstract
   preserves-mul-inv-is-iso-hom-Ab :
     { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-    ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) →
+    ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
     ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f) →
     ( pres-mul-f : preserves-mul-hom-Ab R1 R2 f) →
     preserves-mul-hom-Ab R2 R1
@@ -244,7 +244,7 @@ abstract
 
 preserves-unit-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2)
-  ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) →
+  ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f)
   ( pres-unit-f : preserves-unit-hom-Ab R1 R2 f) →
   preserves-unit-hom-Ab R2 R1
@@ -259,7 +259,7 @@ preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
 
 is-ring-homomorphism-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2)
-  ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) →
+  ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f) →
   ( is-ring-hom-f : is-ring-homomorphism-hom-Ab R1 R2 f) →
   is-ring-homomorphism-hom-Ab R2 R1
@@ -358,12 +358,12 @@ equiv-iso-Ab-iso-Ring :
 equiv-iso-Ab-iso-Ring R1 R2 =
   ( ( ( inv-equiv
         ( assoc-Σ
-          ( hom-Ab (ab-Ring R1) (ab-Ring R2))
+          ( type-hom-Ab (ab-Ring R1) (ab-Ring R2))
           ( is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2))
           ( λ f → is-ring-homomorphism-hom-Ab R1 R2 (pr1 f)))) ∘e
       ( equiv-tot (λ f → commutative-prod))) ∘e
     ( assoc-Σ
-      ( hom-Ab (ab-Ring R1) (ab-Ring R2))
+      ( type-hom-Ab (ab-Ring R1) (ab-Ring R2))
       ( is-ring-homomorphism-hom-Ab R1 R2)
       ( λ f → is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) (pr1 f)))) ∘e
   ( equiv-type-subtype

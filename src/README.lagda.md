@@ -388,6 +388,7 @@ open import group-theory
 open import group-theory.abelian-groups
 open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
+open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
@@ -396,6 +397,7 @@ open import group-theory.concrete-groups
 open import group-theory.concrete-subgroups
 open import group-theory.conjugation
 open import group-theory.embeddings-groups
+open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
 open import group-theory.examples-higher-groups
