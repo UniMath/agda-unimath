@@ -16,7 +16,7 @@ open import group-theory.abelian-groups using
     has-associative-add-Ab; associative-add-Ab; semigroup-Ab; is-group-Ab;
     has-zero-Ab; zero-Ab;
     left-unit-law-add-Ab; right-unit-law-add-Ab; has-negatives-Ab; neg-Ab;
-    left-inverse-law-add-Ab; right-inverse-law-add-Ab; is-commutative-add-Ab)
+    left-inverse-law-add-Ab; right-inverse-law-add-Ab; commutative-add-Ab)
 open import group-theory.groups using (Group; is-group; is-group')
 open import group-theory.monoids using
   ( is-unital; Monoid; unit-Monoid; left-unit-law-Monoid; right-unit-law-Monoid)
@@ -124,7 +124,7 @@ right-inverse-law-add-Ring R = right-inverse-law-add-Ab (ab-Ring R)
 commutative-add-Ring :
   {l : Level} (R : Ring l) (x y : type-Ring R) →
   Id (add-Ring R x y) (add-Ring R y x)
-commutative-add-Ring R = is-commutative-add-Ab (ab-Ring R)
+commutative-add-Ring R = commutative-add-Ab (ab-Ring R)
 
 has-associative-mul-Ring :
   {l : Level} (R : Ring l) → has-associative-mul-Set (set-Ring R)

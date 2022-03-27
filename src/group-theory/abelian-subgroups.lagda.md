@@ -13,11 +13,11 @@ open import foundation.sets using (is-set; UU-Set)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.abelian-groups using
-  ( Ab; group-Ab; type-Ab; is-commutative-add-Ab)
+  ( Ab; group-Ab; type-Ab; commutative-add-Ab)
 open import group-theory.embeddings-groups using
   ( emb-Group; emb-Group-Slice; emb-group-slice-Subgroup)
 open import group-theory.homomorphisms-abelian-groups using
-  ( preserves-add; hom-Ab)
+  ( preserves-add; type-hom-Ab)
 open import group-theory.subgroups using
   ( subset-Group; is-set-subset-Group; contains-unit-subset-Group;
     is-prop-contains-unit-subset-Group; closed-under-mul-subset-Group;
@@ -226,7 +226,7 @@ is-commutative-add-ab-Subgroup-Ab :
   ( x y : type-ab-Subgroup-Ab A P) →
   Id ( add-ab-Subgroup-Ab A P x y) (add-ab-Subgroup-Ab A P y x)
 is-commutative-add-ab-Subgroup-Ab A P (pair x p) (pair y q) =
-  eq-subgroup-ab-eq-ab A P (is-commutative-add-Ab A x y)
+  eq-subgroup-ab-eq-ab A P (commutative-add-Ab A x y)
 
 ab-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) → Subgroup-Ab l2 A → Ab (l1 ⊔ l2)
@@ -247,7 +247,7 @@ preserves-add-incl-ab-Subgroup-Ab A =
 
 hom-ab-Subgroup-Ab :
   { l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  hom-Ab (ab-Subgroup-Ab A P) A
+  type-hom-Ab (ab-Subgroup-Ab A P) A
 hom-ab-Subgroup-Ab A = hom-group-Subgroup (group-Ab A)
 ```
 
