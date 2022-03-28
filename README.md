@@ -79,6 +79,10 @@ Ideally the first section of a file explains the idea, then proceeds to give the
 [ formalization of property 2]
 ```
 
+### KaTeX support for the website
+
+The website of the `agda-unimath` library has support for KaTeX. See the [list of suppoerted functions](https://katex.org/docs/supported.html) in Katex.
+
 ### Library conventions
 
 * This style guide is here to improve the readability of the code. If an item
