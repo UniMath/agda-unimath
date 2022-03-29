@@ -8,14 +8,18 @@ module synthetic-homotopy-theory.commutative-operations where
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( map-equiv; _≃_; htpy-equiv; _∘e_; inv-equiv)
+  ( map-equiv; _≃_; htpy-equiv; _∘e_; inv-equiv; id-equiv)
+open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-equiv-coprod)
 open import foundation.identity-types using (Id; ap-binary; ap; _∙_)
+open import foundation.mere-equivalences using (refl-mere-equiv)
 open import foundation.sets using (UU-Set; type-Set)
 open import
   foundation.universal-property-propositional-truncation-into-sets using
-  ( map-universal-property-set-quotient-trunc-Prop)
+  ( map-universal-property-set-quotient-trunc-Prop;
+    htpy-universal-property-set-quotient-trunc-Prop)
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_; lzero)
 open import foundation.unordered-pairs using
   ( unordered-pair; standard-unordered-pair;
@@ -23,6 +27,7 @@ open import foundation.unordered-pairs using
 
 open import univalent-combinatorics.2-element-types using
   ( decide-value-equiv-Fin-two-ℕ; equiv-ev-zero-htpy-equiv-Fin-two-ℕ)
+open import univalent-combinatorics.finite-types using (Fin-UU-Fin)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin; equiv-succ-Fin)
 ```
@@ -110,4 +115,29 @@ module _
               ( e')
               ( map-equiv e zero-Fin))))
       ( K)
+
+  compute-commutative-operation-is-commutative :
+    (f : A → A → type-Set B) (H : is-commutative f) (x y : A) →
+    Id ( commutative-operation-is-commutative f H (standard-unordered-pair x y))
+       ( f x y)
+  compute-commutative-operation-is-commutative f H x y =
+    
+    htpy-universal-property-set-quotient-trunc-Prop B
+      ( λ e → f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
+      ( λ e e' →
+        is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
+          ( map-equiv-coprod
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin 2) e e'))
+            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
+              ( Fin-UU-Fin 2)
+              ( e)
+              ( e' ∘e equiv-succ-Fin)))
+            ( decide-value-equiv-Fin-two-ℕ
+              ( Fin-UU-Fin 2)
+              ( e')
+              ( map-equiv e zero-Fin))))
+      ( id-equiv)
+    where
+    p : Fin 2 → A
+    p = pr2 (standard-unordered-pair x y)
 ```
