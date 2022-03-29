@@ -670,11 +670,8 @@ module _
       ( composition-transposition-a-b (composition-transposition-a-b g))
       ( g)
   composition-transposition-a-b-involution g x =
-    is-involution-map-transposition X
-      ( pr1
-        ( transposition-two-elements (has-decidable-equality-count eX) a b np))
-      ( pr2
-        ( transposition-two-elements (has-decidable-equality-count eX) a b np))
+    is-involution-map-transposition
+      ( transposition-two-elements (has-decidable-equality-count eX) a b np)
       ( map-equiv g x)
 
   same-orbits-permutation-count : (X ≃ X) → Eq-Rel l1 X
@@ -793,8 +790,8 @@ module _
               ( has-decidable-equality-count eX)
               ( a)
               ( b)
-              ( iterate (succ-ℕ k) (map-equiv g) x)
               ( np)
+              ( iterate (succ-ℕ k) (map-equiv g) x)
               ( λ q' → q (inv q'))
               ( λ r' → r (inv r')))))
 
@@ -1650,21 +1647,21 @@ module _
         ( iterate (length-list li) succ-Fin
           ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) id-equiv))
         ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
-          ( permutation-list-transpositions X li))
+          ( permutation-list-transpositions li))
     sign-list-transpositions-count nil = refl
     sign-list-transpositions-count (cons t li) =
       ap succ-Fin
         ( (sign-list-transpositions-count li) ∙
           opposite-sign-composition-transposition-count X eX (pr1 two-elements-t) (pr1 (pr2 two-elements-t))
-            ( pr1 (pr2 (pr2 two-elements-t))) (permutation-list-transpositions X li )) ∙
+            ( pr1 (pr2 (pr2 two-elements-t))) (permutation-list-transpositions li )) ∙
         ( is-involution-aut-Fin-two-ℕ equiv-succ-Fin
           (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
-            (permutation-list-transpositions X
+            (permutation-list-transpositions
               (cons (transposition-two-elements (has-decidable-equality-count eX)
                 ( pr1 two-elements-t) (pr1 (pr2 two-elements-t)) (pr1 (pr2 (pr2 two-elements-t)))) li))) ∙
           ( ap
             ( λ g → sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
-              (permutation-list-transpositions X (cons g li)))
+              (permutation-list-transpositions (cons g li)))
             { x = transposition-two-elements (has-decidable-equality-count eX) (pr1 two-elements-t) (pr1 (pr2 two-elements-t))
               (pr1 (pr2 (pr2 two-elements-t)))}
             { y = t}

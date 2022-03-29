@@ -162,7 +162,6 @@ module _
       ( h : Fin n ≃ type-UU-Fin-Level X) →
       Id ( f ∘e g)
          ( permutation-list-transpositions
-           ( type-UU-Fin-Level X)
            ( list-comp-f-g h))
     eq-list-comp-f-g h =
       eq-htpy-equiv
@@ -176,7 +175,6 @@ module _
           ( ap
             ( map-equiv
               ( permutation-list-transpositions
-                ( type-UU-Fin-Level X)
                 ( list-trans f h)))
             ( inv
               ( retr-permutation-list-transpositions-count
@@ -185,7 +183,6 @@ module _
                 ( g)
                 ( x))))) ∙
               ( eq-concat-permutation-list-transpositions
-                ( type-UU-Fin-Level X)
                 ( list-trans f h)
                 ( list-trans g h))
 ```

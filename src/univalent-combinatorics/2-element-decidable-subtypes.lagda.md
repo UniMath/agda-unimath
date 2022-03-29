@@ -11,10 +11,11 @@ open import foundation.automorphisms using (Aut)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
     is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
-    type-prop-decidable-subtype)
+    type-prop-decidable-subtype; is-prop-type-prop-decidable-subtype)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.negation using (¬)
+open import foundation.propositions using (is-prop; eq-is-prop)
 open import foundation.subtypes using (subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
@@ -55,6 +56,17 @@ module _
   type-prop-2-Element-Decidable-Subtype : X → UU l2
   type-prop-2-Element-Decidable-Subtype =
     type-prop-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
+
+  is-prop-type-prop-2-Element-Decidable-Subtype :
+    (x : X) → is-prop (type-prop-2-Element-Decidable-Subtype x)
+  is-prop-type-prop-2-Element-Decidable-Subtype =
+    is-prop-type-prop-decidable-subtype
+      decidable-subtype-2-Element-Decidable-Subtype
+
+  eq-type-prop-2-Element-Decidable-Subtype :
+    {x : X} {y z : type-prop-2-Element-Decidable-Subtype x} → Id y z
+  eq-type-prop-2-Element-Decidable-Subtype {x} =
+    eq-is-prop (is-prop-type-prop-2-Element-Decidable-Subtype x)
       
   type-2-Element-Decidable-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Decidable-Subtype =
