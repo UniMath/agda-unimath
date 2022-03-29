@@ -1,4 +1,6 @@
-# The pigeonhole principle
+---
+title: The pigeonhole principle
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

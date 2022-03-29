@@ -552,6 +552,7 @@ open import tutorials.basic-agda
 
 ```agda
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types

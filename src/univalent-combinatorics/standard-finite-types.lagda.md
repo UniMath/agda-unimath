@@ -1,4 +1,6 @@
-# The standard finite types
+---
+title: The standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

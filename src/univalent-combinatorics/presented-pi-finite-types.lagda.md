@@ -1,4 +1,6 @@
-# Finitely π-presented types
+---
+title: Finitely π-presented types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

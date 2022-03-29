@@ -1,4 +1,6 @@
-# Retracts of finite types
+---
+title: Retracts of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

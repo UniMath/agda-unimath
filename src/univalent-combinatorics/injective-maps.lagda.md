@@ -1,4 +1,6 @@
-# Injective maps
+---
+title: Injective maps between finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

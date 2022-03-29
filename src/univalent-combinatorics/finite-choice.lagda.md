@@ -1,3 +1,6 @@
+---
+title: Finite choice
+---
 # Finite choice
 
 ```agda

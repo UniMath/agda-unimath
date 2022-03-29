@@ -1,4 +1,6 @@
-# Equivalences between standard finite types
+---
+title: Equivalences between standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

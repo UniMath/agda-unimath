@@ -1,4 +1,6 @@
-# Standard finite pruned trees
+---
+title: Standard finite pruned trees
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

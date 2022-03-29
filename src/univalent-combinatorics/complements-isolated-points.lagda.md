@@ -1,4 +1,6 @@
-# Complements of isolated points of finite types
+---
+title: Complements of isolated points of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Finite function types
+---
+title: Finite function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

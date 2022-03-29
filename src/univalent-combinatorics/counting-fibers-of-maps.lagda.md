@@ -1,4 +1,6 @@
-# Counting the elements in the fiber of a map
+---
+title: Counting the elements of the fiber of a map
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
