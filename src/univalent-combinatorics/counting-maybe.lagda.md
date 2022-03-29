@@ -1,4 +1,6 @@
-# Counting the elements in Maybe
+---
+title: Counting the elements in Maybe
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

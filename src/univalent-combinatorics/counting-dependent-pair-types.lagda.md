@@ -1,4 +1,6 @@
-# Counting the elements of dependent pair types
+---
+title: Counting the elements of dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

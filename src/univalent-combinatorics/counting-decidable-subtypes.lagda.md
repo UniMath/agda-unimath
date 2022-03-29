@@ -1,4 +1,6 @@
-# Counting the elements of decidable subtypes
+---
+title: Counting the elements of decidable subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

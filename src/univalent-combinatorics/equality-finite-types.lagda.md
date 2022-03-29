@@ -1,4 +1,6 @@
-# Equality of finite types
+---
+title: Equality in finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

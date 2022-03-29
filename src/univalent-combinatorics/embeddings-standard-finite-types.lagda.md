@@ -1,4 +1,6 @@
-# Embeddings between standard finite types
+---
+title: Embeddings between standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

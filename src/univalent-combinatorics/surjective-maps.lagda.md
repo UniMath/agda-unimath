@@ -1,4 +1,6 @@
-# Surjective maps
+---
+title: Surjective maps between finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

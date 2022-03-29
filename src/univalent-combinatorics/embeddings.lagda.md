@@ -1,4 +1,6 @@
-# Injective maps
+---
+title: Injective maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

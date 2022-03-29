@@ -1,4 +1,6 @@
-# Lists
+---
+title: Lists
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

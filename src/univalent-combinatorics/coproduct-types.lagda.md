@@ -1,4 +1,6 @@
-# The coproduct operation on finite types
+---
+title: Coproducts of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
