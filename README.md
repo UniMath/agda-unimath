@@ -81,7 +81,7 @@ Ideally the first section of a file explains the idea, then proceeds to give the
 
 ### KaTeX support for the website
 
-The website of the `agda-unimath` library has support for KaTeX. See the [list of suppoerted functions](https://katex.org/docs/supported.html) in Katex.
+The website of the `agda-unimath` library has support for KaTeX. See the [list of supported functions](https://katex.org/docs/supported.html) in Katex.
 
 ### Library conventions
 
