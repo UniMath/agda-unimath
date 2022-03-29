@@ -78,7 +78,7 @@ module equiv {l1 l2 : Level} where
 #### Equivalence between Graph definitions
 
 The two definitions given above for directed graphs are equivalent. $\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$.
-We use these lemmas in the following calculation:
+We use these lemmas in the following calculation ASDFASD:
 
 \begin{equation}
 \begin{split}
@@ -109,11 +109,6 @@ module directed-graph-defs-equivalence
 -- Show that Graph is pre-category
 -- + iso corresponds to equiv.
 -- Instance of
-```
-
-```
--- TODO
-Cyclic graphs
 ```
 
 #### The type of Graph forms a Topos
