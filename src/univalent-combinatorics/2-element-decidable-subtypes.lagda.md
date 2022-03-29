@@ -7,14 +7,21 @@ title: 2-element decidable subtypes
 
 module univalent-combinatorics.2-element-decidable-subtypes where
 
+open import foundation.automorphisms using (Aut)
 open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype)
+  ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
+    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
+    type-prop-decidable-subtype; is-prop-type-prop-decidable-subtype)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.identity-types using (Id)
+open import foundation.negation using (¬)
+open import foundation.propositions using (is-prop; eq-is-prop)
 open import foundation.subtypes using (subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import univalent-combinatorics.2-element-types using
-  (has-two-elements; 2-Element-Type)
+  ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
+    map-swap-2-Element-Type; compute-swap-2-Element-Type)
 ```
 
 ## Idea
@@ -40,6 +47,27 @@ module _
   subtype-2-Element-Decidable-Subtype =
     subtype-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
 
+  is-decidable-subtype-subtype-2-Element-Decidable-Subtype :
+    is-decidable-subtype subtype-2-Element-Decidable-Subtype
+  is-decidable-subtype-subtype-2-Element-Decidable-Subtype =
+    is-decidable-subtype-subtype-decidable-subtype
+      decidable-subtype-2-Element-Decidable-Subtype
+
+  type-prop-2-Element-Decidable-Subtype : X → UU l2
+  type-prop-2-Element-Decidable-Subtype =
+    type-prop-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
+
+  is-prop-type-prop-2-Element-Decidable-Subtype :
+    (x : X) → is-prop (type-prop-2-Element-Decidable-Subtype x)
+  is-prop-type-prop-2-Element-Decidable-Subtype =
+    is-prop-type-prop-decidable-subtype
+      decidable-subtype-2-Element-Decidable-Subtype
+
+  eq-type-prop-2-Element-Decidable-Subtype :
+    {x : X} {y z : type-prop-2-Element-Decidable-Subtype x} → Id y z
+  eq-type-prop-2-Element-Decidable-Subtype {x} =
+    eq-is-prop (is-prop-type-prop-2-Element-Decidable-Subtype x)
+      
   type-2-Element-Decidable-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Decidable-Subtype =
     type-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
@@ -53,4 +81,27 @@ module _
     type-2-Element-Decidable-Subtype
   pr2 2-element-type-2-Element-Decidable-Subtype =
     has-two-elements-type-2-Element-Decidable-Subtype
+```
+
+## Swapping the elements in a 2-element subtype
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (P : 2-Element-Decidable-Subtype l2 X)
+  where
+
+  swap-2-Element-Decidable-Subtype : Aut (type-2-Element-Decidable-Subtype P)
+  swap-2-Element-Decidable-Subtype =
+    swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
+
+  map-swap-2-Element-Decidable-Subtype :
+    type-2-Element-Decidable-Subtype P → type-2-Element-Decidable-Subtype P
+  map-swap-2-Element-Decidable-Subtype =
+    map-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
+
+  compute-swap-2-Element-Decidable-Subtype :
+    (x y : type-2-Element-Decidable-Subtype P) → ¬ (Id x y) →
+    Id (map-swap-2-Element-Decidable-Subtype x) y
+  compute-swap-2-Element-Decidable-Subtype =
+    compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
 ```

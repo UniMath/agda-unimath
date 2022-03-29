@@ -112,10 +112,9 @@ is-prop-has-two-elements {l} {X} = is-prop-type-Prop (has-two-elements-Prop X)
 type-2-Element-Type : {l : Level} → 2-Element-Type l → UU l
 type-2-Element-Type = pr1
 
-mere-equiv-2-Element-Type :
-  {l : Level} (X : 2-Element-Type l) →
-  mere-equiv (Fin 2) (type-2-Element-Type X)
-mere-equiv-2-Element-Type = pr2
+has-two-elements-type-2-Element-Type :
+  {l : Level} (X : 2-Element-Type l) → has-two-elements (type-2-Element-Type X)
+has-two-elements-type-2-Element-Type = pr2
 ```
 
 ## Properties
@@ -130,7 +129,7 @@ is-set-has-two-elements H = is-set-has-cardinality H
 is-set-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → is-set (type-2-Element-Type X)
 is-set-type-2-Element-Type X =
-  is-set-has-cardinality (mere-equiv-2-Element-Type X)
+  is-set-has-cardinality (has-two-elements-type-2-Element-Type X)
 
 set-2-Element-Type :
   {l : Level} → 2-Element-Type l → UU-Set l
@@ -263,7 +262,7 @@ module _
       is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {type-2-Element-Type X})
     is-equiv-ev-zero-equiv-Fin-two-ℕ =
       apply-universal-property-trunc-Prop
-        ( mere-equiv-2-Element-Type X)
+        ( has-two-elements-type-2-Element-Type X)
         ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
         ( λ α →
           is-equiv-left-factor'
@@ -546,7 +545,7 @@ module _
     (e : equiv-2-Element-Type X X) → is-involution-aut e
   is-involution-aut-2-element-type e x =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
+      ( has-two-elements-type-2-Element-Type X)
       ( Id-Prop (set-UU-Fin-Level X) (map-equiv (e ∘e e) x) x)
       ( λ h →
         ( ap (map-equiv (e ∘e e)) (inv (issec-map-inv-equiv h x))) ∙
@@ -609,7 +608,7 @@ module _
            ( id-equiv))
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
+      ( has-two-elements-type-2-Element-Type X)
       ( empty-Prop)
       ( λ f →
         neq-inr-inl
@@ -650,7 +649,7 @@ module _
     ¬ (Id (map-equiv (swap-2-Element-Type X) x) x)
   has-no-fixpoints-swap-2-Element-Type x P =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
+      ( has-two-elements-type-2-Element-Type X)
       ( empty-Prop)
       ( λ h →
         is-not-identity-swap-2-Element-Type X
