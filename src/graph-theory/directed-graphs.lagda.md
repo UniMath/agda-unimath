@@ -41,7 +41,6 @@ module alternative where
 
   Graph' : (l1 l2 : Level)  → UU (lsuc l1 ⊔ lsuc l2)
   Graph' l1 l2 = Σ (UU l1)  λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
-  -- TODO: Add the syntax ∑[ x ]
 
   module _ {l1 l2 : Level} (G : Graph' l1 l2) where
 
@@ -79,7 +78,7 @@ module equiv {l1 l2 : Level} where
 #### Equivalence between Graph definitions
 
 The two definitions given above for directed graphs are equivalent. $\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$.
-We use these lemmas in the following calculation:
+We use these lemmas in the following calculation ASDFASD:
 
 \begin{equation}
 \begin{split}
@@ -90,11 +89,11 @@ We use these lemmas in the following calculation:
 \end{split}
 \end{equation}
 
-```agda
+
+```
 module directed-graph-defs-equivalence
   {l1 l2 : Level} where
-  _ = {! _∘e_  !}
-  _ = {! is-equiv-htpy-equiv  !}
+  -- is-equiv-htpy-equiv
   -- Uses equiv-Fib
   -- universal-property-cartesian-product-types.lagda
   -- equiv.
@@ -110,11 +109,6 @@ module directed-graph-defs-equivalence
 -- Show that Graph is pre-category
 -- + iso corresponds to equiv.
 -- Instance of
-```
-
-```
--- TODO
-Cyclic graphs
 ```
 
 #### The type of Graph forms a Topos
