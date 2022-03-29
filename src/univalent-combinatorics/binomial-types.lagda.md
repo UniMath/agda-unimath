@@ -1,4 +1,6 @@
-# The binomial types
+---
+title: The binomial types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

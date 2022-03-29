@@ -1,4 +1,6 @@
-# Double counting
+---
+title: Double counting
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

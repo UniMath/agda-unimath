@@ -1,4 +1,6 @@
-# Orientations of cubes
+---
+title: Orientations of cubes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

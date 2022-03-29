@@ -1,4 +1,6 @@
-# Skipping an element in a standard finite type
+---
+title: Skipping elements in standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

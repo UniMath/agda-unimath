@@ -94,10 +94,11 @@ open import univalent-combinatorics.standard-finite-types using
 
 ## Properties
 
-### Every permutation of `Fin n` can be described as a product of transpositions for all `n : ℕ`.
+### Every permutation on `Fin n` can be described as a composite of transpositions
 
 ```agda
-list-transpositions-permutation-Fin' : (n : ℕ) → (f : Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) →
+list-transpositions-permutation-Fin' :
+  (n : ℕ) (f : Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) →
   (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
   ( list
     ( Σ

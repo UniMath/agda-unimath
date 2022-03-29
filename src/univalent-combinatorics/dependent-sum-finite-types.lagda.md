@@ -1,4 +1,6 @@
-# Dependent sums of finite types
+---
+title: Dependent sums of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

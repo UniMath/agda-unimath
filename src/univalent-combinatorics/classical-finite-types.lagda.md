@@ -1,4 +1,6 @@
-# The classical definition of the finite types
+---
+title: The classical definition of the standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

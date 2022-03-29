@@ -1,4 +1,6 @@
-# 2-element decidable subtypes
+---
+title: 2-element decidable subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

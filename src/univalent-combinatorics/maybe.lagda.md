@@ -1,4 +1,6 @@
-# The maybe modality on finite types
+---
+title: The maybe modality on finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

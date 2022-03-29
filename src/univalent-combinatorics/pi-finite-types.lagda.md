@@ -1,4 +1,6 @@
-# π-finite types
+---
+title: π-finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

@@ -1,4 +1,6 @@
-# Cartesian product of finite types
+---
+title: Cartesian products of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

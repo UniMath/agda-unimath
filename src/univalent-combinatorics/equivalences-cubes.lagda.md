@@ -1,4 +1,6 @@
-# Equivalences of cubes
+---
+title: Equivalences of cubes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

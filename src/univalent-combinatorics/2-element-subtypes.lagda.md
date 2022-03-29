@@ -1,4 +1,6 @@
-# 2-element subtypes
+---
+title: 2-element subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

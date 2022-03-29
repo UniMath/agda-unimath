@@ -1,4 +1,6 @@
-# Counting the elements of dependent function types
+---
+title: Counting the elements of dependent function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

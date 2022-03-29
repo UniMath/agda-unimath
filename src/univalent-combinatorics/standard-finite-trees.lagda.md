@@ -1,4 +1,6 @@
-# Standard finite trees
+---
+title: Standard finite trees
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

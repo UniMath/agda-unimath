@@ -1,4 +1,6 @@
-# Fibers of maps between finite types
+---
+title: Fibers of maps between finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

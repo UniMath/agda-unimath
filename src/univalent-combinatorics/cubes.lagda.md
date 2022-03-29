@@ -1,4 +1,6 @@
-# Cubes
+---
+title: Cubes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
