@@ -7,6 +7,7 @@ title: 2-element subtypes
 
 module univalent-combinatorics.2-element-subtypes where
 
+open import foundation.automorphisms using (Aut)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.decidable-propositions using
@@ -15,13 +16,15 @@ open import foundation.decidable-propositions using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_)
 open import foundation.identity-types using (Id)
+open import foundation.negation using (¬)
 open import foundation.propositions using (type-Prop)
 open import foundation.subtypes using (subtype; type-subtype)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
 open import univalent-combinatorics.2-element-types using
-  ( has-two-elements; 2-Element-Type)
+  ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
+    map-swap-2-Element-Type; compute-swap-2-Element-Type)
 ```
 
 ## Idea
@@ -52,4 +55,27 @@ module _
   2-element-type-2-Element-Subtype : 2-Element-Type (l1 ⊔ l2)
   pr1 2-element-type-2-Element-Subtype = type-2-Element-Subtype
   pr2 2-element-type-2-Element-Subtype = has-two-elements-type-2-Element-Subtype
+```
+
+## Swapping the elements in a 2-element subtype
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (P : 2-Element-Subtype l2 X)
+  where
+
+  swap-2-Element-Subtype : Aut (type-2-Element-Subtype P)
+  swap-2-Element-Subtype =
+    swap-2-Element-Type (2-element-type-2-Element-Subtype P)
+
+  map-swap-2-Element-Subtype :
+    type-2-Element-Subtype P → type-2-Element-Subtype P
+  map-swap-2-Element-Subtype =
+    map-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
+
+  compute-swap-2-Element-Subtype :
+    (x y : type-2-Element-Subtype P) → ¬ (Id x y) →
+    Id (map-swap-2-Element-Subtype x) y
+  compute-swap-2-Element-Subtype =
+    compute-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
 ```
