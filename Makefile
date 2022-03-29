@@ -3,7 +3,7 @@ checkOpts :=--without-K --exact-split
 everythingOpts :=$(checkOpts) --allow-unsolved-metas
 agdaVerbose?=1
 # use "$ export agdaVerbose=20" if you want to see all
-AGDAFILES := $(wildcard ./src/**/*.lagda.md)
+AGDAFILES := $(wildcard src/**/*.lagda.md)
 HTMLFILES := $(AGDAFILES:.lagda.md=.html)
 
 bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
@@ -57,7 +57,8 @@ html: $(HTMLFILES)
 				--from markdown+tex_math_dollars+tex_math_double_backslash+latex_macros+lists_without_preceding_blankline \
 				--to=html5  \
 				--mathjax \
-				-o $@
+				-o $@ \
+				--variable=reload:"true"
 
 agda-html: src/everything.lagda.md
 	mkdir -p docs
@@ -66,6 +67,10 @@ agda-html: src/everything.lagda.md
 	cd docs/; \
 	sh conv.sh; \
 	cp README.html index.html
+
+.phony: watch-html
+watch-html : $(AGDAFILES)
+	@fswatch -0 $^ | xargs -0 -n1 -I {}  sh -c 'ALT=`realpath --relative-to=. {}` ; make "$${ALT/.lagda.md/.html}";'
 
 .PHONY : graph
 graph:
