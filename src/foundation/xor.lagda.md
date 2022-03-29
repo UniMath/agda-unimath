@@ -9,9 +9,9 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.conjunction using (conj-Prop)
 open import foundation.coproduct-types using (coprod; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-propositions using
-  (decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop)
+  ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop)
 open import foundation.decidable-types using
-  (is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
+  ( is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)

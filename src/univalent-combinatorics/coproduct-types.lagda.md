@@ -19,7 +19,7 @@ open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
-open import foundation.identity-types using (Id; refl; _∙_; inv)
+open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.mere-equivalences using (mere-equiv-Prop)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
@@ -36,7 +36,10 @@ open import univalent-combinatorics.counting-decidable-subtypes using
 open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin-Level; UU-Fin)
+    UU-Fin-Level; UU-Fin; number-of-elements-is-finite;
+    number-of-elements-has-finite-cardinality; all-elements-equal-has-finite-cardinality;
+    has-finite-cardinality-is-finite; mere-equiv-UU-Fin-Level;
+    mere-equiv-has-finite-cardinality)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -178,4 +181,21 @@ pr2 (coprod-UU-Fin-Level {l1} {l2} {k} {l} (pair X H) (pair Y K)) =
 coprod-UU-Fin :
   {k l : ℕ} → UU-Fin k → UU-Fin l → UU-Fin (add-ℕ k l)
 coprod-UU-Fin X Y = coprod-UU-Fin-Level X Y
+
+coprod-eq-is-finite :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
+    Id
+      ( add-ℕ (number-of-elements-is-finite P) (number-of-elements-is-finite Q))
+      ( number-of-elements-is-finite (is-finite-coprod P Q))
+coprod-eq-is-finite {X = X} {Y = Y} P Q =
+  ap
+    ( number-of-elements-has-finite-cardinality)
+    ( all-elements-equal-has-finite-cardinality
+      ( pair
+        ( add-ℕ (number-of-elements-is-finite P) (number-of-elements-is-finite Q))
+        ( mere-equiv-UU-Fin-Level
+          ( coprod-UU-Fin-Level
+            ( pair X (mere-equiv-has-finite-cardinality (has-finite-cardinality-is-finite P)))
+            ( pair Y (mere-equiv-has-finite-cardinality (has-finite-cardinality-is-finite Q))))))
+      ( has-finite-cardinality-is-finite (is-finite-coprod P Q)))
 ```

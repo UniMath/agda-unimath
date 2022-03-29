@@ -1,0 +1,133 @@
+# Symmetric difference of finite subtypes
+
+```agda
+{-# OPTIONS --without-K --exact-split #-}
+
+module univalent-combinatorics.symmetric-difference where
+
+open import foundation.symmetric-difference public
+
+open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers using
+  (mul-ℕ; left-unit-law-mul-ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ)
+
+open import foundation.coproduct-types using (coprod)
+open import foundation.decidable-subtypes using
+  ( decidable-subtype; type-decidable-subtype)
+open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.equivalences using (inv-equiv)
+open import foundation.identity-types using (Id; _∙_; refl; ap; tr; inv)
+open import foundation.intersection using (intersection-decidable-subtype)
+open import foundation.mere-equivalences using (transitive-mere-equiv)
+open import foundation.propositional-truncations using (unit-trunc-Prop)
+open import foundation.subtypes using (subtype)
+open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.xor using (xor-Prop; xor-decidable-Prop)
+
+open import univalent-combinatorics.coproduct-types using
+  ( coprod-eq-is-finite; is-finite-coprod)
+open import univalent-combinatorics.decidable-subtypes using (is-finite-decidable-subtype)
+open import univalent-combinatorics.finite-types using
+  ( UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level; number-of-elements-is-finite;
+    is-finite; is-finite-has-cardinality; number-of-elements-has-finite-cardinality;
+    all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
+    mere-equiv-has-finite-cardinality)
+```
+
+```agda
+module _
+  {l l1 l2 : Level} {n : ℕ} (X : UU-Fin-Level l n)
+  (P : decidable-subtype l1 (type-UU-Fin-Level X))
+  (Q : decidable-subtype l2 (type-UU-Fin-Level X))
+  
+  where
+
+  private
+    is-finite-X : is-finite (type-UU-Fin-Level X)
+    is-finite-X = is-finite-has-cardinality (mere-equiv-UU-Fin-Level X)
+    is-finite-symmetric-difference :
+      is-finite
+        ( type-decidable-subtype
+          ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+    is-finite-symmetric-difference =
+      is-finite-decidable-subtype
+        ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q)
+        ( is-finite-has-cardinality (mere-equiv-UU-Fin-Level X))
+    is-finite-intersection :
+      is-finite (type-decidable-subtype (intersection-decidable-subtype (type-UU-Fin-Level X) P Q))
+    is-finite-intersection =
+      is-finite-decidable-subtype
+        ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q)
+        ( is-finite-X)
+    number-of-elements-decidable-subtype-X : {l' : Level} →
+      (decidable-subtype l' (type-UU-Fin-Level X)) → ℕ
+    number-of-elements-decidable-subtype-X R =
+      number-of-elements-is-finite (is-finite-decidable-subtype R is-finite-X)
+
+  eq-symmetric-difference :
+    Id
+      ( add-ℕ
+        ( number-of-elements-decidable-subtype-X P)        
+        ( number-of-elements-decidable-subtype-X Q))
+      ( add-ℕ
+        ( number-of-elements-decidable-subtype-X
+          ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+        ( mul-ℕ
+          2
+          ( number-of-elements-decidable-subtype-X
+            ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q))))
+  eq-symmetric-difference =
+    ( ( coprod-eq-is-finite
+      ( is-finite-decidable-subtype P is-finite-X)
+      ( is-finite-decidable-subtype Q is-finite-X))) ∙
+      ( ( ap
+        ( number-of-elements-has-finite-cardinality)
+        ( all-elements-equal-has-finite-cardinality
+          ( has-finite-cardinality-is-finite
+            ( is-finite-coprod
+              ( is-finite-decidable-subtype P is-finite-X)
+              ( is-finite-decidable-subtype Q is-finite-X)))
+          ( pair
+            ( number-of-elements-is-finite is-finite-coprod-symmetric-difference)
+            ( transitive-mere-equiv
+              ( mere-equiv-has-finite-cardinality
+                ( has-finite-cardinality-is-finite is-finite-coprod-symmetric-difference))
+              ( unit-trunc-Prop (inv-equiv (equiv-symmetric-difference (type-UU-Fin-Level X) P Q))))))) ∙
+        ( inv
+          ( coprod-eq-is-finite
+            ( is-finite-symmetric-difference)
+            ( is-finite-coprod is-finite-intersection is-finite-intersection)) ∙
+          ( ap
+            ( λ n →
+              add-ℕ
+                ( number-of-elements-decidable-subtype-X
+                  ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+                ( n))
+            ( ( inv
+              ( coprod-eq-is-finite is-finite-intersection is-finite-intersection)) ∙
+              ( ap
+                ( λ n →
+                  add-ℕ
+                    ( n)
+                    ( number-of-elements-decidable-subtype-X
+                      ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q)))
+                ( inv
+                  ( left-unit-law-mul-ℕ
+                    ( number-of-elements-decidable-subtype-X
+                      ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q)))))))))
+    where
+    is-finite-coprod-symmetric-difference :
+      is-finite
+        ( coprod
+          ( type-decidable-subtype
+            ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+          ( coprod
+            ( type-decidable-subtype
+              ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q))
+            ( type-decidable-subtype
+              ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q))))
+    is-finite-coprod-symmetric-difference =
+      is-finite-coprod
+        ( is-finite-symmetric-difference)
+        ( is-finite-coprod is-finite-intersection is-finite-intersection)
