@@ -9,7 +9,9 @@ module univalent-combinatorics.2-element-decidable-subtypes where
 
 open import foundation.automorphisms using (Aut)
 open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype)
+  ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
+    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
+    type-prop-decidable-subtype)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.negation using (¬)
@@ -44,6 +46,16 @@ module _
   subtype-2-Element-Decidable-Subtype =
     subtype-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
 
+  is-decidable-subtype-subtype-2-Element-Decidable-Subtype :
+    is-decidable-subtype subtype-2-Element-Decidable-Subtype
+  is-decidable-subtype-subtype-2-Element-Decidable-Subtype =
+    is-decidable-subtype-subtype-decidable-subtype
+      decidable-subtype-2-Element-Decidable-Subtype
+
+  type-prop-2-Element-Decidable-Subtype : X → UU l2
+  type-prop-2-Element-Decidable-Subtype =
+    type-prop-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
+      
   type-2-Element-Decidable-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Decidable-Subtype =
     type-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
