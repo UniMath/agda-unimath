@@ -15,11 +15,11 @@ open import
 
 open import finite-group-theory.transpositions using
   ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
-    left-computation-transposition-two-elements; map-transposition;
-    not-computation-transposition-two-elements; permutation-list-transpositions;
+    left-computation-standard-transposition; map-transposition;
+    is-fixed-point-standard-transposition; permutation-list-transpositions;
     eq-concat-permutation-list-transpositions;
-    right-computation-transposition-two-elements; transposition;
-    transposition-two-elements; transposition-conjugation-equiv;
+    right-computation-standard-transposition; transposition;
+    transposition-conjugation-equiv;
     correct-transposition-conjugation-equiv-list)
 open import finite-group-theory.orbits-permutations using
   ( sign-list-transpositions-count; sign-permutation-orbit)
@@ -73,6 +73,8 @@ open import group-theory.homomorphisms-groups using (type-hom-Group)
 open import group-theory.semigroups using (set-Semigroup; mul-Semigroup)
 open import group-theory.symmetric-groups using (symmetric-Group)
 
+open import univalent-combinatorics.2-element-decidable-subtypes using
+  ( standard-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
   ( is-involution-aut-Fin-two-ℕ; ev-zero-aut-Fin-two-ℕ;
     is-equiv-ev-zero-aut-Fin-two-ℕ; aut-point-Fin-two-ℕ)
@@ -119,7 +121,7 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
     ( λ P →
       has-cardinality 2
         ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-  t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+  t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
   f' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
   f' =
     map-inv-equiv
@@ -127,7 +129,7 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
       ( pair
         ( transposition t ∘e f)
         ( ( ap (λ y → map-transposition t y) p) ∙
-          right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl))
+          right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl))
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inr star) p =
   map-list
     ( Fin-succ-Fin-transposition (succ-ℕ n))
@@ -187,22 +189,22 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
     P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
       ( transposition t ∘e f)
       ( ( ap (λ y → map-transposition t y) p) ∙
-        right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl)
+        right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl)
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
     lemma2 : Id
       (map-equiv
       (transposition t) (inl z))
       (inl z)
-    lemma2 = not-computation-transposition-two-elements
+    lemma2 = is-fixed-point-standard-transposition
             ( has-decidable-equality-Fin)
-            ( inr star)
-            ( inl x)
+            { inr star}
+            { inl x}
             ( neq-inr-inl)
             ( inl z)
             ( neq-inr-inl)
@@ -240,10 +242,10 @@ abstract
           ( eq-htpy-equiv
             ( λ w → retr-permutation-list-transpositions-Fin' n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
           ( (ap (map-equiv (transposition t)) lemma) ∙
-            ( (right-computation-transposition-two-elements
+            ( (right-computation-standard-transposition
               ( has-decidable-equality-Fin)
-              ( inr star)
-              ( inl x)
+              { inr star}
+              { inl x}
               ( neq-inr-inl)) ∙
               ( inv q)))))
     where
@@ -252,19 +254,19 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
     P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
       ( transposition t ∘e f)
       ( ( ap (λ y → map-transposition t y) p) ∙
-        right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl)
+        right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl)
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
     lemma : Id (map-equiv (pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) (inl y)) (inl x)
     lemma =
       ( ap (λ e → map-equiv (pr1 (map-equiv e P)) (inl y)) (right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
         ( ap (map-equiv (transposition t)) q ∙
-          ( left-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl))
+          ( left-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inr star) z q =
     ap 
       (λ w →
@@ -282,7 +284,7 @@ abstract
         ( ap
           ( map-equiv (transposition t))
           ( pr2 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) ∙
-          ( left-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl ∙
+          ( left-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl ∙
             inv p)))
     where
     t : ( Σ
@@ -290,7 +292,7 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' =
       map-inv-equiv
@@ -298,7 +300,7 @@ abstract
         ( pair
           ( transposition t ∘e f)
           ( ( ap (λ y → map-transposition t y) p) ∙
-            right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl))
+            right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inl y) (inl z) q =
     ap 
       (λ w →

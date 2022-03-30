@@ -156,6 +156,12 @@ module _
       ( pair X (is-set-has-decidable-equality d))
       ( np)
 
+  2-element-type-standard-2-Element-Decidable-Subtype : 2-Element-Type l
+  pr1 2-element-type-standard-2-Element-Decidable-Subtype =
+    type-standard-2-Element-Decidable-Subtype
+  pr2 2-element-type-standard-2-Element-Decidable-Subtype =
+    has-two-elements-type-standard-2-Element-Decidable-Subtype
+
   standard-2-Element-Decidable-Subtype : 2-Element-Decidable-Subtype l X
   pr1 standard-2-Element-Decidable-Subtype =
     decidable-subtype-standard-2-Element-Decidable-Subtype
