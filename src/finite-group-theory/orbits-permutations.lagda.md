@@ -1,16 +1,15 @@
 # Orbits of permutations
 
-
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module finite-group-theory.orbits-permutations where
 
 open import finite-group-theory.transpositions using
-  ( transposition; equiv-transposition-two-elements; transposition-two-elements;
-    not-computation-transposition-two-elements;
-    right-computation-transposition-two-elements;
-    left-computation-transposition-two-elements;
+  ( transposition; standard-transposition; map-standard-transposition;
+    is-fixed-point-standard-transposition;
+    right-computation-standard-transposition;
+    left-computation-standard-transposition;
     is-involution-map-transposition; permutation-list-transpositions;
     two-elements-transposition)
 
@@ -99,6 +98,8 @@ open import foundation.universal-property-propositional-truncation using
   ( htpy-is-propositional-truncation)
 open import foundation.universe-levels using (Level; UU; lzero)
 
+open import univalent-combinatorics.2-element-decidable-subtypes using
+  ( standard-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
   ( is-involution-aut-Fin-two-ℕ)
 open import univalent-combinatorics.counting using
@@ -660,9 +661,7 @@ module _
 
   composition-transposition-a-b : (X ≃ X) → (X ≃ X)
   composition-transposition-a-b g =
-    ( equiv-transposition-two-elements
-      ( has-decidable-equality-count eX) a b np) ∘e
-    ( g)
+    ( standard-transposition (has-decidable-equality-count eX) np) ∘e g
 
   composition-transposition-a-b-involution :
     ( g : X ≃ X) →
@@ -671,7 +670,9 @@ module _
       ( g)
   composition-transposition-a-b-involution g x =
     is-involution-map-transposition
-      ( transposition-two-elements (has-decidable-equality-count eX) a b np)
+      ( standard-2-Element-Decidable-Subtype
+        ( has-decidable-equality-count eX)
+        ( np))
       ( map-equiv g x)
 
   same-orbits-permutation-count : (X ≃ X) → Eq-Rel l1 X
@@ -786,10 +787,8 @@ module _
               ( map-equiv (composition-transposition-a-b g))
               ( induction-cases-equal-iterate-transposition
                 ( has-decidable-equality-ℕ k zero-ℕ))) ∙
-            ( not-computation-transposition-two-elements
+            ( is-fixed-point-standard-transposition
               ( has-decidable-equality-count eX)
-              ( a)
-              ( b)
               ( np)
               ( iterate (succ-ℕ k) (map-equiv g) x)
               ( λ q' → q (inv q'))
@@ -939,19 +938,18 @@ module _
                   ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
               ( (ap
                 ( λ n →
-                  map-equiv
-                    ( equiv-transposition-two-elements
-                      ( has-decidable-equality-count eX) a b np)
+                  map-standard-transposition
+                    ( has-decidable-equality-count eX)
+                    ( np)
                     ( iterate n (map-equiv g) a))
                 ( inv (pr2 is-successor-k1))) ∙
-                ( (ap
-                  ( map-equiv
-                    ( equiv-transposition-two-elements
-                      ( has-decidable-equality-count eX) a b np))
-                  ( pr1 (pr2 (minimal-element-iterate g a b pa)))) ∙
-                  ( right-computation-transposition-two-elements
+                ( ( ap
+                    ( map-standard-transposition
+                      ( has-decidable-equality-count eX) np)
+                    ( pr1 (pr2 (minimal-element-iterate g a b pa)))) ∙
+                  ( right-computation-standard-transposition
                     ( has-decidable-equality-count eX)
-                    a b np)))))
+                    ( np))))))
         where
         is-successor-k1 : is-successor-ℕ (pr1 (minimal-element-iterate g a b pa))
         is-successor-k1 = is-successor-is-nonzero-ℕ p
@@ -1078,19 +1076,19 @@ module _
                     ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
                   ( (ap
                     ( λ n →
-                      map-equiv
-                        ( equiv-transposition-two-elements
-                          ( has-decidable-equality-count eX) a b np)
+                      map-standard-transposition
+                        ( has-decidable-equality-count eX)
+                        ( np)
                         ( iterate n (map-equiv g) x))
                     ( inv (pr2 is-successor-k1))) ∙
-                    ( (ap
-                      ( map-equiv
-                        ( equiv-transposition-two-elements
-                          ( has-decidable-equality-count eX) a b np))
-                      ( c)) ∙
-                      left-computation-transposition-two-elements
+                    ( ( ap
+                        ( map-standard-transposition
+                          ( has-decidable-equality-count eX)
+                          ( np))
+                        ( c)) ∙
+                      left-computation-standard-transposition
                         ( has-decidable-equality-count eX)
-                        a b np)))))))
+                        ( np))))))))
           where
           is-successor-k1 : is-successor-ℕ (pr1 (minimal-element-iterate-2-a-b g pa))
           is-successor-k1 = is-successor-is-nonzero-ℕ q
@@ -1106,19 +1104,19 @@ module _
                     ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
                   ( (ap
                     ( λ n →
-                      map-equiv
-                        ( equiv-transposition-two-elements
-                          ( has-decidable-equality-count eX) a b np)
+                      map-standard-transposition
+                        ( has-decidable-equality-count eX)
+                        ( np)
                         ( iterate n (map-equiv g) x))
                     ( inv (pr2 is-successor-k1))) ∙
-                    ( (ap
-                      ( map-equiv
-                        ( equiv-transposition-two-elements
-                          ( has-decidable-equality-count eX) a b np))
-                      ( c)) ∙
-                      right-computation-transposition-two-elements
+                    ( ( ap
+                        ( map-standard-transposition
+                          ( has-decidable-equality-count eX)
+                          ( np))
+                        ( c)) ∙
+                      right-computation-standard-transposition
                         ( has-decidable-equality-count eX)
-                        a b np)))))))
+                        ( np))))))))
           where
           is-successor-k1 : is-successor-ℕ (pr1 (minimal-element-iterate-2-a-b g pa))
           is-successor-k1 = is-successor-is-nonzero-ℕ q
@@ -1578,19 +1576,19 @@ module _
                   ( tr (λ n → le-ℕ (pr1 is-successor-k1) n) (inv (pr2 is-successor-k1)) (le-succ-ℕ {x = pr1 is-successor-k1})))) ∙
               ( (ap
                 ( λ n →
-                  map-equiv
-                    ( equiv-transposition-two-elements
-                      ( has-decidable-equality-count eX) a b np)
+                  map-standard-transposition
+                    ( has-decidable-equality-count eX)
+                    ( np)
                     ( iterate n (map-equiv g) a))
                 ( inv (pr2 is-successor-k1))) ∙
                 ( ap
-                  ( map-equiv
-                    ( equiv-transposition-two-elements
-                      ( has-decidable-equality-count eX) a b np))
-                  ( pr2 (pr1 (pr2 minimal-element-iterate-repeating))) ∙
-                  ( left-computation-transposition-two-elements
+                  ( map-standard-transposition
                     ( has-decidable-equality-count eX)
-                    a b np)))))
+                    ( np))
+                  ( pr2 (pr1 (pr2 minimal-element-iterate-repeating))) ∙
+                  ( left-computation-standard-transposition
+                    ( has-decidable-equality-count eX)
+                    np)))))
         where
         is-successor-k1 : is-successor-ℕ (pr1 minimal-element-iterate-repeating)
         is-successor-k1 = is-successor-is-nonzero-ℕ (pr1 (pr1 (pr2 minimal-element-iterate-repeating)))
@@ -1657,17 +1655,16 @@ module _
         ( is-involution-aut-Fin-two-ℕ equiv-succ-Fin
           (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
             (permutation-list-transpositions
-              (cons (transposition-two-elements (has-decidable-equality-count eX)
-                ( pr1 two-elements-t) (pr1 (pr2 two-elements-t)) (pr1 (pr2 (pr2 two-elements-t)))) li))) ∙
+              (cons (standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX)
+                (pr1 (pr2 (pr2 two-elements-t)))) li))) ∙
           ( ap
             ( λ g → sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               (permutation-list-transpositions (cons g li)))
-            { x = transposition-two-elements (has-decidable-equality-count eX) (pr1 two-elements-t) (pr1 (pr2 two-elements-t))
-              (pr1 (pr2 (pr2 two-elements-t)))}
+            { x = standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) (pr1 (pr2 (pr2 two-elements-t)))}
             { y = t}
             ( pr2 (pr2 (pr2 two-elements-t)))))
       where
       two-elements-t :
-        Σ X (λ x → Σ X (λ y → Σ (¬ (Id x y)) (λ np → Id (transposition-two-elements (has-decidable-equality-count eX) x y np) t)))
+        Σ X (λ x → Σ X (λ y → Σ (¬ (Id x y)) (λ np → Id (standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np) t)))
       two-elements-t = two-elements-transposition eX t
 ```
