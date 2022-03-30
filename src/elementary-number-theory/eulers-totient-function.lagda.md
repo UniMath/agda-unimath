@@ -5,9 +5,14 @@
 
 module elementary-number-theory.eulers-totient-function where
 
-open import elementary-number-theory
-open import foundation
-open import univalent-combinatorics
+open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.relatively-prime-natural-numbers using
+  ( relatively-prime-ℕ; is-decidable-relatively-prime-ℕ)
+open import elementary-number-theory.sums-of-natural-numbers using
+  ( bounded-sum-ℕ)
+
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using (is-decidable)
 ```
 
 ## Idea
