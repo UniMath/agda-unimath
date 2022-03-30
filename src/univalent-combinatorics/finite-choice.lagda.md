@@ -1,7 +1,6 @@
 ---
 title: Finite choice
 ---
-# Finite choice
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,6 +13,11 @@ open import
   ( ε-operator-decidable-subtype-Fin)
 
 open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-embeddings using
+  ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
+open import foundation.decidable-subtypes using
+  ( decidable-subtype; type-decidable-subtype; type-prop-decidable-subtype;
+    is-decidable-subtype-subtype-decidable-subtype)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
@@ -108,30 +112,27 @@ abstract
 
 abstract
   ε-operator-decidable-subtype-count :
-    {l1 l2 : Level} {A : UU l1} (e : count A) (P : A → UU-Prop l2) →
-    ((x : A) → is-decidable (type-Prop (P x))) →
-    ε-operator-Hilbert (type-subtype P)
-  ε-operator-decidable-subtype-count e P d =
+    {l1 l2 : Level} {A : UU l1} (e : count A) (P : decidable-subtype l2 A) →
+    ε-operator-Hilbert (type-decidable-subtype P)
+  ε-operator-decidable-subtype-count e P =
     ε-operator-equiv
-      ( equiv-Σ-equiv-base (type-Prop ∘ P) (equiv-count e))
+      ( equiv-Σ-equiv-base (type-prop-decidable-subtype P) (equiv-count e))
       ( ε-operator-decidable-subtype-Fin
-        ( λ x → P (map-equiv-count e x))
-        ( λ x → d (map-equiv-count e x)))
+        ( λ x → P (map-equiv-count e x)))
 ```
 
 ```agda
 abstract
   ε-operator-emb-count :
-    {l1 l2 : Level} {A : UU l1} (e : count A) {B : UU l2} (f : B ↪ A) →
-    ((x : A) → is-decidable (fib (map-emb f) x)) → ε-operator-Hilbert B
-  ε-operator-emb-count e f d t =
+    {l1 l2 : Level} {A : UU l1} (e : count A) {B : UU l2} →
+    (f : B ↪d A) → ε-operator-Hilbert B
+  ε-operator-emb-count e f t =
     map-equiv-total-fib
-      ( map-emb f)
+      ( map-decidable-emb f)
       ( ε-operator-decidable-subtype-count e
-        ( fib-emb-Prop f)
-        ( d)
+        ( decidable-subtype-decidable-emb f)
         ( functor-trunc-Prop
-          ( map-inv-equiv-total-fib (map-emb f))
+          ( map-inv-equiv-total-fib (map-decidable-emb f))
           ( t)))
 ```
 

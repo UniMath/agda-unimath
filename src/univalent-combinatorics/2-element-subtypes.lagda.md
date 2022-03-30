@@ -20,7 +20,8 @@ open import foundation.equivalences using (_≃_; _∘e_; inv-equiv)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.identity-types using (Id; _∙_; inv)
 open import foundation.negation using (¬)
-open import foundation.propositional-truncations using (unit-trunc-Prop)
+open import foundation.propositional-truncations using
+  ( unit-trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
   ( type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
@@ -32,7 +33,8 @@ open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
 open import univalent-combinatorics.2-element-types using
   ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
-    map-swap-2-Element-Type; compute-swap-2-Element-Type)
+    map-swap-2-Element-Type; compute-swap-2-Element-Type;
+    is-inhabited-2-Element-Type)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; is-contr-Fin-one-ℕ)
 ```
@@ -75,6 +77,10 @@ module _
   2-element-type-2-Element-Subtype : 2-Element-Type (l1 ⊔ l2)
   pr1 2-element-type-2-Element-Subtype = type-2-Element-Subtype
   pr2 2-element-type-2-Element-Subtype = has-two-elements-type-2-Element-Subtype
+
+  is-inhabited-type-2-Element-Subtype : type-trunc-Prop type-2-Element-Subtype
+  is-inhabited-type-2-Element-Subtype =
+    is-inhabited-2-Element-Type 2-element-type-2-Element-Subtype
 ```
 
 ### The standard 2-element subtype of a pair of distinct elements in a set

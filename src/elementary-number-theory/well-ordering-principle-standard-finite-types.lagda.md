@@ -21,7 +21,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-prop-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype-subtype-decidable-subtype)
+    is-decidable-subtype-subtype-decidable-subtype; type-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -202,14 +202,13 @@ well-ordering-principle-∃-Fin P H =
 
 ```agda
 ε-operator-decidable-subtype-Fin :
-  {l : Level} {k : ℕ} (P : Fin k → UU-Prop l) →
-  ((x : Fin k) → is-decidable (type-Prop (P x))) →
-  ε-operator-Hilbert (type-subtype P)
-ε-operator-decidable-subtype-Fin {l} {zero-ℕ} P d t =
+  {l : Level} {k : ℕ} (P : decidable-subtype l (Fin k)) →
+  ε-operator-Hilbert (type-decidable-subtype P)
+ε-operator-decidable-subtype-Fin {l} {zero-ℕ} P t =
   ex-falso (apply-universal-property-trunc-Prop t empty-Prop pr1)
-ε-operator-decidable-subtype-Fin {l} {succ-ℕ k} P d t =
+ε-operator-decidable-subtype-Fin {l} {succ-ℕ k} P t =
   map-Σ
-    ( λ x → type-Prop (P x))
+    ( type-prop-decidable-subtype P)
     ( mod-succ-ℕ k)
     ( λ x → id)
     ( ε-operator-total-Q
@@ -217,13 +216,14 @@ well-ordering-principle-∃-Fin P H =
         ( map-Σ
           ( type-Prop ∘ Q)
           ( nat-Fin)
-          ( λ x → tr (type-Prop ∘ P) (inv (issec-nat-Fin x))))
+          ( λ x → tr (type-prop-decidable-subtype P) (inv (issec-nat-Fin x))))
         ( t)))
   where
   Q : ℕ → UU-Prop l
-  Q n = P (mod-succ-ℕ k n)
+  Q n = subtype-decidable-subtype P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
-  is-decidable-Q n = d (mod-succ-ℕ k n)
+  is-decidable-Q n =
+    is-decidable-subtype-subtype-decidable-subtype P (mod-succ-ℕ k n)
   ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
   ε-operator-total-Q =
     ε-operator-decidable-subtype-ℕ Q is-decidable-Q

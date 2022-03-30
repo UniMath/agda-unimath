@@ -53,7 +53,8 @@ open import foundation.mere-equivalences using
   ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
+  ( apply-universal-property-trunc-Prop; type-trunc-Prop; trunc-Prop;
+    unit-trunc-Prop)
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.raising-universe-levels using (map-raise)
@@ -118,6 +119,18 @@ has-two-elements-type-2-Element-Type = pr2
 ```
 
 ## Properties
+
+### Any 2-element type is inhabited
+
+```agda
+is-inhabited-2-Element-Type :
+  {l : Level} (X : 2-Element-Type l) → type-trunc-Prop (type-2-Element-Type X)
+is-inhabited-2-Element-Type X =
+  apply-universal-property-trunc-Prop
+    ( has-two-elements-type-2-Element-Type X)
+    ( trunc-Prop (type-2-Element-Type X))
+    ( λ e → unit-trunc-Prop (map-equiv e zero-Fin))
+```
 
 ### Any 2-element type is a set
 
