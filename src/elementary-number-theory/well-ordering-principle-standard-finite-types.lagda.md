@@ -15,24 +15,29 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( global-choice-decidable-subtype-ℕ)
+  ( ε-operator-decidable-subtype-ℕ)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr; ind-coprod)
+open import foundation.decidable-subtypes using
+  ( decidable-subtype; type-prop-decidable-subtype; subtype-decidable-subtype;
+    is-decidable-subtype-subtype-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( ex-falso; ind-empty; empty-Prop; is-empty-type-trunc-Prop)
 open import foundation.equivalences using
-  ( _∘e_; htpy-eq-equiv; id-equiv; map-equiv; map-inv-equiv; right-inverse-law-equiv)
+  ( _∘e_; htpy-eq-equiv; id-equiv; map-equiv; map-inv-equiv;
+    right-inverse-law-equiv)
+open import foundation.existential-quantification using (∃)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( map-Σ; map-Σ-map-base)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop; map-equiv-trunc-Prop)
-open import foundation.global-choice using (global-choice)
+open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
 open import foundation.identity-types using (tr; inv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
@@ -40,7 +45,8 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
     prod-Prop; is-prop-all-elements-equal; type-Prop)
-open import foundation.subtypes using (eq-subtype; type-subtype)
+open import foundation.subtypes using
+  ( subtype; eq-subtype; type-subtype; type-prop-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
 open import foundation.type-arithmetic-empty-type using
@@ -56,7 +62,13 @@ open import univalent-combinatorics.standard-finite-types using
 open import univalent-combinatorics.counting using (count; number-of-elements-count)
 ```
 
-# The well-ordering principle on the standard finite types
+## Idea
+
+The standard finite types inherit a well-ordering principle from the natural numbers
+
+## Properties
+
+### For any decidable family `P` over `Fin n`, if `P x` doesn't hold for all `x` then there exists an `x` for which `P x` is false
 
 ```agda
 exists-not-not-forall-Fin :
@@ -119,26 +131,25 @@ minimal-element-Fin {l} {k} P =
 
 abstract
   all-elements-equal-minimal-element-Fin :
-    {l : Level} {k : ℕ} (P : Fin k → UU l) →
-    ((x : Fin k) → is-prop (P x)) → all-elements-equal (minimal-element-Fin P)
-  all-elements-equal-minimal-element-Fin P H
+    {l : Level} {k : ℕ} (P : subtype l (Fin k)) →
+    all-elements-equal (minimal-element-Fin (type-prop-subtype P))
+  all-elements-equal-minimal-element-Fin P
     (pair x (pair p l)) (pair y (pair q m)) =
     eq-subtype
-      ( λ t → prod-Prop (pair _ (H t)) (is-lower-bound-fin-Prop P t))
+      ( λ t → prod-Prop (P t) (is-lower-bound-fin-Prop (type-prop-subtype P) t))
       ( antisymmetric-leq-Fin (l y q) (m x p))
 
 abstract
   is-prop-minimal-element-Fin :
-    {l : Level} {k : ℕ} (P : Fin k → UU l) →
-    ((x : Fin k) → is-prop (P x)) → is-prop (minimal-element-Fin P)
-  is-prop-minimal-element-Fin P H =
-    is-prop-all-elements-equal (all-elements-equal-minimal-element-Fin P H)
+    {l : Level} {k : ℕ} (P : subtype l (Fin k)) →
+    is-prop (minimal-element-Fin (type-prop-subtype P))
+  is-prop-minimal-element-Fin P =
+    is-prop-all-elements-equal (all-elements-equal-minimal-element-Fin P)
 
 minimal-element-Fin-Prop :
-  {l : Level} {k : ℕ} (P : Fin k → UU l) → ((x : Fin k) → is-prop (P x)) →
-  UU-Prop l
-pr1 (minimal-element-Fin-Prop P H) = minimal-element-Fin P
-pr2 (minimal-element-Fin-Prop P H) = is-prop-minimal-element-Fin P H
+  {l : Level} {k : ℕ} (P : subtype l (Fin k)) → UU-Prop l
+pr1 (minimal-element-Fin-Prop P) = minimal-element-Fin (type-prop-subtype P)
+pr2 (minimal-element-Fin-Prop P) = is-prop-minimal-element-Fin P
 
 is-lower-bound-inl-Fin :
   {l : Level} {k : ℕ} {P : Fin (succ-ℕ k) → UU l} {x : Fin k} →
@@ -147,39 +158,26 @@ is-lower-bound-inl-Fin H (inl y) p = H y p
 is-lower-bound-inl-Fin {l} {k} {P} {x} H (inr star) p =
   ( leq-neg-one-Fin (inl x))
 
-minimal-element-decidable-subtype-Fin :
-  {l : Level} {k : ℕ} {P : Fin k → UU l} →
-  ((x : Fin k) → is-decidable (P x)) →
+well-ordering-principle-Σ-Fin :
+  {l : Level} {k : ℕ} {P : Fin k → UU l} → ((x : Fin k) → is-decidable (P x)) →
   Σ (Fin k) P → minimal-element-Fin P
-pr1 (minimal-element-decidable-subtype-Fin {l} {succ-ℕ k} d (pair (inl x) p)) =
-  inl
-    ( pr1
-      ( minimal-element-decidable-subtype-Fin (λ x' → d (inl x')) (pair x p)))
-pr1
-  ( pr2
-    ( minimal-element-decidable-subtype-Fin
-      {l} {succ-ℕ k} d (pair (inl x) p))) =
-  pr1
-    ( pr2
-      ( minimal-element-decidable-subtype-Fin (λ x' → d (inl x')) (pair x p)))
-pr2
-  ( pr2
-    ( minimal-element-decidable-subtype-Fin
-      {l} {succ-ℕ k} d (pair (inl x) p))) =
+pr1 (well-ordering-principle-Σ-Fin {l} {succ-ℕ k} d (pair (inl x) p)) =
+  inl (pr1 (well-ordering-principle-Σ-Fin (λ x' → d (inl x')) (pair x p)))
+pr1 (pr2 (well-ordering-principle-Σ-Fin {l} {succ-ℕ k} d (pair (inl x) p))) =
+  pr1 (pr2 (well-ordering-principle-Σ-Fin (λ x' → d (inl x')) (pair x p)))
+pr2 (pr2 (well-ordering-principle-Σ-Fin {l} {succ-ℕ k} d (pair (inl x) p))) =
   is-lower-bound-inl-Fin (pr2 (pr2 m))
   where
-  m = minimal-element-decidable-subtype-Fin (λ x' → d (inl x')) (pair x p)
-minimal-element-decidable-subtype-Fin {l} {succ-ℕ k} {P} d (pair (inr star) p)
+  m = well-ordering-principle-Σ-Fin (λ x' → d (inl x')) (pair x p)
+well-ordering-principle-Σ-Fin {l} {succ-ℕ k} {P} d (pair (inr star) p)
   with
   is-decidable-Σ-Fin (λ t → d (inl t))
 ... | inl t =
   pair
     ( inl (pr1 m))
-    ( pair
-      ( pr1 (pr2 m))
-      ( is-lower-bound-inl-Fin (pr2 (pr2 m))))
+    ( pair (pr1 (pr2 m)) (is-lower-bound-inl-Fin (pr2 (pr2 m))))
   where
-  m = minimal-element-decidable-subtype-Fin (λ x' → d (inl x')) t
+  m = well-ordering-principle-Σ-Fin (λ x' → d (inl x')) t
 ... | inr f =
   pair
     ( inr star)
@@ -188,23 +186,33 @@ minimal-element-decidable-subtype-Fin {l} {succ-ℕ k} {P} d (pair (inr star) p)
   g : (y : Fin (succ-ℕ k)) → P y → leq-Fin (neg-one-Fin {k}) y
   g (inl y) q = ex-falso (f (pair y q))
   g (inr star) q = refl-leq-Fin (neg-one-Fin {k})
+
+well-ordering-principle-∃-Fin :
+  {l : Level} {k : ℕ} (P : decidable-subtype l (Fin k)) →
+  ∃ (type-prop-decidable-subtype P) →
+  minimal-element-Fin (type-prop-decidable-subtype P)
+well-ordering-principle-∃-Fin P H =
+  apply-universal-property-trunc-Prop H
+    ( minimal-element-Fin-Prop (subtype-decidable-subtype P))
+    ( well-ordering-principle-Σ-Fin
+      ( is-decidable-subtype-subtype-decidable-subtype P))
 ```
 
-### Global choice
+### Hilbert's epsilon operator for decidable subtypes of standard finite types
 
 ```agda
-global-choice-decidable-subtype-Fin :
+ε-operator-decidable-subtype-Fin :
   {l : Level} {k : ℕ} (P : Fin k → UU-Prop l) →
   ((x : Fin k) → is-decidable (type-Prop (P x))) →
-  global-choice (type-subtype P)
-global-choice-decidable-subtype-Fin {l} {zero-ℕ} P d t =
+  ε-operator-Hilbert (type-subtype P)
+ε-operator-decidable-subtype-Fin {l} {zero-ℕ} P d t =
   ex-falso (apply-universal-property-trunc-Prop t empty-Prop pr1)
-global-choice-decidable-subtype-Fin {l} {succ-ℕ k} P d t =
+ε-operator-decidable-subtype-Fin {l} {succ-ℕ k} P d t =
   map-Σ
     ( λ x → type-Prop (P x))
     ( mod-succ-ℕ k)
     ( λ x → id)
-    ( global-choice-total-Q
+    ( ε-operator-total-Q
       ( functor-trunc-Prop
         ( map-Σ
           ( type-Prop ∘ Q)
@@ -216,9 +224,9 @@ global-choice-decidable-subtype-Fin {l} {succ-ℕ k} P d t =
   Q n = P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
   is-decidable-Q n = d (mod-succ-ℕ k n)
-  global-choice-total-Q : global-choice (type-subtype Q)
-  global-choice-total-Q =
-    global-choice-decidable-subtype-ℕ Q is-decidable-Q
+  ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
+  ε-operator-total-Q =
+    ε-operator-decidable-subtype-ℕ Q is-decidable-Q
 ```
 
 ```agda

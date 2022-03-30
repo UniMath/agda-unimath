@@ -3,9 +3,14 @@ title: 2-element decidable subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module univalent-combinatorics.2-element-decidable-subtypes where
+
+open import elementary-number-theory.natural-numbers using (ℕ)
+open import
+  elementary-number-theory.well-ordering-principle-standard-finite-types using
+  ( well-ordering-principle-∃-Fin)
 
 open import foundation.automorphisms using (Aut)
 open import foundation.decidable-equality using
@@ -190,4 +195,19 @@ module _
     Id (map-swap-2-Element-Decidable-Subtype x) y
   compute-swap-2-Element-Decidable-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
+```
+
+## Properties
+
+### Any 2-element decidable subtype of a standard finite type is a standard 2-element decidable subtype
+
+```agda
+module _
+  {l : Level} {n : ℕ} (P : 2-Element-Decidable-Subtype l (Fin n))
+  where
+
+  least-element-2-element-subtype-Fin : type-2-Element-Decidable-Subtype P
+  least-element-2-element-subtype-Fin =
+    {!well-ordering-principle-∃-Fin (decidable-subtype-2-Element-Decidable-Subtype P) ?!}
+
 ```

@@ -11,7 +11,7 @@ module univalent-combinatorics.finite-choice where
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import
   elementary-number-theory.well-ordering-principle-standard-finite-types using
-  ( global-choice-decidable-subtype-Fin)
+  ( ε-operator-decidable-subtype-Fin)
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable)
@@ -28,7 +28,8 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ-equiv-base)
 open import foundation.functoriality-propositional-truncation using
   ( map-inv-equiv-trunc-Prop; functor-trunc-Prop)
-open import foundation.global-choice using (global-choice; global-choice-equiv)
+open import foundation.hilberts-epsilon-operators using
+  ( ε-operator-Hilbert; ε-operator-equiv)
 open import foundation.identity-types using (refl)
 open import foundation.propositional-maps using (fib-emb-Prop)
 open import foundation.propositional-truncations using
@@ -96,37 +97,37 @@ abstract
 
 ```agda
 abstract
-  global-choice-count :
-    {l : Level} {A : UU l} → count A → global-choice A
-  global-choice-count (pair zero-ℕ e) t =
+  ε-operator-count :
+    {l : Level} {A : UU l} → count A → ε-operator-Hilbert A
+  ε-operator-count (pair zero-ℕ e) t =
     ex-falso
       ( is-empty-type-trunc-Prop
         ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
         ( t))
-  global-choice-count (pair (succ-ℕ k) e) t = map-equiv e zero-Fin
+  ε-operator-count (pair (succ-ℕ k) e) t = map-equiv e zero-Fin
 
 abstract
-  global-choice-decidable-subtype-count :
+  ε-operator-decidable-subtype-count :
     {l1 l2 : Level} {A : UU l1} (e : count A) (P : A → UU-Prop l2) →
     ((x : A) → is-decidable (type-Prop (P x))) →
-    global-choice (type-subtype P)
-  global-choice-decidable-subtype-count e P d =
-    global-choice-equiv
+    ε-operator-Hilbert (type-subtype P)
+  ε-operator-decidable-subtype-count e P d =
+    ε-operator-equiv
       ( equiv-Σ-equiv-base (type-Prop ∘ P) (equiv-count e))
-      ( global-choice-decidable-subtype-Fin
+      ( ε-operator-decidable-subtype-Fin
         ( λ x → P (map-equiv-count e x))
         ( λ x → d (map-equiv-count e x)))
 ```
 
 ```agda
 abstract
-  global-choice-emb-count :
+  ε-operator-emb-count :
     {l1 l2 : Level} {A : UU l1} (e : count A) {B : UU l2} (f : B ↪ A) →
-    ((x : A) → is-decidable (fib (map-emb f) x)) → global-choice B
-  global-choice-emb-count e f d t =
+    ((x : A) → is-decidable (fib (map-emb f) x)) → ε-operator-Hilbert B
+  ε-operator-emb-count e f d t =
     map-equiv-total-fib
       ( map-emb f)
-      ( global-choice-decidable-subtype-count e
+      ( ε-operator-decidable-subtype-count e
         ( fib-emb-Prop f)
         ( d)
         ( functor-trunc-Prop
@@ -141,7 +142,7 @@ abstract
     is-set A → count (Σ A B) → ((x : A) → is-finite (B x)) →
     ((x : A) → type-trunc-Prop (B x)) → (x : A) → B x
   choice-count-Σ-is-finite-fiber {l1} {l2} {A} {B} K e g H x =
-    global-choice-count
+    ε-operator-count
       ( count-domain-emb-is-finite-domain-emb e
         ( fiber-inclusion-emb (pair A K) B x)
         ( g x))

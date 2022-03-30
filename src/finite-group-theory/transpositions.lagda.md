@@ -87,9 +87,11 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 
 ## Idea
 
-Transpositions are permutations of two elements
+Transpositions are permutations that swap two elements.
 
 ## Definitions
+
+### Transpositions
 
 ```agda
 module _
@@ -168,59 +170,9 @@ module _
   transposition : X ≃ X
   pr1 transposition = map-transposition
   pr2 transposition = is-equiv-map-transposition
-
-module _
-  {l1 l2 : Level} {X : UU l1}
-  where
-
-  permutation-list-transpositions :
-    ( list (2-Element-Decidable-Subtype l2 X)) → Aut X
-  permutation-list-transpositions =
-    fold-list id-equiv (λ P e → (transposition P) ∘e e)
-
-  -- !! Why not a homotopy?
-  eq-concat-permutation-list-transpositions : 
-    (l l' : list (2-Element-Decidable-Subtype l2 X)) →
-    Id ( ( permutation-list-transpositions l) ∘e
-         ( permutation-list-transpositions l'))
-       ( permutation-list-transpositions (concat-list l l'))
-  eq-concat-permutation-list-transpositions nil l' = eq-htpy-equiv refl-htpy
-  eq-concat-permutation-list-transpositions (cons P l) l' =
-    eq-htpy-equiv
-      ( λ x →
-        ap ( map-equiv (transposition P))
-           ( htpy-eq-equiv (eq-concat-permutation-list-transpositions l l') x))
 ```
 
-## Properties
-
-### `transposition` is not the identity equivalence
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} (P : 2-Element-Decidable-Subtype l2 X)
-  where
-
-  abstract
-    is-not-identity-map-transposition : Id (map-transposition P) id → empty
-    is-not-identity-map-transposition f =
-      is-not-identity-swap-2-Element-Type
-        ( 2-element-type-2-Element-Decidable-Subtype P)
-        ( eq-htpy-equiv
-          ( λ { (pair x p) →
-                eq-pair-Σ
-                  ( ( ap
-                      ( map-transposition' P x)
-                      ( eq-is-prop
-                        ( is-prop-is-decidable
-                          ( is-prop-type-prop-2-Element-Decidable-Subtype P x))
-                          { y =
-                            is-decidable-subtype-subtype-2-Element-Decidable-Subtype P x})) ∙
-                    ( htpy-eq f x))
-                  ( eq-type-prop-2-Element-Decidable-Subtype P)}))
-```
-
-### For any type `X` with decidable equality and `x y : X` such that `x` and `y` are distinct, there exists a transposition that maps `x` to `y`, `y` to `x` and everything else to itself.
+### The standard transposition obtained from a pair of distinct points
 
 ```agda
 module _
@@ -274,7 +226,65 @@ module _
     ... | inl (inl h) = ex-falso (q h)
     ... | inl (inr h) = ex-falso (r h)
     ... | inr np = refl
+```
 
+### The permutation obtained from a list of transpositions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1}
+  where
+
+  permutation-list-transpositions :
+    ( list (2-Element-Decidable-Subtype l2 X)) → Aut X
+  permutation-list-transpositions =
+    fold-list id-equiv (λ P e → (transposition P) ∘e e)
+
+  -- !! Why not a homotopy?
+  eq-concat-permutation-list-transpositions : 
+    (l l' : list (2-Element-Decidable-Subtype l2 X)) →
+    Id ( ( permutation-list-transpositions l) ∘e
+         ( permutation-list-transpositions l'))
+       ( permutation-list-transpositions (concat-list l l'))
+  eq-concat-permutation-list-transpositions nil l' = eq-htpy-equiv refl-htpy
+  eq-concat-permutation-list-transpositions (cons P l) l' =
+    eq-htpy-equiv
+      ( λ x →
+        ap ( map-equiv (transposition P))
+           ( htpy-eq-equiv (eq-concat-permutation-list-transpositions l l') x))
+```
+
+## Properties
+
+### A transposition is not the identity equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (P : 2-Element-Decidable-Subtype l2 X)
+  where
+
+  abstract
+    is-not-identity-map-transposition : Id (map-transposition P) id → empty
+    is-not-identity-map-transposition f =
+      is-not-identity-swap-2-Element-Type
+        ( 2-element-type-2-Element-Decidable-Subtype P)
+        ( eq-htpy-equiv
+          ( λ { (pair x p) →
+                eq-pair-Σ
+                  ( ( ap
+                      ( map-transposition' P x)
+                      ( eq-is-prop
+                        ( is-prop-is-decidable
+                          ( is-prop-type-prop-2-Element-Decidable-Subtype P x))
+                          { y =
+                            is-decidable-subtype-subtype-2-Element-Decidable-Subtype P x})) ∙
+                    ( htpy-eq f x))
+                  ( eq-type-prop-2-Element-Decidable-Subtype P)}))
+```
+
+### Any transposition on a type equipped with a counting is a standard transposition
+
+```agda
 module _
   {l : Level} {X : UU l} (eX : count X)
   (t : 2-Element-Decidable-Subtype l X)
@@ -283,9 +293,11 @@ module _
   element-is-not-identity-map-transposition :
     Σ X (λ x → ¬ (Id (map-transposition t x) x))
   element-is-not-identity-map-transposition =
-    exists-not-not-forall-count (λ z → Id (map-transposition t z) z)
-    ( λ x → has-decidable-equality-count eX (map-transposition t x) x) eX
-    ( λ H → is-not-identity-map-transposition t (eq-htpy H))
+    exists-not-not-forall-count
+      ( λ z → Id (map-transposition t z) z)
+      ( λ x → has-decidable-equality-count eX (map-transposition t x) x)
+      ( eX)
+      ( λ H → is-not-identity-map-transposition t (eq-htpy H))
   
   two-elements-transposition :
     Σ ( X)

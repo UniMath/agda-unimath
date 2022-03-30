@@ -215,6 +215,7 @@ open import foundation.functoriality-set-truncation
 open import foundation.functoriality-w-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.global-choice
+open import foundation.hilberts-epsilon-operators
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
