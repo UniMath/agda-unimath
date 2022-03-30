@@ -71,7 +71,7 @@ open import univalent-combinatorics.2-element-decidable-subtypes using
     subtype-standard-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
   ( compute-swap-2-Element-Type; is-involution-aut-2-element-type;
-    has-no-fixpoints-swap-2-Element-Type; swap-2-Element-Type;
+    has-no-fixed-points-swap-2-Element-Type; swap-2-Element-Type;
     is-not-identity-swap-2-Element-Type; map-swap-2-Element-Type)
 open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
@@ -490,9 +490,9 @@ module _
                   ( inv (left-inverse-law-equiv e))
                   ( pr2 second-pair-X))))
             λ q →
-              has-no-fixpoints-swap-2-Element-Type
+              has-no-fixed-points-swap-2-Element-Type
                 ( pair (Σ X (λ y → type-decidable-Prop (pr1 t y))) (pr2 t))
-                ( pair (map-inv-equiv e x) p)
+                { pair (map-inv-equiv e x) p}
                 ( eq-pair-Σ
                   ( is-injective-map-equiv e (inv (pr1 (pair-eq-Σ q)) ∙ ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv e))))
                   ( eq-is-prop (is-prop-type-decidable-Prop (pr1 t (map-inv-equiv e x))))))
@@ -599,9 +599,9 @@ correct-Fin-succ-Fin-transposition n t (inl x) | inl p =
           ( inl (pr1 (map-swap-2-Element-Type (pair (Σ (Fin n) (λ y → type-decidable-Prop (pr1 t y))) (pr2 t)) (pair x p))))
           ( pr2 (map-swap-2-Element-Type (pair (Σ (Fin n) (λ y → type-decidable-Prop (pr1 t y))) (pr2 t)) (pair x p))))
         ( λ eq →
-          has-no-fixpoints-swap-2-Element-Type
+          has-no-fixed-points-swap-2-Element-Type
             ( pair (Σ (Fin n) (λ y → type-decidable-Prop (pr1 t y))) (pr2 t))
-            ( pair x p)
+            { pair x p}
             ( eq-pair-Σ
               ( is-injective-inl (inv (pr1 (pair-eq-Σ eq))))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 t x))))))

@@ -9,7 +9,8 @@ open import foundation.booleans using
   ( bool; true; false; is-set-bool; neq-false-true-bool)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr; eq-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using
+  ( coprod; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -33,7 +34,7 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( inv-assoc-Σ)
 open import foundation.unit-type using
   ( is-contr-unit; raise-unit-Prop; raise-star)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 ```
 
 ## Idea

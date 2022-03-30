@@ -79,22 +79,6 @@ is-decidable-empty : is-decidable empty
 is-decidable-empty = inr id
 ```
 
-### Being on the left or on the right in a coproduct is decidable
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
-  where
-  
-  is-decidable-is-left : (x : coprod X Y) → is-decidable (is-left x)
-  is-decidable-is-left (inl x) = is-decidable-unit
-  is-decidable-is-left (inr x) = is-decidable-empty
-
-  is-decidable-is-right : (x : coprod X Y) → is-decidable (is-right x)
-  is-decidable-is-right (inl x) = is-decidable-empty
-  is-decidable-is-right (inr x) = is-decidable-unit
-```
-
 ## Properties
 
 ### Coproducts of decidable types are decidable

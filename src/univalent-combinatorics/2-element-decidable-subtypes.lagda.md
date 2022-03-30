@@ -22,7 +22,7 @@ open import foundation.decidable-subtypes using
 open import foundation.decidable-types using (is-decidable; is-decidable-coprod)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (Id; inv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using (type-trunc-Prop)
 open import foundation.propositions using (is-prop; eq-is-prop)
@@ -38,7 +38,7 @@ open import univalent-combinatorics.2-element-subtypes using
 open import univalent-combinatorics.2-element-types using
   ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
     map-swap-2-Element-Type; compute-swap-2-Element-Type;
-    is-inhabited-2-Element-Type)
+    is-inhabited-2-Element-Type; has-no-fixed-points-swap-2-Element-Type)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -247,10 +247,17 @@ module _
   in-subtype-other-element-2-element-decidable-subtype-Fin =
     pr2 other-element-subtype-2-element-decidable-subtype-Fin
 
-  unequal-elements-2-element-decidable-subtype-Fin :
-    ¬ ( Id
-        ( element-2-element-decidable-subtype-Fin)
-        ( other-element-2-element-decidable-subtype-Fin))
-  unequal-elements-2-element-decidable-subtype-Fin p = {!eq-subtype!}
+  abstract
+    unequal-elements-2-element-decidable-subtype-Fin :
+      ¬ ( Id
+          ( element-2-element-decidable-subtype-Fin)
+          ( other-element-2-element-decidable-subtype-Fin))
+    unequal-elements-2-element-decidable-subtype-Fin p =
+      has-no-fixed-points-swap-2-Element-Type
+        ( 2-element-type-2-Element-Decidable-Subtype P)
+        { element-subtype-2-element-decidable-subtype-Fin}
+        ( eq-subtype
+          ( subtype-2-Element-Decidable-Subtype P)
+          ( inv p))
 
 ```

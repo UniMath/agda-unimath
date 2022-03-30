@@ -658,9 +658,9 @@ module _
   {l : Level} (X : 2-Element-Type l)
   where
 
-  has-no-fixpoints-swap-2-Element-Type : (x : type-2-Element-Type X) →
-    ¬ (Id (map-equiv (swap-2-Element-Type X) x) x)
-  has-no-fixpoints-swap-2-Element-Type x P =
+  has-no-fixed-points-swap-2-Element-Type :
+    {x : type-2-Element-Type X} → ¬ (Id (map-equiv (swap-2-Element-Type X) x) x)
+  has-no-fixed-points-swap-2-Element-Type {x} P =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
       ( empty-Prop)
