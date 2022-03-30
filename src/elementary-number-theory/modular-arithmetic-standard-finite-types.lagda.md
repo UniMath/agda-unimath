@@ -193,6 +193,27 @@ cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin x) (nat-Fin y))
 ```
 
+### Distance on finite sets
+
+```agda
+dist-Fin : {k : ℕ} → Fin k → Fin k → Fin k
+dist-Fin {succ-ℕ k} x y = mod-succ-ℕ k (dist-ℕ (nat-Fin x) (nat-Fin y))
+
+dist-Fin' : {k : ℕ} → Fin k → Fin k → Fin k
+dist-Fin' x y = dist-Fin y x
+
+ap-dist-Fin :
+  {k : ℕ} {x y x' y' : Fin k} →
+  Id x x' → Id y y' → Id (dist-Fin x y) (dist-Fin x' y')
+ap-dist-Fin p q = ap-binary dist-Fin p q
+
+cong-dist-Fin :
+  {k : ℕ} (x y : Fin k) →
+  cong-ℕ k (nat-Fin (dist-Fin x y)) (dist-ℕ (nat-Fin x) (nat-Fin y))
+cong-dist-Fin {succ-ℕ k} x y =
+  cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin x) (nat-Fin y))
+```
+
 ### The negative of an element of Fin k
 
 ```agda
