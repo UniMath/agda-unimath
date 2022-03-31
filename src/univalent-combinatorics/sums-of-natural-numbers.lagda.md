@@ -1,4 +1,6 @@
-# Combinatorial identities of sums of natural numbers
+---
+title: Combinatorial identities of sums of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

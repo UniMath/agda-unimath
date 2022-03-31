@@ -1,4 +1,6 @@
-# Decidable subtypes of finite types
+---
+title: Decidable subtypes of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

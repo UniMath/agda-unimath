@@ -8,6 +8,7 @@ module group-theory where
 open import group-theory.abelian-groups public
 open import group-theory.abelian-subgroups public
 open import group-theory.abstract-group-torsors public
+open import group-theory.addition-homomorphisms-abelian-groups public
 open import group-theory.category-of-groups public
 open import group-theory.category-of-semigroups public
 open import group-theory.cayleys-theorem public
@@ -16,6 +17,7 @@ open import group-theory.concrete-groups public
 open import group-theory.concrete-subgroups public
 open import group-theory.conjugation public
 open import group-theory.embeddings-groups public
+open import group-theory.endomorphism-rings-abelian-groups public
 open import group-theory.equivalences-group-actions public
 open import group-theory.equivalences-semigroups public
 open import group-theory.examples-higher-groups public

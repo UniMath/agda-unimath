@@ -6,46 +6,59 @@
 module finite-group-theory.permutations where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.iterating-functions using (iterate; iterate-involution)
+open import elementary-number-theory.iterating-functions using
+  ( iterate; iterate-involution)
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using (mod-two-ℕ; add-Fin; mod-succ-add-ℕ)
+open import
+  elementary-number-theory.modular-arithmetic-standard-finite-types using
+  ( mod-two-ℕ; add-Fin; mod-succ-add-ℕ)
 
 open import finite-group-theory.transpositions using
-  ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition; left-computation-transposition-two-elements;
-    map-transposition; not-computation-transposition-two-elements; permutation-list-transpositions;
-    eq-concat-permutation-list-transpositions; right-computation-transposition-two-elements; transposition;
-    transposition-two-elements; transposition-conjugation-equiv; correct-transposition-conjugation-equiv-list)
+  ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
+    left-computation-standard-transposition; map-transposition;
+    is-fixed-point-standard-transposition; permutation-list-transpositions;
+    eq-concat-permutation-list-transpositions;
+    right-computation-standard-transposition; transposition;
+    transposition-conjugation-equiv;
+    correct-transposition-conjugation-equiv-list)
 open import finite-group-theory.orbits-permutations using
   ( sign-list-transpositions-count; sign-permutation-orbit)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl; neq-inl-inr)
+  ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
+    neq-inl-inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-types using
-  (is-decidable; is-decidable-coprod; is-decidable-empty; is-prop-is-decidable)
+  ( is-decidable; is-decidable-coprod; is-decidable-empty; is-prop-is-decidable)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop; is-prop-type-decidable-Prop; type-decidable-Prop)
+  ( decidable-Prop; is-decidable-type-decidable-Prop;
+    is-prop-type-decidable-Prop; type-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ; pair-eq-Σ)
+open import foundation.equality-dependent-pair-types using
+  ( eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; htpy-equiv; id-equiv; inv-equiv; is-emb-is-equiv; is-equiv;
-    is-equiv-has-inverse; left-inverse-law-equiv; right-inverse-law-equiv; map-equiv; map-inv-equiv; htpy-eq-equiv)
+  ( _≃_; _∘e_; eq-htpy-equiv; htpy-equiv; id-equiv; inv-equiv; is-emb-is-equiv;
+    is-equiv; is-equiv-has-inverse; left-inverse-law-equiv;
+    right-inverse-law-equiv; map-equiv; map-inv-equiv; htpy-eq-equiv)
 open import foundation.equivalences-maybe using
-  ( extend-equiv-Maybe; comp-extend-equiv-Maybe; computation-inv-extend-equiv-Maybe)
+  ( extend-equiv-Maybe; comp-extend-equiv-Maybe;
+    computation-inv-extend-equiv-Maybe)
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functoriality-coproduct-types using (id-map-coprod; map-coprod)
+open import foundation.functoriality-coproduct-types using
+  ( id-map-coprod; map-coprod)
 open import foundation.homotopies using (_~_; comp-htpy; refl-htpy; inv-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop; type-trunc-Prop)
+  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
+    unit-trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using (eq-is-prop; is-prop)
 open import foundation.sets using (is-set-type-Set; Id-Prop)
 open import foundation.type-arithmetic-empty-type using
@@ -60,26 +73,34 @@ open import group-theory.homomorphisms-groups using (type-hom-Group)
 open import group-theory.semigroups using (set-Semigroup; mul-Semigroup)
 open import group-theory.symmetric-groups using (symmetric-Group)
 
+open import univalent-combinatorics.2-element-decidable-subtypes using
+  ( standard-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
-  ( is-involution-aut-Fin-two-ℕ; ev-zero-aut-Fin-two-ℕ; is-equiv-ev-zero-aut-Fin-two-ℕ; aut-point-Fin-two-ℕ)
+  ( is-involution-aut-Fin-two-ℕ; ev-zero-aut-Fin-two-ℕ;
+    is-equiv-ev-zero-aut-Fin-two-ℕ; aut-point-Fin-two-ℕ)
 open import univalent-combinatorics.counting using
-  ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count; number-of-elements-count)
-open import univalent-combinatorics.equality-finite-types using (set-UU-Fin-Level)
+  ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
+    number-of-elements-count)
+open import univalent-combinatorics.equality-finite-types using
+  ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; Fin-Set)
 open import univalent-combinatorics.finite-types using
   ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level)
 open import univalent-combinatorics.lists using
-  (cons; list; fold-list; map-list; nil; length-list; concat-list; length-concat-list)
-open import univalent-combinatorics.standard-finite-types using (Fin; nat-Fin; succ-Fin; equiv-succ-Fin; zero-Fin)
+  ( cons; list; fold-list; map-list; nil; length-list; concat-list;
+    length-concat-list)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; nat-Fin; succ-Fin; equiv-succ-Fin; zero-Fin)
 ```
 
 ## Properties
 
-### Every permutation of `Fin n` can be described as a product of transpositions for all `n : ℕ`.
+### Every permutation on `Fin n` can be described as a composite of transpositions
 
 ```agda
-list-transpositions-permutation-Fin' : (n : ℕ) → (f : Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) →
+list-transpositions-permutation-Fin' :
+  (n : ℕ) (f : Fin (succ-ℕ n) ≃ Fin (succ-ℕ n)) →
   (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
   ( list
     ( Σ
@@ -100,15 +121,15 @@ list-transpositions-permutation-Fin' (succ-ℕ n) f (inl x) p =
     ( λ P →
       has-cardinality 2
         ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-  t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+  t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
   f' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
   f' =
     map-inv-equiv
       ( extend-equiv-Maybe (Fin-Set (succ-ℕ n)))
       ( pair
-        ( transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) ∘e f)
-        ( ( ap (λ y → map-transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) y) p) ∙
-          right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl))
+        ( transposition t ∘e f)
+        ( ( ap (λ y → map-transposition t y) p) ∙
+          right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl))
 list-transpositions-permutation-Fin' (succ-ℕ n) f (inr star) p =
   map-list
     ( Fin-succ-Fin-transposition (succ-ℕ n))
@@ -131,7 +152,7 @@ abstract
     (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
     (y z : Fin (succ-ℕ n)) → Id (map-equiv f y) z →
     Id
-      ( map-equiv (permutation-list-transpositions (Fin (succ-ℕ n)) (list-transpositions-permutation-Fin (succ-ℕ n) f)) y)
+      ( map-equiv (permutation-list-transpositions (list-transpositions-permutation-Fin (succ-ℕ n) f)) y)
       ( map-equiv f y)
   retr-permutation-list-transpositions-Fin' zero-ℕ f (inr star) p (inr star) z q = inv p
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inl z) q =
@@ -139,12 +160,11 @@ abstract
       (λ w →
         map-equiv
           ( permutation-list-transpositions
-            ( Fin (succ-ℕ (succ-ℕ n)))
             ( list-transpositions-permutation-Fin' (succ-ℕ n) f (pr1 w) (pr2 w)))
         ( inl y)) {y = pair (inl x) p}
       ( eq-pair-Σ p (eq-is-prop (is-set-type-Set (Fin-Set (succ-ℕ (succ-ℕ n))) (map-equiv f (inr star)) (inl x)))) ∙
       ( ap
-        ( map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t)))
+        ( map-equiv (transposition t))
         ( correct-Fin-succ-Fin-transposition-list
           ( succ-ℕ n)
           ( list-transpositions-permutation-Fin' n _ (map-equiv F' (inr star)) refl)
@@ -152,16 +172,16 @@ abstract
         (ap
           ( λ g →
             map-equiv
-              ( transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t))
+              ( transposition t)
               ( map-equiv
                 ( pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) g))
                 ( inl y)))
           { x =
-            permutation-list-transpositions ( Fin (succ-ℕ n)) (list-transpositions-permutation-Fin (succ-ℕ n) _)}
+            permutation-list-transpositions (list-transpositions-permutation-Fin (succ-ℕ n) _)}
           { y = F'} 
           ( eq-htpy-equiv
             ( λ w → retr-permutation-list-transpositions-Fin' n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
-            ( (ap (map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t))) lemma) ∙
+            ( (ap (map-equiv (transposition t)) lemma) ∙
               (lemma2 ∙ inv q))))
     where
     t : ( Σ
@@ -169,24 +189,24 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
     P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
-      ( transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) ∘e f)
-      ( ( ap (λ y → map-transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) y) p) ∙
-        right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl)
+      ( transposition t ∘e f)
+      ( ( ap (λ y → map-transposition t y) p) ∙
+        right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl)
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
     lemma2 : Id
       (map-equiv
-      (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t)) (inl z))
+      (transposition t) (inl z))
       (inl z)
-    lemma2 = not-computation-transposition-two-elements
+    lemma2 = is-fixed-point-standard-transposition
             ( has-decidable-equality-Fin)
-            ( inr star)
-            ( inl x)
-            ( inl z)
+            { inr star}
+            { inl x}
             ( neq-inr-inl)
+            ( inl z)
             ( neq-inr-inl)
             ( λ r →
               neq-inr-inl
@@ -194,18 +214,17 @@ abstract
     lemma : Id (map-equiv (pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) (inl y)) (inl z)
     lemma =
       ( ap (λ e → map-equiv (pr1 (map-equiv e P)) (inl y)) (right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
-        ( ap (map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t))) q ∙ lemma2)
+        ( ap (map-equiv (transposition t)) q ∙ lemma2)
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inl y) (inr star) q =
     ap 
       (λ w →
         map-equiv
           ( permutation-list-transpositions
-            ( Fin (succ-ℕ (succ-ℕ n)))
             ( list-transpositions-permutation-Fin' (succ-ℕ n) f (pr1 w) (pr2 w)))
         ( inl y)) {y = pair (inl x) p}
       ( eq-pair-Σ p (eq-is-prop (is-set-type-Set (Fin-Set (succ-ℕ (succ-ℕ n))) (map-equiv f (inr star)) (inl x)))) ∙
       ( ap
-        ( map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t)))
+        ( map-equiv (transposition t))
         ( correct-Fin-succ-Fin-transposition-list
           ( succ-ℕ n)
           ( list-transpositions-permutation-Fin' n _ (map-equiv F' (inr star)) refl)
@@ -213,20 +232,20 @@ abstract
         (ap
           ( λ g →
             map-equiv
-              ( transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t))
+              ( transposition t)
               ( map-equiv
                 ( pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) g))
                 ( inl y)))
           { x =
-            permutation-list-transpositions ( Fin (succ-ℕ n)) (list-transpositions-permutation-Fin (succ-ℕ n) _)}
+            permutation-list-transpositions (list-transpositions-permutation-Fin (succ-ℕ n) _)}
           { y = F'} 
           ( eq-htpy-equiv
             ( λ w → retr-permutation-list-transpositions-Fin' n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
-          ( (ap (map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t))) lemma) ∙
-            ( (right-computation-transposition-two-elements
+          ( (ap (map-equiv (transposition t)) lemma) ∙
+            ( (right-computation-standard-transposition
               ( has-decidable-equality-Fin)
-              ( inr star)
-              ( inl x)
+              { inr star}
+              { inl x}
               ( neq-inr-inl)) ∙
               ( inv q)))))
     where
@@ -235,38 +254,37 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
     P : Σ (Fin (succ-ℕ (succ-ℕ n)) ≃ Fin (succ-ℕ (succ-ℕ n))) (λ g → Id (map-equiv g (inr star)) (inr star))
     P = pair
-      ( transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) ∘e f)
-      ( ( ap (λ y → map-transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) y) p) ∙
-        right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl)
+      ( transposition t ∘e f)
+      ( ( ap (λ y → map-transposition t y) p) ∙
+        right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl)
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) P
     lemma : Id (map-equiv (pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) (inl y)) (inl x)
     lemma =
       ( ap (λ e → map-equiv (pr1 (map-equiv e P)) (inl y)) (right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
-        ( ap (map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t))) q ∙
-          ( left-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl))
+        ( ap (map-equiv (transposition t)) q ∙
+          ( left-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inl x) p (inr star) z q =
     ap 
       (λ w →
         map-equiv
           ( permutation-list-transpositions
-            ( Fin (succ-ℕ (succ-ℕ n)))
             ( list-transpositions-permutation-Fin' (succ-ℕ n) f (pr1 w) (pr2 w)))
         ( inr star)) {y = pair (inl x) p}
       ( eq-pair-Σ p (eq-is-prop (is-set-type-Set (Fin-Set (succ-ℕ (succ-ℕ n))) (map-equiv f (inr star)) (inl x)))) ∙
       ( ap
-        ( map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t)))
+        ( map-equiv (transposition t))
         ( correct-Fin-succ-Fin-transposition-list
           ( succ-ℕ n)
           ( list-transpositions-permutation-Fin' n _ (map-equiv F' (inr star)) refl)
           ( inr star)) ∙
         ( ap
-          ( map-equiv (transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t)))
+          ( map-equiv (transposition t))
           ( pr2 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F')) ∙
-          ( left-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl ∙
+          ( left-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl ∙
             inv p)))
     where
     t : ( Σ
@@ -274,21 +292,20 @@ abstract
       ( λ P →
         has-cardinality 2
           ( Σ (Fin (succ-ℕ (succ-ℕ n))) (λ x → type-decidable-Prop (P x)))))
-    t = transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl 
+    t = standard-2-Element-Decidable-Subtype has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl 
     F' : (Fin (succ-ℕ n) ≃ Fin (succ-ℕ n))
     F' =
       map-inv-equiv
         ( extend-equiv-Maybe (Fin-Set (succ-ℕ n)))
         ( pair
-          ( transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) ∘e f)
-          ( ( ap (λ y → map-transposition (Fin (succ-ℕ (succ-ℕ n))) (pr1 t) (pr2 t) y) p) ∙
-            right-computation-transposition-two-elements has-decidable-equality-Fin (inr star) (inl x) neq-inr-inl))
+          ( transposition t ∘e f)
+          ( ( ap (λ y → map-transposition t y) p) ∙
+            right-computation-standard-transposition has-decidable-equality-Fin {inr star} {inl x} neq-inr-inl))
   retr-permutation-list-transpositions-Fin' (succ-ℕ n) f (inr star) p (inl y) (inl z) q =
     ap 
       (λ w →
         map-equiv
           ( permutation-list-transpositions
-            ( Fin (succ-ℕ (succ-ℕ n)))
             ( list-transpositions-permutation-Fin' (succ-ℕ n) f (pr1 w) (pr2 w)))
         ( inl y)) {y = pair (inr star) p}
       ( eq-pair-Σ p (eq-is-prop (is-set-type-Set (Fin-Set (succ-ℕ (succ-ℕ n))) (map-equiv f (inr star)) (inr star)))) ∙
@@ -310,7 +327,6 @@ abstract
       (λ w →
         map-equiv
           ( permutation-list-transpositions
-            ( Fin (succ-ℕ (succ-ℕ n)))
             ( list-transpositions-permutation-Fin' (succ-ℕ n) f (pr1 w) (pr2 w)))
         ( inr star)) {y = pair (inr star) p}
       ( eq-pair-Σ p (eq-is-prop (is-set-type-Set (Fin-Set (succ-ℕ (succ-ℕ n))) (map-equiv f (inr star)) (inr star)))) ∙
@@ -324,7 +340,7 @@ abstract
     f' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) (pair f p)
 
   retr-permutation-list-transpositions-Fin : (n : ℕ) → (f : Fin n ≃ Fin n) →
-    htpy-equiv (permutation-list-transpositions (Fin n) (list-transpositions-permutation-Fin n f)) f
+    htpy-equiv (permutation-list-transpositions (list-transpositions-permutation-Fin n f)) f
   retr-permutation-list-transpositions-Fin zero-ℕ f ()
   retr-permutation-list-transpositions-Fin (succ-ℕ n) f y =
     retr-permutation-list-transpositions-Fin' n f (map-equiv f (inr star)) refl y (map-equiv f y) refl
@@ -350,7 +366,7 @@ module _
 
   abstract
     retr-permutation-list-transpositions-count :
-      htpy-equiv (permutation-list-transpositions X list-transpositions-permutation-count) f
+      htpy-equiv (permutation-list-transpositions list-transpositions-permutation-count) f
     retr-permutation-list-transpositions-count x =
       ( correct-transposition-conjugation-equiv-list
         ( Fin (number-of-elements-count eX))
@@ -385,7 +401,7 @@ module _
             ( list
               ( Σ ((type-UU-Fin-Level X) → decidable-Prop l)
                 ( λ P → has-cardinality 2 (Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x))))))
-            ( λ li → Id k (mod-two-ℕ (length-list li)) × Id f (permutation-list-transpositions (type-UU-Fin-Level X) li))))
+            ( λ li → Id k (mod-two-ℕ (length-list li)) × Id f (permutation-list-transpositions li))))
 
     abstract
       is-contr-parity-transposition-permutation : is-contr parity-transposition-permutation
@@ -416,8 +432,8 @@ module _
                           ( sign-list-transpositions-count (type-UU-Fin-Level X) (pair n h) (list-transposition-f h) ∙
                             ( ap
                               ( sign-permutation-orbit n (pair (type-UU-Fin-Level X) (unit-trunc-Prop h)))
-                              { x = permutation-list-transpositions (type-UU-Fin-Level X) (list-transposition-f h)}
-                              { y = permutation-list-transpositions (type-UU-Fin-Level X) li}
+                              { x = permutation-list-transpositions (list-transposition-f h)}
+                              { y = permutation-list-transpositions li}
                               ( (eq-htpy-equiv (retr-permutation-list-transpositions-count
                                 (type-UU-Fin-Level X) (pair n h) f)) ∙ r) ∙
                               ( inv (sign-list-transpositions-count (type-UU-Fin-Level X) (pair n h) li) ∙
@@ -442,83 +458,4 @@ module _
         is-injective-iterate-involution (inr star) (inl (inr star)) (inl (inr star)) p = ex-falso (neq-inr-inl p)
         is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
-
-    sign-homomorphism-Fin-two : Fin 2
-    sign-homomorphism-Fin-two = pr1 (center is-contr-parity-transposition-permutation)
-
-  preserves-add-sign-homomorphism-Fin-two : (f g : (type-UU-Fin-Level X) ≃ (type-UU-Fin-Level X)) →
-    Id (sign-homomorphism-Fin-two (f ∘e g)) (add-Fin (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
-  preserves-add-sign-homomorphism-Fin-two f g =
-    apply-universal-property-trunc-Prop
-      ( mere-equiv-UU-Fin-Level X)
-      ( Id-Prop (Fin-Set 2)
-        (sign-homomorphism-Fin-two (f ∘e g)) (add-Fin (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g)))
-      ( λ h →
-        ( ap pr1 (eq-is-contr (is-contr-parity-transposition-permutation (f ∘e g))
-          { x = center (is-contr-parity-transposition-permutation (f ∘e g))}
-          { y = pair (mod-two-ℕ (length-list (list-comp-f-g h)))
-            ( unit-trunc-Prop (pair (list-comp-f-g h) (pair refl (eq-list-comp-f-g h))))})) ∙
-          ( ap mod-two-ℕ
-            ( length-concat-list (list-trans f h) (list-trans g h)) ∙
-            ( mod-succ-add-ℕ 1 (length-list (list-trans f h)) (length-list (list-trans g h)) ∙
-              ( ap (λ P → add-Fin (pr1 P) (mod-two-ℕ (length-list (list-trans g h))))
-                { x = pair (mod-two-ℕ (length-list (list-trans f h)))
-                  (unit-trunc-Prop (pair (list-trans f h) (pair refl
-                    ( inv
-                      ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) f))))))}
-                { y = center (is-contr-parity-transposition-permutation f)}
-                ( eq-is-contr (is-contr-parity-transposition-permutation f)) ∙
-                ( ap (λ P → add-Fin (sign-homomorphism-Fin-two f) (pr1 P))
-                  { x = pair (mod-two-ℕ (length-list (list-trans g h)))
-                    (unit-trunc-Prop (pair (list-trans g h) (pair refl
-                      ( inv
-                        ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) g))))))}
-                  { y = center (is-contr-parity-transposition-permutation g)}
-                  (eq-is-contr (is-contr-parity-transposition-permutation g)))))))
-    where
-    list-trans : (f' : (type-UU-Fin-Level X) ≃ (type-UU-Fin-Level X)) (h : Fin n ≃ type-UU-Fin-Level X) →
-      list
-        ( Σ
-          ((type-UU-Fin-Level X) → decidable-Prop l)
-          ( λ P → has-cardinality 2 (Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x)))))
-    list-trans f' h = list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) f'
-    list-comp-f-g : (h : Fin n ≃ type-UU-Fin-Level X) →
-      list
-        ( Σ
-          ((type-UU-Fin-Level X) → decidable-Prop l)
-          ( λ P → has-cardinality 2 (Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x)))))
-    list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
-    eq-list-comp-f-g : (h : Fin n ≃ type-UU-Fin-Level X) →
-      Id (f ∘e g) (permutation-list-transpositions (type-UU-Fin-Level X) (list-comp-f-g h))
-    eq-list-comp-f-g h =
-      eq-htpy-equiv
-        ( λ x → (inv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) f (map-equiv g x))) ∙
-          ap
-            (map-equiv
-              (permutation-list-transpositions (type-UU-Fin-Level X) (list-trans f h)))
-            ( inv (retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) g x))) ∙
-              ( eq-concat-permutation-list-transpositions (type-UU-Fin-Level X) (list-trans f h) (list-trans g h))
-```
-
-```agda
-module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n)
-  where
-
-  sign-homomorphism :
-    type-hom-Group (symmetric-Group (set-UU-Fin-Level X)) (symmetric-Group (Fin-Set 2))
-  pr1 sign-homomorphism f = aut-point-Fin-two-ℕ (sign-homomorphism-Fin-two n X f)
-  pr2 sign-homomorphism f g =
-    ( ap aut-point-Fin-two-ℕ
-      { x = sign-homomorphism-Fin-two n X (f ∘e g)}
-      { y = add-Fin (sign-homomorphism-Fin-two n X f) (sign-homomorphism-Fin-two n X g)}
-      ( preserves-add-sign-homomorphism-Fin-two n X f g)) ∙
-      ( cases-add-Fin-aut-point (sign-homomorphism-Fin-two n X f) (sign-homomorphism-Fin-two n X g))
-    where
-    cases-add-Fin-aut-point : (a b : Fin 2) →
-      Id (aut-point-Fin-two-ℕ (add-Fin a b)) ((aut-point-Fin-two-ℕ a) ∘e (aut-point-Fin-two-ℕ b))
-    cases-add-Fin-aut-point (inl (inr star)) (inl (inr star)) = eq-htpy-equiv refl-htpy
-    cases-add-Fin-aut-point (inl (inr star)) (inr star) = eq-htpy-equiv refl-htpy
-    cases-add-Fin-aut-point (inr star) (inl (inr star)) = eq-htpy-equiv refl-htpy
-    cases-add-Fin-aut-point (inr star) (inr star) = eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin x))
 ```

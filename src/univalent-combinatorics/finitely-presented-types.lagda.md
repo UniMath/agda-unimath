@@ -1,4 +1,6 @@
-# Finitely presented types
+---
+title: Finitely presented types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

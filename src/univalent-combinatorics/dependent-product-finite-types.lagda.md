@@ -1,4 +1,6 @@
-# Dependent products of finite types
+---
+title: Dependent products of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

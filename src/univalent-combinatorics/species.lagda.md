@@ -1,4 +1,6 @@
-# Species
+---
+title: Species
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

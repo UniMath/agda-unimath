@@ -1,4 +1,6 @@
-# Counting in type theory
+---
+title: Counting in type theory
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

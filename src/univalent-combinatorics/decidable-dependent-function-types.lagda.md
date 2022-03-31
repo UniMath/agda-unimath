@@ -1,4 +1,6 @@
-# Decidable dependent function types
+---
+title: Decidable dependent function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,5 +1,5 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Finite presentations of types
 ---
 
 ```agda

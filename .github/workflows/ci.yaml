@@ -6,13 +6,13 @@
 #   3. Add .cabal/bin into PATH
 #   4. Checkout Agda repository
 #   5. Install Agda
-# - check: i) use the cache to get haskell and agda. 
+# - check: i) use the cache to get haskell and agda.
 #          ii) see if there some cache for typechecking `main/_build` in the branch build.
 #          iii) if so, it tries to check the agda files.
 #   6. Checkout the main repository
 #   7. Verify the whole formalisation
 # - html
-#   8. Setup Pandoc using setup-pandoc 
+#   8. Setup Pandoc using setup-pandoc
 #   9. Generate HTML
 #   10. Deploy HTML to github pages
 
@@ -23,7 +23,7 @@ on:
   pull_request:
     branches:
       - master
-   
+
 
 jobs:
   build:
@@ -87,7 +87,7 @@ jobs:
         agda: ["v2.6.2"]
         ghc: ["8.10.7"]
     steps:
-      - uses: actions/cache@v2 
+      - uses: actions/cache@v2
         id: cache-build
         with:
           path: |
@@ -113,7 +113,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-            ${{ runner.os }}-check-${{ github.ref }}-       
+            ${{ runner.os }}-check-${{ github.ref }}-
       - name: Verify the whole formalisation
         if: steps.cache-agda-formalisation.cache-hit != 'true'
         id: typecheck
@@ -128,13 +128,13 @@ jobs:
     strategy:
       matrix:
         agda: ["v2.6.2"]
-        ghc: ["8.10.7"]  
+        ghc: ["8.10.7"]
     steps:
       - name: Checkout the main repository
         uses: actions/checkout@v2
         with:
           path: main
-      - uses: actions/cache@v2 
+      - uses: actions/cache@v2
         with:
           path: |
             ~/.cabal
@@ -145,7 +145,7 @@ jobs:
         run:
           echo "$HOME/.cabal/bin" >> $GITHUB_PATH
         shell: bash
-      - uses: actions/cache@v2 
+      - uses: actions/cache@v2
         with:
           path: main/_build
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
@@ -158,10 +158,10 @@ jobs:
         id: html
         run: |
           cd main
-          make html
+          make agda-html
 
       - name: Deploy HTML to github pages
-        if: steps.html.outputs.cache-hit != 'true' 
+        if: steps.html.outputs.cache-hit != 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

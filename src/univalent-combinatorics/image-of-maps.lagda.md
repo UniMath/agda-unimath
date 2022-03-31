@@ -1,4 +1,6 @@
-# The image of a map
+---
+title: The image of a map
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

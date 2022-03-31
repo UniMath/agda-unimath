@@ -13,7 +13,8 @@ open import foundation.equality-coproduct-types using
   ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
 open import foundation.equivalences using
   ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
-    map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_)
+    map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_;
+    is-equiv-map-equiv)
 open import foundation.empty-types using (ex-falso)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (equiv-funext)
@@ -100,11 +101,12 @@ module _
 ```agda
 module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  {f : A → A'} {g : B → B'}
   where
 
   abstract
-    is-equiv-map-coprod : is-equiv f → is-equiv g → is-equiv (map-coprod f g)
+    is-equiv-map-coprod :
+      {f : A → A'} {g : B → B'} →
+      is-equiv f → is-equiv g → is-equiv (map-coprod f g)
     pr1
       ( pr1
         ( is-equiv-map-coprod
@@ -112,7 +114,7 @@ module _
           ( pair (pair sg Sg) (pair rg Rg)))) = map-coprod sf sg
     pr2
       ( pr1
-        ( is-equiv-map-coprod
+        ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
       ( ( inv-htpy (compose-map-coprod sf f sg g)) ∙h
@@ -125,19 +127,22 @@ module _
           ( pair (pair sg Sg) (pair rg Rg)))) = map-coprod rf rg
     pr2
       ( pr2
-        ( is-equiv-map-coprod
+        ( is-equiv-map-coprod {f} {g}
           ( pair (pair sf Sf) (pair rf Rf))
           ( pair (pair sg Sg) (pair rg Rg)))) =
       ( ( inv-htpy (compose-map-coprod f rf g rg)) ∙h
         ( htpy-map-coprod Rf Rg)) ∙h
       ( id-map-coprod A B)
+
+  map-equiv-coprod :
+    (A ≃ A') → (B ≃ B') → coprod A B → coprod A' B'
+  map-equiv-coprod e e' = map-coprod (map-equiv e) (map-equiv e')
   
-equiv-coprod :
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'} →
-  (A ≃ A') → (B ≃ B') → (coprod A B) ≃ (coprod A' B')
-pr1 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) = map-coprod e f
-pr2 (equiv-coprod (pair e is-equiv-e) (pair f is-equiv-f)) =
-  is-equiv-map-coprod is-equiv-e is-equiv-f
+  equiv-coprod :
+    (A ≃ A') → (B ≃ B') → (coprod A B) ≃ (coprod A' B')
+  pr1 (equiv-coprod e e') = map-equiv-coprod e e'
+  pr2 (equiv-coprod e e') =
+    is-equiv-map-coprod (is-equiv-map-equiv e) (is-equiv-map-equiv e')
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`.

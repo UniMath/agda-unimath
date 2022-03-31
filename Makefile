@@ -3,8 +3,10 @@ checkOpts :=--without-K --exact-split
 everythingOpts :=$(checkOpts) --allow-unsolved-metas
 agdaVerbose?=1
 # use "$ export agdaVerbose=20" if you want to see all
-AGDA_FILES := $(wildcard ./src/**/*.lagda.md)
-bar := $(foreach f,$(AGDA_FILES),$(shell wc -l $(f))"\n")
+AGDAFILES := $(wildcard src/**/*.lagda.md)
+HTMLFILES := $(AGDAFILES:.lagda.md=.html)
+
+bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
 
 htmlOpts=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 AGDA ?=agda -v$(agdaVerbose)
@@ -41,13 +43,34 @@ src/everything.lagda.md : agdaFiles
 check : src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
-html: src/everything.lagda.md
+.PHONY: html
+html: $(HTMLFILES)
+
+%.html: %.lagda.md
+	@echo "... $@"
+	@pandoc --standalone \
+				--metadata-file=docs/_config.yml \
+				--template=docs/template.html5 \
+				--metadata \
+        title="Expected HTML" \
+				$? \
+				--from markdown+tex_math_dollars+tex_math_double_backslash+latex_macros+lists_without_preceding_blankline \
+				--to=html5  \
+				--mathjax \
+				-o $@ \
+				--variable=reload:"true"
+
+agda-html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
 	${AGDA} ${htmlOpts} src/everything.lagda.md
 	cd docs/; \
 	sh conv.sh; \
 	cp README.html index.html
+
+.phony: watch-html
+watch-html : $(AGDAFILES)
+	@fswatch -0 $^ | xargs -0 -n1 -I {}  sh -c 'ALT=`realpath --relative-to=. {}` ; make "$${ALT/.lagda.md/.html}";'
 
 .PHONY : graph
 graph:

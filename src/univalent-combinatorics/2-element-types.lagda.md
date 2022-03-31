@@ -1,19 +1,28 @@
-# 2-element types
+---
+title: 2-element types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module univalent-combinatorics.2-element-types where
 
+open import
+  elementary-number-theory.modular-arithmetic-standard-finite-types using
+  ( add-Fin)
 open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ)
 
 open import foundation.connected-components-universes using
   ( is-contr-total-equiv-component-UU-Level; equiv-eq-component-UU-Level;
     is-equiv-equiv-eq-component-UU-Level)
+open import foundation.contractible-maps using
+  ( is-contr-map-is-equiv)
 open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inr-inl; neq-inl-inr)
+  ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr;
+    is-equiv-is-contr; center)
+open import foundation.coproduct-types using
+  ( coprod; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
@@ -25,14 +34,19 @@ open import foundation.equivalences using
     is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv;
     left-inverse-law-equiv; left-unit-law-equiv; right-inverse-law-equiv;
     is-emb-is-equiv; htpy-eq-equiv; right-unit-law-equiv; equiv-precomp;
-    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv;
+    extensionality-equiv; is-contr-total-htpy-equiv)
+open import foundation.fibers-of-maps using (fib)
+open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-tot; is-fiberwise-equiv-is-equiv-tot; tot)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
+open import foundation.identity-types using
+  ( Id; refl; inv; _∙_; ap; tr; equiv-inv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (is-involution-aut)
 open import foundation.mere-equivalences using
@@ -45,9 +59,15 @@ open import foundation.propositions using
 open import foundation.raising-universe-levels using (map-raise)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.subuniverses using (is-contr-total-equiv-subuniverse)
+open import foundation.type-arithmetic-coproduct-types using
+  ( right-distributive-Σ-coprod)
+open import foundation.type-arithmetic-dependent-pair-types using
+  ( left-unit-law-Σ-is-contr)
 open import foundation.type-arithmetic-empty-type using
   ( map-right-unit-law-coprod-is-empty)
-open import foundation.unit-type using (star)
+open import foundation.type-arithmetic-unit-type using
+  ( left-unit-law-Σ)
+open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
 open import foundation-core.sets using (Id-Prop)
@@ -61,7 +81,7 @@ open import univalent-combinatorics.finite-types using
     Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
-    is-not-contractible-Fin; succ-Fin)
+    is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
 ```
 
 ## Idea
@@ -92,10 +112,9 @@ is-prop-has-two-elements {l} {X} = is-prop-type-Prop (has-two-elements-Prop X)
 type-2-Element-Type : {l : Level} → 2-Element-Type l → UU l
 type-2-Element-Type = pr1
 
-mere-equiv-2-Element-Type :
-  {l : Level} (X : 2-Element-Type l) →
-  mere-equiv (Fin 2) (type-2-Element-Type X)
-mere-equiv-2-Element-Type = pr2
+has-two-elements-type-2-Element-Type :
+  {l : Level} (X : 2-Element-Type l) → has-two-elements (type-2-Element-Type X)
+has-two-elements-type-2-Element-Type = pr2
 ```
 
 ## Properties
@@ -110,7 +129,7 @@ is-set-has-two-elements H = is-set-has-cardinality H
 is-set-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → is-set (type-2-Element-Type X)
 is-set-type-2-Element-Type X =
-  is-set-has-cardinality (mere-equiv-2-Element-Type X)
+  is-set-has-cardinality (has-two-elements-type-2-Element-Type X)
 
 set-2-Element-Type :
   {l : Level} → 2-Element-Type l → UU-Set l
@@ -225,6 +244,10 @@ abstract
       aut-point-Fin-two-ℕ
       issec-aut-point-Fin-two-ℕ
       isretr-aut-point-Fin-two-ℕ
+
+equiv-ev-zero-aut-Fin-two-ℕ : (Fin 2 ≃ Fin 2) ≃ Fin 2
+pr1 equiv-ev-zero-aut-Fin-two-ℕ = ev-zero-aut-Fin-two-ℕ
+pr2 equiv-ev-zero-aut-Fin-two-ℕ = is-equiv-ev-zero-aut-Fin-two-ℕ
 ```
 
 #### If `X` is a 2-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
@@ -239,7 +262,7 @@ module _
       is-equiv (ev-zero-equiv-Fin-two-ℕ {l1} {type-2-Element-Type X})
     is-equiv-ev-zero-equiv-Fin-two-ℕ =
       apply-universal-property-trunc-Prop
-        ( mere-equiv-2-Element-Type X)
+        ( has-two-elements-type-2-Element-Type X)
         ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
         ( λ α →
           is-equiv-left-factor'
@@ -391,6 +414,52 @@ eq-point-UU-Fin-two-ℕ {X} =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
 
+### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence.
+
+```agda
+module _
+  {l1 : Level} (X : 2-Element-Type l1)
+  where
+
+  ev-zero-htpy-equiv-Fin-two-ℕ :
+    (e e' : Fin 2 ≃ type-2-Element-Type X) → htpy-equiv e e' →
+    Id (map-equiv e zero-Fin) (map-equiv e' zero-Fin)
+  ev-zero-htpy-equiv-Fin-two-ℕ e e' H = H zero-Fin
+
+  equiv-ev-zero-htpy-equiv-Fin-two-ℕ' :
+    (e e' : Fin 2 ≃ type-2-Element-Type X) →
+    htpy-equiv e e' ≃ Id (map-equiv e zero-Fin) (map-equiv e' zero-Fin)
+  equiv-ev-zero-htpy-equiv-Fin-two-ℕ' e e' =
+    ( equiv-ap (equiv-ev-zero-equiv-Fin-two-ℕ X) e e') ∘e
+    ( inv-equiv (extensionality-equiv e e'))
+
+  abstract
+    is-equiv-ev-zero-htpy-equiv-Fin-two-ℕ :
+      (e e' : Fin 2 ≃ type-2-Element-Type X) →
+      is-equiv (ev-zero-htpy-equiv-Fin-two-ℕ e e')
+    is-equiv-ev-zero-htpy-equiv-Fin-two-ℕ e =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-is-contr
+          ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
+          ( is-contr-total-htpy-equiv e)
+          ( is-contr-equiv
+            ( fib (ev-zero-equiv-Fin-two-ℕ) (map-equiv e zero-Fin))
+            ( equiv-tot
+              ( λ e' →
+                equiv-inv (map-equiv e zero-Fin) (map-equiv e' zero-Fin)))
+            ( is-contr-map-is-equiv
+              ( is-equiv-ev-zero-equiv-Fin-two-ℕ X)
+              ( map-equiv e zero-Fin))))
+
+  equiv-ev-zero-htpy-equiv-Fin-two-ℕ :
+    (e e' : Fin 2 ≃ type-2-Element-Type X) →
+    htpy-equiv e e' ≃ Id (map-equiv e zero-Fin) (map-equiv e' zero-Fin)
+  pr1 (equiv-ev-zero-htpy-equiv-Fin-two-ℕ e e') =
+    ev-zero-htpy-equiv-Fin-two-ℕ e e'
+  pr2 (equiv-ev-zero-htpy-equiv-Fin-two-ℕ e e') =
+    is-equiv-ev-zero-htpy-equiv-Fin-two-ℕ e e'
+```
+
 ### The canonical type family on the type of 2-element types has no section
 
 ```agda
@@ -476,7 +545,7 @@ module _
     (e : equiv-2-Element-Type X X) → is-involution-aut e
   is-involution-aut-2-element-type e x =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
+      ( has-two-elements-type-2-Element-Type X)
       ( Id-Prop (set-UU-Fin-Level X) (map-equiv (e ∘e e) x) x)
       ( λ h →
         ( ap (map-equiv (e ∘e e)) (inv (issec-map-inv-equiv h x))) ∙
@@ -539,7 +608,7 @@ module _
            ( id-equiv))
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
+      ( has-two-elements-type-2-Element-Type X)
       ( empty-Prop)
       ( λ f →
         neq-inr-inl
@@ -580,7 +649,7 @@ module _
     ¬ (Id (map-equiv (swap-2-Element-Type X) x) x)
   has-no-fixpoints-swap-2-Element-Type x P =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-2-Element-Type X)
+      ( has-two-elements-type-2-Element-Type X)
       ( empty-Prop)
       ( λ h →
         is-not-identity-swap-2-Element-Type X
@@ -640,4 +709,59 @@ module _
         ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
         ( is-injective-map-equiv h (p ∙ inv q))
         ( P)
+```
+
+### Evaluating an automorphism at `0 : Fin 2` is a group homomorphism
+
+```agda
+preserves-add-aut-point-Fin-two-ℕ :
+  (a b : Fin 2) →
+  Id ( aut-point-Fin-two-ℕ (add-Fin a b))
+     ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
+preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inl (inr star)) =
+  eq-htpy-equiv refl-htpy
+preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inr star) =
+  eq-htpy-equiv refl-htpy
+preserves-add-aut-point-Fin-two-ℕ (inr star) (inl (inr star)) =
+  eq-htpy-equiv refl-htpy
+preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
+  eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin x))
+```
+
+### Any Σ-type over `Fin 2` is a coproduct
+
+```agda
+is-coprod-Σ-Fin-two-ℕ :
+  {l : Level} (P : Fin 2 → UU l) → Σ (Fin 2) P ≃ coprod (P zero-Fin) (P one-Fin)
+is-coprod-Σ-Fin-two-ℕ P =
+  ( equiv-coprod
+    ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ zero-Fin)
+    ( left-unit-law-Σ (P ∘ inr))) ∘e
+  ( right-distributive-Σ-coprod (Fin 1) unit P)
+```
+
+### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`.
+
+```agda
+module _
+  {l : Level} (X : 2-Element-Type l)
+  where
+
+  abstract
+    is-contr-decide-value-equiv-Fin-two-ℕ :
+      (e : Fin 2 ≃ type-2-Element-Type X) (x : type-2-Element-Type X) →
+      is-contr
+        ( coprod (Id x (map-equiv e zero-Fin)) (Id x (map-equiv e one-Fin)))
+    is-contr-decide-value-equiv-Fin-two-ℕ e x =
+      is-contr-equiv'
+        ( fib (map-equiv e) x)
+        ( ( is-coprod-Σ-Fin-two-ℕ (λ y → Id x (map-equiv e y))) ∘e
+          ( equiv-tot (λ y → equiv-inv (map-equiv e y) x)))
+        ( is-contr-map-is-equiv (is-equiv-map-equiv e) x)
+
+  decide-value-equiv-Fin-two-ℕ :
+    (e : Fin 2 ≃ type-2-Element-Type X) (x : type-2-Element-Type X) →
+    coprod (Id x (map-equiv e zero-Fin)) (Id x (map-equiv e one-Fin))
+  decide-value-equiv-Fin-two-ℕ e x =
+    center (is-contr-decide-value-equiv-Fin-two-ℕ e x)
 ```

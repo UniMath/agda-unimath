@@ -36,8 +36,8 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
-open import category-theory.terminal-objects-precategories
 open import category-theory.slice-precategories
+open import category-theory.terminal-objects-precategories
 ```
 
 ## Elementary number theory
@@ -111,6 +111,7 @@ open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 open import elementary-number-theory.triangular-numbers
+open import elementary-number-theory.telephone-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.unit-elements-standard-finite-types
 open import elementary-number-theory.unit-similarity-standard-finite-types
@@ -127,8 +128,12 @@ open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-monoids
+open import finite-group-theory.finite-semigroups
+open import finite-group-theory.groups-of-order-2
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
+open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 ```
 
@@ -367,6 +372,7 @@ open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.incidence-undirected-graphs
+open import graph-theory.matchings
 open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
@@ -386,6 +392,7 @@ open import group-theory
 open import group-theory.abelian-groups
 open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
+open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
@@ -394,6 +401,7 @@ open import group-theory.concrete-groups
 open import group-theory.concrete-subgroups
 open import group-theory.conjugation
 open import group-theory.embeddings-groups
+open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
 open import group-theory.examples-higher-groups
@@ -433,6 +441,7 @@ open import group-theory.transitive-group-actions
 open import linear-algebra
 open import linear-algebra.constant-matrices
 open import linear-algebra.constant-vectors
+open import linear-algebra.diagonal-matrices-on-rings
 open import linear-algebra.functoriality-matrices
 open import linear-algebra.functoriality-vectors
 open import linear-algebra.matrices-on-rings
@@ -456,6 +465,7 @@ open import order-theory.decidable-subpreorders
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.greatest-lower-bounds-posets
 open import order-theory.interval-subposets
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
@@ -464,6 +474,7 @@ open import order-theory.least-elements-preorders
 open import order-theory.locally-finite-posets
 open import order-theory.maximal-chains-posets
 open import order-theory.maximal-chains-preorders
+open import order-theory.meet-semilattices
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
@@ -511,6 +522,7 @@ open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.commutative-operations
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
@@ -540,6 +552,7 @@ open import tutorials.basic-agda
 
 ```agda
 open import univalent-combinatorics
+open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types

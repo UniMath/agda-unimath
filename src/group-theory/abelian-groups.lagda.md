@@ -6,7 +6,9 @@
 module group-theory.abelian-groups where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (Id; ap-binary; _∙_)
+open import foundation.interchange-law using
+  (interchange-law-commutative-and-associative)
 open import foundation.propositions using
   ( is-prop; is-prop-Π; Π-Prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.sets using (UU-Set; is-set; Id-Prop)
@@ -17,7 +19,8 @@ open import group-theory.groups using
     associative-mul-Group; has-associative-mul-Group; semigroup-Group; is-group;
     is-group-Group; is-unital-Group; unit-Group; left-unit-law-Group;
     right-unit-law-Group; inv-Group; left-inverse-law-Group;
-    right-inverse-law-Group; is-group'; has-inverses-Group)
+    right-inverse-law-Group; is-group'; has-inverses-Group;
+    distributive-inv-mul-Group)
 open import group-theory.monoids using (is-unital)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
@@ -73,6 +76,11 @@ add-Ab :
   {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
 add-Ab A = mul-Group (group-Ab A)
 
+ap-add-Ab :
+  {l : Level} (A : Ab l) {x y x' y' : type-Ab A} (p : Id x x') (q : Id y y') →
+  Id (add-Ab A x y) (add-Ab A x' y')
+ap-add-Ab A p q = ap-binary (add-Ab A) p q
+
 associative-add-Ab :
   {l : Level} (A : Ab l) (x y z : type-Ab A) →
   Id (add-Ab A (add-Ab A x y) z) (add-Ab A x (add-Ab A y z))
@@ -122,8 +130,25 @@ right-inverse-law-add-Ab :
   Id (add-Ab A x (neg-Ab A x)) (zero-Ab A)
 right-inverse-law-add-Ab A = right-inverse-law-Group (group-Ab A)
 
-is-commutative-add-Ab :
+commutative-add-Ab :
   {l : Level} (A : Ab l) (x y : type-Ab A) →
   Id (add-Ab A x y) (add-Ab A y x)
-is-commutative-add-Ab A = pr2 A
+commutative-add-Ab A = pr2 A
+
+interchange-add-add-Ab :
+  {l : Level} (A : Ab l) (a b c d : type-Ab A) →
+  Id ( add-Ab A (add-Ab A a b) (add-Ab A c d))
+     ( add-Ab A (add-Ab A a c) (add-Ab A b d))
+interchange-add-add-Ab A =
+  interchange-law-commutative-and-associative
+    ( add-Ab A)
+    ( commutative-add-Ab A)
+    ( associative-add-Ab A)
+
+distributive-neg-add-Ab :
+  {l : Level} (A : Ab l) (x y : type-Ab A) →
+  Id (neg-Ab A (add-Ab A x y)) (add-Ab A (neg-Ab A x) (neg-Ab A y))
+distributive-neg-add-Ab A x y =
+  ( distributive-inv-mul-Group (group-Ab A) x y) ∙
+  ( commutative-add-Ab A (neg-Ab A y) (neg-Ab A x))
 ```
