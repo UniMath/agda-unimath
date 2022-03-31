@@ -197,7 +197,7 @@ translation-invariant-dist-ℕ :
   (k m n : ℕ) → Id (dist-ℕ (add-ℕ k m) (add-ℕ k n)) (dist-ℕ m n)
 translation-invariant-dist-ℕ zero-ℕ m n =
   ap-dist-ℕ (left-unit-law-add-ℕ m) (left-unit-law-add-ℕ n)
-translation-invariant-dist-ℕ (succ-ℕ k)  m n =
+translation-invariant-dist-ℕ (succ-ℕ k) m n =
   ( ap-dist-ℕ (left-successor-law-add-ℕ k m) (left-successor-law-add-ℕ k n)) ∙
   ( translation-invariant-dist-ℕ k m n)
 
