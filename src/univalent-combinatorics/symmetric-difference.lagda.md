@@ -27,7 +27,7 @@ open import foundation.xor using (xor-Prop; xor-decidable-Prop)
 
 open import univalent-combinatorics.coproduct-types using
   ( coprod-eq-is-finite; is-finite-coprod)
-open import univalent-combinatorics.decidable-subtypes using (is-finite-decidable-subtype)
+open import univalent-combinatorics.decidable-subtypes using ( is-finite-decidable-subtype)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level; number-of-elements-is-finite;
     is-finite; is-finite-has-cardinality; number-of-elements-has-finite-cardinality;
@@ -37,72 +37,52 @@ open import univalent-combinatorics.finite-types using
 
 ```agda
 module _
-  {l l1 l2 : Level} {n : ℕ} (X : UU-Fin-Level l n)
-  (P : decidable-subtype l1 (type-UU-Fin-Level X))
-  (Q : decidable-subtype l2 (type-UU-Fin-Level X))
+  {l l1 l2 : Level} (X : UU l) (F : is-finite X)
+  (P : decidable-subtype l1 X)
+  (Q : decidable-subtype l2 X)
   
   where
-
-  private
-    is-finite-X : is-finite (type-UU-Fin-Level X)
-    is-finite-X = is-finite-has-cardinality (mere-equiv-UU-Fin-Level X)
-    is-finite-symmetric-difference :
-      is-finite
-        ( type-decidable-subtype
-          ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
-    is-finite-symmetric-difference =
-      is-finite-decidable-subtype
-        ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q)
-        ( is-finite-has-cardinality (mere-equiv-UU-Fin-Level X))
-    is-finite-intersection :
-      is-finite (type-decidable-subtype (intersection-decidable-subtype (type-UU-Fin-Level X) P Q))
-    is-finite-intersection =
-      is-finite-decidable-subtype
-        ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q)
-        ( is-finite-X)
-    number-of-elements-decidable-subtype-X : {l' : Level} →
-      (decidable-subtype l' (type-UU-Fin-Level X)) → ℕ
-    number-of-elements-decidable-subtype-X R =
-      number-of-elements-is-finite (is-finite-decidable-subtype R is-finite-X)
 
   eq-symmetric-difference :
     Id
       ( add-ℕ
-        ( number-of-elements-decidable-subtype-X P)        
-        ( number-of-elements-decidable-subtype-X Q))
+        ( number-of-elements-is-finite (is-finite-decidable-subtype P F))        
+        ( number-of-elements-is-finite (is-finite-decidable-subtype Q F)))
       ( add-ℕ
-        ( number-of-elements-decidable-subtype-X
-          ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+        ( number-of-elements-is-finite
+          ( is-finite-decidable-subtype (symmetric-difference-decidable-subtype X P Q) F))
         ( mul-ℕ
           2
-          ( number-of-elements-decidable-subtype-X
-            ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q))))
+          ( number-of-elements-is-finite
+            ( is-finite-decidable-subtype
+              ( intersection-decidable-subtype X P Q)
+              ( F)))))
   eq-symmetric-difference =
     ( ( coprod-eq-is-finite
-      ( is-finite-decidable-subtype P is-finite-X)
-      ( is-finite-decidable-subtype Q is-finite-X))) ∙
+      ( is-finite-decidable-subtype P F)
+      ( is-finite-decidable-subtype Q F))) ∙
       ( ( ap
         ( number-of-elements-has-finite-cardinality)
         ( all-elements-equal-has-finite-cardinality
           ( has-finite-cardinality-is-finite
             ( is-finite-coprod
-              ( is-finite-decidable-subtype P is-finite-X)
-              ( is-finite-decidable-subtype Q is-finite-X)))
+              ( is-finite-decidable-subtype P F)
+              ( is-finite-decidable-subtype Q F)))
           ( pair
             ( number-of-elements-is-finite is-finite-coprod-symmetric-difference)
             ( transitive-mere-equiv
               ( mere-equiv-has-finite-cardinality
                 ( has-finite-cardinality-is-finite is-finite-coprod-symmetric-difference))
-              ( unit-trunc-Prop (inv-equiv (equiv-symmetric-difference (type-UU-Fin-Level X) P Q))))))) ∙
+              ( unit-trunc-Prop (inv-equiv (equiv-symmetric-difference X P Q))))))) ∙
         ( inv
           ( coprod-eq-is-finite
-            ( is-finite-symmetric-difference)
+            ( is-finite-decidable-subtype (symmetric-difference-decidable-subtype X P Q) F)
             ( is-finite-coprod is-finite-intersection is-finite-intersection)) ∙
           ( ap
             ( λ n →
               add-ℕ
                 ( number-of-elements-decidable-subtype-X
-                  ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+                  ( symmetric-difference-decidable-subtype X P Q))
                 ( n))
             ( ( inv
               ( coprod-eq-is-finite is-finite-intersection is-finite-intersection)) ∙
@@ -111,23 +91,31 @@ module _
                   add-ℕ
                     ( n)
                     ( number-of-elements-decidable-subtype-X
-                      ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q)))
+                      ( intersection-decidable-subtype X P Q)))
                 ( inv
                   ( left-unit-law-mul-ℕ
                     ( number-of-elements-decidable-subtype-X
-                      ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q)))))))))
+                      ( intersection-decidable-subtype X P Q)))))))))
     where
+    is-finite-intersection :
+      is-finite (type-decidable-subtype (intersection-decidable-subtype X P Q))
+    is-finite-intersection =
+      is-finite-decidable-subtype (intersection-decidable-subtype X P Q) F
+    number-of-elements-decidable-subtype-X : {l' : Level} →
+      (decidable-subtype l' X) → ℕ
+    number-of-elements-decidable-subtype-X R =
+      number-of-elements-is-finite (is-finite-decidable-subtype R F)
     is-finite-coprod-symmetric-difference :
       is-finite
         ( coprod
           ( type-decidable-subtype
-            ( symmetric-difference-decidable-subtype (type-UU-Fin-Level X) P Q))
+            ( symmetric-difference-decidable-subtype X P Q))
           ( coprod
             ( type-decidable-subtype
-              ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q))
+              ( intersection-decidable-subtype X P Q))
             ( type-decidable-subtype
-              ( intersection-decidable-subtype (type-UU-Fin-Level X) P Q))))
+              ( intersection-decidable-subtype X P Q))))
     is-finite-coprod-symmetric-difference =
       is-finite-coprod
-        ( is-finite-symmetric-difference)
+        ( is-finite-decidable-subtype (symmetric-difference-decidable-subtype X P Q) F)
         ( is-finite-coprod is-finite-intersection is-finite-intersection)
