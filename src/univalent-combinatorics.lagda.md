@@ -22,6 +22,7 @@ open import univalent-combinatorics.counting public
 open import univalent-combinatorics.cubes public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
+open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dependent-function-types public
 open import univalent-combinatorics.dependent-sum-finite-types public
