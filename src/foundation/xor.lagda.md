@@ -35,10 +35,11 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.unordered-pairs using (unordered-pair; standard-unordered-pair)
 
 open import univalent-combinatorics.2-element-types using
-  ( type-2-Element-Type; map-swap-2-Element-Type; mere-equiv-2-Element-Type; compute-swap-2-Element-Type)
+  ( type-2-Element-Type; map-swap-2-Element-Type; compute-swap-2-Element-Type)
 open import univalent-combinatorics.equality-finite-types using
-  ( has-decidable-equality-has-cardinality)
-open import univalent-combinatorics.finite-types using (Fin-UU-Fin)
+  ( has-decidable-equality-is-finite)
+open import univalent-combinatorics.finite-types using
+  (Fin-UU-Fin; is-finite-type-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -77,7 +78,7 @@ is-prop-type-commutative-xor-Prop (pair X P) =
       cases-is-prop-type-commutative-xor-Prop
         ( x)
         ( y)
-        ( has-decidable-equality-has-cardinality (mere-equiv-2-Element-Type X) (pr1 x) (pr1 y)))
+        ( has-decidable-equality-is-finite (is-finite-type-UU-Fin-Level X) (pr1 x) (pr1 y)))
   where
   cases-is-prop-type-commutative-xor-Prop : (x y : type-commutative-xor-Prop (pair X P)) →
     is-decidable (Id (pr1 x) (pr1 y)) → Id x y
