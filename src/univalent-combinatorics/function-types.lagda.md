@@ -5,7 +5,7 @@ title: Finite function types
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module univalent-combinatorics.finite-function-types where
+module univalent-combinatorics.function-types where
 
 open import foundation.dependent-pair-types using (pr1; pr2)
 open import foundation.equivalences using (_≃_)
@@ -13,8 +13,9 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import univalent-combinatorics.cartesian-product-types using
   ( is-finite-prod)
-open import univalent-combinatorics.dependent-product-finite-types using
-  ( is-finite-Π)
+open import univalent-combinatorics.counting using (count)
+open import univalent-combinatorics.dependent-function-types using
+  ( count-Π; is-finite-Π)
 open import univalent-combinatorics.dependent-sum-finite-types using
   ( is-finite-Σ)
 open import univalent-combinatorics.equality-finite-types using
@@ -22,6 +23,20 @@ open import univalent-combinatorics.equality-finite-types using
 open import univalent-combinatorics.finite-types using
   ( is-finite; 𝔽; type-𝔽; is-finite-type-𝔽)
 ```
+
+## Properties
+
+### The type of functions between types equipped with a counting can be equipped with a counting
+
+```agda
+count-function-type :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  count A → count B → count (A → B)
+count-function-type e f =
+  count-Π e (λ x → f)
+```
+
+### The type of functions between finite types is finite
 
 ```agda
 abstract
@@ -34,7 +49,11 @@ _→-𝔽_ : 𝔽 → 𝔽 → 𝔽
 pr1 (A →-𝔽 B) = type-𝔽 A → type-𝔽 B
 pr2 (A →-𝔽 B) =
   is-finite-function-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
+```
 
+### The type of equivalences between finite types is finite
+
+```agda
 abstract
   is-finite-≃ :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -58,7 +77,11 @@ abstract
 _≃-𝔽_ : 𝔽 → 𝔽 → 𝔽
 pr1 (A ≃-𝔽 B) = type-𝔽 A ≃ type-𝔽 B
 pr2 (A ≃-𝔽 B) = is-finite-≃ (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
+```
 
+### The type of automorphisms on a finite type is finite
+
+```agda
 Aut-𝔽 : 𝔽 → 𝔽
 Aut-𝔽 A = A ≃-𝔽 A
 ```
