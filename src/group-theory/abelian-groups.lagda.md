@@ -5,8 +5,13 @@
 
 module group-theory.abelian-groups where
 
+open import foundation.binary-embeddings using (is-binary-emb)
+open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; ap-binary; _∙_)
+open import foundation.embeddings using (is-emb)
+open import foundation.equivalences using (is-equiv)
+open import foundation.identity-types using (Id; ap-binary; _∙_; inv)
+open import foundation.injective-maps using (is-injective)
 open import foundation.interchange-law using
   (interchange-law-commutative-and-associative)
 open import foundation.propositions using
@@ -20,7 +25,11 @@ open import group-theory.groups using
     is-group-Group; is-unital-Group; unit-Group; left-unit-law-Group;
     right-unit-law-Group; inv-Group; left-inverse-law-Group;
     right-inverse-law-Group; is-group'; has-inverses-Group;
-    distributive-inv-mul-Group)
+    distributive-inv-mul-Group; mul-Group'; is-equiv-mul-Group;
+    is-equiv-mul-Group'; is-binary-equiv-mul-Group; transpose-eq-mul-Group;
+    transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
+    is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
+    is-idempotent-Group; is-unit-is-idempotent-Group)
 open import group-theory.monoids using (is-unital)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
@@ -76,6 +85,10 @@ add-Ab :
   {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
 add-Ab A = mul-Group (group-Ab A)
 
+add-Ab' :
+  {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
+add-Ab' A = mul-Group' (group-Ab A)
+
 ap-add-Ab :
   {l : Level} (A : Ab l) {x y x' y' : type-Ab A} (p : Id x x') (q : Id y y') →
   Id (add-Ab A x y) (add-Ab A x' y')
@@ -101,6 +114,9 @@ has-zero-Ab A = is-unital-Group (group-Ab A)
 zero-Ab :
   {l : Level} (A : Ab l) → type-Ab A
 zero-Ab A = unit-Group (group-Ab A)
+
+is-zero-Ab : {l : Level} (A : Ab l) → type-Ab A → UU l
+is-zero-Ab A x = Id x (zero-Ab A)
 
 left-unit-law-add-Ab :
   {l : Level} (A : Ab l) → (x : type-Ab A) →
@@ -151,4 +167,83 @@ distributive-neg-add-Ab :
 distributive-neg-add-Ab A x y =
   ( distributive-inv-mul-Group (group-Ab A) x y) ∙
   ( commutative-add-Ab A (neg-Ab A y) (neg-Ab A x))
+```
+
+### Addition on an abelian group is a binary equivalence
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
+  is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
+
+  is-equiv-add-Ab' : (x : type-Ab A) → is-equiv (add-Ab' A x)
+  is-equiv-add-Ab' = is-equiv-mul-Group' (group-Ab A)
+
+  is-binary-equiv-add-Ab : is-binary-equiv (add-Ab A)
+  is-binary-equiv-add-Ab = is-binary-equiv-mul-Group (group-Ab A)
+```
+
+### Addition on an abelian group is a binary embedding
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-binary-emb-add-Ab : is-binary-emb (add-Ab A)
+  is-binary-emb-add-Ab = is-binary-emb-mul-Group (group-Ab A)
+
+  is-emb-add-Ab : (x : type-Ab A) → is-emb (add-Ab A x)
+  is-emb-add-Ab = is-emb-mul-Group (group-Ab A)
+
+  is-emb-add-Ab' : (x : type-Ab A) → is-emb (add-Ab' A x)
+  is-emb-add-Ab' = is-emb-mul-Group' (group-Ab A)
+```
+
+### Addition on an abelian group is pointwise injective from both sides
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-injective-add-Ab : (x : type-Ab A) → is-injective (add-Ab A x)
+  is-injective-add-Ab = is-injective-mul-Group (group-Ab A)
+
+  is-injective-add-Ab' : (x : type-Ab A) → is-injective (add-Ab' A x)
+  is-injective-add-Ab' = is-injective-mul-Group' (group-Ab A)
+```
+
+### Transposing identifications in abelian groups
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  transpose-eq-add-Ab :
+    {x y z : type-Ab A} → Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
+  transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
+
+  transpose-eq-add-Ab' :
+    {x y z : type-Ab A} → Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
+  transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
+```
+
+### Any idempotent element in an abelian group is zero
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+  
+  is-idempotent-Ab : type-Ab A → UU l
+  is-idempotent-Ab = is-idempotent-Group (group-Ab A)
+
+  is-zero-is-idempotent-Ab :
+    {x : type-Ab A} → is-idempotent-Ab x → is-zero-Ab A x
+  is-zero-is-idempotent-Ab = is-unit-is-idempotent-Group (group-Ab A)
 ```
