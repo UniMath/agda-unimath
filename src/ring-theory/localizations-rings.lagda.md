@@ -63,7 +63,7 @@ is-left-inverse-inv-inverts-element-hom-Ring :
   Id ( mul-Ring S
        ( inv-inverts-element-hom-Ring R S x f H)
        ( map-hom-Ring R S f x))
-     ( unit-Ring S)
+     ( one-Ring S)
 is-left-inverse-inv-inverts-element-hom-Ring R S x f H = pr1 (pr2 H)
 
 is-right-inverse-inv-inverts-element-hom-Ring :
@@ -72,7 +72,7 @@ is-right-inverse-inv-inverts-element-hom-Ring :
   Id ( mul-Ring S
        ( map-hom-Ring R S f x)
        ( inv-inverts-element-hom-Ring R S x f H))
-     ( unit-Ring S)
+     ( one-Ring S)
 is-right-inverse-inv-inverts-element-hom-Ring R S x f H = pr2 (pr2 H)
 
 inverts-element-comp-hom-Ring :
@@ -210,7 +210,7 @@ is-left-inverse-inv-inverts-subset-hom-Ring :
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (P : subset-Ring l3 R)
   (f : type-hom-Ring R S) (H : inverts-subset-hom-Ring R S P f)
   (x : type-Ring R) (p : type-Prop (P x)) →
-  Id (mul-Ring S (inv-inverts-subset-hom-Ring R S P f H x p) (map-hom-Ring R S f x)) (unit-Ring S)
+  Id (mul-Ring S (inv-inverts-subset-hom-Ring R S P f H x p) (map-hom-Ring R S f x)) (one-Ring S)
 is-left-inverse-inv-inverts-subset-hom-Ring R S P f H x p =
   is-left-inverse-inv-inverts-element-hom-Ring R S x f (H x p)
 
@@ -218,7 +218,7 @@ is-right-inverse-inv-inverts-subset-hom-Ring :
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (P : subset-Ring l3 R)
   (f : type-hom-Ring R S) (H : inverts-subset-hom-Ring R S P f)
   (x : type-Ring R) (p : type-Prop (P x)) →
-  Id (mul-Ring S (map-hom-Ring R S f x) (inv-inverts-subset-hom-Ring R S P f H x p)) (unit-Ring S)
+  Id (mul-Ring S (map-hom-Ring R S f x) (inv-inverts-subset-hom-Ring R S P f H x p)) (one-Ring S)
 is-right-inverse-inv-inverts-subset-hom-Ring R S P f H x p =
   is-right-inverse-inv-inverts-element-hom-Ring R S x f (H x p)
   

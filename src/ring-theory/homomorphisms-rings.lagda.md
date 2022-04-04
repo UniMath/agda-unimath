@@ -27,7 +27,7 @@ open import group-theory.homomorphisms-abelian-groups using
     eq-htpy-hom-Ab)
 
 open import ring-theory.rings using
-  ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; unit-Ring)
+  ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; one-Ring)
 ```
 
 ## Idea
@@ -68,7 +68,7 @@ preserves-unit-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ab (ab-Ring R1) (ab-Ring R2) → UU l2
 preserves-unit-hom-Ab R1 R2 f =
-  Id (map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (unit-Ring R1)) (unit-Ring R2)
+  Id (map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (one-Ring R1)) (one-Ring R2)
 
 is-prop-preserves-unit-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
@@ -76,8 +76,8 @@ is-prop-preserves-unit-hom-Ab :
   is-prop (preserves-unit-hom-Ab R1 R2 f)
 is-prop-preserves-unit-hom-Ab R1 R2 f =
   is-set-type-Ring R2
-    ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (unit-Ring R1))
-    ( unit-Ring R2)
+    ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (one-Ring R1))
+    ( one-Ring R2)
 
 is-ring-homomorphism-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →

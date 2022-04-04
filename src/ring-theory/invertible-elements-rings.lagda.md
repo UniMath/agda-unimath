@@ -10,7 +10,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.universe-levels using (Level; UU)
 
-open import ring-theory.rings using (Ring; type-Ring; unit-Ring; mul-Ring)
+open import ring-theory.rings using (Ring; type-Ring; one-Ring; mul-Ring)
 ```
 
 ## Idea
@@ -26,11 +26,11 @@ module _
   
   has-left-inverse-Ring : type-Ring R → UU l
   has-left-inverse-Ring x =
-    Σ (type-Ring R) (λ y → Id (mul-Ring R y x) (unit-Ring R))
+    Σ (type-Ring R) (λ y → Id (mul-Ring R y x) (one-Ring R))
   
   has-right-inverse-Ring : type-Ring R → UU l
   has-right-inverse-Ring x =
-    Σ (type-Ring R) (λ y → Id (mul-Ring R x y) (unit-Ring R))
+    Σ (type-Ring R) (λ y → Id (mul-Ring R x y) (one-Ring R))
   
   has-two-sided-inverse-Ring : type-Ring R → UU l
   has-two-sided-inverse-Ring x =
@@ -40,6 +40,6 @@ module _
   is-invertible-Ring x =
     Σ ( type-Ring R)
       ( λ y →
-        Id (mul-Ring R y x) (unit-Ring R) ×
-        Id (mul-Ring R x y) (unit-Ring R))
+        Id (mul-Ring R y x) (one-Ring R) ×
+        Id (mul-Ring R x y) (one-Ring R))
 ```
