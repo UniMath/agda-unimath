@@ -383,6 +383,7 @@ open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
+open import graph-theory.voltage-graphs
 ```
 
 ## Group theory
