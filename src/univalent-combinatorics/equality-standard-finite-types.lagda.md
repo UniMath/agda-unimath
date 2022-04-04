@@ -7,21 +7,22 @@ title: Equality in the standard finite types
 
 module univalent-combinatorics.equality-standard-finite-types where
 
+open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
     
 open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod)
+open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod; neq-inr-inl)
 open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
-open import foundation.dependent-pair-types using (pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pr1; pr2)
 open import foundation.empty-types using (empty; is-set-empty)
 open import foundation.equality-coproduct-types using
   ( is-set-coprod)
 open import foundation.equivalences using (_≃_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap; inv; _∙_)
-open import foundation.negation using (map-neg)
+open import foundation.negation using (¬; map-neg)
 open import foundation.propositions using (is-prop; is-proof-irrelevant-is-prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
@@ -146,4 +147,14 @@ pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin i j
 ```agda
 equiv-unit-trunc-Fin-Set : (k : ℕ) → Fin k ≃ type-trunc-Set (Fin k)
 equiv-unit-trunc-Fin-Set k = equiv-unit-trunc-Set (Fin-Set k)
+```
+
+### If `leq-ℕ 2 n`, then there exists two distinct elements in `Fin n`
+
+```agda
+two-distinct-elements-leq-2-Fin : (n : ℕ) → leq-ℕ 2 n →
+  Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
+pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) = inr star
+pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = inl (inr star)
+pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = neq-inr-inl
 ```

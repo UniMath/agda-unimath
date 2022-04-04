@@ -17,15 +17,20 @@ open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; _∘e_; inv-equiv)
+open import foundation.equivalences using
+  ( _≃_; _∘e_; inv-equiv; map-equiv; map-inv-equiv; id-equiv; left-inverse-law-equiv;
+    right-inverse-law-equiv)
+open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.identity-types using (Id; _∙_; inv)
+open import foundation.identity-types using (Id; _∙_; inv; tr)
+open import foundation.logical-equivalences using (iff-equiv)
+open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using (unit-trunc-Prop)
 open import foundation.propositions using
   ( type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
-open import foundation.subtypes using (subtype; type-subtype)
+open import foundation.subtypes using (subtype; type-subtype; equiv-subtype-equiv)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
 open import foundation.unit-type using (star; is-contr-unit)
@@ -149,6 +154,33 @@ module _
     Id (map-swap-2-Element-Subtype x) y
   compute-swap-2-Element-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
+```
+
+### 2-element subtypes are closed under precomposition with an equivalence
+
+```agda
+precomp-equiv-2-Element-Subtype :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y →
+    2-Element-Subtype l3 X → 2-Element-Subtype l3 Y
+pr1 (precomp-equiv-2-Element-Subtype e (pair P H)) =
+  P ∘ (map-inv-equiv e)
+pr2 (precomp-equiv-2-Element-Subtype e (pair P H)) =
+  transitive-mere-equiv
+    ( H)
+    ( unit-trunc-Prop
+      ( equiv-subtype-equiv
+        ( e)
+        ( P)
+        ( P ∘ (map-inv-equiv e))
+        ( λ x →
+          iff-equiv
+            ( P x)
+            ( P (map-inv-equiv e (map-equiv e x)))
+            ( tr
+              ( λ g → (type-Prop (P x)) ≃ (type-Prop (P (map-equiv g x))))
+              ( inv (left-inverse-law-equiv e))
+              ( id-equiv)))))
+  
 
 {-
 module _
