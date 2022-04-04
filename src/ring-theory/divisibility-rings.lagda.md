@@ -75,3 +75,29 @@ module _
     {x : type-Ring R} → div-Ring R x (zero-Ring R)
   pr1 (div-zero-Ring {x}) = zero-Ring R
   pr2 (div-zero-Ring {x}) = right-zero-law-mul-Ring R x
+```
+
+### The only element of which zero is a divisor is zero itself
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-zero-div-zero-Ring :
+    {x : type-Ring R} → div-Ring R (zero-Ring R) x → is-zero-Ring R x
+  is-zero-div-zero-Ring (pair y p) = inv p ∙ left-zero-law-mul-Ring R y
+```
+
+### The unit of a ring divides any element
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  div-one-Ring :
+    {x : type-Ring R} → div-Ring R (one-Ring R) x
+  pr1 (div-one-Ring {x}) = x
+  pr2 (div-one-Ring {x}) = left-unit-law-mul-Ring R x
+```

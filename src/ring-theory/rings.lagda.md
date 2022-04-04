@@ -147,6 +147,9 @@ module _
   zero-Ring : type-Ring R
   zero-Ring = zero-Ab (ab-Ring R)
 
+  is-zero-Ring : type-Ring R → UU l
+  is-zero-Ring x = Id x zero-Ring
+
   left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x
   left-unit-law-add-Ring = left-unit-law-add-Ab (ab-Ring R)
 
