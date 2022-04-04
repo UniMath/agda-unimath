@@ -24,4 +24,5 @@ open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.undirected-graphs public
+open import graph-theory.voltage-graphs public
 ```
