@@ -269,4 +269,5 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
               ( λ g → (type-decidable-Prop (P x)) ≃ (type-decidable-Prop (P (map-equiv g x))))
               ( inv (left-inverse-law-equiv e))
               ( id-equiv))))
+```
   

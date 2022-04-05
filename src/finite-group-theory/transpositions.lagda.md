@@ -41,6 +41,7 @@ open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; comp-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
 open import foundation.injective-maps using (is-injective-map-equiv)
+open import foundation.logical-equivalences using (equiv-iff)
 open import foundation.negation using (¬)
 open import foundation.propositions using
   ( eq-is-prop; is-prop-is-prop; is-prop-all-elements-equal)
@@ -55,6 +56,7 @@ open import foundation.type-arithmetic-empty-type using
   ( inv-right-unit-law-coprod-is-empty; map-right-absorption-prod;
     map-right-unit-law-coprod-is-empty)
 open import foundation.unit-type using (star; unit)
+open import foundation.univalence using (eq-equiv)
 open import foundation.universe-levels using (Level; UU; lzero; _⊔_)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
@@ -68,7 +70,8 @@ open import univalent-combinatorics.2-element-decidable-subtypes using
     standard-2-Element-Decidable-Subtype;
     is-decidable-type-prop-standard-2-Element-Decidable-Subtype;
     2-element-type-standard-2-Element-Decidable-Subtype;
-    subtype-standard-2-Element-Decidable-Subtype)
+    subtype-standard-2-Element-Decidable-Subtype;
+    precomp-equiv-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
   ( compute-swap-2-Element-Type; is-involution-aut-2-element-type;
     has-no-fixpoints-swap-2-Element-Type; swap-2-Element-Type;
@@ -623,4 +626,79 @@ correct-Fin-succ-Fin-transposition-list n (cons t l) x =
             ( transposition t)
             ( permutation-list-transpositions l)
             ( x))))
+```
+
+```agda
+eq-transposition-precomp-standard-2-Element-Decidable-Subtype :
+  {l : Level} {X : UU l} (H : has-decidable-equality X) →
+  {x y : X} (np : ¬ (Id x y)) →
+  Id
+    ( precomp-equiv-2-Element-Decidable-Subtype
+      ( standard-transposition H np)
+      ( standard-2-Element-Decidable-Subtype H np))
+    ( standard-2-Element-Decidable-Subtype H np)
+eq-transposition-precomp-standard-2-Element-Decidable-Subtype {l} {X} H {x} {y} np =
+  eq-pair-Σ
+    ( eq-htpy
+      ( λ z →
+        eq-pair-Σ
+          ( eq-equiv
+            ( pr1
+              ( pr1
+                ( precomp-equiv-2-Element-Decidable-Subtype
+                  ( standard-transposition H np)
+                  ( standard-2-Element-Decidable-Subtype H np))
+                ( z)))
+            ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z))
+            ( equiv-iff
+              ( subtype-standard-2-Element-Decidable-Subtype H np
+                ( map-inv-equiv (standard-transposition H np) z))
+              ( subtype-standard-2-Element-Decidable-Subtype H np z)
+              ( f z)
+              ( g z)))
+          ( eq-pair-Σ
+            ( eq-is-prop
+              ( is-prop-is-prop
+                ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))
+            ( eq-is-prop
+              ( is-prop-is-decidable
+                ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))))))
+    ( eq-is-prop is-prop-type-trunc-Prop)
+      where
+      f : (z : X) →
+        pr1
+          ( pr1
+            ( precomp-equiv-2-Element-Decidable-Subtype
+              ( standard-transposition H np)
+              ( standard-2-Element-Decidable-Subtype H np)) z) →
+        pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z)
+      f z (inl p) =
+        inr
+          ( is-injective-map-equiv
+            ( standard-transposition H np)
+            ( ( right-computation-standard-transposition H np) ∙
+              ( p)))
+      f z (inr p) =
+        inl
+          ( is-injective-map-equiv
+            ( standard-transposition H np)
+            ( ( left-computation-standard-transposition H np) ∙
+              ( p)))
+      g : (z : X) →
+        pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z) →
+        pr1
+          ( pr1
+            ( precomp-equiv-2-Element-Decidable-Subtype
+              ( standard-transposition H np)
+              ( standard-2-Element-Decidable-Subtype H np)) z)
+      g z (inl p) =
+        inr
+          ( ( inv
+            ( left-computation-standard-transposition H np)) ∙
+            ( ap (map-standard-transposition H np) p))
+      g z (inr p) =
+        inl
+          ( ( inv
+            ( right-computation-standard-transposition H np)) ∙
+            ( ap (map-standard-transposition H np) p))
 ```

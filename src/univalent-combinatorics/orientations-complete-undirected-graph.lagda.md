@@ -24,8 +24,11 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
   ( exists-not-not-forall-count)
 
 open import finite-group-theory.transpositions using
-  ( map-transposition; transposition; two-elements-transposition;
-    left-computation-standard-transposition)
+  ( map-transposition; map-transposition'; transposition; two-elements-transposition;
+    left-computation-standard-transposition;
+    right-computation-standard-transposition;
+    map-standard-transposition; standard-transposition;
+    eq-transposition-precomp-standard-2-Element-Decidable-Subtype)
 
 open import foundation.automorphisms using (Aut)
 open import foundation.cartesian-product-types using (_×_)
@@ -45,9 +48,11 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; ex-falso; equiv-is-empty; empty-Prop)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation.equality-dependent-pair-types using
+  (eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv)
+  ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv;
+    left-unit-law-equiv; right-unit-law-equiv; equiv-comp)
 open import foundation.equivalence-classes using
   ( large-set-quotient; quotient-map-large-set-quotient; large-quotient-Set;
     type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
@@ -79,7 +84,7 @@ open import foundation.unit-type using (star)
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; is-finite-2-Element-Decidable-Subtype;
     2-element-type-2-Element-Decidable-Subtype; precomp-equiv-2-Element-Decidable-Subtype;
-    standard-2-Element-Decidable-Subtype)
+    standard-2-Element-Decidable-Subtype; 2-element-type-standard-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-subtypes using
   ( type-prop-standard-2-Element-Subtype;
     is-prop-type-prop-standard-2-Element-Subtype;
@@ -476,6 +481,166 @@ module _
             ( has-decidable-equality-count
               ( pair n h)
               ( pr1 (pr2 (two-elements-transposition (pair n h) Y))) i) 
+        abstract
+          cases-eq-d1 :
+            ( two-elements : Σ (type-UU-Fin-Level X)
+              ( λ x → Σ (type-UU-Fin-Level X)
+                ( λ y → Σ (¬ (Id x y))
+                  ( λ np' →
+                    Id
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count (pair n h))
+                        ( np'))
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count (pair n h))
+                        ( np )))))) →
+            (q : is-decidable (Id (pr1 two-elements) i)) →
+            (r : is-decidable (Id (pr1 two-elements) j)) →
+            (s : is-decidable (Id (pr1 (pr2 two-elements)) i)) →
+            (t : is-decidable (Id (pr1 (pr2 two-elements)) j)) →
+            Id
+              ( pr1
+                ( cases-d1 
+                  ( standard-2-Element-Decidable-Subtype
+                    ( has-decidable-equality-count (pair n h))
+                    ( np))
+                  ( two-elements)
+                  ( q)
+                  ( r)
+                  ( s)))
+              j
+          cases-eq-d1 (pair x (pair y (pair np' P))) (inl q) r s (inl t) = t
+          cases-eq-d1 (pair x (pair y (pair np' P))) (inl q) r s (inr nt) =
+            ex-falso
+              ( nt
+                ( ( inv
+                  ( left-computation-standard-transposition
+                    ( has-decidable-equality-count (pair n h))
+                    ( np'))) ∙
+                  ( ( ap
+                    ( map-standard-transposition
+                      ( has-decidable-equality-count (pair n h))
+                      ( np'))
+                    ( q)) ∙
+                    ( ( ap (λ Y → map-transposition Y i) P) ∙
+                      ( left-computation-standard-transposition
+                        ( has-decidable-equality-count (pair n h))
+                        ( np))))))
+          cases-eq-d1 (pair x (pair y (pair np' P))) (inr nq) (inl r) (inl s) t = r
+          cases-eq-d1 (pair x (pair y (pair np' P))) (inr nq) (inl r) (inr ns) t =
+            ex-falso
+              ( ns
+                ( ( inv
+                  ( left-computation-standard-transposition
+                    ( has-decidable-equality-count (pair n h))
+                    ( np'))) ∙
+                  ( ( ap
+                    ( map-standard-transposition
+                      ( has-decidable-equality-count (pair n h))
+                      ( np'))
+                    ( r)) ∙
+                    ( ( ap (λ Y → map-transposition Y j) P) ∙
+                      ( right-computation-standard-transposition
+                        ( has-decidable-equality-count (pair n h))
+                        ( np))))))
+          cases-eq-d1 (pair x (pair y (pair np' P))) (inr nq) (inr nr) s t =
+            ex-falso
+              ( contradiction-3-distinct-element-2-Element-Type
+                ( 2-element-type-standard-2-Element-Decidable-Subtype
+                  ( has-decidable-equality-count (pair n h))
+                  ( np))
+                ( pair i (inl refl))
+                ( pair j (inr refl))
+                ( pair
+                  ( x)
+                  (tr (λ Y → type-decidable-Prop (pr1 Y x)) P (inl refl)))
+                ( λ eq → np (pr1 (pair-eq-Σ eq)))
+                ( λ eq → nr (inv (pr1 (pair-eq-Σ eq))))
+                ( λ eq → nq (inv (pr1 (pair-eq-Σ eq)))))
+          eq-d1 :
+            Id
+              (pr1
+                ( d1
+                  ( standard-2-Element-Decidable-Subtype
+                    ( has-decidable-equality-count (pair n h))
+                    ( np))))
+              ( j)
+          eq-d1 =
+            cases-eq-d1
+              ( two-elements-transposition
+                ( pair n h)
+                ( standard-2-Element-Decidable-Subtype
+                  ( has-decidable-equality-count (pair n h))
+                  ( np)))
+              (has-decidable-equality-count
+                ( pair n h)
+                ( pr1
+                  ( two-elements-transposition
+                    ( pair n h)
+                    ( standard-2-Element-Decidable-Subtype
+                      ( has-decidable-equality-count
+                        (pair n h))
+                        ( np))))
+                ( i))
+              (has-decidable-equality-count
+                ( pair n h)
+                ( pr1
+                  ( two-elements-transposition
+                    ( pair n h)
+                    ( standard-2-Element-Decidable-Subtype
+                      ( has-decidable-equality-count
+                        (pair n h))
+                      ( np))))
+                ( j))
+              ( has-decidable-equality-count
+                ( pair n h)
+                ( pr1
+                  ( pr2
+                    ( two-elements-transposition
+                      ( pair n h)
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count
+                          (pair n h))
+                        ( np)))))
+                ( i))
+              ( has-decidable-equality-count
+                ( pair n h)
+                ( pr1
+                  ( pr2
+                    ( two-elements-transposition
+                      ( pair n h)
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count
+                          (pair n h))
+                        ( np)))))
+                ( j))
+        abstract
+          eq-trans-d1 :
+            Id
+              ( i)
+              ( pr1
+                ( orientation-Complete-Undirected-Graph-Aut
+                  ( standard-transposition
+                    ( has-decidable-equality-count (pair n h))
+                    ( np))
+                  ( d1)
+                  ( standard-2-Element-Decidable-Subtype
+                    ( has-decidable-equality-count (pair n h))
+                    ( np))))
+          eq-trans-d1 =
+            ( inv
+              ( right-computation-standard-transposition
+                ( has-decidable-equality-count (pair n h))
+                ( np))) ∙
+              ( ( ap
+                ( map-standard-transposition (has-decidable-equality-count (pair n h)) np)
+                ( inv eq-d1)) ∙
+                ( ap
+                  ( λ Y → map-standard-transposition (has-decidable-equality-count (pair n h)) np (pr1 (d1 Y)))
+                  ( inv
+                    ( eq-transposition-precomp-standard-2-Element-Decidable-Subtype
+                      ( has-decidable-equality-count (pair n h))
+                      ( np)))))
         equiv-Fin-1-difference-d1-trans : Fin 1 ≃
           Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
           (λ Y →
@@ -483,26 +648,15 @@ module _
               ( 2-Element-Decidable-Subtype-subtype-pointwise-difference
                 ( d1)
                 ( orientation-Complete-Undirected-Graph-Aut
-                  ( transposition
-                    (standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-count (pair n h))
-                      ( np)))
+                  ( standard-transposition
+                    ( has-decidable-equality-count (pair n h))
+                    ( np))
                   ( d1))
                 ( Y)))
         pr1 (pr1 equiv-Fin-1-difference-d1-trans (inr star)) =
           standard-2-Element-Decidable-Subtype (has-decidable-equality-count (pair n h)) np
         pr2 (pr1 equiv-Fin-1-difference-d1-trans (inr star)) q =
-          np
-            ({!!} ∙ {!!})
-            {-( is-injective-map-equiv
-              ( transposition
-                ( standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count (pair n h))
-                  ( np)))
-              ( (left-computation-standard-transposition
-                ( has-decidable-equality-count (pair n h))
-                ( np)) ∙
-                {!!}))-}
+          np (eq-trans-d1 ∙ ((ap pr1 (inv ?)) ∙ eq-d1))
         pr2 equiv-Fin-1-difference-d1-trans =
           is-equiv-has-inverse
             ( λ x → inr star)
@@ -527,11 +681,10 @@ module _
                     (2-Element-Decidable-Subtype-subtype-pointwise-difference
                       ( d1)
                       ( orientation-Complete-Undirected-Graph-Aut
-                        ( transposition
-                          ( standard-2-Element-Decidable-Subtype
-                            ( has-decidable-equality-count (pair n h))
-                            ( np)))
-                        {!!})
+                        ( standard-transposition
+                          ( has-decidable-equality-count (pair n h))
+                          ( np))
+                        ( d1))
                       ( Y)))) →
             is-decidable
               ( Id
@@ -548,10 +701,9 @@ module _
                   ( 2-Element-Decidable-Subtype-subtype-pointwise-difference
                     ( d1)
                     ( orientation-Complete-Undirected-Graph-Aut
-                      (transposition
-                        (standard-2-Element-Decidable-Subtype
-                          ( has-decidable-equality-count (pair n h))
-                          ( np)))
+                      ( standard-transposition
+                        ( has-decidable-equality-count (pair n h))
+                        ( np))
                       ( d1))
                     ( pr1 T))))
           retr-Fin-1-difference-d1-trans T (inr NQ) =
@@ -566,10 +718,9 @@ module _
               ( is-finite-subtype-pointwise-difference
                 ( d1)
                 ( orientation-Complete-Undirected-Graph-Aut
-                  ( transposition
-                    ( standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-count (pair n h))
-                      ( np)))
+                  ( standard-transposition
+                    ( has-decidable-equality-count (pair n h))
+                    ( np))
                   ( d1))))
         lemma =
           ap
@@ -582,10 +733,9 @@ module _
                 ( is-finite-subtype-pointwise-difference
                   ( d1)
                   ( orientation-Complete-Undirected-Graph-Aut
-                    ( transposition
-                      ( standard-2-Element-Decidable-Subtype
-                        ( has-decidable-equality-count (pair n h))
-                        ( np)))
+                    ( standard-transposition
+                      ( has-decidable-equality-count (pair n h))
+                      ( np))
                     ( d1)))))
         inv-orientation : (T : quotient-sign) →
           is-decidable
@@ -605,10 +755,9 @@ module _
           quotient-map-large-set-quotient
             even-difference-orientation-Complete-Undirected-Graph
             ( orientation-Complete-Undirected-Graph-Aut
-              ( transposition
-                ( standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count (pair n h))
-                  ( np)))
+              ( standard-transposition
+                ( has-decidable-equality-count (pair n h))
+                ( np))
               ( d1))
         pr2 equiv-Fin-2-count =
           is-equiv-has-inverse
@@ -648,10 +797,9 @@ module _
             eq-effective-quotient'
               ( even-difference-orientation-Complete-Undirected-Graph)
               ( orientation-Complete-Undirected-Graph-Aut
-                ( transposition
-                  (standard-2-Element-Decidable-Subtype
-                    (has-decidable-equality-count (pair n h))
-                    ( np)))
+                ( standard-transposition
+                  ( has-decidable-equality-count (pair n h))
+                  ( np))
                 ( d1))
               ( T)
               {!!}
@@ -663,3 +811,4 @@ module _
         ( mere-equiv-UU-Fin-Level X)
         ( trunc-Prop (Fin 2 ≃ quotient-sign))
         ( λ h → unit-trunc-Prop (equiv-Fin-2-count h))
+```
