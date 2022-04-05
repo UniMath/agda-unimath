@@ -23,6 +23,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
+open import ring-theory.subsets-rings
 
 
 is-prop-is-invertible-Ring :
