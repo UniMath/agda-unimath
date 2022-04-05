@@ -596,6 +596,7 @@ open import univalent-combinatorics.injective-maps
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.orientations-cubes
+open import univalent-combinatorics.petri-nets
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types

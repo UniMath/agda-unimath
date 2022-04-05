@@ -51,6 +51,7 @@ open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.lists public
 open import univalent-combinatorics.maybe public
 open import univalent-combinatorics.orientations-cubes public
+open import univalent-combinatorics.petri-nets public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.ramsey-theory public
