@@ -7,7 +7,6 @@ module ring-theory where
 
 open import ring-theory.commutative-rings public
 open import ring-theory.discrete-fields public
-open import ring-theory.divisibility-rings public
 open import ring-theory.division-rings public
 open import ring-theory.eisenstein-integers public
 open import ring-theory.gaussian-integers public

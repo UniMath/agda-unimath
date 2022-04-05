@@ -498,7 +498,6 @@ open import polytopes.abstract-polytopes
 open import ring-theory
 open import ring-theory.commutative-rings
 open import ring-theory.discrete-fields
-open import ring-theory.divisibility-rings
 open import ring-theory.division-rings
 open import ring-theory.eisenstein-integers
 open import ring-theory.gaussian-integers
