@@ -572,6 +572,7 @@ open import univalent-combinatorics.cubes
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dependent-product-finite-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
@@ -593,6 +594,7 @@ open import univalent-combinatorics.finitely-presented-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
+open import univalent-combinatorics.kuratowsky-finite-sets
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.orientations-cubes
