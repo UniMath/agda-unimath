@@ -1,4 +1,6 @@
-# Rings
+---
+title: Rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,8 @@ open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv)
 open import foundation.identity-types using (Id; ap-binary; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
-open import foundation.sets using (UU-Set; is-set)
+open import foundation.propositions using (UU-Prop)
+open import foundation.sets using (UU-Set; is-set; Id-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.abelian-groups using
@@ -23,12 +26,15 @@ open import group-theory.abelian-groups using
     has-negatives-Ab; neg-Ab; left-inverse-law-add-Ab; right-inverse-law-add-Ab;
     commutative-add-Ab; add-Ab'; ap-add-Ab; is-equiv-add-Ab; is-equiv-add-Ab';
     is-binary-equiv-add-Ab; is-binary-emb-add-Ab; is-emb-add-Ab; is-emb-add-Ab';
-    is-injective-add-Ab; is-injective-add-Ab'; is-zero-is-idempotent-Ab)
+    is-injective-add-Ab; is-injective-add-Ab'; is-zero-is-idempotent-Ab;
+    add-list-Ab; preserves-concat-add-list-Ab)
 open import group-theory.groups using (Group; is-group; is-group')
 open import group-theory.monoids using
   ( is-unital; Monoid; unit-Monoid; left-unit-law-Monoid; right-unit-law-Monoid)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
+
+open import univalent-combinatorics.lists using (list; concat-list)
 ```
 
 ## Idea
@@ -89,10 +95,10 @@ module _
   add-Ring' : type-Ring R → type-Ring R → type-Ring R
   add-Ring' = add-Ab' (ab-Ring R)
 
-  ap-add-Ring' :
+  ap-add-Ring :
     {x y x' y' : type-Ring R} →
     Id x x' → Id y y' → Id (add-Ring x y) (add-Ring x' y')
-  ap-add-Ring' = ap-add-Ab (ab-Ring R)
+  ap-add-Ring = ap-add-Ab (ab-Ring R)
 
   associative-add-Ring :
     (x y z : type-Ring R) →
@@ -149,6 +155,9 @@ module _
 
   is-zero-Ring : type-Ring R → UU l
   is-zero-Ring x = Id x zero-Ring
+
+  is-zero-ring-Prop : type-Ring R → UU-Prop l
+  is-zero-ring-Prop x = Id-Prop (set-Ring R) x zero-Ring
 
   left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x
   left-unit-law-add-Ring = left-unit-law-add-Ab (ab-Ring R)
@@ -296,3 +305,20 @@ module _
             ( left-zero-law-mul-Ring R x)))) ∙
         ( inv (right-inverse-law-add-Ring R x)))
 ```  
+
+### Addition of a list of elements in an abelian group
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+  
+  add-list-Ring : list (type-Ring R) → type-Ring R
+  add-list-Ring = add-list-Ab (ab-Ring R)
+
+  preserves-concat-add-list-Ring :
+    (l1 l2 : list (type-Ring R)) →
+    Id ( add-list-Ring (concat-list l1 l2))
+       ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
+  preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
+```

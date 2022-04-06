@@ -1,4 +1,6 @@
-# Isomorphisms of rings
+---
+title: Isomorphisms of rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

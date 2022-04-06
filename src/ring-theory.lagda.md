@@ -1,4 +1,6 @@
-# Ring theory
+---
+title: Ring theory
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

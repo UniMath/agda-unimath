@@ -1,4 +1,6 @@
-# Nontrivial rings
+---
+title: Nontrivial rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -29,10 +29,13 @@ open import group-theory.groups using
     is-equiv-mul-Group'; is-binary-equiv-mul-Group; transpose-eq-mul-Group;
     transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
     is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
-    is-idempotent-Group; is-unit-is-idempotent-Group)
+    is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
+    preserves-concat-mul-list-Group)
 open import group-theory.monoids using (is-unital)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
+
+open import univalent-combinatorics.lists using (list; concat-list)
 ```
 
 ## Idea
@@ -246,4 +249,21 @@ module _
   is-zero-is-idempotent-Ab :
     {x : type-Ab A} → is-idempotent-Ab x → is-zero-Ab A x
   is-zero-is-idempotent-Ab = is-unit-is-idempotent-Group (group-Ab A)
+```
+
+### Addition of a list of elements in an abelian group
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+  
+  add-list-Ab : list (type-Ab A) → type-Ab A
+  add-list-Ab = mul-list-Group (group-Ab A)
+
+  preserves-concat-add-list-Ab :
+    (l1 l2 : list (type-Ab A)) →
+    Id ( add-list-Ab (concat-list l1 l2))
+       ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+  preserves-concat-add-list-Ab = preserves-concat-mul-list-Group (group-Ab A)
 ```

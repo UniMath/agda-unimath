@@ -28,6 +28,9 @@ open import group-theory.monoids using
   ( is-unital; Monoid; is-prop-is-unital)
 open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul)
+
+open import univalent-combinatorics.lists using
+  ( list; mul-list-Monoid; distributive-mul-list-Monoid; concat-list)
 ```
 
 ## Idea
@@ -279,4 +282,22 @@ module _
     {x : type-Group G} → is-idempotent-Group x → is-unit-Group G x
   is-unit-is-idempotent-Group {x} p =
     is-injective-mul-Group G x (p ∙ inv (right-unit-law-Group G x))
+```
+
+### Multiplication of a list of elements in a group
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  mul-list-Group : list (type-Group G) → type-Group G
+  mul-list-Group = mul-list-Monoid (monoid-Group G)
+
+  preserves-concat-mul-list-Group :
+    (l1 l2 : list (type-Group G)) →
+    Id ( mul-list-Group (concat-list l1 l2))
+       ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
+  preserves-concat-mul-list-Group =
+    distributive-mul-list-Monoid (monoid-Group G)
 ```

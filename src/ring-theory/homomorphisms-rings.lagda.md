@@ -1,4 +1,6 @@
-# Ring homomorphisms
+---
+title: Ring homomorphisms
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

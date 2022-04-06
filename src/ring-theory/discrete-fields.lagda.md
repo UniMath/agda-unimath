@@ -1,4 +1,6 @@
-# Discrete fields
+---
+title: Discrete fields
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

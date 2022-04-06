@@ -1,4 +1,6 @@
-# Invertible elements in rings
+---
+title: Invertible elements in rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
