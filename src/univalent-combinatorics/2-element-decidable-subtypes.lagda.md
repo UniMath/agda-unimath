@@ -23,12 +23,15 @@ open import foundation.decidable-subtypes using
     is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
     type-prop-decidable-subtype; is-prop-type-prop-decidable-subtype)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg; dn-elim-is-decidable)
+  ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
+    dn-elim-is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-inv-equiv; map-equiv;
     left-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
+open import foundation.function-extensionality using (eq-htpy)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
 open import foundation.logical-equivalences using (iff-equiv)
@@ -38,9 +41,12 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
     trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
+  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop; is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (subtype; eq-subtype; equiv-subtype-equiv)
+open import foundation.type-arithmetic-coproduct-types using
+  ( map-commutative-coprod; is-equiv-map-commutative-coprod)
+open import foundation.univalence using (eq-equiv)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 
 open import univalent-combinatorics.2-element-subtypes using
@@ -195,6 +201,37 @@ module _
     decidable-subtype-standard-2-Element-Decidable-Subtype
   pr2 standard-2-Element-Decidable-Subtype =
     has-two-elements-type-standard-2-Element-Decidable-Subtype
+
+module _
+  {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
+  (np : ¬ (Id x y))
+  where
+
+  is-commutative-standard-2-Element-Decidable-Subtype :
+    Id
+      ( standard-2-Element-Decidable-Subtype d np)
+      ( standard-2-Element-Decidable-Subtype d (λ p → np (inv p)))
+  is-commutative-standard-2-Element-Decidable-Subtype =
+    eq-pair-Σ
+      ( eq-htpy
+        (λ z →
+          eq-pair-Σ
+            ( eq-equiv
+              ( coprod (Id x z) (Id y z))
+              ( coprod (Id y z) (Id x z))
+              ( pair
+                ( map-commutative-coprod (Id x z) (Id y z))
+                ( is-equiv-map-commutative-coprod (Id x z) (Id y z))))
+            ( eq-pair-Σ
+              ( eq-is-prop
+                ( is-prop-is-prop
+                  ( type-decidable-Prop
+                    ( pr1 (standard-2-Element-Decidable-Subtype d (λ p → np (inv p))) z))))
+              ( eq-is-prop
+                ( is-prop-is-decidable
+                  (is-prop-type-decidable-Prop
+                    ( pr1 (standard-2-Element-Decidable-Subtype d (λ p → np (inv p))) z)))))))
+      ( eq-is-prop is-prop-type-trunc-Prop)
 ```
 
 ### Swapping the elements in a 2-element subtype
