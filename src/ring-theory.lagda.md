@@ -14,7 +14,8 @@ open import ring-theory.eisenstein-integers public
 open import ring-theory.gaussian-integers public
 open import ring-theory.homomorphisms-commutative-rings public
 open import ring-theory.homomorphisms-rings public
-open import ring-theory.ideals public
+open import ring-theory.ideals-generated-by-subsets-rings public
+open import ring-theory.ideals-rings public
 open import ring-theory.invertible-elements-rings public
 open import ring-theory.isomorphisms-commutative-rings public
 open import ring-theory.isomorphisms-rings public

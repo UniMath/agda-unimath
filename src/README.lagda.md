@@ -504,7 +504,8 @@ open import ring-theory.eisenstein-integers
 open import ring-theory.gaussian-integers
 open import ring-theory.homomorphisms-commutative-rings
 open import ring-theory.homomorphisms-rings
-open import ring-theory.ideals
+open import ring-theory.ideals-generated-by-subsets-rings
+open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-commutative-rings
 open import ring-theory.isomorphisms-rings
@@ -571,6 +572,7 @@ open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.double-counting
@@ -591,9 +593,11 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
+open import univalent-combinatorics.kuratowsky-finite-sets
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.orientations-cubes
+open import univalent-combinatorics.petri-nets
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types

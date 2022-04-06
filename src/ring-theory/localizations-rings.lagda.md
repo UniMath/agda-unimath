@@ -20,7 +20,7 @@ open import foundation.universe-levels
 open import group-theory.invertible-elements-monoids
 
 open import ring-theory.homomorphisms-rings
-open import ring-theory.ideals
+open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
