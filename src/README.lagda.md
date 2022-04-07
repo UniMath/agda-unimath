@@ -617,9 +617,15 @@ open import univalent-combinatorics.surjective-maps
 ```agda
 open import wild-algebra
 open import wild-algebra.magmas
+open import wild-algebra.morphisms-magmas
+open import wild-algebra.morphisms-wild-unital-magmas
 open import wild-algebra.universal-property-lists-wild-monoids
 open import wild-algebra.wild-groups
+open import wild-algebra.wild-inverse-semigroups
+open import wild-algebra.wild-loops
 open import wild-algebra.wild-monoids
+open import wild-algebra.wild-quasigroups
+open import wild-algebra.wild-semigroups
 open import wild-algebra.wild-unital-magmas
 ```
 
