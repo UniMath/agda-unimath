@@ -11,6 +11,7 @@ open import
   ( exists-not-not-forall-count)
 
 open import foundation.automorphisms using (Aut)
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
     coprod-Prop)
@@ -75,7 +76,8 @@ open import univalent-combinatorics.2-element-decidable-subtypes using
 open import univalent-combinatorics.2-element-types using
   ( compute-swap-2-Element-Type; is-involution-aut-2-element-type;
     has-no-fixpoints-swap-2-Element-Type; swap-2-Element-Type;
-    is-not-identity-swap-2-Element-Type; map-swap-2-Element-Type)
+    is-not-identity-swap-2-Element-Type; map-swap-2-Element-Type;
+    contradiction-3-distinct-element-2-Element-Type)
 open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
     number-of-elements-count; has-decidable-equality-count; is-set-count)
@@ -383,6 +385,98 @@ module _
           (map-inv-equiv h (pair (pr1 two-elements-transposition) type-decidable-prop-pr1-two-elements-transposition))
           (map-inv-equiv h (pair (pr1 (pr2 two-elements-transposition)) type-decidable-prop-pr1-pr2-two-elements-transposition))
           refl refl refl)
+
+  abstract
+    cases-eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
+      (type-decidable-Prop (pr1 t x)) →
+      (type-decidable-Prop (pr1 t y)) →
+      is-decidable (Id (pr1 two-elements-transposition) x) →
+      is-decidable (Id (pr1 (pr2 two-elements-transposition)) x) →
+      is-decidable (Id (pr1 two-elements-transposition) y) →
+      is-decidable (Id (pr1 (pr2 two-elements-transposition)) y) →
+      coprod
+        ( Id (pr1 two-elements-transposition) x × Id (pr1 (pr2 two-elements-transposition)) y)
+        ( Id (pr1 two-elements-transposition) y × Id (pr1 (pr2 two-elements-transposition)) x)
+    cases-eq-two-elements-transposition x y np p1 p2 (inl q) r s (inl u) =
+      inl (pair q u)
+    cases-eq-two-elements-transposition x y np p1 p2 (inl q) r s (inr nu) =
+      ex-falso
+        ( contradiction-3-distinct-element-2-Element-Type
+          ( 2-element-type-2-Element-Decidable-Subtype
+            ( standard-2-Element-Decidable-Subtype
+              ( has-decidable-equality-count eX)
+              ( pr1 (pr2 (pr2 two-elements-transposition)))))
+          ( pair (pr1 two-elements-transposition) (inl refl))
+          ( pair (pr1 (pr2 two-elements-transposition)) (inr refl))
+          ( pair
+            ( y)
+            ( tr
+              ( λ Y → type-decidable-Prop (pr1 Y y))
+              ( inv (pr2 (pr2 (pr2 two-elements-transposition))))
+              ( p2)))
+          ( λ p →
+            pr1
+              ( pr2 (pr2 two-elements-transposition))
+              ( pr1 (pair-eq-Σ p)))
+          ( λ p → nu (pr1 (pair-eq-Σ p)))
+          ( λ p → np (inv q ∙ pr1 (pair-eq-Σ p))))
+    cases-eq-two-elements-transposition x y np p1 p2 (inr nq) (inl r) (inl s) u =
+      inr (pair s r)
+    cases-eq-two-elements-transposition x y np p1 p2 (inr nq) (inl r) (inr ns) u =
+      ex-falso
+        ( contradiction-3-distinct-element-2-Element-Type
+          ( 2-element-type-2-Element-Decidable-Subtype
+            ( standard-2-Element-Decidable-Subtype
+              ( has-decidable-equality-count eX)
+              ( pr1 (pr2 (pr2 two-elements-transposition)))))
+          ( pair (pr1 two-elements-transposition) (inl refl))
+          ( pair (pr1 (pr2 two-elements-transposition)) (inr refl))
+          ( pair
+            ( y)
+            ( tr
+              ( λ Y → type-decidable-Prop (pr1 Y y))
+              ( inv (pr2 (pr2 (pr2 two-elements-transposition))))
+              ( p2)))
+          ( λ p →
+            pr1
+              ( pr2 (pr2 two-elements-transposition))
+              ( pr1 (pair-eq-Σ p)))
+          ( λ p → np (inv r ∙ pr1 (pair-eq-Σ p)))
+          ( λ p → ns (pr1 (pair-eq-Σ p))))
+    cases-eq-two-elements-transposition x y np p1 p2 (inr nq) (inr nr) s u =
+      ex-falso
+        ( contradiction-3-distinct-element-2-Element-Type
+          ( 2-element-type-2-Element-Decidable-Subtype
+            ( standard-2-Element-Decidable-Subtype
+              ( has-decidable-equality-count eX)
+              ( pr1 (pr2 (pr2 two-elements-transposition)))))
+          ( pair (pr1 two-elements-transposition) (inl refl))
+          ( pair (pr1 (pr2 two-elements-transposition)) (inr refl))
+          ( pair
+            ( x)
+            ( tr
+              ( λ Y → type-decidable-Prop (pr1 Y x))
+              ( inv (pr2 (pr2 (pr2 two-elements-transposition))))
+              ( p1)))
+          ( λ p →
+            pr1
+              ( pr2 (pr2 two-elements-transposition))
+              ( pr1 (pair-eq-Σ p)))
+          ( λ p → nr (pr1 (pair-eq-Σ p)))
+          ( λ p → nq (pr1 (pair-eq-Σ p))))
+
+    eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
+      (type-decidable-Prop (pr1 t x)) →
+      (type-decidable-Prop (pr1 t y)) →
+      coprod
+        ( Id (pr1 two-elements-transposition) x × Id (pr1 (pr2 two-elements-transposition)) y)
+        ( Id (pr1 two-elements-transposition) y × Id (pr1 (pr2 two-elements-transposition)) x)
+    eq-two-elements-transposition x y np p1 p2 =
+      cases-eq-two-elements-transposition x y np p1 p2
+        (has-decidable-equality-count eX (pr1 two-elements-transposition) x)
+        (has-decidable-equality-count eX (pr1 (pr2 two-elements-transposition)) x)
+        (has-decidable-equality-count eX (pr1 two-elements-transposition) y)
+        (has-decidable-equality-count eX (pr1 (pr2 two-elements-transposition)) y)
 ```
 
 ### Transpositions can be transported along equivalences
