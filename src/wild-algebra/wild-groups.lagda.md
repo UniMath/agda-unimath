@@ -1,4 +1,6 @@
-# Wild groups
+---
+title: Wild groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,8 +26,4 @@ is-wild-group-Wild-Monoid M = is-binary-equiv (mul-Wild-Monoid M)
 
 Wild-Group : (l : Level) → UU (lsuc l)
 Wild-Group l = Σ (Wild-Monoid l) is-wild-group-Wild-Monoid
-
--- Ω-Wild-Group :
---   {l : Level} → Pointed-Type l → Wild-Group l
--- Ω-Wild-Group X = {!!}
 ```
