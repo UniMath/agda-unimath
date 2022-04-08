@@ -103,7 +103,7 @@ open import univalent-combinatorics.counting using
   ( has-decidable-equality-count; count; number-of-elements-count;
     map-equiv-count; equiv-count; is-set-count)
 open import univalent-combinatorics.decidable-subtypes using (is-finite-decidable-subtype)
-open import univalent-combinatorics.dependent-product-finite-types using (is-finite-Π)
+open import univalent-combinatorics.dependent-function-types using (is-finite-Π)
 open import univalent-combinatorics.equality-finite-types using
   ( set-UU-Fin; has-decidable-equality-is-finite; is-set-is-finite)
 open import univalent-combinatorics.equality-standard-finite-types using
@@ -749,6 +749,38 @@ module _
                 ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np))))
           ( j))
 
+  map-equiv-Fin-1-difference-canonical-orientation-count-trans' :
+    Fin 1 → 
+    Σ (2-Element-Decidable-Subtype l X)
+    ( λ Y →
+      ¬ (Id
+        ( pr1 (canonical-orientation-count Y))
+        ( pr1 (trans-canonical-orientation-count Y))))
+  pr1 (map-equiv-Fin-1-difference-canonical-orientation-count-trans' x) =
+    canonical-2-Element-Decidable-Subtype-count
+  pr2 (map-equiv-Fin-1-difference-canonical-orientation-count-trans' x) q =
+    distinct-two-elements-count
+      ( ( inv
+        ( eq-orientation-two-elements-count
+          ( second-element-count)
+          ( first-element-count)
+          ( λ p → distinct-two-elements-count (inv p)))) ∙
+        ( ( ap
+          ( λ Y → pr1 (trans-canonical-orientation-count Y))
+          { x =
+            standard-2-Element-Decidable-Subtype
+              ( has-decidable-equality-count eX)
+              ( λ p → distinct-two-elements-count (inv p))}
+          { y = canonical-2-Element-Decidable-Subtype-count}
+          ( inv
+            ( is-commutative-standard-2-Element-Decidable-Subtype
+              ( has-decidable-equality-count eX) ( distinct-two-elements-count)))) ∙
+          ( inv q ∙
+            eq-orientation-two-elements-count
+              ( first-element-count)
+              ( second-element-count)
+              ( distinct-two-elements-count))))
+{-
   equiv-Fin-1-difference-canonical-orientation-count-trans : Fin 1 ≃
     Σ (2-Element-Decidable-Subtype l X)
     (λ Y →
@@ -762,51 +794,9 @@ module _
   pr1 (pr1 equiv-Fin-1-difference-canonical-orientation-count-trans x) =
     canonical-2-Element-Decidable-Subtype-count
   pr2 (pr1 equiv-Fin-1-difference-canonical-orientation-count-trans x) q =
-    distinct-two-elements-count
-      ( ( inv
-        ( eq-orientation-two-elements-count
-          ( second-element-count)
-          ( first-element-count)
-          ( λ p → distinct-two-elements-count (inv p)))) ∙
-        ( lemma1 ∙
-          ( lemma2 ∙
-            eq-orientation-two-elements-count
-              ( first-element-count)
-              ( second-element-count)
-              ( distinct-two-elements-count))))
     where
-    lemma1 :
-      Id 
-        ( pr1
-          ( trans-canonical-orientation-count
-            ( standard-2-Element-Decidable-Subtype
-              ( has-decidable-equality-count eX)
-              ( λ p → distinct-two-elements-count (inv p)))))
-        ( pr1
-          ( trans-canonical-orientation-count
-            ( canonical-2-Element-Decidable-Subtype-count)))
-    lemma1 =
-      ap
-        ( λ Y → pr1 (trans-canonical-orientation-count Y))
-        { x =
-          standard-2-Element-Decidable-Subtype
-            (has-decidable-equality-count eX)
-            (λ p → distinct-two-elements-count (inv p))}
-        { y = canonical-2-Element-Decidable-Subtype-count}
-        ( inv
-          ( is-commutative-standard-2-Element-Decidable-Subtype
-            ( has-decidable-equality-count eX) ( distinct-two-elements-count)))
-    lemma2 :
-      Id
-        ( pr1 (trans-canonical-orientation-count canonical-2-Element-Decidable-Subtype-count))
-        ( pr1 (canonical-orientation-count canonical-2-Element-Decidable-Subtype-count))
-    lemma2 =
-      ap
-        ( pr1)
-        { x = trans-canonical-orientation-count canonical-2-Element-Decidable-Subtype-count}
-        { y = canonical-orientation-count canonical-2-Element-Decidable-Subtype-count}
-        ( inv q)
   pr2 equiv-Fin-1-difference-canonical-orientation-count-trans = {!!}
+-}
 {-
       
       ((is-equiv-has-inverse
