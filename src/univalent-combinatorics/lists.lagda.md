@@ -41,7 +41,7 @@ open import foundation.universe-levels using (UU; Level)
 
 open import group-theory.monoids using
   ( Monoid; type-Monoid; unit-Monoid; mul-Monoid; left-unit-law-Monoid;
-    assoc-mul-Monoid)
+    associative-mul-Monoid)
 ```
 
 ## Idea
@@ -623,5 +623,5 @@ module _
     inv (left-unit-law-Monoid M (mul-list-Monoid l2))
   distributive-mul-list-Monoid (cons x l1) l2 =
     ( ap (mul-Monoid M x) (distributive-mul-list-Monoid l1 l2)) ∙
-    ( inv (assoc-mul-Monoid M x (mul-list-Monoid l1) (mul-list-Monoid l2)))
+    ( inv (associative-mul-Monoid M x (mul-list-Monoid l1) (mul-list-Monoid l2)))
 ```
