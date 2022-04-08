@@ -136,25 +136,6 @@ module _
   pr2 (orientation-Complete-Undirected-Graph-Aut e d Y) =
     pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
 
-  orientation-Complete-Undirected-Graph-transposition :
-    2-Element-Decidable-Subtype l (type-UU-Fin-Level X) → orientation-Complete-Undirected-Graph →
-    orientation-Complete-Undirected-Graph
-  pr1 (orientation-Complete-Undirected-Graph-transposition t d Y) =
-    map-transposition t (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype (transposition t) Y)))
-  pr2 (orientation-Complete-Undirected-Graph-transposition t d Y) =
-    tr
-      ( λ e →
-        type-decidable-Prop
-          ( pr1
-            ( Y)
-            ( map-equiv
-              ( e)
-              (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype (transposition t) Y))))))
-      { x = inv-equiv (transposition t)}
-      { y = transposition t}
-      ( own-inverse-is-involution (is-involution-map-transposition t))
-      ( pr2 (d (precomp-equiv-2-Element-Decidable-Subtype (transposition t) Y)))
-
   2-Element-Decidable-Subtype-subtype-pointwise-difference :
     orientation-Complete-Undirected-Graph → orientation-Complete-Undirected-Graph →
     2-Element-Decidable-Subtype l (type-UU-Fin-Level X) → decidable-Prop l
@@ -506,11 +487,11 @@ module _
   cases-orientation-two-elements-count i j Y (pair x (pair y (pair np' P))) (inr nq) (inr nr) s = 
     pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
 
-  orientation-two-elements-count : (i j : X) →
+  orientation-two-elements-count : (i j : X) → ¬ (Id i j) →
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
-  orientation-two-elements-count i j Y =
+  orientation-two-elements-count i j np Y =
     cases-orientation-two-elements-count i j Y
       ( two-elements-transposition eX Y)
       ( has-decidable-equality-count eX
@@ -524,230 +505,250 @@ module _
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
-  canonical-orientation-count = orientation-two-elements-count first-element-count second-element-count
+  canonical-orientation-count =
+    orientation-two-elements-count first-element-count second-element-count distinct-two-elements-count
 
   trans-canonical-orientation-count : 
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
   trans-canonical-orientation-count =
-    orientation-two-elements-count second-element-count first-element-count 
+    orientation-two-elements-count
+      ( second-element-count)
+      ( first-element-count)
+      ( λ p → distinct-two-elements-count (inv p))
 
-  cases-inward-edge-left-two-elements-orientation-count :
-    (i j : X) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-    ¬ (Id x i) → ¬ (Id x j) →
-    coprod
-      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i))
-      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
-        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
-    Id
-      ( pr1 (orientation-two-elements-count i j Y))
-      ( x)
-  cases-inward-edge-left-two-elements-orientation-count
-    i j Y x nq nr (inl (pair r1 r2)) =
-    ( ap
-      ( λ d →
-        pr1
-          ( cases-orientation-two-elements-count i j Y
-            ( two-elements-transposition eX Y)
-            ( pr1 d)
-            ( pr2 d)
-            ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
-      { x =
-        pair
-          ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)
-          ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)}
-      { y = pair (inr (λ p → nq (inv r1 ∙ p))) (inr (λ p → nr (inv r1 ∙ p)))}
-      ( eq-pair-Σ
-        ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))
-        ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) j))))) ∙
-      ( r1)
-  cases-inward-edge-left-two-elements-orientation-count
-    i j Y x nq nr (inr (pair r1 r2)) =
-    ( ap
-      ( λ d →
-        pr1
-          ( cases-orientation-two-elements-count i j Y
-            ( two-elements-transposition eX Y)
-            ( d)
-            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)
-            ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
-      { x = ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)}
-      { y = inl r1 }
-      ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))) ∙
-      ( r2)
-
-  inward-edge-left-two-elements-orientation-count :
-    ( i j : X) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
-    ( type-decidable-Prop (pr1 Y x)) → 
-    ( type-decidable-Prop (pr1 Y i)) →
-    ¬ (Id x i) → ¬ (Id x j) →
-    Id
-      ( pr1 (orientation-two-elements-count i j Y))
-      ( x)
-  inward-edge-left-two-elements-orientation-count i j Y x p1 p2 nq nr =
-    cases-inward-edge-left-two-elements-orientation-count i j Y x nq nr
-      ( eq-two-elements-transposition eX Y x i nq p1 p2)
-
-{-
   abstract
-    cases-eq-canonical-orientation-count :
+    cases-inward-edge-left-two-elements-orientation-count :
+      (i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
+      ¬ (Id x i) → ¬ (Id x j) →
+      coprod
+        ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i))
+        ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
+          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      Id
+        ( pr1 (orientation-two-elements-count i j np Y))
+        ( x)
+    cases-inward-edge-left-two-elements-orientation-count
+      i j np Y x nq nr (inl (pair r1 r2)) =
+      ( ap
+        ( λ d →
+          pr1
+            ( cases-orientation-two-elements-count i j Y
+              ( two-elements-transposition eX Y)
+              ( pr1 d)
+              ( pr2 d)
+              ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
+        { x =
+          pair
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)}
+        { y = pair (inr (λ p → nq (inv r1 ∙ p))) (inr (λ p → nr (inv r1 ∙ p)))}
+        ( eq-pair-Σ
+          ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))
+          ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) j))))) ∙
+        ( r1)
+    cases-inward-edge-left-two-elements-orientation-count
+      i j np Y x nq nr (inr (pair r1 r2)) =
+      ( ap
+        ( λ d →
+          pr1
+            ( cases-orientation-two-elements-count i j Y
+              ( two-elements-transposition eX Y)
+              ( d)
+              ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)
+              ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
+        { x = ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)}
+        { y = inl r1 }
+        ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))) ∙
+        ( r2)
+
+    inward-edge-left-two-elements-orientation-count :
+      ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
+      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y i)) →
+      ¬ (Id x i) → ¬ (Id x j) →
+      Id
+        ( pr1 (orientation-two-elements-count i j np Y))
+        ( x)
+    inward-edge-left-two-elements-orientation-count i j np Y x p1 p2 nq nr =
+      cases-inward-edge-left-two-elements-orientation-count i j np Y x nq nr
+        ( eq-two-elements-transposition eX Y x i nq p1 p2)
+
+    cases-inward-edge-right-two-elements-orientation-count :
+      (i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
+      ¬ (Id x i) → ¬ (Id x j) →
+      coprod
+        ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j))
+        ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
+          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      Id
+        ( pr1 (orientation-two-elements-count i j np Y))
+        ( x)
+    cases-inward-edge-right-two-elements-orientation-count
+      i j np Y x nq nr (inl (pair r1 r2)) = 
+      ( ap
+        ( λ d →
+          pr1
+            ( cases-orientation-two-elements-count i j Y
+              ( two-elements-transposition eX Y)
+              ( pr1 d)
+              ( pr2 d)
+              ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
+        { x =
+          pair
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)}
+        { y = pair (inr (λ p → nq (inv r1 ∙ p))) (inr (λ p → nr (inv r1 ∙ p)))}
+        ( eq-pair-Σ
+          ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))
+          ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) j))))) ∙
+        ( r1)
+    cases-inward-edge-right-two-elements-orientation-count
+      i j np Y x nq nr (inr (pair r1 r2)) =
+      ( ap
+        ( λ d →
+          pr1
+            ( cases-orientation-two-elements-count i j Y
+              ( two-elements-transposition eX Y)
+              ( pr1 d)
+              ( pr2 d)
+              ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))
+        { x =
+          pair
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) i)
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX Y)) j)}
+        { y = pair (inr λ p → np (inv p ∙ r1)) (inl r1)}
+        ( eq-pair-Σ
+          ( eq-is-prop (is-prop-is-decidable ( is-set-count eX (pr1 (two-elements-transposition eX Y)) i)))
+          ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (two-elements-transposition eX Y)) j))))) ∙
+        ( ( ap
+          ( λ d →
+            pr1
+              ( cases-orientation-two-elements-count i j Y
+                ( two-elements-transposition eX Y)
+                ( inr λ p → np (inv p ∙ r1))
+                ( inl r1)
+                ( d)))
+          { x = has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i}
+          { y = inr (λ q → nq (inv r2 ∙ q))}
+          ( eq-is-prop (is-prop-is-decidable (is-set-count eX (pr1 (pr2 (two-elements-transposition eX Y))) i)))) ∙
+          ( r2))
+
+    inward-edge-right-two-elements-orientation-count :
+      ( i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
+      ( type-decidable-Prop (pr1 Y x)) → 
+      ( type-decidable-Prop (pr1 Y j)) →
+      ¬ (Id x i) → ¬ (Id x j) →
+      Id
+        ( pr1 (orientation-two-elements-count i j np Y))
+        ( x)
+    inward-edge-right-two-elements-orientation-count i j np Y x p1 p2 nq nr =
+      cases-inward-edge-right-two-elements-orientation-count i j np Y x nq nr
+        ( eq-two-elements-transposition eX Y x j nr p1 p2)
+
+    cases-eq-orientation-two-elements-count : (i j : X) (np : ¬ (Id i j)) →
       ( two-elements : Σ X
         ( λ x → Σ X
           ( λ y → Σ (¬ (Id x y))
             ( λ np' →
               Id
                 ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np')
-                ( standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count eX)
-                  ( distinct-two-elements-count )))))) →
-      (q : is-decidable (Id (pr1 two-elements) first-element-count)) →
-      (r : is-decidable (Id (pr1 two-elements) second-element-count)) →
-      (s : is-decidable (Id (pr1 (pr2 two-elements)) first-element-count)) →
-      (t : is-decidable (Id (pr1 (pr2 two-elements)) second-element-count)) →
+                ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np))))) →
+      (q : is-decidable (Id (pr1 two-elements) i)) →
+      (r : is-decidable (Id (pr1 two-elements) j)) →
+      (s : is-decidable (Id (pr1 (pr2 two-elements)) i)) →
+      (t : is-decidable (Id (pr1 (pr2 two-elements)) j)) →
       Id
         ( pr1
-          ( cases-orientation-two-elements-count
-            ( first-element-count)
-            ( second-element-count)
+          ( cases-orientation-two-elements-count i j
             ( standard-2-Element-Decidable-Subtype
               ( has-decidable-equality-count eX)
-              ( distinct-two-elements-count))
+              ( np))
             ( two-elements)
             ( q)
             ( r)
             ( s)))
-        ( second-element-count)
-    cases-eq-canonical-orientation-count
-      (pair x (pair y (pair np' P))) (inl q) r s (inl t) = t
-    cases-eq-canonical-orientation-count
-      (pair x (pair y (pair np' P))) (inl q) r s (inr nt) =
+        ( j)
+    cases-eq-orientation-two-elements-count
+      i j np (pair x (pair y (pair np' P))) (inl q) r s (inl t) = t
+    cases-eq-orientation-two-elements-count
+      i j np (pair x (pair y (pair np' P))) (inl q) r s (inr nt) =
       ex-falso
         ( nt
           ( ( inv
             ( left-computation-standard-transposition (has-decidable-equality-count eX) np')) ∙
             ( ( ap
-              ( map-standard-transposition
-                ( has-decidable-equality-count eX)
-                ( np'))
+              ( map-standard-transposition (has-decidable-equality-count eX) np')
               ( q)) ∙
-              ( ( ap (λ Y → map-transposition Y first-element-count) P) ∙
-                ( left-computation-standard-transposition
-                  ( has-decidable-equality-count eX)
-                  ( distinct-two-elements-count))))))
-    cases-eq-canonical-orientation-count
-      (pair x (pair y (pair np' P))) (inr nq) (inl r) (inl s) t = r
-    cases-eq-canonical-orientation-count
-      (pair x (pair y (pair np' P))) (inr nq) (inl r) (inr ns) t =
+              ( ( ap (λ Y → map-transposition Y i) P) ∙
+                ( left-computation-standard-transposition (has-decidable-equality-count eX) np)))))
+    cases-eq-orientation-two-elements-count
+      i j np (pair x (pair y (pair np' P))) (inr nq) (inl r) (inl s) t = r
+    cases-eq-orientation-two-elements-count
+      i j np (pair x (pair y (pair np' P))) (inr nq) (inl r) (inr ns) t =
       ex-falso
         ( ns
           ( ( inv
-            ( left-computation-standard-transposition
-              ( has-decidable-equality-count eX)
-              ( np'))) ∙
+            ( left-computation-standard-transposition (has-decidable-equality-count eX) np')) ∙
             ( ( ap
-              ( map-standard-transposition
-                ( has-decidable-equality-count eX)
-                ( np'))
+              ( map-standard-transposition (has-decidable-equality-count eX) np')
               ( r)) ∙
-              ( ( ap (λ Y → map-transposition Y second-element-count) P) ∙
-                ( right-computation-standard-transposition
-                  ( has-decidable-equality-count eX)
-                  ( distinct-two-elements-count))))))
-    cases-eq-canonical-orientation-count
-      (pair x (pair y (pair np' P))) (inr nq) (inr nr) s t =
+              ( ( ap (λ Y → map-transposition Y j) P) ∙
+                ( right-computation-standard-transposition (has-decidable-equality-count eX) np)))))
+    cases-eq-orientation-two-elements-count
+      i j np (pair x (pair y (pair np' P))) (inr nq) (inr nr) s t =
       ex-falso
         ( contradiction-3-distinct-element-2-Element-Type
           ( 2-element-type-standard-2-Element-Decidable-Subtype
             ( has-decidable-equality-count eX)
-            ( distinct-two-elements-count))
-          ( pair first-element-count (inl refl))
-          ( pair second-element-count (inr refl))
+            ( np))
+          ( pair i (inl refl))
+          ( pair j (inr refl))
           ( pair
             ( x)
             (tr (λ Y → type-decidable-Prop (pr1 Y x)) P (inl refl)))
-          ( λ eq → distinct-two-elements-count (pr1 (pair-eq-Σ eq)))
+          ( λ eq → np (pr1 (pair-eq-Σ eq)))
           ( λ eq → nr (inv (pr1 (pair-eq-Σ eq))))
           ( λ eq → nq (inv (pr1 (pair-eq-Σ eq)))))
 
-    eq-canonical-orientation-count :
+    eq-orientation-two-elements-count : (i j : X) (np : ¬ (Id i j)) →
       Id
         ( pr1
-          ( canonical-orientation-count
+          ( orientation-two-elements-count i j np
             ( standard-2-Element-Decidable-Subtype
               ( has-decidable-equality-count eX)
-              ( distinct-two-elements-count))))
-        ( second-element-count)
-    eq-canonical-orientation-count =
-      cases-eq-canonical-orientation-count
+              ( np))))
+        ( j)
+    eq-orientation-two-elements-count i j np =
+      cases-eq-orientation-two-elements-count i j np
         ( two-elements-transposition eX
-          ( standard-2-Element-Decidable-Subtype
-            ( has-decidable-equality-count eX)
-            ( distinct-two-elements-count)))
+          ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np))
         ( has-decidable-equality-count eX
           ( pr1
             ( two-elements-transposition eX
-              ( standard-2-Element-Decidable-Subtype
-                ( has-decidable-equality-count eX)
-                  ( distinct-two-elements-count))))
-          ( first-element-count))
-        (has-decidable-equality-count eX
+              ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+          ( i))
+        ( has-decidable-equality-count eX
           ( pr1
+          ( two-elements-transposition eX
+            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+          ( j))
+        ( has-decidable-equality-count eX
+          ( pr1
+          ( pr2
             ( two-elements-transposition eX
-              ( standard-2-Element-Decidable-Subtype
-                ( has-decidable-equality-count eX)
-                ( distinct-two-elements-count))))
-          ( second-element-count))
+            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np))))
+          ( i))
         ( has-decidable-equality-count eX
           ( pr1
             ( pr2
               ( two-elements-transposition eX
-                ( standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count eX)
-                  ( distinct-two-elements-count)))))
-          ( first-element-count))
-        ( has-decidable-equality-count eX
-          ( pr1
-            ( pr2
-              ( two-elements-transposition eX
-                ( standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count eX)
-                  ( distinct-two-elements-count)))))
-          ( second-element-count))
+                ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np))))
+          ( j))
 
-  abstract
-    eq-trans-canonical-orientation-count :
-      Id
-        ( first-element-count)
-        ( pr1
-          ( orientation-Complete-Undirected-Graph-transposition
-            ( number-of-elements-count eX)
-            ( pair X (unit-trunc-Prop (equiv-count eX)))
-            ( canonical-2-Element-Decidable-Subtype-count)
-            ( canonical-orientation-count)
-            ( canonical-2-Element-Decidable-Subtype-count)))
-    eq-trans-canonical-orientation-count =
-      ( inv
-        ( right-computation-standard-transposition
-          ( has-decidable-equality-count eX)
-          ( distinct-two-elements-count))) ∙
-        ( ( ap
-          ( map-standard-transposition
-            ( has-decidable-equality-count eX)
-            ( distinct-two-elements-count))
-          ( inv eq-canonical-orientation-count)) ∙
-          ( ap
-            ( λ Y →
-              map-standard-transposition
-                ( has-decidable-equality-count eX)
-                ( distinct-two-elements-count)
-                ( pr1 (canonical-orientation-count Y)))
-            ( inv
-              ( eq-transposition-precomp-standard-2-Element-Decidable-Subtype
-                ( has-decidable-equality-count eX)
-                ( distinct-two-elements-count)))))
-      
   equiv-Fin-1-difference-canonical-orientation-count-trans : Fin 1 ≃
     Σ (2-Element-Decidable-Subtype l X)
     (λ Y →
@@ -756,21 +757,58 @@ module _
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX)))
           ( canonical-orientation-count)
-          ( orientation-Complete-Undirected-Graph-transposition
-            ( number-of-elements-count eX)
-            ( pair X (unit-trunc-Prop (equiv-count eX)))
-            ( canonical-2-Element-Decidable-Subtype-count)
-            ( canonical-orientation-count))
+          ( trans-canonical-orientation-count)
           ( Y)))
-  equiv-Fin-1-difference-canonical-orientation-count-trans =
-    pair
-      ( λ x →
-        pair
-          ( canonical-2-Element-Decidable-Subtype-count)
-          ( λ q →
-            ( distinct-two-elements-count
-              ( eq-trans-canonical-orientation-count ∙
-                (ap pr1 (inv q) ∙ eq-canonical-orientation-count)))))
+  pr1 (pr1 equiv-Fin-1-difference-canonical-orientation-count-trans x) =
+    canonical-2-Element-Decidable-Subtype-count
+  pr2 (pr1 equiv-Fin-1-difference-canonical-orientation-count-trans x) q =
+    distinct-two-elements-count
+      ( ( inv
+        ( eq-orientation-two-elements-count
+          ( second-element-count)
+          ( first-element-count)
+          ( λ p → distinct-two-elements-count (inv p)))) ∙
+        ( lemma1 ∙
+          ( lemma2 ∙
+            eq-orientation-two-elements-count
+              ( first-element-count)
+              ( second-element-count)
+              ( distinct-two-elements-count))))
+    where
+    lemma1 :
+      Id 
+        ( pr1
+          ( trans-canonical-orientation-count
+            ( standard-2-Element-Decidable-Subtype
+              ( has-decidable-equality-count eX)
+              ( λ p → distinct-two-elements-count (inv p)))))
+        ( pr1
+          ( trans-canonical-orientation-count
+            ( canonical-2-Element-Decidable-Subtype-count)))
+    lemma1 =
+      ap
+        ( λ Y → pr1 (trans-canonical-orientation-count Y))
+        { x =
+          standard-2-Element-Decidable-Subtype
+            (has-decidable-equality-count eX)
+            (λ p → distinct-two-elements-count (inv p))}
+        { y = canonical-2-Element-Decidable-Subtype-count}
+        ( inv
+          ( is-commutative-standard-2-Element-Decidable-Subtype
+            ( has-decidable-equality-count eX) ( distinct-two-elements-count)))
+    lemma2 :
+      Id
+        ( pr1 (trans-canonical-orientation-count canonical-2-Element-Decidable-Subtype-count))
+        ( pr1 (canonical-orientation-count canonical-2-Element-Decidable-Subtype-count))
+    lemma2 =
+      ap
+        ( pr1)
+        { x = trans-canonical-orientation-count canonical-2-Element-Decidable-Subtype-count}
+        { y = canonical-orientation-count canonical-2-Element-Decidable-Subtype-count}
+        ( inv q)
+  pr2 equiv-Fin-1-difference-canonical-orientation-count-trans = {!!}
+{-
+      
       ((is-equiv-has-inverse
         ( λ x → inr star)
         {!!}
