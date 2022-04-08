@@ -44,15 +44,18 @@ module _
   is-set-type-Semigroup : is-set type-Semigroup
   is-set-type-Semigroup = is-set-type-Set set-Semigroup
 
-  associative-mul-Semigroup : has-associative-mul type-Semigroup
-  associative-mul-Semigroup = pr2 G
+  has-associative-mul-Semigroup : has-associative-mul type-Semigroup
+  has-associative-mul-Semigroup = pr2 G
 
   mul-Semigroup : type-Semigroup → type-Semigroup → type-Semigroup
-  mul-Semigroup = pr1 associative-mul-Semigroup
+  mul-Semigroup = pr1 has-associative-mul-Semigroup
 
-  assoc-mul-Semigroup :
+  mul-Semigroup' : type-Semigroup → type-Semigroup → type-Semigroup
+  mul-Semigroup' x y = mul-Semigroup y x
+
+  associative-mul-Semigroup :
     (x y z : type-Semigroup) →
     Id ( mul-Semigroup (mul-Semigroup x y) z)
        ( mul-Semigroup x (mul-Semigroup y z))
-  assoc-mul-Semigroup = pr2 associative-mul-Semigroup
+  associative-mul-Semigroup = pr2 has-associative-mul-Semigroup
 ```
