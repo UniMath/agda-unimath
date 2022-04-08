@@ -1,4 +1,6 @@
-# Commutative rings
+---
+title: Commutative rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

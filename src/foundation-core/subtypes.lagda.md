@@ -54,11 +54,17 @@ subtype : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 subtype l A = A → UU-Prop l
 
 module _
-  {l1 l2 : Level} {A : UU l1}
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
-  type-subtype : subtype l2 A → UU (l1 ⊔ l2)
-  type-subtype P = Σ A (λ x → pr1 (P x))
+  type-prop-subtype : A → UU l2
+  type-prop-subtype x = type-Prop (P x)
+
+  is-prop-type-prop-subtype : (x : A) → is-prop (type-prop-subtype x)
+  is-prop-type-prop-subtype x = is-prop-type-Prop (P x)
+
+  type-subtype : UU (l1 ⊔ l2)
+  type-subtype = Σ A type-prop-subtype
 ```
 
 ## Properties

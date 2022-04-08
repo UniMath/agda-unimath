@@ -17,7 +17,7 @@ open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup; set-Semigroup;
-    is-set-type-Semigroup; assoc-mul-Semigroup)
+    is-set-type-Semigroup; associative-mul-Semigroup)
 ```
 
 ## Idea
@@ -61,11 +61,11 @@ mul-Monoid' :
   {l : Level} (M : Monoid l) → type-Monoid M → type-Monoid M → type-Monoid M
 mul-Monoid' M y x = mul-Monoid M x y
 
-assoc-mul-Monoid :
+associative-mul-Monoid :
   {l : Level} (M : Monoid l) (x y z : type-Monoid M) →
   Id (mul-Monoid M (mul-Monoid M x y) z) (mul-Monoid M x (mul-Monoid M y z))
-assoc-mul-Monoid M =
-  assoc-mul-Semigroup (semigroup-Monoid M)
+associative-mul-Monoid M =
+  associative-mul-Semigroup (semigroup-Monoid M)
 
 unit-Monoid :
   {l : Level} (M : Monoid l) → type-Monoid M

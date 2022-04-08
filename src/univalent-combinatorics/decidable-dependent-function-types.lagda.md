@@ -13,11 +13,11 @@ open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-
 
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-Prop)
+  ( is-decidable; is-decidable-iff; is-decidable-Prop;
+    elim-trunc-Prop-is-decidable)
 open import foundation.empty-types using (ind-empty)
 open import foundation.equivalences using (id-equiv)
 open import foundation.functions using (map-Π)
-open import foundation.global-choice using (elim-trunc-Prop-is-decidable)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; map-universal-property-trunc-Prop; trunc-Prop;
     unit-trunc-Prop; apply-universal-property-trunc-Prop)

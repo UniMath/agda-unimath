@@ -39,7 +39,9 @@ open import foundation.unit-type using
   ( raise-unit; raise-star; is-contr-raise-unit; unit; star)
 open import foundation.universe-levels using (UU; Level)
 
-open import group-theory.monoids using (Monoid)
+open import group-theory.monoids using
+  ( Monoid; type-Monoid; unit-Monoid; mul-Monoid; left-unit-law-Monoid;
+    assoc-mul-Monoid)
 ```
 
 ## Idea
@@ -583,4 +585,43 @@ is-equiv-map-algebra-list A =
     ( inv-map-algebra-list A)
     ( issec-inv-map-algebra-list A)
     ( isretr-inv-map-algebra-list A)
+```
+
+### `map-list` preserves concatenation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  preserves-concat-map-list :
+    (l k : list A) →
+    Id ( map-list f (concat-list l k))
+       ( concat-list (map-list f l) (map-list f k))
+  preserves-concat-map-list nil k = refl
+  preserves-concat-map-list (cons x l) k =
+    ap (cons (f x)) (preserves-concat-map-list l k)
+  
+```
+
+### Multiplication of a list of elements in a monoid
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+  
+  mul-list-Monoid : list (type-Monoid M) → type-Monoid M
+  mul-list-Monoid nil = unit-Monoid M
+  mul-list-Monoid (cons x l) = mul-Monoid M x (mul-list-Monoid l)
+
+  distributive-mul-list-Monoid :
+    (l1 l2 : list (type-Monoid M)) →
+    Id ( mul-list-Monoid (concat-list l1 l2))
+       ( mul-Monoid M (mul-list-Monoid l1) (mul-list-Monoid l2))
+  distributive-mul-list-Monoid nil l2 =
+    inv (left-unit-law-Monoid M (mul-list-Monoid l2))
+  distributive-mul-list-Monoid (cons x l1) l2 =
+    ( ap (mul-Monoid M x) (distributive-mul-list-Monoid l1 l2)) ∙
+    ( inv (assoc-mul-Monoid M x (mul-list-Monoid l1) (mul-list-Monoid l2)))
 ```

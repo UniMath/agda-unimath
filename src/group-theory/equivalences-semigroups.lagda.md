@@ -25,7 +25,7 @@ open import group-theory.homomorphisms-semigroups using
   ( preserves-mul; preserves-mul-Semigroup; preserves-mul-semigroup-Prop)
 open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul;
-    set-Semigroup; assoc-mul-Semigroup; is-set-type-Semigroup)
+    set-Semigroup; associative-mul-Semigroup; is-set-type-Semigroup)
 ```
 
 ## Idea
@@ -76,7 +76,8 @@ module _
     Σ ( has-associative-mul (type-Semigroup G))
       ( λ μ → preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)
   pr1 (pr1 (center-total-preserves-mul-id-Semigroup)) = mul-Semigroup G
-  pr2 (pr1 (center-total-preserves-mul-id-Semigroup)) = assoc-mul-Semigroup G
+  pr2 (pr1 (center-total-preserves-mul-id-Semigroup)) =
+    associative-mul-Semigroup G
   pr2 (center-total-preserves-mul-id-Semigroup) x y = refl
 
   contraction-total-preserves-mul-id-Semigroup :

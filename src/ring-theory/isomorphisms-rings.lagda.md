@@ -1,4 +1,6 @@
-# Isomorphisms of rings
+---
+title: Isomorphisms of rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -255,7 +257,7 @@ preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
       ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
       ( pres-unit-f))) ∙
   ( is-retr-map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f
-    ( unit-Ring R1))
+    ( one-Ring R1))
 
 is-ring-homomorphism-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2)
@@ -389,7 +391,7 @@ abstract
         ( is-contr-total-iso-Ab (ab-Ring R))
         ( pair (ab-Ring R) (id-iso-Ab (ab-Ring R)))
         ( is-contr-total-Eq-structure
-          ( λ μ H pres-mul → Id (unit-Ring R) (pr1 (pr1 H)))
+          ( λ μ H pres-mul → Id (one-Ring R) (pr1 (pr1 H)))
           ( is-contr-total-Eq-subtype
             ( is-contr-total-Eq-Π
               ( λ x m → (y : type-Ring R) → Id (mul-Ring R x y) (m y))
@@ -402,12 +404,12 @@ abstract
           ( pair (pair (mul-Ring R) (associative-mul-Ring R)) (λ x y → refl))
           ( is-contr-total-Eq-subtype
             ( is-contr-total-Eq-subtype
-              ( is-contr-total-path (unit-Ring R))
+              ( is-contr-total-path (one-Ring R))
               ( λ x →
                 is-prop-prod
                   ( is-prop-Π (λ y → is-set-type-Ring R (mul-Ring R x y) y))
                   ( is-prop-Π (λ y → is-set-type-Ring R (mul-Ring R y x) y)))
-              ( unit-Ring R)
+              ( one-Ring R)
               ( refl)
               ( pair (left-unit-law-mul-Ring R) (right-unit-law-mul-Ring R)))
             ( λ u →
@@ -423,8 +425,8 @@ abstract
             ( is-unital-Ring R)
             ( refl)
             ( pair
-              ( left-distributive-law-mul-add-Ring R)
-              ( right-distributive-law-mul-add-Ring R)))))
+              ( left-distributive-mul-add-Ring R)
+              ( right-distributive-mul-add-Ring R)))))
 
 is-equiv-iso-eq-Ring :
   { l : Level} (R S : Ring l) → is-equiv (iso-eq-Ring R S)

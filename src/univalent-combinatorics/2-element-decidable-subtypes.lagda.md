@@ -3,12 +3,15 @@ title: 2-element decidable subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module univalent-combinatorics.2-element-decidable-subtypes where
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 open import elementary-number-theory.equality-natural-numbers using (has-decidable-equality-ℕ)
+open import
+  elementary-number-theory.well-ordering-principle-standard-finite-types using
+  ( ε-operator-decidable-subtype-Fin)
 
 open import foundation.automorphisms using (Aut)
 open import foundation.cartesian-product-types using (_×_)
@@ -39,7 +42,7 @@ open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
-    trunc-Prop)
+    trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop; is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
@@ -58,9 +61,10 @@ open import univalent-combinatorics.2-element-subtypes using
 open import univalent-combinatorics.2-element-types using
   ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
     map-swap-2-Element-Type; compute-swap-2-Element-Type;
+    is-inhabited-2-Element-Type; has-no-fixed-points-swap-2-Element-Type;
     contradiction-3-distinct-element-2-Element-Type)
 open import univalent-combinatorics.decidable-subtypes using (is-finite-decidable-subtype)
-open import univalent-combinatorics.dependent-product-finite-types using (is-finite-Π)
+open import univalent-combinatorics.dependent-function-types using (is-finite-Π)
 open import univalent-combinatorics.finite-types using
   ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin; is-finite; 
     equiv-has-cardinality-id-number-of-elements-is-finite; number-of-elements-is-finite;
@@ -128,6 +132,11 @@ module _
     type-2-Element-Decidable-Subtype
   pr2 2-element-type-2-Element-Decidable-Subtype =
     has-two-elements-type-2-Element-Decidable-Subtype
+
+  is-inhabited-type-2-Element-Decidable-Subtype :
+    type-trunc-Prop type-2-Element-Decidable-Subtype
+  is-inhabited-type-2-Element-Decidable-Subtype =
+    is-inhabited-2-Element-Type 2-element-type-2-Element-Decidable-Subtype
 ```
 
 ### The standard 2-element decidable subtypes in a type with decidable equality
@@ -308,3 +317,60 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
               ( id-equiv))))
 ```
   
+## Properties
+
+### Any 2-element decidable subtype of a standard finite type is a standard 2-element decidable subtype
+
+```agda
+module _
+  {l : Level} {n : ℕ} (P : 2-Element-Decidable-Subtype l (Fin n))
+  where
+
+  element-subtype-2-element-decidable-subtype-Fin :
+    type-2-Element-Decidable-Subtype P
+  element-subtype-2-element-decidable-subtype-Fin =
+    ε-operator-decidable-subtype-Fin
+      ( decidable-subtype-2-Element-Decidable-Subtype P)
+      ( is-inhabited-type-2-Element-Decidable-Subtype P)
+
+  element-2-element-decidable-subtype-Fin : Fin n
+  element-2-element-decidable-subtype-Fin =
+    pr1 element-subtype-2-element-decidable-subtype-Fin
+
+  in-subtype-element-2-element-decidable-subtype-Fin :
+    type-prop-2-Element-Decidable-Subtype P
+      element-2-element-decidable-subtype-Fin
+  in-subtype-element-2-element-decidable-subtype-Fin =
+    pr2 element-subtype-2-element-decidable-subtype-Fin
+
+  other-element-subtype-2-element-decidable-subtype-Fin :
+    type-2-Element-Decidable-Subtype P
+  other-element-subtype-2-element-decidable-subtype-Fin =
+    map-swap-2-Element-Type
+      ( 2-element-type-2-Element-Decidable-Subtype P)
+      ( element-subtype-2-element-decidable-subtype-Fin)
+
+  other-element-2-element-decidable-subtype-Fin : Fin n
+  other-element-2-element-decidable-subtype-Fin =
+    pr1 other-element-subtype-2-element-decidable-subtype-Fin
+
+  in-subtype-other-element-2-element-decidable-subtype-Fin :
+    type-prop-2-Element-Decidable-Subtype P
+      other-element-2-element-decidable-subtype-Fin
+  in-subtype-other-element-2-element-decidable-subtype-Fin =
+    pr2 other-element-subtype-2-element-decidable-subtype-Fin
+
+  abstract
+    unequal-elements-2-element-decidable-subtype-Fin :
+      ¬ ( Id
+          ( element-2-element-decidable-subtype-Fin)
+          ( other-element-2-element-decidable-subtype-Fin))
+    unequal-elements-2-element-decidable-subtype-Fin p =
+      has-no-fixed-points-swap-2-Element-Type
+        ( 2-element-type-2-Element-Decidable-Subtype P)
+        { element-subtype-2-element-decidable-subtype-Fin}
+        ( eq-subtype
+          ( subtype-2-Element-Decidable-Subtype P)
+          ( inv p))
+
+```

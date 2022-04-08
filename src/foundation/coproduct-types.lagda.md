@@ -58,12 +58,18 @@ module _
   is-left : coprod X Y → UU lzero
   is-left x = type-Prop (is-left-Prop x)
 
+  is-prop-is-left : (x : coprod X Y) → is-prop (is-left x)
+  is-prop-is-left x = is-prop-type-Prop (is-left-Prop x)
+
   is-right-Prop : coprod X Y → UU-Prop lzero
   is-right-Prop (inl x) = empty-Prop
   is-right-Prop (inr x) = unit-Prop
 
   is-right : coprod X Y → UU lzero
   is-right x = type-Prop (is-right-Prop x)
+
+  is-prop-is-right : (x : coprod X Y) → is-prop (is-right x)
+  is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
 ```
 
 ## Properties

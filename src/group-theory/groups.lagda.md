@@ -5,11 +5,18 @@
 
 module group-theory.groups where
 
+open import foundation.binary-embeddings using
+  ( is-binary-emb; is-binary-emb-is-binary-equiv)
+open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; is-equiv-has-inverse; _≃_)
+open import foundation.embeddings using (is-emb)
+open import foundation.equivalences using
+  ( is-equiv; is-equiv-has-inverse; _≃_; is-emb-is-equiv)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.identity-types using (Id; ap-binary; inv; _∙_; ap; refl)
+open import foundation.injective-maps using
+  ( is-injective; is-injective-is-equiv)
 open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;
     is-prop-Σ; UU-Prop)
@@ -21,11 +28,14 @@ open import group-theory.monoids using
   ( is-unital; Monoid; is-prop-is-unital)
 open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul)
+
+open import univalent-combinatorics.lists using
+  ( list; mul-list-Monoid; distributive-mul-list-Monoid; concat-list)
 ```
 
 ## Idea
 
-An abstract group is a group in the usual algebraic sense, i.e., it consists of a set equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfyint the group laws
+An abstract group is a group in the usual algebraic sense, i.e., it consists of a set equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the group laws
 
 ```md
   (xy)z = x(yz)      (associativity)
@@ -110,6 +120,9 @@ module _
   
   unit-Group : type-Group
   unit-Group = pr1 is-unital-Group
+
+  is-unit-Group : type-Group → UU l
+  is-unit-Group x = Id x unit-Group
   
   left-unit-law-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
@@ -166,6 +179,26 @@ module _
   equiv-mul-Group' : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group' x) = mul-Group' x
   pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
+
+  is-binary-equiv-mul-Group : is-binary-equiv mul-Group
+  pr1 is-binary-equiv-mul-Group = is-equiv-mul-Group'
+  pr2 is-binary-equiv-mul-Group = is-equiv-mul-Group
+
+  is-binary-emb-mul-Group : is-binary-emb mul-Group
+  is-binary-emb-mul-Group =
+    is-binary-emb-is-binary-equiv is-binary-equiv-mul-Group
+
+  is-emb-mul-Group : (x : type-Group) → is-emb (mul-Group x)
+  is-emb-mul-Group x = is-emb-is-equiv (is-equiv-mul-Group x)
+
+  is-emb-mul-Group' : (x : type-Group) → is-emb (mul-Group' x)
+  is-emb-mul-Group' x = is-emb-is-equiv (is-equiv-mul-Group' x)
+
+  is-injective-mul-Group : (x : type-Group) → is-injective (mul-Group x)
+  is-injective-mul-Group x = is-injective-is-equiv (is-equiv-mul-Group x)
+
+  is-injective-mul-Group' : (x : type-Group) → is-injective (mul-Group' x)
+  is-injective-mul-Group' x = is-injective-is-equiv (is-equiv-mul-Group' x)
 
   transpose-eq-mul-Group :
     {x y z : type-Group} →
@@ -233,4 +266,38 @@ abstract
 is-group-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
 pr1 (is-group-Prop G) = is-group G
 pr2 (is-group-Prop G) = is-prop-is-group G
+```
+
+### Any idempotent element in a group is the unit
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  is-idempotent-Group : type-Group G → UU l
+  is-idempotent-Group x = Id (mul-Group G x x) x
+
+  is-unit-is-idempotent-Group :
+    {x : type-Group G} → is-idempotent-Group x → is-unit-Group G x
+  is-unit-is-idempotent-Group {x} p =
+    is-injective-mul-Group G x (p ∙ inv (right-unit-law-Group G x))
+```
+
+### Multiplication of a list of elements in a group
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  mul-list-Group : list (type-Group G) → type-Group G
+  mul-list-Group = mul-list-Monoid (monoid-Group G)
+
+  preserves-concat-mul-list-Group :
+    (l1 l2 : list (type-Group G)) →
+    Id ( mul-list-Group (concat-list l1 l2))
+       ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
+  preserves-concat-mul-list-Group =
+    distributive-mul-list-Monoid (monoid-Group G)
 ```

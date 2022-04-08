@@ -28,19 +28,19 @@ open import group-theory.semigroups using (Semigroup; mul-Semigroup)
 open import univalent-combinatorics.cartesian-product-types using (count-prod)
 open import univalent-combinatorics.counting using
   ( has-decidable-equality-count)
-open import univalent-combinatorics.counting-decidable-subtypes using (count-eq)
-open import univalent-combinatorics.counting-dependent-function-types using
-  ( count-Π)
 open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-Σ)
-open import univalent-combinatorics.counting-function-types using
-  ( count-function-type)
 open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-count)
 open import univalent-combinatorics.decidable-dependent-pair-types using
   ( is-decidable-Σ-count)
+open import univalent-combinatorics.decidable-propositions using (count-eq)
+open import univalent-combinatorics.dependent-function-types using
+  ( count-Π)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-is-decidable-Prop)
+open import univalent-combinatorics.function-types using
+  ( count-function-type)
 open import univalent-combinatorics.pi-finite-types using
   ( is-π-finite; is-π-finite-equiv; is-π-finite-Σ; is-π-finite-is-finite;
     number-of-connected-components; mere-equiv-number-of-connected-components)

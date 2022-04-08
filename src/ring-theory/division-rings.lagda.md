@@ -1,4 +1,6 @@
-# Division rings
+---
+title: Division rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

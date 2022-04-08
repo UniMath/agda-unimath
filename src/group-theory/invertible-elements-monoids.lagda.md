@@ -17,7 +17,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import group-theory.monoids using
   ( Monoid; type-Monoid; mul-Monoid; unit-Monoid; set-Monoid;
-    left-unit-law-Monoid; assoc-mul-Monoid; right-unit-law-Monoid; mul-Monoid')
+    left-unit-law-Monoid; associative-mul-Monoid; right-unit-law-Monoid; mul-Monoid')
 ```
 
 ## Idea
@@ -87,7 +87,7 @@ module _
           ( Id-Prop (set-Monoid M) (mul-Monoid M x z) (unit-Monoid M)))
       ( ( inv (left-unit-law-Monoid M y)) ∙
         ( ( inv (ap (λ z → mul-Monoid M z y) p')) ∙
-          ( ( assoc-mul-Monoid M y' x y) ∙
+          ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-Monoid M y')))))
   
@@ -114,7 +114,7 @@ module _
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M x u) (unit-Monoid M))
       ( ( inv (right-unit-law-Monoid M y)) ∙
         ( ( ap (mul-Monoid M y) (inv q')) ∙
-          ( ( inv (assoc-mul-Monoid M y x y')) ∙
+          ( ( inv (associative-mul-Monoid M y x y')) ∙
             ( ( ap (mul-Monoid' M y') p) ∙
               ( left-unit-law-Monoid M y')))))
 ```
@@ -136,7 +136,7 @@ module _
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M u x) (unit-Monoid M))
       ( ( inv (left-unit-law-Monoid M y)) ∙
         ( ( ap (mul-Monoid' M y) (inv p')) ∙
-          ( ( assoc-mul-Monoid M y' x y) ∙
+          ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
               ( right-unit-law-Monoid M y')))))
 ```
