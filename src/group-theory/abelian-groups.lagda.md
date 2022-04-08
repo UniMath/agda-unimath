@@ -5,8 +5,15 @@
 
 module group-theory.abelian-groups where
 
+open import foundation.binary-embeddings using (is-binary-emb)
+open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
+open import foundation.embeddings using (is-emb)
+open import foundation.equivalences using (is-equiv)
+open import foundation.identity-types using (Id; ap-binary; _∙_; inv)
+open import foundation.injective-maps using (is-injective)
+open import foundation.interchange-law using
+  (interchange-law-commutative-and-associative)
 open import foundation.propositions using
   ( is-prop; is-prop-Π; Π-Prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.sets using (UU-Set; is-set; Id-Prop)
@@ -17,10 +24,18 @@ open import group-theory.groups using
     associative-mul-Group; has-associative-mul-Group; semigroup-Group; is-group;
     is-group-Group; is-unital-Group; unit-Group; left-unit-law-Group;
     right-unit-law-Group; inv-Group; left-inverse-law-Group;
-    right-inverse-law-Group; is-group'; has-inverses-Group)
+    right-inverse-law-Group; is-group'; has-inverses-Group;
+    distributive-inv-mul-Group; mul-Group'; is-equiv-mul-Group;
+    is-equiv-mul-Group'; is-binary-equiv-mul-Group; transpose-eq-mul-Group;
+    transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
+    is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
+    is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
+    preserves-concat-mul-list-Group)
 open import group-theory.monoids using (is-unital)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
+
+open import univalent-combinatorics.lists using (list; concat-list)
 ```
 
 ## Idea
@@ -73,6 +88,15 @@ add-Ab :
   {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
 add-Ab A = mul-Group (group-Ab A)
 
+add-Ab' :
+  {l : Level} (A : Ab l) → type-Ab A → type-Ab A → type-Ab A
+add-Ab' A = mul-Group' (group-Ab A)
+
+ap-add-Ab :
+  {l : Level} (A : Ab l) {x y x' y' : type-Ab A} (p : Id x x') (q : Id y y') →
+  Id (add-Ab A x y) (add-Ab A x' y')
+ap-add-Ab A p q = ap-binary (add-Ab A) p q
+
 associative-add-Ab :
   {l : Level} (A : Ab l) (x y z : type-Ab A) →
   Id (add-Ab A (add-Ab A x y) z) (add-Ab A x (add-Ab A y z))
@@ -93,6 +117,9 @@ has-zero-Ab A = is-unital-Group (group-Ab A)
 zero-Ab :
   {l : Level} (A : Ab l) → type-Ab A
 zero-Ab A = unit-Group (group-Ab A)
+
+is-zero-Ab : {l : Level} (A : Ab l) → type-Ab A → UU l
+is-zero-Ab A x = Id x (zero-Ab A)
 
 left-unit-law-add-Ab :
   {l : Level} (A : Ab l) → (x : type-Ab A) →
@@ -122,8 +149,121 @@ right-inverse-law-add-Ab :
   Id (add-Ab A x (neg-Ab A x)) (zero-Ab A)
 right-inverse-law-add-Ab A = right-inverse-law-Group (group-Ab A)
 
-is-commutative-add-Ab :
+commutative-add-Ab :
   {l : Level} (A : Ab l) (x y : type-Ab A) →
   Id (add-Ab A x y) (add-Ab A y x)
-is-commutative-add-Ab A = pr2 A
+commutative-add-Ab A = pr2 A
+
+interchange-add-add-Ab :
+  {l : Level} (A : Ab l) (a b c d : type-Ab A) →
+  Id ( add-Ab A (add-Ab A a b) (add-Ab A c d))
+     ( add-Ab A (add-Ab A a c) (add-Ab A b d))
+interchange-add-add-Ab A =
+  interchange-law-commutative-and-associative
+    ( add-Ab A)
+    ( commutative-add-Ab A)
+    ( associative-add-Ab A)
+
+distributive-neg-add-Ab :
+  {l : Level} (A : Ab l) (x y : type-Ab A) →
+  Id (neg-Ab A (add-Ab A x y)) (add-Ab A (neg-Ab A x) (neg-Ab A y))
+distributive-neg-add-Ab A x y =
+  ( distributive-inv-mul-Group (group-Ab A) x y) ∙
+  ( commutative-add-Ab A (neg-Ab A y) (neg-Ab A x))
+```
+
+### Addition on an abelian group is a binary equivalence
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
+  is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
+
+  is-equiv-add-Ab' : (x : type-Ab A) → is-equiv (add-Ab' A x)
+  is-equiv-add-Ab' = is-equiv-mul-Group' (group-Ab A)
+
+  is-binary-equiv-add-Ab : is-binary-equiv (add-Ab A)
+  is-binary-equiv-add-Ab = is-binary-equiv-mul-Group (group-Ab A)
+```
+
+### Addition on an abelian group is a binary embedding
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-binary-emb-add-Ab : is-binary-emb (add-Ab A)
+  is-binary-emb-add-Ab = is-binary-emb-mul-Group (group-Ab A)
+
+  is-emb-add-Ab : (x : type-Ab A) → is-emb (add-Ab A x)
+  is-emb-add-Ab = is-emb-mul-Group (group-Ab A)
+
+  is-emb-add-Ab' : (x : type-Ab A) → is-emb (add-Ab' A x)
+  is-emb-add-Ab' = is-emb-mul-Group' (group-Ab A)
+```
+
+### Addition on an abelian group is pointwise injective from both sides
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-injective-add-Ab : (x : type-Ab A) → is-injective (add-Ab A x)
+  is-injective-add-Ab = is-injective-mul-Group (group-Ab A)
+
+  is-injective-add-Ab' : (x : type-Ab A) → is-injective (add-Ab' A x)
+  is-injective-add-Ab' = is-injective-mul-Group' (group-Ab A)
+```
+
+### Transposing identifications in abelian groups
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  transpose-eq-add-Ab :
+    {x y z : type-Ab A} → Id (add-Ab A x y) z → Id x (add-Ab A z (neg-Ab A y))
+  transpose-eq-add-Ab = transpose-eq-mul-Group (group-Ab A)
+
+  transpose-eq-add-Ab' :
+    {x y z : type-Ab A} → Id (add-Ab A x y) z → Id y (add-Ab A (neg-Ab A x) z)
+  transpose-eq-add-Ab' = transpose-eq-mul-Group' (group-Ab A)
+```
+
+### Any idempotent element in an abelian group is zero
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+  
+  is-idempotent-Ab : type-Ab A → UU l
+  is-idempotent-Ab = is-idempotent-Group (group-Ab A)
+
+  is-zero-is-idempotent-Ab :
+    {x : type-Ab A} → is-idempotent-Ab x → is-zero-Ab A x
+  is-zero-is-idempotent-Ab = is-unit-is-idempotent-Group (group-Ab A)
+```
+
+### Addition of a list of elements in an abelian group
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+  
+  add-list-Ab : list (type-Ab A) → type-Ab A
+  add-list-Ab = mul-list-Group (group-Ab A)
+
+  preserves-concat-add-list-Ab :
+    (l1 l2 : list (type-Ab A)) →
+    Id ( add-list-Ab (concat-list l1 l2))
+       ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+  preserves-concat-add-list-Ab = preserves-concat-mul-list-Group (group-Ab A)
 ```

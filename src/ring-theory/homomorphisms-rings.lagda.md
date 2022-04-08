@@ -1,4 +1,6 @@
-# Ring homomorphisms
+---
+title: Ring homomorphisms
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -22,12 +24,12 @@ open import foundation.truncation-levels using (𝕋; neg-one-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.homomorphisms-abelian-groups using
-  ( hom-Ab; map-hom-Ab; preserves-add; preserves-add-Ab;
+  ( type-hom-Ab; map-hom-Ab; preserves-add; preserves-add-hom-Ab;
     is-contr-total-htpy-hom-Ab; is-set-hom-Ab; id-hom-Ab; comp-hom-Ab;
     eq-htpy-hom-Ab)
 
 open import ring-theory.rings using
-  ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; unit-Ring)
+  ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; one-Ring)
 ```
 
 ## Idea
@@ -41,7 +43,7 @@ Ring homomorphisms are maps between rings that preserve the ring structure
 
 preserves-mul-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  hom-Ab (ab-Ring R1) (ab-Ring R2) → UU (l1 ⊔ l2)
+  type-hom-Ab (ab-Ring R1) (ab-Ring R2) → UU (l1 ⊔ l2)
 preserves-mul-hom-Ab R1 R2 f =
   (x y : type-Ring R1) →
   Id ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (mul-Ring R1 x y))
@@ -51,7 +53,7 @@ preserves-mul-hom-Ab R1 R2 f =
 
 is-prop-preserves-mul-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) →
+  ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   is-prop (preserves-mul-hom-Ab R1 R2 f)
 is-prop-preserves-mul-hom-Ab R1 R2 f =
   is-prop-Π
@@ -66,28 +68,28 @@ is-prop-preserves-mul-hom-Ab R1 R2 f =
 
 preserves-unit-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  hom-Ab (ab-Ring R1) (ab-Ring R2) → UU l2
+  type-hom-Ab (ab-Ring R1) (ab-Ring R2) → UU l2
 preserves-unit-hom-Ab R1 R2 f =
-  Id (map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (unit-Ring R1)) (unit-Ring R2)
+  Id (map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (one-Ring R1)) (one-Ring R2)
 
 is-prop-preserves-unit-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) →
+  ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   is-prop (preserves-unit-hom-Ab R1 R2 f)
 is-prop-preserves-unit-hom-Ab R1 R2 f =
   is-set-type-Ring R2
-    ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (unit-Ring R1))
-    ( unit-Ring R2)
+    ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (one-Ring R1))
+    ( one-Ring R2)
 
 is-ring-homomorphism-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) → UU (l1 ⊔ l2)
+  ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) → UU (l1 ⊔ l2)
 is-ring-homomorphism-hom-Ab R1 R2 f =
   preserves-mul-hom-Ab R1 R2 f × preserves-unit-hom-Ab R1 R2 f
 
 is-prop-is-ring-homomorphism-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  ( f : hom-Ab (ab-Ring R1) (ab-Ring R2)) →
+  ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   is-prop (is-ring-homomorphism-hom-Ab R1 R2 f)
 is-prop-is-ring-homomorphism-hom-Ab R1 R2 f =
   is-prop-prod
@@ -97,13 +99,13 @@ is-prop-is-ring-homomorphism-hom-Ab R1 R2 f =
 type-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R : Ring l2) → UU (l1 ⊔ l2)
 type-hom-Ring R1 R2 =
-  Σ (hom-Ab (ab-Ring R1) (ab-Ring R2)) (is-ring-homomorphism-hom-Ab R1 R2)
+  Σ (type-hom-Ab (ab-Ring R1) (ab-Ring R2)) (is-ring-homomorphism-hom-Ab R1 R2)
 
 {- Basic infrastructure for ring homomorphisms. -}
 
 hom-ab-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  type-hom-Ring R1 R2 → hom-Ab (ab-Ring R1) (ab-Ring R2)
+  type-hom-Ring R1 R2 → type-hom-Ab (ab-Ring R1) (ab-Ring R2)
 hom-ab-hom-Ring R1 R2 = pr1
 
 map-hom-Ring :
@@ -117,7 +119,7 @@ preserves-add-hom-Ring :
   (f : type-hom-Ring R1 R2) →
   preserves-add (ab-Ring R1) (ab-Ring R2) (map-hom-Ring R1 R2 f)
 preserves-add-hom-Ring R1 R2 f =
-  preserves-add-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f)
+  preserves-add-hom-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f)
 
 preserves-mul-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
@@ -229,7 +231,7 @@ id-hom-Ring R = pair (id-hom-Ab (ab-Ring R)) (is-ring-homomorphism-id-hom-Ring R
 hom-Ab-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  hom-Ab (ab-Ring R1) (ab-Ring R3) 
+  type-hom-Ab (ab-Ring R1) (ab-Ring R3) 
 hom-Ab-comp-hom-Ring R1 R2 R3 g f =
   comp-hom-Ab
     ( ab-Ring R1)

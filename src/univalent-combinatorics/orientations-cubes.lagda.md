@@ -1,4 +1,6 @@
-# Orientations of cubes
+---
+title: Orientations of cubes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,10 +20,10 @@ open import univalent-combinatorics.dependent-sum-finite-types using
   ( is-finite-Σ)
 open import univalent-combinatorics.equality-finite-types using
   ( is-finite-eq; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-function-types using
-  ( is-finite-function-type)
 open import univalent-combinatorics.finite-types using
   ( number-of-elements-is-finite; is-finite-empty)
+open import univalent-combinatorics.function-types using
+  ( is-finite-function-type)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; succ-Fin)
 ```

@@ -7,6 +7,7 @@ agdaFiles
 docs/dependency.dot
 docs/graph.png
 src/everything.lagda.md
+src/**/*.html
 
 ### Emacs ###
 # -*- mode: gitignore; -*-

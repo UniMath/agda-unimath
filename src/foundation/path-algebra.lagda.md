@@ -134,7 +134,7 @@ is-binary-equiv-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : Id x y} {u v : Id y z} →
   is-binary-equiv (horizontal-concat-Id² {l} {A} {x} {y} {z} {p} {q} {u} {v})
 is-binary-equiv-horizontal-concat-Id² =
-  is-binary-emb-is-binary-equiv (λ s t → s ∙ t) is-binary-equiv-concat
+  is-binary-emb-is-binary-equiv is-binary-equiv-concat
 
 -- both operations satisfy unit laws
 

@@ -1,4 +1,6 @@
-# The coproduct operation on finite types
+---
+title: Coproducts of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,8 +13,8 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.coproduct-types using
   ( coprod; inl; inr; equiv-left-summand; equiv-right-summand; is-left-Prop;
     is-right-Prop)
-open import foundation.decidable-types using
-  ( is-decidable-is-left; is-decidable-is-right)
+open import foundation.decidable-subtypes using
+  ( is-left-decidable-Prop; is-right-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_∘e_; inv-equiv; _≃_; id-equiv)
 open import foundation.functions using (_∘_)
@@ -81,19 +83,21 @@ abstract
 ### If `X + Y` has a count, then both `X` and `Y` have a count
 
 ```agda
-count-left-summand :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (coprod X Y) → count X
-count-left-summand e =
-  count-equiv
-    ( equiv-left-summand)
-    ( count-decidable-subtype is-left-Prop is-decidable-is-left e)
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+  
+  count-left-summand : count (coprod X Y) → count X
+  count-left-summand e =
+    count-equiv
+      ( equiv-left-summand)
+      ( count-decidable-subtype is-left-decidable-Prop e)
 
-count-right-summand :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (coprod X Y) → count Y
-count-right-summand e =
-  count-equiv
-    ( equiv-right-summand)
-    ( count-decidable-subtype is-right-Prop is-decidable-is-right e)
+  count-right-summand : count (coprod X Y) → count Y
+  count-right-summand e =
+    count-equiv
+      ( equiv-right-summand)
+      ( count-decidable-subtype is-right-decidable-Prop e)
 ```
 
 ### If each of `A`, `B`, and `A + B` come equipped with countings, then the number of elements of `A` and of `B` add up to the number of elements of `A + B`

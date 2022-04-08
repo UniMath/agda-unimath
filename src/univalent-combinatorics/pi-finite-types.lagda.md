@@ -1,4 +1,6 @@
-# π-finite types
+---
+title: π-finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
@@ -99,7 +101,7 @@ open import univalent-combinatorics.cartesian-product-types using
 open import univalent-combinatorics.coproduct-types using
   ( is-finite-coprod)
 open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.dependent-product-finite-types using
+open import univalent-combinatorics.dependent-function-types using
   ( is-finite-Π)
 open import univalent-combinatorics.dependent-sum-finite-types using
   ( is-finite-Σ)
@@ -109,8 +111,6 @@ open import
   ( equiv-distributive-trunc-Π-is-finite-Set)
 open import univalent-combinatorics.equality-finite-types using
   ( is-finite-eq; is-set-is-finite; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-function-types using
-  ( is-finite-≃)
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
@@ -121,6 +121,8 @@ open import univalent-combinatorics.finite-types using
     is-finite-is-decidable-Prop)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
+open import univalent-combinatorics.function-types using
+  ( is-finite-≃)
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```

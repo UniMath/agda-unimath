@@ -1,4 +1,6 @@
-# Surjective maps
+---
+title: Surjective maps between finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-is-finite)
-open import univalent-combinatorics.fibers-of-maps-between-finite-types
+open import univalent-combinatorics.fibers-of-maps using (is-finite-fib)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-decidable-type-trunc-Prop-is-finite)
 ```

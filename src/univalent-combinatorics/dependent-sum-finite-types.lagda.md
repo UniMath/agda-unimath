@@ -1,4 +1,6 @@
-# Dependent sums of finite types
+---
+title: Dependent sums of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -36,10 +38,10 @@ open import univalent-combinatorics.coproduct-types using
   ( is-finite-coprod)
 open import univalent-combinatorics.counting using
   ( count; count-equiv)
-open import univalent-combinatorics.counting-decidable-subtypes using
-  ( count-eq)
 open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-Σ; count-fiber-count-Σ)
+open import univalent-combinatorics.decidable-propositions using
+  ( count-eq)
 open import univalent-combinatorics.equality-finite-types using
   ( has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-choice using

@@ -12,6 +12,7 @@ open import synthetic-homotopy-theory.26-descent public
 open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.27-sequences public
 open import synthetic-homotopy-theory.circle public
+open import synthetic-homotopy-theory.commutative-operations public
 open import synthetic-homotopy-theory.cyclic-types public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public

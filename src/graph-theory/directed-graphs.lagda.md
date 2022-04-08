@@ -10,6 +10,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
+open import foundation.equivalences
 ```
 
 ## Idea
@@ -40,7 +41,6 @@ module alternative where
 
   Graph' : (l1 l2 : Level)  → UU (lsuc l1 ⊔ lsuc l2)
   Graph' l1 l2 = Σ (UU l1)  λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
-  -- TODO: Add the syntax ∑[ x ]
 
   module _ {l1 l2 : Level} (G : Graph' l1 l2) where
 
@@ -71,9 +71,50 @@ module equiv {l1 l2 : Level} where
   Graph'-to-Graph : Graph' l1 l2 -> Graph l1 (l1 ⊔ l2)
   Graph'-to-Graph (pair V (pair E (pair st tg)))
     = pair V λ x y → Σ E λ e → (Id (st e) x) × (Id (tg e) y)
+```
 
--- TODO: One can show that the two definitions (Graph and Graph') are equivalent
--- when the underlying types for vertices and edges are sets. I'm not quite sure
--- if it still holds after removing such an assumption, as it was used to show the equiv here
--- https://jonaprieto.github.io/synthetic-graph-theory/lib.graph-definitions.Alternative-definition-is-equiv.html#2371
+### Results
+
+#### Equivalence between Graph definitions
+
+The two definitions given above for directed graphs are equivalent. $\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent to $\sum_{(C : U)} C \to A$.
+We use these lemmas in the following calculation ASDFASD:
+
+\begin{equation}
+\begin{split}
+\sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
+ (V \times V \to \mathcal{U}) \\
+ &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
+&\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
+\end{split}
+\end{equation}
+
+
+```
+module directed-graph-defs-equivalence
+  {l1 l2 : Level} where
+  -- is-equiv-htpy-equiv
+  -- Uses equiv-Fib
+  -- universal-property-cartesian-product-types.lagda
+  -- equiv.
+
+  -- The canonical (optimal) map for the equivalence.
+  -- Any other map is homotopic to the canonical map.
+  --is-equi
+```
+
+#### The type of Graph forms a category
+
+```agda
+-- Show that Graph is pre-category
+-- + iso corresponds to equiv.
+-- Instance of
+```
+
+#### The type of Graph forms a Topos
+
+```agda
+-- Show that Graph is pre-category
+-- + iso corresponds to equiv.
+-- Instance of
 ```

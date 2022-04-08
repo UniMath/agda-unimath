@@ -1,4 +1,6 @@
-# The pigeonhole principle
+---
+title: The pigeonhole principle
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -36,7 +38,7 @@ open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; inv-equiv-count; equiv-count; is-set-count)
-open import univalent-combinatorics.counting-decidable-subtypes using
+open import univalent-combinatorics.decidable-propositions using
   ( count-is-decidable-is-prop)
 open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-is-finite; is-decidable-Π-count)

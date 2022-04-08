@@ -41,7 +41,8 @@ open import univalent-combinatorics.equality-standard-finite-types using
 open import univalent-combinatorics.finite-types using
   ( UU-Fin; Fin-UU-Fin; equiv-UU-Fin; id-equiv-UU-Fin;
     is-contr-total-equiv-UU-Fin; type-UU-Fin)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using
+  ( Fin; equiv-succ-Fin)
 ```
 
 ## Idea
@@ -205,6 +206,19 @@ module _
     (p : unordered-pair A) → mere-Eq-unordered-pair p p
   refl-mere-Eq-unordered-pair p =
     unit-trunc-Prop (refl-Eq-unordered-pair p)
+```
+
+### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`.
+
+```agda
+is-commutative-standard-unordered-pair :
+  {l : Level} {A : UU l} (x y : A) →
+  Id (standard-unordered-pair x y) (standard-unordered-pair y x)
+is-commutative-standard-unordered-pair x y =
+  eq-Eq-unordered-pair
+    ( standard-unordered-pair x y)
+    ( standard-unordered-pair y x)
+    ( pair equiv-succ-Fin (λ { (inl (inr star)) → refl ; (inr star) → refl}))
 ```
 
 ### Functoriality of unordered pairs

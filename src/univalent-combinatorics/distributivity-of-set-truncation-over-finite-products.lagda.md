@@ -1,4 +1,6 @@
-# Distributivity of set truncation over finite products
+---
+title: Distributivity of set truncation over finite products
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

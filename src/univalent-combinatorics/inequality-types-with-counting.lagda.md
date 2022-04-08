@@ -1,4 +1,6 @@
-# Inequality on types equipped with a counting
+---
+title: Inequality on types equipped with a counting
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

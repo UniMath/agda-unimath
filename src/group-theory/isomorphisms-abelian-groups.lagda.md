@@ -23,7 +23,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import group-theory.abelian-groups using
   ( Ab; semigroup-Ab; type-Ab; group-Ab; is-prop-is-abelian-Group)
 open import group-theory.homomorphisms-abelian-groups using
-  ( hom-Ab; map-hom-Ab; comp-hom-Ab; id-hom-Ab; htpy-eq-hom-Ab)
+  ( type-hom-Ab; map-hom-Ab; comp-hom-Ab; id-hom-Ab; htpy-eq-hom-Ab)
 open import group-theory.isomorphisms-groups using
   ( id-iso-Group; extensionality-Group')
 open import group-theory.isomorphisms-semigroups using
@@ -39,29 +39,29 @@ Isomorphisms between abelian groups are just isomorphisms between their underlyi
 ```agda
 is-iso-hom-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  ( f : hom-Ab A B) → UU (l1 ⊔ l2)
+  ( f : type-hom-Ab A B) → UU (l1 ⊔ l2)
 is-iso-hom-Ab A B =
   is-iso-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 
 inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
-  is-iso-hom-Ab A B f → hom-Ab B A
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
+  is-iso-hom-Ab A B f → type-hom-Ab B A
 inv-is-iso-hom-Ab A B f = pr1
 
 map-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   is-iso-hom-Ab A B f → type-Ab B → type-Ab A
 map-inv-is-iso-hom-Ab A B f is-iso-f =
   map-hom-Ab B A (inv-is-iso-hom-Ab A B f is-iso-f)
 
 is-sec-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   ( is-iso-f : is-iso-hom-Ab A B f) →
   Id (comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f)) (id-hom-Ab B)
 is-sec-inv-is-iso-hom-Ab A B f is-iso-f = pr1 (pr2 is-iso-f)
 
 is-sec-map-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   ( is-iso-f : is-iso-hom-Ab A B f) →
   ( (map-hom-Ab A B f) ∘ (map-hom-Ab B A (inv-is-iso-hom-Ab A B f is-iso-f))) ~
   id
@@ -72,13 +72,13 @@ is-sec-map-inv-is-iso-hom-Ab A B f is-iso-f =
     ( is-sec-inv-is-iso-hom-Ab A B f is-iso-f)
 
 is-retr-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   ( is-iso-f : is-iso-hom-Ab A B f) →
   Id (comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f) (id-hom-Ab A)
 is-retr-inv-is-iso-hom-Ab A B f is-iso-f = pr2 (pr2 is-iso-f)
 
 is-retr-map-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   ( is-iso-f : is-iso-hom-Ab A B f) →
   ( (map-inv-is-iso-hom-Ab A B f is-iso-f) ∘ (map-hom-Ab A B f)) ~ id
 is-retr-map-inv-is-iso-hom-Ab A B f is-iso-f =
@@ -88,18 +88,18 @@ is-retr-map-inv-is-iso-hom-Ab A B f is-iso-f =
     ( is-retr-inv-is-iso-hom-Ab A B f is-iso-f)
 
 is-prop-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B) →
+  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
   is-prop (is-iso-hom-Ab A B f)
 is-prop-is-iso-hom-Ab A B f =
   is-prop-is-iso-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B) f
 
 iso-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) → UU (l1 ⊔ l2)
-iso-Ab A B = Σ (hom-Ab A B) (is-iso-hom-Ab A B)
+iso-Ab A B = Σ (type-hom-Ab A B) (is-iso-hom-Ab A B)
 
 hom-iso-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  iso-Ab A B → hom-Ab A B
+  iso-Ab A B → type-hom-Ab A B
 hom-iso-Ab A B = pr1
 
 is-iso-hom-iso-Ab :
@@ -109,7 +109,7 @@ is-iso-hom-iso-Ab A B = pr2
 
 inv-hom-iso-Ab :
   { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  iso-Ab A B → hom-Ab B A
+  iso-Ab A B → type-hom-Ab B A
 inv-hom-iso-Ab A B f =
   inv-is-iso-hom-Ab A B
     ( hom-iso-Ab A B f)

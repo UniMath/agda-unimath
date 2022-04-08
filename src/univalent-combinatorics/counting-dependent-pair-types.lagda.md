@@ -1,4 +1,6 @@
-# Counting the elements of dependent pair types
+---
+title: Counting the elements of dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -43,7 +45,7 @@ open import univalent-combinatorics.counting using
     count-equiv'; map-equiv-count)
 open import univalent-combinatorics.coproduct-types using
   ( count-coprod; number-of-elements-count-coprod)
-open import univalent-combinatorics.counting-decidable-subtypes using
+open import univalent-combinatorics.decidable-propositions using
   ( count-eq; is-decidable-count)
 open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)

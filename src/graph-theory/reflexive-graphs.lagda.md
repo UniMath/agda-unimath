@@ -20,12 +20,12 @@ open import elementary-number-theory.natural-numbers
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.dependent-product-finite-types
+open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.fibers-of-maps-between-finite-types
-open import univalent-combinatorics.finite-function-types
+open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
 
 

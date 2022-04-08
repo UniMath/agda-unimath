@@ -22,7 +22,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-dependent-pair-types using (tot)
-open import foundation.global-choice using (global-choice)
+open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
 open import foundation.identity-types using (Id; refl)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
@@ -157,11 +157,11 @@ is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
 ### Global choice
 
 ```agda
-global-choice-decidable-subtype-ℕ :
+ε-operator-decidable-subtype-ℕ :
   {l1 : Level} (P : ℕ → UU-Prop l1)
   (d : (x : ℕ) → is-decidable (type-Prop (P x))) →
-  global-choice (type-subtype P)
-global-choice-decidable-subtype-ℕ {l1} P d t =
+  ε-operator-Hilbert (type-subtype P)
+ε-operator-decidable-subtype-ℕ {l1} P d t =
   tot ( λ x → pr1)
       ( apply-universal-property-trunc-Prop t
         ( minimal-element-ℕ-Prop P)

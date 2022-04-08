@@ -1,16 +1,22 @@
-# Fibers of maps between finite types
+---
+title: Fibers of maps between finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module univalent-combinatorics.fibers-of-maps-between-finite-types where
+module univalent-combinatorics.fibers-of-maps where
+
+open import foundation.fibers-of-maps public
+
+open import elementary-number-theory.sums-of-natural-numbers using
+  ( sum-count-ℕ)
 
 open import foundation.contractible-types using (is-contr-total-path')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
   ( equiv-pair-eq-Σ)
 open import foundation.equivalences using (_∘e_)
-open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.identity-types using (Id; refl; tr)
 open import foundation.propositional-truncations using
@@ -20,8 +26,11 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr; inv-assoc-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import univalent-combinatorics.counting-fibers-of-maps using
-  ( count-fib)
+open import univalent-combinatorics.counting using
+  ( count; count-equiv'; number-of-elements-count)
+open import univalent-combinatorics.counting-dependent-pair-types using
+  ( count-fiber-count-Σ; sum-number-of-elements-count-fiber-count-Σ)
+open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.equality-finite-types using
   ( is-finite-eq; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
@@ -32,7 +41,41 @@ open import univalent-combinatorics.finite-types using
 
 The fibers of maps between finite types are finite.
 
-## Theorem
+## Properties
+
+### If A and B can be counted, then the fibers of a map f : A → B can be counted
+
+```agda
+count-fib :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  count A → count B → (y : B) → count (fib f y)
+count-fib f count-A count-B =
+  count-fiber-count-Σ count-B (count-equiv' (equiv-total-fib f) count-A)
+```
+
+```agda
+abstract
+  sum-number-of-elements-count-fib :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    (count-A : count A) (count-B : count B) →
+    Id ( sum-count-ℕ count-B
+         ( λ x → number-of-elements-count (count-fib f count-A count-B x)))
+       ( number-of-elements-count count-A)
+  sum-number-of-elements-count-fib f count-A count-B =
+    sum-number-of-elements-count-fiber-count-Σ count-B
+      ( count-equiv' (equiv-total-fib f) count-A)
+
+abstract
+  double-counting-fib :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (count-A : count A) →
+    (count-B : count B) (count-fib-f : (y : B) → count (fib f y)) (y : B) →
+    Id ( number-of-elements-count (count-fib-f y))
+       ( number-of-elements-count (count-fib f count-A count-B y))
+  double-counting-fib f count-A count-B count-fib-f y =
+    double-counting (count-fib-f y) (count-fib f count-A count-B y)
+```
+
+### Fibers of maps between finite types are finite
 
 ```agda
 abstract

@@ -33,45 +33,33 @@ open import graph-theory.directed-graphs using
 ### Morphisms graphs
 
 ```agda
-{-
 module _
   {l1 l2 l3 l4 : Level}
   (G : Graph l1 l2) (H : Graph l3 l4)
   where
 
-  hom-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-Graph : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Graph =
     Σ ( vertex-Graph G → vertex-Graph H )
-      ( λ f →
-        ( p : unordered-pair-vertices-Graph G) →
-        edge-Graph G p →
-        edge-Graph H (map-unordered-pair f p))
+      λ α → (x y : vertex-Graph G) → (e : edge-Graph G x y)
+          → edge-Graph H (α x) (α y)
 
-  vertex-hom-Graph :
-    hom-Graph → vertex-Graph G → vertex-Graph H
-  vertex-hom-Graph f = pr1 f
+  module _ (f : hom-Graph) where
 
-  unordered-pair-vertices-hom-Graph :
-    hom-Graph →
-    unordered-pair-vertices-Graph G →
-    unordered-pair-vertices-Graph H
-  unordered-pair-vertices-hom-Graph f =
-    map-unordered-pair (vertex-hom-Graph f)
+    vertex-hom-Graph : vertex-Graph G → vertex-Graph H
+    vertex-hom-Graph = pr1 f
 
-  edge-hom-Graph :
-    (f : hom-Graph)
-    (p : unordered-pair-vertices-Graph G) →
-    edge-Graph G p →
-    edge-Graph H
-      ( unordered-pair-vertices-hom-Graph f p)
-  edge-hom-Graph f = pr2 f
--}
+    edge-hom-Graph :
+      (x y : vertex-Graph G) →
+      (e : edge-Graph G x y) →
+      edge-Graph H (vertex-hom-Graph x) (vertex-hom-Graph y)
+    edge-hom-Graph = pr2 f
 ```
 
 ### Composition of morphisms graphs
 
 ```agda
-{-
+
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   (G : Graph l1 l2) (H : Graph l3 l4)
@@ -81,24 +69,23 @@ module _
   comp-hom-Graph :
     hom-Graph H K → hom-Graph G H →
     hom-Graph G K
-  pr1 (comp-hom-Graph (pair gV gE) (pair fV fE)) = gV ∘ fV
-  pr2 (comp-hom-Graph (pair gV gE) (pair fV fE)) p e =
-    gE (map-unordered-pair fV p) (fE p e)
--}
+  pr1 (comp-hom-Graph g f) = (vertex-hom-Graph H K g) ∘ (vertex-hom-Graph G H f)
+  pr2 (comp-hom-Graph g f) = λ x y e → (edge-hom-Graph H K g) (α x) (α y) (β x y e)
+    where
+    α = vertex-hom-Graph G H f
+    β = edge-hom-Graph G H f
 ```
 
 ### Identity morphisms graphs
 
 ```agda
-{-
 module _
   {l1 l2 : Level} (G : Graph l1 l2)
   where
 
   id-hom-Graph : hom-Graph G G
   pr1 id-hom-Graph = id
-  pr2 id-hom-Graph p = id
--}
+  pr2 id-hom-Graph _ _ = id
 ```
 
 

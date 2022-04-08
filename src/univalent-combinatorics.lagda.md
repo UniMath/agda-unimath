@@ -1,5 +1,5 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Univalent Combinatorics
 ---
 
 ```agda
@@ -7,6 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module univalent-combinatorics where
 
+open import univalent-combinatorics.2-element-decidable-subtypes public
+open import univalent-combinatorics.2-element-subtypes public
 open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.cartesian-product-types public
@@ -14,17 +16,16 @@ open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.complements-isolated-points public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting-decidable-subtypes public
-open import univalent-combinatorics.counting-dependent-function-types public
 open import univalent-combinatorics.counting-dependent-pair-types public
-open import univalent-combinatorics.counting-fibers-of-maps public
-open import univalent-combinatorics.counting-function-types public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.cubes public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
+open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
-open import univalent-combinatorics.dependent-product-finite-types public
+open import univalent-combinatorics.dependent-function-types public
+open import univalent-combinatorics.dedekind-finite-sets public
 open import univalent-combinatorics.dependent-sum-finite-types public
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products public
 open import univalent-combinatorics.double-counting public
@@ -35,22 +36,24 @@ open import univalent-combinatorics.equality-standard-finite-types public
 open import univalent-combinatorics.equivalences-cubes public
 open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.equivalences public
-open import univalent-combinatorics.fibers-of-maps-between-finite-types public
+open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
 open import univalent-combinatorics.finite-connected-components public
-open import univalent-combinatorics.finite-function-types public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.finite-types public
-open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.finitely-presented-types public
+open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.injective-maps public
+open import univalent-combinatorics.kuratowsky-finite-sets public
 open import univalent-combinatorics.lists public
 open import univalent-combinatorics.maybe public
 open import univalent-combinatorics.orientations-cubes public
+open import univalent-combinatorics.petri-nets public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
+open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.skipping-element-standard-finite-types public

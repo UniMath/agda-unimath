@@ -1,4 +1,4 @@
-# Matrices on rings
+# Diagonal matrices on rings
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -17,7 +17,7 @@ open import linear-algebra.vectors using (empty-vec; _∷_; vec)
 open import linear-algebra.vectors-on-rings using (vec-Ring; zero-vec-Ring)
 
 open import ring-theory.rings using
-  ( Ring; type-Ring; zero-Ring; unit-Ring)
+  ( Ring; type-Ring; zero-Ring; one-Ring)
 ```
 
 ## Definitions
@@ -46,5 +46,5 @@ module _
   scalar-matrix-Ring n x = diagonal-matrix-Ring R n (constant-vec x)
 
   identity-matrix-Ring : (n : ℕ) → matrix-Ring R n n
-  identity-matrix-Ring n = scalar-matrix-Ring n (unit-Ring R)
+  identity-matrix-Ring n = scalar-matrix-Ring n (one-Ring R)
 ```

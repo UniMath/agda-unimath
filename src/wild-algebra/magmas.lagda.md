@@ -1,4 +1,6 @@
-# Magmas
+---
+title: Magmas
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -30,12 +32,18 @@ A magma is a type equipped with a binary operation.
 Magma : (l : Level) → UU (lsuc l)
 Magma l = Σ (UU l) (λ A → A → A → A)
 
-type-Magma : {l : Level} → Magma l → UU l
-type-Magma M = pr1 M
-
-mul-Magma :
-  {l : Level} (M : Magma l) → type-Magma M → type-Magma M → type-Magma M
-mul-Magma M = pr2 M
+module _
+  {l : Level} (M : Magma l)
+  where
+  
+  type-Magma : UU l
+  type-Magma = pr1 M
+  
+  mul-Magma : type-Magma → type-Magma → type-Magma
+  mul-Magma = pr2 M
+  
+  mul-Magma' : type-Magma → type-Magma → type-Magma
+  mul-Magma' x y = mul-Magma y x
 ```
 
 ## Structures

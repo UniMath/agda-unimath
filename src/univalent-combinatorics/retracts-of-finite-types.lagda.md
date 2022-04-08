@@ -1,4 +1,6 @@
-# Retracts of finite types
+---
+title: Retracts of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,6 +11,8 @@ open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.decidable-maps using
   ( is-decidable-map; is-decidable-map-retr)
+open import foundation.decidable-embeddings using
+  (_↪d_; decidable-subtype-decidable-emb)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.fibers-of-maps using (equiv-total-fib)
@@ -74,6 +78,14 @@ emb-retract-count :
 pr1 (emb-retract-count e i R) = i
 pr2 (emb-retract-count e i R) = is-emb-retract-count e i R
 
+decidable-emb-retract-count :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
+  retr i → A ↪d B
+pr1 (decidable-emb-retract-count e i R) = i
+pr1 (pr2 (decidable-emb-retract-count e i R)) = is-emb-retract-count e i R
+pr2 (pr2 (decidable-emb-retract-count e i R)) =
+  is-decidable-map-retr-count e i R
+
 count-retract :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A retract-of B → count B → count A
@@ -81,8 +93,7 @@ count-retract (pair i R) e =
   count-equiv
     ( equiv-total-fib i)
     ( count-decidable-subtype
-      ( fib-emb-Prop (emb-retract-count e i R))
-      ( is-decidable-map-retr-count e i R)
+      ( decidable-subtype-decidable-emb (decidable-emb-retract-count e i R))
       ( e))
 
 abstract

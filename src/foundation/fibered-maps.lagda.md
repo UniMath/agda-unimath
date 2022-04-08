@@ -38,7 +38,7 @@ A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the squa
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
-  
+
   hom-over-morphism :
     (i : X → Y) (f : A → X) (g : B → Y) → UU (l1 ⊔ (l2 ⊔ l4))
   hom-over-morphism i f g = hom-slice (i ∘ f) g

@@ -1,4 +1,6 @@
-# Cartesian product of finite types
+---
+title: Cartesian products of finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -45,7 +47,7 @@ open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; count-equiv; has-decidable-equality-count)
 open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-Σ)
-open import univalent-combinatorics.counting-decidable-subtypes using
+open import univalent-combinatorics.decidable-propositions using
   ( count-eq)
 open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.finite-types using

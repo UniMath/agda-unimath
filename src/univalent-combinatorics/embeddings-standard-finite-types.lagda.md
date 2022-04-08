@@ -1,4 +1,6 @@
-# Embeddings between standard finite types
+---
+title: Embeddings between standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -19,6 +21,7 @@ open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (inv; _∙_; Id; ap)
 open import foundation.injective-maps using
   ( is-injective-emb; is-injective-is-emb; is-injective; is-emb-is-injective)
+open import foundation.split-surjective-maps using (is-split-surjective)
 open import foundation.unit-type using (unit; star)
 
 open import univalent-combinatorics.equality-standard-finite-types using
@@ -122,3 +125,12 @@ reduce-emb-Fin :
 pr1 (reduce-emb-Fin k l f) = map-reduce-emb-Fin f
 pr2 (reduce-emb-Fin k l f) = is-emb-map-reduce-emb-Fin f
 ```
+
+### Any embedding from `Fin k` into itself is surjective
+
+-- ```agda
+-- is-split-surjective-is-emb-Fin :
+--   {k : ℕ} {f : Fin k → Fin k} → is-emb f → is-split-surjective f
+-- is-split-surjective-is-emb-Fin {zero-ℕ} {f} H ()
+-- is-split-surjective-is-emb-Fin {succ-ℕ k} {f} H y = {!!}
+-- ```

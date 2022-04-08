@@ -25,95 +25,95 @@ open import foundation.universe-levels using (UU; lzero)
 The type of fractions is the type of pairs `n/m` consisting of an integer `n` and a positive integer `m`. The type of rational numbers is a retract of the type of fractions.
 
 ```agda
-pre-ℚ : UU lzero
-pre-ℚ = ℤ × positive-ℤ
+fractions-ℤ : UU lzero
+fractions-ℤ = ℤ × positive-ℤ
 
-numerator-pre-ℚ : pre-ℚ → ℤ
-numerator-pre-ℚ x = pr1 x
+numerator-fractions-ℤ : fractions-ℤ → ℤ
+numerator-fractions-ℤ x = pr1 x
 
-positive-denominator-pre-ℚ : pre-ℚ → positive-ℤ
-positive-denominator-pre-ℚ x = pr2 x
+positive-denominator-fractions-ℤ : fractions-ℤ → positive-ℤ
+positive-denominator-fractions-ℤ x = pr2 x
 
-denominator-pre-ℚ : pre-ℚ → ℤ
-denominator-pre-ℚ x = pr1 (positive-denominator-pre-ℚ x)
+denominator-fractions-ℤ : fractions-ℤ → ℤ
+denominator-fractions-ℤ x = pr1 (positive-denominator-fractions-ℤ x)
 
-is-positive-denominator-pre-ℚ :
-  (x : pre-ℚ) → is-positive-ℤ (denominator-pre-ℚ x)
-is-positive-denominator-pre-ℚ x = pr2 (positive-denominator-pre-ℚ x)
+is-positive-denominator-fractions-ℤ :
+  (x : fractions-ℤ) → is-positive-ℤ (denominator-fractions-ℤ x)
+is-positive-denominator-fractions-ℤ x = pr2 (positive-denominator-fractions-ℤ x)
 
-is-nonzero-denominator-pre-ℚ :
-  (x : pre-ℚ) → is-nonzero-ℤ (denominator-pre-ℚ x)
-is-nonzero-denominator-pre-ℚ x =
+is-nonzero-denominator-fractions-ℤ :
+  (x : fractions-ℤ) → is-nonzero-ℤ (denominator-fractions-ℤ x)
+is-nonzero-denominator-fractions-ℤ x =
   is-nonzero-is-positive-ℤ
-    ( denominator-pre-ℚ x)
-    ( is-positive-denominator-pre-ℚ x)
+    ( denominator-fractions-ℤ x)
+    ( is-positive-denominator-fractions-ℤ x)
 
-sim-pre-ℚ-Prop : pre-ℚ → pre-ℚ → UU-Prop lzero
-sim-pre-ℚ-Prop x y =
+sim-fractions-ℤ-Prop : fractions-ℤ → fractions-ℤ → UU-Prop lzero
+sim-fractions-ℤ-Prop x y =
   Id-Prop ℤ-Set
-    (mul-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ y))
-    (mul-ℤ (numerator-pre-ℚ y) (denominator-pre-ℚ x))
+    (mul-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ y))
+    (mul-ℤ (numerator-fractions-ℤ y) (denominator-fractions-ℤ x))
 
-sim-pre-ℚ : pre-ℚ → pre-ℚ → UU lzero
-sim-pre-ℚ x y = type-Prop (sim-pre-ℚ-Prop x y)
+sim-fractions-ℤ : fractions-ℤ → fractions-ℤ → UU lzero
+sim-fractions-ℤ x y = type-Prop (sim-fractions-ℤ-Prop x y)
 
-is-prop-sim-pre-ℚ : (x y : pre-ℚ) → is-prop (sim-pre-ℚ x y)
-is-prop-sim-pre-ℚ x y = is-prop-type-Prop (sim-pre-ℚ-Prop x y)
+is-prop-sim-fractions-ℤ : (x y : fractions-ℤ) → is-prop (sim-fractions-ℤ x y)
+is-prop-sim-fractions-ℤ x y = is-prop-type-Prop (sim-fractions-ℤ-Prop x y)
 
-refl-sim-pre-ℚ : (x : pre-ℚ) → sim-pre-ℚ x x
-refl-sim-pre-ℚ x = refl
+refl-sim-fractions-ℤ : (x : fractions-ℤ) → sim-fractions-ℤ x x
+refl-sim-fractions-ℤ x = refl
 
-symm-sim-pre-ℚ : {x y : pre-ℚ} → sim-pre-ℚ x y → sim-pre-ℚ y x
-symm-sim-pre-ℚ r = inv r
+symm-sim-fractions-ℤ : {x y : fractions-ℤ} → sim-fractions-ℤ x y → sim-fractions-ℤ y x
+symm-sim-fractions-ℤ r = inv r
 
-trans-sim-pre-ℚ :
-  {x y z : pre-ℚ} → sim-pre-ℚ x y → sim-pre-ℚ y z → sim-pre-ℚ x z
-trans-sim-pre-ℚ {x} {y} {z} r s =
+trans-sim-fractions-ℤ :
+  {x y z : fractions-ℤ} → sim-fractions-ℤ x y → sim-fractions-ℤ y z → sim-fractions-ℤ x z
+trans-sim-fractions-ℤ {x} {y} {z} r s =
   is-injective-mul-ℤ'
-    ( denominator-pre-ℚ y)
-    ( is-nonzero-denominator-pre-ℚ y)
+    ( denominator-fractions-ℤ y)
+    ( is-nonzero-denominator-fractions-ℤ y)
     ( ( associative-mul-ℤ
-        ( numerator-pre-ℚ x)
-        ( denominator-pre-ℚ z)
-        ( denominator-pre-ℚ y)) ∙
+        ( numerator-fractions-ℤ x)
+        ( denominator-fractions-ℤ z)
+        ( denominator-fractions-ℤ y)) ∙
       ( ( ap
-          ( mul-ℤ (numerator-pre-ℚ x))
+          ( mul-ℤ (numerator-fractions-ℤ x))
           ( commutative-mul-ℤ
-            ( denominator-pre-ℚ z)
-            ( denominator-pre-ℚ y))) ∙
+            ( denominator-fractions-ℤ z)
+            ( denominator-fractions-ℤ y))) ∙
         ( ( inv
             ( associative-mul-ℤ
-              ( numerator-pre-ℚ x)
-              ( denominator-pre-ℚ y)
-              ( denominator-pre-ℚ z))) ∙
-          ( ( ap ( mul-ℤ' (denominator-pre-ℚ z)) r) ∙
+              ( numerator-fractions-ℤ x)
+              ( denominator-fractions-ℤ y)
+              ( denominator-fractions-ℤ z))) ∙
+          ( ( ap ( mul-ℤ' (denominator-fractions-ℤ z)) r) ∙
             ( ( associative-mul-ℤ
-                ( numerator-pre-ℚ y)
-                ( denominator-pre-ℚ x)
-                ( denominator-pre-ℚ z)) ∙
+                ( numerator-fractions-ℤ y)
+                ( denominator-fractions-ℤ x)
+                ( denominator-fractions-ℤ z)) ∙
               ( ( ap
-                  ( mul-ℤ (numerator-pre-ℚ y))
+                  ( mul-ℤ (numerator-fractions-ℤ y))
                   ( commutative-mul-ℤ
-                    ( denominator-pre-ℚ x)
-                    ( denominator-pre-ℚ z))) ∙
+                    ( denominator-fractions-ℤ x)
+                    ( denominator-fractions-ℤ z))) ∙
                 ( ( inv
                     ( associative-mul-ℤ
-                      ( numerator-pre-ℚ y)
-                      ( denominator-pre-ℚ z)
-                      ( denominator-pre-ℚ x))) ∙
-                  ( ( ap (mul-ℤ' (denominator-pre-ℚ x)) s) ∙
+                      ( numerator-fractions-ℤ y)
+                      ( denominator-fractions-ℤ z)
+                      ( denominator-fractions-ℤ x))) ∙
+                  ( ( ap (mul-ℤ' (denominator-fractions-ℤ x)) s) ∙
                     ( ( associative-mul-ℤ
-                        ( numerator-pre-ℚ z)
-                        ( denominator-pre-ℚ y)
-                        ( denominator-pre-ℚ x)) ∙
+                        ( numerator-fractions-ℤ z)
+                        ( denominator-fractions-ℤ y)
+                        ( denominator-fractions-ℤ x)) ∙
                       ( ( ap
-                          ( mul-ℤ (numerator-pre-ℚ z))
+                          ( mul-ℤ (numerator-fractions-ℤ z))
                           ( commutative-mul-ℤ
-                            ( denominator-pre-ℚ y)
-                            ( denominator-pre-ℚ x))) ∙
+                            ( denominator-fractions-ℤ y)
+                            ( denominator-fractions-ℤ x))) ∙
                         ( inv
                           ( associative-mul-ℤ
-                            ( numerator-pre-ℚ z)
-                            ( denominator-pre-ℚ x)
-                            ( denominator-pre-ℚ y)))))))))))))
+                            ( numerator-fractions-ℤ z)
+                            ( denominator-fractions-ℤ x)
+                            ( denominator-fractions-ℤ y)))))))))))))
 ```

@@ -1,4 +1,6 @@
-# Finiteness of the type of connected components
+---
+title: Finiteness of the type of connected components
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
