@@ -23,7 +23,7 @@ open import ring-theory.rings using
   ( Ring; type-Ring; add-Ring; zero-Ring; left-unit-law-add-Ring;
     right-unit-law-add-Ring; neg-Ring; associative-add-Ring;
     left-inverse-law-add-Ring; right-inverse-law-add-Ring; mul-Ring;
-    associative-mul-Ring; unit-Ring; left-unit-law-mul-Ring;
+    associative-mul-Ring; one-Ring; left-unit-law-mul-Ring;
     commutative-add-Ring)
 
 open import univalent-combinatorics.standard-finite-types using (Fin)
@@ -157,7 +157,7 @@ module _
       ( associative-scalar-mul-vec-Ring r s v)
 
   unit-law-scalar-mul-vec-Ring :
-    {n : ℕ} (v : vec-Ring R n) → Id (scalar-mul-vec-Ring (unit-Ring R) v) v
+    {n : ℕ} (v : vec-Ring R n) → Id (scalar-mul-vec-Ring (one-Ring R) v) v
   unit-law-scalar-mul-vec-Ring empty-vec = refl
   unit-law-scalar-mul-vec-Ring (x ∷ v) =
     ap-binary _∷_ (left-unit-law-mul-Ring R x) (unit-law-scalar-mul-vec-Ring v)

@@ -1,4 +1,6 @@
-# Homomorphisms of commutative rings
+---
+title: Homomorphisms of commutative rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

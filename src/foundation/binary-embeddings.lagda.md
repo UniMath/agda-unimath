@@ -41,9 +41,9 @@ is-emb-fix-right-is-binary-equiv f H {b} =
   is-emb-is-equiv (is-equiv-fix-right f H)
 
 is-binary-emb-is-binary-equiv :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B → C} →
   is-binary-equiv f → is-binary-emb f
-is-binary-emb-is-binary-equiv f H {x} {x'} {y} {y'} =
+is-binary-emb-is-binary-equiv {f = f} H {x} {x'} {y} {y'} =
   pair
     ( λ q →
       is-equiv-comp

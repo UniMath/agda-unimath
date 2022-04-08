@@ -17,7 +17,6 @@ open import finite-group-theory.transpositions using
   ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
     left-computation-standard-transposition; map-transposition;
     is-fixed-point-standard-transposition; permutation-list-transpositions;
-    eq-concat-permutation-list-transpositions;
     right-computation-standard-transposition; transposition;
     transposition-conjugation-equiv;
     correct-transposition-conjugation-equiv-list)

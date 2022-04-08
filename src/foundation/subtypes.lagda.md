@@ -14,12 +14,11 @@ open import foundation-core.functions using (_∘_)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-Σ; map-Σ; is-equiv-map-Σ)
 open import foundation-core.identity-types using (tr)
+open import foundation-core.logical-equivalences using (_↔_; equiv-iff')
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-equiv-is-prop)
 open import foundation-core.truncation-levels using (𝕋; zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU)
-
-open import foundation-core.logical-equivalences using (_↔_; equiv-iff')
 ```
 
 ### Equivalences of subtypes

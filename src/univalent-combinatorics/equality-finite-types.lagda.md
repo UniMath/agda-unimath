@@ -22,7 +22,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
 
 open import univalent-combinatorics.counting using
   ( is-set-count; equiv-count)
-open import univalent-combinatorics.counting-decidable-subtypes using
+open import univalent-combinatorics.decidable-propositions using
   ( count-eq)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; is-set-Fin)

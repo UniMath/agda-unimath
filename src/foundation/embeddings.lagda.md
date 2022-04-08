@@ -13,7 +13,11 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-sec)
 open import foundation-core.homotopies using
   ( _~_; nat-htpy; inv-htpy; refl-htpy)
+open import foundation-core.propositional-maps using (is-emb-is-prop-map)
 open import foundation-core.sections using (sec)
+open import foundation-core.truncated-maps using
+  ( is-trunc-map-is-trunc-domain-codomain)
+open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.equivalences using
@@ -72,6 +76,16 @@ module _
     is-emb-htpy' : is-emb f → is-emb g
     is-emb-htpy' is-emb-f =
       is-emb-htpy g f (inv-htpy H) is-emb-f
+```
+
+### Any map between propositions is an embedding
+
+```
+is-emb-is-prop :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-prop A → is-prop B → is-emb f
+is-emb-is-prop H K =
+  is-emb-is-prop-map (is-trunc-map-is-trunc-domain-codomain neg-one-𝕋 H K)
 ```
 
 ### Embeddings are closed under composition

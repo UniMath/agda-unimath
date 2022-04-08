@@ -5,14 +5,12 @@
 
 module foundation.global-choice where
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso; empty-Prop)
-open import foundation.equivalences using (_≃_; map-equiv; map-inv-equiv)
-open import foundation.functions using (_∘_)
+open import foundation.equivalences using (map-equiv)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
+open import foundation.hilberts-epsilon-operators using
+  ( ε-operator-Hilbert)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop)
@@ -30,39 +28,22 @@ Global choice is the principle that there is a map from `type-trunc-Prop A` back
 
 ## Definition
 
-```agda
-global-choice : {l : Level} → UU l → UU l
-global-choice X = type-trunc-Prop X → X
+### The global choice principle
 
+```agda
 Global-Choice : (l : Level) → UU (lsuc l)
-Global-Choice l = (A : UU l) → global-choice A
-
-global-choice-equiv :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  global-choice X → global-choice Y
-global-choice-equiv e f =
-  (map-equiv e ∘ f) ∘ (functor-trunc-Prop (map-inv-equiv e))
-
-global-choice-equiv' :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
-  global-choice Y → global-choice X
-global-choice-equiv' e f =
-  (map-inv-equiv e ∘ f) ∘ (functor-trunc-Prop (map-equiv e))
+Global-Choice l = (A : UU l) → ε-operator-Hilbert A
 ```
 
-```agda
-elim-trunc-Prop-is-decidable :
-  {l : Level} {A : UU l} → is-decidable A → type-trunc-Prop A → A
-elim-trunc-Prop-is-decidable (inl a) x = a
-elim-trunc-Prop-is-decidable (inr f) x =
-  ex-falso (apply-universal-property-trunc-Prop x empty-Prop f)
-```
+## Properties
+
+### The global choice principle is inconsistent in `agda-unimath`
 
 ```agda
 abstract
-  no-global-section :
+  no-global-choice :
     {l : Level} → ¬ ((X : UU l) → type-trunc-Prop X → X)
-  no-global-section f =
+  no-global-choice f =
     no-section-type-UU-Fin-Level-two-ℕ
       ( λ X →
         f (pr1 X) (functor-trunc-Prop (λ e → map-equiv e zero-Fin) (pr2 X)))

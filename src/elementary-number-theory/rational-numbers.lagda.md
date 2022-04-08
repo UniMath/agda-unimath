@@ -7,7 +7,8 @@ module elementary-number-theory.rational-numbers where
 
 open import elementary-number-theory.divisibility-integers using (div-ℤ)
 open import elementary-number-theory.fractions using
-  ( pre-ℚ; numerator-pre-ℚ; denominator-pre-ℚ; is-positive-denominator-pre-ℚ)
+  ( fractions-ℤ; numerator-fractions-ℤ; denominator-fractions-ℤ;
+    is-positive-denominator-fractions-ℤ)
 open import elementary-number-theory.greatest-common-divisor-integers using
   ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ)
 open import elementary-number-theory.integers using
@@ -27,72 +28,72 @@ open import foundation.universe-levels using (UU; lzero)
 The type of rational numbers is the quotient of the type of fractions, by the equivalence relation given by `(n/m) ~ (n'/m') := Id (mul-ℤ n m') (mul-ℤ n' m)`.
 
 ```agda
-is-reduced-pre-ℚ : pre-ℚ → UU lzero
-is-reduced-pre-ℚ x =
-  is-relative-prime-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x)
+is-reduced-fractions-ℤ : fractions-ℤ → UU lzero
+is-reduced-fractions-ℤ x =
+  is-relative-prime-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)
 
 ℚ : UU lzero
-ℚ = Σ pre-ℚ is-reduced-pre-ℚ
+ℚ = Σ fractions-ℤ is-reduced-fractions-ℤ
 
-reduce-numerator-pre-ℚ :
-  (x : pre-ℚ) →
-  div-ℤ (gcd-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x)) (numerator-pre-ℚ x)
-reduce-numerator-pre-ℚ x =
-  pr1 (is-common-divisor-gcd-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x))
+reduce-numerator-fractions-ℤ :
+  (x : fractions-ℤ) →
+  div-ℤ (gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)) (numerator-fractions-ℤ x)
+reduce-numerator-fractions-ℤ x =
+  pr1 (is-common-divisor-gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x))
 
-int-reduce-numerator-pre-ℚ : pre-ℚ → ℤ
-int-reduce-numerator-pre-ℚ x = pr1 (reduce-numerator-pre-ℚ x)
+int-reduce-numerator-fractions-ℤ : fractions-ℤ → ℤ
+int-reduce-numerator-fractions-ℤ x = pr1 (reduce-numerator-fractions-ℤ x)
 
-eq-reduce-numerator-pre-ℚ :
-  (x : pre-ℚ) →
+eq-reduce-numerator-fractions-ℤ :
+  (x : fractions-ℤ) →
   Id ( mul-ℤ
-       ( int-reduce-numerator-pre-ℚ x)
-       ( gcd-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x)))
-     ( numerator-pre-ℚ x)
-eq-reduce-numerator-pre-ℚ x = pr2 (reduce-numerator-pre-ℚ x)
+       ( int-reduce-numerator-fractions-ℤ x)
+       ( gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)))
+     ( numerator-fractions-ℤ x)
+eq-reduce-numerator-fractions-ℤ x = pr2 (reduce-numerator-fractions-ℤ x)
 
-reduce-denominator-pre-ℚ :
-  (x : pre-ℚ) →
-  div-ℤ (gcd-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x)) (denominator-pre-ℚ x)
-reduce-denominator-pre-ℚ x =
-  pr2 (is-common-divisor-gcd-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x))
+reduce-denominator-fractions-ℤ :
+  (x : fractions-ℤ) →
+  div-ℤ (gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)) (denominator-fractions-ℤ x)
+reduce-denominator-fractions-ℤ x =
+  pr2 (is-common-divisor-gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x))
 
-int-reduce-denominator-pre-ℚ : pre-ℚ → ℤ
-int-reduce-denominator-pre-ℚ x =
-  pr1 (reduce-denominator-pre-ℚ x)
+int-reduce-denominator-fractions-ℤ : fractions-ℤ → ℤ
+int-reduce-denominator-fractions-ℤ x =
+  pr1 (reduce-denominator-fractions-ℤ x)
 
-eq-reduce-denominator-pre-ℚ :
-  (x : pre-ℚ) →
+eq-reduce-denominator-fractions-ℤ :
+  (x : fractions-ℤ) →
   Id ( mul-ℤ
-       ( int-reduce-denominator-pre-ℚ x)
-       ( gcd-ℤ (numerator-pre-ℚ x) (denominator-pre-ℚ x)))
-     ( denominator-pre-ℚ x)
-eq-reduce-denominator-pre-ℚ x =
-  pr2 (reduce-denominator-pre-ℚ x)
+       ( int-reduce-denominator-fractions-ℤ x)
+       ( gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)))
+     ( denominator-fractions-ℤ x)
+eq-reduce-denominator-fractions-ℤ x =
+  pr2 (reduce-denominator-fractions-ℤ x)
 
-is-positive-int-reduce-denominator-pre-ℚ :
-  (x : pre-ℚ) → is-positive-ℤ (int-reduce-denominator-pre-ℚ x)
-is-positive-int-reduce-denominator-pre-ℚ x =
+is-positive-int-reduce-denominator-fractions-ℤ :
+  (x : fractions-ℤ) → is-positive-ℤ (int-reduce-denominator-fractions-ℤ x)
+is-positive-int-reduce-denominator-fractions-ℤ x =
   is-positive-left-factor-mul-ℤ
     ( is-positive-eq-ℤ
-      ( inv (eq-reduce-denominator-pre-ℚ x))
-      ( is-positive-denominator-pre-ℚ x))
+      ( inv (eq-reduce-denominator-fractions-ℤ x))
+      ( is-positive-denominator-fractions-ℤ x))
     ( is-positive-gcd-is-positive-right-ℤ
-      ( numerator-pre-ℚ x)
-      ( denominator-pre-ℚ x)
-      ( is-positive-denominator-pre-ℚ x))
+      ( numerator-fractions-ℤ x)
+      ( denominator-fractions-ℤ x)
+      ( is-positive-denominator-fractions-ℤ x))
 
-reduce-pre-ℚ : pre-ℚ → pre-ℚ
-reduce-pre-ℚ x =
+reduce-fractions-ℤ : fractions-ℤ → fractions-ℤ
+reduce-fractions-ℤ x =
   pair
-    ( int-reduce-numerator-pre-ℚ x)
+    ( int-reduce-numerator-fractions-ℤ x)
     ( pair
-      ( int-reduce-denominator-pre-ℚ x)
-      ( is-positive-int-reduce-denominator-pre-ℚ x))
+      ( int-reduce-denominator-fractions-ℤ x)
+      ( is-positive-int-reduce-denominator-fractions-ℤ x))
 
 {-
-is-reduced-reduce-pre-ℚ :
-  (x : pre-ℚ) → is-reduced-pre-ℚ (reduce-pre-ℚ x)
-is-reduced-reduce-pre-ℚ x = {!!}
+is-reduced-reduce-fractions-ℤ :
+  (x : fractions-ℤ) → is-reduced-fractions-ℤ (reduce-fractions-ℤ x)
+is-reduced-reduce-fractions-ℤ x = {!!}
 -}
 ```

@@ -12,6 +12,7 @@ open import foundation.contractible-types using (center; is-contr)
 open import foundation.decidable-maps using (is-decidable-map)
 open import foundation.decidable-propositions using
   ( is-decidable-prop; is-prop-is-decidable-prop; decidable-Prop)
+open import foundation.decidable-subtypes using (decidable-subtype)
 open import foundation.decidable-types using
   ( is-prop-is-decidable; is-decidable; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -53,6 +54,10 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 A map is said to be a decidable embedding if it is an embedding and its fibers are decidable types.
 
+## Definitions
+
+### The condition on a map of being a decidable embedding
+
 ```agda
 is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
@@ -89,29 +94,9 @@ is-decidable-map-is-decidable-prop-map :
 is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
 ```
 
-## Properties
-
-### Being a decidably propositional map is a proposition
+### The type of decidable embeddings
 
 ```agda
-abstract
-  is-prop-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    is-prop (is-decidable-prop-map f)
-  is-prop-is-decidable-prop-map f =
-    is-prop-Π (λ y → is-prop-is-decidable-prop (fib f y))
-```
-
-```agda
-abstract
-  is-decidable-emb-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    is-decidable-prop-map f → is-decidable-emb f
-  pr1 (is-decidable-emb-is-decidable-prop-map f H) =
-    is-emb-is-prop-map (is-prop-map-is-decidable-prop-map H)
-  pr2 (is-decidable-emb-is-decidable-prop-map f H) =
-    is-decidable-map-is-decidable-prop-map H
-
 _↪d_ :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
 X ↪d Y = Σ (X → Y) is-decidable-emb
@@ -146,10 +131,60 @@ pr1 (emb-decidable-emb e) = map-decidable-emb e
 pr2 (emb-decidable-emb e) = is-emb-map-decidable-emb e
 ```
 
+## Properties
+
+### Being a decidably propositional map is a proposition
+
+```agda
+abstract
+  is-prop-is-decidable-prop-map :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
+    is-prop (is-decidable-prop-map f)
+  is-prop-is-decidable-prop-map f =
+    is-prop-Π (λ y → is-prop-is-decidable-prop (fib f y))
+```
+
+### Any map of which the fibers are decidable propositions is a decidable embedding
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y}
+  where
+  
+  abstract
+    is-decidable-emb-is-decidable-prop-map :
+      is-decidable-prop-map f → is-decidable-emb f
+    pr1 (is-decidable-emb-is-decidable-prop-map H) =
+      is-emb-is-prop-map (is-prop-map-is-decidable-prop-map H)
+    pr2 (is-decidable-emb-is-decidable-prop-map H) =
+      is-decidable-map-is-decidable-prop-map H
+
+  abstract
+    is-prop-map-is-decidable-emb : is-decidable-emb f → is-prop-map f
+    is-prop-map-is-decidable-emb H =
+      is-prop-map-is-emb (is-emb-is-decidable-emb H)
+
+  abstract
+    is-decidable-prop-map-is-decidable-emb :
+      is-decidable-emb f → is-decidable-prop-map f
+    pr1 (is-decidable-prop-map-is-decidable-emb H y) =
+      is-prop-map-is-decidable-emb H y
+    pr2 (is-decidable-prop-map-is-decidable-emb H y) = pr2 H y
+
+decidable-subtype-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+  (X ↪d Y) → (decidable-subtype (l1 ⊔ l2) Y)
+pr1 (decidable-subtype-decidable-emb f y) = fib (map-decidable-emb f) y
+pr2 (decidable-subtype-decidable-emb f y) =
+  is-decidable-prop-map-is-decidable-emb (pr2 f) y
+```
+
+### The type of all decidable embeddings into a type `A` is equivalent to the type of decidable subtypes of `A`
+
 ```agda
 equiv-Fib-decidable-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
-  Σ (UU (l1 ⊔ l)) (λ X → X ↪d A) ≃ (A → decidable-Prop (l1 ⊔ l))
+  Σ (UU (l1 ⊔ l)) (λ X → X ↪d A) ≃ (decidable-subtype (l1 ⊔ l) A)
 equiv-Fib-decidable-Prop l A =
   ( equiv-Fib-structure l is-decidable-prop A) ∘e
   ( equiv-tot
@@ -158,7 +193,11 @@ equiv-Fib-decidable-Prop l A =
         ( λ f →
           ( inv-distributive-Π-Σ) ∘e
           ( equiv-prod (equiv-is-prop-map-is-emb f) id-equiv))))
+```
 
+### Any equivalence is a decidable embedding
+
+```agda
 abstract
   is-decidable-emb-is-equiv :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
@@ -176,7 +215,11 @@ decidable-emb-id :
   {l1 : Level} {A : UU l1} → A ↪d A
 pr1 (decidable-emb-id {l1} {A}) = id
 pr2 (decidable-emb-id {l1} {A}) = is-decidable-emb-id
+```
 
+### Being a decidable embedding is a property
+
+```agda
 abstract
   is-prop-is-decidable-emb :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
@@ -189,6 +232,8 @@ abstract
           ( is-prop-Π
             ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
 ```
+
+### Decidable embeddings are closed under composition
 
 ```agda
 abstract
@@ -213,7 +258,11 @@ abstract
               ( is-decidable-map-is-decidable-emb H (pr1 u))))
       ( λ α → inr (λ t → α (pair (f (pr1 t)) (pr2 t))))
       ( pr2 K x)
+```
 
+### Decidable embeddings are closed under homotopies
+
+```agda
 abstract
   is-decidable-emb-htpy :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
@@ -224,7 +273,11 @@ abstract
     is-decidable-equiv
       ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
       ( is-decidable-map-is-decidable-emb K b)
+```
 
+### Characterizing equality in the type of decidable embeddings
+
+```agda
 htpy-decidable-emb :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) → UU (l1 ⊔ l2)
 htpy-decidable-emb f g = map-decidable-emb f ~ map-decidable-emb g
@@ -265,7 +318,11 @@ eq-htpy-decidable-emb :
   htpy-decidable-emb f g → Id f g
 eq-htpy-decidable-emb {f = f} {g} =
   map-inv-is-equiv (is-equiv-htpy-eq-decidable-emb f g)
+```
 
+### Precomposing decidable embeddings with equivalences
+
+```agda
 equiv-precomp-decidable-emb-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
   (C : UU l3) → (B ↪d C) ≃ (A ↪d C)
@@ -285,6 +342,8 @@ equiv-precomp-decidable-emb-equiv e C =
               ( is-decidable-emb-is-equiv (is-equiv-map-inv-equiv e))
               ( d))))
 ```
+
+### Any map out of the empty type is a decidable embedding
 
 ```agda
 abstract

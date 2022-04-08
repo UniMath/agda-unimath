@@ -22,17 +22,17 @@ open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 open import group-theory.semigroups using
   ( has-associative-mul; Semigroup; type-Semigroup; has-associative-mul-Set)
 
-open import univalent-combinatorics.dependent-product-finite-types using
+open import univalent-combinatorics.dependent-function-types using
   ( is-finite-Π)
 open import univalent-combinatorics.dependent-sum-finite-types using
   ( is-finite-Σ)
 open import univalent-combinatorics.equality-finite-types using
   ( is-finite-eq; has-decidable-equality-is-finite; is-set-is-finite)
-open import univalent-combinatorics.finite-function-types using
-  ( is-finite-function-type)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; is-finite; is-finite-type-UU-Fin-Level;
     is-finite-has-cardinality)
+open import univalent-combinatorics.function-types using
+  ( is-finite-function-type)
 open import univalent-combinatorics.pi-finite-types using
   ( is-π-finite; is-π-finite-Σ; is-π-finite-UU-Fin-Level; is-π-finite-is-finite;
     is-π-finite-equiv; number-of-connected-components;

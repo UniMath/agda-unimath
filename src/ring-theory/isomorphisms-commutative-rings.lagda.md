@@ -1,4 +1,6 @@
-# Isomorphisms of commutative rings
+---
+title: Isomorphisms of commutative rings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

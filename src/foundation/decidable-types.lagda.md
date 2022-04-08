@@ -15,6 +15,7 @@ open import foundation.empty-types using
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-equiv; map-equiv; inv-equiv)
 open import foundation.functions using (id; _∘_)
+open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
 open import foundation.negation using (¬; map-neg; is-prop-neg)
 open import foundation.retractions using (_retract-of_)
 open import foundation.propositions using
@@ -76,22 +77,6 @@ is-decidable-unit = inl star
 
 is-decidable-empty : is-decidable empty
 is-decidable-empty = inr id
-```
-
-### Being on the left or on the right in a coproduct is decidable
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
-  where
-  
-  is-decidable-is-left : (x : coprod X Y) → is-decidable (is-left x)
-  is-decidable-is-left (inl x) = is-decidable-unit
-  is-decidable-is-left (inr x) = is-decidable-empty
-
-  is-decidable-is-right : (x : coprod X Y) → is-decidable (is-right x)
-  is-decidable-is-right (inl x) = is-decidable-empty
-  is-decidable-is-right (inr x) = is-decidable-unit
 ```
 
 ## Properties
@@ -209,6 +194,16 @@ dn-is-decidable {P = P} f =
     ( map-neg (inl {A = P} {B = ¬ P}) f)
 ```
 
+### Decidable types have ε-operators
+
+```agda
+elim-trunc-Prop-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → ε-operator-Hilbert A
+elim-trunc-Prop-is-decidable (inl a) x = a
+elim-trunc-Prop-is-decidable (inr f) x =
+  ex-falso (apply-universal-property-trunc-Prop x empty-Prop f)
+```
+
 ### `is-decidable` is an idempotent operation
 
 ```agda
@@ -302,3 +297,4 @@ module _
   is-decidable-raise : is-decidable A → is-decidable (raise l A)
   is-decidable-raise (inl p) = inl (map-raise p)
   is-decidable-raise (inr np) = inr (λ p' → np (map-inv-raise p'))
+```
