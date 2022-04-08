@@ -416,6 +416,7 @@ open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
+open import group-theory.inverse-semigroups
 open import group-theory.invertible-elements-monoids
 open import group-theory.isomorphisms-abelian-groups
 open import group-theory.isomorphisms-group-actions
@@ -621,7 +622,6 @@ open import wild-algebra.morphisms-magmas
 open import wild-algebra.morphisms-wild-unital-magmas
 open import wild-algebra.universal-property-lists-wild-monoids
 open import wild-algebra.wild-groups
-open import wild-algebra.wild-inverse-semigroups
 open import wild-algebra.wild-loops
 open import wild-algebra.wild-monoids
 open import wild-algebra.wild-quasigroups
