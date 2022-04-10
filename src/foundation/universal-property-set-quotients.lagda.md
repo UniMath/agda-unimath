@@ -65,7 +65,8 @@ open import foundation.sets using
   ( UU-Set; type-Set; is-set; is-set-type-Set; type-hom-Set; Id-Prop;
     is-set-function-type)
 open import foundation.small-types using (is-small; is-small-Prop)
-open import foundation.subtypes using (eq-subtype; equiv-ap-pr1)
+open import foundation.subtypes using
+  ( eq-subtype; equiv-ap-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; dependent-universal-property-surj-is-surjective)
 open import foundation.univalence using (equiv-eq)
@@ -558,7 +559,7 @@ module _
           is-proof-irrelevant-is-prop
           ( is-prop-equiv
             ( equiv-tot
-              ( λ h → equiv-ap-pr1 (is-prop-reflects-Eq-Rel R X)))
+              ( λ h → equiv-ap-inclusion-subtype (reflects-Eq-Rel-Prop R X)))
             ( is-prop-map-is-emb
               ( is-epimorphism-is-surjective-Set (pr1 E) X)
               ( pr1 f)))

@@ -13,8 +13,11 @@ open import foundation.decidable-propositions using
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-unit; is-decidable-empty)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.propositions using (type-Prop; is-prop)
-open import foundation.subtypes using (subtype; type-subtype)
+open import foundation.subtypes using
+  ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
+    emb-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 ```
 
@@ -60,9 +63,22 @@ module _
 ### The underlying type of a decidable subtype
 
 ```agda
-type-decidable-subtype :
-  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) → UU (l1 ⊔ l2)
-type-decidable-subtype P = type-subtype (subtype-decidable-subtype P)
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+  
+  type-decidable-subtype : UU (l1 ⊔ l2)
+  type-decidable-subtype = type-subtype (subtype-decidable-subtype P)
+
+  inclusion-decidable-subtype : type-decidable-subtype → A
+  inclusion-decidable-subtype = inclusion-subtype (subtype-decidable-subtype P)
+
+  is-emb-inclusion-decidable-subtype : is-emb inclusion-decidable-subtype
+  is-emb-inclusion-decidable-subtype =
+    is-emb-inclusion-subtype (subtype-decidable-subtype P)
+
+  emb-decidable-subtype : type-decidable-subtype ↪ A
+  emb-decidable-subtype = emb-subtype (subtype-decidable-subtype P)
 ```
 
 ## Examples

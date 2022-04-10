@@ -16,13 +16,14 @@ open import foundation-core.propositions using
 open import foundation-core.sets using (is-set; UU-Set)
 open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation-core.subtypes using (is-subtype; subtype; is-emb-pr1)
+open import foundation-core.subtypes using
+  ( is-subtype; subtype; is-emb-inclusion-subtype)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-Prop; equiv-is-contr)
 open import foundation.truncated-types using
-  ( is-trunc; is-trunc-is-equiv; is-prop-is-trunc; is-trunc-equiv-is-trunc)
+  ( is-trunc; is-trunc-is-equiv; is-trunc-Prop; is-trunc-equiv-is-trunc)
 open import foundation.truncation-levels using
   ( 𝕋; neg-two-𝕋; succ-𝕋; neg-one-𝕋)
 open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
@@ -179,8 +180,8 @@ abstract
     is-trunc-is-equiv k
       ( Id (pr1 X) (pr1 Y))
       ( ap pr1)
-      ( is-emb-pr1
-        ( is-prop-is-trunc k) X Y)
+      ( is-emb-inclusion-subtype
+        ( is-trunc-Prop k) X Y)
       ( is-trunc-is-equiv k
         ( (pr1 X) ≃ (pr1 Y))
         ( equiv-eq)
