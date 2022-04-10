@@ -49,7 +49,8 @@ open import foundation.identity-types using
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
-open import foundation.subtypes using (is-emb-pr1; equiv-subtype-equiv)
+open import foundation.subtypes using
+  ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 ```
 
 ## Properties
@@ -378,7 +379,7 @@ module _
   abstract
     is-emb-map-equiv :
       is-emb (map-equiv {A = A} {B = B})
-    is-emb-map-equiv = is-emb-pr1 is-property-is-equiv
+    is-emb-map-equiv = is-emb-inclusion-subtype is-equiv-Prop
 ```
 
 ### Characterizing the identity type of equivalences

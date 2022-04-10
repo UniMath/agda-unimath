@@ -16,9 +16,9 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.propositions using
-  ( prod-Prop; is-prop; is-prop-all-elements-equal)
+  ( prod-Prop; is-prop; is-prop-all-elements-equal; UU-Prop)
 open import foundation.sets using (Id-Prop; is-set; UU-Set)
-open import foundation.subtypes using (eq-subtype; is-set-is-subtype)
+open import foundation.subtypes using (eq-subtype; is-set-type-subtype)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -156,6 +156,11 @@ module _
     (f : type-hom-Large-Precat C X Y) → is-prop (is-iso-Large-Precat C f)
   is-prop-is-iso-Large-Precat f =
     is-prop-all-elements-equal (all-elements-equal-is-iso-Large-Precat f)
+
+  is-iso-large-precat-Prop :
+    (f : type-hom-Large-Precat C X Y) → UU-Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
+  pr1 (is-iso-large-precat-Prop f) = is-iso-Large-Precat C f
+  pr2 (is-iso-large-precat-Prop f) = is-prop-is-iso-Large-Precat f
 ```
 
 ### The type of isomorphisms form a set
@@ -171,8 +176,8 @@ module _
 
   is-set-iso-Large-Precat : is-set (iso-Large-Precat C X Y)
   is-set-iso-Large-Precat =
-    is-set-is-subtype
-      ( is-prop-is-iso-Large-Precat C X Y)
+    is-set-type-subtype
+      ( is-iso-large-precat-Prop C X Y)
       ( is-set-type-hom-Large-Precat C X Y)
 
   iso-Large-Precat-Set : UU-Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)

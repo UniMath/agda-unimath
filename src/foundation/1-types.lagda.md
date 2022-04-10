@@ -12,7 +12,8 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_; is-equiv)
 open import foundation-core.identity-types using (Id)
 open import foundation-core.propositions using (is-prop; UU-Prop)
-open import foundation-core.subtypes using (is-subtype; is-trunc-is-subtype)
+open import foundation-core.subtypes using
+  ( subtype; is-subtype; is-trunc-type-subtype; type-subtype)
 open import foundation-core.truncation-levels using (one-𝕋; zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
@@ -108,12 +109,12 @@ pr2 (hom-1-Type A B) = is-1-type-type-hom-1-Type A B
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
   abstract
-    is-1-type-is-subtype : is-subtype P → is-1-type A → is-1-type (Σ A P)
-    is-1-type-is-subtype = is-trunc-is-subtype zero-𝕋
+    is-1-type-type-subtype : is-1-type A → is-1-type (type-subtype P)
+    is-1-type-type-subtype = is-trunc-type-subtype zero-𝕋 P
 ```
 
 ```agda

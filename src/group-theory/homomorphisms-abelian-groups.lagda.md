@@ -42,8 +42,8 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
   
-  preserves-add : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
-  preserves-add = preserves-mul-Semigroup (semigroup-Ab A) (semigroup-Ab B)
+  preserves-add-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
+  preserves-add-Ab = preserves-mul-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 
   hom-Ab : UU-Set (l1 ⊔ l2)
   hom-Ab = hom-Group (group-Ab A) (group-Ab B)
@@ -54,17 +54,22 @@ module _
   map-hom-Ab : type-hom-Ab → type-Ab A → type-Ab B
   map-hom-Ab = map-hom-Group (group-Ab A) (group-Ab B)
 
-  preserves-add-hom-Ab : (f : type-hom-Ab) → preserves-add (map-hom-Ab f)
+  preserves-add-hom-Ab : (f : type-hom-Ab) → preserves-add-Ab (map-hom-Ab f)
   preserves-add-hom-Ab f = preserves-mul-hom-Group (group-Ab A) (group-Ab B) f
 
-  preserves-zero-Ab :
-    (f : type-hom-Ab) → Id (map-hom-Ab f (zero-Ab A)) (zero-Ab B)
-  preserves-zero-Ab f = preserves-unit-hom-Group (group-Ab A) (group-Ab B) f
+  preserves-zero-Ab : (type-Ab A → type-Ab B) → UU l2
+  preserves-zero-Ab f = Id (f (zero-Ab A)) (zero-Ab B)
 
-  preserves-neg-Ab :
-    (f : type-hom-Ab) (x : type-Ab A) →
-    Id (map-hom-Ab f (neg-Ab A x)) (neg-Ab B (map-hom-Ab f x))
-  preserves-neg-Ab f =
+  preserves-zero-hom-Ab : (f : type-hom-Ab) → preserves-zero-Ab (map-hom-Ab f)
+  preserves-zero-hom-Ab f = preserves-unit-hom-Group (group-Ab A) (group-Ab B) f
+
+  preserves-negatives-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
+  preserves-negatives-Ab f =
+    (x : type-Ab A) → Id (f (neg-Ab A x)) (neg-Ab B (f x))
+
+  preserves-negatives-hom-Ab :
+    (f : type-hom-Ab) → preserves-negatives-Ab (map-hom-Ab f)
+  preserves-negatives-hom-Ab f =
     preserves-inverses-hom-Group (group-Ab A) (group-Ab B) f
 ```
 
@@ -106,7 +111,7 @@ module _
 ### The identity morphism of abelian groups
 
 ```agda
-preserves-add-id : {l : Level} (A : Ab l) → preserves-add A A id
+preserves-add-id : {l : Level} (A : Ab l) → preserves-add-Ab A A id
 preserves-add-id A = preserves-mul-id-Semigroup (semigroup-Ab A)
 
 id-hom-Ab : {l1 : Level} (A : Ab l1) → type-hom-Ab A A

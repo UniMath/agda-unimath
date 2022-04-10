@@ -28,7 +28,7 @@ open import foundation.propositions using
     all-elements-equal; is-prop-all-elements-equal; prod-Prop; Π-Prop; hom-Prop)
 open import foundation.sets using
   ( UU-Set; type-Set; is-set; is-set-type-Set; Σ-Set; Id-Prop; set-Prop)
-open import foundation.subtypes using (eq-subtype; emb-pr1)
+open import foundation.subtypes using (eq-subtype; emb-subtype)
 open import foundation.truncated-maps using (tot-emb)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( map-left-unit-law-Σ-is-contr)
@@ -497,7 +497,7 @@ module _
 
     emb-face-Finitely-Graded-Subposet :
       face-Finitely-Graded-Subposet ↪ face-Finitely-Graded-Poset X i
-    emb-face-Finitely-Graded-Subposet = emb-pr1 (λ x → is-prop-type-Prop (S x))
+    emb-face-Finitely-Graded-Subposet = emb-subtype S
 
     map-emb-face-Finitely-Graded-Subposet :
       face-Finitely-Graded-Subposet → face-Finitely-Graded-Poset X i
