@@ -12,13 +12,13 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 The `agda-unimath` library is a new Agda library for univalent mathematics. We warmly welcome any contributions. To chat with us about anything related to univalent mathematics or the library, please join the `#unimath` stream of the Agda community chat at
 
+[![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
+
 ## Statement of inclusion
 
 There are many reasons to contribute something to a library of formalized mathematics. Some do it just for fun, some do it for their research, some do it to learn something. Whatever your reason is, we welcome your contributions! To keep the experience of contributing something to our library enjoyable for everyone, we strive for an inclusive community of contributors. You can expect from us that we are kind and polite in discussions, that we use inclusive language and try to avoid cultural appropriation, and that we will take your code seriously regardless of your level of experience or position in the community. And if you think something can be improved, please point it out to us and we will listen. Homotopy type theory is difficult enough without all the barriers that many of us have to face, so we hope to bring some of those down a bit.
 
 Happy contributing!
-
-[![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
 
 ## Design of the library
 
