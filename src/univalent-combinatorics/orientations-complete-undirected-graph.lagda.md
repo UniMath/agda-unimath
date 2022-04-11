@@ -42,8 +42,7 @@ open import foundation.decidable-propositions using
     type-decidable-Prop; equiv-bool-decidable-Prop; prop-decidable-Prop)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
-    type-prop-decidable-subtype; is-prop-type-prop-decidable-subtype)
+    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
     dn-elim-is-decidable; is-decidable-Prop; is-prop-is-decidable)

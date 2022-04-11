@@ -403,8 +403,8 @@ module _
 
   abstract
     cases-eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
-      (type-decidable-Prop (pr1 t x)) →
-      (type-decidable-Prop (pr1 t y)) →
+      (type-decidable-Prop (pr1 Y x)) →
+      (type-decidable-Prop (pr1 Y y)) →
       is-decidable (Id (pr1 two-elements-transposition) x) →
       is-decidable (Id (pr1 (pr2 two-elements-transposition)) x) →
       is-decidable (Id (pr1 two-elements-transposition) y) →
@@ -481,8 +481,8 @@ module _
           ( λ p → nq (pr1 (pair-eq-Σ p))))
 
     eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
-      (type-decidable-Prop (pr1 t x)) →
-      (type-decidable-Prop (pr1 t y)) →
+      (type-decidable-Prop (pr1 Y x)) →
+      (type-decidable-Prop (pr1 Y y)) →
       coprod
         ( Id (pr1 two-elements-transposition) x × Id (pr1 (pr2 two-elements-transposition)) y)
         ( Id (pr1 two-elements-transposition) y × Id (pr1 (pr2 two-elements-transposition)) x)
