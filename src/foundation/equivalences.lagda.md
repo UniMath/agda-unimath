@@ -29,6 +29,8 @@ open import foundation-core.propositions using
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
+open import foundation-core.subtypes using
+  ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 open import foundation-core.truncated-types using
   ( Truncated-Type; type-Truncated-Type; is-trunc)
 open import foundation-core.truncation-levels using (𝕋)
@@ -49,8 +51,6 @@ open import foundation.identity-types using
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
-open import foundation.subtypes using
-  ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 ```
 
 ## Properties

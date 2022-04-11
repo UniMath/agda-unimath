@@ -107,6 +107,7 @@ open import foundation.monomorphisms public
 open import foundation.multisets public
 open import foundation.negation public
 open import foundation.non-contractible-types public
+open import foundation.pairs-of-distinct-elements public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public

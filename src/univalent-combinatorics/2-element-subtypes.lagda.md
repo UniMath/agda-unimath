@@ -22,13 +22,16 @@ open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot)
 open import foundation.identity-types using (Id; _∙_; inv)
+open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( unit-trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
   ( type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
-open import foundation.subtypes using (subtype; type-subtype)
+open import foundation.subtypes using
+  ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
+    is-injective-inclusion-subtype)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.truncated-maps using (is-emb-tot)
 open import foundation.type-arithmetic-coproduct-types using
@@ -74,6 +77,18 @@ module _
 
   type-2-Element-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Subtype = type-subtype subtype-2-Element-Subtype
+
+  inclusion-2-Element-Subtype : type-2-Element-Subtype → X
+  inclusion-2-Element-Subtype = inclusion-subtype subtype-2-Element-Subtype
+
+  is-emb-inclusion-2-Element-Subtype : is-emb inclusion-2-Element-Subtype
+  is-emb-inclusion-2-Element-Subtype =
+    is-emb-inclusion-subtype subtype-2-Element-Subtype
+
+  is-injective-inclusion-2-Element-Subtype :
+    is-injective inclusion-2-Element-Subtype
+  is-injective-inclusion-2-Element-Subtype =
+    is-injective-inclusion-subtype subtype-2-Element-Subtype
 
   has-two-elements-type-2-Element-Subtype :
     has-two-elements type-2-Element-Subtype
