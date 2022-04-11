@@ -70,7 +70,7 @@ open import foundation.equivalence-classes using
     type-class-large-set-quotient; class-large-set-quotient;
     related-eq-quotient; is-equiv-related-eq-quotient;
     transitive-type-class-large-set-quotient; eq-effective-quotient';
-    is-prop-type-class-large-set-quotient)
+    is-prop-type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable)
 open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; refl-Eq-Rel; symm-Eq-Rel; trans-Eq-Rel)
 open import foundation.equivalences using
@@ -574,36 +574,11 @@ module _
       (a : type-UU-Fin-Level X) →
       is-decidable (type-class-large-set-quotient same-orbits-permutation T a)
     is-decidable-type-class-large-set-quotient-same-orbits-permutation T a =
-      apply-universal-property-trunc-Prop
-        ( pr2 T)
-        ( is-decidable-Prop
-          ( class-large-set-quotient same-orbits-permutation T a))
-        ( λ (pair t P) →
-          cases-decidable-type-class-large-set-quotient T a t
-            ( eq-pair-Σ (inv P) (all-elements-equal-type-trunc-Prop _ _))
-            ( is-decidable-same-orbits-permutation t a))
-      where
-      cases-decidable-type-class-large-set-quotient :
-        (T : large-set-quotient same-orbits-permutation)
-        (a t : type-UU-Fin-Level X) →
-        Id T (quotient-map-large-set-quotient same-orbits-permutation t) →
-        is-decidable (type-Eq-Rel same-orbits-permutation t a) →
-        is-decidable (type-class-large-set-quotient same-orbits-permutation T a)
-      cases-decidable-type-class-large-set-quotient T a t p1 (inl p) =
-        inl
-          ( tr
-            ( λ x → type-class-large-set-quotient same-orbits-permutation x a)
-            ( inv p1)
-            ( p))
-      cases-decidable-type-class-large-set-quotient T a t p1 (inr np) =
-        inr
-          ( λ p →
-            np
-            ( tr
-              ( λ x →
-                type-class-large-set-quotient same-orbits-permutation x a)
-              ( p1)
-              ( p)))
+      is-decidable-type-class-large-set-quotient-is-decidable
+        ( same-orbits-permutation)
+        ( is-decidable-same-orbits-permutation)
+        ( T)
+        ( a)
 
   abstract
     has-finite-number-orbits-permutation :
