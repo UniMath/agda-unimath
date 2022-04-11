@@ -78,7 +78,7 @@ open import foundation.set-truncations using
     is-surjective-unit-trunc-Set)
 open import foundation.sets using
   ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; UU-Set; type-Set)
-open import foundation.subtypes using (is-emb-pr1)
+open import foundation.subtypes using (is-emb-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; is-equiv-is-emb-is-surjective; is-surjective-comp')
 open import foundation.truncated-types using (is-trunc)
@@ -718,8 +718,8 @@ module _
   is-emb-map-is-coprod-codomain : is-emb map-is-coprod-codomain
   is-emb-map-is-coprod-codomain =
     is-emb-coprod
-      ( is-emb-pr1 (λ b → is-prop-type-trunc-Prop))
-      ( is-emb-pr1 (λ b → is-prop-type-trunc-Prop))
+      ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
+      ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
       ( λ { (pair b1 u) (pair b2 v) →
           apply-universal-property-trunc-Prop u
             ( function-Prop _ empty-Prop)
@@ -840,8 +840,8 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
                 ( equiv-trunc-Set
                   ( equiv-ap-emb
                     ( pair pr1
-                      ( is-emb-pr1
-                        ( λ u → is-prop-type-trunc-Prop)))))
+                      ( is-emb-inclusion-subtype
+                        ( λ u → trunc-Prop _)))))
                 ( H (pr1 x) (pr1 y)))
             ( λ x → K (pr1 x)))
           ( has-finite-connected-components-Σ-is-path-connected

@@ -24,12 +24,15 @@ open import foundation.decidable-propositions using
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
     is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
-    type-prop-decidable-subtype; is-prop-type-prop-decidable-subtype)
+    is-in-decidable-subtype; is-prop-is-in-decidable-subtype;
+    inclusion-decidable-subtype; is-emb-inclusion-decidable-subtype;
+    is-injective-inclusion-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
     dn-elim-is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-inv-equiv; map-equiv;
     left-inverse-law-equiv)
@@ -37,6 +40,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
+open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (iff-equiv)
 open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.negation using (¬)
@@ -104,25 +108,41 @@ module _
     is-decidable-subtype-subtype-decidable-subtype
       decidable-subtype-2-Element-Decidable-Subtype
 
-  type-prop-2-Element-Decidable-Subtype : X → UU l2
-  type-prop-2-Element-Decidable-Subtype =
-    type-prop-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
+  is-in-2-Element-Decidable-Subtype : X → UU l2
+  is-in-2-Element-Decidable-Subtype =
+    is-in-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
 
-  is-prop-type-prop-2-Element-Decidable-Subtype :
-    (x : X) → is-prop (type-prop-2-Element-Decidable-Subtype x)
-  is-prop-type-prop-2-Element-Decidable-Subtype =
-    is-prop-type-prop-decidable-subtype
+  is-prop-is-in-2-Element-Decidable-Subtype :
+    (x : X) → is-prop (is-in-2-Element-Decidable-Subtype x)
+  is-prop-is-in-2-Element-Decidable-Subtype =
+    is-prop-is-in-decidable-subtype
       decidable-subtype-2-Element-Decidable-Subtype
 
-  eq-type-prop-2-Element-Decidable-Subtype :
-    {x : X} {y z : type-prop-2-Element-Decidable-Subtype x} → Id y z
-  eq-type-prop-2-Element-Decidable-Subtype {x} =
-    eq-is-prop (is-prop-type-prop-2-Element-Decidable-Subtype x)
+  eq-is-in-2-Element-Decidable-Subtype :
+    {x : X} {y z : is-in-2-Element-Decidable-Subtype x} → Id y z
+  eq-is-in-2-Element-Decidable-Subtype {x} =
+    eq-is-prop (is-prop-is-in-2-Element-Decidable-Subtype x)
       
   type-2-Element-Decidable-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Decidable-Subtype =
     type-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
 
+  inclusion-2-Element-Decidable-Subtype : type-2-Element-Decidable-Subtype → X
+  inclusion-2-Element-Decidable-Subtype =
+    inclusion-decidable-subtype decidable-subtype-2-Element-Decidable-Subtype
+
+  is-emb-inclusion-2-Element-Decidable-Subtype :
+    is-emb inclusion-2-Element-Decidable-Subtype
+  is-emb-inclusion-2-Element-Decidable-Subtype =
+    is-emb-inclusion-decidable-subtype
+      decidable-subtype-2-Element-Decidable-Subtype
+
+  is-injective-inclusion-2-Element-Decidable-Subtype :
+    is-injective inclusion-2-Element-Decidable-Subtype
+  is-injective-inclusion-2-Element-Decidable-Subtype =
+    is-injective-inclusion-decidable-subtype
+      decidable-subtype-2-Element-Decidable-Subtype
+      
   has-two-elements-type-2-Element-Decidable-Subtype :
     has-two-elements type-2-Element-Decidable-Subtype
   has-two-elements-type-2-Element-Decidable-Subtype = pr2 P
@@ -338,7 +358,7 @@ module _
     pr1 element-subtype-2-element-decidable-subtype-Fin
 
   in-subtype-element-2-element-decidable-subtype-Fin :
-    type-prop-2-Element-Decidable-Subtype P
+    is-in-2-Element-Decidable-Subtype P
       element-2-element-decidable-subtype-Fin
   in-subtype-element-2-element-decidable-subtype-Fin =
     pr2 element-subtype-2-element-decidable-subtype-Fin
@@ -355,7 +375,7 @@ module _
     pr1 other-element-subtype-2-element-decidable-subtype-Fin
 
   in-subtype-other-element-2-element-decidable-subtype-Fin :
-    type-prop-2-Element-Decidable-Subtype P
+    is-in-2-Element-Decidable-Subtype P
       other-element-2-element-decidable-subtype-Fin
   in-subtype-other-element-2-element-decidable-subtype-Fin =
     pr2 other-element-subtype-2-element-decidable-subtype-Fin
@@ -372,5 +392,4 @@ module _
         ( eq-subtype
           ( subtype-2-Element-Decidable-Subtype P)
           ( inv p))
-
 ```

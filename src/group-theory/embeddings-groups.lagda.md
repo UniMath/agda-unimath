@@ -13,7 +13,8 @@ open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group)
 open import group-theory.groups using (Group; type-Group)
 open import group-theory.subgroups using
-  ( Subgroup; group-Subgroup; hom-group-Subgroup; is-emb-incl-group-Subgroup)
+  ( Subgroup; group-Subgroup; inclusion-group-Subgroup;
+    is-emb-inclusion-group-Subgroup)
 ```
 
 ## Idea
@@ -60,7 +61,7 @@ emb-group-slice-Subgroup G P =
   pair
     ( group-Subgroup G P)
     ( pair
-      ( hom-group-Subgroup G P)
-      ( is-emb-incl-group-Subgroup G P))
+      ( inclusion-group-Subgroup G P)
+      ( is-emb-inclusion-group-Subgroup G P))
 ```
 

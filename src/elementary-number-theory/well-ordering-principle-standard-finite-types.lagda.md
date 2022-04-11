@@ -20,7 +20,7 @@ open import
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-prop-decidable-subtype; subtype-decidable-subtype;
+  ( decidable-subtype; is-in-decidable-subtype; subtype-decidable-subtype;
     is-decidable-subtype-subtype-decidable-subtype; type-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
@@ -46,7 +46,7 @@ open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
     prod-Prop; is-prop-all-elements-equal; type-Prop)
 open import foundation.subtypes using
-  ( subtype; eq-subtype; type-subtype; type-prop-subtype)
+  ( subtype; eq-subtype; type-subtype; is-in-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
 open import foundation.type-arithmetic-empty-type using
@@ -132,23 +132,23 @@ minimal-element-Fin {l} {k} P =
 abstract
   all-elements-equal-minimal-element-Fin :
     {l : Level} {k : ℕ} (P : subtype l (Fin k)) →
-    all-elements-equal (minimal-element-Fin (type-prop-subtype P))
+    all-elements-equal (minimal-element-Fin (is-in-subtype P))
   all-elements-equal-minimal-element-Fin P
     (pair x (pair p l)) (pair y (pair q m)) =
     eq-subtype
-      ( λ t → prod-Prop (P t) (is-lower-bound-fin-Prop (type-prop-subtype P) t))
+      ( λ t → prod-Prop (P t) (is-lower-bound-fin-Prop (is-in-subtype P) t))
       ( antisymmetric-leq-Fin (l y q) (m x p))
 
 abstract
   is-prop-minimal-element-Fin :
     {l : Level} {k : ℕ} (P : subtype l (Fin k)) →
-    is-prop (minimal-element-Fin (type-prop-subtype P))
+    is-prop (minimal-element-Fin (is-in-subtype P))
   is-prop-minimal-element-Fin P =
     is-prop-all-elements-equal (all-elements-equal-minimal-element-Fin P)
 
 minimal-element-Fin-Prop :
   {l : Level} {k : ℕ} (P : subtype l (Fin k)) → UU-Prop l
-pr1 (minimal-element-Fin-Prop P) = minimal-element-Fin (type-prop-subtype P)
+pr1 (minimal-element-Fin-Prop P) = minimal-element-Fin (is-in-subtype P)
 pr2 (minimal-element-Fin-Prop P) = is-prop-minimal-element-Fin P
 
 is-lower-bound-inl-Fin :
@@ -189,8 +189,8 @@ well-ordering-principle-Σ-Fin {l} {succ-ℕ k} {P} d (pair (inr star) p)
 
 well-ordering-principle-∃-Fin :
   {l : Level} {k : ℕ} (P : decidable-subtype l (Fin k)) →
-  ∃ (type-prop-decidable-subtype P) →
-  minimal-element-Fin (type-prop-decidable-subtype P)
+  ∃ (is-in-decidable-subtype P) →
+  minimal-element-Fin (is-in-decidable-subtype P)
 well-ordering-principle-∃-Fin P H =
   apply-universal-property-trunc-Prop H
     ( minimal-element-Fin-Prop (subtype-decidable-subtype P))
@@ -208,7 +208,7 @@ well-ordering-principle-∃-Fin P H =
   ex-falso (apply-universal-property-trunc-Prop t empty-Prop pr1)
 ε-operator-decidable-subtype-Fin {l} {succ-ℕ k} P t =
   map-Σ
-    ( type-prop-decidable-subtype P)
+    ( is-in-decidable-subtype P)
     ( mod-succ-ℕ k)
     ( λ x → id)
     ( ε-operator-total-Q
@@ -216,7 +216,7 @@ well-ordering-principle-∃-Fin P H =
         ( map-Σ
           ( type-Prop ∘ Q)
           ( nat-Fin)
-          ( λ x → tr (type-prop-decidable-subtype P) (inv (issec-nat-Fin x))))
+          ( λ x → tr (is-in-decidable-subtype P) (inv (issec-nat-Fin x))))
         ( t)))
   where
   Q : ℕ → UU-Prop l

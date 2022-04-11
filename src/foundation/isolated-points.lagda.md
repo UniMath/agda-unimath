@@ -34,7 +34,8 @@ open import foundation.propositions using
   ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop;
     is-prop-is-inhabited; is-prop-Π; eq-is-prop)
 open import foundation.sets using (is-set)
-open import foundation.subtypes using (eq-subtype; is-emb-pr1; equiv-ap-pr1)
+open import foundation.subtypes using
+  ( eq-subtype; is-emb-inclusion-subtype; equiv-ap-inclusion-subtype)
 open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-prod)
 open import foundation.unit-type using (unit; is-prop-unit; star)
@@ -201,19 +202,24 @@ is-prop-is-isolated a =
     ( λ H →
       is-prop-Π (λ x → is-prop-is-decidable (is-prop-eq-isolated-point a H x)))
 
+is-isolated-Prop :
+  {l1 : Level} {A : UU l1} (a : A) → UU-Prop l1
+pr1 (is-isolated-Prop a) = is-isolated a
+pr2 (is-isolated-Prop a) = is-prop-is-isolated a
+
 inclusion-isolated-point :
   {l1 : Level} (A : UU l1) → isolated-point A → A
 inclusion-isolated-point A = pr1
 
 is-emb-inclusion-isolated-point :
   {l1 : Level} (A : UU l1) → is-emb (inclusion-isolated-point A)
-is-emb-inclusion-isolated-point A = is-emb-pr1 is-prop-is-isolated
+is-emb-inclusion-isolated-point A = is-emb-inclusion-subtype is-isolated-Prop
 
 has-decidable-equality-isolated-point :
   {l1 : Level} (A : UU l1) → has-decidable-equality (isolated-point A)
 has-decidable-equality-isolated-point A (pair x dx) (pair y dy) =
   is-decidable-equiv
-    ( equiv-ap-pr1 is-prop-is-isolated)
+    ( equiv-ap-inclusion-subtype is-isolated-Prop)
     ( dx y)
 
 is-set-isolated-point :

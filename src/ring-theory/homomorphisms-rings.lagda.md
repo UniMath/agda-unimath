@@ -15,16 +15,17 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; ap; _∙_)
-open import foundation.propositions using (is-prop; is-prop-Π; is-prop-prod)
+open import foundation.propositions using
+  ( is-prop; is-prop-Π; is-prop-prod; UU-Prop)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (is-trunc-is-subtype)
+open import foundation.subtypes using (is-trunc-type-subtype)
 open import foundation.truncation-levels using (𝕋; neg-one-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.homomorphisms-abelian-groups using
-  ( type-hom-Ab; map-hom-Ab; preserves-add; preserves-add-hom-Ab;
+  ( type-hom-Ab; map-hom-Ab; preserves-add-Ab; preserves-add-hom-Ab;
     is-contr-total-htpy-hom-Ab; is-set-hom-Ab; id-hom-Ab; comp-hom-Ab;
     eq-htpy-hom-Ab)
 
@@ -96,6 +97,14 @@ is-prop-is-ring-homomorphism-hom-Ab R1 R2 f =
     ( is-prop-preserves-mul-hom-Ab R1 R2 f)
     ( is-prop-preserves-unit-hom-Ab R1 R2 f)
 
+is-ring-homomorphism-hom-ab-Prop :
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
+  (f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) → UU-Prop (l1 ⊔ l2)
+pr1 (is-ring-homomorphism-hom-ab-Prop R1 R2 f) =
+  is-ring-homomorphism-hom-Ab R1 R2 f
+pr2 (is-ring-homomorphism-hom-ab-Prop R1 R2 f) =
+  is-prop-is-ring-homomorphism-hom-Ab R1 R2 f
+
 type-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R : Ring l2) → UU (l1 ⊔ l2)
 type-hom-Ring R1 R2 =
@@ -117,7 +126,7 @@ map-hom-Ring R1 R2 f =
 preserves-add-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   (f : type-hom-Ring R1 R2) →
-  preserves-add (ab-Ring R1) (ab-Ring R2) (map-hom-Ring R1 R2 f)
+  preserves-add-Ab (ab-Ring R1) (ab-Ring R2) (map-hom-Ring R1 R2 f)
 preserves-add-hom-Ring R1 R2 f =
   preserves-add-hom-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f)
 
@@ -199,9 +208,9 @@ eq-htpy-hom-Ring R1 R2 f g =
 is-set-type-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → is-set (type-hom-Ring R1 R2)
 is-set-type-hom-Ring R1 R2 =
-  is-trunc-is-subtype
+  is-trunc-type-subtype
     ( neg-one-𝕋)
-    ( is-prop-is-ring-homomorphism-hom-Ab R1 R2)
+    ( is-ring-homomorphism-hom-ab-Prop R1 R2)
     ( is-set-hom-Ab (ab-Ring R1) (ab-Ring R2))
 
 hom-Ring :

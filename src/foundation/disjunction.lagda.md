@@ -7,6 +7,10 @@ module foundation.disjunction where
 
 open import foundation.conjunction using (conj-Prop)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.decidable-propositions using
+  (decidable-Prop; prop-decidable-Prop; type-decidable-Prop; is-decidable-type-decidable-Prop)
+open import foundation.decidable-types using
+  (is-decidable-coprod; is-decidable-trunc-Prop-is-merely-decidable)
 open import foundation.dependent-pair-types using (pr1; pr2; pair)
 open import foundation.equivalences using (is-equiv)
 open import foundation.functions using (_∘_)
@@ -38,6 +42,19 @@ abstract
     {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
     is-prop (type-disj-Prop P Q)
   is-prop-type-disj-Prop P Q = is-prop-type-Prop (disj-Prop P Q)
+
+disj-decidable-Prop : 
+  {l1 l2 : Level} → decidable-Prop l1 → decidable-Prop l2 → decidable-Prop (l1 ⊔ l2)
+pr1 (disj-decidable-Prop P Q) = type-disj-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
+pr1 (pr2 (disj-decidable-Prop P Q)) =
+  is-prop-type-disj-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
+pr2 (pr2 (disj-decidable-Prop P Q)) =
+  is-decidable-trunc-Prop-is-merely-decidable
+    ( coprod (type-decidable-Prop P) (type-decidable-Prop Q))
+    ( unit-trunc-Prop
+      ( is-decidable-coprod
+        ( is-decidable-type-decidable-Prop P)
+        ( is-decidable-type-decidable-Prop Q)))
 ```
 
 ## Properties

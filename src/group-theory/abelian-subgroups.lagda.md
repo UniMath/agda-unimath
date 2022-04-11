@@ -16,23 +16,29 @@ open import group-theory.abelian-groups using
   ( Ab; group-Ab; type-Ab; commutative-add-Ab)
 open import group-theory.embeddings-groups using
   ( emb-Group; emb-Group-Slice; emb-group-slice-Subgroup)
+open import group-theory.groups using (Group)
 open import group-theory.homomorphisms-abelian-groups using
-  ( preserves-add; type-hom-Ab)
+  ( preserves-add-Ab; type-hom-Ab; preserves-zero-Ab; preserves-negatives-Ab)
+open import group-theory.semigroups using (Semigroup)
 open import group-theory.subgroups using
   ( subset-Group; is-set-subset-Group; contains-unit-subset-Group;
-    is-prop-contains-unit-subset-Group; closed-under-mul-subset-Group;
-    is-prop-closed-under-mul-subset-Group; closed-under-inv-subset-Group;
-    is-prop-closed-under-inv-subset-Group; is-subgroup-Group;
-    is-prop-is-subgroup-Group; Subgroup; subset-Subgroup;
-    is-emb-subset-Subgroup; type-subset-Subgroup; is-prop-type-subset-Subgroup;
-    is-subgroup-Subgroup; contains-unit-Subgroup; closed-under-mul-Subgroup;
-    closed-under-inv-Subgroup; type-group-Subgroup; incl-group-Subgroup;
-    is-emb-incl-group-Subgroup; eq-subgroup-eq-group; set-group-Subgroup;
+    is-prop-contains-unit-subset-Group; is-closed-under-mul-subset-Group;
+    is-prop-is-closed-under-mul-subset-Group; is-closed-under-inv-subset-Group;
+    is-prop-is-closed-under-inv-subset-Group; is-subgroup-subset-Group;
+    is-prop-is-subgroup-subset-Group; Subgroup; subset-Subgroup;
+    is-emb-subset-Subgroup; type-predicate-Subgroup;
+    is-prop-type-predicate-Subgroup;
+    is-subgroup-Subgroup; contains-unit-Subgroup; is-closed-under-mul-Subgroup;
+    is-closed-under-inv-Subgroup; type-group-Subgroup;
+    map-inclusion-group-Subgroup;
+    is-emb-inclusion-group-Subgroup; eq-subgroup-eq-group; set-group-Subgroup;
     unit-group-Subgroup; mul-group-Subgroup; inv-group-Subgroup;
     associative-mul-group-Subgroup; left-unit-law-group-Subgroup;
     right-unit-law-group-Subgroup; left-inverse-law-group-Subgroup;
     right-inverse-law-group-Subgroup; group-Subgroup;
-    preserves-mul-incl-group-Subgroup; hom-group-Subgroup)
+    preserves-mul-inclusion-group-Subgroup; inclusion-group-Subgroup;
+    semigroup-Subgroup; preserves-unit-inclusion-group-Subgroup;
+    preserves-inverses-inclusion-group-Subgroup)
 ```
 
 ## Definitions
@@ -52,46 +58,40 @@ is-set-subset-Ab l A = is-set-subset-Group l (group-Ab A)
 ### Subgroups of abelian groups
 
 ```agda
-contains-zero-subset-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) → UU l2
-contains-zero-subset-Ab A = contains-unit-subset-Group (group-Ab A)
-
-is-prop-contains-zero-subset-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) →
-  is-prop (contains-zero-subset-Ab A P)
-is-prop-contains-zero-subset-Ab A =
-  is-prop-contains-unit-subset-Group (group-Ab A)
-
-closed-under-add-subset-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) → UU (l1 ⊔ l2)
-closed-under-add-subset-Ab A =
-  closed-under-mul-subset-Group (group-Ab A)
-
-is-prop-closed-under-add-subset-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) →
-  is-prop (closed-under-add-subset-Ab A P)
-is-prop-closed-under-add-subset-Ab A =
-  is-prop-closed-under-mul-subset-Group (group-Ab A)
-
-closed-under-neg-subset-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) → UU (l1 ⊔ l2)
-closed-under-neg-subset-Ab A =
-  closed-under-inv-subset-Group (group-Ab A)
-
-is-prop-closed-under-neg-subset-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) →
-  is-prop (closed-under-neg-subset-Ab A P)
-is-prop-closed-under-neg-subset-Ab A =
-  is-prop-closed-under-inv-subset-Group (group-Ab A)
+module _
+  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A)
+  where
   
-is-subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) → UU (l1 ⊔ l2)
-is-subgroup-Ab A = is-subgroup-Group (group-Ab A)
+  contains-zero-subset-Ab : UU l2
+  contains-zero-subset-Ab = contains-unit-subset-Group (group-Ab A) P
 
-is-prop-is-subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : subset-Ab l2 A) →
-  is-prop (is-subgroup-Ab A P)
-is-prop-is-subgroup-Ab A = is-prop-is-subgroup-Group (group-Ab A)
+  is-prop-contains-zero-subset-Ab : is-prop contains-zero-subset-Ab
+  is-prop-contains-zero-subset-Ab =
+    is-prop-contains-unit-subset-Group (group-Ab A) P
+
+  is-closed-under-add-subset-Ab : UU (l1 ⊔ l2)
+  is-closed-under-add-subset-Ab =
+    is-closed-under-mul-subset-Group (group-Ab A) P
+
+  is-prop-is-closed-under-add-subset-Ab :
+    is-prop is-closed-under-add-subset-Ab
+  is-prop-is-closed-under-add-subset-Ab =
+    is-prop-is-closed-under-mul-subset-Group (group-Ab A) P
+
+  is-closed-under-neg-subset-Ab : UU (l1 ⊔ l2)
+  is-closed-under-neg-subset-Ab =
+    is-closed-under-inv-subset-Group (group-Ab A) P
+
+  is-prop-closed-under-neg-subset-Ab :
+    is-prop is-closed-under-neg-subset-Ab
+  is-prop-closed-under-neg-subset-Ab =
+    is-prop-is-closed-under-inv-subset-Group (group-Ab A) P
+  
+  is-subgroup-Ab : UU (l1 ⊔ l2)
+  is-subgroup-Ab = is-subgroup-subset-Group (group-Ab A) P
+
+  is-prop-is-subgroup-Ab : is-prop is-subgroup-Ab
+  is-prop-is-subgroup-Ab = is-prop-is-subgroup-subset-Group (group-Ab A) P
 ```
 
 ### The type of all subgroups of an abelian group
@@ -101,154 +101,153 @@ Subgroup-Ab :
   (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
 Subgroup-Ab l A = Subgroup l (group-Ab A)
 
-subset-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) →
-  ( Subgroup-Ab l2 A) → ( subset-Ab l2 A)
-subset-Subgroup-Ab A = subset-Subgroup (group-Ab A)
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+  
+  subset-Subgroup-Ab : subset-Ab l2 A
+  subset-Subgroup-Ab = subset-Subgroup (group-Ab A) B
+
+  type-subset-Subgroup-Ab : type-Ab A → UU l2
+  type-subset-Subgroup-Ab = type-predicate-Subgroup (group-Ab A) B
+
+  is-prop-type-subset-Subgroup-Ab :
+    (x : type-Ab A) → is-prop (type-subset-Subgroup-Ab x)
+  is-prop-type-subset-Subgroup-Ab =
+    is-prop-type-predicate-Subgroup (group-Ab A) B
+
+  is-subgroup-Subgroup-Ab :
+    is-subgroup-Ab A subset-Subgroup-Ab
+  is-subgroup-Subgroup-Ab = is-subgroup-Subgroup (group-Ab A) B
+
+  contains-zero-Subgroup-Ab :
+    contains-zero-subset-Ab A subset-Subgroup-Ab
+  contains-zero-Subgroup-Ab = contains-unit-Subgroup (group-Ab A) B
+
+  is-closed-under-add-Subgroup-Ab :
+    is-closed-under-add-subset-Ab A subset-Subgroup-Ab
+  is-closed-under-add-Subgroup-Ab = is-closed-under-mul-Subgroup (group-Ab A) B
+
+  is-closed-under-neg-Subgroup-Ab :
+    is-closed-under-neg-subset-Ab A subset-Subgroup-Ab
+  is-closed-under-neg-Subgroup-Ab = is-closed-under-inv-Subgroup (group-Ab A) B
 
 is-emb-subset-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) → is-emb (subset-Subgroup-Ab {l2 = l2} A)
 is-emb-subset-Subgroup-Ab A = is-emb-subset-Subgroup (group-Ab A)
-
-type-subset-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  (type-Ab A → UU l2)
-type-subset-Subgroup-Ab A = type-subset-Subgroup (group-Ab A)
-
-is-prop-type-subset-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  (x : type-Ab A) → is-prop (type-subset-Subgroup-Ab A P x)
-is-prop-type-subset-Subgroup-Ab A =
-  is-prop-type-subset-Subgroup (group-Ab A)
-
-is-subgroup-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  is-subgroup-Ab A (subset-Subgroup-Ab A P)
-is-subgroup-Subgroup-Ab A = is-subgroup-Subgroup (group-Ab A)
-
-contains-zero-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  contains-zero-subset-Ab A (subset-Subgroup-Ab A P)
-contains-zero-Subgroup-Ab A = contains-unit-Subgroup (group-Ab A)
-
-closed-under-add-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  closed-under-add-subset-Ab A (subset-Subgroup-Ab A P)
-closed-under-add-Subgroup-Ab A = closed-under-mul-Subgroup (group-Ab A)
-
-closed-under-neg-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  closed-under-neg-subset-Ab A (subset-Subgroup-Ab A P)
-closed-under-neg-Subgroup-Ab A = closed-under-inv-Subgroup (group-Ab A)
 ```
 
 ### The underlying abelian group of a subgroup of an abelian group
 
 ```agda
-type-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) → UU (l1 ⊔ l2)
-type-ab-Subgroup-Ab A =  type-group-Subgroup (group-Ab A)
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+  
+  type-ab-Subgroup-Ab : UU (l1 ⊔ l2)
+  type-ab-Subgroup-Ab = type-group-Subgroup (group-Ab A) B
 
-incl-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  type-ab-Subgroup-Ab A P → type-Ab A
-incl-ab-Subgroup-Ab A = incl-group-Subgroup (group-Ab A)
+  map-inclusion-ab-Subgroup-Ab : type-ab-Subgroup-Ab → type-Ab A
+  map-inclusion-ab-Subgroup-Ab = map-inclusion-group-Subgroup (group-Ab A) B
 
-is-emb-incl-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  is-emb (incl-ab-Subgroup-Ab A P)
-is-emb-incl-ab-Subgroup-Ab A = is-emb-incl-group-Subgroup (group-Ab A)
+  is-emb-incl-ab-Subgroup-Ab : is-emb map-inclusion-ab-Subgroup-Ab
+  is-emb-incl-ab-Subgroup-Ab = is-emb-inclusion-group-Subgroup (group-Ab A) B
 
-eq-subgroup-ab-eq-ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  {x y : type-ab-Subgroup-Ab A P} →
-  Id (incl-ab-Subgroup-Ab A P x) (incl-ab-Subgroup-Ab A P y) → Id x y
-eq-subgroup-ab-eq-ab A =
-  eq-subgroup-eq-group (group-Ab A)
+  eq-subgroup-ab-eq-ab :
+    {x y : type-ab-Subgroup-Ab} →
+    Id (map-inclusion-ab-Subgroup-Ab x) (map-inclusion-ab-Subgroup-Ab y) →
+    Id x y
+  eq-subgroup-ab-eq-ab = eq-subgroup-eq-group (group-Ab A) B
 
-set-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) → Subgroup-Ab l2 A → UU-Set (l1 ⊔ l2)
-set-ab-Subgroup-Ab A = set-group-Subgroup (group-Ab A)
+  set-ab-Subgroup-Ab : UU-Set (l1 ⊔ l2)
+  set-ab-Subgroup-Ab = set-group-Subgroup (group-Ab A) B
 
-zero-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) → type-ab-Subgroup-Ab A P
-zero-ab-Subgroup-Ab A = unit-group-Subgroup (group-Ab A)
+  zero-ab-Subgroup-Ab : type-ab-Subgroup-Ab
+  zero-ab-Subgroup-Ab = unit-group-Subgroup (group-Ab A) B
 
-add-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x y : type-ab-Subgroup-Ab A P) → type-ab-Subgroup-Ab A P
-add-ab-Subgroup-Ab A = mul-group-Subgroup (group-Ab A)
+  add-ab-Subgroup-Ab : (x y : type-ab-Subgroup-Ab) → type-ab-Subgroup-Ab
+  add-ab-Subgroup-Ab = mul-group-Subgroup (group-Ab A) B
 
-neg-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  type-ab-Subgroup-Ab A P → type-ab-Subgroup-Ab A P
-neg-ab-Subgroup-Ab A = inv-group-Subgroup (group-Ab A)
+  neg-ab-Subgroup-Ab : type-ab-Subgroup-Ab → type-ab-Subgroup-Ab
+  neg-ab-Subgroup-Ab = inv-group-Subgroup (group-Ab A) B
 
-is-associative-add-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x y z : type-ab-Subgroup-Ab A P) →
-  Id (add-ab-Subgroup-Ab A P (add-ab-Subgroup-Ab A P x y) z)
-     (add-ab-Subgroup-Ab A P x (add-ab-Subgroup-Ab A P y z))
-is-associative-add-ab-Subgroup-Ab A =
-  associative-mul-group-Subgroup (group-Ab A)
+  associative-add-ab-Subgroup-Ab :
+    ( x y z : type-ab-Subgroup-Ab) →
+    Id (add-ab-Subgroup-Ab (add-ab-Subgroup-Ab x y) z)
+       (add-ab-Subgroup-Ab x (add-ab-Subgroup-Ab y z))
+  associative-add-ab-Subgroup-Ab =
+    associative-mul-group-Subgroup (group-Ab A) B
 
-left-zero-law-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x : type-ab-Subgroup-Ab A P) →
-  Id (add-ab-Subgroup-Ab A P (zero-ab-Subgroup-Ab A P) x) x
-left-zero-law-ab-Subgroup-Ab A =
-  left-unit-law-group-Subgroup (group-Ab A)
+  left-zero-law-ab-Subgroup-Ab :
+    (x : type-ab-Subgroup-Ab) →
+    Id (add-ab-Subgroup-Ab zero-ab-Subgroup-Ab x) x
+  left-zero-law-ab-Subgroup-Ab =
+    left-unit-law-group-Subgroup (group-Ab A) B
 
-right-zero-law-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x : type-ab-Subgroup-Ab A P) →
-  Id (add-ab-Subgroup-Ab A P x (zero-ab-Subgroup-Ab A P)) x
-right-zero-law-ab-Subgroup-Ab A =
-  right-unit-law-group-Subgroup (group-Ab A)
+  right-zero-law-ab-Subgroup-Ab :
+    (x : type-ab-Subgroup-Ab) →
+    Id (add-ab-Subgroup-Ab x zero-ab-Subgroup-Ab) x
+  right-zero-law-ab-Subgroup-Ab =
+    right-unit-law-group-Subgroup (group-Ab A) B
 
-left-neg-law-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x : type-ab-Subgroup-Ab A P) →
-  Id ( add-ab-Subgroup-Ab A P (neg-ab-Subgroup-Ab A P x) x)
-     ( zero-ab-Subgroup-Ab A P)
-left-neg-law-ab-Subgroup-Ab A =
-  left-inverse-law-group-Subgroup (group-Ab A)
+  left-neg-law-ab-Subgroup-Ab :
+    (x : type-ab-Subgroup-Ab) →
+    Id ( add-ab-Subgroup-Ab (neg-ab-Subgroup-Ab x) x)
+       ( zero-ab-Subgroup-Ab)
+  left-neg-law-ab-Subgroup-Ab =
+    left-inverse-law-group-Subgroup (group-Ab A) B
 
-right-neg-law-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x : type-ab-Subgroup-Ab A P) →
-  Id ( add-ab-Subgroup-Ab A P x (neg-ab-Subgroup-Ab A P x))
-     ( zero-ab-Subgroup-Ab A P)
-right-neg-law-ab-Subgroup-Ab A = right-inverse-law-group-Subgroup (group-Ab A)
+  right-neg-law-ab-Subgroup-Ab :
+    (x : type-ab-Subgroup-Ab) →
+    Id ( add-ab-Subgroup-Ab x (neg-ab-Subgroup-Ab x))
+       ( zero-ab-Subgroup-Ab)
+  right-neg-law-ab-Subgroup-Ab = right-inverse-law-group-Subgroup (group-Ab A) B
 
-is-commutative-add-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  ( x y : type-ab-Subgroup-Ab A P) →
-  Id ( add-ab-Subgroup-Ab A P x y) (add-ab-Subgroup-Ab A P y x)
-is-commutative-add-ab-Subgroup-Ab A P (pair x p) (pair y q) =
-  eq-subgroup-ab-eq-ab A P (commutative-add-Ab A x y)
+  commutative-add-ab-Subgroup-Ab :
+    ( x y : type-ab-Subgroup-Ab) →
+    Id ( add-ab-Subgroup-Ab x y) (add-ab-Subgroup-Ab y x)
+  commutative-add-ab-Subgroup-Ab x y =
+    eq-subgroup-ab-eq-ab (commutative-add-Ab A (pr1 x) (pr1 y))
 
-ab-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) → Subgroup-Ab l2 A → Ab (l1 ⊔ l2)
-ab-Subgroup-Ab A P =
-  pair
-    (group-Subgroup (group-Ab A) P) (is-commutative-add-ab-Subgroup-Ab A P)
+  semigroup-Subgroup-Ab : Semigroup (l1 ⊔ l2)
+  semigroup-Subgroup-Ab = semigroup-Subgroup (group-Ab A) B
+
+  group-Subgroup-Ab : Group (l1 ⊔ l2)
+  group-Subgroup-Ab = group-Subgroup (group-Ab A) B
+
+  ab-Subgroup-Ab : Ab (l1 ⊔ l2)
+  pr1 ab-Subgroup-Ab = group-Subgroup-Ab
+  pr2 ab-Subgroup-Ab = commutative-add-ab-Subgroup-Ab
 ```
 
 ### The inclusion of the underlying group of a subgroup into the ambient abelian group
 
 
 ```agda
-preserves-add-incl-ab-Subgroup-Ab :
-  { l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  preserves-add (ab-Subgroup-Ab A P) A (incl-ab-Subgroup-Ab A P)
-preserves-add-incl-ab-Subgroup-Ab A =
-  preserves-mul-incl-group-Subgroup (group-Ab A)
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
+  where
+  
+  preserves-add-inclusion-ab-Subgroup-Ab :
+    preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
+  preserves-add-inclusion-ab-Subgroup-Ab =
+    preserves-mul-inclusion-group-Subgroup (group-Ab A) B
 
-hom-ab-Subgroup-Ab :
-  { l1 l2 : Level} (A : Ab l1) (P : Subgroup-Ab l2 A) →
-  type-hom-Ab (ab-Subgroup-Ab A P) A
-hom-ab-Subgroup-Ab A = hom-group-Subgroup (group-Ab A)
+  preserves-zero-inclusion-ab-Subgroup-Ab :
+    preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
+  preserves-zero-inclusion-ab-Subgroup-Ab =
+    preserves-unit-inclusion-group-Subgroup (group-Ab A) B
+
+  preserves-negatives-inclusion-ab-Subgroup-Ab :
+    preserves-negatives-Ab
+      ( ab-Subgroup-Ab A B)
+      ( A)
+      ( map-inclusion-ab-Subgroup-Ab A B)
+  preserves-negatives-inclusion-ab-Subgroup-Ab =
+    preserves-inverses-inclusion-group-Subgroup (group-Ab A) B
+
+  inclusion-ab-Subgroup-Ab : type-hom-Ab (ab-Subgroup-Ab A B) A
+  inclusion-ab-Subgroup-Ab = inclusion-group-Subgroup (group-Ab A) B
 ```
 
 ### The type of all abelian groups equipped with an embedding into the ambient abelian group

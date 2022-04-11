@@ -17,7 +17,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-equiv; _∘e_)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.identity-types using (Id)
-open import foundation.subtypes using (equiv-ap-pr1)
+open import foundation.subtypes using (equiv-ap-inclusion-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.category-of-semigroups using
@@ -25,7 +25,7 @@ open import group-theory.category-of-semigroups using
 open import group-theory.equivalences-semigroups using
   ( equiv-Semigroup)
 open import group-theory.groups using
-  ( Group; semigroup-Group; is-prop-is-group)
+  ( Group; semigroup-Group; is-group-Prop)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group)
 open import group-theory.isomorphisms-semigroups using
@@ -98,7 +98,7 @@ module _
       ( extensionality-Semigroup
         ( semigroup-Group G)
         ( semigroup-Group H)) ∘e
-      ( equiv-ap-pr1 is-prop-is-group {s = G} {t = H})
+      ( equiv-ap-inclusion-subtype is-group-Prop {s = G} {t = H})
 
   abstract
     is-contr-total-iso-Group : is-contr (Σ (Group l) (type-iso-Group G))

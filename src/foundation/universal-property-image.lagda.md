@@ -38,7 +38,8 @@ open import foundation.slice using
     htpy-hom-slice; comp-hom-slice; extensionality-hom-slice;
     is-equiv-hom-slice-emb; equiv-slice; hom-equiv-slice;
     equiv-hom-slice-fiberwise-hom; equiv-fiberwise-hom-hom-slice)
-open import foundation.subtypes using (is-emb-pr1; eq-subtype)
+open import foundation.subtypes using
+  ( type-subtype; is-emb-inclusion-subtype; eq-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; equiv-dependent-universal-property-surj-is-surjective)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -256,12 +257,14 @@ abstract
       ( trunc-Prop (fib (map-hom-slice f (map-emb i) q) b))
       ( γ)
     where
-    g : Σ B (λ b → type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) b)) → X
+    g : type-subtype
+          ( λ b → trunc-Prop (fib (map-hom-slice f (map-emb i) q) b)) →
+        X
     g = map-emb i ∘ pr1
     is-emb-g : is-emb g
     is-emb-g = is-emb-comp' (map-emb i) pr1
       ( is-emb-map-emb i)
-      ( is-emb-pr1 (λ x → is-prop-type-trunc-Prop))
+      ( is-emb-inclusion-subtype (λ x → trunc-Prop _))
     α : hom-slice (map-emb i) g
     α = map-inv-is-equiv
           ( up-i

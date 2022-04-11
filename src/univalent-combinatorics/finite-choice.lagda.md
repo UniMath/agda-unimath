@@ -16,7 +16,7 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-embeddings using
   ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
 open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; type-prop-decidable-subtype;
+  ( decidable-subtype; type-decidable-subtype; is-in-decidable-subtype;
     is-decidable-subtype-subtype-decidable-subtype)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -116,7 +116,7 @@ abstract
     ε-operator-Hilbert (type-decidable-subtype P)
   ε-operator-decidable-subtype-count e P =
     ε-operator-equiv
-      ( equiv-Σ-equiv-base (type-prop-decidable-subtype P) (equiv-count e))
+      ( equiv-Σ-equiv-base (is-in-decidable-subtype P) (equiv-count e))
       ( ε-operator-decidable-subtype-Fin
         ( λ x → P (map-equiv-count e x)))
 ```

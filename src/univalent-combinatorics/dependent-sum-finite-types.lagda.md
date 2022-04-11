@@ -21,12 +21,12 @@ open import foundation.functoriality-propositional-truncation using
 open import foundation.identity-types using (Id; tr; refl)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop;
-    is-prop-type-trunc-Prop)
+    is-prop-type-trunc-Prop; trunc-Prop)
 open import foundation.propositions using (is-proof-irrelevant-is-prop)
 open import foundation.sections using
   ( equiv-total-fib-map-section; map-section)
 open import foundation.sets using (is-set)
-open import foundation.subtypes using (is-set-is-subtype)
+open import foundation.subtypes using (is-set-type-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -159,7 +159,7 @@ abstract
             ( λ x → is-empty (B x)))))
       ( is-finite-coprod
         ( is-finite-base-is-finite-Σ-merely-inhabited
-          ( is-set-is-subtype (λ x → is-prop-type-trunc-Prop) K)
+          ( is-set-type-subtype (λ x → trunc-Prop _) K)
           ( λ t → pr2 t)
           ( is-finite-equiv
             ( equiv-right-swap-Σ)

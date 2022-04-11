@@ -181,6 +181,7 @@ open import foundation.disjunction
 open import foundation.distributivity-of-dependent-functions-over-coproduct-types
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
+open import foundation.dubuc-penon-compact-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.elementhood-relation-w-types
 open import foundation.embeddings
@@ -242,9 +243,11 @@ open import foundation.monomorphisms
 open import foundation.multisets
 open import foundation.negation
 open import foundation.non-contractible-types
+open import foundation.pairs-of-distinct-elements
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
+open import foundation.principle-of-omniscience
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-truncations

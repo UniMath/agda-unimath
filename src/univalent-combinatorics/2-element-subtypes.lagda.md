@@ -7,7 +7,6 @@ title: 2-element subtypes
 
 module univalent-combinatorics.2-element-subtypes where
 
-
 open import foundation.automorphisms using (Aut)
 open import foundation.contractible-types using
   ( equiv-is-contr; is-contr-total-path)
@@ -26,6 +25,7 @@ open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot)
 open import foundation.identity-types using (Id; _∙_; inv; tr)
+open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (iff-equiv)
 open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.negation using (¬)
@@ -34,7 +34,9 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
-open import foundation.subtypes using (subtype; type-subtype; equiv-subtype-equiv)
+open import foundation.subtypes using
+  ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
+    is-injective-inclusion-subtype; equiv-subtype-equiv)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.truncated-maps using (is-emb-tot)
 open import foundation.type-arithmetic-coproduct-types using
@@ -83,6 +85,18 @@ module _
 
   type-2-Element-Subtype : UU (l1 ⊔ l2)
   type-2-Element-Subtype = type-subtype subtype-2-Element-Subtype
+
+  inclusion-2-Element-Subtype : type-2-Element-Subtype → X
+  inclusion-2-Element-Subtype = inclusion-subtype subtype-2-Element-Subtype
+
+  is-emb-inclusion-2-Element-Subtype : is-emb inclusion-2-Element-Subtype
+  is-emb-inclusion-2-Element-Subtype =
+    is-emb-inclusion-subtype subtype-2-Element-Subtype
+
+  is-injective-inclusion-2-Element-Subtype :
+    is-injective inclusion-2-Element-Subtype
+  is-injective-inclusion-2-Element-Subtype =
+    is-injective-inclusion-subtype subtype-2-Element-Subtype
 
   has-two-elements-type-2-Element-Subtype :
     has-two-elements type-2-Element-Subtype

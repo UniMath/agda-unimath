@@ -10,14 +10,17 @@ open import category-theory.precategories using
     id-hom-Precat; hom-Precat; right-unit-law-comp-hom-Precat;
     left-unit-law-comp-hom-Precat; assoc-comp-hom-Precat; comp-hom-Precat';
     is-set-type-hom-Precat)
+    
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.propositions using
-  ( is-proof-irrelevant; prod-Prop; is-prop;
+  ( is-proof-irrelevant; prod-Prop; is-prop; UU-Prop;
     is-prop-is-proof-irrelevant)
 open import foundation.sets using (Id-Prop; is-set; UU-Set)
-open import foundation.subtypes using (eq-subtype; is-set-is-subtype)
+open import foundation.subtypes using
+  ( eq-subtype; type-subtype; is-set-type-subtype; inclusion-subtype;
+    is-in-subtype-inclusion-subtype)
 open import foundation.universe-levels using (UU; Level)
 ```
 
@@ -28,6 +31,8 @@ An isomorphism between objects `x y : A` in a precategory `C` is a morphism `f :
 - `comp f g = id_y`.
 
 ## Definition
+
+### The property of being an isomorphism
 
 ```agda
 module _
@@ -41,16 +46,63 @@ module _
         Id (comp-hom-Precat C f g) (id-hom-Precat C) ×
         Id (comp-hom-Precat C g f) (id-hom-Precat C))
 
+  abstract
+    is-proof-irrelevant-is-iso-Precat :
+      {x y : obj-Precat C} (f : type-hom-Precat C x y) →
+      is-proof-irrelevant (is-iso-Precat f)
+    pr1 (is-proof-irrelevant-is-iso-Precat f H) = H
+    pr2
+      ( is-proof-irrelevant-is-iso-Precat {x} {y} f
+        ( pair g (pair p q)))
+        ( pair g' (pair p' q')) =
+      eq-subtype
+        ( λ h →
+          prod-Prop
+            ( Id-Prop
+              ( hom-Precat C y y)
+              ( comp-hom-Precat C f h)
+              ( id-hom-Precat C))
+            ( Id-Prop
+              ( hom-Precat C x x)
+              ( comp-hom-Precat C h f)
+              ( id-hom-Precat C)))
+        ( ( inv (right-unit-law-comp-hom-Precat C g)) ∙
+          ( ( ap (comp-hom-Precat C g) (inv p')) ∙
+            ( ( inv (assoc-comp-hom-Precat C g f g')) ∙
+              ( ( ap (comp-hom-Precat' C g') q) ∙
+                ( left-unit-law-comp-hom-Precat C g')))))
+
+    is-prop-is-iso-Precat :
+      {x y : obj-Precat C} (f : type-hom-Precat C x y) →
+      is-prop (is-iso-Precat f)
+    is-prop-is-iso-Precat f =
+      is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
+
+  is-iso-precat-Prop :
+    {x y : obj-Precat C} (f : type-hom-Precat C x y) → UU-Prop l2
+  pr1 (is-iso-precat-Prop f) = is-iso-Precat f
+  pr2 (is-iso-precat-Prop f) = is-prop-is-iso-Precat f
+```
+
+### The type of isomorphisms between two objects in a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precat l1 l2)
+  where
+  
   iso-Precat : (x y : obj-Precat C) → UU l2
-  iso-Precat x y = Σ (type-hom-Precat C x y) is-iso-Precat
+  iso-Precat x y = type-subtype (is-iso-precat-Prop C {x} {y})
 
   hom-iso-Precat :
     {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C x y
-  hom-iso-Precat f = pr1 f
+  hom-iso-Precat f = inclusion-subtype (is-iso-precat-Prop C) f
 
   is-iso-hom-iso-Precat :
-    {x y : obj-Precat C} (f : iso-Precat x y) → is-iso-Precat (hom-iso-Precat f)
-  is-iso-hom-iso-Precat f = pr2 f
+    {x y : obj-Precat C} (f : iso-Precat x y) →
+    is-iso-Precat C (hom-iso-Precat f)
+  is-iso-hom-iso-Precat f =
+    is-in-subtype-inclusion-subtype (is-iso-precat-Prop C) f
 
   hom-inv-iso-Precat :
     {x y : obj-Precat C} → iso-Precat x y → type-hom-Precat C y x
@@ -120,37 +172,6 @@ module _
   {l1 l2 : Level} (C : Precat l1 l2)
   where
 
-  abstract
-    is-proof-irrelevant-is-iso-Precat :
-      {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-      is-proof-irrelevant (is-iso-Precat C f)
-    pr1 (is-proof-irrelevant-is-iso-Precat f H) = H
-    pr2
-      ( is-proof-irrelevant-is-iso-Precat {x} {y} f
-        ( pair g (pair p q)))
-        ( pair g' (pair p' q')) =
-      eq-subtype
-        ( λ h →
-          prod-Prop
-            ( Id-Prop
-              ( hom-Precat C y y)
-              ( comp-hom-Precat C f h)
-              ( id-hom-Precat C))
-            ( Id-Prop
-              ( hom-Precat C x x)
-              ( comp-hom-Precat C h f)
-              ( id-hom-Precat C)))
-        ( ( inv (right-unit-law-comp-hom-Precat C g)) ∙
-          ( ( ap (comp-hom-Precat C g) (inv p')) ∙
-            ( ( inv (assoc-comp-hom-Precat C g f g')) ∙
-              ( ( ap (comp-hom-Precat' C g') q) ∙
-                ( left-unit-law-comp-hom-Precat C g')))))
-
-    is-prop-is-iso-Precat :
-      {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-      is-prop (is-iso-Precat C f)
-    is-prop-is-iso-Precat f =
-      is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
 ```
 
 ### The type of isomorphisms form a set
@@ -164,9 +185,10 @@ module _
 
   is-set-iso-Precat : (x y : obj-Precat C) → is-set (iso-Precat C x y)
   is-set-iso-Precat x y =
-    is-set-is-subtype
-      ( is-prop-is-iso-Precat C)
+    is-set-type-subtype
+      ( is-iso-precat-Prop C)
       ( is-set-type-hom-Precat C x y)
+      
 
   iso-Precat-Set : (x y : obj-Precat C) → UU-Set l2
   pr1 (iso-Precat-Set x y) = iso-Precat C x y
