@@ -243,6 +243,7 @@ open import foundation.monomorphisms
 open import foundation.multisets
 open import foundation.negation
 open import foundation.non-contractible-types
+open import foundation.pairs-of-distinct-elements
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
