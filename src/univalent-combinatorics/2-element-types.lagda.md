@@ -26,7 +26,7 @@ open import foundation.coproduct-types using
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
-open import foundation.empty-types using (ex-falso; empty-Prop)
+open import foundation.empty-types using (ex-falso; empty-Prop; empty)
 open import foundation.equivalences using
   ( _≃_; map-equiv; id-equiv; htpy-equiv; eq-htpy-equiv; is-equiv;
     is-equiv-has-inverse; is-equiv-Prop; is-equiv-left-factor';
@@ -58,7 +58,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation.raising-universe-levels using (map-raise)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; UU-Set; Id-Prop)
 open import foundation.subuniverses using (is-contr-total-equiv-subuniverse)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
@@ -70,8 +70,6 @@ open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-Σ)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
-
-open import foundation-core.sets using (Id-Prop)
 
 open import univalent-combinatorics.equality-finite-types using
   ( set-UU-Fin-Level; is-set-has-cardinality)
@@ -778,3 +776,36 @@ module _
   decide-value-equiv-Fin-two-ℕ e x =
     center (is-contr-decide-value-equiv-Fin-two-ℕ e x)
 ```
+
+### There can't be three distinct elements in a 2-element type
+
+```agda
+module _
+  {l : Level} (X : 2-Element-Type l)
+  where
+
+  contradiction-3-distinct-element-2-Element-Type : (x y z : type-2-Element-Type X) →
+    ¬ (Id x y) → ¬ (Id y z) → ¬ (Id x z) → empty
+  contradiction-3-distinct-element-2-Element-Type x y z np nq nr =
+    apply-universal-property-trunc-Prop
+      ( has-two-elements-type-2-Element-Type X)
+      ( empty-Prop)
+      ( λ e →
+        cases-contradiction-3-distinct-element-2-Element-Type
+          ( e)
+          ( decide-value-equiv-Fin-two-ℕ X e x)
+          ( decide-value-equiv-Fin-two-ℕ X e y)
+          ( decide-value-equiv-Fin-two-ℕ X e z))
+    where
+    cases-contradiction-3-distinct-element-2-Element-Type :
+      (e : Fin 2 ≃ type-2-Element-Type X) →
+      coprod (Id x (map-equiv e zero-Fin)) (Id x (map-equiv e one-Fin)) →
+      coprod (Id y (map-equiv e zero-Fin)) (Id y (map-equiv e one-Fin)) →
+      coprod (Id z (map-equiv e zero-Fin)) (Id z (map-equiv e one-Fin)) →
+      empty
+    cases-contradiction-3-distinct-element-2-Element-Type e (inl refl) (inl refl) c3 = np refl
+    cases-contradiction-3-distinct-element-2-Element-Type e (inl refl) (inr refl) (inl refl) = nr refl
+    cases-contradiction-3-distinct-element-2-Element-Type e (inl refl) (inr refl) (inr refl) = nq refl
+    cases-contradiction-3-distinct-element-2-Element-Type e (inr refl) (inl refl) (inl refl) = nq refl
+    cases-contradiction-3-distinct-element-2-Element-Type e (inr refl) (inl refl) (inr refl) = nr refl
+    cases-contradiction-3-distinct-element-2-Element-Type e (inr refl) (inr refl) c3 = np refl

@@ -191,6 +191,50 @@ cong-add-Fin :
   cong-ℕ k (nat-Fin (add-Fin x y)) (add-ℕ (nat-Fin x) (nat-Fin y))
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (add-ℕ (nat-Fin x) (nat-Fin y))
+
+cong-add-ℕ : {k : ℕ} (x y : ℕ) →
+  cong-ℕ
+    ( succ-ℕ k)
+    ( add-ℕ (nat-Fin (mod-succ-ℕ k x)) (nat-Fin (mod-succ-ℕ k y)))
+    ( add-ℕ x y)
+cong-add-ℕ {k} x y =
+  trans-cong-ℕ (succ-ℕ k)
+    ( add-ℕ (nat-Fin (mod-succ-ℕ k x)) (nat-Fin (mod-succ-ℕ k y)))
+    ( add-ℕ x (nat-Fin (mod-succ-ℕ k y)))
+    ( add-ℕ x y)
+    ( translation-invariant-cong-ℕ'
+      ( succ-ℕ k)
+      ( nat-Fin (mod-succ-ℕ k x))
+      ( x)
+      ( nat-Fin (mod-succ-ℕ k y))
+      ( cong-nat-mod-succ-ℕ k x))
+    ( translation-invariant-cong-ℕ
+      ( succ-ℕ k)
+      ( nat-Fin (mod-succ-ℕ k y))
+      ( y)
+      ( x)
+      ( cong-nat-mod-succ-ℕ k y))
+```
+
+### Distance on finite sets
+
+```agda
+dist-Fin : {k : ℕ} → Fin k → Fin k → Fin k
+dist-Fin {succ-ℕ k} x y = mod-succ-ℕ k (dist-ℕ (nat-Fin x) (nat-Fin y))
+
+dist-Fin' : {k : ℕ} → Fin k → Fin k → Fin k
+dist-Fin' x y = dist-Fin y x
+
+ap-dist-Fin :
+  {k : ℕ} {x y x' y' : Fin k} →
+  Id x x' → Id y y' → Id (dist-Fin x y) (dist-Fin x' y')
+ap-dist-Fin p q = ap-binary dist-Fin p q
+
+cong-dist-Fin :
+  {k : ℕ} (x y : Fin k) →
+  cong-ℕ k (nat-Fin (dist-Fin x y)) (dist-ℕ (nat-Fin x) (nat-Fin y))
+cong-dist-Fin {succ-ℕ k} x y =
+  cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin x) (nat-Fin y))
 ```
 
 ### The negative of an element of Fin k

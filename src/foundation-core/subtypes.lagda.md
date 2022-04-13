@@ -10,13 +10,16 @@ open import foundation-core.contractible-types using
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; id-equiv; map-inv-equiv)
+  ( is-equiv; _≃_; map-inv-is-equiv; id-equiv; map-inv-equiv; map-equiv;
+    isretr-map-inv-is-equiv)
 open import foundation-core.fibers-of-maps using (equiv-fib-pr1)
+open import foundation-core.functions using (_∘_)
 open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv)
+  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-Σ; map-Σ; is-equiv-map-Σ)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation-core.identity-types using (Id; refl; ap)
+open import foundation-core.identity-types using (Id; refl; ap; tr)
+open import foundation-core.logical-equivalences using (_↔_; equiv-iff')
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.propositions using
@@ -57,14 +60,26 @@ module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
-  type-prop-subtype : A → UU l2
-  type-prop-subtype x = type-Prop (P x)
+  is-in-subtype : A → UU l2
+  is-in-subtype x = type-Prop (P x)
 
-  is-prop-type-prop-subtype : (x : A) → is-prop (type-prop-subtype x)
-  is-prop-type-prop-subtype x = is-prop-type-Prop (P x)
+  is-prop-is-in-subtype : (x : A) → is-prop (is-in-subtype x)
+  is-prop-is-in-subtype x = is-prop-type-Prop (P x)
 
   type-subtype : UU (l1 ⊔ l2)
-  type-subtype = Σ A type-prop-subtype
+  type-subtype = Σ A is-in-subtype
+
+  inclusion-subtype : type-subtype → A
+  inclusion-subtype = pr1
+
+  ap-inclusion-subtype :
+    (x y : type-subtype) →
+    Id x y → Id (inclusion-subtype x) (inclusion-subtype y)
+  ap-inclusion-subtype x y p = ap inclusion-subtype p
+
+  is-in-subtype-inclusion-subtype :
+    (x : type-subtype) → is-in-subtype (inclusion-subtype x)
+  is-in-subtype-inclusion-subtype = pr2
 ```
 
 ## Properties
@@ -93,22 +108,36 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where
 
   abstract
-    is-emb-pr1 : is-subtype B → is-emb (pr1 {B = B})
-    is-emb-pr1 H =
-      is-emb-is-prop-map (λ x → is-prop-equiv (equiv-fib-pr1 B x) (H x))
+    is-emb-inclusion-subtype : is-emb (inclusion-subtype B)
+    is-emb-inclusion-subtype =
+      is-emb-is-prop-map
+        ( λ x →
+          is-prop-equiv
+            ( equiv-fib-pr1 (is-in-subtype B) x)
+            ( is-prop-is-in-subtype B x))
 
-  emb-pr1 : is-subtype B → Σ A B ↪ A
-  pr1 (emb-pr1 H) = pr1
-  pr2 (emb-pr1 H) = is-emb-pr1 H
+  emb-subtype : type-subtype B ↪ A
+  pr1 emb-subtype = inclusion-subtype B
+  pr2 emb-subtype = is-emb-inclusion-subtype
 
-  equiv-ap-pr1 : is-subtype B → {s t : Σ A B} → Id s t ≃ Id (pr1 s) (pr1 t)
-  pr1 (equiv-ap-pr1 is-subtype-B {s} {t}) = ap pr1
-  pr2 (equiv-ap-pr1 is-subtype-B {s} {t}) = is-emb-pr1 is-subtype-B s t
+  equiv-ap-inclusion-subtype :
+    {s t : type-subtype B} →
+    Id s t ≃ Id (inclusion-subtype B s) (inclusion-subtype B t)
+  pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
+  pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
+```
 
+### If the projection map of a type family is an embedding, then the type family is a subtype
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+  
   abstract
     is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
     is-subtype-is-emb-pr1 H x =
@@ -119,41 +148,42 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1}
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} (P : subtype l2 A)
   where
   
   abstract
-    is-trunc-is-subtype :
-      {P : A → UU l2} → is-subtype P → is-trunc (succ-𝕋 k) A →
-      is-trunc (succ-𝕋 k) (Σ A P)
-    is-trunc-is-subtype H is-trunc-A =
-      is-trunc-is-emb k pr1 (is-emb-pr1 H) is-trunc-A
+    is-trunc-type-subtype :
+      is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (type-subtype P)
+    is-trunc-type-subtype =
+      is-trunc-is-emb k
+        ( inclusion-subtype P)
+        ( is-emb-inclusion-subtype P)
 
 module _
-  {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
   
   abstract
-    is-prop-is-subtype : is-subtype P → is-prop A → is-prop (Σ A P)
-    is-prop-is-subtype = is-trunc-is-subtype neg-two-𝕋
+    is-prop-type-subtype : is-prop A → is-prop (type-subtype P)
+    is-prop-type-subtype = is-trunc-type-subtype neg-two-𝕋 P
 
   abstract
-    is-set-is-subtype : is-subtype P → is-set A → is-set (Σ A P)
-    is-set-is-subtype = is-trunc-is-subtype neg-one-𝕋
+    is-set-type-subtype : is-set A → is-set (type-subtype P)
+    is-set-type-subtype = is-trunc-type-subtype neg-one-𝕋 P
 
 subprop-Prop :
-  {l1 l2 : Level} (A : UU-Prop l1) (P : (x : type-Prop A) → UU-Prop l2) →
+  {l1 l2 : Level} (A : UU-Prop l1) (P : subtype l2 (type-Prop A)) →
   UU-Prop (l1 ⊔ l2)
-pr1 (subprop-Prop A P) = Σ (type-Prop A) (λ x → type-Prop (P x))
+pr1 (subprop-Prop A P) = type-subtype P
 pr2 (subprop-Prop A P) =
-  is-prop-is-subtype (λ x → is-prop-type-Prop (P x)) (is-prop-type-Prop A)
+  is-prop-type-subtype P (is-prop-type-Prop A)
 
 subset-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (P : (x : type-Set A) → UU-Prop l2) →
+  {l1 l2 : Level} (A : UU-Set l1) (P : subtype l2 (type-Set A)) →
   UU-Set (l1 ⊔ l2)
-pr1 (subset-Set A P) = Σ (type-Set A) (λ x → type-Prop (P x))
+pr1 (subset-Set A P) = type-subtype P
 pr2 (subset-Set A P) =
-  is-set-is-subtype (λ x → is-prop-type-Prop (P x)) (is-set-type-Set A)
+  is-set-type-subtype P (is-set-type-Set A)
 ```
 
 ### Logically equivalent subtypes induce equivalences on the underlying type of a subtype
@@ -169,4 +199,46 @@ pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
 pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
   is-equiv-tot-is-fiberwise-equiv {f = f}
     ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x))
+```
+
+### Equivalences of subtypes
+
+```agda
+equiv-subtype-equiv :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} (e : A ≃ B)
+  (C : A → UU-Prop l3) (D : B → UU-Prop l4) →
+  ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
+  type-subtype C ≃ type-subtype D
+equiv-subtype-equiv e C D H =
+  equiv-Σ (λ y → type-Prop (D y)) e
+    ( λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
+```
+
+```agda
+abstract
+  is-equiv-subtype-is-equiv :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+    {P : A → UU l3} {Q : B → UU l4}
+    (is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q)
+    (f : A → B) (g : (x : A) → P x → Q (f x)) →
+    is-equiv f → ((x : A) → (Q (f x)) → P x) → is-equiv (map-Σ Q f g)
+  is-equiv-subtype-is-equiv {Q = Q} is-subtype-P is-subtype-Q f g is-equiv-f h =
+    is-equiv-map-Σ Q f g is-equiv-f
+      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x)) (h x))
+
+abstract
+  is-equiv-subtype-is-equiv' :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+    {P : A → UU l3} {Q : B → UU l4}
+    (is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q)
+    (f : A → B) (g : (x : A) → P x → Q (f x)) →
+    (is-equiv-f : is-equiv f) →
+    ((y : B) → (Q y) → P (map-inv-is-equiv is-equiv-f y)) →
+    is-equiv (map-Σ Q f g)
+  is-equiv-subtype-is-equiv' {P = P} {Q}
+    is-subtype-P is-subtype-Q f g is-equiv-f h =
+    is-equiv-map-Σ Q f g is-equiv-f
+      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x))
+        ( (tr P (isretr-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
 ```

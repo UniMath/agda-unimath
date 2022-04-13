@@ -13,9 +13,12 @@ open import foundation.identity-types using (Id; refl)
 open import foundation.propositional-extensionality using (is-set-UU-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
-    is-prop-function-type; is-prop-prod; is-prop-is-equiv)
+    is-prop-function-type; is-prop-prod; is-prop-is-equiv; Π-Prop; hom-Prop;
+    prod-Prop)
 open import foundation.sets using (is-set; is-set-function-type; UU-Set)
-open import foundation.subtypes using (is-emb-pr1)
+open import foundation.subtypes using
+  ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
+    is-set-type-subtype)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.groups using
@@ -23,7 +26,9 @@ open import group-theory.groups using
     associative-mul-Group; left-unit-law-Group; right-unit-law-Group;
     left-inverse-law-Group; right-inverse-law-Group)
 open import group-theory.homomorphisms-groups using
-  ( preserves-mul-Group; type-hom-Group)
+  ( preserves-mul-Group; type-hom-Group; preserves-unit-Group;
+    preserves-inverses-Group)
+open import group-theory.semigroups using (Semigroup)
 ```
 
 ## Definitions
@@ -33,7 +38,7 @@ open import group-theory.homomorphisms-groups using
 ```agda
 subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-subset-Group l G = type-Group G → UU-Prop l
+subset-Group l G = subtype l (type-Group G)
 
 is-set-subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
@@ -44,230 +49,230 @@ is-set-subset-Group l G =
 ### Subgroups
 
 ```agda
-contains-unit-subset-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) → UU l2
-contains-unit-subset-Group G P = type-Prop (P (unit-Group G))
+module _
+  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G)
+  where
+  
+  contains-unit-subset-group-Prop : UU-Prop l2
+  contains-unit-subset-group-Prop = P (unit-Group G)
+  
+  contains-unit-subset-Group : UU l2
+  contains-unit-subset-Group = type-Prop contains-unit-subset-group-Prop
 
-is-prop-contains-unit-subset-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) →
-  is-prop (contains-unit-subset-Group G P)
-is-prop-contains-unit-subset-Group G P = is-prop-type-Prop (P (unit-Group G))
+  is-prop-contains-unit-subset-Group : is-prop contains-unit-subset-Group
+  is-prop-contains-unit-subset-Group =
+    is-prop-type-Prop contains-unit-subset-group-Prop
 
-closed-under-mul-subset-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) → UU (l1 ⊔ l2)
-closed-under-mul-subset-Group G P =
-  (x y : type-Group G) →
-  type-Prop (P x) → type-Prop (P y) → type-Prop (P (mul-Group G x y))
+  is-closed-under-mul-subset-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-closed-under-mul-subset-group-Prop =
+    Π-Prop
+      ( type-Group G)
+      ( λ x →
+        Π-Prop
+          ( type-Group G)
+          ( λ y → hom-Prop (P x) (hom-Prop (P y) (P (mul-Group G x y)))))
 
-is-prop-closed-under-mul-subset-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) →
-  is-prop (closed-under-mul-subset-Group G P)
-is-prop-closed-under-mul-subset-Group G P =
-  is-prop-Π (λ x →
-    is-prop-Π (λ y →
-      is-prop-function-type
-        ( is-prop-function-type
-          ( is-prop-type-Prop (P (mul-Group G x y))))))
+  is-closed-under-mul-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-mul-subset-Group =
+    type-Prop is-closed-under-mul-subset-group-Prop
 
-closed-under-inv-subset-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) → UU (l1 ⊔ l2)
-closed-under-inv-subset-Group G P =
-  (x : type-Group G) → type-Prop (P x) → type-Prop (P (inv-Group G x))
+  is-prop-is-closed-under-mul-subset-Group :
+    is-prop is-closed-under-mul-subset-Group
+  is-prop-is-closed-under-mul-subset-Group =
+    is-prop-type-Prop is-closed-under-mul-subset-group-Prop
 
-is-prop-closed-under-inv-subset-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) →
-  is-prop (closed-under-inv-subset-Group G P)
-is-prop-closed-under-inv-subset-Group G P =
-  is-prop-Π
-    ( λ x → is-prop-function-type (is-prop-type-Prop (P (inv-Group G x))))
+  is-closed-under-inv-subset-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-closed-under-inv-subset-group-Prop =
+    Π-Prop
+      ( type-Group G)
+      ( λ x → hom-Prop (P x) (P (inv-Group G x)))
 
-is-subgroup-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) → UU (l1 ⊔ l2)
-is-subgroup-Group G P =
-  ( contains-unit-subset-Group G P) ×
-  ( ( closed-under-mul-subset-Group G P) ×
-    ( closed-under-inv-subset-Group G P))
+  is-closed-under-inv-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-inv-subset-Group =
+    type-Prop is-closed-under-inv-subset-group-Prop
 
-is-prop-is-subgroup-Group :
-  {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G) →
-  is-prop (is-subgroup-Group G P)
-is-prop-is-subgroup-Group G P =
-  is-prop-prod
-    ( is-prop-contains-unit-subset-Group G P)
-    ( is-prop-prod
-      ( is-prop-closed-under-mul-subset-Group G P)
-      ( is-prop-closed-under-inv-subset-Group G P))
+  is-prop-is-closed-under-inv-subset-Group :
+    is-prop is-closed-under-inv-subset-Group
+  is-prop-is-closed-under-inv-subset-Group =
+    is-prop-type-Prop is-closed-under-inv-subset-group-Prop
+
+  is-subgroup-subset-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-subgroup-subset-group-Prop =
+    prod-Prop
+      ( contains-unit-subset-group-Prop)
+      ( prod-Prop
+        ( is-closed-under-mul-subset-group-Prop)
+        ( is-closed-under-inv-subset-group-Prop))
+
+  is-subgroup-subset-Group : UU (l1 ⊔ l2)
+  is-subgroup-subset-Group = type-Prop is-subgroup-subset-group-Prop
+
+  is-prop-is-subgroup-subset-Group : is-prop is-subgroup-subset-Group
+  is-prop-is-subgroup-subset-Group =
+    is-prop-type-Prop is-subgroup-subset-group-Prop
 
 Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-Subgroup l G = Σ (type-Group G → UU-Prop l) (is-subgroup-Group G)
+Subgroup l G = type-subtype (is-subgroup-subset-group-Prop {l2 = l} G)
 
-subset-Subgroup :
-  {l1 l2 : Level} (G : Group l1) →
-  ( Subgroup l2 G) → ( subset-Group l2 G)
-subset-Subgroup G = pr1
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+
+  subset-Subgroup : subset-Group l2 G
+  subset-Subgroup = inclusion-subtype (is-subgroup-subset-group-Prop G) H
+
+  type-Subgroup : UU (l1 ⊔ l2)
+  type-Subgroup = type-subtype subset-Subgroup
+
+  map-inclusion-Subgroup : type-Subgroup → type-Group G
+  map-inclusion-Subgroup = inclusion-subtype subset-Subgroup
+
+  type-predicate-Subgroup : type-Group G → UU l2
+  type-predicate-Subgroup x = type-Prop (subset-Subgroup x)
+
+  is-prop-type-predicate-Subgroup :
+    (x : type-Group G) → is-prop (type-predicate-Subgroup x)
+  is-prop-type-predicate-Subgroup x = is-prop-type-Prop (subset-Subgroup x)
+
+  is-subgroup-Subgroup : is-subgroup-subset-Group G subset-Subgroup
+  is-subgroup-Subgroup = pr2 H
+
+  contains-unit-Subgroup :
+    contains-unit-subset-Group G subset-Subgroup
+  contains-unit-Subgroup = pr1 is-subgroup-Subgroup
+
+  is-closed-under-mul-Subgroup :
+    is-closed-under-mul-subset-Group G subset-Subgroup
+  is-closed-under-mul-Subgroup = pr1 (pr2 is-subgroup-Subgroup)
+
+  is-closed-under-inv-Subgroup :
+    is-closed-under-inv-subset-Group G subset-Subgroup
+  is-closed-under-inv-Subgroup = pr2 (pr2 is-subgroup-Subgroup)
 
 is-emb-subset-Subgroup :
   {l1 l2 : Level} (G : Group l1) → is-emb (subset-Subgroup {l2 = l2} G)
-is-emb-subset-Subgroup G = is-emb-pr1 (is-prop-is-subgroup-Group G)
-
-type-subset-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  (type-Group G → UU l2)
-type-subset-Subgroup G P x = type-Prop (subset-Subgroup G P x)
-
-is-prop-type-subset-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  (x : type-Group G) → is-prop (type-subset-Subgroup G P x)
-is-prop-type-subset-Subgroup G P x =
-  is-prop-type-Prop (subset-Subgroup G P x)
-
-is-subgroup-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  is-subgroup-Group G (subset-Subgroup G P)
-is-subgroup-Subgroup G = pr2
-
-contains-unit-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  contains-unit-subset-Group G (subset-Subgroup G P)
-contains-unit-Subgroup G P = pr1 (is-subgroup-Subgroup G P)
-
-closed-under-mul-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  closed-under-mul-subset-Group G (subset-Subgroup G P)
-closed-under-mul-Subgroup G P = pr1 (pr2 (is-subgroup-Subgroup G P))
-
-closed-under-inv-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  closed-under-inv-subset-Group G (subset-Subgroup G P)
-closed-under-inv-Subgroup G P = pr2 (pr2 (is-subgroup-Subgroup G P))
+is-emb-subset-Subgroup G =
+  is-emb-inclusion-subtype (is-subgroup-subset-group-Prop G)
 ```
 
 ### The underlying group of a subgroup
 
 ```agda
-type-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) → UU (l1 ⊔ l2)
-type-group-Subgroup G P =
-  Σ (type-Group G) (type-subset-Subgroup G P)
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+  
+  type-group-Subgroup :  UU (l1 ⊔ l2)
+  type-group-Subgroup = type-subtype (subset-Subgroup G H)
 
-incl-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  type-group-Subgroup G P → type-Group G
-incl-group-Subgroup G P = pr1
+  map-inclusion-group-Subgroup : type-group-Subgroup → type-Group G
+  map-inclusion-group-Subgroup = inclusion-subtype (subset-Subgroup G H)
 
-is-emb-incl-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  is-emb (incl-group-Subgroup G P)
-is-emb-incl-group-Subgroup G P =
-  is-emb-pr1 (is-prop-type-subset-Subgroup G P)
+  is-emb-inclusion-group-Subgroup : is-emb map-inclusion-group-Subgroup
+  is-emb-inclusion-group-Subgroup =
+    is-emb-inclusion-subtype (subset-Subgroup G H)
 
-eq-subgroup-eq-group :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  {x y : type-group-Subgroup G P} →
-  Id (incl-group-Subgroup G P x) (incl-group-Subgroup G P y) → Id x y
-eq-subgroup-eq-group G P {x} {y} =
-  map-inv-is-equiv (is-emb-incl-group-Subgroup G P x y)
+  eq-subgroup-eq-group :
+    {x y : type-group-Subgroup} →
+    Id (map-inclusion-group-Subgroup x) (map-inclusion-group-Subgroup y) →
+    Id x y
+  eq-subgroup-eq-group {x} {y} =
+    map-inv-is-equiv (is-emb-inclusion-group-Subgroup x y)
 
-set-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) → Subgroup l2 G → UU-Set (l1 ⊔ l2)
-set-group-Subgroup G P =
-  pair ( type-group-Subgroup G P)
-       ( λ x y →
-         is-prop-is-equiv
-           ( is-emb-incl-group-Subgroup G P x y)
-           ( is-set-type-Group G (pr1 x) (pr1 y)))
+  set-group-Subgroup : UU-Set (l1 ⊔ l2)
+  pr1 set-group-Subgroup = type-group-Subgroup
+  pr2 set-group-Subgroup =
+    is-set-type-subtype (subset-Subgroup G H) (is-set-type-Group G)
 
-unit-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) → type-group-Subgroup G P
-unit-group-Subgroup G P =
-  pair ( unit-Group G)
-       ( contains-unit-Subgroup G P)
+  mul-group-Subgroup : (x y : type-group-Subgroup) → type-group-Subgroup
+  pr1 (mul-group-Subgroup x y) = mul-Group G (pr1 x) (pr1 y)
+  pr2 (mul-group-Subgroup x y) =
+    is-closed-under-mul-Subgroup G H (pr1 x) (pr1 y) (pr2 x) (pr2 y)
 
-mul-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  ( x y : type-group-Subgroup G P) → type-group-Subgroup G P
-mul-group-Subgroup G P x y =
-  pair ( mul-Group G (pr1 x) (pr1 y))
-       ( closed-under-mul-Subgroup G P (pr1 x) (pr1 y) (pr2 x) (pr2 y))
+  associative-mul-group-Subgroup :
+    (x y z : type-group-Subgroup) →
+    Id (mul-group-Subgroup (mul-group-Subgroup x y) z)
+       (mul-group-Subgroup x (mul-group-Subgroup y z))
+  associative-mul-group-Subgroup x y z =
+    eq-subgroup-eq-group (associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
 
-inv-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  type-group-Subgroup G P → type-group-Subgroup G P
-inv-group-Subgroup G P x =
-  pair (inv-Group G (pr1 x)) (closed-under-inv-Subgroup G P (pr1 x) (pr2 x))
+  unit-group-Subgroup : type-group-Subgroup
+  pr1 unit-group-Subgroup = unit-Group G
+  pr2 unit-group-Subgroup = contains-unit-Subgroup G H
 
-associative-mul-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  ( x y z : type-group-Subgroup G P) →
-  Id (mul-group-Subgroup G P (mul-group-Subgroup G P x y) z)
-     (mul-group-Subgroup G P x (mul-group-Subgroup G P y z))
-associative-mul-group-Subgroup G P x y z =
-  eq-subgroup-eq-group G P (associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
+  left-unit-law-group-Subgroup :
+    (x : type-group-Subgroup) → Id (mul-group-Subgroup unit-group-Subgroup x) x
+  left-unit-law-group-Subgroup x =
+    eq-subgroup-eq-group (left-unit-law-Group G (pr1 x))
 
-left-unit-law-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  ( x : type-group-Subgroup G P) →
-  Id (mul-group-Subgroup G P (unit-group-Subgroup G P) x) x
-left-unit-law-group-Subgroup G P x =
-  eq-subgroup-eq-group G P (left-unit-law-Group G (pr1 x))
+  right-unit-law-group-Subgroup :
+    (x : type-group-Subgroup) → Id (mul-group-Subgroup x unit-group-Subgroup) x
+  right-unit-law-group-Subgroup x =
+    eq-subgroup-eq-group (right-unit-law-Group G (pr1 x))
 
-right-unit-law-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  ( x : type-group-Subgroup G P) →
-  Id (mul-group-Subgroup G P x (unit-group-Subgroup G P)) x
-right-unit-law-group-Subgroup G P x =
-  eq-subgroup-eq-group G P (right-unit-law-Group G (pr1 x))
+  inv-group-Subgroup : type-group-Subgroup → type-group-Subgroup
+  pr1 (inv-group-Subgroup x) = inv-Group G (pr1 x)
+  pr2 (inv-group-Subgroup x) = is-closed-under-inv-Subgroup G H (pr1 x) (pr2 x)
 
-left-inverse-law-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  ( x : type-group-Subgroup G P) →
-  Id ( mul-group-Subgroup G P (inv-group-Subgroup G P x) x)
-     ( unit-group-Subgroup G P)
-left-inverse-law-group-Subgroup G P x =
-  eq-subgroup-eq-group G P (left-inverse-law-Group G (pr1 x))
+  left-inverse-law-group-Subgroup :
+    ( x : type-group-Subgroup) →
+    Id ( mul-group-Subgroup (inv-group-Subgroup x) x)
+       ( unit-group-Subgroup)
+  left-inverse-law-group-Subgroup x =
+    eq-subgroup-eq-group (left-inverse-law-Group G (pr1 x))
 
-right-inverse-law-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  ( x : type-group-Subgroup G P) →
-  Id ( mul-group-Subgroup G P x (inv-group-Subgroup G P x))
-     ( unit-group-Subgroup G P)
-right-inverse-law-group-Subgroup G P x =
-  eq-subgroup-eq-group G P (right-inverse-law-Group G (pr1 x))
+  right-inverse-law-group-Subgroup :
+    (x : type-group-Subgroup) →
+    Id ( mul-group-Subgroup x (inv-group-Subgroup x))
+       ( unit-group-Subgroup)
+  right-inverse-law-group-Subgroup x =
+    eq-subgroup-eq-group (right-inverse-law-Group G (pr1 x))
 
-group-Subgroup :
-  {l1 l2 : Level} (G : Group l1) → Subgroup l2 G → Group (l1 ⊔ l2)
-group-Subgroup G P =
-  pair
-    ( pair
-      ( set-group-Subgroup G P)
-      ( pair
-        ( mul-group-Subgroup G P)
-        ( associative-mul-group-Subgroup G P)))
-    ( pair
-      ( pair
-        ( unit-group-Subgroup G P)
-        ( pair
-          ( left-unit-law-group-Subgroup G P)
-          ( right-unit-law-group-Subgroup G P)))
-      ( pair
-        ( inv-group-Subgroup G P)
-        ( pair
-          ( left-inverse-law-group-Subgroup G P)
-          ( right-inverse-law-group-Subgroup G P))))
+  semigroup-Subgroup : Semigroup (l1 ⊔ l2)
+  pr1 semigroup-Subgroup = set-group-Subgroup
+  pr1 (pr2 semigroup-Subgroup) = mul-group-Subgroup
+  pr2 (pr2 semigroup-Subgroup) = associative-mul-group-Subgroup
+
+  group-Subgroup : Group (l1 ⊔ l2)
+  pr1 group-Subgroup = semigroup-Subgroup
+  pr1 (pr1 (pr2 group-Subgroup)) = unit-group-Subgroup
+  pr1 (pr2 (pr1 (pr2 group-Subgroup))) = left-unit-law-group-Subgroup
+  pr2 (pr2 (pr1 (pr2 group-Subgroup))) = right-unit-law-group-Subgroup
+  pr1 (pr2 (pr2 group-Subgroup)) = inv-group-Subgroup
+  pr1 (pr2 (pr2 (pr2 group-Subgroup))) = left-inverse-law-group-Subgroup
+  pr2 (pr2 (pr2 (pr2 group-Subgroup))) = right-inverse-law-group-Subgroup
 ```
 
 ### The inclusion of the underlying group of a subgroup into the ambient group
 
 ```agda
-preserves-mul-incl-group-Subgroup :
-  { l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  preserves-mul-Group (group-Subgroup G P) G (incl-group-Subgroup G P)
-preserves-mul-incl-group-Subgroup G P (pair x p) (pair y q) = refl
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+  
+  preserves-mul-inclusion-group-Subgroup :
+    preserves-mul-Group
+      ( group-Subgroup G H)
+      ( G)
+      ( map-inclusion-group-Subgroup G H)
+  preserves-mul-inclusion-group-Subgroup x y = refl
 
-hom-group-Subgroup :
-  { l1 l2 : Level} (G : Group l1) (P : Subgroup l2 G) →
-  type-hom-Group (group-Subgroup G P) G
-hom-group-Subgroup G P =
-  pair (incl-group-Subgroup G P) (preserves-mul-incl-group-Subgroup G P)
+  preserves-unit-inclusion-group-Subgroup :
+    preserves-unit-Group
+      ( group-Subgroup G H)
+      ( G)
+      ( map-inclusion-group-Subgroup G H)
+  preserves-unit-inclusion-group-Subgroup = refl
+
+  preserves-inverses-inclusion-group-Subgroup :
+    preserves-inverses-Group
+      ( group-Subgroup G H)
+      ( G)
+      ( map-inclusion-group-Subgroup G H)
+  preserves-inverses-inclusion-group-Subgroup x = refl
+
+  inclusion-group-Subgroup : type-hom-Group (group-Subgroup G H) G
+  pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
+  pr2 inclusion-group-Subgroup = preserves-mul-inclusion-group-Subgroup
 ```

@@ -6,6 +6,8 @@
 module foundation.equivalence-classes where
 
 open import foundation.contractible-types using (is-contr)
+open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.decidable-types using (is-decidable; is-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.effective-maps-equivalence-relations using
@@ -280,4 +282,46 @@ module _
               ( eq-pair-Σ (inv T) (all-elements-equal-type-trunc-Prop _ _))
               ( p))
             q))
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  is-decidable-type-class-large-set-quotient-is-decidable :
+    ((a b : A) → is-decidable (type-Eq-Rel R a b)) →
+    (T : large-set-quotient R) →
+    (a : A) →
+    is-decidable (type-class-large-set-quotient R T a)
+  is-decidable-type-class-large-set-quotient-is-decidable F T a =
+    apply-universal-property-trunc-Prop
+      ( pr2 T)
+      ( is-decidable-Prop
+        ( class-large-set-quotient R T a))
+      ( λ (pair t P) →
+        cases-decidable-type-class-large-set-quotient
+          T a t (eq-pair-Σ (inv P) (all-elements-equal-type-trunc-Prop _ _)) (F t a))
+    where
+    cases-decidable-type-class-large-set-quotient :
+      (T : large-set-quotient R)
+      (a t : A) →
+      Id T (quotient-map-large-set-quotient R t) →
+      is-decidable (type-Eq-Rel R t a) →
+      is-decidable (type-class-large-set-quotient R T a)
+    cases-decidable-type-class-large-set-quotient T a t p1 (inl p) =
+      inl
+        ( tr
+          ( λ x → type-class-large-set-quotient R x a)
+          ( inv p1)
+          ( p))
+    cases-decidable-type-class-large-set-quotient T a t p1 (inr np) =
+      inr
+        ( λ p →
+          np
+          ( tr
+            ( λ x →
+              type-class-large-set-quotient R x a)
+            ( p1)
+            ( p)))
 ```

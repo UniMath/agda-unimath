@@ -17,11 +17,11 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl)
 open import foundation.propositions using (is-prop)
-open import foundation.subtypes using (equiv-ap-pr1)
+open import foundation.subtypes using (equiv-ap-inclusion-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.abelian-groups using
-  ( Ab; semigroup-Ab; type-Ab; group-Ab; is-prop-is-abelian-Group)
+  ( Ab; semigroup-Ab; type-Ab; group-Ab; is-abelian-group-Prop)
 open import group-theory.homomorphisms-abelian-groups using
   ( type-hom-Ab; map-hom-Ab; comp-hom-Ab; id-hom-Ab; htpy-eq-hom-Ab)
 open import group-theory.isomorphisms-groups using
@@ -128,7 +128,7 @@ abstract
     {l1 : Level} (A B : Ab l1) → Id A B ≃ iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
-    ( equiv-ap-pr1 is-prop-is-abelian-Group {A} {B})
+    ( equiv-ap-inclusion-subtype is-abelian-group-Prop {A} {B})
 
 abstract
   is-contr-total-iso-Ab :
