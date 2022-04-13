@@ -10,7 +10,7 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 ## Contributions and chat
 
-The `agda-unimath` library is a new Agda library for univalent mathematics. We warmly welcome any contributions. To chat with us about anything related to univalent mathematics or the library, please join the `#unimath` stream of the Agda community chat at
+The `agda-unimath` library is a new Agda library for univalent mathematics. We warmly welcome any contributions. To chat with us about anything related to univalent mathematics or the library, please join our [discord server](https://discord.gg/efbDHEabec) or the `#unimath` stream of the Agda community chat at
 
 [![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
 
