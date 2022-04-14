@@ -5,7 +5,7 @@ Welcome to the website of the `agda-unimath` formalization project.
 [![build](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --guardedness #-}
 ```
 
 ## Category theory
