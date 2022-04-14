@@ -229,7 +229,7 @@ module _
 
 ### Deloopings of the sign homomorphism
 
-```
+```agda
 module _
   { l : Level}
   where
