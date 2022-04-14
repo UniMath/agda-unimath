@@ -78,7 +78,7 @@ open import foundation.propositional-truncations using
     trunc-Prop; type-trunc-Prop; all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
-open import foundation.sets using (Id-Prop)
+open import foundation.sets using (Id-Prop; UU-Set)
 open import foundation.subtypes using (subtype; eq-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.universal-property-propositional-truncation-into-sets using
@@ -445,6 +445,9 @@ module _
 
   quotient-sign : UU (lsuc l)
   quotient-sign = large-set-quotient even-difference-orientation-Complete-Undirected-Graph
+  
+  quotient-sign-Set : UU-Set (lsuc l)
+  quotient-sign-Set = large-quotient-Set even-difference-orientation-Complete-Undirected-Graph
 ```
 
 ```
@@ -1347,16 +1350,19 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin-Level l n) (ineq : leq-ℕ 2 n)
   where
   
+  equiv-Fin-2-quotient-sign-equiv-Fin-n : (h : Fin n ≃ type-UU-Fin-Level X) →
+    ( Fin 2 ≃ quotient-sign n X)
+  equiv-Fin-2-quotient-sign-equiv-Fin-n h =
+    tr
+      ( λ e → Fin 2 ≃ quotient-sign n (pair (type-UU-Fin-Level X) e))
+      ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
+      ( equiv-Fin-2-quotient-sign-count (pair n h) ineq)
+    
   mere-equiv-Fin-2-quotient-sign :
     mere-equiv (Fin 2) (quotient-sign n X)
   mere-equiv-Fin-2-quotient-sign =
     apply-universal-property-trunc-Prop
       ( mere-equiv-UU-Fin-Level X)
       ( trunc-Prop (Fin 2 ≃ (quotient-sign n X)))
-      ( λ h →
-        unit-trunc-Prop
-          ( tr
-            ( λ e → Fin 2 ≃ quotient-sign n (pair (type-UU-Fin-Level X) e))
-            ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
-            ( equiv-Fin-2-quotient-sign-count (pair n h) ineq)))
+      ( λ h → unit-trunc-Prop (equiv-Fin-2-quotient-sign-equiv-Fin-n h))
 ```
