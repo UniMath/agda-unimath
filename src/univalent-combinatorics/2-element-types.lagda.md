@@ -13,6 +13,7 @@ open import
 open import elementary-number-theory.equality-natural-numbers using
   ( Eq-eq-ℕ)
 
+open import foundation.automorphisms using (Aut)
 open import foundation.connected-components-universes using
   ( is-contr-total-equiv-component-UU-Level; equiv-eq-component-UU-Level;
     is-equiv-equiv-eq-component-UU-Level)
@@ -50,7 +51,8 @@ open import foundation.identity-types using
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (is-involution-aut)
 open import foundation.mere-equivalences using
-  ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv)
+  ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv;
+    transitive-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop; trunc-Prop;
@@ -117,6 +119,21 @@ has-two-elements-type-2-Element-Type = pr2
 ```
 
 ## Properties
+
+### The condition of having two elements is closed under equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+  
+  has-two-elements-equiv : X ≃ Y → has-two-elements X → has-two-elements Y
+  has-two-elements-equiv e H = transitive-mere-equiv H (unit-trunc-Prop e)
+
+  has-two-elements-equiv' : X ≃ Y → has-two-elements Y → has-two-elements X
+  has-two-elements-equiv' e H =
+    transitive-mere-equiv H (unit-trunc-Prop (inv-equiv e))
+```
 
 ### Any 2-element type is inhabited
 
@@ -423,6 +440,30 @@ eq-point-UU-Fin-two-ℕ :
   {X : UU-Fin 2} → type-UU-Fin X → Id (Fin-UU-Fin 2) X
 eq-point-UU-Fin-two-ℕ {X} =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
+```
+
+### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type.
+
+```agda
+module _
+  {l : Level} (X : 2-Element-Type l)
+  where
+  
+  has-two-elements-Aut-2-Element-Type :
+    has-two-elements (Aut (type-2-Element-Type X))
+  has-two-elements-Aut-2-Element-Type =
+    apply-universal-property-trunc-Prop
+      ( has-two-elements-type-2-Element-Type X)
+      ( has-two-elements-Prop (Aut (type-2-Element-Type X)))
+      ( λ e →
+        has-two-elements-equiv
+          ( ( equiv-postcomp-equiv e (type-2-Element-Type X)) ∘e
+            ( equiv-precomp-equiv (inv-equiv e) (Fin 2)))
+          ( unit-trunc-Prop (inv-equiv equiv-ev-zero-aut-Fin-two-ℕ)))
+
+  Aut-2-Element-Type : 2-Element-Type l
+  pr1 Aut-2-Element-Type = Aut (type-2-Element-Type X)
+  pr2 Aut-2-Element-Type = has-two-elements-Aut-2-Element-Type
 ```
 
 ### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence.
