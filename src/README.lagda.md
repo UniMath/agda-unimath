@@ -126,6 +126,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ```agda
 open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
+open import finite-group-theory.automorphism-groups
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-monoids
@@ -228,6 +229,7 @@ open import foundation.induction-w-types
 open import foundation.inequality-w-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.intersection
 open import foundation.involutions
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
@@ -277,6 +279,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.surjective-maps
+open import foundation.symmetric-difference
 open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
@@ -317,6 +320,7 @@ open import foundation.unordered-pairs
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
+open import foundation.xor
 ```
 
 ## Foundation Core
@@ -612,6 +616,7 @@ open import univalent-combinatorics.injective-maps
 open import univalent-combinatorics.kuratowsky-finite-sets
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
+open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.orientations-cubes
 open import univalent-combinatorics.petri-nets
 open import univalent-combinatorics.pi-finite-types
@@ -626,6 +631,7 @@ open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
+open import univalent-combinatorics.symmetric-difference
 ```
 
 ## Wild algebra
