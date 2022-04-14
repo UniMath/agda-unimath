@@ -5,7 +5,7 @@ Welcome to the website of the `agda-unimath` formalization project.
 [![build](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --guardedness #-}
 ```
 
 ## Category theory
@@ -553,6 +553,18 @@ open import synthetic-homotopy-theory.universal-cover-circle
 
 ```agda
 open import tutorials.basic-agda
+```
+
+## Type theories
+
+```agda
+open import type-theories
+open import type-theories.comprehension-type-theories
+open import type-theories.dependent-type-theories
+open import type-theories.fibered-dependent-type-theories
+open import type-theories.sections-dependent-type-theories
+open import type-theories.simple-type-theories
+open import type-theories.unityped-type-theories
 ```
 
 ## Univalent combinatorics
