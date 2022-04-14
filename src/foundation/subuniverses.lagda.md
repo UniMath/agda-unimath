@@ -25,7 +25,7 @@ open import foundation.contractible-types using
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-is-equiv; is-trunc-Prop; is-trunc-equiv-is-trunc)
 open import foundation.truncation-levels using
-  ( 𝕋; neg-two-𝕋; succ-𝕋; neg-one-𝕋)
+  ( 𝕋; neg-two-𝕋; succ-𝕋; neg-one-𝕋; zero-𝕋; one-𝕋)
 open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
 open import foundation.univalence using
   ( eq-equiv; is-contr-total-equiv; equiv-eq; univalence)
@@ -187,4 +187,10 @@ abstract
         ( equiv-eq)
         ( univalence (pr1 X) (pr1 Y))
         ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
+
+abstract
+  is-one-type-UU-Set :
+    (l : Level)  → is-trunc one-𝕋 (UU-Set l)
+  is-one-type-UU-Set l = is-trunc-UU-Trunc zero-𝕋 l
+    
 ```

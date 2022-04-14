@@ -8,7 +8,7 @@ module finite-group-theory.sign-homomorphism where
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin; mod-two-ℕ; mod-succ-add-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import finite-group-theory.permutations using
   ( is-contr-parity-transposition-permutation;
@@ -23,16 +23,25 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-propositions using
   ( decidable-Prop; type-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.equality-dependent-pair-types using (pair-eq-Σ; eq-pair-Σ)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv)
+  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv)
+open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
 open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (Id; inv; _∙_; ap; refl)
+open import foundation.identity-types using (Id; inv; _∙_; ap; refl; tr)
+open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.sets using (Id-Prop)
+  ( apply-universal-property-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop)
+open import foundation.propositions using (eq-is-prop)
+open import foundation.raising-universe-levels using (raise-Set; equiv-raise; raise)
+open import foundation.sets using (Id-Prop; UU-Set; type-Set; is-prop-is-set)
+open import foundation.subuniverses using (is-one-type-UU-Set)
 open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level)
+open import foundation.univalence using (equiv-eq; eq-equiv)
+open import foundation.universe-levels using (Level; lzero; lsuc)
 
+open import group-theory.automorphism-groups using (Automorphism-Group)
+open import group-theory.concrete-groups using (hom-Concrete-Group; classifying-type-Concrete-Group)
 open import group-theory.homomorphisms-groups using (type-hom-Group)
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 open import group-theory.symmetric-groups using (symmetric-Group)
@@ -48,6 +57,8 @@ open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; mere-equiv-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( list; concat-list; length-list; length-concat-list)
+open import univalent-combinatorics.orientations-complete-undirected-graph using
+  ( quotient-sign; quotient-sign-Set; mere-equiv-Fin-2-quotient-sign; equiv-Fin-2-quotient-sign-equiv-Fin-n)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; equiv-succ-Fin)
 ```
@@ -214,5 +225,85 @@ module _
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism
   pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
+```
+
+### Deloopings of the sign homomorphism
+
+```
+module _
+  { l : Level}
+  where
+  
+  map-cartier-delooping-sign : (n : ℕ) →
+    classifying-type-Concrete-Group
+      ( Automorphism-Group
+        ( UU-Set l)
+        ( raise-Set l (Fin-Set n))
+        ( is-one-type-UU-Set l)) →
+    classifying-type-Concrete-Group
+      ( Automorphism-Group
+        ( UU-Set (lsuc l))
+        ( raise-Set (lsuc l) (Fin-Set 2))
+        ( is-one-type-UU-Set (lsuc l)))
+  pr1 (map-cartier-delooping-sign zero-ℕ X) = raise-Set (lsuc l) (Fin-Set 2)
+  pr2 (map-cartier-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
+  pr1 (map-cartier-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc l) (Fin-Set 2)
+  pr2 (map-cartier-delooping-sign (succ-ℕ zero-ℕ) X) = unit-trunc-Prop refl
+  pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
+    quotient-sign-Set
+      ( succ-ℕ (succ-ℕ n))
+      ( pair
+        ( type-Set X)
+        ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
+  pr2 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
+    functor-trunc-Prop
+      ( λ e →
+        eq-pair-Σ
+          ( eq-equiv
+            ( type-Set (pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p))))
+            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
+            ( equiv-raise (lsuc l) (Fin 2) ∘e inv-equiv e))
+          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (type-Set (Fin-Set 2))))))
+      ( mere-equiv-Fin-2-quotient-sign
+        ( succ-ℕ (succ-ℕ n))
+        ( pair
+          ( type-Set X)
+          ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
+        ( star))
+
+  cartier-delooping-sign : (n : ℕ) →
+    hom-Concrete-Group
+      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) (is-one-type-UU-Set l))
+      ( Automorphism-Group (UU-Set (lsuc l)) (raise-Set (lsuc l) (Fin-Set 2)) (is-one-type-UU-Set (lsuc l)))
+  pr1 (cartier-delooping-sign n) = map-cartier-delooping-sign n
+  pr2 (cartier-delooping-sign zero-ℕ) = refl
+  pr2 (cartier-delooping-sign (succ-ℕ zero-ℕ)) = refl
+  pr2 (cartier-delooping-sign (succ-ℕ (succ-ℕ n))) =
+    eq-pair-Σ
+      ( eq-pair-Σ
+        ( eq-equiv
+          ( type-Set
+            ( pr1
+              ( map-cartier-delooping-sign
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
+                  ( unit-trunc-Prop refl)))))
+          ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
+          ( equiv-raise (lsuc l) (Fin 2) ∘e
+            inv-equiv
+              ( equiv-Fin-2-quotient-sign-equiv-Fin-n
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                  ( functor-trunc-Prop
+                    ( λ p' →
+                      ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                    ( unit-trunc-Prop refl)))
+                ( star)
+                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+        ( eq-is-prop (is-prop-is-set _)))
+      ( eq-is-prop is-prop-type-trunc-Prop)
 ```
 
