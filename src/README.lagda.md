@@ -555,6 +555,18 @@ open import synthetic-homotopy-theory.universal-cover-circle
 open import tutorials.basic-agda
 ```
 
+## Type theories
+
+```agda
+open import type-theories
+open import type-theories.comprehension-type-theories
+open import type-theories.dependent-type-theories
+open import type-theories.fibered-dependent-type-theories
+open import type-theories.sections-dependent-type-theories
+open import type-theories.simple-type-theories
+open import type-theories.unityped-type-theories
+```
+
 ## Univalent combinatorics
 
 ```agda

@@ -1,6 +1,6 @@
 
-checkOpts :=--without-K --exact-split
-everythingOpts :=$(checkOpts) --allow-unsolved-metas
+checkOpts :=--without-K --exact-split --guardedness
+everythingOpts :=$(checkOpts)
 agdaVerbose?=1
 # use "$ export agdaVerbose=20" if you want to see all
 AGDAFILES := $(wildcard src/**/*.lagda.md)
