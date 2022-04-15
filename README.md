@@ -20,8 +20,8 @@ There are many reasons to contribute something to a library of formalized mathem
 
 :rainbow: Happy contributing!
 
-Elisabeth Bonnevier
-Jonathan Prieto-Cubides
+Elisabeth Bonnevier  
+Jonathan Prieto-Cubides  
 Egbert Rijke
 
 ## Design of the library
