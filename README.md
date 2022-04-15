@@ -2,17 +2,15 @@
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment)
 
-This repository is for a formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics could be useful, informative resources for mathematicians. The `agda-unimath` library is designed to work towards this goal.
+Th `agda-unimath` library is a new formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics have the potential to be useful, and informative resources for mathematicians. Our library is designed to work towards this goal, and we welcome contributions to the library about any topic in mathematics.
 
-This library is based on the formalisation of the [Introduction to Homotopy Type Theory](https://github.com/HoTT-Intro/Agda) book by Egbert Rijke.
-
-The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder.
+The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
 ## Contributions and chat
 
-The `agda-unimath` library is a new Agda library for univalent mathematics. We warmly welcome any contributions. To chat with us about anything related to univalent mathematics or the library, please join our [discord server](https://discord.gg/Zp2e8hYsuX) or the `#unimath` stream of the Agda community chat at
+Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you can also just come over just to hang out.
 
-[![Agda on Zulip](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://agda.zulipchat.com)
+Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
 ## Statement of inclusion
 
