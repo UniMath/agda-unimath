@@ -6,7 +6,7 @@ Th `agda-unimath` library is a new formalisation project for univalent mathemati
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
-## Contributions and chat
+## Joining the project
 
 Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
 
