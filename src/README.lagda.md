@@ -146,7 +146,6 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ```agda
 open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
-open import finite-group-theory.automorphism-groups
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-monoids
@@ -422,6 +421,7 @@ open import group-theory.abelian-groups
 open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
 open import group-theory.addition-homomorphisms-abelian-groups
+open import group-theory.automorphism-groups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
