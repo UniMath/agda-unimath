@@ -468,7 +468,7 @@ module _
   {l1 l2 l3 : Level} {n : ℕ} (X : UU-Fin-Level l1 n) (Y : Group l2) 
   where
 
-  distributivity-hom-Group-permutation-list-transpositions :
+  distributivity-hom-group-permutation-list-transpositions :
     ( f : type-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y) →
     ( l : list (2-Element-Decidable-Subtype l3 (type-UU-Fin-Level X))) →
     Id
@@ -480,14 +480,14 @@ module _
             ( Y)
             ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f (transposition S)))
         ( l))   
-  distributivity-hom-Group-permutation-list-transpositions f nil =
+  distributivity-hom-group-permutation-list-transpositions f nil =
     preserves-unit-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f
-  distributivity-hom-Group-permutation-list-transpositions f (cons x l) = 
+  distributivity-hom-group-permutation-list-transpositions f (cons x l) = 
     ( preserves-mul-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f
       ( transposition x) (permutation-list-transpositions l)) ∙
       ( ap
         ( mul-Group Y (map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f (transposition x)))
-        ( distributivity-hom-Group-permutation-list-transpositions f l))
+        ( distributivity-hom-group-permutation-list-transpositions f l))
     
   restriction-generating-subset-transpositions-symmetric-Group : 
     type-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y ↪
@@ -514,7 +514,7 @@ module _
                   ( inv
                     ( eq-htpy-equiv
                       ( retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) x)))) ∙
-                  ( distributivity-hom-Group-permutation-list-transpositions f
+                  ( distributivity-hom-group-permutation-list-transpositions f
                     ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) x) ∙
                     ( ( ap
                       ( λ F →
@@ -524,7 +524,7 @@ module _
                           ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) x))
                       ( P)) ∙
                       ( ( inv
-                        ( distributivity-hom-Group-permutation-list-transpositions g
+                        ( distributivity-hom-group-permutation-list-transpositions g
                         ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) x))) ∙
                         ( ap
                           ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y g)
