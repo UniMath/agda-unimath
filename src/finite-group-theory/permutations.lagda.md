@@ -36,6 +36,7 @@ open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (_↪_)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ; pair-eq-Σ)
@@ -62,18 +63,21 @@ open import foundation.propositions using (eq-is-prop; is-prop)
 open import foundation.sets using (is-set-type-Set; Id-Prop)
 open import foundation.type-arithmetic-empty-type using
   ( inv-right-unit-law-coprod-is-empty; map-right-absorption-prod)
-open import foundation.truncated-types using (is-trunc-Prop)
-open import foundation.truncation-levels using (neg-two-𝕋)
+open import foundation.truncated-types using (is-trunc-Prop; is-trunc-Π)
+open import foundation.truncation-levels using (neg-two-𝕋; zero-𝕋)
 open import foundation.unit-type using (star; unit)
 open import foundation.universe-levels using (Level; UU; lzero; _⊔_; lsuc)
 
-open import group-theory.groups using (semigroup-Group)
-open import group-theory.homomorphisms-groups using (type-hom-Group)
+open import group-theory.groups using
+  ( semigroup-Group; Group; type-Group; set-Group; is-set-type-Group; mul-Group; unit-Group)
+open import group-theory.homomorphisms-groups using
+  ( type-hom-Group; map-hom-Group; eq-htpy-hom-Group; is-set-type-hom-Group; preserves-unit-hom-Group;
+    preserves-mul-hom-Group)
 open import group-theory.semigroups using (set-Semigroup; mul-Semigroup)
 open import group-theory.symmetric-groups using (symmetric-Group)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
-  ( standard-2-Element-Decidable-Subtype)
+  ( standard-2-Element-Decidable-Subtype; 2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
   ( is-involution-aut-Fin-two-ℕ; ev-zero-aut-Fin-two-ℕ;
     is-equiv-ev-zero-aut-Fin-two-ℕ; aut-point-Fin-two-ℕ)
@@ -457,4 +461,83 @@ module _
         is-injective-iterate-involution (inr star) (inl (inr star)) (inl (inr star)) p = ex-falso (neq-inr-inl p)
         is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {n : ℕ} (X : UU-Fin-Level l1 n) (Y : Group l2) 
+  where
+
+  distributivity-hom-Group-permutation-list-transpositions :
+    ( f : type-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y) →
+    ( l : list (2-Element-Decidable-Subtype l3 (type-UU-Fin-Level X))) →
+    Id
+      ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f (permutation-list-transpositions l))
+      ( fold-list
+        ( unit-Group Y)
+        ( λ S →
+          mul-Group
+            ( Y)
+            ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f (transposition S)))
+        ( l))   
+  distributivity-hom-Group-permutation-list-transpositions f nil =
+    preserves-unit-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f
+  distributivity-hom-Group-permutation-list-transpositions f (cons x l) = 
+    ( preserves-mul-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f
+      ( transposition x) (permutation-list-transpositions l)) ∙
+      ( ap
+        ( mul-Group Y (map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f (transposition x)))
+        ( distributivity-hom-Group-permutation-list-transpositions f l))
+    
+  restriction-generating-subset-transpositions-symmetric-Group : 
+    type-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y ↪
+      ( 2-Element-Decidable-Subtype l3 (type-UU-Fin-Level X) →
+        type-Group Y)
+  pr1 restriction-generating-subset-transpositions-symmetric-Group f S =
+    map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f (transposition S)
+  pr2 restriction-generating-subset-transpositions-symmetric-Group f g =
+    is-equiv-has-inverse
+      ( λ P →
+        eq-htpy-hom-Group
+          ( symmetric-Group (set-UU-Fin-Level X))
+          ( Y)
+          ( λ x →
+            apply-universal-property-trunc-Prop
+              ( mere-equiv-UU-Fin-Level X)
+              ( Id-Prop
+                ( set-Group Y)
+                ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f x)
+                ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y g x))
+              ( λ h →
+                ( ap
+                  ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f)
+                  ( inv
+                    ( eq-htpy-equiv
+                      ( retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) x)))) ∙
+                  ( distributivity-hom-Group-permutation-list-transpositions f
+                    ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) x) ∙
+                    ( ( ap
+                      ( λ F →
+                        fold-list
+                          ( unit-Group Y)
+                          ( λ S → mul-Group Y (F S))
+                          ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) x))
+                      ( P)) ∙
+                      ( ( inv
+                        ( distributivity-hom-Group-permutation-list-transpositions g
+                        ( list-transpositions-permutation-count (type-UU-Fin-Level X) (pair n h) x))) ∙
+                        ( ap
+                          ( map-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y g)
+                          ( eq-htpy-equiv
+                            ( retr-permutation-list-transpositions-count (type-UU-Fin-Level X) (pair n h) x)))))))))
+      ( λ p →
+        eq-is-prop
+          ( is-trunc-Π
+            ( zero-𝕋)
+            ( λ x → is-set-type-Group Y)
+            ( λ S → pr1 restriction-generating-subset-transpositions-symmetric-Group f S)
+            ( λ S → pr1 restriction-generating-subset-transpositions-symmetric-Group g S)))
+      ( λ p →
+        eq-is-prop
+          ( is-set-type-hom-Group (symmetric-Group (set-UU-Fin-Level X)) Y f g))
 ```
