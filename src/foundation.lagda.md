@@ -111,6 +111,7 @@ open import foundation.pairs-of-distinct-elements public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
+open import foundation.powersets public
 open import foundation.principle-of-omniscience public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public

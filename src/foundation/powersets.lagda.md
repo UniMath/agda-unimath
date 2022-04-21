@@ -75,7 +75,13 @@ module _
   antisymmetric-⊆ :
     {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → Id P Q
   antisymmetric-⊆ P Q H K = eq-htpy (λ x → eq-iff (H x) (K x))
+```
 
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
+  
   powerset-Large-Preorder :
     Large-Preorder (λ l → l1 ⊔ lsuc l) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   type-Large-Preorder powerset-Large-Preorder l = subtype l A

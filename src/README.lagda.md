@@ -268,6 +268,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
+open import foundation.powersets
 open import foundation.principle-of-omniscience
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
@@ -497,6 +498,8 @@ open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.interval-subposets
+open import order-theory.large-posets
+open import order-theorr.large-preorders
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
 open import order-theory.least-elements-posets
