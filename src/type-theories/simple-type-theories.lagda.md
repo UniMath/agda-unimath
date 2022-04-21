@@ -90,7 +90,11 @@ module simple where
   section-system.element
     ( concat-htpy-section-system'
       {B = B} {α = refl} {refl} .refl refl {H = H} {H'} {g} K K') {X} x =
-    ( tr-concat (H X) (H' X) (section-system.element g x)) ∙
+    ( tr-concat
+      { B = λ t → fibered-system.element B t x}
+      ( H X)
+      ( H' X)
+      ( section-system.element g x)) ∙
     ( ( ap ( tr ( λ t → fibered-system.element B t x)
                 ( H' X))
            ( section-system.element K x)) ∙
