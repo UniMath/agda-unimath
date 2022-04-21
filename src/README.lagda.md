@@ -201,6 +201,7 @@ open import foundation.disjunction
 open import foundation.distributivity-of-dependent-functions-over-coproduct-types
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
+open import foundation.double-powersets
 open import foundation.dubuc-penon-compact-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.elementhood-relation-w-types
@@ -499,7 +500,7 @@ open import order-theory.finitely-graded-posets
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.interval-subposets
 open import order-theory.large-posets
-open import order-theorr.large-preorders
+open import order-theory.large-preorders
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
 open import order-theory.least-elements-posets
