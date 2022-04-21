@@ -494,6 +494,22 @@ module _
   pr1 equiv-inv-equiv = inv-equiv
   pr2 equiv-inv-equiv = is-equiv-inv-equiv
 
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
+  where
+
+  distributive-inv-comp-equiv : (e : X ≃ Y) (f : Y ≃ Z) →
+    Id (inv-equiv (f ∘e e)) ((inv-equiv e) ∘e (inv-equiv f))
+  distributive-inv-comp-equiv e f =
+    eq-htpy-equiv
+      ( λ x →
+        map-eq-transpose-equiv'
+          ( f ∘e e)
+          ( ( ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv f))) ∙
+            ( ap
+              ( λ g → map-equiv (f ∘e (g ∘e (inv-equiv f))) x)
+              ( inv (right-inverse-law-equiv e)))))
+
 compose-inv-equiv-compose-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) →

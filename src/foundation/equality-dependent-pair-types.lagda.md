@@ -10,7 +10,9 @@ open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl; tr)
+open import foundation-core.identity-types using
+  (Id; refl; tr; _∙_; concat; ap; tr-concat)
+open import foundation-core.propositions using (is-prop; eq-is-prop)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -83,4 +85,21 @@ module _
 
   η-pair : (t : Σ A B) → Id (pair (pr1 t) (pr2 t)) t
   η-pair t = eq-pair-Σ refl refl
+
+  comp-eq-pair-Σ :
+    {x y z : A} (a : B x) (b : B y) (c : B z) (p : Id x y) (q : Id y z) →
+    ( r : Id (tr B p a) b) (s : Id (tr B q b) c) → 
+    Id
+      ( concat
+        {x = pair x a}
+        {y = pair y b}
+        ( eq-pair-Σ p r)
+        ( pair z c)
+        ( eq-pair-Σ q s))
+      ( eq-pair-Σ (p ∙ q) (tr-concat {B = B} p q a ∙ (ap (tr B q) r ∙ s)))
+  comp-eq-pair-Σ a .a .a refl refl refl refl = refl
+
+  comp-pair-eq-Σ : {s t u : Σ A B} (p : Id s t) (q : Id t u) →
+    Id (pr1 (pair-eq-Σ p) ∙ pr1 (pair-eq-Σ q)) (pr1 (pair-eq-Σ (p ∙ q)))
+  comp-pair-eq-Σ refl refl = refl
 ```
