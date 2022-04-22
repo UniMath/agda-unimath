@@ -24,11 +24,12 @@ open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; ap; inv; _∙_)
 open import foundation.negation using (¬; map-neg)
 open import foundation.propositions using (is-prop; is-proof-irrelevant-is-prop)
+open import foundation.raising-universe-levels using (raise-Set)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (unit; star; is-set-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.universe-levels using (Level; UU; lzero)
 
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
@@ -101,6 +102,11 @@ abstract
 Fin-Set : (n : ℕ) → UU-Set lzero
 pr1 (Fin-Set n) = Fin n
 pr2 (Fin-Set n) = is-set-Fin n
+```
+
+```agda
+raise-Fin-Set : (l : Level) (k : ℕ) → UU-Set l
+raise-Fin-Set l k = raise-Set l (Fin-Set k)
 ```
 
 ### Being zero or being one is a proposition

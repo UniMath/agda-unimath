@@ -313,9 +313,13 @@ Fin-UU-Fin : (k : ℕ) → UU-Fin k
 pr1 (Fin-UU-Fin k) = Fin k
 pr2 (Fin-UU-Fin k) = unit-trunc-Prop id-equiv
 
+has-cardinality-raise-Fin :
+  {l : Level} {k : ℕ} → has-cardinality k (raise-Fin l k)
+has-cardinality-raise-Fin {l} {k} = unit-trunc-Prop (equiv-raise-Fin l k)
+
 Fin-UU-Fin-Level : (l : Level) (k : ℕ) → UU-Fin-Level l k
 pr1 (Fin-UU-Fin-Level l k) = raise-Fin l k
-pr2 (Fin-UU-Fin-Level l k) = unit-trunc-Prop (equiv-raise-Fin l k)
+pr2 (Fin-UU-Fin-Level l k) = has-cardinality-raise-Fin
 ```
 
 ### The types `ℤ-Mod k` are finite for nonzero natural numbers `k`

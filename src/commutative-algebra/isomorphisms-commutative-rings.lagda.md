@@ -5,7 +5,11 @@ title: Isomorphisms of commutative rings
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module ring-theory.isomorphisms-commutative-rings where
+module commutative-algebra.isomorphisms-commutative-rings where
+
+open import commutative-algebra.commutative-rings using
+  ( Comm-Ring; ring-Comm-Ring; is-prop-is-commutative-Ring;
+    is-commutative-Comm-Ring)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -13,9 +17,6 @@ open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import ring-theory.commutative-rings using
-  ( Comm-Ring; ring-Comm-Ring; is-prop-is-commutative-Ring;
-    is-commutative-Comm-Ring)
 open import ring-theory.isomorphisms-rings using
   ( iso-Ring; is-contr-total-iso-Ring; id-iso-Ring)
 ```

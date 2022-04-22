@@ -60,6 +60,18 @@ open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```
 
+## Commutative algebra
+
+```agda
+open import commutative-algebra
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.discrete-fields
+open import commutative-algebra.eisenstein-integers
+open import commutative-algebra.gaussian-integers
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
+```
+
 ## Elementary number theory
 
 ```agda
@@ -201,6 +213,7 @@ open import foundation.disjunction
 open import foundation.distributivity-of-dependent-functions-over-coproduct-types
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
+open import foundation.double-powersets
 open import foundation.dubuc-penon-compact-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.elementhood-relation-w-types
@@ -268,6 +281,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
+open import foundation.powersets
 open import foundation.principle-of-omniscience
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
@@ -497,6 +511,8 @@ open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.interval-subposets
+open import order-theory.large-posets
+open import order-theory.large-preorders
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
 open import order-theory.least-elements-posets
@@ -525,17 +541,11 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
-open import ring-theory.commutative-rings
-open import ring-theory.discrete-fields
 open import ring-theory.division-rings
-open import ring-theory.eisenstein-integers
-open import ring-theory.gaussian-integers
-open import ring-theory.homomorphisms-commutative-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
-open import ring-theory.isomorphisms-commutative-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
 open import ring-theory.nontrivial-rings
