@@ -5,7 +5,9 @@ title: The Eisenstein integers
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module ring-theory.eisenstein-integers where
+module commutative-algebra.eisenstein-integers where
+
+open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.equality-integers
@@ -456,34 +458,34 @@ right-distributive-mul-add-ℤ[ω] x y z =
 -- We complete the construction of the ring of Eisenstein integers
 
 ℤ[ω]-Semigroup : Semigroup lzero
-ℤ[ω]-Semigroup =
-  pair
-    ( prod-Set ℤ-Set ℤ-Set)
-    ( pair add-ℤ[ω] associative-add-ℤ[ω])
+pr1 ℤ[ω]-Semigroup = prod-Set ℤ-Set ℤ-Set
+pr1 (pr2 ℤ[ω]-Semigroup) = add-ℤ[ω]
+pr2 (pr2 ℤ[ω]-Semigroup) = associative-add-ℤ[ω]
 
 ℤ[ω]-Group : Group lzero
-ℤ[ω]-Group =
-  pair
-    ( ℤ[ω]-Semigroup)
-    ( pair
-      ( pair zero-ℤ[ω] (pair left-unit-law-add-ℤ[ω] right-unit-law-add-ℤ[ω]))
-      ( pair neg-ℤ[ω]
-        ( pair left-inverse-law-add-ℤ[ω] right-inverse-law-add-ℤ[ω])))
+pr1 ℤ[ω]-Group = ℤ[ω]-Semigroup
+pr1 (pr1 (pr2 ℤ[ω]-Group)) = zero-ℤ[ω]
+pr1 (pr2 (pr1 (pr2 ℤ[ω]-Group))) = left-unit-law-add-ℤ[ω]
+pr2 (pr2 (pr1 (pr2 ℤ[ω]-Group))) = right-unit-law-add-ℤ[ω]
+pr1 (pr2 (pr2 ℤ[ω]-Group)) = neg-ℤ[ω]
+pr1 (pr2 (pr2 (pr2 ℤ[ω]-Group))) = left-inverse-law-add-ℤ[ω]
+pr2 (pr2 (pr2 (pr2 ℤ[ω]-Group))) = right-inverse-law-add-ℤ[ω]
 
 ℤ[ω]-Ab : Ab lzero
-ℤ[ω]-Ab =
-  pair
-    ( ℤ[ω]-Group)
-    ( commutative-add-ℤ[ω])
-
+pr1 ℤ[ω]-Ab = ℤ[ω]-Group
+pr2 ℤ[ω]-Ab = commutative-add-ℤ[ω]
 
 ℤ[ω]-Ring : Ring lzero
-ℤ[ω]-Ring =
-  pair
-    ( ℤ[ω]-Ab)
-    ( pair
-      ( pair mul-ℤ[ω] associative-mul-ℤ[ω])
-      ( pair
-        ( pair one-ℤ[ω] (pair left-unit-law-mul-ℤ[ω] right-unit-law-mul-ℤ[ω]))
-        ( pair left-distributive-mul-add-ℤ[ω] right-distributive-mul-add-ℤ[ω])))
+pr1 ℤ[ω]-Ring = ℤ[ω]-Ab
+pr1 (pr1 (pr2 ℤ[ω]-Ring)) = mul-ℤ[ω]
+pr2 (pr1 (pr2 ℤ[ω]-Ring)) = associative-mul-ℤ[ω]
+pr1 (pr1 (pr2 (pr2 ℤ[ω]-Ring))) = one-ℤ[ω]
+pr1 (pr2 (pr1 (pr2 (pr2 ℤ[ω]-Ring)))) = left-unit-law-mul-ℤ[ω]
+pr2 (pr2 (pr1 (pr2 (pr2 ℤ[ω]-Ring)))) = right-unit-law-mul-ℤ[ω]
+pr1 (pr2 (pr2 (pr2 ℤ[ω]-Ring))) = left-distributive-mul-add-ℤ[ω]
+pr2 (pr2 (pr2 (pr2 ℤ[ω]-Ring))) = right-distributive-mul-add-ℤ[ω]
+
+ℤ[ω]-Comm-Ring : Comm-Ring lzero
+pr1 ℤ[ω]-Comm-Ring = ℤ[ω]-Ring
+pr2 ℤ[ω]-Comm-Ring = commutative-mul-ℤ[ω]
 ```

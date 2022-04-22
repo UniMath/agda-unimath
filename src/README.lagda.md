@@ -60,6 +60,18 @@ open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```
 
+## Commutative algebra
+
+```agda
+open import commutative-algebra
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.discrete-fields
+open import commutative-algebra.eisenstein-integers
+open import commutative-algebra.gaussian-integers
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
+```
+
 ## Elementary number theory
 
 ```agda
@@ -529,17 +541,11 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
-open import ring-theory.commutative-rings
-open import ring-theory.discrete-fields
 open import ring-theory.division-rings
-open import ring-theory.eisenstein-integers
-open import ring-theory.gaussian-integers
-open import ring-theory.homomorphisms-commutative-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
 open import ring-theory.invertible-elements-rings
-open import ring-theory.isomorphisms-commutative-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
 open import ring-theory.nontrivial-rings

@@ -5,7 +5,9 @@ title: The Gaussian integers
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module ring-theory.gaussian-integers where
+module commutative-algebra.gaussian-integers where
+
+open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.equality-integers
@@ -272,33 +274,33 @@ right-distributive-mul-add-ℤ[i] x y z =
 -- We complete the construction of the ring of Gaussian integers
 
 ℤ[i]-Semigroup : Semigroup lzero
-ℤ[i]-Semigroup =
-  pair
-    ( prod-Set ℤ-Set ℤ-Set)
-    ( pair add-ℤ[i] associative-add-ℤ[i])
+pr1 ℤ[i]-Semigroup = prod-Set ℤ-Set ℤ-Set
+pr1 (pr2 ℤ[i]-Semigroup) = add-ℤ[i]
+pr2 (pr2 ℤ[i]-Semigroup) = associative-add-ℤ[i]
 
 ℤ[i]-Group : Group lzero
-ℤ[i]-Group =
-  pair
-    ( ℤ[i]-Semigroup)
-    ( pair
-      ( pair zero-ℤ[i] (pair left-unit-law-add-ℤ[i] right-unit-law-add-ℤ[i]))
-      ( pair neg-ℤ[i]
-        ( pair left-inverse-law-add-ℤ[i] right-inverse-law-add-ℤ[i])))
+pr1 ℤ[i]-Group = ℤ[i]-Semigroup
+pr1 (pr1 (pr2 ℤ[i]-Group)) = zero-ℤ[i]
+pr1 (pr2 (pr1 (pr2 ℤ[i]-Group))) = left-unit-law-add-ℤ[i]
+pr2 (pr2 (pr1 (pr2 ℤ[i]-Group))) = right-unit-law-add-ℤ[i]
+pr1 (pr2 (pr2 ℤ[i]-Group)) = neg-ℤ[i]
+pr1 (pr2 (pr2 (pr2 ℤ[i]-Group))) = left-inverse-law-add-ℤ[i]
+pr2 (pr2 (pr2 (pr2 ℤ[i]-Group))) = right-inverse-law-add-ℤ[i]
 
 ℤ[i]-Ab : Ab lzero
-ℤ[i]-Ab =
-  pair
-    ( ℤ[i]-Group)
-    ( commutative-add-ℤ[i])
-
+pr1 ℤ[i]-Ab = ℤ[i]-Group
+pr2 ℤ[i]-Ab = commutative-add-ℤ[i]
 
 ℤ[i]-Ring : Ring lzero
-ℤ[i]-Ring =
-  pair
-    ( ℤ[i]-Ab)
-    ( pair
-      ( pair mul-ℤ[i] associative-mul-ℤ[i])
-      ( pair
-        ( pair one-ℤ[i] (pair left-unit-law-mul-ℤ[i] right-unit-law-mul-ℤ[i]))
-        ( pair left-distributive-mul-add-ℤ[i] right-distributive-mul-add-ℤ[i])))
+pr1 ℤ[i]-Ring = ℤ[i]-Ab
+pr1 (pr1 (pr2 ℤ[i]-Ring)) = mul-ℤ[i]
+pr2 (pr1 (pr2 ℤ[i]-Ring)) = associative-mul-ℤ[i]
+pr1 (pr1 (pr2 (pr2 ℤ[i]-Ring))) = one-ℤ[i]
+pr1 (pr2 (pr1 (pr2 (pr2 ℤ[i]-Ring)))) = left-unit-law-mul-ℤ[i]
+pr2 (pr2 (pr1 (pr2 (pr2 ℤ[i]-Ring)))) = right-unit-law-mul-ℤ[i]
+pr1 (pr2 (pr2 (pr2 ℤ[i]-Ring))) = left-distributive-mul-add-ℤ[i]
+pr2 (pr2 (pr2 (pr2 ℤ[i]-Ring))) = right-distributive-mul-add-ℤ[i]
+
+ℤ[i]-Comm-Ring : Comm-Ring lzero
+pr1 ℤ[i]-Comm-Ring = ℤ[i]-Ring
+pr2 ℤ[i]-Comm-Ring = commutative-mul-ℤ[i]
