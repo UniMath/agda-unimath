@@ -28,7 +28,7 @@ open import group-theory.groups using
     inv-inv-Group; distributive-inv-mul-Group)
 open import group-theory.subgroups using
   ( subset-Group; Subgroup; subset-Subgroup; type-predicate-Subgroup; contains-unit-Subgroup;
-    is-closed-under-mul-Subgroup; is-closed-under-inv-Subgroup)
+    is-closed-under-mul-Subgroup; is-closed-under-inv-Subgroup; complete-Subgroup)
 
 open import univalent-combinatorics.lists using
   ( list; nil; cons; in-list; concat-list)
@@ -254,4 +254,8 @@ module _
     where
     P : subset-subgroup-subset-Group' x → type-predicate-Subgroup G U' x
     P (pair c refl) = contains-formal-combinations-Subgroup U' K c
+
+  is-generating-subset-Group : UU (l1 ⊔ l2)
+  is-generating-subset-Group =
+    subset-Subgroup G (complete-Subgroup {l2 = l1} G) ⊆ subset-subgroup-subset-Group
 ```

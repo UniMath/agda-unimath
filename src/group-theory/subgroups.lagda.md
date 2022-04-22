@@ -15,16 +15,19 @@ open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
     is-prop-function-type; is-prop-prod; is-prop-is-equiv; Π-Prop; hom-Prop;
     prod-Prop)
+open import foundation.raising-universe-levels using (raise-Prop)
 open import foundation.sets using (is-set; is-set-function-type; UU-Set)
 open import foundation.subtypes using
   ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
     is-set-type-subtype)
+open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
     associative-mul-Group; left-unit-law-Group; right-unit-law-Group;
-    left-inverse-law-Group; right-inverse-law-Group)
+    left-inverse-law-Group; right-inverse-law-Group; is-unit-group-Prop;
+    is-own-inverse-unit-Group)
 open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group; preserves-unit-Group;
     preserves-inverses-Group)
@@ -276,3 +279,27 @@ module _
   pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
   pr2 inclusion-group-Subgroup = preserves-mul-inclusion-group-Subgroup
 ```
+
+### Examples of subgroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1)
+  where
+
+  complete-Subgroup : Subgroup l2 G
+  pr1 complete-Subgroup x = raise-Prop l2 unit-Prop
+  pr1 (pr2 complete-Subgroup) = raise-star
+  pr1 (pr2 (pr2 complete-Subgroup)) _ _ _ _ = raise-star
+  pr2 (pr2 (pr2 complete-Subgroup)) _ _ = raise-star
+
+  trivial-Subgroup : Subgroup l1 G
+  pr1 trivial-Subgroup x = is-unit-group-Prop G x
+  pr1 (pr2 trivial-Subgroup) = refl
+  pr1 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) .(unit-Group G) refl refl =
+    left-unit-law-Group G (unit-Group G)
+  pr2 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) refl =
+    is-own-inverse-unit-Group G
+```
+
+

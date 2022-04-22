@@ -124,6 +124,13 @@ module _
   is-unit-Group : type-Group → UU l
   is-unit-Group x = Id x unit-Group
   
+  is-prop-is-unit-Group : (x : type-Group) → is-prop (is-unit-Group x)
+  is-prop-is-unit-Group x = is-set-type-Group x unit-Group
+
+  is-unit-group-Prop : type-Group → UU-Prop l
+  pr1 (is-unit-group-Prop x) = is-unit-Group x
+  pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
+
   left-unit-law-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
   left-unit-law-Group = pr1 (pr2 is-unital-Group)
