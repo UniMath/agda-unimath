@@ -37,29 +37,29 @@ is-prop-is-commutative-Ring R =
       ( λ y →
         is-set-type-Ring R (mul-Ring R x y) (mul-Ring R y x)))
 
-Comm-Ring :
+Commutative-Ring :
   ( l : Level) → UU (lsuc l)
-Comm-Ring l = Σ (Ring l) is-commutative-Ring
+Commutative-Ring l = Σ (Ring l) is-commutative-Ring
 
 module _
-  {l : Level} (R : Comm-Ring l)
+  {l : Level} (R : Commutative-Ring l)
   where
   
-  ring-Comm-Ring : Ring l
-  ring-Comm-Ring = pr1 R
+  ring-Commutative-Ring : Ring l
+  ring-Commutative-Ring = pr1 R
 
-  is-commutative-Comm-Ring : is-commutative-Ring ring-Comm-Ring
-  is-commutative-Comm-Ring = pr2 R
+  is-commutative-Commutative-Ring : is-commutative-Ring ring-Commutative-Ring
+  is-commutative-Commutative-Ring = pr2 R
 
-  type-Comm-Ring : UU l
-  type-Comm-Ring = type-Ring ring-Comm-Ring
+  type-Commutative-Ring : UU l
+  type-Commutative-Ring = type-Ring ring-Commutative-Ring
 
-  zero-Comm-Ring : type-Comm-Ring
-  zero-Comm-Ring = zero-Ring ring-Comm-Ring
+  zero-Commutative-Ring : type-Commutative-Ring
+  zero-Commutative-Ring = zero-Ring ring-Commutative-Ring
 
-  add-Comm-Ring : type-Comm-Ring → type-Comm-Ring → type-Comm-Ring
-  add-Comm-Ring = add-Ring ring-Comm-Ring
+  add-Commutative-Ring : type-Commutative-Ring → type-Commutative-Ring → type-Commutative-Ring
+  add-Commutative-Ring = add-Ring ring-Commutative-Ring
 
-  neg-Comm-Ring : type-Comm-Ring → type-Comm-Ring
-  neg-Comm-Ring = neg-Ring ring-Comm-Ring
+  neg-Commutative-Ring : type-Commutative-Ring → type-Commutative-Ring
+  neg-Commutative-Ring = neg-Ring ring-Commutative-Ring
 ```

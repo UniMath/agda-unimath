@@ -142,6 +142,9 @@ module _
   subset-right-ideal-Ring : subset-Ring l2 R
   subset-right-ideal-Ring = pr1 I
 
+  is-in-right-ideal-Ring : type-Ring R → UU l2
+  is-in-right-ideal-Ring x = type-Prop (subset-right-ideal-Ring x)
+
   type-right-ideal-Ring : UU (l1 ⊔ l2)
   type-right-ideal-Ring = type-subset-Ring R subset-right-ideal-Ring
 
@@ -156,6 +159,16 @@ module _
     is-additive-subgroup-subset-Ring R subset-right-ideal-Ring
   is-additive-subgroup-subset-right-ideal-Ring =
     pr1 is-right-ideal-subset-right-ideal-Ring
+
+  contains-zero-right-ideal-Ring : is-in-right-ideal-Ring (zero-Ring R)
+  contains-zero-right-ideal-Ring =
+    pr1 is-additive-subgroup-subset-right-ideal-Ring
+
+  is-closed-under-add-right-ideal-Ring :
+    {x y : type-Ring R} → is-in-right-ideal-Ring x → is-in-right-ideal-Ring y →
+    is-in-right-ideal-Ring (add-Ring R x y)
+  is-closed-under-add-right-ideal-Ring H K =
+    pr1 (pr2 is-additive-subgroup-subset-right-ideal-Ring) _ _ H K
 
   is-closed-under-mul-right-ideal-Ring :
     is-closed-under-mul-right-subset-Ring R subset-right-ideal-Ring
@@ -185,6 +198,9 @@ module _
   subset-two-sided-ideal-Ring : subset-Ring l2 R
   subset-two-sided-ideal-Ring = pr1 I
 
+  is-in-two-sided-ideal-Ring : type-Ring R → UU l2
+  is-in-two-sided-ideal-Ring x = type-Prop (subset-two-sided-ideal-Ring x)
+
   type-two-sided-ideal-Ring : UU (l1 ⊔ l2)
   type-two-sided-ideal-Ring = type-subset-Ring R subset-two-sided-ideal-Ring
 
@@ -200,6 +216,17 @@ module _
     is-additive-subgroup-subset-Ring R subset-two-sided-ideal-Ring
   is-additive-subgroup-subset-two-sided-ideal-Ring =
     pr1 is-two-sided-ideal-subset-two-sided-ideal-Ring
+
+  contains-zero-two-sided-ideal-Ring : is-in-two-sided-ideal-Ring (zero-Ring R)
+  contains-zero-two-sided-ideal-Ring =
+    pr1 is-additive-subgroup-subset-two-sided-ideal-Ring
+
+  is-closed-under-add-two-sided-ideal-Ring :
+    {x y : type-Ring R} → is-in-two-sided-ideal-Ring x →
+    is-in-two-sided-ideal-Ring y →
+    is-in-two-sided-ideal-Ring (add-Ring R x y)
+  is-closed-under-add-two-sided-ideal-Ring H K =
+    pr1 (pr2 is-additive-subgroup-subset-two-sided-ideal-Ring) _ _ H K
 
   is-closed-under-mul-left-two-sided-ideal-Ring :
     is-closed-under-mul-left-subset-Ring R subset-two-sided-ideal-Ring
