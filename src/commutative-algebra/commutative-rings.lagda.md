@@ -5,7 +5,7 @@ title: Commutative rings
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module ring-theory.commutative-rings where
+module commutative-algebra.commutative-rings where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)

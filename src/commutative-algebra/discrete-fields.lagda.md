@@ -5,11 +5,13 @@ title: Discrete fields
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module ring-theory.discrete-fields where
+module commutative-algebra.discrete-fields where
+
+open import commutative-algebra.commutative-rings using
+  ( Comm-Ring; ring-Comm-Ring)
 
 open import foundation.universe-levels using (Level; UU)
 
-open import ring-theory.commutative-rings using (Comm-Ring; ring-Comm-Ring)
 open import ring-theory.division-rings using (is-division-Ring)
 ```
 
