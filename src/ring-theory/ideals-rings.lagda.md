@@ -55,9 +55,9 @@ module _
   {l1 : Level} (R : Ring l1)
   where
   
-  is-is-closed-under-mul-left-subset-Ring :
+  is-closed-under-mul-left-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
-  is-is-closed-under-mul-left-subset-Ring P =
+  is-closed-under-mul-left-subset-Ring P =
     (x : type-Ring R) (y : type-Ring R) →
     type-Prop (P y) → type-Prop (P (mul-Ring R x y))
   
@@ -65,7 +65,7 @@ module _
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-left-ideal-subset-Ring P =
     is-additive-subgroup-subset-Ring R P ×
-    is-is-closed-under-mul-left-subset-Ring P
+    is-closed-under-mul-left-subset-Ring P
   
 left-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
@@ -77,6 +77,9 @@ module _
 
   subset-left-ideal-Ring : subset-Ring l2 R
   subset-left-ideal-Ring = pr1 I
+
+  is-in-left-ideal-Ring : type-Ring R → UU l2
+  is-in-left-ideal-Ring x = type-Prop (subset-left-ideal-Ring x)
 
   type-left-ideal-Ring : UU (l1 ⊔ l2)
   type-left-ideal-Ring = type-subset-Ring R subset-left-ideal-Ring
@@ -93,9 +96,19 @@ module _
   is-additive-subgroup-subset-left-ideal-Ring =
     pr1 is-left-ideal-subset-left-ideal-Ring
 
-  is-is-closed-under-mul-left-ideal-Ring :
-    is-is-closed-under-mul-left-subset-Ring R subset-left-ideal-Ring
-  is-is-closed-under-mul-left-ideal-Ring =
+  contains-zero-left-ideal-Ring : is-in-left-ideal-Ring (zero-Ring R)
+  contains-zero-left-ideal-Ring =
+    pr1 is-additive-subgroup-subset-left-ideal-Ring
+
+  is-closed-under-add-left-ideal-Ring :
+    {x y : type-Ring R} → is-in-left-ideal-Ring x → is-in-left-ideal-Ring y →
+    is-in-left-ideal-Ring (add-Ring R x y)
+  is-closed-under-add-left-ideal-Ring H K =
+    pr1 (pr2 is-additive-subgroup-subset-left-ideal-Ring) _ _ H K
+
+  is-closed-under-mul-left-ideal-Ring :
+    is-closed-under-mul-left-subset-Ring R subset-left-ideal-Ring
+  is-closed-under-mul-left-ideal-Ring =
     pr2 is-left-ideal-subset-left-ideal-Ring
 ```
 
@@ -106,9 +119,9 @@ module _
   {l1 : Level} (R : Ring l1)
   where
   
-  is-is-closed-under-mul-right-subset-Ring :
+  is-closed-under-mul-right-subset-Ring :
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
-  is-is-closed-under-mul-right-subset-Ring P =
+  is-closed-under-mul-right-subset-Ring P =
     (x : type-Ring R) (y : type-Ring R) →
     type-Prop (P x) → type-Prop (P (mul-Ring R x y))
 
@@ -116,7 +129,7 @@ module _
     {l2 : Level} → subset-Ring l2 R → UU (l1 ⊔ l2)
   is-right-ideal-subset-Ring P =
     is-additive-subgroup-subset-Ring R P ×
-    is-is-closed-under-mul-right-subset-Ring P
+    is-closed-under-mul-right-subset-Ring P
 
 right-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
@@ -144,9 +157,9 @@ module _
   is-additive-subgroup-subset-right-ideal-Ring =
     pr1 is-right-ideal-subset-right-ideal-Ring
 
-  is-is-closed-under-mul-right-ideal-Ring :
-    is-is-closed-under-mul-right-subset-Ring R subset-right-ideal-Ring
-  is-is-closed-under-mul-right-ideal-Ring =
+  is-closed-under-mul-right-ideal-Ring :
+    is-closed-under-mul-right-subset-Ring R subset-right-ideal-Ring
+  is-closed-under-mul-right-ideal-Ring =
     pr2 is-right-ideal-subset-right-ideal-Ring
 ```
 
@@ -157,8 +170,8 @@ is-two-sided-ideal-subset-Ring :
   {l1 l2 : Level} (R : Ring l1) (P : subset-Ring l2 R) → UU (l1 ⊔ l2)
 is-two-sided-ideal-subset-Ring R P =
   is-additive-subgroup-subset-Ring R P ×
-  ( is-is-closed-under-mul-left-subset-Ring R P ×
-    is-is-closed-under-mul-right-subset-Ring R P)
+  ( is-closed-under-mul-left-subset-Ring R P ×
+    is-closed-under-mul-right-subset-Ring R P)
 
 two-sided-ideal-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
@@ -188,13 +201,13 @@ module _
   is-additive-subgroup-subset-two-sided-ideal-Ring =
     pr1 is-two-sided-ideal-subset-two-sided-ideal-Ring
 
-  is-is-closed-under-mul-left-two-sided-ideal-Ring :
-    is-is-closed-under-mul-left-subset-Ring R subset-two-sided-ideal-Ring
-  is-is-closed-under-mul-left-two-sided-ideal-Ring =
+  is-closed-under-mul-left-two-sided-ideal-Ring :
+    is-closed-under-mul-left-subset-Ring R subset-two-sided-ideal-Ring
+  is-closed-under-mul-left-two-sided-ideal-Ring =
     pr1 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Ring)
 
-  is-is-closed-under-mul-right-two-sided-ideal-Ring :
-    is-is-closed-under-mul-right-subset-Ring R subset-two-sided-ideal-Ring
-  is-is-closed-under-mul-right-two-sided-ideal-Ring =
+  is-closed-under-mul-right-two-sided-ideal-Ring :
+    is-closed-under-mul-right-subset-Ring R subset-two-sided-ideal-Ring
+  is-closed-under-mul-right-two-sided-ideal-Ring =
     pr2 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Ring)
 ```
