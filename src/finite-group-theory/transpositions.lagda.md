@@ -34,6 +34,7 @@ open import foundation.equivalences using
 open import foundation.equivalences-maybe using
   ( extend-equiv-Maybe; comp-extend-equiv-Maybe;
     computation-inv-extend-equiv-Maybe)
+open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_; id; precomp)
 open import foundation.function-extensionality using (htpy-eq; eq-htpy)
 open import foundation.functoriality-coproduct-types using
@@ -48,11 +49,12 @@ open import foundation.pairs-of-distinct-elements using
   ( pair-of-distinct-elements; fst-pair-of-distinct-elements;
     snd-pair-of-distinct-elements; distinction-pair-of-distinct-elements)
 open import foundation.propositions using
-  ( eq-is-prop; is-prop-is-prop; is-prop-all-elements-equal)
+  ( eq-is-prop; is-prop-is-prop; is-prop-all-elements-equal; UU-Prop; type-Prop;
+    is-prop-type-Prop; is-prop)
 open import foundation.propositional-extensionality using (eq-iff)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
-    unit-trunc-Prop; type-trunc-Prop)
+    unit-trunc-Prop; type-trunc-Prop; trunc-Prop)
 open import foundation.raising-universe-levels using
   ( map-raise; map-inv-raise; raise; equiv-raise)
 open import foundation.sets using (is-set-type-Set; Id-Prop)
@@ -61,7 +63,7 @@ open import foundation.type-arithmetic-empty-type using
     map-right-unit-law-coprod-is-empty)
 open import foundation.unit-type using (star; unit)
 open import foundation.univalence using (eq-equiv)
-open import foundation.universe-levels using (Level; UU; lzero; _⊔_)
+open import foundation.universe-levels using (Level; UU; lzero; _⊔_; lsuc)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; is-in-2-Element-Decidable-Subtype;
@@ -178,6 +180,19 @@ module _
   transposition : X ≃ X
   pr1 transposition = map-transposition
   pr2 transposition = is-equiv-map-transposition
+
+module _
+  {l1 l2 : Level} {X : UU l1}
+  where
+
+  is-transposition-permutation-Prop : X ≃ X → UU-Prop (l1 ⊔ lsuc l2)
+  is-transposition-permutation-Prop f = trunc-Prop (fib (transposition {l2 = l2}) f)
+
+  is-transposition-permutation : X ≃ X → UU (l1 ⊔ lsuc l2)
+  is-transposition-permutation f = type-Prop (is-transposition-permutation-Prop f)
+
+  is-prop-is-transposition-permutation : (f : X ≃ X) → is-prop (is-transposition-permutation f)
+  is-prop-is-transposition-permutation f = is-prop-type-Prop (is-transposition-permutation-Prop f)
 ```
 
 ### The standard transposition obtained from a pair of distinct points
