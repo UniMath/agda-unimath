@@ -184,3 +184,71 @@ module _
   pr1 iso-Large-Precat-Set = iso-Large-Precat C X Y
   pr2 iso-Large-Precat-Set = is-set-iso-Large-Precat
 ```
+
+### Isomorphisms are stable by composition
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 l3 : Level}
+  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
+  (Z : obj-Large-Precat C l3)
+  where
+
+  is-iso-comp-iso-Large-Precat : (g : type-hom-Large-Precat C Y Z) →
+    (f : type-hom-Large-Precat C X Y) →
+    is-iso-Large-Precat C g → is-iso-Large-Precat C f →
+    is-iso-Large-Precat C (comp-hom-Large-Precat C g f)
+  pr1 (is-iso-comp-iso-Large-Precat g f q p) =
+    comp-hom-Large-Precat C
+      ( hom-inv-iso-Large-Precat C X Y (pair f p))
+      ( hom-inv-iso-Large-Precat C Y Z (pair g q))
+  pr1 (pr2 (is-iso-comp-iso-Large-Precat g f q p)) =
+    ( associative-comp-hom-Large-Precat C g f (pr1 (is-iso-comp-iso-Large-Precat g f q p))) ∙
+      ( ( ap
+        ( comp-hom-Large-Precat C g)
+        ( ( inv
+          ( associative-comp-hom-Large-Precat C f
+            ( hom-inv-iso-Large-Precat C X Y (pair f p))
+            ( hom-inv-iso-Large-Precat C Y Z (pair g q)))) ∙
+          ( ( ap
+            ( λ h →
+              comp-hom-Large-Precat C h
+                (hom-inv-iso-Large-Precat C Y Z (pair g q)))
+            ( is-sec-hom-inv-iso-Large-Precat C X Y (pair f p))) ∙
+            ( left-unit-law-comp-hom-Large-Precat C
+              ( hom-inv-iso-Large-Precat C Y Z (pair g q)))))) ∙
+        ( is-sec-hom-inv-iso-Large-Precat C Y Z (pair g q)))
+  pr2 (pr2 (is-iso-comp-iso-Large-Precat g f q p)) =
+    ( associative-comp-hom-Large-Precat C
+      ( hom-inv-iso-Large-Precat C X Y (pair f p))
+      ( hom-inv-iso-Large-Precat C Y Z (pair g q))
+      ( comp-hom-Large-Precat C g f)) ∙
+      ( ( ap
+        ( comp-hom-Large-Precat C (hom-inv-iso-Large-Precat C X Y (pair f p)))
+        ( ( inv
+          ( associative-comp-hom-Large-Precat C
+            ( hom-inv-iso-Large-Precat C Y Z (pair g q))
+            ( g)
+            ( f))) ∙
+          ( ( ap
+            ( λ h → comp-hom-Large-Precat C h f)
+            ( is-retr-hom-inv-iso-Large-Precat C Y Z (pair g q))) ∙
+            ( left-unit-law-comp-hom-Large-Precat C f)))) ∙
+        ( is-retr-hom-inv-iso-Large-Precat C X Y (pair f p)))
+
+  comp-iso-Large-Precat : iso-Large-Precat C Y Z →
+    iso-Large-Precat C X Y →
+    iso-Large-Precat C X Z
+  pr1 (comp-iso-Large-Precat g f) =
+    comp-hom-Large-Precat C
+      ( hom-iso-Large-Precat C Y Z g)
+      ( hom-iso-Large-Precat C X Y f)
+  pr2 (comp-iso-Large-Precat f g) =
+    is-iso-comp-iso-Large-Precat
+      ( hom-iso-Large-Precat C Y Z f)
+      ( hom-iso-Large-Precat C X Y g)
+      ( is-iso-hom-iso-Large-Precat C Y Z f)
+      ( is-iso-hom-iso-Large-Precat C X Y g)
+```
+

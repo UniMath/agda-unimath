@@ -9,7 +9,7 @@ open import category-theory.isomorphisms-large-precategories using
   ( is-iso-Large-Precat; iso-Large-Precat; hom-iso-Large-Precat;
     is-iso-hom-iso-Large-Precat; hom-inv-iso-Large-Precat;
     is-sec-hom-inv-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat;
-    id-iso-Large-Precat; iso-eq-Large-Precat)
+    id-iso-Large-Precat; iso-eq-Large-Precat; comp-iso-Large-Precat)
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-total-path)
@@ -107,4 +107,17 @@ module _
         ( Σ (Group l) (Id G))
         ( equiv-tot extensionality-Group')
         ( is-contr-total-path G)
+```
+
+### Group isomorphisms are stable by composition
+
+```agda
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
+  where
+
+  comp-iso-Group :
+    type-iso-Group H K → type-iso-Group G H → type-iso-Group G K
+  comp-iso-Group = comp-iso-Large-Precat Group-Large-Precat G H K
 ```
