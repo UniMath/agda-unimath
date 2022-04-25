@@ -25,6 +25,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count)
+open import univalent-combinatorics.finite-types using (𝔽; type-𝔽)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin)
 ```
@@ -48,6 +49,13 @@ sum-Fin-ℕ {succ-ℕ k} f = add-ℕ (sum-Fin-ℕ (λ x → f (inl x))) (f (inr 
 ```agda
 sum-count-ℕ : {l : Level} {A : UU l} (e : count A) → (f : A → ℕ) → ℕ
 sum-count-ℕ (pair k e) f = sum-Fin-ℕ (f ∘ (map-equiv e))
+```
+
+### Sums of finitely many natural numbers
+
+```agda
+finite-sum-ℕ : (X : 𝔽) → (type-𝔽 X → ℕ) → ℕ
+finite-sum-ℕ X f = ?
 ```
 
 ### Bounded sums of natural numbers
