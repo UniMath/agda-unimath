@@ -485,7 +485,7 @@ pr2 (pr2 (pr1 (pr2 (pr2 ℤ[ω]-Ring)))) = right-unit-law-mul-ℤ[ω]
 pr1 (pr2 (pr2 (pr2 ℤ[ω]-Ring))) = left-distributive-mul-add-ℤ[ω]
 pr2 (pr2 (pr2 (pr2 ℤ[ω]-Ring))) = right-distributive-mul-add-ℤ[ω]
 
-ℤ[ω]-Comm-Ring : Comm-Ring lzero
-pr1 ℤ[ω]-Comm-Ring = ℤ[ω]-Ring
-pr2 ℤ[ω]-Comm-Ring = commutative-mul-ℤ[ω]
+ℤ[ω]-Commutative-Ring : Commutative-Ring lzero
+pr1 ℤ[ω]-Commutative-Ring = ℤ[ω]-Ring
+pr2 ℤ[ω]-Commutative-Ring = commutative-mul-ℤ[ω]
 ```

@@ -8,8 +8,8 @@ title: Isomorphisms of commutative rings
 module commutative-algebra.isomorphisms-commutative-rings where
 
 open import commutative-algebra.commutative-rings using
-  ( Comm-Ring; ring-Comm-Ring; is-prop-is-commutative-Ring;
-    is-commutative-Comm-Ring)
+  ( Commutative-Ring; ring-Commutative-Ring; is-prop-is-commutative-Ring;
+    is-commutative-Commutative-Ring)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -24,18 +24,18 @@ open import ring-theory.isomorphisms-rings using
 ## Definition
 
 ```agda
-iso-Comm-Ring :
-  { l1 l2 : Level} → Comm-Ring l1 → Comm-Ring l2 → UU (l1 ⊔ l2)
-iso-Comm-Ring R1 R2 = iso-Ring (ring-Comm-Ring R1) (ring-Comm-Ring R2)
+iso-Commutative-Ring :
+  { l1 l2 : Level} → Commutative-Ring l1 → Commutative-Ring l2 → UU (l1 ⊔ l2)
+iso-Commutative-Ring R1 R2 = iso-Ring (ring-Commutative-Ring R1) (ring-Commutative-Ring R2)
 
-is-contr-total-iso-Comm-Ring :
-  { l1 : Level} (R1 : Comm-Ring l1) →
-  is-contr (Σ (Comm-Ring l1) (iso-Comm-Ring R1))
-is-contr-total-iso-Comm-Ring R1 =
+is-contr-total-iso-Commutative-Ring :
+  { l1 : Level} (R1 : Commutative-Ring l1) →
+  is-contr (Σ (Commutative-Ring l1) (iso-Commutative-Ring R1))
+is-contr-total-iso-Commutative-Ring R1 =
   is-contr-total-Eq-subtype
-    ( is-contr-total-iso-Ring (ring-Comm-Ring R1))
+    ( is-contr-total-iso-Ring (ring-Commutative-Ring R1))
     ( is-prop-is-commutative-Ring)
-    ( ring-Comm-Ring R1)
-    ( id-iso-Ring (ring-Comm-Ring R1))
-    ( is-commutative-Comm-Ring R1)
+    ( ring-Commutative-Ring R1)
+    ( id-iso-Ring (ring-Commutative-Ring R1))
+    ( is-commutative-Commutative-Ring R1)
 ```

@@ -8,7 +8,7 @@ title: Discrete fields
 module commutative-algebra.discrete-fields where
 
 open import commutative-algebra.commutative-rings using
-  ( Comm-Ring; ring-Comm-Ring)
+  ( Commutative-Ring; ring-Commutative-Ring)
 
 open import foundation.universe-levels using (Level; UU)
 
@@ -22,7 +22,8 @@ A discrete field is a commutative division ring. They are called discrete, becau
 ## Definition
 
 ```agda
-is-discrete-field-Comm-Ring :
-  { l : Level} → Comm-Ring l → UU l
-is-discrete-field-Comm-Ring R = is-division-Ring (ring-Comm-Ring R)
+is-discrete-field-Commutative-Ring :
+  { l : Level} → Commutative-Ring l → UU l
+is-discrete-field-Commutative-Ring R =
+  is-division-Ring (ring-Commutative-Ring R)
 ```

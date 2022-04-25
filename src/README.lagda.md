@@ -69,6 +69,7 @@ open import commutative-algebra.discrete-fields
 open import commutative-algebra.eisenstein-integers
 open import commutative-algebra.gaussian-integers
 open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
 ```
 
