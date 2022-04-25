@@ -17,7 +17,7 @@ open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using
   (Id; refl; _∙_; ap; inv; ap-binary)
 open import foundation.propositional-truncations using
-  (type-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop)
+  ( type-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Set; equiv-raise)
 open import foundation.sets using
@@ -82,6 +82,8 @@ pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semigroup' X
 ```
 
 ## Properties
+
+### The symmetric group and the abstract automorphism group of a set are isomorphic
 
 ```agda
 module _

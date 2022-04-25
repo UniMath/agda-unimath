@@ -8,26 +8,36 @@ module group-theory.subgroups where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
+open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using (map-inv-is-equiv)
+open import foundation.function-extensionality using (eq-htpy)
+open import foundation.functions using (id)
 open import foundation.identity-types using (Id; refl)
+open import foundation.powersets using (_⊆_)
 open import foundation.propositional-extensionality using (is-set-UU-Prop)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
     is-prop-function-type; is-prop-prod; is-prop-is-equiv; Π-Prop; hom-Prop;
-    prod-Prop)
+    prod-Prop; eq-is-prop)
+open import foundation.raising-universe-levels using (raise-Prop; map-raise)
 open import foundation.sets using (is-set; is-set-function-type; UU-Set)
 open import foundation.subtypes using
   ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
-    is-set-type-subtype)
+    is-set-type-subtype; is-prop-is-in-subtype)
+open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
     associative-mul-Group; left-unit-law-Group; right-unit-law-Group;
-    left-inverse-law-Group; right-inverse-law-Group)
+    left-inverse-law-Group; right-inverse-law-Group; is-unit-group-Prop;
+    is-own-inverse-unit-Group; semigroup-Group)
 open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group; preserves-unit-Group;
     preserves-inverses-Group)
+open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
+open import group-theory.isomorphisms-groups using
+  ( type-iso-Group; comp-iso-Group)
 open import group-theory.semigroups using (Semigroup)
 ```
 
@@ -276,3 +286,87 @@ module _
   pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
   pr2 inclusion-group-Subgroup = preserves-mul-inclusion-group-Subgroup
 ```
+
+### Examples of subgroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1)
+  where
+
+  complete-Subgroup : Subgroup l2 G
+  pr1 complete-Subgroup x = raise-Prop l2 unit-Prop
+  pr1 (pr2 complete-Subgroup) = raise-star
+  pr1 (pr2 (pr2 complete-Subgroup)) _ _ _ _ = raise-star
+  pr2 (pr2 (pr2 complete-Subgroup)) _ _ = raise-star
+
+  isomorph-complete-Subgroup :
+    type-iso-Group G (group-Subgroup G complete-Subgroup)
+  pr1 (pr1 isomorph-complete-Subgroup) x = pair x raise-star
+  pr2 (pr1 isomorph-complete-Subgroup) x y = refl
+  pr1 (pr1 (pr2 isomorph-complete-Subgroup)) (pair x u) = x
+  pr2 (pr1 (pr2 isomorph-complete-Subgroup)) x y = refl
+  pr1 (pr2 (pr2 isomorph-complete-Subgroup)) =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ {(pair x (map-raise star)) → refl}))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Subgroup G complete-Subgroup)
+          ( semigroup-Subgroup G complete-Subgroup)
+          ( id)))
+  pr2 (pr2 (pr2 isomorph-complete-Subgroup)) =
+    eq-pair-Σ
+      ( eq-htpy
+        (λ x → refl))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup (semigroup-Group G) (semigroup-Group G) id))
+
+  isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup : {l3 : Level} (U : Subgroup l3 G) →
+    subset-Subgroup G complete-Subgroup ⊆ subset-Subgroup G U →
+    type-iso-Group (group-Subgroup G complete-Subgroup) (group-Subgroup G U)
+  pr1 (pr1 (isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H)) (pair x u) = pair x (H x u)
+  pr2 (pr1 (isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H)) x y =
+    eq-pair-Σ refl (eq-is-prop (is-prop-is-in-subtype (subset-Subgroup G U) _))
+  pr1 (pr1 (pr2 (isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H))) (pair x _) = pair x raise-star
+  pr2 (pr1 (pr2 (isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H))) x y = refl
+  pr1 (pr2 (pr2 (isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H))) =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ x → eq-pair-Σ refl (eq-is-prop (is-prop-is-in-subtype (subset-Subgroup G U) (pr1 x)))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup (semigroup-Subgroup G U) (semigroup-Subgroup G U) id))
+  pr2 (pr2 (pr2 (isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H))) =
+    eq-pair-Σ
+      ( eq-htpy
+        (λ {(pair x (map-raise star)) → refl}))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Subgroup G complete-Subgroup)
+          ( semigroup-Subgroup G complete-Subgroup)
+          ( id)))
+
+  isomorph-inclusion-complete-subgroup-Subgroup : {l3 : Level} (U : Subgroup l3 G) →
+    subset-Subgroup G complete-Subgroup ⊆ subset-Subgroup G U →
+    type-iso-Group G (group-Subgroup G U)
+  isomorph-inclusion-complete-subgroup-Subgroup U H =
+    comp-iso-Group G
+      ( group-Subgroup G complete-Subgroup)
+      ( group-Subgroup G U)
+      ( isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H)
+      ( isomorph-complete-Subgroup)
+
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  trivial-Subgroup : Subgroup l1 G
+  pr1 trivial-Subgroup x = is-unit-group-Prop G x
+  pr1 (pr2 trivial-Subgroup) = refl
+  pr1 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) .(unit-Group G) refl refl =
+    left-unit-law-Group G (unit-Group G)
+  pr2 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) refl =
+    is-own-inverse-unit-Group G
+```
+
+
