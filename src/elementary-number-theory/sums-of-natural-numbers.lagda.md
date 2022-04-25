@@ -55,7 +55,7 @@ sum-count-ℕ (pair k e) f = sum-Fin-ℕ (f ∘ (map-equiv e))
 
 ```agda
 finite-sum-ℕ : (X : 𝔽) → (type-𝔽 X → ℕ) → ℕ
-finite-sum-ℕ X f = ?
+finite-sum-ℕ X f = {!!}
 ```
 
 ### Bounded sums of natural numbers
