@@ -36,7 +36,8 @@ open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group; preserves-unit-Group;
     preserves-inverses-Group)
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using (type-iso-Group)
+open import group-theory.isomorphisms-groups using
+  ( type-iso-Group; comp-iso-Group)
 open import group-theory.semigroups using (Semigroup)
 ```
 
@@ -345,13 +346,15 @@ module _
           ( semigroup-Subgroup G complete-Subgroup)
           ( id)))
 
-{-
   isomorph-inclusion-complete-subgroup-Subgroup : {l3 : Level} (U : Subgroup l3 G) →
     subset-Subgroup G complete-Subgroup ⊆ subset-Subgroup G U →
     type-iso-Group G (group-Subgroup G U)
-  isomorph-inclusion-complete-subgroup-Subgroup U H = {!!}
--}
-
+  isomorph-inclusion-complete-subgroup-Subgroup U H =
+    comp-iso-Group G
+      ( group-Subgroup G complete-Subgroup)
+      ( group-Subgroup G U)
+      ( isomorph-complete-subgroup-inclusion-complete-subgroup-Subgroup U H)
+      ( isomorph-complete-Subgroup)
 
 module _
   {l1 : Level} (G : Group l1)

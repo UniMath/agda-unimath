@@ -23,13 +23,18 @@ open import foundation.truncation-levels using (zero-𝕋)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
+open import group-theory.epimorphisms-groups using (is-epi-iso-Group)
 open import group-theory.groups using
   ( Group; type-Group; right-unit-law-Group; is-set-type-Group; set-Group;
     unit-Group; mul-Group; inv-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group; is-set-type-hom-Group; eq-htpy-hom-Group;
-    preserves-unit-hom-Group; preserves-mul-hom-Group; preserves-inverses-hom-Group)
-open import group-theory.subgroups using (subset-Group; group-Subgroup)
+    preserves-unit-hom-Group; preserves-mul-hom-Group; preserves-inverses-hom-Group;
+    comp-hom-Group)
+open import group-theory.isomorphisms-groups using
+  ( inv-iso-Group; hom-iso-Group; hom-inv-iso-Group)
+open import group-theory.subgroups using
+  ( subset-Group; group-Subgroup; isomorph-inclusion-complete-subgroup-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
   ( subgroup-subset-Group; ev-formal-combination-subset-Group; formal-combination-subset-Group;
     preserves-concat-ev-formal-combination-subset-Group; is-generating-subset-Group)
@@ -245,6 +250,21 @@ module _
   restriction-generating-subset-Group =
     comp-emb
       ( restriction-generating-subset-Subgroup G S G')
-      ( {!!})
+      ( pair
+        ( λ f →
+          comp-hom-Group
+            ( group-Subgroup G (subgroup-subset-Group G S))
+            ( G)
+            ( G')
+            ( f)
+            ( pair pr1 (λ x y → refl)))
+        ( is-epi-iso-Group l3
+          ( group-Subgroup G (subgroup-subset-Group G S))
+          ( G)
+          ( inv-iso-Group
+            ( G)
+            ( group-Subgroup G (subgroup-subset-Group G S))
+            ( isomorph-inclusion-complete-subgroup-Subgroup G (subgroup-subset-Group G S) H))
+          ( G')))
 ```
 
