@@ -252,3 +252,28 @@ module _
       ( is-iso-hom-iso-Large-Precat C X Y g)
 ```
 
+### Isomorphisms are stable by inversion
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precat α β) {l1 l2 : Level}
+  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
+  where
+
+  is-iso-inv-iso-Large-Precat : (f : type-hom-Large-Precat C X Y) →
+    (p : is-iso-Large-Precat C f) →
+    is-iso-Large-Precat C (hom-inv-iso-Large-Precat C X Y (pair f p))
+  pr1 (is-iso-inv-iso-Large-Precat f p) = f
+  pr1 (pr2 (is-iso-inv-iso-Large-Precat f p)) =
+    is-retr-hom-inv-iso-Large-Precat C X Y (pair f p)
+  pr2 (pr2 (is-iso-inv-iso-Large-Precat f p)) =
+    is-sec-hom-inv-iso-Large-Precat C X Y (pair f p)
+
+  inv-iso-Large-Precat : iso-Large-Precat C X Y →
+    iso-Large-Precat C Y X
+  pr1 (inv-iso-Large-Precat f) = hom-inv-iso-Large-Precat C X Y f
+  pr2 (inv-iso-Large-Precat f) =
+    is-iso-inv-iso-Large-Precat
+      ( hom-iso-Large-Precat C X Y f)
+      ( is-iso-hom-iso-Large-Precat C X Y f)
