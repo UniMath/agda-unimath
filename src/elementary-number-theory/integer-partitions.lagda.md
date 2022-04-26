@@ -22,7 +22,7 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-An integer partition of a natural number n is a list of nonzero natural numbers that sum up to n.
+An integer partition of a natural number n is a list of nonzero natural numbers that sum up to n, up to reordering.
 
 ## Definition
 
@@ -36,8 +36,4 @@ sum-list-nonzero-ℕ (cons x l) = add-ℕ (nat-nonzero-ℕ x) (sum-list-nonzero-
 
 integer-partition' : ℕ → UU lzero
 integer-partition' = fib sum-list-nonzero-ℕ
-
-integer-partition : ℕ → UU (lsuc lzero)
-integer-partition n =
-  Σ 𝔽 (λ X → Σ (type-𝔽 X → nonzero-ℕ) (λ f → Id {!!} {!!}))
 ```
