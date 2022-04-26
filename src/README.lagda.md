@@ -634,6 +634,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences-cubes
 open import univalent-combinatorics.equivalences-standard-finite-types
 open import univalent-combinatorics.equivalences
+open import univalent-combinatorics.ferrers-diagrams
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-connected-components

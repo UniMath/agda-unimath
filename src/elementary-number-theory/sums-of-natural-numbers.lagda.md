@@ -51,13 +51,6 @@ sum-count-ℕ : {l : Level} {A : UU l} (e : count A) → (f : A → ℕ) → ℕ
 sum-count-ℕ (pair k e) f = sum-Fin-ℕ (f ∘ (map-equiv e))
 ```
 
-### Sums of finitely many natural numbers
-
-```agda
-finite-sum-ℕ : (X : 𝔽) → (type-𝔽 X → ℕ) → ℕ
-finite-sum-ℕ X f = {!!}
-```
-
 ### Bounded sums of natural numbers
 
 ```agda

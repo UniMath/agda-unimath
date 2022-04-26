@@ -36,6 +36,7 @@ open import univalent-combinatorics.equality-standard-finite-types public
 open import univalent-combinatorics.equivalences-cubes public
 open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.equivalences public
+open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
 open import univalent-combinatorics.finite-connected-components public
