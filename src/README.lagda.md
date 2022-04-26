@@ -35,6 +35,7 @@ open import category-theory
 open import category-theory.adjunctions-large-precategories
 open import category-theory.anafunctors
 open import category-theory.categories
+open import category-theory.epimorphisms-large-precategories
 open import category-theory.equivalences-categories
 open import category-theory.equivalences-large-precategories
 open import category-theory.equivalences-precategories
@@ -118,6 +119,7 @@ open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.infinitude-of-primes
+open import elementary-number-theory.integer-partitions
 open import elementary-number-theory.integers
 open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.lower-bounds-natural-numbers
@@ -143,8 +145,8 @@ open import elementary-number-theory.square-free-natural-numbers
 open import elementary-number-theory.stirling-numbers-of-the-second-kind
 open import elementary-number-theory.strong-induction-natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
-open import elementary-number-theory.triangular-numbers
 open import elementary-number-theory.telephone-numbers
+open import elementary-number-theory.triangular-numbers
 open import elementary-number-theory.twin-prime-conjecture
 open import elementary-number-theory.unit-elements-standard-finite-types
 open import elementary-number-theory.unit-similarity-standard-finite-types
@@ -276,6 +278,7 @@ open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.monomorphisms
 open import foundation.multisets
+open import foundation.multisubsets
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.pairs-of-distinct-elements
@@ -324,6 +327,7 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
+open import foundation.union
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations
@@ -425,6 +429,7 @@ open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.undirected-graphs
+open import graph-theory.vertex-covers
 open import graph-theory.voltage-graphs
 ```
 
@@ -446,6 +451,7 @@ open import group-theory.concrete-subgroups
 open import group-theory.conjugation
 open import group-theory.embeddings-groups
 open import group-theory.endomorphism-rings-abelian-groups
+open import group-theory.epimorphisms-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
 open import group-theory.examples-higher-groups
@@ -454,6 +460,7 @@ open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
@@ -466,6 +473,7 @@ open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoids
+open import group-theory.monomorphisms-groups
 open import group-theory.orbits-group-actions
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
@@ -474,6 +482,7 @@ open import group-theory.principal-group-actions
 open import group-theory.semigroups
 open import group-theory.sheargroups
 open import group-theory.stabilizer-groups
+open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.subgroups
 open import group-theory.substitution-functor-group-actions
 open import group-theory.symmetric-groups
@@ -512,12 +521,14 @@ open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.interval-subposets
+open import order-theory.join-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
 open import order-theory.least-elements-posets
 open import order-theory.least-elements-preorders
+open import order-theory.least-upper-bounds-posets
 open import order-theory.locally-finite-posets
 open import order-theory.maximal-chains-posets
 open import order-theory.maximal-chains-preorders
@@ -550,7 +561,9 @@ open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
 open import ring-theory.nontrivial-rings
+open import ring-theory.opposite-rings
 open import ring-theory.rings
+open import ring-theory.subsets-rings
 ```
 
 ## Synthetic homotopy theory
@@ -616,14 +629,16 @@ open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.counting-fibers-of-maps
 open import univalent-combinatorics.counting-maybe
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.decidable-subtypes
-open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dedekind-finite-sets
+open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.double-counting
