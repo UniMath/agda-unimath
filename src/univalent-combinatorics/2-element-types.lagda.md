@@ -82,7 +82,7 @@ open import univalent-combinatorics.finite-types using
     Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
-    is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
+    is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ; succ-Fin)
 ```
 
 ## Idea
@@ -646,6 +646,13 @@ module _
     compute-swap-2-Element-Type' x y p
       ( map-inv-equiv-point-2-Element-Type X x y)
       ( refl)
+
+compute-swap-Fin-two-ℕ :
+  map-swap-2-Element-Type (Fin-UU-Fin 2) ~ succ-Fin
+compute-swap-Fin-two-ℕ (inl (inr star)) =
+  compute-swap-2-Element-Type (Fin-UU-Fin 2) zero-Fin one-Fin neq-inl-inr
+compute-swap-Fin-two-ℕ (inr star) =
+  compute-swap-2-Element-Type (Fin-UU-Fin 2) one-Fin zero-Fin neq-inr-inl
 ```
 
 ### The swapping equivalence is not the identity equivalence
