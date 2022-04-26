@@ -124,6 +124,13 @@ module _
   is-unit-Group : type-Group → UU l
   is-unit-Group x = Id x unit-Group
   
+  is-prop-is-unit-Group : (x : type-Group) → is-prop (is-unit-Group x)
+  is-prop-is-unit-Group x = is-set-type-Group x unit-Group
+
+  is-unit-group-Prop : type-Group → UU-Prop l
+  pr1 (is-unit-group-Prop x) = is-unit-Group x
+  pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
+
   left-unit-law-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
   left-unit-law-Group = pr1 (pr2 is-unital-Group)
@@ -145,6 +152,12 @@ module _
   right-inverse-law-Group :
     (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
   right-inverse-law-Group = pr2 (pr2 has-inverses-Group)
+
+  is-own-inverse-unit-Group :
+    Id (inv-Group unit-Group) unit-Group
+  is-own-inverse-unit-Group =
+    ( inv (left-unit-law-Group (inv-Group unit-Group))) ∙
+      ( right-inverse-law-Group unit-Group)
 
   is-equiv-mul-Group : (x : type-Group) → is-equiv (mul-Group x)
   is-equiv-mul-Group x =
@@ -225,6 +238,14 @@ module _
           ( ( associative-mul-Group (inv-Group (mul-Group x y)) x y) ∙
             ( left-inverse-law-Group (mul-Group x y)))) ∙
         ( left-unit-law-Group (inv-Group y)))
+        
+  inv-inv-Group :
+    (x : type-Group) → Id (inv-Group (inv-Group x)) x
+  inv-inv-Group x =
+    is-injective-mul-Group
+      ( inv-Group x)
+      ( ( right-inverse-law-Group (inv-Group x)) ∙
+        ( inv (left-inverse-law-Group x)))
 ```
 
 ## Properties
