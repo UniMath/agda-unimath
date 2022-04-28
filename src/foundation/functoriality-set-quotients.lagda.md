@@ -13,10 +13,10 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-has-inverse; map-inv-equiv; right-inverse-law-equiv;
-    left-inverse-law-equiv; is-property-is-equiv)
+    left-inverse-law-equiv; is-property-is-equiv; htpy-equiv; id-equiv)
 open import foundation.equivalence-relations using (Eq-Rel; type-Eq-Rel)
 open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (refl-htpy)
+open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; inv; tr; ap; _∙_)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.propositions using (eq-is-prop; is-prop-Π)
@@ -78,7 +78,13 @@ module _
       ( map-is-set-quotient Uf Ug h H)
   coherence-square-map-is-set-quotient Uf Ug h H =
     pr2 (center (unique-map-is-set-quotient Uf Ug h H))
+```
 
+## Properties
+
+### Functoriality of set quotients preserves equivalences
+
+```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
@@ -234,4 +240,40 @@ module _
       ( map-equiv (equiv-is-set-quotient Uf Ug h H))
   coherence-square-equiv-is-set-quotient Uf Ug h H =
     pr2 (center (unique-equiv-is-set-quotient Uf Ug h H))
+```
+
+### Functoriality of set quotients preserves identity maps
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A)
+  (A/R : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  where
+
+  id-map-is-set-quotient : 
+    (Uf : {l : Level} → is-set-quotient l R A/R f) →
+    map-is-set-quotient R A/R f R A/R f Uf Uf id id ~ id
+  id-map-is-set-quotient Uf x =
+    ap
+      ( λ c → pr1 c x)
+      { x =
+        center
+          (unique-map-is-set-quotient R A/R f R A/R f Uf Uf id id)}
+      { y = pair id refl-htpy}
+      ( eq-is-contr
+        (unique-map-is-set-quotient R A/R f R A/R f Uf Uf id id))
+
+  id-equiv-is-set-quotient : 
+    (Uf : {l : Level} → is-set-quotient l R A/R f) →
+    htpy-equiv (equiv-is-set-quotient R A/R f R A/R f Uf Uf id-equiv (pair id id)) id-equiv
+  id-equiv-is-set-quotient Uf x =
+    ap
+      ( λ c → map-equiv (pr1 c) x)
+      { x =
+        center
+          ( unique-equiv-is-set-quotient R A/R f R A/R f Uf Uf id-equiv (pair id id))}
+      { y = pair id-equiv refl-htpy}
+      ( eq-is-contr
+        ( unique-equiv-is-set-quotient R A/R f R A/R f Uf Uf id-equiv (pair id id)))
 ```
