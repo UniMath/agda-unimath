@@ -33,7 +33,6 @@ open import finite-group-theory.transpositions using
     is-fixed-point-standard-transposition; eq-two-elements-transposition;
     is-involution-map-transposition)
 
-open import foundation.automorphisms using (Aut)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
 open import foundation.decidable-equality using
@@ -128,14 +127,6 @@ module _
   orientation-Complete-Undirected-Graph : UU (lsuc l)
   orientation-Complete-Undirected-Graph = ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
     Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x))
-
-  orientation-Complete-Undirected-Graph-Aut :
-    Aut (type-UU-Fin-Level X) → orientation-Complete-Undirected-Graph →
-    orientation-Complete-Undirected-Graph
-  pr1 (orientation-Complete-Undirected-Graph-Aut e d Y) =
-    map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
-  pr2 (orientation-Complete-Undirected-Graph-Aut e d Y) =
-    pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
 
   2-Element-Decidable-Subtype-subtype-pointwise-difference :
     orientation-Complete-Undirected-Graph → orientation-Complete-Undirected-Graph →
@@ -448,6 +439,18 @@ module _
   
   quotient-sign-Set : UU-Set (lsuc l)
   quotient-sign-Set = large-quotient-Set even-difference-orientation-Complete-Undirected-Graph
+
+module _
+  {l : Level} (n : ℕ) (X X' : UU-Fin-Level l n)
+  where
+
+  orientation-Complete-Undirected-Graph-equiv :
+    (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') → orientation-Complete-Undirected-Graph n X' →
+    orientation-Complete-Undirected-Graph n X
+  pr1 (orientation-Complete-Undirected-Graph-equiv e d Y) =
+    map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
+  pr2 (orientation-Complete-Undirected-Graph-equiv e d Y) =
+    pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
 ```
 
 ```

@@ -90,12 +90,12 @@ module _
   {l1 l2 : Level}
   where
   
-  iso-Symmetric-Group-abstract-Automorphism-Group : (X : UU-Set l1) →
+  iso-symmetric-group-abstract-Automorphism-Group : (X : UU-Set l1) →
     type-iso-Group
       ( symmetric-Group X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
-  pr1 (pr1 (iso-Symmetric-Group-abstract-Automorphism-Group X)) x =
+  pr1 (pr1 (iso-symmetric-group-abstract-Automorphism-Group X)) x =
     eq-pair-Σ
       ( eq-pair-Σ
         ( eq-equiv
@@ -105,7 +105,7 @@ module _
             ( (inv-equiv x) ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
         ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
       ( eq-is-prop is-prop-type-trunc-Prop) 
-  pr2 (pr1 (iso-Symmetric-Group-abstract-Automorphism-Group X)) x y =
+  pr2 (pr1 (iso-symmetric-group-abstract-Automorphism-Group X)) x y =
     ( ap
       ( λ P → eq-pair-Σ P (eq-is-prop is-prop-type-trunc-Prop))
       ( ap
@@ -198,11 +198,11 @@ module _
               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
             ( eq-is-prop is-prop-type-trunc-Prop)
             ( eq-is-prop is-prop-type-trunc-Prop))) 
-  pr1 (pr1 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) x =
+  pr1 (pr1 (pr2 (iso-symmetric-group-abstract-Automorphism-Group X))) x =
     inv-equiv
       ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
         ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
-  pr2 (pr1 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) x y =
+  pr2 (pr1 (pr2 (iso-symmetric-group-abstract-Automorphism-Group X))) x y =
     ( ap
       ( inv-equiv)
       { y =
@@ -232,7 +232,7 @@ module _
           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
         ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e equiv-raise l2 (type-Set X))))
-  pr1 (pr2 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) =
+  pr1 (pr2 (pr2 (iso-symmetric-group-abstract-Automorphism-Group X))) =
     eq-pair-Σ
       ( eq-htpy
         ( λ x →
@@ -291,7 +291,7 @@ module _
             ( id-hom-Group
               ( abstract-group-Concrete-Group
                 ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))))))
-  pr2 (pr2 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) =
+  pr2 (pr2 (pr2 (iso-symmetric-group-abstract-Automorphism-Group X))) =
     eq-pair-Σ
       ( eq-htpy
         ( λ x →
