@@ -53,7 +53,8 @@ open import foundation.equality-dependent-pair-types using
   (eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv;
-    left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv)
+    left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv; right-inverse-law-equiv;
+    left-inverse-law-equiv)
 open import foundation.equivalence-classes using
   ( large-set-quotient; quotient-map-large-set-quotient; large-quotient-Set;
     type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
@@ -62,6 +63,7 @@ open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; trans-Eq-Rel; refl-Eq-Rel)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_; id)
+open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; inv; ap; ap-binary; _∙_; tr)
@@ -441,16 +443,51 @@ module _
   quotient-sign-Set = large-quotient-Set even-difference-orientation-Complete-Undirected-Graph
 
 module _
-  {l : Level} (n : ℕ) (X X' : UU-Fin-Level l n)
+  {l : Level} (n : ℕ)
   where
 
-  orientation-Complete-Undirected-Graph-equiv :
+  map-orientation-Complete-Undirected-Graph-equiv : (X X' : UU-Fin-Level l n) →
     (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') → orientation-Complete-Undirected-Graph n X' →
     orientation-Complete-Undirected-Graph n X
-  pr1 (orientation-Complete-Undirected-Graph-equiv e d Y) =
+  pr1 (map-orientation-Complete-Undirected-Graph-equiv X X' e d Y) =
     map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
-  pr2 (orientation-Complete-Undirected-Graph-equiv e d Y) =
+  pr2 (map-orientation-Complete-Undirected-Graph-equiv X X' e d Y) =
     pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
+
+  orientation-Complete-Undirected-Graph-equiv : (X X' : UU-Fin-Level l n) →
+    (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
+    orientation-Complete-Undirected-Graph n X' ≃ orientation-Complete-Undirected-Graph n X
+  pr1 (orientation-Complete-Undirected-Graph-equiv X X' e) =
+    map-orientation-Complete-Undirected-Graph-equiv X X' e
+  pr2 (orientation-Complete-Undirected-Graph-equiv X X' e) =
+    is-equiv-has-inverse
+      ( map-orientation-Complete-Undirected-Graph-equiv X' X (inv-equiv e))
+      ( λ d →
+        eq-htpy
+          ( λ Y →
+            eq-pair-Σ
+              ( ( ap
+                ( λ Y' → (map-inv-equiv e ∘ (map-inv-equiv (inv-equiv e))) (pr1 (d Y')))
+                ( eq-pair-Σ
+                  ( ap
+                    ( λ h → pr1 Y ∘ map-equiv h)
+                    ( right-inverse-law-equiv (inv-equiv e)) )
+                  ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                ( ap (λ h → map-equiv h (pr1 (d Y))) (right-inverse-law-equiv (inv-equiv e))))
+              ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
+      ( λ d →
+        eq-htpy
+          ( λ Y →
+            eq-pair-Σ
+              ( ( ap
+                ( λ Y' → (map-inv-equiv (inv-equiv e) ∘ map-inv-equiv e) (pr1 (d Y')))
+                ( eq-pair-Σ
+                  ( ap
+                    ( λ h → pr1 Y ∘ map-equiv h)
+                    ( left-inverse-law-equiv (inv-equiv e)) )
+                  ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                ( ap (λ h → map-equiv h (pr1 (d Y))) (left-inverse-law-equiv (inv-equiv e))))
+              ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
 ```
 
 ```
@@ -1361,11 +1398,12 @@ module _
       ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
       ( equiv-Fin-2-quotient-sign-count (pair n h) ineq)
     
-  mere-equiv-Fin-2-quotient-sign :
-    mere-equiv (Fin 2) (quotient-sign n X)
-  mere-equiv-Fin-2-quotient-sign =
-    apply-universal-property-trunc-Prop
-      ( mere-equiv-UU-Fin-Level X)
-      ( trunc-Prop (Fin 2 ≃ (quotient-sign n X)))
-      ( λ h → unit-trunc-Prop (equiv-Fin-2-quotient-sign-equiv-Fin-n h))
+  abstract
+    mere-equiv-Fin-2-quotient-sign :
+      mere-equiv (Fin 2) (quotient-sign n X)
+    mere-equiv-Fin-2-quotient-sign =
+      apply-universal-property-trunc-Prop
+        ( mere-equiv-UU-Fin-Level X)
+        ( trunc-Prop (Fin 2 ≃ (quotient-sign n X)))
+        ( λ h → unit-trunc-Prop (equiv-Fin-2-quotient-sign-equiv-Fin-n h))
 ```
