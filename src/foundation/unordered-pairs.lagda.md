@@ -227,8 +227,8 @@ is-commutative-standard-unordered-pair x y =
 map-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-pair A → unordered-pair B
-pr1 (map-unordered-pair f (pair X p)) = X
-pr2 (map-unordered-pair f (pair X p)) = f ∘ p
+pr1 (map-unordered-pair f x) = 2-element-type-unordered-pair x
+pr2 (map-unordered-pair f x) = f ∘ (element-unordered-pair x)
 
 preserves-comp-map-unordered-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
