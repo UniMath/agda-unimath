@@ -47,7 +47,9 @@ open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.injective-maps public
+open import univalent-combinatorics.isotopies-latin-squares public
 open import univalent-combinatorics.kuratowsky-finite-sets public
+open import univalent-combinatorics.latin-squares public
 open import univalent-combinatorics.lists public
 open import univalent-combinatorics.maybe public
 open import univalent-combinatorics.orientations-cubes public

@@ -91,6 +91,7 @@ open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-w-types public
 open import foundation.inequality-w-types public
+open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.involutions public

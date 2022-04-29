@@ -262,6 +262,7 @@ open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
 open import foundation.inequality-w-types
+open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.intersection
@@ -660,7 +661,9 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
+open import univalent-combinatorics.isotopies-latin-squares
 open import univalent-combinatorics.kuratowsky-finite-sets
+open import univalent-combinatorics.latin-squares
 open import univalent-combinatorics.lists
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.orientations-complete-undirected-graph
