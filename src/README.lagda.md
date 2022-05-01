@@ -191,6 +191,7 @@ open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
 open import foundation.coherently-invertible-maps
+open import foundation.commutative-operations
 open import foundation.commuting-squares
 open import foundation.complements
 open import foundation.conjunction
@@ -578,7 +579,6 @@ open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
-open import synthetic-homotopy-theory.commutative-operations
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
@@ -682,6 +682,7 @@ open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
+open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 ## Wild algebra

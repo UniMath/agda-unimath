@@ -29,7 +29,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
 open import univalent-combinatorics.finite-types using
   ( is-finite; has-cardinality; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
     UU-Fin-Level; UU-Fin; type-UU-Fin-Level; type-UU-Fin;
-    mere-equiv-UU-Fin-Level; mere-equiv-UU-Fin)
+    has-cardinality-type-UU-Fin-Level; has-cardinality-type-UU-Fin)
 ```
 
 ## Idea
@@ -75,7 +75,8 @@ is-set-has-cardinality H = is-set-mere-equiv' H (is-set-Fin _)
 
 set-UU-Fin-Level : {l1 : Level} {k : ℕ} → UU-Fin-Level l1 k → UU-Set l1
 pr1 (set-UU-Fin-Level X) = type-UU-Fin-Level X
-pr2 (set-UU-Fin-Level X) = is-set-has-cardinality (mere-equiv-UU-Fin-Level X)
+pr2 (set-UU-Fin-Level X) =
+  is-set-has-cardinality (has-cardinality-type-UU-Fin-Level X)
 
 set-UU-Fin : {k : ℕ} → UU-Fin k → UU-Set lzero
 set-UU-Fin X = set-UU-Fin-Level X

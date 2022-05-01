@@ -1,5 +1,5 @@
 ---
-title: Σ-decompositions of types
+title: Ferrers diagrams
 ---
 
 ```agda

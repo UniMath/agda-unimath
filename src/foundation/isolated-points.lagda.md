@@ -333,3 +333,18 @@ equiv-complement-isolated-point e x y p =
       equiv-neg
         ( equiv-concat (inv p) (map-equiv e z) ∘e (equiv-ap e (pr1 x) z)))
 ```
+
+```agda
+inclusion-complement-isolated-point :
+  {l1 : Level} {X : UU l1} (x : isolated-point X) →
+  complement-isolated-point X x → X
+inclusion-complement-isolated-point x = pr1
+
+natural-inclusion-equiv-complement-isolated-point :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-point X)
+  (y : isolated-point Y) (p : Id (map-equiv e (pr1 x)) (pr1 y)) →
+  ( inclusion-complement-isolated-point y ∘
+    map-equiv (equiv-complement-isolated-point e x y p)) ~
+  ( map-equiv e ∘ inclusion-complement-isolated-point x)
+natural-inclusion-equiv-complement-isolated-point e x y p (pair x' f) = refl
+```

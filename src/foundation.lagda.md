@@ -20,6 +20,7 @@ open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
+open import foundation.commutative-operations public
 open import foundation.commuting-squares public
 open import foundation.complements public
 open import foundation.conjunction public

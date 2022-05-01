@@ -15,7 +15,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Latin squares are multiplication tables in which every element appears in every row and in every column exactly once. Latin squares are considered to be the same if they are isotopic. We therefore define the type of all Latin squares to be the type of all inhabited types A, B, and C, equipped with a binary equivalence f : A → B → C.
+Latin squares are multiplication tables in which every element appears in every row and in every column exactly once. Latin squares are considered to be the same if they are isotopic. We therefore define the type of all Latin squares to be the type of all inhabited types A, B, and C, equipped with a binary equivalence f : A → B → C. The groupoid of main classes of latin squares is defined in `main-classes-of-latin-squares`.
 
 ## Definition
 

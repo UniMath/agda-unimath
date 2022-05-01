@@ -184,6 +184,12 @@ module _
               ( λ x → Id (ind-singleton-is-contr a H P (f a) x) (f x))
               ( comp-singleton-is-contr a H P (f a))))
 
+  equiv-dependent-universal-property-contr :
+    (a : A) → is-contr A → {l : Level} (B : A → UU l) → ((x : A) → B x) ≃ B a
+  pr1 (equiv-dependent-universal-property-contr a H P) = ev-point a
+  pr2 (equiv-dependent-universal-property-contr a H P) =
+    dependent-universal-property-contr-is-contr a H P
+
   abstract
     universal-property-contr-is-contr :
       (a : A) → is-contr A → {l : Level} → universal-property-contr l a
