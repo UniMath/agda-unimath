@@ -110,12 +110,12 @@ open import univalent-combinatorics.equality-finite-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Fin-Set; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin; is-finite; 
+  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; has-cardinality-type-UU-Fin; is-finite; 
     equiv-has-cardinality-id-number-of-elements-is-finite; number-of-elements-is-finite;
     is-finite-type-UU-Fin-Level; is-finite-equiv; is-finite-Fin;
     number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
     all-elements-equal-has-finite-cardinality; has-finite-cardinality;
-    is-finite-has-finite-cardinality; mere-equiv-UU-Fin-Level)
+    is-finite-has-finite-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin; equiv-bool-Fin-two-ℕ; nat-Fin; is-zero-nat-zero-Fin)
 open import univalent-combinatorics.symmetric-difference using
@@ -1362,7 +1362,7 @@ module _
     mere-equiv (Fin 2) (quotient-sign n X)
   mere-equiv-Fin-2-quotient-sign =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-UU-Fin-Level X)
+      ( has-cardinality-type-UU-Fin-Level X)
       ( trunc-Prop (Fin 2 ≃ (quotient-sign n X)))
       ( λ h → unit-trunc-Prop (equiv-Fin-2-quotient-sign-equiv-Fin-n h))
 ```
