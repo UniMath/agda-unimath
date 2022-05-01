@@ -184,6 +184,8 @@ open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
+open import foundation.binary-equivalences-unordered-pairs-of-types
+open import foundation.binary-operations-unordered-pairs-of-types
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
@@ -289,6 +291,8 @@ open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.powersets
 open import foundation.principle-of-omniscience
+open import foundation.products-unordered-pairs-of-types
+open import foundation.products-unordered-tuples-of-types
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
@@ -357,6 +361,9 @@ open import foundation.universal-property-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+open import foundation.unordered-pairs-of-types
+open import foundation.unordered-tuples
+open import foundation.unordered-tuples-of-types
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
@@ -665,6 +672,8 @@ open import univalent-combinatorics.isotopies-latin-squares
 open import univalent-combinatorics.kuratowsky-finite-sets
 open import univalent-combinatorics.latin-squares
 open import univalent-combinatorics.lists
+open import univalent-combinatorics.main-classes-of-latin-hypercubes
+open import univalent-combinatorics.main-classes-of-latin-squares
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.orientations-cubes

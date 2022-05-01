@@ -109,7 +109,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-type-UU-Fin-Level; UU-Fin-Level; type-UU-Fin-Level;
-    mere-equiv-UU-Fin-Level; number-of-elements-is-finite;
+    has-cardinality-type-UU-Fin-Level; number-of-elements-is-finite;
     number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
     has-finite-cardinality-count; all-elements-equal-has-finite-cardinality;
     has-cardinality)
@@ -426,7 +426,7 @@ module _
       ( pr1 same-orbits-permutation b a)
       ( λ (pair k p) →
         apply-universal-property-trunc-Prop
-          ( mere-equiv-UU-Fin-Level X)
+          ( has-cardinality-type-UU-Fin-Level X)
           ( pr1 same-orbits-permutation b a)
           ( λ h →
             unit-trunc-Prop
@@ -482,7 +482,7 @@ module _
       is-decidable (type-Eq-Rel same-orbits-permutation a b) 
     is-decidable-same-orbits-permutation a b =
       apply-universal-property-trunc-Prop
-        ( mere-equiv-UU-Fin-Level X)
+        ( has-cardinality-type-UU-Fin-Level X)
         ( is-decidable-Prop (prop-Eq-Rel same-orbits-permutation a b))
         ( λ h →
           is-decidable-trunc-Prop-is-merely-decidable
@@ -588,7 +588,7 @@ module _
         ( is-finite-type-UU-Fin-Level X)
         ( is-surjective-quotient-map-large-set-quotient same-orbits-permutation)
         ( apply-universal-property-trunc-Prop
-          ( mere-equiv-UU-Fin-Level X)
+          ( has-cardinality-type-UU-Fin-Level X)
           ( pair
             ( has-decidable-equality
               ( large-set-quotient same-orbits-permutation))
