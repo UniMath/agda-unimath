@@ -646,6 +646,12 @@ module _
     compute-swap-2-Element-Type' x y p
       ( map-inv-equiv-point-2-Element-Type X x y)
       ( refl)
+
+  compute-map-equiv-point-2-Element-Type' :
+    (x : type-2-Element-Type X) →
+    Id ( map-equiv-point-2-Element-Type X x one-Fin)
+       ( map-swap-2-Element-Type x)
+  compute-map-equiv-point-2-Element-Type' x = refl
 ```
 
 ### The swapping equivalence is not the identity equivalence

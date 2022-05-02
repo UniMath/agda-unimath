@@ -135,10 +135,10 @@ type-UU-Fin-Level : {l : Level} {k : ℕ} → UU-Fin-Level l k → UU l
 type-UU-Fin-Level X = pr1 X
 
 abstract
-  mere-equiv-UU-Fin-Level :
+  has-cardinality-type-UU-Fin-Level :
     {l : Level} {k : ℕ} (X : UU-Fin-Level l k) →
     mere-equiv (Fin k) (type-UU-Fin-Level X)
-  mere-equiv-UU-Fin-Level X = pr2 X
+  has-cardinality-type-UU-Fin-Level X = pr2 X
 ```
 
 ### The type of all types of cardinality k of univerese level `lzero`
@@ -151,9 +151,9 @@ type-UU-Fin : {k : ℕ} → UU-Fin k → UU lzero
 type-UU-Fin X = pr1 X
 
 abstract
-  mere-equiv-UU-Fin :
-    {k : ℕ} (X : UU-Fin k) → mere-equiv (Fin k) (type-UU-Fin X)
-  mere-equiv-UU-Fin X = pr2 X
+  has-cardinality-type-UU-Fin :
+    {k : ℕ} (X : UU-Fin k) → has-cardinality k (type-UU-Fin X)
+  has-cardinality-type-UU-Fin X = pr2 X
 ```
 
 ### Types of finite cardinality
@@ -343,7 +343,7 @@ abstract
     {l : Level} {k : ℕ} (X : UU-Fin-Level l k) → is-finite (type-UU-Fin-Level X)
   is-finite-type-UU-Fin-Level X =
     is-finite-mere-equiv
-      ( mere-equiv-UU-Fin-Level X)
+      ( has-cardinality-type-UU-Fin-Level X)
       ( is-finite-Fin)
 
 abstract
@@ -645,5 +645,7 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →
-        tr ( λ m → has-cardinality m X) p (pr2 (has-finite-cardinality-is-finite H)))
+        tr ( λ m → has-cardinality m X)
+           ( p)
+           ( pr2 (has-finite-cardinality-is-finite H)))
 ```

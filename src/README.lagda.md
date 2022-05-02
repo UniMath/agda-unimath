@@ -184,6 +184,8 @@ open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
+open import foundation.binary-equivalences-unordered-pairs-of-types
+open import foundation.binary-operations-unordered-pairs-of-types
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
@@ -191,6 +193,7 @@ open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
 open import foundation.coherently-invertible-maps
+open import foundation.commutative-operations
 open import foundation.commuting-squares
 open import foundation.complements
 open import foundation.conjunction
@@ -262,6 +265,7 @@ open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
 open import foundation.inequality-w-types
+open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.intersection
@@ -287,6 +291,8 @@ open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.powersets
 open import foundation.principle-of-omniscience
+open import foundation.products-unordered-pairs-of-types
+open import foundation.products-unordered-tuples-of-types
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-truncations
@@ -355,6 +361,9 @@ open import foundation.universal-property-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+open import foundation.unordered-pairs-of-types
+open import foundation.unordered-tuples
+open import foundation.unordered-tuples-of-types
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
@@ -577,7 +586,6 @@ open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
-open import synthetic-homotopy-theory.commutative-operations
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
@@ -660,8 +668,12 @@ open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.inequality-types-with-counting
 open import univalent-combinatorics.injective-maps
+open import univalent-combinatorics.isotopies-latin-squares
 open import univalent-combinatorics.kuratowsky-finite-sets
+open import univalent-combinatorics.latin-squares
 open import univalent-combinatorics.lists
+open import univalent-combinatorics.main-classes-of-latin-hypercubes
+open import univalent-combinatorics.main-classes-of-latin-squares
 open import univalent-combinatorics.maybe
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.orientations-cubes
@@ -679,6 +691,7 @@ open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
+open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 ## Wild algebra

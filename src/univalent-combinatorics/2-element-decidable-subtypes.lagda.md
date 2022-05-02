@@ -19,8 +19,9 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop; is-prop-type-decidable-Prop; type-decidable-Prop;
-    equiv-bool-decidable-Prop; prop-decidable-Prop)
+  ( decidable-Prop; is-decidable-type-decidable-Prop;
+    is-prop-type-decidable-Prop; type-decidable-Prop; equiv-bool-decidable-Prop;
+    prop-decidable-Prop)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
     is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
@@ -34,8 +35,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-inv-equiv; map-equiv;
-    left-inverse-law-equiv)
+  ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-inv-equiv;
+    map-equiv; left-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.homotopies using (_~_)
@@ -45,10 +46,11 @@ open import foundation.logical-equivalences using (iff-equiv)
 open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
-    trunc-Prop; type-trunc-Prop)
+  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
+    unit-trunc-Prop; trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop; is-prop-is-prop)
+  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
+    is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (subtype; eq-subtype; equiv-subtype-equiv)
 open import foundation.type-arithmetic-coproduct-types using
@@ -67,12 +69,15 @@ open import univalent-combinatorics.2-element-types using
     map-swap-2-Element-Type; compute-swap-2-Element-Type;
     is-inhabited-2-Element-Type; has-no-fixed-points-swap-2-Element-Type;
     contradiction-3-distinct-element-2-Element-Type)
-open import univalent-combinatorics.decidable-subtypes using (is-finite-decidable-subtype)
+open import univalent-combinatorics.decidable-subtypes using
+  ( is-finite-decidable-subtype)
 open import univalent-combinatorics.dependent-function-types using (is-finite-Π)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin; is-finite; 
-    equiv-has-cardinality-id-number-of-elements-is-finite; number-of-elements-is-finite;
-    is-finite-type-UU-Fin-Level; is-finite-equiv; is-finite-Fin)
+  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level;
+    has-cardinality-type-UU-Fin; is-finite;
+    equiv-has-cardinality-id-number-of-elements-is-finite;
+    number-of-elements-is-finite; is-finite-type-UU-Fin-Level; is-finite-equiv;
+    is-finite-Fin)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin; equiv-bool-Fin-two-ℕ)
 ```
@@ -255,11 +260,17 @@ module _
               ( eq-is-prop
                 ( is-prop-is-prop
                   ( type-decidable-Prop
-                    ( pr1 (standard-2-Element-Decidable-Subtype d (λ p → np (inv p))) z))))
+                    ( pr1
+                      ( standard-2-Element-Decidable-Subtype d
+                        ( λ p → np (inv p)))
+                      ( z)))))
               ( eq-is-prop
                 ( is-prop-is-decidable
-                  (is-prop-type-decidable-Prop
-                    ( pr1 (standard-2-Element-Decidable-Subtype d (λ p → np (inv p))) z)))))))
+                  ( is-prop-type-decidable-Prop
+                    ( pr1
+                      ( standard-2-Element-Decidable-Subtype d
+                        ( λ p → np (inv p)))
+                        ( z))))))))
       ( eq-is-prop is-prop-type-trunc-Prop)
 ```
 
@@ -295,19 +306,27 @@ module _
     is-finite-decidable-subtype
       (λ P →
         pair
-          ( has-cardinality 2 (Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x))))
+          ( has-cardinality 2
+            ( Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x))))
           ( pair
             ( is-prop-type-trunc-Prop)
             ( is-decidable-equiv
               ( equiv-has-cardinality-id-number-of-elements-is-finite
                 ( Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x)))
-                ( is-finite-decidable-subtype P (is-finite-type-UU-Fin-Level X)) 2)
+                ( is-finite-decidable-subtype P
+                  ( is-finite-type-UU-Fin-Level X))
+                ( 2))
               ( has-decidable-equality-ℕ
-                ( number-of-elements-is-finite (is-finite-decidable-subtype P (is-finite-type-UU-Fin-Level X)))
+                ( number-of-elements-is-finite
+                  ( is-finite-decidable-subtype P
+                    ( is-finite-type-UU-Fin-Level X)))
                 ( 2)))))
       ( is-finite-Π
         ( is-finite-type-UU-Fin-Level X)
-        ( λ x → is-finite-equiv (inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-Fin-two-ℕ) is-finite-Fin))
+        ( λ x →
+          is-finite-equiv
+            ( inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
+            ( is-finite-Fin)))
 
 ```
 
@@ -332,7 +351,9 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
             ( prop-decidable-Prop (P x))
             ( prop-decidable-Prop (P (map-inv-equiv e (map-equiv e x))))
             ( tr
-              ( λ g → (type-decidable-Prop (P x)) ≃ (type-decidable-Prop (P (map-equiv g x))))
+              ( λ g →
+                ( type-decidable-Prop (P x)) ≃
+                ( type-decidable-Prop (P (map-equiv g x))))
               ( inv (left-inverse-law-equiv e))
               ( id-equiv))))
 ```

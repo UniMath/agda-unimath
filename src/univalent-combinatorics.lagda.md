@@ -47,8 +47,12 @@ open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
 open import univalent-combinatorics.inequality-types-with-counting public
 open import univalent-combinatorics.injective-maps public
+open import univalent-combinatorics.isotopies-latin-squares public
 open import univalent-combinatorics.kuratowsky-finite-sets public
+open import univalent-combinatorics.latin-squares public
 open import univalent-combinatorics.lists public
+open import univalent-combinatorics.main-classes-of-latin-hypercubes public
+open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.petri-nets public
@@ -63,4 +67,5 @@ open import univalent-combinatorics.standard-finite-trees public
 open import univalent-combinatorics.standard-finite-types public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
+open import univalent-combinatorics.universal-property-standard-finite-types public
 ```

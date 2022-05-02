@@ -29,7 +29,7 @@ open import univalent-combinatorics.coproduct-types using
   ( coprod-eq-is-finite; is-finite-coprod)
 open import univalent-combinatorics.decidable-subtypes using ( is-finite-decidable-subtype)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level; number-of-elements-is-finite;
+  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality-type-UU-Fin-Level; number-of-elements-is-finite;
     is-finite; is-finite-has-cardinality; number-of-elements-has-finite-cardinality;
     all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
     mere-equiv-has-finite-cardinality)

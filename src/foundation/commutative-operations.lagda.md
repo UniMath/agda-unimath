@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module synthetic-homotopy-theory.commutative-operations where
+module foundation.commutative-operations where
 
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
