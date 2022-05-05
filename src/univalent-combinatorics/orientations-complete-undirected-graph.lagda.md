@@ -344,7 +344,7 @@ module _
                 ( add-ℕ)
                 ( ap nat-Fin (inv p1))
                 ( ap nat-Fin (inv p2))) ∙
-                ( ap ( λ n → add-ℕ ( n) (nat-Fin m)) ( inv ( left-unit-law-mul-ℕ (nat-Fin m)))))
+                ( ap (λ n → add-ℕ n (nat-Fin m)) (inv (left-unit-law-mul-ℕ (nat-Fin m)))))
               ( scalar-invariant-cong-ℕ' 2 2 0 (nat-Fin m) (cong-zero-ℕ' 2))))
           ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2)))) ∙
       (ap
@@ -1495,8 +1495,7 @@ module _
     mere-equiv-Fin-2-quotient-sign :
       mere-equiv (Fin 2) (quotient-sign n X)
     mere-equiv-Fin-2-quotient-sign =
-      apply-universal-property-trunc-Prop
+      functor-trunc-Prop
+        ( equiv-Fin-2-quotient-sign-equiv-Fin-n)
         ( mere-equiv-UU-Fin-Level X)
-        ( trunc-Prop (Fin 2 ≃ (quotient-sign n X)))
-        ( λ h → unit-trunc-Prop (equiv-Fin-2-quotient-sign-equiv-Fin-n h))
 ```
