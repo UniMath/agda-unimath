@@ -88,7 +88,7 @@ open import univalent-combinatorics.equality-finite-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Fin-Set; has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; mere-equiv-UU-Fin-Level)
+  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
 open import univalent-combinatorics.orientations-complete-undirected-graph using
@@ -120,7 +120,7 @@ module _
        ( add-Fin (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
   preserves-add-sign-homomorphism-Fin-two f g =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-UU-Fin-Level X)
+      ( has-cardinality-type-UU-Fin-Level X)
       ( Id-Prop
         ( Fin-Set 2)
         ( sign-homomorphism-Fin-two (f ∘e g))
@@ -957,7 +957,7 @@ module _
     mere-equiv-Fin-2-quotient-sign-comp =
       functor-trunc-Prop
         ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n)
-        ( mere-equiv-UU-Fin-Level X)
+        ( has-cardinality-type-UU-Fin-Level X)
 
 module _
   { l : Level}

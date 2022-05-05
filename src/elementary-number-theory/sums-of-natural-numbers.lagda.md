@@ -25,6 +25,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count)
+open import univalent-combinatorics.finite-types using (𝔽; type-𝔽)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin)
 ```

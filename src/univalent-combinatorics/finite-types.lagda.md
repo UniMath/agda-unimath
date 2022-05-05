@@ -8,11 +8,12 @@ title: Finite types
 module univalent-combinatorics.finite-types where
 
 open import elementary-number-theory.equality-natural-numbers using
-  ( is-set-ℕ; ℕ-Set)
+  ( is-set-ℕ; ℕ-Set; has-decidable-equality-ℕ)
 open import elementary-number-theory.modular-arithmetic using (ℤ-Mod)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ)
+  ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
 
+open import foundation.booleans using (bool)
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
     id-equiv-component-UU; equiv-eq-component-UU-Level; equiv-eq-component-UU;
@@ -21,13 +22,17 @@ open import foundation.connected-components-universes using
     eq-equiv-component-UU-Level; eq-equiv-component-UU)
 open import foundation.connected-types using
   ( is-path-connected; is-path-connected-mere-eq)
-open import foundation.contractible-types using (is-contr)
+open import foundation.contractible-types using
+  ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv')
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-Prop;
     has-decidable-equality-equiv')
+open import foundation.decidable-propositions using
+  ( decidable-Prop; equiv-bool-decidable-Prop)
 open import foundation.decidable-types using
-  ( is-decidable; is-inhabited-or-empty; is-inhabited-or-empty-Prop)
+  ( is-decidable; is-inhabited-or-empty; is-inhabited-or-empty-Prop;
+    is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; is-empty; ex-falso; is-empty-Prop; empty-Prop)
@@ -39,7 +44,8 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
-open import foundation.identity-types using (refl; Id; _∙_; ap; tr)
+open import foundation.identity-types using
+  ( refl; Id; _∙_; ap; tr; equiv-tr; inv)
 open import foundation.mere-equivalences using
   ( mere-equiv-Prop; mere-equiv)
 open import foundation.propositional-truncations using
@@ -57,18 +63,19 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( equiv-left-swap-Σ)
 open import foundation.type-arithmetic-empty-type using
   ( left-unit-law-coprod)
-open import foundation.unit-type using (unit; star)
+open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 
 open import univalent-combinatorics.counting using
   ( count; count-empty; count-is-empty; count-unit; count-is-contr; count-Fin;
     count-equiv; is-set-count; equiv-count; number-of-elements-count;
     is-empty-is-zero-number-of-elements-count; is-inhabited-or-empty-count;
-    count-type-trunc-Prop)
+    count-type-trunc-Prop; inv-equiv-count)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin)
+  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin; equiv-bool-Fin-two-ℕ;
+    is-contr-Fin-one-ℕ)
 ```
 
 ## Idea
@@ -135,10 +142,10 @@ type-UU-Fin-Level : {l : Level} {k : ℕ} → UU-Fin-Level l k → UU l
 type-UU-Fin-Level X = pr1 X
 
 abstract
-  mere-equiv-UU-Fin-Level :
+  has-cardinality-type-UU-Fin-Level :
     {l : Level} {k : ℕ} (X : UU-Fin-Level l k) →
     mere-equiv (Fin k) (type-UU-Fin-Level X)
-  mere-equiv-UU-Fin-Level X = pr2 X
+  has-cardinality-type-UU-Fin-Level X = pr2 X
 ```
 
 ### The type of all types of cardinality k of univerese level `lzero`
@@ -151,9 +158,9 @@ type-UU-Fin : {k : ℕ} → UU-Fin k → UU lzero
 type-UU-Fin X = pr1 X
 
 abstract
-  mere-equiv-UU-Fin :
-    {k : ℕ} (X : UU-Fin k) → mere-equiv (Fin k) (type-UU-Fin X)
-  mere-equiv-UU-Fin X = pr2 X
+  has-cardinality-type-UU-Fin :
+    {k : ℕ} (X : UU-Fin k) → has-cardinality k (type-UU-Fin X)
+  has-cardinality-type-UU-Fin X = pr2 X
 ```
 
 ### Types of finite cardinality
@@ -283,6 +290,12 @@ abstract
   is-finite-is-contr :
     {l1 : Level} {X : UU l1} → is-contr X → is-finite X
   is-finite-is-contr H = is-finite-count (count-is-contr H)
+
+abstract
+  has-cardinality-is-contr :
+    {l1 : Level} {X : UU l1} → is-contr X → has-cardinality 1 X
+  has-cardinality-is-contr H =
+    unit-trunc-Prop (equiv-is-contr is-contr-Fin-one-ℕ H)
 ```
 
 ### Decidable propositions are finite
@@ -322,6 +335,21 @@ pr1 (Fin-UU-Fin-Level l k) = raise-Fin l k
 pr2 (Fin-UU-Fin-Level l k) = has-cardinality-raise-Fin
 ```
 
+### The type of booleans is finite
+
+```agda
+is-finite-bool : is-finite bool
+is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ is-finite-Fin
+```
+
+### The type of decidable propositions of any universe level is finite
+
+```agda
+is-finite-decidable-Prop : {l : Level} → is-finite (decidable-Prop l)
+is-finite-decidable-Prop {l} =
+  is-finite-equiv' equiv-bool-decidable-Prop is-finite-bool
+```
+
 ### The types `ℤ-Mod k` are finite for nonzero natural numbers `k`
 
 ```agda
@@ -343,7 +371,7 @@ abstract
     {l : Level} {k : ℕ} (X : UU-Fin-Level l k) → is-finite (type-UU-Fin-Level X)
   is-finite-type-UU-Fin-Level X =
     is-finite-mere-equiv
-      ( mere-equiv-UU-Fin-Level X)
+      ( has-cardinality-type-UU-Fin-Level X)
       ( is-finite-Fin)
 
 abstract
@@ -437,6 +465,11 @@ module _
               ( has-finite-cardinality-count g)
               ( has-finite-cardinality-is-finite (unit-trunc-Prop g)))))
         ( f)
+
+  has-cardinality-is-finite :
+    (H : is-finite X) → has-cardinality (number-of-elements-is-finite H) X
+  has-cardinality-is-finite H =
+    pr2 (has-finite-cardinality-is-finite H)
 ```
 
 ### If a type has cardinality `k` and cardinality `l`, then `k = l`.
@@ -454,7 +487,7 @@ eq-cardinality H K =
         ( λ f → is-injective-Fin (inv-equiv f ∘e e)))
 ```
 
-### A finite type is empty if and only if it has 0 elemeents
+### A finite type is empty if and only if it has 0 elements
 
 ```agda
 abstract
@@ -467,6 +500,40 @@ abstract
       ( λ e →
         is-empty-is-zero-number-of-elements-count e
           ( compute-number-of-elements-is-finite e f ∙ p))
+```
+
+### A finite type is contractible if and only if it has one element
+
+```agda
+is-one-number-of-elements-is-finite-is-contr :
+  {l : Level} {X : UU l} (H : is-finite X) →
+  is-contr X → is-one-ℕ (number-of-elements-is-finite H)
+is-one-number-of-elements-is-finite-is-contr H K =
+  eq-cardinality
+    ( has-cardinality-is-finite H)
+    ( has-cardinality-is-contr K)
+
+is-contr-is-one-number-of-elements-is-finite :
+  {l : Level} {X : UU l} (H : is-finite X) →
+  is-one-ℕ (number-of-elements-is-finite H) → is-contr X
+is-contr-is-one-number-of-elements-is-finite H p =
+  apply-universal-property-trunc-Prop H
+    ( is-contr-Prop _)
+    ( λ e →
+      is-contr-equiv'
+        ( Fin 1)
+        ( ( equiv-count e) ∘e
+          ( equiv-tr Fin
+            ( inv p ∙ inv (compute-number-of-elements-is-finite e H))))
+        ( is-contr-Fin-one-ℕ))
+
+is-decidable-is-contr-is-finite :
+  {l : Level} {X : UU l} (H : is-finite X) → is-decidable (is-contr X)
+is-decidable-is-contr-is-finite H =
+  is-decidable-iff
+    ( is-contr-is-one-number-of-elements-is-finite H)
+    ( is-one-number-of-elements-is-finite-is-contr H)
+    ( has-decidable-equality-ℕ (number-of-elements-is-finite H) 1)
 ```
 
 ### The type of all pairs consisting of a natural number `k` and a type of cardinality `k` is equivalent to the type of all finite types
@@ -645,5 +712,7 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →
-        tr ( λ m → has-cardinality m X) p (pr2 (has-finite-cardinality-is-finite H)))
+        tr ( λ m → has-cardinality m X)
+           ( p)
+           ( pr2 (has-finite-cardinality-is-finite H)))
 ```

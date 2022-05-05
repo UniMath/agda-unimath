@@ -10,6 +10,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.isolated-points
 open import foundation.universe-levels
 
 open import univalent-combinatorics.complements-isolated-points

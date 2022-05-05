@@ -91,7 +91,7 @@ open import univalent-combinatorics.equality-finite-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; Fin-Set)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin-Level)
+  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( cons; list; fold-list; map-list; nil; length-list; concat-list;
     length-concat-list)
@@ -402,7 +402,7 @@ module _
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f _ =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-UU-Fin-Level X)
+      ( has-cardinality-type-UU-Fin-Level X)
       ( subset-subgroup-subset-Group
         ( symmetric-Group (set-UU-Fin-Level X))
         ( is-transposition-permutation-Prop)
@@ -455,7 +455,7 @@ module _
       is-contr-parity-transposition-permutation : is-contr parity-transposition-permutation
       is-contr-parity-transposition-permutation =
         apply-universal-property-trunc-Prop
-          ( mere-equiv-UU-Fin-Level X)
+          ( has-cardinality-type-UU-Fin-Level X)
           ( is-trunc-Prop neg-two-𝕋 parity-transposition-permutation)
           ( λ h →
             pair

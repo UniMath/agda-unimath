@@ -39,9 +39,9 @@ open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
     UU-Fin-Level; UU-Fin; number-of-elements-is-finite;
-    number-of-elements-has-finite-cardinality; all-elements-equal-has-finite-cardinality;
-    has-finite-cardinality-is-finite; mere-equiv-UU-Fin-Level;
-    mere-equiv-has-finite-cardinality)
+    number-of-elements-has-finite-cardinality;
+    all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
+    has-cardinality-type-UU-Fin-Level; mere-equiv-has-finite-cardinality)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -196,10 +196,16 @@ coprod-eq-is-finite {X = X} {Y = Y} P Q =
     ( number-of-elements-has-finite-cardinality)
     ( all-elements-equal-has-finite-cardinality
       ( pair
-        ( add-ℕ (number-of-elements-is-finite P) (number-of-elements-is-finite Q))
-        ( mere-equiv-UU-Fin-Level
+        ( add-ℕ
+          ( number-of-elements-is-finite P)
+          ( number-of-elements-is-finite Q))
+        ( has-cardinality-type-UU-Fin-Level
           ( coprod-UU-Fin-Level
-            ( pair X (mere-equiv-has-finite-cardinality (has-finite-cardinality-is-finite P)))
-            ( pair Y (mere-equiv-has-finite-cardinality (has-finite-cardinality-is-finite Q))))))
+            ( pair X
+              ( mere-equiv-has-finite-cardinality
+                ( has-finite-cardinality-is-finite P)))
+            ( pair Y
+              ( mere-equiv-has-finite-cardinality
+                ( has-finite-cardinality-is-finite Q))))))
       ( has-finite-cardinality-is-finite (is-finite-coprod P Q)))
 ```
