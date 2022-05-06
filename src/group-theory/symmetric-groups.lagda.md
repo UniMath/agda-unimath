@@ -9,9 +9,10 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
   (eq-pair-Σ; pair-eq-Σ; comp-eq-pair-Σ; comp-pair-eq-Σ; issec-pair-eq-Σ; isretr-pair-eq-Σ)
 open import foundation.equivalences using
-  ( _∘e_; associative-comp-equiv; id-equiv; left-unit-law-equiv; inv-equiv;
+  ( _≃_; _∘e_; associative-comp-equiv; id-equiv; left-unit-law-equiv; inv-equiv;
     right-unit-law-equiv; left-inverse-law-equiv; right-inverse-law-equiv;
     distributive-inv-comp-equiv; inv-inv-equiv; map-equiv; eq-htpy-equiv)
+open import foundation.functions using (id)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using
@@ -83,6 +84,57 @@ pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semigroup' X
 
 ## Properties
 
+### If two sets are equivalent, then their symmetric groups are isomorphic
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  iso-symmetric-group-equiv-Set : ( X : UU-Set l1) (Y : UU-Set l2) →
+    type-Set X ≃ type-Set Y →
+    type-iso-Group (symmetric-Group X) (symmetric-Group Y)
+  pr1 (pr1 (iso-symmetric-group-equiv-Set X Y e)) f = e ∘e (f ∘e inv-equiv e)
+  pr2 (pr1 (iso-symmetric-group-equiv-Set X Y e)) f g =
+    ( eq-htpy-equiv refl-htpy) ∙
+      ( ( ap
+        ( λ h → e ∘e (( f ∘e (h ∘e g)) ∘e inv-equiv e))
+        ( inv (left-inverse-law-equiv e))) ∙
+        ( eq-htpy-equiv refl-htpy))
+  pr1 (pr1 (pr2 (iso-symmetric-group-equiv-Set X Y e))) f = inv-equiv e ∘e (f ∘e e)
+  pr2 (pr1 (pr2 (iso-symmetric-group-equiv-Set X Y e))) f g =
+    ( eq-htpy-equiv refl-htpy) ∙
+      ( ( ap
+        ( λ h → inv-equiv e ∘e (( f ∘e (h ∘e g)) ∘e e))
+        ( inv (right-inverse-law-equiv e))) ∙
+        ( eq-htpy-equiv refl-htpy))
+  pr1 (pr2 (pr2 (iso-symmetric-group-equiv-Set X Y e))) =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ f →
+          ( eq-htpy-equiv refl-htpy) ∙
+            ( ( ap (λ h → h ∘e (f ∘e h)) (right-inverse-law-equiv e)) ∙
+              ( eq-htpy-equiv refl-htpy))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (symmetric-Group Y))
+          ( semigroup-Group (symmetric-Group Y))
+          ( id)))
+  pr2 (pr2 (pr2 (iso-symmetric-group-equiv-Set X Y e))) =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ f →
+          ( eq-htpy-equiv refl-htpy) ∙
+            ( ( ap (λ h → h ∘e (f ∘e h)) (left-inverse-law-equiv e)) ∙
+              ( eq-htpy-equiv refl-htpy))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (symmetric-Group X))
+          ( semigroup-Group (symmetric-Group X))
+          ( id)))
+
+```
+
 ### The symmetric group and the abstract automorphism group of a set are isomorphic
 
 ```agda
@@ -90,12 +142,12 @@ module _
   {l1 l2 : Level}
   where
   
-  iso-Symmetric-Group-abstract-Automorphism-Group : (X : UU-Set l1) →
+  iso-symmetric-group-abstract-automorphism-group-Set : (X : UU-Set l1) →
     type-iso-Group
       ( symmetric-Group X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
-  pr1 (pr1 (iso-Symmetric-Group-abstract-Automorphism-Group X)) x =
+  pr1 (pr1 (iso-symmetric-group-abstract-automorphism-group-Set X)) x =
     eq-pair-Σ
       ( eq-pair-Σ
         ( eq-equiv
@@ -105,7 +157,7 @@ module _
             ( (inv-equiv x) ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
         ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
       ( eq-is-prop is-prop-type-trunc-Prop) 
-  pr2 (pr1 (iso-Symmetric-Group-abstract-Automorphism-Group X)) x y =
+  pr2 (pr1 (iso-symmetric-group-abstract-automorphism-group-Set X)) x y =
     ( ap
       ( λ P → eq-pair-Σ P (eq-is-prop is-prop-type-trunc-Prop))
       ( ap
@@ -198,11 +250,11 @@ module _
               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
             ( eq-is-prop is-prop-type-trunc-Prop)
             ( eq-is-prop is-prop-type-trunc-Prop))) 
-  pr1 (pr1 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) x =
+  pr1 (pr1 (pr2 (iso-symmetric-group-abstract-automorphism-group-Set X))) x =
     inv-equiv
       ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
         ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
-  pr2 (pr1 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) x y =
+  pr2 (pr1 (pr2 (iso-symmetric-group-abstract-automorphism-group-Set X))) x y =
     ( ap
       ( inv-equiv)
       { y =
@@ -232,7 +284,7 @@ module _
           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
         ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e equiv-raise l2 (type-Set X))))
-  pr1 (pr2 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) =
+  pr1 (pr2 (pr2 (iso-symmetric-group-abstract-automorphism-group-Set X))) =
     eq-pair-Σ
       ( eq-htpy
         ( λ x →
@@ -287,11 +339,8 @@ module _
           ( semigroup-Group
             ( abstract-group-Concrete-Group
               ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2)))))
-          ( pr1
-            ( id-hom-Group
-              ( abstract-group-Concrete-Group
-                ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))))))
-  pr2 (pr2 (pr2 (iso-Symmetric-Group-abstract-Automorphism-Group X))) =
+          ( id)))
+  pr2 (pr2 (pr2 (iso-symmetric-group-abstract-automorphism-group-Set X))) =
     eq-pair-Σ
       ( eq-htpy
         ( λ x →
@@ -352,5 +401,5 @@ module _
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (symmetric-Group X))
           ( semigroup-Group (symmetric-Group X))
-          ( pr1 (id-hom-Group (symmetric-Group X)))))
+          ( id)))
 ```
