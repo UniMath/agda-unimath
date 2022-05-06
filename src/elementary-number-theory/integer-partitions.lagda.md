@@ -22,18 +22,4 @@ open import univalent-combinatorics.lists
 
 ## Idea
 
-An integer partition of a natural number n is a list of nonzero natural numbers that sum up to n, up to reordering.
-
-## Definition
-
-```agda
-list-nonzero-ℕ : UU lzero
-list-nonzero-ℕ = list nonzero-ℕ
-
-sum-list-nonzero-ℕ : list-nonzero-ℕ → ℕ
-sum-list-nonzero-ℕ nil = 0
-sum-list-nonzero-ℕ (cons x l) = add-ℕ (nat-nonzero-ℕ x) (sum-list-nonzero-ℕ l)
-
-integer-partition' : ℕ → UU lzero
-integer-partition' = fib sum-list-nonzero-ℕ
-```
+An integer partition of a natural number n is a list of nonzero natural numbers that sum up to n, up to reordering. We define the number `p n` of integer partitions of `n` as the number of connected components in the type of finite Ferrer diagrams of `Fin n`.
