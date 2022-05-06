@@ -117,17 +117,18 @@ triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ =
     ( transitive-leq-ℕ
       ( dist-ℕ m n)
       ( succ-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n)))
-      ( succ-ℕ (succ-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n)))) 
+      ( succ-ℕ (succ-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n))))
+      ( succ-leq-ℕ (succ-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n))))
       ( transitive-leq-ℕ
         ( dist-ℕ m n)
         ( add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n))
         ( succ-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n)))
-        ( triangle-inequality-dist-ℕ m n zero-ℕ)
-        ( succ-leq-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n))))
-      ( succ-leq-ℕ (succ-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n)))))
+        ( succ-leq-ℕ (add-ℕ (dist-ℕ m zero-ℕ) (dist-ℕ zero-ℕ n)))
+        ( triangle-inequality-dist-ℕ m n zero-ℕ)))
     ( ( ap (succ-ℕ ∘ succ-ℕ)
            ( ap-add-ℕ (right-unit-law-dist-ℕ m) (left-unit-law-dist-ℕ n))) ∙
       ( inv (left-successor-law-add-ℕ m (succ-ℕ n))))
+
 triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
   triangle-inequality-dist-ℕ m n k
 
@@ -189,7 +190,7 @@ leq-dist-ℕ :
 leq-dist-ℕ zero-ℕ zero-ℕ H = refl-leq-ℕ zero-ℕ
 leq-dist-ℕ zero-ℕ (succ-ℕ y) H = refl-leq-ℕ y
 leq-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
-  transitive-leq-ℕ (dist-ℕ x y) y (succ-ℕ y) (leq-dist-ℕ x y H) (succ-leq-ℕ y)
+  transitive-leq-ℕ (dist-ℕ x y) y (succ-ℕ y) (succ-leq-ℕ y) (leq-dist-ℕ x y H)
 
 -- We show that dist-ℕ is translation invariant
 

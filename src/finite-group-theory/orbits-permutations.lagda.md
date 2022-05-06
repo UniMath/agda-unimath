@@ -29,8 +29,6 @@ open import elementary-number-theory.inequality-natural-numbers using
     decide-leq-ℕ; le-leq-neq-ℕ; leq-le-ℕ; leq-le-succ-ℕ; subtraction-leq-ℕ;
     transitive-leq-ℕ; leq-mul-is-nonzero-ℕ; subtraction-le-ℕ; le-subtraction-ℕ;
     transitive-le-ℕ; le-succ-ℕ)
-open import elementary-number-theory.iterating-functions using
-  ( iterate; iterate-add-ℕ)
 open import elementary-number-theory.lower-bounds-natural-numbers using
   ( is-lower-bound-ℕ)
 open import
@@ -83,6 +81,8 @@ open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
 open import foundation.injective-maps using (is-injective-map-equiv)
+open import foundation.iterating-functions using
+  ( iterate; iterate-add-ℕ)
 open import foundation.negation using (¬; reductio-ad-absurdum)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
@@ -91,6 +91,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( UU-Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
     is-prop; is-prop-Σ)
+open import foundation.repetitions using (repetition)
 open import foundation.sets using (Id-Prop)
 open import foundation.unit-type using (star; unit)
 open import foundation.univalence using (eq-equiv)
@@ -116,7 +117,7 @@ open import univalent-combinatorics.finite-types using
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 open import univalent-combinatorics.lists using (list; length-list; cons; nil)
 open import univalent-combinatorics.pigeonhole-principle using
-  ( two-points-same-image-le-count)
+  ( repetition-le-count)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin;
     zero-Fin; equiv-succ-Fin)
@@ -134,31 +135,27 @@ The orbit of a point `x` for a permutation `f` is the set of point obtained by i
 module _
   {l : Level} (X : UU l) (eX : count X) (f : Aut X) (a : X)
   where
+
+  -- The map `i ↦ eⁱ a` repeats itself
   
-  two-points-iterate-Fin :
-    Σ ( Fin (succ-ℕ (number-of-elements-count eX)))
-      ( λ k1 →
-        Σ ( Fin (succ-ℕ (number-of-elements-count eX)))
-          ( λ k2 →
-            ( Id ( iterate (nat-Fin k1) (map-equiv f) a)
-                 ( iterate (nat-Fin k2) (map-equiv f) a)) ×
-            ¬ (Id k1 k2)))
-  two-points-iterate-Fin =
-    two-points-same-image-le-count
+  repetition-iterate-Fin :
+    repetition (λ k → iterate (nat-Fin k) (map-equiv f) a)
+  repetition-iterate-Fin =
+    repetition-le-count
       ( count-Fin (succ-ℕ (number-of-elements-count eX)))
       ( eX)
       ( λ k → iterate (nat-Fin k) (map-equiv f) a)
       ( succ-le-ℕ (number-of-elements-count eX))
 
   point1-iterate-ℕ : ℕ
-  point1-iterate-ℕ = nat-Fin (pr1 two-points-iterate-Fin)
+  point1-iterate-ℕ = nat-Fin (pr1 (pr1 repetition-iterate-Fin))
 
   point2-iterate-ℕ : ℕ
-  point2-iterate-ℕ = nat-Fin (pr1 (pr2 two-points-iterate-Fin))
+  point2-iterate-ℕ = nat-Fin (pr1 (pr2 (pr1 repetition-iterate-Fin)))
 
   neq-points-iterate-ℕ : ¬ (Id point1-iterate-ℕ point2-iterate-ℕ)
   neq-points-iterate-ℕ p =
-    pr2 (pr2 (pr2 two-points-iterate-Fin)) (is-injective-nat-Fin p)
+    pr2 (pr2 (pr1 repetition-iterate-Fin)) (is-injective-nat-Fin p)
  
   two-points-iterate-ordered-ℕ :
     coprod
@@ -175,13 +172,13 @@ module _
   pr1 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inl p)))) =
     le-leq-neq-ℕ p neq-points-iterate-ℕ
   pr2 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inl p)))) =
-    inv (pr1 (pr2 (pr2 two-points-iterate-Fin)))
+    inv ((pr2 repetition-iterate-Fin))
   pr1 (two-points-iterate-ordered-ℕ (inr p)) = point1-iterate-ℕ
   pr1 (pr2 (two-points-iterate-ordered-ℕ (inr p))) = point2-iterate-ℕ
   pr1 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inr p)))) =
     le-leq-neq-ℕ p λ e → neq-points-iterate-ℕ (inv e)
   pr2 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inr p)))) =
-    pr1 (pr2 (pr2 two-points-iterate-Fin))
+    pr2 repetition-iterate-Fin
 
   leq-greater-point-number-elements :
     ( p :
@@ -192,56 +189,62 @@ module _
   leq-greater-point-number-elements (inl p) =
     leq-le-succ-ℕ
       { pr1 (two-points-iterate-ordered-ℕ (inl p))}
-      ( strict-upper-bound-nat-Fin (pr1 (pr2 two-points-iterate-Fin)))
+      ( strict-upper-bound-nat-Fin (pr1 (pr2 (pr1 repetition-iterate-Fin))))
   leq-greater-point-number-elements (inr p) =
     leq-le-succ-ℕ
       { pr1 (two-points-iterate-ordered-ℕ (inr p))}
-      ( strict-upper-bound-nat-Fin (pr1 two-points-iterate-Fin))
-          
-  min-repeating :
-    minimal-element-ℕ
-      ( λ n →
-        Σ ( ℕ)
-          ( λ m →
-            ( le-ℕ m n) ×
-            ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
-  min-repeating =
-    well-ordering-principle-ℕ
-      ( λ n →
-        Σ ( ℕ)
-          ( λ m →
-            ( le-ℕ m n) ×
-            ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
-      ( λ n →
-        is-decidable-bounded-Σ-ℕ n ( λ m → le-ℕ m n)
-          ( λ m → (Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a)))
-          ( λ m → is-decidable-le-ℕ m n)
-          ( λ m →
-            has-decidable-equality-count eX
-              ( iterate n (map-equiv f) a)
-              ( iterate m (map-equiv f) a))
-          ( λ m p → leq-le-ℕ {m} {n} p))
-      ( two-points-iterate-ordered-ℕ
-        ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
+      ( strict-upper-bound-nat-Fin (pr1 (pr1 repetition-iterate-Fin)))
 
-  first-point-min-repeating : ℕ
-  first-point-min-repeating = pr1 min-repeating
-    
-  second-point-min-repeating : ℕ
-  second-point-min-repeating = pr1 (pr1 (pr2 min-repeating))
+  abstract
+    min-repeating :
+      minimal-element-ℕ
+        ( λ n →
+          Σ ( ℕ)
+            ( λ m →
+              ( le-ℕ m n) ×
+              ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
+    min-repeating =
+      well-ordering-principle-ℕ
+        ( λ n →
+          Σ ( ℕ)
+            ( λ m →
+              ( le-ℕ m n) ×
+              ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
+        ( λ n →
+          is-decidable-bounded-Σ-ℕ n ( λ m → le-ℕ m n)
+            ( λ m → (Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a)))
+            ( λ m → is-decidable-le-ℕ m n)
+            ( λ m →
+              has-decidable-equality-count eX
+                ( iterate n (map-equiv f) a)
+                ( iterate m (map-equiv f) a))
+            ( λ m p → leq-le-ℕ {m} {n} p))
+        ( two-points-iterate-ordered-ℕ
+          ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
+  
+    first-point-min-repeating : ℕ
+    first-point-min-repeating = pr1 min-repeating
+      
+    second-point-min-repeating : ℕ
+    second-point-min-repeating = pr1 (pr1 (pr2 min-repeating))
+  
+    le-min-reporting : le-ℕ second-point-min-repeating first-point-min-repeating
+    le-min-reporting = pr1 (pr2 (pr1 (pr2 min-repeating)))
 
-  le-min-reporting : le-ℕ second-point-min-repeating first-point-min-repeating
-  le-min-reporting = pr1 (pr2 (pr1 (pr2 min-repeating)))
+    is-lower-bound-min-reporting :
+      is-lower-bound-ℕ
+        ( λ n →
+          Σ ( ℕ)
+            ( λ m →
+              ( le-ℕ m n) ×
+              ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
+        ( first-point-min-repeating)
+    is-lower-bound-min-reporting = pr2 (pr2 min-repeating)
 
-  is-lower-bound-min-reporting :
-    is-lower-bound-ℕ
-      ( λ n →
-        Σ ( ℕ)
-          ( λ m →
-            ( le-ℕ m n) ×
-            ( Id (iterate n (map-equiv f) a) (iterate m (map-equiv f) a))))
-      ( first-point-min-repeating)
-  is-lower-bound-min-reporting = pr2 (pr2 min-repeating)
+    same-image-iterate-min-reporting :
+      Id ( iterate first-point-min-repeating (map-equiv f) a)
+        ( iterate second-point-min-repeating (map-equiv f) a)
+    same-image-iterate-min-reporting = pr2 (pr2 (pr1 (pr2 min-repeating)))
 
   leq-first-point-min-reporting-succ-number-elements :
     first-point-min-repeating ≤-ℕ (number-of-elements-count eX)
@@ -252,6 +255,8 @@ module _
         ( two-points-iterate-ordered-ℕ
           ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ)))
       ( number-of-elements-count eX)
+      ( leq-greater-point-number-elements
+        ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
       ( is-lower-bound-min-reporting
         ( pr1
           ( two-points-iterate-ordered-ℕ
@@ -259,14 +264,7 @@ module _
         ( pr2
           ( two-points-iterate-ordered-ℕ
             ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))))
-      ( leq-greater-point-number-elements
-        ( decide-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))
 
-  same-image-iterate-min-reporting :
-    Id ( iterate first-point-min-repeating (map-equiv f) a)
-       ( iterate second-point-min-repeating (map-equiv f) a)
-  same-image-iterate-min-reporting = pr2 (pr2 (pr1 (pr2 min-repeating)))
-  
   abstract
     not-not-eq-second-point-zero-min-reporting :
       ¬¬ (Id second-point-min-repeating zero-ℕ)
@@ -656,50 +654,53 @@ module _
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
 
-  minimal-element-iterate :
-    (g : X ≃ X) (x y : X) → Σ ℕ (λ k → Id (iterate k (map-equiv g) x) y) →
-    minimal-element-ℕ (λ k → Id (iterate k (map-equiv g) x) y)
-  minimal-element-iterate g x y =
-    well-ordering-principle-ℕ
-      ( λ k → Id (iterate k (map-equiv g) x) y)
-      ( λ k → has-decidable-equality-count eX (iterate k (map-equiv g) x) y)
+  abstract
+    minimal-element-iterate :
+      (g : X ≃ X) (x y : X) → Σ ℕ (λ k → Id (iterate k (map-equiv g) x) y) →
+      minimal-element-ℕ (λ k → Id (iterate k (map-equiv g) x) y)
+    minimal-element-iterate g x y =
+      well-ordering-principle-ℕ
+        ( λ k → Id (iterate k (map-equiv g) x) y)
+        ( λ k → has-decidable-equality-count eX (iterate k (map-equiv g) x) y)
 
-  minimal-element-iterate-nonzero :
-    (g : X ≃ X) (x y : X) →
-    Σ ℕ (λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y) →
-    minimal-element-ℕ
-      ( λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y)
-  minimal-element-iterate-nonzero g x y =
-    well-ordering-principle-ℕ
-      ( λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y)
-      ( λ k →
-        is-decidable-prod
-          ( is-decidable-neg (has-decidable-equality-ℕ k zero-ℕ))
-          ( has-decidable-equality-count eX (iterate k (map-equiv g) x) y))
+  abstract
+    minimal-element-iterate-nonzero :
+      (g : X ≃ X) (x y : X) →
+      Σ ℕ (λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y) →
+      minimal-element-ℕ
+        ( λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y)
+    minimal-element-iterate-nonzero g x y =
+      well-ordering-principle-ℕ
+        ( λ k → is-nonzero-ℕ k × Id (iterate k (map-equiv g) x) y)
+        ( λ k →
+          is-decidable-prod
+            ( is-decidable-neg (has-decidable-equality-ℕ k zero-ℕ))
+            ( has-decidable-equality-count eX (iterate k (map-equiv g) x) y))
 
-  minimal-element-iterate-2 :
-    (g : X ≃ X) (x y z : X) →
-    Σ ( ℕ)
-      ( λ k →
-        coprod
-          ( Id (iterate k (map-equiv g) x) y)
-          ( Id (iterate k (map-equiv g) x) z)) →
-    minimal-element-ℕ
-      ( λ k →
-        coprod
-          ( Id (iterate k (map-equiv g) x) y)
-          ( Id (iterate k (map-equiv g) x) z))
-  minimal-element-iterate-2 g x y z p =
-    well-ordering-principle-ℕ
-      ( λ k →
-        coprod
-          ( Id (iterate k (map-equiv g) x) y)
-          ( Id (iterate k (map-equiv g) x) z))
-      ( λ k →
-        is-decidable-coprod
-        ( has-decidable-equality-count eX (iterate k (map-equiv g) x) y)
-        ( has-decidable-equality-count eX (iterate k (map-equiv g) x) z))
-      ( p)
+  abstract
+    minimal-element-iterate-2 :
+      (g : X ≃ X) (x y z : X) →
+      Σ ( ℕ)
+        ( λ k →
+          coprod
+            ( Id (iterate k (map-equiv g) x) y)
+            ( Id (iterate k (map-equiv g) x) z)) →
+      minimal-element-ℕ
+        ( λ k →
+          coprod
+            ( Id (iterate k (map-equiv g) x) y)
+            ( Id (iterate k (map-equiv g) x) z))
+    minimal-element-iterate-2 g x y z p =
+      well-ordering-principle-ℕ
+        ( λ k →
+          coprod
+            ( Id (iterate k (map-equiv g) x) y)
+            ( Id (iterate k (map-equiv g) x) z))
+        ( λ k →
+          is-decidable-coprod
+          ( has-decidable-equality-count eX (iterate k (map-equiv g) x) y)
+          ( has-decidable-equality-count eX (iterate k (map-equiv g) x) z))
+        ( p)
 
   abstract
     equal-iterate-transposition :

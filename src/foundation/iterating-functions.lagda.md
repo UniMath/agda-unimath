@@ -1,9 +1,11 @@
-# Iterating functions
+---
+title: Iterating functions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module elementary-number-theory.iterating-functions where
+module foundation.iterating-functions where
 
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ)
@@ -25,7 +27,11 @@ open import foundation.universe-levels using (Level; UU)
 open import univalent-combinatorics.standard-finite-types using (nat-Fin; Fin; succ-Fin)
 ```
 
-# Iterating functions
+## Idea
+
+Any map `f : X → X` can be iterated by repeatedly applying `f`
+
+## Definition
 
 ```agda
 module _
@@ -56,49 +62,4 @@ module _
     ( inv (iterate-add-ℕ k l f x)) ∙
     ( ( ap (λ t → iterate t f x) (commutative-add-ℕ k l)) ∙
       ( iterate-add-ℕ l k f x))
-```
-
-### Iterating automorphisms
-
-```agda
-module _
-  {l : Level} {X : UU l}
-  where
-
-  iterate-automorphism : ℕ → Aut X → Aut X
-  iterate-automorphism zero-ℕ e = id-equiv
-  iterate-automorphism (succ-ℕ n) e = e ∘e (iterate-automorphism n e)
-
-  map-iterate-automorphism : ℕ → Aut X → X → X
-  map-iterate-automorphism n e = map-equiv (iterate-automorphism n e)
-
-  is-equiv-map-iterate-automorphism :
-    (n : ℕ) (e : Aut X) → is-equiv (map-iterate-automorphism n e)
-  is-equiv-map-iterate-automorphism n e =
-    is-equiv-map-equiv (iterate-automorphism n e)
-
-  compute-map-iterate-automorphism :
-    (n : ℕ) (e : Aut X) → map-iterate-automorphism n e ~ iterate n (map-equiv e)
-  compute-map-iterate-automorphism zero-ℕ e = refl-htpy
-  compute-map-iterate-automorphism (succ-ℕ n) e =
-    map-equiv e ·l (compute-map-iterate-automorphism n e)
-```
-
-### Iteration of involution
-
-```agda
-module _
-  {l : Level} {X : UU l} (f : X → X) (P : is-involution f)
-  where
-  
-  iterate-involution :
-    (n : ℕ) (x : X) → Id (iterate n f x) (iterate (nat-Fin (mod-two-ℕ n)) f x)
-  iterate-involution zero-ℕ x = refl
-  iterate-involution (succ-ℕ n) x =
-    ap f (iterate-involution n x) ∙ (cases-iterate-involution (mod-two-ℕ n))
-    where
-    cases-iterate-involution : (k : Fin 2) →
-      Id (f (iterate (nat-Fin k) f x)) (iterate (nat-Fin (succ-Fin k)) f x) 
-    cases-iterate-involution (inl (inr star)) = refl
-    cases-iterate-involution (inr star) = P x
 ```
