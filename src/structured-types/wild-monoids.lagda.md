@@ -5,7 +5,7 @@ title: Wild monoids
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module wild-algebra.wild-monoids where
+module structured-types.wild-monoids where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; _∙_; ap)
@@ -14,14 +14,13 @@ open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
-open import synthetic-homotopy-theory.pointed-maps using (_→*_)
-open import synthetic-homotopy-theory.pointed-types using
-  ( Pointed-Type)
-
-open import wild-algebra.morphisms-wild-unital-magmas using
+open import structured-types.morphisms-wild-unital-magmas using
   ( hom-Wild-Unital-Magma; preserves-unital-mul; preserves-left-unit-law-mul;
     preserves-right-unit-law-mul; preserves-coh-unit-laws-mul)
-open import wild-algebra.wild-unital-magmas using
+open import structured-types.pointed-maps using (_→*_)
+open import structured-types.pointed-types using
+  ( Pointed-Type)
+open import structured-types.wild-unital-magmas using
   ( Wild-Unital-Magma; type-Wild-Unital-Magma; mul-Wild-Unital-Magma;
     unit-Wild-Unital-Magma; left-unit-law-mul-Wild-Unital-Magma;
     mul-Wild-Unital-Magma'; right-unit-law-mul-Wild-Unital-Magma;

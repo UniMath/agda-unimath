@@ -5,7 +5,7 @@ title: Wild quasigroups
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.wild-quasigroups where
+module structured-types.wild-quasigroups where
 
 open import foundation.automorphisms
 open import foundation.binary-equivalences
@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
 
-open import wild-algebra.magmas
+open import structured-types.magmas
 ```
 
 ## Idea

@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.pairs-of-distinct-elements
+open import foundation.repetitions
 open import foundation.sequences
 open import foundation.universe-levels
 ```
@@ -24,12 +25,11 @@ A repetition in a sequence `a : ℕ → A` consists of a pair of distinct natura
 ## Definition
 
 ```agda
-is-repetition-pair-of-distinct-elements :
+is-repetition-pair-of-distinct-elements-sequence :
   {l : Level} {A : UU l} (a : sequence A) (p : pair-of-distinct-elements ℕ) →
   UU l
-is-repetition-pair-of-distinct-elements a p =
-  Id ( a (fst-pair-of-distinct-elements p))
-     ( a (snd-pair-of-distinct-elements p))
+is-repetition-pair-of-distinct-elements-sequence a p =
+  is-repetition-pair-of-distinct-elements a p
 
 repetition-sequence :
   {l : Level} {A : UU l} → sequence A → UU l

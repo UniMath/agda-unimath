@@ -5,7 +5,7 @@ title: Wild loops
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.wild-loops where
+module structured-types.wild-loops where
 
 open import foundation.automorphisms
 open import foundation.binary-equivalences
@@ -14,11 +14,10 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.pointed-types
-
-open import wild-algebra.magmas
-open import wild-algebra.wild-quasigroups
-open import wild-algebra.wild-unital-magmas
+open import structured-types.magmas
+open import structured-types.pointed-types
+open import structured-types.wild-quasigroups
+open import structured-types.wild-unital-magmas
 ```
 
 ## Idea

@@ -55,6 +55,8 @@ open import foundation.sets using (is-set; UU-Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 
+open import structured-types.types-equipped-with-endomorphisms using (Endo)
+
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; is-set-Fin)
 open import univalent-combinatorics.standard-finite-types using
@@ -137,6 +139,10 @@ is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
 succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 succ-ℤ-Mod zero-ℕ = succ-ℤ
 succ-ℤ-Mod (succ-ℕ k) = succ-Fin
+
+ℤ-Mod-Endo : (k : ℕ) → Endo lzero
+pr1 (ℤ-Mod-Endo k) = ℤ-Mod k
+pr2 (ℤ-Mod-Endo k) = succ-ℤ-Mod k
 
 abstract
   is-equiv-succ-ℤ-Mod : (k : ℕ) → is-equiv (succ-ℤ-Mod k)

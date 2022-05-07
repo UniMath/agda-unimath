@@ -9,6 +9,7 @@ module foundation.repetitions where
 
 open import foundation.commuting-squares
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -16,6 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.pairs-of-distinct-elements
+open import foundation.truncated-maps
 open import foundation.universe-levels
 ```
 
@@ -107,4 +109,38 @@ module _
   isretr-map-inv-equiv-repetition :
     ( map-inv-equiv-repetition ∘ map-equiv-repetition) ~ id
   isretr-map-inv-equiv-repetition = isretr-map-inv-equiv equiv-repetition
+```
+
+### Embeddings of repetitions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D) (e : A ↪ C) (d : B ↪ D)
+  (H : coherence-square (map-emb e) f g (map-emb d))
+  where
+
+  emb-repetition : repetition f ↪ repetition g
+  emb-repetition =
+    emb-Σ
+      ( λ p →
+        Id ( g (fst-pair-of-distinct-elements p))
+           ( g (snd-pair-of-distinct-elements p)))
+      ( emb-pair-of-distinct-elements e)
+      ( λ p →
+        emb-equiv
+          ( ( ( equiv-concat'
+                ( g (map-emb e (fst-pair-of-distinct-elements p)))
+                ( H (snd-pair-of-distinct-elements p))) ∘e
+              ( equiv-concat
+                ( inv (H (fst-pair-of-distinct-elements p)))
+                ( map-emb d (f (snd-pair-of-distinct-elements p))))) ∘e
+            ( equiv-ap-emb d)))
+
+  map-emb-repetition : repetition f → repetition g
+  map-emb-repetition = map-emb emb-repetition
+
+  is-emb-map-emb-repetition : is-emb map-emb-repetition
+  is-emb-map-emb-repetition = is-emb-map-emb emb-repetition
+
 ```

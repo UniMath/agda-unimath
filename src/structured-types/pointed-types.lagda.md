@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module synthetic-homotopy-theory.pointed-types where
+module structured-types.pointed-types where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (Level; UU; lsuc)

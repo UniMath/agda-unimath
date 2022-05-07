@@ -5,13 +5,13 @@ title: Morphisms of magmas
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.morphisms-magmas where
+module structured-types.morphisms-magmas where
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import wild-algebra.magmas
+open import structured-types.magmas
 ```
 
 ## Idea

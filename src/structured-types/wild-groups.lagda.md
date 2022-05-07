@@ -5,17 +5,16 @@ title: Wild groups
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.wild-groups where
+module structured-types.wild-groups where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.pointed-types using
   ( Pointed-Type)
-
-open import wild-algebra.wild-monoids using
+open import structured-types.wild-monoids using
   ( Wild-Monoid; type-Wild-Monoid; mul-Wild-Monoid; mul-Wild-Monoid')
 ```
 

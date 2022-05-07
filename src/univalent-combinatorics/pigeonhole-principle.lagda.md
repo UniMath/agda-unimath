@@ -110,51 +110,82 @@ abstract
     is-not-injective-le-Fin f (le-succ-ℕ {k})
 
 abstract
-  repetition-le-Fin :
-    {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → repetition f
-  repetition-le-Fin {k} {l} f p =
-    pair (pair x (pair y (pr2 w))) (pr1 w)
-    where
-    u : Σ (Fin k) (λ x → ¬ ((y : Fin k) → Id (f x) (f y) → Id x y))
-    u = exists-not-not-forall-Fin
-         ( λ x →
-           is-decidable-Π-Fin
-             ( λ y →
-               is-decidable-function-type
-                 ( has-decidable-equality-Fin (f x) (f y))
-                 ( has-decidable-equality-Fin x y)))
-         ( λ q → is-not-injective-le-Fin f p (λ {x} {y} r → q x y r))
-    x : Fin k
-    x = pr1 u
-    H : ¬ ((y : Fin k) → Id (f x) (f y) → Id x y)
-    H = pr2 u
-    v : Σ (Fin k) (λ y → ¬ (Id (f x) (f y) → Id x y))
-    v = exists-not-not-forall-Fin
-          ( λ y →
-            is-decidable-function-type
-              ( has-decidable-equality-Fin (f x) (f y))
-              ( has-decidable-equality-Fin x y))
-          ( H)
-    y : Fin k
-    y = pr1 v
-    K : ¬ (Id (f x) (f y) → Id x y)
-    K = pr2 v
-    w : Id (f x) (f y) × ¬ (Id x y)
-    w = exists-not-not-forall-count
-          ( λ _ → Id x y)
-          ( λ _ → has-decidable-equality-Fin x y)
-          ( count-is-decidable-is-prop
-            ( is-set-Fin _ (f x) (f y))
-            ( has-decidable-equality-Fin (f x) (f y)))
-          ( K)
-              
-abstract
   no-embedding-ℕ-Fin :
     (k : ℕ) → ¬ (ℕ ↪ Fin k)
   no-embedding-ℕ-Fin k e =
     contradiction-leq-ℕ k k
       ( refl-leq-ℕ k)
       ( leq-emb-Fin (comp-emb e (emb-nat-Fin (succ-ℕ k))))
+```
+
+### For any `f : Fin k → Fin l`, where `l < k`, we construct a pair of distinct elements of `Fin k` on which `f` assumes the same value
+
+```agda
+module _
+  {k l : ℕ} (f : Fin k → Fin l) (p : le-ℕ l k)
+  where
+  
+  abstract
+    repetition-le-Fin : repetition f
+    repetition-le-Fin =
+      pair (pair x (pair y (pr2 w))) (pr1 w)
+      where
+      u : Σ (Fin k) (λ x → ¬ ((y : Fin k) → Id (f x) (f y) → Id x y))
+      u = exists-not-not-forall-Fin
+          ( λ x →
+            is-decidable-Π-Fin
+              ( λ y →
+                is-decidable-function-type
+                  ( has-decidable-equality-Fin (f x) (f y))
+                  ( has-decidable-equality-Fin x y)))
+          ( λ q → is-not-injective-le-Fin f p (λ {x} {y} r → q x y r))
+      x : Fin k
+      x = pr1 u
+      H : ¬ ((y : Fin k) → Id (f x) (f y) → Id x y)
+      H = pr2 u
+      v : Σ (Fin k) (λ y → ¬ (Id (f x) (f y) → Id x y))
+      v = exists-not-not-forall-Fin
+          ( λ y →
+            is-decidable-function-type
+              ( has-decidable-equality-Fin (f x) (f y))
+              ( has-decidable-equality-Fin x y))
+          ( H)
+      y : Fin k
+      y = pr1 v
+      K : ¬ (Id (f x) (f y) → Id x y)
+      K = pr2 v
+      w : Id (f x) (f y) × ¬ (Id x y)
+      w = exists-not-not-forall-count
+          ( λ _ → Id x y)
+          ( λ _ → has-decidable-equality-Fin x y)
+          ( count-is-decidable-is-prop
+            ( is-set-Fin _ (f x) (f y))
+            ( has-decidable-equality-Fin (f x) (f y)))
+          ( K)
+
+  pair-of-distinct-elements-repetition-le-Fin :
+    pair-of-distinct-elements (Fin k)
+  pair-of-distinct-elements-repetition-le-Fin = pr1 repetition-le-Fin
+
+  fst-repetition-le-Fin : Fin k
+  fst-repetition-le-Fin =
+    fst-pair-of-distinct-elements pair-of-distinct-elements-repetition-le-Fin
+
+  snd-repetition-le-Fin : Fin k
+  snd-repetition-le-Fin =
+    snd-pair-of-distinct-elements pair-of-distinct-elements-repetition-le-Fin
+
+  distinction-repetition-le-Fin :
+    ¬ (Id fst-repetition-le-Fin snd-repetition-le-Fin)
+  distinction-repetition-le-Fin =
+    distinction-pair-of-distinct-elements
+      pair-of-distinct-elements-repetition-le-Fin
+
+  is-repetition-pair-of-distinct-elements-repetition-le-Fin :
+    is-repetition-pair-of-distinct-elements f
+      pair-of-distinct-elements-repetition-le-Fin
+  is-repetition-pair-of-distinct-elements-repetition-le-Fin =
+    is-repetition-pair-of-distinct-elements-repetition f repetition-le-Fin
 ```
 
 ### The pigeonhole principle for types equipped with a counting

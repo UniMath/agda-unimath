@@ -5,7 +5,7 @@ title: Wild unital magmas
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.wild-unital-magmas where
+module structured-types.wild-unital-magmas where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (id)
@@ -19,11 +19,10 @@ open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
 
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
-open import synthetic-homotopy-theory.pointed-maps using (_→*_)
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.magmas
+open import structured-types.pointed-maps using (_→*_)
+open import structured-types.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
-
-open import wild-algebra.magmas
 ```
 
 ## Idea

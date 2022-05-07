@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module synthetic-homotopy-theory.pointed-homotopies where
+module structured-types.pointed-homotopies where
 
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv)
@@ -16,13 +16,13 @@ open import foundation.identity-types using
 open import foundation.structure-identity-principle using ( extensionality-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import synthetic-homotopy-theory.pointed-dependent-functions using
+open import structured-types.pointed-dependent-functions using
   ( pointed-Π; function-pointed-Π; preserves-point-function-pointed-Π)
-open import synthetic-homotopy-theory.pointed-families-of-types using
+open import structured-types.pointed-families-of-types using
   ( Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
-open import synthetic-homotopy-theory.pointed-maps using
+open import structured-types.pointed-maps using
   (_→*_; comp-pointed-map; id-pointed-map; map-pointed-map)
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.pointed-types using
   ( Pointed-Type; pt-Pointed-Type)
 ```
 

@@ -3,12 +3,12 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module synthetic-homotopy-theory.pointed-families-of-types where
+module structured-types.pointed-families-of-types where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 ```
 

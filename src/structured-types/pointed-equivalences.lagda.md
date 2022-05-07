@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module synthetic-homotopy-theory.pointed-equivalences where
+module structured-types.pointed-equivalences where
 
 open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using
@@ -32,16 +32,16 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.univalence using (equiv-univalence)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import synthetic-homotopy-theory.pointed-homotopies using
+open import structured-types.pointed-homotopies using
   ( htpy-pointed-map; extensionality-pointed-map; eq-htpy-pointed-map;
     concat-htpy-pointed-map; assoc-comp-pointed-map;
     left-whisker-htpy-pointed-map; right-unit-law-comp-pointed-map;
     left-unit-law-comp-pointed-map; inv-assoc-comp-pointed-map;
     right-whisker-htpy-pointed-map)
-open import synthetic-homotopy-theory.pointed-maps using
+open import structured-types.pointed-maps using
   ( _→*_; comp-pointed-map; id-pointed-map; map-pointed-map;
     preserves-point-map-pointed-map; precomp-pointed-map)
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 ```
 

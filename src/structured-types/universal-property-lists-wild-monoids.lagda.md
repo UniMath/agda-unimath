@@ -5,7 +5,7 @@ title: The universal property of lists with respect to wild monoids
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module wild-algebra.universal-property-lists-wild-monoids where
+module structured-types.universal-property-lists-wild-monoids where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using
@@ -20,16 +20,16 @@ open import univalent-combinatorics.lists using
   ( list; nil; cons; concat-list; left-unit-law-concat-list;
     right-unit-law-concat-list; assoc-concat-list)
 
-open import wild-algebra.morphisms-wild-unital-magmas using
+open import structured-types.morphisms-wild-unital-magmas using
   ( preserves-left-unit-law-mul; preserves-right-unit-law-mul;
     preserves-coh-unit-laws-mul)
-open import wild-algebra.wild-monoids using
+open import structured-types.wild-monoids using
   ( Wild-Monoid; type-Wild-Monoid; unit-Wild-Monoid; mul-Wild-Monoid;
     left-unit-law-mul-Wild-Monoid; associative-mul-Wild-Monoid;
     right-unit-law-mul-Wild-Monoid; coh-unit-laws-mul-Wild-Monoid;
     unit-law-110-assoc-Wild-Monoid; wild-unital-magma-Wild-Monoid;
     hom-Wild-Monoid)
-open import wild-algebra.wild-unital-magmas using
+open import structured-types.wild-unital-magmas using
   ( Wild-Unital-Magma)
 ```
 

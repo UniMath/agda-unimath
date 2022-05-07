@@ -32,13 +32,15 @@ open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; Level; lzero)
+
+open import structured-types.types-equipped-with-endomorphisms using (Endo)
 ```
 
 ## Idea
 
 The type of integers is an extension of the type of natural numbers including negative whole numbers.
 
-## Definition
+## Definitions
 
 ### The type of integers
 
@@ -133,6 +135,10 @@ pred-ℤ (inl x) = inl (succ-ℕ x)
 pred-ℤ (inr (inl star)) = inl zero-ℕ
 pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
+
+ℤ-Endo : Endo lzero
+pr1 ℤ-Endo = ℤ
+pr2 ℤ-Endo = succ-ℤ
 ```
 
 ### The negative of an integer

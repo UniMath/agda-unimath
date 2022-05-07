@@ -113,19 +113,54 @@ open import univalent-combinatorics.finite-types using
     has-cardinality-type-UU-Fin-Level; number-of-elements-is-finite;
     number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
     has-finite-cardinality-count; all-elements-equal-has-finite-cardinality;
-    has-cardinality)
+    has-cardinality; 𝔽; type-𝔽)
 open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
 open import univalent-combinatorics.lists using (list; length-list; cons; nil)
 open import univalent-combinatorics.pigeonhole-principle using
   ( repetition-le-count)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; strict-upper-bound-nat-Fin;
+  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; upper-bound-nat-Fin;
     zero-Fin; equiv-succ-Fin)
 ```
 
 ## Idea
 
 The orbit of a point `x` for a permutation `f` is the set of point obtained by iterating `f` on `x`.
+
+## Definition
+
+### The groupoid of iterative orbits of an automorphism on a finite set
+
+```agda
+module _
+  (X : 𝔽) (e : type-𝔽 X ≃ type-𝔽 X)
+  where
+  
+  iso-iterative-groupoid-automorphism-𝔽 : (x y : type-𝔽 X) → UU lzero
+  iso-iterative-groupoid-automorphism-𝔽 x y =
+    Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
+
+  nat-iso-iterative-groupoid-automorphism-𝔽 :
+    (x y : type-𝔽 X) (f : iso-iterative-groupoid-automorphism-𝔽 x y) → ℕ
+  nat-iso-iterative-groupoid-automorphism-𝔽 x y = pr1
+
+  id-iso-iterative-groupoid-automorphism-𝔽 :
+    (x : type-𝔽 X) → iso-iterative-groupoid-automorphism-𝔽 x x
+  pr1 (id-iso-iterative-groupoid-automorphism-𝔽 x) = 0
+  pr2 (id-iso-iterative-groupoid-automorphism-𝔽 x) = refl
+
+  comp-iso-iterative-groupoid-automorphism-𝔽 :
+    {x y z : type-𝔽 X} →
+    iso-iterative-groupoid-automorphism-𝔽 y z →
+    iso-iterative-groupoid-automorphism-𝔽 x y →
+    iso-iterative-groupoid-automorphism-𝔽 x z
+  pr1 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
+    add-ℕ n m
+  pr2 (comp-iso-iterative-groupoid-automorphism-𝔽 (pair n q) (pair m p)) =
+    iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
+```
+
+### The equivalence classes of iterative orbits of an automorphism on a finite set
 
 ## Properties
 
@@ -138,9 +173,9 @@ module _
 
   -- The map `i ↦ eⁱ a` repeats itself
   
-  repetition-iterate-Fin :
+  repetition-iterate-automorphism-Fin :
     repetition (λ k → iterate (nat-Fin k) (map-equiv f) a)
-  repetition-iterate-Fin =
+  repetition-iterate-automorphism-Fin =
     repetition-le-count
       ( count-Fin (succ-ℕ (number-of-elements-count eX)))
       ( eX)
@@ -148,14 +183,14 @@ module _
       ( succ-le-ℕ (number-of-elements-count eX))
 
   point1-iterate-ℕ : ℕ
-  point1-iterate-ℕ = nat-Fin (pr1 (pr1 repetition-iterate-Fin))
+  point1-iterate-ℕ = nat-Fin (pr1 (pr1 repetition-iterate-automorphism-Fin))
 
   point2-iterate-ℕ : ℕ
-  point2-iterate-ℕ = nat-Fin (pr1 (pr2 (pr1 repetition-iterate-Fin)))
+  point2-iterate-ℕ = nat-Fin (pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin)))
 
   neq-points-iterate-ℕ : ¬ (Id point1-iterate-ℕ point2-iterate-ℕ)
   neq-points-iterate-ℕ p =
-    pr2 (pr2 (pr1 repetition-iterate-Fin)) (is-injective-nat-Fin p)
+    pr2 (pr2 (pr1 repetition-iterate-automorphism-Fin)) (is-injective-nat-Fin p)
  
   two-points-iterate-ordered-ℕ :
     coprod
@@ -172,13 +207,13 @@ module _
   pr1 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inl p)))) =
     le-leq-neq-ℕ p neq-points-iterate-ℕ
   pr2 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inl p)))) =
-    inv ((pr2 repetition-iterate-Fin))
+    inv ((pr2 repetition-iterate-automorphism-Fin))
   pr1 (two-points-iterate-ordered-ℕ (inr p)) = point1-iterate-ℕ
   pr1 (pr2 (two-points-iterate-ordered-ℕ (inr p))) = point2-iterate-ℕ
   pr1 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inr p)))) =
     le-leq-neq-ℕ p λ e → neq-points-iterate-ℕ (inv e)
   pr2 (pr2 (pr2 (two-points-iterate-ordered-ℕ (inr p)))) =
-    pr2 repetition-iterate-Fin
+    pr2 repetition-iterate-automorphism-Fin
 
   leq-greater-point-number-elements :
     ( p :
@@ -187,13 +222,9 @@ module _
         ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ)) →
     pr1 (two-points-iterate-ordered-ℕ p) ≤-ℕ number-of-elements-count eX
   leq-greater-point-number-elements (inl p) =
-    leq-le-succ-ℕ
-      { pr1 (two-points-iterate-ordered-ℕ (inl p))}
-      ( strict-upper-bound-nat-Fin (pr1 (pr2 (pr1 repetition-iterate-Fin))))
+    ( upper-bound-nat-Fin (pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin))))
   leq-greater-point-number-elements (inr p) =
-    leq-le-succ-ℕ
-      { pr1 (two-points-iterate-ordered-ℕ (inr p))}
-      ( strict-upper-bound-nat-Fin (pr1 (pr1 repetition-iterate-Fin)))
+    ( upper-bound-nat-Fin (pr1 (pr1 repetition-iterate-automorphism-Fin)))
 
   abstract
     min-repeating :

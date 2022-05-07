@@ -5,7 +5,7 @@ title: Magmas
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.magmas where
+module structured-types.magmas where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 

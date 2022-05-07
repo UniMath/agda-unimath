@@ -28,6 +28,8 @@ Egbert Rijke
 {-# OPTIONS --without-K --exact-split --guardedness #-}
 ```
 
+See the list of all Agda modules [here](everything.html).
+
 ## Category theory
 
 ```agda
@@ -121,7 +123,6 @@ open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.integer-partitions
 open import elementary-number-theory.integers
-open import elementary-number-theory.iterating-functions
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.mersenne-primes
@@ -575,6 +576,32 @@ open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```
 
+## Structured types
+
+```agda
+open import structured-types
+open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.magmas
+open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import structured-types.morphisms-magmas
+open import structured-types.morphisms-types-equipped-with-endomorphisms
+open import structured-types.morphisms-wild-unital-magmas
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-equivalences
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
+open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.universal-property-lists-wild-monoids
+open import structured-types.wild-groups
+open import structured-types.wild-loops
+open import structured-types.wild-monoids
+open import structured-types.wild-quasigroups
+open import structured-types.wild-semigroups
+open import structured-types.wild-unital-magmas
+```
+
 ## Synthetic homotopy theory
 
 ```agda
@@ -594,12 +621,6 @@ open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.pointed-dependent-functions
-open import synthetic-homotopy-theory.pointed-equivalences
-open import synthetic-homotopy-theory.pointed-families-of-types
-open import synthetic-homotopy-theory.pointed-homotopies
-open import synthetic-homotopy-theory.pointed-maps
-open import synthetic-homotopy-theory.pointed-types
 open import synthetic-homotopy-theory.spaces
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
@@ -693,24 +714,3 @@ open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
 open import univalent-combinatorics.universal-property-standard-finite-types
 ```
-
-## Wild algebra
-
-```agda
-open import wild-algebra
-open import wild-algebra.magmas
-open import wild-algebra.morphisms-magmas
-open import wild-algebra.morphisms-wild-unital-magmas
-open import wild-algebra.universal-property-lists-wild-monoids
-open import wild-algebra.wild-groups
-open import wild-algebra.wild-loops
-open import wild-algebra.wild-monoids
-open import wild-algebra.wild-quasigroups
-open import wild-algebra.wild-semigroups
-open import wild-algebra.wild-unital-magmas
-```
-
-## Everything
-
-See the list of all Agda modules [here](everything.html).
-
