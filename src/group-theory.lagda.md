@@ -37,6 +37,7 @@ open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.mere-equivalences-group-actions public
+open import group-theory.monoid-actions public
 open import group-theory.monoids public
 open import group-theory.orbits-group-actions public
 open import group-theory.precategory-of-group-actions public
