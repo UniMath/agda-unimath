@@ -54,7 +54,7 @@ open import foundation.equality-dependent-pair-types using
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv;
     left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv; right-inverse-law-equiv;
-    left-inverse-law-equiv)
+    left-inverse-law-equiv; eq-htpy-equiv)
 open import foundation.equivalence-classes using
   ( large-set-quotient; quotient-map-large-set-quotient; large-quotient-Set;
     type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
@@ -347,7 +347,7 @@ module _
                 ( ap (λ n → add-ℕ n (nat-Fin m)) (inv (left-unit-law-mul-ℕ (nat-Fin m)))))
               ( scalar-invariant-cong-ℕ' 2 2 0 (nat-Fin m) (cong-zero-ℕ' 2))))
           ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2)))) ∙
-      (ap
+      ( ap
         ( mod-two-ℕ)
         ( ( symmetric-dist-ℕ (add-ℕ k1 k2) (mul-ℕ 2 k')) ∙
           ( inv
@@ -581,6 +581,18 @@ module _
                   ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
                   ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
                   ( Y)))))
+
+  preserves-id-equiv-orientation-Complete-Undirected-Graph-equiv :
+    (X : UU-Fin-Level l n) →
+    Id (orientation-Complete-Undirected-Graph-equiv X X id-equiv) id-equiv
+  preserves-id-equiv-orientation-Complete-Undirected-Graph-equiv X =
+    eq-htpy-equiv
+      ( λ d →
+        eq-htpy
+          ( λ Y →
+            eq-pair-Σ
+              ( ap (λ Y' → pr1 (d Y')) (eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
+              ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
 ```
 
 ```
