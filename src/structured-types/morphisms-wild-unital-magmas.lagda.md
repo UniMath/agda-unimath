@@ -5,7 +5,7 @@ title: Morphisms of wild unital magmas
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module wild-algebra.morphisms-wild-unital-magmas where
+module structured-types.morphisms-wild-unital-magmas where
 
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -16,9 +16,8 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
 
-open import synthetic-homotopy-theory.pointed-maps
-
-open import wild-algebra.wild-unital-magmas
+open import structured-types.pointed-maps
+open import structured-types.wild-unital-magmas
 ```
 
 ## Idea

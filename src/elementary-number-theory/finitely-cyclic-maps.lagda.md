@@ -9,8 +9,6 @@ title: Univalent Mathematics in Agda
 
 module elementary-number-theory.finitely-cyclic-maps where
 
-open import elementary-number-theory.iterating-functions using
-  ( iterate; iterate-succ-ℕ; iterate-iterate)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin; mod-succ-ℕ; right-unit-law-add-Fin; right-successor-law-add-Fin;
@@ -23,6 +21,8 @@ open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; _∙_; inv; ap)
+open import foundation.iterating-functions using
+  ( iterate; iterate-succ-ℕ; iterate-iterate)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.standard-finite-types using

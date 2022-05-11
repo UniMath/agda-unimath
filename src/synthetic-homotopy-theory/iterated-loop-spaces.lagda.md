@@ -10,8 +10,9 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.identity-types using (Id; refl)
 open import foundation.universe-levels using (Level; UU)
 
+open import structured-types.pointed-types using (Pointed-Type)
+
 open import synthetic-homotopy-theory.loop-spaces using (Ω)
-open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
 ```
 
 ```agda

@@ -6,8 +6,6 @@
 module finite-group-theory.permutations where
 
 open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.iterating-functions using
-  ( iterate; iterate-involution)
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
@@ -55,6 +53,8 @@ open import foundation.homotopies using (_~_; comp-htpy; refl-htpy; inv-htpy)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
 open import foundation.injective-maps using (is-injective-map-equiv)
+open import foundation.iterating-functions using (iterate)
+open import foundation.iterating-involutions using (iterate-involution)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;

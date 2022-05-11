@@ -96,8 +96,8 @@ le-constant-unary-op-ℕ k x y m =
       ( k)
       ( mul-ℕ k (succ-ℕ m))
       ( unary-op-ℕ k y m)
-        ( leq-mul-ℕ m k)
-        ( leq-add-ℕ (mul-ℕ k (succ-ℕ m)) (nat-Fin y)))
+      ( leq-add-ℕ (mul-ℕ k (succ-ℕ m)) (nat-Fin y))
+      ( leq-mul-ℕ m k))
 
 is-injective-convert-based-ℕ :
   (k : ℕ) → is-injective (convert-based-ℕ k)

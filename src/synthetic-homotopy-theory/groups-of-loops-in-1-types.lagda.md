@@ -16,8 +16,9 @@ open import foundation.universe-levels using (Level; UU)
 open import group-theory.groups using (Group)
 open import group-theory.semigroups using (Semigroup)
 
+open import structured-types.pointed-types using (Pointed-Type)
+
 open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
-open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
 ```
 
 ```agda

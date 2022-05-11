@@ -17,6 +17,16 @@ open import foundation.mere-equality using (mere-eq)
 open import foundation.propositions using (UU-Prop; type-Prop)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 
+open import structured-types.pointed-homotopies using
+  ( htpy-pointed-map; extensionality-pointed-map;
+    assoc-comp-pointed-map; left-unit-law-comp-pointed-map;
+    right-unit-law-comp-pointed-map)
+open import structured-types.pointed-maps using
+  ( _→*_; map-pointed-map; preserves-point-map-pointed-map;
+    id-pointed-map; comp-pointed-map)
+open import structured-types.pointed-types using
+  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+
 open import synthetic-homotopy-theory.functoriality-loop-spaces using
   ( map-Ω; preserves-refl-map-Ω; preserves-mul-map-Ω;
     preserves-inv-map-Ω)
@@ -24,15 +34,6 @@ open import synthetic-homotopy-theory.loop-spaces using
   ( type-Ω; refl-Ω; mul-Ω; associative-mul-Ω; left-unit-law-mul-Ω;
     right-unit-law-mul-Ω; inv-Ω; left-inverse-law-mul-Ω;
     right-inverse-law-mul-Ω)
-open import synthetic-homotopy-theory.pointed-homotopies using
-  ( htpy-pointed-map; extensionality-pointed-map;
-    assoc-comp-pointed-map; left-unit-law-comp-pointed-map;
-    right-unit-law-comp-pointed-map)
-open import synthetic-homotopy-theory.pointed-maps using
-  ( _→*_; map-pointed-map; preserves-point-map-pointed-map;
-    id-pointed-map; comp-pointed-map)
-open import synthetic-homotopy-theory.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 
 ∞-Group : (l : Level) → UU (lsuc l)
 ∞-Group l = Σ (Pointed-Type l) (λ X → is-path-connected (type-Pointed-Type X))

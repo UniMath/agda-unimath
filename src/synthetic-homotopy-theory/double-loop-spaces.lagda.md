@@ -13,10 +13,11 @@ open import foundation.path-algebra using
     interchange-Id²; z-concat-Id³; y-concat-Id³)
 open import foundation.universe-levels using (Level; UU)
 
+open import structured-types.pointed-types using
+  ( Pointed-Type)
+
 open import synthetic-homotopy-theory.iterated-loop-spaces using
   ( iterated-loop-space)
-open import synthetic-homotopy-theory.pointed-types using
-  ( Pointed-Type)
 ```
 
 ## Definition

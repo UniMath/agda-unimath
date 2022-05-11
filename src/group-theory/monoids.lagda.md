@@ -71,15 +71,15 @@ unit-Monoid :
   {l : Level} (M : Monoid l) → type-Monoid M
 unit-Monoid M = pr1 (pr2 M)
 
-left-unit-law-Monoid :
+left-unit-law-mul-Monoid :
   {l : Level} (M : Monoid l) (x : type-Monoid M) →
   Id (mul-Monoid M (unit-Monoid M) x) x
-left-unit-law-Monoid M = pr1 (pr2 (pr2 M))
+left-unit-law-mul-Monoid M = pr1 (pr2 (pr2 M))
 
-right-unit-law-Monoid :
+right-unit-law-mul-Monoid :
   {l : Level} (M : Monoid l) (x : type-Monoid M) →
   Id (mul-Monoid M x (unit-Monoid M)) x
-right-unit-law-Monoid M = pr2 (pr2 (pr2 M))
+right-unit-law-mul-Monoid M = pr2 (pr2 (pr2 M))
 ```
 
 ## Properties

@@ -100,6 +100,9 @@ open import foundation.interchange-law public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
+open import foundation.iterating-automorphisms public
+open import foundation.iterating-functions public
+open import foundation.iterating-involutions public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.locally-small-types public

@@ -5,13 +5,13 @@ title: Wild semigroups
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.wild-semigroups where
+module structured-types.wild-semigroups where
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import wild-algebra.magmas
+open import structured-types.magmas
 ```
 
 ## Idea

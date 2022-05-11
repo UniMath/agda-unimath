@@ -10,13 +10,14 @@ open import foundation.identity-types using
   ( Id; refl; ap; ap-concat; _∙_; ap-inv)
 open import foundation.universe-levels using (Level; UU)
 
+open import structured-types.pointed-maps using
+  ( _→*_; preserves-point-map-pointed-map; map-pointed-map)
+open import structured-types.pointed-types using
+  ( Pointed-Type)
+
 open import synthetic-homotopy-theory.loop-spaces using
   ( type-Ω; tr-type-Ω; preserves-refl-tr-Ω; Ω; mul-Ω; preserves-mul-tr-Ω; inv-Ω;
     preserves-inv-tr-Ω)
-open import synthetic-homotopy-theory.pointed-maps using
-  ( _→*_; preserves-point-map-pointed-map; map-pointed-map)
-open import synthetic-homotopy-theory.pointed-types using
-  ( Pointed-Type)
 ```
 
 ## Idea

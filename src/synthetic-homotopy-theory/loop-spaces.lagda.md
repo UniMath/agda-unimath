@@ -13,14 +13,13 @@ open import foundation.identity-types using
     is-binary-equiv-concat)
 open import foundation.universe-levels using (Level; UU)
 
-open import synthetic-homotopy-theory.pointed-equivalences using
+open import structured-types.magmas
+open import structured-types.pointed-equivalences using
   ( _≃*_; equiv-pointed-equiv)
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.pointed-types using
   ( Pointed-Type; pt-Pointed-Type; type-Pointed-Type)
-
-open import wild-algebra.magmas
-open import wild-algebra.wild-unital-magmas
-open import wild-algebra.wild-quasigroups
+open import structured-types.wild-unital-magmas
+open import structured-types.wild-quasigroups
 ```
 
 ## Idea

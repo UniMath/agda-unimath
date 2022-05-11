@@ -6,6 +6,7 @@
 module foundation.involutions where
 
 open import foundation.automorphisms using (Aut)
+open import foundation.dependent-pair-types
 open import foundation.equivalences using
   ( map-equiv; is-equiv; is-equiv-has-inverse; inv-equiv; eq-htpy-equiv;
     htpy-eq-equiv; right-inverse-law-equiv)
@@ -22,6 +23,8 @@ An involution on a type `A` is a map (or an equivalence) `f : A → A` such that
 
 ## Definition
 
+### The condition that a map is an involution
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -32,6 +35,23 @@ module _
 
   is-involution-aut : Aut A → UU l
   is-involution-aut e = is-involution (map-equiv e)
+```
+
+### The type of involutions on `X`
+
+```agda
+involution : {l : Level} → UU l → UU l
+involution A = Σ (A → A) is-involution
+
+module _
+  {l : Level} {A : UU l} (f : involution A)
+  where
+
+  map-involution : A → A
+  map-involution = pr1 f
+
+  is-involution-map-involution : is-involution map-involution
+  is-involution-map-involution = pr2 f
 ```
 
 ## Properties

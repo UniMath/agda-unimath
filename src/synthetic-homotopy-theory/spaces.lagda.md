@@ -20,8 +20,9 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.pointed-types
 
 --------------------------------------------------------------------------------
 

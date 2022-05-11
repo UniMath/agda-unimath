@@ -5,7 +5,7 @@ title: Magmas
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module wild-algebra.magmas where
+module structured-types.magmas where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
@@ -17,9 +17,6 @@ open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lsuc)
-
-open import univalent-combinatorics.counting using (count; map-equiv-count)
-open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea
@@ -47,27 +44,6 @@ module _
 ```
 
 ## Structures
-
-### The fold operation on magmas
-
-```agda
-fold-Fin-mul-Magma :
-  {l : Level} (M : Magma l) → type-Magma M →
-  {k : ℕ} → (Fin k → type-Magma M) → type-Magma M
-fold-Fin-mul-Magma M m {zero-ℕ} f = m
-fold-Fin-mul-Magma M m {succ-ℕ k} f =
-  mul-Magma M (fold-Fin-mul-Magma M m (f ∘ inl)) (f (inr star))
-
-fold-count-mul-Magma' :
-  {l1 l2 : Level} (M : Magma l1) → type-Magma M →
-  {A : UU l2} {k : ℕ} → (Fin k ≃ A) → (A → type-Magma M) → type-Magma M
-fold-count-mul-Magma' M m e f = fold-Fin-mul-Magma M m (f ∘ map-equiv e)
-
-fold-count-mul-Magma :
-  {l1 l2 : Level} (M : Magma l1) → type-Magma M →
-  {A : UU l2} → count A → (A → type-Magma M) → type-Magma M
-fold-count-mul-Magma M m e f = fold-Fin-mul-Magma M m (f ∘ map-equiv-count e)
-```
 
 ### Unital magmas
 
