@@ -10,6 +10,7 @@ module structured-types where
 
 ```agda
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
+open import structured-types.finite-multiplication-magmas public
 open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-magmas public

@@ -8,11 +8,15 @@ title: Monoid actions
 module group-theory.monoid-actions where
 
 open import foundation.dependent-pair-types
+open import foundation.endomorphisms
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
-
-open import structured-types.wild-monoids
 ```
 
 ## Idea
@@ -21,24 +25,46 @@ A monoid `M` can act on a type `A` by a monoid homomorphism `hom M (A → A)`.
 
 ## Definition
 
-### Wild monoid actions
-
-```agda
-module _
-  {l1 : Level} (M : Wild-Monoid l1)
-  where
-
-  Wild-Monoid-Action : (l : Level) → UU (l1 ⊔ lsuc l)
-  Wild-Monoid-Action l = Σ (UU l) (λ X → type-Wild-Monoid M → X → X)
-```
-
 ### Monoid actions
 
 ```agda
+Monoid-Action : {l1 : Level} (l : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l)
+Monoid-Action l M = Σ (UU-Set l) (λ X → hom-Monoid M (endo-Monoid X))
+
 module _
-  {l1 : Level} (M : Monoid l1)
+  {l1 l2 : Level} (M : Monoid l1) (X : Monoid-Action l2 M)
   where
 
-  Monoid-Action : (l : Level) → UU (l1 ⊔ lsuc l)
-  Monoid-Action l = Σ (UU l) (λ X → type-Monoid M → X → X)
+  set-Monoid-Action : UU-Set l2
+  set-Monoid-Action = pr1 X
+
+  type-Monoid-Action : UU l2
+  type-Monoid-Action = type-Set set-Monoid-Action
+
+  is-set-type-Monoid-Action : is-set type-Monoid-Action
+  is-set-type-Monoid-Action = is-set-type-Set set-Monoid-Action
+
+  mul-Monoid-Action : type-Monoid M → type-Monoid-Action → type-Monoid-Action
+  mul-Monoid-Action = pr1 (pr1 (pr2 X))
+
+  ap-mul-Monoid-Action :
+    {m : type-Monoid M} {x y : type-Monoid-Action} →
+    Id x y → Id (mul-Monoid-Action m x) (mul-Monoid-Action m y)
+  ap-mul-Monoid-Action {m} = ap (mul-Monoid-Action m)
+
+  ap-mul-Monoid-Action' :
+    {m n : type-Monoid M} (p : Id m n) {x : type-Monoid-Action} →
+    Id (mul-Monoid-Action m x) (mul-Monoid-Action n x)
+  ap-mul-Monoid-Action' p {x} =
+    ap (λ t → mul-Monoid-Action t x) p
+
+  associative-mul-Monoid-Action :
+    (x y : type-Monoid M) (z : type-Monoid-Action) →
+    Id ( mul-Monoid-Action (mul-Monoid M x y) z)
+       ( mul-Monoid-Action x (mul-Monoid-Action y z))
+  associative-mul-Monoid-Action x y = htpy-eq (pr2 (pr1 (pr2 X)) x y)
+
+  unit-law-mul-Monoid-Action :
+    (x : type-Monoid-Action) → Id (mul-Monoid-Action (unit-Monoid M) x) x
+  unit-law-mul-Monoid-Action = htpy-eq (pr2 (pr2 X))
 ```

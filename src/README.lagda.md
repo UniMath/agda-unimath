@@ -184,8 +184,8 @@ open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.binary-embeddings
-open import foundation.binary-equivalences
 open import foundation.binary-equivalences-unordered-pairs-of-types
+open import foundation.binary-equivalences
 open import foundation.binary-operations-unordered-pairs-of-types
 open import foundation.binary-relations
 open import foundation.boolean-reflection
@@ -226,6 +226,7 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.elementhood-relation-w-types
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.endomorphisms
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
@@ -273,6 +274,9 @@ open import foundation.intersection
 open import foundation.involutions
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
+open import foundation.iterating-automorphisms
+open import foundation.iterating-functions
+open import foundation.iterating-involutions
 open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.locally-small-types
@@ -302,10 +306,13 @@ open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.ranks-of-elements-w-types
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.repetitions-sequences
+open import foundation.repetitions
 open import foundation.replacement
 open import foundation.retractions
 open import foundation.russells-paradox
 open import foundation.sections
+open import foundation.sequences
 open import foundation.set-presented-types
 open import foundation.set-truncations
 open import foundation.sets
@@ -361,10 +368,10 @@ open import foundation.universal-property-set-truncation
 open import foundation.universal-property-truncation
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs
 open import foundation.unordered-pairs-of-types
-open import foundation.unordered-tuples
+open import foundation.unordered-pairs
 open import foundation.unordered-tuples-of-types
+open import foundation.unordered-tuples
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weakly-constant-maps
@@ -484,6 +491,7 @@ open import group-theory.isomorphisms-semigroups
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoids
 open import group-theory.monomorphisms-groups
+open import group-theory.orbits-monoid-actions
 open import group-theory.orbits-group-actions
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
@@ -581,6 +589,7 @@ open import ring-theory.subsets-rings
 ```agda
 open import structured-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.finite-multiplication-magmas
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-magmas
