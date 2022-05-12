@@ -24,7 +24,8 @@ open import ring-theory.rings using
     right-unit-law-add-Ring; neg-Ring; associative-add-Ring;
     left-inverse-law-add-Ring; right-inverse-law-add-Ring; mul-Ring;
     associative-mul-Ring; one-Ring; left-unit-law-mul-Ring;
-    commutative-add-Ring)
+    commutative-add-Ring;
+    left-distributive-mul-add-Ring; right-distributive-mul-add-Ring)
 
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
@@ -161,6 +162,26 @@ module _
   unit-law-scalar-mul-vec-Ring empty-vec = refl
   unit-law-scalar-mul-vec-Ring (x ∷ v) =
     ap-binary _∷_ (left-unit-law-mul-Ring R x) (unit-law-scalar-mul-vec-Ring v)
+
+  left-distributive-scalar-mul-add-vec-Ring :
+    {n : ℕ} (r : type-Ring R) (v1 v2 : vec-Ring R n) →
+    Id ( scalar-mul-vec-Ring r (add-vec-Ring R v1 v2))
+       ( add-vec-Ring R (scalar-mul-vec-Ring r v1) (scalar-mul-vec-Ring r v2))
+  left-distributive-scalar-mul-add-vec-Ring r empty-vec empty-vec = refl
+  left-distributive-scalar-mul-add-vec-Ring r (x ∷ v1) (y ∷ v2) =
+    ap-binary _∷_
+      ( left-distributive-mul-add-Ring R r x y)
+      ( left-distributive-scalar-mul-add-vec-Ring r v1 v2)
+
+  right-distributive-scalar-mul-add-vec-Ring :
+    {n : ℕ} (r s : type-Ring R) (v : vec-Ring R n) →
+    Id ( scalar-mul-vec-Ring (add-Ring R r s) v)
+       ( add-vec-Ring R (scalar-mul-vec-Ring r v) (scalar-mul-vec-Ring s v))
+  right-distributive-scalar-mul-add-vec-Ring r s empty-vec = refl
+  right-distributive-scalar-mul-add-vec-Ring r s (x ∷ v) =
+    ap-binary _∷_
+      ( right-distributive-mul-add-Ring R r s x)
+      ( right-distributive-scalar-mul-add-vec-Ring r s v)
 ```
 
 ## Properties
@@ -178,28 +199,4 @@ module _
 -- scalar-product _ _ zeroK empty-vec empty-vec = zeroK
 -- scalar-product addK mulK zeroK (x ∷ xs) (y ∷ ys) = addK (mulK x y)
 --   (scalar-product addK mulK zeroK xs ys)
--- ```
-
--- ## Properties of scalar-vector multiplication
---   - left distributive k(v1 + v2) = kv1 + kv2
-
--- ```agda
--- module _
---   {l : Level}
---   {K : UU l}
---   {addK : K → K → K}
---   {mulK : K → K → K}
---   {zero : K}
---   where
---   left-distributive-scalar-vector :
---     {n : ℕ} →
---     ((x y z : K) → Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z))) →
---     (k : K) → (v1 v2 : vec K n) →
---     Id (scalar-mul-vec mulK k (add-vec addK v1 v2))
---        (add-vec addK (mul-scalar-vector mulK k v1) (mul-scalar-vector mulK k v2))
---   left-distributive-scalar-vector _ _ empty-vec empty-vec = refl
---   left-distributive-scalar-vector k-distr k (x ∷ xs) (y ∷ ys) =
---     (ap (λ k' → k' ∷ mul-scalar-vector mulK k (add-vec addK xs ys)) (k-distr k x y))
---       ∙ ap (_∷_ (addK (mulK k x) (mulK k y)))
---            (left-distributive-scalar-vector k-distr k xs ys)
 -- ```
