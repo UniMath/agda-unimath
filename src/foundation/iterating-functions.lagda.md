@@ -10,6 +10,8 @@ module foundation.iterating-functions where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; commutative-add-ℕ; left-unit-law-add-ℕ; right-unit-law-add-ℕ;
     ℕ-Monoid)
+open import elementary-number-theory.exponentiation-natural-numbers using
+  ( exp-ℕ)
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mod-two-ℕ)
@@ -23,7 +25,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.endomorphisms using (endo-Set)
 open import foundation.equivalences using
   ( _∘e_; id-equiv; map-equiv; is-equiv-map-equiv; is-equiv)
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.homotopies using (_~_; refl-htpy; _·l_)
 open import foundation.identity-types using
   ( Id; refl; _∙_; inv; ap; right-unit; ap-comp)
@@ -129,6 +131,15 @@ module _
     ( iterate-add-ℕ (mul-ℕ k l) l f x) ∙
     ( ( iterate-mul-ℕ k l f (iterate l f x)) ∙
       ( inv (iterate-succ-ℕ k (iterate l f) x)))
+
+  iterate-exp-ℕ :
+    (k l : ℕ) (f : X → X) (x : X) →
+    Id (iterate (exp-ℕ l k) f x) (iterate k (iterate l) f x)
+  iterate-exp-ℕ zero-ℕ l f x = refl
+  iterate-exp-ℕ (succ-ℕ k) l f x =
+    ( iterate-mul-ℕ (exp-ℕ l k) l f x) ∙
+    ( ( iterate-exp-ℕ k l (iterate l f) x) ∙
+      ( inv (htpy-eq (iterate-succ-ℕ k (iterate l) f) x)))
       
 module _
   {l : Level} (X : UU-Set l)

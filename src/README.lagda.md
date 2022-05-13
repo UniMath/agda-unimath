@@ -584,6 +584,14 @@ open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```
 
+## Set theory
+
+```agda
+open import set-theory
+open import set-theory.countable-sets
+open import set-theory.uncountable-sets
+```
+
 ## Structured types
 
 ```agda
