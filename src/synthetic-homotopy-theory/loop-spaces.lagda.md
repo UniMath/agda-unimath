@@ -153,4 +153,10 @@ module _
     Id ( tr-type-Ω p (inv-Ω (pair A x) u))
        ( inv-Ω (pair A y) (tr-type-Ω p u))
   preserves-inv-tr-Ω refl u = refl
+
+  eq-tr-type-Ω :
+    (p : Id x y) (q : type-Ω (pair A x)) →
+    Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
+  eq-tr-type-Ω refl q = inv right-unit
+    
 ```
