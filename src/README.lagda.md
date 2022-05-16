@@ -626,11 +626,15 @@ open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types
+open import synthetic-homotopy-theory.infinite-complex-projective-space
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.prespectra
 open import synthetic-homotopy-theory.spaces
+open import synthetic-homotopy-theory.spectra
+open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 ```
