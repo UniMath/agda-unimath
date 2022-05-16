@@ -638,7 +638,6 @@ open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
-open import synthetic-homotopy-theory.spaces
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 ```

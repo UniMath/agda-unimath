@@ -5,8 +5,6 @@
 
 module foundation.universal-property-propositional-truncation where
 
-open import foundation.contractible-maps using
-  ( is-contr-map-is-equiv; is-equiv-is-contr-map)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; center; is-contr-equiv)
 open import foundation.dependent-pair-types using
@@ -22,8 +20,6 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; precomp-Π; precomp; id)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ; map-Σ)
 open import foundation.functoriality-dependent-function-types using
   ( is-equiv-map-Π)
 open import foundation.homotopies using (_~_; refl-htpy)
@@ -38,6 +34,11 @@ open import foundation.unit-type using (unit-Prop; terminal-map; ind-unit)
 open import foundation.universal-property-dependent-pair-types using
   ( is-equiv-ev-pair)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import foundation-core.contractible-maps using
+  ( is-contr-map-is-equiv; is-equiv-is-contr-map)
+open import foundation-core.functoriality-dependent-pair-types using
+  ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ; map-Σ)
 ```
 
 ## Idea

@@ -18,6 +18,7 @@ open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.complements-isolated-points public
+open import univalent-combinatorics.composition-species public
 open import univalent-combinatorics.coproduct-types public
 open import univalent-combinatorics.counting-decidable-subtypes public
 open import univalent-combinatorics.counting-dependent-pair-types public

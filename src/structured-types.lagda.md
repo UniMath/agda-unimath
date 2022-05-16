@@ -9,6 +9,7 @@ module structured-types where
 ```
 
 ```agda
+open import structured-types.contractible-pointed-types public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
 open import structured-types.finite-multiplication-magmas public
 open import structured-types.magmas public

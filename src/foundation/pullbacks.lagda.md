@@ -16,8 +16,6 @@ open import foundation.equivalences using
   ( is-equiv-comp; _∘e_; is-equiv; map-inv-is-equiv; _≃_; id-equiv;
     map-inv-equiv)
 open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot)
 open import foundation.homotopies using (_~_; refl-htpy; right-unit-htpy)
 open import foundation.identity-types using
   ( Id; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv)
@@ -26,6 +24,9 @@ open import foundation.universal-property-pullbacks using
   ( cone; universal-property-pullback; cone-map; htpy-cone;
     is-equiv-up-pullback-up-pullback; up-pullback-up-pullback-is-equiv)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.functoriality-dependent-pair-types using
+  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot)
 ```
 
 ## Idea

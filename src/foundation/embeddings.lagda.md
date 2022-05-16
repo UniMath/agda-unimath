@@ -1,4 +1,6 @@
-# Embeddings
+---
+title: Embeddings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,10 +15,9 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-sec)
 open import foundation-core.homotopies using
   ( _~_; nat-htpy; inv-htpy; refl-htpy)
-open import foundation-core.propositional-maps using (is-emb-is-prop-map)
+open import foundation-core.propositional-maps using
+  ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.sections using (sec)
-open import foundation-core.truncated-maps using
-  ( is-trunc-map-is-trunc-domain-codomain)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
@@ -27,7 +28,10 @@ open import foundation.equivalences using
 open import foundation.identity-types using
   ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
 open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
-
+open import foundation.pullbacks using (is-pullback)
+open import foundation.truncated-maps using
+  ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback)
+open import foundation.universal-property-pullbacks using (cone)
 ```
 
 ## Properties
@@ -174,4 +178,19 @@ module _
       ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
     is-emb-sec-ap sec-ap-f x y =
       fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
+```
+
+### Embeddings are closed under pullback
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+  
+  abstract
+    is-emb-is-pullback : is-pullback f g c → is-emb g → is-emb (pr1 c)
+    is-emb-is-pullback pb is-emb-g =
+      is-emb-is-prop-map
+        ( is-trunc-is-pullback neg-one-𝕋 f g c pb (is-prop-map-is-emb is-emb-g))
 ```

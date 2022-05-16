@@ -6,19 +6,10 @@
 module foundation.universal-property-pullbacks where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.commuting-squares using (coherence-square)
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using (is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import foundation.equivalences using
-  ( is-equiv; is-property-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
-    _≃_; is-equiv-right-factor; is-equiv-comp; is-equiv-left-factor; map-equiv;
-    id-equiv; _∘e_; map-inv-equiv; is-equiv-map-equiv)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_)
-open import foundation.functoriality-function-types using
-  ( is-equiv-is-equiv-postcomp; is-equiv-postcomp-is-equiv)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id')
 open import foundation.homotopies using
@@ -31,6 +22,16 @@ open import foundation.structure-identity-principle using
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import foundation-core.commuting-squares using (coherence-square)
+open import foundation-core.contractible-maps using (is-contr-map-is-equiv)
+open import foundation-core.equivalences using
+  ( is-equiv; is-property-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
+    _≃_; is-equiv-right-factor; is-equiv-comp; is-equiv-left-factor; map-equiv;
+    id-equiv; _∘e_; map-inv-equiv; is-equiv-map-equiv)
+open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation-core.functoriality-function-types using
+  ( is-equiv-is-equiv-postcomp; is-equiv-postcomp-is-equiv)
 ```
 
 ## Idea

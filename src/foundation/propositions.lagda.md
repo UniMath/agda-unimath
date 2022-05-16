@@ -9,18 +9,19 @@ open import foundation-core.propositions public
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv-has-inverse; _≃_)
-open import foundation-core.functions using (id)
-open import foundation-core.homotopies using (refl-htpy)
+open import foundation-core.function-extensionality using
+  ( htpy-eq; equiv-funext)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.homotopies using (_~_; refl-htpy)
+open import foundation-core.truncated-types using
+  ( is-trunc)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
-  ( is-contr; is-trunc-is-contr; eq-is-contr)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.truncated-types using
-  ( is-trunc; is-prop-is-trunc; is-trunc-Π; is-trunc-function-type;
-    is-trunc-equiv-is-trunc)
+  ( is-contr; is-trunc-is-contr; eq-is-contr; is-contr-equiv; is-contr-Π;
+    is-prop-is-contr; is-subtype-is-contr)
 ```
 
 ### Propositions are (k+1)-truncated for any k.
@@ -32,19 +33,6 @@ abstract
   is-trunc-is-prop k is-prop-A x y = is-trunc-is-contr k (is-prop-A x y)
 ```
 
-### Being a proposition is a proposition
-
-```agda
-abstract
-  is-prop-is-prop :
-    {l : Level} (A : UU l) → is-prop (is-prop A)
-  is-prop-is-prop = is-prop-is-trunc neg-one-𝕋
-
-is-prop-Prop : {l : Level} (A : UU l) → UU-Prop l
-pr1 (is-prop-Prop A) = is-prop A
-pr2 (is-prop-Prop A) = is-prop-is-prop A
-```
-
 ### Products of families of propositions are propositions
 
 ```agda
@@ -52,7 +40,9 @@ abstract
   is-prop-Π :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
-  is-prop-Π = is-trunc-Π neg-one-𝕋
+  is-prop-Π H =
+    is-prop-is-proof-irrelevant
+      ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
 
 type-Π-Prop :
   {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → UU (l1 ⊔ l2)
@@ -106,7 +96,7 @@ abstract
   is-prop-function-type :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop B → is-prop (A → B)
-  is-prop-function-type = is-trunc-function-type neg-one-𝕋
+  is-prop-function-type H = is-prop-Π (λ x → H)
 
 type-function-Prop :
   {l1 l2 : Level} → UU l1 → UU-Prop l2 → UU (l1 ⊔ l2)
@@ -154,7 +144,17 @@ module _
   where
 
   is-prop-equiv-is-prop : is-prop A → is-prop B → is-prop (A ≃ B)
-  is-prop-equiv-is-prop = is-trunc-equiv-is-trunc neg-one-𝕋
+  is-prop-equiv-is-prop H K =
+    is-prop-Σ
+      ( is-prop-function-type K)
+      ( λ f →
+        is-prop-prod
+          ( is-prop-Σ
+            ( is-prop-function-type H)
+            ( λ g → is-prop-is-contr (is-contr-Π (λ y → K (f (g y)) y))))
+          ( is-prop-Σ
+            ( is-prop-function-type H)
+            ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
 
 type-equiv-Prop :
   { l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → UU (l1 ⊔ l2)
@@ -187,4 +187,17 @@ abstract
     {l : Level} (P : UU l) → is-prop P → is-contr (P → P)
   is-contr-endomaps-is-prop P is-prop-P =
     is-proof-irrelevant-is-prop (is-prop-function-type is-prop-P) id
+```
+
+### Being a proposition is a proposition
+
+```agda
+abstract
+  is-prop-is-prop :
+    {l : Level} (A : UU l) → is-prop (is-prop A)
+  is-prop-is-prop A = is-prop-Π (λ x → is-prop-Π (λ y → is-subtype-is-contr))
+
+is-prop-Prop : {l : Level} (A : UU l) → UU-Prop l
+pr1 (is-prop-Prop A) = is-prop A
+pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```

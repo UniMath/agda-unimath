@@ -77,5 +77,7 @@ le-fst-repetition-sequence-Fin :
   le-ℕ (fst-repetition-sequence-Fin f) (succ-ℕ k)
 le-fst-repetition-sequence-Fin {k} f =
   strict-upper-bound-nat-Fin
-    ( pr1 (pr1 (repetition-le-Fin {succ-ℕ k} {k} (f ∘ nat-Fin) (le-succ-ℕ {k}))))
+    ( pr1
+      ( pr1
+        ( repetition-le-Fin {succ-ℕ k} {k} (f ∘ nat-Fin) (le-succ-ℕ {k}))))
 ```
