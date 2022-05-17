@@ -9,7 +9,7 @@ module group-theory.loop-groups-sets where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( map-equiv; left-inverse-law-equiv; right-inverse-law-equiv)
+  ( _≃_; map-equiv; left-inverse-law-equiv; right-inverse-law-equiv)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.functions using (id)
 open import foundation.function-extensionality using (eq-htpy)
@@ -84,20 +84,34 @@ module _
 
 ```agda
 module _
+  {l : Level}
+  where
+
+  map-hom-symmetric-group-loop-group-Set : (X Y : UU-Set l) →
+    Id (type-Set X) (type-Set Y) → (type-Set Y) ≃ (type-Set X)
+  map-hom-symmetric-group-loop-group-Set X Y p = equiv-eq (inv p)
+
+  map-hom-inv-symmetric-group-loop-group-Set : (X Y : UU-Set l) →
+    (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
+  map-hom-inv-symmetric-group-loop-group-Set X Y f =
+    inv (eq-equiv (type-Set X) (type-Set Y) f)
+
+module _
   {l : Level} (X : UU-Set l)
   where
 
   hom-symmetric-group-loop-group-Set :
     type-hom-Group (loop-group-Set X) (symmetric-Group X)
-  pr1 hom-symmetric-group-loop-group-Set p = equiv-eq (inv p)
+  pr1 hom-symmetric-group-loop-group-Set =
+    map-hom-symmetric-group-loop-group-Set X X
   pr2 hom-symmetric-group-loop-group-Set p q =
     ( ap equiv-eq (distributive-inv-concat p q)) ∙
       ( inv (comp-equiv-eq (inv q) (inv p)))
 
   hom-inv-symmetric-group-loop-group-Set :
     type-hom-Group (symmetric-Group X) (loop-group-Set X)
-  pr1 hom-inv-symmetric-group-loop-group-Set f =
-    inv (eq-equiv (type-Set X) (type-Set X) f)
+  pr1 hom-inv-symmetric-group-loop-group-Set =
+    map-hom-inv-symmetric-group-loop-group-Set X X
   pr2 hom-inv-symmetric-group-loop-group-Set f g =
     ( ap inv (inv (comp-eq-equiv (type-Set X) (type-Set X) (type-Set X) g f))) ∙
       ( distributive-inv-concat
