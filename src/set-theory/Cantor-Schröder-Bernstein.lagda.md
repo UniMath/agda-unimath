@@ -21,6 +21,7 @@ open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
+open import foundation.iterating-functions using (iterate)
 open import foundation.law-of-excluded-middle using (LEM)
 open import foundation.negation using (¬; is-prop-neg)
 open import foundation.propositions using
@@ -43,16 +44,6 @@ From given embeddings of two types into each other, we can construct an equivale
 
 The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.html), [Link 2](https://github.com/martinescardo/TypeTopology)). We will follow the same proof but using agda.unimath library notation.
 
-### Preparation
-
-For any map `f : A → A`, we can define its iterated compositions. It's needed due to define `is-g-point` notion in the proof.
-
-```agda
-_^_ :  {l1 : Level} {A : UU l1} → (A → A) → ℕ → (A → A)
-f ^ zero-ℕ = id
-f ^ succ-ℕ n = f ∘ (f ^ n)
-```
-
 ### Proof
 
 We will prove that LEM implies Cantor-Schröder-Bernstein.
@@ -71,7 +62,7 @@ LEM-implies-Cantor-Schröder-Bernstein {l1} {l2} lem {X} {Y}
     pair h h-is-equiv
     where
     is-g-point : (x : X) →  UU (l1 ⊔ l2)
-    is-g-point x = (x₀ : X) (n : ℕ) → Id (((g ∘ f) ^ n) x₀) x → fib g x₀
+    is-g-point x = (x₀ : X) (n : ℕ) → Id ((iterate n (g ∘ f)) x₀) x → fib g x₀
 
     is-prop-is-g-point : (x : X) → is-prop (is-g-point x)
     is-prop-is-g-point x =
@@ -120,14 +111,14 @@ The next function will be the bijection we want.
       v = tr (λ _ → ¬ (is-g-point _)) q s
 ```
 
-It is convenient to work with the following auxiliary function `H` and prove properties of `H` and then specialize them to `h`:
+It is convenient to work with the following auxiliary function H and prove properties of $H$ and then specialize them to $h$:
 
 ```agda
     H : (x : X) → is-decidable (is-g-point x) → Y
     H x d = ind-coprod _ (g⁻¹ x) (λ t → f x) d
 ```
 
-By definition, `H` and `h` are the same function. Wel'll prove `h` is injective split surjection using `H`.
+By definition, $H$ and $h$ are the same function. Wel'll prove h is injective split surjection using $H$.
 
 ```agda
     h=H : Id h (λ x → H x (δ x))
@@ -151,7 +142,7 @@ By definition, `H` and `h` are the same function. Wel'll prove `h` is injective 
 
     f-point : (x : X) → UU (l1 ⊔ l2)
     f-point x =
-      Σ X (λ x₀ → (Σ ℕ (λ n →  (Id (((g ∘ f) ^ n) x₀) x) × ¬ (fib g x₀))))
+      Σ X (λ x₀ → (Σ ℕ (λ n →  (Id ((iterate n (g ∘ f)) x₀) x) × ¬ (fib g x₀))))
 
     non-f-point-is-g-point : (x : X) → ¬ (f-point x) → (is-g-point x)
     non-f-point-is-g-point x nρ x₀ n p =
@@ -161,7 +152,7 @@ By definition, `H` and `h` are the same function. Wel'll prove `h` is injective 
          (lem (pair (fib g x₀) (is-prop-map-is-emb is-emb-g x₀)))
 ```
 
-The following claim states that if `g (y)` is not a `g-point`, then there is a designated point `(x : X , p : f(x)=y)` of the `f`-fiber of `y` such that `x` is not a `g-point` either. The claim is used to show `h` is split surjective.
+The following claim states that if $g (y)$ is not a g-point, then there is a designated point $(x : X , p : f(x)=y)$ of the $f$-fiber of $y$ such that $x$ is not a g-point either. The claim is used to show h is split surjective.
 
 ```agda
     claim :
@@ -177,13 +168,13 @@ The following claim states that if `g (y)` is not a `g-point`, then there is a d
       ii (pair x₀ (pair zero-ℕ u)) = ex-falso (pr2 u (pair y (inv (pr1 u))))
       ii (pair x₀ (pair (succ-ℕ n) u)) = pair a b
         where
-        q : Id (f (((g ∘ f) ^ n) x₀)) y
+        q : Id (f ((iterate n (g ∘ f)) x₀)) y
         q = is-injective-is-emb is-emb-g (pr1 u)
 
         a : fib f y
-        a = pair (((g ∘ f) ^ n) x₀)  q
+        a = pair ((iterate n (g ∘ f)) x₀)  q
 
-        b : ¬ (is-g-point (((g ∘ f) ^ n) x₀))
+        b : ¬ (is-g-point ((iterate n (g ∘ f)) x₀))
         b = λ s → pr2 u (s x₀ n refl)
 
       iii : ¬¬ (Σ (fib f y) (λ s → ¬ (is-g-point (pr1 s))))
@@ -240,3 +231,4 @@ The following claim states that if `g (y)` is not a `g-point`, then there is a d
         is-injective-h
         is-split-surjective-h      
 ```
+
