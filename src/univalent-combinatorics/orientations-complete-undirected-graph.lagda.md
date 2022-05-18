@@ -54,7 +54,7 @@ open import foundation.equality-dependent-pair-types using
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv;
     left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv; right-inverse-law-equiv;
-    left-inverse-law-equiv; eq-htpy-equiv)
+    left-inverse-law-equiv; eq-htpy-equiv; distributive-inv-comp-equiv)
 open import foundation.equivalence-classes using
   ( large-set-quotient; quotient-map-large-set-quotient; large-quotient-Set;
     type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
@@ -63,7 +63,7 @@ open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; trans-Eq-Rel; refl-Eq-Rel)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_; id)
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality using (htpy-eq; eq-htpy)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
@@ -73,7 +73,7 @@ open import foundation.injective-maps using
   ( is-injective; is-prop-is-injective; is-injective-map-equiv)
 open import foundation.intersection using (intersection-decidable-subtype)
 open import foundation.involutions using (own-inverse-is-involution)
-open import foundation.logical-equivalences using (equiv-iff)
+open import foundation.logical-equivalences using (_↔_; equiv-iff)
 open import foundation.mere-equivalences using (transitive-mere-equiv; mere-equiv)
 open import foundation.negation using (¬; is-prop-neg)
 open import foundation.propositional-truncations using
@@ -92,7 +92,8 @@ open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; is-finite-2-Element-Decidable-Subtype;
     2-element-type-2-Element-Decidable-Subtype; precomp-equiv-2-Element-Decidable-Subtype;
     standard-2-Element-Decidable-Subtype; 2-element-type-standard-2-Element-Decidable-Subtype;
-    is-commutative-standard-2-Element-Decidable-Subtype)
+    is-commutative-standard-2-Element-Decidable-Subtype;
+    preserves-comp-precomp-equiv-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-subtypes using
   ( type-prop-standard-2-Element-Subtype;
     is-prop-type-prop-standard-2-Element-Subtype;
@@ -448,22 +449,22 @@ module _
   {l : Level} (n : ℕ)
   where
 
-  map-orientation-Complete-Undirected-Graph-equiv : (X X' : UU-Fin-Level l n) →
+  map-orientation-complete-undirected-graph-equiv : (X X' : UU-Fin-Level l n) →
     (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') → orientation-Complete-Undirected-Graph n X' →
     orientation-Complete-Undirected-Graph n X
-  pr1 (map-orientation-Complete-Undirected-Graph-equiv X X' e d Y) =
+  pr1 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
     map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
-  pr2 (map-orientation-Complete-Undirected-Graph-equiv X X' e d Y) =
+  pr2 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
     pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
 
-  orientation-Complete-Undirected-Graph-equiv : (X X' : UU-Fin-Level l n) →
+  orientation-complete-undirected-graph-equiv : (X X' : UU-Fin-Level l n) →
     (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
     orientation-Complete-Undirected-Graph n X' ≃ orientation-Complete-Undirected-Graph n X
-  pr1 (orientation-Complete-Undirected-Graph-equiv X X' e) =
-    map-orientation-Complete-Undirected-Graph-equiv X X' e
-  pr2 (orientation-Complete-Undirected-Graph-equiv X X' e) =
+  pr1 (orientation-complete-undirected-graph-equiv X X' e) =
+    map-orientation-complete-undirected-graph-equiv X X' e
+  pr2 (orientation-complete-undirected-graph-equiv X X' e) =
     is-equiv-has-inverse
-      ( map-orientation-Complete-Undirected-Graph-equiv X' X (inv-equiv e))
+      ( map-orientation-complete-undirected-graph-equiv X' X (inv-equiv e))
       ( λ d →
         eq-htpy
           ( λ Y →
@@ -491,101 +492,10 @@ module _
                 ( ap (λ h → map-equiv h (pr1 (d Y))) (left-inverse-law-equiv (inv-equiv e))))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
 
-  preserves-even-difference-orientation-Complete-Undirected-Graph-equiv :
-    (X X' : UU-Fin-Level l n) ( e : type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
-    ( d d' : orientation-Complete-Undirected-Graph n X') →
-    type-Eq-Rel (even-difference-orientation-Complete-Undirected-Graph n X') d d' →
-    type-Eq-Rel
-      ( even-difference-orientation-Complete-Undirected-Graph n X)
-      ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
-      ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
-  preserves-even-difference-orientation-Complete-Undirected-Graph-equiv X X' e d d' P =
-    ( P) ∙
-      ( ap
-        ( mod-two-ℕ ∘ number-of-elements-has-finite-cardinality)
-        ( all-elements-equal-has-finite-cardinality
-          ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference n X' d d'))
-          ( pair
-            ( number-of-elements-is-finite
-              ( is-finite-subtype-pointwise-difference n X
-                ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
-                ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')))
-            ( functor-trunc-Prop
-              ( λ h → equiv-subtype-pointwise-difference-equiv ∘e h)
-              ( pr2
-                ( has-finite-cardinality-is-finite
-                  ( is-finite-subtype-pointwise-difference n X
-                    ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
-                    ( map-orientation-Complete-Undirected-Graph-equiv X X' e d'))))))))
-    where
-    equiv-subtype-pointwise-difference-equiv :
-      Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
-        ( λ Y →
-          type-decidable-Prop
-            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
-              ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
-              ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
-              ( Y))) ≃
-      Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X'))
-        ( λ Y →
-          type-decidable-Prop
-            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))
-    pr1 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) = precomp-equiv-2-Element-Decidable-Subtype e Y
-    pr2 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) p =
-      NQ
-        ( eq-pair-Σ
-          ( ap (map-inv-equiv e) (pr1 (pair-eq-Σ p)))
-          ( eq-is-prop
-            ( is-prop-type-decidable-Prop
-              ( pr1 Y (pr1 (map-orientation-Complete-Undirected-Graph-equiv X X' e d' Y))))))
-    pr2 equiv-subtype-pointwise-difference-equiv =
-      is-equiv-has-inverse
-        ( λ (pair Y NQ) →
-          pair
-            ( precomp-equiv-2-Element-Decidable-Subtype (inv-equiv e) Y)
-            ( λ p →
-              NQ
-                ( eq-pair-Σ
-                  ( ( ap
-                    ( λ Y' → pr1 (d Y'))
-                    ( eq-pair-Σ
-                      ( ap
-                        ( λ h → pr1 Y ∘ (map-equiv h))
-                        ( inv (right-inverse-law-equiv e)))
-                      ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-                    ( ( is-injective-map-equiv (inv-equiv e) (pr1 (pair-eq-Σ p))) ∙
-                      ( ap
-                        ( λ Y' → pr1 (d' Y'))
-                        ( eq-pair-Σ
-                          ( ap
-                            ( λ h → pr1 Y ∘ map-equiv h)
-                            ( right-inverse-law-equiv e))
-                          ( eq-is-prop is-prop-type-trunc-Prop)))))
-                  ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (d' Y))))))))
-        ( λ (pair Y NQ) →
-          eq-pair-Σ
-            ( eq-pair-Σ
-              ( ap (λ h → pr1 Y ∘ map-equiv h) (right-inverse-law-equiv e))
-              ( eq-is-prop is-prop-type-trunc-Prop))
-            ( eq-is-prop
-              ( is-prop-type-decidable-Prop
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))))
-        ( λ (pair Y NQ) →
-          eq-pair-Σ
-            ( eq-pair-Σ
-              ( ap (λ h → pr1 Y ∘ map-equiv h) (left-inverse-law-equiv e))
-              ( eq-is-prop is-prop-type-trunc-Prop))
-            ( eq-is-prop
-              ( is-prop-type-decidable-Prop
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
-                  ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
-                  ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
-                  ( Y)))))
-
-  preserves-id-equiv-orientation-Complete-Undirected-Graph-equiv :
+  preserves-id-equiv-orientation-complete-undirected-graph-equiv :
     (X : UU-Fin-Level l n) →
-    Id (orientation-Complete-Undirected-Graph-equiv X X id-equiv) id-equiv
-  preserves-id-equiv-orientation-Complete-Undirected-Graph-equiv X =
+    Id (orientation-complete-undirected-graph-equiv X X id-equiv) id-equiv
+  preserves-id-equiv-orientation-complete-undirected-graph-equiv X =
     eq-htpy-equiv
       ( λ d →
         eq-htpy
@@ -593,6 +503,158 @@ module _
             eq-pair-Σ
               ( ap (λ Y' → pr1 (d Y')) (eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
+
+  preserves-comp-orientation-complete-undirected-graph-equiv :
+    ( X Y Z : UU-Fin-Level l n) (e : type-UU-Fin-Level X ≃ type-UU-Fin-Level Y) →
+    ( f : type-UU-Fin-Level Y ≃ type-UU-Fin-Level Z) →
+    Id
+      ( orientation-complete-undirected-graph-equiv X Z (f ∘e e))
+      ( ( orientation-complete-undirected-graph-equiv X Y e) ∘e
+        ( orientation-complete-undirected-graph-equiv Y Z f))
+  preserves-comp-orientation-complete-undirected-graph-equiv X Y Z e f =
+    eq-htpy-equiv
+      ( λ d →
+        eq-htpy
+          ( λ S →
+            eq-pair-Σ
+              ( ( ap
+                ( λ S' → map-inv-equiv (f ∘e e) (pr1 (d S')))
+                ( htpy-eq
+                  ( preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f)
+                  ( S))) ∙
+                ( ap
+                  ( λ g →
+                    map-equiv
+                      ( g)
+                      ( pr1
+                        ( d
+                          ( ( precomp-equiv-2-Element-Decidable-Subtype f ∘
+                            precomp-equiv-2-Element-Decidable-Subtype e)
+                          ( S)))))
+                  ( distributive-inv-comp-equiv e f)))
+              ( eq-is-prop
+                ( is-prop-type-decidable-Prop
+                  ( pr1 S
+                    ( pr1
+                      ( map-equiv
+                        ( orientation-complete-undirected-graph-equiv X Y e ∘e
+                          orientation-complete-undirected-graph-equiv Y Z f)
+                        ( d)
+                        ( S))))))))
+
+  abstract
+    preserves-even-difference-orientation-complete-undirected-graph-equiv :
+      (X X' : UU-Fin-Level l n) ( e : type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
+      ( d d' : orientation-Complete-Undirected-Graph n X') →
+      ( type-Eq-Rel (even-difference-orientation-Complete-Undirected-Graph n X') d d' ↔
+        type-Eq-Rel
+          ( even-difference-orientation-Complete-Undirected-Graph n X)
+          ( map-orientation-complete-undirected-graph-equiv X X' e d)
+          ( map-orientation-complete-undirected-graph-equiv X X' e d'))
+    pr1 (preserves-even-difference-orientation-complete-undirected-graph-equiv X X' e d d') P =
+      ( P) ∙
+        ( ap
+          ( mod-two-ℕ ∘ number-of-elements-has-finite-cardinality)
+          ( all-elements-equal-has-finite-cardinality
+            ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference n X' d d'))
+            ( pair
+              ( number-of-elements-is-finite
+                ( is-finite-subtype-pointwise-difference n X
+                  ( map-orientation-complete-undirected-graph-equiv X X' e d)
+                  ( map-orientation-complete-undirected-graph-equiv X X' e d')))
+              ( functor-trunc-Prop
+                ( λ h → equiv-subtype-pointwise-difference-equiv ∘e h)
+                ( pr2
+                  ( has-finite-cardinality-is-finite
+                    ( is-finite-subtype-pointwise-difference n X
+                      ( map-orientation-complete-undirected-graph-equiv X X' e d)
+                      ( map-orientation-complete-undirected-graph-equiv X X' e d'))))))))
+      where
+      equiv-subtype-pointwise-difference-equiv :
+        Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
+          ( λ Y →
+            type-decidable-Prop
+              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
+                ( map-orientation-complete-undirected-graph-equiv X X' e d)
+                ( map-orientation-complete-undirected-graph-equiv X X' e d')
+                ( Y))) ≃
+        Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X'))
+          ( λ Y →
+            type-decidable-Prop
+              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))
+      pr1 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) = precomp-equiv-2-Element-Decidable-Subtype e Y
+      pr2 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) p =
+        NQ
+          ( eq-pair-Σ
+            ( ap (map-inv-equiv e) (pr1 (pair-eq-Σ p)))
+            ( eq-is-prop
+              ( is-prop-type-decidable-Prop
+                ( pr1 Y (pr1 (map-orientation-complete-undirected-graph-equiv X X' e d' Y))))))
+      pr2 equiv-subtype-pointwise-difference-equiv =
+        is-equiv-has-inverse
+          ( λ (pair Y NQ) →
+            pair
+              ( precomp-equiv-2-Element-Decidable-Subtype (inv-equiv e) Y)
+              ( λ p →
+                NQ
+                  ( eq-pair-Σ
+                    ( ( ap
+                      ( λ Y' → pr1 (d Y'))
+                      ( eq-pair-Σ
+                        ( ap
+                          ( λ h → pr1 Y ∘ (map-equiv h))
+                          ( inv (right-inverse-law-equiv e)))
+                        ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( ( is-injective-map-equiv (inv-equiv e) (pr1 (pair-eq-Σ p))) ∙
+                        ( ap
+                          ( λ Y' → pr1 (d' Y'))
+                          ( eq-pair-Σ
+                            ( ap
+                              ( λ h → pr1 Y ∘ map-equiv h)
+                              ( right-inverse-law-equiv e))
+                            ( eq-is-prop is-prop-type-trunc-Prop)))))
+                    ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (d' Y))))))))
+          ( λ (pair Y NQ) →
+            eq-pair-Σ
+              ( eq-pair-Σ
+                ( ap (λ h → pr1 Y ∘ map-equiv h) (right-inverse-law-equiv e))
+                ( eq-is-prop is-prop-type-trunc-Prop))
+              ( eq-is-prop
+                ( is-prop-type-decidable-Prop
+                  ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))))
+          ( λ (pair Y NQ) →
+            eq-pair-Σ
+              ( eq-pair-Σ
+                ( ap (λ h → pr1 Y ∘ map-equiv h) (left-inverse-law-equiv e))
+                ( eq-is-prop is-prop-type-trunc-Prop))
+              ( eq-is-prop
+                ( is-prop-type-decidable-Prop
+                  ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
+                    ( map-orientation-complete-undirected-graph-equiv X X' e d)
+                    ( map-orientation-complete-undirected-graph-equiv X X' e d')
+                    ( Y)))))
+    pr2 (preserves-even-difference-orientation-complete-undirected-graph-equiv X X' e d d') P =
+      tr
+        ( λ g →
+          type-Eq-Rel
+            ( even-difference-orientation-Complete-Undirected-Graph n X')
+            ( map-equiv g d)
+            ( map-equiv g d'))
+        { x =
+          orientation-complete-undirected-graph-equiv X' X (inv-equiv e) ∘e
+          orientation-complete-undirected-graph-equiv X X' e}
+        { y = id-equiv}
+        ( inv (preserves-comp-orientation-complete-undirected-graph-equiv X' X X' (inv-equiv e) e) ∙
+          ( ( ap (orientation-complete-undirected-graph-equiv X' X') (right-inverse-law-equiv e)) ∙
+            ( preserves-id-equiv-orientation-complete-undirected-graph-equiv X')))
+        ( pr1
+          ( preserves-even-difference-orientation-complete-undirected-graph-equiv
+            ( X')
+            ( X)
+            ( inv-equiv e)
+            ( map-orientation-complete-undirected-graph-equiv X X' e d)
+            ( map-orientation-complete-undirected-graph-equiv X X' e d'))
+          ( P))
 ```
 
 ```
