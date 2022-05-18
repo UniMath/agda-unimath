@@ -22,62 +22,43 @@ open import foundation-core.universe-levels
 
 ## Properties
 
-### If `f` is coherently invertible, then precomposing by `f` is an equivalence
-
-```agda
-tr-precompose-fam :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
-  (f : A → B) {x y : A} (p : Id x y) → tr C (ap f p) ~ tr (λ x → C (f x)) p
-tr-precompose-fam C f refl = refl-htpy
-
-abstract
-  is-equiv-precomp-Π-is-coherently-invertible :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-coherently-invertible f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-coherently-invertible f
-    ( pair g (pair issec-g (pair isretr-g coh))) C = 
-    is-equiv-has-inverse
-      (λ s y → tr C (issec-g y) (s (g y)))
-      ( λ s → eq-htpy (λ x → 
-        ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙
-        ( ( tr-precompose-fam C f (isretr-g x) (s (g (f x)))) ∙
-          ( apd s (isretr-g x)))))
-      ( λ s → eq-htpy λ y → apd s (issec-g y))
-```
-
-### If `f` is an equivalence, then precomposing by `f` is an equivalence
-
-```agda
-abstract
-  is-equiv-precomp-Π-is-equiv :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) → is-equiv f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-equiv f is-equiv-f =
-    is-equiv-precomp-Π-is-coherently-invertible f
-      ( is-coherently-invertible-is-path-split f
-        ( is-path-split-is-equiv f is-equiv-f))
-
-equiv-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  (C : B → UU l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
-pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
-pr2 (equiv-precomp-Π e C) =
-  is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
-```
-
 ### A map `f` is an equivalence if and only if postcomposing by `f` is an equivalence
 
 ```agda
-abstract
-  is-equiv-is-equiv-postcomp :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    ({l3 : Level} (A : UU l3) → is-equiv (postcomp A f)) → is-equiv f
-  is-equiv-is-equiv-postcomp {X = X} {Y = Y} f post-comp-equiv-f =
-    is-equiv-is-contr-map (λ g → {!!})
-    {-
-      ( is-trunc-map-is-trunc-map-postcomp neg-two-𝕋 f
-        ( λ {l} A → is-contr-map-is-equiv (post-comp-equiv-f A)))-}
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  (H : {l3 : Level} (A : UU l3) → is-equiv (postcomp A f))
+  where
+
+  map-inv-is-equiv-is-equiv-postcomp : Y → X
+  map-inv-is-equiv-is-equiv-postcomp = map-inv-is-equiv (H Y) id
+
+  issec-map-inv-is-equiv-is-equiv-postcomp :
+    ( f ∘ map-inv-is-equiv-is-equiv-postcomp) ~ id
+  issec-map-inv-is-equiv-is-equiv-postcomp =
+    htpy-eq (issec-map-inv-is-equiv (H Y) id)
+
+  isretr-map-inv-is-equiv-is-equiv-postcomp :
+    ( map-inv-is-equiv-is-equiv-postcomp ∘ f) ~ id
+  isretr-map-inv-is-equiv-is-equiv-postcomp =
+    htpy-eq
+      ( ap
+        ( pr1)
+        ( eq-is-contr
+          ( is-contr-map-is-equiv (H X) f)
+          { x =
+            pair
+              ( map-inv-is-equiv-is-equiv-postcomp ∘ f)
+              ( ap (λ u → u ∘ f) (issec-map-inv-is-equiv (H Y) id))}
+          { y = pair id refl}))
+
+  abstract
+    is-equiv-is-equiv-postcomp : is-equiv f
+    is-equiv-is-equiv-postcomp =
+      is-equiv-has-inverse
+        map-inv-is-equiv-is-equiv-postcomp
+        issec-map-inv-is-equiv-is-equiv-postcomp
+        isretr-map-inv-is-equiv-is-equiv-postcomp
 
 {- The following version of the same theorem works when X and Y are in the same
    universe. The condition of inducing equivalences by postcomposition is 

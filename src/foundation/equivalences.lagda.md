@@ -10,13 +10,15 @@ open import foundation-core.equivalences public
 open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.commuting-squares using (coherence-square)
+open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps using
-  ( is-contr-map-is-equiv; is-contr-map)
+  ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
 open import foundation-core.contractible-types using (center; eq-is-contr')
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functions using (_∘_; id; precomp-Π; precomp)
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; equiv-tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation-core.fundamental-theorem-of-identity-types using
@@ -26,6 +28,7 @@ open import foundation-core.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+open import foundation-core.pullbacks using (is-pullback)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
@@ -34,6 +37,7 @@ open import foundation-core.subtypes using
 open import foundation-core.truncated-types using
   ( Truncated-Type; type-Truncated-Type; is-trunc)
 open import foundation-core.truncation-levels using (𝕋)
+open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
@@ -49,9 +53,11 @@ open import foundation.identity-types using
   ( Id; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
+open import foundation.pullbacks
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
-open import foundation.universal-property-pullbacks
+
+open import foundation.truncated-maps
 ```
 
 ## Properties
@@ -328,8 +334,7 @@ module _
     is-property-is-equiv f H =
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
-  is-equiv-Prop :
-    (f : A → B) → Σ (UU (l1 ⊔ l2)) (λ X → (x y : X) → is-contr (Id x y))
+  is-equiv-Prop : (f : A → B) → UU-Prop (l1 ⊔ l2)
   pr1 (is-equiv-Prop f) = is-equiv f
   pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
