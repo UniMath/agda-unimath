@@ -41,7 +41,7 @@ Here, we will prove the following theorem assuming the terminology and notation 
 
 From given embeddings of two types into each other, we can construct an equivalence between them using the principle of excluded middle.
 
-The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). We will follow its proof using agda.unimath library settings.
+The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.html), [Link 2](https://github.com/martinescardo/TypeTopology)). We will follow the same proof but using agda.unimath library notation.
 
 ### Preparation
 
