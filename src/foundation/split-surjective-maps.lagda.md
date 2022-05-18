@@ -9,8 +9,8 @@ open import foundation.injective-maps using (is-injective)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv)
 open import foundation-core.identity-types using (Id)
-open import foundation-core.sections using (sec)
 open import foundation-core.retractions using (retr)
+open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
