@@ -35,7 +35,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 ## Idea
 
-The classical Cantor–Schröder–Bernstein Theorem of set theory, formulated by Cantor and first proved by Bernstein, states that for any pair of sets A and B, if there are injective maps $f : A \to B$ and $g : B \to A$, then one can find a bijection $h : A \to B$. There are proofs that use the principle of excluded middle but not the axiom of choice. That the principle excluded middle is absolutely necessary.
+The classical Cantor–Schröder–Bernstein Theorem of set theory, formulated by Cantor and first proved by Bernstein, states that for any pair of sets `A` and `B`, if there are injective maps `f : A → B` and `g : B → A`, then one can find a bijection `h : A → B`. There are proofs that use the principle of excluded middle but not the axiom of choice. That the principle excluded middle is absolutely necessary.
 
 Here, we will prove the following theorem assuming the terminology and notation of the HoTT book.
 
@@ -45,7 +45,7 @@ The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Sc
 
 ### Preparation
 
-For any map $f : A \to A$, we can define its iterated compositions. It's needed due to define `is-g-point` notion in the proof.
+For any map `f : A → A`, we can define its iterated compositions. It's needed due to define `is-g-point` notion in the proof.
 
 ```agda
 _^_ :  {l1 : Level} {A : UU l1} → (A → A) → ℕ → (A → A)
@@ -120,14 +120,14 @@ The next function will be the bijection we want.
       v = tr (λ _ → ¬ (is-g-point _)) q s
 ```
 
-It is convenient to work with the following auxiliary function H and prove properties of $H$ and then specialize them to $h$:
+It is convenient to work with the following auxiliary function `H` and prove properties of `H` and then specialize them to `h`:
 
 ```agda
     H : (x : X) → is-decidable (is-g-point x) → Y
     H x d = ind-coprod _ (g⁻¹ x) (λ t → f x) d
 ```
 
-By definition, $H$ and $h$ are the same function. Wel'll prove h is injective split surjection using $H$.
+By definition, `H` and `h` are the same function. Wel'll prove `h` is injective split surjection using `H`.
 
 ```agda
     h=H : Id h (λ x → H x (δ x))
@@ -161,7 +161,7 @@ By definition, $H$ and $h$ are the same function. Wel'll prove h is injective sp
          (lem (pair (fib g x₀) (is-prop-map-is-emb is-emb-g x₀)))
 ```
 
-The following claim states that if $g (y)$ is not a g-point, then there is a designated point $(x : X , p : f(x)=y)$ of the $f$-fiber of $y$ such that $x$ is not a g-point either. The claim is used to show h is split surjective.
+The following claim states that if `g (y)` is not a `g-point`, then there is a designated point `(x : X , p : f(x)=y)` of the `f`-fiber of `y` such that `x` is not a `g-point` either. The claim is used to show `h` is split surjective.
 
 ```agda
     claim :
