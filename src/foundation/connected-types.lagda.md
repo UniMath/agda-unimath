@@ -25,9 +25,9 @@ open import foundation.set-truncations using
 open import foundation.sets using (set-Prop; Id-Prop)
 open import foundation.surjective-maps using
   ( is-surjective; equiv-dependent-universal-property-surj-is-surjective)
-open import foundation.unit-type using (star; unit)
+open import foundation.unit-type using (star; unit; pt)
 open import foundation.universal-property-unit-type using
-  ( pt; equiv-universal-property-unit)
+  ( equiv-universal-property-unit)
 open import foundation.universe-levels using (Level; UU)
 ```
 

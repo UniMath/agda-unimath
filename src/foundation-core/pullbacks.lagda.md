@@ -15,11 +15,11 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 
 open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.identity-types
 ```
 
 ## Definition

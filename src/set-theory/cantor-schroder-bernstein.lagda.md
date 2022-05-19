@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module set-theory.cantor-schröder-bernstein where
+module set-theory.cantor-schroder-bernstein where
 
 open import elementary-number-theory.natural-numbers using
   (ℕ; zero-ℕ; succ-ℕ)

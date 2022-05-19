@@ -8,6 +8,7 @@ module foundation.fiber-inclusions where
 open import foundation.0-maps using (is-0-map)
 open import foundation.1-types using
   ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
+open import foundation.cones-pullbacks using (cone)
 open import foundation.contractible-maps using
   ( is-contr-map; is-contr-map-is-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -38,7 +39,6 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( right-unit-law-Σ-is-contr; equiv-left-swap-Σ)
 open import foundation.unit-type using
   ( raise-unit; raise-star; pt; terminal-map)
-open import foundation.universal-property-pullbacks using (cone)
 open import foundation.universe-levels using (Level; UU)
 ```
 

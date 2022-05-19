@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.23-pullbacks where
 
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares
+open import foundation.cones-pullbacks
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types

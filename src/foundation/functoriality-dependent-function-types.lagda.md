@@ -16,6 +16,13 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
   ( distributive-Π-Σ)
+open import foundation.equivalences using
+  ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;
+    issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
+    isretr-map-inv-equiv; is-equiv-comp'; issec-map-inv-is-equiv;
+    map-inv-is-equiv; is-equiv-map-inv-is-equiv;
+    id-equiv; equiv-ap; htpy-equiv; refl-htpy-equiv; ind-htpy-equiv;
+    comp-htpy-equiv)
 open import foundation.function-extensionality using (eq-htpy; equiv-eq-htpy)
 open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)
 open import foundation.identity-types using
@@ -28,13 +35,6 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
-open import foundation-core.equivalences using
-  ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;
-    issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
-    isretr-map-inv-equiv; is-equiv-comp'; issec-map-inv-is-equiv;
-    map-inv-is-equiv; is-equiv-precomp-Π-is-equiv; is-equiv-map-inv-is-equiv;
-    id-equiv; equiv-ap; htpy-equiv; refl-htpy-equiv; ind-htpy-equiv;
-    comp-htpy-equiv)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-tot; equiv-Σ)

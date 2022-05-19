@@ -5,6 +5,8 @@
 
 module foundation.universal-property-pullbacks where
 
+open import foundation-core.universal-property-pullbacks public
+
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
@@ -28,6 +30,8 @@ open import foundation.subtype-identity-principle using
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import foundation-core.commuting-squares using (coherence-square)
+open import foundation-core.cones-pullbacks using
+  ( cone; cone-map; htpy-cone; htpy-eq-cone; extensionality-cone)
 open import foundation-core.contractible-maps using (is-contr-map-is-equiv)
 open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation-core.functoriality-function-types using

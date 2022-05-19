@@ -5,6 +5,8 @@
 
 module foundation.functoriality-function-types where
 
+open import foundation-core.functoriality-function-types public
+
 open import foundation.constant-maps using (const)
 open import foundation.contractible-types using (center; eq-is-contr')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

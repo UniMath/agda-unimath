@@ -13,7 +13,8 @@ open import foundation-core.commuting-squares using (coherence-square)
 open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps using
   ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
-open import foundation-core.contractible-types using (center; eq-is-contr')
+open import foundation-core.contractible-types using
+  ( center; eq-is-contr'; is-equiv-is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.fibers-of-maps using (fib)
@@ -28,7 +29,8 @@ open import foundation-core.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation-core.pullbacks using (is-pullback)
+open import foundation-core.pullbacks using
+  ( is-pullback; is-pullback-is-fiberwise-equiv-fib-square; fib-square)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
@@ -36,7 +38,7 @@ open import foundation-core.subtypes using
   ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 open import foundation-core.truncated-types using
   ( Truncated-Type; type-Truncated-Type; is-trunc)
-open import foundation-core.truncation-levels using (𝕋)
+open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 

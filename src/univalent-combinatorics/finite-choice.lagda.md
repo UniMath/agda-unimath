@@ -23,11 +23,13 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.empty-types using
   ( ind-empty; ex-falso; is-empty-type-trunc-Prop)
-open import foundation.equivalences using (equiv-precomp-Π; map-equiv)
+open import foundation.equivalences using (map-equiv)
 open import foundation.fiber-inclusions using (fiber-inclusion-emb)
 open import foundation.fibers-of-maps using
   ( fib; map-equiv-total-fib; map-inv-equiv-total-fib)
 open import foundation.functions using (_∘_)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-precomp-Π)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ-equiv-base)
 open import foundation.functoriality-propositional-truncation using

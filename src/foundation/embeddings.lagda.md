@@ -9,6 +9,7 @@ module foundation.embeddings where
 
 open import foundation-core.embeddings public
 
+open import foundation-core.cones-pullbacks using (cone)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.functions using (_∘_)
 open import foundation-core.fundamental-theorem-of-identity-types using
@@ -31,7 +32,6 @@ open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
 open import foundation.pullbacks using (is-pullback)
 open import foundation.truncated-maps using
   ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback)
-open import foundation.universal-property-pullbacks using (cone)
 ```
 
 ## Properties

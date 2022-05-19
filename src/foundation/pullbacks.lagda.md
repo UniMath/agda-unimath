@@ -5,7 +5,7 @@
 
 module foundation.pullbacks where
 
-open import foundation-core.pullbacks
+open import foundation-core.pullbacks public
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-total-path; is-contr-equiv')

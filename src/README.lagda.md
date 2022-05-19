@@ -1,4 +1,6 @@
-# Univalent mathematics in Agda
+---
+title: Univalent mathematics in Agda
+---
 
 Welcome to the website of the `agda-unimath` formalization project.
 
@@ -589,6 +591,7 @@ open import ring-theory.subsets-rings
 
 ```agda
 open import set-theory
+open import set-theory.cantor-schroder-bernstein
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```

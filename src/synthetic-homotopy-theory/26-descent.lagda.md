@@ -8,6 +8,7 @@ title: Formalisation of the Symmetry Book
 module synthetic-homotopy-theory.26-descent where
 
 open import foundation.commuting-squares
+open import foundation.cones-pullbacks
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

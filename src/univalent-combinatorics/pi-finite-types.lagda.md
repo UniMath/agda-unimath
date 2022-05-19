@@ -35,7 +35,7 @@ open import foundation.equality-cartesian-product-types using
 open import foundation.equality-dependent-pair-types using
   ( equiv-pair-eq-Σ; eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; equiv-ap; map-equiv; inv-equiv; equiv-precomp-Π; map-inv-equiv;
+  ( _≃_; equiv-ap; map-equiv; inv-equiv; map-inv-equiv;
     is-equiv-map-equiv; issec-map-inv-equiv; is-equiv; id-equiv; _∘e_;
     is-emb-is-equiv)
 open import foundation.fiber-inclusions using (fiber-inclusion)
@@ -43,6 +43,8 @@ open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-precomp-Π)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
 open import foundation.functoriality-set-truncation using
