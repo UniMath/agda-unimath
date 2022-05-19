@@ -12,6 +12,7 @@ open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation-core.equivalences using
   ( is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv; _≃_;
     is-equiv-map-inv-is-equiv; is-equiv-has-inverse)
+open import foundation-core.function-extensionality using (funext)
 open import foundation-core.identity-types using
   ( Id; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
 open import foundation-core.retractions using (_retract-of_)
@@ -232,4 +233,62 @@ is-prop-is-contr :
   {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (Id x y)
 pr1 (is-prop-is-contr H x y) = eq-is-contr H
 pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
+```
+
+### Products of families of contractible types are contractible
+
+```agda
+abstract
+  is-contr-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
+  pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
+  pr2 (is-contr-Π {A = A} {B = B} H) f =
+    map-inv-is-equiv
+      ( funext (λ x → center (H x)) f)
+      ( λ x → contraction (H x) (f x))
+```
+
+### The type of equivalences between contractible types is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-contr-equiv-is-contr :
+    is-contr A → is-contr B → is-contr (A ≃ B)
+  is-contr-equiv-is-contr (pair a α) (pair b β) =
+    is-contr-Σ
+      ( is-contr-Π (λ x → (pair b β)))
+      ( λ x → b)
+      ( is-contr-prod
+        ( is-contr-Σ
+          ( is-contr-Π (λ y → (pair a α)))
+          ( λ y → a)
+          ( is-contr-Π (λ y → is-prop-is-contr (pair b β) b y)))
+        ( is-contr-Σ
+          ( is-contr-Π (λ x → pair a α))
+          ( λ y → a)
+          ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))))
+```
+
+### Being contractible is a proposition
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-contr-is-contr : is-contr A → is-contr (is-contr A)
+    is-contr-is-contr (pair a α) =
+      is-contr-Σ
+        ( pair a α)
+        ( a)
+        ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))
+
+  abstract
+    is-property-is-contr : (H K : is-contr A) → is-contr (Id H K)
+    is-property-is-contr H = is-prop-is-contr (is-contr-is-contr H) H
 ```

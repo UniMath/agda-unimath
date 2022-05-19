@@ -142,5 +142,4 @@ module _
 
   is-emb-map-emb-repetition : is-emb map-emb-repetition
   is-emb-map-emb-repetition = is-emb-map-emb emb-repetition
-
 ```

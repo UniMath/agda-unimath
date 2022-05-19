@@ -10,7 +10,6 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv)
 open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using
@@ -19,6 +18,8 @@ open import foundation.identity-types using (Id; tr; refl)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.functoriality-dependent-pair-types using (tot)
 ```
 
 ## Idea

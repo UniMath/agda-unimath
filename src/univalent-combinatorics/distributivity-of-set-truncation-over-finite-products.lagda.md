@@ -20,13 +20,13 @@ open import foundation.empty-types using (empty-Set)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-precomp-is-equiv; is-equiv-left-factor';
     is-equiv-comp'; is-equiv-right-factor'; is-equiv-htpy-equiv;
-    is-equiv-map-equiv; _∘e_; equiv-postcomp-equiv; equiv-precomp-Π;
+    is-equiv-map-equiv; _∘e_; equiv-postcomp-equiv;
     inv-equiv; equiv-precomp-equiv; id-equiv)
 open import foundation.function-extensionality using (equiv-funext; eq-htpy)
 open import foundation.functions using (_∘_; map-Π; precomp; precomp-Π)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π; equiv-Π; map-equiv-Π; compute-map-equiv-Π)
+  ( equiv-map-Π; equiv-Π; map-equiv-Π; compute-map-equiv-Π; equiv-precomp-Π)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.functoriality-set-truncation using

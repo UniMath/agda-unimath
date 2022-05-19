@@ -1,66 +1,33 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Joins of types
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module synthetic-homotopy-theory.spaces where
+module synthetic-homotopy-theory.joins-of-types where
 
 open import foundation.cartesian-product-types
-open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.pointed-types
-
 open import synthetic-homotopy-theory.24-pushouts
+```
 
---------------------------------------------------------------------------------
+## Idea
 
--- Examples of pushouts
+The join of `A` and `B` is the pushout of the span `A ← A × B → B`.
 
-{- The cofiber of a map. -}
+## Definition
 
-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-cofiber {A = A} f = pushout f (const A unit star)
-
-cocone-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  cocone f (const A unit star) (cofiber f)
-cocone-cofiber {A = A} f = cocone-pushout f (const A unit star)
-
-inl-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → B → cofiber f
-inl-cofiber {A = A} f = pr1 (cocone-cofiber f)
-
-inr-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → unit → cofiber f
-inr-cofiber f = pr1 (pr2 (cocone-cofiber f))
-
-pt-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → cofiber f
-pt-cofiber {A = A} f = inr-cofiber f star
-
-cofiber-ptd :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → Pointed-Type (l1 ⊔ l2)
-cofiber-ptd f = pair (cofiber f) (pt-cofiber f)
-
-up-cofiber :
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  ( {l : Level} →
-    universal-property-pushout l f (const A unit star) (cocone-cofiber f))
-up-cofiber {A = A} f = up-pushout f (const A unit star)
-
+```agda
 _*_ :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A * B = pushout (pr1 {A = A} {B = λ x → B}) pr2
@@ -88,56 +55,11 @@ glue-join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (t : A × B) →
   Id (inl-join A B (pr1 t)) (inr-join A B (pr2 t))
 glue-join A B = pr2 (pr2 (cocone-join A B))
+```
 
-_∨_ :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-A ∨ B =
-  pair
-    ( pushout
-      ( const unit (pr1 A) (pr2 A))
-      ( const unit (pr1 B) (pr2 B)))
-    ( inl-pushout
-      ( const unit (pr1 A) (pr2 A))
-      ( const unit (pr1 B) (pr2 B))
-      ( pr2 A))
+## Properties
 
-indexed-wedge :
-  {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-indexed-wedge I A =
-  pair
-    ( cofiber (λ i → pair i (pr2 (A i))))
-    ( pt-cofiber (λ i → pair i (pr2 (A i))))
-
-wedge-inclusion :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  pr1 (A ∨ B) → (pr1 A) × (pr1 B)
-wedge-inclusion {l1} {l2} (pair A a) (pair B b) =
-  map-inv-is-equiv
-    ( up-pushout
-      ( const unit A a)
-      ( const unit B b)
-      ( A × B))
-    ( pair
-      ( λ x → pair x b)
-      ( pair
-        ( λ y → pair a y)
-        ( refl-htpy)))
-
-is-contr-cofiber-is-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-equiv f → is-contr (cofiber f)
-is-contr-cofiber-is-equiv {A = A} {B} f is-equiv-f =
-  is-contr-is-equiv'
-    ( unit)
-    ( pr1 (pr2 (cocone-cofiber f)))
-    ( is-equiv-universal-property-pushout
-      ( f)
-      ( const A unit star)
-      ( cocone-cofiber f)
-      ( is-equiv-f)
-      ( up-cofiber f))
-    ( is-contr-unit)
-
+```agda
 is-equiv-inr-join-empty :
   {l : Level} (X : UU l) → is-equiv (inr-join empty X)
 is-equiv-inr-join-empty X =
@@ -203,11 +125,4 @@ right-zero-law-join X =
     ( unit)
     ( pair (inr-join X unit) (is-equiv-inr-join-unit X))
     ( is-contr-unit)
-
-unit-pt : Pointed-Type lzero
-unit-pt = pair unit star
-
-is-contr-pt :
-  {l : Level} → Pointed-Type l → UU l
-is-contr-pt A = is-contr (pr1 A)
 ```

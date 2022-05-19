@@ -1,15 +1,17 @@
-# Functoriality of dependent function types
+---
+title: Functoriality of dependent function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.functoriality-dependent-function-types where
 
+open import foundation-core.functoriality-dependent-function-types public
+
 open import foundation-core.homotopies using (_~_; _·l_; _·r_)
 
 open import foundation.constant-maps using (const)
-open import foundation.contractible-maps using
-  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
   foundation.distributivity-of-dependent-functions-over-dependent-pairs using
@@ -18,24 +20,26 @@ open import foundation.equivalences using
   ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;
     issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
     isretr-map-inv-equiv; is-equiv-comp'; issec-map-inv-is-equiv;
-    map-inv-is-equiv; is-equiv-precomp-Π-is-equiv; is-equiv-map-inv-is-equiv;
+    map-inv-is-equiv; is-equiv-map-inv-is-equiv;
     id-equiv; equiv-ap; htpy-equiv; refl-htpy-equiv; ind-htpy-equiv;
     comp-htpy-equiv)
-open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy; equiv-eq-htpy)
 open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
 open import foundation.identity-types using
   ( Id; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
-open import foundation.truncated-maps using (is-trunc-map)
 open import foundation.truncated-types using (is-trunc-equiv'; is-trunc-Π)
 open import foundation.unit-type using (unit)
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
+open import foundation-core.contractible-maps using
+  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
+open import foundation-core.fibers-of-maps using (fib)
+open import foundation-core.functoriality-dependent-pair-types using
+  ( equiv-tot; equiv-Σ)
 open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
+open import foundation-core.truncated-maps using (is-trunc-map)
 ```
 
 ## Idea
@@ -43,68 +47,6 @@ open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-�
 The type constructor for dependent function types acts contravariantly in its first argument, and covariantly in its second argument.
 
 ## Properties
-
-### The operation `map-Π` preserves homotopies
-
-```agda
-htpy-map-Π :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {f f' : (i : I) → A i → B i} (H : (i : I) → (f i) ~ (f' i)) →
-  (map-Π f) ~ (map-Π f')
-htpy-map-Π H h = eq-htpy (λ i → H i (h i))
-
-htpy-map-Π' :
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {J : UU l4} (α : J → I) {f f' : (i : I) → A i → B i} →
-  ((i : I) → (f i) ~ (f' i)) → (map-Π' α f ~ map-Π' α f')
-htpy-map-Π' α H = htpy-map-Π (λ j → H (α j))
-```
-
-### We compute the fibers of map-Π
-
-```agda
-equiv-fib-map-Π :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (f : (i : I) → A i → B i) (h : (i : I) → B i) →
-  ((i : I) → fib (f i) (h i)) ≃ fib (map-Π f) h
-equiv-fib-map-Π f h =
-  equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
-```
-
-### Truncated families of maps induce truncated maps on dependent function types
-
-```agda
-abstract
-  is-trunc-map-map-Π :
-    (k : 𝕋) {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    (f : (i : I) → A i → B i) →
-    ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
-  is-trunc-map-map-Π k {I = I} f H h =
-    is-trunc-equiv' k
-      ( (i : I) → fib (f i) (h i))
-      ( equiv-fib-map-Π f h)
-      ( is-trunc-Π k (λ i → H i (h i)))
-```
-
-### Families of equivalences induce equivalences on dependent function types
-
-```agda
-abstract
-  is-equiv-map-Π :
-    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    (f : (i : I) → A i → B i) (is-equiv-f : is-fiberwise-equiv f) →
-    is-equiv (map-Π f)
-  is-equiv-map-Π f is-equiv-f =
-    is-equiv-is-contr-map
-      ( is-trunc-map-map-Π neg-two-𝕋 f
-        ( λ i → is-contr-map-is-equiv (is-equiv-f i)))
-
-equiv-map-Π :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
-pr1 (equiv-map-Π e) = map-Π (λ i → map-equiv (e i))
-pr2 (equiv-map-Π e) = is-equiv-map-Π _ (λ i → is-equiv-map-equiv (e i))
-```
 
 ### An equivalence of base types and a family of equivalences induce an equivalence on dependent function types
 
@@ -194,6 +136,21 @@ equiv-fib-map-Π' α f h =
   equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
 ```
 
+### Truncated families of maps induce truncated maps on dependent function types
+
+```agda
+abstract
+  is-trunc-map-map-Π :
+    (k : 𝕋) {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+    (f : (i : I) → A i → B i) →
+    ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
+  is-trunc-map-map-Π k {I = I} f H h =
+    is-trunc-equiv' k
+      ( (i : I) → fib (f i) (h i))
+      ( equiv-fib-map-Π f h)
+      ( is-trunc-Π k (λ i → H i (h i)))
+```
+
 ### A family of truncated maps over any map induces a truncated map on dependent function types
 
 ```agda
@@ -224,6 +181,8 @@ is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
         ( const unit (B i) b)))
     ( H (λ x → i) (const unit (B i) b))
 ```
+
+###
 
 ```agda
 HTPY-map-equiv-Π :
