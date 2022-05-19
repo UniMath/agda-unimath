@@ -50,15 +50,15 @@ The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Sc
 We will prove that LEM implies Cantor-Schröder-Bernstein.
 
 ```agda
-cantor-schröder-bernstein : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
-cantor-schröder-bernstein l1 l2 =
+cantor-schroder-bernstein : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
+cantor-schroder-bernstein l1 l2 =
   {X : UU l1} {Y : UU l2} → ((X ↪ Y) × (Y ↪ X) → X ≃ Y)
 
-LEM-implies-cantor-schröder-bernstein :
+LEM-implies-cantor-schroder-bernstein :
   {l1 l2 : Level} →
   LEM (l1 ⊔ l2) →
-  cantor-schröder-bernstein l1 l2
-LEM-implies-cantor-schröder-bernstein {l1} {l2} lem {X} {Y}
+  cantor-schroder-bernstein l1 l2
+LEM-implies-cantor-schroder-bernstein {l1} {l2} lem {X} {Y}
   (pair (pair f is-emb-f) (pair g is-emb-g)) =
     pair h h-is-equiv
 ```
