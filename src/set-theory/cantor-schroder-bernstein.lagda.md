@@ -1,4 +1,6 @@
-# Cantor-Schröder-Bernstein
+---
+title: Cantor-Schröder-Bernstein
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
