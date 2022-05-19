@@ -83,10 +83,11 @@ open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
 open import foundation.sets using (Id-Prop; UU-Set)
 open import foundation.subtypes using (subtype; eq-subtype)
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.universal-property-propositional-truncation-into-sets using
   (map-universal-property-set-quotient-trunc-Prop)
-open import foundation.unit-type using (star)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; is-finite-2-Element-Decidable-Subtype;
@@ -167,7 +168,6 @@ module _
       ( d1 d2 d3 : orientation-Complete-Undirected-Graph) →
       ( type-decidable-subtype
         ( symmetric-difference-decidable-subtype
-          ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
           ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
           ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3)) ≃
         type-decidable-subtype
@@ -184,7 +184,6 @@ module _
           equiv-iff
             ( prop-decidable-Prop
               ( symmetric-difference-decidable-subtype
-                ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
                 ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
                 ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3)
                 ( Y)))
@@ -196,7 +195,6 @@ module _
         type-Prop
           ( prop-decidable-Prop
             ( symmetric-difference-decidable-subtype
-              ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
               ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
               ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3) Y)) →
           type-Prop (prop-decidable-Prop (2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y))
@@ -212,27 +210,27 @@ module _
                 ( d2 Y)
                 ( d3 Y))
               ( nnq)))
-      f Y (inr (pair nnp nq)) r =
+      f Y (inr (pair nq nnp)) r =
         nq
-          ( (inv
-            ( dn-elim-is-decidable
-              ( Id (d1 Y) (d2 Y))
-              ( has-decidable-equality-is-finite
-                ( is-finite-decidable-subtype
-                  ( pr1 Y)
-                  ( is-finite-type-UU-Fin-Level X))
-                (d1 Y)
-                (d2 Y))
-              ( nnp))) ∙
-          ( r))
+          ( ( inv
+              ( dn-elim-is-decidable
+                ( Id (d1 Y) (d2 Y))
+                ( has-decidable-equality-is-finite
+                  ( is-finite-decidable-subtype
+                    ( pr1 Y)
+                    ( is-finite-type-UU-Fin-Level X))
+                  ( d1 Y)
+                  ( d2 Y))
+                ( nnp))) ∙
+            ( r))
       cases-g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
         ¬ (Id (d1 Y) (d3 Y)) → (is-decidable (Id (d1 Y) (d2 Y))) →
         is-decidable (Id (d2 Y) (d3 Y)) →
         coprod
           (¬ (Id (d1 Y) (d2 Y)) × ¬ (¬ (Id (d2 Y) (d3 Y))))
-          (¬ (¬ (Id (d1 Y) (d2 Y))) × ¬ (Id (d2 Y) (d3 Y)))
+          (¬ (Id (d2 Y) (d3 Y)) × ¬ (¬ (Id (d1 Y) (d2 Y))))
       cases-g Y nr (inl p) (inl q) = ex-falso (nr (p ∙ q))
-      cases-g Y nr (inl p) (inr nq) = inr (pair (λ f → f p) nq)
+      cases-g Y nr (inl p) (inr nq) = inr (pair nq (λ f → f p))
       cases-g Y nr (inr np) (inl q) = inl (pair np (λ f → f q))
       cases-g Y nr (inr np) (inr nq) =
         ex-falso
@@ -249,19 +247,14 @@ module _
                 ( nq)
                 ( nr)))
       g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
-        type-Prop
-          ( prop-decidable-Prop
-            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y)) →
-          type-Prop
-            ( prop-decidable-Prop
-              ( symmetric-difference-decidable-subtype
-                ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3) Y))
+        type-decidable-Prop
+          ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y) →
+        type-decidable-Prop
+          ( symmetric-difference-decidable-subtype
+            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
+            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3) Y)
       g Y r =
-        cases-g
-          ( Y)
-          ( r)
+        cases-g Y r
           ( has-decidable-equality-is-finite
             ( is-finite-decidable-subtype (pr1 Y) (is-finite-type-UU-Fin-Level X))
             ( d1 Y)
@@ -270,7 +263,6 @@ module _
             ( is-finite-decidable-subtype (pr1 Y) (is-finite-type-UU-Fin-Level X))
             ( d2 Y)
             ( d3 Y)) 
-
   is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     ( d d' : orientation-Complete-Undirected-Graph) (m : Fin 2) →
       Id m (mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d') →
@@ -367,7 +359,6 @@ module _
                 ( has-finite-cardinality-is-finite
                   ( is-finite-decidable-subtype
                     ( symmetric-difference-decidable-subtype
-                      ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
                       ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
                       ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
                     ( is-finite-2-Element-Decidable-Subtype n X)))
@@ -391,7 +382,6 @@ module _
       number-of-elements-is-finite
         ( is-finite-decidable-subtype
           ( symmetric-difference-decidable-subtype
-            ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
           ( is-finite-2-Element-Decidable-Subtype n X))

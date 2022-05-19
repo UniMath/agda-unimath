@@ -1,12 +1,15 @@
 # Split surjective maps
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.split-surjective-maps where
 
-open import foundation-core.dependent-pair-types using (Σ)
+open import foundation.injective-maps using (is-injective)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using (is-equiv)
 open import foundation-core.identity-types using (Id)
+open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
@@ -35,4 +38,23 @@ is-split-surjective {A = A} {B} f = (b : B) → Σ A (λ a → Id (f a) b)
 is-split-epimorphism :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → UU (l1 ⊔ l2)
 is-split-epimorphism f = sec f
+```
+
+## Properties
+
+```agda
+abstract
+  is-equiv-is-split-surjective-is-injective :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2 } (f : X → Y) →
+    is-injective f →
+    is-split-surjective f →
+    is-equiv f
+  is-equiv-is-split-surjective-is-injective {X = X} {Y = Y} f l s =
+    pair (sec-f) (retr-f) 
+    where
+    sec-f : sec f
+    sec-f = pair (λ y → pr1 (s y)) (λ y → pr2 (s y))
+
+    retr-f : retr f
+    retr-f = pair (λ y → pr1 (s y)) (λ x → l (pr2 (s (f x))))
 ```
