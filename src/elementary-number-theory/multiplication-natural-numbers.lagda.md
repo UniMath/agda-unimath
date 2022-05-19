@@ -1,4 +1,6 @@
-# Multiplication of natural numbers
+---
+title: Multiplication of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,10 +11,12 @@ open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; add-ℕ'; right-unit-law-add-ℕ; associative-add-ℕ;
     left-successor-law-add-ℕ; commutative-add-ℕ; is-injective-add-ℕ';
     is-zero-right-is-zero-add-ℕ; neq-add-ℕ)
-open import elementary-number-theory.equality-natural-numbers using (is-set-ℕ)
+open import elementary-number-theory.equality-natural-numbers using
+  ( is-set-ℕ; ℕ-Set)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-nonzero-ℕ; is-successor-is-nonzero-ℕ;
     is-injective-succ-ℕ)
+    
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
@@ -21,9 +25,15 @@ open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.negation using (¬)
+open import foundation.universe-levels using (lzero)
+
+open import group-theory.monoids using (Monoid)
+open import group-theory.semigroups using (Semigroup)
 ```
 
-# Multiplication on the natural numbers
+## Definition
+
+### Multiplication
 
 ```agda
 mul-ℕ : ℕ → ℕ → ℕ
@@ -50,7 +60,7 @@ cube-ℕ : ℕ → ℕ
 cube-ℕ x = mul-ℕ (square-ℕ x) x
 ```
 
-## Laws for multiplication on ℕ
+## Properties
 
 ```agda
 abstract
@@ -240,4 +250,19 @@ neq-mul-ℕ m n p =
     ( ( p) ∙
       ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
         ( ap (add-ℕ (succ-ℕ m)) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
+```
+
+### The multiplicative monoid ℕ*
+
+```agda
+ℕ*-Semigroup : Semigroup lzero
+pr1 ℕ*-Semigroup = ℕ-Set
+pr1 (pr2 ℕ*-Semigroup) = mul-ℕ
+pr2 (pr2 ℕ*-Semigroup) = associative-mul-ℕ
+
+ℕ*-Monoid : Monoid lzero
+pr1 ℕ*-Monoid = ℕ*-Semigroup
+pr1 (pr2 ℕ*-Monoid) = 1
+pr1 (pr2 (pr2 ℕ*-Monoid)) = left-unit-law-mul-ℕ
+pr2 (pr2 (pr2 ℕ*-Monoid)) = right-unit-law-mul-ℕ
 ```

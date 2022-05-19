@@ -8,7 +8,7 @@ module synthetic-homotopy-theory.infinite-cyclic-types where
 open import elementary-number-theory.addition-integers using
   ( equiv-add-ℤ; add-ℤ; right-successor-law-add-ℤ; left-inverse-law-add-ℤ)
 open import elementary-number-theory.integers using
-  ( ℤ; succ-ℤ; zero-ℤ; ℤ-Pointed-Type-With-Aut; neg-ℤ;
+  ( ℤ; succ-ℤ; zero-ℤ; ℤ-Pointed-Type-With-Aut; neg-ℤ; ℤ-Endo;
     is-initial-ℤ-Pointed-Type-With-Aut)
 open import elementary-number-theory.natural-numbers using (zero-ℕ)
 
@@ -35,14 +35,19 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( right-unit-law-Σ-is-contr; equiv-right-swap-Σ; assoc-Σ)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
-open import synthetic-homotopy-theory.cyclic-types using
-  ( Cyclic; ℤ-Mod-Cyclic; Cyclic-Pointed-Type; Endo; endo-Cyclic; type-Cyclic;
-    endomorphism-Cyclic; mere-equiv-Endo; ℤ-Endo; equiv-Cyclic; id-equiv-Cyclic;
-    equiv-eq-Cyclic; is-contr-total-equiv-Cyclic;
-    is-equiv-equiv-eq-Cyclic; extensionality-Cyclic; map-equiv-Endo)
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
-open import synthetic-homotopy-theory.pointed-types using
+open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import structured-types.morphisms-types-equipped-with-endomorphisms
+open import structured-types.pointed-types using
   ( Pointed-Type)
+open import structured-types.types-equipped-with-endomorphisms
+
+open import synthetic-homotopy-theory.cyclic-types using
+  ( Cyclic; ℤ-Mod-Cyclic; Cyclic-Pointed-Type; endo-Cyclic; type-Cyclic;
+    endomorphism-Cyclic; equiv-Cyclic; id-equiv-Cyclic;
+    equiv-eq-Cyclic; is-contr-total-equiv-Cyclic;
+    is-equiv-equiv-eq-Cyclic; extensionality-Cyclic)
+open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
 ```
 
 ```agda

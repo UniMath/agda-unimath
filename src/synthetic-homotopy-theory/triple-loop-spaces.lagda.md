@@ -16,13 +16,14 @@ open import foundation.path-algebra using
     right-unit-law-z-concat-Id³)
 open import foundation.universe-levels using (Level; UU)
 
+open import structured-types.pointed-types using
+  ( Pointed-Type)
+
 open import synthetic-homotopy-theory.double-loop-spaces using
   ( refl-Ω²; left-unit-law-horizontal-concat-Ω²;
     right-unit-law-horizontal-concat-Ω²)
 open import synthetic-homotopy-theory.iterated-loop-spaces using
   ( iterated-loop-space)
-open import synthetic-homotopy-theory.pointed-types using
-  ( Pointed-Type)
 ```
 
 ```agda

@@ -7,11 +7,11 @@ title: Orientations of cubes
 
 module univalent-combinatorics.orientations-cubes where
 
-open import elementary-number-theory.iterating-functions using (iterate)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
+open import foundation.iterating-functions using (iterate)
 open import foundation.universe-levels using (UU; lzero)
 
 open import univalent-combinatorics.cubes using

@@ -6,6 +6,8 @@
 module foundation.xor where
 
 open import foundation.cartesian-product-types using (_×_)
+open import foundation.commutative-operations using
+  ( commutative-operation)
 open import foundation.conjunction using (conj-Prop)
 open import foundation.coproduct-types using
   ( coprod; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
@@ -45,9 +47,6 @@ open import foundation.unordered-pairs using
   ( unordered-pair; standard-unordered-pair; element-unordered-pair;
     type-unordered-pair; 2-element-type-unordered-pair;
     other-element-unordered-pair; map-unordered-pair)
-
-open import synthetic-homotopy-theory.commutative-operations using
-  ( commutative-operation)
 
 open import univalent-combinatorics.2-element-types using
   ( type-2-Element-Type; map-swap-2-Element-Type; compute-swap-2-Element-Type;

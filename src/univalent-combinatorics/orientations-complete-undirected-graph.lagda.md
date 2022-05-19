@@ -33,7 +33,6 @@ open import finite-group-theory.transpositions using
     is-fixed-point-standard-transposition; eq-two-elements-transposition;
     is-involution-map-transposition)
 
-open import foundation.automorphisms using (Aut)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
 open import foundation.decidable-equality using
@@ -54,7 +53,8 @@ open import foundation.equality-dependent-pair-types using
   (eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv;
-    left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv)
+    left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv; right-inverse-law-equiv;
+    left-inverse-law-equiv)
 open import foundation.equivalence-classes using
   ( large-set-quotient; quotient-map-large-set-quotient; large-quotient-Set;
     type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
@@ -63,7 +63,10 @@ open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; type-Eq-Rel; trans-Eq-Rel; refl-Eq-Rel)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_; id)
+open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
+open import foundation.functoriality-propositional-truncation using
+  ( functor-trunc-Prop)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; inv; ap; ap-binary; _∙_; tr)
 open import foundation.injective-maps using
@@ -80,10 +83,11 @@ open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
 open import foundation.sets using (Id-Prop; UU-Set)
 open import foundation.subtypes using (subtype; eq-subtype)
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.universal-property-propositional-truncation-into-sets using
   (map-universal-property-set-quotient-trunc-Prop)
-open import foundation.unit-type using (star)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; is-finite-2-Element-Decidable-Subtype;
@@ -110,12 +114,12 @@ open import univalent-combinatorics.equality-finite-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Fin-Set; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; mere-equiv-UU-Fin; is-finite; 
+  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; has-cardinality-type-UU-Fin; is-finite; 
     equiv-has-cardinality-id-number-of-elements-is-finite; number-of-elements-is-finite;
     is-finite-type-UU-Fin-Level; is-finite-equiv; is-finite-Fin;
     number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
     all-elements-equal-has-finite-cardinality; has-finite-cardinality;
-    is-finite-has-finite-cardinality; mere-equiv-UU-Fin-Level)
+    is-finite-has-finite-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin; equiv-bool-Fin-two-ℕ; nat-Fin; is-zero-nat-zero-Fin)
 open import univalent-combinatorics.symmetric-difference using
@@ -128,14 +132,6 @@ module _
   orientation-Complete-Undirected-Graph : UU (lsuc l)
   orientation-Complete-Undirected-Graph = ((pair P H) : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
     Σ (type-UU-Fin-Level X) (λ x → type-decidable-Prop (P x))
-
-  orientation-Complete-Undirected-Graph-Aut :
-    Aut (type-UU-Fin-Level X) → orientation-Complete-Undirected-Graph →
-    orientation-Complete-Undirected-Graph
-  pr1 (orientation-Complete-Undirected-Graph-Aut e d Y) =
-    map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
-  pr2 (orientation-Complete-Undirected-Graph-Aut e d Y) =
-    pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
 
   2-Element-Decidable-Subtype-subtype-pointwise-difference :
     orientation-Complete-Undirected-Graph → orientation-Complete-Undirected-Graph →
@@ -172,7 +168,6 @@ module _
       ( d1 d2 d3 : orientation-Complete-Undirected-Graph) →
       ( type-decidable-subtype
         ( symmetric-difference-decidable-subtype
-          ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
           ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
           ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3)) ≃
         type-decidable-subtype
@@ -189,7 +184,6 @@ module _
           equiv-iff
             ( prop-decidable-Prop
               ( symmetric-difference-decidable-subtype
-                ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
                 ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
                 ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3)
                 ( Y)))
@@ -201,7 +195,6 @@ module _
         type-Prop
           ( prop-decidable-Prop
             ( symmetric-difference-decidable-subtype
-              ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
               ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
               ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3) Y)) →
           type-Prop (prop-decidable-Prop (2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y))
@@ -217,27 +210,27 @@ module _
                 ( d2 Y)
                 ( d3 Y))
               ( nnq)))
-      f Y (inr (pair nnp nq)) r =
+      f Y (inr (pair nq nnp)) r =
         nq
-          ( (inv
-            ( dn-elim-is-decidable
-              ( Id (d1 Y) (d2 Y))
-              ( has-decidable-equality-is-finite
-                ( is-finite-decidable-subtype
-                  ( pr1 Y)
-                  ( is-finite-type-UU-Fin-Level X))
-                (d1 Y)
-                (d2 Y))
-              ( nnp))) ∙
-          ( r))
+          ( ( inv
+              ( dn-elim-is-decidable
+                ( Id (d1 Y) (d2 Y))
+                ( has-decidable-equality-is-finite
+                  ( is-finite-decidable-subtype
+                    ( pr1 Y)
+                    ( is-finite-type-UU-Fin-Level X))
+                  ( d1 Y)
+                  ( d2 Y))
+                ( nnp))) ∙
+            ( r))
       cases-g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
         ¬ (Id (d1 Y) (d3 Y)) → (is-decidable (Id (d1 Y) (d2 Y))) →
         is-decidable (Id (d2 Y) (d3 Y)) →
         coprod
           (¬ (Id (d1 Y) (d2 Y)) × ¬ (¬ (Id (d2 Y) (d3 Y))))
-          (¬ (¬ (Id (d1 Y) (d2 Y))) × ¬ (Id (d2 Y) (d3 Y)))
+          (¬ (Id (d2 Y) (d3 Y)) × ¬ (¬ (Id (d1 Y) (d2 Y))))
       cases-g Y nr (inl p) (inl q) = ex-falso (nr (p ∙ q))
-      cases-g Y nr (inl p) (inr nq) = inr (pair (λ f → f p) nq)
+      cases-g Y nr (inl p) (inr nq) = inr (pair nq (λ f → f p))
       cases-g Y nr (inr np) (inl q) = inl (pair np (λ f → f q))
       cases-g Y nr (inr np) (inr nq) =
         ex-falso
@@ -254,19 +247,14 @@ module _
                 ( nq)
                 ( nr)))
       g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
-        type-Prop
-          ( prop-decidable-Prop
-            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y)) →
-          type-Prop
-            ( prop-decidable-Prop
-              ( symmetric-difference-decidable-subtype
-                ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3) Y))
+        type-decidable-Prop
+          ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d3 Y) →
+        type-decidable-Prop
+          ( symmetric-difference-decidable-subtype
+            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
+            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3) Y)
       g Y r =
-        cases-g
-          ( Y)
-          ( r)
+        cases-g Y r
           ( has-decidable-equality-is-finite
             ( is-finite-decidable-subtype (pr1 Y) (is-finite-type-UU-Fin-Level X))
             ( d1 Y)
@@ -275,7 +263,6 @@ module _
             ( is-finite-decidable-subtype (pr1 Y) (is-finite-type-UU-Fin-Level X))
             ( d2 Y)
             ( d3 Y)) 
-
   is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     ( d d' : orientation-Complete-Undirected-Graph) (m : Fin 2) →
       Id m (mod-two-number-of-differences-orientation-Complete-Undirected-Graph d d') →
@@ -349,7 +336,7 @@ module _
                 ( add-ℕ)
                 ( ap nat-Fin (inv p1))
                 ( ap nat-Fin (inv p2))) ∙
-                ( ap ( λ n → add-ℕ ( n) (nat-Fin m)) ( inv ( left-unit-law-mul-ℕ (nat-Fin m)))))
+                ( ap (λ n → add-ℕ n (nat-Fin m)) (inv (left-unit-law-mul-ℕ (nat-Fin m)))))
               ( scalar-invariant-cong-ℕ' 2 2 0 (nat-Fin m) (cong-zero-ℕ' 2))))
           ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2)))) ∙
       (ap
@@ -372,7 +359,6 @@ module _
                 ( has-finite-cardinality-is-finite
                   ( is-finite-decidable-subtype
                     ( symmetric-difference-decidable-subtype
-                      ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
                       ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
                       ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
                     ( is-finite-2-Element-Decidable-Subtype n X)))
@@ -396,7 +382,6 @@ module _
       number-of-elements-is-finite
         ( is-finite-decidable-subtype
           ( symmetric-difference-decidable-subtype
-            ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
           ( is-finite-2-Element-Decidable-Subtype n X))
@@ -448,6 +433,144 @@ module _
   
   quotient-sign-Set : UU-Set (lsuc l)
   quotient-sign-Set = large-quotient-Set even-difference-orientation-Complete-Undirected-Graph
+
+module _
+  {l : Level} (n : ℕ)
+  where
+
+  map-orientation-Complete-Undirected-Graph-equiv : (X X' : UU-Fin-Level l n) →
+    (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') → orientation-Complete-Undirected-Graph n X' →
+    orientation-Complete-Undirected-Graph n X
+  pr1 (map-orientation-Complete-Undirected-Graph-equiv X X' e d Y) =
+    map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
+  pr2 (map-orientation-Complete-Undirected-Graph-equiv X X' e d Y) =
+    pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
+
+  orientation-Complete-Undirected-Graph-equiv : (X X' : UU-Fin-Level l n) →
+    (type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
+    orientation-Complete-Undirected-Graph n X' ≃ orientation-Complete-Undirected-Graph n X
+  pr1 (orientation-Complete-Undirected-Graph-equiv X X' e) =
+    map-orientation-Complete-Undirected-Graph-equiv X X' e
+  pr2 (orientation-Complete-Undirected-Graph-equiv X X' e) =
+    is-equiv-has-inverse
+      ( map-orientation-Complete-Undirected-Graph-equiv X' X (inv-equiv e))
+      ( λ d →
+        eq-htpy
+          ( λ Y →
+            eq-pair-Σ
+              ( ( ap
+                ( λ Y' → (map-inv-equiv e ∘ (map-inv-equiv (inv-equiv e))) (pr1 (d Y')))
+                ( eq-pair-Σ
+                  ( ap
+                    ( λ h → pr1 Y ∘ map-equiv h)
+                    ( right-inverse-law-equiv (inv-equiv e)) )
+                  ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                ( ap (λ h → map-equiv h (pr1 (d Y))) (right-inverse-law-equiv (inv-equiv e))))
+              ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
+      ( λ d →
+        eq-htpy
+          ( λ Y →
+            eq-pair-Σ
+              ( ( ap
+                ( λ Y' → (map-inv-equiv (inv-equiv e) ∘ map-inv-equiv e) (pr1 (d Y')))
+                ( eq-pair-Σ
+                  ( ap
+                    ( λ h → pr1 Y ∘ map-equiv h)
+                    ( left-inverse-law-equiv (inv-equiv e)) )
+                  ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                ( ap (λ h → map-equiv h (pr1 (d Y))) (left-inverse-law-equiv (inv-equiv e))))
+              ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
+
+  preserves-even-difference-orientation-Complete-Undirected-Graph-equiv :
+    (X X' : UU-Fin-Level l n) ( e : type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
+    ( d d' : orientation-Complete-Undirected-Graph n X') →
+    type-Eq-Rel (even-difference-orientation-Complete-Undirected-Graph n X') d d' →
+    type-Eq-Rel
+      ( even-difference-orientation-Complete-Undirected-Graph n X)
+      ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
+      ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
+  preserves-even-difference-orientation-Complete-Undirected-Graph-equiv X X' e d d' P =
+    ( P) ∙
+      ( ap
+        ( mod-two-ℕ ∘ number-of-elements-has-finite-cardinality)
+        ( all-elements-equal-has-finite-cardinality
+          ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference n X' d d'))
+          ( pair
+            ( number-of-elements-is-finite
+              ( is-finite-subtype-pointwise-difference n X
+                ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
+                ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')))
+            ( functor-trunc-Prop
+              ( λ h → equiv-subtype-pointwise-difference-equiv ∘e h)
+              ( pr2
+                ( has-finite-cardinality-is-finite
+                  ( is-finite-subtype-pointwise-difference n X
+                    ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
+                    ( map-orientation-Complete-Undirected-Graph-equiv X X' e d'))))))))
+    where
+    equiv-subtype-pointwise-difference-equiv :
+      Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
+        ( λ Y →
+          type-decidable-Prop
+            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
+              ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
+              ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
+              ( Y))) ≃
+      Σ (2-Element-Decidable-Subtype l (type-UU-Fin-Level X'))
+        ( λ Y →
+          type-decidable-Prop
+            ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))
+    pr1 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) = precomp-equiv-2-Element-Decidable-Subtype e Y
+    pr2 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) p =
+      NQ
+        ( eq-pair-Σ
+          ( ap (map-inv-equiv e) (pr1 (pair-eq-Σ p)))
+          ( eq-is-prop
+            ( is-prop-type-decidable-Prop
+              ( pr1 Y (pr1 (map-orientation-Complete-Undirected-Graph-equiv X X' e d' Y))))))
+    pr2 equiv-subtype-pointwise-difference-equiv =
+      is-equiv-has-inverse
+        ( λ (pair Y NQ) →
+          pair
+            ( precomp-equiv-2-Element-Decidable-Subtype (inv-equiv e) Y)
+            ( λ p →
+              NQ
+                ( eq-pair-Σ
+                  ( ( ap
+                    ( λ Y' → pr1 (d Y'))
+                    ( eq-pair-Σ
+                      ( ap
+                        ( λ h → pr1 Y ∘ (map-equiv h))
+                        ( inv (right-inverse-law-equiv e)))
+                      ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                    ( ( is-injective-map-equiv (inv-equiv e) (pr1 (pair-eq-Σ p))) ∙
+                      ( ap
+                        ( λ Y' → pr1 (d' Y'))
+                        ( eq-pair-Σ
+                          ( ap
+                            ( λ h → pr1 Y ∘ map-equiv h)
+                            ( right-inverse-law-equiv e))
+                          ( eq-is-prop is-prop-type-trunc-Prop)))))
+                  ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (d' Y))))))))
+        ( λ (pair Y NQ) →
+          eq-pair-Σ
+            ( eq-pair-Σ
+              ( ap (λ h → pr1 Y ∘ map-equiv h) (right-inverse-law-equiv e))
+              ( eq-is-prop is-prop-type-trunc-Prop))
+            ( eq-is-prop
+              ( is-prop-type-decidable-Prop
+                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))))
+        ( λ (pair Y NQ) →
+          eq-pair-Σ
+            ( eq-pair-Σ
+              ( ap (λ h → pr1 Y ∘ map-equiv h) (left-inverse-law-equiv e))
+              ( eq-is-prop is-prop-type-trunc-Prop))
+            ( eq-is-prop
+              ( is-prop-type-decidable-Prop
+                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
+                  ( map-orientation-Complete-Undirected-Graph-equiv X X' e d)
+                  ( map-orientation-Complete-Undirected-Graph-equiv X X' e d')
+                  ( Y)))))
 ```
 
 ```
@@ -1358,11 +1481,11 @@ module _
       ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
       ( equiv-Fin-2-quotient-sign-count (pair n h) ineq)
     
-  mere-equiv-Fin-2-quotient-sign :
-    mere-equiv (Fin 2) (quotient-sign n X)
-  mere-equiv-Fin-2-quotient-sign =
-    apply-universal-property-trunc-Prop
-      ( mere-equiv-UU-Fin-Level X)
-      ( trunc-Prop (Fin 2 ≃ (quotient-sign n X)))
-      ( λ h → unit-trunc-Prop (equiv-Fin-2-quotient-sign-equiv-Fin-n h))
+  abstract
+    mere-equiv-Fin-2-quotient-sign :
+      mere-equiv (Fin 2) (quotient-sign n X)
+    mere-equiv-Fin-2-quotient-sign =
+      functor-trunc-Prop
+        ( equiv-Fin-2-quotient-sign-equiv-Fin-n)
+        ( has-cardinality-type-UU-Fin-Level X)
 ```

@@ -25,9 +25,17 @@ open import foundation.negation using (¬)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
+
+open import order-theory.posets
 ```
 
-# Inequality on the natural numbers
+## Idea
+
+The relation `≤` on the natural numbers is the unique relation such that `0` is less than any natural number, and such that `m+1 ≤ n+1` is equivalent to `m ≤ n`.
+
+## Definitions
+
+### The partial ordering on ℕ
 
 ```agda
 leq-ℕ : ℕ → ℕ → UU lzero
@@ -36,17 +44,40 @@ leq-ℕ (succ-ℕ n) zero-ℕ = empty
 leq-ℕ (succ-ℕ n) (succ-ℕ m) = leq-ℕ n m
 
 _≤-ℕ_ = leq-ℕ
+```
 
+### Alternative definition of the partial ordering on ℕ
+
+```agda
 data leq-ℕ' : ℕ → ℕ → UU lzero where
   refl-leq-ℕ' : (n : ℕ) → leq-ℕ' n n
-  propagate-leq-ℕ' : {x y z : ℕ} → Id (succ-ℕ y) z → (leq-ℕ' x y) → (leq-ℕ' x z) 
+  propagate-leq-ℕ' : {x y z : ℕ} → Id (succ-ℕ y) z → (leq-ℕ' x y) → (leq-ℕ' x z)
+```
 
--- Some trivialities that will be useful later
+### The strict ordering of the natural numbers
 
+```agda
+le-ℕ : ℕ → ℕ → UU lzero
+le-ℕ m zero-ℕ = empty
+le-ℕ zero-ℕ (succ-ℕ m) = unit
+le-ℕ (succ-ℕ n) (succ-ℕ m) = le-ℕ n m
+
+_<_ = le-ℕ
+```
+
+## Properties of `≤`
+
+### Zero is less than or equal to any natural number
+
+```agda
 leq-zero-ℕ :
   (n : ℕ) → zero-ℕ ≤-ℕ n
 leq-zero-ℕ n = star
+```
 
+### Any natural number less than zero is zero
+
+```agda
 is-zero-leq-zero-ℕ :
   (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ x
 is-zero-leq-zero-ℕ zero-ℕ star = refl
@@ -54,11 +85,19 @@ is-zero-leq-zero-ℕ zero-ℕ star = refl
 is-zero-leq-zero-ℕ' :
   (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ' x
 is-zero-leq-zero-ℕ' zero-ℕ star = refl
+```
 
+### Any natural number is less than or equal to its own successor
+
+```agda
 succ-leq-ℕ : (n : ℕ) → n ≤-ℕ (succ-ℕ n)
 succ-leq-ℕ zero-ℕ = star
 succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
+```
 
+### The partial ordering on ℕ is a congruence
+
+```agda
 concatenate-eq-leq-eq-ℕ :
   {x' x y y' : ℕ} → Id x' x → x ≤-ℕ y → Id y y' → x' ≤-ℕ y'
 concatenate-eq-leq-eq-ℕ refl H refl = H
@@ -70,14 +109,22 @@ concatenate-leq-eq-ℕ m H refl = H
 concatenate-eq-leq-ℕ :
   {m m' : ℕ} (n : ℕ) → Id m' m → m ≤-ℕ n → m' ≤-ℕ n
 concatenate-eq-leq-ℕ n refl H = H
+```
 
+### The partial ordering on the natural numbers is decidable
+
+```agda
 is-decidable-leq-ℕ :
   (m n : ℕ) → is-decidable (leq-ℕ m n)
 is-decidable-leq-ℕ zero-ℕ zero-ℕ = inl star
 is-decidable-leq-ℕ zero-ℕ (succ-ℕ n) = inl star
 is-decidable-leq-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
+```
 
+### An natural number less than `n+1` is either less than `n` or it is `n+1`
+
+```agda
 decide-leq-succ-ℕ :
   (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → coprod (m ≤-ℕ n) (Id m (succ-ℕ n))
 decide-leq-succ-ℕ zero-ℕ zero-ℕ l = inl star
@@ -86,54 +133,106 @@ decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
   inr (ap succ-ℕ (is-zero-leq-zero-ℕ m l))
 decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
   map-coprod id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
+```
 
--- Exercise 6.3 (a)
+### The less than or equal to relation is a preordering
 
+#### Inequality on ℕ is a proposition
+
+```agda
+is-prop-leq-ℕ :
+  (m n : ℕ) → is-prop (leq-ℕ m n)
+is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
+is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
+is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
+
+leq-ℕ-Prop : ℕ → ℕ → UU-Prop lzero
+pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
+pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
+```
+
+#### Reflexivity
+
+```agda
 refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
 refl-leq-ℕ zero-ℕ = star
 refl-leq-ℕ (succ-ℕ n) = refl-leq-ℕ n
 
 leq-eq-ℕ : (m n : ℕ) → Id m n → m ≤-ℕ n
 leq-eq-ℕ m .m refl = refl-leq-ℕ m
+```
 
+#### Transitivity
+
+```agda
 transitive-leq-ℕ :
-  (n m l : ℕ) → (n ≤-ℕ m) → (m ≤-ℕ l) → (n ≤-ℕ l)
+  (n m l : ℕ) → (m ≤-ℕ l) → (n ≤-ℕ m) → (n ≤-ℕ l)
 transitive-leq-ℕ zero-ℕ m l p q = star
 transitive-leq-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-leq-ℕ n m l p q
+```
 
-preserves-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ (succ-ℕ n)
-preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) p (succ-leq-ℕ n)
+#### Antisymmetry
 
+```agda
 antisymmetric-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → n ≤-ℕ m → Id m n
 antisymmetric-leq-ℕ zero-ℕ zero-ℕ p q = refl
 antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
+```
 
--- Exercise 6.3 (b)
+#### The poset of natural numbers
 
+```agda
+ℕ-Poset : Poset lzero lzero
+pr1 ℕ-Poset = ℕ
+pr1 (pr2 ℕ-Poset) = leq-ℕ-Prop
+pr1 (pr1 (pr2 (pr2 ℕ-Poset))) = refl-leq-ℕ
+pr2 (pr1 (pr2 (pr2 ℕ-Poset))) = transitive-leq-ℕ
+pr2 (pr2 (pr2 ℕ-Poset)) = antisymmetric-leq-ℕ
+```
+
+### For any two natural numbers we can decide which one is less than the other
+
+```agda
 decide-leq-ℕ :
   (m n : ℕ) → coprod (m ≤-ℕ n) (n ≤-ℕ m)
 decide-leq-ℕ zero-ℕ zero-ℕ = inl star
 decide-leq-ℕ zero-ℕ (succ-ℕ n) = inl star
 decide-leq-ℕ (succ-ℕ m) zero-ℕ = inr star
 decide-leq-ℕ (succ-ℕ m) (succ-ℕ n) = decide-leq-ℕ m n
+```
 
--- Exercise 6.3 (c)
+### If `m` is less than `n`, then it is less than `n+1`
 
+```agda
+preserves-leq-succ-ℕ :
+  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ (succ-ℕ n)
+preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
+```
+
+### Addition preserves the ordering on ℕ
+
+```agda
 preserves-order-add-ℕ :
   (k m n : ℕ) → m ≤-ℕ n → (add-ℕ m k) ≤-ℕ (add-ℕ n k)
 preserves-order-add-ℕ zero-ℕ m n = id
 preserves-order-add-ℕ (succ-ℕ k) m n = preserves-order-add-ℕ k m n
+```
 
+### Addition reflects the ordering on ℕ
+
+```agda
 reflects-order-add-ℕ :
   (k m n : ℕ) → (add-ℕ m k) ≤-ℕ (add-ℕ n k) → m ≤-ℕ n
 reflects-order-add-ℕ zero-ℕ m n = id
 reflects-order-add-ℕ (succ-ℕ k) m n = reflects-order-add-ℕ k m n
+```
 
--- Exercise 6.3 (d)
+### Multiplication preserves the ordering on ℕ
 
+```
 preserves-order-mul-ℕ :
   (k m n : ℕ) → m ≤-ℕ n → (mul-ℕ m k) ≤-ℕ (mul-ℕ n k)
 preserves-order-mul-ℕ k zero-ℕ n p = star
@@ -150,7 +249,11 @@ preserves-order-mul-ℕ' k m n H =
     ( commutative-mul-ℕ k m)
     ( preserves-order-mul-ℕ k m n H)
     ( commutative-mul-ℕ n k)
+```
 
+### Multiplication by a nonzero element reflects the ordering on ℕ
+
+```agda
 reflects-order-mul-ℕ :
   (k m n : ℕ) → (mul-ℕ m (succ-ℕ k)) ≤-ℕ (mul-ℕ n (succ-ℕ k)) → m ≤-ℕ n
 reflects-order-mul-ℕ k zero-ℕ n p = star
@@ -161,9 +264,11 @@ reflects-order-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
       ( mul-ℕ m (succ-ℕ k))
       ( mul-ℕ n (succ-ℕ k))
       ( p))
+```
 
--- We also record the fact that x ≤-ℕ mul-ℕ x (succ-ℕ k)
+### Any number `x` is less than a nonzero multiple of itself
 
+```agda
 leq-mul-ℕ :
   (k x : ℕ) → x ≤-ℕ (mul-ℕ x (succ-ℕ k))
 leq-mul-ℕ k x =
@@ -188,7 +293,11 @@ leq-mul-is-nonzero-ℕ' :
   (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (mul-ℕ k x)
 leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 ... | pair l refl = leq-mul-ℕ' l x
+```
 
+### We have `n ≤ m` if and only if there is a number `l` such that `l+n=m`
+
+```agda
 subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → Id (add-ℕ l n) m)
 subtraction-leq-ℕ zero-ℕ m p = pair m refl
 subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (ap succ-ℕ (pr2 P))
@@ -200,6 +309,8 @@ leq-subtraction-ℕ : (n m l : ℕ) → Id (add-ℕ l n) m → n ≤-ℕ m
 leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
 leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p = leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
 ```
+
+### For any three natural numbers, there are three cases in how they can be ordered
 
 ```agda
 cases-order-three-elements-ℕ :
@@ -226,37 +337,71 @@ order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ =
   inr (inr (map-coprod (pair star) (pair star) (decide-leq-ℕ x y)))
 order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
   order-three-elements-ℕ x y z
+```
 
--- Exercise 6.4
+## Properties of `<`
 
--- The definition of <
+### Any natural number is strictly less than its successor
 
-le-ℕ : ℕ → ℕ → UU lzero
-le-ℕ m zero-ℕ = empty
-le-ℕ zero-ℕ (succ-ℕ m) = unit
-le-ℕ (succ-ℕ n) (succ-ℕ m) = le-ℕ n m
+```agda
+succ-le-ℕ : (n : ℕ) → le-ℕ n (succ-ℕ n)
+succ-le-ℕ zero-ℕ = star
+succ-le-ℕ (succ-ℕ n) = succ-le-ℕ n
+```
 
-_<_ = le-ℕ
+### If `m < n` then `n` must be nonzero
 
-anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n < n)
-anti-reflexive-le-ℕ zero-ℕ ()
-anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
+```agda
+is-nonzero-le-ℕ : (m n : ℕ) → le-ℕ m n → is-nonzero-ℕ n
+is-nonzero-le-ℕ m .zero-ℕ () refl
+```
 
-transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ n l)
-transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
-transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
-  transitive-le-ℕ n m l p q
+### No natural number is strictly less than zero
 
+```agda
 contradiction-le-zero-ℕ :
   (m : ℕ) → (le-ℕ m zero-ℕ) → empty
 contradiction-le-zero-ℕ zero-ℕ ()
 contradiction-le-zero-ℕ (succ-ℕ m) ()
+```
 
+### No successor is strictly less than one
+
+```agda
 contradiction-le-one-ℕ :
   (n : ℕ) → le-ℕ (succ-ℕ n) 1 → empty
 contradiction-le-one-ℕ zero-ℕ ()
 contradiction-le-one-ℕ (succ-ℕ n) ()
+```
 
+### The strict ordering of the natural numbers is anti-reflexive
+
+```agda
+anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n < n)
+anti-reflexive-le-ℕ zero-ℕ ()
+anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
+```
+
+### Strict inequality is antisymmetric
+
+```agda
+anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → Id m n
+anti-symmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
+  ap succ-ℕ (anti-symmetric-le-ℕ m n p q)
+```
+
+### The strict ordering of the natural numbers is transitive
+
+```agda
+transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ n l)
+transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
+transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
+  transitive-le-ℕ n m l p q
+```
+
+### A sharper variant of transitivity
+
+```agda
 transitive-le-ℕ' :
   (k l m : ℕ) → (le-ℕ k l) → (le-ℕ l (succ-ℕ m)) → le-ℕ k m
 transitive-le-ℕ' zero-ℕ zero-ℕ m () s
@@ -268,43 +413,54 @@ transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) zero-ℕ t s =
 transitive-le-ℕ' zero-ℕ (succ-ℕ l) (succ-ℕ m) star s = star
 transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) (succ-ℕ m) t s =
   transitive-le-ℕ' k l m t s
+```
 
-succ-le-ℕ : (n : ℕ) → le-ℕ n (succ-ℕ n)
-succ-le-ℕ zero-ℕ = star
-succ-le-ℕ (succ-ℕ n) = succ-le-ℕ n
-
+```agda
 preserves-le-succ-ℕ :
   (m n : ℕ) → le-ℕ m n → le-ℕ m (succ-ℕ n)
 preserves-le-succ-ℕ m n H =
   transitive-le-ℕ m n (succ-ℕ n) H (succ-le-ℕ n)
+```
 
-anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → Id m n
-anti-symmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
-  ap succ-ℕ (anti-symmetric-le-ℕ m n p q)
+### Strict inequality is decidable
 
+```agda
 is-decidable-le-ℕ :
   (m n : ℕ) → is-decidable (le-ℕ m n)
 is-decidable-le-ℕ zero-ℕ zero-ℕ = inr id
 is-decidable-le-ℕ zero-ℕ (succ-ℕ n) = inl star
 is-decidable-le-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-le-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-le-ℕ m n
+```
 
+## Properties relating nonstrict and strict inequality
+
+### If `m < n` then `n ≰ m`
+
+```agda
 contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
 contradiction-le-ℕ zero-ℕ (succ-ℕ n) H K = K
 contradiction-le-ℕ (succ-ℕ m) (succ-ℕ n) H = contradiction-le-ℕ m n H
+```
 
+### If `n ≤ m` then `m ≮ n`
+
+```agda
 contradiction-le-ℕ' : (m n : ℕ) → n ≤-ℕ m → ¬ (le-ℕ m n)
 contradiction-le-ℕ' m n K H = contradiction-le-ℕ m n H K
+```
 
+### If `m ≮ n` then `n ≤ m`
+
+```agda
 leq-not-le-ℕ : (m n : ℕ) → ¬ (le-ℕ m n) → n ≤-ℕ m
 leq-not-le-ℕ zero-ℕ zero-ℕ H = star
 leq-not-le-ℕ zero-ℕ (succ-ℕ n) H = ex-falso (H star)
 leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
 leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
+```
 
-is-nonzero-le-ℕ : (m n : ℕ) → le-ℕ m n → is-nonzero-ℕ n
-is-nonzero-le-ℕ m n H p = tr (le-ℕ m) p H
-
+```agda
 contradiction-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → ¬ ((succ-ℕ n) ≤-ℕ m)
 contradiction-leq-ℕ (succ-ℕ m) (succ-ℕ n) H K = contradiction-leq-ℕ m n H K
 
@@ -398,8 +554,8 @@ preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
     ( add-ℕ m n)
     ( add-ℕ m' n)
     ( add-ℕ m' n')
-    ( left-law-leq-add-ℕ n m m' H)
     ( right-law-leq-add-ℕ m' n n' K)
+    ( left-law-leq-add-ℕ n m m' H)
 
 --------------------------------------------------------------------------------
 
@@ -409,9 +565,9 @@ leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (add-ℕ m n)
 leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
 leq-add-ℕ m (succ-ℕ n) =
   transitive-leq-ℕ m (add-ℕ m n) (succ-ℕ (add-ℕ m n))
-    ( leq-add-ℕ m n)
     ( succ-leq-ℕ (add-ℕ m n))
-
+    ( leq-add-ℕ m n)
+    
 leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (add-ℕ n m)
 leq-add-ℕ' m n =
   concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
@@ -464,20 +620,7 @@ neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
 neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
 ```
 
-## Inequality on ℕ is a proposition
-
 ```agda
-is-prop-leq-ℕ :
-  (m n : ℕ) → is-prop (leq-ℕ m n)
-is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
-is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
-is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
-is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
-
-leq-ℕ-Prop : ℕ → ℕ → UU-Prop lzero
-pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
-pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
-
 neg-succ-leq-ℕ :
   (n : ℕ) → ¬ (leq-ℕ (succ-ℕ n) n)
 neg-succ-leq-ℕ zero-ℕ = id

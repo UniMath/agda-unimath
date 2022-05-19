@@ -647,6 +647,12 @@ module _
       ( map-inv-equiv-point-2-Element-Type X x y)
       ( refl)
 
+  compute-map-equiv-point-2-Element-Type' :
+    (x : type-2-Element-Type X) →
+    Id ( map-equiv-point-2-Element-Type X x one-Fin)
+       ( map-swap-2-Element-Type x)
+  compute-map-equiv-point-2-Element-Type' x = refl
+
 compute-swap-Fin-two-ℕ :
   map-swap-2-Element-Type (Fin-UU-Fin 2) ~ succ-Fin
 compute-swap-Fin-two-ℕ (inl (inr star)) =

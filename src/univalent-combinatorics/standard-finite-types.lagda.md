@@ -37,6 +37,8 @@ open import foundation.raising-universe-levels using
   ( raise; equiv-raise; map-raise)
 open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universe-levels using (Level; UU; lzero)
+
+open import structured-types.types-equipped-with-endomorphisms
 ```
 
 ## Idea
@@ -245,6 +247,10 @@ skip-zero-Fin {succ-ℕ k} (inr star) = inr star
 succ-Fin : {k : ℕ} → Fin k → Fin k
 succ-Fin {succ-ℕ k} (inl x) = skip-zero-Fin x
 succ-Fin {succ-ℕ k} (inr star) = zero-Fin
+
+Fin-Endo : ℕ → Endo lzero
+pr1 (Fin-Endo k) = Fin k
+pr2 (Fin-Endo k) = succ-Fin
 ```
 
 ```agda

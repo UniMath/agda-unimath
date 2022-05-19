@@ -42,7 +42,7 @@ open import group-theory.higher-groups using
     left-unit-law-comp-hom-∞-Group; right-unit-law-comp-hom-∞-Group)
 open import group-theory.homomorphisms-groups using (type-hom-Group)
 
-open import synthetic-homotopy-theory.pointed-types using (Pointed-Type)
+open import structured-types.pointed-types using (Pointed-Type)
 
 Concrete-Group : (l : Level) → UU (lsuc l)
 Concrete-Group l = Σ (∞-Group l) (λ G → is-set (type-∞-Group G))

@@ -13,6 +13,8 @@ open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
+open import foundation.binary-equivalences-unordered-pairs-of-types public
+open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-relations public
 open import foundation.boolean-reflection public
 open import foundation.booleans public
@@ -20,6 +22,7 @@ open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
+open import foundation.commutative-operations public
 open import foundation.commuting-squares public
 open import foundation.complements public
 open import foundation.conjunction public
@@ -91,11 +94,15 @@ open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-w-types public
 open import foundation.inequality-w-types public
+open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
+open import foundation.iterating-automorphisms public
+open import foundation.iterating-functions public
+open import foundation.iterating-involutions public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.locally-small-types public
@@ -114,6 +121,8 @@ open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
 open import foundation.principle-of-omniscience public
+open import foundation.products-unordered-pairs-of-types public
+open import foundation.products-unordered-tuples-of-types public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public
 open import foundation.propositional-truncations public
@@ -179,6 +188,9 @@ open import foundation.universal-property-truncation public
 open import foundation.universal-property-unit-type public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
+open import foundation.unordered-pairs-of-types public
+open import foundation.unordered-tuples public
+open import foundation.unordered-tuples-of-types public
 open import foundation.w-types public
 open import foundation.weak-function-extensionality public
 open import foundation.weakly-constant-maps public

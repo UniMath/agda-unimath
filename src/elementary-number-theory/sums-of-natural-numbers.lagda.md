@@ -8,7 +8,7 @@ module elementary-number-theory.sums-of-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; ap-add-ℕ; add-ℕ')
 open import elementary-number-theory.inequality-natural-numbers using
-  ( le-ℕ; preserves-le-succ-ℕ; le-succ-ℕ)
+  ( leq-ℕ; le-ℕ; preserves-le-succ-ℕ; le-succ-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
@@ -98,3 +98,11 @@ abstract
     Id (sum-count-ℕ e (const A ℕ n)) (mul-ℕ (number-of-elements-count e) n)
   constant-sum-count-ℕ (pair m e) n = constant-sum-Fin-ℕ m n
 ```
+
+### Each of the summands is less than or equal to the total sum
+
+-- ```agda
+-- leq-sum-Fin-ℕ :
+--   {k : ℕ} (f : Fin k → ℕ) (x : Fin k) → leq-ℕ (f x) (sum-Fin-ℕ f)
+-- leq-sum-Fin-ℕ {succ-ℕ k} f x = {!leq-add-ℕ!}
+-- ```

@@ -17,7 +17,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import group-theory.monoids using
   ( Monoid; type-Monoid; mul-Monoid; unit-Monoid; set-Monoid;
-    left-unit-law-Monoid; associative-mul-Monoid; right-unit-law-Monoid; mul-Monoid')
+    left-unit-law-mul-Monoid; associative-mul-Monoid; right-unit-law-mul-Monoid; mul-Monoid')
 ```
 
 ## Idea
@@ -85,11 +85,11 @@ module _
         prod-Prop
           ( Id-Prop (set-Monoid M) (mul-Monoid M z x) (unit-Monoid M))
           ( Id-Prop (set-Monoid M) (mul-Monoid M x z) (unit-Monoid M)))
-      ( ( inv (left-unit-law-Monoid M y)) ∙
+      ( ( inv (left-unit-law-mul-Monoid M y)) ∙
         ( ( inv (ap (λ z → mul-Monoid M z y) p')) ∙
           ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
-              ( right-unit-law-Monoid M y')))))
+              ( right-unit-law-mul-Monoid M y')))))
   
   is-prop-is-invertible-Monoid :
     (x : type-Monoid M) → is-prop (is-invertible-Monoid M x)
@@ -112,11 +112,11 @@ module _
   pr2 (is-contr-has-right-inverse-Monoid x (pair y (pair p q))) (pair y' q') =
     eq-subtype
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M x u) (unit-Monoid M))
-      ( ( inv (right-unit-law-Monoid M y)) ∙
+      ( ( inv (right-unit-law-mul-Monoid M y)) ∙
         ( ( ap (mul-Monoid M y) (inv q')) ∙
           ( ( inv (associative-mul-Monoid M y x y')) ∙
             ( ( ap (mul-Monoid' M y') p) ∙
-              ( left-unit-law-Monoid M y')))))
+              ( left-unit-law-mul-Monoid M y')))))
 ```
 
 ### Any invertible element of a monoid has a contractible type of left inverses
@@ -134,9 +134,9 @@ module _
   pr2 (is-contr-has-left-inverse-Monoid x (pair y (pair p q))) (pair y' p') =
     eq-subtype
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M u x) (unit-Monoid M))
-      ( ( inv (left-unit-law-Monoid M y)) ∙
+      ( ( inv (left-unit-law-mul-Monoid M y)) ∙
         ( ( ap (mul-Monoid' M y) (inv p')) ∙
           ( ( associative-mul-Monoid M y' x y) ∙
             ( ( ap (mul-Monoid M y') q) ∙
-              ( right-unit-law-Monoid M y')))))
+              ( right-unit-law-mul-Monoid M y')))))
 ```

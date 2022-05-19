@@ -75,8 +75,8 @@ open import univalent-combinatorics.coproduct-types using
   ( Fin-add-ℕ)
 open import univalent-combinatorics.finite-types using
   ( Fin-UU-Fin-Level; has-cardinality; has-cardinality-Prop; UU-Fin-Level;
-    type-UU-Fin-Level; mere-equiv-UU-Fin-Level; UU-Fin; type-UU-Fin;
-    mere-equiv-UU-Fin; has-finite-cardinality; is-finite;
+    type-UU-Fin-Level; has-cardinality-type-UU-Fin-Level; UU-Fin; type-UU-Fin;
+    has-cardinality-type-UU-Fin; has-finite-cardinality; is-finite;
     is-finite-has-finite-cardinality; has-finite-cardinality-is-finite; 𝔽;
     type-𝔽; is-finite-type-𝔽; is-finite-equiv)
 open import univalent-combinatorics.standard-finite-types using
@@ -96,7 +96,8 @@ binomial-type-Level l X Y =
   Σ (component-UU-Level l Y) (λ Z → type-component-UU-Level Z ↪d X)
 
 type-binomial-type-Level :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → binomial-type-Level l3 X Y → UU l3
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  binomial-type-Level l3 X Y → UU l3
 type-binomial-type-Level Z = type-component-UU-Level (pr1 Z)
 
 abstract
@@ -420,8 +421,8 @@ pr1 (binomial-type-UU-Fin-Level A B) =
   binomial-type (type-UU-Fin-Level A) (type-UU-Fin-Level B)
 pr2 (binomial-type-UU-Fin-Level A B) =
   has-cardinality-binomial-type
-    ( mere-equiv-UU-Fin-Level A)
-    ( mere-equiv-UU-Fin-Level B)
+    ( has-cardinality-type-UU-Fin-Level A)
+    ( has-cardinality-type-UU-Fin-Level B)
 
 binomial-type-UU-Fin :
   {n m : ℕ} → UU-Fin n → UU-Fin m → UU-Fin (n choose-ℕ m)
@@ -430,8 +431,8 @@ pr1 (binomial-type-UU-Fin {n} {m} A B) =
 pr2 (binomial-type-UU-Fin {n} {m} A B) =
   apply-universal-property-trunc-Prop
     ( has-cardinality-binomial-type
-      ( mere-equiv-UU-Fin A)
-      ( mere-equiv-UU-Fin B))
+      ( has-cardinality-type-UU-Fin A)
+      ( has-cardinality-type-UU-Fin B))
     ( mere-equiv-Prop
       ( Fin (n choose-ℕ m))
       ( small-binomial-type (pr1 A) (pr1 B)))

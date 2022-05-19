@@ -35,7 +35,8 @@ open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
 open import univalent-combinatorics.2-element-types using
-  ( 2-Element-Type; type-2-Element-Type; map-swap-2-Element-Type)
+  ( 2-Element-Type; type-2-Element-Type; map-swap-2-Element-Type;
+    has-two-elements; has-two-elements-type-2-Element-Type)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( is-set-Fin; has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
@@ -71,9 +72,9 @@ module _
   type-unordered-pair : UU lzero
   type-unordered-pair = type-2-Element-Type 2-element-type-unordered-pair
 
-  has-two-elements-type-unordered-pair :
-    mere-equiv (Fin 2) type-unordered-pair
-  has-two-elements-type-unordered-pair = pr2 (pr1 p)
+  has-two-elements-type-unordered-pair : has-two-elements type-unordered-pair
+  has-two-elements-type-unordered-pair =
+    has-two-elements-type-2-Element-Type 2-element-type-unordered-pair
 
   is-set-type-unordered-pair : is-set type-unordered-pair
   is-set-type-unordered-pair =
@@ -227,8 +228,8 @@ is-commutative-standard-unordered-pair x y =
 map-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-pair A → unordered-pair B
-pr1 (map-unordered-pair f x) = 2-element-type-unordered-pair x
-pr2 (map-unordered-pair f x) = f ∘ (element-unordered-pair x)
+pr1 (map-unordered-pair f p) = 2-element-type-unordered-pair p
+pr2 (map-unordered-pair f p) = f ∘ element-unordered-pair p
 
 preserves-comp-map-unordered-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}

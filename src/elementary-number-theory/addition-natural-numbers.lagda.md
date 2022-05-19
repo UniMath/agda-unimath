@@ -1,15 +1,19 @@
-# Addition on the natural numbers
+---
+title: Addition on the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module elementary-number-theory.addition-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using (is-set-ℕ)
+open import elementary-number-theory.equality-natural-numbers using
+  ( is-set-ℕ; ℕ-Set)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ)
+  
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (pair)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (id)
@@ -18,9 +22,13 @@ open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.negation using (¬)
+open import foundation.universe-levels using (lzero)
+
+open import group-theory.monoids using (Monoid)
+open import group-theory.semigroups using (Semigroup)
 ```
 
-##  Addition and multiplication on ℕ
+## Definition
 
 ```agda
 add-ℕ : ℕ → ℕ → ℕ
@@ -35,7 +43,9 @@ ap-add-ℕ :
 ap-add-ℕ p q = ap-binary add-ℕ p q
 ```
 
-## The laws of addition on ℕ
+## Properties
+
+### The laws of addition on ℕ
 
 ```agda
 right-unit-law-add-ℕ :
@@ -134,4 +144,19 @@ neq-add-ℕ (succ-ℕ m) n p =
   neq-add-ℕ m n
     ( ( is-injective-succ-ℕ p) ∙
       ( left-successor-law-add-ℕ m n))
+```
+
+### The natural numbers with addition is a monoid
+
+```agda
+ℕ-Semigroup : Semigroup lzero
+pr1 ℕ-Semigroup = ℕ-Set
+pr1 (pr2 ℕ-Semigroup) = add-ℕ
+pr2 (pr2 ℕ-Semigroup) = associative-add-ℕ
+
+ℕ-Monoid : Monoid lzero
+pr1 ℕ-Monoid = ℕ-Semigroup
+pr1 (pr2 ℕ-Monoid) = 0
+pr1 (pr2 (pr2 ℕ-Monoid)) = left-unit-law-add-ℕ
+pr2 (pr2 (pr2 ℕ-Monoid)) = right-unit-law-add-ℕ
 ```

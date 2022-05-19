@@ -25,9 +25,9 @@ open import foundation.structure-identity-principle
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.pointed-homotopies
-open import synthetic-homotopy-theory.pointed-maps
-open import synthetic-homotopy-theory.pointed-types
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 ```agda
