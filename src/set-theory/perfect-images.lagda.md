@@ -156,7 +156,7 @@ module _
       v = tr (λ _ → ¬ (is-perfect-image f g _)) q s
 ```
 
-Using the property above, we can talk about ancestor of `a` which are not images of `g`.
+Using the property above, we can talk about origins of `a` which are not images of `g`.
 
 ```agda
 module _
