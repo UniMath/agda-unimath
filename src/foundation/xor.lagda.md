@@ -74,7 +74,7 @@ module _
   where
 
   xor : UU (l1 ⊔ l2)
-  xor = coprod (A × ¬ B) (¬ A × B)
+  xor = coprod (A × ¬ B) (B × ¬ A)
 ```
 
 ### Exclusive disjunction of propositions
@@ -85,11 +85,11 @@ module _
   where
 
   xor-Prop : UU-Prop (l1 ⊔ l2)
-  xor-Prop =
+  xor-Prop = 
     coprod-Prop
       ( conj-Prop P (neg-Prop Q))
-      ( conj-Prop (neg-Prop P) Q)
-      ( λ p q → pr1 q (pr1 p))
+      ( conj-Prop Q (neg-Prop P))
+      ( λ p q → pr2 q (pr1 p))
 
   type-xor-Prop : UU (l1 ⊔ l2)
   type-xor-Prop = type-Prop xor-Prop
@@ -182,11 +182,11 @@ module _
   xor-commutative-xor (pair (inr star) (pair q np)) =
     inr
       ( pair
+        ( q)
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
           ( compute-swap-Fin-two-ℕ one-Fin)
-          ( np))
-        ( q))
+          ( np)))
 
   commutative-xor-xor :
     xor A B → commutative-xor (standard-unordered-pair A B)
@@ -198,47 +198,15 @@ module _
       ( inv (compute-swap-Fin-two-ℕ zero-Fin))
       ( nb)
   pr1 (commutative-xor-xor (inr (pair na b))) = one-Fin
-  pr1 (pr2 (commutative-xor-xor (inr (pair na b)))) = b
-  pr2 (pr2 (commutative-xor-xor (inr (pair na b)))) =
+  pr1 (pr2 (commutative-xor-xor (inr (pair b na)))) = b
+  pr2 (pr2 (commutative-xor-xor (inr (pair b na)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
       ( inv (compute-swap-Fin-two-ℕ one-Fin))
       ( na)
-```
 
-```agda
-xor-commutative-xor-Prop :
-  {l : Level} (P Q : UU-Prop l) →
-  type-hom-Prop
-    ( commutative-xor-Prop (standard-unordered-pair P Q))
-    ( xor-Prop P Q)
-xor-commutative-xor-Prop P Q x =
-  {!xor-commutative-xor (map-unordered-pair type-Prop (standard-unordered-pair P Q))!}
 
-eq-commutative-xor-xor' :
-  {l : Level} (P Q : UU-Prop l) →
-  Id (commutative-xor-Prop (standard-unordered-pair P Q)) (xor-Prop P Q)
-eq-commutative-xor-xor' P Q = eq-iff ϕ ψ
-  where
-  ϕ : type-Prop (commutative-xor-Prop (standard-unordered-pair P Q)) →
-      type-Prop (xor-Prop P Q)
-  ϕ (pair (inl (inr star)) u) = {!!}
-  ϕ (pair (inr star) u) = {!!}
-  ψ : type-Prop (xor-Prop P Q) →
-      type-Prop (commutative-xor-Prop (standard-unordered-pair P Q))
-  pr1 (ψ (inl (pair p nq))) = zero-Fin
-  pr1 (pr2 (ψ (inl (pair p nq)))) = p
-  pr2 (pr2 (ψ (inl (pair p nq)))) =
-    tr ( λ t →
-         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
-       ( inv (compute-swap-Fin-two-ℕ zero-Fin))
-       ( nq)
-  ψ (inr (pair np q)) = {!!}
-
-eq-commmutative-xor-xor :
-  {l : Level} (P Q : UU-Prop l) →
-  Id (commutative-xor-Prop (standard-unordered-pair P Q)) (xor-Prop P Q)
-eq-commmutative-xor-xor P Q =
+{-
   eq-equiv-Prop
     ( ( ( equiv-coprod
           ( ( ( left-unit-law-coprod (type-Prop (conj-Prop P (neg-Prop Q)))) ∘e
@@ -310,6 +278,63 @@ eq-commmutative-xor-xor P Q =
                   ( map-swap-2-Element-Type
                     ( pr1 (standard-unordered-pair P Q))
                     ( x)))))))))
+-}
+```
+
+```agda
+module _
+  {l : Level} (P Q : UU-Prop l)
+  where
+  
+  xor-commutative-xor-Prop :
+    type-hom-Prop
+      ( commutative-xor-Prop (standard-unordered-pair P Q))
+      ( xor-Prop P Q)
+  xor-commutative-xor-Prop (pair (inl (inr star)) (pair p nq)) =
+    inl
+      ( pair p
+        ( tr
+          ( λ t →
+            ¬ ( type-Prop
+                ( element-unordered-pair (standard-unordered-pair P Q) t)))
+          ( compute-swap-Fin-two-ℕ zero-Fin)
+          ( nq)))
+  xor-commutative-xor-Prop (pair (inr star) (pair q np)) =
+    inr
+      ( pair q
+        ( tr
+          ( λ t →
+            ¬ ( type-Prop
+                ( element-unordered-pair (standard-unordered-pair P Q) t)))
+          ( compute-swap-Fin-two-ℕ one-Fin)
+          ( np)))
+
+  commutative-xor-xor-Prop :
+    type-hom-Prop
+      ( xor-Prop P Q)
+      ( commutative-xor-Prop (standard-unordered-pair P Q))
+  pr1 (commutative-xor-xor-Prop (inl (pair p nq))) = zero-Fin
+  pr1 (pr2 (commutative-xor-xor-Prop (inl (pair p nq)))) = p
+  pr2 (pr2 (commutative-xor-xor-Prop (inl (pair p nq)))) =
+    tr
+      ( λ t →
+        ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
+      ( inv (compute-swap-Fin-two-ℕ zero-Fin))
+      ( nq)
+  pr1 (commutative-xor-xor-Prop (inr (pair q np))) = one-Fin
+  pr1 (pr2 (commutative-xor-xor-Prop (inr (pair q np)))) = q
+  pr2 (pr2 (commutative-xor-xor-Prop (inr (pair q np)))) =
+    tr
+      ( λ t →
+        ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
+      ( inv (compute-swap-Fin-two-ℕ one-Fin))
+      ( np)
+
+eq-commmutative-xor-xor :
+  {l : Level} (P Q : UU-Prop l) →
+  Id (commutative-xor-Prop (standard-unordered-pair P Q)) (xor-Prop P Q)
+eq-commmutative-xor-xor P Q =
+  eq-iff (xor-commutative-xor-Prop P Q) (commutative-xor-xor-Prop P Q)
 ```
 
 ### Exclusive disjunction of decidable propositions
@@ -321,7 +346,7 @@ is-decidable-xor :
 is-decidable-xor d e =
   is-decidable-coprod
     ( is-decidable-prod d (is-decidable-neg e))
-    ( is-decidable-prod (is-decidable-neg d) e)
+    ( is-decidable-prod e (is-decidable-neg d))
 
 xor-decidable-Prop :
   {l1 l2 : Level} → decidable-Prop l1 → decidable-Prop l2 →
@@ -331,8 +356,11 @@ pr1 (xor-decidable-Prop P Q) =
 pr1 (pr2 (xor-decidable-Prop P Q)) =
   is-prop-type-xor-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
 pr2 (pr2 (xor-decidable-Prop P Q)) =
-  is-decidable-xor
-    ( is-decidable-type-decidable-Prop P)
-    ( is-decidable-type-decidable-Prop Q)
+  is-decidable-coprod
+    ( is-decidable-prod
+      ( is-decidable-type-decidable-Prop P)
+      ( is-decidable-neg (is-decidable-type-decidable-Prop Q)))
+    ( is-decidable-prod
+      ( is-decidable-type-decidable-Prop Q)
+      ( is-decidable-neg (is-decidable-type-decidable-Prop P)))
 ```
-

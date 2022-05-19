@@ -16,5 +16,6 @@ open import ring-theory.isomorphisms-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.nontrivial-rings public
 open import ring-theory.opposite-rings public
+open import ring-theory.products-rings public
 open import ring-theory.rings public
 ```

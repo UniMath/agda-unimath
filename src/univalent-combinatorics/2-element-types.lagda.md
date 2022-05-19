@@ -82,7 +82,7 @@ open import univalent-combinatorics.finite-types using
     Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
-    is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ; succ-Fin)
+    is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
 ```
 
 ## Idea

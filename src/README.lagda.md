@@ -562,6 +562,7 @@ open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
 open import ring-theory.nontrivial-rings
 open import ring-theory.opposite-rings
+open import ring-theory.products-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```
