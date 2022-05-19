@@ -1,4 +1,6 @@
-# Perfect Images
+---
+title: Perfect Images
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
