@@ -29,43 +29,60 @@ The symmetric difference of two subtypes `A` and `B` is the subtypes that contai
 
 ```agda
 module _
-  {l l1 l2 : Level} (X : UU l)
+  {l l1 l2 : Level} {X : UU l}
   where
 
-  symmetric-difference-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
+  symmetric-difference-subtype :
+    subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
   symmetric-difference-subtype P Q x = xor-Prop (P x) (Q x)
 
-  symmetric-difference-decidable-subtype : decidable-subtype l1 X → decidable-subtype l2 X →
+  symmetric-difference-decidable-subtype :
+    decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
   symmetric-difference-decidable-subtype P Q x = xor-decidable-Prop (P x) (Q x)
+```
 
-  left-cases-equiv-symmetric-difference : (P : decidable-subtype l1 X) (Q : decidable-subtype l2 X) →
-    (x : X) → type-decidable-Prop (P x) → is-decidable (type-decidable-Prop (Q x)) →
+## Properties
+
+### The coproduct of two decidable subtypes is equivalent to their symmetric difference plus two times their intersection
+
+```
+module _
+  {l l1 l2 : Level} {X : UU l}
+  where
+
+  left-cases-equiv-symmetric-difference :
+    (P : decidable-subtype l1 X) (Q : decidable-subtype l2 X) →
+    (x : X) → type-decidable-Prop (P x) →
+    is-decidable (type-decidable-Prop (Q x)) →
     coprod
-      (type-decidable-subtype
-        (symmetric-difference-decidable-subtype P Q))
-      (coprod
-        (type-decidable-subtype (intersection-decidable-subtype X P Q))
-        (type-decidable-subtype (intersection-decidable-subtype X P Q)))
+      ( type-decidable-subtype
+        ( symmetric-difference-decidable-subtype P Q))
+      ( coprod
+        ( type-decidable-subtype (intersection-decidable-subtype X P Q))
+        ( type-decidable-subtype (intersection-decidable-subtype X P Q)))
   left-cases-equiv-symmetric-difference P Q x p (inl q) = 
     inr (inl (pair x (pair p q)))
   left-cases-equiv-symmetric-difference P Q x p (inr nq) =
     inl (pair x (inl (pair p nq)))
 
-  right-cases-equiv-symmetric-difference : (P : decidable-subtype l1 X) (Q : decidable-subtype l2 X) →
-    (x : X) → type-decidable-Prop (Q x) → is-decidable (type-decidable-Prop (P x)) →
+  right-cases-equiv-symmetric-difference :
+    ( P : decidable-subtype l1 X) (Q : decidable-subtype l2 X) →
+    (x : X) → type-decidable-Prop (Q x) →
+    is-decidable (type-decidable-Prop (P x)) →
     coprod
-      (type-decidable-subtype
-        (symmetric-difference-decidable-subtype P Q))
-      (coprod
-        (type-decidable-subtype (intersection-decidable-subtype X P Q))
-        (type-decidable-subtype (intersection-decidable-subtype X P Q)))
+      ( type-decidable-subtype
+        ( symmetric-difference-decidable-subtype P Q))
+      ( coprod
+        ( type-decidable-subtype (intersection-decidable-subtype X P Q))
+        ( type-decidable-subtype (intersection-decidable-subtype X P Q)))
   right-cases-equiv-symmetric-difference P Q x q (inl p) = 
     inr (inr (pair x (pair p q)))
   right-cases-equiv-symmetric-difference P Q x q (inr np) =
-    inl (pair x (inr (pair np q)))
+    inl (pair x (inr (pair q np)))
 
-  equiv-symmetric-difference : (P : decidable-subtype l1 X) (Q : decidable-subtype l2 X) →
+  equiv-symmetric-difference :
+    (P : decidable-subtype l1 X) (Q : decidable-subtype l2 X) →
     ( coprod (type-decidable-subtype P) (type-decidable-subtype Q) ≃
       coprod
         ( type-decidable-subtype (symmetric-difference-decidable-subtype P Q))
@@ -73,10 +90,13 @@ module _
           ( type-decidable-subtype (intersection-decidable-subtype X P Q))
           ( type-decidable-subtype (intersection-decidable-subtype X P Q))))
   pr1 (equiv-symmetric-difference P Q) (inl (pair x p)) =
-    left-cases-equiv-symmetric-difference P Q x p (is-decidable-type-decidable-Prop (Q x))
+    left-cases-equiv-symmetric-difference P Q x p
+      ( is-decidable-type-decidable-Prop (Q x))
   pr1 (equiv-symmetric-difference P Q) (inr (pair x q)) =
-    right-cases-equiv-symmetric-difference P Q x q (is-decidable-type-decidable-Prop (P x))
-  pr2 (equiv-symmetric-difference P Q) = is-equiv-has-inverse inv retr sec
+    right-cases-equiv-symmetric-difference P Q x q
+      ( is-decidable-type-decidable-Prop (P x))
+  pr2 (equiv-symmetric-difference P Q) =
+    is-equiv-has-inverse inv retr sec
     where
     inv : 
       coprod
@@ -87,7 +107,7 @@ module _
           (type-decidable-subtype (intersection-decidable-subtype X P Q))) →
         coprod (type-decidable-subtype P) (type-decidable-subtype Q)
     inv (inl (pair x (inl (pair p nq)))) = inl (pair x p)
-    inv (inl (pair x (inr (pair np q)))) = inr (pair x q)
+    inv (inl (pair x (inr (pair q np)))) = inr (pair x q)
     inv (inr (inl (pair x (pair p q)))) = inl (pair x p)
     inv (inr (inr (pair x (pair p q)))) = inr (pair x q)
     retr :
@@ -102,9 +122,9 @@ module _
         ( λ q' → Id (left-cases-equiv-symmetric-difference P Q x p q') (inl (pair x (inl (pair p nq)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-decidable-Prop (Q x))))
         ( refl)
-    retr (inl (pair x (inr (pair np q)))) =
+    retr (inl (pair x (inr (pair q np)))) =
       tr
-        ( λ p' → Id (right-cases-equiv-symmetric-difference P Q x q p') (inl (pair x (inr (pair np q)))))
+        ( λ p' → Id (right-cases-equiv-symmetric-difference P Q x q p') (inl (pair x (inr (pair q np)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-decidable-Prop (P x))))
         ( refl)
     retr (inr (inl (pair x (pair p q)))) =
