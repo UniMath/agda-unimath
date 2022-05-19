@@ -5,30 +5,19 @@
 
 module set-theory.cantor-schroder-bernstein where
 
-open import elementary-number-theory.natural-numbers using
-  (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
-open import foundation.decidable-types using
-  (is-decidable; dn-elim-is-decidable)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.double-negation using (¬¬)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fibers-of-maps using(fib)
-open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
+open import foundation.identity-types using (Id; inv; ap; _∙_)
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
-open import foundation.iterating-functions using (iterate)
 open import foundation.law-of-excluded-middle using (LEM)
-open import foundation.negation using (¬; is-prop-neg)
-open import foundation.propositions using
-  (is-prop; eq-is-prop'; is-prop-Π; is-prop-Σ)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.retractions using (retr)
-open import foundation.sections using (sec)
+open import foundation.negation using (¬)
 open import foundation.split-surjective-maps using
   (is-split-surjective; is-equiv-is-split-surjective-is-injective)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
