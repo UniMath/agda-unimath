@@ -185,6 +185,7 @@ open import foundation.2-types
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
+open import foundation.bands
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences-unordered-pairs-of-types
 open import foundation.binary-equivalences
@@ -199,6 +200,7 @@ open import foundation.coherently-invertible-maps
 open import foundation.commutative-operations
 open import foundation.commuting-squares
 open import foundation.complements
+open import foundation.cones-pullbacks
 open import foundation.conjunction
 open import foundation.connected-components-universes
 open import foundation.connected-components
@@ -388,6 +390,7 @@ open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.commuting-squares
+open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -401,8 +404,11 @@ open import foundation-core.equivalence-induction
 open import foundation-core.equivalences
 open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality
 open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-systems
@@ -412,6 +418,7 @@ open import foundation-core.negation
 open import foundation-core.path-split-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.sets
@@ -424,6 +431,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.univalence
+open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 ```
 
@@ -491,10 +499,11 @@ open import group-theory.isomorphisms-group-actions
 open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.mere-equivalences-group-actions
+open import group-theory.monoid-actions
 open import group-theory.monoids
 open import group-theory.monomorphisms-groups
-open import group-theory.orbits-monoid-actions
 open import group-theory.orbits-group-actions
+open import group-theory.orbits-monoid-actions
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
 open import group-theory.precategory-of-semigroups
@@ -546,6 +555,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.largest-elements-posets
 open import order-theory.largest-elements-preorders
+open import order-theory.lattices
 open import order-theory.least-elements-posets
 open import order-theory.least-elements-preorders
 open import order-theory.least-upper-bounds-posets
@@ -553,6 +563,8 @@ open import order-theory.locally-finite-posets
 open import order-theory.maximal-chains-posets
 open import order-theory.maximal-chains-preorders
 open import order-theory.meet-semilattices
+open import order-theory.order-preserving-maps-posets
+open import order-theory.order-preserving-maps-preorders
 open import order-theory.planar-binary-trees
 open import order-theory.posets
 open import order-theory.preorders
@@ -600,6 +612,7 @@ open import set-theory.uncountable-sets
 
 ```agda
 open import structured-types
+open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.finite-multiplication-magmas
 open import structured-types.magmas
@@ -634,6 +647,7 @@ open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.cofibers
 open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
@@ -641,9 +655,11 @@ open import synthetic-homotopy-theory.groups-of-loops-in-1-types
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
+open import synthetic-homotopy-theory.wedges-of-pointed-types
 ```
 
 ## Tutorials
@@ -675,6 +691,7 @@ open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.composition-species
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
@@ -724,6 +741,7 @@ open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
+open import univalent-combinatorics.sequences-finite-types
 open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.species
 open import univalent-combinatorics.standard-finite-pruned-trees
