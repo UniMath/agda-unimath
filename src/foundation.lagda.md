@@ -18,6 +18,7 @@ open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-relations public
 open import foundation.boolean-reflection public
 open import foundation.booleans public
+open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public

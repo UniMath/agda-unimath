@@ -5,7 +5,7 @@ title: Perfect Images
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module set-theory.perfect-images where
+module foundation.perfect-images where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)

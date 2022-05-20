@@ -5,7 +5,7 @@ title: Cantor-Schröder-Bernstein
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module set-theory.cantor-schroder-bernstein where
+module foundation.cantor-schroder-bernstein-escardo where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
@@ -20,31 +20,29 @@ open import foundation.identity-types using (Id; inv; ap; _∙_)
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
 open import foundation.law-of-excluded-middle using (LEM)
 open import foundation.negation using (¬)
+open import foundation.perfect-images
 open import foundation.split-surjective-maps using
   (is-split-surjective; is-equiv-is-split-surjective-is-injective)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
-open import set-theory.perfect-images
 ```
 
 ## Idea
 
-The classical Cantor–Schröder–Bernstein Theorem of set theory, formulated by Cantor and first proved by Bernstein, states that for any pair of sets `A` and `B`, if there are injective maps `f : A → B` and `g : B → A`, then one can find a bijection `h : A → B`. There are proofs that use the principle of excluded middle but not the axiom of choice. That the principle excluded middle is absolutely necessary.
+The classical Cantor-Schröder-Bernstein theorem asserts that from any pair of injective maps `f : A → B` and `g : B → A` we can construct a bijection between `A` and `B`. In a recent generalization [1], Escardó proved that the Cantor-Schröder-Bernstein theorem also holds for ∞-groupoids. His generalization asserts that from given embeddings of two types into each other, we can construct an equivalence between them.
 
-Here, we will prove the following theorem assuming the terminology and notation of the HoTT book.
-
-From given embeddings of two types into each other, we can construct an equivalence between them using the principle of excluded middle.
-
-The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.html), [Link 2](https://github.com/martinescardo/TypeTopology)). We will follow the same proof but using agda.unimath library notation.
-
-### Proof
-
-We will prove that LEM implies Cantor-Schröder-Bernstein.
+## Statement
 
 ```agda
 cantor-schroder-bernstein : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 cantor-schroder-bernstein l1 l2 =
   {X : UU l1} {Y : UU l2} → ((X ↪ Y) × (Y ↪ X) → X ≃ Y)
+```
 
+## Proof
+
+We will prove that LEM implies Cantor-Schröder-Bernstein.
+
+```agda
 LEM-implies-cantor-schroder-bernstein :
   {l1 l2 : Level} →
   LEM (l1 ⊔ l2) →
@@ -135,3 +133,7 @@ It is convenient to work with the following auxiliary function `H` and prove pro
         is-injective-h
         is-split-surjective-h
 ```
+
+## References
+
+[1] The idea and the proof is given by Martin Escardo in his paper ["The Cantor–Schröder–Bernstein Theorem for ∞-groupoids"](https://doi.org/10.1007/s40062-021-00284-6). Also, the proof is formalized in Agda ([Link 1](https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.html), [Link 2](https://github.com/martinescardo/TypeTopology)). 

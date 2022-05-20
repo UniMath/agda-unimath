@@ -193,6 +193,7 @@ open import foundation.binary-operations-unordered-pairs-of-types
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
+open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
@@ -585,10 +586,12 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
+open import ring-theory.dependent-products-rings
 open import ring-theory.division-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
+open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
@@ -603,7 +606,6 @@ open import ring-theory.subsets-rings
 
 ```agda
 open import set-theory
-open import set-theory.cantor-schroder-bernstein
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```

@@ -7,10 +7,12 @@ title: Ring theory
 
 module ring-theory where
 
+open import ring-theory.dependent-products-rings public
 open import ring-theory.division-rings public
 open import ring-theory.homomorphisms-rings public
 open import ring-theory.ideals-generated-by-subsets-rings public
 open import ring-theory.ideals-rings public
+open import ring-theory.invariant-basis-property-rings public
 open import ring-theory.invertible-elements-rings public
 open import ring-theory.isomorphisms-rings public
 open import ring-theory.localizations-rings public

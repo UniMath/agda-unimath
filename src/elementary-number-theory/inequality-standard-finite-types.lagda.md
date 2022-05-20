@@ -21,6 +21,9 @@ open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 
+open import order-theory.posets using (Poset)
+open import order-theory.preorders using (Preorder)
+
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; neg-one-Fin; inl-Fin; succ-Fin; nat-Fin; strict-upper-bound-nat-Fin)
 ```
@@ -53,18 +56,18 @@ refl-leq-Fin {succ-ℕ k} (inl x) = refl-leq-Fin x
 refl-leq-Fin {succ-ℕ k} (inr star) = star
 
 antisymmetric-leq-Fin :
-  {k : ℕ} {x y : Fin k} → leq-Fin x y → leq-Fin y x → Id x y
-antisymmetric-leq-Fin {succ-ℕ k} {inl x} {inl y} H K =
-  ap inl (antisymmetric-leq-Fin H K)
-antisymmetric-leq-Fin {succ-ℕ k} {inr star} {inr star} H K = refl
+  {k : ℕ} (x y : Fin k) → leq-Fin x y → leq-Fin y x → Id x y
+antisymmetric-leq-Fin {succ-ℕ k} (inl x) (inl y) H K =
+  ap inl (antisymmetric-leq-Fin x y H K)
+antisymmetric-leq-Fin {succ-ℕ k} (inr star) (inr star) H K = refl
 
 transitive-leq-Fin :
-  {k : ℕ} {x y z : Fin k} → leq-Fin x y → leq-Fin {k} y z → leq-Fin {k} x z
-transitive-leq-Fin {succ-ℕ k} {inl x} {inl y} {inl z} H K =
-  transitive-leq-Fin {k} H K
-transitive-leq-Fin {succ-ℕ k} {inl x} {inl y} {inr star} H K = star
-transitive-leq-Fin {succ-ℕ k} {inl x} {inr star} {inr star} H K = star
-transitive-leq-Fin {succ-ℕ k} {inr star} {inr star} {inr star} H K = star
+  {k : ℕ} (x y z : Fin k) → leq-Fin y z → leq-Fin {k} x y → leq-Fin {k} x z
+transitive-leq-Fin {succ-ℕ k} (inl x) (inl y) (inl z) H K =
+  transitive-leq-Fin {k} x y z H K
+transitive-leq-Fin {succ-ℕ k} (inl x) (inl y) (inr star) H K = star
+transitive-leq-Fin {succ-ℕ k} (inl x) (inr star) (inr star) H K = star
+transitive-leq-Fin {succ-ℕ k} (inr star) (inr star) (inr star) H K = star
 
 concatenate-eq-leq-eq-Fin :
   {k : ℕ} {x1 x2 x3 x4 : Fin k} →
@@ -93,4 +96,23 @@ reflects-leq-nat-Fin {succ-ℕ k} {inr star} {inl y} H =
   ex-falso (contradiction-le-ℕ (nat-Fin y) k (strict-upper-bound-nat-Fin y) H)
 reflects-leq-nat-Fin {succ-ℕ k} {inl x} {inr star} H = star
 reflects-leq-nat-Fin {succ-ℕ k} {inr star} {inr star} H = star
+```
+
+## Properties
+
+### The preordering on the standard finite types
+
+```agda
+fin-Preorder : ℕ → Preorder lzero lzero
+pr1 (fin-Preorder k) = Fin k
+pr1 (pr2 (fin-Preorder k)) = leq-fin-Prop
+pr1 (pr2 (pr2 (fin-Preorder k))) = refl-leq-Fin
+pr2 (pr2 (pr2 (fin-Preorder k))) = transitive-leq-Fin
+
+fin-Poset : ℕ → Poset lzero lzero
+pr1 (fin-Poset k) = Fin k
+pr1 (pr2 (fin-Poset k)) = leq-fin-Prop
+pr1 (pr1 (pr2 (pr2 (fin-Poset k)))) = refl-leq-Fin
+pr2 (pr1 (pr2 (pr2 (fin-Poset k)))) = transitive-leq-Fin
+pr2 (pr2 (pr2 (fin-Poset k))) = antisymmetric-leq-Fin
 ```
