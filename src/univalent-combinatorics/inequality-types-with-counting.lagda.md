@@ -48,13 +48,16 @@ antisymmetric-leq-count :
   {l : Level} {X : UU l} (e : count X) {x y : X} →
   leq-count e x y → leq-count e y x → Id x y
 antisymmetric-leq-count (pair k e) H K =
-  is-injective-map-inv-equiv e (antisymmetric-leq-Fin H K)
+  is-injective-map-inv-equiv e (antisymmetric-leq-Fin _ _ H K)
 
 transitive-leq-count :
   {l : Level} {X : UU l} (e : count X) {x y z : X} →
-  leq-count e x y → leq-count e y z → leq-count e x z
-transitive-leq-count (pair k e) {x} {y} {z} H K =
-  transitive-leq-Fin {x = map-inv-equiv e x} {map-inv-equiv e y} H K
+  leq-count e y z → leq-count e x y → leq-count e x z
+transitive-leq-count (pair k e) {x} {y} {z} =
+  transitive-leq-Fin
+    ( map-inv-equiv e x)
+    ( map-inv-equiv e y)
+    ( map-inv-equiv-count (pair k e) z)
 
 preserves-leq-equiv-count :
   {l : Level} {X : UU l} (e : count X)

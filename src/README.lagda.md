@@ -585,10 +585,12 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
+open import ring-theory.dependent-products-rings
 open import ring-theory.division-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
+open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
