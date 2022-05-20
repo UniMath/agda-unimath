@@ -661,7 +661,42 @@ module _
 module _
   {l : Level} {X : UU l} (eX : count X) (ineq : leq-ℕ 2 (number-of-elements-count eX))
   where
+
+  cases-orientation-aut-count : (e : X ≃ X) →
+    ( Y : 2-Element-Decidable-Subtype l X) →
+    ( two-elements : Σ X
+      ( λ x → Σ X
+        ( λ y → Σ (¬ (Id x y))
+          ( λ np →
+            Id
+              ( standard-2-Element-Decidable-Subtype
+                ( has-decidable-equality-count eX)
+                ( np))
+              ( Y))))) →
+    is-decidable (Id (map-equiv e (pr1 two-elements)) (pr1 two-elements)) →
+    is-decidable (Id (map-equiv e (pr1 (pr2 two-elements))) (pr1 (pr2 two-elements))) →
+    Σ X (λ z → type-decidable-Prop (pr1 Y z))
+  cases-orientation-aut-count e Y (pair x (pair y (pair np P))) q (inl r) =
+    pair y (tr (λ Z → type-decidable-Prop (pr1 Z y)) P (inr refl))
+  cases-orientation-aut-count e Y (pair x (pair y (pair np P))) (inl q) (inr nr) =
+    pair x (tr (λ Z → type-decidable-Prop (pr1 Z x)) P (inl refl))
+  cases-orientation-aut-count e Y (pair x (pair y (pair np P))) (inr nq) (inr nr) =
+    pair y (tr (λ Z → type-decidable-Prop (pr1 Z y)) P (inr refl))
  
+  orientation-aut-count : X ≃ X →
+    orientation-Complete-Undirected-Graph
+      ( number-of-elements-count eX)
+      ( pair X (unit-trunc-Prop (equiv-count eX)))
+  orientation-aut-count e Y =
+    cases-orientation-aut-count e Y
+      ( two-elements-transposition eX Y)
+      ( has-decidable-equality-count eX
+        ( map-equiv e (pr1 (two-elements-transposition eX Y)))
+        ( pr1 (two-elements-transposition eX Y)))
+      ( has-decidable-equality-count eX
+        ( map-equiv e (pr1 (pr2 (two-elements-transposition eX Y))))
+        ( pr1 (pr2 (two-elements-transposition eX Y))))
+    
   first-element-count : X
   first-element-count =
     map-equiv-count
@@ -696,7 +731,6 @@ module _
     standard-2-Element-Decidable-Subtype
       ( has-decidable-equality-count eX)
       ( distinct-two-elements-count)
-      
 
   cases-orientation-two-elements-count : (i j : X)
     (Y : 2-Element-Decidable-Subtype l X) →
