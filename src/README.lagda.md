@@ -193,6 +193,7 @@ open import foundation.binary-operations-unordered-pairs-of-types
 open import foundation.binary-relations
 open import foundation.boolean-reflection
 open import foundation.booleans
+open import foundation.cantor-schroder-bernstein-escardo
 open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
@@ -605,7 +606,6 @@ open import ring-theory.subsets-rings
 
 ```agda
 open import set-theory
-open import set-theory.cantor-schroder-bernstein
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```

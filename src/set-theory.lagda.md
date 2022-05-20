@@ -7,7 +7,6 @@ title: Set theory
 
 module set-theory where
 
-open import set-theory.cantor-schroder-bernstein public
 open import set-theory.countable-sets public
 open import set-theory.uncountable-sets public
 ```
