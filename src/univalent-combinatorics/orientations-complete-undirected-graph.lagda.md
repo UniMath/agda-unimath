@@ -492,57 +492,57 @@ module _
                 ( ap (λ h → map-equiv h (pr1 (d Y))) (left-inverse-law-equiv (inv-equiv e))))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
 
-  preserves-id-equiv-orientation-complete-undirected-graph-equiv :
-    (X : UU-Fin-Level l n) →
-    Id (orientation-complete-undirected-graph-equiv X X id-equiv) id-equiv
-  preserves-id-equiv-orientation-complete-undirected-graph-equiv X =
-    eq-htpy-equiv
-      ( λ d →
-        eq-htpy
-          ( λ Y →
-            eq-pair-Σ
-              ( ap (λ Y' → pr1 (d Y')) (eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
-              ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
-
-  preserves-comp-orientation-complete-undirected-graph-equiv :
-    ( X Y Z : UU-Fin-Level l n) (e : type-UU-Fin-Level X ≃ type-UU-Fin-Level Y) →
-    ( f : type-UU-Fin-Level Y ≃ type-UU-Fin-Level Z) →
-    Id
-      ( orientation-complete-undirected-graph-equiv X Z (f ∘e e))
-      ( ( orientation-complete-undirected-graph-equiv X Y e) ∘e
-        ( orientation-complete-undirected-graph-equiv Y Z f))
-  preserves-comp-orientation-complete-undirected-graph-equiv X Y Z e f =
-    eq-htpy-equiv
-      ( λ d →
-        eq-htpy
-          ( λ S →
-            eq-pair-Σ
-              ( ( ap
-                ( λ S' → map-inv-equiv (f ∘e e) (pr1 (d S')))
-                ( htpy-eq
-                  ( preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f)
-                  ( S))) ∙
-                ( ap
-                  ( λ g →
-                    map-equiv
-                      ( g)
-                      ( pr1
-                        ( d
-                          ( ( precomp-equiv-2-Element-Decidable-Subtype f ∘
-                            precomp-equiv-2-Element-Decidable-Subtype e)
-                          ( S)))))
-                  ( distributive-inv-comp-equiv e f)))
-              ( eq-is-prop
-                ( is-prop-type-decidable-Prop
-                  ( pr1 S
-                    ( pr1
-                      ( map-equiv
-                        ( orientation-complete-undirected-graph-equiv X Y e ∘e
-                          orientation-complete-undirected-graph-equiv Y Z f)
-                        ( d)
-                        ( S))))))))
-
   abstract
+    preserves-id-equiv-orientation-complete-undirected-graph-equiv :
+      (X : UU-Fin-Level l n) →
+      Id (orientation-complete-undirected-graph-equiv X X id-equiv) id-equiv
+    preserves-id-equiv-orientation-complete-undirected-graph-equiv X =
+      eq-htpy-equiv
+        ( λ d →
+          eq-htpy
+            ( λ Y →
+              eq-pair-Σ
+                ( ap (λ Y' → pr1 (d Y')) (eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
+                ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
+
+    preserves-comp-orientation-complete-undirected-graph-equiv :
+      ( X Y Z : UU-Fin-Level l n) (e : type-UU-Fin-Level X ≃ type-UU-Fin-Level Y) →
+      ( f : type-UU-Fin-Level Y ≃ type-UU-Fin-Level Z) →
+      Id
+        ( orientation-complete-undirected-graph-equiv X Z (f ∘e e))
+        ( ( orientation-complete-undirected-graph-equiv X Y e) ∘e
+          ( orientation-complete-undirected-graph-equiv Y Z f))
+    preserves-comp-orientation-complete-undirected-graph-equiv X Y Z e f =
+      eq-htpy-equiv
+        ( λ d →
+          eq-htpy
+            ( λ S →
+              eq-pair-Σ
+                ( ( ap
+                  ( λ S' → map-inv-equiv (f ∘e e) (pr1 (d S')))
+                  ( htpy-eq
+                    ( preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f)
+                    ( S))) ∙
+                  ( ap
+                    ( λ g →
+                      map-equiv
+                        ( g)
+                        ( pr1
+                          ( d
+                            ( ( precomp-equiv-2-Element-Decidable-Subtype f ∘
+                              precomp-equiv-2-Element-Decidable-Subtype e)
+                            ( S)))))
+                    ( distributive-inv-comp-equiv e f)))
+                ( eq-is-prop
+                  ( is-prop-type-decidable-Prop
+                    ( pr1 S
+                      ( pr1
+                        ( map-equiv
+                          ( orientation-complete-undirected-graph-equiv X Y e ∘e
+                            orientation-complete-undirected-graph-equiv Y Z f)
+                          ( d)
+                          ( S))))))))
+
     preserves-even-difference-orientation-complete-undirected-graph-equiv :
       (X X' : UU-Fin-Level l n) ( e : type-UU-Fin-Level X ≃ type-UU-Fin-Level X') →
       ( d d' : orientation-Complete-Undirected-Graph n X') →
@@ -657,7 +657,7 @@ module _
           ( P))
 ```
 
-```
+```agda
 module _
   {l : Level} {X : UU l} (eX : count X) (ineq : leq-ℕ 2 (number-of-elements-count eX))
   where

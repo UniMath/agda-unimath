@@ -46,7 +46,8 @@ open import foundation.functoriality-set-quotients using
   ( unique-equiv-is-set-quotient; equiv-is-set-quotient)
 open import foundation.empty-types using (ex-falso)
 open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (Id; inv; _∙_; ap; refl; tr; ap-concat)
+open import foundation.identity-types using
+  ( Id; inv; _∙_; ap; refl; tr; ap-concat; distributive-inv-concat)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (own-inverse-is-involution)
 open import foundation.mere-equivalences using
@@ -71,15 +72,16 @@ open import group-theory.concrete-groups using
   ( hom-Concrete-Group; classifying-type-Concrete-Group;
     abstract-group-Concrete-Group; hom-group-hom-Concrete-Group;
     map-hom-Concrete-Group)
-open import group-theory.groups using (set-Group; type-Group)
+open import group-theory.groups using
+  ( set-Group; type-Group; mul-Group)
 open import group-theory.homomorphisms-generated-subgroups using
   ( restriction-generating-subset-Group)
 open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group)
+  ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group; preserves-mul-hom-Group)
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 open import group-theory.isomorphisms-groups using (hom-iso-Group; hom-inv-iso-Group)
 open import group-theory.loop-groups-sets using
-  ( loop-group-Set; map-hom-symmetric-group-loop-group-Set)
+  ( loop-group-Set; map-hom-symmetric-group-loop-group-Set; hom-symmetric-group-loop-group-Set)
 open import group-theory.symmetric-groups using
   ( symmetric-Group; iso-symmetric-group-abstract-automorphism-group-Set;
     iso-symmetric-group-equiv-Set)
@@ -156,62 +158,63 @@ module _
           ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
         ( star))
 
-  eq-Fin-2-map-cartier-delooping-sign-count : (n : ℕ) →
-    ( X : UU lzero) (eX : Fin n ≃ X) →
-    Id
-      ( map-cartier-delooping-sign n
-        ( pair
-          ( raise-Set l (pair X (is-set-count (pair n eX))))
-          ( unit-trunc-Prop
-            ( eq-pair-Σ
-              ( eq-equiv
-                ( raise l X)
-                ( raise l (Fin n))
-                ( equiv-raise l (Fin n) ∘e (inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-              ( eq-is-prop (is-prop-is-set (raise l (Fin n))))))))
-      ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl))
-  eq-Fin-2-map-cartier-delooping-sign-count zero-ℕ X eX = refl
-  eq-Fin-2-map-cartier-delooping-sign-count (succ-ℕ zero-ℕ) X eX = refl
-  eq-Fin-2-map-cartier-delooping-sign-count (succ-ℕ (succ-ℕ n)) X eX =
-    eq-pair-Σ
-      ( eq-pair-Σ
-        ( eq-equiv
-          ( type-Set
-            ( pr1
-              ( map-cartier-delooping-sign
-                ( succ-ℕ (succ-ℕ n))
-                ( pair
-                  ( raise-Set l (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX))))
-                  ( unit-trunc-Prop
-                    ( eq-pair-Σ
-                      ( eq-equiv
-                        ( raise l X)
-                        ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
-                          ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                      ( eq-is-prop (is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
-          ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-          ( equiv-raise (lsuc l) (Fin 2) ∘e
-            inv-equiv
-              ( equiv-Fin-2-quotient-sign-equiv-Fin-n
-                ( succ-ℕ (succ-ℕ n))
-                ( pair
-                  ( raise l (type-Set (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX)))))
-                  ( functor-trunc-Prop
-                    ( λ p' →
-                      equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
-                        equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
+  abstract
+    eq-Fin-2-map-cartier-delooping-sign-count : (n : ℕ) →
+      ( X : UU lzero) (eX : Fin n ≃ X) →
+      Id
+        ( map-cartier-delooping-sign n
+          ( pair
+            ( raise-Set l (pair X (is-set-count (pair n eX))))
+            ( unit-trunc-Prop
+              ( eq-pair-Σ
+                ( eq-equiv
+                  ( raise l X)
+                  ( raise l (Fin n))
+                  ( equiv-raise l (Fin n) ∘e (inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
+                ( eq-is-prop (is-prop-is-set (raise l (Fin n))))))))
+        ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl))
+    eq-Fin-2-map-cartier-delooping-sign-count zero-ℕ X eX = refl
+    eq-Fin-2-map-cartier-delooping-sign-count (succ-ℕ zero-ℕ) X eX = refl
+    eq-Fin-2-map-cartier-delooping-sign-count (succ-ℕ (succ-ℕ n)) X eX =
+      eq-pair-Σ
+        ( eq-pair-Σ
+          ( eq-equiv
+            ( type-Set
+              ( pr1
+                ( map-cartier-delooping-sign
+                  ( succ-ℕ (succ-ℕ n))
+                  ( pair
+                    ( raise-Set l (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX))))
                     ( unit-trunc-Prop
                       ( eq-pair-Σ
-                        ( eq-equiv (raise l X) (raise l (Fin (succ-ℕ (succ-ℕ n))))
-                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
-                          ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                      ( eq-is-prop
-                        ( is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
-                ( star)
-                ( equiv-raise l X ∘e eX))))
-        ( eq-is-prop (is-prop-is-set _)))
-      ( eq-is-prop is-prop-type-trunc-Prop)
+                        ( eq-equiv
+                          ( raise l X)
+                          ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
+                            ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
+                        ( eq-is-prop (is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
+            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
+            ( equiv-raise (lsuc l) (Fin 2) ∘e
+              inv-equiv
+                ( equiv-Fin-2-quotient-sign-equiv-Fin-n
+                  ( succ-ℕ (succ-ℕ n))
+                  ( pair
+                    ( raise l (type-Set (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX)))))
+                    ( functor-trunc-Prop
+                      ( λ p' →
+                        equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
+                          equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
+                      ( unit-trunc-Prop
+                        ( eq-pair-Σ
+                          ( eq-equiv (raise l X) (raise l (Fin (succ-ℕ (succ-ℕ n))))
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
+                            ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
+                        ( eq-is-prop
+                          ( is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
+                  ( star)
+                  ( equiv-raise l X ∘e eX))))
+          ( eq-is-prop (is-prop-is-set _)))
+        ( eq-is-prop is-prop-type-trunc-Prop)
 
   cartier-delooping-sign : (n : ℕ) →
     hom-Concrete-Group
@@ -292,25 +295,25 @@ module _
       coherence-square
         ( map-orientation-complete-undirected-graph-equiv
           ( succ-ℕ (succ-ℕ n))
-          ( pair Y eY)
           ( pair X eX)
+          ( pair Y eY)
           ( map-hom-symmetric-group-loop-group-Set
-            ( pair X sX)
             ( pair Y sY)
-            ( p)))
-        ( quotient-map-large-set-quotient
-          ( even-difference-orientation-Complete-Undirected-Graph
-            ( succ-ℕ (succ-ℕ n))
-            ( pair X eX)))
+            ( pair X sX)
+            ( inv p)))
         ( quotient-map-large-set-quotient
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( pair Y eY)))
+        ( quotient-map-large-set-quotient
+          ( even-difference-orientation-Complete-Undirected-Graph
+            ( succ-ℕ (succ-ℕ n))
+            ( pair X eX)))
         ( map-equiv
           ( map-hom-symmetric-group-loop-group-Set
-            ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair Y eY))
             ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
-            ( map-cartier-delooping-sign-loop n Y X eY eX (inv p))))
+            ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair Y eY))
+            ( map-cartier-delooping-sign-loop n X Y eX eY p)))
     coherence-square-map-cartier-delooping-sign-loop-Set n X .X eX .eX refl refl sX sY x =
       ( ap
         ( λ w →
@@ -356,7 +359,7 @@ module _
         ( map-hom-symmetric-group-loop-group-Set
           ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
           ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
-          ( p)))
+          ( inv p)))
       ( quotient-map-large-set-quotient
         ( even-difference-orientation-Complete-Undirected-Graph
           ( succ-ℕ (succ-ℕ n))
@@ -386,7 +389,7 @@ module _
             ( raise l (Fin (succ-ℕ (succ-ℕ n))))
             ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
             ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-            ( inv p))))
+            ( p))))
   coherence-square-map-cartier-delooping-sign-loop-Fin n p =
     coherence-square-map-cartier-delooping-sign-loop-Set n
       ( raise l (Fin (succ-ℕ (succ-ℕ n)))) 
@@ -398,7 +401,7 @@ module _
       ( is-set-type-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
       ( is-set-type-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
 
-  private
+  private abstract
     is-contr-equiv-orientation : (n : ℕ) →
       ( p : Id (raise l (Fin (succ-ℕ (succ-ℕ n)))) (raise l (Fin (succ-ℕ (succ-ℕ n))))) →
       is-contr
@@ -427,7 +430,7 @@ module _
                   ( map-hom-symmetric-group-loop-group-Set
                     ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
                     ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
-                    ( p))))
+                    ( inv p))))
               ( quotient-map-large-set-quotient
                 ( even-difference-orientation-Complete-Undirected-Graph
                   ( succ-ℕ (succ-ℕ n))
@@ -496,7 +499,7 @@ module _
           ( map-hom-symmetric-group-loop-group-Set
             ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
             ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
-            ( p)))
+            ( inv p)))
         ( λ {x} {y} →
           preserves-even-difference-orientation-complete-undirected-graph-equiv
             ( succ-ℕ (succ-ℕ n))
@@ -506,53 +509,149 @@ module _
             ( pair
               ( raise l (Fin (succ-ℕ (succ-ℕ n))))
               ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
-            ( equiv-eq (inv p))
+            ( equiv-eq (inv (inv p)))
             ( x)
             ( y))
 
-  eq-cartier-delooping-sign-loop-equiv-is-set-quotient : (n : ℕ) →
-    ( p : Id (raise l (Fin (succ-ℕ (succ-ℕ n)))) (raise l (Fin (succ-ℕ (succ-ℕ n))))) →
-    Id 
-      ( map-hom-symmetric-group-loop-group-Set
+  abstract
+    eq-cartier-delooping-sign-loop-equiv-is-set-quotient : (n : ℕ) →
+      ( p : Id (raise l (Fin (succ-ℕ (succ-ℕ n)))) (raise l (Fin (succ-ℕ (succ-ℕ n))))) →
+      Id 
+        ( map-hom-symmetric-group-loop-group-Set
+          ( quotient-sign-Set
+            ( succ-ℕ (succ-ℕ n))
+            ( pair
+              ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+              ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+          ( quotient-sign-Set
+            ( succ-ℕ (succ-ℕ n))
+            ( pair
+              ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+              ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+          ( map-cartier-delooping-sign-loop n
+            ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+            ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+            ( p)))
+        (pr1 (center (is-contr-equiv-orientation n p)))
+    eq-cartier-delooping-sign-loop-equiv-is-set-quotient n p =
+      ap pr1
+        { x =
+          pair
+            ( map-hom-symmetric-group-loop-group-Set
+              ( quotient-sign-Set
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                  ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+              ( quotient-sign-Set
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                  ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+              ( map-cartier-delooping-sign-loop n
+                ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                ( p)))
+            ( coherence-square-map-cartier-delooping-sign-loop-Fin n p)}
+        { y = center (is-contr-equiv-orientation n p)}
+        ( eq-is-contr (is-contr-equiv-orientation n p))
+
+  hom-equiv-is-set-quotient-orientation : (n : ℕ) →
+    type-hom-Group
+      ( loop-group-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
+      ( symmetric-Group
         ( quotient-sign-Set
           ( succ-ℕ (succ-ℕ n))
           ( pair
             ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
-        ( quotient-sign-Set
-          ( succ-ℕ (succ-ℕ n))
-          ( pair
-            ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
-        ( map-cartier-delooping-sign-loop n
-          ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-          ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-          ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-          ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-          ( inv p)))
-      (pr1 (center (is-contr-equiv-orientation n p)))
-  eq-cartier-delooping-sign-loop-equiv-is-set-quotient n p =
-    ap pr1
-      { x =
-        pair
-          ( map-hom-symmetric-group-loop-group-Set
+            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+  pr1 (hom-equiv-is-set-quotient-orientation n) p =
+    pr1 (center (is-contr-equiv-orientation n p))
+  pr2 (hom-equiv-is-set-quotient-orientation n) p q =
+    ( inv (eq-cartier-delooping-sign-loop-equiv-is-set-quotient n (p ∙ q))) ∙
+      ( ( preserves-mul-hom-Group
+        ( loop-group-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
+        ( symmetric-Group
+          ( quotient-sign-Set
+            ( succ-ℕ (succ-ℕ n))
+            ( pair
+              ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+              ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+        ( comp-hom-Group
+          ( loop-group-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
+          ( loop-group-Set
             ( quotient-sign-Set
               ( succ-ℕ (succ-ℕ n))
               ( pair
                 ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+          ( symmetric-Group
             ( quotient-sign-Set
               ( succ-ℕ (succ-ℕ n))
               ( pair
                 ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
-            ( map-cartier-delooping-sign-loop n
-              ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-              ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-              ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-              ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-              ( inv p)))
-          ( coherence-square-map-cartier-delooping-sign-loop-Fin n p)}
-      { y = center (is-contr-equiv-orientation n p)}
-      ( eq-is-contr (is-contr-equiv-orientation n p))
+                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+          ( hom-symmetric-group-loop-group-Set
+            ( quotient-sign-Set
+              ( succ-ℕ (succ-ℕ n))
+              ( pair
+                ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+          ( cartier-delooping-sign-loop n))
+        ( p)
+        ( q) ∙
+        ( ( ap
+          ( mul-Group
+            ( symmetric-Group
+              ( quotient-sign-Set
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                  ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+            ( map-hom-Group
+              ( loop-group-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
+              ( symmetric-Group
+                ( quotient-sign-Set (succ-ℕ (succ-ℕ n))
+                  ( pair
+                    ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                    (unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+              ( comp-hom-Group
+                ( loop-group-Set (raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n)))))
+                ( loop-group-Set
+                  ( quotient-sign-Set
+                    ( succ-ℕ (succ-ℕ n))
+                    ( pair
+                      ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                      ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                ( symmetric-Group
+                  ( quotient-sign-Set
+                    ( succ-ℕ (succ-ℕ n))
+                    ( pair
+                      ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                      ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                ( hom-symmetric-group-loop-group-Set
+                  ( quotient-sign-Set
+                    ( succ-ℕ (succ-ℕ n))
+                    ( pair
+                      ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                      ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                ( cartier-delooping-sign-loop n))
+              ( p)))
+          ( eq-cartier-delooping-sign-loop-equiv-is-set-quotient n q)) ∙
+          ( ap
+            ( λ s →
+              mul-Group
+                ( symmetric-Group
+                  ( quotient-sign-Set
+                    ( succ-ℕ (succ-ℕ n))
+                    ( pair
+                      ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                      ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                ( s)
+                ( pr1 (center (is-contr-equiv-orientation n q))))
+            ( eq-cartier-delooping-sign-loop-equiv-is-set-quotient n p)))))
 ```
