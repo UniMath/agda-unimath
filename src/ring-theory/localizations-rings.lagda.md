@@ -26,13 +26,6 @@ open import ring-theory.rings
 open import ring-theory.subsets-rings
 
 
-is-prop-is-invertible-Ring :
-  {l1 : Level} (R : Ring l1) (x : type-Ring R) →
-  is-prop (is-invertible-Ring R x)
-is-prop-is-invertible-Ring R =
-  is-prop-is-invertible-Monoid (multiplicative-monoid-Ring R)
-
---------------------------------------------------------------------------------
 
 {- We introduce homomorphism that invert specific elements -}
 
@@ -43,11 +36,11 @@ module _
   
   inverts-element-hom-Ring : UU l2
   inverts-element-hom-Ring =
-    is-invertible-Ring R2 (map-hom-Ring R1 R2 f x)
+    is-invertible-element-Ring R2 (map-hom-Ring R1 R2 f x)
 
   is-prop-inverts-element-hom-Ring : is-prop inverts-element-hom-Ring
   is-prop-inverts-element-hom-Ring =
-    is-prop-is-invertible-Ring R2 (map-hom-Ring R1 R2 f x)
+    is-prop-is-invertible-element-Ring R2 (map-hom-Ring R1 R2 f x)
 
   inverts-element-hom-ring-Prop : UU-Prop l2
   pr1 inverts-element-hom-ring-Prop = inverts-element-hom-Ring
