@@ -595,6 +595,7 @@ open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
+open import ring-theory.modules-rings
 open import ring-theory.nil-ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.nontrivial-rings
