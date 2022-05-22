@@ -76,6 +76,7 @@ open import commutative-algebra.gaussian-integers
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
+open import commutative-algebra.prime-ideals-commutative-rings
 ```
 
 ## Elementary number theory

@@ -62,4 +62,7 @@ module _
 
   neg-Commutative-Ring : type-Commutative-Ring → type-Commutative-Ring
   neg-Commutative-Ring = neg-Ring ring-Commutative-Ring
+
+  mul-Commutative-Ring : (x y : type-Commutative-Ring) → type-Commutative-Ring
+  mul-Commutative-Ring = mul-Ring ring-Commutative-Ring
 ```
