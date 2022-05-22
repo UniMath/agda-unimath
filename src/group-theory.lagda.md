@@ -9,9 +9,12 @@ open import group-theory.abelian-groups public
 open import group-theory.abelian-subgroups public
 open import group-theory.abstract-group-torsors public
 open import group-theory.addition-homomorphisms-abelian-groups public
+open import group-theory.cartesian-products-monoids public
+open import group-theory.cartesian-products-semigroups public
 open import group-theory.category-of-groups public
 open import group-theory.category-of-semigroups public
 open import group-theory.cayleys-theorem public
+open import group-theory.commutative-monoids public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.concrete-subgroups public
