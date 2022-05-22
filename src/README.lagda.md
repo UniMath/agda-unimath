@@ -470,6 +470,7 @@ open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.automorphism-groups
+open import group-theory.cartesian-products-abelian-groups
 open import group-theory.cartesian-products-groups
 open import group-theory.cartesian-products-monoids
 open import group-theory.cartesian-products-semigroups
