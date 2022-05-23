@@ -76,6 +76,7 @@ open import commutative-algebra.gaussian-integers
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
+open import commutative-algebra.prime-ideals-commutative-rings
 ```
 
 ## Elementary number theory
@@ -470,9 +471,14 @@ open import group-theory.abelian-subgroups
 open import group-theory.abstract-group-torsors
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.automorphism-groups
+open import group-theory.cartesian-products-abelian-groups
+open import group-theory.cartesian-products-groups
+open import group-theory.cartesian-products-monoids
+open import group-theory.cartesian-products-semigroups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
+open import group-theory.commutative-monoids
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.concrete-subgroups
@@ -595,6 +601,7 @@ open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
 open import ring-theory.localizations-rings
+open import ring-theory.modules-rings
 open import ring-theory.nil-ideals-rings
 open import ring-theory.nilpotent-elements-rings
 open import ring-theory.nontrivial-rings

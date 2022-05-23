@@ -16,6 +16,7 @@ open import ring-theory.invariant-basis-property-rings public
 open import ring-theory.invertible-elements-rings public
 open import ring-theory.isomorphisms-rings public
 open import ring-theory.localizations-rings public
+open import ring-theory.modules-rings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nontrivial-rings public
