@@ -75,8 +75,10 @@ open import commutative-algebra.eisenstein-integers
 open import commutative-algebra.gaussian-integers
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.integral-domains
 open import commutative-algebra.isomorphisms-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
+open import commutative-algebra.zarisky-topology
 ```
 
 ## Elementary number theory
