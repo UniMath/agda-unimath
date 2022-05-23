@@ -53,5 +53,26 @@ module _
   ring-Integral-Domain = ring-Commutative-Ring commutative-ring-Integral-Domain
 
   set-Integral-Domain : UU-Set l
-  set-Integral-Domain = set-Commutative-Ring commutative-ring-Integral-Domain
+  set-Integral-Domain = set-Ring ring-Integral-Domain
+
+  type-Integral-Domain : UU l
+  type-Integral-Domain = type-Ring ring-Integral-Domain
+
+  is-set-type-Integral-Domain : is-set type-Integral-Domain
+  is-set-type-Integral-Domain = is-set-type-Ring ring-Integral-Domain
+
+  add-Integral-Domain : (x y : type-Integral-Domain) → type-Integral-Domain
+  add-Integral-Domain = add-Ring ring-Integral-Domain
+
+  zero-Integral-Domain : type-Integral-Domain
+  zero-Integral-Domain = zero-Ring ring-Integral-Domain
+
+  neg-Integral-Domain : type-Integral-Domain → type-Integral-Domain
+  neg-Integral-Domain = neg-Ring ring-Integral-Domain
+
+  mul-Integral-Domain : (x y : type-Integral-Domain) → type-Integral-Domain
+  mul-Integral-Domain = mul-Ring ring-Integral-Domain
+
+  one-Integral-Domain : type-Integral-Domain
+  one-Integral-Domain = one-Ring ring-Integral-Domain
 ```
