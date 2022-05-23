@@ -46,7 +46,7 @@ module _
 
 ## Operations on the double powerset
 
-### Intersections
+### Intersections of subtypes of powersets
 
 ```agda
 intersection-double-powerset :
@@ -71,7 +71,7 @@ module _
   universal-property-intersection-double-powerset P H a p X = H X a p
 ```
 
-###
+### Unions of subtypes of powersets
 
 ```agda
 union-double-powerset :
