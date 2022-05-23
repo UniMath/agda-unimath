@@ -7,7 +7,11 @@ title: Double powersets
 
 module foundation.double-powersets where
 
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.powersets
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -16,6 +20,8 @@ open import order-theory.posets
 ```
 
 ## Definitions
+
+### The double powerset
 
 ```agda
 module _
@@ -36,4 +42,61 @@ module _
 
   double-powerset : (l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
   double-powerset l3 A = element-Poset (double-powerset-Poset l3 A)
+```
+
+## Operations on the double powerset
+
+### Intersections
+
+```agda
+intersection-double-powerset :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  double-powerset l2 l3 A → subtype (l1 ⊔ lsuc l2 ⊔ l3) A
+intersection-double-powerset F a =
+  Π-Prop (type-subtype F) (λ X → inclusion-subtype F X a)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (F : double-powerset l2 l3 A)
+  where
+  
+  inclusion-intersection-double-powerset :
+    (X : type-subtype F) →
+    intersection-double-powerset F ⊆ inclusion-subtype F X
+  inclusion-intersection-double-powerset X a f = f X
+
+  universal-property-intersection-double-powerset :
+    {l : Level} (P : subtype l A)
+    (H : (X : type-subtype F) → P ⊆ inclusion-subtype F X) →
+    P ⊆ intersection-double-powerset F
+  universal-property-intersection-double-powerset P H a p X = H X a p
+```
+
+###
+
+```agda
+union-double-powerset :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  double-powerset l2 l3 A → subtype (l1 ⊔ lsuc l2 ⊔ l3) A
+union-double-powerset F a =
+  ∃-Prop (λ (X : type-subtype F) → is-in-subtype (inclusion-subtype F X) a)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (F : double-powerset l2 l3 A)
+  where
+
+  type-union-double-powerset : UU (l1 ⊔ lsuc l2 ⊔ l3)
+  type-union-double-powerset = type-subtype (union-double-powerset F)
+
+  inclusion-union-double-powerset :
+    (X : type-subtype F) → inclusion-subtype F X ⊆ union-double-powerset F
+  inclusion-union-double-powerset X a = intro-∃ X
+
+  universal-property-union-double-powerset :
+    {l : Level} (P : subtype l A)
+    (H : (X : type-subtype F) → inclusion-subtype F X ⊆ P) →
+    union-double-powerset F ⊆ P
+  universal-property-union-double-powerset P H a =
+    map-universal-property-trunc-Prop
+      ( P a)
+      ( λ X → H (pr1 X) a (pr2 X))
 ```
