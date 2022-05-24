@@ -9,7 +9,7 @@ module commutative-algebra.isomorphisms-commutative-rings where
 
 open import commutative-algebra.commutative-rings using
   ( Commutative-Ring; ring-Commutative-Ring; is-prop-is-commutative-Ring;
-    is-commutative-Commutative-Ring)
+    commutative-mul-Commutative-Ring)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -37,5 +37,5 @@ is-contr-total-iso-Commutative-Ring R1 =
     ( is-prop-is-commutative-Ring)
     ( ring-Commutative-Ring R1)
     ( id-iso-Ring (ring-Commutative-Ring R1))
-    ( is-commutative-Commutative-Ring R1)
+    ( commutative-mul-Commutative-Ring R1)
 ```
