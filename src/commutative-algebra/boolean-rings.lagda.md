@@ -13,7 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import ring-theory.idempotent-elements-rings
-
 ```
 
 ## Idea
