@@ -3,7 +3,7 @@ title: Orientations of the complete undirected graph
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
 
 module univalent-combinatorics.orientations-complete-undirected-graph where
 
@@ -25,7 +25,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
   ( exists-not-not-forall-count)
 
 open import finite-group-theory.transpositions using
-  ( map-transposition; map-transposition'; transposition; two-elements-transposition;
+  ( map-transposition; transposition; two-elements-transposition;
     left-computation-standard-transposition;
     right-computation-standard-transposition;
     map-standard-transposition; standard-transposition;
@@ -1028,52 +1028,53 @@ module _
         ( canonical-orientation-count)
         ( trans-canonical-orientation-count)
         ( Y)))
-  equiv-Fin-1-difference-canonical-orientation-count-trans =
-    pair
-      ( λ x → pair 
-        ( canonical-2-Element-Decidable-Subtype-count)
-        ( λ q → distinct-two-elements-count
-          ( ( inv
-            ( eq-orientation-two-elements-count
-              ( second-element-count)
-              ( first-element-count)
-              ( λ p → distinct-two-elements-count (inv p)))) ∙
-            ( ( ap
-              ( λ Y → pr1 (trans-canonical-orientation-count Y))
-              { x =
-                standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count eX)
-                  ( λ p → distinct-two-elements-count (inv p))}
-              { y = canonical-2-Element-Decidable-Subtype-count}
-              ( inv
-                ( is-commutative-standard-2-Element-Decidable-Subtype
-                  ( has-decidable-equality-count eX) ( distinct-two-elements-count)))) ∙
-              ( inv (ap pr1 q) ∙
-                eq-orientation-two-elements-count
-                  ( first-element-count)
-                  ( second-element-count)
-                  ( distinct-two-elements-count))))))
-      ( is-equiv-has-inverse
-        ( λ x → inr star)
-        ( λ T →
-          eq-pair-Σ
-            ( retr-Fin-1-difference-canonical-orientation-count-trans
-              ( T)
-              ( two-elements-transposition eX (pr1 T))
-              ( refl)
-              ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX (pr1 T))) first-element-count)
-              ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX (pr1 T))) second-element-count)
-              ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX (pr1 T)))) first-element-count)
-              ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX (pr1 T)))) second-element-count))
-            ( eq-is-prop
-              ( is-prop-type-decidable-Prop
-                ( 2-Element-Decidable-Subtype-subtype-pointwise-difference
-                  ( number-of-elements-count eX)
-                  ( pair X (unit-trunc-Prop (equiv-count eX)))
-                  ( canonical-orientation-count)
-                  ( trans-canonical-orientation-count)
-                  ( pr1 T)))))
-        ( sec-Fin-1-difference-canonical-orientation-count-trans))
+  pr1 (pr1 equiv-Fin-1-difference-canonical-orientation-count-trans x) =
+    canonical-2-Element-Decidable-Subtype-count
+  pr2 (pr1 equiv-Fin-1-difference-canonical-orientation-count-trans x) q =
+    distinct-two-elements-count
+      ( ( inv
+        ( eq-orientation-two-elements-count
+          ( second-element-count)
+          ( first-element-count)
+          ( λ p → distinct-two-elements-count (inv p)))) ∙
+          ( ( ap
+            ( λ Y → pr1 (trans-canonical-orientation-count Y))
+            { x =
+              standard-2-Element-Decidable-Subtype
+                ( has-decidable-equality-count eX)
+                ( λ p → distinct-two-elements-count (inv p))}
+            { y = canonical-2-Element-Decidable-Subtype-count}
+            ( inv
+              ( is-commutative-standard-2-Element-Decidable-Subtype
+                ( has-decidable-equality-count eX)
+                ( distinct-two-elements-count)))) ∙
+            ( inv (ap pr1 q) ∙
+              eq-orientation-two-elements-count
+                ( first-element-count)
+                ( second-element-count)
+                ( distinct-two-elements-count))))
+  pr2 equiv-Fin-1-difference-canonical-orientation-count-trans =
+    is-equiv-has-inverse
+      ( λ x → inr star)
+      ( λ T →
+        eq-pair-Σ
+          ( retr-Fin-1-difference-canonical-orientation-count-trans
+            ( T)
+            ( two-elements-transposition eX (pr1 T))
+            ( refl)
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX (pr1 T))) first-element-count)
+            ( has-decidable-equality-count eX (pr1 (two-elements-transposition eX (pr1 T))) second-element-count)
+            ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX (pr1 T)))) first-element-count)
+            ( has-decidable-equality-count eX (pr1 (pr2 (two-elements-transposition eX (pr1 T)))) second-element-count))
+          ( eq-is-prop
+            ( is-prop-type-decidable-Prop
+              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference
+                ( number-of-elements-count eX)
+                ( pair X (unit-trunc-Prop (equiv-count eX)))
+                ( canonical-orientation-count)
+                ( trans-canonical-orientation-count)
+                ( pr1 T)))))
+      ( sec-Fin-1-difference-canonical-orientation-count-trans)
     where
     retr-Fin-1-difference-canonical-orientation-count-trans :
       ( T :
@@ -1350,21 +1351,21 @@ module _
   inv-orientation T (inl P) = inl (inr star)
   inv-orientation T (inr NP) = inr star
 
-  equiv-Fin-2-quotient-sign-count : Fin 2 ≃
+  equiv-fin-2-quotient-sign-count : Fin 2 ≃
     (quotient-sign (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
-  pr1 equiv-Fin-2-quotient-sign-count (inl (inr star)) =
+  pr1 equiv-fin-2-quotient-sign-count (inl (inr star)) =
     quotient-map-large-set-quotient
       ( even-difference-orientation-Complete-Undirected-Graph
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX))))
       ( canonical-orientation-count)
-  pr1 equiv-Fin-2-quotient-sign-count (inr star) =
+  pr1 equiv-fin-2-quotient-sign-count (inr star) =
     quotient-map-large-set-quotient
       ( even-difference-orientation-Complete-Undirected-Graph
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX))))
       ( trans-canonical-orientation-count)
-  pr2 equiv-Fin-2-quotient-sign-count =
+  pr2 equiv-fin-2-quotient-sign-count =
     is-equiv-has-inverse
       ( λ T →
         inv-orientation
@@ -1400,7 +1401,7 @@ module _
             ( is-decidable-even-difference-orientation-Complete-Undirected-Graph
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
-            ( pr1 equiv-Fin-2-quotient-sign-count k)
+            ( pr1 equiv-fin-2-quotient-sign-count k)
             ( canonical-orientation-count)))
     where
     cases-retr-orientation :
@@ -1507,7 +1508,7 @@ module _
               ( pair X (unit-trunc-Prop (equiv-count eX))))
             ( T)
             ( canonical-orientation-count))) →
-      Id (pr1 equiv-Fin-2-quotient-sign-count (inv-orientation T H)) T
+      Id (pr1 equiv-fin-2-quotient-sign-count (inv-orientation T H)) T
     retr-orientation T (inl H) =
       eq-effective-quotient'
         ( even-difference-orientation-Complete-Undirected-Graph
@@ -1558,11 +1559,11 @@ module _
           ( even-difference-orientation-Complete-Undirected-Graph
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))))
-          ( pr1 equiv-Fin-2-quotient-sign-count k)
+          ( pr1 equiv-fin-2-quotient-sign-count k)
           ( canonical-orientation-count))) →
       Id
         ( inv-orientation
-          ( pr1 equiv-Fin-2-quotient-sign-count k)
+          ( pr1 equiv-fin-2-quotient-sign-count k)
           ( D))
         ( k)
     sec-orientation (inl (inr star)) (inl Q) = refl
@@ -1591,19 +1592,19 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin-Level l n) (ineq : leq-ℕ 2 n)
   where
   
-  equiv-Fin-2-quotient-sign-equiv-Fin-n : (h : Fin n ≃ type-UU-Fin-Level X) →
+  equiv-fin-2-quotient-sign-equiv-Fin : (h : Fin n ≃ type-UU-Fin-Level X) →
     ( Fin 2 ≃ quotient-sign n X)
-  equiv-Fin-2-quotient-sign-equiv-Fin-n h =
+  equiv-fin-2-quotient-sign-equiv-Fin h =
     tr
       ( λ e → Fin 2 ≃ quotient-sign n (pair (type-UU-Fin-Level X) e))
       ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
-      ( equiv-Fin-2-quotient-sign-count (pair n h) ineq)
+      ( equiv-fin-2-quotient-sign-count (pair n h) ineq)
     
   abstract
-    mere-equiv-Fin-2-quotient-sign :
+    mere-equiv-fin-2-quotient-sign :
       mere-equiv (Fin 2) (quotient-sign n X)
-    mere-equiv-Fin-2-quotient-sign =
+    mere-equiv-fin-2-quotient-sign =
       functor-trunc-Prop
-        ( equiv-Fin-2-quotient-sign-equiv-Fin-n)
+        ( equiv-fin-2-quotient-sign-equiv-Fin)
         ( has-cardinality-type-UU-Fin-Level X)
 ```

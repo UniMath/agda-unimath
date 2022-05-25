@@ -288,7 +288,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
+  {l1 l2 l3 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
   (A/R : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
   (Uf : {l : Level} → is-set-quotient l R A/R f)
