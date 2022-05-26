@@ -64,7 +64,7 @@ module _
         ( Σ ( type-trunc-Set A → type-trunc-Set B)
             ( λ h → (h ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)))
     unique-map-trunc-Set =
-      universal-property-trunc-Set A (trunc-Set B) (unit-trunc-Set ∘ f)
+      universal-property-trunc-Set (trunc-Set B) (unit-trunc-Set ∘ f)
 
   map-trunc-Set :
     type-trunc-Set A → type-trunc-Set B
@@ -99,7 +99,7 @@ map-id-trunc-Set {l1} {A} =
   htpy-eq
     ( ap pr1
       ( eq-is-contr
-        ( universal-property-trunc-Set A (trunc-Set A) unit-trunc-Set)
+        ( universal-property-trunc-Set (trunc-Set A) unit-trunc-Set)
         { pair (map-trunc-Set id) (naturality-trunc-Set id)}
         { pair id refl-htpy}))
 ```
@@ -116,9 +116,8 @@ map-comp-trunc-Set {A = A} {C = C} g f =
     ( ap pr1
       ( eq-is-contr
         ( universal-property-trunc-Set
-          A
-          (trunc-Set C)
-          (unit-trunc-Set ∘ (g ∘ f)))
+          ( trunc-Set C)
+          ( unit-trunc-Set ∘ (g ∘ f)))
         { pair (map-trunc-Set (g ∘ f)) (naturality-trunc-Set (g ∘ f))}
         { pair ( map-trunc-Set g ∘ map-trunc-Set f)
                ( ( map-trunc-Set g ·l naturality-trunc-Set f) ∙h

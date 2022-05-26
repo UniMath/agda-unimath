@@ -3,7 +3,7 @@ title: Products of tuples of elements in commutative monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module group-theory.products-of-tuples-of-elements-commutative-monoids where
 

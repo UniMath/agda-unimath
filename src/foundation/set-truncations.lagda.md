@@ -142,13 +142,19 @@ module _
     (function-dependent-universal-property-trunc-Set B f ∘ unit-trunc-Set) ~ f
   compute-dependent-universal-property-trunc-Set B f = pr2 (Π-trunc-Set B f)
 
+  apply-dependent-universal-property-trunc-Set :
+    {l2 : Level} (B : type-trunc-Set A → UU-Set l2) →
+    ((x : A) → type-Set (B (unit-trunc-Set x))) →
+    (x : type-trunc-Set A) → type-Set (B x)
+  apply-dependent-universal-property-trunc-Set B =
+    map-inv-equiv (equiv-dependent-universal-property-trunc-Set B)
 ```
 
 ### The universal property of set truncations
 
 ```agda
 module _
-  {l1 : Level} (A : UU l1)
+  {l1 : Level} {A : UU l1}
   where
   
   equiv-universal-property-trunc-Set :
@@ -575,10 +581,9 @@ module _
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
               ( ( equiv-map-Π
-                  ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
+                  ( λ x → equiv-universal-property-trunc-Set C)) ∘e
                 ( ( equiv-ev-pair) ∘e
-                  ( equiv-universal-property-trunc-Set
-                    ( Σ A (type-trunc-Set ∘ B)) C)))
+                  ( equiv-universal-property-trunc-Set C)))
               ( refl-htpy)))
 
   equiv-trunc-Σ-Set :
@@ -614,10 +619,10 @@ module _
             ( precomp-Set (map-prod unit-trunc-Set unit-trunc-Set) C)
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
-              ( ( equiv-universal-property-trunc-Set A (Π-Set' B (λ y → C))) ∘e
+              ( ( equiv-universal-property-trunc-Set (Π-Set' B (λ y → C))) ∘e
                 ( ( equiv-postcomp
                     ( type-trunc-Set A)
-                    (equiv-universal-property-trunc-Set B C)) ∘e
+                    (equiv-universal-property-trunc-Set C)) ∘e
                   ( equiv-ev-pair)))
               ( refl-htpy)))
 

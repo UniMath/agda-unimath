@@ -3,7 +3,7 @@ title: Cardinalities of sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module set-theory.cardinalities where
 
