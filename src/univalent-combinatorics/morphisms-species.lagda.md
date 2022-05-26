@@ -1,11 +1,17 @@
 # Morphisms of species
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --allow-unsolved-metas --without-K --exact-split #-}
 
 module univalent-combinatorics.morphisms-species where
 
+open import foundation-core.sets using (UU-Set; is-set)
+
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
+
+open import foundation.propositions using
+  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-is-equiv;
+    is-prop-Π)
 
 open import foundation.identity-types using
     (Id; tr; inv; concat; refl; ap; eq-transpose-tr; eq-transpose-tr'; inv-inv; _∙_)
@@ -43,11 +49,11 @@ _→ˢ_ : {l1 l2 : Level} → species l1 → species l2 → UU (lsuc lzero ⊔ l
 _→ˢ_ F G = (X : 𝔽) → F X → G X 
 ```
 
-### homotopies between morphisms of species
+### We characterise the identity type of species morphisms
 
 ```agda
 _∼ˢ_ : {l1 l2 : Level} → {F : species l1} → {G : species l2} → (F →ˢ G) → (F →ˢ G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
-_∼ˢ_ {F = F} f g    = (X : 𝔽) → (y : F X ) → Id (f X y) (g X y)
+_∼ˢ_ {F = F} f g       = (X : 𝔽) → (y : F X ) → Id (f X y) (g X y)
 
 refl-htpy-hom-species : {l1 l2 : Level} → {F : species l1} → {G : species l2} → (f : F →ˢ G) → (f ∼ˢ f)
 refl-htpy-hom-species f X y = refl 
@@ -57,7 +63,6 @@ refl-htpy-hom-species f X y = refl
 
 is-contr-htpy-hom-species : {l1 l2 : Level} → {F : species l1} → {G : species l2} → (f : F →ˢ G) → is-contr (Σ (F →ˢ G) (λ g → f ∼ˢ g) )
 is-contr-htpy-hom-species f = is-contr-total-Eq-Π (λ X h → f X ~ h) (λ X → is-contr-total-htpy (f X) )
-
 
 htpy-eq-hom-species : {l1 l2 : Level} → {F : species l1} → {G : species l2} → {f g : F →ˢ G} → Id f g → f ∼ˢ g
 htpy-eq-hom-species refl X y = refl
@@ -91,5 +96,35 @@ _∘ˢ_ f g = λ X x → f X (g X x)
 left-unit-law-∘ˢ : {l1 l2 : Level} → {F : species l1} → {G : species l2} → (f : F →ˢ G)
                                                       → Id (idˢ G ∘ˢ f) f
 left-unit-law-∘ˢ f = eq-htpy-hom-species (λ X y → refl)
+
+right-unit-law-∘ˢ : {l1 l2 : Level} → {F : species l1} → {G : species l2} → (f : F →ˢ G)
+                                                      → Id (f ∘ˢ idˢ F) f
+right-unit-law-∘ˢ f = eq-htpy-hom-species (λ X y → refl)
+
+associative-law-∘ˢ : {l1 l2 l3 l4 : Level}
+                    → {F : species l1} → {G : species l2} → {H : species l3} → {I : species l4}
+                    → (f : F →ˢ G) → (g : G →ˢ H) → (h : H →ˢ I)
+                    → Id (h ∘ˢ (g ∘ˢ f)) ((h ∘ˢ g) ∘ˢ f)
+associative-law-∘ˢ f g h = eq-htpy-hom-species (λ X y → refl)
 ```
  
+ ## The type of species morphisms is a set
+
+ ```agda
+module _
+  {l1 l2 : Level} (F : species l1) (G : species l2)
+  where
+
+
+  is-set-→ˢ : is-set (F →ˢ G)
+  is-set-→ˢ f g =
+    ( is-prop-is-equiv
+      ( is-equiv-htpy-eq-hom-species f g)
+      ( is-prop-Π (λ X → is-prop-Π (λ x → {!   !}))
+    )
+    )
+
+  hom-species : UU-Set (lsuc lzero ⊔ l1 ⊔ l2)
+  pr1 hom-species = F →ˢ G
+  pr2 hom-species = is-set-→ˢ
+ ```
