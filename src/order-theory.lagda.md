@@ -9,6 +9,7 @@ open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
+open import order-theory.distributive-lattices public
 open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public

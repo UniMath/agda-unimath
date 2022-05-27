@@ -557,6 +557,7 @@ open import order-theory.chains-posets
 open import order-theory.chains-preorders
 open import order-theory.decidable-subposets
 open import order-theory.decidable-subpreorders
+open import order-theory.distributive-lattices
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
