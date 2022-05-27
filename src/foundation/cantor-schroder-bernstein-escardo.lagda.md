@@ -1,5 +1,5 @@
 ---
-title: Cantor-Schröder-Bernstein
+title: The Cantor-Schröder-Bernstein-Escardó theorem
 ---
 
 ```agda
