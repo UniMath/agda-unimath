@@ -110,10 +110,10 @@ module _
       (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
     is-emb-comp' g h = is-emb-comp (g ∘ h) g h refl-htpy
 
-    comp-emb :
-      (B ↪ C) → (A ↪ B) → (A ↪ C)
-    pr1 (comp-emb (pair g H) (pair f K)) = g ∘ f
-    pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
+  comp-emb :
+    (B ↪ C) → (A ↪ B) → (A ↪ C)
+  pr1 (comp-emb (pair g H) (pair f K)) = g ∘ f
+  pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
 ```
 
 ### The right factor of a composed embedding is an embedding
