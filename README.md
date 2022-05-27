@@ -53,6 +53,8 @@ Ideally the first section of a file explains the idea, then proceeds to give the
 title: [The title of this file]
 ---
 
+Contributors : [The list of contributors]
+
 [ options
   module declaration
   imports]
@@ -61,7 +63,11 @@ title: [The title of this file]
 
 ( Informal description of the idea)
 
-## Definition
+## Definitions
+
+### Definition 1
+
+( Contributor of this definition (optional))
 
 [ formalization of the definition and immediately related structure]
 
@@ -69,13 +75,15 @@ title: [The title of this file]
 
 ### X is an example
 
-( informal explanation)
+( Contributor of this definition (optional)
+  Informal explanation)
 
 [ formalization that X is an example]
 
 ### Y is an example
 
-( informal explanation)
+( Contributor of this example (optional)
+  Informal explanation)
 
 [ formalization that Y is an example]
 
@@ -83,15 +91,21 @@ title: [The title of this file]
 
 ### Concise descrition of property 1
 
-( informal explanation)
+( Contributor of this property (optional)
+  Informal explanation)
 
 [ formalization of property 1]
 
 ### Concise description of property 2
 
-( informal explanation)
+( Contributor of this property (optional)
+  Informal explanation)
 
 [ formalization of property 2]
+
+## Related concepts
+
+## References
 ```
 
 ### KaTeX support for the website
