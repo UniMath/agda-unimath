@@ -22,8 +22,8 @@ There are many reasons to contribute something to a library of formalized mathem
 
 :rainbow: Happy contributing!
 
-Elisabeth Bonnevier  
-Jonathan Prieto-Cubides  
+Elisabeth Bonnevier
+Jonathan Prieto-Cubides
 Egbert Rijke
 
 ```agda
@@ -241,6 +241,7 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.equivalence-induction
 open import foundation.equivalence-relations
