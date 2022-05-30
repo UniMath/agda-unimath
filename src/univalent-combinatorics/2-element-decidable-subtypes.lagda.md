@@ -27,7 +27,8 @@ open import foundation.decidable-subtypes using
     is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
     is-in-decidable-subtype; is-prop-is-in-decidable-subtype;
     inclusion-decidable-subtype; is-emb-inclusion-decidable-subtype;
-    is-injective-inclusion-decidable-subtype)
+    is-injective-inclusion-decidable-subtype; equiv-universes-decidable-subtype;
+    iff-universes-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
     dn-elim-is-decidable; is-prop-is-decidable)
@@ -39,10 +40,14 @@ open import foundation.equivalences using
     map-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (eq-htpy)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-Σ)
+open import foundation.functoriality-propositional-truncation using
+  ( functor-trunc-Prop)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
 open import foundation.injective-maps using (is-injective)
-open import foundation.logical-equivalences using (iff-equiv)
+open import foundation.logical-equivalences using (iff-equiv; equiv-iff')
 open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
@@ -429,4 +434,59 @@ module _
         ( eq-subtype
           ( subtype-2-Element-Decidable-Subtype P)
           ( inv p))
+```
+
+### Types of decidable subtypes of any universe level are equivalent
+
+```agda
+module _
+  {l1 : Level} (X : UU l1)
+  where
+
+  equiv-universes-2-Element-Decidable-Subtype : (l l' : Level) →
+    2-Element-Decidable-Subtype l X ≃ 2-Element-Decidable-Subtype l' X
+  equiv-universes-2-Element-Decidable-Subtype l l' =
+    equiv-subtype-equiv
+      ( equiv-universes-decidable-subtype X l l')
+      ( λ P →
+        pair
+          ( has-two-elements (type-decidable-subtype P))
+          ( is-prop-type-trunc-Prop))
+      ( λ P →
+        pair
+          ( has-two-elements (type-decidable-subtype P))
+          ( is-prop-type-trunc-Prop))
+      ( λ S →
+        pair
+          ( λ h →
+            functor-trunc-Prop
+              ( λ h' →
+                equiv-Σ
+                  ( λ x →
+                    type-decidable-Prop
+                      ( map-equiv (equiv-universes-decidable-subtype X l l') S x))
+                  ( id-equiv)
+                  ( λ x →
+                    equiv-iff'
+                      ( prop-decidable-Prop (S x))
+                      ( prop-decidable-Prop
+                        ( map-equiv (equiv-universes-decidable-subtype X l l') S x))
+                      ( iff-universes-decidable-subtype X l l' S x)) ∘e
+                  ( h'))
+              ( h))
+          ( λ h →
+            functor-trunc-Prop
+              ( λ h' →
+                equiv-Σ
+                  ( λ x → type-decidable-Prop (S x))
+                  ( id-equiv)
+                  ( λ x →
+                    inv-equiv
+                      ( equiv-iff'
+                        ( prop-decidable-Prop (S x))
+                        ( prop-decidable-Prop
+                          ( map-equiv (equiv-universes-decidable-subtype X l l') S x))
+                        ( iff-universes-decidable-subtype X l l' S x))) ∘e
+                  ( h'))
+              ( h)))
 ```
