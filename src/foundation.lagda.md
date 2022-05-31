@@ -61,6 +61,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equational-reasoning public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
