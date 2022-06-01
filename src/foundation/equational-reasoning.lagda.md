@@ -1,13 +1,14 @@
 # Equational reasoning
 
 Tom de Jong, 27 May 2022.
+Elisabeth Bonnevier, 31 May 2022.
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.equational-reasoning where
 
-open import foundation.identity-types using (Id ; refl ; _∙_)
-open import foundation.equivalences using (_≃_ ; _∘e_ ; id-equiv)
+open import foundation.identity-types using (Id ; refl ; _∙_; inv)
+open import foundation.equivalences using (_≃_ ; _∘e_ ; id-equiv; inv-equiv)
 open import foundation.universe-levels using (Level; UU)
 open import order-theory.preorders using
   (Preorder ; element-Preorder ; leq-Preorder
@@ -45,7 +46,7 @@ For inequalities we also need to pass the preorder as an argument.
 
 We write Agda code that allows for such reasoning. The code for equational
 reasoning for equalities and equivalences is based on Martín Escardó's Agda code
-[1,2].
+[1,2] and the Agda standard library [3].
 
 
 ## Definitions
@@ -53,23 +54,43 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 ### Equational reasoning for identifications
 
 ```agda
-_=⟨_⟩_ : {l : Level} {X : UU l} (x : X) {y z : X}
-       → Id x y → Id y z → Id x z
-_ =⟨ p ⟩ q = p ∙ q
+infix 1 _∎
+infixr 0 step-= step-=˘
+
+step-= : {l : Level} {X : UU l} (x : X) {y z : X}
+       → Id y z → Id x y → Id x z
+step-= _ q p = p ∙ q
+
+step-=˘ : {l : Level} {X : UU l} (x : X) {y z : X}
+        → Id y z → Id y x → Id x z
+step-=˘ _ q p = inv p ∙ q
 
 _∎ : {l : Level} {X : UU l} (x : X) → Id x x
 x ∎ = refl
+
+syntax step-= x q p = x =⟨ p ⟩ q
+syntax step-=˘ x q p = x =˘⟨ p ⟩ q
 ```
 
 ### Equational reasoning for equivalences
 
 ```agda
-_≃⟨_⟩_ : {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3}
-       → X ≃ Y → Y ≃ Z → X ≃ Z
-_ ≃⟨ f ⟩ g = g ∘e f
+infix 1 _■
+infixr 0 step-≃ step-≃˘
+
+step-≃ : {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3}
+       → Y ≃ Z → X ≃ Y → X ≃ Z
+step-≃ _ g f = g ∘e f
+
+step-≃˘ : {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3}
+        → Y ≃ Z → Y ≃ X → X ≃ Z
+step-≃˘ _ g f = g ∘e inv-equiv f
 
 _■ : {l : Level} (X : UU l) → X ≃ X
 X ■ = id-equiv
+
+syntax step-≃ X g f = X ≃⟨ f ⟩ g
+syntax step-≃˘ X g f = X ≃˘⟨ f ⟩ g
 ```
 
 ### Equational reasoning for preorders
@@ -104,4 +125,5 @@ z ∎⟨ X ⟩
 ## References
 
 1. Martín Escardó. https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda
-1. Martín Escardó. https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda
+2. Martín Escardó. https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda
+3. The Agda standard library. https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda
