@@ -11,7 +11,7 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-total-path; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
     is-equiv-map-distributive-Π-Σ)
 open import foundation.functions using (_∘_)

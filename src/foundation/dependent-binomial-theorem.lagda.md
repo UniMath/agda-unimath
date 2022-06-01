@@ -3,16 +3,14 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module
-  foundation.distributivity-of-dependent-functions-over-coproduct-types
-  where
+module foundation.dependent-binomial-theorem where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-diagonal-is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)

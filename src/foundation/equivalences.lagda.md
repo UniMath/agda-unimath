@@ -46,7 +46,7 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π; is-contr-is-equiv';
     is-contr-prod; is-prop-is-contr)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
 open import foundation.function-extensionality using
   ( htpy-eq; funext; eq-htpy; equiv-funext)

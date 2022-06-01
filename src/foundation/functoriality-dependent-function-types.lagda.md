@@ -14,7 +14,7 @@ open import foundation-core.homotopies using (_~_; _·l_; _·r_)
 open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;

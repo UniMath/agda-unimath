@@ -9,7 +9,7 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( inv-distributive-Π-Σ; map-distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-equiv; map-inv-is-equiv; is-equiv-precomp-is-equiv;

@@ -15,7 +15,7 @@ open import foundation.algebras-polynomial-endofunctors using
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ)
 open import foundation.empty-types using (is-empty; ex-falso; empty-Prop)
 open import foundation.equivalences using

@@ -10,7 +10,7 @@ open import foundation.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( inv-distributive-Π-Σ)
 open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation.equivalences using

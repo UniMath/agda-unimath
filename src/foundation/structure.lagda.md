@@ -7,7 +7,7 @@ module foundation.structure where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+  foundation.type-theoretic-principle-of-choice using
   ( inv-distributive-Π-Σ)
 open import foundation.equivalences using (_≃_; _∘e_)
 open import foundation.fibers-of-maps using (fib)

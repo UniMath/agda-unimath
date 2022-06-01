@@ -17,7 +17,7 @@ open import foundation.decidable-types using
   ( is-prop-is-decidable; is-decidable; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs
+  foundation.type-theoretic-principle-of-choice
   using
   ( inv-distributive-Π-Σ)
 open import foundation.embeddings using

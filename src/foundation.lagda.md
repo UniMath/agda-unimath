@@ -46,8 +46,8 @@ open import foundation.decidable-types public
 open import foundation.dependent-pair-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.disjunction public
-open import foundation.distributivity-of-dependent-functions-over-coproduct-types public
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs public
+open import foundation.dependent-binomial-theorem public
+open import foundation.type-theoretic-principle-of-choice public
 open import foundation.double-negation public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public

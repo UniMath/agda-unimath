@@ -12,7 +12,7 @@ open import foundation.cones-pullbacks
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
