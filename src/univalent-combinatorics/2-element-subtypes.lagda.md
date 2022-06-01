@@ -38,7 +38,6 @@ open import foundation.subtypes using
   ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
     is-injective-inclusion-subtype; equiv-subtype-equiv)
 open import foundation.surjective-maps using (is-surjective)
-open import foundation.truncated-maps using (is-emb-tot)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
 open import foundation.unit-type using (star; is-contr-unit)

@@ -22,16 +22,20 @@ open import foundation-core.sections using (sec)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.equivalences using
   ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
     is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
     issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-property-is-equiv)
+open import foundation.functoriality-dependent-pair-types using
+  ( tot; map-Σ-map-base; map-Σ)
 open import foundation.identity-types using
   ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
 open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
 open import foundation.pullbacks using (is-pullback)
 open import foundation.truncated-maps using
-  ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback)
+  ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback;
+    is-prop-map-tot; is-prop-map-map-Σ-map-base; is-prop-map-map-Σ)
 ```
 
 ## Properties
@@ -118,6 +122,73 @@ module _
       (B ↪ C) → (A ↪ B) → (A ↪ C)
     pr1 (comp-emb (pair g H) (pair f K)) = g ∘ f
     pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
+```
+
+### The map on total spaces induced by a family of embeddings is an embedding
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  is-emb-tot : {f : (x : A) → B x → C x}
+    → ((x : A) → is-emb (f x)) → is-emb (tot f)
+  is-emb-tot H =
+    is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
+
+  tot-emb : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
+  pr1 (tot-emb f) = tot (λ x → map-emb (f x))
+  pr2 (tot-emb f) = is-emb-tot (λ x → is-emb-map-emb (f x))
+```
+
+### The functoriality of dependent pair types preserves embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-emb-map-Σ-map-base : {f : A → B} (C : B → UU l3)
+      → is-emb f → is-emb (map-Σ-map-base f C)
+    is-emb-map-Σ-map-base C H =
+      is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
+
+  emb-Σ-emb-base :
+    (f : A ↪ B) (C : B → UU l3) → Σ A (λ a → C (map-emb f a)) ↪ Σ B C
+  pr1 (emb-Σ-emb-base f C) = map-Σ-map-base (map-emb f) C
+  pr2 (emb-Σ-emb-base f C) =
+    is-emb-map-Σ-map-base C (is-emb-map-emb f)
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  where
+
+  is-emb-map-Σ : (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
+    → is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
+  is-emb-map-Σ D H K =
+    is-emb-is-prop-map
+      ( is-prop-map-map-Σ D
+        ( is-prop-map-is-emb H)
+        ( λ x → is-prop-map-is-emb (K x)))
+
+  emb-Σ :
+    (D : B → UU l4) (f : A ↪ B) (g : (x : A) → C x ↪ D (map-emb f x)) →
+    Σ A C ↪ Σ B D
+  pr1 (emb-Σ D f g) = map-Σ D (map-emb f) (λ x → map-emb (g x))
+  pr2 (emb-Σ D f g) =
+    is-emb-map-Σ D (is-emb-map-emb f) (λ x → is-emb-map-emb (g x))
+```
+
+### The product of two embeddings is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  emb-× : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
+  emb-× f g = emb-Σ (λ _ → D) f (λ _ → g)
 ```
 
 ### The right factor of a composed embedding is an embedding
