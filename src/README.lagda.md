@@ -272,6 +272,7 @@ open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.images
 open import foundation.impredicative-encodings
+open import foundation.impredicative-universes
 open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
@@ -300,6 +301,7 @@ open import foundation.multisubsets
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.pairs-of-distinct-elements
+open import foundation.partial-elements
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
