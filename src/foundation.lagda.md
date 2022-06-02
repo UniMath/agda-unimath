@@ -166,6 +166,7 @@ open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
+open import foundation.unique-existence public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-set-quotients public
 open import foundation.uniqueness-set-truncations public
