@@ -49,7 +49,7 @@ module _
     (n : ℕ) (e : Fin n ≃ Fin n) (x : Fin n → type-Commutative-Monoid M) →
     Id ( mul-fin-Commutative-Monoid n (x ∘ map-equiv e))
        ( mul-fin-Commutative-Monoid n x)
-  compute-permutation-mul-fin-Commutative-Monoid n e x = ?
+  compute-permutation-mul-fin-Commutative-Monoid n e x = {!!}
 
   mul-count-Commutative-Monoid :
     {l2 : Level} {A : UU l2} → count A →

@@ -35,8 +35,8 @@ card : {l : Level} → UU-Set l → cardinal l
 card A = unit-trunc-Set A
 
 total-leq-card-Prop :
-  {l1 l2 : Level} → ?
-total-leq-card-Prop X = ?
+  {l1 l2 : Level} → {!!}
+total-leq-card-Prop X = {!!}
 
 leq-card-Prop : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU-Prop (l1 ⊔ l2)
 leq-card-Prop {l1} {l2} X Y =
