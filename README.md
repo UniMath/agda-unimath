@@ -12,6 +12,22 @@ Great, you want to contribute something! The best way to start is to find us in 
 
 Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
+## Getting started
+
+Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
+
+ - Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
+ - Once you have Agda up and running, you can copy our library to your machine using `git clone git@github.com:UniMath/agda-unimath.git`.
+ - If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
+
+The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. In order for your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
+
+```
+(setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
+```
+
+With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the `src` folder. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
+
 ## Statement of inclusion
 
 There are many reasons to contribute something to a library of formalized mathematics. Some do it just for fun, some do it for their research, some do it to learn something. Whatever your reason is, we welcome your contributions! To keep the experience of contributing something to our library enjoyable for everyone, we strive for an inclusive community of contributors. You can expect from us that we are kind and respectful in discussions, that we will be mindful of your pronouns and use [inclusive language](https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines), and that we value your input regardless of your level of experience or status in the community. We're commited to providing a safe and welcoming environment to people of any gender identity, sexual orientation, race, colour, age, ability, ethnicity, background, or fluency in English -- here on github, in online communication channels, and in person. Homotopy type theory is difficult enough without all the barriers that many of us have to face, so we hope to bring some of those down a bit.

@@ -31,7 +31,7 @@ open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; universal-property-trunc-Set; trunc-Set;
     dependent-universal-property-trunc-Set; map-equiv-trunc-Σ-Set;
     trunc-Σ-Set; equiv-trunc-Σ-Set; apply-effectiveness-unit-trunc-Set;
-    apply-dependent-universal-property-trunc-Set; is-surjective-unit-trunc-Set;
+    apply-dependent-universal-property-trunc-Set'; is-surjective-unit-trunc-Set;
     is-set-type-trunc-Set; is-set-truncation-trunc-Set)
 open import foundation.sets using (set-Prop; Id-Prop)
 open import foundation.slice using
@@ -215,13 +215,13 @@ module _
     is-injective-map-trunc-Set :
       is-injective f → is-injective (map-trunc-Set f)
     is-injective-map-trunc-Set H {x} {y} =
-      apply-dependent-universal-property-trunc-Set
+      apply-dependent-universal-property-trunc-Set'
         ( λ u →
           set-Prop
             ( function-Prop (Id (map-trunc-Set f u) (map-trunc-Set f y))
             ( Id-Prop (trunc-Set A) u y) ))
         ( λ a →
-          apply-dependent-universal-property-trunc-Set
+          apply-dependent-universal-property-trunc-Set'
           ( λ v →
             set-Prop
               ( function-Prop
@@ -249,7 +249,7 @@ module _
     is-surjective-map-trunc-Set :
       is-surjective f → is-surjective (map-trunc-Set f)
     is-surjective-map-trunc-Set H =
-      apply-dependent-universal-property-trunc-Set
+      apply-dependent-universal-property-trunc-Set'
         ( λ x → set-Prop (trunc-Prop (fib (map-trunc-Set f) x)))
         ( λ b →
           apply-universal-property-trunc-Prop

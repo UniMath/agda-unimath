@@ -34,6 +34,10 @@ cardinal l = type-Set (cardinal-Set l)
 card : {l : Level} → UU-Set l → cardinal l
 card A = unit-trunc-Set A
 
+total-leq-card-Prop :
+  {l1 l2 : Level} → ?
+total-leq-card-Prop X = ?
+
 leq-card-Prop : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU-Prop (l1 ⊔ l2)
 leq-card-Prop {l1} {l2} X Y =
   apply-universal-property-trunc-Set X
@@ -52,7 +56,7 @@ is-prop-≤-card {X = X} {Y = Y} = is-prop-type-Prop (leq-card-Prop X Y)
 compute-leq-card :
   {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
   type-trunc-Prop (type-Set A ↪ type-Set B) ≃ (card A ≤-card card B)
-compute-leq-card A B = ?
+compute-leq-card A B = {!!}
 
 refl-≤-card : {l : Level} (X : cardinal l) → X ≤-card X
 refl-≤-card {l} =

@@ -677,6 +677,7 @@ open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.multiplication-circle
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 open import synthetic-homotopy-theory.wedges-of-pointed-types
