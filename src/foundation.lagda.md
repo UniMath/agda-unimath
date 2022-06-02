@@ -92,6 +92,7 @@ open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.impredicative-encodings public
+open import foundation.impredicative-universes public
 open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-w-types public
@@ -118,6 +119,7 @@ open import foundation.multisets public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.pairs-of-distinct-elements public
+open import foundation.partial-elements public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
