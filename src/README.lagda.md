@@ -630,14 +630,15 @@ open import set-theory.uncountable-sets
 
 ```agda
 open import structured-types
+open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.finite-multiplication-magmas
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.morphisms-magmas
 open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.morphisms-wild-unital-magmas
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-families-of-types
@@ -651,7 +652,6 @@ open import structured-types.wild-loops
 open import structured-types.wild-monoids
 open import structured-types.wild-quasigroups
 open import structured-types.wild-semigroups
-open import structured-types.wild-unital-magmas
 ```
 
 ## Synthetic homotopy theory
