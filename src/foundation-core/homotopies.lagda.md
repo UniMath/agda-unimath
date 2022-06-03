@@ -5,9 +5,10 @@
 
 module foundation-core.homotopies where
 
+open import foundation-core.functions using (id)
 open import foundation-core.identity-types using
   ( Id; refl; _∙_; concat; inv; ap; assoc; left-unit; right-unit; left-inv;
-    right-inv; distributive-inv-concat)
+    right-inv; distributive-inv-concat; is-injective-concat'; ap-id)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -146,4 +147,18 @@ nat-htpy :
   {x y : A} (p : Id x y) →
   Id ((H x) ∙ (ap g p)) ((ap f p) ∙ (H y))
 nat-htpy H refl = right-unit
+
+nat-htpy-id :
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) →
+  {x y : A} (p : Id x y) → Id ((H x) ∙ p) ((ap f p) ∙ (H y))
+nat-htpy-id H refl = right-unit
+```
+
+### A coherence for homotopies to the identity function
+
+```agda
+coh-htpy-id :
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → (H ·r f) ~ (f ·l H)
+coh-htpy-id {f = f} H x =
+  is-injective-concat' (H x) (nat-htpy-id H (H x))
 ```

@@ -47,7 +47,7 @@ open import group-theory.isomorphisms-abelian-groups using
 open import ring-theory.homomorphisms-rings using
   ( type-hom-Ring; comp-hom-Ring; id-hom-Ring; map-hom-Ring; htpy-eq-hom-Ring;
     hom-Ring; eq-htpy-hom-Ring; left-unit-law-comp-hom-Ring; hom-ab-hom-Ring;
-    preserves-mul-hom-Ab; preserves-unit-hom-Ab; is-ring-homomorphism-hom-Ab;
+    preserves-mul-hom-Ab; preserves-one-hom-Ab; is-ring-homomorphism-hom-Ab;
     is-ring-homomorphism-hom-Ring)
 open import ring-theory.rings
 ```
@@ -244,14 +244,14 @@ abstract
         ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f x)
         ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f y)))
 
-preserves-unit-inv-is-iso-hom-Ab :
+preserves-one-inv-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2)
   ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f)
-  ( pres-unit-f : preserves-unit-hom-Ab R1 R2 f) →
-  preserves-unit-hom-Ab R2 R1
+  ( pres-unit-f : preserves-one-hom-Ab R1 R2 f) →
+  preserves-one-hom-Ab R2 R1
     ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f) 
-preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
+preserves-one-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
   ( inv
     ( ap
       ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
@@ -270,7 +270,7 @@ is-ring-homomorphism-inv-is-iso-hom-Ab
   R1 R2 f is-iso-f (pair pres-mul-f pres-unit-f) =
   pair
     ( preserves-mul-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-mul-f)
-    ( preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f)
+    ( preserves-one-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f)
 
 inv-hom-Ring-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →

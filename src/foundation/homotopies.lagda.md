@@ -13,14 +13,14 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; is-equiv-id)
 open import foundation-core.functions using (_∘_; id)
+open import foundation-core.functoriality-dependent-function-types using
+  ( is-equiv-map-Π)
 open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 
 open import foundation.function-extensionality using
   ( equiv-funext; eq-htpy; FUNEXT; htpy-eq; funext)
-open import foundation.functoriality-dependent-function-types using
-  ( is-equiv-map-Π)
 open import foundation.identity-systems using
   ( Ind-identity-system; fundamental-theorem-id-IND-identity-system)
 open import foundation.identity-types using

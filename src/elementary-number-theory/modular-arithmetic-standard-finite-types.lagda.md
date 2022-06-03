@@ -801,8 +801,8 @@ leq-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( nat-Fin (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (mod-succ-ℕ k x)))
     ( succ-ℕ x)
-    ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( leq-nat-mod-succ-ℕ k x)
+    ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
 ```
 
 ## Decidability of division

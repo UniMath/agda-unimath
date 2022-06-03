@@ -18,11 +18,8 @@ open import
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
     _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
-open import foundation.fibers-of-maps using (fib; equiv-total-fib)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy; assoc-htpy; ap-concat-htpy';
     left-inv-htpy)
@@ -34,6 +31,10 @@ open import foundation.type-arithmetic-dependent-pair-types using
   ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr;
     equiv-right-swap-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.fibers-of-maps using (fib; equiv-total-fib)
+open import foundation-core.functoriality-dependent-pair-types using
+  ( equiv-Σ)
 ```
 
 ## Idea

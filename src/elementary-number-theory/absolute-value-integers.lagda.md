@@ -89,8 +89,8 @@ subadditive-abs-ℤ x (inl (succ-ℕ y)) =
       ( abs-ℤ (pred-ℤ (add-ℤ x (inl y))))
       ( succ-ℕ (abs-ℤ (add-ℤ x (inl y))))
       ( add-ℕ (abs-ℤ x) (succ-ℕ (succ-ℕ y)))
-      ( predecessor-law-abs-ℤ (add-ℤ x (inl y)))
-      ( subadditive-abs-ℤ x (inl y)))
+      ( subadditive-abs-ℤ x (inl y))
+      ( predecessor-law-abs-ℤ (add-ℤ x (inl y))))
     ( refl)
 subadditive-abs-ℤ x (inr (inl star)) =
   concatenate-eq-leq-eq-ℕ
@@ -109,8 +109,8 @@ subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =
       ( abs-ℤ (succ-ℤ (add-ℤ x (inr (inr y)))))
       ( succ-ℕ (abs-ℤ (add-ℤ x (inr (inr y)))))
       ( succ-ℕ (add-ℕ (abs-ℤ x) (succ-ℕ y)))
-      ( successor-law-abs-ℤ (add-ℤ x (inr (inr y))))
-      ( subadditive-abs-ℤ x (inr (inr y))))
+      ( subadditive-abs-ℤ x (inr (inr y)))
+      ( successor-law-abs-ℤ (add-ℤ x (inr (inr y)))))
     ( refl)
 
 negative-law-abs-ℤ :

@@ -27,6 +27,10 @@ open import order-theory.preorders
 ## Definition
 
 ```agda
+powerset :
+  {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+powerset = subtype
+
 module _
   {l1 : Level} {A : UU l1}
   where

@@ -6,6 +6,7 @@
 module foundation.universal-property-cartesian-product-types where
 
 open import foundation.cartesian-product-types using (_×_)
+open import foundation.cones-pullbacks using (cone)
 open import foundation.constant-maps using (const)
 open import foundation.contractible-types using (eq-is-contr; is-prop-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -19,7 +20,7 @@ open import foundation.pullbacks using
     universal-property-pullback-is-pullback)
 open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universal-property-pullbacks using
-  ( cone; universal-property-pullback)
+  ( universal-property-pullback)
 open import foundation.universe-levels using (Level; UU)
 ```
 

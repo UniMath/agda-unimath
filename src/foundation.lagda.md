@@ -18,6 +18,7 @@ open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-relations public
 open import foundation.boolean-reflection public
 open import foundation.booleans public
+open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
@@ -60,6 +61,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equational-reasoning public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
@@ -90,6 +92,7 @@ open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.impredicative-encodings public
+open import foundation.impredicative-universes public
 open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-w-types public
@@ -100,6 +103,9 @@ open import foundation.interchange-law public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
+open import foundation.iterating-automorphisms public
+open import foundation.iterating-functions public
+open import foundation.iterating-involutions public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.locally-small-types public
@@ -113,6 +119,7 @@ open import foundation.multisets public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.pairs-of-distinct-elements public
+open import foundation.partial-elements public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public

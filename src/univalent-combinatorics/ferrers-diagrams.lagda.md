@@ -7,6 +7,8 @@ title: Ferrers diagrams
 
 module univalent-combinatorics.ferrers-diagrams where
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -23,6 +25,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.pi-finite-types
 ```
 
 ## Idea
@@ -245,3 +248,7 @@ module _
   eq-equiv-ferrers-diagram-𝔽 E =
     map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram-𝔽 E)
 ```
+
+## Properties
+
+### The type of Ferrers diagrams of any finite type is π-finite

@@ -20,7 +20,10 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( is-empty; ex-falso; is-equiv-is-empty'; empty; is-empty-type-trunc-Prop)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; map-inv-equiv; inv-equiv; id-equiv; _∘e_; is-equiv)
+  ( _≃_; map-equiv; map-inv-equiv; inv-equiv; id-equiv; _∘e_; is-equiv;
+    issec-map-inv-equiv; isretr-map-inv-equiv)
+open import foundation.functions using (_∘_; id)
+open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.propositional-truncations using
@@ -61,6 +64,12 @@ module _
   
   map-inv-equiv-count : X → Fin number-of-elements-count
   map-inv-equiv-count = map-inv-equiv equiv-count
+
+  issec-map-inv-equiv-count : (map-equiv-count ∘ map-inv-equiv-count) ~ id
+  issec-map-inv-equiv-count = issec-map-inv-equiv equiv-count
+
+  isretr-map-inv-equiv-count : (map-inv-equiv-count ∘ map-equiv-count) ~ id
+  isretr-map-inv-equiv-count = isretr-map-inv-equiv equiv-count
   
   inv-equiv-count : X ≃ Fin number-of-elements-count
   inv-equiv-count = inv-equiv equiv-count

@@ -13,5 +13,8 @@ open import commutative-algebra.eisenstein-integers public
 open import commutative-algebra.gaussian-integers public
 open import commutative-algebra.homomorphisms-commutative-rings public
 open import commutative-algebra.ideals-commutative-rings public
+open import commutative-algebra.integral-domains public
 open import commutative-algebra.isomorphisms-commutative-rings public
+open import commutative-algebra.prime-ideals-commutative-rings public
+open import commutative-algebra.zarisky-topology public
 ```

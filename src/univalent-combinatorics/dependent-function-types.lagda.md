@@ -11,8 +11,9 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (equiv-precomp-Π)
 open import foundation.functions using (_∘_)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-precomp-Π)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.unit-type using (star)

@@ -137,7 +137,7 @@ abstract
     (pair x (pair p l)) (pair y (pair q m)) =
     eq-subtype
       ( λ t → prod-Prop (P t) (is-lower-bound-fin-Prop (is-in-subtype P) t))
-      ( antisymmetric-leq-Fin (l y q) (m x p))
+      ( antisymmetric-leq-Fin x y (l y q) (m x p))
 
 abstract
   is-prop-minimal-element-Fin :

@@ -10,15 +10,17 @@ module foundation.pairs-of-distinct-elements where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-total-path)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using
+  ( _↪_; map-emb; equiv-ap-emb; is-emb; is-emb-map-emb; emb-Σ)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-map-equiv; is-equiv; map-inv-is-equiv;
     map-inv-equiv; is-equiv-map-inv-equiv; issec-map-inv-equiv;
-    isretr-map-inv-equiv; is-equiv-has-inverse)
+    isretr-map-inv-equiv; is-equiv-has-inverse; emb-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl)
 open import foundation.injective-maps using (is-injective-is-equiv)
-open import foundation.negation using (¬; is-prop-neg)
+open import foundation.negation using (¬; is-prop-neg; equiv-neg)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
@@ -172,4 +174,34 @@ module _
   pr1 equiv-pair-of-distinct-elements = map-equiv-pair-of-distinct-elements
   pr2 equiv-pair-of-distinct-elements =
     is-equiv-map-equiv-pair-of-distinct-elements
+```
+
+### Embeddings map pairs of distinct elements to pairs of distinct elements
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ↪ B)
+  where
+
+  emb-pair-of-distinct-elements :
+    pair-of-distinct-elements A ↪ pair-of-distinct-elements B
+  emb-pair-of-distinct-elements =
+    emb-Σ
+      ( λ x → Σ B (λ y → ¬ (Id x y)))
+      ( e)
+      ( λ x →
+        emb-Σ
+          ( λ y → ¬ (Id (map-emb e x) y))
+          ( e)
+          ( λ y → emb-equiv (equiv-neg (equiv-ap-emb e))))
+
+  map-emb-pair-of-distinct-elements :
+    pair-of-distinct-elements A → pair-of-distinct-elements B
+  map-emb-pair-of-distinct-elements =
+    map-emb emb-pair-of-distinct-elements
+
+  is-emb-map-emb-pair-of-distinct-elements :
+    is-emb map-emb-pair-of-distinct-elements
+  is-emb-map-emb-pair-of-distinct-elements =
+    is-emb-map-emb emb-pair-of-distinct-elements
 ```

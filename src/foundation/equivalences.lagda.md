@@ -10,13 +10,16 @@ open import foundation-core.equivalences public
 open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.commuting-squares using (coherence-square)
+open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps using
-  ( is-contr-map-is-equiv; is-contr-map)
-open import foundation-core.contractible-types using (center; eq-is-contr')
+  ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
+open import foundation-core.contractible-types using
+  ( center; eq-is-contr'; is-equiv-is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functions using (_∘_; id; precomp-Π; precomp)
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; equiv-tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation-core.fundamental-theorem-of-identity-types using
@@ -26,6 +29,8 @@ open import foundation-core.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+open import foundation-core.pullbacks using
+  ( is-pullback; is-pullback-is-fiberwise-equiv-fib-square; fib-square)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
@@ -33,7 +38,8 @@ open import foundation-core.subtypes using
   ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 open import foundation-core.truncated-types using
   ( Truncated-Type; type-Truncated-Type; is-trunc)
-open import foundation-core.truncation-levels using (𝕋)
+open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
+open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
@@ -49,8 +55,11 @@ open import foundation.identity-types using
   ( Id; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
+open import foundation.pullbacks
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
+
+open import foundation.truncated-maps
 ```
 
 ## Properties
@@ -141,50 +150,6 @@ module _
                                 ( inv (issec-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
-```
-
-### If `f` is coherently invertible, then precomposing by `f` is an equivalence
-
-```agda
-tr-precompose-fam :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
-  (f : A → B) {x y : A} (p : Id x y) → tr C (ap f p) ~ tr (λ x → C (f x)) p
-tr-precompose-fam C f refl = refl-htpy
-
-abstract
-  is-equiv-precomp-Π-is-coherently-invertible :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-coherently-invertible f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-coherently-invertible f
-    ( pair g (pair issec-g (pair isretr-g coh))) C = 
-    is-equiv-has-inverse
-      (λ s y → tr C (issec-g y) (s (g y)))
-      ( λ s → eq-htpy (λ x → 
-        ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙
-        ( ( tr-precompose-fam C f (isretr-g x) (s (g (f x)))) ∙
-          ( apd s (isretr-g x)))))
-      ( λ s → eq-htpy λ y → apd s (issec-g y))
-```
-
-### If `f` is an equivalence, then precomposing by `f` is an equivalence
-
-```agda
-abstract
-  is-equiv-precomp-Π-is-equiv :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) → is-equiv f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-equiv f is-equiv-f =
-    is-equiv-precomp-Π-is-coherently-invertible f
-      ( is-coherently-invertible-is-path-split f
-        ( is-path-split-is-equiv f is-equiv-f))
-
-equiv-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  (C : B → UU l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
-pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
-pr2 (equiv-precomp-Π e C) =
-  is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
 ```
 
 ### Equivalences can be seen as constructors for inductive types.
@@ -371,8 +336,7 @@ module _
     is-property-is-equiv f H =
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
-  is-equiv-Prop :
-    (f : A → B) → Σ (UU (l1 ⊔ l2)) (λ X → (x y : X) → is-contr (Id x y))
+  is-equiv-Prop : (f : A → B) → UU-Prop (l1 ⊔ l2)
   pr1 (is-equiv-Prop f) = is-equiv f
   pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
@@ -555,4 +519,29 @@ equiv-precomp-equiv e C =
         ( λ is-equiv-eg →
           is-equiv-left-factor'
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))
+```
+
+### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the span is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  abstract
+    is-equiv-is-pullback : is-equiv g → is-pullback f g c → is-equiv (pr1 c)
+    is-equiv-is-pullback is-equiv-g pb =
+      is-equiv-is-contr-map
+        ( is-trunc-is-pullback neg-two-𝕋 f g c pb
+          ( is-contr-map-is-equiv is-equiv-g))
+
+  abstract
+    is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
+    is-pullback-is-equiv is-equiv-g is-equiv-p =
+      is-pullback-is-fiberwise-equiv-fib-square f g c
+        ( λ a → is-equiv-is-contr
+          ( fib-square f g c a)
+          ( is-contr-map-is-equiv is-equiv-p a)
+          ( is-contr-map-is-equiv is-equiv-g (f a)))
 ```

@@ -15,6 +15,7 @@ open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv)
 open import foundation.identity-types using (Id; ap-binary; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
+open import foundation.negation using (¬)
 open import foundation.propositions using (UU-Prop)
 open import foundation.sets using (UU-Set; is-set; Id-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
@@ -30,7 +31,7 @@ open import group-theory.abelian-groups using
     add-list-Ab; preserves-concat-add-list-Ab)
 open import group-theory.groups using (Group; is-group; is-group')
 open import group-theory.monoids using
-  ( is-unital; Monoid; unit-Monoid; left-unit-law-Monoid; right-unit-law-Monoid)
+  ( is-unital; Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
 
@@ -156,6 +157,9 @@ module _
   is-zero-Ring : type-Ring R → UU l
   is-zero-Ring x = Id x zero-Ring
 
+  is-nonzero-Ring : type-Ring R → UU l
+  is-nonzero-Ring x = ¬ (is-zero-Ring x)
+
   is-zero-ring-Prop : type-Ring R → UU-Prop l
   is-zero-ring-Prop x = Id-Prop (set-Ring R) x zero-Ring
 
@@ -250,10 +254,10 @@ module _
   one-Ring = unit-Monoid multiplicative-monoid-Ring
 
   left-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R one-Ring x) x
-  left-unit-law-mul-Ring = left-unit-law-Monoid multiplicative-monoid-Ring
+  left-unit-law-mul-Ring = left-unit-law-mul-Monoid multiplicative-monoid-Ring
 
   right-unit-law-mul-Ring : (x : type-Ring R) → Id (mul-Ring R x one-Ring) x
-  right-unit-law-mul-Ring = right-unit-law-Monoid multiplicative-monoid-Ring
+  right-unit-law-mul-Ring = right-unit-law-mul-Monoid multiplicative-monoid-Ring
 ```
 
 ### The zero laws for multiplication of a ring
