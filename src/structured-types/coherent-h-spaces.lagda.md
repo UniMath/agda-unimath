@@ -9,10 +9,11 @@ module structured-types.coherent-h-spaces where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (id)
-open import foundation.homotopies using (nat-htpy; _~_)
+open import foundation.homotopies using
+  (nat-htpy; _~_; coh-htpy-id; nat-htpy-id)
 open import foundation.identity-types using
   ( Id; refl; ap-binary; _∙_; left-unit; right-unit; ap; concat; inv; ap-id;
-    assoc; triangle-ap-binary; triangle-ap-binary')
+    assoc; triangle-ap-binary; triangle-ap-binary'; inv-con; concat')
 open import foundation.path-algebra using
   ( horizontal-concat-Id²)
 open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
@@ -118,5 +119,33 @@ module _
 ```agda
 coherent-h-space-H-Space :
   {l : Level} → H-Space l → Coherent-H-Space l
-coherent-h-space-H-Space A = ?
+pr1 (coherent-h-space-H-Space A) = pointed-type-H-Space A
+pr1 (pr2 (coherent-h-space-H-Space A)) = mul-H-Space A
+pr1 (pr2 (pr2 (coherent-h-space-H-Space A))) x =
+  left-unit-law-mul-H-Space A x
+pr1 (pr2 (pr2 (pr2 (coherent-h-space-H-Space A)))) x =
+  ( inv (ap (mul-H-Space A x) (right-unit-law-mul-H-Space A (pt-H-Space A)))) ∙
+  ( ( ap (mul-H-Space A x) (left-unit-law-mul-H-Space A (pt-H-Space A))) ∙
+    ( right-unit-law-mul-H-Space A x))
+pr2 (pr2 (pr2 (pr2 (coherent-h-space-H-Space A)))) =
+  inv-con
+    ( ap
+      ( mul-H-Space A (pt-H-Space A))
+      ( right-unit-law-mul-H-Space A (pt-H-Space A)))
+    ( left-unit-law-mul-H-Space A (pt-H-Space A))
+    ( ( ap
+        ( mul-H-Space A (pt-H-Space A))
+        ( left-unit-law-mul-H-Space A (pt-H-Space A))) ∙
+      ( right-unit-law-mul-H-Space A (pt-H-Space A)))
+    ( ( inv
+        ( nat-htpy-id
+          ( left-unit-law-mul-H-Space A)
+          ( right-unit-law-mul-H-Space A (pt-H-Space A)))) ∙
+      ( ap
+        ( concat'
+          ( mul-H-Space A
+            ( pt-H-Space A)
+            ( mul-H-Space A (pt-H-Space A) (pt-H-Space A)))
+          ( right-unit-law-mul-H-Space A (pt-H-Space A)))
+        ( coh-htpy-id (left-unit-law-mul-H-Space A) (pt-H-Space A))))
 ```
