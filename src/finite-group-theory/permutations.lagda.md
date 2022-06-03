@@ -1,7 +1,7 @@
 # Permutations
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
 
 module finite-group-theory.permutations where
 

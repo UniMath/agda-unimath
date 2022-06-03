@@ -1,7 +1,7 @@
 # Orbits of permutations
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
 
 module finite-group-theory.orbits-permutations where
 

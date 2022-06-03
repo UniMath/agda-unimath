@@ -39,7 +39,7 @@ open import foundation.equivalence-classes using
 open import foundation.equivalences using
   ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
     right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
-    right-unit-law-equiv)
+    right-unit-law-equiv; left-unit-law-equiv)
 open import foundation.equivalence-relations using (Eq-Rel; refl-Eq-Rel)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
@@ -91,8 +91,6 @@ open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
-open import univalent-combinatorics.orientations-complete-undirected-graph using
-  ( quotient-sign; quotient-sign-Set; mere-equiv-Fin-2-quotient-sign; equiv-Fin-2-quotient-sign-equiv-Fin-n)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin)
 ```
@@ -259,6 +257,30 @@ module _
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism
   pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
+
+  eq-sign-homomorphism-transposition :
+    ( Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
+    Id
+      ( map-hom-Group
+        ( symmetric-Group (set-UU-Fin-Level X))
+        ( symmetric-Group (Fin-Set 2))
+        ( sign-homomorphism)
+        ( transposition Y))
+      equiv-succ-Fin
+  eq-sign-homomorphism-transposition Y =
+    ap aut-point-Fin-two-ℕ
+      ( ap pr1
+        { x = center (is-contr-parity-transposition-permutation n X (transposition Y))}
+        { y =
+          pair
+            ( inr star)
+            ( unit-trunc-Prop
+              ( pair
+                ( in-list Y)
+                ( pair refl (inv (right-unit-law-equiv (transposition Y))))))}
+        ( eq-is-contr
+          ( is-contr-parity-transposition-permutation n X (transposition Y))))
+    
 ```
 
 ## Deloopings of the sign homomorphism

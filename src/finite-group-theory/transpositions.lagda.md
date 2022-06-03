@@ -792,43 +792,118 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype {l} {X} H {x} {y} 
               ( is-prop-is-decidable
                 ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))))))
     ( eq-is-prop is-prop-type-trunc-Prop)
-      where
-      f : (z : X) →
-        pr1
-          ( pr1
-            ( precomp-equiv-2-Element-Decidable-Subtype
-              ( standard-transposition H np)
-              ( standard-2-Element-Decidable-Subtype H np)) z) →
-        pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z)
-      f z (inl p) =
-        inr
-          ( is-injective-map-equiv
-            ( standard-transposition H np)
-            ( ( right-computation-standard-transposition H np) ∙
-              ( p)))
-      f z (inr p) =
-        inl
-          ( is-injective-map-equiv
-            ( standard-transposition H np)
-            ( ( left-computation-standard-transposition H np) ∙
-              ( p)))
-      g : (z : X) →
-        pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z) →
-        pr1
-          ( pr1
-            ( precomp-equiv-2-Element-Decidable-Subtype
-              ( standard-transposition H np)
-              ( standard-2-Element-Decidable-Subtype H np)) z)
-      g z (inl p) =
-        inr
-          ( ( inv
-            ( left-computation-standard-transposition H np)) ∙
-            ( ap (map-standard-transposition H np) p))
-      g z (inr p) =
-        inl
-          ( ( inv
-            ( right-computation-standard-transposition H np)) ∙
-            ( ap (map-standard-transposition H np) p))
+  where
+  f : (z : X) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np)) z) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z)
+  f z (inl p) =
+    inr
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( right-computation-standard-transposition H np) ∙
+          ( p)))
+  f z (inr p) =
+    inl
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( left-computation-standard-transposition H np) ∙
+          ( p)))
+  g : (z : X) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np)) z)
+  g z (inl p) =
+    inr
+      ( ( inv
+        ( left-computation-standard-transposition H np)) ∙
+        ( ap (map-standard-transposition H np) p))
+  g z (inr p) =
+    inl
+      ( ( inv
+        ( right-computation-standard-transposition H np)) ∙
+        ( ap (map-standard-transposition H np) p))
+
+eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype :
+  {l : Level} {X : UU l} (H : has-decidable-equality X) →
+  {x y z w : X} (np : ¬ (Id x y)) (np' : ¬ (Id z w)) →
+  ¬ (Id x z) → ¬ (Id x w) → ¬ (Id y z) → ¬ (Id y w) → 
+  Id
+    ( precomp-equiv-2-Element-Decidable-Subtype
+      ( standard-transposition H np)
+      ( standard-2-Element-Decidable-Subtype H np'))
+    ( standard-2-Element-Decidable-Subtype H np')
+eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
+  {l} {X} H {x} {y} {z} {w} np np' nq1 nq2 nq3 nq4 =
+  eq-pair-Σ
+    ( eq-htpy
+      ( λ u →
+        eq-pair-Σ
+          ( eq-equiv
+            ( pr1
+              ( pr1
+                ( precomp-equiv-2-Element-Decidable-Subtype
+                  ( standard-transposition H np)
+                  ( standard-2-Element-Decidable-Subtype H np'))
+                ( u)))
+            ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))
+            ( equiv-iff
+              ( subtype-standard-2-Element-Decidable-Subtype H np'
+                ( map-inv-equiv (standard-transposition H np) u))
+              ( subtype-standard-2-Element-Decidable-Subtype H np' u)
+              ( f u)
+              ( g u)))
+          ( eq-pair-Σ
+            ( eq-is-prop
+              ( is-prop-is-prop
+                ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))
+            ( eq-is-prop
+              ( is-prop-is-decidable
+                ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))))))
+    ( eq-is-prop is-prop-type-trunc-Prop)
+  where
+  f : (u : X) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np')) u) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u)
+  f u (inl p) =
+    inl
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( is-fixed-point-standard-transposition H np z nq1 nq3) ∙
+          ( p)))
+  f u (inr p) =
+    inr
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( is-fixed-point-standard-transposition H np w nq2 nq4) ∙
+          ( p)))
+  g : (u : X) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np')) u)
+  g u (inl p) =
+    inl
+      ( ( inv
+        ( is-fixed-point-standard-transposition H np z nq1 nq3)) ∙
+        ( ap (map-standard-transposition H np) p))
+  g u (inr p) =
+    inr
+      ( ( inv
+        ( is-fixed-point-standard-transposition H np w nq2 nq4)) ∙
+        ( ap (map-standard-transposition H np) p))
 ```
 
 ```agda

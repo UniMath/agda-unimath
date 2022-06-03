@@ -40,12 +40,13 @@ open import foundation.equivalences using
     map-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (eq-htpy)
+open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
 open import foundation.functoriality-propositional-truncation using
   ( functor-trunc-Prop)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
+open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr; equiv-concat)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (iff-equiv; equiv-iff')
 open import foundation.mere-equivalences using (transitive-mere-equiv)
@@ -275,7 +276,42 @@ module _
                     ( pr1
                       ( standard-2-Element-Decidable-Subtype d
                         ( λ p → np (inv p)))
-                        ( z))))))))
+                      ( z))))))))
+      ( eq-is-prop is-prop-type-trunc-Prop)
+
+module _
+  {l : Level} {X : UU l} (d : has-decidable-equality X) {x y z w : X}
+  (np : ¬ (Id x y)) (nq : ¬ (Id z w)) (r : Id x z) (s : Id y w)
+  where
+
+  eq-equal-elements-standard-2-Element-Decidable-Subtype :
+    Id
+      ( standard-2-Element-Decidable-Subtype d np)
+      ( standard-2-Element-Decidable-Subtype d nq)
+  eq-equal-elements-standard-2-Element-Decidable-Subtype =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ v →
+          eq-pair-Σ
+            ( eq-equiv
+              ( coprod (Id x v) (Id y v))
+              ( coprod (Id z v) (Id w v))
+              ( equiv-coprod
+                ( equiv-concat (inv r) v)
+                ( equiv-concat (inv s) v)))
+            ( eq-pair-Σ
+              ( eq-is-prop
+                ( is-prop-is-prop
+                  ( type-decidable-Prop
+                    ( pr1
+                      ( standard-2-Element-Decidable-Subtype d nq)
+                      ( v)))))
+              ( eq-is-prop
+                ( is-prop-is-decidable
+                  ( is-prop-type-decidable-Prop
+                    ( pr1
+                      ( standard-2-Element-Decidable-Subtype d nq)
+                      ( v))))))))
       ( eq-is-prop is-prop-type-trunc-Prop)
 ```
 

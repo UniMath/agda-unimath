@@ -9,10 +9,12 @@ module group-theory.loop-groups-sets where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; left-inverse-law-equiv; right-inverse-law-equiv)
+  ( _≃_; map-equiv; inv-equiv; id-equiv; left-inverse-law-equiv; right-inverse-law-equiv;
+    left-unit-law-equiv; eq-htpy-equiv)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.functions using (id)
 open import foundation.function-extensionality using (eq-htpy)
+open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-truncated-types using (is-trunc-id-is-trunc)
 open import foundation.identity-types using
   ( Id; refl; _∙_; inv; ap; assoc; left-unit; right-unit; left-inv; right-inv;
@@ -96,6 +98,16 @@ module _
   map-hom-inv-symmetric-group-loop-group-Set X Y f =
     inv (eq-equiv (type-Set X) (type-Set Y) f)
 
+  commutative-inv-map-hom-symmetric-group-loop-group-Set :
+    (X Y : UU l) (p : Id X Y) (sX : is-set X) (sY : is-set Y) →
+    Id
+      ( map-hom-symmetric-group-loop-group-Set (pair Y sY) (pair X sX) (inv p))
+      ( inv-equiv
+        ( map-hom-symmetric-group-loop-group-Set (pair X sX) (pair Y sY) p))
+  commutative-inv-map-hom-symmetric-group-loop-group-Set X .X refl sX sY =
+    ( inv (right-inverse-law-equiv id-equiv)) ∙
+      ( left-unit-law-equiv (inv-equiv id-equiv))
+
 module _
   {l : Level} (X : UU-Set l)
   where
@@ -167,8 +179,4 @@ module _
   pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-sec-hom-inv-symmetric-group-loop-group-Set
   pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-retr-hom-inv-symmetric-group-loop-group-Set
 ```
-
-
-
-
 
