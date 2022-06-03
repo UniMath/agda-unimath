@@ -167,6 +167,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ```agda
 open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
+open import finite-group-theory.cartier-delooping-sign-homomorphism
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-monoids
@@ -269,6 +270,7 @@ open import foundation.global-choice
 open import foundation.hilberts-epsilon-operators
 open import foundation.homotopies
 open import foundation.identity-systems
+open import foundation.identity-truncated-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.impredicative-encodings
@@ -510,6 +512,7 @@ open import group-theory.isomorphisms-abelian-groups
 open import group-theory.isomorphisms-group-actions
 open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
+open import group-theory.loop-groups-sets
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions
 open import group-theory.monoids

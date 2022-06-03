@@ -8,7 +8,7 @@ module group-theory.homomorphisms-generated-subgroups where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_; is-emb; comp-emb)
+open import foundation.embeddings using (_↪_; is-emb; map-emb; comp-emb)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using (is-equiv-has-inverse; emb-equiv)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
@@ -109,7 +109,7 @@ module _
       ( pair
         ( ev-formal-combination-subset-Group G S (in-list (pair (inr star) x)))
         ( unit-trunc-Prop
-          (pair ( in-list (pair (inr star) x)) refl)))
+          ( pair (in-list (pair (inr star) x)) refl)))
 
   is-emb-map-restriction-generating-subset-Subgroup : 
     is-emb (map-restriction-generating-subset-Subgroup)
@@ -266,5 +266,14 @@ module _
             ( group-Subgroup G (subgroup-subset-Group G S))
             ( isomorph-inclusion-complete-subgroup-Subgroup G (subgroup-subset-Group G S) H))
           ( G')))
-```
 
+  eq-map-restriction-generating-subset-Group :
+    ( f : type-hom-Group G G') (x : type-subtype S) →
+    Id
+      ( map-emb restriction-generating-subset-Group f x)
+      ( map-hom-Group G G' f (pr1 x))
+  eq-map-restriction-generating-subset-Group f x =
+    ap
+      ( map-hom-Group G G' f)
+      ( right-unit-law-Group G (pr1 x))
+```

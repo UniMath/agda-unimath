@@ -15,13 +15,15 @@ open import foundation.decidable-types using
   ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
-  ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty)
+  ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; map-equiv; equiv-ap; is-equiv; is-equiv-has-inverse)
+  ( _≃_; _∘e_; map-equiv; equiv-ap; is-equiv; is-equiv-has-inverse; inv-equiv; map-inv-equiv;
+    right-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; ap; refl)
+open import foundation.identity-types using (Id; ap; refl; inv; tr)
+open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.negation using (¬)
 open import foundation.propositional-extensionality using
   ( is-contr-total-true-Prop; is-contr-total-false-Prop)
@@ -159,4 +161,35 @@ module _
         ( is-proof-irrelevant-is-prop (is-set-bool true true) refl)
     compute-equiv-bool-decidable-Prop (pair P (pair H (inr np))) =
       equiv-is-empty np neq-false-true-bool
+```
+
+### Types of decidable propositions of any universe level are equivalent
+
+```agda
+equiv-universes-decidable-Prop : (l l' : Level) →
+  decidable-Prop l ≃ decidable-Prop l'
+equiv-universes-decidable-Prop l l' =
+  inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-decidable-Prop
+
+iff-universes-decidable-Prop : (l l' : Level) (P : decidable-Prop l) →
+  ( prop-decidable-Prop P ⇔
+    prop-decidable-Prop (map-equiv (equiv-universes-decidable-Prop l l') P))
+pr1 (iff-universes-decidable-Prop l l' P) p =
+  map-inv-equiv
+    ( compute-equiv-bool-decidable-Prop
+      ( map-equiv (equiv-universes-decidable-Prop l l') P))
+    ( tr
+      ( λ e → Id (map-equiv e (map-equiv equiv-bool-decidable-Prop P)) true)
+      ( inv (right-inverse-law-equiv equiv-bool-decidable-Prop))
+      ( map-equiv (compute-equiv-bool-decidable-Prop P) p))
+pr2 (iff-universes-decidable-Prop l l' P) p =
+  map-inv-equiv
+    ( compute-equiv-bool-decidable-Prop P)
+    ( tr
+      ( λ e → Id (map-equiv e (map-equiv equiv-bool-decidable-Prop P)) true)
+      ( right-inverse-law-equiv equiv-bool-decidable-Prop)
+      ( map-equiv
+        ( compute-equiv-bool-decidable-Prop
+          ( map-equiv (equiv-universes-decidable-Prop l l') P))
+        ( p)))
 ```
