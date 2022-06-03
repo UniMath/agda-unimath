@@ -353,6 +353,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.union
+open import foundation.unique-existence
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations
