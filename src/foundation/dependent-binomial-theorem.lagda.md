@@ -9,9 +9,6 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-diagonal-is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.type-theoretic-principle-of-choice using
-  ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
@@ -25,6 +22,8 @@ open import foundation.identity-types using (ap; equiv-tr)
 open import foundation.raising-universe-levels using
   ( raise; map-inv-raise; map-raise; isretr-map-inv-raise; issec-map-inv-raise;
     equiv-raise)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
 open import foundation.unit-type using (star)
 open import foundation.universal-property-coproduct-types using
   ( equiv-universal-property-coprod)

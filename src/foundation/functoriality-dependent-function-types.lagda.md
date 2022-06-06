@@ -13,9 +13,6 @@ open import foundation-core.homotopies using (_~_; _·l_; _·r_)
 
 open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.type-theoretic-principle-of-choice using
-  ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;
     issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
@@ -28,6 +25,8 @@ open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)
 open import foundation.identity-types using
   ( Id; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
 open import foundation.truncated-types using (is-trunc-equiv'; is-trunc-Π)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
 open import foundation.unit-type using (unit)
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)

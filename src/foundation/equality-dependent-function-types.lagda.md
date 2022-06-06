@@ -15,8 +15,7 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-total-path; is-contr-Π)
-open import
-  foundation.type-theoretic-principle-of-choice using
+open import foundation.type-theoretic-principle-of-choice using
   ( Π-total-fam; distributive-Π-Σ)
 ```
 

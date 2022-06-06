@@ -8,9 +8,6 @@ module foundation.slice where
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.type-theoretic-principle-of-choice using
-  ( inv-distributive-Π-Σ)
 open import foundation.embeddings using (_↪_; map-emb; is-emb-map-emb)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
@@ -43,6 +40,8 @@ open import foundation.structure-identity-principle using
   ( extensionality-Σ; is-contr-total-Eq-structure)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( inv-assoc-Σ; equiv-right-swap-Σ)
+open import foundation.type-theoretic-principle-of-choice using
+  ( inv-distributive-Π-Σ)
 open import foundation.univalence using
   ( is-contr-total-equiv; eq-equiv-fam)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)

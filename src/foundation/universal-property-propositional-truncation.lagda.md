@@ -9,9 +9,6 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; center; is-contr-equiv)
 open import foundation.dependent-pair-types using
   ( Σ; pair; pr1; pr2; ind-Σ; ev-pair)
-open import
-  foundation.type-theoretic-principle-of-choice using
-  ( map-inv-distributive-Π-Σ; is-equiv-map-inv-distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; map-equiv; is-property-is-equiv;
     is-equiv-top-is-equiv-bottom-square; is-equiv-precomp-is-equiv;
@@ -30,6 +27,8 @@ open import foundation.propositions using
     is-prop-type-hom-Prop)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
+open import foundation.type-theoretic-principle-of-choice using
+  ( map-inv-distributive-Π-Σ; is-equiv-map-inv-distributive-Π-Σ)
 open import foundation.unit-type using (unit-Prop; terminal-map; ind-unit)
 open import foundation.universal-property-dependent-pair-types using
   ( is-equiv-ev-pair)

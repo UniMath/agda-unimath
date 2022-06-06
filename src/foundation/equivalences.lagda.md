@@ -45,9 +45,6 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π; is-contr-is-equiv';
     is-contr-prod; is-prop-is-contr)
-open import
-  foundation.type-theoretic-principle-of-choice using
-  ( distributive-Π-Σ)
 open import foundation.function-extensionality using
   ( htpy-eq; funext; eq-htpy; equiv-funext)
 open import foundation.identity-systems using (Ind-identity-system)
@@ -58,6 +55,8 @@ open import foundation.identity-types using
 open import foundation.pullbacks
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
 
 open import foundation.truncated-maps
 ```

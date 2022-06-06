@@ -16,10 +16,6 @@ open import foundation.decidable-subtypes using (decidable-subtype)
 open import foundation.decidable-types using
   ( is-prop-is-decidable; is-decidable; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.type-theoretic-principle-of-choice
-  using
-  ( inv-distributive-Π-Σ)
 open import foundation.embeddings using
   ( is-emb; _↪_; is-emb-id; is-prop-is-emb; is-emb-comp'; is-emb-htpy)
 open import foundation.empty-types using (ex-falso; is-emb-ex-falso)
@@ -47,6 +43,8 @@ open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr)
+open import foundation.type-theoretic-principle-of-choice using
+  ( inv-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 

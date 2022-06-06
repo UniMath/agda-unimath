@@ -10,15 +10,14 @@ open import foundation-core.pullbacks public
 open import foundation.contractible-types using
   ( is-contr; is-contr-total-path; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import
-  foundation.type-theoretic-principle-of-choice using
-  ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
-    is-equiv-map-distributive-Π-Σ)
 open import foundation.functions using (_∘_)
 open import foundation.homotopies using (_~_; refl-htpy; right-unit-htpy)
 open import foundation.identity-types using
   ( Id; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv)
 open import foundation.structure-identity-principle using (extensionality-Σ)
+open import foundation.type-theoretic-principle-of-choice using
+  ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
+    is-equiv-map-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.cones-pullbacks
