@@ -28,39 +28,26 @@ open import univalent-combinatorics.species
 
 ```
 
-## Definition
+## Idea
+
+In this file, we define the type of species equivalences
+and prove the univalence principle for species. An equivalence
+of species is a pointwise family of equivalences between their
+values.
+
+### Definition
 
 ```agda
-_≃ˢ_ : {l1 l2 : Level} → species l1 → species l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
-_≃ˢ_ F G = (X : 𝔽) → F X ≃ G X 
+eqiv-species : {l1 l2 : Level} → species l1 → species l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
+eqiv-species F G = (X : 𝔽) → F X ≃ G X 
 ```
 
-### The identity type of two species is equivalent to the type of equivalences between them
+### The identity type of species is equivalent to the type of equivalences between them
 
 ```agda
--- species-is-equiv-Id' : {l : Level} → (F G : species l) → (Id F G) ≃ (F ≃ˢ G)  
--- species-is-equiv-Id' F G = pair
---                             (λ p X → equiv-eq (ap (λ S → S X) p))
---                             (pair
---                                 (pair
---                                     (λ e → eq-equiv-fam (λ X → e X))
---                                     htpy₁
---                                     )
---                                 (pair
---                                     (λ e → eq-equiv-fam (λ X → e X))
---                                     (λ e → {!   !})
---                                     )
---                                 )
-
-species-is-equiv-Id' : {l : Level} → (F G : species l) → (Id F G) ≃ (F ≃ˢ G)  
-pr1 (species-is-equiv-Id' F G) = equiv-eq-fam F G
-pr2 (species-is-equiv-Id' F G) = is-equiv-equiv-eq-fam F G
-
-
--- is-contr-total-equiv-species : {l : Level} → (F : species l) → is-contr (Σ (species l) (λ G → F ≃ˢ G))
-
--- is-contr-total-equiv-species F = is-contr-total-Eq-Π (λ X Y → F X ≃ Y) (λ x → {!   !})
-
+species-is-equiv-Id : {l : Level} → (F G : species l) → (Id F G) ≃ (eqiv-species F G)  
+pr1 (species-is-equiv-Id F G) = equiv-eq-fam F G
+pr2 (species-is-equiv-Id F G) = is-equiv-equiv-eq-fam F G
 ```
 
  
