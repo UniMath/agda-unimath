@@ -40,14 +40,14 @@ F ×ˢ G , X = species-cartesian-prod F G X
 
 ## Universal properties
 
-Proof of ((species-cartesian-prod F G) →ˢ H) ≃ ( F →ˢ exponents-species G H).
+Proof of (hom-species (species-cartesian-prod F G) H) ≃ (hom-species F (exponents-species G H)).
 
 
 ```agda 
 equiv-universal-property-exponents-species :
   {l1 l2 l3 : Level} (F : species l1) (G : species l2) (H : species l3) →
-  ((species-cartesian-prod F G) →ˢ H) ≃
-  ( F →ˢ exponents-species G H)
+  (hom-species (species-cartesian-prod F G) H) ≃
+  (hom-species F (exponents-species G H))
 equiv-universal-property-exponents-species F G H =
   equiv-map-Π (λ X → equiv-ev-pair)
   

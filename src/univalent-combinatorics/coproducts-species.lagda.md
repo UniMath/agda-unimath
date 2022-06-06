@@ -48,13 +48,13 @@ F +ˢ G , X = species-coprod F G X
 
 ## Universal properties
 
-Proof of ((species-coprod F G) →ˢ H) ≃ (( F →ˢ H) × ( G →ˢ H)).
+Proof of (hom-species (species-coprod F G) H) ≃ ((hom-species F H) × (hom-species G H)).
 
 ```agda
 equiv-universal-property-coproduct-species :
  {l1 l2 l3 : Level} (F : species l1) (G : species l2) (H : species l3) →
- ((species-coprod F G) →ˢ H) ≃
- (( F →ˢ H) × ( G →ˢ H))
+ (hom-species (species-coprod F G) H) ≃
+ ((hom-species F H) × (hom-species G H))
 equiv-universal-property-coproduct-species F G H =
   distributive-Π-Σ ∘e equiv-map-Π (λ X → ( (equiv-universal-property-coprod (H X)) ))
  
