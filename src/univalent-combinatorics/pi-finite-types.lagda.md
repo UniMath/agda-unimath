@@ -74,7 +74,7 @@ open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
     is-contr-trunc-Set; equiv-distributive-trunc-coprod-Set;
     equiv-unit-trunc-Set; unit-trunc-Set; trunc-Set;
-    universal-property-trunc-Set; apply-dependent-universal-property-trunc-Set;
+    universal-property-trunc-Set; apply-dependent-universal-property-trunc-Set';
     is-effective-unit-trunc-Set; apply-effectiveness-unit-trunc-Set;
     equiv-unit-trunc-unit-Set; is-empty-is-empty-trunc-Set;
     is-surjective-unit-trunc-Set)
@@ -582,7 +582,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
       ( is-surjective-map-trunc-Set
         ( fiber-inclusion B a)
         ( is-surjective-fiber-inclusion C a))
-      ( apply-dependent-universal-property-trunc-Set
+      ( apply-dependent-universal-property-trunc-Set'
         ( λ x →
           set-Prop
             ( Π-Prop
@@ -594,7 +594,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
     β : (x : Σ A B) (v : type-trunc-Set (Σ A B)) →
         is-decidable (Id (unit-trunc-Set x) v)
     β (pair x y) =
-      apply-dependent-universal-property-trunc-Set
+      apply-dependent-universal-property-trunc-Set'
         ( λ u →
           set-Prop
             ( is-decidable-Prop
@@ -641,7 +641,6 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
                       ( λ a₁ → h (unit-trunc-Set a₁)) ~
                       ( λ ω₁ → trunc-Prop (Id (tr B ω₁ y) y'))))
             ℙ = universal-property-trunc-Set
-                ( Id a a)
                 ( UU-Prop-Set _)
                 ( λ ω → trunc-Prop (Id (tr B ω y) y'))
             P : type-trunc-Set (Id a a) → UU-Prop _
@@ -652,7 +651,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
               type-trunc-Prop (Id (tr B ω y) y') 
             compute-P ω = equiv-eq (ap pr1 (pr2 (center ℙ) ω))
             d : (t : type-trunc-Set (Id a a)) → is-decidable (type-Prop (P t))
-            d = apply-dependent-universal-property-trunc-Set
+            d = apply-dependent-universal-property-trunc-Set'
                 ( λ t → set-Prop (is-decidable-Prop (P t)))
                 ( λ ω →
                   is-decidable-equiv'
@@ -669,7 +668,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
             f t = apply-universal-property-trunc-Prop t
                     ( mere-eq-Prop (pair a y) (pair a y'))
                      λ { (pair u v) →
-                         apply-dependent-universal-property-trunc-Set
+                         apply-dependent-universal-property-trunc-Set'
                            ( λ u' →
                              hom-Set
                                ( set-Prop (P u'))
@@ -788,7 +787,7 @@ is-path-connected-im {l1} {l2} {A} {B} f C =
         ( is-contr-im
           ( trunc-Set B)
           ( unit-trunc-Set a)
-          ( apply-dependent-universal-property-trunc-Set
+          ( apply-dependent-universal-property-trunc-Set'
             ( λ x →
               set-Prop
                 ( Id-Prop

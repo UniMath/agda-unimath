@@ -17,7 +17,8 @@ open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup)
 
 open import order-theory.greatest-lower-bounds-posets using
-  ( has-greatest-binary-lower-bound-poset-Prop)
+  ( has-greatest-binary-lower-bound-poset-Prop;
+    is-greatest-binary-lower-bound-Poset)
 open import order-theory.posets using
   ( Poset; element-Poset; leq-poset-Prop; leq-Poset; is-prop-leq-Poset;
     refl-leq-Poset; antisymmetric-leq-Poset; transitive-leq-Poset;
@@ -106,6 +107,18 @@ module _
   meet-semilattice-Meet-Semilattice : Meet-Semilattice l1 l2
   pr1 meet-semilattice-Meet-Semilattice = poset-Meet-Semilattice
   pr2 meet-semilattice-Meet-Semilattice = is-meet-semilattice-Meet-Semilattice
+
+  meet-Meet-Semilattice :
+    (x y : element-Meet-Semilattice) → element-Meet-Semilattice
+  meet-Meet-Semilattice x y =
+    pr1 (is-meet-semilattice-Meet-Semilattice x y)
+
+  is-greatest-binary-lower-bound-meet-Meet-Semilattice :
+    (x y : element-Meet-Semilattice) →
+    is-greatest-binary-lower-bound-Poset poset-Meet-Semilattice x y
+      ( meet-Meet-Semilattice x y)
+  is-greatest-binary-lower-bound-meet-Meet-Semilattice x y =
+    pr2 (is-meet-semilattice-Meet-Semilattice x y)
 ```
 
 ### Algebraic meet-semilattices

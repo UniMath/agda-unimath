@@ -1,6 +1,8 @@
 ---
-title: Cantor-Schröder-Bernstein
+title: The Cantor-Schröder-Bernstein-Escardó theorem
 ---
+
+Contributors: Elif Uskuplu, Egbert Rijke
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
