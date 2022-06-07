@@ -7,6 +7,8 @@ title: Perfect Images
 
 module foundation.perfect-images where
 
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundation.decidable-types using
@@ -22,9 +24,8 @@ open import foundation.injective-maps using (is-injective; is-injective-is-emb)
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle using (LEM)
 open import foundation.negation using (¬; is-prop-neg)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 open import foundation.propositions using
-  (is-prop; eq-is-prop'; is-prop-Π; is-prop-Σ)
+  (is-prop; eq-is-prop'; is-prop-Π; is-prop-Σ; UU-Prop)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -59,19 +60,20 @@ module _
   {f : A → B} {g : B → A} (is-emb-g : is-emb g)
   where
 
-  is-emb-is-prop-is-perfect-image :
+  is-prop-is-perfect-image-is-emb :
     (a : A) → is-prop (is-perfect-image f g a)
-  is-emb-is-prop-is-perfect-image a =
+  is-prop-is-perfect-image-is-emb a =
      is-prop-Π (λ a₀ → (is-prop-Π λ n →
         is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
 
-  is-emb-is-decidable-is-perfect-image :
+  is-perfect-image-Prop : A → UU-Prop (l1 ⊔ l2)
+  pr1 (is-perfect-image-Prop a) = is-perfect-image f g a
+  pr2 (is-perfect-image-Prop a) = is-prop-is-perfect-image-is-emb a
+
+  is-decidable-is-perfect-image-is-emb :
     LEM (l1 ⊔ l2) → (a : A) → is-decidable (is-perfect-image f g a)
-  is-emb-is-decidable-is-perfect-image lem a =
-    lem
-      (pair
-        (is-perfect-image f g a)
-        (is-emb-is-prop-is-perfect-image a))  
+  is-decidable-is-perfect-image-is-emb lem a =
+    lem (is-perfect-image-Prop a)  
 ```
 
 If `a` is a perfect image for `g`, then `a` has a preimage under `g`. Just take n=zero in the definition.
@@ -142,20 +144,19 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
-  perfect-image-has-distinct-image : (a a₀ : A) →
-                             ¬ (is-perfect-image f g a) →
-                             (ρ : is-perfect-image f g a₀) →
-                             ¬ (Id (f a) (inverse-of-perfect-image a₀ ρ))
+  perfect-image-has-distinct-image :
+    (a a₀ : A) → ¬ (is-perfect-image f g a) → (ρ : is-perfect-image f g a₀) →
+    ¬ (Id (f a) (inverse-of-perfect-image a₀ ρ))
   perfect-image-has-distinct-image a a₀ nρ ρ p = v ρ
-      where
-      q : Id (g (f a)) a₀
-      q = ap g p ∙ is-sec-inverse-of-perfect-image a₀ ρ
+    where
+    q : Id (g (f a)) a₀
+    q = ap g p ∙ is-sec-inverse-of-perfect-image a₀ ρ
+                                                    
+    s : ¬ (is-perfect-image f g (g (f a)))
+    s = λ η → nρ (previous-perfect-image a η)
 
-      s : ¬ (is-perfect-image f g (g (f a)))
-      s = λ η → nρ (previous-perfect-image a η)
-
-      v : ¬ (is-perfect-image f g a₀)
-      v = tr (λ _ → ¬ (is-perfect-image f g _)) q s
+    v : ¬ (is-perfect-image f g a₀)
+    v = tr (λ _ → ¬ (is-perfect-image f g _)) q s
 ```
 
 Using the property above, we can talk about origins of `a` which are not images of `g`.
