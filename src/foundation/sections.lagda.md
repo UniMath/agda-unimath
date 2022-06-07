@@ -12,9 +12,6 @@ open import foundation-core.retractions using (_retract-of_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path'; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
     _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
@@ -30,6 +27,8 @@ open import foundation.structure-identity-principle using
 open import foundation.type-arithmetic-dependent-pair-types using
   ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr;
     equiv-right-swap-Σ)
+open import foundation.type-theoretic-principle-of-choice using
+  ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.fibers-of-maps using (fib; equiv-total-fib)
