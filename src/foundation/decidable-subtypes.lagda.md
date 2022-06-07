@@ -9,12 +9,18 @@ open import foundation.coproduct-types using
   ( coprod; inl; inr; is-left; is-right; is-prop-is-left; is-prop-is-right)
 open import foundation.decidable-propositions using
   ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop;
-    type-decidable-Prop; is-prop-type-decidable-Prop)
+    type-decidable-Prop; is-prop-type-decidable-Prop; equiv-universes-decidable-Prop;
+    iff-universes-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-unit; is-decidable-empty)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
+open import foundation.equivalences using (_≃_; map-equiv; id-equiv)
+open import foundation.functoriality-dependent-function-types using
+  ( compute-map-equiv-Π; equiv-Π)
+open import foundation.identity-types using (Id; inv; tr)
 open import foundation.injective-maps using (is-injective)
+open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.propositions using (type-Prop; is-prop)
 open import foundation.subtypes using
   ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
@@ -115,4 +121,36 @@ module _
   pr1 (is-right-decidable-Prop x) = is-right x
   pr1 (pr2 (is-right-decidable-Prop x)) = is-prop-is-right x
   pr2 (pr2 (is-right-decidable-Prop x)) = is-decidable-is-right x
+```
+
+### Types of decidable subtypes of any universe level are equivalent
+
+```agda
+module _
+  {l1 : Level} (X : UU l1)
+  where
+
+  equiv-universes-decidable-subtype : (l l' : Level) →
+    decidable-subtype l X ≃ decidable-subtype l' X
+  equiv-universes-decidable-subtype l l' =
+    equiv-Π
+      ( λ _ → decidable-Prop l')
+      ( id-equiv)
+      ( λ _ → equiv-universes-decidable-Prop l l')
+
+  iff-universes-decidable-subtype : (l l' : Level) (S : decidable-subtype l X) →
+    ( (x : X) →
+      prop-decidable-Prop (S x) ⇔
+      prop-decidable-Prop (map-equiv (equiv-universes-decidable-subtype l l') S x))
+  iff-universes-decidable-subtype l l' S x =
+    tr
+      ( λ P → prop-decidable-Prop (S x) ⇔ prop-decidable-Prop P)
+      ( inv
+        ( compute-map-equiv-Π
+          ( λ _ → decidable-Prop l')
+          ( id-equiv)
+          ( λ _ → equiv-universes-decidable-Prop l l')
+          ( S)
+          ( x)))
+      ( iff-universes-decidable-Prop l l' (S x))
 ```

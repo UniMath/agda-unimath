@@ -11,7 +11,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-total-path)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
-  ( _↪_; map-emb; equiv-ap-emb; is-emb; is-emb-map-emb)
+  ( _↪_; map-emb; equiv-ap-emb; is-emb; is-emb-map-emb; emb-Σ)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-map-equiv; is-equiv; map-inv-is-equiv;
     map-inv-equiv; is-equiv-map-inv-equiv; issec-map-inv-equiv;
@@ -25,7 +25,6 @@ open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.truncated-maps using (emb-Σ)
 open import foundation.universe-levels using (Level; UU)
 ```
 
