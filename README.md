@@ -6,12 +6,6 @@ The `agda-unimath` library is a new formalisation project for univalent mathemat
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
-## Joining the project
-
-Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
-
-Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
-
 ## Getting started
 
 Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
@@ -27,6 +21,12 @@ The `agda-unimath` library is written in literate markdown agda. This means that
 ```
 
 With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the `src` folder. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
+
+## Joining the project
+
+Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
+
+Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
 ## Statement of inclusion
 
@@ -206,3 +206,11 @@ module _
 * Function arguments should be implicit if they can "almost always" be inferred within proofs. It is often harder for Agda to infer an argument in a type declaration, but we prioritize usage in proofs in our decision to make an argument implicit.
 * If there are lots of implicit arguments that are common to a collection of proofs they should be extracted by using an anonymous module.
 * The library doesn't use variables at the moment. All variables are declared either as parameters of an anonymous module or in the type declaration of a construction.
+
+#### Coding practices we avoid
+
+* Unicode characters in names are allowed, but use them sparingly. If it is overdone, it will be more difficult to read.
+* Names of constructions should never refer to variable names.
+* Don't use deeply indented code if a two-space indentation level suffices. Deeply indented code will be rendered unreadable on smaller screens.
+* Don't use long lines of code, for the same reason.
+* `where` blocks are allowed, but keep them short. Large `where` blocks tend to result in non-reusable and non-refactorable code, and in some instances they slow down Agda's verification process.
