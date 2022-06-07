@@ -37,7 +37,8 @@ module _
 
   is-binary-upper-bound-Poset :
     (x y z : element-Poset P) → UU l2
-  is-binary-upper-bound-Poset x y z = type-Prop (is-binary-upper-bound-poset-Prop x y z)
+  is-binary-upper-bound-Poset x y z =
+    type-Prop (is-binary-upper-bound-poset-Prop x y z)
 
   is-prop-is-binary-upper-bound-Poset :
     (x y z : element-Poset P) → is-prop (is-binary-upper-bound-Poset x y z)
@@ -74,7 +75,8 @@ module _
   all-elements-equal-has-least-binary-upper-bound-Poset :
     (x y : element-Poset P) →
     all-elements-equal (has-least-binary-upper-bound-Poset x y)
-  all-elements-equal-has-least-binary-upper-bound-Poset x y (pair u H) (pair v K) =
+  all-elements-equal-has-least-binary-upper-bound-Poset x y
+    (pair u H) (pair v K) =
     eq-subtype
       ( is-least-binary-upper-bound-poset-Prop x y)
       ( antisymmetric-leq-Poset P u v
@@ -93,4 +95,85 @@ module _
     has-least-binary-upper-bound-Poset x y
   pr2 (has-least-binary-upper-bound-poset-Prop x y) =
     is-prop-has-least-binary-upper-bound-Poset x y
+```
+
+### Least upper bounds of families of elements
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2)
+  where
+
+  is-upper-bound-family-poset-Prop :
+    {l : Level} {I : UU l} → (I → element-Poset P) → element-Poset P →
+    UU-Prop (l2 ⊔ l)
+  is-upper-bound-family-poset-Prop {l} {I} f z =
+    Π-Prop I (λ i → leq-poset-Prop P (f i) z)
+
+  is-upper-bound-family-Poset :
+    {l : Level} {I : UU l} → (I → element-Poset P) → element-Poset P →
+    UU (l2 ⊔ l)
+  is-upper-bound-family-Poset f z =
+    type-Prop (is-upper-bound-family-poset-Prop f z)
+
+  is-prop-is-upper-bound-family-Poset :
+    {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
+    is-prop (is-upper-bound-family-Poset f z)
+  is-prop-is-upper-bound-family-Poset f z =
+    is-prop-type-Prop (is-upper-bound-family-poset-Prop f z)
+
+  is-least-upper-bound-family-poset-Prop :
+    {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
+    UU-Prop (l1 ⊔ l2 ⊔ l)
+  is-least-upper-bound-family-poset-Prop f z =
+    prod-Prop
+      ( is-upper-bound-family-poset-Prop f z)
+      ( Π-Prop
+        ( element-Poset P)
+        ( λ w →
+          function-Prop
+            ( is-upper-bound-family-Poset f w)
+            ( leq-poset-Prop P z w)))
+
+  is-least-upper-bound-family-Poset :
+    {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
+    UU (l1 ⊔ l2 ⊔ l)
+  is-least-upper-bound-family-Poset f z =
+    type-Prop (is-least-upper-bound-family-poset-Prop f z)
+
+  is-prop-is-least-upper-bound-family-Poset :
+    {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
+    is-prop (is-least-upper-bound-family-Poset f z)
+  is-prop-is-least-upper-bound-family-Poset f z =
+    is-prop-type-Prop (is-least-upper-bound-family-poset-Prop f z)
+
+  has-least-upper-bound-family-Poset :
+    {l : Level} {I : UU l} (f : I → element-Poset P) → UU (l1 ⊔ l2 ⊔ l)
+  has-least-upper-bound-family-Poset f =
+    Σ (element-Poset P) (is-least-upper-bound-family-Poset f)
+    
+  all-elements-equal-has-least-upper-bound-family-Poset :
+    {l : Level} {I : UU l} (f : I → element-Poset P) →
+    all-elements-equal (has-least-upper-bound-family-Poset f)
+  all-elements-equal-has-least-upper-bound-family-Poset f
+    (pair u H) (pair v K) =
+    eq-subtype
+      ( is-least-upper-bound-family-poset-Prop f)
+      ( antisymmetric-leq-Poset P u v
+        ( pr2 H v (pr1 K))
+        ( pr2 K u (pr1 H)))
+
+  is-prop-has-least-upper-bound-family-Poset :
+    {l : Level} {I : UU l} (f : I → element-Poset P) →
+    is-prop (has-least-upper-bound-family-Poset f)
+  is-prop-has-least-upper-bound-family-Poset f =
+    is-prop-all-elements-equal
+      ( all-elements-equal-has-least-upper-bound-family-Poset f)
+
+  has-least-upper-bound-family-poset-Prop :
+    {l : Level} {I : UU l} (f : I → element-Poset P) → UU-Prop (l1 ⊔ l2 ⊔ l)
+  pr1 (has-least-upper-bound-family-poset-Prop f) =
+    has-least-upper-bound-family-Poset f
+  pr2 (has-least-upper-bound-family-poset-Prop f) =
+    is-prop-has-least-upper-bound-family-Poset f
 ```

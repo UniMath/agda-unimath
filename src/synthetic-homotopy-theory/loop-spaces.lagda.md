@@ -13,12 +13,12 @@ open import foundation.identity-types using
     is-binary-equiv-concat)
 open import foundation.universe-levels using (Level; UU)
 
+open import structured-types.coherent-h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences using
   ( _≃*_; equiv-pointed-equiv)
 open import structured-types.pointed-types using
   ( Pointed-Type; pt-Pointed-Type; type-Pointed-Type)
-open import structured-types.wild-unital-magmas
 open import structured-types.wild-quasigroups
 ```
 
@@ -75,12 +75,12 @@ module _
     (x : type-Ω A) → Id (mul-Ω A x (refl-Ω A)) x
   right-unit-law-mul-Ω x = right-unit
 
-  Ω-Wild-Unital-Magma : Wild-Unital-Magma l
-  pr1 Ω-Wild-Unital-Magma = Ω A
-  pr1 (pr2 Ω-Wild-Unital-Magma) = mul-Ω A
-  pr1 (pr2 (pr2 Ω-Wild-Unital-Magma)) = left-unit-law-mul-Ω
-  pr1 (pr2 (pr2 (pr2 Ω-Wild-Unital-Magma))) = right-unit-law-mul-Ω
-  pr2 (pr2 (pr2 (pr2 Ω-Wild-Unital-Magma))) = refl
+  Ω-Coherent-H-Space : Coherent-H-Space l
+  pr1 Ω-Coherent-H-Space = Ω A
+  pr1 (pr2 Ω-Coherent-H-Space) = mul-Ω A
+  pr1 (pr2 (pr2 Ω-Coherent-H-Space)) = left-unit-law-mul-Ω
+  pr1 (pr2 (pr2 (pr2 Ω-Coherent-H-Space))) = right-unit-law-mul-Ω
+  pr2 (pr2 (pr2 (pr2 Ω-Coherent-H-Space))) = refl
 ```
 
 ### The wild quasigroup of loops on a pointed space
@@ -152,4 +152,10 @@ module _
     Id ( tr-type-Ω p (inv-Ω (pair A x) u))
        ( inv-Ω (pair A y) (tr-type-Ω p u))
   preserves-inv-tr-Ω refl u = refl
+
+  eq-tr-type-Ω :
+    (p : Id x y) (q : type-Ω (pair A x)) →
+    Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
+  eq-tr-type-Ω refl q = inv right-unit
+    
 ```

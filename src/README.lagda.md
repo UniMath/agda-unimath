@@ -22,8 +22,8 @@ There are many reasons to contribute something to a library of formalized mathem
 
 :rainbow: Happy contributing!
 
-Elisabeth Bonnevier  
-Jonathan Prieto-Cubides  
+Elisabeth Bonnevier
+Jonathan Prieto-Cubides
 Egbert Rijke
 
 ```agda
@@ -169,6 +169,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ```agda
 open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
+open import finite-group-theory.cartier-delooping-sign-homomorphism
 open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-monoids
@@ -224,11 +225,10 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.disjunction
-open import foundation.distributivity-of-dependent-functions-over-coproduct-types
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.double-powersets
 open import foundation.dubuc-penon-compact-types
@@ -243,6 +243,7 @@ open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equality-fibers-of-maps
+open import foundation.equational-reasoning
 open import foundation.equivalence-classes
 open import foundation.equivalence-induction
 open import foundation.equivalence-relations
@@ -270,9 +271,11 @@ open import foundation.global-choice
 open import foundation.hilberts-epsilon-operators
 open import foundation.homotopies
 open import foundation.identity-systems
+open import foundation.identity-truncated-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.impredicative-encodings
+open import foundation.impredicative-universes
 open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
@@ -301,6 +304,7 @@ open import foundation.multisubsets
 open import foundation.negation
 open import foundation.non-contractible-types
 open import foundation.pairs-of-distinct-elements
+open import foundation.partial-elements
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
@@ -352,7 +356,9 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.union
+open import foundation.unique-existence
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations
@@ -510,6 +516,7 @@ open import group-theory.isomorphisms-abelian-groups
 open import group-theory.isomorphisms-group-actions
 open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
+open import group-theory.loop-groups-sets
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions
 open import group-theory.monoids
@@ -632,14 +639,15 @@ open import set-theory.uncountable-sets
 
 ```agda
 open import structured-types
+open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.finite-multiplication-magmas
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
+open import structured-types.morphisms-coherent-h-spaces
 open import structured-types.morphisms-magmas
 open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.morphisms-wild-unital-magmas
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-families-of-types
@@ -653,7 +661,6 @@ open import structured-types.wild-loops
 open import structured-types.wild-monoids
 open import structured-types.wild-quasigroups
 open import structured-types.wild-semigroups
-open import structured-types.wild-unital-magmas
 ```
 
 ## Synthetic homotopy theory

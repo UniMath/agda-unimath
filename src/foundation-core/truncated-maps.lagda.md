@@ -283,18 +283,6 @@ module _
   abstract
     is-prop-map-tot : ((x : A) → is-prop-map (f x)) → is-prop-map (tot f)
     is-prop-map-tot = is-trunc-map-tot neg-one-𝕋
-
-  is-emb-tot : ((x : A) → is-emb (f x)) → is-emb (tot f)
-  is-emb-tot H =
-    is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
-
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  where
-
-  tot-emb : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
-  pr1 (tot-emb f) = tot (λ x → map-emb (f x))
-  pr2 (tot-emb f) = is-emb-tot (λ x → is-emb-map-emb (f x))
 ```
 
 ### The functoriality of dependent pair types preserves truncatedness
@@ -313,26 +301,11 @@ module _
       ( equiv-fib-map-Σ-map-base-fib f C y)
       ( H (pr1 y))
 
-  module _
-    {f : A → B} (C : B → UU l3)
-    where
+  abstract
+    is-prop-map-map-Σ-map-base : {f : A → B} (C : B → UU l3)
+      → is-prop-map f → is-prop-map (map-Σ-map-base f C)
+    is-prop-map-map-Σ-map-base C = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
 
-    abstract
-      is-prop-map-map-Σ-map-base :
-        is-prop-map f → is-prop-map (map-Σ-map-base f C)
-      is-prop-map-map-Σ-map-base = is-trunc-map-map-Σ-map-base neg-one-𝕋 C
-
-    abstract
-      is-emb-map-Σ-map-base : is-emb f → is-emb (map-Σ-map-base f C)
-      is-emb-map-Σ-map-base H =
-        is-emb-is-prop-map (is-prop-map-map-Σ-map-base (is-prop-map-is-emb H))
-
-  emb-Σ-emb-base :
-    (f : A ↪ B) (C : B → UU l3) → Σ A (λ a → C (map-emb f a)) ↪ Σ B C
-  pr1 (emb-Σ-emb-base f C) = map-Σ-map-base (map-emb f) C
-  pr2 (emb-Σ-emb-base f C) =
-    is-emb-map-Σ-map-base C (is-emb-map-emb f)
-    
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   where
@@ -362,19 +335,4 @@ module _
     is-prop-map-map-Σ :
       is-prop-map f → ((x : A) → is-prop-map (g x)) → is-prop-map (map-Σ D f g)
     is-prop-map-map-Σ = is-trunc-map-map-Σ neg-one-𝕋 D
-
-    is-emb-map-Σ :
-      is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
-    is-emb-map-Σ H K =
-      is-emb-is-prop-map
-        ( is-prop-map-map-Σ
-          ( is-prop-map-is-emb H)
-          ( λ x → is-prop-map-is-emb (K x)))
-
-  emb-Σ :
-    (D : B → UU l4) (f : A ↪ B) (g : (x : A) → C x ↪ D (map-emb f x)) →
-    Σ A C ↪ Σ B D
-  pr1 (emb-Σ D f g) = map-Σ D (map-emb f) (λ x → map-emb (g x))
-  pr2 (emb-Σ D f g) =
-    is-emb-map-Σ D (is-emb-map-emb f) (λ x → is-emb-map-emb (g x))
 ```

@@ -3,8 +3,7 @@
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.distributivity-of-dependent-functions-over-dependent-pairs
-  where
+module foundation.type-theoretic-principle-of-choice where
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)

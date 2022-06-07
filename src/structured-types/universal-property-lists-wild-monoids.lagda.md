@@ -20,7 +20,7 @@ open import univalent-combinatorics.lists using
   ( list; nil; cons; concat-list; left-unit-law-concat-list;
     right-unit-law-concat-list; assoc-concat-list)
 
-open import structured-types.morphisms-wild-unital-magmas using
+open import structured-types.morphisms-coherent-h-spaces using
   ( preserves-left-unit-law-mul; preserves-right-unit-law-mul;
     preserves-coh-unit-laws-mul)
 open import structured-types.wild-monoids using
@@ -29,8 +29,8 @@ open import structured-types.wild-monoids using
     right-unit-law-mul-Wild-Monoid; coh-unit-laws-mul-Wild-Monoid;
     unit-law-110-assoc-Wild-Monoid; wild-unital-magma-Wild-Monoid;
     hom-Wild-Monoid)
-open import structured-types.wild-unital-magmas using
-  ( Wild-Unital-Magma)
+open import structured-types.coherent-h-spaces using
+  ( Coherent-H-Space)
 ```
 
 ## Idea
@@ -42,9 +42,9 @@ The type of lists of elements of `X` is the initial wild monoid equipped with a 
 ### The wild unital magma of lists of elements of `X`
 
 ```agda
-list-Wild-Unital-Magma :
-  {l : Level} (X : UU l) → Wild-Unital-Magma l
-list-Wild-Unital-Magma X =
+list-Coherent-H-Space :
+  {l : Level} (X : UU l) → Coherent-H-Space l
+list-Coherent-H-Space X =
   pair
     ( pair (list X) nil)
     ( pair
@@ -103,7 +103,7 @@ unit-law-110-assoc-concat-list (cons a x) y =
 list-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
 list-Wild-Monoid X =
   pair
-    ( list-Wild-Unital-Magma X)
+    ( list-Coherent-H-Space X)
     ( pair
       ( assoc-concat-list)
       ( pair
@@ -263,7 +263,7 @@ preserves-coh-unit-laws-map-elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
   (f : X → type-Wild-Monoid M) → 
   preserves-coh-unit-laws-mul
-    ( list-Wild-Unital-Magma X)
+    ( list-Coherent-H-Space X)
     ( wild-unital-magma-Wild-Monoid M)
     ( pair (map-elim-list-Wild-Monoid M f) refl)
     ( preserves-mul-map-elim-list-Wild-Monoid M f)

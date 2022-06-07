@@ -8,9 +8,6 @@ module foundation.universal-property-truncation where
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( inv-distributive-Π-Σ; map-distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-equiv; map-inv-is-equiv; is-equiv-precomp-is-equiv;
     is-equiv-id; _≃_; map-equiv; is-equiv-map-equiv)
@@ -22,13 +19,15 @@ open import foundation.sections using (sec)
 open import foundation.truncated-types using
   ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type;
     Σ-Truncated-Type; fib-Truncated-Type; is-trunc)
-open import foundation-core.truncation-levels using (𝕋)
+open import foundation.type-theoretic-principle-of-choice using
+  ( inv-distributive-Π-Σ; map-distributive-Π-Σ)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 
 open import foundation-core.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ)
+open import foundation-core.truncation-levels using (𝕋)
 ```
 
 ## Idea

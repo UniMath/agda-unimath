@@ -39,7 +39,7 @@ open import foundation.equivalence-classes using
 open import foundation.equivalences using
   ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
     right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
-    right-unit-law-equiv)
+    right-unit-law-equiv; left-unit-law-equiv)
 open import foundation.equivalence-relations using (Eq-Rel; refl-Eq-Rel)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
@@ -91,8 +91,6 @@ open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
-open import univalent-combinatorics.orientations-complete-undirected-graph using
-  ( quotient-sign; quotient-sign-Set; mere-equiv-Fin-2-quotient-sign; equiv-Fin-2-quotient-sign-equiv-Fin-n)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin)
 ```
@@ -259,263 +257,33 @@ module _
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism
   pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
-```
 
-### Deloopings of the sign homomorphism
-
-```agda
-module _
-  { l : Level}
-  where
-  
-  map-cartier-delooping-sign : (n : ℕ) →
-    classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( UU-Set l)
-        ( raise-Set l (Fin-Set n))
-        ( is-one-type-UU-Set l)) →
-    classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( UU-Set (lsuc l))
-        ( raise-Set (lsuc l) (Fin-Set 2))
-        ( is-one-type-UU-Set (lsuc l)))
-  pr1 (map-cartier-delooping-sign zero-ℕ X) = raise-Set (lsuc l) (Fin-Set 2)
-  pr2 (map-cartier-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
-  pr1 (map-cartier-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc l) (Fin-Set 2)
-  pr2 (map-cartier-delooping-sign (succ-ℕ zero-ℕ) X) = unit-trunc-Prop refl
-  pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    quotient-sign-Set
-      ( succ-ℕ (succ-ℕ n))
-      ( pair
-        ( type-Set X)
-        ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
-  pr2 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    functor-trunc-Prop
-      ( λ e →
-        eq-pair-Σ
-          ( eq-equiv
-            ( type-Set (pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p))))
-            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-            ( equiv-raise (lsuc l) (Fin 2) ∘e inv-equiv e))
-          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (type-Set (Fin-Set 2))))))
-      ( mere-equiv-Fin-2-quotient-sign
-        ( succ-ℕ (succ-ℕ n))
-        ( pair
-          ( type-Set X)
-          ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
-        ( star))
-
-  cartier-delooping-sign : (n : ℕ) →
-    hom-Concrete-Group
-      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) (is-one-type-UU-Set l))
-      ( Automorphism-Group (UU-Set (lsuc l)) (raise-Set (lsuc l) (Fin-Set 2)) (is-one-type-UU-Set (lsuc l)))
-  pr1 (cartier-delooping-sign n) = map-cartier-delooping-sign n
-  pr2 (cartier-delooping-sign zero-ℕ) = refl
-  pr2 (cartier-delooping-sign (succ-ℕ zero-ℕ)) = refl
-  pr2 (cartier-delooping-sign (succ-ℕ (succ-ℕ n))) =
-    eq-pair-Σ
-      ( eq-pair-Σ
-        ( eq-equiv
-          ( type-Set
-            ( pr1
-              ( map-cartier-delooping-sign
-                ( succ-ℕ (succ-ℕ n))
-                ( pair
-                  ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
-                  ( unit-trunc-Prop refl)))))
-          ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-          ( equiv-raise (lsuc l) (Fin 2) ∘e
-            inv-equiv
-              ( equiv-Fin-2-quotient-sign-equiv-Fin-n
-                ( succ-ℕ (succ-ℕ n))
-                ( pair
-                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                  ( functor-trunc-Prop
-                    ( λ p' →
-                      ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
-                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-                    ( unit-trunc-Prop refl)))
-                ( star)
-                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
-        ( eq-is-prop (is-prop-is-set _)))
-      ( eq-is-prop is-prop-type-trunc-Prop)
-
-{-
-  eq-cartier-delooping-sign-trans : (n : ℕ) (ineq : leq-ℕ 2 n) →
-    ( Y : 2-Element-Decidable-Subtype lzero (Fin n)) →
+  eq-sign-homomorphism-transposition :
+    ( Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level X)) →
     Id
-      ( map-hom-Concrete-Group
-        ( Automorphism-Group
-          ( UU-Set l)
-          ( raise-Set l (Fin-Set n))
-          ( is-one-type-UU-Set l))
-        ( Automorphism-Group
-          ( UU-Set (lsuc l))
-          ( raise-Set (lsuc l) (Fin-Set 2))
-          ( is-one-type-UU-Set (lsuc l)))
-        ( cartier-delooping-sign n)
-        ( eq-pair-Σ
-          ( eq-pair-Σ
-            ( eq-equiv
-              ( type-Set (raise-Set l (Fin-Set n)))
-              ( type-Set (raise-Set l (Fin-Set n)))
-              ( equiv-raise l (Fin n) ∘e
-                ( transposition Y ∘e inv-equiv (equiv-raise l (Fin n)))))
-            ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l (Fin-Set n))))))
-          ( eq-is-prop is-prop-type-trunc-Prop)))
-      ( eq-pair-Σ
-        ( eq-pair-Σ
-          ( eq-equiv
-            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-            ( equiv-raise (lsuc l) (Fin 2) ∘e
-              ( equiv-succ-Fin ∘e inv-equiv (equiv-raise (lsuc l) (Fin 2)))))
-          ( eq-is-prop (is-prop-is-set (type-Set (raise-Set (lsuc l) (Fin-Set 2))))))
-        ( eq-is-prop is-prop-type-trunc-Prop))
-  eq-cartier-delooping-sign-trans (succ-ℕ (succ-ℕ n)) _ Y = {!!}
-    where
-    two-elements :
-      Σ ( Fin (succ-ℕ (succ-ℕ n)))
-        ( λ x →
-          Σ ( Fin (succ-ℕ (succ-ℕ n)))
-            ( λ y →
-              Σ ( ¬ (Id x y))
-                ( λ np →
-                  Id
-                    ( standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-count (pair (succ-ℕ (succ-ℕ n)) id-equiv))
-                      ( np))
-                    ( Y))))
-    two-elements =
-      two-elements-transposition
-        ( pair (succ-ℕ (succ-ℕ n)) id-equiv)
-        ( Y)
-    
-  lemma : {l' : Level} (n : ℕ) →
-    Id
-      ( comp-hom-Group
-        ( symmetric-Group (Fin-Set n))
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group
-            ( UU-Set l)
-            ( raise-Set l (Fin-Set n))
-            ( is-one-type-UU-Set l)))
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group
-            ( UU-Set (lsuc l))
-            ( raise-Set (lsuc l) (Fin-Set 2))
-            ( is-one-type-UU-Set (lsuc l))))
-        ( hom-group-hom-Concrete-Group
-          ( Automorphism-Group
-            ( UU-Set l)
-            ( raise-Set l (Fin-Set n))
-            ( is-one-type-UU-Set l))
-          ( Automorphism-Group
-            ( UU-Set (lsuc l))
-            ( raise-Set (lsuc l) (Fin-Set 2))
-            ( is-one-type-UU-Set (lsuc l)))
-          ( cartier-delooping-sign n))
-        ( hom-iso-Group
-          ( symmetric-Group (Fin-Set n))
-          ( abstract-group-Concrete-Group
-            ( Automorphism-Group
-              ( UU-Set l)
-              ( raise-Set l (Fin-Set n))
-              ( is-one-type-UU-Set l)))
-          ( iso-symmetric-group-abstract-automorphism-group-Set (Fin-Set n))))
-      ( comp-hom-Group
-        ( symmetric-Group (Fin-Set n))
+      ( map-hom-Group
+        ( symmetric-Group (set-UU-Fin-Level X))
         ( symmetric-Group (Fin-Set 2))
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group
-            ( UU-Set (lsuc l))
-            ( raise-Set (lsuc l) (Fin-Set 2))
-            ( is-one-type-UU-Set (lsuc l))))
-        ( hom-iso-Group
-          ( symmetric-Group (Fin-Set 2))
-          ( abstract-group-Concrete-Group
-            ( Automorphism-Group
-              ( UU-Set (lsuc l))
-              ( raise-Set (lsuc l) (Fin-Set 2))
-              ( is-one-type-UU-Set (lsuc l))))
-          ( iso-symmetric-group-abstract-automorphism-group-Set (Fin-Set 2)))
-        ( sign-homomorphism n (pair (Fin n) (unit-trunc-Prop id-equiv))))
-  lemma {l'} n =
-    map-inv-equiv
-      ( equiv-ap-emb
-        ( restriction-generating-subset-Group
-          ( symmetric-Group (set-UU-Fin-Level (pair (Fin n) (unit-trunc-Prop id-equiv))))
-          ( is-transposition-permutation-Prop {l2 = l'})
-          ( is-generated-transposition-symmetric-Fin-Level n (pair (Fin n) (unit-trunc-Prop id-equiv)))
-          ( abstract-group-Concrete-Group
-            ( Automorphism-Group
-              ( UU-Set (lsuc l))
-              ( raise-Set (lsuc l) (Fin-Set 2))
-              ( is-one-type-UU-Set (lsuc l))))))
-      ( eq-htpy
-        ( λ (pair Y p) →
-          apply-universal-property-trunc-Prop
-            ( p)
-            ( Id-Prop
-              ( set-Group
-                ( abstract-group-Concrete-Group
-                  ( Automorphism-Group
-                    ( UU-Set (lsuc l))
-                    ( raise-Set (lsuc l) (Fin-Set 2))
-                    ( is-one-type-UU-Set (lsuc l)))))
-              ?
-              ?)
-            ( λ (pair x p') →
-              ( ( ap
-                ( map-emb
-                  ( restriction-generating-subset-Group
-                    ( symmetric-Group (set-UU-Fin-Level (pair (Fin n) (unit-trunc-Prop id-equiv))))
-                    ( is-transposition-permutation-Prop)
-                    ( is-generated-transposition-symmetric-Fin-Level n
-                      ( pair (Fin n) (unit-trunc-Prop id-equiv)))
-                    ( abstract-group-Concrete-Group
-                      ( Automorphism-Group
-                        ( UU-Set (lsuc l))
-                        ( raise-Set (lsuc l) (Fin-Set 2))
-                        ( is-one-type-UU-Set (lsuc l)))))
-                    ( comp-hom-Group
-                      ( symmetric-Group (Fin-Set n))
-                      ( abstract-group-Concrete-Group
-                        ( Automorphism-Group
-                          ( UU-Set l)
-                          ( raise-Set l (Fin-Set n))
-                          ( is-one-type-UU-Set l)))
-                      ( abstract-group-Concrete-Group
-                        ( Automorphism-Group
-                          ( UU-Set (lsuc l))
-                          ( raise-Set (lsuc l) (Fin-Set 2))
-                          ( is-one-type-UU-Set (lsuc l))))
-                      ( hom-group-hom-Concrete-Group
-                        ( Automorphism-Group
-                          ( UU-Set l)
-                          ( raise-Set l (Fin-Set n))
-                          ( is-one-type-UU-Set l))
-                        ( Automorphism-Group
-                          ( UU-Set (lsuc l))
-                          ( raise-Set (lsuc l) (Fin-Set 2))
-                          ( is-one-type-UU-Set (lsuc l)))
-                        ( cartier-delooping-sign n))
-                      ( hom-iso-Group
-                        ( symmetric-Group (Fin-Set n))
-                        ( abstract-group-Concrete-Group
-                          ( Automorphism-Group
-                            ( UU-Set l)
-                            ( raise-Set l (Fin-Set n))
-                            ( is-one-type-UU-Set l)))
-                        ( iso-symmetric-group-abstract-automorphism-group-Set
-                          ( Fin-Set n)))))
-                { y = pair (transposition x) (unit-trunc-Prop (pair x refl))}
-                ( eq-pair-Σ
-                  ( inv p')
-                  ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-                ( {!ap!} ∙
-                  {!!})))))-}
+        ( sign-homomorphism)
+        ( transposition Y))
+      equiv-succ-Fin
+  eq-sign-homomorphism-transposition Y =
+    ap aut-point-Fin-two-ℕ
+      ( ap pr1
+        { x = center (is-contr-parity-transposition-permutation n X (transposition Y))}
+        { y =
+          pair
+            ( inr star)
+            ( unit-trunc-Prop
+              ( pair
+                ( in-list Y)
+                ( pair refl (inv (right-unit-law-equiv (transposition Y))))))}
+        ( eq-is-contr
+          ( is-contr-parity-transposition-permutation n X (transposition Y))))
+    
 ```
+
+## Deloopings of the sign homomorphism
 
 ### Simpson's delooping of the sign homomorphism
 

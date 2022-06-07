@@ -43,11 +43,10 @@ open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
+open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-pair-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.disjunction public
-open import foundation.distributivity-of-dependent-functions-over-coproduct-types public
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs public
 open import foundation.double-negation public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
@@ -61,6 +60,7 @@ open import foundation.equality-coproduct-types public
 open import foundation.equality-dependent-function-types public
 open import foundation.equality-dependent-pair-types public
 open import foundation.equality-fibers-of-maps public
+open import foundation.equational-reasoning public
 open import foundation.equivalence-classes public
 open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
@@ -91,6 +91,7 @@ open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.impredicative-encodings public
+open import foundation.impredicative-universes public
 open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-w-types public
@@ -117,6 +118,7 @@ open import foundation.multisets public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.pairs-of-distinct-elements public
+open import foundation.partial-elements public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
@@ -164,6 +166,8 @@ open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
+open import foundation.type-theoretic-principle-of-choice public
+open import foundation.unique-existence public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-set-quotients public
 open import foundation.uniqueness-set-truncations public

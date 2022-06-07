@@ -8,8 +8,7 @@ title: Functoriality of dependent function types
 module foundation-core.functoriality-dependent-function-types where
 
 open import foundation.contractible-types
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-maps
