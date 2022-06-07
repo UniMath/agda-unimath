@@ -15,7 +15,7 @@ open import elementary-number-theory.natural-numbers using
 
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using ( _↪_; map-emb; is-emb; is-emb-map-emb)
+open import foundation.embeddings using ( _↪_; map-emb; is-emb; is-emb-map-emb; tot-emb)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equality-dependent-pair-types using (pair-eq-Σ)
 open import foundation.functions using (id; _∘_)
@@ -29,7 +29,6 @@ open import foundation.propositions using
 open import foundation.sets using
   ( UU-Set; type-Set; is-set; is-set-type-Set; Σ-Set; Id-Prop; set-Prop)
 open import foundation.subtypes using (eq-subtype; emb-subtype)
-open import foundation.truncated-maps using (tot-emb)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( map-left-unit-law-Σ-is-contr)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
