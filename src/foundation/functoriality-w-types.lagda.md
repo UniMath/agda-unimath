@@ -9,9 +9,6 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( inv-distributive-Π-Σ)
 open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation.equivalences using
   ( _≃_; map-inv-equiv; inv-equiv; _∘e_; id-equiv; map-equiv;
@@ -31,6 +28,8 @@ open import foundation.truncated-types using
 open import foundation.truncation-levels using (𝕋; neg-two-𝕋; neg-one-𝕋)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( assoc-Σ; equiv-left-swap-Σ)
+open import foundation.type-theoretic-principle-of-choice using
+  ( inv-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.w-types using
   ( 𝕎; tree-𝕎; equiv-Eq-𝕎-eq; structure-𝕎-Alg; inv-equiv-structure-𝕎-Alg;

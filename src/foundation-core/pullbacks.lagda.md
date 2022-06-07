@@ -18,8 +18,8 @@ open import foundation-core.homotopies
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.identity-types
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Definition

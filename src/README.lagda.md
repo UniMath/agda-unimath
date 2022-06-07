@@ -223,11 +223,10 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.disjunction
-open import foundation.distributivity-of-dependent-functions-over-coproduct-types
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.double-negation
 open import foundation.double-powersets
 open import foundation.dubuc-penon-compact-types
@@ -354,7 +353,9 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.union
+open import foundation.unique-existence
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations

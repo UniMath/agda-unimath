@@ -14,9 +14,6 @@ open import foundation.algebras-polynomial-endofunctors using
     eq-htpy-hom-algebra-polynomial-endofunctor)
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( map-distributive-Π-Σ)
 open import foundation.empty-types using (is-empty; ex-falso; empty-Prop)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; _≃_; is-equiv-has-inverse)
@@ -35,6 +32,8 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-is-equiv; is-trunc-Σ; is-trunc-Π; is-trunc-is-equiv')
+open import foundation.type-theoretic-principle-of-choice using
+  ( map-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
