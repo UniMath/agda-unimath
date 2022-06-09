@@ -37,7 +37,7 @@ exponents-species F G X  = F X → G X
 
 _⇒ˢ_,_ : {l1 l2 : Level} → species l1 → species l2 → species (l1 ⊔ l2)
 F ⇒ˢ G , X = exponents-species F G X
-
+  
 ```
 
 

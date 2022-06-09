@@ -39,6 +39,8 @@ We caracterize the type coproduct of species as the coproduct of species on obje
 ### coproduct on objects
 
 ```agda
+
+
 species-coprod :  {l1 l2 : Level} → species l1 → species l2 → species (l1 ⊔ l2)
 species-coprod F G X = coprod (F X) (G X)
 
