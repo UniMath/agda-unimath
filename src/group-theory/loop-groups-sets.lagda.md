@@ -11,7 +11,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; map-equiv; inv-equiv; id-equiv; left-inverse-law-equiv; right-inverse-law-equiv;
     left-unit-law-equiv; eq-htpy-equiv)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation.equality-dependent-pair-types using
+  ( eq-pair-Σ; pair-eq-Σ; issec-pair-eq-Σ; isretr-pair-eq-Σ; comp-eq-pair-Σ; comp-pair-eq-Σ)
 open import foundation.functions using (id)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.homotopies using (refl-htpy)
@@ -19,14 +20,18 @@ open import foundation.identity-truncated-types using (is-trunc-id-is-trunc)
 open import foundation.identity-types using
   ( Id; refl; _∙_; inv; ap; assoc; left-unit; right-unit; left-inv; right-inv;
     distributive-inv-concat; inv-inv)
+open import foundation.propositional-truncations using (is-prop-type-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
-open import foundation.sets using (UU-Set; is-set; type-Set; is-set-type-Set)
-open import foundation.truncated-types using (is-trunc-is-emb)
+open import foundation.sets using (UU-Set; is-set; type-Set; is-set-type-Set; is-prop-is-set)
+open import foundation.subuniverses using (is-one-type-UU-Set)
+open import foundation.truncated-types using (is-trunc-is-emb; is-trunc-Id)
 open import foundation.truncation-levels using (zero-𝕋; neg-one-𝕋)
 open import foundation.univalence using
   ( equiv-univalence; equiv-eq; eq-equiv; comp-eq-equiv; comp-equiv-eq)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 
+open import group-theory.automorphism-groups using (Automorphism-Group)
+open import group-theory.concrete-groups using (abstract-group-Concrete-Group)
 open import group-theory.groups using (Group; is-group'; semigroup-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; comp-hom-Group; id-hom-Group)
@@ -180,3 +185,150 @@ module _
   pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) = is-retr-hom-inv-symmetric-group-loop-group-Set
 ```
 
+### The abstacted automorphism group and the loop group of a set are isomorphic
+
+```agda
+module _
+  {l : Level} (X : UU-Set l)
+  where
+
+  hom-abstract-automorphism-group-loop-group-Set :
+    type-hom-Group
+      ( loop-group-Set X)
+      ( abstract-group-Concrete-Group
+        ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+  pr1 hom-abstract-automorphism-group-loop-group-Set p =
+    eq-pair-Σ
+      ( eq-pair-Σ
+        ( p)
+        ( eq-is-prop (is-prop-is-set (type-Set X))))
+      ( eq-is-prop is-prop-type-trunc-Prop)
+  pr2 hom-abstract-automorphism-group-loop-group-Set p q =
+    ( ap
+      ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
+      ( ( ap
+        ( λ w → eq-pair-Σ (p ∙ q) w)
+        ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set X) _ _)))) ∙
+        ( inv
+          ( comp-eq-pair-Σ
+            ( pr2 X)
+            ( pr2 X)
+            ( pr2 X)
+            ( p)
+            ( q)
+            ( eq-is-prop (is-prop-is-set (type-Set X)))
+            ( eq-is-prop (is-prop-is-set (type-Set X))))))) ∙
+      ( ( ap
+        ( λ w →
+          eq-pair-Σ
+            ( ( eq-pair-Σ p (eq-is-prop (is-prop-is-set (pr1 X)))) ∙
+              ( eq-pair-Σ q (eq-is-prop (is-prop-is-set (pr1 X)))))
+            ( w)))
+        ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
+        ( inv
+          ( comp-eq-pair-Σ
+            ( unit-trunc-Prop refl)
+            ( unit-trunc-Prop refl)
+            ( unit-trunc-Prop refl)
+            ( eq-pair-Σ p (eq-is-prop (is-prop-is-set (type-Set X))))
+            ( eq-pair-Σ q (eq-is-prop (is-prop-is-set (type-Set X))))
+            ( eq-is-prop is-prop-type-trunc-Prop)
+            ( eq-is-prop is-prop-type-trunc-Prop))))
+
+  hom-inv-abstract-automorphism-group-loop-group-Set :
+    type-hom-Group
+      ( abstract-group-Concrete-Group
+        ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+      ( loop-group-Set X)
+  pr1 hom-inv-abstract-automorphism-group-loop-group-Set p =
+    pr1 (pair-eq-Σ (pr1 (pair-eq-Σ p)))
+  pr2 hom-inv-abstract-automorphism-group-loop-group-Set p q =
+    ( ap
+      ( λ r → pr1 (pair-eq-Σ r))
+      ( inv (comp-pair-eq-Σ p q))) ∙
+      ( inv (comp-pair-eq-Σ (pr1 (pair-eq-Σ p)) (pr1 (pair-eq-Σ q))))
+
+  is-sec-hom-inv-abstract-automorphism-group-loop-group-Set :
+    Id
+      ( comp-hom-Group
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+        ( loop-group-Set X)
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+        ( hom-abstract-automorphism-group-loop-group-Set)
+        ( hom-inv-abstract-automorphism-group-loop-group-Set))
+      ( id-hom-Group
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l))))
+  is-sec-hom-inv-abstract-automorphism-group-loop-group-Set =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          ( ap
+            ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
+            ( ( ap
+              ( eq-pair-Σ (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ p)))))
+              { y = pr2 (pair-eq-Σ (pr1 (pair-eq-Σ p)))}
+              ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set X) _ _)))) ∙
+              ( issec-pair-eq-Σ X X (pr1 (pair-eq-Σ p))))) ∙
+            ( ( ap
+              ( eq-pair-Σ (pr1 (pair-eq-Σ p)))
+              ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+              ( issec-pair-eq-Σ
+                ( pair X (unit-trunc-Prop refl))
+                ( pair X (unit-trunc-Prop refl))
+                ( p)))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group
+            ( abstract-group-Concrete-Group
+              ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l))))
+          ( semigroup-Group
+            ( abstract-group-Concrete-Group
+              ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l))))
+          ( id)))
+
+  is-retr-hom-inv-abstract-automorphism-group-loop-group-Set :
+    Id
+      ( comp-hom-Group
+        ( loop-group-Set X)
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+        ( loop-group-Set X)
+        ( hom-inv-abstract-automorphism-group-loop-group-Set)
+        ( hom-abstract-automorphism-group-loop-group-Set))
+      ( id-hom-Group (loop-group-Set X))
+  is-retr-hom-inv-abstract-automorphism-group-loop-group-Set =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          ( ap
+            ( λ w → pr1 (pair-eq-Σ (pr1 w)))
+            ( isretr-pair-eq-Σ
+              ( pair X (unit-trunc-Prop refl))
+              ( pair X (unit-trunc-Prop refl))
+              ( pair
+                ( eq-pair-Σ
+                  ( p)
+                  ( eq-is-prop (is-prop-is-set (type-Set X))))
+                ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
+            ( ap pr1
+              ( isretr-pair-eq-Σ X X
+                ( pair p (eq-is-prop (is-prop-is-set (type-Set X))))))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (loop-group-Set X))
+          ( semigroup-Group (loop-group-Set X))
+          ( id)))
+
+  iso-abstract-automorphism-group-loop-group-Set :
+    type-iso-Group
+      ( loop-group-Set X)
+      ( abstract-group-Concrete-Group
+        ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+  pr1 iso-abstract-automorphism-group-loop-group-Set = hom-abstract-automorphism-group-loop-group-Set
+  pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) = hom-inv-abstract-automorphism-group-loop-group-Set
+  pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
+  pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
+```
