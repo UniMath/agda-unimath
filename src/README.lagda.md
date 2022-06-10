@@ -361,6 +361,7 @@ open import foundation.uniqueness-set-quotients
 open import foundation.uniqueness-set-truncations
 open import foundation.uniqueness-truncation
 open import foundation.unit-type
+open import foundation.unital-binary-operations
 open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
 open import foundation.univalent-type-families
