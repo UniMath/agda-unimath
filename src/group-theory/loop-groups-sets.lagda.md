@@ -36,10 +36,11 @@ open import group-theory.groups using (Group; is-group'; semigroup-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; comp-hom-Group; id-hom-Group)
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using (type-iso-Group)
+open import group-theory.isomorphisms-groups using
+  ( type-iso-Group; comp-iso-Group; inv-iso-Group)
 open import group-theory.monoids using (is-unital)
 open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.symmetric-groups using (symmetric-Group; iso-symmetric-group-equiv-Set)
 ```
 
 ## Idea
@@ -331,4 +332,32 @@ module _
   pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) = hom-inv-abstract-automorphism-group-loop-group-Set
   pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
   pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
+```
+
+### The loop groups of two equivalent sets are isomorphic
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU-Set l1) (Y : UU-Set l2) (e : type-Set X ≃ type-Set Y)
+  where
+
+  iso-loop-group-equiv-Set :
+    type-iso-Group
+      ( loop-group-Set X)
+      ( loop-group-Set Y)
+  iso-loop-group-equiv-Set =
+    comp-iso-Group
+      ( loop-group-Set X)
+      ( symmetric-Group X)
+      ( loop-group-Set Y)
+      ( comp-iso-Group
+        ( symmetric-Group X)
+        ( symmetric-Group Y)
+        ( loop-group-Set Y)
+        ( inv-iso-Group
+          ( loop-group-Set Y)
+          ( symmetric-Group Y)
+          ( iso-symmetric-group-loop-group-Set Y))
+        ( iso-symmetric-group-equiv-Set X Y e))
+      ( iso-symmetric-group-loop-group-Set X)
 ```
