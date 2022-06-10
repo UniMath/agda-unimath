@@ -35,7 +35,7 @@ open import group-theory.groups using (is-group'; Group; semigroup-Group)
 open import group-theory.homomorphisms-groups using (id-hom-Group; type-hom-Group; comp-hom-Group)
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
 open import group-theory.isomorphisms-groups using (type-iso-Group)
-open import group-theory.monoids using (is-unital)
+open import group-theory.monoids using (is-unital-Semigroup)
 open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
 ```
 
@@ -62,15 +62,15 @@ symmetric-Semigroup :
 pr1 (symmetric-Semigroup X) = set-symmetric-Group X
 pr2 (symmetric-Semigroup X) = has-associative-mul-aut-Set X
 
-is-unital-symmetric-Semigroup :
-  {l : Level} (X : UU-Set l) → is-unital (symmetric-Semigroup X)
-pr1 (is-unital-symmetric-Semigroup X) = id-equiv
-pr1 (pr2 (is-unital-symmetric-Semigroup X)) = left-unit-law-equiv
-pr2 (pr2 (is-unital-symmetric-Semigroup X)) = right-unit-law-equiv
+is-unital-Semigroup-symmetric-Semigroup :
+  {l : Level} (X : UU-Set l) → is-unital-Semigroup (symmetric-Semigroup X)
+pr1 (is-unital-Semigroup-symmetric-Semigroup X) = id-equiv
+pr1 (pr2 (is-unital-Semigroup-symmetric-Semigroup X)) = left-unit-law-equiv
+pr2 (pr2 (is-unital-Semigroup-symmetric-Semigroup X)) = right-unit-law-equiv
 
 is-group-symmetric-Semigroup' :
   {l : Level} (X : UU-Set l) →
-  is-group' (symmetric-Semigroup X) (is-unital-symmetric-Semigroup X)
+  is-group' (symmetric-Semigroup X) (is-unital-Semigroup-symmetric-Semigroup X)
 pr1 (is-group-symmetric-Semigroup' X) = inv-equiv
 pr1 (pr2 (is-group-symmetric-Semigroup' X)) = left-inverse-law-equiv
 pr2 (pr2 (is-group-symmetric-Semigroup' X)) = right-inverse-law-equiv
@@ -78,7 +78,7 @@ pr2 (pr2 (is-group-symmetric-Semigroup' X)) = right-inverse-law-equiv
 symmetric-Group :
   {l : Level} → UU-Set l → Group l
 pr1 (symmetric-Group X) = symmetric-Semigroup X
-pr1 (pr2 (symmetric-Group X)) = is-unital-symmetric-Semigroup X
+pr1 (pr2 (symmetric-Group X)) = is-unital-Semigroup-symmetric-Semigroup X
 pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semigroup' X
 ```
 

@@ -25,7 +25,7 @@ open import foundation.subtypes using (eq-subtype)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.monoids using
-  ( is-unital; Monoid; is-prop-is-unital)
+  ( is-unital-Semigroup; Monoid; is-prop-is-unital-Semigroup)
 open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul)
 
@@ -51,19 +51,19 @@ An abstract group is a group in the usual algebraic sense, i.e., it consists of 
 
 ```agda
 is-group' :
-  {l : Level} (G : Semigroup l) → is-unital G → UU l
-is-group' G is-unital-G =
+  {l : Level} (G : Semigroup l) → is-unital-Semigroup G → UU l
+is-group' G is-unital-Semigroup-G =
   Σ ( type-Semigroup G → type-Semigroup G)
     ( λ i →
       ( (x : type-Semigroup G) →
-        Id (mul-Semigroup G (i x) x) (pr1 is-unital-G)) ×
+        Id (mul-Semigroup G (i x) x) (pr1 is-unital-Semigroup-G)) ×
       ( (x : type-Semigroup G) →
-        Id (mul-Semigroup G x (i x)) (pr1 is-unital-G)))
+        Id (mul-Semigroup G x (i x)) (pr1 is-unital-Semigroup-G)))
 
 is-group :
   {l : Level} (G : Semigroup l) → UU l
 is-group G =
-  Σ (is-unital G) (is-group' G)
+  Σ (is-unital-Semigroup G) (is-group' G)
 ```
 
 ### The type of groups
@@ -110,8 +110,8 @@ module _
     
   is-group-Group : is-group semigroup-Group
   is-group-Group = pr2 G
-  
-  is-unital-Group : is-unital semigroup-Group
+
+  is-unital-Group : is-unital-Semigroup semigroup-Group
   is-unital-Group = pr1 is-group-Group
 
   monoid-Group : Monoid l
@@ -255,7 +255,7 @@ module _
 ```agda
 abstract
   all-elements-equal-is-group :
-    {l : Level} (G : Semigroup l) (e : is-unital G) →
+    {l : Level} (G : Semigroup l) (e : is-unital-Semigroup G) →
     all-elements-equal (is-group' G e)
   all-elements-equal-is-group
     ( pair G (pair μ assoc-G))
@@ -280,7 +280,7 @@ abstract
     {l : Level} (G : Semigroup l) → is-prop (is-group G)
   is-prop-is-group G =
     is-prop-Σ
-      ( is-prop-is-unital G)
+      ( is-prop-is-unital-Semigroup G)
       ( λ e →
         is-prop-all-elements-equal (all-elements-equal-is-group G e))
 

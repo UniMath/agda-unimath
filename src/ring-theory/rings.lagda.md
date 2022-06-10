@@ -18,6 +18,7 @@ open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.propositions using (UU-Prop)
 open import foundation.sets using (UU-Set; is-set; Id-Prop)
+open import foundation.unital-binary-operations using (is-unital)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.abelian-groups using
@@ -31,7 +32,7 @@ open import group-theory.abelian-groups using
     add-list-Ab; preserves-concat-add-list-Ab)
 open import group-theory.groups using (Group; is-group; is-group')
 open import group-theory.monoids using
-  ( is-unital; Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
+  ( Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
 
@@ -51,7 +52,7 @@ has-mul-Ab : {l1 : Level} (A : Ab l1) → UU l1
 has-mul-Ab A =
   Σ ( has-associative-mul-Set (set-Ab A))
     ( λ μ →
-      ( is-unital (pair (set-Ab A) μ)) ×
+      ( is-unital (pr1 μ)) ×
       ( ( (a b c : type-Ab A) →
           Id (pr1 μ a (add-Ab A b c)) (add-Ab A (pr1 μ a b) (pr1 μ a c))) ×
         ( (a b c : type-Ab A) →
@@ -147,8 +148,8 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
-  has-zero-Ring : is-unital (additive-semigroup-Ring R)
+
+  has-zero-Ring : is-unital (add-Ring R)
   has-zero-Ring = has-zero-Ab (ab-Ring R)
 
   zero-Ring : type-Ring R
@@ -242,8 +243,8 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
-  is-unital-Ring : is-unital (multiplicative-semigroup-Ring R)
+
+  is-unital-Ring : is-unital (mul-Ring R)
   is-unital-Ring = pr1 (pr2 (pr2 R))
 
   multiplicative-monoid-Ring : Monoid l
