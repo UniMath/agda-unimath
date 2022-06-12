@@ -31,7 +31,7 @@ open import group-theory.groups using
     is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
     is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
     preserves-concat-mul-list-Group)
-open import group-theory.monoids using (is-unital)
+open import group-theory.monoids using (is-unital-Semigroup)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
 
@@ -111,7 +111,7 @@ is-group-Ab :
 is-group-Ab A = is-group-Group (group-Ab A)
 
 has-zero-Ab :
-  {l : Level} (A : Ab l) → is-unital (semigroup-Ab A)
+  {l : Level} (A : Ab l) → is-unital-Semigroup (semigroup-Ab A)
 has-zero-Ab A = is-unital-Group (group-Ab A)
 
 zero-Ab :

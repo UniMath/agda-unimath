@@ -13,6 +13,7 @@ open import foundation.propositions using
     prod-Prop; Π-Prop)
 open import foundation.sets using (UU-Set; is-set; type-Set; Id-Prop)
 open import foundation.subtypes using (eq-subtype)
+open import foundation.unital-binary-operations using (is-unital)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.semigroups using
@@ -27,17 +28,13 @@ Monoids are unital semigroups
 ## Definition
 
 ```agda
-is-unital :
+is-unital-Semigroup :
   {l : Level} → Semigroup l → UU l
-is-unital G =
-  Σ ( type-Semigroup G)
-    ( λ e →
-      ( (y : type-Semigroup G) → Id (mul-Semigroup G e y) y) ×
-      ( (x : type-Semigroup G) → Id (mul-Semigroup G x e) x))
+is-unital-Semigroup G = is-unital (mul-Semigroup G)
 
 Monoid :
   (l : Level) → UU (lsuc l)
-Monoid l = Σ (Semigroup l) is-unital
+Monoid l = Σ (Semigroup l) is-unital-Semigroup
 
 semigroup-Monoid :
   {l : Level} (M : Monoid l) → Semigroup l
@@ -88,9 +85,9 @@ right-unit-law-mul-Monoid M = pr2 (pr2 (pr2 M))
 
 ```agda
 abstract
-  all-elements-equal-is-unital :
-    {l : Level} (G : Semigroup l) → all-elements-equal (is-unital G)
-  all-elements-equal-is-unital (pair X (pair μ assoc-μ))
+  all-elements-equal-is-unital-Semigroup :
+    {l : Level} (G : Semigroup l) → all-elements-equal (is-unital-Semigroup G)
+  all-elements-equal-is-unital-Semigroup (pair X (pair μ assoc-μ))
     (pair e (pair left-unit-e right-unit-e))
     (pair e' (pair left-unit-e' right-unit-e')) =
     eq-subtype
@@ -101,12 +98,12 @@ abstract
       ( (inv (left-unit-e' e)) ∙ (right-unit-e e'))
 
 abstract
-  is-prop-is-unital :
-    {l : Level} (G : Semigroup l) → is-prop (is-unital G)
-  is-prop-is-unital G =
-    is-prop-all-elements-equal (all-elements-equal-is-unital G)
+  is-prop-is-unital-Semigroup :
+    {l : Level} (G : Semigroup l) → is-prop (is-unital-Semigroup G)
+  is-prop-is-unital-Semigroup G =
+    is-prop-all-elements-equal (all-elements-equal-is-unital-Semigroup G)
 
-is-unital-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
-pr1 (is-unital-Prop G) = is-unital G
-pr2 (is-unital-Prop G) = is-prop-is-unital G
+is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
+pr1 (is-unital-Semigroup-Prop G) = is-unital-Semigroup G
+pr2 (is-unital-Semigroup-Prop G) = is-prop-is-unital-Semigroup G
 ```
