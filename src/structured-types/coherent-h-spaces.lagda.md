@@ -37,16 +37,17 @@ A coherent H-space is a "wild unital magma", i.e., it is a pointed type equipped
 ### Unital binary operations on pointed types
 
 ```agda
-is-unital-mul-Pointed-Type :
+is-coherent-unital-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
-is-unital-mul-Pointed-Type A μ = coherent-unit-laws μ (pt-Pointed-Type A)
+is-coherent-unital-mul-Pointed-Type A μ =
+  coherent-unit-laws μ (pt-Pointed-Type A)
 
-unital-mul-Pointed-Type :
+coherent-unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
-unital-mul-Pointed-Type A =
+coherent-unital-mul-Pointed-Type A =
   Σ ( type-Pointed-Type A → type-Pointed-Type A → type-Pointed-Type A)
-    ( is-unital-mul-Pointed-Type A)
+    ( is-coherent-unital-mul-Pointed-Type A)
 ```
 
 ### Coherent H-spaces
@@ -54,7 +55,7 @@ unital-mul-Pointed-Type A =
 ```agda
 Coherent-H-Space : (l : Level) → UU (lsuc l)
 Coherent-H-Space l =
-  Σ ( Pointed-Type l) unital-mul-Pointed-Type
+  Σ ( Pointed-Type l) coherent-unital-mul-Pointed-Type
 
 module _
   {l : Level} (M : Coherent-H-Space l)
@@ -69,13 +70,13 @@ module _
   unit-Coherent-H-Space : type-Coherent-H-Space
   unit-Coherent-H-Space = pt-Pointed-Type pointed-type-Coherent-H-Space
 
-  unital-mul-Coherent-H-Space :
-    unital-mul-Pointed-Type pointed-type-Coherent-H-Space
-  unital-mul-Coherent-H-Space = pr2 M
+  coherent-unital-mul-Coherent-H-Space :
+    coherent-unital-mul-Pointed-Type pointed-type-Coherent-H-Space
+  coherent-unital-mul-Coherent-H-Space = pr2 M
 
   mul-Coherent-H-Space :
     type-Coherent-H-Space → type-Coherent-H-Space → type-Coherent-H-Space
-  mul-Coherent-H-Space = pr1 unital-mul-Coherent-H-Space
+  mul-Coherent-H-Space = pr1 coherent-unital-mul-Coherent-H-Space
 
   mul-Coherent-H-Space' :
     type-Coherent-H-Space → type-Coherent-H-Space → type-Coherent-H-Space
@@ -92,7 +93,7 @@ module _
 
   coherent-unit-laws-mul-Coherent-H-Space :
     coherent-unit-laws mul-Coherent-H-Space unit-Coherent-H-Space
-  coherent-unit-laws-mul-Coherent-H-Space = pr2 unital-mul-Coherent-H-Space
+  coherent-unit-laws-mul-Coherent-H-Space = pr2 coherent-unital-mul-Coherent-H-Space
 
   left-unit-law-mul-Coherent-H-Space :
     (x : type-Coherent-H-Space) →
