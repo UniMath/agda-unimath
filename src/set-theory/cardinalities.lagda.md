@@ -10,6 +10,9 @@ module set-theory.cardinalities where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.mere-embeddings
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -31,36 +34,60 @@ cardinal-Set l = trunc-Set (UU-Set l)
 cardinal : (l : Level) → UU (lsuc l)
 cardinal l = type-Set (cardinal-Set l)
 
-card : {l : Level} → UU-Set l → cardinal l
-card A = unit-trunc-Set A
+cardinality : {l : Level} → UU-Set l → cardinal l
+cardinality A = unit-trunc-Set A
 
-total-leq-card-Prop :
-  {l1 l2 : Level} → {!!}
-total-leq-card-Prop X = {!!}
-
-leq-card-Prop : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU-Prop (l1 ⊔ l2)
-leq-card-Prop {l1} {l2} X Y =
-  apply-universal-property-trunc-Set X
+leq-cardinality-Prop' :
+  {l1 l2 : Level} → UU-Set l1 → cardinal l2 → UU-Prop (l1 ⊔ l2)
+leq-cardinality-Prop' {l1} {l2} X =
+  map-universal-property-trunc-Set
     ( UU-Prop-Set (l1 ⊔ l2))
-    ( λ X' →
-      apply-universal-property-trunc-Set Y
-        ( UU-Prop-Set (l1 ⊔ l2))
-        ( λ Y' → trunc-Prop (type-Set X' ↪ type-Set Y')))
+    ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
 
-_≤-card_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
-X ≤-card Y = type-Prop (leq-card-Prop X Y)
+compute-leq-cardinality-Prop' :
+  {l1 l2 : Level} (X : UU-Set l1) (Y : UU-Set l2) →
+  Id ( leq-cardinality-Prop' X (cardinality Y))
+     ( mere-emb-Prop (type-Set X) (type-Set Y))
+compute-leq-cardinality-Prop' {l1} {l2} X =
+  triangle-universal-property-trunc-Set
+    ( UU-Prop-Set (l1 ⊔ l2))
+    ( λ Y' → mere-emb-Prop (type-Set X) (type-Set Y'))
+    
+leq-cardinality-Prop :
+  {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU-Prop (l1 ⊔ l2)
+leq-cardinality-Prop {l1} {l2} =
+  map-universal-property-trunc-Set
+    ( hom-Set (cardinal-Set l2) (UU-Prop-Set (l1 ⊔ l2)))
+    ( leq-cardinality-Prop')
 
-is-prop-≤-card : {l : Level} {X Y : cardinal l} → is-prop (X ≤-card Y)
-is-prop-≤-card {X = X} {Y = Y} = is-prop-type-Prop (leq-card-Prop X Y)
+_≤-cardinality_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
+X ≤-cardinality Y = type-Prop (leq-cardinality-Prop X Y)
 
-compute-leq-card :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
-  type-trunc-Prop (type-Set A ↪ type-Set B) ≃ (card A ≤-card card B)
-compute-leq-card A B = {!!}
+is-prop-≤-cardinality :
+  {l : Level} {X Y : cardinal l} → is-prop (X ≤-cardinality Y)
+is-prop-≤-cardinality {X = X} {Y = Y} =
+  is-prop-type-Prop (leq-cardinality-Prop X Y)
 
-refl-≤-card : {l : Level} (X : cardinal l) → X ≤-card X
-refl-≤-card {l} =
-  apply-dependent-universal-property-trunc-Set
-    ( λ X → set-Prop (leq-card-Prop X X))
+compute-leq-cardinality :
+  {l1 l2 : Level} (X : UU-Set l1) (Y : UU-Set l2) →
+  ( cardinality X ≤-cardinality cardinality Y) ≃
+  ( mere-emb (type-Set X) (type-Set Y))
+compute-leq-cardinality {l1} {l2} X Y =
+  equiv-eq-Prop
+    ( ( htpy-eq
+        ( triangle-universal-property-trunc-Set
+          ( hom-Set (cardinal-Set l2) (UU-Prop-Set (l1 ⊔ l2)))
+          ( leq-cardinality-Prop') X) (cardinality Y)) ∙
+      ( compute-leq-cardinality-Prop' X Y))
+
+unit-leq-cardinality :
+  {l1 l2 : Level} (X : UU-Set l1) (Y : UU-Set l2) →
+  mere-emb (type-Set X) (type-Set Y) → cardinality X ≤-cardinality cardinality Y
+unit-leq-cardinality X Y = map-inv-equiv (compute-leq-cardinality X Y)
+
+refl-≤-cardinality : {l : Level} (X : cardinal l) → X ≤-cardinality X
+refl-≤-cardinality {l} =
+  apply-dependent-universal-property-trunc-Set'
+    ( λ X → set-Prop (leq-cardinality-Prop X X))
     ( λ A → {!unit-trunc-Prop ?!})
 ```
