@@ -27,16 +27,16 @@ An H-space is a pointed type `A` equipped with a binary operation `μ` and homot
 ### Unital binary operations on pointed types
 
 ```agda
-is-unital-mul-Pointed-Type :
+unit-laws-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
-is-unital-mul-Pointed-Type A μ = unit-laws μ (pt-Pointed-Type A)
+unit-laws-mul-Pointed-Type A μ = unit-laws μ (pt-Pointed-Type A)
 
 unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
 unital-mul-Pointed-Type A =
   Σ ( type-Pointed-Type A → type-Pointed-Type A → type-Pointed-Type A)
-    ( is-unital-mul-Pointed-Type A)
+    ( unit-laws-mul-Pointed-Type A)
 ```
 
 ### H-Spaces

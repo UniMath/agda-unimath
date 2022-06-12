@@ -37,17 +37,17 @@ A coherent H-space is a "wild unital magma", i.e., it is a pointed type equipped
 ### Unital binary operations on pointed types
 
 ```agda
-is-coherent-unital-mul-Pointed-Type :
+coherent-unit-laws-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
-is-coherent-unital-mul-Pointed-Type A μ =
+coherent-unit-laws-mul-Pointed-Type A μ =
   coherent-unit-laws μ (pt-Pointed-Type A)
 
 coherent-unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
 coherent-unital-mul-Pointed-Type A =
   Σ ( type-Pointed-Type A → type-Pointed-Type A → type-Pointed-Type A)
-    ( is-coherent-unital-mul-Pointed-Type A)
+    ( coherent-unit-laws-mul-Pointed-Type A)
 ```
 
 ### Coherent H-spaces
