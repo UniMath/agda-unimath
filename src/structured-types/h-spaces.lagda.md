@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
@@ -28,9 +29,7 @@ h-space-structure :
   {l : Level} (A : Pointed-Type l) → UU l
 h-space-structure A =
   Σ ( (x y : type-Pointed-Type A) → type-Pointed-Type A)
-    ( λ μ →
-      ( μ (pt-Pointed-Type A) ~ id) ×
-      ( (λ x → μ x (pt-Pointed-Type A)) ~ id))
+    ( λ μ → unit-laws μ (pt-Pointed-Type A))
 
 H-Space : (l : Level) → UU (lsuc l)
 H-Space l = Σ (Pointed-Type l) h-space-structure
@@ -51,13 +50,17 @@ module _
   mul-H-Space : type-H-Space → type-H-Space → type-H-Space
   mul-H-Space = pr1 (pr2 A)
 
+  unit-laws-mul-H-Space :
+    unit-laws mul-H-Space pt-H-Space
+  unit-laws-mul-H-Space = pr2 (pr2 A)
+
   left-unit-law-mul-H-Space :
     (x : type-H-Space) → Id (mul-H-Space pt-H-Space x) x
-  left-unit-law-mul-H-Space = pr1 (pr2 (pr2 A))
+  left-unit-law-mul-H-Space = pr1 unit-laws-mul-H-Space
 
   right-unit-law-mul-H-Space :
     (x : type-H-Space) → Id (mul-H-Space x pt-H-Space) x
-  right-unit-law-mul-H-Space = pr2 (pr2 (pr2 A))
+  right-unit-law-mul-H-Space = pr2 unit-laws-mul-H-Space
 ```
 
 ## Properties

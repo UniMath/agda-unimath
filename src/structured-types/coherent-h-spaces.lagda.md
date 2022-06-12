@@ -16,6 +16,7 @@ open import foundation.identity-types using
     assoc; triangle-ap-binary; triangle-ap-binary'; inv-con; concat')
 open import foundation.path-algebra using
   ( horizontal-concat-Id²)
+open import foundation.unital-binary-operations
 open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
 
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
@@ -39,11 +40,7 @@ A coherent H-space is a "wild unital magma", i.e., it is a pointed type equipped
 is-unital-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
-is-unital-mul-Pointed-Type A μ =
-  Σ ( (x : type-Pointed-Type A) → Id (μ (pt-Pointed-Type A) x) x)
-      ( λ α →
-        Σ ( (x : type-Pointed-Type A) → Id (μ x (pt-Pointed-Type A)) x)
-          ( λ β → Id (α (pt-Pointed-Type A)) (β (pt-Pointed-Type A))))
+is-unital-mul-Pointed-Type A μ = coherent-unit-laws μ (pt-Pointed-Type A)
 
 unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
@@ -93,23 +90,27 @@ module _
   pr1 magma-Coherent-H-Space = type-Coherent-H-Space
   pr2 magma-Coherent-H-Space = mul-Coherent-H-Space
 
+  coherent-unit-laws-mul-Coherent-H-Space :
+    coherent-unit-laws mul-Coherent-H-Space unit-Coherent-H-Space
+  coherent-unit-laws-mul-Coherent-H-Space = pr2 unital-mul-Coherent-H-Space
+
   left-unit-law-mul-Coherent-H-Space :
     (x : type-Coherent-H-Space) →
     Id (mul-Coherent-H-Space unit-Coherent-H-Space x) x
   left-unit-law-mul-Coherent-H-Space =
-    pr1 (pr2 unital-mul-Coherent-H-Space)
+    pr1 coherent-unit-laws-mul-Coherent-H-Space
 
   right-unit-law-mul-Coherent-H-Space :
     (x : type-Coherent-H-Space) →
     Id (mul-Coherent-H-Space x unit-Coherent-H-Space) x
   right-unit-law-mul-Coherent-H-Space =
-    pr1 (pr2 (pr2 unital-mul-Coherent-H-Space))
+    pr1 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 
   coh-unit-laws-mul-Coherent-H-Space :
     Id ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
        ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
   coh-unit-laws-mul-Coherent-H-Space =
-    pr2 (pr2 (pr2 unital-mul-Coherent-H-Space))
+    pr2 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 ```
 
 ## Properties
@@ -121,31 +122,6 @@ coherent-h-space-H-Space :
   {l : Level} → H-Space l → Coherent-H-Space l
 pr1 (coherent-h-space-H-Space A) = pointed-type-H-Space A
 pr1 (pr2 (coherent-h-space-H-Space A)) = mul-H-Space A
-pr1 (pr2 (pr2 (coherent-h-space-H-Space A))) x =
-  left-unit-law-mul-H-Space A x
-pr1 (pr2 (pr2 (pr2 (coherent-h-space-H-Space A)))) x =
-  ( inv (ap (mul-H-Space A x) (right-unit-law-mul-H-Space A (pt-H-Space A)))) ∙
-  ( ( ap (mul-H-Space A x) (left-unit-law-mul-H-Space A (pt-H-Space A))) ∙
-    ( right-unit-law-mul-H-Space A x))
-pr2 (pr2 (pr2 (pr2 (coherent-h-space-H-Space A)))) =
-  inv-con
-    ( ap
-      ( mul-H-Space A (pt-H-Space A))
-      ( right-unit-law-mul-H-Space A (pt-H-Space A)))
-    ( left-unit-law-mul-H-Space A (pt-H-Space A))
-    ( ( ap
-        ( mul-H-Space A (pt-H-Space A))
-        ( left-unit-law-mul-H-Space A (pt-H-Space A))) ∙
-      ( right-unit-law-mul-H-Space A (pt-H-Space A)))
-    ( ( inv
-        ( nat-htpy-id
-          ( left-unit-law-mul-H-Space A)
-          ( right-unit-law-mul-H-Space A (pt-H-Space A)))) ∙
-      ( ap
-        ( concat'
-          ( mul-H-Space A
-            ( pt-H-Space A)
-            ( mul-H-Space A (pt-H-Space A) (pt-H-Space A)))
-          ( right-unit-law-mul-H-Space A (pt-H-Space A)))
-        ( coh-htpy-id (left-unit-law-mul-H-Space A) (pt-H-Space A))))
+pr2 (pr2 (coherent-h-space-H-Space A)) =
+  coherent-unit-laws-unit-laws (mul-H-Space A) (unit-laws-mul-H-Space A)
 ```
