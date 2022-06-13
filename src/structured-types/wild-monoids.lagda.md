@@ -18,8 +18,8 @@ open import structured-types.coherent-h-spaces using
   ( Coherent-H-Space; type-Coherent-H-Space; mul-Coherent-H-Space;
     unit-Coherent-H-Space; left-unit-law-mul-Coherent-H-Space;
     mul-Coherent-H-Space'; right-unit-law-mul-Coherent-H-Space;
-    pointed-type-Coherent-H-Space; unital-mul-Pointed-Type;
-    unital-mul-Coherent-H-Space; ap-mul-Coherent-H-Space;
+    pointed-type-Coherent-H-Space; coherent-unital-mul-Pointed-Type;
+    coherent-unital-mul-Coherent-H-Space; ap-mul-Coherent-H-Space;
     coh-unit-laws-mul-Coherent-H-Space)
 open import structured-types.morphisms-coherent-h-spaces using
   ( hom-Coherent-H-Space; preserves-unital-mul; preserves-left-unit-law-mul;
@@ -102,9 +102,10 @@ module _
   pointed-type-Wild-Monoid =
     pointed-type-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
-  unital-mul-Wild-Monoid : unital-mul-Pointed-Type pointed-type-Wild-Monoid
-  unital-mul-Wild-Monoid =
-    unital-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
+  coherent-unital-mul-Wild-Monoid :
+    coherent-unital-mul-Pointed-Type pointed-type-Wild-Monoid
+  coherent-unital-mul-Wild-Monoid =
+    coherent-unital-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   mul-Wild-Monoid : type-Wild-Monoid → type-Wild-Monoid → type-Wild-Monoid
   mul-Wild-Monoid = mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
