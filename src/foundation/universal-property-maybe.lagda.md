@@ -1,7 +1,7 @@
 # The universal property of maybe
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.universal-property-maybe where
 

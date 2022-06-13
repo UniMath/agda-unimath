@@ -3,7 +3,7 @@ title: Cardinalities of sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module set-theory.cardinalities where
 
@@ -89,5 +89,5 @@ refl-≤-cardinality : {l : Level} (X : cardinal l) → X ≤-cardinality X
 refl-≤-cardinality {l} =
   apply-dependent-universal-property-trunc-Set'
     ( λ X → set-Prop (leq-cardinality-Prop X X))
-    ( λ A → {!unit-trunc-Prop ?!})
+    ( λ A → unit-leq-cardinality A A (refl-mere-emb (type-Set A)))
 ```
