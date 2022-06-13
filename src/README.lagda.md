@@ -76,7 +76,9 @@ open import commutative-algebra.gaussian-integers
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.integral-domains
+open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
+open import commutative-algebra.local-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 open import commutative-algebra.zarisky-topology
 ```
@@ -312,6 +314,7 @@ open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
+open import foundation.propositional-resizing
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
@@ -562,6 +565,7 @@ open import order-theory.chains-posets
 open import order-theory.chains-preorders
 open import order-theory.decidable-subposets
 open import order-theory.decidable-subpreorders
+open import order-theory.distributive-lattices
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
@@ -610,6 +614,7 @@ open import ring-theory.ideals-rings
 open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
+open import ring-theory.local-rings
 open import ring-theory.localizations-rings
 open import ring-theory.modules-rings
 open import ring-theory.nil-ideals-rings
@@ -680,6 +685,7 @@ open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.multiplication-circle
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 open import synthetic-homotopy-theory.wedges-of-pointed-types

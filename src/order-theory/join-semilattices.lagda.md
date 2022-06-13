@@ -17,7 +17,8 @@ open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup)
 
 open import order-theory.least-upper-bounds-posets using
-  ( has-least-binary-upper-bound-poset-Prop)
+  ( has-least-binary-upper-bound-poset-Prop;
+    is-least-binary-upper-bound-Poset)
 open import order-theory.posets using
   ( Poset; element-Poset; leq-poset-Prop; leq-Poset; is-prop-leq-Poset;
     refl-leq-Poset; antisymmetric-leq-Poset; transitive-leq-Poset;
@@ -106,6 +107,19 @@ module _
   join-semilattice-Join-Semilattice : Join-Semilattice l1 l2
   pr1 join-semilattice-Join-Semilattice = poset-Join-Semilattice
   pr2 join-semilattice-Join-Semilattice = is-join-semilattice-Join-Semilattice
+
+  join-Join-Semilattice :
+    (x y : element-Join-Semilattice) → element-Join-Semilattice
+  join-Join-Semilattice x y =
+    pr1 (is-join-semilattice-Join-Semilattice x y)
+
+  is-least-binary-upper-bound-join-Join-Semilattice :
+    (x y : element-Join-Semilattice) →
+    is-least-binary-upper-bound-Poset poset-Join-Semilattice x y
+      ( join-Join-Semilattice x y)
+  is-least-binary-upper-bound-join-Join-Semilattice x y =
+    pr2 (is-join-semilattice-Join-Semilattice x y)
+
 ```
 
 ### Algebraic join-semilattices

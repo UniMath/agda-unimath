@@ -31,7 +31,7 @@ open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; universal-property-trunc-Set; trunc-Set;
     dependent-universal-property-trunc-Set; map-equiv-trunc-Σ-Set;
     trunc-Σ-Set; equiv-trunc-Σ-Set; apply-effectiveness-unit-trunc-Set;
-    apply-dependent-universal-property-trunc-Set; is-surjective-unit-trunc-Set;
+    apply-dependent-universal-property-trunc-Set'; is-surjective-unit-trunc-Set;
     is-set-type-trunc-Set; is-set-truncation-trunc-Set)
 open import foundation.sets using (set-Prop; Id-Prop)
 open import foundation.slice using
@@ -64,7 +64,7 @@ module _
         ( Σ ( type-trunc-Set A → type-trunc-Set B)
             ( λ h → (h ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)))
     unique-map-trunc-Set =
-      universal-property-trunc-Set A (trunc-Set B) (unit-trunc-Set ∘ f)
+      universal-property-trunc-Set (trunc-Set B) (unit-trunc-Set ∘ f)
 
   map-trunc-Set :
     type-trunc-Set A → type-trunc-Set B
@@ -99,7 +99,7 @@ map-id-trunc-Set {l1} {A} =
   htpy-eq
     ( ap pr1
       ( eq-is-contr
-        ( universal-property-trunc-Set A (trunc-Set A) unit-trunc-Set)
+        ( universal-property-trunc-Set (trunc-Set A) unit-trunc-Set)
         { pair (map-trunc-Set id) (naturality-trunc-Set id)}
         { pair id refl-htpy}))
 ```
@@ -116,9 +116,8 @@ map-comp-trunc-Set {A = A} {C = C} g f =
     ( ap pr1
       ( eq-is-contr
         ( universal-property-trunc-Set
-          A
-          (trunc-Set C)
-          (unit-trunc-Set ∘ (g ∘ f)))
+          ( trunc-Set C)
+          ( unit-trunc-Set ∘ (g ∘ f)))
         { pair (map-trunc-Set (g ∘ f)) (naturality-trunc-Set (g ∘ f))}
         { pair ( map-trunc-Set g ∘ map-trunc-Set f)
                ( ( map-trunc-Set g ·l naturality-trunc-Set f) ∙h
@@ -216,13 +215,13 @@ module _
     is-injective-map-trunc-Set :
       is-injective f → is-injective (map-trunc-Set f)
     is-injective-map-trunc-Set H {x} {y} =
-      apply-dependent-universal-property-trunc-Set
+      apply-dependent-universal-property-trunc-Set'
         ( λ u →
           set-Prop
             ( function-Prop (Id (map-trunc-Set f u) (map-trunc-Set f y))
             ( Id-Prop (trunc-Set A) u y) ))
         ( λ a →
-          apply-dependent-universal-property-trunc-Set
+          apply-dependent-universal-property-trunc-Set'
           ( λ v →
             set-Prop
               ( function-Prop
@@ -250,7 +249,7 @@ module _
     is-surjective-map-trunc-Set :
       is-surjective f → is-surjective (map-trunc-Set f)
     is-surjective-map-trunc-Set H =
-      apply-dependent-universal-property-trunc-Set
+      apply-dependent-universal-property-trunc-Set'
         ( λ x → set-Prop (trunc-Prop (fib (map-trunc-Set f) x)))
         ( λ b →
           apply-universal-property-trunc-Prop

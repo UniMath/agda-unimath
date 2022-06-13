@@ -1,14 +1,17 @@
 # Uniqueness of the truncations
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.uniqueness-truncation where
 
+open import foundation.contractible-types using (center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv)
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
+open import foundation.injective-maps
 open import foundation.truncated-types using
   ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type)
 open import foundation.truncation-levels using (𝕋)
@@ -29,17 +32,19 @@ module _
   {h : type-hom-Truncated-Type k B C} (H : (h ∘ f) ~ g)
   where
 
+{-
+
   abstract
     is-equiv-is-truncation-is-truncation :
       ({l : Level} → is-truncation l B f) →
       ({l : Level} → is-truncation l C g) →
       is-equiv h
-    is-equiv-is-truncation-is-truncation H K =
-      pair
-        {! sec-is-truncation!}
+    is-equiv-is-truncation-is-truncation K L =
+      is-equiv-has-inverse
+        ( map-inv-is-equiv (L B) f)
+        ( {!!})
         {!!}
 
-{-
       is-equiv-has-inverse 
         ( pr1 (center K))
         ( htpy-eq

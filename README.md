@@ -6,6 +6,22 @@ The `agda-unimath` library is a new formalisation project for univalent mathemat
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
+## Getting started
+
+Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
+
+ - Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
+ - Once you have Agda up and running, you can copy our library to your machine using `git clone git@github.com:UniMath/agda-unimath.git`.
+ - If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
+
+The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. In order for your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
+
+```
+(setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
+```
+
+With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the `src` folder. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
+
 ## Joining the project
 
 Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
@@ -53,6 +69,8 @@ Ideally the first section of a file explains the idea, then proceeds to give the
 title: [The title of this file]
 ---
 
+Contributors : [The list of contributors]
+
 [ options
   module declaration
   imports]
@@ -61,7 +79,11 @@ title: [The title of this file]
 
 ( Informal description of the idea)
 
-## Definition
+## Definitions
+
+### Definition 1
+
+( Contributor of this definition (optional))
 
 [ formalization of the definition and immediately related structure]
 
@@ -69,13 +91,15 @@ title: [The title of this file]
 
 ### X is an example
 
-( informal explanation)
+( Contributor of this definition (optional)
+  Informal explanation)
 
 [ formalization that X is an example]
 
 ### Y is an example
 
-( informal explanation)
+( Contributor of this example (optional)
+  Informal explanation)
 
 [ formalization that Y is an example]
 
@@ -83,15 +107,21 @@ title: [The title of this file]
 
 ### Concise descrition of property 1
 
-( informal explanation)
+( Contributor of this property (optional)
+  Informal explanation)
 
 [ formalization of property 1]
 
 ### Concise description of property 2
 
-( informal explanation)
+( Contributor of this property (optional)
+  Informal explanation)
 
 [ formalization of property 2]
+
+## Related concepts
+
+## References
 ```
 
 ### KaTeX support for the website
@@ -176,3 +206,11 @@ module _
 * Function arguments should be implicit if they can "almost always" be inferred within proofs. It is often harder for Agda to infer an argument in a type declaration, but we prioritize usage in proofs in our decision to make an argument implicit.
 * If there are lots of implicit arguments that are common to a collection of proofs they should be extracted by using an anonymous module.
 * The library doesn't use variables at the moment. All variables are declared either as parameters of an anonymous module or in the type declaration of a construction.
+
+#### Coding practices we avoid
+
+* Unicode characters in names are allowed, but use them sparingly. If it is overdone, it will be more difficult to read.
+* Names of constructions should never refer to variable names.
+* Don't use deeply indented code if a two-space indentation level suffices. Deeply indented code will be rendered unreadable on smaller screens.
+* Don't use long lines of code, for the same reason.
+* `where` blocks are allowed, but keep them short. Large `where` blocks tend to result in non-reusable and non-refactorable code, and in some instances they slow down Agda's verification process.

@@ -19,7 +19,7 @@ open import foundation.functoriality-function-types using
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (Id; refl)
 open import foundation.logical-equivalences using
   ( _⇔_; equiv-equiv-iff; iff-eq; is-prop-logical-equivalence)
 open import foundation.negation using (neg-Prop)
@@ -92,6 +92,10 @@ module _
     {P Q : UU-Prop l1} → (type-Prop P ≃ type-Prop Q) → Id P Q
   eq-equiv-Prop e =
     eq-iff (map-equiv e) (map-inv-equiv e)
+
+  equiv-eq-Prop :
+    {P Q : UU-Prop l1} → Id P Q → type-Prop P ≃ type-Prop Q
+  equiv-eq-Prop {P} refl = id-equiv
 ```
 
 ### The type of propositions is a set

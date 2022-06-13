@@ -1,7 +1,7 @@
 # Polynomial endofunctors
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.polynomial-endofunctors where
 

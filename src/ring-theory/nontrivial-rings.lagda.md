@@ -7,11 +7,13 @@ title: Nontrivial rings
 
 module ring-theory.nontrivial-rings where
 
-open import foundation.identity-types using (Id)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import ring-theory.rings using (Ring; zero-Ring; one-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea
@@ -21,7 +23,14 @@ Nontrivial rings are rings in which `0 ≠ 1`.
 ## Definition
 
 ```agda
-is-nontrivial-Ring :
-  { l : Level} → Ring l → UU l
-is-nontrivial-Ring R = ¬ (Id (zero-Ring R) (one-Ring R))
+is-nontrivial-ring-Prop : {l : Level} → Ring l → UU-Prop l
+is-nontrivial-ring-Prop R =
+  neg-Prop (Id-Prop (set-Ring R) (zero-Ring R) (one-Ring R))
+
+is-nontrivial-Ring : {l : Level} → Ring l → UU l
+is-nontrivial-Ring R = type-Prop (is-nontrivial-ring-Prop R)
+
+is-prop-is-nontrivial-Ring :
+  {l : Level} (R : Ring l) → is-prop (is-nontrivial-Ring R)
+is-prop-is-nontrivial-Ring R = is-prop-type-Prop (is-nontrivial-ring-Prop R)
 ```

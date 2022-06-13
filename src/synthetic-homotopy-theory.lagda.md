@@ -22,6 +22,7 @@ open import synthetic-homotopy-theory.interval-type public
 open import synthetic-homotopy-theory.iterated-loop-spaces public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
+open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
