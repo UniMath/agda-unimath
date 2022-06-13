@@ -93,7 +93,8 @@ module _
 
   coherent-unit-laws-mul-Coherent-H-Space :
     coherent-unit-laws mul-Coherent-H-Space unit-Coherent-H-Space
-  coherent-unit-laws-mul-Coherent-H-Space = pr2 coherent-unital-mul-Coherent-H-Space
+  coherent-unit-laws-mul-Coherent-H-Space =
+    pr2 coherent-unital-mul-Coherent-H-Space
 
   left-unit-law-mul-Coherent-H-Space :
     (x : type-Coherent-H-Space) →
