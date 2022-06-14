@@ -717,6 +717,7 @@ open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
+open import univalent-combinatorics.bracelets
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.complements-isolated-points
@@ -762,6 +763,7 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.main-classes-of-latin-hypercubes
 open import univalent-combinatorics.main-classes-of-latin-squares
 open import univalent-combinatorics.maybe
+open import univalent-combinatorics.necklaces
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.orientations-cubes
 open import univalent-combinatorics.petri-nets

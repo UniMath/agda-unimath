@@ -15,6 +15,7 @@ open import univalent-combinatorics.2-element-decidable-subtypes public
 open import univalent-combinatorics.2-element-subtypes public
 open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
+open import univalent-combinatorics.bracelets public
 open import univalent-combinatorics.cartesian-product-types public
 open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.complements-isolated-points public
@@ -59,6 +60,7 @@ open import univalent-combinatorics.lists public
 open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public
+open import univalent-combinatorics.necklaces public
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.petri-nets public
 open import univalent-combinatorics.pi-finite-types public
