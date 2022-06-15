@@ -37,6 +37,15 @@ module _
   unordered-pair-vertices-Undirected-Graph =
     unordered-pair vertex-Undirected-Graph
 
+  type-unordered-pair-vertices-Undirected-Graph :
+    unordered-pair-vertices-Undirected-Graph → UU lzero
+  type-unordered-pair-vertices-Undirected-Graph p = type-unordered-pair p
+
+  element-unordered-pair-vertices-Undirected-Graph :
+    (p : unordered-pair-vertices-Undirected-Graph) →
+    type-unordered-pair-vertices-Undirected-Graph p → vertex-Undirected-Graph
+  element-unordered-pair-vertices-Undirected-Graph p = element-unordered-pair p
+
   edge-Undirected-Graph : unordered-pair-vertices-Undirected-Graph → UU l2
   edge-Undirected-Graph = pr2 G
 ```
