@@ -16,7 +16,7 @@ open import foundation.unordered-pairs using (unordered-pair)
 
 open import graph-theory.undirected-graphs using
   ( Undirected-Graph; unordered-pair-vertices-Undirected-Graph;
-    edge-Undirected-Graph)
+    edge-Undirected-Graph; element-unordered-pair-vertices-Undirected-Graph)
 
 open import univalent-combinatorics.finite-types using (Fin-UU-Fin)
 ```
@@ -38,7 +38,10 @@ module _
       ( Π-Prop
         ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p →
-          function-Prop (edge-Undirected-Graph G p) (is-emb-Prop (pr2 p))))
+          function-Prop
+            ( edge-Undirected-Graph G p)
+            ( is-emb-Prop
+              ( element-unordered-pair-vertices-Undirected-Graph G p))))
       ( Π-Prop
         ( unordered-pair-vertices-Undirected-Graph G)
         ( λ p → is-prop-Prop (edge-Undirected-Graph G p)))
