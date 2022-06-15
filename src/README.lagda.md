@@ -456,7 +456,9 @@ open import graph-theory
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
+open import graph-theory.embeddings-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.faithful-morphisms-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.incidence-undirected-graphs
 open import graph-theory.matchings
@@ -469,6 +471,7 @@ open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
+open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
 open import graph-theory.voltage-graphs
@@ -782,4 +785,5 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
 open import univalent-combinatorics.universal-property-standard-finite-types
+open import univalent-combinatorics.unlabelled-trees
 ```
