@@ -453,11 +453,15 @@ open import foundation-core.universe-levels
 
 ```agda
 open import graph-theory
+open import graph-theory.circuits-undirected-graphs
+open import graph-theory.closed-walks-undirected-graphs
 open import graph-theory.connected-undirected-graphs
+open import graph-theory.cycles-undirected-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.incidence-undirected-graphs

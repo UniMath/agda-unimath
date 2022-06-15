@@ -7,11 +7,15 @@ module graph-theory where
 ```
 
 ```agda
+open import graph-theory.circuits-undirected-graphs public
+open import graph-theory.closed-walks-undirected-graphs public
 open import graph-theory.connected-undirected-graphs public
+open import graph-theory.cycles-undirected-graphs public
 open import graph-theory.directed-graphs public
 open import graph-theory.edge-coloured-undirected-graphs public
 open import graph-theory.embeddings-undirected-graphs public
 open import graph-theory.equivalences-undirected-graphs public
+open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
 open import graph-theory.finite-graphs public
 open import graph-theory.incidence-undirected-graphs public
