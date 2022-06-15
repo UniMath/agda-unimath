@@ -24,6 +24,9 @@ record Σ {l1 l2} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
 open Σ public
 
 {-# BUILTIN SIGMA Σ #-}
+
+infixr 10 _,_
+pattern _,_ a  b = pair a b
 ```
 
 ## Constructions
