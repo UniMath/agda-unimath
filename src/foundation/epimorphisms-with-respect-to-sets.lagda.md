@@ -94,5 +94,5 @@ abstract
     g : B → UU-Prop (l1 ⊔ l2)
     g y = raise-unit-Prop (l1 ⊔ l2)
     h : B → UU-Prop (l1 ⊔ l2)
-    h y = ∃-Prop (λ x → Id (f x) y)
+    h y = ∃-Prop A (λ x → Id (f x) y)
 ```

@@ -101,7 +101,7 @@ module _
 ```agda
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
-is-in-unordered-pair p a = ∃ (λ x → Id (element-unordered-pair p x) a)
+is-in-unordered-pair p a = ∃ (type-unordered-pair p) (λ x → Id (element-unordered-pair p x) a)
 ```
 
 ### The condition of being a self-pairing

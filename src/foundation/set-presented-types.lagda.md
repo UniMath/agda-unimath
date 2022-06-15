@@ -22,5 +22,5 @@ A type `A` is said to be set presented if there exists a map `f : X → A` from 
 has-set-presentation-Prop :
   {l1 l2 : Level} (A : UU-Set l1) (B : UU l2) → UU-Prop (l1 ⊔ l2)
 has-set-presentation-Prop A B =
-  ∃-Prop (λ (f : type-Set A → B) → is-equiv (unit-trunc-Set ∘ f))
+  ∃-Prop (type-Set A → B) (λ f → is-equiv (unit-trunc-Set ∘ f))
 ```
