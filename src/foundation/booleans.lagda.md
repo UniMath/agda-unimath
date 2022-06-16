@@ -12,12 +12,14 @@ open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (Id; refl; inv)
-open import foundation.injective-maps using (is-injective)
 open import foundation-core.negation using (¬)
 open import foundation-core.propositions using (is-prop)
 open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation-core.universe-levels using (Level; lzero; UU)
+
+open import foundation.injective-maps using (is-injective)
+open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation-core.universe-levels using (lzero; UU)
 ```
 
 ## Idea
@@ -33,6 +35,12 @@ data bool : UU lzero where
 {-# BUILTIN BOOL bool #-}
 {-# BUILTIN TRUE  true  #-}
 {-# BUILTIN FALSE false #-}
+
+raise-bool : (l : Level) → UU l
+raise-bool l = raise l bool
+
+equiv-raise-bool : (l : Level) → bool ≃ raise-bool l
+equiv-raise-bool l = equiv-raise l bool
 ```
 
 ### Equality on the booleans
