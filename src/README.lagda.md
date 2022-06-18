@@ -726,10 +726,12 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.binomial-types
 open import univalent-combinatorics.bracelets
 open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.cartesian-products-species
 open import univalent-combinatorics.classical-finite-types
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.composition-species
 open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.coproducts-species
 open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.counting-fibers-of-maps
@@ -750,13 +752,16 @@ open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.equivalences-cubes
+open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.equivalences-standard-finite-types
 open import univalent-combinatorics.equivalences
+open import univalent-combinatorics.exponents-species
 open import univalent-combinatorics.ferrers-diagrams
 open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-presentations
+open import univalent-combinatorics.finite-species
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-presented-types
 open import univalent-combinatorics.function-types
@@ -770,12 +775,15 @@ open import univalent-combinatorics.lists
 open import univalent-combinatorics.main-classes-of-latin-hypercubes
 open import univalent-combinatorics.main-classes-of-latin-squares
 open import univalent-combinatorics.maybe
+open import univalent-combinatorics.morphisms-finite-species
+open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.necklaces
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.orientations-cubes
 open import univalent-combinatorics.petri-nets
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
+open import univalent-combinatorics.precategory-of-finite-species
 open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
@@ -789,5 +797,6 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
 open import univalent-combinatorics.universal-property-standard-finite-types
-open import univalent-combinatorics.unlabelled-trees
+open import univalent-combinatorics.unlabeled-rooted-trees
+open import univalent-combinatorics.unlabeled-trees
 ```

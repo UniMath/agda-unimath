@@ -3,7 +3,7 @@ title: Morphisms of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --allow-unsolved-metas --without-K --exact-split #-}
 
 module univalent-combinatorics.morphisms-species where
 
@@ -20,12 +20,12 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
-
 ```
 
-# Idea
+### Idea
 
-A morphism between two species is a pointwise family of maps between the species' values.
+A homomorphism between two species is a pointwise family of
+maps between their values.
 
 ## Definitions
 
@@ -116,4 +116,3 @@ right-unit-law-comp-hom-species :
   Id (comp-hom-species f (id-hom-species F)) f
 right-unit-law-comp-hom-species f = refl
 ```
- 

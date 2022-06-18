@@ -42,5 +42,4 @@ extensionality-species :
   {l : Level} → (F G : species l) → (Id F G) ≃ (equiv-species F G)  
 extensionality-species = extensionality-fam
 ```
-
  
