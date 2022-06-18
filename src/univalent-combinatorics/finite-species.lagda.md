@@ -1,15 +1,16 @@
-# Finite species
+---
+title: Finite species
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module univalent-combinatorics.finite-species where
 
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types using  (𝔽; type-𝔽)
-
-open import univalent-combinatorics.species using (species)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.species
 ```
 
 ### Idea
@@ -20,7 +21,7 @@ species is just a map from 𝔽 to 𝔽.
 ## Definition
 
 ```agda
-finite-species : UU₁
+finite-species : UU (lsuc lzero)
 finite-species = 𝔽 → 𝔽
 
 species-finite-species : finite-species → species lzero
