@@ -745,6 +745,7 @@ open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dedekind-finite-sets
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.derivatives-species
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.embeddings-standard-finite-types
@@ -783,6 +784,7 @@ open import univalent-combinatorics.orientations-cubes
 open import univalent-combinatorics.petri-nets
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
+open import univalent-combinatorics.pointing-species
 open import univalent-combinatorics.precategory-of-finite-species
 open import univalent-combinatorics.presented-pi-finite-types
 open import univalent-combinatorics.ramsey-theory
