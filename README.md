@@ -1,3 +1,53 @@
+--------------------------------------------------------
+
+# Formalisation of combinatorial species in agda
+
+## LOGRAC project (Matej Jazbec & Ivan Kobe; mentor: dr. Egbert Rijke)
+
+For our project, we have formalised combinatorial species in agda and have proven some basic facts about them. The formalisation was done in the framework of HoTT/UF and was ment to be a potential contribution to the agda-unimath library.
+
+Since we rely heavily on theorems from the library, our project is not self-contained.
+Therefore, we are turning it in on a fork of agda-unimath.
+
+Our main source was: B. A. Yorgey, Combinatorial Species and Labelled Structures, 2014, PhD Dissertation at University of Pennsylvania
+
+Our contribution consists of the following files:
+
+* univalent-combinatorics.species.lagda.md 
+  + definition of the type of combinatorial species  
+* univalent-combinatorics.finite-species.lagda.md
+  + definition of the type of finite combinatorial species
+* univalent-combinatorics.equivalences-species.lagda.md
+  + definition of the type of equivalences of species
+  + univalence principle for species
+* univalent-combinatorics.morphisms-species.lagda.md
+  + definition of the type of homomorphisms of species
+  + characterisation of their identity type (as the type of homotopies of homomorphisms  of species)
+  + the identity morphism of species
+  + composition
+  + associativity
+  + unit laws 
+* univalent-combinatorics.morphisms-finite-species.lagda.md 
+  + definition of the type of homomorphisms of finite species
+  + characterisation of their identity type (as the type of homotopies of homomorphisms  of finite species)
+  + the identity morphism of finite species
+  + composition
+  + associativity
+  + unit laws
+  + the type of homomorphisms of finite species is a set
+* univalent-combinatorics.precategory-of-finite-species.lagda.md
+  + finite species and their morphisms form a precategory
+* univalent-combinatorics.cartesian-products-species.lagda.md
+  + defined cartesian product of species
+  + proved universal property of cartesian producs of species
+* univalent-combinatorics.exponents-species.lagda.md
+  + defined exponents of species
+* univalent-combinatorics.coproduts-species.lagda.md
+  + defined coproduct of species
+  + proved universal property of coproducs of species
+--------------------------------------------------------
+
+
 # Univalent mathematics in Agda
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment)
