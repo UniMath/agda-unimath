@@ -95,6 +95,11 @@ abstract
       ( is-contr-total-equiv-fam B)
       ( equiv-eq-fam B)
 
+extensionality-fam :
+  {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → Id B C ≃ equiv-fam B C
+pr1 (extensionality-fam B C) = equiv-eq-fam B C
+pr2 (extensionality-fam B C) = is-equiv-equiv-eq-fam B C
+
 eq-equiv-fam :
   {l1 l2 : Level} {A : UU l1} {B C : A → UU l2} → equiv-fam B C → Id B C
 eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)

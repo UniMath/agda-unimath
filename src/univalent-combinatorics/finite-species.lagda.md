@@ -1,18 +1,20 @@
-# Finite species
+---
+title: Finite species
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module univalent-combinatorics.finite-species where
 
-open import foundation.universe-levels using (UU)
+open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types using (𝔽)
+open import univalent-combinatorics.finite-types
 ```
 
 ## Definition
 
 ```agda
-finite-species : UU₁
+finite-species : UU (lsuc lzero)
 finite-species = 𝔽 → 𝔽
 ```
