@@ -29,6 +29,9 @@ open import univalent-combinatorics.counting-fibers-of-maps public
 open import univalent-combinatorics.counting-maybe public
 open import univalent-combinatorics.counting public
 open import univalent-combinatorics.cubes public
+open import univalent-combinatorics.cycle-index-series-species public
+open import univalent-combinatorics.cycle-partitions public
+open import univalent-combinatorics.cyclic-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
 open import univalent-combinatorics.decidable-propositions public
@@ -72,6 +75,7 @@ open import univalent-combinatorics.morphisms-species public
 open import univalent-combinatorics.necklaces public
 open import univalent-combinatorics.orientations-complete-undirected-graph public
 open import univalent-combinatorics.orientations-cubes public
+open import univalent-combinatorics.partitions public
 open import univalent-combinatorics.petri-nets public
 open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
@@ -90,6 +94,8 @@ open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
 open import univalent-combinatorics.universal-property-standard-finite-types public
+open import univalent-combinatorics.unlabeled-partitions public
 open import univalent-combinatorics.unlabeled-rooted-trees public
+open import univalent-combinatorics.unlabeled-structures-species public
 open import univalent-combinatorics.unlabeled-trees public
 ```

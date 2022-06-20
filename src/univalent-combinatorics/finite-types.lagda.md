@@ -23,7 +23,8 @@ open import foundation.connected-components-universes using
 open import foundation.connected-types using
   ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
-  ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv')
+  ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv';
+    is-contr-total-path)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-Prop;
@@ -37,7 +38,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; is-empty; ex-falso; is-empty-Prop; empty-Prop)
 open import foundation.equivalences using
-  ( id-equiv; _≃_; is-equiv; inv-equiv; _∘e_; map-equiv; equiv-precomp-equiv)
+  ( id-equiv; _≃_; is-equiv; inv-equiv; _∘e_; map-equiv; equiv-precomp-equiv;
+    map-inv-equiv)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.functoriality-dependent-pair-types using
@@ -59,11 +61,14 @@ open import foundation.propositions using
 open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using (is-set; is-set-Prop; Id-Prop)
 open import foundation.subtypes using (eq-subtype)
+open import foundation.subuniverses using
+  ( extensionality-subuniverse; extensionality-fam-subuniverse)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( equiv-left-swap-Σ)
 open import foundation.type-arithmetic-empty-type using
   ( left-unit-law-coprod)
 open import foundation.unit-type using (unit; star; is-contr-unit)
+open import foundation.univalence
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 
 open import univalent-combinatorics.counting using
@@ -470,6 +475,11 @@ module _
     (H : is-finite X) → has-cardinality (number-of-elements-is-finite H) X
   has-cardinality-is-finite H =
     pr2 (has-finite-cardinality-is-finite H)
+
+finite-type-UU-Fin : {k : ℕ} → UU-Fin k → 𝔽
+pr1 (finite-type-UU-Fin X) = type-UU-Fin X
+pr2 (finite-type-UU-Fin X) =
+  is-finite-has-cardinality (has-cardinality-type-UU-Fin X)
 ```
 
 ### If a type has cardinality `k` and cardinality `l`, then `k = l`.
@@ -590,6 +600,46 @@ abstract
 trunc-Prop-𝔽 : 𝔽 → 𝔽
 pr1 (trunc-Prop-𝔽 A) = type-trunc-Prop (type-𝔽 A)
 pr2 (trunc-Prop-𝔽 A) = is-finite-type-trunc-Prop (is-finite-type-𝔽 A)
+```
+
+### We characterize the identity type of 𝔽
+
+```agda
+equiv-𝔽 : 𝔽 → 𝔽 → UU lzero
+equiv-𝔽 X Y = type-𝔽 X ≃ type-𝔽 Y
+
+id-equiv-𝔽 : (X : 𝔽) → equiv-𝔽 X X
+id-equiv-𝔽 X = id-equiv
+
+extensionality-𝔽 : (X Y : 𝔽) → Id X Y ≃ equiv-𝔽 X Y
+extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
+
+is-contr-total-equiv-𝔽 : (X : 𝔽) → is-contr (Σ 𝔽 (equiv-𝔽 X))
+is-contr-total-equiv-𝔽 X =
+  is-contr-equiv'
+    ( Σ 𝔽 (Id X))
+    ( equiv-tot (extensionality-𝔽 X))
+    ( is-contr-total-path X)
+
+equiv-eq-𝔽 : (X Y : 𝔽) → Id X Y → equiv-𝔽 X Y
+equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)
+
+eq-equiv-𝔽 : (X Y : 𝔽) → equiv-𝔽 X Y → Id X Y
+eq-equiv-𝔽 X Y = map-inv-equiv (extensionality-𝔽 X Y)
+```
+
+### We characterize the identity type of families of finite types
+
+```agda
+equiv-fam-𝔽 : {l : Level} {X : UU l} (Y Z : X → 𝔽) → UU l
+equiv-fam-𝔽 Y Z = equiv-fam (type-𝔽 ∘ Y) (type-𝔽 ∘ Z)
+
+id-equiv-fam-𝔽 : {l : Level} {X : UU l} → (Y : X → 𝔽) → equiv-fam-𝔽 Y Y
+id-equiv-fam-𝔽 Y x = id-equiv
+
+extensionality-fam-𝔽 :
+  {l : Level} {X : UU l} (Y Z : X → 𝔽) → Id Y Z ≃ equiv-fam-𝔽 Y Z
+extensionality-fam-𝔽 = extensionality-fam-subuniverse is-finite-Prop
 ```
 
 ### We characterize the identity type of `UU-Fin-Level`
