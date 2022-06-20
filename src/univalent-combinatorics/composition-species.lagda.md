@@ -18,6 +18,7 @@ open import foundation.universe-levels
 open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equivalences-species
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.partitions
 open import univalent-combinatorics.species
 ```
 
@@ -39,13 +40,11 @@ Using the formula for composition of analytic endofunctors, we obtain a way to c
 analytic-comp-species :
   {l1 l2 : Level} → species l1 → species l2 → species (lsuc lzero ⊔ l1 ⊔ l2)
 analytic-comp-species S T X =
-  Σ ( 𝔽)
-    ( λ Y →
-      Σ ( Σ ( type-𝔽 Y → 𝔽)
-            ( λ Z → (y : type-𝔽 Y) → type-trunc-Prop (type-𝔽 (Z y))))
-        ( λ Z →
-          ( (type-𝔽 (Σ-𝔽 Y (pr1 Z)) ≃ type-𝔽 X)) ×
-          ( T Y × ((y : type-𝔽 Y) → S (pr1 Z y)))))
+  Σ ( partition-𝔽 X)
+    ( λ P →
+      ( T (finite-indexing-type-partition-𝔽 X P)) ×
+      ( (y : indexing-type-partition-𝔽 X P) →
+        S (finite-block-partition-𝔽 X P y)))
 ```
 
 ### The analytic unit for composition of species
