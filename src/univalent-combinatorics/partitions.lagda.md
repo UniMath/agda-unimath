@@ -157,8 +157,8 @@ extensionality-partition-𝔽 X P =
 
 ### The type of finite partitions of a finite type `X` is equivalent to the type of equivalence relations on `X`
 
-### The type of finite partitions of a contractible type is contractible
-
 ### The type of finite partitions of a finite type is finite
 
 ### The number of elements of the type of finite partitions of a finite type is a Stirling number of the second kind
+
+### The type of finite partitions of a contractible type is contractible
