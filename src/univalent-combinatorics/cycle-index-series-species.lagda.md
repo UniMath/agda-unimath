@@ -3,7 +3,7 @@ title: Cycle index series of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module univalent-combinatorics.cycle-index-series-species where
 
@@ -14,8 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cyclic-types
-
+open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.species
 ```

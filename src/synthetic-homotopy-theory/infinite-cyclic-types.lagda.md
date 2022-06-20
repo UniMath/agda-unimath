@@ -42,12 +42,13 @@ open import structured-types.pointed-types using
   ( Pointed-Type)
 open import structured-types.types-equipped-with-endomorphisms
 
-open import synthetic-homotopy-theory.cyclic-types using
+open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+
+open import univalent-combinatorics.cyclic-types using
   ( Cyclic; ℤ-Mod-Cyclic; Cyclic-Pointed-Type; endo-Cyclic; type-Cyclic;
     endomorphism-Cyclic; equiv-Cyclic; id-equiv-Cyclic;
     equiv-eq-Cyclic; is-contr-total-equiv-Cyclic;
     is-equiv-equiv-eq-Cyclic; extensionality-Cyclic)
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
 ```
 
 ```agda
