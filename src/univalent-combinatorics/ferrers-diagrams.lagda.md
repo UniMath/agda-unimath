@@ -1,5 +1,5 @@
 ---
-title: Ferrers diagrams
+title: Ferrers diagrams (unlabeled partitions)
 ---
 
 ```agda
@@ -30,7 +30,7 @@ open import univalent-combinatorics.pi-finite-types
 
 ## Idea
 
-Ferrers diagrams of a type `A` record the number of ways in which `A` can be decomposed as the dependent pair type of a family of inhabited type over an indexing type of "rows". When `A` is a finite type, the number of connected component in the type of Ferrers diagrams on `A` is the partition number of the cardinality `|A|` of `A`.
+Unlabeled partitions, also known as Ferrers diagrams, of a type `A` record the number of ways in which `A` can be decomposed as the dependent pair type of a family of inhabited types. More precisely, a Ferrers diagram of a type `A` consists of a type `X` and a family `Y` of inhabited types over `X` such that `Σ X Y` is merely equivalent to `A`. A finite Finite ferrers diagram of a finite type `A` consists of a finite type `X` and a family `Y` of inhabited finite types over `X` such that `Σ X Y` is merely equivalent to `A`. The number of finite Ferrers diagrams of `A` is the partition number of the cardinality of `A`.
 
 ## Definition
 
@@ -252,3 +252,7 @@ module _
 ## Properties
 
 ### The type of Ferrers diagrams of any finite type is π-finite
+
+## See also
+
+- [Integer partitions](elementary-number-theory.integer-partitions.html)

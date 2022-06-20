@@ -109,6 +109,12 @@ abstract
       ( is-contr-total-equiv-subuniverse P (pair X p))
       ( equiv-eq-subuniverse P (pair X p))
 
+extensionality-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) (s t : total-subuniverse P) →
+  Id s t ≃ equiv-subuniverse P s t
+pr1 (extensionality-subuniverse P s t) = equiv-eq-subuniverse P s t
+pr2 (extensionality-subuniverse P s t) = is-equiv-equiv-eq-subuniverse P s t
+
 eq-equiv-subuniverse :
   {l1 l2 : Level} (P : subuniverse l1 l2) →
   {s t : total-subuniverse P} → equiv-subuniverse P s t → Id s t
