@@ -7,6 +7,8 @@ title: Partitions of finite types
 
 module univalent-combinatorics.partitions where
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -47,7 +49,7 @@ Note that the last description is subtly different from the notion of unlabeled 
 ```agda
 partition-𝔽 : 𝔽 → UU (lsuc lzero)
 partition-𝔽 X =
-  Σ 𝔽
+  Σ ( 𝔽)
     ( λ Y →
       Σ ( type-𝔽 Y → 𝔽)
         ( λ Z →
@@ -64,11 +66,27 @@ module _
   indexing-type-partition-𝔽 : UU lzero
   indexing-type-partition-𝔽 = type-𝔽 finite-indexing-type-partition-𝔽
 
+  is-finite-indexing-type-partition-𝔽 : is-finite indexing-type-partition-𝔽
+  is-finite-indexing-type-partition-𝔽 =
+    is-finite-type-𝔽 finite-indexing-type-partition-𝔽
+
+  number-of-elements-indexing-type-partition-𝔽 : ℕ
+  number-of-elements-indexing-type-partition-𝔽 =
+    number-of-elements-is-finite is-finite-indexing-type-partition-𝔽
+
   finite-block-partition-𝔽 : indexing-type-partition-𝔽 → 𝔽
   finite-block-partition-𝔽 = pr1 (pr2 P)
 
   block-partition-𝔽 : indexing-type-partition-𝔽 → UU lzero
   block-partition-𝔽 i = type-𝔽 (finite-block-partition-𝔽 i)
+
+  is-finite-block-partition-𝔽 :
+    (i : indexing-type-partition-𝔽) → is-finite (block-partition-𝔽 i)
+  is-finite-block-partition-𝔽 i = is-finite-type-𝔽 (finite-block-partition-𝔽 i)
+
+  number-of-elements-block-partition-𝔽 : indexing-type-partition-𝔽 → ℕ
+  number-of-elements-block-partition-𝔽 i =
+    number-of-elements-is-finite (is-finite-block-partition-𝔽 i)
 
   is-inhabited-block-partition-𝔽 :
     (i : indexing-type-partition-𝔽) → type-trunc-Prop (block-partition-𝔽 i)
@@ -132,3 +150,15 @@ extensionality-partition-𝔽 X P =
               ( pr1 α)))) ∘e
         ( equiv-pair-eq (pr2 (pr2 P)) α)))
 ```
+
+## Properties
+
+### The type of finite partitions of a finite type `X` is equivalent to the type of decidable partitions of `X` in the usual sense
+
+### The type of finite partitions of a finite type `X` is equivalent to the type of equivalence relations on `X`
+
+### The type of finite partitions of a contractible type is contractible
+
+### The type of finite partitions of a finite type is finite
+
+### The number of elements of the type of finite partitions of a finite type is a Stirling number of the second kind
