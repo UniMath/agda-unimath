@@ -23,7 +23,8 @@ open import foundation.connected-components-universes using
 open import foundation.connected-types using
   ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
-  ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv')
+  ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv';
+    is-contr-total-path)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-Prop;
@@ -60,7 +61,8 @@ open import foundation.propositions using
 open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using (is-set; is-set-Prop; Id-Prop)
 open import foundation.subtypes using (eq-subtype)
-open import foundation.subuniverses using (extensionality-subuniverse)
+open import foundation.subuniverses using
+  ( extensionality-subuniverse; extensionality-fam-subuniverse)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( equiv-left-swap-Σ)
 open import foundation.type-arithmetic-empty-type using
@@ -612,11 +614,32 @@ id-equiv-𝔽 X = id-equiv
 extensionality-𝔽 : (X Y : 𝔽) → Id X Y ≃ equiv-𝔽 X Y
 extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
 
+is-contr-total-equiv-𝔽 : (X : 𝔽) → is-contr (Σ 𝔽 (equiv-𝔽 X))
+is-contr-total-equiv-𝔽 X =
+  is-contr-equiv'
+    ( Σ 𝔽 (Id X))
+    ( equiv-tot (extensionality-𝔽 X))
+    ( is-contr-total-path X)
+
 equiv-eq-𝔽 : (X Y : 𝔽) → Id X Y → equiv-𝔽 X Y
 equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)
 
 eq-equiv-𝔽 : (X Y : 𝔽) → equiv-𝔽 X Y → Id X Y
 eq-equiv-𝔽 X Y = map-inv-equiv (extensionality-𝔽 X Y)
+```
+
+### We characterize the identity type of families of finite types
+
+```agda
+equiv-fam-𝔽 : {l : Level} {X : UU l} (Y Z : X → 𝔽) → UU l
+equiv-fam-𝔽 Y Z = equiv-fam (type-𝔽 ∘ Y) (type-𝔽 ∘ Z)
+
+id-equiv-fam-𝔽 : {l : Level} {X : UU l} → (Y : X → 𝔽) → equiv-fam-𝔽 Y Y
+id-equiv-fam-𝔽 Y x = id-equiv
+
+extensionality-fam-𝔽 :
+  {l : Level} {X : UU l} (Y Z : X → 𝔽) → Id Y Z ≃ equiv-fam-𝔽 Y Z
+extensionality-fam-𝔽 = extensionality-fam-subuniverse is-finite-Prop
 ```
 
 ### We characterize the identity type of `UU-Fin-Level`
