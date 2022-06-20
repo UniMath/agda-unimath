@@ -1,9 +1,11 @@
-# Cyclic types
+---
+title: Cyclic types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module synthetic-homotopy-theory.cyclic-types where
+module univalent-combinatorics.cyclic-types where
 
 open import elementary-number-theory.addition-integers using
   ( left-unit-law-add-ℤ)

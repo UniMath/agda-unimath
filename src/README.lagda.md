@@ -683,7 +683,6 @@ open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.cofibers
-open import synthetic-homotopy-theory.cyclic-types
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types
@@ -738,6 +737,9 @@ open import univalent-combinatorics.counting-fibers-of-maps
 open import univalent-combinatorics.counting-maybe
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.cubes
+open import univalent-combinatorics.cycle-index-series-species
+open import univalent-combinatorics.cycle-partitions
+open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.decidable-propositions
@@ -781,6 +783,7 @@ open import univalent-combinatorics.morphisms-species
 open import univalent-combinatorics.necklaces
 open import univalent-combinatorics.orientations-complete-undirected-graph
 open import univalent-combinatorics.orientations-cubes
+open import univalent-combinatorics.partitions
 open import univalent-combinatorics.petri-nets
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.pigeonhole-principle
@@ -799,6 +802,8 @@ open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
 open import univalent-combinatorics.universal-property-standard-finite-types
+open import univalent-combinatorics.unlabeled-partitions
 open import univalent-combinatorics.unlabeled-rooted-trees
+open import univalent-combinatorics.unlabeled-structures-species
 open import univalent-combinatorics.unlabeled-trees
 ```

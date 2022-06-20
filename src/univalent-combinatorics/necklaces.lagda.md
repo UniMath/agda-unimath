@@ -20,8 +20,7 @@ open import foundation.universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms
 
-open import synthetic-homotopy-theory.cyclic-types
-
+open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
