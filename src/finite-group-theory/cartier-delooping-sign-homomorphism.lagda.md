@@ -1,4 +1,6 @@
-# Cartier's delooping of the sign homomorphism
+---
+title: Cartier's delooping of the sign homomorphism
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
@@ -32,16 +34,17 @@ open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using
   ( pair-eq-Σ; eq-pair-Σ; comp-eq-pair-Σ)
 open import foundation.equivalence-classes using
-  ( large-set-quotient; large-quotient-Set; quotient-map-large-set-quotient;
-    type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
-    eq-effective-quotient'; is-prop-type-class-large-set-quotient;
-    quotient-reflecting-map-large-set-quotient)
+  ( equivalence-class; equivalence-class-Set; class;
+    is-in-subtype-equivalence-class;
+    is-decidable-is-in-subtype-equivalence-class-is-decidable;
+    eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class;
+    quotient-reflecting-map-equivalence-class)
 open import foundation.equivalences using
   ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
     right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
     right-unit-law-equiv; htpy-eq-equiv; is-equiv-map-equiv; associative-comp-equiv)
 open import foundation.equivalence-relations using
-  ( Eq-Rel; refl-Eq-Rel; type-Eq-Rel; is-prop-type-Eq-Rel)
+  ( Eq-Rel; refl-Eq-Rel; sim-Eq-Rel; is-prop-sim-Eq-Rel)
 open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
@@ -71,7 +74,7 @@ open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.unit-type using (star)
 open import foundation.univalence using (equiv-eq; eq-equiv)
 open import foundation.universal-property-set-quotients using
-  ( is-set-quotient-large-set-quotient; is-effective-is-set-quotient)
+  ( is-set-quotient-equivalence-class; is-effective-is-set-quotient)
 open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
@@ -305,7 +308,7 @@ module _
       ( orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n)) →
       ( type-Set (quotient-sign-set-Fin n))
     quotient-map-even-difference-Fin n =
-      quotient-map-large-set-quotient
+      class
         ( even-difference-orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n))
 
     quotient-reflecting-map-even-difference-Fin : (n : ℕ) →
@@ -313,7 +316,7 @@ module _
         ( even-difference-orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n))
         ( type-Set (quotient-sign-set-Fin n))
     quotient-reflecting-map-even-difference-Fin n =
-      quotient-reflecting-map-large-set-quotient
+      quotient-reflecting-map-equivalence-class
         ( even-difference-orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n))
 
     orientation-aut-succ-succ-Fin : (n : ℕ) →
@@ -386,11 +389,11 @@ module _
             ( pair Y sY)
             ( pair X sX)
             ( inv p)))
-        ( quotient-map-large-set-quotient
+        ( class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( pair Y eY)))
-        ( quotient-map-large-set-quotient
+        ( class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( pair X eX)))
@@ -407,7 +410,7 @@ module _
               ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
               ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
               ( w))
-            ( quotient-map-large-set-quotient
+            ( class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( succ-ℕ (succ-ℕ n))
                 ( pair X eX))
@@ -421,7 +424,7 @@ module _
                 ( tr (mere-equiv (Fin (succ-ℕ (succ-ℕ n)))) refl eX)
                 ( eX)))))) ∙
         ( ap
-          ( quotient-map-large-set-quotient
+          ( class
             ( even-difference-orientation-Complete-Undirected-Graph
               ( succ-ℕ (succ-ℕ n))
               ( pair X (tr (mere-equiv (Fin (succ-ℕ (succ-ℕ n)))) refl eX))))
@@ -477,11 +480,11 @@ module _
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
         ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
         ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n)))
-        ( is-set-quotient-large-set-quotient
+        ( is-set-quotient-equivalence-class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
-        ( is-set-quotient-large-set-quotient
+        ( is-set-quotient-equivalence-class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -522,7 +525,7 @@ module _
   cases-map-orientation-even-difference-aut-Fin : (n : ℕ) →
     ( h : type-Group (symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))) →
     is-decidable
-      ( type-Eq-Rel
+      ( sim-Eq-Rel
         ( even-difference-orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
         ( orientation-aut-succ-succ-Fin n h)
@@ -599,7 +602,7 @@ module _
             ( Y))}
       ( eq-is-prop
         ( is-prop-is-decidable
-          ( is-prop-type-Eq-Rel
+          ( is-prop-sim-Eq-Rel
             ( even-difference-orientation-Complete-Undirected-Graph
               ( succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
@@ -613,7 +616,7 @@ module _
   cases-eq-map-orientation-even-difference-aut-Fin : (n : ℕ) →
     ( p : type-Group (loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))) →
     ( D : is-decidable
-      ( type-Eq-Rel
+      ( sim-Eq-Rel
         ( even-difference-orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
         ( orientation-aut-succ-succ-Fin n
@@ -697,7 +700,7 @@ module _
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
               ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n))))
-            ( is-set-quotient-large-set-quotient
+            ( is-set-quotient-equivalence-class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -790,7 +793,7 @@ module _
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
               ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n))))
-            ( is-set-quotient-large-set-quotient
+            ( is-set-quotient-equivalence-class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -891,7 +894,7 @@ module _
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
       ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
       ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n)))
-      ( is-set-quotient-large-set-quotient
+      ( is-set-quotient-equivalence-class
         ( even-difference-orientation-Complete-Undirected-Graph
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
