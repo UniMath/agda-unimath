@@ -1,4 +1,6 @@
-# Foundation
+---
+title: Foundation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
