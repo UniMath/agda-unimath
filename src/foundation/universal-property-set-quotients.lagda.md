@@ -17,11 +17,11 @@ open import foundation.embeddings using (_↪_; map-emb; equiv-ap-emb; is-emb)
 open import foundation.epimorphisms-with-respect-to-sets using
   ( is-epimorphism-is-surjective-Set)
 open import foundation.equivalence-classes using
-  ( equivalence-class; quotient-map-equivalence-class;
-    apply-effectiveness-quotient-map-equivalence-class';
-    is-effective-quotient-map-equivalence-class; large-quotient-Set;
+  ( equivalence-class; class;
+    apply-effectiveness-class';
+    is-effective-class; equivalence-class-Set;
     quotient-reflecting-map-equivalence-class;
-    is-surjective-and-effective-quotient-map-equivalence-class)
+    is-surjective-and-effective-class)
 open import foundation.equivalence-relations using
   ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
 open import foundation.equivalences using
@@ -217,7 +217,7 @@ module _
       ({l : Level} → is-image l (prop-Eq-Rel R) i (pair q T)) →
       is-effective R q
     is-effective-is-image i T H x y =
-      ( is-effective-quotient-map-equivalence-class R x y) ∘e
+      ( is-effective-class R x y) ∘e
       ( ( inv-equiv (equiv-ap-emb (emb-im (prop-Eq-Rel R)))) ∘e
         ( ( inv-equiv (convert-eq-values T x y)) ∘e
           ( equiv-ap-emb i)))
@@ -591,22 +591,22 @@ module _
   universal-property-equivalence-class :
     {l : Level} →
     universal-property-set-quotient l R
-      ( large-quotient-Set R)
+      ( equivalence-class-Set R)
       ( quotient-reflecting-map-equivalence-class R)
   universal-property-equivalence-class =
     universal-property-set-quotient-is-surjective-and-effective R
-      ( large-quotient-Set R)
-      ( quotient-map-equivalence-class R)
-      ( is-surjective-and-effective-quotient-map-equivalence-class R)
+      ( equivalence-class-Set R)
+      ( class R)
+      ( is-surjective-and-effective-class R)
 
   is-set-quotient-equivalence-class :
     {l : Level} →
     is-set-quotient l R
-      ( large-quotient-Set R)
+      ( equivalence-class-Set R)
       ( quotient-reflecting-map-equivalence-class R)
   is-set-quotient-equivalence-class =
     is-set-quotient-universal-property-set-quotient R
-      ( large-quotient-Set R)
+      ( equivalence-class-Set R)
       ( quotient-reflecting-map-equivalence-class R)
       ( universal-property-equivalence-class)
 
@@ -619,7 +619,7 @@ module _
   triangle-universal-property-equivalence-class :
     {l4 : Level} (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
     ( ( map-universal-property-equivalence-class C g) ∘
-      ( quotient-map-equivalence-class R)) ~
+      ( class R)) ~
     ( map-reflecting-map-Eq-Rel R g)
   triangle-universal-property-equivalence-class C g =
     pr2 (center (universal-property-equivalence-class C g))
