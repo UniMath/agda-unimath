@@ -7,11 +7,16 @@ title: Decidable equivalence relations
 
 module foundation.decidable-equivalence-relations where
 
+open import foundation.decidable-propositions
 open import foundation.decidable-relations
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
+open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -19,7 +24,9 @@ open import foundation.universe-levels
 
 A decidable equivalence relation on a type `X` is an equivalence relation `R` on `X` such that `R x y` is a decidable proposition for each `x y : X`.
 
-## Definition
+## Definitions
+
+### Decidable equivalence relations
 
 ```agda
 Decidable-Equivalence-Relation :
@@ -84,4 +91,17 @@ module _
     sim-Decidable-Equivalence-Relation x z
   transitive-Decidable-Equivalence-Relation =
     trans-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
+```
+
+### Equivalence classes of decidable equivalence relations
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (R : Decidable-Equivalence-Relation l2 X)
+  where
+
+  is-equivalence-class-Decidable-Equivalence-Relation :
+    decidable-subtype l2 X → UU (l1 ⊔ lsuc l2)
+  is-equivalence-class-Decidable-Equivalence-Relation P =
+    ∃ (λ x → Id P (decidable-relation-Decidable-Equivalence-Relation R x))
 ```
