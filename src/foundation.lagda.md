@@ -41,8 +41,10 @@ open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
 open import foundation.decidable-equality public
+open import foundation.decidable-equivalence-relations public
 open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
+open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public

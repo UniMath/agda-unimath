@@ -82,6 +82,7 @@ open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.pointing-species public
 open import univalent-combinatorics.precategory-of-finite-species public
 open import univalent-combinatorics.presented-pi-finite-types public
+open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public
