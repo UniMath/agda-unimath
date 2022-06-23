@@ -34,6 +34,7 @@ open import univalent-combinatorics.cycle-partitions public
 open import univalent-combinatorics.cyclic-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
+open import univalent-combinatorics.decidable-equivalence-relations public
 open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dedekind-finite-sets public

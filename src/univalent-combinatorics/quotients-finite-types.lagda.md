@@ -3,7 +3,7 @@ title: Quotients of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
 module univalent-combinatorics.quotients-finite-types where
 

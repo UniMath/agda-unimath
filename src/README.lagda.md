@@ -744,6 +744,7 @@ open import univalent-combinatorics.cycle-partitions
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.decidable-equivalence-relations
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dedekind-finite-sets
