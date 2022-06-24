@@ -15,7 +15,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.injective-maps using (is-emb-is-injective)
 open import foundation.mere-equivalences using
   ( mere-equiv; is-set-mere-equiv'; has-decidable-equality-mere-equiv')
@@ -103,7 +103,7 @@ module _
 
   mere-equiv-vertex-Polygon : mere-equiv (ℤ-Mod k) vertex-Polygon
   mere-equiv-vertex-Polygon =
-    functor-trunc-Prop
+    map-trunc-Prop
       ( equiv-vertex-equiv-Undirected-Graph
         ( standard-polygon-Undirected-Graph k)
         ( undirected-graph-Polygon))

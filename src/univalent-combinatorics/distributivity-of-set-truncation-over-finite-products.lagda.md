@@ -30,7 +30,7 @@ open import foundation.functoriality-dependent-function-types using
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.functoriality-set-truncation using
-  ( equiv-trunc-Set; map-equiv-trunc-Set; naturality-trunc-Set)
+  ( equiv-trunc-Set; map-equiv-trunc-Set; htpy-map-trunc-Set)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using
   ( Id; equiv-concat; ap; _∙_; equiv-concat'; inv)
@@ -229,7 +229,7 @@ module _
                         ( equiv-concat
                           ( ap
                             ( λ t → map-equiv f t x)
-                            ( ( naturality-trunc-Set (precomp-Π (map-equiv e) B)
+                            ( ( htpy-map-trunc-Set (precomp-Π (map-equiv e) B)
                                 ( map-equiv-Π B e (λ _ → id-equiv) h)) ∙
                               ( ap
                                 ( unit-trunc-Set)

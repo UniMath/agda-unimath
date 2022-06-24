@@ -45,7 +45,7 @@ open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.identity-types using
   ( refl; Id; _∙_; ap; tr; equiv-tr; inv)
 open import foundation.mere-equivalences using
@@ -595,7 +595,7 @@ is-decidable-type-trunc-Prop-is-finite H =
 abstract
   is-finite-type-trunc-Prop :
     {l1 : Level} {A : UU l1} → is-finite A → is-finite (type-trunc-Prop A)
-  is-finite-type-trunc-Prop = functor-trunc-Prop count-type-trunc-Prop
+  is-finite-type-trunc-Prop = map-trunc-Prop count-type-trunc-Prop
 
 trunc-Prop-𝔽 : 𝔽 → 𝔽
 pr1 (trunc-Prop-𝔽 A) = type-trunc-Prop (type-𝔽 A)
@@ -730,7 +730,7 @@ abstract
     is-path-connected-mere-eq
       ( Fin-UU-Fin-Level l n)
       ( λ A →
-        functor-trunc-Prop
+        map-trunc-Prop
           ( ( eq-equiv-UU-Fin-Level (Fin-UU-Fin-Level l n) A) ∘
             ( map-equiv
               ( equiv-precomp-equiv
@@ -744,7 +744,7 @@ abstract
   is-path-connected-UU-Fin n =
     is-path-connected-mere-eq
       ( Fin-UU-Fin n)
-      ( λ A → functor-trunc-Prop (eq-equiv-UU-Fin (Fin-UU-Fin n) A) (pr2 A))
+      ( λ A → map-trunc-Prop (eq-equiv-UU-Fin (Fin-UU-Fin n) A) (pr2 A))
 ```
 
 ```agda

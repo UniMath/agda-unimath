@@ -33,7 +33,7 @@ open import foundation.functoriality-dependent-function-types using
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ-equiv-base)
 open import foundation.functoriality-propositional-truncation using
-  ( map-inv-equiv-trunc-Prop; functor-trunc-Prop)
+  ( map-inv-equiv-trunc-Prop; map-trunc-Prop)
 open import foundation.hilberts-epsilon-operators using
   ( ε-operator-Hilbert; ε-operator-equiv)
 open import foundation.identity-types using (refl)
@@ -133,7 +133,7 @@ abstract
       ( map-decidable-emb f)
       ( ε-operator-decidable-subtype-count e
         ( decidable-subtype-decidable-emb f)
-        ( functor-trunc-Prop
+        ( map-trunc-Prop
           ( map-inv-equiv-total-fib (map-decidable-emb f))
           ( t)))
 ```

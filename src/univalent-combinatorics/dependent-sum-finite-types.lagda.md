@@ -17,7 +17,7 @@ open import foundation.equivalences using (_∘e_; inv-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.identity-types using (Id; tr; refl)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop;
@@ -85,7 +85,7 @@ abstract
   is-finite-fiber-is-finite-Σ {l1} {l2} {X} {Y} f g x =
     apply-universal-property-trunc-Prop f
       ( is-finite-Prop (Y x))
-      ( λ e → functor-trunc-Prop (λ h → count-fiber-count-Σ e h x) g)
+      ( λ e → map-trunc-Prop (λ h → count-fiber-count-Σ e h x) g)
 
 -- Theorem 16.3.6 (iii) (b), (c), B has a section implies (a)
 

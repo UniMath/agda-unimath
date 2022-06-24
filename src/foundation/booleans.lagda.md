@@ -18,7 +18,8 @@ open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
 open import foundation-core.universe-levels using (Level; lzero; UU)
 
 open import foundation.injective-maps using (is-injective)
-open import foundation.raising-universe-levels using (raise; equiv-raise)
+open import foundation.raising-universe-levels using
+  ( raise; equiv-raise; map-raise)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 ```
 
@@ -38,6 +39,12 @@ data bool : UU lzero where
 
 raise-bool : (l : Level) → UU l
 raise-bool l = raise l bool
+
+raise-true : (l : Level) → raise-bool l
+raise-true l = map-raise true
+
+raise-false : (l : Level) → raise-bool l
+raise-false l = map-raise false
 
 equiv-raise-bool : (l : Level) → bool ≃ raise-bool l
 equiv-raise-bool l = equiv-raise l bool

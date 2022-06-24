@@ -8,7 +8,7 @@ module foundation.mere-equality where
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
@@ -53,7 +53,7 @@ abstract
   symm-mere-eq :
     {l : Level} {A : UU l} {x y : A} → mere-eq x y → mere-eq y x
   symm-mere-eq {x = x} {y} =
-    functor-trunc-Prop inv
+    map-trunc-Prop inv
 ```
 
 ### Transitivity
@@ -66,7 +66,7 @@ abstract
   trans-mere-eq {x = x} {y} {z} p q =
     apply-universal-property-trunc-Prop p
       ( mere-eq-Prop x z)
-      ( λ p' → functor-trunc-Prop (λ q' → p' ∙ q') q)
+      ( λ p' → map-trunc-Prop (λ q' → p' ∙ q') q)
 ```
 
 ### Mere equality is an equivalence relation

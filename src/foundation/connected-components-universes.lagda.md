@@ -14,7 +14,7 @@ open import foundation.empty-types using
 open import foundation.equivalences using
   ( _≃_; id-equiv; is-equiv; map-inv-is-equiv; map-inv-equiv)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (Id; refl)
@@ -189,7 +189,7 @@ abstract
     is-path-connected-mere-eq
       ( pair X (refl-mere-equiv X))
       ( λ Y →
-        functor-trunc-Prop
+        map-trunc-Prop
           ( eq-equiv-component-UU (pair X (refl-mere-equiv X)) Y)
           ( mere-equiv-component-UU Y))
 ```

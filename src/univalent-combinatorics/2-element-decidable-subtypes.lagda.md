@@ -44,7 +44,7 @@ open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr; equiv-concat)
 open import foundation.injective-maps using (is-injective)
@@ -495,7 +495,7 @@ module _
       ( λ S →
         pair
           ( λ h →
-            functor-trunc-Prop
+            map-trunc-Prop
               ( λ h' →
                 equiv-Σ
                   ( λ x →
@@ -511,7 +511,7 @@ module _
                   ( h'))
               ( h))
           ( λ h →
-            functor-trunc-Prop
+            map-trunc-Prop
               ( λ h' →
                 equiv-Σ
                   ( λ x → type-decidable-Prop (S x))

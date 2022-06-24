@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types using
   ( Σ; pr1; pr2; pair)
 open import foundation.equivalences using
   ( _≃_; map-equiv; map-inv-equiv; isretr-map-inv-equiv;
-    issec-map-inv-equiv)
+    issec-map-inv-equiv; is-equiv)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using
@@ -31,21 +31,19 @@ The universal property of truncations can be used to define the functorial actio
 ## Definition
 
 ```agda
-abstract
-  unique-functor-trunc :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
-    is-contr
-      ( Σ ( type-trunc k A → type-trunc k B)
-          ( λ h → (h ∘ unit-trunc) ~ (unit-trunc ∘ f)))
-  unique-functor-trunc {l1} {l2} {A} {B} k f =
-    universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
+unique-map-trunc :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
+  is-contr
+    ( Σ ( type-trunc k A → type-trunc k B)
+        ( λ h → (h ∘ unit-trunc) ~ (unit-trunc ∘ f)))
+unique-map-trunc {l1} {l2} {A} {B} k f =
+  universal-property-trunc k A (trunc k B) (unit-trunc ∘ f)
 
-abstract
-  functor-trunc :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
-    (A → B) → type-trunc k A → type-trunc k B
-  functor-trunc k f =
-    pr1 (center (unique-functor-trunc k f))
+map-trunc :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
+  (A → B) → type-trunc k A → type-trunc k B
+map-trunc k f =
+  pr1 (center (unique-map-trunc k f))
 ```
 
 ## Properties
@@ -53,89 +51,85 @@ abstract
 ### Truncations of homotopic maps are homotopic
 
 ```agda
-  htpy-functor-trunc :
-    { l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
-    ( (functor-trunc k f) ∘ unit-trunc) ~ (unit-trunc ∘ f)
-  htpy-functor-trunc k f =
-    pr2 (center (unique-functor-trunc k f))
+htpy-map-trunc :
+  { l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
+  ( (map-trunc k f) ∘ unit-trunc) ~ (unit-trunc ∘ f)
+htpy-map-trunc k f =
+  pr2 (center (unique-map-trunc k f))
 
-  htpy-uniqueness-functor-trunc :
-    { l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
-    ( h : type-trunc k A → type-trunc k B) →
-    ( ( h ∘ unit-trunc) ~ (unit-trunc ∘ f)) →
-    (functor-trunc k f) ~ h
-  htpy-uniqueness-functor-trunc k f h H =
-    htpy-eq (ap pr1 (contraction (unique-functor-trunc k f) (pair h H)))
+htpy-uniqueness-map-trunc :
+  { l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
+  ( h : type-trunc k A → type-trunc k B) →
+  ( ( h ∘ unit-trunc) ~ (unit-trunc ∘ f)) →
+  (map-trunc k f) ~ h
+htpy-uniqueness-map-trunc k f h H =
+  htpy-eq (ap pr1 (contraction (unique-map-trunc k f) (pair h H)))
 
-  htpy-trunc :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {k : 𝕋} {f g : A → B} →
-    (f ~ g) → (functor-trunc k f ~ functor-trunc k g)
-  htpy-trunc {k = k} {f} {g} H =
-    htpy-uniqueness-functor-trunc
-      ( k)
-      ( f)
-      ( functor-trunc k g)
-      ( htpy-functor-trunc k g ∙h
-        inv-htpy (unit-trunc ·l H))
+htpy-trunc :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {k : 𝕋} {f g : A → B} →
+  (f ~ g) → (map-trunc k f ~ map-trunc k g)
+htpy-trunc {k = k} {f} {g} H =
+  htpy-uniqueness-map-trunc
+    ( k)
+    ( f)
+    ( map-trunc k g)
+    ( htpy-map-trunc k g ∙h
+      inv-htpy (unit-trunc ·l H))
 ```
 
 ### The truncation of the identity map is the identity map
 
 ```agda
-abstract
-  id-functor-trunc :
-    { l1 : Level} {A : UU l1} (k : 𝕋) → functor-trunc k (id {A = A}) ~ id
-  id-functor-trunc {l1} {A} k =
-    htpy-uniqueness-functor-trunc k id id refl-htpy
+id-map-trunc :
+  { l1 : Level} {A : UU l1} (k : 𝕋) → map-trunc k (id {A = A}) ~ id
+id-map-trunc {l1} {A} k =
+  htpy-uniqueness-map-trunc k id id refl-htpy
 ```
 
 ### The truncation of a composite is the composite of the truncations
 
 ```agda
-abstract
-  comp-functor-trunc :
-    { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (k : 𝕋)
-    ( g : B → C) (f : A → B) →
-    ( functor-trunc k (g ∘ f)) ~
-    ( (functor-trunc k g) ∘ (functor-trunc k f))
-  comp-functor-trunc k g f =
-    htpy-uniqueness-functor-trunc k
-      ( g ∘ f)
-      ( (functor-trunc k g) ∘ (functor-trunc k f))
-      ( ( (functor-trunc k g) ·l (htpy-functor-trunc k f)) ∙h
-        ( ( htpy-functor-trunc k g) ·r f))
+comp-map-trunc :
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (k : 𝕋)
+  ( g : B → C) (f : A → B) →
+  ( map-trunc k (g ∘ f)) ~
+  ( (map-trunc k g) ∘ (map-trunc k f))
+comp-map-trunc k g f =
+  htpy-uniqueness-map-trunc k
+    ( g ∘ f)
+    ( (map-trunc k g) ∘ (map-trunc k f))
+    ( ( (map-trunc k g) ·l (htpy-map-trunc k f)) ∙h
+      ( ( htpy-map-trunc k g) ·r f))
 ```
 
-### Truncations of equivalences are equivalences
+### The functorial action of truncations preserves equivalences
 
 ```agda
-abstract
-  map-equiv-trunc :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
-    (A ≃ B) → type-trunc k A → type-trunc k B
-  map-equiv-trunc k e = functor-trunc k (map-equiv e)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (e : A ≃ B)
+  where
 
-abstract
-  map-inv-equiv-trunc :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
-    (A ≃ B) → type-trunc k B → type-trunc k A
-  map-inv-equiv-trunc k e = functor-trunc k (map-inv-equiv e)
+  map-equiv-trunc : type-trunc k A → type-trunc k B
+  map-equiv-trunc = map-trunc k (map-equiv e)
 
-abstract
-  equiv-trunc :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) →
-    (A ≃ B) → (type-trunc k A ≃ type-trunc k B)
-  pr1 (equiv-trunc k e) = map-equiv-trunc k e
-  pr2 (equiv-trunc k e) =
+  map-inv-equiv-trunc : type-trunc k B → type-trunc k A
+  map-inv-equiv-trunc = map-trunc k (map-inv-equiv e)
+
+  is-equiv-map-equiv-trunc : is-equiv map-equiv-trunc
+  is-equiv-map-equiv-trunc =
     pair
       ( pair
-        ( map-inv-equiv-trunc k e)
-        ( inv-htpy (comp-functor-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
+        ( map-inv-equiv-trunc)
+        ( inv-htpy (comp-map-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
           ( htpy-trunc (issec-map-inv-equiv e) ∙h
-            id-functor-trunc k)))
+            id-map-trunc k)))
       ( pair
-        ( map-inv-equiv-trunc k e)
-        ( inv-htpy (comp-functor-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
+        ( map-inv-equiv-trunc)
+        ( inv-htpy (comp-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
           ( htpy-trunc (isretr-map-inv-equiv e) ∙h
-            id-functor-trunc k)))
+            id-map-trunc k)))
+
+  equiv-trunc : (type-trunc k A ≃ type-trunc k B)
+  pr1 equiv-trunc = map-equiv-trunc
+  pr2 equiv-trunc = is-equiv-map-equiv-trunc
 ```

@@ -36,7 +36,7 @@ open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( map-Σ; map-Σ-map-base)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop; map-equiv-trunc-Prop)
+  ( map-trunc-Prop; map-equiv-trunc-Prop)
 open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
 open import foundation.identity-types using (tr; inv)
 open import foundation.negation using (¬)
@@ -212,7 +212,7 @@ well-ordering-principle-∃-Fin P H =
     ( mod-succ-ℕ k)
     ( λ x → id)
     ( ε-operator-total-Q
-      ( functor-trunc-Prop
+      ( map-trunc-Prop
         ( map-Σ
           ( type-Prop ∘ Q)
           ( nat-Fin)

@@ -24,7 +24,7 @@ open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.identity-types using (Id; refl; inv; _∙_)
 open import foundation.mere-equivalences using (mere-equiv-Prop)
 open import foundation.propositional-truncations using
@@ -163,14 +163,14 @@ abstract
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
     is-finite (X × Y) → Y → is-finite X
   is-finite-left-factor f y =
-    functor-trunc-Prop (λ e → count-left-factor e y) f
+    map-trunc-Prop (λ e → count-left-factor e y) f
 
 abstract
   is-finite-right-factor :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
     is-finite (X × Y) → X → is-finite Y
   is-finite-right-factor f x =
-    functor-trunc-Prop (λ e → count-right-factor e x) f
+    map-trunc-Prop (λ e → count-right-factor e x) f
 
 prod-UU-Fin-Level :
   {l1 l2 : Level} {k l : ℕ} → UU-Fin-Level l1 k → UU-Fin-Level l2 l →

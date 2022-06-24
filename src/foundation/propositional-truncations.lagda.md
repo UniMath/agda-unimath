@@ -158,7 +158,7 @@ abstract
     map-universal-property-trunc-Prop P f t
 ```
 
-### A proposition is equivalent to its' propositional truncation
+### A proposition is equivalent to its propositional truncation
 
 ```agda
 module _
