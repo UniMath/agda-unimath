@@ -131,7 +131,7 @@ module _
     map-inv-equiv (equiv-dependent-universal-property-trunc B)
 ```
 
-### An n-truncated type is equivalent to its' n-truncation
+### An n-truncated type is equivalent to its n-truncation
 
 ```agda
 module _
