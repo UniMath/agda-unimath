@@ -239,7 +239,7 @@ module _
                 ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
             ( eq-htpy
               ( λ y →
-                {!!}))
+                {!is-injective-is-emb!}))
 
 ```
       α : fib (pr1 R) P → Id (class R a) (pair P p)
