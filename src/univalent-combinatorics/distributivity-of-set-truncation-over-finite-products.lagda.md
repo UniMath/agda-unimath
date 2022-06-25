@@ -120,7 +120,7 @@ abstract
                         ( Π-Set' (A (inr star)) (λ a → B)))) ∘e
                     ( equiv-postcomp
                       ( (x : Fin k) → type-trunc-Set (A (inl x)))
-                      ( equiv-universal-property-trunc-Set B))) ∘e
+                      ( equiv-universal-property-trunc-Set (A (inr star)) B))) ∘e
                   ( equiv-ev-pair))
                 ( refl-htpy)))
             ( is-equiv-precomp-is-equiv

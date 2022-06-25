@@ -641,6 +641,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
                       ( λ a₁ → h (unit-trunc-Set a₁)) ~
                       ( λ ω₁ → trunc-Prop (Id (tr B ω₁ y) y'))))
             ℙ = universal-property-trunc-Set
+                ( Id a a)
                 ( UU-Prop-Set _)
                 ( λ ω → trunc-Prop (Id (tr B ω y) y'))
             P : type-trunc-Set (Id a a) → UU-Prop _
