@@ -101,7 +101,7 @@ is-set-truncation-trunc-Set :
 is-set-truncation-trunc-Set A = is-truncation-trunc
 ```
 
--- ## Properties
+## Properties
 
 ### The dependent universal property of set truncations
 
