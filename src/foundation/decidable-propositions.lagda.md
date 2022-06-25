@@ -14,6 +14,7 @@ open import foundation.coproduct-types using
 open import foundation.decidable-types using
   ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (is-emb; _↪_; is-emb-tot)
 open import foundation.empty-types using
   ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso)
 open import foundation.equivalences using
@@ -21,6 +22,7 @@ open import foundation.equivalences using
     right-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap; refl; inv; tr)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
@@ -30,6 +32,8 @@ open import foundation.propositional-extensionality using
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
     is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
+open import foundation.sets using (is-set; is-set-equiv)
+open import foundation.subtypes using (is-emb-inclusion-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -41,7 +45,7 @@ open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 
 ## Idea
 
-A decidable proposition is a proposition that is decidable.
+A decidable proposition is a proposition that has a decidable underlying type.
 
 ## Definition
 
@@ -58,8 +62,7 @@ module _
   where
 
   prop-decidable-Prop : UU-Prop l
-  pr1 prop-decidable-Prop = pr1 P
-  pr2 prop-decidable-Prop = pr1 (pr2 P)
+  prop-decidable-Prop = tot (λ x → pr1) P
 
   type-decidable-Prop : UU l
   type-decidable-Prop = type-Prop prop-decidable-Prop
@@ -94,6 +97,22 @@ abstract
         is-prop-prod
           ( is-prop-is-prop X)
           ( is-prop-is-decidable (pr1 H)))
+```
+
+### The forgetful map from decidable propositions to propositions is an embedding
+
+```agda
+is-emb-prop-decidable-Prop : {l : Level} → is-emb (prop-decidable-Prop {l})
+is-emb-prop-decidable-Prop =
+  is-emb-tot
+    ( λ X →
+      is-emb-inclusion-subtype
+        ( λ H → pair (is-decidable X) (is-prop-is-decidable H)))
+
+emb-prop-decidable-Prop :
+  {l : Level} → decidable-Prop l ↪ UU-Prop l
+pr1 emb-prop-decidable-Prop = prop-decidable-Prop
+pr2 emb-prop-decidable-Prop = is-emb-prop-decidable-Prop
 ```
 
 ```agda
@@ -192,4 +211,23 @@ pr2 (iff-universes-decidable-Prop l l' P) p =
         ( compute-equiv-bool-decidable-Prop
           ( map-equiv (equiv-universes-decidable-Prop l l') P))
         ( p)))
+```
+
+### The type of decidable propositions in any universe is a set
+
+```agda
+is-set-decidable-Prop : {l : Level} → is-set (decidable-Prop l)
+is-set-decidable-Prop {l} =
+  is-set-equiv bool equiv-bool-decidable-Prop is-set-bool 
+```
+
+### Extensionality of decidable propositions
+
+```agda
+iff-eq-decidable-Prop :
+  {l : Level} (P Q : decidable-Prop l) → Id P Q →
+  (type-decidable-Prop P → type-decidable-Prop Q) ×
+  (type-decidable-Prop Q → type-decidable-Prop P)
+pr1 (iff-eq-decidable-Prop P .P refl) = id
+pr2 (iff-eq-decidable-Prop P .P refl) = id
 ```

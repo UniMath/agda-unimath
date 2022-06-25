@@ -109,7 +109,7 @@ module _
 
 ## Properties
 
-### We characterize the identity type of the large set quotient
+### We characterize the identity type of the type of equivalence classes
 
 ```agda
 module _
@@ -188,7 +188,7 @@ module _
     eq-effective-quotient' q = map-inv-is-equiv (is-equiv-related-eq-quotient q)
 ```
 
-### The quotient map into the large set quotient is effective
+### The map `class` into the type of equivalence classes is effective
 
 ```
 module _
@@ -220,7 +220,7 @@ module _
       map-inv-equiv (is-effective-class x y)
 ```
 
-### The quotient map into the large set quotient is surjective and effective
+### The map `class` into the type of equivalence classes is surjective and effective
 
 ```agda
 module _
@@ -235,7 +235,7 @@ module _
     is-effective-class R
 ```
 
-### The quotient map into the large set quotient is a reflecting map
+### The map `class` into the type of equivalence classes is a reflecting map
 
 ```agda
 module _
