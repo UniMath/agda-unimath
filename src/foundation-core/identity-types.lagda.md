@@ -17,7 +17,7 @@ The equality relation on a type is a reflexive relation, with the universal prop
 
 We include two notations for the identity type. First, we introduce the identity type using Martin-Löf's original notation `Id`. Then we introduce as a secondary option the infix notation `_＝_`.
 
-**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
+**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). Note that the full width equals sign is slightly wider, and it is highlighted in blue just like all the other defined constructions in Agda. In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
@@ -25,8 +25,9 @@ We include two notations for the identity type. First, we introduce the identity
 - Type the regular equals sign `=` in the Key sequence field.
 - Click the `INS` button
 - Type the full width equals sign `＝` in the translations field.
-- Click the `Apply and save` button. 
+- Click the `Apply and save` button.
 
+After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
 
 ## Defnition
 

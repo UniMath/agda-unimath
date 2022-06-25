@@ -28,7 +28,7 @@ The `agda-unimath` library is written in literate markdown agda. This means that
 
 In the `agda-unimath` library we use two notations for the identity type. The identity type is first introduced using Martin-Löf's original notation `Id`. Then we introduce as a secondary option the infix notation `_＝_`.
 
-**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
+**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). Note that the full width equals sign is slightly wider, and it is highlighted in blue. In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
