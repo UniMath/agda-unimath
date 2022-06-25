@@ -13,6 +13,22 @@ open import foundation-core.universe-levels using (UU; Level)
 
 The equality relation on a type is a reflexive relation, with the universal property that it maps uniquely into any other reflexive relation. In type theory, we introduce the identity type as an inductive family of types, where the induction principle can be understood as expressing that the identity type is the least reflexive relation.
 
+### Notation of the identity type
+
+We include two notations for the identity type. First, we introduce the identity type using Martin-Löf's original notation `Id`. Then we introduce as a secondary option the infix notation `_＝_`.
+
+**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). Note that the full width equals sign is slightly wider, and it is highlighted in blue just like all the other defined constructions in Agda. In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
+
+- Type `M-x customize-variable` and press enter.
+- Type `agda-input-user-translations` and press enter.
+- Click the `INS` button
+- Type the regular equals sign `=` in the Key sequence field.
+- Click the `INS` button
+- Type the full width equals sign `＝` in the translations field.
+- Click the `Apply and save` button.
+
+After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
+
 ## Defnition
 
 ```agda
@@ -20,6 +36,9 @@ data Id {i : Level} {A : UU i} (x : A) : A → UU i where
   refl : Id x x
 
 {-# BUILTIN EQUALITY Id  #-}
+
+_＝_ : {l : Level} {A : UU l} → A → A → UU l
+(a ＝ b) = Id a b
 ```
 
 ### The induction principle
@@ -28,8 +47,8 @@ Agda's pattern matching machinery allows us to define many operations on the ide
 
 ```agda
 ind-Id :
-  {i j : Level} {A : UU i} (x : A) (B : (y : A) (p : Id x y) → UU j) →
-  (B x refl) → (y : A) (p : Id x y) → B y p
+  {i j : Level} {A : UU i} (x : A) (B : (y : A) (p : x ＝ y) → UU j) →
+  (B x refl) → (y : A) (p : x ＝ y) → B y p
 ind-Id x B b y refl = b
 ```
 
@@ -42,13 +61,13 @@ module _
   {l : Level} {A : UU l}
   where
   
-  _∙_ : {x y z : A} → Id x y → Id y z → Id x z
+  _∙_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
   refl ∙ q = q
 
-  concat : {x y : A} → Id x y → (z : A) → Id y z → Id x z
+  concat : {x y : A} → x ＝ y → (z : A) → y ＝ z → x ＝ z
   concat p z q = p ∙ q
 
-  concat' : (x : A) {y z : A} → Id y z → Id x y → Id x z
+  concat' : (x : A) {y z : A} → y ＝ z → x ＝ y → x ＝ z
   concat' x q p = p ∙ q
 ```
 
