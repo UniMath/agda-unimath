@@ -25,7 +25,7 @@ open import elementary-number-theory.natural-numbers using
     
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; tr; ap)
 open import foundation.negation using (¬)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.propositions using (is-prop)
@@ -36,30 +36,30 @@ open import foundation.universe-levels using (UU; lzero)
 
 ```agda
 div-ℕ : ℕ → ℕ → UU lzero
-div-ℕ m n = Σ ℕ (λ k → Id (mul-ℕ k m) n)
+div-ℕ m n = Σ ℕ (λ k → mul-ℕ k m ＝ n)
 
 quotient-div-ℕ : (x y : ℕ) → div-ℕ x y → ℕ
 quotient-div-ℕ x y H = pr1 H
 
 eq-quotient-div-ℕ :
-  (x y : ℕ) (H : div-ℕ x y) → Id (mul-ℕ (quotient-div-ℕ x y H) x) y
+  (x y : ℕ) (H : div-ℕ x y) → mul-ℕ (quotient-div-ℕ x y H) x ＝ y
 eq-quotient-div-ℕ x y H = pr2 H
 
 eq-quotient-div-ℕ' :
-  (x y : ℕ) (H : div-ℕ x y) → Id (mul-ℕ x (quotient-div-ℕ x y H)) y
+  (x y : ℕ) (H : div-ℕ x y) → mul-ℕ x (quotient-div-ℕ x y H) ＝ y
 eq-quotient-div-ℕ' x y H =
   commutative-mul-ℕ x (quotient-div-ℕ x y H) ∙ eq-quotient-div-ℕ x y H
 
 concatenate-eq-div-ℕ :
-  {x y z : ℕ} → Id x y → div-ℕ y z → div-ℕ x z
+  {x y z : ℕ} → x ＝ y → div-ℕ y z → div-ℕ x z
 concatenate-eq-div-ℕ refl p = p
 
 concatenate-div-eq-ℕ :
-  {x y z : ℕ} → div-ℕ x y → Id y z → div-ℕ x z
+  {x y z : ℕ} → div-ℕ x y → y ＝ z → div-ℕ x z
 concatenate-div-eq-ℕ p refl = p
 
 concatenate-eq-div-eq-ℕ :
-  {x y z w : ℕ} → Id x y → div-ℕ y z → Id z w → div-ℕ x w
+  {x y z w : ℕ} → x ＝ y → div-ℕ y z → z ＝ w → div-ℕ x w
 concatenate-eq-div-eq-ℕ refl p refl = p
 
 is-even-ℕ : ℕ → UU lzero
@@ -153,7 +153,7 @@ pr1 (refl-div-ℕ x) = 1
 pr2 (refl-div-ℕ x) = left-unit-law-mul-ℕ x
 
 antisymmetric-div-ℕ :
-  (x y : ℕ) → div-ℕ x y → div-ℕ y x → Id x y
+  (x y : ℕ) → div-ℕ x y → div-ℕ y x → x ＝ y
 antisymmetric-div-ℕ zero-ℕ zero-ℕ H K = refl
 antisymmetric-div-ℕ zero-ℕ (succ-ℕ y) (pair k p) K =
   inv (right-zero-law-mul-ℕ k) ∙ p
@@ -248,7 +248,7 @@ is-one-div-one-ℕ x H = antisymmetric-div-ℕ x 1 H (div-one-ℕ x)
 is-one-div-ℕ : (x y : ℕ) → div-ℕ x y → div-ℕ x (succ-ℕ y) → is-one-ℕ x
 is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
 
-div-eq-ℕ : (x y : ℕ) → Id x y → div-ℕ x y
+div-eq-ℕ : (x y : ℕ) → x ＝ y → div-ℕ x y
 div-eq-ℕ x .x refl = refl-div-ℕ x
 ```
 

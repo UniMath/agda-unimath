@@ -34,7 +34,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.negation using (¬)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.propositions using (is-prop)
@@ -50,7 +50,7 @@ An integer `d` divides an integer `x` if there is an integer `k` such that `mul-
 
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
-div-ℤ d x = Σ ℤ (λ k → Id (mul-ℤ k d) x)
+div-ℤ d x = Σ ℤ (λ k → mul-ℤ k d ＝ x)
 ```
 
 ## Properties
@@ -129,7 +129,7 @@ pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
 pr2 (div-int-div-ℕ {x} {y} (pair d p)) = mul-int-ℕ d x ∙ ap int-ℕ p
 
 int-abs-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → Id (int-abs-ℤ x) x
+  (x : ℤ) → is-nonnegative-ℤ x → int-abs-ℤ x ＝ x
 int-abs-is-nonnegative-ℤ (inr (inl star)) star = refl
 int-abs-is-nonnegative-ℤ (inr (inr x)) star = refl
 
@@ -241,11 +241,11 @@ is-one-or-neg-one-is-unit-ℤ
     ( Eq-eq-ℤ
       ( inv p ∙ compute-mul-ℤ (inr (inr (succ-ℕ d))) (inr (inr (succ-ℕ x)))))
 
-idempotent-is-unit-ℤ : {x : ℤ} → is-unit-ℤ x → Id (mul-ℤ x x) one-ℤ
+idempotent-is-unit-ℤ : {x : ℤ} → is-unit-ℤ x → mul-ℤ x x ＝ one-ℤ
 idempotent-is-unit-ℤ {x} H =
   f (is-one-or-neg-one-is-unit-ℤ x H)
   where
-  f : is-one-or-neg-one-ℤ x → Id (mul-ℤ x x) one-ℤ
+  f : is-one-or-neg-one-ℤ x → mul-ℤ x x ＝ one-ℤ
   f (inl refl) = refl
   f (inr refl) = refl
 
@@ -290,7 +290,7 @@ is-unit-right-factor-ℤ x y (pair d p) =
    valued in the propositions. Indeed presim-unit-ℤ zero-ℤ zero-ℤ is not a
    proposition. -}
 presim-unit-ℤ : ℤ → ℤ → UU lzero
-presim-unit-ℤ x y = Σ unit-ℤ (λ u → Id (mul-ℤ (pr1 u) x) y)
+presim-unit-ℤ x y = Σ unit-ℤ (λ u → mul-ℤ (pr1 u) x ＝ y)
 
 {- We could define sim-unit-ℤ x y to be the propositional truncation of
    presim-unit-ℤ, but that's a waste because presim-unit-ℤ x y is only not a 
@@ -325,7 +325,7 @@ is-nonzero-presim-unit-ℤ :
 is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
   Eq-eq-ℤ (ap (mul-ℤ' u) (inv q) ∙ (commutative-mul-ℤ v u ∙ α))
   where
-  q : Id v zero-ℤ
+  q : is-zero-ℤ v
   q = is-injective-mul-ℤ' x f {v} {zero-ℤ} (β ∙ p)
   
 is-nonzero-sim-unit-ℤ :
@@ -347,7 +347,7 @@ is-zero-sim-unit-ℤ {x} {y} H p =
   u g = pr1 (pr1 (K g))
   v : is-nonzero-ℤ y → ℤ
   v g = pr1 (pr2 (pr1 (K g)))
-  β : (g : is-nonzero-ℤ y) → Id (mul-ℤ (u g) x) y
+  β : (g : is-nonzero-ℤ y) → mul-ℤ (u g) x ＝ y
   β g = pr2 (K g)
 
 -- The relations presim-unit-ℤ and sim-unit-ℤ are equivalence relations
@@ -359,10 +359,10 @@ pr2 (refl-presim-unit-ℤ x) = left-unit-law-mul-ℤ x
 refl-sim-unit-ℤ : (x : ℤ) → sim-unit-ℤ x x
 refl-sim-unit-ℤ x f = refl-presim-unit-ℤ x
 
-presim-unit-eq-ℤ : {x y : ℤ} → Id x y → presim-unit-ℤ x y
+presim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → presim-unit-ℤ x y
 presim-unit-eq-ℤ {x} refl = refl-presim-unit-ℤ x
 
-sim-unit-eq-ℤ : {x y : ℤ} → Id x y → sim-unit-ℤ x y
+sim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → sim-unit-ℤ x y
 sim-unit-eq-ℤ {x} refl = refl-sim-unit-ℤ x
 
 symm-presim-unit-ℤ : {x y : ℤ} → presim-unit-ℤ x y → presim-unit-ℤ y x

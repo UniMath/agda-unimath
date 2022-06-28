@@ -29,7 +29,7 @@ open import elementary-number-theory.natural-numbers using (ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (id)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -53,7 +53,7 @@ pr2 (div-is-cong-zero-ℤ k x (pair d p)) = p ∙ right-unit-law-add-ℤ x
 is-indiscrete-cong-ℤ : (k : ℤ) → is-unit-ℤ k → (x y : ℤ) → cong-ℤ k x y
 is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (diff-ℤ x y) H
 
-is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ k x y → Id x y
+is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ k x y → x ＝ y
 is-discrete-cong-ℤ .zero-ℤ refl x y K =
   eq-diff-ℤ (is-zero-div-zero-ℤ (diff-ℤ x y) K)
 
@@ -95,19 +95,19 @@ pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
     ( triangle-diff-ℤ x y z))
 
 concatenate-eq-cong-ℤ :
-  (k x x' y : ℤ) → Id x x' → cong-ℤ k x' y → cong-ℤ k x y
+  (k x x' y : ℤ) → x ＝ x' → cong-ℤ k x' y → cong-ℤ k x y
 concatenate-eq-cong-ℤ k x .x y refl = id
 
 concatenate-cong-eq-ℤ :
-  (k x y y' : ℤ) → cong-ℤ k x y → Id y y' → cong-ℤ k x y'
+  (k x y y' : ℤ) → cong-ℤ k x y → y ＝ y' → cong-ℤ k x y'
 concatenate-cong-eq-ℤ k x y .y H refl = H
 
 concatenate-eq-cong-eq-ℤ :
-  (k x x' y' y : ℤ) → Id x x' → cong-ℤ k x' y' → Id y' y → cong-ℤ k x y
+  (k x x' y' y : ℤ) → x ＝ x' → cong-ℤ k x' y' → y' ＝ y → cong-ℤ k x y
 concatenate-eq-cong-eq-ℤ k x .x y .y refl H refl = H
 
 concatenate-cong-eq-cong-ℤ :
-  (k x y y' z : ℤ) → cong-ℤ k x y → Id y y' → cong-ℤ k y' z → cong-ℤ k x z
+  (k x y y' z : ℤ) → cong-ℤ k x y → y ＝ y' → cong-ℤ k y' z → cong-ℤ k x z
 concatenate-cong-eq-cong-ℤ k x y .y z H refl K =
   transitive-cong-ℤ k x y z H K
 

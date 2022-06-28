@@ -25,7 +25,7 @@ open import elementary-number-theory.natural-numbers using
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; tr)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.universe-levels using (UU; lzero)
 
 open import univalent-combinatorics.standard-finite-types using
@@ -45,17 +45,17 @@ x ≡ y mod k = cong-ℕ k x y
 
 concatenate-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 : ℕ} →
-  Id x1 x2 → cong-ℕ k x2 x3 → Id x3 x4 → cong-ℕ k x1 x4
+  x1 ＝ x2 → cong-ℕ k x2 x3 → x3 ＝ x4 → cong-ℕ k x1 x4
 concatenate-eq-cong-eq-ℕ k refl H refl = H
 
 concatenate-eq-cong-ℕ :
   (k : ℕ) {x1 x2 x3 : ℕ} →
-  Id x1 x2 → cong-ℕ k x2 x3 → cong-ℕ k x1 x3
+  x1 ＝ x2 → cong-ℕ k x2 x3 → cong-ℕ k x1 x3
 concatenate-eq-cong-ℕ k refl H = H
 
 concatenate-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 : ℕ} →
-  cong-ℕ k x1 x2 → Id x2 x3 → cong-ℕ k x1 x3
+  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x1 x3
 concatenate-cong-eq-ℕ k H refl = H
 
 is-indiscrete-cong-one-ℕ :
@@ -63,7 +63,7 @@ is-indiscrete-cong-one-ℕ :
 is-indiscrete-cong-one-ℕ x y = div-one-ℕ (dist-ℕ x y)
 
 is-discrete-cong-zero-ℕ :
-  (x y : ℕ) → cong-ℕ zero-ℕ x y → Id x y
+  (x y : ℕ) → cong-ℕ zero-ℕ x y → x ＝ y
 is-discrete-cong-zero-ℕ x y (pair k p) =
   eq-dist-ℕ x y ((inv p) ∙ (right-zero-law-mul-ℕ k))
 
@@ -80,7 +80,7 @@ pr2 (refl-cong-ℕ k x) =
   (left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl))
 
 cong-identification-ℕ :
-  (k : ℕ) {x y : ℕ} → Id x y → cong-ℕ k x y
+  (k : ℕ) {x y : ℕ} → x ＝ y → cong-ℕ k x y
 cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
 symm-cong-ℕ :
@@ -108,14 +108,14 @@ trans-cong-ℕ k x y z d e | inr (inr α) =
 
 concatenate-cong-eq-cong-ℕ :
   {k x1 x2 x3 x4 : ℕ} →
-  cong-ℕ k x1 x2 → Id x2 x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
+  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
 concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
   trans-cong-ℕ k x y z H K
 
 concatenate-eq-cong-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
-  Id x1 x2 → cong-ℕ k x2 x3 → Id x3 x4 →
-  cong-ℕ k x4 x5 → Id x5 x6 → cong-ℕ k x1 x6
+  x1 ＝ x2 → cong-ℕ k x2 x3 → x3 ＝ x4 →
+  cong-ℕ k x4 x5 → x5 ＝ x6 → cong-ℕ k x1 x6
 concatenate-eq-cong-eq-cong-eq-ℕ k
   {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
   trans-cong-ℕ k x y z H K
@@ -123,21 +123,21 @@ concatenate-eq-cong-eq-cong-eq-ℕ k
 
 ```agda
 eq-cong-le-dist-ℕ :
-  (k x y : ℕ) → le-ℕ (dist-ℕ x y) k → cong-ℕ k x y → Id x y
+  (k x y : ℕ) → le-ℕ (dist-ℕ x y) k → cong-ℕ k x y → x ＝ y
 eq-cong-le-dist-ℕ k x y H K =
   eq-dist-ℕ x y (is-zero-div-ℕ k (dist-ℕ x y) H K)
 ```
 
 ```
 eq-cong-le-ℕ :
-  (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → Id x y
+  (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → x ＝ y
 eq-cong-le-ℕ k x y H K =
   eq-cong-le-dist-ℕ k x y (strict-upper-bound-dist-ℕ k x y H K)
 ```
 
 ```agda
 eq-cong-nat-Fin :
-  (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin x) (nat-Fin y) → Id x y
+  (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin x) (nat-Fin y) → x ＝ y
 eq-cong-nat-Fin (succ-ℕ k) x y H =
   is-injective-nat-Fin
     ( eq-cong-le-ℕ (succ-ℕ k) (nat-Fin x) (nat-Fin y)
@@ -154,7 +154,7 @@ cong-is-zero-nat-zero-Fin {k} =
 ```
 
 ```agda
-eq-cong-zero-ℕ : (x y : ℕ) → cong-ℕ zero-ℕ x y → Id x y
+eq-cong-zero-ℕ : (x y : ℕ) → cong-ℕ zero-ℕ x y → x ＝ y
 eq-cong-zero-ℕ x y H =
   eq-dist-ℕ x y (is-zero-div-zero-ℕ (dist-ℕ x y) H)
 
