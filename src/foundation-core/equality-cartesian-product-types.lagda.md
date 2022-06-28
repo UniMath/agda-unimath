@@ -1,4 +1,6 @@
-# Equality of cartesian product types
+---
+title: Equality of cartesian product types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

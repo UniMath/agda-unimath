@@ -1,4 +1,6 @@
-# Equivalences
+---
+title: Equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

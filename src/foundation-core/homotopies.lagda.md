@@ -1,4 +1,6 @@
-# Homotopies
+---
+title: Homotopies
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

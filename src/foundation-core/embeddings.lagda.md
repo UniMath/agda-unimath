@@ -1,4 +1,6 @@
-# Embeddings
+---
+title: Embeddings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

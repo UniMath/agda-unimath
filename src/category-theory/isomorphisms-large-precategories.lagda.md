@@ -1,4 +1,6 @@
-# Isomorphisms in large precategories
+---
+title: Isomorphisms in large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,7 @@ open import category-theory.large-precategories using
     is-set-type-hom-Large-Precat)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.propositions using
   ( prod-Prop; is-prop; is-prop-all-elements-equal; UU-Prop)
 open import foundation.sets using (Id-Prop; is-set; UU-Set)
@@ -39,8 +41,8 @@ is-iso-Large-Precat :
 is-iso-Large-Precat C {X = X} {Y = Y} f =
   Σ ( type-hom-Large-Precat C Y X)
     ( λ g →
-      ( Id (comp-hom-Large-Precat C f g) (id-hom-Large-Precat C)) ×
-      ( Id (comp-hom-Large-Precat C g f) (id-hom-Large-Precat C)))
+      ( comp-hom-Large-Precat C f g ＝ id-hom-Large-Precat C) ×
+      ( comp-hom-Large-Precat C g f ＝ id-hom-Large-Precat C))
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
@@ -65,16 +67,18 @@ module _
 
   is-sec-hom-inv-iso-Large-Precat :
     (f : iso-Large-Precat) →
-    Id ( comp-hom-Large-Precat C
-         ( hom-iso-Large-Precat f)
-         ( hom-inv-iso-Large-Precat f))
-       ( id-hom-Large-Precat C)
+    ( comp-hom-Large-Precat C
+      ( hom-iso-Large-Precat f)
+      ( hom-inv-iso-Large-Precat f)) ＝
+    ( id-hom-Large-Precat C)
   is-sec-hom-inv-iso-Large-Precat f = pr1 (pr2 (pr2 f))
 
   is-retr-hom-inv-iso-Large-Precat :
     (f : iso-Large-Precat) →
-    Id ( comp-hom-Large-Precat C (hom-inv-iso-Large-Precat f) (hom-iso-Large-Precat f))
-       ( id-hom-Large-Precat C)
+    ( comp-hom-Large-Precat C
+      ( hom-inv-iso-Large-Precat f)
+      ( hom-iso-Large-Precat f)) ＝
+    ( id-hom-Large-Precat C)
   is-retr-hom-inv-iso-Large-Precat f = pr2 (pr2 (pr2 f))
 ```
 
@@ -108,7 +112,7 @@ iso-eq-Large-Precat :
   {α : Level → Level} {β : Level → Level → Level} →
   (C : Large-Precat α β) {l1 : Level}
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l1) →
-  Id X Y → iso-Large-Precat C X Y
+  X ＝ Y → iso-Large-Precat C X Y
 iso-eq-Large-Precat C X .X refl = id-iso-Large-Precat C
 ```
 
@@ -132,7 +136,7 @@ module _
 
   all-elements-equal-is-iso-Large-Precat :
     (f : type-hom-Large-Precat C X Y)
-    (H K : is-iso-Large-Precat C f) → Id H K
+    (H K : is-iso-Large-Precat C f) → H ＝ K
   all-elements-equal-is-iso-Large-Precat f
     (pair g (pair p q)) (pair g' (pair p' q')) =
     eq-subtype

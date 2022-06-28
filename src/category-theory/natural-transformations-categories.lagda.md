@@ -1,4 +1,6 @@
-# Natural transformations between functors on categories
+---
+title: Natural transformations between functors between categories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,6 +13,7 @@ open import category-theory.functors-categories using
   ( functor-Cat; obj-functor-Cat)
 open import category-theory.natural-transformations-precategories using
   ( is-nat-trans-Precat; nat-trans-Precat; components-nat-trans-Precat)
+  
 open import foundation.universe-levels using (UU; _⊔_)
 ```
 

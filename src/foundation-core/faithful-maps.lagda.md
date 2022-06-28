@@ -1,4 +1,6 @@
-# Faithful maps
+---
+title: Faithful maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

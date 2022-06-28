@@ -1,4 +1,6 @@
-# Anafunctors
+---
+title: Anafunctors
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -20,7 +22,7 @@ open import category-theory.precategories using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.existential-quantification using (∃)
-open import foundation.identity-types using (Id; ap; _∙_; inv)
+open import foundation.identity-types using (_＝_; ap; _∙_; inv)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; unit-trunc-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
@@ -47,15 +49,15 @@ anafunctor-Precat l C D =
         ( λ  F₁ →
           ( ( X : obj-Precat C) → type-trunc-Prop (Σ (obj-Precat D) (F₀ X))) ×
           ( ( ( X : obj-Precat C) (U : obj-Precat D) (u : F₀ X U) →
-              Id (F₁ X X U u U u (id-hom-Precat C)) (id-hom-Precat D)) ×
+              F₁ X X U u U u (id-hom-Precat C) ＝ id-hom-Precat D) ×
             ( ( X Y Z : obj-Precat C)
               ( U : obj-Precat D) (u : F₀ X U) (V : obj-Precat D) (v : F₀ Y V)
               ( W : obj-Precat D) (w : F₀ Z W) →
               ( g : type-hom-Precat C Y Z) (f : type-hom-Precat C X Y) →
-              Id ( F₁ X Z U u W w (comp-hom-Precat C g f))
-                 ( comp-hom-Precat D
-                   ( F₁ Y Z V v W w g)
-                   ( F₁ X Y U u V v f))))))
+              ( F₁ X Z U u W w (comp-hom-Precat C g f)) ＝
+              ( comp-hom-Precat D
+                ( F₁ Y Z V v W w g)
+                ( F₁ X Y U u V v f))))))
 
 module _
   {l1 l2 l3 l4 l5 : Level} (C : Precat l1 l2) (D : Precat l3 l4)

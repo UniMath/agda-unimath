@@ -1,4 +1,6 @@
-# Truncated maps
+---
+title: Truncated maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

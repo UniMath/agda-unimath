@@ -1,4 +1,6 @@
-# 1-Types
+---
+title: 1-Types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

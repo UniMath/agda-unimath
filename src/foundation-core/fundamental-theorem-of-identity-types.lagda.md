@@ -1,4 +1,6 @@
-# The fundamental theorem of identity types
+---
+title: The fundamental theorem of identity types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
