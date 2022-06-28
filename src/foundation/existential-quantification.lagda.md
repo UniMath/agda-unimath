@@ -1,4 +1,6 @@
-# Existential quantification
+---
+title: Existential quantification
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -60,9 +62,9 @@ is-prop-∃ A B = is-prop-type-Prop (∃-Prop A B)
 
 ```agda
 intro-exists :
-  {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) →
+  {l1 l2 : Level} {A : UU l1} (P : A → UU-Prop l2) →
   (x : A) → type-Prop (P x) → exists A P
-intro-exists A P x p = unit-trunc-Prop (pair x p)
+intro-exists P x p = unit-trunc-Prop (pair x p)
 
 intro-∃ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) →
@@ -74,23 +76,23 @@ intro-∃ a b = unit-trunc-Prop (pair a b)
 
 ```agda
 ev-intro-exists-Prop :
-  {l1 l2 l3 : Level} (A : UU l1) (P : A → UU-Prop l2) (Q : UU-Prop l3) →
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → UU-Prop l2) (Q : UU-Prop l3) →
   type-hom-Prop (exists-Prop A P) Q → (x : A) → type-hom-Prop (P x) Q
-ev-intro-exists-Prop A P Q H x p = H (intro-exists A P x p)
+ev-intro-exists-Prop P Q H x p = H (intro-exists P x p)
 
 elim-exists-Prop :
-  {l1 l2 l3 : Level} (A : UU l1) (P : A → UU-Prop l2) (Q : UU-Prop l3) →
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → UU-Prop l2) (Q : UU-Prop l3) →
   ((x : A) → type-hom-Prop (P x) Q) → type-hom-Prop (exists-Prop A P) Q
-elim-exists-Prop A P Q f =
+elim-exists-Prop P Q f =
   map-universal-property-trunc-Prop Q (ind-Σ f)
 
 abstract
   is-equiv-ev-intro-exists-Prop :
     {l1 l2 l3 : Level} (A : UU l1) (P : A → UU-Prop l2) (Q : UU-Prop l3) →
-    is-equiv (ev-intro-exists-Prop A P Q)
+    is-equiv (ev-intro-exists-Prop P Q)
   is-equiv-ev-intro-exists-Prop A P Q =
     is-equiv-is-prop
       ( is-prop-type-hom-Prop (exists-Prop A P) Q)
       ( is-prop-Π ((λ x → is-prop-type-hom-Prop (P x) Q)))
-      ( elim-exists-Prop A P Q)
+      ( elim-exists-Prop P Q)
 ```

@@ -1,4 +1,6 @@
-# Functoriality of set truncation
+---
+title: Functoriality of set truncation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -17,7 +19,7 @@ open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.functoriality-truncation using
-  ( unique-map-trunc; map-trunc; htpy-map-trunc;
+  ( unique-map-trunc; map-trunc; naturality-unit-trunc;
     htpy-uniqueness-map-trunc; id-map-trunc; comp-map-trunc;
     htpy-trunc; map-equiv-trunc; is-equiv-map-equiv-trunc; equiv-trunc)
 open import foundation.homotopies using
@@ -74,9 +76,9 @@ module _
     type-trunc-Set A → type-trunc-Set B
   map-trunc-Set = map-trunc zero-𝕋 f
 
-  htpy-map-trunc-Set :
+  naturality-unit-trunc-Set :
     (map-trunc-Set ∘ unit-trunc-Set) ~ (unit-trunc-Set ∘ f)
-  htpy-map-trunc-Set = htpy-map-trunc zero-𝕋 f
+  naturality-unit-trunc-Set = naturality-unit-trunc zero-𝕋 f
 
   htpy-uniqueness-map-trunc-Set :
     (h : type-trunc-Set A → type-trunc-Set B) →
@@ -187,8 +189,8 @@ module _
           ( λ b p →
             apply-universal-property-trunc-Prop
               ( apply-effectiveness-unit-trunc-Set
-                ( ( inv (htpy-map-trunc-Set f a)) ∙
-                  ( p ∙ (htpy-map-trunc-Set f b))))
+                ( ( inv (naturality-unit-trunc-Set f a)) ∙
+                  ( p ∙ (naturality-unit-trunc-Set f b))))
               ( Id-Prop (trunc-Set A) (unit-trunc-Set a) (unit-trunc-Set b))
               ( λ q → ap unit-trunc-Set (H q)))
           ( y))
@@ -216,7 +218,7 @@ module _
                   unit-trunc-Prop
                     ( pair
                       ( unit-trunc-Set a)
-                      ( htpy-map-trunc-Set f a ∙ ap unit-trunc-Set p))}))
+                      ( naturality-unit-trunc-Set f a ∙ ap unit-trunc-Set p))}))
 ```
 
 ### If the set truncation of a map `f` is surjective, then `f` is surjective
@@ -236,7 +238,7 @@ module _
                 ( λ { (pair a refl) →
                       apply-universal-property-trunc-Prop
                         ( apply-effectiveness-unit-trunc-Set
-                          ( inv (htpy-map-trunc-Set f a) ∙ p))
+                          ( inv (naturality-unit-trunc-Set f a) ∙ p))
                         ( trunc-Prop (fib f b))
                         ( λ q → unit-trunc-Prop (pair a q))})})
 ```
@@ -384,7 +386,7 @@ module _
           unit-trunc-Prop
             ( pair
               ( unit-trunc-Set (pr1 u))
-              ( htpy-map-trunc-Set f (pr1 u) ∙ ap unit-trunc-Set (pr2 u)))))
+              ( naturality-unit-trunc-Set f (pr1 u) ∙ ap unit-trunc-Set (pr2 u)))))
 
   left-square-unit-im-map-trunc-Set :
     ( map-unit-im (map-trunc-Set f) ∘ unit-trunc-Set) ~
@@ -394,7 +396,7 @@ module _
       ( map-trunc-Set f)
       ( map-unit-im (map-trunc-Set f) (unit-trunc-Set a))
       ( unit-im-map-trunc-Set (map-unit-im f a))
-      ( htpy-map-trunc-Set f a)
+      ( naturality-unit-trunc-Set f a)
 
   right-square-unit-im-map-trunc-Set :
     ( inclusion-im (map-trunc-Set f) ∘ unit-im-map-trunc-Set) ~
@@ -416,7 +418,7 @@ module _
         ( λ b →
           is-injective-inclusion-trunc-im-Set
             ( ( inv (triangle-trunc-im-Set (unit-im-map-trunc-Set b))) ∙
-              ( inv (htpy-map-trunc-Set (inclusion-im f) b))))
+              ( inv (naturality-unit-trunc-Set (inclusion-im f) b))))
         ( is-set-truncation-trunc-Set (im f))
         ( is-equiv-map-equiv equiv-trunc-im-Set)
 ```

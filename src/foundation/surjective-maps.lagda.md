@@ -63,8 +63,8 @@ module _
   map-surjection : A → B
   map-surjection = pr1 f
 
-  is-surjective-map-surj : is-surjective map-surjection
-  is-surjective-map-surj = pr2 f
+  is-surjective-map-surjection : is-surjective map-surjection
+  is-surjective-map-surjection = pr2 f
 ```
 
 ## Properties

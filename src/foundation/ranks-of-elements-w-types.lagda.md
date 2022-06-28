@@ -163,11 +163,9 @@ module _
           exists (𝕎 A B) (λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
       f (pair c K) =
         intro-exists
-          ( 𝕎 A B)
           ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
           ( β c)
           ( intro-exists
-            ( Σ (B y) (λ c' → Id (β c') (β c)))
             ( λ hβc → α b ≼-𝕎-Prop β c)
             ( pair c refl)
             ( K))
@@ -200,7 +198,6 @@ module _
   ≼-∈-𝕎 : {x y : 𝕎 A B} → (x ∈-𝕎 y) → (x ≼-𝕎 y)
   ≼-∈-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} (pair v p) u =
     intro-exists
-      ( B y)
       ( λ z → α u ≼-𝕎-Prop β z)
       ( v)
       ( tr ( λ t → α u ≼-𝕎 t)
@@ -305,7 +302,6 @@ module _
       g : Σ (Σ (𝕎 A B) (λ w → w ∈-𝕎 z)) (λ t → y ≼-𝕎 pr1 t) → x ≺-𝕎 z
       g (pair (pair v P) Q) =
         intro-exists
-          ( Σ (𝕎 A B) (λ s → s ∈-𝕎 z))
           ( λ t → x ≼-𝕎-Prop (pr1 t))
           ( pair v P)
           ( transitive-≼-𝕎 {x = x} {w} {v} M
