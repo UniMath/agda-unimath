@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Euclidean division on the natural numbers
 ---
-
-# Euclidean division on the natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -26,7 +24,7 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
 
 open import univalent-combinatorics.standard-finite-types using
   ( nat-Fin; strict-upper-bound-nat-Fin)
@@ -70,16 +68,17 @@ quotient-euclidean-division-ℕ k x =
 
 eq-quotient-euclidean-division-ℕ :
   (k x : ℕ) →
-  Id ( mul-ℕ (quotient-euclidean-division-ℕ k x) k)
-     ( dist-ℕ x (remainder-euclidean-division-ℕ k x))
+  ( mul-ℕ (quotient-euclidean-division-ℕ k x) k) ＝
+  ( dist-ℕ x (remainder-euclidean-division-ℕ k x))
 eq-quotient-euclidean-division-ℕ k x =
   pr2 (cong-euclidean-division-ℕ k x)
 
 eq-euclidean-division-ℕ :
   (k x : ℕ) →
-  Id ( add-ℕ ( mul-ℕ (quotient-euclidean-division-ℕ k x) k)
-             ( remainder-euclidean-division-ℕ k x))
-     ( x)
+  ( add-ℕ
+    ( mul-ℕ (quotient-euclidean-division-ℕ k x) k)
+    ( remainder-euclidean-division-ℕ k x)) ＝
+  ( x)
 eq-euclidean-division-ℕ zero-ℕ x =
   ( inv
     ( ap

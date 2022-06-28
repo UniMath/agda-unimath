@@ -1,4 +1,6 @@
-# The integers
+---
+title: The integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -27,7 +29,7 @@ open import foundation.equivalences using
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
-  ( Id; refl; _∙_; inv; ap; left-inv; inv-con; right-unit; concat; assoc)
+  ( _＝_; refl; _∙_; inv; ap; left-inv; inv-con; right-unit; concat; assoc)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.unit-type using (unit; star)
@@ -59,7 +61,7 @@ neg-one-ℤ : ℤ
 neg-one-ℤ = in-neg zero-ℕ
 
 is-neg-one-ℤ : ℤ → UU lzero
-is-neg-one-ℤ x = Id x neg-one-ℤ
+is-neg-one-ℤ x = (x ＝ neg-one-ℤ)
 ```
 
 ### Zero
@@ -69,7 +71,7 @@ zero-ℤ : ℤ
 zero-ℤ = inr (inl star)
 
 is-zero-ℤ : ℤ → UU lzero
-is-zero-ℤ x = Id x zero-ℤ
+is-zero-ℤ x = (x ＝ zero-ℤ)
 
 is-nonzero-ℤ : ℤ → UU lzero
 is-nonzero-ℤ k = ¬ (is-zero-ℤ k)
@@ -85,7 +87,7 @@ one-ℤ : ℤ
 one-ℤ = in-pos zero-ℕ
 
 is-one-ℤ : ℤ → UU lzero
-is-one-ℤ x = Id x one-ℤ
+is-one-ℤ x = (x ＝ one-ℤ)
 ```
 
 ### Inclusion of the natural numbers
@@ -198,7 +200,7 @@ is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
   inv (isretr-pred-ℤ x) ∙ (ap pred-ℤ p ∙ isretr-pred-ℤ y)
 
-has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (Id (succ-ℤ x) x)
+has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (succ-ℤ x ＝ x)
 has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
 has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
 has-no-fixed-points-succ-ℤ (inr (inl star)) ()
@@ -231,20 +233,20 @@ emb-neg-ℤ : ℤ ↪ ℤ
 pr1 emb-neg-ℤ = neg-ℤ
 pr2 emb-neg-ℤ = is-emb-neg-ℤ
 
-neg-pred-ℤ : (k : ℤ) → Id (neg-ℤ (pred-ℤ k)) (succ-ℤ (neg-ℤ k))
+neg-pred-ℤ : (k : ℤ) → neg-ℤ (pred-ℤ k) ＝ succ-ℤ (neg-ℤ k)
 neg-pred-ℤ (inl x) = refl
 neg-pred-ℤ (inr (inl star)) = refl
 neg-pred-ℤ (inr (inr zero-ℕ)) = refl
 neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
-neg-succ-ℤ : (x : ℤ) → Id (neg-ℤ (succ-ℤ x)) (pred-ℤ (neg-ℤ x))
+neg-succ-ℤ : (x : ℤ) → neg-ℤ (succ-ℤ x) ＝ pred-ℤ (neg-ℤ x)
 neg-succ-ℤ (inl zero-ℕ) = refl
 neg-succ-ℤ (inl (succ-ℕ x)) = refl
 neg-succ-ℤ (inr (inl star)) = refl
 neg-succ-ℤ (inr (inr x)) = refl
 
 pred-neg-ℤ :
-  (k : ℤ) → Id (pred-ℤ (neg-ℤ k)) (neg-ℤ (succ-ℤ k))
+  (k : ℤ) → pred-ℤ (neg-ℤ k) ＝ neg-ℤ (succ-ℤ k)
 pred-neg-ℤ (inl zero-ℕ) = refl
 pred-neg-ℤ (inl (succ-ℕ x)) = refl
 pred-neg-ℤ (inr (inl star)) = refl
@@ -259,7 +261,7 @@ is-nonnegative-ℤ (inl x) = empty
 is-nonnegative-ℤ (inr k) = unit
 
 is-nonnegative-eq-ℤ :
-  {x y : ℤ} → Id x y → is-nonnegative-ℤ x → is-nonnegative-ℤ y
+  {x y : ℤ} → x ＝ y → is-nonnegative-ℤ x → is-nonnegative-ℤ y
 is-nonnegative-eq-ℤ refl = id
 
 is-zero-is-nonnegative-ℤ :
@@ -289,7 +291,7 @@ is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
 is-nonzero-is-positive-ℤ : (x : ℤ) → is-positive-ℤ x → is-nonzero-ℤ x
 is-nonzero-is-positive-ℤ (inr (inr x)) H ()
 
-is-positive-eq-ℤ : {x y : ℤ} → Id x y → is-positive-ℤ x → is-positive-ℤ y
+is-positive-eq-ℤ : {x y : ℤ} → x ＝ y → is-positive-ℤ x → is-positive-ℤ y
 is-positive-eq-ℤ {x} refl = id
 
 is-positive-one-ℤ : is-positive-ℤ one-ℤ
@@ -339,12 +341,12 @@ nat-nonnegative-ℤ (pair (inr (inl x)) H) = zero-ℕ
 nat-nonnegative-ℤ (pair (inr (inr x)) H) = succ-ℕ x
 
 issec-nat-nonnegative-ℤ :
-  (x : nonnegative-ℤ) → Id (nonnegative-int-ℕ (nat-nonnegative-ℤ x)) x
+  (x : nonnegative-ℤ) → nonnegative-int-ℕ (nat-nonnegative-ℤ x) ＝ x
 issec-nat-nonnegative-ℤ (pair (inr (inl star)) star) = refl
 issec-nat-nonnegative-ℤ (pair (inr (inr x)) star) = refl
 
 isretr-nat-nonnegative-ℤ :
-  (n : ℕ) → Id (nat-nonnegative-ℤ (nonnegative-int-ℕ n)) n
+  (n : ℕ) → nat-nonnegative-ℤ (nonnegative-int-ℕ n) ＝ n
 isretr-nat-nonnegative-ℤ zero-ℕ = refl
 isretr-nat-nonnegative-ℤ (succ-ℕ n) = refl
 
@@ -377,7 +379,7 @@ decide-is-nonnegative-ℤ {inr x} = inl star
 ```
 
 ```agda
-succ-int-ℕ : (x : ℕ) → Id (succ-ℤ (int-ℕ x)) (int-ℕ (succ-ℕ x))
+succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
 succ-int-ℕ zero-ℕ = refl
 succ-int-ℕ (succ-ℕ x) = refl
 ```
@@ -422,15 +424,15 @@ map-ℤ-Pointed-Type-With-Aut X (inr (inr (succ-ℕ k))) =
 
 preserves-point-map-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : UU-Pointed-Type-With-Aut l) →
-  Id ( map-ℤ-Pointed-Type-With-Aut X zero-ℤ)
-     ( point-Pointed-Type-With-Aut X)
+  ( map-ℤ-Pointed-Type-With-Aut X zero-ℤ) ＝
+  ( point-Pointed-Type-With-Aut X)
 preserves-point-map-ℤ-Pointed-Type-With-Aut X = refl
 
 preserves-aut-map-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : UU-Pointed-Type-With-Aut l) (k : ℤ) →
-  Id ( map-ℤ-Pointed-Type-With-Aut X (succ-ℤ k))
-     ( map-aut-Pointed-Type-With-Aut X
-       ( map-ℤ-Pointed-Type-With-Aut X k))
+  ( map-ℤ-Pointed-Type-With-Aut X (succ-ℤ k)) ＝
+  ( map-aut-Pointed-Type-With-Aut X
+    ( map-ℤ-Pointed-Type-With-Aut X k))
 preserves-aut-map-ℤ-Pointed-Type-With-Aut X (inl zero-ℕ) =
   inv
     ( issec-inv-map-aut-Pointed-Type-With-Aut X (point-Pointed-Type-With-Aut X))
@@ -497,10 +499,10 @@ htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))) =
 coh-point-htpy-map-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : UU-Pointed-Type-With-Aut l)
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X) →
-  Id ( preserves-point-map-ℤ-Pointed-Type-With-Aut X)
-     ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
-       ( preserves-point-map-hom-Pointed-Type-With-Aut
-         ℤ-Pointed-Type-With-Aut X h))
+  ( preserves-point-map-ℤ-Pointed-Type-With-Aut X) ＝
+  ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
+    ( preserves-point-map-hom-Pointed-Type-With-Aut
+      ℤ-Pointed-Type-With-Aut X h))
 coh-point-htpy-map-ℤ-Pointed-Type-With-Aut X h =
   inv
     ( left-inv
@@ -511,12 +513,12 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : UU-Pointed-Type-With-Aut l)
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X)
   (k : ℤ) →
-  Id ( ( preserves-aut-map-ℤ-Pointed-Type-With-Aut X k) ∙
-       ( ap ( map-aut-Pointed-Type-With-Aut X)
-            ( htpy-map-ℤ-Pointed-Type-With-Aut X h k)))
-     ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (succ-ℤ k)) ∙
-       ( preserves-aut-map-hom-Pointed-Type-With-Aut
-         ℤ-Pointed-Type-With-Aut X h k))
+  ( ( preserves-aut-map-ℤ-Pointed-Type-With-Aut X k) ∙
+    ( ap ( map-aut-Pointed-Type-With-Aut X)
+         ( htpy-map-ℤ-Pointed-Type-With-Aut X h k))) ＝
+  ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (succ-ℤ k)) ∙
+    ( preserves-aut-map-hom-Pointed-Type-With-Aut
+      ℤ-Pointed-Type-With-Aut X h k))
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
   inv
     ( inv-con

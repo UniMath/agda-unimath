@@ -1,4 +1,6 @@
-# Singleton induction
+---
+title: Singleton induction
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

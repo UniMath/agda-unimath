@@ -1,4 +1,6 @@
-# Large precategories
+---
+title: Large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -7,7 +9,7 @@ module category-theory.large-precategories where
 
 open import Agda.Primitive using (Setω)
 open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (Id; refl; ap-binary)
+open import foundation.identity-types using (_＝_; refl; ap-binary)
 open import foundation.sets using
   ( UU-Set; type-Set; hom-Set; is-set; is-set-type-Set)
 open import foundation.universe-levels using
@@ -42,16 +44,16 @@ record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Se
       (h : type-Set (hom-Large-Precat Z W))
       (g : type-Set (hom-Large-Precat Y Z))
       (f : type-Set (hom-Large-Precat X Y)) →
-      Id ( comp-hom-Large-Precat (comp-hom-Large-Precat h g) f)
-         ( comp-hom-Large-Precat h (comp-hom-Large-Precat g f))
+      ( comp-hom-Large-Precat (comp-hom-Large-Precat h g) f) ＝
+      ( comp-hom-Large-Precat h (comp-hom-Large-Precat g f))
     left-unit-law-comp-hom-Large-Precat :
       {l1 l2 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       (f : type-Set (hom-Large-Precat X Y)) →
-      Id ( comp-hom-Large-Precat id-hom-Large-Precat f) f
+      ( comp-hom-Large-Precat id-hom-Large-Precat f) ＝ f
     right-unit-law-comp-hom-Large-Precat :
       {l1 l2 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       (f : type-Set (hom-Large-Precat X Y)) →
-      Id ( comp-hom-Large-Precat f id-hom-Large-Precat) f
+      ( comp-hom-Large-Precat f id-hom-Large-Precat) ＝ f
 
 open Large-Precat public
 
@@ -75,9 +77,9 @@ module _
   where
 
   ap-comp-hom-Large-Precat :
-    {g g' : type-hom-Large-Precat C Y Z} (p : Id g g')
-    {f f' : type-hom-Large-Precat C X Y} (q : Id f f') →
-    Id (comp-hom-Large-Precat C g f) (comp-hom-Large-Precat C g' f')
+    {g g' : type-hom-Large-Precat C Y Z} (p : g ＝ g')
+    {f f' : type-hom-Large-Precat C X Y} (q : f ＝ f') →
+    comp-hom-Large-Precat C g f ＝ comp-hom-Large-Precat C g' f'
   ap-comp-hom-Large-Precat p q = ap-binary (comp-hom-Large-Precat C) p q
 
   comp-hom-Large-Precat' :

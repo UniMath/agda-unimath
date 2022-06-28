@@ -1,4 +1,6 @@
-# Mersenne prime
+---
+title: Mersenne primes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
 
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -24,7 +26,7 @@ A Mersenne prime is a prime number that is one less than a power of two.
 
 ```agda
 is-mersenne-prime : ℕ → UU lzero
-is-mersenne-prime n = is-prime-ℕ n × Σ ℕ (λ k → Id (dist-ℕ (exp-ℕ 2 k) 1) n)
+is-mersenne-prime n = is-prime-ℕ n × Σ ℕ (λ k → dist-ℕ (exp-ℕ 2 k) 1 ＝ n)
 
 is-mersenne-prime-power : ℕ → UU lzero
 is-mersenne-prime-power k = is-prime-ℕ (dist-ℕ (exp-ℕ 2 k) 1)

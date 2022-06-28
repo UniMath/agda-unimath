@@ -1,4 +1,6 @@
-# Fibers of maps
+---
+title: Fibers of maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

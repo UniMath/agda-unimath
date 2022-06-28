@@ -1,4 +1,6 @@
-# Sets
+---
+title: Sets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

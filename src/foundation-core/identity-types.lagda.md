@@ -1,4 +1,6 @@
-# Identity types
+---
+title: Identity types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

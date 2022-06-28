@@ -1,4 +1,6 @@
-# The univalence axiom
+---
+title: The univalence axiom
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

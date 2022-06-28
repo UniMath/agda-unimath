@@ -1,4 +1,6 @@
-# Homotopies of natural transformations in large precategories
+---
+title: Homotopies of natural transformations in large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,7 @@ open import category-theory.natural-transformations-large-precategories using
   ( natural-transformation-Large-Precat;
     obj-natural-transformation-Large-Precat)
 open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (Id; _∙_; assoc)
+open import foundation.identity-types using (_＝_; _∙_; assoc)
 open import foundation.universe-levels using (Level)
 ```
 
@@ -37,8 +39,8 @@ module _
     (α β : natural-transformation-Large-Precat F G) → Setω
   htpy-natural-transformation-Large-Precat α β =
     {l : Level} (X : obj-Large-Precat C l) →
-    Id ( obj-natural-transformation-Large-Precat α X)
-       ( obj-natural-transformation-Large-Precat β X)
+    ( obj-natural-transformation-Large-Precat α X) ＝
+    ( obj-natural-transformation-Large-Precat β X)
 ```
 
 ## Examples
@@ -79,14 +81,14 @@ A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `�
     (K : htpy-natural-transformation-Large-Precat β γ)
     (L : htpy-natural-transformation-Large-Precat γ δ) →
     {l : Level} (X : obj-Large-Precat C l) →
-    Id ( concat-htpy-natural-transformation-Large-Precat α γ δ
-         ( concat-htpy-natural-transformation-Large-Precat α β γ H K)
-         ( L)
-         ( X))
-       ( concat-htpy-natural-transformation-Large-Precat α β δ
-         ( H)
-         ( concat-htpy-natural-transformation-Large-Precat β γ δ K L)
-         ( X))
+    ( concat-htpy-natural-transformation-Large-Precat α γ δ
+      ( concat-htpy-natural-transformation-Large-Precat α β γ H K)
+      ( L)
+      ( X)) ＝
+    ( concat-htpy-natural-transformation-Large-Precat α β δ
+      ( H)
+      ( concat-htpy-natural-transformation-Large-Precat β γ δ K L)
+      ( X))
   associative-concat-htpy-natural-transformation-Large-Precat α β γ δ H K L X =
     assoc (H X) (K X) (L X)
 ```

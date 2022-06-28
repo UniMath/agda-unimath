@@ -1,4 +1,6 @@
-# The Collatz bijection
+---
+title: The Collatz bijection
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 
 open import foundation.coproduct-types using (inl; inr)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.unit-type using (star)
 ```
 
@@ -25,7 +27,7 @@ We define a bijection of Collatz
 ## Definition
 
 ```agda
-cases-map-collatz-bijection : (n : ℕ) (x : ℤ-Mod 3) (p : Id (mod-ℕ 3 n) x) → ℕ
+cases-map-collatz-bijection : (n : ℕ) (x : ℤ-Mod 3) (p : mod-ℕ 3 n ＝ x) → ℕ
 cases-map-collatz-bijection n (inl (inl (inr star))) p =
   quotient-euclidean-division-ℕ 3 (mul-ℕ 2 n)
 cases-map-collatz-bijection n (inl (inr star)) p =

@@ -1,4 +1,6 @@
-# The divisibility relation on the standard finite types
+---
+title: The divisibility relation on the standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; _∙_; ap; inv)
+open import foundation.identity-types using (_＝_; _∙_; ap; inv)
 open import foundation.universe-levels using (UU; lzero)
 
 open import univalent-combinatorics.decidable-dependent-pair-types using
@@ -32,7 +34,7 @@ Given two elements `x y : Fin k`, we say that `x` divides `y` if there is an ele
 
 ```agda
 div-Fin : {k : ℕ} → Fin k → Fin k → UU lzero
-div-Fin {k} x y = Σ (Fin k) (λ u → Id (mul-Fin u x) y)
+div-Fin {k} x y = Σ (Fin k) (λ u → mul-Fin u x ＝ y)
 ```
 
 ## Properties

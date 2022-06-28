@@ -1,4 +1,6 @@
-# 0-Maps
+---
+title: 0-Maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Dirichlet convolution
+---
+title: Dirichlet convolution
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

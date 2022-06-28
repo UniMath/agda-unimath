@@ -1,11 +1,12 @@
-# Natural transformations between functors on large precategories
+---
+title: Natural transformations between functors between large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module category-theory.natural-transformations-large-precategories where
 
-open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories using
   ( functor-Large-Precat; obj-functor-Large-Precat;
     hom-functor-Large-Precat)
@@ -14,8 +15,9 @@ open import category-theory.large-precategories using
     comp-hom-Large-Precat; id-hom-Large-Precat;
     left-unit-law-comp-hom-Large-Precat;
     right-unit-law-comp-hom-Large-Precat)
-open import foundation.identity-types using (Id; _∙_; inv)
-open import foundation.universe-levels using (UU; Level)
+    
+open import foundation.identity-types using (_＝_; _∙_; inv)
+open import foundation.universe-levels using (UU; Level; UUω)
 ```
 
 ## Idea
@@ -38,7 +40,7 @@ square-Large-Precat :
   (right : type-hom-Large-Precat C B Y) (bottom : type-hom-Large-Precat C X Y) →
   UU (βC l1 l4)
 square-Large-Precat C top left right bottom =
-  Id (comp-hom-Large-Precat C bottom left) (comp-hom-Large-Precat C right top)
+  comp-hom-Large-Precat C bottom left ＝ comp-hom-Large-Precat C right top
 
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
@@ -46,7 +48,7 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat C D γG)
   where
 
-  record natural-transformation-Large-Precat : Setω
+  record natural-transformation-Large-Precat : UUω
     where
     constructor make-natural-transformation
     field

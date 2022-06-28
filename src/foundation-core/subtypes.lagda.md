@@ -1,4 +1,6 @@
-# Subtypes
+---
+title: Subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

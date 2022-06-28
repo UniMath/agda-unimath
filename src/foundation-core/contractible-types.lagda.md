@@ -1,4 +1,6 @@
-# Contractible types
+---
+title: Contractible types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

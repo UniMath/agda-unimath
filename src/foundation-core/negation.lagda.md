@@ -1,4 +1,6 @@
-# Negation
+---
+title: Negation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

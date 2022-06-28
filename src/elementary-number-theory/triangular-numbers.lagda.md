@@ -1,4 +1,6 @@
-# The triangular numbers
+---
+title: The triangular numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Isomorphisms in categories
+---
+title: Isomorphisms in categories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import category-theory.isomorphisms-precategories using
   ( is-iso-Precat; iso-Precat; is-prop-is-iso-Precat;
     is-set-iso-Precat; iso-Precat-Set; is-iso-id-hom-Precat;
     id-iso-Precat; iso-eq-Precat)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.propositions using (is-prop)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.universe-levels using (UU; Level)
@@ -56,7 +58,7 @@ module _
 ```agda
 iso-eq-Cat :
   {l1 l2 : Level} (C : Cat l1 l2) →
-  (x y : obj-Cat C) → Id x y → iso-Cat C x y
+  (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
 iso-eq-Cat C = iso-eq-Precat (precat-Cat C)
 ```
 

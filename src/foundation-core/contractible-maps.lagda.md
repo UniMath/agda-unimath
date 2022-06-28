@@ -1,4 +1,6 @@
-# Contractible maps
+---
+title: Contractible maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

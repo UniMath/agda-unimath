@@ -1,4 +1,6 @@
-# Identity systems
+---
+title: Identity systems
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

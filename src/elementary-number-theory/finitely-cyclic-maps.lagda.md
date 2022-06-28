@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Finitely cyclic maps
 ---
-
-# Finitely cyclic maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -20,7 +18,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; _∙_; inv; ap)
 open import foundation.iterating-functions using
   ( iterate; iterate-succ-ℕ; iterate-iterate)
 open import foundation.universe-levels using (Level; UU)
@@ -37,7 +35,7 @@ module _
   where
 
   is-finitely-cyclic-map : (f : X → X) → UU l
-  is-finitely-cyclic-map f = (x y : X) → Σ ℕ (λ k → Id (iterate k f x) y)
+  is-finitely-cyclic-map f = (x y : X) → Σ ℕ (λ k → iterate k f x ＝ y)
 
   length-path-is-finitely-cyclic-map :
     {f : X → X} → is-finitely-cyclic-map f → X → X → ℕ
@@ -45,7 +43,7 @@ module _
 
   eq-is-finitely-cyclic-map :
     {f : X → X} (H : is-finitely-cyclic-map f) (x y : X) →
-    Id (iterate (length-path-is-finitely-cyclic-map H x y) f x) y
+    iterate (length-path-is-finitely-cyclic-map H x y) f x ＝ y
   eq-is-finitely-cyclic-map H x y = pr2 (H x y)
 
   map-inv-is-finitely-cyclic-map :
@@ -90,7 +88,7 @@ module _
 ```agda
 compute-iterate-succ-Fin :
   {k : ℕ} (n : ℕ) (x : Fin (succ-ℕ k)) →
-  Id (iterate n succ-Fin x) (add-Fin x (mod-succ-ℕ k n))
+  iterate n succ-Fin x ＝ add-Fin x (mod-succ-ℕ k n)
 compute-iterate-succ-Fin zero-ℕ x = inv (right-unit-law-add-Fin x)
 compute-iterate-succ-Fin {k} (succ-ℕ n) x =
   ( ap succ-Fin (compute-iterate-succ-Fin n x)) ∙

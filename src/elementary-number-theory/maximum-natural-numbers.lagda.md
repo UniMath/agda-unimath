@@ -1,4 +1,6 @@
-# Maximum on the natural numbers
+---
+title: Maximum on the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

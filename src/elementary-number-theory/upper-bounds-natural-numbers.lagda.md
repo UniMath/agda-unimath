@@ -1,4 +1,6 @@
-# Upper bounds for type families over the natural numbers
+---
+title: Upper bounds for type families over the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

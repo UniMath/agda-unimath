@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Factorials of natural numbers
 ---
-
-# Factorials of natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

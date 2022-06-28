@@ -1,4 +1,6 @@
-# Prime numbers
+---
+title: Prime numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
