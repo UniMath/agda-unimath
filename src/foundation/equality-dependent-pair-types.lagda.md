@@ -102,4 +102,9 @@ module _
   comp-pair-eq-Σ : {s t u : Σ A B} (p : Id s t) (q : Id t u) →
     Id (pr1 (pair-eq-Σ p) ∙ pr1 (pair-eq-Σ q)) (pr1 (pair-eq-Σ (p ∙ q)))
   comp-pair-eq-Σ refl refl = refl
+
+  ap-pair-eq-Σ : {l3 : Level} (X : UU l3) (f : X → Σ A B)
+    (x y : X) (p : Id x y) →
+    Id (pr1 (pair-eq-Σ (ap f p))) (ap (λ x → pr1 (f x)) p)
+  ap-pair-eq-Σ X f x .x refl = refl
 ```

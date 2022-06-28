@@ -21,7 +21,7 @@ open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
   ( _≃_; map-inv-is-equiv; equiv-inv-equiv; id-equiv; is-equiv; _∘e_; eq-htpy-equiv;
-    map-equiv; right-inverse-law-equiv)
+    map-equiv; right-inverse-law-equiv; inv-equiv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 ```
 
@@ -116,4 +116,21 @@ comp-eq-equiv A B C f g =
         ( right-inverse-law-equiv equiv-univalence)) ∙
         ( ( ap (λ e → g ∘e map-equiv e f) (right-inverse-law-equiv equiv-univalence)) ∙
           ( ap (λ e → map-equiv e (g ∘e f)) (inv (right-inverse-law-equiv equiv-univalence))))))
+
+commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : Id A B) →
+  Id (inv-equiv (equiv-eq p)) (equiv-eq (inv p))
+commutativity-inv-equiv-eq A .A refl = eq-htpy-equiv refl-htpy
+
+commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
+  Id (inv (eq-equiv A B f)) (eq-equiv B A (inv-equiv f))
+commutativity-inv-eq-equiv A B f =
+  is-injective-map-equiv
+    ( equiv-univalence)
+    ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
+      ( ( ap
+        ( λ e → (inv-equiv (map-equiv e f)))
+        ( right-inverse-law-equiv equiv-univalence)) ∙
+        ( ap
+          ( λ e → map-equiv e (inv-equiv f))
+          ( inv (right-inverse-law-equiv equiv-univalence)))))
 ```

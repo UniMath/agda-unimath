@@ -30,7 +30,7 @@ open import foundation.decidable-types using (is-decidable; is-prop-is-decidable
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using
-  ( pair-eq-Σ; eq-pair-Σ; comp-eq-pair-Σ)
+  ( pair-eq-Σ; eq-pair-Σ; issec-pair-eq-Σ; comp-eq-pair-Σ; ap-pair-eq-Σ)
 open import foundation.equivalence-classes using
   ( large-set-quotient; large-quotient-Set; quotient-map-large-set-quotient;
     type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
@@ -51,7 +51,7 @@ open import foundation.functoriality-set-quotients using
 open import foundation.empty-types using (ex-falso)
 open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using
-  ( Id; inv; _∙_; ap; refl; tr; ap-concat; distributive-inv-concat; inv-inv)
+  ( Id; inv; _∙_; ap; refl; tr; ap-concat; distributive-inv-concat; inv-inv; ap-binary)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (own-inverse-is-involution)
 open import foundation.mere-equivalences using
@@ -69,7 +69,8 @@ open import foundation.sets using
 open import foundation.subuniverses using (is-one-type-UU-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.unit-type using (star)
-open import foundation.univalence using (equiv-eq; eq-equiv)
+open import foundation.univalence using
+  ( equiv-eq; eq-equiv; comp-eq-equiv; comp-equiv-eq; commutativity-inv-eq-equiv; equiv-univalence)
 open import foundation.universal-property-set-quotients using
   ( is-set-quotient-large-set-quotient; is-effective-is-set-quotient)
 open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
@@ -87,12 +88,14 @@ open import group-theory.homomorphisms-groups using
   ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group; preserves-mul-hom-Group;
     htpy-eq-hom-Group; id-hom-Group)
 open import group-theory.homomorphisms-semigroups using (preserves-mul; is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using (hom-iso-Group; hom-inv-iso-Group)
+open import group-theory.isomorphisms-groups using
+  ( hom-iso-Group; hom-inv-iso-Group; comp-iso-Group; inv-iso-Group)
 open import group-theory.loop-groups-sets using
   ( loop-group-Set; map-hom-symmetric-group-loop-group-Set; hom-symmetric-group-loop-group-Set;
     map-hom-inv-symmetric-group-loop-group-Set; hom-inv-symmetric-group-loop-group-Set;
     is-retr-hom-inv-symmetric-group-loop-group-Set; is-sec-hom-inv-symmetric-group-loop-group-Set;
-    iso-symmetric-group-loop-group-Set; commutative-inv-map-hom-symmetric-group-loop-group-Set)
+    iso-symmetric-group-loop-group-Set; commutative-inv-map-hom-symmetric-group-loop-group-Set;
+    iso-loop-group-equiv-Set; iso-abstract-automorphism-group-loop-group-Set)
 open import group-theory.subgroups using (group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
   ( is-generating-subset-Group; subgroup-subset-Group)
@@ -177,84 +180,49 @@ module _
           ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
         ( star))
 
-  abstract
-    eq-fin-2-map-cartier-delooping-sign-count : (n : ℕ) →
-      ( X : UU lzero) (eX : Fin n ≃ X) →
-      Id
-        ( map-cartier-delooping-sign n
-          ( pair
-            ( raise-Set l (pair X (is-set-count (pair n eX))))
-            ( unit-trunc-Prop
-              ( eq-pair-Σ
-                ( eq-equiv
-                  ( raise l X)
-                  ( raise l (Fin n))
-                  ( equiv-raise l (Fin n) ∘e (inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                ( eq-is-prop (is-prop-is-set (raise l (Fin n))))))))
-        ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl))
-    eq-fin-2-map-cartier-delooping-sign-count zero-ℕ X eX = refl
-    eq-fin-2-map-cartier-delooping-sign-count (succ-ℕ zero-ℕ) X eX = refl
-    eq-fin-2-map-cartier-delooping-sign-count (succ-ℕ (succ-ℕ n)) X eX =
-      eq-pair-Σ
-        ( eq-pair-Σ
-          ( eq-equiv
-            ( type-Set
-              ( pr1
-                ( map-cartier-delooping-sign
-                  ( succ-ℕ (succ-ℕ n))
-                  ( pair
-                    ( raise-Set l (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX))))
-                    ( unit-trunc-Prop
-                      ( eq-pair-Σ
-                        ( eq-equiv
-                          ( raise l X)
-                          ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
-                            ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                        ( eq-is-prop (is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
-            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-            ( equiv-raise (lsuc l) (Fin 2) ∘e
-              inv-equiv
-                ( equiv-fin-2-quotient-sign-equiv-Fin
-                  ( succ-ℕ (succ-ℕ n))
-                  ( pair
-                    ( raise l (type-Set (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX)))))
-                    ( functor-trunc-Prop
-                      ( λ p' →
-                        equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
-                          equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
-                      ( unit-trunc-Prop
-                        ( eq-pair-Σ
-                          ( eq-equiv (raise l X) (raise l (Fin (succ-ℕ (succ-ℕ n))))
-                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
-                            ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                        ( eq-is-prop
-                          ( is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
-                  ( star)
-                  ( equiv-raise l X ∘e eX))))
-          ( eq-is-prop (is-prop-is-set _)))
-        ( eq-is-prop is-prop-type-trunc-Prop)
+  eq-fin-2-map-cartier-delooping-sign-Fin : (n : ℕ) →
+    Id
+      ( map-cartier-delooping-sign n
+        ( pair
+          ( raise-Set l (Fin-Set n))
+          ( unit-trunc-Prop refl)))
+      ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl))
+  eq-fin-2-map-cartier-delooping-sign-Fin zero-ℕ = refl
+  eq-fin-2-map-cartier-delooping-sign-Fin (succ-ℕ zero-ℕ) = refl
+  eq-fin-2-map-cartier-delooping-sign-Fin (succ-ℕ (succ-ℕ n)) =
+    eq-pair-Σ
+      ( eq-pair-Σ
+        ( eq-equiv
+          ( type-Set
+            ( pr1
+              ( map-cartier-delooping-sign
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
+                  ( unit-trunc-Prop refl)))))
+          ( raise (lsuc l) (Fin 2))
+          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+            ( inv-equiv
+              ( equiv-fin-2-quotient-sign-equiv-Fin
+                ( succ-ℕ (succ-ℕ n))
+                ( pair
+                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                  ( functor-trunc-Prop
+                    ( λ p' →
+                      ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                    ( unit-trunc-Prop refl)))
+                ( star)
+                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+        ( eq-is-prop (is-prop-is-set _)))
+      ( eq-is-prop is-prop-type-trunc-Prop)
 
   cartier-delooping-sign : (n : ℕ) →
     hom-Concrete-Group
       ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) (is-one-type-UU-Set l))
       ( Automorphism-Group (UU-Set (lsuc l)) (raise-Set (lsuc l) (Fin-Set 2)) (is-one-type-UU-Set (lsuc l)))
   pr1 (cartier-delooping-sign n) = map-cartier-delooping-sign n
-  pr2 (cartier-delooping-sign n) =
-    tr
-      ( λ w →
-        Id
-          ( map-cartier-delooping-sign n
-            ( pair
-              ( pair
-                ( raise l (Fin n))
-                ( pr1 w))
-              ( pr2 w)))
-          ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl)))
-      ( eq-pair-Σ
-        ( eq-is-prop ( is-prop-is-set (raise l (Fin n))))
-        ( eq-is-prop is-prop-type-trunc-Prop))
-      ( eq-fin-2-map-cartier-delooping-sign-count n (Fin n) id-equiv)
+  pr2 (cartier-delooping-sign n) = eq-fin-2-map-cartier-delooping-sign-Fin n
 
 module _
   { l : Level}
@@ -1278,4 +1246,1028 @@ module _
                                 ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
                                 ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
                             ( pair f s))))))))))
+
+{-
+  private
+    raise-UU-Fin-Fin' : (n : ℕ) → UU-Fin-Level l n
+    raise-UU-Fin-Fin' n =
+      pair
+        ( raise l (Fin n))
+        ( functor-trunc-Prop
+          ( λ p' →
+            ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
+              ( equiv-raise l (Fin n)))
+          ( unit-trunc-Prop refl))
+
+  eq-cartier-delooping-loop-automorphism-Group' : (n : ℕ)
+    ( p : Id (raise l (Fin (succ-ℕ (succ-ℕ n)))) (raise l (Fin (succ-ℕ (succ-ℕ n))))) →
+    Id
+      ( eq-pair-Σ
+        ( eq-pair-Σ
+          ( inv
+            ( eq-equiv
+              ( raise (lsuc l) (Fin 2))
+              ( raise (lsuc l) (Fin 2))
+              ( ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                ( inv-equiv
+                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                    ( succ-ℕ (succ-ℕ n))
+                    ( pair
+                      ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                      ( functor-trunc-Prop
+                        ( λ p' →
+                          ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                        ( unit-trunc-Prop refl)))
+                    ( star)
+                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))) ∘e
+                ( ( equiv-eq
+                  ( inv
+                    ( ap
+                      ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∘e
+                  ( inv-equiv
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( pair
+                            ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                            ( functor-trunc-Prop
+                              ( λ p' →
+                                ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
+                                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                              ( unit-trunc-Prop refl)))
+                            ( star)
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
+          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+        ( eq-is-prop is-prop-type-trunc-Prop))
+      ( map-hom-Group
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group
+            ( UU-Set (lsuc l))
+            ( raise-Set (lsuc l) (Fin-Set 2))
+            ( is-one-type-UU-Set (lsuc l))))
+        ( comp-hom-Group
+          ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( Automorphism-Group (UU-Set l)
+              ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+              ( is-one-type-UU-Set l)))
+          ( abstract-group-Concrete-Group
+            ( Automorphism-Group
+              ( UU-Set (lsuc l))
+              ( raise-Set (lsuc l) (Fin-Set 2))
+              ( is-one-type-UU-Set (lsuc l))))
+          ( hom-group-hom-Concrete-Group
+            ( Automorphism-Group
+              ( UU-Set l)
+              ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+              ( is-one-type-UU-Set l))
+            ( Automorphism-Group
+              ( UU-Set (lsuc l))
+              ( raise-Set (lsuc l) (Fin-Set 2))
+              ( is-one-type-UU-Set (lsuc l)))
+            ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+          ( hom-iso-Group
+            ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+            ( abstract-group-Concrete-Group
+              ( Automorphism-Group
+                ( UU-Set l)
+                ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+                ( is-one-type-UU-Set l)))
+            ( iso-abstract-automorphism-group-loop-group-Set
+              ( raise-Fin-Set (succ-ℕ (succ-ℕ n))))))
+        ( p))
+  eq-cartier-delooping-loop-automorphism-Group' n p =
+    ( ap
+      ( λ r →
+        eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
+      ( ( ap
+        ( λ r → eq-pair-Σ r
+          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+        (  ap inv
+          (  inv
+            ( comp-eq-equiv
+              ( raise (lsuc l) (Fin 2))
+              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+              ( raise (lsuc l) (Fin 2))
+              ( ( equiv-eq
+                ( inv
+                  ( ap
+                    ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∘e
+                ( inv-equiv
+                  ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                    ( inv-equiv
+                      ( equiv-fin-2-quotient-sign-equiv-Fin
+                        ( succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                        ( star)
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                ( inv-equiv
+                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                    ( succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                    ( star)
+                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+            ( ap
+              ( λ r →
+                ( r) ∙
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+              (  inv
+                ( comp-eq-equiv
+                  ( raise (lsuc l) (Fin 2))
+                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                  ( inv-equiv
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                  ( equiv-eq
+                    ( inv
+                      ( ap
+                        ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))) ∙
+                ( ( ap
+                  ( λ r → r ∙
+                    eq-equiv
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                      ( equiv-eq
+                        ( inv
+                          ( ap
+                            ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))))
+                  ( inv
+                    ( commutativity-inv-eq-equiv
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                      ( raise (lsuc l) (Fin 2))
+                      ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                        ( inv-equiv
+                          ( equiv-fin-2-quotient-sign-equiv-Fin (succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                            ( star)
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))) ∙
+                  ( ap
+                    ( λ e →
+                      inv
+                        ( eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                        ( map-equiv e
+                          ( inv
+                            ( ap
+                              ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                              ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))))
+                    ( left-inverse-law-equiv equiv-univalence)))))) ∙
+          ( ( distributive-inv-concat
+            ( ( inv
+              ( eq-equiv
+                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                ( raise (lsuc l) (Fin 2))
+                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                  ( inv-equiv
+                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+              ( inv
+                ( ap
+                  ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                  ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))
+            ( eq-equiv
+              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+              ( raise (lsuc l) (Fin 2))
+              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                ( inv-equiv (equiv-fin-2-quotient-sign-equiv-Fin
+                  ( succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                  ( star)
+                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+            ( ap
+              ( λ r →
+                inv
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                  ( r))
+              ( ( distributive-inv-concat
+                ( inv
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                ( inv
+                  ( ap
+                    ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∙
+                ( ap
+                  ( λ r →
+                    ( r) ∙
+                      ( inv
+                        ( inv
+                          ( eq-equiv
+                            ( quotient-sign (succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                            ( raise (lsuc l) (type-Set (Fin-Set 2)))
+                            ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                              ( inv-equiv
+                                ( equiv-fin-2-quotient-sign-equiv-Fin
+                                  ( succ-ℕ (succ-ℕ n))
+                                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                                  ( star)
+                                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))))
+                  ( inv-inv
+                    ( ap
+                      ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))) ∙
+                  ( ap
+                    ( λ r →
+                      ( ap
+                        ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                        ( r))
+                    ( inv-inv
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))))))) ∙
+        ( ( ap
+          ( eq-pair-Σ
+            ( ( inv
+              ( eq-equiv
+                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                ( raise (lsuc l) (Fin 2))
+                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                  ( inv-equiv
+                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+              ( ( ap
+                ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                ( eq-equiv
+                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                  ( raise (lsuc l) (Fin 2))
+                  ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                    ( inv-equiv
+                      ( equiv-fin-2-quotient-sign-equiv-Fin
+                        ( succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                        ( star)
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))))
+            ( eq-is-prop (is-trunc-Id (is-prop-is-set (raise (lsuc l) (Fin 2)) _ _)))) ∙
+            ( ( inv
+              ( comp-eq-pair-Σ
+                ( pr2 (raise-Set (lsuc l) (Fin-Set 2)))
+                ( pr2
+                  ( quotient-sign-Set (succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))))
+                ( pr2 (raise-Set (lsuc l) (Fin-Set 2)))
+                ( inv
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                ( ( ap
+                  ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                  ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                ( eq-is-prop
+                  ( is-prop-is-set
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))))
+                ( _))) ∙
+              ( ap
+                ( λ r →
+                  ( eq-pair-Σ
+                    ( inv
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                    ( eq-is-prop
+                      ( is-prop-is-set
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))))) ∙
+                    ( r))
+                ( ( inv
+                  ( comp-eq-pair-Σ
+                    ( pr2
+                      ( quotient-sign-Set (succ-ℕ (succ-ℕ n))
+                        (raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))))
+                    ( pr2
+                      ( quotient-sign-Set (succ-ℕ (succ-ℕ n))
+                        (raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))))
+                    ( pr2 (raise-Set (lsuc l) (Fin-Set 2)))
+                    ( ap
+                      ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
+                    ( eq-equiv
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                      ( raise (lsuc l) (Fin 2))
+                      ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                        ( inv-equiv
+                          ( equiv-fin-2-quotient-sign-equiv-Fin
+                            ( succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                            ( star)
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                    ( eq-is-prop
+                      ( is-prop-is-set
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))))
+                    ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))) ∙
+                  ( ap
+                    ( λ r →
+                      ( r) ∙
+                        ( eq-pair-Σ
+                          ( eq-equiv
+                            ( quotient-sign (succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                            ( raise (lsuc l) (Fin 2))
+                            ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                              ( inv-equiv
+                                ( equiv-fin-2-quotient-sign-equiv-Fin
+                                  ( succ-ℕ (succ-ℕ n))
+                                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                                  ( star)
+                                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+                    ( ( ap
+                      ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
+                      { y =
+                        pair-eq-Σ
+                          ( ap
+                            ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))}
+                      ( eq-pair-Σ
+                        ( inv
+                          ( ap-pair-eq-Σ
+                            ( UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                            ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                            ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                            ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))
+                        ( eq-is-prop (is-trunc-Id (is-prop-is-set _ _ _))))) ∙
+                      ( issec-pair-eq-Σ
+                        ( quotient-sign-Set (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                        ( quotient-sign-Set (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                        ( ap
+                          ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                          ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))))))))) ∙
+    ( ( ap
+      ( eq-pair-Σ
+        (  eq-pair-Σ
+          ( inv
+            ( eq-equiv
+              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+              ( raise (lsuc l) (Fin 2))
+              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                ( inv-equiv
+                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                    ( succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                    ( star)
+                    (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+          ( eq-is-prop
+            ( is-prop-is-set
+              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))))) ∙
+          ( ( ap
+            ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+            ( eq-pair-Σ
+              ( eq-equiv
+                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                ( raise (lsuc l) (Fin 2))
+                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                  ( inv-equiv
+                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+              ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))))
+      ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+      ( ( inv
+        ( comp-eq-pair-Σ
+          ( unit-trunc-Prop refl)
+          ( unit-trunc-Prop
+            ( eq-pair-Σ
+              ( eq-equiv
+                ( quotient-sign
+                  ( succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                ( pr1 (raise-Set (lsuc l) (Fin-Set 2)))
+                ( ( equiv-raise (lsuc l) (type-Set (Fin-Set 2))) ∘e
+                  ( inv-equiv
+                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+              ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+          ( unit-trunc-Prop refl)
+          ( eq-pair-Σ
+            ( inv
+              ( eq-equiv
+                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                ( raise (lsuc l) (Fin 2))
+                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                  ( inv-equiv
+                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+            ( eq-is-prop
+              ( is-prop-is-set
+                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))))))
+          ( ( ap
+            ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+            ( eq-pair-Σ
+              ( eq-equiv
+                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                ( raise (lsuc l) (Fin 2))
+                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                  ( inv-equiv
+                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+              ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+          ( eq-is-prop is-prop-type-trunc-Prop)
+          ( _))) ∙
+        ( ( ap
+          ( λ r →
+            ( eq-pair-Σ
+              ( eq-pair-Σ
+                ( inv
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                ( eq-is-prop
+                  ( is-prop-is-set
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))))))
+              ( eq-is-prop is-prop-type-trunc-Prop)) ∙
+              ( r))
+          ( ( inv
+            ( comp-eq-pair-Σ
+              ( unit-trunc-Prop
+                ( eq-pair-Σ
+                  ( eq-equiv
+                    ( quotient-sign
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (type-Set (Fin-Set 2))) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                  ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+              ( unit-trunc-Prop
+                ( eq-pair-Σ
+                  ( eq-equiv
+                    ( quotient-sign
+                      ( succ-ℕ (succ-ℕ n))
+                      ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                  ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+              ( unit-trunc-Prop refl)
+              ( ap
+                ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
+              ( eq-pair-Σ
+                ( eq-equiv
+                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                  ( raise (lsuc l) (Fin 2))
+                  ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                    ( inv-equiv
+                      ( equiv-fin-2-quotient-sign-equiv-Fin
+                        ( succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                        ( star)
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+              ( eq-is-prop is-prop-type-trunc-Prop)
+              ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+            ( ap
+              ( λ r →
+                ( r) ∙
+                  ( eq-pair-Σ
+                    ( eq-pair-Σ
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin' (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                      ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+                    (eq-is-prop is-prop-type-trunc-Prop)))
+              ( ap
+                ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
+                { y =
+                  pair
+                    ( pr1
+                      ( pair-eq-Σ
+                        ( ap
+                          ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)))
+                          ( eq-pair-Σ
+                            ( eq-pair-Σ p
+                              ( eq-is-prop (is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+                            ( eq-is-prop is-prop-type-trunc-Prop)))))
+                    ( eq-is-prop is-prop-type-trunc-Prop)}
+                ( eq-pair-Σ
+                  ( ( inv
+                    ( ( ap-pair-eq-Σ
+                      ( UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                      ( λ z → pair (quotient-sign-Set (succ-ℕ (succ-ℕ n)) z) _)
+                      ( pair
+                        ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                        ( functor-trunc-Prop
+                          ( λ p' →
+                            equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
+                              equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
+                          ( unit-trunc-Prop refl)))
+                      ( pair
+                        ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                        ( functor-trunc-Prop
+                          ( λ p' →
+                            equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
+                              equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
+                          ( unit-trunc-Prop refl)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∙
+                    ( ap (λ q → pr1 (pair-eq-Σ q)) {!!}))
+                  ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop {!!} {!!})))))))) ∙
+          ( {!ap (λ r → r ∙ ?) ?!} ∙
+            {!!}))))
+
+  eq-cartier-delooping-loop-automorphism-Group : (n : ℕ) →
+    Id
+      ( comp-hom-Group
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group
+            ( UU-Set (lsuc l))
+            ( raise-Set (lsuc l) (Fin-Set 2))
+            ( is-one-type-UU-Set (lsuc l))))
+        ( hom-iso-Group
+          ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( Automorphism-Group
+              ( UU-Set (lsuc l))
+              ( raise-Set (lsuc l) (Fin-Set 2))
+              ( is-one-type-UU-Set (lsuc l))))
+          ( comp-iso-Group
+            ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+            ( loop-group-Set (raise-Set (lsuc l) (Fin-Set 2)))
+            ( abstract-group-Concrete-Group
+              ( Automorphism-Group
+                ( UU-Set (lsuc l))
+                ( raise-Set (lsuc l) (Fin-Set 2))
+                ( is-one-type-UU-Set (lsuc l))))
+            ( iso-abstract-automorphism-group-loop-group-Set
+              ( raise-Set (lsuc l) (Fin-Set 2)))
+            ( iso-loop-group-equiv-Set
+              ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( raise-Set (lsuc l) (Fin-Set 2))
+              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                ( inv-equiv
+                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                    ( succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                    ( star)
+                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
+        ( cartier-delooping-sign-loop n))
+      ( comp-hom-Group
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group (UU-Set l)
+            ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+            ( is-one-type-UU-Set l)))
+        ( abstract-group-Concrete-Group
+          ( Automorphism-Group
+            ( UU-Set (lsuc l))
+            ( raise-Set (lsuc l) (Fin-Set 2))
+            ( is-one-type-UU-Set (lsuc l))))
+        ( hom-group-hom-Concrete-Group
+          ( Automorphism-Group (UU-Set l) (raise-Fin-Set (succ-ℕ (succ-ℕ n))) (is-one-type-UU-Set l))
+          ( Automorphism-Group (UU-Set (lsuc l)) (raise-Set (lsuc l) (Fin-Set 2)) (is-one-type-UU-Set (lsuc l)))
+          ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+        ( hom-iso-Group
+          ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( Automorphism-Group
+              ( UU-Set l)
+              ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+              ( is-one-type-UU-Set l)))
+          ( iso-abstract-automorphism-group-loop-group-Set
+            ( raise-Fin-Set (succ-ℕ (succ-ℕ n))))))
+  eq-cartier-delooping-loop-automorphism-Group n =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          tr
+            ( λ Q →
+              Id
+                ( eq-pair-Σ
+                  ( eq-pair-Σ
+                    ( inv
+                      ( eq-equiv
+                        ( raise (lsuc l) (Fin 2))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( pair
+                                ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                                ( Q))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))) ∘e
+                          ( ( equiv-eq
+                            ( inv
+                              ( ap
+                                ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                                ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∘e
+                            ( inv-equiv
+                              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                ( inv-equiv
+                                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                                    ( succ-ℕ (succ-ℕ n))
+                                    ( pair
+                                      ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+                                      ( Q))
+                                      ( star)
+                                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
+                    ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+                  ( eq-is-prop is-prop-type-trunc-Prop))
+                ( map-hom-Group
+                  ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+                  ( abstract-group-Concrete-Group
+                    ( Automorphism-Group
+                      ( UU-Set (lsuc l))
+                      ( raise-Set (lsuc l) (Fin-Set 2))
+                      ( is-one-type-UU-Set (lsuc l))))
+                  ( comp-hom-Group
+                    ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+                    ( abstract-group-Concrete-Group
+                      ( Automorphism-Group (UU-Set l)
+                        ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+                        ( is-one-type-UU-Set l)))
+                    ( abstract-group-Concrete-Group
+                      ( Automorphism-Group
+                        ( UU-Set (lsuc l))
+                        ( raise-Set (lsuc l) (Fin-Set 2))
+                        ( is-one-type-UU-Set (lsuc l))))
+                    ( hom-group-hom-Concrete-Group
+                      ( Automorphism-Group
+                        ( UU-Set l)
+                        ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+                        ( is-one-type-UU-Set l))
+                      ( Automorphism-Group
+                        ( UU-Set (lsuc l))
+                        ( raise-Set (lsuc l) (Fin-Set 2))
+                        ( is-one-type-UU-Set (lsuc l)))
+                      ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+                    ( hom-iso-Group
+                      ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+                      ( abstract-group-Concrete-Group
+                        ( Automorphism-Group
+                          ( UU-Set l)
+                          ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+                          ( is-one-type-UU-Set l)))
+                      ( iso-abstract-automorphism-group-loop-group-Set
+                        ( raise-Fin-Set (succ-ℕ (succ-ℕ n))))))
+                  ( p)))
+            { x =
+              functor-trunc-Prop
+                ( λ p' →
+                  equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
+                ( unit-trunc-Prop refl)}
+            { y = pr2 (raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))}
+            ( eq-is-prop is-prop-type-trunc-Prop)
+            {! 
+              ( ( ap
+                ( eq-pair-Σ
+                  (  eq-pair-Σ
+                    ( inv
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                    ( eq-is-prop
+                      ( is-prop-is-set
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))) ∙
+                    ( ( ap
+                      ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( eq-pair-Σ
+                        ( eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                        ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))))
+                ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+                ( ( inv
+                  ( comp-eq-pair-Σ
+                    ( unit-trunc-Prop refl)
+                    ( unit-trunc-Prop
+                      ( eq-pair-Σ
+                        ( eq-equiv
+                          ( quotient-sign
+                            ( succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                          ( pr1 (raise-Set (lsuc l) (Fin-Set 2)))
+                          ( ( equiv-raise (lsuc l) (type-Set (Fin-Set 2))) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                        ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+                    ( unit-trunc-Prop refl)
+                    ( eq-pair-Σ
+                      ( inv
+                        ( eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                      ( eq-is-prop
+                        ( is-prop-is-set
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))))
+                    ( ( ap
+                      ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( eq-pair-Σ
+                        ( eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                        ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+                    ( eq-is-prop is-prop-type-trunc-Prop)
+                    ( _))) ∙
+                  ( ( ap
+                    ( λ r →
+                      ( eq-pair-Σ
+                        ( eq-pair-Σ
+                          ( inv
+                            ( eq-equiv
+                              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                              ( raise (lsuc l) (Fin 2))
+                              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                ( inv-equiv
+                                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                                    ( succ-ℕ (succ-ℕ n))
+                                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                    ( star)
+                                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                          ( eq-is-prop
+                            ( is-prop-is-set
+                              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))))
+                        ( eq-is-prop is-prop-type-trunc-Prop)) ∙
+                        ( r))
+                    ( ( inv
+                      ( comp-eq-pair-Σ
+                        ( unit-trunc-Prop
+                          ( eq-pair-Σ
+                            ( eq-equiv
+                              ( quotient-sign
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                              ( raise (lsuc l) (Fin 2))
+                              ( ( equiv-raise (lsuc l) (type-Set (Fin-Set 2))) ∘e
+                                ( inv-equiv
+                                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                                    ( succ-ℕ (succ-ℕ n))
+                                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                    ( star)
+                                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                            ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+                        ( unit-trunc-Prop
+                          ( eq-pair-Σ
+                            ( eq-equiv
+                              ( quotient-sign
+                                ( succ-ℕ (succ-ℕ n))
+                                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                              ( raise (lsuc l) (Fin 2))
+                              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                ( inv-equiv
+                                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                                    ( succ-ℕ (succ-ℕ n))
+                                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                    ( star)
+                                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                            ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2))))))
+                        ( unit-trunc-Prop refl)
+                        ( ap
+                          ( quotient-sign-Set (succ-ℕ (succ-ℕ n)))
+                          ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
+                        ( eq-pair-Σ
+                          ( eq-equiv
+                            ( quotient-sign (succ-ℕ (succ-ℕ n))
+                              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                            ( raise (lsuc l) (Fin 2))
+                            ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                              ( inv-equiv
+                                ( equiv-fin-2-quotient-sign-equiv-Fin
+                                  ( succ-ℕ (succ-ℕ n))
+                                  ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                  ( star)
+                                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+                        ( eq-is-prop is-prop-type-trunc-Prop)
+                        ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( ap
+                        ( λ r →
+                          ( r) ∙
+                            ( eq-pair-Σ
+                              ( eq-pair-Σ
+                                ( eq-equiv
+                                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                                  ( raise (lsuc l) (Fin 2))
+                                  ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                    ( inv-equiv
+                                      ( equiv-fin-2-quotient-sign-equiv-Fin
+                                        ( succ-ℕ (succ-ℕ n))
+                                        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                        ( star)
+                                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                                ( eq-is-prop (is-prop-is-set (raise (lsuc l) (Fin 2)))))
+                              (eq-is-prop is-prop-type-trunc-Prop)))
+                        ( ap
+                          ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
+                          { y =
+                            pair
+                              ( pr1 (pair-eq-Σ {!ap (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n))) ?!}))
+                              {!!}}
+                          {!!})))) ∙
+                    ( {!ap (λ r → r ∙ ?) ?!} ∙
+                      {!!}))))!}))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n)))))
+          ( semigroup-Group
+            ( abstract-group-Concrete-Group
+              ( Automorphism-Group
+                ( UU-Set (lsuc l))
+                ( raise-Set (lsuc l) (Fin-Set 2))
+                ( is-one-type-UU-Set (lsuc l)))))
+          ( _)))
+          -}
 ```
