@@ -46,10 +46,10 @@ precomp-Trunc :
 precomp-Trunc f C = precomp f (type-Truncated-Type C)
 
 is-truncation :
-  {l1 l2 : Level} (l : Level) {k : 𝕋} {A : UU l1}
+  (l : Level) {l1 l2 : Level} {k : 𝕋} {A : UU l1}
   (B : Truncated-Type l2 k) → (A → type-Truncated-Type B) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-is-truncation l {k} B f =
+is-truncation l {k = k} B f =
   (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
 ```
 

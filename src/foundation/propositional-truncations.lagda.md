@@ -20,7 +20,8 @@ open import foundation.propositions using
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation.truncations using
   ( type-trunc; unit-trunc; is-trunc-type-trunc; trunc;
-    apply-dependent-universal-property-trunc)
+    apply-dependent-universal-property-trunc;
+    equiv-unit-trunc)
 open import foundation.universal-property-propositional-truncation using
   ( is-propositional-truncation; is-propositional-truncation-extension-property;
     universal-property-propositional-truncation; 
@@ -155,6 +156,17 @@ abstract
     (A → type-Prop P) → type-Prop P
   apply-universal-property-trunc-Prop t P f =
     map-universal-property-trunc-Prop P f t
+```
+
+### A proposition is equivalent to its propositional truncation
+
+```agda
+module _
+  {l : Level} (A : UU-Prop l)
+  where
+
+  equiv-unit-trunc-Prop : type-Prop A ≃ type-trunc-Prop (type-Prop A)
+  equiv-unit-trunc-Prop = equiv-unit-trunc A
 ```
 
 ### The propositional truncation is idempotent

@@ -20,7 +20,7 @@ open import foundation.equivalences using (_∘e_; inv-equiv; _≃_; id-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.mere-equivalences using (mere-equiv-Prop)
 open import foundation.propositional-truncations using
@@ -159,14 +159,14 @@ abstract
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-finite (coprod X Y) →
     is-finite X
   is-finite-left-summand =
-    functor-trunc-Prop count-left-summand
+    map-trunc-Prop count-left-summand
 
 abstract
   is-finite-right-summand :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-finite (coprod X Y) →
     is-finite Y
   is-finite-right-summand =
-    functor-trunc-Prop count-right-summand
+    map-trunc-Prop count-right-summand
 
 coprod-UU-Fin-Level :
   {l1 l2 : Level} {k l : ℕ} → UU-Fin-Level l1 k → UU-Fin-Level l2 l →

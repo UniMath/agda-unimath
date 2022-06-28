@@ -10,7 +10,7 @@ open import foundation.decidable-equality using
     has-decidable-equality-equiv; has-decidable-equality-equiv')
 open import foundation.equivalences using (_≃_; id-equiv; inv-equiv; _∘e_)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.mere-equality using (mere-eq)
 open import foundation.propositional-truncations using
   ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
@@ -149,5 +149,5 @@ module _
 abstract
   mere-eq-mere-equiv :
     {l : Level} {A B : UU l} → mere-equiv A B → mere-eq A B
-  mere-eq-mere-equiv {l} {A} {B} = functor-trunc-Prop (eq-equiv A B)
+  mere-eq-mere-equiv {l} {A} {B} = map-trunc-Prop (eq-equiv A B)
 ```

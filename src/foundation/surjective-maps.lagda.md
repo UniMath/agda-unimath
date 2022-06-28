@@ -46,9 +46,25 @@ A map `f : A → B` is surjective if all of its fibers are inhabited.
 ## Definition
 
 ```agda
+
 is-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-surjective {B = B} f = (y : B) → type-trunc-Prop (fib f y)
+
+
+_↠_ :
+  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+A ↠ B = Σ (A → B) is-surjective
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (f : A ↠ B)
+  where
+
+  map-surjection : A → B
+  map-surjection = pr1 f
+
+  is-surjective-map-surj : is-surjective map-surjection
+  is-surjective-map-surj = pr2 f
 ```
 
 ## Properties

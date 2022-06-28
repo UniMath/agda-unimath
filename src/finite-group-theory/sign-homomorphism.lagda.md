@@ -42,7 +42,7 @@ open import foundation.equivalences using
     right-unit-law-equiv; left-unit-law-equiv)
 open import foundation.equivalence-relations using (Eq-Rel; refl-Eq-Rel)
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
+open import foundation.functoriality-propositional-truncation using (map-trunc-Prop)
 open import foundation.empty-types using (ex-falso)
 open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using (Id; inv; _∙_; ap; refl; tr)
@@ -723,7 +723,7 @@ module _
     mere-equiv-Fin-2-quotient-sign-comp :
       mere-equiv (Fin 2) (quotient-sign-comp n X)
     mere-equiv-Fin-2-quotient-sign-comp =
-      functor-trunc-Prop
+      map-trunc-Prop
         ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n)
         ( has-cardinality-type-UU-Fin-Level X)
 
@@ -751,9 +751,9 @@ module _
       ( succ-ℕ (succ-ℕ n))
       ( pair
         ( type-Set X)
-        ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
+        ( map-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
   pr2 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    functor-trunc-Prop
+    map-trunc-Prop
       ( λ e →
         eq-pair-Σ
           ( eq-equiv
@@ -765,7 +765,7 @@ module _
         ( succ-ℕ (succ-ℕ n))
         ( pair
           ( type-Set X)
-          ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
+          ( map-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
         ( star))
 
   simpson-delooping-sign : (n : ℕ) →
@@ -796,7 +796,7 @@ module _
                 ( succ-ℕ (succ-ℕ n))
                 ( pair
                   ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                  ( functor-trunc-Prop
+                  ( map-trunc-Prop
                     ( λ p' →
                       ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
                         ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))

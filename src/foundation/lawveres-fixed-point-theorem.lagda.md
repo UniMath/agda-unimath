@@ -25,11 +25,11 @@ Lawvere's fixed point theorem asserts that if there is a surjective map `A → (
 abstract
   fixed-point-theorem-Lawvere :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → A → B} →
-    is-surjective f → (h : B → B) → ∃ (λ b → Id (h b) b)
+    is-surjective f → (h : B → B) → ∃ B (λ b → Id (h b) b)
   fixed-point-theorem-Lawvere {A = A} {B} {f} H h =
     apply-universal-property-trunc-Prop
       ( H g)
-      ( ∃-Prop (λ b → Id (h b) b))
+      ( ∃-Prop B (λ b → Id (h b) b))
       ( λ p → intro-∃ (f (pr1 p) (pr1 p)) (inv (htpy-eq (pr2 p) (pr1 p))))
     where
     g : A → B

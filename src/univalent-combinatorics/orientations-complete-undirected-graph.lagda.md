@@ -67,7 +67,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (htpy-eq; eq-htpy)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; inv; ap; ap-binary; _∙_; tr)
 open import foundation.injective-maps using
@@ -554,7 +554,7 @@ module _
                 ( is-finite-subtype-pointwise-difference n X
                   ( map-orientation-complete-undirected-graph-equiv X X' e d)
                   ( map-orientation-complete-undirected-graph-equiv X X' e d')))
-              ( functor-trunc-Prop
+              ( map-trunc-Prop
                 ( λ h → equiv-subtype-pointwise-difference-equiv ∘e h)
                 ( pr2
                   ( has-finite-cardinality-is-finite
@@ -3254,7 +3254,7 @@ module _
     mere-equiv-fin-2-quotient-sign :
       mere-equiv (Fin 2) (quotient-sign n X)
     mere-equiv-fin-2-quotient-sign =
-      functor-trunc-Prop
+      map-trunc-Prop
         ( equiv-fin-2-quotient-sign-equiv-Fin)
         ( has-cardinality-type-UU-Fin-Level X)
 ```

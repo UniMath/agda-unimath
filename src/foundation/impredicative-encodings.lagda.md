@@ -206,7 +206,7 @@ type-impredicative-exists-Prop P =
 
 map-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → UU-Prop l2) →
-  exists P → type-impredicative-exists-Prop P
+  exists A P → type-impredicative-exists-Prop P
 map-impredicative-exists-Prop {l1} {l2} {A} P =
   map-universal-property-trunc-Prop
     ( impredicative-exists-Prop P)
@@ -214,17 +214,17 @@ map-impredicative-exists-Prop {l1} {l2} {A} P =
 
 inv-map-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → UU-Prop l2) →
-  type-impredicative-exists-Prop P → exists P
+  type-impredicative-exists-Prop P → exists A P
 inv-map-impredicative-exists-Prop {A = A} P H =
-  H ( exists-Prop P)
+  H ( exists-Prop A P)
     ( λ x y → unit-trunc-Prop (pair x y))
 
 equiv-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → UU-Prop l2) →
-  exists P ≃ type-impredicative-exists-Prop P
-equiv-impredicative-exists-Prop P =
+  exists A P ≃ type-impredicative-exists-Prop P
+equiv-impredicative-exists-Prop {A = A} P =
   equiv-iff
-    ( exists-Prop P)
+    ( exists-Prop A P)
     ( impredicative-exists-Prop P)
     ( map-impredicative-exists-Prop P)
     ( inv-map-impredicative-exists-Prop P)

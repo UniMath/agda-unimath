@@ -497,7 +497,7 @@ module _
       
       P-Prop : (b : type-Set B) (x : type-Set X) → UU-Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
-        ∃-Prop (λ a → (Id (map-reflecting-map-Eq-Rel R f a) x) × (Id (q a) b))
+        ∃-Prop A (λ a → (Id (map-reflecting-map-Eq-Rel R f a) x) × (Id (q a) b))
 
       P : (b : type-Set B) (x : type-Set X) → UU (l1 ⊔ l3 ⊔ l)
       P b x = type-Prop (P-Prop b x)

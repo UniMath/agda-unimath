@@ -62,7 +62,7 @@ module _
 
   is-equivalence-class-Eq-Rel : (A → UU-Prop l2) → UU (l1 ⊔ lsuc l2)
   is-equivalence-class-Eq-Rel P =
-    ∃ (λ x → Id (type-Prop ∘ P) (class-Eq-Rel x))
+    ∃ A (λ x → Id (type-Prop ∘ P) (class-Eq-Rel x))
 
   large-set-quotient : UU (l1 ⊔ lsuc l2)
   large-set-quotient = im (prop-Eq-Rel R)
