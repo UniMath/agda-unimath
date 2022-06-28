@@ -13,7 +13,7 @@ open import foundation-core.equivalences using
     isretr-map-inv-is-equiv; is-equiv-map-inv-is-equiv)
 open import foundation-core.functions using (_∘_; id; precomp)
 open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (Id; refl; ap)
+open import foundation-core.identity-types using (_＝_; refl; ap)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -28,7 +28,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
   
-  htpy-eq : {f g : (x : A) → B x} → (Id f g) → (f ~ g)
+  htpy-eq : {f g : (x : A) → B x} → (f ＝ g) → (f ~ g)
   htpy-eq refl = refl-htpy
 
   FUNEXT : (f : (x : A) → B x) → UU (l1 ⊔ l2)
@@ -44,12 +44,12 @@ module _
   
   postulate funext : (f : (x : A) → B x) → FUNEXT f
 
-  equiv-funext : {f g : (x : A) → B x} → (Id f g) ≃ (f ~ g)
+  equiv-funext : {f g : (x : A) → B x} → (f ＝ g) ≃ (f ~ g)
   pr1 (equiv-funext {f = f} {g}) = htpy-eq
   pr2 (equiv-funext {f = f} {g}) = funext f g
 
   abstract
-    eq-htpy : {f g : (x : A) → B x} → (f ~ g) → Id f g
+    eq-htpy : {f g : (x : A) → B x} → (f ~ g) → f ＝ g
     eq-htpy = map-inv-is-equiv (funext _ _)
   
     issec-eq-htpy :
@@ -65,10 +65,10 @@ module _
     is-equiv-eq-htpy f g = is-equiv-map-inv-is-equiv (funext _ _)
 
     eq-htpy-refl-htpy :
-      (f : (x : A) → B x) → Id (eq-htpy (refl-htpy {f = f})) refl
+      (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
     eq-htpy-refl-htpy f = isretr-eq-htpy refl
 
-  equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ Id f g
+  equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
   pr1 (equiv-eq-htpy {f = f} {g}) = eq-htpy
   pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
 ```
@@ -77,7 +77,7 @@ module _
 square-htpy-eq :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
   ( g h : B → C) →
-  ( (λ (p : (y : B) → Id (g y) (h y)) (x : A) → p (f x)) ∘ htpy-eq) ~
+  ( (λ (p : (y : B) → g y ＝ h y) (x : A) → p (f x)) ∘ htpy-eq) ~
   ( htpy-eq ∘ (ap (precomp f C)))
 square-htpy-eq f g .g refl = refl
 ```

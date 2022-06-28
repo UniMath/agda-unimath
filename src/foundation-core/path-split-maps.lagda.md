@@ -10,16 +10,15 @@ open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb)
+open import foundation-core.equivalences using
+  ( is-equiv; is-equiv-has-inverse; is-equiv-is-coherently-invertible;
+    is-emb-is-equiv)
 open import foundation-core.functions using (_∘_)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-sec)
 open import foundation-core.identity-types using (ap; inv)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
-
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; is-equiv-is-coherently-invertible;
-    is-emb-is-equiv)
 ```
 
 ## Idea

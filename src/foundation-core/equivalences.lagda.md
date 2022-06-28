@@ -14,7 +14,7 @@ open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using
   ( _~_; refl-htpy; inv-htpy; _·r_; _·l_; _∙h_; htpy-right-whisk; nat-htpy)
 open import foundation-core.identity-types using
-  ( Id; refl; inv; _∙_; ap; ap-concat; ap-binary; ap-inv; ap-id; ap-comp;
+  ( _＝_; refl; inv; _∙_; ap; ap-concat; ap-binary; ap-inv; ap-id; ap-comp;
     inv-con; left-inv)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
@@ -534,7 +534,7 @@ module _
       ( λ {refl → left-inv (isretr-map-inv-is-equiv H x)})
 
   equiv-ap :
-    (e : A ≃ B) (x y : A) → (Id x y) ≃ (Id (map-equiv e x) (map-equiv e y))
+    (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)
   pr1 (equiv-ap e x y) = ap (map-equiv e)
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 ```

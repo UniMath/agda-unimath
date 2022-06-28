@@ -14,7 +14,7 @@ open import foundation-core.functions using (_∘_)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.identity-types using (_＝_; refl)
 open import foundation-core.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
 open import foundation-core.type-arithmetic-dependent-pair-types using
@@ -67,8 +67,8 @@ module _
 
   abstract
     subtype-identity-principle :
-      {f : (x : A) → Id a x → Eq-A x}
-      (h : (z : (Σ A P)) → Id (pair a p) z → Eq-A (pr1 z)) →
+      {f : (x : A) → a ＝ x → Eq-A x}
+      (h : (z : (Σ A P)) → (pair a p) ＝ z → Eq-A (pr1 z)) →
       ((x : A) → is-equiv (f x)) → (z : Σ A P) → is-equiv (h z)
     subtype-identity-principle {f} h H =
       fundamental-theorem-id
@@ -88,13 +88,13 @@ module _
   where
 
   map-extensionality-subtype :
-    (f : (x : A) → Id a x ≃ Eq-A x) →
-    (z : Σ A (type-Prop ∘ P)) → Id (pair a p) z → Eq-A (pr1 z)
+    (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
+    (z : Σ A (type-Prop ∘ P)) → (pair a p) ＝ z → Eq-A (pr1 z)
   map-extensionality-subtype f .(pair a p) refl = refl-A
 
   extensionality-subtype :
-    (f : (x : A) → Id a x ≃ Eq-A x) →
-    (z : Σ A (type-Prop ∘ P)) → Id (pair a p) z ≃ Eq-A (pr1 z)
+    (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
+    (z : Σ A (type-Prop ∘ P)) → (pair a p ＝ z) ≃ Eq-A (pr1 z)
   pr1 (extensionality-subtype f z) = map-extensionality-subtype f z
   pr2 (extensionality-subtype f z) =
     subtype-identity-principle

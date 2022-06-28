@@ -16,8 +16,8 @@ open import foundation-core.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation-core.homotopies using (refl-htpy; _~_)
 open import foundation.identity-types using
-  ( Id; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl; is-equiv-concat;
-    is-equiv-inv; is-equiv-tr)
+  ( _＝_; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl;
+    is-equiv-concat; is-equiv-inv; is-equiv-tr)
 open import foundation-core.universe-levels using (Level; UU)
 ```
 
@@ -30,7 +30,7 @@ In the file `foundation-core.fibers-of-a-map` we already gave one characterizati
 For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an equivalence
 
 ```md
-Id x y ≃ fib (ap f) ((pr2 x) ∙ (inv (pr2 y)))
+(x ＝ y) ≃ fib (ap f) ((pr2 x) ∙ (inv (pr2 y)))
 ```
 
 ### Proof
@@ -41,9 +41,9 @@ module _
   where
 
   fib-ap-eq-fib-fiberwise :
-    (s t : fib f b) (p : Id (pr1 s) (pr1 t)) →
-    (Id (tr (λ (a : A) → Id (f a) b) p (pr2 s)) (pr2 t)) →
-    (Id (ap f p) ((pr2 s) ∙ (inv (pr2 t))))
+    (s t : fib f b) (p : (pr1 s) ＝ (pr1 t)) →
+    ((tr (λ (a : A) → (f a) ＝ b) p (pr2 s)) ＝ (pr2 t)) →
+    (ap f p ＝ ((pr2 s) ∙ (inv (pr2 t))))
   fib-ap-eq-fib-fiberwise (pair .x' p) (pair x' refl) refl =
     inv ∘ (concat right-unit refl)
 
@@ -60,7 +60,7 @@ module _
         ( is-equiv-inv (y ∙ refl) refl)
 
   fib-ap-eq-fib :
-    (s t : fib f b) → Id s t →
+    (s t : fib f b) → s ＝ t →
     fib (ap f {x = pr1 s} {y = pr1 t}) ((pr2 s) ∙ (inv (pr2 t)))
   pr1 (fib-ap-eq-fib s .s refl) = refl
   pr2 (fib-ap-eq-fib s .s refl) = inv (right-inv (pr2 s))
@@ -85,7 +85,7 @@ module _
 
   equiv-fib-ap-eq-fib :
     (s t : fib f b) →
-    Id s t ≃ fib (ap f {x = pr1 s} {y = pr1 t}) ((pr2 s) ∙ (inv (pr2 t)))
+    (s ＝ t) ≃ fib (ap f {x = pr1 s} {y = pr1 t}) ((pr2 s) ∙ (inv (pr2 t)))
   pr1 (equiv-fib-ap-eq-fib s t) = fib-ap-eq-fib s t
   pr2 (equiv-fib-ap-eq-fib s t) = is-equiv-fib-ap-eq-fib s t
 
@@ -94,13 +94,13 @@ module _
   where
   
   eq-fib-fib-ap :
-    (q : Id (f x) (f y)) → Id (pair x q) (pair y refl) → fib (ap f {x} {y}) q
+    (q : f x ＝ f y) → (pair x q) ＝ (pair y refl) → fib (ap f {x} {y}) q
   eq-fib-fib-ap q =
     (tr (fib (ap f)) right-unit) ∘ (fib-ap-eq-fib f (pair x q) (pair y refl))
 
   abstract
     is-equiv-eq-fib-fib-ap :
-      (q : Id (f x) (f y)) → is-equiv (eq-fib-fib-ap q)
+      (q : (f x) ＝ (f y)) → is-equiv (eq-fib-fib-ap q)
     is-equiv-eq-fib-fib-ap q =
       is-equiv-comp
         ( eq-fib-fib-ap q)

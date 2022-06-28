@@ -10,13 +10,13 @@ open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl; tr)
+open import foundation-core.identity-types using (_＝_; refl; tr)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
 ## Idea
 
-An identification `Id (pair x y) (pair x' y')` in a dependent pair type `Σ A B` is equivalently described as a pair `pair α β` consisting of an identification `α : Id x x'` and an identification `β : Id (tr B α y) y'`. 
+An identification `(pair x y) ＝ (pair x' y')` in a dependent pair type `Σ A B` is equivalently described as a pair `pair α β` consisting of an identification `α : x ＝ x'` and an identification `β : (tr B α y) ＝ y'`. 
 
 ## Definition
 
@@ -27,7 +27,7 @@ module _
   where
 
   Eq-Σ : (s t : Σ A B) → UU (l1 ⊔ l2)
-  Eq-Σ s t = Σ (Id (pr1 s) (pr1 t)) (λ α → Id (tr B α (pr2 s)) (pr2 t))
+  Eq-Σ s t = Σ (pr1 s ＝ pr1 t) (λ α → tr B α (pr2 s) ＝ pr2 t)
 ```
 
 ## Properties
@@ -39,15 +39,15 @@ module _
   pr1 (refl-Eq-Σ (pair a b)) = refl
   pr2 (refl-Eq-Σ (pair a b)) = refl
 
-  pair-eq-Σ : {s t : Σ A B} → Id s t → Eq-Σ s t
+  pair-eq-Σ : {s t : Σ A B} → s ＝ t → Eq-Σ s t
   pair-eq-Σ {s} refl = refl-Eq-Σ s
 
   eq-pair-Σ :
     {s t : Σ A B} →
-    (α : Id (pr1 s) (pr1 t)) → Id (tr B α (pr2 s)) (pr2 t) → Id s t
+    (α : pr1 s ＝ pr1 t) → tr B α (pr2 s) ＝ pr2 t → s ＝ t
   eq-pair-Σ {pair x y} {pair .x .y} refl refl = refl
 
-  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → Id s t
+  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' (pair α β) = eq-pair-Σ α β
 
   isretr-pair-eq-Σ :
@@ -67,7 +67,7 @@ module _
         ( issec-pair-eq-Σ s t)
         ( isretr-pair-eq-Σ s t)
 
-  equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ Id s t
+  equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ (s ＝ t)
   equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
 
   abstract
@@ -78,9 +78,9 @@ module _
         ( isretr-pair-eq-Σ s t)
         ( issec-pair-eq-Σ s t)
 
-  equiv-pair-eq-Σ : (s t : Σ A B) → Id s t ≃ Eq-Σ s t
+  equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
   equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
 
-  η-pair : (t : Σ A B) → Id (pair (pr1 t) (pr2 t)) t
+  η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
   η-pair t = eq-pair-Σ refl refl
 ```

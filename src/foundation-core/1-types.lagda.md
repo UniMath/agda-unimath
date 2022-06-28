@@ -6,7 +6,7 @@
 module foundation-core.1-types where
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.identity-types using (Id)
+open import foundation-core.identity-types using (_＝_)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.sets using (UU-Set)
 open import foundation-core.truncated-types using
@@ -41,7 +41,7 @@ abstract
 
 ```agda
 Id-Set : {l : Level} (X : UU-1-Type l) (x y : type-1-Type X) → UU-Set l
-pr1 (Id-Set X x y) = Id x y
+pr1 (Id-Set X x y) = (x ＝ y)
 pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
 ```
 

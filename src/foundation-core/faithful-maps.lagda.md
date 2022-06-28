@@ -18,7 +18,7 @@ open import foundation-core.functions using (id; _∘_)
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; map-Σ-map-base; map-Σ)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; ap)
+open import foundation-core.identity-types using (_＝_; ap)
 open import foundation-core.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation-core.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
@@ -58,7 +58,7 @@ module _
 
   emb-ap-faithful-map :
     (f : faithful-map A B) {x y : A} →
-    Id x y ↪ Id (map-faithful-map f x) (map-faithful-map f y)
+    (x ＝ y) ↪ (map-faithful-map f x ＝ map-faithful-map f y)
   pr1 (emb-ap-faithful-map f {x} {y}) = ap (map-faithful-map f)
   pr2 (emb-ap-faithful-map f {x} {y}) = is-faithful-map-faithful-map f x y
 
@@ -76,7 +76,7 @@ module _
   pr1 (faithful-map-equiv e) = map-equiv e
   pr2 (faithful-map-equiv e) = is-faithful-is-equiv (is-equiv-map-equiv e)
 
-  emb-ap : (f : A ↪ B) (x y : A) → Id x y ↪ Id (map-emb f x) (map-emb f y)
+  emb-ap : (f : A ↪ B) (x y : A) → (x ＝ y) ↪ (map-emb f x ＝ map-emb f y)
   pr1 (emb-ap f x y) = ap (map-emb f) {x} {y}
   pr2 (emb-ap f x y) = is-faithful-is-emb (is-emb-map-emb f) x y
 ```

@@ -14,7 +14,7 @@ open import foundation-core.equivalences using
     is-equiv-map-inv-is-equiv; is-equiv-has-inverse)
 open import foundation-core.function-extensionality using (funext)
 open import foundation-core.identity-types using
-  ( Id; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
+  ( _＝_; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
 open import foundation-core.retractions using (_retract-of_)
 open import foundation-core.universe-levels using (Level; UU)
 ```
@@ -28,7 +28,7 @@ Contractible types are types that have, up to identification, exactly one elemen
 ```agda
 is-contr :
   {l : Level} → UU l → UU l
-is-contr A = Σ A (λ a → (x : A) → Id a x)
+is-contr A = Σ A (λ a → (x : A) → a ＝ x)
 
 abstract
   center :
@@ -36,22 +36,22 @@ abstract
   center (pair c is-contr-A) = c
   
 eq-is-contr' :
-  {l : Level} {A : UU l} → is-contr A → (x y : A) → Id x y
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → x ＝ y
 eq-is-contr' (pair c C) x y = (inv (C x)) ∙ (C y)
 
 eq-is-contr :
-  {l : Level} {A : UU l} → is-contr A → {x y : A} → Id x y
+  {l : Level} {A : UU l} → is-contr A → {x y : A} → x ＝ y
 eq-is-contr C {x} {y} = eq-is-contr' C x y
 
 abstract
   contraction :
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
-    (x : A) → Id (center is-contr-A) x
+    (x : A) → (center is-contr-A) ＝ x
   contraction C x = eq-is-contr C
   
   coh-contraction :
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
-    Id (contraction is-contr-A (center is-contr-A)) refl
+    (contraction is-contr-A (center is-contr-A)) ＝ refl
   coh-contraction (pair c C) = left-inv (C c)
 ```
 
@@ -67,13 +67,13 @@ module _
   where
 
   abstract
-    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → Id a x))
+    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
     pr1 (pr1 (is-contr-total-path a)) = a
     pr2 (pr1 (is-contr-total-path a)) = refl
     pr2 (is-contr-total-path a) (pair .a refl) = refl
 
   abstract
-    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → Id x a))
+    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
     pr1 (pr1 (is-contr-total-path' a)) = a
     pr2 (pr1 (is-contr-total-path' a)) = refl
     pr2 (is-contr-total-path' a) (pair .a refl) = refl
@@ -230,7 +230,7 @@ module _
 
 ```agda
 is-prop-is-contr :
-  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (Id x y)
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (x ＝ y)
 pr1 (is-prop-is-contr H x y) = eq-is-contr H
 pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
 ```
@@ -289,6 +289,6 @@ module _
         ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))
 
   abstract
-    is-property-is-contr : (H K : is-contr A) → is-contr (Id H K)
+    is-property-is-contr : (H K : is-contr A) → is-contr (H ＝ K)
     is-property-is-contr H = is-prop-is-contr (is-contr-is-contr H) H
 ```
