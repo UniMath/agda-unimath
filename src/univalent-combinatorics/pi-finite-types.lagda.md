@@ -49,7 +49,7 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
 open import foundation.functoriality-set-truncation using
   ( equiv-trunc-Set; is-surjective-map-trunc-Set; map-trunc-Set;
-    equiv-trunc-im-Set; inclusion-trunc-im-Set; htpy-map-trunc-Set;
+    equiv-trunc-im-Set; inclusion-trunc-im-Set; naturality-unit-trunc-Set;
     is-emb-inclusion-trunc-im-Set)
 open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·r_)
 open import foundation.identity-types using (Id; tr; ap; refl; inv; _∙_)
@@ -883,7 +883,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
         ( (unit-trunc-Set ∘ f) ∘ inl)
         ( inclusion-trunc-im-Set (f ∘ inl))
         ( i)
-        ( ( inv-htpy (htpy-map-trunc-Set (inclusion-im (f ∘ inl)))) ·r
+        ( ( inv-htpy (naturality-unit-trunc-Set (inclusion-im (f ∘ inl)))) ·r
           ( map-unit-im (f ∘ inl)))
         ( is-emb-inclusion-trunc-im-Set (f ∘ inl))
         ( is-emb-comp'

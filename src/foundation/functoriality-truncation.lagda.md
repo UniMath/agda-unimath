@@ -1,4 +1,6 @@
-# Functoriality of truncations
+---
+title: Functoriality of truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -51,10 +53,10 @@ map-trunc k f =
 ### Truncations of homotopic maps are homotopic
 
 ```agda
-htpy-map-trunc :
+naturality-unit-trunc :
   { l1 l2 : Level} {A : UU l1} {B : UU l2} (k : 𝕋) (f : A → B) →
   ( (map-trunc k f) ∘ unit-trunc) ~ (unit-trunc ∘ f)
-htpy-map-trunc k f =
+naturality-unit-trunc k f =
   pr2 (center (unique-map-trunc k f))
 
 htpy-uniqueness-map-trunc :
@@ -73,7 +75,7 @@ htpy-trunc {k = k} {f} {g} H =
     ( k)
     ( f)
     ( map-trunc k g)
-    ( htpy-map-trunc k g ∙h
+    ( naturality-unit-trunc k g ∙h
       inv-htpy (unit-trunc ·l H))
 ```
 
@@ -98,8 +100,8 @@ comp-map-trunc k g f =
   htpy-uniqueness-map-trunc k
     ( g ∘ f)
     ( (map-trunc k g) ∘ (map-trunc k f))
-    ( ( (map-trunc k g) ·l (htpy-map-trunc k f)) ∙h
-      ( ( htpy-map-trunc k g) ·r f))
+    ( ( (map-trunc k g) ·l (naturality-unit-trunc k f)) ∙h
+      ( ( naturality-unit-trunc k g) ·r f))
 ```
 
 ### The functorial action of truncations preserves equivalences
