@@ -20,7 +20,8 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types using
+  ( _＝_; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
@@ -44,7 +45,7 @@ mul-ℕ' : ℕ → ℕ → ℕ
 mul-ℕ' x y = mul-ℕ y x
 
 ap-mul-ℕ :
-  {x y x' y' : ℕ} → Id x x' → Id y y' → Id (mul-ℕ x y) (mul-ℕ x' y')
+  {x y x' y' : ℕ} → x ＝ x' → y ＝ y' → mul-ℕ x y ＝ mul-ℕ x' y'
 ap-mul-ℕ p q = ap-binary mul-ℕ p q
 
 double-ℕ : ℕ → ℕ
@@ -65,33 +66,33 @@ cube-ℕ x = mul-ℕ (square-ℕ x) x
 ```agda
 abstract
   left-zero-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ zero-ℕ x) zero-ℕ
+    (x : ℕ) → mul-ℕ zero-ℕ x ＝ zero-ℕ
   left-zero-law-mul-ℕ x = refl
 
   right-zero-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ x zero-ℕ) zero-ℕ
+    (x : ℕ) → mul-ℕ x zero-ℕ ＝ zero-ℕ
   right-zero-law-mul-ℕ zero-ℕ = refl
   right-zero-law-mul-ℕ (succ-ℕ x) =
     ( right-unit-law-add-ℕ (mul-ℕ x zero-ℕ)) ∙ (right-zero-law-mul-ℕ x)
 
 abstract
   right-unit-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ x 1) x
+    (x : ℕ) → mul-ℕ x 1 ＝ x
   right-unit-law-mul-ℕ zero-ℕ = refl
   right-unit-law-mul-ℕ (succ-ℕ x) = ap succ-ℕ (right-unit-law-mul-ℕ x)
 
   left-unit-law-mul-ℕ :
-    (x : ℕ) → Id (mul-ℕ 1 x) x
+    (x : ℕ) → mul-ℕ 1 x ＝ x
   left-unit-law-mul-ℕ zero-ℕ = refl
   left-unit-law-mul-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-mul-ℕ x)
 
 abstract
   left-successor-law-mul-ℕ :
-    (x y : ℕ) → Id (mul-ℕ (succ-ℕ x) y) (add-ℕ (mul-ℕ x y) y)
+    (x y : ℕ) → mul-ℕ (succ-ℕ x) y ＝ add-ℕ (mul-ℕ x y) y
   left-successor-law-mul-ℕ x y = refl
 
   right-successor-law-mul-ℕ :
-    (x y : ℕ) → Id (mul-ℕ x (succ-ℕ y)) (add-ℕ x (mul-ℕ x y))
+    (x y : ℕ) → mul-ℕ x (succ-ℕ y) ＝ add-ℕ x (mul-ℕ x y)
   right-successor-law-mul-ℕ zero-ℕ y = refl
   right-successor-law-mul-ℕ (succ-ℕ x) y =
     ( ( ap (λ t → succ-ℕ (add-ℕ t y)) (right-successor-law-mul-ℕ x y)) ∙
@@ -100,14 +101,14 @@ abstract
 
 square-succ-ℕ :
   (k : ℕ) →
-  Id (square-ℕ (succ-ℕ k)) (succ-ℕ (mul-ℕ (succ-ℕ (succ-ℕ k)) k))
+  square-ℕ (succ-ℕ k) ＝ succ-ℕ (mul-ℕ (succ-ℕ (succ-ℕ k)) k)
 square-succ-ℕ k =
   ( right-successor-law-mul-ℕ (succ-ℕ k) k) ∙
   ( commutative-add-ℕ (succ-ℕ k) (mul-ℕ (succ-ℕ k) k))
 
 abstract
   commutative-mul-ℕ :
-    (x y : ℕ) → Id (mul-ℕ x y) (mul-ℕ y x)
+    (x y : ℕ) → mul-ℕ x y ＝ mul-ℕ y x
   commutative-mul-ℕ zero-ℕ y = inv (right-zero-law-mul-ℕ y)
   commutative-mul-ℕ (succ-ℕ x) y =
     ( commutative-add-ℕ (mul-ℕ x y) y) ∙ 
@@ -116,7 +117,7 @@ abstract
 
 abstract
   left-distributive-mul-add-ℕ :
-    (x y z : ℕ) → Id (mul-ℕ x (add-ℕ y z)) (add-ℕ (mul-ℕ x y) (mul-ℕ x z))
+    (x y z : ℕ) → mul-ℕ x (add-ℕ y z) ＝ add-ℕ (mul-ℕ x y) (mul-ℕ x z)
   left-distributive-mul-add-ℕ zero-ℕ y z = refl
   left-distributive-mul-add-ℕ (succ-ℕ x) y z =
     ( left-successor-law-mul-ℕ x (add-ℕ y z)) ∙ 
@@ -130,7 +131,7 @@ abstract
 
 abstract
   right-distributive-mul-add-ℕ :
-    (x y z : ℕ) → Id (mul-ℕ (add-ℕ x y) z) (add-ℕ (mul-ℕ x z) (mul-ℕ y z))
+    (x y z : ℕ) → mul-ℕ (add-ℕ x y) z ＝ add-ℕ (mul-ℕ x z) (mul-ℕ y z)
   right-distributive-mul-add-ℕ x y z =
     ( commutative-mul-ℕ (add-ℕ x y) z) ∙ 
     ( ( left-distributive-mul-add-ℕ z x y) ∙ 
@@ -139,20 +140,20 @@ abstract
 
 abstract
   associative-mul-ℕ :
-    (x y z : ℕ) → Id (mul-ℕ (mul-ℕ x y) z) (mul-ℕ x (mul-ℕ y z))
+    (x y z : ℕ) → mul-ℕ (mul-ℕ x y) z ＝ mul-ℕ x (mul-ℕ y z)
   associative-mul-ℕ zero-ℕ y z = refl
   associative-mul-ℕ (succ-ℕ x) y z =
     ( right-distributive-mul-add-ℕ (mul-ℕ x y) y z) ∙ 
     ( ap (add-ℕ' (mul-ℕ y z)) (associative-mul-ℕ x y z))
 
 left-two-law-mul-ℕ :
-  (x : ℕ) → Id (mul-ℕ 2 x) (add-ℕ x x)
+  (x : ℕ) → mul-ℕ 2 x ＝ add-ℕ x x
 left-two-law-mul-ℕ x =
   ( left-successor-law-mul-ℕ 1 x) ∙
   ( ap (add-ℕ' x) (left-unit-law-mul-ℕ x))
 
 right-two-law-mul-ℕ :
-  (x : ℕ) → Id (mul-ℕ x 2) (add-ℕ x x)
+  (x : ℕ) → mul-ℕ x 2 ＝ add-ℕ x x
 right-two-law-mul-ℕ x =
   ( right-successor-law-mul-ℕ x 1) ∙
   ( ap (add-ℕ x) (right-unit-law-mul-ℕ x))
@@ -216,12 +217,12 @@ is-nonzero-right-factor-mul-ℕ x .zero-ℕ H refl = H (right-zero-law-mul-ℕ x
 -- We conclude that y = 1 if (x+1)y = x+1
 
 is-one-is-right-unit-mul-ℕ :
-  (x y : ℕ) → Id (mul-ℕ (succ-ℕ x) y) (succ-ℕ x) → is-one-ℕ y
+  (x y : ℕ) → mul-ℕ (succ-ℕ x) y ＝ succ-ℕ x → is-one-ℕ y
 is-one-is-right-unit-mul-ℕ x y p =
   is-injective-mul-succ-ℕ x (p ∙ inv (right-unit-law-mul-ℕ (succ-ℕ x)))
 
 is-one-is-left-unit-mul-ℕ :
-  (x y : ℕ) → Id (mul-ℕ x (succ-ℕ y)) (succ-ℕ y) → is-one-ℕ x
+  (x y : ℕ) → mul-ℕ x (succ-ℕ y) ＝ succ-ℕ y → is-one-ℕ x
 is-one-is-left-unit-mul-ℕ x y p =
   is-injective-mul-succ-ℕ' y (p ∙ inv (left-unit-law-mul-ℕ (succ-ℕ y)))
 
@@ -242,7 +243,7 @@ is-one-left-is-one-mul-ℕ x y p =
   is-one-right-is-one-mul-ℕ y x (commutative-mul-ℕ y x ∙ p)
 
 neq-mul-ℕ :
-  (m n : ℕ) → ¬ (Id (succ-ℕ m) (mul-ℕ (succ-ℕ m) (succ-ℕ (succ-ℕ n))))
+  (m n : ℕ) → ¬ (succ-ℕ m ＝ mul-ℕ (succ-ℕ m) (succ-ℕ (succ-ℕ n)))
 neq-mul-ℕ m n p =
   neq-add-ℕ
     ( succ-ℕ m)

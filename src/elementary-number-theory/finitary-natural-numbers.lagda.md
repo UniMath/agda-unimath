@@ -25,7 +25,7 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair)
 open import foundation.empty-types using (is-empty; ex-falso)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
@@ -180,7 +180,7 @@ inv-convert-based-ℕ k (succ-ℕ n) =
 
 convert-based-succ-based-ℕ :
   (k : ℕ) (x : based-ℕ k) →
-  Id (convert-based-ℕ k (succ-based-ℕ k x)) (succ-ℕ (convert-based-ℕ k x))
+  convert-based-ℕ k (succ-based-ℕ k x) ＝ succ-ℕ (convert-based-ℕ k x)
 convert-based-succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl x)) =
   nat-succ-Fin x
 convert-based-succ-based-ℕ
@@ -209,7 +209,7 @@ convert-based-succ-based-ℕ
         ( mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
 
 issec-inv-convert-based-ℕ :
-  (k n : ℕ) → Id (convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) n
+  (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n
 issec-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
 issec-inv-convert-based-ℕ k (succ-ℕ n) =
   ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ  k n)) ∙
@@ -217,7 +217,7 @@ issec-inv-convert-based-ℕ k (succ-ℕ n) =
 
 isretr-inv-convert-based-ℕ :
   (k : ℕ) (x : based-ℕ (succ-ℕ k)) →
-  Id (inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x)) x
+  inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x) ＝ x
 isretr-inv-convert-based-ℕ k x =
   is-injective-convert-based-ℕ
     ( succ-ℕ k)

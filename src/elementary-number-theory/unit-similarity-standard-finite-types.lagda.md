@@ -20,7 +20,7 @@ open import elementary-number-theory.unit-elements-standard-finite-types using
   ( unit-Fin; one-unit-Fin; inv-unit-Fin; mul-unit-Fin)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; ap; inv; _∙_)
+open import foundation.identity-types using (_＝_; ap; inv; _∙_)
 open import foundation.universe-levels using (UU; lzero)
 
 open import univalent-combinatorics.standard-finite-types using
@@ -36,7 +36,7 @@ Two elements `x y : Fin k` are said to be unit similar if there is a unit elemen
 ```agda
 sim-unit-Fin :
   {k : ℕ} → Fin k → Fin k → UU lzero
-sim-unit-Fin {k} x y = Σ (unit-Fin k) (λ u → Id (mul-Fin (pr1 u) x) y)
+sim-unit-Fin {k} x y = Σ (unit-Fin k) (λ u → mul-Fin (pr1 u) x ＝ y)
 
 refl-sim-unit-Fin :
   {k : ℕ} (x : Fin k) → sim-unit-Fin x x

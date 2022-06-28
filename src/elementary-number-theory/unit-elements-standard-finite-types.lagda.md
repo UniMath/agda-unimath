@@ -22,7 +22,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_∙_; inv; ap; Id)
+open import foundation.identity-types using (_∙_; inv; ap)
 open import foundation.universe-levels using (UU; lzero)
 
 open import univalent-combinatorics.standard-finite-types using

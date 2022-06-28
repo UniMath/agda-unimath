@@ -21,7 +21,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (map-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.homotopies using (_~_; _·r_)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU)
 
@@ -71,7 +71,7 @@ bounded-sum-ℕ (succ-ℕ u) f =
 ```agda
 abstract
   htpy-sum-Fin-ℕ :
-    {k : ℕ} {f g : Fin k → ℕ} (H : f ~ g) → Id (sum-Fin-ℕ f) (sum-Fin-ℕ g)
+    {k : ℕ} {f g : Fin k → ℕ} (H : f ~ g) → sum-Fin-ℕ f ＝ sum-Fin-ℕ g
   htpy-sum-Fin-ℕ {zero-ℕ} H = refl
   htpy-sum-Fin-ℕ {succ-ℕ k} H =
     ap-add-ℕ
@@ -81,7 +81,7 @@ abstract
 abstract
   htpy-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) {f g : A → ℕ} (H : f ~ g) →
-    Id (sum-count-ℕ e f) (sum-count-ℕ e g)
+    sum-count-ℕ e f ＝ sum-count-ℕ e g
   htpy-sum-count-ℕ (pair k e) H = htpy-sum-Fin-ℕ (H ·r (map-equiv e))
 ```
 
@@ -90,14 +90,14 @@ abstract
 ```agda
 abstract
   constant-sum-Fin-ℕ :
-    (m n : ℕ) → Id (sum-Fin-ℕ (const (Fin m) ℕ n)) (mul-ℕ m n)
+    (m n : ℕ) → sum-Fin-ℕ (const (Fin m) ℕ n) ＝ mul-ℕ m n
   constant-sum-Fin-ℕ zero-ℕ n = refl
   constant-sum-Fin-ℕ (succ-ℕ m) n = ap (add-ℕ' n) (constant-sum-Fin-ℕ m n)
 
 abstract
   constant-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) (n : ℕ) →
-    Id (sum-count-ℕ e (const A ℕ n)) (mul-ℕ (number-of-elements-count e) n)
+    sum-count-ℕ e (const A ℕ n) ＝ mul-ℕ (number-of-elements-count e) n
   constant-sum-count-ℕ (pair m e) n = constant-sum-Fin-ℕ m n
 ```
 

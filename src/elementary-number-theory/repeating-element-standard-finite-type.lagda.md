@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.coproduct-types using
   ( coprod; inl; inr; is-injective-inl)
 open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (Id; ap; refl; inv)
+open import foundation.identity-types using (_＝_; ap; refl; inv)
 open import foundation.negation using (¬)
 open import foundation.unit-type using (star)
 
@@ -32,8 +32,7 @@ repeat-Fin {succ-ℕ k} (inr star) (inr star) = inr star
 abstract
   is-almost-injective-repeat-Fin :
     {k : ℕ} (x : Fin k) {y z : Fin (succ-ℕ k)} →
-    ¬ (Id (inl x) y) → ¬ (Id (inl x) z) →
-    Id (repeat-Fin x y) (repeat-Fin x z) → Id y z
+    ¬ (inl x ＝ y) → ¬ (inl x ＝ z) → repeat-Fin x y ＝ repeat-Fin x z → y ＝ z
   is-almost-injective-repeat-Fin {succ-ℕ k} (inl x) {inl y} {inl z} f g p =
     ap ( inl)
        ( is-almost-injective-repeat-Fin x

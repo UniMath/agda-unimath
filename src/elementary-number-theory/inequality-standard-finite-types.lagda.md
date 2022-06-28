@@ -14,7 +14,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
@@ -54,7 +54,7 @@ refl-leq-Fin {succ-ℕ k} (inl x) = refl-leq-Fin x
 refl-leq-Fin {succ-ℕ k} (inr star) = star
 
 antisymmetric-leq-Fin :
-  {k : ℕ} (x y : Fin k) → leq-Fin x y → leq-Fin y x → Id x y
+  {k : ℕ} (x y : Fin k) → leq-Fin x y → leq-Fin y x → x ＝ y
 antisymmetric-leq-Fin {succ-ℕ k} (inl x) (inl y) H K =
   ap inl (antisymmetric-leq-Fin x y H K)
 antisymmetric-leq-Fin {succ-ℕ k} (inr star) (inr star) H K = refl
@@ -69,7 +69,7 @@ transitive-leq-Fin {succ-ℕ k} (inr star) (inr star) (inr star) H K = star
 
 concatenate-eq-leq-eq-Fin :
   {k : ℕ} {x1 x2 x3 x4 : Fin k} →
-  Id x1 x2 → leq-Fin x2 x3 → Id x3 x4 → leq-Fin x1 x4
+  x1 ＝ x2 → leq-Fin x2 x3 → x3 ＝ x4 → leq-Fin x1 x4
 concatenate-eq-leq-eq-Fin refl H refl = H
 
 leq-succ-Fin :

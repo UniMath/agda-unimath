@@ -38,7 +38,8 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types using
+  ( _＝_; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)
 open import foundation.split-surjective-maps using (is-split-surjective)
 open import foundation.unit-type using (star)
@@ -104,7 +105,7 @@ We show that if mod-succ-ℕ k x = mod-succ-ℕ k y, then x and y must be congru
 
 ```agda
 cong-eq-mod-succ-ℕ :
-  (k x y : ℕ) → Id (mod-succ-ℕ k x) (mod-succ-ℕ k y) → cong-ℕ (succ-ℕ k) x y
+  (k x y : ℕ) → mod-succ-ℕ k x ＝ mod-succ-ℕ k y → cong-ℕ (succ-ℕ k) x y
 cong-eq-mod-succ-ℕ k x y p =
   concatenate-cong-eq-cong-ℕ {succ-ℕ k} {x}
     ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (mod-succ-ℕ k x)) x
@@ -115,7 +116,7 @@ cong-eq-mod-succ-ℕ k x y p =
 
 ```agda
 eq-mod-succ-cong-ℕ :
-  (k x y : ℕ) → cong-ℕ (succ-ℕ k) x y → Id (mod-succ-ℕ k x) (mod-succ-ℕ k y)
+  (k x y : ℕ) → cong-ℕ (succ-ℕ k) x y → mod-succ-ℕ k x ＝ mod-succ-ℕ k y
 eq-mod-succ-cong-ℕ k x y H =
   eq-cong-nat-Fin
     ( succ-ℕ k)
@@ -151,7 +152,7 @@ div-is-zero-mod-succ-ℕ k x p =
 
 ```agda
 issec-nat-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mod-succ-ℕ k (nat-Fin x)) x
+  {k : ℕ} (x : Fin (succ-ℕ k)) → mod-succ-ℕ k (nat-Fin x) ＝ x
 issec-nat-Fin {k} x =
   is-injective-nat-Fin
     ( eq-cong-le-ℕ
@@ -181,7 +182,7 @@ add-Fin' x y = add-Fin y x
 
 ap-add-Fin :
   {k : ℕ} {x y x' y' : Fin k} →
-  Id x x' → Id y y' → Id (add-Fin x y) (add-Fin x' y')
+  x ＝ x' → y ＝ y' → add-Fin x y ＝ add-Fin x' y'
 ap-add-Fin p q = ap-binary add-Fin p q
 
 cong-add-Fin :
@@ -225,7 +226,7 @@ dist-Fin' x y = dist-Fin y x
 
 ap-dist-Fin :
   {k : ℕ} {x y x' y' : Fin k} →
-  Id x x' → Id y y' → Id (dist-Fin x y) (dist-Fin x' y')
+  x ＝ x' → y ＝ y' → dist-Fin x y ＝ dist-Fin x' y'
 ap-dist-Fin p q = ap-binary dist-Fin p q
 
 cong-dist-Fin :
@@ -261,7 +262,7 @@ congruence-add-ℕ k {x} {y} {x'} {y'} H K =
 
 mod-succ-add-ℕ :
   (k x y : ℕ) →
-  Id (mod-succ-ℕ k (add-ℕ x y)) (add-Fin (mod-succ-ℕ k x) (mod-succ-ℕ k y))
+  mod-succ-ℕ k (add-ℕ x y) ＝ add-Fin (mod-succ-ℕ k x) (mod-succ-ℕ k y)
 mod-succ-add-ℕ k x y =
   eq-mod-succ-cong-ℕ k
     ( add-ℕ x y)
@@ -281,13 +282,13 @@ mod-succ-add-ℕ k x y =
 ## Laws for addition on Fin k
 
 ```agda
-commutative-add-Fin : {k : ℕ} (x y : Fin k) → Id (add-Fin x y) (add-Fin y x)
+commutative-add-Fin : {k : ℕ} (x y : Fin k) → add-Fin x y ＝ add-Fin y x
 commutative-add-Fin {succ-ℕ k} x y =
   ap (mod-succ-ℕ k) (commutative-add-ℕ (nat-Fin x) (nat-Fin y))
 
 associative-add-Fin :
   {k : ℕ} (x y z : Fin k) →
-  Id (add-Fin (add-Fin x y) z) (add-Fin x (add-Fin y z))
+  add-Fin (add-Fin x y) z ＝ add-Fin x (add-Fin y z)
 associative-add-Fin {succ-ℕ k} x y z =
   eq-mod-succ-cong-ℕ k
     ( add-ℕ (nat-Fin (add-Fin x y)) (nat-Fin z))
@@ -320,7 +321,7 @@ associative-add-Fin {succ-ℕ k} x y z =
           ( cong-add-Fin y z))))
 
 right-unit-law-add-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (add-Fin x zero-Fin) x
+  {k : ℕ} (x : Fin (succ-ℕ k)) → add-Fin x zero-Fin ＝ x
 right-unit-law-add-Fin {k} x =
   ( eq-mod-succ-cong-ℕ k
     ( add-ℕ (nat-Fin x) (nat-Fin {succ-ℕ k} zero-Fin))
@@ -336,7 +337,7 @@ right-unit-law-add-Fin {k} x =
   ( issec-nat-Fin x)
 
 left-unit-law-add-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (add-Fin zero-Fin x) x
+  {k : ℕ} (x : Fin (succ-ℕ k)) → add-Fin zero-Fin x ＝ x
 left-unit-law-add-Fin {k} x =
   ( commutative-add-Fin zero-Fin x) ∙
   ( right-unit-law-add-Fin x)
@@ -370,7 +371,7 @@ right-inverse-law-add-Fin x =
 
 ```agda
 is-add-one-succ-Fin' :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (succ-Fin x) (add-Fin x one-Fin)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → succ-Fin x ＝ add-Fin x one-Fin
 is-add-one-succ-Fin' {zero-ℕ} (inr star) = refl
 is-add-one-succ-Fin' {succ-ℕ k} x =
   ( ap succ-Fin (inv (issec-nat-Fin x))) ∙
@@ -378,20 +379,20 @@ is-add-one-succ-Fin' {succ-ℕ k} x =
        ( ap (add-ℕ (nat-Fin x)) (inv (is-one-nat-one-Fin (succ-ℕ k)))))
 
 is-add-one-succ-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (succ-Fin x) (add-Fin one-Fin x)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → succ-Fin x ＝ add-Fin one-Fin x
 is-add-one-succ-Fin x = is-add-one-succ-Fin' x ∙ commutative-add-Fin x one-Fin
 
 -- We conclude the successor laws for addition on Fin k
 
 right-successor-law-add-Fin :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin x (succ-Fin y)) (succ-Fin (add-Fin x y))
+  {k : ℕ} (x y : Fin k) → add-Fin x (succ-Fin y) ＝ succ-Fin (add-Fin x y)
 right-successor-law-add-Fin {succ-ℕ k} x y =
   ( ap (add-Fin x) (is-add-one-succ-Fin' y)) ∙
   ( ( inv (associative-add-Fin x y one-Fin)) ∙
     ( inv (is-add-one-succ-Fin' (add-Fin x y))))
 
 left-successor-law-add-Fin :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin (succ-Fin x) y) (succ-Fin (add-Fin x y))
+  {k : ℕ} (x y : Fin k) → add-Fin (succ-Fin x) y ＝ succ-Fin (add-Fin x y)
 left-successor-law-add-Fin x y =
   commutative-add-Fin (succ-Fin x) y ∙
   ( ( right-successor-law-add-Fin y x) ∙
@@ -412,8 +413,7 @@ mul-Fin' :
 mul-Fin' {k} x y = mul-Fin y x
 
 ap-mul-Fin :
-  {k : ℕ} {x y x' y' : Fin k} →
-  Id x x' → Id y y' → Id (mul-Fin x y) (mul-Fin x' y')
+  {k : ℕ} {x y x' y' : Fin k} → x ＝ x' → y ＝ y' → mul-Fin x y ＝ mul-Fin x' y'
 ap-mul-Fin p q = ap-binary mul-Fin p q
 
 cong-mul-Fin :
@@ -428,7 +428,7 @@ cong-mul-Fin {succ-ℕ k} x y =
 ```agda
 associative-mul-Fin :
   {k : ℕ} (x y z : Fin k) →
-  Id (mul-Fin (mul-Fin x y) z) (mul-Fin x (mul-Fin y z))
+  mul-Fin (mul-Fin x y) z ＝ mul-Fin x (mul-Fin y z)
 associative-mul-Fin {succ-ℕ k} x y z =
   eq-mod-succ-cong-ℕ k
     ( mul-ℕ (nat-Fin (mul-Fin x y)) (nat-Fin z))
@@ -457,7 +457,7 @@ associative-mul-Fin {succ-ℕ k} x y z =
           ( cong-mul-Fin y z))))
 
 commutative-mul-Fin :
-  {k : ℕ} (x y : Fin k) → Id (mul-Fin x y) (mul-Fin y x)
+  {k : ℕ} (x y : Fin k) → mul-Fin x y ＝ mul-Fin y x
 commutative-mul-Fin {succ-ℕ k} x y =
   eq-mod-succ-cong-ℕ k
     ( mul-ℕ (nat-Fin x) (nat-Fin y))
@@ -467,7 +467,7 @@ commutative-mul-Fin {succ-ℕ k} x y =
       ( commutative-mul-ℕ (nat-Fin x) (nat-Fin y)))
 
 left-unit-law-mul-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mul-Fin one-Fin x) x
+  {k : ℕ} (x : Fin (succ-ℕ k)) → mul-Fin one-Fin x ＝ x
 left-unit-law-mul-Fin {zero-ℕ} (inr star) = refl
 left-unit-law-mul-Fin {succ-ℕ k} x =
   ( eq-mod-succ-cong-ℕ (succ-ℕ k)
@@ -481,13 +481,13 @@ left-unit-law-mul-Fin {succ-ℕ k} x =
   ( issec-nat-Fin x)
 
 right-unit-law-mul-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mul-Fin x one-Fin) x
+  {k : ℕ} (x : Fin (succ-ℕ k)) → mul-Fin x one-Fin ＝ x
 right-unit-law-mul-Fin x =
   ( commutative-mul-Fin x one-Fin) ∙
   ( left-unit-law-mul-Fin x)
 
 left-zero-law-mul-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mul-Fin zero-Fin x) zero-Fin
+  {k : ℕ} (x : Fin (succ-ℕ k)) → mul-Fin zero-Fin x ＝ zero-Fin
 left-zero-law-mul-Fin {k} x =
   ( eq-mod-succ-cong-ℕ k
     ( mul-ℕ (nat-Fin (zero-Fin {k})) (nat-Fin x))
@@ -501,14 +501,14 @@ left-zero-law-mul-Fin {k} x =
   ( issec-nat-Fin (zero-Fin {k}))
 
 right-zero-law-mul-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mul-Fin x zero-Fin) zero-Fin
+  {k : ℕ} (x : Fin (succ-ℕ k)) → mul-Fin x zero-Fin ＝ zero-Fin
 right-zero-law-mul-Fin x =
   ( commutative-mul-Fin x zero-Fin) ∙
   ( left-zero-law-mul-Fin x)
 
 left-distributive-mul-add-Fin :
   {k : ℕ} (x y z : Fin k) →
-  Id (mul-Fin x (add-Fin y z)) (add-Fin (mul-Fin x y) (mul-Fin x z))
+  mul-Fin x (add-Fin y z) ＝ add-Fin (mul-Fin x y) (mul-Fin x z)
 left-distributive-mul-add-Fin {succ-ℕ k} x y z =
   eq-mod-succ-cong-ℕ k
     ( mul-ℕ (nat-Fin x) (nat-Fin (add-Fin y z)))
@@ -545,7 +545,7 @@ left-distributive-mul-add-Fin {succ-ℕ k} x y z =
 
 right-distributive-mul-add-Fin :
   {k : ℕ} (x y z : Fin k) →
-  Id (mul-Fin (add-Fin x y) z) (add-Fin (mul-Fin x z) (mul-Fin y z))
+  mul-Fin (add-Fin x y) z ＝ add-Fin (mul-Fin x z) (mul-Fin y z)
 right-distributive-mul-add-Fin {k} x y z =
   ( commutative-mul-Fin (add-Fin x y) z) ∙
   ( ( left-distributive-mul-add-Fin z x y) ∙
@@ -554,14 +554,14 @@ right-distributive-mul-add-Fin {k} x y z =
 
 ```agda
 add-add-neg-Fin :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin x (add-Fin (neg-Fin x) y)) y
+  {k : ℕ} (x y : Fin k) → add-Fin x (add-Fin (neg-Fin x) y) ＝ y
 add-add-neg-Fin {succ-ℕ k} x y =
   ( inv (associative-add-Fin x (neg-Fin x) y)) ∙
   ( ( ap (add-Fin' y) (right-inverse-law-add-Fin x)) ∙
     ( left-unit-law-add-Fin y))
 
 add-neg-add-Fin :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin (neg-Fin x) (add-Fin x y)) y
+  {k : ℕ} (x y : Fin k) → add-Fin (neg-Fin x) (add-Fin x y) ＝ y
 add-neg-add-Fin {succ-ℕ k} x y =
   ( inv (associative-add-Fin (neg-Fin x) x y)) ∙
   ( ( ap (add-Fin' y) (left-inverse-law-add-Fin x)) ∙
@@ -580,14 +580,14 @@ pr1 (equiv-add-Fin x) = add-Fin x
 pr2 (equiv-add-Fin x) = is-equiv-add-Fin x
 
 add-add-neg-Fin' :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin' x (add-Fin' (neg-Fin x) y)) y
+  {k : ℕ} (x y : Fin k) → add-Fin' x (add-Fin' (neg-Fin x) y) ＝ y
 add-add-neg-Fin' {succ-ℕ k} x y =
   ( associative-add-Fin y (neg-Fin x) x) ∙
   ( ( ap (add-Fin y) (left-inverse-law-add-Fin x)) ∙
     ( right-unit-law-add-Fin y))
 
 add-neg-add-Fin' :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin' (neg-Fin x) (add-Fin' x y)) y
+  {k : ℕ} (x y : Fin k) → add-Fin' (neg-Fin x) (add-Fin' x y) ＝ y
 add-neg-add-Fin' {succ-ℕ k} x y =
   ( associative-add-Fin y x (neg-Fin x)) ∙
   ( ( ap (add-Fin y) (right-inverse-law-add-Fin x)) ∙
@@ -621,7 +621,7 @@ is-injective-add-Fin' {k} x {y} {z} p =
 
 ```agda
 mul-neg-one-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (mul-Fin neg-one-Fin x) (neg-Fin x)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → mul-Fin neg-one-Fin x ＝ neg-Fin x
 mul-neg-one-Fin {k} x =
   is-injective-add-Fin x
     ( ( ( ap
@@ -645,7 +645,7 @@ is-one-neg-neg-one-Fin {k} =
       ( is-one-dist-succ-ℕ k))
 
 is-neg-one-neg-one-Fin :
-  {k : ℕ} → Id (neg-Fin {succ-ℕ k} one-Fin) neg-one-Fin
+  {k : ℕ} → neg-Fin {succ-ℕ k} one-Fin ＝ neg-one-Fin
 is-neg-one-neg-one-Fin {k} =
   is-injective-add-Fin one-Fin
     ( ( right-inverse-law-add-Fin one-Fin) ∙
@@ -653,7 +653,7 @@ is-neg-one-neg-one-Fin {k} =
         ( ap (add-Fin' neg-one-Fin) is-one-neg-neg-one-Fin)))
 
 is-add-neg-one-pred-Fin' :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (pred-Fin x) (add-Fin x neg-one-Fin)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → pred-Fin x ＝ add-Fin x neg-one-Fin
 is-add-neg-one-pred-Fin' {k} x =
   is-injective-succ-Fin
     ( ( issec-pred-Fin x) ∙
@@ -667,12 +667,12 @@ is-add-neg-one-pred-Fin' {k} x =
         ( inv (is-add-one-succ-Fin' (add-Fin x neg-one-Fin)))))
 
 is-add-neg-one-pred-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (pred-Fin x) (add-Fin neg-one-Fin x)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → pred-Fin x ＝ add-Fin neg-one-Fin x
 is-add-neg-one-pred-Fin x =
   is-add-neg-one-pred-Fin' x ∙ commutative-add-Fin x neg-one-Fin
 
 is-mul-neg-one-neg-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (neg-Fin x) (mul-Fin neg-one-Fin x)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → neg-Fin x ＝ mul-Fin neg-one-Fin x
 is-mul-neg-one-neg-Fin x =
   is-injective-add-Fin x
     ( ( right-inverse-law-add-Fin x) ∙
@@ -686,17 +686,17 @@ is-mul-neg-one-neg-Fin x =
         ( ap (add-Fin' (mul-Fin neg-one-Fin x)) (left-unit-law-mul-Fin x))))
 
 is-mul-neg-one-neg-Fin' :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → Id (neg-Fin x) (mul-Fin x neg-one-Fin)
+  {k : ℕ} (x : Fin (succ-ℕ k)) → neg-Fin x ＝ mul-Fin x neg-one-Fin
 is-mul-neg-one-neg-Fin' x =
   is-mul-neg-one-neg-Fin x ∙ commutative-mul-Fin neg-one-Fin x
 
-neg-zero-Fin : {k : ℕ} → Id (neg-Fin (zero-Fin {k})) zero-Fin
+neg-zero-Fin : {k : ℕ} → neg-Fin (zero-Fin {k}) ＝ zero-Fin
 neg-zero-Fin {k} =
   ( inv (left-unit-law-add-Fin (neg-Fin zero-Fin))) ∙
   ( right-inverse-law-add-Fin zero-Fin)
 
 neg-succ-Fin :
-  {k : ℕ} (x : Fin k) → Id (neg-Fin (succ-Fin x)) (pred-Fin (neg-Fin x))
+  {k : ℕ} (x : Fin k) → neg-Fin (succ-Fin x) ＝ pred-Fin (neg-Fin x)
 neg-succ-Fin {succ-ℕ k} x =
   ( ap neg-Fin (is-add-one-succ-Fin' x)) ∙
   ( ( is-mul-neg-one-neg-Fin (add-Fin x one-Fin)) ∙
@@ -707,7 +707,7 @@ neg-succ-Fin {succ-ℕ k} x =
         ( inv (is-add-neg-one-pred-Fin' (neg-Fin x))))))
 
 neg-pred-Fin :
-  {k : ℕ} (x : Fin k) → Id (neg-Fin (pred-Fin x)) (succ-Fin (neg-Fin x))
+  {k : ℕ} (x : Fin k) → neg-Fin (pred-Fin x) ＝ succ-Fin (neg-Fin x)
 neg-pred-Fin {succ-ℕ k} x =
   ( ap neg-Fin (is-add-neg-one-pred-Fin' x)) ∙
   ( ( is-mul-neg-one-neg-Fin (add-Fin x neg-one-Fin)) ∙
@@ -720,21 +720,21 @@ neg-pred-Fin {succ-ℕ k} x =
 
 distributive-neg-add-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (neg-Fin (add-Fin x y)) (add-Fin (neg-Fin x) (neg-Fin y))
+  neg-Fin (add-Fin x y) ＝ add-Fin (neg-Fin x) (neg-Fin y)
 distributive-neg-add-Fin {succ-ℕ k} x y =
   ( is-mul-neg-one-neg-Fin (add-Fin x y)) ∙
   ( ( left-distributive-mul-add-Fin neg-one-Fin x y) ∙
     ( inv (ap-add-Fin (is-mul-neg-one-neg-Fin x) (is-mul-neg-one-neg-Fin y))))
 
 left-predecessor-law-add-Fin :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin (pred-Fin x) y) (pred-Fin (add-Fin x y))
+  {k : ℕ} (x y : Fin k) → add-Fin (pred-Fin x) y ＝ pred-Fin (add-Fin x y)
 left-predecessor-law-add-Fin {succ-ℕ k} x y =
   ( ap (add-Fin' y) (is-add-neg-one-pred-Fin x)) ∙
   ( ( associative-add-Fin neg-one-Fin x y) ∙
     ( inv (is-add-neg-one-pred-Fin (add-Fin x y))))
 
 right-predecessor-law-add-Fin :
-  {k : ℕ} (x y : Fin k) → Id (add-Fin x (pred-Fin y)) (pred-Fin (add-Fin x y))
+  {k : ℕ} (x y : Fin k) → add-Fin x (pred-Fin y) ＝ pred-Fin (add-Fin x y)
 right-predecessor-law-add-Fin {succ-ℕ k} x y =
   ( ap (add-Fin x) (is-add-neg-one-pred-Fin' y)) ∙
   ( ( inv (associative-add-Fin x y neg-one-Fin)) ∙
@@ -742,7 +742,7 @@ right-predecessor-law-add-Fin {succ-ℕ k} x y =
 
 left-negative-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (mul-Fin (neg-Fin x) y) (neg-Fin (mul-Fin x y))
+  mul-Fin (neg-Fin x) y ＝ neg-Fin (mul-Fin x y)
 left-negative-law-mul-Fin {succ-ℕ k} x y =
   ( ap (mul-Fin' y) (is-mul-neg-one-neg-Fin x)) ∙
   ( ( associative-mul-Fin neg-one-Fin x y) ∙
@@ -750,7 +750,7 @@ left-negative-law-mul-Fin {succ-ℕ k} x y =
 
 right-negative-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (mul-Fin x (neg-Fin y)) (neg-Fin (mul-Fin x y))
+  mul-Fin x (neg-Fin y) ＝ neg-Fin (mul-Fin x y)
 right-negative-law-mul-Fin {succ-ℕ k} x y =
   ( commutative-mul-Fin x (neg-Fin y)) ∙
   ( ( left-negative-law-mul-Fin y x) ∙
@@ -758,7 +758,7 @@ right-negative-law-mul-Fin {succ-ℕ k} x y =
 
 left-successor-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (mul-Fin (succ-Fin x) y) (add-Fin y (mul-Fin x y))
+  mul-Fin (succ-Fin x) y ＝ add-Fin y (mul-Fin x y)
 left-successor-law-mul-Fin {succ-ℕ k} x y =
   ( ap (mul-Fin' y) (is-add-one-succ-Fin x)) ∙
   ( ( right-distributive-mul-add-Fin one-Fin x y) ∙
@@ -766,7 +766,7 @@ left-successor-law-mul-Fin {succ-ℕ k} x y =
 
 right-successor-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (mul-Fin x (succ-Fin y)) (add-Fin x (mul-Fin x y))
+  mul-Fin x (succ-Fin y) ＝ add-Fin x (mul-Fin x y)
 right-successor-law-mul-Fin {succ-ℕ k} x y =
   ( ap (mul-Fin x) (is-add-one-succ-Fin y)) ∙
   ( ( left-distributive-mul-add-Fin x one-Fin y) ∙
@@ -774,7 +774,7 @@ right-successor-law-mul-Fin {succ-ℕ k} x y =
 
 left-predecessor-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (mul-Fin (pred-Fin x) y) (add-Fin (neg-Fin y) (mul-Fin x y))
+  mul-Fin (pred-Fin x) y ＝ add-Fin (neg-Fin y) (mul-Fin x y)
 left-predecessor-law-mul-Fin {succ-ℕ k} x y =
   ( ap (mul-Fin' y) (is-add-neg-one-pred-Fin x)) ∙
   ( ( right-distributive-mul-add-Fin neg-one-Fin x y) ∙
@@ -782,7 +782,7 @@ left-predecessor-law-mul-Fin {succ-ℕ k} x y =
 
 right-predecessor-law-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  Id (mul-Fin x (pred-Fin y)) (add-Fin (neg-Fin x) (mul-Fin x y))
+  mul-Fin x (pred-Fin y) ＝ add-Fin (neg-Fin x) (mul-Fin x y)
 right-predecessor-law-mul-Fin {succ-ℕ k} x y =
   ( ap (mul-Fin x) (is-add-neg-one-pred-Fin y)) ∙
   ( ( left-distributive-mul-add-Fin x neg-one-Fin y) ∙
@@ -832,7 +832,7 @@ is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 
 ```agda
 neg-neg-Fin :
-  {k : ℕ} (x : Fin k) → Id (neg-Fin (neg-Fin x)) x
+  {k : ℕ} (x : Fin k) → neg-Fin (neg-Fin x) ＝ x
 neg-neg-Fin {succ-ℕ k} x =
   ( inv (right-unit-law-add-Fin (neg-Fin (neg-Fin x)))) ∙
   ( ( ap (add-Fin (neg-Fin (neg-Fin x))) (inv (left-inverse-law-add-Fin x))) ∙

@@ -15,7 +15,7 @@ open import elementary-number-theory.natural-numbers using (ℕ)
 open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -25,5 +25,5 @@ open import foundation.universe-levels using (UU; lzero)
 Goldbach-conjecture : UU lzero
 Goldbach-conjecture =
   ( n : ℕ) → (le-ℕ 2 n) → (is-even-ℕ n) →
-    Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × Id (add-ℕ p q) n)))
+    Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × (add-ℕ p q ＝ n))))
 ```

@@ -27,7 +27,7 @@ open import foundation.decidable-types using
   ( is-decidable; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (Id; refl; inv)
+open import foundation.identity-types using (_＝_; refl; inv)
 open import foundation.negation using (¬; is-prop-neg)
 open import foundation.propositions using
   ( is-prop; is-prop-prod)
@@ -40,7 +40,7 @@ open import foundation.universe-levels using (UU; lzero)
 
 ```agda
 is-proper-divisor-ℕ : ℕ → ℕ → UU lzero
-is-proper-divisor-ℕ n d = ¬ (Id d n) × div-ℕ d n
+is-proper-divisor-ℕ n d = ¬ (d ＝ n) × div-ℕ d n
 
 is-decidable-is-proper-divisor-ℕ :
   (n d : ℕ) → is-decidable (is-proper-divisor-ℕ n d)

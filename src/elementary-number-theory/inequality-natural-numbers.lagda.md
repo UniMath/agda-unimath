@@ -22,7 +22,7 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (Id; refl; inv; ap; tr)
+open import foundation.identity-types using (_＝_; refl; inv; ap; tr)
 open import foundation.negation using (¬)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
@@ -53,7 +53,7 @@ _≤-ℕ_ = leq-ℕ
 ```agda
 data leq-ℕ' : ℕ → ℕ → UU lzero where
   refl-leq-ℕ' : (n : ℕ) → leq-ℕ' n n
-  propagate-leq-ℕ' : {x y z : ℕ} → Id (succ-ℕ y) z → (leq-ℕ' x y) → (leq-ℕ' x z)
+  propagate-leq-ℕ' : {x y z : ℕ} → succ-ℕ y ＝ z → (leq-ℕ' x y) → (leq-ℕ' x z)
 ```
 
 ### The strict ordering of the natural numbers
@@ -101,15 +101,15 @@ succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 
 ```agda
 concatenate-eq-leq-eq-ℕ :
-  {x' x y y' : ℕ} → Id x' x → x ≤-ℕ y → Id y y' → x' ≤-ℕ y'
+  {x' x y y' : ℕ} → x' ＝ x → x ≤-ℕ y → y ＝ y' → x' ≤-ℕ y'
 concatenate-eq-leq-eq-ℕ refl H refl = H
 
 concatenate-leq-eq-ℕ :
-  (m : ℕ) {n n' : ℕ} → m ≤-ℕ n → Id n n' → m ≤-ℕ n'
+  (m : ℕ) {n n' : ℕ} → m ≤-ℕ n → n ＝ n' → m ≤-ℕ n'
 concatenate-leq-eq-ℕ m H refl = H
 
 concatenate-eq-leq-ℕ :
-  {m m' : ℕ} (n : ℕ) → Id m' m → m ≤-ℕ n → m' ≤-ℕ n
+  {m m' : ℕ} (n : ℕ) → m' ＝ m → m ≤-ℕ n → m' ≤-ℕ n
 concatenate-eq-leq-ℕ n refl H = H
 ```
 
@@ -128,7 +128,7 @@ is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 
 ```agda
 decide-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → coprod (m ≤-ℕ n) (Id m (succ-ℕ n))
+  (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → coprod (m ≤-ℕ n) (m ＝ succ-ℕ n)
 decide-leq-succ-ℕ zero-ℕ zero-ℕ l = inl star
 decide-leq-succ-ℕ zero-ℕ (succ-ℕ n) l = inl star
 decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
@@ -161,7 +161,7 @@ refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
 refl-leq-ℕ zero-ℕ = star
 refl-leq-ℕ (succ-ℕ n) = refl-leq-ℕ n
 
-leq-eq-ℕ : (m n : ℕ) → Id m n → m ≤-ℕ n
+leq-eq-ℕ : (m n : ℕ) → m ＝ n → m ≤-ℕ n
 leq-eq-ℕ m .m refl = refl-leq-ℕ m
 ```
 
@@ -178,7 +178,7 @@ transitive-leq-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
 #### Antisymmetry
 
 ```agda
-antisymmetric-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → n ≤-ℕ m → Id m n
+antisymmetric-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → n ≤-ℕ m → m ＝ n
 antisymmetric-leq-ℕ zero-ℕ zero-ℕ p q = refl
 antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
@@ -300,14 +300,14 @@ leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
 ### We have `n ≤ m` if and only if there is a number `l` such that `l+n=m`
 
 ```agda
-subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → Id (add-ℕ l n) m)
+subtraction-leq-ℕ : (n m : ℕ) → n ≤-ℕ m → Σ ℕ (λ l → add-ℕ l n ＝ m)
 subtraction-leq-ℕ zero-ℕ m p = pair m refl
 subtraction-leq-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (ap succ-ℕ (pr2 P))
   where
-  P : Σ ℕ (λ l' → Id (add-ℕ l' n) m)
+  P : Σ ℕ (λ l' → add-ℕ l' n ＝ m)
   P = subtraction-leq-ℕ n m p
 
-leq-subtraction-ℕ : (n m l : ℕ) → Id (add-ℕ l n) m → n ≤-ℕ m
+leq-subtraction-ℕ : (n m l : ℕ) → add-ℕ l n ＝ m → n ≤-ℕ m
 leq-subtraction-ℕ zero-ℕ m l p = leq-zero-ℕ m
 leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p = leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
 ```
@@ -387,7 +387,7 @@ anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
 ### Strict inequality is antisymmetric
 
 ```agda
-anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → Id m n
+anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
 anti-symmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (anti-symmetric-le-ℕ m n p q)
 ```
@@ -493,28 +493,28 @@ concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
   concatenate-le-leq-ℕ {x} {y} {z} H K
 
 concatenate-eq-le-eq-ℕ :
-  {x y z w : ℕ} → Id x y → le-ℕ y z → Id z w → le-ℕ x w
+  {x y z w : ℕ} → x ＝ y → le-ℕ y z → z ＝ w → le-ℕ x w
 concatenate-eq-le-eq-ℕ refl p refl = p
 
 concatenate-eq-le-ℕ :
-  {x y z : ℕ} → Id x y → le-ℕ y z → le-ℕ x z
+  {x y z : ℕ} → x ＝ y → le-ℕ y z → le-ℕ x z
 concatenate-eq-le-ℕ refl p = p
 
 concatenate-le-eq-ℕ :
-  {x y z : ℕ} → le-ℕ x y → Id y z → le-ℕ x z
+  {x y z : ℕ} → le-ℕ x y → y ＝ z → le-ℕ x z
 concatenate-le-eq-ℕ p refl = p
 
 le-succ-ℕ : {x : ℕ} → le-ℕ x (succ-ℕ x)
 le-succ-ℕ {zero-ℕ} = star
 le-succ-ℕ {succ-ℕ x} = le-succ-ℕ {x}
 
-le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → ¬ (Id x y) → le-ℕ x y
+le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → ¬ (x ＝ y) → le-ℕ x y
 le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
 le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
 
-linear-le-ℕ : (x y : ℕ) → coprod (le-ℕ x y) (coprod (Id x y) (le-ℕ y x))
+linear-le-ℕ : (x y : ℕ) → coprod (le-ℕ x y) (coprod (x ＝ y) (le-ℕ y x))
 linear-le-ℕ zero-ℕ zero-ℕ = inr (inl refl)
 linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
 linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
@@ -525,14 +525,15 @@ le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
 le-is-nonzero-ℕ zero-ℕ H = H refl
 le-is-nonzero-ℕ (succ-ℕ n) H = concatenate-leq-le-ℕ {x = zero-ℕ} {y = n} {z = succ-ℕ n} (leq-zero-ℕ n) (succ-le-ℕ n)
 
-subtraction-le-ℕ : (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (Id (add-ℕ l n) m))
+subtraction-le-ℕ :
+  (n m : ℕ) → le-ℕ n m → Σ ℕ (λ l → (is-nonzero-ℕ l) × (add-ℕ l n ＝ m))
 subtraction-le-ℕ zero-ℕ m p = pair m (pair (is-nonzero-le-ℕ zero-ℕ m p) refl)
 subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p = pair (pr1 P) (pair (pr1 (pr2 P)) (ap succ-ℕ (pr2 (pr2 P))))
   where
-  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (Id (add-ℕ l' n) m))
+  P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (add-ℕ l' n ＝ m))
   P = subtraction-le-ℕ n m p
 
-le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → Id (add-ℕ l n) m → le-ℕ n m
+le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → add-ℕ l n ＝ m → le-ℕ n m
 le-subtraction-ℕ zero-ℕ m l q p = tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
 le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p = le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
 ```
@@ -617,7 +618,7 @@ leq-leq-mul-ℕ' m n x H =
 ```
 
 ```agda
-neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (Id x y)
+neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (x ＝ y)
 neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
 neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
 ```
@@ -629,15 +630,15 @@ neg-succ-leq-ℕ zero-ℕ = id
 neg-succ-leq-ℕ (succ-ℕ n) = neg-succ-leq-ℕ n
 
 leq-eq-left-ℕ :
-  {m m' : ℕ} → Id m m' → (n : ℕ) → leq-ℕ m n → leq-ℕ m' n
+  {m m' : ℕ} → m ＝ m' → (n : ℕ) → leq-ℕ m n → leq-ℕ m' n
 leq-eq-left-ℕ refl n = id
 
 leq-eq-right-ℕ :
-  (m : ℕ) {n n' : ℕ} → Id n n' → leq-ℕ m n → leq-ℕ m n'
+  (m : ℕ) {n n' : ℕ} → n ＝ n' → leq-ℕ m n → leq-ℕ m n'
 leq-eq-right-ℕ m refl = id
 
 cases-leq-succ-ℕ :
-  {m n : ℕ} → leq-ℕ m (succ-ℕ n) → coprod (leq-ℕ m n) (Id m (succ-ℕ n))
+  {m n : ℕ} → leq-ℕ m (succ-ℕ n) → coprod (leq-ℕ m n) (m ＝ succ-ℕ n)
 cases-leq-succ-ℕ {zero-ℕ} {n} star = inl star
 cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
   inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))
