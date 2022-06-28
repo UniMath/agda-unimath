@@ -11,7 +11,7 @@ open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using
   (_~_; _·r_; _·l_; nat-htpy; htpy-right-whisk)
 open import foundation-core.identity-types using
-  ( Id; inv; _∙_; ap; inv-con; sq-top-whisk; ap-comp; is-injective-concat';
+  ( _＝_; inv; _∙_; ap; inv-con; sq-top-whisk; ap-comp; is-injective-concat';
     concat; ap-id)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
@@ -75,7 +75,7 @@ module _
 ```agda
 coh-is-coherently-invertible-id :
   {i : Level} {A : UU i} {f : A → A} (H : f ~ (λ x → x)) →
-  (x : A) → Id (H (f x)) (ap f (H x))
+  (x : A) → H (f x) ＝ ap f (H x)
 coh-is-coherently-invertible-id {_} {A} {f} H x =
   is-injective-concat' (H x)
     ( ( ap (concat (H (f x)) x) (inv (ap-id (H x)))) ∙
