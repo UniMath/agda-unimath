@@ -1,4 +1,6 @@
-# Inequality of natural numbers
+---
+title: Inequality of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

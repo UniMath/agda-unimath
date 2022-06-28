@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The Goldbach conjecture
 ---
-
-# The Goldbach conjecture
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

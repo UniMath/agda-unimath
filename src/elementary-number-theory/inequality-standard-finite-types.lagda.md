@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Inequality on the standard finite types
 ---
-
-# Inequality on the standard finite types
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

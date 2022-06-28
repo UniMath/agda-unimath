@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The congruence relations on the natural numbers
 ---
-
-# The congruence relations on the natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

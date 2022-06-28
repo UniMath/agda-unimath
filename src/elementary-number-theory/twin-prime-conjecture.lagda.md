@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The Twin Prime conjecture
 ---
-
-# The Twin Prime conjecture
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

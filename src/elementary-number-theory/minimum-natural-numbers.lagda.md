@@ -1,4 +1,6 @@
-# Minimum on the natural numbers
+---
+title: Minimum on the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

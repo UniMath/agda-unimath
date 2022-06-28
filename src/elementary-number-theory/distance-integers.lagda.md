@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The distance between integers
 ---
-
-# The distance between integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Proper divisors of natural numbers
+---
+title: Proper divisors of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

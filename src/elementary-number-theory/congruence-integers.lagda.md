@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The congruence relations on the integers
 ---
-
-# The congruence relations on the integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

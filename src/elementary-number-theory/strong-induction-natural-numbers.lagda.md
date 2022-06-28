@@ -1,4 +1,6 @@
-# The strong induction principle for the natural numbers
+---
+title: The strong induction principle for the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

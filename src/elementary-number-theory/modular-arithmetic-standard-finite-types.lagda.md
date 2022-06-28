@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Modular arithmetic on the standard finite types
 ---
-
-# Modular arithmetic on the standard finite types
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

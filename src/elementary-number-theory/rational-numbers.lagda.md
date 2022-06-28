@@ -1,4 +1,6 @@
-# The rational numbers
+---
+title: The rational numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Euclidean division on the natural numbers
 ---
-
-# Euclidean division on the natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Finitely cyclic maps
 ---
-
-# Finitely cyclic maps
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

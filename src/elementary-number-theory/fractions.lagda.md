@@ -1,4 +1,6 @@
-# Fractions
+---
+title: Fractions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

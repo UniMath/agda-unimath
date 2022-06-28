@@ -1,4 +1,6 @@
-# The Collatz bijection
+---
+title: The Collatz bijection
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

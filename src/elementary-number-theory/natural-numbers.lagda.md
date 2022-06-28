@@ -1,4 +1,6 @@
-# The type of natural numbers
+---
+title: The type of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

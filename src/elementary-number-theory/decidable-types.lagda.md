@@ -1,4 +1,6 @@
-# Decidable types in elementary number theory
+---
+title: Decidable types in elementary number theory
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

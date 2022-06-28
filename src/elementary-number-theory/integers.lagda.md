@@ -1,4 +1,6 @@
-# The integers
+---
+title: The integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

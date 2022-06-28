@@ -1,4 +1,6 @@
-# Addition on the integers
+---
+title: Addition on the integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

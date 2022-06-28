@@ -1,4 +1,6 @@
-# Exponentiation of natural numbers
+---
+title: Exponentiation of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

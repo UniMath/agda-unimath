@@ -1,4 +1,6 @@
-# The universal property of the natural numbers
+---
+title: The universal property of the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

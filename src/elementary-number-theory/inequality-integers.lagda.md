@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Inequality of integers
 ---
-
-# Inequality of integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

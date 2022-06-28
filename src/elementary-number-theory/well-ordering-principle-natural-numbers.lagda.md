@@ -1,4 +1,6 @@
-# The Well-Ordering Principle of the natural numbers
+---
+title: The Well-Ordering Principle of the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Divisibility in modular arithmetic
+---
+title: Divisibility in modular arithmetic
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

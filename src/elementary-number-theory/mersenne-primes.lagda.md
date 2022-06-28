@@ -1,4 +1,6 @@
-# Mersenne prime
+---
+title: Mersenne primes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

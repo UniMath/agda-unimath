@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Modular arithmetic
 ---
-
-# Modular arithmetic
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

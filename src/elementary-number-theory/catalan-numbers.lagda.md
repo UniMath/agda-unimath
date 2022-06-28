@@ -1,4 +1,6 @@
-# Catalan numbers
+---
+title: Catalan numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

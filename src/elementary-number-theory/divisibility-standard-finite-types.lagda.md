@@ -1,4 +1,6 @@
-# The divisibility relation on the standard finite types
+---
+title: The divisibility relation on the standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

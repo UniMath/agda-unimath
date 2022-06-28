@@ -1,4 +1,6 @@
-# Divisibility of integers
+---
+title: Divisibility of integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

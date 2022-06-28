@@ -1,4 +1,6 @@
-# Unit similarity on the standard finite types
+---
+title: Unit similarity on the standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

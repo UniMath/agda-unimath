@@ -1,4 +1,6 @@
-# Sums of natural numbers
+---
+title: Sums of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

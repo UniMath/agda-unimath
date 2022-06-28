@@ -1,4 +1,6 @@
-# Stirling numbers of the second kind
+---
+title: Stirling numbers of the second kind
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

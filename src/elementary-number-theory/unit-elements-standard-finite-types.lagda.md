@@ -1,4 +1,6 @@
-# Unit elements in the standard finite types
+---
+title: Unit elements in the standard finite types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

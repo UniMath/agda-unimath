@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The natural numbers base k
 ---
-
-# The natural numbers base k
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Equality of natural numbers
 ---
-
-# Equality of natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

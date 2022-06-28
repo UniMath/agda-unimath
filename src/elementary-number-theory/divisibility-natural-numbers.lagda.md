@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Divisibility of natural numbers
 ---
-
-# Divisibility of natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

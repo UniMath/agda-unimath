@@ -1,4 +1,6 @@
-# Repeating an element in a standard finite type
+---
+title: Repeating an element in a standard finite type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

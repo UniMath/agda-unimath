@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The difference between integers
 ---
-
-# The difference between integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

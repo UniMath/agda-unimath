@@ -1,4 +1,6 @@
-# Multiplication of integers
+---
+title: Multiplication of integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

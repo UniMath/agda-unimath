@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The greatest common divisor of integers
 ---
-
-# The greatest common divisor of integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

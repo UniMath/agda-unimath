@@ -1,4 +1,6 @@
-# Equality of integers
+---
+title: Equality of integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
