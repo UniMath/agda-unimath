@@ -1,4 +1,6 @@
-# Decidable equality
+---
+title: Decidable equality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ'; pair-eq-Σ)
 open import foundation.equivalences using (_≃_; map-equiv; inv-equiv; equiv-ap)
 open import foundation.fibers-of-maps using (equiv-fib-pr1; equiv-total-fib)
-open import foundation.identity-types using (Id; refl; ap; tr)
+open import foundation.identity-types using (_＝_; refl; ap; tr)
 open import foundation.injective-maps using (is-prop-map-is-injective)
 open import foundation.negation using (is-prop-neg)
 open import foundation.propositions using
@@ -39,7 +41,7 @@ A type `A` is said to have decidable equality if `Id x y` is a decidable type fo
 
 ```agda
 has-decidable-equality : {l : Level} (A : UU l) → UU l
-has-decidable-equality A = (x y : A) → is-decidable (Id x y)
+has-decidable-equality A = (x y : A) → is-decidable (x ＝ y)
 ```
 
 ## Examples
@@ -150,7 +152,7 @@ module _
   where
 
   Eq-has-decidable-equality' :
-    (x y : A) → is-decidable (Id x y) → UU lzero
+    (x y : A) → is-decidable (x ＝ y) → UU lzero
   Eq-has-decidable-equality' x y (inl p) = unit
   Eq-has-decidable-equality' x y (inr f) = empty
 
@@ -160,7 +162,7 @@ module _
 
   abstract
     is-prop-Eq-has-decidable-equality' :
-      (x y : A) (t : is-decidable (Id x y)) →
+      (x y : A) (t : is-decidable (x ＝ y)) →
       is-prop (Eq-has-decidable-equality' x y t)
     is-prop-Eq-has-decidable-equality' x y (inl p) = is-prop-unit
     is-prop-Eq-has-decidable-equality' x y (inr f) = is-prop-empty
@@ -183,21 +185,21 @@ module _
   abstract
     Eq-has-decidable-equality-eq :
       (d : has-decidable-equality A) {x y : A} →
-      Id x y → Eq-has-decidable-equality d x y
+      x ＝ y → Eq-has-decidable-equality d x y
     Eq-has-decidable-equality-eq d {x} {.x} refl =
       refl-Eq-has-decidable-equality d x
 
   abstract
     eq-Eq-has-decidable-equality' :
-      (x y : A) (t : is-decidable (Id x y)) →
-      Eq-has-decidable-equality' x y t → Id x y
+      (x y : A) (t : is-decidable (x ＝ y)) →
+      Eq-has-decidable-equality' x y t → x ＝ y
     eq-Eq-has-decidable-equality' x y (inl p) t = p
     eq-Eq-has-decidable-equality' x y (inr f) t = ex-falso t
 
   abstract
     eq-Eq-has-decidable-equality :
       (d : has-decidable-equality A) {x y : A} →
-      Eq-has-decidable-equality d x y → Id x y
+      Eq-has-decidable-equality d x y → x ＝ y
     eq-Eq-has-decidable-equality d {x} {y} =
       eq-Eq-has-decidable-equality' x y (d x y)
 

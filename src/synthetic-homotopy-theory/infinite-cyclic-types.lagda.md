@@ -12,7 +12,6 @@ open import elementary-number-theory.integers using
     is-initial-ℤ-Pointed-Type-With-Aut)
 open import elementary-number-theory.natural-numbers using (zero-ℕ)
 
-open import foundation.automorphisms using (hom-Pointed-Type-With-Aut)
 open import foundation.contractible-maps using (is-equiv-is-contr-map)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr)
@@ -38,8 +37,9 @@ open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-types-equipped-with-endomorphisms
-open import structured-types.pointed-types using
-  ( Pointed-Type)
+open import structured-types.pointed-types using (Pointed-Type)
+open import structured-types.pointed-types-equipped-with-automorphisms using
+  ( hom-Pointed-Type-With-Aut)
 open import structured-types.types-equipped-with-endomorphisms
 
 open import synthetic-homotopy-theory.loop-spaces using (type-Ω)

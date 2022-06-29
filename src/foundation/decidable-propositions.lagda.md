@@ -1,4 +1,6 @@
-# Decidable propositions
+---
+title: Decidable propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -22,7 +24,7 @@ open import foundation.equivalences using
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; ap; refl; inv; tr)
+open import foundation.identity-types using (_＝_; ap; refl; inv; tr)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.negation using (¬)
 open import foundation.propositional-extensionality using
@@ -154,7 +156,7 @@ module _
   abstract
     compute-equiv-bool-decidable-Prop :
       (P : decidable-Prop l) →
-      type-decidable-Prop P ≃ Id (map-equiv equiv-bool-decidable-Prop P) true
+      type-decidable-Prop P ≃ (map-equiv equiv-bool-decidable-Prop P ＝ true)
     compute-equiv-bool-decidable-Prop (pair P (pair H (inl p))) =
       equiv-is-contr
         ( is-proof-irrelevant-is-prop H p)
@@ -179,14 +181,14 @@ pr1 (iff-universes-decidable-Prop l l' P) p =
     ( compute-equiv-bool-decidable-Prop
       ( map-equiv (equiv-universes-decidable-Prop l l') P))
     ( tr
-      ( λ e → Id (map-equiv e (map-equiv equiv-bool-decidable-Prop P)) true)
+      ( λ e → map-equiv e (map-equiv equiv-bool-decidable-Prop P) ＝ true)
       ( inv (right-inverse-law-equiv equiv-bool-decidable-Prop))
       ( map-equiv (compute-equiv-bool-decidable-Prop P) p))
 pr2 (iff-universes-decidable-Prop l l' P) p =
   map-inv-equiv
     ( compute-equiv-bool-decidable-Prop P)
     ( tr
-      ( λ e → Id (map-equiv e (map-equiv equiv-bool-decidable-Prop P)) true)
+      ( λ e → map-equiv e (map-equiv equiv-bool-decidable-Prop P) ＝ true)
       ( right-inverse-law-equiv equiv-bool-decidable-Prop)
       ( map-equiv
         ( compute-equiv-bool-decidable-Prop

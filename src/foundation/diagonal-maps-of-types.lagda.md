@@ -1,4 +1,6 @@
-# Diagonal maps of types
+---
+title: Diagonal maps of types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -20,7 +22,7 @@ open import foundation.faithful-maps using
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
 open import foundation.propositional-maps using
   ( is-prop-map; is-prop-map-is-emb; is-emb-is-prop-map)
 open import foundation.propositions using
@@ -75,10 +77,10 @@ module _
   {l : Level} (A : UU l)
   where
 
-  eq-fib-diagonal : (t : A × A) → fib (diagonal A) t → Id (pr1 t) (pr2 t)
+  eq-fib-diagonal : (t : A × A) → fib (diagonal A) t → pr1 t ＝ pr2 t
   eq-fib-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
   
-  fib-diagonal-eq : (t : A × A) → Id (pr1 t) (pr2 t) → fib (diagonal A) t
+  fib-diagonal-eq : (t : A × A) → pr1 t ＝ pr2 t → fib (diagonal A) t
   pr1 (fib-diagonal-eq (pair x y) β) = x
   pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
   
@@ -143,7 +145,7 @@ module _
       (k : 𝕋) → is-trunc (succ-𝕋 k) A → is-trunc-map k (diagonal A)
     is-trunc-map-diagonal-is-trunc k is-trunc-A t =
       is-trunc-is-equiv k
-        ( Id (pr1 t) (pr2 t))
+        ( pr1 t ＝ pr2 t)
         ( eq-fib-diagonal A t)
         ( is-equiv-eq-fib-diagonal A t)
           ( is-trunc-A (pr1 t) (pr2 t))

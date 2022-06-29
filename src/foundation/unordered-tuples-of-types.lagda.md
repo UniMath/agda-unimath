@@ -83,7 +83,7 @@ module _
   pr2 id-equiv-unordered-tuple-types i = id-equiv
 
   equiv-eq-unordered-tuple-types :
-    (B : unordered-tuple-types l n) → Id A B → equiv-unordered-tuple-types A B
+    (B : unordered-tuple-types l n) → A ＝ B → equiv-unordered-tuple-types A B
   equiv-eq-unordered-tuple-types .A refl = id-equiv-unordered-tuple-types
 
   is-contr-total-equiv-unordered-tuple-types :
@@ -107,7 +107,7 @@ module _
       equiv-eq-unordered-tuple-types
 
   extensionality-unordered-tuple-types :
-    (B : unordered-tuple-types l n) → Id A B ≃ equiv-unordered-tuple-types A B
+    (B : unordered-tuple-types l n) → (A ＝ B) ≃ equiv-unordered-tuple-types A B
   pr1 (extensionality-unordered-tuple-types B) =
     equiv-eq-unordered-tuple-types B
   pr2 (extensionality-unordered-tuple-types B) =

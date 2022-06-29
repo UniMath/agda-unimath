@@ -1,4 +1,6 @@
-# The universal property of set quotients
+---
+title: The universal property of set quotients
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -39,7 +41,7 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using
   ( _~_; refl-htpy; is-contr-total-htpy; inv-htpy; _·l_; _∙h_)
 open import foundation.identity-types using
-  ( Id; ap; _∙_; inv; refl; convert-eq-values; tr; inv-tr)
+  ( _＝_; ap; _∙_; inv; refl; convert-eq-values; tr; inv-tr)
 open import foundation.images using
   ( emb-im; map-unit-im; is-emb-inclusion-im; triangle-unit-im; im; is-set-im;
     inclusion-im)
@@ -128,7 +130,7 @@ module _
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
-  precomp-id-Set-Quotient : Id (precomp-Set-Quotient R B f B id) f
+  precomp-id-Set-Quotient : precomp-Set-Quotient R B f B id ＝ f
   precomp-id-Set-Quotient =
     eq-htpy-reflecting-map-Eq-Rel R B
       ( precomp-Set-Quotient R B f B id)
@@ -239,14 +241,14 @@ module _
     is-locally-small-is-surjective-and-effective e x y =
       apply-universal-property-trunc-Prop
         ( pr1 e x)
-        ( is-small-Prop l2 (Id x y))
+        ( is-small-Prop l2 (x ＝ y))
         ( λ u →
           apply-universal-property-trunc-Prop
             ( pr1 e y)
-            ( is-small-Prop l2 (Id x y))
+            ( is-small-Prop l2 (x ＝ y))
             ( α u))
       where
-      α : fib q x → fib q y → is-small l2 (Id x y)
+      α : fib q x → fib q y → is-small l2 (x ＝ y)
       pr1 (α (pair a refl) (pair b refl)) = type-Eq-Rel R a b
       pr2 (α (pair a refl) (pair b refl)) = pr2 e a b
 
@@ -303,8 +305,8 @@ module _
             ( α p))
       where
       α : {x y : type-Set B}
-          (p : Id ( map-emb-is-surjective-and-effective H x)
-                  ( map-emb-is-surjective-and-effective H y)) →
+          (p : ( map-emb-is-surjective-and-effective H x) ＝
+               ( map-emb-is-surjective-and-effective H y)) →
           fib q y → type-Prop (Id-Prop B x y)
       α {x} p (pair a refl) =
         map-inv-equiv
@@ -338,8 +340,8 @@ module _
             ( α p))
       where
       α : {x y : type-Set B}
-          (p : Id ( large-map-emb-is-surjective-and-effective e x)
-                  ( large-map-emb-is-surjective-and-effective e y)) →
+          (p : ( large-map-emb-is-surjective-and-effective e x) ＝ 
+               ( large-map-emb-is-surjective-and-effective e y)) →
           fib q y → type-Prop (Id-Prop B x y)
       α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
   
@@ -450,7 +452,7 @@ module _
       center-total-P : Σ (type-Set B) (λ b → type-Prop (P b))
       center-total-P = pair (q x) point-P
       contraction-total-P :
-        (u : Σ (type-Set B) (λ b → type-Prop (P b))) → Id center-total-P u
+        (u : Σ (type-Set B) (λ b → type-Prop (P b))) → center-total-P ＝ u
       contraction-total-P (pair b p) =
         eq-subtype P
           ( apply-universal-property-trunc-Prop
@@ -463,11 +465,11 @@ module _
               ( pr2 v)))
       is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
       is-contr-total-P = pair center-total-P contraction-total-P
-      β : (b : type-Set B) → Id (q x) b → type-Prop (P b)
+      β : (b : type-Set B) → q x ＝ b → type-Prop (P b)
       β .(q x) refl = point-P
       γ : (b : type-Set B) → is-equiv (β b)
       γ = fundamental-theorem-id (q x) point-P is-contr-total-P β
-      δ : (b : type-Set B) → Id (q x) b ≃ type-Prop (P b)
+      δ : (b : type-Set B) → (q x ＝ b) ≃ type-Prop (P b)
       δ b = pair (β b) (γ b)
 
   abstract
@@ -497,7 +499,7 @@ module _
       
       P-Prop : (b : type-Set B) (x : type-Set X) → UU-Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
-        ∃-Prop A (λ a → (Id (map-reflecting-map-Eq-Rel R f a) x) × (Id (q a) b))
+        ∃-Prop A (λ a → (map-reflecting-map-Eq-Rel R f a ＝ x) × (q a ＝ b))
 
       P : (b : type-Set B) (x : type-Set X) → UU (l1 ⊔ l3 ⊔ l)
       P b x = type-Prop (P-Prop b x)
@@ -538,8 +540,8 @@ module _
           ( λ a → pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
           
       β : (a : A) →
-          Id ( α (q a))
-             ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
+          ( α (q a)) ＝
+          ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
       β = htpy-eq
             ( issec-map-inv-is-equiv
               ( dependent-universal-property-surj-is-surjective q

@@ -1,4 +1,6 @@
-# Choice of representatives for an equivalence relation
+---
+title: Choice of representatives for an equivalence relation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

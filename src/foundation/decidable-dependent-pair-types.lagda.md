@@ -1,4 +1,6 @@
-# Decidability of dependent pair types
+---
+title: Decidability of dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -53,7 +53,7 @@ module _
     snd-pair-of-distinct-elements pair-of-distinct-elements-repetition-sequence
 
   distinction-repetition-sequence :
-    ¬ (Id fst-repetition-sequence snd-repetition-sequence)
+    ¬ (fst-repetition-sequence ＝ snd-repetition-sequence)
   distinction-repetition-sequence =
     distinction-pair-of-distinct-elements
       pair-of-distinct-elements-repetition-sequence

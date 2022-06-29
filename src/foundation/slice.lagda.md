@@ -1,4 +1,6 @@
-# Morphisms of the slice category of types
+---
+title: Morphisms of the slice category of types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -28,7 +30,7 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using
   ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy; _·r_;
     equiv-concat-htpy)
-open import foundation.identity-types using (Id; refl; inv; inv-inv; _∙_)
+open import foundation.identity-types using (_＝_; refl; inv; inv-inv; _∙_)
 open import foundation.injective-maps using (is-injective-emb)
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; equiv-is-prop-map-is-emb)
@@ -105,7 +107,7 @@ module _
         ( triangle-hom-slice f g h'))
 
   extensionality-hom-slice :
-    (h h' : hom-slice f g) → Id h h' ≃ htpy-hom-slice h h'
+    (h h' : hom-slice f g) → (h ＝ h') ≃ htpy-hom-slice h h'
   extensionality-hom-slice (pair h H) =
     extensionality-Σ
       ( λ {h'} H' (K : h ~ h') → (H ∙h (g ·l K)) ~ H')
@@ -115,7 +117,7 @@ module _
       ( λ H' → equiv-concat-htpy (right-unit-htpy) H' ∘e equiv-funext)
 
   eq-htpy-hom-slice :
-    (h h' : hom-slice f g) → htpy-hom-slice h h' → Id h h'
+    (h h' : hom-slice f g) → htpy-hom-slice h h' → h ＝ h'
   eq-htpy-hom-slice h h' = map-inv-equiv (extensionality-hom-slice h h')
 ```
 
@@ -343,7 +345,7 @@ module _
   pr1 (id-equiv-slice-UU f) = id-equiv
   pr2 (id-equiv-slice-UU f) = refl-htpy
 
-  equiv-eq-slice-UU : (f g : slice-UU l2 A) → Id f g → equiv-slice' f g
+  equiv-eq-slice-UU : (f g : slice-UU l2 A) → f ＝ g → equiv-slice' f g
   equiv-eq-slice-UU f .f refl = id-equiv-slice-UU f
 
   abstract
@@ -366,7 +368,7 @@ module _
         ( equiv-eq-slice-UU f)
 
   eq-equiv-slice :
-    (f g : slice-UU l2 A) → equiv-slice' f g → Id f g
+    (f g : slice-UU l2 A) → equiv-slice' f g → f ＝ g
   eq-equiv-slice f g =
     map-inv-is-equiv (is-equiv-equiv-eq-slice-UU f g)
 

@@ -1,4 +1,6 @@
-# Equivalence classes
+---
+title: Equivalence classes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,7 +26,7 @@ open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl; tr; inv)
+open import foundation.identity-types using (_＝_; refl; tr; inv)
 open import foundation.images using
   ( im; map-unit-im; emb-im; is-set-im; unit-im; is-surjective-map-unit-im)
 open import foundation.propositional-extensionality using
@@ -62,7 +64,7 @@ module _
 
   is-equivalence-class-Eq-Rel : (A → UU-Prop l2) → UU (l1 ⊔ lsuc l2)
   is-equivalence-class-Eq-Rel P =
-    ∃ A (λ x → Id (type-Prop ∘ P) (class-Eq-Rel x))
+    ∃ A (λ x → (type-Prop ∘ P) ＝ class-Eq-Rel x)
 
   large-set-quotient : UU (l1 ⊔ lsuc l2)
   large-set-quotient = im (prop-Eq-Rel R)
@@ -128,7 +130,7 @@ module _
     contraction-total-class-Eq-Rel :
       ( t :
         Σ (large-set-quotient R) (λ P → type-class-large-set-quotient R P a)) →
-      Id center-total-class-Eq-Rel t
+      center-total-class-Eq-Rel ＝ t
     contraction-total-class-Eq-Rel (pair (pair P p) H) =
       eq-subtype
         ( λ Q → class-large-set-quotient R Q a)
@@ -140,7 +142,7 @@ module _
             ( pair P p))
           ( α))
       where
-      α : fib (pr1 R) P → Id (quotient-map-large-set-quotient R a) (pair P p)
+      α : fib (pr1 R) P → quotient-map-large-set-quotient R a ＝ pair P p
       α (pair x refl) =
         eq-subtype
           ( λ z → trunc-Prop (fib (prop-Eq-Rel R) z))
@@ -157,7 +159,7 @@ module _
     pr2 is-contr-total-class-Eq-Rel = contraction-total-class-Eq-Rel
 
   related-eq-quotient :
-    (q : large-set-quotient R) → Id (quotient-map-large-set-quotient R a) q →
+    (q : large-set-quotient R) → quotient-map-large-set-quotient R a ＝ q →
     type-class-large-set-quotient R q a
   related-eq-quotient .(quotient-map-large-set-quotient R a) refl =
     refl-Eq-Rel R
@@ -175,7 +177,7 @@ module _
   abstract
     effective-quotient' :
       (q : large-set-quotient R) →
-      ( Id (quotient-map-large-set-quotient R a) q) ≃
+      ( quotient-map-large-set-quotient R a ＝ q) ≃
       ( type-class-large-set-quotient R q a)
     pr1 (effective-quotient' q) = related-eq-quotient q
     pr2 (effective-quotient' q) = is-equiv-related-eq-quotient q
@@ -190,7 +192,7 @@ module _
   abstract
     eq-effective-quotient' :
       (q : large-set-quotient R) → type-class-large-set-quotient R q a →
-      Id (quotient-map-large-set-quotient R a) q
+      quotient-map-large-set-quotient R a ＝ q
     eq-effective-quotient' q = map-inv-is-equiv (is-equiv-related-eq-quotient q)
 ```
 
@@ -211,8 +213,8 @@ module _
   abstract
     apply-effectiveness-quotient-map-large-set-quotient :
       {x y : A} →
-      Id ( quotient-map-large-set-quotient R x)
-         ( quotient-map-large-set-quotient R y) →
+      ( quotient-map-large-set-quotient R x ＝
+        quotient-map-large-set-quotient R y) →
       type-Eq-Rel R x y
     apply-effectiveness-quotient-map-large-set-quotient {x} {y} =
       map-equiv (is-effective-quotient-map-large-set-quotient x y)
@@ -220,8 +222,7 @@ module _
   abstract
     apply-effectiveness-quotient-map-large-set-quotient' :
       {x y : A} → type-Eq-Rel R x y →
-      Id ( quotient-map-large-set-quotient R x)
-         ( quotient-map-large-set-quotient R y)
+      quotient-map-large-set-quotient R x ＝ quotient-map-large-set-quotient R y
     apply-effectiveness-quotient-map-large-set-quotient' {x} {y} =
       map-inv-equiv (is-effective-quotient-map-large-set-quotient x y)
 ```
@@ -301,12 +302,14 @@ module _
         ( class-large-set-quotient R T a))
       ( λ (pair t P) →
         cases-decidable-type-class-large-set-quotient
-          T a t (eq-pair-Σ (inv P) (all-elements-equal-type-trunc-Prop _ _)) (F t a))
+          T a t
+            ( eq-pair-Σ (inv P) (all-elements-equal-type-trunc-Prop _ _))
+            ( F t a))
     where
     cases-decidable-type-class-large-set-quotient :
       (T : large-set-quotient R)
       (a t : A) →
-      Id T (quotient-map-large-set-quotient R t) →
+      T ＝ (quotient-map-large-set-quotient R t) →
       is-decidable (type-Eq-Rel R t a) →
       is-decidable (type-class-large-set-quotient R T a)
     cases-decidable-type-class-large-set-quotient T a t p1 (inl p) =

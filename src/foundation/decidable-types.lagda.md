@@ -1,4 +1,6 @@
-# Decidable types
+---
+title: Decidable types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

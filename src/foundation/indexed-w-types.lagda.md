@@ -1,4 +1,6 @@
-# Indexed W-types
+---
+title: Indexed W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

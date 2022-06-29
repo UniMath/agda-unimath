@@ -1,4 +1,6 @@
-# Functoriality of function types
+---
+title: Functoriality of function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

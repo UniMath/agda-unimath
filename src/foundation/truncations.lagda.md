@@ -1,4 +1,6 @@
-# Truncations
+---
+title: Truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

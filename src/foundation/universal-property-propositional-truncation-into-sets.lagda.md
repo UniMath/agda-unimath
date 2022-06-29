@@ -1,4 +1,6 @@
-# The universal property of propositional truncations with respect to sets
+---
+title: The universal property of propositional truncations with respect to sets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

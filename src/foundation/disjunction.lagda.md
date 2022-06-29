@@ -1,4 +1,6 @@
-# Disjunction of propositions
+---
+title: Disjunction of propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

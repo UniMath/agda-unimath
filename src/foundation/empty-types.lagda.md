@@ -1,4 +1,6 @@
-# Empty types
+---
+title: Empty types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

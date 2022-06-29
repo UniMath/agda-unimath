@@ -1,4 +1,6 @@
-# The universal property of maybe
+---
+title: The universal property of maybe
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -31,7 +31,7 @@ open import foundation.functoriality-dependent-function-types using
 open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.homotopies using (_~_; refl-htpy; inv-htpy)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.mere-equality using
   ( mere-eq-Eq-Rel; reflects-mere-eq; mere-eq; mere-eq-Prop)
 open import foundation.propositions using (UU-Prop)
@@ -301,14 +301,14 @@ abstract
 abstract
   apply-effectiveness-unit-trunc-Set :
     {l1 : Level} {A : UU l1} {x y : A} →
-    Id (unit-trunc-Set x) (unit-trunc-Set y) → mere-eq x y
+    unit-trunc-Set x ＝ unit-trunc-Set y → mere-eq x y
   apply-effectiveness-unit-trunc-Set {A = A} {x} {y} =
     map-equiv (is-effective-unit-trunc-Set A x y)
 
 abstract
   apply-effectiveness-unit-trunc-Set' :
     {l1 : Level} {A : UU l1} {x y : A} →
-    mere-eq x y → Id (unit-trunc-Set x) (unit-trunc-Set y)
+    mere-eq x y → unit-trunc-Set x ＝ unit-trunc-Set y
   apply-effectiveness-unit-trunc-Set' {A = A} {x} {y} =
     map-inv-equiv (is-effective-unit-trunc-Set A x y)
 

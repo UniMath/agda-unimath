@@ -1,5 +1,5 @@
 ---
-title: The inclusion relation on subtypes
+title: Powersets
 ---
 
 ```agda
@@ -77,7 +77,7 @@ module _
       ( K x)
 
   antisymmetric-⊆ :
-    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → Id P Q
+    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
   antisymmetric-⊆ P Q H K = eq-htpy (λ x → eq-iff (H x) (K x))
 ```
 

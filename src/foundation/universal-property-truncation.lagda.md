@@ -1,4 +1,6 @@
-# The universal property of truncations
+---
+title: The universal property of truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,7 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (precomp; _∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; inv)
+open import foundation.identity-types using (_＝_; refl; inv)
 open import foundation.sections using (sec)
 open import foundation.truncated-types using
   ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type;
@@ -133,7 +135,7 @@ module _
       ({l : Level} → universal-property-truncation l B f)
     universal-property-truncation-is-truncation H C g =
       is-contr-equiv'
-        ( Σ (type-hom-Truncated-Type k B C) (λ h → Id (h ∘ f) g))
+        ( Σ (type-hom-Truncated-Type k B C) (λ h → (h ∘ f) ＝ g))
         ( equiv-tot (λ h → equiv-funext))
         ( is-contr-map-is-equiv (H C) g)
 

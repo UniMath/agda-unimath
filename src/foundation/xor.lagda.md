@@ -1,4 +1,6 @@
-# Exclusive disjunction of propositions
+---
+title: Exclusive disjunction of propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -23,7 +25,7 @@ open import foundation.equivalences using
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-cartesian-product-types using (equiv-prod)
-open import foundation.identity-types using (Id; tr; inv)
+open import foundation.identity-types using (_＝_; tr; inv)
 open import foundation.negation using (¬; neg-Prop; is-prop-neg)
 open import foundation.propositional-extensionality using
   ( eq-equiv-Prop; eq-iff)
@@ -134,7 +136,7 @@ all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
       ( pr1 y))
   where
   cases-is-prop-type-commutative-xor-Prop :
-    is-decidable (Id (pr1 x) (pr1 y)) → Id x y
+    is-decidable (pr1 x ＝ pr1 y) → x ＝ y
   cases-is-prop-type-commutative-xor-Prop (inl p) =
     eq-pair-Σ
       ( p)
@@ -331,7 +333,7 @@ module _
 
 eq-commmutative-xor-xor :
   {l : Level} (P Q : UU-Prop l) →
-  Id (commutative-xor-Prop (standard-unordered-pair P Q)) (xor-Prop P Q)
+  commutative-xor-Prop (standard-unordered-pair P Q) ＝ xor-Prop P Q
 eq-commmutative-xor-xor P Q =
   eq-iff (xor-commutative-xor-Prop P Q) (commutative-xor-xor-Prop P Q)
 ```

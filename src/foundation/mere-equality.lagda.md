@@ -1,4 +1,6 @@
-# Mere equality
+---
+title: Mere equality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,7 +11,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
   ( map-trunc-Prop)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 open import foundation.propositional-truncations using
@@ -29,10 +31,10 @@ Two elements in a type are said to be merely equal if there is an element of the
 ```agda
 mere-eq-Prop :
   {l : Level} {A : UU l} → A → A → UU-Prop l
-mere-eq-Prop x y = trunc-Prop (Id x y)
+mere-eq-Prop x y = trunc-Prop (x ＝ y)
 
 mere-eq : {l : Level} {A : UU l} → A → A → UU l
-mere-eq x y = type-trunc-Prop (Id x y)
+mere-eq x y = type-trunc-Prop (x ＝ y)
 ```
 
 ## Properties

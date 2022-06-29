@@ -1,4 +1,6 @@
-# Structure
+---
+title: Structure
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

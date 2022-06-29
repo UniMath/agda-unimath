@@ -1,4 +1,6 @@
-# Set presented types
+---
+title: Set presented types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

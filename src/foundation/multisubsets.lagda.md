@@ -1,4 +1,6 @@
-# Multisubsets
+---
+title: Multisubsets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,7 +11,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.fibers-of-maps using (fib)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.images using (im)
 open import foundation.negation using (¬)
 open import foundation.sets using (UU-Set; type-Set)
@@ -50,11 +52,11 @@ module _
 
   support-locally-finite-multisubset : 
     (U : UU-Set l1) → locally-finite-multisubset U → UU l1
-  support-locally-finite-multisubset U mu =
-    Σ (type-Set U) λ x → ¬ (Id (mu x) zero-ℕ)
+  support-locally-finite-multisubset U μ =
+    Σ (type-Set U) λ x → ¬ (μ x ＝ zero-ℕ)
 
   is-finite-locally-finite-multisubset :
     (U : UU-Set l1) → locally-finite-multisubset U → UU l1
-  is-finite-locally-finite-multisubset U mu =
-    is-finite (support-locally-finite-multisubset U mu)
+  is-finite-locally-finite-multisubset U μ =
+    is-finite (support-locally-finite-multisubset U μ)
 ```

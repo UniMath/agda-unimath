@@ -24,7 +24,7 @@ open import foundation.functoriality-truncation using
     htpy-trunc; map-equiv-trunc; is-equiv-map-equiv-trunc; equiv-trunc)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy)
-open import foundation.identity-types using (Id; ap; _∙_; inv; refl)
+open import foundation.identity-types using (_＝_; ap; _∙_; inv; refl)
 open import foundation.images using
   ( im; inclusion-im; is-emb-inclusion-im; map-unit-im; triangle-unit-im;
     is-surjective-map-unit-im; unit-im; eq-Eq-im; im-Set)
@@ -177,14 +177,14 @@ module _
       apply-dependent-universal-property-trunc-Set'
         ( λ u →
           set-Prop
-            ( function-Prop (Id (map-trunc-Set f u) (map-trunc-Set f y))
+            ( function-Prop (map-trunc-Set f u ＝ map-trunc-Set f y)
             ( Id-Prop (trunc-Set A) u y) ))
         ( λ a →
           apply-dependent-universal-property-trunc-Set'
           ( λ v →
             set-Prop
               ( function-Prop
-                ( Id (map-trunc-Set f (unit-trunc-Set a)) (map-trunc-Set f v))
+                ( map-trunc-Set f (unit-trunc-Set a) ＝ map-trunc-Set f v)
                 ( Id-Prop (trunc-Set A) (unit-trunc-Set a) v)))
           ( λ b p →
             apply-universal-property-trunc-Prop

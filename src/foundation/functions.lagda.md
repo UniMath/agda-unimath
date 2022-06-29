@@ -1,4 +1,6 @@
-# Functions
+---
+title: Functions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

@@ -1,4 +1,6 @@
-# Unital binary operations
+---
+title: Unital binary operations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,8 @@ module foundation.unital-binary-operations where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
 open import foundation.homotopies using (nat-htpy-id; coh-htpy-id)
-open import foundation.identity-types using (Id; inv; _∙_; ap; inv-con; concat')
+open import foundation.identity-types using
+  ( _＝_; inv; _∙_; ap; inv-con; concat')
 open import foundation.universe-levels using (UU; Level)
 ```
 
@@ -26,13 +29,13 @@ module _
   where
   
   left-unit-law : UU l
-  left-unit-law = (x : A) → Id (μ e x) x
+  left-unit-law = (x : A) → μ e x ＝ x
 
   right-unit-law : UU l
-  right-unit-law = (x : A) → Id (μ x e) x
+  right-unit-law = (x : A) → μ x e ＝ x
 
   coh-unit-laws : left-unit-law → right-unit-law → UU l
-  coh-unit-laws α β = Id (α e) (β e)
+  coh-unit-laws α β = (α e ＝ β e)
 
   unit-laws : UU l
   unit-laws = left-unit-law × right-unit-law

@@ -1,4 +1,6 @@
-# The universal property of the image of a map
+---
+title: The universal property of the image of a map
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

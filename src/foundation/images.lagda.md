@@ -1,4 +1,6 @@
-# The image of a map
+---
+title: The image of a map
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -19,7 +21,7 @@ open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; _∙h_; _·r_; _·l_)
-open import foundation.identity-types using (Id; refl; inv; _∙_)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_)
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
 open import foundation.propositional-maps using (fib-emb-Prop)
 open import foundation.propositional-truncations using
@@ -80,12 +82,12 @@ module _
   where
 
   Eq-im : im f → im f → UU l1
-  Eq-im x y = Id (pr1 x) (pr1 y)
+  Eq-im x y = (pr1 x ＝ pr1 y)
 
   refl-Eq-im : (x : im f) → Eq-im x x
   refl-Eq-im x = refl
 
-  Eq-eq-im : (x y : im f) → Id x y → Eq-im x y
+  Eq-eq-im : (x y : im f) → x ＝ y → Eq-im x y
   Eq-eq-im x .x refl = refl-Eq-im x
 
   abstract
@@ -107,11 +109,11 @@ module _
         ( is-contr-total-Eq-im x)
         ( Eq-eq-im x)
 
-  equiv-Eq-eq-im : (x y : im f) → Id x y ≃ Eq-im x y
+  equiv-Eq-eq-im : (x y : im f) → (x ＝ y) ≃ Eq-im x y
   pr1 (equiv-Eq-eq-im x y) = Eq-eq-im x y
   pr2 (equiv-Eq-eq-im x y) = is-equiv-Eq-eq-im x y
 
-  eq-Eq-im : (x y : im f) → Eq-im x y → Id x y
+  eq-Eq-im : (x y : im f) → Eq-im x y → x ＝ y
   eq-Eq-im x y = map-inv-is-equiv (is-equiv-Eq-eq-im x y)
 ```
 

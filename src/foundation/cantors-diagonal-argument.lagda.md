@@ -1,4 +1,6 @@
-# Cantor's diagonal argument
+---
+title: Cantor's diagonal argument
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
