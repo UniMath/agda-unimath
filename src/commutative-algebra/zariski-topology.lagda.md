@@ -1,5 +1,5 @@
 ---
-title: The Zariski topology on a space
+title: The Zariski topology on the set of prime ideals in a commutative ring
 ---
 
 ```agda
