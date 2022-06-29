@@ -1,4 +1,6 @@
-# The universal property of set truncations
+---
+title: The universal property of set truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -19,7 +21,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.mere-equality using
   ( mere-eq-Eq-Rel; reflecting-map-mere-eq; reflects-mere-eq)
 open import foundation.propositions using (is-proof-irrelevant-is-prop)
@@ -107,7 +109,7 @@ abstract
     is-set-truncation l B f → universal-property-set-truncation l B f
   universal-property-is-set-truncation l B f is-settr-f C g =
     is-contr-equiv'
-      ( Σ (type-hom-Set B C) (λ h → Id (h ∘ f) g))
+      ( Σ (type-hom-Set B C) (λ h → (h ∘ f) ＝ g))
       ( equiv-tot (λ h → equiv-funext))
       ( is-contr-map-is-equiv (is-settr-f C) g)
 

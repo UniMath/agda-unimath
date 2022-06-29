@@ -1,4 +1,6 @@
-# Retractions
+---
+title: Retractions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

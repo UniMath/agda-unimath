@@ -1,4 +1,6 @@
-# Type arithmetic with the booleans
+---
+title: Type arithmetic with the booleans
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Type arithmetic for coproduct types
+---
+title: Type arithmetic for coproduct types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

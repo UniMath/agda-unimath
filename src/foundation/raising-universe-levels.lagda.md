@@ -1,4 +1,6 @@
-# Raising universe levels
+---
+title: Raising universe levels
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,7 +12,7 @@ open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.identity-types using (refl)
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop-equiv')
 open import foundation-core.sets using

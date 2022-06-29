@@ -18,7 +18,7 @@ open import foundation.empty-types using (ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.fibers-of-maps using(fib)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; inv; ap; _∙_)
+open import foundation.identity-types using (_＝_; inv; ap; _∙_)
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
 open import foundation.law-of-excluded-middle using (LEM)
 open import foundation.negation using (¬)
@@ -75,9 +75,9 @@ module _
       l :
         (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x))
         (d' : is-decidable (is-perfect-image (map-emb f) (map-emb g) x')) →
-        Id ( map-Cantor-Schröder-Bernstein-Escardó' x d)
-           ( map-Cantor-Schröder-Bernstein-Escardó' x' d') →
-        Id x x'
+        ( map-Cantor-Schröder-Bernstein-Escardó' x d) ＝
+        ( map-Cantor-Schröder-Bernstein-Escardó' x' d') →
+        x ＝ x'
       l (inl ρ) (inl ρ') p =
         inv (is-sec-inverse-of-perfect-image x ρ) ∙
           (ap (map-emb g) p ∙ is-sec-inverse-of-perfect-image x' ρ')
@@ -98,14 +98,14 @@ module _
         Σ ( X)
           ( λ x →
             ( (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
-              Id (map-Cantor-Schröder-Bernstein-Escardó' x d) y))
+              map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y))
       a (inl γ) = pair (map-emb g y) ψ
         where
         ψ :
           ( d :
             is-decidable
               ( is-perfect-image (map-emb f) (map-emb g) (map-emb g y))) →
-          Id (map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d) y
+          map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d ＝ y
         ψ (inl v') =
           is-retr-inverse-of-perfect-image {is-emb-g = is-emb-map-emb g} y v'
         ψ (inr v)  = ex-falso (v γ)
@@ -125,12 +125,12 @@ module _
           x : X
           x = pr1 (pr1 w)
 
-          p : Id (map-emb f x) y
+          p : map-emb f x ＝ y
           p = pr2 (pr1 w)
 
           ψ :
             ( d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
-            Id (map-Cantor-Schröder-Bernstein-Escardó' x d) y
+            map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y
           ψ (inl v) = ex-falso ((pr2 w) v)
           ψ (inr v) = p
 
@@ -138,7 +138,7 @@ module _
         Σ ( X)
           ( λ x →
             ( (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
-              Id (map-Cantor-Schröder-Bernstein-Escardó' x d) y))
+              map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y))
       b =
         a ( is-decidable-is-perfect-image-is-emb
             ( is-emb-map-emb g)
@@ -148,7 +148,7 @@ module _
       x : X
       x = pr1 b
 
-      p : Id (map-Cantor-Schröder-Bernstein-Escardó x) y
+      p : map-Cantor-Schröder-Bernstein-Escardó x ＝ y
       p = pr2 b (is-decidable-is-perfect-image-is-emb (is-emb-map-emb g) lem x)
 
     is-equiv-map-Cantor-Schröder-Bernstein-Escardó :

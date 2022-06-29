@@ -1,4 +1,6 @@
-# The uniqueness of set quotients
+---
+title: The uniqueness of set quotients
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -15,7 +17,7 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using  (_∘_; id; precomp)
 open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·l_)
-open import foundation.identity-types using (Id; _∙_; ap; inv)
+open import foundation.identity-types using (_＝_; _∙_; ap; inv)
 open import foundation.injective-maps using (is-injective-is-equiv)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel; eq-htpy-reflecting-map-Eq-Rel;
@@ -45,8 +47,8 @@ precomp-comp-Set-Quotient :
   (B : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
   (C : UU-Set l4) (g : type-hom-Set B C)
   (D : UU-Set l5) (h : type-hom-Set C D) →
-  Id ( precomp-Set-Quotient R B f D (h ∘ g))
-     ( precomp-Set-Quotient R C (precomp-Set-Quotient R B f C g) D h)
+  ( precomp-Set-Quotient R B f D (h ∘ g)) ＝
+  ( precomp-Set-Quotient R C (precomp-Set-Quotient R B f C g) D h)
 precomp-comp-Set-Quotient R B f C g D h =
   eq-htpy-reflecting-map-Eq-Rel R D
     ( precomp-Set-Quotient R B f D (h ∘ g))
@@ -100,7 +102,7 @@ module _
       K = universal-property-set-quotient-is-set-quotient R C g Ug B f
       k : type-Set C → type-Set B
       k = pr1 (center K)
-      α : Id (precomp-Set-Quotient R C g B k) f
+      α : precomp-Set-Quotient R C g B k ＝ f
       α = eq-htpy-reflecting-map-Eq-Rel R B
             ( precomp-Set-Quotient R C g B k)
             ( f)

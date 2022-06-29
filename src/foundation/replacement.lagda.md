@@ -1,4 +1,6 @@
-# The replacement axiom for type theory
+---
+title: The replacement axiom for type theory
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

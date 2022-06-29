@@ -1,4 +1,6 @@
-# Global choice
+---
+title: Global choice
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

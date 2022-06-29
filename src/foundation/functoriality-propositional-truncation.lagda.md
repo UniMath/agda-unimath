@@ -1,4 +1,6 @@
-# Functoriality of propositional truncations
+---
+title: Functoriality of propositional truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

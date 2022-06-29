@@ -1,4 +1,6 @@
-# Ranks of elements in W-types
+---
+title: Ranks of elements in W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.empty-types using
   ( empty; empty-Prop; is-empty; ex-falso)
 open import foundation.existential-quantification using
   ( exists-Prop; exists; intro-exists; ∃; intro-∃)
-open import foundation.identity-types using (tr; inv; refl; Id)
+open import foundation.identity-types using (tr; inv; refl)
 open import foundation.inequality-w-types using
   ( _le-𝕎_; le-∈-𝕎; propagate-le-𝕎)
 open import foundation.negation using (¬)

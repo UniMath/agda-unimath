@@ -1,4 +1,6 @@
-# Equivalences on Maybe
+---
+title: Equivalences on Maybe
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using
   ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; _∙_; inv; refl; ap)
+open import foundation.identity-types using (_＝_; _∙_; inv; refl; ap)
 open import foundation.injective-maps using
   ( is-injective; is-injective-map-equiv; is-injective-emb)
 open import foundation.maybe using
@@ -67,7 +69,7 @@ id-equiv-maybe-structure Y =
 
 equiv-eq-maybe-structure :
   {l1 : Level} {X : UU l1} (Y Z : maybe-structure X) →
-  Id Y Z → equiv-maybe-structure Y Z
+  Y ＝ Z → equiv-maybe-structure Y Z
 equiv-eq-maybe-structure Y .Y refl = id-equiv-maybe-structure Y
 ```
 
@@ -124,8 +126,8 @@ value-injective-map-exception-Maybe {f = f} is-inj-f x H =
 comp-injective-map-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   (is-inj-f : is-injective f) (x : X) (H : is-exception-Maybe (f (inl x))) →
-  Id ( inl (value-injective-map-exception-Maybe is-inj-f x H))
-     ( f exception-Maybe)
+  inl (value-injective-map-exception-Maybe is-inj-f x H) ＝
+  f exception-Maybe
 comp-injective-map-exception-Maybe {f = f} is-inj-f x H =
   eq-is-value-Maybe
     ( f exception-Maybe)
@@ -155,8 +157,7 @@ value-map-equiv-exception-Maybe e x H =
 comp-map-equiv-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
   (H : is-exception-Maybe (map-equiv e (inl x))) →
-  Id ( inl (value-map-equiv-exception-Maybe e x H))
-     ( map-equiv e exception-Maybe)
+  inl (value-map-equiv-exception-Maybe e x H) ＝ map-equiv e exception-Maybe
 comp-map-equiv-exception-Maybe e x H =
   eq-is-value-Maybe
     ( map-equiv e exception-Maybe)
@@ -168,7 +169,7 @@ comp-map-equiv-exception-Maybe e x H =
 ```agda
 restrict-injective-map-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
-  is-injective f → (x : X) (u : Maybe Y) (p : Id (f (inl x)) u) → Y
+  is-injective f → (x : X) (u : Maybe Y) (p : f (inl x) ＝ u) → Y
 restrict-injective-map-Maybe' {f = f} is-inj-f x (inl y) p = y
 restrict-injective-map-Maybe' {f = f} is-inj-f x (inr star) p =
   value-injective-map-exception-Maybe is-inj-f x p
@@ -181,26 +182,27 @@ restrict-injective-map-Maybe {f = f} is-inj-f x =
 
 comp-restrict-injective-map-is-exception-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
-  (is-inj-f : is-injective f) (x : X) (u : Maybe Y) (p : Id (f (inl x)) u) →
+  (is-inj-f : is-injective f) (x : X) (u : Maybe Y) (p : f (inl x) ＝ u) →
   is-exception-Maybe (f (inl x)) →
-  Id (inl (restrict-injective-map-Maybe' is-inj-f x u p)) (f exception-Maybe)
+  inl (restrict-injective-map-Maybe' is-inj-f x u p) ＝ f exception-Maybe
 comp-restrict-injective-map-is-exception-Maybe' {f = f} is-inj-f x (inl y) p q =
   ex-falso (is-not-exception-unit-Maybe y (inv p ∙ q))
-comp-restrict-injective-map-is-exception-Maybe' {f = f} is-inj-f x (inr star) p q =
+comp-restrict-injective-map-is-exception-Maybe'
+  {f = f} is-inj-f x (inr star) p q =
   comp-injective-map-exception-Maybe is-inj-f x p
 
 comp-restrict-injective-map-is-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   (is-inj-f : is-injective f) (x : X) → is-exception-Maybe (f (inl x)) →
-  Id (inl (restrict-injective-map-Maybe is-inj-f x)) (f exception-Maybe)
+  inl (restrict-injective-map-Maybe is-inj-f x) ＝ f exception-Maybe
 comp-restrict-injective-map-is-exception-Maybe {f = f} is-inj-f x =
   comp-restrict-injective-map-is-exception-Maybe' is-inj-f x (f (inl x)) refl
 
 comp-restrict-injective-map-is-not-exception-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
-  (is-inj-f : is-injective f) (x : X) (u : Maybe Y) (p : Id (f (inl x)) u) →
+  (is-inj-f : is-injective f) (x : X) (u : Maybe Y) (p : f (inl x) ＝ u) →
   is-not-exception-Maybe (f (inl x)) →
-  Id (inl (restrict-injective-map-Maybe' is-inj-f x u p)) (f (inl x))
+  inl (restrict-injective-map-Maybe' is-inj-f x u p) ＝ f (inl x)
 comp-restrict-injective-map-is-not-exception-Maybe' is-inj-f x (inl y) p H =
   inv p
 comp-restrict-injective-map-is-not-exception-Maybe' is-inj-f x (inr star) p H =
@@ -209,7 +211,7 @@ comp-restrict-injective-map-is-not-exception-Maybe' is-inj-f x (inr star) p H =
 comp-restrict-injective-map-is-not-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : Maybe X → Maybe Y} →
   (is-inj-f : is-injective f) (x : X) → is-not-exception-Maybe (f (inl x)) →
-  Id (inl (restrict-injective-map-Maybe is-inj-f x)) (f (inl x))
+  inl (restrict-injective-map-Maybe is-inj-f x) ＝ f (inl x)
 comp-restrict-injective-map-is-not-exception-Maybe {f = f} is-inj-f x =
   comp-restrict-injective-map-is-not-exception-Maybe' is-inj-f x (f (inl x))
     refl
@@ -222,7 +224,7 @@ We don't use with-abstraction to keep full control over the definitional equalit
 ```agda
 map-equiv-equiv-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y)
-  (x : X) (u : Maybe Y) (p : Id (map-equiv e (inl x)) u) → Y
+  (x : X) (u : Maybe Y) (p : map-equiv e (inl x) ＝ u) → Y
 map-equiv-equiv-Maybe' e =
   restrict-injective-map-Maybe' (is-injective-map-equiv e)
 
@@ -233,24 +235,24 @@ map-equiv-equiv-Maybe e =
 
 comp-map-equiv-equiv-is-exception-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
-  (u : Maybe Y) (p : Id (map-equiv e (inl x)) u) →
+  (u : Maybe Y) (p : map-equiv e (inl x) ＝ u) →
   is-exception-Maybe (map-equiv e (inl x)) →
-  Id (inl (map-equiv-equiv-Maybe' e x u p)) (map-equiv e exception-Maybe)
+  inl (map-equiv-equiv-Maybe' e x u p) ＝ map-equiv e exception-Maybe
 comp-map-equiv-equiv-is-exception-Maybe' e =
   comp-restrict-injective-map-is-exception-Maybe' (is-injective-map-equiv e)
 
 comp-map-equiv-equiv-is-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
   is-exception-Maybe (map-equiv e (inl x)) →
-  Id (inl (map-equiv-equiv-Maybe e x)) (map-equiv e exception-Maybe)
+  inl (map-equiv-equiv-Maybe e x) ＝ map-equiv e exception-Maybe
 comp-map-equiv-equiv-is-exception-Maybe e x =
   comp-map-equiv-equiv-is-exception-Maybe' e x (map-equiv e (inl x)) refl
 
 comp-map-equiv-equiv-is-not-exception-Maybe' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
-  (u : Maybe Y) (p : Id (map-equiv e (inl x)) u) →
+  (u : Maybe Y) (p : map-equiv e (inl x) ＝ u) →
   is-not-exception-Maybe (map-equiv e (inl x)) →
-  Id (inl (map-equiv-equiv-Maybe' e x u p)) (map-equiv e (inl x))
+  inl (map-equiv-equiv-Maybe' e x u p) ＝ map-equiv e (inl x)
 comp-map-equiv-equiv-is-not-exception-Maybe' e x (inl y) p H =
   inv p
 comp-map-equiv-equiv-is-not-exception-Maybe' e x (inr star) p H =
@@ -259,7 +261,7 @@ comp-map-equiv-equiv-is-not-exception-Maybe' e x (inr star) p H =
 comp-map-equiv-equiv-is-not-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (x : X) →
   is-not-exception-Maybe (map-equiv e (inl x)) →
-  Id (inl (map-equiv-equiv-Maybe e x)) (map-equiv e (inl x))
+  inl (map-equiv-equiv-Maybe e x) ＝ map-equiv e (inl x)
 comp-map-equiv-equiv-is-not-exception-Maybe e x =
   comp-map-equiv-equiv-is-not-exception-Maybe' e x (map-equiv e (inl x)) refl
 ```
@@ -275,14 +277,14 @@ map-inv-equiv-equiv-Maybe e =
 comp-map-inv-equiv-equiv-is-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (y : Y) →
   is-exception-Maybe (map-inv-equiv e (inl y)) →
-  Id (inl (map-inv-equiv-equiv-Maybe e y)) (map-inv-equiv e exception-Maybe)
+  inl (map-inv-equiv-equiv-Maybe e y) ＝ map-inv-equiv e exception-Maybe
 comp-map-inv-equiv-equiv-is-exception-Maybe e =
   comp-map-equiv-equiv-is-exception-Maybe (inv-equiv e)
 
 comp-map-inv-equiv-equiv-is-not-exception-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) (y : Y) →
   ( f : is-not-exception-Maybe (map-inv-equiv e (inl y))) →
-  Id (inl (map-inv-equiv-equiv-Maybe e y)) (map-inv-equiv e (inl y))
+  inl (map-inv-equiv-equiv-Maybe e y) ＝ map-inv-equiv e (inl y)
 comp-map-inv-equiv-equiv-is-not-exception-Maybe e =
   comp-map-equiv-equiv-is-not-exception-Maybe (inv-equiv e)
 ```
@@ -377,7 +379,7 @@ pr1 (equiv-equiv-Maybe e) = map-equiv-equiv-Maybe e
 pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
 ```
 
-### For `X` a set, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception.
+### For any set `X`, the type of automorphisms on `X` is equivalent to the type of automorphisms on `Maybe X` that fix the exception.
 
 ```agda
 module _
@@ -385,7 +387,9 @@ module _
   where
   
   extend-equiv-Maybe :
-    (type-Set X ≃ type-Set X) ≃ (Σ (Maybe (type-Set X) ≃ Maybe (type-Set X)) (λ e → Id (map-equiv e (inr star)) (inr star)))
+    (type-Set X ≃ type-Set X) ≃
+    ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
+        ( λ e → map-equiv e (inr star) ＝ inr star))
   pr1 (pr1 extend-equiv-Maybe f) = equiv-coprod f id-equiv
   pr2 (pr1 extend-equiv-Maybe f) = refl
   pr2 extend-equiv-Maybe =
@@ -393,31 +397,43 @@ module _
       ( λ f → pr1 (retr-equiv-coprod (pr1 f) id-equiv (p f)))
       ( λ f →
         ( eq-pair-Σ
-          ( inv (eq-htpy-equiv (pr2 (retr-equiv-coprod (pr1 f) id-equiv (p f)))))
+          ( inv
+            ( eq-htpy-equiv (pr2 (retr-equiv-coprod (pr1 f) id-equiv (p f)))))
           ( eq-is-prop
             ( pr2
               ( Id-Prop
-                ( pair (Maybe (type-Set X)) (is-set-coprod (is-set-type-Set X) is-set-unit))
+                ( pair
+                  ( Maybe (type-Set X))
+                  ( is-set-coprod (is-set-type-Set X) is-set-unit))
                 ( map-equiv (pr1 f) (inr star))
                 ( inr star))))))
       ( λ f → eq-htpy-equiv refl-htpy)
     where
-    p : (f : (Σ (Maybe (type-Set X) ≃ Maybe (type-Set X)) (λ e → Id (map-equiv e (inr star)) (inr star))))
-      (b : unit) → Id (map-equiv (pr1 f) (inr b)) (inr b) 
+    p : (f : ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
+                 ( λ e → map-equiv e (inr star) ＝ inr star)))
+      (b : unit) → map-equiv (pr1 f) (inr b) ＝ inr b
     p f star = pr2 f
 
-  computation-extend-equiv-Maybe : (f : type-Set X ≃ type-Set X) → (x y : type-Set X) →
-    Id (map-equiv f x) y → Id (map-equiv (pr1 (map-equiv extend-equiv-Maybe f)) (inl x)) (inl y)
+  computation-extend-equiv-Maybe :
+    (f : type-Set X ≃ type-Set X) (x y : type-Set X) → map-equiv f x ＝ y →
+    map-equiv (pr1 (map-equiv extend-equiv-Maybe f)) (inl x) ＝ inl y
   computation-extend-equiv-Maybe f x y p = ap inl p
 
-  computation-inv-extend-equiv-Maybe : (f : Maybe (type-Set X) ≃ Maybe (type-Set X)) → (p : Id (map-equiv f (inr star)) (inr star)) →
-    (x : type-Set X) → Id (inl (map-equiv (map-inv-equiv extend-equiv-Maybe (pair f p)) x)) (map-equiv f (inl x))
+  computation-inv-extend-equiv-Maybe :
+    (f : Maybe (type-Set X) ≃ Maybe (type-Set X))
+    (p : map-equiv f (inr star) ＝ inr star) (x : type-Set X) →
+    inl (map-equiv (map-inv-equiv extend-equiv-Maybe (pair f p)) x) ＝
+    map-equiv f (inl x)
   computation-inv-extend-equiv-Maybe f p x =
-    htpy-eq-equiv (pr1 (pair-eq-Σ (pr2 (pr1 (pr2 extend-equiv-Maybe)) (pair f p)))) (inl x)
+    htpy-eq-equiv
+      ( pr1 (pair-eq-Σ (pr2 (pr1 (pr2 extend-equiv-Maybe)) (pair f p))))
+      ( inl x)
 
   comp-extend-equiv-Maybe : (f g : type-Set X ≃ type-Set X) →
     htpy-equiv
       ( pr1 (map-equiv extend-equiv-Maybe (f ∘e g)))
-      ( (pr1 (map-equiv extend-equiv-Maybe f)) ∘e (pr1 (map-equiv extend-equiv-Maybe g)))
-  comp-extend-equiv-Maybe f g = compose-map-coprod (map-equiv g) (map-equiv f) id id
+      ( ( pr1 (map-equiv extend-equiv-Maybe f)) ∘e
+        ( pr1 (map-equiv extend-equiv-Maybe g)))
+  comp-extend-equiv-Maybe f g =
+    compose-map-coprod (map-equiv g) (map-equiv f) id id
 ```

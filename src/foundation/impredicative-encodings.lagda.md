@@ -1,4 +1,6 @@
-# Impredicative encodings of the logical operations
+---
+title: Impredicative encodings of the logical operations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -15,7 +17,7 @@ open import foundation.empty-types using (ex-falso)
 open import foundation.equivalences using (_≃_)
 open import foundation.existential-quantification using
   ( exists; exists-Prop)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.logical-equivalences using (equiv-iff)
 open import foundation.negation using (¬; neg-Prop')
 open import foundation.propositional-truncations using
@@ -245,21 +247,21 @@ type-impredicative-based-id-Prop A a x =
 
 map-impredicative-based-id-Prop :
   {l : Level} (A : UU-Set l) (a x : type-Set A) →
-  Id a x → type-impredicative-based-id-Prop A a x
+  a ＝ x → type-impredicative-based-id-Prop A a x
 map-impredicative-based-id-Prop A a .a refl Q p = p
 
 inv-map-impredicative-based-id-Prop :
   {l : Level} (A : UU-Set l) (a x : type-Set A) →
-  type-impredicative-based-id-Prop A a x → Id a x
+  type-impredicative-based-id-Prop A a x → a ＝ x
 inv-map-impredicative-based-id-Prop A a x H =
-  H (λ x → pair (Id a x) (is-set-type-Set A a x)) refl
+  H (λ x → pair (a ＝ x) (is-set-type-Set A a x)) refl
 
 equiv-impredicative-based-id-Prop :
   {l : Level} (A : UU-Set l) (a x : type-Set A) →
-  Id a x ≃ type-impredicative-based-id-Prop A a x
+  (a ＝ x) ≃ type-impredicative-based-id-Prop A a x
 equiv-impredicative-based-id-Prop A a x =
   equiv-iff
-    ( pair (Id a x) (is-set-type-Set A a x))
+    ( pair (a ＝ x) (is-set-type-Set A a x))
     ( impredicative-based-id-Prop A a x)
     ( map-impredicative-based-id-Prop A a x)
     ( inv-map-impredicative-based-id-Prop A a x)
@@ -281,21 +283,21 @@ type-impredicative-id-Prop A x y =
 
 map-impredicative-id-Prop :
   {l : Level} (A : UU-Set l) (x y : type-Set A) →
-  Id x y → type-impredicative-id-Prop A x y
+  x ＝ y → type-impredicative-id-Prop A x y
 map-impredicative-id-Prop A x .x refl Q r = r x
 
 inv-map-impredicative-id-Prop :
   {l : Level} (A : UU-Set l ) (x y : type-Set A) →
-  type-impredicative-id-Prop A x y → Id x y
+  type-impredicative-id-Prop A x y → x ＝ y
 inv-map-impredicative-id-Prop A x y H =
-  H (λ a b → pair (Id a b) (is-set-type-Set A a b)) (λ a → refl)
+  H (λ a b → pair (a ＝ b) (is-set-type-Set A a b)) (λ a → refl)
 
 equiv-impredicative-id-Prop :
   {l : Level} (A : UU-Set l) (x y : type-Set A) →
-  Id x y ≃ type-impredicative-id-Prop A x y
+  (x ＝ y) ≃ type-impredicative-id-Prop A x y
 equiv-impredicative-id-Prop A x y =
   equiv-iff
-    ( pair (Id x y) (is-set-type-Set A x y))
+    ( pair (x ＝ y) (is-set-type-Set A x y))
     ( impredicative-id-Prop A x y)
     ( map-impredicative-id-Prop A x y)
     ( inv-map-impredicative-id-Prop A x y)

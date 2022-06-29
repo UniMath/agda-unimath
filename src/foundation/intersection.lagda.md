@@ -1,4 +1,6 @@
-# Intersection of subtypes
+---
+title: Intersection of subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

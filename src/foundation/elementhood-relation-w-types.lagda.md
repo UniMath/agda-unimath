@@ -1,4 +1,6 @@
-# The elementhood relation on W-types
+---
+title: The elementhood relation on W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

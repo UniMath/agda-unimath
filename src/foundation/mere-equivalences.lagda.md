@@ -1,4 +1,6 @@
-# Mere equivalences
+---
+title: Mere equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

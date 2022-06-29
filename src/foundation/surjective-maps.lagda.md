@@ -1,4 +1,6 @@
-# Surjective maps
+---
+title: Surjective maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

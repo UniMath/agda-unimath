@@ -1,4 +1,6 @@
-# The universal property of pullbacks
+---
+title: The universal property of pullbacks
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -21,7 +23,7 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using
   ( _·r_; _~_; _∙h_; htpy-left-whisk; refl-htpy; right-unit-htpy;
     is-contr-total-htpy; equiv-concat-htpy)
-open import foundation.identity-types using (Id; inv; ap; refl)
+open import foundation.identity-types using (_＝_; inv; ap; refl)
 open import foundation.propositions using (is-prop; is-prop-Π)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
@@ -88,7 +90,7 @@ module _
   eq-map-universal-property-pullback :
     (up-c : {l : Level} → universal-property-pullback l f g c) →
     {C' : UU l5} (c' : cone f g C') →
-    Id (cone-map f g c (map-universal-property-pullback up-c c')) c'
+    cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
   eq-map-universal-property-pullback up-c {C'} c' =
     issec-map-inv-is-equiv (up-c C') c'
 ```
@@ -129,7 +131,7 @@ module _
       is-contr (Σ (C' → C) (λ h → htpy-cone f g (cone-map f g c h) c'))
     uniqueness-universal-property-pullback up C' c' =
       is-contr-equiv'
-        ( Σ (C' → C) (λ h → Id (cone-map f g c h) c'))
+        ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
         ( equiv-tot
           ( λ h → extensionality-cone f g (cone-map f g c h) c'))
         ( is-contr-map-is-equiv (up C')  c')

@@ -28,7 +28,7 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.homotopies using (_~_; refl-htpy; _·l_)
 open import foundation.identity-types using
-  ( Id; refl; _∙_; inv; ap; right-unit; ap-comp)
+  ( _＝_; refl; _∙_; inv; ap; right-unit; ap-comp)
 open import foundation.involutions using (is-involution)
 open import foundation.sets using (UU-Set; type-Set)
 open import foundation.unit-type using (star)
@@ -73,8 +73,7 @@ module _
   where
 
   iterate-succ-ℕ :
-    (k : ℕ) (f : X → X) (x : X) →
-    Id (iterate (succ-ℕ k) f x) (iterate k f (f x))
+    (k : ℕ) (f : X → X) (x : X) → iterate (succ-ℕ k) f x ＝ iterate k f (f x)
   iterate-succ-ℕ zero-ℕ f x = refl
   iterate-succ-ℕ (succ-ℕ k) f x = ap f (iterate-succ-ℕ k f x)
 
@@ -93,15 +92,14 @@ module _
 
   iterate-add-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    Id (iterate (add-ℕ k l) f x) (iterate k f (iterate l f x))
+    iterate (add-ℕ k l) f x ＝ iterate k f (iterate l f x)
   iterate-add-ℕ k zero-ℕ f x = refl
   iterate-add-ℕ k (succ-ℕ l) f x =
     ap f (iterate-add-ℕ k l f x) ∙ iterate-succ-ℕ k f (iterate l f x)
 
   left-unit-law-iterate-add-ℕ :
     (l : ℕ) (f : X → X) (x : X) →
-    Id ( iterate-add-ℕ 0 l f x)
-       ( ap (λ t → iterate t f x) (left-unit-law-add-ℕ l))
+    iterate-add-ℕ 0 l f x ＝ ap (λ t → iterate t f x) (left-unit-law-add-ℕ l)
   left-unit-law-iterate-add-ℕ zero-ℕ f x = refl
   left-unit-law-iterate-add-ℕ (succ-ℕ l) f x =
     ( right-unit) ∙
@@ -111,13 +109,12 @@ module _
 
   right-unit-law-iterate-add-ℕ :
     (k : ℕ) (f : X → X) (x : X) →
-    Id ( iterate-add-ℕ k 0 f x)
-       ( ap (λ t → iterate t f x) (right-unit-law-add-ℕ k))
+    iterate-add-ℕ k 0 f x ＝ ap (λ t → iterate t f x) (right-unit-law-add-ℕ k)
   right-unit-law-iterate-add-ℕ k f x = refl
 
   iterate-iterate :
     (k l : ℕ) (f : X → X) (x : X) →
-    Id (iterate k f (iterate l f x)) (iterate l f (iterate k f x))
+    iterate k f (iterate l f x) ＝ iterate l f (iterate k f x)
   iterate-iterate k l f x =
     ( inv (iterate-add-ℕ k l f x)) ∙
     ( ( ap (λ t → iterate t f x) (commutative-add-ℕ k l)) ∙
@@ -125,7 +122,7 @@ module _
 
   iterate-mul-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    Id (iterate (mul-ℕ k l) f x) (iterate k (iterate l f) x)
+    iterate (mul-ℕ k l) f x ＝ iterate k (iterate l f) x
   iterate-mul-ℕ zero-ℕ l f x = refl
   iterate-mul-ℕ (succ-ℕ k) l f x =
     ( iterate-add-ℕ (mul-ℕ k l) l f x) ∙
@@ -134,7 +131,7 @@ module _
 
   iterate-exp-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    Id (iterate (exp-ℕ l k) f x) (iterate k (iterate l) f x)
+    iterate (exp-ℕ l k) f x ＝ iterate k (iterate l) f x
   iterate-exp-ℕ zero-ℕ l f x = refl
   iterate-exp-ℕ (succ-ℕ k) l f x =
     ( iterate-mul-ℕ (exp-ℕ l k) l f x) ∙

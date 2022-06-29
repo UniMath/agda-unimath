@@ -1,4 +1,6 @@
-# Contractible types
+---
+title: Contractible types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation-core.function-extensionality using
   ( funext; htpy-eq; eq-htpy)
 open import foundation-core.functions using (id)
 open import foundation-core.functoriality-dependent-pair-types using (tot)
-open import foundation-core.identity-types using (Id; left-inv; refl; ap)
+open import foundation-core.identity-types using (_＝_; left-inv; refl; ap)
 open import foundation-core.propositions using (UU-Prop; equiv-prop)
 open import foundation-core.singleton-induction using
   ( ind-singleton-is-contr; comp-singleton-is-contr)
@@ -142,7 +144,7 @@ module _
         ( λ f →
           eq-htpy
             ( ind-singleton-is-contr a H
-              ( λ x → Id (ind-singleton-is-contr a H P (f a) x) (f x))
+              ( λ x → ind-singleton-is-contr a H P (f a) x ＝ f x)
               ( comp-singleton-is-contr a H P (f a))))
 
   equiv-dependent-universal-property-contr :

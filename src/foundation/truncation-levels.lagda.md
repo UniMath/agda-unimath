@@ -1,4 +1,6 @@
-# Truncation levels
+---
+title: Truncation levels
+---
 
 
 ```agda

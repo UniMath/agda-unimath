@@ -1,4 +1,6 @@
-# The subtype identity principle
+---
+title: The subtype identity principle
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

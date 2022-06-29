@@ -10,14 +10,6 @@ module elementary-number-theory.integers where
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
 
-open import foundation.automorphisms using
-  ( UU-Pointed-Type-With-Aut; type-Pointed-Type-With-Aut;
-    inv-map-aut-Pointed-Type-With-Aut; point-Pointed-Type-With-Aut;
-    map-aut-Pointed-Type-With-Aut; issec-inv-map-aut-Pointed-Type-With-Aut;
-    hom-Pointed-Type-With-Aut; map-hom-Pointed-Type-With-Aut;
-    aut-Pointed-Type-With-Aut; preserves-point-map-hom-Pointed-Type-With-Aut;
-    preserves-aut-map-hom-Pointed-Type-With-Aut; htpy-hom-Pointed-Type-With-Aut;
-    eq-htpy-hom-Pointed-Type-With-Aut)
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -36,6 +28,15 @@ open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; Level; lzero)
 
 open import structured-types.types-equipped-with-endomorphisms using (Endo)
+open import structured-types.pointed-types-equipped-with-automorphisms using
+  ( Pointed-Type-With-Aut; type-Pointed-Type-With-Aut;
+    inv-map-aut-Pointed-Type-With-Aut; pt-Pointed-Type-With-Aut;
+    map-aut-Pointed-Type-With-Aut; issec-inv-map-aut-Pointed-Type-With-Aut;
+    hom-Pointed-Type-With-Aut; map-hom-Pointed-Type-With-Aut;
+    aut-Pointed-Type-With-Aut; preserves-point-map-hom-Pointed-Type-With-Aut;
+    preserves-aut-map-hom-Pointed-Type-With-Aut; htpy-hom-Pointed-Type-With-Aut;
+    eq-htpy-hom-Pointed-Type-With-Aut)
+
 ```
 
 ## Idea
@@ -398,44 +399,45 @@ is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 #### The type of integers is a type equipped with a point and an automorphism
 
 ```agda
-ℤ-Pointed-Type-With-Aut : UU-Pointed-Type-With-Aut lzero
-ℤ-Pointed-Type-With-Aut =
-  pair ℤ (pair zero-ℤ equiv-succ-ℤ)
+ℤ-Pointed-Type-With-Aut : Pointed-Type-With-Aut lzero
+pr1 (pr1 ℤ-Pointed-Type-With-Aut) = ℤ
+pr2 (pr1 ℤ-Pointed-Type-With-Aut) = zero-ℤ
+pr2 ℤ-Pointed-Type-With-Aut = equiv-succ-ℤ
 ```
 
 #### Construction of a map from ℤ into any type with a point and an automorphism
 
 ```agda
 map-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l) →
+  {l : Level} (X : Pointed-Type-With-Aut l) →
   ℤ → type-Pointed-Type-With-Aut X
 map-ℤ-Pointed-Type-With-Aut X (inl zero-ℕ) =
-  inv-map-aut-Pointed-Type-With-Aut X (point-Pointed-Type-With-Aut X)
+  inv-map-aut-Pointed-Type-With-Aut X (pt-Pointed-Type-With-Aut X)
 map-ℤ-Pointed-Type-With-Aut X (inl (succ-ℕ k)) =
   inv-map-aut-Pointed-Type-With-Aut X
     ( map-ℤ-Pointed-Type-With-Aut X (inl k))
 map-ℤ-Pointed-Type-With-Aut X (inr (inl star)) =
-  point-Pointed-Type-With-Aut X
+  pt-Pointed-Type-With-Aut X
 map-ℤ-Pointed-Type-With-Aut X (inr (inr zero-ℕ)) =
-  map-aut-Pointed-Type-With-Aut X (point-Pointed-Type-With-Aut X)
+  map-aut-Pointed-Type-With-Aut X (pt-Pointed-Type-With-Aut X)
 map-ℤ-Pointed-Type-With-Aut X (inr (inr (succ-ℕ k))) =
   map-aut-Pointed-Type-With-Aut X
     ( map-ℤ-Pointed-Type-With-Aut X (inr (inr k)))
 
 preserves-point-map-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l) →
+  {l : Level} (X : Pointed-Type-With-Aut l) →
   ( map-ℤ-Pointed-Type-With-Aut X zero-ℤ) ＝
-  ( point-Pointed-Type-With-Aut X)
+  ( pt-Pointed-Type-With-Aut X)
 preserves-point-map-ℤ-Pointed-Type-With-Aut X = refl
 
 preserves-aut-map-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l) (k : ℤ) →
+  {l : Level} (X : Pointed-Type-With-Aut l) (k : ℤ) →
   ( map-ℤ-Pointed-Type-With-Aut X (succ-ℤ k)) ＝
   ( map-aut-Pointed-Type-With-Aut X
     ( map-ℤ-Pointed-Type-With-Aut X k))
 preserves-aut-map-ℤ-Pointed-Type-With-Aut X (inl zero-ℕ) =
   inv
-    ( issec-inv-map-aut-Pointed-Type-With-Aut X (point-Pointed-Type-With-Aut X))
+    ( issec-inv-map-aut-Pointed-Type-With-Aut X (pt-Pointed-Type-With-Aut X))
 preserves-aut-map-ℤ-Pointed-Type-With-Aut X (inl (succ-ℕ k)) =
   inv
     ( issec-inv-map-aut-Pointed-Type-With-Aut X
@@ -448,7 +450,7 @@ preserves-aut-map-ℤ-Pointed-Type-With-Aut X (inr (inr (succ-ℕ x))) =
   refl
 
 hom-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l) →
+  {l : Level} (X : Pointed-Type-With-Aut l) →
   hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X
 hom-ℤ-Pointed-Type-With-Aut X =
   pair
@@ -462,7 +464,7 @@ hom-ℤ-Pointed-Type-With-Aut X =
 
 ```agda
 htpy-map-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l)
+  {l : Level} (X : Pointed-Type-With-Aut l)
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X) →
   map-ℤ-Pointed-Type-With-Aut X ~
   map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X h
@@ -497,7 +499,7 @@ htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))) =
       ℤ-Pointed-Type-With-Aut X h (inr (inr k))))
 
 coh-point-htpy-map-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l)
+  {l : Level} (X : Pointed-Type-With-Aut l)
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X) →
   ( preserves-point-map-ℤ-Pointed-Type-With-Aut X) ＝
   ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
@@ -510,7 +512,7 @@ coh-point-htpy-map-ℤ-Pointed-Type-With-Aut X h =
         ℤ-Pointed-Type-With-Aut X h))
 
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l)
+  {l : Level} (X : Pointed-Type-With-Aut l)
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X)
   (k : ℤ) →
   ( ( preserves-aut-map-ℤ-Pointed-Type-With-Aut X k) ∙
@@ -524,7 +526,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
     ( inv-con
       ( issec-map-inv-equiv
         ( aut-Pointed-Type-With-Aut X)
-        ( point-Pointed-Type-With-Aut X))
+        ( pt-Pointed-Type-With-Aut X))
       ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
         ( preserves-aut-map-hom-Pointed-Type-With-Aut
           ℤ-Pointed-Type-With-Aut X h neg-one-ℤ))
@@ -621,7 +623,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))) =
           ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k)))))))
 
 htpy-hom-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l) →
+  {l : Level} (X : Pointed-Type-With-Aut l) →
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X) →
   htpy-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X
     (hom-ℤ-Pointed-Type-With-Aut X) h
@@ -633,7 +635,7 @@ htpy-hom-ℤ-Pointed-Type-With-Aut X h =
       ( coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h))
 
 is-initial-ℤ-Pointed-Type-With-Aut :
-  {l : Level} (X : UU-Pointed-Type-With-Aut l) →
+  {l : Level} (X : Pointed-Type-With-Aut l) →
   is-contr (hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X)
 is-initial-ℤ-Pointed-Type-With-Aut X =
   pair

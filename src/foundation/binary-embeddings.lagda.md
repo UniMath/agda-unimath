@@ -1,4 +1,6 @@
-# Binary embeddings
+---
+title: Binary embeddings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv-comp; is-emb-is-equiv)
 open import foundation.identity-types using
-  ( Id; ap-binary; concat'; ap; triangle-ap-binary; is-equiv-concat'; concat;
+  ( _＝_; ap-binary; concat'; ap; triangle-ap-binary; is-equiv-concat'; concat;
     is-equiv-concat)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -20,14 +22,22 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 A binary operation `f : A → B → C` is said to be a binary embedding if the functions `λ x → f x b` and `λ y → f a y` are embeddings for each `a : A` and `b : B` respectively.
 
+## Definition
+
 ```agda
 is-binary-emb :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → B → C) → UU (l1 ⊔ l2 ⊔ l3)
 is-binary-emb {A = A} {B = B} f =
   {x x' : A} {y y' : B} →
-    is-binary-equiv (λ (p : Id x x') (q : Id y y') → ap-binary f p q)
+    is-binary-equiv (λ (p : x ＝ x') (q : y ＝ y') → ap-binary f p q)
+```
 
+## Properties
+
+### Any binary equivalence is a binary embedding
+
+```agda
 is-emb-fix-left-is-binary-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
   is-binary-equiv f → {a : A} → is-emb (fix-left f a)

@@ -1,4 +1,6 @@
-# Union of subtypes
+---
+title: Union of subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Propositional truncations
+---
+title: Propositional truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.equivalences using (is-equiv; _≃_; map-inv-equiv)
 open import foundation.functions using (_∘_; precomp-Π; id)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; tr; ap; _∙_)
+open import foundation.identity-types using (_＝_; tr; ap; _∙_)
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; UU-Prop; type-Prop;
     eq-is-prop; is-prop-type-Prop; is-prop-Π; type-hom-Prop; is-equiv-is-prop;
@@ -66,7 +68,7 @@ abstract
   is-prop-condition-ind-trunc-Prop' :
     {l1 l2 : Level} {A : UU l1} {P : type-trunc-Prop A → UU l2} →
     ( (x y : type-trunc-Prop A) (u : P x) (v : P y) →
-      Id (tr P (all-elements-equal-type-trunc-Prop x y) u) v) →
+      tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
     (x : type-trunc-Prop A) → is-prop (P x)
   is-prop-condition-ind-trunc-Prop' {P = P} H x =
     is-prop-all-elements-equal
@@ -83,7 +85,7 @@ ind-trunc-Prop' :
   {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → UU l)
   (f : (x : A) → P (unit-trunc-Prop x))
   (H : (x y : type-trunc-Prop A) (u : P x) (v : P y) →
-       Id (tr P (all-elements-equal-type-trunc-Prop x y) u) v) →
+       tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
   (x : type-trunc-Prop A) → P x
 ind-trunc-Prop' P f H =
   apply-dependent-universal-property-trunc

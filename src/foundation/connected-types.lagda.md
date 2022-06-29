@@ -1,4 +1,6 @@
-# Connected types
+---
+title: Connected types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

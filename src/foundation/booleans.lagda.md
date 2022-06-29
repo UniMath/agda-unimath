@@ -1,4 +1,6 @@
-# The booleans
+---
+title: The booleans
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.empty-types using (empty; is-prop-empty)
 open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl; inv)
+open import foundation-core.identity-types using (_＝_; refl; inv)
 open import foundation-core.negation using (¬)
 open import foundation-core.propositions using (is-prop)
 open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
@@ -64,16 +66,16 @@ refl-Eq-bool true = star
 refl-Eq-bool false = star
 
 Eq-eq-bool :
-  {x y : bool} → Id x y → Eq-bool x y
+  {x y : bool} → x ＝ y → Eq-bool x y
 Eq-eq-bool {x = x} refl = refl-Eq-bool x
 
 eq-Eq-bool :
-  {x y : bool} → Eq-bool x y → Id x y
+  {x y : bool} → Eq-bool x y → x ＝ y
 eq-Eq-bool {true} {true} star = refl
 eq-Eq-bool {false} {false} star = refl
 
 neq-false-true-bool :
-  ¬ (Id false true)
+  ¬ (false ＝ true)
 neq-false-true-bool ()
 ```
 
@@ -127,7 +129,7 @@ pr2 bool-Set = is-set-bool
 
 
 ```agda
-neq-neg-bool : (b : bool) → ¬ (Id b (neg-bool b))
+neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)
 neq-neg-bool true ()
 neq-neg-bool false ()
 

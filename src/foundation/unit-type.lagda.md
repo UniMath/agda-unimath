@@ -1,4 +1,6 @@
-# The unit type
+---
+title: The unit type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,7 +12,7 @@ open import foundation-core.contractible-types using
   ( is-contr; center; contraction; is-prop-is-contr; is-contr-equiv')
 open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv; _≃_)
-open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.identity-types using (refl)
 open import foundation-core.propositions using
   ( is-prop; UU-Prop; is-prop-equiv')
 open import foundation-core.sets using (is-set; UU-Set)

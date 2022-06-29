@@ -1,4 +1,6 @@
-# Small types
+---
+title: Small types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Commutative operations
+---
+title: Commutative operations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-equiv-coprod)
-open import foundation.identity-types using (Id; ap-binary; ap; _∙_)
+open import foundation.identity-types using (_＝_; ap-binary; ap; _∙_)
 open import foundation.mere-equivalences using (refl-mere-equiv)
 open import foundation.sets using (UU-Set; type-Set)
 open import
@@ -52,7 +54,7 @@ module _
   where
   
   is-commutative : (A → A → B) → UU (l1 ⊔ l2)
-  is-commutative f = (x y : A) → Id (f x y) (f y x)
+  is-commutative f = (x y : A) → f x y ＝ f y x
 ```
 
 ### Commutative operations
@@ -88,8 +90,8 @@ module _
     coprod
       ( htpy-equiv e e')
       ( htpy-equiv e (e' ∘e equiv-succ-Fin)) →
-    Id ( f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
-       ( f (p (map-equiv e' zero-Fin)) (p (map-equiv e' one-Fin)))
+    ( f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin))) ＝ 
+    ( f (p (map-equiv e' zero-Fin)) (p (map-equiv e' one-Fin)))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inl K) =
     ap-binary f (ap p (K zero-Fin)) (ap p (K one-Fin))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inr K) =
@@ -118,8 +120,8 @@ module _
 
   compute-commutative-operation-is-commutative :
     (f : A → A → type-Set B) (H : is-commutative f) (x y : A) →
-    Id ( commutative-operation-is-commutative f H (standard-unordered-pair x y))
-       ( f x y)
+    commutative-operation-is-commutative f H (standard-unordered-pair x y) ＝
+    f x y
   compute-commutative-operation-is-commutative f H x y =
     
     htpy-universal-property-set-quotient-trunc-Prop B

@@ -1,4 +1,6 @@
-# The universal propert of cartesian product types
+---
+title: The universal propert of cartesian product types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

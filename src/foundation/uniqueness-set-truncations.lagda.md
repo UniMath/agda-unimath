@@ -1,4 +1,6 @@
-# Uniqueness of set truncations
+---
+title: Uniqueness of set truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

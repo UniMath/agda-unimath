@@ -1,4 +1,6 @@
-# Split surjective maps
+---
+title: Split surjective maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,7 @@ module foundation.split-surjective-maps where
 open import foundation.injective-maps using (is-injective)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv)
-open import foundation-core.identity-types using (Id)
+open import foundation-core.identity-types using (_＝_)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
@@ -29,7 +31,7 @@ Note that split-surjectiveness is the Curry-Howard interpretation of surjectiven
 ```agda
 is-split-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-split-surjective {A = A} {B} f = (b : B) → Σ A (λ a → Id (f a) b)
+is-split-surjective {A = A} {B} f = (b : B) → Σ A (λ a → f a ＝ b)
 ```
 
 ### Split epimorphisms

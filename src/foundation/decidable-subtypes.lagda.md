@@ -1,4 +1,6 @@
-# Decidable subtypes
+---
+title: Decidable subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.equivalences using (_≃_; map-equiv; id-equiv)
 open import foundation.functoriality-dependent-function-types using
   ( compute-map-equiv-Π; equiv-Π)
-open import foundation.identity-types using (Id; inv; tr)
+open import foundation.identity-types using (inv; tr)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.propositions using (type-Prop; is-prop)

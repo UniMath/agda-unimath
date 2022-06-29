@@ -1,4 +1,6 @@
-# The universal property of propositional truncations
+---
+title: The universal property of propositional truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -20,7 +22,7 @@ open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.functoriality-dependent-function-types using
   ( is-equiv-map-Π)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; type-hom-Prop; is-equiv-is-prop;
     is-prop-Π; type-equiv-Prop; Σ-Prop; is-prop-function-type; prod-Prop;
@@ -108,7 +110,7 @@ abstract
     universal-property-propositional-truncation l P f
   universal-property-is-propositional-truncation l P f is-ptr-f Q g =
     is-contr-equiv'
-      ( Σ (type-hom-Prop P Q) (λ h → Id (h ∘ f) g))
+      ( Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ＝ g))
       ( equiv-tot (λ h → equiv-funext))
       ( is-contr-map-is-equiv (is-ptr-f Q) g)
 
