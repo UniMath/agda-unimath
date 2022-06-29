@@ -18,5 +18,5 @@ open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.prime-ideals-commutative-rings public
-open import commutative-algebra.zarisky-topology public
+open import commutative-algebra.zariski-topology public
 ```

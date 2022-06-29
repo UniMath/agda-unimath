@@ -43,7 +43,7 @@ is-closed-subset-zarisky-topology-Commutative-Ring {l1} {l2} {l3} R U =
   ∃-Prop
     ( subtype l3 (type-Commutative-Ring R))
     ( λ V →
-      Id (standard-closed-subset-zarisky-topology-Commutative-Ring R V) U)
+      standard-closed-subset-zarisky-topology-Commutative-Ring R V ＝ U)
 
 closed-subset-zarisky-topology-Commutative-Ring :
   {l1 l2 : Level} (l3 : Level) (R : Commutative-Ring l1) →
