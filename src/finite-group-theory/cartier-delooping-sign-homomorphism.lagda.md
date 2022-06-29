@@ -8,6 +8,7 @@ module finite-group-theory.cartier-delooping-sign-homomorphism where
 open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
+open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations using
   ( is-contr-parity-transposition-permutation; list-transpositions-permutation-count;
     retr-permutation-list-transpositions-count; is-generated-transposition-symmetric-Fin-Level)
@@ -117,7 +118,7 @@ open import univalent-combinatorics.equality-finite-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Fin-Set; has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin; is-set-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level)
+  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level; Fin-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
 open import univalent-combinatorics.orientations-complete-undirected-graph using
@@ -223,6 +224,41 @@ module _
       ( Automorphism-Group (UU-Set (lsuc l)) (raise-Set (lsuc l) (Fin-Set 2)) (is-one-type-UU-Set (lsuc l)))
   pr1 (cartier-delooping-sign n) = map-cartier-delooping-sign n
   pr2 (cartier-delooping-sign n) = eq-fin-2-map-cartier-delooping-sign-Fin n
+
+  map-cartier-delooping-sign' : (n : ℕ) →
+    classifying-type-Concrete-Group
+      ( UU-Fin-Level-Group l n) →
+    classifying-type-Concrete-Group
+      ( UU-Fin-Level-Group (lsuc l) 2)
+  map-cartier-delooping-sign' zero-ℕ X = Fin-UU-Fin-Level (lsuc l) 2
+  map-cartier-delooping-sign' (succ-ℕ zero-ℕ) X = Fin-UU-Fin-Level (lsuc l) 2
+  pr1 (map-cartier-delooping-sign' (succ-ℕ (succ-ℕ n)) X) =
+    quotient-sign (succ-ℕ (succ-ℕ n)) X
+  pr2 (map-cartier-delooping-sign' (succ-ℕ (succ-ℕ n)) X) =
+    mere-equiv-fin-2-quotient-sign (succ-ℕ (succ-ℕ n)) X star
+
+  eq-fin-2-map-cartier-delooping-sign-Fin' : (n : ℕ) →
+    Id
+      ( map-cartier-delooping-sign' n (Fin-UU-Fin-Level l n))
+      ( Fin-UU-Fin-Level (lsuc l) 2)
+  eq-fin-2-map-cartier-delooping-sign-Fin' zero-ℕ = refl
+  eq-fin-2-map-cartier-delooping-sign-Fin' (succ-ℕ zero-ℕ) = refl
+  eq-fin-2-map-cartier-delooping-sign-Fin' (succ-ℕ (succ-ℕ n)) =
+    eq-pair-Σ
+      ( eq-equiv
+        ( pr1
+          ( map-cartier-delooping-sign'
+            ( succ-ℕ (succ-ℕ n))
+            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))))
+        ( raise (lsuc l) (Fin 2))
+        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+          ( inv-equiv
+            ( equiv-fin-2-quotient-sign-equiv-Fin
+              ( succ-ℕ (succ-ℕ n))
+              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+              ( star)
+              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+      ( eq-is-prop is-prop-type-trunc-Prop)
 
 module _
   { l : Level}
