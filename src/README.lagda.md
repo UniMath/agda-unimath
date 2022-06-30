@@ -80,7 +80,7 @@ open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
 open import commutative-algebra.local-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
-open import commutative-algebra.zarisky-topology
+open import commutative-algebra.zariski-topology
 ```
 
 ## Elementary number theory
