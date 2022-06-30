@@ -144,6 +144,7 @@ open import elementary-number-theory.ordinal-induction-natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
+open import elementary-number-theory.pythagorean-triples
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.relatively-prime-natural-numbers

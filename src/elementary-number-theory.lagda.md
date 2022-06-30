@@ -48,6 +48,7 @@ open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
+open import elementary-number-theory.pythagorean-triples public
 open import elementary-number-theory.rational-numbers public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
