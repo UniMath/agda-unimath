@@ -640,6 +640,8 @@ open import ring-theory.subsets-rings
 
 ```agda
 open import set-theory
+open import set-theory.baire-space
+open import set-theory.cantor-space
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```
