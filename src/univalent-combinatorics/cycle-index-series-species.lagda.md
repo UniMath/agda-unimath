@@ -27,18 +27,19 @@ The cycle index series of a species `F` is a type family indexed by finite famil
 
 ```agda
 total-type-family-of-cyclic-types :
-  {l : Level} (X : 𝔽) (C : type-𝔽 X → Σ ℕ (Cyclic l)) → UU l
+  {l : Level} (X : 𝔽) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l)) → UU l
 total-type-family-of-cyclic-types X C =
-  Σ (type-𝔽 X) (λ x → type-Cyclic (pr1 (C x)) (pr2 (C x)))
+  Σ (type-𝔽 X) (λ x → type-Cyclic-Type (pr1 (C x)) (pr2 (C x)))
 
 permutation-family-of-cyclic-types :
-  {l : Level} (X : 𝔽) (C : type-𝔽 X → Σ ℕ (Cyclic l)) →
+  {l : Level} (X : 𝔽) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l)) →
   Aut (total-type-family-of-cyclic-types X C)
 permutation-family-of-cyclic-types X C = {!!}
 
 cycle-index-series-species :
   {l : Level} (F : species l) (X : 𝔽) →
-  (type-𝔽 X → Σ ℕ (Cyclic lzero ∘ succ-ℕ)) →
+  (type-𝔽 X → Σ ℕ (Cyclic-Type lzero ∘ succ-ℕ)) →
   UU {!!}
-cycle-index-series-species F X C = Σ {!F (total-type-family-of-cyclic-types X C)!} {!!}
+cycle-index-series-species F X C =
+  Σ {!F (total-type-family-of-cyclic-types X C)!} {!!}
 ```

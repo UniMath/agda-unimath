@@ -7,6 +7,8 @@ title: Formalisation of the Symmetry Book
 
 module graph-theory.finite-graphs where
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,7 +18,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
-open import elementary-number-theory.natural-numbers
+
+open import graph-theory.undirected-graphs
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
@@ -27,50 +30,69 @@ open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
+```
 
+## Definitions
+
+### Undirected graph structures on `Fin n`
+
+```agda
 record Graph-Fin : UU (lsuc lzero)
   where
   field
     V : ℕ
     E : (unordered-pair (Fin V)) → ℕ
+```
 
+### Directed graph structures on `Fin n`
+
+```agda
 record Graph-Fin' : UU (lsuc lzero)
   where
   field
     V : ℕ
     E : Fin V → Fin V → ℕ
     σ : (x y : Fin V) → Id (E x y) (E y x)
+```
 
-record Graph-𝔽 : UU (lsuc lzero)
+### Finite undirected graphs
+
+```agda
+Graph-𝔽 : UU (lsuc lzero)
+Graph-𝔽 = Σ 𝔽 (λ X → unordered-pair (type-𝔽 X) → 𝔽)
+
+module _
+  (G : Graph-𝔽)
   where
-  field
-    vertex : 𝔽
-    edge : unordered-pair (type-𝔽 vertex) → 𝔽
 
-vertices-Graph-𝔽 : (G : Graph-𝔽) → UU lzero
-vertices-Graph-𝔽 G = type-𝔽 (Graph-𝔽.vertex G)
+  vertex-Graph-𝔽 : UU lzero
+  vertex-Graph-𝔽 = type-𝔽 (pr1 G)
 
-is-finite-vertices-Graph-𝔽 : (G : Graph-𝔽) → is-finite (vertices-Graph-𝔽 G)
-is-finite-vertices-Graph-𝔽 G = is-finite-type-𝔽 (Graph-𝔽.vertex G)
+  unordered-pair-vertices-Graph-𝔽 : UU (lsuc lzero)
+  unordered-pair-vertices-Graph-𝔽 = unordered-pair vertex-Graph-𝔽
 
-edges-Graph-𝔽 :
-  (G : Graph-𝔽) (p : unordered-pair (vertices-Graph-𝔽 G)) → UU lzero
-edges-Graph-𝔽 G p = type-𝔽 (Graph-𝔽.edge G p)
+  is-finite-vertex-Graph-𝔽 : is-finite vertex-Graph-𝔽
+  is-finite-vertex-Graph-𝔽 = is-finite-type-𝔽 (pr1 G)
 
-is-finite-edges-Graph-𝔽 :
-  (G : Graph-𝔽) (p : unordered-pair (vertices-Graph-𝔽 G)) →
-  is-finite (edges-Graph-𝔽 G p)
-is-finite-edges-Graph-𝔽 G p = is-finite-type-𝔽 (Graph-𝔽.edge G p)
+  edge-Graph-𝔽 : (p : unordered-pair-vertices-Graph-𝔽) → UU lzero
+  edge-Graph-𝔽 p = type-𝔽 (pr2 G p)
 
-total-edges-Graph-𝔽 : (G : Graph-𝔽) → UU (lsuc lzero)
-total-edges-Graph-𝔽 G =
-  Σ (unordered-pair (vertices-Graph-𝔽 G)) (edges-Graph-𝔽 G)
+  is-finite-edge-Graph-𝔽 :
+    (p : unordered-pair-vertices-Graph-𝔽) → is-finite (edge-Graph-𝔽 p)
+  is-finite-edge-Graph-𝔽 p = is-finite-type-𝔽 (pr2 G p)
 
-{- The type total-edges-Graph-𝔽 isn't expected to be finite, but its set
-   truncation should be. -}
+  total-edge-Graph-𝔽 : UU (lsuc lzero)
+  total-edge-Graph-𝔽 = Σ unordered-pair-vertices-Graph-𝔽 edge-Graph-𝔽
 
-{- The following type is expected to be equivalent to Graph-𝔽 -}
+  graph-Graph-𝔽 : Undirected-Graph lzero lzero
+  pr1 graph-Graph-𝔽 = vertex-Graph-𝔽
+  pr2 graph-Graph-𝔽 = edge-Graph-𝔽
+```
 
+
+### The following type is expected to be equivalent to Graph-𝔽
+
+```agda
 record Graph-𝔽' : UU (lsuc lzero)
   where
   field
@@ -78,24 +100,18 @@ record Graph-𝔽' : UU (lsuc lzero)
     edge : type-𝔽 vertex → type-𝔽 vertex → 𝔽
     σ : (x y : type-𝔽 vertex) → type-𝔽 (edge x y) ≃ type-𝔽 (edge y x)
     σ² : (x y : type-𝔽 vertex) → map-equiv ((σ y x) ∘e (σ x y)) ~ id
+```
 
-{- The degree of a vertex x of a graph G is the set of occurences of x as an
-   endpoint of x. Note that the unordered pair {x,x} adds two elements to the
-   degree of x.  -}
+The degree of a vertex x of a graph G is the set of occurences of x as an endpoint of x. Note that the unordered pair {x,x} adds two elements to the degree of x.
 
+```agda
 incident-edges-vertex-Graph-𝔽 :
-  (G : Graph-𝔽) (x : type-𝔽 (Graph-𝔽.vertex G)) → UU (lsuc lzero)
+  (G : Graph-𝔽) (x : vertex-Graph-𝔽 G) → UU (lsuc lzero)
 incident-edges-vertex-Graph-𝔽 G x =
-  Σ ( unordered-pair (type-𝔽 (Graph-𝔽.vertex G)))
+  Σ ( unordered-pair (vertex-Graph-𝔽 G))
     ( λ p → fib (element-unordered-pair p) x)
+```
 
-{-
-neighbor-Graph-𝔽 :
-  (G : Graph-𝔽) (x : vertices-Graph-𝔽 G) → UU (lsuc lzero)
-neighbor-Graph-𝔽 G x = Σ (vertices-Graph-𝔽 G) (λ y → type-trunc-Prop {!!})
--}
-
---------------------------------------------------------------------------------
 
 {- We formalize the definitions of complete multipartite graphs, complete
    graphs, and complete bipartite graphs. -}

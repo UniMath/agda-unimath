@@ -397,7 +397,6 @@ module _
       number-of-elements-is-finite
         ( is-finite-decidable-subtype
           ( intersection-decidable-subtype
-            ( 2-Element-Decidable-Subtype l (type-UU-Fin-Level X))
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d1 d2)
             ( 2-Element-Decidable-Subtype-subtype-pointwise-difference d2 d3))
           ( is-finite-2-Element-Decidable-Subtype n X))

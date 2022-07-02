@@ -45,91 +45,96 @@ open import structured-types.types-equipped-with-endomorphisms
 open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
 
 open import univalent-combinatorics.cyclic-types using
-  ( Cyclic; ℤ-Mod-Cyclic; Cyclic-Pointed-Type; endo-Cyclic; type-Cyclic;
-    endomorphism-Cyclic; equiv-Cyclic; id-equiv-Cyclic;
-    equiv-eq-Cyclic; is-contr-total-equiv-Cyclic;
-    is-equiv-equiv-eq-Cyclic; extensionality-Cyclic)
+  ( Cyclic-Type; ℤ-Mod-Cyclic-Type; Cyclic-Type-Pointed-Type; endo-Cyclic-Type;
+    type-Cyclic-Type; endomorphism-Cyclic-Type; equiv-Cyclic-Type;
+    id-equiv-Cyclic-Type; equiv-eq-Cyclic-Type;
+    is-contr-total-equiv-Cyclic-Type; is-equiv-equiv-eq-Cyclic-Type;
+    extensionality-Cyclic-Type)
 ```
 
 ```agda
-Infinite-Cyclic : (l : Level) → UU (lsuc l)
-Infinite-Cyclic l = Cyclic l zero-ℕ 
+Infinite-Cyclic-Type : (l : Level) → UU (lsuc l)
+Infinite-Cyclic-Type l = Cyclic-Type l zero-ℕ 
 
-ℤ-Infinite-Cyclic : Infinite-Cyclic lzero
-ℤ-Infinite-Cyclic = ℤ-Mod-Cyclic zero-ℕ
+ℤ-Infinite-Cyclic-Type : Infinite-Cyclic-Type lzero
+ℤ-Infinite-Cyclic-Type = ℤ-Mod-Cyclic-Type zero-ℕ
 
-Infinite-Cyclic-Pointed-Type : Pointed-Type (lsuc lzero)
-Infinite-Cyclic-Pointed-Type = Cyclic-Pointed-Type zero-ℕ
+Infinite-Cyclic-Type-Pointed-Type : Pointed-Type (lsuc lzero)
+Infinite-Cyclic-Type-Pointed-Type = Cyclic-Type-Pointed-Type zero-ℕ
 
 module _
-  {l : Level} (X : Infinite-Cyclic l)
+  {l : Level} (X : Infinite-Cyclic-Type l)
   where
 
-  endo-Infinite-Cyclic : Endo l
-  endo-Infinite-Cyclic = endo-Cyclic zero-ℕ X
+  endo-Infinite-Cyclic-Type : Endo l
+  endo-Infinite-Cyclic-Type = endo-Cyclic-Type zero-ℕ X
   
-  type-Infinite-Cyclic : UU l
-  type-Infinite-Cyclic = type-Cyclic zero-ℕ X
+  type-Infinite-Cyclic-Type : UU l
+  type-Infinite-Cyclic-Type = type-Cyclic-Type zero-ℕ X
   
-  endomorphism-Infinite-Cyclic :
-    type-Infinite-Cyclic → type-Infinite-Cyclic
-  endomorphism-Infinite-Cyclic = endomorphism-Cyclic zero-ℕ X
+  endomorphism-Infinite-Cyclic-Type :
+    type-Infinite-Cyclic-Type → type-Infinite-Cyclic-Type
+  endomorphism-Infinite-Cyclic-Type = endomorphism-Cyclic-Type zero-ℕ X
 
-  mere-equiv-ℤ-Infinite-Cyclic : mere-equiv-Endo ℤ-Endo endo-Infinite-Cyclic
-  mere-equiv-ℤ-Infinite-Cyclic = pr2 X
+  mere-equiv-ℤ-Infinite-Cyclic-Type :
+    mere-equiv-Endo ℤ-Endo endo-Infinite-Cyclic-Type
+  mere-equiv-ℤ-Infinite-Cyclic-Type = pr2 X
   
 module _
   (l : Level)
   where
 
-  point-Infinite-Cyclic : Infinite-Cyclic l
-  pr1 (pr1 point-Infinite-Cyclic) = raise l ℤ
-  pr2 (pr1 point-Infinite-Cyclic) = (map-raise ∘ succ-ℤ) ∘ map-inv-raise
-  pr2 point-Infinite-Cyclic =
+  point-Infinite-Cyclic-Type : Infinite-Cyclic-Type l
+  pr1 (pr1 point-Infinite-Cyclic-Type) = raise l ℤ
+  pr2 (pr1 point-Infinite-Cyclic-Type) = (map-raise ∘ succ-ℤ) ∘ map-inv-raise
+  pr2 point-Infinite-Cyclic-Type =
     unit-trunc-Prop (pair (equiv-raise l ℤ) refl-htpy)
 
-  Infinite-Cyclic-Pointed-Type-Level : Pointed-Type (lsuc l)
-  pr1 Infinite-Cyclic-Pointed-Type-Level = Infinite-Cyclic l
-  pr2 Infinite-Cyclic-Pointed-Type-Level = point-Infinite-Cyclic
+  Infinite-Cyclic-Type-Pointed-Type-Level : Pointed-Type (lsuc l)
+  pr1 Infinite-Cyclic-Type-Pointed-Type-Level = Infinite-Cyclic-Type l
+  pr2 Infinite-Cyclic-Type-Pointed-Type-Level = point-Infinite-Cyclic-Type
 
 module _
-  {l1 : Level} (X : Infinite-Cyclic l1) 
+  {l1 : Level} (X : Infinite-Cyclic-Type l1) 
   where
   
-  equiv-Infinite-Cyclic : {l2 : Level} → Infinite-Cyclic l2 → UU (l1 ⊔ l2)
-  equiv-Infinite-Cyclic = equiv-Cyclic zero-ℕ X
+  equiv-Infinite-Cyclic-Type :
+    {l2 : Level} → Infinite-Cyclic-Type l2 → UU (l1 ⊔ l2)
+  equiv-Infinite-Cyclic-Type = equiv-Cyclic-Type zero-ℕ X
 
-  id-equiv-Infinite-Cyclic : equiv-Infinite-Cyclic X
-  id-equiv-Infinite-Cyclic = id-equiv-Cyclic zero-ℕ X
+  id-equiv-Infinite-Cyclic-Type : equiv-Infinite-Cyclic-Type X
+  id-equiv-Infinite-Cyclic-Type = id-equiv-Cyclic-Type zero-ℕ X
 
-  equiv-eq-Infinite-Cyclic :
-    (Y : Infinite-Cyclic l1) → Id X Y → equiv-Infinite-Cyclic Y
-  equiv-eq-Infinite-Cyclic = equiv-eq-Cyclic zero-ℕ X
+  equiv-eq-Infinite-Cyclic-Type :
+    (Y : Infinite-Cyclic-Type l1) → Id X Y → equiv-Infinite-Cyclic-Type Y
+  equiv-eq-Infinite-Cyclic-Type = equiv-eq-Cyclic-Type zero-ℕ X
   
-  is-contr-total-equiv-Infinite-Cyclic :
-    is-contr (Σ (Infinite-Cyclic l1) equiv-Infinite-Cyclic)
-  is-contr-total-equiv-Infinite-Cyclic = is-contr-total-equiv-Cyclic zero-ℕ X
+  is-contr-total-equiv-Infinite-Cyclic-Type :
+    is-contr (Σ (Infinite-Cyclic-Type l1) equiv-Infinite-Cyclic-Type)
+  is-contr-total-equiv-Infinite-Cyclic-Type =
+    is-contr-total-equiv-Cyclic-Type zero-ℕ X
 
-  is-equiv-equiv-eq-Infinite-Cyclic :
-    (Y : Infinite-Cyclic l1) → is-equiv (equiv-eq-Infinite-Cyclic Y)
-  is-equiv-equiv-eq-Infinite-Cyclic = is-equiv-equiv-eq-Cyclic zero-ℕ X
+  is-equiv-equiv-eq-Infinite-Cyclic-Type :
+    (Y : Infinite-Cyclic-Type l1) → is-equiv (equiv-eq-Infinite-Cyclic-Type Y)
+  is-equiv-equiv-eq-Infinite-Cyclic-Type =
+    is-equiv-equiv-eq-Cyclic-Type zero-ℕ X
 
-  extensionality-Infinite-Cyclic :
-    (Y : Infinite-Cyclic l1) → Id X Y ≃ equiv-Infinite-Cyclic Y
-  extensionality-Infinite-Cyclic = extensionality-Cyclic zero-ℕ X
+  extensionality-Infinite-Cyclic-Type :
+    (Y : Infinite-Cyclic-Type l1) → Id X Y ≃ equiv-Infinite-Cyclic-Type Y
+  extensionality-Infinite-Cyclic-Type = extensionality-Cyclic-Type zero-ℕ X
 
 module _
   where
   
-  map-left-factor-compute-Ω-Infinite-Cyclic :
-    equiv-Infinite-Cyclic ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic → ℤ
-  map-left-factor-compute-Ω-Infinite-Cyclic e =
+  map-left-factor-compute-Ω-Infinite-Cyclic-Type :
+    equiv-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type → ℤ
+  map-left-factor-compute-Ω-Infinite-Cyclic-Type e =
     map-equiv-Endo ℤ-Endo ℤ-Endo e zero-ℤ
 
   abstract
-    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic :
-      is-equiv map-left-factor-compute-Ω-Infinite-Cyclic
-    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic =
+    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic-Type :
+      is-equiv map-left-factor-compute-Ω-Infinite-Cyclic-Type
+    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic-Type =
       is-equiv-is-contr-map
         ( λ x →
           is-contr-equiv
@@ -186,23 +191,26 @@ module _
                           ( x))))))))
             ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))
 
-  equiv-left-factor-compute-Ω-Infinite-Cyclic :
-    equiv-Infinite-Cyclic
-      ℤ-Infinite-Cyclic
-      ℤ-Infinite-Cyclic ≃ ℤ
-  pr1 equiv-left-factor-compute-Ω-Infinite-Cyclic =
-    map-left-factor-compute-Ω-Infinite-Cyclic
-  pr2 equiv-left-factor-compute-Ω-Infinite-Cyclic =
-    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic
+  equiv-left-factor-compute-Ω-Infinite-Cyclic-Type :
+    equiv-Infinite-Cyclic-Type
+      ℤ-Infinite-Cyclic-Type
+      ℤ-Infinite-Cyclic-Type ≃ ℤ
+  pr1 equiv-left-factor-compute-Ω-Infinite-Cyclic-Type =
+    map-left-factor-compute-Ω-Infinite-Cyclic-Type
+  pr2 equiv-left-factor-compute-Ω-Infinite-Cyclic-Type =
+    is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic-Type
 
-  compute-Ω-Infinite-Cyclic : type-Ω (Infinite-Cyclic-Pointed-Type) ≃ ℤ
-  compute-Ω-Infinite-Cyclic =
-    ( equiv-left-factor-compute-Ω-Infinite-Cyclic) ∘e
-    ( extensionality-Infinite-Cyclic ℤ-Infinite-Cyclic ℤ-Infinite-Cyclic)
+  compute-Ω-Infinite-Cyclic-Type :
+    type-Ω (Infinite-Cyclic-Type-Pointed-Type) ≃ ℤ
+  compute-Ω-Infinite-Cyclic-Type =
+    ( equiv-left-factor-compute-Ω-Infinite-Cyclic-Type) ∘e
+    ( extensionality-Infinite-Cyclic-Type
+        ℤ-Infinite-Cyclic-Type
+        ℤ-Infinite-Cyclic-Type)
 
--- Infinite-Cyclic-𝕊¹ : 𝕊¹ → Infinite-Cyclic
--- pr1 (pr1 (Infinite-Cyclic-𝕊¹ x)) = Id x x
--- pr2 (pr1 (Infinite-Cyclic-𝕊¹ x)) = {!!}
--- pr2 (Infinite-Cyclic-𝕊¹ x) = {!!}
+-- Infinite-Cyclic-Type-𝕊¹ : 𝕊¹ → Infinite-Cyclic-Type
+-- pr1 (pr1 (Infinite-Cyclic-Type-𝕊¹ x)) = Id x x
+-- pr2 (pr1 (Infinite-Cyclic-Type-𝕊¹ x)) = {!!}
+-- pr2 (Infinite-Cyclic-Type-𝕊¹ x) = {!!}
 
 ```

@@ -9,6 +9,8 @@ module foundation.intersection where
 
 open import foundation.conjunction using (conj-Prop; conj-decidable-Prop)
 open import foundation.decidable-subtypes using (decidable-subtype)
+open import foundation.double-powersets
+open import foundation.propositions using (Π-Prop)
 open import foundation.subtypes using (subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -19,15 +21,38 @@ The intersection of two subtypes `A` and `B` is the subtype that contains the el
 
 ## Definition
 
+### The intersection of two subtypes
+
 ```agda
 module _
-  {l l1 l2 : Level} (X : UU l)
+  {l l1 l2 : Level} {X : UU l}
   where
 
   intersection-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
   intersection-subtype P Q x = conj-Prop (P x) (Q x)
+```
 
-  intersection-decidable-subtype : decidable-subtype l1 X → decidable-subtype l2 X →
+### The intersection of two decidable subtypes
+
+```agda
+module _
+  {l l1 l2 : Level} {X : UU l}
+  where
+
+  intersection-decidable-subtype :
+    decidable-subtype l1 X → decidable-subtype l2 X →
     decidable-subtype (l1 ⊔ l2) X
   intersection-decidable-subtype P Q x = conj-decidable-Prop (P x) (Q x)
+```
+
+### The intersection of a family of subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1}
+  where
+
+  intersection-fam-subtype :
+    {I : UU l2} (P : I → subtype l2 X) → subtype l2 X
+  intersection-fam-subtype {I} P x = Π-Prop I (λ i → P i x)
 ```
