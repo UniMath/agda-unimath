@@ -79,7 +79,8 @@ open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq; is-set-Fin)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
-    Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level)
+    Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level;
+    is-finite; 𝔽; is-finite-has-cardinality)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
     is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
@@ -116,6 +117,15 @@ type-2-Element-Type = pr1
 has-two-elements-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → has-two-elements (type-2-Element-Type X)
 has-two-elements-type-2-Element-Type = pr2
+
+is-finite-type-2-Element-Type :
+  {l : Level} (X : 2-Element-Type l) → is-finite (type-2-Element-Type X)
+is-finite-type-2-Element-Type X =
+  is-finite-has-cardinality (has-two-elements-type-2-Element-Type X)
+
+finite-type-2-Element-Type : 2-Element-Type lzero → 𝔽
+pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
+pr2 (finite-type-2-Element-Type X) = is-finite-type-2-Element-Type X
 ```
 
 ## Properties

@@ -40,6 +40,25 @@ tetrahedron-in-3-space =
                   is-in-2-Element-Decidable-Subtype
                     (pr1 P)
                     ( x)))))
-```
 
-BA₄ := tetrahedron-in-3-space
+module _
+  (T : tetrahedron-in-3-space)
+  where
+
+  vertex-tetrahedron-in-3-space : UU lzero
+  vertex-tetrahedron-in-3-space = type-UU-Fin (pr1 T)
+
+  cyclic-structure-tetrahedron-in-3-space :
+    cyclic-structure 3
+      ( Σ ( 2-Element-Decidable-Subtype lzero
+            ( 2-Element-Decidable-Subtype lzero
+              ( vertex-tetrahedron-in-3-space)))
+          ( λ Q →
+            (x : vertex-tetrahedron-in-3-space) →
+            is-empty
+              ( (P : type-2-Element-Decidable-Subtype Q) →
+                is-in-2-Element-Decidable-Subtype
+                  (pr1 P)
+                  ( x))))
+  cyclic-structure-tetrahedron-in-3-space = pr2 T
+```

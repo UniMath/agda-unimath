@@ -29,7 +29,13 @@ We define the type of all theoretically possible hydrocarbons, correctly account
 
 Hydrocarbons are built out of carbon and hydrogen atoms. The symmetry group of an isolated carbon atom in 3-space is the alternating group `A₄`, where the number 4 comes from the number of bonds a carbon atom makes in a molecule.
 
-Bonds in hydrocarbons can appear as single bonds, double bonds, and triple bonds, but there are no quadruple bonds. 
+Bonds in hydrocarbons can appear as single bonds, double bonds, and triple bonds, but there are no quadruple bonds.
+
+We define hydrocarbons to be graphs equipped with a family of tetrahedra in 3-dimensional space indexed by the vertices and for each vertex `c` an embedding from the type of all edges incident to `c` into the vertices of the tetrahedron associated to `c`, satisfying the following conditions:
+
+- There are at most 3 edges between any two vertices
+- The graph contains no loops
+- The graph is connected
 
 ## Definition
 
@@ -43,12 +49,53 @@ hydrocarbon =
           ( ( c : vertex-Graph-𝔽 G) →
             Σ ( vertex-Graph-𝔽 G)
               ( λ c' →
-                edge-Graph-𝔽 G
-                  ( standard-unordered-pair c c')) ↪
+                edge-Graph-𝔽 G (standard-unordered-pair c c')) ↪
               type-UU-Fin (pr1 (C c))) ×
           ( ( (c : vertex-Graph-𝔽 G) →
               ¬ ( edge-Graph-𝔽 G
                   ( standard-unordered-pair c c))) ×
             ( (c c' : vertex-Graph-𝔽 G) →
-              leq-ℕ (number-of-elements-is-finite (is-finite-type-𝔽 (pr2 G (standard-unordered-pair c c')))) 3))))
+              leq-ℕ
+                ( number-of-elements-is-finite
+                  ( is-finite-type-𝔽 (pr2 G (standard-unordered-pair c c'))))
+                ( 3)))))
+
+module _
+  (H : hydrocarbon)
+  where
+
+  finite-graph-hydrocarbon : Graph-𝔽
+  finite-graph-hydrocarbon = pr1 H
+
+  vertex-hydrocarbon-𝔽 : 𝔽
+  vertex-hydrocarbon-𝔽 = pr1 finite-graph-hydrocarbon
+
+  vertex-hydrocarbon : UU lzero
+  vertex-hydrocarbon = vertex-Graph-𝔽 finite-graph-hydrocarbon
+
+  is-finite-vertex-hydrocarbon : is-finite vertex-hydrocarbon
+  is-finite-vertex-hydrocarbon =
+    is-finite-vertex-Graph-𝔽 finite-graph-hydrocarbon
+
+  unordered-pair-vertices-hydrocarbon : UU (lsuc lzero)
+  unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
+
+  edge-hydrocarbon-𝔽 : unordered-pair-vertices-hydrocarbon → 𝔽
+  edge-hydrocarbon-𝔽 = pr2  finite-graph-hydrocarbon
+
+  edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU lzero
+  edge-hydrocarbon = edge-Graph-𝔽 finite-graph-hydrocarbon
+
+  is-finite-edge-hydrocarbon :
+    (p : unordered-pair-vertices-hydrocarbon) → is-finite (edge-hydrocarbon p)
+  is-finite-edge-hydrocarbon = is-finite-edge-Graph-𝔽 finite-graph-hydrocarbon
+
+  carbon-atom-hydrocarbon :
+    vertex-hydrocarbon → tetrahedron-in-3-space
+  carbon-atom-hydrocarbon = pr1 (pr2 H)
+
+  electron-carbon-atom-hydrocarbon :
+    (c : vertex-hydrocarbon) → UU lzero
+  electron-carbon-atom-hydrocarbon c =
+    vertex-tetrahedron-in-3-space (carbon-atom-hydrocarbon c)
 ```

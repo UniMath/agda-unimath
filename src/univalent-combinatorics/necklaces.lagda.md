@@ -65,7 +65,8 @@ module _
 ```agda
 necklace-pattern : (l : Level) → ℕ → ℕ → UU (lsuc l)
 necklace-pattern l m n =
-  Σ (Cyclic-Type l m) (λ X → Σ (UU-Fin n) (λ C → type-Cyclic-Type m X → type-UU-Fin C))
+  Σ ( Cyclic-Type l m)
+    ( λ X → Σ (UU-Fin n) (λ C → type-Cyclic-Type m X → type-UU-Fin C))
 ```
 
 ## Properties
