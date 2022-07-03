@@ -71,9 +71,9 @@ module _
   total-edge-Undirected-Graph-𝔽 =
     Σ unordered-pair-vertices-Undirected-Graph-𝔽 edge-Undirected-Graph-𝔽
 
-  graph-Undirected-Graph-𝔽 : Undirected-Graph lzero lzero
-  pr1 graph-Undirected-Graph-𝔽 = vertex-Undirected-Graph-𝔽
-  pr2 graph-Undirected-Graph-𝔽 = edge-Undirected-Graph-𝔽
+  undirected-graph-Undirected-Graph-𝔽 : Undirected-Graph lzero lzero
+  pr1 undirected-graph-Undirected-Graph-𝔽 = vertex-Undirected-Graph-𝔽
+  pr2 undirected-graph-Undirected-Graph-𝔽 = edge-Undirected-Graph-𝔽
 ```
 
 
@@ -99,27 +99,4 @@ incident-edges-vertex-Undirected-Graph-𝔽 :
 incident-edges-vertex-Undirected-Graph-𝔽 G x =
   Σ ( unordered-pair (vertex-Undirected-Graph-𝔽 G))
     ( λ p → fib (element-unordered-pair p) x)
-```
-
-
-complete-Undirected-Graph-𝔽 : 𝔽 → Undirected-Graph-𝔽
-complete-Undirected-Graph-𝔽 X = complete-multipartite-Undirected-Graph-𝔽 X (λ x → unit-𝔽)
-
-complete-bipartite-Undirected-Graph-𝔽 : 𝔽 → 𝔽 → Undirected-Graph-𝔽
-Undirected-Graph-𝔽.vertex (complete-bipartite-Undirected-Graph-𝔽 X Y) = coprod-𝔽 X Y
-Undirected-Graph-𝔽.edge (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
-  prod-𝔽 ( Σ-𝔽 X
-           ( λ x →
-             fib-𝔽
-               ( two-element-type-𝔽 (pr1 p))
-               ( coprod-𝔽 X Y)
-               ( element-unordered-pair p)
-               ( inl x)))
-         ( Σ-𝔽 Y
-           ( λ y →
-             fib-𝔽
-               ( two-element-type-𝔽 (pr1 p))
-               ( coprod-𝔽 X Y)
-               ( element-unordered-pair p)
-               ( inr y)))
 ```

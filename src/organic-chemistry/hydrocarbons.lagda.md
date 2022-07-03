@@ -18,6 +18,7 @@ open import foundation.negation
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
+open import graph-theory.connected-undirected-graphs
 open import graph-theory.finite-graphs
 
 open import univalent-combinatorics.finite-types
@@ -42,40 +43,42 @@ We define hydrocarbons to be graphs equipped with a family of tetrahedra in 3-di
 ```agda
 hydrocarbon : UU (lsuc lzero)
 hydrocarbon =
-  Σ ( Graph-𝔽)
+  Σ ( Undirected-Graph-𝔽)
     ( λ G →
-      Σ ( vertex-Graph-𝔽 G → tetrahedron-in-3-space)
+      Σ ( vertex-Undirected-Graph-𝔽 G → tetrahedron-in-3-space)
         ( λ C →
-          ( ( c : vertex-Graph-𝔽 G) →
-            Σ ( vertex-Graph-𝔽 G)
+          ( ( c : vertex-Undirected-Graph-𝔽 G) →
+            Σ ( vertex-Undirected-Graph-𝔽 G)
               ( λ c' →
-                edge-Graph-𝔽 G (standard-unordered-pair c c')) ↪
-              type-UU-Fin (pr1 (C c))) ×
-          ( ( (c : vertex-Graph-𝔽 G) →
-              ¬ ( edge-Graph-𝔽 G
+                edge-Undirected-Graph-𝔽 G (standard-unordered-pair c c')) ↪
+                type-UU-Fin (pr1 (C c))) ×
+          ( ( (c : vertex-Undirected-Graph-𝔽 G) →
+              ¬ ( edge-Undirected-Graph-𝔽 G
                   ( standard-unordered-pair c c))) ×
-            ( (c c' : vertex-Graph-𝔽 G) →
-              leq-ℕ
-                ( number-of-elements-is-finite
-                  ( is-finite-type-𝔽 (pr2 G (standard-unordered-pair c c'))))
-                ( 3)))))
+            ( ( (c c' : vertex-Undirected-Graph-𝔽 G) →
+                leq-ℕ
+                  ( number-of-elements-is-finite
+                    ( is-finite-type-𝔽 (pr2 G (standard-unordered-pair c c'))))
+                  ( 3)) ×
+                is-connected-Undirected-Graph
+                  ( undirected-graph-Undirected-Graph-𝔽 G)))))
 
 module _
   (H : hydrocarbon)
   where
 
-  finite-graph-hydrocarbon : Graph-𝔽
+  finite-graph-hydrocarbon : Undirected-Graph-𝔽
   finite-graph-hydrocarbon = pr1 H
 
   vertex-hydrocarbon-𝔽 : 𝔽
   vertex-hydrocarbon-𝔽 = pr1 finite-graph-hydrocarbon
 
   vertex-hydrocarbon : UU lzero
-  vertex-hydrocarbon = vertex-Graph-𝔽 finite-graph-hydrocarbon
+  vertex-hydrocarbon = vertex-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
   is-finite-vertex-hydrocarbon : is-finite vertex-hydrocarbon
   is-finite-vertex-hydrocarbon =
-    is-finite-vertex-Graph-𝔽 finite-graph-hydrocarbon
+    is-finite-vertex-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
   unordered-pair-vertices-hydrocarbon : UU (lsuc lzero)
   unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
@@ -84,11 +87,12 @@ module _
   edge-hydrocarbon-𝔽 = pr2  finite-graph-hydrocarbon
 
   edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU lzero
-  edge-hydrocarbon = edge-Graph-𝔽 finite-graph-hydrocarbon
+  edge-hydrocarbon = edge-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
   is-finite-edge-hydrocarbon :
     (p : unordered-pair-vertices-hydrocarbon) → is-finite (edge-hydrocarbon p)
-  is-finite-edge-hydrocarbon = is-finite-edge-Graph-𝔽 finite-graph-hydrocarbon
+  is-finite-edge-hydrocarbon =
+    is-finite-edge-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
   carbon-atom-hydrocarbon :
     vertex-hydrocarbon → tetrahedron-in-3-space

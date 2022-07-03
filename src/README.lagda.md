@@ -456,8 +456,12 @@ open import foundation-core.universe-levels
 open import graph-theory
 open import graph-theory.circuits-undirected-graphs
 open import graph-theory.closed-walks-undirected-graphs
+open import graph-theory.complete-bipartite-graphs
+open import graph-theory.complete-multipartite-graphs
+open import graph-theory.complete-undirected-graphs
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.cycles-undirected-graphs
+open import graph-theory.directed-graph-structures-on-standard-finite-sets
 open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
@@ -477,6 +481,7 @@ open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
+open import graph-theory.undirected-graph-structures-on-standard-finite-sets
 open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
 open import graph-theory.voltage-graphs
