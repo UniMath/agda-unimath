@@ -52,7 +52,7 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
     apply-universal-property-trunc-Prop)
 open import foundation.sets using
-  ( is-set; is-set-Prop; is-set-equiv'; is-set-equiv)
+  ( is-set; is-set-Prop; is-set-equiv'; is-set-equiv; UU-Set)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
@@ -81,279 +81,331 @@ open import univalent-combinatorics.standard-finite-types using
   ( Fin; succ-Fin; Fin-Endo)
 ```
 
+## Idea
+
+A cyclic type is a type `X` equipped with an endomorphism `f : X → X` such that the pair `(X, f)` is merely equivalent to the pair `(ℤ-Mod k, +1)` for some `k : ℕ`.
+
+## Definitions
+
+### The type of cyclic types of a given order
+
 ```agda
 is-cyclic-Endo : {l : Level} → ℕ → Endo l → UU l
 is-cyclic-Endo k X = mere-equiv-Endo (ℤ-Mod-Endo k) X
 
-Cyclic : (l : Level) → ℕ → UU (lsuc l)
-Cyclic l k = Σ (Endo l) (is-cyclic-Endo k)
-
-ℤ-Mod-Cyclic : (k : ℕ) → Cyclic lzero k
-pr1 (ℤ-Mod-Cyclic k) = ℤ-Mod-Endo k
-pr2 (ℤ-Mod-Cyclic k) = refl-mere-equiv-Endo (ℤ-Mod-Endo k)
-
-Cyclic-Pointed-Type : (k : ℕ) → Pointed-Type (lsuc lzero)
-pr1 (Cyclic-Pointed-Type k) = Cyclic lzero k
-pr2 (Cyclic-Pointed-Type k) = ℤ-Mod-Cyclic k
-
-endo-Cyclic : {l : Level} (k : ℕ) → Cyclic l k → Endo l
-endo-Cyclic k = pr1
-
-type-Cyclic : {l : Level} (k : ℕ) → Cyclic l k → UU l
-type-Cyclic k X = type-Endo (endo-Cyclic k X)
-
-Fin-Cyclic : (k : ℕ) → Cyclic lzero (succ-ℕ k)
-pr1 (Fin-Cyclic k) = Fin-Endo (succ-ℕ k)
-pr2 (Fin-Cyclic k) = refl-mere-equiv-Endo (Fin-Endo (succ-ℕ k))
-
-endo-ℤ-Mod-Cyclic : (k : ℕ) → Endo lzero
-endo-ℤ-Mod-Cyclic k = endo-Cyclic k (ℤ-Mod-Cyclic k)
-
-mere-equiv-endo-Cyclic :
-  {l : Level} (k : ℕ) (X : Cyclic l k) →
-  mere-equiv-Endo (endo-ℤ-Mod-Cyclic k) (endo-Cyclic k X)
-mere-equiv-endo-Cyclic zero-ℕ X = pr2 X
-mere-equiv-endo-Cyclic (succ-ℕ k) X = pr2 X
-
-endomorphism-Cyclic :
-  {l : Level} (k : ℕ) (X : Cyclic l k) → type-Cyclic k X → type-Cyclic k X
-endomorphism-Cyclic k X = endomorphism-Endo (endo-Cyclic k X)
+Cyclic-Type : (l : Level) → ℕ → UU (lsuc l)
+Cyclic-Type l k = Σ (Endo l) (is-cyclic-Endo k)
 
 module _
-  {l1 l2 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k)
+  {l : Level} (k : ℕ) (X : Cyclic-Type l k)
   where
-  
-  equiv-Cyclic : UU (l1 ⊔ l2)
-  equiv-Cyclic = equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y)
 
-  equiv-equiv-Cyclic : equiv-Cyclic → type-Cyclic k X ≃ type-Cyclic k Y
-  equiv-equiv-Cyclic = equiv-equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y)
+  endo-Cyclic-Type : Endo l
+  endo-Cyclic-Type = pr1 X
 
-  map-equiv-Cyclic : equiv-Cyclic → type-Cyclic k X → type-Cyclic k Y
-  map-equiv-Cyclic e = map-equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y) e
+  type-Cyclic-Type : UU l
+  type-Cyclic-Type = type-Endo endo-Cyclic-Type
 
-  coherence-square-equiv-Cyclic :
-    (e : equiv-Cyclic) →
-    coherence-square
-      ( map-equiv-Cyclic e)
-      ( endomorphism-Cyclic k X)
-      ( endomorphism-Cyclic k Y)
-      ( map-equiv-Cyclic e)
-  coherence-square-equiv-Cyclic e = pr2 e
+  endomorphism-Cyclic-Type : type-Cyclic-Type → type-Cyclic-Type
+  endomorphism-Cyclic-Type = endomorphism-Endo endo-Cyclic-Type
 
-module _
-  {l : Level} (k : ℕ) (X : Cyclic l k)
-  where
-  
-  is-set-type-Cyclic : is-set (type-Cyclic k X)
-  is-set-type-Cyclic =
+  mere-equiv-endo-Cyclic-Type : mere-equiv-Endo (ℤ-Mod-Endo k) endo-Cyclic-Type
+  mere-equiv-endo-Cyclic-Type = pr2 X
+
+  is-set-type-Cyclic-Type : is-set type-Cyclic-Type
+  is-set-type-Cyclic-Type =
     apply-universal-property-trunc-Prop
-      ( mere-equiv-endo-Cyclic k X)
-      ( is-set-Prop (type-Cyclic k X))
+      ( mere-equiv-endo-Cyclic-Type)
+      ( is-set-Prop type-Cyclic-Type)
       ( λ e →
         is-set-equiv'
           ( ℤ-Mod k)
-          ( equiv-equiv-Cyclic k (ℤ-Mod-Cyclic k) X e)
+          ( equiv-equiv-Endo (ℤ-Mod-Endo k) endo-Cyclic-Type e)
           ( is-set-ℤ-Mod k))
 
-  id-equiv-Cyclic : equiv-Cyclic k X X
-  id-equiv-Cyclic = id-equiv-Endo (endo-Cyclic k X)
+  set-Cyclic-Type : UU-Set l
+  pr1 set-Cyclic-Type = type-Cyclic-Type
+  pr2 set-Cyclic-Type = is-set-type-Cyclic-Type
+```
+
+### Cyclic-Type structure on a type
+
+```agda
+cyclic-structure : {l : Level} → ℕ → UU l → UU l
+cyclic-structure k X = Σ (X → X) (λ f → is-cyclic-Endo k (pair X f))
+
+cyclic-type-cyclic-structure :
+  {l : Level} (k : ℕ) {X : UU l} → cyclic-structure k X → Cyclic-Type l k
+pr1 (pr1 (cyclic-type-cyclic-structure k {X} c)) = X
+pr2 (pr1 (cyclic-type-cyclic-structure k c)) = pr1 c
+pr2 (cyclic-type-cyclic-structure k c) = pr2 c
+```
+
+### The standard cyclic types
+
+```agda
+ℤ-Mod-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero k
+pr1 (ℤ-Mod-Cyclic-Type k) = ℤ-Mod-Endo k
+pr2 (ℤ-Mod-Cyclic-Type k) = refl-mere-equiv-Endo (ℤ-Mod-Endo k)
+
+Fin-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero (succ-ℕ k)
+Fin-Cyclic-Type k = ℤ-Mod-Cyclic-Type (succ-ℕ k)
+
+Cyclic-Type-Pointed-Type : (k : ℕ) → Pointed-Type (lsuc lzero)
+pr1 (Cyclic-Type-Pointed-Type k) = Cyclic-Type lzero k
+pr2 (Cyclic-Type-Pointed-Type k) = ℤ-Mod-Cyclic-Type k
+```
+
+### Equivalences of cyclic types
+
+```agda
+module _
+  {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
+  where
+  
+  equiv-Cyclic-Type : UU (l1 ⊔ l2)
+  equiv-Cyclic-Type = equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y)
+
+  equiv-equiv-Cyclic-Type :
+    equiv-Cyclic-Type → type-Cyclic-Type k X ≃ type-Cyclic-Type k Y
+  equiv-equiv-Cyclic-Type =
+    equiv-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y)
+
+  map-equiv-Cyclic-Type :
+    equiv-Cyclic-Type → type-Cyclic-Type k X → type-Cyclic-Type k Y
+  map-equiv-Cyclic-Type e =
+    map-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y) e
+
+  coherence-square-equiv-Cyclic-Type :
+    (e : equiv-Cyclic-Type) →
+    coherence-square
+      ( map-equiv-Cyclic-Type e)
+      ( endomorphism-Cyclic-Type k X)
+      ( endomorphism-Cyclic-Type k Y)
+      ( map-equiv-Cyclic-Type e)
+  coherence-square-equiv-Cyclic-Type e = pr2 e
+
+module _
+  {l : Level} (k : ℕ) (X : Cyclic-Type l k)
+  where
+
+  id-equiv-Cyclic-Type : equiv-Cyclic-Type k X X
+  id-equiv-Cyclic-Type = id-equiv-Endo (endo-Cyclic-Type k X)
                                                  
-  equiv-eq-Cyclic : (Y : Cyclic l k) → Id X Y → equiv-Cyclic k X Y
-  equiv-eq-Cyclic .X refl = id-equiv-Cyclic
+  equiv-eq-Cyclic-Type :
+    (Y : Cyclic-Type l k) → Id X Y → equiv-Cyclic-Type k X Y
+  equiv-eq-Cyclic-Type .X refl = id-equiv-Cyclic-Type
 
-is-contr-total-equiv-Cyclic :
-  {l1 : Level} (k : ℕ) (X : Cyclic l1 k) →
-  is-contr (Σ (Cyclic l1 k) (equiv-Cyclic k X))
-is-contr-total-equiv-Cyclic k X =
+is-contr-total-equiv-Cyclic-Type :
+  {l1 : Level} (k : ℕ) (X : Cyclic-Type l1 k) →
+  is-contr (Σ (Cyclic-Type l1 k) (equiv-Cyclic-Type k X))
+is-contr-total-equiv-Cyclic-Type k X =
   is-contr-total-Eq-subtype
-    ( is-contr-total-equiv-Endo (endo-Cyclic k X))
+    ( is-contr-total-equiv-Endo (endo-Cyclic-Type k X))
     ( λ Y → is-prop-type-trunc-Prop)
-    ( endo-Cyclic k X)
-    ( id-equiv-Endo (endo-Cyclic k X))
-    ( mere-equiv-endo-Cyclic k X)
+    ( endo-Cyclic-Type k X)
+    ( id-equiv-Endo (endo-Cyclic-Type k X))
+    ( mere-equiv-endo-Cyclic-Type k X)
 
 module _
-  {l : Level} (k : ℕ) (X : Cyclic l k)
+  {l : Level} (k : ℕ) (X : Cyclic-Type l k)
   where
   
-  is-equiv-equiv-eq-Cyclic : (Y : Cyclic l k) → is-equiv (equiv-eq-Cyclic k X Y)
-  is-equiv-equiv-eq-Cyclic =
+  is-equiv-equiv-eq-Cyclic-Type :
+    (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
+  is-equiv-equiv-eq-Cyclic-Type =
     fundamental-theorem-id X
-      ( id-equiv-Cyclic k X)
-      ( is-contr-total-equiv-Cyclic k X)
-      ( equiv-eq-Cyclic k X)
+      ( id-equiv-Cyclic-Type k X)
+      ( is-contr-total-equiv-Cyclic-Type k X)
+      ( equiv-eq-Cyclic-Type k X)
 
-  extensionality-Cyclic : (Y : Cyclic l k) → Id X Y ≃ equiv-Cyclic k X Y
-  pr1 (extensionality-Cyclic Y) = equiv-eq-Cyclic k X Y
-  pr2 (extensionality-Cyclic Y) = is-equiv-equiv-eq-Cyclic Y
+  extensionality-Cyclic-Type :
+    (Y : Cyclic-Type l k) → Id X Y ≃ equiv-Cyclic-Type k X Y
+  pr1 (extensionality-Cyclic-Type Y) = equiv-eq-Cyclic-Type k X Y
+  pr2 (extensionality-Cyclic-Type Y) = is-equiv-equiv-eq-Cyclic-Type Y
   
-  eq-equiv-Cyclic : (Y : Cyclic l k) → equiv-Cyclic k X Y → Id X Y
-  eq-equiv-Cyclic Y = map-inv-is-equiv (is-equiv-equiv-eq-Cyclic Y)
+  eq-equiv-Cyclic-Type :
+    (Y : Cyclic-Type l k) → equiv-Cyclic-Type k X Y → Id X Y
+  eq-equiv-Cyclic-Type Y = map-inv-is-equiv (is-equiv-equiv-eq-Cyclic-Type Y)
+```
 
+## Properties
+
+```agda
 module _
-  {l1 l2 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k)
+  {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   where
 
-  htpy-equiv-Cyclic : (e f : equiv-Cyclic k X Y) → UU (l1 ⊔ l2)
-  htpy-equiv-Cyclic e f = map-equiv-Cyclic k X Y e ~ map-equiv-Cyclic k X Y f
+  htpy-equiv-Cyclic-Type : (e f : equiv-Cyclic-Type k X Y) → UU (l1 ⊔ l2)
+  htpy-equiv-Cyclic-Type e f =
+    map-equiv-Cyclic-Type k X Y e ~ map-equiv-Cyclic-Type k X Y f
 
-  refl-htpy-equiv-Cyclic :
-    (e : equiv-Cyclic k X Y) → htpy-equiv-Cyclic e e
-  refl-htpy-equiv-Cyclic e = refl-htpy
+  refl-htpy-equiv-Cyclic-Type :
+    (e : equiv-Cyclic-Type k X Y) → htpy-equiv-Cyclic-Type e e
+  refl-htpy-equiv-Cyclic-Type e = refl-htpy
 
-  htpy-eq-equiv-Cyclic :
-    (e f : equiv-Cyclic k X Y) → Id e f → htpy-equiv-Cyclic e f
-  htpy-eq-equiv-Cyclic e .e refl = refl-htpy-equiv-Cyclic e
+  htpy-eq-equiv-Cyclic-Type :
+    (e f : equiv-Cyclic-Type k X Y) → Id e f → htpy-equiv-Cyclic-Type e f
+  htpy-eq-equiv-Cyclic-Type e .e refl = refl-htpy-equiv-Cyclic-Type e
 
-  is-contr-total-htpy-equiv-Cyclic :
-    (e : equiv-Cyclic k X Y) →
-    is-contr (Σ (equiv-Cyclic k X Y) (htpy-equiv-Cyclic e))
-  is-contr-total-htpy-equiv-Cyclic e =
+  is-contr-total-htpy-equiv-Cyclic-Type :
+    (e : equiv-Cyclic-Type k X Y) →
+    is-contr (Σ (equiv-Cyclic-Type k X Y) (htpy-equiv-Cyclic-Type e))
+  is-contr-total-htpy-equiv-Cyclic-Type e =
     is-contr-equiv'
-      ( Σ ( equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y))
-          ( htpy-equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y) e))
+      ( Σ ( equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y))
+          ( htpy-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y) e))
       ( equiv-tot
         ( λ f →
           right-unit-law-Σ-is-contr
             ( λ H →
               is-contr-Π
                 ( λ x →
-                  is-set-type-Cyclic k Y
-                  ( map-equiv-Cyclic k X Y e (endomorphism-Cyclic k X x))
-                  ( endomorphism-Cyclic k Y (map-equiv-Cyclic k X Y f x))
-                  ( ( H (endomorphism-Cyclic k X x)) ∙
-                    ( coherence-square-equiv-Cyclic k X Y f x))
-                  ( ( coherence-square-equiv-Cyclic k X Y e x) ∙
-                    ( ap (endomorphism-Cyclic k Y) (H x)))))))
-      ( is-contr-total-htpy-equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y) e)
+                  is-set-type-Cyclic-Type k Y
+                  ( map-equiv-Cyclic-Type k X Y e
+                    ( endomorphism-Cyclic-Type k X x))
+                  ( endomorphism-Cyclic-Type k Y
+                    ( map-equiv-Cyclic-Type k X Y f x))
+                  ( ( H (endomorphism-Cyclic-Type k X x)) ∙
+                    ( coherence-square-equiv-Cyclic-Type k X Y f x))
+                  ( ( coherence-square-equiv-Cyclic-Type k X Y e x) ∙
+                    ( ap (endomorphism-Cyclic-Type k Y) (H x)))))))
+      ( is-contr-total-htpy-equiv-Endo
+        ( endo-Cyclic-Type k X)
+        ( endo-Cyclic-Type k Y)
+        ( e))
 
-  is-equiv-htpy-eq-equiv-Cyclic :
-    (e f : equiv-Cyclic k X Y) → is-equiv (htpy-eq-equiv-Cyclic e f)
-  is-equiv-htpy-eq-equiv-Cyclic e =
+  is-equiv-htpy-eq-equiv-Cyclic-Type :
+    (e f : equiv-Cyclic-Type k X Y) → is-equiv (htpy-eq-equiv-Cyclic-Type e f)
+  is-equiv-htpy-eq-equiv-Cyclic-Type e =
     fundamental-theorem-id e
-      ( refl-htpy-equiv-Cyclic e)
-      ( is-contr-total-htpy-equiv-Cyclic e)
-      ( htpy-eq-equiv-Cyclic e)
+      ( refl-htpy-equiv-Cyclic-Type e)
+      ( is-contr-total-htpy-equiv-Cyclic-Type e)
+      ( htpy-eq-equiv-Cyclic-Type e)
 
-  extensionality-equiv-Cyclic :
-    (e f : equiv-Cyclic k X Y) → Id e f ≃ htpy-equiv-Cyclic e f
-  pr1 (extensionality-equiv-Cyclic e f) = htpy-eq-equiv-Cyclic e f
-  pr2 (extensionality-equiv-Cyclic e f) = is-equiv-htpy-eq-equiv-Cyclic e f
+  extensionality-equiv-Cyclic-Type :
+    (e f : equiv-Cyclic-Type k X Y) → Id e f ≃ htpy-equiv-Cyclic-Type e f
+  pr1 (extensionality-equiv-Cyclic-Type e f) = htpy-eq-equiv-Cyclic-Type e f
+  pr2 (extensionality-equiv-Cyclic-Type e f) =
+    is-equiv-htpy-eq-equiv-Cyclic-Type e f
 
-  eq-htpy-equiv-Cyclic :
-    (e f : equiv-Cyclic k X Y) → htpy-equiv-Cyclic e f → Id e f
-  eq-htpy-equiv-Cyclic e f = map-inv-equiv (extensionality-equiv-Cyclic e f)
+  eq-htpy-equiv-Cyclic-Type :
+    (e f : equiv-Cyclic-Type k X Y) → htpy-equiv-Cyclic-Type e f → Id e f
+  eq-htpy-equiv-Cyclic-Type e f =
+    map-inv-equiv (extensionality-equiv-Cyclic-Type e f)
 
-comp-equiv-Cyclic :
-  {l1 l2 l3 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k)
-  (Z : Cyclic l3 k) →
-  equiv-Cyclic k Y Z → equiv-Cyclic k X Y → equiv-Cyclic k X Z
-comp-equiv-Cyclic k X Y Z =
+comp-equiv-Cyclic-Type :
+  {l1 l2 l3 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
+  (Z : Cyclic-Type l3 k) →
+  equiv-Cyclic-Type k Y Z → equiv-Cyclic-Type k X Y → equiv-Cyclic-Type k X Z
+comp-equiv-Cyclic-Type k X Y Z =
   comp-equiv-Endo
-    ( endo-Cyclic k X)
-    ( endo-Cyclic k Y)
-    ( endo-Cyclic k Z)
+    ( endo-Cyclic-Type k X)
+    ( endo-Cyclic-Type k Y)
+    ( endo-Cyclic-Type k Z)
 
-inv-equiv-Cyclic :
-  {l1 l2 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k) →
-  equiv-Cyclic k X Y → equiv-Cyclic k Y X
-inv-equiv-Cyclic k X Y = inv-equiv-Endo (endo-Cyclic k X) (endo-Cyclic k Y)
+inv-equiv-Cyclic-Type :
+  {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k) →
+  equiv-Cyclic-Type k X Y → equiv-Cyclic-Type k Y X
+inv-equiv-Cyclic-Type k X Y =
+  inv-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y)
 
-associative-comp-equiv-Cyclic :
-  {l1 l2 l3 l4 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k)
-  (Z : Cyclic l3 k) (W : Cyclic l4 k) (g : equiv-Cyclic k Z W)
-  (f : equiv-Cyclic k Y Z) (e : equiv-Cyclic k X Y) →
-  Id ( comp-equiv-Cyclic k X Y W (comp-equiv-Cyclic k Y Z W g f) e)
-     ( comp-equiv-Cyclic k X Z W g (comp-equiv-Cyclic k X Y Z f e))
-associative-comp-equiv-Cyclic k X Y Z W g f e =
-  eq-htpy-equiv-Cyclic k X W
-    ( comp-equiv-Cyclic k X Y W (comp-equiv-Cyclic k Y Z W g f) e)
-    ( comp-equiv-Cyclic k X Z W g (comp-equiv-Cyclic k X Y Z f e))
+associative-comp-equiv-Cyclic-Type :
+  {l1 l2 l3 l4 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
+  (Z : Cyclic-Type l3 k) (W : Cyclic-Type l4 k) (g : equiv-Cyclic-Type k Z W)
+  (f : equiv-Cyclic-Type k Y Z) (e : equiv-Cyclic-Type k X Y) →
+  Id ( comp-equiv-Cyclic-Type k X Y W (comp-equiv-Cyclic-Type k Y Z W g f) e)
+     ( comp-equiv-Cyclic-Type k X Z W g (comp-equiv-Cyclic-Type k X Y Z f e))
+associative-comp-equiv-Cyclic-Type k X Y Z W g f e =
+  eq-htpy-equiv-Cyclic-Type k X W
+    ( comp-equiv-Cyclic-Type k X Y W (comp-equiv-Cyclic-Type k Y Z W g f) e)
+    ( comp-equiv-Cyclic-Type k X Z W g (comp-equiv-Cyclic-Type k X Y Z f e))
     ( refl-htpy)
 
 module _
-  {l1 l2 : Level} (k : ℕ) (X : Cyclic l1 k) (Y : Cyclic l2 k)
-  (e : equiv-Cyclic k X Y)
+  {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
+  (e : equiv-Cyclic-Type k X Y)
   where
   
-  left-unit-law-comp-equiv-Cyclic :
-    Id (comp-equiv-Cyclic k X Y Y (id-equiv-Cyclic k Y) e) e
-  left-unit-law-comp-equiv-Cyclic =
-    eq-htpy-equiv-Cyclic k X Y
-      ( comp-equiv-Cyclic k X Y Y (id-equiv-Cyclic k Y) e)
+  left-unit-law-comp-equiv-Cyclic-Type :
+    Id (comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e) e
+  left-unit-law-comp-equiv-Cyclic-Type =
+    eq-htpy-equiv-Cyclic-Type k X Y
+      ( comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e)
       ( e)
       ( refl-htpy)
 
-  right-unit-law-comp-equiv-Cyclic :
-    Id (comp-equiv-Cyclic k X X Y e (id-equiv-Cyclic k X)) e
-  right-unit-law-comp-equiv-Cyclic =
-    eq-htpy-equiv-Cyclic k X Y
-      ( comp-equiv-Cyclic k X X Y e (id-equiv-Cyclic k X))
+  right-unit-law-comp-equiv-Cyclic-Type :
+    Id (comp-equiv-Cyclic-Type k X X Y e (id-equiv-Cyclic-Type k X)) e
+  right-unit-law-comp-equiv-Cyclic-Type =
+    eq-htpy-equiv-Cyclic-Type k X Y
+      ( comp-equiv-Cyclic-Type k X X Y e (id-equiv-Cyclic-Type k X))
       ( e)
       ( refl-htpy)
 
-  left-inverse-law-comp-equiv-Cyclic :
-    Id ( comp-equiv-Cyclic k X Y X (inv-equiv-Cyclic k X Y e) e)
-       ( id-equiv-Cyclic k X)
-  left-inverse-law-comp-equiv-Cyclic =
-    eq-htpy-equiv-Cyclic k X X
-      ( comp-equiv-Cyclic k X Y X (inv-equiv-Cyclic k X Y e) e)
-      ( id-equiv-Cyclic k X)
-      ( isretr-map-inv-equiv (equiv-equiv-Cyclic k X Y e))
+  left-inverse-law-comp-equiv-Cyclic-Type :
+    Id ( comp-equiv-Cyclic-Type k X Y X (inv-equiv-Cyclic-Type k X Y e) e)
+       ( id-equiv-Cyclic-Type k X)
+  left-inverse-law-comp-equiv-Cyclic-Type =
+    eq-htpy-equiv-Cyclic-Type k X X
+      ( comp-equiv-Cyclic-Type k X Y X (inv-equiv-Cyclic-Type k X Y e) e)
+      ( id-equiv-Cyclic-Type k X)
+      ( isretr-map-inv-equiv (equiv-equiv-Cyclic-Type k X Y e))
 
-  right-inverse-law-comp-equiv-Cyclic :
-    Id ( comp-equiv-Cyclic k Y X Y e (inv-equiv-Cyclic k X Y e))
-       ( id-equiv-Cyclic k Y)
-  right-inverse-law-comp-equiv-Cyclic =
-    eq-htpy-equiv-Cyclic k Y Y
-      ( comp-equiv-Cyclic k Y X Y e (inv-equiv-Cyclic k X Y e))
-      ( id-equiv-Cyclic k Y)
-      ( issec-map-inv-equiv (equiv-equiv-Cyclic k X Y e))
+  right-inverse-law-comp-equiv-Cyclic-Type :
+    Id ( comp-equiv-Cyclic-Type k Y X Y e (inv-equiv-Cyclic-Type k X Y e))
+       ( id-equiv-Cyclic-Type k Y)
+  right-inverse-law-comp-equiv-Cyclic-Type =
+    eq-htpy-equiv-Cyclic-Type k Y Y
+      ( comp-equiv-Cyclic-Type k Y X Y e (inv-equiv-Cyclic-Type k X Y e))
+      ( id-equiv-Cyclic-Type k Y)
+      ( issec-map-inv-equiv (equiv-equiv-Cyclic-Type k X Y e))
 
-mere-eq-Cyclic : {l : Level} (k : ℕ) (X Y : Cyclic l k) → mere-eq X Y
-mere-eq-Cyclic k X Y =
+mere-eq-Cyclic-Type : {l : Level} (k : ℕ) (X Y : Cyclic-Type l k) → mere-eq X Y
+mere-eq-Cyclic-Type k X Y =
   apply-universal-property-trunc-Prop
-    ( mere-equiv-endo-Cyclic k X)
+    ( mere-equiv-endo-Cyclic-Type k X)
     ( mere-eq-Prop X Y)
     ( λ e →
       apply-universal-property-trunc-Prop
-        ( mere-equiv-endo-Cyclic k Y)
+        ( mere-equiv-endo-Cyclic-Type k Y)
         ( mere-eq-Prop X Y)
         ( λ f →
           unit-trunc-Prop
-            ( eq-equiv-Cyclic k X Y
-              ( comp-equiv-Cyclic k X (ℤ-Mod-Cyclic k) Y f
-                ( inv-equiv-Cyclic k (ℤ-Mod-Cyclic k) X e)))))
+            ( eq-equiv-Cyclic-Type k X Y
+              ( comp-equiv-Cyclic-Type k X (ℤ-Mod-Cyclic-Type k) Y f
+                ( inv-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X e)))))
 
-is-path-connected-Cyclic : (k : ℕ) → is-path-connected (Cyclic lzero k)
-is-path-connected-Cyclic k =
+is-path-connected-Cyclic-Type :
+  (k : ℕ) → is-path-connected (Cyclic-Type lzero k)
+is-path-connected-Cyclic-Type k =
   is-path-connected-mere-eq
-    ( ℤ-Mod-Cyclic k)
-    ( mere-eq-Cyclic k (ℤ-Mod-Cyclic k))
+    ( ℤ-Mod-Cyclic-Type k)
+    ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
 
-Eq-Cyclic : (k : ℕ) → Cyclic lzero k → UU lzero
-Eq-Cyclic k X = type-Cyclic k X
+Eq-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero k → UU lzero
+Eq-Cyclic-Type k X = type-Cyclic-Type k X
 
-refl-Eq-Cyclic : (k : ℕ) → Eq-Cyclic k (ℤ-Mod-Cyclic k)
-refl-Eq-Cyclic k = zero-ℤ-Mod k
+refl-Eq-Cyclic-Type : (k : ℕ) → Eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k)
+refl-Eq-Cyclic-Type k = zero-ℤ-Mod k
 
-Eq-equiv-Cyclic :
-  (k : ℕ) (X : Cyclic lzero k) →
-  equiv-Cyclic k (ℤ-Mod-Cyclic k) X → Eq-Cyclic k X
-Eq-equiv-Cyclic k X e =
-  map-equiv-Cyclic k (ℤ-Mod-Cyclic k) X e (zero-ℤ-Mod k)
+Eq-equiv-Cyclic-Type :
+  (k : ℕ) (X : Cyclic-Type lzero k) →
+  equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X → Eq-Cyclic-Type k X
+Eq-equiv-Cyclic-Type k X e =
+  map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X e (zero-ℤ-Mod k)
 
-equiv-Eq-Cyclic :
-  (k : ℕ) → Eq-Cyclic k (ℤ-Mod-Cyclic k) →
-  equiv-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k)
-pr1 (equiv-Eq-Cyclic k x) = equiv-add-ℤ-Mod' k x
-pr2 (equiv-Eq-Cyclic k x) y = left-successor-law-add-ℤ-Mod k y x
+equiv-Eq-Cyclic-Type :
+  (k : ℕ) → Eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) →
+  equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k)
+pr1 (equiv-Eq-Cyclic-Type k x) = equiv-add-ℤ-Mod' k x
+pr2 (equiv-Eq-Cyclic-Type k x) y = left-successor-law-add-ℤ-Mod k y x
 
-issec-equiv-Eq-Cyclic :
-  (k : ℕ) → (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) ∘ equiv-Eq-Cyclic k) ~ id
-issec-equiv-Eq-Cyclic zero-ℕ x = left-unit-law-add-ℤ x
-issec-equiv-Eq-Cyclic (succ-ℕ k) x = left-unit-law-add-Fin x
+issec-equiv-Eq-Cyclic-Type :
+  (k : ℕ) →
+  (Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) ∘ equiv-Eq-Cyclic-Type k) ~ id
+issec-equiv-Eq-Cyclic-Type zero-ℕ x = left-unit-law-add-ℤ x
+issec-equiv-Eq-Cyclic-Type (succ-ℕ k) x = left-unit-law-add-Fin x
 
 preserves-pred-preserves-succ-map-ℤ-Mod :
   (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →
@@ -417,127 +469,130 @@ compute-map-preserves-succ-map-ℤ-Mod k f H x =
   ( ( compute-map-preserves-succ-map-ℤ-Mod' k f H (int-ℤ-Mod k x)) ∙
     ( ap f (issec-int-ℤ-Mod k x)))
 
-isretr-equiv-Eq-Cyclic :
-  (k : ℕ) → (equiv-Eq-Cyclic k ∘ Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k)) ~ id
-isretr-equiv-Eq-Cyclic k e =
-  eq-htpy-equiv-Cyclic k
-    ( ℤ-Mod-Cyclic k)
-    ( ℤ-Mod-Cyclic k)
-    ( equiv-Eq-Cyclic k (Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e))
+isretr-equiv-Eq-Cyclic-Type :
+  (k : ℕ) →
+  (equiv-Eq-Cyclic-Type k ∘ Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k)) ~ id
+isretr-equiv-Eq-Cyclic-Type k e =
+  eq-htpy-equiv-Cyclic-Type k
+    ( ℤ-Mod-Cyclic-Type k)
+    ( ℤ-Mod-Cyclic-Type k)
+    ( equiv-Eq-Cyclic-Type k (Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) e))
     ( e)
     ( compute-map-preserves-succ-map-ℤ-Mod
       ( k)
-      ( map-equiv-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k) e)
-      ( coherence-square-equiv-Cyclic
+      ( map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k) e)
+      ( coherence-square-equiv-Cyclic-Type
         ( k)
-        ( ℤ-Mod-Cyclic k)
-        ( ℤ-Mod-Cyclic k)
+        ( ℤ-Mod-Cyclic-Type k)
+        ( ℤ-Mod-Cyclic-Type k)
         ( e)))
 
-is-equiv-Eq-equiv-Cyclic :
-  (k : ℕ) (X : Cyclic lzero k) → is-equiv (Eq-equiv-Cyclic k X)
-is-equiv-Eq-equiv-Cyclic k X =
+is-equiv-Eq-equiv-Cyclic-Type :
+  (k : ℕ) (X : Cyclic-Type lzero k) → is-equiv (Eq-equiv-Cyclic-Type k X)
+is-equiv-Eq-equiv-Cyclic-Type k X =
   apply-universal-property-trunc-Prop
-    ( mere-eq-Cyclic k (ℤ-Mod-Cyclic k) X)
-    ( is-equiv-Prop (Eq-equiv-Cyclic k X))
+    ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X)
+    ( is-equiv-Prop (Eq-equiv-Cyclic-Type k X))
     ( λ { refl →
           is-equiv-has-inverse
-            ( equiv-Eq-Cyclic k)
-            ( issec-equiv-Eq-Cyclic k)
-            ( isretr-equiv-Eq-Cyclic k)})
+            ( equiv-Eq-Cyclic-Type k)
+            ( issec-equiv-Eq-Cyclic-Type k)
+            ( isretr-equiv-Eq-Cyclic-Type k)})
 
-equiv-compute-Ω-Cyclic :
-  (k : ℕ) → type-Ω (pair (Cyclic lzero k) (ℤ-Mod-Cyclic k)) ≃ ℤ-Mod k
-equiv-compute-Ω-Cyclic k =
+equiv-compute-Ω-Cyclic-Type :
+  (k : ℕ) → type-Ω (pair (Cyclic-Type lzero k) (ℤ-Mod-Cyclic-Type k)) ≃ ℤ-Mod k
+equiv-compute-Ω-Cyclic-Type k =
   ( pair
-    ( Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k))
-    ( is-equiv-Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k))) ∘e
-  ( extensionality-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k))
+    ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
+    ( is-equiv-Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))) ∘e
+  ( extensionality-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k))
 
-map-equiv-compute-Ω-Cyclic :
-  (k : ℕ) → type-Ω (pair (Cyclic lzero k) (ℤ-Mod-Cyclic k)) → ℤ-Mod k
-map-equiv-compute-Ω-Cyclic k = map-equiv (equiv-compute-Ω-Cyclic k)
+map-equiv-compute-Ω-Cyclic-Type :
+  (k : ℕ) → type-Ω (pair (Cyclic-Type lzero k) (ℤ-Mod-Cyclic-Type k)) → ℤ-Mod k
+map-equiv-compute-Ω-Cyclic-Type k = map-equiv (equiv-compute-Ω-Cyclic-Type k)
 
-preserves-concat-equiv-eq-Cyclic :
-  (k : ℕ) (X Y Z : Cyclic lzero k) (p : Id X Y) (q : Id Y Z) →
-  Id ( equiv-eq-Cyclic k X Z (p ∙ q))
-     ( comp-equiv-Cyclic k X Y Z
-       ( equiv-eq-Cyclic k Y Z q)
-       ( equiv-eq-Cyclic k X Y p))
-preserves-concat-equiv-eq-Cyclic k X .X Z refl q =
-  inv (right-unit-law-comp-equiv-Cyclic k X Z (equiv-eq-Cyclic k X Z q))
+preserves-concat-equiv-eq-Cyclic-Type :
+  (k : ℕ) (X Y Z : Cyclic-Type lzero k) (p : Id X Y) (q : Id Y Z) →
+  Id ( equiv-eq-Cyclic-Type k X Z (p ∙ q))
+     ( comp-equiv-Cyclic-Type k X Y Z
+       ( equiv-eq-Cyclic-Type k Y Z q)
+       ( equiv-eq-Cyclic-Type k X Y p))
+preserves-concat-equiv-eq-Cyclic-Type k X .X Z refl q =
+  inv (right-unit-law-comp-equiv-Cyclic-Type k X Z (equiv-eq-Cyclic-Type k X Z q))
 
-preserves-comp-Eq-equiv-Cyclic :
-  (k : ℕ) (e f : equiv-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k)) →
-  Id ( Eq-equiv-Cyclic k
-       ( ℤ-Mod-Cyclic k)
-       ( comp-equiv-Cyclic k
-         ( ℤ-Mod-Cyclic k)
-         ( ℤ-Mod-Cyclic k)
-         ( ℤ-Mod-Cyclic k)
+preserves-comp-Eq-equiv-Cyclic-Type :
+  (k : ℕ)
+  (e f : equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k)) →
+  Id ( Eq-equiv-Cyclic-Type k
+       ( ℤ-Mod-Cyclic-Type k)
+       ( comp-equiv-Cyclic-Type k
+         ( ℤ-Mod-Cyclic-Type k)
+         ( ℤ-Mod-Cyclic-Type k)
+         ( ℤ-Mod-Cyclic-Type k)
          ( f)
          ( e)))
      ( add-ℤ-Mod k
-       ( Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) e)
-       ( Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k) f))
-preserves-comp-Eq-equiv-Cyclic k e f =
+       ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) e)
+       ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) f))
+preserves-comp-Eq-equiv-Cyclic-Type k e f =
   inv
   ( compute-map-preserves-succ-map-ℤ-Mod k
-    ( map-equiv-Cyclic k (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k) f)
-    ( coherence-square-equiv-Cyclic k
-      ( ℤ-Mod-Cyclic k)
-      ( ℤ-Mod-Cyclic k)
+    ( map-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k) f)
+    ( coherence-square-equiv-Cyclic-Type k
+      ( ℤ-Mod-Cyclic-Type k)
+      ( ℤ-Mod-Cyclic-Type k)
       ( f))
-    ( map-equiv-Cyclic k
-      ( ℤ-Mod-Cyclic k)
-      ( ℤ-Mod-Cyclic k)
+    ( map-equiv-Cyclic-Type k
+      ( ℤ-Mod-Cyclic-Type k)
+      ( ℤ-Mod-Cyclic-Type k)
       ( e)
       ( zero-ℤ-Mod k)))
 
-preserves-concat-equiv-compute-Ω-Cyclic :
-  (k : ℕ) (p q : type-Ω (Cyclic-Pointed-Type k)) →
-  Id ( map-equiv (equiv-compute-Ω-Cyclic k) (p ∙ q))
+preserves-concat-equiv-compute-Ω-Cyclic-Type :
+  (k : ℕ) (p q : type-Ω (Cyclic-Type-Pointed-Type k)) →
+  Id ( map-equiv (equiv-compute-Ω-Cyclic-Type k) (p ∙ q))
      ( add-ℤ-Mod k
-       ( map-equiv (equiv-compute-Ω-Cyclic k) p)
-       ( map-equiv (equiv-compute-Ω-Cyclic k) q))
-preserves-concat-equiv-compute-Ω-Cyclic k p q =
+       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) p)
+       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) q))
+preserves-concat-equiv-compute-Ω-Cyclic-Type k p q =
   ( ap
-    ( Eq-equiv-Cyclic k (ℤ-Mod-Cyclic k))
-    ( preserves-concat-equiv-eq-Cyclic k
-      ( ℤ-Mod-Cyclic k)
-      ( ℤ-Mod-Cyclic k)
-      ( ℤ-Mod-Cyclic k)
+    ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
+    ( preserves-concat-equiv-eq-Cyclic-Type k
+      ( ℤ-Mod-Cyclic-Type k)
+      ( ℤ-Mod-Cyclic-Type k)
+      ( ℤ-Mod-Cyclic-Type k)
       ( p)
       ( q))) ∙
-  ( preserves-comp-Eq-equiv-Cyclic k
-    ( equiv-eq-Cyclic k ( ℤ-Mod-Cyclic k) ( ℤ-Mod-Cyclic k) p)
-    ( equiv-eq-Cyclic k ( ℤ-Mod-Cyclic k) ( ℤ-Mod-Cyclic k) q))
+  ( preserves-comp-Eq-equiv-Cyclic-Type k
+    ( equiv-eq-Cyclic-Type k ( ℤ-Mod-Cyclic-Type k) ( ℤ-Mod-Cyclic-Type k) p)
+    ( equiv-eq-Cyclic-Type k ( ℤ-Mod-Cyclic-Type k) ( ℤ-Mod-Cyclic-Type k) q))
 
-type-Ω-Cyclic : (k : ℕ) → UU (lsuc lzero)
-type-Ω-Cyclic k = Id (ℤ-Mod-Cyclic k) (ℤ-Mod-Cyclic k)
+type-Ω-Cyclic-Type : (k : ℕ) → UU (lsuc lzero)
+type-Ω-Cyclic-Type k = Id (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k)
 
-is-set-type-Ω-Cyclic : (k : ℕ) → is-set (type-Ω-Cyclic k)
-is-set-type-Ω-Cyclic k =
+is-set-type-Ω-Cyclic-Type : (k : ℕ) → is-set (type-Ω-Cyclic-Type k)
+is-set-type-Ω-Cyclic-Type k =
   is-set-equiv
     ( ℤ-Mod k)
-    ( equiv-compute-Ω-Cyclic k)
+    ( equiv-compute-Ω-Cyclic-Type k)
     ( is-set-ℤ-Mod k)
 
-Ω-Cyclic-Group : (k : ℕ) → Group (lsuc lzero)
-Ω-Cyclic-Group k =
+Ω-Cyclic-Type-Group : (k : ℕ) → Group (lsuc lzero)
+Ω-Cyclic-Type-Group k =
   loop-space-Group
-    ( pair (Cyclic lzero k) (ℤ-Mod-Cyclic k))
-    ( is-set-type-Ω-Cyclic k)
+    ( pair (Cyclic-Type lzero k) (ℤ-Mod-Cyclic-Type k))
+    ( is-set-type-Ω-Cyclic-Type k)
 
-equiv-Ω-Cyclic-Group : (k : ℕ) → equiv-Group (Ω-Cyclic-Group k) (ℤ-Mod-Group k)
-pr1 (equiv-Ω-Cyclic-Group k) = equiv-compute-Ω-Cyclic k
-pr2 (equiv-Ω-Cyclic-Group k) = preserves-concat-equiv-compute-Ω-Cyclic k
+equiv-Ω-Cyclic-Type-Group : (k : ℕ) → equiv-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
+pr1 (equiv-Ω-Cyclic-Type-Group k) = equiv-compute-Ω-Cyclic-Type k
+pr2 (equiv-Ω-Cyclic-Type-Group k) =
+  preserves-concat-equiv-compute-Ω-Cyclic-Type k
 
-iso-Ω-Cyclic-Group : (k : ℕ) → type-iso-Group (Ω-Cyclic-Group k) (ℤ-Mod-Group k)
-iso-Ω-Cyclic-Group k =
+iso-Ω-Cyclic-Type-Group :
+  (k : ℕ) → type-iso-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
+iso-Ω-Cyclic-Type-Group k =
   iso-equiv-Group
-    ( Ω-Cyclic-Group k)
+    ( Ω-Cyclic-Type-Group k)
     ( ℤ-Mod-Group k)
-    ( equiv-Ω-Cyclic-Group k)
-
+    ( equiv-Ω-Cyclic-Type-Group k)
 ```

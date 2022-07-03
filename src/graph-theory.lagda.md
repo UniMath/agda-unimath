@@ -9,8 +9,12 @@ module graph-theory where
 ```agda
 open import graph-theory.circuits-undirected-graphs public
 open import graph-theory.closed-walks-undirected-graphs public
+open import graph-theory.complete-bipartite-graphs public
+open import graph-theory.complete-multipartite-graphs public
+open import graph-theory.complete-undirected-graphs public
 open import graph-theory.connected-undirected-graphs public
 open import graph-theory.cycles-undirected-graphs public
+open import graph-theory.directed-graph-structures-on-standard-finite-sets public
 open import graph-theory.directed-graphs public
 open import graph-theory.edge-coloured-undirected-graphs public
 open import graph-theory.embeddings-undirected-graphs public
@@ -30,6 +34,8 @@ open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.totally-faithful-morphisms-undirected-graphs public
+open import graph-theory.undirected-graph-structures-on-standard-finite-sets public
 open import graph-theory.undirected-graphs public
+open import graph-theory.vertex-covers public
 open import graph-theory.voltage-graphs public
 ```
