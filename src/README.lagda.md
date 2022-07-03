@@ -608,6 +608,13 @@ open import order-theory.total-posets
 open import order-theory.total-preorders
 ```
 
+## Organic chemistry
+
+```agda
+open import organic-chemistry
+open import organic-chemistry.hydrocarbons
+```
+
 ## Polytopes
 
 ```agda
