@@ -102,4 +102,18 @@ module _
     (c : vertex-hydrocarbon) → UU lzero
   electron-carbon-atom-hydrocarbon c =
     vertex-tetrahedron-in-3-space (carbon-atom-hydrocarbon c)
+
+  emb-bonding-hydrocarbon :
+    (c : vertex-hydrocarbon) →
+    Σ vertex-hydrocarbon
+      ( λ c' → edge-hydrocarbon (standard-unordered-pair c c')) ↪
+    electron-carbon-atom-hydrocarbon c
+  emb-bonding-hydrocarbon = pr1 (pr2 (pr2 H))
+
+  bonding-hydrocarbon :
+    {c c' : vertex-hydrocarbon} →
+    edge-hydrocarbon (standard-unordered-pair c c') →
+    electron-carbon-atom-hydrocarbon c
+  bonding-hydrocarbon {c} {c'} b =
+    map-emb (emb-bonding-hydrocarbon c) (pair c' b)
 ```
