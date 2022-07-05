@@ -56,27 +56,27 @@ Type-theoretically, the saturation condition on a carbon atom (fix one and call 
 We refer to a hydrocarbon equipped with a choice of $n$ carbons equipped with double bonds as an "n-alkene". For an n-alkene, the embedding from the given type (the first component of the n-alkene structure) specifies which carbons have double bonds. For example, 1-butene and but-2-ene have the same geometry, and the embedding is what differentiates them (while the third tautometer, isobutylene, is branched, thus has a different geometry).
 
 ```agda
-  has-double-bond : vertex-hydrocarbon H → UU
-  has-double-bond c = type-trunc-Prop (Σ (vertex-hydrocarbon H) λ c' →
+  has-double-bond-hydrocarbon : vertex-hydrocarbon H → UU
+  has-double-bond-hydrocarbon c = type-trunc-Prop (Σ (vertex-hydrocarbon H) λ c' →
     has-cardinality 2 (edge-hydrocarbon H (standard-unordered-pair c c')))
 
   n-alkene : ℕ → UU (lsuc lzero)
   n-alkene n =
     Σ (UU-Fin n) λ carbons →
       Σ (type-UU-Fin carbons ↪ vertex-hydrocarbon H) λ embed-carbons →
-        (c : type-UU-Fin carbons) → has-double-bond (pr1 embed-carbons c)
+        (c : type-UU-Fin carbons) → has-double-bond-hydrocarbon (pr1 embed-carbons c)
 ```
 
 The definition of n-alkynes is analogous.
 
 ```agda
-  has-triple-bond : vertex-hydrocarbon H → UU
-  has-triple-bond c = type-trunc-Prop (Σ (vertex-hydrocarbon H) λ c' →
+  has-triple-bond-hydrocarbon : vertex-hydrocarbon H → UU
+  has-triple-bond-hydrocarbon c = type-trunc-Prop (Σ (vertex-hydrocarbon H) λ c' →
     has-cardinality 3 (edge-hydrocarbon H (standard-unordered-pair c c')))
 
   n-alkyne : ℕ → UU (lsuc lzero)
   n-alkyne n =
     Σ (UU-Fin n) λ carbons →
       Σ (type-UU-Fin carbons ↪ vertex-hydrocarbon H) λ embed-carbons →
-        (c : type-UU-Fin carbons) → has-triple-bond (pr1 embed-carbons c)
+        (c : type-UU-Fin carbons) → has-triple-bond-hydrocarbon (pr1 embed-carbons c)
 ```
