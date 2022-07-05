@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
+open import foundation.decidable-types
 open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop; UU-Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
@@ -113,4 +114,14 @@ pr1 (pr2 (fin-Poset k)) = leq-fin-Prop
 pr1 (pr1 (pr2 (pr2 (fin-Poset k)))) = refl-leq-Fin
 pr2 (pr1 (pr2 (pr2 (fin-Poset k)))) = transitive-leq-Fin
 pr2 (pr2 (pr2 (fin-Poset k))) = antisymmetric-leq-Fin
+```
+
+### Ordering on the standard finite types is decidable
+
+```agda
+decide-leq-Fin : {k : ℕ} (x y : Fin k) → is-decidable (leq-Fin x y)
+decide-leq-Fin {k = succ-ℕ k} (inl x) (inl y) = decide-leq-Fin x y
+decide-leq-Fin {k = succ-ℕ k} (inl x) (inr y) = inl star
+decide-leq-Fin {k = succ-ℕ k} (inr x) (inl y) = inr (λ x → x)
+decide-leq-Fin {k = succ-ℕ k} (inr x) (inr y) = inl star
 ```
