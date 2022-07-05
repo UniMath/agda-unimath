@@ -16,5 +16,6 @@ open import finite-group-theory.groups-of-order-2 public
 open import finite-group-theory.orbits-permutations public
 open import finite-group-theory.permutations public
 open import finite-group-theory.sign-homomorphism public
+open import finite-group-theory.tetrahedra-in-3-space public
 open import finite-group-theory.transpositions public
 ```
