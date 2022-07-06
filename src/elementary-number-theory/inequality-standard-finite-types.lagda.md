@@ -119,9 +119,9 @@ pr2 (pr2 (pr2 (fin-Poset k))) = antisymmetric-leq-Fin
 ### Ordering on the standard finite types is decidable
 
 ```agda
-decide-leq-Fin : {k : ℕ} (x y : Fin k) → is-decidable (leq-Fin x y)
-decide-leq-Fin {k = succ-ℕ k} (inl x) (inl y) = decide-leq-Fin x y
-decide-leq-Fin {k = succ-ℕ k} (inl x) (inr y) = inl star
-decide-leq-Fin {k = succ-ℕ k} (inr x) (inl y) = inr (λ x → x)
-decide-leq-Fin {k = succ-ℕ k} (inr x) (inr y) = inl star
+is-decidable-leq-Fin : {k : ℕ} (x y : Fin k) → is-decidable (leq-Fin x y)
+is-decidable-leq-Fin {k = succ-ℕ k} (inl x) (inl y) = is-decidable-leq-Fin x y
+is-decidable-leq-Fin {k = succ-ℕ k} (inl x) (inr y) = inl star
+is-decidable-leq-Fin {k = succ-ℕ k} (inr x) (inl y) = inr (λ x → x)
+is-decidable-leq-Fin {k = succ-ℕ k} (inr x) (inr y) = inl star
 ```
