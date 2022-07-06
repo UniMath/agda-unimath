@@ -34,6 +34,7 @@ open import univalent-combinatorics.cycle-partitions public
 open import univalent-combinatorics.cyclic-types public
 open import univalent-combinatorics.decidable-dependent-function-types public
 open import univalent-combinatorics.decidable-dependent-pair-types public
+open import univalent-combinatorics.decidable-equivalence-relations public
 open import univalent-combinatorics.decidable-propositions public
 open import univalent-combinatorics.decidable-subtypes public
 open import univalent-combinatorics.dedekind-finite-sets public
@@ -82,6 +83,7 @@ open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.pointing-species public
 open import univalent-combinatorics.precategory-of-finite-species public
 open import univalent-combinatorics.presented-pi-finite-types public
+open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public

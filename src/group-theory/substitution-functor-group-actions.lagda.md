@@ -1,4 +1,6 @@
-# The substitution functor of group actions
+---
+title: The substitution functor of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import category-theory.functors-large-precategories using
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalence-classes using (large-quotient-Set)
+open import foundation.equivalence-classes using (equivalence-class-Set)
 open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.existential-quantification using (∃-Prop; intro-∃)
 open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
@@ -205,7 +207,7 @@ module _
     {l3 : Level} → Abstract-Group-Action G l3 →
     UU-Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   set-left-adjoint-subst-Abstract-Group-Action X =
-    large-quotient-Set (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
+    equivalence-class-Set (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
 
 {-
   obj-left-adjoint-subst-Abstract-Group-Action :

@@ -13,6 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
@@ -23,12 +24,14 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```
 
@@ -95,6 +98,42 @@ module _
   conversion-partition-𝔽 :
     equiv-𝔽 X (Σ-𝔽 finite-indexing-type-partition-𝔽 finite-block-partition-𝔽)
   conversion-partition-𝔽 = pr2 (pr2 (pr2 P))
+
+  map-conversion-partition-𝔽 :
+    type-𝔽 X → Σ indexing-type-partition-𝔽 block-partition-𝔽
+  map-conversion-partition-𝔽 = map-equiv conversion-partition-𝔽
+
+  rel-partition-𝔽-Prop : type-𝔽 X → type-𝔽 X → UU-Prop lzero
+  rel-partition-𝔽-Prop x y =
+    Id-Prop
+      ( set-𝔽 finite-indexing-type-partition-𝔽)
+      ( pr1 (map-conversion-partition-𝔽 x))
+      ( pr1 (map-conversion-partition-𝔽 y))
+
+  rel-partition-𝔽 : type-𝔽 X → type-𝔽 X → UU lzero
+  rel-partition-𝔽 x y = type-Prop (rel-partition-𝔽-Prop x y)
+
+  is-prop-rel-partition-𝔽 : (x y : type-𝔽 X) → is-prop (rel-partition-𝔽 x y)
+  is-prop-rel-partition-𝔽 x y = is-prop-type-Prop (rel-partition-𝔽-Prop x y)
+
+  refl-rel-partition-𝔽 : (x : type-𝔽 X) → rel-partition-𝔽 x x
+  refl-rel-partition-𝔽 x = refl
+
+  symmetric-rel-partition-𝔽 :
+    (x y : type-𝔽 X) → rel-partition-𝔽 x y → rel-partition-𝔽 y x
+  symmetric-rel-partition-𝔽 x y r = inv r
+
+  transitive-rel-partition-𝔽 :
+    (x y z : type-𝔽 X) →
+    rel-partition-𝔽 x y → rel-partition-𝔽 y z → rel-partition-𝔽 x z
+  transitive-rel-partition-𝔽 x y z r s = r ∙ s
+
+  eq-rel-partition-𝔽 : Eq-Rel lzero (type-𝔽 X)
+  pr1 eq-rel-partition-𝔽 = rel-partition-𝔽-Prop
+  pr1 (pr2 eq-rel-partition-𝔽) {x} = refl-rel-partition-𝔽 x
+  pr1 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} = symmetric-rel-partition-𝔽 x y
+  pr2 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} {z} =
+    transitive-rel-partition-𝔽 x y z
 ```
 
 ### Equivalences of partitions

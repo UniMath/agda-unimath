@@ -8,7 +8,7 @@ title: Effective maps for equivalence relations
 module foundation.effective-maps-equivalence-relations where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.equivalence-relations using (Eq-Rel; type-Eq-Rel)
+open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation.equivalences using (_≃_)
 open import foundation.identity-types using (_＝_)
 open import foundation.surjective-maps using (is-surjective)
@@ -28,7 +28,7 @@ is-effective :
   {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3}
   (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
 is-effective {A = A} R f =
-  (x y : A) → (f x ＝ f y) ≃ type-Eq-Rel R x y
+  (x y : A) → (f x ＝ f y) ≃ sim-Eq-Rel R x y
 ```
 
 ### Maps that are effective and surjective

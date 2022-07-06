@@ -11,7 +11,7 @@ open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.effective-maps-equivalence-relations using
   ( is-surjective-and-effective)
-open import foundation.equivalence-relations using (Eq-Rel; type-Eq-Rel)
+open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation.equivalences using
   ( map-inv-equiv; is-equiv; _≃_; map-inv-is-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
@@ -40,7 +40,7 @@ module _
   where
   
   reflects-Eq-Rel : {l3 : Level} {B : UU l3} → (A → B) → UU (l1 ⊔ (l2 ⊔ l3))
-  reflects-Eq-Rel f = {x y : A} → type-Eq-Rel R x y → f x ＝ f y
+  reflects-Eq-Rel f = {x y : A} → sim-Eq-Rel R x y → (f x ＝ f y)
   
   reflecting-map-Eq-Rel : {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
   reflecting-map-Eq-Rel B = Σ (A → B) reflects-Eq-Rel

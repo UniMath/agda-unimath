@@ -223,8 +223,10 @@ open import foundation.decidable-dependent-function-types
 open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-equality
+open import foundation.decidable-equivalence-relations
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
+open import foundation.decidable-relations
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-binomial-theorem
@@ -761,6 +763,7 @@ open import univalent-combinatorics.cycle-partitions
 open import univalent-combinatorics.cyclic-types
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-dependent-pair-types
+open import univalent-combinatorics.decidable-equivalence-relations
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dedekind-finite-sets
@@ -809,6 +812,7 @@ open import univalent-combinatorics.pigeonhole-principle
 open import univalent-combinatorics.pointing-species
 open import univalent-combinatorics.precategory-of-finite-species
 open import univalent-combinatorics.presented-pi-finite-types
+open import univalent-combinatorics.quotients-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.sequences-finite-types
