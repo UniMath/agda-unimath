@@ -40,11 +40,7 @@ module _
   where
   
   reflects-Eq-Rel : {l3 : Level} {B : UU l3} → (A → B) → UU (l1 ⊔ (l2 ⊔ l3))
-<<<<<<< HEAD
-  reflects-Eq-Rel f = {x y : A} → sim-Eq-Rel R x y → Id (f x) (f y)
-=======
-  reflects-Eq-Rel f = {x y : A} → type-Eq-Rel R x y → f x ＝ f y
->>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
+  reflects-Eq-Rel f = {x y : A} → sim-Eq-Rel R x y → (f x ＝ f y)
   
   reflecting-map-Eq-Rel : {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
   reflecting-map-Eq-Rel B = Σ (A → B) reflects-Eq-Rel

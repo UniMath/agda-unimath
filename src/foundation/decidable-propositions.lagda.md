@@ -16,7 +16,7 @@ open import foundation.coproduct-types using
 open import foundation.decidable-types using
   ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_; is-emb-tot)
+open import foundation.embeddings using (is-emb; _↪_; is-emb-tot; equiv-ap-emb)
 open import foundation.empty-types using
   ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso)
 open import foundation.equivalences using
@@ -30,7 +30,8 @@ open import foundation.identity-types using (_＝_; ap; refl; inv; tr)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.negation using (¬)
 open import foundation.propositional-extensionality using
-  ( is-contr-total-true-Prop; is-contr-total-false-Prop)
+  ( is-contr-total-true-Prop; is-contr-total-false-Prop;
+    propositional-extensionality)
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
     is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
@@ -226,10 +227,25 @@ is-set-decidable-Prop {l} =
 ### Extensionality of decidable propositions
 
 ```agda
-iff-eq-decidable-Prop :
-  {l : Level} (P Q : decidable-Prop l) → Id P Q →
-  (type-decidable-Prop P → type-decidable-Prop Q) ×
-  (type-decidable-Prop Q → type-decidable-Prop P)
-pr1 (iff-eq-decidable-Prop P .P refl) = id
-pr2 (iff-eq-decidable-Prop P .P refl) = id
+module _
+  {l : Level} (P Q : decidable-Prop l)
+  where
+
+  extensionality-decidable-Prop :
+    (P ＝ Q) ≃ (type-decidable-Prop P ↔ type-decidable-Prop Q)
+  extensionality-decidable-Prop =
+    ( propositional-extensionality
+      ( prop-decidable-Prop P)
+      ( prop-decidable-Prop Q)) ∘e
+    ( equiv-ap-emb emb-prop-decidable-Prop)
+
+  iff-eq-decidable-Prop :
+    P ＝ Q → type-decidable-Prop P ↔ type-decidable-Prop Q
+  iff-eq-decidable-Prop = map-equiv extensionality-decidable-Prop
+  
+  eq-iff-decidable-Prop :
+    (type-decidable-Prop P → type-decidable-Prop Q) →
+    (type-decidable-Prop Q → type-decidable-Prop P) → P ＝ Q
+  eq-iff-decidable-Prop f g =
+    map-inv-equiv extensionality-decidable-Prop (pair f g)
 ```

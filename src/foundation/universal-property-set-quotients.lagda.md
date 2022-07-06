@@ -248,13 +248,8 @@ module _
             ( is-small-Prop l2 (x ＝ y))
             ( α u))
       where
-<<<<<<< HEAD
-      α : fib q x → fib q y → is-small l2 (Id x y)
-      pr1 (α (pair a refl) (pair b refl)) = sim-Eq-Rel R a b
-=======
       α : fib q x → fib q y → is-small l2 (x ＝ y)
-      pr1 (α (pair a refl) (pair b refl)) = type-Eq-Rel R a b
->>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
+      pr1 (α (pair a refl) (pair b refl)) = sim-Eq-Rel R a b
       pr2 (α (pair a refl) (pair b refl)) = pr2 e a b
 
   large-map-emb-is-surjective-and-effective :

@@ -28,11 +28,7 @@ is-effective :
   {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3}
   (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
 is-effective {A = A} R f =
-<<<<<<< HEAD
-  (x y : A) → Id (f x) (f y) ≃ sim-Eq-Rel R x y
-=======
-  (x y : A) → (f x ＝ f y) ≃ type-Eq-Rel R x y
->>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
+  (x y : A) → (f x ＝ f y) ≃ sim-Eq-Rel R x y
 ```
 
 ### Maps that are effective and surjective
