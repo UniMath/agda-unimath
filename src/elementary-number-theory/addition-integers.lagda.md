@@ -1,4 +1,6 @@
-# Addition on the integers
+---
+title: Addition on the integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,8 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv; _≃_; is-emb-is-equiv)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types using
+  (_＝_; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using (is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
@@ -43,7 +46,7 @@ add-ℤ' : ℤ → ℤ → ℤ
 add-ℤ' x y = add-ℤ y x
 
 ap-add-ℤ :
-  {x y x' y' : ℤ} → Id x x' → Id y y' → Id (add-ℤ x y) (add-ℤ x' y')
+  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → add-ℤ x y ＝ add-ℤ x' y'
 ap-add-ℤ p q = ap-binary add-ℤ p q
 ```
 
@@ -54,11 +57,11 @@ ap-add-ℤ p q = ap-binary add-ℤ p q
 ```agda
 abstract
   left-unit-law-add-ℤ :
-    (k : ℤ) → Id (add-ℤ zero-ℤ k) k
+    (k : ℤ) → add-ℤ zero-ℤ k ＝ k
   left-unit-law-add-ℤ k = refl
   
   right-unit-law-add-ℤ :
-    (k : ℤ) → Id (add-ℤ k zero-ℤ) k
+    (k : ℤ) → add-ℤ k zero-ℤ ＝ k
   right-unit-law-add-ℤ (inl zero-ℕ) = refl
   right-unit-law-add-ℤ (inl (succ-ℕ x)) =
     ap pred-ℤ (right-unit-law-add-ℤ (inl x))
@@ -69,7 +72,7 @@ abstract
 
 abstract
   left-predecessor-law-add-ℤ :
-    (x y : ℤ) → Id (add-ℤ (pred-ℤ x) y) (pred-ℤ (add-ℤ x y))
+    (x y : ℤ) → add-ℤ (pred-ℤ x) y ＝ pred-ℤ (add-ℤ x y)
   left-predecessor-law-add-ℤ (inl n) y = refl
   left-predecessor-law-add-ℤ (inr (inl star)) y = refl
   left-predecessor-law-add-ℤ (inr (inr zero-ℕ)) y =
@@ -80,7 +83,7 @@ abstract
     ( inv (isretr-pred-ℤ (add-ℤ (inr (inr x)) y)))
 
   right-predecessor-law-add-ℤ :
-    (x y : ℤ) → Id (add-ℤ x (pred-ℤ y)) (pred-ℤ (add-ℤ x y))
+    (x y : ℤ) → add-ℤ x (pred-ℤ y) ＝ pred-ℤ (add-ℤ x y)
   right-predecessor-law-add-ℤ (inl zero-ℕ) n = refl
   right-predecessor-law-add-ℤ (inl (succ-ℕ m)) n =
     ap pred-ℤ (right-predecessor-law-add-ℤ (inl m) n)
@@ -94,7 +97,7 @@ abstract
 
 abstract
   left-successor-law-add-ℤ :
-    (x y : ℤ) → Id (add-ℤ (succ-ℤ x) y) (succ-ℤ (add-ℤ x y))
+    (x y : ℤ) → add-ℤ (succ-ℤ x) y ＝ succ-ℤ (add-ℤ x y)
   left-successor-law-add-ℤ (inl zero-ℕ) y =
     ( ap (add-ℤ' y) (issec-pred-ℤ zero-ℤ)) ∙
     ( inv (issec-pred-ℤ y))
@@ -105,7 +108,7 @@ abstract
   left-successor-law-add-ℤ (inr (inr x)) y = refl
 
   right-successor-law-add-ℤ :
-    (x y : ℤ) → Id (add-ℤ x (succ-ℤ y)) (succ-ℤ (add-ℤ x y))
+    (x y : ℤ) → add-ℤ x (succ-ℤ y) ＝ succ-ℤ (add-ℤ x y)
   right-successor-law-add-ℤ (inl zero-ℕ) y =
     (isretr-pred-ℤ y) ∙ (inv (issec-pred-ℤ y))
   right-successor-law-add-ℤ (inl (succ-ℕ x)) y =
@@ -118,26 +121,26 @@ abstract
     ap succ-ℤ (right-successor-law-add-ℤ (inr (inr x)) y)
 
 abstract
-  is-add-one-succ-ℤ' : (x : ℤ) → Id (succ-ℤ x) (add-ℤ x one-ℤ)
+  is-add-one-succ-ℤ' : (x : ℤ) → succ-ℤ x ＝ add-ℤ x one-ℤ
   is-add-one-succ-ℤ' x =
     inv (ap succ-ℤ (right-unit-law-add-ℤ x)) ∙
     inv (right-successor-law-add-ℤ x zero-ℤ)
 
-  is-add-one-succ-ℤ : (x : ℤ) → Id (succ-ℤ x) (add-ℤ one-ℤ x)
+  is-add-one-succ-ℤ : (x : ℤ) → succ-ℤ x ＝ add-ℤ one-ℤ x
   is-add-one-succ-ℤ x = inv (left-successor-law-add-ℤ zero-ℤ x)
 
-  is-add-neg-one-pred-ℤ : (x : ℤ) → Id (pred-ℤ x) (add-ℤ neg-one-ℤ x)
+  is-add-neg-one-pred-ℤ : (x : ℤ) → pred-ℤ x ＝ add-ℤ neg-one-ℤ x
   is-add-neg-one-pred-ℤ x =
     inv (left-predecessor-law-add-ℤ zero-ℤ x)
 
-  is-add-neg-one-pred-ℤ' : (x : ℤ) → Id (pred-ℤ x) (add-ℤ x neg-one-ℤ)
+  is-add-neg-one-pred-ℤ' : (x : ℤ) → pred-ℤ x ＝ add-ℤ x neg-one-ℤ
   is-add-neg-one-pred-ℤ' x =
     inv (ap pred-ℤ (right-unit-law-add-ℤ x)) ∙
     inv (right-predecessor-law-add-ℤ x zero-ℤ)
 
 abstract
   associative-add-ℤ :
-    (x y z : ℤ) → Id (add-ℤ (add-ℤ x y) z) (add-ℤ x (add-ℤ y z))
+    (x y z : ℤ) → add-ℤ (add-ℤ x y) z ＝ add-ℤ x (add-ℤ y z)
   associative-add-ℤ (inl zero-ℕ) y z =
     ( ap (add-ℤ' z) (left-predecessor-law-add-ℤ zero-ℤ y)) ∙
     ( ( left-predecessor-law-add-ℤ y z) ∙
@@ -160,7 +163,7 @@ abstract
 
 abstract
   commutative-add-ℤ :
-    (x y : ℤ) → Id (add-ℤ x y) (add-ℤ y x)
+    (x y : ℤ) → add-ℤ x y ＝ add-ℤ y x
   commutative-add-ℤ (inl zero-ℕ) y =
     ( left-predecessor-law-add-ℤ zero-ℤ y) ∙
     ( inv
@@ -180,7 +183,7 @@ abstract
 
 abstract
   left-inverse-law-add-ℤ :
-    (x : ℤ) → Id (add-ℤ (neg-ℤ x) x) zero-ℤ
+    (x : ℤ) → add-ℤ (neg-ℤ x) x ＝ zero-ℤ
   left-inverse-law-add-ℤ (inl zero-ℕ) = refl
   left-inverse-law-add-ℤ (inl (succ-ℕ x)) =
     ( ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) (inl x))) ∙ 
@@ -192,31 +195,31 @@ abstract
     ( left-inverse-law-add-ℤ (inl x))
   
   right-inverse-law-add-ℤ :
-    (x : ℤ) → Id (add-ℤ x (neg-ℤ x)) zero-ℤ
+    (x : ℤ) → add-ℤ x (neg-ℤ x) ＝ zero-ℤ
   right-inverse-law-add-ℤ x =
     ( commutative-add-ℤ x (neg-ℤ x)) ∙ (left-inverse-law-add-ℤ x)
 
 issec-add-neg-ℤ :
-  (x y : ℤ) → Id (add-ℤ x (add-ℤ (neg-ℤ x) y)) y
+  (x y : ℤ) → add-ℤ x (add-ℤ (neg-ℤ x) y) ＝ y
 issec-add-neg-ℤ x y =
   ( inv (associative-add-ℤ x (neg-ℤ x) y)) ∙
   ( ap (add-ℤ' y) (right-inverse-law-add-ℤ x))
 
 isretr-add-neg-ℤ :
-  (x y : ℤ) → Id (add-ℤ (neg-ℤ x) (add-ℤ x y)) y
+  (x y : ℤ) → add-ℤ (neg-ℤ x) (add-ℤ x y) ＝ y
 isretr-add-neg-ℤ x y =
   ( inv (associative-add-ℤ (neg-ℤ x) x y)) ∙
   ( ap (add-ℤ' y) (left-inverse-law-add-ℤ x))
 
 issec-add-neg-ℤ' :
-  (x y : ℤ) → Id (add-ℤ' x (add-ℤ' (neg-ℤ x) y)) y
+  (x y : ℤ) → add-ℤ' x (add-ℤ' (neg-ℤ x) y) ＝ y
 issec-add-neg-ℤ' x y =
   ( associative-add-ℤ y (neg-ℤ x) x) ∙
   ( ( ap (add-ℤ y) (left-inverse-law-add-ℤ x)) ∙
     ( right-unit-law-add-ℤ y))
 
 isretr-add-neg-ℤ' :
-  (x y : ℤ) → Id (add-ℤ' (neg-ℤ x) (add-ℤ' x y)) y
+  (x y : ℤ) → add-ℤ' (neg-ℤ x) (add-ℤ' x y) ＝ y
 isretr-add-neg-ℤ' x y =
   ( associative-add-ℤ y x (neg-ℤ x)) ∙
   ( ( ap (add-ℤ y) (right-inverse-law-add-ℤ x)) ∙
@@ -246,7 +249,7 @@ is-injective-add-ℤ x {y} {z} p =
 
 ```agda
 right-negative-law-add-ℤ :
-  (k l : ℤ) → Id (add-ℤ k (neg-ℤ l)) (neg-ℤ (add-ℤ (neg-ℤ k) l))
+  (k l : ℤ) → add-ℤ k (neg-ℤ l) ＝ neg-ℤ (add-ℤ (neg-ℤ k) l)
 right-negative-law-add-ℤ (inl zero-ℕ) l =
   ( left-predecessor-law-add-ℤ zero-ℤ (neg-ℤ l)) ∙
   ( pred-neg-ℤ l)
@@ -266,7 +269,7 @@ right-negative-law-add-ℤ (inr (inr (succ-ℕ n))) l =
 
 ```agda
 distributive-neg-add-ℤ :
-  (k l : ℤ) → Id (neg-ℤ (add-ℤ k l)) (add-ℤ (neg-ℤ k) (neg-ℤ l))
+  (k l : ℤ) → neg-ℤ (add-ℤ k l) ＝ add-ℤ (neg-ℤ k) (neg-ℤ l)
 distributive-neg-add-ℤ (inl zero-ℕ) l =
   ( ap neg-ℤ (left-predecessor-law-add-ℤ zero-ℤ l)) ∙
   ( neg-pred-ℤ l)
@@ -283,26 +286,26 @@ distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
 
 ```agda
 negatives-add-ℤ :
-  (x y : ℕ) → Id (add-ℤ (in-neg x) (in-neg y)) (in-neg (succ-ℕ (add-ℕ x y)))
+  (x y : ℕ) → add-ℤ (in-neg x) (in-neg y) ＝ in-neg (succ-ℕ (add-ℕ x y))
 negatives-add-ℤ zero-ℕ y = ap (inl ∘ succ-ℕ) (inv (left-unit-law-add-ℕ y))
 negatives-add-ℤ (succ-ℕ x) y =
   ( ap pred-ℤ (negatives-add-ℤ x y)) ∙
   ( ap (inl ∘ succ-ℕ) (inv (left-successor-law-add-ℕ x y)))
 
 add-one-left-ℤ :
-  (x : ℤ) → Id (add-ℤ one-ℤ x) (succ-ℤ x)
+  (x : ℤ) → add-ℤ one-ℤ x ＝ succ-ℤ x
 add-one-left-ℤ x = refl
 
 add-one-right-ℤ :
-  (x : ℤ) → Id (add-ℤ x one-ℤ) (succ-ℤ x)
+  (x : ℤ) → add-ℤ x one-ℤ ＝ succ-ℤ x
 add-one-right-ℤ x = commutative-add-ℤ x one-ℤ
 
 add-neg-one-left-ℤ :
-  (x : ℤ) → Id (add-ℤ neg-one-ℤ x) (pred-ℤ x)
+  (x : ℤ) → add-ℤ neg-one-ℤ x ＝ pred-ℤ x
 add-neg-one-left-ℤ x = refl
 
 add-neg-one-right-ℤ :
-  (x : ℤ) → Id (add-ℤ x neg-one-ℤ) (pred-ℤ x)
+  (x : ℤ) → add-ℤ x neg-one-ℤ ＝ pred-ℤ x
 add-neg-one-right-ℤ x = commutative-add-ℤ x neg-one-ℤ
 ```
 
@@ -337,7 +340,7 @@ is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
 ### The inclusion of ℕ into ℤ preserves addition
 
 ```agda
-add-int-ℕ : (x y : ℕ) → Id (add-ℤ (int-ℕ x) (int-ℕ y)) (int-ℕ (add-ℕ x y))
+add-int-ℕ : (x y : ℕ) → add-ℤ (int-ℕ x) (int-ℕ y) ＝ int-ℕ (add-ℕ x y)
 add-int-ℕ x zero-ℕ = right-unit-law-add-ℤ (int-ℕ x)
 add-int-ℕ x (succ-ℕ y) =
   ( ap (add-ℤ (int-ℕ x)) (inv (succ-int-ℕ y))) ∙
@@ -348,7 +351,7 @@ add-int-ℕ x (succ-ℕ y) =
 
 ```agda
 is-zero-add-ℤ :
-  (x y : ℤ) → Id (add-ℤ x y) y → is-zero-ℤ x
+  (x y : ℤ) → add-ℤ x y ＝ y → is-zero-ℤ x
 is-zero-add-ℤ x y H =
   ( inv (right-unit-law-add-ℤ x)) ∙
   ( ( inv (ap (add-ℤ x) (right-inverse-law-add-ℤ y))) ∙
@@ -357,7 +360,7 @@ is-zero-add-ℤ x y H =
         ( right-inverse-law-add-ℤ y))))
 
 is-zero-add-ℤ' :
-  (x y : ℤ) → Id (add-ℤ x y) x → is-zero-ℤ y
+  (x y : ℤ) → add-ℤ x y ＝ x → is-zero-ℤ y
 is-zero-add-ℤ' x y H =
   is-zero-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```

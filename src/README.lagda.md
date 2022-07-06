@@ -80,7 +80,7 @@ open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
 open import commutative-algebra.local-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
-open import commutative-algebra.zarisky-topology
+open import commutative-algebra.zariski-topology
 ```
 
 ## Elementary number theory
@@ -144,6 +144,7 @@ open import elementary-number-theory.ordinal-induction-natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
+open import elementary-number-theory.pythagorean-triples
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.relatively-prime-integers
 open import elementary-number-theory.relatively-prime-natural-numbers
@@ -178,6 +179,7 @@ open import finite-group-theory.groups-of-order-2
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
+open import finite-group-theory.tetrahedra-in-3-space
 open import finite-group-theory.transpositions
 ```
 
@@ -457,8 +459,12 @@ open import foundation-core.universe-levels
 open import graph-theory
 open import graph-theory.circuits-undirected-graphs
 open import graph-theory.closed-walks-undirected-graphs
+open import graph-theory.complete-bipartite-graphs
+open import graph-theory.complete-multipartite-graphs
+open import graph-theory.complete-undirected-graphs
 open import graph-theory.connected-undirected-graphs
 open import graph-theory.cycles-undirected-graphs
+open import graph-theory.directed-graph-structures-on-standard-finite-sets
 open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
@@ -478,6 +484,7 @@ open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
+open import graph-theory.undirected-graph-structures-on-standard-finite-sets
 open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
 open import graph-theory.voltage-graphs
@@ -604,6 +611,14 @@ open import order-theory.total-posets
 open import order-theory.total-preorders
 ```
 
+## Organic chemistry
+
+```agda
+open import organic-chemistry
+open import organic-chemistry.alcohols
+open import organic-chemistry.hydrocarbons
+```
+
 ## Polytopes
 
 ```agda
@@ -641,6 +656,8 @@ open import ring-theory.subsets-rings
 
 ```agda
 open import set-theory
+open import set-theory.baire-space
+open import set-theory.cantor-space
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```
@@ -664,6 +681,8 @@ open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.pointed-types-equipped-with-automorphisms
+open import structured-types.types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 open import structured-types.universal-property-lists-wild-monoids
 open import structured-types.wild-groups

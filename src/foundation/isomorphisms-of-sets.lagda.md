@@ -1,4 +1,6 @@
-# Isomorphisms of sets
+---
+title: Isomorphisms of sets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,7 @@ open import foundation.equivalences using
     is-property-is-equiv)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (Id; ap; inv; _∙_)
+open import foundation.identity-types using (_＝_; ap; inv; _∙_)
 open import foundation.propositions using
   ( is-proof-irrelevant; prod-Prop; is-prop; is-prop-is-proof-irrelevant)
 open import foundation.sets using
@@ -33,7 +35,7 @@ module _
   where
 
   is-iso-Set : (f : type-hom-Set A B) → UU (l1 ⊔ l2)
-  is-iso-Set f = Σ (type-hom-Set B A) (λ g → (Id (f ∘ g) id) × (Id (g ∘ f) id))
+  is-iso-Set f = Σ (type-hom-Set B A) (λ g → ((f ∘ g) ＝ id) × ((g ∘ f) ＝ id))
 
   iso-Set : UU (l1 ⊔ l2)
   iso-Set = Σ (type-hom-Set A B) is-iso-Set

@@ -26,7 +26,7 @@ open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl; tr; inv)
+open import foundation.identity-types using (_＝_; refl; tr; inv)
 open import foundation.images using
   ( im; map-unit-im; emb-im; is-set-im; unit-im; is-surjective-map-unit-im)
 open import foundation.propositional-extensionality using
@@ -62,8 +62,17 @@ module _
   is-equivalence-class : subtype l2 A → UU (l1 ⊔ lsuc l2)
   is-equivalence-class P = ∃ (λ x → Id (type-Prop ∘ P) (sim-Eq-Rel R x))
 
+<<<<<<< HEAD
   equivalence-class : UU (l1 ⊔ lsuc l2)
   equivalence-class = im (prop-Eq-Rel R)
+=======
+  is-equivalence-class-Eq-Rel : (A → UU-Prop l2) → UU (l1 ⊔ lsuc l2)
+  is-equivalence-class-Eq-Rel P =
+    ∃ A (λ x → (type-Prop ∘ P) ＝ class-Eq-Rel x)
+
+  large-set-quotient : UU (l1 ⊔ lsuc l2)
+  large-set-quotient = im (prop-Eq-Rel R)
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
   
   class : A → equivalence-class
   class = map-unit-im (prop-Eq-Rel R)
@@ -124,10 +133,16 @@ module _
   
     contraction-total-subtype-equivalence-class :
       ( t :
+<<<<<<< HEAD
         Σ ( equivalence-class R)
           ( λ P → is-in-subtype-equivalence-class R P a)) →
       Id center-total-subtype-equivalence-class t
     contraction-total-subtype-equivalence-class (pair (pair P p) H) =
+=======
+        Σ (large-set-quotient R) (λ P → type-class-large-set-quotient R P a)) →
+      center-total-class-Eq-Rel ＝ t
+    contraction-total-class-Eq-Rel (pair (pair P p) H) =
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
       eq-subtype
         ( λ Q → subtype-equivalence-class R Q a)
         ( apply-universal-property-trunc-Prop
@@ -138,7 +153,11 @@ module _
             ( pair P p))
           ( α))
       where
+<<<<<<< HEAD
       α : fib (pr1 R) P → Id (class R a) (pair P p)
+=======
+      α : fib (pr1 R) P → quotient-map-large-set-quotient R a ＝ pair P p
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
       α (pair x refl) =
         eq-subtype
           ( λ z → trunc-Prop (fib (prop-Eq-Rel R) z))
@@ -158,9 +177,15 @@ module _
       contraction-total-subtype-equivalence-class
 
   related-eq-quotient :
+<<<<<<< HEAD
     (q : equivalence-class R) → Id (class R a) q →
     is-in-subtype-equivalence-class R q a
   related-eq-quotient .(class R a) refl =
+=======
+    (q : large-set-quotient R) → quotient-map-large-set-quotient R a ＝ q →
+    type-class-large-set-quotient R q a
+  related-eq-quotient .(quotient-map-large-set-quotient R a) refl =
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
     refl-Eq-Rel R
 
   abstract
@@ -175,16 +200,27 @@ module _
 
   abstract
     effective-quotient' :
+<<<<<<< HEAD
       (q : equivalence-class R) →
       ( Id (class R a) q) ≃
       ( is-in-subtype-equivalence-class R q a)
+=======
+      (q : large-set-quotient R) →
+      ( quotient-map-large-set-quotient R a ＝ q) ≃
+      ( type-class-large-set-quotient R q a)
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
     pr1 (effective-quotient' q) = related-eq-quotient q
     pr2 (effective-quotient' q) = is-equiv-related-eq-quotient q
 
   abstract
     eq-effective-quotient' :
+<<<<<<< HEAD
       (q : equivalence-class R) → is-in-subtype-equivalence-class R q a →
       Id (class R a) q
+=======
+      (q : large-set-quotient R) → type-class-large-set-quotient R q a →
+      quotient-map-large-set-quotient R a ＝ q
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
     eq-effective-quotient' q = map-inv-is-equiv (is-equiv-related-eq-quotient q)
 ```
 
@@ -205,6 +241,7 @@ module _
   abstract
     apply-effectiveness-class :
       {x y : A} →
+<<<<<<< HEAD
       Id ( class R x)
          ( class R y) →
       sim-Eq-Rel R x y
@@ -218,6 +255,20 @@ module _
          ( class R y)
     apply-effectiveness-class' {x} {y} =
       map-inv-equiv (is-effective-class x y)
+=======
+      ( quotient-map-large-set-quotient R x ＝
+        quotient-map-large-set-quotient R y) →
+      type-Eq-Rel R x y
+    apply-effectiveness-quotient-map-large-set-quotient {x} {y} =
+      map-equiv (is-effective-quotient-map-large-set-quotient x y)
+
+  abstract
+    apply-effectiveness-quotient-map-large-set-quotient' :
+      {x y : A} → type-Eq-Rel R x y →
+      quotient-map-large-set-quotient R x ＝ quotient-map-large-set-quotient R y
+    apply-effectiveness-quotient-map-large-set-quotient' {x} {y} =
+      map-inv-equiv (is-effective-quotient-map-large-set-quotient x y)
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
 ```
 
 ### The map `class` into the type of equivalence classes is surjective and effective
@@ -294,16 +345,30 @@ module _
       ( is-decidable-Prop
         ( subtype-equivalence-class R T a))
       ( λ (pair t P) →
+<<<<<<< HEAD
         cases-decidable-is-in-subtype-equivalence-class
           T a t (eq-pair-Σ (inv P) (all-elements-equal-type-trunc-Prop _ _)) (F t a))
+=======
+        cases-decidable-type-class-large-set-quotient
+          T a t
+            ( eq-pair-Σ (inv P) (all-elements-equal-type-trunc-Prop _ _))
+            ( F t a))
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
     where
     cases-decidable-is-in-subtype-equivalence-class :
       (T : equivalence-class R)
       (a t : A) →
+<<<<<<< HEAD
       Id T (class R t) →
       is-decidable (sim-Eq-Rel R t a) →
       is-decidable (is-in-subtype-equivalence-class R T a)
     cases-decidable-is-in-subtype-equivalence-class T a t p1 (inl p) =
+=======
+      T ＝ (quotient-map-large-set-quotient R t) →
+      is-decidable (type-Eq-Rel R t a) →
+      is-decidable (type-class-large-set-quotient R T a)
+    cases-decidable-type-class-large-set-quotient T a t p1 (inl p) =
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
       inl
         ( tr
           ( λ x → is-in-subtype-equivalence-class R x a)

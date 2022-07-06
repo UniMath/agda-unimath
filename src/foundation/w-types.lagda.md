@@ -1,4 +1,6 @@
-# W-types
+---
+title: W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,7 +26,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; _·r_; ind-htpy; _∙h_; _·l_)
 open import foundation.identity-types using
-  ( Id; refl; tr; ap; _∙_; inv; right-unit; concat; left-inv; assoc)
+  ( _＝_; refl; tr; ap; _∙_; inv; right-unit; concat; left-inv; assoc)
 open import foundation.polynomial-endofunctors using
   ( type-polynomial-endofunctor; map-polynomial-endofunctor;
     htpy-polynomial-endofunctor; coh-refl-htpy-polynomial-endofunctor)
@@ -59,7 +61,7 @@ module _
   component-𝕎 : (x : 𝕎 A B) → B (symbol-𝕎 x) → 𝕎 A B
   component-𝕎 (tree-𝕎 x α) = α
 
-  η-𝕎 : (x : 𝕎 A B) → Id (tree-𝕎 (symbol-𝕎 x) (component-𝕎 x)) x
+  η-𝕎 : (x : 𝕎 A B) → tree-𝕎 (symbol-𝕎 x) (component-𝕎 x) ＝ x
   η-𝕎 (tree-𝕎 x α) = refl
 ```
 
@@ -103,7 +105,7 @@ module _
   
   Eq-𝕎 : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   Eq-𝕎 (tree-𝕎 x α) (tree-𝕎 y β) =
-    Σ (Id x y) (λ p → (z : B x) → Eq-𝕎 (α z) (β (tr B p z))) 
+    Σ (x ＝ y) (λ p → (z : B x) → Eq-𝕎 (α z) (β (tr B p z))) 
 
   refl-Eq-𝕎 : (w : 𝕎 A B) → Eq-𝕎 w w
   refl-Eq-𝕎 (tree-𝕎 x α) = pair refl (λ z → refl-Eq-𝕎 (α z))
@@ -118,7 +120,7 @@ module _
   aux-total-Eq-𝕎 x α (pair β e) = pair (tree-𝕎 x β) (pair refl e)
 
   contraction-total-Eq-𝕎 :
-    (w : 𝕎 A B) (t : Σ (𝕎 A B) (Eq-𝕎 w)) → Id (center-total-Eq-𝕎 w) t
+    (w : 𝕎 A B) (t : Σ (𝕎 A B) (Eq-𝕎 w)) → center-total-Eq-𝕎 w ＝ t
   contraction-total-Eq-𝕎
     ( tree-𝕎 x α) (pair (tree-𝕎 .x β) (pair refl e)) =
     ap ( ( aux-total-Eq-𝕎 x α) ∘
@@ -134,7 +136,7 @@ module _
   is-contr-total-Eq-𝕎 w =
     pair (center-total-Eq-𝕎 w) (contraction-total-Eq-𝕎 w)
 
-  Eq-𝕎-eq : (v w : 𝕎 A B) → Id v w → Eq-𝕎 v w
+  Eq-𝕎-eq : (v w : 𝕎 A B) → v ＝ w → Eq-𝕎 v w
   Eq-𝕎-eq v .v refl = refl-Eq-𝕎 v
 
   is-equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → is-equiv (Eq-𝕎-eq v w)
@@ -144,10 +146,10 @@ module _
       ( is-contr-total-Eq-𝕎 v)
       ( Eq-𝕎-eq v)
 
-  eq-Eq-𝕎 : (v w : 𝕎 A B) → Eq-𝕎 v w → Id v w
+  eq-Eq-𝕎 : (v w : 𝕎 A B) → Eq-𝕎 v w → v ＝ w
   eq-Eq-𝕎 v w = map-inv-is-equiv (is-equiv-Eq-𝕎-eq v w)
 
-  equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → Id v w ≃ Eq-𝕎 v w
+  equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → (v ＝ w) ≃ Eq-𝕎 v w
   equiv-Eq-𝕎-eq v w = pair (Eq-𝕎-eq v w) (is-equiv-Eq-𝕎-eq v w)
   
   is-trunc-𝕎 : (k : 𝕋) → is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (𝕎 A B)
@@ -161,7 +163,7 @@ module _
         ( λ p → is-trunc-Π k
           ( λ z →
             is-trunc-is-equiv' k
-            ( Id (α z) (β (tr B p z)))
+            ( α z ＝ β (tr B p z))
             ( Eq-𝕎-eq (α z) (β (tr B p z)))
             ( is-equiv-Eq-𝕎-eq (α z) (β (tr B p z)))
             ( is-trunc-𝕎 k is-trunc-A (α z) (β (tr B p z))))))
@@ -269,18 +271,18 @@ compute-structure-htpy-hom-𝕎-Alg :
   (X : algebra-polynomial-endofunctor-UU l3 A B) (x : A) (α : B x → 𝕎 A B)
   {f : 𝕎 A B → type-algebra-polynomial-endofunctor X} →
   (H : map-hom-𝕎-Alg X ~ f) →
-  Id ( ap ( structure-algebra-polynomial-endofunctor X)
-          ( htpy-polynomial-endofunctor A B H (pair x α)))
-     ( ap ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
-          ( eq-htpy (H ·r α)))
+  ( ap ( structure-algebra-polynomial-endofunctor X)
+       ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
+  ( ap ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
+       ( eq-htpy (H ·r α)))
 compute-structure-htpy-hom-𝕎-Alg {A = A} {B} X x α = 
   ind-htpy
     ( map-hom-𝕎-Alg X)
     ( λ f H →
-      Id ( ap ( structure-algebra-polynomial-endofunctor X)
-              ( htpy-polynomial-endofunctor A B H (pair x α)))
-         ( ap ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
-              ( eq-htpy (H ·r α))))
+      ( ap ( structure-algebra-polynomial-endofunctor X)
+           ( htpy-polynomial-endofunctor A B H (pair x α))) ＝
+      ( ap ( λ t → structure-algebra-polynomial-endofunctor X (pair x t))
+           ( eq-htpy (H ·r α))))
     ( ap ( ap (pr2 X))
          ( coh-refl-htpy-polynomial-endofunctor A B
            ( map-hom-𝕎-Alg X)

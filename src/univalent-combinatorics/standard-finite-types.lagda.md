@@ -43,7 +43,7 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (n+1) := (Fin n) + 1`.
+The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (n+1) := (Fin n) + 1`. **Note** that the outermost coproduct (i.e. the `inr` injection) is the _top_ element, when `Fin n` is considered as an initial segment of `n`.
 
 ## Definition
 

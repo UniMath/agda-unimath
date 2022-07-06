@@ -1,4 +1,6 @@
-# Small maps
+---
+title: Small maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

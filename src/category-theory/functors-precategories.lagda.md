@@ -1,4 +1,6 @@
-# Functors on precategories
+---
+title: Functors between precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import category-theory.precategories using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)
 open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id; refl; ap; _∙_)
+open import foundation.identity-types using (_＝_; refl; ap; _∙_)
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-Π')
 open import foundation.universe-levels using (UU; Level; _⊔_)
@@ -20,11 +22,11 @@ open import foundation.universe-levels using (UU; Level; _⊔_)
 ## Idea
 
 A functor from a precategory `C` to a precategory `D` consists of:
-- a map `F : C → D` on objects,
-- a map `Fmap : hom x y → hom (F x) (F y)` on morphisms,
+- a map `F₀ : C → D` on objects,
+- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms,
 such that the following identities hold:
-- `Fmap id_x = id_(F x)`,
-- `Fmap (comp g f) = comp (F g) (F f)`.
+- `F₁ id_x = id_(F₀ x)`,
+- `F₁ (comp g f) = comp (F₁ g) (F₁ f)`.
 
 ## Definition
 
@@ -38,16 +40,15 @@ module _
   functor-Precat : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   functor-Precat =
     Σ ( obj-Precat C → obj-Precat D)
-      ( λ F →
+      ( λ F₀ →
         Σ ( {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-            type-hom-Precat D (F x) (F y))
-          ( λ Fmap →
+            type-hom-Precat D (F₀ x) (F₀ y))
+          ( λ F₁ →
             ( {x y z : obj-Precat C} (g : type-hom-Precat C y z)
               (f : type-hom-Precat C x y) →
-              Id ( Fmap (comp-hom-Precat C g f))
-                 ( comp-hom-Precat D (Fmap g) (Fmap f))) ×
+              F₁ (comp-hom-Precat C g f) ＝ comp-hom-Precat D (F₁ g) (F₁ f)) ×
             ( (x : obj-Precat C) →
-              Id (Fmap (id-hom-Precat C {x})) (id-hom-Precat D {F x}))))
+              F₁ (id-hom-Precat C {x}) ＝ id-hom-Precat D {F₀ x})))
 
   obj-functor-Precat : functor-Precat → obj-Precat C → obj-Precat D
   obj-functor-Precat = pr1
@@ -62,14 +63,14 @@ module _
   respects-comp-functor-Precat :
     (F : functor-Precat) {x y z : obj-Precat C}
     (g : type-hom-Precat C y z) (f : type-hom-Precat C x y) →
-    Id ( hom-functor-Precat F (comp-hom-Precat C g f))
-       ( comp-hom-Precat D (hom-functor-Precat F g) (hom-functor-Precat F f))
+    ( hom-functor-Precat F (comp-hom-Precat C g f)) ＝
+    ( comp-hom-Precat D (hom-functor-Precat F g) (hom-functor-Precat F f))
   respects-comp-functor-Precat F = pr1 (pr2 (pr2 F))
 
   respects-id-functor-Precat :
     (F : functor-Precat) (x : obj-Precat C) →
-    Id ( hom-functor-Precat F (id-hom-Precat C {x}))
-       ( id-hom-Precat D {obj-functor-Precat F x})
+    ( hom-functor-Precat F (id-hom-Precat C {x})) ＝
+    ( id-hom-Precat D {obj-functor-Precat F x})
   respects-id-functor-Precat F = pr2 (pr2 (pr2 F))
 ```
 
@@ -128,10 +129,10 @@ module _
     is-prop
       ( {x y z : obj-Precat C}
         (g : type-hom-Precat C y z) (f : type-hom-Precat C x y) →
-        Id ( hom-functor-Precat C D F (comp-hom-Precat C g f))
-           ( comp-hom-Precat D
-             ( hom-functor-Precat C D F g)
-             ( hom-functor-Precat C D F f)))
+        ( hom-functor-Precat C D F (comp-hom-Precat C g f)) ＝
+        ( comp-hom-Precat D
+          ( hom-functor-Precat C D F g)
+          ( hom-functor-Precat C D F f)))
   is-prop-respects-comp-hom-Precat =
     is-prop-Π'
       ( λ x →
@@ -154,8 +155,8 @@ module _
   is-prop-respects-id-hom-Precat :
     is-prop
       ( (x : obj-Precat C) →
-        Id ( hom-functor-Precat C D F (id-hom-Precat C {x}))
-           ( id-hom-Precat D {obj-functor-Precat C D F x}))
+        ( hom-functor-Precat C D F (id-hom-Precat C {x})) ＝
+        ( id-hom-Precat D {obj-functor-Precat C D F x}))
   is-prop-respects-id-hom-Precat =
     is-prop-Π
       ( λ x →

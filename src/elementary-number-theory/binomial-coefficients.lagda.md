@@ -1,4 +1,6 @@
-# The binomial coefficients
+---
+title: The binomial coefficients
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Effective maps for equivalence relations
+---
+title: Effective maps for equivalence relations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,7 @@ module foundation.effective-maps-equivalence-relations where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation.equivalences using (_≃_)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -26,7 +28,11 @@ is-effective :
   {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3}
   (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
 is-effective {A = A} R f =
+<<<<<<< HEAD
   (x y : A) → Id (f x) (f y) ≃ sim-Eq-Rel R x y
+=======
+  (x y : A) → (f x ＝ f y) ≃ type-Eq-Rel R x y
+>>>>>>> 93fe279b0774549abe8c140bcbba48a290b7bed5
 ```
 
 ### Maps that are effective and surjective

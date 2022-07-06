@@ -1,4 +1,6 @@
-# Morphisms in the coslice category of types
+---
+title: Morphisms in the coslice category of types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,7 +11,7 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_; map-inv-equiv)
 open import foundation-core.functions using (_∘_)
 open import foundation-core.homotopies using (_~_; _·r_; _∙h_; refl-htpy)
-open import foundation-core.identity-types using (Id)
+open import foundation-core.identity-types using (_＝_)
 open import foundation-core.retractions using (retr)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
@@ -58,7 +60,7 @@ module _
         (triangle-hom-coslice h) ~ ((H ·r f) ∙h (triangle-hom-coslice k)))
 
   extensionality-hom-coslice :
-    (h k : hom-coslice f g) → Id h k ≃ htpy-hom-coslice h k
+    (h k : hom-coslice f g) → (h ＝ k) ≃ htpy-hom-coslice h k
   extensionality-hom-coslice (pair h H) =
     extensionality-Σ
       ( λ {h' : A → B} (H' : (h' ∘ f) ~ g) (K : h ~ h') → H ~ ((K ·r f) ∙h H'))
@@ -70,7 +72,7 @@ module _
   eq-htpy-hom-coslice :
     (h k : hom-coslice f g) (H : map-hom-coslice h ~ map-hom-coslice k)
     (K : (triangle-hom-coslice h) ~ ((H ·r f) ∙h (triangle-hom-coslice k))) →
-    Id h k
+    h ＝ k
   eq-htpy-hom-coslice h k H K =
     map-inv-equiv (extensionality-hom-coslice h k) (pair H K)
 ```

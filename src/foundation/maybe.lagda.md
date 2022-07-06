@@ -1,4 +1,6 @@
-# The maybe modality
+---
+title: The maybe modality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
@@ -19,7 +21,7 @@ open import foundation.equivalences using (_≃_)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.type-arithmetic-empty-type using
@@ -51,7 +53,7 @@ exception-Maybe {l} {X} = inr star
 
 ```agda
 is-exception-Maybe : {l : Level} {X : UU l} → Maybe X → UU l
-is-exception-Maybe {l} {X} x = Id x exception-Maybe
+is-exception-Maybe {l} {X} x = (x ＝ exception-Maybe)
 
 is-not-exception-Maybe : {l : Level} {X : UU l} → Maybe X → UU l
 is-not-exception-Maybe x = ¬ (is-exception-Maybe x)
@@ -61,7 +63,7 @@ is-not-exception-Maybe x = ¬ (is-exception-Maybe x)
 
 ```agda
 is-value-Maybe : {l : Level} {X : UU l} → Maybe X → UU l
-is-value-Maybe {l} {X} x = Σ X (λ y → Id (inl y) x)
+is-value-Maybe {l} {X} x = Σ X (λ y → inl y ＝ x)
 
 value-is-value-Maybe :
   {l : Level} {X : UU l} (x : Maybe X) → is-value-Maybe x → X
@@ -69,7 +71,7 @@ value-is-value-Maybe x = pr1
 
 eq-is-value-Maybe :
   {l : Level} {X : UU l} (x : Maybe X) (H : is-value-Maybe x) →
-  Id (inl (value-is-value-Maybe x H)) x
+  inl (value-is-value-Maybe x H) ＝ x
 eq-is-value-Maybe x H = pr2 H
 ```
 
@@ -164,7 +166,7 @@ value-is-not-exception-Maybe x H =
 
 eq-is-not-exception-Maybe :
   {l1 : Level} {X : UU l1} (x : Maybe X) (H : is-not-exception-Maybe x) →
-  Id (inl (value-is-not-exception-Maybe x H)) x
+  inl (value-is-not-exception-Maybe x H) ＝ x
 eq-is-not-exception-Maybe x H =
   eq-is-value-Maybe x (is-value-is-not-exception-Maybe x H)
 ```

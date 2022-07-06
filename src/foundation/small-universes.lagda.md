@@ -1,4 +1,6 @@
-# Small universes
+---
+title: Small universes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

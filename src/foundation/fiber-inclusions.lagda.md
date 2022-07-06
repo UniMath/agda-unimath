@@ -1,4 +1,6 @@
-# Fiber inclusions
+---
+title: Fiber inclusions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,7 +26,7 @@ open import foundation.fibers-of-maps using
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (Id; is-equiv-tr)
+open import foundation.identity-types using (_＝_; is-equiv-tr)
 open import foundation.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map)
 open import foundation.propositions using (is-prop)
@@ -58,7 +60,7 @@ module _
   pr2 (fiber-inclusion x y) = y
 
   fib-fiber-inclusion :
-    (a : A) (t : Σ A B) → fib (fiber-inclusion a) t ≃ Id a (pr1 t)
+    (a : A) (t : Σ A B) → fib (fiber-inclusion a) t ≃ (a ＝ pr1 t)
   fib-fiber-inclusion a t =
     ( ( right-unit-law-Σ-is-contr
         ( λ p → is-contr-map-is-equiv (is-equiv-tr B p) (pr2 t))) ∘e
@@ -92,7 +94,7 @@ module _
     is-trunc (succ-𝕋 k) A → is-trunc-map k (fiber-inclusion B a)
   is-trunc-map-fiber-inclusion-is-trunc B a H t =
     is-trunc-equiv k
-      ( Id a (pr1 t))
+      ( a ＝ pr1 t)
       ( fib-fiber-inclusion B a t)
       ( H a (pr1 t))
 

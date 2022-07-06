@@ -29,10 +29,11 @@ cyclic-partition-𝔽 : 𝔽 → UU (lsuc lzero)
 cyclic-partition-𝔽 X =
   Σ 𝔽
     ( λ Y →
-      Σ ( type-𝔽 Y → Σ ℕ (λ n → Cyclic lzero (succ-ℕ n)))
+      Σ ( type-𝔽 Y → Σ ℕ (λ n → Cyclic-Type lzero (succ-ℕ n)))
         ( λ C →
           type-𝔽 X ≃
-          Σ (type-𝔽 Y) (λ y → type-Cyclic (succ-ℕ (pr1 (C y))) (pr2 (C y)))))
+          Σ ( type-𝔽 Y)
+            ( λ y → type-Cyclic-Type (succ-ℕ (pr1 (C y))) (pr2 (C y)))))
 
 module _
   (X : 𝔽) (C : cyclic-partition-𝔽 X)
@@ -51,14 +52,16 @@ module _
 
   cycle-cyclic-partition-𝔽 :
     (y : indexing-type-cyclic-partition-𝔽) →
-    Cyclic lzero (order-cycle-cyclic-partition-𝔽 y)
+    Cyclic-Type lzero (order-cycle-cyclic-partition-𝔽 y)
   cycle-cyclic-partition-𝔽 y =
     pr2 (pr1 (pr2 C) y)
 
   type-cycle-cyclic-partition-𝔽 :
     indexing-type-cyclic-partition-𝔽 → UU lzero
   type-cycle-cyclic-partition-𝔽 y =
-    type-Cyclic (order-cycle-cyclic-partition-𝔽 y) (cycle-cyclic-partition-𝔽 y)
+    type-Cyclic-Type
+      ( order-cycle-cyclic-partition-𝔽 y)
+      ( cycle-cyclic-partition-𝔽 y)
 
   equiv-cyclic-partition-𝔽 :
     type-𝔽 X ≃ Σ indexing-type-cyclic-partition-𝔽 type-cycle-cyclic-partition-𝔽

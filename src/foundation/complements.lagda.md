@@ -1,4 +1,6 @@
-# Complements of type families
+---
+title: Complements of type families
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

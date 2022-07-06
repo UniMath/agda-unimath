@@ -1,4 +1,6 @@
-# Type arithmetic with dependent function types
+---
+title: The type theoretic principle of choice
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation-core.equivalences using
     equiv-ap)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (refl-htpy; _~_)
-open import foundation-core.identity-types using (Id; refl; tr)
+open import foundation-core.identity-types using (_＝_; refl; tr)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.function-extensionality using
@@ -55,15 +57,15 @@ module _
     (t t' : universally-structured-Π C) → UU (l1 ⊔ (l2 ⊔ l3))
   htpy-universally-structured-Π t t' =
     universally-structured-Π
-      ( λ (x : A) (p : Id ((pr1 t) x) ((pr1 t') x)) →
-        Id (tr (C x) p ((pr2 t) x)) ((pr2 t') x))
+      ( λ (x : A) (p : (pr1 t) x ＝ (pr1 t') x) →
+        tr (C x) p ((pr2 t) x) ＝ (pr2 t') x)
 
   extensionality-universally-structured-Π :
     (t t' : universally-structured-Π C) →
-    Id t t' ≃ htpy-universally-structured-Π t t'
+    (t ＝ t') ≃ htpy-universally-structured-Π t t'
   extensionality-universally-structured-Π (pair f g) =
     extensionality-Σ
-      ( λ {f'} g' (H : f ~ f') → (x : A) → Id (tr (C x) (H x) (g x)) (g' x))
+      ( λ {f'} g' (H : f ~ f') → (x : A) → tr (C x) (H x) (g x) ＝ g' x)
       ( refl-htpy)
       ( refl-htpy)
       ( λ f' → equiv-funext)
@@ -71,7 +73,7 @@ module _
 
   eq-htpy-universally-structured-Π :
     {t t' : universally-structured-Π C} →
-    htpy-universally-structured-Π t t' → Id t t'
+    htpy-universally-structured-Π t t' → t ＝ t'
   eq-htpy-universally-structured-Π {t} {t'} =
     map-inv-equiv (extensionality-universally-structured-Π t t')
 ```
@@ -147,12 +149,12 @@ Eq-Π-total-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
   (t t' : (a : A) → Σ (B a) (C a)) → UU (l1 ⊔ (l2 ⊔ l3))
 Eq-Π-total-fam {A = A} C t t' =
-  Π-total-fam (λ x (p : Id (pr1 (t x)) (pr1 (t' x))) →
-    Id (tr (C x) p (pr2 (t x))) (pr2 (t' x)))
+  Π-total-fam (λ x (p : pr1 (t x) ＝ pr1 (t' x)) →
+    tr (C x) p (pr2 (t x)) ＝ pr2 (t' x))
 
 extensionality-Π-total-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (f g : (a : A) → Σ (B a) (C a)) → Id f g ≃ Eq-Π-total-fam C f g
+  (f g : (a : A) → Σ (B a) (C a)) → (f ＝ g) ≃ Eq-Π-total-fam C f g
 extensionality-Π-total-fam C f g =
   ( inv-distributive-Π-Σ ∘e
     ( extensionality-universally-structured-Π C
@@ -162,7 +164,7 @@ extensionality-Π-total-fam C f g =
 
 eq-Eq-Π-total-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (f g : (a : A) → Σ (B a) (C a)) → Eq-Π-total-fam C f g → Id f g
+  (f g : (a : A) → Σ (B a) (C a)) → Eq-Π-total-fam C f g → f ＝ g
 eq-Eq-Π-total-fam C f g = map-inv-equiv (extensionality-Π-total-fam C f g)
 ```
 

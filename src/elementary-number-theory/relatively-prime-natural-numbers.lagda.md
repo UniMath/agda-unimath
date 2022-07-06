@@ -1,4 +1,6 @@
-# Relatively prime natural numbers
+---
+title: Relatively prime natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

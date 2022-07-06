@@ -1,4 +1,6 @@
-# Empty types
+---
+title: Empty types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,9 +10,6 @@ module foundation.empty-types where
 open import foundation-core.empty-types public
 
 open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_)
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; map-inv-equiv)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.sets using (is-set; UU-Set)
@@ -19,6 +18,9 @@ open import foundation-core.truncated-types using
 open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; lzero; UU)
 
+open import foundation.embeddings using (is-emb; _↪_; comp-emb)
+open import foundation.equivalences using
+  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; map-inv-equiv; emb-equiv)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
@@ -40,9 +42,24 @@ raise-empty l = raise l empty
 
 equiv-raise-empty : (l : Level) → empty ≃ raise-empty l
 equiv-raise-empty l = equiv-raise l empty
+
+raise-ex-falso :
+  (l1 : Level) {l2 : Level} {A : UU l2} →
+  raise-empty l1 → A
+raise-ex-falso l = ex-falso ∘ map-inv-equiv (equiv-raise-empty l)
 ```
 
 ## Properties
+
+### The map `ex-falso` is an embedding
+
+```agda
+raise-ex-falso-emb :
+  (l1 : Level) {l2 : Level} {A : UU l2} →
+  raise-empty l1 ↪ A
+raise-ex-falso-emb l =
+  comp-emb ex-falso-emb (emb-equiv (inv-equiv (equiv-raise-empty l)))
+```
 
 
 ### Being empty is a proposition

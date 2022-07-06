@@ -1,4 +1,6 @@
-# The universal property of coproduct types
+---
+title: The universal property of coproduct types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -16,7 +18,7 @@ open import foundation.equivalences using
     is-equiv-right-factor'; is-equiv-comp; is-equiv-precomp-is-equiv)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; precomp)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (refl)
 open import foundation.universe-levels using (Level; UU)
 ```
 

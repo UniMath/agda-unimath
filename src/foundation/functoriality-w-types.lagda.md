@@ -1,4 +1,6 @@
-# Functoriality of W-types
+---
+title: Functoriality of W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -19,7 +21,7 @@ open import foundation.functoriality-dependent-function-types using (equiv-Π)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; equiv-Σ)
 open import foundation.identity-types using
-  ( Id; equiv-tr; tr; equiv-concat'; ap; inv; equiv-concat)
+  ( _＝_; equiv-tr; tr; equiv-concat'; ap; inv; equiv-concat)
 open import foundation.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.truncated-maps using (is-trunc-map)
@@ -76,7 +78,7 @@ abstract
   equiv-fib-map-𝕎 {A = A} {B} {C} D f e (tree-𝕎 c γ) =
     ( ( ( inv-equiv
           ( assoc-Σ A
-            ( λ a → Id (f a) c)
+            ( λ a → f a ＝ c)
             ( λ t → (d : D c) → fib (map-𝕎 D f e) (γ d)))) ∘e
         ( equiv-tot
           ( λ a →
@@ -91,8 +93,7 @@ abstract
                     ( λ α →
                       equiv-Π
                         ( λ (b : B a) →
-                          Id ( map-𝕎 D f e (α b))
-                             ( γ (tr D p (map-equiv (e a) b))))
+                          map-𝕎 D f e (α b) ＝  γ (tr D p (map-equiv (e a) b)))
                         ( inv-equiv (e a))
                         ( λ d →
                           ( equiv-concat'
@@ -115,10 +116,9 @@ abstract
                       ( α ∘ map-inv-equiv (e a)))) (tree-𝕎 c γ)))))) ∘e
       ( assoc-Σ A
         ( λ a → B a → 𝕎 A B)
-        ( λ t →
-          Id (map-𝕎 D f e (structure-𝕎-Alg t)) (tree-𝕎 c γ)))) ∘e
+        ( λ t → map-𝕎 D f e (structure-𝕎-Alg t) ＝ tree-𝕎 c γ))) ∘e
     ( equiv-Σ
-      ( λ t → Id (map-𝕎 D f e (structure-𝕎-Alg t)) (tree-𝕎 c γ))
+      ( λ t → map-𝕎 D f e (structure-𝕎-Alg t) ＝ tree-𝕎 c γ)
       ( inv-equiv-structure-𝕎-Alg)
       ( λ x →
         equiv-concat

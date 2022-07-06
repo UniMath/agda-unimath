@@ -1,4 +1,6 @@
-# Pullbacks
+---
+title: Pullbacks
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
 open import foundation.functions using (_∘_)
 open import foundation.homotopies using (_~_; refl-htpy; right-unit-htpy)
 open import foundation.identity-types using
-  ( Id; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv)
+  ( _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv)
 open import foundation.structure-identity-principle using (extensionality-Σ)
 open import foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
@@ -52,7 +54,7 @@ module _
         b' = pr1 (pr2 t')
         p' = pr2 (pr2 t')
     in
-    Σ (Id a a') (λ α → Σ (Id b b') (λ β → Id ((ap f α) ∙ p') (p ∙ (ap g β))))
+    Σ (a ＝ a') (λ α → Σ (b ＝ b') (λ β → ((ap f α) ∙ p') ＝ (p ∙ (ap g β))))
 
   refl-Eq-canonical-pullback :
     (t : canonical-pullback f g) → Eq-canonical-pullback t t
@@ -61,20 +63,20 @@ module _
   pr2 (pr2 (refl-Eq-canonical-pullback (pair a (pair b p)))) = inv right-unit
 
   Eq-eq-canonical-pullback :
-    (s t : canonical-pullback f g) → Id s t → Eq-canonical-pullback s t
+    (s t : canonical-pullback f g) → s ＝ t → Eq-canonical-pullback s t
   Eq-eq-canonical-pullback s .s refl = refl-Eq-canonical-pullback s
 
   extensionality-canonical-pullback :
-    (t t' : canonical-pullback f g) → Id t t' ≃ Eq-canonical-pullback t t'
+    (t t' : canonical-pullback f g) → (t ＝ t') ≃ Eq-canonical-pullback t t'
   extensionality-canonical-pullback (pair a (pair b p)) =
     extensionality-Σ
       ( λ {a'} bp' α →
-        Σ (Id b (pr1 bp')) (λ β → Id (ap f α ∙ pr2 bp') (p ∙ ap g β)))
+        Σ (b ＝ pr1 bp') (λ β → (ap f α ∙ pr2 bp') ＝ (p ∙ ap g β)))
       ( refl)
       ( pair refl (inv right-unit))
       ( λ x → id-equiv)
       ( extensionality-Σ
-        ( λ {b'} p' β → Id p' (p ∙ ap g β))
+        ( λ {b'} p' β → p' ＝ (p ∙ ap g β))
         ( refl)
         ( inv right-unit)
         ( λ y → id-equiv)
@@ -82,8 +84,8 @@ module _
 
   map-extensionality-canonical-pullback :
     { s t : canonical-pullback f g} →
-    ( α : Id (pr1 s) (pr1 t)) (β : Id (pr1 (pr2 s)) (pr1 (pr2 t))) →
-    ( Id ((ap f α) ∙ (pr2 (pr2 t))) ((pr2 (pr2 s)) ∙ (ap g β))) → Id s t
+    ( α : pr1 s ＝ pr1 t) (β : pr1 (pr2 s) ＝ pr1 (pr2 t)) →
+    ( ((ap f α) ∙ (pr2 (pr2 t))) ＝ ((pr2 (pr2 s)) ∙ (ap g β))) → s ＝ t
   map-extensionality-canonical-pullback {s} {t} α β γ =
     map-inv-equiv
       ( extensionality-canonical-pullback s t)

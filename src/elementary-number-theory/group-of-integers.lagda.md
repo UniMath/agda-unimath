@@ -1,4 +1,6 @@
-# The group of integers
+---
+title: The group of integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

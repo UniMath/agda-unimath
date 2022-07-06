@@ -1,4 +1,6 @@
-# Equality of cartesian product types
+---
+title: Equality of cartesian product types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,7 +12,7 @@ open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation.functions using (id; _∘_)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -26,7 +28,7 @@ module _
   where
   
   Eq-prod : (s t : A × B) → UU (l1 ⊔ l2)
-  Eq-prod s t = (Id (pr1 s) (pr1 t)) × (Id (pr2 s) (pr2 t))
+  Eq-prod s t = (pr1 s ＝ pr1 t) × (pr2 s ＝ pr2 t)
 ```
 
 ## Properties
@@ -38,14 +40,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
   
-  eq-pair' : {s t : A × B} → Eq-prod s t → Id s t
+  eq-pair' : {s t : A × B} → Eq-prod s t → s ＝ t
   eq-pair' {pair x y} {pair .x .y} (pair refl refl) = refl
 
   eq-pair :
-    {s t : A × B} → Id (pr1 s) (pr1 t) → Id (pr2 s) (pr2 t) → Id s t
+    {s t : A × B} → pr1 s ＝ pr1 t → pr2 s ＝ pr2 t → s ＝ t
   eq-pair p q = eq-pair' (pair p q)
 
-  pair-eq : {s t : A × B} → Id s t → Eq-prod s t
+  pair-eq : {s t : A × B} → s ＝ t → Eq-prod s t
   pr1 (pair-eq α) = ap pr1 α
   pr2 (pair-eq α) = ap pr2 α
 
@@ -64,7 +66,7 @@ module _
       is-equiv-has-inverse pair-eq issec-pair-eq isretr-pair-eq
 
   equiv-eq-pair :
-    (s t : A × B) → Eq-prod s t ≃ Id s t
+    (s t : A × B) → Eq-prod s t ≃ (s ＝ t)
   pr1 (equiv-eq-pair s t) = eq-pair'
   pr2 (equiv-eq-pair s t) = is-equiv-eq-pair s t
 
@@ -75,7 +77,7 @@ module _
       is-equiv-has-inverse eq-pair' isretr-pair-eq issec-pair-eq
 
   equiv-pair-eq :
-    (s t : A × B) → Id s t ≃ Eq-prod s t
+    (s t : A × B) → (s ＝ t) ≃ Eq-prod s t
   pr1 (equiv-pair-eq s t) = pair-eq
   pr2 (equiv-pair-eq s t) = is-equiv-pair-eq s t
 ```

@@ -41,7 +41,7 @@ open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ; equiv-tot)
 open import foundation.functoriality-propositional-truncation using
-  ( equiv-trunc-Prop; functor-trunc-Prop)
+  ( equiv-trunc-Prop; map-trunc-Prop)
 open import foundation.logical-equivalences using (equiv-iff)
 open import foundation.maybe using (Maybe)
 open import foundation.mere-equivalences using
@@ -265,8 +265,8 @@ abstract
                 ( ( ( equiv-iff
                       ( mere-equiv-Prop (Maybe B) (Maybe (Σ A _)))
                       ( mere-equiv-Prop B (Σ A _))
-                      ( functor-trunc-Prop (equiv-equiv-Maybe))
-                      ( functor-trunc-Prop
+                      ( map-trunc-Prop (equiv-equiv-Maybe))
+                      ( map-trunc-Prop
                         ( λ e → equiv-coprod e id-equiv))) ∘e
                     ( equiv-trunc-Prop
                       ( equiv-postcomp-equiv

@@ -1,4 +1,6 @@
-# The universal property of the unit type
+---
+title: The universal property of the unit type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

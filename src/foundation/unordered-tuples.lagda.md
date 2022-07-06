@@ -128,7 +128,7 @@ module _
   pr2 (refl-Eq-unordered-tuple x) = refl-htpy
 
   Eq-eq-unordered-tuple :
-    (x y : unordered-tuple n A) → Id x y → Eq-unordered-tuple x y
+    (x y : unordered-tuple n A) → x ＝ y → Eq-unordered-tuple x y
   Eq-eq-unordered-tuple x .x refl = refl-Eq-unordered-tuple x
 
   is-contr-total-Eq-unordered-tuple :
@@ -150,12 +150,12 @@ module _
       ( Eq-eq-unordered-tuple x)
 
   extensionality-unordered-tuple :
-    (x y : unordered-tuple n A) → Id x y ≃ Eq-unordered-tuple x y
+    (x y : unordered-tuple n A) → (x ＝ y) ≃ Eq-unordered-tuple x y
   pr1 (extensionality-unordered-tuple x y) = Eq-eq-unordered-tuple x y
   pr2 (extensionality-unordered-tuple x y) = is-equiv-Eq-eq-unordered-tuple x y
 
   eq-Eq-unordered-tuple :
-    (x y : unordered-tuple n A) → Eq-unordered-tuple x y → Id x y
+    (x y : unordered-tuple n A) → Eq-unordered-tuple x y → x ＝ y
   eq-Eq-unordered-tuple x y =
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
 

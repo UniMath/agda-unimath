@@ -1,4 +1,6 @@
-# Singleton induction
+---
+title: Singleton induction
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.dependent-pair-types using
 open import foundation-core.functions using (ev-pt; _∘_; id)
 open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using
-  ( Id; refl; tr; inv; _∙_; ap; left-inv; ind-Id)
+  ( _＝_; refl; tr; inv; _∙_; ap; left-inv; ind-Id)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
@@ -69,7 +71,7 @@ abstract
     {i : Level} (A : UU i) (a : A) →
     ({l : Level} (P : A → UU l) → P a → (x : A) → P x) → is-contr A
   pr1 (is-contr-ind-singleton A a S) = a
-  pr2 (is-contr-ind-singleton A a S) = S (λ x → Id a x) refl
+  pr2 (is-contr-ind-singleton A a S) = S (λ x → a ＝ x) refl
 
 abstract
   is-contr-is-singleton :
@@ -86,7 +88,7 @@ abstract
 abstract
   is-singleton-total-path :
     {i l : Level} (A : UU i) (a : A) →
-    is-singleton l (Σ A (λ x → Id a x)) (pair a refl)
+    is-singleton l (Σ A (λ x → a ＝ x)) (pair a refl)
   pr1 (is-singleton-total-path A a B) = ind-Σ ∘ (ind-Id a _)
   pr2 (is-singleton-total-path A a B) = refl-htpy
 ```

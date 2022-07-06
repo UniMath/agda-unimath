@@ -1,4 +1,6 @@
-# Type arithmetic with the empty type
+---
+title: Type arithmetic with the empty type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

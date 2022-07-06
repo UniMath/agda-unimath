@@ -1,4 +1,6 @@
-# Type arithmetic with the unit type
+---
+title: Type arithmetic with the unit type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.identity-types using (refl)
 open import foundation-core.universe-levels using (Level; UU)
 
 open import foundation.unit-type using (unit; star)

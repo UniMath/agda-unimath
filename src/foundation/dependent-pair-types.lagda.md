@@ -1,4 +1,6 @@
-# Dependent pair types
+---
+title: Dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

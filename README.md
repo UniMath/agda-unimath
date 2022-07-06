@@ -10,9 +10,13 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
 
+### Installation guides and tutorials for Agda
+
  - Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
  - Once you have Agda up and running, you can copy our library to your machine using `git clone git@github.com:UniMath/agda-unimath.git`.
  - If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
+
+### Setting up emacs for literate Agda files
 
 The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. In order for your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
 
@@ -20,7 +24,25 @@ The `agda-unimath` library is written in literate markdown agda. This means that
 (setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
 ```
 
-With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the `src` folder. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
+### Setting up emacs for the notation of identity types
+
+In the `agda-unimath` library we use two notations for the identity type. The identity type is first introduced using Martin-Löf's original notation `Id`. Then we introduce as a secondary option the infix notation `_＝_`.
+
+**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). Note that the full width equals sign is slightly wider, and it is highlighted in blue just like all the other defined constructions in Agda. In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
+
+- Type `M-x customize-variable` and press enter.
+- Type `agda-input-user-translations` and press enter.
+- Click the `INS` button
+- Type the regular equals sign `=` in the Key sequence field.
+- Click the `INS` button
+- Type the full width equals sign `＝` in the translations field.
+- Click the `Apply and save` button.
+
+After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
+
+### After the setup
+
+With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the main folder of the repository. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
 
 ## Joining the project and contributing
 
@@ -214,3 +236,6 @@ module _
 * Don't use deeply indented code if a two-space indentation level suffices. Deeply indented code will be rendered unreadable on smaller screens.
 * Don't use long lines of code, for the same reason.
 * `where` blocks are allowed, but keep them short. Large `where` blocks tend to result in non-reusable and non-refactorable code, and in some instances they slow down Agda's verification process.
+* We don't make much use of record types in the `agda-unimath` library. This is because they make it a hassle to characterize their identity type, which is often the first thing we do with a new type. If characterizing the identity type is less relevant, then of course it is convenient to use record types.
+* The use of the projection functions `pr1` and `pr2`, and especially their compositions, should be very limited. If a type of the form `Σ A B` is given a name, then it is also worth giving the projections a name. This makes the code more readable, and furthermore if we now jump to the definition of the named projection we will see an informative answer.
+* We don't name constructions after infix notation of any operation that occurs in it. Infix notation is always secondary, and in later names that refer to a construction that has infix notation, we refer to the primary prefix notation. For example, the name for commutativity of cartesian products is `commutative-prod` and not `commutative-×`.

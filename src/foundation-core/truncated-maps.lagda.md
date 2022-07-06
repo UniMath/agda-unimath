@@ -1,4 +1,6 @@
-# Truncated maps
+---
+title: Truncated maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -17,7 +19,7 @@ open import foundation-core.functoriality-dependent-pair-types using
     is-fiberwise-equiv-is-equiv-triangle; map-Σ-map-base;
     equiv-fib-map-Σ-map-base-fib; map-Σ; triangle-map-Σ)
 open import foundation-core.homotopies using (_~_; inv-htpy)
-open import foundation-core.identity-types using (Id; refl; ap; _∙_; inv)
+open import foundation-core.identity-types using (_＝_; refl; ap; _∙_; inv)
 open import foundation-core.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map; is-prop-map)
 open import foundation-core.sets using
@@ -99,7 +101,7 @@ module _
       is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
     is-trunc-map-ap-is-trunc-map is-trunc-map-f x y p =
       is-trunc-is-equiv' k
-        ( Id (pair x p) (pair y refl))
+        ( pair x p ＝ pair y refl)
         ( eq-fib-fib-ap f x y p)
         ( is-equiv-eq-fib-fib-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
@@ -166,7 +168,7 @@ abstract
     {f g : A → B} → f ~ g → is-trunc-map k g → is-trunc-map k f
   is-trunc-map-htpy k {A} {B} {f} {g} H is-trunc-g b =
     is-trunc-is-equiv k
-      ( Σ A (λ z → Id (g z) b))
+      ( Σ A (λ z → g z ＝ b))
       ( fib-triangle f g id H b)
       ( is-fiberwise-equiv-is-equiv-triangle f g id H is-equiv-id b)
       ( is-trunc-g b)
@@ -226,7 +228,7 @@ abstract
     is-trunc-fam-is-trunc-Σ k
       ( is-trunc-g (g b))
       ( is-trunc-is-equiv' k
-        ( Σ A (λ z → Id (g (h z)) (g b)))
+        ( Σ A (λ z → g (h z) ＝ g b))
         ( map-fib-comp g h (g b))
         ( is-equiv-map-fib-comp g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))

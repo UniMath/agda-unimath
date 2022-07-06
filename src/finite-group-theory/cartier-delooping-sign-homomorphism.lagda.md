@@ -47,7 +47,7 @@ open import foundation.equivalence-relations using
   ( Eq-Rel; refl-Eq-Rel; sim-Eq-Rel; is-prop-sim-Eq-Rel)
 open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
-open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
+open import foundation.functoriality-propositional-truncation using (map-trunc-Prop)
 open import foundation.functoriality-set-quotients using
   ( unique-equiv-is-set-quotient; equiv-is-set-quotient;
     eq-equiv-eq-one-value-equiv-is-set-quotient)
@@ -163,9 +163,9 @@ module _
       ( succ-ℕ (succ-ℕ n))
       ( pair
         ( type-Set X)
-        ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
+        ( map-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
   pr2 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    functor-trunc-Prop
+    map-trunc-Prop
       ( λ e →
         eq-pair-Σ
           ( eq-equiv
@@ -177,7 +177,7 @@ module _
         ( succ-ℕ (succ-ℕ n))
         ( pair
           ( type-Set X)
-          ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
+          ( map-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
         ( star))
 
   abstract
@@ -222,7 +222,7 @@ module _
                   ( succ-ℕ (succ-ℕ n))
                   ( pair
                     ( raise l (type-Set (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX)))))
-                    ( functor-trunc-Prop
+                    ( map-trunc-Prop
                       ( λ p' →
                         equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
                           equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))

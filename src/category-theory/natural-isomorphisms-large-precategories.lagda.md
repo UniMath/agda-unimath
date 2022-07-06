@@ -1,11 +1,12 @@
-# Natural isomorphisms between functors on large precategories
+---
+title: Natural isomorphisms between functors on large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module category-theory.natural-isomorphisms-large-precategories where
 
-open import Agda.Primitive using (Setω)
 open import category-theory.functors-large-precategories using
   ( functor-Large-Precat; obj-functor-Large-Precat;
     hom-functor-Large-Precat)
@@ -17,7 +18,8 @@ open import category-theory.natural-transformations-large-precategories using
   ( square-Large-Precat; natural-transformation-Large-Precat;
     obj-natural-transformation-Large-Precat;
     coherence-square-natural-transformation-Large-Precat)
-open import foundation.universe-levels using (Level)
+    
+open import foundation.universe-levels using (Level; UUω)
 ```
 
 ## Idea
@@ -33,7 +35,7 @@ module _
   (F : functor-Large-Precat C D γF) (G : functor-Large-Precat C D γG)
   where
 
-  record natural-isomorphism-Large-Precat : Setω
+  record natural-isomorphism-Large-Precat : UUω
     where
     constructor make-natural-isomorphism
     field

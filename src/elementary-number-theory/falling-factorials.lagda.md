@@ -1,4 +1,6 @@
-# Falling factorials
+---
+title: Falling factorials
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

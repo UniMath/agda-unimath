@@ -1,4 +1,6 @@
-# Identity systems
+---
+title: Identity systems
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2; fam-
 open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation-core.identity-types using (tr; ap; refl; Id)
+open import foundation-core.identity-types using (tr; ap; refl; _＝_)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
@@ -61,12 +63,12 @@ module _
     pr1 (pr1 (is-contr-total-space-IND-identity-system ind)) = a
     pr2 (pr1 (is-contr-total-space-IND-identity-system ind)) = b
     pr2 (is-contr-total-space-IND-identity-system ind) (pair x y) =
-      pr1 (ind (λ x' y' → Id (pair a b) (pair x' y'))) refl x y
+      pr1 (ind (λ x' y' → (pair a b) ＝ (pair x' y'))) refl x y
 
   abstract
     fundamental-theorem-id-IND-identity-system :
       ({l : Level} → IND-identity-system l B a b) →
-      (f : (x : A) → Id a x → B x) → (x : A) → is-equiv (f x)
+      (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
     fundamental-theorem-id-IND-identity-system ind f =
       fundamental-theorem-id a b
         ( is-contr-total-space-IND-identity-system ind)

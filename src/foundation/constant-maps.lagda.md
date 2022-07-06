@@ -1,4 +1,6 @@
-# Constant maps
+---
+title: Constant maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation-core.equivalences using (_≃_; is-equiv)
 open import foundation-core.faithful-maps using
   ( is-faithful; is-faithful-is-0-map; is-0-map-is-faithful; faithful-map)
 open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.identity-types using (Id)
+open import foundation-core.identity-types using (_＝_)
 open import foundation-core.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.propositions using
@@ -46,7 +48,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  fib-const : (x y : A) → fib (const unit A x) y ≃ (Id x y)
+  fib-const : (x y : A) → fib (const unit A x) y ≃ (x ＝ y)
   fib-const x y = left-unit-law-prod
 
   abstract
@@ -55,7 +57,7 @@ module _
       (x : A) → is-trunc-map k (const unit A x)
     is-trunc-map-const-is-trunc k is-trunc-A x y =
       is-trunc-equiv k
-        ( Id x y)
+        ( x ＝ y)
         ( fib-const x y)
         ( is-trunc-A x y)
 
@@ -95,8 +97,8 @@ module _
       is-trunc (succ-𝕋 k) A
     is-trunc-is-trunc-map-const k is-trunc-const x y =
       is-trunc-equiv' k
-        ( Σ unit (λ t → Id x y))
-        ( left-unit-law-Σ (λ t → Id x y))
+        ( Σ unit (λ _ → x ＝ y))
+        ( left-unit-law-Σ (λ _ → x ＝ y))
         ( is-trunc-const x y)
 
   abstract

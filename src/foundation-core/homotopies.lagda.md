@@ -1,4 +1,6 @@
-# Homotopies
+---
+title: Homotopies
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -7,7 +9,7 @@ module foundation-core.homotopies where
 
 open import foundation-core.functions using (id)
 open import foundation-core.identity-types using
-  ( Id; refl; _∙_; concat; inv; ap; assoc; left-unit; right-unit; left-inv;
+  ( _＝_; refl; _∙_; concat; inv; ap; assoc; left-unit; right-unit; left-inv;
     right-inv; distributive-inv-concat; is-injective-concat'; ap-id)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
@@ -19,10 +21,12 @@ A homotopy of identifications is a pointwise equality between dependent function
 ## Definition
 
 ```agda
-_~_ :
+module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f g : (x : A) → B x) → UU (l1 ⊔ l2)
-f ~ g = (x : _) → Id (f x) (g x)
+  where
+  
+  _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
+  f ~ g = (x : A) → f x ＝ g x
 ```
 
 ## Properties
@@ -144,13 +148,13 @@ module _
 ```agda
 nat-htpy :
   {i j : Level} {A : UU i} {B : UU j} {f g : A → B} (H : f ~ g)
-  {x y : A} (p : Id x y) →
-  Id ((H x) ∙ (ap g p)) ((ap f p) ∙ (H y))
+  {x y : A} (p : x ＝ y) →
+  ((H x) ∙ (ap g p)) ＝ ((ap f p) ∙ (H y))
 nat-htpy H refl = right-unit
 
 nat-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id) →
-  {x y : A} (p : Id x y) → Id ((H x) ∙ p) ((ap f p) ∙ (H y))
+  {x y : A} (p : x ＝ y) → ((H x) ∙ p) ＝ ((ap f p) ∙ (H y))
 nat-htpy-id H refl = right-unit
 ```
 

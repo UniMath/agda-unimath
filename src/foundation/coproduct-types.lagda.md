@@ -1,4 +1,6 @@
-# Coproduct types
+---
+title: Coproduct types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equivalences using (_≃_; is-equiv-has-inverse)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
 open import foundation.non-contractible-types using (is-not-contractible)
@@ -87,10 +89,10 @@ module _
   is-injective-inr : is-injective {B = coprod A B} inr
   is-injective-inr refl = refl 
 
-  neq-inl-inr : {x : A} {y : B} → ¬ (Id (inl x) (inr y))
+  neq-inl-inr : {x : A} {y : B} → ¬ (inl x ＝ inr y)
   neq-inl-inr ()
 
-  neq-inr-inl : {x : B} {y : A} → ¬ (Id (inr x) (inl y))
+  neq-inr-inl : {x : B} {y : A} → ¬ (inr x ＝ inl y)
   neq-inr-inl ()
 ```
 

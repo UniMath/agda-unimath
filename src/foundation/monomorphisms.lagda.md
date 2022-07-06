@@ -1,4 +1,6 @@
-# Monomorphisms
+---
+title: Monomorphisms
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The greatest common divisor of integers
 ---
-
-# The greatest common divisor of integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -30,7 +28,7 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (Id; ap)
+open import foundation.identity-types using (_＝_; ap)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -200,8 +198,7 @@ is-positive-gcd-ℤ :
 is-positive-gcd-ℤ x y (inl H) = is-positive-gcd-is-positive-left-ℤ x y H
 is-positive-gcd-ℤ x y (inr H) = is-positive-gcd-is-positive-right-ℤ x y H
 
-is-commutative-gcd-ℤ :
-  (x y : ℤ) → Id (gcd-ℤ x y) (gcd-ℤ y x)
+is-commutative-gcd-ℤ : (x y : ℤ) → gcd-ℤ x y ＝ gcd-ℤ y x
 is-commutative-gcd-ℤ x y =
   ap int-ℕ (is-commutative-gcd-ℕ (abs-ℤ x) (abs-ℤ y))
 ```

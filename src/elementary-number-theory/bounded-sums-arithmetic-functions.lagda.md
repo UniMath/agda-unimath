@@ -1,4 +1,6 @@
-# Bounded sums of arithmetic functions
+---
+title: Bounded sums of arithmetic functions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

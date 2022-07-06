@@ -1,4 +1,6 @@
-# Adjunctions in large precategories
+---
+title: Adjunctions between large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -23,7 +25,7 @@ open import foundation.commuting-squares using
   ( coherence-square; coherence-square-inv-horizontal)
 open import foundation.equivalences using
   ( _≃_; map-equiv; inv-equiv; map-inv-equiv)
-open import foundation.identity-types using (Id; inv; _∙_; ap)
+open import foundation.identity-types using (_＝_; inv; _∙_; ap)
 open import foundation.universe-levels using (Level)
 ```
 
@@ -199,8 +201,8 @@ module _
 
   preserves-id-left-adjoint-Adjunction :
     (FG : Adjunction) {l1 : Level} (X : obj-Large-Precat C l1) →
-    Id ( hom-left-adjoint-Adjunction FG (id-hom-Large-Precat C {X = X}))
-       ( id-hom-Large-Precat D)
+    ( hom-left-adjoint-Adjunction FG (id-hom-Large-Precat C {X = X})) ＝
+    ( id-hom-Large-Precat D)
   preserves-id-left-adjoint-Adjunction FG X =
     preserves-id-functor-Large-Precat (left-adjoint-Adjunction FG)
 
@@ -223,8 +225,8 @@ module _
 
   preserves-id-right-adjoint-Adjunction :
     (FG : Adjunction) {l : Level} (Y : obj-Large-Precat D l) →
-    Id ( hom-right-adjoint-Adjunction FG (id-hom-Large-Precat D {X = Y}))
-       ( id-hom-Large-Precat C)
+    ( hom-right-adjoint-Adjunction FG (id-hom-Large-Precat D {X = Y})) ＝
+    ( id-hom-Large-Precat C)
   preserves-id-right-adjoint-Adjunction FG Y =
     preserves-id-functor-Large-Precat (right-adjoint-Adjunction FG)
 

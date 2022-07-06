@@ -1,4 +1,6 @@
-# Connected components of universes
+---
+title: Connected components of universes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,10 +16,10 @@ open import foundation.empty-types using
 open import foundation.equivalences using
   ( _≃_; id-equiv; is-equiv; map-inv-is-equiv; map-inv-equiv)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.mere-equivalences using
   ( mere-equiv-Prop; mere-equiv; is-prop-mere-equiv; refl-mere-equiv)
 open import foundation.propositional-truncations using
@@ -89,7 +91,7 @@ id-equiv-component-UU-Level X = id-equiv
 
 equiv-eq-component-UU-Level :
   {l1 l2 : Level} {A : UU l2} {X Y : component-UU-Level l1 A} →
-  Id X Y → equiv-component-UU-Level X Y
+  X ＝ Y → equiv-component-UU-Level X Y
 equiv-eq-component-UU-Level {X = X} refl =
   id-equiv-component-UU-Level X
 
@@ -117,7 +119,7 @@ abstract
 
 eq-equiv-component-UU-Level :
   {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
-  equiv-component-UU-Level X Y → Id X Y
+  equiv-component-UU-Level X Y → X ＝ Y
 eq-equiv-component-UU-Level X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-component-UU-Level X Y)
 
@@ -131,7 +133,7 @@ id-equiv-component-UU X = id-equiv-component-UU-Level X
 
 equiv-eq-component-UU :
   {l1 : Level} {A : UU l1} {X Y : component-UU A} →
-  Id X Y → equiv-component-UU X Y
+  X ＝ Y → equiv-component-UU X Y
 equiv-eq-component-UU p = equiv-eq-component-UU-Level p
 
 abstract
@@ -150,7 +152,7 @@ abstract
 
 eq-equiv-component-UU :
   {l1 : Level} {A : UU l1} (X Y : component-UU A) →
-  equiv-component-UU X Y → Id X Y
+  equiv-component-UU X Y → X ＝ Y
 eq-equiv-component-UU X Y =
   eq-equiv-component-UU-Level X Y
 ```
@@ -189,7 +191,7 @@ abstract
     is-path-connected-mere-eq
       ( pair X (refl-mere-equiv X))
       ( λ Y →
-        functor-trunc-Prop
+        map-trunc-Prop
           ( eq-equiv-component-UU (pair X (refl-mere-equiv X)) Y)
           ( mere-equiv-component-UU Y))
 ```

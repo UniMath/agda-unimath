@@ -1,4 +1,6 @@
-# Contractible maps
+---
+title: Contractible maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -17,13 +19,13 @@ open import foundation-core.fibers-of-maps using (fib; eq-Eq-fib)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_; _·r_; _·l_)
 open import foundation-core.identity-types using
-  ( Id; ap; inv; _∙_; refl; right-unit)
+  ( _＝_; ap; inv; _∙_; refl; right-unit)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea
 
-A map is often said to satisfy a property `P` if each of its fibers satisfy property `P`. Thus, we define contractible maps to be maps of which each fiber is contractible. In other words, contractible maps are maps `f : A → B` such that for each element `b : B` there is a unique `a : A` equipped with an identification `Id (f a) b`, i.e., contractible maps are the type theoretic bijections.
+A map is often said to satisfy a property `P` if each of its fibers satisfy property `P`. Thus, we define contractible maps to be maps of which each fiber is contractible. In other words, contractible maps are maps `f : A → B` such that for each element `b : B` there is a unique `a : A` equipped with an identification `(f a) ＝ b`, i.e., contractible maps are the type theoretic bijections.
 
 ## Definition
 
@@ -55,7 +57,7 @@ module _
   isretr-map-inv-is-contr-map :
     (H : is-contr-map f) → ((map-inv-is-contr-map H) ∘ f) ~ id
   isretr-map-inv-is-contr-map H x =
-    ap ( pr1 {B = λ z → Id (f z) (f x)})
+    ap ( pr1 {B = λ z → (f z) ＝ (f x)})
        ( ( inv
            ( contraction
              ( H (f x))
@@ -90,7 +92,7 @@ module _
 
     contraction-fib-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fib f y) →
-      Id (center-fib-is-coherently-invertible H y) t
+      (center-fib-is-coherently-invertible H y) ＝ t
     contraction-fib-is-coherently-invertible H y (pair x refl) =
       eq-Eq-fib f y
         ( isretr-inv-is-coherently-invertible H x)

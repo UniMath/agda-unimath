@@ -1,4 +1,6 @@
-# Distributivity of dependent function types over coproduct types
+---
+title: The dependent binomial theorem for types (Distributivity of dependent function types over coproduct types)
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

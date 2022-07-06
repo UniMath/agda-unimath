@@ -1,4 +1,6 @@
-# The univalence axiom
+---
+title: The univalence axiom
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation-core.equivalences using
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (Id; refl; ap; tr)
+open import foundation-core.identity-types using (_＝_; refl; ap; tr)
 open import foundation-core.universe-levels using (Level; UU; lsuc)
 ```
 
@@ -23,7 +25,7 @@ The univalence axiom characterizes the identity types of universes. It asserts t
 ## Definition
 
 ```agda
-equiv-eq : {i : Level} {A : UU i} {B : UU i} → Id A B → A ≃ B
+equiv-eq : {i : Level} {A : UU i} {B : UU i} → (A ＝ B) → A ≃ B
 equiv-eq refl = id-equiv
 
 UNIVALENCE : {i : Level} (A B : UU i) → UU (lsuc i)
@@ -56,6 +58,6 @@ abstract
 
 ```agda
 tr-equiv-eq-ap : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
-  (p : Id x y) → (map-equiv (equiv-eq (ap B p))) ~ tr B p
+  (p : x ＝ y) → (map-equiv (equiv-eq (ap B p))) ~ tr B p
 tr-equiv-eq-ap refl = refl-htpy
 ```

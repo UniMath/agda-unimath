@@ -1,4 +1,6 @@
-# Homotopies
+---
+title: Homotopies
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,7 +26,7 @@ open import foundation.function-extensionality using
 open import foundation.identity-systems using
   ( Ind-identity-system; fundamental-theorem-id-IND-identity-system)
 open import foundation.identity-types using
-  ( Id; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
+  ( Id; _＝_; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
     right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
     ap-id; is-injective-concat'; inv-inv; issec-inv-concat'; isretr-inv-concat';
     is-equiv-inv-con; is-equiv-con-inv)
@@ -113,7 +115,7 @@ module _
     is-contr-total-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
     is-contr-total-htpy' =
       is-contr-equiv'
-        ( Σ ((x : A) → B x) (λ g → Id g f))
+        ( Σ ((x : A) → B x) (λ g → g ＝ f))
         ( equiv-tot (λ g → equiv-funext))
         ( is-contr-total-path' f)
 ```
@@ -173,8 +175,7 @@ abstract
   comp-htpy :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
     (f : (x : A) → B x) (C : (g : (x : A) → B x) → (f ~ g) → UU l3) →
-    (c : C f refl-htpy) →
-    Id (ind-htpy f C c refl-htpy) c
+    (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
   comp-htpy f C = pr2 (Ind-htpy f C)
 ```
 

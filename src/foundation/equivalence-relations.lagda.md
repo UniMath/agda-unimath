@@ -1,4 +1,6 @@
-# Equivalence relations
+---
+title: Equivalence relations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

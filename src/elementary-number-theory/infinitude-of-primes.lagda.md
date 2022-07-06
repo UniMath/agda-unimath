@@ -1,4 +1,6 @@
-# The infinitude of primes
+---
+title: The infinitude of primes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
