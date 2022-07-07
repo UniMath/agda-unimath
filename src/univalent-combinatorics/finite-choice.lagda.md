@@ -53,7 +53,7 @@ open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
   ( count; is-empty-is-zero-number-of-elements-count; equiv-count;
-    map-equiv-count)
+    map-equiv-count; number-of-elements-count)
 open import univalent-combinatorics.counting-decidable-subtypes using
   ( count-domain-emb-is-finite-domain-emb)
 open import univalent-combinatorics.finite-types using (is-finite)
@@ -69,15 +69,15 @@ Propositional truncations distributes over finite products.
 ```agda
 abstract
   finite-choice-Fin :
-    {l1 : Level} {k : ℕ} {Y : Fin k → UU l1} →
+    {l1 : Level} (k : ℕ) {Y : Fin k → UU l1} →
     ((x : Fin k) → type-trunc-Prop (Y x)) → type-trunc-Prop ((x : Fin k) → Y x)
-  finite-choice-Fin {l1} {zero-ℕ} {Y} H = unit-trunc-Prop ind-empty
-  finite-choice-Fin {l1} {succ-ℕ k} {Y} H =
+  finite-choice-Fin {l1} zero-ℕ {Y} H = unit-trunc-Prop ind-empty
+  finite-choice-Fin {l1} (succ-ℕ k) {Y} H =
     map-inv-equiv-trunc-Prop
       ( equiv-dependent-universal-property-coprod Y)
       ( map-inv-distributive-trunc-prod-Prop
         ( pair
-          ( finite-choice-Fin (λ x → H (inl x)))
+          ( finite-choice-Fin k (λ x → H (inl x)))
           ( map-inv-equiv-trunc-Prop
             ( equiv-dependent-universal-property-unit (Y ∘ inr))
             ( H (inr star)))))
@@ -89,7 +89,7 @@ abstract
   finite-choice-count {l1} {l2} {X} {Y} (pair k e) H =
     map-inv-equiv-trunc-Prop
       ( equiv-precomp-Π e Y)
-      ( finite-choice-Fin (λ x → H (map-equiv e x)))
+      ( finite-choice-Fin k (λ x → H (map-equiv e x)))
 
 abstract
   finite-choice :
@@ -110,7 +110,7 @@ abstract
       ( is-empty-type-trunc-Prop
         ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
         ( t))
-  ε-operator-count (pair (succ-ℕ k) e) t = map-equiv e zero-Fin
+  ε-operator-count (pair (succ-ℕ k) e) t = map-equiv e (zero-Fin k)
 
 abstract
   ε-operator-decidable-subtype-count :
@@ -120,6 +120,7 @@ abstract
     ε-operator-equiv
       ( equiv-Σ-equiv-base (is-in-decidable-subtype P) (equiv-count e))
       ( ε-operator-decidable-subtype-Fin
+        ( number-of-elements-count e)
         ( λ x → P (map-equiv-count e x)))
 ```
 

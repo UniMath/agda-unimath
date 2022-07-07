@@ -35,7 +35,9 @@ open import foundation.propositional-extensionality using
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
     is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
+open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.sets using (is-set; is-set-equiv)
+open import foundation.small-types using (is-small)
 open import foundation.subtypes using (is-emb-inclusion-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
@@ -248,4 +250,15 @@ module _
     (type-decidable-Prop Q → type-decidable-Prop P) → P ＝ Q
   eq-iff-decidable-Prop f g =
     map-inv-equiv extensionality-decidable-Prop (pair f g)
+```
+
+### The type of decidable propositions in any universe is small
+
+```agda
+abstract
+  is-small-decidable-Prop :
+    (l1 l2 : Level) → is-small l2 (decidable-Prop l1)
+  pr1 (is-small-decidable-Prop l1 l2) = raise l2 bool
+  pr2 (is-small-decidable-Prop l1 l2) =
+    equiv-raise l2 bool ∘e equiv-bool-decidable-Prop
 ```

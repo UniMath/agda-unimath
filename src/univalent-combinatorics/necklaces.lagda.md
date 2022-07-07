@@ -38,7 +38,7 @@ necklace : (l : Level) → ℕ → ℕ → UU (lsuc l)
 necklace l m n = Σ (Cyclic-Type l m) (λ X → type-Cyclic-Type m X → Fin n)
 
 module _
-  {l : Level} (m : ℕ) {n : ℕ} (N : necklace l m n)
+  {l : Level} (m : ℕ) (n : ℕ) (N : necklace l m n)
   where
 
   cyclic-necklace : Cyclic-Type l m
@@ -66,7 +66,7 @@ module _
 necklace-pattern : (l : Level) → ℕ → ℕ → UU (lsuc l)
 necklace-pattern l m n =
   Σ ( Cyclic-Type l m)
-    ( λ X → Σ (UU-Fin n) (λ C → type-Cyclic-Type m X → type-UU-Fin C))
+    ( λ X → Σ (UU-Fin n) (λ C → type-Cyclic-Type m X → type-UU-Fin n C))
 ```
 
 ## Properties
@@ -75,48 +75,48 @@ necklace-pattern l m n =
 
 ```agda
 module _
-  {l1 l2 : Level} (m : ℕ) {n : ℕ}
+  {l1 l2 : Level} (m n : ℕ)
   where
   
   equiv-necklace :
     (N1 : necklace l1 m n) (N2 : necklace l2 m n) → UU (l1 ⊔ l2)
   equiv-necklace N1 N2 =
-    Σ ( equiv-Cyclic-Type m (cyclic-necklace m N1) (cyclic-necklace m N2))
+    Σ ( equiv-Cyclic-Type m (cyclic-necklace m n N1) (cyclic-necklace m n N2))
       ( λ e →
-        ( colouring-necklace m N1) ~
-        ( ( colouring-necklace m N2) ∘
+        ( colouring-necklace m n N1) ~
+        ( ( colouring-necklace m n N2) ∘
           ( map-equiv-Cyclic-Type m
-            ( cyclic-necklace m N1)
-            ( cyclic-necklace m N2)
+            ( cyclic-necklace m n N1)
+            ( cyclic-necklace m n N2)
             ( e))))
 
 module _
-  {l : Level} (m : ℕ) {n : ℕ}
+  {l : Level} (m n : ℕ)
   where
 
   id-equiv-necklace :
-    (N : necklace l m n) → equiv-necklace m N N
-  pr1 (id-equiv-necklace N) = id-equiv-Cyclic-Type m (cyclic-necklace m N)
+    (N : necklace l m n) → equiv-necklace m n N N
+  pr1 (id-equiv-necklace N) = id-equiv-Cyclic-Type m (cyclic-necklace m n N)
   pr2 (id-equiv-necklace N) = refl-htpy
 
 module _
-  {l : Level} (m : ℕ) {n : ℕ}
+  {l : Level} (m n : ℕ)
   where
   
   extensionality-necklace :
-    (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m N1 N2
+    (N1 N2 : necklace l m n) → Id N1 N2 ≃ equiv-necklace m n N1 N2
   extensionality-necklace N1 =
     extensionality-Σ
       ( λ {X} f e →
-        ( colouring-necklace m N1) ~
-        ( f ∘ map-equiv-Cyclic-Type m (cyclic-necklace m N1) X e))
-      ( id-equiv-Cyclic-Type m (cyclic-necklace m N1))
+        ( colouring-necklace m n N1) ~
+        ( f ∘ map-equiv-Cyclic-Type m (cyclic-necklace m n N1) X e))
+      ( id-equiv-Cyclic-Type m (cyclic-necklace m n N1))
       ( refl-htpy)
-      ( extensionality-Cyclic-Type m (cyclic-necklace m N1))
+      ( extensionality-Cyclic-Type m (cyclic-necklace m n N1))
       ( λ f → equiv-funext)
 
   refl-extensionality-necklace :
     (N : necklace l m n) →
-    Id (map-equiv (extensionality-necklace N N) refl) (id-equiv-necklace m N)
+    Id (map-equiv (extensionality-necklace N N) refl) (id-equiv-necklace m n N)
   refl-extensionality-necklace N = refl
 ```

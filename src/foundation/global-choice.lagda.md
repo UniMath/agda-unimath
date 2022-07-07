@@ -48,5 +48,5 @@ abstract
   no-global-choice f =
     no-section-type-UU-Fin-Level-two-ℕ
       ( λ X →
-        f (pr1 X) (map-trunc-Prop (λ e → map-equiv e zero-Fin) (pr2 X)))
+        f (pr1 X) (map-trunc-Prop (λ e → map-equiv e (zero-Fin 1)) (pr2 X)))
 ```

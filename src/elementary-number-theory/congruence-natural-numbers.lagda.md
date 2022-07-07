@@ -137,18 +137,18 @@ eq-cong-le-ℕ k x y H K =
 
 ```agda
 eq-cong-nat-Fin :
-  (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin x) (nat-Fin y) → x ＝ y
+  (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin k x) (nat-Fin k y) → x ＝ y
 eq-cong-nat-Fin (succ-ℕ k) x y H =
-  is-injective-nat-Fin
-    ( eq-cong-le-ℕ (succ-ℕ k) (nat-Fin x) (nat-Fin y)
-      ( strict-upper-bound-nat-Fin x)
-      ( strict-upper-bound-nat-Fin y)
+  is-injective-nat-Fin (succ-ℕ k)
+    ( eq-cong-le-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y)
+      ( strict-upper-bound-nat-Fin (succ-ℕ k) x)
+      ( strict-upper-bound-nat-Fin (succ-ℕ k) y)
       ( H))
 ```
 
 ```agda
 cong-is-zero-nat-zero-Fin :
-  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (zero-Fin {k})) zero-ℕ
+  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (zero-Fin k)) zero-ℕ
 cong-is-zero-nat-zero-Fin {k} =
   cong-identification-ℕ (succ-ℕ k) (is-zero-nat-zero-Fin {k})
 ```

@@ -405,7 +405,7 @@ issec-equiv-Eq-Cyclic-Type :
   (k : ℕ) →
   (Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) ∘ equiv-Eq-Cyclic-Type k) ~ id
 issec-equiv-Eq-Cyclic-Type zero-ℕ x = left-unit-law-add-ℤ x
-issec-equiv-Eq-Cyclic-Type (succ-ℕ k) x = left-unit-law-add-Fin x
+issec-equiv-Eq-Cyclic-Type (succ-ℕ k) x = left-unit-law-add-Fin k x
 
 preserves-pred-preserves-succ-map-ℤ-Mod :
   (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →

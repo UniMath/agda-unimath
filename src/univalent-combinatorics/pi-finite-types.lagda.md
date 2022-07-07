@@ -402,7 +402,7 @@ is-π-finite-UU-Fin zero-ℕ n =
 pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) = is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin x y)
+    ( equiv-equiv-eq-UU-Fin n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -417,7 +417,7 @@ pr1 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) =
   is-π-finite-UU-Fin-Level zero-ℕ n
 pr2 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) x y =
   is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin-Level x y)
+    ( equiv-equiv-eq-UU-Fin-Level n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -494,16 +494,16 @@ is-locally-finite-prod f g x y =
     ( is-finite-prod (f (pr1 x) (pr1 y)) (g (pr2 x) (pr2 y)))
 
 is-locally-finite-Π-Fin :
-  {l1 : Level} {k : ℕ} {B : Fin k → UU l1} →
+  {l1 : Level} (k : ℕ) {B : Fin k → UU l1} →
   ((x : Fin k) → is-locally-finite (B x)) →
   is-locally-finite ((x : Fin k) → B x)
-is-locally-finite-Π-Fin {l1} {zero-ℕ} {B} f =
+is-locally-finite-Π-Fin {l1} zero-ℕ {B} f =
   is-locally-finite-is-contr (dependent-universal-property-empty' B)
-is-locally-finite-Π-Fin {l1} {succ-ℕ k} {B} f =
+is-locally-finite-Π-Fin {l1} (succ-ℕ k) {B} f =
   is-locally-finite-equiv
     ( equiv-dependent-universal-property-coprod B)
     ( is-locally-finite-prod
-      ( is-locally-finite-Π-Fin (λ x → f (inl x)))
+      ( is-locally-finite-Π-Fin k (λ x → f (inl x)))
       ( is-locally-finite-equiv
         ( equiv-dependent-universal-property-unit (B ∘ inr))
         ( f (inr star))))
@@ -514,7 +514,7 @@ is-locally-finite-Π-count :
 is-locally-finite-Π-count {l1} {l2} {A} {B} (pair k e) g =
   is-locally-finite-equiv
     ( equiv-precomp-Π e B )
-    ( is-locally-finite-Π-Fin (λ x → g (map-equiv e x)))
+    ( is-locally-finite-Π-Fin k (λ x → g (map-equiv e x)))
 
 is-locally-finite-Π :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-finite A →
@@ -820,7 +820,7 @@ has-finite-connected-components-Σ' zero-ℕ e H K =
     ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
 has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
   apply-universal-property-trunc-Prop
-    ( has-presentation-of-cardinality-has-cardinality-components
+    ( has-presentation-of-cardinality-has-cardinality-components (succ-ℕ k)
       ( unit-trunc-Prop e))
     ( has-finite-connected-components-Prop (Σ A B))
     ( α)

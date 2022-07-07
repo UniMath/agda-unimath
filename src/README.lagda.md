@@ -179,6 +179,7 @@ open import finite-group-theory.groups-of-order-2
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
+open import finite-group-theory.simpson-delooping-sign-homomorphism
 open import finite-group-theory.tetrahedra-in-3-space
 open import finite-group-theory.transpositions
 ```

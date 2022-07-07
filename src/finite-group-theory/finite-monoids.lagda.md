@@ -58,9 +58,9 @@ Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M)
 
 ```agda
 is-finite-is-unital-Semigroup :
-  {l : Level} {n : ℕ} (X : Semigroup-of-Order l n) →
+  {l : Level} (n : ℕ) (X : Semigroup-of-Order l n) →
   is-finite (is-unital-Semigroup (pr1 X))
-is-finite-is-unital-Semigroup {l} {n} X =
+is-finite-is-unital-Semigroup {l} n X =
   apply-universal-property-trunc-Prop
     ( pr2 X)
     ( is-finite-Prop _)
@@ -98,7 +98,7 @@ is-π-finite-Monoid-of-Order {l} k n =
       ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
         is-π-finite-is-finite k
-          ( is-finite-is-unital-Semigroup X)))
+          ( is-finite-is-unital-Semigroup n X)))
   where
   e : Monoid-of-Order l n ≃
       Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
