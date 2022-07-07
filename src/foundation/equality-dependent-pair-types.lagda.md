@@ -5,13 +5,14 @@
 
 module foundation.equality-dependent-pair-types where
 
+open import foundation.identity-types using
+  (Id; refl; tr; _∙_; concat; ap; tr-concat; inv; isretr-inv-tr)
+
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using
-  (Id; refl; tr; _∙_; concat; ap; tr-concat)
 open import foundation-core.propositions using (is-prop; eq-is-prop)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
@@ -107,4 +108,16 @@ module _
     (x y : X) (p : Id x y) →
     Id (pr1 (pair-eq-Σ (ap f p))) (ap (λ x → pr1 (f x)) p)
   ap-pair-eq-Σ X f x .x refl = refl
+
+  inv-eq-pair-Σ : 
+    {x y : A} (a : B x) (b : B y) (p : Id x y) (r : Id (tr B p a) b) → 
+    Id
+      ( inv (eq-pair-Σ p r))
+      ( eq-pair-Σ
+        ( inv p)
+        ( tr
+          ( λ x → Id (tr B (inv p) b) x)
+          ( isretr-inv-tr B p a)
+          ( ap (tr B (inv p)) (inv r))))
+  inv-eq-pair-Σ a .a refl refl = refl
 ```
