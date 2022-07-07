@@ -115,7 +115,7 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.equality-finite-types using
   ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set; has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin; is-set-Fin)
+  ( has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.lists using
@@ -128,10 +128,11 @@ open import univalent-combinatorics.orientations-complete-undirected-graph using
     preserves-even-difference-orientation-complete-undirected-graph-equiv;
     preserves-id-equiv-orientation-complete-undirected-graph-equiv;
     equiv-fin-2-quotient-sign-count; orientation-complete-undirected-graph-equiv;
-    orientation-aut-count; is-decidable-even-difference-orientation-Complete-Undirected-Graph;
+    orientation-aut-count;
+    is-decidable-even-difference-orientation-Complete-Undirected-Graph;
     not-even-difference-orientation-aut-transposition-count)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin)
+  ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin; Fin-Set; is-set-Fin)
 ```
 
 ## Idea
@@ -542,7 +543,7 @@ module _
       ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
       ( star)
       ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))) ∘e
-      ( equiv-succ-Fin ∘e
+      ( ( equiv-succ-Fin 2) ∘e
         ( inv-equiv
           ( equiv-fin-2-quotient-sign-equiv-Fin
             ( succ-ℕ (succ-ℕ n))
@@ -574,7 +575,7 @@ module _
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
         ( star)
         ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))) ∘e
-        ( equiv-succ-Fin ∘e
+        ( ( equiv-succ-Fin 2) ∘e
           ( inv-equiv
             ( equiv-fin-2-quotient-sign-equiv-Fin
               ( succ-ℕ (succ-ℕ n))
@@ -731,7 +732,7 @@ module _
           ( star)
           ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
       ( ( ap
-        ( map-equiv equiv-succ-Fin)
+        ( map-equiv (equiv-succ-Fin 2))
         ( q)) ∙
         ( inv r))) ∙
        ap
@@ -759,7 +760,7 @@ module _
           ( star)
           ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
       ( ( ap
-        ( map-equiv equiv-succ-Fin)
+        ( map-equiv (equiv-succ-Fin 2))
         ( q)) ∙
         ( inv r))) ∙
        ap
@@ -1201,7 +1202,7 @@ module _
                                 ( ap
                                   ( map-hom-Group
                                     ( symmetric-Group
-                                      ( set-UU-Fin-Level
+                                      ( set-UU-Fin-Level (succ-ℕ (succ-ℕ n))
                                        ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
                                     ( symmetric-Group (Fin-Set 2))
                                     ( sign-homomorphism

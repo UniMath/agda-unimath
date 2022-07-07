@@ -89,21 +89,21 @@ module _
     (X : UU lzero) (p : X → A) (e e' : Fin 2 ≃ X) →
     coprod
       ( htpy-equiv e e')
-      ( htpy-equiv e (e' ∘e equiv-succ-Fin)) →
-    ( f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin))) ＝ 
-    ( f (p (map-equiv e' zero-Fin)) (p (map-equiv e' one-Fin)))
+      ( htpy-equiv e (e' ∘e equiv-succ-Fin 2)) →
+    ( f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1)))) ＝ 
+    ( f (p (map-equiv e' (zero-Fin 1))) (p (map-equiv e' (one-Fin 1))))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inl K) =
-    ap-binary f (ap p (K zero-Fin)) (ap p (K one-Fin))
+    ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inr K) =
-    ( ap-binary f (ap p (K zero-Fin)) (ap p (K one-Fin))) ∙
-    ( H (p (map-equiv e' one-Fin)) (p (map-equiv e' zero-Fin)))
+    ( ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))) ∙
+    ( H (p (map-equiv e' (one-Fin 1))) (p (map-equiv e' (zero-Fin 1))))
   
   commutative-operation-is-commutative :
     (f : A → A → type-Set B) → is-commutative f →
     commutative-operation A (type-Set B)
   commutative-operation-is-commutative f H (pair (pair X K) p) =
     map-universal-property-set-quotient-trunc-Prop B
-      ( λ e → f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
+      ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H X p e e'
           ( map-equiv-coprod
@@ -111,11 +111,11 @@ module _
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
               ( pair X K)
               ( e)
-              ( e' ∘e equiv-succ-Fin)))
+              ( e' ∘e equiv-succ-Fin 2)))
             ( decide-value-equiv-Fin-two-ℕ
               ( pair X K)
               ( e')
-              ( map-equiv e zero-Fin))))
+              ( map-equiv e (zero-Fin 1)))))
       ( K)
 
   compute-commutative-operation-is-commutative :
@@ -125,7 +125,7 @@ module _
   compute-commutative-operation-is-commutative f H x y =
     
     htpy-universal-property-set-quotient-trunc-Prop B
-      ( λ e → f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
+      ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
           ( map-equiv-coprod
@@ -133,11 +133,11 @@ module _
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
               ( Fin-UU-Fin 2)
               ( e)
-              ( e' ∘e equiv-succ-Fin)))
+              ( e' ∘e equiv-succ-Fin 2)))
             ( decide-value-equiv-Fin-two-ℕ
               ( Fin-UU-Fin 2)
               ( e')
-              ( map-equiv e zero-Fin))))
+              ( map-equiv e (zero-Fin 1)))))
       ( id-equiv)
     where
     p : Fin 2 → A

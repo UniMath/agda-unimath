@@ -29,6 +29,8 @@ An **n-alkene** is a hydrocarbon equipped with a choice of $n$ carbons, each of 
 n-alkene : hydrocarbon → ℕ → UU (lsuc lzero)
 n-alkene H n =
   Σ (UU-Fin n) λ carbons →
-    Σ (type-UU-Fin carbons ↪ vertex-hydrocarbon H) λ embed-carbons →
-      (c : type-UU-Fin carbons) → pr1 (has-double-bond-hydrocarbon H (pr1 embed-carbons c))
+    Σ ( type-UU-Fin n carbons ↪ vertex-hydrocarbon H)
+      ( λ embed-carbons →
+        ( c : type-UU-Fin n carbons) →
+        pr1 (has-double-bond-hydrocarbon H (pr1 embed-carbons c)))
 ```

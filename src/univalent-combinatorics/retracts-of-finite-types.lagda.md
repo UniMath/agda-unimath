@@ -43,9 +43,9 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 
 ```agda
 is-decidable-map-retr-Fin :
-  {l1 : Level} {k : ℕ} {A : UU l1} (i : A → Fin k) → retr i → is-decidable-map i
-is-decidable-map-retr-Fin =
-  is-decidable-map-retr has-decidable-equality-Fin
+  {l1 : Level} (k : ℕ) {A : UU l1} (i : A → Fin k) → retr i → is-decidable-map i
+is-decidable-map-retr-Fin k =
+  is-decidable-map-retr (has-decidable-equality-Fin k)
 ```
 
 ### If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite.

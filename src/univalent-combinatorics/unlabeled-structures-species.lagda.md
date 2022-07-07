@@ -28,7 +28,7 @@ The type of unlabeled `F`-structures of order `n` of a species `F` is the type o
 ```agda
 unlabeled-structure-species :
   {l : Level} (F : species l) → ℕ → UU (lsuc lzero ⊔ l)
-unlabeled-structure-species F n = Σ (UU-Fin n) (λ X → F (finite-type-UU-Fin X))
+unlabeled-structure-species F n = Σ (UU-Fin n) (λ X → F (finite-type-UU-Fin n X))
 
 module _
   {l : Level} (F : species l) {k : ℕ} (X : unlabeled-structure-species F k)
@@ -39,16 +39,16 @@ module _
 
   type-unlabeled-structure-species : UU lzero
   type-unlabeled-structure-species =
-    type-UU-Fin type-of-cardinality-unlabeled-structure-species
+    type-UU-Fin k type-of-cardinality-unlabeled-structure-species
 
   has-cardinality-type-unlabeled-structure-species :
     has-cardinality k type-unlabeled-structure-species
   has-cardinality-type-unlabeled-structure-species =
-    has-cardinality-type-UU-Fin type-of-cardinality-unlabeled-structure-species
+    has-cardinality-type-UU-Fin k type-of-cardinality-unlabeled-structure-species
 
   finite-type-unlabeled-structure-species : 𝔽
   finite-type-unlabeled-structure-species =
-    finite-type-UU-Fin type-of-cardinality-unlabeled-structure-species
+    finite-type-UU-Fin k type-of-cardinality-unlabeled-structure-species
 
   structure-unlabeled-structure-species :
     F finite-type-unlabeled-structure-species
@@ -56,16 +56,3 @@ module _
 ```
 
 ### Equivalences of unlabeled structures of a speces
-
-```agda
-module _
-  {l : Level} (F : species l)
-  where
-  
-  equiv-unlabeled-structure-species :
-    {k : ℕ} (X Y : unlabeled-structure-species F k) → UU {!!}
-  equiv-unlabeled-structure-species X Y =
-    Σ ( type-unlabeled-structure-species F X ≃
-        type-unlabeled-structure-species F Y)
-      {!!}
-```

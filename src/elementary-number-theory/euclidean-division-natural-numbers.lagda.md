@@ -38,15 +38,15 @@ euclidean-division-ℕ :
 pr1 (euclidean-division-ℕ zero-ℕ x) = x
 pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
 pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
-pr1 (euclidean-division-ℕ (succ-ℕ k) x) = nat-Fin (mod-succ-ℕ k x)
+pr1 (euclidean-division-ℕ (succ-ℕ k) x) = nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
 pr1 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) =
   symm-cong-ℕ
     ( succ-ℕ k)
-    ( nat-Fin (mod-succ-ℕ k x))
+    ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( x)
     ( cong-nat-mod-succ-ℕ k x)
 pr2 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) f =
-  strict-upper-bound-nat-Fin (mod-succ-ℕ k x)
+  strict-upper-bound-nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
 
 remainder-euclidean-division-ℕ : ℕ → ℕ → ℕ
 remainder-euclidean-division-ℕ k x =

@@ -56,12 +56,12 @@ open import univalent-combinatorics.embeddings-standard-finite-types using
 open import univalent-combinatorics.equality-finite-types using
   ( is-set-is-finite)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( is-set-Fin; has-decidable-equality-Fin; Fin-Set)
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; number-of-elements-is-finite;
     compute-number-of-elements-is-finite)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; emb-nat-Fin)
+  ( Fin; emb-nat-Fin; is-set-Fin)
 ```
 
 ## Idea
@@ -75,39 +75,40 @@ If `f : X → Y` is an injective map between finite types `X` and `Y` with `k` a
 ```agda
 abstract
   leq-emb-Fin :
-    {k l : ℕ} → Fin k ↪ Fin l → k ≤-ℕ l
-  leq-emb-Fin {zero-ℕ} {zero-ℕ} f = refl-leq-ℕ zero-ℕ
-  leq-emb-Fin {succ-ℕ k} {zero-ℕ} f = ex-falso (map-emb f (inr star))
-  leq-emb-Fin {zero-ℕ} {succ-ℕ l} f = leq-zero-ℕ (succ-ℕ l)
-  leq-emb-Fin {succ-ℕ k} {succ-ℕ l} f = leq-emb-Fin (reduce-emb-Fin k l f)
+    (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
+  leq-emb-Fin zero-ℕ zero-ℕ f = refl-leq-ℕ zero-ℕ
+  leq-emb-Fin (succ-ℕ k) zero-ℕ f = ex-falso (map-emb f (inr star))
+  leq-emb-Fin zero-ℕ (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
+  leq-emb-Fin (succ-ℕ k) (succ-ℕ l) f = leq-emb-Fin k l (reduce-emb-Fin k l f)
 
 abstract
   leq-is-emb-Fin :
-    {k l : ℕ} {f : Fin k → Fin l} → is-emb f → k ≤-ℕ l
-  leq-is-emb-Fin {f = f} H = leq-emb-Fin (pair f H)
+    (k l : ℕ) {f : Fin k → Fin l} → is-emb f → k ≤-ℕ l
+  leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (pair f H)
 
 abstract
   leq-is-injective-Fin :
-    {k l : ℕ} {f : Fin k → Fin l} → is-injective f → k ≤-ℕ l
-  leq-is-injective-Fin H = leq-is-emb-Fin (is-emb-is-injective (is-set-Fin _) H)
+    (k l : ℕ) {f : Fin k → Fin l} → is-injective f → k ≤-ℕ l
+  leq-is-injective-Fin k l H =
+    leq-is-emb-Fin k l (is-emb-is-injective (is-set-Fin l) H)
 
 abstract
   is-not-emb-le-Fin :
-    {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
-  is-not-emb-le-Fin {k} {l} f p =
-    map-neg (leq-is-emb-Fin) (contradiction-le-ℕ l k p)
+    (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
+  is-not-emb-le-Fin k l f p =
+    map-neg (leq-is-emb-Fin k l) (contradiction-le-ℕ l k p)
 
 abstract
   is-not-injective-le-Fin :
-    {k l : ℕ} (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-injective f)
-  is-not-injective-le-Fin {k} {l} f p =
-    map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin f p)
+    (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-injective f)
+  is-not-injective-le-Fin k l f p =
+    map-neg (is-emb-is-injective (is-set-Fin l)) (is-not-emb-le-Fin k l f p)
 
 abstract
   is-not-injective-map-Fin-succ-Fin :
-    {k : ℕ} (f : Fin (succ-ℕ k) → Fin k) → ¬ (is-injective f)
-  is-not-injective-map-Fin-succ-Fin {k} f =
-    is-not-injective-le-Fin f (le-succ-ℕ {k})
+    (k : ℕ) (f : Fin (succ-ℕ k) → Fin k) → ¬ (is-injective f)
+  is-not-injective-map-Fin-succ-Fin k f =
+    is-not-injective-le-Fin (succ-ℕ k) k f (le-succ-ℕ {k})
 
 abstract
   no-embedding-ℕ-Fin :
@@ -115,14 +116,14 @@ abstract
   no-embedding-ℕ-Fin k e =
     contradiction-leq-ℕ k k
       ( refl-leq-ℕ k)
-      ( leq-emb-Fin (comp-emb e (emb-nat-Fin (succ-ℕ k))))
+      ( leq-emb-Fin (succ-ℕ k) k (comp-emb e (emb-nat-Fin (succ-ℕ k))))
 ```
 
 ### For any `f : Fin k → Fin l`, where `l < k`, we construct a pair of distinct elements of `Fin k` on which `f` assumes the same value
 
 ```agda
 module _
-  {k l : ℕ} (f : Fin k → Fin l) (p : le-ℕ l k)
+  (k l : ℕ) (f : Fin k → Fin l) (p : le-ℕ l k)
   where
   
   abstract
@@ -131,24 +132,25 @@ module _
       pair (pair x (pair y (pr2 w))) (pr1 w)
       where
       u : Σ (Fin k) (λ x → ¬ ((y : Fin k) → Id (f x) (f y) → Id x y))
-      u = exists-not-not-forall-Fin
+      u =
+        exists-not-not-forall-Fin k
           ( λ x →
-            is-decidable-Π-Fin
+            is-decidable-Π-Fin k
               ( λ y →
                 is-decidable-function-type
-                  ( has-decidable-equality-Fin (f x) (f y))
-                  ( has-decidable-equality-Fin x y)))
-          ( λ q → is-not-injective-le-Fin f p (λ {x} {y} r → q x y r))
+                  ( has-decidable-equality-Fin l (f x) (f y))
+                  ( has-decidable-equality-Fin k x y)))
+          ( λ q → is-not-injective-le-Fin k l f p (λ {x} {y} r → q x y r))
       x : Fin k
       x = pr1 u
       H : ¬ ((y : Fin k) → Id (f x) (f y) → Id x y)
       H = pr2 u
       v : Σ (Fin k) (λ y → ¬ (Id (f x) (f y) → Id x y))
-      v = exists-not-not-forall-Fin
+      v = exists-not-not-forall-Fin k
           ( λ y →
             is-decidable-function-type
-              ( has-decidable-equality-Fin (f x) (f y))
-              ( has-decidable-equality-Fin x y))
+              ( has-decidable-equality-Fin l (f x) (f y))
+              ( has-decidable-equality-Fin k x y))
           ( H)
       y : Fin k
       y = pr1 v
@@ -157,10 +159,11 @@ module _
       w : Id (f x) (f y) × ¬ (Id x y)
       w = exists-not-not-forall-count
           ( λ _ → Id x y)
-          ( λ _ → has-decidable-equality-Fin x y)
+          ( λ _ →
+            has-decidable-equality-Fin k x y)
           ( count-is-decidable-is-prop
-            ( is-set-Fin _ (f x) (f y))
-            ( has-decidable-equality-Fin (f x) (f y)))
+            ( is-set-Fin l (f x) (f y))
+            ( has-decidable-equality-Fin l (f x) (f y)))
           ( K)
 
   pair-of-distinct-elements-repetition-le-Fin :
@@ -200,6 +203,8 @@ module _
       (A ↪ B) → (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
     leq-emb-count f =
       leq-emb-Fin
+        ( number-of-elements-count eA)
+        ( number-of-elements-count eB)
         ( comp-emb
           ( comp-emb (emb-equiv (inv-equiv-count eB)) f)
           ( emb-equiv (equiv-count eA)))
@@ -223,7 +228,12 @@ module _
       le-ℕ (number-of-elements-count eB) (number-of-elements-count eA) →
       ¬ (is-emb f)
     is-not-emb-le-count f p H =
-      is-not-emb-le-Fin (map-emb h) p (is-emb-map-emb h)
+      is-not-emb-le-Fin
+        ( number-of-elements-count eA)
+        ( number-of-elements-count eB)
+        ( map-emb h)
+        ( p)
+        ( is-emb-map-emb h)
       where
       h : Fin (number-of-elements-count eA) ↪ Fin (number-of-elements-count eB)
       h = comp-emb
@@ -261,6 +271,8 @@ module _
       ( equiv-count eB)
       ( issec-map-inv-equiv-count eB ·r (f ∘ (map-equiv-count eA)))
       ( repetition-le-Fin
+        ( number-of-elements-count eA)
+        ( number-of-elements-count eB)
         ( (map-inv-equiv-count eB ∘ f) ∘ (map-equiv-count eA))
         ( p))
 

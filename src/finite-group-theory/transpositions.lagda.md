@@ -93,12 +93,12 @@ open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
     number-of-elements-count; has-decidable-equality-count; is-set-count)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin; Fin-Set)
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( has-cardinality; has-cardinality-Prop)
 open import univalent-combinatorics.lists using
   (cons; list; fold-list; map-list; nil; concat-list)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
 ```
 
 ## Idea

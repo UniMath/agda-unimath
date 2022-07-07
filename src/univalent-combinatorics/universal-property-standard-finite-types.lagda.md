@@ -34,9 +34,10 @@ The universal property of the standard finite types asserts that for any family 
 ```agda
 iterated-prod : {l : Level} (n : ℕ) (A : Fin n → UU l) → UU l
 iterated-prod zero-ℕ A = raise-unit _
-iterated-prod (succ-ℕ zero-ℕ) A = A zero-Fin
+iterated-prod (succ-ℕ zero-ℕ) A = A (zero-Fin 0)
 iterated-prod (succ-ℕ (succ-ℕ n)) A =
-  iterated-prod (succ-ℕ n) (A ∘ inl-Fin (succ-ℕ n)) × A neg-one-Fin
+  ( iterated-prod (succ-ℕ n) (A ∘ inl-Fin (succ-ℕ n))) ×
+  ( A (neg-one-Fin (succ-ℕ n)))
 ```
 
 ## Properties
@@ -52,7 +53,7 @@ equiv-dependent-universal-property-Fin zero-ℕ A =
     ( dependent-universal-property-empty' A)
     ( is-contr-raise-unit)
 equiv-dependent-universal-property-Fin (succ-ℕ zero-ℕ) A =
-  equiv-dependent-universal-property-contr zero-Fin is-contr-Fin-one-ℕ A
+  equiv-dependent-universal-property-contr (zero-Fin 0) is-contr-Fin-one-ℕ A
 equiv-dependent-universal-property-Fin (succ-ℕ (succ-ℕ n)) A =
   ( equiv-prod
     ( equiv-dependent-universal-property-Fin (succ-ℕ n) (A ∘ inl))
@@ -61,7 +62,7 @@ equiv-dependent-universal-property-Fin (succ-ℕ (succ-ℕ n)) A =
 
 equiv-dependent-universal-property-Fin-two-ℕ :
   {l : Level} (A : Fin 2 → UU l) →
-  ((i : Fin 2) → A i) ≃ (A zero-Fin × A one-Fin)
+  ((i : Fin 2) → A i) ≃ (A (zero-Fin 1) × A (one-Fin 1))
 equiv-dependent-universal-property-Fin-two-ℕ =
   equiv-dependent-universal-property-Fin 2
 ```

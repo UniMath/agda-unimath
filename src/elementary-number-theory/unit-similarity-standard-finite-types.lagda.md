@@ -35,54 +35,56 @@ Two elements `x y : Fin k` are said to be unit similar if there is a unit elemen
 
 ```agda
 sim-unit-Fin :
-  {k : ℕ} → Fin k → Fin k → UU lzero
-sim-unit-Fin {k} x y = Σ (unit-Fin k) (λ u → mul-Fin (pr1 u) x ＝ y)
+  (k : ℕ) → Fin k → Fin k → UU lzero
+sim-unit-Fin k x y = Σ (unit-Fin k) (λ u → mul-Fin k (pr1 u) x ＝ y)
 
 refl-sim-unit-Fin :
-  {k : ℕ} (x : Fin k) → sim-unit-Fin x x
+  {k : ℕ} (x : Fin k) → sim-unit-Fin k x x
 pr1 (refl-sim-unit-Fin {succ-ℕ k} x) = one-unit-Fin
-pr2 (refl-sim-unit-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin x
+pr2 (refl-sim-unit-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin k x
 
 symm-sim-unit-Fin :
-  {k : ℕ} (x y : Fin k) → sim-unit-Fin x y → sim-unit-Fin y x
+  {k : ℕ} (x y : Fin k) → sim-unit-Fin k x y → sim-unit-Fin k y x
 pr1 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
   inv-unit-Fin (pair u (pair v q))
 pr2 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
-  ( ( ( ap (mul-Fin v) (inv p)) ∙
-        ( inv (associative-mul-Fin v u x))) ∙
-      ( ap (mul-Fin' x) q)) ∙
-    ( left-unit-law-mul-Fin x)
+  ( ( ( ap (mul-Fin (succ-ℕ k) v) (inv p)) ∙
+        ( inv (associative-mul-Fin (succ-ℕ k) v u x))) ∙
+      ( ap (mul-Fin' (succ-ℕ k) x) q)) ∙
+    ( left-unit-law-mul-Fin k x)
 
 trans-sim-unit-Fin :
-  {k : ℕ} (x y z : Fin k) → sim-unit-Fin x y → sim-unit-Fin y z →
-  sim-unit-Fin x z
+  {k : ℕ} (x y z : Fin k) → sim-unit-Fin k x y → sim-unit-Fin k y z →
+  sim-unit-Fin k x z
 pr1 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
-  mul-unit-Fin v u
+  mul-unit-Fin (succ-ℕ k) v u
 pr2 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
-  associative-mul-Fin (pr1 v) (pr1 u) x ∙ (ap (mul-Fin (pr1 v)) p ∙ q)
+  ( associative-mul-Fin (succ-ℕ k) (pr1 v) (pr1 u) x) ∙
+  ( ap (mul-Fin (succ-ℕ k) (pr1 v)) p ∙ q)
 
 is-mod-unit-ℕ : (k x : ℕ) → UU lzero
 is-mod-unit-ℕ k x = Σ ℕ (λ l → cong-ℕ k (mul-ℕ l x) 1)
 
 is-mod-unit-sim-unit-mod-succ-ℕ :
-  (k x : ℕ) → sim-unit-Fin (mod-succ-ℕ k x) one-Fin → is-mod-unit-ℕ (succ-ℕ k) x
+  (k x : ℕ) → sim-unit-Fin (succ-ℕ k) (mod-succ-ℕ k x) (one-Fin k) →
+  is-mod-unit-ℕ (succ-ℕ k) x
 pr1 (is-mod-unit-sim-unit-mod-succ-ℕ k x (pair u p)) =
-  nat-Fin (pr1 u)
+  nat-Fin (succ-ℕ k) (pr1 u)
 pr2 (is-mod-unit-sim-unit-mod-succ-ℕ k x (pair u p)) =
   cong-eq-mod-succ-ℕ k
-    ( mul-ℕ (nat-Fin (pr1 u)) x)
+    ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
     ( 1)
     ( ( eq-mod-succ-cong-ℕ k
-        ( mul-ℕ (nat-Fin (pr1 u)) x)
-        ( mul-ℕ (nat-Fin (pr1 u)) (nat-Fin (mod-succ-ℕ k x)))
+        ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
+        ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
         ( scalar-invariant-cong-ℕ
           ( succ-ℕ k)
           ( x)
-          ( nat-Fin (mod-succ-ℕ k x))
-          ( nat-Fin (pr1 u))
+          ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+          ( nat-Fin (succ-ℕ k) (pr1 u))
           ( symm-cong-ℕ
             ( succ-ℕ k)
-            ( nat-Fin (mod-succ-ℕ k x))
+            ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
             ( x)
             ( cong-nat-mod-succ-ℕ k x)))) ∙
       ( p))

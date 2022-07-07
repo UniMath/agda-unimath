@@ -50,10 +50,8 @@ open import foundation.universal-property-maybe using
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set)
 open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
 ```
 
 ```agda

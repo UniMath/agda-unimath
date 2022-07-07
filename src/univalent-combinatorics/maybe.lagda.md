@@ -21,9 +21,9 @@ open import univalent-combinatorics.finite-types using
 
 ```agda
 add-free-point-UU-Fin-Level :
-  {l1 : Level} {k : ℕ} → UU-Fin-Level l1 k → UU-Fin-Level l1 (succ-ℕ k)
-add-free-point-UU-Fin-Level X = coprod-UU-Fin-Level X unit-UU-Fin
+  {l1 : Level} (k : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l1 (succ-ℕ k)
+add-free-point-UU-Fin-Level k X = coprod-UU-Fin-Level k 1 X unit-UU-Fin
 
-add-free-point-UU-Fin : {k : ℕ} → UU-Fin k → UU-Fin (succ-ℕ k)
-add-free-point-UU-Fin X = add-free-point-UU-Fin-Level X
+add-free-point-UU-Fin : (k : ℕ) → UU-Fin k → UU-Fin (succ-ℕ k)
+add-free-point-UU-Fin k X = add-free-point-UU-Fin-Level k X
 ```

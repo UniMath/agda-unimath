@@ -52,9 +52,9 @@ Group-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Group-of-Order l n = Σ (Group l) (λ G → mere-equiv (Fin n) (type-Group G))
 
 is-finite-is-group :
-  {l : Level} {n : ℕ} (G : Semigroup-of-Order l n) →
+  {l : Level} (n : ℕ) (G : Semigroup-of-Order l n) →
   is-finite {l} (is-group (pr1 G))
-is-finite-is-group {l} {n} G =
+is-finite-is-group {l} n G =
   apply-universal-property-trunc-Prop
     ( pr2 G)
     ( is-finite-Prop _)
@@ -108,7 +108,7 @@ is-π-finite-Group-of-Order {l} k n =
       ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
         is-π-finite-is-finite k
-          ( is-finite-is-group X)))
+          ( is-finite-is-group n X)))
   where
   e : Group-of-Order l n ≃
       Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))

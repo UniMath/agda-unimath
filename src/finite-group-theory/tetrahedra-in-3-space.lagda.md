@@ -32,9 +32,9 @@ tetrahedron-in-3-space =
       cyclic-structure 3
         ( Σ ( 2-Element-Decidable-Subtype lzero
               ( 2-Element-Decidable-Subtype lzero
-                ( type-UU-Fin X)))
+                ( type-UU-Fin 4 X)))
             ( λ Q →
-              (x : type-UU-Fin X) →
+              (x : type-UU-Fin 4 X) →
               is-empty
                 ( (P : type-2-Element-Decidable-Subtype Q) →
                   is-in-2-Element-Decidable-Subtype
@@ -46,7 +46,7 @@ module _
   where
 
   vertex-tetrahedron-in-3-space : UU lzero
-  vertex-tetrahedron-in-3-space = type-UU-Fin (pr1 T)
+  vertex-tetrahedron-in-3-space = type-UU-Fin 4 (pr1 T)
 
   cyclic-structure-tetrahedron-in-3-space :
     cyclic-structure 3

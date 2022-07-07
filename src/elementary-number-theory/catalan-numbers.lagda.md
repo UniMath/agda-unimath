@@ -35,18 +35,18 @@ catalan-numbers : ℕ → ℕ
 catalan-numbers =
   strong-ind-ℕ (λ _ → ℕ) (succ-ℕ zero-ℕ)
     ( λ k C →
-      sum-Fin-ℕ {k = k}
+      sum-Fin-ℕ k
         ( λ i →
           mul-ℕ
-            ( C ( nat-Fin i)
-                ( leq-le-ℕ {x = nat-Fin i} (strict-upper-bound-nat-Fin i)))
-            ( C ( dist-ℕ (nat-Fin i) k)
+            ( C ( nat-Fin k i)
+                ( leq-le-ℕ {x = nat-Fin k i} (strict-upper-bound-nat-Fin k i)))
+            ( C ( dist-ℕ (nat-Fin k i) k)
                 ( leq-dist-ℕ
-                  ( nat-Fin i)
+                  ( nat-Fin k i)
                   ( k)
                   ( leq-le-ℕ
-                    { x = nat-Fin i}
-                    ( strict-upper-bound-nat-Fin i))))))
+                    { x = nat-Fin k i}
+                    ( strict-upper-bound-nat-Fin k i))))))
 
 catalan-numbers-binomial : ℕ → ℕ
 catalan-numbers-binomial n =

@@ -41,16 +41,16 @@ The values of a map `f : X → ℕ` out of a finite type `X` can be summed up.
 ### Sums of natural numbers indexed by a standard finite type
 
 ```agda
-sum-Fin-ℕ : {k : ℕ} → (Fin k → ℕ) → ℕ
-sum-Fin-ℕ {zero-ℕ} f = zero-ℕ
-sum-Fin-ℕ {succ-ℕ k} f = add-ℕ (sum-Fin-ℕ (λ x → f (inl x))) (f (inr star))
+sum-Fin-ℕ : (k : ℕ) → (Fin k → ℕ) → ℕ
+sum-Fin-ℕ zero-ℕ f = zero-ℕ
+sum-Fin-ℕ (succ-ℕ k) f = add-ℕ (sum-Fin-ℕ k (λ x → f (inl x))) (f (inr star))
 ```
 
 ### Sums of natural numbers indexed by a type equipped with a counting
 
 ```agda
 sum-count-ℕ : {l : Level} {A : UU l} (e : count A) → (f : A → ℕ) → ℕ
-sum-count-ℕ (pair k e) f = sum-Fin-ℕ (f ∘ (map-equiv e))
+sum-count-ℕ (pair k e) f = sum-Fin-ℕ k (f ∘ (map-equiv e))
 ```
 
 ### Bounded sums of natural numbers
@@ -71,18 +71,18 @@ bounded-sum-ℕ (succ-ℕ u) f =
 ```agda
 abstract
   htpy-sum-Fin-ℕ :
-    {k : ℕ} {f g : Fin k → ℕ} (H : f ~ g) → sum-Fin-ℕ f ＝ sum-Fin-ℕ g
-  htpy-sum-Fin-ℕ {zero-ℕ} H = refl
-  htpy-sum-Fin-ℕ {succ-ℕ k} H =
+    (k : ℕ) {f g : Fin k → ℕ} (H : f ~ g) → sum-Fin-ℕ k f ＝ sum-Fin-ℕ k g
+  htpy-sum-Fin-ℕ zero-ℕ H = refl
+  htpy-sum-Fin-ℕ (succ-ℕ k) H =
     ap-add-ℕ
-      ( htpy-sum-Fin-ℕ (λ x → H (inl x)))
+      ( htpy-sum-Fin-ℕ k (λ x → H (inl x)))
       ( H (inr star))
 
 abstract
   htpy-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) {f g : A → ℕ} (H : f ~ g) →
     sum-count-ℕ e f ＝ sum-count-ℕ e g
-  htpy-sum-count-ℕ (pair k e) H = htpy-sum-Fin-ℕ (H ·r (map-equiv e))
+  htpy-sum-count-ℕ (pair k e) H = htpy-sum-Fin-ℕ k (H ·r (map-equiv e))
 ```
 
 ### Summing up the same value `m` times is multiplication by `m`.
@@ -90,7 +90,7 @@ abstract
 ```agda
 abstract
   constant-sum-Fin-ℕ :
-    (m n : ℕ) → sum-Fin-ℕ (const (Fin m) ℕ n) ＝ mul-ℕ m n
+    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ mul-ℕ m n
   constant-sum-Fin-ℕ zero-ℕ n = refl
   constant-sum-Fin-ℕ (succ-ℕ m) n = ap (add-ℕ' n) (constant-sum-Fin-ℕ m n)
 

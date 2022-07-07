@@ -175,23 +175,33 @@ module _
   -- The map `i ↦ eⁱ a` repeats itself
   
   repetition-iterate-automorphism-Fin :
-    repetition (λ k → iterate (nat-Fin k) (map-equiv f) a)
+    repetition
+      ( λ (k : Fin (succ-ℕ (number-of-elements-count eX))) →
+        iterate (nat-Fin (succ-ℕ (number-of-elements-count eX)) k) (map-equiv f) a)
   repetition-iterate-automorphism-Fin =
     repetition-le-count
       ( count-Fin (succ-ℕ (number-of-elements-count eX)))
       ( eX)
-      ( λ k → iterate (nat-Fin k) (map-equiv f) a)
+      ( λ k → iterate (nat-Fin (succ-ℕ (number-of-elements-count eX)) k) (map-equiv f) a)
       ( succ-le-ℕ (number-of-elements-count eX))
 
   point1-iterate-ℕ : ℕ
-  point1-iterate-ℕ = nat-Fin (pr1 (pr1 repetition-iterate-automorphism-Fin))
+  point1-iterate-ℕ =
+    nat-Fin
+      ( succ-ℕ (number-of-elements-count eX))
+      ( pr1 (pr1 repetition-iterate-automorphism-Fin))
 
   point2-iterate-ℕ : ℕ
-  point2-iterate-ℕ = nat-Fin (pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin)))
+  point2-iterate-ℕ =
+    nat-Fin
+      ( succ-ℕ (number-of-elements-count eX))
+      ( pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin)))
 
   neq-points-iterate-ℕ : ¬ (Id point1-iterate-ℕ point2-iterate-ℕ)
   neq-points-iterate-ℕ p =
-    pr2 (pr2 (pr1 repetition-iterate-automorphism-Fin)) (is-injective-nat-Fin p)
+    pr2
+      ( pr2 (pr1 repetition-iterate-automorphism-Fin))
+      ( is-injective-nat-Fin (succ-ℕ (number-of-elements-count eX)) p)
  
   two-points-iterate-ordered-ℕ :
     coprod
@@ -223,9 +233,13 @@ module _
         ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ)) →
     pr1 (two-points-iterate-ordered-ℕ p) ≤-ℕ number-of-elements-count eX
   leq-greater-point-number-elements (inl p) =
-    ( upper-bound-nat-Fin (pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin))))
+    ( upper-bound-nat-Fin
+      ( number-of-elements-count eX)
+      ( pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin))))
   leq-greater-point-number-elements (inr p) =
-    ( upper-bound-nat-Fin (pr1 (pr1 repetition-iterate-automorphism-Fin)))
+    ( upper-bound-nat-Fin
+      ( number-of-elements-count eX)
+      ( pr1 (pr1 repetition-iterate-automorphism-Fin)))
 
   abstract
     min-repeating :
@@ -443,10 +457,10 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n) (f : Aut (type-UU-Fin-Level X)) 
+  {l : Level} (n : ℕ) (X : UU-Fin-Level l n) (f : Aut (type-UU-Fin-Level n X)) 
   where
 
-  same-orbits-permutation : Eq-Rel l (type-UU-Fin-Level X)
+  same-orbits-permutation : Eq-Rel l (type-UU-Fin-Level n X)
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
   pr1 (pr2 same-orbits-permutation) = unit-trunc-Prop (pair 0 refl)
@@ -456,7 +470,7 @@ module _
       ( pr1 same-orbits-permutation b a)
       ( λ (pair k p) →
         apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin-Level X)
+          ( has-cardinality-type-UU-Fin-Level n X)
           ( pr1 same-orbits-permutation b a)
           ( λ h →
             unit-trunc-Prop
@@ -468,18 +482,18 @@ module _
                         ( λ x → iterate x (map-equiv f) a)
                         ( pr2 (lemma h k))) ∙
                       ( mult-has-finite-orbits-permutation
-                        ( type-UU-Fin-Level X)
+                        ( type-UU-Fin-Level n X)
                         ( pair n h)
                         ( f)
                         ( a)
                         ( k))))))))
     where
     has-finite-orbits-permutation-a :
-      (h : Fin n ≃ type-UU-Fin-Level X) →
+      (h : Fin n ≃ type-UU-Fin-Level n X) →
       Σ ℕ (λ l → (is-nonzero-ℕ l) × Id (iterate l (map-equiv f) a) a)
     has-finite-orbits-permutation-a h =
-      has-finite-orbits-permutation (type-UU-Fin-Level X) (pair n h) f a
-    lemma : (h : Fin n ≃ type-UU-Fin-Level X) (k : ℕ) →
+      has-finite-orbits-permutation (type-UU-Fin-Level n X) (pair n h) f a
+    lemma : (h : Fin n ≃ type-UU-Fin-Level n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
           Id (add-ℕ j k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
@@ -508,11 +522,11 @@ module _
 
   abstract
     is-decidable-same-orbits-permutation :
-      ( a b : type-UU-Fin-Level X) →
+      ( a b : type-UU-Fin-Level n X) →
       is-decidable (sim-Eq-Rel same-orbits-permutation a b) 
     is-decidable-same-orbits-permutation a b =
       apply-universal-property-trunc-Prop
-        ( has-cardinality-type-UU-Fin-Level X)
+        ( has-cardinality-type-UU-Fin-Level n X)
         ( is-decidable-Prop (prop-Eq-Rel same-orbits-permutation a b))
         ( λ h →
           is-decidable-trunc-Prop-is-merely-decidable
@@ -526,13 +540,13 @@ module _
                   ( λ z →
                     has-decidable-equality-equiv
                       ( inv-equiv h)
-                      ( has-decidable-equality-Fin)
+                      ( has-decidable-equality-Fin n)
                       ( iterate z (map-equiv f) a)
                       ( b))
                   ( λ m p → p)))))
       where
       is-decidable-iterate-is-decidable-bounded :
-        ( h : Fin n ≃ type-UU-Fin-Level X) (a b : type-UU-Fin-Level X) →
+        ( h : Fin n ≃ type-UU-Fin-Level n X) (a b : type-UU-Fin-Level n X) →
         is-decidable
           ( Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
         is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
@@ -554,12 +568,12 @@ module _
                          ( pr1
                            ( pr2
                              ( has-finite-orbits-permutation
-                               ( type-UU-Fin-Level X)
+                               ( type-UU-Fin-Level n X)
                                ( pair n h)
                                ( f)
                                ( a)))))
                        ( leq-has-finite-orbits-permutation-number-elements
-                         ( type-UU-Fin-Level X)
+                         ( type-UU-Fin-Level n X)
                          ( pair n h)
                          ( f)
                          ( a))))
@@ -569,7 +583,7 @@ module _
                          ( map-equiv f))
                        ( inv
                          ( mult-has-finite-orbits-permutation
-                           ( type-UU-Fin-Level X)
+                           ( type-UU-Fin-Level n X)
                            ( pair n h)
                            ( f)
                            ( a)
@@ -593,7 +607,7 @@ module _
         m : ℕ
         m = pr1
             ( has-finite-orbits-permutation
-              ( type-UU-Fin-Level X)
+              ( type-UU-Fin-Level n X)
               ( pair n h)
               ( f)
               ( a))
@@ -601,7 +615,7 @@ module _
   abstract
     is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation :
       (T : equivalence-class same-orbits-permutation) →
-      (a : type-UU-Fin-Level X) →
+      (a : type-UU-Fin-Level n X) →
       is-decidable (is-in-subtype-equivalence-class same-orbits-permutation T a)
     is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation T a =
       is-decidable-is-in-subtype-equivalence-class-is-decidable
@@ -615,10 +629,10 @@ module _
       is-finite (equivalence-class same-orbits-permutation)
     has-finite-number-orbits-permutation =
       is-finite-codomain
-        ( is-finite-type-UU-Fin-Level X)
+        ( is-finite-type-UU-Fin-Level n X)
         ( is-surjective-class same-orbits-permutation)
         ( apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin-Level X)
+          ( has-cardinality-type-UU-Fin-Level n X)
           ( pair
             ( has-decidable-equality
               ( equivalence-class same-orbits-permutation))
@@ -631,11 +645,12 @@ module _
           ( λ (pair t1 p1) →
             cases-decidable-equality T1 T2 t1
               ( eq-pair-Σ (inv p1) (all-elements-equal-type-trunc-Prop _ _))
-              ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation T2 t1))))
+              ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+                T2 t1))))
       where
       cases-decidable-equality :
         (T1 T2 : equivalence-class same-orbits-permutation)
-        (t1 : type-UU-Fin-Level X) →
+        (t1 : type-UU-Fin-Level n X) →
         Id T1 (class same-orbits-permutation t1) →
         is-decidable
           ( is-in-subtype-equivalence-class same-orbits-permutation T2 t1) →
@@ -656,7 +671,7 @@ module _
 
   sign-permutation-orbit : Fin 2
   sign-permutation-orbit =
-    iterate (add-ℕ n number-of-orbits-permutation) (succ-Fin {k = 2}) zero-Fin
+    iterate (add-ℕ n number-of-orbits-permutation) (succ-Fin 2) (zero-Fin 1)
 ```
 
 ```agda
@@ -1622,7 +1637,7 @@ module _
     opposite-sign-composition-transposition-count : (g : X ≃ X) →
       Id
         (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g)
-        (succ-Fin (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+        (succ-Fin 2 (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
           (composition-transposition-a-b g)))
     opposite-sign-composition-transposition-count g =
       cases-opposite-sign-composition-transposition
@@ -1631,15 +1646,15 @@ module _
       cases-opposite-sign-composition-transposition : is-decidable (sim-Eq-Rel (same-orbits-permutation-count g) a b) →
         Id
           (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g)
-          (succ-Fin (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
+          (succ-Fin 2 (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
             (composition-transposition-a-b g)))
       cases-opposite-sign-composition-transposition (inl P) =
-        inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin
+        inv (is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2)
           (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g)) ∙
-          ap (λ k → succ-Fin (iterate (add-ℕ (number-of-elements-count eX) k) succ-Fin zero-Fin))
+          ap (λ k → succ-Fin 2 (iterate (add-ℕ (number-of-elements-count eX) k) (succ-Fin 2) (zero-Fin 1)))
             (number-orbits-composition-transposition g P)
       cases-opposite-sign-composition-transposition (inr NP) =
-        ap (λ k → iterate (add-ℕ (number-of-elements-count eX) k) succ-Fin zero-Fin)
+        ap (λ k → iterate (add-ℕ (number-of-elements-count eX) k) (succ-Fin 2) (zero-Fin 1))
           ( number-orbits-composition-transposition' g NP)
 
 module _
@@ -1650,17 +1665,17 @@ module _
     sign-list-transpositions-count :
       ( li : list (Σ (X → decidable-Prop l) (λ P → has-cardinality 2 (Σ X (λ x → type-decidable-Prop (P x)))))) →
       Id
-        ( iterate (length-list li) succ-Fin
+        ( iterate (length-list li) (succ-Fin 2)
           ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) id-equiv))
         ( sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
           ( permutation-list-transpositions li))
     sign-list-transpositions-count nil = refl
     sign-list-transpositions-count (cons t li) =
-      ap succ-Fin
+      ap (succ-Fin 2)
         ( (sign-list-transpositions-count li) ∙
           opposite-sign-composition-transposition-count X eX (pr1 two-elements-t) (pr1 (pr2 two-elements-t))
             ( pr1 (pr2 (pr2 two-elements-t))) (permutation-list-transpositions li )) ∙
-        ( is-involution-aut-Fin-two-ℕ equiv-succ-Fin
+        ( is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2)
           (sign-permutation-orbit (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
             (permutation-list-transpositions
               (cons (standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX)

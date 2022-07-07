@@ -88,20 +88,27 @@ module _
 ```agda
 compute-iterate-succ-Fin :
   {k : ℕ} (n : ℕ) (x : Fin (succ-ℕ k)) →
-  iterate n succ-Fin x ＝ add-Fin x (mod-succ-ℕ k n)
-compute-iterate-succ-Fin zero-ℕ x = inv (right-unit-law-add-Fin x)
+  iterate n (succ-Fin (succ-ℕ k)) x ＝ add-Fin (succ-ℕ k) x (mod-succ-ℕ k n)
+compute-iterate-succ-Fin {k} zero-ℕ x = inv (right-unit-law-add-Fin k x)
 compute-iterate-succ-Fin {k} (succ-ℕ n) x =
-  ( ap succ-Fin (compute-iterate-succ-Fin n x)) ∙
-  ( inv (right-successor-law-add-Fin x (mod-succ-ℕ k n)))
+  ( ap (succ-Fin (succ-ℕ k)) (compute-iterate-succ-Fin n x)) ∙
+  ( inv (right-successor-law-add-Fin (succ-ℕ k) x (mod-succ-ℕ k n)))
 
-is-finitely-cyclic-succ-Fin : {k : ℕ} → is-finitely-cyclic-map (succ-Fin {k})
+is-finitely-cyclic-succ-Fin : {k : ℕ} → is-finitely-cyclic-map (succ-Fin k)
 pr1 (is-finitely-cyclic-succ-Fin {succ-ℕ k} x y) =
-  nat-Fin (add-Fin y (neg-Fin x))
+  nat-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x))
 pr2 (is-finitely-cyclic-succ-Fin {succ-ℕ k} x y) =
-  ( compute-iterate-succ-Fin (nat-Fin (add-Fin y (neg-Fin x))) x) ∙
-    ( ( ap (add-Fin x) (issec-nat-Fin (add-Fin y (neg-Fin x)))) ∙
-      ( ( commutative-add-Fin x (add-Fin y (neg-Fin x))) ∙
-        ( ( associative-add-Fin y (neg-Fin x) x) ∙
-          ( ( ap (add-Fin y) (left-inverse-law-add-Fin x)) ∙
-            ( right-unit-law-add-Fin y)))))
+  ( compute-iterate-succ-Fin
+    ( nat-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x)))
+    ( x)) ∙
+    ( ( ap
+        ( add-Fin (succ-ℕ k) x)
+        ( issec-nat-Fin k (add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x)))) ∙
+      ( ( commutative-add-Fin
+          ( succ-ℕ k)
+          ( x)
+          ( add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x))) ∙
+        ( ( associative-add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x) x) ∙
+          ( ( ap (add-Fin (succ-ℕ k) y) (left-inverse-law-add-Fin k x)) ∙
+            ( right-unit-law-add-Fin k y)))))
 ```

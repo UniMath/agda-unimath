@@ -39,30 +39,30 @@ An unordered n-tuple of elements of a type `A` consists of an n-element set `X` 
 ```agda
 unordered-tuple :
   {l : Level} (n : ℕ) (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-tuple n A = Σ (UU-Fin n) (λ X → type-UU-Fin X → A)
+unordered-tuple n A = Σ (UU-Fin n) (λ X → type-UU-Fin n X → A)
 
 module _
-  {l : Level} {n : ℕ} {A : UU l} (t : unordered-tuple n A)
+  {l : Level} (n : ℕ) {A : UU l} (t : unordered-tuple n A)
   where
 
   type-unordered-tuple-UU-Fin : UU-Fin n
   type-unordered-tuple-UU-Fin = pr1 t
 
   type-unordered-tuple : UU lzero
-  type-unordered-tuple = type-UU-Fin type-unordered-tuple-UU-Fin
+  type-unordered-tuple = type-UU-Fin n type-unordered-tuple-UU-Fin
 
   has-cardinality-type-unordered-tuple : has-cardinality n type-unordered-tuple
   has-cardinality-type-unordered-tuple =
-    has-cardinality-type-UU-Fin type-unordered-tuple-UU-Fin
+    has-cardinality-type-UU-Fin n type-unordered-tuple-UU-Fin
 
   is-set-type-unordered-tuple : is-set type-unordered-tuple
   is-set-type-unordered-tuple =
-    is-set-has-cardinality has-cardinality-type-unordered-tuple
+    is-set-has-cardinality n has-cardinality-type-unordered-tuple
 
   has-decidable-equality-type-unordered-tuple :
     has-decidable-equality type-unordered-tuple
   has-decidable-equality-type-unordered-tuple =
-    has-decidable-equality-has-cardinality
+    has-decidable-equality-has-cardinality n
       has-cardinality-type-unordered-tuple
       
   element-unordered-tuple : type-unordered-tuple → A
@@ -73,38 +73,42 @@ module _
 
 ```agda
 module _
-  {l : Level} {n : ℕ} {A : UU l} (t : unordered-tuple (succ-ℕ n) A)
-  (i : type-unordered-tuple t)
+  {l : Level} (n : ℕ) {A : UU l} (t : unordered-tuple (succ-ℕ n) A)
+  (i : type-unordered-tuple (succ-ℕ n) t)
   where
 
   type-complement-point-unordered-tuple-UU-Fin : UU-Fin n
   type-complement-point-unordered-tuple-UU-Fin =
-    complement-point-UU-Fin (pair (type-unordered-tuple-UU-Fin t) i)
+    complement-point-UU-Fin n
+      ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
 
   type-complement-point-unordered-tuple : UU lzero
   type-complement-point-unordered-tuple =
-    type-UU-Fin type-complement-point-unordered-tuple-UU-Fin
+    type-UU-Fin n type-complement-point-unordered-tuple-UU-Fin
 
   inclusion-complement-point-unordered-tuple :
-    type-complement-point-unordered-tuple → type-unordered-tuple t
+    type-complement-point-unordered-tuple → type-unordered-tuple (succ-ℕ n) t
   inclusion-complement-point-unordered-tuple =
-    inclusion-complement-point-UU-Fin (pair (type-unordered-tuple-UU-Fin t) i)
+    inclusion-complement-point-UU-Fin n
+      ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
 
   unordered-tuple-complement-point-type-unordered-tuple :
     unordered-tuple n A
   pr1 unordered-tuple-complement-point-type-unordered-tuple =
-    complement-point-UU-Fin (pair (type-unordered-tuple-UU-Fin t) i)
+    complement-point-UU-Fin n
+      ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
   pr2 unordered-tuple-complement-point-type-unordered-tuple =
-    element-unordered-tuple t ∘ inclusion-complement-point-unordered-tuple
+    ( element-unordered-tuple (succ-ℕ n) t) ∘
+    ( inclusion-complement-point-unordered-tuple)
 ```
 
 ### Standard unordered tuples
 
 ```agda
 standard-unordered-tuple :
-  {l : Level} {n : ℕ} {A : UU l} (f : Fin n → A) → unordered-tuple n A
-pr1 (standard-unordered-tuple f) = Fin-UU-Fin _
-pr2 (standard-unordered-tuple f) = f
+  {l : Level} (n : ℕ) {A : UU l} (f : Fin n → A) → unordered-tuple n A
+pr1 (standard-unordered-tuple n f) = Fin-UU-Fin n
+pr2 (standard-unordered-tuple n f) = f
 ```
 
 ## Properties
@@ -113,14 +117,15 @@ pr2 (standard-unordered-tuple f) = f
 
 ```agda
 module _
-  {l : Level} {n : ℕ} {A : UU l}
+  {l : Level} (n : ℕ) {A : UU l}
   where
   
   Eq-unordered-tuple : unordered-tuple n A → unordered-tuple n A → UU l
   Eq-unordered-tuple x y =
-    Σ ( type-unordered-tuple x ≃ type-unordered-tuple y)
+    Σ ( type-unordered-tuple n x ≃ type-unordered-tuple n y)
       ( λ e →
-        element-unordered-tuple x ~ (element-unordered-tuple y ∘ map-equiv e))
+        ( element-unordered-tuple n x) ~
+        ( element-unordered-tuple n y ∘ map-equiv e))
 
   refl-Eq-unordered-tuple :
     (x : unordered-tuple n A) → Eq-unordered-tuple x x
@@ -136,10 +141,10 @@ module _
     is-contr (Σ (unordered-tuple n A) (Eq-unordered-tuple x))
   is-contr-total-Eq-unordered-tuple x =
     is-contr-total-Eq-structure
-      ( λ i f e → element-unordered-tuple x ~ (f ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin (type-unordered-tuple-UU-Fin x))
-      ( pair (type-unordered-tuple-UU-Fin x) id-equiv)
-      ( is-contr-total-htpy (element-unordered-tuple x))
+      ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))
+      ( is-contr-total-equiv-UU-Fin n (type-unordered-tuple-UU-Fin n x))
+      ( pair (type-unordered-tuple-UU-Fin n x) id-equiv)
+      ( is-contr-total-htpy (element-unordered-tuple n x))
 
   is-equiv-Eq-eq-unordered-tuple :
     (x y : unordered-tuple n A) → is-equiv (Eq-eq-unordered-tuple x y)
@@ -172,8 +177,8 @@ module _
 map-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} (f : A → B) →
   unordered-tuple n A → unordered-tuple n B
-pr1 (map-unordered-tuple n f t) = type-unordered-tuple-UU-Fin t
-pr2 (map-unordered-tuple n f t) = f ∘ element-unordered-tuple t
+pr1 (map-unordered-tuple n f t) = type-unordered-tuple-UU-Fin n t
+pr2 (map-unordered-tuple n f t) = f ∘ element-unordered-tuple n t
 
 preserves-comp-map-unordered-tuple :
   {l1 l2 l3 : Level} (n : ℕ) {A : UU l1} {B : UU l2} {C : UU l3}
@@ -191,16 +196,16 @@ htpy-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} {f g : A → B} →
   (f ~ g) → (map-unordered-tuple n f ~ map-unordered-tuple n g)
 htpy-unordered-tuple n {f = f} {g = g} H t =
-  eq-Eq-unordered-tuple
+  eq-Eq-unordered-tuple n
     ( map-unordered-tuple n f t)
     ( map-unordered-tuple n g t)
-    ( pair id-equiv (H ·r element-unordered-tuple t))
+    ( pair id-equiv (H ·r element-unordered-tuple n t))
 
 preserves-refl-htpy-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} (f : A → B) →
   htpy-unordered-tuple n (refl-htpy {f = f}) ~ refl-htpy
 preserves-refl-htpy-unordered-tuple n f p =
-  isretr-eq-Eq-unordered-tuple
+  isretr-eq-Eq-unordered-tuple n
     ( map-unordered-tuple n f p)
     ( map-unordered-tuple n f p)
     ( refl)
@@ -208,7 +213,7 @@ preserves-refl-htpy-unordered-tuple n f p =
 equiv-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} →
   (A ≃ B) → (unordered-tuple n A ≃ unordered-tuple n B)
-equiv-unordered-tuple n e = equiv-tot (λ X → equiv-postcomp (type-UU-Fin X) e)
+equiv-unordered-tuple n e = equiv-tot (λ X → equiv-postcomp (type-UU-Fin n X) e)
 
 map-equiv-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} →
