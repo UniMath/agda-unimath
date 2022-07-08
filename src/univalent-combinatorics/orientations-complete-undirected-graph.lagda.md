@@ -113,7 +113,7 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.decidable-subtypes using (is-finite-type-decidable-subtype)
 open import univalent-combinatorics.dependent-function-types using (is-finite-Π)
 open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin; has-decidable-equality-is-finite; is-set-is-finite)
+  ( has-decidable-equality-is-finite)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using

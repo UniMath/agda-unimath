@@ -86,12 +86,11 @@ open import univalent-combinatorics.2-element-types using
 open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
     number-of-elements-count)
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; has-cardinality-type-UU-Fin-Level)
+  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level;
+    has-cardinality-type-UU-Fin-Level; set-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( cons; list; fold-list; map-list; nil; length-list; concat-list;
     length-concat-list)

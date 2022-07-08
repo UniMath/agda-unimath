@@ -133,12 +133,10 @@ open import univalent-combinatorics.2-element-types using
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; equiv-count; has-decidable-equality-count;
     is-set-count)
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality;
+  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; set-UU-Fin-Level;
     has-cardinality-type-UU-Fin-Level; Fin-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list;

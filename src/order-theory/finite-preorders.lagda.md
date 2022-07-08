@@ -34,10 +34,10 @@ open import order-theory.preorders using
 open import univalent-combinatorics.decidable-subtypes using
   ( is-finite-type-decidable-subtype)
 open import univalent-combinatorics.equality-finite-types using
-  ( is-set-is-finite; has-decidable-equality-is-finite)
+  ( has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽;
-    number-of-elements-is-finite; mere-equiv-is-finite)
+    number-of-elements-is-finite; mere-equiv-is-finite; is-set-is-finite)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin)
 ```

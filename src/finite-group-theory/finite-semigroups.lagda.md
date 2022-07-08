@@ -27,10 +27,10 @@ open import univalent-combinatorics.dependent-function-types using
 open import univalent-combinatorics.dependent-sum-finite-types using
   ( is-finite-Σ)
 open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; has-decidable-equality-is-finite; is-set-is-finite)
+  ( is-finite-eq; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; is-finite; is-finite-type-UU-Fin-Level;
-    is-finite-has-cardinality)
+    is-finite-has-cardinality; is-set-is-finite)
 open import univalent-combinatorics.function-types using
   ( is-finite-function-type)
 open import univalent-combinatorics.pi-finite-types using

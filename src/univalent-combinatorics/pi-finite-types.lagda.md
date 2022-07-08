@@ -114,14 +114,15 @@ open import
   using
   ( equiv-distributive-trunc-Π-is-finite-Set)
 open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; is-set-is-finite; has-decidable-equality-is-finite)
+  ( is-finite-eq; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
     is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
     is-path-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
     is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
-    is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite)
+    is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
+    is-set-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
 open import univalent-combinatorics.function-types using
