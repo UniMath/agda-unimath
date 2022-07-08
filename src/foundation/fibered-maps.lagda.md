@@ -1,4 +1,6 @@
-# Maps fibered over a map
+---
+title: Maps fibered over a map
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

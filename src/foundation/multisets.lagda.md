@@ -1,4 +1,6 @@
-# Multisets
+---
+title: Multisets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

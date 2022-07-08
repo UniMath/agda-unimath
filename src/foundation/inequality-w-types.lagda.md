@@ -1,4 +1,6 @@
-# Inequality on W-types
+---
+title: Inequality on W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.elementhood-relation-w-types using
   ( _∈-𝕎_; irreflexive-∈-𝕎)
 open import foundation.empty-types using (empty)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (refl)
 open import foundation.negation using (¬)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.w-types using (𝕎; tree-𝕎)

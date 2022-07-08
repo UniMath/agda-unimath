@@ -1,4 +1,6 @@
-# Reflecting maps for equivalence relations
+---
+title: Reflecting maps for equivalence relations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,13 +11,13 @@ open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.effective-maps-equivalence-relations using
   ( is-surjective-and-effective)
-open import foundation.equivalence-relations using (Eq-Rel; type-Eq-Rel)
+open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation.equivalences using
   ( map-inv-equiv; is-equiv; _≃_; map-inv-is-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.propositions using
   ( is-prop; is-prop-Π'; is-prop-function-type; UU-Prop)
 open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
@@ -38,7 +40,7 @@ module _
   where
   
   reflects-Eq-Rel : {l3 : Level} {B : UU l3} → (A → B) → UU (l1 ⊔ (l2 ⊔ l3))
-  reflects-Eq-Rel f = {x y : A} → type-Eq-Rel R x y → Id (f x) (f y)
+  reflects-Eq-Rel f = {x y : A} → sim-Eq-Rel R x y → (f x ＝ f y)
   
   reflecting-map-Eq-Rel : {l3 : Level} → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
   reflecting-map-Eq-Rel B = Σ (A → B) reflects-Eq-Rel
@@ -110,7 +112,7 @@ module _
   
   htpy-eq-reflecting-map-Eq-Rel :
     (g : reflecting-map-Eq-Rel R (type-Set B)) →
-    Id f g → htpy-reflecting-map-Eq-Rel g
+    f ＝ g → htpy-reflecting-map-Eq-Rel g
   htpy-eq-reflecting-map-Eq-Rel .f refl =
     refl-htpy-reflecting-map-Eq-Rel
 
@@ -138,7 +140,7 @@ module _
 
   extensionality-reflecting-map-Eq-Rel :
     (g : reflecting-map-Eq-Rel R (type-Set B)) →
-    Id f g ≃ htpy-reflecting-map-Eq-Rel g
+    (f ＝ g) ≃ htpy-reflecting-map-Eq-Rel g
   pr1 (extensionality-reflecting-map-Eq-Rel g) = htpy-eq-reflecting-map-Eq-Rel g
   pr2 (extensionality-reflecting-map-Eq-Rel g) =
     is-equiv-htpy-eq-reflecting-map-Eq-Rel g
@@ -146,7 +148,7 @@ module _
   abstract
     eq-htpy-reflecting-map-Eq-Rel :
       (g : reflecting-map-Eq-Rel R (type-Set B)) →
-      htpy-reflecting-map-Eq-Rel g → Id f g
+      htpy-reflecting-map-Eq-Rel g → f ＝ g
     eq-htpy-reflecting-map-Eq-Rel g =
       map-inv-is-equiv (is-equiv-htpy-eq-reflecting-map-Eq-Rel g)
 ```

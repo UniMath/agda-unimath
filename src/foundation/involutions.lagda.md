@@ -1,4 +1,6 @@
-# Involutions
+---
+title: Involutions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.equivalences using
     htpy-eq-equiv; right-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; _∙_; inv)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.universe-levels using (Level; UU)
 ```
@@ -64,12 +66,11 @@ is-equiv-is-involution :
 is-equiv-is-involution {f = f} H = is-equiv-has-inverse f H H
 ```
 
-### Involution are their own inverse
+### Involutions are their own inverse
 
 ```agda
 own-inverse-is-involution :
-  {l : Level} {A : UU l} {f : Aut A} → is-involution-aut f →
-  Id (inv-equiv f) f
+  {l : Level} {A : UU l} {f : Aut A} → is-involution-aut f → inv-equiv f ＝ f
 own-inverse-is-involution {f = f} p =
   eq-htpy-equiv
     (λ x →

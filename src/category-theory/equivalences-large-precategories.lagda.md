@@ -1,4 +1,6 @@
-# Equivalences between large precategories
+---
+title: Equivalences between large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -33,14 +35,18 @@ module _
   record equivalence-Large-Precat (γ-there γ-back : Level → Level) : Setω where
     constructor make-equivalence-Large-Precat
     field
-      there-equivalence-Large-Precat : functor-Large-Precat C D γ-there
-      back-equivalence-Large-Precat : functor-Large-Precat D C γ-back
-      back-there-equivalence-Large-Precat :
+      functor-equivalence-Large-Precat : functor-Large-Precat C D γ-there
+      functor-inv-equivalence-Large-Precat : functor-Large-Precat D C γ-back
+      issec-functor-inv-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          (comp-functor-Large-Precat back-equivalence-Large-Precat there-equivalence-Large-Precat)
+          ( comp-functor-Large-Precat
+            functor-equivalence-Large-Precat
+            functor-inv-equivalence-Large-Precat)
           (id-functor-Large-Precat)
-      there-back-equivalence-Large-Precat :
+      isretr-functor-inv-equivalence-Large-Precat :
         natural-isomorphism-Large-Precat
-          (comp-functor-Large-Precat there-equivalence-Large-Precat back-equivalence-Large-Precat)
+          ( comp-functor-Large-Precat
+            functor-inv-equivalence-Large-Precat
+            functor-equivalence-Large-Precat)
           (id-functor-Large-Precat)
 ```

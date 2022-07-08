@@ -1,4 +1,6 @@
-# Universe levels
+---
+title: Universe levels
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe --no-import-sorts #-}

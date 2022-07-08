@@ -1,4 +1,6 @@
-# Type arithmetic for dependent pair types
+---
+title: Type arithmetic for dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

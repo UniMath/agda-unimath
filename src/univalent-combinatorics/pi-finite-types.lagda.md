@@ -19,6 +19,8 @@ open import foundation.contractible-types using
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
+open import foundation.decidable-propositions using
+  ( is-finite-is-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-Prop; is-decidable-equiv'; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -49,7 +51,7 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-Σ)
 open import foundation.functoriality-set-truncation using
   ( equiv-trunc-Set; is-surjective-map-trunc-Set; map-trunc-Set;
-    equiv-trunc-im-Set; inclusion-trunc-im-Set; naturality-trunc-Set;
+    equiv-trunc-im-Set; inclusion-trunc-im-Set; naturality-unit-trunc-Set;
     is-emb-inclusion-trunc-im-Set)
 open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·r_)
 open import foundation.identity-types using (Id; tr; ap; refl; inv; _∙_)
@@ -74,7 +76,7 @@ open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
     is-contr-trunc-Set; equiv-distributive-trunc-coprod-Set;
     equiv-unit-trunc-Set; unit-trunc-Set; trunc-Set;
-    universal-property-trunc-Set; apply-dependent-universal-property-trunc-Set;
+    universal-property-trunc-Set; apply-dependent-universal-property-trunc-Set';
     is-effective-unit-trunc-Set; apply-effectiveness-unit-trunc-Set;
     equiv-unit-trunc-unit-Set; is-empty-is-empty-trunc-Set;
     is-surjective-unit-trunc-Set)
@@ -112,7 +114,7 @@ open import
   using
   ( equiv-distributive-trunc-Π-is-finite-Set)
 open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; is-set-is-finite; has-decidable-equality-is-finite)
+  ( is-finite-eq; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
@@ -120,7 +122,7 @@ open import univalent-combinatorics.finite-types using
     is-path-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
     is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
     is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
-    is-finite-is-decidable-Prop)
+    is-set-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
 open import univalent-combinatorics.function-types using
@@ -402,7 +404,7 @@ is-π-finite-UU-Fin zero-ℕ n =
 pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) = is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin x y)
+    ( equiv-equiv-eq-UU-Fin n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -417,7 +419,7 @@ pr1 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) =
   is-π-finite-UU-Fin-Level zero-ℕ n
 pr2 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) x y =
   is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin-Level x y)
+    ( equiv-equiv-eq-UU-Fin-Level n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -494,16 +496,16 @@ is-locally-finite-prod f g x y =
     ( is-finite-prod (f (pr1 x) (pr1 y)) (g (pr2 x) (pr2 y)))
 
 is-locally-finite-Π-Fin :
-  {l1 : Level} {k : ℕ} {B : Fin k → UU l1} →
+  {l1 : Level} (k : ℕ) {B : Fin k → UU l1} →
   ((x : Fin k) → is-locally-finite (B x)) →
   is-locally-finite ((x : Fin k) → B x)
-is-locally-finite-Π-Fin {l1} {zero-ℕ} {B} f =
+is-locally-finite-Π-Fin {l1} zero-ℕ {B} f =
   is-locally-finite-is-contr (dependent-universal-property-empty' B)
-is-locally-finite-Π-Fin {l1} {succ-ℕ k} {B} f =
+is-locally-finite-Π-Fin {l1} (succ-ℕ k) {B} f =
   is-locally-finite-equiv
     ( equiv-dependent-universal-property-coprod B)
     ( is-locally-finite-prod
-      ( is-locally-finite-Π-Fin (λ x → f (inl x)))
+      ( is-locally-finite-Π-Fin k (λ x → f (inl x)))
       ( is-locally-finite-equiv
         ( equiv-dependent-universal-property-unit (B ∘ inr))
         ( f (inr star))))
@@ -514,7 +516,7 @@ is-locally-finite-Π-count :
 is-locally-finite-Π-count {l1} {l2} {A} {B} (pair k e) g =
   is-locally-finite-equiv
     ( equiv-precomp-Π e B )
-    ( is-locally-finite-Π-Fin (λ x → g (map-equiv e x)))
+    ( is-locally-finite-Π-Fin k (λ x → g (map-equiv e x)))
 
 is-locally-finite-Π :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-finite A →
@@ -582,7 +584,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
       ( is-surjective-map-trunc-Set
         ( fiber-inclusion B a)
         ( is-surjective-fiber-inclusion C a))
-      ( apply-dependent-universal-property-trunc-Set
+      ( apply-dependent-universal-property-trunc-Set'
         ( λ x →
           set-Prop
             ( Π-Prop
@@ -594,7 +596,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
     β : (x : Σ A B) (v : type-trunc-Set (Σ A B)) →
         is-decidable (Id (unit-trunc-Set x) v)
     β (pair x y) =
-      apply-dependent-universal-property-trunc-Set
+      apply-dependent-universal-property-trunc-Set'
         ( λ u →
           set-Prop
             ( is-decidable-Prop
@@ -652,7 +654,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
               type-trunc-Prop (Id (tr B ω y) y') 
             compute-P ω = equiv-eq (ap pr1 (pr2 (center ℙ) ω))
             d : (t : type-trunc-Set (Id a a)) → is-decidable (type-Prop (P t))
-            d = apply-dependent-universal-property-trunc-Set
+            d = apply-dependent-universal-property-trunc-Set'
                 ( λ t → set-Prop (is-decidable-Prop (P t)))
                 ( λ ω →
                   is-decidable-equiv'
@@ -669,7 +671,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
             f t = apply-universal-property-trunc-Prop t
                     ( mere-eq-Prop (pair a y) (pair a y'))
                      λ { (pair u v) →
-                         apply-dependent-universal-property-trunc-Set
+                         apply-dependent-universal-property-trunc-Set'
                            ( λ u' →
                              hom-Set
                                ( set-Prop (P u'))
@@ -788,7 +790,7 @@ is-path-connected-im {l1} {l2} {A} {B} f C =
         ( is-contr-im
           ( trunc-Set B)
           ( unit-trunc-Set a)
-          ( apply-dependent-universal-property-trunc-Set
+          ( apply-dependent-universal-property-trunc-Set'
             ( λ x →
               set-Prop
                 ( Id-Prop
@@ -821,6 +823,7 @@ has-finite-connected-components-Σ' zero-ℕ e H K =
 has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
   apply-universal-property-trunc-Prop
     ( has-presentation-of-cardinality-has-cardinality-components
+      ( succ-ℕ k)
       ( unit-trunc-Prop e))
     ( has-finite-connected-components-Prop (Σ A B))
     ( α)
@@ -883,7 +886,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
         ( (unit-trunc-Set ∘ f) ∘ inl)
         ( inclusion-trunc-im-Set (f ∘ inl))
         ( i)
-        ( ( inv-htpy (naturality-trunc-Set (inclusion-im (f ∘ inl)))) ·r
+        ( ( inv-htpy (naturality-unit-trunc-Set (inclusion-im (f ∘ inl)))) ·r
           ( map-unit-im (f ∘ inl)))
         ( is-emb-inclusion-trunc-im-Set (f ∘ inl))
         ( is-emb-comp'

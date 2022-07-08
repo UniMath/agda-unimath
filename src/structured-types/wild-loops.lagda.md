@@ -48,9 +48,9 @@ module _
   unit-Wild-Loop : type-Wild-Loop
   unit-Wild-Loop = unit-Coherent-H-Space wild-unital-magma-Wild-Loop
 
-  unital-mul-Wild-Loop : unital-mul-Pointed-Type pointed-type-Wild-Loop
+  unital-mul-Wild-Loop : coherent-unital-mul-Pointed-Type pointed-type-Wild-Loop
   unital-mul-Wild-Loop =
-    unital-mul-Coherent-H-Space wild-unital-magma-Wild-Loop
+    coherent-unital-mul-Coherent-H-Space wild-unital-magma-Wild-Loop
 
   mul-Wild-Loop : type-Wild-Loop → type-Wild-Loop → type-Wild-Loop
   mul-Wild-Loop = mul-Coherent-H-Space wild-unital-magma-Wild-Loop

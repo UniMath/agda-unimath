@@ -1,4 +1,6 @@
-# Slice precategories
+---
+title: Slice precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,7 +11,7 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-inv-equiv)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.sets using
   ( UU-Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
 open import foundation.subtypes using
@@ -48,7 +50,7 @@ module _
 
   Eq-hom-slice-Precat :
     {A B : obj-slice-Precat} (f g : type-hom-slice-Precat A B) → UU l2
-  Eq-hom-slice-Precat f g = Id (pr1 f) (pr1 g)
+  Eq-hom-slice-Precat f g = (pr1 f ＝ pr1 g)
 
   refl-Eq-hom-slice-Precat :
     {A B : obj-slice-Precat} (f : type-hom-slice-Precat A B) →
@@ -57,7 +59,7 @@ module _
 
   extensionality-hom-slice-Precat :
     {A B : obj-slice-Precat} (f g : type-hom-slice-Precat A B) →
-    Id f g ≃ Eq-hom-slice-Precat f g
+    (f ＝ g) ≃ Eq-hom-slice-Precat f g
   extensionality-hom-slice-Precat {A} {B} =
     extensionality-type-subtype
       ( λ h →
@@ -65,7 +67,7 @@ module _
 
   eq-hom-slice-Precat :
     {A B : obj-slice-Precat} (f g : type-hom-slice-Precat A B) →
-    Eq-hom-slice-Precat f g → Id f g
+    Eq-hom-slice-Precat f g → f ＝ g
   eq-hom-slice-Precat f g =
     map-inv-equiv (extensionality-hom-slice-Precat f g)
 ```
@@ -100,8 +102,8 @@ module _
     {A1 A2 A3 A4 : obj-slice-Precat} →
     (h : type-hom-slice-Precat A3 A4) (g : type-hom-slice-Precat A2 A3)
     (f : type-hom-slice-Precat A1 A2) →
-    Id ( comp-hom-slice-Precat (comp-hom-slice-Precat h g) f)
-       ( comp-hom-slice-Precat h (comp-hom-slice-Precat g f))
+    ( comp-hom-slice-Precat (comp-hom-slice-Precat h g) f) ＝
+    ( comp-hom-slice-Precat h (comp-hom-slice-Precat g f))
   assoc-comp-hom-slice-Precat h g f =
     eq-hom-slice-Precat
       ( comp-hom-slice-Precat (comp-hom-slice-Precat h g) f)
@@ -114,7 +116,7 @@ module _
 ```agda
   left-unit-law-comp-hom-slice-Precat :
     {A B : obj-slice-Precat} (f : type-hom-slice-Precat A B) →
-    Id (comp-hom-slice-Precat (id-hom-slice-Precat B) f) f
+    comp-hom-slice-Precat (id-hom-slice-Precat B) f ＝ f
   left-unit-law-comp-hom-slice-Precat f =
     eq-hom-slice-Precat
       ( comp-hom-slice-Precat (id-hom-slice-Precat _) f)
@@ -127,7 +129,7 @@ module _
 ```agda
   right-unit-law-comp-hom-slice-Precat :
     {A B : obj-slice-Precat} (f : type-hom-slice-Precat A B) →
-    Id (comp-hom-slice-Precat f (id-hom-slice-Precat A)) f
+    comp-hom-slice-Precat f (id-hom-slice-Precat A) ＝ f
   right-unit-law-comp-hom-slice-Precat f =
     eq-hom-slice-Precat
       ( comp-hom-slice-Precat f (id-hom-slice-Precat _))

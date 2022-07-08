@@ -109,7 +109,7 @@ module _
   inv-formal-combination-subset-Group (cons (pair s x) u) =
     concat-list
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (succ-Fin s) x))
+      ( in-list (pair (succ-Fin 2 s) x))
     
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →

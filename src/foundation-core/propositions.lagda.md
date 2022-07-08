@@ -1,4 +1,6 @@
-# Propositions
+---
+title: Propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation-core.function-extensionality using (htpy-eq)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (refl-htpy)
 open import foundation-core.identity-types using
-  ( Id; refl; left-inv; inv; _∙_; tr)
+  ( _＝_; refl; left-inv; inv; _∙_; tr)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
@@ -33,7 +35,7 @@ A type is considered to be a proposition if its identity types are contractible.
 ```agda
 is-prop :
   {i : Level} (A : UU i) → UU i
-is-prop A = (x y : A) → is-contr (Id x y)
+is-prop A = (x y : A) → is-contr (x ＝ y)
 
 UU-Prop :
   (l : Level) → UU (lsuc l)
@@ -79,7 +81,7 @@ module _
   where
   
   all-elements-equal : UU l
-  all-elements-equal = (x y : A) → Id x y
+  all-elements-equal = (x y : A) → x ＝ y
   
   is-proof-irrelevant : UU l
   is-proof-irrelevant = A → is-contr A
@@ -98,7 +100,7 @@ module _
     eq-is-prop' H x y = pr1 (H x y)
 
   abstract
-    eq-is-prop : is-prop A → {x y : A} → Id x y
+    eq-is-prop : is-prop A → {x y : A} → x ＝ y
     eq-is-prop H {x} {y} = eq-is-prop' H x y
 
   abstract

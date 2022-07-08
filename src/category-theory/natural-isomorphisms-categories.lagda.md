@@ -1,4 +1,6 @@
-# Natural isomorphisms between functors on categories
+---
+title: Natural isomorphisms between functors between categories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,6 +13,7 @@ open import category-theory.natural-isomorphisms-precategories using
   ( is-nat-iso-Precat; nat-iso-Precat)
 open import category-theory.natural-transformations-categories using
   ( nat-trans-Cat)
+
 open import foundation.universe-levels using (UU; _⊔_)
 ```
 

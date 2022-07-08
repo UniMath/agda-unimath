@@ -1,4 +1,6 @@
-# Non-contractible types
+---
+title: Non-contractible types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

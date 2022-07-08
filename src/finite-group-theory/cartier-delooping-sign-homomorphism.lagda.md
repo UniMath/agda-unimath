@@ -1,4 +1,6 @@
-# Cartier's delooping of the sign homomorphism
+---
+title: Cartier's delooping of the sign homomorphism
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
@@ -8,17 +10,21 @@ module finite-group-theory.cartier-delooping-sign-homomorphism where
 open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
+open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations using
-  ( is-contr-parity-transposition-permutation; list-transpositions-permutation-count;
-    retr-permutation-list-transpositions-count; is-generated-transposition-symmetric-Fin-Level)
+  ( is-contr-parity-transposition-permutation;
+    list-transpositions-permutation-count;
+    retr-permutation-list-transpositions-count;
+    is-generated-transposition-symmetric-Fin-Level)
 open import finite-group-theory.sign-homomorphism using
   ( sign-homomorphism; eq-sign-homomorphism-transposition)
 open import finite-group-theory.transpositions using
   ( permutation-list-transpositions; eq-concat-permutation-list-transpositions;
-    is-transposition-permutation-Prop; transposition; two-elements-transposition;
-    transposition-conjugation-equiv; is-involution-map-transposition;
-    correct-transposition-conjugation-equiv-list; correct-transposition-conjugation-equiv;
-    eq-equiv-universes-transposition)
+    is-transposition-permutation-Prop; transposition;
+    two-elements-transposition; transposition-conjugation-equiv;
+    is-involution-map-transposition;
+    correct-transposition-conjugation-equiv-list;
+    correct-transposition-conjugation-equiv; eq-equiv-universes-transposition)
 
 open import foundation.automorphisms using (Aut)
 open import foundation.commuting-squares using (coherence-square)
@@ -26,52 +32,58 @@ open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using (inl; inr; neq-inr-inl)
 open import foundation.decidable-propositions using
   ( decidable-Prop; type-decidable-Prop)
-open import foundation.decidable-types using (is-decidable; is-prop-is-decidable)
+open import foundation.decidable-types using
+  ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using
-  ( pair-eq-Σ; eq-pair-Σ; comp-eq-pair-Σ)
+  ( pair-eq-Σ; eq-pair-Σ; issec-pair-eq-Σ; comp-eq-pair-Σ; ap-pair-eq-Σ; inv-eq-pair-Σ)
 open import foundation.equivalence-classes using
-  ( large-set-quotient; large-quotient-Set; quotient-map-large-set-quotient;
-    type-class-large-set-quotient; is-decidable-type-class-large-set-quotient-is-decidable;
-    eq-effective-quotient'; is-prop-type-class-large-set-quotient;
-    quotient-reflecting-map-large-set-quotient)
+  ( equivalence-class; equivalence-class-Set; class;
+    is-in-subtype-equivalence-class;
+    is-decidable-is-in-subtype-equivalence-class-is-decidable;
+    eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class;
+    quotient-reflecting-map-equivalence-class)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
-    right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
-    right-unit-law-equiv; htpy-eq-equiv; is-equiv-map-equiv; associative-comp-equiv)
+  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv;
+    inv-inv-equiv; right-inverse-law-equiv; left-inverse-law-equiv;
+    distributive-inv-comp-equiv; is-equiv-has-inverse; right-unit-law-equiv;
+    htpy-eq-equiv; is-equiv-map-equiv; associative-comp-equiv)
 open import foundation.equivalence-relations using
-  ( Eq-Rel; refl-Eq-Rel; type-Eq-Rel; is-prop-type-Eq-Rel)
+  ( Eq-Rel; refl-Eq-Rel; sim-Eq-Rel; is-prop-sim-Eq-Rel)
 open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
-open import foundation.functoriality-propositional-truncation using (functor-trunc-Prop)
+open import foundation.functoriality-propositional-truncation using
+  ( map-trunc-Prop)
 open import foundation.functoriality-set-quotients using
   ( unique-equiv-is-set-quotient; equiv-is-set-quotient;
     eq-equiv-eq-one-value-equiv-is-set-quotient)
 open import foundation.empty-types using (ex-falso)
 open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using
-  ( Id; inv; _∙_; ap; refl; tr; ap-concat; distributive-inv-concat; inv-inv)
+  ( Id; inv; _∙_; ap; refl; tr; ap-concat; distributive-inv-concat; inv-inv; ap-binary)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (own-inverse-is-involution)
 open import foundation.mere-equivalences using
   ( transitive-mere-equiv; symmetric-mere-equiv; mere-equiv; is-set-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
-    all-elements-equal-type-trunc-Prop)
+  ( apply-universal-property-trunc-Prop; unit-trunc-Prop;
+    is-prop-type-trunc-Prop; all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel; reflects-map-reflecting-map-Eq-Rel)
-open import foundation.raising-universe-levels using (raise-Set; equiv-raise; raise)
+open import foundation.raising-universe-levels using
+  ( raise-Set; equiv-raise; raise)
 open import foundation.sets using
-  ( is-set; Id-Prop; UU-Set; type-Set; is-set-type-Set; is-prop-is-set; is-set-equiv)
-open import foundation.subuniverses using (is-one-type-UU-Set)
+  ( is-set; Id-Prop; UU-Set; type-Set; is-set-type-Set; is-prop-is-set;
+    is-set-equiv; is-1-type-UU-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.unit-type using (star)
-open import foundation.univalence using (equiv-eq; eq-equiv)
+open import foundation.univalence using
+  ( equiv-eq; eq-equiv; comp-eq-equiv; comp-equiv-eq; commutativity-inv-eq-equiv; equiv-univalence)
 open import foundation.universal-property-set-quotients using
-  ( is-set-quotient-large-set-quotient; is-effective-is-set-quotient)
+  ( is-set-quotient-equivalence-class; is-effective-is-set-quotient)
 open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
@@ -82,17 +94,26 @@ open import group-theory.concrete-groups using
 open import group-theory.groups using
   ( set-Group; type-Group; mul-Group; semigroup-Group)
 open import group-theory.homomorphisms-generated-subgroups using
-  ( restriction-generating-subset-Group; eq-map-restriction-generating-subset-Group)
+  ( restriction-generating-subset-Group;
+    eq-map-restriction-generating-subset-Group)
 open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group; preserves-mul-hom-Group;
-    htpy-eq-hom-Group; id-hom-Group)
-open import group-theory.homomorphisms-semigroups using (preserves-mul; is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using (hom-iso-Group; hom-inv-iso-Group)
+  ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group;
+    preserves-mul-hom-Group; htpy-eq-hom-Group; id-hom-Group;
+    associative-comp-hom-Group)
+open import group-theory.homomorphisms-semigroups using
+  ( preserves-mul; is-prop-preserves-mul-Semigroup)
+open import group-theory.isomorphisms-groups using
+  ( hom-iso-Group; hom-inv-iso-Group; comp-iso-Group; inv-iso-Group)
 open import group-theory.loop-groups-sets using
-  ( loop-group-Set; map-hom-symmetric-group-loop-group-Set; hom-symmetric-group-loop-group-Set;
-    map-hom-inv-symmetric-group-loop-group-Set; hom-inv-symmetric-group-loop-group-Set;
-    is-retr-hom-inv-symmetric-group-loop-group-Set; is-sec-hom-inv-symmetric-group-loop-group-Set;
-    iso-symmetric-group-loop-group-Set; commutative-inv-map-hom-symmetric-group-loop-group-Set)
+  ( loop-group-Set; map-hom-symmetric-group-loop-group-Set;
+    hom-symmetric-group-loop-group-Set;
+    map-hom-inv-symmetric-group-loop-group-Set;
+    hom-inv-symmetric-group-loop-group-Set;
+    is-retr-hom-inv-symmetric-group-loop-group-Set;
+    is-sec-hom-inv-symmetric-group-loop-group-Set;
+    iso-symmetric-group-loop-group-Set;
+    commutative-inv-map-hom-symmetric-group-loop-group-Set;
+    iso-loop-group-equiv-Set; iso-abstract-automorphism-group-loop-group-Set)
 open import group-theory.subgroups using (group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
   ( is-generating-subset-Group; subgroup-subset-Group)
@@ -101,6 +122,8 @@ open import group-theory.symmetric-groups using
     hom-symmetric-group-equiv-Set; hom-inv-symmetric-group-equiv-Set;
     iso-symmetric-group-equiv-Set)
 
+open import synthetic-homotopy-theory.loop-spaces
+
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; standard-2-Element-Decidable-Subtype;
     equiv-universes-2-Element-Decidable-Subtype)
@@ -108,15 +131,16 @@ open import univalent-combinatorics.2-element-types using
   ( aut-point-Fin-two-ℕ; is-involution-aut-Fin-two-ℕ;
     preserves-add-aut-point-Fin-two-ℕ)
 open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count; equiv-count; has-decidable-equality-count; is-set-count)
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level)
+  ( count; number-of-elements-count; equiv-count; has-decidable-equality-count;
+    is-set-count)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set; has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin; is-set-Fin)
+  ( has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level)
+  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; set-UU-Fin-Level;
+    has-cardinality-type-UU-Fin-Level; Fin-UU-Fin-Level)
 open import univalent-combinatorics.lists using
-  ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
+  ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list;
+    in-list)
 open import univalent-combinatorics.orientations-complete-undirected-graph using
   ( quotient-sign; quotient-sign-Set; mere-equiv-fin-2-quotient-sign;
     orientation-Complete-Undirected-Graph; equiv-fin-2-quotient-sign-equiv-Fin;
@@ -124,11 +148,14 @@ open import univalent-combinatorics.orientations-complete-undirected-graph using
     even-difference-orientation-Complete-Undirected-Graph;
     preserves-even-difference-orientation-complete-undirected-graph-equiv;
     preserves-id-equiv-orientation-complete-undirected-graph-equiv;
-    equiv-fin-2-quotient-sign-count; orientation-complete-undirected-graph-equiv;
-    orientation-aut-count; is-decidable-even-difference-orientation-Complete-Undirected-Graph;
+    equiv-fin-2-quotient-sign-count;
+    orientation-complete-undirected-graph-equiv;
+    orientation-aut-count;
+    is-decidable-even-difference-orientation-Complete-Undirected-Graph;
     not-even-difference-orientation-aut-transposition-count)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin)
+  ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin; Fin-Set;
+    is-set-Fin)
 ```
 
 ## Idea
@@ -142,119 +169,43 @@ module _
 
   map-cartier-delooping-sign : (n : ℕ) →
     classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( UU-Set l)
-        ( raise-Set l (Fin-Set n))
-        ( is-one-type-UU-Set l)) →
+      ( UU-Fin-Level-Group l n) →
     classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( UU-Set (lsuc l))
-        ( raise-Set (lsuc l) (Fin-Set 2))
-        ( is-one-type-UU-Set (lsuc l)))
-  pr1 (map-cartier-delooping-sign zero-ℕ X) = raise-Set (lsuc l) (Fin-Set 2)
-  pr2 (map-cartier-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
-  pr1 (map-cartier-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc l) (Fin-Set 2)
-  pr2 (map-cartier-delooping-sign (succ-ℕ zero-ℕ) X) = unit-trunc-Prop refl
-  pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    quotient-sign-Set
-      ( succ-ℕ (succ-ℕ n))
-      ( pair
-        ( type-Set X)
-        ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
-  pr2 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    functor-trunc-Prop
-      ( λ e →
-        eq-pair-Σ
-          ( eq-equiv
-            ( type-Set (pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p))))
-            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-            ( equiv-raise (lsuc l) (Fin 2) ∘e inv-equiv e))
-          ( eq-is-prop (is-prop-is-set (raise (lsuc l) (type-Set (Fin-Set 2))))))
-      ( mere-equiv-fin-2-quotient-sign
-        ( succ-ℕ (succ-ℕ n))
-        ( pair
-          ( type-Set X)
-          ( functor-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
-        ( star))
+      ( UU-Fin-Level-Group (lsuc l) 2)
+  map-cartier-delooping-sign zero-ℕ X = Fin-UU-Fin-Level (lsuc l) 2
+  map-cartier-delooping-sign (succ-ℕ zero-ℕ) X = Fin-UU-Fin-Level (lsuc l) 2
+  pr1 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
+    quotient-sign (succ-ℕ (succ-ℕ n)) X
+  pr2 (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
+    mere-equiv-fin-2-quotient-sign (succ-ℕ (succ-ℕ n)) X star
 
-  abstract
-    eq-fin-2-map-cartier-delooping-sign-count : (n : ℕ) →
-      ( X : UU lzero) (eX : Fin n ≃ X) →
-      Id
-        ( map-cartier-delooping-sign n
-          ( pair
-            ( raise-Set l (pair X (is-set-count (pair n eX))))
-            ( unit-trunc-Prop
-              ( eq-pair-Σ
-                ( eq-equiv
-                  ( raise l X)
-                  ( raise l (Fin n))
-                  ( equiv-raise l (Fin n) ∘e (inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                ( eq-is-prop (is-prop-is-set (raise l (Fin n))))))))
-        ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl))
-    eq-fin-2-map-cartier-delooping-sign-count zero-ℕ X eX = refl
-    eq-fin-2-map-cartier-delooping-sign-count (succ-ℕ zero-ℕ) X eX = refl
-    eq-fin-2-map-cartier-delooping-sign-count (succ-ℕ (succ-ℕ n)) X eX =
-      eq-pair-Σ
-        ( eq-pair-Σ
-          ( eq-equiv
-            ( type-Set
-              ( pr1
-                ( map-cartier-delooping-sign
-                  ( succ-ℕ (succ-ℕ n))
-                  ( pair
-                    ( raise-Set l (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX))))
-                    ( unit-trunc-Prop
-                      ( eq-pair-Σ
-                        ( eq-equiv
-                          ( raise l X)
-                          ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
-                            ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                        ( eq-is-prop (is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
-            ( type-Set (raise-Set (lsuc l) (Fin-Set 2)))
-            ( equiv-raise (lsuc l) (Fin 2) ∘e
-              inv-equiv
-                ( equiv-fin-2-quotient-sign-equiv-Fin
-                  ( succ-ℕ (succ-ℕ n))
-                  ( pair
-                    ( raise l (type-Set (pair X (is-set-count (pair (succ-ℕ (succ-ℕ n)) eX)))))
-                    ( functor-trunc-Prop
-                      ( λ p' →
-                        equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e
-                          equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))
-                      ( unit-trunc-Prop
-                        ( eq-pair-Σ
-                          ( eq-equiv (raise l X) (raise l (Fin (succ-ℕ (succ-ℕ n))))
-                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))) ∘e
-                            ( inv-equiv eX ∘e inv-equiv (equiv-raise l X))))
-                        ( eq-is-prop
-                          ( is-prop-is-set (raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
-                  ( star)
-                  ( equiv-raise l X ∘e eX))))
-          ( eq-is-prop (is-prop-is-set _)))
-        ( eq-is-prop is-prop-type-trunc-Prop)
+  eq-fin-2-map-cartier-delooping-sign-Fin : (n : ℕ) →
+    Id
+      ( map-cartier-delooping-sign n (Fin-UU-Fin-Level l n))
+      ( Fin-UU-Fin-Level (lsuc l) 2)
+  eq-fin-2-map-cartier-delooping-sign-Fin zero-ℕ = refl
+  eq-fin-2-map-cartier-delooping-sign-Fin (succ-ℕ zero-ℕ) = refl
+  eq-fin-2-map-cartier-delooping-sign-Fin (succ-ℕ (succ-ℕ n)) =
+    eq-pair-Σ
+      ( eq-equiv
+        ( pr1
+          ( map-cartier-delooping-sign
+            ( succ-ℕ (succ-ℕ n))
+            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))))
+        ( raise (lsuc l) (Fin 2))
+        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+          ( inv-equiv
+            ( equiv-fin-2-quotient-sign-equiv-Fin
+              ( succ-ℕ (succ-ℕ n))
+              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+              ( star)
+              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+      ( eq-is-prop is-prop-type-trunc-Prop)
 
   cartier-delooping-sign : (n : ℕ) →
-    hom-Concrete-Group
-      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) (is-one-type-UU-Set l))
-      ( Automorphism-Group (UU-Set (lsuc l)) (raise-Set (lsuc l) (Fin-Set 2)) (is-one-type-UU-Set (lsuc l)))
+    hom-Concrete-Group (UU-Fin-Level-Group l n) (UU-Fin-Level-Group (lsuc l) 2)
   pr1 (cartier-delooping-sign n) = map-cartier-delooping-sign n
-  pr2 (cartier-delooping-sign n) =
-    tr
-      ( λ w →
-        Id
-          ( map-cartier-delooping-sign n
-            ( pair
-              ( pair
-                ( raise l (Fin n))
-                ( pr1 w))
-              ( pr2 w)))
-          ( pair (raise-Set (lsuc l) (Fin-Set 2)) (unit-trunc-Prop refl)))
-      ( eq-pair-Σ
-        ( eq-is-prop ( is-prop-is-set (raise l (Fin n))))
-        ( eq-is-prop is-prop-type-trunc-Prop))
-      ( eq-fin-2-map-cartier-delooping-sign-count n (Fin n) id-equiv)
+  pr2 (cartier-delooping-sign n) = eq-fin-2-map-cartier-delooping-sign-Fin n
 
 module _
   { l : Level}
@@ -305,7 +256,7 @@ module _
       ( orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n)) →
       ( type-Set (quotient-sign-set-Fin n))
     quotient-map-even-difference-Fin n =
-      quotient-map-large-set-quotient
+      class
         ( even-difference-orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n))
 
     quotient-reflecting-map-even-difference-Fin : (n : ℕ) →
@@ -313,7 +264,7 @@ module _
         ( even-difference-orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n))
         ( type-Set (quotient-sign-set-Fin n))
     quotient-reflecting-map-even-difference-Fin n =
-      quotient-reflecting-map-large-set-quotient
+      quotient-reflecting-map-equivalence-class
         ( even-difference-orientation-Complete-Undirected-Graph n (raise-UU-Fin-Fin n))
 
     orientation-aut-succ-succ-Fin : (n : ℕ) →
@@ -386,11 +337,11 @@ module _
             ( pair Y sY)
             ( pair X sX)
             ( inv p)))
-        ( quotient-map-large-set-quotient
+        ( class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( pair Y eY)))
-        ( quotient-map-large-set-quotient
+        ( class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( pair X eX)))
@@ -407,7 +358,7 @@ module _
               ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
               ( quotient-sign-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
               ( w))
-            ( quotient-map-large-set-quotient
+            ( class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( succ-ℕ (succ-ℕ n))
                 ( pair X eX))
@@ -421,7 +372,7 @@ module _
                 ( tr (mere-equiv (Fin (succ-ℕ (succ-ℕ n)))) refl eX)
                 ( eX)))))) ∙
         ( ap
-          ( quotient-map-large-set-quotient
+          ( class
             ( even-difference-orientation-Complete-Undirected-Graph
               ( succ-ℕ (succ-ℕ n))
               ( pair X (tr (mere-equiv (Fin (succ-ℕ (succ-ℕ n)))) refl eX))))
@@ -477,11 +428,11 @@ module _
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
         ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
         ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n)))
-        ( is-set-quotient-large-set-quotient
+        ( is-set-quotient-equivalence-class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
-        ( is-set-quotient-large-set-quotient
+        ( is-set-quotient-equivalence-class
           ( even-difference-orientation-Complete-Undirected-Graph
             ( succ-ℕ (succ-ℕ n))
             ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -522,7 +473,7 @@ module _
   cases-map-orientation-even-difference-aut-Fin : (n : ℕ) →
     ( h : type-Group (symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))) →
     is-decidable
-      ( type-Eq-Rel
+      ( sim-Eq-Rel
         ( even-difference-orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
         ( orientation-aut-succ-succ-Fin n h)
@@ -539,7 +490,7 @@ module _
       ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
       ( star)
       ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))) ∘e
-      ( equiv-succ-Fin ∘e
+      ( ( equiv-succ-Fin 2) ∘e
         ( inv-equiv
           ( equiv-fin-2-quotient-sign-equiv-Fin
             ( succ-ℕ (succ-ℕ n))
@@ -571,7 +522,7 @@ module _
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
         ( star)
         ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))) ∘e
-        ( equiv-succ-Fin ∘e
+        ( ( equiv-succ-Fin 2) ∘e
           ( inv-equiv
             ( equiv-fin-2-quotient-sign-equiv-Fin
               ( succ-ℕ (succ-ℕ n))
@@ -599,7 +550,7 @@ module _
             ( Y))}
       ( eq-is-prop
         ( is-prop-is-decidable
-          ( is-prop-type-Eq-Rel
+          ( is-prop-sim-Eq-Rel
             ( even-difference-orientation-Complete-Undirected-Graph
               ( succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
@@ -613,7 +564,7 @@ module _
   cases-eq-map-orientation-even-difference-aut-Fin : (n : ℕ) →
     ( p : type-Group (loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))) →
     ( D : is-decidable
-      ( type-Eq-Rel
+      ( sim-Eq-Rel
         ( even-difference-orientation-Complete-Undirected-Graph (succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
         ( orientation-aut-succ-succ-Fin n
@@ -697,7 +648,7 @@ module _
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
               ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n))))
-            ( is-set-quotient-large-set-quotient
+            ( is-set-quotient-equivalence-class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -728,7 +679,7 @@ module _
           ( star)
           ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
       ( ( ap
-        ( map-equiv equiv-succ-Fin)
+        ( map-equiv (equiv-succ-Fin 2))
         ( q)) ∙
         ( inv r))) ∙
        ap
@@ -756,7 +707,7 @@ module _
           ( star)
           ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
       ( ( ap
-        ( map-equiv equiv-succ-Fin)
+        ( map-equiv (equiv-succ-Fin 2))
         ( q)) ∙
         ( inv r))) ∙
        ap
@@ -790,7 +741,7 @@ module _
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
               ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n))))
-            ( is-set-quotient-large-set-quotient
+            ( is-set-quotient-equivalence-class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -891,7 +842,7 @@ module _
         ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
       ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
       ( quotient-reflecting-map-even-difference-Fin (succ-ℕ (succ-ℕ n)))
-      ( is-set-quotient-large-set-quotient
+      ( is-set-quotient-equivalence-class
         ( even-difference-orientation-Complete-Undirected-Graph
           ( succ-ℕ (succ-ℕ n))
           ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -931,7 +882,6 @@ module _
             ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
             ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
             ( inv p))))
-
 
   eq-cartier-delooping-sign-loop-sign-homomorphism : {l' : Level} (n : ℕ) →
     Id
@@ -1198,7 +1148,7 @@ module _
                                 ( ap
                                   ( map-hom-Group
                                     ( symmetric-Group
-                                      ( set-UU-Fin-Level
+                                      ( set-UU-Fin-Level (succ-ℕ (succ-ℕ n))
                                        ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
                                     ( symmetric-Group (Fin-Set 2))
                                     ( sign-homomorphism
@@ -1278,4 +1228,754 @@ module _
                                 ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
                                 ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
                             ( pair f s))))))))))
+
+  eq-cartier-delooping-loop-UU-Fin-Level-Group : (n : ℕ) →
+    Id
+      ( comp-hom-Group
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Level-Group (lsuc l) 2))
+        ( hom-iso-Group
+          ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Level-Group (lsuc l) 2))
+          ( comp-iso-Group
+            ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+            ( loop-group-Set (raise-Set (lsuc l) (Fin-Set 2)))
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Level-Group (lsuc l) 2))
+            ( inv-iso-Group
+              ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+              ( loop-group-Set (raise-Set (lsuc l) (Fin-Set 2)))
+              ( iso-loop-group-fin-UU-Fin-Level-Group (lsuc l) 2))
+            ( iso-loop-group-equiv-Set
+              ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( raise-Set (lsuc l) (Fin-Set 2))
+              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                ( inv-equiv
+                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                    ( succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                    ( star)
+                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
+        ( cartier-delooping-sign-loop n))
+      ( comp-hom-Group
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Level-Group (lsuc l) 2))
+        ( hom-group-hom-Concrete-Group
+          ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n)))
+          ( UU-Fin-Level-Group (lsuc l) 2)
+          ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+        ( hom-iso-Group
+          ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+          ( inv-iso-Group
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+            ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+            ( iso-loop-group-fin-UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))))
+  eq-cartier-delooping-loop-UU-Fin-Level-Group n =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          ( ap
+            ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
+            ( ap inv
+              ( inv
+                ( comp-eq-equiv
+                  ( raise (lsuc l) (Fin 2))
+                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                    ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                  ( raise (lsuc l) (Fin 2))
+                  ( ( equiv-eq
+                    ( inv
+                      ( ap
+                        ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∘e
+                    ( inv-equiv
+                      ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                        ( inv-equiv
+                          ( equiv-fin-2-quotient-sign-equiv-Fin
+                            ( succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                            ( star)
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                  ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                    ( inv-equiv
+                      ( equiv-fin-2-quotient-sign-equiv-Fin
+                        ( succ-ℕ (succ-ℕ n))
+                        ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                        ( star)
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                ( ap
+                  ( λ r →
+                    ( r) ∙
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                  (  inv
+                    ( comp-eq-equiv
+                      ( raise (lsuc l) (Fin 2))
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                      ( inv-equiv
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                      ( equiv-eq
+                        ( inv
+                          ( ap
+                            ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))) ∙
+                    ( ( ap
+                      ( λ r → r ∙
+                        eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                          ( equiv-eq
+                            ( inv
+                              ( ap
+                                ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                                ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))))
+                      ( inv
+                        ( commutativity-inv-eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin (succ-ℕ (succ-ℕ n))
+                                ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))) ∙
+                      ( ap
+                        ( λ e →
+                          inv
+                            ( eq-equiv
+                              ( quotient-sign (succ-ℕ (succ-ℕ n))
+                                ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                              ( raise (lsuc l) (Fin 2))
+                              ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                ( inv-equiv
+                                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                                    ( succ-ℕ (succ-ℕ n))
+                                    ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                    ( star)
+                                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                            ( map-equiv e
+                              ( inv
+                                ( ap
+                                  ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                                  ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))))
+                        ( left-inverse-law-equiv equiv-univalence)))))) ∙
+              ( ( distributive-inv-concat
+                ( ( inv
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+                  ( inv
+                    ( ap
+                      ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))
+                ( eq-equiv
+                  ( quotient-sign (succ-ℕ (succ-ℕ n))
+                    ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                  ( raise (lsuc l) (Fin 2))
+                  ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                    ( inv-equiv (equiv-fin-2-quotient-sign-equiv-Fin
+                      ( succ-ℕ (succ-ℕ n))
+                      ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                      ( star)
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                ( ap
+                  ( λ r →
+                    inv
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))) ∙
+                      ( r))
+                  ( ( distributive-inv-concat
+                    ( inv
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                    ( inv
+                      ( ap
+                        ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))) ∙
+                    ( ap
+                      ( λ r →
+                        ( r) ∙
+                          ( inv
+                            ( inv
+                              ( eq-equiv
+                                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                                  ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                                ( raise (lsuc l) (type-Set (Fin-Set 2)))
+                                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                  ( inv-equiv
+                                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                                      ( succ-ℕ (succ-ℕ n))
+                                      ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                      ( star)
+                                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))))
+                      ( inv-inv
+                        ( ap
+                          ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                          ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))) ∙
+                      ( ap
+                        ( λ r →
+                          ( ap
+                            ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                            ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                            ( r))
+                        ( inv-inv
+                          ( eq-equiv
+                            ( quotient-sign (succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                            ( raise (lsuc l) (Fin 2))
+                            ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                              ( inv-equiv
+                                ( equiv-fin-2-quotient-sign-equiv-Fin
+                                  ( succ-ℕ (succ-ℕ n))
+                                  ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                  ( star)
+                                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))))))) ∙
+            ( ( ( ap
+              ( eq-pair-Σ
+                ( ( inv
+                  ( eq-equiv
+                    ( quotient-sign (succ-ℕ (succ-ℕ n))
+                      ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                    ( raise (lsuc l) (Fin 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+                  ( ( ap
+                    ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                    ( eq-equiv
+                      ( quotient-sign (succ-ℕ (succ-ℕ n))
+                        ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                      ( raise (lsuc l) (Fin 2))
+                      ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                        ( inv-equiv
+                          ( equiv-fin-2-quotient-sign-equiv-Fin
+                            ( succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                            ( star)
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))))
+                ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+                ( ( inv
+                  ( comp-eq-pair-Σ
+                    ( pr2 (Fin-UU-Fin-Level (lsuc l) 2))
+                    ( mere-equiv-fin-2-quotient-sign
+                      ( succ-ℕ (succ-ℕ n))
+                      ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                      ( star))
+                    ( pr2 (Fin-UU-Fin-Level (lsuc l) 2))
+                    ( inv
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                    ( ( ap
+                      ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                          ( inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                    ( eq-is-prop is-prop-type-trunc-Prop)
+                    ( _))) ∙
+                  ( ap
+                    ( λ r →
+                      ( eq-pair-Σ
+                        ( inv
+                          ( eq-equiv
+                            ( quotient-sign (succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                            ( raise (lsuc l) (Fin 2))
+                            ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                              ( inv-equiv
+                                ( equiv-fin-2-quotient-sign-equiv-Fin
+                                  ( succ-ℕ (succ-ℕ n))
+                                  ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                  ( star)
+                                  ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                        ( eq-is-prop is-prop-type-trunc-Prop)) ∙
+                        ( r))
+                    ( ( inv
+                      ( comp-eq-pair-Σ
+                        ( mere-equiv-fin-2-quotient-sign
+                          ( succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                          ( star))
+                        ( mere-equiv-fin-2-quotient-sign
+                          ( succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                          ( star))
+                        ( pr2 (Fin-UU-Fin-Level (lsuc l) 2))
+                        ( ap
+                          ( quotient-sign (succ-ℕ (succ-ℕ n)))
+                          ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
+                        ( eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                            ( inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                        ( eq-is-prop is-prop-type-trunc-Prop)
+                        ( eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( ap
+                        ( λ r →
+                          ( r) ∙
+                            ( eq-pair-Σ
+                              ( eq-equiv
+                                ( quotient-sign (succ-ℕ (succ-ℕ n))
+                                  ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                                ( raise (lsuc l) (Fin 2))
+                                ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                                  ( inv-equiv
+                                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                                      ( succ-ℕ (succ-ℕ n))
+                                      ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                      ( star)
+                                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+                              ( eq-is-prop is-prop-type-trunc-Prop)))
+                        ( ( ap
+                          ( λ w → eq-pair-Σ (pr1 w) (pr2 w))
+                          { y =
+                            pair-eq-Σ
+                              ( ap
+                                ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)))
+                                ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))}
+                          ( eq-pair-Σ
+                            ( inv
+                              ( ap-pair-eq-Σ
+                                ( UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)))
+                                ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))
+                            ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))))) ∙
+                           issec-pair-eq-Σ
+                            ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                            ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                            ( ap
+                              ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)))
+                              ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))))))))) ∙
+              ( ( ap
+                ( λ r →
+                  ( r) ∙
+                    ( ( ap
+                      ( map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))) ∙
+                      ( eq-pair-Σ
+                        ( eq-equiv
+                          ( quotient-sign (succ-ℕ (succ-ℕ n))
+                            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                          ( raise (lsuc l) (Fin 2))
+                          ( equiv-raise (lsuc l) (Fin 2) ∘e
+                            inv-equiv
+                              ( equiv-fin-2-quotient-sign-equiv-Fin
+                                ( succ-ℕ (succ-ℕ n))
+                                ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                                ( star)
+                                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+                        ( eq-is-prop is-prop-type-trunc-Prop))))
+                ( ( ap
+                  ( eq-pair-Σ
+                    ( inv
+                      ( eq-equiv
+                        ( quotient-sign
+                          ( succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( equiv-raise (lsuc l) (Fin 2) ∘e
+                          inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                  ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+                  ( inv
+                    ( inv-eq-pair-Σ
+                      ( mere-equiv-fin-2-quotient-sign
+                        ( succ-ℕ (succ-ℕ n))
+                        ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                        ( star))
+                      ( pr2 (Fin-UU-Fin-Level (lsuc l) 2))
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( equiv-raise (lsuc l) (Fin 2) ∘e
+                          inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+                      ( eq-is-prop is-prop-type-trunc-Prop))))) ∙
+                ( inv
+                  ( eq-tr-type-Ω
+                    ( eq-pair-Σ
+                      ( eq-equiv
+                        ( quotient-sign (succ-ℕ (succ-ℕ n))
+                          ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n))))
+                        ( raise (lsuc l) (Fin 2))
+                        ( equiv-raise (lsuc l) (Fin 2) ∘e
+                          inv-equiv
+                            ( equiv-fin-2-quotient-sign-equiv-Fin
+                              ( succ-ℕ (succ-ℕ n))
+                              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+                              ( star)
+                              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+                      (eq-is-prop is-prop-type-trunc-Prop))
+                    ( ap (map-cartier-delooping-sign (succ-ℕ (succ-ℕ n)))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))))))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group
+            ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n)))))
+          ( semigroup-Group
+            ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2)))
+          ( pr1
+            ( comp-hom-Group
+              ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+              ( abstract-group-Concrete-Group
+                ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+              ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+              ( hom-group-hom-Concrete-Group
+                ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n)))
+                ( UU-Fin-Level-Group (lsuc l) 2)
+                ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+              ( hom-iso-Group
+                ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+                ( abstract-group-Concrete-Group
+                  ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+                ( inv-iso-Group
+                  ( abstract-group-Concrete-Group
+                    ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+                  ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+                  ( iso-loop-group-fin-UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n)))))))))
+
+  eq-cartier-delooping-sign-homomorphism : {l' : Level} (n : ℕ) →
+    Id
+      ( comp-hom-Group
+        ( symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Level-Group (lsuc l) 2))
+        ( comp-hom-Group
+          ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Level-Group (lsuc l) 2))
+          ( hom-group-hom-Concrete-Group
+            ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n)))
+            ( UU-Fin-Level-Group (lsuc l) 2)
+            ( cartier-delooping-sign (succ-ℕ (succ-ℕ n))))
+          ( hom-iso-Group
+            ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+            ( inv-iso-Group
+              ( abstract-group-Concrete-Group
+                ( UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))
+              ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+              ( iso-loop-group-fin-UU-Fin-Level-Group l (succ-ℕ (succ-ℕ n))))))
+        ( hom-inv-symmetric-group-loop-group-Set
+          ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))))
+      ( comp-hom-Group
+        ( symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Level-Group (lsuc l) 2))
+        ( comp-hom-Group
+          ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( symmetric-Group (Fin-Set 2))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Level-Group (lsuc l) 2))
+          ( comp-hom-Group
+            ( symmetric-Group (Fin-Set 2))
+            ( symmetric-Group
+              ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Level-Group (lsuc l) 2))
+            ( comp-hom-Group
+              ( symmetric-Group
+                ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+              ( loop-group-Set
+                ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+              ( abstract-group-Concrete-Group
+                ( UU-Fin-Level-Group (lsuc l) 2))
+              ( hom-iso-Group
+                ( loop-group-Set
+                  ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                ( abstract-group-Concrete-Group
+                  ( UU-Fin-Level-Group (lsuc l) 2))
+                ( comp-iso-Group
+                  ( loop-group-Set
+                    ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                  ( loop-group-Set
+                    ( raise-Set (lsuc l) (Fin-Set 2)))
+                  ( abstract-group-Concrete-Group
+                    ( UU-Fin-Level-Group (lsuc l) 2))
+                  ( inv-iso-Group
+                    ( abstract-group-Concrete-Group
+                      ( UU-Fin-Level-Group (lsuc l) 2))
+                    ( loop-group-Set
+                      ( raise-Set (lsuc l) (Fin-Set 2)))
+                    ( iso-loop-group-fin-UU-Fin-Level-Group (lsuc l) 2))
+                  ( iso-loop-group-equiv-Set
+                    ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+                    ( raise-Set (lsuc l) (Fin-Set 2))
+                    ( ( equiv-raise (lsuc l) (Fin 2)) ∘e
+                      ( inv-equiv
+                        ( equiv-fin-2-quotient-sign-equiv-Fin
+                          ( succ-ℕ (succ-ℕ n))
+                          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                          ( star)
+                          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))
+              ( hom-inv-symmetric-group-loop-group-Set
+                ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))))
+            ( hom-symmetric-group-equiv-Set
+              ( Fin-Set 2)
+              ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( equiv-fin-2-quotient-sign-equiv-Fin
+                ( succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                ( star)
+                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+          ( sign-homomorphism
+            ( succ-ℕ (succ-ℕ n))
+            ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
+        ( hom-inv-symmetric-group-equiv-Set
+          ( Fin-Set (succ-ℕ (succ-ℕ n)))
+          ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+  eq-cartier-delooping-sign-homomorphism {l'} n =
+    ( ap
+      ( λ f →
+        comp-hom-Group
+          ( symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+          ( f)
+          ( hom-inv-symmetric-group-loop-group-Set
+            ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))))
+      ( inv (eq-cartier-delooping-loop-UU-Fin-Level-Group n))) ∙
+      ( ( associative-comp-hom-Group
+        ( symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set
+          ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Level-Group (lsuc l) 2))
+        ( hom-iso-Group
+          ( loop-group-Set
+            ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Level-Group (lsuc l) 2))
+          ( comp-iso-Group
+            ( loop-group-Set
+              ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+            ( loop-group-Set
+              ( raise-Set (lsuc l) (Fin-Set 2)))
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Level-Group (lsuc l) 2))
+            ( inv-iso-Group
+              ( abstract-group-Concrete-Group
+                ( UU-Fin-Level-Group (lsuc l) 2))
+              ( loop-group-Set (raise-Set (lsuc l) (Fin-Set 2)))
+              ( iso-loop-group-fin-UU-Fin-Level-Group (lsuc l) 2))
+            ( iso-loop-group-equiv-Set
+              ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( raise-Set (lsuc l) (Fin-Set 2))
+              ( equiv-raise (lsuc l) (Fin 2) ∘e
+                inv-equiv
+                  ( equiv-fin-2-quotient-sign-equiv-Fin
+                    (succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                    ( star)
+                    ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+        ( cartier-delooping-sign-loop n)
+        ( hom-inv-symmetric-group-loop-group-Set
+          ( raise-Fin-Set (succ-ℕ (succ-ℕ n))))) ∙
+        ( ( ap
+          ( λ f →
+            comp-hom-Group
+              ( symmetric-Group
+                ( raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+              ( loop-group-Set
+                ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+              ( abstract-group-Concrete-Group
+                ( UU-Fin-Level-Group (lsuc l) 2))
+              ( hom-iso-Group
+                ( loop-group-Set
+                  ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                ( abstract-group-Concrete-Group
+                  ( UU-Fin-Level-Group (lsuc l) 2))
+                ( comp-iso-Group
+                  ( loop-group-Set
+                    ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                  ( loop-group-Set
+                    ( raise-Set (lsuc l) (Fin-Set 2)))
+                  ( abstract-group-Concrete-Group
+                    ( UU-Fin-Level-Group (lsuc l) 2))
+                  ( inv-iso-Group
+                    ( abstract-group-Concrete-Group
+                      ( UU-Fin-Level-Group (lsuc l) 2))
+                    ( loop-group-Set
+                      ( raise-Set (lsuc l) (Fin-Set 2)))
+                    ( iso-loop-group-fin-UU-Fin-Level-Group (lsuc l) 2))
+                  ( iso-loop-group-equiv-Set
+                    ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+                    ( raise-Set (lsuc l) (Fin-Set 2))
+                    ( equiv-raise (lsuc l) (Fin 2) ∘e
+                      inv-equiv
+                      ( equiv-fin-2-quotient-sign-equiv-Fin
+                        ( succ-ℕ (succ-ℕ n))
+                        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                        ( star)
+                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+              ( f))
+          ( eq-cartier-delooping-sign-loop-sign-homomorphism {l' = l'} n)) ∙
+          ( eq-pair-Σ
+            ( eq-htpy refl-htpy)
+            ( eq-is-prop
+              ( is-prop-preserves-mul-Semigroup
+                ( semigroup-Group
+                  ( symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n)))))
+                ( semigroup-Group
+                  ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2)))
+                ( pr1
+                  ( comp-hom-Group
+                    ( symmetric-Group (raise-Fin-Set (succ-ℕ (succ-ℕ n))))
+                    ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+                    ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+                    ( comp-hom-Group
+                      ( symmetric-Group (Fin-Set (succ-ℕ (succ-ℕ n))))
+                      ( symmetric-Group (Fin-Set 2))
+                      ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+                      ( comp-hom-Group
+                        ( symmetric-Group (Fin-Set 2))
+                        ( symmetric-Group (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                        ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+                        ( comp-hom-Group
+                          ( symmetric-Group (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                          ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                          ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+                          ( hom-iso-Group
+                            ( loop-group-Set (quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                            ( abstract-group-Concrete-Group (UU-Fin-Level-Group (lsuc l) 2))
+                            ( comp-iso-Group
+                              ( loop-group-Set ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n))))
+                              ( loop-group-Set (raise-Set (lsuc l) (Fin-Set 2)))
+                              ( abstract-group-Concrete-Group
+                                ( UU-Fin-Level-Group (lsuc l) 2))
+                              ( inv-iso-Group
+                                ( abstract-group-Concrete-Group
+                                  ( UU-Fin-Level-Group (lsuc l) 2))
+                                ( loop-group-Set (raise-Set (lsuc l) (Fin-Set 2)))
+                                ( iso-loop-group-fin-UU-Fin-Level-Group (lsuc l) 2))
+                              ( iso-loop-group-equiv-Set
+                                ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+                                ( raise-Set (lsuc l) (Fin-Set 2))
+                                ( equiv-raise (lsuc l) (Fin 2) ∘e
+                                  inv-equiv
+                                    ( equiv-fin-2-quotient-sign-equiv-Fin
+                                      ( succ-ℕ (succ-ℕ n))
+                                      ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                                      ( star)
+                                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))))
+                          ( hom-inv-symmetric-group-loop-group-Set
+                            ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))))
+                        ( hom-symmetric-group-equiv-Set
+                          ( Fin-Set 2)
+                          ( quotient-sign-set-Fin (succ-ℕ (succ-ℕ n)))
+                          ( equiv-fin-2-quotient-sign-equiv-Fin
+                            ( succ-ℕ (succ-ℕ n))
+                            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                            ( star)
+                            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+                      ( sign-homomorphism (succ-ℕ (succ-ℕ n))
+                        ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
+                    ( hom-inv-symmetric-group-equiv-Set (Fin-Set (succ-ℕ (succ-ℕ n)))
+                      ( raise-Fin-Set (succ-ℕ (succ-ℕ n)))
+                      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))))))
 ```

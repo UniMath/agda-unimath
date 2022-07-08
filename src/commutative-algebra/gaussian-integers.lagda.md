@@ -25,19 +25,24 @@ open import group-theory.groups
 open import group-theory.semigroups
 
 open import ring-theory.rings
+```
 
-{-------------------------------------------------------------------------------
+## Idea
 
-  The Gaussian Integers
+The Gaussian integers are the complex numbers of the form `a + bi`, where `a` and `b` are integers.
 
-  The Gaussian integers are the complex numbers of the form a + bi, where a and
-  b are integers.
+## Definition
 
--------------------------------------------------------------------------------}
+### The underlying type of the Gaussian integers
 
+```agda
 ℤ[i] : UU lzero
 ℤ[i] = ℤ × ℤ
+```
 
+### Observational equality of the Gaussian integers
+
+```agda
 Eq-ℤ[i] : ℤ[i] → ℤ[i] → UU lzero
 Eq-ℤ[i] x y = (Id (pr1 x) (pr1 y)) × (Id (pr2 x) (pr2 y))
 
@@ -52,32 +57,64 @@ eq-Eq-ℤ[i]' {pair a b} {pair .a .b} (pair refl refl) = refl
 
 eq-Eq-ℤ[i] : {x y : ℤ[i]} → Id (pr1 x) (pr1 y) → Id (pr2 x) (pr2 y) → Id x y
 eq-Eq-ℤ[i] {pair a b} {pair .a .b} refl refl = refl
+```
 
+### The Gaussian integer zero
+
+```agda
 zero-ℤ[i] : ℤ[i]
 zero-ℤ[i] = pair zero-ℤ zero-ℤ
+```
 
+### The Gaussian integer one
+
+```agda
 one-ℤ[i] : ℤ[i]
 one-ℤ[i] = pair one-ℤ zero-ℤ
+```
 
+### The inclusion of the integers into the Gaussian integers
+
+```agda
 gaussian-int-ℤ : ℤ → ℤ[i]
 gaussian-int-ℤ x = pair x zero-ℤ
+```
 
+### The Gaussian integer `i`
+
+```agda
 i-ℤ[i] : ℤ[i]
 i-ℤ[i] = pair zero-ℤ one-ℤ
+```
 
+### The Gaussian integer `-i`.
+
+```agda
 neg-i-ℤ[i] : ℤ[i]
 neg-i-ℤ[i] = pair zero-ℤ neg-one-ℤ
+```
 
+### Addition of Gaussian integers
+
+```agda
 add-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
 add-ℤ[i] (pair a b) (pair a' b') = pair (add-ℤ a a') (add-ℤ b b')
 
 ap-add-ℤ[i] :
   {x x' y y' : ℤ[i]} → Id x x' → Id y y' → Id (add-ℤ[i] x y) (add-ℤ[i] x' y')
 ap-add-ℤ[i] p q = ap-binary add-ℤ[i] p q
+```
 
+### Negatives of Gaussian integers
+
+```agda
 neg-ℤ[i] : ℤ[i] → ℤ[i]
 neg-ℤ[i] (pair a b) = pair (neg-ℤ a) (neg-ℤ b)
+```
 
+### Multiplication of Gaussian integers
+
+```agda
 mul-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
 mul-ℤ[i] (pair a b) (pair a' b') =
   pair
@@ -87,12 +124,18 @@ mul-ℤ[i] (pair a b) (pair a' b') =
 ap-mul-ℤ[i] :
   {x x' y y' : ℤ[i]} → Id x x' → Id y y' → Id (mul-ℤ[i] x y) (mul-ℤ[i] x' y')
 ap-mul-ℤ[i] p q = ap-binary mul-ℤ[i] p q
+```
 
+### Conjugation of Gaussian integers
+
+```agda
 conjugate-ℤ[i] : ℤ[i] → ℤ[i]
 conjugate-ℤ[i] (pair a b) = pair a (neg-ℤ b)
+```
 
--- We show that the Gaussian integers form a commutative ring
+### The Gaussian integers form a commutative ring
 
+```agda
 left-unit-law-add-ℤ[i] : (x : ℤ[i]) → Id (add-ℤ[i] zero-ℤ[i] x) x
 left-unit-law-add-ℤ[i] (pair a b) = eq-Eq-ℤ[i] refl refl
 
@@ -271,8 +314,6 @@ right-distributive-mul-add-ℤ[i] x y z =
   ( ( left-distributive-mul-add-ℤ[i] z x y) ∙
     ( ap-add-ℤ[i] (commutative-mul-ℤ[i] z x) (commutative-mul-ℤ[i] z y)))
 
--- We complete the construction of the ring of Gaussian integers
-
 ℤ[i]-Semigroup : Semigroup lzero
 pr1 ℤ[i]-Semigroup = prod-Set ℤ-Set ℤ-Set
 pr1 (pr2 ℤ[i]-Semigroup) = add-ℤ[i]
@@ -304,3 +345,4 @@ pr2 (pr2 (pr2 (pr2 ℤ[i]-Ring))) = right-distributive-mul-add-ℤ[i]
 ℤ[i]-Commutative-Ring : Commutative-Ring lzero
 pr1 ℤ[i]-Commutative-Ring = ℤ[i]-Ring
 pr2 ℤ[i]-Commutative-Ring = commutative-mul-ℤ[i]
+```

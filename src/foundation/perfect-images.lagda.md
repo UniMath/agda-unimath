@@ -19,7 +19,7 @@ open import foundation.embeddings
 open import foundation.empty-types using (ex-falso)
 open import foundation.fibers-of-maps using(fib)
 open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id; refl; inv; ap; _∙_; tr)
+open import foundation.identity-types using (_＝_; refl; inv; ap; _∙_; tr)
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle using (LEM)
@@ -47,7 +47,7 @@ module _
 
   is-perfect-image : (a : A) →  UU (l1 ⊔ l2)
   is-perfect-image a =
-    (a₀ : A) (n : ℕ) → Id ((iterate n (g ∘ f)) a₀) a → fib g a₀
+    (a₀ : A) (n : ℕ) → (iterate n (g ∘ f)) a₀ ＝ a → fib g a₀
 ```
 
 ## Properties
@@ -103,7 +103,7 @@ module _
 
   is-sec-inverse-of-perfect-image :
     (a : A) (ρ : is-perfect-image f g a) →
-    Id (g (inverse-of-perfect-image a ρ)) a
+    g (inverse-of-perfect-image a ρ) ＝ a
   is-sec-inverse-of-perfect-image a ρ =
     pr2 (is-perfect-image-is-fib a ρ)
 ```
@@ -116,7 +116,7 @@ module _
 
   is-retr-inverse-of-perfect-image :
     (b : B) (ρ : is-perfect-image f g (g b)) →
-    Id (inverse-of-perfect-image (g b) ρ) b
+    inverse-of-perfect-image (g b) ρ ＝ b
   is-retr-inverse-of-perfect-image b ρ =
      is-injective-is-emb
        is-emb-g
@@ -146,10 +146,10 @@ module _
 
   perfect-image-has-distinct-image :
     (a a₀ : A) → ¬ (is-perfect-image f g a) → (ρ : is-perfect-image f g a₀) →
-    ¬ (Id (f a) (inverse-of-perfect-image a₀ ρ))
+    ¬ (f a ＝ inverse-of-perfect-image a₀ ρ)
   perfect-image-has-distinct-image a a₀ nρ ρ p = v ρ
     where
-    q : Id (g (f a)) a₀
+    q : g (f a) ＝ a₀
     q = ap g p ∙ is-sec-inverse-of-perfect-image a₀ ρ
                                                     
     s : ¬ (is-perfect-image f g (g (f a)))
@@ -168,7 +168,7 @@ module _
 
   is-not-perfect-image : (a : A) → UU (l1 ⊔ l2)
   is-not-perfect-image a =
-    Σ A (λ a₀ → (Σ ℕ (λ n →  (Id ((iterate n (g ∘ f)) a₀) a) × ¬ (fib g a₀))))
+    Σ A (λ a₀ → (Σ ℕ (λ n →  ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
 ```
 
 If we assume law of excluded middle and `g` is embedding, we can prove that if `is-not-perfect-image a` does not hold, we have `is-perfect-image a`.
@@ -217,7 +217,7 @@ module _
         ex-falso (pr2 u (pair b (inv (pr1 u))))
       ii (pair x₀ (pair (succ-ℕ n) u)) = pair a w
         where
-        q : Id (f ((iterate n (g ∘ f)) x₀)) b
+        q : f ((iterate n (g ∘ f)) x₀) ＝ b
         q = is-injective-is-emb is-emb-g (pr1 u)
 
         a : fib f b

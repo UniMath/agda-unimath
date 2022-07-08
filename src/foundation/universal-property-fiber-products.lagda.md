@@ -1,4 +1,6 @@
-# The universal property of fiber products
+---
+title: The universal property of fiber products
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

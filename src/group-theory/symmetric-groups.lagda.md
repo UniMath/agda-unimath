@@ -22,8 +22,8 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using (eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Set; equiv-raise)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set; is-set-type-Set; aut-Set; is-prop-is-set)
-open import foundation.subuniverses using (is-one-type-UU-Set)
+  ( UU-Set; type-Set; is-set; is-set-type-Set; aut-Set; is-prop-is-set;
+    is-1-type-UU-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.univalence using
   ( equiv-eq; eq-equiv; comp-eq-equiv; comp-equiv-eq; equiv-univalence)
@@ -35,7 +35,7 @@ open import group-theory.groups using (is-group'; Group; semigroup-Group)
 open import group-theory.homomorphisms-groups using (id-hom-Group; type-hom-Group; comp-hom-Group)
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
 open import group-theory.isomorphisms-groups using (type-iso-Group)
-open import group-theory.monoids using (is-unital)
+open import group-theory.monoids using (is-unital-Semigroup)
 open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
 ```
 
@@ -62,15 +62,15 @@ symmetric-Semigroup :
 pr1 (symmetric-Semigroup X) = set-symmetric-Group X
 pr2 (symmetric-Semigroup X) = has-associative-mul-aut-Set X
 
-is-unital-symmetric-Semigroup :
-  {l : Level} (X : UU-Set l) → is-unital (symmetric-Semigroup X)
-pr1 (is-unital-symmetric-Semigroup X) = id-equiv
-pr1 (pr2 (is-unital-symmetric-Semigroup X)) = left-unit-law-equiv
-pr2 (pr2 (is-unital-symmetric-Semigroup X)) = right-unit-law-equiv
+is-unital-Semigroup-symmetric-Semigroup :
+  {l : Level} (X : UU-Set l) → is-unital-Semigroup (symmetric-Semigroup X)
+pr1 (is-unital-Semigroup-symmetric-Semigroup X) = id-equiv
+pr1 (pr2 (is-unital-Semigroup-symmetric-Semigroup X)) = left-unit-law-equiv
+pr2 (pr2 (is-unital-Semigroup-symmetric-Semigroup X)) = right-unit-law-equiv
 
 is-group-symmetric-Semigroup' :
   {l : Level} (X : UU-Set l) →
-  is-group' (symmetric-Semigroup X) (is-unital-symmetric-Semigroup X)
+  is-group' (symmetric-Semigroup X) (is-unital-Semigroup-symmetric-Semigroup X)
 pr1 (is-group-symmetric-Semigroup' X) = inv-equiv
 pr1 (pr2 (is-group-symmetric-Semigroup' X)) = left-inverse-law-equiv
 pr2 (pr2 (is-group-symmetric-Semigroup' X)) = right-inverse-law-equiv
@@ -78,7 +78,7 @@ pr2 (pr2 (is-group-symmetric-Semigroup' X)) = right-inverse-law-equiv
 symmetric-Group :
   {l : Level} → UU-Set l → Group l
 pr1 (symmetric-Group X) = symmetric-Semigroup X
-pr1 (pr2 (symmetric-Group X)) = is-unital-symmetric-Semigroup X
+pr1 (pr2 (symmetric-Group X)) = is-unital-Semigroup-symmetric-Semigroup X
 pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semigroup' X
 ```
 
@@ -175,7 +175,7 @@ module _
     type-hom-Group
       ( symmetric-Group X)
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
+        ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set))
   pr1 hom-symmetric-group-abstract-automorphism-group-Set x =
     eq-pair-Σ
       ( eq-pair-Σ
@@ -283,7 +283,7 @@ module _
   hom-inv-symmetric-group-abstract-automorphism-group-Set :
     type-hom-Group
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
+        ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set))
       ( symmetric-Group X)
   pr1 hom-inv-symmetric-group-abstract-automorphism-group-Set x =
     inv-equiv
@@ -324,15 +324,15 @@ module _
     Id
       ( comp-hom-Group
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
+          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set))
         ( symmetric-Group X)
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
+          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set))
         ( hom-symmetric-group-abstract-automorphism-group-Set)
         ( hom-inv-symmetric-group-abstract-automorphism-group-Set))
       ( id-hom-Group
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2)))))
+          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set)))
   is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set = 
     eq-pair-Σ
       ( eq-htpy
@@ -384,10 +384,10 @@ module _
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group
             ( abstract-group-Concrete-Group
-              ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2)))))
+              ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set)))
           ( semigroup-Group
             ( abstract-group-Concrete-Group
-              ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2)))))
+              ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set)))
           ( id)))
 
   is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set :
@@ -395,7 +395,7 @@ module _
       ( comp-hom-Group
         ( symmetric-Group X)
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
+          ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set))
         ( symmetric-Group X)
         ( hom-inv-symmetric-group-abstract-automorphism-group-Set)
         ( hom-symmetric-group-abstract-automorphism-group-Set))
@@ -467,7 +467,7 @@ module _
     type-iso-Group
       ( symmetric-Group X)
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) (is-one-type-UU-Set (l1 ⊔ l2))))
+        ( Automorphism-Group (UU-Set (l1 ⊔ l2)) (raise-Set l2 X) is-1-type-UU-Set))
   pr1 iso-symmetric-group-abstract-automorphism-group-Set =
     hom-symmetric-group-abstract-automorphism-group-Set
   pr1 (pr2 iso-symmetric-group-abstract-automorphism-group-Set) =

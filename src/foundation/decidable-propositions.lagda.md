@@ -1,12 +1,16 @@
-# Decidable propositions
+---
+title: Decidable propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.decidable-propositions where
 
+open import foundation-core.decidable-propositions public
+
 open import foundation.booleans using
-  ( bool; true; false; is-set-bool; neq-false-true-bool)
+  ( bool; true; false; is-set-bool; neq-false-true-bool; is-finite-bool)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr; eq-is-contr)
 open import foundation.coproduct-types using
@@ -14,6 +18,7 @@ open import foundation.coproduct-types using
 open import foundation.decidable-types using
   ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.embeddings using (is-emb; _↪_; is-emb-tot; equiv-ap-emb)
 open import foundation.empty-types using
   ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso)
 open import foundation.equivalences using
@@ -21,15 +26,21 @@ open import foundation.equivalences using
     right-inverse-law-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
+open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; ap; refl; inv; tr)
+open import foundation.identity-types using (_＝_; ap; refl; inv; tr)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.negation using (¬)
 open import foundation.propositional-extensionality using
-  ( is-contr-total-true-Prop; is-contr-total-false-Prop)
+  ( is-contr-total-true-Prop; is-contr-total-false-Prop;
+    propositional-extensionality)
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
     is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
+open import foundation.raising-universe-levels using (raise; equiv-raise)
+open import foundation.sets using (is-set; is-set-equiv)
+open import foundation.small-types using (is-small)
+open import foundation.subtypes using (is-emb-inclusion-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( left-distributive-Σ-coprod)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -37,48 +48,13 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.unit-type using
   ( is-contr-unit; raise-unit-Prop; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea
 
-A decidable proposition is a proposition that is decidable.
-
-## Definition
-
-```agda
-is-decidable-prop : {l : Level} → UU l → UU l
-is-decidable-prop A = is-prop A × is-decidable A
-
-decidable-Prop :
-  (l : Level) → UU (lsuc l)
-decidable-Prop l = Σ (UU l) is-decidable-prop
-
-module _
-  {l : Level} (P : decidable-Prop l)
-  where
-
-  prop-decidable-Prop : UU-Prop l
-  pr1 prop-decidable-Prop = pr1 P
-  pr2 prop-decidable-Prop = pr1 (pr2 P)
-
-  type-decidable-Prop : UU l
-  type-decidable-Prop = type-Prop prop-decidable-Prop
-
-  abstract
-    is-prop-type-decidable-Prop : is-prop type-decidable-Prop
-    is-prop-type-decidable-Prop = is-prop-type-Prop prop-decidable-Prop
-
-  is-decidable-type-decidable-Prop : is-decidable type-decidable-Prop
-  is-decidable-type-decidable-Prop = pr2 (pr2 P)
-
-  is-decidable-prop-type-decidable-Prop : is-decidable-prop type-decidable-Prop
-  is-decidable-prop-type-decidable-Prop = pr2 P
-
-  is-decidable-prop-decidable-Prop : UU-Prop l
-  pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
-  pr2 is-decidable-prop-decidable-Prop =
-    is-prop-is-decidable is-prop-type-decidable-Prop
-```
+A decidable proposition is a proposition that has a decidable underlying type.
 
 ## Properties
 
@@ -94,6 +70,22 @@ abstract
         is-prop-prod
           ( is-prop-is-prop X)
           ( is-prop-is-decidable (pr1 H)))
+```
+
+### The forgetful map from decidable propositions to propositions is an embedding
+
+```agda
+is-emb-prop-decidable-Prop : {l : Level} → is-emb (prop-decidable-Prop {l})
+is-emb-prop-decidable-Prop =
+  is-emb-tot
+    ( λ X →
+      is-emb-inclusion-subtype
+        ( λ H → pair (is-decidable X) (is-prop-is-decidable H)))
+
+emb-prop-decidable-Prop :
+  {l : Level} → decidable-Prop l ↪ UU-Prop l
+pr1 emb-prop-decidable-Prop = prop-decidable-Prop
+pr2 emb-prop-decidable-Prop = is-emb-prop-decidable-Prop
 ```
 
 ```agda
@@ -154,7 +146,7 @@ module _
   abstract
     compute-equiv-bool-decidable-Prop :
       (P : decidable-Prop l) →
-      type-decidable-Prop P ≃ Id (map-equiv equiv-bool-decidable-Prop P) true
+      type-decidable-Prop P ≃ (map-equiv equiv-bool-decidable-Prop P ＝ true)
     compute-equiv-bool-decidable-Prop (pair P (pair H (inl p))) =
       equiv-is-contr
         ( is-proof-irrelevant-is-prop H p)
@@ -179,17 +171,87 @@ pr1 (iff-universes-decidable-Prop l l' P) p =
     ( compute-equiv-bool-decidable-Prop
       ( map-equiv (equiv-universes-decidable-Prop l l') P))
     ( tr
-      ( λ e → Id (map-equiv e (map-equiv equiv-bool-decidable-Prop P)) true)
+      ( λ e → map-equiv e (map-equiv equiv-bool-decidable-Prop P) ＝ true)
       ( inv (right-inverse-law-equiv equiv-bool-decidable-Prop))
       ( map-equiv (compute-equiv-bool-decidable-Prop P) p))
 pr2 (iff-universes-decidable-Prop l l' P) p =
   map-inv-equiv
     ( compute-equiv-bool-decidable-Prop P)
     ( tr
-      ( λ e → Id (map-equiv e (map-equiv equiv-bool-decidable-Prop P)) true)
+      ( λ e → map-equiv e (map-equiv equiv-bool-decidable-Prop P) ＝ true)
       ( right-inverse-law-equiv equiv-bool-decidable-Prop)
       ( map-equiv
         ( compute-equiv-bool-decidable-Prop
           ( map-equiv (equiv-universes-decidable-Prop l l') P))
         ( p)))
+```
+
+### The type of decidable propositions in any universe is a set
+
+```agda
+is-set-decidable-Prop : {l : Level} → is-set (decidable-Prop l)
+is-set-decidable-Prop {l} =
+  is-set-equiv bool equiv-bool-decidable-Prop is-set-bool 
+```
+
+### Extensionality of decidable propositions
+
+```agda
+module _
+  {l : Level} (P Q : decidable-Prop l)
+  where
+
+  extensionality-decidable-Prop :
+    (P ＝ Q) ≃ (type-decidable-Prop P ↔ type-decidable-Prop Q)
+  extensionality-decidable-Prop =
+    ( propositional-extensionality
+      ( prop-decidable-Prop P)
+      ( prop-decidable-Prop Q)) ∘e
+    ( equiv-ap-emb emb-prop-decidable-Prop)
+
+  iff-eq-decidable-Prop :
+    P ＝ Q → type-decidable-Prop P ↔ type-decidable-Prop Q
+  iff-eq-decidable-Prop = map-equiv extensionality-decidable-Prop
+  
+  eq-iff-decidable-Prop :
+    (type-decidable-Prop P → type-decidable-Prop Q) →
+    (type-decidable-Prop Q → type-decidable-Prop P) → P ＝ Q
+  eq-iff-decidable-Prop f g =
+    map-inv-equiv extensionality-decidable-Prop (pair f g)
+```
+
+### The type of decidable propositions in any universe is small
+
+```agda
+abstract
+  is-small-decidable-Prop :
+    (l1 l2 : Level) → is-small l2 (decidable-Prop l1)
+  pr1 (is-small-decidable-Prop l1 l2) = raise l2 bool
+  pr2 (is-small-decidable-Prop l1 l2) =
+    equiv-raise l2 bool ∘e equiv-bool-decidable-Prop
+```
+
+### Decidable propositions are finite
+
+```agda
+abstract
+  is-finite-is-decidable-Prop :
+    {l : Level} (P : UU-Prop l) →
+    is-decidable (type-Prop P) → is-finite (type-Prop P)
+  is-finite-is-decidable-Prop P (inl x) =
+    is-finite-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) x)
+  is-finite-is-decidable-Prop P (inr x) =
+    is-finite-is-empty x
+```
+
+### The type of decidable propositions of any universe level is finite
+
+```agda
+is-finite-decidable-Prop : {l : Level} → is-finite (decidable-Prop l)
+is-finite-decidable-Prop {l} =
+  is-finite-equiv' equiv-bool-decidable-Prop is-finite-bool
+
+decidable-Prop-𝔽-Level : (l : Level) → 𝔽-Level (lsuc l)
+pr1 (decidable-Prop-𝔽-Level l) = decidable-Prop l
+pr2 (decidable-Prop-𝔽-Level l) = is-finite-decidable-Prop
 ```

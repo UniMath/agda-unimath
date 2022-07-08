@@ -1,4 +1,6 @@
-# Equivalence induction
+---
+title: Equivalence induction
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

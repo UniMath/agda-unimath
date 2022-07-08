@@ -48,6 +48,7 @@ open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public
+open import elementary-number-theory.pythagorean-triples public
 open import elementary-number-theory.rational-numbers public
 open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
@@ -56,5 +57,6 @@ open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
+open import elementary-number-theory.w-type-of-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public

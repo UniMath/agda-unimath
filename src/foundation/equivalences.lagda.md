@@ -1,4 +1,6 @@
-# Equivalences
+---
+title: Equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -49,7 +51,7 @@ open import foundation.function-extensionality using
   ( htpy-eq; funext; eq-htpy; equiv-funext)
 open import foundation.identity-systems using (Ind-identity-system)
 open import foundation.identity-types using
-  ( Id; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
+  ( _＝_; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
 open import foundation.pullbacks
@@ -87,7 +89,7 @@ module _
   where
 
   eq-transpose-equiv :
-    (x : A) (y : B) → (Id (map-equiv e x) y) ≃ (Id x (map-inv-equiv e y))
+    (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
   eq-transpose-equiv x y =
     ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
     ( equiv-concat'
@@ -95,18 +97,18 @@ module _
       ( inv (issec-map-inv-equiv e y)))
 
   map-eq-transpose-equiv :
-    {x : A} {y : B} → Id (map-equiv e x) y → Id x (map-inv-equiv e y)
+    {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
   map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
 
   inv-map-eq-transpose-equiv :
-    {x : A} {y : B} → Id x (map-inv-equiv e y) → Id (map-equiv e x) y
+    {x : A} {y : B} → x ＝ map-inv-equiv e y → map-equiv e x ＝ y
   inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
 
   triangle-eq-transpose-equiv :
-    {x : A} {y : B} (p : Id (map-equiv e x) y) →
-    Id ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
-         ( issec-map-inv-equiv e y))
-       ( p)
+    {x : A} {y : B} (p : map-equiv e x ＝ y) →
+    ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
+      ( issec-map-inv-equiv e y)) ＝
+    ( p)
   triangle-eq-transpose-equiv {x} {y} p =
     ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
          ( issec-map-inv-equiv
@@ -116,18 +118,18 @@ module _
       ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
   
   map-eq-transpose-equiv' :
-    {a : A} {b : B} → Id b (map-equiv e a) → Id (map-inv-equiv e b) a
+    {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
   map-eq-transpose-equiv' p = inv (map-eq-transpose-equiv (inv p))
 
   inv-map-eq-transpose-equiv' :
-    {a : A} {b : B} → Id (map-inv-equiv e b) a → Id b (map-equiv e a)
+    {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
   inv-map-eq-transpose-equiv' p =
     inv (inv-map-eq-transpose-equiv (inv p))
 
   triangle-eq-transpose-equiv' :
-    {x : A} {y : B} (p : Id y (map-equiv e x)) →
-    Id ( (issec-map-inv-equiv e y) ∙ p)
-      ( ap (map-equiv e) (map-eq-transpose-equiv' p))
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( (issec-map-inv-equiv e y) ∙ p) ＝
+    ( ap (map-equiv e) (map-eq-transpose-equiv' p))
   triangle-eq-transpose-equiv' {x} {y} p =
     map-inv-equiv
       ( equiv-ap
@@ -165,7 +167,7 @@ abstract
   comp-is-equiv :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
     (f : A → B) (is-equiv-f : is-equiv f) (h : (x : A) → C (f x)) →
-    Id (λ x → (ind-is-equiv C f is-equiv-f h) (f x)) h
+    (ind-is-equiv C f is-equiv-f h ∘ f) ＝ h
   comp-is-equiv C f is-equiv-f h =
     issec-map-inv-is-equiv (is-equiv-precomp-Π-is-equiv f is-equiv-f C) h
   
@@ -310,7 +312,7 @@ module _
   is-contr-retr-is-equiv : {f : A → B} → is-equiv f → is-contr (retr f)
   is-contr-retr-is-equiv {f} is-equiv-f =
     is-contr-is-equiv'
-      ( Σ (B → A) (λ h → Id (h ∘ f) id))
+      ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
       ( tot (λ h → htpy-eq))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ h → funext (h ∘ f) id))
@@ -331,7 +333,7 @@ module _
       ( is-contr-retr-is-equiv is-equiv-f)
 
   abstract
-    is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (Id H K)
+    is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (H ＝ K)
     is-property-is-equiv f H =
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
@@ -355,7 +357,7 @@ module _
   htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
   htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
 
-  extensionality-equiv : (f g : A ≃ B) → Id f g ≃ htpy-equiv f g
+  extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
   extensionality-equiv f =
     extensionality-subtype
       ( is-equiv-Prop)
@@ -375,10 +377,10 @@ module _
         ( λ f → map-equiv (extensionality-equiv e f))
         ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
 
-  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → Id e e'
+  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → e ＝ e'
   eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
 
-  htpy-eq-equiv : {e e' : A ≃ B} → Id e e' → htpy-equiv e e'
+  htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
   htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
 ```
 
@@ -409,7 +411,7 @@ module _
   comp-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
-    Id (ind-htpy-equiv e P p e (refl-htpy-equiv e)) p
+    ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
   comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
@@ -419,31 +421,31 @@ module _
 associative-comp-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
-  Id ((g ∘e f) ∘e e) (g ∘e (f ∘e e))
+  ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
 associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  left-unit-law-equiv : (e : X ≃ Y) → Id (id-equiv ∘e e) e
+  left-unit-law-equiv : (e : X ≃ Y) → (id-equiv ∘e e) ＝ e
   left-unit-law-equiv e = eq-htpy-equiv refl-htpy
   
-  right-unit-law-equiv : (e : X ≃ Y) → Id (e ∘e id-equiv) e
+  right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
   right-unit-law-equiv e = eq-htpy-equiv refl-htpy
   
-  left-inverse-law-equiv : (e : X ≃ Y) → Id ((inv-equiv e) ∘e e) id-equiv
+  left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
     eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
   
-  right-inverse-law-equiv : (e : X ≃ Y) → Id (e ∘e (inv-equiv e)) id-equiv
+  right-inverse-law-equiv : (e : X ≃ Y) → (e ∘e (inv-equiv e)) ＝ id-equiv
   right-inverse-law-equiv e =
     eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
-  inv-inv-equiv : (e : X ≃ Y) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
   inv-inv-equiv e = eq-htpy-equiv refl-htpy
 
-  inv-inv-equiv' : (e : Y ≃ X) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv' : (e : Y ≃ X) → (inv-equiv (inv-equiv e)) ＝ e
   inv-inv-equiv' e = eq-htpy-equiv refl-htpy
 
   is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
@@ -462,7 +464,7 @@ module _
   where
 
   distributive-inv-comp-equiv : (e : X ≃ Y) (f : Y ≃ Z) →
-    Id (inv-equiv (f ∘e e)) ((inv-equiv e) ∘e (inv-equiv f))
+    (inv-equiv (f ∘e e)) ＝ ((inv-equiv e) ∘e (inv-equiv f))
   distributive-inv-comp-equiv e f =
     eq-htpy-equiv
       ( λ x →
@@ -475,15 +477,14 @@ module _
 
 compose-inv-equiv-compose-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : B ≃ C) (e : A ≃ B) →
-  Id (inv-equiv f ∘e (f ∘e e)) e
+  (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e
 compose-inv-equiv-compose-equiv f e =
   eq-htpy-equiv (λ x → isretr-map-inv-equiv f (map-equiv e x))
 
 compose-equiv-compose-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ C) →
-  Id (f ∘e (inv-equiv f ∘e e)) e
+  (f ∘e (inv-equiv f ∘e e)) ＝ e
 compose-equiv-compose-inv-equiv f e =
   eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
 

@@ -1,4 +1,6 @@
-# Euler's totient function
+---
+title: Euler's totient function
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

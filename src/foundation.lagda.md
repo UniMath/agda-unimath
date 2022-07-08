@@ -1,4 +1,6 @@
-# Foundation
+---
+title: Foundation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -39,8 +41,10 @@ open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
 open import foundation.decidable-equality public
+open import foundation.decidable-equivalence-relations public
 open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
+open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
@@ -128,6 +132,7 @@ open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public
+open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullbacks public

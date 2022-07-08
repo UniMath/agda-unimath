@@ -1,4 +1,6 @@
-# Type arithmetic for coproduct types
+---
+title: Type arithmetic for coproduct types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -53,6 +55,10 @@ module _
       map-inv-commutative-coprod
       issec-map-inv-commutative-coprod
       isretr-map-inv-commutative-coprod
+
+  commutative-coprod : coprod A B ≃ coprod B A
+  pr1 commutative-coprod = map-commutative-coprod
+  pr2 commutative-coprod = is-equiv-map-commutative-coprod
 ```
 
 ### Associativity of coproducts

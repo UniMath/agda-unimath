@@ -1,4 +1,6 @@
-# Telephone numbers
+---
+title: Telephone numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

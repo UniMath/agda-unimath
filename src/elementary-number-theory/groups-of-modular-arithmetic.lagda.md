@@ -1,4 +1,6 @@
-# The groups ℤ/kℤ
+---
+title: The groups ℤ/kℤ
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

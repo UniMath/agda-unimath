@@ -1,11 +1,13 @@
-# The interchange law
+---
+title: The interchange law
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.interchange-law where
 
-open import foundation.identity-types using (Id; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; _∙_; inv; ap)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -45,11 +47,10 @@ module _
   where
   
   interchange-law : (X → X → X) → UU l
-  interchange-law ν = (x y u v : X) → Id (μ (ν x y) (ν u v)) (ν (μ x u) (μ y v))
+  interchange-law ν = (x y u v : X) → μ (ν x y) (ν u v) ＝ ν (μ x u) (μ y v)
 
   interchange-law-commutative-and-associative :
-    ((x y : X) → Id (μ x y) (μ y x)) →
-    ((x y z : X ) → Id (μ (μ x y) z) (μ x (μ y z))) →
+    ((x y : X) → μ x y ＝ μ y x) → ((x y z : X ) → μ (μ x y) z ＝ μ x (μ y z)) →
     interchange-law μ
   interchange-law-commutative-and-associative C A x y u v =
     ( A x y (μ u v)) ∙

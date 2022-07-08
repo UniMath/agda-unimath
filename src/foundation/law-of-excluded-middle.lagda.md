@@ -1,4 +1,6 @@
-# The law of excluded middle
+---
+title: The law of excluded middle
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

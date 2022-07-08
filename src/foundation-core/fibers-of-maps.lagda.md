@@ -1,4 +1,6 @@
-# Fibers of maps
+---
+title: Fibers of maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.equivalences using
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using
-  ( Id; refl; ap; _∙_; tr; inv; concat; right-unit; right-inv)
+  ( _＝_; refl; ap; _∙_; tr; inv; concat; right-unit; right-inv)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -27,10 +29,10 @@ module _
   where
   
   fib : UU (l1 ⊔ l2)
-  fib = Σ A (λ x → Id (f x) b)
+  fib = Σ A (λ x → f x ＝ b)
 
   fib' : UU (l1 ⊔ l2)
-  fib' = Σ A (λ x → Id b (f x))
+  fib' = Σ A (λ x → b ＝ f x)
 ```
 
 ## Properties
@@ -43,7 +45,7 @@ module _
   where
 
   Eq-fib : fib f b → fib f b → UU (l1 ⊔ l2)
-  Eq-fib s t = Σ (Id (pr1 s) (pr1 t)) (λ α → Id ((ap f α) ∙ (pr2 t)) (pr2 s))
+  Eq-fib s t = Σ (pr1 s ＝ pr1 t) (λ α → ((ap f α) ∙ (pr2 t)) ＝ (pr2 s))
 
   {- Proposition 10.3.3 -}
   
@@ -51,15 +53,15 @@ module _
   pr1 (refl-Eq-fib s) = refl
   pr2 (refl-Eq-fib s) = refl
 
-  Eq-eq-fib : {s t : fib f b} → Id s t → Eq-fib s t
+  Eq-eq-fib : {s t : fib f b} → s ＝ t → Eq-fib s t
   Eq-eq-fib {s} refl = refl-Eq-fib s
 
-  eq-Eq-fib' : {s t : fib f b} → Eq-fib s t → Id s t
+  eq-Eq-fib' : {s t : fib f b} → Eq-fib s t → s ＝ t
   eq-Eq-fib' {pair x p} {pair .x .p} (pair refl refl) = refl
 
   eq-Eq-fib :
-    {s t : fib f b} (α : Id (pr1 s) (pr1 t)) →
-    Id ((ap f α) ∙ (pr2 t)) (pr2 s) → Id s t
+    {s t : fib f b} (α : pr1 s ＝ pr1 t) →
+    ((ap f α) ∙ (pr2 t)) ＝ pr2 s → s ＝ t
   eq-Eq-fib α β = eq-Eq-fib' (pair α β)
 
   issec-eq-Eq-fib :
@@ -78,7 +80,7 @@ module _
         issec-eq-Eq-fib
         isretr-eq-Eq-fib
 
-  equiv-Eq-eq-fib : {s t : fib f b} → Id s t ≃ Eq-fib s t
+  equiv-Eq-eq-fib : {s t : fib f b} → (s ＝ t) ≃ Eq-fib s t
   pr1 (equiv-Eq-eq-fib {s} {t}) = Eq-eq-fib
   pr2 (equiv-Eq-eq-fib {s} {t}) = is-equiv-Eq-eq-fib
 
@@ -91,7 +93,7 @@ module _
         isretr-eq-Eq-fib
         issec-eq-Eq-fib
 
-  equiv-eq-Eq-fib : {s t : fib f b} → Eq-fib s t ≃ Id s t
+  equiv-eq-Eq-fib : {s t : fib f b} → Eq-fib s t ≃ (s ＝ t)
   pr1 (equiv-eq-Eq-fib {s} {t}) = eq-Eq-fib'
   pr2 (equiv-eq-Eq-fib {s} {t}) = is-equiv-eq-Eq-fib
 ```

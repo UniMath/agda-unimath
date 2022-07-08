@@ -1,4 +1,6 @@
-# Weak function extensionality
+---
+title: Weak function extensionality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -25,7 +27,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.negation using (¬)
 open import foundation.propositions using
   ( is-prop; is-prop-equiv; UU-Prop; type-Prop; is-prop-type-Prop; eq-is-prop)
@@ -78,13 +80,13 @@ abstract
     fundamental-theorem-id f
       ( refl-htpy)
       ( is-contr-retract-of
-        ( (x : A) → Σ (B x) (λ b → Id (f x) b))
+        ( (x : A) → Σ (B x) (λ b → f x ＝ b))
         ( pair
           ( λ t x → pair (pr1 t x) (pr2 t x))
           ( pair (λ t → pair (λ x → pr1 (t x)) (λ x → pr2 (t x)))
           ( λ t → eq-pair-Σ refl refl)))
         ( weak-funext A
-          ( λ x → Σ (B x) (λ b → Id (f x) b))
+          ( λ x → Σ (B x) (λ b → f x ＝ b))
           ( λ x → is-contr-total-path (f x))))
       ( λ g → htpy-eq {g = g})
 ```
@@ -95,7 +97,7 @@ abstract
 cases-function-converse-weak-funext :
   {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
   (H : is-contr ((i : I) → A i)) (i : I) (x : A i)
-  (j : I) (e : is-decidable (Id i j)) → A j
+  (j : I) (e : is-decidable (i ＝ j)) → A j
 cases-function-converse-weak-funext d H i x .i (inl refl) = x
 cases-function-converse-weak-funext d H i x j (inr f) = center H j
 
@@ -107,8 +109,8 @@ function-converse-weak-funext d H i x j =
 
 cases-eq-function-converse-weak-funext :
   {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
-  (H : is-contr ((i : I) → A i)) (i : I) (x : A i) (e : is-decidable (Id i i)) →
-  Id (cases-function-converse-weak-funext d H i x i e) x
+  (H : is-contr ((i : I) → A i)) (i : I) (x : A i) (e : is-decidable (i ＝ i)) →
+  cases-function-converse-weak-funext d H i x i e ＝ x
 cases-eq-function-converse-weak-funext d H i x (inl p) =
   ap ( λ t → cases-function-converse-weak-funext d H i x i (inl t))
      ( eq-is-prop (is-set-has-decidable-equality d i i) {p} {refl})
@@ -117,7 +119,7 @@ cases-eq-function-converse-weak-funext d H i x (inr f) = ex-falso (f refl)
 eq-function-converse-weak-funext :
   {l1 l2 : Level} {I : UU l1} {A : I → UU l2} (d : has-decidable-equality I)
   (H : is-contr ((i : I) → A i)) (i : I) (x : A i) →
-  Id (function-converse-weak-funext d H i x i) x
+  function-converse-weak-funext d H i x i ＝ x
 eq-function-converse-weak-funext d H i x =
   cases-eq-function-converse-weak-funext d H i x (d i i)
 

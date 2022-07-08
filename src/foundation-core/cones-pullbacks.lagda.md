@@ -86,10 +86,10 @@ module _
   pr1 (pr2 (refl-htpy-cone c)) = refl-htpy
   pr2 (pr2 (refl-htpy-cone c)) = right-unit-htpy
       
-  htpy-eq-cone : (c c' : cone f g C) → Id c c' → htpy-cone c c'
+  htpy-eq-cone : (c c' : cone f g C) → c ＝ c' → htpy-cone c c'
   htpy-eq-cone c .c refl = refl-htpy-cone c
 
-  extensionality-cone : (c d : cone f g C) → Id c d ≃ htpy-cone c d
+  extensionality-cone : (c d : cone f g C) → (c ＝ d) ≃ htpy-cone c d
   extensionality-cone (pair p (pair q H)) =
     extensionality-Σ
       ( λ {p'} qH' K →
@@ -118,6 +118,6 @@ module _
        ( λ c' → is-equiv-map-equiv (extensionality-cone c c'))
 
   eq-htpy-cone :
-    (c c' : cone f g C) → htpy-cone c c' → Id c c'
+    (c c' : cone f g C) → htpy-cone c c' → c ＝ c'
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
 ```

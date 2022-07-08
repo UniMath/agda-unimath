@@ -1,4 +1,6 @@
-# Small multisets
+---
+title: Small multisets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -15,7 +17,7 @@ open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
-  ( Id; tr; refl; ap; _∙_; equiv-concat)
+  ( _＝_; tr; refl; ap; _∙_; equiv-concat)
 open import foundation.multisets using (𝕍; comprehension-𝕍; _∈-𝕍_; _∉-𝕍_)
 open import foundation.propositions using
   ( UU-Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
@@ -81,7 +83,7 @@ is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
 ```agda
 is-small-eq-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
-  is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (Id X Y)
+  is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ＝ Y)
 is-small-eq-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (pair (pair Y f) K) =
   is-small-equiv l
     ( Eq-𝕎 (tree-𝕎 A α) (tree-𝕎 B β))
@@ -95,13 +97,13 @@ is-small-eq-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (p
           ( equiv-precomp-equiv (inv-equiv e) Y ∘e equiv-postcomp-equiv f A)))
       ( σ))
   where
-  σ : (x : Id A B) → is-small l ((z : A) → Eq-𝕎 (α z) (β (tr id x z)))
+  σ : (x : A ＝ B) → is-small l ((z : A) → Eq-𝕎 (α z) (β (tr id x z)))
   σ refl =
     is-small-Π l
       ( pair X e)
       ( λ x →
         is-small-equiv l
-          ( Id (α x) (β x))
+          ( α x ＝ β x)
           ( inv-equiv (equiv-Eq-𝕎-eq (α x) (β x)))
           ( is-small-eq-𝕍 l (H x) (K x)))
 ```
@@ -152,7 +154,7 @@ resize-𝕍' (pair X H) = pair (resize-𝕍 X H) (is-small-resize-𝕍 X H)
 abstract
   resize-resize-𝕍 :
     {l1 l2 : Level} {x : 𝕍 l1} (H : is-small-𝕍 l2 x) → 
-    Id (resize-𝕍 (resize-𝕍 x H) (is-small-resize-𝕍 x H)) x
+    resize-𝕍 (resize-𝕍 x H) (is-small-resize-𝕍 x H) ＝ x
   resize-resize-𝕍 {x = tree-𝕎 A α} (pair (pair A' e) H) =
     eq-Eq-𝕎
       ( resize-𝕍
@@ -205,7 +207,7 @@ The resizing operation on small multisets is an embedding
 ```agda
 eq-resize-𝕍 :
   {l1 l2 : Level} {x y : 𝕍 l1} (H : is-small-𝕍 l2 x) (K : is-small-𝕍 l2 y) →
-  Id x y ≃ Id (resize-𝕍 x H) (resize-𝕍 y K)
+  (x ＝ y) ≃ (resize-𝕍 x H ＝ resize-𝕍 y K)
 eq-resize-𝕍 {l1} {l2} H K =
   ( extensionality-type-subtype
     ( is-small-𝕍-Prop l1)
@@ -229,8 +231,8 @@ abstract
   equiv-elementhood-resize-𝕍 {x = X} {tree-𝕎 B β} H (pair (pair B' e) K) =
     equiv-Σ
       ( λ y' →
-        Id ( component-𝕎 (resize-𝕍 (tree-𝕎 B β) (pair (pair B' e) K)) y')
-           ( resize-𝕍 X H))
+        ( component-𝕎 (resize-𝕍 (tree-𝕎 B β) (pair (pair B' e) K)) y') ＝
+        ( resize-𝕍 X H))
       ( e)
       ( λ b →
         ( equiv-concat

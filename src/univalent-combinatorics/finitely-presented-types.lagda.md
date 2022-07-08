@@ -7,7 +7,6 @@ title: Finitely presented types
 
 module univalent-combinatorics.finitely-presented-types where
 
-open import elementary-number-theory.equality-natural-numbers using (ℕ-Set)
 open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -26,14 +25,12 @@ open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (eq-subtype)
 open import foundation.universe-levels using (Level; UU)
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set)
 open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
 open import univalent-combinatorics.finite-connected-components using
   ( has-cardinality-components; has-cardinality-components-Prop)
 open import univalent-combinatorics.finite-types using (eq-cardinality)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-injective-Fin)
+  ( Fin; is-injective-Fin; Fin-Set)
 ```
 
 ## Idea
@@ -68,9 +65,9 @@ is-finitely-presented A =
 
 ```agda
 has-presentation-of-cardinality-has-cardinality-components :
-  {l : Level} {k : ℕ} {A : UU l} → has-cardinality-components k A →
+  {l : Level} (k : ℕ) {A : UU l} → has-cardinality-components k A →
   has-presentation-of-cardinality k A
-has-presentation-of-cardinality-has-cardinality-components {l} {k} {A} H =
+has-presentation-of-cardinality-has-cardinality-components {l} k {A} H =
   apply-universal-property-trunc-Prop H
     ( has-presentation-of-cardinality-Prop k A)
     ( λ e →
@@ -88,12 +85,12 @@ has-presentation-of-cardinality-has-cardinality-components {l} {k} {A} H =
   P1 e x = is-surjective-unit-trunc-Set A (map-equiv e x)
   P2 : (e : Fin k ≃ type-trunc-Set A) →
        type-trunc-Prop ((x : Fin k) → fib unit-trunc-Set (map-equiv e x))
-  P2 e = finite-choice-Fin (P1 e)
+  P2 e = finite-choice-Fin k (P1 e)
 
 has-cardinality-components-has-presentation-of-cardinality :
-  {l : Level} {k : ℕ} {A : UU l} → has-presentation-of-cardinality k A →
+  {l : Level} (k : ℕ) {A : UU l} → has-presentation-of-cardinality k A →
   has-cardinality-components k A
-has-cardinality-components-has-presentation-of-cardinality {l} {k} {A} H =
+has-cardinality-components-has-presentation-of-cardinality {l} k {A} H =
   apply-universal-property-trunc-Prop H
     ( has-cardinality-components-Prop k A)
     ( λ { (pair f E) → unit-trunc-Prop (pair (unit-trunc-Set ∘ f) E)})
@@ -108,8 +105,8 @@ all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
   eq-subtype
     ( λ n → has-set-presentation-Prop (Fin-Set n) A)
     ( eq-cardinality
-      ( has-cardinality-components-has-presentation-of-cardinality K)
-      ( has-cardinality-components-has-presentation-of-cardinality L))
+      ( has-cardinality-components-has-presentation-of-cardinality k K)
+      ( has-cardinality-components-has-presentation-of-cardinality l L))
 
 is-prop-is-finitely-presented :
   {l1 : Level} {A : UU l1} → is-prop (is-finitely-presented A)

@@ -1,4 +1,6 @@
-# Retracts of the type of natural numbers
+---
+title: Retracts of the type of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

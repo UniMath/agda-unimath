@@ -1,4 +1,6 @@
-# Extensional W-types
+---
+title: Extensional W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,7 +26,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
 open import foundation.identity-types using
-  ( Id; equiv-concat; ap; equiv-tr; refl)
+  ( _＝_; equiv-concat; ap; equiv-tr; refl)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using (Π-Prop)
@@ -57,7 +59,7 @@ module _
   where
 
   extensional-Eq-eq-𝕎 : 
-    {x y : 𝕎 A B} → Id x y → (z : 𝕎 A B) → (z ∈-𝕎 x) ≃ (z ∈-𝕎 y)
+    {x y : 𝕎 A B} → x ＝ y → (z : 𝕎 A B) → (z ∈-𝕎 x) ≃ (z ∈-𝕎 y)
   extensional-Eq-eq-𝕎 refl z = id-equiv
 
 is-extensional-𝕎 :
@@ -75,7 +77,7 @@ module _
   refl-Eq-ext-𝕎 : (x : 𝕎 A B) → Eq-ext-𝕎 x x
   refl-Eq-ext-𝕎 x z = id-equiv
 
-  Eq-ext-eq-𝕎 : {x y : 𝕎 A B} → Id x y → Eq-ext-𝕎 x y
+  Eq-ext-eq-𝕎 : {x y : 𝕎 A B} → x ＝ y → Eq-ext-𝕎 x y
   Eq-ext-eq-𝕎 {x} refl = refl-Eq-ext-𝕎 x
 ```
 
@@ -102,7 +104,7 @@ module _
       ( λ z → is-contr-total-htpy-equiv (u z))
 
   Eq-Eq-ext-eq-𝕎 :
-    (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → Id u v → Eq-Eq-ext-𝕎 x y u v
+    (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → u ＝ v → Eq-Eq-ext-𝕎 x y u v
   Eq-Eq-ext-eq-𝕎 x y u .u refl = refl-Eq-Eq-ext-𝕎 x y u
 
   is-equiv-Eq-Eq-ext-eq-𝕎 :
@@ -114,7 +116,7 @@ module _
       ( Eq-Eq-ext-eq-𝕎 x y u)
 
   eq-Eq-Eq-ext-𝕎 :
-    {x y : 𝕎 A B} {u v : Eq-ext-𝕎 x y} → Eq-Eq-ext-𝕎 x y u v → Id u v
+    {x y : 𝕎 A B} {u v : Eq-ext-𝕎 x y} → Eq-Eq-ext-𝕎 x y u v → u ＝ v
   eq-Eq-Eq-ext-𝕎 {x} {y} {u} {v} =
     map-inv-is-equiv (is-equiv-Eq-Eq-ext-eq-𝕎 x y u v)
 
@@ -130,7 +132,7 @@ module _
                     equiv-tot
                       ( λ g →
                         equiv-Π
-                          ( λ y → Id (f (map-inv-equiv e y)) (g y))
+                          ( λ y → f (map-inv-equiv e y) ＝ g y)
                           ( e)
                           ( λ y →
                             equiv-concat
@@ -179,7 +181,7 @@ module _
     type-trunc-Prop (𝕎 A B) → is-extensional-𝕎 A B → is-univalent B
   is-univalent-is-extensional-𝕎 p H x =
     apply-universal-property-trunc-Prop p
-      ( Π-Prop A (λ y → is-equiv-Prop (λ (γ : Id x y) → equiv-tr B γ)))
+      ( Π-Prop A (λ y → is-equiv-Prop (λ (γ : x ＝ y) → equiv-tr B γ)))
       ( λ w →
         fundamental-theorem-id x
           ( id-equiv)

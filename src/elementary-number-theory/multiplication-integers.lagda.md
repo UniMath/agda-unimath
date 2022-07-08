@@ -1,4 +1,6 @@
-# Multiplication of integers
+---
+title: Multiplication of integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -32,7 +34,8 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types using
+  ( _＝_; refl; _∙_; inv; ap; ap-binary)
 open import foundation.injective-maps using
   ( is-injective; is-emb-is-injective)
 open import foundation.interchange-law using
@@ -60,7 +63,7 @@ mul-ℤ' : ℤ → ℤ → ℤ
 mul-ℤ' x y = mul-ℤ y x
 
 ap-mul-ℤ :
-  {x y x' y' : ℤ} → Id x x' → Id y y' → Id (mul-ℤ x y) (mul-ℤ x' y')
+  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → mul-ℤ x y ＝ mul-ℤ x' y'
 ap-mul-ℤ p q = ap-binary mul-ℤ p q
 ```
 
@@ -89,10 +92,10 @@ explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 ### Laws for multiplication on ℤ
 
 ```agda
-left-zero-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ zero-ℤ k) zero-ℤ
+left-zero-law-mul-ℤ : (k : ℤ) → mul-ℤ zero-ℤ k ＝ zero-ℤ
 left-zero-law-mul-ℤ k = refl
 
-right-zero-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ k zero-ℤ) zero-ℤ
+right-zero-law-mul-ℤ : (k : ℤ) → mul-ℤ k zero-ℤ ＝ zero-ℤ
 right-zero-law-mul-ℤ (inl zero-ℕ) = refl
 right-zero-law-mul-ℤ (inl (succ-ℕ n)) =
   right-zero-law-mul-ℤ (inl n)
@@ -101,10 +104,10 @@ right-zero-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-zero-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   right-zero-law-mul-ℤ (inr (inr n))
 
-left-unit-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ one-ℤ k) k
+left-unit-law-mul-ℤ : (k : ℤ) → mul-ℤ one-ℤ k ＝ k
 left-unit-law-mul-ℤ k = refl
 
-right-unit-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ k one-ℤ) k
+right-unit-law-mul-ℤ : (k : ℤ) → mul-ℤ k one-ℤ ＝ k
 right-unit-law-mul-ℤ (inl zero-ℕ) = refl
 right-unit-law-mul-ℤ (inl (succ-ℕ n)) =
   ap (add-ℤ (neg-one-ℤ)) (right-unit-law-mul-ℤ (inl n))
@@ -113,10 +116,10 @@ right-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (add-ℤ one-ℤ) (right-unit-law-mul-ℤ (inr (inr n)))
 
-left-neg-unit-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ neg-one-ℤ k) (neg-ℤ k)
+left-neg-unit-law-mul-ℤ : (k : ℤ) → mul-ℤ neg-one-ℤ k ＝ neg-ℤ k
 left-neg-unit-law-mul-ℤ k = refl
 
-right-neg-unit-law-mul-ℤ : (k : ℤ) → Id (mul-ℤ k neg-one-ℤ) (neg-ℤ k)
+right-neg-unit-law-mul-ℤ : (k : ℤ) → mul-ℤ k neg-one-ℤ ＝ neg-ℤ k
 right-neg-unit-law-mul-ℤ (inl zero-ℕ) = refl
 right-neg-unit-law-mul-ℤ (inl (succ-ℕ n)) =
   ap (add-ℤ one-ℤ) (right-neg-unit-law-mul-ℤ (inl n))
@@ -126,7 +129,7 @@ right-neg-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (add-ℤ neg-one-ℤ) (right-neg-unit-law-mul-ℤ (inr (inr n)))
 
 left-successor-law-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ (succ-ℤ k) l) (add-ℤ l (mul-ℤ k l))
+  (k l : ℤ) → mul-ℤ (succ-ℤ k) l ＝ add-ℤ l (mul-ℤ k l)
 left-successor-law-mul-ℤ (inl zero-ℕ) l =
   inv (right-inverse-law-add-ℤ l)
 left-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
@@ -140,7 +143,7 @@ left-successor-law-mul-ℤ (inr (inl star)) l =
 left-successor-law-mul-ℤ (inr (inr n)) l = refl
 
 left-predecessor-law-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ (pred-ℤ k) l) (add-ℤ (neg-ℤ l) (mul-ℤ k l))
+  (k l : ℤ) → mul-ℤ (pred-ℤ k) l ＝ add-ℤ (neg-ℤ l) (mul-ℤ k l)
 left-predecessor-law-mul-ℤ (inl n) l = refl
 left-predecessor-law-mul-ℤ (inr (inl star)) l =
   ( left-neg-unit-law-mul-ℤ l) ∙
@@ -154,7 +157,7 @@ left-predecessor-law-mul-ℤ (inr (inr (succ-ℕ x))) l =
    ( associative-add-ℤ (neg-ℤ l) l (mul-ℤ (in-pos x) l))
 
 right-successor-law-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ k (succ-ℤ l)) (add-ℤ k (mul-ℤ k l))
+  (k l : ℤ) → mul-ℤ k (succ-ℤ l) ＝ add-ℤ k (mul-ℤ k l)
 right-successor-law-mul-ℤ (inl zero-ℕ) l = inv (pred-neg-ℤ l)
 right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
   ( left-predecessor-law-mul-ℤ (inl n) (succ-ℤ l)) ∙
@@ -192,7 +195,7 @@ right-successor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
         ( associative-add-ℤ (inr (inr (succ-ℕ n))) l (mul-ℤ (inr (inr n)) l)))))
 
 right-predecessor-law-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ k (pred-ℤ l)) (add-ℤ (neg-ℤ k) (mul-ℤ k l))
+  (k l : ℤ) → mul-ℤ k (pred-ℤ l) ＝ add-ℤ (neg-ℤ k) (mul-ℤ k l)
 right-predecessor-law-mul-ℤ (inl zero-ℕ) l =
   ( left-neg-unit-law-mul-ℤ (pred-ℤ l)) ∙
   ( neg-pred-ℤ l)
@@ -226,7 +229,7 @@ right-predecessor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
         ( associative-add-ℤ (inl (succ-ℕ n)) l (mul-ℤ (inr (inr n)) l)))))
 
 right-distributive-mul-add-ℤ :
-  (k l m : ℤ) → Id (mul-ℤ (add-ℤ k l) m) (add-ℤ (mul-ℤ k m) (mul-ℤ l m))
+  (k l m : ℤ) → mul-ℤ (add-ℤ k l) m ＝ add-ℤ (mul-ℤ k m) (mul-ℤ l m)
 right-distributive-mul-add-ℤ (inl zero-ℕ) l m =
   ( left-predecessor-law-mul-ℤ l m) ∙
   ( ap
@@ -247,7 +250,7 @@ right-distributive-mul-add-ℤ (inr (inr (succ-ℕ n))) l m =
     ( inv (associative-add-ℤ m (mul-ℤ (in-pos n) m) (mul-ℤ l m))))
 
 left-negative-law-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ (neg-ℤ k) l) (neg-ℤ (mul-ℤ k l))
+  (k l : ℤ) → mul-ℤ (neg-ℤ k) l ＝ neg-ℤ (mul-ℤ k l)
 left-negative-law-mul-ℤ (inl zero-ℕ) l =
   ( left-unit-law-mul-ℤ l) ∙
   ( inv (neg-neg-ℤ l))
@@ -264,7 +267,7 @@ left-negative-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
     ( inv (distributive-neg-add-ℤ l (mul-ℤ (in-pos n) l))))
 
 associative-mul-ℤ :
-  (k l m : ℤ) → Id (mul-ℤ (mul-ℤ k l) m) (mul-ℤ k (mul-ℤ l m))
+  (k l m : ℤ) → mul-ℤ (mul-ℤ k l) m ＝ mul-ℤ k (mul-ℤ l m)
 associative-mul-ℤ (inl zero-ℕ) l m =
   left-negative-law-mul-ℤ l m
 associative-mul-ℤ (inl (succ-ℕ n)) l m =
@@ -280,7 +283,7 @@ associative-mul-ℤ (inr (inr (succ-ℕ n))) l m =
   ( ap (add-ℤ (mul-ℤ l m)) (associative-mul-ℤ (inr (inr n)) l m))
 
 commutative-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ k l) (mul-ℤ l k)
+  (k l : ℤ) → mul-ℤ k l ＝ mul-ℤ l k
 commutative-mul-ℤ (inl zero-ℕ) l = inv (right-neg-unit-law-mul-ℤ l)
 commutative-mul-ℤ (inl (succ-ℕ n)) l =
   ( ap (add-ℤ (neg-ℤ l)) (commutative-mul-ℤ (inl n) l)) ∙
@@ -292,14 +295,14 @@ commutative-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( inv (right-successor-law-mul-ℤ l (in-pos n)))
 
 left-distributive-mul-add-ℤ :
-  (m k l : ℤ) → Id (mul-ℤ m (add-ℤ k l)) (add-ℤ (mul-ℤ m k) (mul-ℤ m l))
+  (m k l : ℤ) → mul-ℤ m (add-ℤ k l) ＝ add-ℤ (mul-ℤ m k) (mul-ℤ m l)
 left-distributive-mul-add-ℤ m k l =
   commutative-mul-ℤ m (add-ℤ k l) ∙
     ( ( right-distributive-mul-add-ℤ k l m) ∙
       ( ap-add-ℤ (commutative-mul-ℤ k m) (commutative-mul-ℤ l m)))
 
 right-negative-law-mul-ℤ :
-  (k l : ℤ) → Id (mul-ℤ k (neg-ℤ l)) (neg-ℤ (mul-ℤ k l))
+  (k l : ℤ) → mul-ℤ k (neg-ℤ l) ＝ neg-ℤ (mul-ℤ k l)
 right-negative-law-mul-ℤ k l =
   ( ( commutative-mul-ℤ k (neg-ℤ l)) ∙
     ( left-negative-law-mul-ℤ l k)) ∙
@@ -312,10 +315,10 @@ interchange-law-mul-mul-ℤ =
     commutative-mul-ℤ
     associative-mul-ℤ
 
-is-mul-neg-one-neg-ℤ : (x : ℤ) → Id (neg-ℤ x) (mul-ℤ neg-one-ℤ x)
+is-mul-neg-one-neg-ℤ : (x : ℤ) → neg-ℤ x ＝ mul-ℤ neg-one-ℤ x
 is-mul-neg-one-neg-ℤ x = refl
 
-is-mul-neg-one-neg-ℤ' : (x : ℤ) → Id (neg-ℤ x) (mul-ℤ x neg-one-ℤ)
+is-mul-neg-one-neg-ℤ' : (x : ℤ) → neg-ℤ x ＝ mul-ℤ x neg-one-ℤ
 is-mul-neg-one-neg-ℤ' x =
   is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
 ```
@@ -334,7 +337,7 @@ is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
 ### Computing multiplication of integers that come from natural numbers
 
 ```agda
-mul-int-ℕ : (x y : ℕ) → Id (mul-ℤ (int-ℕ x) (int-ℕ y)) (int-ℕ (mul-ℕ x y))
+mul-int-ℕ : (x y : ℕ) → mul-ℤ (int-ℕ x) (int-ℕ y) ＝ int-ℕ (mul-ℕ x y)
 mul-int-ℕ zero-ℕ y = refl
 mul-int-ℕ (succ-ℕ x) y =
   ( ap (mul-ℤ' (int-ℕ y)) (inv (succ-int-ℕ x))) ∙
@@ -343,7 +346,7 @@ mul-int-ℕ (succ-ℕ x) y =
         ( add-int-ℕ y (mul-ℕ x y))) ∙
       ( ap int-ℕ (commutative-add-ℕ y (mul-ℕ x y)))))
 
-compute-mul-ℤ : (x y : ℤ) → Id (mul-ℤ x y) (explicit-mul-ℤ x y)
+compute-mul-ℤ : (x y : ℤ) → mul-ℤ x y ＝ explicit-mul-ℤ x y
 compute-mul-ℤ (inl zero-ℕ) (inl y) =
   inv (ap int-ℕ (left-unit-law-mul-ℕ (succ-ℕ y)))
 compute-mul-ℤ (inl (succ-ℕ x)) (inl y) =
@@ -402,13 +405,13 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
 
 ```agda
 linear-diff-ℤ :
-  (z x y : ℤ) → Id (diff-ℤ (mul-ℤ z x) (mul-ℤ z y)) (mul-ℤ z (diff-ℤ x y))
+  (z x y : ℤ) → diff-ℤ (mul-ℤ z x) (mul-ℤ z y) ＝ mul-ℤ z (diff-ℤ x y)
 linear-diff-ℤ z x y =
   ( ap (add-ℤ (mul-ℤ z x)) (inv (right-negative-law-mul-ℤ z y))) ∙
   ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
 
 linear-diff-ℤ' :
-  (x y z : ℤ) → Id (diff-ℤ (mul-ℤ x z) (mul-ℤ y z)) (mul-ℤ (diff-ℤ x y) z)
+  (x y z : ℤ) → diff-ℤ (mul-ℤ x z) (mul-ℤ y z) ＝ mul-ℤ (diff-ℤ x y) z
 linear-diff-ℤ' x y z =
   ( ap (add-ℤ (mul-ℤ x z)) (inv (left-negative-law-mul-ℤ y z))) ∙
   ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))

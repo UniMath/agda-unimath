@@ -1,4 +1,6 @@
-# Equality of integers
+---
+title: Equality of integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -6,10 +8,11 @@
 module elementary-number-theory.equality-integers where
 
 open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-set-ℕ;
-    is-prop-Eq-ℕ)
+  ( has-decidable-equality-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ)
+open import elementary-number-theory.natural-numbers using
+  ( Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-set-ℕ; is-prop-Eq-ℕ)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)
@@ -26,7 +29,7 @@ open import foundation.equivalences using (_≃_; is-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop; eq-is-prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
@@ -56,10 +59,10 @@ refl-Eq-ℤ (inl x) = refl-Eq-ℕ x
 refl-Eq-ℤ (inr (inl x)) = star
 refl-Eq-ℤ (inr (inr x)) = refl-Eq-ℕ x
 
-Eq-eq-ℤ : {x y : ℤ} → Id x y → Eq-ℤ x y
+Eq-eq-ℤ : {x y : ℤ} → x ＝ y → Eq-ℤ x y
 Eq-eq-ℤ {x} {.x} refl = refl-Eq-ℤ x
 
-eq-Eq-ℤ : (x y : ℤ) → Eq-ℤ x y → Id x y
+eq-Eq-ℤ : (x y : ℤ) → Eq-ℤ x y → x ＝ y
 eq-Eq-ℤ (inl x) (inl y) e = ap inl (eq-Eq-ℕ x y e)
 eq-Eq-ℤ (inr (inl star)) (inr (inl star)) e = refl
 eq-Eq-ℤ (inr (inr x)) (inr (inr y)) e = ap (inr ∘ inr) (eq-Eq-ℕ x y e)
@@ -124,11 +127,11 @@ is-prop-Eq-ℤ (inr (inr x)) (inr (inl y)) = is-prop-empty
 is-prop-Eq-ℤ (inr (inr x)) (inr (inr y)) = is-prop-Eq-ℕ x y
 
 Eq-ℤ-eq :
-  {x y : ℤ} → Id x y → Eq-ℤ x y
+  {x y : ℤ} → x ＝ y → Eq-ℤ x y
 Eq-ℤ-eq {x} {.x} refl = refl-Eq-ℤ x
 
 contraction-total-Eq-ℤ :
-  (x : ℤ) (y : Σ ℤ (Eq-ℤ x)) → Id (pair x (refl-Eq-ℤ x)) y
+  (x : ℤ) (y : Σ ℤ (Eq-ℤ x)) → pair x (refl-Eq-ℤ x) ＝ y
 contraction-total-Eq-ℤ (inl x) (pair (inl y) e) =
   eq-pair-Σ
     ( ap inl (eq-Eq-ℕ x y e))

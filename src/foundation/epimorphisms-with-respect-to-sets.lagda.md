@@ -1,4 +1,6 @@
-# Epimorphisms of sets
+---
+title: Epimorphisms with respect to maps into sets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,7 @@ open import foundation.function-extensionality using
   ( eq-htpy; htpy-eq; funext)
 open import foundation.functions using (precomp; _∘_)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (inv; ap; _∙_; Id; refl)
+open import foundation.identity-types using (inv; ap; _∙_; _＝_; refl)
 open import foundation.injective-maps using
   ( is-emb-is-injective; is-injective-is-emb)
 open import foundation.propositional-extensionality using
@@ -94,5 +96,5 @@ abstract
     g : B → UU-Prop (l1 ⊔ l2)
     g y = raise-unit-Prop (l1 ⊔ l2)
     h : B → UU-Prop (l1 ⊔ l2)
-    h y = ∃-Prop (λ x → Id (f x) y)
+    h y = ∃-Prop A (λ x → f x ＝ y)
 ```

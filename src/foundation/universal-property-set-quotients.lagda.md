@@ -1,4 +1,6 @@
-# The universal property of set quotients
+---
+title: The universal property of set quotients
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -17,13 +19,13 @@ open import foundation.embeddings using (_↪_; map-emb; equiv-ap-emb; is-emb)
 open import foundation.epimorphisms-with-respect-to-sets using
   ( is-epimorphism-is-surjective-Set)
 open import foundation.equivalence-classes using
-  ( large-set-quotient; quotient-map-large-set-quotient;
-    apply-effectiveness-quotient-map-large-set-quotient';
-    is-effective-quotient-map-large-set-quotient; large-quotient-Set;
-    quotient-reflecting-map-large-set-quotient;
-    is-surjective-and-effective-quotient-map-large-set-quotient)
+  ( equivalence-class; class;
+    apply-effectiveness-class';
+    is-effective-class; equivalence-class-Set;
+    quotient-reflecting-map-equivalence-class;
+    is-surjective-and-effective-class)
 open import foundation.equivalence-relations using
-  ( Eq-Rel; type-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
+  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse; is-equiv-comp;
     is-equiv-precomp-is-equiv; is-equiv-left-factor; map-equiv;
@@ -39,7 +41,7 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using
   ( _~_; refl-htpy; is-contr-total-htpy; inv-htpy; _·l_; _∙h_)
 open import foundation.identity-types using
-  ( Id; ap; _∙_; inv; refl; convert-eq-values; tr; inv-tr)
+  ( _＝_; ap; _∙_; inv; refl; convert-eq-values; tr; inv-tr)
 open import foundation.images using
   ( emb-im; map-unit-im; is-emb-inclusion-im; triangle-unit-im; im; is-set-im;
     inclusion-im)
@@ -128,7 +130,7 @@ module _
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
-  precomp-id-Set-Quotient : Id (precomp-Set-Quotient R B f B id) f
+  precomp-id-Set-Quotient : precomp-Set-Quotient R B f B id ＝ f
   precomp-id-Set-Quotient =
     eq-htpy-reflecting-map-Eq-Rel R B
       ( precomp-Set-Quotient R B f B id)
@@ -217,7 +219,7 @@ module _
       ({l : Level} → is-image l (prop-Eq-Rel R) i (pair q T)) →
       is-effective R q
     is-effective-is-image i T H x y =
-      ( is-effective-quotient-map-large-set-quotient R x y) ∘e
+      ( is-effective-class R x y) ∘e
       ( ( inv-equiv (equiv-ap-emb (emb-im (prop-Eq-Rel R)))) ∘e
         ( ( inv-equiv (convert-eq-values T x y)) ∘e
           ( equiv-ap-emb i)))
@@ -239,15 +241,15 @@ module _
     is-locally-small-is-surjective-and-effective e x y =
       apply-universal-property-trunc-Prop
         ( pr1 e x)
-        ( is-small-Prop l2 (Id x y))
+        ( is-small-Prop l2 (x ＝ y))
         ( λ u →
           apply-universal-property-trunc-Prop
             ( pr1 e y)
-            ( is-small-Prop l2 (Id x y))
+            ( is-small-Prop l2 (x ＝ y))
             ( α u))
       where
-      α : fib q x → fib q y → is-small l2 (Id x y)
-      pr1 (α (pair a refl) (pair b refl)) = type-Eq-Rel R a b
+      α : fib q x → fib q y → is-small l2 (x ＝ y)
+      pr1 (α (pair a refl) (pair b refl)) = sim-Eq-Rel R a b
       pr2 (α (pair a refl) (pair b refl)) = pr2 e a b
 
   large-map-emb-is-surjective-and-effective :
@@ -303,8 +305,8 @@ module _
             ( α p))
       where
       α : {x y : type-Set B}
-          (p : Id ( map-emb-is-surjective-and-effective H x)
-                  ( map-emb-is-surjective-and-effective H y)) →
+          (p : ( map-emb-is-surjective-and-effective H x) ＝
+               ( map-emb-is-surjective-and-effective H y)) →
           fib q y → type-Prop (Id-Prop B x y)
       α {x} p (pair a refl) =
         map-inv-equiv
@@ -338,8 +340,8 @@ module _
             ( α p))
       where
       α : {x y : type-Set B}
-          (p : Id ( large-map-emb-is-surjective-and-effective e x)
-                  ( large-map-emb-is-surjective-and-effective e y)) →
+          (p : ( large-map-emb-is-surjective-and-effective e x) ＝ 
+               ( large-map-emb-is-surjective-and-effective e y)) →
           fib q y → type-Prop (Id-Prop B x y)
       α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
   
@@ -437,7 +439,7 @@ module _
                 ( λ s → trans-Eq-Rel R s (symm-Eq-Rel R r)))
       P : type-Set B → UU-Prop l2
       P = map-inv-is-equiv (Q (UU-Prop-Set l2)) α
-      compute-P : (a : A) → type-Eq-Rel R x a ≃ type-Prop (P (q a))
+      compute-P : (a : A) → sim-Eq-Rel R x a ≃ type-Prop (P (q a))
       compute-P a =
         equiv-eq
           ( ap pr1
@@ -450,7 +452,7 @@ module _
       center-total-P : Σ (type-Set B) (λ b → type-Prop (P b))
       center-total-P = pair (q x) point-P
       contraction-total-P :
-        (u : Σ (type-Set B) (λ b → type-Prop (P b))) → Id center-total-P u
+        (u : Σ (type-Set B) (λ b → type-Prop (P b))) → center-total-P ＝ u
       contraction-total-P (pair b p) =
         eq-subtype P
           ( apply-universal-property-trunc-Prop
@@ -463,11 +465,11 @@ module _
               ( pr2 v)))
       is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
       is-contr-total-P = pair center-total-P contraction-total-P
-      β : (b : type-Set B) → Id (q x) b → type-Prop (P b)
+      β : (b : type-Set B) → q x ＝ b → type-Prop (P b)
       β .(q x) refl = point-P
       γ : (b : type-Set B) → is-equiv (β b)
       γ = fundamental-theorem-id (q x) point-P is-contr-total-P β
-      δ : (b : type-Set B) → Id (q x) b ≃ type-Prop (P b)
+      δ : (b : type-Set B) → (q x ＝ b) ≃ type-Prop (P b)
       δ b = pair (β b) (γ b)
 
   abstract
@@ -497,7 +499,7 @@ module _
       
       P-Prop : (b : type-Set B) (x : type-Set X) → UU-Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
-        ∃-Prop (λ a → (Id (map-reflecting-map-Eq-Rel R f a) x) × (Id (q a) b))
+        ∃-Prop A (λ a → (map-reflecting-map-Eq-Rel R f a ＝ x) × (q a ＝ b))
 
       P : (b : type-Set B) (x : type-Set X) → UU (l1 ⊔ l3 ⊔ l)
       P b x = type-Prop (P-Prop b x)
@@ -538,8 +540,8 @@ module _
           ( λ a → pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
           
       β : (a : A) →
-          Id ( α (q a))
-             ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
+          ( α (q a)) ＝
+          ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
       β = htpy-eq
             ( issec-map-inv-is-equiv
               ( dependent-universal-property-surj-is-surjective q
@@ -588,39 +590,39 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
   
-  universal-property-large-set-quotient :
+  universal-property-equivalence-class :
     {l : Level} →
     universal-property-set-quotient l R
-      ( large-quotient-Set R)
-      ( quotient-reflecting-map-large-set-quotient R)
-  universal-property-large-set-quotient =
+      ( equivalence-class-Set R)
+      ( quotient-reflecting-map-equivalence-class R)
+  universal-property-equivalence-class =
     universal-property-set-quotient-is-surjective-and-effective R
-      ( large-quotient-Set R)
-      ( quotient-map-large-set-quotient R)
-      ( is-surjective-and-effective-quotient-map-large-set-quotient R)
+      ( equivalence-class-Set R)
+      ( class R)
+      ( is-surjective-and-effective-class R)
 
-  is-set-quotient-large-set-quotient :
+  is-set-quotient-equivalence-class :
     {l : Level} →
     is-set-quotient l R
-      ( large-quotient-Set R)
-      ( quotient-reflecting-map-large-set-quotient R)
-  is-set-quotient-large-set-quotient =
+      ( equivalence-class-Set R)
+      ( quotient-reflecting-map-equivalence-class R)
+  is-set-quotient-equivalence-class =
     is-set-quotient-universal-property-set-quotient R
-      ( large-quotient-Set R)
-      ( quotient-reflecting-map-large-set-quotient R)
-      ( universal-property-large-set-quotient)
+      ( equivalence-class-Set R)
+      ( quotient-reflecting-map-equivalence-class R)
+      ( universal-property-equivalence-class)
 
-  map-universal-property-large-set-quotient :
+  map-universal-property-equivalence-class :
     {l4 : Level} (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
-    large-set-quotient R → type-Set C
-  map-universal-property-large-set-quotient C g =
-    pr1 (center (universal-property-large-set-quotient C g))
+    equivalence-class R → type-Set C
+  map-universal-property-equivalence-class C g =
+    pr1 (center (universal-property-equivalence-class C g))
   
-  triangle-universal-property-large-set-quotient :
+  triangle-universal-property-equivalence-class :
     {l4 : Level} (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
-    ( ( map-universal-property-large-set-quotient C g) ∘
-      ( quotient-map-large-set-quotient R)) ~
+    ( ( map-universal-property-equivalence-class C g) ∘
+      ( class R)) ~
     ( map-reflecting-map-Eq-Rel R g)
-  triangle-universal-property-large-set-quotient C g =
-    pr2 (center (universal-property-large-set-quotient C g))
+  triangle-universal-property-equivalence-class C g =
+    pr2 (center (universal-property-equivalence-class C g))
 ```

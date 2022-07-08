@@ -1,4 +1,6 @@
-# The rational numbers
+---
+title: The rational numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -19,7 +21,7 @@ open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; inv)
+open import foundation.identity-types using (_＝_; inv)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -46,10 +48,10 @@ int-reduce-numerator-fractions-ℤ x = pr1 (reduce-numerator-fractions-ℤ x)
 
 eq-reduce-numerator-fractions-ℤ :
   (x : fractions-ℤ) →
-  Id ( mul-ℤ
-       ( int-reduce-numerator-fractions-ℤ x)
-       ( gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)))
-     ( numerator-fractions-ℤ x)
+  ( mul-ℤ
+    ( int-reduce-numerator-fractions-ℤ x)
+    ( gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x))) ＝
+  ( numerator-fractions-ℤ x)
 eq-reduce-numerator-fractions-ℤ x = pr2 (reduce-numerator-fractions-ℤ x)
 
 reduce-denominator-fractions-ℤ :
@@ -64,10 +66,10 @@ int-reduce-denominator-fractions-ℤ x =
 
 eq-reduce-denominator-fractions-ℤ :
   (x : fractions-ℤ) →
-  Id ( mul-ℤ
-       ( int-reduce-denominator-fractions-ℤ x)
-       ( gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x)))
-     ( denominator-fractions-ℤ x)
+  ( mul-ℤ
+    ( int-reduce-denominator-fractions-ℤ x)
+    ( gcd-ℤ (numerator-fractions-ℤ x) (denominator-fractions-ℤ x))) ＝
+  ( denominator-fractions-ℤ x)
 eq-reduce-denominator-fractions-ℤ x =
   pr2 (reduce-denominator-fractions-ℤ x)
 

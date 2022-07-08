@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Inequality of integers
 ---
-
-# Inequality of integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -23,7 +21,7 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.empty-types using (empty)
 open import foundation.functions using (id)
 open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (Id; refl; _∙_; inv; tr; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; tr; ap)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -37,7 +35,7 @@ leq-ℤ x y = is-nonnegative-ℤ (diff-ℤ y x)
 refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
 refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
 
-antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → Id x y
+antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
 antisymmetric-leq-ℤ {x} {y} H K =
   eq-diff-ℤ
     ( is-zero-is-nonnegative-ℤ K
@@ -75,15 +73,15 @@ leq-ℤ-succ-leq-ℤ k l p = trans-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
 -- Bureaucracy
 
 concatenate-eq-leq-eq-ℤ :
-  {x' x y y' : ℤ} → Id x' x → leq-ℤ x y → Id y y' → leq-ℤ x' y'
+  {x' x y y' : ℤ} → x' ＝ x → leq-ℤ x y → y ＝ y' → leq-ℤ x' y'
 concatenate-eq-leq-eq-ℤ refl H refl = H
 
 concatenate-leq-eq-ℤ :
-  (x : ℤ) {y y' : ℤ} → leq-ℤ x y → Id y y' → leq-ℤ x y'
+  (x : ℤ) {y y' : ℤ} → leq-ℤ x y → y ＝ y' → leq-ℤ x y'
 concatenate-leq-eq-ℤ x H refl = H
 
 concatenate-eq-leq-ℤ :
-  {x x' : ℤ} (y : ℤ) → Id x' x → leq-ℤ x y → leq-ℤ x' y
+  {x x' : ℤ} (y : ℤ) → x' ＝ x → leq-ℤ x y → leq-ℤ x' y
 concatenate-eq-leq-ℤ y refl H = H
 ```
 

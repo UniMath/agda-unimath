@@ -1,4 +1,6 @@
-# The universal property of the empty type
+---
+title: The universal property of the empty type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Global choice
+---
+title: Global choice
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,7 @@ module foundation.global-choice where
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (map-equiv)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.hilberts-epsilon-operators using
   ( ε-operator-Hilbert)
 open import foundation.negation using (¬)
@@ -46,5 +48,5 @@ abstract
   no-global-choice f =
     no-section-type-UU-Fin-Level-two-ℕ
       ( λ X →
-        f (pr1 X) (functor-trunc-Prop (λ e → map-equiv e zero-Fin) (pr2 X)))
+        f (pr1 X) (map-trunc-Prop (λ e → map-equiv e (zero-Fin 1)) (pr2 X)))
 ```

@@ -30,7 +30,7 @@ open import foundation.functoriality-dependent-function-types using
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.functoriality-set-truncation using
-  ( equiv-trunc-Set; map-equiv-trunc-Set; naturality-trunc-Set)
+  ( equiv-trunc-Set; map-equiv-trunc-Set; naturality-unit-trunc-Set)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using
   ( Id; equiv-concat; ap; _∙_; equiv-concat'; inv)
@@ -50,10 +50,8 @@ open import foundation.universal-property-maybe using
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set)
 open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
 ```
 
 ```agda
@@ -231,7 +229,8 @@ module _
                         ( equiv-concat
                           ( ap
                             ( λ t → map-equiv f t x)
-                            ( ( naturality-trunc-Set (precomp-Π (map-equiv e) B)
+                            ( ( naturality-unit-trunc-Set
+                                ( precomp-Π (map-equiv e) B)
                                 ( map-equiv-Π B e (λ _ → id-equiv) h)) ∙
                               ( ap
                                 ( unit-trunc-Set)

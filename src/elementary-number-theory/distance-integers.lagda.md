@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The distance between integers
 ---
-
-# The distance between integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -17,27 +15,28 @@ open import elementary-number-theory.distance-natural-numbers using (dist-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; int-ℕ; succ-int-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types using
+  (_＝_; refl; _∙_; inv; ap; ap-binary)
 ```
 
-# Distance between integers
+## Definition
 
 ```agda
 dist-ℤ : ℤ → ℤ → ℕ
 dist-ℤ x y = abs-ℤ (diff-ℤ x y)
 
 ap-dist-ℤ :
-  {x x' y y' : ℤ} (p : Id x x') (q : Id y y') → Id (dist-ℤ x y) (dist-ℤ x' y')
+  {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → dist-ℤ x y ＝ dist-ℤ x' y'
 ap-dist-ℤ p q = ap-binary dist-ℤ p q
 
-left-zero-law-dist-ℤ : (x : ℤ) → Id (dist-ℤ zero-ℤ x) (abs-ℤ x)
+left-zero-law-dist-ℤ : (x : ℤ) → dist-ℤ zero-ℤ x ＝ abs-ℤ x
 left-zero-law-dist-ℤ x = ap abs-ℤ (left-zero-law-diff-ℤ x) ∙ abs-neg-ℤ x
 
-right-zero-law-dist-ℤ : (x : ℤ) → Id (dist-ℤ x zero-ℤ) (abs-ℤ x)
+right-zero-law-dist-ℤ : (x : ℤ) → dist-ℤ x zero-ℤ ＝ abs-ℤ x
 right-zero-law-dist-ℤ x = ap abs-ℤ (right-zero-law-diff-ℤ x)
 
 dist-int-ℕ :
-  (x y : ℕ) → Id (dist-ℤ (int-ℕ x) (int-ℕ y)) (dist-ℕ x y)
+  (x y : ℕ) → dist-ℤ (int-ℕ x) (int-ℕ y) ＝ dist-ℕ x y
 dist-int-ℕ zero-ℕ zero-ℕ = refl
 dist-int-ℕ zero-ℕ (succ-ℕ y) = left-zero-law-dist-ℤ (int-ℕ (succ-ℕ y))
 dist-int-ℕ (succ-ℕ x) zero-ℕ = right-zero-law-dist-ℤ (int-ℕ (succ-ℕ x))

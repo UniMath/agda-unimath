@@ -1,4 +1,6 @@
-# Coherently invertible maps
+---
+title: Coherently invertible maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -13,7 +13,7 @@ open import foundation.universe-levels using (Level; _⊔_)
 open import group-theory.group-actions using
   ( Abstract-Group-Action; type-Abstract-Group-Action;
     mul-Abstract-Group-Action)
-open import group-theory.groups using (Group)
+open import group-theory.groups using (Group; type-Group)
 ```
 
 ## Idea
@@ -34,5 +34,5 @@ module _
       ( λ x →
         Π-Prop
           ( type-Abstract-Group-Action G X)
-          ( λ y → ∃-Prop (λ g → Id (mul-Abstract-Group-Action G X g x) y)))
+          ( λ y → ∃-Prop (type-Group G) (λ g → Id (mul-Abstract-Group-Action G X g x) y)))
 ```

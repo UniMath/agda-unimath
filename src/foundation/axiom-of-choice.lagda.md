@@ -1,4 +1,6 @@
-# The axiom of choice
+---
+title: The axiom of choice
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

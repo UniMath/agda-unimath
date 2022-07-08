@@ -1,4 +1,6 @@
-# Binary equivalences
+---
+title: Binary equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
