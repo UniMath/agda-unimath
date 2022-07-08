@@ -14,7 +14,7 @@ open import foundation.booleans using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr; eq-is-contr)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr)
+  ( _+_; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -95,20 +95,20 @@ module _
   
   split-decidable-Prop :
     decidable-Prop l ≃
-    coprod (Σ (UU-Prop l) type-Prop) (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q)))
+    ((Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q))))
   split-decidable-Prop =
     ( left-distributive-Σ-coprod (UU-Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
     ( inv-assoc-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
 
   map-equiv-bool-decidable-Prop' :
-    coprod (Σ (UU-Prop l) type-Prop) (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q))) →
+    (Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q))) →
     bool
   map-equiv-bool-decidable-Prop' (inl x) = true
   map-equiv-bool-decidable-Prop' (inr x) = false
 
   map-inv-equiv-bool-decidable-Prop' :
     bool →
-    coprod (Σ (UU-Prop l) type-Prop) (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q)))
+    (Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q)))
   map-inv-equiv-bool-decidable-Prop' true =
     inl (pair (raise-unit-Prop l) raise-star)
   map-inv-equiv-bool-decidable-Prop' false =
@@ -135,7 +135,7 @@ module _
       isretr-map-inv-equiv-bool-decidable-Prop'
 
   equiv-bool-decidable-Prop' :
-    coprod (Σ (UU-Prop l) type-Prop) (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q))) ≃
+    ((Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q)))) ≃
     bool
   pr1 equiv-bool-decidable-Prop' = map-equiv-bool-decidable-Prop'
   pr2 equiv-bool-decidable-Prop' = is-equiv-map-equiv-bool-decidable-Prop'

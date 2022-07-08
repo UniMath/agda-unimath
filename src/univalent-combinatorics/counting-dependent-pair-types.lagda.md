@@ -16,7 +16,7 @@ open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-Fin-ℕ; sum-count-ℕ)
 
 open import foundation.contractible-types using (is-contr-total-path')
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
@@ -180,7 +180,7 @@ section-count-base-count-Σ' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → count (Σ A B) →
   (f : (x : A) → count (B x)) →
   count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))) →
-  (x : A) → coprod (B x) (is-zero-ℕ (number-of-elements-count (f x)))
+  (x : A) → (B x) + (is-zero-ℕ (number-of-elements-count (f x)))
 section-count-base-count-Σ' e f g x with
   is-decidable-is-zero-ℕ (number-of-elements-count (f x))
 ... | inl p = inr p

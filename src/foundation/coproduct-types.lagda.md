@@ -34,14 +34,14 @@ The coproduct of two types `A` and `B` can be thought of as the disjoint union o
 ### Coproducts
 
 ```agda
-data coprod {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)  where
-  inl : A → coprod A B
-  inr : B → coprod A B
-
+data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)  where
+  inl : A → A + B
+  inr : B → A + B
+  
 ind-coprod :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : coprod A B → UU l3) →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3) →
   ((x : A) → C (inl x)) → ((y : B) → C (inr y)) →
-  (t : coprod A B) → C t
+  (t : A + B) → C t
 ind-coprod C f g (inl x) = f x
 ind-coprod C f g (inr x) = g x
 ```
@@ -53,24 +53,24 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
   
-  is-left-Prop : coprod X Y → UU-Prop lzero
+  is-left-Prop : X + Y → UU-Prop lzero
   is-left-Prop (inl x) = unit-Prop
   is-left-Prop (inr x) = empty-Prop
 
-  is-left : coprod X Y → UU lzero
+  is-left : X + Y → UU lzero
   is-left x = type-Prop (is-left-Prop x)
 
-  is-prop-is-left : (x : coprod X Y) → is-prop (is-left x)
+  is-prop-is-left : (x : X + Y) → is-prop (is-left x)
   is-prop-is-left x = is-prop-type-Prop (is-left-Prop x)
 
-  is-right-Prop : coprod X Y → UU-Prop lzero
+  is-right-Prop : X + Y → UU-Prop lzero
   is-right-Prop (inl x) = empty-Prop
   is-right-Prop (inr x) = unit-Prop
 
-  is-right : coprod X Y → UU lzero
+  is-right : X + Y → UU lzero
   is-right x = type-Prop (is-right-Prop x)
 
-  is-prop-is-right : (x : coprod X Y) → is-prop (is-right x)
+  is-prop-is-right : (x : X + Y) → is-prop (is-right x)
   is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
 ```
 
@@ -83,10 +83,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-injective-inl : is-injective {B = coprod A B} inl
+  is-injective-inl : is-injective {B = A + B} inl
   is-injective-inl refl = refl
 
-  is-injective-inr : is-injective {B = coprod A B} inr
+  is-injective-inr : is-injective {B = A + B} inr
   is-injective-inr refl = refl 
 
   neq-inl-inr : {x : A} {y : B} → ¬ (inl x ＝ inr y)
@@ -103,11 +103,11 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  map-equiv-left-summand : Σ (coprod X Y) is-left → X
+  map-equiv-left-summand : Σ (X + Y) is-left → X
   map-equiv-left-summand (pair (inl x) star) = x
   map-equiv-left-summand (pair (inr x) ())
 
-  map-inv-equiv-left-summand : X → Σ (coprod X Y) is-left
+  map-inv-equiv-left-summand : X → Σ (X + Y) is-left
   map-inv-equiv-left-summand x = pair (inl x) star
 
   issec-map-inv-equiv-left-summand :
@@ -119,7 +119,7 @@ module _
   isretr-map-inv-equiv-left-summand (pair (inl x) star) = refl
   isretr-map-inv-equiv-left-summand (pair (inr x) ())
   
-  equiv-left-summand : (Σ (coprod X Y) is-left) ≃ X
+  equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
   pr2 equiv-left-summand =
     is-equiv-has-inverse
@@ -135,11 +135,11 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  map-equiv-right-summand : Σ (coprod X Y) is-right → Y
+  map-equiv-right-summand : Σ (X + Y) is-right → Y
   map-equiv-right-summand (pair (inl x) ())
   map-equiv-right-summand (pair (inr x) star) = x
 
-  map-inv-equiv-right-summand : Y → Σ (coprod X Y) is-right
+  map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
   map-inv-equiv-right-summand y = pair (inr y) star
 
   issec-map-inv-equiv-right-summand :
@@ -151,7 +151,7 @@ module _
   isretr-map-inv-equiv-right-summand (pair (inl x) ())
   isretr-map-inv-equiv-right-summand (pair (inr x) star) = refl
   
-  equiv-right-summand : (Σ (coprod X Y) is-right) ≃ Y
+  equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
     is-equiv-has-inverse
@@ -169,7 +169,7 @@ module _
 
   abstract
     is-not-contractible-coprod-is-contr :
-      is-contr A → is-contr B → is-not-contractible (coprod A B)
+      is-contr A → is-contr B → is-not-contractible (A + B)
     is-not-contractible-coprod-is-contr HA HB HAB =
       neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr  HAB)
 ```
@@ -184,7 +184,7 @@ module _
   abstract
     all-elements-equal-coprod :
       (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
-      all-elements-equal (coprod P Q)
+      all-elements-equal (P + Q)
     all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inl p') =
       ap inl (is-prop-P p p')
     all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inr q') =
@@ -195,7 +195,7 @@ module _
       ap inr (is-prop-Q q q')
   
   abstract
-    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (coprod P Q)
+    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (P + Q)
     is-prop-coprod f is-prop-P is-prop-Q =
       is-prop-all-elements-equal
         ( all-elements-equal-coprod f
@@ -205,7 +205,7 @@ module _
 coprod-Prop :
   {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
   (type-Prop P → ¬ (type-Prop Q)) → UU-Prop (l1 ⊔ l2)
-pr1 (coprod-Prop P Q H) = coprod (type-Prop P) (type-Prop Q)
+pr1 (coprod-Prop P Q H) = type-Prop P + type-Prop Q
 pr2 (coprod-Prop P Q H) =
   is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```

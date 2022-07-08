@@ -11,7 +11,7 @@ open import foundation.decidable-propositions public
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)

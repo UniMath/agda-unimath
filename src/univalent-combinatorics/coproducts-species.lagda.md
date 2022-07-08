@@ -32,7 +32,7 @@ The coproduct of two species `F` and `G` is the pointwise coproduct.
 ```agda
 coprod-species :
   {l1 l2 : Level} (F : species l1) (G : species l2) (X : 𝔽) → UU (l1 ⊔ l2)
-coprod-species F G X = coprod (F X) (G X)
+coprod-species F G X = F X + G X
 ```
 
 ## Universal properties

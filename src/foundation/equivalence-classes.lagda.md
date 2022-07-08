@@ -8,7 +8,7 @@ title: Equivalence classes
 module foundation.equivalence-classes where
 
 open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable; is-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)

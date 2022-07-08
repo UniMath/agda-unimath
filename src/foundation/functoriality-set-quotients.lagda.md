@@ -11,7 +11,8 @@ open import foundation.commuting-squares using
   ( coherence-square; coherence-square-comp-horizontal)
 open import foundation.contractible-types using
   ( is-contr; center; eq-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr; neq-inr-inl)
+open import foundation.coproduct-types using
+  ( inl; inr; neq-inl-inr; neq-inr-inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)

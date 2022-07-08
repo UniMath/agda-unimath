@@ -9,7 +9,7 @@ module univalent-combinatorics.decidable-dependent-pair-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-dependent-pair-types using
   ( is-decidable-Σ-equiv)
 open import foundation.decidable-types using

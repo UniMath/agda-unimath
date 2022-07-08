@@ -15,7 +15,7 @@ open import elementary-number-theory.natural-numbers using
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
 
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
+open import foundation.coproduct-types using (_+_; inl; inr; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
@@ -256,7 +256,7 @@ is-one-Fin : (k : ℕ) → Fin k → UU lzero
 is-one-Fin (succ-ℕ k) x = Id x (one-Fin k)
 
 is-zero-or-one-Fin-two-ℕ :
-  (x : Fin 2) → coprod (is-zero-Fin 2 x) (is-one-Fin 2 x)
+  (x : Fin 2) → (is-zero-Fin 2 x) + (is-one-Fin 2 x)
 is-zero-or-one-Fin-two-ℕ (inl (inr star)) = inl refl
 is-zero-or-one-Fin-two-ℕ (inr star) = inr refl
 

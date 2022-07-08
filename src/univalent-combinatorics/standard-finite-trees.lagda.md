@@ -12,7 +12,6 @@ open import elementary-number-theory.sums-of-natural-numbers using (sum-Fin-ℕ)
 open import elementary-number-theory.maximum-natural-numbers using (max-Fin-ℕ)
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod)
 open import foundation.empty-types using (ex-falso; empty)
 open import foundation.identity-types using (Id)
 open import foundation.unit-type using (unit)

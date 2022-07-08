@@ -9,8 +9,7 @@ module elementary-number-theory.repeating-element-standard-finite-type where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl)
+open import foundation.coproduct-types using (inl; inr; is-injective-inl)
 open import foundation.empty-types using (ex-falso)
 open import foundation.identity-types using (_＝_; ap; refl; inv)
 open import foundation.negation using (¬)

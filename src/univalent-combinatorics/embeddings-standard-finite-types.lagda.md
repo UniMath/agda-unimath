@@ -13,7 +13,7 @@ open import
   ( repeat-Fin; is-almost-injective-repeat-Fin)
 
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl)
+  ( inl; inr; is-injective-inl)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb; is-emb-map-emb; is-emb)

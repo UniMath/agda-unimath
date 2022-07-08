@@ -7,7 +7,7 @@ title: Equivalences on Maybe
 
 module foundation.equivalences-maybe where
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.empty-types using (ex-falso)

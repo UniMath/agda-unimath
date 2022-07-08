@@ -336,7 +336,7 @@ module _
   
   cone-descent-coprod :
     (cone-A' : cone f i A') (cone-B' : cone g i B') →
-    cone (ind-coprod _ f g) i (coprod A' B')
+    cone (ind-coprod _ f g) i (A' + B')
   pr1 (cone-descent-coprod (pair h (pair f' H)) (pair k (pair g' K))) =
     map-coprod h k
   pr1
