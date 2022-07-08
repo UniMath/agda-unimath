@@ -11,21 +11,20 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-total-path)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
-  ( _↪_; map-emb; equiv-ap-emb; is-emb; is-emb-map-emb)
+  ( _↪_; map-emb; equiv-ap-emb; is-emb; is-emb-map-emb; emb-Σ)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-map-equiv; is-equiv; map-inv-is-equiv;
     map-inv-equiv; is-equiv-map-inv-equiv; issec-map-inv-equiv;
     isretr-map-inv-equiv; is-equiv-has-inverse; emb-equiv)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.injective-maps using (is-injective-is-equiv)
 open import foundation.negation using (¬; is-prop-neg; equiv-neg)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.truncated-maps using (emb-Σ)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -38,7 +37,7 @@ Pairs of distinct elements in a type `A` consist of two elements `x` and `y` of 
 ```agda
 pair-of-distinct-elements : {l : Level} → UU l → UU l
 pair-of-distinct-elements A =
-  Σ A (λ x → Σ A (λ y → ¬ (Id x y)))
+  Σ A (λ x → Σ A (λ y → ¬ (x ＝ y)))
 
 module _
   {l : Level} {A : UU l} (p : pair-of-distinct-elements A)
@@ -51,7 +50,7 @@ module _
   snd-pair-of-distinct-elements = pr1 (pr2 p)
 
   distinction-pair-of-distinct-elements :
-    ¬ (Id fst-pair-of-distinct-elements snd-pair-of-distinct-elements)
+    ¬ (fst-pair-of-distinct-elements ＝ snd-pair-of-distinct-elements)
   distinction-pair-of-distinct-elements = pr2 (pr2 p)
 ```
 
@@ -67,8 +66,8 @@ module _
   Eq-pair-of-distinct-elements :
     (p q : pair-of-distinct-elements A) → UU l
   Eq-pair-of-distinct-elements p q =
-    Id (fst-pair-of-distinct-elements p) (fst-pair-of-distinct-elements q) ×
-    Id (snd-pair-of-distinct-elements p) (snd-pair-of-distinct-elements q)
+    (fst-pair-of-distinct-elements p ＝ fst-pair-of-distinct-elements q) ×
+    (snd-pair-of-distinct-elements p ＝ snd-pair-of-distinct-elements q)
 
   refl-Eq-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) → Eq-pair-of-distinct-elements p p
@@ -77,7 +76,7 @@ module _
 
   Eq-eq-pair-of-distinct-elements :
     (p q : pair-of-distinct-elements A) →
-    Id p q → Eq-pair-of-distinct-elements p q
+    p ＝ q → Eq-pair-of-distinct-elements p q
   Eq-eq-pair-of-distinct-elements p .p refl =
     refl-Eq-pair-of-distinct-elements p
 
@@ -86,7 +85,7 @@ module _
     is-contr (Σ (pair-of-distinct-elements A) (Eq-pair-of-distinct-elements p))
   is-contr-total-Eq-pair-of-distinct-elements p =
     is-contr-total-Eq-structure
-      ( λ x ynp α → Id (snd-pair-of-distinct-elements p) (pr1 ynp))
+      ( λ x ynp α → snd-pair-of-distinct-elements p ＝ pr1 ynp)
       ( is-contr-total-path (fst-pair-of-distinct-elements p))
       ( pair (fst-pair-of-distinct-elements p) refl)
       ( is-contr-total-Eq-subtype
@@ -107,9 +106,9 @@ module _
 
   eq-Eq-pair-of-distinct-elements :
     {p q : pair-of-distinct-elements A} →
-    Id (fst-pair-of-distinct-elements p) (fst-pair-of-distinct-elements q) →
-    Id (snd-pair-of-distinct-elements p) (snd-pair-of-distinct-elements q) →
-    Id p q
+    fst-pair-of-distinct-elements p ＝ fst-pair-of-distinct-elements q →
+    snd-pair-of-distinct-elements p ＝ snd-pair-of-distinct-elements q →
+    p ＝ q
   eq-Eq-pair-of-distinct-elements {p} {q} α β =
     map-inv-is-equiv (is-equiv-Eq-eq-pair-of-distinct-elements p q) (pair α β)
   
@@ -144,9 +143,9 @@ module _
 
   issec-map-inv-equiv-pair-of-distinct-elements :
     (q : pair-of-distinct-elements B) →
-    Id ( map-equiv-pair-of-distinct-elements
-         ( map-inv-equiv-pair-of-distinct-elements q))
-       ( q)
+    ( map-equiv-pair-of-distinct-elements
+      ( map-inv-equiv-pair-of-distinct-elements q)) ＝
+    ( q)
   issec-map-inv-equiv-pair-of-distinct-elements q =
     eq-Eq-pair-of-distinct-elements
       ( issec-map-inv-equiv e (fst-pair-of-distinct-elements q))
@@ -154,9 +153,9 @@ module _
 
   isretr-map-inv-equiv-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) →
-    Id ( map-inv-equiv-pair-of-distinct-elements
-         ( map-equiv-pair-of-distinct-elements p))
-       ( p)
+    ( map-inv-equiv-pair-of-distinct-elements
+      ( map-equiv-pair-of-distinct-elements p)) ＝
+    ( p)
   isretr-map-inv-equiv-pair-of-distinct-elements p =
     eq-Eq-pair-of-distinct-elements
       ( isretr-map-inv-equiv e (fst-pair-of-distinct-elements p))
@@ -188,11 +187,11 @@ module _
     pair-of-distinct-elements A ↪ pair-of-distinct-elements B
   emb-pair-of-distinct-elements =
     emb-Σ
-      ( λ x → Σ B (λ y → ¬ (Id x y)))
+      ( λ x → Σ B (λ y → ¬ (x ＝ y)))
       ( e)
       ( λ x →
         emb-Σ
-          ( λ y → ¬ (Id (map-emb e x) y))
+          ( λ y → ¬ (map-emb e x ＝ y))
           ( e)
           ( λ y → emb-equiv (equiv-neg (equiv-ap-emb e))))
 

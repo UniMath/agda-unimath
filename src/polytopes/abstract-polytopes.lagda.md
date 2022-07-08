@@ -95,15 +95,17 @@ diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
         ( λ x →
           Π-Prop
             ( face-Finitely-Graded-Poset X
-              ( succ-Fin (succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
+              ( succ-Fin
+                ( succ-ℕ (succ-ℕ k))
+                ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) (inl-Fin k i)))))
             ( λ y →
               has-cardinality-Prop 2
                 ( Σ ( face-Finitely-Graded-Poset X
-                      ( succ-Fin (inl-Fin (succ-ℕ k) (inl-Fin k i))))
+                      ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) (inl-Fin k i))))
                     ( λ z →
                       adjacent-Finitely-Graded-Poset X (inl-Fin k i) x z ×
                       adjacent-Finitely-Graded-Poset X
-                        ( succ-Fin (inl-Fin k i))
+                        ( succ-Fin (succ-ℕ k) (inl-Fin k i))
                         ( z)
                         ( y))))))
 
@@ -182,7 +184,7 @@ module _
 
   module _
     (i : Fin k) (y : face-Prepolytope (inl-Fin k i))
-    (z : face-Prepolytope (succ-Fin (inl-Fin k i)))
+    (z : face-Prepolytope (succ-Fin (succ-ℕ k) (inl-Fin k i)))
     where
 
     adjancent-prepolytope-Prop : UU-Prop l2
@@ -245,7 +247,7 @@ module _
   cons-path-faces-Prepolytope :
     {i : Fin (succ-ℕ k)} {x : face-Prepolytope i}
     {j : Fin k} {y : face-Prepolytope (inl-Fin k j)}
-    {z : face-Prepolytope (succ-Fin (inl-Fin k j))} →
+    {z : face-Prepolytope (succ-Fin (succ-ℕ k) (inl-Fin k j))} →
     adjacent-Prepolytope j y z → path-faces-Prepolytope x y →
     path-faces-Prepolytope x z
   cons-path-faces-Prepolytope a p = cons-path-faces-Finitely-Graded-Poset a p
@@ -282,7 +284,7 @@ module _
 
   leq-type-path-faces-Prepolytope :
     {i1 i2 : Fin (succ-ℕ k)} (x : face-Prepolytope i1)
-    (y : face-Prepolytope i2) → path-faces-Prepolytope x y → leq-Fin i1 i2
+    (y : face-Prepolytope i2) → path-faces-Prepolytope x y → leq-Fin (succ-ℕ k) i1 i2
   leq-type-path-faces-Prepolytope =
     leq-type-path-faces-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
@@ -368,7 +370,7 @@ module _
   face-flag-Prepolytope F i =
     Σ (face-Prepolytope i) (type-subtype-flag-Prepolytope F)
 
-  face-least-element-Prepolytope : face-Prepolytope zero-Fin
+  face-least-element-Prepolytope : face-Prepolytope (zero-Fin k)
   face-least-element-Prepolytope = pr1 least-element-Prepolytope
 
   element-least-element-Prepolytope : element-Prepolytope
@@ -381,7 +383,7 @@ module _
   is-least-element-least-element-Prepolytope =
     pr2 least-element-Prepolytope
 
-  face-largest-element-Prepolytope : face-Prepolytope neg-one-Fin
+  face-largest-element-Prepolytope : face-Prepolytope (neg-one-Fin k)
   face-largest-element-Prepolytope = pr1 largest-element-Prepolytope
 
   element-largest-element-Prepolytope : element-Prepolytope
@@ -395,20 +397,20 @@ module _
     pr2 largest-element-Prepolytope
 
   is-contr-face-bottom-dimension-Prepolytope :
-    is-contr (face-Prepolytope zero-Fin)
+    is-contr (face-Prepolytope (zero-Fin k))
   pr1 is-contr-face-bottom-dimension-Prepolytope =
     face-least-element-Prepolytope
   pr2 is-contr-face-bottom-dimension-Prepolytope x =
     apply-universal-property-trunc-Prop
       ( is-least-element-least-element-Prepolytope (element-face-Prepolytope x))
       ( Id-Prop
-        ( face-prepolytope-Set zero-Fin)
+        ( face-prepolytope-Set (zero-Fin k))
         ( face-least-element-Prepolytope)
         ( x))
       ( λ p → eq-path-faces-Prepolytope face-least-element-Prepolytope x p)
 
   is-contr-face-top-dimension-Prepolytope :
-    is-contr (face-Prepolytope neg-one-Fin)
+    is-contr (face-Prepolytope (neg-one-Fin k))
   pr1 is-contr-face-top-dimension-Prepolytope =
     face-largest-element-Prepolytope
   pr2 is-contr-face-top-dimension-Prepolytope x =
@@ -416,7 +418,7 @@ module _
       ( is-largest-element-largest-element-Prepolytope
         ( element-face-Prepolytope x))
       ( Id-Prop
-        ( face-prepolytope-Set neg-one-Fin)
+        ( face-prepolytope-Set (neg-one-Fin k))
         ( face-largest-element-Prepolytope)
         ( x))
       ( λ p →

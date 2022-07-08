@@ -1,4 +1,6 @@
-# Products of natural numbers
+---
+title: Products of natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

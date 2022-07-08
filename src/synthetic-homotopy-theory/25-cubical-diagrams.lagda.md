@@ -8,6 +8,7 @@ title: Formalisation of the Symmetry Book
 module synthetic-homotopy-theory.25-cubical-diagrams where
 
 open import foundation.commuting-squares
+open import foundation.cones-pullbacks
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types

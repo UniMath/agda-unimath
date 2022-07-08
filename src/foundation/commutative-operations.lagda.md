@@ -1,4 +1,6 @@
-# Commutative operations
+---
+title: Commutative operations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,7 +14,7 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-equiv-coprod)
-open import foundation.identity-types using (Id; ap-binary; ap; _∙_)
+open import foundation.identity-types using (_＝_; ap-binary; ap; _∙_)
 open import foundation.mere-equivalences using (refl-mere-equiv)
 open import foundation.sets using (UU-Set; type-Set)
 open import
@@ -52,7 +54,7 @@ module _
   where
   
   is-commutative : (A → A → B) → UU (l1 ⊔ l2)
-  is-commutative f = (x y : A) → Id (f x y) (f y x)
+  is-commutative f = (x y : A) → f x y ＝ f y x
 ```
 
 ### Commutative operations
@@ -87,21 +89,21 @@ module _
     (X : UU lzero) (p : X → A) (e e' : Fin 2 ≃ X) →
     coprod
       ( htpy-equiv e e')
-      ( htpy-equiv e (e' ∘e equiv-succ-Fin)) →
-    Id ( f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
-       ( f (p (map-equiv e' zero-Fin)) (p (map-equiv e' one-Fin)))
+      ( htpy-equiv e (e' ∘e equiv-succ-Fin 2)) →
+    ( f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1)))) ＝ 
+    ( f (p (map-equiv e' (zero-Fin 1))) (p (map-equiv e' (one-Fin 1))))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inl K) =
-    ap-binary f (ap p (K zero-Fin)) (ap p (K one-Fin))
+    ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inr K) =
-    ( ap-binary f (ap p (K zero-Fin)) (ap p (K one-Fin))) ∙
-    ( H (p (map-equiv e' one-Fin)) (p (map-equiv e' zero-Fin)))
+    ( ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))) ∙
+    ( H (p (map-equiv e' (one-Fin 1))) (p (map-equiv e' (zero-Fin 1))))
   
   commutative-operation-is-commutative :
     (f : A → A → type-Set B) → is-commutative f →
     commutative-operation A (type-Set B)
   commutative-operation-is-commutative f H (pair (pair X K) p) =
     map-universal-property-set-quotient-trunc-Prop B
-      ( λ e → f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
+      ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H X p e e'
           ( map-equiv-coprod
@@ -109,33 +111,34 @@ module _
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
               ( pair X K)
               ( e)
-              ( e' ∘e equiv-succ-Fin)))
+              ( e' ∘e equiv-succ-Fin 2)))
             ( decide-value-equiv-Fin-two-ℕ
               ( pair X K)
               ( e')
-              ( map-equiv e zero-Fin))))
+              ( map-equiv e (zero-Fin 1)))))
       ( K)
 
   compute-commutative-operation-is-commutative :
     (f : A → A → type-Set B) (H : is-commutative f) (x y : A) →
-    Id ( commutative-operation-is-commutative f H (standard-unordered-pair x y))
-       ( f x y)
+    commutative-operation-is-commutative f H (standard-unordered-pair x y) ＝
+    f x y
   compute-commutative-operation-is-commutative f H x y =
     
     htpy-universal-property-set-quotient-trunc-Prop B
-      ( λ e → f (p (map-equiv e zero-Fin)) (p (map-equiv e one-Fin)))
+      ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
           ( map-equiv-coprod
-            ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin 2) e e'))
+            ( inv-equiv
+              ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin 2) e e'))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
               ( Fin-UU-Fin 2)
               ( e)
-              ( e' ∘e equiv-succ-Fin)))
+              ( e' ∘e equiv-succ-Fin 2)))
             ( decide-value-equiv-Fin-two-ℕ
               ( Fin-UU-Fin 2)
               ( e')
-              ( map-equiv e zero-Fin))))
+              ( map-equiv e (zero-Fin 1)))))
       ( id-equiv)
     where
     p : Fin 2 → A

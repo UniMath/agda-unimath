@@ -14,19 +14,19 @@ open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
-open import structured-types.morphisms-wild-unital-magmas using
-  ( hom-Wild-Unital-Magma; preserves-unital-mul; preserves-left-unit-law-mul;
+open import structured-types.coherent-h-spaces using
+  ( Coherent-H-Space; type-Coherent-H-Space; mul-Coherent-H-Space;
+    unit-Coherent-H-Space; left-unit-law-mul-Coherent-H-Space;
+    mul-Coherent-H-Space'; right-unit-law-mul-Coherent-H-Space;
+    pointed-type-Coherent-H-Space; coherent-unital-mul-Pointed-Type;
+    coherent-unital-mul-Coherent-H-Space; ap-mul-Coherent-H-Space;
+    coh-unit-laws-mul-Coherent-H-Space)
+open import structured-types.morphisms-coherent-h-spaces using
+  ( hom-Coherent-H-Space; preserves-unital-mul; preserves-left-unit-law-mul;
     preserves-right-unit-law-mul; preserves-coh-unit-laws-mul)
 open import structured-types.pointed-maps using (_→*_)
 open import structured-types.pointed-types using
   ( Pointed-Type)
-open import structured-types.wild-unital-magmas using
-  ( Wild-Unital-Magma; type-Wild-Unital-Magma; mul-Wild-Unital-Magma;
-    unit-Wild-Unital-Magma; left-unit-law-mul-Wild-Unital-Magma;
-    mul-Wild-Unital-Magma'; right-unit-law-mul-Wild-Unital-Magma;
-    pointed-type-Wild-Unital-Magma; unital-mul-Pointed-Type;
-    unital-mul-Wild-Unital-Magma; ap-mul-Wild-Unital-Magma;
-    coh-unit-laws-mul-Wild-Unital-Magma)
 ```
 
 ## Idea
@@ -37,45 +37,45 @@ open import structured-types.wild-unital-magmas using
 
 ```agda
 module _
-  {l : Level} (M : Wild-Unital-Magma l)
+  {l : Level} (M : Coherent-H-Space l)
   where
   
-  associator-Wild-Unital-Magma : UU l
-  associator-Wild-Unital-Magma =
-    (x y z : type-Wild-Unital-Magma M) →
-    Id ( mul-Wild-Unital-Magma M (mul-Wild-Unital-Magma M x y) z)
-      ( mul-Wild-Unital-Magma M x (mul-Wild-Unital-Magma M y z))
+  associator-Coherent-H-Space : UU l
+  associator-Coherent-H-Space =
+    (x y z : type-Coherent-H-Space M) →
+    Id ( mul-Coherent-H-Space M (mul-Coherent-H-Space M x y) z)
+      ( mul-Coherent-H-Space M x (mul-Coherent-H-Space M y z))
      
-  is-unital-associator : (α : associator-Wild-Unital-Magma) → UU l
+  is-unital-associator : (α : associator-Coherent-H-Space) → UU l
   is-unital-associator α111 =
-    Σ ( (y z : type-Wild-Unital-Magma M) →
-        Id ( ( α111 (unit-Wild-Unital-Magma M) y z) ∙
-             ( left-unit-law-mul-Wild-Unital-Magma M
-           ( mul-Wild-Unital-Magma M y z)))
+    Σ ( (y z : type-Coherent-H-Space M) →
+        Id ( ( α111 (unit-Coherent-H-Space M) y z) ∙
+             ( left-unit-law-mul-Coherent-H-Space M
+           ( mul-Coherent-H-Space M y z)))
              ( ap
-               ( mul-Wild-Unital-Magma' M z)
-               ( left-unit-law-mul-Wild-Unital-Magma M y)))
+               ( mul-Coherent-H-Space' M z)
+               ( left-unit-law-mul-Coherent-H-Space M y)))
       ( λ α011 →
-        Σ ( (x z : type-Wild-Unital-Magma M) →
-            Id ( ( α111 x (unit-Wild-Unital-Magma M) z) ∙
+        Σ ( (x z : type-Coherent-H-Space M) →
+            Id ( ( α111 x (unit-Coherent-H-Space M) z) ∙
                  ( ap
-                   ( mul-Wild-Unital-Magma M x)
-                   ( left-unit-law-mul-Wild-Unital-Magma M z)))
+                   ( mul-Coherent-H-Space M x)
+                   ( left-unit-law-mul-Coherent-H-Space M z)))
                ( ap
-                 ( mul-Wild-Unital-Magma' M z)
-                 ( right-unit-law-mul-Wild-Unital-Magma M x)))
+                 ( mul-Coherent-H-Space' M z)
+                 ( right-unit-law-mul-Coherent-H-Space M x)))
           ( λ α101 →
-            Σ ( (x y : type-Wild-Unital-Magma M) →
-                Id ( ( α111 x y (unit-Wild-Unital-Magma M)) ∙
+            Σ ( (x y : type-Coherent-H-Space M) →
+                Id ( ( α111 x y (unit-Coherent-H-Space M)) ∙
                      ( ap
-                       ( mul-Wild-Unital-Magma M x)
-                       ( right-unit-law-mul-Wild-Unital-Magma M y)))
-                   ( right-unit-law-mul-Wild-Unital-Magma M
-                     ( mul-Wild-Unital-Magma M x y)))
+                       ( mul-Coherent-H-Space M x)
+                       ( right-unit-law-mul-Coherent-H-Space M y)))
+                   ( right-unit-law-mul-Coherent-H-Space M
+                     ( mul-Coherent-H-Space M x y)))
               ( λ α110 → unit)))
 
   unital-associator : UU l
-  unital-associator = Σ ( associator-Wild-Unital-Magma) is-unital-associator
+  unital-associator = Σ ( associator-Coherent-H-Space) is-unital-associator
 ```
 
 ### Wild monoids
@@ -83,55 +83,56 @@ module _
 ```agda
 Wild-Monoid : (l : Level) → UU (lsuc l)
 Wild-Monoid l =
-  Σ (Wild-Unital-Magma l) unital-associator
+  Σ (Coherent-H-Space l) unital-associator
 
 module _
   {l : Level} (M : Wild-Monoid l)
   where
 
-  wild-unital-magma-Wild-Monoid : Wild-Unital-Magma l
+  wild-unital-magma-Wild-Monoid : Coherent-H-Space l
   wild-unital-magma-Wild-Monoid = pr1 M
       
   type-Wild-Monoid : UU l
-  type-Wild-Monoid = type-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+  type-Wild-Monoid = type-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   unit-Wild-Monoid : type-Wild-Monoid
-  unit-Wild-Monoid = unit-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+  unit-Wild-Monoid = unit-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   pointed-type-Wild-Monoid : Pointed-Type l
   pointed-type-Wild-Monoid =
-    pointed-type-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+    pointed-type-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
-  unital-mul-Wild-Monoid : unital-mul-Pointed-Type pointed-type-Wild-Monoid
-  unital-mul-Wild-Monoid =
-    unital-mul-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+  coherent-unital-mul-Wild-Monoid :
+    coherent-unital-mul-Pointed-Type pointed-type-Wild-Monoid
+  coherent-unital-mul-Wild-Monoid =
+    coherent-unital-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   mul-Wild-Monoid : type-Wild-Monoid → type-Wild-Monoid → type-Wild-Monoid
-  mul-Wild-Monoid = mul-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+  mul-Wild-Monoid = mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   mul-Wild-Monoid' : type-Wild-Monoid → type-Wild-Monoid → type-Wild-Monoid
-  mul-Wild-Monoid' = mul-Wild-Unital-Magma' wild-unital-magma-Wild-Monoid
+  mul-Wild-Monoid' = mul-Coherent-H-Space' wild-unital-magma-Wild-Monoid
 
   ap-mul-Wild-Monoid :
     {a b c d : type-Wild-Monoid} →
     Id a b → Id c d → Id (mul-Wild-Monoid a c) (mul-Wild-Monoid b d)
-  ap-mul-Wild-Monoid = ap-mul-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+  ap-mul-Wild-Monoid = ap-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   left-unit-law-mul-Wild-Monoid :
     (x : type-Wild-Monoid) → Id (mul-Wild-Monoid unit-Wild-Monoid x) x
   left-unit-law-mul-Wild-Monoid =
-    left-unit-law-mul-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+    left-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   right-unit-law-mul-Wild-Monoid :
     (x : type-Wild-Monoid ) → Id (mul-Wild-Monoid x unit-Wild-Monoid) x
   right-unit-law-mul-Wild-Monoid =
-    right-unit-law-mul-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+    right-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   coh-unit-laws-mul-Wild-Monoid :
     Id ( left-unit-law-mul-Wild-Monoid unit-Wild-Monoid)
        ( right-unit-law-mul-Wild-Monoid unit-Wild-Monoid)
   coh-unit-laws-mul-Wild-Monoid =
-    coh-unit-laws-mul-Wild-Unital-Magma wild-unital-magma-Wild-Monoid
+    coh-unit-laws-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   unital-associator-Wild-Monoid :
     unital-associator wild-unital-magma-Wild-Monoid
@@ -161,7 +162,7 @@ module _
   
   hom-Wild-Monoid : UU (l1 ⊔ l2)
   hom-Wild-Monoid =
-    hom-Wild-Unital-Magma
+    hom-Coherent-H-Space
       ( wild-unital-magma-Wild-Monoid M)
       ( wild-unital-magma-Wild-Monoid N)
 

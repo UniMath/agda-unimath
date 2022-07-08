@@ -1,4 +1,6 @@
-# Equivalences
+---
+title: Equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,13 +12,16 @@ open import foundation-core.equivalences public
 open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.commuting-squares using (coherence-square)
+open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps using
-  ( is-contr-map-is-equiv; is-contr-map)
-open import foundation-core.contractible-types using (center; eq-is-contr')
+  ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
+open import foundation-core.contractible-types using
+  ( center; eq-is-contr'; is-equiv-is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functions using (_∘_; id; precomp-Π; precomp)
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; equiv-tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation-core.fundamental-theorem-of-identity-types using
@@ -26,6 +31,8 @@ open import foundation-core.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+open import foundation-core.pullbacks using
+  ( is-pullback; is-pullback-is-fiberwise-equiv-fib-square; fib-square)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
@@ -33,24 +40,27 @@ open import foundation-core.subtypes using
   ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 open import foundation-core.truncated-types using
   ( Truncated-Type; type-Truncated-Type; is-trunc)
-open import foundation-core.truncation-levels using (𝕋)
+open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
+open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π; is-contr-is-equiv';
     is-contr-prod; is-prop-is-contr)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( distributive-Π-Σ)
 open import foundation.function-extensionality using
   ( htpy-eq; funext; eq-htpy; equiv-funext)
 open import foundation.identity-systems using (Ind-identity-system)
 open import foundation.identity-types using
-  ( Id; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
+  ( _＝_; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
+open import foundation.pullbacks
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
+
+open import foundation.truncated-maps
 ```
 
 ## Properties
@@ -79,7 +89,7 @@ module _
   where
 
   eq-transpose-equiv :
-    (x : A) (y : B) → (Id (map-equiv e x) y) ≃ (Id x (map-inv-equiv e y))
+    (x : A) (y : B) → (map-equiv e x ＝ y) ≃ (x ＝ map-inv-equiv e y)
   eq-transpose-equiv x y =
     ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
     ( equiv-concat'
@@ -87,18 +97,18 @@ module _
       ( inv (issec-map-inv-equiv e y)))
 
   map-eq-transpose-equiv :
-    {x : A} {y : B} → Id (map-equiv e x) y → Id x (map-inv-equiv e y)
+    {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
   map-eq-transpose-equiv {x} {y} = map-equiv (eq-transpose-equiv x y)
 
   inv-map-eq-transpose-equiv :
-    {x : A} {y : B} → Id x (map-inv-equiv e y) → Id (map-equiv e x) y
+    {x : A} {y : B} → x ＝ map-inv-equiv e y → map-equiv e x ＝ y
   inv-map-eq-transpose-equiv {x} {y} = map-inv-equiv (eq-transpose-equiv x y)
 
   triangle-eq-transpose-equiv :
-    {x : A} {y : B} (p : Id (map-equiv e x) y) →
-    Id ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
-         ( issec-map-inv-equiv e y))
-       ( p)
+    {x : A} {y : B} (p : map-equiv e x ＝ y) →
+    ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
+      ( issec-map-inv-equiv e y)) ＝
+    ( p)
   triangle-eq-transpose-equiv {x} {y} p =
     ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
          ( issec-map-inv-equiv
@@ -108,18 +118,18 @@ module _
       ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
   
   map-eq-transpose-equiv' :
-    {a : A} {b : B} → Id b (map-equiv e a) → Id (map-inv-equiv e b) a
+    {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
   map-eq-transpose-equiv' p = inv (map-eq-transpose-equiv (inv p))
 
   inv-map-eq-transpose-equiv' :
-    {a : A} {b : B} → Id (map-inv-equiv e b) a → Id b (map-equiv e a)
+    {a : A} {b : B} → map-inv-equiv e b ＝ a → b ＝ map-equiv e a
   inv-map-eq-transpose-equiv' p =
     inv (inv-map-eq-transpose-equiv (inv p))
 
   triangle-eq-transpose-equiv' :
-    {x : A} {y : B} (p : Id y (map-equiv e x)) →
-    Id ( (issec-map-inv-equiv e y) ∙ p)
-      ( ap (map-equiv e) (map-eq-transpose-equiv' p))
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( (issec-map-inv-equiv e y) ∙ p) ＝
+    ( ap (map-equiv e) (map-eq-transpose-equiv' p))
   triangle-eq-transpose-equiv' {x} {y} p =
     map-inv-equiv
       ( equiv-ap
@@ -143,50 +153,6 @@ module _
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
 ```
 
-### If `f` is coherently invertible, then precomposing by `f` is an equivalence
-
-```agda
-tr-precompose-fam :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
-  (f : A → B) {x y : A} (p : Id x y) → tr C (ap f p) ~ tr (λ x → C (f x)) p
-tr-precompose-fam C f refl = refl-htpy
-
-abstract
-  is-equiv-precomp-Π-is-coherently-invertible :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-coherently-invertible f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-coherently-invertible f
-    ( pair g (pair issec-g (pair isretr-g coh))) C = 
-    is-equiv-has-inverse
-      (λ s y → tr C (issec-g y) (s (g y)))
-      ( λ s → eq-htpy (λ x → 
-        ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙
-        ( ( tr-precompose-fam C f (isretr-g x) (s (g (f x)))) ∙
-          ( apd s (isretr-g x)))))
-      ( λ s → eq-htpy λ y → apd s (issec-g y))
-```
-
-### If `f` is an equivalence, then precomposing by `f` is an equivalence
-
-```agda
-abstract
-  is-equiv-precomp-Π-is-equiv :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) → is-equiv f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-equiv f is-equiv-f =
-    is-equiv-precomp-Π-is-coherently-invertible f
-      ( is-coherently-invertible-is-path-split f
-        ( is-path-split-is-equiv f is-equiv-f))
-
-equiv-precomp-Π :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  (C : B → UU l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
-pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
-pr2 (equiv-precomp-Π e C) =
-  is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
-```
-
 ### Equivalences can be seen as constructors for inductive types.
 
 ```agda
@@ -201,7 +167,7 @@ abstract
   comp-is-equiv :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
     (f : A → B) (is-equiv-f : is-equiv f) (h : (x : A) → C (f x)) →
-    Id (λ x → (ind-is-equiv C f is-equiv-f h) (f x)) h
+    (ind-is-equiv C f is-equiv-f h ∘ f) ＝ h
   comp-is-equiv C f is-equiv-f h =
     issec-map-inv-is-equiv (is-equiv-precomp-Π-is-equiv f is-equiv-f C) h
   
@@ -346,7 +312,7 @@ module _
   is-contr-retr-is-equiv : {f : A → B} → is-equiv f → is-contr (retr f)
   is-contr-retr-is-equiv {f} is-equiv-f =
     is-contr-is-equiv'
-      ( Σ (B → A) (λ h → Id (h ∘ f) id))
+      ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
       ( tot (λ h → htpy-eq))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ h → funext (h ∘ f) id))
@@ -367,12 +333,11 @@ module _
       ( is-contr-retr-is-equiv is-equiv-f)
 
   abstract
-    is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (Id H K)
+    is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (H ＝ K)
     is-property-is-equiv f H =
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
-  is-equiv-Prop :
-    (f : A → B) → Σ (UU (l1 ⊔ l2)) (λ X → (x y : X) → is-contr (Id x y))
+  is-equiv-Prop : (f : A → B) → UU-Prop (l1 ⊔ l2)
   pr1 (is-equiv-Prop f) = is-equiv f
   pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
@@ -392,7 +357,7 @@ module _
   htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
   htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
 
-  extensionality-equiv : (f g : A ≃ B) → Id f g ≃ htpy-equiv f g
+  extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
   extensionality-equiv f =
     extensionality-subtype
       ( is-equiv-Prop)
@@ -412,10 +377,10 @@ module _
         ( λ f → map-equiv (extensionality-equiv e f))
         ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
 
-  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → Id e e'
+  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → e ＝ e'
   eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
 
-  htpy-eq-equiv : {e e' : A ≃ B} → Id e e' → htpy-equiv e e'
+  htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
   htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
 ```
 
@@ -446,7 +411,7 @@ module _
   comp-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
-    Id (ind-htpy-equiv e P p e (refl-htpy-equiv e)) p
+    ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
   comp-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
@@ -456,31 +421,31 @@ module _
 associative-comp-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
-  Id ((g ∘e f) ∘e e) (g ∘e (f ∘e e))
+  ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
 associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  left-unit-law-equiv : (e : X ≃ Y) → Id (id-equiv ∘e e) e
+  left-unit-law-equiv : (e : X ≃ Y) → (id-equiv ∘e e) ＝ e
   left-unit-law-equiv e = eq-htpy-equiv refl-htpy
   
-  right-unit-law-equiv : (e : X ≃ Y) → Id (e ∘e id-equiv) e
+  right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
   right-unit-law-equiv e = eq-htpy-equiv refl-htpy
   
-  left-inverse-law-equiv : (e : X ≃ Y) → Id ((inv-equiv e) ∘e e) id-equiv
+  left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
     eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
   
-  right-inverse-law-equiv : (e : X ≃ Y) → Id (e ∘e (inv-equiv e)) id-equiv
+  right-inverse-law-equiv : (e : X ≃ Y) → (e ∘e (inv-equiv e)) ＝ id-equiv
   right-inverse-law-equiv e =
     eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
-  inv-inv-equiv : (e : X ≃ Y) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
   inv-inv-equiv e = eq-htpy-equiv refl-htpy
 
-  inv-inv-equiv' : (e : Y ≃ X) → Id (inv-equiv (inv-equiv e)) e
+  inv-inv-equiv' : (e : Y ≃ X) → (inv-equiv (inv-equiv e)) ＝ e
   inv-inv-equiv' e = eq-htpy-equiv refl-htpy
 
   is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
@@ -499,7 +464,7 @@ module _
   where
 
   distributive-inv-comp-equiv : (e : X ≃ Y) (f : Y ≃ Z) →
-    Id (inv-equiv (f ∘e e)) ((inv-equiv e) ∘e (inv-equiv f))
+    (inv-equiv (f ∘e e)) ＝ ((inv-equiv e) ∘e (inv-equiv f))
   distributive-inv-comp-equiv e f =
     eq-htpy-equiv
       ( λ x →
@@ -512,15 +477,14 @@ module _
 
 compose-inv-equiv-compose-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : B ≃ C) (e : A ≃ B) →
-  Id (inv-equiv f ∘e (f ∘e e)) e
+  (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e
 compose-inv-equiv-compose-equiv f e =
   eq-htpy-equiv (λ x → isretr-map-inv-equiv f (map-equiv e x))
 
 compose-equiv-compose-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ C) →
-  Id (f ∘e (inv-equiv f ∘e e)) e
+  (f ∘e (inv-equiv f ∘e e)) ＝ e
 compose-equiv-compose-inv-equiv f e =
   eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
 
@@ -555,4 +519,29 @@ equiv-precomp-equiv e C =
         ( λ is-equiv-eg →
           is-equiv-left-factor'
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))
+```
+
+### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the span is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  abstract
+    is-equiv-is-pullback : is-equiv g → is-pullback f g c → is-equiv (pr1 c)
+    is-equiv-is-pullback is-equiv-g pb =
+      is-equiv-is-contr-map
+        ( is-trunc-is-pullback neg-two-𝕋 f g c pb
+          ( is-contr-map-is-equiv is-equiv-g))
+
+  abstract
+    is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
+    is-pullback-is-equiv is-equiv-g is-equiv-p =
+      is-pullback-is-fiberwise-equiv-fib-square f g c
+        ( λ a → is-equiv-is-contr
+          ( fib-square f g c a)
+          ( is-contr-map-is-equiv is-equiv-p a)
+          ( is-contr-map-is-equiv is-equiv-g (f a)))
 ```

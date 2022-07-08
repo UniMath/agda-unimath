@@ -1,4 +1,6 @@
-# Equality in the fibers of a map
+---
+title: Equality in the fibers of a map
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

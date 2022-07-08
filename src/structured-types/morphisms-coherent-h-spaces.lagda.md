@@ -1,11 +1,11 @@
 ---
-title: Morphisms of wild unital magmas
+title: Morphisms of coherent H-spaces
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
 
-module structured-types.morphisms-wild-unital-magmas where
+module structured-types.morphisms-coherent-h-spaces where
 
 open import foundation.dependent-pair-types
 open import foundation.functions
@@ -17,7 +17,7 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 
 open import structured-types.pointed-maps
-open import structured-types.wild-unital-magmas
+open import structured-types.coherent-h-spaces
 ```
 
 ## Idea
@@ -46,23 +46,23 @@ preserves-right-unit-law-mul {A = A} {B} μ {eA} rA ν {eB} rB f p μf =
   (x : A) → Id (ap f (rA x)) (μf x eA ∙ (ap (ν (f x)) p ∙ rB (f x)))
 
 preserves-coh-unit-laws-mul :
-  {l1 l2 : Level} (M : Wild-Unital-Magma l1) (N : Wild-Unital-Magma l2) →
-  ( f : pointed-type-Wild-Unital-Magma M →* pointed-type-Wild-Unital-Magma N) →
+  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
+  ( f : pointed-type-Coherent-H-Space M →* pointed-type-Coherent-H-Space N) →
   ( μf :
-    preserves-mul (mul-Wild-Unital-Magma M) (mul-Wild-Unital-Magma N) (pr1 f)) →
+    preserves-mul (mul-Coherent-H-Space M) (mul-Coherent-H-Space N) (pr1 f)) →
   preserves-left-unit-law-mul
-    ( mul-Wild-Unital-Magma M)
-    ( left-unit-law-mul-Wild-Unital-Magma M)
-    ( mul-Wild-Unital-Magma N)
-    ( left-unit-law-mul-Wild-Unital-Magma N)
+    ( mul-Coherent-H-Space M)
+    ( left-unit-law-mul-Coherent-H-Space M)
+    ( mul-Coherent-H-Space N)
+    ( left-unit-law-mul-Coherent-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
   preserves-right-unit-law-mul
-    ( mul-Wild-Unital-Magma M)
-    ( right-unit-law-mul-Wild-Unital-Magma M)
-    ( mul-Wild-Unital-Magma N)
-    ( right-unit-law-mul-Wild-Unital-Magma N)
+    ( mul-Coherent-H-Space M)
+    ( right-unit-law-mul-Coherent-H-Space M)
+    ( mul-Coherent-H-Space N)
+    ( right-unit-law-mul-Coherent-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
@@ -72,31 +72,32 @@ preserves-coh-unit-laws-mul M
   (pair f refl) μf lf rf =
   Id (ap (ap f) cM ∙ rf eM) (lf eM ∙ ap (concat (μf eM eM) (f eM)) cN)
   where
-  eM = unit-Wild-Unital-Magma M
-  cM = coh-unit-laws-mul-Wild-Unital-Magma M
+  eM = unit-Coherent-H-Space M
+  cM = coh-unit-laws-mul-Coherent-H-Space M
   cN = pr2 (pr2 (pr2 μ))
+```
 
--- We also present an alternative description of preservation of coherence,
--- which is always an identity type.
+### Second description of preservation of the coherent unit laws
 
+```agda
 preserves-coh-unit-laws-mul' :
-  {l1 l2 : Level} (M : Wild-Unital-Magma l1) (N : Wild-Unital-Magma l2) →
-  ( f : pointed-type-Wild-Unital-Magma M →* pointed-type-Wild-Unital-Magma N) →
+  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
+  ( f : pointed-type-Coherent-H-Space M →* pointed-type-Coherent-H-Space N) →
   ( μf :
-    preserves-mul (mul-Wild-Unital-Magma M) (mul-Wild-Unital-Magma N) (pr1 f)) →
+    preserves-mul (mul-Coherent-H-Space M) (mul-Coherent-H-Space N) (pr1 f)) →
   preserves-left-unit-law-mul
-    ( mul-Wild-Unital-Magma M)
-    ( left-unit-law-mul-Wild-Unital-Magma M)
-    ( mul-Wild-Unital-Magma N)
-    ( left-unit-law-mul-Wild-Unital-Magma N)
+    ( mul-Coherent-H-Space M)
+    ( left-unit-law-mul-Coherent-H-Space M)
+    ( mul-Coherent-H-Space N)
+    ( left-unit-law-mul-Coherent-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
   preserves-right-unit-law-mul
-    ( mul-Wild-Unital-Magma M)
-    ( right-unit-law-mul-Wild-Unital-Magma M)
-    ( mul-Wild-Unital-Magma N)
-    ( right-unit-law-mul-Wild-Unital-Magma N)
+    ( mul-Coherent-H-Space M)
+    ( right-unit-law-mul-Coherent-H-Space M)
+    ( mul-Coherent-H-Space N)
+    ( right-unit-law-mul-Coherent-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
@@ -110,26 +111,26 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
            ( inv
              ( assoc
                ( μf eM eM)
-               ( ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef)
+               ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
                ( lN (pr1 f eM))))) ∙
          ( ( assoc
-             ( μf eM eM ∙ ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef)
+             ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
              ( lN (pr1 f eM))
              ( ap id ef)) ∙
            ( ( ap
                ( λ t →
-                 ( μf eM eM ∙ ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef) ∙ t)
+                 ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef) ∙ t)
                ( nat-htpy lN ef)) ∙
              ( ( inv
                  ( assoc
-                   ( μf eM eM ∙ ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef)
+                   ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
                    ( ap (μN eN) ef)
                    ( lN eN))) ∙
                ( ( ap
                    ( λ t → t ∙ lN eN)
                    ( assoc
                      ( μf eM eM)
-                     ( ap (mul-Wild-Unital-Magma' N (pr1 f eM)) ef)
+                     ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
                      ( ap (μN eN) ef))) ∙
                  ( horizontal-concat-Id²
                    ( ap
@@ -152,33 +153,33 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
                ( ( inv
                    ( assoc
                      ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
-                     ( ap (mul-Wild-Unital-Magma' N eN) ef)
+                     ( ap (mul-Coherent-H-Space' N eN) ef)
                      ( rN eN))) ∙
                  ( ap
                    ( λ t → t ∙ rN eN)
                    ( ( assoc
                        ( μf eM eM)
                        ( ap (μN (pr1 f eM)) ef)
-                       ( ap (mul-Wild-Unital-Magma' N eN) ef)) ∙
+                       ( ap (mul-Coherent-H-Space' N eN) ef)) ∙
                      ( ap
                        ( λ t → μf eM eM ∙ t)
                        ( inv (triangle-ap-binary' μN ef ef)))))))))))
   where
-  eM = unit-Wild-Unital-Magma M
-  μM = mul-Wild-Unital-Magma M
-  lM = left-unit-law-mul-Wild-Unital-Magma M
-  rM = right-unit-law-mul-Wild-Unital-Magma M
-  cM = coh-unit-laws-mul-Wild-Unital-Magma M
-  eN = unit-Wild-Unital-Magma N
-  μN = mul-Wild-Unital-Magma N
-  lN = left-unit-law-mul-Wild-Unital-Magma N
-  rN = right-unit-law-mul-Wild-Unital-Magma N
-  cN = coh-unit-laws-mul-Wild-Unital-Magma N
+  eM = unit-Coherent-H-Space M
+  μM = mul-Coherent-H-Space M
+  lM = left-unit-law-mul-Coherent-H-Space M
+  rM = right-unit-law-mul-Coherent-H-Space M
+  cM = coh-unit-laws-mul-Coherent-H-Space M
+  eN = unit-Coherent-H-Space N
+  μN = mul-Coherent-H-Space N
+  lN = left-unit-law-mul-Coherent-H-Space N
+  rN = right-unit-law-mul-Coherent-H-Space N
+  cN = coh-unit-laws-mul-Coherent-H-Space N
   ef = pr2 f
   
 preserves-unital-mul :
-  {l1 l2 : Level} (M : Wild-Unital-Magma l1) (N : Wild-Unital-Magma l2) →
-  (f : pointed-type-Wild-Unital-Magma M →* pointed-type-Wild-Unital-Magma N) →
+  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
+  (f : pointed-type-Coherent-H-Space M →* pointed-type-Coherent-H-Space N) →
   UU (l1 ⊔ l2)
 preserves-unital-mul M N f =
   Σ ( preserves-mul μM μN (pr1 f))
@@ -188,18 +189,18 @@ preserves-unital-mul M N f =
           Σ ( preserves-right-unit-law-mul μM rM μN rN (pr1 f) (pr2 f) μ11)
             ( λ μ10 → preserves-coh-unit-laws-mul M N f μ11 μ01 μ10)))
   where
-  μM = mul-Wild-Unital-Magma M
-  lM = left-unit-law-mul-Wild-Unital-Magma M
-  rM = right-unit-law-mul-Wild-Unital-Magma M
-  μN = mul-Wild-Unital-Magma N
-  lN = left-unit-law-mul-Wild-Unital-Magma N
-  rN = right-unit-law-mul-Wild-Unital-Magma N
+  μM = mul-Coherent-H-Space M
+  lM = left-unit-law-mul-Coherent-H-Space M
+  rM = right-unit-law-mul-Coherent-H-Space M
+  μN = mul-Coherent-H-Space N
+  lN = left-unit-law-mul-Coherent-H-Space N
+  rN = right-unit-law-mul-Coherent-H-Space N
 
-hom-Wild-Unital-Magma :
-  {l1 l2 : Level} (M : Wild-Unital-Magma l1) (N : Wild-Unital-Magma l2) →
+hom-Coherent-H-Space :
+  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
   UU (l1 ⊔ l2)
-hom-Wild-Unital-Magma M N =
-  Σ ( pointed-type-Wild-Unital-Magma M →* pointed-type-Wild-Unital-Magma N)
+hom-Coherent-H-Space M N =
+  Σ ( pointed-type-Coherent-H-Space M →* pointed-type-Coherent-H-Space N)
     ( preserves-unital-mul M N)
 
 -- Homotopies of morphisms of wild unital magmas

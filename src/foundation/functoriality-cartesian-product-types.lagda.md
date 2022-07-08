@@ -1,4 +1,6 @@
-# Functoriality of cartesian product types
+---
+title: Functoriality of cartesian product types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

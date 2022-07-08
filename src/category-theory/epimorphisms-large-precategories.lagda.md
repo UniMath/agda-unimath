@@ -1,4 +1,6 @@
-# Epimorphism in large precategories
+---
+title: Epimorphism in large precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -15,7 +17,7 @@ open import category-theory.large-precategories using
 
 open import foundation.embeddings using (is-emb-Prop)
 open import foundation.equivalences using (is-equiv-has-inverse)
-open import foundation.identity-types using (Id; refl; _∙_; ap; inv)
+open import foundation.identity-types using (_∙_; ap; inv)
 open import foundation.propositions using
   ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; eq-is-prop)
 open import foundation.universe-levels using (UU; Level; _⊔_)

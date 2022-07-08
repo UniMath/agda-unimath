@@ -1,4 +1,6 @@
-# Contractible types
+---
+title: Contractible types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,8 +14,9 @@ open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation-core.equivalences using
   ( is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv; _≃_;
     is-equiv-map-inv-is-equiv; is-equiv-has-inverse)
+open import foundation-core.function-extensionality using (funext)
 open import foundation-core.identity-types using
-  ( Id; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
+  ( _＝_; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
 open import foundation-core.retractions using (_retract-of_)
 open import foundation-core.universe-levels using (Level; UU)
 ```
@@ -27,7 +30,7 @@ Contractible types are types that have, up to identification, exactly one elemen
 ```agda
 is-contr :
   {l : Level} → UU l → UU l
-is-contr A = Σ A (λ a → (x : A) → Id a x)
+is-contr A = Σ A (λ a → (x : A) → a ＝ x)
 
 abstract
   center :
@@ -35,22 +38,22 @@ abstract
   center (pair c is-contr-A) = c
   
 eq-is-contr' :
-  {l : Level} {A : UU l} → is-contr A → (x y : A) → Id x y
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → x ＝ y
 eq-is-contr' (pair c C) x y = (inv (C x)) ∙ (C y)
 
 eq-is-contr :
-  {l : Level} {A : UU l} → is-contr A → {x y : A} → Id x y
+  {l : Level} {A : UU l} → is-contr A → {x y : A} → x ＝ y
 eq-is-contr C {x} {y} = eq-is-contr' C x y
 
 abstract
   contraction :
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
-    (x : A) → Id (center is-contr-A) x
+    (x : A) → (center is-contr-A) ＝ x
   contraction C x = eq-is-contr C
   
   coh-contraction :
     {l : Level} {A : UU l} (is-contr-A : is-contr A) →
-    Id (contraction is-contr-A (center is-contr-A)) refl
+    (contraction is-contr-A (center is-contr-A)) ＝ refl
   coh-contraction (pair c C) = left-inv (C c)
 ```
 
@@ -66,13 +69,13 @@ module _
   where
 
   abstract
-    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → Id a x))
+    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
     pr1 (pr1 (is-contr-total-path a)) = a
     pr2 (pr1 (is-contr-total-path a)) = refl
     pr2 (is-contr-total-path a) (pair .a refl) = refl
 
   abstract
-    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → Id x a))
+    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
     pr1 (pr1 (is-contr-total-path' a)) = a
     pr2 (pr1 (is-contr-total-path' a)) = refl
     pr2 (is-contr-total-path' a) (pair .a refl) = refl
@@ -229,7 +232,65 @@ module _
 
 ```agda
 is-prop-is-contr :
-  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (Id x y)
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (x ＝ y)
 pr1 (is-prop-is-contr H x y) = eq-is-contr H
 pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
+```
+
+### Products of families of contractible types are contractible
+
+```agda
+abstract
+  is-contr-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
+  pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
+  pr2 (is-contr-Π {A = A} {B = B} H) f =
+    map-inv-is-equiv
+      ( funext (λ x → center (H x)) f)
+      ( λ x → contraction (H x) (f x))
+```
+
+### The type of equivalences between contractible types is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-contr-equiv-is-contr :
+    is-contr A → is-contr B → is-contr (A ≃ B)
+  is-contr-equiv-is-contr (pair a α) (pair b β) =
+    is-contr-Σ
+      ( is-contr-Π (λ x → (pair b β)))
+      ( λ x → b)
+      ( is-contr-prod
+        ( is-contr-Σ
+          ( is-contr-Π (λ y → (pair a α)))
+          ( λ y → a)
+          ( is-contr-Π (λ y → is-prop-is-contr (pair b β) b y)))
+        ( is-contr-Σ
+          ( is-contr-Π (λ x → pair a α))
+          ( λ y → a)
+          ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))))
+```
+
+### Being contractible is a proposition
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  abstract
+    is-contr-is-contr : is-contr A → is-contr (is-contr A)
+    is-contr-is-contr (pair a α) =
+      is-contr-Σ
+        ( pair a α)
+        ( a)
+        ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))
+
+  abstract
+    is-property-is-contr : (H K : is-contr A) → is-contr (H ＝ K)
+    is-property-is-contr H = is-prop-is-contr (is-contr-is-contr H) H
 ```

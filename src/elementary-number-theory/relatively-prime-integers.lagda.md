@@ -1,4 +1,6 @@
-# Relatively prime integers
+---
+title: Relatively prime integers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

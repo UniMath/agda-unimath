@@ -1,4 +1,6 @@
-# The universal property of set truncations
+---
+title: The universal property of set truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,9 +12,6 @@ open import foundation.contractible-maps using
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( inv-distributive-Π-Σ)
 open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-precomp-is-equiv; is-equiv-id; _≃_; map-equiv;
@@ -22,7 +21,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.mere-equality using
   ( mere-eq-Eq-Rel; reflecting-map-mere-eq; reflects-mere-eq)
 open import foundation.propositions using (is-proof-irrelevant-is-prop)
@@ -32,6 +31,8 @@ open import foundation.sets using
   ( UU-Set; type-Set; precomp-Set; type-hom-Set; is-set; Σ-Set)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( is-equiv-pr1-is-contr)
+open import foundation.type-theoretic-principle-of-choice using
+  ( inv-distributive-Π-Σ)
 open import foundation.universal-property-set-quotients using
   ( is-set-quotient; precomp-Set-Quotient)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
@@ -108,7 +109,7 @@ abstract
     is-set-truncation l B f → universal-property-set-truncation l B f
   universal-property-is-set-truncation l B f is-settr-f C g =
     is-contr-equiv'
-      ( Σ (type-hom-Set B C) (λ h → Id (h ∘ f) g))
+      ( Σ (type-hom-Set B C) (λ h → (h ∘ f) ＝ g))
       ( equiv-tot (λ h → equiv-funext))
       ( is-contr-map-is-equiv (is-settr-f C) g)
 

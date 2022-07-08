@@ -1,4 +1,6 @@
-# The universal property of dependent pair types
+---
+title: The universal property of dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

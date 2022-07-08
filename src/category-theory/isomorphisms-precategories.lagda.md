@@ -1,4 +1,6 @@
-# Isomorphisms in precategories
+---
+title: Isomorphisms in precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,7 @@ open import category-theory.precategories using
     
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.propositions using
   ( is-proof-irrelevant; prod-Prop; is-prop; UU-Prop;
     is-prop-is-proof-irrelevant)
@@ -43,8 +45,8 @@ module _
   is-iso-Precat {x} {y} f =
     Σ ( type-hom-Precat C y x)
       ( λ g →
-        Id (comp-hom-Precat C f g) (id-hom-Precat C) ×
-        Id (comp-hom-Precat C g f) (id-hom-Precat C))
+        (comp-hom-Precat C f g ＝ id-hom-Precat C) ×
+        (comp-hom-Precat C g f ＝ id-hom-Precat C))
 
   abstract
     is-proof-irrelevant-is-iso-Precat :
@@ -110,14 +112,14 @@ module _
 
   issec-hom-inv-iso-Precat :
     {x y : obj-Precat C} (f : iso-Precat x y) →
-    Id ( comp-hom-Precat C (hom-iso-Precat f) (hom-inv-iso-Precat f))
-       ( id-hom-Precat C)
+    ( comp-hom-Precat C (hom-iso-Precat f) (hom-inv-iso-Precat f)) ＝
+    ( id-hom-Precat C)
   issec-hom-inv-iso-Precat f = pr1 (pr2 (is-iso-hom-iso-Precat f))
 
   isretr-hom-inv-iso-Precat :
     {x y : obj-Precat C} (f : iso-Precat x y) →
-    Id ( comp-hom-Precat C (hom-inv-iso-Precat f) (hom-iso-Precat f))
-       ( id-hom-Precat C)
+    ( comp-hom-Precat C (hom-inv-iso-Precat f) (hom-iso-Precat f)) ＝
+    ( id-hom-Precat C)
   isretr-hom-inv-iso-Precat f = pr2 (pr2 (is-iso-hom-iso-Precat f))
 ```
 
@@ -152,7 +154,7 @@ An equality between objects `x y : A` gives rise to an isomorphism between them.
 ```agda
 iso-eq-Precat :
   {l1 l2 : Level} (C : Precat l1 l2) →
-  (x y : obj-Precat C) → Id x y → iso-Precat C x y
+  (x y : obj-Precat C) → x ＝ y → iso-Precat C x y
 iso-eq-Precat C x .x refl = id-iso-Precat C
 ```
 

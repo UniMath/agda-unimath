@@ -80,7 +80,7 @@ module _
   pr2 id-equiv-unordered-pair-types i = id-equiv
 
   equiv-eq-unordered-pair-types :
-    (B : unordered-pair-types l) → Id A B → equiv-unordered-pair-types A B
+    (B : unordered-pair-types l) → A ＝ B → equiv-unordered-pair-types A B
   equiv-eq-unordered-pair-types .A refl = id-equiv-unordered-pair-types
 
   is-contr-total-equiv-unordered-pair-types :
@@ -103,7 +103,7 @@ module _
       equiv-eq-unordered-pair-types
 
   extensionality-unordered-pair-types :
-    (B : unordered-pair-types l) → Id A B ≃ equiv-unordered-pair-types A B
+    (B : unordered-pair-types l) → (A ＝ B) ≃ equiv-unordered-pair-types A B
   pr1 (extensionality-unordered-pair-types B) =
     equiv-eq-unordered-pair-types B
   pr2 (extensionality-unordered-pair-types B) =

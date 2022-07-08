@@ -24,7 +24,7 @@ open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.identity-types using (Id; refl; inv; _∙_)
 open import foundation.mere-equivalences using (mere-equiv-Prop)
 open import foundation.propositional-truncations using
@@ -163,20 +163,20 @@ abstract
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
     is-finite (X × Y) → Y → is-finite X
   is-finite-left-factor f y =
-    functor-trunc-Prop (λ e → count-left-factor e y) f
+    map-trunc-Prop (λ e → count-left-factor e y) f
 
 abstract
   is-finite-right-factor :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
     is-finite (X × Y) → X → is-finite Y
   is-finite-right-factor f x =
-    functor-trunc-Prop (λ e → count-right-factor e x) f
+    map-trunc-Prop (λ e → count-right-factor e x) f
 
 prod-UU-Fin-Level :
-  {l1 l2 : Level} {k l : ℕ} → UU-Fin-Level l1 k → UU-Fin-Level l2 l →
+  {l1 l2 : Level} (k l : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l2 l →
   UU-Fin-Level (l1 ⊔ l2) (mul-ℕ k l)
-pr1 (prod-UU-Fin-Level {l1} {l2} {k} {l} (pair X H) (pair Y K)) = X × Y
-pr2 (prod-UU-Fin-Level {l1} {l2} {k} {l} (pair X H) (pair Y K)) =
+pr1 (prod-UU-Fin-Level k l (pair X H) (pair Y K)) = X × Y
+pr2 (prod-UU-Fin-Level k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
     ( mere-equiv-Prop (Fin (mul-ℕ k l)) (X × Y))
     ( λ e1 →
@@ -186,6 +186,6 @@ pr2 (prod-UU-Fin-Level {l1} {l2} {k} {l} (pair X H) (pair Y K)) =
           unit-trunc-Prop (equiv-prod e1 e2 ∘e inv-equiv (prod-Fin k l))))
 
 prod-UU-Fin :
-  {k l : ℕ} → UU-Fin k → UU-Fin l → UU-Fin (mul-ℕ k l)
-prod-UU-Fin = prod-UU-Fin-Level
+  (k l : ℕ) → UU-Fin k → UU-Fin l → UU-Fin (mul-ℕ k l)
+prod-UU-Fin k l = prod-UU-Fin-Level k l
 ```

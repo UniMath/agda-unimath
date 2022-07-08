@@ -1,4 +1,6 @@
-# Propositional maps
+---
+title: Propositional maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

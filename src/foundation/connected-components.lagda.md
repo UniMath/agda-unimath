@@ -1,4 +1,6 @@
-# Connected components of types
+---
+title: Connected components of types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,7 @@ module foundation.connected-components where
 open import foundation.connected-types using (is-path-connected; is-path-connected-mere-eq)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.identity-types using (Id; refl; inv)
+open import foundation.identity-types using (_＝_; refl; inv)
 open import foundation.propositional-truncations using
   ( trunc-Prop; type-trunc-Prop; unit-trunc-Prop; apply-universal-property-trunc-Prop;
     all-elements-equal-type-trunc-Prop; is-prop-type-trunc-Prop)
@@ -31,7 +33,7 @@ module _
 
   connected-component : UU l
   connected-component =
-    Σ A (λ x → type-trunc-Prop (Id x a))
+    Σ A (λ x → type-trunc-Prop (x ＝ a))
 
   value-connected-component :
     connected-component → A
@@ -39,7 +41,7 @@ module _
 
   abstract
     mere-equality-connected-component : (X : connected-component) →
-      type-trunc-Prop (Id (value-connected-component X) a)
+      type-trunc-Prop (value-connected-component X ＝ a)
     mere-equality-connected-component X = pr2 X
 ```
 
@@ -58,7 +60,7 @@ abstract
       ( λ (pair x p) →
         apply-universal-property-trunc-Prop
           ( p)
-          ( trunc-Prop (Id (pair a (unit-trunc-Prop refl)) (pair x p)))
+          ( trunc-Prop (pair a (unit-trunc-Prop refl) ＝ pair x p))
           ( λ p' →
             unit-trunc-Prop
               ( eq-pair-Σ

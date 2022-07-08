@@ -20,17 +20,17 @@ open import foundation.empty-types using (empty-Set)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-precomp-is-equiv; is-equiv-left-factor';
     is-equiv-comp'; is-equiv-right-factor'; is-equiv-htpy-equiv;
-    is-equiv-map-equiv; _∘e_; equiv-postcomp-equiv; equiv-precomp-Π;
+    is-equiv-map-equiv; _∘e_; equiv-postcomp-equiv;
     inv-equiv; equiv-precomp-equiv; id-equiv)
 open import foundation.function-extensionality using (equiv-funext; eq-htpy)
 open import foundation.functions using (_∘_; map-Π; precomp; precomp-Π)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π; equiv-Π; map-equiv-Π; compute-map-equiv-Π)
+  ( equiv-map-Π; equiv-Π; map-equiv-Π; compute-map-equiv-Π; equiv-precomp-Π)
 open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
 open import foundation.functoriality-function-types using (equiv-postcomp)
 open import foundation.functoriality-set-truncation using
-  ( equiv-trunc-Set; map-equiv-trunc-Set; naturality-trunc-Set)
+  ( equiv-trunc-Set; map-equiv-trunc-Set; naturality-unit-trunc-Set)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using
   ( Id; equiv-concat; ap; _∙_; equiv-concat'; inv)
@@ -50,10 +50,8 @@ open import foundation.universal-property-maybe using
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set)
 open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
 ```
 
 ```agda
@@ -231,7 +229,8 @@ module _
                         ( equiv-concat
                           ( ap
                             ( λ t → map-equiv f t x)
-                            ( ( naturality-trunc-Set (precomp-Π (map-equiv e) B)
+                            ( ( naturality-unit-trunc-Set
+                                ( precomp-Π (map-equiv e) B)
                                 ( map-equiv-Π B e (λ _ → id-equiv) h)) ∙
                               ( ap
                                 ( unit-trunc-Set)

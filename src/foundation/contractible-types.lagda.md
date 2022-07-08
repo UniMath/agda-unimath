@@ -1,4 +1,6 @@
-# Contractible types
+---
+title: Contractible types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,10 +14,14 @@ open import foundation-core.contractible-maps using
   ( is-contr-map-is-equiv)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
-  ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse)
+  ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse;
+    map-inv-equiv; isretr-map-inv-equiv; map-equiv; issec-map-inv-equiv)
+open import foundation-core.function-extensionality using
+  ( funext; htpy-eq; eq-htpy)
 open import foundation-core.functions using (id)
 open import foundation-core.functoriality-dependent-pair-types using (tot)
-open import foundation-core.identity-types using (Id; left-inv; refl; ap)
+open import foundation-core.identity-types using (_＝_; left-inv; refl; ap)
+open import foundation-core.propositions using (UU-Prop; equiv-prop)
 open import foundation-core.singleton-induction using
   ( ind-singleton-is-contr; comp-singleton-is-contr)
 open import foundation-core.truncated-types using
@@ -23,73 +29,82 @@ open import foundation-core.truncated-types using
 open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 
-open import foundation.function-extensionality using
-  ( funext; htpy-eq; eq-htpy)
+open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
+open import foundation.subuniverses using
+  ( total-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
+    eq-equiv-subuniverse)
+```
+
+## Definition
+
+### The proposition of being contractible
+
+```agda
+is-contr-Prop : {l : Level} → UU l → UU-Prop l
+pr1 (is-contr-Prop A) = is-contr A
+pr2 (is-contr-Prop A) = is-property-is-contr
+```
+
+### The subuniverse of contractible types
+
+```agda
+UU-Contr : (l : Level) → UU (lsuc l)
+UU-Contr l = total-subuniverse is-contr-Prop
+
+type-UU-Contr : {l : Level} → UU-Contr l → UU l
+type-UU-Contr A = pr1 A
+
+abstract
+  is-contr-type-UU-Contr :
+    {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
+  is-contr-type-UU-Contr A = pr2 A
+
+equiv-UU-Contr :
+  {l1 l2 : Level} (X : UU-Contr l1) (Y : UU-Contr l2) → UU (l1 ⊔ l2)
+equiv-UU-Contr X Y = type-UU-Contr X ≃ type-UU-Contr Y
+
+equiv-eq-UU-Contr :
+  {l1 : Level} (X Y : UU-Contr l1) → (X ＝ Y) → equiv-UU-Contr X Y
+equiv-eq-UU-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
+
+abstract
+  is-equiv-equiv-eq-UU-Contr :
+    {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
+  is-equiv-equiv-eq-UU-Contr X Y =
+    is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
+
+eq-equiv-UU-Contr :
+  {l1 : Level} {X Y : UU-Contr l1} → equiv-UU-Contr X Y → (X ＝ Y)
+eq-equiv-UU-Contr = eq-equiv-subuniverse is-contr-Prop
+
+abstract
+  center-UU-contr : (l : Level) → UU-Contr l
+  center-UU-contr l = pair (raise-unit l) is-contr-raise-unit
+  
+  contraction-UU-contr :
+    {l : Level} (A : UU-Contr l) → center-UU-contr l ＝ A
+  contraction-UU-contr A =
+    eq-equiv-UU-Contr
+      ( equiv-is-contr is-contr-raise-unit (is-contr-type-UU-Contr A))
+
+abstract
+  is-contr-UU-Contr : (l : Level) → is-contr (UU-Contr l)
+  is-contr-UU-Contr l = pair (center-UU-contr l) contraction-UU-contr
 ```
 
 ## Properties
 
-### Products of families of contractible types are contractible
+### If two types are equivalent then so are the propositions that they are contractible
 
 ```agda
-abstract
-  is-contr-Π :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
-  pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
-  pr2 (is-contr-Π {A = A} {B = B} H) f =
-    map-inv-is-equiv
-      ( funext (λ x → center (H x)) f)
-      ( λ x → contraction (H x) (f x))
-```
-
-### The type of equivalences between contractible types is contractible
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-contr-equiv-is-contr :
-    is-contr A → is-contr B → is-contr (A ≃ B)
-  is-contr-equiv-is-contr (pair a α) (pair b β) =
-    is-contr-Σ
-      ( is-contr-Π (λ x → (pair b β)))
-      ( λ x → b)
-      ( is-contr-prod
-        ( is-contr-Σ
-          ( is-contr-Π (λ y → (pair a α)))
-          ( λ y → a)
-          ( is-contr-Π (λ y → is-prop-is-contr (pair b β) b y)))
-        ( is-contr-Σ
-          ( is-contr-Π (λ x → pair a α))
-          ( λ y → a)
-          ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))))
-```
-
-### Being contractible is a proposition
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-  
-  abstract
-    is-contr-is-contr : is-contr A → is-contr (is-contr A)
-    is-contr-is-contr (pair a α) =
-      is-contr-Σ
-        ( pair a α)
-        ( a)
-        ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))
-
-  abstract
-    is-subtype-is-contr : (H K : is-contr A) → is-contr (Id H K)
-    is-subtype-is-contr H = is-prop-is-contr (is-contr-is-contr H) H
-
-is-contr-Prop :
-  {l : Level} → UU l → Σ (UU l) (λ X → (x y : X) → is-contr (Id x y))
-pr1 (is-contr-Prop A) = is-contr A
-pr2 (is-contr-Prop A) = is-subtype-is-contr
+equiv-is-contr-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  → A ≃ B → is-contr A ≃ is-contr B
+equiv-is-contr-equiv {A = A} {B = B} e =
+  equiv-prop
+    ( is-property-is-contr)
+    ( is-property-is-contr)
+    ( is-contr-retract-of A (pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
+    ( is-contr-retract-of B (pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
 ```
 
 ### Contractible types are k-truncated for any k.
@@ -181,7 +196,7 @@ module _
         ( λ f →
           eq-htpy
             ( ind-singleton-is-contr a H
-              ( λ x → Id (ind-singleton-is-contr a H P (f a) x) (f x))
+              ( λ x → ind-singleton-is-contr a H P (f a) x ＝ f x)
               ( comp-singleton-is-contr a H P (f a))))
 
   equiv-dependent-universal-property-contr :

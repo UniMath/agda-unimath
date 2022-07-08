@@ -36,7 +36,8 @@ root-Tree-Fin = tree-Fin zero-ℕ ex-falso
 
 number-nodes-Tree-Fin : Tree-Fin → ℕ
 number-nodes-Tree-Fin (tree-Fin zero-ℕ _) = zero-ℕ
-number-nodes-Tree-Fin (tree-Fin (succ-ℕ n) f) = succ-ℕ (sum-Fin-ℕ (λ k → number-nodes-Tree-Fin (f k)))
+number-nodes-Tree-Fin (tree-Fin (succ-ℕ n) f) =
+  succ-ℕ (sum-Fin-ℕ (succ-ℕ n) (λ k → number-nodes-Tree-Fin (f k)))
 
 height-Tree-Fin : Tree-Fin → ℕ
 height-Tree-Fin (tree-Fin zero-ℕ f) = zero-ℕ

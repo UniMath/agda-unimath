@@ -1,4 +1,6 @@
-# Mere equality
+---
+title: Mere equality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,8 +10,8 @@ module foundation.mere-equality where
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+  ( map-trunc-Prop)
+open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 open import foundation.propositional-truncations using
@@ -29,10 +31,10 @@ Two elements in a type are said to be merely equal if there is an element of the
 ```agda
 mere-eq-Prop :
   {l : Level} {A : UU l} → A → A → UU-Prop l
-mere-eq-Prop x y = trunc-Prop (Id x y)
+mere-eq-Prop x y = trunc-Prop (x ＝ y)
 
 mere-eq : {l : Level} {A : UU l} → A → A → UU l
-mere-eq x y = type-trunc-Prop (Id x y)
+mere-eq x y = type-trunc-Prop (x ＝ y)
 ```
 
 ## Properties
@@ -53,7 +55,7 @@ abstract
   symm-mere-eq :
     {l : Level} {A : UU l} {x y : A} → mere-eq x y → mere-eq y x
   symm-mere-eq {x = x} {y} =
-    functor-trunc-Prop inv
+    map-trunc-Prop inv
 ```
 
 ### Transitivity
@@ -66,7 +68,7 @@ abstract
   trans-mere-eq {x = x} {y} {z} p q =
     apply-universal-property-trunc-Prop p
       ( mere-eq-Prop x z)
-      ( λ p' → functor-trunc-Prop (λ q' → p' ∙ q') q)
+      ( λ p' → map-trunc-Prop (λ q' → p' ∙ q') q)
 ```
 
 ### Mere equality is an equivalence relation

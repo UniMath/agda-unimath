@@ -1,4 +1,6 @@
-# Equality on dependent function types
+---
+title: Equality on dependent function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,13 +12,12 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation-core.equivalences using
   ( is-equiv; map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
-open import foundation-core.identity-types using (Id; tr; refl)
+open import foundation-core.identity-types using (_＝_; tr; refl)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
-open import foundation.contractible-types using
+open import foundation-core.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-total-path; is-contr-Π)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
+open import foundation.type-theoretic-principle-of-choice using
   ( Π-total-fam; distributive-Π-Σ)
 ```
 
@@ -48,13 +49,13 @@ module _
   where
 
   map-extensionality-Π :
-    ( (x : A) (y : B x) → Id (f x) y ≃ Eq-B x y) →
-    ( g : (x : A) → B x) → Id f g → ((x : A) → Eq-B x (g x))
+    ( (x : A) (y : B x) → (f x ＝ y) ≃ Eq-B x y) →
+    ( g : (x : A) → B x) → f ＝ g → ((x : A) → Eq-B x (g x))
   map-extensionality-Π e .f refl x = map-equiv (e x (f x)) refl
 
   abstract
     is-equiv-map-extensionality-Π :
-      (e : (x : A) (y : B x) → Id (f x) y ≃ Eq-B x y) →
+      (e : (x : A) (y : B x) → (f x ＝ y) ≃ Eq-B x y) →
       (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
     is-equiv-map-extensionality-Π e =
       fundamental-theorem-id f
@@ -69,8 +70,8 @@ module _
         ( map-extensionality-Π e)
   
   extensionality-Π :
-    ( (x : A) (y : B x) → Id (f x) y ≃ Eq-B x y) →
-    ( g : (x : A) → B x) → Id f g ≃ ((x : A) → Eq-B x (g x))
+    ( (x : A) (y : B x) → (f x ＝ y) ≃ Eq-B x y) →
+    ( g : (x : A) → B x) → (f ＝ g) ≃ ((x : A) → Eq-B x (g x))
   pr1 (extensionality-Π e g) = map-extensionality-Π e g
   pr2 (extensionality-Π e g) = is-equiv-map-extensionality-Π e g
 ```

@@ -1,15 +1,14 @@
-# Small types
+---
+title: Small types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.small-types where
 
-open import foundation.booleans using (bool)
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-equiv')
-open import foundation.decidable-propositions using
-  ( decidable-Prop; equiv-bool-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-map-equiv; map-inv-equiv; _∘e_; inv-equiv;
@@ -149,17 +148,6 @@ equiv-UU-is-small :
 equiv-UU-is-small l1 l2 =
   ( equiv-tot (λ X → equiv-tot (λ Y → equiv-inv-equiv))) ∘e
   ( equiv-left-swap-Σ)
-```
-
-### The type of decidable propositions in any universe is small
-
-```agda
-abstract
-  is-small-decidable-Prop :
-    (l1 l2 : Level) → is-small l2 (decidable-Prop l1)
-  pr1 (is-small-decidable-Prop l1 l2) = raise l2 bool
-  pr2 (is-small-decidable-Prop l1 l2) =
-    equiv-raise l2 bool ∘e equiv-bool-decidable-Prop
 ```
 
 ### Being small is a property

@@ -1,7 +1,9 @@
-# Polynomial endofunctors
+---
+title: Polynomial endofunctors
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.polynomial-endofunctors where
 
@@ -10,15 +12,16 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv)
 open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using
   ( _~_; refl-htpy; is-contr-total-htpy; _·r_)
-open import foundation.identity-types using (Id; tr; refl)
+open import foundation.identity-types using (_＝_; tr; refl)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.functoriality-dependent-pair-types using (tot)
 ```
 
 ## Idea
@@ -52,7 +55,7 @@ module _
   Eq-type-polynomial-endofunctor :
     (x y : type-polynomial-endofunctor A B X) → UU (l1 ⊔ l2 ⊔ l3)
   Eq-type-polynomial-endofunctor x y =
-    Σ (Id (pr1 x) (pr1 y)) (λ p → (pr2 x) ~ ((pr2 y) ∘ (tr B p)))
+    Σ (pr1 x ＝ pr1 y) (λ p → (pr2 x) ~ ((pr2 y) ∘ (tr B p)))
 
   refl-Eq-type-polynomial-endofunctor :
     (x : type-polynomial-endofunctor A B X) →
@@ -66,14 +69,14 @@ module _
           ( Eq-type-polynomial-endofunctor x))
   is-contr-total-Eq-type-polynomial-endofunctor (pair x α) =
     is-contr-total-Eq-structure
-      ( ( λ (y : A) (β : B y → X) (p : Id x y) → α ~ (β ∘ tr B p)))
+      ( ( λ (y : A) (β : B y → X) (p : x ＝ y) → α ~ (β ∘ tr B p)))
       ( is-contr-total-path x)
       ( pair x refl)
       ( is-contr-total-htpy α)
 
   Eq-type-polynomial-endofunctor-eq :
     (x y : type-polynomial-endofunctor A B X) →
-    Id x y → Eq-type-polynomial-endofunctor x y
+    x ＝ y → Eq-type-polynomial-endofunctor x y
   Eq-type-polynomial-endofunctor-eq x .x refl =
     refl-Eq-type-polynomial-endofunctor x
 
@@ -88,7 +91,7 @@ module _
 
   eq-Eq-type-polynomial-endofunctor :
     (x y : type-polynomial-endofunctor A B X) →
-    Eq-type-polynomial-endofunctor x y → Id x y
+    Eq-type-polynomial-endofunctor x y → x ＝ y
   eq-Eq-type-polynomial-endofunctor x y =
     map-inv-is-equiv (is-equiv-Eq-type-polynomial-endofunctor-eq x y)
 
@@ -101,8 +104,8 @@ module _
 
   coh-refl-eq-Eq-type-polynomial-endofunctor :
     (x : type-polynomial-endofunctor A B X) →
-    Id ( eq-Eq-type-polynomial-endofunctor x x
-       ( refl-Eq-type-polynomial-endofunctor x)) refl
+    ( eq-Eq-type-polynomial-endofunctor x x
+      ( refl-Eq-type-polynomial-endofunctor x)) ＝ refl
   coh-refl-eq-Eq-type-polynomial-endofunctor x =
     isretr-eq-Eq-type-polynomial-endofunctor x x refl
 ```

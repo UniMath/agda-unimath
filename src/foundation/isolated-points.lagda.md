@@ -1,4 +1,6 @@
-# Isolated points
+---
+title: Isolated points
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -26,7 +28,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
-  ( Id; refl; tr; ap; equiv-concat; inv)
+  ( _＝_; refl; tr; ap; equiv-concat; inv)
 open import foundation.injective-maps using (is-emb-is-injective)
 open import foundation.maybe using (Maybe; maybe-structure)
 open import foundation.negation using (¬; equiv-neg)
@@ -53,7 +55,7 @@ A point `a : A` is considered to be isolated if `Id a x` is decidable for any `x
 ```agda
 is-isolated :
   {l1 : Level} {X : UU l1} (a : X) → UU l1
-is-isolated {l1} {X} a = (x : X) → is-decidable (Id a x)
+is-isolated {l1} {X} a = (x : X) → is-decidable (a ＝ x)
 
 isolated-point :
   {l1 : Level} (X : UU l1) → UU l1
@@ -66,7 +68,7 @@ isolated-point X = Σ X is-isolated
 complement-isolated-point :
   {l1 : Level} (X : UU l1) → isolated-point X → UU l1
 complement-isolated-point X x =
-  Σ X (λ y → ¬ (Id (pr1 x) y))
+  Σ X (λ y → ¬ (pr1 x ＝ y))
 ```
 
 ## Properties
@@ -89,13 +91,13 @@ module _
     is-decidable-equiv' (fib-const a x) (d x)
 
   cases-Eq-isolated-point :
-    is-isolated a → (x : A) → is-decidable (Id a x) → UU lzero
+    is-isolated a → (x : A) → is-decidable (a ＝ x) → UU lzero
   cases-Eq-isolated-point H x (inl p) = unit
   cases-Eq-isolated-point H x (inr f) = empty
 
   abstract
     is-prop-cases-Eq-isolated-point :
-      (d : is-isolated a) (x : A) (dx : is-decidable (Id a x)) →
+      (d : is-isolated a) (x : A) (dx : is-decidable (a ＝ x)) →
       is-prop (cases-Eq-isolated-point d x dx)
     is-prop-cases-Eq-isolated-point d x (inl p) = is-prop-unit
     is-prop-cases-Eq-isolated-point d x (inr f) = is-prop-empty
@@ -114,7 +116,7 @@ module _
   pr2 (Eq-isolated-point-Prop d x) = is-prop-Eq-isolated-point d x
 
   decide-reflexivity :
-    (d : is-decidable (Id a a)) → Σ (Id a a) (λ p → Id (inl p) d)
+    (d : is-decidable (a ＝ a)) → Σ (a ＝ a) (λ p → inl p ＝ d)
   pr1 (decide-reflexivity (inl p)) = p
   pr2 (decide-reflexivity (inl p)) = refl
   decide-reflexivity (inr f) = ex-falso (f refl)
@@ -128,7 +130,7 @@ module _
 
   abstract
     Eq-eq-isolated-point :
-      (d : is-isolated a) {x : A} → Id a x → Eq-isolated-point d x
+      (d : is-isolated a) {x : A} → a ＝ x → Eq-isolated-point d x
     Eq-eq-isolated-point d refl = refl-Eq-isolated-point d
 
   abstract
@@ -138,13 +140,13 @@ module _
     pr2 (center-total-Eq-isolated-point d) = refl-Eq-isolated-point d
   
     cases-contraction-total-Eq-isolated-point :
-      (d : is-isolated a) (x : A) (dx : is-decidable (Id a x))
-      (e : cases-Eq-isolated-point d x dx) → Id a x
+      (d : is-isolated a) (x : A) (dx : is-decidable (a ＝ x))
+      (e : cases-Eq-isolated-point d x dx) → a ＝ x
     cases-contraction-total-Eq-isolated-point d x (inl p) e = p
   
     contraction-total-Eq-isolated-point :
       (d : is-isolated a) (t : Σ A (Eq-isolated-point d)) →
-      Id (center-total-Eq-isolated-point d) t
+      center-total-Eq-isolated-point d ＝ t
     contraction-total-Eq-isolated-point d (pair x e) =
       eq-subtype
         ( Eq-isolated-point-Prop d)
@@ -167,12 +169,12 @@ module _
 
   abstract
     equiv-Eq-eq-isolated-point :
-      (d : is-isolated a) (x : A) → Id a x ≃ Eq-isolated-point d x
+      (d : is-isolated a) (x : A) → (a ＝ x) ≃ Eq-isolated-point d x
     pr1 (equiv-Eq-eq-isolated-point d x) = Eq-eq-isolated-point d
     pr2 (equiv-Eq-eq-isolated-point d x) = is-equiv-Eq-eq-isolated-point d x
 
   abstract
-    is-prop-eq-isolated-point : (d : is-isolated a) (x : A) → is-prop (Id a x)
+    is-prop-eq-isolated-point : (d : is-isolated a) (x : A) → is-prop (a ＝ x)
     is-prop-eq-isolated-point d x =
       is-prop-equiv
         ( equiv-Eq-eq-isolated-point d x)
@@ -184,7 +186,7 @@ module _
       fundamental-theorem-id star
         refl
         ( is-contr-equiv
-          ( Id a a)
+          ( a ＝ a)
           ( left-unit-law-prod)
           ( is-proof-irrelevant-is-prop
             ( is-prop-eq-isolated-point d a)
@@ -254,7 +256,7 @@ map-maybe-structure-isolated-point X (pair x d) (inr star) = x
 
 cases-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
-  (y : X) → is-decidable (Id (pr1 x) y) → Maybe (complement-isolated-point X x)
+  (y : X) → is-decidable (pr1 x ＝ y) → Maybe (complement-isolated-point X x)
 cases-map-inv-maybe-structure-isolated-point X (pair x dx) y (inl p) =
   inr star
 cases-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
@@ -268,10 +270,10 @@ map-inv-maybe-structure-isolated-point X (pair x d) y =
 
 cases-issec-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
-  (y : X) (d : is-decidable (Id (pr1 x) y)) →
-  Id ( map-maybe-structure-isolated-point X x
-       ( cases-map-inv-maybe-structure-isolated-point X x y d))
-     ( y)
+  (y : X) (d : is-decidable (pr1 x ＝ y)) →
+  ( map-maybe-structure-isolated-point X x
+    ( cases-map-inv-maybe-structure-isolated-point X x y d)) ＝
+  ( y)
 cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) .x (inl refl) =
   refl
 cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
@@ -323,11 +325,11 @@ maybe-structure-isolated-point {l1} {X} x =
 ```agda
 equiv-complement-isolated-point :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-point X)
-  (y : isolated-point Y) (p : Id (map-equiv e (pr1 x)) (pr1 y)) →
+  (y : isolated-point Y) (p : map-equiv e (pr1 x) ＝ pr1 y) →
   complement-isolated-point X x ≃ complement-isolated-point Y y
 equiv-complement-isolated-point e x y p =
   equiv-Σ
-    ( λ z → ¬ (Id (pr1 y) z))
+    ( λ z → ¬ (pr1 y ＝ z))
     ( e)
     ( λ z →
       equiv-neg
@@ -342,7 +344,7 @@ inclusion-complement-isolated-point x = pr1
 
 natural-inclusion-equiv-complement-isolated-point :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) (x : isolated-point X)
-  (y : isolated-point Y) (p : Id (map-equiv e (pr1 x)) (pr1 y)) →
+  (y : isolated-point Y) (p : map-equiv e (pr1 x) ＝ pr1 y) →
   ( inclusion-complement-isolated-point y ∘
     map-equiv (equiv-complement-isolated-point e x y p)) ~
   ( map-equiv e ∘ inclusion-complement-isolated-point x)

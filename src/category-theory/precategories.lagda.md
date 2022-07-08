@@ -1,4 +1,6 @@
-# Precategories
+---
+title: Precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,7 @@ module category-theory.precategories where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using (Id; inv; _∙_)
+open import foundation.identity-types using (_＝_; inv; _∙_)
 open import foundation.propositions using
   ( all-elements-equal; prod-Prop; Π-Prop; Π-Prop'; is-prop;
     is-prop-all-elements-equal)
@@ -44,16 +46,15 @@ module _
         → type-Set (hom x z))
       ( λ μ →
         {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
-        (f : type-Set (hom x y)) →
-        Id (μ (μ h g) f) (μ h (μ g f)))
+        (f : type-Set (hom x y)) → μ (μ h g) f ＝ μ h (μ g f))
 
   is-unital-composition-structure-Set :
     associative-composition-structure-Set → UU (l1 ⊔ l2)
   is-unital-composition-structure-Set μ =
     Σ ( (x : A) → type-Set (hom x x))
       ( λ e →
-        ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ (e y) f) f) ×
-        ( {x y : A} (f : type-Set (hom x y)) → Id (pr1 μ f (e x)) f))
+        ( {x y : A} (f : type-Set (hom x y)) → pr1 μ (e y) f ＝ f) ×
+        ( {x y : A} (f : type-Set (hom x y)) → pr1 μ f (e x) ＝ f))
 
 Precat :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -96,8 +97,8 @@ module _
   assoc-comp-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
-    Id (comp-hom-Precat (comp-hom-Precat h g) f)
-       (comp-hom-Precat h (comp-hom-Precat g f))
+    ( comp-hom-Precat (comp-hom-Precat h g) f) ＝
+    ( comp-hom-Precat h (comp-hom-Precat g f))
   assoc-comp-hom-Precat = pr2 associative-composition-Precat
 
   is-unital-Precat :
@@ -111,12 +112,12 @@ module _
 
   left-unit-law-comp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    Id (comp-hom-Precat id-hom-Precat f) f
+    comp-hom-Precat id-hom-Precat f ＝ f
   left-unit-law-comp-hom-Precat = pr1 (pr2 is-unital-Precat)
 
   right-unit-law-comp-hom-Precat :
     {x y : obj-Precat} (f : type-hom-Precat x y) →
-    Id (comp-hom-Precat f id-hom-Precat) f
+    comp-hom-Precat f id-hom-Precat ＝ f
   right-unit-law-comp-hom-Precat = pr2 (pr2 is-unital-Precat)
 ```
 

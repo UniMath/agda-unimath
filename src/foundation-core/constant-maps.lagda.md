@@ -1,4 +1,6 @@
-# Constant maps
+---
+title: Constant maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

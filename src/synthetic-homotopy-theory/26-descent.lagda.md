@@ -8,10 +8,10 @@ title: Formalisation of the Symmetry Book
 module synthetic-homotopy-theory.26-descent where
 
 open import foundation.commuting-squares
+open import foundation.cones-pullbacks
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -26,6 +26,7 @@ open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.sections
 open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels

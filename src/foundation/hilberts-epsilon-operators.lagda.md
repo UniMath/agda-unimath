@@ -10,7 +10,7 @@ module foundation.hilberts-epsilon-operators where
 open import foundation.equivalences using (_≃_; map-equiv; map-inv-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.propositional-truncations using (type-trunc-Prop)
 open import foundation.universe-levels using (Level; UU)
 ```
@@ -35,11 +35,11 @@ Hilbert's ε-operator at a type `A` is a map `type-trunc-Prop A → A`. Contrary
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
   ε-operator-Hilbert X → ε-operator-Hilbert Y
 ε-operator-equiv e f =
-  (map-equiv e ∘ f) ∘ (functor-trunc-Prop (map-inv-equiv e))
+  (map-equiv e ∘ f) ∘ (map-trunc-Prop (map-inv-equiv e))
 
 ε-operator-equiv' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
   ε-operator-Hilbert Y → ε-operator-Hilbert X
 ε-operator-equiv' e f =
-  (map-inv-equiv e ∘ f) ∘ (functor-trunc-Prop (map-equiv e))
+  (map-inv-equiv e ∘ f) ∘ (map-trunc-Prop (map-equiv e))
 ```

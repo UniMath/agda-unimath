@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.24-pushouts where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
+open import foundation.cones-pullbacks
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types

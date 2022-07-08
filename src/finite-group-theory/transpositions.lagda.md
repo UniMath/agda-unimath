@@ -1,7 +1,7 @@
 # Transpositions
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module finite-group-theory.transpositions where
 
@@ -23,6 +23,8 @@ open import foundation.decidable-types using
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop; prop-decidable-Prop)
+open import foundation.decidable-subtypes using
+  ( equiv-universes-decidable-subtype; iff-universes-decidable-subtype)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.equality-dependent-pair-types using
@@ -68,6 +70,7 @@ open import foundation.universe-levels using (Level; UU; lzero; _⊔_; lsuc)
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; is-in-2-Element-Decidable-Subtype;
     map-swap-2-Element-Decidable-Subtype; swap-2-Element-Decidable-Subtype;
+    compute-swap-2-Element-Decidable-Subtype;
     decidable-subtype-2-Element-Decidable-Subtype;
     is-decidable-subtype-subtype-2-Element-Decidable-Subtype;
     2-element-type-2-Element-Decidable-Subtype;
@@ -77,7 +80,10 @@ open import univalent-combinatorics.2-element-decidable-subtypes using
     is-decidable-type-prop-standard-2-Element-Decidable-Subtype;
     2-element-type-standard-2-Element-Decidable-Subtype;
     subtype-standard-2-Element-Decidable-Subtype;
-    precomp-equiv-2-Element-Decidable-Subtype)
+    precomp-equiv-2-Element-Decidable-Subtype;
+    equiv-universes-2-Element-Decidable-Subtype;
+    type-2-Element-Decidable-Subtype;
+    subtype-2-Element-Decidable-Subtype)
 open import univalent-combinatorics.2-element-types using
   ( compute-swap-2-Element-Type; is-involution-aut-2-element-type;
     contradiction-3-distinct-element-2-Element-Type;
@@ -87,12 +93,12 @@ open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
     number-of-elements-count; has-decidable-equality-count; is-set-count)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin; Fin-Set)
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( has-cardinality; has-cardinality-Prop)
 open import univalent-combinatorics.lists using
   (cons; list; fold-list; map-list; nil; concat-list)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
 ```
 
 ## Idea
@@ -321,7 +327,7 @@ module _
       ( λ x → has-decidable-equality-count eX (map-transposition Y x) x)
       ( eX)
       ( λ H → is-not-identity-map-transposition Y (eq-htpy H))
-  
+
   two-elements-transposition :
     Σ ( X)
       ( λ x →
@@ -333,10 +339,12 @@ module _
                      ( has-decidable-equality-count eX)
                      ( np))
                    ( Y))))
-  pr1 two-elements-transposition = pr1 element-is-not-identity-map-transposition
+  pr1 two-elements-transposition =
+    pr1 element-is-not-identity-map-transposition
   pr1 (pr2 two-elements-transposition) =
     map-transposition Y (pr1 element-is-not-identity-map-transposition)
-  pr1 (pr2 (pr2 two-elements-transposition)) = λ p → pr2 element-is-not-identity-map-transposition (inv p)
+  pr1 (pr2 (pr2 two-elements-transposition)) p =
+    pr2 element-is-not-identity-map-transposition (inv p)
   pr2 (pr2 (pr2 two-elements-transposition)) =
     eq-pair-Σ
       ( eq-htpy
@@ -347,74 +355,140 @@ module _
               ( has-decidable-equality-count eX)
               ( pr1 (pr2 (pr2 two-elements-transposition)))
               ( x)}
-            { y = prop-decidable-Prop (pr1 Y x)}
+            { y = subtype-2-Element-Decidable-Subtype Y x}
             ( eq-iff
               (type-t-coprod-id x)
               (coprod-id-type-t x)))
           ( eq-pair-Σ
             ( eq-is-prop (is-prop-is-prop (pr1 (pr1 Y x))))
             ( eq-is-prop (is-prop-is-decidable (pr1 (pr2 (pr1 Y x))))))))
-      ( eq-is-prop (pr2 (has-cardinality-Prop 2 (Σ X (λ x → type-decidable-Prop (pr1 Y x))))))
+      ( eq-is-prop
+        ( pr2
+          ( has-cardinality-Prop 2
+            ( Σ X (λ x → type-decidable-Prop (pr1 Y x))))))
     where
     type-decidable-prop-pr1-two-elements-transposition :
-      type-decidable-Prop (pr1 Y (pr1 two-elements-transposition))
+      is-in-2-Element-Decidable-Subtype Y (pr1 two-elements-transposition)
     type-decidable-prop-pr1-two-elements-transposition =
       cases-type-decidable-prop-pr1-two-elements-transposition
-        (is-decidable-type-decidable-Prop (pr1 Y (pr1 two-elements-transposition)))
+        ( is-decidable-subtype-subtype-2-Element-Decidable-Subtype Y
+          ( pr1 two-elements-transposition))
       where
       cases-type-decidable-prop-pr1-two-elements-transposition :
-        is-decidable (type-decidable-Prop (pr1 Y (pr1 two-elements-transposition))) →
-        type-decidable-Prop (pr1 Y (pr1 two-elements-transposition))
+        is-decidable
+          ( is-in-2-Element-Decidable-Subtype Y
+            ( pr1 two-elements-transposition)) →
+        is-in-2-Element-Decidable-Subtype Y (pr1 two-elements-transposition)
       cases-type-decidable-prop-pr1-two-elements-transposition (inl Q) = Q
       cases-type-decidable-prop-pr1-two-elements-transposition (inr NQ) =
-        ex-falso (pr2 element-is-not-identity-map-transposition
-          ( ap (λ R → map-transposition' Y (pr1 (two-elements-transposition)) R)
-            { x = is-decidable-type-decidable-Prop (pr1 Y (pr1 two-elements-transposition))} {y = inr NQ}
-            ( eq-is-prop (is-prop-is-decidable (is-prop-type-decidable-Prop (pr1 Y (pr1 two-elements-transposition)))))))
+        ex-falso
+          ( pr2 element-is-not-identity-map-transposition
+            ( ap
+              ( λ R →
+                map-transposition' Y (pr1 (two-elements-transposition)) R)
+            { x =
+              is-decidable-subtype-subtype-2-Element-Decidable-Subtype Y
+                ( pr1 two-elements-transposition)}
+            { y = inr NQ}
+            ( eq-is-prop
+              ( is-prop-is-decidable
+                ( is-prop-is-in-2-Element-Decidable-Subtype Y
+                  ( pr1 two-elements-transposition))))))
     type-decidable-prop-pr1-pr2-two-elements-transposition :
-      type-decidable-Prop (pr1 Y (pr1 (pr2 two-elements-transposition)))
+      is-in-2-Element-Decidable-Subtype Y (pr1 (pr2 two-elements-transposition))
     type-decidable-prop-pr1-pr2-two-elements-transposition = 
       preserves-subtype-map-transposition Y (pr1 two-elements-transposition)
         ( type-decidable-prop-pr1-two-elements-transposition)
-    type-t-coprod-id : (x : X) →
-      coprod (Id (pr1 two-elements-transposition) x) (Id (pr1 (pr2 two-elements-transposition)) x) → type-decidable-Prop (pr1 Y x)
+    type-t-coprod-id :
+      (x : X) →
+      coprod
+        ( Id (pr1 two-elements-transposition) x)
+        ( Id (pr1 (pr2 two-elements-transposition)) x) →
+      type-decidable-Prop (pr1 Y x)
     type-t-coprod-id x (inl Q) =
-      tr (λ y → type-decidable-Prop (pr1 Y y)) Q
+      tr
+        ( is-in-2-Element-Decidable-Subtype Y)
+        ( Q)
         ( type-decidable-prop-pr1-two-elements-transposition)
     type-t-coprod-id x (inr Q) =
-      tr (λ y → type-decidable-Prop (pr1 Y y)) Q type-decidable-prop-pr1-pr2-two-elements-transposition
-    cases-coprod-id-type-t : (x : X) → ( p : type-decidable-Prop (pr1 Y x)) →
-      (h : Fin 2 ≃ Σ X (λ y → type-decidable-Prop (pr1 Y y))) → ( k1 k2 k3 : Fin 2 ) →
-      Id (map-inv-equiv h (pair x p)) k1 →
-      Id (map-inv-equiv h (pair (pr1 two-elements-transposition) type-decidable-prop-pr1-two-elements-transposition)) k2 →
-      Id (map-inv-equiv h (pair (pr1 (pr2 two-elements-transposition)) type-decidable-prop-pr1-pr2-two-elements-transposition)) k3 →
-      coprod (Id (pr1 two-elements-transposition) x) (Id (pr1 (pr2 two-elements-transposition)) x)
+      tr
+        ( is-in-2-Element-Decidable-Subtype Y)
+        ( Q)
+        ( type-decidable-prop-pr1-pr2-two-elements-transposition)
+    cases-coprod-id-type-t :
+      (x : X) (p : is-in-2-Element-Decidable-Subtype Y x) →
+      (h : Fin 2 ≃ type-2-Element-Decidable-Subtype Y) →
+      (k1 k2 k3 : Fin 2 ) →
+      Id ( map-inv-equiv h (pair x p)) k1 →
+      Id ( map-inv-equiv h
+           ( pair
+             ( pr1 two-elements-transposition)
+             ( type-decidable-prop-pr1-two-elements-transposition)))
+         ( k2) →
+      Id ( map-inv-equiv h
+           ( pair
+             ( pr1 (pr2 two-elements-transposition))
+             ( type-decidable-prop-pr1-pr2-two-elements-transposition)))
+         ( k3) →
+      coprod
+        ( Id (pr1 two-elements-transposition) x)
+        ( Id (pr1 (pr2 two-elements-transposition)) x)
     cases-coprod-id-type-t x p h (inl (inr star)) (inl (inr star)) k3 K1 K2 K3 =
       inl (ap pr1 (is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K1)))
-    cases-coprod-id-type-t x p h (inl (inr star)) (inr star) (inl (inr star)) K1 K2 K3 =
+    cases-coprod-id-type-t x p h
+      (inl (inr star)) (inr star) (inl (inr star)) K1 K2 K3 =
       inr (ap pr1 (is-injective-map-equiv (inv-equiv h) (K3 ∙ inv K1)))
-    cases-coprod-id-type-t x p h (inl (inr star)) (inr star) (inr star) K1 K2 K3 =
-      ex-falso (pr1 (pr2 (pr2 two-elements-transposition)) (ap pr1 (is-injective-map-equiv (inv-equiv h)
-        (K2 ∙ inv K3))))
-    cases-coprod-id-type-t x p h (inr star) (inl (inr star)) (inl (inr star)) K1 K2 K3 =
-      ex-falso (pr1 (pr2 (pr2 two-elements-transposition)) (ap pr1 (is-injective-map-equiv (inv-equiv h)
-        (K2 ∙ inv K3))))
-    cases-coprod-id-type-t x p h (inr star) (inl (inr star)) (inr star) K1 K2 K3 =
+    cases-coprod-id-type-t x p h
+      (inl (inr star)) (inr star) (inr star) K1 K2 K3 =
+      ex-falso
+        ( pr2 element-is-not-identity-map-transposition
+        ( inv
+          ( ap pr1
+            ( is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K3)))))
+    cases-coprod-id-type-t x p h
+      (inr star) (inl (inr star)) (inl (inr star)) K1 K2 K3 =
+      ex-falso
+        ( pr2 element-is-not-identity-map-transposition
+        ( inv
+          ( ap pr1
+            ( is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K3)))))
+    cases-coprod-id-type-t x p h
+      (inr star) (inl (inr star)) (inr star) K1 K2 K3 =
       inr (ap pr1 (is-injective-map-equiv (inv-equiv h) (K3 ∙ inv K1)))
     cases-coprod-id-type-t x p h (inr star) (inr star) k3 K1 K2 K3 =
       inl (ap pr1 (is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K1)))
-    coprod-id-type-t : (x : X) → type-decidable-Prop (pr1 Y x) →
-      coprod (Id (pr1 two-elements-transposition) x) (Id (pr1 (pr2 two-elements-transposition)) x)
+    coprod-id-type-t :
+      (x : X) → type-decidable-Prop (pr1 Y x) →
+      coprod
+        ( Id (pr1 two-elements-transposition) x)
+        ( Id (pr1 (pr2 two-elements-transposition)) x)
     coprod-id-type-t x p =
       apply-universal-property-trunc-Prop (pr2 Y)
         ( coprod-Prop
-          ( Id-Prop (pair X (is-set-count eX)) (pr1 two-elements-transposition) x)
-          ( Id-Prop (pair X (is-set-count eX)) (pr1 (pr2 two-elements-transposition)) x)
-          ( λ q r → pr1 (pr2 (pr2 two-elements-transposition)) (q ∙ inv r)))
-        ( λ h → cases-coprod-id-type-t x p h (map-inv-equiv h (pair x p))
-          (map-inv-equiv h (pair (pr1 two-elements-transposition) type-decidable-prop-pr1-two-elements-transposition))
-          (map-inv-equiv h (pair (pr1 (pr2 two-elements-transposition)) type-decidable-prop-pr1-pr2-two-elements-transposition))
-          refl refl refl)
+          ( Id-Prop
+            ( pair X (is-set-count eX))
+            ( pr1 two-elements-transposition)
+            ( x))
+          ( Id-Prop
+            ( pair X (is-set-count eX))
+            ( pr1 (pr2 two-elements-transposition))
+            ( x))
+          ( λ q r →
+            pr2 element-is-not-identity-map-transposition (inv (q ∙ inv r))))
+        ( λ h →
+          cases-coprod-id-type-t x p h
+            ( map-inv-equiv h (pair x p))
+            ( map-inv-equiv h
+              ( pair
+                ( pr1 two-elements-transposition)
+                ( type-decidable-prop-pr1-two-elements-transposition)))
+            ( map-inv-equiv h
+              ( pair
+                ( pr1 (pr2 two-elements-transposition))
+                ( type-decidable-prop-pr1-pr2-two-elements-transposition)))
+            ( refl)
+            ( refl)
+            ( refl))
 
   abstract
     cases-eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
@@ -628,7 +702,8 @@ module _
       htpy-equiv
         ( permutation-list-transpositions (map-list transposition-conjugation-equiv li))
         ( (e ∘e (permutation-list-transpositions li)) ∘e (inv-equiv e))
-    correct-transposition-conjugation-equiv-list nil x = ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv e))
+    correct-transposition-conjugation-equiv-list nil x =
+      ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv e))
     correct-transposition-conjugation-equiv-list (cons t li) x =
       ( correct-transposition-conjugation-equiv
         ( t)
@@ -788,41 +863,192 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype {l} {X} H {x} {y} 
               ( is-prop-is-decidable
                 ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np) z))))))))
     ( eq-is-prop is-prop-type-trunc-Prop)
-      where
-      f : (z : X) →
-        pr1
-          ( pr1
-            ( precomp-equiv-2-Element-Decidable-Subtype
-              ( standard-transposition H np)
-              ( standard-2-Element-Decidable-Subtype H np)) z) →
-        pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z)
-      f z (inl p) =
-        inr
-          ( is-injective-map-equiv
-            ( standard-transposition H np)
-            ( ( right-computation-standard-transposition H np) ∙
-              ( p)))
-      f z (inr p) =
-        inl
-          ( is-injective-map-equiv
-            ( standard-transposition H np)
-            ( ( left-computation-standard-transposition H np) ∙
-              ( p)))
-      g : (z : X) →
-        pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z) →
-        pr1
-          ( pr1
-            ( precomp-equiv-2-Element-Decidable-Subtype
-              ( standard-transposition H np)
-              ( standard-2-Element-Decidable-Subtype H np)) z)
-      g z (inl p) =
-        inr
-          ( ( inv
-            ( left-computation-standard-transposition H np)) ∙
-            ( ap (map-standard-transposition H np) p))
-      g z (inr p) =
-        inl
-          ( ( inv
-            ( right-computation-standard-transposition H np)) ∙
-            ( ap (map-standard-transposition H np) p))
+  where
+  f : (z : X) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np)) z) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z)
+  f z (inl p) =
+    inr
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( right-computation-standard-transposition H np) ∙
+          ( p)))
+  f z (inr p) =
+    inl
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( left-computation-standard-transposition H np) ∙
+          ( p)))
+  g : (z : X) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np) z) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np)) z)
+  g z (inl p) =
+    inr
+      ( ( inv
+        ( left-computation-standard-transposition H np)) ∙
+        ( ap (map-standard-transposition H np) p))
+  g z (inr p) =
+    inl
+      ( ( inv
+        ( right-computation-standard-transposition H np)) ∙
+        ( ap (map-standard-transposition H np) p))
+
+eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype :
+  {l : Level} {X : UU l} (H : has-decidable-equality X) →
+  {x y z w : X} (np : ¬ (Id x y)) (np' : ¬ (Id z w)) →
+  ¬ (Id x z) → ¬ (Id x w) → ¬ (Id y z) → ¬ (Id y w) → 
+  Id
+    ( precomp-equiv-2-Element-Decidable-Subtype
+      ( standard-transposition H np)
+      ( standard-2-Element-Decidable-Subtype H np'))
+    ( standard-2-Element-Decidable-Subtype H np')
+eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype
+  {l} {X} H {x} {y} {z} {w} np np' nq1 nq2 nq3 nq4 =
+  eq-pair-Σ
+    ( eq-htpy
+      ( λ u →
+        eq-pair-Σ
+          ( eq-equiv
+            ( pr1
+              ( pr1
+                ( precomp-equiv-2-Element-Decidable-Subtype
+                  ( standard-transposition H np)
+                  ( standard-2-Element-Decidable-Subtype H np'))
+                ( u)))
+            ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))
+            ( equiv-iff
+              ( subtype-standard-2-Element-Decidable-Subtype H np'
+                ( map-inv-equiv (standard-transposition H np) u))
+              ( subtype-standard-2-Element-Decidable-Subtype H np' u)
+              ( f u)
+              ( g u)))
+          ( eq-pair-Σ
+            ( eq-is-prop
+              ( is-prop-is-prop
+                ( pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))
+            ( eq-is-prop
+              ( is-prop-is-decidable
+                ( pr1 (pr2 (pr1 (standard-2-Element-Decidable-Subtype H np') u))))))))
+    ( eq-is-prop is-prop-type-trunc-Prop)
+  where
+  f : (u : X) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np')) u) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u)
+  f u (inl p) =
+    inl
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( is-fixed-point-standard-transposition H np z nq1 nq3) ∙
+          ( p)))
+  f u (inr p) =
+    inr
+      ( is-injective-map-equiv
+        ( standard-transposition H np)
+        ( ( is-fixed-point-standard-transposition H np w nq2 nq4) ∙
+          ( p)))
+  g : (u : X) →
+    pr1 (pr1 (standard-2-Element-Decidable-Subtype H np') u) →
+    pr1
+      ( pr1
+        ( precomp-equiv-2-Element-Decidable-Subtype
+          ( standard-transposition H np)
+          ( standard-2-Element-Decidable-Subtype H np')) u)
+  g u (inl p) =
+    inl
+      ( ( inv
+        ( is-fixed-point-standard-transposition H np z nq1 nq3)) ∙
+        ( ap (map-standard-transposition H np) p))
+  g u (inr p) =
+    inr
+      ( ( inv
+        ( is-fixed-point-standard-transposition H np w nq2 nq4)) ∙
+        ( ap (map-standard-transposition H np) p))
+```
+
+```agda
+module _
+  {l1 : Level} (X : UU l1) (l l' : Level)
+  where
+
+  cases-eq-equiv-universes-transposition :
+    ( P : 2-Element-Decidable-Subtype l X) (x : X) →
+    ( d : is-decidable (is-in-2-Element-Decidable-Subtype P x)) →
+    Id
+      ( map-transposition' P x d)
+      ( map-transposition
+        ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P)
+        ( x))
+  cases-eq-equiv-universes-transposition P x (inl p) =
+    ( ap pr1
+      ( inv
+        ( compute-swap-2-Element-Decidable-Subtype
+          ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P)
+          ( pair x (pr1 (iff-universes-decidable-subtype X l l' (pr1 P) x) p))
+          ( pair
+            ( pr1 (map-swap-2-Element-Decidable-Subtype P (pair x p)))
+            ( pr1
+              ( iff-universes-decidable-subtype X l l' (pr1 P)
+                ( pr1 (map-swap-2-Element-Decidable-Subtype P (pair x p))))
+              ( pr2 (map-swap-2-Element-Decidable-Subtype P (pair x p)))))
+          ( λ q →
+            has-no-fixed-points-swap-2-Element-Type
+              ( 2-element-type-2-Element-Decidable-Subtype P)
+              ( eq-pair-Σ (pr1 (pair-eq-Σ (inv q))) (eq-is-prop (is-prop-type-decidable-Prop (pr1 P x)))))))) ∙
+      ap
+      ( λ d' →
+        map-transposition'
+          ( map-equiv
+            ( equiv-universes-2-Element-Decidable-Subtype X l l')
+            ( P))
+          ( x)
+          ( d'))
+      { x = inl (pr1 (iff-universes-decidable-subtype X l l' (pr1 P) x) p)}
+      { y =
+        is-decidable-type-decidable-Prop
+          ( map-equiv (equiv-universes-decidable-subtype X l l') (pr1 P) x)}
+      ( eq-is-prop
+        ( is-prop-is-decidable
+          ( is-prop-type-decidable-Prop
+            (map-equiv (equiv-universes-decidable-subtype X l l') (pr1 P) x))))
+  cases-eq-equiv-universes-transposition P x (inr np) =
+    ap
+      ( λ d' →
+        map-transposition'
+          ( map-equiv
+            ( equiv-universes-2-Element-Decidable-Subtype X l l')
+            ( P))
+          ( x)
+          ( d'))
+      { x = inr (λ q → np (pr2 (iff-universes-decidable-subtype X l l' (pr1 P) x) q))}
+      { y =
+        is-decidable-type-decidable-Prop
+          ( map-equiv (equiv-universes-decidable-subtype X l l') (pr1 P) x)}
+      ( eq-is-prop
+        ( is-prop-is-decidable
+          ( is-prop-type-decidable-Prop
+            (map-equiv (equiv-universes-decidable-subtype X l l') (pr1 P) x))))
+    
+  eq-equiv-universes-transposition : 
+    ( P : 2-Element-Decidable-Subtype l X) →
+    Id
+      ( transposition P)
+      ( transposition
+        ( map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l') P))
+  eq-equiv-universes-transposition P =
+    eq-htpy-equiv
+      ( λ x →
+        cases-eq-equiv-universes-transposition P x
+          ( is-decidable-type-decidable-Prop (pr1 P x)))
 ```

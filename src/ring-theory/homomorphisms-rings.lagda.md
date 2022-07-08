@@ -27,7 +27,8 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import group-theory.homomorphisms-abelian-groups using
   ( type-hom-Ab; map-hom-Ab; preserves-add-Ab; preserves-add-hom-Ab;
     is-contr-total-htpy-hom-Ab; is-set-hom-Ab; id-hom-Ab; comp-hom-Ab;
-    eq-htpy-hom-Ab)
+    eq-htpy-hom-Ab; preserves-zero-Ab; preserves-zero-hom-Ab;
+    preserves-negatives-Ab; preserves-negatives-hom-Ab)
 
 open import ring-theory.rings using
   ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; one-Ring)
@@ -67,17 +68,17 @@ is-prop-preserves-mul-hom-Ab R1 R2 f =
               ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f x)
               ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f y))))
 
-preserves-unit-hom-Ab :
+preserves-one-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   type-hom-Ab (ab-Ring R1) (ab-Ring R2) → UU l2
-preserves-unit-hom-Ab R1 R2 f =
+preserves-one-hom-Ab R1 R2 f =
   Id (map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (one-Ring R1)) (one-Ring R2)
 
-is-prop-preserves-unit-hom-Ab :
+is-prop-preserves-one-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) →
-  is-prop (preserves-unit-hom-Ab R1 R2 f)
-is-prop-preserves-unit-hom-Ab R1 R2 f =
+  is-prop (preserves-one-hom-Ab R1 R2 f)
+is-prop-preserves-one-hom-Ab R1 R2 f =
   is-set-type-Ring R2
     ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f (one-Ring R1))
     ( one-Ring R2)
@@ -86,7 +87,7 @@ is-ring-homomorphism-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   ( f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) → UU (l1 ⊔ l2)
 is-ring-homomorphism-hom-Ab R1 R2 f =
-  preserves-mul-hom-Ab R1 R2 f × preserves-unit-hom-Ab R1 R2 f
+  preserves-mul-hom-Ab R1 R2 f × preserves-one-hom-Ab R1 R2 f
 
 is-prop-is-ring-homomorphism-hom-Ab :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
@@ -95,7 +96,7 @@ is-prop-is-ring-homomorphism-hom-Ab :
 is-prop-is-ring-homomorphism-hom-Ab R1 R2 f =
   is-prop-prod
     ( is-prop-preserves-mul-hom-Ab R1 R2 f)
-    ( is-prop-preserves-unit-hom-Ab R1 R2 f)
+    ( is-prop-preserves-one-hom-Ab R1 R2 f)
 
 is-ring-homomorphism-hom-ab-Prop :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
@@ -130,24 +131,38 @@ preserves-add-hom-Ring :
 preserves-add-hom-Ring R1 R2 f =
   preserves-add-hom-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f)
 
+preserves-zero-hom-Ring :
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
+  (f : type-hom-Ring R1 R2) →
+  preserves-zero-Ab (ab-Ring R1) (ab-Ring R2) (map-hom-Ring R1 R2 f)
+preserves-zero-hom-Ring R1 R2 f =
+  preserves-zero-hom-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f)
+
+preserves-neg-hom-Ring :
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
+  (f : type-hom-Ring R1 R2) →
+  preserves-negatives-Ab (ab-Ring R1) (ab-Ring R2) (map-hom-Ring R1 R2 f)
+preserves-neg-hom-Ring R1 R2 f =
+  preserves-negatives-hom-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f)
+
 preserves-mul-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   (f : type-hom-Ring R1 R2) → preserves-mul-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
 preserves-mul-hom-Ring R1 R2 f = pr1 (pr2 f)
 
-preserves-unit-hom-Ring :
+preserves-one-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  (f : type-hom-Ring R1 R2) → preserves-unit-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
-preserves-unit-hom-Ring R1 R2 f = pr2 (pr2 f)
+  (f : type-hom-Ring R1 R2) → preserves-one-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)
+preserves-one-hom-Ring R1 R2 f = pr2 (pr2 f)
 
 is-ring-homomorphism-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   (f : type-hom-Ring R1 R2) →
   ( preserves-mul-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f)) ×
-  ( preserves-unit-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f))
+  ( preserves-one-hom-Ab R1 R2 (hom-ab-hom-Ring R1 R2 f))
 is-ring-homomorphism-hom-Ring R1 R2 f =
   pair ( preserves-mul-hom-Ring R1 R2 f)
-       ( preserves-unit-hom-Ring R1 R2 f)
+       ( preserves-one-hom-Ring R1 R2 f)
 ```
 
 ```agda
@@ -224,14 +239,14 @@ preserves-mul-id-hom-Ring :
   {l : Level} (R : Ring l) → preserves-mul-hom-Ab R R (id-hom-Ab (ab-Ring R))
 preserves-mul-id-hom-Ring R x y = refl
 
-preserves-unit-id-hom-Ring :
-  {l : Level} (R : Ring l) → preserves-unit-hom-Ab R R (id-hom-Ab (ab-Ring R))
-preserves-unit-id-hom-Ring R = refl
+preserves-one-id-hom-Ring :
+  {l : Level} (R : Ring l) → preserves-one-hom-Ab R R (id-hom-Ab (ab-Ring R))
+preserves-one-id-hom-Ring R = refl
 
 is-ring-homomorphism-id-hom-Ring :
   {l : Level} (R : Ring l) → is-ring-homomorphism-hom-Ab R R (id-hom-Ab (ab-Ring R))
 is-ring-homomorphism-id-hom-Ring R =
-  pair (preserves-mul-id-hom-Ring R) (preserves-unit-id-hom-Ring R)
+  pair (preserves-mul-id-hom-Ring R) (preserves-one-id-hom-Ring R)
 
 id-hom-Ring :
   {l : Level} (R : Ring l) → type-hom-Ring R R
@@ -259,13 +274,13 @@ preserves-mul-comp-hom-Ring R1 R2 R3 g f x y =
     ( map-hom-Ring R1 R2 f x)
     ( map-hom-Ring R1 R2 f y))
 
-preserves-unit-comp-hom-Ring :
+preserves-one-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
   ( g : type-hom-Ring R2 R3) (f : type-hom-Ring R1 R2) →
-  preserves-unit-hom-Ab R1 R3 (hom-Ab-comp-hom-Ring R1 R2 R3 g f)
-preserves-unit-comp-hom-Ring R1 R2 R3 g f =
-  ( ap (map-hom-Ring R2 R3 g) (preserves-unit-hom-Ring R1 R2 f)) ∙
-  ( preserves-unit-hom-Ring R2 R3 g)
+  preserves-one-hom-Ab R1 R3 (hom-Ab-comp-hom-Ring R1 R2 R3 g f)
+preserves-one-comp-hom-Ring R1 R2 R3 g f =
+  ( ap (map-hom-Ring R2 R3 g) (preserves-one-hom-Ring R1 R2 f)) ∙
+  ( preserves-one-hom-Ring R2 R3 g)
 
 is-ring-homomorphism-comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →
@@ -273,7 +288,7 @@ is-ring-homomorphism-comp-hom-Ring :
   is-ring-homomorphism-hom-Ab R1 R3 (hom-Ab-comp-hom-Ring R1 R2 R3 g f)
 is-ring-homomorphism-comp-hom-Ring R1 R2 R3 g f =
   pair ( preserves-mul-comp-hom-Ring R1 R2 R3 g f)
-       ( preserves-unit-comp-hom-Ring R1 R2 R3 g f)
+       ( preserves-one-comp-hom-Ring R1 R2 R3 g f)
 
 comp-hom-Ring :
   { l1 l2 l3 : Level} (R1 : Ring l1) (R2 : Ring l2) (R3 : Ring l3) →

@@ -1,4 +1,6 @@
-# Choice of representatives for an equivalence relation
+---
+title: Choice of representatives for an equivalence relation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,11 +13,11 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalence-classes using
-  ( large-set-quotient; quotient-map-large-set-quotient;
-    apply-effectiveness-quotient-map-large-set-quotient';
-    is-effective-quotient-map-large-set-quotient)
+  ( equivalence-class; class;
+    apply-effectiveness-class';
+    is-effective-class)
 open import foundation.equivalence-relations using
-  ( Eq-Rel; type-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel)
+  ( Eq-Rel; sim-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel)
 open import foundation.equivalences using (_∘e_; is-equiv; _≃_)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
@@ -44,67 +46,67 @@ module _
   is-choice-of-representatives :
     (A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   is-choice-of-representatives P =
-    (a : A) → is-contr (Σ A (λ x → P x × type-Eq-Rel R a x))
+    (a : A) → is-contr (Σ A (λ x → P x × sim-Eq-Rel R a x))
   
   representatives :
     {P : A → UU l3} → is-choice-of-representatives P → UU (l1 ⊔ l3)
   representatives {P} H = Σ A P
   
-  quotient-map-large-set-quotient-representatives :
+  class-representatives :
     {P : A → UU l3} (H : is-choice-of-representatives P) →
-    representatives H → large-set-quotient R
-  quotient-map-large-set-quotient-representatives H a =
-    quotient-map-large-set-quotient R (pr1 a)
+    representatives H → equivalence-class R
+  class-representatives H a =
+    class R (pr1 a)
 
   abstract
-    is-surjective-quotient-map-large-set-quotient-representatives :
+    is-surjective-class-representatives :
       {P : A → UU l3} (H : is-choice-of-representatives P) →
-      is-surjective (quotient-map-large-set-quotient-representatives H)
-    is-surjective-quotient-map-large-set-quotient-representatives H (pair Q K) =
+      is-surjective (class-representatives H)
+    is-surjective-class-representatives H (pair Q K) =
       apply-universal-property-trunc-Prop K
         ( trunc-Prop
-          ( fib (quotient-map-large-set-quotient-representatives H) (pair Q K)))
+          ( fib (class-representatives H) (pair Q K)))
         ( λ { (pair a refl) →
               unit-trunc-Prop
                 ( pair
                   ( pair (pr1 (center (H a))) (pr1 (pr2 (center (H a)))))
-                  ( ( apply-effectiveness-quotient-map-large-set-quotient' R
+                  ( ( apply-effectiveness-class' R
                       ( symm-Eq-Rel R (pr2 (pr2 (center (H a)))))) ∙
                     ( ap
                       ( pair (prop-Eq-Rel R a))
                       ( eq-is-prop is-prop-type-trunc-Prop))))})
 
   abstract
-    is-emb-quotient-map-large-set-quotient-representatives :
+    is-emb-class-representatives :
       {P : A → UU l3} (H : is-choice-of-representatives P) →
-      is-emb (quotient-map-large-set-quotient-representatives H)
-    is-emb-quotient-map-large-set-quotient-representatives {P} H (pair a p) =
+      is-emb (class-representatives H)
+    is-emb-class-representatives {P} H (pair a p) =
       fundamental-theorem-id
         ( pair a p)
         ( refl)
         ( is-contr-equiv
-          ( Σ A (λ x → P x × type-Eq-Rel R a x))
-          ( ( assoc-Σ A P (λ z → type-Eq-Rel R a (pr1 z))) ∘e
+          ( Σ A (λ x → P x × sim-Eq-Rel R a x))
+          ( ( assoc-Σ A P (λ z → sim-Eq-Rel R a (pr1 z))) ∘e
             ( equiv-tot
               ( λ t →
-                is-effective-quotient-map-large-set-quotient R a (pr1 t))))
+                is-effective-class R a (pr1 t))))
           ( H a))
         ( λ y →
-          ap (quotient-map-large-set-quotient-representatives H) {pair a p} {y})
+          ap (class-representatives H) {pair a p} {y})
 
   abstract
-    is-equiv-quotient-map-large-set-quotient-representatives :
+    is-equiv-class-representatives :
       {P : A → UU l3} (H : is-choice-of-representatives P) →
-      is-equiv (quotient-map-large-set-quotient-representatives H)
-    is-equiv-quotient-map-large-set-quotient-representatives H =
+      is-equiv (class-representatives H)
+    is-equiv-class-representatives H =
       is-equiv-is-emb-is-surjective
-        ( is-surjective-quotient-map-large-set-quotient-representatives H)
-        ( is-emb-quotient-map-large-set-quotient-representatives H)
+        ( is-surjective-class-representatives H)
+        ( is-emb-class-representatives H)
 
-  equiv-large-set-quotient-representatives :
+  equiv-equivalence-class-representatives :
     {P : A → UU l3} (H : is-choice-of-representatives P) →
-    representatives H ≃ large-set-quotient R
-  equiv-large-set-quotient-representatives H =
-    pair ( quotient-map-large-set-quotient-representatives H)
-         ( is-equiv-quotient-map-large-set-quotient-representatives H)
+    representatives H ≃ equivalence-class R
+  equiv-equivalence-class-representatives H =
+    pair ( class-representatives H)
+         ( is-equiv-class-representatives H)
 ```

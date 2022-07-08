@@ -1,4 +1,6 @@
-# Type arithmetic for cartesian product types
+---
+title: Type arithmetic for cartesian product types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

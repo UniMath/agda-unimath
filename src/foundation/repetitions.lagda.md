@@ -35,8 +35,7 @@ module _
   is-repetition-pair-of-distinct-elements :
     (f : A → B) (p : pair-of-distinct-elements A) → UU l2
   is-repetition-pair-of-distinct-elements f p =
-    Id ( f (fst-pair-of-distinct-elements p))
-       ( f (snd-pair-of-distinct-elements p))
+    f (fst-pair-of-distinct-elements p) ＝ f (snd-pair-of-distinct-elements p)
   
   repetition : (A → B) → UU (l1 ⊔ l2)
   repetition f =
@@ -57,7 +56,7 @@ module _
   snd-repetition =
     snd-pair-of-distinct-elements pair-of-distinct-elements-repetition
 
-  distinction-repetition : ¬ (Id fst-repetition snd-repetition)
+  distinction-repetition : ¬ (fst-repetition ＝ snd-repetition)
   distinction-repetition =
     distinction-pair-of-distinct-elements pair-of-distinct-elements-repetition
 
@@ -82,8 +81,8 @@ module _
   equiv-repetition =
     equiv-Σ
       ( λ p →
-        Id ( g (fst-pair-of-distinct-elements p))
-           ( g (snd-pair-of-distinct-elements p)))
+        ( g (fst-pair-of-distinct-elements p)) ＝
+        ( g (snd-pair-of-distinct-elements p)))
       ( equiv-pair-of-distinct-elements e)
       ( λ p →
         ( ( equiv-concat'
@@ -124,8 +123,8 @@ module _
   emb-repetition =
     emb-Σ
       ( λ p →
-        Id ( g (fst-pair-of-distinct-elements p))
-           ( g (snd-pair-of-distinct-elements p)))
+        ( g (fst-pair-of-distinct-elements p)) ＝
+        ( g (snd-pair-of-distinct-elements p)))
       ( emb-pair-of-distinct-elements e)
       ( λ p →
         emb-equiv
@@ -142,5 +141,4 @@ module _
 
   is-emb-map-emb-repetition : is-emb map-emb-repetition
   is-emb-map-emb-repetition = is-emb-map-emb emb-repetition
-
 ```

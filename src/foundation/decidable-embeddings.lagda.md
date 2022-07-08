@@ -1,4 +1,6 @@
-# Decidable embeddings
+---
+title: Decidable embeddings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -16,10 +18,6 @@ open import foundation.decidable-subtypes using (decidable-subtype)
 open import foundation.decidable-types using
   ( is-prop-is-decidable; is-decidable; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs
-  using
-  ( inv-distributive-Π-Σ)
 open import foundation.embeddings using
   ( is-emb; _↪_; is-emb-id; is-prop-is-emb; is-emb-comp'; is-emb-htpy)
 open import foundation.empty-types using (ex-falso; is-emb-ex-falso)
@@ -35,7 +33,7 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (Id; refl; equiv-concat; inv; ap)
+open import foundation.identity-types using (_＝_; refl; equiv-concat; inv; ap)
 open import foundation.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map; equiv-is-prop-map-is-emb;
     is-prop-map-is-emb)
@@ -47,6 +45,8 @@ open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr)
+open import foundation.type-theoretic-principle-of-choice using
+  ( inv-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -288,7 +288,7 @@ refl-htpy-decidable-emb f = refl-htpy
 
 htpy-eq-decidable-emb :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) →
-  Id f g → htpy-decidable-emb f g
+  f ＝ g → htpy-decidable-emb f g
 htpy-eq-decidable-emb f .f refl = refl-htpy-decidable-emb f
 
 abstract
@@ -315,7 +315,7 @@ abstract
 
 eq-htpy-decidable-emb :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A ↪d B} →
-  htpy-decidable-emb f g → Id f g
+  htpy-decidable-emb f g → f ＝ g
 eq-htpy-decidable-emb {f = f} {g} =
   map-inv-is-equiv (is-equiv-htpy-eq-decidable-emb f g)
 ```

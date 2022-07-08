@@ -75,13 +75,13 @@ eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
 #### We define maps back and forth between the standard finite sets and the bounded natural numbers
 
 ```agda
-standard-classical-Fin : {k : ℕ} → classical-Fin k → Fin k
-standard-classical-Fin {succ-ℕ k} (pair x H) = mod-succ-ℕ k x
+standard-classical-Fin : (k : ℕ) → classical-Fin k → Fin k
+standard-classical-Fin (succ-ℕ k) (pair x H) = mod-succ-ℕ k x
 
 classical-standard-Fin :
   (k : ℕ) → Fin k → classical-Fin k
-pr1 (classical-standard-Fin k x) = nat-Fin x
-pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin x
+pr1 (classical-standard-Fin k x) = nat-Fin k x
+pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin k x
 ```
 
 #### We show that these maps are mutual inverses
@@ -89,21 +89,23 @@ pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin x
 ```agda
 issec-classical-standard-Fin :
   {k : ℕ} (x : Fin k) →
-  Id (standard-classical-Fin (classical-standard-Fin k x)) x
-issec-classical-standard-Fin {succ-ℕ k} x = issec-nat-Fin x
+  Id (standard-classical-Fin k (classical-standard-Fin k x)) x
+issec-classical-standard-Fin {succ-ℕ k} x = issec-nat-Fin k x
 
 isretr-classical-standard-Fin :
   {k : ℕ} (x : classical-Fin k) →
-  Id (classical-standard-Fin k (standard-classical-Fin x)) x
+  Id (classical-standard-Fin k (standard-classical-Fin k x)) x
 isretr-classical-standard-Fin {succ-ℕ k} (pair x p) =
   eq-Eq-classical-Fin (succ-ℕ k)
-    ( classical-standard-Fin (succ-ℕ k) (standard-classical-Fin (pair x p)))
+    ( classical-standard-Fin
+      ( succ-ℕ k)
+      ( standard-classical-Fin (succ-ℕ k) (pair x p)))
     ( pair x p)
     ( eq-cong-le-ℕ
       ( succ-ℕ k)
-      ( nat-Fin (mod-succ-ℕ k x))
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( x)
-      ( strict-upper-bound-nat-Fin (mod-succ-ℕ k x))
+      ( strict-upper-bound-nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( p)
       ( cong-nat-mod-succ-ℕ k x))
 ```

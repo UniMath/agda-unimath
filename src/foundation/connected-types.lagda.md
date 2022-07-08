@@ -1,4 +1,6 @@
-# Connected types
+---
+title: Connected types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,16 +20,16 @@ open import foundation.propositional-truncations using
     apply-universal-property-trunc-Prop)
 open import foundation.propositions using (UU-Prop; is-prop; type-Prop)
 open import foundation.set-truncations using
-  ( type-trunc-Set; apply-universal-property-trunc-Set; unit-trunc-Set;
+  ( type-trunc-Set; apply-universal-property-trunc-Set'; unit-trunc-Set;
     apply-effectiveness-unit-trunc-Set; trunc-Set;
-    apply-dependent-universal-property-trunc-Set;
+    apply-dependent-universal-property-trunc-Set';
     apply-effectiveness-unit-trunc-Set')
 open import foundation.sets using (set-Prop; Id-Prop)
 open import foundation.surjective-maps using
   ( is-surjective; equiv-dependent-universal-property-surj-is-surjective)
-open import foundation.unit-type using (star; unit)
+open import foundation.unit-type using (star; unit; pt)
 open import foundation.universal-property-unit-type using
-  ( pt; equiv-universal-property-unit)
+  ( equiv-universal-property-unit)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -46,7 +48,7 @@ abstract
   is-inhabited-is-path-connected :
     {l : Level} {A : UU l} → is-path-connected A → type-trunc-Prop A
   is-inhabited-is-path-connected {l} {A} C =
-    apply-universal-property-trunc-Set
+    apply-universal-property-trunc-Set'
       ( center C)
       ( set-Prop (trunc-Prop A))
       ( unit-trunc-Prop)
@@ -64,7 +66,7 @@ abstract
   is-path-connected-mere-eq {l} {A} a e =
     pair
       ( unit-trunc-Set a)
-      ( apply-dependent-universal-property-trunc-Set
+      ( apply-dependent-universal-property-trunc-Set'
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
 

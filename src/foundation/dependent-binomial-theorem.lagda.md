@@ -1,19 +1,16 @@
-# Distributivity of dependent function types over coproduct types
+---
+title: The dependent binomial theorem for types (Distributivity of dependent function types over coproduct types)
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module
-  foundation.distributivity-of-dependent-functions-over-coproduct-types
-  where
+module foundation.dependent-binomial-theorem where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-diagonal-is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation.functions using (_∘_; id)
@@ -27,6 +24,8 @@ open import foundation.identity-types using (ap; equiv-tr)
 open import foundation.raising-universe-levels using
   ( raise; map-inv-raise; map-raise; isretr-map-inv-raise; issec-map-inv-raise;
     equiv-raise)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
 open import foundation.unit-type using (star)
 open import foundation.universal-property-coproduct-types using
   ( equiv-universal-property-coprod)
@@ -57,9 +56,9 @@ module _
 
   map-inv-compute-total-fam-coprod :
     coprod A B → Σ (Fin 2) fam-coprod
-  pr1 (map-inv-compute-total-fam-coprod (inl x)) = zero-Fin
+  pr1 (map-inv-compute-total-fam-coprod (inl x)) = zero-Fin 1
   pr2 (map-inv-compute-total-fam-coprod (inl x)) = map-raise x
-  pr1 (map-inv-compute-total-fam-coprod (inr x)) = one-Fin
+  pr1 (map-inv-compute-total-fam-coprod (inr x)) = one-Fin 1
   pr2 (map-inv-compute-total-fam-coprod (inr x)) = map-raise x
 
   issec-map-inv-compute-total-fam-coprod :
@@ -72,9 +71,9 @@ module _
   isretr-map-inv-compute-total-fam-coprod :
     (map-inv-compute-total-fam-coprod ∘ map-compute-total-fam-coprod) ~ id
   isretr-map-inv-compute-total-fam-coprod (pair (inl (inr star)) y) =
-    ap (pair zero-Fin) (issec-map-inv-raise y)
+    ap (pair (zero-Fin 1)) (issec-map-inv-raise y)
   isretr-map-inv-compute-total-fam-coprod (pair (inr star) y) =
-    ap (pair one-Fin) (issec-map-inv-raise y)
+    ap (pair (one-Fin 1)) (issec-map-inv-raise y)
 
   is-equiv-map-compute-total-fam-coprod :
     is-equiv map-compute-total-fam-coprod
@@ -101,8 +100,8 @@ module _
   type-distributive-Π-coprod : UU (l1 ⊔ l2 ⊔ l3)
   type-distributive-Π-coprod =
     Σ ( X → Fin 2)
-      ( λ f → ((x : X) (p : is-zero-Fin (f x)) → A x) ×
-              ((x : X) (p : is-one-Fin (f x)) → B x))
+      ( λ f → ((x : X) (p : is-zero-Fin 2 (f x)) → A x) ×
+              ((x : X) (p : is-one-Fin 2 (f x)) → B x))
 
   distributive-Π-coprod :
     ((x : X) → coprod (A x) (B x)) ≃ type-distributive-Π-coprod

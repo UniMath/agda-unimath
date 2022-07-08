@@ -1,4 +1,6 @@
-# Natural transformations between functors on precategories
+---
+title: Natural transformations between functors on precategories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,8 +12,9 @@ open import category-theory.functors-precategories using
 open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat;
     is-set-type-hom-Precat)
+
 open import foundation.dependent-pair-types using (Σ; pr1)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-Π')
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -40,8 +43,8 @@ module _
     UU (l1 ⊔ l2 ⊔ l4)
   is-nat-trans-Precat γ =
     {x y : obj-Precat C} (f : type-hom-Precat C x y) →
-    Id ( comp-hom-Precat D (hom-functor-Precat C D G f) (γ x))
-       ( comp-hom-Precat D (γ y) (hom-functor-Precat C D F f))
+    ( comp-hom-Precat D (hom-functor-Precat C D G f) (γ x)) ＝
+    ( comp-hom-Precat D (γ y) (hom-functor-Precat C D F f))
 
   nat-trans-Precat : UU (l1 ⊔ l2 ⊔ l4)
   nat-trans-Precat =

@@ -36,12 +36,12 @@ repetition-sequence-Fin :
   (k : ℕ) (f : sequence (Fin k)) → repetition-sequence f
 repetition-sequence-Fin k f =
   map-emb-repetition
-    ( f ∘ nat-Fin {succ-ℕ k})
+    ( f ∘ nat-Fin (succ-ℕ k))
     ( f)
     ( emb-nat-Fin (succ-ℕ k))
     ( id-emb)
     ( refl-htpy)
-    ( repetition-le-Fin (f ∘ nat-Fin) (le-succ-ℕ {k}))
+    ( repetition-le-Fin (succ-ℕ k) k (f ∘ nat-Fin (succ-ℕ k)) (le-succ-ℕ {k}))
 
 pair-of-distinct-elements-repetition-sequence-Fin :
   {k : ℕ} (f : sequence (Fin k)) → pair-of-distinct-elements ℕ
@@ -77,5 +77,8 @@ le-fst-repetition-sequence-Fin :
   le-ℕ (fst-repetition-sequence-Fin f) (succ-ℕ k)
 le-fst-repetition-sequence-Fin {k} f =
   strict-upper-bound-nat-Fin
-    ( pr1 (pr1 (repetition-le-Fin {succ-ℕ k} {k} (f ∘ nat-Fin) (le-succ-ℕ {k}))))
+    ( succ-ℕ k)
+    ( pr1
+      ( pr1
+        ( repetition-le-Fin (succ-ℕ k) k (f ∘ nat-Fin (succ-ℕ k)) (le-succ-ℕ {k}))))
 ```

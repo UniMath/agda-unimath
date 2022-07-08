@@ -1,4 +1,6 @@
-# Divisibility in modular arithmetic
+---
+title: Divisibility in modular arithmetic
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,10 +13,10 @@ open import elementary-number-theory.divisibility-standard-finite-types using
   ( refl-div-Fin; trans-div-Fin)
 open import elementary-number-theory.modular-arithmetic using
   ( ℤ-Mod; mul-ℤ-Mod)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -26,7 +28,7 @@ For two numbers `x` and `y` in `ℤ-Mod k`, we say that `x` divides `y` if there
 
 ```agda
 div-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → UU lzero
-div-ℤ-Mod k x y = Σ (ℤ-Mod k) (λ u → Id (mul-ℤ-Mod k u x) y)
+div-ℤ-Mod k x y = Σ (ℤ-Mod k) (λ u → mul-ℤ-Mod k u x ＝ y)
 ```
 
 ## Properties
@@ -45,6 +47,6 @@ refl-div-ℤ-Mod {ℕ.succ-ℕ k} = refl-div-Fin
 trans-div-ℤ-Mod :
   {k : ℕ} (x y z : ℤ-Mod k) →
   div-ℤ-Mod k x y → div-ℤ-Mod k y z → div-ℤ-Mod k x z
-trans-div-ℤ-Mod {ℕ.zero-ℕ} = trans-div-ℤ
-trans-div-ℤ-Mod {ℕ.succ-ℕ k} = trans-div-Fin
+trans-div-ℤ-Mod {zero-ℕ} = trans-div-ℤ
+trans-div-ℤ-Mod {succ-ℕ k} = trans-div-Fin (succ-ℕ k)
 ```

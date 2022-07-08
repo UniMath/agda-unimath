@@ -1,4 +1,6 @@
-# Lower types of elements in W-types
+---
+title: Lower types of elements in W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

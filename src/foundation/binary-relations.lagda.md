@@ -1,4 +1,6 @@
-# Binary relations
+---
+title: Binary relations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,6 @@ open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ## Idea
 
 A binary relation on a type `A` is a family of types `R x y` depending on two variables `x y : A`. In the special case where each `R x y` is a proposition, we say that the relation is valued in propositions.
-
 
 ## Definition
 

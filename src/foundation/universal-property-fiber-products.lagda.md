@@ -1,4 +1,6 @@
-# The universal property of fiber products
+---
+title: The universal property of fiber products
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -6,6 +8,7 @@
 module foundation.universal-property-fiber-products where
 
 open import foundation.cartesian-product-types using (_×_)
+open import foundation.cones-pullbacks using (cone)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-cartesian-product-types using (eq-pair)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
@@ -20,7 +23,7 @@ open import foundation.pullbacks using
   ( canonical-pullback; gap; is-pullback; map-extensionality-canonical-pullback;
     universal-property-pullback-is-pullback)
 open import foundation.universal-property-pullbacks using
-  ( cone; universal-property-pullback)
+  ( universal-property-pullback)
 open import foundation.universe-levels using (Level; UU)
 ```
 

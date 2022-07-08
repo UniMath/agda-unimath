@@ -10,6 +10,8 @@ open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-
 open import finite-group-theory.finite-semigroups using
   ( Semigroup-of-Order; is-π-finite-Semigroup-of-Order)
 
+open import foundation.decidable-propositions using
+  ( is-finite-is-decidable-Prop)
 open import foundation.decidable-types using (is-decidable-prod)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_)
@@ -38,7 +40,7 @@ open import univalent-combinatorics.decidable-propositions using (count-eq)
 open import univalent-combinatorics.dependent-function-types using
   ( count-Π)
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-is-decidable-Prop)
+  ( is-finite; is-finite-Prop)
 open import univalent-combinatorics.function-types using
   ( count-function-type)
 open import univalent-combinatorics.pi-finite-types using
@@ -52,9 +54,9 @@ Group-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Group-of-Order l n = Σ (Group l) (λ G → mere-equiv (Fin n) (type-Group G))
 
 is-finite-is-group :
-  {l : Level} {n : ℕ} (G : Semigroup-of-Order l n) →
+  {l : Level} (n : ℕ) (G : Semigroup-of-Order l n) →
   is-finite {l} (is-group (pr1 G))
-is-finite-is-group {l} {n} G =
+is-finite-is-group {l} n G =
   apply-universal-property-trunc-Prop
     ( pr2 G)
     ( is-finite-Prop _)
@@ -108,7 +110,7 @@ is-π-finite-Group-of-Order {l} k n =
       ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
         is-π-finite-is-finite k
-          ( is-finite-is-group X)))
+          ( is-finite-is-group n X)))
   where
   e : Group-of-Order l n ≃
       Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))

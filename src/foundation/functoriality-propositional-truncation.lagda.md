@@ -1,4 +1,6 @@
-# Functoriality of propositional truncations
+---
+title: Functoriality of propositional truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -28,20 +30,20 @@ The universal property of propositional truncations can be used to define the fu
 
 ```agda
 abstract
-  unique-functor-trunc-Prop :
+  unique-map-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-contr
       ( Σ ( type-hom-Prop (trunc-Prop A) (trunc-Prop B))
           ( λ h → (h ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)))
-  unique-functor-trunc-Prop {l1} {l2} {A} {B} f =
+  unique-map-trunc-Prop {l1} {l2} {A} {B} f =
     universal-property-trunc-Prop A (trunc-Prop B) (unit-trunc-Prop ∘ f)
 
 abstract
-  functor-trunc-Prop :
+  map-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     (A → B) → type-hom-Prop (trunc-Prop A) (trunc-Prop B)
-  functor-trunc-Prop f =
-    pr1 (center (unique-functor-trunc-Prop f))
+  map-trunc-Prop f =
+    pr1 (center (unique-map-trunc-Prop f))
 ```
 
 ## Properties
@@ -49,56 +51,56 @@ abstract
 ### Propositional truncations of homotopic maps are homotopic
 
 ```agda
-  htpy-functor-trunc-Prop :
+  htpy-map-trunc-Prop :
     { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    ( (functor-trunc-Prop f) ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)
-  htpy-functor-trunc-Prop f =
-    pr2 (center (unique-functor-trunc-Prop f))
+    ( (map-trunc-Prop f) ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)
+  htpy-map-trunc-Prop f =
+    pr2 (center (unique-map-trunc-Prop f))
 
-  htpy-uniqueness-functor-trunc-Prop :
+  htpy-uniqueness-map-trunc-Prop :
     { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     ( h : type-hom-Prop (trunc-Prop A) (trunc-Prop B)) →
     ( ( h ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)) →
-    (functor-trunc-Prop f) ~ h
-  htpy-uniqueness-functor-trunc-Prop f h H =
-    htpy-eq (ap pr1 (contraction (unique-functor-trunc-Prop f) (pair h H)))
+    (map-trunc-Prop f) ~ h
+  htpy-uniqueness-map-trunc-Prop f h H =
+    htpy-eq (ap pr1 (contraction (unique-map-trunc-Prop f) (pair h H)))
 ```
 
 ### The propositional truncation of the identity map is the identity map
 
 ```agda
 abstract
-  id-functor-trunc-Prop :
-    { l1 : Level} {A : UU l1} → functor-trunc-Prop (id {A = A}) ~ id
-  id-functor-trunc-Prop {l1} {A} =
-    htpy-uniqueness-functor-trunc-Prop id id refl-htpy
+  id-map-trunc-Prop :
+    { l1 : Level} {A : UU l1} → map-trunc-Prop (id {A = A}) ~ id
+  id-map-trunc-Prop {l1} {A} =
+    htpy-uniqueness-map-trunc-Prop id id refl-htpy
 ```
 
 ### The propositional truncation of a composite is the composite of the propositional truncations
 
 ```agda
 abstract
-  comp-functor-trunc-Prop :
+  comp-map-trunc-Prop :
     { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
     ( g : B → C) (f : A → B) →
-    ( functor-trunc-Prop (g ∘ f)) ~
-    ( (functor-trunc-Prop g) ∘ (functor-trunc-Prop f))
-  comp-functor-trunc-Prop g f =
-    htpy-uniqueness-functor-trunc-Prop
+    ( map-trunc-Prop (g ∘ f)) ~
+    ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))
+  comp-map-trunc-Prop g f =
+    htpy-uniqueness-map-trunc-Prop
       ( g ∘ f)
-      ( (functor-trunc-Prop g) ∘ (functor-trunc-Prop f))
-      ( ( (functor-trunc-Prop g) ·l (htpy-functor-trunc-Prop f)) ∙h
-        ( ( htpy-functor-trunc-Prop g) ·r f))
+      ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))
+      ( ( (map-trunc-Prop g) ·l (htpy-map-trunc-Prop f)) ∙h
+        ( ( htpy-map-trunc-Prop g) ·r f))
 ```
 
-### Propositional truncations of equivalences are equivalences
+### The functorial action of propositional truncations preserves equivalences
 
 ```agda
 abstract
   map-equiv-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     (A ≃ B) → type-trunc-Prop A → type-trunc-Prop B
-  map-equiv-trunc-Prop e = functor-trunc-Prop (map-equiv e)
+  map-equiv-trunc-Prop e = map-trunc-Prop (map-equiv e)
 
 abstract
   map-inv-equiv-trunc-Prop :

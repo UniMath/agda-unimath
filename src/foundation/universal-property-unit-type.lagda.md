@@ -1,4 +1,6 @@
-# The universal property of the unit type
+---
+title: The universal property of the unit type
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -16,7 +18,7 @@ open import foundation.equivalences using
     is-equiv-comp; is-equiv-precomp-is-equiv; is-equiv-is-section)
 open import foundation.functions using (precomp)
 open import foundation.identity-types using (refl)
-open import foundation.unit-type using (unit; star; is-contr-unit)
+open import foundation.unit-type using (unit; star; is-contr-unit; pt)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -38,9 +40,6 @@ ev-star P f = f star
 ev-star' :
   {l : Level} (Y : UU l) → (unit → Y) → Y
 ev-star' Y = ev-star (λ t → Y)
-
-pt : {l1 : Level} {X : UU l1} (x : X) → unit → X
-pt x y = x
 
 abstract
   dependent-universal-property-unit :

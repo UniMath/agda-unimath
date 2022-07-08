@@ -32,7 +32,7 @@ open import order-theory.preorders using
     is-prop-leq-Preorder; refl-leq-Preorder; transitive-leq-Preorder)
 
 open import univalent-combinatorics.decidable-subtypes using
-  ( is-finite-decidable-subtype)
+  ( is-finite-type-decidable-subtype)
 open import univalent-combinatorics.equality-finite-types using
   ( is-set-is-finite; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
@@ -201,7 +201,7 @@ module _
 
   is-finite-element-finite-sub-Preorder : is-finite element-finite-sub-Preorder
   is-finite-element-finite-sub-Preorder =
-    is-finite-decidable-subtype S (is-finite-element-Finite-Preorder X)
+    is-finite-type-decidable-subtype S (is-finite-element-Finite-Preorder X)
 
   eq-element-finite-sub-Preorder :
     (x y : element-finite-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y

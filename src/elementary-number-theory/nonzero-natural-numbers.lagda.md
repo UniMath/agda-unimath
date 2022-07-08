@@ -1,4 +1,6 @@
-# Nonzero natural numbers
+---
+title: Nonzero natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

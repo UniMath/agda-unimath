@@ -1,4 +1,6 @@
-# 1-Types
+---
+title: 1-Types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,7 +12,7 @@ open import foundation-core.1-types public
 open import foundation-core.contractible-types using (is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_; is-equiv)
-open import foundation-core.identity-types using (Id)
+open import foundation-core.identity-types using (_＝_)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.subtypes using
   ( subtype; is-subtype; is-trunc-type-subtype; type-subtype)
@@ -125,7 +127,7 @@ module _
   type-equiv-1-Type : {l2 : Level} (Y : UU-1-Type l2) → UU (l ⊔ l2)
   type-equiv-1-Type Y = type-1-Type X ≃ type-1-Type Y
 
-  equiv-eq-1-Type : (Y : UU-1-Type l) → Id X Y → type-equiv-1-Type Y
+  equiv-eq-1-Type : (Y : UU-1-Type l) → X ＝ Y → type-equiv-1-Type Y
   equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
   
   abstract
@@ -137,6 +139,11 @@ module _
     is-equiv-equiv-eq-1-Type : (Y : UU-1-Type l) → is-equiv (equiv-eq-1-Type Y)
     is-equiv-equiv-eq-1-Type = is-equiv-equiv-eq-subuniverse is-1-type-Prop X
 
-  eq-equiv-1-Type : (Y : UU-1-Type l) → type-equiv-1-Type Y → Id X Y
+  extensionality-1-Type :
+    (Y : UU-1-Type l) → (X ＝ Y) ≃ type-equiv-1-Type Y
+  pr1 (extensionality-1-Type Y) = equiv-eq-1-Type Y
+  pr2 (extensionality-1-Type Y) = is-equiv-equiv-eq-1-Type Y
+
+  eq-equiv-1-Type : (Y : UU-1-Type l) → type-equiv-1-Type Y → X ＝ Y
   eq-equiv-1-Type Y = eq-equiv-subuniverse is-1-type-Prop
 ```

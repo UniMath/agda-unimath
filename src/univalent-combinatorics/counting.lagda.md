@@ -34,9 +34,9 @@ open import foundation.unit-type using (unit; star; is-contr-unit)
 open import foundation.universe-levels using (UU; Level)
 
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( is-set-Fin; Eq-Fin-eq; has-decidable-equality-Fin)
+  ( Eq-Fin-eq; has-decidable-equality-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; is-contr-Fin-one-ℕ; neg-one-Fin)
+  ( Fin; zero-Fin; is-contr-Fin-one-ℕ; neg-one-Fin; is-set-Fin)
 ```
 
 ## Idea
@@ -141,7 +141,7 @@ abstract
     is-empty X → is-zero-ℕ (number-of-elements-count e)
   is-zero-number-of-elements-count-is-empty (pair zero-ℕ e) H = refl
   is-zero-number-of-elements-count-is-empty (pair (succ-ℕ k) e) H =
-    ex-falso (H (map-equiv e zero-Fin))
+    ex-falso (H (map-equiv e (zero-Fin k)))
 
 count-is-empty :
   {l : Level} {X : UU l} → is-empty X → count X
@@ -177,9 +177,11 @@ abstract
     refl
   is-one-number-of-elements-count-is-contr (pair (succ-ℕ (succ-ℕ k)) e) H =
     ex-falso
-      ( Eq-Fin-eq
+      ( Eq-Fin-eq (succ-ℕ (succ-ℕ k))
         ( is-injective-map-equiv e
-          ( eq-is-contr' H (map-equiv e zero-Fin) (map-equiv e neg-one-Fin))))
+          ( eq-is-contr' H
+            ( map-equiv e (zero-Fin (succ-ℕ k)))
+            ( map-equiv e (neg-one-Fin (succ-ℕ k))))))
 
 count-unit : count unit
 count-unit = count-is-contr is-contr-unit
@@ -191,7 +193,7 @@ count-unit = count-is-contr is-contr-unit
 has-decidable-equality-count :
   {l : Level} {X : UU l} → count X → has-decidable-equality X
 has-decidable-equality-count (pair k e) =
-  has-decidable-equality-equiv' e has-decidable-equality-Fin
+  has-decidable-equality-equiv' e (has-decidable-equality-Fin k)
 ```
 
 ### This with a count are either inhabited or empty
@@ -202,7 +204,7 @@ is-inhabited-or-empty-count :
 is-inhabited-or-empty-count (pair zero-ℕ e) =
   inr (is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
 is-inhabited-or-empty-count (pair (succ-ℕ k) e) =
-  inl (unit-trunc-Prop (map-equiv e zero-Fin))
+  inl (unit-trunc-Prop (map-equiv e (zero-Fin k)))
 ```
 
 ### If the elements of a type can be counted, then the elements of its propositional truncation can be counted
@@ -218,5 +220,5 @@ count-type-trunc-Prop (pair (succ-ℕ k) e) =
   count-is-contr
     ( is-proof-irrelevant-is-prop
       ( is-prop-type-trunc-Prop)
-      ( unit-trunc-Prop (map-equiv e zero-Fin)))
+      ( unit-trunc-Prop (map-equiv e (zero-Fin k))))
 ```

@@ -1,4 +1,6 @@
-# The booleans
+---
+title: The booleans
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,16 +10,24 @@ module foundation.booleans where
 open import foundation-core.constant-maps using (const)
 open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.empty-types using (empty; is-prop-empty)
-open import foundation-core.equivalences using (is-equiv; _≃_)
+open import foundation-core.equivalences using
+  ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl; inv)
-open import foundation.injective-maps using (is-injective)
+open import foundation-core.identity-types using (_＝_; refl; inv)
 open import foundation-core.negation using (¬)
 open import foundation-core.propositions using (is-prop)
 open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation-core.universe-levels using (Level; lzero; UU)
+
+open import foundation.coproduct-types using (inl; inr)
+open import foundation.injective-maps using (is-injective)
+open import foundation.raising-universe-levels using
+  ( raise; equiv-raise; map-raise)
 open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation-core.universe-levels using (lzero; UU)
+
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -26,6 +36,8 @@ The type of booleans is a 2-element type with elements `true false : bool`, whic
 
 ## Definition
 
+### The booleans
+
 ```agda
 data bool : UU lzero where
   true false : bool
@@ -33,6 +45,22 @@ data bool : UU lzero where
 {-# BUILTIN BOOL bool #-}
 {-# BUILTIN TRUE  true  #-}
 {-# BUILTIN FALSE false #-}
+```
+
+### Raising universe levels of the booleans
+
+```agda
+raise-bool : (l : Level) → UU l
+raise-bool l = raise l bool
+
+raise-true : (l : Level) → raise-bool l
+raise-true l = map-raise true
+
+raise-false : (l : Level) → raise-bool l
+raise-false l = map-raise false
+
+equiv-raise-bool : (l : Level) → bool ≃ raise-bool l
+equiv-raise-bool l = equiv-raise l bool
 ```
 
 ### Equality on the booleans
@@ -49,16 +77,16 @@ refl-Eq-bool true = star
 refl-Eq-bool false = star
 
 Eq-eq-bool :
-  {x y : bool} → Id x y → Eq-bool x y
+  {x y : bool} → x ＝ y → Eq-bool x y
 Eq-eq-bool {x = x} refl = refl-Eq-bool x
 
 eq-Eq-bool :
-  {x y : bool} → Eq-bool x y → Id x y
+  {x y : bool} → Eq-bool x y → x ＝ y
 eq-Eq-bool {true} {true} star = refl
 eq-Eq-bool {false} {false} star = refl
 
 neq-false-true-bool :
-  ¬ (Id false true)
+  ¬ (false ＝ true)
 neq-false-true-bool ()
 ```
 
@@ -110,16 +138,66 @@ pr1 bool-Set = bool
 pr2 bool-Set = is-set-bool
 ```
 
+### The type of booleans is equivalent to `Fin 2`
 
 ```agda
-neq-neg-bool : (b : bool) → ¬ (Id b (neg-bool b))
+bool-Fin-two-ℕ : Fin 2 → bool
+bool-Fin-two-ℕ (inl (inr star)) = true
+bool-Fin-two-ℕ (inr star) = false
+
+Fin-two-ℕ-bool : bool → Fin 2
+Fin-two-ℕ-bool true = inl (inr star)
+Fin-two-ℕ-bool false = inr star
+
+abstract
+  isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
+  isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
+  isretr-Fin-two-ℕ-bool (inr star) = refl
+
+abstract
+  issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
+  issec-Fin-two-ℕ-bool true = refl
+  issec-Fin-two-ℕ-bool false = refl
+
+equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
+pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
+pr2 equiv-bool-Fin-two-ℕ =
+  is-equiv-has-inverse
+    ( Fin-two-ℕ-bool)
+    ( issec-Fin-two-ℕ-bool)
+    ( isretr-Fin-two-ℕ-bool)
+```
+
+### The type of booleans is finite
+
+```agda
+is-finite-bool : is-finite bool
+is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
+
+bool-𝔽 : 𝔽
+pr1 bool-𝔽 = bool
+pr2 bool-𝔽 = is-finite-bool
+```
+
+### Boolean negation has no fixed points
+
+```agda
+neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)
 neq-neg-bool true ()
 neq-neg-bool false ()
+```
 
+### Boolean negation is an involution
+
+```agda
 neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
 neg-neg-bool true = refl
 neg-neg-bool false = refl
+```
 
+### Boolean negation is an equivalence
+
+```agda
 abstract
   is-equiv-neg-bool : is-equiv neg-bool
   pr1 (pr1 is-equiv-neg-bool) = neg-bool

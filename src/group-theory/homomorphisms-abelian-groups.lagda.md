@@ -22,7 +22,7 @@ open import group-theory.homomorphisms-groups using
     refl-htpy-hom-Group; htpy-eq-hom-Group; is-contr-total-htpy-hom-Group;
     is-equiv-htpy-eq-hom-Group; eq-htpy-hom-Group; is-set-type-hom-Group;
     id-hom-Group; comp-hom-Group; hom-Group; preserves-unit-hom-Group;
-    preserves-inverses-hom-Group)
+    preserves-inverses-hom-Group; preserves-unit-Group)
 open import group-theory.homomorphisms-semigroups using
   ( preserves-mul-Semigroup; preserves-mul-id-Semigroup;
     associative-comp-hom-Semigroup; left-unit-law-comp-hom-Semigroup;
@@ -58,7 +58,7 @@ module _
   preserves-add-hom-Ab f = preserves-mul-hom-Group (group-Ab A) (group-Ab B) f
 
   preserves-zero-Ab : (type-Ab A → type-Ab B) → UU l2
-  preserves-zero-Ab f = Id (f (zero-Ab A)) (zero-Ab B)
+  preserves-zero-Ab = preserves-unit-Group (group-Ab A) (group-Ab B)
 
   preserves-zero-hom-Ab : (f : type-hom-Ab) → preserves-zero-Ab (map-hom-Ab f)
   preserves-zero-hom-Ab f = preserves-unit-hom-Group (group-Ab A) (group-Ab B) f

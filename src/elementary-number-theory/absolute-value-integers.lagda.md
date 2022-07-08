@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The absolute value function on the integers
 ---
-
-# The absolute value function on the integers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -20,10 +18,11 @@ open import elementary-number-theory.integers using
   ( ℤ; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.unit-type using (star)
 ```
 
@@ -38,11 +37,11 @@ abs-ℤ (inr (inr x)) = succ-ℕ x
 int-abs-ℤ : ℤ → ℤ
 int-abs-ℤ = int-ℕ ∘ abs-ℤ
 
-abs-int-ℕ : (x : ℕ) → Id (abs-ℤ (int-ℕ x)) x
+abs-int-ℕ : (x : ℕ) → abs-ℤ (int-ℕ x) ＝ x
 abs-int-ℕ zero-ℕ = refl
 abs-int-ℕ (succ-ℕ x) = refl
 
-abs-neg-ℤ : (x : ℤ) → Id (abs-ℤ (neg-ℤ x)) (abs-ℤ x)
+abs-neg-ℤ : (x : ℤ) → abs-ℤ (neg-ℤ x) ＝ abs-ℤ x
 abs-neg-ℤ (inl x) = refl
 abs-neg-ℤ (inr (inl star)) = refl
 abs-neg-ℤ (inr (inr x)) = refl
@@ -114,7 +113,7 @@ subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =
     ( refl)
 
 negative-law-abs-ℤ :
-  (x : ℤ) → Id (abs-ℤ (neg-ℤ x)) (abs-ℤ x)
+  (x : ℤ) → abs-ℤ (neg-ℤ x) ＝ abs-ℤ x
 negative-law-abs-ℤ (inl x) = refl
 negative-law-abs-ℤ (inr (inl star)) = refl
 negative-law-abs-ℤ (inr (inr x)) = refl

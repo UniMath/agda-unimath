@@ -1,4 +1,6 @@
-# Equivalence relations
+---
+title: Equivalence relations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -36,15 +38,15 @@ prop-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} → Eq-Rel l2 A → Rel-Prop l2 A
 prop-Eq-Rel = pr1
 
-type-Eq-Rel :
+sim-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} → Eq-Rel l2 A → A → A → UU l2
-type-Eq-Rel R = type-Rel-Prop (prop-Eq-Rel R)
+sim-Eq-Rel R = type-Rel-Prop (prop-Eq-Rel R)
 
 abstract
-  is-prop-type-Eq-Rel :
+  is-prop-sim-Eq-Rel :
     {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) (x y : A) →
-    is-prop (type-Eq-Rel R x y)
-  is-prop-type-Eq-Rel R = is-prop-type-Rel-Prop (prop-Eq-Rel R)
+    is-prop (sim-Eq-Rel R x y)
+  is-prop-sim-Eq-Rel R = is-prop-type-Rel-Prop (prop-Eq-Rel R)
 
 is-equivalence-relation-prop-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) →
@@ -63,11 +65,11 @@ symm-Eq-Rel R = pr1 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
 
 equiv-symm-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) (x y : A) →
-  type-Eq-Rel R x y ≃ type-Eq-Rel R y x
+  sim-Eq-Rel R x y ≃ sim-Eq-Rel R y x
 equiv-symm-Eq-Rel R x y =
   equiv-prop
-    ( is-prop-type-Eq-Rel R x y)
-    ( is-prop-type-Eq-Rel R y x)
+    ( is-prop-sim-Eq-Rel R x y)
+    ( is-prop-sim-Eq-Rel R y x)
     ( symm-Eq-Rel R)
     ( symm-Eq-Rel R)
 

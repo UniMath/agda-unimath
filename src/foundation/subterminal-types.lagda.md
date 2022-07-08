@@ -1,4 +1,6 @@
-# Subterminal types
+---
+title: Subterminal types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,7 +12,7 @@ open import foundation.contractible-types using
 open import foundation.embeddings using (is-emb; is-emb-is-emb)
 open import foundation.equivalences using (is-emb-is-equiv)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; ap)
+open import foundation.identity-types using (_＝_; ap)
 open import foundation.propositions using
   ( is-prop; is-proof-irrelevant; all-elements-equal;
     is-proof-irrelevant-all-elements-equal; eq-is-prop')
@@ -63,7 +65,7 @@ module _
     is-prop-is-subterminal : is-subterminal A → is-prop A
     is-prop-is-subterminal H x y =
       is-contr-is-equiv
-        ( Id star star)
+        ( star ＝ star)
         ( ap terminal-map)
         ( H x y)
         ( is-prop-is-contr is-contr-unit star star)

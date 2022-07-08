@@ -25,65 +25,98 @@ open import group-theory.groups
 open import group-theory.semigroups
 
 open import ring-theory.rings
+```
 
-{-------------------------------------------------------------------------------
+## Idea
 
-  The Eisenstein Integers
+The Eisenstein integers are the complex numbers of the form `a + bω`, where `ω = -½ + ½√3i`, and where `a` and `b` are integers. Note that `ω` is a solution to the equation `ω² + ω + 1 = 0`.
 
-  The Eisenstein integers are the complex numbers of the form
+## Definition
 
-    a + bω
+### The underlying type of the Eisenstein integers
 
-  where ω = -½ + ½√3i, and where a and b are integers. Note that ω is a 
-  solution to the equation ω² + ω + 1 = 0.
-
--------------------------------------------------------------------------------}
-
+```agda
 ℤ[ω] : UU lzero
 ℤ[ω] = ℤ × ℤ
+```
 
+### Observational equality of the Eisenstein integers
+
+```agda
 Eq-ℤ[ω] : ℤ[ω] → ℤ[ω] → UU lzero
-Eq-ℤ[ω] x y = (Id (pr1 x) (pr1 y)) × (Id (pr2 x) (pr2 y))
+Eq-ℤ[ω] x y = (pr1 x ＝ pr1 y) × (pr2 x ＝ pr2 y)
 
 refl-Eq-ℤ[ω] : (x : ℤ[ω]) → Eq-ℤ[ω] x x
 refl-Eq-ℤ[ω] x = pair refl refl
 
-Eq-eq-ℤ[ω] : {x y : ℤ[ω]} → Id x y → Eq-ℤ[ω] x y
+Eq-eq-ℤ[ω] : {x y : ℤ[ω]} → x ＝ y → Eq-ℤ[ω] x y
 Eq-eq-ℤ[ω] {x} refl = refl-Eq-ℤ[ω] x
 
-eq-Eq-ℤ[ω]' : {x y : ℤ[ω]} → Eq-ℤ[ω] x y → Id x y
+eq-Eq-ℤ[ω]' : {x y : ℤ[ω]} → Eq-ℤ[ω] x y → x ＝ y
 eq-Eq-ℤ[ω]' {pair a b} {pair .a .b} (pair refl refl) = refl
 
-eq-Eq-ℤ[ω] : {x y : ℤ[ω]} → Id (pr1 x) (pr1 y) → Id (pr2 x) (pr2 y) → Id x y
+eq-Eq-ℤ[ω] : {x y : ℤ[ω]} → (pr1 x ＝ pr1 y) → (pr2 x ＝ pr2 y) → x ＝ y
 eq-Eq-ℤ[ω] {pair a b} {pair .a .b} refl refl = refl
+```
 
+### The Eisenstein integer zero
+
+```agda
 zero-ℤ[ω] : ℤ[ω]
 zero-ℤ[ω] = pair zero-ℤ zero-ℤ
+```
 
+### The Eisenstein integer one
+
+```agda
 one-ℤ[ω] : ℤ[ω]
 one-ℤ[ω] = pair one-ℤ zero-ℤ
+```
 
+### The inclusion of the integers into the Eisenstein integers
+
+```agda
 eisenstein-int-ℤ : ℤ → ℤ[ω]
 eisenstein-int-ℤ x = pair x zero-ℤ
+```
 
+### The Eisenstein integer ω
+
+```agda
 ω-ℤ[ω] : ℤ[ω]
 ω-ℤ[ω] = pair zero-ℤ one-ℤ
+```
 
+### The Eisenstein integer -ω
+
+```agda
 neg-ω-ℤ[ω] : ℤ[ω]
 neg-ω-ℤ[ω] = pair zero-ℤ neg-one-ℤ
+```
 
+### Addition of Eisenstein integers
+
+```agda
 add-ℤ[ω] : ℤ[ω] → ℤ[ω] → ℤ[ω]
 add-ℤ[ω] (pair a b) (pair a' b') = pair (add-ℤ a a') (add-ℤ b b')
 
 ap-add-ℤ[ω] :
-  {x x' y y' : ℤ[ω]} → Id x x' → Id y y' → Id (add-ℤ[ω] x y) (add-ℤ[ω] x' y')
+  {x x' y y' : ℤ[ω]} → x ＝ x' → y ＝ y' → add-ℤ[ω] x y ＝ add-ℤ[ω] x' y'
 ap-add-ℤ[ω] p q = ap-binary add-ℤ[ω] p q
+```
 
+### Negatives of Eisenstein integers
+
+```agda
 neg-ℤ[ω] : ℤ[ω] → ℤ[ω]
 neg-ℤ[ω] (pair a b) = pair (neg-ℤ a) (neg-ℤ b)
+```
 
--- (a + bω)(c + dω) = (ac - bd) + (ad + cb - bd)ω
+### Multiplication of Eisenstein integers
 
+Note that `(a + bω)(c + dω) = (ac - bd) + (ad + cb - bd)ω`
+
+```agda
 mul-ℤ[ω] : ℤ[ω] → ℤ[ω] → ℤ[ω]
 mul-ℤ[ω] (pair a1 b1) (pair a2 b2) =
   pair
@@ -91,50 +124,56 @@ mul-ℤ[ω] (pair a1 b1) (pair a2 b2) =
     ( add-ℤ (add-ℤ (mul-ℤ a1 b2) (mul-ℤ a2 b1)) (neg-ℤ (mul-ℤ b1 b2)))
 
 ap-mul-ℤ[ω] :
-  {x x' y y' : ℤ[ω]} → Id x x' → Id y y' → Id (mul-ℤ[ω] x y) (mul-ℤ[ω] x' y')
+  {x x' y y' : ℤ[ω]} → x ＝ x' → y ＝ y' → mul-ℤ[ω] x y ＝ mul-ℤ[ω] x' y'
 ap-mul-ℤ[ω] p q = ap-binary mul-ℤ[ω] p q
+```
 
--- The conjugate of (a + bω) is (a + bω²), which is ((a - b) - bω).
+### Conjugation of Eisenstein integers
 
+The conjugate of `a + bω` is `a + bω²`, which is `(a - b) - bω`.
+
+```agda
 conjugate-ℤ[ω] : ℤ[ω] → ℤ[ω]
 conjugate-ℤ[ω] (pair a b) = pair (add-ℤ a (neg-ℤ b)) (neg-ℤ b)
 
 conjugate-conjugate-ℤ[ω] :
-  (x : ℤ[ω]) → Id (conjugate-ℤ[ω] (conjugate-ℤ[ω] x)) x
+  (x : ℤ[ω]) → conjugate-ℤ[ω] (conjugate-ℤ[ω] x) ＝ x
 conjugate-conjugate-ℤ[ω] (pair a b) =
   eq-Eq-ℤ[ω] (isretr-add-neg-ℤ' (neg-ℤ b) a) (neg-neg-ℤ b)
+```
 
--- We show that the Eisenstein integers form a ring with conjugation
+### The Eisenstein integers form a ring with conjugation
 
-left-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → Id (add-ℤ[ω] zero-ℤ[ω] x) x
+```agda
+left-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → add-ℤ[ω] zero-ℤ[ω] x ＝ x
 left-unit-law-add-ℤ[ω] (pair a b) = eq-Eq-ℤ[ω] refl refl
 
-right-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → Id (add-ℤ[ω] x zero-ℤ[ω]) x
+right-unit-law-add-ℤ[ω] : (x : ℤ[ω]) → add-ℤ[ω] x zero-ℤ[ω] ＝ x
 right-unit-law-add-ℤ[ω] (pair a b) =
   eq-Eq-ℤ[ω] (right-unit-law-add-ℤ a) (right-unit-law-add-ℤ b)
 
 associative-add-ℤ[ω] :
-  (x y z : ℤ[ω]) → Id (add-ℤ[ω] (add-ℤ[ω] x y) z) (add-ℤ[ω] x (add-ℤ[ω] y z))
+  (x y z : ℤ[ω]) → add-ℤ[ω] (add-ℤ[ω] x y) z ＝ add-ℤ[ω] x (add-ℤ[ω] y z)
 associative-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
   eq-Eq-ℤ[ω] (associative-add-ℤ a c e) (associative-add-ℤ b d f)
   
 left-inverse-law-add-ℤ[ω] :
-  (x : ℤ[ω]) → Id (add-ℤ[ω] (neg-ℤ[ω] x) x) zero-ℤ[ω]
+  (x : ℤ[ω]) → add-ℤ[ω] (neg-ℤ[ω] x) x ＝ zero-ℤ[ω]
 left-inverse-law-add-ℤ[ω] (pair a b) =
   eq-Eq-ℤ[ω] (left-inverse-law-add-ℤ a) (left-inverse-law-add-ℤ b)
 
 right-inverse-law-add-ℤ[ω] :
-  (x : ℤ[ω]) → Id (add-ℤ[ω] x (neg-ℤ[ω] x)) zero-ℤ[ω]
+  (x : ℤ[ω]) → add-ℤ[ω] x (neg-ℤ[ω] x) ＝ zero-ℤ[ω]
 right-inverse-law-add-ℤ[ω] (pair a b) =
   eq-Eq-ℤ[ω] (right-inverse-law-add-ℤ a) (right-inverse-law-add-ℤ b)
 
 commutative-add-ℤ[ω] :
-  (x y : ℤ[ω]) → Id (add-ℤ[ω] x y) (add-ℤ[ω] y x)
+  (x y : ℤ[ω]) → add-ℤ[ω] x y ＝ add-ℤ[ω] y x
 commutative-add-ℤ[ω] (pair a b) (pair a' b') =
   eq-Eq-ℤ[ω] (commutative-add-ℤ a a') (commutative-add-ℤ b b')
 
 left-unit-law-mul-ℤ[ω] :
-  (x : ℤ[ω]) → Id (mul-ℤ[ω] one-ℤ[ω] x) x
+  (x : ℤ[ω]) → mul-ℤ[ω] one-ℤ[ω] x ＝ x
 left-unit-law-mul-ℤ[ω] (pair a b) =
   eq-Eq-ℤ[ω]
     ( right-unit-law-add-ℤ a)
@@ -143,7 +182,7 @@ left-unit-law-mul-ℤ[ω] (pair a b) =
         ( right-unit-law-add-ℤ b)))
 
 right-unit-law-mul-ℤ[ω] :
-  (x : ℤ[ω]) → Id (mul-ℤ[ω] x one-ℤ[ω]) x
+  (x : ℤ[ω]) → mul-ℤ[ω] x one-ℤ[ω] ＝ x
 right-unit-law-mul-ℤ[ω] (pair a b) =
   eq-Eq-ℤ[ω]
     ( ( ap-add-ℤ (right-unit-law-mul-ℤ a) (ap neg-ℤ (right-zero-law-mul-ℤ b))) ∙
@@ -154,7 +193,7 @@ right-unit-law-mul-ℤ[ω] (pair a b) =
       ( right-unit-law-add-ℤ b))
 
 commutative-mul-ℤ[ω] :
-  (x y : ℤ[ω]) → Id (mul-ℤ[ω] x y) (mul-ℤ[ω] y x)
+  (x y : ℤ[ω]) → mul-ℤ[ω] x y ＝ mul-ℤ[ω] y x
 commutative-mul-ℤ[ω] (pair a b) (pair c d) =
   eq-Eq-ℤ[ω]
     ( ap-add-ℤ (commutative-mul-ℤ a c) (ap neg-ℤ (commutative-mul-ℤ b d)))
@@ -163,7 +202,7 @@ commutative-mul-ℤ[ω] (pair a b) (pair c d) =
       ( ap neg-ℤ (commutative-mul-ℤ b d)))
 
 associative-mul-ℤ[ω] :
-  (x y z : ℤ[ω]) → Id (mul-ℤ[ω] (mul-ℤ[ω] x y) z) (mul-ℤ[ω] x (mul-ℤ[ω] y z))
+  (x y z : ℤ[ω]) → mul-ℤ[ω] (mul-ℤ[ω] x y) z ＝ mul-ℤ[ω] x (mul-ℤ[ω] y z)
 associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
   eq-Eq-ℤ[ω]
     ( ( ap-add-ℤ
@@ -416,7 +455,7 @@ associative-mul-ℤ[ω] (pair a b) (pair c d) (pair e f) =
 
 left-distributive-mul-add-ℤ[ω] :
   (x y z : ℤ[ω]) →
-  Id (mul-ℤ[ω] x (add-ℤ[ω] y z)) (add-ℤ[ω] (mul-ℤ[ω] x y) (mul-ℤ[ω] x z))
+  mul-ℤ[ω] x (add-ℤ[ω] y z) ＝ add-ℤ[ω] (mul-ℤ[ω] x y) (mul-ℤ[ω] x z)
 left-distributive-mul-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
   eq-Eq-ℤ[ω]
     ( ( ap-add-ℤ
@@ -449,13 +488,11 @@ left-distributive-mul-add-ℤ[ω] (pair a b) (pair c d) (pair e f) =
 
 right-distributive-mul-add-ℤ[ω] :
   (x y z : ℤ[ω]) →
-  Id (mul-ℤ[ω] (add-ℤ[ω] x y) z) (add-ℤ[ω] (mul-ℤ[ω] x z) (mul-ℤ[ω] y z))
+  mul-ℤ[ω] (add-ℤ[ω] x y) z ＝ add-ℤ[ω] (mul-ℤ[ω] x z) (mul-ℤ[ω] y z)
 right-distributive-mul-add-ℤ[ω] x y z =
   ( commutative-mul-ℤ[ω] (add-ℤ[ω] x y) z) ∙
   ( ( left-distributive-mul-add-ℤ[ω] z x y) ∙
     ( ap-add-ℤ[ω] (commutative-mul-ℤ[ω] z x) (commutative-mul-ℤ[ω] z y)))
-
--- We complete the construction of the ring of Eisenstein integers
 
 ℤ[ω]-Semigroup : Semigroup lzero
 pr1 ℤ[ω]-Semigroup = prod-Set ℤ-Set ℤ-Set

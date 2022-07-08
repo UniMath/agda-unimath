@@ -1,4 +1,6 @@
-# Square-free natural numbers
+---
+title: Square-free natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

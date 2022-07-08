@@ -1,4 +1,6 @@
-# Large categories
+---
+title: Large categories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

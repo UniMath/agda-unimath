@@ -1,4 +1,6 @@
-# The univalence axiom implies function extensionality
+---
+title: The univalence axiom implies function extensionality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

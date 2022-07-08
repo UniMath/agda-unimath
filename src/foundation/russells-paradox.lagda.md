@@ -1,4 +1,6 @@
-# Russell's paradox
+---
+title: Russell's paradox
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,7 @@ open import foundation.functoriality-cartesian-product-types using
   ( equiv-prod)
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
-open import foundation.identity-types using (Id; refl; equiv-concat')
+open import foundation.identity-types using (_＝_; refl; equiv-concat')
 open import foundation.locally-small-types using (is-locally-small-UU)
 open import foundation.multisets using (𝕍; comprehension-𝕍; _∉-𝕍_; _∈-𝕍_)
 open import foundation.negation using (¬; no-fixed-points-neg)
@@ -114,7 +116,7 @@ paradox-Russell {l} H =
   is-small-R' = is-small-resize-Russell K
 
   abstract
-    p : Id (resize-𝕍 R' is-small-R') R
+    p : resize-𝕍 R' is-small-R' ＝ R
     p = resize-resize-𝕍 is-small-R
 
   α : (R ∈-𝕍 R) ≃ (R' ∈-𝕍 R')
@@ -127,7 +129,7 @@ paradox-Russell {l} H =
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
             ( is-contr-total-path' R')
             ( pair R' refl)) ∘e
-          ( ( inv-assoc-Σ (𝕍 l) (λ t → Id t R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
+          ( ( inv-assoc-Σ (𝕍 l) (λ t → t ＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
                   ( commutative-prod) ∘e
@@ -142,10 +144,10 @@ paradox-Russell {l} H =
               ( assoc-Σ
                 ( 𝕍 l)
                 ( λ t → t ∉-𝕍 t)
-                ( λ t → Id ( resize-𝕍
-                             ( pr1 t)
-                             ( is-small-multiset-𝕍 is-small-lsuc (pr1 t)))
-                           ( R))))))
+                ( λ t → ( resize-𝕍
+                          ( pr1 t)
+                          ( is-small-multiset-𝕍 is-small-lsuc (pr1 t))) ＝
+                        ( R))))))
 ```
 
 ### There can be no surjective map `f : A → U` for any `A : U`
