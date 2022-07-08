@@ -30,7 +30,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functions using (_∘_)
@@ -419,7 +419,7 @@ linear-diff-ℤ' x y z =
 
 ```agda
 is-zero-is-zero-mul-ℤ :
-  (x y : ℤ) → is-zero-ℤ (mul-ℤ x y) → coprod (is-zero-ℤ x) (is-zero-ℤ y)
+  (x y : ℤ) → is-zero-ℤ (mul-ℤ x y) → (is-zero-ℤ x) + (is-zero-ℤ y)
 is-zero-is-zero-mul-ℤ (inl x) (inl y) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inl x) (inl y)) ∙ H))
 is-zero-is-zero-mul-ℤ (inl x) (inr (inl star)) H = inr refl

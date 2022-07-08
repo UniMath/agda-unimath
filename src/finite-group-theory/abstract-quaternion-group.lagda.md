@@ -5,7 +5,7 @@
 
 module finite-group-theory.abstract-quaternion-group where
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-types using

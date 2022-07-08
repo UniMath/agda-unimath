@@ -10,7 +10,7 @@ Contributors: Elif Uskuplu, Egbert Rijke
 module foundation.cantor-schroder-bernstein-escardo where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)

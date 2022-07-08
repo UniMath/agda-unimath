@@ -7,7 +7,7 @@ title: Decidability of dependent pair types
 
 module foundation.decidable-dependent-pair-types where
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-equiv; is-decidable-coprod; is-decidable-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -28,9 +28,9 @@ We describe conditions under which dependent sums are decidable.
 
 ```agda
 is-decidable-Σ-coprod :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : coprod A B → UU l3) →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3) →
   is-decidable (Σ A (C ∘ inl)) → is-decidable (Σ B (C ∘ inr)) →
-  is-decidable (Σ (coprod A B) C)
+  is-decidable (Σ (A + B) C)
 is-decidable-Σ-coprod {l1} {l2} {l3} {A} {B} C dA dB =
   is-decidable-equiv
     ( right-distributive-Σ-coprod A B C)

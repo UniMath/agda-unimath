@@ -10,7 +10,7 @@ module structured-types.magmas where
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-equiv)
 open import foundation.functions using (_∘_)

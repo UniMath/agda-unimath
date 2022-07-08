@@ -8,7 +8,7 @@ title: Decidable subtypes
 module foundation.decidable-subtypes where
 
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-left; is-right; is-prop-is-left; is-prop-is-right)
+  ( _+_; inl; inr; is-left; is-right; is-prop-is-left; is-prop-is-right)
 open import foundation.decidable-propositions using
   ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop;
     type-decidable-Prop; is-prop-type-decidable-Prop;
@@ -108,20 +108,20 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-decidable-is-left : (x : coprod A B) → is-decidable (is-left x)
+  is-decidable-is-left : (x : A + B) → is-decidable (is-left x)
   is-decidable-is-left (inl x) = is-decidable-unit
   is-decidable-is-left (inr x) = is-decidable-empty
 
-  is-left-decidable-Prop : coprod A B → decidable-Prop lzero
+  is-left-decidable-Prop : A + B → decidable-Prop lzero
   pr1 (is-left-decidable-Prop x) = is-left x
   pr1 (pr2 (is-left-decidable-Prop x)) = is-prop-is-left x
   pr2 (pr2 (is-left-decidable-Prop x)) = is-decidable-is-left x
 
-  is-decidable-is-right : (x : coprod A B) → is-decidable (is-right x)
+  is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
   is-decidable-is-right (inl x) = is-decidable-empty
   is-decidable-is-right (inr x) = is-decidable-unit
 
-  is-right-decidable-Prop : coprod A B → decidable-Prop lzero
+  is-right-decidable-Prop : A + B → decidable-Prop lzero
   pr1 (is-right-decidable-Prop x) = is-right x
   pr1 (pr2 (is-right-decidable-Prop x)) = is-prop-is-right x
   pr2 (pr2 (is-right-decidable-Prop x)) = is-decidable-is-right x

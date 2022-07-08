@@ -17,7 +17,7 @@ open import foundation.connected-components-universes using
 open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; equiv-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-embeddings using
   ( _↪d_; map-decidable-emb; is-emb-map-decidable-emb; is-decidable-emb;
     equiv-Fib-decidable-Prop; equiv-precomp-decidable-emb-equiv;
@@ -253,7 +253,7 @@ abstract
   recursion-binomial-type' :
     {l1 l2 : Level} (A : UU l1) (B : UU l2) →
     binomial-type' (Maybe A) (Maybe B) ≃
-    coprod (binomial-type' A B) (binomial-type' A (Maybe B))
+    (binomial-type' A B + binomial-type' A (Maybe B))
   recursion-binomial-type' A B =
     ( ( ( left-distributive-Σ-coprod
           ( A → decidable-Prop _)
@@ -292,24 +292,22 @@ abstract
                 ( Σ (UU-Prop _) (¬ ∘ type-Prop))
                 ( ind-coprod _
                   ( λ Q →
-                    mere-equiv (Maybe B) (coprod (Σ A _) (type-Prop (pr1 Q))))
+                    mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))
                   ( λ Q →
                     mere-equiv
                       ( Maybe B)
-                      ( coprod (Σ A _) (type-Prop (pr1 Q))))))) ∘e
+                      ( (Σ A _) + (type-Prop (pr1 Q))))))) ∘e
             ( equiv-Σ
               ( ind-coprod _
                 ( λ Q →
                   mere-equiv
                     ( Maybe B)
-                    ( coprod
-                      ( Σ A (λ a → type-decidable-Prop (P a)))
+                    ( ( Σ A (λ a → type-decidable-Prop (P a))) +
                       ( type-Prop (pr1 Q))))
                 ( λ Q →
                   mere-equiv
                     ( Maybe B)
-                    ( coprod
-                      ( Σ A (λ a → type-decidable-Prop (P a)))
+                    ( ( Σ A (λ a → type-decidable-Prop (P a))) +
                       ( type-Prop (pr1 Q)))))
               ( split-decidable-Prop)
               ( ind-Σ
@@ -323,15 +321,13 @@ abstract
         ( λ t →
           mere-equiv
             ( Maybe B)
-            ( coprod
-              ( Σ A (λ a → type-decidable-Prop (pr1 t a)))
+            ( ( Σ A (λ a → type-decidable-Prop (pr1 t a))) +
               ( type-decidable-Prop (pr2 t)))))) ∘e
     ( equiv-Σ
       ( λ p →
         mere-equiv
           ( Maybe B)
-          ( coprod
-            ( Σ A (λ a → type-decidable-Prop (pr1 p a)))
+          ( ( Σ A (λ a → type-decidable-Prop (pr1 p a))) +
             ( type-decidable-Prop (pr2 p))))
       ( equiv-universal-property-Maybe)
       ( λ u →
@@ -348,7 +344,7 @@ abstract
   binomial-type-Maybe :
     {l1 l2 : Level} (A : UU l1) (B : UU l2) →
     binomial-type (Maybe A) (Maybe B) ≃
-    coprod (binomial-type A B) (binomial-type A (Maybe B))
+    (binomial-type A B + binomial-type A (Maybe B))
   binomial-type-Maybe A B =
     ( inv-equiv
       ( equiv-coprod

@@ -24,7 +24,7 @@ open import finite-group-theory.orbits-permutations using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
+  ( inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
     neq-inl-inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)

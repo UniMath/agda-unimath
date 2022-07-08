@@ -17,7 +17,7 @@ open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
     is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.empty-types using (empty)
 open import foundation.functions using (id)
 open import foundation.functoriality-coproduct-types using (map-coprod)
@@ -52,7 +52,7 @@ trans-leq-ℤ k l m p q =
       ( p))
 
 decide-leq-ℤ :
-  {x y : ℤ} → coprod (leq-ℤ x y) (leq-ℤ y x)
+  {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
 decide-leq-ℤ {x} {y} =
   map-coprod
     ( id)

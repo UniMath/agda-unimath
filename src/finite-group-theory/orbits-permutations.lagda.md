@@ -48,7 +48,7 @@ open import
 open import foundation.automorphisms using (Aut)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; neq-inr-inl; coprod-Prop)
+  ( _+_; inl; inr; neq-inr-inl; coprod-Prop)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-equiv;
     is-prop-has-decidable-equality; has-decidable-equality-Σ)
@@ -204,9 +204,8 @@ module _
       ( is-injective-nat-Fin (succ-ℕ (number-of-elements-count eX)) p)
  
   two-points-iterate-ordered-ℕ :
-    coprod
-      ( point1-iterate-ℕ ≤-ℕ point2-iterate-ℕ)
-      ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ) →
+    ( point1-iterate-ℕ ≤-ℕ point2-iterate-ℕ) +
+    ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ) →
     Σ ( ℕ)
       ( λ n →
         Σ ( ℕ)
@@ -228,9 +227,8 @@ module _
 
   leq-greater-point-number-elements :
     ( p :
-      coprod
-        ( point1-iterate-ℕ ≤-ℕ point2-iterate-ℕ)
-        ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ)) →
+      ( point1-iterate-ℕ ≤-ℕ point2-iterate-ℕ) +
+      ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ)) →
     pr1 (two-points-iterate-ordered-ℕ p) ≤-ℕ number-of-elements-count eX
   leq-greater-point-number-elements (inl p) =
     ( upper-bound-nat-Fin
@@ -729,20 +727,17 @@ module _
       (g : X ≃ X) (x y z : X) →
       Σ ( ℕ)
         ( λ k →
-          coprod
-            ( Id (iterate k (map-equiv g) x) y)
-            ( Id (iterate k (map-equiv g) x) z)) →
+          ( Id (iterate k (map-equiv g) x) y) +
+          ( Id (iterate k (map-equiv g) x) z)) →
       minimal-element-ℕ
         ( λ k →
-          coprod
-            ( Id (iterate k (map-equiv g) x) y)
-            ( Id (iterate k (map-equiv g) x) z))
+          ( Id (iterate k (map-equiv g) x) y) +
+          ( Id (iterate k (map-equiv g) x) z))
     minimal-element-iterate-2 g x y z p =
       well-ordering-principle-ℕ
         ( λ k →
-          coprod
-            ( Id (iterate k (map-equiv g) x) y)
-            ( Id (iterate k (map-equiv g) x) z))
+          ( Id (iterate k (map-equiv g) x) y) +
+          ( Id (iterate k (map-equiv g) x) z))
         ( λ k →
           is-decidable-coprod
           ( has-decidable-equality-count eX (iterate k (map-equiv g) x) y)
@@ -758,7 +753,7 @@ module _
         ( ¬ (Id (iterate k (map-equiv g) x) b)))
       ( Ind :
         (n : ℕ) → C (succ-ℕ n) → is-nonzero-ℕ n → C n) →
-      (k : ℕ) → coprod (is-zero-ℕ k) (C k) →
+      (k : ℕ) → (is-zero-ℕ k + C k) →
       Id ( iterate k (map-equiv (composition-transposition-a-b g)) x)
          ( iterate k (map-equiv g) x)
     equal-iterate-transposition x g C F Ind zero-ℕ p = refl
@@ -943,7 +938,8 @@ module _
           ( cases-equal-iterate-transposition-a (has-decidable-equality-ℕ k zero-ℕ))
         where
         cases-equal-iterate-transposition-a : is-decidable (is-zero-ℕ k) →
-          coprod (is-zero-ℕ k) (is-nonzero-ℕ k × le-ℕ k (pr1 (minimal-element-iterate g a b pa)))
+          ( is-zero-ℕ k) +
+          ( is-nonzero-ℕ k × le-ℕ k (pr1 (minimal-element-iterate g a b pa)))
         cases-equal-iterate-transposition-a (inl s) = inl s
         cases-equal-iterate-transposition-a (inr s) = inr (pair s ineq)
       lemma2 : (pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) →
@@ -1029,8 +1025,7 @@ module _
       (P : (sim-Eq-Rel (same-orbits-permutation (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g) a b)) →
       (x : X) →
       ( ( sim-Eq-Rel (same-orbits-permutation-count g) x a) ≃
-        ( coprod
-          ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a)
+        ( ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a) +
           ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x b)))
     split-orbits-a-b-transposition g P x =
       pair
@@ -1047,11 +1042,11 @@ module _
                 (λ pa → lemma3 (lemma2 (composition-transposition-a-b g) (pair (pr1 pa) (inr (pr2 pa)))))}))
       where
       minimal-element-iterate-2-a-b : (g : X ≃ X) →
-        (Σ ℕ (λ k → coprod (Id (iterate k (map-equiv g) x) a) (Id (iterate k (map-equiv g) x) b))) →
-        minimal-element-ℕ (λ k → coprod (Id (iterate k (map-equiv g) x) a) (Id (iterate k (map-equiv g) x) b))
+        (Σ ℕ (λ k → (Id (iterate k (map-equiv g) x) a) + (Id (iterate k (map-equiv g) x) b))) →
+        minimal-element-ℕ (λ k → (Id (iterate k (map-equiv g) x) a) + (Id (iterate k (map-equiv g) x) b))
       minimal-element-iterate-2-a-b g = minimal-element-iterate-2 g x a b
       equal-iterate-transposition-same-orbits : (g : X ≃ X) →
-        (pa : Σ ℕ (λ k → coprod (Id (iterate k (map-equiv g) x) a) (Id (iterate k (map-equiv g) x) b))) (k : ℕ) →
+        (pa : Σ ℕ (λ k → (Id (iterate k (map-equiv g) x) a) + (Id (iterate k (map-equiv g) x) b))) (k : ℕ) →
         (le-ℕ k (pr1 (minimal-element-iterate-2-a-b g pa))) →
         Id (iterate k (map-equiv (composition-transposition-a-b g)) x) (iterate k (map-equiv g) x) 
       equal-iterate-transposition-same-orbits g pa k ineq =
@@ -1065,10 +1060,9 @@ module _
           ( λ k' ineq' _ →
             (transitive-le-ℕ k' (succ-ℕ k') (pr1 (minimal-element-iterate-2-a-b g pa)) (le-succ-ℕ {x = k'}) ineq'))
           k (inr ineq)
-      lemma2 : (g : X ≃ X) (pa : Σ ℕ (λ k → coprod (Id (iterate k (map-equiv g) x) a) (Id (iterate k (map-equiv g) x) b))) →
-        coprod
-          ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a)
-          ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x b)
+      lemma2 : (g : X ≃ X) (pa : Σ ℕ (λ k → (Id (iterate k (map-equiv g) x) a) + (Id (iterate k (map-equiv g) x) b))) →
+        ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a) +
+        ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x b)
       lemma2 g pa =
         cases-lemma2
           ( has-decidable-equality-ℕ (pr1 (minimal-element-iterate-2-a-b g pa)) zero-ℕ)
@@ -1076,13 +1070,12 @@ module _
           ( refl)
         where
         cases-lemma2 : is-decidable (Id (pr1 (minimal-element-iterate-2-a-b g pa)) zero-ℕ) →
-          (c : coprod
-            (Id (iterate (pr1 (minimal-element-iterate-2-a-b g pa)) (map-equiv g) x) a)
-            (Id (iterate (pr1 (minimal-element-iterate-2-a-b g pa)) (map-equiv g) x) b)) →
+          (c : 
+            ( Id (iterate (pr1 (minimal-element-iterate-2-a-b g pa)) (map-equiv g) x) a) +
+            ( Id (iterate (pr1 (minimal-element-iterate-2-a-b g pa)) (map-equiv g) x) b)) →
           Id c (pr1 (pr2 (minimal-element-iterate-2-a-b g pa))) →
-          coprod
-            ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a)
-            ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x b)
+          ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a) +
+          ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x b)
         cases-lemma2 (inl q) (inl c) r =
           inl (unit-trunc-Prop (pair zero-ℕ (tr (λ z → Id (iterate z (map-equiv g) x) a) q c)))
         cases-lemma2 (inl q) (inr c) r =
@@ -1144,8 +1137,7 @@ module _
           is-successor-k1 : is-successor-ℕ (pr1 (minimal-element-iterate-2-a-b g pa))
           is-successor-k1 = is-successor-is-nonzero-ℕ q
       lemma3 : 
-        (coprod
-          ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b (composition-transposition-a-b g))) x a)
+        ( ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b (composition-transposition-a-b g))) x a) +
           ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b (composition-transposition-a-b g))) x b)) →
           sim-Eq-Rel (same-orbits-permutation-count g) x a
       lemma3 (inl T) =
@@ -1585,7 +1577,7 @@ module _
           ( cases-equal-iterate-transposition-a (has-decidable-equality-ℕ k zero-ℕ))
         where
         cases-equal-iterate-transposition-a : is-decidable (is-zero-ℕ k) →
-          coprod (is-zero-ℕ k) (is-nonzero-ℕ k × le-ℕ k (pr1 minimal-element-iterate-repeating))
+          (is-zero-ℕ k) + (is-nonzero-ℕ k × le-ℕ k (pr1 minimal-element-iterate-repeating))
         cases-equal-iterate-transposition-a (inl s) = inl s
         cases-equal-iterate-transposition-a (inr s) = inr (pair s ineq)
       lemma : Id (iterate (pr1 minimal-element-iterate-repeating) (map-equiv (composition-transposition-a-b g)) a) b

@@ -31,7 +31,7 @@ open import foundation.connected-types using
   ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_; inv-equiv;

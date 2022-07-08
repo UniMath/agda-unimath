@@ -13,7 +13,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation-core.decidable-propositions using (decidable-Prop)
 
 open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod; neq-inr-inl)
+open import foundation.coproduct-types using (_+_; inl; inr; is-prop-coprod; neq-inr-inl)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)
@@ -103,7 +103,7 @@ is-prop-is-one-Fin :
 is-prop-is-one-Fin k x = is-set-Fin (succ-ℕ k) x (one-Fin k)
 
 is-prop-is-zero-or-one-Fin-two-ℕ :
-  (x : Fin 2) → is-prop (coprod (is-zero-Fin 2 x) (is-one-Fin 2 x))
+  (x : Fin 2) → is-prop ((is-zero-Fin 2 x) + (is-one-Fin 2 x))
 is-prop-is-zero-or-one-Fin-two-ℕ x =
   is-prop-coprod
     ( λ p q → Eq-Fin-eq 2 (inv p ∙ q))
@@ -115,7 +115,7 @@ is-prop-is-zero-or-one-Fin-two-ℕ x =
 
 ```agda
 is-contr-is-zero-or-one-Fin-two-ℕ :
-  (x : Fin 2) → is-contr (coprod (is-zero-Fin 2 x) (is-one-Fin 2 x))
+  (x : Fin 2) → is-contr ((is-zero-Fin 2 x) + (is-one-Fin 2 x))
 is-contr-is-zero-or-one-Fin-two-ℕ x =
   is-proof-irrelevant-is-prop
     ( is-prop-is-zero-or-one-Fin-two-ℕ x)

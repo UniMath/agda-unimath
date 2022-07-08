@@ -11,7 +11,7 @@ open import elementary-number-theory.decidable-dependent-function-types public
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-Prop;
     elim-trunc-Prop-is-decidable)

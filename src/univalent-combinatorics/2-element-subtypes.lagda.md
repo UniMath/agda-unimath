@@ -10,7 +10,7 @@ module univalent-combinatorics.2-element-subtypes where
 open import foundation.automorphisms using (Aut)
 open import foundation.contractible-types using
   ( equiv-is-contr; is-contr-total-path)
-open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod)
+open import foundation.coproduct-types using (_+_; inl; inr; is-prop-coprod)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
@@ -24,7 +24,7 @@ open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot)
-open import foundation.identity-types using (Id; _∙_; inv; tr)
+open import foundation.identity-types using (Id; _＝_; _∙_; inv; tr)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (iff-equiv)
 open import foundation.mere-equivalences using (transitive-mere-equiv)
@@ -114,11 +114,11 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l) {x y : type-Set X} (np : ¬ (Id x y))
+  {l : Level} (X : UU-Set l) {x y : type-Set X} (np : ¬ (x ＝ y))
   where
 
   type-prop-standard-2-Element-Subtype : type-Set X → UU l
-  type-prop-standard-2-Element-Subtype z = coprod (Id x z) (Id y z)
+  type-prop-standard-2-Element-Subtype z = (x ＝ z) + (y ＝ z)
 
   is-prop-type-prop-standard-2-Element-Subtype :
     (z : type-Set X) → is-prop (type-prop-standard-2-Element-Subtype z)
@@ -212,8 +212,8 @@ module _
     map-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
 
   compute-swap-2-Element-Subtype :
-    (x y : type-2-Element-Subtype P) → ¬ (Id x y) →
-    Id (map-swap-2-Element-Subtype x) y
+    (x y : type-2-Element-Subtype P) → ¬ (x ＝ y) →
+    map-swap-2-Element-Subtype x ＝ y
   compute-swap-2-Element-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
 ```

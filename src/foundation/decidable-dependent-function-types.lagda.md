@@ -7,7 +7,7 @@ title: Decidability of dependent function types
 
 module foundation.decidable-dependent-function-types where
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-equiv; is-decidable-prod; is-decidable-equiv')
 open import foundation.equivalences using (_≃_; map-equiv)
@@ -29,9 +29,9 @@ We describe conditions under which dependent products are decidable.
 
 ```agda
 is-decidable-Π-coprod :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : coprod A B → UU l3} →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : A + B → UU l3} →
   is-decidable ((a : A) → C (inl a)) → is-decidable ((b : B) → C (inr b)) →
-  is-decidable ((x : coprod A B) → C x)
+  is-decidable ((x : A + B) → C x)
 is-decidable-Π-coprod {C = C} dA dB =
   is-decidable-equiv
     ( equiv-dependent-universal-property-coprod C)

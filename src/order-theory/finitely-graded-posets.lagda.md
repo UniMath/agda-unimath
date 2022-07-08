@@ -13,7 +13,7 @@ open import elementary-number-theory.modular-arithmetic using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using ( _↪_; map-emb; is-emb; is-emb-map-emb; tot-emb)
 open import foundation.empty-types using (ex-falso)

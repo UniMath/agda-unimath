@@ -17,7 +17,7 @@ open import elementary-number-theory.natural-numbers using
 open import elementary-number-theory.upper-bounds-natural-numbers using
   ( is-upper-bound-ℕ; is-strict-upper-bound-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-function-type)
 open import foundation.empty-types using (ind-empty; ex-falso)

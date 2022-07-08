@@ -11,7 +11,7 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
 
 open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (empty; ex-falso)
@@ -49,7 +49,7 @@ The type of integers is an extension of the type of natural numbers including ne
 
 ```agda
 ℤ : UU lzero
-ℤ = coprod ℕ (coprod unit ℕ)
+ℤ = ℕ + (unit + ℕ)
 ```
 
 ### Inclusion of the negative integers
@@ -374,7 +374,7 @@ is-injective-nonnegative-int-ℕ {x} {y} p =
     ( isretr-nat-nonnegative-ℤ y))
 
 decide-is-nonnegative-ℤ :
-  {x : ℤ} → coprod (is-nonnegative-ℤ x) (is-nonnegative-ℤ (neg-ℤ x))
+  {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))
 decide-is-nonnegative-ℤ {inl x} = inr star
 decide-is-nonnegative-ℤ {inr x} = inl star
 ```

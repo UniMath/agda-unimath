@@ -35,7 +35,7 @@ open import finite-group-theory.transpositions using
     is-involution-map-transposition)
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
+open import foundation.coproduct-types using (_+_; inl; inr; neq-inl-inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-propositions using
@@ -245,9 +245,8 @@ module _
       cases-g : (Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level n X)) →
         ¬ (Id (d1 Y) (d3 Y)) → (is-decidable (Id (d1 Y) (d2 Y))) →
         is-decidable (Id (d2 Y) (d3 Y)) →
-        coprod
-          (¬ (Id (d1 Y) (d2 Y)) × ¬ (¬ (Id (d2 Y) (d3 Y))))
-          (¬ (Id (d2 Y) (d3 Y)) × ¬ (¬ (Id (d1 Y) (d2 Y))))
+        (¬ (Id (d1 Y) (d2 Y)) × ¬ (¬ (Id (d2 Y) (d3 Y)))) +
+        (¬ (Id (d2 Y) (d3 Y)) × ¬ (¬ (Id (d1 Y) (d2 Y))))
       cases-g Y nr (inl p) (inl q) = ex-falso (nr (p ∙ q))
       cases-g Y nr (inl p) (inr nq) = inr (pair nq (λ f → f p))
       cases-g Y nr (inr np) (inl q) = inl (pair np (λ f → f q))
@@ -827,11 +826,10 @@ module _
     cases-inward-edge-left-two-elements-orientation-count :
       (i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ¬ (Id x i) → ¬ (Id x j) →
-      coprod
-        ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i))
-        ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
+      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
@@ -884,11 +882,10 @@ module _
     cases-inward-edge-left-transposition-orientation-count :
       (i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ¬ (Id x i) → ¬ (Id x j) →
-      coprod
-        ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i))
-        ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
+      ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1
           ( orientation-aut-count
@@ -1072,11 +1069,10 @@ module _
     cases-inward-edge-right-two-elements-orientation-count :
       (i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ¬ (Id x i) → ¬ (Id x j) →
-      coprod
-        ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j))
-        ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
+      ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
@@ -1145,11 +1141,10 @@ module _
     cases-inward-edge-right-transposition-orientation-count :
       (i j : X) (np : ¬ (Id i j)) ( Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ¬ (Id x i) → ¬ (Id x j) →
-      coprod
-        ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j))
-        ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
-          ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
+      ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
+      ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
+        ( Id (pr1 (pr2 (two-elements-transposition eX Y))) x)) →
       Id
         ( pr1
           ( orientation-aut-count
@@ -1906,17 +1901,16 @@ module _
               ( has-decidable-equality-count eX)
               ( np))))
         ( j)) →
-    coprod
-      ( Id
-        ( orientation-aut-count
-          ( transposition
-            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
-        ( orientation-two-elements-count i j np))
-      ( Id
-        ( orientation-aut-count
-          ( transposition
-            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
-        ( orientation-two-elements-count j i (λ p → np (inv p))))
+    ( Id
+      ( orientation-aut-count
+        ( transposition
+          ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+      ( orientation-two-elements-count i j np)) +
+    ( Id
+      ( orientation-aut-count
+        ( transposition
+          ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+      ( orientation-two-elements-count j i (λ p → np (inv p))))
   cases-eq-orientation-aut-orientation-two-elements-count i j np (inl q) =
     inl
       ( eq-htpy
@@ -2008,17 +2002,16 @@ module _
 
   eq-orientation-aut-orientation-two-elements-count :
     ( i j : X) (np : ¬ (Id i j)) →
-    coprod
-      ( Id
-        ( orientation-aut-count
-          ( transposition
-            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
-        ( orientation-two-elements-count i j np))
-      ( Id
-        ( orientation-aut-count
-          ( transposition
-            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
-        ( orientation-two-elements-count j i (λ p → np (inv p))))
+    ( Id
+      ( orientation-aut-count
+        ( transposition
+          ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+      ( orientation-two-elements-count i j np)) +
+    ( Id
+      ( orientation-aut-count
+        ( transposition
+          ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+      ( orientation-two-elements-count j i (λ p → np (inv p))))
   eq-orientation-aut-orientation-two-elements-count i j np =
     cases-eq-orientation-aut-orientation-two-elements-count i j np
       (has-decidable-equality-count eX
@@ -2874,19 +2867,18 @@ module _
 
   cases-not-even-difference-orientation-aut-transposition-count :
     ( i j : X) (np : ¬ (Id i j)) →
-    coprod
-      ( Id
-        ( orientation-aut-count
-          ( transposition
-            ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
-        ( orientation-two-elements-count i j np))
-      ( Id
-        ( orientation-aut-count
-          ( transposition
-            ( standard-2-Element-Decidable-Subtype
-              ( has-decidable-equality-count eX)
-              ( np))))
-        ( orientation-two-elements-count j i (λ p → np (inv p)))) →
+    ( Id
+      ( orientation-aut-count
+        ( transposition
+          ( standard-2-Element-Decidable-Subtype (has-decidable-equality-count eX) np)))
+      ( orientation-two-elements-count i j np)) +
+    ( Id
+      ( orientation-aut-count
+        ( transposition
+          ( standard-2-Element-Decidable-Subtype
+            ( has-decidable-equality-count eX)
+            ( np))))
+      ( orientation-two-elements-count j i (λ p → np (inv p)))) →
     ¬ ( sim-Eq-Rel
       ( even-difference-orientation-Complete-Undirected-Graph
         ( number-of-elements-count eX)

@@ -16,7 +16,7 @@ open import foundation.connected-types using
 open import foundation.constant-maps using (const)
 open import foundation.contractible-types using
   ( is-contr; is-prop-is-contr; center; is-contr-equiv'; is-contr-Prop)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
 open import foundation.decidable-propositions using
@@ -318,7 +318,7 @@ pr2 (unit-π-Finite k) = is-π-finite-unit k
 is-π-finite-coprod :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
   is-π-finite k A → is-π-finite k B →
-  is-π-finite k (coprod A B)
+  is-π-finite k (A + B)
 is-π-finite-coprod zero-ℕ H K =
   is-finite-equiv'
     ( equiv-distributive-trunc-coprod-Set _ _)
@@ -345,8 +345,7 @@ pr2 (is-π-finite-coprod (succ-ℕ k) H K) (inr x) (inr y) =
 coprod-π-Finite :
   {l1 l2 : Level} (k : ℕ) →
   π-Finite l1 k → π-Finite l2 k → π-Finite (l1 ⊔ l2) k
-pr1 (coprod-π-Finite k A B) =
-  coprod (type-π-Finite k A) (type-π-Finite k B)
+pr1 (coprod-π-Finite k A B) = (type-π-Finite k A + type-π-Finite k B)
 pr2 (coprod-π-Finite k A B) =
   is-π-finite-coprod k
     ( is-π-finite-type-π-Finite k A)
@@ -706,11 +705,11 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
 
 module _
   {l1 l2 l3 : Level} {A1 : UU l1} {A2 : UU l2} {B : UU l3}
-  (f : coprod A1 A2 → B) (e : coprod A1 A2 ≃ type-trunc-Set B)
+  (f : A1 + A2 → B) (e : (A1 + A2) ≃ type-trunc-Set B)
   (H : (unit-trunc-Set ∘ f) ~ map-equiv e)
   where
   
-  map-is-coprod-codomain : coprod (im (f ∘ inl)) (im (f ∘ inr)) → B
+  map-is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
   map-is-coprod-codomain = ind-coprod (λ x → B) pr1 pr1
 
   triangle-is-coprod-codomain :
@@ -754,7 +753,7 @@ module _
     where
     a = map-inv-equiv e (unit-trunc-Set b)
 
-  is-coprod-codomain : coprod (im (f ∘ inl)) (im (f ∘ inr)) ≃ B
+  is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
   pr1 is-coprod-codomain = map-is-coprod-codomain
   pr2 is-coprod-codomain =
     is-equiv-is-emb-is-surjective
@@ -860,7 +859,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
                   ( H (pr1 x) (pr1 y))))
             ( λ x → K (pr1 x)))))
     where
-    g : coprod (Σ (im (f ∘ inl)) (B ∘ pr1)) (Σ (im (f ∘ inr)) (B ∘ pr1)) ≃
+    g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃
         Σ A B
     g = ( equiv-Σ B
           ( is-coprod-codomain f

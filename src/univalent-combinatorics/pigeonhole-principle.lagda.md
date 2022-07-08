@@ -16,7 +16,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
   (exists-not-not-forall-Fin; exists-not-not-forall-count)
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inr; inl)
+open import foundation.coproduct-types using (inr; inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.decidable-types using (is-decidable-function-type)
 open import foundation.embeddings using

@@ -12,7 +12,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ)
 
-open import foundation.coproduct-types using (coprod)
+open import foundation.coproduct-types using (_+_)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
@@ -116,12 +116,10 @@ module _
       number-of-elements-is-finite (is-finite-type-decidable-subtype R F)
     is-finite-coprod-symmetric-difference :
       is-finite
-        ( coprod
-          ( type-decidable-subtype
-            ( symmetric-difference-decidable-subtype P Q))
-          ( coprod
-            ( type-decidable-subtype
-              ( intersection-decidable-subtype P Q))
+        ( ( type-decidable-subtype
+            ( symmetric-difference-decidable-subtype P Q)) +
+          ( ( type-decidable-subtype
+              ( intersection-decidable-subtype P Q)) +
             ( type-decidable-subtype
               ( intersection-decidable-subtype P Q))))
     is-finite-coprod-symmetric-difference =

@@ -12,7 +12,7 @@ open import foundation.commutative-operations using
   ( commutative-operation)
 open import foundation.conjunction using (conj-Prop)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
+  ( _+_; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-propositions using
   ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop)
 open import foundation.decidable-types using
@@ -75,7 +75,7 @@ module _
   where
 
   xor : UU (l1 ⊔ l2)
-  xor = coprod (A × ¬ B) (B × ¬ A)
+  xor = (A × ¬ B) + (B × ¬ A)
 ```
 
 ### Exclusive disjunction of propositions

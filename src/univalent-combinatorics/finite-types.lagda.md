@@ -24,7 +24,7 @@ open import foundation.connected-types using
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv';
     is-contr-total-path)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-Prop;
     has-decidable-equality-equiv')

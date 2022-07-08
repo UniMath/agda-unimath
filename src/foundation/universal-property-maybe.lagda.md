@@ -8,7 +8,7 @@ title: The universal property of maybe
 module foundation.universal-property-maybe where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_)

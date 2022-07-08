@@ -8,7 +8,7 @@ title: Type arithmetic with the booleans
 module foundation.type-arithmetic-booleans where
 
 open import foundation.booleans using (bool; true; false)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; is-equiv; is-equiv-has-inverse)
@@ -31,11 +31,11 @@ module _
   {l : Level} (A : bool → UU l)
   where
 
-  map-Σ-bool-coprod : Σ bool A → coprod (A true) (A false)
+  map-Σ-bool-coprod : Σ bool A → A true + A false
   map-Σ-bool-coprod (pair true a) = inl a
   map-Σ-bool-coprod (pair false a) = inr a
 
-  map-inv-Σ-bool-coprod : coprod (A true) (A false) → Σ bool A
+  map-inv-Σ-bool-coprod : A true + A false → Σ bool A
   map-inv-Σ-bool-coprod (inl a) = pair true a
   map-inv-Σ-bool-coprod (inr a) = pair false a
 
@@ -56,7 +56,7 @@ module _
       issec-map-inv-Σ-bool-coprod
       isretr-map-inv-Σ-bool-coprod
 
-  equiv-Σ-bool-coprod : Σ bool A ≃ coprod (A true) (A false)
+  equiv-Σ-bool-coprod : Σ bool A ≃ (A true + A false)
   pr1 equiv-Σ-bool-coprod = map-Σ-bool-coprod
   pr2 equiv-Σ-bool-coprod = is-equiv-map-Σ-bool-coprod
 
@@ -67,7 +67,7 @@ module _
       isretr-map-inv-Σ-bool-coprod
       issec-map-inv-Σ-bool-coprod
 
-  inv-equiv-Σ-bool-coprod : coprod (A true) (A false) ≃ Σ bool A
+  inv-equiv-Σ-bool-coprod : (A true + A false) ≃ Σ bool A
   pr1 inv-equiv-Σ-bool-coprod = map-inv-Σ-bool-coprod
   pr2 inv-equiv-Σ-bool-coprod = is-equiv-map-inv-Σ-bool-coprod
 ```
