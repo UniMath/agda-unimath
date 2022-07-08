@@ -124,8 +124,7 @@ open import univalent-combinatorics.finite-types using
     all-elements-equal-has-finite-cardinality; has-finite-cardinality;
     is-finite-has-finite-cardinality; has-cardinality-type-UU-Fin-Level)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin; equiv-bool-Fin-two-ℕ; nat-Fin; is-zero-nat-zero-Fin;
-    Fin-Set)
+  ( Fin; zero-Fin; one-Fin; nat-Fin; is-zero-nat-zero-Fin; Fin-Set)
 open import univalent-combinatorics.symmetric-difference using
   (eq-symmetric-difference; symmetric-difference-decidable-subtype)
 

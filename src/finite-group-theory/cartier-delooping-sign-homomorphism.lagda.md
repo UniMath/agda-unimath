@@ -12,16 +12,19 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations using
-  ( is-contr-parity-transposition-permutation; list-transpositions-permutation-count;
-    retr-permutation-list-transpositions-count; is-generated-transposition-symmetric-Fin-Level)
+  ( is-contr-parity-transposition-permutation;
+    list-transpositions-permutation-count;
+    retr-permutation-list-transpositions-count;
+    is-generated-transposition-symmetric-Fin-Level)
 open import finite-group-theory.sign-homomorphism using
   ( sign-homomorphism; eq-sign-homomorphism-transposition)
 open import finite-group-theory.transpositions using
   ( permutation-list-transpositions; eq-concat-permutation-list-transpositions;
-    is-transposition-permutation-Prop; transposition; two-elements-transposition;
-    transposition-conjugation-equiv; is-involution-map-transposition;
-    correct-transposition-conjugation-equiv-list; correct-transposition-conjugation-equiv;
-    eq-equiv-universes-transposition)
+    is-transposition-permutation-Prop; transposition;
+    two-elements-transposition; transposition-conjugation-equiv;
+    is-involution-map-transposition;
+    correct-transposition-conjugation-equiv-list;
+    correct-transposition-conjugation-equiv; eq-equiv-universes-transposition)
 
 open import foundation.automorphisms using (Aut)
 open import foundation.commuting-squares using (coherence-square)
@@ -29,7 +32,8 @@ open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using (inl; inr; neq-inr-inl)
 open import foundation.decidable-propositions using
   ( decidable-Prop; type-decidable-Prop)
-open import foundation.decidable-types using (is-decidable; is-prop-is-decidable)
+open import foundation.decidable-types using
+  ( is-decidable; is-prop-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using
@@ -41,14 +45,16 @@ open import foundation.equivalence-classes using
     eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class;
     quotient-reflecting-map-equivalence-class)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
-    right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
-    right-unit-law-equiv; htpy-eq-equiv; is-equiv-map-equiv; associative-comp-equiv)
+  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv;
+    inv-inv-equiv; right-inverse-law-equiv; left-inverse-law-equiv;
+    distributive-inv-comp-equiv; is-equiv-has-inverse; right-unit-law-equiv;
+    htpy-eq-equiv; is-equiv-map-equiv; associative-comp-equiv)
 open import foundation.equivalence-relations using
   ( Eq-Rel; refl-Eq-Rel; sim-Eq-Rel; is-prop-sim-Eq-Rel)
 open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
-open import foundation.functoriality-propositional-truncation using (map-trunc-Prop)
+open import foundation.functoriality-propositional-truncation using
+  ( map-trunc-Prop)
 open import foundation.functoriality-set-quotients using
   ( unique-equiv-is-set-quotient; equiv-is-set-quotient;
     eq-equiv-eq-one-value-equiv-is-set-quotient)
@@ -62,15 +68,16 @@ open import foundation.mere-equivalences using
   ( transitive-mere-equiv; symmetric-mere-equiv; mere-equiv; is-set-mere-equiv)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
-    all-elements-equal-type-trunc-Prop)
+  ( apply-universal-property-trunc-Prop; unit-trunc-Prop;
+    is-prop-type-trunc-Prop; all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel; reflects-map-reflecting-map-Eq-Rel)
-open import foundation.raising-universe-levels using (raise-Set; equiv-raise; raise)
+open import foundation.raising-universe-levels using
+  ( raise-Set; equiv-raise; raise)
 open import foundation.sets using
-  ( is-set; Id-Prop; UU-Set; type-Set; is-set-type-Set; is-prop-is-set; is-set-equiv)
-open import foundation.subuniverses using (is-one-type-UU-Set)
+  ( is-set; Id-Prop; UU-Set; type-Set; is-set-type-Set; is-prop-is-set;
+    is-set-equiv; is-1-type-UU-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.unit-type using (star)
 open import foundation.univalence using
@@ -87,18 +94,24 @@ open import group-theory.concrete-groups using
 open import group-theory.groups using
   ( set-Group; type-Group; mul-Group; semigroup-Group)
 open import group-theory.homomorphisms-generated-subgroups using
-  ( restriction-generating-subset-Group; eq-map-restriction-generating-subset-Group)
+  ( restriction-generating-subset-Group;
+    eq-map-restriction-generating-subset-Group)
 open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group; preserves-mul-hom-Group;
-    htpy-eq-hom-Group; id-hom-Group; associative-comp-hom-Group)
-open import group-theory.homomorphisms-semigroups using (preserves-mul; is-prop-preserves-mul-Semigroup)
+  ( type-hom-Group; htpy-hom-Group; comp-hom-Group; map-hom-Group;
+    preserves-mul-hom-Group; htpy-eq-hom-Group; id-hom-Group; associative-comp-hom-Group)
+open import group-theory.homomorphisms-semigroups using
+  ( preserves-mul; is-prop-preserves-mul-Semigroup)
 open import group-theory.isomorphisms-groups using
   ( hom-iso-Group; hom-inv-iso-Group; comp-iso-Group; inv-iso-Group)
 open import group-theory.loop-groups-sets using
-  ( loop-group-Set; map-hom-symmetric-group-loop-group-Set; hom-symmetric-group-loop-group-Set;
-    map-hom-inv-symmetric-group-loop-group-Set; hom-inv-symmetric-group-loop-group-Set;
-    is-retr-hom-inv-symmetric-group-loop-group-Set; is-sec-hom-inv-symmetric-group-loop-group-Set;
-    iso-symmetric-group-loop-group-Set; commutative-inv-map-hom-symmetric-group-loop-group-Set;
+  ( loop-group-Set; map-hom-symmetric-group-loop-group-Set;
+    hom-symmetric-group-loop-group-Set;
+    map-hom-inv-symmetric-group-loop-group-Set;
+    hom-inv-symmetric-group-loop-group-Set;
+    is-retr-hom-inv-symmetric-group-loop-group-Set;
+    is-sec-hom-inv-symmetric-group-loop-group-Set;
+    iso-symmetric-group-loop-group-Set;
+    commutative-inv-map-hom-symmetric-group-loop-group-Set;
     iso-loop-group-equiv-Set; iso-abstract-automorphism-group-loop-group-Set)
 open import group-theory.subgroups using (group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
@@ -117,15 +130,18 @@ open import univalent-combinatorics.2-element-types using
   ( aut-point-Fin-two-ℕ; is-involution-aut-Fin-two-ℕ;
     preserves-add-aut-point-Fin-two-ℕ)
 open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count; equiv-count; has-decidable-equality-count; is-set-count)
+  ( count; number-of-elements-count; equiv-count; has-decidable-equality-count;
+    is-set-count)
 open import univalent-combinatorics.equality-finite-types using
   ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality; has-cardinality-type-UU-Fin-Level; Fin-UU-Fin-Level)
+  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality;
+    has-cardinality-type-UU-Fin-Level; Fin-UU-Fin-Level)
 open import univalent-combinatorics.lists using
-  ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
+  ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list;
+    in-list)
 open import univalent-combinatorics.orientations-complete-undirected-graph using
   ( quotient-sign; quotient-sign-Set; mere-equiv-fin-2-quotient-sign;
     orientation-Complete-Undirected-Graph; equiv-fin-2-quotient-sign-equiv-Fin;
@@ -133,12 +149,14 @@ open import univalent-combinatorics.orientations-complete-undirected-graph using
     even-difference-orientation-Complete-Undirected-Graph;
     preserves-even-difference-orientation-complete-undirected-graph-equiv;
     preserves-id-equiv-orientation-complete-undirected-graph-equiv;
-    equiv-fin-2-quotient-sign-count; orientation-complete-undirected-graph-equiv;
+    equiv-fin-2-quotient-sign-count;
+    orientation-complete-undirected-graph-equiv;
     orientation-aut-count;
     is-decidable-even-difference-orientation-Complete-Undirected-Graph;
     not-even-difference-orientation-aut-transposition-count)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin; Fin-Set; is-set-Fin)
+  ( Fin; equiv-succ-Fin; zero-Fin; nat-Fin; is-zero-nat-zero-Fin; Fin-Set;
+    is-set-Fin)
 ```
 
 ## Idea

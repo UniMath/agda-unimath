@@ -9,10 +9,11 @@ module univalent-combinatorics.equality-standard-finite-types where
 
 open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-    
+
+open import foundation-core.decidable-propositions using (decidable-Prop)
+
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (coprod; inl; inr; is-prop-coprod; neq-inr-inl)
-open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)

@@ -617,7 +617,11 @@ open import order-theory.total-preorders
 ```agda
 open import organic-chemistry
 open import organic-chemistry.alcohols
+open import organic-chemistry.alkanes
+open import organic-chemistry.alkenes
+open import organic-chemistry.alkynes
 open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
 ```
 
 ## Polytopes

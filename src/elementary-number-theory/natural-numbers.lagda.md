@@ -9,9 +9,9 @@ module elementary-number-theory.natural-numbers where
 
 open import foundation-core.empty-types using (ex-falso)
 
-open import foundation.booleans using (bool; Eq-bool; true; false)
 open import foundation.contractible-types using (eq-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.empty-types using (empty; is-prop-empty)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_)
 open import foundation.function-extensionality using (eq-htpy)
@@ -21,11 +21,12 @@ open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.negation using (¬)
-open import foundation.unit-type using (star; unit)
+open import foundation.propositions using (is-prop)
+open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation.unit-type using (star; unit; is-prop-unit)
 open import foundation.universal-property-empty-type using
   ( universal-property-empty')
 open import foundation.universe-levels using (Level; lzero; UU)
-open import foundation.w-types using (𝕎; constant-𝕎; tree-𝕎)
 ```
 
 ## Idea
@@ -72,19 +73,6 @@ is-not-one-ℕ n = ¬ (is-one-ℕ n)
 
 is-not-one-ℕ' : ℕ → UU lzero
 is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
-```
-
-### The type of natural numbers defined as a W-type
-
-```agda
-Nat-𝕎 : UU lzero
-Nat-𝕎 = 𝕎 bool (Eq-bool true)
-
-zero-Nat-𝕎 : Nat-𝕎
-zero-Nat-𝕎 = constant-𝕎 false id
-
-succ-Nat-𝕎 : Nat-𝕎 → Nat-𝕎
-succ-Nat-𝕎 x = tree-𝕎 true (λ y → x)
 ```
 
 ## Properties
@@ -147,48 +135,44 @@ is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
 ```
 
-### The type of natural numbers is equivalent to the W-type Nat-𝕎
+### The type of natural numbers is a set
 
 ```agda
-Nat-𝕎-ℕ : ℕ → Nat-𝕎
-Nat-𝕎-ℕ zero-ℕ = zero-Nat-𝕎
-Nat-𝕎-ℕ (succ-ℕ x) = succ-Nat-𝕎 (Nat-𝕎-ℕ x)
+Eq-ℕ : ℕ → ℕ → UU lzero
+Eq-ℕ zero-ℕ zero-ℕ = unit
+Eq-ℕ zero-ℕ (succ-ℕ n) = empty
+Eq-ℕ (succ-ℕ m) zero-ℕ = empty
+Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
 
-ℕ-Nat-𝕎 : Nat-𝕎 → ℕ
-ℕ-Nat-𝕎 (tree-𝕎 true α) = succ-ℕ (ℕ-Nat-𝕎 (α star))
-ℕ-Nat-𝕎 (tree-𝕎 false α) = zero-ℕ
+abstract
+  is-prop-Eq-ℕ :
+    (n m : ℕ) → is-prop (Eq-ℕ n m)
+  is-prop-Eq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+  is-prop-Eq-ℕ zero-ℕ (succ-ℕ m) = is-prop-empty
+  is-prop-Eq-ℕ (succ-ℕ n) zero-ℕ = is-prop-empty
+  is-prop-Eq-ℕ (succ-ℕ n) (succ-ℕ m) = is-prop-Eq-ℕ n m
 
-issec-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
-issec-ℕ-Nat-𝕎 (tree-𝕎 true α) =
-  ap ( tree-𝕎 true)
-     ( eq-htpy H)
-  where
-  H : (z : unit) → Nat-𝕎-ℕ (ℕ-Nat-𝕎 (α star)) ＝ α z
-  H star = issec-ℕ-Nat-𝕎 (α star)
-issec-ℕ-Nat-𝕎 (tree-𝕎 false α) =
-  ap (tree-𝕎 false) (eq-is-contr (universal-property-empty' Nat-𝕎))
+refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
+refl-Eq-ℕ zero-ℕ = star
+refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 
-isretr-ℕ-Nat-𝕎 : (ℕ-Nat-𝕎 ∘ Nat-𝕎-ℕ) ~ id
-isretr-ℕ-Nat-𝕎 zero-ℕ = refl
-isretr-ℕ-Nat-𝕎 (succ-ℕ x) = ap succ-ℕ (isretr-ℕ-Nat-𝕎 x)
+Eq-eq-ℕ : {x y : ℕ} → x ＝ y → Eq-ℕ x y
+Eq-eq-ℕ {x} {.x} refl = refl-Eq-ℕ x
 
-is-equiv-Nat-𝕎-ℕ : is-equiv Nat-𝕎-ℕ
-is-equiv-Nat-𝕎-ℕ =
-  is-equiv-has-inverse
-    ℕ-Nat-𝕎
-    issec-ℕ-Nat-𝕎
-    isretr-ℕ-Nat-𝕎
+eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
+eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
+eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
 
-equiv-Nat-𝕎-ℕ : ℕ ≃ Nat-𝕎
-equiv-Nat-𝕎-ℕ = pair Nat-𝕎-ℕ is-equiv-Nat-𝕎-ℕ
+abstract
+  is-set-ℕ : is-set ℕ
+  is-set-ℕ =
+    is-set-prop-in-id
+      Eq-ℕ
+      is-prop-Eq-ℕ
+      refl-Eq-ℕ
+      eq-Eq-ℕ
 
-is-equiv-ℕ-Nat-𝕎 : is-equiv ℕ-Nat-𝕎
-is-equiv-ℕ-Nat-𝕎 =
-  is-equiv-has-inverse
-    Nat-𝕎-ℕ
-    isretr-ℕ-Nat-𝕎
-    issec-ℕ-Nat-𝕎
-
-equiv-ℕ-Nat-𝕎 : Nat-𝕎 ≃ ℕ
-equiv-ℕ-Nat-𝕎 = pair ℕ-Nat-𝕎 is-equiv-ℕ-Nat-𝕎
+ℕ-Set : UU-Set lzero
+pr1 ℕ-Set = ℕ
+pr2 ℕ-Set = is-set-ℕ
 ```

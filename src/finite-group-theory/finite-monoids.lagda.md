@@ -10,6 +10,8 @@ open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-
 open import finite-group-theory.finite-semigroups using
   ( Semigroup-of-Order; is-π-finite-Semigroup-of-Order)
 
+open import foundation.decidable-propositions using
+  ( is-finite-is-decidable-Prop)
 open import foundation.decidable-types using (is-decidable-prod)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_)
@@ -32,7 +34,7 @@ open import univalent-combinatorics.decidable-dependent-function-types using
 open import univalent-combinatorics.decidable-dependent-pair-types using
   ( is-decidable-Σ-count)
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-is-decidable-Prop)
+  ( is-finite; is-finite-Prop)
 open import univalent-combinatorics.pi-finite-types using
   ( is-π-finite; is-π-finite-equiv; is-π-finite-Σ; is-π-finite-is-finite;
     number-of-connected-components; mere-equiv-number-of-connected-components)

@@ -13,15 +13,15 @@ open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-propositions using
-  ( prop-decidable-Prop; is-decidable-type-decidable-Prop)
+  ( prop-decidable-Prop; is-decidable-type-decidable-Prop;
+    is-finite-decidable-Prop; is-finite-is-decidable-Prop)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.dependent-sum-finite-types using
   ( is-finite-Σ)
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-is-decidable-Prop; number-of-elements-is-finite;
-    is-finite-decidable-Prop; 𝔽)
+  ( is-finite; number-of-elements-is-finite; 𝔽)
 open import univalent-combinatorics.function-types
 ```
 

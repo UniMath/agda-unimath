@@ -22,46 +22,14 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
-  ( _≃_; map-inv-is-equiv; equiv-inv-equiv; id-equiv; is-equiv; _∘e_; eq-htpy-equiv;
-    map-equiv; right-inverse-law-equiv; inv-equiv)
+  ( _≃_; map-inv-is-equiv; id-equiv; is-equiv; _∘e_;
+    eq-htpy-equiv; map-equiv; right-inverse-law-equiv; inv-equiv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 ```
 
 ## Idea
 
 The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
-
-## Postulates
-
-```agda
-postulate univalence : {i : Level} (A B : UU i) → UNIVALENCE A B
-```
-
-## Properties
-
-```agda
-eq-equiv : {i : Level} (A B : UU i) → (A ≃ B) → A ＝ B
-eq-equiv A B = map-inv-is-equiv (univalence A B)
-
-equiv-univalence :
-  {i : Level} {A B : UU i} → (A ＝ B) ≃ (A ≃ B)
-pr1 equiv-univalence = equiv-eq
-pr2 equiv-univalence = univalence _ _
-
-abstract
-  is-contr-total-equiv : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → A ≃ X))
-  is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
-
-abstract
-  is-contr-total-equiv' : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → X ≃ A))
-  is-contr-total-equiv' A =
-    is-contr-equiv
-      ( Σ (UU _) (λ X → A ≃ X))
-      ( equiv-tot (λ X → equiv-inv-equiv))
-      ( is-contr-total-equiv A)
-```
 
 ### Univalence for type families
 

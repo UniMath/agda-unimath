@@ -7,7 +7,6 @@ title: Finitely presented types
 
 module univalent-combinatorics.finitely-presented-types where
 
-open import elementary-number-theory.equality-natural-numbers using (ℕ-Set)
 open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
