@@ -7,11 +7,11 @@ title: Functoriality of dependent function types
 
 module foundation-core.functoriality-dependent-function-types where
 
-open import foundation.contractible-types
 open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

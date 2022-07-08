@@ -36,7 +36,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
@@ -516,12 +515,12 @@ module _
       ( Automorphism-Group
         ( UU-Set l)
         ( raise-Set l (Fin-Set n))
-        ( is-one-type-UU-Set l)) →
+        ( is-1-type-UU-Set)) →
     classifying-type-Concrete-Group
       ( Automorphism-Group
         ( UU-Set (lsuc lzero ⊔ l))
         ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-one-type-UU-Set (lsuc lzero ⊔ l)))
+        ( is-1-type-UU-Set))
   pr1 (map-simpson-delooping-sign zero-ℕ X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
   pr2 (map-simpson-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
   pr1 (map-simpson-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
@@ -550,11 +549,11 @@ module _
 
   simpson-delooping-sign : (n : ℕ) →
     hom-Concrete-Group
-      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) (is-one-type-UU-Set l))
+      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) is-1-type-UU-Set)
       ( Automorphism-Group
         ( UU-Set (lsuc lzero ⊔ l))
         ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-one-type-UU-Set (lsuc lzero ⊔ l)))
+        ( is-1-type-UU-Set))
   pr1 (simpson-delooping-sign n) = map-simpson-delooping-sign n
   pr2 (simpson-delooping-sign zero-ℕ) = refl
   pr2 (simpson-delooping-sign (succ-ℕ zero-ℕ)) = refl

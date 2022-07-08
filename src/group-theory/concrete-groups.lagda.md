@@ -17,8 +17,7 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using (UU-Prop; type-Prop)
 open import foundation.sets using (is-set; UU-Set; is-set-Prop)
-open import foundation.subuniverses using (UU-Trunc)
-open import foundation.truncated-types using (is-trunc)
+open import foundation.truncated-types using (is-trunc; UU-Trunc)
 open import foundation.truncation-levels using (one-𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 

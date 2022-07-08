@@ -7,7 +7,6 @@ title: Small types
 
 module foundation.small-types where
 
-open import foundation.booleans using (bool)
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

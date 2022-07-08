@@ -40,7 +40,7 @@ module _
     is-finite-im
       ( is-finite-type-𝔽 X)
       ( has-decidable-equality-is-finite
-        ( ?))
+        ( {!is-finite-decidable-subtype!}))
 
   quotient-𝔽 : 𝔽
   quotient-𝔽 = {!!}

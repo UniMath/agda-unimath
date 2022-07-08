@@ -10,7 +10,7 @@ module univalent-combinatorics.2-element-types where
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin)
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.natural-numbers using
   ( Eq-eq-ℕ)
 
 open import foundation.automorphisms using (Aut)
