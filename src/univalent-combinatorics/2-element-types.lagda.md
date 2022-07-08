@@ -73,14 +73,13 @@ open import foundation.type-arithmetic-unit-type using
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level; is-set-has-cardinality)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
     Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level;
-    is-finite; 𝔽; is-finite-has-cardinality)
+    is-finite; 𝔽; is-finite-has-cardinality; set-UU-Fin-Level;
+    is-set-has-cardinality)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
     is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)

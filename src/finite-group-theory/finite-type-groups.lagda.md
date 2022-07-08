@@ -43,12 +43,7 @@ pr1 (pr1 (pr1 (UU-Fin-Level-Group l n))) = UU-Fin-Level l n
 pr2 (pr1 (pr1 (UU-Fin-Level-Group l n))) = Fin-UU-Fin-Level l n
 pr2 (pr1 (UU-Fin-Level-Group l n)) = is-path-connected-UU-Fin-Level n
 pr2 (UU-Fin-Level-Group l n) =
-  is-set-equiv
-    ( equiv-UU-Fin-Level n (Fin-UU-Fin-Level l n) (Fin-UU-Fin-Level l n))
-    ( equiv-equiv-eq-UU-Fin-Level n (Fin-UU-Fin-Level l n) (Fin-UU-Fin-Level l n))
-    ( is-set-equiv-is-set
-      ( is-set-type-Set (raise-Set l (Fin-Set n)))
-      ( is-set-type-Set (raise-Set l (Fin-Set n))))
+  is-1-type-UU-Fin-Level n (Fin-UU-Fin-Level l n) (Fin-UU-Fin-Level l n)
 ```
 
 ### Properties
