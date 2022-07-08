@@ -113,7 +113,7 @@ open import group-theory.loop-groups-sets using
     is-sec-hom-inv-symmetric-group-loop-group-Set;
     iso-symmetric-group-loop-group-Set;
     commutative-inv-map-hom-symmetric-group-loop-group-Set;
-    iso-loop-group-equiv-Set)
+    iso-loop-group-equiv-Set; iso-abstract-automorphism-group-loop-group-Set)
 open import group-theory.subgroups using (group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
   ( is-generating-subset-Group; subgroup-subset-Group)
