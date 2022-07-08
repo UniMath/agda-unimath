@@ -1,4 +1,6 @@
-# Arithmetic functions
+---
+title: Arithmetic functions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

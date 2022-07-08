@@ -1,4 +1,6 @@
-# Sets
+---
+title: Sets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-retr)
 open import foundation-core.identity-types using
-  ( Id; refl; inv; _∙_; ind-Id)
+  ( _＝_; refl; inv; _∙_; ind-Id)
 open import foundation-core.propositions using
   ( is-prop; UU-Prop; all-elements-equal; is-prop-all-elements-equal;
     is-proof-irrelevant-is-prop; eq-is-prop; is-prop-is-equiv')
@@ -32,7 +34,7 @@ A type is a set if its identity types are propositions.
 ```agda
 is-set :
   {i : Level} → UU i → UU i
-is-set A = (x y : A) → is-prop (Id x y)
+is-set A = (x y : A) → is-prop (x ＝ y)
 
 UU-Set :
   (i : Level) → UU (lsuc i)
@@ -50,7 +52,7 @@ module _
     is-set-type-Set = pr2 X
 
   Id-Prop : (x y : type-Set) → UU-Prop l
-  pr1 (Id-Prop x y) = Id x y
+  pr1 (Id-Prop x y) = (x ＝ y)
   pr2 (Id-Prop x y) = is-set-type-Set x y
 ```
 
@@ -61,14 +63,14 @@ module _
 ```agda
 axiom-K :
   {i : Level} → UU i → UU i
-axiom-K A = (x : A) (p : Id x x) → Id refl p
+axiom-K A = (x : A) (p : x ＝ x) → refl ＝ p
 
 module _
   {l : Level} {A : UU l}
   where
 
   abstract
-    is-set-axiom-K' : axiom-K A → (x y : A) → all-elements-equal (Id x y)
+    is-set-axiom-K' : axiom-K A → (x y : A) → all-elements-equal (x ＝ y)
     is-set-axiom-K' K x .x refl q with K x q
     ... | refl = refl
 
@@ -89,7 +91,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} (R : A → A → UU l2)
   (p : (x y : A) → is-prop (R x y)) (ρ : (x : A) → R x x)
-  (i : (x y : A) → R x y → Id x y)
+  (i : (x y : A) → R x y → x ＝ y)
   where
 
   abstract

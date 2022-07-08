@@ -1,4 +1,6 @@
-# Sections of type families
+---
+title: Sections of type families
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}

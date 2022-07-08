@@ -1,4 +1,6 @@
-# Embeddings
+---
+title: Embeddings
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -10,13 +12,13 @@ open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-htpy; is-equiv-id)
 open import foundation-core.functions using (id)
 open import foundation-core.identity-types using
-  ( Id; refl; ap; inv; _∙_; ap-id)
+  ( _＝_; refl; ap; inv; _∙_; ap-id)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea
 
-An embedding from one type into another is a map that induces equivalences on identity types. In other words, the identitifications `Id (f x) (f y)` for an embedding `f : A → B` are in one-to-one correspondence with the identitifications `Id x y`. Embeddings are better behaved homotopically than injective maps, because the condition of being an equivalence is a property under function extensionality.
+An embedding from one type into another is a map that induces equivalences on identity types. In other words, the identitifications `(f x) ＝ (f y)` for an embedding `f : A → B` are in one-to-one correspondence with the identitifications `x ＝ y`. Embeddings are better behaved homotopically than injective maps, because the condition of being an equivalence is a property under function extensionality.
 
 ## Definition
 
@@ -42,7 +44,8 @@ module _
   is-emb-map-emb : (f : A ↪ B) → is-emb (map-emb f)
   is-emb-map-emb f = pr2 f
 
-  equiv-ap-emb : (e : A ↪ B) {x y : A} → Id x y ≃ Id (map-emb e x) (map-emb e y)
+  equiv-ap-emb :
+    (e : A ↪ B) {x y : A} → (x ＝ y) ≃ ((map-emb e x) ＝ (map-emb e y))
   pr1 (equiv-ap-emb e {x} {y}) = ap (map-emb e)
   pr2 (equiv-ap-emb e {x} {y}) = is-emb-map-emb e x y
 ```

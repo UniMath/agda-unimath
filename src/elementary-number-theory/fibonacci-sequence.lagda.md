@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The Fibonacci sequence
 ---
-
-# The Fibonacci sequence
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

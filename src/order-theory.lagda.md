@@ -11,6 +11,7 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.directed-complete-posets public
 open import order-theory.directed-families public
+open import order-theory.distributive-lattices public
 open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public

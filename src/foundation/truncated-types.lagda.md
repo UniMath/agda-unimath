@@ -1,4 +1,6 @@
-# Truncated types
+---
+title: Truncated types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

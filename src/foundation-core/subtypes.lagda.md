@@ -1,4 +1,6 @@
-# Subtypes
+---
+title: Subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation-core.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-Σ; map-Σ; is-equiv-map-Σ)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation-core.identity-types using (Id; refl; ap; tr)
+open import foundation-core.identity-types using (_＝_; refl; ap; tr)
 open import foundation-core.logical-equivalences using (_↔_; equiv-iff')
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
@@ -74,7 +76,7 @@ module _
 
   ap-inclusion-subtype :
     (x y : type-subtype) →
-    Id x y → Id (inclusion-subtype x) (inclusion-subtype y)
+    x ＝ y → (inclusion-subtype x ＝ inclusion-subtype y)
   ap-inclusion-subtype x y p = ap inclusion-subtype p
 
   is-in-subtype-inclusion-subtype :
@@ -92,15 +94,15 @@ module _
   where
 
   Eq-type-subtype : (x y : type-subtype P) → UU l1
-  Eq-type-subtype x y = Id (pr1 x) (pr1 y)
+  Eq-type-subtype x y = (pr1 x ＝ pr1 y)
 
   extensionality-type-subtype :
-    (a b : type-subtype P) → (Id a b) ≃ Id (pr1 a) (pr1 b)
+    (a b : type-subtype P) → (a ＝ b) ≃ (pr1 a ＝ pr1 b)
   extensionality-type-subtype (pair a p) =
     extensionality-subtype P p refl (λ x → id-equiv)
 
   eq-subtype :
-    {a b : type-subtype P} → Id (pr1 a) (pr1 b) → Id a b
+    {a b : type-subtype P} → (pr1 a ＝ pr1 b) → a ＝ b
   eq-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype a b)
 ```
 
@@ -126,7 +128,7 @@ module _
 
   equiv-ap-inclusion-subtype :
     {s t : type-subtype B} →
-    Id s t ≃ Id (inclusion-subtype B s) (inclusion-subtype B t)
+    (s ＝ t) ≃ (inclusion-subtype B s ＝ inclusion-subtype B t)
   pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
 ```

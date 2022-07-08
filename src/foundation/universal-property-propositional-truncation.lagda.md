@@ -1,4 +1,6 @@
-# The universal property of propositional truncations
+---
+title: The universal property of propositional truncations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,9 +11,6 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; center; is-contr-equiv)
 open import foundation.dependent-pair-types using
   ( Σ; pair; pr1; pr2; ind-Σ; ev-pair)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( map-inv-distributive-Π-Σ; is-equiv-map-inv-distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; map-equiv; is-property-is-equiv;
     is-equiv-top-is-equiv-bottom-square; is-equiv-precomp-is-equiv;
@@ -23,13 +22,15 @@ open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.functoriality-dependent-function-types using
   ( is-equiv-map-Π)
 open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; type-hom-Prop; is-equiv-is-prop;
     is-prop-Π; type-equiv-Prop; Σ-Prop; is-prop-function-type; prod-Prop;
     is-prop-type-hom-Prop)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
+open import foundation.type-theoretic-principle-of-choice using
+  ( map-inv-distributive-Π-Σ; is-equiv-map-inv-distributive-Π-Σ)
 open import foundation.unit-type using (unit-Prop; terminal-map; ind-unit)
 open import foundation.universal-property-dependent-pair-types using
   ( is-equiv-ev-pair)
@@ -109,7 +110,7 @@ abstract
     universal-property-propositional-truncation l P f
   universal-property-is-propositional-truncation l P f is-ptr-f Q g =
     is-contr-equiv'
-      ( Σ (type-hom-Prop P Q) (λ h → Id (h ∘ f) g))
+      ( Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ＝ g))
       ( equiv-tot (λ h → equiv-funext))
       ( is-contr-map-is-equiv (is-ptr-f Q) g)
 

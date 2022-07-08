@@ -22,7 +22,7 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 
 open import group-theory.monoids using
-  ( Monoid; type-Monoid; is-unital; is-unital-Prop)
+  ( Monoid; type-Monoid; is-unital-Semigroup; is-unital-Semigroup-Prop)
 open import group-theory.semigroups using (mul-Semigroup)
 
 open import univalent-combinatorics.counting using
@@ -57,16 +57,16 @@ Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M)
 ### For any semigroup of order n, the type of multiplicative units is finite
 
 ```agda
-is-finite-is-unital :
-  {l : Level} {n : ℕ} (X : Semigroup-of-Order l n) →
-  is-finite (is-unital (pr1 X))
-is-finite-is-unital {l} {n} X =
+is-finite-is-unital-Semigroup :
+  {l : Level} (n : ℕ) (X : Semigroup-of-Order l n) →
+  is-finite (is-unital-Semigroup (pr1 X))
+is-finite-is-unital-Semigroup {l} n X =
   apply-universal-property-trunc-Prop
     ( pr2 X)
     ( is-finite-Prop _)
     ( λ e →
       is-finite-is-decidable-Prop
-        ( is-unital-Prop (pr1 X))
+        ( is-unital-Semigroup-Prop (pr1 X))
         ( is-decidable-Σ-count
           ( pair n e)
           ( λ u →
@@ -98,10 +98,10 @@ is-π-finite-Monoid-of-Order {l} k n =
       ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
         is-π-finite-is-finite k
-          ( is-finite-is-unital X)))
+          ( is-finite-is-unital-Semigroup n X)))
   where
   e : Monoid-of-Order l n ≃
-      Σ (Semigroup-of-Order l n) (λ X → is-unital (pr1 X))
+      Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
   e = equiv-right-swap-Σ
 ```
 

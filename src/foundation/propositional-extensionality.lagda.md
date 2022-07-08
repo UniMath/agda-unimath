@@ -1,4 +1,6 @@
-# Propositional extensionality
+---
+title: Propositional extensionality
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -19,7 +21,7 @@ open import foundation.functoriality-function-types using
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.logical-equivalences using
   ( _⇔_; equiv-equiv-iff; iff-eq; is-prop-logical-equivalence)
 open import foundation.negation using (neg-Prop)
@@ -76,22 +78,26 @@ module _
         ( λ Q → iff-eq {P = P} {Q})
 
   propositional-extensionality :
-    (P Q : UU-Prop l1) → Id P Q ≃ (P ⇔ Q)
+    (P Q : UU-Prop l1) → (P ＝ Q) ≃ (P ⇔ Q)
   pr1 (propositional-extensionality P Q) = iff-eq
   pr2 (propositional-extensionality P Q) = is-equiv-iff-eq P Q
 
-  eq-iff' : (P Q : UU-Prop l1) → P ⇔ Q → Id P Q
+  eq-iff' : (P Q : UU-Prop l1) → P ⇔ Q → P ＝ Q
   eq-iff' P Q = map-inv-is-equiv (is-equiv-iff-eq P Q)
 
   eq-iff :
     {P Q : UU-Prop l1} →
-    (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) → Id P Q
+    (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) → P ＝ Q
   eq-iff {P} {Q} f g = eq-iff' P Q (pair f g)
 
   eq-equiv-Prop :
-    {P Q : UU-Prop l1} → (type-Prop P ≃ type-Prop Q) → Id P Q
+    {P Q : UU-Prop l1} → (type-Prop P ≃ type-Prop Q) → P ＝ Q
   eq-equiv-Prop e =
     eq-iff (map-equiv e) (map-inv-equiv e)
+
+  equiv-eq-Prop :
+    {P Q : UU-Prop l1} → P ＝ Q → type-Prop P ≃ type-Prop Q
+  equiv-eq-Prop {P} refl = id-equiv
 ```
 
 ### The type of propositions is a set

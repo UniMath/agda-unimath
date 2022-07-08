@@ -1,4 +1,6 @@
-# Contractible types
+---
+title: Contractible types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,13 +14,14 @@ open import foundation-core.contractible-maps using
   ( is-contr-map-is-equiv)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
-  ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse)
+  ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse;
+    map-inv-equiv; isretr-map-inv-equiv; map-equiv; issec-map-inv-equiv)
 open import foundation-core.function-extensionality using
   ( funext; htpy-eq; eq-htpy)
 open import foundation-core.functions using (id)
 open import foundation-core.functoriality-dependent-pair-types using (tot)
-open import foundation-core.identity-types using (Id; left-inv; refl; ap)
-open import foundation-core.propositions using (UU-Prop)
+open import foundation-core.identity-types using (_＝_; left-inv; refl; ap)
+open import foundation-core.propositions using (UU-Prop; equiv-prop)
 open import foundation-core.singleton-induction using
   ( ind-singleton-is-contr; comp-singleton-is-contr)
 open import foundation-core.truncated-types using
@@ -38,6 +41,19 @@ pr2 (is-contr-Prop A) = is-property-is-contr
 ```
 
 ## Properties
+
+### If two types are equivalent then so are the propositions that they are contractible
+
+```agda
+equiv-is-contr-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  → A ≃ B → is-contr A ≃ is-contr B
+equiv-is-contr-equiv {A = A} {B = B} e =
+  equiv-prop
+    ( is-property-is-contr)
+    ( is-property-is-contr)
+    ( is-contr-retract-of A (pair (map-inv-equiv e) (pair (map-equiv e) (issec-map-inv-equiv e))))
+    ( is-contr-retract-of B (pair (map-equiv e) (pair (map-inv-equiv e) (isretr-map-inv-equiv e))))
+```
 
 ### Contractible types are k-truncated for any k.
 
@@ -128,7 +144,7 @@ module _
         ( λ f →
           eq-htpy
             ( ind-singleton-is-contr a H
-              ( λ x → Id (ind-singleton-is-contr a H P (f a) x) (f x))
+              ( λ x → ind-singleton-is-contr a H P (f a) x ＝ f x)
               ( comp-singleton-is-contr a H P (f a))))
 
   equiv-dependent-universal-property-contr :

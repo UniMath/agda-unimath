@@ -18,8 +18,8 @@ open import foundation-core.homotopies
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 
-open import foundation.distributivity-of-dependent-functions-over-dependent-pairs
 open import foundation.identity-types
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Definition
@@ -30,7 +30,7 @@ module _
   where
 
   canonical-pullback : UU ((l1 ⊔ l2) ⊔ l3)
-  canonical-pullback = Σ A (λ x → Σ B (λ y → Id (f x) (g y)))
+  canonical-pullback = Σ A (λ x → Σ B (λ y → f x ＝ g y))
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {f : A → X} {g : B → X}

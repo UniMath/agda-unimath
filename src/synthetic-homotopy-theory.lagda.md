@@ -13,7 +13,6 @@ open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.27-sequences public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cofibers public
-open import synthetic-homotopy-theory.cyclic-types public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
@@ -22,6 +21,7 @@ open import synthetic-homotopy-theory.interval-type public
 open import synthetic-homotopy-theory.iterated-loop-spaces public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
+open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public

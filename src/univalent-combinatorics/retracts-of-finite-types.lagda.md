@@ -17,7 +17,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.fibers-of-maps using (equiv-total-fib)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.injective-maps using (is-emb-is-injective)
 open import foundation.propositional-maps using (fib-emb-Prop)
 open import foundation.retractions using
@@ -43,9 +43,9 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 
 ```agda
 is-decidable-map-retr-Fin :
-  {l1 : Level} {k : ℕ} {A : UU l1} (i : A → Fin k) → retr i → is-decidable-map i
-is-decidable-map-retr-Fin =
-  is-decidable-map-retr has-decidable-equality-Fin
+  {l1 : Level} (k : ℕ) {A : UU l1} (i : A → Fin k) → retr i → is-decidable-map i
+is-decidable-map-retr-Fin k =
+  is-decidable-map-retr (has-decidable-equality-Fin k)
 ```
 
 ### If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite.
@@ -100,5 +100,5 @@ abstract
   is-finite-retract :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} → A retract-of B →
     is-finite B → is-finite A
-  is-finite-retract R = functor-trunc-Prop (count-retract R)
+  is-finite-retract R = map-trunc-Prop (count-retract R)
 ```

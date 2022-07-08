@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: The greatest common divisor of natural numbers
 ---
-
-# The greatest common divisor of natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -41,6 +39,7 @@ open import elementary-number-theory.natural-numbers using
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ)
+
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
@@ -49,7 +48,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -82,7 +81,7 @@ is-common-divisor-is-gcd-ℕ a b d H = pr2 (H d) (refl-div-ℕ d)
 {- Proposition 8.4.2 -}
 
 uniqueness-is-gcd-ℕ :
-  (a b d d' : ℕ) → is-gcd-ℕ a b d → is-gcd-ℕ a b d' → Id d d'
+  (a b d d' : ℕ) → is-gcd-ℕ a b d → is-gcd-ℕ a b d' → d ＝ d'
 uniqueness-is-gcd-ℕ a b d d' H H' =
   antisymmetric-div-ℕ d d'
     ( pr1 (H' d) (is-common-divisor-is-gcd-ℕ a b d H))
@@ -281,7 +280,7 @@ pr2 (is-gcd-gcd-ℕ a b x) = is-common-divisor-div-gcd-ℕ a b x
 
 -- We show that gcd-ℕ is commutative
 
-is-commutative-gcd-ℕ : (a b : ℕ) → Id (gcd-ℕ a b) (gcd-ℕ b a)
+is-commutative-gcd-ℕ : (a b : ℕ) → gcd-ℕ a b ＝ gcd-ℕ b a
 is-commutative-gcd-ℕ a b =
   antisymmetric-div-ℕ
     ( gcd-ℕ a b)

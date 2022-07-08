@@ -1,4 +1,6 @@
-# Sets
+---
+title: Sets
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_; is-equiv)
 open import foundation-core.functions using (precomp)
-open import foundation-core.identity-types using (Id)
+open import foundation-core.identity-types using (_＝_)
 open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.truncation-levels using (zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
@@ -177,7 +179,7 @@ module _
   {l : Level} (X : UU-Set l)
   where
 
-  equiv-eq-Set : (Y : UU-Set l) → Id X Y → type-equiv-Set X Y
+  equiv-eq-Set : (Y : UU-Set l) → X ＝ Y → type-equiv-Set X Y
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
   
   abstract
@@ -189,6 +191,6 @@ module _
     is-equiv-equiv-eq-Set : (Y : UU-Set l) → is-equiv (equiv-eq-Set Y)
     is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
 
-  eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → Id X Y
+  eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → X ＝ Y
   eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
 ```

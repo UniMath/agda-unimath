@@ -1,4 +1,6 @@
-# Sections of type families
+---
+title: Sections of type families
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -12,9 +14,6 @@ open import foundation-core.retractions using (_retract-of_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path'; is-contr-Π)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
     _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
@@ -23,13 +22,15 @@ open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using
   ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy; assoc-htpy; ap-concat-htpy';
     left-inv-htpy)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.structure-identity-principle using
   ( extensionality-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr;
     equiv-right-swap-Σ)
+open import foundation.type-theoretic-principle-of-choice using
+  ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.fibers-of-maps using (fib; equiv-total-fib)
@@ -121,7 +122,7 @@ module _
   equiv-Π-sec-pr1 =
     ( ( left-unit-law-Σ-is-contr
         ( is-contr-equiv
-          ( Π-total-fam (λ x y → Id y x))
+          ( Π-total-fam (λ x y → y ＝ x))
           ( inv-distributive-Π-Σ)
           ( is-contr-Π (λ x → is-contr-total-path' x)))
         ( pair id refl-htpy)) ∘e
@@ -140,7 +141,7 @@ module _
   htpy-sec : (s t : sec f) → UU (l1 ⊔ l2)
   htpy-sec s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
 
-  extensionality-sec : (s t : sec f) → Id s t ≃ htpy-sec s t
+  extensionality-sec : (s t : sec f) → (s ＝ t) ≃ htpy-sec s t
   extensionality-sec (pair s H) =
     extensionality-Σ
       ( λ {s'} H' K → H ~ ((f ·l K) ∙h H'))
@@ -151,7 +152,7 @@ module _
 
   eq-htpy-sec :
     (s t : sec f)
-    (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) → Id s t
+    (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) → s ＝ t
   eq-htpy-sec s t H K =
     map-inv-equiv (extensionality-sec s t) (pair H K)
 ```

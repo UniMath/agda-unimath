@@ -1,4 +1,6 @@
-# Categories
+---
+title: Categories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -20,7 +22,7 @@ open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.isomorphisms-of-sets using
   ( iso-Set; equiv-iso-equiv-Set)
 open import foundation.propositions using (UU-Prop; Π-Prop; type-Prop)
@@ -78,19 +80,18 @@ module _
   assoc-comp-hom-Cat :
     {x y z w : obj-Cat}
     (h : type-hom-Cat z w) (g : type-hom-Cat y z) (f : type-hom-Cat x y) →
-    Id ( comp-hom-Cat (comp-hom-Cat h g) f)
-       ( comp-hom-Cat h (comp-hom-Cat g f))
+    comp-hom-Cat (comp-hom-Cat h g) f ＝ comp-hom-Cat h (comp-hom-Cat g f)
   assoc-comp-hom-Cat = assoc-comp-hom-Precat precat-Cat
 
   id-hom-Cat : {x : obj-Cat} → type-hom-Cat x x
   id-hom-Cat = id-hom-Precat precat-Cat
 
   left-unit-law-comp-hom-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-hom-Cat id-hom-Cat f) f
+    {x y : obj-Cat} (f : type-hom-Cat x y) → comp-hom-Cat id-hom-Cat f ＝ f
   left-unit-law-comp-hom-Cat = left-unit-law-comp-hom-Precat precat-Cat
 
   right-unit-law-comp-hom-Cat :
-    {x y : obj-Cat} (f : type-hom-Cat x y) → Id (comp-hom-Cat f id-hom-Cat) f
+    {x y : obj-Cat} (f : type-hom-Cat x y) → comp-hom-Cat f id-hom-Cat ＝ f
   right-unit-law-comp-hom-Cat = right-unit-law-comp-hom-Precat precat-Cat
 
   is-category-Cat : is-category-Precat precat-Cat
@@ -116,7 +117,7 @@ pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 id-iso-Set : {l : Level} {x : UU-Set l} → iso-Set x x
 id-iso-Set {l} {x} = id-iso-Precat (Set-Precat l) {x}
 
-iso-eq-Set : {l : Level} (x y : UU-Set l) → Id x y → iso-Set x y
+iso-eq-Set : {l : Level} (x y : UU-Set l) → x ＝ y → iso-Set x y
 iso-eq-Set {l} = iso-eq-Precat (Set-Precat l)
 
 is-category-Set-Precat : (l : Level) → is-category-Precat (Set-Precat l)

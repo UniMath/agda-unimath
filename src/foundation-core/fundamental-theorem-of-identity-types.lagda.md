@@ -1,4 +1,6 @@
-# The fundamental theorem of identity types
+---
+title: The fundamental theorem of identity types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -16,7 +18,7 @@ open import foundation-core.functoriality-dependent-pair-types using
   ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv;
     tot-comp; tot-htpy; tot-id; equiv-tot)
 open import foundation-core.homotopies using (_~_; refl-htpy; inv-htpy; _∙h_)
-open import foundation-core.identity-types using (Id; ind-Id; inv; _∙_)
+open import foundation-core.identity-types using (Id; _＝_; ind-Id; inv; _∙_)
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.type-arithmetic-dependent-pair-types using
@@ -26,11 +28,11 @@ open import foundation-core.universe-levels using (Level; UU)
 
 ## Idea
 
-The fundamental theorem of identity type provides a way to characterize identity types. It uses the fact that a family of maps `f : (x : A) → Id a x → B x` is a family of equivalences if and only if it induces an equivalence `Σ A (Id a) → Σ A B` on total spaces. Note that the total space `Σ A (Id a)` is contractible. Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and only if `Σ A B` is contractible.
+The fundamental theorem of identity type provides a way to characterize identity types. It uses the fact that a family of maps `f : (x : A) → a ＝ x → B x` is a family of equivalences if and only if it induces an equivalence `Σ A (Id a) → Σ A B` on total spaces. Note that the total space `Σ A (Id a)` is contractible. Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and only if `Σ A B` is contractible.
 
 ## Theorem
 
-For any family of maps `f : (x : A) → Id a x → B x`, the following are equivalent:
+For any family of maps `f : (x : A) → a ＝ x → B x`, the following are equivalent:
 1. Each `f x` is an equivalence
 2. The total space `Σ A B` is contractible.
 
@@ -41,14 +43,14 @@ module _
 
   abstract
     fundamental-theorem-id :
-      is-contr (Σ A B) → (f : (x : A) → Id a x → B x) → is-fiberwise-equiv f
+      is-contr (Σ A B) → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
     fundamental-theorem-id is-contr-AB f =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr (tot f) (is-contr-total-path a) is-contr-AB)
 
   abstract
     fundamental-theorem-id' :
-      (f : (x : A) → Id a x → B x) → is-fiberwise-equiv f → is-contr (Σ A B)
+      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f → is-contr (Σ A B)
     fundamental-theorem-id' f is-fiberwise-equiv-f =
       is-contr-is-equiv'
         ( Σ A (Id a))
@@ -90,12 +92,12 @@ module _
 
   abstract
     fundamental-theorem-id-retr :
-      (i : (x : A) → B x → Id a x) → (R : (x : A) → retr (i x)) →
+      (i : (x : A) → B x → a ＝ x) → (R : (x : A) → retr (i x)) →
       is-fiberwise-equiv i
     fundamental-theorem-id-retr i R =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr (tot i)
-          ( is-contr-retract-of (Σ _ (λ y → Id a y))
+          ( is-contr-retract-of (Σ _ (λ y → a ＝ y))
             ( pair (tot i)
               ( pair (tot λ x → pr1 (R x))
                 ( ( inv-htpy (tot-comp i (λ x → pr1 (R x)))) ∙h
@@ -113,12 +115,12 @@ module _
 
   abstract
     fundamental-theorem-id-sec :
-      (f : (x : A) → Id a x → B x) → ((x : A) → sec (f x)) →
+      (f : (x : A) → a ＝ x → B x) → ((x : A) → sec (f x)) →
       is-fiberwise-equiv f
     fundamental-theorem-id-sec f sec-f x =
       is-equiv-sec-is-equiv (f x) (sec-f x) (is-fiberwise-equiv-i x)
       where
-        i : (x : A) → B x → Id a x
+        i : (x : A) → B x → a ＝ x
         i = λ x → pr1 (sec-f x)
         retr-i : (x : A) → retr (i x)
         pr1 (retr-i x) = f x

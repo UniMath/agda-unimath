@@ -1,8 +1,6 @@
 ---
-title: Univalent Mathematics in Agda
+title: Equality of natural numbers
 ---
-
-# Equality of natural numbers
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,7 +22,7 @@ open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (id)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (Id; refl; ap)
+open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
@@ -56,10 +54,10 @@ refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
 refl-Eq-ℕ zero-ℕ = star
 refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 
-Eq-eq-ℕ : {x y : ℕ} → Id x y → Eq-ℕ x y
+Eq-eq-ℕ : {x y : ℕ} → x ＝ y → Eq-ℕ x y
 Eq-eq-ℕ {x} {.x} refl = refl-Eq-ℕ x
 
-eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → Id x y
+eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
 eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
 eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
 
@@ -88,7 +86,7 @@ has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
 
 decidable-eq-ℕ : ℕ → ℕ → decidable-Prop lzero
-pr1 (decidable-eq-ℕ m n) = Id m n
+pr1 (decidable-eq-ℕ m n) = (m ＝ n)
 pr1 (pr2 (decidable-eq-ℕ m n)) = is-set-ℕ m n
 pr2 (pr2 (decidable-eq-ℕ m n)) = has-decidable-equality-ℕ m n
 

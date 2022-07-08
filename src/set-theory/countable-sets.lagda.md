@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 ```agda
 is-countable-Prop : {l : Level} → UU l → UU-Prop l
-is-countable-Prop X = ∃-Prop {A = ℕ → Maybe X} is-surjective
+is-countable-Prop X = ∃-Prop (ℕ → Maybe X) is-surjective
 
 is-countable : {l : Level} → UU l → UU l
 is-countable X = type-Prop (is-countable-Prop X)

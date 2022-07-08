@@ -1,4 +1,6 @@
-# Functoriality of dependent pair types
+---
+title: Functoriality of dependent pair types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

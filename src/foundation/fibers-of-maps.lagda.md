@@ -1,4 +1,6 @@
-# Fibers of maps
+---
+title: Fibers of maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -18,7 +20,7 @@ open import foundation-core.functions using (_∘_; id)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-tot; is-equiv-tot-is-fiberwise-equiv)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl)
+open import foundation-core.identity-types using (Id; _＝_; refl)
 open import foundation-core.pullbacks using
   ( is-pullback; universal-property-pullback-is-pullback)
 open import foundation-core.type-arithmetic-cartesian-product-types using
@@ -105,9 +107,9 @@ fib-comp {A = A} {B} {C} g f c =
   ( equiv-left-swap-Σ) ∘e
   ( equiv-tot
     ( λ a →
-      ( inv-assoc-Σ B (λ b → Id (g b) c) (λ u → Id (f a) (pr1 u))) ∘e
+      ( inv-assoc-Σ B (λ b → g b ＝ c) (λ u → f a ＝ pr1 u)) ∘e
       ( ( equiv-tot (λ b → commutative-prod)) ∘e
-        ( ( assoc-Σ B (Id (f a)) ( λ u → Id (g (pr1 u)) c)) ∘e
+        ( ( assoc-Σ B (Id (f a)) ( λ u → g (pr1 u) ＝ c)) ∘e
           ( inv-equiv
             ( left-unit-law-Σ-is-contr
               ( is-contr-total-path (f a))

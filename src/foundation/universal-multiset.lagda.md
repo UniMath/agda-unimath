@@ -1,4 +1,6 @@
-# The universal multiset
+---
+title: The universal multiset
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

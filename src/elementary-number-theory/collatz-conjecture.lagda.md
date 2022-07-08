@@ -1,4 +1,6 @@
-# The Collatz conjecture
+---
+title: The Collatz conjecture
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

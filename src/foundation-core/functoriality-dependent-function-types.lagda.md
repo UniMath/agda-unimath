@@ -8,8 +8,7 @@ title: Functoriality of dependent function types
 module foundation-core.functoriality-dependent-function-types where
 
 open import foundation.contractible-types
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs
+open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-maps
@@ -82,7 +81,7 @@ pr2 (equiv-map-Π e) = is-equiv-map-Π _ (λ i → is-equiv-map-equiv (e i))
 ```agda
 tr-precompose-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
-  (f : A → B) {x y : A} (p : Id x y) → tr C (ap f p) ~ tr (λ x → C (f x)) p
+  (f : A → B) {x y : A} (p : x ＝ y) → tr C (ap f p) ~ tr (λ x → C (f x)) p
 tr-precompose-fam C f refl = refl-htpy
 
 abstract

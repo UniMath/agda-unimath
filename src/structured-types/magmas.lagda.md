@@ -16,6 +16,7 @@ open import foundation.equivalences using (_≃_; map-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using (Id)
 open import foundation.unit-type using (unit; star)
+open import foundation.unital-binary-operations using (is-unital)
 open import foundation.universe-levels using (Level; UU; lsuc)
 ```
 
@@ -49,11 +50,7 @@ module _
 
 ```agda
 is-unital-Magma : {l : Level} (M : Magma l) → UU l
-is-unital-Magma M =
-  Σ ( type-Magma M)
-    ( λ e →
-      ( (x : type-Magma M) → Id (mul-Magma M e x) x) ×
-      ( (x : type-Magma M) → Id (mul-Magma M x e) x))
+is-unital-Magma M = is-unital (mul-Magma M)
 
 Unital-Magma : (l : Level) → UU (lsuc l)
 Unital-Magma l = Σ (Magma l) is-unital-Magma

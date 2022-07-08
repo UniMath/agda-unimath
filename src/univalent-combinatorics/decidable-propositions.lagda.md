@@ -36,7 +36,7 @@ is-decidable-count :
 is-decidable-count (pair zero-ℕ e) =
   inr (is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
 is-decidable-count (pair (succ-ℕ k) e) =
-  inl (map-equiv e zero-Fin)
+  inl (map-equiv e (zero-Fin k))
 
 count-is-decidable-is-prop :
   {l : Level} {A : UU l} → is-prop A → is-decidable A → count A

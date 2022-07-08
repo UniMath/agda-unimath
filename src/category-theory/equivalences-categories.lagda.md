@@ -1,4 +1,6 @@
-# Equivalences between categories
+---
+title: Equivalences between categories
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

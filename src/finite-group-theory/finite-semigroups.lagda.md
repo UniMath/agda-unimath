@@ -52,7 +52,7 @@ Finite semigroups are semigroups of which the underlying type is finite.
 Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order' l n =
   Σ ( UU-Fin-Level l n)
-    ( λ X → has-associative-mul (type-UU-Fin-Level X))
+    ( λ X → has-associative-mul (type-UU-Fin-Level n X))
 
 Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order l n =
@@ -90,7 +90,7 @@ is-π-finite-Semigroup-of-Order' k n =
     ( λ x →
       is-π-finite-is-finite k
         ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin-Level x)))
+          ( is-finite-type-UU-Fin-Level n x)))
 
 is-π-finite-Semigroup-of-Order :
   {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order l n)
@@ -100,13 +100,13 @@ is-π-finite-Semigroup-of-Order {l} k n =
   where
   e : Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
   e = ( equiv-Σ
-        ( has-associative-mul ∘ type-UU-Fin-Level)
+        ( has-associative-mul ∘ type-UU-Fin-Level n)
         ( ( right-unit-law-Σ-is-contr
             ( λ X →
               is-proof-irrelevant-is-prop
                 ( is-prop-is-set _)
                 ( is-set-is-finite
-                  ( is-finite-has-cardinality (pr2 X))))) ∘e
+                  ( is-finite-has-cardinality n (pr2 X))))) ∘e
           ( equiv-right-swap-Σ))
         ( λ X → id-equiv)) ∘e
       ( equiv-right-swap-Σ

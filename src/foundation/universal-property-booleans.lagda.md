@@ -1,4 +1,6 @@
-# The universal property of booleans
+---
+title: The universal property of booleans
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

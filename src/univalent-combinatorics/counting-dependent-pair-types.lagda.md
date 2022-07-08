@@ -108,7 +108,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
     (f : (x : A) → count (B x)) →
     Id ( number-of-elements-count (count-Σ' k e f))
-      ( sum-Fin-ℕ (λ x → number-of-elements-count (f (map-equiv e x)))) 
+      ( sum-Fin-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))) 
   number-of-elements-count-Σ' zero-ℕ e f = refl
   number-of-elements-count-Σ' (succ-ℕ k) e f =
     ( number-of-elements-count-coprod
@@ -185,7 +185,7 @@ section-count-base-count-Σ' e f g x with
   is-decidable-is-zero-ℕ (number-of-elements-count (f x))
 ... | inl p = inr p
 ... | inr H with is-successor-is-nonzero-ℕ H
-... | (pair k p) = inl (map-equiv-count (f x) (tr Fin (inv p) zero-Fin))
+... | (pair k p) = inl (map-equiv-count (f x) (tr Fin (inv p) (zero-Fin k)))
 
 count-base-count-Σ' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → count (Σ A B) →

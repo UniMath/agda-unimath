@@ -7,6 +7,8 @@ title: Kuratowsky finite sets
 
 module univalent-combinatorics.kuratowsky-finite-sets where
 
+open import elementary-number-theory.natural-numbers using (ℕ)
+
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.existential-quantification using (∃-Prop)
 open import foundation.propositions using (UU-Prop; type-Prop)
@@ -26,7 +28,7 @@ A Kuratowsky finite type is a set `X` for which there exists a surjection into `
 ```agda
 is-kuratowsky-finite-set-Prop : {l : Level} → UU-Set l → UU-Prop l
 is-kuratowsky-finite-set-Prop X =
-  ∃-Prop (λ n → Σ (Fin n → type-Set X) is-surjective)
+  ∃-Prop ℕ (λ n → Σ (Fin n → type-Set X) is-surjective)
 
 is-kuratowsky-finite-set : {l : Level} → UU-Set l → UU l
 is-kuratowsky-finite-set X = type-Prop (is-kuratowsky-finite-set-Prop X)

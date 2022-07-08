@@ -1,0 +1,24 @@
+---
+title: Baire space
+---
+
+```agda
+{-# OPTIONS --without-K --exact-split #-}
+
+module set-theory.baire-space where
+
+open import elementary-number-theory.natural-numbers
+
+open import foundation.universe-levels
+```
+
+## Idea
+
+The Baire space is the type of functions `ℕ → ℕ`.
+
+## Definition
+
+```agda
+baire-space : UU lzero
+baire-space = ℕ → ℕ
+```

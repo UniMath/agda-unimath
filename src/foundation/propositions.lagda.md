@@ -1,4 +1,6 @@
-# Propositions
+---
+title: Propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

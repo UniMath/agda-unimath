@@ -1,4 +1,6 @@
-# Injective maps
+---
+title: Injective maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation-core.equivalences using
   ( is-equiv; isretr-map-inv-is-equiv; map-inv-is-equiv; _≃_; map-equiv;
     map-inv-equiv; is-equiv-map-inv-equiv; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
-open import foundation-core.identity-types using (Id; refl; _∙_; inv; ap)
+open import foundation-core.identity-types using (_＝_; refl; _∙_; inv; ap)
 open import foundation-core.propositional-maps using (is-prop-map; is-prop-map-is-emb)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (is-set; is-set-prop-in-id)
@@ -34,7 +36,7 @@ The notion of injective map is, however, not homotopically coherent. It is fine 
 
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-injective {l1} {l2} {A} {B} f = ({x y : A} → Id (f x) (f y) → Id x y)
+is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
 ```
 
 ## Examples
@@ -56,7 +58,7 @@ module _
   where
   
   is-injective-right-factor :
-    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
+    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
     is-injective f → is-injective h
   is-injective-right-factor f g h H is-inj-f {x} {x'} p =
     is-inj-f {x} {x'} ((H x) ∙ ((ap g p) ∙ (inv (H x'))))
@@ -70,7 +72,7 @@ module _
   where
   
   is-injective-comp :
-    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → Id (f a) (g (h a))) →
+    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
     is-injective h → is-injective g → is-injective f
   is-injective-comp f g h H is-inj-h is-inj-g {x} {x'} p =
     is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
@@ -146,7 +148,7 @@ abstract
     is-set B → is-injective f → is-set A
   is-set-is-injective {f = f} H I =
     is-set-prop-in-id
-      ( λ x y → Id (f x) (f y))
+      ( λ x y → f x ＝ f y)
       ( λ x y → H (f x) (f y))
       ( λ x → refl)
       ( λ x y → I)

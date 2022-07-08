@@ -6,7 +6,8 @@
 module graph-theory.polygons where
 
 open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; has-decidable-equality-ℤ-Mod)
+  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; has-decidable-equality-ℤ-Mod;
+    is-finite-ℤ-Mod)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; is-nonzero-ℕ; is-not-one-ℕ)
 
@@ -15,7 +16,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-propositional-truncation using
-  ( functor-trunc-Prop)
+  ( map-trunc-Prop)
 open import foundation.injective-maps using (is-emb-is-injective)
 open import foundation.mere-equivalences using
   ( mere-equiv; is-set-mere-equiv'; has-decidable-equality-mere-equiv')
@@ -35,7 +36,7 @@ open import graph-theory.undirected-graphs using
   ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph)
 
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-mere-equiv; is-finite-ℤ-Mod)
+  ( is-finite; is-finite-mere-equiv)
 ```
 
 ## Idea
@@ -103,7 +104,7 @@ module _
 
   mere-equiv-vertex-Polygon : mere-equiv (ℤ-Mod k) vertex-Polygon
   mere-equiv-vertex-Polygon =
-    functor-trunc-Prop
+    map-trunc-Prop
       ( equiv-vertex-equiv-Undirected-Graph
         ( standard-polygon-Undirected-Graph k)
         ( undirected-graph-Polygon))

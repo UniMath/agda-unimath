@@ -1,4 +1,6 @@
-# Decidable subtypes
+---
+title: Decidable subtypes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,8 +11,9 @@ open import foundation.coproduct-types using
   ( coprod; inl; inr; is-left; is-right; is-prop-is-left; is-prop-is-right)
 open import foundation.decidable-propositions using
   ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop;
-    type-decidable-Prop; is-prop-type-decidable-Prop; equiv-universes-decidable-Prop;
-    iff-universes-decidable-Prop)
+    type-decidable-Prop; is-prop-type-decidable-Prop;
+    equiv-universes-decidable-Prop; iff-universes-decidable-Prop;
+    is-set-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-unit; is-decidable-empty)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -18,10 +21,11 @@ open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.equivalences using (_≃_; map-equiv; id-equiv)
 open import foundation.functoriality-dependent-function-types using
   ( compute-map-equiv-Π; equiv-Π)
-open import foundation.identity-types using (Id; inv; tr)
+open import foundation.identity-types using (inv; tr)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.propositions using (type-Prop; is-prop)
+open import foundation.sets using (is-set; is-set-function-type)
 open import foundation.subtypes using
   ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
     emb-subtype; is-injective-inclusion-subtype; is-in-subtype;
@@ -153,4 +157,13 @@ module _
           ( S)
           ( x)))
       ( iff-universes-decidable-Prop l l' (S x))
+```
+
+### The type of decidable subtypes of a type is a set
+
+```agda
+is-set-decidable-subtype :
+  {l1 l2 : Level} {X : UU l1} → is-set (decidable-subtype l2 X)
+is-set-decidable-subtype {l1} {l2} {X} =
+  is-set-function-type is-set-decidable-Prop
 ```

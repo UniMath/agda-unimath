@@ -1,4 +1,6 @@
-# Conjunction of propositions
+---
+title: Conjunction of propositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

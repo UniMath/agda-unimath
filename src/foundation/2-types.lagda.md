@@ -1,4 +1,6 @@
-# 2-Types
+---
+title: 2-Types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -6,7 +8,6 @@
 module foundation.2-types where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
 open import foundation.truncated-types using
   ( is-trunc; truncated-type-succ-Truncated-Type)
 open import foundation.truncation-levels using (two-𝕋)

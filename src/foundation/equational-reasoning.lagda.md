@@ -1,24 +1,27 @@
-# Equational reasoning
+---
+title: Equational reasoning
+---
 
 Tom de Jong, 27 May 2022.
 Elisabeth Bonnevier, 31 May 2022.
+
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.equational-reasoning where
 
-open import foundation.identity-types using (Id ; refl ; _∙_; inv)
-open import foundation.equivalences using (_≃_ ; _∘e_ ; id-equiv; inv-equiv)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv)
+open import foundation.equivalences using (_≃_; _∘e_; id-equiv; inv-equiv)
 open import foundation.universe-levels using (Level; UU)
 open import order-theory.preorders using
-  (Preorder ; element-Preorder ; leq-Preorder
-  ; transitive-leq-Preorder ; refl-leq-Preorder)
+  ( Preorder; element-Preorder; leq-Preorder; transitive-leq-Preorder;
+    refl-leq-Preorder)
 ```
 
 ## Idea
 
 Often it's convenient to reason by chains of (in)equalities or equivalences,
-i.e. to write a proof in the following form:
+i.e., to write a proof in the following form:
 
 ```md
 X ≃⟨ equiv-1 ⟩
@@ -55,71 +58,75 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 
 ```agda
 infix 1 _∎
-infixr 0 step-= step-=˘
+infixr 0 step-equational-reasoning step-equational-reasoning˘
 
-step-= : {l : Level} {X : UU l} (x : X) {y z : X}
-       → Id y z → Id x y → Id x z
-step-= _ q p = p ∙ q
+step-equational-reasoning :
+  {l : Level} {X : UU l} (x : X) {y z : X} → y ＝ z → x ＝ y → x ＝ z
+step-equational-reasoning _ q p = p ∙ q
 
-step-=˘ : {l : Level} {X : UU l} (x : X) {y z : X}
-        → Id y z → Id y x → Id x z
-step-=˘ _ q p = inv p ∙ q
+step-equational-reasoning˘ :
+  {l : Level} {X : UU l} (x : X) {y z : X} → y ＝ z → y ＝ x → x ＝ z
+step-equational-reasoning˘ _ q p = inv p ∙ q
 
-_∎ : {l : Level} {X : UU l} (x : X) → Id x x
+_∎ : {l : Level} {X : UU l} (x : X) → x ＝ x
 x ∎ = refl
 
-syntax step-= x q p = x =⟨ p ⟩ q
-syntax step-=˘ x q p = x =˘⟨ p ⟩ q
+syntax step-equational-reasoning x q p = x =⟨ p ⟩ q
+syntax step-equational-reasoning˘ x q p = x =˘⟨ p ⟩ q
 ```
 
 ### Equational reasoning for equivalences
 
 ```agda
-infix 1 _■
-infixr 0 step-≃ step-≃˘
+infix 1 _∎e
+infixr 0 step-equivalence-reasoning step-equivalence-reasoning˘
 
-step-≃ : {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3}
-       → Y ≃ Z → X ≃ Y → X ≃ Z
-step-≃ _ g f = g ∘e f
+step-equivalence-reasoning :
+  {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3} →
+  Y ≃ Z → X ≃ Y → X ≃ Z
+step-equivalence-reasoning _ g f = g ∘e f
 
-step-≃˘ : {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3}
-        → Y ≃ Z → Y ≃ X → X ≃ Z
-step-≃˘ _ g f = g ∘e inv-equiv f
+step-equivalence-reasoning˘ :
+  {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3} →
+  Y ≃ Z → Y ≃ X → X ≃ Z
+step-equivalence-reasoning˘ _ g f = g ∘e inv-equiv f
 
-_■ : {l : Level} (X : UU l) → X ≃ X
-X ■ = id-equiv
+_∎e : {l : Level} (X : UU l) → X ≃ X
+X ∎e = id-equiv
 
-syntax step-≃ X g f = X ≃⟨ f ⟩ g
-syntax step-≃˘ X g f = X ≃˘⟨ f ⟩ g
+syntax step-equivalence-reasoning X g f = X ≃⟨ f ⟩ g
+syntax step-equivalence-reasoning˘ X g f = X ≃˘⟨ f ⟩ g
 ```
 
 ### Equational reasoning for preorders
 
 ```agda
 private
- transitivity : {l1 l2 : Level} (X : Preorder l1 l2)
-                (x : element-Preorder X) {y z : element-Preorder X}
-              → leq-Preorder X x y → leq-Preorder X y z → leq-Preorder X x z
- transitivity X x {y} {z} u v = transitive-leq-Preorder X x y z v u
+  transitivity :
+    {l1 l2 : Level} (X : Preorder l1 l2)
+    (x : element-Preorder X) {y z : element-Preorder X} →
+    leq-Preorder X x y → leq-Preorder X y z → leq-Preorder X x z
+  transitivity X x {y} {z} u v = transitive-leq-Preorder X x y z v u
 
-syntax transitivity X x u v = x ≤⟨ X ⟩[ u ] v
+syntax transitivity X x u v = x ≤[ X ]⟨ u ⟩ v
 infixr 0 transitivity
 
 private
- reflexivity : {l1 l2 : Level} (X : Preorder l1 l2)
-             → (x : element-Preorder X) → leq-Preorder X x x
- reflexivity = refl-leq-Preorder
+  reflexivity :
+    {l1 l2 : Level} (X : Preorder l1 l2) (x : element-Preorder X) →
+    leq-Preorder X x x
+  reflexivity = refl-leq-Preorder
 
-syntax reflexivity X x = x ∎⟨ X ⟩
+syntax reflexivity X x = x ∎[ X ]
 infix 1 reflexivity
 ```
 
 For a preorder `X` we thus write the chains as follows
 
 ```md
-x ≤⟨ X ⟩[ ineq-1 ]
-y ≤⟨ X ⟩[ ineq-2 ]
-z ∎⟨ X ⟩
+x ≤[ X ]⟨ ineq-1 ⟩
+y ≤[ X ]⟨ ineq-2 ⟩
+z ∎[ X ]
 ```
 
 ## References

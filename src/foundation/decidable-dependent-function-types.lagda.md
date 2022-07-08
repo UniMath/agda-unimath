@@ -1,4 +1,6 @@
-# Decidability of dependent function types
+---
+title: Decidability of dependent function types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

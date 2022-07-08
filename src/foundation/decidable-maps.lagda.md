@@ -1,4 +1,6 @@
-# Decidable maps
+---
+title: Decidable maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id; ap; inv; _∙_)
+open import foundation.identity-types using (_＝_; ap; inv; _∙_)
 open import foundation.retractions using (retr)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -35,7 +37,7 @@ is-decidable-map-retr :
   (i : A → B) → retr i → is-decidable-map i
 is-decidable-map-retr d i (pair r R) b =
   is-decidable-iff
-    ( λ (p : Id (i (r b)) b) → pair (r b) p)
+    ( λ (p : i (r b) ＝ b) → pair (r b) p)
     ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ (ap i (R (pr1 t)) ∙ pr2 t))
     ( d (i (r b)) b)
 ```

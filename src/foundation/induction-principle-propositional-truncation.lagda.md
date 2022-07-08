@@ -1,4 +1,6 @@
-# The induction principle for propositional truncation
+---
+title: The induction principle for propositional truncation
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -6,7 +8,7 @@
 module foundation.induction-principle-propositional-truncation where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; tr)
+open import foundation.identity-types using (_＝_; tr)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop; is-prop-is-proof-irrelevant; eq-is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
@@ -21,20 +23,20 @@ The induction principle for the propositional truncations present propositional 
 ```agda
 case-paths-induction-principle-propositional-truncation :
   { l : Level} {l1 l2 : Level} {A : UU l1}
-  ( P : UU-Prop l2) (α : (p q : type-Prop P) → Id p q) (f : A → type-Prop P) →
+  ( P : UU-Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
   ( B : type-Prop P → UU l) → UU (l ⊔ l2)
 case-paths-induction-principle-propositional-truncation P α f B =
-  (p q : type-Prop P) (x : B p) (y : B q) → Id (tr B (α p q) x) y
+  (p q : type-Prop P) (x : B p) (y : B q) → tr B (α p q) x ＝ y
   
 induction-principle-propositional-truncation :
   (l : Level) {l1 l2 : Level} {A : UU l1}
-  (P : UU-Prop l2) (α : (p q : type-Prop P) → Id p q) (f : A → type-Prop P) →
+  (P : UU-Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
   UU (lsuc l ⊔ l1 ⊔ l2)
 induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
   ( B : type-Prop P → UU l) →
   ( g : (x : A) → (B (f x))) →
   ( β : case-paths-induction-principle-propositional-truncation P α f B) →
-  Σ ((p : type-Prop P) → B p) (λ h → (x : A) → Id (h (f x)) (g x))
+  Σ ((p : type-Prop P) → B p) (λ h → (x : A) → h (f x) ＝ g x)
 ```
 
 ## Properties
@@ -45,7 +47,7 @@ induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
 abstract
   is-prop-case-paths-induction-principle-propositional-truncation :
     { l : Level} {l1 l2 : Level} {A : UU l1}
-    ( P : UU-Prop l2) (α : (p q : type-Prop P) → Id p q) (f : A → type-Prop P) →
+    ( P : UU-Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
     ( B : type-Prop P → UU l) →
     case-paths-induction-principle-propositional-truncation P α f B →
     ( p : type-Prop P) → is-prop (B p)
@@ -54,7 +56,7 @@ abstract
   
   case-paths-induction-principle-propositional-truncation-is-prop :
     { l : Level} {l1 l2 : Level} {A : UU l1}
-    ( P : UU-Prop l2) (α : (p q : type-Prop P) → Id p q) (f : A → type-Prop P) →
+    ( P : UU-Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
     ( B : type-Prop P → UU l) →
     ( (p : type-Prop P) → is-prop (B p)) →
     case-paths-induction-principle-propositional-truncation P α f B

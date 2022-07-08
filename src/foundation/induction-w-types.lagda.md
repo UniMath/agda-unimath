@@ -1,4 +1,6 @@
-# Induction principles on W-types
+---
+title: Induction principles on W-types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -13,7 +15,7 @@ open import foundation.equivalences using (_≃_; id-equiv; is-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functions using (_∘_)
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using (Id; ap; refl; tr)
+open import foundation.identity-types using (_＝_; ap; refl; tr)
 open import foundation.inequality-w-types using
   ( _le-𝕎_; le-∈-𝕎; propagate-le-𝕎)
 open import foundation.negation using (¬)
@@ -55,7 +57,7 @@ module _
   comp-□-∈-𝕎 :
     (P : 𝕎 A B → UU l3) (h : (y : 𝕎 A B) → □-∈-𝕎 P y → P y) →
     (x y : 𝕎 A B) (e : y ∈-𝕎 x) →
-    Id (ind-□-∈-𝕎 P h x y e) (h y (ind-□-∈-𝕎 P h y))
+    ind-□-∈-𝕎 P h x y e ＝ h y (ind-□-∈-𝕎 P h y)
   comp-□-∈-𝕎 P h (tree-𝕎 x α) .(α b) (pair b refl) = refl
   
   ind-∈-𝕎 :
@@ -65,7 +67,7 @@ module _
 
   comp-∈-𝕎 :
     (P : 𝕎 A B → UU l3) (h : (y : 𝕎 A B) → □-∈-𝕎 P y → P y) →
-    (x : 𝕎 A B) → Id (ind-∈-𝕎 P h x) (h x (λ y e → ind-∈-𝕎 P h y))
+    (x : 𝕎 A B) → ind-∈-𝕎 P h x ＝ h x (λ y e → ind-∈-𝕎 P h y)
   comp-∈-𝕎 P h x =
     ap (h x) (eq-htpy (λ y → eq-htpy (λ e → comp-□-∈-𝕎 P h x y e)))
 ```
@@ -122,7 +124,7 @@ We first prove an intermediate induction principle with computation rule, where 
   □-strong-comp-𝕎 :
     (h : (x : 𝕎 A B) → □-𝕎 P x → P x)
     (x : 𝕎 A B) (y : 𝕎 A B) (p : y le-𝕎 x) →
-    Id (□-strong-ind-𝕎 h x y p) (h y (□-strong-ind-𝕎 h y))
+    □-strong-ind-𝕎 h x y p ＝ h y (□-strong-ind-𝕎 h y)
   □-strong-comp-𝕎 h (tree-𝕎 x α) .(α b) (le-∈-𝕎 (pair b refl)) =
     refl
   □-strong-comp-𝕎 h (tree-𝕎 x α) y (propagate-le-𝕎 (pair b refl) K) =
@@ -140,7 +142,7 @@ strong-ind-𝕎 P h = reflect-□-𝕎 h (□-strong-ind-𝕎 h)
 strong-comp-𝕎 :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (P : 𝕎 A B → UU l3) →
   (h : (x : 𝕎 A B) → □-𝕎 P x → P x) (x : 𝕎 A B) →
-  Id (strong-ind-𝕎 P h x) (h x (unit-□-𝕎 (strong-ind-𝕎 P h) x))
+  strong-ind-𝕎 P h x ＝ h x (unit-□-𝕎 (strong-ind-𝕎 P h) x)
 strong-comp-𝕎 P h x =
   ap (h x) (eq-htpy (λ y → eq-htpy (λ p → □-strong-comp-𝕎 h x y p)))
 ```
@@ -153,7 +155,7 @@ no-infinite-descent-𝕎 :
   (f : ℕ → 𝕎 A B) → ¬ ((n : ℕ) → (f (succ-ℕ n) le-𝕎 (f n)))
 no-infinite-descent-𝕎 {A = A} {B} f =
   strong-ind-𝕎
-    ( λ x → (f : ℕ → 𝕎 A B) (p : Id (f zero-ℕ) x) →
+    ( λ x → (f : ℕ → 𝕎 A B) (p : f zero-ℕ ＝ x) →
             ¬ ((n : ℕ) → (f (succ-ℕ n)) le-𝕎 (f n)))
     ( λ x IH f p H →
       IH ( f 1)

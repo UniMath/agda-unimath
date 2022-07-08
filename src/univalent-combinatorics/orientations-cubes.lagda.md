@@ -33,22 +33,22 @@ open import univalent-combinatorics.standard-finite-types using
 ```agda
 orientation-cube : {k : ℕ} → cube k → UU (lzero)
 orientation-cube {k} X =
-  Σ ( vertex-cube X → Fin 2)
+  Σ ( vertex-cube k X → Fin 2)
     ( λ h →
-      ( x y : vertex-cube X) →
+      ( x y : vertex-cube k X) →
         Id ( iterate
              ( number-of-elements-is-finite
                ( is-finite-Σ
-                 ( is-finite-dim-cube X)
+                 ( is-finite-dim-cube k X)
                  ( λ d →
                    is-finite-function-type
                      ( is-finite-eq
                        ( has-decidable-equality-is-finite
-                         ( is-finite-axis-cube X d))
+                         ( is-finite-axis-cube k X d))
                      { x d}
                      { y d})
                      ( is-finite-empty))))
-             ( succ-Fin)
+             ( succ-Fin 2)
              ( h x))
            ( h y))
 ```

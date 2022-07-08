@@ -1,4 +1,6 @@
-# Commuting squares
+---
+title: Commuting squares
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

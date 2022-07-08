@@ -36,9 +36,8 @@ open import group-theory.groups using (Group; is-group'; semigroup-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; comp-hom-Group; id-hom-Group)
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using
-  ( type-iso-Group; comp-iso-Group; inv-iso-Group)
-open import group-theory.monoids using (is-unital)
+open import group-theory.isomorphisms-groups
+open import group-theory.monoids
 open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
 open import group-theory.symmetric-groups using (symmetric-Group; iso-symmetric-group-equiv-Set)
 ```
@@ -70,19 +69,19 @@ module _
   pr1 loop-semigroup-Set = set-loop-Set
   pr2 loop-semigroup-Set = has-associative-mul-loop-Set
 
-  is-unital-loop-semigroup-Set : is-unital loop-semigroup-Set
-  pr1 is-unital-loop-semigroup-Set = refl
-  pr1 (pr2 is-unital-loop-semigroup-Set) y = left-unit
-  pr2 (pr2 is-unital-loop-semigroup-Set) x = right-unit
+  is-unital-Semigroup-loop-semigroup-Set : is-unital-Semigroup loop-semigroup-Set
+  pr1 is-unital-Semigroup-loop-semigroup-Set = refl
+  pr1 (pr2 is-unital-Semigroup-loop-semigroup-Set) y = left-unit
+  pr2 (pr2 is-unital-Semigroup-loop-semigroup-Set) x = right-unit
 
-  is-group-loop-semigroup-Set' : is-group' loop-semigroup-Set is-unital-loop-semigroup-Set
+  is-group-loop-semigroup-Set' : is-group' loop-semigroup-Set is-unital-Semigroup-loop-semigroup-Set
   pr1 is-group-loop-semigroup-Set' = inv
   pr1 (pr2 is-group-loop-semigroup-Set') = left-inv
   pr2 (pr2 is-group-loop-semigroup-Set') = right-inv
 
   loop-group-Set : Group (lsuc l)
   pr1 loop-group-Set = loop-semigroup-Set
-  pr1 (pr2 loop-group-Set) = is-unital-loop-semigroup-Set
+  pr1 (pr2 loop-group-Set) = is-unital-Semigroup-loop-semigroup-Set
   pr2 (pr2 loop-group-Set) = is-group-loop-semigroup-Set'
 ```
 

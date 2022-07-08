@@ -1,4 +1,6 @@
-# The Well-Ordering Principle of the natural numbers
+---
+title: The Well-Ordering Principle of the natural numbers
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,7 +13,7 @@ open import elementary-number-theory.inequality-natural-numbers using
 open import elementary-number-theory.lower-bounds-natural-numbers using
   ( is-lower-bound-ℕ; is-lower-bound-ℕ-Prop)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ; is-zero-ℕ)
   
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr)
@@ -23,7 +25,7 @@ open import foundation.empty-types using (empty; ex-falso)
 open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
-open import foundation.identity-types using (Id; refl)
+open import foundation.identity-types using (_＝_; refl)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
@@ -136,7 +138,7 @@ is-zero-well-ordering-principle-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
   (n : ℕ) (p : P (succ-ℕ n)) (d0 : is-decidable (P zero-ℕ)) →
   (x : minimal-element-ℕ (λ m → P (succ-ℕ m))) (p0 : P zero-ℕ) →
-  Id (pr1 (well-ordering-principle-succ-ℕ P d n p d0 x)) zero-ℕ
+  pr1 (well-ordering-principle-succ-ℕ P d n p d0 x) ＝ zero-ℕ
 is-zero-well-ordering-principle-succ-ℕ P d n p (inl p0) x q0 =
   refl
 is-zero-well-ordering-principle-succ-ℕ P d n p (inr np0) x q0 =
@@ -144,7 +146,7 @@ is-zero-well-ordering-principle-succ-ℕ P d n p (inr np0) x q0 =
 
 is-zero-well-ordering-principle-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
-  (x : Σ ℕ P) → P zero-ℕ → Id (number-well-ordering-principle-ℕ P d x) zero-ℕ
+  (x : Σ ℕ P) → P zero-ℕ → is-zero-ℕ (number-well-ordering-principle-ℕ P d x)
 is-zero-well-ordering-principle-ℕ P d (pair zero-ℕ p) p0 = refl
 is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
   is-zero-well-ordering-principle-succ-ℕ P d m p (d zero-ℕ)

@@ -1,4 +1,6 @@
-# The booleans
+---
+title: The booleans
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -11,13 +13,16 @@ open import foundation-core.empty-types using (empty; is-prop-empty)
 open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl; inv)
-open import foundation.injective-maps using (is-injective)
+open import foundation-core.identity-types using (_＝_; refl; inv)
 open import foundation-core.negation using (¬)
 open import foundation-core.propositions using (is-prop)
 open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation-core.universe-levels using (Level; lzero; UU)
+
+open import foundation.injective-maps using (is-injective)
+open import foundation.raising-universe-levels using
+  ( raise; equiv-raise; map-raise)
 open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation-core.universe-levels using (lzero; UU)
 ```
 
 ## Idea
@@ -33,6 +38,18 @@ data bool : UU lzero where
 {-# BUILTIN BOOL bool #-}
 {-# BUILTIN TRUE  true  #-}
 {-# BUILTIN FALSE false #-}
+
+raise-bool : (l : Level) → UU l
+raise-bool l = raise l bool
+
+raise-true : (l : Level) → raise-bool l
+raise-true l = map-raise true
+
+raise-false : (l : Level) → raise-bool l
+raise-false l = map-raise false
+
+equiv-raise-bool : (l : Level) → bool ≃ raise-bool l
+equiv-raise-bool l = equiv-raise l bool
 ```
 
 ### Equality on the booleans
@@ -49,16 +66,16 @@ refl-Eq-bool true = star
 refl-Eq-bool false = star
 
 Eq-eq-bool :
-  {x y : bool} → Id x y → Eq-bool x y
+  {x y : bool} → x ＝ y → Eq-bool x y
 Eq-eq-bool {x = x} refl = refl-Eq-bool x
 
 eq-Eq-bool :
-  {x y : bool} → Eq-bool x y → Id x y
+  {x y : bool} → Eq-bool x y → x ＝ y
 eq-Eq-bool {true} {true} star = refl
 eq-Eq-bool {false} {false} star = refl
 
 neq-false-true-bool :
-  ¬ (Id false true)
+  ¬ (false ＝ true)
 neq-false-true-bool ()
 ```
 
@@ -112,7 +129,7 @@ pr2 bool-Set = is-set-bool
 
 
 ```agda
-neq-neg-bool : (b : bool) → ¬ (Id b (neg-bool b))
+neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)
 neq-neg-bool true ()
 neq-neg-bool false ()
 

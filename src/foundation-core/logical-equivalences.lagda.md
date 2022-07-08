@@ -1,4 +1,6 @@
-# Logical equivalences
+---
+title: Logical equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

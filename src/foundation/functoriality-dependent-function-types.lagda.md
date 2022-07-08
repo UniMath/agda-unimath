@@ -13,9 +13,6 @@ open import foundation-core.homotopies using (_~_; _·l_; _·r_)
 
 open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;
     issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
@@ -26,8 +23,10 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (eq-htpy; equiv-eq-htpy)
 open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)
 open import foundation.identity-types using
-  ( Id; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
+  ( _＝_; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
 open import foundation.truncated-types using (is-trunc-equiv'; is-trunc-Π)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
 open import foundation.unit-type using (unit)
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
@@ -67,7 +66,7 @@ module _
 
   compute-map-equiv-Π :
     (h : (a' : A') → B' a') (a' : A') →
-    Id ( map-equiv-Π h (map-equiv e a')) (map-equiv (f a') (h a'))
+    map-equiv-Π h (map-equiv e a') ＝ map-equiv (f a') (h a')
   compute-map-equiv-Π h a' =
     ( ap
       ( λ t →
@@ -85,9 +84,9 @@ module _
       ( α ( map-inv-equiv e (map-equiv e a'))
           ( isretr-map-inv-equiv e a')))
     where
-    α : (x : A') (p : Id x a') →
-        Id ( tr (B ∘ map-equiv e) p (map-equiv (f x) (h x)))
-           ( map-equiv (f a') (h a'))
+    α :
+      (x : A') (p : x ＝ a') →
+      tr (B ∘ map-equiv e) p (map-equiv (f x) (h x)) ＝ map-equiv (f a') (h a')
     α x refl = refl
 
   abstract
@@ -173,7 +172,7 @@ is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
     ( fib (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
     ( equiv-Σ
-      ( λ a → Id (f i a) b)
+      ( λ a → f i a ＝ b)
       ( equiv-universal-property-unit (A i))
       ( λ h → equiv-ap
         ( equiv-universal-property-unit (B i))
@@ -225,8 +224,8 @@ abstract
     { l1 l2 l3 l4 : Level}
     { A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
     ( e : A' ≃ A) →
-    Id ( htpy-map-equiv-Π {B' = B'} B e e (refl-htpy-equiv e))
-      ( ( htpy-map-equiv-Π-refl-htpy B e))
+    ( htpy-map-equiv-Π {B' = B'} B e e (refl-htpy-equiv e)) ＝
+    ( ( htpy-map-equiv-Π-refl-htpy B e))
   comp-htpy-map-equiv-Π {B' = B'} B e =
     comp-htpy-equiv e
       ( HTPY-map-equiv-Π B' B e)

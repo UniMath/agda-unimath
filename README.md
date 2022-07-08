@@ -6,11 +6,49 @@ The `agda-unimath` library is a new formalisation project for univalent mathemat
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
-## Joining the project
+## Getting started
 
-Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
+Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
 
-Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
+### Installation guides and tutorials for Agda
+
+ - Go to the [installation guide](https://agda.readthedocs.io/en/latest/getting-started/installation.html) on the Agda documentation page for instructions to install Agda.
+ - Once you have Agda up and running, you can copy our library to your machine using `git clone git@github.com:UniMath/agda-unimath.git`.
+ - If you're new to Agda, see the [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html) to learn how to use Agda.
+
+### Setting up emacs for literate Agda files
+
+The `agda-unimath` library is written in literate markdown agda. This means that all the files in the formalization have the extension `.lagda.md` and they consist of markdown text and `agda` code blocks. In order for your emacs to handle these files correctly, you need to add the following line to your `.emacs` file:
+
+```
+(setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
+```
+
+### Setting up emacs for the notation of identity types
+
+In the `agda-unimath` library we use two notations for the identity type. The identity type is first introduced using Martin-Löf's original notation `Id`. Then we introduce as a secondary option the infix notation `_＝_`.
+
+**Note**: The equals sign in the infix notation is not the standard equals sign on your keyboard, but it is the [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm). Note that the full width equals sign is slightly wider, and it is highlighted in blue just like all the other defined constructions in Agda. In order to type the full width equals sign in Agda emacs mode, you need to add it to your agda input method as follows:
+
+- Type `M-x customize-variable` and press enter.
+- Type `agda-input-user-translations` and press enter.
+- Click the `INS` button
+- Type the regular equals sign `=` in the Key sequence field.
+- Click the `INS` button
+- Type the full width equals sign `＝` in the translations field.
+- Click the `Apply and save` button.
+
+After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
+
+### After the setup
+
+With Agda installed and emacs correctly set up, you can start using the library. There is no need to install anything further. To compile the library, which is optional, run `make check` from the main folder of the repository. This generates the file `everything.lagda.md`, which imports all the files in the library and subsequently verifies them. You don't need to compile the entire library, however. You can simply open the file you're interested in and load it with Agda. This will verify the file and any prerequisites that are not already compiled.
+
+## Joining the project and contributing
+
+If you would like to contribute something to the `agda-unimath` library, the best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
+
+Once you've decided what you want to contribute, we recommend that you make your own fork of the library. Within your fork, make a separate branch in which you will be making your contribution. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
 ## Statement of inclusion
 
@@ -53,6 +91,8 @@ Ideally the first section of a file explains the idea, then proceeds to give the
 title: [The title of this file]
 ---
 
+Contributors : [The list of contributors]
+
 [ options
   module declaration
   imports]
@@ -61,7 +101,11 @@ title: [The title of this file]
 
 ( Informal description of the idea)
 
-## Definition
+## Definitions
+
+### Definition 1
+
+( Contributor of this definition (optional))
 
 [ formalization of the definition and immediately related structure]
 
@@ -69,13 +113,15 @@ title: [The title of this file]
 
 ### X is an example
 
-( informal explanation)
+( Contributor of this definition (optional)
+  Informal explanation)
 
 [ formalization that X is an example]
 
 ### Y is an example
 
-( informal explanation)
+( Contributor of this example (optional)
+  Informal explanation)
 
 [ formalization that Y is an example]
 
@@ -83,15 +129,21 @@ title: [The title of this file]
 
 ### Concise descrition of property 1
 
-( informal explanation)
+( Contributor of this property (optional)
+  Informal explanation)
 
 [ formalization of property 1]
 
 ### Concise description of property 2
 
-( informal explanation)
+( Contributor of this property (optional)
+  Informal explanation)
 
 [ formalization of property 2]
+
+## Related concepts
+
+## References
 ```
 
 ### KaTeX support for the website
@@ -176,3 +228,14 @@ module _
 * Function arguments should be implicit if they can "almost always" be inferred within proofs. It is often harder for Agda to infer an argument in a type declaration, but we prioritize usage in proofs in our decision to make an argument implicit.
 * If there are lots of implicit arguments that are common to a collection of proofs they should be extracted by using an anonymous module.
 * The library doesn't use variables at the moment. All variables are declared either as parameters of an anonymous module or in the type declaration of a construction.
+
+#### Coding practices we avoid
+
+* Unicode characters in names are allowed, but use them sparingly. If it is overdone, it will be more difficult to read.
+* Names of constructions should never refer to variable names.
+* Don't use deeply indented code if a two-space indentation level suffices. Deeply indented code will be rendered unreadable on smaller screens.
+* Don't use long lines of code, for the same reason.
+* `where` blocks are allowed, but keep them short. Large `where` blocks tend to result in non-reusable and non-refactorable code, and in some instances they slow down Agda's verification process.
+* We don't make much use of record types in the `agda-unimath` library. This is because they make it a hassle to characterize their identity type, which is often the first thing we do with a new type. If characterizing the identity type is less relevant, then of course it is convenient to use record types.
+* The use of the projection functions `pr1` and `pr2`, and especially their compositions, should be very limited. If a type of the form `Σ A B` is given a name, then it is also worth giving the projections a name. This makes the code more readable, and furthermore if we now jump to the definition of the named projection we will see an informative answer.
+* We don't name constructions after infix notation of any operation that occurs in it. Infix notation is always secondary, and in later names that refer to a construction that has infix notation, we refer to the primary prefix notation. For example, the name for commutativity of cartesian products is `commutative-prod` and not `commutative-×`.

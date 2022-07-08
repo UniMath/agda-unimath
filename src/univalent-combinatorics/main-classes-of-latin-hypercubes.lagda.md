@@ -36,18 +36,18 @@ Main-Class-Latin-Hypercube : (l1 l2 : Level) (n : ℕ) → UU (lsuc l1 ⊔ lsuc 
 Main-Class-Latin-Hypercube l1 l2 n =
   Σ ( unordered-tuple (succ-ℕ n) (Inhabited-Type l1))
     ( λ A →
-      Σ ( product-unordered-tuple-types
+      Σ ( product-unordered-tuple-types (succ-ℕ n)
           ( map-unordered-tuple (succ-ℕ n) type-Inhabited-Type A) → UU l2)
         ( λ R →
-          ( i : type-unordered-tuple A)
-          ( f : product-unordered-tuple-types
-                ( unordered-tuple-complement-point-type-unordered-tuple
+          ( i : type-unordered-tuple (succ-ℕ n) A)
+          ( f : product-unordered-tuple-types n
+                ( unordered-tuple-complement-point-type-unordered-tuple n
                   ( map-unordered-tuple (succ-ℕ n) type-Inhabited-Type A)
                   ( i))) →
           is-contr
-            ( Σ ( type-Inhabited-Type (element-unordered-tuple A i))
+            ( Σ ( type-Inhabited-Type (element-unordered-tuple (succ-ℕ n) A i))
                 ( λ a →
-                  R ( map-equiv-pr-product-unordered-tuple-types
+                  R ( map-equiv-pr-product-unordered-tuple-types n
                       ( map-unordered-tuple (succ-ℕ n) type-Inhabited-Type A)
                       ( i)
                       ( f)
@@ -61,21 +61,21 @@ Main-Class-Latin-Hypercube-of-Order : (n m : ℕ) → UU (lsuc lzero)
 Main-Class-Latin-Hypercube-of-Order n m =
   Σ ( unordered-tuple (succ-ℕ n) (UU-Fin m))
     ( λ A →
-      Σ ( product-unordered-tuple-types
-          ( map-unordered-tuple (succ-ℕ n) type-UU-Fin A) →
+      Σ ( product-unordered-tuple-types (succ-ℕ n)
+          ( map-unordered-tuple (succ-ℕ n) (type-UU-Fin m) A) →
           decidable-Prop lzero)
         ( λ R →
-          (i : type-unordered-tuple A)
-          (f : product-unordered-tuple-types
-               ( unordered-tuple-complement-point-type-unordered-tuple
-                 ( map-unordered-tuple (succ-ℕ n) type-UU-Fin A)
+          (i : type-unordered-tuple (succ-ℕ n) A)
+          (f : product-unordered-tuple-types n
+               ( unordered-tuple-complement-point-type-unordered-tuple n
+                 ( map-unordered-tuple (succ-ℕ n) (type-UU-Fin m) A)
                  ( i))) →
           is-contr
-            ( Σ ( type-UU-Fin (element-unordered-tuple A i))
+            ( Σ ( type-UU-Fin m (element-unordered-tuple (succ-ℕ n) A i))
                 ( λ a →
                   type-decidable-Prop
-                    ( R ( map-equiv-pr-product-unordered-tuple-types
-                          ( map-unordered-tuple (succ-ℕ n) type-UU-Fin A)
+                    ( R ( map-equiv-pr-product-unordered-tuple-types n
+                          ( map-unordered-tuple (succ-ℕ n) (type-UU-Fin m) A)
                           ( i)
                           ( f)
                           ( a)))))))
@@ -96,7 +96,7 @@ is-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
       ( λ X →
         is-π-finite-Π
           ( succ-ℕ k)
-          ( is-finite-type-UU-Fin X)
+          ( is-finite-type-UU-Fin (succ-ℕ n) X)
           ( λ i → is-π-finite-UU-Fin (succ-ℕ k) m)))
     ( λ A →
       is-π-finite-Σ k
@@ -104,35 +104,44 @@ is-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
           ( succ-ℕ k)
           ( is-finite-Π
             ( is-finite-Π
-              ( is-finite-type-UU-Fin (type-unordered-tuple-UU-Fin A))
-              ( λ i → is-finite-type-UU-Fin (element-unordered-tuple A i)))
+              ( is-finite-type-UU-Fin
+                ( succ-ℕ n)
+                ( type-unordered-tuple-UU-Fin (succ-ℕ n) A))
+              ( λ i →
+                is-finite-type-UU-Fin m
+                  ( element-unordered-tuple (succ-ℕ n) A i)))
             ( λ f → is-finite-decidable-Prop)))
         ( λ R →
           is-π-finite-is-finite k
             ( is-finite-Π
-              ( is-finite-type-UU-Fin (type-unordered-tuple-UU-Fin A))
+              ( is-finite-type-UU-Fin
+                ( succ-ℕ n)
+                ( type-unordered-tuple-UU-Fin (succ-ℕ n) A))
               ( λ i →
                 is-finite-Π
                   ( is-finite-Π
-                    ( is-finite-has-cardinality
-                      ( has-cardinality-type-complement-point-UU-Fin
-                        ( pair (type-unordered-tuple-UU-Fin A) i)))
+                    ( is-finite-has-cardinality n
+                      ( has-cardinality-type-complement-point-UU-Fin n
+                        ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) A) i)))
                     ( λ j →
-                      is-finite-type-UU-Fin
-                        ( element-unordered-tuple A (pr1 j))))
+                      is-finite-type-UU-Fin m
+                        ( element-unordered-tuple (succ-ℕ n) A (pr1 j))))
                   ( λ f →
                     is-finite-is-decidable-Prop
                       ( is-contr-Prop _)
                       ( is-decidable-is-contr-is-finite
-                        ( is-finite-decidable-subtype
+                        ( is-finite-type-decidable-subtype
                           ( λ x →
-                            R ( map-equiv-pr-product-unordered-tuple-types
-                                ( map-unordered-tuple (succ-ℕ n) type-UU-Fin A)
+                            R ( map-equiv-pr-product-unordered-tuple-types n
+                                ( map-unordered-tuple
+                                  ( succ-ℕ n)
+                                  ( type-UU-Fin m)
+                                  ( A))
                                 ( i)
                                 ( f)
                                 ( x)))
-                          ( is-finite-type-UU-Fin
-                            ( element-unordered-tuple A i)))))))))
+                          ( is-finite-type-UU-Fin m
+                            ( element-unordered-tuple (succ-ℕ n) A i)))))))))
 ```
 
 ### The sequence of main classes of Latin hypercubes of fixed finite order

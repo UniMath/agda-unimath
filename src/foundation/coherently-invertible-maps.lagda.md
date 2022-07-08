@@ -1,4 +1,6 @@
-# Coherently invertible maps
+---
+title: Coherently invertible maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,14 +26,13 @@ open import foundation-core.universe-levels using (Level; UU)
 
 open import foundation.contractible-types using
   ( is-contr-equiv'; is-contr-Σ; is-contr-Π)
-open import
-  foundation.distributivity-of-dependent-functions-over-dependent-pairs using
-  ( distributive-Π-Σ)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-is-coherently-invertible; is-contr-sec-is-equiv;
     is-emb-is-equiv; is-coherently-invertible-is-equiv; is-property-is-equiv;
     is-equiv-id; is-equiv-comp)
 open import foundation.identity-types using (Id; ap; equiv-inv; refl)
+open import foundation.type-theoretic-principle-of-choice using
+  ( distributive-Π-Σ)
 ```
 
 ## Properties

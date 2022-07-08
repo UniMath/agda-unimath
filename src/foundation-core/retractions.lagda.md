@@ -1,4 +1,6 @@
-# Retractions
+---
+title: Retractions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --safe #-}
@@ -9,7 +11,7 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using
-  ( Id; inv; _∙_; ap; refl; left-inv)
+  ( _＝_; inv; _∙_; ap; refl; left-inv)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -58,7 +60,7 @@ module _
 ap-retraction :
   {i j : Level} {A : UU i} {B : UU j}
   (i : A → B) (r : B → A) (H : (r ∘ i) ~ id)
-  (x y : A) → Id (i x) (i y) → Id x y
+  (x y : A) → i x ＝ i y → x ＝ y
 ap-retraction i r H x y p =
     ( inv (H x)) ∙ ((ap r p) ∙ (H y))
 
@@ -76,7 +78,7 @@ pr2 (retr-ap i (pair r H) x y) = isretr-ap-retraction i r H x y
 
 retract-eq :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) →
-  (x y : A) → (Id x y) retract-of (Id (pr1 R x) (pr1 R y))
+  (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)
 pr1 (retract-eq (pair i (pair r H)) x y) = ap i
 pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
 ```

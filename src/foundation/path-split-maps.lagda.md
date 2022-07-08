@@ -1,4 +1,6 @@
-# Path-split maps
+---
+title: Path-split maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

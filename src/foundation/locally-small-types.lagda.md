@@ -1,4 +1,6 @@
-# Locally small types
+---
+title: Locally small types
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,7 +11,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (map-equiv; equiv-ap; _≃_)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id)
+open import foundation.identity-types using (_＝_)
 open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
 open import foundation.small-types using
   ( is-small; is-small-is-contr; is-small-equiv; is-small-Π; is-prop-is-small)
@@ -26,7 +28,7 @@ A type is said to be locally small if its identity types are small.
 ```agda
 is-locally-small :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-is-locally-small l A = (x y : A) → is-small l (Id x y)
+is-locally-small l A = (x y : A) → is-small l (x ＝ y)
 ```
 
 ## Properties
@@ -38,7 +40,7 @@ abstract
   is-locally-small-is-small :
     (l : Level) {l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
   pr1 (is-locally-small-is-small l (pair X e) x y) =
-    Id (map-equiv e x) (map-equiv e y)
+    map-equiv e x ＝ map-equiv e y
   pr2 (is-locally-small-is-small l (pair X e) x y) = equiv-ap e x y
 ```
 
@@ -81,7 +83,7 @@ abstract
   is-prop-is-locally-small :
     (l : Level) {l1 : Level} (A : UU l1) → is-prop (is-locally-small l A)
   is-prop-is-locally-small l A =
-    is-prop-Π (λ x → is-prop-Π (λ y → is-prop-is-small l (Id x y)))
+    is-prop-Π (λ x → is-prop-Π (λ y → is-prop-is-small l (x ＝ y)))
 
 is-locally-small-Prop :
   (l : Level) {l1 : Level} (A : UU l1) → UU-Prop (lsuc l ⊔ l1)
