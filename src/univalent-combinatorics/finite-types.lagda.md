@@ -8,11 +8,10 @@ title: Finite types
 module univalent-combinatorics.finite-types where
 
 open import elementary-number-theory.equality-natural-numbers using
-  ( is-set-ℕ; ℕ-Set; has-decidable-equality-ℕ)
+  ( has-decidable-equality-ℕ)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
+  ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-set-ℕ; ℕ-Set)
 
-open import foundation.booleans using (bool)
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
     id-equiv-component-UU; equiv-eq-component-UU-Level; equiv-eq-component-UU;
@@ -28,8 +27,6 @@ open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-Prop;
     has-decidable-equality-equiv')
-open import foundation.decidable-propositions using
-  ( decidable-Prop; equiv-bool-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-inhabited-or-empty; is-inhabited-or-empty-Prop;
     is-decidable-iff)
@@ -78,8 +75,7 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin; equiv-bool-Fin-two-ℕ;
-    is-contr-Fin-one-ℕ)
+  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin; is-contr-Fin-one-ℕ)
 ```
 
 ## Idea
@@ -315,19 +311,6 @@ abstract
     unit-trunc-Prop (equiv-is-contr is-contr-Fin-one-ℕ H)
 ```
 
-### Decidable propositions are finite
-
-```agda
-abstract
-  is-finite-is-decidable-Prop :
-    {l : Level} (P : UU-Prop l) →
-    is-decidable (type-Prop P) → is-finite (type-Prop P)
-  is-finite-is-decidable-Prop P (inl x) =
-    is-finite-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) x)
-  is-finite-is-decidable-Prop P (inr x) =
-    is-finite-is-empty x
-```
-
 ### The standard finite types are finite
 
 ```agda
@@ -350,21 +333,6 @@ has-cardinality-raise-Fin {l} k = unit-trunc-Prop (equiv-raise-Fin l k)
 Fin-UU-Fin-Level : (l : Level) (k : ℕ) → UU-Fin-Level l k
 pr1 (Fin-UU-Fin-Level l k) = raise-Fin l k
 pr2 (Fin-UU-Fin-Level l k) = has-cardinality-raise-Fin k
-```
-
-### The type of booleans is finite
-
-```agda
-is-finite-bool : is-finite bool
-is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
-```
-
-### The type of decidable propositions of any universe level is finite
-
-```agda
-is-finite-decidable-Prop : {l : Level} → is-finite (decidable-Prop l)
-is-finite-decidable-Prop {l} =
-  is-finite-equiv' equiv-bool-decidable-Prop is-finite-bool
 ```
 
 ### Every type of cardinality `k` is finite

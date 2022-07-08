@@ -7,16 +7,14 @@ title: The standard finite types
 
 module univalent-combinatorics.standard-finite-types where
 
-open import elementary-number-theory.equality-natural-numbers using (is-set-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
     leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ; is-set-ℕ)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
 
-open import foundation.booleans using (bool; true; false)
 open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -156,36 +154,6 @@ is-not-contractible-Fin zero-ℕ f = is-not-contractible-empty
 is-not-contractible-Fin (succ-ℕ zero-ℕ) f C = f refl
 is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
-```
-
-### `Fin 2` is equivalent to `bool`
-
-```agda
-bool-Fin-two-ℕ : Fin 2 → bool
-bool-Fin-two-ℕ (inl (inr star)) = true
-bool-Fin-two-ℕ (inr star) = false
-
-Fin-two-ℕ-bool : bool → Fin 2
-Fin-two-ℕ-bool true = inl (inr star)
-Fin-two-ℕ-bool false = inr star
-
-abstract
-  isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
-  isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
-  isretr-Fin-two-ℕ-bool (inr star) = refl
-
-abstract
-  issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
-  issec-Fin-two-ℕ-bool true = refl
-  issec-Fin-two-ℕ-bool false = refl
-
-equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
-pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
-pr2 equiv-bool-Fin-two-ℕ =
-  is-equiv-has-inverse
-    ( Fin-two-ℕ-bool)
-    ( issec-Fin-two-ℕ-bool)
-    ( isretr-Fin-two-ℕ-bool)
 ```
 
 ### The inclusion of Fin k into ℕ

@@ -9,10 +9,12 @@ module elementary-number-theory.equality-natural-numbers where
 
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
-    is-not-one-ℕ)
+    is-not-one-ℕ; Eq-ℕ; eq-Eq-ℕ; Eq-eq-ℕ; is-set-ℕ; refl-Eq-ℕ; ℕ-Set)
+
+open import foundation-core.decidable-propositions using (decidable-Prop)
+
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-neg)
@@ -31,49 +33,11 @@ open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
-# Equality on the natural numbers
+## Properties
 
-## Observational equality on the natural numbers
+### The type of natural numbers has decidable equality
 
 ```agda
-Eq-ℕ : ℕ → ℕ → UU lzero
-Eq-ℕ zero-ℕ zero-ℕ = unit
-Eq-ℕ zero-ℕ (succ-ℕ n) = empty
-Eq-ℕ (succ-ℕ m) zero-ℕ = empty
-Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
-
-abstract
-  is-prop-Eq-ℕ :
-    (n m : ℕ) → is-prop (Eq-ℕ n m)
-  is-prop-Eq-ℕ zero-ℕ zero-ℕ = is-prop-unit
-  is-prop-Eq-ℕ zero-ℕ (succ-ℕ m) = is-prop-empty
-  is-prop-Eq-ℕ (succ-ℕ n) zero-ℕ = is-prop-empty
-  is-prop-Eq-ℕ (succ-ℕ n) (succ-ℕ m) = is-prop-Eq-ℕ n m
-
-refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
-refl-Eq-ℕ zero-ℕ = star
-refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
-
-Eq-eq-ℕ : {x y : ℕ} → x ＝ y → Eq-ℕ x y
-Eq-eq-ℕ {x} {.x} refl = refl-Eq-ℕ x
-
-eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
-eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
-eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
-
-abstract
-  is-set-ℕ : is-set ℕ
-  is-set-ℕ =
-    is-set-prop-in-id
-      Eq-ℕ
-      is-prop-Eq-ℕ
-      refl-Eq-ℕ
-      eq-Eq-ℕ
-
-ℕ-Set : UU-Set lzero
-pr1 ℕ-Set = ℕ
-pr2 ℕ-Set = is-set-ℕ
-
 is-decidable-Eq-ℕ :
   (m n : ℕ) → is-decidable (Eq-ℕ m n)
 is-decidable-Eq-ℕ zero-ℕ zero-ℕ = inl star

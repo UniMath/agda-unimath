@@ -13,7 +13,7 @@ open import elementary-number-theory.divisibility-natural-numbers using
   ( is-one-is-divisor-below-ℕ; div-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
     transitive-div-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ; Eq-eq-ℕ; is-decidable-is-zero-ℕ)
+  ( is-decidable-is-one-ℕ; is-decidable-is-zero-ℕ)
 open import elementary-number-theory.factorials using
   ( factorial-ℕ; leq-factorial-ℕ; div-factorial-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -29,7 +29,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( right-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ; is-not-one-ℕ;
-    is-successor-is-nonzero-ℕ)
+    is-successor-is-nonzero-ℕ; Eq-eq-ℕ)
 open import elementary-number-theory.prime-numbers using
   ( is-one-is-proper-divisor-ℕ; is-prime-ℕ; is-prime-is-prime-easy-ℕ;
     is-prime-two-ℕ; is-decidable-is-prime-ℕ)

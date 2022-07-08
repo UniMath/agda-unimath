@@ -14,6 +14,7 @@ open import
   ( ε-operator-decidable-subtype-Fin)
 
 open import foundation.automorphisms using (Aut)
+open import foundation.booleans using (equiv-bool-Fin-two-ℕ)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.decidable-equality using
@@ -85,7 +86,7 @@ open import univalent-combinatorics.finite-types using
     number-of-elements-is-finite; is-finite-type-UU-Fin-Level; is-finite-equiv;
     is-finite-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin; equiv-bool-Fin-two-ℕ)
+  ( Fin; zero-Fin; one-Fin)
 ```
 
 ## Idea

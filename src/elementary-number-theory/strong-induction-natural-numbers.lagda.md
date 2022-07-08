@@ -7,12 +7,12 @@ title: The strong induction principle for the natural numbers
 
 module elementary-number-theory.strong-induction-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-set-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( _≤-ℕ_; refl-leq-ℕ; leq-ℕ; cases-leq-succ-ℕ; is-prop-leq-ℕ; neg-succ-leq-ℕ;
     leq-eq-left-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-set-ℕ)
+
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

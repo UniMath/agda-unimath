@@ -9,6 +9,7 @@ module foundation.sets where
 
 open import foundation-core.sets public
 
+open import foundation-core.1-types using (is-1-type)
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_; is-equiv)
@@ -25,7 +26,17 @@ open import foundation.subuniverses using
     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
 open import foundation.truncated-types using
   ( is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
-    is-trunc-function-type; is-trunc-equiv-is-trunc)
+    is-trunc-function-type; is-trunc-equiv-is-trunc; is-trunc-UU-Trunc)
+```
+
+## Properties
+
+### The type of all sets in a universe is a 1-type
+
+```
+abstract
+  is-1-type-UU-Set : {l : Level}  → is-1-type (UU-Set l)
+  is-1-type-UU-Set = is-trunc-UU-Trunc zero-𝕋
 ```
 
 ### Any contractible type is a set

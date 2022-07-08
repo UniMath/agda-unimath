@@ -19,6 +19,8 @@ open import foundation.contractible-types using
 open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
+open import foundation.decidable-propositions using
+  ( is-finite-is-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-Prop; is-decidable-equiv'; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -119,8 +121,7 @@ open import univalent-combinatorics.finite-types using
     is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
     is-path-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
     is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
-    is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
-    is-finite-is-decidable-Prop)
+    is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
 open import univalent-combinatorics.function-types using
