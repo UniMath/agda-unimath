@@ -820,7 +820,8 @@ has-finite-connected-components-Σ' zero-ℕ e H K =
     ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
 has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
   apply-universal-property-trunc-Prop
-    ( has-presentation-of-cardinality-has-cardinality-components (succ-ℕ k)
+    ( has-presentation-of-cardinality-has-cardinality-components
+      ( succ-ℕ k)
       ( unit-trunc-Prop e))
     ( has-finite-connected-components-Prop (Σ A B))
     ( α)
