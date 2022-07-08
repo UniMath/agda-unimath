@@ -12,11 +12,12 @@ open import elementary-number-theory.decidable-types using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-one-ℕ; leq-div-succ-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ; Eq-eq-ℕ; is-set-ℕ)
+  ( is-decidable-is-one-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( right-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-not-one-two-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-not-one-two-ℕ;
+    Eq-eq-ℕ; is-set-ℕ)
 open import elementary-number-theory.proper-divisors-natural-numbers using
   ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
     is-decidable-is-proper-divisor-ℕ; is-prop-is-proper-divisor-ℕ;

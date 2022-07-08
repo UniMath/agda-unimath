@@ -8,11 +8,11 @@ title: Relatively prime natural numbers
 module elementary-number-theory.relatively-prime-natural-numbers where
 
 open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ; is-set-ℕ)
+  ( is-decidable-is-one-ℕ)
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
   using (gcd-ℕ)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-set-ℕ)
 
 open import foundation.decidable-propositions using
   ( is-decidable-prop)

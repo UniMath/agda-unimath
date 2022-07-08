@@ -7,10 +7,9 @@ title: Addition on the natural numbers
 
 module elementary-number-theory.addition-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-set-ℕ; ℕ-Set)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ;
+    is-set-ℕ; ℕ-Set)
   
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

@@ -20,7 +20,7 @@ open import elementary-number-theory.addition-natural-numbers using
 open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Σ-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ; ℕ-Set)
+  ( has-decidable-equality-ℕ)
 open import elementary-number-theory.euclidean-division-natural-numbers using
   ( remainder-euclidean-division-ℕ;
     strict-upper-bound-remainder-euclidean-division-ℕ;
@@ -40,7 +40,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; succ-ℕ; zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ; is-successor-ℕ;
-    is-successor-is-nonzero-ℕ; is-zero-ℕ)
+    is-successor-is-nonzero-ℕ; is-zero-ℕ; ℕ-Set)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ; minimal-element-ℕ-Prop)

@@ -22,8 +22,8 @@ open import foundation.identity-types using
     distributive-inv-concat; inv-inv)
 open import foundation.propositional-truncations using (is-prop-type-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
-open import foundation.sets using (UU-Set; is-set; type-Set; is-set-type-Set; is-prop-is-set)
-open import foundation.subuniverses using (is-one-type-UU-Set)
+open import foundation.sets using
+  ( UU-Set; is-set; type-Set; is-set-type-Set; is-prop-is-set; is-1-type-UU-Set)
 open import foundation.truncated-types using (is-trunc-is-emb; is-trunc-Id)
 open import foundation.truncation-levels using (zero-𝕋; neg-one-𝕋)
 open import foundation.univalence using
@@ -196,7 +196,7 @@ module _
     type-hom-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+        ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
   pr1 hom-abstract-automorphism-group-loop-group-Set p =
     eq-pair-Σ
       ( eq-pair-Σ
@@ -238,7 +238,7 @@ module _
   hom-inv-abstract-automorphism-group-loop-group-Set :
     type-hom-Group
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+        ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
       ( loop-group-Set X)
   pr1 hom-inv-abstract-automorphism-group-loop-group-Set p =
     pr1 (pair-eq-Σ (pr1 (pair-eq-Σ p)))
@@ -252,15 +252,15 @@ module _
     Id
       ( comp-hom-Group
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
         ( loop-group-Set X)
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
         ( hom-abstract-automorphism-group-loop-group-Set)
         ( hom-inv-abstract-automorphism-group-loop-group-Set))
       ( id-hom-Group
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l))))
+          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set)))
   is-sec-hom-inv-abstract-automorphism-group-loop-group-Set =
     eq-pair-Σ
       ( eq-htpy
@@ -283,10 +283,10 @@ module _
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group
             ( abstract-group-Concrete-Group
-              ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l))))
+              ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set)))
           ( semigroup-Group
             ( abstract-group-Concrete-Group
-              ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l))))
+              ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set)))
           ( id)))
 
   is-retr-hom-inv-abstract-automorphism-group-loop-group-Set :
@@ -294,7 +294,7 @@ module _
       ( comp-hom-Group
         ( loop-group-Set X)
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
         ( loop-group-Set X)
         ( hom-inv-abstract-automorphism-group-loop-group-Set)
         ( hom-abstract-automorphism-group-loop-group-Set))
@@ -326,7 +326,7 @@ module _
     type-iso-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set l) X (is-one-type-UU-Set l)))
+        ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
   pr1 iso-abstract-automorphism-group-loop-group-Set = hom-abstract-automorphism-group-loop-group-Set
   pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) = hom-inv-abstract-automorphism-group-loop-group-Set
   pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-sec-hom-inv-abstract-automorphism-group-loop-group-Set

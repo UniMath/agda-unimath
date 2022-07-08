@@ -7,8 +7,10 @@ title: Decidable propositions
 
 module foundation.decidable-propositions where
 
+open import foundation-core.decidable-propositions public
+
 open import foundation.booleans using
-  ( bool; true; false; is-set-bool; neq-false-true-bool)
+  ( bool; true; false; is-set-bool; neq-false-true-bool; is-finite-bool)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (equiv-is-contr; eq-is-contr)
 open import foundation.coproduct-types using
@@ -46,47 +48,13 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.unit-type using
   ( is-contr-unit; raise-unit-Prop; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea
 
 A decidable proposition is a proposition that has a decidable underlying type.
-
-## Definition
-
-```agda
-is-decidable-prop : {l : Level} → UU l → UU l
-is-decidable-prop A = is-prop A × is-decidable A
-
-decidable-Prop :
-  (l : Level) → UU (lsuc l)
-decidable-Prop l = Σ (UU l) is-decidable-prop
-
-module _
-  {l : Level} (P : decidable-Prop l)
-  where
-
-  prop-decidable-Prop : UU-Prop l
-  prop-decidable-Prop = tot (λ x → pr1) P
-
-  type-decidable-Prop : UU l
-  type-decidable-Prop = type-Prop prop-decidable-Prop
-
-  abstract
-    is-prop-type-decidable-Prop : is-prop type-decidable-Prop
-    is-prop-type-decidable-Prop = is-prop-type-Prop prop-decidable-Prop
-
-  is-decidable-type-decidable-Prop : is-decidable type-decidable-Prop
-  is-decidable-type-decidable-Prop = pr2 (pr2 P)
-
-  is-decidable-prop-type-decidable-Prop : is-decidable-prop type-decidable-Prop
-  is-decidable-prop-type-decidable-Prop = pr2 P
-
-  is-decidable-prop-decidable-Prop : UU-Prop l
-  pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
-  pr2 is-decidable-prop-decidable-Prop =
-    is-prop-is-decidable is-prop-type-decidable-Prop
-```
 
 ## Properties
 
@@ -261,4 +229,29 @@ abstract
   pr1 (is-small-decidable-Prop l1 l2) = raise l2 bool
   pr2 (is-small-decidable-Prop l1 l2) =
     equiv-raise l2 bool ∘e equiv-bool-decidable-Prop
+```
+
+### Decidable propositions are finite
+
+```agda
+abstract
+  is-finite-is-decidable-Prop :
+    {l : Level} (P : UU-Prop l) →
+    is-decidable (type-Prop P) → is-finite (type-Prop P)
+  is-finite-is-decidable-Prop P (inl x) =
+    is-finite-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) x)
+  is-finite-is-decidable-Prop P (inr x) =
+    is-finite-is-empty x
+```
+
+### The type of decidable propositions of any universe level is finite
+
+```agda
+is-finite-decidable-Prop : {l : Level} → is-finite (decidable-Prop l)
+is-finite-decidable-Prop {l} =
+  is-finite-equiv' equiv-bool-decidable-Prop is-finite-bool
+
+decidable-Prop-𝔽-Level : (l : Level) → 𝔽-Level (lsuc l)
+pr1 (decidable-Prop-𝔽-Level l) = decidable-Prop l
+pr2 (decidable-Prop-𝔽-Level l) = is-finite-decidable-Prop
 ```
