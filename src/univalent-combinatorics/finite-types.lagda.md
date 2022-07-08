@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-set-ℕ; ℕ-Set)
 
+open import foundation.1-types using (is-1-type; UU-1-Type)
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
     id-equiv-component-UU; equiv-eq-component-UU-Level; equiv-eq-component-UU;
@@ -45,7 +46,7 @@ open import foundation.functoriality-propositional-truncation using
 open import foundation.identity-types using
   ( refl; Id; _∙_; ap; tr; equiv-tr; inv)
 open import foundation.mere-equivalences using
-  ( mere-equiv-Prop; mere-equiv)
+  ( mere-equiv-Prop; mere-equiv; is-set-mere-equiv')
 open import foundation.propositional-truncations using
   ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
     apply-universal-property-trunc-Prop; type-trunc-Prop; ind-trunc-Prop;
@@ -55,7 +56,8 @@ open import foundation.propositions using
     all-elements-equal; is-prop-all-elements-equal; eq-is-prop; eq-is-prop';
     equiv-prop; is-equiv-is-prop)
 open import foundation.raising-universe-levels using (equiv-raise)
-open import foundation.sets using (is-set; is-set-Prop; Id-Prop)
+open import foundation.sets using
+  ( is-set; is-set-Prop; Id-Prop; is-set-equiv; is-set-equiv-is-set; UU-Set)
 open import foundation.subtypes using (eq-subtype)
 open import foundation.subuniverses using
   ( extensionality-subuniverse; extensionality-fam-subuniverse)
@@ -75,7 +77,8 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin; is-contr-Fin-one-ℕ)
+  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin; is-contr-Fin-one-ℕ;
+    is-set-Fin)
 ```
 
 ## Idea
@@ -465,6 +468,46 @@ eq-cardinality H K =
         ( λ f → is-injective-Fin (inv-equiv f ∘e e)))
 ```
 
+### Any finite type is a set
+
+```agda
+abstract
+  is-set-is-finite :
+    {l : Level} {X : UU l} → is-finite X → is-set X
+  is-set-is-finite {l} {X} H =
+    apply-universal-property-trunc-Prop H
+      ( is-set-Prop X)
+      ( λ e → is-set-count e)
+
+set-𝔽 : 𝔽 → UU-Set lzero
+pr1 (set-𝔽 X) = type-𝔽 X
+pr2 (set-𝔽 X) = is-set-is-finite (is-finite-type-𝔽 X)
+```
+
+### Any type of cardinality `k` is a set
+
+```agda
+is-set-has-cardinality :
+  {l1 : Level} {X : UU l1} (k : ℕ) → has-cardinality k X → is-set X
+is-set-has-cardinality k H = is-set-mere-equiv' H (is-set-Fin k)
+
+is-set-type-UU-Fin-Level :
+  {l : Level} (k : ℕ) (X : UU-Fin-Level l k) → is-set (type-UU-Fin-Level k X)
+is-set-type-UU-Fin-Level k X =
+  is-set-has-cardinality k (has-cardinality-type-UU-Fin-Level k X)
+
+set-UU-Fin-Level : {l1 : Level} (k : ℕ) → UU-Fin-Level l1 k → UU-Set l1
+pr1 (set-UU-Fin-Level k X) = type-UU-Fin-Level k X
+pr2 (set-UU-Fin-Level k X) = is-set-type-UU-Fin-Level k X
+
+is-set-type-UU-Fin :
+  (k : ℕ) (X : UU-Fin k) → is-set (type-UU-Fin k X)
+is-set-type-UU-Fin = is-set-type-UU-Fin-Level
+
+set-UU-Fin : (k : ℕ) → UU-Fin k → UU-Set lzero
+set-UU-Fin = set-UU-Fin-Level
+```
+
 ### A finite type is empty if and only if it has 0 elements
 
 ```agda
@@ -650,6 +693,33 @@ equiv-equiv-eq-UU-Fin-Level :
   Id X Y ≃ equiv-UU-Fin-Level k X Y
 pr1 (equiv-equiv-eq-UU-Fin-Level k X Y) = equiv-eq-UU-Fin-Level k
 pr2 (equiv-equiv-eq-UU-Fin-Level k X Y) = is-equiv-equiv-eq-UU-Fin-Level k X Y
+```
+
+### The type `UU-Fin-Level l k` is a 1-type
+
+```agda
+is-1-type-UU-Fin-Level : {l : Level} (k : ℕ) → is-1-type (UU-Fin-Level l k)
+is-1-type-UU-Fin-Level k X Y =
+  is-set-equiv
+    ( equiv-UU-Fin-Level k X Y)
+    ( equiv-equiv-eq-UU-Fin-Level k X Y)
+    ( is-set-equiv-is-set
+      ( is-set-type-UU-Fin-Level k X)
+      ( is-set-type-UU-Fin-Level k Y))
+
+UU-Fin-Level-1-Type : (l : Level) (k : ℕ) → UU-1-Type (lsuc l)
+pr1 (UU-Fin-Level-1-Type l k) = UU-Fin-Level l k
+pr2 (UU-Fin-Level-1-Type l k) = is-1-type-UU-Fin-Level k
+```
+
+### The type `UU-Fin k` is a 1-type
+
+```agda
+is-1-type-UU-Fin : (k : ℕ) → is-1-type (UU-Fin k)
+is-1-type-UU-Fin = is-1-type-UU-Fin-Level
+
+UU-Fin-1-Type : ℕ → UU-1-Type (lsuc lzero)
+UU-Fin-1-Type = UU-Fin-Level-1-Type lzero
 ```
 
 ### We characterize the identity type of `UU-Fin`

@@ -154,7 +154,6 @@ abstract
     is-trunc k A → is-trunc k B
   is-trunc-equiv' k A (pair f is-equiv-f) =
     is-trunc-is-equiv' k A f is-equiv-f
-
 ```
 
 ### If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
