@@ -25,7 +25,7 @@ open import foundation.raising-universe-levels using (raise-Prop; map-raise)
 open import foundation.sets using (is-set; is-set-function-type; UU-Set)
 open import foundation.subtypes using
   ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
-    is-set-type-subtype; is-prop-is-in-subtype)
+    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype)
 open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
@@ -137,15 +137,15 @@ module _
   type-Subgroup : UU (l1 ⊔ l2)
   type-Subgroup = type-subtype subset-Subgroup
 
-  map-inclusion-Subgroup : type-Subgroup → type-Group G
-  map-inclusion-Subgroup = inclusion-subtype subset-Subgroup
+  inclusion-Subgroup : type-Subgroup → type-Group G
+  inclusion-Subgroup = inclusion-subtype subset-Subgroup
 
-  type-predicate-Subgroup : type-Group G → UU l2
-  type-predicate-Subgroup x = type-Prop (subset-Subgroup x)
+  is-in-Subgroup : type-Group G → UU l2
+  is-in-Subgroup = is-in-subtype subset-Subgroup
 
-  is-prop-type-predicate-Subgroup :
-    (x : type-Group G) → is-prop (type-predicate-Subgroup x)
-  is-prop-type-predicate-Subgroup x = is-prop-type-Prop (subset-Subgroup x)
+  is-prop-is-in-Subgroup :
+    (x : type-Group G) → is-prop (is-in-Subgroup x)
+  is-prop-is-in-Subgroup = is-prop-is-in-subtype subset-Subgroup
 
   is-subgroup-Subgroup : is-subgroup-subset-Group G subset-Subgroup
   is-subgroup-Subgroup = pr2 H

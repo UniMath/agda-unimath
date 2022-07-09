@@ -1,5 +1,5 @@
 ---
-title: Conjucation in groups
+title: Conjugation in groups
 ---
 
 ```agda

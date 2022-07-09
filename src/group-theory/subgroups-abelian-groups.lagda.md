@@ -28,8 +28,7 @@ open import group-theory.subgroups using
     is-prop-is-closed-under-mul-subset-Group; is-closed-under-inv-subset-Group;
     is-prop-is-closed-under-inv-subset-Group; is-subgroup-subset-Group;
     is-prop-is-subgroup-subset-Group; Subgroup; subset-Subgroup;
-    is-emb-subset-Subgroup; type-predicate-Subgroup;
-    is-prop-type-predicate-Subgroup;
+    is-emb-subset-Subgroup; is-in-Subgroup; is-prop-is-in-Subgroup;
     is-subgroup-Subgroup; contains-unit-Subgroup; is-closed-under-mul-Subgroup;
     is-closed-under-inv-Subgroup; type-group-Subgroup;
     map-inclusion-group-Subgroup;
@@ -110,13 +109,13 @@ module _
   subset-Subgroup-Ab : subset-Ab l2 A
   subset-Subgroup-Ab = subset-Subgroup (group-Ab A) B
 
-  type-subset-Subgroup-Ab : type-Ab A → UU l2
-  type-subset-Subgroup-Ab = type-predicate-Subgroup (group-Ab A) B
+  is-in-Subgroup-Ab : type-Ab A → UU l2
+  is-in-Subgroup-Ab = is-in-Subgroup (group-Ab A) B
 
-  is-prop-type-subset-Subgroup-Ab :
-    (x : type-Ab A) → is-prop (type-subset-Subgroup-Ab x)
-  is-prop-type-subset-Subgroup-Ab =
-    is-prop-type-predicate-Subgroup (group-Ab A) B
+  is-prop-is-in-Subgroup-Ab :
+    (x : type-Ab A) → is-prop (is-in-Subgroup-Ab x)
+  is-prop-is-in-Subgroup-Ab =
+    is-prop-is-in-Subgroup (group-Ab A) B
 
   is-subgroup-Subgroup-Ab :
     is-subgroup-Ab A subset-Subgroup-Ab
