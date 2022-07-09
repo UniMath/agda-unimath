@@ -515,10 +515,13 @@ open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
+open import group-theory.fixed-points-higher-group-actions
 open import group-theory.free-concrete-group-actions
+open import group-theory.free-higher-group-actions
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
 open import group-theory.groups
+open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-concrete-group-actions
@@ -544,6 +547,7 @@ open import group-theory.monomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
+open import group-theory.orbits-higher-group-actions
 open import group-theory.orbits-monoid-actions
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
