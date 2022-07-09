@@ -34,6 +34,7 @@ open import group-theory.homomorphisms-abelian-groups public
 open import group-theory.homomorphisms-concrete-group-actions public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
+open import group-theory.homomorphisms-higher-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.inverse-semigroups public
