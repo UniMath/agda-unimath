@@ -526,6 +526,7 @@ open import group-theory.homomorphisms-concrete-group-actions
 open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-higher-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
 open import group-theory.inverse-semigroups
