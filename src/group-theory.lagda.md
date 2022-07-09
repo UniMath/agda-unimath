@@ -25,10 +25,13 @@ open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
 open import group-theory.equivalences-group-actions public
 open import group-theory.equivalences-semigroups public
-open import group-theory.examples-higher-groups public
+open import group-theory.fixed-points-higher-group-actions public
+open import group-theory.free-concrete-group-actions public
+open import group-theory.free-higher-group-actions public
 open import group-theory.furstenberg-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public
+open import group-theory.higher-group-actions public
 open import group-theory.higher-groups public
 open import group-theory.homomorphisms-abelian-groups public
 open import group-theory.homomorphisms-concrete-group-actions public
@@ -37,6 +40,7 @@ open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-higher-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.integers-higher-group public
 open import group-theory.inverse-semigroups public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
@@ -52,6 +56,8 @@ open import group-theory.normal-subgroups public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
+open import group-theory.orbits-higher-group-actions public
+open import group-theory.orbits-monoid-actions public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public
@@ -66,9 +72,11 @@ open import group-theory.subgroups public
 open import group-theory.subgroups-abelian-groups public
 open import group-theory.subgroups-concrete-groups public
 open import group-theory.subgroups-generated-by-subsets-groups public
+open import group-theory.subgroups-higher-groups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.symmetric-groups public
+open import group-theory.symmetric-higher-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public
