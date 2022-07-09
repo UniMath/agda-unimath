@@ -1,4 +1,6 @@
-# Cayley's theorem
+---
+title: Cayley's theorem
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

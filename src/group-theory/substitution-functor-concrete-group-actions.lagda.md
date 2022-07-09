@@ -1,11 +1,11 @@
 ---
-title: Substitution of concrete group actions along concrete group homomorphisms
+title: The substitution functor of concrete group actions
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.substitutions-concrete-group-actions where
+module group-theory.substitution-functor-concrete-group-actions where
 
 open import foundation.universe-levels
 

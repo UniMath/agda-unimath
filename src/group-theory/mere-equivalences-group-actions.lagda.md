@@ -1,4 +1,6 @@
-# Mere equivalences of group actions
+---
+title: Mere equivalences of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

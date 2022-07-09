@@ -1,4 +1,6 @@
-# The category of semigroups
+---
+title: The category of semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

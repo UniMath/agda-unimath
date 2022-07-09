@@ -1,4 +1,6 @@
-# Abstract groups
+---
+title: Abstract groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

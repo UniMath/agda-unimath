@@ -1,4 +1,6 @@
-# Embeddings of groups
+---
+title: Embeddings of groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

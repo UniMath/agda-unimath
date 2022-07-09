@@ -496,8 +496,6 @@ open import graph-theory.voltage-graphs
 ```agda
 open import group-theory
 open import group-theory.abelian-groups
-open import group-theory.abelian-subgroups
-open import group-theory.abstract-group-torsors
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.automorphism-groups
 open import group-theory.cartesian-products-abelian-groups
@@ -510,7 +508,6 @@ open import group-theory.cayleys-theorem
 open import group-theory.commutative-monoids
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
-open import group-theory.concrete-subgroups
 open import group-theory.conjugation
 open import group-theory.contravariant-pushforward-concrete-group-actions
 open import group-theory.embeddings-groups
@@ -555,12 +552,15 @@ open import group-theory.semigroups
 open import group-theory.sheargroups
 open import group-theory.shriek-concrete-group-actions
 open import group-theory.stabilizer-groups
-open import group-theory.stabilizers-concrete-group-actions
-open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.stabilizer-groups-concrete-group-actions
 open import group-theory.subgroups
+open import group-theory.subgroups-abelian-groups
+open import group-theory.subgroups-concrete-groups
+open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
-open import group-theory.substitutions-concrete-group-actions
 open import group-theory.symmetric-groups
+open import group-theory.torsors
 open import group-theory.transitive-concrete-group-actions
 open import group-theory.transitive-group-actions
 open import group-theory.unordered-tuples-of-elements-commutative-monoids

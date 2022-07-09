@@ -1,11 +1,11 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Torsors of abstract groups
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.abstract-group-torsors where
+module group-theory.torsors where
 
 open import foundation.connected-types using
   ( is-path-connected; is-path-connected-mere-eq)

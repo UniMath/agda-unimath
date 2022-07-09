@@ -1,11 +1,11 @@
 ---
-title: Concrete subgroups
+title: Subgroups of concrete groups
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.concrete-subgroups where
+module group-theory.subgroups-concrete-groups where
 
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.embeddings using (is-emb-Prop)

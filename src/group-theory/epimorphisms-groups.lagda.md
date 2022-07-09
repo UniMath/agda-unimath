@@ -1,4 +1,6 @@
-# Epimorphisms in groups
+---
+title: Epimorphisms in groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

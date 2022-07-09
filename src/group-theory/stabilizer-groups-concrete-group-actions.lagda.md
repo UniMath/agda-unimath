@@ -5,7 +5,7 @@ title: Stabilizers of concrete group actions
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.stabilizers-concrete-group-actions where
+module group-theory.stabilizer-groups-concrete-group-actions where
 
 open import foundation.dependent-pair-types
 open import foundation.connected-components

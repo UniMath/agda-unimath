@@ -1,9 +1,11 @@
-# Subgroups of abelian groups
+---
+title: Subgroups of abelian groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.abelian-subgroups where
+module group-theory.subgroups-abelian-groups where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)

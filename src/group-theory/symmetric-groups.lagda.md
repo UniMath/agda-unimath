@@ -1,4 +1,6 @@
-# Symmetric groups
+---
+title: Symmetric groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
