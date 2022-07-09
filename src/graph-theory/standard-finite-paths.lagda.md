@@ -144,18 +144,17 @@ module _ (len : ℕ) where
       find-path-to-top {succ-ℕ _} (inr star) = refl-path-Undirected-Graph
       find-path-to-top {zero-ℕ} (inr star) = refl-path-Undirected-Graph
 
-      absurd : ∀ {l} {P : UU l} {k : ℕ} (x : Fin k) → le-ℕ k (nat-Fin k x) → P
-      absurd {k = zero-ℕ} () p
-      absurd {k = succ-ℕ k} (inl x) p = absurd {k = k} x (le-above-succ-ℕ {k} {nat-Fin k x} p)
-      absurd {k = succ-ℕ k} (inr x) p = reductio-ad-absurdum (leq-le-ℕ {x = succ-ℕ k} {y = k} p) (neg-succ-leq-ℕ k)
-
       find-path′
         : ∀ {len} (x y : Fin len) (p : le-ℕ (nat-Fin len x) (nat-Fin len y))
         → path-Undirected-Graph (standard-finite-path-Undirected-Graph len) x y
       find-path′ {len = succ-ℕ len} (inl x) (inl x₁) p with find-path′ {len = len} x x₁ p
       ... | path = raise-path _ _ path
       find-path′ {len = succ-ℕ _} (inl x) (inr star) p = find-path-to-top (inl x)
-      find-path′ {len = succ-ℕ len} (inr _) (inl f) p = absurd {k = len} f p
+      find-path′ {len = succ-ℕ len} (inr _) (inl f) p =
+        reductio-ad-absurdum
+          ( transitive-le-ℕ (nat-Fin len f) len (nat-Fin len f)
+              ( strict-upper-bound-nat-Fin len f) p)
+          ( anti-reflexive-le-ℕ (nat-Fin len f))
       find-path′ {len = succ-ℕ a} (inr _) (inr _) p = reductio-ad-absurdum p (anti-reflexive-le-ℕ a)
 
       find-path : (x y : Fin len) → patht x y
