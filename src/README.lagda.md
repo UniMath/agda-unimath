@@ -515,7 +515,6 @@ open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
-open import group-theory.examples-higher-groups
 open import group-theory.free-concrete-group-actions
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
@@ -529,6 +528,7 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-higher-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
+open import group-theory.integers-higher-group
 open import group-theory.inverse-semigroups
 open import group-theory.invertible-elements-monoids
 open import group-theory.isomorphisms-abelian-groups
@@ -560,9 +560,11 @@ open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
 open import group-theory.subgroups-concrete-groups
 open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.subgroups-higher-groups
 open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
 open import group-theory.symmetric-groups
+open import group-theory.symmetric-higher-groups
 open import group-theory.torsors
 open import group-theory.transitive-concrete-group-actions
 open import group-theory.transitive-group-actions
