@@ -12,6 +12,7 @@ module structured-types where
 open import structured-types.coherent-h-spaces public
 open import structured-types.contractible-pointed-types public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
+open import structured-types.faithful-pointed-maps public
 open import structured-types.finite-multiplication-magmas public
 open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public

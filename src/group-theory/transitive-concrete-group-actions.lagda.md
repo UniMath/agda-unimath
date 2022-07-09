@@ -52,4 +52,9 @@ module _
   action-transitive-action-Concrete-Group :
     action-Concrete-Group l2 G
   action-transitive-action-Concrete-Group = pr1 X
+
+  is-transitive-transitive-action-Concrete-Group :
+    is-transitive-action-Concrete-Group G
+      action-transitive-action-Concrete-Group
+  is-transitive-transitive-action-Concrete-Group = pr2 X
 ```

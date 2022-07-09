@@ -22,7 +22,7 @@ open import structured-types.pointed-homotopies using
     assoc-comp-pointed-map; left-unit-law-comp-pointed-map;
     right-unit-law-comp-pointed-map)
 open import structured-types.pointed-maps using
-  ( _→*_; map-pointed-map; preserves-point-map-pointed-map;
+  ( _→*_; map-pointed-map; preserves-point-pointed-map;
     id-pointed-map; comp-pointed-map)
 open import structured-types.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)

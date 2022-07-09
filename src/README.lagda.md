@@ -688,6 +688,7 @@ open import structured-types
 open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.faithful-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
