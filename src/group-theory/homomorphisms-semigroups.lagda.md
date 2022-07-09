@@ -1,4 +1,6 @@
-# Homomorphisms of semigroups
+---
+title: Homomorphisms of semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

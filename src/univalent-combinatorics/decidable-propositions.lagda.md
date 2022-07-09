@@ -11,7 +11,7 @@ open import foundation.decidable-propositions public
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
@@ -36,7 +36,7 @@ is-decidable-count :
 is-decidable-count (pair zero-ℕ e) =
   inr (is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
 is-decidable-count (pair (succ-ℕ k) e) =
-  inl (map-equiv e zero-Fin)
+  inl (map-equiv e (zero-Fin k))
 
 count-is-decidable-is-prop :
   {l : Level} {A : UU l} → is-prop A → is-decidable A → count A

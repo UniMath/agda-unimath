@@ -13,7 +13,7 @@ open import elementary-number-theory.modular-arithmetic using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using ( _↪_; map-emb; is-emb; is-emb-map-emb; tot-emb)
 open import foundation.empty-types using (ex-falso)
@@ -43,10 +43,8 @@ open import order-theory.preorders using (Preorder)
 open import order-theory.posets using (Poset)
 open import order-theory.total-posets using (is-total-poset-Prop)
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set; is-set-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; inl-Fin; succ-Fin; skip-zero-Fin; zero-Fin; neg-one-Fin)
+  ( Fin; inl-Fin; succ-Fin; skip-zero-Fin; zero-Fin; neg-one-Fin; Fin-Set; is-set-Fin)
 ```
 
 ## Idea
@@ -60,7 +58,7 @@ Finitely-Graded-Poset l1 l2 k =
   Σ ( Fin (succ-ℕ k) → UU-Set l1)
     ( λ X →
       (i : Fin k) → type-Set (X (inl-Fin k i)) →
-      type-Set (X (succ-Fin (inl-Fin k i))) → UU-Prop l2)
+      type-Set (X (succ-Fin (succ-ℕ k) (inl-Fin k i))) → UU-Prop l2)
 
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
@@ -84,7 +82,7 @@ module _
 
   module _
     (i : Fin k) (y : face-Finitely-Graded-Poset (inl-Fin k i))
-    (z : face-Finitely-Graded-Poset (succ-Fin (inl-Fin k i)))
+    (z : face-Finitely-Graded-Poset (succ-Fin (succ-ℕ k) (inl-Fin k i)))
     where
 
     adjacent-finitely-graded-poset-Prop : UU-Prop l2
@@ -140,7 +138,7 @@ module _
           path-faces-Finitely-Graded-Poset x
         cons-path-faces-Finitely-Graded-Poset :
           {j : Fin k} {y : face-Finitely-Graded-Poset (inl-Fin k j)}
-          {z : face-Finitely-Graded-Poset (succ-Fin (inl-Fin k j))} →
+          {z : face-Finitely-Graded-Poset (succ-Fin (succ-ℕ k) (inl-Fin k j))} →
           adjacent-Finitely-Graded-Poset j y z →
           path-faces-Finitely-Graded-Poset y →
           path-faces-Finitely-Graded-Poset z
@@ -189,17 +187,17 @@ module _
   leq-type-path-faces-Finitely-Graded-Poset :
     {i1 i2 : Fin (succ-ℕ k)} (x : face-Finitely-Graded-Poset i1)
     (y : face-Finitely-Graded-Poset i2) →
-    path-faces-Finitely-Graded-Poset x y → leq-Fin i1 i2
+    path-faces-Finitely-Graded-Poset x y → leq-Fin (succ-ℕ k) i1 i2
   leq-type-path-faces-Finitely-Graded-Poset {i1} x .x
-    refl-path-faces-Finitely-Graded-Poset = refl-leq-Fin i1
+    refl-path-faces-Finitely-Graded-Poset = refl-leq-Fin (succ-ℕ k) i1
   leq-type-path-faces-Finitely-Graded-Poset {i1} x y
     ( cons-path-faces-Finitely-Graded-Poset {i3} {z} H K) =
      transitive-leq-Fin
-       { succ-ℕ k}
+       ( succ-ℕ k)
        ( i1)
        ( inl-Fin k i3)
-       ( succ-Fin (inl-Fin k i3))
-       ( leq-succ-Fin {k} i3)
+       ( succ-Fin (succ-ℕ k) (inl-Fin k i3))
+       ( leq-succ-Fin k i3)
        ( leq-type-path-faces-Finitely-Graded-Poset x z K)
 ```
 
@@ -215,7 +213,7 @@ eq-path-elements-Finitely-Graded-Poset :
 eq-path-elements-Finitely-Graded-Poset {k} X (pair i1 x) (pair .i1 .x) p
   refl-path-faces-Finitely-Graded-Poset = refl
 eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
-  (pair .(succ-Fin (inl-Fin (succ-ℕ k) i2)) y) p
+  (pair .(succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) i2)) y) p
   (cons-path-faces-Finitely-Graded-Poset {i2} {z} H K) =
   ex-falso
     ( has-no-fixed-points-succ-Fin
@@ -223,21 +221,25 @@ eq-path-elements-Finitely-Graded-Poset {k = succ-ℕ k} X (pair i1 x)
       ( inl-Fin (succ-ℕ k) i2)
       ( λ (q : is-one-ℕ (succ-ℕ (succ-ℕ k))) →
         is-nonzero-succ-ℕ k (is-injective-succ-ℕ q))
-      ( antisymmetric-leq-Fin
-        { succ-ℕ (succ-ℕ k)}
-        ( succ-Fin (inl-Fin (succ-ℕ k) i2))
+      ( antisymmetric-leq-Fin 
+        ( succ-ℕ (succ-ℕ k))
+        ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) i2))
         ( inl-Fin (succ-ℕ k) i2)
         ( transitive-leq-Fin
-          { succ-ℕ (succ-ℕ k)}
-          ( skip-zero-Fin i2)
+          ( succ-ℕ (succ-ℕ k))
+          ( skip-zero-Fin (succ-ℕ k) i2)
           ( i1)
           ( inl i2)
           ( leq-type-path-faces-Finitely-Graded-Poset X x z K)
           ( tr
-            ( leq-Fin (succ-Fin (inl-Fin (succ-ℕ k) i2)))
+            ( leq-Fin
+              ( succ-ℕ (succ-ℕ k))
+              ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) i2)))
             ( inv p)
-            ( refl-leq-Fin (succ-Fin (inl-Fin (succ-ℕ k) i2)))))
-        ( leq-succ-Fin i2)))
+            ( refl-leq-Fin
+              ( succ-ℕ (succ-ℕ k))
+              ( succ-Fin (succ-ℕ (succ-ℕ k)) (inl-Fin (succ-ℕ k) i2)))))
+        ( leq-succ-Fin (succ-ℕ k) i2)))
 
 module _
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k)
@@ -267,7 +269,7 @@ module _
     Id x y
   antisymmetric-path-elements-Finitely-Graded-Poset (pair i x) (pair j y) H K =
     eq-path-elements-Finitely-Graded-Poset X (pair i x) (pair j y)
-      ( antisymmetric-leq-Fin
+      ( antisymmetric-leq-Fin (succ-ℕ k)
         ( type-element-Finitely-Graded-Poset X (pair i x))
         ( type-element-Finitely-Graded-Poset X (pair j y))
         ( leq-type-path-faces-Finitely-Graded-Poset X x y H)
@@ -350,7 +352,7 @@ module _
   where
 
   module _
-    (x : face-Finitely-Graded-Poset X zero-Fin)
+    (x : face-Finitely-Graded-Poset X (zero-Fin k))
     where
     
     is-least-element-finitely-graded-poset-Prop : UU-Prop (l1 ⊔ l2)
@@ -374,7 +376,7 @@ module _
 
   least-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
   least-element-Finitely-Graded-Poset =
-    Σ ( face-Finitely-Graded-Poset X zero-Fin)
+    Σ ( face-Finitely-Graded-Poset X (zero-Fin k))
       ( is-least-element-Finitely-Graded-Poset)
 
   all-elements-equal-least-element-Finitely-Graded-Poset :
@@ -384,7 +386,7 @@ module _
       ( is-least-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( H (element-face-Finitely-Graded-Poset X y))
-        ( Id-Prop (face-finitely-graded-poset-Set X zero-Fin) x y)
+        ( Id-Prop (face-finitely-graded-poset-Set X (zero-Fin k)) x y)
         ( eq-path-faces-Finitely-Graded-Poset X x y))
 
   is-prop-least-element-Finitely-Graded-Poset :
@@ -400,7 +402,7 @@ module _
     is-prop-least-element-Finitely-Graded-Poset
 
   module _
-    (x : face-Finitely-Graded-Poset X neg-one-Fin)
+    (x : face-Finitely-Graded-Poset X (neg-one-Fin k))
     where
     
     is-largest-element-finitely-graded-poset-Prop : UU-Prop (l1 ⊔ l2)
@@ -424,7 +426,7 @@ module _
 
   largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
   largest-element-Finitely-Graded-Poset =
-    Σ ( face-Finitely-Graded-Poset X neg-one-Fin)
+    Σ ( face-Finitely-Graded-Poset X (neg-one-Fin k)) 
       ( is-largest-element-Finitely-Graded-Poset)
 
   all-elements-equal-largest-element-Finitely-Graded-Poset :
@@ -435,7 +437,7 @@ module _
       ( is-largest-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( K (element-face-Finitely-Graded-Poset X x))
-        ( Id-Prop (face-finitely-graded-poset-Set X neg-one-Fin) x y)
+        ( Id-Prop (face-finitely-graded-poset-Set X (neg-one-Fin k)) x y)
         ( eq-path-faces-Finitely-Graded-Poset X x y))
 
   is-prop-largest-element-Finitely-Graded-Poset :
@@ -512,7 +514,7 @@ module _
 
   module _
     (i : Fin k) (y : face-Finitely-Graded-Subposet (inl-Fin k i))
-    (z : face-Finitely-Graded-Subposet (succ-Fin (inl-Fin k i)))
+    (z : face-Finitely-Graded-Subposet (succ-Fin (succ-ℕ k) (inl-Fin k i)))
     where
 
     adjacent-finitely-graded-subposet-Prop : UU-Prop l2

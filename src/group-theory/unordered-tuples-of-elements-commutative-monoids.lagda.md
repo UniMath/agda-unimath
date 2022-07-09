@@ -30,10 +30,10 @@ module _
   where
 
   type-unordered-tuple-Commutative-Monoid : UU lzero
-  type-unordered-tuple-Commutative-Monoid = type-unordered-tuple x
+  type-unordered-tuple-Commutative-Monoid = type-unordered-tuple n x
 
   element-unordered-tuple-Commutative-Monoid :
     type-unordered-tuple-Commutative-Monoid → type-Commutative-Monoid M
   element-unordered-tuple-Commutative-Monoid =
-    element-unordered-tuple x
+    element-unordered-tuple n x
 ```

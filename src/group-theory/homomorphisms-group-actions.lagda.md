@@ -1,4 +1,6 @@
-# Homomorphisms of group actions
+---
+title: Homomorphisms of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

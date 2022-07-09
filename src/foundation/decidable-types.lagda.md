@@ -9,7 +9,7 @@ module foundation.decidable-types where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; ind-coprod; is-prop-coprod; is-left; is-right)
+  ( _+_; inl; inr; ind-coprod; is-prop-coprod; is-left; is-right)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.double-negation using (¬¬; intro-dn)
 open import foundation.empty-types using
@@ -43,7 +43,7 @@ A type is said to be decidable if we can either construct an element, or we can 
 
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l
-is-decidable A = coprod A (¬ A)
+is-decidable A = A + (¬ A)
 
 is-decidable-fam :
   {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
@@ -54,7 +54,7 @@ is-decidable-fam {A = A} P = (x : A) → is-decidable (P x)
 
 ```agda
 is-inhabited-or-empty : {l1 : Level} → UU l1 → UU l1
-is-inhabited-or-empty A = coprod (type-trunc-Prop A) (is-empty A)
+is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 ```
 
 ### A type `A` is said to be merely decidable if it comes equipped with an element of `type-trunc-Prop (is-decidable A)`.
@@ -88,7 +88,7 @@ is-decidable-empty = inr id
 ```agda
 is-decidable-coprod :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-decidable A → is-decidable B → is-decidable (coprod A B)
+  is-decidable A → is-decidable B → is-decidable (A + B)
 is-decidable-coprod (inl a) y = inl (inl a)
 is-decidable-coprod (inr na) (inl b) = inl (inr b)
 is-decidable-coprod (inr na) (inr nb) = inr (ind-coprod (λ x → empty) na nb)

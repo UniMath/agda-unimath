@@ -1,4 +1,6 @@
-# The precategory of group actions
+---
+title: The precategory of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

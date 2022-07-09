@@ -14,7 +14,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.contractible-types using
   ( is-contr; is-equiv-is-contr; center; is-contr-equiv; is-contr-equiv';
     is-contr-Prop)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ev-pair)
 open import foundation.empty-types using (empty-Set)
 open import foundation.equivalences using
@@ -50,10 +50,8 @@ open import foundation.universal-property-maybe using
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( Fin-Set)
 open import univalent-combinatorics.finite-types using (is-finite)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types using (Fin; Fin-Set)
 ```
 
 ```agda

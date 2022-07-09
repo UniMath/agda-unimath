@@ -10,6 +10,8 @@ open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-
 open import finite-group-theory.finite-semigroups using
   ( Semigroup-of-Order; is-π-finite-Semigroup-of-Order)
 
+open import foundation.decidable-propositions using
+  ( is-finite-is-decidable-Prop)
 open import foundation.decidable-types using (is-decidable-prod)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_)
@@ -32,7 +34,7 @@ open import univalent-combinatorics.decidable-dependent-function-types using
 open import univalent-combinatorics.decidable-dependent-pair-types using
   ( is-decidable-Σ-count)
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-is-decidable-Prop)
+  ( is-finite; is-finite-Prop)
 open import univalent-combinatorics.pi-finite-types using
   ( is-π-finite; is-π-finite-equiv; is-π-finite-Σ; is-π-finite-is-finite;
     number-of-connected-components; mere-equiv-number-of-connected-components)
@@ -58,9 +60,9 @@ Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M)
 
 ```agda
 is-finite-is-unital-Semigroup :
-  {l : Level} {n : ℕ} (X : Semigroup-of-Order l n) →
+  {l : Level} (n : ℕ) (X : Semigroup-of-Order l n) →
   is-finite (is-unital-Semigroup (pr1 X))
-is-finite-is-unital-Semigroup {l} {n} X =
+is-finite-is-unital-Semigroup {l} n X =
   apply-universal-property-trunc-Prop
     ( pr2 X)
     ( is-finite-Prop _)
@@ -98,7 +100,7 @@ is-π-finite-Monoid-of-Order {l} k n =
       ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
         is-π-finite-is-finite k
-          ( is-finite-is-unital-Semigroup X)))
+          ( is-finite-is-unital-Semigroup n X)))
   where
   e : Monoid-of-Order l n ≃
       Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))

@@ -1,4 +1,6 @@
-# Equivalences of group actions
+---
+title: Equivalences of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

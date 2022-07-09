@@ -27,7 +27,7 @@ open import group-theory.groups using
     right-unit-law-Group; associative-mul-Group; ap-mul-Group; is-own-inverse-unit-Group;
     inv-inv-Group; distributive-inv-mul-Group)
 open import group-theory.subgroups using
-  ( subset-Group; Subgroup; subset-Subgroup; type-predicate-Subgroup; contains-unit-Subgroup;
+  ( subset-Group; Subgroup; subset-Subgroup; is-in-Subgroup; contains-unit-Subgroup;
     is-closed-under-mul-Subgroup; is-closed-under-inv-Subgroup; complete-Subgroup)
 
 open import univalent-combinatorics.lists using
@@ -109,7 +109,7 @@ module _
   inv-formal-combination-subset-Group (cons (pair s x) u) =
     concat-list
       ( inv-formal-combination-subset-Group u)
-      ( in-list (pair (succ-Fin s) x))
+      ( in-list (pair (succ-Fin 2 s) x))
     
   preserves-inv-ev-formal-combination-subset-Group :
     (u : formal-combination-subset-Group) →
@@ -226,7 +226,7 @@ module _
   contains-formal-combinations-Subgroup :
     {l3 : Level} (U : Subgroup l3 G) → S ⊆ subset-Subgroup G U →
     (x : formal-combination-subset-Group) →
-    type-predicate-Subgroup G U (ev-formal-combination-subset-Group x)
+    is-in-Subgroup G U (ev-formal-combination-subset-Group x)
   contains-formal-combinations-Subgroup U H nil =
     contains-unit-Subgroup G U
   contains-formal-combinations-Subgroup U H
@@ -252,10 +252,11 @@ module _
   is-subgroup-generated-by-subset-subgroup-subset-Group l U' K x H =
     apply-universal-property-trunc-Prop H (subset-Subgroup G U' x) P
     where
-    P : subset-subgroup-subset-Group' x → type-predicate-Subgroup G U' x
+    P : subset-subgroup-subset-Group' x → is-in-Subgroup G U' x
     P (pair c refl) = contains-formal-combinations-Subgroup U' K c
 
   is-generating-subset-Group : UU (l1 ⊔ l2)
   is-generating-subset-Group =
-    subset-Subgroup G (complete-Subgroup {l2 = l1} G) ⊆ subset-subgroup-subset-Group
+    subset-Subgroup G (complete-Subgroup {l2 = l1} G) ⊆
+    subset-subgroup-subset-Group
 ```

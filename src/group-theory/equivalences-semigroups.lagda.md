@@ -1,4 +1,6 @@
-# Equivalences between semigroups
+---
+title: Equivalences between semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

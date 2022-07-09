@@ -1,4 +1,6 @@
-# Stabilizer groups
+---
+title: Stabilizer groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

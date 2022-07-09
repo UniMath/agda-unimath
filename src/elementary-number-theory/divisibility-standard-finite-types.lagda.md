@@ -33,8 +33,8 @@ Given two elements `x y : Fin k`, we say that `x` divides `y` if there is an ele
 ## Definition
 
 ```agda
-div-Fin : {k : ℕ} → Fin k → Fin k → UU lzero
-div-Fin {k} x y = Σ (Fin k) (λ u → mul-Fin u x ＝ y)
+div-Fin : (k : ℕ) → Fin k → Fin k → UU lzero
+div-Fin k x y = Σ (Fin k) (λ u → mul-Fin k u x ＝ y)
 ```
 
 ## Properties
@@ -42,49 +42,50 @@ div-Fin {k} x y = Σ (Fin k) (λ u → mul-Fin u x ＝ y)
 ### The divisibility relation is reflexive
 
 ```agda
-refl-div-Fin : {k : ℕ} (x : Fin k) → div-Fin x x
-pr1 (refl-div-Fin {succ-ℕ k} x) = one-Fin
-pr2 (refl-div-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin x
+refl-div-Fin : {k : ℕ} (x : Fin k) → div-Fin k x x
+pr1 (refl-div-Fin {succ-ℕ k} x) = one-Fin k
+pr2 (refl-div-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin k x
 ```
 
 ### The divisibility relation is transitive
 
 ```agda
 trans-div-Fin :
-  {k : ℕ} (x y z : Fin k) → div-Fin x y → div-Fin y z → div-Fin x z
-pr1 (trans-div-Fin x y z (pair u p) (pair v q)) = mul-Fin v u
-pr2 (trans-div-Fin x y z (pair u p) (pair v q)) =
-  associative-mul-Fin v u x ∙ (ap (mul-Fin v) p ∙ q)
+  (k : ℕ) (x y z : Fin k) → div-Fin k x y → div-Fin k y z → div-Fin k x z
+pr1 (trans-div-Fin k x y z (pair u p) (pair v q)) = mul-Fin k v u
+pr2 (trans-div-Fin k x y z (pair u p) (pair v q)) =
+  associative-mul-Fin k v u x ∙ (ap (mul-Fin k v) p ∙ q)
 ```
 
 ### Every element divides zero
 
 ```agda
-div-zero-Fin : {k : ℕ} (x : Fin (succ-ℕ k)) → div-Fin x zero-Fin
-pr1 (div-zero-Fin x) = zero-Fin
-pr2 (div-zero-Fin x) = left-zero-law-mul-Fin x
+div-zero-Fin : (k : ℕ) (x : Fin (succ-ℕ k)) → div-Fin (succ-ℕ k) x (zero-Fin k)
+pr1 (div-zero-Fin k x) = zero-Fin k
+pr2 (div-zero-Fin k x) = left-zero-law-mul-Fin k x
 ```
 
 ### Every element is divisible by one
 
 ```agda
-div-one-Fin : {k : ℕ} (x : Fin (succ-ℕ k)) → div-Fin one-Fin x
-pr1 (div-one-Fin x) = x
-pr2 (div-one-Fin x) = right-unit-law-mul-Fin x
+div-one-Fin : (k : ℕ) (x : Fin (succ-ℕ k)) → div-Fin (succ-ℕ k) (one-Fin k) x
+pr1 (div-one-Fin k x) = x
+pr2 (div-one-Fin k x) = right-unit-law-mul-Fin k x
 ```
 
 ### The only element that is divisible by zero is zero itself
 
 ```agda
 is-zero-div-zero-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → div-Fin zero-Fin x → is-zero-Fin x
-is-zero-div-zero-Fin {k} x (pair u p) = inv p ∙ right-zero-law-mul-Fin u
+  {k : ℕ} (x : Fin (succ-ℕ k)) →
+  div-Fin (succ-ℕ k) (zero-Fin k) x → is-zero-Fin (succ-ℕ k) x
+is-zero-div-zero-Fin {k} x (pair u p) = inv p ∙ right-zero-law-mul-Fin k u
 ```
 
 ### The divisibility relation is decidable
 
 ```agda
-is-decidable-div-Fin : {k : ℕ} (x y : Fin k) → is-decidable (div-Fin x y)
-is-decidable-div-Fin x y =
-  is-decidable-Σ-Fin (λ u → has-decidable-equality-Fin (mul-Fin u x) y)
+is-decidable-div-Fin : (k : ℕ) (x y : Fin k) → is-decidable (div-Fin k x y)
+is-decidable-div-Fin k x y =
+  is-decidable-Σ-Fin k (λ u → has-decidable-equality-Fin k (mul-Fin k u x) y)
 ```

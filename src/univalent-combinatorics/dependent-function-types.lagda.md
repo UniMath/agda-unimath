@@ -28,7 +28,8 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import univalent-combinatorics.cartesian-product-types using
   ( count-prod)
 open import univalent-combinatorics.counting using
-  ( count; count-is-contr; count-equiv'; equiv-count; map-equiv-count)
+  ( count; count-is-contr; count-equiv'; equiv-count; map-equiv-count;
+    number-of-elements-count)
 open import univalent-combinatorics.finite-choice using (finite-choice)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; 𝔽; type-𝔽; is-finite-type-𝔽)
@@ -47,15 +48,15 @@ If the elements of `A` can be counted and if for each `x : A` the elements of `B
 
 ```agda
 count-Π-Fin :
-  {l1 : Level} {k : ℕ} {B : Fin k → UU l1} →
+  {l1 : Level} (k : ℕ) {B : Fin k → UU l1} →
   ((x : Fin k) → count (B x)) → count ((x : Fin k) → B x)
-count-Π-Fin {l1} {zero-ℕ} {B} e =
+count-Π-Fin {l1} zero-ℕ {B} e =
   count-is-contr (dependent-universal-property-empty' B)
-count-Π-Fin {l1} {succ-ℕ k} {B} e =
+count-Π-Fin {l1} (succ-ℕ k) {B} e =
   count-equiv'
     ( equiv-dependent-universal-property-coprod B)
     ( count-prod
-      ( count-Π-Fin (λ x → e (inl x)))
+      ( count-Π-Fin k (λ x → e (inl x)))
       ( count-equiv'
         ( equiv-dependent-universal-property-unit (B ∘ inr))
         ( e (inr star))))
@@ -70,7 +71,7 @@ count-Π :
 count-Π {l1} {l2} {A} {B} e f =
   count-equiv'
     ( equiv-precomp-Π (equiv-count e) B)
-    ( count-Π-Fin (λ x → f (map-equiv-count e x)))
+    ( count-Π-Fin (number-of-elements-count e) (λ x → f (map-equiv-count e x)))
 ```
 
 ### Finiteness of dependent function types

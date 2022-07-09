@@ -1,4 +1,6 @@
-# Isomorphisms of group actions
+---
+title: Isomorphisms of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

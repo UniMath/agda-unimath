@@ -8,10 +8,11 @@ title: Equality of integers
 module elementary-number-theory.equality-integers where
 
 open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ; Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-set-ℕ;
-    is-prop-Eq-ℕ)
+  ( has-decidable-equality-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ)
+open import elementary-number-theory.natural-numbers using
+  ( Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-set-ℕ; is-prop-Eq-ℕ)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)

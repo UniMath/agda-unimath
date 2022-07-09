@@ -9,7 +9,7 @@ module univalent-combinatorics.decidable-dependent-pair-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-dependent-pair-types using
   ( is-decidable-Σ-equiv)
 open import foundation.decidable-types using
@@ -22,7 +22,7 @@ open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
-  ( count; equiv-count; map-equiv-count)
+  ( count; equiv-count; map-equiv-count; number-of-elements-count)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -36,16 +36,16 @@ We describe conditions under which dependent sums are decidable. Note that it is
 
 ```agda
 is-decidable-Σ-Fin :
-  {l : Level} {k : ℕ} {P : Fin k → UU l} →
+  {l : Level} (k : ℕ) {P : Fin k → UU l} →
   ((x : Fin k) → is-decidable (P x)) → is-decidable (Σ (Fin k) P)
-is-decidable-Σ-Fin {l} {zero-ℕ} {P} d = inr pr1
-is-decidable-Σ-Fin {l} {succ-ℕ k} {P} d with d (inr star)
+is-decidable-Σ-Fin zero-ℕ {P} d = inr pr1
+is-decidable-Σ-Fin (succ-ℕ k) {P} d with d (inr star)
 ... | inl p = inl (pair (inr star) p)
 ... | inr f =
   is-decidable-iff
     ( λ t → pair (inl (pr1 t)) (pr2 t))
     ( g)
-    ( is-decidable-Σ-Fin {l} {k} {P ∘ inl} (λ x → d (inl x)))
+    ( is-decidable-Σ-Fin k {P ∘ inl} (λ x → d (inl x)))
   where
   g : Σ (Fin (succ-ℕ k)) P → Σ (Fin k) (P ∘ inl)
   g (pair (inl x) p) = pair x p
@@ -62,5 +62,7 @@ is-decidable-Σ-count e d =
   is-decidable-Σ-equiv
     ( equiv-count e)
     ( λ x → id-equiv)
-    ( is-decidable-Σ-Fin (λ x → d (map-equiv-count e x)))
+    ( is-decidable-Σ-Fin
+      ( number-of-elements-count e)
+      ( λ x → d (map-equiv-count e x)))
 ```

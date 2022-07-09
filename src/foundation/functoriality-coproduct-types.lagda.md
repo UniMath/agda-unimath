@@ -10,7 +10,7 @@ module foundation.functoriality-coproduct-types where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-equiv)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; neq-inr-inl)
+  ( _+_; inl; inr; is-injective-inl; neq-inr-inl)
 open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.equality-coproduct-types using
   ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
@@ -51,7 +51,7 @@ module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   where
   
-  map-coprod : (A → A') → (B → B') → coprod A B → coprod A' B'
+  map-coprod : (A → A') → (B → B') → A + B → A' + B'
   map-coprod f g (inl x) = inl (f x)
   map-coprod f g (inr y) = inr (g y)
 ```
@@ -138,11 +138,11 @@ module _
       ( id-map-coprod A B)
 
   map-equiv-coprod :
-    (A ≃ A') → (B ≃ B') → coprod A B → coprod A' B'
+    (A ≃ A') → (B ≃ B') → A + B → A' + B'
   map-equiv-coprod e e' = map-coprod (map-equiv e) (map-equiv e')
   
   equiv-coprod :
-    (A ≃ A') → (B ≃ B') → (coprod A B) ≃ (coprod A' B')
+    (A ≃ A') → (B ≃ B') → (A + B) ≃ (A' + B')
   pr1 (equiv-coprod e e') = map-equiv-coprod e e'
   pr2 (equiv-coprod e e') =
     is-equiv-map-coprod (is-equiv-map-equiv e) (is-equiv-map-equiv e')
@@ -191,7 +191,7 @@ is-emb-map-coprod (pair f g) =
 -}
 ```
 
-### For any equivalence `f : coprod A B ≃ coprod A B` and `g : B ≃ B` such that `f` and `g` coincide on `B`, we construct an `h : A ≃ A` such that `htpy-equiv (equiv-coprod h d) f`
+### For any equivalence `f : A + B ≃ A + B` and `g : B ≃ B` such that `f` and `g` coincide on `B`, we construct an `h : A ≃ A` such that `htpy-equiv (equiv-coprod h d) f`
 
 ```agda
 module _
@@ -199,7 +199,7 @@ module _
   where
 
   equiv-coproduct-induce-equiv-disjoint :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
     (x : A) (y : B) → ¬ (map-equiv f (inl x) ＝ inr y)
   equiv-coproduct-induce-equiv-disjoint f g p x y q =
@@ -210,7 +210,7 @@ module _
             ( inv q)))))
 
   inv-commutative-square-inr :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b)) →
     (b : B) → map-inv-equiv f (inr b) ＝ inr (map-inv-equiv g b)
   inv-commutative-square-inr f g p b =
@@ -220,17 +220,17 @@ module _
           ( inv (p (map-inv-equiv g b)))))
   
   cases-retr-equiv-coprod :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y : coprod A B) → map-equiv f (inl x) ＝ y → A
+    (x : A) (y : A + B) → map-equiv f (inl x) ＝ y → A
   cases-retr-equiv-coprod f g p x (inl y) q = y
   cases-retr-equiv-coprod f g p x (inr y) q =
     ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
   
   inv-cases-retr-equiv-coprod :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y : coprod A B) → map-inv-equiv f (inl x) ＝ y → A
+    (x : A) (y : A + B) → map-inv-equiv f (inl x) ＝ y → A
   inv-cases-retr-equiv-coprod f g p =
     cases-retr-equiv-coprod
       ( inv-equiv f)
@@ -238,9 +238,9 @@ module _
       ( inv-commutative-square-inr f g p)
 
   retr-cases-retr-equiv-coprod :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y z : coprod A B) (q : map-equiv f (inl x) ＝ y)
+    (x : A) (y z : A + B) (q : map-equiv f (inl x) ＝ y)
     (r : map-inv-equiv f (inl (cases-retr-equiv-coprod f g p x y q)) ＝ z) →
     ( inv-cases-retr-equiv-coprod f g p
       ( cases-retr-equiv-coprod f g p x y q) z r) ＝
@@ -263,9 +263,9 @@ module _
     ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
 
   sec-cases-retr-equiv-coprod :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y z : coprod A B) (q : map-inv-equiv f (inl x) ＝ y)
+    (x : A) (y z : A + B) (q : map-inv-equiv f (inl x) ＝ y)
     (r : map-equiv f (inl (inv-cases-retr-equiv-coprod f g p x y q)) ＝ z) →
     ( cases-retr-equiv-coprod f g p
       ( inv-cases-retr-equiv-coprod f g p x y q) z r) ＝
@@ -288,7 +288,7 @@ module _
         ( q))
 
   retr-equiv-coprod :
-    (f : coprod A B ≃ coprod A B) (g : B ≃ B)
+    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b)) →
     Σ (A ≃ A) (λ h → htpy-equiv f (equiv-coprod h g))
   pr1 (pr1 (retr-equiv-coprod f g p)) x =
@@ -321,7 +321,7 @@ module _
     commutative-square-inl-retr-equiv-coprod x (map-equiv f (inl x)) refl
     where
     commutative-square-inl-retr-equiv-coprod :
-      (x : A) (y : coprod A B) (q : map-equiv f (inl x) ＝ y) →
+      (x : A) (y : A + B) (q : map-equiv f (inl x) ＝ y) →
       map-equiv f (inl x) ＝ inl (cases-retr-equiv-coprod f g p x y q)
     commutative-square-inl-retr-equiv-coprod x (inl y) q = q
     commutative-square-inl-retr-equiv-coprod x (inr y) q =

@@ -21,15 +21,16 @@ open import foundation.sets using (is-set; is-set-Prop; UU-Set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
 
 open import univalent-combinatorics.counting using
-  ( is-set-count; equiv-count)
+  ( is-set-count; equiv-count; number-of-elements-count)
 open import univalent-combinatorics.decidable-propositions using
   ( count-eq)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin; is-set-Fin)
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; has-cardinality; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
     UU-Fin-Level; UU-Fin; type-UU-Fin-Level; type-UU-Fin;
     has-cardinality-type-UU-Fin-Level; has-cardinality-type-UU-Fin)
+open import univalent-combinatorics.standard-finite-types using (is-set-Fin)
 ```
 
 ## Idea
@@ -37,22 +38,6 @@ open import univalent-combinatorics.finite-types using
 Any finite type is a set because it is merely equivalent to a standard finite type. Moreover, any finite type has decidable equality. In particular, this implies that the type of identifications between any two elements in a finite type is finite.
 
 ## Properties
-
-### Any finite type is a set
-
-```agda
-abstract
-  is-set-is-finite :
-    {l : Level} {X : UU l} → is-finite X → is-set X
-  is-set-is-finite {l} {X} H =
-    apply-universal-property-trunc-Prop H
-      ( is-set-Prop X)
-      ( λ e → is-set-count e)
-
-set-𝔽 : 𝔽 → UU-Set lzero
-pr1 (set-𝔽 X) = type-𝔽 X
-pr2 (set-𝔽 X) = is-set-is-finite (is-finite-type-𝔽 X)
-```
 
 ### Any finite type has decidable equality
 
@@ -63,35 +48,21 @@ has-decidable-equality-is-finite {l1} {X} is-finite-X =
   apply-universal-property-trunc-Prop is-finite-X
     ( has-decidable-equality-Prop X)
     ( λ e →
-      has-decidable-equality-equiv' (equiv-count e) has-decidable-equality-Fin)
-```
-
-### Any type of cardinality `k` is a set
-
-```agda
-is-set-has-cardinality :
-  {l1 : Level} {X : UU l1} {k : ℕ} → has-cardinality k X → is-set X
-is-set-has-cardinality H = is-set-mere-equiv' H (is-set-Fin _)
-
-set-UU-Fin-Level : {l1 : Level} {k : ℕ} → UU-Fin-Level l1 k → UU-Set l1
-pr1 (set-UU-Fin-Level X) = type-UU-Fin-Level X
-pr2 (set-UU-Fin-Level X) =
-  is-set-has-cardinality (has-cardinality-type-UU-Fin-Level X)
-
-set-UU-Fin : {k : ℕ} → UU-Fin k → UU-Set lzero
-set-UU-Fin X = set-UU-Fin-Level X
+      has-decidable-equality-equiv'
+        ( equiv-count e)
+        ( has-decidable-equality-Fin (number-of-elements-count e)))
 ```
 
 ### Any type of finite cardinality has decidable equality
 
 ```agda
 has-decidable-equality-has-cardinality :
-  {l1 : Level} {X : UU l1} {k : ℕ} →
+  {l1 : Level} {X : UU l1} (k : ℕ) →
   has-cardinality k X → has-decidable-equality X
-has-decidable-equality-has-cardinality {l1} {X} {k} H =
+has-decidable-equality-has-cardinality {l1} {X} k H =
   apply-universal-property-trunc-Prop H
     ( has-decidable-equality-Prop X)
-    ( λ e → has-decidable-equality-equiv' e has-decidable-equality-Fin)
+    ( λ e → has-decidable-equality-equiv' e (has-decidable-equality-Fin k))
 ```
 
 ### The type of identifications between any two elements in a finite type is finite

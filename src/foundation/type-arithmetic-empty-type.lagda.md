@@ -9,7 +9,7 @@ module foundation.type-arithmetic-empty-type where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; neq-inr-inl; neq-inl-inr)
+  ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; is-empty; is-equiv-is-empty'; ex-falso)
@@ -170,11 +170,11 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty A)
   where
 
-  map-left-unit-law-coprod-is-empty : coprod A B → B
+  map-left-unit-law-coprod-is-empty : A + B → B
   map-left-unit-law-coprod-is-empty (inl a) = ex-falso (H a)
   map-left-unit-law-coprod-is-empty (inr b) = b
 
-  map-inv-left-unit-law-coprod-is-empty : B → coprod A B
+  map-inv-left-unit-law-coprod-is-empty : B → A + B
   map-inv-left-unit-law-coprod-is-empty = inr
 
   issec-map-inv-left-unit-law-coprod-is-empty :
@@ -196,11 +196,11 @@ module _
       issec-map-inv-left-unit-law-coprod-is-empty
       isretr-map-inv-left-unit-law-coprod-is-empty
 
-  left-unit-law-coprod-is-empty : coprod A B ≃ B
+  left-unit-law-coprod-is-empty : (A + B) ≃ B
   pr1 left-unit-law-coprod-is-empty = map-left-unit-law-coprod-is-empty
   pr2 left-unit-law-coprod-is-empty = is-equiv-map-left-unit-law-coprod-is-empty
 
-  inv-left-unit-law-coprod-is-empty : B ≃ coprod A B
+  inv-left-unit-law-coprod-is-empty : B ≃ (A + B)
   pr1 inv-left-unit-law-coprod-is-empty = map-inv-left-unit-law-coprod-is-empty
   pr2 inv-left-unit-law-coprod-is-empty =
     is-equiv-has-inverse
@@ -220,10 +220,10 @@ module _
   {l : Level} (B : UU l)
   where
 
-  map-left-unit-law-coprod : coprod empty B → B
+  map-left-unit-law-coprod : empty + B → B
   map-left-unit-law-coprod = map-left-unit-law-coprod-is-empty empty B id
 
-  map-inv-left-unit-law-coprod : B → coprod empty B
+  map-inv-left-unit-law-coprod : B → empty + B
   map-inv-left-unit-law-coprod = inr
 
   issec-map-inv-left-unit-law-coprod :
@@ -240,10 +240,10 @@ module _
   is-equiv-map-left-unit-law-coprod =
     is-equiv-map-left-unit-law-coprod-is-empty empty B id
   
-  left-unit-law-coprod : coprod empty B ≃ B
+  left-unit-law-coprod : (empty + B) ≃ B
   left-unit-law-coprod = left-unit-law-coprod-is-empty empty B id
 
-  inv-left-unit-law-coprod : B ≃ (coprod empty B)
+  inv-left-unit-law-coprod : B ≃ (empty + B)
   inv-left-unit-law-coprod = inv-left-unit-law-coprod-is-empty empty B id
 ```
 
@@ -254,11 +254,11 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty B)
   where
 
-  map-right-unit-law-coprod-is-empty : coprod A B → A
+  map-right-unit-law-coprod-is-empty : A + B → A
   map-right-unit-law-coprod-is-empty (inl a) = a
   map-right-unit-law-coprod-is-empty (inr b) = ex-falso (H b)
   
-  map-inv-right-unit-law-coprod-is-empty : A → coprod A B
+  map-inv-right-unit-law-coprod-is-empty : A → A + B
   map-inv-right-unit-law-coprod-is-empty = inl
 
   issec-map-inv-right-unit-law-coprod-is-empty :
@@ -287,12 +287,12 @@ module _
       ( isretr-map-inv-right-unit-law-coprod-is-empty)
       ( issec-map-inv-right-unit-law-coprod-is-empty)
 
-  right-unit-law-coprod-is-empty : coprod A B ≃ A
+  right-unit-law-coprod-is-empty : (A + B) ≃ A
   pr1 right-unit-law-coprod-is-empty = map-right-unit-law-coprod-is-empty
   pr2 right-unit-law-coprod-is-empty =
     is-equiv-map-right-unit-law-coprod-is-empty
 
-  inv-right-unit-law-coprod-is-empty : A ≃ (coprod A B)
+  inv-right-unit-law-coprod-is-empty : A ≃ (A + B)
   pr1 inv-right-unit-law-coprod-is-empty = inl
   pr2 inv-right-unit-law-coprod-is-empty =
     is-equiv-has-inverse
@@ -312,10 +312,10 @@ module _
   {l : Level} (A : UU l)
   where
 
-  map-right-unit-law-coprod : coprod A empty → A
+  map-right-unit-law-coprod : A + empty → A
   map-right-unit-law-coprod = map-right-unit-law-coprod-is-empty A empty id
 
-  map-inv-right-unit-law-coprod : A → coprod A empty
+  map-inv-right-unit-law-coprod : A → A + empty
   map-inv-right-unit-law-coprod = inl
 
   issec-map-inv-right-unit-law-coprod :
@@ -332,10 +332,10 @@ module _
   is-equiv-map-right-unit-law-coprod =
     is-equiv-map-right-unit-law-coprod-is-empty A empty id
 
-  right-unit-law-coprod : coprod A empty ≃ A
+  right-unit-law-coprod : (A + empty) ≃ A
   right-unit-law-coprod = right-unit-law-coprod-is-empty A empty id
 
-  inv-right-unit-law-coprod : A ≃ coprod A empty
+  inv-right-unit-law-coprod : A ≃ (A + empty)
   inv-right-unit-law-coprod =
     inv-right-unit-law-coprod-is-empty A empty id
 ```

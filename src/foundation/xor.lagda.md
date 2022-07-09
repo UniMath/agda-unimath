@@ -12,7 +12,7 @@ open import foundation.commutative-operations using
   ( commutative-operation)
 open import foundation.conjunction using (conj-Prop)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
+  ( _+_; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-propositions using
   ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop)
 open import foundation.decidable-types using
@@ -75,7 +75,7 @@ module _
   where
 
   xor : UU (l1 ⊔ l2)
-  xor = coprod (A × ¬ B) (B × ¬ A)
+  xor = (A × ¬ B) + (B × ¬ A)
 ```
 
 ### Exclusive disjunction of propositions
@@ -131,7 +131,7 @@ all-elements-equal-type-commutative-xor-Prop :
 all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
   cases-is-prop-type-commutative-xor-Prop
     ( has-decidable-equality-is-finite
-      ( is-finite-type-UU-Fin-Level X)
+      ( is-finite-type-UU-Fin-Level 2 X)
       ( pr1 x)
       ( pr1 y))
   where
@@ -178,7 +178,7 @@ module _
       ( pair p
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-          ( compute-swap-Fin-two-ℕ zero-Fin)
+          ( compute-swap-Fin-two-ℕ (zero-Fin 1))
           ( nq)))
   xor-commutative-xor (pair (inr star) (pair q np)) =
     inr
@@ -186,24 +186,24 @@ module _
         ( q)
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-          ( compute-swap-Fin-two-ℕ one-Fin)
+          ( compute-swap-Fin-two-ℕ (one-Fin 1))
           ( np)))
 
   commutative-xor-xor :
     xor A B → commutative-xor (standard-unordered-pair A B)
-  pr1 (commutative-xor-xor (inl (pair a nb))) = zero-Fin
+  pr1 (commutative-xor-xor (inl (pair a nb))) = (zero-Fin 1)
   pr1 (pr2 (commutative-xor-xor (inl (pair a nb)))) = a
   pr2 (pr2 (commutative-xor-xor (inl (pair a nb)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-      ( inv (compute-swap-Fin-two-ℕ zero-Fin))
+      ( inv (compute-swap-Fin-two-ℕ (zero-Fin 1)))
       ( nb)
-  pr1 (commutative-xor-xor (inr (pair na b))) = one-Fin
+  pr1 (commutative-xor-xor (inr (pair na b))) = (one-Fin 1)
   pr1 (pr2 (commutative-xor-xor (inr (pair b na)))) = b
   pr2 (pr2 (commutative-xor-xor (inr (pair b na)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
-      ( inv (compute-swap-Fin-two-ℕ one-Fin))
+      ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
       ( na)
 
 
@@ -228,7 +228,7 @@ module _
                       ( λ b →
                         ( ¬ (type-Prop (pr2 (standard-unordered-pair P Q) b))) ≃
                         ( ¬ (type-Prop Q)))
-                      ( inv (compute-swap-Fin-two-ℕ zero-Fin))
+                      ( inv (compute-swap-Fin-two-ℕ (zero-Fin ?)))
                       ( id-equiv))) ∘e
                     ( left-unit-law-Σ
                       ( λ y →
@@ -255,7 +255,7 @@ module _
               ( λ b →
                 ¬ (type-Prop (pr2 (standard-unordered-pair P Q) b)) ≃
                 ¬ (type-Prop P))
-              ( inv (compute-swap-Fin-two-ℕ one-Fin))
+              ( inv (compute-swap-Fin-two-ℕ (one-Fin ?)))
               ( id-equiv))
             ( id-equiv)) ∘e
           ( ( commutative-prod) ∘e
@@ -298,7 +298,7 @@ module _
           ( λ t →
             ¬ ( type-Prop
                 ( element-unordered-pair (standard-unordered-pair P Q) t)))
-          ( compute-swap-Fin-two-ℕ zero-Fin)
+          ( compute-swap-Fin-two-ℕ (zero-Fin 1))
           ( nq)))
   xor-commutative-xor-Prop (pair (inr star) (pair q np)) =
     inr
@@ -307,28 +307,28 @@ module _
           ( λ t →
             ¬ ( type-Prop
                 ( element-unordered-pair (standard-unordered-pair P Q) t)))
-          ( compute-swap-Fin-two-ℕ one-Fin)
+          ( compute-swap-Fin-two-ℕ (one-Fin 1))
           ( np)))
 
   commutative-xor-xor-Prop :
     type-hom-Prop
       ( xor-Prop P Q)
       ( commutative-xor-Prop (standard-unordered-pair P Q))
-  pr1 (commutative-xor-xor-Prop (inl (pair p nq))) = zero-Fin
+  pr1 (commutative-xor-xor-Prop (inl (pair p nq))) = (zero-Fin 1)
   pr1 (pr2 (commutative-xor-xor-Prop (inl (pair p nq)))) = p
   pr2 (pr2 (commutative-xor-xor-Prop (inl (pair p nq)))) =
     tr
       ( λ t →
         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
-      ( inv (compute-swap-Fin-two-ℕ zero-Fin))
+      ( inv (compute-swap-Fin-two-ℕ (zero-Fin 1)))
       ( nq)
-  pr1 (commutative-xor-xor-Prop (inr (pair q np))) = one-Fin
+  pr1 (commutative-xor-xor-Prop (inr (pair q np))) = (one-Fin 1)
   pr1 (pr2 (commutative-xor-xor-Prop (inr (pair q np)))) = q
   pr2 (pr2 (commutative-xor-xor-Prop (inr (pair q np)))) =
     tr
       ( λ t →
         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
-      ( inv (compute-swap-Fin-two-ℕ one-Fin))
+      ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
       ( np)
 
 eq-commmutative-xor-xor :

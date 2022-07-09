@@ -23,8 +23,9 @@ open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
     is-positive-ℤ; is-positive-int-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; is-zero-ℕ)
+
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
@@ -193,7 +194,7 @@ is-positive-gcd-is-positive-right-ℤ x y H =
   f = is-zero-right-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y)
 
 is-positive-gcd-ℤ :
-  (x y : ℤ) → coprod (is-positive-ℤ x) (is-positive-ℤ y) →
+  (x y : ℤ) → (is-positive-ℤ x) + (is-positive-ℤ y) →
   is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-ℤ x y (inl H) = is-positive-gcd-is-positive-left-ℤ x y H
 is-positive-gcd-ℤ x y (inr H) = is-positive-gcd-is-positive-right-ℤ x y H

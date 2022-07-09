@@ -22,46 +22,14 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
-  ( _≃_; map-inv-is-equiv; equiv-inv-equiv; id-equiv; is-equiv; _∘e_; eq-htpy-equiv;
-    map-equiv; right-inverse-law-equiv)
+  ( _≃_; map-inv-is-equiv; id-equiv; is-equiv; _∘e_;
+    eq-htpy-equiv; map-equiv; right-inverse-law-equiv; inv-equiv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 ```
 
 ## Idea
 
 The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
-
-## Postulates
-
-```agda
-postulate univalence : {i : Level} (A B : UU i) → UNIVALENCE A B
-```
-
-## Properties
-
-```agda
-eq-equiv : {i : Level} (A B : UU i) → (A ≃ B) → A ＝ B
-eq-equiv A B = map-inv-is-equiv (univalence A B)
-
-equiv-univalence :
-  {i : Level} {A B : UU i} → (A ＝ B) ≃ (A ≃ B)
-pr1 equiv-univalence = equiv-eq
-pr2 equiv-univalence = univalence _ _
-
-abstract
-  is-contr-total-equiv : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → A ≃ X))
-  is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
-
-abstract
-  is-contr-total-equiv' : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → X ≃ A))
-  is-contr-total-equiv' A =
-    is-contr-equiv
-      ( Σ (UU _) (λ X → A ≃ X))
-      ( equiv-tot (λ X → equiv-inv-equiv))
-      ( is-contr-total-equiv A)
-```
 
 ### Univalence for type families
 
@@ -121,10 +89,23 @@ comp-eq-equiv A B C f g =
       ( ( ap
         ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
         ( right-inverse-law-equiv equiv-univalence)) ∙
-        ( ( ap
-            ( λ e → g ∘e map-equiv e f)
-            ( right-inverse-law-equiv equiv-univalence)) ∙
-          ( ap
-            ( λ e → map-equiv e (g ∘e f))
-            ( inv (right-inverse-law-equiv equiv-univalence))))))
+        ( ( ap (λ e → g ∘e map-equiv e f) (right-inverse-law-equiv equiv-univalence)) ∙
+          ( ap (λ e → map-equiv e (g ∘e f)) (inv (right-inverse-law-equiv equiv-univalence))))))
+
+commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : A ＝ B) →
+  inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
+commutativity-inv-equiv-eq A .A refl = eq-htpy-equiv refl-htpy
+
+commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
+  inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
+commutativity-inv-eq-equiv A B f =
+  is-injective-map-equiv
+    ( equiv-univalence)
+    ( ( inv (commutativity-inv-equiv-eq A B (eq-equiv A B f))) ∙
+      ( ( ap
+        ( λ e → (inv-equiv (map-equiv e f)))
+        ( right-inverse-law-equiv equiv-univalence)) ∙
+        ( ap
+          ( λ e → map-equiv e (inv-equiv f))
+          ( inv (right-inverse-law-equiv equiv-univalence)))))
 ```

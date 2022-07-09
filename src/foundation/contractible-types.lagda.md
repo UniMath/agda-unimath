@@ -28,6 +28,11 @@ open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-succ-is-trunc)
 open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
+open import foundation.subuniverses using
+  ( total-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
+    eq-equiv-subuniverse)
 ```
 
 ## Definition
@@ -38,6 +43,53 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 is-contr-Prop : {l : Level} → UU l → UU-Prop l
 pr1 (is-contr-Prop A) = is-contr A
 pr2 (is-contr-Prop A) = is-property-is-contr
+```
+
+### The subuniverse of contractible types
+
+```agda
+UU-Contr : (l : Level) → UU (lsuc l)
+UU-Contr l = total-subuniverse is-contr-Prop
+
+type-UU-Contr : {l : Level} → UU-Contr l → UU l
+type-UU-Contr A = pr1 A
+
+abstract
+  is-contr-type-UU-Contr :
+    {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
+  is-contr-type-UU-Contr A = pr2 A
+
+equiv-UU-Contr :
+  {l1 l2 : Level} (X : UU-Contr l1) (Y : UU-Contr l2) → UU (l1 ⊔ l2)
+equiv-UU-Contr X Y = type-UU-Contr X ≃ type-UU-Contr Y
+
+equiv-eq-UU-Contr :
+  {l1 : Level} (X Y : UU-Contr l1) → (X ＝ Y) → equiv-UU-Contr X Y
+equiv-eq-UU-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
+
+abstract
+  is-equiv-equiv-eq-UU-Contr :
+    {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
+  is-equiv-equiv-eq-UU-Contr X Y =
+    is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
+
+eq-equiv-UU-Contr :
+  {l1 : Level} {X Y : UU-Contr l1} → equiv-UU-Contr X Y → (X ＝ Y)
+eq-equiv-UU-Contr = eq-equiv-subuniverse is-contr-Prop
+
+abstract
+  center-UU-contr : (l : Level) → UU-Contr l
+  center-UU-contr l = pair (raise-unit l) is-contr-raise-unit
+  
+  contraction-UU-contr :
+    {l : Level} (A : UU-Contr l) → center-UU-contr l ＝ A
+  contraction-UU-contr A =
+    eq-equiv-UU-Contr
+      ( equiv-is-contr is-contr-raise-unit (is-contr-type-UU-Contr A))
+
+abstract
+  is-contr-UU-Contr : (l : Level) → is-contr (UU-Contr l)
+  is-contr-UU-Contr l = pair (center-UU-contr l) contraction-UU-contr
 ```
 
 ## Properties

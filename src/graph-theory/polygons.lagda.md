@@ -6,7 +6,8 @@
 module graph-theory.polygons where
 
 open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; has-decidable-equality-ℤ-Mod)
+  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; has-decidable-equality-ℤ-Mod;
+    is-finite-ℤ-Mod)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; is-nonzero-ℕ; is-not-one-ℕ)
 
@@ -35,7 +36,7 @@ open import graph-theory.undirected-graphs using
   ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph)
 
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-mere-equiv; is-finite-ℤ-Mod)
+  ( is-finite; is-finite-mere-equiv)
 ```
 
 ## Idea

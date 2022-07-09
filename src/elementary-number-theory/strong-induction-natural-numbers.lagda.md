@@ -7,14 +7,14 @@ title: The strong induction principle for the natural numbers
 
 module elementary-number-theory.strong-induction-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-set-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( _≤-ℕ_; refl-leq-ℕ; leq-ℕ; cases-leq-succ-ℕ; is-prop-leq-ℕ; neg-succ-leq-ℕ;
     leq-eq-left-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; zero-ℕ; succ-ℕ; is-set-ℕ)
+
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.function-extensionality using (eq-htpy)
@@ -65,7 +65,7 @@ eq-zero-strong-ind-ℕ P p0 t = refl
 ```agda
 cases-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (n : ℕ) → (□-≤-ℕ P n) → P (succ-ℕ n)) (n : ℕ)
-  (H : □-≤-ℕ P n) (m : ℕ) (c : coprod (leq-ℕ m n) (m ＝ succ-ℕ n)) → P m
+  (H : □-≤-ℕ P n) (m : ℕ) (c : (leq-ℕ m n) + (m ＝ succ-ℕ n)) → P m
 cases-succ-strong-ind-ℕ P pS n H m (inl q) = H m q
 cases-succ-strong-ind-ℕ P pS n H .(succ-ℕ n) (inr refl) = pS n H
 
@@ -77,7 +77,7 @@ succ-strong-ind-ℕ P pS k H m p =
 
 cases-htpy-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
-  (k : ℕ) (H : □-≤-ℕ P k) (m : ℕ) (c : coprod (leq-ℕ m k) (m ＝ succ-ℕ k)) →
+  (k : ℕ) (H : □-≤-ℕ P k) (m : ℕ) (c : (leq-ℕ m k) + (m ＝ succ-ℕ k)) →
   (q : leq-ℕ m k) →
   ( cases-succ-strong-ind-ℕ P pS k H m c) ＝
   ( H m q)
@@ -97,7 +97,7 @@ htpy-succ-strong-ind-ℕ P pS k H m p q =
 cases-eq-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   (k : ℕ) (H : □-≤-ℕ P k)
-  (c : coprod (leq-ℕ (succ-ℕ k) k) (succ-ℕ k ＝ succ-ℕ k)) →
+  (c : (leq-ℕ (succ-ℕ k) k) + (succ-ℕ k ＝ succ-ℕ k)) →
   ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k) c)) ＝
   ( pS k H)
 cases-eq-succ-strong-ind-ℕ P pS k H (inl p) = ex-falso (neg-succ-leq-ℕ k p)
@@ -169,7 +169,7 @@ cases-eq-comp-succ-strong-ind-ℕ :
       n m p) ＝
     ( strong-ind-ℕ P p0 pS m)) →
   ( m : ℕ) (p : leq-ℕ m (succ-ℕ n)) →
-  ( q : coprod (leq-ℕ m n) (m ＝ succ-ℕ n)) →
+  ( q : (leq-ℕ m n) + (m ＝ succ-ℕ n)) →
   ( succ-strong-ind-ℕ P pS n
     ( induction-strong-ind-ℕ P
       ( zero-strong-ind-ℕ P p0)

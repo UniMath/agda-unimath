@@ -1,5 +1,5 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Concrete groups
 ---
 
 ```agda
@@ -17,8 +17,7 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using (UU-Prop; type-Prop)
 open import foundation.sets using (is-set; UU-Set; is-set-Prop)
-open import foundation.subuniverses using (UU-Trunc)
-open import foundation.truncated-types using (is-trunc)
+open import foundation.truncated-types using (is-trunc; UU-Trunc)
 open import foundation.truncation-levels using (one-𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 
@@ -32,15 +31,16 @@ open import group-theory.higher-groups using
     unit-∞-Group; mul-∞-Group; assoc-mul-∞-Group;
     left-unit-law-mul-∞-Group; right-unit-law-mul-∞-Group;
     coherence-unit-laws-mul-∞-Group; inv-∞-Group;
-    left-inverse-law-mul-∞-Group; right-inverse-law-mul-∞-Group;
-    hom-∞-Group; classifying-map-hom-∞-Group;
+    left-inverse-law-mul-∞-Group; right-inverse-law-mul-∞-Group)
+open import group-theory.homomorphisms-groups using (type-hom-Group)
+open import group-theory.homomorphisms-higher-groups using
+  ( hom-∞-Group; classifying-map-hom-∞-Group;
     preserves-point-classifying-map-hom-∞-Group;
     map-hom-∞-Group; preserves-unit-map-hom-∞-Group;
     preserves-mul-map-hom-∞-Group; preserves-inv-map-hom-∞-Group;
     htpy-hom-∞-Group; extensionality-hom-∞-Group;
     id-hom-∞-Group; comp-hom-∞-Group; assoc-comp-hom-∞-Group;
     left-unit-law-comp-hom-∞-Group; right-unit-law-comp-hom-∞-Group)
-open import group-theory.homomorphisms-groups using (type-hom-Group)
 
 open import structured-types.pointed-types using (Pointed-Type)
 

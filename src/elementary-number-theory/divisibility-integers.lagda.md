@@ -28,7 +28,7 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
   
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-types using
   ( is-decidable; dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -179,7 +179,7 @@ pr2 (div-is-unit-ℤ x y (pair d p)) =
 -- An integer is a unit if and only if it is 1 or -1.
 
 is-one-or-neg-one-ℤ : ℤ → UU lzero
-is-one-or-neg-one-ℤ x = coprod (is-one-ℤ x) (is-neg-one-ℤ x)
+is-one-or-neg-one-ℤ x = (is-one-ℤ x) + (is-neg-one-ℤ x)
 
 is-unit-one-ℤ : is-unit-ℤ one-ℤ
 is-unit-one-ℤ = refl-div-ℤ one-ℤ

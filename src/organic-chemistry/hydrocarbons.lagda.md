@@ -51,7 +51,7 @@ hydrocarbon =
             Σ ( vertex-Undirected-Graph-𝔽 G)
               ( λ c' →
                 edge-Undirected-Graph-𝔽 G (standard-unordered-pair c c')) ↪
-                type-UU-Fin (pr1 (C c))) ×
+                type-UU-Fin 4 (pr1 (C c))) ×
           ( ( (c : vertex-Undirected-Graph-𝔽 G) →
               ¬ ( edge-Undirected-Graph-𝔽 G
                   ( standard-unordered-pair c c))) ×

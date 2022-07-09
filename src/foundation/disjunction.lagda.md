@@ -8,7 +8,7 @@ title: Disjunction of propositions
 module foundation.disjunction where
 
 open import foundation.conjunction using (conj-Prop)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-propositions using
   (decidable-Prop; prop-decidable-Prop; type-decidable-Prop; is-decidable-type-decidable-Prop)
 open import foundation.decidable-types using
@@ -33,7 +33,7 @@ The disjunction of two propositions `P` and `Q` is the proposition that `P` hold
 ```agda
 disj-Prop :
   {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
-disj-Prop P Q = trunc-Prop (coprod (type-Prop P) (type-Prop Q))
+disj-Prop P Q = trunc-Prop (type-Prop P + type-Prop Q)
 
 type-disj-Prop :
   {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU (l1 ⊔ l2)
@@ -52,7 +52,7 @@ pr1 (pr2 (disj-decidable-Prop P Q)) =
   is-prop-type-disj-Prop (prop-decidable-Prop P) (prop-decidable-Prop Q)
 pr2 (pr2 (disj-decidable-Prop P Q)) =
   is-decidable-trunc-Prop-is-merely-decidable
-    ( coprod (type-decidable-Prop P) (type-decidable-Prop Q))
+    ( type-decidable-Prop P + type-decidable-Prop Q)
     ( unit-trunc-Prop
       ( is-decidable-coprod
         ( is-decidable-type-decidable-Prop P)

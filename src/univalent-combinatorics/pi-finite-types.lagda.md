@@ -16,9 +16,11 @@ open import foundation.connected-types using
 open import foundation.constant-maps using (const)
 open import foundation.contractible-types using
   ( is-contr; is-prop-is-contr; center; is-contr-equiv'; is-contr-Prop)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
+open import foundation.decidable-propositions using
+  ( is-finite-is-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-Prop; is-decidable-equiv'; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -112,7 +114,7 @@ open import
   using
   ( equiv-distributive-trunc-Π-is-finite-Set)
 open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; is-set-is-finite; has-decidable-equality-is-finite)
+  ( is-finite-eq; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
@@ -120,7 +122,7 @@ open import univalent-combinatorics.finite-types using
     is-path-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
     is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
     is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
-    is-finite-is-decidable-Prop)
+    is-set-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
 open import univalent-combinatorics.function-types using
@@ -316,7 +318,7 @@ pr2 (unit-π-Finite k) = is-π-finite-unit k
 is-π-finite-coprod :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
   is-π-finite k A → is-π-finite k B →
-  is-π-finite k (coprod A B)
+  is-π-finite k (A + B)
 is-π-finite-coprod zero-ℕ H K =
   is-finite-equiv'
     ( equiv-distributive-trunc-coprod-Set _ _)
@@ -343,8 +345,7 @@ pr2 (is-π-finite-coprod (succ-ℕ k) H K) (inr x) (inr y) =
 coprod-π-Finite :
   {l1 l2 : Level} (k : ℕ) →
   π-Finite l1 k → π-Finite l2 k → π-Finite (l1 ⊔ l2) k
-pr1 (coprod-π-Finite k A B) =
-  coprod (type-π-Finite k A) (type-π-Finite k B)
+pr1 (coprod-π-Finite k A B) = (type-π-Finite k A + type-π-Finite k B)
 pr2 (coprod-π-Finite k A B) =
   is-π-finite-coprod k
     ( is-π-finite-type-π-Finite k A)
@@ -402,7 +403,7 @@ is-π-finite-UU-Fin zero-ℕ n =
 pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) = is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin x y)
+    ( equiv-equiv-eq-UU-Fin n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -417,7 +418,7 @@ pr1 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) =
   is-π-finite-UU-Fin-Level zero-ℕ n
 pr2 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) x y =
   is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin-Level x y)
+    ( equiv-equiv-eq-UU-Fin-Level n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -494,16 +495,16 @@ is-locally-finite-prod f g x y =
     ( is-finite-prod (f (pr1 x) (pr1 y)) (g (pr2 x) (pr2 y)))
 
 is-locally-finite-Π-Fin :
-  {l1 : Level} {k : ℕ} {B : Fin k → UU l1} →
+  {l1 : Level} (k : ℕ) {B : Fin k → UU l1} →
   ((x : Fin k) → is-locally-finite (B x)) →
   is-locally-finite ((x : Fin k) → B x)
-is-locally-finite-Π-Fin {l1} {zero-ℕ} {B} f =
+is-locally-finite-Π-Fin {l1} zero-ℕ {B} f =
   is-locally-finite-is-contr (dependent-universal-property-empty' B)
-is-locally-finite-Π-Fin {l1} {succ-ℕ k} {B} f =
+is-locally-finite-Π-Fin {l1} (succ-ℕ k) {B} f =
   is-locally-finite-equiv
     ( equiv-dependent-universal-property-coprod B)
     ( is-locally-finite-prod
-      ( is-locally-finite-Π-Fin (λ x → f (inl x)))
+      ( is-locally-finite-Π-Fin k (λ x → f (inl x)))
       ( is-locally-finite-equiv
         ( equiv-dependent-universal-property-unit (B ∘ inr))
         ( f (inr star))))
@@ -514,7 +515,7 @@ is-locally-finite-Π-count :
 is-locally-finite-Π-count {l1} {l2} {A} {B} (pair k e) g =
   is-locally-finite-equiv
     ( equiv-precomp-Π e B )
-    ( is-locally-finite-Π-Fin (λ x → g (map-equiv e x)))
+    ( is-locally-finite-Π-Fin k (λ x → g (map-equiv e x)))
 
 is-locally-finite-Π :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-finite A →
@@ -704,11 +705,11 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
 
 module _
   {l1 l2 l3 : Level} {A1 : UU l1} {A2 : UU l2} {B : UU l3}
-  (f : coprod A1 A2 → B) (e : coprod A1 A2 ≃ type-trunc-Set B)
+  (f : A1 + A2 → B) (e : (A1 + A2) ≃ type-trunc-Set B)
   (H : (unit-trunc-Set ∘ f) ~ map-equiv e)
   where
   
-  map-is-coprod-codomain : coprod (im (f ∘ inl)) (im (f ∘ inr)) → B
+  map-is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
   map-is-coprod-codomain = ind-coprod (λ x → B) pr1 pr1
 
   triangle-is-coprod-codomain :
@@ -752,7 +753,7 @@ module _
     where
     a = map-inv-equiv e (unit-trunc-Set b)
 
-  is-coprod-codomain : coprod (im (f ∘ inl)) (im (f ∘ inr)) ≃ B
+  is-coprod-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
   pr1 is-coprod-codomain = map-is-coprod-codomain
   pr2 is-coprod-codomain =
     is-equiv-is-emb-is-surjective
@@ -821,6 +822,7 @@ has-finite-connected-components-Σ' zero-ℕ e H K =
 has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
   apply-universal-property-trunc-Prop
     ( has-presentation-of-cardinality-has-cardinality-components
+      ( succ-ℕ k)
       ( unit-trunc-Prop e))
     ( has-finite-connected-components-Prop (Σ A B))
     ( α)
@@ -857,7 +859,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
                   ( H (pr1 x) (pr1 y))))
             ( λ x → K (pr1 x)))))
     where
-    g : coprod (Σ (im (f ∘ inl)) (B ∘ pr1)) (Σ (im (f ∘ inr)) (B ∘ pr1)) ≃
+    g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃
         Σ A B
     g = ( equiv-Σ B
           ( is-coprod-codomain f

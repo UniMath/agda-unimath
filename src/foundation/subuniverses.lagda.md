@@ -7,6 +7,8 @@ title: Subuniverse
 
 module foundation.subuniverses where
 
+open import foundation-core.contractible-types using
+  ( is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
   ( _≃_; id-equiv; is-equiv; map-inv-is-equiv)
@@ -20,18 +22,12 @@ open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation-core.subtypes using
   ( is-subtype; subtype; is-emb-inclusion-subtype)
+open import foundation-core.univalence using
+  ( eq-equiv; is-contr-total-equiv; equiv-eq)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-Prop; equiv-is-contr)
 open import foundation.equality-dependent-function-types
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-is-equiv; is-trunc-Prop; is-trunc-equiv-is-trunc)
-open import foundation.truncation-levels using
-  ( 𝕋; neg-two-𝕋; succ-𝕋; neg-one-𝕋; zero-𝕋; one-𝕋)
 open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
-open import foundation.univalence using
-  ( eq-equiv; is-contr-total-equiv; equiv-eq; univalence)
 ```
 
 ## Idea
@@ -175,86 +171,4 @@ module _
     (Y Z : fam-subuniverse P X) → equiv-fam-subuniverse Y Z → (Y ＝ Z)
   eq-equiv-fam-subuniverse Y Z =
     map-inv-is-equiv (is-equiv-equiv-eq-fam-subuniverse Y Z)
-```
-
-### The subuniverse of contractible types
-
-```agda
-UU-Contr : (l : Level) → UU (lsuc l)
-UU-Contr l = total-subuniverse is-contr-Prop
-
-type-UU-Contr : {l : Level} → UU-Contr l → UU l
-type-UU-Contr A = pr1 A
-
-abstract
-  is-contr-type-UU-Contr :
-    {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
-  is-contr-type-UU-Contr A = pr2 A
-
-equiv-UU-Contr :
-  {l1 l2 : Level} (X : UU-Contr l1) (Y : UU-Contr l2) → UU (l1 ⊔ l2)
-equiv-UU-Contr X Y = type-UU-Contr X ≃ type-UU-Contr Y
-
-equiv-eq-UU-Contr :
-  {l1 : Level} (X Y : UU-Contr l1) → (X ＝ Y) → equiv-UU-Contr X Y
-equiv-eq-UU-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
-
-abstract
-  is-equiv-equiv-eq-UU-Contr :
-    {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
-  is-equiv-equiv-eq-UU-Contr X Y =
-    is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
-
-eq-equiv-UU-Contr :
-  {l1 : Level} {X Y : UU-Contr l1} → equiv-UU-Contr X Y → (X ＝ Y)
-eq-equiv-UU-Contr = eq-equiv-subuniverse is-contr-Prop
-
-abstract
-  center-UU-contr : (l : Level) → UU-Contr l
-  center-UU-contr l = pair (raise-unit l) is-contr-raise-unit
-  
-  contraction-UU-contr :
-    {l : Level} (A : UU-Contr l) → center-UU-contr l ＝ A
-  contraction-UU-contr A =
-    eq-equiv-UU-Contr
-      ( equiv-is-contr is-contr-raise-unit (is-contr-type-UU-Contr A))
-
-abstract
-  is-contr-UU-Contr : (l : Level) → is-contr (UU-Contr l)
-  is-contr-UU-Contr l = pair (center-UU-contr l) contraction-UU-contr
-```
-
-### The subuniverse of truncated types
-
-```agda
-UU-Trunc : (k : 𝕋) (l : Level) → UU (lsuc l)
-UU-Trunc k l = Σ (UU l) (is-trunc k)
-
-type-UU-Trunc : {k : 𝕋} {l : Level} → UU-Trunc k l → UU l
-type-UU-Trunc A = pr1 A
-
-abstract
-  is-trunc-type-UU-Trunc :
-    {k : 𝕋} {l : Level} (A : UU-Trunc k l) → is-trunc k (type-UU-Trunc A)
-  is-trunc-type-UU-Trunc A = pr2 A
-
-abstract
-  is-trunc-UU-Trunc :
-    (k : 𝕋) (l : Level) → is-trunc (succ-𝕋 k) (UU-Trunc k l)
-  is-trunc-UU-Trunc k l X Y =
-    is-trunc-is-equiv k
-      ( pr1 X ＝ pr1 Y)
-      ( ap pr1)
-      ( is-emb-inclusion-subtype
-        ( is-trunc-Prop k) X Y)
-      ( is-trunc-is-equiv k
-        ( (pr1 X) ≃ (pr1 Y))
-        ( equiv-eq)
-        ( univalence (pr1 X) (pr1 Y))
-        ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
-
-abstract
-  is-one-type-UU-Set :
-    (l : Level)  → is-trunc one-𝕋 (UU-Set l)
-  is-one-type-UU-Set l = is-trunc-UU-Trunc zero-𝕋 l
 ```

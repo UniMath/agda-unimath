@@ -8,7 +8,7 @@ title: Unordered pairs of elements in a type
 module foundation.unordered-pairs where
 
 open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_)
@@ -40,12 +40,12 @@ open import univalent-combinatorics.2-element-types using
   ( 2-Element-Type; type-2-Element-Type; map-swap-2-Element-Type;
     has-two-elements; has-two-elements-type-2-Element-Type)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( is-set-Fin; has-decidable-equality-Fin)
+  ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin; Fin-UU-Fin; equiv-UU-Fin; id-equiv-UU-Fin;
     is-contr-total-equiv-UU-Fin; type-UU-Fin)
 open import univalent-combinatorics.standard-finite-types using
-  ( Fin; equiv-succ-Fin)
+  ( Fin; equiv-succ-Fin; is-set-Fin)
 ```
 
 ## Idea
@@ -87,7 +87,7 @@ module _
   has-decidable-equality-type-unordered-pair =
     has-decidable-equality-mere-equiv'
       has-two-elements-type-unordered-pair
-      has-decidable-equality-Fin
+      ( has-decidable-equality-Fin 2)
 
   element-unordered-pair : type-unordered-pair → A
   element-unordered-pair = pr2 p
@@ -143,10 +143,10 @@ module _
 
   Eq-unordered-pair : (p q : unordered-pair A) → UU l1
   Eq-unordered-pair (pair X p) (pair Y q) =
-    Σ (equiv-UU-Fin X Y) (λ e → p ~ (q ∘ map-equiv e))
+    Σ (equiv-UU-Fin 2 X Y) (λ e → p ~ (q ∘ map-equiv e))
 
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
-  pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin X
+  pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin 2 X
   pr2 (refl-Eq-unordered-pair (pair X p)) = refl-htpy
 
   Eq-eq-unordered-pair :
@@ -159,8 +159,8 @@ module _
   is-contr-total-Eq-unordered-pair (pair X p) =
     is-contr-total-Eq-structure
       ( λ Y q e → p ~ (q ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin X)
-      ( pair X (id-equiv-UU-Fin X))
+      ( is-contr-total-equiv-UU-Fin 2 X)
+      ( pair X (id-equiv-UU-Fin 2 X))
       ( is-contr-total-htpy p)
 
   is-equiv-Eq-eq-unordered-pair :
@@ -222,7 +222,9 @@ is-commutative-standard-unordered-pair x y =
   eq-Eq-unordered-pair
     ( standard-unordered-pair x y)
     ( standard-unordered-pair y x)
-    ( pair equiv-succ-Fin (λ { (inl (inr star)) → refl ; (inr star) → refl}))
+    ( pair
+      ( equiv-succ-Fin 2)
+      ( λ { (inl (inr star)) → refl ; (inr star) → refl}))
 ```
 
 ### Functoriality of unordered pairs
@@ -266,7 +268,7 @@ preserves-refl-htpy-unordered-pair f p =
 equiv-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → (unordered-pair A ≃ unordered-pair B)
-equiv-unordered-pair e = equiv-tot (λ X → equiv-postcomp (type-UU-Fin X) e)
+equiv-unordered-pair e = equiv-tot (λ X → equiv-postcomp (type-UU-Fin 2 X) e)
 
 map-equiv-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →

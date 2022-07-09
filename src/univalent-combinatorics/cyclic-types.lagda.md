@@ -31,7 +31,7 @@ open import foundation.connected-types using
   ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_; inv-equiv;
@@ -405,7 +405,7 @@ issec-equiv-Eq-Cyclic-Type :
   (k : ℕ) →
   (Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) ∘ equiv-Eq-Cyclic-Type k) ~ id
 issec-equiv-Eq-Cyclic-Type zero-ℕ x = left-unit-law-add-ℤ x
-issec-equiv-Eq-Cyclic-Type (succ-ℕ k) x = left-unit-law-add-Fin x
+issec-equiv-Eq-Cyclic-Type (succ-ℕ k) x = left-unit-law-add-Fin k x
 
 preserves-pred-preserves-succ-map-ℤ-Mod :
   (k : ℕ) (f : ℤ-Mod k → ℤ-Mod k) →

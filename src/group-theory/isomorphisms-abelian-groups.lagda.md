@@ -1,4 +1,6 @@
-# Isomorphisms of abelian groups
+---
+title: Isomorphisms of abelian groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

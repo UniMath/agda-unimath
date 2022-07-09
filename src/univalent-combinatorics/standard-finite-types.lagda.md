@@ -7,22 +7,20 @@ title: The standard finite types
 
 module univalent-combinatorics.standard-finite-types where
 
-open import elementary-number-theory.equality-natural-numbers using (is-set-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
     leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ; is-set-ℕ)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; eq-is-contr')
 
-open import foundation.booleans using (bool; true; false)
-open import foundation.coproduct-types using (coprod; inl; inr; neq-inl-inr)
+open import foundation.coproduct-types using (_+_; inl; inr; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-types using (empty; ex-falso)
-open import foundation.equality-coproduct-types using (is-emb-inl)
+open import foundation.empty-types using (empty; ex-falso; empty-Set)
+open import foundation.equality-coproduct-types using (is-emb-inl; coprod-Set)
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse; map-inv-equiv; map-equiv)
 open import foundation.functions using (_∘_; id)
@@ -34,8 +32,9 @@ open import foundation.negation using (¬; map-neg)
 open import foundation.non-contractible-types using
   ( is-not-contractible; is-not-contractible-empty)
 open import foundation.raising-universe-levels using
-  ( raise; equiv-raise; map-raise)
-open import foundation.unit-type using (unit; star; is-contr-unit)
+  ( raise; equiv-raise; map-raise; raise-Set)
+open import foundation.sets using (UU-Set; type-Set; is-set-type-Set; is-set)
+open import foundation.unit-type using (unit; star; is-contr-unit; unit-Set)
 open import foundation.universe-levels using (Level; UU; lzero)
 
 open import structured-types.types-equipped-with-endomorphisms
@@ -50,9 +49,15 @@ The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (
 ### The standard finite types in universe level zero.
 
 ```agda
+Fin-Set : ℕ → UU-Set lzero
+Fin-Set zero-ℕ = empty-Set
+Fin-Set (succ-ℕ n) = coprod-Set (Fin-Set n) unit-Set
+
 Fin : ℕ → UU lzero
-Fin zero-ℕ = empty
-Fin (succ-ℕ k) = coprod (Fin k) unit
+Fin n = type-Set (Fin-Set n)
+
+is-set-Fin : (n : ℕ) → is-set (Fin n)
+is-set-Fin n = is-set-type-Set (Fin-Set n)
 
 inl-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
@@ -62,24 +67,24 @@ emb-inl-Fin : (k : ℕ) → Fin k ↪ Fin (succ-ℕ k)
 pr1 (emb-inl-Fin k) = inl-Fin k
 pr2 (emb-inl-Fin k) = is-emb-inl (Fin k) unit
 
-neg-one-Fin : {k : ℕ} → Fin (succ-ℕ k)
-neg-one-Fin {k} = inr star
+neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
+neg-one-Fin k = inr star
 
-is-neg-one-Fin : {k : ℕ} → Fin k → UU lzero
-is-neg-one-Fin {succ-ℕ k} x = Id x neg-one-Fin
+is-neg-one-Fin : (k : ℕ) → Fin k → UU lzero
+is-neg-one-Fin (succ-ℕ k) x = Id x (neg-one-Fin k)
 
-neg-two-Fin :
-  {k : ℕ} → Fin (succ-ℕ k)
-neg-two-Fin {zero-ℕ} = inr star
-neg-two-Fin {succ-ℕ k} = inl (inr star)
+neg-two-Fin : (k : ℕ) → Fin (succ-ℕ k)
+neg-two-Fin zero-ℕ = inr star
+neg-two-Fin (succ-ℕ k) = inl (inr star)
 
-is-inl-Fin : {k : ℕ} → Fin (succ-ℕ k) → UU lzero
-is-inl-Fin {k} x = Σ (Fin k) (λ y → Id (inl y) x)
+is-inl-Fin : (k : ℕ) → Fin (succ-ℕ k) → UU lzero
+is-inl-Fin k x = Σ (Fin k) (λ y → Id (inl y) x)
 
 is-neg-one-is-not-inl-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → ¬ (is-inl-Fin x) → is-neg-one-Fin x
-is-neg-one-is-not-inl-Fin (inl x) H = ex-falso (H (pair x refl))
-is-neg-one-is-not-inl-Fin (inr star) H = refl
+  (k : ℕ) (x : Fin (succ-ℕ k)) →
+  ¬ (is-inl-Fin k x) → is-neg-one-Fin (succ-ℕ k) x
+is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (pair x refl))
+is-neg-one-is-not-inl-Fin k (inr star) H = refl
 ```
 
 ### The standard finite types in an arbitrary universe
@@ -93,6 +98,9 @@ equiv-raise-Fin l k = equiv-raise l (Fin k)
 
 map-raise-Fin : (l : Level) (k : ℕ) → Fin k → raise-Fin l k
 map-raise-Fin l k = map-raise
+
+raise-Fin-Set : (l : Level) (k : ℕ) → UU-Set l
+raise-Fin-Set l k = raise-Set l (Fin-Set k)
 ```
 
 ## Properties
@@ -101,11 +109,11 @@ map-raise-Fin l k = map-raise
 
 ```agda
 is-decidable-is-inl-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin x)
-is-decidable-is-inl-Fin (inl x) = inl (pair x refl)
-is-decidable-is-inl-Fin (inr star) = inr α
+  (k : ℕ) (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin k x)
+is-decidable-is-inl-Fin k (inl x) = inl (pair x refl)
+is-decidable-is-inl-Fin k (inr star) = inr α
   where
-  α : is-inl-Fin (inr star) → empty
+  α : is-inl-Fin k (inr star) → empty
   α (pair y ())
 ```
 
@@ -145,255 +153,228 @@ is-not-contractible-Fin :
 is-not-contractible-Fin zero-ℕ f = is-not-contractible-empty
 is-not-contractible-Fin (succ-ℕ zero-ℕ) f C = f refl
 is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
-  neq-inl-inr (eq-is-contr' C neg-two-Fin neg-one-Fin)
-```
-
-### `Fin 2` is equivalent to `bool`
-
-```agda
-bool-Fin-two-ℕ : Fin 2 → bool
-bool-Fin-two-ℕ (inl (inr star)) = true
-bool-Fin-two-ℕ (inr star) = false
-
-Fin-two-ℕ-bool : bool → Fin 2
-Fin-two-ℕ-bool true = inl (inr star)
-Fin-two-ℕ-bool false = inr star
-
-abstract
-  isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
-  isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
-  isretr-Fin-two-ℕ-bool (inr star) = refl
-
-abstract
-  issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
-  issec-Fin-two-ℕ-bool true = refl
-  issec-Fin-two-ℕ-bool false = refl
-
-equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
-pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
-pr2 equiv-bool-Fin-two-ℕ =
-  is-equiv-has-inverse
-    ( Fin-two-ℕ-bool)
-    ( issec-Fin-two-ℕ-bool)
-    ( isretr-Fin-two-ℕ-bool)
+  neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
 ```
 
 ### The inclusion of Fin k into ℕ
 
 ```agda
-nat-Fin : {k : ℕ} → Fin k → ℕ
-nat-Fin {succ-ℕ k} (inl x) = nat-Fin x
-nat-Fin {succ-ℕ k} (inr x) = k
+nat-Fin : (k : ℕ) → Fin k → ℕ
+nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
+nat-Fin (succ-ℕ k) (inr x) = k
 
-strict-upper-bound-nat-Fin : {k : ℕ} (x : Fin k) → le-ℕ (nat-Fin x) k
-strict-upper-bound-nat-Fin {succ-ℕ k} (inl x) =
+strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
+strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
   transitive-le-ℕ
-    ( nat-Fin x)
+    ( nat-Fin k x)
     ( k)
     ( succ-ℕ k)
-    ( strict-upper-bound-nat-Fin x)
+    ( strict-upper-bound-nat-Fin k x)
     ( succ-le-ℕ k)
-strict-upper-bound-nat-Fin {succ-ℕ k} (inr star) =
+strict-upper-bound-nat-Fin (succ-ℕ k) (inr star) =
   succ-le-ℕ k
 
-upper-bound-nat-Fin : {k : ℕ} (x : Fin (succ-ℕ k)) → leq-ℕ (nat-Fin x) k
-upper-bound-nat-Fin {zero-ℕ} (inr star) = star
-upper-bound-nat-Fin {succ-ℕ k} (inl x) =
-  preserves-leq-succ-ℕ (nat-Fin x) k (upper-bound-nat-Fin x)
-upper-bound-nat-Fin {succ-ℕ k} (inr star) = refl-leq-ℕ (succ-ℕ k)
+upper-bound-nat-Fin :
+  (k : ℕ) (x : Fin (succ-ℕ k)) → leq-ℕ (nat-Fin (succ-ℕ k) x) k
+upper-bound-nat-Fin zero-ℕ (inr star) = star
+upper-bound-nat-Fin (succ-ℕ k) (inl x) =
+  preserves-leq-succ-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
+upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
 
-is-injective-nat-Fin : {k : ℕ} → is-injective (nat-Fin {k})
-is-injective-nat-Fin {succ-ℕ k} {inl x} {inl y} p =
-  ap inl (is-injective-nat-Fin p)
-is-injective-nat-Fin {succ-ℕ k} {inl x} {inr star} p =
-  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin x) p)
-is-injective-nat-Fin {succ-ℕ k} {inr star} {inl y} p =
-  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin y) (inv p))
-is-injective-nat-Fin {succ-ℕ k} {inr star} {inr star} p =
+is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
+is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
+  ap inl (is-injective-nat-Fin k p)
+is-injective-nat-Fin (succ-ℕ k) {inl x} {inr star} p =
+  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k x) p)
+is-injective-nat-Fin (succ-ℕ k) {inr star} {inl y} p =
+  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k y) (inv p))
+is-injective-nat-Fin (succ-ℕ k) {inr star} {inr star} p =
   refl
 
-is-emb-nat-Fin : {k : ℕ} → is-emb (nat-Fin {k})
-is-emb-nat-Fin {k} = is-emb-is-injective is-set-ℕ is-injective-nat-Fin
+is-emb-nat-Fin : (k : ℕ) → is-emb (nat-Fin k)
+is-emb-nat-Fin k = is-emb-is-injective is-set-ℕ (is-injective-nat-Fin k)
 
 emb-nat-Fin : (k : ℕ) → Fin k ↪ ℕ
-pr1 (emb-nat-Fin k) = nat-Fin
-pr2 (emb-nat-Fin k) = is-emb-nat-Fin
+pr1 (emb-nat-Fin k) = nat-Fin k
+pr2 (emb-nat-Fin k) = is-emb-nat-Fin k
 ```
 
 ### The zero elements in the standard finite types
 
 ```agda
-zero-Fin : {k : ℕ} → Fin (succ-ℕ k)
-zero-Fin {zero-ℕ} = inr star
-zero-Fin {succ-ℕ k} = inl zero-Fin
+zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
+zero-Fin zero-ℕ = inr star
+zero-Fin (succ-ℕ k) = inl (zero-Fin k)
 
-is-zero-Fin : {k : ℕ} → Fin k → UU lzero
-is-zero-Fin {succ-ℕ k} x = Id x zero-Fin
+is-zero-Fin : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin (succ-ℕ k) x = Id x (zero-Fin k)
 
-is-zero-Fin' : {k : ℕ} → Fin k → UU lzero
-is-zero-Fin' {succ-ℕ k} x = Id zero-Fin x
+is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin' (succ-ℕ k) x = Id (zero-Fin k) x
 
-is-nonzero-Fin : {k : ℕ} → Fin k → UU lzero
-is-nonzero-Fin {succ-ℕ k} x = ¬ (is-zero-Fin x)
+is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
+is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
 ```
 
 ### The successor function on the standard finite types
 
 ```agda
-skip-zero-Fin : {k : ℕ} → Fin k → Fin (succ-ℕ k)
-skip-zero-Fin {succ-ℕ k} (inl x) = inl (skip-zero-Fin x)
-skip-zero-Fin {succ-ℕ k} (inr star) = inr star
+skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
+skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
+skip-zero-Fin (succ-ℕ k) (inr star) = inr star
 
-succ-Fin : {k : ℕ} → Fin k → Fin k
-succ-Fin {succ-ℕ k} (inl x) = skip-zero-Fin x
-succ-Fin {succ-ℕ k} (inr star) = zero-Fin
+succ-Fin : (k : ℕ) → Fin k → Fin k
+succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
 
 Fin-Endo : ℕ → Endo lzero
 pr1 (Fin-Endo k) = Fin k
-pr2 (Fin-Endo k) = succ-Fin
+pr2 (Fin-Endo k) = succ-Fin k
 ```
 
 ```agda
-is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (zero-Fin {k}))
+is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (succ-ℕ k) (zero-Fin k))
 is-zero-nat-zero-Fin {zero-ℕ} = refl
 is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
 
 nat-skip-zero-Fin :
-  {k : ℕ} (x : Fin k) → Id (nat-Fin (skip-zero-Fin x)) (succ-ℕ (nat-Fin x))
-nat-skip-zero-Fin {succ-ℕ k} (inl x) = nat-skip-zero-Fin x
-nat-skip-zero-Fin {succ-ℕ k} (inr star) = refl
+  (k : ℕ) (x : Fin k) →
+  Id (nat-Fin (succ-ℕ k) (skip-zero-Fin k x)) (succ-ℕ (nat-Fin k x))
+nat-skip-zero-Fin (succ-ℕ k) (inl x) = nat-skip-zero-Fin k x
+nat-skip-zero-Fin (succ-ℕ k) (inr star) = refl
 
 nat-succ-Fin :
-  {k : ℕ} (x : Fin k) → Id (nat-Fin (succ-Fin (inl x))) (succ-ℕ (nat-Fin x))
-nat-succ-Fin {k} x = nat-skip-zero-Fin x
+  (k : ℕ) (x : Fin k) → Id (nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))) (succ-ℕ (nat-Fin k x))
+nat-succ-Fin k x = nat-skip-zero-Fin k x
 ```
 
 ```agda
-one-Fin : {k : ℕ} → Fin (succ-ℕ k)
-one-Fin {k} = succ-Fin zero-Fin
+one-Fin : (k : ℕ) → Fin (succ-ℕ k)
+one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
 
-is-one-Fin : {k : ℕ} → Fin k → UU lzero
-is-one-Fin {succ-ℕ k} x = Id x one-Fin
+is-one-Fin : (k : ℕ) → Fin k → UU lzero
+is-one-Fin (succ-ℕ k) x = Id x (one-Fin k)
 
 is-zero-or-one-Fin-two-ℕ :
-  (x : Fin 2) → coprod (is-zero-Fin x) (is-one-Fin x)
+  (x : Fin 2) → (is-zero-Fin 2 x) + (is-one-Fin 2 x)
 is-zero-or-one-Fin-two-ℕ (inl (inr star)) = inl refl
 is-zero-or-one-Fin-two-ℕ (inr star) = inr refl
 
 is-one-nat-one-Fin :
-  (k : ℕ) → is-one-ℕ (nat-Fin (one-Fin {succ-ℕ k}))
+  (k : ℕ) → is-one-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k)))
 is-one-nat-one-Fin zero-ℕ = refl
 is-one-nat-one-Fin (succ-ℕ k) = is-one-nat-one-Fin k
 ```
 
 ```agda
-is-injective-inl-Fin : {k : ℕ} → is-injective (inl-Fin k)
-is-injective-inl-Fin refl = refl
+is-injective-inl-Fin : (k : ℕ) → is-injective (inl-Fin k)
+is-injective-inl-Fin k refl = refl
 
 -- Exercise 7.5 (c)
 
 neq-zero-succ-Fin :
-  {k : ℕ} {x : Fin k} → is-nonzero-Fin (succ-Fin (inl-Fin k x))
+  {k : ℕ} {x : Fin k} → is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
 neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
-  neq-zero-succ-Fin (is-injective-inl-Fin p)
+  neq-zero-succ-Fin (is-injective-inl-Fin (succ-ℕ k) p)
 neq-zero-succ-Fin {succ-ℕ k} {inr star} ()
 
 -- Exercise 7.5 (d)
 
-is-injective-skip-zero-Fin : {k : ℕ} → is-injective (skip-zero-Fin {k})
-is-injective-skip-zero-Fin {succ-ℕ k} {inl x} {inl y} p =
-  ap inl (is-injective-skip-zero-Fin (is-injective-inl-Fin p))
-is-injective-skip-zero-Fin {succ-ℕ k} {inl x} {inr star} ()
-is-injective-skip-zero-Fin {succ-ℕ k} {inr star} {inl y} ()
-is-injective-skip-zero-Fin {succ-ℕ k} {inr star} {inr star} p = refl
+is-injective-skip-zero-Fin : (k : ℕ) → is-injective (skip-zero-Fin k)
+is-injective-skip-zero-Fin (succ-ℕ k) {inl x} {inl y} p =
+  ap inl (is-injective-skip-zero-Fin k (is-injective-inl-Fin (succ-ℕ k) p))
+is-injective-skip-zero-Fin (succ-ℕ k) {inl x} {inr star} ()
+is-injective-skip-zero-Fin (succ-ℕ k) {inr star} {inl y} ()
+is-injective-skip-zero-Fin (succ-ℕ k) {inr star} {inr star} p = refl
 
-is-injective-succ-Fin : {k : ℕ} → is-injective (succ-Fin {k})
-is-injective-succ-Fin {succ-ℕ k} {inl x} {inl y} p =
-  ap inl (is-injective-skip-zero-Fin {k} {x} {y} p)
-is-injective-succ-Fin {succ-ℕ k} {inl x} {inr star} p =
+is-injective-succ-Fin : (k : ℕ) → is-injective (succ-Fin k)
+is-injective-succ-Fin (succ-ℕ k) {inl x} {inl y} p =
+  ap inl (is-injective-skip-zero-Fin k {x} {y} p)
+is-injective-succ-Fin (succ-ℕ k) {inl x} {inr star} p =
   ex-falso (neq-zero-succ-Fin {succ-ℕ k} {inl x} (ap inl p))
-is-injective-succ-Fin {succ-ℕ k} {inr star} {inl y} p =
+is-injective-succ-Fin (succ-ℕ k) {inr star} {inl y} p =
   ex-falso (neq-zero-succ-Fin {succ-ℕ k} {inl y} (ap inl (inv p)))
-is-injective-succ-Fin {succ-ℕ k} {inr star} {inr star} p = refl
+is-injective-succ-Fin (succ-ℕ k) {inr star} {inr star} p = refl
 ```
 
 ```agda
 -- We define a function skip-neg-two-Fin in order to define pred-Fin.
 
 skip-neg-two-Fin :
-  {k : ℕ} → Fin k → Fin (succ-ℕ k)
-skip-neg-two-Fin {succ-ℕ k} (inl x) = inl (inl x)
-skip-neg-two-Fin {succ-ℕ k} (inr x) = neg-one-Fin {succ-ℕ k}
+  (k : ℕ) → Fin k → Fin (succ-ℕ k)
+skip-neg-two-Fin (succ-ℕ k) (inl x) = inl (inl x)
+skip-neg-two-Fin (succ-ℕ k) (inr x) = neg-one-Fin (succ-ℕ k)
 
 -- We define the predecessor function on Fin k.
 
-pred-Fin : {k : ℕ} → Fin k → Fin k
-pred-Fin {succ-ℕ k} (inl x) = skip-neg-two-Fin (pred-Fin x)
-pred-Fin {succ-ℕ k} (inr x) = neg-two-Fin
+pred-Fin : (k : ℕ) → Fin k → Fin k
+pred-Fin (succ-ℕ k) (inl x) = skip-neg-two-Fin k (pred-Fin k x)
+pred-Fin (succ-ℕ k) (inr x) = neg-two-Fin k
 
 -- We now turn to the exercise.
 
 pred-zero-Fin :
-  {k : ℕ} → is-neg-one-Fin (pred-Fin {succ-ℕ k} zero-Fin)
-pred-zero-Fin {zero-ℕ} = refl
-pred-zero-Fin {succ-ℕ k} = ap skip-neg-two-Fin (pred-zero-Fin {k})
+  (k : ℕ) → is-neg-one-Fin (succ-ℕ k) (pred-Fin (succ-ℕ k) (zero-Fin k))
+pred-zero-Fin (zero-ℕ) = refl
+pred-zero-Fin (succ-ℕ k) = ap (skip-neg-two-Fin (succ-ℕ k)) (pred-zero-Fin k)
 
 succ-skip-neg-two-Fin :
-  {k : ℕ} (x : Fin (succ-ℕ k)) →
-  Id (succ-Fin (skip-neg-two-Fin x)) (inl (succ-Fin x))
-succ-skip-neg-two-Fin {zero-ℕ} (inr star) = refl
-succ-skip-neg-two-Fin {succ-ℕ k} (inl x) = refl
-succ-skip-neg-two-Fin {succ-ℕ k} (inr star) = refl
+  (k : ℕ) (x : Fin (succ-ℕ k)) →
+  Id (succ-Fin (succ-ℕ (succ-ℕ k)) (skip-neg-two-Fin (succ-ℕ k) x)) (inl (succ-Fin (succ-ℕ k) x))
+succ-skip-neg-two-Fin zero-ℕ (inr star) = refl
+succ-skip-neg-two-Fin (succ-ℕ k) (inl x) = refl
+succ-skip-neg-two-Fin (succ-ℕ k) (inr star) = refl
 
 issec-pred-Fin :
-  {k : ℕ} (x : Fin k) → Id (succ-Fin (pred-Fin x)) x
-issec-pred-Fin {succ-ℕ zero-ℕ} (inr star) = refl
-issec-pred-Fin {succ-ℕ (succ-ℕ k)} (inl x) =
-  succ-skip-neg-two-Fin (pred-Fin x) ∙ ap inl (issec-pred-Fin x)
-issec-pred-Fin {succ-ℕ (succ-ℕ k)} (inr star) = refl
+  (k : ℕ) (x : Fin k) → Id (succ-Fin k (pred-Fin k x)) x
+issec-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
+issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
+  ( succ-skip-neg-two-Fin k (pred-Fin (succ-ℕ k) x)) ∙
+  ( ap inl (issec-pred-Fin (succ-ℕ k) x))
+issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = refl
 
 isretr-pred-Fin :
-  {k : ℕ} (x : Fin k) → Id (pred-Fin (succ-Fin x)) x
-isretr-pred-Fin {succ-ℕ zero-ℕ} (inr star) = refl
-isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inl (inl x)) =
-  ap skip-neg-two-Fin (isretr-pred-Fin (inl x))
-isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inl (inr star)) = refl
-isretr-pred-Fin {succ-ℕ (succ-ℕ k)} (inr star) = pred-zero-Fin
+  (k : ℕ) (x : Fin k) → Id (pred-Fin k (succ-Fin k x)) x
+isretr-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
+isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inl x)) =
+  ap (skip-neg-two-Fin (succ-ℕ k)) (isretr-pred-Fin (succ-ℕ k) (inl x))
+isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inr star)) = refl
+isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = pred-zero-Fin (succ-ℕ k)
 
-is-equiv-succ-Fin : {k : ℕ} → is-equiv (succ-Fin {k})
-pr1 (pr1 is-equiv-succ-Fin) = pred-Fin
-pr2 (pr1 is-equiv-succ-Fin) = issec-pred-Fin
-pr1 (pr2 is-equiv-succ-Fin) = pred-Fin
-pr2 (pr2 is-equiv-succ-Fin) = isretr-pred-Fin
+is-equiv-succ-Fin : (k : ℕ) → is-equiv (succ-Fin k)
+pr1 (pr1 (is-equiv-succ-Fin k)) = pred-Fin k
+pr2 (pr1 (is-equiv-succ-Fin k)) = issec-pred-Fin k
+pr1 (pr2 (is-equiv-succ-Fin k)) = pred-Fin k
+pr2 (pr2 (is-equiv-succ-Fin k)) = isretr-pred-Fin k
 
-equiv-succ-Fin : {k : ℕ} → Fin k ≃ Fin k
-pr1 equiv-succ-Fin = succ-Fin
-pr2 equiv-succ-Fin = is-equiv-succ-Fin
+equiv-succ-Fin : (k : ℕ) → Fin k ≃ Fin k
+pr1 (equiv-succ-Fin k) = succ-Fin k
+pr2 (equiv-succ-Fin k) = is-equiv-succ-Fin k
 
-is-equiv-pred-Fin : {k : ℕ} → is-equiv (pred-Fin {k})
-pr1 (pr1 is-equiv-pred-Fin) = succ-Fin
-pr2 (pr1 is-equiv-pred-Fin) = isretr-pred-Fin
-pr1 (pr2 is-equiv-pred-Fin) = succ-Fin
-pr2 (pr2 is-equiv-pred-Fin) = issec-pred-Fin
+is-equiv-pred-Fin : (k : ℕ) → is-equiv (pred-Fin k)
+pr1 (pr1 (is-equiv-pred-Fin k)) = succ-Fin k
+pr2 (pr1 (is-equiv-pred-Fin k)) = isretr-pred-Fin k
+pr1 (pr2 (is-equiv-pred-Fin k)) = succ-Fin k
+pr2 (pr2 (is-equiv-pred-Fin k)) = issec-pred-Fin k
 
-equiv-pred-Fin : {k : ℕ} → Fin k ≃ Fin k
-pr1 equiv-pred-Fin = pred-Fin
-pr2 equiv-pred-Fin = is-equiv-pred-Fin
+equiv-pred-Fin : (k : ℕ) → Fin k ≃ Fin k
+pr1 (equiv-pred-Fin k) = pred-Fin k
+pr2 (equiv-pred-Fin k) = is-equiv-pred-Fin k
 ```
 
 ```agda
 leq-nat-succ-Fin :
-  (k : ℕ) (x : Fin k) → leq-ℕ (nat-Fin (succ-Fin x)) (succ-ℕ (nat-Fin x))
+  (k : ℕ) (x : Fin k) → leq-ℕ (nat-Fin k (succ-Fin k x)) (succ-ℕ (nat-Fin k x))
 leq-nat-succ-Fin (succ-ℕ k) (inl x) =
   leq-eq-ℕ
-    ( nat-Fin (skip-zero-Fin x))
-    ( succ-ℕ (nat-Fin (inl x)))
-    ( nat-skip-zero-Fin x)
+    ( nat-Fin (succ-ℕ k) (skip-zero-Fin k x))
+    ( succ-ℕ (nat-Fin (succ-ℕ k) (inl x)))
+    ( nat-skip-zero-Fin k x)
 leq-nat-succ-Fin (succ-ℕ k) (inr star) =
   concatenate-eq-leq-ℕ
-    ( succ-ℕ (nat-Fin (inr star)))
+    ( succ-ℕ (nat-Fin (succ-ℕ k) (inr star)))
     ( is-zero-nat-zero-Fin {succ-ℕ k})
-    ( leq-zero-ℕ (succ-ℕ (nat-Fin {succ-ℕ k} (inr star))))
+    ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
 ```
 
 ### Fin is injective
@@ -402,8 +383,10 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
 abstract
   is-injective-Fin : {k l : ℕ} → (Fin k ≃ Fin l) → Id k l
   is-injective-Fin {zero-ℕ} {zero-ℕ} e = refl
-  is-injective-Fin {zero-ℕ} {succ-ℕ l} e = ex-falso (map-inv-equiv e zero-Fin)
-  is-injective-Fin {succ-ℕ k} {zero-ℕ} e = ex-falso (map-equiv e zero-Fin)
+  is-injective-Fin {zero-ℕ} {succ-ℕ l} e =
+    ex-falso (map-inv-equiv e (zero-Fin l))
+  is-injective-Fin {succ-ℕ k} {zero-ℕ} e =
+    ex-falso (map-equiv e (zero-Fin k))
   is-injective-Fin {succ-ℕ k} {succ-ℕ l} e =
     ap succ-ℕ (is-injective-Fin (equiv-equiv-Maybe e))
 ```

@@ -11,7 +11,7 @@ open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; equiv-left-summand; equiv-right-summand; is-left-Prop;
+  ( _+_; inl; inr; equiv-left-summand; equiv-right-summand; is-left-Prop;
     is-right-Prop)
 open import foundation.decidable-subtypes using
   ( is-left-decidable-Prop; is-right-decidable-Prop)
@@ -55,13 +55,13 @@ Coproducts of finite types are finite, giving a coproduct operation on the type 
 
 ```agda
 coprod-Fin :
-  (k l : ℕ) → coprod (Fin k) (Fin l) ≃ Fin (add-ℕ k l)
+  (k l : ℕ) → (Fin k + Fin l) ≃ Fin (add-ℕ k l)
 coprod-Fin k zero-ℕ = right-unit-law-coprod (Fin k)
 coprod-Fin k (succ-ℕ l) =
   (equiv-coprod (coprod-Fin k l) id-equiv) ∘e inv-assoc-coprod
 
 Fin-add-ℕ :
-  (k l : ℕ) → Fin (add-ℕ k l) ≃ coprod (Fin k) (Fin l)
+  (k l : ℕ) → Fin (add-ℕ k l) ≃ (Fin k + Fin l)
 Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
 ```
 
@@ -70,7 +70,7 @@ Fin-add-ℕ k l = inv-equiv (coprod-Fin k l)
 ```agda
 count-coprod :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  count X → count Y → count (coprod X Y)
+  count X → count Y → count (X + Y)
 pr1 (count-coprod (pair k e) (pair l f)) = add-ℕ k l
 pr2 (count-coprod (pair k e) (pair l f)) =
   (equiv-coprod e f) ∘e (inv-equiv (coprod-Fin k l))
@@ -90,13 +90,13 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
   
-  count-left-summand : count (coprod X Y) → count X
+  count-left-summand : count (X + Y) → count X
   count-left-summand e =
     count-equiv
       ( equiv-left-summand)
       ( count-decidable-subtype is-left-decidable-Prop e)
 
-  count-right-summand : count (coprod X Y) → count Y
+  count-right-summand : count (X + Y) → count Y
   count-right-summand e =
     count-equiv
       ( equiv-right-summand)
@@ -109,7 +109,7 @@ module _
 abstract
   double-counting-coprod :
     { l1 l2 : Level} {A : UU l1} {B : UU l2}
-    ( count-A : count A) (count-B : count B) (count-C : count (coprod A B)) →
+    ( count-A : count A) (count-B : count B) (count-C : count (A + B)) →
     Id ( number-of-elements-count count-C)
        ( add-ℕ
          ( number-of-elements-count count-A)
@@ -120,7 +120,7 @@ abstract
 
 abstract
   sum-number-of-elements-coprod :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (coprod A B)) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (A + B)) →
     Id ( add-ℕ ( number-of-elements-count (count-left-summand e))
                ( number-of-elements-count (count-right-summand e)))
        ( number-of-elements-count e)
@@ -141,50 +141,50 @@ abstract
 abstract
   is-finite-coprod :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-    is-finite X → is-finite Y → is-finite (coprod X Y)
+    is-finite X → is-finite Y → is-finite (X + Y)
   is-finite-coprod {X = X} {Y} is-finite-X is-finite-Y =
     apply-universal-property-trunc-Prop is-finite-X
-      ( is-finite-Prop (coprod X Y))
+      ( is-finite-Prop (X + Y))
       ( λ (e : count X) →
         apply-universal-property-trunc-Prop is-finite-Y
-          ( is-finite-Prop (coprod X Y))
+          ( is-finite-Prop (X + Y))
           ( is-finite-count ∘ (count-coprod e)))
 
 coprod-𝔽 : 𝔽 → 𝔽 → 𝔽
-pr1 (coprod-𝔽 X Y) = coprod (type-𝔽 X) (type-𝔽 Y)
+pr1 (coprod-𝔽 X Y) = (type-𝔽 X) + (type-𝔽 Y)
 pr2 (coprod-𝔽 X Y) = is-finite-coprod (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
 
 abstract
   is-finite-left-summand :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-finite (coprod X Y) →
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-finite (X + Y) →
     is-finite X
   is-finite-left-summand =
     map-trunc-Prop count-left-summand
 
 abstract
   is-finite-right-summand :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-finite (coprod X Y) →
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} → is-finite (X + Y) →
     is-finite Y
   is-finite-right-summand =
     map-trunc-Prop count-right-summand
 
 coprod-UU-Fin-Level :
-  {l1 l2 : Level} {k l : ℕ} → UU-Fin-Level l1 k → UU-Fin-Level l2 l →
+  {l1 l2 : Level} (k l : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l2 l →
   UU-Fin-Level (l1 ⊔ l2) (add-ℕ k l)
-pr1 (coprod-UU-Fin-Level {l1} {l2} {k} {l} (pair X H) (pair Y K)) = coprod X Y
-pr2 (coprod-UU-Fin-Level {l1} {l2} {k} {l} (pair X H) (pair Y K)) =
+pr1 (coprod-UU-Fin-Level {l1} {l2} k l (pair X H) (pair Y K)) = X + Y
+pr2 (coprod-UU-Fin-Level {l1} {l2} k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
-    ( mere-equiv-Prop (Fin (add-ℕ k l)) (coprod X Y))
+    ( mere-equiv-Prop (Fin (add-ℕ k l)) (X + Y))
     ( λ e1 →
       apply-universal-property-trunc-Prop K
-        ( mere-equiv-Prop (Fin (add-ℕ k l)) (coprod X Y))
+        ( mere-equiv-Prop (Fin (add-ℕ k l)) (X + Y))
         ( λ e2 →
           unit-trunc-Prop
             ( equiv-coprod e1 e2 ∘e inv-equiv (coprod-Fin k l))))
 
 coprod-UU-Fin :
-  {k l : ℕ} → UU-Fin k → UU-Fin l → UU-Fin (add-ℕ k l)
-coprod-UU-Fin X Y = coprod-UU-Fin-Level X Y
+  (k l : ℕ) → UU-Fin k → UU-Fin l → UU-Fin (add-ℕ k l)
+coprod-UU-Fin k l X Y = coprod-UU-Fin-Level k l X Y
 
 coprod-eq-is-finite :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
@@ -200,7 +200,12 @@ coprod-eq-is-finite {X = X} {Y = Y} P Q =
           ( number-of-elements-is-finite P)
           ( number-of-elements-is-finite Q))
         ( has-cardinality-type-UU-Fin-Level
+          ( add-ℕ
+            ( number-of-elements-is-finite P)
+            ( number-of-elements-is-finite Q))
           ( coprod-UU-Fin-Level
+            ( number-of-elements-is-finite P)
+            ( number-of-elements-is-finite Q)
             ( pair X
               ( mere-equiv-has-finite-cardinality
                 ( has-finite-cardinality-is-finite P)))

@@ -1,4 +1,6 @@
-# Homomorphisms of groups
+---
+title: Homomorphisms of groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

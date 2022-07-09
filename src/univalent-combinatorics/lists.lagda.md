@@ -17,7 +17,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
   ( eq-is-contr; is-contr; is-contr-equiv'; is-contr-total-path;
     is-trunc-is-contr)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-types using
   ( is-decidable-iff; is-decidable-prod; is-decidable)
@@ -556,13 +556,13 @@ remove-last-element-reverse-list x =
 
 map-algebra-list :
   {l1 : Level} (A : UU l1) →
-  coprod unit (A × list A) → list A
+  unit + (A × list A) → list A
 map-algebra-list A (inl star) = nil
 map-algebra-list A (inr (pair a x)) = cons a x
 
 inv-map-algebra-list :
   {l1 : Level} (A : UU l1) →
-  list A → coprod unit (A × list A)
+  list A → unit + (A × list A)
 inv-map-algebra-list A nil = inl star
 inv-map-algebra-list A (cons a x) = inr (pair a x)
 

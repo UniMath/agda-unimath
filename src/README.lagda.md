@@ -179,6 +179,7 @@ open import finite-group-theory.groups-of-order-2
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
+open import finite-group-theory.simpson-delooping-sign-homomorphism
 open import finite-group-theory.tetrahedra-in-3-space
 open import finite-group-theory.transpositions
 ```
@@ -495,8 +496,6 @@ open import graph-theory.voltage-graphs
 ```agda
 open import group-theory
 open import group-theory.abelian-groups
-open import group-theory.abelian-subgroups
-open import group-theory.abstract-group-torsors
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.automorphism-groups
 open import group-theory.cartesian-products-abelian-groups
@@ -509,22 +508,25 @@ open import group-theory.cayleys-theorem
 open import group-theory.commutative-monoids
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
-open import group-theory.concrete-subgroups
 open import group-theory.conjugation
+open import group-theory.contravariant-pushforward-concrete-group-actions
 open import group-theory.embeddings-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
 open import group-theory.examples-higher-groups
+open import group-theory.free-concrete-group-actions
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-concrete-group-actions
 open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-higher-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
 open import group-theory.inverse-semigroups
@@ -537,21 +539,34 @@ open import group-theory.loop-groups-sets
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions
 open import group-theory.monoids
+open import group-theory.monomorphisms-concrete-groups
 open import group-theory.monomorphisms-groups
+open import group-theory.normal-subgroups
+open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-monoid-actions
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
 open import group-theory.precategory-of-semigroups
 open import group-theory.principal-group-actions
+open import group-theory.principal-torsors-concrete-groups
+open import group-theory.products-of-tuples-of-elements-commutative-monoids
 open import group-theory.semigroups
 open import group-theory.sheargroups
+open import group-theory.shriek-concrete-group-actions
 open import group-theory.stabilizer-groups
-open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.stabilizer-groups-concrete-group-actions
 open import group-theory.subgroups
+open import group-theory.subgroups-abelian-groups
+open import group-theory.subgroups-concrete-groups
+open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
 open import group-theory.symmetric-groups
+open import group-theory.torsors
+open import group-theory.transitive-concrete-group-actions
 open import group-theory.transitive-group-actions
+open import group-theory.unordered-tuples-of-elements-commutative-monoids
 ```
 
 ## Linear algebra
@@ -616,7 +631,11 @@ open import order-theory.total-preorders
 ```agda
 open import organic-chemistry
 open import organic-chemistry.alcohols
+open import organic-chemistry.alkanes
+open import organic-chemistry.alkenes
+open import organic-chemistry.alkynes
 open import organic-chemistry.hydrocarbons
+open import organic-chemistry.saturated-carbons
 ```
 
 ## Polytopes
@@ -669,6 +688,7 @@ open import structured-types
 open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.faithful-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
@@ -707,12 +727,16 @@ open import synthetic-homotopy-theory.cofibers
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types
+open import synthetic-homotopy-theory.infinite-complex-projective-space
 open import synthetic-homotopy-theory.infinite-cyclic-types
 open import synthetic-homotopy-theory.interval-type
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.multiplication-circle
+open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.spectra
+open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
 open import synthetic-homotopy-theory.wedges-of-pointed-types

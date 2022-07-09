@@ -15,8 +15,9 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
+    
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
@@ -128,7 +129,7 @@ is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 
 ```agda
 decide-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → coprod (m ≤-ℕ n) (m ＝ succ-ℕ n)
+  (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → (m ≤-ℕ n) + (m ＝ succ-ℕ n)
 decide-leq-succ-ℕ zero-ℕ zero-ℕ l = inl star
 decide-leq-succ-ℕ zero-ℕ (succ-ℕ n) l = inl star
 decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
@@ -199,7 +200,7 @@ pr2 (pr2 (pr2 ℕ-Poset)) = antisymmetric-leq-ℕ
 
 ```agda
 decide-leq-ℕ :
-  (m n : ℕ) → coprod (m ≤-ℕ n) (n ≤-ℕ m)
+  (m n : ℕ) → (m ≤-ℕ n) + (n ≤-ℕ m)
 decide-leq-ℕ zero-ℕ zero-ℕ = inl star
 decide-leq-ℕ zero-ℕ (succ-ℕ n) = inl star
 decide-leq-ℕ (succ-ℕ m) zero-ℕ = inr star
@@ -318,11 +319,12 @@ leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p = leq-subtraction-ℕ n m l (i
 cases-order-three-elements-ℕ :
   (x y z : ℕ) → UU lzero
 cases-order-three-elements-ℕ x y z =
-  coprod
-    ( coprod ((leq-ℕ x y) × (leq-ℕ y z)) ((leq-ℕ x z) × (leq-ℕ z y)))
-    ( coprod
-      ( coprod ((leq-ℕ y z) × (leq-ℕ z x)) ((leq-ℕ y x) × (leq-ℕ x z)))
-      ( coprod ((leq-ℕ z x) × (leq-ℕ x y)) ((leq-ℕ z y) × (leq-ℕ y x))))
+  ( ( leq-ℕ x y × leq-ℕ y z) +
+    ( leq-ℕ x z × leq-ℕ z y)) +
+  ( ( ( leq-ℕ y z × leq-ℕ z x) +
+      ( leq-ℕ y x × leq-ℕ x z)) +
+    ( ( leq-ℕ z x × leq-ℕ x y) +
+      ( leq-ℕ z y × leq-ℕ y x)))
 
 order-three-elements-ℕ :
   (x y z : ℕ) → cases-order-three-elements-ℕ x y z
@@ -514,7 +516,7 @@ le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
 
-linear-le-ℕ : (x y : ℕ) → coprod (le-ℕ x y) (coprod (x ＝ y) (le-ℕ y x))
+linear-le-ℕ : (x y : ℕ) → (le-ℕ x y) + ((x ＝ y) + (le-ℕ y x))
 linear-le-ℕ zero-ℕ zero-ℕ = inr (inl refl)
 linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
 linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
@@ -638,7 +640,7 @@ leq-eq-right-ℕ :
 leq-eq-right-ℕ m refl = id
 
 cases-leq-succ-ℕ :
-  {m n : ℕ} → leq-ℕ m (succ-ℕ n) → coprod (leq-ℕ m n) (m ＝ succ-ℕ n)
+  {m n : ℕ} → leq-ℕ m (succ-ℕ n) → (leq-ℕ m n) + (m ＝ succ-ℕ n)
 cases-leq-succ-ℕ {zero-ℕ} {n} star = inl star
 cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
   inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))

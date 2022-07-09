@@ -29,6 +29,6 @@ An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of 
 n-alkyne : hydrocarbon → ℕ → UU (lsuc lzero)
 n-alkyne H n =
   Σ (UU-Fin n) λ carbons →
-    Σ (type-UU-Fin carbons ↪ vertex-hydrocarbon H) λ embed-carbons →
-      (c : type-UU-Fin carbons) → has-triple-bond-hydrocarbon H (pr1 embed-carbons c)
+    Σ (type-UU-Fin n carbons ↪ vertex-hydrocarbon H) λ embed-carbons →
+      (c : type-UU-Fin n carbons) → has-triple-bond-hydrocarbon H (pr1 embed-carbons c)
 ```

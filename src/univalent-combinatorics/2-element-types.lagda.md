@@ -10,7 +10,7 @@ module univalent-combinatorics.2-element-types where
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin)
-open import elementary-number-theory.equality-natural-numbers using
+open import elementary-number-theory.natural-numbers using
   ( Eq-eq-ℕ)
 
 open import foundation.automorphisms using (Aut)
@@ -23,7 +23,7 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr;
     is-equiv-is-contr; center)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; neq-inr-inl; neq-inl-inr)
+  ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
@@ -47,7 +47,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using
-  ( Id; refl; inv; _∙_; ap; tr; equiv-inv)
+  ( _＝_; refl; inv; _∙_; ap; tr; equiv-inv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (is-involution-aut)
 open import foundation.mere-equivalences using
@@ -73,14 +73,13 @@ open import foundation.type-arithmetic-unit-type using
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level; is-set-has-cardinality)
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( Eq-Fin-eq; is-set-Fin)
+  ( Eq-Fin-eq)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
     Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level;
-    is-finite; 𝔽; is-finite-has-cardinality)
+    is-finite; 𝔽; is-finite-has-cardinality; set-UU-Fin-Level;
+    is-set-has-cardinality)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
     is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
@@ -121,7 +120,7 @@ has-two-elements-type-2-Element-Type = pr2
 is-finite-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → is-finite (type-2-Element-Type X)
 is-finite-type-2-Element-Type X =
-  is-finite-has-cardinality (has-two-elements-type-2-Element-Type X)
+  is-finite-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
 
 finite-type-2-Element-Type : 2-Element-Type lzero → 𝔽
 pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
@@ -154,7 +153,7 @@ is-inhabited-2-Element-Type X =
   apply-universal-property-trunc-Prop
     ( has-two-elements-type-2-Element-Type X)
     ( trunc-Prop (type-2-Element-Type X))
-    ( λ e → unit-trunc-Prop (map-equiv e zero-Fin))
+    ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin 1)))
 ```
 
 ### Any 2-element type is a set
@@ -162,12 +161,12 @@ is-inhabited-2-Element-Type X =
 ```agda
 is-set-has-two-elements :
   {l : Level} {X : UU l} → has-two-elements X → is-set X
-is-set-has-two-elements H = is-set-has-cardinality H
+is-set-has-two-elements H = is-set-has-cardinality 2 H
 
 is-set-type-2-Element-Type :
   {l : Level} (X : 2-Element-Type l) → is-set (type-2-Element-Type X)
 is-set-type-2-Element-Type X =
-  is-set-has-cardinality (has-two-elements-type-2-Element-Type X)
+  is-set-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
 
 set-2-Element-Type :
   {l : Level} → 2-Element-Type l → UU-Set l
@@ -180,14 +179,14 @@ pr2 (set-2-Element-Type X) = is-set-type-2-Element-Type X
 ```agda
 equiv-2-Element-Type :
   {l1 l2 : Level} → 2-Element-Type l1 → 2-Element-Type l2 → UU (l1 ⊔ l2)
-equiv-2-Element-Type X Y = equiv-UU-Fin-Level X Y
+equiv-2-Element-Type X Y = equiv-UU-Fin-Level 2 X Y
 
 id-equiv-2-Element-Type :
   {l1 : Level} (X : 2-Element-Type l1) → equiv-2-Element-Type X X
 id-equiv-2-Element-Type X = id-equiv
 
 equiv-eq-2-Element-Type :
-  {l1 : Level} (X Y : 2-Element-Type l1) → Id X Y → equiv-2-Element-Type X Y
+  {l1 : Level} (X Y : 2-Element-Type l1) → X ＝ Y → equiv-2-Element-Type X Y
 equiv-eq-2-Element-Type X Y = equiv-eq-component-UU-Level
 
 abstract
@@ -204,12 +203,12 @@ abstract
   is-equiv-equiv-eq-2-Element-Type = is-equiv-equiv-eq-component-UU-Level
 
 eq-equiv-2-Element-Type :
-  {l1 : Level} (X Y : 2-Element-Type l1) → equiv-2-Element-Type X Y → Id X Y
+  {l1 : Level} (X Y : 2-Element-Type l1) → equiv-2-Element-Type X Y → X ＝ Y
 eq-equiv-2-Element-Type X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-2-Element-Type X Y)
 
 extensionality-2-Element-Type :
-  {l1 : Level} (X Y : 2-Element-Type l1) → Id X Y ≃ equiv-2-Element-Type X Y
+  {l1 : Level} (X Y : 2-Element-Type l1) → (X ＝ Y) ≃ equiv-2-Element-Type X Y
 pr1 (extensionality-2-Element-Type X Y) = equiv-eq-2-Element-Type X Y
 pr2 (extensionality-2-Element-Type X Y) = is-equiv-equiv-eq-2-Element-Type X Y
 ```
@@ -221,7 +220,7 @@ pr2 (extensionality-2-Element-Type X Y) = is-equiv-equiv-eq-2-Element-Type X Y
 ```agda
 ev-zero-equiv-Fin-two-ℕ :
   {l1 : Level} {X : UU l1} → (Fin 2 ≃ X) → X
-ev-zero-equiv-Fin-two-ℕ e = map-equiv e zero-Fin
+ev-zero-equiv-Fin-two-ℕ e = map-equiv e (zero-Fin 1)
 
 ev-zero-aut-Fin-two-ℕ : (Fin 2 ≃ Fin 2) → Fin 2
 ev-zero-aut-Fin-two-ℕ = ev-zero-equiv-Fin-two-ℕ
@@ -233,7 +232,7 @@ ev-zero-aut-Fin-two-ℕ = ev-zero-equiv-Fin-two-ℕ
 aut-point-Fin-two-ℕ :
   Fin 2 → (Fin 2 ≃ Fin 2)
 aut-point-Fin-two-ℕ (inl (inr star)) = id-equiv
-aut-point-Fin-two-ℕ (inr star) = equiv-succ-Fin
+aut-point-Fin-two-ℕ (inr star) = equiv-succ-Fin 2
 
 abstract
   issec-aut-point-Fin-two-ℕ :
@@ -243,13 +242,13 @@ abstract
 
   isretr-aut-point-Fin-two-ℕ' :
     (e : Fin 2 ≃ Fin 2) (x y : Fin 2) →
-    Id (map-equiv e zero-Fin) x →
-    Id (map-equiv e one-Fin) y → htpy-equiv (aut-point-Fin-two-ℕ x) e
+    map-equiv e (zero-Fin 1) ＝ x →
+    map-equiv e (one-Fin 1) ＝ y → htpy-equiv (aut-point-Fin-two-ℕ x) e
   isretr-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
   isretr-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inr star) =
-    ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
+    ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
   isretr-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
   isretr-aut-point-Fin-two-ℕ' e
@@ -260,18 +259,18 @@ abstract
     (inr star) (inl (inr star)) p q (inr star) = inv q
   isretr-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inl (inr star)) =
-    ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
+    ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
   isretr-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inr star) =
-    ex-falso (Eq-Fin-eq (is-injective-map-equiv e (p ∙ inv q)))
+    ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
 
   isretr-aut-point-Fin-two-ℕ :
     (aut-point-Fin-two-ℕ ∘ ev-zero-aut-Fin-two-ℕ) ~ id
   isretr-aut-point-Fin-two-ℕ e =
     eq-htpy-equiv
       ( isretr-aut-point-Fin-two-ℕ' e
-        ( map-equiv e zero-Fin)
-        ( map-equiv e one-Fin)
+        ( map-equiv e (zero-Fin 1))
+        ( map-equiv e (one-Fin 1))
         ( refl)
         ( refl))
 
@@ -351,13 +350,13 @@ module _
 
   compute-map-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
-    Id (map-equiv-point-2-Element-Type x zero-Fin) x
+    map-equiv-point-2-Element-Type x (zero-Fin 1) ＝ x
   compute-map-equiv-point-2-Element-Type =
     issec-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
 
   is-unique-equiv-point-2-Element-Type :
     (e : Fin 2 ≃ type-2-Element-Type X) →
-    htpy-equiv (equiv-point-2-Element-Type (map-equiv e zero-Fin)) e
+    htpy-equiv (equiv-point-2-Element-Type (map-equiv e (zero-Fin 1))) e
   is-unique-equiv-point-2-Element-Type e =
     htpy-eq-equiv (isretr-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
 ```
@@ -367,11 +366,11 @@ module _
 ```agda
 abstract
   is-contr-total-UU-Fin-Level-two-ℕ :
-    {l : Level} → is-contr (Σ (UU-Fin-Level l 2) type-UU-Fin-Level)
+    {l : Level} → is-contr (Σ (UU-Fin-Level l 2) (type-UU-Fin-Level 2))
   is-contr-total-UU-Fin-Level-two-ℕ {l} =
     is-contr-equiv'
       ( Σ ( UU-Fin-Level l 2)
-          ( λ X → raise-Fin l 2 ≃ type-UU-Fin-Level X))
+          ( λ X → raise-Fin l 2 ≃ type-UU-Fin-Level 2 X))
       ( equiv-tot
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
@@ -386,7 +385,7 @@ abstract
 ```agda
 abstract
   is-contr-total-UU-Fin-two-ℕ :
-    is-contr (Σ (UU-Fin 2) (λ X → type-UU-Fin X))
+    is-contr (Σ (UU-Fin 2) (λ X → type-UU-Fin 2 X))
   is-contr-total-UU-Fin-two-ℕ = is-contr-total-UU-Fin-Level-two-ℕ
 ```
 
@@ -395,8 +394,8 @@ abstract
 ```agda
 point-eq-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l 2} →
-  Id (Fin-UU-Fin-Level l 2) X → type-UU-Fin-Level X
-point-eq-UU-Fin-Level-two-ℕ refl = map-raise zero-Fin
+  Fin-UU-Fin-Level l 2 ＝ X → type-UU-Fin-Level 2 X
+point-eq-UU-Fin-Level-two-ℕ refl = map-raise (zero-Fin 1)
 
 abstract
   is-equiv-point-eq-UU-Fin-Level-two-ℕ :
@@ -405,13 +404,13 @@ abstract
   is-equiv-point-eq-UU-Fin-Level-two-ℕ {l} =
     fundamental-theorem-id
       ( Fin-UU-Fin-Level l 2)
-      ( map-raise zero-Fin)
+      ( map-raise (zero-Fin 1))
       ( is-contr-total-UU-Fin-Level-two-ℕ)
       ( λ X → point-eq-UU-Fin-Level-two-ℕ {l} {X})
 
 equiv-point-eq-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l 2} →
-  Id (Fin-UU-Fin-Level l 2) X ≃ type-UU-Fin-Level X
+  (Fin-UU-Fin-Level l 2 ＝ X) ≃ type-UU-Fin-Level 2 X
 pr1 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
   point-eq-UU-Fin-Level-two-ℕ
 pr2 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
@@ -419,7 +418,7 @@ pr2 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
 
 eq-point-UU-Fin-Level-two-ℕ :
   {l : Level} {X : UU-Fin-Level l 2} →
-  type-UU-Fin-Level X → Id (Fin-UU-Fin-Level l 2) X
+  type-UU-Fin-Level 2 X → Fin-UU-Fin-Level l 2 ＝ X
 eq-point-UU-Fin-Level-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ
 ```
@@ -428,8 +427,8 @@ eq-point-UU-Fin-Level-two-ℕ =
 
 ```agda
 point-eq-UU-Fin-two-ℕ :
-  {X : UU-Fin 2} → Id (Fin-UU-Fin 2) X → type-UU-Fin X
-point-eq-UU-Fin-two-ℕ refl = zero-Fin
+  {X : UU-Fin 2} → Fin-UU-Fin 2 ＝ X → type-UU-Fin 2 X
+point-eq-UU-Fin-two-ℕ refl = zero-Fin 1
 
 abstract
   is-equiv-point-eq-UU-Fin-two-ℕ :
@@ -437,17 +436,17 @@ abstract
   is-equiv-point-eq-UU-Fin-two-ℕ =
     fundamental-theorem-id
       ( Fin-UU-Fin 2)
-      ( zero-Fin)
+      ( zero-Fin 1)
       ( is-contr-total-UU-Fin-two-ℕ)
       ( λ X → point-eq-UU-Fin-two-ℕ {X})
 
 equiv-point-eq-UU-Fin-two-ℕ :
-  {X : UU-Fin 2} → Id (Fin-UU-Fin 2) X ≃ type-UU-Fin X
+  {X : UU-Fin 2} → (Fin-UU-Fin 2 ＝ X) ≃ type-UU-Fin 2 X
 pr1 (equiv-point-eq-UU-Fin-two-ℕ {X}) = point-eq-UU-Fin-two-ℕ
 pr2 (equiv-point-eq-UU-Fin-two-ℕ {X}) = is-equiv-point-eq-UU-Fin-two-ℕ X
 
 eq-point-UU-Fin-two-ℕ :
-  {X : UU-Fin 2} → type-UU-Fin X → Id (Fin-UU-Fin 2) X
+  {X : UU-Fin 2} → type-UU-Fin 2 X → Fin-UU-Fin 2 ＝ X
 eq-point-UU-Fin-two-ℕ {X} =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
@@ -485,12 +484,12 @@ module _
 
   ev-zero-htpy-equiv-Fin-two-ℕ :
     (e e' : Fin 2 ≃ type-2-Element-Type X) → htpy-equiv e e' →
-    Id (map-equiv e zero-Fin) (map-equiv e' zero-Fin)
-  ev-zero-htpy-equiv-Fin-two-ℕ e e' H = H zero-Fin
+    map-equiv e (zero-Fin 1) ＝ map-equiv e' (zero-Fin 1)
+  ev-zero-htpy-equiv-Fin-two-ℕ e e' H = H (zero-Fin 1)
 
   equiv-ev-zero-htpy-equiv-Fin-two-ℕ' :
     (e e' : Fin 2 ≃ type-2-Element-Type X) →
-    htpy-equiv e e' ≃ Id (map-equiv e zero-Fin) (map-equiv e' zero-Fin)
+    htpy-equiv e e' ≃ (map-equiv e (zero-Fin 1) ＝ map-equiv e' (zero-Fin 1))
   equiv-ev-zero-htpy-equiv-Fin-two-ℕ' e e' =
     ( equiv-ap (equiv-ev-zero-equiv-Fin-two-ℕ X) e e') ∘e
     ( inv-equiv (extensionality-equiv e e'))
@@ -505,17 +504,19 @@ module _
           ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
           ( is-contr-total-htpy-equiv e)
           ( is-contr-equiv
-            ( fib (ev-zero-equiv-Fin-two-ℕ) (map-equiv e zero-Fin))
+            ( fib (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
             ( equiv-tot
               ( λ e' →
-                equiv-inv (map-equiv e zero-Fin) (map-equiv e' zero-Fin)))
+                equiv-inv
+                  ( map-equiv e (zero-Fin 1))
+                  ( map-equiv e' (zero-Fin 1))))
             ( is-contr-map-is-equiv
               ( is-equiv-ev-zero-equiv-Fin-two-ℕ X)
-              ( map-equiv e zero-Fin))))
+              ( map-equiv e (zero-Fin 1)))))
 
   equiv-ev-zero-htpy-equiv-Fin-two-ℕ :
     (e e' : Fin 2 ≃ type-2-Element-Type X) →
-    htpy-equiv e e' ≃ Id (map-equiv e zero-Fin) (map-equiv e' zero-Fin)
+    htpy-equiv e e' ≃ (map-equiv e (zero-Fin 1) ＝ map-equiv e' (zero-Fin 1))
   pr1 (equiv-ev-zero-htpy-equiv-Fin-two-ℕ e e') =
     ev-zero-htpy-equiv-Fin-two-ℕ e e'
   pr2 (equiv-ev-zero-htpy-equiv-Fin-two-ℕ e e') =
@@ -527,12 +528,12 @@ module _
 ```agda
 abstract
   no-section-type-UU-Fin-Level-two-ℕ :
-    {l : Level} → ¬ ((X : UU-Fin-Level l 2) → type-UU-Fin-Level X)
+    {l : Level} → ¬ ((X : UU-Fin-Level l 2) → type-UU-Fin-Level 2 X)
   no-section-type-UU-Fin-Level-two-ℕ {l} f =
     is-not-contractible-Fin 2
       ( Eq-eq-ℕ)
       ( is-contr-equiv
-        ( Id (Fin-UU-Fin-Level l 2) (Fin-UU-Fin-Level l 2))
+        ( Fin-UU-Fin-Level l 2 ＝ Fin-UU-Fin-Level l 2)
         ( ( inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ) ∘e
           ( equiv-raise-Fin l 2))
         ( is-prop-is-contr
@@ -544,7 +545,7 @@ abstract
 
 abstract
   no-section-type-UU-Fin-two-ℕ :
-    ¬ ((X : UU-Fin 2) → type-UU-Fin X)
+    ¬ ((X : UU-Fin 2) → type-UU-Fin 2 X)
   no-section-type-UU-Fin-two-ℕ f =
     no-section-type-UU-Fin-Level-two-ℕ f
 ```
@@ -555,7 +556,7 @@ abstract
 abstract
   is-not-decidable-type-UU-Fin-Level-two-ℕ :
     {l : Level} →
-    ¬ ((X : UU-Fin-Level l 2) → is-decidable (type-UU-Fin-Level X))
+    ¬ ((X : UU-Fin-Level l 2) → is-decidable (type-UU-Fin-Level 2 X))
   is-not-decidable-type-UU-Fin-Level-two-ℕ {l} d =
     no-section-type-UU-Fin-Level-two-ℕ
       ( λ X →
@@ -565,7 +566,7 @@ abstract
           ( apply-universal-property-trunc-Prop
             ( pr2 X)
             ( dn-Prop' (pr1 X))
-            ( λ e → intro-dn {l} (map-equiv e zero-Fin)))
+            ( λ e → intro-dn {l} (map-equiv e (zero-Fin 1))))
           ( d X))
 ```
 
@@ -574,8 +575,8 @@ abstract
 ```agda
 cases-is-involution-aut-Fin-two-ℕ :
   (e : Fin 2 ≃ Fin 2) (x y z : Fin 2) →
-  Id (map-equiv e x) y → Id (map-equiv e y) z →
-  Id (map-equiv (e ∘e e) x) x
+  map-equiv e x ＝ y → map-equiv e y ＝ z →
+  map-equiv (e ∘e e) x ＝ x
 cases-is-involution-aut-Fin-two-ℕ e (inl (inr star)) (inl (inr star)) z p q =
   ap (map-equiv e) p ∙ p
 cases-is-involution-aut-Fin-two-ℕ e
@@ -608,7 +609,7 @@ module _
   is-involution-aut-2-element-type e x =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
-      ( Id-Prop (set-UU-Fin-Level X) (map-equiv (e ∘e e) x) x)
+      ( Id-Prop (set-UU-Fin-Level 2 X) (map-equiv (e ∘e e) x) x)
       ( λ h →
         ( ap (map-equiv (e ∘e e)) (inv (issec-map-inv-equiv h x))) ∙
         ( ( ap (map-equiv e) (inv (issec-map-inv-equiv h _))) ∙
@@ -629,16 +630,16 @@ module _
   swap-2-Element-Type : equiv-2-Element-Type X X
   swap-2-Element-Type =
     ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
-    ( ( equiv-precomp-equiv equiv-succ-Fin (type-2-Element-Type X)) ∘e
+    ( ( equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X)) ∘e
       ( inv-equiv (equiv-ev-zero-equiv-Fin-two-ℕ X)))
 
   map-swap-2-Element-Type : type-2-Element-Type X → type-2-Element-Type X
   map-swap-2-Element-Type = map-equiv swap-2-Element-Type
 
   compute-swap-2-Element-Type' :
-    (x y : type-2-Element-Type X) → ¬ (Id x y) → (z : Fin 2) →
-    Id ( map-inv-equiv-point-2-Element-Type X x y) z →
-    Id ( map-swap-2-Element-Type x) y
+    (x y : type-2-Element-Type X) → ¬ (x ＝ y) → (z : Fin 2) →
+    map-inv-equiv-point-2-Element-Type X x y ＝ z →
+    map-swap-2-Element-Type x ＝ y
   compute-swap-2-Element-Type' x y f (inl (inr star)) q =
     ex-falso
       ( f
@@ -650,8 +651,8 @@ module _
     ( issec-map-inv-equiv-point-2-Element-Type X x y)
 
   compute-swap-2-Element-Type :
-    (x y : type-2-Element-Type X) → ¬ (Id x y) →
-    Id (map-swap-2-Element-Type x) y
+    (x y : type-2-Element-Type X) → ¬ (x ＝ y) →
+    map-swap-2-Element-Type x ＝ y
   compute-swap-2-Element-Type x y p =
     compute-swap-2-Element-Type' x y p
       ( map-inv-equiv-point-2-Element-Type X x y)
@@ -659,16 +660,24 @@ module _
 
   compute-map-equiv-point-2-Element-Type' :
     (x : type-2-Element-Type X) →
-    Id ( map-equiv-point-2-Element-Type X x one-Fin)
-       ( map-swap-2-Element-Type x)
+    map-equiv-point-2-Element-Type X x (one-Fin 1) ＝
+    map-swap-2-Element-Type x
   compute-map-equiv-point-2-Element-Type' x = refl
 
 compute-swap-Fin-two-ℕ :
-  map-swap-2-Element-Type (Fin-UU-Fin 2) ~ succ-Fin
+  map-swap-2-Element-Type (Fin-UU-Fin 2) ~ succ-Fin 2
 compute-swap-Fin-two-ℕ (inl (inr star)) =
-  compute-swap-2-Element-Type (Fin-UU-Fin 2) zero-Fin one-Fin neq-inl-inr
+  compute-swap-2-Element-Type
+    ( Fin-UU-Fin 2)
+    ( zero-Fin 1)
+    ( one-Fin 1)
+    ( neq-inl-inr)
 compute-swap-Fin-two-ℕ (inr star) =
-  compute-swap-2-Element-Type (Fin-UU-Fin 2) one-Fin zero-Fin neq-inr-inl
+  compute-swap-2-Element-Type
+    ( Fin-UU-Fin 2)
+    ( one-Fin 1)
+    ( zero-Fin 1)
+    ( neq-inr-inl)
 ```
 
 ### The swapping equivalence is not the identity equivalence
@@ -679,8 +688,8 @@ module _
   where
 
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
-    ¬ ( Id ( equiv-precomp-equiv (equiv-succ-Fin {2}) (type-2-Element-Type X))
-           ( id-equiv))
+    ¬ ( equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X) ＝
+        id-equiv)
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
@@ -688,9 +697,9 @@ module _
       ( λ f →
         neq-inr-inl
           ( is-injective-map-equiv f
-            ( htpy-eq-equiv (htpy-eq-equiv p' f) zero-Fin)))
+            ( htpy-eq-equiv (htpy-eq-equiv p' f) (zero-Fin 1))))
 
-  is-not-identity-swap-2-Element-Type : ¬ (Id (swap-2-Element-Type X) id-equiv)
+  is-not-identity-swap-2-Element-Type : ¬ (swap-2-Element-Type X ＝ id-equiv)
   is-not-identity-swap-2-Element-Type p =
     is-not-identity-equiv-precomp-equiv-equiv-succ-Fin
       ( ( ( inv (left-unit-law-equiv equiv1)) ∙
@@ -708,7 +717,7 @@ module _
               ( left-inverse-law-equiv equiv2))))))
     where
     equiv1 : (Fin 2 ≃ type-2-Element-Type X) ≃ (Fin 2 ≃ type-2-Element-Type X)
-    equiv1 = equiv-precomp-equiv (equiv-succ-Fin {2}) (type-2-Element-Type X)
+    equiv1 = equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X)
     equiv2 : (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X
     equiv2 = equiv-ev-zero-equiv-Fin-two-ℕ X
 ```
@@ -721,7 +730,7 @@ module _
   where
 
   has-no-fixed-points-swap-2-Element-Type :
-    {x : type-2-Element-Type X} → ¬ (Id (map-equiv (swap-2-Element-Type X) x) x)
+    {x : type-2-Element-Type X} → ¬ (map-equiv (swap-2-Element-Type X) x ＝ x)
   has-no-fixed-points-swap-2-Element-Type {x} P =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
@@ -742,12 +751,12 @@ module _
     where
     f : (h : type-2-Element-Type X ≃ Fin 2) → (y : type-2-Element-Type X) →
         ( k1 k2 k3 : Fin 2) →
-        Id (map-equiv h x) k1 → Id (map-equiv h y) k2 →
-        Id (map-equiv h (map-equiv (swap-2-Element-Type X) y)) k3 →
-        Id (map-equiv (swap-2-Element-Type X) y) y
+        map-equiv h x ＝ k1 → map-equiv h y ＝ k2 →
+        map-equiv h (map-equiv (swap-2-Element-Type X) y) ＝ k3 →
+        map-equiv (swap-2-Element-Type X) y ＝ y
     f h y (inl (inr star)) (inl (inr star)) k3 p q r =
       tr
-        ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
+        ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
         ( is-injective-map-equiv h (p ∙ inv q))
         ( P)
     f h y (inl (inr star)) (inr star) (inl (inr star)) p q r =
@@ -781,7 +790,7 @@ module _
                 ( q))))))
     f h y (inr star) (inr star) k3 p q r =
       tr
-        ( λ z → Id (map-equiv (swap-2-Element-Type X) z) z)
+        ( λ z → map-equiv (swap-2-Element-Type X) z ＝ z)
         ( is-injective-map-equiv h (p ∙ inv q))
         ( P)
 ```
@@ -791,8 +800,8 @@ module _
 ```agda
 preserves-add-aut-point-Fin-two-ℕ :
   (a b : Fin 2) →
-  Id ( aut-point-Fin-two-ℕ (add-Fin a b))
-     ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
+  aut-point-Fin-two-ℕ (add-Fin 2 a b) ＝
+  ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
 preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inl (inr star)) =
   eq-htpy-equiv refl-htpy
 preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inr star) =
@@ -800,17 +809,18 @@ preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inr star) =
 preserves-add-aut-point-Fin-two-ℕ (inr star) (inl (inr star)) =
   eq-htpy-equiv refl-htpy
 preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
-  eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ equiv-succ-Fin x))
+  eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2) x))
 ```
 
 ### Any Σ-type over `Fin 2` is a coproduct
 
 ```agda
 is-coprod-Σ-Fin-two-ℕ :
-  {l : Level} (P : Fin 2 → UU l) → Σ (Fin 2) P ≃ coprod (P zero-Fin) (P one-Fin)
+  {l : Level} (P : Fin 2 → UU l) →
+  Σ (Fin 2) P ≃ (P (zero-Fin 1) + P (one-Fin 1))
 is-coprod-Σ-Fin-two-ℕ P =
   ( equiv-coprod
-    ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ zero-Fin)
+    ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (zero-Fin 0))
     ( left-unit-law-Σ (P ∘ inr))) ∘e
   ( right-distributive-Σ-coprod (Fin 1) unit P)
 ```
@@ -826,17 +836,18 @@ module _
     is-contr-decide-value-equiv-Fin-two-ℕ :
       (e : Fin 2 ≃ type-2-Element-Type X) (x : type-2-Element-Type X) →
       is-contr
-        ( coprod (Id x (map-equiv e zero-Fin)) (Id x (map-equiv e one-Fin)))
+        ( ( x ＝ map-equiv e (zero-Fin 1)) +
+          ( x ＝ map-equiv e (one-Fin 1)))
     is-contr-decide-value-equiv-Fin-two-ℕ e x =
       is-contr-equiv'
         ( fib (map-equiv e) x)
-        ( ( is-coprod-Σ-Fin-two-ℕ (λ y → Id x (map-equiv e y))) ∘e
+        ( ( is-coprod-Σ-Fin-two-ℕ (λ y → x ＝ map-equiv e y)) ∘e
           ( equiv-tot (λ y → equiv-inv (map-equiv e y) x)))
         ( is-contr-map-is-equiv (is-equiv-map-equiv e) x)
 
   decide-value-equiv-Fin-two-ℕ :
     (e : Fin 2 ≃ type-2-Element-Type X) (x : type-2-Element-Type X) →
-    coprod (Id x (map-equiv e zero-Fin)) (Id x (map-equiv e one-Fin))
+    (x ＝ map-equiv e (zero-Fin 1)) + (x ＝ map-equiv e (one-Fin 1))
   decide-value-equiv-Fin-two-ℕ e x =
     center (is-contr-decide-value-equiv-Fin-two-ℕ e x)
 ```
@@ -849,7 +860,7 @@ module _
   where
 
   contradiction-3-distinct-element-2-Element-Type : (x y z : type-2-Element-Type X) →
-    ¬ (Id x y) → ¬ (Id y z) → ¬ (Id x z) → empty
+    ¬ (x ＝ y) → ¬ (y ＝ z) → ¬ (x ＝ z) → empty
   contradiction-3-distinct-element-2-Element-Type x y z np nq nr =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
@@ -863,13 +874,19 @@ module _
     where
     cases-contradiction-3-distinct-element-2-Element-Type :
       (e : Fin 2 ≃ type-2-Element-Type X) →
-      coprod (Id x (map-equiv e zero-Fin)) (Id x (map-equiv e one-Fin)) →
-      coprod (Id y (map-equiv e zero-Fin)) (Id y (map-equiv e one-Fin)) →
-      coprod (Id z (map-equiv e zero-Fin)) (Id z (map-equiv e one-Fin)) →
+      (x ＝ map-equiv e (zero-Fin 1)) + (x ＝ map-equiv e (one-Fin 1)) →
+      (y ＝ map-equiv e (zero-Fin 1)) + (y ＝ map-equiv e (one-Fin 1)) →
+      (z ＝ map-equiv e (zero-Fin 1)) + (z ＝ map-equiv e (one-Fin 1)) →
       empty
-    cases-contradiction-3-distinct-element-2-Element-Type e (inl refl) (inl refl) c3 = np refl
-    cases-contradiction-3-distinct-element-2-Element-Type e (inl refl) (inr refl) (inl refl) = nr refl
-    cases-contradiction-3-distinct-element-2-Element-Type e (inl refl) (inr refl) (inr refl) = nq refl
-    cases-contradiction-3-distinct-element-2-Element-Type e (inr refl) (inl refl) (inl refl) = nq refl
-    cases-contradiction-3-distinct-element-2-Element-Type e (inr refl) (inl refl) (inr refl) = nr refl
-    cases-contradiction-3-distinct-element-2-Element-Type e (inr refl) (inr refl) c3 = np refl
+    cases-contradiction-3-distinct-element-2-Element-Type e
+      (inl refl) (inl refl) c3 = np refl
+    cases-contradiction-3-distinct-element-2-Element-Type e
+      (inl refl) (inr refl) (inl refl) = nr refl
+    cases-contradiction-3-distinct-element-2-Element-Type e
+      (inl refl) (inr refl) (inr refl) = nq refl
+    cases-contradiction-3-distinct-element-2-Element-Type e
+      (inr refl) (inl refl) (inl refl) = nq refl
+    cases-contradiction-3-distinct-element-2-Element-Type e
+      (inr refl) (inl refl) (inr refl) = nr refl
+    cases-contradiction-3-distinct-element-2-Element-Type e
+      (inr refl) (inr refl) c3 = np refl
