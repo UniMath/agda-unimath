@@ -538,6 +538,7 @@ open import group-theory.loop-groups-sets
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions
 open import group-theory.monoids
+open import group-theory.monomorphisms-concrete-groups
 open import group-theory.monomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.orbits-concrete-group-actions
