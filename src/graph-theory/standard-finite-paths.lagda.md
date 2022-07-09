@@ -3,6 +3,7 @@ title: Generic finite paths
 ---
 
 ```agda
+{-# OPTIONS --without-K --exact-split #-}
 module graph-theory.standard-finite-paths where
 
 open import elementary-number-theory.inequality-natural-numbers
@@ -56,35 +57,35 @@ We construct the standard finite path in stages: The type of vertices is the sta
 
 ```agda
 module _ (length : ℕ) where
-  standard-finite-path-vertex : UU
-  standard-finite-path-vertex = Fin length
+  vertex-standard-finite-path : UU
+  vertex-standard-finite-path = Fin length
 ```
 
 Our encoding of the edges is a bit obfuscated by the use of `fib`, but it boils down to: For an unordered pair of vertices `p`, there is an edge between the two elements of `p` iff there are points `x, y : type-unordered-pair(p)` such that `p(x) = suc(p(y))`.
 
 ```agda
-  standard-finite-path-edge : unordered-pair standard-finite-path-vertex → UU
-  standard-finite-path-edge vertices =
+  edge-standard-finite-path : unordered-pair vertex-standard-finite-path → UU
+  edge-standard-finite-path vertices =
     Σ (type-unordered-pair vertices) λ x →
       fib (nat-Fin length ∘ element-unordered-pair vertices)
         (succ-ℕ (nat-Fin length (element-unordered-pair vertices x)))
 
-  standard-finite-path-edge-is-finite :
-    (vertices : unordered-pair standard-finite-path-vertex) →
-    is-finite (standard-finite-path-edge vertices)
-  standard-finite-path-edge-is-finite vertices =
+  is-finite-edge-standard-finite-path :
+    (vertices : unordered-pair vertex-standard-finite-path) →
+    is-finite (edge-standard-finite-path vertices)
+  is-finite-edge-standard-finite-path vertices =
     is-finite-Σ (is-finite-mere-equiv (has-two-elements-type-unordered-pair vertices) (is-finite-Fin 2))
       ( λ x → is-finite-Σ (is-finite-mere-equiv (has-two-elements-type-unordered-pair vertices) (is-finite-Fin 2))
         ( λ y → is-finite-is-decidable-Prop (_ , is-set-ℕ _ _) (has-decidable-equality-ℕ _ _)))
 
   standard-finite-path-Undirected-Graph : Undirected-Graph lzero lzero
-  standard-finite-path-Undirected-Graph .pr1 = standard-finite-path-vertex
-  standard-finite-path-Undirected-Graph .pr2 = standard-finite-path-edge
+  standard-finite-path-Undirected-Graph .pr1 = vertex-standard-finite-path
+  standard-finite-path-Undirected-Graph .pr2 = edge-standard-finite-path
 
   standard-finite-path-Undirected-Graph-𝔽 : Undirected-Graph-𝔽
   standard-finite-path-Undirected-Graph-𝔽 =
-    (standard-finite-path-vertex , is-finite-Fin length) ,
-    (λ vertices → _ , standard-finite-path-edge-is-finite vertices)
+    (vertex-standard-finite-path , is-finite-Fin length) ,
+    (λ vertices → _ , is-finite-edge-standard-finite-path vertices)
 ```
 
 ## Properties
@@ -93,8 +94,8 @@ Our encoding of the edges is a bit obfuscated by the use of `fib`, but it boils 
 
 ```agda
   no-loops-standard-finite-path-Undirected-Graph
-    : (x : standard-finite-path-vertex)
-    → ¬ (standard-finite-path-edge (standard-unordered-pair x x))
+    : (x : vertex-standard-finite-path)
+    → ¬ (edge-standard-finite-path (standard-unordered-pair x x))
   no-loops-standard-finite-path-Undirected-Graph vertex loop with loop
   ... | inl (inr star) , inl (inr star) , path = has-no-fixed-points-succ-ℕ _ (inv path)
   ... | inl (inr star) , inr star       , path = has-no-fixed-points-succ-ℕ _ (inv path)
@@ -118,9 +119,9 @@ module _ (len : ℕ) where
 
 ```agda
 module _ (len : ℕ) where
-  standard-finite-path-is-connected-Undirected-Graph
+  is-connected-standard-finite-path
     : is-connected-Undirected-Graph (standard-finite-path-Undirected-Graph len)
-  standard-finite-path-is-connected-Undirected-Graph x y = unit-trunc-Prop (find-path x y)
+  is-connected-standard-finite-path x y = unit-trunc-Prop (find-path x y)
     where
       patht = path-Undirected-Graph (standard-finite-path-Undirected-Graph len)
 
@@ -140,7 +141,8 @@ module _ (len : ℕ) where
           {y = inl (inr star)} {z = inr star}
           (compute-swap-2-Element-Type _ _ _ λ { () })
           (raise-path _ _ (find-path-to-top x))
-      find-path-to-top (inr star) = refl-path-Undirected-Graph
+      find-path-to-top {succ-ℕ _} (inr star) = refl-path-Undirected-Graph
+      find-path-to-top {zero-ℕ} (inr star) = refl-path-Undirected-Graph
 
       absurd : ∀ {l} {P : UU l} {k : ℕ} (x : Fin k) → le-ℕ k (nat-Fin k x) → P
       absurd {k = zero-ℕ} () p
