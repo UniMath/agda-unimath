@@ -1,4 +1,6 @@
-# Homomorphisms of generated subgroups
+---
+title: Homomorphisms of generated subgroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

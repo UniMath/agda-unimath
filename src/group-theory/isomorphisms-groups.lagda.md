@@ -1,4 +1,6 @@
-# Isomorphisms of groups
+---
+title: Isomorphisms of groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

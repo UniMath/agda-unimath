@@ -13,7 +13,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-concrete-group-actions
-open import group-theory.substitutions-concrete-group-actions
+open import group-theory.substitution-functor-concrete-group-actions
 ```
 
 ## Idea

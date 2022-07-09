@@ -1,4 +1,6 @@
-# The precategory of groups
+---
+title: The precategory of groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

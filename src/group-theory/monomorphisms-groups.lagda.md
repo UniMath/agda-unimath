@@ -1,4 +1,6 @@
-# Monomorphisms in groups
+---
+title: Monomorphisms in groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

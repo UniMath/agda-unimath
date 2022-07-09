@@ -1,4 +1,6 @@
-# Transitive group actions
+---
+title: Transitive group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

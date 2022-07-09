@@ -1,4 +1,6 @@
-# Sheargroups
+---
+title: Sheargroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

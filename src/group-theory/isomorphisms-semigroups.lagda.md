@@ -1,4 +1,6 @@
-# Isomorphisms of semigroups
+---
+title: Isomorphisms of semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -1,4 +1,6 @@
-# Conjucation in groups
+---
+title: Conjucation in groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

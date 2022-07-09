@@ -1,5 +1,5 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Automorphism groups
 ---
 
 ```agda

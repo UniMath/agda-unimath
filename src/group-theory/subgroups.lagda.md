@@ -1,4 +1,6 @@
-# Subgroups
+---
+title: Subgroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

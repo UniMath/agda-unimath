@@ -1,4 +1,6 @@
-# The category of groups
+---
+title: The category of groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

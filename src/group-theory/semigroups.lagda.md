@@ -1,4 +1,6 @@
-# Semigroups
+---
+title: Semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
