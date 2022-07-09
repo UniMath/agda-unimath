@@ -45,7 +45,7 @@ module _
     (f : hom-∞-Group) →
     Id (classifying-map-hom-∞-Group f (shape-∞-Group G)) (shape-∞-Group H)
   preserves-point-classifying-map-hom-∞-Group =
-    preserves-point-map-pointed-map
+    preserves-point-pointed-map
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
 
