@@ -23,11 +23,11 @@ The stabilizer of an element `x : X pt` of a concrete G-set `X : BG → UU-Set` 
 ## Definition
 
 ```agda
-stabilizer-Concrete-Group-Action :
+stabilizer-action-Concrete-Group :
   {l1 l2 : Level} (G : Concrete-Group l1)
   (X : action-Concrete-Group l2 G) → type-action-Concrete-Group G X →
   UU (l1 ⊔ l2)
-stabilizer-Concrete-Group-Action G X x =
+stabilizer-action-Concrete-Group G X x =
   connected-component
     ( orbit-action-Concrete-Group G X)
     ( pair (shape-Concrete-Group G) x)

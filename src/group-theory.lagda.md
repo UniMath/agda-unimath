@@ -53,6 +53,7 @@ open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.normal-subgroups public
+open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
