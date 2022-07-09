@@ -543,7 +543,7 @@ left-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ m k) ≤-ℕ (
 left-law-leq-add-ℕ zero-ℕ m n = id
 left-law-leq-add-ℕ (succ-ℕ k) m n H = left-law-leq-add-ℕ k m n H
 
-right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ k m) ≤-ℕ (add-ℕ k n) 
+right-law-leq-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → (add-ℕ k m) ≤-ℕ (add-ℕ k n)
 right-law-leq-add-ℕ k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-add-ℕ k m)
@@ -570,7 +570,7 @@ leq-add-ℕ m (succ-ℕ n) =
   transitive-leq-ℕ m (add-ℕ m n) (succ-ℕ (add-ℕ m n))
     ( succ-leq-ℕ (add-ℕ m n))
     ( leq-add-ℕ m n)
-    
+
 leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (add-ℕ n m)
 leq-add-ℕ' m n =
   concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
@@ -644,4 +644,8 @@ cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
   inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))
 cases-leq-succ-ℕ {succ-ℕ m} {succ-ℕ n} p =
   map-coprod id (ap succ-ℕ) (cases-leq-succ-ℕ p)
+
+le-above-succ-ℕ : {m n : ℕ} → le-ℕ (succ-ℕ m) n → le-ℕ m n
+le-above-succ-ℕ {zero-ℕ} {succ-ℕ n} p   = star
+le-above-succ-ℕ {succ-ℕ m} {succ-ℕ n} p = le-above-succ-ℕ {m} {n} p
 ```

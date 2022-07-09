@@ -6,12 +6,16 @@
 module graph-theory.paths-undirected-graphs where
 
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
+open import foundation.identity-types using (_＝_)
 open import foundation.unordered-pairs using
   ( unordered-pair; type-unordered-pair; element-unordered-pair;
-    other-element-unordered-pair)
+    2-element-type-unordered-pair)
 
 open import graph-theory.undirected-graphs using
   ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph)
+
+open import univalent-combinatorics.2-element-types using
+  ( map-swap-2-Element-Type)
 ```
 
 ## Idea
@@ -33,7 +37,8 @@ module _
       cons-path-Undirected-Graph :
         (p : unordered-pair (vertex-Undirected-Graph G)) →
         (e : edge-Undirected-Graph G p) →
-        {y : type-unordered-pair p} →
+        {y z : type-unordered-pair p} →
+        map-swap-2-Element-Type (2-element-type-unordered-pair p) y ＝ z →
         path-Undirected-Graph x (element-unordered-pair p y) →
-        path-Undirected-Graph x (other-element-unordered-pair p y)
+        path-Undirected-Graph x (element-unordered-pair p z)
 ```
