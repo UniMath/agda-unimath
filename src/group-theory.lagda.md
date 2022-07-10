@@ -9,6 +9,7 @@ module group-theory where
 
 open import group-theory.abelian-groups public
 open import group-theory.addition-homomorphisms-abelian-groups public
+open import group-theory.automorphism-groups public
 open import group-theory.cartesian-products-abelian-groups public
 open import group-theory.cartesian-products-groups public
 open import group-theory.cartesian-products-monoids public
@@ -23,6 +24,7 @@ open import group-theory.conjugation public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
 open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
+open import group-theory.equivalences-concrete-group-actions public
 open import group-theory.equivalences-group-actions public
 open import group-theory.equivalences-semigroups public
 open import group-theory.fixed-points-higher-group-actions public
@@ -53,6 +55,7 @@ open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.normal-subgroups public
+open import group-theory.normal-subgroups-concrete-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orbits-concrete-group-actions public

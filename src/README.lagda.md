@@ -513,6 +513,7 @@ open import group-theory.contravariant-pushforward-concrete-group-actions
 open import group-theory.embeddings-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups
+open import group-theory.equivalences-concrete-group-actions
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-semigroups
 open import group-theory.fixed-points-higher-group-actions
@@ -545,6 +546,7 @@ open import group-theory.monoids
 open import group-theory.monomorphisms-concrete-groups
 open import group-theory.monomorphisms-groups
 open import group-theory.normal-subgroups
+open import group-theory.normal-subgroups-concrete-groups
 open import group-theory.orbit-stabilizer-theorem-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions

@@ -206,6 +206,10 @@ module _
 
   eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → X ＝ Y
   eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
+
+  extensionality-Set : (Y : UU-Set l) → (X ＝ Y) ≃ type-equiv-Set X Y
+  pr1 (extensionality-Set Y) = equiv-eq-Set Y
+  pr2 (extensionality-Set Y) = is-equiv-equiv-eq-Set Y
 ```
 
 ### If a type embeds into a set, then it is a set
