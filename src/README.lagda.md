@@ -545,6 +545,7 @@ open import group-theory.monoids
 open import group-theory.monomorphisms-concrete-groups
 open import group-theory.monomorphisms-groups
 open import group-theory.normal-subgroups
+open import group-theory.orbit-stabilizer-theorem-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-higher-group-actions
