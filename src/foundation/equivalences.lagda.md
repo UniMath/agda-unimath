@@ -345,6 +345,10 @@ module _
     is-emb-map-equiv :
       is-emb (map-equiv {A = A} {B = B})
     is-emb-map-equiv = is-emb-inclusion-subtype is-equiv-Prop
+
+  emb-map-equiv : (A ≃ B) ↪ (A → B)
+  pr1 emb-map-equiv = map-equiv
+  pr2 emb-map-equiv = is-emb-map-equiv
 ```
 
 ### Characterizing the identity type of equivalences

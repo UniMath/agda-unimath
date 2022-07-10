@@ -10,13 +10,19 @@ module group-theory.subgroups-concrete-groups where
 open import foundation.0-maps
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.faithful-maps
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-group-actions
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.transitive-concrete-group-actions
 
@@ -72,13 +78,31 @@ module _
     is-transitive-transitive-action-Concrete-Group G
       transitive-action-subgroup-Concrete-Group
 
+  mul-transitive-action-subgroup-Concrete-Group :
+    type-Concrete-Group G → type-coset-subgroup-Concrete-Group →
+    type-coset-subgroup-Concrete-Group
+  mul-transitive-action-subgroup-Concrete-Group =
+    mul-transitive-action-Concrete-Group G
+      transitive-action-subgroup-Concrete-Group
+
+  is-transitive-mul-transitive-action-subgroup-Concrete-Group :
+    ( x y : type-coset-subgroup-Concrete-Group) →
+    ∃ ( type-Concrete-Group G)
+      ( λ g → mul-transitive-action-subgroup-Concrete-Group g x ＝ y)
+  is-transitive-mul-transitive-action-subgroup-Concrete-Group =
+    is-transitive-mul-transitive-action-Concrete-Group G
+      transitive-action-subgroup-Concrete-Group
+
   classifying-type-subgroup-Concrete-Group : UU (l1 ⊔ l2)
   classifying-type-subgroup-Concrete-Group =
     orbit-action-Concrete-Group G action-subgroup-Concrete-Group
 
+  unit-coset-subgroup-Concrete-Group : type-coset-subgroup-Concrete-Group
+  unit-coset-subgroup-Concrete-Group = pr2 H
+
   shape-subgroup-Concrete-Group : classifying-type-subgroup-Concrete-Group
   pr1 shape-subgroup-Concrete-Group = shape-Concrete-Group G
-  pr2 shape-subgroup-Concrete-Group = pr2 H
+  pr2 shape-subgroup-Concrete-Group = unit-coset-subgroup-Concrete-Group
 
   classifying-pointed-type-subgroup-Concrete-Group : Pointed-Type (l1 ⊔ l2)
   pr1 classifying-pointed-type-subgroup-Concrete-Group =
@@ -149,4 +173,81 @@ module _
     classifying-inclusion-subgroup-Concrete-Group
   pr2 hom-inclusion-subgroup-Concrete-Group =
     preserves-shape-classifying-inclusion-subgroup-Concrete-Group
+```
+
+## Properties
+
+```agda
+equiv-subgroup-Concrete-Group :
+  {l1 l2 l3 : Level} (G : Concrete-Group l1) → subgroup-Concrete-Group l2 G →
+  subgroup-Concrete-Group l3 G → UU (l1 ⊔ l2 ⊔ l3)
+equiv-subgroup-Concrete-Group G X Y =
+  Σ ( equiv-action-Concrete-Group G
+      ( action-subgroup-Concrete-Group G X)
+      ( action-subgroup-Concrete-Group G Y))
+    ( λ e →
+      ( map-equiv
+        ( e (shape-Concrete-Group G)) (unit-coset-subgroup-Concrete-Group G X)) ＝
+      ( unit-coset-subgroup-Concrete-Group G Y))
+  
+extensionality-subgroup-Concrete-Group :
+  {l1 l2 : Level} (G : Concrete-Group l1) (X Y : subgroup-Concrete-Group l2 G) →
+  (X ＝ Y) ≃ equiv-subgroup-Concrete-Group G X Y
+extensionality-subgroup-Concrete-Group G X =
+  extensionality-Σ
+    ( λ {Y} y e →
+      ( map-equiv
+        ( e (shape-Concrete-Group G))
+        ( unit-coset-subgroup-Concrete-Group G X)) ＝
+      ( y))
+    ( id-equiv-action-Concrete-Group G (action-subgroup-Concrete-Group G X))
+    ( refl)
+    ( extensionality-transitive-action-Concrete-Group G
+      ( transitive-action-subgroup-Concrete-Group G X))
+    ( λ x → id-equiv)
+
+is-set-subgroup-Concrete-Group :
+  {l1 l2 : Level} (G : Concrete-Group l1) →
+  is-set (subgroup-Concrete-Group l2 G)
+is-set-subgroup-Concrete-Group G X Y =
+  is-prop-equiv
+    ( extensionality-subgroup-Concrete-Group G X Y)
+    ( λ e f →
+      is-proof-irrelevant-is-prop
+        ( is-set-type-subtype
+          ( P)
+          ( is-set-equiv-action-Concrete-Group G
+            ( action-subgroup-Concrete-Group G X)
+            ( action-subgroup-Concrete-Group G Y))
+          ( e)
+          ( f))
+        ( eq-subtype P
+          ( eq-htpy-equiv-action-Concrete-Group G
+            ( action-subgroup-Concrete-Group G X)
+            ( action-subgroup-Concrete-Group G Y)
+            ( pr1 e)
+            ( pr1 f)
+            ( htpy-exists-equiv-transitive-action-Concrete-Group G
+              ( transitive-action-subgroup-Concrete-Group G X)
+              ( transitive-action-subgroup-Concrete-Group G Y)
+              ( pr1 e)
+              ( pr1 f)
+              ( intro-∃
+                ( unit-coset-subgroup-Concrete-Group G X)
+                ( pr2 e ∙ inv (pr2 f)))))))
+  where
+  P :
+    subtype _
+      ( equiv-action-Concrete-Group G
+        ( action-subgroup-Concrete-Group G X)
+        ( action-subgroup-Concrete-Group G Y))
+  P h =
+    Id-Prop
+      ( coset-subgroup-Concrete-Group G Y)
+      ( map-equiv-action-Concrete-Group G
+        ( action-subgroup-Concrete-Group G X)
+        ( action-subgroup-Concrete-Group G Y)
+        ( h)
+        ( unit-coset-subgroup-Concrete-Group G X))
+      ( unit-coset-subgroup-Concrete-Group G Y)
 ```
