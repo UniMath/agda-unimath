@@ -3,7 +3,7 @@ title: Simpson's delooping of the sign homomorphism
 ---
 
 ```agda
-{-# OPTIONS --without-K #-}
+{-# OPTIONS --without-K --experimental-lossy-unification #-}
 
 module finite-group-theory.simpson-delooping-sign-homomorphism where
 
@@ -96,10 +96,12 @@ module _
         ( preserves-add-sign-homomorphism-Fin-two n X (f ∘e inv-equiv g) (g ∘e inv-equiv h))) ∙
         ( ap
           ( sign-homomorphism-Fin-two n X)
-          ( ( eq-htpy-equiv refl-htpy) ∙
-            ( ap (λ h' → f ∘e (h' ∘e inv-equiv h)) (left-inverse-law-equiv g) ∙
-              ( eq-htpy-equiv refl-htpy)))))
-
+          ( ( associative-comp-equiv (g ∘e inv-equiv h) (inv-equiv g) f) ∙
+            ( ap
+              ( λ h' → f ∘e h')
+              ( ( inv (associative-comp-equiv (inv-equiv h) g (inv-equiv g))) ∙
+                ( ( ap (λ h' → h' ∘e inv-equiv h) (left-inverse-law-equiv g)) ∙
+                  ( left-unit-law-equiv (inv-equiv h))))))))
   quotient-sign-comp : UU (lsuc lzero ⊔ l)
   quotient-sign-comp = equivalence-class sign-comp-Eq-Rel
 
@@ -164,16 +166,38 @@ module _
                                 ( standard-2-Element-Decidable-Subtype
                                   ( has-decidable-equality-Fin (number-of-elements-count eX))
                                   ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))) ∙
-                          ( inv
-                            ( eq-htpy-equiv
-                              ( correct-transposition-conjugation-equiv-list
-                                ( Fin (number-of-elements-count eX))
-                                ( X)
-                                ( equiv-count eX)
-                                ( in-list
-                                  ( standard-2-Element-Decidable-Subtype
-                                    ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                    ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))))))))}
+                          ( ( ap
+                            ( λ h → equiv-count eX ∘e (h ∘e inv-equiv (equiv-count eX)))
+                            ( ( right-unit-law-equiv
+                              ( transposition
+                                ( standard-2-Element-Decidable-Subtype
+                                  ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
+                              ( inv
+                                ( right-unit-law-equiv
+                                  ( transposition
+                                    ( standard-2-Element-Decidable-Subtype
+                                      ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))) ∙
+                            ( inv
+                              ( associative-comp-equiv
+                                ( inv-equiv (equiv-count eX))
+                                ( permutation-list-transpositions
+                                  ( in-list
+                                    ( standard-2-Element-Decidable-Subtype
+                                      ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                                ( equiv-count eX)) ∙
+                              ( inv
+                                ( eq-htpy-equiv
+                                  ( correct-transposition-conjugation-equiv-list
+                                    ( Fin (number-of-elements-count eX))
+                                    ( X)
+                                    ( equiv-count eX)
+                                    ( in-list
+                                      ( standard-2-Element-Decidable-Subtype
+                                        ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))))))))))}
         { y =
           center
             ( is-contr-parity-transposition-permutation
@@ -343,24 +367,49 @@ module _
                           ( has-decidable-equality-Fin
                             ( number-of-elements-count eX))
                             ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))) ∙
-              ( ap
+               ap
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
                   ( pair X (unit-trunc-Prop (equiv-count eX))))
-                ( ( eq-htpy-equiv refl-htpy) ∙
+                ( ( associative-comp-equiv
+                  ( equiv-count eX ∘e
+                    inv-equiv
+                      ( equiv-count eX ∘e
+                        transposition
+                          ( standard-2-Element-Decidable-Subtype
+                            (has-decidable-equality-Fin (number-of-elements-count eX))
+                            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                  ( inv-equiv (equiv-count eX))
+                  ( f)) ∙
                   ( ap
-                    ( λ h →
-                      f ∘e
-                        ( h ∘e
-                          inv-equiv
+                    ( λ h → f ∘e h)
+                    ( inv
+                      ( associative-comp-equiv
+                        ( inv-equiv
+                          ( equiv-count eX ∘e
+                            transposition
+                              ( standard-2-Element-Decidable-Subtype
+                                ( has-decidable-equality-Fin (number-of-elements-count eX))
+                              ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                        ( equiv-count eX)
+                        ( inv-equiv (equiv-count eX))) ∙
+                      ( ( ap
+                        ( λ h →
+                          h ∘e
+                            inv-equiv
+                              ( equiv-count eX ∘e
+                                transposition
+                                  ( standard-2-Element-Decidable-Subtype
+                                    ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                    (pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                        ( left-inverse-law-equiv (equiv-count eX))) ∙
+                        ( left-unit-law-equiv
+                          ( inv-equiv
                             ( equiv-count eX ∘e
                               transposition
                                 ( standard-2-Element-Decidable-Subtype
-                                  ( has-decidable-equality-Fin
-                                    ( number-of-elements-count eX))
-                                    ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))
-                    (left-inverse-law-equiv (equiv-count eX)) ∙
-                    ( eq-htpy-equiv refl-htpy)))))))
+                                  ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))))))))
     retr-Fin-2-quotient-sign-comp-count :
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
@@ -453,12 +502,18 @@ module _
           (lemma ∙
             ( inv
               ( D ∙
-                ( ap
+                 ap
                   ( sign-homomorphism-Fin-two
                     ( number-of-elements-count eX)
                     ( pair X (unit-trunc-Prop (equiv-count eX))))
-                  ( eq-htpy-equiv refl-htpy ∙
-                    ( ( ap
+                  ( ( associative-comp-equiv
+                    ( inv-equiv (equiv-count eX))
+                    ( transposition
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-Fin (number-of-elements-count eX))
+                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+                    ( equiv-count eX)) ∙
+                    ( ap
                       ( λ h → equiv-count eX ∘e h)
                       ( ( ap
                         ( λ h → h ∘e inv-equiv (equiv-count eX))
@@ -482,8 +537,7 @@ module _
                                 ( has-decidable-equality-Fin
                                   ( number-of-elements-count eX))
                                   ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
-                            ( equiv-count eX))))) ∙
-                      ( eq-htpy-equiv refl-htpy))))))))
+                            ( equiv-count eX))))))))))
     sec-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
 
 module _
