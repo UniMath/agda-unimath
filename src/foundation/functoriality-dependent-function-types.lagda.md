@@ -34,10 +34,15 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.contractible-maps using
   ( is-equiv-is-contr-map; is-contr-map-is-equiv)
+open import foundation-core.embeddings using
+  ( is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-tot; equiv-Σ)
-open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
+open import foundation-core.propositional-maps using
+  ( is-emb-is-prop-map; is-prop-map-is-emb)
+open import foundation-core.truncation-levels using
+  (𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
 open import foundation-core.truncated-maps using (is-trunc-map)
 ```
 
@@ -148,6 +153,22 @@ abstract
       ( (i : I) → fib (f i) (h i))
       ( equiv-fib-map-Π f h)
       ( is-trunc-Π k (λ i → H i (h i)))
+
+abstract
+  is-emb-map-Π :
+    {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+    {f : (i : I) → A i → B i} →
+    ((i : I) → is-emb (f i)) → is-emb (map-Π f)
+  is-emb-map-Π {f = f} H =
+    is-emb-is-prop-map
+      ( is-trunc-map-map-Π neg-one-𝕋 f
+        ( λ i → is-prop-map-is-emb (H i)))
+
+emb-Π :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
+  ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
+pr1 (emb-Π f) = map-Π (λ i → map-emb (f i))
+pr2 (emb-Π f) = is-emb-map-Π (λ i → is-emb-map-emb (f i))
 ```
 
 ### A family of truncated maps over any map induces a truncated map on dependent function types
@@ -179,6 +200,15 @@ is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
         ( map-Π (λ x → f i) h)
         ( const unit (B i) b)))
     ( H (λ x → i) (const unit (B i) b))
+
+is-emb-map-Π-is-emb' :
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3} →
+  {J : UU l4} (α : J → I) (f : (i : I) → A i → B i) →
+  ((i : I) → is-emb (f i)) → is-emb (map-Π' α f)
+is-emb-map-Π-is-emb' α f H =
+  is-emb-is-prop-map
+    ( is-trunc-map-map-Π-is-trunc-map' neg-one-𝕋 α f
+      ( λ i → is-prop-map-is-emb (H i)))
 ```
 
 ###

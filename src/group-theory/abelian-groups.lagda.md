@@ -1,4 +1,6 @@
-# Abelian groups
+---
+title: Abelian groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

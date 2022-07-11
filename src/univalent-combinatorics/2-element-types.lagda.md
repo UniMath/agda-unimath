@@ -23,7 +23,7 @@ open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; is-prop-is-contr;
     is-equiv-is-contr; center)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; neq-inr-inl; neq-inl-inr)
+  ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
@@ -73,14 +73,13 @@ open import foundation.type-arithmetic-unit-type using
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level; is-set-has-cardinality)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq)
 open import univalent-combinatorics.finite-types using
   ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
     Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level;
-    is-finite; 𝔽; is-finite-has-cardinality)
+    is-finite; 𝔽; is-finite-has-cardinality; set-UU-Fin-Level;
+    is-set-has-cardinality)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
     is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
@@ -818,7 +817,7 @@ preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
 ```agda
 is-coprod-Σ-Fin-two-ℕ :
   {l : Level} (P : Fin 2 → UU l) →
-  Σ (Fin 2) P ≃ coprod (P (zero-Fin 1)) (P (one-Fin 1))
+  Σ (Fin 2) P ≃ (P (zero-Fin 1) + P (one-Fin 1))
 is-coprod-Σ-Fin-two-ℕ P =
   ( equiv-coprod
     ( left-unit-law-Σ-is-contr is-contr-Fin-one-ℕ (zero-Fin 0))
@@ -837,8 +836,7 @@ module _
     is-contr-decide-value-equiv-Fin-two-ℕ :
       (e : Fin 2 ≃ type-2-Element-Type X) (x : type-2-Element-Type X) →
       is-contr
-        ( coprod
-          ( x ＝ map-equiv e (zero-Fin 1))
+        ( ( x ＝ map-equiv e (zero-Fin 1)) +
           ( x ＝ map-equiv e (one-Fin 1)))
     is-contr-decide-value-equiv-Fin-two-ℕ e x =
       is-contr-equiv'
@@ -849,7 +847,7 @@ module _
 
   decide-value-equiv-Fin-two-ℕ :
     (e : Fin 2 ≃ type-2-Element-Type X) (x : type-2-Element-Type X) →
-    coprod (x ＝ map-equiv e (zero-Fin 1)) (x ＝ map-equiv e (one-Fin 1))
+    (x ＝ map-equiv e (zero-Fin 1)) + (x ＝ map-equiv e (one-Fin 1))
   decide-value-equiv-Fin-two-ℕ e x =
     center (is-contr-decide-value-equiv-Fin-two-ℕ e x)
 ```
@@ -876,15 +874,9 @@ module _
     where
     cases-contradiction-3-distinct-element-2-Element-Type :
       (e : Fin 2 ≃ type-2-Element-Type X) →
-      coprod
-        ( x ＝ map-equiv e (zero-Fin 1))
-        ( x ＝ map-equiv e (one-Fin 1)) →
-      coprod
-        ( y ＝ map-equiv e (zero-Fin 1))
-        ( y ＝ map-equiv e (one-Fin 1)) →
-      coprod
-        ( z ＝ map-equiv e (zero-Fin 1))
-        ( z ＝ map-equiv e (one-Fin 1)) →
+      (x ＝ map-equiv e (zero-Fin 1)) + (x ＝ map-equiv e (one-Fin 1)) →
+      (y ＝ map-equiv e (zero-Fin 1)) + (y ＝ map-equiv e (one-Fin 1)) →
+      (z ＝ map-equiv e (zero-Fin 1)) + (z ＝ map-equiv e (one-Fin 1)) →
       empty
     cases-contradiction-3-distinct-element-2-Element-Type e
       (inl refl) (inl refl) c3 = np refl

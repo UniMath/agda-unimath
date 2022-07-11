@@ -18,7 +18,8 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
-open import foundation.coproduct-types using (coprod; inl; inr)
+  
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (pair)
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using
@@ -260,11 +261,9 @@ is-difference-dist-ℕ' x y H =
 cases-dist-ℕ :
   (x y z : ℕ) → UU lzero
 cases-dist-ℕ x y z =
-  coprod
-    ( add-ℕ (dist-ℕ x y) (dist-ℕ y z) ＝ dist-ℕ x z)
-    ( coprod
-      ( add-ℕ (dist-ℕ y z) (dist-ℕ x z) ＝ dist-ℕ x y)
-      ( add-ℕ (dist-ℕ x z) (dist-ℕ x y) ＝ dist-ℕ y z))
+  ( add-ℕ (dist-ℕ x y) (dist-ℕ y z) ＝ dist-ℕ x z) +
+  ( ( add-ℕ (dist-ℕ y z) (dist-ℕ x z) ＝ dist-ℕ x y) +
+    ( add-ℕ (dist-ℕ x z) (dist-ℕ x y) ＝ dist-ℕ y z))
 
 is-total-dist-ℕ :
   (x y z : ℕ) → cases-dist-ℕ x y z

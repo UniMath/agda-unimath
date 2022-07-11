@@ -1,11 +1,11 @@
 ---
-title: Concrete subgroups
+title: Monomorphisms of concrete groups
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.concrete-subgroups where
+module group-theory.monomorphisms-concrete-groups where
 
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.embeddings using (is-emb-Prop)
@@ -18,7 +18,7 @@ open import group-theory.concrete-groups using
 
 ## Idea
 
-A concrete subgroup of a concrete group BG consists of a concrete group BH equipped with a faithful pointed map BH →* BG. Recall that a map is said to be faithful if it induces embeddings on identity types. In particular, any faithful pointed map BH →* BG induces an embedding ΩBH → ΩBG, i.e., an inclusion of the underlying groups of a concrete group. Faithful pointed maps BH →* BG are equivalently described as monomorphisms in the category of concrete groups.
+A monomorphism of concrete groups from `G` to `H` is a faithful pointed map BH →* BG. Recall that a map is said to be faithful if it induces embeddings on identity types. In particular, any faithful pointed map BH →* BG induces an embedding ΩBH → ΩBG, i.e., an inclusion of the underlying groups of a concrete group. 
 
 ```agda
 module _ {l1 l2 : Level} (l3 : Level)

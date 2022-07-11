@@ -9,7 +9,7 @@ module foundation.maybe where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl)
+  ( _+_; inl; inr; is-injective-inl)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -40,7 +40,7 @@ The maybe modality is an operation on types that adds one point. This is used, f
 
 ```agda
 Maybe : {l : Level} → UU l → UU l
-Maybe X = coprod X unit
+Maybe X = X + unit
 
 unit-Maybe : {l : Level} {X : UU l} → X → Maybe X
 unit-Maybe = inl
@@ -129,8 +129,7 @@ abstract
 
 ```agda
 decide-Maybe :
-  {l : Level} {X : UU l} (x : Maybe X) →
-  coprod (is-value-Maybe x) (is-exception-Maybe x)
+  {l : Level} {X : UU l} (x : Maybe X) → is-value-Maybe x + is-exception-Maybe x
 decide-Maybe (inl x) = inl (pair x refl)
 decide-Maybe (inr star) = inr refl
 ```

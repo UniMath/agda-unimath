@@ -39,22 +39,6 @@ Any finite type is a set because it is merely equivalent to a standard finite ty
 
 ## Properties
 
-### Any finite type is a set
-
-```agda
-abstract
-  is-set-is-finite :
-    {l : Level} {X : UU l} → is-finite X → is-set X
-  is-set-is-finite {l} {X} H =
-    apply-universal-property-trunc-Prop H
-      ( is-set-Prop X)
-      ( λ e → is-set-count e)
-
-set-𝔽 : 𝔽 → UU-Set lzero
-pr1 (set-𝔽 X) = type-𝔽 X
-pr2 (set-𝔽 X) = is-set-is-finite (is-finite-type-𝔽 X)
-```
-
 ### Any finite type has decidable equality
 
 ```agda
@@ -67,22 +51,6 @@ has-decidable-equality-is-finite {l1} {X} is-finite-X =
       has-decidable-equality-equiv'
         ( equiv-count e)
         ( has-decidable-equality-Fin (number-of-elements-count e)))
-```
-
-### Any type of cardinality `k` is a set
-
-```agda
-is-set-has-cardinality :
-  {l1 : Level} {X : UU l1} (k : ℕ) → has-cardinality k X → is-set X
-is-set-has-cardinality k H = is-set-mere-equiv' H (is-set-Fin k)
-
-set-UU-Fin-Level : {l1 : Level} (k : ℕ) → UU-Fin-Level l1 k → UU-Set l1
-pr1 (set-UU-Fin-Level k X) = type-UU-Fin-Level k X
-pr2 (set-UU-Fin-Level k X) =
-  is-set-has-cardinality k (has-cardinality-type-UU-Fin-Level k X)
-
-set-UU-Fin : (k : ℕ) → UU-Fin k → UU-Set lzero
-set-UU-Fin k X = set-UU-Fin-Level k X
 ```
 
 ### Any type of finite cardinality has decidable equality

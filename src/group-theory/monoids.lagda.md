@@ -1,4 +1,6 @@
-# Monoids
+---
+title: Monoids
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

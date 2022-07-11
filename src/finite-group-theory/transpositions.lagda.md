@@ -13,7 +13,7 @@ open import
 open import foundation.automorphisms using (Aut)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
+  ( _+_; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
     coprod-Prop)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
@@ -401,9 +401,8 @@ module _
         ( type-decidable-prop-pr1-two-elements-transposition)
     type-t-coprod-id :
       (x : X) →
-      coprod
-        ( Id (pr1 two-elements-transposition) x)
-        ( Id (pr1 (pr2 two-elements-transposition)) x) →
+      ( Id (pr1 two-elements-transposition) x) +
+      ( Id (pr1 (pr2 two-elements-transposition)) x) →
       type-decidable-Prop (pr1 Y x)
     type-t-coprod-id x (inl Q) =
       tr
@@ -430,9 +429,8 @@ module _
              ( pr1 (pr2 two-elements-transposition))
              ( type-decidable-prop-pr1-pr2-two-elements-transposition)))
          ( k3) →
-      coprod
-        ( Id (pr1 two-elements-transposition) x)
-        ( Id (pr1 (pr2 two-elements-transposition)) x)
+      ( Id (pr1 two-elements-transposition) x) +
+      ( Id (pr1 (pr2 two-elements-transposition)) x)
     cases-coprod-id-type-t x p h (inl (inr star)) (inl (inr star)) k3 K1 K2 K3 =
       inl (ap pr1 (is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K1)))
     cases-coprod-id-type-t x p h
@@ -459,9 +457,8 @@ module _
       inl (ap pr1 (is-injective-map-equiv (inv-equiv h) (K2 ∙ inv K1)))
     coprod-id-type-t :
       (x : X) → type-decidable-Prop (pr1 Y x) →
-      coprod
-        ( Id (pr1 two-elements-transposition) x)
-        ( Id (pr1 (pr2 two-elements-transposition)) x)
+      ( Id (pr1 two-elements-transposition) x) +
+      ( Id (pr1 (pr2 two-elements-transposition)) x)
     coprod-id-type-t x p =
       apply-universal-property-trunc-Prop (pr2 Y)
         ( coprod-Prop
@@ -498,9 +495,10 @@ module _
       is-decidable (Id (pr1 (pr2 two-elements-transposition)) x) →
       is-decidable (Id (pr1 two-elements-transposition) y) →
       is-decidable (Id (pr1 (pr2 two-elements-transposition)) y) →
-      coprod
-        ( Id (pr1 two-elements-transposition) x × Id (pr1 (pr2 two-elements-transposition)) y)
-        ( Id (pr1 two-elements-transposition) y × Id (pr1 (pr2 two-elements-transposition)) x)
+      ( ( Id (pr1 two-elements-transposition) x) ×
+        ( Id (pr1 (pr2 two-elements-transposition)) y)) +
+      ( ( Id (pr1 two-elements-transposition) y) ×
+        ( Id (pr1 (pr2 two-elements-transposition)) x))
     cases-eq-two-elements-transposition x y np p1 p2 (inl q) r s (inl u) =
       inl (pair q u)
     cases-eq-two-elements-transposition x y np p1 p2 (inl q) r s (inr nu) =
@@ -572,9 +570,10 @@ module _
     eq-two-elements-transposition : (x y : X) (np : ¬ (Id x y)) →
       (type-decidable-Prop (pr1 Y x)) →
       (type-decidable-Prop (pr1 Y y)) →
-      coprod
-        ( Id (pr1 two-elements-transposition) x × Id (pr1 (pr2 two-elements-transposition)) y)
-        ( Id (pr1 two-elements-transposition) y × Id (pr1 (pr2 two-elements-transposition)) x)
+      ( ( Id (pr1 two-elements-transposition) x) ×
+        ( Id (pr1 (pr2 two-elements-transposition)) y)) +
+      ( ( Id (pr1 two-elements-transposition) y) ×
+        ( Id (pr1 (pr2 two-elements-transposition)) x))
     eq-two-elements-transposition x y np p1 p2 =
       cases-eq-two-elements-transposition x y np p1 p2
         (has-decidable-equality-count eX (pr1 two-elements-transposition) x)
@@ -746,8 +745,8 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
               ( λ x → type-decidable-Prop (P x)))
             ( Σ unit (λ x → empty)) map-right-absorption-prod ∘e h)))
   where
-  f : coprod (Σ (Fin n) (λ x → type-decidable-Prop (P x)))
-    (Σ unit (λ x → empty)) →
+  f :
+    (Σ (Fin n) (λ x → type-decidable-Prop (P x))) + (Σ unit (λ x → empty)) →
     Σ (Fin (succ-ℕ n))
     (λ x →
        type-decidable-Prop
@@ -757,8 +756,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
     (λ x →
        type-decidable-Prop
        (pr1 (Fin-succ-Fin-transposition n (pair P H)) x)) →
-    coprod (Σ (Fin n) (λ x → type-decidable-Prop (P x)))
-      (Σ unit (λ x → empty)) 
+    (Σ (Fin n) (λ x → type-decidable-Prop (P x))) + (Σ unit (λ x → empty)) 
   inv-f (pair (inl x) p) = inl (pair x p)
   retr-f : (f ∘ inv-f) ~ id
   retr-f (pair (inl x) p) = refl

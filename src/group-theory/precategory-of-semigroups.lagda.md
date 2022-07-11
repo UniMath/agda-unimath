@@ -1,4 +1,6 @@
-# The precategory of semigroups
+---
+title: The precategory of semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

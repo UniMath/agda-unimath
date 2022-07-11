@@ -16,7 +16,7 @@ open import
 open import foundation.automorphisms using (Aut)
 open import foundation.booleans using (equiv-bool-Fin-two-ℕ)
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-propositions using
@@ -258,8 +258,8 @@ module _
         (λ z →
           eq-pair-Σ
             ( eq-equiv
-              ( coprod (Id x z) (Id y z))
-              ( coprod (Id y z) (Id x z))
+              ( (Id x z) + (Id y z))
+              ( (Id y z) + (Id x z))
               ( pair
                 ( map-commutative-coprod (Id x z) (Id y z))
                 ( is-equiv-map-commutative-coprod (Id x z) (Id y z))))
@@ -295,8 +295,8 @@ module _
         ( λ v →
           eq-pair-Σ
             ( eq-equiv
-              ( coprod (Id x v) (Id y v))
-              ( coprod (Id z v) (Id w v))
+              ( (Id x v) + (Id y v))
+              ( (Id z v) + (Id w v))
               ( equiv-coprod
                 ( equiv-concat (inv r) v)
                 ( equiv-concat (inv s) v)))

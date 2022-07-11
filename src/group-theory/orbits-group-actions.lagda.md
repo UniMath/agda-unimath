@@ -1,4 +1,6 @@
-# Orbits of group actions
+---
+title: Orbits of group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

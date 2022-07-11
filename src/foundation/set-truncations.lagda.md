@@ -10,7 +10,7 @@ module foundation.set-truncations where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; center)
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ev-pair)
 open import foundation.effective-maps-equivalence-relations using
   ( is-surjective-and-effective; is-effective)
@@ -509,7 +509,7 @@ module _
     distributive-trunc-coprod-Set :
       is-contr
         ( Σ ( type-equiv-Set
-              ( trunc-Set (coprod A B))
+              ( trunc-Set (A + B))
               ( coprod-Set (trunc-Set A) (trunc-Set B)))
             ( λ e →
               ( map-equiv e ∘ unit-trunc-Set) ~
@@ -537,14 +537,14 @@ module _
 
   equiv-distributive-trunc-coprod-Set :
     type-equiv-Set
-      ( trunc-Set (coprod A B))
+      ( trunc-Set (A + B))
       ( coprod-Set (trunc-Set A) (trunc-Set B))
   equiv-distributive-trunc-coprod-Set =
     pr1 (center distributive-trunc-coprod-Set)
 
   map-equiv-distributive-trunc-coprod-Set :
     type-hom-Set
-      ( trunc-Set (coprod A B))
+      ( trunc-Set (A + B))
       ( coprod-Set (trunc-Set A) (trunc-Set B))
   map-equiv-distributive-trunc-coprod-Set =
     map-equiv equiv-distributive-trunc-coprod-Set

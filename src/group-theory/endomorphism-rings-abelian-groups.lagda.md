@@ -1,4 +1,6 @@
-# The endomorphism rings of abelian groups
+---
+title: The endomorphism rings of abelian groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

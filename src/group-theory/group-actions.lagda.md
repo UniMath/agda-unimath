@@ -1,4 +1,6 @@
-# Group actions
+---
+title: Group actions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

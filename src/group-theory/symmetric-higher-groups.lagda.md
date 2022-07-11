@@ -1,47 +1,30 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Symmetric higher groups
 ---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module group-theory.examples-higher-groups where
+module group-theory.symmetric-higher-groups where
 
+open import foundation.dependent-pair-types
 open import foundation.connected-components-universes
 open import foundation.connected-types
-open import foundation.dependent-pair-types
 open import foundation.mere-equivalences
 open import foundation.universe-levels
 
 open import group-theory.higher-groups
 
 open import structured-types.pointed-types
-
-open import synthetic-homotopy-theory.circle
 ```
 
+## Idea
+
+The symmetric higher group of a type `X` is the connected component of the universe at `X`.
+
+## Definition
+
 ```agda
-module _
-  where
-
-  classifying-type-ℤ-∞-Group : UU lzero
-  classifying-type-ℤ-∞-Group = 𝕊¹
-
-  shape-ℤ-∞-Group : 𝕊¹
-  shape-ℤ-∞-Group = base-𝕊¹
-
-  classifying-pointed-type-ℤ-∞-Group : Pointed-Type lzero
-  classifying-pointed-type-ℤ-∞-Group =
-    pair
-      classifying-type-ℤ-∞-Group
-      shape-ℤ-∞-Group
-
-  ℤ-∞-Group : ∞-Group lzero
-  ℤ-∞-Group =
-    pair
-      classifying-pointed-type-ℤ-∞-Group
-      is-path-connected-𝕊¹
-
 module _
   {l : Level} (X : UU l)
   where

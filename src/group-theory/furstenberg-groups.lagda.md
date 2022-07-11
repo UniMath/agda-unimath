@@ -1,4 +1,6 @@
-# Furstenberg groups
+---
+title: Furstenberg groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

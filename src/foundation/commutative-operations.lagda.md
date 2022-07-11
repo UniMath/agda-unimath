@@ -7,7 +7,7 @@ title: Commutative operations
 
 module foundation.commutative-operations where
 
-open import foundation.coproduct-types using (coprod; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( map-equiv; _≃_; htpy-equiv; _∘e_; inv-equiv; id-equiv)
@@ -87,9 +87,7 @@ module _
   is-weakly-constant-on-equivalences-is-commutative :
     (f : A → A → type-Set B) (H : is-commutative f) →
     (X : UU lzero) (p : X → A) (e e' : Fin 2 ≃ X) →
-    coprod
-      ( htpy-equiv e e')
-      ( htpy-equiv e (e' ∘e equiv-succ-Fin 2)) →
+    (htpy-equiv e e') + (htpy-equiv e (e' ∘e equiv-succ-Fin 2)) →
     ( f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1)))) ＝ 
     ( f (p (map-equiv e' (zero-Fin 1))) (p (map-equiv e' (one-Fin 1))))
   is-weakly-constant-on-equivalences-is-commutative f H X p e e' (inl K) =

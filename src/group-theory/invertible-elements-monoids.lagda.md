@@ -1,4 +1,6 @@
-# Invertible elements in monoids
+---
+title: Invertible elements in monoids
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

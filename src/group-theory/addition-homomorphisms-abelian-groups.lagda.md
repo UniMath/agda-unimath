@@ -1,4 +1,6 @@
-# Pointwise addition of morphisms of abelian groups
+---
+title: Pointwise addition of morphisms of abelian groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

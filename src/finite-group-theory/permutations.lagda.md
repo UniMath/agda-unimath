@@ -24,7 +24,7 @@ open import finite-group-theory.orbits-permutations using
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
+  ( inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
     neq-inl-inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
@@ -86,12 +86,11 @@ open import univalent-combinatorics.2-element-types using
 open import univalent-combinatorics.counting using
   ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
     number-of-elements-count)
-open import univalent-combinatorics.equality-finite-types using
-  ( set-UU-Fin-Level)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level; has-cardinality-type-UU-Fin-Level)
+  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level;
+    has-cardinality-type-UU-Fin-Level; set-UU-Fin-Level)
 open import univalent-combinatorics.lists using
   ( cons; list; fold-list; map-list; nil; length-list; concat-list;
     length-concat-list)

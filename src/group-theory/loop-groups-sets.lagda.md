@@ -1,5 +1,5 @@
 ---
-title: Formalisation of the Symmetry Book
+title: Concrete automorphism groups on sets
 ---
 
 ```agda
@@ -69,12 +69,14 @@ module _
   pr1 loop-semigroup-Set = set-loop-Set
   pr2 loop-semigroup-Set = has-associative-mul-loop-Set
 
-  is-unital-Semigroup-loop-semigroup-Set : is-unital-Semigroup loop-semigroup-Set
+  is-unital-Semigroup-loop-semigroup-Set :
+    is-unital-Semigroup loop-semigroup-Set
   pr1 is-unital-Semigroup-loop-semigroup-Set = refl
   pr1 (pr2 is-unital-Semigroup-loop-semigroup-Set) y = left-unit
   pr2 (pr2 is-unital-Semigroup-loop-semigroup-Set) x = right-unit
 
-  is-group-loop-semigroup-Set' : is-group' loop-semigroup-Set is-unital-Semigroup-loop-semigroup-Set
+  is-group-loop-semigroup-Set' :
+    is-group' loop-semigroup-Set is-unital-Semigroup-loop-semigroup-Set
   pr1 is-group-loop-semigroup-Set' = inv
   pr1 (pr2 is-group-loop-semigroup-Set') = left-inv
   pr2 (pr2 is-group-loop-semigroup-Set') = right-inv

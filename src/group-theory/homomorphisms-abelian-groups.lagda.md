@@ -1,4 +1,6 @@
-# Homomorphisms of abelian groups
+---
+title: Homomorphisms of abelian groups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

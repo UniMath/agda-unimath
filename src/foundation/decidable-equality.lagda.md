@@ -9,7 +9,7 @@ module foundation.decidable-equality where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
+  ( _+_; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
     neq-inr-inl; is-prop-coprod)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
@@ -303,7 +303,7 @@ module _
 
   has-decidable-equality-coprod :
     has-decidable-equality A → has-decidable-equality B →
-    has-decidable-equality (coprod A B)
+    has-decidable-equality (A + B)
   has-decidable-equality-coprod d e (inl x) (inl y) =
     is-decidable-iff (ap inl) is-injective-inl (d x y)
   has-decidable-equality-coprod d e (inl x) (inr y) =
@@ -314,12 +314,12 @@ module _
     is-decidable-iff (ap inr) is-injective-inr (e x y)
 
   has-decidable-equality-left-summand :
-    has-decidable-equality (coprod A B) → has-decidable-equality A
+    has-decidable-equality (A + B) → has-decidable-equality A
   has-decidable-equality-left-summand d x y =
     is-decidable-iff is-injective-inl (ap inl) (d (inl x) (inl y))
 
   has-decidable-equality-right-summand :
-    has-decidable-equality (coprod A B) → has-decidable-equality B
+    has-decidable-equality (A + B) → has-decidable-equality B
   has-decidable-equality-right-summand d x y =
     is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
 ```

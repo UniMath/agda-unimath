@@ -1,4 +1,6 @@
-# Homomorphisms of monoids
+---
+title: Homomorphisms of monoids
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

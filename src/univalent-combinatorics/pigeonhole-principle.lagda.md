@@ -16,7 +16,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
   (exists-not-not-forall-Fin; exists-not-not-forall-count)
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inr; inl)
+open import foundation.coproduct-types using (inr; inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.decidable-types using (is-decidable-function-type)
 open import foundation.embeddings using
@@ -53,12 +53,10 @@ open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-is-finite; is-decidable-Π-Fin)
 open import univalent-combinatorics.embeddings-standard-finite-types using
   ( reduce-emb-Fin)
-open import univalent-combinatorics.equality-finite-types using
-  ( is-set-is-finite)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( is-finite; number-of-elements-is-finite;
+  ( is-finite; number-of-elements-is-finite; is-set-is-finite;
     compute-number-of-elements-is-finite)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; emb-nat-Fin; is-set-Fin)

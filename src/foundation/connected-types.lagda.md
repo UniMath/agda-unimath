@@ -14,6 +14,7 @@ open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv)
 open import foundation.fiber-inclusions using (fiber-inclusion)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.identity-types using (ap; refl)
+open import foundation.inhabited-types using (is-inhabited)
 open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
@@ -46,7 +47,7 @@ is-path-connected A = type-Prop (is-path-connected-Prop A)
 
 abstract
   is-inhabited-is-path-connected :
-    {l : Level} {A : UU l} → is-path-connected A → type-trunc-Prop A
+    {l : Level} {A : UU l} → is-path-connected A → is-inhabited A
   is-inhabited-is-path-connected {l} {A} C =
     apply-universal-property-trunc-Set'
       ( center C)

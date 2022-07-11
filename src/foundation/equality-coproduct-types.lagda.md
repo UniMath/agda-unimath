@@ -10,7 +10,7 @@ module foundation.equality-coproduct-types where
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path)
 open import foundation.coproduct-types using
-  ( coprod; inl; inr; ind-coprod;
+  ( _+_; inl; inr; ind-coprod;
     is-injective-inl; is-injective-inr; neq-inl-inr; neq-inr-inl)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-types using (is-decidable-iff)
@@ -45,7 +45,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  data Eq-coprod : coprod A B → coprod A B → UU (l1 ⊔ l2)
+  data Eq-coprod : A + B → A + B → UU (l1 ⊔ l2)
     where
     Eq-eq-coprod-inl : {x y : A} → x ＝ y → Eq-coprod (inl x) (inl y)
     Eq-eq-coprod-inr : {x y : B} → x ＝ y → Eq-coprod (inr x) (inr y)
@@ -62,19 +62,19 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  refl-Eq-coprod : (x : coprod A B) → Eq-coprod x x
+  refl-Eq-coprod : (x : A + B) → Eq-coprod x x
   refl-Eq-coprod (inl x) = Eq-eq-coprod-inl refl
   refl-Eq-coprod (inr x) = Eq-eq-coprod-inr refl
 
-  Eq-eq-coprod : (x y : coprod A B) → x ＝ y → Eq-coprod x y
+  Eq-eq-coprod : (x y : A + B) → x ＝ y → Eq-coprod x y
   Eq-eq-coprod x .x refl = refl-Eq-coprod x
 
-  eq-Eq-coprod : (x y : coprod A B) → Eq-coprod x y → x ＝ y
+  eq-Eq-coprod : (x y : A + B) → Eq-coprod x y → x ＝ y
   eq-Eq-coprod .(inl x) .(inl x) (Eq-eq-coprod-inl {x} {.x} refl) = refl
   eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
   
   is-contr-total-Eq-coprod :
-    (x : coprod A B) → is-contr (Σ (coprod A B) (Eq-coprod x))
+    (x : A + B) → is-contr (Σ (A + B) (Eq-coprod x))
   pr1 (pr1 (is-contr-total-Eq-coprod (inl x))) = inl x
   pr2 (pr1 (is-contr-total-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
   pr2
@@ -86,14 +86,14 @@ module _
     ( is-contr-total-Eq-coprod (inr x))
     ( pair .(inr x) (Eq-eq-coprod-inr refl)) = refl
 
-  is-equiv-Eq-eq-coprod : (x y : coprod A B) → is-equiv (Eq-eq-coprod x y)
+  is-equiv-Eq-eq-coprod : (x y : A + B) → is-equiv (Eq-eq-coprod x y)
   is-equiv-Eq-eq-coprod x =
     fundamental-theorem-id x
       ( refl-Eq-coprod x)
       ( is-contr-total-Eq-coprod x)
       ( Eq-eq-coprod x)
 
-  extensionality-coprod : (x y : coprod A B) → (x ＝ y) ≃ Eq-coprod x y
+  extensionality-coprod : (x y : A + B) → (x ＝ y) ≃ Eq-coprod x y
   pr1 (extensionality-coprod x y) = Eq-eq-coprod x y
   pr2 (extensionality-coprod x y) = is-equiv-Eq-eq-coprod x y
 ```
@@ -132,11 +132,11 @@ module _
     pr1 compute-Eq-coprod-inl-inl = map-compute-Eq-coprod-inl-inl
     pr2 compute-Eq-coprod-inl-inl = is-equiv-map-compute-Eq-coprod-inl-inl
 
-    compute-eq-coprod-inl-inl : Id {A = coprod A B} (inl x) (inl y) ≃ (x ＝ y)
+    compute-eq-coprod-inl-inl : Id {A = A + B} (inl x) (inl y) ≃ (x ＝ y)
     compute-eq-coprod-inl-inl =
       compute-Eq-coprod-inl-inl ∘e extensionality-coprod (inl x) (inl y)
       
-    map-compute-eq-coprod-inl-inl : Id {A = coprod A B} (inl x) (inl y) → x ＝ y
+    map-compute-eq-coprod-inl-inl : Id {A = A + B} (inl x) (inl y) → x ＝ y
     map-compute-eq-coprod-inl-inl = map-equiv compute-eq-coprod-inl-inl
 
   module _
@@ -155,11 +155,11 @@ module _
     pr1 compute-Eq-coprod-inl-inr = map-compute-Eq-coprod-inl-inr
     pr2 compute-Eq-coprod-inl-inr = is-equiv-map-compute-Eq-coprod-inl-inr
 
-    compute-eq-coprod-inl-inr : Id {A = coprod A B} (inl x) (inr y) ≃ empty
+    compute-eq-coprod-inl-inr : Id {A = A + B} (inl x) (inr y) ≃ empty
     compute-eq-coprod-inl-inr =
       compute-Eq-coprod-inl-inr ∘e extensionality-coprod (inl x) (inr y)
       
-    is-empty-eq-coprod-inl-inr : is-empty (Id {A = coprod A B} (inl x) (inr y))
+    is-empty-eq-coprod-inl-inr : is-empty (Id {A = A + B} (inl x) (inr y))
     is-empty-eq-coprod-inl-inr = map-equiv compute-eq-coprod-inl-inr
 
   module _
@@ -178,11 +178,11 @@ module _
     pr1 compute-Eq-coprod-inr-inl = map-compute-Eq-coprod-inr-inl
     pr2 compute-Eq-coprod-inr-inl = is-equiv-map-compute-Eq-coprod-inr-inl
 
-    compute-eq-coprod-inr-inl : Id {A = coprod A B} (inr x) (inl y) ≃ empty
+    compute-eq-coprod-inr-inl : Id {A = A + B} (inr x) (inl y) ≃ empty
     compute-eq-coprod-inr-inl =
       compute-Eq-coprod-inr-inl ∘e extensionality-coprod (inr x) (inl y)
       
-    is-empty-eq-coprod-inr-inl : is-empty (Id {A = coprod A B} (inr x) (inl y))
+    is-empty-eq-coprod-inr-inl : is-empty (Id {A = A + B} (inr x) (inl y))
     is-empty-eq-coprod-inr-inl = map-equiv compute-eq-coprod-inr-inl
 
   module _
@@ -212,11 +212,11 @@ module _
     pr1 compute-Eq-coprod-inr-inr = map-compute-Eq-coprod-inr-inr
     pr2 compute-Eq-coprod-inr-inr = is-equiv-map-compute-Eq-coprod-inr-inr
 
-    compute-eq-coprod-inr-inr : Id {A = coprod A B} (inr x) (inr y) ≃ (x ＝ y)
+    compute-eq-coprod-inr-inr : Id {A = A + B} (inr x) (inr y) ≃ (x ＝ y)
     compute-eq-coprod-inr-inr =
       compute-Eq-coprod-inr-inr ∘e extensionality-coprod (inr x) (inr y)
 
-    map-compute-eq-coprod-inr-inr : Id {A = coprod A B} (inr x) (inr y) → x ＝ y
+    map-compute-eq-coprod-inr-inr : Id {A = A + B} (inr x) (inr y) → x ＝ y
     map-compute-eq-coprod-inr-inr = map-equiv compute-eq-coprod-inr-inr
 ```
 
@@ -237,7 +237,7 @@ module _
           ( is-contr-total-path x))
         ( λ y → ap inl)
 
-  emb-inl : A ↪ coprod A B
+  emb-inl : A ↪ (A + B)
   pr1 emb-inl = inl
   pr2 emb-inl = is-emb-inl
 
@@ -251,12 +251,12 @@ module _
           ( is-contr-total-path x))
         ( λ y → ap inr)
 
-  emb-inr : B ↪ coprod A B
+  emb-inr : B ↪ (A + B)
   pr1 emb-inr = inr
   pr2 emb-inr = is-emb-inr
 ```
 
-### A map `coprod A B → C` defined by maps `f : A → C` and `B → C` is an embedding if both `f` and `g` are embeddings and they don't overlap
+### A map `A + B → C` defined by maps `f : A → C` and `B → C` is an embedding if both `f` and `g` are embeddings and they don't overlap
 
 ```agda
 module _
@@ -298,7 +298,7 @@ module _
   abstract
     is-trunc-coprod :
       is-trunc (succ-𝕋 (succ-𝕋 k)) A → is-trunc (succ-𝕋 (succ-𝕋 k)) B →
-      is-trunc (succ-𝕋 (succ-𝕋 k)) (coprod A B)
+      is-trunc (succ-𝕋 (succ-𝕋 k)) (A + B)
     is-trunc-coprod is-trunc-A is-trunc-B (inl x) (inl y) =
       is-trunc-equiv (succ-𝕋 k)
         ( x ＝ y)
@@ -320,12 +320,12 @@ module _
 ```agda
 abstract
   is-set-coprod : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    is-set A → is-set B → is-set (coprod A B)
+    is-set A → is-set B → is-set (A + B)
   is-set-coprod = is-trunc-coprod neg-two-𝕋
 
 coprod-Set :
   {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
-pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = coprod A B
+pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = A + B
 pr2 (coprod-Set (pair A is-set-A) (pair B is-set-B)) =
   is-set-coprod is-set-A is-set-B
 ```

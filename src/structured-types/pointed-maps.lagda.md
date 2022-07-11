@@ -31,13 +31,14 @@ module _
   _→*_ : Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
   A →* B = pointed-Π A (constant-Pointed-Fam A B)
 
+  constant-pointed-map : (A : Pointed-Type l1) (B : Pointed-Type l2) → A →* B
+  pr1 (constant-pointed-map A B) =
+    const (type-Pointed-Type A) (type-Pointed-Type B) (pt-Pointed-Type B)
+  pr2 (constant-pointed-map A B) = refl
+
   [_→*_] : Pointed-Type l1 → Pointed-Type l2 → Pointed-Type (l1 ⊔ l2)
-  [ A →* B ] =
-    pair
-      ( A →* B)
-      ( pair
-        ( const (type-Pointed-Type A) (type-Pointed-Type B) (pt-Pointed-Type B))
-        ( refl))
+  pr1 [ A →* B ] = A →* B
+  pr2 [ A →* B ] = constant-pointed-map A B
 
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
@@ -46,10 +47,10 @@ module _
   map-pointed-map : A →* B → type-Pointed-Type A → type-Pointed-Type B
   map-pointed-map f = pr1 f
 
-  preserves-point-map-pointed-map :
+  preserves-point-pointed-map :
     (f : A →* B) →
     Id (map-pointed-map f (pt-Pointed-Type A)) (pt-Pointed-Type B)
-  preserves-point-map-pointed-map f = pr2 f
+  preserves-point-pointed-map f = pr2 f
 
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
@@ -62,7 +63,7 @@ module _
       ( fam-Pointed-Fam B C ∘ map-pointed-map A B f)
       ( tr
         ( fam-Pointed-Fam B C)
-        ( inv (preserves-point-map-pointed-map A B f))
+        ( inv (preserves-point-pointed-map A B f))
         ( pt-Pointed-Fam B C))
 
   precomp-pointed-Π : pointed-Π B C → pointed-Π A precomp-Pointed-Fam
@@ -72,11 +73,11 @@ module _
       ( ( inv
           ( apd
             ( function-pointed-Π B C g)
-            ( inv (preserves-point-map-pointed-map A B f)))) ∙
+            ( inv (preserves-point-pointed-map A B f)))) ∙
         ( ap
           ( tr
             ( fam-Pointed-Fam B C)
-            ( inv (preserves-point-map-pointed-map A B f)))
+            ( inv (preserves-point-pointed-map A B f)))
           ( preserves-point-function-pointed-Π B C g)))
 
 module _
@@ -88,8 +89,8 @@ module _
   precomp-pointed-map f g =
     pair
       ( map-pointed-map B C g ∘ map-pointed-map A B f)
-      ( ( ap (map-pointed-map B C g) (preserves-point-map-pointed-map A B f)) ∙
-        ( preserves-point-map-pointed-map B C g))
+      ( ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
+        ( preserves-point-pointed-map B C g))
 
   comp-pointed-map : B →* C → A →* B → A →* C
   comp-pointed-map g f = precomp-pointed-map f g

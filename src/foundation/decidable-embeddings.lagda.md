@@ -8,7 +8,7 @@ title: Decidable embeddings
 module foundation.decidable-embeddings where
 
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (coprod; inl; inr; ind-coprod)
+open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using (center; is-contr)
 open import foundation.decidable-maps using (is-decidable-map)
