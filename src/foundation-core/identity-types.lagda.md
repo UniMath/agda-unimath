@@ -246,6 +246,12 @@ tr-ap :
   (f : A → C) (g : (x : A) → B x → D (f x)) {x y : A} (p : x ＝ y) (z : B x) →
   (tr D (ap f p) (g x z)) ＝ (g y (tr B p z))
 tr-ap f g refl z = refl
+
+preserves-tr :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i) {i j : I} (p : i ＝ j) (x : A i) →
+  f j (tr A p x) ＝ tr B p (f i x)
+preserves-tr f refl x = refl
 ```
 
 ### The Mac Lane pentagon for identity types
