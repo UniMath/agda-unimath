@@ -16,7 +16,7 @@ open import foundation.equivalences using
   ( is-equiv; is-contr-sec-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
     _∘e_; is-emb-is-equiv; is-contr-retr-is-equiv; isretr-map-inv-is-equiv;
     is-equiv-comp'; _≃_; is-property-is-equiv; map-equiv; id-equiv;
-    map-inv-equiv; is-equiv-has-inverse)
+    map-inv-equiv; is-equiv-has-inverse; is-equiv-map-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_; id)
@@ -85,6 +85,9 @@ module _
   map-equiv-pointed-equiv : type-Pointed-Type A → type-Pointed-Type B
   map-equiv-pointed-equiv = map-equiv equiv-pointed-equiv
 
+  is-equiv-map-equiv-pointed-equiv : is-equiv map-equiv-pointed-equiv
+  is-equiv-map-equiv-pointed-equiv = is-equiv-map-equiv equiv-pointed-equiv
+
   preserves-point-equiv-pointed-equiv :
     Id (map-equiv-pointed-equiv (pt-Pointed-Type A)) (pt-Pointed-Type B)
   preserves-point-equiv-pointed-equiv = pr2 e
@@ -92,6 +95,10 @@ module _
   pointed-map-pointed-equiv : A →* B
   pr1 pointed-map-pointed-equiv = map-equiv-pointed-equiv
   pr2 pointed-map-pointed-equiv = preserves-point-equiv-pointed-equiv
+
+  is-equiv-pointed-map-pointed-equiv :
+    is-equiv-pointed-map A B pointed-map-pointed-equiv
+  is-equiv-pointed-map-pointed-equiv = is-equiv-map-equiv-pointed-equiv
 ```
 
 ### The identity pointed equivalence
@@ -267,14 +274,10 @@ module _
 
   is-equiv-is-iso-pointed-map :
     is-iso-pointed-map A B f → is-equiv-pointed-map A B f
-  is-equiv-is-iso-pointed-map H =
-    pair
-      ( pair
-        ( pr1 (pr1 (pr1 H)))
-        ( pr1 (pr2 (pr1 H))))
-      ( pair
-        ( pr1 (pr1 (pr2 H)))
-        ( pr1 (pr2 (pr2 H))))
+  pr1 (pr1 (is-equiv-is-iso-pointed-map H)) = pr1 (pr1 (pr1 H))
+  pr2 (pr1 (is-equiv-is-iso-pointed-map H)) = pr1 (pr2 (pr1 H))
+  pr1 (pr2 (is-equiv-is-iso-pointed-map H)) = pr1 (pr1 (pr2 H))
+  pr2 (pr2 (is-equiv-is-iso-pointed-map H)) = pr1 (pr2 (pr2 H))
 
   is-prop-is-iso-pointed-map : is-prop (is-iso-pointed-map A B f)
   is-prop-is-iso-pointed-map =
@@ -284,13 +287,12 @@ module _
 
   equiv-is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map A B f ≃ (is-iso-pointed-map A B f)
-  equiv-is-iso-is-equiv-pointed-map =
-    pair
-      ( is-iso-is-equiv-pointed-map)
-      ( is-equiv-is-prop
-        ( is-property-is-equiv (map-pointed-map A B f))
-        ( is-prop-is-iso-pointed-map)
-        ( is-equiv-is-iso-pointed-map))
+  pr1 equiv-is-iso-is-equiv-pointed-map = is-iso-is-equiv-pointed-map
+  pr2 equiv-is-iso-is-equiv-pointed-map =
+    is-equiv-is-prop
+      ( is-property-is-equiv (map-pointed-map A B f))
+      ( is-prop-is-iso-pointed-map)
+      ( is-equiv-is-iso-pointed-map)
 ```
 
 ### Precomposing by pointed equivalences is a pointed equivalence
@@ -410,6 +412,17 @@ module _
     h = pr1 (pr2 I)
     H : htpy-pointed-map A A (comp-pointed-map A B A h f) id-pointed-map
     H = pr2 (pr2 I)
+
+equiv-precomp-pointed-map :
+  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  (C : Pointed-Type l3) → (A ≃* B) → (B →* C) ≃ (A →* C)
+pr1 (equiv-precomp-pointed-map A B C f) g =
+  comp-pointed-map A B C g (pointed-map-pointed-equiv A B f)
+pr2 (equiv-precomp-pointed-map A B C f) =
+  is-equiv-precomp-is-equiv-pointed-map A B
+    ( pointed-map-pointed-equiv A B f)
+    ( is-equiv-map-equiv-pointed-equiv A B f)
+    ( C)
 ```
 
 ### Postcomposing by pointed equivalences is a pointed equivalence
