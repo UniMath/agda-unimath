@@ -13,6 +13,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.finite-type-groups
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
@@ -566,76 +567,35 @@ module _
   
   map-simpson-delooping-sign : (n : ℕ) →
     classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( UU-Set l)
-        ( raise-Set l (Fin-Set n))
-        ( is-1-type-UU-Set)) →
+      ( UU-Fin-Level-Group l n) →
     classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( UU-Set (lsuc lzero ⊔ l))
-        ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-1-type-UU-Set))
-  pr1 (map-simpson-delooping-sign zero-ℕ X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
-  pr2 (map-simpson-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
-  pr1 (map-simpson-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
-  pr2 (map-simpson-delooping-sign (succ-ℕ zero-ℕ) X) = unit-trunc-Prop refl
-  pr1 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    quotient-sign-comp-Set
-      ( succ-ℕ (succ-ℕ n))
-      ( pair
-        ( type-Set X)
-        ( map-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
-  pr2 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p)) =
-    map-trunc-Prop
-      ( λ e →
-        eq-pair-Σ
-          ( eq-equiv
-            ( type-Set (pr1 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) (pair X p))))
-            ( type-Set (raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)))
-            ( equiv-raise (lsuc lzero ⊔ l) (Fin 2) ∘e inv-equiv e))
-          ( eq-is-prop (is-prop-is-set (raise (lsuc lzero ⊔ l) (type-Set (Fin-Set 2))))))
-      ( mere-equiv-Fin-2-quotient-sign-comp
-        ( succ-ℕ (succ-ℕ n))
-        ( pair
-          ( type-Set X)
-          ( map-trunc-Prop (λ p' → equiv-eq (inv (pr1 (pair-eq-Σ p'))) ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))) p))
-        ( star))
+      ( UU-Fin-Level-Group (lsuc lzero ⊔ l) 2)
+  map-simpson-delooping-sign zero-ℕ X = Fin-UU-Fin-Level (lsuc lzero ⊔ l) 2
+  map-simpson-delooping-sign (succ-ℕ zero-ℕ) X = Fin-UU-Fin-Level (lsuc lzero ⊔ l) 2
+  pr1 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
+    quotient-sign-comp (succ-ℕ (succ-ℕ n)) X 
+  pr2 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
+    mere-equiv-Fin-2-quotient-sign-comp (succ-ℕ (succ-ℕ n)) X star
 
   simpson-delooping-sign : (n : ℕ) →
-    hom-Concrete-Group
-      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) is-1-type-UU-Set)
-      ( Automorphism-Group
-        ( UU-Set (lsuc lzero ⊔ l))
-        ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-1-type-UU-Set))
+    hom-Concrete-Group (UU-Fin-Level-Group l n) (UU-Fin-Level-Group (lsuc lzero ⊔ l) 2)
   pr1 (simpson-delooping-sign n) = map-simpson-delooping-sign n
   pr2 (simpson-delooping-sign zero-ℕ) = refl
   pr2 (simpson-delooping-sign (succ-ℕ zero-ℕ)) = refl
   pr2 (simpson-delooping-sign (succ-ℕ (succ-ℕ n))) =
     eq-pair-Σ
-      ( eq-pair-Σ
-        ( eq-equiv
-          ( type-Set
-            ( pr1
-              ( map-simpson-delooping-sign
-                ( succ-ℕ (succ-ℕ n))
-                ( pair
-                  ( raise-Set l (Fin-Set (succ-ℕ (succ-ℕ n))))
-                  ( unit-trunc-Prop refl)))))
-          ( type-Set (raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)))
-          ( equiv-raise (lsuc lzero ⊔ l) (Fin 2) ∘e
-            inv-equiv
-              ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n
-                ( succ-ℕ (succ-ℕ n))
-                ( pair
-                  ( raise l (Fin (succ-ℕ (succ-ℕ n))))
-                  ( map-trunc-Prop
-                    ( λ p' →
-                      ( equiv-eq (inv (pr1 (pair-eq-Σ p')))) ∘e
-                        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
-                    ( unit-trunc-Prop refl)))
-                ( star)
-                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
-        ( eq-is-prop (is-prop-is-set _)))
+      ( eq-equiv
+        ( pr1
+          ( map-simpson-delooping-sign
+            ( succ-ℕ (succ-ℕ n))
+            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))))
+        ( raise (lsuc lzero ⊔ l) (Fin 2))
+        ( ( equiv-raise (lsuc lzero ⊔ l) (Fin 2)) ∘e
+          ( inv-equiv
+            ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n
+              ( succ-ℕ (succ-ℕ n))
+              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+              ( star)
+              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
       ( eq-is-prop is-prop-type-trunc-Prop)
 ```
