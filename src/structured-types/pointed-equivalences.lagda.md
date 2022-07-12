@@ -42,7 +42,8 @@ open import structured-types.pointed-homotopies using
     right-whisker-htpy-pointed-map)
 open import structured-types.pointed-maps using
   ( _→*_; comp-pointed-map; id-pointed-map; map-pointed-map;
-    preserves-point-pointed-map; precomp-pointed-map)
+    preserves-point-pointed-map; precomp-pointed-map;
+    preserves-point-comp-pointed-map)
 open import structured-types.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 ```
@@ -91,6 +92,28 @@ module _
   pointed-map-pointed-equiv : A →* B
   pr1 pointed-map-pointed-equiv = map-equiv-pointed-equiv
   pr2 pointed-map-pointed-equiv = preserves-point-equiv-pointed-equiv
+```
+
+### The identity pointed equivalence
+
+```agda
+id-pointed-equiv : {l : Level} (A : Pointed-Type l) → A ≃* A
+pr1 (id-pointed-equiv A) = id-equiv
+pr2 (id-pointed-equiv A) = refl
+```
+
+### Composition of pointed equivalences
+
+```agda
+comp-pointed-equiv :
+  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  (C : Pointed-Type l3) → (B ≃* C) → (A ≃* B) → (A ≃* C)
+pr1 (comp-pointed-equiv A B C f e) =
+  equiv-pointed-equiv B C f ∘e equiv-pointed-equiv A B e
+pr2 (comp-pointed-equiv A B C f e) =
+  preserves-point-comp-pointed-map A B C
+    ( pointed-map-pointed-equiv B C f)
+    ( pointed-map-pointed-equiv A B e)
 ```
 
 ### Pointed isomorphisms
