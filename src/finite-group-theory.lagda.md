@@ -8,6 +8,7 @@ module finite-group-theory where
 
 ```agda
 open import finite-group-theory.abstract-quaternion-group public
+open import finite-group-theory.alternating-groups public
 open import finite-group-theory.concrete-quaternion-group public
 open import finite-group-theory.finite-groups public
 open import finite-group-theory.finite-monoids public

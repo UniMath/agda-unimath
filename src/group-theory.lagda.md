@@ -49,6 +49,8 @@ open import group-theory.isomorphisms-abelian-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-semigroups public
+open import group-theory.loop-groups-sets public
+open import group-theory.kernels public
 open import group-theory.mere-equivalences-group-actions public
 open import group-theory.monoid-actions public
 open import group-theory.monoids public
