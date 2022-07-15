@@ -3,7 +3,6 @@ title: Kernels
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
 module group-theory.kernels where
 
 open import foundation.equality-cartesian-product-types using (eq-pair)
