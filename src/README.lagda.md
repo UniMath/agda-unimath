@@ -856,6 +856,7 @@ open import univalent-combinatorics.standard-finite-pruned-trees
 open import univalent-combinatorics.standard-finite-trees
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.steiner-systems
+open import univalent-combinatorics.steiner-triple-systems
 open import univalent-combinatorics.sums-of-natural-numbers
 open import univalent-combinatorics.surjective-maps
 open import univalent-combinatorics.symmetric-difference
