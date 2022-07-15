@@ -22,6 +22,7 @@ open import graph-theory.equivalences-undirected-graphs public
 open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
 open import graph-theory.finite-graphs public
+open import graph-theory.hypergraphs public
 open import graph-theory.incidence-undirected-graphs public
 open import graph-theory.matchings public
 open import graph-theory.mere-equivalences-undirected-graphs public
