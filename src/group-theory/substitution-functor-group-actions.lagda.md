@@ -38,7 +38,7 @@ open import group-theory.homomorphisms-group-actions using
     comp-hom-Abstract-Group-Action)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; comp-hom-Group; map-hom-Group; preserves-unit-hom-Group;
-    preserves-inverses-hom-Group; preserves-mul-hom-Group)
+    preserves-inv-hom-Group; preserves-mul-hom-Group)
 open import group-theory.symmetric-groups using (symmetric-Group)
 ```
 
@@ -171,7 +171,7 @@ module _
               ( pair
                 ( ( ap
                     ( mul-Group' H h')
-                    ( preserves-inverses-hom-Group G H f g)) ∙
+                    ( preserves-inv-hom-Group G H f g)) ∙
                   ( inv (transpose-eq-mul-Group' H p)))
                 ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
   pr2 (pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))

@@ -11,7 +11,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.identity-types using (Id; inv; _∙_; ap)
+open import foundation.identity-types using (Id; _＝_; inv; _∙_; ap)
 open import foundation.sets using (is-set; UU-Set)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
@@ -229,9 +229,9 @@ module _
     (x : type-Group G) → Id (f (inv-Group G x)) (inv-Group H (f x))
 
   abstract
-    preserves-inverses-hom-Group :
+    preserves-inv-hom-Group :
       (f : type-hom-Group G H) → preserves-inverses-Group (map-hom-Group G H f)
-    preserves-inverses-hom-Group f x =
+    preserves-inv-hom-Group f x =
       ( inv ( right-unit-law-Group H (map-hom-Group G H f (inv-Group G x)))) ∙
       ( ( ap
           ( mul-Group H (map-hom-Group G H f (inv-Group G x)))
@@ -276,5 +276,5 @@ pr1 (preserves-group-structure-hom-Group G H f) = f
 pr1 (pr2 (preserves-group-structure-hom-Group G H f)) =
   preserves-unit-hom-Group G H f
 pr2 (pr2 (preserves-group-structure-hom-Group G H f)) =
-  preserves-inverses-hom-Group G H f
+  preserves-inv-hom-Group G H f
 ```

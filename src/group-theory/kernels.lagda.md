@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-groups
 open import group-theory.embeddings-groups
+open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.groups
 ```
@@ -54,7 +55,7 @@ module _
   is-closed-under-inv-subtype-kernel-hom-Group :
     is-closed-under-inv-subset-Group G subtype-kernel-hom-Group
   is-closed-under-inv-subtype-kernel-hom-Group x p =
-    ( preserves-inverses-hom-Group G H f x) ∙
+    ( preserves-inv-hom-Group G H f x) ∙
     ( ap (inv-Group H) p ∙ is-own-inverse-unit-Group H)
 
   subgroup-kernel-hom-Group : Subgroup k G
@@ -65,21 +66,47 @@ module _
   pr2 (pr2 (pr2 subgroup-kernel-hom-Group)) =
     is-closed-under-inv-subtype-kernel-hom-Group
 
-  kernel-hom-Group : Group _
-  kernel-hom-Group = group-Subgroup G subgroup-kernel-hom-Group
+  group-kernel-hom-Group : Group (l ⊔ k)
+  group-kernel-hom-Group = group-Subgroup G subgroup-kernel-hom-Group
 
-  inclusion-kernel-hom-Group : type-hom-Group kernel-hom-Group G
+  inclusion-kernel-hom-Group : type-hom-Group group-kernel-hom-Group G
   inclusion-kernel-hom-Group =
     inclusion-group-Subgroup G subgroup-kernel-hom-Group
 
   is-emb-inclusion-kernel-hom-Group :
-    is-emb-hom-Group kernel-hom-Group G inclusion-kernel-hom-Group
+    is-emb-hom-Group group-kernel-hom-Group G inclusion-kernel-hom-Group
   is-emb-inclusion-kernel-hom-Group =
     is-emb-inclusion-group-Subgroup G subgroup-kernel-hom-Group
 
-  emb-inclusion-kernel-hom-Group : emb-Group kernel-hom-Group G
+  emb-inclusion-kernel-hom-Group : emb-Group group-kernel-hom-Group G
   pr1 emb-inclusion-kernel-hom-Group =
     inclusion-kernel-hom-Group
   pr2 emb-inclusion-kernel-hom-Group =
     is-emb-inclusion-kernel-hom-Group
+```
+
+## Properties
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  where
+  
+  is-normal-kernel-hom-Group :
+    is-normal-Subgroup G (subgroup-kernel-hom-Group G H f)
+  is-normal-kernel-hom-Group g h =
+    ( preserves-mul-hom-Group G H f (mul-Group G g (pr1 h)) (inv-Group G g)) ∙
+    ( ( ap
+        ( mul-Group' H (map-hom-Group G H f (inv-Group G g)))
+        ( ( preserves-mul-hom-Group G H f g (pr1 h)) ∙
+          ( ( ap (mul-Group H (map-hom-Group G H f g)) (pr2 h)) ∙
+            ( right-unit-law-Group H (map-hom-Group G H f g))))) ∙
+      ( ( ap
+          ( mul-Group H (map-hom-Group G H f g))
+          ( preserves-inv-hom-Group G H f g)) ∙
+        ( right-inverse-law-Group H (map-hom-Group G H f g))))
+
+  kernel-hom-Group : Normal-Subgroup l2 G
+  pr1 kernel-hom-Group = subgroup-kernel-hom-Group G H f
+  pr2 kernel-hom-Group = is-normal-kernel-hom-Group
 ```

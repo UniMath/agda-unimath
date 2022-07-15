@@ -17,7 +17,8 @@ open import foundation.function-extensionality using (eq-htpy; htpy-eq)
 open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.propositional-truncations using
-  ( unit-trunc-Prop; apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop)
+  ( unit-trunc-Prop; apply-universal-property-trunc-Prop;
+    is-prop-type-trunc-Prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (type-subtype)
 open import foundation.truncated-types using (is-trunc-Π)
@@ -31,7 +32,7 @@ open import group-theory.groups using
     unit-Group; mul-Group; inv-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group; is-set-type-hom-Group; eq-htpy-hom-Group;
-    preserves-unit-hom-Group; preserves-mul-hom-Group; preserves-inverses-hom-Group;
+    preserves-unit-hom-Group; preserves-mul-hom-Group; preserves-inv-hom-Group;
     comp-hom-Group)
 open import group-theory.isomorphisms-groups using
   ( inv-iso-Group; hom-iso-Group; hom-inv-iso-Group)
@@ -211,7 +212,7 @@ module _
       ( ap
         ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' f)
         ( eq-pair-Σ (right-unit-law-Group G (inv-Group G x)) (eq-is-prop is-prop-type-trunc-Prop))) ∙
-        ( preserves-inverses-hom-Group
+        ( preserves-inv-hom-Group
           ( group-Subgroup G (subgroup-subset-Group G S))
           ( G')
           ( f)
@@ -226,7 +227,7 @@ module _
                   ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' g)
                   ( eq-pair-Σ (right-unit-law-Group G x) (eq-is-prop is-prop-type-trunc-Prop)))))) ∙
             ( ( inv
-              ( preserves-inverses-hom-Group
+              ( preserves-inv-hom-Group
                 ( group-Subgroup G (subgroup-subset-Group G S))
                 ( G')
                 ( g)
