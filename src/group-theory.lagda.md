@@ -17,6 +17,7 @@ open import group-theory.cartesian-products-semigroups public
 open import group-theory.category-of-groups public
 open import group-theory.category-of-semigroups public
 open import group-theory.cayleys-theorem public
+open import group-theory.centers-groups public
 open import group-theory.commutative-monoids public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
