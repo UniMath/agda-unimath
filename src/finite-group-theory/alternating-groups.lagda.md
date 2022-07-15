@@ -26,7 +26,7 @@ The alternating group on a finite set `X` is the group of even permutations of `
 ```agda
 module _ {l} (n : ℕ) (X : UU-Fin-Level l n) where
   alternating-Group : Group l
-  alternating-Group = kernel-hom-Group
+  alternating-Group = group-kernel-hom-Group
     ( symmetric-Group (set-UU-Fin-Level n X))
     ( symmetric-Group (Fin-Set 2))
     ( sign-homomorphism n X)

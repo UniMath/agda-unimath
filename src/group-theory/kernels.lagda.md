@@ -66,7 +66,7 @@ module _
   pr2 (pr2 (pr2 subgroup-kernel-hom-Group)) =
     is-closed-under-inv-subtype-kernel-hom-Group
 
-  group-kernel-hom-Group : Group _
+  group-kernel-hom-Group : Group (l ⊔ k)
   group-kernel-hom-Group = group-Subgroup G subgroup-kernel-hom-Group
 
   inclusion-kernel-hom-Group : type-hom-Group group-kernel-hom-Group G
