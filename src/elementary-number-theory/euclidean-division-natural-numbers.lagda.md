@@ -36,7 +36,7 @@ Euclidean division is division with remainder, i.e., the Euclidean division of `
 
 ## Definitions
 
-### Euclidean division via sequences
+### Euclidean division via an array of natural numbers
 
 The following definition produces for each `k : ℕ` a sequence of sequences as follows:
 
