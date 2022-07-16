@@ -30,7 +30,46 @@ open import univalent-combinatorics.standard-finite-types using
   ( nat-Fin; strict-upper-bound-nat-Fin)
 ```
 
-# Euclidean division of the natural numbers
+## Idea
+
+Euclidean division is division with remainder, i.e., the Euclidean division of `n` by `d` is the largest natural number `k ≤ n/d`, and the remainder is the unique natural number `r < d` such that `kd + r = n`.
+
+## Definitions
+
+### Euclidean division via sequences
+
+The following definition produces for each `k : ℕ` a sequence of sequences as follows:
+
+```md
+       This is the k-th column
+        ↓
+  0,…,0,0,0,0,0,0,0,…  -- The first sequence is the constant sequence of zeroes
+  1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
+        ⋮
+  1,…,1,0,…,0,0,0,0,…  -- This is the (k-1)-st row    
+  2,1,…,1,0,0,0,0,0,…  -- After k steps we append 2's at the start
+        ⋮
+  2,…,2,1,…,1,0,…,0,…  -- This is the (2k-1)-st row 
+  3,2,…,2,1,…,1,0,0,…  -- After another k steps we append 3's at the start
+        ⋮
+```
+
+This produces an array of natural numbers. We find the euclidean division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array.
+
+```agda
+sequence-euclidean-division-ℕ : ℕ → ℕ → ℕ → ℕ
+sequence-euclidean-division-ℕ k zero-ℕ m = zero-ℕ
+sequence-euclidean-division-ℕ k (succ-ℕ n) zero-ℕ =
+  succ-ℕ (sequence-euclidean-division-ℕ k n k)
+sequence-euclidean-division-ℕ k (succ-ℕ n) (succ-ℕ m) =
+  sequence-euclidean-division-ℕ k n m
+
+euclidean-division-ℕ' : ℕ → ℕ → ℕ
+euclidean-division-ℕ' zero-ℕ n = zero-ℕ
+euclidean-division-ℕ' (succ-ℕ k) n = sequence-euclidean-division-ℕ k n k  
+```
+
+### Euclidean division via modular arithmetic
 
 ```agda
 euclidean-division-ℕ :
