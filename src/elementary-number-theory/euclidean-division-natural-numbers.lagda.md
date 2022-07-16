@@ -54,19 +54,19 @@ The following definition produces for each `k : ℕ` a sequence of sequences as 
       ⋮
 ```
 
-This produces an array of natural numbers. We find the euclidean division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array.
+This produces an array of natural numbers. We find the quotient of the euclidean division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array. We will arbitrarily set the quotient of the euclidean division of `n` by `0` to `0` in this definition.
 
 ```agda
-sequence-euclidean-division-ℕ : ℕ → ℕ → ℕ → ℕ
-sequence-euclidean-division-ℕ k zero-ℕ m = zero-ℕ
-sequence-euclidean-division-ℕ k (succ-ℕ n) zero-ℕ =
-  succ-ℕ (sequence-euclidean-division-ℕ k n k)
-sequence-euclidean-division-ℕ k (succ-ℕ n) (succ-ℕ m) =
-  sequence-euclidean-division-ℕ k n m
+array-euclidean-division-ℕ : ℕ → ℕ → ℕ → ℕ
+array-euclidean-division-ℕ k zero-ℕ m = zero-ℕ
+array-euclidean-division-ℕ k (succ-ℕ n) zero-ℕ =
+  succ-ℕ (array-euclidean-division-ℕ k n k)
+array-euclidean-division-ℕ k (succ-ℕ n) (succ-ℕ m) =
+  array-euclidean-division-ℕ k n m
 
-euclidean-division-ℕ' : ℕ → ℕ → ℕ
-euclidean-division-ℕ' zero-ℕ n = zero-ℕ
-euclidean-division-ℕ' (succ-ℕ k) n = sequence-euclidean-division-ℕ k n k  
+quotient-euclidean-division-ℕ' : ℕ → ℕ → ℕ
+quotient-euclidean-division-ℕ' zero-ℕ n = zero-ℕ
+quotient-euclidean-division-ℕ' (succ-ℕ k) n = array-euclidean-division-ℕ k n k  
 ```
 
 ### Euclidean division via modular arithmetic
