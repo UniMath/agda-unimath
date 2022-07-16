@@ -46,10 +46,10 @@ The following definition produces for each `k : ℕ` a sequence of sequences as 
   0,…,0,0,0,0,0,0,0,…  -- The first sequence is the constant sequence of zeroes
   1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
         ⋮
-  1,…,1,0,…,0,0,0,0,…  -- This is the (k-1)-st row    
+  1,…,1,0,…,0,0,0,0,…  -- This is the k-th row    
   2,1,…,1,0,0,0,0,0,…  -- After k steps we append 2's at the start
         ⋮
-  2,…,2,1,…,1,0,…,0,…  -- This is the (2k-1)-st row 
+  2,…,2,1,…,1,0,…,0,…  -- This is the 2k-th row 
   3,2,…,2,1,…,1,0,0,…  -- After another k steps we append 3's at the start
         ⋮
 ```
