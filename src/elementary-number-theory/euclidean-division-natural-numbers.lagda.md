@@ -41,17 +41,17 @@ Euclidean division is division with remainder, i.e., the Euclidean division of `
 The following definition produces for each `k : ℕ` a sequence of sequences as follows:
 
 ```md
-       This is the k-th column
-        ↓
-  0,…,0,0,0,0,0,0,0,…  -- The first sequence is the constant sequence of zeroes
+    This is column k
+      ↓
+  0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence
   1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
-        ⋮
-  1,…,1,0,…,0,0,0,0,…  -- This is the k-th row    
-  2,1,…,1,0,0,0,0,0,…  -- After k steps we append 2's at the start
-        ⋮
-  2,…,2,1,…,1,0,…,0,…  -- This is the 2k-th row 
-  3,2,…,2,1,…,1,0,0,…  -- After another k steps we append 3's at the start
-        ⋮
+      ⋮
+  1,…,1,0,…,0,0,0,0,…  -- This is row k+1    
+  2,1,…,1,0,0,0,0,0,…  -- After k+1 steps we append 2's at the start
+      ⋮
+  2,…,2,1,…,1,0,…,0,…  -- This is row 2(k+1)
+  3,2,…,2,1,…,1,0,0,…  -- After another k+1 steps we append 3's at the start
+      ⋮
 ```
 
 This produces an array of natural numbers. We find the euclidean division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array.
