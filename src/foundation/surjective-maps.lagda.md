@@ -15,7 +15,8 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( _↪_; map-emb; is-emb)
 open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; is-equiv-comp'; _≃_; map-equiv; _∘e_; inv-equiv)
+  ( is-equiv; map-inv-is-equiv; is-equiv-comp'; _≃_; map-equiv; _∘e_; inv-equiv;
+    map-inv-equiv)
 open import foundation.fibers-of-maps using
   ( fib; is-equiv-map-reduce-Π-fib; reduce-Π-fib)
 open import foundation.functions using (_∘_; id)
@@ -153,6 +154,13 @@ equiv-dependent-universal-property-surj-is-surjective :
 pr1 (equiv-dependent-universal-property-surj-is-surjective f H C) h x = h (f x)
 pr2 (equiv-dependent-universal-property-surj-is-surjective f H C) =
   dependent-universal-property-surj-is-surjective f H C
+
+apply-dependent-universal-property-surj-is-surjective :
+  {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-surjective f → (C : B → UU-Prop l) →
+  ((a : A) → type-Prop (C (f a))) → ((y : B) → type-Prop (C y))
+apply-dependent-universal-property-surj-is-surjective f H C =
+  map-inv-equiv (equiv-dependent-universal-property-surj-is-surjective f H C)
 ```
 
 ### A map into a proposition is a propositional truncation if and only if it is surjective

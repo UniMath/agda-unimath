@@ -17,7 +17,7 @@ open import foundation.injective-maps
 open import foundation.truncated-types using
   ( Truncated-Type; type-Truncated-Type; type-hom-Truncated-Type)
 open import foundation.truncation-levels using (𝕋)
-open import foundation.universal-property-truncation using
+open import foundation-core.universal-property-truncation using
   ( is-truncation)
 open import foundation.universe-levels using (Level; UU)
 ```
