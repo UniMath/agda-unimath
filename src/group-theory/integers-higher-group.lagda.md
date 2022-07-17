@@ -39,5 +39,5 @@ module _
 
   ℤ-∞-Group : ∞-Group lzero
   pr1 ℤ-∞-Group = classifying-pointed-type-ℤ-∞-Group
-  pr2 ℤ-∞-Group = is-path-connected-𝕊¹
+  pr2 ℤ-∞-Group = is-0-connected-𝕊¹
 ```

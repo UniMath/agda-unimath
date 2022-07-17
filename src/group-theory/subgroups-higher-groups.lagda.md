@@ -7,8 +7,8 @@ title: Subgroups of higher groups
 
 module group-theory.subgroups-higher-groups where
 
+open import foundation.0-connected-types
 open import foundation.cartesian-product-types
-open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.sets
@@ -33,7 +33,7 @@ subgroup-action-∞-Group l2 G u =
   Σ ( classifying-type-∞-Group G → UU-Set l2)
     ( λ X →
       ( type-Set (X u)) ×
-      ( is-path-connected (Σ (classifying-type-∞-Group G) (type-Set ∘ X))))
+      ( is-0-connected (Σ (classifying-type-∞-Group G) (type-Set ∘ X))))
 
 subgroup-∞-Group :
   {l1 : Level} (l2 : Level) (G : ∞-Group l1) → UU (l1 ⊔ lsuc l2)
@@ -65,7 +65,7 @@ module _
     shape-subgroup-∞-Group
 
   is-connected-classifying-type-subgroup-∞-Group :
-    is-path-connected classifying-type-subgroup-∞-Group
+    is-0-connected classifying-type-subgroup-∞-Group
   is-connected-classifying-type-subgroup-∞-Group = pr2 (pr2 H)
 
   ∞-group-subgroup-∞-Group : ∞-Group (l1 ⊔ l2)

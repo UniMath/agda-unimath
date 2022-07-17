@@ -7,7 +7,8 @@ title: Connected components of types
 
 module foundation.connected-components where
 
-open import foundation.connected-types using (is-path-connected; is-path-connected-mere-eq)
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.identity-types using (_＝_; refl; inv)
@@ -47,15 +48,15 @@ module _
 
 ## Properties
 
-### Connected components are path-connected
+### Connected components are 0-connected
 
 ```agda
 abstract
-  is-path-connected-connected-component :
+  is-0-connected-connected-component :
     {l : Level} (A : UU l) (a : A) →
-    is-path-connected (connected-component A a)
-  is-path-connected-connected-component A a =
-    is-path-connected-mere-eq
+    is-0-connected (connected-component A a)
+  is-0-connected-connected-component A a =
+    is-0-connected-mere-eq
       ( pair a (unit-trunc-Prop refl))
       ( λ (pair x p) →
         apply-universal-property-trunc-Prop

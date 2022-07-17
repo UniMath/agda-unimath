@@ -12,6 +12,8 @@ open import elementary-number-theory.equality-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-set-ℕ; ℕ-Set)
 
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.1-types using (is-1-type; UU-1-Type)
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
@@ -19,8 +21,6 @@ open import foundation.connected-components-universes using
     is-contr-total-equiv-component-UU-Level; is-contr-total-equiv-component-UU;
     is-equiv-equiv-eq-component-UU-Level; is-equiv-equiv-eq-component-UU;
     eq-equiv-component-UU-Level; eq-equiv-component-UU)
-open import foundation.connected-types using
-  ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv';
     is-contr-total-path)
@@ -762,10 +762,10 @@ pr2 (equiv-equiv-eq-UU-Fin k X Y) = is-equiv-equiv-eq-UU-Fin k X Y
 
 ```agda
 abstract
-  is-path-connected-UU-Fin-Level :
-    {l : Level} (n : ℕ) → is-path-connected (UU-Fin-Level l n)
-  is-path-connected-UU-Fin-Level {l} n =
-    is-path-connected-mere-eq
+  is-0-connected-UU-Fin-Level :
+    {l : Level} (n : ℕ) → is-0-connected (UU-Fin-Level l n)
+  is-0-connected-UU-Fin-Level {l} n =
+    is-0-connected-mere-eq
       ( Fin-UU-Fin-Level l n)
       ( λ A →
         map-trunc-Prop
@@ -777,10 +777,10 @@ abstract
           ( pr2 A))
 
 abstract
-  is-path-connected-UU-Fin :
-    (n : ℕ) → is-path-connected (UU-Fin n)
-  is-path-connected-UU-Fin n =
-    is-path-connected-mere-eq
+  is-0-connected-UU-Fin :
+    (n : ℕ) → is-0-connected (UU-Fin n)
+  is-0-connected-UU-Fin n =
+    is-0-connected-mere-eq
       ( Fin-UU-Fin n)
       ( λ A → map-trunc-Prop (eq-equiv-UU-Fin n (Fin-UU-Fin n) A) (pr2 A))
 ```

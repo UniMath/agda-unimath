@@ -189,6 +189,7 @@ open import finite-group-theory.transpositions
 
 ```agda
 open import foundation
+open import foundation.0-connected-types
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
@@ -215,6 +216,7 @@ open import foundation.cones-pullbacks
 open import foundation.conjunction
 open import foundation.connected-components-universes
 open import foundation.connected-components
+open import foundation.connected-maps
 open import foundation.connected-types
 open import foundation.constant-maps
 open import foundation.contractible-maps
