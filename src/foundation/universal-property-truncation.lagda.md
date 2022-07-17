@@ -100,6 +100,7 @@ module _
       ( dependent-universal-property-truncation-is-truncation B f H
         ( λ y → truncated-type-trunc-Prop k (fib f y)))
       ( λ x → unit-trunc-Prop (pair x refl))
+      
 {-
 -- Corollary 18.5.4
 
