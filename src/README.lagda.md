@@ -547,6 +547,7 @@ open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.loop-groups-sets
 open import group-theory.kernels
+open import group-theory.mere-equivalences-concrete-group-actions
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions
 open import group-theory.monoids

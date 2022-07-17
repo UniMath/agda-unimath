@@ -8,11 +8,12 @@ title: 0-Connected types
 module foundation.0-connected-types where
 
 open import foundation.contractible-types using
-  ( is-contr-Prop; center; eq-is-contr)
+  ( is-contr-Prop; center; eq-is-contr; is-contr-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv)
+open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv; inv-equiv)
 open import foundation.fiber-inclusions using (fiber-inclusion)
 open import foundation.fibers-of-maps using (fib)
+open import foundation.functoriality-set-truncation using (equiv-trunc-Set)
 open import foundation.identity-types using (ap; refl)
 open import foundation.inhabited-types using (is-inhabited)
 open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
@@ -136,4 +137,14 @@ abstract
     is-0-connected A
   is-0-connected-is-surjective-fiber-inclusion a H =
     is-0-connected-mere-eq a (mere-eq-is-surjective-fiber-inclusion a H)
+
+is-0-connected-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (A ≃ B) → is-0-connected B → is-0-connected A
+is-0-connected-equiv e = is-contr-equiv _ (equiv-trunc-Set e)
+
+is-0-connected-equiv' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (A ≃ B) → is-0-connected A → is-0-connected B
+is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
 ```

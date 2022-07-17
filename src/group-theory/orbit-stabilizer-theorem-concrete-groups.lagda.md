@@ -7,13 +7,25 @@ title: The orbit-stabilizer theorem for concrete groups
 
 module group-theory.orbit-stabilizer-theorem-concrete-groups where
 
+open import foundation.0-connected-types
+open import foundation.connected-components
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
+open import group-theory.mere-equivalences-concrete-group-actions
+open import group-theory.subgroups-concrete-groups
+open import group-theory.stabilizer-groups-concrete-group-actions
+open import group-theory.transitive-concrete-group-actions
+
+open import structured-types.pointed-types
 ```
 
 ## Idea
@@ -35,11 +47,31 @@ which induces a bijection from the cosets of the stabilizer subgroup `G_x` of `G
 ## Definitions
 
 ```agda
-coset-stabilizer-action-Concrete-Group :
-  {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G) →
-  type-action-Concrete-Group G X → action-Concrete-Group (l1 ⊔ l2) G
-coset-stabilizer-action-Concrete-Group G X x u =
-  subset-Set
-    ( X u)
-    ( λ y → mere-eq-Prop (pair (shape-Concrete-Group G) x) (pair u y))
+module _
+  {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
+  where
+
+  classifying-type-quotient-stabilizer-action-Concrete-Group :
+    type-action-Concrete-Group G X → UU (lsuc l1 ⊔ lsuc l2)
+  classifying-type-quotient-stabilizer-action-Concrete-Group x =
+    Σ ( action-Concrete-Group (l1 ⊔ l2) G)
+      ( mere-equiv-action-Concrete-Group G
+        ( action-stabilizer-action-Concrete-Group G X x))
+
+  point-classifying-type-quotient-stabilizer-action-Concrete-Group :
+    (x : type-action-Concrete-Group G X) →
+    classifying-type-quotient-stabilizer-action-Concrete-Group x
+  pr1 (point-classifying-type-quotient-stabilizer-action-Concrete-Group x) =
+    action-stabilizer-action-Concrete-Group G X x
+  pr2 (point-classifying-type-quotient-stabilizer-action-Concrete-Group x) =
+    refl-mere-equiv-action-Concrete-Group G
+      (action-stabilizer-action-Concrete-Group G X x)
+
+  classifying-pointed-type-stabilizer-action-Concrete-Group :
+    (x : type-action-Concrete-Group G X) →
+    Pointed-Type (lsuc l1 ⊔ lsuc l2)
+  pr1 (classifying-pointed-type-stabilizer-action-Concrete-Group x) =
+    classifying-type-quotient-stabilizer-action-Concrete-Group x
+  pr2 (classifying-pointed-type-stabilizer-action-Concrete-Group x) =
+    point-classifying-type-quotient-stabilizer-action-Concrete-Group x
 ```
