@@ -21,7 +21,7 @@ open import foundation.propositions using (eq-is-prop')
 open import foundation.truncated-types using
   ( is-trunc; Truncated-Type; type-Truncated-Type;
     is-trunc-succ-is-trunc)
-open import foundation.universal-property-truncation using
+open import foundation-core.universal-property-truncation using
   ( is-truncation; precomp-Trunc; universal-property-truncation;
     universal-property-truncation-is-truncation; map-is-truncation;
     triangle-is-truncation; precomp-Π-Truncated-Type;
