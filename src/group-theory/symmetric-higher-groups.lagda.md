@@ -7,9 +7,9 @@ title: Symmetric higher groups
 
 module group-theory.symmetric-higher-groups where
 
-open import foundation.dependent-pair-types
+open import foundation.0-connected-types
 open import foundation.connected-components-universes
-open import foundation.connected-types
+open import foundation.dependent-pair-types
 open import foundation.mere-equivalences
 open import foundation.universe-levels
 
@@ -42,14 +42,14 @@ module _
       classifying-type-symmetric-∞-Group
       shape-symmetric-∞-Group
 
-  is-path-connected-classifying-type-symmetric-∞-Group :
-    is-path-connected classifying-type-symmetric-∞-Group
-  is-path-connected-classifying-type-symmetric-∞-Group =
-    is-path-connected-component-UU X
+  is-0-connected-classifying-type-symmetric-∞-Group :
+    is-0-connected classifying-type-symmetric-∞-Group
+  is-0-connected-classifying-type-symmetric-∞-Group =
+    is-0-connected-component-UU X
   
   symmetric-∞-Group : ∞-Group (lsuc l)
   symmetric-∞-Group =
     pair
       classifying-pointed-type-symmetric-∞-Group
-      is-path-connected-classifying-type-symmetric-∞-Group
+      is-0-connected-classifying-type-symmetric-∞-Group
 ```

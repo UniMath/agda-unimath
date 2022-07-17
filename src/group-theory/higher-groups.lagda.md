@@ -7,9 +7,9 @@ title: Higher groups
 
 module group-theory.higher-groups where
 
-open import foundation.connected-types using
-  ( is-path-connected; mere-eq-is-path-connected;
-    apply-dependent-universal-property-is-path-connected)
+open import foundation.0-connected-types using
+  ( is-0-connected; mere-eq-is-0-connected;
+    apply-dependent-universal-property-is-0-connected)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-inv-equiv)
 open import foundation.identity-types using (Id; refl)
@@ -44,7 +44,7 @@ An ∞-group is just a pointed connected type. Its underlying type is its loop s
 
 ```agda
 ∞-Group : (l : Level) → UU (lsuc l)
-∞-Group l = Σ (Pointed-Type l) (λ X → is-path-connected (type-Pointed-Type X))
+∞-Group l = Σ (Pointed-Type l) (λ X → is-0-connected (type-Pointed-Type X))
 
 module _
   {l : Level} (G : ∞-Group l)
@@ -61,24 +61,24 @@ module _
   shape-∞-Group =
     pt-Pointed-Type classifying-pointed-type-∞-Group
 
-  is-path-connected-classifying-type-∞-Group :
-    is-path-connected classifying-type-∞-Group
-  is-path-connected-classifying-type-∞-Group = pr2 G
+  is-0-connected-classifying-type-∞-Group :
+    is-0-connected classifying-type-∞-Group
+  is-0-connected-classifying-type-∞-Group = pr2 G
 
   mere-eq-classifying-type-∞-Group :
     (X Y : classifying-type-∞-Group) → mere-eq X Y
   mere-eq-classifying-type-∞-Group =
-    mere-eq-is-path-connected
-      is-path-connected-classifying-type-∞-Group
+    mere-eq-is-0-connected
+      is-0-connected-classifying-type-∞-Group
 
   elim-prop-classifying-type-∞-Group :
     {l2 : Level} (P : classifying-type-∞-Group → UU-Prop l2) →
     type-Prop (P shape-∞-Group) →
     ((X : classifying-type-∞-Group) → type-Prop (P X))
   elim-prop-classifying-type-∞-Group =
-    apply-dependent-universal-property-is-path-connected
+    apply-dependent-universal-property-is-0-connected
       shape-∞-Group
-      is-path-connected-classifying-type-∞-Group
+      is-0-connected-classifying-type-∞-Group
 
   type-∞-Group : UU l
   type-∞-Group = type-Ω classifying-pointed-type-∞-Group

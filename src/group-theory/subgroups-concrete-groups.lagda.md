@@ -7,8 +7,8 @@ title: Subgroups of concrete groups
 
 module group-theory.subgroups-concrete-groups where
 
+open import foundation.0-connected-types
 open import foundation.0-maps
-open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -111,7 +111,7 @@ module _
     shape-subgroup-Concrete-Group
 
   is-connected-classifying-type-subgroup-Concrete-Group :
-    is-path-connected classifying-type-subgroup-Concrete-Group
+    is-0-connected classifying-type-subgroup-Concrete-Group
   is-connected-classifying-type-subgroup-Concrete-Group =
     is-transitive-action-subgroup-Concrete-Group
 

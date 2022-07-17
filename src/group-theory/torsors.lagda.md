@@ -7,8 +7,8 @@ title: Torsors of abstract groups
 
 module group-theory.torsors where
 
-open import foundation.connected-types using
-  ( is-path-connected; is-path-connected-mere-eq)
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
@@ -461,10 +461,10 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  is-path-connected-Torsor-Abstract-Group :
-    is-path-connected (Torsor-Abstract-Group G l1)
-  is-path-connected-Torsor-Abstract-Group =
-    is-path-connected-mere-eq
+  is-0-connected-Torsor-Abstract-Group :
+    is-0-connected (Torsor-Abstract-Group G l1)
+  is-0-connected-Torsor-Abstract-Group =
+    is-0-connected-mere-eq
       ( principal-Torsor-Abstract-Group G)
       ( mere-eq-Torsor-Abstract-Group G (principal-Torsor-Abstract-Group G))
 
@@ -607,7 +607,7 @@ module _
   ∞-group-Group : ∞-Group (lsuc l1)
   pr1 (pr1 ∞-group-Group) = Torsor-Abstract-Group G l1
   pr2 (pr1 ∞-group-Group) = principal-Torsor-Abstract-Group G
-  pr2 ∞-group-Group = is-path-connected-Torsor-Abstract-Group G
+  pr2 ∞-group-Group = is-0-connected-Torsor-Abstract-Group G
 
   concrete-group-Group : Concrete-Group (lsuc l1)
   pr1 concrete-group-Group = ∞-group-Group

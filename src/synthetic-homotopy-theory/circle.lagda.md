@@ -5,7 +5,7 @@
 
 module synthetic-homotopy-theory.circle where
 
-open import foundation.connected-types
+open import foundation.0-connected-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -487,6 +487,6 @@ mere-eq-𝕊¹ =
       ( eq-is-prop is-prop-type-trunc-Prop))
     ( eq-is-prop (is-prop-Π (λ y → is-prop-type-trunc-Prop)))
 
-is-path-connected-𝕊¹ : is-path-connected 𝕊¹
-is-path-connected-𝕊¹ = is-path-connected-mere-eq base-𝕊¹ (mere-eq-𝕊¹ base-𝕊¹)
+is-0-connected-𝕊¹ : is-0-connected 𝕊¹
+is-0-connected-𝕊¹ = is-0-connected-mere-eq base-𝕊¹ (mere-eq-𝕊¹ base-𝕊¹)
 ```

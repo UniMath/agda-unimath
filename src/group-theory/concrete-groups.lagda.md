@@ -7,8 +7,8 @@ title: Concrete groups
 
 module group-theory.concrete-groups where
 
+open import foundation.0-connected-types using (is-0-connected)
 open import foundation.1-types using (Id-Set)
-open import foundation.connected-types using (is-path-connected)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
 open import foundation.equivalences using (_≃_; map-inv-equiv)
 open import foundation.identity-types using (Id; refl)
@@ -25,7 +25,7 @@ open import group-theory.groups using (Group)
 open import group-theory.higher-groups using
   ( ∞-Group; type-∞-Group; classifying-pointed-type-∞-Group;
     classifying-type-∞-Group; shape-∞-Group;
-    is-path-connected-classifying-type-∞-Group;
+    is-0-connected-classifying-type-∞-Group;
     mere-eq-classifying-type-∞-Group;
     elim-prop-classifying-type-∞-Group;
     unit-∞-Group; mul-∞-Group; assoc-mul-∞-Group;
@@ -66,10 +66,10 @@ module _
   shape-Concrete-Group =
     shape-∞-Group ∞-group-Concrete-Group
 
-  is-path-connected-classifying-type-Concrete-Group :
-    is-path-connected classifying-type-Concrete-Group
-  is-path-connected-classifying-type-Concrete-Group =
-    is-path-connected-classifying-type-∞-Group ∞-group-Concrete-Group
+  is-0-connected-classifying-type-Concrete-Group :
+    is-0-connected classifying-type-Concrete-Group
+  is-0-connected-classifying-type-Concrete-Group =
+    is-0-connected-classifying-type-∞-Group ∞-group-Concrete-Group
 
   mere-eq-classifying-type-Concrete-Group :
     (X Y : classifying-type-Concrete-Group) → mere-eq X Y

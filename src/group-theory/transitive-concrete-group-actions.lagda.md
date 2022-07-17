@@ -7,7 +7,7 @@ title: Transitive concrete group actions
 
 module group-theory.transitive-concrete-group-actions where
 
-open import foundation.connected-types
+open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -34,7 +34,7 @@ is-transitive-action-Concrete-Group-Prop :
   {l1 l2 : Level} (G : Concrete-Group l1) → action-Concrete-Group l2 G →
   UU-Prop (l1 ⊔ l2)
 is-transitive-action-Concrete-Group-Prop G X =
-  is-path-connected-Prop (orbit-action-Concrete-Group G X)
+  is-0-connected-Prop (orbit-action-Concrete-Group G X)
 
 is-transitive-action-Concrete-Group :
   {l1 l2 : Level} (G : Concrete-Group l1) → action-Concrete-Group l2 G →
@@ -84,13 +84,13 @@ module _
     is-inhabited type-transitive-action-Concrete-Group
   is-inhabited-type-transitive-action-Concrete-Group =
     apply-universal-property-trunc-Prop
-      ( is-inhabited-is-path-connected
+      ( is-inhabited-is-0-connected
         ( is-transitive-transitive-action-Concrete-Group))
       ( is-inhabited-Prop type-transitive-action-Concrete-Group)
       ( λ t →
         apply-universal-property-trunc-Prop
-          ( mere-eq-is-path-connected
-            ( is-path-connected-classifying-type-Concrete-Group G)
+          ( mere-eq-is-0-connected
+            ( is-0-connected-classifying-type-Concrete-Group G)
             ( pr1 t)
             ( shape-Concrete-Group G))
           ( is-inhabited-Prop type-transitive-action-Concrete-Group)
@@ -113,7 +113,7 @@ module _
       ( λ g → mul-transitive-action-Concrete-Group g x ＝ y)
   is-transitive-mul-transitive-action-Concrete-Group x y =
     apply-universal-property-trunc-Prop
-      ( mere-eq-is-path-connected
+      ( mere-eq-is-0-connected
         ( is-transitive-transitive-action-Concrete-Group)
         ( pair (shape-Concrete-Group G) x)
         ( pair (shape-Concrete-Group G) y))

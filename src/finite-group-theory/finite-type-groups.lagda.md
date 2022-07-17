@@ -7,7 +7,7 @@ module finite-group-theory.finite-type-groups where
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.connected-types 
+open import foundation.0-connected-types 
 open import foundation.dependent-pair-types 
 open import foundation.equality-dependent-pair-types 
 open import foundation.equivalences 
@@ -41,7 +41,7 @@ open import univalent-combinatorics.standard-finite-types
 UU-Fin-Level-Group : (l : Level) (n : ℕ) → Concrete-Group (lsuc l)
 pr1 (pr1 (pr1 (UU-Fin-Level-Group l n))) = UU-Fin-Level l n
 pr2 (pr1 (pr1 (UU-Fin-Level-Group l n))) = Fin-UU-Fin-Level l n
-pr2 (pr1 (UU-Fin-Level-Group l n)) = is-path-connected-UU-Fin-Level n
+pr2 (pr1 (UU-Fin-Level-Group l n)) = is-0-connected-UU-Fin-Level n
 pr2 (UU-Fin-Level-Group l n) =
   is-1-type-UU-Fin-Level n (Fin-UU-Fin-Level l n) (Fin-UU-Fin-Level l n)
 ```

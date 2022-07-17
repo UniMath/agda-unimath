@@ -7,6 +7,7 @@ title: Foundation
 
 module foundation where
 
+open import foundation.0-connected-types public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
@@ -29,7 +30,6 @@ open import foundation.commutative-operations public
 open import foundation.commuting-squares public
 open import foundation.complements public
 open import foundation.conjunction public
-open import foundation.connected-types public
 open import foundation.connected-components-universes public
 open import foundation.connected-components public
 open import foundation.constant-maps public
