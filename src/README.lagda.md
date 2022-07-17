@@ -216,6 +216,8 @@ open import foundation.cones-pullbacks
 open import foundation.conjunction
 open import foundation.connected-components-universes
 open import foundation.connected-components
+open import foundation.connected-maps
+open import foundation.connected-types
 open import foundation.constant-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types

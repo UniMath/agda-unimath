@@ -32,6 +32,8 @@ open import foundation.complements public
 open import foundation.conjunction public
 open import foundation.connected-components-universes public
 open import foundation.connected-components public
+open import foundation.connected-maps public
+open import foundation.connected-types public
 open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
