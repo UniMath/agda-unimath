@@ -8,6 +8,7 @@ title: Foundation
 module foundation where
 
 open import foundation.0-connected-types public
+open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
