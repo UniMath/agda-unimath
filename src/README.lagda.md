@@ -190,6 +190,7 @@ open import finite-group-theory.transpositions
 ```agda
 open import foundation
 open import foundation.0-connected-types
+open import foundation.0-images-of-maps
 open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
@@ -566,6 +567,7 @@ open import group-theory.precategory-of-semigroups
 open import group-theory.principal-group-actions
 open import group-theory.principal-torsors-concrete-groups
 open import group-theory.products-of-tuples-of-elements-commutative-monoids
+open import group-theory.quotient-groups-concrete-groups
 open import group-theory.semigroups
 open import group-theory.sheargroups
 open import group-theory.shriek-concrete-group-actions

@@ -71,6 +71,7 @@ open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
+open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.semigroups public
 open import group-theory.sheargroups public
 open import group-theory.shriek-concrete-group-actions public
