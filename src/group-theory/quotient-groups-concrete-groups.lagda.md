@@ -3,8 +3,6 @@ title: Quotient groups of concrete groups
 ---
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module group-theory.quotient-groups-concrete-groups where
 
 open import foundation.0-connected-types
@@ -178,11 +176,4 @@ module _
   type-0-image-quotient-Concrete-Group : UU (l1 ⊔ lsuc l2)
   type-0-image-quotient-Concrete-Group =
     type-Ω classifying-pointed-type-0-image-quotient-Concrete-Group
-
-  Eq-0-image-quotient-Concrete-Group :
-    (u v : classifying-type-0-image-quotient-Concrete-Group) → UU {!!}
-  Eq-0-image-quotient-Concrete-Group u v =
-    Σ ( type-Set (pr1 u) ≃ type-Set (pr1 v))
-      ( λ e →
-        {!!})
 ```

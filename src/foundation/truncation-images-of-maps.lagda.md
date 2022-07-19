@@ -3,8 +3,6 @@ title: Truncation images of maps
 ---
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.truncation-images-of-maps where
 
 open import foundation.dependent-pair-types
@@ -56,6 +54,7 @@ module _
   Eq-unit-trunc-im : A → A → UU (l1 ⊔ l2)
   Eq-unit-trunc-im x y = trunc-im k (ap f {x} {y})
 
+{-
   extensionality-trunc-im :
     (x y : A) →
     ( unit-trunc-im (succ-𝕋 k) f x ＝ unit-trunc-im (succ-𝕋 k) f y) ≃
@@ -67,4 +66,5 @@ module _
     ( equiv-pair-eq-Σ
       ( unit-trunc-im (succ-𝕋 k) f x)
       ( unit-trunc-im (succ-𝕋 k) f y))
+-}
 ```
