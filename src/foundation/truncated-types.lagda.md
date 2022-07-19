@@ -17,37 +17,36 @@ open import foundation-core.subtypes
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
+open import foundation.subtype-identity-principle
 open import foundation.univalence
 ```
 
 ## Definition
 
-### The subuniverse of truncated types
+### The subuniverse of truncated types is itself truncated
 
 ```agda
-UU-Trunc : (k : 𝕋) (l : Level) → UU (lsuc l)
-UU-Trunc k l = Σ (UU l) (is-trunc k)
-
-type-UU-Trunc : {k : 𝕋} {l : Level} → UU-Trunc k l → UU l
-type-UU-Trunc A = pr1 A
+extensionality-Truncated-Type :
+  {l : Level} {k : 𝕋} (A B : Truncated-Type l k) →
+  (A ＝ B) ≃ type-equiv-Truncated-Type A B
+extensionality-Truncated-Type A =
+  extensionality-subtype
+    ( is-trunc-Prop _)
+    ( is-trunc-type-Truncated-Type A)
+    ( id-equiv)
+    ( λ X → equiv-univalence)
 
 abstract
-  is-trunc-type-UU-Trunc :
-    {k : 𝕋} {l : Level} (A : UU-Trunc k l) → is-trunc k (type-UU-Trunc A)
-  is-trunc-type-UU-Trunc A = pr2 A
+  is-trunc-Truncated-Type :
+    {l : Level} (k : 𝕋) → is-trunc (succ-𝕋 k) (Truncated-Type l k)
+  is-trunc-Truncated-Type k X Y =
+    is-trunc-equiv k
+      ( type-equiv-Truncated-Type X Y)
+      ( extensionality-Truncated-Type X Y)
+      ( is-trunc-type-equiv-Truncated-Type X Y)
 
-abstract
-  is-trunc-UU-Trunc :
-    (k : 𝕋) {l : Level} → is-trunc (succ-𝕋 k) (UU-Trunc k l)
-  is-trunc-UU-Trunc k X Y =
-    is-trunc-is-equiv k
-      ( pr1 X ＝ pr1 Y)
-      ( ap pr1)
-      ( is-emb-inclusion-subtype
-        ( is-trunc-Prop k) X Y)
-      ( is-trunc-is-equiv k
-        ( (pr1 X) ≃ (pr1 Y))
-        ( equiv-eq)
-        ( univalence (pr1 X) (pr1 Y))
-        ( is-trunc-equiv-is-trunc k (pr2 X) (pr2 Y)))
+Truncated-Type-Truncated-Type :
+  (l : Level) (k : 𝕋) → Truncated-Type (lsuc l) (succ-𝕋 k)
+pr1 (Truncated-Type-Truncated-Type l k) = Truncated-Type l k
+pr2 (Truncated-Type-Truncated-Type l k) = is-trunc-Truncated-Type k
 ```

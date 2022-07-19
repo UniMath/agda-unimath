@@ -5,6 +5,8 @@ title: Mere equivalences of concrete group actions
 ```agda
 module group-theory.mere-equivalences-concrete-group-actions where
 
+open import foundation.functoriality-propositional-truncation
+open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
@@ -42,4 +44,18 @@ refl-mere-equiv-action-Concrete-Group :
   mere-equiv-action-Concrete-Group G X X
 refl-mere-equiv-action-Concrete-Group G X =
   unit-trunc-Prop (id-equiv-action-Concrete-Group G X)
+```
+
+## Properties
+
+### Mere equivalences of concrete group actions give mere equalities
+
+```agda
+mere-eq-mere-equiv-action-Concrete-Group :
+  {l1 l2 : Level} (G : Concrete-Group l1)
+  (X : action-Concrete-Group l2 G) (Y : action-Concrete-Group l2 G) →
+  mere-equiv-action-Concrete-Group G X Y →
+  mere-eq X Y
+mere-eq-mere-equiv-action-Concrete-Group G X Y =
+  map-trunc-Prop (eq-equiv-action-Concrete-Group G X Y)
 ```

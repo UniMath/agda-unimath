@@ -48,10 +48,10 @@ open import foundation.truncations using
   ( type-trunc; is-trunc-type-trunc; trunc; unit-trunc;
     is-truncation-trunc; equiv-universal-property-trunc;
     universal-property-trunc; map-universal-property-trunc;
-    triangle-universal-property-trunc; apply-universal-property-trunc;
-    dependent-universal-property-trunc; equiv-dependent-universal-property-trunc;
-    apply-dependent-universal-property-trunc; is-equiv-unit-trunc;
-    equiv-unit-trunc)
+    triangle-universal-property-trunc; dependent-universal-property-trunc;
+    equiv-dependent-universal-property-trunc;
+    function-dependent-universal-property-trunc; is-equiv-unit-trunc;
+    equiv-unit-trunc; htpy-dependent-universal-property-trunc)
 open import foundation.uniqueness-set-truncations using
   ( is-equiv-is-set-truncation-is-set-truncation;
     is-set-truncation-is-equiv-is-set-truncation;
@@ -116,13 +116,6 @@ equiv-dependent-universal-property-trunc-Set :
   ((x : type-trunc-Set A) → type-Set (B x)) ≃
   ((a : A) → type-Set (B (unit-trunc-Set a)))
 equiv-dependent-universal-property-trunc-Set = equiv-dependent-universal-property-trunc
-
-apply-dependent-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1}
-  (B : type-trunc-Set A → UU-Set l2) →
-  ((x : A) → type-Set (B (unit-trunc-Set x))) →
-  (x : type-trunc-Set A) → type-Set (B x)
-apply-dependent-universal-property-trunc-Set = apply-dependent-universal-property-trunc
   
 module _
   {l1 : Level} {A : UU l1}
@@ -140,15 +133,14 @@ module _
     ((x : A) → type-Set (B (unit-trunc-Set x))) →
     (x : type-trunc-Set A) → type-Set (B x)
   function-dependent-universal-property-trunc-Set B f =
-    apply-dependent-universal-property-trunc-Set B f
+    function-dependent-universal-property-trunc B f
 
   compute-dependent-universal-property-trunc-Set :
     {l2 : Level} (B : type-trunc-Set A → UU-Set l2) →
     (f : (x : A) → type-Set (B (unit-trunc-Set x))) →
     (function-dependent-universal-property-trunc-Set B f ∘ unit-trunc-Set) ~ f
   compute-dependent-universal-property-trunc-Set B f =
-    ( htpy-eq
-      ( issec-map-inv-equiv (equiv-dependent-universal-property-trunc-Set B) f))
+    htpy-dependent-universal-property-trunc B f
 
   apply-dependent-universal-property-trunc-Set' :
     {l2 : Level} (B : type-trunc-Set A → UU-Set l2) →
@@ -175,7 +167,7 @@ equiv-universal-property-trunc-Set = equiv-universal-property-trunc
 apply-universal-property-trunc-Set :
   {l1 l2 : Level} {A : UU l1} (t : type-trunc-Set A) (B : UU-Set l2) →
   (A → type-Set B) → type-Set B
-apply-universal-property-trunc-Set = apply-universal-property-trunc
+apply-universal-property-trunc-Set t B f = map-universal-property-trunc B f t
 
 map-universal-property-trunc-Set :
   {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →

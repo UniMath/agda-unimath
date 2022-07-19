@@ -7,6 +7,7 @@ title: Subtypes
 
 module foundation-core.subtypes where
 
+open import foundation-core.1-types using (is-1-type)
 open import foundation-core.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -172,6 +173,10 @@ module _
   abstract
     is-set-type-subtype : is-set A → is-set (type-subtype P)
     is-set-type-subtype = is-trunc-type-subtype neg-one-𝕋 P
+
+  abstract
+    is-1-type-subtype : is-1-type A → is-1-type (type-subtype P)
+    is-1-type-subtype = is-trunc-type-subtype zero-𝕋 P
 
 subprop-Prop :
   {l1 l2 : Level} (A : UU-Prop l1) (P : subtype l2 (type-Prop A)) →
