@@ -12,6 +12,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.subgroups-concrete-groups
+open import group-theory.transitive-concrete-group-actions
 ```
 
 ## Idea
@@ -38,5 +39,11 @@ module _
   action-normal-subgroup-Concrete-Group : action-Concrete-Group l2 G
   action-normal-subgroup-Concrete-Group =
     action-subgroup-Concrete-Group G subgroup-normal-subgroup-Concrete-Group
+
+  transitive-action-normal-subgroup-Concrete-Group :
+    transitive-action-Concrete-Group l2 G
+  transitive-action-normal-subgroup-Concrete-Group =
+    transitive-action-subgroup-Concrete-Group G
+      ( subgroup-normal-subgroup-Concrete-Group)
 ```
 

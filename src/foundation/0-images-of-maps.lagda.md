@@ -8,7 +8,11 @@ module foundation.0-images-of-maps where
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
+open import foundation.images
+open import foundation.propositional-truncations
 open import foundation.set-truncations
+open import foundation.truncation-images-of-maps
+open import foundation.truncation-levels
 open import foundation.universe-levels
 ```
 
@@ -24,12 +28,24 @@ module _
   where
   
   0-im : UU (l1 ⊔ l2)
-  0-im = Σ B (λ b → type-trunc-Set (fib f b))
+  0-im = trunc-im zero-𝕋 f
 
   unit-0-im : A → 0-im
-  pr1 (unit-0-im x) = f x
-  pr2 (unit-0-im x) = unit-trunc-Set (pair x refl)
+  unit-0-im = unit-trunc-im zero-𝕋 f
 
   projection-0-im : 0-im → B
-  projection-0-im = pr1
+  projection-0-im = projection-trunc-im zero-𝕋 f
+```
+
+## Properties
+
+### Characterization of the identity type of `0-im f`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  Eq-unit-0-im : A → A → UU (l1 ⊔ l2)
+  Eq-unit-0-im = Eq-unit-trunc-im neg-one-𝕋 f
 ```

@@ -358,6 +358,7 @@ open import foundation.symmetric-difference
 open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
+open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.truncations
 open import foundation.type-arithmetic-cartesian-product-types

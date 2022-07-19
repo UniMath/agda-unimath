@@ -21,7 +21,7 @@ open import foundation.propositions using
     type-equiv-Prop; prod-Prop; is-prop-prod; eq-is-prop'; is-trunc-is-prop)
 open import foundation.truncations using
   ( type-trunc; unit-trunc; is-trunc-type-trunc; trunc;
-    apply-dependent-universal-property-trunc;
+    function-dependent-universal-property-trunc;
     equiv-unit-trunc)
 open import foundation.universal-property-propositional-truncation using
   ( is-propositional-truncation; is-propositional-truncation-extension-property;
@@ -92,7 +92,7 @@ ind-trunc-Prop' :
        tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
   (x : type-trunc-Prop A) → P x
 ind-trunc-Prop' P f H =
-  apply-dependent-universal-property-trunc
+  function-dependent-universal-property-trunc
     ( λ x → pair (P x) (is-prop-condition-ind-trunc-Prop' H x))
     ( f)
 ```

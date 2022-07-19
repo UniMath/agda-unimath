@@ -17,7 +17,7 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using (UU-Prop; type-Prop)
 open import foundation.sets using (is-set; UU-Set; is-set-Prop)
-open import foundation.truncated-types using (is-trunc; UU-Trunc)
+open import foundation.truncated-types using (is-trunc; Truncated-Type)
 open import foundation.truncation-levels using (one-𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 
@@ -104,7 +104,7 @@ module _
               ( is-set-Prop (Id shape-Concrete-Group Y))
               ( λ { refl → is-set-type-Concrete-Group})})
 
-  classifying-1-type-Concrete-Group : UU-Trunc one-𝕋 l
+  classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
   classifying-1-type-Concrete-Group =
     pair
       classifying-type-Concrete-Group

@@ -86,11 +86,7 @@ is-minimal-element-succ-ℕ
   leq-zero-ℕ n
 is-minimal-element-succ-ℕ
   P d (succ-ℕ m) pm is-lower-bound-m neg-p0 (succ-ℕ n) psuccn =
-  is-minimal-element-succ-ℕ (λ x → P (succ-ℕ x)) (λ x → d (succ-ℕ x)) m pm
-    ( λ m → is-lower-bound-m (succ-ℕ m))
-    ( is-lower-bound-m zero-ℕ)
-    ( n)
-    ( psuccn)
+  is-lower-bound-m n psuccn
 
 well-ordering-principle-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
@@ -156,7 +152,7 @@ is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
       ( pair m p))
 ```
 
-### Global choice
+### The ε-operator for decidable subtypes of ℕ
 
 ```agda
 ε-operator-decidable-subtype-ℕ :

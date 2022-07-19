@@ -8,6 +8,7 @@ title: Transitive concrete group actions
 module group-theory.transitive-concrete-group-actions where
 
 open import foundation.0-connected-types
+open import foundation.1-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -163,6 +164,12 @@ module _
       ( action-transitive-action-Concrete-Group G X)
       ( action-transitive-action-Concrete-Group G Y)
 
+  id-equiv-transitive-action-Concrete-Group :
+    equiv-transitive-action-Concrete-Group X
+  id-equiv-transitive-action-Concrete-Group =
+    id-equiv-action-Concrete-Group G
+      ( action-transitive-action-Concrete-Group G X)
+
   extensionality-transitive-action-Concrete-Group :
     (Y : transitive-action-Concrete-Group l2 G) →
     (X ＝ Y) ≃ equiv-transitive-action-Concrete-Group Y
@@ -231,4 +238,25 @@ module _
                     ( preserves-mul-equiv-transitive-action-Concrete-Group
                       G X Y f g x)))) ∙
               ( ap (map-equiv-transitive-action-Concrete-Group G X Y f) q))))
+```
+
+### The type of transitive concrete group actions is a 1-type
+
+```agda
+module _
+  {l1 l2 : Level} (G : Concrete-Group l1)
+  where
+  
+  is-1-type-transitive-action-Concrete-Group :
+    is-1-type (transitive-action-Concrete-Group l2 G)
+  is-1-type-transitive-action-Concrete-Group =
+    is-1-type-subtype
+      ( is-transitive-action-Concrete-Group-Prop G)
+      ( is-1-type-action-Concrete-Group G)
+
+  transitive-action-Concrete-Group-1-Type : UU-1-Type (l1 ⊔ lsuc l2)
+  pr1 transitive-action-Concrete-Group-1-Type =
+    transitive-action-Concrete-Group l2 G
+  pr2 transitive-action-Concrete-Group-1-Type =
+    is-1-type-transitive-action-Concrete-Group
 ```
