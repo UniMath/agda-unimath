@@ -32,7 +32,7 @@ open import foundation.truncated-types using
     is-trunc-succ-is-trunc; type-equiv-Truncated-Type;
     Truncated-Type-Truncated-Type; extensionality-Truncated-Type;
     Π-Truncated-Type'; truncated-type-succ-Truncated-Type;
-    Id-Truncated-Type; Σ-Truncated-Type)
+    Id-Truncated-Type; Σ-Truncated-Type; Π-Truncated-Type)
 
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation using
@@ -222,6 +222,32 @@ module _
     type-equiv-Truncated-Type (B x) (truncated-fam-trunc (unit-trunc x))
   compute-truncated-fam-trunc =
     pr2 (center (unique-truncated-fam-trunc B))
+
+  elim-truncated-fam-trunc :
+    {l3 : Level}
+    ( C :
+      (x : type-trunc (succ-𝕋 k) A) →
+      type-Truncated-Type (truncated-fam-trunc x) → Truncated-Type l3 k) →
+    ( f :
+      (x : A) (y : type-Truncated-Type (B x)) →
+      type-Truncated-Type
+        ( C (unit-trunc x) (map-equiv (compute-truncated-fam-trunc x) y))) →
+    ( x : type-trunc (succ-𝕋 k) A)
+    ( y : type-Truncated-Type (truncated-fam-trunc x)) →
+    type-Truncated-Type (C x y)
+  elim-truncated-fam-trunc C f =
+    function-dependent-universal-property-trunc
+      ( λ y →
+        truncated-type-succ-Truncated-Type k
+          ( Π-Truncated-Type k
+            ( truncated-fam-trunc y)
+            ( C y)))
+      ( λ y →
+        map-equiv-Π
+          ( λ u → type-Truncated-Type (C (unit-trunc y) u))
+          ( compute-truncated-fam-trunc y)
+          ( λ u → id-equiv)
+          ( f y))
 ```
 
 ### An n-truncated type is equivalent to its n-truncation
@@ -310,39 +336,29 @@ module _
   pr1 (pr1 is-contr-total-Eq-trunc) = unit-trunc a
   pr2 (pr1 is-contr-total-Eq-trunc) = refl-Eq-trunc
   pr2 is-contr-total-Eq-trunc (pair x e) =
-    function-dependent-universal-property-trunc
+    elim-truncated-fam-trunc
+      ( λ y → trunc k (a ＝ y))
+      ( λ y p →
+        Id-Truncated-Type
+          ( Σ-Truncated-Type
+            ( trunc (succ-𝕋 k) A)
+            ( λ b →
+              truncated-type-succ-Truncated-Type k
+                ( Eq-trunc-Truncated-Type b)))
+          ( pair (unit-trunc a) refl-Eq-trunc)
+          ( pair y p))
       ( λ y →
-        truncated-type-succ-Truncated-Type k
-          ( Π-Truncated-Type' k
-            ( Eq-trunc y)
-            ( λ p →
-              Id-Truncated-Type
-                ( Σ-Truncated-Type
-                  ( trunc (succ-𝕋 k) A)
-                  ( λ y →
-                    truncated-type-succ-Truncated-Type k
-                      ( Eq-trunc-Truncated-Type y)))
-                ( pair (unit-trunc a) refl-Eq-trunc)
-                ( pair y p))))
-      ( λ y →
-        map-equiv-Π
-          ( λ p →
-            Id { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
-               ( pair (unit-trunc a) refl-Eq-trunc)
-               ( pair (unit-trunc y) p))
-          ( compute-Eq-trunc y)
-          ( λ q → id-equiv)
-          ( function-dependent-universal-property-trunc
-            ( λ q →
-              Id-Truncated-Type
-                ( Σ-Truncated-Type
-                  ( trunc (succ-𝕋 k) A)
-                  ( λ y →
-                    truncated-type-succ-Truncated-Type k
-                      ( Eq-trunc-Truncated-Type y)))
-                ( pair (unit-trunc a) refl-Eq-trunc)
-                ( pair (unit-trunc y) (map-compute-Eq-trunc y q)))
-            ( r y)))
+        function-dependent-universal-property-trunc
+          ( λ q →
+            Id-Truncated-Type
+              ( Σ-Truncated-Type
+                ( trunc (succ-𝕋 k) A)
+                ( λ y →
+                  truncated-type-succ-Truncated-Type k
+                    ( Eq-trunc-Truncated-Type y)))
+              ( pair (unit-trunc a) refl-Eq-trunc)
+              ( pair (unit-trunc y) (map-compute-Eq-trunc y q)))
+          ( r y))
       ( x)
       ( e)
     where
