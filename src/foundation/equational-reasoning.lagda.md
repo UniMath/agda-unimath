@@ -32,9 +32,9 @@ Y ∎e
 
 or
 ```md
-x ≤ X by ineq-1 than
-a ≤ X by ineq-2 than
-b ≤ X by ineq-3 than
+x ≤ X by ineq-1 to
+a ≤ X by ineq-2 to
+b ≤ X by ineq-3 to
 c ∎ X
 ```
 
@@ -99,7 +99,7 @@ private
     leq-Preorder X x y → leq-Preorder X y z → leq-Preorder X x z
   transitivity X x {y} {z} u v = transitive-leq-Preorder X x y z v u
 
-syntax transitivity X x u v = x ≤ X by u than v
+syntax transitivity X x u v = x ≤ X by u to v
 infixr 0 transitivity
 
 private
@@ -115,8 +115,8 @@ infix 1 reflexivity
 For a preorder `X` we thus write the chains as follows
 
 ```md
-x ≤ X by ineq-1 than
-y ≤ X by ineq-2 than
+x ≤ X by ineq-1 to
+y ≤ X by ineq-2 to
 z ∎ X
 ```
 
