@@ -7,6 +7,7 @@ title: Pullbacks
 
 module foundation-core.pullbacks where
 
+open import foundation-core.commuting-squares
 open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
@@ -286,4 +287,171 @@ fib-square-id g .(g b) (pair b refl) =
           ( λ x → is-equiv-tot-is-fiberwise-equiv
             ( λ y → is-equiv-inv (g y) (f x))))
         ( is-equiv-tot-is-fiberwise-equiv is-equiv-fsq)
+```
+
+### The pullback pasting property
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (i : X → Y) (j : Y → Z) (h : C → Z)
+  where
+  
+  cone-comp-horizontal :
+    (c : cone j h B) → (cone i (pr1 c) A) → cone (j ∘ i) h A
+  pr1 (cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H))) = f
+  pr1
+    ( pr2
+      ( cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H)))) = q ∘ p
+  pr2
+    ( pr2
+      ( cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H)))) =
+    coherence-square-comp-horizontal p q f g h i j H K
+
+  fib-square-comp-horizontal :
+    (c : cone j h B) (d : cone i (pr1 c) A) → (x : X) →
+    ( fib-square (j ∘ i) h (cone-comp-horizontal c d) x) ~
+    ( (fib-square j h c (i x)) ∘ (fib-square i (pr1 c) d x))
+  fib-square-comp-horizontal
+    (pair g (pair q K)) (pair f (pair p H)) .(f a) (pair a refl) =
+    eq-pair-Σ
+      ( refl)
+      ( ( ap
+          ( concat' (h (q (p a))) refl)
+          ( distributive-inv-concat (ap j (H a)) (K (p a)))) ∙
+        ( ( assoc (inv (K (p a))) (inv (ap j (H a))) refl) ∙
+          ( ap
+            ( concat (inv (K (p a))) (j (i (f a))))
+            ( ( ap (concat' (j (g (p a))) refl) (inv (ap-inv j (H a)))) ∙
+              ( inv (ap-concat j (inv (H a)) refl))))))
+
+  abstract
+    is-pullback-rectangle-is-pullback-left-square :
+      (c : cone j h B) (d : cone i (pr1 c) A) →
+      is-pullback j h c → is-pullback i (pr1 c) d →
+      is-pullback (j ∘ i) h (cone-comp-horizontal c d)
+    is-pullback-rectangle-is-pullback-left-square c d is-pb-c is-pb-d =
+      is-pullback-is-fiberwise-equiv-fib-square (j ∘ i) h
+        ( cone-comp-horizontal c d)
+        ( λ x → is-equiv-comp
+          ( fib-square (j ∘ i) h (cone-comp-horizontal c d) x)
+          ( fib-square j h c (i x))
+          ( fib-square i (pr1 c) d x)
+          ( fib-square-comp-horizontal c d x)
+          ( is-fiberwise-equiv-fib-square-is-pullback i (pr1 c) d is-pb-d x)
+          ( is-fiberwise-equiv-fib-square-is-pullback j h c is-pb-c (i x)))
+
+  abstract
+    is-pullback-left-square-is-pullback-rectangle :
+      (c : cone j h B) (d : cone i (pr1 c) A) →
+      is-pullback j h c → is-pullback (j ∘ i) h (cone-comp-horizontal c d) →
+      is-pullback i (pr1 c) d
+    is-pullback-left-square-is-pullback-rectangle c d is-pb-c is-pb-rect =
+      is-pullback-is-fiberwise-equiv-fib-square i (pr1 c) d
+        ( λ x → is-equiv-right-factor
+          ( fib-square (j ∘ i) h (cone-comp-horizontal c d) x)
+          ( fib-square j h c (i x))
+          ( fib-square i (pr1 c) d x)
+          ( fib-square-comp-horizontal c d x)
+          ( is-fiberwise-equiv-fib-square-is-pullback j h c is-pb-c (i x))
+          ( is-fiberwise-equiv-fib-square-is-pullback (j ∘ i) h
+            ( cone-comp-horizontal c d) is-pb-rect x))
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (f : C → Z) (g : Y → Z) (h : X → Y)
+  where
+  
+  cone-comp-vertical :
+    (c : cone f g B) → cone (pr1 (pr2 c)) h A → cone f (g ∘ h) A
+  pr1 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H'))) = p ∘ p'
+  pr1 (pr2 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H')))) = q'
+  pr2 (pr2 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H')))) =
+    coherence-square-comp-vertical q' p' h q p g f H' H
+
+  fib-square-comp-vertical : 
+    (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
+    ( ( fib-square f (g ∘ h) (cone-comp-vertical c d) x) ∘
+      ( inv-map-fib-comp (pr1 c) (pr1 d) x)) ~
+    ( ( inv-map-fib-comp g h (f x)) ∘
+      ( map-Σ
+        ( λ t → fib h (pr1 t))
+        ( fib-square f g c x)
+        ( λ t → fib-square (pr1 (pr2 c)) h d (pr1 t))))
+  fib-square-comp-vertical
+    (pair p (pair q H)) (pair p' (pair q' H')) .(p (p' a))
+    (pair (pair .(p' a) refl) (pair a refl)) =
+    eq-pair-Σ refl
+      ( ( right-unit) ∙
+        ( ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
+          ( ( ap
+              ( concat (inv (ap g (H' a))) (f (p (p' a))))
+              ( inv right-unit)) ∙
+            ( ap
+              ( concat' (g (h (q' a)))
+                ( pr2
+                  ( fib-square f g
+                    ( triple p q H)
+                    ( p (p' a))
+                    ( pair (p' a) refl))))
+              ( ( inv (ap-inv g (H' a))) ∙
+                ( ap (ap g) (inv right-unit)))))))
+
+  abstract
+    is-pullback-top-is-pullback-rectangle :
+      (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) →
+      is-pullback f g c →
+      is-pullback f (g ∘ h) (cone-comp-vertical c d) →
+      is-pullback (pr1 (pr2 c)) h d
+    is-pullback-top-is-pullback-rectangle c d is-pb-c is-pb-dc =
+      is-pullback-is-fiberwise-equiv-fib-square (pr1 (pr2 c)) h d
+        ( λ x → is-fiberwise-equiv-is-equiv-map-Σ
+          ( λ t → fib h (pr1 t))
+          ( fib-square f g c ((pr1 c) x))
+          ( λ t → fib-square (pr1 (pr2 c)) h d (pr1 t))
+          ( is-fiberwise-equiv-fib-square-is-pullback f g c is-pb-c ((pr1 c) x))
+          ( is-equiv-top-is-equiv-bottom-square
+            ( inv-map-fib-comp (pr1 c) (pr1 d) ((pr1 c) x))
+            ( inv-map-fib-comp g h (f ((pr1 c) x)))
+            ( map-Σ
+              ( λ t → fib h (pr1 t))
+              ( fib-square f g c ((pr1 c) x))
+              ( λ t → fib-square (pr1 (pr2 c)) h d (pr1 t)))
+            ( fib-square f (g ∘ h) (cone-comp-vertical c d) ((pr1 c) x))
+            ( fib-square-comp-vertical c d ((pr1 c) x))
+            ( is-equiv-inv-map-fib-comp (pr1 c) (pr1 d) ((pr1 c) x))
+            ( is-equiv-inv-map-fib-comp g h (f ((pr1 c) x)))
+            ( is-fiberwise-equiv-fib-square-is-pullback f (g ∘ h)
+              ( cone-comp-vertical c d) is-pb-dc ((pr1 c) x)))
+          ( pair x refl))
+
+  abstract
+    is-pullback-rectangle-is-pullback-top :
+      (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) →
+      is-pullback f g c →
+      is-pullback (pr1 (pr2 c)) h d →
+      is-pullback f (g ∘ h) (cone-comp-vertical c d)
+    is-pullback-rectangle-is-pullback-top c d is-pb-c is-pb-d =
+      is-pullback-is-fiberwise-equiv-fib-square f (g ∘ h)
+        ( cone-comp-vertical c d)
+        ( λ x → is-equiv-bottom-is-equiv-top-square
+          ( inv-map-fib-comp (pr1 c) (pr1 d) x)
+          ( inv-map-fib-comp g h (f x))
+          ( map-Σ
+            ( λ t → fib h (pr1 t))
+            ( fib-square f g c x)
+            ( λ t → fib-square (pr1 (pr2 c)) h d (pr1 t)))
+          ( fib-square f (g ∘ h) (cone-comp-vertical c d) x)
+          ( fib-square-comp-vertical c d x)
+          ( is-equiv-inv-map-fib-comp (pr1 c) (pr1 d) x)
+          ( is-equiv-inv-map-fib-comp g h (f x))
+          ( is-equiv-map-Σ
+            ( λ t → fib h (pr1 t))
+            ( fib-square f g c x)
+            ( λ t → fib-square (pr1 (pr2 c)) h d (pr1 t))
+            ( is-fiberwise-equiv-fib-square-is-pullback f g c is-pb-c x)
+            ( λ t → is-fiberwise-equiv-fib-square-is-pullback
+              (pr1 (pr2 c)) h d is-pb-d (pr1 t)))) 
 ```

@@ -11,8 +11,11 @@ open import foundation-core.pullbacks public
 
 open import foundation.contractible-types using
   ( is-contr; is-contr-total-path; is-contr-equiv')
+open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import foundation.functions using (_∘_)
+open import foundation.diagonal-maps-of-types using (diagonal)
+open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_; refl-htpy; right-unit-htpy)
 open import foundation.identity-types using
   ( _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv)
@@ -20,12 +23,14 @@ open import foundation.structure-identity-principle using (extensionality-Σ)
 open import foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
     is-equiv-map-distributive-Π-Σ)
+open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
+open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.cones-pullbacks
 open import foundation-core.equivalences using
   ( is-equiv-comp; _∘e_; is-equiv; map-inv-is-equiv; _≃_; id-equiv;
-    map-inv-equiv)
+    map-inv-equiv; is-equiv-has-inverse)
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot)
 open import foundation-core.universal-property-pullbacks using
@@ -90,4 +95,87 @@ module _
     map-inv-equiv
       ( extensionality-canonical-pullback s t)
       ( triple α β γ)
+```
+
+### Identity types can be presented as pullbacks
+
+```agda
+cone-Id :
+  {l : Level} {A : UU l} (x y : A) →
+  cone (const unit A x) (const unit A y) (x ＝ y)
+cone-Id x y =
+  triple (const (x ＝ y) unit star) (const (x ＝ y) unit star) id
+
+inv-gap-cone-Id :
+  {l : Level} {A : UU l} (x y : A) →
+  canonical-pullback (const unit A x) (const unit A y) → x ＝ y
+inv-gap-cone-Id x y (pair star (pair star p)) = p
+
+abstract
+  issec-inv-gap-cone-Id :
+    {l : Level} {A : UU l} (x y : A) →
+    ( ( gap (const unit A x) (const unit A y) (cone-Id x y)) ∘
+      ( inv-gap-cone-Id x y)) ~ id
+  issec-inv-gap-cone-Id x y (pair star (pair star p)) = refl
+
+abstract
+  isretr-inv-gap-cone-Id :
+    {l : Level} {A : UU l} (x y : A) →
+    ( ( inv-gap-cone-Id x y) ∘
+      ( gap (const unit A x) (const unit A y) (cone-Id x y))) ~ id
+  isretr-inv-gap-cone-Id x y p = refl
+
+abstract
+  is-pullback-cone-Id :
+    {l : Level} {A : UU l} (x y : A) →
+    is-pullback (const unit A x) (const unit A y) (cone-Id x y)
+  is-pullback-cone-Id x y =
+    is-equiv-has-inverse
+      ( inv-gap-cone-Id x y)
+      ( issec-inv-gap-cone-Id x y)
+      ( isretr-inv-gap-cone-Id x y)
+
+{- One way to solve this exercise is to show that Id (pr1 t) (pr2 t) is a
+   pullback for every t : A × A. This allows one to use path induction to
+   show that the inverse of the gap map is a section.
+-}
+
+cone-Id' :
+  {l : Level} {A : UU l} (t : A × A) →
+  cone (const unit (A × A) t) (diagonal A) (pr1 t ＝ pr2 t)
+cone-Id' {A = A} (pair x y) =
+  triple
+    ( const (x ＝ y) unit star)
+    ( const (x ＝ y) A x)
+    ( λ p → eq-pair-Σ refl (inv p))
+
+inv-gap-cone-Id' :
+  {l : Level} {A : UU l} (t : A × A) →
+  canonical-pullback (const unit (A × A) t) (diagonal A) → (pr1 t ＝ pr2 t)
+inv-gap-cone-Id' t (pair star (pair z p)) =
+  (ap pr1 p) ∙ (inv (ap pr2 p))
+
+abstract
+  issec-inv-gap-cone-Id' :
+    {l : Level} {A : UU l} (t : A × A) →
+    ( ( gap (const unit (A × A) t) (diagonal A) (cone-Id' t)) ∘
+      ( inv-gap-cone-Id' t)) ~ id
+  issec-inv-gap-cone-Id' .(pair z z) (pair star (pair z refl)) = refl
+
+abstract
+  isretr-inv-gap-cone-Id' :
+    {l : Level} {A : UU l} (t : A × A) →
+    ( ( inv-gap-cone-Id' t) ∘
+      ( gap (const unit (A × A) t) (diagonal A) (cone-Id' t))) ~ id
+  isretr-inv-gap-cone-Id' (pair x .x) refl = refl
+
+abstract
+  is-pullback-cone-Id' :
+    {l : Level} {A : UU l} (t : A × A) →
+    is-pullback (const unit (A × A) t) (diagonal A) (cone-Id' t)
+  is-pullback-cone-Id' t =
+    is-equiv-has-inverse
+      ( inv-gap-cone-Id' t)
+      ( issec-inv-gap-cone-Id' t)
+      ( isretr-inv-gap-cone-Id' t)
 ```

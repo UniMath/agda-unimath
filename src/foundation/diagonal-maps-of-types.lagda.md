@@ -7,33 +7,34 @@ title: Diagonal maps of types
 
 module foundation.diagonal-maps-of-types where
 
-open import foundation.0-maps using (is-0-map)
-open import foundation.1-types using
+open import foundation-core.0-maps using (is-0-map)
+open import foundation-core.1-types using
   ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-maps using (is-contr-map)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equivalences using
+open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.contractible-maps using (is-contr-map)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.embeddings using (is-emb; _↪_)
+open import foundation-core.equality-cartesian-product-types using (eq-pair)
+open import foundation-core.equivalences using
   ( is-equiv; issec-map-inv-is-equiv; is-equiv-has-inverse)
-open import foundation.faithful-maps using
+open import foundation-core.faithful-maps using
   ( is-faithful; is-0-map-is-faithful; is-faithful-is-0-map; faithful-map)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation.propositional-maps using
+open import foundation-core.fibers-of-maps using (fib)
+open import foundation-core.functions using (_∘_; id)
+open import foundation-core.homotopies using (_~_)
+open import foundation-core.identity-types using (_＝_; refl; _∙_; inv; ap)
+open import foundation-core.propositional-maps using
   ( is-prop-map; is-prop-map-is-emb; is-emb-is-prop-map)
-open import foundation.propositions using
+open import foundation-core.propositions using
   ( is-prop; is-prop-all-elements-equal)
-open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
-open import foundation.truncated-maps using (is-trunc-map)
-open import foundation.truncated-types using
+open import foundation-core.sets using
+  ( is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation-core.truncated-maps using (is-trunc-map)
+open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-is-equiv'; is-trunc-is-equiv)
-open import foundation.truncation-levels using
+open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.universe-levels using (Level; UU)
 ```
 
 ## Idea
