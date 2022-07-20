@@ -52,7 +52,10 @@ open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-pair-types public
+open import foundation.descent-coproduct-types public
+open import foundation.descent-dependent-pair-types public
 open import foundation.diagonal-maps-of-types public
+open import foundation.diagonals-of-maps public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-powersets public
