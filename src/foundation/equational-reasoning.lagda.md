@@ -24,18 +24,18 @@ Often it's convenient to reason by chains of (in)equalities or equivalences,
 i.e., to write a proof in the following form:
 
 ```md
-X ≃⟨ equiv-1 ⟩
-A ≃⟨ equiv-2 ⟩
-B ≃⟨ equiv-3 ⟩
-Y ∎
+X ≃ by equiv-1 to
+A ≃ by equiv-2 to
+B ≃ by equiv-3 to
+Y ∎e
 ```
 
 or
 ```md
-x ≤⟨ ineq-1 ⟩
-a ≤⟨ ineq-2 ⟩
-b ≤⟨ ineq-3 ⟩
-c ∎
+x ≤ X by ineq-1 than
+a ≤ X by ineq-2 than
+b ≤ X by ineq-3 than
+c ∎ X
 ```
 
 where `equiv-x` and `ineq-x` are proofs of respectively the equivalences or
@@ -108,16 +108,16 @@ private
     leq-Preorder X x x
   reflexivity = refl-leq-Preorder
 
-syntax reflexivity X x = x ∎ in-preorder X
+syntax reflexivity X x = x ∎ X
 infix 1 reflexivity
 ```
 
 For a preorder `X` we thus write the chains as follows
 
 ```md
-x ≤[ X ]⟨ ineq-1 ⟩
-y ≤[ X ]⟨ ineq-2 ⟩
-z ∎[ X ]
+x ≤ X by ineq-1 than
+y ≤ X by ineq-2 than
+z ∎ X
 ```
 
 ## References
