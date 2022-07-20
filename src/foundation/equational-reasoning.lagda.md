@@ -89,6 +89,8 @@ syntax step-equivalence-reasoning X g f = X ≃ by f to g
 
 ### Equational reasoning for preorders
 
+Note: In an equational reasoning argument, the preorder is always specified at the last step. So do we really need to specify it at each of the earlier steps?
+
 ```agda
 private
   transitivity :
@@ -106,7 +108,7 @@ private
     leq-Preorder X x x
   reflexivity = refl-leq-Preorder
 
-syntax reflexivity X x = x ∎ X
+syntax reflexivity X x = x ∎ in-preorder X
 infix 1 reflexivity
 ```
 
