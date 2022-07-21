@@ -54,7 +54,6 @@ open import foundation.identity-types using
   ( _＝_; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
-open import foundation.pullbacks
 open import foundation.subtype-identity-principle using
   ( extensionality-subtype)
 open import foundation.type-theoretic-principle-of-choice using
