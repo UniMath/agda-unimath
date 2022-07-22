@@ -81,7 +81,7 @@ For example, the file about sets defines first what a set is, and then goes on t
 
 Now we can do a thought experiment. Suppose we have an unorganized library of mathematics, and we organize everything by topic as described above. Most probably this would create a huge cluster of interdependent files, and Agda will give errors because of those cyclic dependencies. We have created a directed graph, but an Agda library has to be a directed acyclic graph, i.e., a DAG. Now, luckily there is a theorem of directed acyclic graphs, which asserts that if we organize our library by topic -- so that humans can find stuff somewhat easily in the library -- we're never too far off a directed acyclic graph.
 
-**Theorem.** For every simple directed graph `G`, there exists a simple directed acyclic graph `H` and a graph homomorphism `f : H → Reflexivization(G)` such that the following two conditions hold:
+**Theorem.** For every directed graph `G` without loops there exists a directed acyclic graph `H` and a graph homomorphism `f : H → Reflexivization(G)` such that the following two conditions hold:
 1. `f` is surjective on vertices and edges
 2. For each vertex `x` in `G` there are at most two vertices in `H` that map to `x`.
 
