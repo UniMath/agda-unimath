@@ -69,7 +69,7 @@ Egbert Rijke
 3. The `agda-unimath` library has the goal to be an informative resource of formalised mathematics. We therefore formalise in literate agda, using markdown. We think of the files in the formalisation as pages of a wiki on mathematics.
 4. The files focus sharply on one topic. Typically, a file begins by introducing one new concept, possibly in several equivalent ways, and develop the most basic properties thereof. Alternatively, a file could have the goal to prove an important theorem, and derive immediate corollaries thereof.
 
-### A thought experiment about library design
+### The design philosophy of `agda-unimath`
 
 When a human is looking for something in a library of formalized mathematics, they likely have a clear idea of what concept they are looking for. It would be unlikely, however, that they know exactly what other concepts the concept they are looking for depends on. If the concept they're looking for is an instance of something more general, we also cannot count on it that they know about that this is the case. Certainly, we wouldn't require the human to know anything at all about _how_ their concept has been formalized in order to find it in `agda-unimath`. In fact, the human might not yet know very much about the concept they're looking for except the name, and they might have come to find more information about it. The best case scenario for someone like that is that they can readily find their concept being listed in a hyperlinked index, like the index in the back of a book, so that they can find it there, click on it, and find what they were looking for.
 
