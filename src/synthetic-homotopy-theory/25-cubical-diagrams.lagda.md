@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -577,10 +578,10 @@ descent-is-equiv :
 descent-is-equiv i j h c d
   is-equiv-i is-equiv-k is-pb-rectangle =
   is-pullback-is-fiberwise-equiv-fib-square j h c
-    ( ind-is-equiv
-      ( λ y → is-equiv (fib-square j h c y))
+    ( map-inv-is-equiv-precomp-Π-is-equiv
       ( i)
       ( is-equiv-i)
+      ( λ y → is-equiv (fib-square j h c y))
       ( λ x → is-equiv-left-factor
         ( fib-square (j ∘ i) h
           ( cone-comp-horizontal i j h c d) x)

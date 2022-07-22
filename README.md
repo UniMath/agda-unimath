@@ -69,6 +69,28 @@ Egbert Rijke
 3. The `agda-unimath` library has the goal to be an informative resource of formalised mathematics. We therefore formalise in literate agda, using markdown. We think of the files in the formalisation as pages of a wiki on mathematics.
 4. The files focus sharply on one topic. Typically, a file begins by introducing one new concept, possibly in several equivalent ways, and develop the most basic properties thereof. Alternatively, a file could have the goal to prove an important theorem, and derive immediate corollaries thereof.
 
+### A thought experiment about library design
+
+When a human is looking for something in a library of formalized mathematics, they likely have a clear idea of what concept they are looking for. It would be unlikely, however, that they know exactly what other concepts the concept they are looking for depends on, and if the concept they're looking for is an instance of a more general concept we also cannot count on it that they know about the more general concept. In fact, the user might not yet know very much about the concept they're looking for except the name, and they might have come to find more information about it. The best case scenario for someone like that is that they can readily find their concept being listed in a hyperlinked index, so that they can find it there, click on it, and find what they were looking for.
+
+In the `agda-unimath` library, such an index is formed by the list of files in the library, and the indexing terms are the file names. Since we want to help humans looking for their favorite topic to find it easily, all the files in our library introduce one concept, or are about one named theorem or about one narrow topic. The file names describe that concept, theorem, or topic in a concise and natural manner.
+
+This choice of organization of the library implies that we can organize our files much like pages on a wiki. The title of the file is the topic at hand, in an informal section we can describe in words what the main idea is; then we give the main definition, the basic infrastructure around it, and we derive properties or consequences that hold in the same generality as the main definition of the file.
+
+For example, the file about sets defines first what a set is, and then goes on to show that sets are closed under equivalences, dependent pair types, dependent product types, and so on. But it doesn't show that the type of natural numbers is a set, because users would more likely expect such a fact to be presented on the page about natural numbers.
+
+Now we can do a thought experiment. Suppose we have an unorganized library of mathematics, and we organize everything by topic as described above. Most probably this would create a huge cluster of interdependent files, and Agda will give errors because of those cyclic dependencies. We have created a directed graph, but an Agda library has to be a directed acyclic graph, i.e., a DAG. Now, luckily there is a theorem of directed acyclic graphs, which asserts that if we organize our library by topic -- so that humans can find stuff somewhat easily in the library -- we're never too far off a directed acyclic graph.
+
+**Theorem.** For every simple directed graph `G`, there exists a simple directed acyclic graph `H` and a graph homomorphism `f : H → Reflexivization(G)` such that the following two conditions hold:
+1. `f` is surjective on vertices and edges
+2. For each vertex `x` in `G` there are at most two vertices in `H` that map to `x`.
+
+This theorem says that we can resolve the cyclic dependencies by splitting some files into a part (a) and a part (b) such that (b) imports part (a) publicly. Now, this wouldn't be so useful if we'd have to split all the files of the library in two, but we're lucky. The messiest cluster of interdependent files would occur at the very bottom of the hierarchy in the library, in its foundations.
+
+We have therefore created two folders for the foundation of the `agda-unimath` library: the `foundation-core` folder containing the basic setup, and the `foundation` folder, containing everything that belongs to the foundation of the library. The `foundation-core` folder contains files that are paired with files of the same name in the `foundation` folder. The corresponding file in the `foundation` folder imports this file from the `foundation-core` folder publicly, so that outside of the foundations of the library you don't have to worry that some files might be split in two.
+
+Outside of the `foundation` folder of the library, we stick to the "one-concept-per-file" design principle of our library. If you find, however, that something you were looking for was not in the place you expected it to be (this happens!) please let us know and we will consider it for improvements.
+
 ### Style conventions for files
 
 1. File names are descriptive of the concept it introduces, or the main theorem it proves. The file names could be considered indexing terms, with the list of files functioning much like the index in the back of a book. Usually, file names consist of a noun or a noun phrase. File names should be natural, sufficiently precise, concise, and consistent with those of related files. 

@@ -54,6 +54,7 @@ open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-pair-types public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
+open import foundation.descent-empty-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
 open import foundation.disjunction public
