@@ -455,3 +455,70 @@ module _
             ( λ t → is-fiberwise-equiv-fib-square-is-pullback
               (pr1 (pr2 c)) h d is-pb-d (pr1 t)))) 
 ```
+
+### Pullbacks are symmetric
+
+```agda
+cone-swap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) → cone f g C → cone g f C
+cone-swap f g (pair p (pair q H)) = triple q p (inv-htpy H)
+
+map-canonical-pullback-swap :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) → canonical-pullback f g → canonical-pullback g f
+map-canonical-pullback-swap f g (pair a (pair b p)) =
+  triple b a (inv p)
+
+inv-inv-map-canonical-pullback-swap :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) →
+  (map-canonical-pullback-swap f g ∘ map-canonical-pullback-swap g f) ~ id
+inv-inv-map-canonical-pullback-swap f g (pair b (pair a q)) =
+  eq-pair-Σ refl (eq-pair-Σ refl (inv-inv q))
+
+abstract
+  is-equiv-map-canonical-pullback-swap :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+    (f : A → X) (g : B → X) → is-equiv (map-canonical-pullback-swap f g)
+  is-equiv-map-canonical-pullback-swap f g =
+    is-equiv-has-inverse
+      ( map-canonical-pullback-swap g f)
+      ( inv-inv-map-canonical-pullback-swap f g)
+      ( inv-inv-map-canonical-pullback-swap g f)
+
+triangle-map-canonical-pullback-swap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C) →
+  ( gap g f (cone-swap f g c)) ~
+  ( ( map-canonical-pullback-swap f g) ∘ ( gap f g c))
+triangle-map-canonical-pullback-swap f g (pair p (pair q H)) x = refl
+
+abstract
+  is-pullback-cone-swap :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+    (f : A → X) (g : B → X) (c : cone f g C) →
+    is-pullback f g c → is-pullback g f (cone-swap f g c)
+  is-pullback-cone-swap f g c is-pb-c =
+    is-equiv-comp
+      ( gap g f (cone-swap f g c))
+      ( map-canonical-pullback-swap f g)
+      ( gap f g c)
+      ( triangle-map-canonical-pullback-swap f g c)
+      ( is-pb-c)
+      ( is-equiv-map-canonical-pullback-swap f g)
+
+abstract
+  is-pullback-cone-swap' :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+    (f : A → X) (g : B → X) (c : cone f g C) →
+    is-pullback g f (cone-swap f g c) → is-pullback f g c
+  is-pullback-cone-swap' f g c is-pb-c' =
+    is-equiv-right-factor
+      ( gap g f (cone-swap f g c))
+      ( map-canonical-pullback-swap f g)
+      ( gap f g c)
+      ( triangle-map-canonical-pullback-swap f g c)
+      ( is-equiv-map-canonical-pullback-swap f g)
+      ( is-pb-c')
+```

@@ -10,7 +10,8 @@ module foundation.truncated-maps where
 open import foundation-core.truncated-maps public
 
 open import foundation-core.cones-pullbacks
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.dependent-pair-types using
+  ( Σ; pair; pr1; pr2; triple)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.pullbacks
 open import foundation-core.truncated-types using
@@ -55,4 +56,16 @@ module _
         ( fib-square f g c a)
         ( is-fiberwise-equiv-fib-square-is-pullback f g c pb a)
         (is-trunc-g (f a))
+
+abstract
+  is-trunc-is-pullback' :
+    {l1 l2 l3 l4 : Level} (k : 𝕋)
+    {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+    (f : A → X) (g : B → X) (c : cone f g C) →
+    is-pullback f g c → is-trunc-map k f → is-trunc-map k (pr1 (pr2 c))
+  is-trunc-is-pullback' k f g (pair p (pair q H)) pb is-trunc-f =
+    is-trunc-is-pullback k g f
+      ( cone-swap f g (triple p q H))
+      ( is-pullback-cone-swap f g (triple p q H) pb)
+      is-trunc-f
 ```

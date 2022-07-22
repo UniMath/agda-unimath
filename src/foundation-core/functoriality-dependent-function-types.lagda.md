@@ -103,14 +103,35 @@ abstract
 ### If `f` is an equivalence, then precomposing by `f` is an equivalence
 
 ```agda
-abstract
-  is-equiv-precomp-Π-is-equiv :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) → is-equiv f →
-    (C : B → UU l3) → is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-is-equiv f is-equiv-f =
-    is-equiv-precomp-Π-is-coherently-invertible f
-      ( is-coherently-invertible-is-path-split f
-        ( is-path-split-is-equiv f is-equiv-f))
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (H : is-equiv f) (C : B → UU l3)
+  where
+  
+  abstract
+    is-equiv-precomp-Π-is-equiv : is-equiv (precomp-Π f C)
+    is-equiv-precomp-Π-is-equiv =
+      is-equiv-precomp-Π-is-coherently-invertible f
+        ( is-coherently-invertible-is-path-split f
+          ( is-path-split-is-equiv f H))
+        ( C)
+
+  map-inv-is-equiv-precomp-Π-is-equiv :
+    ((a : A) → C (f a)) → ((b : B) → C b)
+  map-inv-is-equiv-precomp-Π-is-equiv =
+    map-inv-is-equiv is-equiv-precomp-Π-is-equiv
+
+  issec-map-inv-is-equiv-precomp-Π-is-equiv :
+    (h : (a : A) → C (f a)) →
+    (precomp-Π f C (map-inv-is-equiv-precomp-Π-is-equiv h)) ~ h
+  issec-map-inv-is-equiv-precomp-Π-is-equiv h =
+    htpy-eq (issec-map-inv-is-equiv is-equiv-precomp-Π-is-equiv h)
+
+  isretr-map-inv-is-equiv-precomp-Π-is-equiv :
+    (g : (b : B) → C b) → 
+    (map-inv-is-equiv-precomp-Π-is-equiv (precomp-Π f C g)) ~ g
+  isretr-map-inv-is-equiv-precomp-Π-is-equiv g =
+    htpy-eq (isretr-map-inv-is-equiv is-equiv-precomp-Π-is-equiv g)
 
 equiv-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →

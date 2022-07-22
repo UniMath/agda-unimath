@@ -9,7 +9,6 @@ open import foundation.cones-pullbacks
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -24,74 +23,6 @@ open import foundation.universe-levels
 ## Theorem
 
 ```agda
-module _
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  (f : A' → A) (g : B' → B)
-  where
-
-  fib-map-coprod-inl-fib : (x : A) → fib f x → fib (map-coprod f g) (inl x)
-  pr1 (fib-map-coprod-inl-fib x (pair a' p)) = inl a'
-  pr2 (fib-map-coprod-inl-fib x (pair a' p)) = ap inl p
-
-  fib-fib-map-coprod-inl : (x : A) → fib (map-coprod f g) (inl x) → fib f x
-  fib-fib-map-coprod-inl x (pair (inl a') p) =
-    pair a' (map-compute-eq-coprod-inl-inl (f a') x p)
-  fib-fib-map-coprod-inl x (pair (inr b') p) =
-    ex-falso (is-empty-eq-coprod-inr-inl (g b') x p)
-
-  abstract
-    issec-fib-fib-map-coprod-inl :
-      (x : A) → (fib-map-coprod-inl-fib x ∘ fib-fib-map-coprod-inl x) ~ id
-    issec-fib-fib-map-coprod-inl .(f a') (pair (inl a') refl) = refl
-    issec-fib-fib-map-coprod-inl x (pair (inr b') p) =
-      ex-falso (is-empty-eq-coprod-inr-inl (g b') x p)
-
-  abstract
-    isretr-fib-fib-map-coprod-inl :
-      (x : A) → (fib-fib-map-coprod-inl x ∘ fib-map-coprod-inl-fib x) ~ id
-    isretr-fib-fib-map-coprod-inl .(f a') (pair a' refl) = refl
-
-  abstract
-    is-equiv-fib-map-coprod-inl-fib :
-      (x : A) → is-equiv (fib-map-coprod-inl-fib x)
-    is-equiv-fib-map-coprod-inl-fib x =
-      is-equiv-has-inverse
-        ( fib-fib-map-coprod-inl x)
-        ( issec-fib-fib-map-coprod-inl x)
-        ( isretr-fib-fib-map-coprod-inl x)
-
-  fib-map-coprod-inr-fib : (y : B) → fib g y → fib (map-coprod f g) (inr y)
-  pr1 (fib-map-coprod-inr-fib y (pair b' p)) = inr b'
-  pr2 (fib-map-coprod-inr-fib y (pair b' p)) = ap inr p
-  
-  fib-fib-map-coprod-inr : (y : B) → fib (map-coprod f g) (inr y) → fib g y
-  fib-fib-map-coprod-inr y (pair (inl a') p) =
-    ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
-  pr1 (fib-fib-map-coprod-inr y (pair (inr b') p)) = b'
-  pr2 (fib-fib-map-coprod-inr y (pair (inr b') p)) =
-    map-compute-eq-coprod-inr-inr (g b') y p
-
-  abstract
-    issec-fib-fib-map-coprod-inr :
-      (y : B) → (fib-map-coprod-inr-fib y ∘ fib-fib-map-coprod-inr y) ~ id
-    issec-fib-fib-map-coprod-inr .(g b') (pair (inr b') refl) = refl
-    issec-fib-fib-map-coprod-inr y (pair (inl a') p) =
-      ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
-
-  abstract
-    isretr-fib-fib-map-coprod-inr :
-      (y : B) → (fib-fib-map-coprod-inr y ∘ fib-map-coprod-inr-fib y) ~ id
-    isretr-fib-fib-map-coprod-inr .(g b') (pair b' refl) = refl
-
-  abstract
-    is-equiv-fib-map-coprod-inr-fib :
-      (y : B) → is-equiv (fib-map-coprod-inr-fib y)
-    is-equiv-fib-map-coprod-inr-fib y =
-      is-equiv-has-inverse
-        ( fib-fib-map-coprod-inr y)
-        ( issec-fib-fib-map-coprod-inr y)
-        ( isretr-fib-fib-map-coprod-inr y)
-
 module _
   {l1 l2 l3 l1' l2' l3' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3}

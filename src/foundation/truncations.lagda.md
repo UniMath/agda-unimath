@@ -330,7 +330,8 @@ module _
   {l : Level} {k : 𝕋} (A : Truncated-Type l k)
   where
 
-  map-inv-unit-trunc : type-trunc k (type-Truncated-Type A) → type-Truncated-Type A
+  map-inv-unit-trunc :
+    type-trunc k (type-Truncated-Type A) → type-Truncated-Type A
   map-inv-unit-trunc = map-universal-property-trunc A id
 
   isretr-map-inv-unit-trunc :
