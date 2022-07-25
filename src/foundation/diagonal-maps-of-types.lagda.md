@@ -55,6 +55,15 @@ module _
 
 ## Properties
 
+### The action on paths of a diagonal
+
+```agda
+ap-diagonal :
+  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) →
+  ap (diagonal A) p ＝ eq-pair p p
+ap-diagonal refl = refl
+```
+
 ### If the diagonal of `A` is an equivalence, then `A` is a proposition.
 
 ```agda

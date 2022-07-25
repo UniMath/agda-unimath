@@ -12,7 +12,8 @@ open import foundation-core.equivalences public
 open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.commuting-squares using (coherence-square)
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-pullbacks using
+  ( cone; fib-square; cone-swap)
 open import foundation-core.contractible-maps using
   ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
 open import foundation-core.contractible-types using
@@ -33,8 +34,8 @@ open import foundation-core.path-split-maps using
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation-core.pullbacks using
-  ( is-pullback; is-pullback-is-fiberwise-equiv-fib-square; fib-square;
-    is-pullback-cone-swap'; cone-swap)
+  ( is-pullback; is-pullback-is-fiberwise-equiv-fib-square;
+    is-pullback-cone-swap')
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)

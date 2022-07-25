@@ -59,59 +59,6 @@ We construct canonical pullbacks of cospans
 
 ## Properties
 
-### We characterize the identity type of the canonical pullback
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-  where
-
-  Eq-canonical-pullback : (t t' : canonical-pullback f g) → UU (l1 ⊔ (l2 ⊔ l3))
-  Eq-canonical-pullback (pair a bp) t' =
-    let b = pr1 bp
-        p = pr2 bp
-        a' = pr1 t'
-        b' = pr1 (pr2 t')
-        p' = pr2 (pr2 t')
-    in
-    Σ (a ＝ a') (λ α → Σ (b ＝ b') (λ β → ((ap f α) ∙ p') ＝ (p ∙ (ap g β))))
-
-  refl-Eq-canonical-pullback :
-    (t : canonical-pullback f g) → Eq-canonical-pullback t t
-  pr1 (refl-Eq-canonical-pullback (pair a (pair b p))) = refl
-  pr1 (pr2 (refl-Eq-canonical-pullback (pair a (pair b p)))) = refl
-  pr2 (pr2 (refl-Eq-canonical-pullback (pair a (pair b p)))) = inv right-unit
-
-  Eq-eq-canonical-pullback :
-    (s t : canonical-pullback f g) → s ＝ t → Eq-canonical-pullback s t
-  Eq-eq-canonical-pullback s .s refl = refl-Eq-canonical-pullback s
-
-  extensionality-canonical-pullback :
-    (t t' : canonical-pullback f g) → (t ＝ t') ≃ Eq-canonical-pullback t t'
-  extensionality-canonical-pullback (pair a (pair b p)) =
-    extensionality-Σ
-      ( λ {a'} bp' α →
-        Σ (b ＝ pr1 bp') (λ β → (ap f α ∙ pr2 bp') ＝ (p ∙ ap g β)))
-      ( refl)
-      ( pair refl (inv right-unit))
-      ( λ x → id-equiv)
-      ( extensionality-Σ
-        ( λ {b'} p' β → p' ＝ (p ∙ ap g β))
-        ( refl)
-        ( inv right-unit)
-        ( λ y → id-equiv)
-        ( λ p' → equiv-concat' p' (inv right-unit) ∘e equiv-inv p p'))
-
-  map-extensionality-canonical-pullback :
-    { s t : canonical-pullback f g} →
-    ( α : pr1 s ＝ pr1 t) (β : pr1 (pr2 s) ＝ pr1 (pr2 t)) →
-    ( ((ap f α) ∙ (pr2 (pr2 t))) ＝ ((pr2 (pr2 s)) ∙ (ap g β))) → s ＝ t
-  map-extensionality-canonical-pullback {s} {t} α β γ =
-    map-inv-equiv
-      ( extensionality-canonical-pullback s t)
-      ( triple α β γ)
-```
-
 ### Identity types can be presented as pullbacks
 
 ```agda

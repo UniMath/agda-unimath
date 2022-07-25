@@ -13,7 +13,7 @@ open import foundation-core.equivalences using
   ( is-equiv; _≃_; is-equiv-has-inverse)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; refl; ap)
+open import foundation-core.identity-types using (_＝_; refl; ap; _∙_)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -81,4 +81,34 @@ module _
     (s t : A × B) → (s ＝ t) ≃ Eq-prod s t
   pr1 (equiv-pair-eq s t) = pair-eq
   pr2 (equiv-pair-eq s t) = is-equiv-pair-eq s t
+```
+
+## Properties
+
+### `eq-pair` preserves concatenation
+
+```agda
+eq-pair-concat :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x x' x'' : A} {y y' y'' : B}
+  (p : x ＝ x') (p' : x' ＝ x'') (q : y ＝ y') (q' : y' ＝ y'') →
+  ( eq-pair {s = pair x y} {t = pair x'' y''} (p ∙ p') (q ∙ q')) ＝
+  ( ( eq-pair {s = pair x y} {t = pair x' y'} p q) ∙
+    ( eq-pair p' q'))
+eq-pair-concat refl p' refl q' = refl
+```
+
+### `eq-pair` computes in the expected way when the action on paths of the projections is applies
+
+```agda
+ap-pr1-eq-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
+  ap pr1 (eq-pair {s = pair x y} {pair x' y'} p q) ＝ p
+ap-pr1-eq-pair refl refl = refl
+
+ap-pr2-eq-pair :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
+  ap pr2 (eq-pair {s = pair x y} {pair x' y'} p q) ＝ q
+ap-pr2-eq-pair refl refl = refl
 ```

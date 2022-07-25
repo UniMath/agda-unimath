@@ -12,6 +12,7 @@ open import foundation-core.commuting-squares
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
@@ -120,4 +121,32 @@ module _
   eq-htpy-cone :
     (c c' : cone f g C) → htpy-cone c c' → c ＝ c'
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
+```
+
+### Any cone induces a family of maps between the fibers of the vertical maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  where
+  
+  fib-square : (x : A) → fib (pr1 c) x → fib g (f x)
+  pr1 (fib-square x t) = pr1 (pr2 c) (pr1 t)
+  pr2 (fib-square x t) = (inv (pr2 (pr2 c) (pr1 t))) ∙ (ap f (pr2 t))
+
+fib-square-id :
+  {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
+  fib-square id g (triple g id refl-htpy) x ~ id
+fib-square-id g .(g b) (pair b refl) =
+  refl
+```
+
+### The swapping function on cones
+
+```agda
+cone-swap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) → cone f g C → cone g f C
+cone-swap f g (pair p (pair q H)) = triple q p (inv-htpy H)
 ```

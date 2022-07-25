@@ -7,14 +7,14 @@ title: Functoriality of cartesian product types
 
 module foundation.functoriality-cartesian-product-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
+open import foundation-core.equality-cartesian-product-types using (eq-pair)
+open import foundation-core.equivalences using (is-equiv; _≃_)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.homotopies using (_~_; inv-htpy; _∙h_)
+open import foundation-core.identity-types using (refl)
+open import foundation-core.universe-levels using (Level; UU)
 ```
 
 ## Idea
@@ -29,8 +29,8 @@ module _
   where
 
   map-prod : (f : A → C) (g : B → D) → (A × B) → (C × D)
-  pr1 (map-prod f g (pair a b)) = f a
-  pr2 (map-prod f g (pair a b)) = g b
+  pr1 (map-prod f g t) = f (pr1 t)
+  pr2 (map-prod f g t) = g (pr2 t)
 
   map-prod-pr1 :
     (f : A → C) (g : B → D) → (pr1 ∘ (map-prod f g)) ~ (f ∘ pr1)
@@ -59,7 +59,7 @@ map-prod-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {E : UU l5} {F : UU l6} (f : A → C) (g : B → D) (h : C → E) (k : D → F) →
   map-prod (h ∘ f) (k ∘ g) ~ ((map-prod h k) ∘ (map-prod f g))
-map-prod-comp f g h k (pair a b) = refl
+map-prod-comp f g h k t = refl
 ```
 
 ### Functoriality of products preserves homotopies
