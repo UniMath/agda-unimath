@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
@@ -23,7 +24,6 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 
 -- Section 15.1 Commuting cubes
@@ -577,22 +577,22 @@ descent-is-equiv :
   is-pullback j h c
 descent-is-equiv i j h c d
   is-equiv-i is-equiv-k is-pb-rectangle =
-  is-pullback-is-fiberwise-equiv-fib-square j h c
+  is-pullback-is-fiberwise-equiv-map-fib-cone j h c
     ( map-inv-is-equiv-precomp-Π-is-equiv
       ( i)
       ( is-equiv-i)
-      ( λ y → is-equiv (fib-square j h c y))
+      ( λ y → is-equiv (map-fib-cone j h c y))
       ( λ x → is-equiv-left-factor
-        ( fib-square (j ∘ i) h
+        ( map-fib-cone (j ∘ i) h
           ( cone-comp-horizontal i j h c d) x)
-        ( fib-square j h c (i x))
-        ( fib-square i (pr1 c) d x)
-        ( fib-square-comp-horizontal i j h c d x)
-        ( is-fiberwise-equiv-fib-square-is-pullback (j ∘ i) h
+        ( map-fib-cone j h c (i x))
+        ( map-fib-cone i (pr1 c) d x)
+        ( map-fib-cone-comp-horizontal i j h c d x)
+        ( is-fiberwise-equiv-map-fib-cone-is-pullback (j ∘ i) h
           ( cone-comp-horizontal i j h c d)
           ( is-pb-rectangle)
           ( x))
-        ( is-fiberwise-equiv-fib-square-is-pullback i (pr1 c) d
+        ( is-fiberwise-equiv-map-fib-cone-is-pullback i (pr1 c) d
           ( is-pullback-is-equiv' i (pr1 c) d is-equiv-i is-equiv-k) x)))
 
 coherence-htpy-square-is-pullback-bottom-is-pullback-top-cube-is-equiv :
@@ -1175,10 +1175,10 @@ square-fib-cube :
        top back-left back-right front-left front-right bottom) →
   (a : A) →
   ( ( tot (λ d' p → p ∙ (bottom a)) ∘
-      ( fib-square h hD (pair hB (pair h' front-left)) (f a))) ∘
-    ( fib-square f hB (pair hA (pair f' back-left)) a)) ~
-  ( ( fib-square k hD (pair hC (pair k' front-right)) (g a)) ∘
-    ( fib-square g hC (pair hA (pair g' back-right)) a))
+      ( map-fib-cone h hD (pair hB (pair h' front-left)) (f a))) ∘
+    ( map-fib-cone f hB (pair hA (pair f' back-left)) a)) ~
+  ( ( map-fib-cone k hD (pair hC (pair k' front-right)) (g a)) ∘
+    ( map-fib-cone g hC (pair hA (pair g' back-right)) a))
 square-fib-cube f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom c
   .(hA a') (pair a' refl) =

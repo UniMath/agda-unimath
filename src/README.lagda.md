@@ -274,6 +274,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.functoriality-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
@@ -312,6 +313,7 @@ open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.monomorphisms
+open import foundation.morphisms-cospans
 open import foundation.multisets
 open import foundation.multisubsets
 open import foundation.negation
@@ -437,12 +439,14 @@ open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.functoriality-function-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-systems
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
+open import foundation-core.morphisms-cospans
 open import foundation-core.negation
 open import foundation-core.path-split-maps
 open import foundation-core.propositional-maps
@@ -740,7 +744,6 @@ open import structured-types.wild-semigroups
 
 ```agda
 open import synthetic-homotopy-theory
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.25-cubical-diagrams
 open import synthetic-homotopy-theory.26-descent

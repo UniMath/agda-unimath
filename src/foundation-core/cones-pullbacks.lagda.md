@@ -12,6 +12,7 @@ open import foundation-core.commuting-squares
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
@@ -120,4 +121,51 @@ module _
   eq-htpy-cone :
     (c c' : cone f g C) → htpy-cone c c' → c ＝ c'
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
+```
+
+### Horizontal composition of cones
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (i : X → Y) (j : Y → Z) (h : C → Z)
+  where
+  
+  cone-comp-horizontal :
+    (c : cone j h B) → (cone i (pr1 c) A) → cone (j ∘ i) h A
+  pr1 (cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H))) = f
+  pr1
+    ( pr2
+      ( cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H)))) = q ∘ p
+  pr2
+    ( pr2
+      ( cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H)))) =
+    coherence-square-comp-horizontal p q f g h i j H K
+```
+
+### Vertical composition of cones
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (f : C → Z) (g : Y → Z) (h : X → Y)
+  where
+  
+  cone-comp-vertical :
+    (c : cone f g B) → cone (pr1 (pr2 c)) h A → cone f (g ∘ h) A
+  pr1 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H'))) = p ∘ p'
+  pr1 (pr2 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H')))) = q'
+  pr2 (pr2 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H')))) =
+    coherence-square-comp-vertical q' p' h q p g f H' H
+```
+
+### The swapping function on cones
+
+```agda
+swap-cone :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) → cone f g C → cone g f C
+swap-cone f g (pair p (pair q H)) = triple q p (inv-htpy H)
 ```

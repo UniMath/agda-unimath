@@ -7,14 +7,16 @@ title: Functoriality of cartesian product types
 
 module foundation.functoriality-cartesian-product-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_; inv-htpy; _∙h_)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
+open import foundation-core.equality-cartesian-product-types using (eq-pair)
+open import foundation-core.equivalences using
+  ( is-equiv; _≃_; is-equiv-has-inverse)
+open import foundation-core.fibers-of-maps using (fib)
+open import foundation-core.functions using (id; _∘_)
+open import foundation-core.homotopies using (_~_; inv-htpy; _∙h_)
+open import foundation-core.identity-types using (refl)
+open import foundation-core.universe-levels using (Level; UU)
 ```
 
 ## Idea
@@ -29,8 +31,8 @@ module _
   where
 
   map-prod : (f : A → C) (g : B → D) → (A × B) → (C × D)
-  pr1 (map-prod f g (pair a b)) = f a
-  pr2 (map-prod f g (pair a b)) = g b
+  pr1 (map-prod f g t) = f (pr1 t)
+  pr2 (map-prod f g t) = g (pr2 t)
 
   map-prod-pr1 :
     (f : A → C) (g : B → D) → (pr1 ∘ (map-prod f g)) ~ (f ∘ pr1)
@@ -59,7 +61,7 @@ map-prod-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {E : UU l5} {F : UU l6} (f : A → C) (g : B → D) (h : C → E) (k : D → F) →
   map-prod (h ∘ f) (k ∘ g) ~ ((map-prod h k) ∘ (map-prod f g))
-map-prod-comp f g h k (pair a b) = refl
+map-prod-comp f g h k t = refl
 ```
 
 ### Functoriality of products preserves homotopies
@@ -113,4 +115,74 @@ module _
   pr1 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) = map-prod f g
   pr2 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) =
     is-equiv-map-prod f g is-equiv-f is-equiv-g
+```
+
+### The fibers of `map-prod f g`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → C) (g : B → D)
+  where
+  
+  map-compute-fib-map-prod :
+    (t : C × D) → fib (map-prod f g) t → (fib f (pr1 t)) × (fib g (pr2 t))
+  pr1
+    ( pr1
+      ( map-compute-fib-map-prod .(map-prod f g (pair a b))
+        ( pair (pair a b) refl))) = a
+  pr2
+    ( pr1
+      ( map-compute-fib-map-prod .(map-prod f g (pair a b))
+        ( pair (pair a b) refl))) = refl
+  pr1
+    ( pr2
+      ( map-compute-fib-map-prod .(map-prod f g (pair a b))
+        ( pair (pair a b) refl))) = b
+  pr2
+    ( pr2
+      ( map-compute-fib-map-prod .(map-prod f g (pair a b))
+        ( pair (pair a b) refl))) = refl
+
+  map-inv-compute-fib-map-prod :
+    (t : C × D) → (fib f (pr1 t)) × (fib g (pr2 t)) → fib (map-prod f g) t
+  pr1
+    ( pr1
+      ( map-inv-compute-fib-map-prod (pair .(f x) .(g y))
+        ( pair (pair x refl) (pair y refl)))) = x
+  pr2
+    ( pr1
+      ( map-inv-compute-fib-map-prod (pair .(f x) .(g y))
+        ( pair (pair x refl) (pair y refl)))) = y
+  pr2
+    ( map-inv-compute-fib-map-prod (pair .(f x) .(g y))
+      ( pair (pair x refl) (pair y refl))) = refl
+  
+  abstract
+    issec-map-inv-compute-fib-map-prod :
+      (t : C × D) →
+      ((map-compute-fib-map-prod t) ∘ (map-inv-compute-fib-map-prod t)) ~ id
+    issec-map-inv-compute-fib-map-prod (pair .(f x) .(g y))
+      (pair (pair x refl) (pair y refl)) = refl
+
+  abstract
+    isretr-map-inv-compute-fib-map-prod :
+      (t : C × D) →
+      ((map-inv-compute-fib-map-prod t) ∘ (map-compute-fib-map-prod t)) ~ id
+    isretr-map-inv-compute-fib-map-prod .(map-prod f g (pair a b))
+      (pair (pair a b) refl) = refl
+
+  abstract
+    is-equiv-map-compute-fib-map-prod :
+      (t : C × D) → is-equiv (map-compute-fib-map-prod t)
+    is-equiv-map-compute-fib-map-prod t =
+      is-equiv-has-inverse
+        ( map-inv-compute-fib-map-prod t)
+        ( issec-map-inv-compute-fib-map-prod t)
+        ( isretr-map-inv-compute-fib-map-prod t)
+
+  compute-fib-map-prod :
+    (t : C × D) → fib (map-prod f g) t ≃ ((fib f (pr1 t)) × (fib g (pr2 t)))
+  pr1 (compute-fib-map-prod t) = map-compute-fib-map-prod t
+  pr2 (compute-fib-map-prod t) = is-equiv-map-compute-fib-map-prod t
 ```

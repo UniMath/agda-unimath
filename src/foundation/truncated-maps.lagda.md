@@ -13,6 +13,7 @@ open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types using
   ( Σ; pair; pr1; pr2; triple)
 open import foundation-core.fibers-of-maps using (fib)
+open import foundation-core.functoriality-fibers-of-maps using (map-fib-cone)
 open import foundation-core.pullbacks
 open import foundation-core.truncated-types using
   ( is-prop-is-trunc; is-trunc-is-equiv)
@@ -53,8 +54,8 @@ module _
     is-trunc-is-pullback pb is-trunc-g a =
       is-trunc-is-equiv k
         ( fib g (f a))
-        ( fib-square f g c a)
-        ( is-fiberwise-equiv-fib-square-is-pullback f g c pb a)
+        ( map-fib-cone f g c a)
+        ( is-fiberwise-equiv-map-fib-cone-is-pullback f g c pb a)
         (is-trunc-g (f a))
 
 abstract
@@ -65,7 +66,7 @@ abstract
     is-pullback f g c → is-trunc-map k f → is-trunc-map k (pr1 (pr2 c))
   is-trunc-is-pullback' k f g (pair p (pair q H)) pb is-trunc-f =
     is-trunc-is-pullback k g f
-      ( cone-swap f g (triple p q H))
-      ( is-pullback-cone-swap f g (triple p q H) pb)
+      ( swap-cone f g (triple p q H))
+      ( is-pullback-swap-cone f g (triple p q H) pb)
       is-trunc-f
 ```

@@ -193,49 +193,49 @@ module _
 ### Fibers of compositions
 
 ```agda
-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) → fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
-pr1 (pr1 (map-fib-comp g h x (pair a p))) = h a
-pr2 (pr1 (map-fib-comp g h x (pair a p))) = p
-pr1 (pr2 (map-fib-comp g h x (pair a p))) = a
-pr2 (pr2 (map-fib-comp g h x (pair a p))) = refl
+pr1 (pr1 (map-compute-fib-comp g h x (pair a p))) = h a
+pr2 (pr1 (map-compute-fib-comp g h x (pair a p))) = p
+pr1 (pr2 (map-compute-fib-comp g h x (pair a p))) = a
+pr2 (pr2 (map-compute-fib-comp g h x (pair a p))) = refl
 
-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) → Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
-pr1 (inv-map-fib-comp g h c t) = pr1 (pr2 t)
-pr2 (inv-map-fib-comp g h c t) = (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
+pr1 (inv-map-compute-fib-comp g h c t) = pr1 (pr2 t)
+pr2 (inv-map-compute-fib-comp g h c t) = (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
 
-issec-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+issec-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) →
-  ((map-fib-comp g h x) ∘ (inv-map-fib-comp g h x)) ~ id
-issec-inv-map-fib-comp g h x
+  ((map-compute-fib-comp g h x) ∘ (inv-map-compute-fib-comp g h x)) ~ id
+issec-inv-map-compute-fib-comp g h x
   (pair (pair .(h a) refl) (pair a refl)) = refl
 
-isretr-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+isretr-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-  ((inv-map-fib-comp g h x) ∘ (map-fib-comp g h x)) ~ id
-isretr-inv-map-fib-comp g h .(g (h a)) (pair a refl) = refl
+  ((inv-map-compute-fib-comp g h x) ∘ (map-compute-fib-comp g h x)) ~ id
+isretr-inv-map-compute-fib-comp g h .(g (h a)) (pair a refl) = refl
 
 abstract
-  is-equiv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  is-equiv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
     {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-    is-equiv (map-fib-comp g h x)
-  is-equiv-map-fib-comp g h x =
+    is-equiv (map-compute-fib-comp g h x)
+  is-equiv-map-compute-fib-comp g h x =
     is-equiv-has-inverse
-      ( inv-map-fib-comp g h x)
-      ( issec-inv-map-fib-comp g h x)
-      ( isretr-inv-map-fib-comp g h x)
+      ( inv-map-compute-fib-comp g h x)
+      ( issec-inv-map-compute-fib-comp g h x)
+      ( isretr-inv-map-compute-fib-comp g h x)
 
 abstract
-  is-equiv-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  is-equiv-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
     {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-    is-equiv (inv-map-fib-comp g h x)
-  is-equiv-inv-map-fib-comp g h x =
+    is-equiv (inv-map-compute-fib-comp g h x)
+  is-equiv-inv-map-compute-fib-comp g h x =
     is-equiv-has-inverse
-      ( map-fib-comp g h x)
-      ( isretr-inv-map-fib-comp g h x)
-      ( issec-inv-map-fib-comp g h x)
+      ( map-compute-fib-comp g h x)
+      ( isretr-inv-map-compute-fib-comp g h x)
+      ( issec-inv-map-compute-fib-comp g h x)
 ```

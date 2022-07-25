@@ -12,7 +12,7 @@ open import foundation-core.equivalences public
 open import foundation-core.coherently-invertible-maps using
   ( is-coherently-invertible)
 open import foundation-core.commuting-squares using (coherence-square)
-open import foundation-core.cones-pullbacks
+open import foundation-core.cones-pullbacks using (cone; swap-cone)
 open import foundation-core.contractible-maps using
   ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
 open import foundation-core.contractible-types using
@@ -25,6 +25,7 @@ open import foundation-core.functions using (_∘_; id; precomp-Π; precomp)
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; equiv-tot; is-equiv-tot-is-fiberwise-equiv)
+open import foundation-core.functoriality-fibers-of-maps using (map-fib-cone)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation-core.homotopies using (_~_; refl-htpy)
@@ -33,8 +34,8 @@ open import foundation-core.path-split-maps using
 open import foundation-core.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation-core.pullbacks using
-  ( is-pullback; is-pullback-is-fiberwise-equiv-fib-square; fib-square;
-    is-pullback-cone-swap'; cone-swap)
+  ( is-pullback; is-pullback-is-fiberwise-equiv-map-fib-cone;
+    is-pullback-swap-cone')
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
 open import foundation-core.sets using (UU-Set; type-Set; is-set)
@@ -518,9 +519,9 @@ module _
   abstract
     is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
     is-pullback-is-equiv is-equiv-g is-equiv-p =
-      is-pullback-is-fiberwise-equiv-fib-square f g c
+      is-pullback-is-fiberwise-equiv-map-fib-cone f g c
         ( λ a → is-equiv-is-contr
-          ( fib-square f g c a)
+          ( map-fib-cone f g c a)
           ( is-contr-map-is-equiv is-equiv-p a)
           ( is-contr-map-is-equiv is-equiv-g (f a)))
 ```
@@ -542,9 +543,9 @@ abstract
     (f : A → X) (g : B → X) (c : cone f g C) →
     is-equiv f → is-equiv (pr1 (pr2 c)) → is-pullback f g c
   is-pullback-is-equiv' f g (pair p (pair q H)) is-equiv-f is-equiv-q =
-    is-pullback-cone-swap' f g (triple p q H)
+    is-pullback-swap-cone' f g (triple p q H)
       ( is-pullback-is-equiv g f
-        ( cone-swap f g (triple p q H))
+        ( swap-cone f g (triple p q H))
         is-equiv-f
         is-equiv-q)
 ```

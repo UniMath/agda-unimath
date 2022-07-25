@@ -89,6 +89,7 @@ open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
+open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
@@ -125,6 +126,7 @@ open import foundation.maybe public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-cospans public
 open import foundation.multisets public
 open import foundation.negation public
 open import foundation.non-contractible-types public

@@ -12,7 +12,7 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation-core.equivalences using (is-equiv-id)
 open import foundation-core.fibers-of-maps using
-  ( fib; equiv-fib-pr1; inv-equiv-fib-pr1; map-fib-comp; is-equiv-map-fib-comp)
+  ( fib; equiv-fib-pr1; inv-equiv-fib-pr1; map-compute-fib-comp; is-equiv-map-compute-fib-comp)
 open import foundation-core.functions using (id; _∘_)
 open import foundation-core.functoriality-dependent-pair-types using
   ( tot; compute-fib-tot; inv-compute-fib-tot; fib-triangle;
@@ -197,8 +197,8 @@ abstract
     is-trunc-map-htpy k H
       ( λ x → is-trunc-is-equiv k
         ( Σ (fib g x) (λ t → fib h (pr1 t)))
-        ( map-fib-comp g h x)
-        ( is-equiv-map-fib-comp g h x)
+        ( map-compute-fib-comp g h x)
+        ( is-equiv-map-compute-fib-comp g h x)
         ( is-trunc-Σ
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t))))
@@ -229,8 +229,8 @@ abstract
       ( is-trunc-g (g b))
       ( is-trunc-is-equiv' k
         ( Σ A (λ z → g (h z) ＝ g b))
-        ( map-fib-comp g h (g b))
-        ( is-equiv-map-fib-comp g h (g b))
+        ( map-compute-fib-comp g h (g b))
+        ( is-equiv-map-compute-fib-comp g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
       ( pair b refl)
 

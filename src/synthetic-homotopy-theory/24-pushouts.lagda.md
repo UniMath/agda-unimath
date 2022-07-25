@@ -32,8 +32,6 @@ open import foundation.universal-property-pullbacks
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.23-pullbacks
-
 -- Section 14.1
 
 {- We define the type of cocones with vertex X on a span. Since we will use it
