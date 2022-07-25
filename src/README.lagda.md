@@ -312,6 +312,7 @@ open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.monomorphisms
+open import foundation.morphisms-cospans
 open import foundation.multisets
 open import foundation.multisubsets
 open import foundation.negation
@@ -443,6 +444,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-systems
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
+open import foundation-core.morphisms-cospans
 open import foundation-core.negation
 open import foundation-core.path-split-maps
 open import foundation-core.propositional-maps
@@ -740,7 +742,6 @@ open import structured-types.wild-semigroups
 
 ```agda
 open import synthetic-homotopy-theory
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.25-cubical-diagrams
 open import synthetic-homotopy-theory.26-descent

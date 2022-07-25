@@ -31,7 +31,6 @@ open import foundation.univalence
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.25-cubical-diagrams
 

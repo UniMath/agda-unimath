@@ -23,7 +23,6 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 
 -- Section 15.1 Commuting cubes

@@ -15,12 +15,13 @@ open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
 open import foundation.diagonal-maps-of-types using (diagonal)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
+open import foundation.function-extensionality using
+  ( htpy-eq; issec-eq-htpy; isretr-eq-htpy)
+open import foundation.functions using (_∘_; id; map-Π)
 open import foundation.functoriality-dependent-function-types using
-  ( map-inv-is-equiv-precomp-Π-is-equiv;
+  ( map-inv-is-equiv-precomp-Π-is-equiv; htpy-map-Π;
     isretr-map-inv-is-equiv-precomp-Π-is-equiv;
-    issec-map-inv-is-equiv-precomp-Π-is-equiv)
+    issec-map-inv-is-equiv-precomp-Π-is-equiv; is-equiv-map-Π)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using
@@ -513,4 +514,113 @@ eq-htpy-square Hf Hg c c' =
   map-inv-is-equiv
     { f = htpy-square-eq Hf Hg c c'}
     ( is-fiberwise-equiv-htpy-square-eq Hf Hg c c')
+```
+
+### Dependent products of pullbacks are pullbacks
+
+```agda
+cone-Π :
+  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
+  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4} {C : I → UU l5}
+  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
+  (c : (i : I) → cone (f i) (g i) (C i)) →
+  cone (map-Π f) (map-Π g) ((i : I) → C i)
+cone-Π f g c =
+  triple
+    ( map-Π (λ i → pr1 (c i)))
+    ( map-Π (λ i → pr1 (pr2 (c i))))
+    ( htpy-map-Π (λ i → pr2 (pr2 (c i))))
+
+map-canonical-pullback-Π :
+  {l1 l2 l3 l4 : Level} {I : UU l1}
+  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
+  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
+  canonical-pullback (map-Π f) (map-Π g) →
+  (i : I) → canonical-pullback (f i) (g i)
+map-canonical-pullback-Π f g (pair α (pair β γ)) i =
+  triple (α i) (β i) (htpy-eq γ i)
+
+inv-map-canonical-pullback-Π :
+  {l1 l2 l3 l4 : Level} {I : UU l1}
+  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
+  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
+  ((i : I) → canonical-pullback (f i) (g i)) →
+  canonical-pullback (map-Π f) (map-Π g)
+inv-map-canonical-pullback-Π f g h =
+  triple
+    ( λ i → (pr1 (h i)))
+    ( λ i → (pr1 (pr2 (h i))))
+    ( eq-htpy (λ i → (pr2 (pr2 (h i)))))
+
+abstract
+  issec-inv-map-canonical-pullback-Π :
+    {l1 l2 l3 l4 : Level} {I : UU l1}
+    {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
+    (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
+    ((map-canonical-pullback-Π f g) ∘ (inv-map-canonical-pullback-Π f g)) ~ id
+  issec-inv-map-canonical-pullback-Π f g h =
+    eq-htpy
+      ( λ i → map-extensionality-canonical-pullback (f i) (g i) refl refl
+        ( inv
+          ( ( right-unit) ∙
+            ( htpy-eq (issec-eq-htpy (λ i → (pr2 (pr2 (h i))))) i))))
+
+abstract
+  isretr-inv-map-canonical-pullback-Π :
+    {l1 l2 l3 l4 : Level} {I : UU l1}
+    {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
+    (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
+    ((inv-map-canonical-pullback-Π f g) ∘ (map-canonical-pullback-Π f g)) ~ id
+  isretr-inv-map-canonical-pullback-Π f g (pair α (pair β γ)) =
+    map-extensionality-canonical-pullback
+      ( map-Π f)
+      ( map-Π g)
+      refl
+      refl
+      ( inv (right-unit ∙ (isretr-eq-htpy γ)))
+
+abstract
+  is-equiv-map-canonical-pullback-Π :
+    {l1 l2 l3 l4 : Level} {I : UU l1}
+    {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
+    (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
+    is-equiv (map-canonical-pullback-Π f g)
+  is-equiv-map-canonical-pullback-Π f g =
+    is-equiv-has-inverse
+      ( inv-map-canonical-pullback-Π f g)
+      ( issec-inv-map-canonical-pullback-Π f g)
+      ( isretr-inv-map-canonical-pullback-Π f g)
+
+triangle-map-canonical-pullback-Π :
+  {l1 l2 l3 l4 l5 : Level} {I : UU l1}
+  {A : I → UU l2} {B : I → UU l3} {X : I → UU l4} {C : I → UU l5}
+  (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
+  (c : (i : I) → cone (f i) (g i) (C i)) →
+  ( map-Π (λ i → gap (f i) (g i) (c i))) ~
+  ( ( map-canonical-pullback-Π f g) ∘
+    ( gap (map-Π f) (map-Π g) (cone-Π f g c)))
+triangle-map-canonical-pullback-Π f g c h =
+  eq-htpy (λ i →
+    map-extensionality-canonical-pullback
+      (f i)
+      (g i)
+      refl refl
+      ( (htpy-eq (issec-eq-htpy _) i) ∙ (inv right-unit)))
+
+abstract
+  is-pullback-cone-Π :
+    {l1 l2 l3 l4 l5 : Level} {I : UU l1}
+    {A : I → UU l2} {B : I → UU l3} {X : I → UU l4} {C : I → UU l5}
+    (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
+    (c : (i : I) → cone (f i) (g i) (C i)) →
+    ((i : I) → is-pullback (f i) (g i) (c i)) →
+    is-pullback (map-Π f) (map-Π g) (cone-Π f g c)
+  is-pullback-cone-Π f g c is-pb-c =
+    is-equiv-right-factor
+      ( map-Π (λ i → gap (f i) (g i) (c i)))
+      ( map-canonical-pullback-Π f g)
+      ( gap (map-Π f) (map-Π g) (cone-Π f g c))
+      ( triangle-map-canonical-pullback-Π f g c)
+      ( is-equiv-map-canonical-pullback-Π f g)
+      ( is-equiv-map-Π _ is-pb-c)
 ```

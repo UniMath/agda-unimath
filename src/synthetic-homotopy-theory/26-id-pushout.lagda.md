@@ -24,7 +24,6 @@ open import foundation.structure-identity-principle
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.25-cubical-diagrams
 open import synthetic-homotopy-theory.26-descent
