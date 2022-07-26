@@ -211,6 +211,7 @@ open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
 open import foundation.coherently-invertible-maps
 open import foundation.commutative-operations
+open import foundation.commuting-cubes
 open import foundation.commuting-squares
 open import foundation.complements
 open import foundation.cones-pullbacks
@@ -224,6 +225,7 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.coslice
+open import foundation.cospans
 open import foundation.decidable-dependent-function-types
 open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
@@ -282,6 +284,7 @@ open import foundation.functoriality-set-truncation
 open import foundation.functoriality-w-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.global-choice
+open import foundation.hexagons-of-identifications
 open import foundation.hilberts-epsilon-operators
 open import foundation.homotopies
 open import foundation.identity-systems
@@ -425,6 +428,7 @@ open import foundation-core.cones-pullbacks
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types

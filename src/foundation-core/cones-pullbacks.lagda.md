@@ -23,19 +23,23 @@ open import foundation.homotopies
 open import foundation.structure-identity-principle
 ```
 
-## Definitions
+## Idea
 
-### Cospans
+A cone on a cospan `A --f--> X <--g-- B` with vertex `C` is a triple `(p,q,H)` consisting of a map `p : C → A`, a map `q : C → B`, and a homotopy `H` witnessing that the square
 
-A cospan is a pair of functions with a common codomain
-
-```agda
-cospan :
-  {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2) →
-  UU (l1 ⊔ (l2 ⊔ (lsuc l)))
-cospan l A B =
-  Σ (UU l) (λ X → (A → X) × (B → X))
+```md
+      q
+  C -----> B
+  |        |
+ p|        |g
+  V        V
+  A -----> X
+      f
 ```
+
+commutes.
+
+## Definitions
 
 ### Cones on cospans
 
@@ -50,13 +54,36 @@ module _
   cone : {l4 : Level} → UU l4 → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
   cone C = Σ (C → A) (λ p → Σ (C → B) (λ q → coherence-square q p g f))
 
-  {- A map into the vertex of a cone induces a new cone. -}
-  
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  vertical-map-cone : C → A
+  vertical-map-cone = pr1 c
+
+  horizontal-map-cone : C → B
+  horizontal-map-cone = pr1 (pr2 c)
+
+  coherence-square-cone :
+    coherence-square horizontal-map-cone vertical-map-cone g f
+  coherence-square-cone = pr2 (pr2 c)
+```
+
+### Precomposing cones
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
   cone-map :
-    {l4 l5 : Level} {C : UU l4} {C' : UU l5} → cone C → (C' → C) → cone C'
-  pr1 (cone-map c h) = (pr1 c) ∘ h
-  pr1 (pr2 (cone-map c h)) = pr1 (pr2 c) ∘ h
-  pr2 (pr2 (cone-map c h)) = pr2 (pr2 c) ·r h
+    {l4 l5 : Level} {C : UU l4} {C' : UU l5} →
+    cone f g C → (C' → C) → cone f g C'
+  pr1 (cone-map c h) = vertical-map-cone f g c ∘ h
+  pr1 (pr2 (cone-map c h)) = horizontal-map-cone f g c ∘ h
+  pr2 (pr2 (cone-map c h)) = coherence-square-cone f g c ·r h
 ```
 
 ### Identifications of cones
@@ -70,16 +97,16 @@ module _
   where
   
   coherence-htpy-cone :
-    (c c' : cone f g C) (K : (pr1 c) ~ (pr1 c'))
-    (L : (pr1 (pr2 c)) ~ (pr1 (pr2 c'))) → UU (l4 ⊔ l3)
+    (c c' : cone f g C) (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
+    (L : horizontal-map-cone f g c ~ horizontal-map-cone f g c') → UU (l4 ⊔ l3)
   coherence-htpy-cone c c' K L =
-    ( (pr2 (pr2 c)) ∙h (htpy-left-whisk g L)) ~
-    ( (htpy-left-whisk f K) ∙h (pr2 (pr2 c')))
+    ( coherence-square-cone f g c ∙h (htpy-left-whisk g L)) ~
+    ( (htpy-left-whisk f K) ∙h coherence-square-cone f g c')
 
   htpy-cone : cone f g C → cone f g C → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
   htpy-cone c c' =
-    Σ ( (pr1 c) ~ (pr1 c'))
-      ( λ K → Σ ((pr1 (pr2 c)) ~ (pr1 (pr2 c')))
+    Σ ( vertical-map-cone f g c ~ vertical-map-cone f g c')
+      ( λ K → Σ (horizontal-map-cone f g c ~ horizontal-map-cone f g c')
         ( λ L → coherence-htpy-cone c c' K L))
 
   refl-htpy-cone : (c : cone f g C) → htpy-cone c c
@@ -91,19 +118,19 @@ module _
   htpy-eq-cone c .c refl = refl-htpy-cone c
 
   extensionality-cone : (c d : cone f g C) → (c ＝ d) ≃ htpy-cone c d
-  extensionality-cone (pair p (pair q H)) =
+  extensionality-cone c =
     extensionality-Σ
       ( λ {p'} qH' K →
-        Σ ( q ~ pr1 qH')
-            ( coherence-htpy-cone (pair p (pair q H)) (pair p' qH') K))
+        Σ ( horizontal-map-cone f g c ~ pr1 qH')
+            ( coherence-htpy-cone c (pair p' qH') K))
       ( refl-htpy)
       ( pair refl-htpy right-unit-htpy)
       ( λ p' → equiv-funext)
       ( extensionality-Σ
         ( λ {q'} H' →
           coherence-htpy-cone
-            ( pair p (pair q H))
-            ( pair p (pair q' H'))
+            ( c)
+            ( pair (vertical-map-cone f g c) (pair q' H'))
             ( refl-htpy))
         ( refl-htpy)
         ( right-unit-htpy)
@@ -133,15 +160,20 @@ module _
   where
   
   cone-comp-horizontal :
-    (c : cone j h B) → (cone i (pr1 c) A) → cone (j ∘ i) h A
-  pr1 (cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H))) = f
-  pr1
-    ( pr2
-      ( cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H)))) = q ∘ p
-  pr2
-    ( pr2
-      ( cone-comp-horizontal (pair g (pair q K)) (pair f (pair p H)))) =
-    coherence-square-comp-horizontal p q f g h i j H K
+    (c : cone j h B) → cone i (vertical-map-cone j h c) A → cone (j ∘ i) h A
+  pr1 (cone-comp-horizontal c (pair f (pair p H))) = f
+  pr1 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
+    (horizontal-map-cone j h c) ∘ p
+  pr2 (pr2 (cone-comp-horizontal c (pair f (pair p H)))) =
+    coherence-square-comp-horizontal p
+      ( horizontal-map-cone j h c)
+      ( f)
+      ( vertical-map-cone j h c)
+      ( h)
+      ( i)
+      ( j)
+      ( H)
+      ( coherence-square-cone j h c)
 ```
 
 ### Vertical composition of cones
@@ -154,11 +186,18 @@ module _
   where
   
   cone-comp-vertical :
-    (c : cone f g B) → cone (pr1 (pr2 c)) h A → cone f (g ∘ h) A
-  pr1 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H'))) = p ∘ p'
-  pr1 (pr2 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H')))) = q'
-  pr2 (pr2 (cone-comp-vertical (pair p (pair q H)) (pair p' (pair q' H')))) =
-    coherence-square-comp-vertical q' p' h q p g f H' H
+    (c : cone f g B) → cone (horizontal-map-cone f g c) h A → cone f (g ∘ h) A
+  pr1 (cone-comp-vertical c (pair p' (pair q' H'))) =
+    ( vertical-map-cone f g c) ∘ p'
+  pr1 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) = q'
+  pr2 (pr2 (cone-comp-vertical c (pair p' (pair q' H')))) =
+    coherence-square-comp-vertical q' p' h
+      ( horizontal-map-cone f g c)
+      ( vertical-map-cone f g c)
+      ( g)
+      ( f)
+      ( H')
+      ( coherence-square-cone f g c)
 ```
 
 ### The swapping function on cones
@@ -167,5 +206,40 @@ module _
 swap-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) → cone f g C → cone g f C
-swap-cone f g (pair p (pair q H)) = triple q p (inv-htpy H)
+pr1 (swap-cone f g c) = horizontal-map-cone f g c
+pr1 (pr2 (swap-cone f g c)) = vertical-map-cone f g c
+pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
+```
+
+### Parallel cones
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
+  where
+
+  coherence-htpy-parallel-cone :
+    {l4 : Level} {C : UU l4} (c : cone f g C) (c' : cone f' g' C)
+    (Hp : vertical-map-cone f g c ~ vertical-map-cone f' g' c')
+    (Hq : horizontal-map-cone f g c ~ horizontal-map-cone f' g' c') → UU _
+  coherence-htpy-parallel-cone c c' Hp Hq =
+    ( ( coherence-square-cone f g c) ∙h
+      ( (g ·l Hq) ∙h (Hg ·r horizontal-map-cone f' g' c'))) ~
+    ( ( (f ·l Hp) ∙h (Hf ·r (vertical-map-cone f' g' c'))) ∙h
+      ( coherence-square-cone f' g' c'))
+
+  fam-htpy-parallel-cone :
+    {l4 : Level} {C : UU l4}  (c : cone f g C) → (c' : cone f' g' C) →
+    (vertical-map-cone f g c ~ vertical-map-cone f' g' c') → UU _
+  fam-htpy-parallel-cone c c' Hp =
+    Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f' g' c')
+      ( coherence-htpy-parallel-cone c c' Hp)
+  
+  htpy-parallel-cone :
+    {l4 : Level} {C : UU l4} →
+    cone f g C → cone f' g' C → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  htpy-parallel-cone c c' =
+    Σ ( vertical-map-cone f g c ~ vertical-map-cone f' g' c')
+      ( fam-htpy-parallel-cone c c')
 ```
