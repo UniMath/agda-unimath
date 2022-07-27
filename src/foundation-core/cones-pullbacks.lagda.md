@@ -140,8 +140,7 @@ module _
   is-contr-total-htpy-cone :
     (c : cone f g C) → is-contr (Σ (cone f g C) (htpy-cone c))
   is-contr-total-htpy-cone c =
-     fundamental-theorem-id' c
-       ( refl-htpy-cone c)
+     fundamental-theorem-id' 
        ( λ c' → map-equiv (extensionality-cone c c'))
        ( λ c' → is-equiv-map-equiv (extensionality-cone c c'))
 

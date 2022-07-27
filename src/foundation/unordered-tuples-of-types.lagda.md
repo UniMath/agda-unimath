@@ -103,8 +103,7 @@ module _
     (B : unordered-tuple-types l n) →
     is-equiv (equiv-eq-unordered-tuple-types B)
   is-equiv-equiv-eq-unordered-tuple-types =
-    fundamental-theorem-id A
-      id-equiv-unordered-tuple-types
+    fundamental-theorem-id
       is-contr-total-equiv-unordered-tuple-types
       equiv-eq-unordered-tuple-types
 

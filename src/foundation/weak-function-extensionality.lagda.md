@@ -77,8 +77,7 @@ abstract
     ((A : UU l1) (B : A → UU l2) → WEAK-FUNEXT A B) →
     ((A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → FUNEXT f)
   FUNEXT-WEAK-FUNEXT weak-funext A B f =
-    fundamental-theorem-id f
-      ( refl-htpy)
+    fundamental-theorem-id
       ( is-contr-retract-of
         ( (x : A) → Σ (B x) (λ b → f x ＝ b))
         ( pair

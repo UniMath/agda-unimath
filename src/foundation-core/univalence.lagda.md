@@ -43,7 +43,7 @@ abstract
   is-contr-total-equiv-UNIVALENCE : {i : Level} (A : UU i) →
     ((B : UU i) → UNIVALENCE A B) → is-contr (Σ (UU i) (λ X → A ≃ X))
   is-contr-total-equiv-UNIVALENCE A UA =
-    fundamental-theorem-id' A id-equiv (λ B → equiv-eq) UA
+    fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
 
 ### Contractibility of the total space of equivalences implies univalence
@@ -53,7 +53,7 @@ abstract
   UNIVALENCE-is-contr-total-equiv : {i : Level} (A : UU i) →
     is-contr (Σ (UU i) (λ X → A ≃ X)) → (B : UU i) → UNIVALENCE A B
   UNIVALENCE-is-contr-total-equiv A c =
-    fundamental-theorem-id A id-equiv c (λ B → equiv-eq)
+    fundamental-theorem-id c (λ B → equiv-eq)
 ```
 
 ### Computing transport

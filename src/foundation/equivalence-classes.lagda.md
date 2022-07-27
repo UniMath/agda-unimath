@@ -168,8 +168,6 @@ module _
       (q : equivalence-class R) → is-equiv (related-eq-quotient q)
     is-equiv-related-eq-quotient =
       fundamental-theorem-id
-        ( class R a)
-        ( refl-Eq-Rel R)
         ( is-contr-total-subtype-equivalence-class)
         ( related-eq-quotient)
 

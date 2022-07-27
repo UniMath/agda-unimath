@@ -88,8 +88,7 @@ module _
 
   is-equiv-Eq-eq-coprod : (x y : A + B) → is-equiv (Eq-eq-coprod x y)
   is-equiv-Eq-eq-coprod x =
-    fundamental-theorem-id x
-      ( refl-Eq-coprod x)
+    fundamental-theorem-id 
       ( is-contr-total-Eq-coprod x)
       ( Eq-eq-coprod x)
 
@@ -230,7 +229,7 @@ module _
   abstract
     is-emb-inl : is-emb (inl {A = A} {B = B})
     is-emb-inl x =
-      fundamental-theorem-id x refl
+      fundamental-theorem-id
         ( is-contr-equiv
           ( Σ A (Id x))
           ( equiv-tot (compute-eq-coprod-inl-inl x))
@@ -244,7 +243,7 @@ module _
   abstract
     is-emb-inr : is-emb (inr {A = A} {B = B})
     is-emb-inr x =
-      fundamental-theorem-id x refl
+      fundamental-theorem-id
         ( is-contr-equiv
           ( Σ B (Id x))
           ( equiv-tot (compute-eq-coprod-inr-inr x))

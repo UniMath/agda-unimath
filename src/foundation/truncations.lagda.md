@@ -449,8 +449,6 @@ module _
     (x : type-trunc (succ-𝕋 k) A) → is-equiv (Eq-eq-trunc x)
   is-equiv-Eq-eq-trunc =
     fundamental-theorem-id
-      ( unit-trunc a)
-      ( refl-Eq-trunc)
       ( is-contr-total-Eq-trunc)
       ( Eq-eq-trunc)
 

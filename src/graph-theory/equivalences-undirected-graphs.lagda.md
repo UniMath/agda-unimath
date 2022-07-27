@@ -189,8 +189,7 @@ module _
     (f g : equiv-Undirected-Graph G H) →
     is-equiv (htpy-eq-equiv-Undirected-Graph f g)
   is-equiv-htpy-eq-equiv-Undirected-Graph f =
-    fundamental-theorem-id f
-      ( refl-htpy-equiv-Undirected-Graph f)
+    fundamental-theorem-id
       ( is-contr-total-htpy-equiv-Undirected-Graph f)
       ( htpy-eq-equiv-Undirected-Graph f)
 
@@ -236,8 +235,7 @@ module _
   is-equiv-equiv-eq-Undirected-Graph :
     (H : Undirected-Graph l1 l2) → is-equiv (equiv-eq-Undirected-Graph H)
   is-equiv-equiv-eq-Undirected-Graph =
-    fundamental-theorem-id G
-      ( id-equiv-Undirected-Graph G)
+    fundamental-theorem-id
       ( is-contr-total-equiv-Undirected-Graph)
       ( equiv-eq-Undirected-Graph)
 

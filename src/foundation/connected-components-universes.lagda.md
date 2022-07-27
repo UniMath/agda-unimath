@@ -112,8 +112,7 @@ abstract
     {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
     is-equiv (equiv-eq-component-UU-Level {X = X} {Y})
   is-equiv-equiv-eq-component-UU-Level X =
-    fundamental-theorem-id X
-      ( id-equiv-component-UU-Level X)
+    fundamental-theorem-id
       ( is-contr-total-equiv-component-UU-Level X)
       ( λ Y → equiv-eq-component-UU-Level {X = X} {Y})
 

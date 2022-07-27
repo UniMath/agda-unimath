@@ -214,8 +214,7 @@ module _
   is-equiv-equiv-eq-Cyclic-Type :
     (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
   is-equiv-equiv-eq-Cyclic-Type =
-    fundamental-theorem-id X
-      ( id-equiv-Cyclic-Type k X)
+    fundamental-theorem-id
       ( is-contr-total-equiv-Cyclic-Type k X)
       ( equiv-eq-Cyclic-Type k X)
 
@@ -278,8 +277,7 @@ module _
   is-equiv-htpy-eq-equiv-Cyclic-Type :
     (e f : equiv-Cyclic-Type k X Y) → is-equiv (htpy-eq-equiv-Cyclic-Type e f)
   is-equiv-htpy-eq-equiv-Cyclic-Type e =
-    fundamental-theorem-id e
-      ( refl-htpy-equiv-Cyclic-Type e)
+    fundamental-theorem-id
       ( is-contr-total-htpy-equiv-Cyclic-Type e)
       ( htpy-eq-equiv-Cyclic-Type e)
 

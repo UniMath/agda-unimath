@@ -60,8 +60,7 @@ abstract
   is-equiv-equiv-eq-fam :
     {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
   is-equiv-equiv-eq-fam B =
-    fundamental-theorem-id B
-      ( id-equiv-fam B)
+    fundamental-theorem-id 
       ( is-contr-total-equiv-fam B)
       ( equiv-eq-fam B)
 

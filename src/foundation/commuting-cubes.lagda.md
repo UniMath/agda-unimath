@@ -9,12 +9,11 @@ open import foundation-core.cones-pullbacks
 open import foundation-core.commuting-squares
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
 open import foundation.hexagons-of-identifications
-open import foundation.pullbacks
+open import foundation.homotopies
 ```
 
 ## Idea
@@ -393,14 +392,18 @@ rectangle-back-left-bottom-cube
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =
   (h ·l (inv-htpy back-left)) ∙h (bottom ·r hA)
+```
 
-is-pullback-back-left-is-pullback-back-right-cube :
+### Any coherence of commuting cubes induces a coherence of parallel cones
+
+```agda
+coherence-htpy-parallel-cone-coherence-cube :
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  {f : A → B} {g : A → C} {h : B → D} {k : C → D}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
   {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  {f' : A' → B'} {g' : A' → C'} {h' : B' → D'} {k' : C' → D'}
-  {hA : A' → A} {hB : B' → B} {hC : C' → C} {hD : D' → D}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
   (top : (h' ∘ f') ~ (k' ∘ g'))
   (back-left : (f ∘ hA) ~ (hB ∘ f'))
   (back-right : (g ∘ hA) ~ (hC ∘ g'))
@@ -408,97 +411,48 @@ is-pullback-back-left-is-pullback-back-right-cube :
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
   (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
-    top back-left back-right front-left front-right bottom) →
-  is-pullback h hD (pair hB (pair h' front-left)) →
-  is-pullback k hD (pair hC (pair k' front-right)) →
-  is-pullback g hC (pair hA (pair g' back-right)) →
-  is-pullback f hB (pair hA (pair f' back-left))
-is-pullback-back-left-is-pullback-back-right-cube
-  {f = f} {g} {h} {k} {f' = f'} {g'} {h'} {k'} {hA = hA} {hB} {hC} {hD}
-  top back-left back-right front-left front-right bottom c
-  is-pb-front-left is-pb-front-right is-pb-back-right =
-  is-pullback-left-square-is-pullback-rectangle f h hD
-    ( pair hB (pair h' front-left))
-    ( pair hA (pair f' back-left))
-    ( is-pb-front-left)
-    ( is-pullback-htpy
-      { f = h ∘ f}
-      -- ( k ∘ g)
-      ( bottom)
-      { g = hD}
-      -- ( hD)
-      ( refl-htpy)
-      { c = pair hA (pair (h' ∘ f')
-        ( rectangle-back-left-front-left-cube
-          f g h k f' g' h' k' hA hB hC hD
-          top back-left back-right front-left front-right bottom))}
-      ( pair hA (pair (k' ∘ g')
-        ( rectangle-back-right-front-right-cube
+       top back-left back-right front-left front-right bottom) →
+  coherence-htpy-parallel-cone
+    ( front-left)
+    ( refl-htpy' k)
+    ( pair f'
+      ( pair
+        ( g ∘ hA)
+        ( rectangle-back-left-bottom-cube
           f g h k f' g' h' k' hA hB hC hD
           top back-left back-right front-left front-right bottom)))
+    ( pair f'
       ( pair
-        ( refl-htpy)
-        ( pair top
-          ( coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube
-            f g h k f' g' h' k' hA hB hC hD
-            top back-left back-right front-left front-right bottom c)))
-      ( is-pullback-rectangle-is-pullback-left-square g k hD
-        ( pair hC (pair k' front-right))
-        ( pair hA (pair g' back-right))
-        ( is-pb-front-right)
-        ( is-pb-back-right)))
-
-is-pullback-back-right-is-pullback-back-left-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  {f : A → B} {g : A → C} {h : B → D} {k : C → D}
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  {f' : A' → B'} {g' : A' → C'} {h' : B' → D'} {k' : C' → D'}
-  {hA : A' → A} {hB : B' → B} {hC : C' → C} {hD : D' → D}
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube f g h k f' g' h' k' hA hB hC hD
-    top back-left back-right front-left front-right bottom) →
-  is-pullback h hD (pair hB (pair h' front-left)) →
-  is-pullback k hD (pair hC (pair k' front-right)) →
-  is-pullback f hB (pair hA (pair f' back-left)) →
-  is-pullback g hC (pair hA (pair g' back-right))
-is-pullback-back-right-is-pullback-back-left-cube
-  {f = f} {g} {h} {k} {f' = f'} {g'} {h'} {k'} {hA = hA} {hB} {hC} {hD}
-  top back-left back-right front-left front-right bottom c
-  is-pb-front-left is-pb-front-right is-pb-back-left =
-  is-pullback-left-square-is-pullback-rectangle g k hD
-    ( pair hC (pair k' front-right))
-    ( pair hA (pair g' back-right))
-    ( is-pb-front-right)
-    ( is-pullback-htpy'
-      -- ( h ∘ f)
-      { f' = k ∘ g}
-      ( bottom)
-      -- ( hD)
-      { g' = hD}
-      ( refl-htpy)
-      ( pair hA (pair (h' ∘ f')
-        ( rectangle-back-left-front-left-cube
+        ( hC ∘ g')
+        ( rectangle-top-front-right-cube
           f g h k f' g' h' k' hA hB hC hD
           top back-left back-right front-left front-right bottom)))
-      { c' = pair hA (pair (k' ∘ g')
-        ( rectangle-back-right-front-right-cube
-          f g h k f' g' h' k' hA hB hC hD
-          top back-left back-right front-left front-right bottom))}
-      ( pair
-        ( refl-htpy)
-        ( pair top
-          ( coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube
-            f g h k f' g' h' k' hA hB hC hD
-            top back-left back-right front-left front-right bottom c)))
-      ( is-pullback-rectangle-is-pullback-left-square f h hD
-        ( pair hB (pair h' front-left))
-        ( pair hA (pair f' back-left))
-        ( is-pb-front-left)
-        ( is-pb-back-left)))
+    ( refl-htpy' f')
+    ( back-right)
+coherence-htpy-parallel-cone-coherence-cube
+  f g h k f' g' h' k' hA hB hC hD
+  top back-left back-right front-left front-right bottom c =
+  ( inv-htpy
+    ( inv-htpy
+      ( assoc-htpy
+        ( h ·l (inv-htpy back-left))
+        ( bottom ·r hA)
+        ( (k ·l back-right) ∙h (refl-htpy' (k ∘ (hC ∘ g'))))))) ∙h
+  ( ( ap-concat-htpy'
+      ( h ·l (inv-htpy back-left))
+      ( inv-htpy (h ·l back-left))
+      ( _)
+      ( left-whisk-inv-htpy h back-left)) ∙h
+      ( inv-htpy (inv-con-htpy (h ·l back-left) _ _
+        ( ( ( inv-htpy (assoc-htpy (h ·l back-left) (front-left ·r f') _)) ∙h
+            ( ( inv-htpy
+                ( assoc-htpy
+                  ( (h ·l back-left) ∙h (front-left ·r f'))
+                  ( hD ·l top)
+                  ( (inv-htpy front-right) ·r g'))) ∙h
+              inv-htpy
+              ( con-inv-htpy _ (front-right ·r g') _
+                ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy (c)))))) ∙h
+          ( inv-htpy
+            ( ap-concat-htpy (bottom ·r hA) _ _ right-unit-htpy))))))
 ```

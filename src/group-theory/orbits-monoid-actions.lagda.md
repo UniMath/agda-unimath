@@ -83,8 +83,7 @@ module _
     {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
     is-equiv (htpy-eq-hom-orbit-Monoid-Action f g)
   is-equiv-htpy-eq-hom-orbit-Monoid-Action f =
-    fundamental-theorem-id f
-      ( refl-htpy-hom-orbit-Monoid-Action f)
+    fundamental-theorem-id
       ( is-contr-total-htpy-hom-orbit-Monoid-Action f)
       ( htpy-eq-hom-orbit-Monoid-Action f)
 

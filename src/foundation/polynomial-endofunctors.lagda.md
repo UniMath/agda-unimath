@@ -84,8 +84,7 @@ module _
     (x y : type-polynomial-endofunctor A B X) →
     is-equiv (Eq-type-polynomial-endofunctor-eq x y)
   is-equiv-Eq-type-polynomial-endofunctor-eq x =
-    fundamental-theorem-id x
-      ( refl-Eq-type-polynomial-endofunctor x)
+    fundamental-theorem-id
       ( is-contr-total-Eq-type-polynomial-endofunctor x)
       ( Eq-type-polynomial-endofunctor-eq x)
 

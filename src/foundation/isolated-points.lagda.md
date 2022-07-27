@@ -162,8 +162,7 @@ module _
     is-equiv-Eq-eq-isolated-point :
       (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-point d {x})
     is-equiv-Eq-eq-isolated-point d =
-      fundamental-theorem-id a
-        ( refl-Eq-isolated-point d)
+      fundamental-theorem-id 
         ( is-contr-total-Eq-isolated-point d)
         ( λ x → Eq-eq-isolated-point d {x})
 
@@ -183,8 +182,7 @@ module _
   abstract
     is-emb-const-is-isolated : is-isolated a → is-emb (const unit A a)
     is-emb-const-is-isolated d star =
-      fundamental-theorem-id star
-        refl
+      fundamental-theorem-id
         ( is-contr-equiv
           ( a ＝ a)
           ( left-unit-law-prod)

@@ -133,8 +133,7 @@ module _
       (g : reflecting-map-Eq-Rel R (type-Set B)) →
       is-equiv (htpy-eq-reflecting-map-Eq-Rel g)
     is-equiv-htpy-eq-reflecting-map-Eq-Rel =
-      fundamental-theorem-id f
-        refl-htpy-reflecting-map-Eq-Rel
+      fundamental-theorem-id
         is-contr-total-htpy-reflecting-map-Eq-Rel
         htpy-eq-reflecting-map-Eq-Rel
 

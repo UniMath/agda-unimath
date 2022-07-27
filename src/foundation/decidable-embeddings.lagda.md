@@ -308,8 +308,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) →
     is-equiv (htpy-eq-decidable-emb f g)
   is-equiv-htpy-eq-decidable-emb f =
-    fundamental-theorem-id f
-      ( refl-htpy-decidable-emb f)
+    fundamental-theorem-id
       ( is-contr-total-htpy-decidable-emb f)
       ( htpy-eq-decidable-emb f)
 

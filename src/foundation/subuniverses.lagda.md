@@ -103,8 +103,6 @@ abstract
     (s t : total-subuniverse P) → is-equiv (equiv-eq-subuniverse P s t)
   is-equiv-equiv-eq-subuniverse P (pair X p) =
     fundamental-theorem-id
-      ( pair X p)
-      ( id-equiv)
       ( is-contr-total-equiv-subuniverse P (pair X p))
       ( equiv-eq-subuniverse P (pair X p))
 
@@ -156,8 +154,7 @@ module _
   is-equiv-equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → is-equiv (equiv-eq-fam-subuniverse Y Z)
   is-equiv-equiv-eq-fam-subuniverse Y =
-    fundamental-theorem-id Y
-      ( id-equiv-fam-subuniverse Y)
+    fundamental-theorem-id 
       ( is-contr-total-equiv-fam-subuniverse Y)
       ( equiv-eq-fam-subuniverse Y)
 

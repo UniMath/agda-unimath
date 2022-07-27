@@ -151,8 +151,7 @@ is-contr-total-Eq-ℤ x =
 is-equiv-Eq-ℤ-eq :
   (x y : ℤ) → is-equiv (Eq-ℤ-eq {x} {y})
 is-equiv-Eq-ℤ-eq x =
-  fundamental-theorem-id x
-    ( refl-Eq-ℤ x)
+  fundamental-theorem-id
     ( is-contr-total-Eq-ℤ x)
     ( λ y → Eq-ℤ-eq {x} {y})
 ```

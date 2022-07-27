@@ -70,7 +70,7 @@ module _
       ({l : Level} → IND-identity-system l B a b) →
       (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
     fundamental-theorem-id-IND-identity-system ind f =
-      fundamental-theorem-id a b
+      fundamental-theorem-id
         ( is-contr-total-space-IND-identity-system ind)
         ( f)
 ```

@@ -97,8 +97,7 @@ module _
   is-equiv-equiv-eq-unordered-pair-types :
     (B : unordered-pair-types l) → is-equiv (equiv-eq-unordered-pair-types B)
   is-equiv-equiv-eq-unordered-pair-types =
-    fundamental-theorem-id A
-      id-equiv-unordered-pair-types
+    fundamental-theorem-id
       is-contr-total-equiv-unordered-pair-types
       equiv-eq-unordered-pair-types
 

@@ -38,7 +38,7 @@ For any family of maps `f : (x : A) → a ＝ x → B x`, the following are equi
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
   where
 
   abstract
@@ -70,7 +70,7 @@ module _
     fundamental-theorem-id-J :
       is-contr (Σ A B) → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
     fundamental-theorem-id-J is-contr-AB =
-      fundamental-theorem-id a b is-contr-AB (ind-Id a (λ x p → B x) b)
+      fundamental-theorem-id is-contr-AB (ind-Id a (λ x p → B x) b)
 
   abstract
     fundamental-theorem-id-J' :

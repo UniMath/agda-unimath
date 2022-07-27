@@ -58,13 +58,10 @@ module _
       (e : (x : A) (y : B x) → (f x ＝ y) ≃ Eq-B x y) →
       (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
     is-equiv-map-extensionality-Π e =
-      fundamental-theorem-id f
-        ( map-extensionality-Π e f refl)
+      fundamental-theorem-id 
         ( is-contr-total-Eq-Π Eq-B
           ( λ x →
             fundamental-theorem-id'
-              ( f x)
-              ( map-equiv (e x (f x)) refl)
               ( λ y → map-equiv (e x y))
               ( λ y → is-equiv-map-equiv (e x y))))
         ( map-extensionality-Π e)

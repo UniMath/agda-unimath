@@ -431,8 +431,7 @@ abstract
 is-equiv-iso-eq-Ring :
   { l : Level} (R S : Ring l) → is-equiv (iso-eq-Ring R S)
 is-equiv-iso-eq-Ring R =
-  fundamental-theorem-id R
-    ( id-iso-Ring R)
+  fundamental-theorem-id
     ( is-contr-total-iso-Ring R)
     ( iso-eq-Ring R)
     

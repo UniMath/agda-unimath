@@ -362,8 +362,7 @@ module _
     is-equiv-equiv-eq-slice-UU :
       (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
     is-equiv-equiv-eq-slice-UU f =
-      fundamental-theorem-id f
-        ( id-equiv-slice-UU f)
+      fundamental-theorem-id 
         ( is-contr-total-equiv-slice' f)
         ( equiv-eq-slice-UU f)
 

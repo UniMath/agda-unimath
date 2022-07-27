@@ -288,8 +288,6 @@ module _
       is-equiv (related-eq-quotient-Decidable-Equivalence-Relation q)
     is-equiv-related-eq-quotient-Decidable-Equivalence-Relation =
       fundamental-theorem-id
-        ( class-Decidable-Equivalence-Relation R a)
-        ( refl-Decidable-Equivalence-Relation R)
         ( is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation)
         ( related-eq-quotient-Decidable-Equivalence-Relation)
 

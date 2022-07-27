@@ -85,8 +85,7 @@ is-contr-total-equiv-cube k X =
 is-equiv-equiv-eq-cube :
   (k : ℕ) (X Y : cube k) → is-equiv (equiv-eq-cube k {X} {Y})
 is-equiv-equiv-eq-cube k X =
-  fundamental-theorem-id X
-    ( id-equiv-cube k X)
+  fundamental-theorem-id
     ( is-contr-total-equiv-cube k X)
     ( λ Y → equiv-eq-cube k {X = X} {Y})
 
@@ -136,8 +135,7 @@ is-equiv-htpy-eq-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) →
   is-equiv (htpy-eq-equiv-cube k X Y e f)
 is-equiv-htpy-eq-equiv-cube k X Y e =
-  fundamental-theorem-id e
-    ( refl-htpy-equiv-cube k X Y e)
+  fundamental-theorem-id
     ( is-contr-total-htpy-equiv-cube k X Y e)
     ( htpy-eq-equiv-cube k X Y e)
 

@@ -149,8 +149,7 @@ module _
   is-equiv-Eq-eq-unordered-tuple :
     (x y : unordered-tuple n A) → is-equiv (Eq-eq-unordered-tuple x y)
   is-equiv-Eq-eq-unordered-tuple x =
-    fundamental-theorem-id x
-      ( refl-Eq-unordered-tuple x)
+    fundamental-theorem-id
       ( is-contr-total-Eq-unordered-tuple x)
       ( Eq-eq-unordered-tuple x)
 

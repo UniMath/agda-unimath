@@ -352,8 +352,7 @@ module _
     is-contr-total-htpy-equiv :
       (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
     is-contr-total-htpy-equiv e =
-      fundamental-theorem-id' e
-        ( refl-htpy-equiv e)
+      fundamental-theorem-id'
         ( λ f → map-equiv (extensionality-equiv e f))
         ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
 

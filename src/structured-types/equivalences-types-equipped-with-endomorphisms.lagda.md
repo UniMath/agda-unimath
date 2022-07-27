@@ -148,8 +148,7 @@ module _
   is-equiv-htpy-eq-equiv-Endo :
     (e f : equiv-Endo X Y) → is-equiv (htpy-eq-equiv-Endo e f)
   is-equiv-htpy-eq-equiv-Endo e =
-    fundamental-theorem-id e
-      ( refl-htpy-equiv-Endo e)
+    fundamental-theorem-id
       ( is-contr-total-htpy-equiv-Endo e)
       ( htpy-eq-equiv-Endo e)
 
@@ -216,8 +215,7 @@ module _
 
   is-equiv-equiv-eq-Endo : (Y : Endo l1) → is-equiv (equiv-eq-Endo Y)
   is-equiv-equiv-eq-Endo =
-    fundamental-theorem-id X
-      (id-equiv-Endo X)
+    fundamental-theorem-id 
       is-contr-total-equiv-Endo
       equiv-eq-Endo
 

@@ -149,8 +149,7 @@ abstract
     (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
     (s t : dep-cocone f g c P) → is-equiv (htpy-dep-cocone-eq f g c P {s} {t})
   is-equiv-htpy-dep-cocone-eq f g c P s =
-    fundamental-theorem-id s
-      ( reflexive-htpy-dep-cocone f g c P s)
+    fundamental-theorem-id
       ( is-contr-total-htpy-dep-cocone f g c P s)
       ( λ t → htpy-dep-cocone-eq f g c P {s} {t})
 
@@ -942,8 +941,7 @@ is-equiv-equiv-Fam-pushout-eq :
   {f : S → A} {g : S → B} (P Q : Fam-pushout l f g) →
   is-equiv (equiv-Fam-pushout-eq {P = P} {Q})
 is-equiv-equiv-Fam-pushout-eq P =
-  fundamental-theorem-id P
-    ( reflexive-equiv-Fam-pushout P)
+  fundamental-theorem-id
     ( is-contr-total-equiv-Fam-pushout P)
     ( λ Q → equiv-Fam-pushout-eq {P = P} {Q})
 

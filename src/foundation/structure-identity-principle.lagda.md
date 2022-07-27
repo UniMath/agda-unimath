@@ -67,13 +67,11 @@ module _
       (z : Σ A B) → is-equiv (h z)
     structure-identity-principle {f} {g} h H K =
       fundamental-theorem-id
-        ( pair a b)
-        ( pair refl-A refl-B)
         ( is-contr-total-Eq-structure
           ( λ x → Eq-B)
-          ( fundamental-theorem-id' a refl-A f H)
+          ( fundamental-theorem-id' f H)
           ( pair a refl-A)
-          ( fundamental-theorem-id' b refl-B g K))
+          ( fundamental-theorem-id' g K))
         ( h)
 
   map-extensionality-Σ :
