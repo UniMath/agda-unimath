@@ -70,6 +70,25 @@ module _
   coherence-square-cone = pr2 (pr2 c)
 ```
 
+### Dependent cones
+
+```agda
+cone-family :
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (PX : X → UU l5) {PA : A → UU l6} {PB : B → UU l7}
+  {f : A → X} {g : B → X} →
+  (f' : (a : A) → PA a → PX (f a)) (g' : (b : B) → PB b → PX (g b)) →
+  cone f g C → (C → UU l8) → UU (l4 ⊔ (l5 ⊔ (l6 ⊔ (l7 ⊔ l8))))
+cone-family {C = C} PX {f = f} {g} f' g' c PC =
+  (x : C) →
+  cone
+    ( ( tr PX (coherence-square-cone f g c x)) ∘
+      ( f' (vertical-map-cone f g c x)))
+    ( g' (horizontal-map-cone f g c x))
+    ( PC x)
+```
+
 ### Precomposing cones
 
 ```agda

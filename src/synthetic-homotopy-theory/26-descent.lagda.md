@@ -559,26 +559,25 @@ triangle-precompose-lifts-refl-htpy :
 triangle-precompose-lifts-refl-htpy {A = A} P f h h' =
   tr-eq-htpy-fam-lifts-refl-htpy P h f (λ a → h' (f a))
 
-abstract
-  triangle-precompose-lifts :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (P : X → UU l4) {f g : A → B} (H : f ~ g) →
-    TRIANGLE-PRECOMPOSE-LIFTS P H
-  triangle-precompose-lifts {A = A} P {f} =
-    ind-htpy f
-      ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
-      ( triangle-precompose-lifts-refl-htpy P f)
+triangle-precompose-lifts :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (P : X → UU l4) {f g : A → B} (H : f ~ g) →
+  TRIANGLE-PRECOMPOSE-LIFTS P H
+triangle-precompose-lifts {A = A} P {f} =
+  ind-htpy f
+    ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
+    ( triangle-precompose-lifts-refl-htpy P f)
   
-  compute-triangle-precompose-lifts :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-    (P : X → UU l4) (f : A → B) →
-    Id
-      ( triangle-precompose-lifts P (refl-htpy' f))
-      ( triangle-precompose-lifts-refl-htpy P f)
-  compute-triangle-precompose-lifts P f =
-    comp-htpy f
-      ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
-      ( triangle-precompose-lifts-refl-htpy P f)
+compute-triangle-precompose-lifts :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (P : X → UU l4) (f : A → B) →
+  Id
+    ( triangle-precompose-lifts P (refl-htpy' f))
+    ( triangle-precompose-lifts-refl-htpy P f)
+compute-triangle-precompose-lifts P f =
+  comp-htpy f
+    ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
+    ( triangle-precompose-lifts-refl-htpy P f)
 
 {- There is a similar commuting triangle with the computed transport function.
    This time we don't use homotopy induction to construct the homotopy. We
@@ -688,7 +687,6 @@ htpy-precompose-total-lifts :
   {f g : A → B} (H : f ~ g) → HTPY-PRECOMPOSE-TOTAL-LIFTS P H
 htpy-precompose-total-lifts {A = A} {B} P {f} {g} H =
   htpy-map-Σ
-    { P = fam-lifts B P}
     ( fam-lifts A P)
     ( λ h → eq-htpy (h ·l H))
     ( precompose-lifts P f)
@@ -706,7 +704,7 @@ tr-id-left-subst refl b q = refl
 compute-htpy-precompose-total-lifts :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
   ( f : A → B) →
-  ( htpy-precompose-total-lifts P (refl-htpy' f)) ~
+  ( htpy-precompose-total-lifts P (refl-htpy {f = f})) ~
   ( refl-htpy' (map-Σ (fam-lifts A P) (λ h → h ∘ f) (precompose-lifts P f)))
 compute-htpy-precompose-total-lifts {A = A} P f (pair h h') =
   let α = λ (t : Id (h ∘ f) (h ∘ f)) → tr (fam-lifts A P) t (λ a → h' (f a))
@@ -724,6 +722,24 @@ compute-htpy-precompose-total-lifts {A = A} P f (pair h h') =
             ( htpy-eq
               ( htpy-eq (compute-triangle-precompose-lifts P f) h) h')) ∙
           ( left-inv (triangle-precompose-lifts-refl-htpy P f h h')))))
+
+{-
+-- pr1 (pr1 (funext (λ a → h (f a)) (λ a → h (f a)))) (λ x → refl)
+
+  ap eq-pair-Σ'
+    ( eq-pair-Σ
+      ( eq-htpy-refl-htpy (h ∘ f))
+      ( ( tr-id-left-subst
+          { f = α}
+          ( eq-htpy-refl-htpy (h ∘ f))
+          ( λ a → h' (f a))
+          ( triangle-precompose-lifts P refl-htpy h h')) ∙
+        ( ( ap
+            ( λ t → inv (ap α (eq-htpy-refl-htpy (λ a → h (f a)))) ∙ t)
+            ( htpy-eq
+              ( htpy-eq (compute-triangle-precompose-lifts P f) h) h')) ∙
+          ( left-inv (triangle-precompose-lifts-refl-htpy P f h h')))))
+          -}
 
 COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
