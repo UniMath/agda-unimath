@@ -110,8 +110,7 @@ module _
   is-equiv-Eq-Eq-ext-eq-𝕎 :
     (x y : 𝕎 A B) (u v : Eq-ext-𝕎 x y) → is-equiv (Eq-Eq-ext-eq-𝕎 x y u v)
   is-equiv-Eq-Eq-ext-eq-𝕎 x y u =
-    fundamental-theorem-id u
-      ( refl-Eq-Eq-ext-𝕎 x y u)
+    fundamental-theorem-id
       ( is-contr-total-Eq-Eq-ext-𝕎 x y u)
       ( Eq-Eq-ext-eq-𝕎 x y u)
 
@@ -167,13 +166,12 @@ module _
     is-contr-equiv
       ( Σ A (λ x → B a ≃ B x))
       ( equiv-total-Eq-ext-𝕎 (tree-𝕎 a f))
-      ( fundamental-theorem-id' a id-equiv (λ x → equiv-tr B) (H a))
+      ( fundamental-theorem-id' (λ x → equiv-tr B) (H a))
 
   is-extensional-is-univalent-𝕎 :
     is-univalent B → is-extensional-𝕎 A B
   is-extensional-is-univalent-𝕎 H x =
-    fundamental-theorem-id x
-      ( λ z → id-equiv)
+    fundamental-theorem-id
       ( is-contr-total-Eq-ext-is-univalent-𝕎 H x)
       ( λ y → extensional-Eq-eq-𝕎 {y = y})
 
@@ -183,14 +181,11 @@ module _
     apply-universal-property-trunc-Prop p
       ( Π-Prop A (λ y → is-equiv-Prop (λ (γ : x ＝ y) → equiv-tr B γ)))
       ( λ w →
-        fundamental-theorem-id x
-          ( id-equiv)
+        fundamental-theorem-id
           ( is-contr-equiv'
             ( Σ (𝕎 A B) (Eq-ext-𝕎 (tree-𝕎 x (λ y → w))))
             ( equiv-total-Eq-ext-𝕎 (tree-𝕎 x (λ y → w)))
             ( fundamental-theorem-id'
-              ( tree-𝕎 x (λ y → w))
-              ( λ z → id-equiv)
               ( λ z → extensional-Eq-eq-𝕎)
               ( H (tree-𝕎 x (λ y → w)))))
           ( λ y →  equiv-tr B {y = y}))

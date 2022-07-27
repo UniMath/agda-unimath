@@ -90,8 +90,7 @@ module _
 
   is-equiv-htpy-eq-hom-Endo : (f g : hom-Endo X Y) → is-equiv (htpy-eq-hom-Endo f g)
   is-equiv-htpy-eq-hom-Endo f =
-    fundamental-theorem-id f
-      ( refl-htpy-hom-Endo f)
+    fundamental-theorem-id
       ( is-contr-total-htpy-hom-Endo f)
       ( htpy-eq-hom-Endo f)
 

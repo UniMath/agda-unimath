@@ -26,6 +26,7 @@ open import foundation-core.morphisms-cospans
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 
+open import foundation.commuting-cubes
 open import foundation.diagonal-maps-of-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types

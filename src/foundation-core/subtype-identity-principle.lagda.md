@@ -74,10 +74,8 @@ module _
       ((x : A) → is-equiv (f x)) → (z : Σ A P) → is-equiv (h z)
     subtype-identity-principle {f} h H =
       fundamental-theorem-id
-        ( pair a p)
-        ( refl-A)
         ( is-contr-total-Eq-subtype
-          ( fundamental-theorem-id' a refl-A f H)
+          ( fundamental-theorem-id' f H)
           ( is-prop-P)
           ( a)
           ( refl-A)

@@ -77,8 +77,7 @@ abstract
   is-equiv-Eq-Fam-circle-eq :
     { l1 : Level} (P Q : Fam-circle l1) → is-equiv (Eq-Fam-circle-eq P Q)
   is-equiv-Eq-Fam-circle-eq P =
-    fundamental-theorem-id P
-      ( reflexive-Eq-Fam-circle P)
+    fundamental-theorem-id
       ( is-contr-total-Eq-Fam-circle P)
       ( Eq-Fam-circle-eq P)
 
@@ -782,8 +781,7 @@ abstract
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
     ( s t : ELIM-ℤ P p0 pS) → is-equiv (Eq-ELIM-ℤ-eq P p0 pS s t)
   is-equiv-Eq-ELIM-ℤ-eq P p0 pS s =
-    fundamental-theorem-id s
-      ( reflexive-Eq-ELIM-ℤ P p0 pS s)
+    fundamental-theorem-id
       ( is-contr-total-Eq-ELIM-ℤ P p0 pS s)
       ( Eq-ELIM-ℤ-eq P p0 pS s)
 
@@ -915,8 +913,6 @@ abstract
     ( x : X) → is-equiv (fundamental-cover-circle-eq l dup-circle x)
   is-equiv-fundamental-cover-circle-eq l dup-circle =
     fundamental-theorem-id
-      ( base-free-loop l)
-      ( pt-fundamental-cover-circle l dup-circle)
       ( is-contr-total-fundamental-cover-circle l dup-circle)
       ( fundamental-cover-circle-eq l dup-circle)
 

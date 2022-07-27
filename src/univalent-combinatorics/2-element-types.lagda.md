@@ -403,8 +403,6 @@ abstract
     is-equiv (point-eq-UU-Fin-Level-two-ℕ {l} {X})
   is-equiv-point-eq-UU-Fin-Level-two-ℕ {l} =
     fundamental-theorem-id
-      ( Fin-UU-Fin-Level l 2)
-      ( map-raise (zero-Fin 1))
       ( is-contr-total-UU-Fin-Level-two-ℕ)
       ( λ X → point-eq-UU-Fin-Level-two-ℕ {l} {X})
 
@@ -435,8 +433,6 @@ abstract
     (X : UU-Fin 2) → is-equiv (point-eq-UU-Fin-two-ℕ {X})
   is-equiv-point-eq-UU-Fin-two-ℕ =
     fundamental-theorem-id
-      ( Fin-UU-Fin 2)
-      ( zero-Fin 1)
       ( is-contr-total-UU-Fin-two-ℕ)
       ( λ X → point-eq-UU-Fin-two-ℕ {X})
 

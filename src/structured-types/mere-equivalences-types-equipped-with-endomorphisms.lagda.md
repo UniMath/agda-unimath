@@ -110,8 +110,6 @@ module _
     is-equiv (equiv-eq-Component-Endo (canonical-Component-Endo X) T)
   is-equiv-equiv-eq-Component-Endo =
     fundamental-theorem-id
-      ( canonical-Component-Endo X)
-      ( id-equiv-Component-Endo (canonical-Component-Endo X))
       ( is-contr-total-equiv-Component-Endo)
       ( equiv-eq-Component-Endo (canonical-Component-Endo X))
 ```

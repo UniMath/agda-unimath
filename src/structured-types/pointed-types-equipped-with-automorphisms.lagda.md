@@ -208,8 +208,7 @@ is-equiv-htpy-hom-Pointed-Type-With-Aut :
   (Y : Pointed-Type-With-Aut l2) (h1 h2 : hom-Pointed-Type-With-Aut X Y) →
   is-equiv (htpy-hom-Pointed-Type-With-Aut-eq X Y h1 h2)
 is-equiv-htpy-hom-Pointed-Type-With-Aut X Y h1 =
-  fundamental-theorem-id h1
-    ( refl-htpy-hom-Pointed-Type-With-Aut X Y h1)
+  fundamental-theorem-id 
     ( is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1)
     ( htpy-hom-Pointed-Type-With-Aut-eq X Y h1)
 

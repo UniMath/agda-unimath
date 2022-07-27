@@ -101,8 +101,7 @@ module _
   is-equiv-htpy-eq-hom-Preorder :
     (f g : hom-Preorder P Q) → is-equiv (htpy-eq-hom-Preorder f g)
   is-equiv-htpy-eq-hom-Preorder f =
-    fundamental-theorem-id f
-      ( refl-htpy-hom-Preorder f)
+    fundamental-theorem-id
       ( is-contr-total-htpy-hom-Preorder f)
       ( htpy-eq-hom-Preorder f)
 

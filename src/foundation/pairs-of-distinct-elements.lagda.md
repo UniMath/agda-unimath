@@ -99,8 +99,7 @@ module _
     (p q : pair-of-distinct-elements A) →
     is-equiv (Eq-eq-pair-of-distinct-elements p q)
   is-equiv-Eq-eq-pair-of-distinct-elements p =
-    fundamental-theorem-id p
-      ( refl-Eq-pair-of-distinct-elements p)
+    fundamental-theorem-id
       ( is-contr-total-Eq-pair-of-distinct-elements p)
       ( Eq-eq-pair-of-distinct-elements p)
 

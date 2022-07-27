@@ -141,8 +141,7 @@ module _
 
   is-equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → is-equiv (Eq-𝕎-eq v w)
   is-equiv-Eq-𝕎-eq v =
-    fundamental-theorem-id v
-      ( refl-Eq-𝕎 v)
+    fundamental-theorem-id 
       ( is-contr-total-Eq-𝕎 v)
       ( Eq-𝕎-eq v)
 

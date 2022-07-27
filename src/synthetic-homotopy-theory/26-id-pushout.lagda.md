@@ -116,8 +116,7 @@ module hom-Fam-pushout
   is-equiv-htpy-hom-Fam-pushout-eq :
     ( h k : hom-Fam-pushout) → is-equiv (htpy-hom-Fam-pushout-eq h k)
   is-equiv-htpy-hom-Fam-pushout-eq h =
-    fundamental-theorem-id h
-      ( reflexive-htpy-hom-Fam-pushout h)
+    fundamental-theorem-id
       ( is-contr-total-htpy-hom-Fam-pushout h)
       ( htpy-hom-Fam-pushout-eq h)
 

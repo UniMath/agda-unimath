@@ -102,8 +102,7 @@ is-equiv-htpy-cocone-eq :
   (f : S → A) (g : S → B) {X : UU l4} (c c' : cocone f g X) →
   is-equiv (htpy-cocone-eq f g c c')
 is-equiv-htpy-cocone-eq f g c =
-  fundamental-theorem-id c
-    ( reflexive-htpy-cocone f g c)
+  fundamental-theorem-id
     ( is-contr-total-htpy-cocone f g c)
     ( htpy-cocone-eq f g c)
 

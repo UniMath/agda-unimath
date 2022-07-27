@@ -80,8 +80,7 @@ module _
     is-equiv-Eq-eq-free-loop :
       (α α' : free-loop X) → is-equiv (Eq-eq-free-loop α α')
     is-equiv-Eq-eq-free-loop α =
-      fundamental-theorem-id α
-        ( refl-Eq-free-loop α)
+      fundamental-theorem-id
         ( is-contr-total-Eq-free-loop α)
         ( Eq-eq-free-loop α) 
 
@@ -132,8 +131,7 @@ module _
       (p p' : dependent-free-loop) →
       is-equiv (Eq-dependent-free-loop-eq p p')
     is-equiv-Eq-dependent-free-loop-eq p =
-      fundamental-theorem-id p
-        ( refl-Eq-dependent-free-loop p)
+      fundamental-theorem-id
         ( is-contr-total-Eq-dependent-free-loop p)
         ( Eq-dependent-free-loop-eq p)
 

@@ -166,8 +166,7 @@ module _
   is-equiv-Eq-eq-unordered-pair :
     (p q : unordered-pair A) → is-equiv (Eq-eq-unordered-pair p q)
   is-equiv-Eq-eq-unordered-pair p =
-    fundamental-theorem-id p
-      ( refl-Eq-unordered-pair p)
+    fundamental-theorem-id
       ( is-contr-total-Eq-unordered-pair p)
       ( Eq-eq-unordered-pair p)
 

@@ -50,7 +50,7 @@ module _
   eq-pair-Σ {pair x y} {pair .x .y} refl refl = refl
 
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
-  eq-pair-Σ' (pair α β) = eq-pair-Σ α β
+  eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
   isretr-pair-eq-Σ :
     (s t : Σ A B) →

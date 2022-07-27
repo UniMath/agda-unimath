@@ -52,7 +52,7 @@ module _
   abstract
     is-emb-is-prop-map : is-prop-map f → is-emb f
     is-emb-is-prop-map is-prop-map-f x =
-      fundamental-theorem-id x refl
+      fundamental-theorem-id
         ( is-contr-equiv
           ( fib f (f x))
           ( equiv-tot (λ y → equiv-inv (f x) (f y)))
@@ -66,7 +66,7 @@ module _
       where
       α : (t : fib f y) → is-contr (fib f y)
       α (pair x refl) =
-        fundamental-theorem-id' x refl
+        fundamental-theorem-id'
           ( λ y → inv ∘ ap f)
           ( λ y →
             is-equiv-comp' inv (ap f)

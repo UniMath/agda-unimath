@@ -122,8 +122,7 @@ iso-eq-Set {l} = iso-eq-Precat (Set-Precat l)
 
 is-category-Set-Precat : (l : Level) → is-category-Precat (Set-Precat l)
 is-category-Set-Precat l x =
-  fundamental-theorem-id x
-    ( id-iso-Set {l} {x})
+  fundamental-theorem-id 
     ( is-contr-equiv'
       ( Σ (UU-Set l) (type-equiv-Set x))
       ( equiv-tot (equiv-iso-equiv-Set x))

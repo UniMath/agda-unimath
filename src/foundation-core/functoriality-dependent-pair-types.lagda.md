@@ -12,7 +12,8 @@ open import foundation-core.contractible-maps using
 open import foundation-core.contractible-types using
   ( is-contr-is-equiv; is-contr-equiv'; is-contr-is-equiv')
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation-core.equality-dependent-pair-types using
+  ( eq-pair-Σ; eq-pair-Σ')
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; map-equiv; is-equiv-map-equiv;
     is-equiv-comp; is-equiv-right-factor; is-fiberwise-equiv;
@@ -21,7 +22,7 @@ open import foundation-core.fibers-of-maps using
   ( fib; map-equiv-total-fib; is-equiv-map-equiv-total-fib)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl; inv)
+open import foundation-core.identity-types using (refl; inv; tr)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -78,6 +79,22 @@ module _
 ```
 
 ## Properties
+
+### The map `map-Σ` preserves homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  (D : B → UU l4)
+  where
+
+  htpy-map-Σ :
+    {f f' : A → B} (H : f ~ f')
+    (g : (x : A) → C x → D (f x)) {g' : (x : A) → C x → D (f' x)}
+    (K : (x : A) → ((tr D (H x)) ∘ (g x)) ~ (g' x)) →
+    (map-Σ D f g) ~ (map-Σ D f' g')
+  htpy-map-Σ H g K t = eq-pair-Σ' (pair (H (pr1 t)) (K (pr1 t) (pr2 t)))
+```
 
 ### The map `tot` preserves homotopies
 

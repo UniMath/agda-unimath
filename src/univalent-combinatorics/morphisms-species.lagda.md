@@ -79,8 +79,7 @@ is-equiv-htpy-eq-hom-species :
   {l1 l2 : Level} {F : species l1} {G : species l2} (f g : hom-species F G) →
   is-equiv (htpy-eq-hom-species {f = f} {g = g})
 is-equiv-htpy-eq-hom-species f =
-  fundamental-theorem-id f
-    ( refl-htpy-hom-species f)
+  fundamental-theorem-id
     ( is-contr-htpy-hom-species f)
     ( λ g → htpy-eq-hom-species {f = f} {g = g})
 

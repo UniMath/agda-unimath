@@ -169,8 +169,7 @@ module _
   is-equiv-equiv-eq-ferrers-diagram :
     (E : ferrers-diagram l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram E)
   is-equiv-equiv-eq-ferrers-diagram =
-    fundamental-theorem-id D
-      id-equiv-ferrers-diagram
+    fundamental-theorem-id
       is-contr-total-equiv-ferrers-diagram
       equiv-eq-ferrers-diagram
 
@@ -238,8 +237,7 @@ module _
   is-equiv-equiv-eq-ferrers-diagram-𝔽 :
     (E : ferrers-diagram-𝔽 A) → is-equiv (equiv-eq-ferrers-diagram-𝔽 E)
   is-equiv-equiv-eq-ferrers-diagram-𝔽 =
-    fundamental-theorem-id D
-      id-equiv-ferrers-diagram-𝔽
+    fundamental-theorem-id
       is-contr-total-equiv-ferrers-diagram-𝔽
       equiv-eq-ferrers-diagram-𝔽
 

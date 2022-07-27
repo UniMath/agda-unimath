@@ -82,8 +82,6 @@ module _
       is-emb (class-representatives H)
     is-emb-class-representatives {P} H (pair a p) =
       fundamental-theorem-id
-        ( pair a p)
-        ( refl)
         ( is-contr-equiv
           ( Σ A (λ x → P x × sim-Eq-Rel R a x))
           ( ( assoc-Σ A P (λ z → sim-Eq-Rel R a (pr1 z))) ∘e

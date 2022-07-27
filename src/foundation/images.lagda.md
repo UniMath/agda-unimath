@@ -104,8 +104,7 @@ module _
   abstract
     is-equiv-Eq-eq-im : (x y : im f) → is-equiv (Eq-eq-im x y)
     is-equiv-Eq-eq-im x =
-      fundamental-theorem-id x
-        ( refl-Eq-im x)
+      fundamental-theorem-id 
         ( is-contr-total-Eq-im x)
         ( Eq-eq-im x)
 

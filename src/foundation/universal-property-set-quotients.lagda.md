@@ -468,7 +468,7 @@ module _
       β : (b : type-Set B) → q x ＝ b → type-Prop (P b)
       β .(q x) refl = point-P
       γ : (b : type-Set B) → is-equiv (β b)
-      γ = fundamental-theorem-id (q x) point-P is-contr-total-P β
+      γ = fundamental-theorem-id is-contr-total-P β
       δ : (b : type-Set B) → (q x ＝ b) ≃ type-Prop (P b)
       δ b = pair (β b) (γ b)
 

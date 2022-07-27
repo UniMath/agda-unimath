@@ -81,8 +81,7 @@ is-contr-total-equiv-Seq A =
 is-equiv-equiv-eq-Seq :
   { l1 : Level} (A B : Sequence l1) → is-equiv (equiv-eq-Seq A B)
 is-equiv-equiv-eq-Seq A =
-  fundamental-theorem-id A
-    ( reflexive-equiv-Seq A)
+  fundamental-theorem-id
     ( is-contr-total-equiv-Seq A)
     ( equiv-eq-Seq A)
 
@@ -166,8 +165,7 @@ is-equiv-htpy-cocone-sequence-eq :
   { l1 l2 : Level} (A : Sequence l1) {X : UU l2} (c c' : cocone-sequence A X) →
   is-equiv (htpy-cocone-sequence-eq A c c')
 is-equiv-htpy-cocone-sequence-eq A c =
-  fundamental-theorem-id c
-    ( reflexive-htpy-cocone-sequence A c)
+  fundamental-theorem-id
     ( is-contr-total-htpy-cocone-sequence A c)
     ( htpy-cocone-sequence-eq A c)
 

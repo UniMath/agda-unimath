@@ -154,8 +154,7 @@ module _
     (g : type-hom-Abstract-Group-Action G X Y) →
     is-equiv (htpy-eq-hom-Abstract-Group-Action g)
   is-equiv-htpy-eq-hom-Abstract-Group-Action =
-    fundamental-theorem-id f
-      refl-htpy-hom-Abstract-Group-Action
+    fundamental-theorem-id
       is-contr-total-htpy-hom-Abstract-Group-Action
       htpy-eq-hom-Abstract-Group-Action
 

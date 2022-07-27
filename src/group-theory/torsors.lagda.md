@@ -163,8 +163,7 @@ module _
     (Y : Torsor-Abstract-Group G l2) →
     is-equiv (equiv-eq-Torsor-Abstract-Group Y)
   is-equiv-equiv-eq-Torsor-Abstract-Group =
-    fundamental-theorem-id X
-      id-equiv-Torsor-Abstract-Group
+    fundamental-theorem-id
       is-contr-total-equiv-Torsor-Abstract-Group
       equiv-eq-Torsor-Abstract-Group
 
@@ -219,8 +218,7 @@ module _
     (f : equiv-Torsor-Abstract-Group G X Y) →
     is-equiv (htpy-eq-equiv-Torsor-Abstract-Group f)
   is-equiv-htpy-eq-equiv-Torsor-Abstract-Group =
-    fundamental-theorem-id e
-      refl-htpy-equiv-Torsor-Abstract-Group
+    fundamental-theorem-id
       is-contr-total-htpy-equiv-Torsor-Abstract-Group
       htpy-eq-equiv-Torsor-Abstract-Group
 
