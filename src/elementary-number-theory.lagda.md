@@ -33,6 +33,9 @@ open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
+open import elementary-number-theory.group-of-integers public
+open import elementary-number-theory.groups-of-modular-arithmetic public
+open import elementary-number-theory.half-integers public
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public

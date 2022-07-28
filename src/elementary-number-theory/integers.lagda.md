@@ -8,13 +8,14 @@ title: The integers
 module elementary-number-theory.integers where
 
 open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
+  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-set-ℕ)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.empty-types using (empty; ex-falso)
+open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-emb-is-equiv; map-eq-transpose-equiv';
     issec-map-inv-equiv; map-equiv; triangle-eq-transpose-equiv')
@@ -24,7 +25,8 @@ open import foundation.identity-types using
   ( _＝_; refl; _∙_; inv; ap; left-inv; inv-con; right-unit; concat; assoc)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
-open import foundation.unit-type using (unit; star)
+open import foundation.sets using (UU-Set; is-set; type-Set; is-set-type-Set)
+open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; Level; lzero)
 
 open import structured-types.types-equipped-with-endomorphisms using (Endo)
@@ -151,6 +153,19 @@ neg-ℤ : ℤ → ℤ
 neg-ℤ (inl x) = inr (inr x)
 neg-ℤ (inr (inl star)) = inr (inl star)
 neg-ℤ (inr (inr x)) = inl x
+```
+
+## Properties
+
+### The type of integers is a set
+
+```agda
+is-set-ℤ : is-set ℤ
+is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
+
+ℤ-Set : UU-Set lzero
+pr1 ℤ-Set = ℤ
+pr2 ℤ-Set = is-set-ℤ
 ```
 
 ### The successor and predecessor functions on ℤ are mutual inverses

@@ -37,7 +37,9 @@ module _
 
 ## Properties
 
-### We immediately characterize the identity type in the fiber of a map
+### Characterization of the identity types of the fibers of a map
+
+#### The case of `fib`
 
 ```agda
 module _
@@ -47,8 +49,6 @@ module _
   Eq-fib : fib f b → fib f b → UU (l1 ⊔ l2)
   Eq-fib s t = Σ (pr1 s ＝ pr1 t) (λ α → ((ap f α) ∙ (pr2 t)) ＝ (pr2 s))
 
-  {- Proposition 10.3.3 -}
-  
   refl-Eq-fib : (s : fib f b) → Eq-fib s s
   pr1 (refl-Eq-fib s) = refl
   pr2 (refl-Eq-fib s) = refl
@@ -56,27 +56,27 @@ module _
   Eq-eq-fib : {s t : fib f b} → s ＝ t → Eq-fib s t
   Eq-eq-fib {s} refl = refl-Eq-fib s
 
-  eq-Eq-fib' : {s t : fib f b} → Eq-fib s t → s ＝ t
-  eq-Eq-fib' {pair x p} {pair .x .p} (pair refl refl) = refl
+  eq-Eq-fib-uncurry : {s t : fib f b} → Eq-fib s t → s ＝ t
+  eq-Eq-fib-uncurry {pair x p} {pair .x .p} (pair refl refl) = refl
 
   eq-Eq-fib :
     {s t : fib f b} (α : pr1 s ＝ pr1 t) →
     ((ap f α) ∙ (pr2 t)) ＝ pr2 s → s ＝ t
-  eq-Eq-fib α β = eq-Eq-fib' (pair α β)
+  eq-Eq-fib α β = eq-Eq-fib-uncurry (pair α β)
 
   issec-eq-Eq-fib :
-    {s t : fib f b} → (Eq-eq-fib {s} {t} ∘ eq-Eq-fib' {s} {t}) ~ id
+    {s t : fib f b} → (Eq-eq-fib {s} {t} ∘ eq-Eq-fib-uncurry {s} {t}) ~ id
   issec-eq-Eq-fib {pair x p} {pair .x .p} (pair refl refl) = refl
 
   isretr-eq-Eq-fib :
-    {s t : fib f b} → (eq-Eq-fib' {s} {t} ∘ Eq-eq-fib {s} {t}) ~ id
+    {s t : fib f b} → (eq-Eq-fib-uncurry {s} {t} ∘ Eq-eq-fib {s} {t}) ~ id
   isretr-eq-Eq-fib {pair x p} {.(pair x p)} refl = refl
 
   abstract
     is-equiv-Eq-eq-fib : {s t : fib f b} → is-equiv (Eq-eq-fib {s} {t})
     is-equiv-Eq-eq-fib {s} {t} =
       is-equiv-has-inverse
-        eq-Eq-fib'
+        eq-Eq-fib-uncurry
         issec-eq-Eq-fib
         isretr-eq-Eq-fib
 
@@ -86,7 +86,7 @@ module _
 
   abstract
     is-equiv-eq-Eq-fib :
-      {s t : fib f b} → is-equiv (eq-Eq-fib' {s} {t})
+      {s t : fib f b} → is-equiv (eq-Eq-fib-uncurry {s} {t})
     is-equiv-eq-Eq-fib {s} {t} =
       is-equiv-has-inverse
         Eq-eq-fib
@@ -94,8 +94,99 @@ module _
         issec-eq-Eq-fib
 
   equiv-eq-Eq-fib : {s t : fib f b} → Eq-fib s t ≃ (s ＝ t)
-  pr1 (equiv-eq-Eq-fib {s} {t}) = eq-Eq-fib'
+  pr1 (equiv-eq-Eq-fib {s} {t}) = eq-Eq-fib-uncurry
   pr2 (equiv-eq-Eq-fib {s} {t}) = is-equiv-eq-Eq-fib
+```
+
+#### The case of `fib'`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
+  where
+
+  Eq-fib' : fib' f b → fib' f b → UU (l1 ⊔ l2)
+  Eq-fib' s t = Σ (pr1 s ＝ pr1 t) (λ α → (pr2 t ＝ ((pr2 s) ∙ (ap f α))))
+
+  refl-Eq-fib' : (s : fib' f b) → Eq-fib' s s
+  pr1 (refl-Eq-fib' s) = refl
+  pr2 (refl-Eq-fib' s) = inv right-unit
+
+  Eq-eq-fib' : {s t : fib' f b} → s ＝ t → Eq-fib' s t
+  Eq-eq-fib' {s} refl = refl-Eq-fib' s
+
+  eq-Eq-fib-uncurry' : {s t : fib' f b} → Eq-fib' s t → s ＝ t
+  eq-Eq-fib-uncurry' {pair x p} {pair .x .(p ∙ refl)} (pair refl refl) =
+    ap (pair x) (inv right-unit)
+
+  eq-Eq-fib' :
+    {s t : fib' f b} (α : pr1 s ＝ pr1 t) →
+    (pr2 t) ＝ ((pr2 s) ∙ (ap f α)) → s ＝ t
+  eq-Eq-fib' α β = eq-Eq-fib-uncurry' (pair α β)
+
+  issec-eq-Eq-fib' :
+    {s t : fib' f b} → (Eq-eq-fib' {s} {t} ∘ eq-Eq-fib-uncurry' {s} {t}) ~ id
+  issec-eq-Eq-fib' {pair x refl} {pair .x .refl} (pair refl refl) = refl
+
+  isretr-eq-Eq-fib' :
+    {s t : fib' f b} → (eq-Eq-fib-uncurry' {s} {t} ∘ Eq-eq-fib' {s} {t}) ~ id
+  isretr-eq-Eq-fib' {pair x refl} {.(pair x refl)} refl = refl
+
+  abstract
+    is-equiv-Eq-eq-fib' : {s t : fib' f b} → is-equiv (Eq-eq-fib' {s} {t})
+    is-equiv-Eq-eq-fib' {s} {t} =
+      is-equiv-has-inverse
+        eq-Eq-fib-uncurry'
+        issec-eq-Eq-fib'
+        isretr-eq-Eq-fib'
+
+  equiv-Eq-eq-fib' : {s t : fib' f b} → (s ＝ t) ≃ Eq-fib' s t
+  pr1 (equiv-Eq-eq-fib' {s} {t}) = Eq-eq-fib'
+  pr2 (equiv-Eq-eq-fib' {s} {t}) = is-equiv-Eq-eq-fib'
+
+  abstract
+    is-equiv-eq-Eq-fib' :
+      {s t : fib' f b} → is-equiv (eq-Eq-fib-uncurry' {s} {t})
+    is-equiv-eq-Eq-fib' {s} {t} =
+      is-equiv-has-inverse
+        Eq-eq-fib'
+        isretr-eq-Eq-fib'
+        issec-eq-Eq-fib'
+
+  equiv-eq-Eq-fib' : {s t : fib' f b} → Eq-fib' s t ≃ (s ＝ t)
+  pr1 (equiv-eq-Eq-fib' {s} {t}) = eq-Eq-fib-uncurry'
+  pr2 (equiv-eq-Eq-fib' {s} {t}) = is-equiv-eq-Eq-fib'
+```
+
+### `fib f y` and `fib' f y` are equivalent
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
+  where
+  
+  map-equiv-fib : fib f y → fib' f y
+  map-equiv-fib (pair x refl) = pair x refl
+
+  map-inv-equiv-fib : fib' f y → fib f y
+  map-inv-equiv-fib (pair x refl) = pair x refl
+
+  issec-map-inv-equiv-fib : (map-equiv-fib ∘ map-inv-equiv-fib) ~ id
+  issec-map-inv-equiv-fib (pair x refl) = refl
+
+  isretr-map-inv-equiv-fib : (map-inv-equiv-fib ∘ map-equiv-fib) ~ id
+  isretr-map-inv-equiv-fib (pair x refl) = refl
+
+  is-equiv-map-equiv-fib : is-equiv map-equiv-fib
+  is-equiv-map-equiv-fib =
+    is-equiv-has-inverse
+      map-inv-equiv-fib
+      issec-map-inv-equiv-fib
+      isretr-map-inv-equiv-fib
+
+  equiv-fib : fib f y ≃ fib' f y
+  pr1 equiv-fib = map-equiv-fib
+  pr2 equiv-fib = is-equiv-map-equiv-fib
 ```
 
 ### Computing the fibers of a projection map

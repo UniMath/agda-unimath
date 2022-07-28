@@ -124,6 +124,7 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.groups-of-modular-arithmetic
+open import elementary-number-theory.half-integers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.inequality-standard-finite-types
@@ -530,6 +531,7 @@ open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.conjugation
 open import group-theory.contravariant-pushforward-concrete-group-actions
+open import group-theory.e8-lattice
 open import group-theory.embeddings-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups

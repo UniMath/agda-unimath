@@ -10,8 +10,7 @@ module elementary-number-theory.group-of-integers where
 open import elementary-number-theory.addition-integers using
   ( add-ℤ; associative-add-ℤ; left-unit-law-add-ℤ; right-unit-law-add-ℤ;
     left-inverse-law-add-ℤ; right-inverse-law-add-ℤ)
-open import elementary-number-theory.equality-integers using (ℤ-Set)
-open import elementary-number-theory.integers using (zero-ℤ; neg-ℤ)
+open import elementary-number-theory.integers using (zero-ℤ; neg-ℤ; ℤ-Set)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (lzero)

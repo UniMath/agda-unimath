@@ -10,7 +10,7 @@ module elementary-number-theory.equality-integers where
 open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ)
 open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ)
+  ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ; ℤ-Set)
 open import elementary-number-theory.natural-numbers using
   ( Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-set-ℕ; is-prop-Eq-ℕ)
 
@@ -92,18 +92,6 @@ is-decidable-is-one-ℤ x = has-decidable-equality-ℤ x one-ℤ
 is-decidable-is-neg-one-ℤ :
   (x : ℤ) → is-decidable (is-neg-one-ℤ x)
 is-decidable-is-neg-one-ℤ x = has-decidable-equality-ℤ x neg-one-ℤ
-```
-
-### The type of integers is a set
-
-```agda
-abstract
-  is-set-ℤ : is-set ℤ
-  is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
-
-ℤ-Set : UU-Set lzero
-pr1 ℤ-Set = ℤ
-pr2 ℤ-Set = is-set-ℤ
 ```
 
 ### The type of integers is its own set truncation

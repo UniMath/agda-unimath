@@ -18,14 +18,14 @@ open import elementary-number-theory.addition-natural-numbers using
     left-successor-law-add-ℕ)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ)
-open import elementary-number-theory.equality-integers using (Eq-eq-ℤ; is-set-ℤ)
+open import elementary-number-theory.equality-integers using (Eq-eq-ℤ)
 open import elementary-number-theory.inequality-integers using
   ( leq-ℤ; preserves-leq-add-ℤ; concatenate-eq-leq-eq-ℤ)
 open import elementary-number-theory.integers using
   ( ℤ; neg-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; int-ℕ; succ-ℤ; pred-ℤ;
     in-pos; pred-neg-ℤ; issec-pred-ℤ; neg-pred-ℤ; neg-neg-ℤ; is-positive-ℤ;
     succ-int-ℕ; is-zero-ℤ; is-nonzero-ℤ; is-positive-eq-ℤ; is-nonnegative-ℤ;
-    is-nonnegative-eq-ℤ)
+    is-nonnegative-eq-ℤ; is-set-ℤ)
 open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)

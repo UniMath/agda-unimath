@@ -11,10 +11,11 @@ open import foundation-core.pullbacks public
 
 open import foundation.commuting-cubes
 open import foundation.contractible-types using
-  ( is-contr; is-contr-total-path; is-contr-equiv'; is-contr-is-equiv')
+  ( is-contr; is-contr-total-path; is-contr-equiv'; is-contr-is-equiv';
+    is-equiv-is-contr)
 open import foundation.constant-maps using (const)
-open import foundation.descent-equivalences
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
+open import foundation.descent-equivalences using (descent-is-equiv)
 open import foundation.diagonal-maps-of-types using (diagonal)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
@@ -22,22 +23,26 @@ open import foundation.equivalences using
     map-inv-equiv; is-equiv-has-inverse; is-equiv-right-factor;
     is-equiv-left-factor; is-pullback-is-equiv'; is-pullback-is-equiv)
 open import foundation.function-extensionality using
-  ( htpy-eq; issec-eq-htpy; isretr-eq-htpy)
+  ( htpy-eq; issec-eq-htpy; isretr-eq-htpy; funext)
 open import foundation.functions using (_∘_; id; map-Π)
 open import foundation.functoriality-dependent-function-types using
   ( map-inv-is-equiv-precomp-Π-is-equiv; htpy-map-Π;
     isretr-map-inv-is-equiv-precomp-Π-is-equiv;
     issec-map-inv-is-equiv-precomp-Π-is-equiv; is-equiv-map-Π)
+open import foundation.functoriality-dependent-pair-types using
+  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot;
+    is-pullback-family-is-pullback-tot; map-Σ; tot-cone-cone-family)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using
   ( _~_; refl-htpy; right-unit-htpy; _∙h_; _·l_; _·r_; ap-concat-htpy;
     ap-concat-htpy'; inv-htpy; concat-htpy; concat-htpy';
     is-equiv-concat-htpy'; is-equiv-concat-htpy; refl-htpy'; ind-htpy;
-    htpy-right-whisk; comp-htpy; assoc-htpy)
+    htpy-right-whisk; comp-htpy; assoc-htpy; nat-htpy)
 open import foundation.identity-types using
   ( Id; _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv; concat';
-    concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr)
+    concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr;
+    ap-comp; tr-id-right)
 open import foundation.structure-identity-principle using (extensionality-Σ)
 open import foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
@@ -49,18 +54,96 @@ open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.cones-pullbacks
 open import foundation-core.function-extensionality using
   ( eq-htpy; eq-htpy-refl-htpy)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot)
 open import foundation-core.universal-property-pullbacks using
   ( universal-property-pullback;
     is-equiv-up-pullback-up-pullback; up-pullback-up-pullback-is-equiv)
 ```
 
-## Idea
-
-We construct canonical pullbacks of cospans
-
 ## Properties
+
+### Exponents of pullbacks are pullbacks
+
+```agda
+exponent-cone :
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} (T : UU l5)
+  (f : A → X) (g : B → X) (c : cone f g C) →
+  cone (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) (T → C)
+pr1 (exponent-cone T f g c) h = vertical-map-cone f g c ∘ h
+pr1 (pr2 (exponent-cone T f g c)) h = horizontal-map-cone f g c ∘ h
+pr2 (pr2 (exponent-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
+
+map-canonical-pullback-exponent :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
+  (T : UU l4) →
+  canonical-pullback (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) →
+  cone f g T
+map-canonical-pullback-exponent f g T =
+  tot (λ p → tot (λ q → htpy-eq))
+
+abstract
+  is-equiv-map-canonical-pullback-exponent :
+    {l1 l2 l3 l4 : Level}
+    {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
+    (T : UU l4) → is-equiv (map-canonical-pullback-exponent f g T)
+  is-equiv-map-canonical-pullback-exponent f g T =
+    is-equiv-tot-is-fiberwise-equiv
+      ( λ p → is-equiv-tot-is-fiberwise-equiv
+        ( λ q → funext (f ∘ p) (g ∘ q)))
+
+triangle-map-canonical-pullback-exponent :
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
+  ( cone-map f g {C' = T} c) ~
+  ( ( map-canonical-pullback-exponent f g T) ∘
+    ( gap
+      ( λ (h : T → A) → f ∘ h)
+      ( λ (h : T → B) → g ∘ h)
+      ( exponent-cone T f g c)))
+triangle-map-canonical-pullback-exponent
+  {A = A} {B} T f g c h =
+  eq-pair-Σ refl
+    ( eq-pair-Σ refl
+      ( inv (issec-eq-htpy (coherence-square-cone f g c ·r h))))
+
+abstract
+  is-pullback-exponent-is-pullback :
+    {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+    (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
+    (T : UU l5) →
+    is-pullback
+      ( λ (h : T → A) → f ∘ h)
+      ( λ (h : T → B) → g ∘ h)
+      ( exponent-cone T f g c)
+  is-pullback-exponent-is-pullback f g c is-pb-c T =
+    is-equiv-right-factor
+      ( cone-map f g c)
+      ( map-canonical-pullback-exponent f g T)
+      ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
+      ( triangle-map-canonical-pullback-exponent T f g c)
+      ( is-equiv-map-canonical-pullback-exponent f g T)
+      ( universal-property-pullback-is-pullback f g c is-pb-c T)
+
+abstract
+  is-pullback-is-pullback-exponent :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+    (f : A → X) (g : B → X) (c : cone f g C) →
+    ((l5 : Level) (T : UU l5) → is-pullback
+      ( λ (h : T → A) → f ∘ h)
+      ( λ (h : T → B) → g ∘ h)
+      ( exponent-cone T f g c)) →
+    is-pullback f g c
+  is-pullback-is-pullback-exponent f g c is-pb-exp =
+    is-pullback-universal-property-pullback f g c
+      ( λ T → is-equiv-comp
+        ( cone-map f g c)
+        ( map-canonical-pullback-exponent f g T)
+        ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
+        ( triangle-map-canonical-pullback-exponent T f g c)
+        ( is-pb-exp _ T)
+        ( is-equiv-map-canonical-pullback-exponent f g T))
+```
 
 ### Identity types can be presented as pullbacks
 
@@ -917,5 +1000,91 @@ is-pullback-front-right-is-pullback-back-left-cube-is-equiv
     ( coherence-cube-rotate-120 f g h k f' g' h' k' hA hB hC hD
       top back-left back-right front-left front-right bottom c)
     is-equiv-g' is-equiv-g is-equiv-h' is-equiv-h is-pb-back-left
+```
+
+### Identity types commute with pullbacks
+
+```agda
+cone-ap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C) (c1 c2 : C) →
+  let p = pr1 c
+      q = pr1 (pr2 c)
+      H = pr2 (pr2 c)
+  in
+  cone
+    ( λ (α : Id (p c1) (p c2)) → (ap f α) ∙ (H c2))
+    ( λ (β : Id (q c1) (q c2)) → (H c1) ∙ (ap g β))
+    ( Id c1 c2)
+pr1 (cone-ap f g (pair p (pair q  H)) c1 c2) = ap p
+pr1 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) = ap q
+pr2 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) γ =
+  ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
+  ( ( inv (nat-htpy H γ)) ∙
+    ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ)))
+
+cone-ap' :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C) (c1 c2 : C) →
+  let p = pr1 c
+      q = pr1 (pr2 c)
+      H = pr2 (pr2 c)
+  in
+  cone
+    ( λ (α : Id (p c1) (p c2)) → tr (λ t → Id (f (p c1)) t) (H c2) (ap f α))
+    ( λ (β : Id (q c1) (q c2)) → (H c1) ∙ (ap g β))
+    ( Id c1 c2)
+pr1 (cone-ap' f g (pair p (pair q  H)) c1 c2) = ap p
+pr1 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) = ap q
+pr2 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) γ =
+  ( tr-id-right (H c2) (ap f (ap p γ))) ∙
+  ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
+    ( ( inv (nat-htpy H γ)) ∙
+      ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ))))
+      
+is-pullback-cone-ap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
+  (c1 c2 : C) →
+  let p = pr1 c
+      q = pr1 (pr2 c)
+      H = pr2 (pr2 c)
+  in
+  is-pullback
+    ( λ (α : Id (vertical-map-cone f g c c1) (vertical-map-cone f g c c2)) →
+      (ap f α) ∙ (coherence-square-cone f g c c2))
+    ( λ (β : Id (horizontal-map-cone f g c c1) (horizontal-map-cone f g c c2)) →
+      (H c1) ∙ (ap g β))
+    ( cone-ap f g c c1 c2)
+is-pullback-cone-ap f g (pair p (pair q H)) is-pb-c c1 c2 =
+  is-pullback-htpy'
+    ( λ α → tr-id-right (H c2) (ap f α))
+    ( refl-htpy)
+    ( cone-ap' f g (pair p (pair q H)) c1 c2)
+    { c' = cone-ap f g (pair p (pair q H)) c1 c2}
+    ( pair refl-htpy (pair refl-htpy right-unit-htpy))
+    ( is-pullback-family-is-pullback-tot
+      ( λ x → Id (f (p c1)) x)
+      ( λ a → ap f {x = p c1} {y = a})
+      ( λ b β → (H c1) ∙ (ap g β))
+      ( pair p (pair q H))
+      ( cone-ap' f g (pair p (pair q H)) c1)
+      ( is-pb-c)
+      ( is-pullback-is-equiv
+        ( map-Σ _ f (λ a α → ap f α))
+        ( map-Σ _ g (λ b β → (H c1) ∙ (ap g β)))
+        ( tot-cone-cone-family
+          ( Id (f (p c1)))
+          ( λ a → ap f)
+          ( λ b β → (H c1) ∙ (ap g β))
+          ( pair p (pair q H))
+          ( cone-ap' f g (pair p (pair q H)) c1))
+        ( is-equiv-is-contr _
+          ( is-contr-total-path (q c1))
+          ( is-contr-total-path (f (p c1))))
+        ( is-equiv-is-contr _
+          ( is-contr-total-path c1)
+          ( is-contr-total-path (p c1))))
+      ( c2))
 ```
 
