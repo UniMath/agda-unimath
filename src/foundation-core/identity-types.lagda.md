@@ -252,6 +252,11 @@ preserves-tr :
   (f : (i : I) → A i → B i) {i j : I} (p : i ＝ j) (x : A i) →
   f j (tr A p x) ＝ tr B p (f i x)
 preserves-tr f refl x = refl
+
+tr-id-right :
+  {l1 : Level} {A : UU l1} {a b c : A} (q : Id b c) (p : Id a b) →
+  Id (tr (λ y → Id a y) q p) (p ∙ q)
+tr-id-right refl refl = refl
 ```
 
 ### The Mac Lane pentagon for identity types

@@ -7,22 +7,22 @@ title: Propositional maps
 
 module foundation-core.propositional-maps where
 
-open import foundation-core.contractible-types using (is-contr-equiv; is-contr)
+open import foundation-core.contractible-types using
+  ( is-contr-equiv'; is-contr; is-contr-equiv)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
+open import foundation-core.embeddings using
+  ( is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation-core.equivalences using (is-equiv-comp'; _≃_)
-open import foundation-core.fibers-of-maps using (fib)
+open import foundation-core.fibers-of-maps using (fib; equiv-fib; fib')
 open import foundation-core.functions using (_∘_)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-tot)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
+open import foundation-core.identity-types using ( refl; ap; inv)
 open import foundation-core.propositions using
   ( is-prop; is-proof-irrelevant-is-prop; is-prop-is-proof-irrelevant; UU-Prop)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
-
-open import foundation.identity-types using
-  ( Id; refl; ap; inv; equiv-inv; is-equiv-inv)
 ```
 
 ## Idea
@@ -53,9 +53,9 @@ module _
     is-emb-is-prop-map : is-prop-map f → is-emb f
     is-emb-is-prop-map is-prop-map-f x =
       fundamental-theorem-id
-        ( is-contr-equiv
+        ( is-contr-equiv'
           ( fib f (f x))
-          ( equiv-tot (λ y → equiv-inv (f x) (f y)))
+          ( equiv-fib f (f x))
           ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (pair x refl)))
         ( λ y → ap f)
 
@@ -66,12 +66,12 @@ module _
       where
       α : (t : fib f y) → is-contr (fib f y)
       α (pair x refl) =
-        fundamental-theorem-id'
-          ( λ y → inv ∘ ap f)
-          ( λ y →
-            is-equiv-comp' inv (ap f)
-              ( is-emb-f x y)
-              ( is-equiv-inv (f x) (f y)))
+        is-contr-equiv
+          ( fib' f (f x))
+          ( equiv-fib f (f x))
+          ( fundamental-theorem-id'
+            ( λ y → ap f)
+            ( λ y → is-emb-f x y))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

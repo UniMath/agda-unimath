@@ -25,11 +25,11 @@ open import elementary-number-theory.congruence-natural-numbers using
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)
 open import elementary-number-theory.equality-integers using
-  ( has-decidable-equality-ℤ; is-set-ℤ)
+  ( has-decidable-equality-ℤ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
-    is-equiv-pred-ℤ; is-equiv-neg-ℤ)
+    is-equiv-pred-ℤ; is-equiv-neg-ℤ; is-set-ℤ)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; left-zero-law-mul-ℤ;

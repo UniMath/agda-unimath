@@ -89,22 +89,6 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Precomposing cones
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X)
-  where
-
-  cone-map :
-    {l4 l5 : Level} {C : UU l4} {C' : UU l5} →
-    cone f g C → (C' → C) → cone f g C'
-  pr1 (cone-map c h) = vertical-map-cone f g c ∘ h
-  pr1 (pr2 (cone-map c h)) = horizontal-map-cone f g c ∘ h
-  pr2 (pr2 (cone-map c h)) = coherence-square-cone f g c ·r h
-```
-
 ### Identifications of cones
 
 Next we characterize the identity type of the type of cones with a given vertex C. Note that in the definition of htpy-cone we do not use pattern matching on the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a Σ-type for any c and c', not just for c and c' of the form (pair p (pair q H)) and (pair p' (pair q' H')) respectively.
@@ -136,36 +120,50 @@ module _
   htpy-eq-cone : (c c' : cone f g C) → c ＝ c' → htpy-cone c c'
   htpy-eq-cone c .c refl = refl-htpy-cone c
 
-  extensionality-cone : (c d : cone f g C) → (c ＝ d) ≃ htpy-cone c d
-  extensionality-cone c =
-    extensionality-Σ
-      ( λ {p'} qH' K →
-        Σ ( horizontal-map-cone f g c ~ pr1 qH')
-            ( coherence-htpy-cone c (pair p' qH') K))
-      ( refl-htpy)
-      ( pair refl-htpy right-unit-htpy)
-      ( λ p' → equiv-funext)
-      ( extensionality-Σ
-        ( λ {q'} H' →
-          coherence-htpy-cone
-            ( c)
-            ( pair (vertical-map-cone f g c) (pair q' H'))
-            ( refl-htpy))
-        ( refl-htpy)
-        ( right-unit-htpy)
-        ( λ q' → equiv-funext)
-        ( λ H' → equiv-concat-htpy right-unit-htpy H' ∘e equiv-funext))
-
   is-contr-total-htpy-cone :
     (c : cone f g C) → is-contr (Σ (cone f g C) (htpy-cone c))
   is-contr-total-htpy-cone c =
-     fundamental-theorem-id' 
-       ( λ c' → map-equiv (extensionality-cone c c'))
-       ( λ c' → is-equiv-map-equiv (extensionality-cone c c'))
+    is-contr-total-Eq-structure
+      ( λ p qH K →
+        Σ ( horizontal-map-cone f g c ~ pr1 qH)
+          ( coherence-htpy-cone c (pair p qH) K))
+      ( is-contr-total-htpy (vertical-map-cone f g c))
+      ( pair (vertical-map-cone f g c) refl-htpy)
+      ( is-contr-total-Eq-structure
+        ( λ q H →
+          coherence-htpy-cone c
+            ( pair (vertical-map-cone f g c) (pair q H))
+            ( refl-htpy))
+        ( is-contr-total-htpy (horizontal-map-cone f g c))
+        ( pair (horizontal-map-cone f g c) refl-htpy)
+        ( is-contr-total-htpy (coherence-square-cone f g c ∙h refl-htpy)))
 
-  eq-htpy-cone :
-    (c c' : cone f g C) → htpy-cone c c' → c ＝ c'
+  is-equiv-htpy-eq-cone : (c c' : cone f g C) → is-equiv (htpy-eq-cone c c')
+  is-equiv-htpy-eq-cone c =
+    fundamental-theorem-id (is-contr-total-htpy-cone c) (htpy-eq-cone c)
+
+  extensionality-cone : (c c' : cone f g C) → (c ＝ c') ≃ htpy-cone c c'
+  pr1 (extensionality-cone c c') = htpy-eq-cone c c'
+  pr2 (extensionality-cone c c') = is-equiv-htpy-eq-cone c c'
+
+  eq-htpy-cone : (c c' : cone f g C) → htpy-cone c c' → (c ＝ c')
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
+```
+
+### Precomposing cones
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  cone-map :
+    {l4 l5 : Level} {C : UU l4} {C' : UU l5} →
+    cone f g C → (C' → C) → cone f g C'
+  pr1 (cone-map c h) = vertical-map-cone f g c ∘ h
+  pr1 (pr2 (cone-map c h)) = horizontal-map-cone f g c ∘ h
+  pr2 (pr2 (cone-map c h)) = coherence-square-cone f g c ·r h
 ```
 
 ### Horizontal composition of cones

@@ -23,6 +23,7 @@ open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.conjugation public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
+open import group-theory.e8-lattice public
 open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
 open import group-theory.equivalences-concrete-group-actions public

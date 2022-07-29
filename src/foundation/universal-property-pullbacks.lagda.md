@@ -116,27 +116,6 @@ module _
       ( eq-map-universal-property-pullback f g c up c')
 ```
 
-### Uniqueness of maps obtained via the universal property of pullbacks
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
-  where
-
-  abstract
-    uniqueness-universal-property-pullback :
-      ({l : Level} → universal-property-pullback l f g c) →
-      {l5 : Level} (C' : UU l5) (c' : cone f g C') →
-      is-contr (Σ (C' → C) (λ h → htpy-cone f g (cone-map f g c h) c'))
-    uniqueness-universal-property-pullback up C' c' =
-      is-contr-equiv'
-        ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
-        ( equiv-tot
-          ( λ h → extensionality-cone f g (cone-map f g c h) c'))
-        ( is-contr-map-is-equiv (up C')  c')
-```
-
 ### Uniquely uniqueness of pullbacks
 
 ```agda

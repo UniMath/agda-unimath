@@ -56,7 +56,7 @@ module _
         ( fib g (f a))
         ( map-fib-cone f g c a)
         ( is-fiberwise-equiv-map-fib-cone-is-pullback f g c pb a)
-        (is-trunc-g (f a))
+        ( is-trunc-g (f a))
 
 abstract
   is-trunc-is-pullback' :

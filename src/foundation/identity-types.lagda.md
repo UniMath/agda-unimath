@@ -16,7 +16,7 @@ open import foundation.universe-levels using (UU; Level)
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp')
 open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
+open import foundation-core.homotopies using (_~_; nat-htpy)
 ```
 
 ## Idea
