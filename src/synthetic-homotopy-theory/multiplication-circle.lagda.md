@@ -31,22 +31,16 @@ Classically, the circle can be viewed as the subset of the complex numbers of ab
 ### Homotopy `id ~ id` of degree one
 
 ```agda
-tr-Eq-subst-id-id :
-  {l1 : Level} {A : UU l1} →
-  {a b : A} (p : Id a b) (q : Id a a) (r : Id b b) →
-  Id (p ∙ r) (q ∙ p) → Id (tr (Eq-subst (id {A = A}) (id {A = A})) p q) r
-tr-Eq-subst-id-id refl q r s = inv (s ∙ right-unit)
-
 htpy-id-id-Π-𝕊¹ :
   Π-𝕊¹
-    ( Eq-subst id id)
+    ( eq-value id id)
     ( loop-𝕊¹)
-    ( tr-Eq-subst-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+    ( tr-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
 htpy-id-id-Π-𝕊¹ =
   apply-dependent-universal-property-𝕊¹
-    ( Eq-subst id id)
+    ( eq-value id id)
     ( loop-𝕊¹)
-    ( tr-Eq-subst-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+    ( tr-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
 
 htpy-id-id-𝕊¹ : (x : 𝕊¹) → Id x x
 htpy-id-id-𝕊¹ = pr1 htpy-id-id-Π-𝕊¹

@@ -38,6 +38,8 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.universal-property-circle
 
 {- Section 12.1 Families over the circle -}
 
@@ -187,11 +189,11 @@ naturality-tr-fiberwise-transformation :
   Id (tr Q α (f x p)) (f y (tr P α p))
 naturality-tr-fiberwise-transformation f refl p = refl
 
-functor-dependent-free-loop :
+functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   { P : X → UU l2} {Q : X → UU l3} (f : (x : X) → P x → Q x) →
-  dependent-free-loop l P → dependent-free-loop l Q
-functor-dependent-free-loop l {P} {Q} f =
+  free-dependent-loop l P → free-dependent-loop l Q
+functor-free-dependent-loop l {P} {Q} f =
   map-Σ
     ( λ q₀ → Id (tr Q (loop-free-loop l) q₀) q₀)
     ( f (base-free-loop l))
@@ -199,35 +201,35 @@ functor-dependent-free-loop l {P} {Q} f =
       ( naturality-tr-fiberwise-transformation f (loop-free-loop l) p₀) ∙
       ( ap (f (base-free-loop l)) α))
 
-coherence-square-functor-dependent-free-loop :
+coherence-square-functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} {P : X → UU l2} {Q : X → UU l3}
   ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y)
   ( h : (x : X) → P x) →
   Id ( ( naturality-tr-fiberwise-transformation f α (h x)) ∙
        ( ap (f y) (apd h α)))
      ( apd (map-Π f h) α)
-coherence-square-functor-dependent-free-loop f refl h = refl
+coherence-square-functor-free-dependent-loop f refl h = refl
   
-square-functor-dependent-free-loop :
+square-functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   { P : X → UU l2} {Q : X → UU l3} (f : (x : X) → P x → Q x) →
-  ( (functor-dependent-free-loop l f) ∘ (ev-free-loop' l P)) ~
-  ( (ev-free-loop' l Q) ∘ (map-Π f))
-square-functor-dependent-free-loop (pair x l) {P} {Q} f h =
-  eq-Eq-dependent-free-loop (pair x l) Q
-    ( functor-dependent-free-loop (pair x l) f
-      ( ev-free-loop' (pair x l) P h))
-    ( ev-free-loop' (pair x l) Q (map-Π f h))
+  ( (functor-free-dependent-loop l f) ∘ (ev-free-loop-Π l P)) ~
+  ( (ev-free-loop-Π l Q) ∘ (map-Π f))
+square-functor-free-dependent-loop (pair x l) {P} {Q} f h =
+  eq-Eq-free-dependent-loop (pair x l) Q
+    ( functor-free-dependent-loop (pair x l) f
+      ( ev-free-loop-Π (pair x l) P h))
+    ( ev-free-loop-Π (pair x l) Q (map-Π f h))
     ( pair refl
-      ( right-unit ∙ (coherence-square-functor-dependent-free-loop f l h)))
+      ( right-unit ∙ (coherence-square-functor-free-dependent-loop f l h)))
 
 abstract
-  is-equiv-functor-dependent-free-loop-is-fiberwise-equiv :
+  is-equiv-functor-free-dependent-loop-is-fiberwise-equiv :
     { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
     { P : X → UU l2} {Q : X → UU l3} {f : (x : X) → P x → Q x}
     ( is-equiv-f : (x : X) → is-equiv (f x)) →
-    is-equiv (functor-dependent-free-loop l f)
-  is-equiv-functor-dependent-free-loop-is-fiberwise-equiv
+    is-equiv (functor-free-dependent-loop l f)
+  is-equiv-functor-free-dependent-loop-is-fiberwise-equiv
     (pair x l) {P} {Q} {f} is-equiv-f =
     is-equiv-map-Σ
       ( λ q₀ → Id (tr Q l q₀) q₀)
@@ -252,13 +254,13 @@ abstract
     dependent-universal-property-circle l3 l
   lower-dependent-universal-property-circle {l1} {l2} l3 l dup-circle P =
     is-equiv-left-is-equiv-right-square
-      ( ev-free-loop' l P)
-      ( ev-free-loop' l (λ x → raise l2 (P x)))
+      ( ev-free-loop-Π l P)
+      ( ev-free-loop-Π l (λ x → raise l2 (P x)))
       ( map-Π (λ x → map-raise))
-      ( functor-dependent-free-loop l (λ x → map-raise))
-      ( square-functor-dependent-free-loop l (λ x → map-raise))
+      ( functor-free-dependent-loop l (λ x → map-raise))
+      ( square-functor-free-dependent-loop l (λ x → map-raise))
       ( is-equiv-map-Π _ (λ x → is-equiv-map-raise))
-      ( is-equiv-functor-dependent-free-loop-is-fiberwise-equiv l
+      ( is-equiv-functor-free-dependent-loop-is-fiberwise-equiv l
         ( λ x → is-equiv-map-raise))
       ( dup-circle (λ x → raise l2 (P x)))
 
