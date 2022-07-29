@@ -253,3 +253,107 @@ universal-property-pushout-pullback-property-pushout
       ( λ i' → is-equiv-tot-is-fiberwise-equiv
         ( λ j' → funext (i' ∘ f) (j' ∘ g))))
 ```
+
+### If the vertical map of a span is an equivalence, then the vertical map of a cocone on it is an equivalence if and only if the cocone is a pushout
+
+```agda
+is-equiv-universal-property-pushout :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : S → A) (g : S → B) (c : cocone f g C) →
+  is-equiv f →
+  ({l : Level} → universal-property-pushout l f g c) → is-equiv (pr1 (pr2 c))
+is-equiv-universal-property-pushout
+  {A = A} {B} f g (pair i (pair j H)) is-equiv-f up-c =
+  is-equiv-is-equiv-precomp j
+    ( λ l T →
+      is-equiv-is-pullback'
+        ( λ (h : A → T) → h ∘ f)
+        ( λ (h : B → T) → h ∘ g)
+        ( cone-pullback-property-pushout f g (pair i (pair j H)) T)
+        ( is-equiv-precomp-is-equiv f is-equiv-f T)
+        ( pullback-property-pushout-universal-property-pushout
+          l f g (pair i (pair j H)) up-c T))
+
+equiv-universal-property-pushout :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (e : S ≃ A) (g : S → B) (c : cocone (map-equiv e) g C) →
+  ({l : Level} → universal-property-pushout l (map-equiv e) g c) →
+  B ≃ C
+pr1 (equiv-universal-property-pushout e g c up-c) =
+  vertical-map-cocone (map-equiv e) g c
+pr2 (equiv-universal-property-pushout e g c up-c) =
+  is-equiv-universal-property-pushout
+    ( map-equiv e)
+    ( g)
+    ( c)
+    ( is-equiv-map-equiv e)
+    ( up-c)
+
+universal-property-pushout-is-equiv :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : S → A) (g : S → B) (c : cocone f g C) →
+  is-equiv f → is-equiv (pr1 (pr2 c)) →
+  ({l : Level} → universal-property-pushout l f g c)
+universal-property-pushout-is-equiv f g (pair i (pair j H)) is-equiv-f is-equiv-j {l} =
+  let c = (pair i (pair j H)) in
+  universal-property-pushout-pullback-property-pushout l f g c
+    ( λ T → is-pullback-is-equiv'
+      ( λ h → h ∘ f)
+      ( λ h → h ∘ g)
+      ( cone-pullback-property-pushout f g c T)
+      ( is-equiv-precomp-is-equiv f is-equiv-f T)
+      ( is-equiv-precomp-is-equiv j is-equiv-j T))
+```
+
+### If the horizontal map of a span is an equivalence, then the horizontal map of a cocone on it is an equivalence if and only if the cocone is a pushout
+
+```agda
+is-equiv-universal-property-pushout' :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : S → A) (g : S → B) (c : cocone f g C) →
+  is-equiv g →
+  ({l : Level} → universal-property-pushout l f g c) →
+  is-equiv (horizontal-map-cocone f g c)
+is-equiv-universal-property-pushout' f g c is-equiv-g up-c =
+  is-equiv-is-equiv-precomp
+    ( horizontal-map-cocone f g c)
+    ( λ l T →
+      is-equiv-is-pullback
+        ( precomp f T)
+        ( precomp g T)
+        ( cone-pullback-property-pushout f g c T)
+        ( is-equiv-precomp-is-equiv g is-equiv-g T)
+        ( pullback-property-pushout-universal-property-pushout
+          l f g c up-c T))
+
+equiv-universal-property-pushout' :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : S → A) (e : S ≃ B) (c : cocone f (map-equiv e) C) →
+  ({l : Level} → universal-property-pushout l f (map-equiv e) c) →
+  A ≃ C
+equiv-universal-property-pushout' f e c up-c =
+  pair
+    ( pr1 c)
+    ( is-equiv-universal-property-pushout'
+      ( f)
+      ( map-equiv e)
+      ( c)
+      ( is-equiv-map-equiv e)
+      ( up-c))
+
+universal-property-pushout-is-equiv' :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : S → A) (g : S → B) (c : cocone f g C) →
+  is-equiv g → is-equiv (pr1 c) →
+  ({l : Level} → universal-property-pushout l f g c)
+universal-property-pushout-is-equiv'
+  f g (pair i (pair j H)) is-equiv-g is-equiv-i {l} =
+  let c = (pair i (pair j H)) in
+  universal-property-pushout-pullback-property-pushout l f g c
+    ( λ T → is-pullback-is-equiv
+      ( precomp f T)
+      ( precomp g T)
+      ( cone-pullback-property-pushout f g c T)
+      ( is-equiv-precomp-is-equiv g is-equiv-g T)
+      ( is-equiv-precomp-is-equiv i is-equiv-i T))
+```
