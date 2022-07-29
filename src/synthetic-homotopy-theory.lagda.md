@@ -13,6 +13,7 @@ open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-pushouts public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.double-loop-spaces public
+open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.infinite-complex-projective-space public
@@ -28,6 +29,7 @@ open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
+open import synthetic-homotopy-theory.universal-property-circle public
 open import synthetic-homotopy-theory.universal-property-pushouts public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
 ```

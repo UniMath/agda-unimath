@@ -10,7 +10,7 @@ module foundation-core.homotopies where
 open import foundation-core.functions using (id)
 open import foundation-core.identity-types using
   ( _＝_; refl; _∙_; concat; inv; ap; assoc; left-unit; right-unit; left-inv;
-    right-inv; distributive-inv-concat; is-injective-concat'; ap-id)
+    right-inv; distributive-inv-concat; is-injective-concat'; ap-id; apd; tr)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -18,7 +18,28 @@ open import foundation-core.universe-levels using (UU; Level; _⊔_)
 
 A homotopy of identifications is a pointwise equality between dependent functions.
 
-## Definition
+## Definitions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {P : X → UU l2} (f g : (x : X) → P x)
+  where
+
+  eq-value : X → UU _
+  eq-value x = (f x ＝ g x)
+
+  tr-eq-value :
+    { x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y)→
+    ( ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p))) →
+    ( tr eq-value p q ＝ r)
+  tr-eq-value refl q .((ap id q) ∙ refl) refl = inv (right-unit ∙ (ap-id q))
+
+tr-eq-value-id-id :
+  {l1 : Level} {A : UU l1} →
+  {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
+  (p ∙ r) ＝ (q ∙ p) → (tr (eq-value (id {A = A}) (id {A = A})) p q) ＝ r
+tr-eq-value-id-id refl q r s = inv (s ∙ right-unit)
+```
 
 ```agda
 module _
@@ -26,7 +47,7 @@ module _
   where
   
   _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
-  f ~ g = (x : A) → f x ＝ g x
+  f ~ g = (x : A) → eq-value f g x
 ```
 
 ## Properties
