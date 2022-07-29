@@ -32,7 +32,8 @@ open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.25-cubical-diagrams
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 
 -- Section 18.1 Five equivalent characterizations of pushouts
 

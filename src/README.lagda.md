@@ -751,11 +751,11 @@ open import structured-types.wild-semigroups
 ```agda
 open import synthetic-homotopy-theory
 open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.25-cubical-diagrams
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.26-id-pushout
 open import synthetic-homotopy-theory.27-sequences
 open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.cocones-pushouts
 open import synthetic-homotopy-theory.cofibers
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
@@ -768,10 +768,12 @@ open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.multiplication-circle
 open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.spectra
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
+open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.wedges-of-pointed-types
 ```
 
