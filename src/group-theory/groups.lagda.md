@@ -155,9 +155,9 @@ module _
     (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
   right-inverse-law-Group = pr2 (pr2 has-inverses-Group)
 
-  is-own-inverse-unit-Group :
+  inv-unit-Group :
     Id (inv-Group unit-Group) unit-Group
-  is-own-inverse-unit-Group =
+  inv-unit-Group =
     ( inv (left-unit-law-Group (inv-Group unit-Group))) ∙
       ( right-inverse-law-Group unit-Group)
 

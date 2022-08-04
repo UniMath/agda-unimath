@@ -12,7 +12,7 @@ open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using (Id; ap-binary; _∙_; inv)
+open import foundation.identity-types using (Id; _＝_; ap-binary; _∙_; inv)
 open import foundation.injective-maps using (is-injective)
 open import foundation.interchange-law using
   (interchange-law-commutative-and-associative)
@@ -32,7 +32,7 @@ open import group-theory.groups using
     transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
     is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
     is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
-    preserves-concat-mul-list-Group)
+    preserves-concat-mul-list-Group; inv-inv-Group; inv-unit-Group)
 open import group-theory.monoids using (is-unital-Semigroup)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
@@ -172,6 +172,13 @@ distributive-neg-add-Ab :
 distributive-neg-add-Ab A x y =
   ( distributive-inv-mul-Group (group-Ab A) x y) ∙
   ( commutative-add-Ab A (neg-Ab A y) (neg-Ab A x))
+
+neg-neg-Ab :
+  {l : Level} (A : Ab l) (x : type-Ab A) → neg-Ab A (neg-Ab A x) ＝ x
+neg-neg-Ab A = inv-inv-Group (group-Ab A)
+
+neg-zero-Ab : {l : Level} (A : Ab l) → neg-Ab A (zero-Ab A) ＝ zero-Ab A
+neg-zero-Ab A = inv-unit-Group (group-Ab A)
 ```
 
 ### Addition on an abelian group is a binary equivalence

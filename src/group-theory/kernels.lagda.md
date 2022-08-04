@@ -56,7 +56,7 @@ module _
     is-closed-under-inv-subset-Group G subtype-kernel-hom-Group
   is-closed-under-inv-subtype-kernel-hom-Group x p =
     ( preserves-inv-hom-Group G H f x) ∙
-    ( ap (inv-Group H) p ∙ is-own-inverse-unit-Group H)
+    ( ap (inv-Group H) p ∙ inv-unit-Group H)
 
   subgroup-kernel-hom-Group : Subgroup k G
   pr1 subgroup-kernel-hom-Group = subtype-kernel-hom-Group

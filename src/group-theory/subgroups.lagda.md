@@ -33,7 +33,7 @@ open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
     associative-mul-Group; left-unit-law-Group; right-unit-law-Group;
     left-inverse-law-Group; right-inverse-law-Group; is-unit-group-Prop;
-    is-own-inverse-unit-Group; semigroup-Group)
+    inv-unit-Group; semigroup-Group)
 open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group; preserves-unit-Group;
     preserves-inverses-Group)
@@ -368,7 +368,7 @@ module _
   pr1 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) .(unit-Group G) refl refl =
     left-unit-law-Group G (unit-Group G)
   pr2 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) refl =
-    is-own-inverse-unit-Group G
+    inv-unit-Group G
 ```
 
 
