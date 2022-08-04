@@ -531,6 +531,8 @@ open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.conjugation
 open import group-theory.contravariant-pushforward-concrete-group-actions
+open import group-theory.dihedral-group-construction
+open import group-theory.dihedral-groups
 open import group-theory.e8-lattice
 open import group-theory.embeddings-groups
 open import group-theory.endomorphism-rings-abelian-groups

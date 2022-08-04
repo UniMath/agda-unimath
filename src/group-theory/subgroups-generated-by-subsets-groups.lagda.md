@@ -24,7 +24,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; left-unit-law-Group;
-    right-unit-law-Group; associative-mul-Group; ap-mul-Group; is-own-inverse-unit-Group;
+    right-unit-law-Group; associative-mul-Group; ap-mul-Group; inv-unit-Group;
     inv-inv-Group; distributive-inv-mul-Group)
 open import group-theory.subgroups using
   ( subset-Group; Subgroup; subset-Subgroup; is-in-Subgroup; contains-unit-Subgroup;
@@ -117,7 +117,7 @@ module _
          ( inv-formal-combination-subset-Group u))
        ( inv-Group G (ev-formal-combination-subset-Group u))
   preserves-inv-ev-formal-combination-subset-Group nil =
-    inv (is-own-inverse-unit-Group G)
+    inv (inv-unit-Group G)
   preserves-inv-ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) u) =
     ( preserves-concat-ev-formal-combination-subset-Group
       ( inv-formal-combination-subset-Group u)
