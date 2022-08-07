@@ -36,6 +36,7 @@ open import graph-theory.regular-undirected-graphs public
 open import graph-theory.rooted-trees public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.totally-faithful-morphisms-undirected-graphs public
+open import graph-theory.trails-undirected-graphs public
 open import graph-theory.trees public
 open import graph-theory.undirected-graph-structures-on-standard-finite-sets public
 open import graph-theory.undirected-graphs public

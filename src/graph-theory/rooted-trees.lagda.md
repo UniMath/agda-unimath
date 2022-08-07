@@ -7,10 +7,13 @@ module graph-theory.rooted-trees where
 
 open import elementary-number-theory.natural-numbers
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.paths-undirected-graphs
+open import graph-theory.trails-undirected-graphs
 open import graph-theory.trees
 open import graph-theory.undirected-graphs
 ```
@@ -41,17 +44,17 @@ module _
   root-Rooted-Tree : node-Rooted-Tree
   root-Rooted-Tree = pr2 T
 
-  path-to-root-Rooted-Tree :
+  trail-to-root-Rooted-Tree :
     (x : node-Rooted-Tree) →
-    path-Undirected-Graph undirected-graph-Rooted-Tree x root-Rooted-Tree
-  path-to-root-Rooted-Tree x =
-    path-Tree tree-Rooted-Tree x root-Rooted-Tree
+    trail-Undirected-Graph undirected-graph-Rooted-Tree x root-Rooted-Tree
+  trail-to-root-Rooted-Tree x =
+    trail-Tree tree-Rooted-Tree x root-Rooted-Tree
 
   height-node-Rooted-Tree : node-Rooted-Tree → ℕ
   height-node-Rooted-Tree x =
-    length-path-Undirected-Graph
+    length-trail-Undirected-Graph
       ( undirected-graph-Rooted-Tree)
-      ( path-to-root-Rooted-Tree x)
+      ( trail-to-root-Rooted-Tree x)
 
   node-of-height-one-Rooted-Tree : UU l1
   node-of-height-one-Rooted-Tree =
@@ -65,4 +68,27 @@ module _
 ```agda
 Forest-Rooted-Trees : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Forest-Rooted-Trees l1 l2 l3 = Σ (UU l1) (λ X → X → Rooted-Tree l2 l3)
+
+module _
+  {l1 l2 l3 : Level} (F : Forest-Rooted-Trees l1 l2 l3)
+  where
+
+  indexing-type-Forest-Rooted-Trees : UU l1
+  indexing-type-Forest-Rooted-Trees = pr1 F
+
+  family-of-rooted-trees-Forest-Rooted-Trees :
+    indexing-type-Forest-Rooted-Trees → Rooted-Tree l2 l3
+  family-of-rooted-trees-Forest-Rooted-Trees = pr2 F
+
+  node-rooted-tree-Forest-Rooted-Trees : UU (l1 ⊔ l2)
+  node-rooted-tree-Forest-Rooted-Trees =
+    ( Σ indexing-type-Forest-Rooted-Trees
+      ( λ x →
+        node-Rooted-Tree (family-of-rooted-trees-Forest-Rooted-Trees x))) +
+    ( unit)
+
+  unordered-pair-of-nodes-rooted-tree-Forest-Rooted-Trees :
+    UU (lsuc lzero ⊔ l1 ⊔ l2)
+  unordered-pair-of-nodes-rooted-tree-Forest-Rooted-Trees =
+    unordered-pair node-rooted-tree-Forest-Rooted-Trees
 ```
