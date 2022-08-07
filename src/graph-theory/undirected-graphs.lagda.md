@@ -48,6 +48,10 @@ module _
 
   edge-Undirected-Graph : unordered-pair-vertices-Undirected-Graph → UU l2
   edge-Undirected-Graph = pr2 G
+
+  total-edge-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  total-edge-Undirected-Graph =
+    Σ unordered-pair-vertices-Undirected-Graph edge-Undirected-Graph
 ```
 
 ### The forgetful functor from directed graphs to undirected graphs

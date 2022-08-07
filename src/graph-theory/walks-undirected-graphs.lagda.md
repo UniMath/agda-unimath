@@ -10,7 +10,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-coproduct-types
@@ -75,6 +77,42 @@ module _
   vertex-vertex-on-walk-Undirected-Graph w = pr1
 ```
 
+### Edges on a walk
+
+```agda
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) {x : vertex-Undirected-Graph G}
+  where
+
+  is-edge-on-walk-Undirected-Graph' :
+    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
+    total-edge-Undirected-Graph G → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  is-edge-on-walk-Undirected-Graph' refl-walk-Undirected-Graph e =
+    raise-empty (lsuc lzero ⊔ l1 ⊔ l2)
+  is-edge-on-walk-Undirected-Graph' (cons-walk-Undirected-Graph q f w) e =
+    ( is-edge-on-walk-Undirected-Graph' w e) +
+    ( pair q f ＝ e)
+
+  is-edge-on-walk-Undirected-Graph :
+    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
+    (p : unordered-pair-vertices-Undirected-Graph G) →
+    edge-Undirected-Graph G p → UU (lsuc lzero ⊔ (l1 ⊔ l2))
+  is-edge-on-walk-Undirected-Graph w p e =
+    is-edge-on-walk-Undirected-Graph' w (pair p e)
+
+  edge-on-walk-Undirected-Graph :
+    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
+    UU (lsuc lzero ⊔ l1 ⊔ l2)
+  edge-on-walk-Undirected-Graph w =
+    Σ ( total-edge-Undirected-Graph G)
+      ( λ e → is-edge-on-walk-Undirected-Graph' w e)
+
+  edge-edge-on-walk-Undirected-Graph :
+    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
+    edge-on-walk-Undirected-Graph w → total-edge-Undirected-Graph G
+  edge-edge-on-walk-Undirected-Graph w = pr1
+```
+
 ### Concatenating walks
 
 ```agda
@@ -123,4 +161,23 @@ module _
       ( vertex-Undirected-Graph G)
       ( is-vertex-on-walk-Undirected-Graph G w)
       ( λ z → other-element-unordered-pair p y ＝ z))
+
+  compute-edge-on-walk-Undirected-Graph :
+    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
+    edge-on-walk-Undirected-Graph G w ≃ Fin (length-walk-Undirected-Graph w)
+  compute-edge-on-walk-Undirected-Graph refl-walk-Undirected-Graph =
+    equiv-is-empty
+      ( is-empty-raise-empty ∘ pr2)
+      ( id)
+  compute-edge-on-walk-Undirected-Graph (cons-walk-Undirected-Graph p e w) =
+    ( equiv-coprod
+      ( compute-edge-on-walk-Undirected-Graph w)
+      ( equiv-is-contr
+        ( is-contr-total-path (pair p e))
+        ( is-contr-unit))) ∘e
+    ( left-distributive-Σ-coprod
+      ( total-edge-Undirected-Graph G)
+      ( is-edge-on-walk-Undirected-Graph' G w)
+      ( λ z → pair p e ＝ z))
+
 ```
