@@ -500,11 +500,14 @@ open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
+open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
+open import graph-theory.rooted-trees
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
+open import graph-theory.trees
 open import graph-theory.undirected-graph-structures-on-standard-finite-sets
 open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
