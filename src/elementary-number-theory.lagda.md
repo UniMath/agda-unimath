@@ -46,6 +46,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types pu
 open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-natural-numbers public
+open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public

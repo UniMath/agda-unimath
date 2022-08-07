@@ -139,6 +139,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiset-coefficients
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.ordinal-induction-natural-numbers
@@ -499,7 +500,6 @@ open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
-open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
@@ -509,6 +509,7 @@ open import graph-theory.undirected-graph-structures-on-standard-finite-sets
 open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
 open import graph-theory.voltage-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 ## Group theory
