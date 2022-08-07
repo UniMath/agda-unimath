@@ -33,10 +33,13 @@ open import graph-theory.paths-undirected-graphs public
 open import graph-theory.polygons public
 open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public
+open import graph-theory.rooted-trees public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.totally-faithful-morphisms-undirected-graphs public
+open import graph-theory.trees public
 open import graph-theory.undirected-graph-structures-on-standard-finite-sets public
 open import graph-theory.undirected-graphs public
 open import graph-theory.vertex-covers public
 open import graph-theory.voltage-graphs public
+open import graph-theory.walks-undirected-graphs public
 ```
