@@ -219,5 +219,6 @@ open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
 open import foundation.w-types public
 open import foundation.weak-function-extensionality public
+open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public
 ```

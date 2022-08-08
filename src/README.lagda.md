@@ -416,6 +416,7 @@ open import foundation.unordered-tuples-of-types
 open import foundation.unordered-tuples
 open import foundation.w-types
 open import foundation.weak-function-extensionality
+open import foundation.weak-limited-principle-of-omniscience
 open import foundation.weakly-constant-maps
 open import foundation.xor
 ```
