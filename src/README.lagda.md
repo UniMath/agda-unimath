@@ -645,6 +645,7 @@ open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
 open import order-theory.greatest-lower-bounds-posets
+open import order-theory.ideals-preorders
 open import order-theory.interval-subposets
 open import order-theory.join-semilattices
 open import order-theory.large-posets
@@ -656,6 +657,7 @@ open import order-theory.least-elements-posets
 open import order-theory.least-elements-preorders
 open import order-theory.least-upper-bounds-posets
 open import order-theory.locally-finite-posets
+open import order-theory.lower-types-preorders
 open import order-theory.maximal-chains-posets
 open import order-theory.maximal-chains-preorders
 open import order-theory.meet-semilattices
