@@ -311,6 +311,8 @@ open import foundation.iterating-functions
 open import foundation.iterating-involutions
 open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
+open import foundation.lesser-limited-principle-of-omniscience
+open import foundation.limited-principle-of-omniscience
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.lower-types-w-types
@@ -414,6 +416,7 @@ open import foundation.unordered-tuples-of-types
 open import foundation.unordered-tuples
 open import foundation.w-types
 open import foundation.weak-function-extensionality
+open import foundation.weak-limited-principle-of-omniscience
 open import foundation.weakly-constant-maps
 open import foundation.xor
 ```
