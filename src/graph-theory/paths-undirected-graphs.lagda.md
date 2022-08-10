@@ -47,3 +47,17 @@ module _
   length-path-Undirected-Graph p =
     length-walk-Undirected-Graph G (walk-path-Undirected-Graph p)
 ```
+
+## Properties
+
+### The constant walk is a path
+
+```agda
+is-path-refl-walk-Undirected-Graph :
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G) →
+  is-path-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x})
+is-path-refl-walk-Undirected-Graph G x =
+  is-injective-is-contr
+    ( vertex-vertex-on-walk-Undirected-Graph G refl-walk-Undirected-Graph)
+    ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
+```

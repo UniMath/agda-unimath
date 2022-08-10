@@ -33,6 +33,7 @@ open import graph-theory.paths-undirected-graphs public
 open import graph-theory.polygons public
 open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public
+open import graph-theory.rooted-quasitrees public
 open import graph-theory.rooted-trees public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.totally-faithful-morphisms-undirected-graphs public

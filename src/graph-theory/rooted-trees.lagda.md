@@ -48,7 +48,7 @@ module _
     (x : node-Rooted-Tree) →
     trail-Undirected-Graph undirected-graph-Rooted-Tree x root-Rooted-Tree
   trail-to-root-Rooted-Tree x =
-    trail-Tree tree-Rooted-Tree x root-Rooted-Tree
+    standard-trail-Tree tree-Rooted-Tree x root-Rooted-Tree
 
   height-node-Rooted-Tree : node-Rooted-Tree → ℕ
   height-node-Rooted-Tree x =
