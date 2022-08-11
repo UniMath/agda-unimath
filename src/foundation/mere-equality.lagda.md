@@ -7,19 +7,20 @@ title: Mere equality
 
 module foundation.mere-equality where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
   ( map-trunc-Prop)
-open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 open import foundation.propositional-truncations using
   ( trunc-Prop; type-trunc-Prop; unit-trunc-Prop;
-    apply-universal-property-trunc-Prop)
-open import foundation.propositions using (UU-Prop)
-open import foundation.sets using (UU-Set; type-Set; Id-Prop)
-open import foundation.universe-levels using (Level; UU)
+    apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop)
+
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.identity-types using (_＝_; refl; inv; _∙_; ap)
+open import foundation-core.propositions using (UU-Prop; is-prop)
+open import foundation-core.sets using (UU-Set; type-Set; Id-Prop)
+open import foundation-core.universe-levels using (Level; UU)
 ```
 
 ## Idea
@@ -29,12 +30,18 @@ Two elements in a type are said to be merely equal if there is an element of the
 ## Definition
 
 ```agda
-mere-eq-Prop :
-  {l : Level} {A : UU l} → A → A → UU-Prop l
-mere-eq-Prop x y = trunc-Prop (x ＝ y)
-
-mere-eq : {l : Level} {A : UU l} → A → A → UU l
-mere-eq x y = type-trunc-Prop (x ＝ y)
+module _
+  {l : Level} {A : UU l}
+  where
+  
+  mere-eq-Prop : A → A → UU-Prop l
+  mere-eq-Prop x y = trunc-Prop (x ＝ y)
+  
+  mere-eq : A → A → UU l
+  mere-eq x y = type-trunc-Prop (x ＝ y)
+  
+  is-prop-mere-eq : (x y : A) → is-prop (mere-eq x y)
+  is-prop-mere-eq x y = is-prop-type-trunc-Prop
 ```
 
 ## Properties

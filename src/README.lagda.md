@@ -507,6 +507,7 @@ open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
+open import graph-theory.rooted-quasitrees
 open import graph-theory.rooted-trees
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs

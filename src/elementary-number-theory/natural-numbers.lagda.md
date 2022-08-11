@@ -21,8 +21,8 @@ open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id; Id-Prop)
 open import foundation.unit-type using (star; unit; is-prop-unit)
 open import foundation.universal-property-empty-type using
   ( universal-property-empty')
@@ -175,4 +175,18 @@ abstract
 ℕ-Set : UU-Set lzero
 pr1 ℕ-Set = ℕ
 pr2 ℕ-Set = is-set-ℕ
+
+is-prop-is-zero-ℕ : (n : ℕ) → is-prop (is-zero-ℕ n)
+is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
+
+is-zero-ℕ-Prop : ℕ → UU-Prop lzero
+pr1 (is-zero-ℕ-Prop n) = is-zero-ℕ n
+pr2 (is-zero-ℕ-Prop n) = is-prop-is-zero-ℕ n
+
+is-prop-is-one-ℕ : (n : ℕ) → is-prop (is-one-ℕ n)
+is-prop-is-one-ℕ n = is-set-ℕ n 1
+
+is-one-ℕ-Prop : ℕ → UU-Prop lzero
+pr1 (is-one-ℕ-Prop n) = is-one-ℕ n
+pr2 (is-one-ℕ-Prop n) = is-prop-is-one-ℕ n
 ```
