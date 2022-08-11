@@ -17,6 +17,7 @@ open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -440,10 +441,16 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) {x : vertex-Undirected-Graph G}
   where
 
+  is-constant-walk-Undirected-Graph-Prop :
+    {y : vertex-Undirected-Graph G} →
+    walk-Undirected-Graph G x y → UU-Prop lzero
+  is-constant-walk-Undirected-Graph-Prop w =
+    is-zero-ℕ-Prop (length-walk-Undirected-Graph G w)
+
   is-constant-walk-Undirected-Graph :
-    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) → UU lzero
+    {y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y → UU lzero
   is-constant-walk-Undirected-Graph w =
-    is-zero-ℕ (length-walk-Undirected-Graph G w)
+    type-Prop (is-constant-walk-Undirected-Graph-Prop w)
 
   constant-walk-Undirected-Graph :
     (y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)

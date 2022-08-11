@@ -5,11 +5,17 @@ title: Trees
 ```agda
 module graph-theory.trees where
 
+open import elementary-number-theory.natural-numbers
+
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
 open import graph-theory.paths-undirected-graphs
@@ -70,6 +76,12 @@ module _
   walk-trail-Tree : {x y : node-Tree} → trail-Tree x y → walk-Tree x y
   walk-trail-Tree = walk-trail-Undirected-Graph undirected-graph-Tree
 
+  is-trail-walk-trail-Tree :
+    {x y : node-Tree} (t : trail-Tree x y) →
+    is-trail-walk-Tree (walk-trail-Tree t)
+  is-trail-walk-trail-Tree =
+    is-trail-walk-trail-Undirected-Graph undirected-graph-Tree
+
   is-path-walk-Tree :
     {x y : node-Tree} → walk-Tree x y → UU l1
   is-path-walk-Tree = is-path-walk-Undirected-Graph undirected-graph-Tree
@@ -86,6 +98,42 @@ module _
 
   standard-walk-Tree : (x y : node-Tree) → walk-Tree x y
   standard-walk-Tree x y = walk-trail-Tree (standard-trail-Tree x y)
+
+  is-trail-standard-walk-Tree :
+    {x y : node-Tree} → is-trail-walk-Tree (standard-walk-Tree x y)
+  is-trail-standard-walk-Tree {x} {y} =
+    is-trail-walk-trail-Tree (standard-trail-Tree x y)
+
+  length-walk-Tree : {x y : node-Tree} → walk-Tree x y → ℕ
+  length-walk-Tree = length-walk-Undirected-Graph undirected-graph-Tree
+
+  length-trail-Tree : {x y : node-Tree} → trail-Tree x y → ℕ
+  length-trail-Tree = length-trail-Undirected-Graph undirected-graph-Tree
+
+  is-constant-walk-Tree-Prop :
+    {x y : node-Tree} → walk-Tree x y → UU-Prop lzero
+  is-constant-walk-Tree-Prop =
+    is-constant-walk-Undirected-Graph-Prop undirected-graph-Tree
+
+  is-constant-walk-Tree : {x y : node-Tree} → walk-Tree x y → UU lzero
+  is-constant-walk-Tree =
+    is-constant-walk-Undirected-Graph undirected-graph-Tree
+
+  is-constant-trail-Tree-Prop :
+    {x y : node-Tree} → trail-Tree x y → UU-Prop lzero
+  is-constant-trail-Tree-Prop =
+    is-constant-trail-Undirected-Graph-Prop undirected-graph-Tree
+
+  is-constant-trail-Tree : {x y : node-Tree} → trail-Tree x y → UU lzero
+  is-constant-trail-Tree =
+    is-constant-trail-Undirected-Graph undirected-graph-Tree
+```
+
+### Distance between nodes of a tree
+
+```agda
+  dist-Tree : node-Tree → node-Tree → ℕ
+  dist-Tree x y = length-trail-Tree (standard-trail-Tree x y)
 ```
 
 ## Properties
@@ -121,6 +169,51 @@ module _
         ( edge-on-walk-Tree T)
         ( inv (is-refl-is-circuit-walk-Tree w H refl))
         ( e))
+```
+
+### If `x` and `y` are merely equal vertices, then the standard trail between them is constant
+
+```agda
+module _
+  {l1 l2 : Level} (T : Tree l1 l2) {x : node-Tree T}
+  where
+
+  is-constant-standard-trail-mere-eq-Tree :
+    {y : node-Tree T} →
+    mere-eq x y → is-constant-trail-Tree T (standard-trail-Tree T x y)
+  is-constant-standard-trail-mere-eq-Tree {y} H =
+    apply-universal-property-trunc-Prop H
+      ( is-constant-trail-Tree-Prop T (standard-trail-Tree T x y))
+      ( λ { refl →
+            inv
+              ( ap
+                ( length-walk-Tree T)
+                ( is-refl-is-circuit-walk-Tree T
+                  ( standard-walk-Tree T x y)
+                  ( is-trail-standard-walk-Tree T)
+                  ( refl)))})
+```
+
+### The type of nodes of a tree is a set
+
+```agda
+module _
+  {l1 l2 : Level} (T : Tree l1 l2) {x : node-Tree T}
+  where
+
+  is-set-node-Tree : is-set (node-Tree T)
+  is-set-node-Tree =
+    is-set-mere-eq-in-id
+      ( λ x y H →
+        eq-constant-walk-Undirected-Graph
+          ( undirected-graph-Tree T)
+          ( pair
+            ( standard-walk-Tree T x y)
+            ( is-constant-standard-trail-mere-eq-Tree T H)))
+
+  node-Tree-Set : UU-Set l1
+  pr1 node-Tree-Set = node-Tree T
+  pr2 node-Tree-Set = is-set-node-Tree
 ```
 
 ### Any trail in a tree is a path

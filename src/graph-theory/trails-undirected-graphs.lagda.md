@@ -10,6 +10,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.injective-maps
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import graph-theory.undirected-graphs
@@ -43,6 +44,11 @@ module _
     trail-Undirected-Graph x y → walk-Undirected-Graph G x y
   walk-trail-Undirected-Graph = pr1
 
+  is-trail-walk-trail-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} (t : trail-Undirected-Graph x y) →
+    is-trail-walk-Undirected-Graph (walk-trail-Undirected-Graph t)
+  is-trail-walk-trail-Undirected-Graph = pr2
+
   is-vertex-on-trail-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} →
     trail-Undirected-Graph x y → vertex-Undirected-Graph G → UU l1
@@ -65,6 +71,17 @@ module _
     {x y : vertex-Undirected-Graph G} → trail-Undirected-Graph x y → ℕ
   length-trail-Undirected-Graph t =
     length-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
+
+  is-constant-trail-Undirected-Graph-Prop :
+    {x y : vertex-Undirected-Graph G} →
+    trail-Undirected-Graph x y → UU-Prop lzero
+  is-constant-trail-Undirected-Graph-Prop t =
+    is-constant-walk-Undirected-Graph-Prop G (walk-trail-Undirected-Graph t)
+
+  is-constant-trail-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} → trail-Undirected-Graph x y → UU lzero
+  is-constant-trail-Undirected-Graph t =
+    is-constant-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
 ```
 
 ## Properties

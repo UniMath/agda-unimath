@@ -22,6 +22,7 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
   ( is-contr; is-trunc-is-contr)
+open import foundation.mere-equality
 open import foundation.subuniverses using
   ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
@@ -187,6 +188,8 @@ aut-Set :
 aut-Set X = equiv-Set X X
 ```
 
+### Extensionality of sets
+
 ```agda
 module _
   {l : Level} (X : UU-Set l)
@@ -225,4 +228,16 @@ abstract
   is-set-emb :
     {i j : Level} {A : UU i} {B : UU j} (f : A ↪ B) → is-set B → is-set A
   is-set-emb = is-trunc-emb neg-one-𝕋
+```
+
+### If mere equality maps into the identity type of `A`, then `A` is a set
+
+```agda
+is-set-mere-eq-in-id :
+  {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
+is-set-mere-eq-in-id =
+  is-set-prop-in-id
+    ( mere-eq)
+    ( is-prop-mere-eq)
+    ( λ x → refl-mere-eq)
 ```

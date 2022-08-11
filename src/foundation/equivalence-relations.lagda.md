@@ -10,11 +10,12 @@ module foundation.equivalence-relations where
 open import foundation.binary-relations using
   ( Rel-Prop; is-reflexive-Rel-Prop; is-symmetric-Rel-Prop;
     is-transitive-Rel-Prop; type-Rel-Prop; is-prop-type-Rel-Prop)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_)
-open import foundation.propositions using (is-prop; equiv-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using (_≃_)
+open import foundation-core.propositions using (is-prop; equiv-prop)
+open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
 ## Idea
