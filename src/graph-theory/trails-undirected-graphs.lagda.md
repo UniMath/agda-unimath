@@ -7,6 +7,7 @@ module graph-theory.trails-undirected-graphs where
 
 open import elementary-number-theory.natural-numbers
 
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.injective-maps
@@ -67,6 +68,26 @@ module _
     vertex-vertex-on-walk-Undirected-Graph G
       ( walk-trail-Undirected-Graph t)
 
+  is-edge-on-trail-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} →
+    (t : trail-Undirected-Graph x y)
+    (p : unordered-pair-vertices-Undirected-Graph G)
+    (e : edge-Undirected-Graph G p) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  is-edge-on-trail-Undirected-Graph t =
+    is-edge-on-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
+
+  edge-on-trail-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} (t : trail-Undirected-Graph x y) →
+    UU (lsuc lzero ⊔ l1 ⊔ l2)
+  edge-on-trail-Undirected-Graph t =
+    edge-on-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
+
+  edge-edge-on-trail-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} (t : trail-Undirected-Graph x y) →
+    edge-on-trail-Undirected-Graph t → total-edge-Undirected-Graph G
+  edge-edge-on-trail-Undirected-Graph t =
+    edge-edge-on-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
+
   length-trail-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} → trail-Undirected-Graph x y → ℕ
   length-trail-Undirected-Graph t =
@@ -82,6 +103,13 @@ module _
     {x y : vertex-Undirected-Graph G} → trail-Undirected-Graph x y → UU lzero
   is-constant-trail-Undirected-Graph t =
     is-constant-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
+
+  is-decidable-is-constant-trail-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} (t : trail-Undirected-Graph x y) →
+    is-decidable (is-constant-trail-Undirected-Graph t)
+  is-decidable-is-constant-trail-Undirected-Graph t =
+    is-decidable-is-constant-walk-Undirected-Graph G
+      ( walk-trail-Undirected-Graph t)
 ```
 
 ## Properties

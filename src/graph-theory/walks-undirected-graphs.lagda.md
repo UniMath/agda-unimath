@@ -5,10 +5,12 @@
 
 module graph-theory.walks-undirected-graphs where
 
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
@@ -456,6 +458,12 @@ module _
     (y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
   constant-walk-Undirected-Graph y =
     Σ (walk-Undirected-Graph G x y) is-constant-walk-Undirected-Graph
+
+  is-decidable-is-constant-walk-Undirected-Graph :
+    {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
+    is-decidable (is-constant-walk-Undirected-Graph w)
+  is-decidable-is-constant-walk-Undirected-Graph w =
+    is-decidable-is-zero-ℕ (length-walk-Undirected-Graph G w)
 
   refl-constant-walk-Undirected-Graph :
     constant-walk-Undirected-Graph x
