@@ -1,5 +1,5 @@
 ---
-title: Wild algebra
+title: Structured types
 ---
 
 ```agda

@@ -13,8 +13,10 @@ open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
 open import foundation.algebras-polynomial-endofunctors public
+open import foundation.apartness-relations public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
+open import foundation.bands public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -133,6 +135,7 @@ open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-cospans public
 open import foundation.multisets public
+open import foundation.multisubsets public
 open import foundation.negation public
 open import foundation.non-contractible-types public
 open import foundation.pairs-of-distinct-elements public
@@ -180,6 +183,7 @@ open import foundation.truncated-types public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncations public
+open import foundation.type-arithmetic-booleans public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-function-types public
@@ -187,6 +191,7 @@ open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-theoretic-principle-of-choice public
+open import foundation.union public
 open import foundation.unique-existence public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-set-quotients public

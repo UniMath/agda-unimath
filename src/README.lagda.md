@@ -69,6 +69,7 @@ open import category-theory.terminal-objects-precategories
 
 ```agda
 open import commutative-algebra
+open import commutative-algebra.boolean-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.discrete-fields
 open import commutative-algebra.eisenstein-integers
@@ -79,6 +80,7 @@ open import commutative-algebra.integral-domains
 open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
 open import commutative-algebra.local-commutative-rings
+open import commutative-algebra.maximal-ideals-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 open import commutative-algebra.zariski-topology
 ```
@@ -133,8 +135,10 @@ open import elementary-number-theory.integer-partitions
 open import elementary-number-theory.integers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
+open import elementary-number-theory.maximum-standard-finite-types
 open import elementary-number-theory.mersenne-primes
 open import elementary-number-theory.minimum-natural-numbers
+open import elementary-number-theory.minimum-standard-finite-types
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
@@ -178,6 +182,7 @@ open import finite-group-theory.concrete-quaternion-group
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-monoids
 open import finite-group-theory.finite-semigroups
+open import finite-group-theory.finite-type-groups
 open import finite-group-theory.groups-of-order-2
 open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
@@ -197,6 +202,7 @@ open import foundation.0-maps
 open import foundation.1-types
 open import foundation.2-types
 open import foundation.algebras-polynomial-endofunctors
+open import foundation.apartness-relations
 open import foundation.automorphisms
 open import foundation.axiom-of-choice
 open import foundation.bands
@@ -374,6 +380,7 @@ open import foundation.truncated-types
 open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.truncations
+open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-function-types
@@ -492,6 +499,7 @@ open import graph-theory.directed-graph-structures-on-standard-finite-sets
 open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
+open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
@@ -548,6 +556,7 @@ open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups
 open import group-theory.equivalences-concrete-group-actions
 open import group-theory.equivalences-group-actions
+open import group-theory.equivalences-higher-groups
 open import group-theory.equivalences-semigroups
 open import group-theory.fixed-points-higher-group-actions
 open import group-theory.free-concrete-group-actions
@@ -562,6 +571,7 @@ open import group-theory.homomorphisms-concrete-group-actions
 open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-higher-group-actions
 open import group-theory.homomorphisms-higher-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
@@ -701,6 +711,7 @@ open import ring-theory.division-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
+open import ring-theory.idempotent-elements-rings
 open import ring-theory.invariant-basis-property-rings
 open import ring-theory.invertible-elements-rings
 open import ring-theory.isomorphisms-rings
@@ -724,6 +735,7 @@ open import ring-theory.subsets-rings
 open import set-theory
 open import set-theory.baire-space
 open import set-theory.cantor-space
+open import set-theory.cardinalities
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```
