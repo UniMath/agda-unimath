@@ -492,6 +492,7 @@ open import graph-theory.directed-graph-structures-on-standard-finite-sets
 open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
+open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
