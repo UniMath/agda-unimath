@@ -7,25 +7,30 @@ title: Coherent H-spaces
 
 module structured-types.coherent-h-spaces where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (id)
-open import foundation.homotopies using
-  (nat-htpy; _~_; coh-htpy-id; nat-htpy-id)
-open import foundation.identity-types using
-  ( Id; refl; ap-binary; _∙_; left-unit; right-unit; ap; concat; inv; ap-id;
-    assoc; triangle-ap-binary; triangle-ap-binary'; inv-con; concat')
-open import foundation.path-algebra using
-  ( horizontal-concat-Id²)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
+open import foundation.sections
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unital-binary-operations
-open import foundation.universe-levels using (UU; Level; lsuc; _⊔_)
+open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups using (preserves-mul)
+open import foundation-core.endomorphisms
+
+open import group-theory.homomorphisms-semigroups
 
 open import structured-types.h-spaces
 open import structured-types.magmas
-open import structured-types.pointed-maps using (_→*_)
-open import structured-types.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-maps
+open import structured-types.pointed-sections
+open import structured-types.pointed-types
 ```
 
 ## Idea
@@ -126,4 +131,45 @@ pr1 (coherent-h-space-H-Space A) = pointed-type-H-Space A
 pr1 (pr2 (coherent-h-space-H-Space A)) = mul-H-Space A
 pr2 (pr2 (coherent-h-space-H-Space A)) =
   coherent-unit-laws-unit-laws (mul-H-Space A) (unit-laws-mul-H-Space A)
+```
+
+### The type of coherent H-space structures on `A` is equivalent to the type of sections of `ev_pt : (A → A) →* A`.
+
+```agda
+module _
+  {l : Level} (A : Pointed-Type l)
+  where
+
+  pointed-section-ev-pt-Pointed-Type : UU l
+  pointed-section-ev-pt-Pointed-Type =
+    pointed-section-Pointed-Type
+      ( endo-Pointed-Type (type-Pointed-Type A))
+      ( A)
+      ( pair (ev-pt-Pointed-Type A) refl)
+
+compute-pointed-section-ev-pt-Pointed-Type :
+  {l : Level} (A : Pointed-Type l) →
+  pointed-section-ev-pt-Pointed-Type A ≃ coherent-unital-mul-Pointed-Type A
+compute-pointed-section-ev-pt-Pointed-Type (pair A a) =
+  ( equiv-tot
+    ( λ μ →
+      ( equiv-Σ
+        ( λ p →
+          Σ ( (x : A) → μ x a ＝ x)
+            ( λ q → p a ＝ q a))
+        ( equiv-funext)
+        ( λ H →
+          equiv-tot
+            ( λ K →
+              ( ( ( equiv-inv (K a) (htpy-eq H a)) ∘e
+                  ( equiv-concat' (K a) (ap-ev a H))) ∘e
+                ( equiv-concat' (K a) right-unit)) ∘e
+              ( equiv-concat' (K a) right-unit)))))) ∘e
+  ( assoc-Σ
+    ( A → (A → A))
+    ( λ μ → μ a ＝ id)
+    ( λ μp →
+      Σ ( (x : A) → pr1 μp x a ＝ x)
+        ( λ H → H a ＝ ( ( ap (λ h → h a) (pr2 μp) ∙ refl) ∙ refl))))
+
 ```

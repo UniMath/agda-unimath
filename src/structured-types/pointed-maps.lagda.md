@@ -1,4 +1,6 @@
-# Pointed maps
+---
+title: Pointed maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -22,6 +24,10 @@ open import structured-types.pointed-types using
 ## Idea
 
 A pointed map from a pointed type `A` to a pointed type `B` is a base point preserving function from `A` to `B`.
+
+## Definitions
+
+### Pointed maps
 
 ```agda
 module _
@@ -51,7 +57,11 @@ module _
     (f : A →* B) →
     map-pointed-map f (pt-Pointed-Type A) ＝ pt-Pointed-Type B
   preserves-point-pointed-map f = pr2 f
+```
 
+### Precomposing pointed pointed maps
+
+```agda
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   (C : Pointed-Fam l3 B) (f : A →* B)
@@ -79,7 +89,11 @@ module _
             ( fam-Pointed-Fam B C)
             ( inv (preserves-point-pointed-map A B f)))
           ( preserves-point-function-pointed-Π B C g)))
+```
 
+### Composing pointed maps
+
+```agda
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   (C : Pointed-Type l3)
@@ -103,7 +117,11 @@ module _
 
   precomp-pointed-map : A →* B → B →* C → A →* C
   precomp-pointed-map f g = comp-pointed-map g f
+```
 
+### The identity pointed map
+
+```agda
 module _
   {l1 : Level} {A : Pointed-Type l1}
   where
