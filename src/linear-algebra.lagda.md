@@ -1,4 +1,6 @@
-# Linear algebra
+---
+title: Linear algebra
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -9,6 +11,7 @@ module linear-algebra where
 ```agda
 open import linear-algebra.constant-matrices public
 open import linear-algebra.constant-vectors public
+open import linear-algebra.diagonal-matrices-on-rings public
 open import linear-algebra.functoriality-matrices public
 open import linear-algebra.functoriality-vectors public
 open import linear-algebra.matrices-on-rings public

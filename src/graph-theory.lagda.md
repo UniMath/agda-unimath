@@ -1,4 +1,6 @@
-# Graph theory
+---
+title: Graph theory
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

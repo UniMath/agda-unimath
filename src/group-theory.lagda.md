@@ -30,6 +30,7 @@ open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
 open import group-theory.equivalences-concrete-group-actions public
 open import group-theory.equivalences-group-actions public
+open import group-theory.equivalences-higher-groups public
 open import group-theory.equivalences-semigroups public
 open import group-theory.fixed-points-higher-group-actions public
 open import group-theory.free-concrete-group-actions public
@@ -43,6 +44,7 @@ open import group-theory.homomorphisms-abelian-groups public
 open import group-theory.homomorphisms-concrete-group-actions public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
+open import group-theory.homomorphisms-higher-group-actions public
 open import group-theory.homomorphisms-higher-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
@@ -74,6 +76,7 @@ open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
+open import group-theory.products-of-tuples-of-elements-commutative-monoids public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.semigroups public
 open import group-theory.sheargroups public
