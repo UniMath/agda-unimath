@@ -444,6 +444,7 @@ open import foundation-core.cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
+open import foundation-core.endomorphisms
 open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equality-fibers-of-maps
@@ -759,11 +760,13 @@ open import structured-types.pointed-equivalences
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
+open import structured-types.pointed-sections
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 open import structured-types.universal-property-lists-wild-monoids
+open import structured-types.unpointed-maps
 open import structured-types.wild-groups
 open import structured-types.wild-loops
 open import structured-types.wild-monoids
