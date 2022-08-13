@@ -20,7 +20,7 @@ open import elementary-number-theory.multiplication-integers using
 open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ)
 open import foundation.binary-relations using (Rel-Prop; is-reflexive-Rel-Prop; is-symmetric-Rel-Prop; is-transitive-Rel-Prop)
-open import foundation.equivalence-relations using (is-equivalence-relation)
+open import foundation.equivalence-relations using (is-equivalence-relation; Eq-Rel)
 open import foundation-core.propositions using (is-prop)
 open import foundation-core.cartesian-product-types using (pair')
 
@@ -119,7 +119,7 @@ fraction-simpl-refl : is-reflexive-Rel-Prop fraction-simpl
 fraction-simpl-refl {x} = refl 
 
 fraction-simpl-sym : is-symmetric-Rel-Prop fraction-simpl
-fraction-simpl-sym p = inv p
+fraction-simpl-sym = (λ p → inv p)
 
 fraction-simpl-trans : is-transitive-Rel-Prop fraction-simpl
 fraction-simpl-trans {x} {y} {z} p q = 
@@ -138,7 +138,12 @@ fraction-simpl-trans {x} {y} {z} p q =
              ∙ ( p 
              ∙ ( commutative-mul-ℤ (pr1 y) (pr1 (pr2 x)) ) )
 
-{- fraction-simpl-eq : is-equivalence-relation fraction-simpl
-fraction-simpl-eq = pair' fraction-simpl-refl (pair' fraction-simpl-sym fraction-simpl-trans) -} 
+fraction-simpl-eq : is-equivalence-relation fraction-simpl
+fraction-simpl-eq = pair' (λ {x} → fraction-simpl-refl {x}) 
+  (pair' (λ {x} {y} p → fraction-simpl-sym {x} {y} p) 
+  (λ {x} {y} {z} p q →  fraction-simpl-trans {x} {y} {z} p q))  
+
+fraction-simpl-eq-rel : Eq-Rel lzero fractions-ℤ
+fraction-simpl-eq-rel = pair fraction-simpl fraction-simpl-eq
 
 ```
