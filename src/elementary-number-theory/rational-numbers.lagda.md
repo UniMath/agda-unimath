@@ -14,14 +14,18 @@ open import elementary-number-theory.fractions using
 open import elementary-number-theory.greatest-common-divisor-integers using
   ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ)
 open import elementary-number-theory.integers using
-  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ)
+  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; is-nonzero-is-positive-ℤ; is-set-ℤ)
 open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-positive-left-factor-mul-ℤ)
+  ( mul-ℤ; mul-ℤ'; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ; associative-mul-ℤ; commutative-mul-ℤ)
 open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ)
+open import foundation.binary-relations using (Rel-Prop; is-reflexive-Rel-Prop; is-symmetric-Rel-Prop; is-transitive-Rel-Prop)
+open import foundation.equivalence-relations using (is-equivalence-relation)
+open import foundation-core.propositions using (is-prop)
+open import foundation-core.cartesian-product-types using (pair')
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; inv)
+open import foundation.identity-types using (_＝_; refl; inv; ap; _∙_)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -98,4 +102,43 @@ is-reduced-reduce-fractions-ℤ :
   (x : fractions-ℤ) → is-reduced-fractions-ℤ (reduce-fractions-ℤ x)
 is-reduced-reduce-fractions-ℤ x = {!!}
 -}
+ 
+fraction-simpl-type : fractions-ℤ → fractions-ℤ → UU lzero
+fraction-simpl-type (pair a (pair b _)) (pair c (pair d _)) = 
+  mul-ℤ a d ＝ mul-ℤ c b 
+
+fraction-simpl-is-prop : (q : fractions-ℤ) (r : fractions-ℤ) 
+  → is-prop (fraction-simpl-type q r)
+fraction-simpl-is-prop (pair a (pair b _)) (pair c (pair d _)) =
+  is-set-ℤ (mul-ℤ a d) (mul-ℤ c b) 
+
+fraction-simpl : Rel-Prop lzero fractions-ℤ
+fraction-simpl q r = pair (fraction-simpl-type q r) (fraction-simpl-is-prop q r)
+
+fraction-simpl-refl : is-reflexive-Rel-Prop fraction-simpl
+fraction-simpl-refl {x} = refl 
+
+fraction-simpl-sym : is-symmetric-Rel-Prop fraction-simpl
+fraction-simpl-sym p = inv p
+
+fraction-simpl-trans : is-transitive-Rel-Prop fraction-simpl
+fraction-simpl-trans {x} {y} {z} p q = 
+  is-injective-mul-ℤ (pr1 (pr2 y)) 
+  (is-nonzero-is-positive-ℤ (pr1 (pr2 y)) (pr2 (pr2 y))) 
+  ( inv (associative-mul-ℤ (pr1 (pr2 y)) (pr1 x) (pr1 (pr2 z))) 
+    ∙ (ap (mul-ℤ' (pr1 (pr2 z))) p-flip 
+    ∙ (associative-mul-ℤ (pr1 (pr2 x)) (pr1 y) (pr1 (pr2 z)) 
+    ∙ (ap (mul-ℤ (pr1 (pr2 x))) q 
+    ∙ (ap (mul-ℤ (pr1 (pr2 x))) (commutative-mul-ℤ (pr1 z) (pr1 (pr2 y)))
+    ∙ (commutative-mul-ℤ (pr1 (pr2 x)) (mul-ℤ (pr1 (pr2 y)) (pr1 z)) 
+    ∙ (associative-mul-ℤ (pr1 (pr2 y)) (pr1 z) (pr1 (pr2 x))))))))) 
+  where
+    p-flip : mul-ℤ (pr1 (pr2 y)) (pr1 x) ＝ mul-ℤ (pr1 (pr2 x)) (pr1 y)
+    p-flip = commutative-mul-ℤ (pr1 (pr2 y)) (pr1 x) 
+             ∙ ( p 
+             ∙ ( commutative-mul-ℤ (pr1 y) (pr1 (pr2 x)) ) )
+
+{- fraction-simpl-eq : is-equivalence-relation fraction-simpl
+fraction-simpl-eq = pair' fraction-simpl-refl (pair' fraction-simpl-sym fraction-simpl-trans) -} 
+
 ```
