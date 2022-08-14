@@ -10,8 +10,8 @@ open import foundation.propositions using
   ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import graph-theory.incidence-undirected-graphs using
-  ( incidence-Undirected-Graph)
+open import graph-theory.neighbors-undirected-graphs using
+  ( neighbor-Undirected-Graph)
 open import graph-theory.undirected-graphs using
   ( Undirected-Graph; vertex-Undirected-Graph)
 ```
@@ -29,7 +29,7 @@ is-regular-undirected-graph-Prop :
 is-regular-undirected-graph-Prop X G =
   Π-Prop
     ( vertex-Undirected-Graph G)
-    ( λ x → mere-equiv-Prop X (incidence-Undirected-Graph G x))
+    ( λ x → mere-equiv-Prop X (neighbor-Undirected-Graph G x))
 
 is-regular-Undirected-Graph :
   {l1 l2 l3 : Level} (X : UU l1) (G : Undirected-Graph l2 l3) →

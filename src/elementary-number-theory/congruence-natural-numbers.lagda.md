@@ -3,8 +3,6 @@ title: The congruence relations on the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.congruence-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
@@ -33,7 +31,9 @@ open import univalent-combinatorics.standard-finite-types using
     is-zero-nat-zero-Fin)
 ```
 
-# The congruence relations on the natural numbers
+## Properties
+
+### The congruence relations on the natural numbers
 
 ```agda
 cong-ℕ :
@@ -163,9 +163,9 @@ is-one-cong-succ-ℕ {k} x H =
   is-one-div-one-ℕ k (tr (div-ℕ k) (is-one-dist-succ-ℕ x) H)
 ```
 
-```agda
--- We show that congruence is invariant under scalar multiplication --
+### Congruence is invariant under scalar multiplication
 
+```agda
 scalar-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y →  cong-ℕ k (mul-ℕ z x) (mul-ℕ z y)
 pr1 (scalar-invariant-cong-ℕ k x y z (pair d p)) = mul-ℕ z d
@@ -181,9 +181,11 @@ scalar-invariant-cong-ℕ' k x y z H =
     ( commutative-mul-ℕ x z)
     ( scalar-invariant-cong-ℕ k x y z H)
     ( commutative-mul-ℕ z y)
+```
 
--- We show that multiplication respects the congruence relation --
+### Multiplication respects the congruence relation
 
+```agda
 congruence-mul-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ  k x x' → cong-ℕ k y y' → cong-ℕ k (mul-ℕ x y) (mul-ℕ x' y')
@@ -193,7 +195,7 @@ congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
     ( scalar-invariant-cong-ℕ' k x x' y' H)
 ```
 
-## The congruence is translation invariant
+### The congruence is translation invariant
 
 ```agda
 translation-invariant-cong-ℕ :
