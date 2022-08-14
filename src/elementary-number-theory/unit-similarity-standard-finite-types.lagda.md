@@ -33,11 +33,34 @@ Two elements `x y : Fin k` are said to be unit similar if there is a unit elemen
 
 ## Definition
 
+### Unit similarity in `Fin k`
+
 ```agda
 sim-unit-Fin :
   (k : ℕ) → Fin k → Fin k → UU lzero
 sim-unit-Fin k x y = Σ (unit-Fin k) (λ u → mul-Fin k (pr1 u) x ＝ y)
+```
 
+### Unit similarity on `ℕ`
+
+```agda
+sim-unit-ℕ :
+  (k : ℕ) → ℕ → ℕ → UU lzero
+sim-unit-ℕ k x y = Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k (mul-ℕ (pr1 l) x) y)
+```
+
+### Congruence to `1`
+
+```agda
+sim-unit-one-ℕ : (k x : ℕ) → UU lzero
+sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (mul-ℕ l x) 1)
+```
+
+## Properties
+
+### Unit similarity is an equivalence relation
+
+```agda
 refl-sim-unit-Fin :
   {k : ℕ} (x : Fin k) → sim-unit-Fin k x x
 pr1 (refl-sim-unit-Fin {succ-ℕ k} x) = one-unit-Fin
@@ -61,16 +84,17 @@ pr1 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
 pr2 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
   ( associative-mul-Fin (succ-ℕ k) (pr1 v) (pr1 u) x) ∙
   ( ap (mul-Fin (succ-ℕ k) (pr1 v)) p ∙ q)
+```
 
-is-mod-unit-ℕ : (k x : ℕ) → UU lzero
-is-mod-unit-ℕ k x = Σ ℕ (λ l → cong-ℕ k (mul-ℕ l x) 1)
+### A natural number `x` is congruent to `1` modulo `k+1` if and only if `[x]_{k+1}` is unit similar to `1`.
 
-is-mod-unit-sim-unit-mod-succ-ℕ :
+```agda
+is-unit-similar-one-sim-unit-mod-succ-ℕ :
   (k x : ℕ) → sim-unit-Fin (succ-ℕ k) (mod-succ-ℕ k x) (one-Fin k) →
-  is-mod-unit-ℕ (succ-ℕ k) x
-pr1 (is-mod-unit-sim-unit-mod-succ-ℕ k x (pair u p)) =
+  sim-unit-one-ℕ (succ-ℕ k) x
+pr1 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   nat-Fin (succ-ℕ k) (pr1 u)
-pr2 (is-mod-unit-sim-unit-mod-succ-ℕ k x (pair u p)) =
+pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   cong-eq-mod-succ-ℕ k
     ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
     ( 1)

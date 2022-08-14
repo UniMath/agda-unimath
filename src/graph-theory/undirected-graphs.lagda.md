@@ -15,7 +15,7 @@ open import foundation.universe-levels using (Level; UU; lsuc; _⊔_; lzero)
 open import foundation.unordered-pairs using
   ( unordered-pair; map-unordered-pair; type-unordered-pair;
     element-unordered-pair; mere-Eq-unordered-pair; standard-unordered-pair;
-    Eq-unordered-pair; eq-Eq-unordered-pair; refl-Eq-unordered-pair;
+    Eq-unordered-pair; eq-Eq-unordered-pair'; refl-Eq-unordered-pair;
     isretr-eq-Eq-unordered-pair)
 
 open import graph-theory.directed-graphs using (Graph; vertex-Graph; edge-Graph)
@@ -107,12 +107,12 @@ module _
     (α : Eq-unordered-pair p q) →
     edge-Undirected-Graph G p ≃ edge-Undirected-Graph G q
   equiv-tr-edge-Undirected-Graph p q α =
-    equiv-tr (edge-Undirected-Graph G) (eq-Eq-unordered-pair p q α)
+    equiv-tr (edge-Undirected-Graph G) (eq-Eq-unordered-pair' p q α)
 
   tr-edge-Undirected-Graph :
     (p q : unordered-pair-vertices-Undirected-Graph G)
     (α : Eq-unordered-pair p q) →
     edge-Undirected-Graph G p → edge-Undirected-Graph G q
   tr-edge-Undirected-Graph p q α =
-    tr (edge-Undirected-Graph G) (eq-Eq-unordered-pair p q α)
+    tr (edge-Undirected-Graph G) (eq-Eq-unordered-pair' p q α)
 ```
