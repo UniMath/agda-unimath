@@ -41,8 +41,8 @@ module _
         ( undirected-graph-Enriched-Undirected-Graph A B G)
         ( undirected-graph-Enriched-Undirected-Graph A B H))
       ( λ e →
-        Σ ( ( label-vertex-Enriched-Undirected-Graph A B G) ~
-            ( ( label-vertex-Enriched-Undirected-Graph A B H) ∘
+        Σ ( ( shape-vertex-Enriched-Undirected-Graph A B G) ~
+            ( ( shape-vertex-Enriched-Undirected-Graph A B H) ∘
               ( vertex-equiv-Undirected-Graph
                 ( undirected-graph-Enriched-Undirected-Graph A B G)
                 ( undirected-graph-Enriched-Undirected-Graph A B H)
@@ -63,6 +63,41 @@ module _
                     ( e)
                     ( x))) ∘e
                 ( equiv-tr B (α x)))))
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
+  (G : Enriched-Undirected-Graph l3 l4 A B) (H : Enriched-Undirected-Graph l5 l6 A B)
+  (e : equiv-Enriched-Undirected-Graph A B G H)
+  where
+
+  equiv-undirected-graph-equiv-Enriched-Undirected-Graph :
+    equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+  equiv-undirected-graph-equiv-Enriched-Undirected-Graph = pr1 e
+
+  equiv-vertex-equiv-Enriched-Undirected-Graph :
+    vertex-Enriched-Undirected-Graph A B G ≃ vertex-Enriched-Undirected-Graph A B H
+  equiv-vertex-equiv-Enriched-Undirected-Graph =
+    equiv-vertex-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+      ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
+
+  vertex-equiv-Enriched-Undirected-Graph :
+    vertex-Enriched-Undirected-Graph A B G → vertex-Enriched-Undirected-Graph A B H
+  vertex-equiv-Enriched-Undirected-Graph =
+    vertex-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+      ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
+
+  shape-equiv-Enriched-Undirected-Graph :
+    (v : vertex-Enriched-Undirected-Graph A B G) →
+    ( shape-vertex-Enriched-Undirected-Graph A B G v) ＝
+    ( shape-vertex-Enriched-Undirected-Graph A B H
+      ( vertex-equiv-Enriched-Undirected-Graph v))
+  shape-equiv-Enriched-Undirected-Graph = pr1 (pr2 e)
 ```
 
 ### The identity equivalence of an enriched undirected graph
@@ -102,8 +137,8 @@ module _
   is-contr-total-equiv-Enriched-Undirected-Graph =
     is-contr-total-Eq-structure
       ( λ H fn e →
-        Σ ( ( label-vertex-Enriched-Undirected-Graph A B G) ~
-            ( ( label-vertex-Enriched-Undirected-Graph A B (H , fn)) ∘
+        Σ ( ( shape-vertex-Enriched-Undirected-Graph A B G) ~
+            ( ( shape-vertex-Enriched-Undirected-Graph A B (H , fn)) ∘
               ( vertex-equiv-Undirected-Graph
                 ( undirected-graph-Enriched-Undirected-Graph A B G)
                 ( undirected-graph-Enriched-Undirected-Graph A B (H , fn)) e)))
@@ -151,9 +186,9 @@ module _
                 ( x)) ∘e
               ( equiv-tr B (K x))))
         ( is-contr-total-htpy
-          ( label-vertex-Enriched-Undirected-Graph A B G))
+          ( shape-vertex-Enriched-Undirected-Graph A B G))
         ( pair
-          ( label-vertex-Enriched-Undirected-Graph A B G)
+          ( shape-vertex-Enriched-Undirected-Graph A B G)
           ( refl-htpy))
         ( is-contr-total-Eq-Π
           ( λ x →

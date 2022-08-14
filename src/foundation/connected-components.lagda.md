@@ -19,6 +19,10 @@ open import foundation.propositions using (is-trunc-is-prop)
 open import foundation.truncated-types using (is-trunc; is-trunc-Σ)
 open import foundation.truncation-levels using (𝕋; succ-𝕋)
 open import foundation.universe-levels using (UU; Level)
+
+open import group-theory.higher-groups using (∞-Group)
+
+open import structured-types.pointed-types using (Pointed-Type)
 ```
 
 ## Idea
@@ -35,6 +39,14 @@ module _
   connected-component : UU l
   connected-component =
     Σ A (λ x → type-trunc-Prop (x ＝ a))
+
+  point-connected-component : connected-component
+  pr1 point-connected-component = a
+  pr2 point-connected-component = unit-trunc-Prop refl
+
+  connected-component-Pointed-Type : Pointed-Type l
+  pr1 connected-component-Pointed-Type = connected-component
+  pr2 connected-component-Pointed-Type = point-connected-component
 
   value-connected-component :
     connected-component → A
@@ -67,6 +79,11 @@ abstract
               ( eq-pair-Σ
                 ( inv p')
                 ( all-elements-equal-type-trunc-Prop _ p))))
+
+connected-component-∞-Group :
+  {l : Level} (A : UU l) (a : A) → ∞-Group l
+pr1 (connected-component-∞-Group A a) = connected-component-Pointed-Type A a
+pr2 (connected-component-∞-Group A a) = is-0-connected-connected-component A a
 ```
 
 ### If `A` is (k+1)-truncated, then the connected component of `a` in `A` is (k+1)-truncated.
