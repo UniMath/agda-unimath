@@ -433,6 +433,7 @@ open import foundation.xor
 ```agda
 open import foundation-core.0-maps
 open import foundation-core.1-types
+open import foundation-core.automorphisms
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.commuting-squares

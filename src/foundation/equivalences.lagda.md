@@ -28,7 +28,7 @@ open import foundation-core.functoriality-dependent-pair-types using
 open import foundation-core.functoriality-fibers-of-maps using (map-fib-cone)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation-core.homotopies using (_~_; refl-htpy)
+open import foundation-core.homotopies using (_~_; refl-htpy; _∙h_; _·r_)
 open import foundation-core.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
@@ -361,6 +361,45 @@ module _
 
   htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
   htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
+
+  isretr-eq-htpy-equiv :
+    {e e' : A ≃ B} (p : e ＝ e') → (eq-htpy-equiv (htpy-eq-equiv p)) ＝ p
+  isretr-eq-htpy-equiv {e} {e'} = isretr-map-inv-equiv (extensionality-equiv e e')
+
+  issec-eq-htpy-equiv :
+    {e e' : A ≃ B} (H : htpy-equiv e e') → (htpy-eq-equiv (eq-htpy-equiv H)) ＝ H
+  issec-eq-htpy-equiv {e} {e'} = issec-map-inv-equiv (extensionality-equiv e e')
+
+  htpy-issec-eq-htpy-equiv :
+    {e e' : A ≃ B} (H : htpy-equiv e e') → htpy-eq-equiv (eq-htpy-equiv {e} {e'} H) ~ H
+  htpy-issec-eq-htpy-equiv H = htpy-eq (issec-eq-htpy-equiv H)
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  preserves-concat-htpy-eq-equiv :
+    {e f g : A ≃ B} (p : e ＝ f) (q : f ＝ g) →
+    htpy-eq-equiv (p ∙ q) ＝ (htpy-eq-equiv p ∙h htpy-eq-equiv q)
+  preserves-concat-htpy-eq-equiv refl q = refl
+
+  preserves-concat-eq-htpy-equiv :
+    {e f g : A ≃ B} (H : htpy-equiv e f) (K : htpy-equiv f g) →
+    ( eq-htpy-equiv {e = e} {e' = g} (H ∙h K)) ＝
+    ( eq-htpy-equiv {e' = f} H ∙ eq-htpy-equiv K)
+  preserves-concat-eq-htpy-equiv H K =
+    ( ap
+      ( eq-htpy-equiv)
+      ( ap-binary
+        ( λ α β → α ∙h β)
+        ( inv (issec-eq-htpy-equiv H))
+        ( inv (issec-eq-htpy-equiv K)))) ∙
+    ( ( ap
+        ( eq-htpy-equiv)
+        ( inv (preserves-concat-htpy-eq-equiv (eq-htpy-equiv H) (eq-htpy-equiv K)))) ∙
+      ( isretr-eq-htpy-equiv (eq-htpy-equiv H ∙ eq-htpy-equiv K)))
 ```
 
 ### Homotopy induction for homotopies between equivalences
@@ -437,6 +476,11 @@ module _
   equiv-inv-equiv : (X ≃ Y) ≃ (Y ≃ X)
   pr1 equiv-inv-equiv = inv-equiv
   pr2 equiv-inv-equiv = is-equiv-inv-equiv
+
+coh-unit-laws-equiv :
+  {l : Level} {X : UU l} →
+  left-unit-law-equiv (id-equiv {A = X}) ＝ right-unit-law-equiv (id-equiv {A = X})
+coh-unit-laws-equiv {l} {X} = ap eq-htpy-equiv refl
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
