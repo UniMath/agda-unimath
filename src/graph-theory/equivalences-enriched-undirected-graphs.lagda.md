@@ -1,0 +1,177 @@
+---
+title: Equivalences of enriched undirected graphs
+---
+
+```agda
+module graph-theory.equivalences-enriched-undirected-graphs where
+
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universe-levels
+
+open import graph-theory.enriched-undirected-graphs
+open import graph-theory.equivalences-undirected-graphs
+open import graph-theory.neighbors-undirected-graphs
+```
+
+## Idea
+
+An equivalence of `(A,B)`-enriched undirected graphs from `G` to `H` consists of an equivalence `e` of the underlying graphs of `G` and `H` such that preserving the labeling and the equivalences on the neighbors
+
+## Definition
+
+### Equivalences between enriched undirected graphs
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (A : UU l1) (B : A → UU l2)
+  (G : Enriched-Undirected-Graph l3 l4 A B) (H : Enriched-Undirected-Graph l5 l6 A B)
+  where
+
+  equiv-Enriched-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  equiv-Enriched-Undirected-Graph =
+    Σ ( equiv-Undirected-Graph
+        ( undirected-graph-Enriched-Undirected-Graph A B G)
+        ( undirected-graph-Enriched-Undirected-Graph A B H))
+      ( λ e →
+        Σ ( ( label-vertex-Enriched-Undirected-Graph A B G) ~
+            ( ( label-vertex-Enriched-Undirected-Graph A B H) ∘
+              ( vertex-equiv-Undirected-Graph
+                ( undirected-graph-Enriched-Undirected-Graph A B G)
+                ( undirected-graph-Enriched-Undirected-Graph A B H)
+                ( e))))
+          ( λ α →
+            ( x : vertex-Enriched-Undirected-Graph A B G) →
+            htpy-equiv
+              ( ( equiv-neighbor-equiv-Undirected-Graph
+                  ( undirected-graph-Enriched-Undirected-Graph A B G)
+                  ( undirected-graph-Enriched-Undirected-Graph A B H)
+                  ( e)
+                  ( x)) ∘e
+                ( equiv-neighbor-Enriched-Undirected-Graph A B G x))
+              ( ( equiv-neighbor-Enriched-Undirected-Graph A B H
+                  ( vertex-equiv-Undirected-Graph
+                    ( undirected-graph-Enriched-Undirected-Graph A B G)
+                    ( undirected-graph-Enriched-Undirected-Graph A B H)
+                    ( e)
+                    ( x))) ∘e
+                ( equiv-tr B (α x)))))
+```
+
+### The identity equivalence of an enriched undirected graph
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
+  (G : Enriched-Undirected-Graph l3 l4 A B)
+  where
+
+  id-equiv-Enriched-Undirected-Graph :
+    equiv-Enriched-Undirected-Graph A B G G
+  pr1 id-equiv-Enriched-Undirected-Graph =
+    id-equiv-Undirected-Graph (undirected-graph-Enriched-Undirected-Graph A B G)
+  pr1 (pr2 id-equiv-Enriched-Undirected-Graph) = refl-htpy
+  pr2 (pr2 id-equiv-Enriched-Undirected-Graph) x b =
+    neighbor-id-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( x)
+      ( map-equiv-neighbor-Enriched-Undirected-Graph A B G x b)
+```
+
+## Properties
+
+### Univalence for enriched undirected graphs
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : UU l1) (B : A → UU l2)
+  (G : Enriched-Undirected-Graph l3 l4 A B)
+  where
+
+  is-contr-total-equiv-Enriched-Undirected-Graph :
+    is-contr
+      ( Σ ( Enriched-Undirected-Graph l3 l4 A B)
+          ( equiv-Enriched-Undirected-Graph A B G))
+  is-contr-total-equiv-Enriched-Undirected-Graph =
+    is-contr-total-Eq-structure
+      ( λ H fn e →
+        Σ ( ( label-vertex-Enriched-Undirected-Graph A B G) ~
+            ( ( label-vertex-Enriched-Undirected-Graph A B (H , fn)) ∘
+              ( vertex-equiv-Undirected-Graph
+                ( undirected-graph-Enriched-Undirected-Graph A B G)
+                ( undirected-graph-Enriched-Undirected-Graph A B (H , fn)) e)))
+          ( λ α →
+            ( x : vertex-Enriched-Undirected-Graph A B G) →
+            htpy-equiv
+              ( ( equiv-neighbor-equiv-Undirected-Graph
+                  ( undirected-graph-Enriched-Undirected-Graph A B G)
+                  ( undirected-graph-Enriched-Undirected-Graph A B (H , fn))
+                  ( e)
+                  ( x)) ∘e
+                ( equiv-neighbor-Enriched-Undirected-Graph A B G x))
+              ( ( equiv-neighbor-Enriched-Undirected-Graph A B (H , fn)
+                  ( vertex-equiv-Undirected-Graph
+                    ( undirected-graph-Enriched-Undirected-Graph A B G)
+                    ( undirected-graph-Enriched-Undirected-Graph A B (H , fn))
+                    ( e)
+                    ( x))) ∘e
+                ( equiv-tr B (α x)))))
+      ( is-contr-total-equiv-Undirected-Graph
+        ( undirected-graph-Enriched-Undirected-Graph A B G))
+      ( pair
+        ( undirected-graph-Enriched-Undirected-Graph A B G)
+        ( id-equiv-Undirected-Graph (undirected-graph-Enriched-Undirected-Graph A B G)))
+      ( is-contr-total-Eq-structure
+        ( λ f α K →
+          ( x : vertex-Enriched-Undirected-Graph A B G) →
+          htpy-equiv
+            ( ( equiv-neighbor-equiv-Undirected-Graph
+                ( undirected-graph-Enriched-Undirected-Graph A B G)
+                ( undirected-graph-Enriched-Undirected-Graph A B
+                  ( undirected-graph-Enriched-Undirected-Graph A B G , f , α))
+                ( id-equiv-Undirected-Graph
+                  ( undirected-graph-Enriched-Undirected-Graph A B G))
+                ( x)) ∘e
+              ( equiv-neighbor-Enriched-Undirected-Graph A B G x))
+            ( equiv-neighbor-Enriched-Undirected-Graph A B
+              ( undirected-graph-Enriched-Undirected-Graph A B G , f , α)
+              ( vertex-equiv-Undirected-Graph
+                ( undirected-graph-Enriched-Undirected-Graph A B G)
+                ( undirected-graph-Enriched-Undirected-Graph A B
+                  ( undirected-graph-Enriched-Undirected-Graph A B G , f , α))
+                  ( id-equiv-Undirected-Graph
+                    ( undirected-graph-Enriched-Undirected-Graph A B G))
+                ( x)) ∘e
+              ( equiv-tr B (K x))))
+        ( is-contr-total-htpy
+          ( label-vertex-Enriched-Undirected-Graph A B G))
+        ( pair
+          ( label-vertex-Enriched-Undirected-Graph A B G)
+          ( refl-htpy))
+        ( is-contr-total-Eq-Π
+          ( λ x →
+            htpy-equiv
+              ( ( equiv-neighbor-equiv-Undirected-Graph
+                  ( undirected-graph-Enriched-Undirected-Graph A B G)
+                  ( undirected-graph-Enriched-Undirected-Graph A B G)
+                    ( id-equiv-Undirected-Graph
+                      ( undirected-graph-Enriched-Undirected-Graph A B G))
+                    ( x)) ∘e
+                ( equiv-neighbor-Enriched-Undirected-Graph A B G x)))
+          ( λ x →
+            is-contr-total-htpy-equiv
+              ( equiv-neighbor-equiv-Undirected-Graph
+                  ( undirected-graph-Enriched-Undirected-Graph A B G)
+                  ( undirected-graph-Enriched-Undirected-Graph A B G)
+                  ( id-equiv-Undirected-Graph
+                    ( undirected-graph-Enriched-Undirected-Graph A B G))
+                  ( x) ∘e
+                ( equiv-neighbor-Enriched-Undirected-Graph A B G x)))))
+```
+

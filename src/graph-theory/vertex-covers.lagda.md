@@ -16,9 +16,9 @@ open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.unordered-pairs using (is-in-unordered-pair)
 
 open import graph-theory.edge-coloured-undirected-graphs using
-  ( incidence-edge-colouring-Undirected-Graph)
-open import graph-theory.incidence-undirected-graphs using
-  ( incidence-Undirected-Graph)
+  ( neighbor-edge-colouring-Undirected-Graph)
+open import graph-theory.neighbors-undirected-graphs using
+  ( neighbor-Undirected-Graph)
 open import graph-theory.undirected-graphs using
   ( Undirected-Graph; unordered-pair-vertices-Undirected-Graph;
     vertex-Undirected-Graph; edge-Undirected-Graph)
