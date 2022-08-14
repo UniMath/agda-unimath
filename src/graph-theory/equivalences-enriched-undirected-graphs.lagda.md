@@ -10,6 +10,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
@@ -173,5 +174,31 @@ module _
                     ( undirected-graph-Enriched-Undirected-Graph A B G))
                   ( x) ∘e
                 ( equiv-neighbor-Enriched-Undirected-Graph A B G x)))))
+
+  equiv-eq-Enriched-Undirected-Graph :
+    (H : Enriched-Undirected-Graph l3 l4 A B) →
+    (G ＝ H) → equiv-Enriched-Undirected-Graph A B G H
+  equiv-eq-Enriched-Undirected-Graph H refl = id-equiv-Enriched-Undirected-Graph A B G
+
+  is-equiv-equiv-eq-Enriched-Undirected-Graph :
+    (H : Enriched-Undirected-Graph l3 l4 A B) →
+    is-equiv (equiv-eq-Enriched-Undirected-Graph H)
+  is-equiv-equiv-eq-Enriched-Undirected-Graph =
+    fundamental-theorem-id
+      ( is-contr-total-equiv-Enriched-Undirected-Graph)
+      ( equiv-eq-Enriched-Undirected-Graph)
+
+  extensionality-Enriched-Undirected-Graph :
+    (H : Enriched-Undirected-Graph l3 l4 A B) →
+    (G ＝ H) ≃ equiv-Enriched-Undirected-Graph A B G H
+  pr1 (extensionality-Enriched-Undirected-Graph H) = equiv-eq-Enriched-Undirected-Graph H
+  pr2 (extensionality-Enriched-Undirected-Graph H) =
+    is-equiv-equiv-eq-Enriched-Undirected-Graph H
+
+  eq-equiv-Enriched-Undirected-Graph :
+    (H : Enriched-Undirected-Graph l3 l4 A B) →
+    equiv-Enriched-Undirected-Graph A B G H → (G ＝ H)
+  eq-equiv-Enriched-Undirected-Graph H =
+    map-inv-equiv (extensionality-Enriched-Undirected-Graph H)
 ```
 
