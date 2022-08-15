@@ -521,6 +521,7 @@ open import graph-theory.regular-undirected-graphs
 open import graph-theory.rooted-quasitrees
 open import graph-theory.rooted-trees
 open import graph-theory.simple-undirected-graphs
+open import graph-theory.stereoisomerism-enriched-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.trees
