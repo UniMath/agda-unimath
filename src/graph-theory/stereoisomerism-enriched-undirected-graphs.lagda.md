@@ -5,6 +5,9 @@ title: Stereoisomerism for enriched undirected graphs
 ```agda
 module graph-theory.stereoisomerism-enriched-undirected-graphs where
 
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.homotopies
 open import foundation.universe-levels
 
 open import graph-theory.enriched-undirected-graphs
@@ -13,7 +16,7 @@ open import graph-theory.equivalences-undirected-graphs
 
 ## Idea
 
-A stereoisomerism between two `(A,B)`-enriched undirected graphs is an equivalence between their underlying undirected graphs. This concept is derived from the concept of stereoisomerism of chemical compounds.
+A stereoisomerism between two `(A,B)`-enriched undirected graphs is an equivalence between their underlying undirected graphs preserving the shape of the vertices. This concept is derived from the concept of stereoisomerism of chemical compounds.
 
 ## Definition
 
@@ -25,9 +28,16 @@ module _
   where
 
   stereoisomerism-Enriched-Undirected-Graph :
-    UU (lsuc lzero ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+    UU (lsuc lzero ⊔ l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   stereoisomerism-Enriched-Undirected-Graph =
-    equiv-Undirected-Graph
-      ( undirected-graph-Enriched-Undirected-Graph A B G)
-      ( undirected-graph-Enriched-Undirected-Graph A B H)
+    Σ ( equiv-Undirected-Graph
+        ( undirected-graph-Enriched-Undirected-Graph A B G)
+        ( undirected-graph-Enriched-Undirected-Graph A B H))
+      ( λ e →
+        ( shape-vertex-Enriched-Undirected-Graph A B G) ~
+        ( ( shape-vertex-Enriched-Undirected-Graph A B H) ∘
+          ( vertex-equiv-Undirected-Graph
+            ( undirected-graph-Enriched-Undirected-Graph A B G)
+            ( undirected-graph-Enriched-Undirected-Graph A B H)
+            ( e))))
 ```
