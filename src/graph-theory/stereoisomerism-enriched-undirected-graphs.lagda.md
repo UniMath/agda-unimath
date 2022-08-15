@@ -18,6 +18,8 @@ open import graph-theory.equivalences-undirected-graphs
 
 A stereoisomerism between two `(A,B)`-enriched undirected graphs is an equivalence between their underlying undirected graphs preserving the shape of the vertices. This concept is derived from the concept of stereoisomerism of chemical compounds.
 
+Note: It could be that we only want the shapes to be merely preserved.
+
 ## Definition
 
 ```agda
