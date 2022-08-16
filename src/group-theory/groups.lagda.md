@@ -31,6 +31,10 @@ open import group-theory.monoids using
 open import group-theory.semigroups using
   ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul)
 
+open import structured-types.pointed-types using (Pointed-Type)
+open import structured-types.pointed-types-equipped-with-automorphisms using
+  ( Pointed-Type-With-Aut)
+
 open import univalent-combinatorics.lists using
   ( list; mul-list-Monoid; distributive-mul-list-Monoid; concat-list)
 ```
@@ -140,6 +144,10 @@ module _
   right-unit-law-Group :
     (x : type-Group) → Id (mul-Group x unit-Group) x
   right-unit-law-Group = pr2 (pr2 is-unital-Group)
+
+  pointed-type-Group : Pointed-Type l
+  pr1 pointed-type-Group = type-Group
+  pr2 pointed-type-Group = unit-Group
   
   has-inverses-Group : is-group' semigroup-Group is-unital-Group
   has-inverses-Group = pr2 is-group-Group
@@ -323,4 +331,16 @@ module _
        ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
   preserves-concat-mul-list-Group =
     distributive-mul-list-Monoid (monoid-Group G)
+```
+
+### Any group element yields a type equipped with an automorphism
+
+```agda
+module _
+  {l : Level} (G : Group l) (g : type-Group G)
+  where
+
+  pointed-type-with-aut-Group : Pointed-Type-With-Aut l
+  pr1 pointed-type-with-aut-Group = pointed-type-Group G
+  pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
 ```
