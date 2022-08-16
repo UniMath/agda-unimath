@@ -178,18 +178,18 @@ module _
     is-1-type-subtype : is-1-type A → is-1-type (type-subtype P)
     is-1-type-subtype = is-trunc-type-subtype zero-𝕋 P
 
-subprop-Prop :
+prop-subprop :
   {l1 l2 : Level} (A : UU-Prop l1) (P : subtype l2 (type-Prop A)) →
   UU-Prop (l1 ⊔ l2)
-pr1 (subprop-Prop A P) = type-subtype P
-pr2 (subprop-Prop A P) =
+pr1 (prop-subprop A P) = type-subtype P
+pr2 (prop-subprop A P) =
   is-prop-type-subtype P (is-prop-type-Prop A)
 
-subset-Set :
+set-subset :
   {l1 l2 : Level} (A : UU-Set l1) (P : subtype l2 (type-Set A)) →
   UU-Set (l1 ⊔ l2)
-pr1 (subset-Set A P) = type-subtype P
-pr2 (subset-Set A P) =
+pr1 (set-subset A P) = type-subtype P
+pr2 (set-subset A P) =
   is-set-type-subtype P (is-set-type-Set A)
 ```
 
