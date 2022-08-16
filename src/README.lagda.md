@@ -521,6 +521,7 @@ open import graph-theory.regular-undirected-graphs
 open import graph-theory.rooted-quasitrees
 open import graph-theory.rooted-trees
 open import graph-theory.simple-undirected-graphs
+open import graph-theory.stereoisomerism-enriched-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.trees
@@ -695,6 +696,7 @@ open import organic-chemistry.alkanes
 open import organic-chemistry.alkenes
 open import organic-chemistry.alkynes
 open import organic-chemistry.hydrocarbons
+open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons
 ```
 
