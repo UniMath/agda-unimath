@@ -95,7 +95,7 @@ module _
     edge-Undirected-Graph G (standard-unordered-pair x y)
 ```
 
-### Transporting edges along equalities of unordere pairs of vertices
+### Transporting edges along equalities of unordered pairs of vertices
 
 ```agda
 module _
