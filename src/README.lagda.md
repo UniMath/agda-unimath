@@ -618,6 +618,8 @@ open import group-theory.subgroups-abelian-groups
 open import group-theory.subgroups-concrete-groups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.subgroups-higher-groups
+open import group-theory.submonoids
+open import group-theory.subsemigroups
 open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
 open import group-theory.symmetric-groups
