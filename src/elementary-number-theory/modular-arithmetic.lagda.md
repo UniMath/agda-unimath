@@ -410,6 +410,11 @@ mod-ℤ zero-ℕ x = x
 mod-ℤ (succ-ℕ k) (inl x) = neg-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))
 mod-ℤ (succ-ℕ k) (inr (inl x)) = zero-Fin k
 mod-ℤ (succ-ℕ k) (inr (inr x)) = mod-succ-ℕ k (succ-ℕ x)
+
+mod-int-ℕ : (k x : ℕ) → mod-ℤ k (int-ℕ x) ＝ mod-ℕ k x
+mod-int-ℕ zero-ℕ x = refl
+mod-int-ℕ (succ-ℕ k) zero-ℕ = refl
+mod-int-ℕ (succ-ℕ k) (succ-ℕ x) = refl
 ```
 
 ## Preservation laws of congruence classes
