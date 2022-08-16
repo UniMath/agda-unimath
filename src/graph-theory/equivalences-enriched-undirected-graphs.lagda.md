@@ -92,6 +92,46 @@ module _
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
 
+  equiv-unordered-pair-vertices-equiv-Enriched-Undirected-Graph :
+    unordered-pair-vertices-Enriched-Undirected-Graph A B G ≃
+    unordered-pair-vertices-Enriched-Undirected-Graph A B H
+  equiv-unordered-pair-vertices-equiv-Enriched-Undirected-Graph =
+    equiv-unordered-pair-vertices-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+      ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
+
+  unordered-pair-vertices-equiv-Enriched-Undirected-Graph :
+    unordered-pair-vertices-Enriched-Undirected-Graph A B G →
+    unordered-pair-vertices-Enriched-Undirected-Graph A B H
+  unordered-pair-vertices-equiv-Enriched-Undirected-Graph =
+    unordered-pair-vertices-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+      ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
+
+  equiv-edge-equiv-Enriched-Undirected-Graph :
+    ( p : unordered-pair-vertices-Enriched-Undirected-Graph A B G) →
+    edge-Enriched-Undirected-Graph A B G p ≃
+    edge-Enriched-Undirected-Graph A B H
+      ( unordered-pair-vertices-equiv-Enriched-Undirected-Graph p)
+  equiv-edge-equiv-Enriched-Undirected-Graph =
+    equiv-edge-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+      ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
+
+  edge-equiv-Enriched-Undirected-Graph :
+    ( p : unordered-pair-vertices-Enriched-Undirected-Graph A B G) →
+    edge-Enriched-Undirected-Graph A B G p →
+    edge-Enriched-Undirected-Graph A B H
+      ( unordered-pair-vertices-equiv-Enriched-Undirected-Graph p)
+  edge-equiv-Enriched-Undirected-Graph =
+    edge-equiv-Undirected-Graph
+      ( undirected-graph-Enriched-Undirected-Graph A B G)
+      ( undirected-graph-Enriched-Undirected-Graph A B H)
+      ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
+
   shape-equiv-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph A B G) →
     ( shape-vertex-Enriched-Undirected-Graph A B G v) ＝

@@ -618,6 +618,8 @@ open import group-theory.subgroups-abelian-groups
 open import group-theory.subgroups-concrete-groups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.subgroups-higher-groups
+open import group-theory.submonoids
+open import group-theory.subsemigroups
 open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
 open import group-theory.symmetric-groups
@@ -754,6 +756,7 @@ open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.faithful-pointed-maps
 open import structured-types.finite-multiplication-magmas
+open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-coherent-h-spaces

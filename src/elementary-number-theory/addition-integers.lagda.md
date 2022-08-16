@@ -15,6 +15,7 @@ open import elementary-number-theory.integers using
     is-nonnegative-ℤ; is-nonnegative-succ-ℤ; is-positive-ℤ; is-positive-succ-ℤ;
     is-nonnegative-is-positive-ℤ; int-ℕ; succ-int-ℕ; is-zero-ℤ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
@@ -26,6 +27,9 @@ open import foundation.injective-maps using (is-injective)
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.unit-type using (star)
+open import foundation.universe-levels using (Level)
+
+open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 
 ## Idea
@@ -415,3 +419,16 @@ is-emb-add-ℤ' :
   (y : ℤ) → is-emb (add-ℤ' y)
 is-emb-add-ℤ' y = is-emb-is-equiv (is-equiv-add-ℤ' y)
 ```
+
+-- ### The initial morphism `ℤ → (X,e)` preserves addition
+
+-- ```agda
+-- module _
+--   {l : Level} (X : Pointed-Type-With-Aut l)
+--   where
+
+--   preserves-add-map-ℤ-Pointed-Type-With-Aut :
+--     (k l : ℤ) →
+--     map-ℤ-Pointed-Type-With-Aut X (add-ℤ k l) ＝ {!!}
+--   preserves-add-map-ℤ-Pointed-Type-With-Aut k l = {!!}
+-- ```
