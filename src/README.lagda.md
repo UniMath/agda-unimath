@@ -502,16 +502,17 @@ open import graph-theory.directed-graphs
 open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
 open import graph-theory.enriched-undirected-graphs
+open import graph-theory.equivalences-enriched-undirected-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
 open import graph-theory.finite-graphs
 open import graph-theory.hypergraphs
-open import graph-theory.incidence-undirected-graphs
 open import graph-theory.matchings
 open import graph-theory.mere-equivalences-undirected-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-undirected-graphs
+open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
@@ -520,6 +521,7 @@ open import graph-theory.regular-undirected-graphs
 open import graph-theory.rooted-quasitrees
 open import graph-theory.rooted-trees
 open import graph-theory.simple-undirected-graphs
+open import graph-theory.stereoisomerism-enriched-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.trails-undirected-graphs
 open import graph-theory.trees
@@ -694,6 +696,7 @@ open import organic-chemistry.alkanes
 open import organic-chemistry.alkenes
 open import organic-chemistry.alkynes
 open import organic-chemistry.hydrocarbons
+open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons
 ```
 
