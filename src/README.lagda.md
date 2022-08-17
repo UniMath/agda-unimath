@@ -564,6 +564,7 @@ open import group-theory.equivalences-higher-groups
 open import group-theory.equivalences-semigroups
 open import group-theory.fixed-points-higher-group-actions
 open import group-theory.free-concrete-group-actions
+open import group-theory.free-groups-with-one-generator
 open import group-theory.free-higher-group-actions
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
