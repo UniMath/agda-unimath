@@ -698,6 +698,7 @@ open import organic-chemistry.alcohols
 open import organic-chemistry.alkanes
 open import organic-chemistry.alkenes
 open import organic-chemistry.alkynes
+open import organic-chemistry.ethane
 open import organic-chemistry.hydrocarbons
 open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons
