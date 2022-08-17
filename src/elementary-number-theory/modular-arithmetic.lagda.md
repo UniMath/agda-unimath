@@ -37,9 +37,11 @@ open import elementary-number-theory.multiplication-integers using
     left-distributive-mul-add-ℤ; right-distributive-mul-add-ℤ;
     is-mul-neg-one-neg-ℤ; is-mul-neg-one-neg-ℤ'; mul-int-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+  ( mul-ℕ; left-unit-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-nonzero-ℕ)
+
+open import univalent-combinatorics.standard-finite-types using (is-zero-Fin)
 
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using (has-decidable-equality)
@@ -429,6 +431,10 @@ preserves-successor-mod-ℕ :
 preserves-successor-mod-ℕ zero-ℕ zero-ℕ = refl
 preserves-successor-mod-ℕ zero-ℕ (succ-ℕ x) = refl
 preserves-successor-mod-ℕ (succ-ℕ k) x = refl
+
+mod-refl-ℕ : (k : ℕ) → mod-ℕ k k ＝ zero-ℤ-Mod k
+mod-refl-ℕ zero-ℕ = refl
+mod-refl-ℕ (succ-ℕ k) = is-zero-mod-succ-ℕ k (succ-ℕ k) (pair 1 (left-unit-law-mul-ℕ (succ-ℕ k))) 
 
 mod-zero-ℤ : (k : ℕ) → mod-ℤ k zero-ℤ ＝ zero-ℤ-Mod k
 mod-zero-ℤ zero-ℕ = refl
