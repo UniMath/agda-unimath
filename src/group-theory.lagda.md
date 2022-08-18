@@ -72,6 +72,7 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-higher-group-actions public
 open import group-theory.orbits-monoid-actions public
+open import group-theory.orders-of-elements-groups public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public

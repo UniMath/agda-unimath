@@ -330,7 +330,7 @@ open import foundation.morphisms-cospans
 open import foundation.multisets
 open import foundation.multisubsets
 open import foundation.negation
-open import foundation.non-contractible-types
+open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.partial-elements
 open import foundation.path-algebra
@@ -602,6 +602,7 @@ open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-higher-group-actions
 open import group-theory.orbits-monoid-actions
+open import group-theory.orders-of-elements-groups
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
 open import group-theory.precategory-of-semigroups
