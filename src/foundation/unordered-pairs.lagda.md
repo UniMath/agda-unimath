@@ -15,7 +15,7 @@ open import foundation.embeddings using (_↪_)
 open import foundation.equivalences using
   ( map-equiv; is-equiv; _≃_; map-inv-is-equiv; isretr-map-inv-is-equiv;
     id-equiv; is-equiv-map-equiv; issec-map-inv-is-equiv)
-open import foundation.existential-quantification using (∃)
+open import foundation.existential-quantification using (∃-Prop)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-function-types using (equiv-postcomp)
@@ -102,10 +102,20 @@ module _
 ### The predicate of being in an unodered pair
 
 ```agda
+is-in-unordered-pair-Prop :
+  {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU-Prop l
+is-in-unordered-pair-Prop p a =
+  ∃-Prop (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
+
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
-is-in-unordered-pair p a =
-  ∃ (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
+is-in-unordered-pair p a = type-Prop (is-in-unordered-pair-Prop p a)
+
+is-prop-is-in-unordered-pair :
+  {l : Level} {A : UU l} (p : unordered-pair A) (a : A) →
+  is-prop (is-in-unordered-pair p a)
+is-prop-is-in-unordered-pair p a =
+  is-prop-type-Prop (is-in-unordered-pair-Prop p a)
 ```
 
 ### The condition of being a self-pairing
