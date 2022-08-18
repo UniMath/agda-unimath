@@ -62,7 +62,9 @@ preserves-aut-map-ℤ-Pointed-Type-With-Aut :
   ( map-aut-Pointed-Type-With-Aut X
     ( map-ℤ-Pointed-Type-With-Aut X k))
 preserves-aut-map-ℤ-Pointed-Type-With-Aut X k =
-  iterate-automorphism-succ-ℤ' k (aut-Pointed-Type-With-Aut X) (pt-Pointed-Type-With-Aut X)
+  iterate-automorphism-succ-ℤ' k
+    ( aut-Pointed-Type-With-Aut X)
+    ( pt-Pointed-Type-With-Aut X)
 
 hom-ℤ-Pointed-Type-With-Aut :
   {l : Level} (X : Pointed-Type-With-Aut l) →
