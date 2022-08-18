@@ -9,7 +9,7 @@ module group-theory.subgroups where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
+open import foundation.embeddings using (is-emb; _↪_)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using (map-inv-is-equiv)
 open import foundation.function-extensionality using (eq-htpy)
@@ -25,7 +25,7 @@ open import foundation.raising-universe-levels using (raise-Prop; map-raise)
 open import foundation.sets using (is-set; is-set-function-type; UU-Set)
 open import foundation.subtypes using
   ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
-    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype)
+    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype; emb-subtype)
 open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
@@ -140,8 +140,18 @@ module _
   inclusion-Subgroup : type-Subgroup → type-Group G
   inclusion-Subgroup = inclusion-subtype subset-Subgroup
 
+  is-emb-inclusion-Subgroup : is-emb inclusion-Subgroup
+  is-emb-inclusion-Subgroup = is-emb-inclusion-subtype subset-Subgroup
+
+  emb-inclusion-Subgroup : type-Subgroup ↪ type-Group G
+  emb-inclusion-Subgroup = emb-subtype subset-Subgroup
+
   is-in-Subgroup : type-Group G → UU l2
   is-in-Subgroup = is-in-subtype subset-Subgroup
+
+  is-in-subgroup-inclusion-Subgroup :
+    (x : type-Subgroup) → is-in-Subgroup (inclusion-Subgroup x)
+  is-in-subgroup-inclusion-Subgroup x = pr2 x
 
   is-prop-is-in-Subgroup :
     (x : type-Group G) → is-prop (is-in-Subgroup x)
