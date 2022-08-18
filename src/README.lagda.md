@@ -602,6 +602,7 @@ open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-higher-group-actions
 open import group-theory.orbits-monoid-actions
+open import group-theory.orders-of-elements-groups
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
 open import group-theory.precategory-of-semigroups
