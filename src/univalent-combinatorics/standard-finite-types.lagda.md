@@ -29,7 +29,7 @@ open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective; is-emb-is-injective)
 open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
 open import foundation.negation using (¬; map-neg)
-open import foundation.non-contractible-types using
+open import foundation.noncontractible-types using
   ( is-not-contractible; is-not-contractible-empty)
 open import foundation.raising-universe-levels using
   ( raise; equiv-raise; map-raise; raise-Set)

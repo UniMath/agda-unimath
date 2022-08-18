@@ -330,7 +330,7 @@ open import foundation.morphisms-cospans
 open import foundation.multisets
 open import foundation.multisubsets
 open import foundation.negation
-open import foundation.non-contractible-types
+open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.partial-elements
 open import foundation.path-algebra

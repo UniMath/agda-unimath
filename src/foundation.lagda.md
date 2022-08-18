@@ -137,7 +137,7 @@ open import foundation.morphisms-cospans public
 open import foundation.multisets public
 open import foundation.multisubsets public
 open import foundation.negation public
-open import foundation.non-contractible-types public
+open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.path-algebra public

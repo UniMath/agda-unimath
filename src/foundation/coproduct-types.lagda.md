@@ -17,7 +17,7 @@ open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
-open import foundation.non-contractible-types using (is-not-contractible)
+open import foundation.noncontractible-types using (is-not-contractible)
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; eq-is-prop';
     UU-Prop; type-Prop; is-prop-type-Prop)

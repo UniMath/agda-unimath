@@ -5,7 +5,7 @@ title: Non-contractible types
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.non-contractible-types where
+module foundation.noncontractible-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
