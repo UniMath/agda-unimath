@@ -21,6 +21,9 @@ open import group-theory.centers-groups public
 open import group-theory.commutative-monoids public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
+open import group-theory.congruence-relations-groups public
+open import group-theory.congruence-relations-monoids public
+open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
 open import group-theory.dihedral-group-construction public

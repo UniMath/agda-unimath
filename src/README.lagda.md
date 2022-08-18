@@ -550,6 +550,9 @@ open import group-theory.centers-groups
 open import group-theory.commutative-monoids
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
+open import group-theory.congruence-relations-groups
+open import group-theory.congruence-relations-monoids
+open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
 open import group-theory.contravariant-pushforward-concrete-group-actions
 open import group-theory.dihedral-group-construction
