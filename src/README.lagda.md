@@ -330,7 +330,7 @@ open import foundation.morphisms-cospans
 open import foundation.multisets
 open import foundation.multisubsets
 open import foundation.negation
-open import foundation.non-contractible-types
+open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.partial-elements
 open import foundation.path-algebra
@@ -564,6 +564,7 @@ open import group-theory.equivalences-higher-groups
 open import group-theory.equivalences-semigroups
 open import group-theory.fixed-points-higher-group-actions
 open import group-theory.free-concrete-group-actions
+open import group-theory.free-groups-with-one-generator
 open import group-theory.free-higher-group-actions
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
@@ -601,6 +602,7 @@ open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-higher-group-actions
 open import group-theory.orbits-monoid-actions
+open import group-theory.orders-of-elements-groups
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
 open import group-theory.precategory-of-semigroups
@@ -697,6 +699,7 @@ open import organic-chemistry.alcohols
 open import organic-chemistry.alkanes
 open import organic-chemistry.alkenes
 open import organic-chemistry.alkynes
+open import organic-chemistry.ethane
 open import organic-chemistry.hydrocarbons
 open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons

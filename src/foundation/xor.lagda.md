@@ -11,6 +11,8 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.commutative-operations using
   ( commutative-operation)
 open import foundation.conjunction using (conj-Prop)
+open import foundation.contractible-types using
+  ( is-contr-Prop; is-contr-Π; is-contr-equiv')
 open import foundation.coproduct-types using
   ( _+_; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-propositions using
@@ -18,13 +20,19 @@ open import foundation.decidable-propositions using
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
+open import foundation.embeddings using (equiv-ap-emb)
 open import foundation.empty-types using (ex-falso)
+open import foundation.equality-coproduct-types using
+  ( emb-inl; compute-eq-coprod-inl-inr; emb-inr; compute-eq-coprod-inr-inl;
+    is-empty-eq-coprod-inl-inr; is-empty-eq-coprod-inr-inl)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv; id-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-cartesian-product-types using (equiv-prod)
+open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types using (_＝_; tr; inv)
 open import foundation.negation using (¬; neg-Prop; is-prop-neg)
 open import foundation.propositional-extensionality using
@@ -36,7 +44,8 @@ open import foundation.propositions using
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
+  ( commutative-prod; left-unit-law-prod-is-contr;
+    right-unit-law-prod-is-contr)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
 open import foundation.type-arithmetic-empty-type using
@@ -44,6 +53,8 @@ open import foundation.type-arithmetic-empty-type using
 open import foundation.type-arithmetic-unit-type using (left-unit-law-Σ)
 open import foundation.unit-type using (unit; star)
 open import foundation.univalence using (eq-equiv)
+open import foundation.universal-property-coproduct-types using
+  ( equiv-dependent-universal-property-coprod)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.unordered-pairs using
   ( unordered-pair; standard-unordered-pair; element-unordered-pair;
@@ -162,7 +173,67 @@ pr1 (commutative-xor-Prop E) = type-commutative-xor-Prop E
 pr2 (commutative-xor-Prop E) = is-prop-type-commutative-xor-Prop E
 ```
 
+### Second definition of exclusiove disjunction
+
+```agda
+module _
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  where
+
+  xor-Prop' : UU-Prop (l1 ⊔ l2)
+  xor-Prop' = is-contr-Prop (type-Prop P + type-Prop Q)
+
+  type-xor-Prop' : UU (l1 ⊔ l2)
+  type-xor-Prop' = type-Prop xor-Prop' 
+```
+
 ## Properties
+
+### The definitions `xor-Prop` and `xor-Prop'` are equivalent
+
+```agda
+module _
+  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  where
+
+  map-equiv-xor-Prop : type-xor-Prop' P Q → type-xor-Prop P Q
+  map-equiv-xor-Prop (pair (inl p) H) =
+    inl (pair p (λ q → is-empty-eq-coprod-inl-inr p q (H (inr q))))
+  map-equiv-xor-Prop (pair (inr q) H) =
+    inr (pair q (λ p → is-empty-eq-coprod-inr-inl q p (H (inl p))))
+  
+  equiv-xor-Prop : type-xor-Prop' P Q ≃ type-xor-Prop P Q
+  equiv-xor-Prop =
+    ( equiv-coprod
+      ( equiv-tot
+        ( λ p →
+           ( ( equiv-map-Π
+               ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
+             ( left-unit-law-prod-is-contr
+               ( is-contr-Π
+                 ( λ p' →
+                   is-contr-equiv'
+                     ( p ＝ p')
+                     ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
+                     ( is-prop-type-Prop P p p'))))) ∘e
+           ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
+      ( equiv-tot
+        ( λ q →
+          ( ( equiv-map-Π
+              ( λ p → compute-eq-coprod-inr-inl q p)) ∘e
+            ( right-unit-law-prod-is-contr
+              ( is-contr-Π
+                ( λ q' →
+                  is-contr-equiv'
+                    ( q ＝ q')
+                    ( equiv-ap-emb (emb-inr (type-Prop P) (type-Prop Q)))
+                    ( is-prop-type-Prop Q q q'))))) ∘e
+          ( equiv-dependent-universal-property-coprod (λ x → inr q ＝ x))))) ∘e
+    ( right-distributive-Σ-coprod
+      ( type-Prop P)
+      ( type-Prop Q)
+      ( λ x → (y : type-Prop P + type-Prop Q) → x ＝ y))
+```
 
 ### The commutative exclusive disjunction at a standard unordered pair
 
