@@ -29,7 +29,7 @@ open import elementary-number-theory.equality-integers using
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
-    is-equiv-pred-ℤ; is-equiv-neg-ℤ; is-set-ℤ)
+    is-equiv-pred-ℤ; is-equiv-neg-ℤ; is-set-ℤ; is-nonnegative-succ-ℤ; is-nonnegative-eq-ℤ)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; left-zero-law-mul-ℤ;
@@ -40,6 +40,8 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; left-unit-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-nonzero-ℕ)
+
+open import elementary-number-theory.inequality-integers
 
 open import univalent-combinatorics.standard-finite-types using (is-zero-Fin)
 
@@ -148,6 +150,17 @@ is-injective-int-ℤ-Mod (succ-ℕ k) =
 is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
 is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
 is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
+
+int-ℤ-Mod-bounded : (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) 
+  → leq-ℤ (int-ℤ-Mod (succ-ℕ  k) x) (int-ℕ (succ-ℕ k))  
+int-ℤ-Mod-bounded zero-ℕ (inr x) = star 
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ 
+  (add-ℤ (inr (inr k)) 
+  (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ 
+  (add-ℤ (inr (inr k)) (inl k)) 
+  (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
+
 ```
 
 ## The successor and predecessor functions on the integers modulo k
