@@ -23,7 +23,7 @@ open import elementary-number-theory.multiplication-integers using
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
     left-negative-law-mul-ℤ; mul-int-ℕ; is-nonnegative-left-factor-mul-ℤ;
     compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ;
-    is-emb-mul-ℤ')
+    is-emb-mul-ℤ'; right-negative-law-mul-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
   
@@ -118,6 +118,14 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
 div-neg-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ x (neg-ℤ y)
 pr1 (div-neg-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ p
+```
+
+### If `x` divides `y` then `-x` divides `y`
+
+```agda
+neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
+pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
+pr2 (neg-div-ℤ x y (pair d p)) = (left-negative-law-mul-ℤ d (neg-ℤ x) ∙ (ap neg-ℤ (right-negative-law-mul-ℤ d x) ∙ (neg-neg-ℤ (mul-ℤ d x) ∙ p)))
 ```
 
 ### Comparison of divisibility on ℕ and on ℤ
