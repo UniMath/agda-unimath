@@ -9,10 +9,12 @@ module univalent-combinatorics.fibers-of-maps where
 
 open import foundation.fibers-of-maps public
 
+open import elementary-number-theory.natural-numbers using (ℕ)
 open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-count-ℕ)
 
 open import foundation.contractible-types using (is-contr-total-path')
+open import foundation.decidable-types
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
   ( equiv-pair-eq-Σ)
@@ -27,14 +29,16 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import univalent-combinatorics.counting using
-  ( count; count-equiv'; number-of-elements-count)
+  ( count; count-equiv'; number-of-elements-count; count-Fin)
 open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-fiber-count-Σ; sum-number-of-elements-count-fiber-count-Σ)
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.equality-finite-types using
   ( is-finite-eq; has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; 𝔽; type-𝔽; is-finite-type-𝔽; is-finite-equiv')
+open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
 ## Idea
@@ -51,9 +55,7 @@ count-fib :
   count A → count B → (y : B) → count (fib f y)
 count-fib f count-A count-B =
   count-fiber-count-Σ count-B (count-equiv' (equiv-total-fib f) count-A)
-```
 
-```agda
 abstract
   sum-number-of-elements-count-fib :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
@@ -98,6 +100,8 @@ pr2 (fib-𝔽 X Y f y) =
   is-finite-fib f (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y) y
 ```
 
+###
+
 ```agda
 abstract
   is-finite-fib-map-section :
@@ -115,3 +119,19 @@ abstract
         ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
       ( is-finite-eq (has-decidable-equality-is-finite (g y)))
 ```
+
+### The fibers of maps between finite types are decidable
+
+```agda
+is-decidable-fib-count :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  count A → count B → (y : B) → is-decidable (fib f y)
+is-decidable-fib-count f count-A count-B y =
+  is-decidable-count (count-fib f count-A count-B y)
+
+is-decidable-fib-Fin :
+  {k l : ℕ} (f : Fin k → Fin l) → (y : Fin l) → is-decidable (fib f y)
+is-decidable-fib-Fin {k} {l} f y =
+  is-decidable-fib-count f (count-Fin k) (count-Fin l) y
+```
+
