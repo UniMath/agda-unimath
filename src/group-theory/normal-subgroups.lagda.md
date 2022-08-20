@@ -19,6 +19,7 @@ open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import group-theory.congruence-relations-groups
 open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.subgroups
@@ -174,6 +175,8 @@ module _
   eq-rel-congruence-Normal-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group G)
   pr1 eq-rel-congruence-Normal-Subgroup = prop-congruence-Normal-Subgroup
   pr1 (pr2 eq-rel-congruence-Normal-Subgroup) = refl-congruence-Normal-Subgroup
-  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Subgroup)) = symm-congruence-Normal-Subgroup
-  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Subgroup)) = trans-congruence-Normal-Subgroup
+  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Subgroup)) =
+    symm-congruence-Normal-Subgroup
+  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Subgroup)) =
+    trans-congruence-Normal-Subgroup
 ```
