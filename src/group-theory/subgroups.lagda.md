@@ -229,32 +229,32 @@ module _
   pr1 unit-Subgroup = unit-Group G
   pr2 unit-Subgroup = contains-unit-Subgroup G H
 
-  left-unit-law-group-Subgroup :
+  left-unit-law-mul-Subgroup :
     (x : type-group-Subgroup) → Id (mul-Subgroup unit-Subgroup x) x
-  left-unit-law-group-Subgroup x =
+  left-unit-law-mul-Subgroup x =
     eq-subgroup-eq-group (left-unit-law-Group G (pr1 x))
 
-  right-unit-law-group-Subgroup :
+  right-unit-law-mul-Subgroup :
     (x : type-group-Subgroup) → Id (mul-Subgroup x unit-Subgroup) x
-  right-unit-law-group-Subgroup x =
+  right-unit-law-mul-Subgroup x =
     eq-subgroup-eq-group (right-unit-law-Group G (pr1 x))
 
   inv-Subgroup : type-group-Subgroup → type-group-Subgroup
   pr1 (inv-Subgroup x) = inv-Group G (pr1 x)
   pr2 (inv-Subgroup x) = is-closed-under-inv-Subgroup G H (pr1 x) (pr2 x)
 
-  left-inverse-law-group-Subgroup :
+  left-inverse-law-mul-Subgroup :
     ( x : type-group-Subgroup) →
     Id ( mul-Subgroup (inv-Subgroup x) x)
        ( unit-Subgroup)
-  left-inverse-law-group-Subgroup x =
+  left-inverse-law-mul-Subgroup x =
     eq-subgroup-eq-group (left-inverse-law-Group G (pr1 x))
 
-  right-inverse-law-group-Subgroup :
+  right-inverse-law-mul-Subgroup :
     (x : type-group-Subgroup) →
     Id ( mul-Subgroup x (inv-Subgroup x))
        ( unit-Subgroup)
-  right-inverse-law-group-Subgroup x =
+  right-inverse-law-mul-Subgroup x =
     eq-subgroup-eq-group (right-inverse-law-Group G (pr1 x))
 
   semigroup-Subgroup : Semigroup (l1 ⊔ l2)
@@ -265,11 +265,11 @@ module _
   group-Subgroup : Group (l1 ⊔ l2)
   pr1 group-Subgroup = semigroup-Subgroup
   pr1 (pr1 (pr2 group-Subgroup)) = unit-Subgroup
-  pr1 (pr2 (pr1 (pr2 group-Subgroup))) = left-unit-law-group-Subgroup
-  pr2 (pr2 (pr1 (pr2 group-Subgroup))) = right-unit-law-group-Subgroup
+  pr1 (pr2 (pr1 (pr2 group-Subgroup))) = left-unit-law-mul-Subgroup
+  pr2 (pr2 (pr1 (pr2 group-Subgroup))) = right-unit-law-mul-Subgroup
   pr1 (pr2 (pr2 group-Subgroup)) = inv-Subgroup
-  pr1 (pr2 (pr2 (pr2 group-Subgroup))) = left-inverse-law-group-Subgroup
-  pr2 (pr2 (pr2 (pr2 group-Subgroup))) = right-inverse-law-group-Subgroup
+  pr1 (pr2 (pr2 (pr2 group-Subgroup))) = left-inverse-law-mul-Subgroup
+  pr2 (pr2 (pr2 (pr2 group-Subgroup))) = right-inverse-law-mul-Subgroup
 ```
 
 ### The inclusion of the underlying group of a subgroup into the ambient group
