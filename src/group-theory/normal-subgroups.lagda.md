@@ -53,6 +53,30 @@ is-prop-is-normal-Subgroup :
   is-prop (is-normal-Subgroup G H)
 is-prop-is-normal-Subgroup G H = is-prop-type-Prop (is-normal-subgroup-Prop G H)
 
+is-normal-Subgroup' :
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) → UU (l1 ⊔ l2)
+is-normal-Subgroup' G H =
+  (x : type-Group G) (y : type-Subgroup G H) →
+  is-in-Subgroup G H (conjugation-Group' G x (inclusion-Subgroup G H y))
+
+is-normal-is-normal-Subgroup :
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
+  is-normal-Subgroup G H → is-normal-Subgroup' G H
+is-normal-is-normal-Subgroup G H K x y =
+  tr
+    ( is-in-Subgroup G H)
+    ( inv (htpy-conjugation-Group G x (inclusion-Subgroup G H y)))
+    ( K (inv-Group G x) y)
+
+is-normal-is-normal-Subgroup' :
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
+  is-normal-Subgroup' G H → is-normal-Subgroup G H
+is-normal-is-normal-Subgroup' G H  K x y =
+  tr
+    ( is-in-Subgroup G H)
+    ( inv (htpy-conjugation-Group' G x (inclusion-Subgroup G H y)))
+    ( K (inv-Group G x) y)
+
 Normal-Subgroup :
   {l1 : Level} (l2 : Level) (G : Group l1) → UU (l1 ⊔ lsuc l2)
 Normal-Subgroup l2 G = Σ (Subgroup l2 G) (is-normal-Subgroup G)
@@ -68,6 +92,13 @@ module _
     is-normal-Subgroup G subgroup-Normal-Subgroup
   is-normal-subgroup-Normal-Subgroup = pr2 N
 
+  is-normal-subgroup-Normal-Subgroup' :
+    is-normal-Subgroup' G subgroup-Normal-Subgroup
+  is-normal-subgroup-Normal-Subgroup' =
+    is-normal-is-normal-Subgroup G
+      subgroup-Normal-Subgroup
+      is-normal-subgroup-Normal-Subgroup
+
   subset-Normal-Subgroup : subset-Group l2 G
   subset-Normal-Subgroup = subset-Subgroup G subgroup-Normal-Subgroup
 
@@ -78,10 +109,12 @@ module _
   inclusion-Normal-Subgroup = inclusion-Subgroup G subgroup-Normal-Subgroup
 
   is-emb-inclusion-Normal-Subgroup : is-emb inclusion-Normal-Subgroup
-  is-emb-inclusion-Normal-Subgroup = is-emb-inclusion-Subgroup G subgroup-Normal-Subgroup
+  is-emb-inclusion-Normal-Subgroup =
+    is-emb-inclusion-Subgroup G subgroup-Normal-Subgroup
 
   emb-inclusion-Normal-Subgroup : type-Normal-Subgroup ↪ type-Group G
-  emb-inclusion-Normal-Subgroup = emb-inclusion-Subgroup G subgroup-Normal-Subgroup
+  emb-inclusion-Normal-Subgroup =
+    emb-inclusion-Subgroup G subgroup-Normal-Subgroup
 
   is-in-Normal-Subgroup : type-Group G → UU l2
   is-in-Normal-Subgroup = is-in-Subgroup G subgroup-Normal-Subgroup
@@ -101,15 +134,16 @@ module _
     contains-unit-Subgroup G subgroup-Normal-Subgroup
 
   unit-Normal-Subgroup : type-Normal-Subgroup
-  unit-Normal-Subgroup = unit-group-Subgroup G subgroup-Normal-Subgroup
+  unit-Normal-Subgroup = unit-Subgroup G subgroup-Normal-Subgroup
 
   is-closed-under-mul-Normal-Subgroup :
     is-closed-under-mul-subset-Group G subset-Normal-Subgroup
   is-closed-under-mul-Normal-Subgroup =
     is-closed-under-mul-Subgroup G subgroup-Normal-Subgroup
 
-  mul-Normal-Subgroup : type-Normal-Subgroup → type-Normal-Subgroup → type-Normal-Subgroup
-  mul-Normal-Subgroup = mul-group-Subgroup G subgroup-Normal-Subgroup
+  mul-Normal-Subgroup :
+    type-Normal-Subgroup → type-Normal-Subgroup → type-Normal-Subgroup
+  mul-Normal-Subgroup = mul-Subgroup G subgroup-Normal-Subgroup
 
   is-closed-under-inv-Normal-Subgroup :
     is-closed-under-inv-subset-Group G subset-Normal-Subgroup
@@ -117,10 +151,24 @@ module _
     is-closed-under-inv-Subgroup G subgroup-Normal-Subgroup
 
   inv-Normal-Subgroup : type-Normal-Subgroup → type-Normal-Subgroup
-  inv-Normal-Subgroup = inv-group-Subgroup G subgroup-Normal-Subgroup
+  inv-Normal-Subgroup = inv-Subgroup G subgroup-Normal-Subgroup
 
   group-Normal-Subgroup : Group (l1 ⊔ l2)
   group-Normal-Subgroup = group-Subgroup G subgroup-Normal-Subgroup
+
+  conjugation-Normal-Subgroup :
+    type-Group G → type-Normal-Subgroup → type-Normal-Subgroup
+  pr1 (conjugation-Normal-Subgroup y u) =
+    conjugation-Group G y (inclusion-Normal-Subgroup u)
+  pr2 (conjugation-Normal-Subgroup y u) =
+    is-normal-subgroup-Normal-Subgroup y u
+
+  conjugation-Normal-Subgroup' :
+    type-Group G → type-Normal-Subgroup → type-Normal-Subgroup
+  pr1 (conjugation-Normal-Subgroup' y u) =
+    conjugation-Group' G y (inclusion-Normal-Subgroup u)
+  pr2 (conjugation-Normal-Subgroup' y u) =
+    is-normal-subgroup-Normal-Subgroup' y u
 ```
 
 ## Properties
@@ -133,50 +181,75 @@ module _
   where
   
   sim-congruence-Normal-Subgroup : (x y : type-Group G) → UU (l1 ⊔ l2)
-  sim-congruence-Normal-Subgroup x y =
-    fib (mul-Group G x ∘ inclusion-Normal-Subgroup G N) y
+  sim-congruence-Normal-Subgroup =
+    right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   is-prop-sim-congruence-Normal-Subgroup :
     (x y : type-Group G) → is-prop (sim-congruence-Normal-Subgroup x y)
-  is-prop-sim-congruence-Normal-Subgroup x =
-    is-prop-map-is-emb
-      ( is-emb-comp'
-        ( mul-Group G x)
-        ( inclusion-Normal-Subgroup G N)
-        ( is-emb-mul-Group G x)
-        ( is-emb-inclusion-Normal-Subgroup G N))
+  is-prop-sim-congruence-Normal-Subgroup =
+    is-prop-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   prop-congruence-Normal-Subgroup : (x y : type-Group G) → UU-Prop (l1 ⊔ l2)
-  pr1 (prop-congruence-Normal-Subgroup x y) = sim-congruence-Normal-Subgroup x y
-  pr2 (prop-congruence-Normal-Subgroup x y) = is-prop-sim-congruence-Normal-Subgroup x y
+  prop-congruence-Normal-Subgroup =
+    prop-right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
 
   refl-congruence-Normal-Subgroup :
     is-reflexive-Rel-Prop prop-congruence-Normal-Subgroup
-  pr1 (refl-congruence-Normal-Subgroup {x}) = unit-Normal-Subgroup G N
-  pr2 (refl-congruence-Normal-Subgroup {x}) = right-unit-law-Group G x
+  refl-congruence-Normal-Subgroup =
+    refl-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   symm-congruence-Normal-Subgroup :
     is-symmetric-Rel-Prop prop-congruence-Normal-Subgroup
-  pr1 (symm-congruence-Normal-Subgroup {x} {y} (u , p)) = inv-Normal-Subgroup G N u
-  pr2 (symm-congruence-Normal-Subgroup {x} {y} (u , p)) = inv (transpose-eq-mul-Group G p)
+  symm-congruence-Normal-Subgroup =
+    symm-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   trans-congruence-Normal-Subgroup :
     is-transitive-Rel-Prop prop-congruence-Normal-Subgroup
-  pr1 (trans-congruence-Normal-Subgroup {x} {y} {z} (u , p) (v , q)) =
-    mul-Normal-Subgroup G N u v
-  pr2 (trans-congruence-Normal-Subgroup {x} {y} {z} (u , p) (v , q)) =
-    ( inv
-      ( associative-mul-Group G x
-        ( inclusion-Normal-Subgroup G N u)
-        ( inclusion-Normal-Subgroup G N v))) ∙
-    ( ( ap (mul-Group' G (inclusion-Normal-Subgroup G N v)) p) ∙
-      ( q))
+  trans-congruence-Normal-Subgroup =
+    trans-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   eq-rel-congruence-Normal-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group G)
-  pr1 eq-rel-congruence-Normal-Subgroup = prop-congruence-Normal-Subgroup
-  pr1 (pr2 eq-rel-congruence-Normal-Subgroup) = refl-congruence-Normal-Subgroup
-  pr1 (pr2 (pr2 eq-rel-congruence-Normal-Subgroup)) =
-    symm-congruence-Normal-Subgroup
-  pr2 (pr2 (pr2 eq-rel-congruence-Normal-Subgroup)) =
-    trans-congruence-Normal-Subgroup
+  eq-rel-congruence-Normal-Subgroup =
+    right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
+
+  is-congruence-eq-rel-congruence-Normal-Subgroup :
+    is-congruence-Eq-Rel-Group G eq-rel-congruence-Normal-Subgroup
+  pr1
+    ( is-congruence-eq-rel-congruence-Normal-Subgroup
+      {x} {x'} {y} {y'} (u , p) (v , q)) =
+    mul-Normal-Subgroup G N (conjugation-Normal-Subgroup' G N y u) v
+  pr2
+    ( is-congruence-eq-rel-congruence-Normal-Subgroup
+      {x1 = x} {y1 = y} (u , p) (v , q)) =
+    ( ( associative-mul-Group G x y
+        ( inclusion-Normal-Subgroup G N
+          ( mul-Normal-Subgroup G N
+            ( conjugation-Normal-Subgroup' G N y u)
+            ( v)))) ∙
+      ( ( ap
+          ( mul-Group G x)
+          ( inv
+            ( associative-mul-Group G
+              ( y)
+              ( inclusion-Normal-Subgroup G N
+                ( conjugation-Normal-Subgroup' G N y u))
+              ( inclusion-Normal-Subgroup G N v)) ∙
+            ( ( ap
+                ( mul-Group' G (inclusion-Normal-Subgroup G N v))
+                ( right-conjugation-law-mul-Group' G y
+                  ( inclusion-Normal-Subgroup G N u))) ∙
+              ( associative-mul-Group G
+                ( inclusion-Normal-Subgroup G N u)
+                ( y)
+                ( inclusion-Normal-Subgroup G N v))))) ∙
+        ( inv
+          ( associative-mul-Group G x
+            ( inclusion-Normal-Subgroup G N u)
+            ( mul-Group G y (inclusion-Normal-Subgroup G N v)))))) ∙
+    ( ap-mul-Group G p q)
+
+  congruence-Normal-Subgroup : congruence-Group (l1 ⊔ l2) G
+  pr1 congruence-Normal-Subgroup = eq-rel-congruence-Normal-Subgroup
+  pr2 congruence-Normal-Subgroup =
+    is-congruence-eq-rel-congruence-Normal-Subgroup
 ```

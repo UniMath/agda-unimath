@@ -634,6 +634,7 @@ open import group-theory.symmetric-higher-groups
 open import group-theory.torsors
 open import group-theory.transitive-concrete-group-actions
 open import group-theory.transitive-group-actions
+open import group-theory.trivial-subgroups
 open import group-theory.unordered-tuples-of-elements-commutative-monoids
 ```
 
