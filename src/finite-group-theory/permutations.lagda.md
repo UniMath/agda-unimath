@@ -424,7 +424,7 @@ module _
     is-generating-subset-Group
       ( symmetric-Group (set-UU-Fin-Level n X))
       ( is-transposition-permutation-Prop)
-  is-generated-transposition-symmetric-Fin-Level f _ =
+  is-generated-transposition-symmetric-Fin-Level f =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-UU-Fin-Level n X)
       ( subset-subgroup-subset-Group

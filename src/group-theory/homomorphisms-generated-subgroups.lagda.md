@@ -27,6 +27,7 @@ open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.epimorphisms-groups using (is-epi-iso-Group)
+open import group-theory.full-subgroups
 open import group-theory.groups using
   ( Group; type-Group; right-unit-law-Group; is-set-type-Group; set-Group;
     unit-Group; mul-Group; inv-Group)
@@ -37,7 +38,7 @@ open import group-theory.homomorphisms-groups using
 open import group-theory.isomorphisms-groups using
   ( inv-iso-Group; hom-iso-Group; hom-inv-iso-Group)
 open import group-theory.subgroups using
-  ( subset-Group; group-Subgroup; isomorph-inclusion-complete-subgroup-Subgroup)
+  ( subset-Group; group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
   ( subgroup-subset-Group; ev-formal-combination-subset-Group; formal-combination-subset-Group;
     preserves-concat-ev-formal-combination-subset-Group; is-generating-subset-Group)
@@ -264,10 +265,7 @@ module _
         ( is-epi-iso-Group l3
           ( group-Subgroup G (subgroup-subset-Group G S))
           ( G)
-          ( inv-iso-Group
-            ( G)
-            ( group-Subgroup G (subgroup-subset-Group G S))
-            ( isomorph-inclusion-complete-subgroup-Subgroup G (subgroup-subset-Group G S) H))
+          ( iso-inclusion-is-full-Subgroup G (subgroup-subset-Group G S) H)
           ( G')))
 
   eq-map-restriction-generating-subset-Group :

@@ -39,6 +39,7 @@ open import group-theory.fixed-points-higher-group-actions public
 open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.free-higher-group-actions public
+open import group-theory.full-subgroups public
 open import group-theory.furstenberg-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public

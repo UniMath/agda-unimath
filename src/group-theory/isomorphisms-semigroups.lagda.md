@@ -30,7 +30,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.equivalences-semigroups using
   ( preserves-mul-equiv-Semigroup; equiv-Semigroup;
-    is-contr-total-equiv-Semigroup)
+    is-contr-total-equiv-Semigroup; is-equiv-hom-Semigroup)
 open import group-theory.homomorphisms-semigroups using
   ( type-hom-Semigroup; comp-hom-Semigroup; id-hom-Semigroup;
     map-hom-Semigroup; preserves-mul-Semigroup; eq-htpy-hom-Semigroup)
@@ -149,8 +149,8 @@ module _
 
   abstract
     is-iso-is-equiv-hom-Semigroup :
-      (f : type-hom-Semigroup G H) → is-equiv (pr1 f) →
-      is-iso-hom-Semigroup G H f
+      (f : type-hom-Semigroup G H) →
+      is-equiv-hom-Semigroup G H f → is-iso-hom-Semigroup G H f
     pr1 (pr1 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
       map-inv-is-equiv is-equiv-f
     pr2 (pr1 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
@@ -162,8 +162,8 @@ module _
 
   abstract
     is-equiv-is-iso-hom-Semigroup :
-      (f : type-hom-Semigroup G H) → is-iso-hom-Semigroup G H f →
-      is-equiv (pr1 f)
+      (f : type-hom-Semigroup G H) →
+      is-iso-hom-Semigroup G H f → is-equiv-hom-Semigroup G H f
     is-equiv-is-iso-hom-Semigroup
       ( pair f μ-f)
       ( pair (pair g μ-g) (pair issec isretr)) =

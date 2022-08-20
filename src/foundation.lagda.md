@@ -87,6 +87,7 @@ open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
