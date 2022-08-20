@@ -33,10 +33,10 @@ open import group-theory.subgroups using
     is-closed-under-inv-Subgroup; type-group-Subgroup;
     map-inclusion-group-Subgroup;
     is-emb-inclusion-group-Subgroup; eq-subgroup-eq-group; set-group-Subgroup;
-    unit-group-Subgroup; mul-group-Subgroup; inv-group-Subgroup;
-    associative-mul-group-Subgroup; left-unit-law-group-Subgroup;
-    right-unit-law-group-Subgroup; left-inverse-law-group-Subgroup;
-    right-inverse-law-group-Subgroup; group-Subgroup;
+    unit-Subgroup; mul-Subgroup; inv-Subgroup;
+    associative-mul-Subgroup; left-unit-law-mul-Subgroup;
+    right-unit-law-mul-Subgroup; left-inverse-law-mul-Subgroup;
+    right-inverse-law-mul-Subgroup; group-Subgroup;
     preserves-mul-inclusion-group-Subgroup; inclusion-group-Subgroup;
     semigroup-Subgroup; preserves-unit-inclusion-group-Subgroup;
     preserves-inverses-inclusion-group-Subgroup)
@@ -164,50 +164,51 @@ module _
   set-ab-Subgroup-Ab = set-group-Subgroup (group-Ab A) B
 
   zero-ab-Subgroup-Ab : type-ab-Subgroup-Ab
-  zero-ab-Subgroup-Ab = unit-group-Subgroup (group-Ab A) B
+  zero-ab-Subgroup-Ab = unit-Subgroup (group-Ab A) B
 
   add-ab-Subgroup-Ab : (x y : type-ab-Subgroup-Ab) → type-ab-Subgroup-Ab
-  add-ab-Subgroup-Ab = mul-group-Subgroup (group-Ab A) B
+  add-ab-Subgroup-Ab = mul-Subgroup (group-Ab A) B
 
   neg-ab-Subgroup-Ab : type-ab-Subgroup-Ab → type-ab-Subgroup-Ab
-  neg-ab-Subgroup-Ab = inv-group-Subgroup (group-Ab A) B
+  neg-ab-Subgroup-Ab = inv-Subgroup (group-Ab A) B
 
-  associative-add-ab-Subgroup-Ab :
+  associative-add-Subgroup-Ab :
     ( x y z : type-ab-Subgroup-Ab) →
     Id (add-ab-Subgroup-Ab (add-ab-Subgroup-Ab x y) z)
        (add-ab-Subgroup-Ab x (add-ab-Subgroup-Ab y z))
-  associative-add-ab-Subgroup-Ab =
-    associative-mul-group-Subgroup (group-Ab A) B
+  associative-add-Subgroup-Ab =
+    associative-mul-Subgroup (group-Ab A) B
 
-  left-zero-law-ab-Subgroup-Ab :
+  left-unit-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
     Id (add-ab-Subgroup-Ab zero-ab-Subgroup-Ab x) x
-  left-zero-law-ab-Subgroup-Ab =
-    left-unit-law-group-Subgroup (group-Ab A) B
+  left-unit-law-add-Subgroup-Ab =
+    left-unit-law-mul-Subgroup (group-Ab A) B
 
-  right-zero-law-ab-Subgroup-Ab :
+  right-unit-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
     Id (add-ab-Subgroup-Ab x zero-ab-Subgroup-Ab) x
-  right-zero-law-ab-Subgroup-Ab =
-    right-unit-law-group-Subgroup (group-Ab A) B
+  right-unit-law-add-Subgroup-Ab =
+    right-unit-law-mul-Subgroup (group-Ab A) B
 
-  left-neg-law-ab-Subgroup-Ab :
+  left-inverse-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
     Id ( add-ab-Subgroup-Ab (neg-ab-Subgroup-Ab x) x)
        ( zero-ab-Subgroup-Ab)
-  left-neg-law-ab-Subgroup-Ab =
-    left-inverse-law-group-Subgroup (group-Ab A) B
+  left-inverse-law-add-Subgroup-Ab =
+    left-inverse-law-mul-Subgroup (group-Ab A) B
 
-  right-neg-law-ab-Subgroup-Ab :
+  right-inverse-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
     Id ( add-ab-Subgroup-Ab x (neg-ab-Subgroup-Ab x))
        ( zero-ab-Subgroup-Ab)
-  right-neg-law-ab-Subgroup-Ab = right-inverse-law-group-Subgroup (group-Ab A) B
+  right-inverse-law-add-Subgroup-Ab =
+    right-inverse-law-mul-Subgroup (group-Ab A) B
 
-  commutative-add-ab-Subgroup-Ab :
+  commutative-add-Subgroup-Ab :
     ( x y : type-ab-Subgroup-Ab) →
     Id ( add-ab-Subgroup-Ab x y) (add-ab-Subgroup-Ab y x)
-  commutative-add-ab-Subgroup-Ab x y =
+  commutative-add-Subgroup-Ab x y =
     eq-subgroup-ab-eq-ab (commutative-add-Ab A (pr1 x) (pr1 y))
 
   semigroup-Subgroup-Ab : Semigroup (l1 ⊔ l2)
@@ -218,7 +219,7 @@ module _
 
   ab-Subgroup-Ab : Ab (l1 ⊔ l2)
   pr1 ab-Subgroup-Ab = group-Subgroup-Ab
-  pr2 ab-Subgroup-Ab = commutative-add-ab-Subgroup-Ab
+  pr2 ab-Subgroup-Ab = commutative-add-Subgroup-Ab
 ```
 
 ### The inclusion of the underlying group of a subgroup into the ambient abelian group

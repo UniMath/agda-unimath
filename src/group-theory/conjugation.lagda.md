@@ -7,18 +7,17 @@ title: Conjugation in groups
 
 module group-theory.conjugation where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; map-equiv; eq-htpy-equiv)
-open import foundation.identity-types using (_∙_; inv; ap)
-open import foundation.universe-levels using (Level)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import group-theory.group-actions using
-  ( Abstract-Group-Action)
-open import group-theory.groups using
-  ( Group; type-Group; equiv-mul-Group'; inv-Group; equiv-mul-Group; set-Group;
-    ap-mul-Group; associative-mul-Group; distributive-inv-mul-Group; mul-Group;
-    mul-Group')
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.isomorphisms-groups
 ```
 
 ## Idea
@@ -40,6 +39,13 @@ module _
 
   conjugation-Group : (x : type-Group G) → type-Group G → type-Group G
   conjugation-Group x = map-equiv (equiv-conjugation-Group x)
+
+  equiv-conjugation-Group' : (x : type-Group G) → type-Group G ≃ type-Group G
+  equiv-conjugation-Group' x =
+    equiv-mul-Group' G x ∘e equiv-mul-Group G (inv-Group G x)
+
+  conjugation-Group' : (x : type-Group G) → type-Group G → type-Group G
+  conjugation-Group' x = map-equiv (equiv-conjugation-Group' x)
 ```
 
 ### The conjugation action of a group on itself
@@ -68,4 +74,124 @@ module _
             ( associative-mul-Group G g
               ( mul-Group G h x)
               ( inv-Group G h)))))
+```
+
+## Properties
+
+### Laws for conjugation and multiplication
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  conjugation-unit-Group :
+    (x : type-Group G) → conjugation-Group G x (unit-Group G) ＝ unit-Group G
+  conjugation-unit-Group x =
+    ( ap (mul-Group' G (inv-Group G x)) (right-unit-law-Group G x)) ∙
+    ( right-inverse-law-Group G x)
+
+  htpy-conjugation-Group :
+    (x : type-Group G) →
+    conjugation-Group' G x ~ conjugation-Group G (inv-Group G x)
+  htpy-conjugation-Group x y =
+    ap
+      ( mul-Group G (mul-Group G (inv-Group G x) y))
+      ( inv (inv-inv-Group G x))
+
+  htpy-conjugation-Group' :
+    (x : type-Group G) →
+    conjugation-Group G x ~ conjugation-Group' G (inv-Group G x)
+  htpy-conjugation-Group' x y =
+    ap
+      ( mul-Group' G (inv-Group G x))
+      ( ap (mul-Group' G y) (inv (inv-inv-Group G x)))
+  
+  right-conjugation-law-mul-Group :
+    (x y : type-Group G) →
+    mul-Group G (inv-Group G x) (conjugation-Group G x y) ＝
+    mul-Group G y (inv-Group G x)
+  right-conjugation-law-mul-Group x y =
+    inv
+      ( transpose-eq-mul-Group' G
+        ( inv (associative-mul-Group G x y (inv-Group G x))))
+
+  right-conjugation-law-mul-Group' :
+    (x y : type-Group G) →
+    mul-Group G x (conjugation-Group' G x y) ＝
+    mul-Group G y x
+  right-conjugation-law-mul-Group' x y =
+    ( ap (mul-Group G x) (associative-mul-Group G (inv-Group G x) y x)) ∙
+    ( issec-mul-inv-Group G x (mul-Group G y x))
+
+  left-conjugation-law-mul-Group :
+    (x y : type-Group G) →
+    mul-Group G (conjugation-Group G x y) x ＝ mul-Group G x y
+  left-conjugation-law-mul-Group x y =
+    ( associative-mul-Group G (mul-Group G x y) (inv-Group G x) x) ∙
+    ( ( ap (mul-Group G (mul-Group G x y)) (left-inverse-law-Group G x)) ∙
+      ( right-unit-law-Group G (mul-Group G x y)))
+
+  left-conjugation-law-mul-Group' :
+    (x y : type-Group G) →
+    mul-Group G (conjugation-Group' G x y) (inv-Group G x) ＝
+    mul-Group G (inv-Group G x) y
+  left-conjugation-law-mul-Group' x y =
+    isretr-mul-inv-Group' G x (mul-Group G (inv-Group G x) y)
+
+  distributive-conjugation-mul-Group :
+    (x y z : type-Group G) →
+    conjugation-Group G x (mul-Group G y z) ＝
+    mul-Group G (conjugation-Group G x y) (conjugation-Group G x z)
+  distributive-conjugation-mul-Group x y z =
+    ( ap
+      ( mul-Group' G (inv-Group G x))
+      ( ( ( inv (associative-mul-Group G x y z)) ∙
+          ( ap
+            ( mul-Group' G z)
+            ( inv (issec-mul-inv-Group' G x (mul-Group G x y))))) ∙
+        ( associative-mul-Group G
+          ( conjugation-Group G x y)
+          ( x)
+          ( z)))) ∙
+    ( associative-mul-Group G
+      ( conjugation-Group G x y)
+      ( mul-Group G x z)
+      ( inv-Group G x))
+
+  conjugation-inv-Group :
+    (x y : type-Group G) →
+    conjugation-Group G x (inv-Group G y) ＝
+    inv-Group G (conjugation-Group G x y)
+  conjugation-inv-Group x y =
+    ( inv (inv-inv-Group G (conjugation-Group G x (inv-Group G y)))) ∙
+    ( ap
+      ( inv-Group G)
+      ( ( distributive-inv-mul-Group G
+          ( mul-Group G x (inv-Group G y))
+          ( inv-Group G x)) ∙
+        ( ( ap-mul-Group G
+            ( inv-inv-Group G x)
+            ( ( distributive-inv-mul-Group G x (inv-Group G y)) ∙
+              ( ap (mul-Group' G (inv-Group G x)) (inv-inv-Group G y)))) ∙
+          ( inv (associative-mul-Group G x y ( inv-Group G x))))))
+```
+
+### Conjugation by `x` is an automorphism of `G`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  conjugation-hom-Group : type-Group G → type-hom-Group G G
+  pr1 (conjugation-hom-Group x) = conjugation-Group G x
+  pr2 (conjugation-hom-Group x) = distributive-conjugation-mul-Group G x
+
+  conjugation-equiv-Group : type-Group G → equiv-Group G G
+  pr1 (conjugation-equiv-Group x) = equiv-conjugation-Group G x
+  pr2 (conjugation-equiv-Group x) = distributive-conjugation-mul-Group G x
+
+  conjugation-iso-Group : type-Group G → type-iso-Group G G
+  conjugation-iso-Group x = iso-equiv-Group G G (conjugation-equiv-Group x)
 ```

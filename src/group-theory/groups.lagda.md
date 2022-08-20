@@ -16,6 +16,8 @@ open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; is-emb-is-equiv)
 open import foundation.function-extensionality using (eq-htpy)
+open import foundation.functions using (_∘_; id)
+open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap-binary; inv; _∙_; ap; refl)
 open import foundation.injective-maps using
   ( is-injective; is-injective-is-equiv)
@@ -169,35 +171,51 @@ module _
     ( inv (left-unit-law-Group (inv-Group unit-Group))) ∙
       ( right-inverse-law-Group unit-Group)
 
+  issec-mul-inv-Group :
+    (x : type-Group) → (mul-Group x ∘ mul-Group (inv-Group x)) ~ id
+  issec-mul-inv-Group x y =
+    ( inv (associative-mul-Group _ _ _)) ∙
+    ( ( ap (mul-Group' y) (right-inverse-law-Group x)) ∙
+      ( left-unit-law-Group y))
+
+  isretr-mul-inv-Group :
+    (x : type-Group) → (mul-Group (inv-Group x) ∘ mul-Group x) ~ id
+  isretr-mul-inv-Group x y =
+    ( inv (associative-mul-Group _ _ _)) ∙
+    ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
+      ( left-unit-law-Group y))
+
   is-equiv-mul-Group : (x : type-Group) → is-equiv (mul-Group x)
   is-equiv-mul-Group x =
     is-equiv-has-inverse
       ( mul-Group (inv-Group x))
-      ( λ y →
-        ( inv (associative-mul-Group _ _ _)) ∙
-        ( ( ap (mul-Group' y) (right-inverse-law-Group x)) ∙
-          ( left-unit-law-Group y)))
-      ( λ y →
-        ( inv (associative-mul-Group _ _ _)) ∙
-        ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
-          ( left-unit-law-Group y)))
+      ( issec-mul-inv-Group x)
+      ( isretr-mul-inv-Group x)
   
   equiv-mul-Group : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group x) = mul-Group x
   pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
+
+  issec-mul-inv-Group' :
+    (x : type-Group) → (mul-Group' x ∘ mul-Group' (inv-Group x)) ~ id
+  issec-mul-inv-Group' x y =
+    ( associative-mul-Group _ _ _) ∙
+    ( ( ap (mul-Group y) (left-inverse-law-Group x)) ∙
+      ( right-unit-law-Group y))
+
+  isretr-mul-inv-Group' :
+    (x : type-Group) → (mul-Group' (inv-Group x) ∘ mul-Group' x) ~ id
+  isretr-mul-inv-Group' x y =
+    ( associative-mul-Group _ _ _) ∙
+    ( ( ap (mul-Group y) (right-inverse-law-Group x)) ∙
+      ( right-unit-law-Group y))
   
   is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
-    ( mul-Group' (inv-Group x))
-      ( λ y →
-        ( associative-mul-Group _ _ _) ∙
-        ( ( ap (mul-Group y) (left-inverse-law-Group x)) ∙
-          ( right-unit-law-Group y)))
-      ( λ y →
-        ( associative-mul-Group _ _ _) ∙
-        ( ( ap (mul-Group y) (right-inverse-law-Group x)) ∙
-          ( right-unit-law-Group y)))
+      ( mul-Group' (inv-Group x))
+      ( issec-mul-inv-Group' x)
+      ( isretr-mul-inv-Group' x)
   
   equiv-mul-Group' : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group' x) = mul-Group' x
