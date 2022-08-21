@@ -19,7 +19,7 @@ open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
@@ -93,10 +93,10 @@ module _
     Id center-total-preserves-mul-id-Semigroup t
   contraction-total-preserves-mul-id-Semigroup
     (pair (pair μ-G' assoc-G') μ-id) =
-    eq-subtype
+    eq-type-subtype
       ( λ μ →
         preserves-mul-semigroup-Prop G (pair (set-Semigroup G) μ) id)
-      ( eq-subtype
+      ( eq-type-subtype
         ( λ μ →
           Π-Prop
             ( type-Semigroup G)

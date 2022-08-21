@@ -25,7 +25,7 @@ open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;
     is-prop-Σ; UU-Prop)
 open import foundation.sets using (UU-Set; is-set; type-Set; Id-Prop)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.monoids using
@@ -290,7 +290,7 @@ abstract
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
-    eq-subtype
+    eq-type-subtype
       ( λ i →
         prod-Prop
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))

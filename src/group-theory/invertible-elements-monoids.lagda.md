@@ -14,7 +14,7 @@ open import foundation.identity-types using (Id; inv; _∙_; ap)
 open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; UU-Prop)
 open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU)
 
 open import group-theory.monoids using
@@ -82,7 +82,7 @@ module _
     (x : type-Monoid M) → all-elements-equal (is-invertible-element-Monoid M x)
   all-elements-equal-is-invertible-element-Monoid x
     (pair y (pair p q)) (pair y' (pair p' q')) =
-    eq-subtype
+    eq-type-subtype
       ( λ z →
         prod-Prop
           ( Id-Prop (set-Monoid M) (mul-Monoid M z x) (unit-Monoid M))
@@ -117,7 +117,7 @@ module _
   pr1 (pr1 (is-contr-has-right-inverse-Monoid x (pair y (pair p q)))) = y
   pr2 (pr1 (is-contr-has-right-inverse-Monoid x (pair y (pair p q)))) = q
   pr2 (is-contr-has-right-inverse-Monoid x (pair y (pair p q))) (pair y' q') =
-    eq-subtype
+    eq-type-subtype
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M x u) (unit-Monoid M))
       ( ( inv (right-unit-law-mul-Monoid M y)) ∙
         ( ( ap (mul-Monoid M y) (inv q')) ∙
@@ -139,7 +139,7 @@ module _
   pr1 (pr1 (is-contr-has-left-inverse-Monoid x (pair y (pair p q)))) = y
   pr2 (pr1 (is-contr-has-left-inverse-Monoid x (pair y (pair p q)))) = p
   pr2 (is-contr-has-left-inverse-Monoid x (pair y (pair p q))) (pair y' p') =
-    eq-subtype
+    eq-type-subtype
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M u x) (unit-Monoid M))
       ( ( inv (left-unit-law-mul-Monoid M y)) ∙
         ( ( ap (mul-Monoid' M y) (inv p')) ∙

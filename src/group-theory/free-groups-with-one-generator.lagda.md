@@ -160,7 +160,7 @@ module _
   pr2 (pr1 is-contr-total-hom-free-group-with-one-generator-ℤ) =
     right-unit-law-Group G g
   pr2 is-contr-total-hom-free-group-with-one-generator-ℤ (pair h p) =
-    eq-subtype
+    eq-type-subtype
       ( λ f → Id-Prop (set-Group G) (map-hom-Group ℤ-Group G f one-ℤ) g)
       ( eq-htpy-hom-Group ℤ-Group G
         ( htpy-hom-free-group-with-one-generator-ℤ h p))

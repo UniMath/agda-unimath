@@ -28,7 +28,7 @@ open import foundation.propositions using
     all-elements-equal; is-prop-all-elements-equal; prod-Prop; Π-Prop; hom-Prop)
 open import foundation.sets using
   ( UU-Set; type-Set; is-set; is-set-type-Set; Σ-Set; Id-Prop; set-Prop)
-open import foundation.subtypes using (eq-subtype; emb-subtype)
+open import foundation.subtypes using (eq-type-subtype; emb-subtype)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( map-left-unit-law-Σ-is-contr)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
@@ -382,7 +382,7 @@ module _
   all-elements-equal-least-element-Finitely-Graded-Poset :
     all-elements-equal least-element-Finitely-Graded-Poset
   all-elements-equal-least-element-Finitely-Graded-Poset (pair x H) (pair y K) =
-    eq-subtype
+    eq-type-subtype
       ( is-least-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( H (element-face-Finitely-Graded-Poset X y))
@@ -433,7 +433,7 @@ module _
     all-elements-equal largest-element-Finitely-Graded-Poset
   all-elements-equal-largest-element-Finitely-Graded-Poset
     (pair x H) (pair y K) =
-    eq-subtype
+    eq-type-subtype
       ( is-largest-element-finitely-graded-poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( K (element-face-Finitely-Graded-Poset X x))
@@ -496,7 +496,7 @@ module _
 
     eq-face-Finitely-Graded-Subposet :
       (x y : face-Finitely-Graded-Subposet) → Id (pr1 x) (pr1 y) → Id x y
-    eq-face-Finitely-Graded-Subposet x y = eq-subtype S
+    eq-face-Finitely-Graded-Subposet x y = eq-type-subtype S
 
     emb-face-Finitely-Graded-Subposet :
       face-Finitely-Graded-Subposet ↪ face-Finitely-Graded-Poset X i

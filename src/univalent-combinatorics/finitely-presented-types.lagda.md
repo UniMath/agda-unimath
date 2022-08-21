@@ -22,7 +22,7 @@ open import foundation.set-presented-types using (has-set-presentation-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
 open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
@@ -102,7 +102,7 @@ has-cardinality-components-has-presentation-of-cardinality {l} k {A} H =
 all-elements-equal-is-finitely-presented :
   {l1 : Level} {A : UU l1} → all-elements-equal (is-finitely-presented A)
 all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
-  eq-subtype
+  eq-type-subtype
     ( λ n → has-set-presentation-Prop (Fin-Set n) A)
     ( eq-cardinality
       ( has-cardinality-components-has-presentation-of-cardinality k K)

@@ -17,6 +17,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-groups
@@ -172,6 +173,27 @@ module _
 ```
 
 ## Properties
+
+### Extensionality of the type of all normal subgroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  Eq-Normal-Subgroup : Normal-Subgroup l2 G → UU (l1 ⊔ l2)
+  Eq-Normal-Subgroup K =
+    Eq-Subgroup G (subgroup-Normal-Subgroup G N) (subgroup-Normal-Subgroup G K)
+
+  extensionality-Normal-Subgroup :
+    (K : Normal-Subgroup l2 G) → (N ＝ K) ≃ Eq-Normal-Subgroup K
+  extensionality-Normal-Subgroup =
+    extensionality-type-subtype
+      ( is-normal-subgroup-Prop G)
+      ( is-normal-subgroup-Normal-Subgroup G N)
+      ( λ x → pair id id)
+      ( extensionality-Subgroup G (subgroup-Normal-Subgroup G N))
+```
 
 ### Normal subgroups are in 1-1 correspondence with congruence relations on groups
 

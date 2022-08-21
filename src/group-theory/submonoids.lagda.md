@@ -6,9 +6,12 @@ title: Submonoids
 module group-theory.submonoids where
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -99,6 +102,9 @@ module _
   subset-Submonoid =
     inclusion-subtype (is-submonoid-subset-Monoid-Prop M) P
 
+  is-submonoid-Submonoid : is-submonoid-subset-Monoid M subset-Submonoid
+  is-submonoid-Submonoid = pr2 P
+
   is-in-Submonoid : type-Monoid M → UU l2
   is-in-Submonoid = is-in-subtype subset-Submonoid
 
@@ -161,7 +167,7 @@ module _
     (mul-Submonoid (mul-Submonoid x y) z) ＝
     (mul-Submonoid x (mul-Submonoid y z))
   associative-mul-Submonoid x y z =
-    eq-subtype
+    eq-type-subtype
       ( subset-Submonoid)
       ( associative-mul-Monoid M
         ( inclusion-Submonoid x)
@@ -176,14 +182,14 @@ module _
   left-unit-law-mul-Submonoid :
     (x : type-Submonoid) → mul-Submonoid unit-Submonoid x ＝ x
   left-unit-law-mul-Submonoid x =
-    eq-subtype
+    eq-type-subtype
       ( subset-Submonoid)
       ( left-unit-law-mul-Monoid M (inclusion-Submonoid x))
 
   right-unit-law-mul-Submonoid :
     (x : type-Submonoid) → mul-Submonoid x unit-Submonoid ＝ x
   right-unit-law-mul-Submonoid x =
-    eq-subtype
+    eq-type-subtype
       ( subset-Submonoid)
       ( right-unit-law-mul-Monoid M (inclusion-Submonoid x))
 
@@ -194,3 +200,24 @@ module _
   pr2 (pr2 (pr2 monoid-Submonoid)) = right-unit-law-mul-Submonoid
 ```
 
+## Properties
+
+### Extensionality of the type of all submonoids
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Submonoid l2 M)
+  where
+
+  Eq-Submonoid : Submonoid l2 M → UU (l1 ⊔ l2)
+  Eq-Submonoid K = Eq-subtype (subset-Submonoid M N) (subset-Submonoid M K)
+
+  extensionality-Submonoid :
+    (K : Submonoid l2 M) → (N ＝ K) ≃ Eq-Submonoid K
+  extensionality-Submonoid =
+    extensionality-type-subtype
+      ( is-submonoid-subset-Monoid-Prop M)
+      ( is-submonoid-Submonoid M N)
+      ( λ x → pair id id)
+      ( extensionality-subtype (subset-Submonoid M N))
+```

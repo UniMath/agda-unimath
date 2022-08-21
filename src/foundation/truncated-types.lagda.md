@@ -30,7 +30,7 @@ extensionality-Truncated-Type :
   {l : Level} {k : 𝕋} (A B : Truncated-Type l k) →
   (A ＝ B) ≃ type-equiv-Truncated-Type A B
 extensionality-Truncated-Type A =
-  extensionality-subtype
+  extensionality-type-subtype
     ( is-trunc-Prop _)
     ( is-trunc-type-Truncated-Type A)
     ( id-equiv)

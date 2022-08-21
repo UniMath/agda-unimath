@@ -59,7 +59,7 @@ open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
     is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (subtype; eq-subtype; equiv-subtype-equiv)
+open import foundation.subtypes using (subtype; eq-type-subtype; equiv-subtype-equiv)
 open import foundation.type-arithmetic-coproduct-types using
   ( map-commutative-coprod; is-equiv-map-commutative-coprod)
 open import foundation.univalence using (eq-equiv)
@@ -468,7 +468,7 @@ module _
       has-no-fixed-points-swap-2-Element-Type
         ( 2-element-type-2-Element-Decidable-Subtype P)
         { element-subtype-2-element-decidable-subtype-Fin}
-        ( eq-subtype
+        ( eq-type-subtype
           ( subtype-2-Element-Decidable-Subtype P)
           ( inv p))
 ```

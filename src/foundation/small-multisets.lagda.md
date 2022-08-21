@@ -25,7 +25,7 @@ open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.small-types using
   ( is-small-Prop; is-small; is-small-Σ; is-small-Π; is-small-equiv)
 open import foundation.subtypes using
-  ( eq-subtype; extensionality-type-subtype)
+  ( eq-type-subtype; extensionality-type-subtype')
 open import foundation.univalence using (equiv-univalence)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 open import foundation.w-types using
@@ -185,7 +185,7 @@ abstract
   resize-resize-𝕍' :
     {l1 l2 : Level} → (resize-𝕍' {l2} {l1} ∘ resize-𝕍' {l1} {l2}) ~ id
   resize-resize-𝕍' {l1} {l2} (pair X H) =
-    eq-subtype
+    eq-type-subtype
       ( is-small-𝕍-Prop l2)
       ( resize-resize-𝕍 H)
 
@@ -209,13 +209,13 @@ eq-resize-𝕍 :
   {l1 l2 : Level} {x y : 𝕍 l1} (H : is-small-𝕍 l2 x) (K : is-small-𝕍 l2 y) →
   (x ＝ y) ≃ (resize-𝕍 x H ＝ resize-𝕍 y K)
 eq-resize-𝕍 {l1} {l2} H K =
-  ( extensionality-type-subtype
+  ( extensionality-type-subtype'
     ( is-small-𝕍-Prop l1)
     ( resize-𝕍' (pair _ H))
     ( resize-𝕍' (pair _ K))) ∘e
   ( ( equiv-ap (equiv-resize-𝕍') (pair _ H) (pair _ K)) ∘e
     ( inv-equiv
-      ( extensionality-type-subtype
+      ( extensionality-type-subtype'
         ( is-small-𝕍-Prop l2)
         ( pair _ H)
         ( pair _ K))))

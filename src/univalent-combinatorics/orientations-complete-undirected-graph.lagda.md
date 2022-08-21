@@ -83,7 +83,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
 open import foundation.sets using (Id-Prop; UU-Set)
-open import foundation.subtypes using (subtype; eq-subtype)
+open import foundation.subtypes using (subtype)
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
