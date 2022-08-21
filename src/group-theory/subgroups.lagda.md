@@ -14,11 +14,11 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
 open import foundation.embeddings using (is-emb; _↪_; is-emb-comp')
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalence-relations using (Eq-Rel)
-open import foundation.equivalences using (map-inv-is-equiv)
+open import foundation.equivalences using (map-inv-is-equiv; _≃_)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap; _＝_)
 open import foundation.powersets using (_⊆_)
 open import foundation.propositional-extensionality using (is-set-UU-Prop)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
@@ -28,9 +28,12 @@ open import foundation.propositions using
     prod-Prop; eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Prop; map-raise)
 open import foundation.sets using (is-set; is-set-function-type; UU-Set)
+open import foundation.subtype-identity-principle using
+  ( extensionality-type-subtype)
 open import foundation.subtypes using
   ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
-    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype; emb-subtype)
+    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype; emb-subtype;
+    Eq-subtype; extensionality-subtype)
 open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
@@ -303,6 +306,27 @@ module _
   inclusion-group-Subgroup : type-hom-Group (group-Subgroup G H) G
   pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
   pr2 inclusion-group-Subgroup = preserves-mul-inclusion-group-Subgroup
+```
+
+## Properties
+
+### Extensionality of the type of all subgroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+
+  Eq-Subgroup : Subgroup l2 G → UU (l1 ⊔ l2)
+  Eq-Subgroup K = Eq-subtype (subset-Subgroup G H) (subset-Subgroup G K)
+
+  extensionality-Subgroup : (K : Subgroup l2 G) → (H ＝ K) ≃ Eq-Subgroup K
+  extensionality-Subgroup =
+    extensionality-type-subtype
+      ( is-subgroup-subset-group-Prop G)
+      ( is-subgroup-Subgroup G H)
+      ( λ x → pair id id)
+      ( extensionality-subtype (subset-Subgroup G H))
 ```
 
 ### Every subgroup induces two equivalence relations

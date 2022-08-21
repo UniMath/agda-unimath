@@ -10,7 +10,7 @@ open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id)
 open import foundation.propositions using
   ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop; hom-Prop)
-open import foundation.subtypes using (type-subtype; eq-subtype)
+open import foundation.subtypes using (type-subtype; eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.preorders using
@@ -32,7 +32,7 @@ module _
 
   eq-element-sub-Preorder :
     (x y : element-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
-  eq-element-sub-Preorder x y = eq-subtype S
+  eq-element-sub-Preorder x y = eq-type-subtype S
 
   leq-sub-preorder-Prop : (x y : element-sub-Preorder) → UU-Prop l2
   leq-sub-preorder-Prop x y = leq-preorder-Prop X (pr1 x) (pr1 y)

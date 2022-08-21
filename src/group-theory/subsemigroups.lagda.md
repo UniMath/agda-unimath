@@ -6,9 +6,12 @@ title: Subsemigroups
 module group-theory.subsemigroups where
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -96,6 +99,10 @@ module _
   subset-Subsemigroup =
     inclusion-subtype (is-subsemigroup-subset-Semigroup-Prop G) P
 
+  is-subsemigroup-Subsemigroup :
+    is-subsemigroup-subset-Semigroup G subset-Subsemigroup
+  is-subsemigroup-Subsemigroup = pr2 P
+
   is-in-Subsemigroup : type-Semigroup G → UU l2
   is-in-Subsemigroup = is-in-subtype subset-Subsemigroup
 
@@ -154,7 +161,7 @@ module _
     ( mul-Subsemigroup (mul-Subsemigroup x y) z) ＝
     ( mul-Subsemigroup x (mul-Subsemigroup y z))
   associative-mul-Subsemigroup x y z =
-    eq-subtype
+    eq-type-subtype
       ( subset-Subsemigroup)
       ( associative-mul-Semigroup G
         ( inclusion-Subsemigroup x)
@@ -165,4 +172,27 @@ module _
   pr1 semigroup-Subsemigroup = set-Subsemigroup
   pr1 (pr2 semigroup-Subsemigroup) = mul-Subsemigroup
   pr2 (pr2 semigroup-Subsemigroup) = associative-mul-Subsemigroup
+```
+
+## Properties
+
+### Extensionality of the type of all subsemigroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Semigroup l1) (H : Subsemigroup l2 G)
+  where
+
+  Eq-Subsemigroup : Subsemigroup l2 G → UU (l1 ⊔ l2)
+  Eq-Subsemigroup K =
+    Eq-subtype (subset-Subsemigroup G H) (subset-Subsemigroup G K)
+
+  extensionality-Subsemigroup :
+    (K : Subsemigroup l2 G) → (H ＝ K) ≃ Eq-Subsemigroup K
+  extensionality-Subsemigroup =
+    extensionality-type-subtype
+      ( is-subsemigroup-subset-Semigroup-Prop G)
+      ( is-subsemigroup-Subsemigroup G H)
+      ( λ x → pair id id)
+      ( extensionality-subtype (subset-Subsemigroup G H))
 ```

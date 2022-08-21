@@ -177,7 +177,7 @@ module _
     ( extensionality-action-Concrete-Group G
       ( action-transitive-action-Concrete-Group G X)
       ( action-transitive-action-Concrete-Group G Y)) ∘e
-    ( extensionality-type-subtype
+    ( extensionality-type-subtype'
       ( is-transitive-action-Concrete-Group-Prop G)
       ( X)
       ( Y))

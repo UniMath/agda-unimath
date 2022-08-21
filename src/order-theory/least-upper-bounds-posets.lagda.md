@@ -10,7 +10,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
     is-prop-all-elements-equal; prod-Prop; Π-Prop; function-Prop)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.posets using
@@ -77,7 +77,7 @@ module _
     all-elements-equal (has-least-binary-upper-bound-Poset x y)
   all-elements-equal-has-least-binary-upper-bound-Poset x y
     (pair u H) (pair v K) =
-    eq-subtype
+    eq-type-subtype
       ( is-least-binary-upper-bound-poset-Prop x y)
       ( antisymmetric-leq-Poset P u v
         ( pr2 H v (pr1 K))
@@ -157,7 +157,7 @@ module _
     all-elements-equal (has-least-upper-bound-family-Poset f)
   all-elements-equal-has-least-upper-bound-family-Poset f
     (pair u H) (pair v K) =
-    eq-subtype
+    eq-type-subtype
       ( is-least-upper-bound-family-poset-Prop f)
       ( antisymmetric-leq-Poset P u v
         ( pr2 H v (pr1 K))

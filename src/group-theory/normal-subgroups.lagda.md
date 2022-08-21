@@ -17,6 +17,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-groups
@@ -173,7 +174,30 @@ module _
 
 ## Properties
 
+### Extensionality of the type of all normal subgroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  Eq-Normal-Subgroup : Normal-Subgroup l2 G → UU (l1 ⊔ l2)
+  Eq-Normal-Subgroup K =
+    Eq-Subgroup G (subgroup-Normal-Subgroup G N) (subgroup-Normal-Subgroup G K)
+
+  extensionality-Normal-Subgroup :
+    (K : Normal-Subgroup l2 G) → (N ＝ K) ≃ Eq-Normal-Subgroup K
+  extensionality-Normal-Subgroup =
+    extensionality-type-subtype
+      ( is-normal-subgroup-Prop G)
+      ( is-normal-subgroup-Normal-Subgroup G N)
+      ( λ x → pair id id)
+      ( extensionality-Subgroup G (subgroup-Normal-Subgroup G N))
+```
+
 ### Normal subgroups are in 1-1 correspondence with congruence relations on groups
+
+#### The congruence relation obtained from a normal subgroup
 
 ```agda
 module _
@@ -252,4 +276,55 @@ module _
   pr1 congruence-Normal-Subgroup = eq-rel-congruence-Normal-Subgroup
   pr2 congruence-Normal-Subgroup =
     is-congruence-eq-rel-congruence-Normal-Subgroup
+```
+
+#### The normal subgroup obtained from a congruence relation
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G)
+  where
+
+  subset-congruence-Group : subset-Group l2 G
+  subset-congruence-Group = prop-congruence-Group G R (unit-Group G)
+
+  is-in-subset-congruence-Group : (type-Group G) → UU l2
+  is-in-subset-congruence-Group = type-Prop ∘ subset-congruence-Group
+
+  contains-unit-subset-congruence-Group :
+    contains-unit-subset-Group G subset-congruence-Group
+  contains-unit-subset-congruence-Group = refl-congruence-Group G R
+
+  is-closed-under-mul-subset-congruence-Group :
+    is-closed-under-mul-subset-Group G subset-congruence-Group
+  is-closed-under-mul-subset-congruence-Group x y H K =
+    concatenate-eq-sim-congruence-Group G R
+      ( inv (left-unit-law-Group G (unit-Group G)))
+      ( mul-congruence-Group G R H K)
+
+  is-closed-under-inv-subset-congruence-Group :
+    is-closed-under-inv-subset-Group G subset-congruence-Group
+  is-closed-under-inv-subset-congruence-Group x H =
+    concatenate-eq-sim-congruence-Group G R
+      ( inv (inv-unit-Group G))
+      ( inv-congruence-Group G R H)
+
+  subgroup-congruence-Group : Subgroup l2 G
+  pr1 subgroup-congruence-Group = subset-congruence-Group
+  pr1 (pr2 subgroup-congruence-Group) = contains-unit-subset-congruence-Group
+  pr1 (pr2 (pr2 subgroup-congruence-Group)) =
+    is-closed-under-mul-subset-congruence-Group
+  pr2 (pr2 (pr2 subgroup-congruence-Group)) =
+    is-closed-under-inv-subset-congruence-Group
+
+  is-normal-subgroup-congruence-Group :
+    is-normal-Subgroup G subgroup-congruence-Group
+  is-normal-subgroup-congruence-Group x (pair y H) =
+    concatenate-eq-sim-congruence-Group G R
+      ( inv (conjugation-unit-Group G x))
+      ( conjugation-congruence-Group G R x H)
+
+  normal-subgroup-congruence-Group : Normal-Subgroup l2 G
+  pr1 normal-subgroup-congruence-Group = subgroup-congruence-Group
+  pr2 normal-subgroup-congruence-Group = is-normal-subgroup-congruence-Group
 ```

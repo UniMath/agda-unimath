@@ -22,7 +22,7 @@ open import foundation-core.functoriality-dependent-pair-types using
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation-core.identity-types using (_＝_; refl; ap; tr)
-open import foundation-core.logical-equivalences using (_↔_; equiv-iff')
+open import foundation-core.logical-equivalences using (_↔_; equiv-iff'; _⇔_)
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.propositions using
@@ -30,7 +30,7 @@ open import foundation-core.propositions using
     is-prop-equiv'; type-Prop; is-prop-type-Prop; is-equiv-is-prop)
 open import foundation-core.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation-core.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype; extensionality-subtype)
+  ( is-contr-total-Eq-subtype; extensionality-type-subtype)
 open import foundation-core.truncated-types using (is-trunc; is-trunc-is-emb)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
@@ -97,14 +97,14 @@ module _
   Eq-type-subtype : (x y : type-subtype P) → UU l1
   Eq-type-subtype x y = (pr1 x ＝ pr1 y)
 
-  extensionality-type-subtype :
+  extensionality-type-subtype' :
     (a b : type-subtype P) → (a ＝ b) ≃ (pr1 a ＝ pr1 b)
-  extensionality-type-subtype (pair a p) =
-    extensionality-subtype P p refl (λ x → id-equiv)
+  extensionality-type-subtype' (pair a p) =
+    extensionality-type-subtype P p refl (λ x → id-equiv)
 
-  eq-subtype :
+  eq-type-subtype :
     {a b : type-subtype P} → (pr1 a ＝ pr1 b) → a ＝ b
-  eq-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype a b)
+  eq-type-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype' a b)
 ```
 
 ### If `B` is a subtype of `A`, then the projection map `Σ A B → A` is an embedding

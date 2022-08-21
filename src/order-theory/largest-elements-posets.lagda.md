@@ -8,7 +8,7 @@ module order-theory.largest-elements-posets where
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
   ( UU-Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.largest-elements-preorders using
@@ -43,7 +43,7 @@ module _
   all-elements-equal-largest-element-Poset :
     all-elements-equal largest-element-Poset
   all-elements-equal-largest-element-Poset (pair x H) (pair y K) =
-    eq-subtype
+    eq-type-subtype
       ( is-largest-element-poset-Prop)
       ( antisymmetric-leq-Poset X x y (K x) (H y))
 

@@ -58,7 +58,7 @@ open import foundation.propositions using
 open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using
   ( is-set; is-set-Prop; Id-Prop; is-set-equiv; is-set-equiv-is-set; UU-Set)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.subuniverses using
   ( extensionality-subuniverse; extensionality-fam-subuniverse)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -363,7 +363,7 @@ abstract
   all-elements-equal-has-finite-cardinality :
     {l1 : Level} {X : UU l1} → all-elements-equal (has-finite-cardinality X)
   all-elements-equal-has-finite-cardinality {l1} {X} (pair k K) (pair l L) =
-    eq-subtype
+    eq-type-subtype
       ( λ k → mere-equiv-Prop (Fin k) X)
       ( apply-universal-property-trunc-Prop K
         ( pair (Id k l) (is-set-ℕ k l))

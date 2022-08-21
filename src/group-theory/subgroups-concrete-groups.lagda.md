@@ -235,7 +235,7 @@ is-set-subgroup-Concrete-Group G X Y =
             ( action-subgroup-Concrete-Group G Y))
           ( e)
           ( f))
-        ( eq-subtype
+        ( eq-type-subtype
           ( subtype-preserves-unit-coset-equiv-action-Concrete-Group G X Y)
           ( eq-htpy-equiv-action-Concrete-Group G
             ( action-subgroup-Concrete-Group G X)
