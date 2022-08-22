@@ -7,11 +7,13 @@ module elementary-number-theory.bezouts-lemma where
 
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-modular-arithmetic
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import elementary-number-theory.integers
 open import elementary-number-theory.addition-integers
@@ -27,7 +29,9 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.negation
 open import foundation.coproduct-types
+open import foundation.cartesian-product-types
 ```
 
 ## Idea
@@ -155,12 +159,12 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p)
   with (decide-is-nonnegative-ℤ {u}) in eq
 ... | inl nonneg = (zero-ℕ , abs-ℤ u , 
   is-injective-int-ℕ (inv (mul-int-ℕ (abs-ℤ u) y) 
-    ∙ (ap (λ p → mul-ℤ p (int-ℕ y)) (nonneg-int-eq-int-abs-ℤ u nonneg) ∙ p)))
+    ∙ (ap (λ p → mul-ℤ p (int-ℕ y)) (int-abs-is-nonnegative-ℤ u nonneg) ∙ p)))
 ... | inr neg = (zero-ℕ , zero-ℕ , path)
   where 
   path : zero-ℕ ＝ z 
   path = is-injective-int-ℕ (inv 
-    (nonneg-nonpos-eq-zero (int-ℕ z) (is-nonnegative-int-ℕ z) 
+    (is-zero-is-nonnegative-neg-is-nonnegative-ℤ (int-ℕ z) (is-nonnegative-int-ℕ z) 
       (tr is-nonnegative-ℤ 
         (left-negative-law-mul-ℤ u (int-ℕ y) ∙ ap (neg-ℤ) p) 
         (is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))) 
@@ -210,7 +214,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p)
     ∙ ( left-unit-law-add-ℤ (int-ℕ z)))))))) 
 
   a-factor-int-ℕ : int-ℕ (abs-ℤ a) ＝ a
-  a-factor-int-ℕ = nonneg-int-eq-int-abs-ℤ a 
+  a-factor-int-ℕ = int-abs-is-nonnegative-ℤ a 
     (is-nonnegative-left-factor-mul-ℤ (tr is-nonnegative-ℤ (inv path) uy-z) 
     (is-nonnegative-int-ℕ (succ-ℕ x))) 
 
@@ -306,7 +310,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p)
       (int-ℕ z)))))))))))))
 
   a-factor-int-ℕ : int-ℕ (abs-ℤ a) ＝ a
-  a-factor-int-ℕ = nonneg-int-eq-int-abs-ℤ a (is-nonnegative-left-factor-mul-ℤ 
+  a-factor-int-ℕ = int-abs-is-nonnegative-ℤ a (is-nonnegative-left-factor-mul-ℤ 
     (tr is-nonnegative-ℤ 
     (distributive-neg-add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
       (neg-ℤ (int-ℕ z)) 
@@ -320,7 +324,7 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p)
   x-u-factor-int-ℕ : 
     int-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) 
     ＝ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))   
-  x-u-factor-int-ℕ = nonneg-int-eq-int-abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+  x-u-factor-int-ℕ = int-abs-is-nonnegative-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
     (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u)
 
   lem3 : dist-ℕ (mul-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)) 
@@ -366,5 +370,19 @@ is-decidable-is-distance-between-multiples-ℕ x y z
 Since `is-distance-between-multiples-ℕ x y z` is decidable, we can prove Bezout's lemma by the well-ordering principle: take the least positive distance `d` between multiples of `x` and `y`. Then `d` divides both `x` and `y`. Since `gcd x y` divides any number of the form `dist-ℕ (kx,ly)`, it follows that `gcd x y | d`, and hence that `gcd x y ＝ d`.
 
 ```agda
+pos-distance-between-multiples : (x y z : ℕ) → UU lzero
+pos-distance-between-multiples x y z = is-nonzero-ℕ (add-ℕ x y) → (is-nonzero-ℕ z) × (is-distance-between-multiples-ℕ x y z)   
+  
+minimal-pos-distance-between-multiples : (x y : ℕ) → minimal-element-ℕ (pos-distance-between-multiples x y)
+minimal-pos-distance-between-multiples zero-ℕ zero-ℕ = {! !}
+minimal-pos-distance-between-multiples zero-ℕ (succ-ℕ y) = {! !}
+minimal-pos-distance-between-multiples (succ-ℕ x) zero-ℕ = {! !}
+minimal-pos-distance-between-multiples (succ-ℕ x) (succ-ℕ y) = {! !}
+-- well-ordering-principle-ℕ 
+--  (pos-distance-between-multiples x y)
+--  (λ z → is-decidable-prod (is-decidable-neg (is-decidable-is-zero-ℕ z)) (is-decidable-is-distance-between-multiples-ℕ x y z)) 
+--  (pair x ? )
+
+  
 
 ```

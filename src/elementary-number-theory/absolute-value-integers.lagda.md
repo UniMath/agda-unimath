@@ -46,9 +46,9 @@ abs-neg-ℤ (inl x) = refl
 abs-neg-ℤ (inr (inl star)) = refl
 abs-neg-ℤ (inr (inr x)) = refl
 
-nonneg-int-eq-int-abs-ℤ : (x : ℤ) → is-nonnegative-ℤ x → int-abs-ℤ x ＝ x
-nonneg-int-eq-int-abs-ℤ (inr (inl star)) h = refl
-nonneg-int-eq-int-abs-ℤ (inr (inr x)) h = refl
+int-abs-is-nonnegative-ℤ : (x : ℤ) → is-nonnegative-ℤ x → int-abs-ℤ x ＝ x
+int-abs-is-nonnegative-ℤ (inr (inl star)) h = refl
+int-abs-is-nonnegative-ℤ (inr (inr x)) h = refl
 
 eq-abs-ℤ : (x : ℤ) → is-zero-ℕ (abs-ℤ x) → is-zero-ℤ x
 eq-abs-ℤ (inr (inl star)) p = refl
