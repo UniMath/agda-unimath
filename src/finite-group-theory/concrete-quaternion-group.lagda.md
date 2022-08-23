@@ -1,4 +1,6 @@
-# The concrete quaternion group
+---
+title: The concrete quaternion group
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

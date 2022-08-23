@@ -25,8 +25,9 @@ An important distinguishing property of organic compounds is the presence of dou
 ## Definition
 
 ```agda
-module _ (H : hydrocarbon) where
-  is-saturated-carbon-hydrocarbon : vertex-hydrocarbon H → UU
+module _
+  {l1 l2 : Level} (H : hydrocarbon l1 l2) where
+  is-saturated-carbon-hydrocarbon : vertex-hydrocarbon H → UU (l1 ⊔ l2)
   is-saturated-carbon-hydrocarbon c =
       (c' : vertex-hydrocarbon H)
     → is-prop (edge-hydrocarbon H (standard-unordered-pair c c'))
@@ -35,14 +36,14 @@ module _ (H : hydrocarbon) where
 Type-theoretically, the saturation condition on a carbon atom (fix one and call it `c`) is incarnated by asking that, for every other carbon atom `c'`, the type of edges `c --- c'` is a proposition. Since edges incident on `c` are a subtype of the type representing electrons of `c`, this guarantees that `c` shares no more than 1 electron with any other carbon in the structure. An **alkane** is a hydrocarbon such that every carbon is saturated.
 
 ```agda
-  double-bond-on-hydrocarbon : vertex-hydrocarbon H → UU
+  double-bond-on-hydrocarbon : vertex-hydrocarbon H → UU (l1 ⊔ l2)
   double-bond-on-hydrocarbon c = Σ (vertex-hydrocarbon H) λ c' →
     has-cardinality 2 (edge-hydrocarbon H (standard-unordered-pair c c'))
 
-  has-double-bond-hydrocarbon : vertex-hydrocarbon H → UU-Prop lzero
+  has-double-bond-hydrocarbon : vertex-hydrocarbon H → UU-Prop (l1 ⊔ l2)
   has-double-bond-hydrocarbon c = trunc-Prop (double-bond-on-hydrocarbon c)
 
-  has-triple-bond-hydrocarbon : vertex-hydrocarbon H → UU
+  has-triple-bond-hydrocarbon : vertex-hydrocarbon H → UU (l1 ⊔ l2)
   has-triple-bond-hydrocarbon c = Σ (vertex-hydrocarbon H) λ c' →
     has-cardinality 3 (edge-hydrocarbon H (standard-unordered-pair c c'))
 ```

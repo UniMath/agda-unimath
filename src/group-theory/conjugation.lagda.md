@@ -88,8 +88,8 @@ module _
   conjugation-unit-Group :
     (x : type-Group G) → conjugation-Group G x (unit-Group G) ＝ unit-Group G
   conjugation-unit-Group x =
-    ( ap (mul-Group' G (inv-Group G x)) (right-unit-law-Group G x)) ∙
-    ( right-inverse-law-Group G x)
+    ( ap (mul-Group' G (inv-Group G x)) (right-unit-law-mul-Group G x)) ∙
+    ( right-inverse-law-mul-Group G x)
 
   htpy-conjugation-Group :
     (x : type-Group G) →
@@ -129,8 +129,8 @@ module _
     mul-Group G (conjugation-Group G x y) x ＝ mul-Group G x y
   left-conjugation-law-mul-Group x y =
     ( associative-mul-Group G (mul-Group G x y) (inv-Group G x) x) ∙
-    ( ( ap (mul-Group G (mul-Group G x y)) (left-inverse-law-Group G x)) ∙
-      ( right-unit-law-Group G (mul-Group G x y)))
+    ( ( ap (mul-Group G (mul-Group G x y)) (left-inverse-law-mul-Group G x)) ∙
+      ( right-unit-law-mul-Group G (mul-Group G x y)))
 
   left-conjugation-law-mul-Group' :
     (x y : type-Group G) →

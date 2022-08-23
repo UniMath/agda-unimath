@@ -94,7 +94,9 @@ abstract
           ( is-finite-Prop (fib f y))
           ( λ K → unit-trunc-Prop (count-fib f H K y)))
 
-fib-𝔽 : (X Y : 𝔽) (f : type-𝔽 X → type-𝔽 Y) → type-𝔽 Y → 𝔽
+fib-𝔽 :
+  {l1 l2 : Level} (X : 𝔽 l1) (Y : 𝔽 l2) (f : type-𝔽 X → type-𝔽 Y) →
+  type-𝔽 Y → 𝔽 (l1 ⊔ l2)
 pr1 (fib-𝔽 X Y f y) = fib f y
 pr2 (fib-𝔽 X Y f y) =
   is-finite-fib f (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y) y

@@ -29,7 +29,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import group-theory.epimorphisms-groups using (is-epi-iso-Group)
 open import group-theory.full-subgroups
 open import group-theory.groups using
-  ( Group; type-Group; right-unit-law-Group; is-set-type-Group; set-Group;
+  ( Group; type-Group; right-unit-law-mul-Group; is-set-type-Group; set-Group;
     unit-Group; mul-Group; inv-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group; is-set-type-hom-Group; eq-htpy-hom-Group;
@@ -212,30 +212,30 @@ module _
     lemma P (pair (inl (inr star)) (pair x s)) =
       ( ap
         ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' f)
-        ( eq-pair-Σ (right-unit-law-Group G (inv-Group G x)) (eq-is-prop is-prop-type-trunc-Prop))) ∙
+        ( eq-pair-Σ (right-unit-law-mul-Group G (inv-Group G x)) (eq-is-prop is-prop-type-trunc-Prop))) ∙
         ( preserves-inv-hom-Group
           ( group-Subgroup G (subgroup-subset-Group G S))
           ( G')
           ( f)
-          ( pair x (unit-trunc-Prop (pair (in-list (pair (inr star) (pair x s))) (right-unit-law-Group G x)))) ∙
+          ( pair x (unit-trunc-Prop (pair (in-list (pair (inr star) (pair x s))) (right-unit-law-mul-Group G x)))) ∙
           ( (ap
             ( inv-Group G')
             ( ( ap
               ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' f)
-              ( eq-pair-Σ (inv (right-unit-law-Group G x)) (eq-is-prop is-prop-type-trunc-Prop))) ∙
+              ( eq-pair-Σ (inv (right-unit-law-mul-Group G x)) (eq-is-prop is-prop-type-trunc-Prop))) ∙
               ( ( P (pair x s)) ∙
                 ( ap
                   ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' g)
-                  ( eq-pair-Σ (right-unit-law-Group G x) (eq-is-prop is-prop-type-trunc-Prop)))))) ∙
+                  ( eq-pair-Σ (right-unit-law-mul-Group G x) (eq-is-prop is-prop-type-trunc-Prop)))))) ∙
             ( ( inv
               ( preserves-inv-hom-Group
                 ( group-Subgroup G (subgroup-subset-Group G S))
                 ( G')
                 ( g)
-                ( pair x (unit-trunc-Prop (pair (in-list (pair (inr star) (pair x s))) (right-unit-law-Group G x)))))) ∙
+                ( pair x (unit-trunc-Prop (pair (in-list (pair (inr star) (pair x s))) (right-unit-law-mul-Group G x)))))) ∙
                 ( ap
                   ( map-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' g)
-                  ( eq-pair-Σ (inv (right-unit-law-Group G (inv-Group G x))) (eq-is-prop is-prop-type-trunc-Prop))))))
+                  ( eq-pair-Σ (inv (right-unit-law-mul-Group G (inv-Group G x))) (eq-is-prop is-prop-type-trunc-Prop))))))
     lemma P (pair (inr star) x) = P x
 
   restriction-generating-subset-Subgroup : 
@@ -276,5 +276,5 @@ module _
   eq-map-restriction-generating-subset-Group f x =
     ap
       ( map-hom-Group G G' f)
-      ( right-unit-law-Group G (pr1 x))
+      ( right-unit-law-mul-Group G (pr1 x))
 ```

@@ -122,7 +122,7 @@ module _
     ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
     ( ( ap
         ( generalized-map-hom-free-group-with-one-generator-ℤ x)
-        ( inv (left-unit-law-Group G
+        ( inv (left-unit-law-mul-Group G
           ( map-hom-free-group-with-one-generator-ℤ y)))) ∙
       ( associative-generalized-map-hom-free-group-with-one-generator-ℤ x
         ( unit-Group G)
@@ -158,7 +158,7 @@ module _
   pr1 (pr1 is-contr-total-hom-free-group-with-one-generator-ℤ) =
     hom-free-group-with-one-generator-ℤ
   pr2 (pr1 is-contr-total-hom-free-group-with-one-generator-ℤ) =
-    right-unit-law-Group G g
+    right-unit-law-mul-Group G g
   pr2 is-contr-total-hom-free-group-with-one-generator-ℤ (pair h p) =
     eq-type-subtype
       ( λ f → Id-Prop (set-Group G) (map-hom-Group ℤ-Group G f one-ℤ) g)

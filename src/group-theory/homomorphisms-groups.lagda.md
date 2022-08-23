@@ -16,9 +16,9 @@ open import foundation.sets using (is-set; UU-Set)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.groups using
-  ( Group; type-Group; semigroup-Group; unit-Group; left-unit-law-Group;
-    mul-Group; left-inverse-law-Group; associative-mul-Group; inv-Group;
-    right-unit-law-Group; right-inverse-law-Group)
+  ( Group; type-Group; semigroup-Group; unit-Group; left-unit-law-mul-Group;
+    mul-Group; left-inverse-law-mul-Group; associative-mul-Group; inv-Group;
+    right-unit-law-mul-Group; right-inverse-law-mul-Group)
 open import group-theory.homomorphisms-semigroups using
   ( preserves-mul-Semigroup; type-hom-Semigroup; htpy-hom-Semigroup;
     refl-htpy-hom-Semigroup; htpy-eq-hom-Semigroup;
@@ -191,10 +191,10 @@ module _
     preserves-unit-hom-Group :
       ( f : type-hom-Group G H) → preserves-unit-Group (map-hom-Group G H f)
     preserves-unit-hom-Group f =
-      ( inv (left-unit-law-Group H (map-hom-Group G H f (unit-Group G)))) ∙
+      ( inv (left-unit-law-mul-Group H (map-hom-Group G H f (unit-Group G)))) ∙
       ( ( ap ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
              ( inv
-               ( left-inverse-law-Group H
+               ( left-inverse-law-mul-Group H
                  ( map-hom-Group G H f (unit-Group G))))) ∙
         ( ( associative-mul-Group H
             ( inv-Group H (map-hom-Group G H f (unit-Group G)))
@@ -211,8 +211,8 @@ module _
                   mul-Group H
                     ( inv-Group H (map-hom-Group G H f (unit-Group G)))
                     ( map-hom-Group G H f x))
-                ( left-unit-law-Group G (unit-Group G))) ∙
-              ( left-inverse-law-Group H
+                ( left-unit-law-mul-Group G (unit-Group G))) ∙
+              ( left-inverse-law-mul-Group H
                 ( map-hom-Group G H f (unit-Group G)))))))
 ```
 
@@ -232,10 +232,10 @@ module _
     preserves-inv-hom-Group :
       (f : type-hom-Group G H) → preserves-inverses-Group (map-hom-Group G H f)
     preserves-inv-hom-Group f x =
-      ( inv ( right-unit-law-Group H (map-hom-Group G H f (inv-Group G x)))) ∙
+      ( inv ( right-unit-law-mul-Group H (map-hom-Group G H f (inv-Group G x)))) ∙
       ( ( ap
           ( mul-Group H (map-hom-Group G H f (inv-Group G x)))
-          ( inv (right-inverse-law-Group H (map-hom-Group G H f x)))) ∙
+          ( inv (right-inverse-law-mul-Group H (map-hom-Group G H f x)))) ∙
         ( ( inv
             ( associative-mul-Group H
               ( map-hom-Group G H f (inv-Group G x))
@@ -250,11 +250,11 @@ module _
                   mul-Group H
                     ( map-hom-Group G H f y)
                     ( inv-Group H (map-hom-Group G H f x)))
-                ( left-inverse-law-Group G x)) ∙
+                ( left-inverse-law-mul-Group G x)) ∙
               ( ( ap
                   ( λ y → mul-Group H y (inv-Group H (map-hom-Group G H f x)))
                   ( preserves-unit-hom-Group G H f)) ∙
-                ( left-unit-law-Group H
+                ( left-unit-law-mul-Group H
                   ( inv-Group H (map-hom-Group G H f x))))))))
 ```
 

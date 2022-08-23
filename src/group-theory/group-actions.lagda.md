@@ -18,7 +18,7 @@ open import foundation.sets using (UU-Set; type-Set; is-set; is-set-type-Set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.groups using
-  ( Group; type-Group; unit-Group; mul-Group; inv-Group; left-inverse-law-Group;
+  ( Group; type-Group; unit-Group; mul-Group; inv-Group; left-inverse-law-mul-Group;
     set-Group; equiv-mul-Group; associative-mul-Group)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group; preserves-unit-hom-Group;
@@ -94,7 +94,7 @@ module _
   transpose-eq-mul-Abstract-Group-Action g x
     .(mul-Abstract-Group-Action g x) refl =
     ( inv
-      ( ( ap (mul-Abstract-Group-Action' x) (left-inverse-law-Group G g)) ∙
+      ( ( ap (mul-Abstract-Group-Action' x) (left-inverse-law-mul-Group G g)) ∙
         ( preserves-unit-mul-Abstract-Group-Action x))) ∙
     ( preserves-mul-Abstract-Group-Action (inv-Group G g) g x)
 ```

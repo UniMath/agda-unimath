@@ -33,14 +33,14 @@ open import foundation.subtype-identity-principle using
 open import foundation.subtypes using
   ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
     is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype; emb-subtype;
-    Eq-subtype; extensionality-subtype)
+    has-same-elements-subtype; extensionality-subtype)
 open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.groups using
   ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
-    associative-mul-Group; left-unit-law-Group; right-unit-law-Group;
-    left-inverse-law-Group; right-inverse-law-Group; is-unit-group-Prop;
+    associative-mul-Group; left-unit-law-mul-Group; right-unit-law-mul-Group;
+    left-inverse-law-mul-Group; right-inverse-law-mul-Group; is-unit-group-Prop;
     inv-unit-Group; semigroup-Group; is-emb-mul-Group; transpose-eq-mul-Group;
     mul-Group'; is-emb-mul-Group'; transpose-eq-mul-Group')
 open import group-theory.homomorphisms-groups using
@@ -54,7 +54,7 @@ open import group-theory.semigroups using (Semigroup)
 
 ## Definitions
 
-### Subsets of subgroups
+### Subsets of groups
 
 ```agda
 subset-Group :
@@ -235,12 +235,12 @@ module _
   left-unit-law-mul-Subgroup :
     (x : type-group-Subgroup) → Id (mul-Subgroup unit-Subgroup x) x
   left-unit-law-mul-Subgroup x =
-    eq-subgroup-eq-group (left-unit-law-Group G (pr1 x))
+    eq-subgroup-eq-group (left-unit-law-mul-Group G (pr1 x))
 
   right-unit-law-mul-Subgroup :
     (x : type-group-Subgroup) → Id (mul-Subgroup x unit-Subgroup) x
   right-unit-law-mul-Subgroup x =
-    eq-subgroup-eq-group (right-unit-law-Group G (pr1 x))
+    eq-subgroup-eq-group (right-unit-law-mul-Group G (pr1 x))
 
   inv-Subgroup : type-group-Subgroup → type-group-Subgroup
   pr1 (inv-Subgroup x) = inv-Group G (pr1 x)
@@ -251,14 +251,14 @@ module _
     Id ( mul-Subgroup (inv-Subgroup x) x)
        ( unit-Subgroup)
   left-inverse-law-mul-Subgroup x =
-    eq-subgroup-eq-group (left-inverse-law-Group G (pr1 x))
+    eq-subgroup-eq-group (left-inverse-law-mul-Group G (pr1 x))
 
   right-inverse-law-mul-Subgroup :
     (x : type-group-Subgroup) →
     Id ( mul-Subgroup x (inv-Subgroup x))
        ( unit-Subgroup)
   right-inverse-law-mul-Subgroup x =
-    eq-subgroup-eq-group (right-inverse-law-Group G (pr1 x))
+    eq-subgroup-eq-group (right-inverse-law-mul-Group G (pr1 x))
 
   semigroup-Subgroup : Semigroup (l1 ⊔ l2)
   pr1 semigroup-Subgroup = set-group-Subgroup
@@ -317,10 +317,12 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  Eq-Subgroup : Subgroup l2 G → UU (l1 ⊔ l2)
-  Eq-Subgroup K = Eq-subtype (subset-Subgroup G H) (subset-Subgroup G K)
+  has-same-elements-Subgroup : {l3 : Level} → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-Subgroup K =
+    has-same-elements-subtype (subset-Subgroup G H) (subset-Subgroup G K)
 
-  extensionality-Subgroup : (K : Subgroup l2 G) → (H ＝ K) ≃ Eq-Subgroup K
+  extensionality-Subgroup :
+    (K : Subgroup l2 G) → (H ＝ K) ≃ has-same-elements-Subgroup K
   extensionality-Subgroup =
     extensionality-type-subtype
       ( is-subgroup-subset-group-Prop G)
@@ -360,7 +362,7 @@ module _
   refl-right-sim-Subgroup :
     is-reflexive-Rel-Prop prop-right-eq-rel-Subgroup
   pr1 (refl-right-sim-Subgroup {x}) = unit-Subgroup G H
-  pr2 (refl-right-sim-Subgroup {x}) = right-unit-law-Group G x
+  pr2 (refl-right-sim-Subgroup {x}) = right-unit-law-mul-Group G x
 
   symm-right-sim-Subgroup :
     is-symmetric-Rel-Prop prop-right-eq-rel-Subgroup
@@ -417,7 +419,7 @@ module _
   refl-left-sim-Subgroup :
     is-reflexive-Rel-Prop prop-left-eq-rel-Subgroup
   pr1 (refl-left-sim-Subgroup {x}) = unit-Subgroup G H
-  pr2 (refl-left-sim-Subgroup {x}) = left-unit-law-Group G x
+  pr2 (refl-left-sim-Subgroup {x}) = left-unit-law-mul-Group G x
 
   symm-left-sim-Subgroup :
     is-symmetric-Rel-Prop prop-left-eq-rel-Subgroup

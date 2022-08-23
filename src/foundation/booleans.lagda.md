@@ -174,7 +174,7 @@ pr2 equiv-bool-Fin-two-ℕ =
 is-finite-bool : is-finite bool
 is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
 
-bool-𝔽 : 𝔽
+bool-𝔽 : 𝔽 lzero
 pr1 bool-𝔽 = bool
 pr2 bool-𝔽 = is-finite-bool
 ```

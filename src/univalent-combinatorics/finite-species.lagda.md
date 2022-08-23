@@ -21,9 +21,9 @@ species is just a map from 𝔽 to 𝔽.
 ## Definition
 
 ```agda
-finite-species : UU (lsuc lzero)
-finite-species = 𝔽 → 𝔽
+finite-species : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+finite-species l1 l2 = 𝔽 l1 → 𝔽 l2
 
-species-finite-species : finite-species → species lzero
-species-finite-species F X = type-𝔽 X
+species-finite-species : {l1 l2 : Level} → finite-species l1 l2 → species l1 l2
+species-finite-species F X = type-𝔽 (F X)
 ```

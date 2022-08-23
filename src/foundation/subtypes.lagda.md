@@ -66,20 +66,23 @@ module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
-  Eq-subtype : subtype l2 A → UU (l1 ⊔ l2)
-  Eq-subtype Q = (x : A) → P x ⇔ Q x
+  has-same-elements-subtype : {l3 : Level} → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-subtype Q = (x : A) → P x ⇔ Q x
 
-  extensionality-subtype : (Q : subtype l2 A) → (P ＝ Q) ≃ Eq-subtype Q
+  extensionality-subtype :
+    (Q : subtype l2 A) → (P ＝ Q) ≃ has-same-elements-subtype Q
   extensionality-subtype =
     extensionality-Π P
       ( λ x Q → P x ⇔ Q)
       ( λ x Q → propositional-extensionality (P x) Q)
 
-  map-extensionality-subtype : (Q : subtype l2 A) → (P ＝ Q) → Eq-subtype Q
-  map-extensionality-subtype Q = map-equiv (extensionality-subtype Q)
+  has-same-elements-eq-subtype :
+    (Q : subtype l2 A) → (P ＝ Q) → has-same-elements-subtype Q
+  has-same-elements-eq-subtype Q = map-equiv (extensionality-subtype Q)
 
-  map-inv-extensionality-subtype : (Q : subtype l2 A) → Eq-subtype Q → P ＝ Q
-  map-inv-extensionality-subtype Q = map-inv-equiv (extensionality-subtype Q)
+  eq-has-same-elements-subtype :
+    (Q : subtype l2 A) → has-same-elements-subtype Q → P ＝ Q
+  eq-has-same-elements-subtype Q = map-inv-equiv (extensionality-subtype Q)
 
   refl-extensionality-subtype :
     map-equiv (extensionality-subtype P) refl ＝ (λ x → pair id id)

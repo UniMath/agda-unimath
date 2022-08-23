@@ -41,9 +41,9 @@ We define hydrocarbons to be graphs equipped with a family of tetrahedra in 3-di
 ## Definition
 
 ```agda
-hydrocarbon : UU (lsuc lzero)
-hydrocarbon =
-  Σ ( Undirected-Graph-𝔽)
+hydrocarbon : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+hydrocarbon l1 l2 =
+  Σ ( Undirected-Graph-𝔽 l1 l2)
     ( λ G →
       Σ ( vertex-Undirected-Graph-𝔽 G → tetrahedron-in-3-space)
         ( λ C →
@@ -64,29 +64,29 @@ hydrocarbon =
                   ( undirected-graph-Undirected-Graph-𝔽 G)))))
 
 module _
-  (H : hydrocarbon)
+  {l1 l2 : Level} (H : hydrocarbon l1 l2)
   where
 
-  finite-graph-hydrocarbon : Undirected-Graph-𝔽
+  finite-graph-hydrocarbon : Undirected-Graph-𝔽 l1 l2
   finite-graph-hydrocarbon = pr1 H
 
-  vertex-hydrocarbon-𝔽 : 𝔽
+  vertex-hydrocarbon-𝔽 : 𝔽 l1
   vertex-hydrocarbon-𝔽 = pr1 finite-graph-hydrocarbon
 
-  vertex-hydrocarbon : UU lzero
+  vertex-hydrocarbon : UU l1
   vertex-hydrocarbon = vertex-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
   is-finite-vertex-hydrocarbon : is-finite vertex-hydrocarbon
   is-finite-vertex-hydrocarbon =
     is-finite-vertex-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
-  unordered-pair-vertices-hydrocarbon : UU (lsuc lzero)
+  unordered-pair-vertices-hydrocarbon : UU (lsuc lzero ⊔ l1)
   unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
 
-  edge-hydrocarbon-𝔽 : unordered-pair-vertices-hydrocarbon → 𝔽
+  edge-hydrocarbon-𝔽 : unordered-pair-vertices-hydrocarbon → 𝔽 l2
   edge-hydrocarbon-𝔽 = pr2  finite-graph-hydrocarbon
 
-  edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU lzero
+  edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU l2
   edge-hydrocarbon = edge-Undirected-Graph-𝔽 finite-graph-hydrocarbon
 
   is-finite-edge-hydrocarbon :

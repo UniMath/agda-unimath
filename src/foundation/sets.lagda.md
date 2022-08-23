@@ -182,10 +182,6 @@ module _
   equiv-Set : UU-Set (l1 ⊔ l2)
   pr1 equiv-Set = type-equiv-Set
   pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
-
-aut-Set :
-  {l : Level} (X : UU-Set l) → UU-Set l
-aut-Set X = equiv-Set X X
 ```
 
 ### Extensionality of sets

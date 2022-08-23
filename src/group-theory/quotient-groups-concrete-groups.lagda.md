@@ -119,7 +119,7 @@ module _
   is-1-type-classifying-type-quotient-Concrete-Group :
     is-1-type classifying-type-quotient-Concrete-Group
   is-1-type-classifying-type-quotient-Concrete-Group =
-    is-1-type-subtype
+    is-1-type-type-subtype
       ( λ X →
         mere-equiv-action-Concrete-Group-Prop G
           ( action-normal-subgroup-Concrete-Group G N)

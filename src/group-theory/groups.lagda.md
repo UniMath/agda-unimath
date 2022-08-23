@@ -139,13 +139,13 @@ module _
   pr1 (is-unit-group-Prop x) = is-unit-Group x
   pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
 
-  left-unit-law-Group :
+  left-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group unit-Group x) x
-  left-unit-law-Group = pr1 (pr2 is-unital-Group)
+  left-unit-law-mul-Group = pr1 (pr2 is-unital-Group)
   
-  right-unit-law-Group :
+  right-unit-law-mul-Group :
     (x : type-Group) → Id (mul-Group x unit-Group) x
-  right-unit-law-Group = pr2 (pr2 is-unital-Group)
+  right-unit-law-mul-Group = pr2 (pr2 is-unital-Group)
 
   pointed-type-Group : Pointed-Type l
   pr1 pointed-type-Group = type-Group
@@ -157,33 +157,33 @@ module _
   inv-Group : type-Group → type-Group
   inv-Group = pr1 has-inverses-Group
   
-  left-inverse-law-Group :
+  left-inverse-law-mul-Group :
     (x : type-Group) → Id (mul-Group (inv-Group x) x) unit-Group
-  left-inverse-law-Group = pr1 (pr2 has-inverses-Group)
+  left-inverse-law-mul-Group = pr1 (pr2 has-inverses-Group)
   
-  right-inverse-law-Group :
+  right-inverse-law-mul-Group :
     (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
-  right-inverse-law-Group = pr2 (pr2 has-inverses-Group)
+  right-inverse-law-mul-Group = pr2 (pr2 has-inverses-Group)
 
   inv-unit-Group :
     Id (inv-Group unit-Group) unit-Group
   inv-unit-Group =
-    ( inv (left-unit-law-Group (inv-Group unit-Group))) ∙
-      ( right-inverse-law-Group unit-Group)
+    ( inv (left-unit-law-mul-Group (inv-Group unit-Group))) ∙
+      ( right-inverse-law-mul-Group unit-Group)
 
   issec-mul-inv-Group :
     (x : type-Group) → (mul-Group x ∘ mul-Group (inv-Group x)) ~ id
   issec-mul-inv-Group x y =
     ( inv (associative-mul-Group _ _ _)) ∙
-    ( ( ap (mul-Group' y) (right-inverse-law-Group x)) ∙
-      ( left-unit-law-Group y))
+    ( ( ap (mul-Group' y) (right-inverse-law-mul-Group x)) ∙
+      ( left-unit-law-mul-Group y))
 
   isretr-mul-inv-Group :
     (x : type-Group) → (mul-Group (inv-Group x) ∘ mul-Group x) ~ id
   isretr-mul-inv-Group x y =
     ( inv (associative-mul-Group _ _ _)) ∙
-    ( ( ap (mul-Group' y) (left-inverse-law-Group x)) ∙
-      ( left-unit-law-Group y))
+    ( ( ap (mul-Group' y) (left-inverse-law-mul-Group x)) ∙
+      ( left-unit-law-mul-Group y))
 
   is-equiv-mul-Group : (x : type-Group) → is-equiv (mul-Group x)
   is-equiv-mul-Group x =
@@ -200,15 +200,15 @@ module _
     (x : type-Group) → (mul-Group' x ∘ mul-Group' (inv-Group x)) ~ id
   issec-mul-inv-Group' x y =
     ( associative-mul-Group _ _ _) ∙
-    ( ( ap (mul-Group y) (left-inverse-law-Group x)) ∙
-      ( right-unit-law-Group y))
+    ( ( ap (mul-Group y) (left-inverse-law-mul-Group x)) ∙
+      ( right-unit-law-mul-Group y))
 
   isretr-mul-inv-Group' :
     (x : type-Group) → (mul-Group' (inv-Group x) ∘ mul-Group' x) ~ id
   isretr-mul-inv-Group' x y =
     ( associative-mul-Group _ _ _) ∙
-    ( ( ap (mul-Group y) (right-inverse-law-Group x)) ∙
-      ( right-unit-law-Group y))
+    ( ( ap (mul-Group y) (right-inverse-law-mul-Group x)) ∙
+      ( right-unit-law-mul-Group y))
   
   is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
   is-equiv-mul-Group' x =
@@ -245,16 +245,16 @@ module _
     {x y z : type-Group} →
     Id (mul-Group x y) z → Id x (mul-Group z (inv-Group y))
   transpose-eq-mul-Group {x} {y} {z} refl =
-    ( ( inv (right-unit-law-Group x)) ∙
-      ( ap (mul-Group x) (inv (right-inverse-law-Group y)))) ∙
+    ( ( inv (right-unit-law-mul-Group x)) ∙
+      ( ap (mul-Group x) (inv (right-inverse-law-mul-Group y)))) ∙
     ( inv (associative-mul-Group x y (inv-Group y)))
 
   transpose-eq-mul-Group' :
     {x y z : type-Group} →
     Id (mul-Group x y) z → Id y (mul-Group (inv-Group x) z)
   transpose-eq-mul-Group' {x} {y} {z} refl =
-    ( ( inv (left-unit-law-Group y)) ∙
-      ( ap (mul-Group' y) (inv (left-inverse-law-Group x)))) ∙
+    ( ( inv (left-unit-law-mul-Group y)) ∙
+      ( ap (mul-Group' y) (inv (left-inverse-law-mul-Group x)))) ∙
     ( associative-mul-Group (inv-Group x) x y)
 
   distributive-inv-mul-Group :
@@ -264,16 +264,16 @@ module _
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
           ( ( associative-mul-Group (inv-Group (mul-Group x y)) x y) ∙
-            ( left-inverse-law-Group (mul-Group x y)))) ∙
-        ( left-unit-law-Group (inv-Group y)))
+            ( left-inverse-law-mul-Group (mul-Group x y)))) ∙
+        ( left-unit-law-mul-Group (inv-Group y)))
         
   inv-inv-Group :
     (x : type-Group) → Id (inv-Group (inv-Group x)) x
   inv-inv-Group x =
     is-injective-mul-Group
       ( inv-Group x)
-      ( ( right-inverse-law-Group (inv-Group x)) ∙
-        ( inv (left-inverse-law-Group x)))
+      ( ( right-inverse-law-mul-Group (inv-Group x)) ∙
+        ( inv (left-inverse-law-mul-Group x)))
 ```
 
 ## Properties
@@ -330,7 +330,7 @@ module _
   is-unit-is-idempotent-Group :
     {x : type-Group G} → is-idempotent-Group x → is-unit-Group G x
   is-unit-is-idempotent-Group {x} p =
-    is-injective-mul-Group G x (p ∙ inv (right-unit-law-Group G x))
+    is-injective-mul-Group G x (p ∙ inv (right-unit-law-mul-Group G x))
 ```
 
 ### Multiplication of a list of elements in a group

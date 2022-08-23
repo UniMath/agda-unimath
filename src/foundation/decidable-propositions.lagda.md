@@ -262,7 +262,7 @@ is-finite-decidable-Prop : {l : Level} → is-finite (decidable-Prop l)
 is-finite-decidable-Prop {l} =
   is-finite-equiv' equiv-bool-decidable-Prop is-finite-bool
 
-decidable-Prop-𝔽-Level : (l : Level) → 𝔽-Level (lsuc l)
-pr1 (decidable-Prop-𝔽-Level l) = decidable-Prop l
-pr2 (decidable-Prop-𝔽-Level l) = is-finite-decidable-Prop
+decidable-Prop-𝔽 : (l : Level) → 𝔽 (lsuc l)
+pr1 (decidable-Prop-𝔽 l) = decidable-Prop l
+pr2 (decidable-Prop-𝔽 l) = is-finite-decidable-Prop
 ```

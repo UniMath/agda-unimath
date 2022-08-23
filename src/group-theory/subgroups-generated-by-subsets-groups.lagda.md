@@ -76,7 +76,7 @@ module _
          ( ev-formal-combination-subset-Group u)
          ( ev-formal-combination-subset-Group v))
   preserves-concat-ev-formal-combination-subset-Group nil v =
-    inv (left-unit-law-Group G (ev-formal-combination-subset-Group v))
+    inv (left-unit-law-mul-Group G (ev-formal-combination-subset-Group v))
   preserves-concat-ev-formal-combination-subset-Group (cons (pair (inl (inr star)) x) u) v =
     ( ap
       ( mul-Group G (inv-Group G (inclusion-subtype S x)))
@@ -120,7 +120,7 @@ module _
         ( preserves-inv-ev-formal-combination-subset-Group u)) ∙
         ( ( ap
           ( mul-Group G (inv-Group G (ev-formal-combination-subset-Group u)))
-          ( ( right-unit-law-Group G (inclusion-subtype S x)) ∙
+          ( ( right-unit-law-mul-Group G (inclusion-subtype S x)) ∙
             ( inv (inv-inv-Group G (inclusion-subtype S x))))) ∙
           ( inv
             ( distributive-inv-mul-Group G
@@ -136,7 +136,7 @@ module _
         ( preserves-inv-ev-formal-combination-subset-Group u)) ∙
         ( ( ap
           ( mul-Group G (inv-Group G (ev-formal-combination-subset-Group u)))
-          ( right-unit-law-Group G (inv-Group G (inclusion-subtype S x)))) ∙
+          ( right-unit-law-mul-Group G (inv-Group G (inclusion-subtype S x)))) ∙
           ( inv
             ( distributive-inv-mul-Group G
               (inclusion-subtype S x)
@@ -214,7 +214,7 @@ module _
     unit-trunc-Prop
       ( pair
         ( in-list (pair (inr star) (pair s H)))
-        ( right-unit-law-Group G (inclusion-subtype S (pair s H))))
+        ( right-unit-law-mul-Group G (inclusion-subtype S (pair s H))))
 
   contains-formal-combinations-Subgroup :
     {l3 : Level} (U : Subgroup l3 G) → S ⊆ subset-Subgroup G U →

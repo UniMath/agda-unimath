@@ -188,6 +188,7 @@ open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.simpson-delooping-sign-homomorphism
+open import finite-group-theory.subgroups-finite-groups
 open import finite-group-theory.tetrahedra-in-3-space
 open import finite-group-theory.transpositions
 ```
@@ -556,6 +557,7 @@ open import group-theory.congruence-relations-monoids
 open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
 open import group-theory.contravariant-pushforward-concrete-group-actions
+open import group-theory.decidable-subgroups
 open import group-theory.dihedral-group-construction
 open import group-theory.dihedral-groups
 open import group-theory.e8-lattice
@@ -629,6 +631,7 @@ open import group-theory.submonoids
 open import group-theory.subsemigroups
 open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
+open import group-theory.symmetric-concrete-groups
 open import group-theory.symmetric-groups
 open import group-theory.symmetric-higher-groups
 open import group-theory.torsors

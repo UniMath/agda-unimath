@@ -183,12 +183,14 @@ module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Subsemigroup l2 G)
   where
 
-  Eq-Subsemigroup : Subsemigroup l2 G → UU (l1 ⊔ l2)
-  Eq-Subsemigroup K =
-    Eq-subtype (subset-Subsemigroup G H) (subset-Subsemigroup G K)
+  has-same-elements-Subsemigroup : Subsemigroup l2 G → UU (l1 ⊔ l2)
+  has-same-elements-Subsemigroup K =
+    has-same-elements-subtype
+      ( subset-Subsemigroup G H)
+      ( subset-Subsemigroup G K)
 
   extensionality-Subsemigroup :
-    (K : Subsemigroup l2 G) → (H ＝ K) ≃ Eq-Subsemigroup K
+    (K : Subsemigroup l2 G) → (H ＝ K) ≃ has-same-elements-Subsemigroup K
   extensionality-Subsemigroup =
     extensionality-type-subtype
       ( is-subsemigroup-subset-Semigroup-Prop G)

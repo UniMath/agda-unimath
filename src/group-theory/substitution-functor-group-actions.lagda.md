@@ -31,7 +31,7 @@ open import group-theory.group-actions using
     preserves-unit-mul-Abstract-Group-Action;
     transpose-eq-mul-Abstract-Group-Action; preserves-mul-Abstract-Group-Action)
 open import group-theory.groups using
-  ( Group; set-Group; mul-Group; unit-Group; mul-Group'; left-unit-law-Group;
+  ( Group; set-Group; mul-Group; unit-Group; mul-Group'; left-unit-law-mul-Group;
     inv-Group; transpose-eq-mul-Group'; associative-mul-Group; type-Group)
 open import group-theory.homomorphisms-group-actions using
   ( type-hom-Abstract-Group-Action; id-hom-Abstract-Group-Action;
@@ -155,7 +155,7 @@ module _
       ( unit-Group G)
       ( pair
         ( ( ap (mul-Group' H h) (preserves-unit-hom-Group G H f)) ∙
-          ( left-unit-law-Group H h))
+          ( left-unit-law-mul-Group H h))
         ( preserves-unit-mul-Abstract-Group-Action G X x))
   pr1
     ( pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
