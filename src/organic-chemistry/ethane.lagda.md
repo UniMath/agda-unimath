@@ -254,7 +254,7 @@ module _
             ( zero-Fin 1)
             ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin 2)
+          ( Fin-UU-Fin' 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))
@@ -274,7 +274,7 @@ module _
             ( one-Fin 1)
             ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin 2)
+          ( Fin-UU-Fin' 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))

@@ -74,9 +74,8 @@ open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 open import univalent-combinatorics.coproduct-types using
   ( Fin-add-ℕ)
 open import univalent-combinatorics.finite-types using
-  ( Fin-UU-Fin-Level; has-cardinality; has-cardinality-Prop; UU-Fin-Level;
-    type-UU-Fin-Level; has-cardinality-type-UU-Fin-Level; UU-Fin; type-UU-Fin;
-    has-cardinality-type-UU-Fin; has-finite-cardinality; is-finite;
+  ( Fin-UU-Fin; has-cardinality; has-cardinality-Prop; UU-Fin;
+    type-UU-Fin; has-cardinality-type-UU-Fin; has-finite-cardinality; is-finite;
     is-finite-has-finite-cardinality; has-finite-cardinality-is-finite; 𝔽;
     type-𝔽; is-finite-type-𝔽; is-finite-equiv)
 open import univalent-combinatorics.standard-finite-types using
@@ -228,7 +227,7 @@ abstract
       ( raise-empty l ↪d X)
       ( left-unit-law-Σ-is-contr
         ( is-contr-component-UU-Level-empty l)
-        ( Fin-UU-Fin-Level l zero-ℕ))
+        ( Fin-UU-Fin l zero-ℕ))
       ( is-contr-equiv
         ( empty ↪d X)
         ( equiv-precomp-decidable-emb-equiv (equiv-raise-empty l) X)
@@ -410,32 +409,15 @@ has-cardinality-binomial-type {A = A} {B} n m H K =
             ( inv-equiv
               ( binomial-type-Fin n m ∘e equiv-binomial-type e f))))
 
-binomial-type-UU-Fin-Level :
-  {l1 l2 : Level} (n m : ℕ) → UU-Fin-Level l1 n → UU-Fin-Level l2 m →
-  UU-Fin-Level (lsuc l1 ⊔ lsuc l2) (n choose-ℕ m)
-pr1 (binomial-type-UU-Fin-Level n m A B) =
-  binomial-type (type-UU-Fin-Level n A) (type-UU-Fin-Level m B)
-pr2 (binomial-type-UU-Fin-Level n m A B) =
-  has-cardinality-binomial-type n m
-    ( has-cardinality-type-UU-Fin-Level n A)
-    ( has-cardinality-type-UU-Fin-Level m B)
-
 binomial-type-UU-Fin :
-  {n m : ℕ} → UU-Fin n → UU-Fin m → UU-Fin (n choose-ℕ m)
-pr1 (binomial-type-UU-Fin {n} {m} A B) =
-  small-binomial-type (type-UU-Fin n A) (type-UU-Fin m B)
-pr2 (binomial-type-UU-Fin {n} {m} A B) =
-  apply-universal-property-trunc-Prop
-    ( has-cardinality-binomial-type n m
-      ( has-cardinality-type-UU-Fin n A)
-      ( has-cardinality-type-UU-Fin m B))
-    ( mere-equiv-Prop
-      ( Fin (n choose-ℕ m))
-      ( small-binomial-type (pr1 A) (pr1 B)))
-    ( λ e →
-      unit-trunc-Prop
-        ( ( compute-small-binomial-type (type-UU-Fin n A) (type-UU-Fin m B)) ∘e
-          ( e)))
+  {l1 l2 : Level} (n m : ℕ) → UU-Fin l1 n → UU-Fin l2 m →
+  UU-Fin (lsuc l1 ⊔ lsuc l2) (n choose-ℕ m)
+pr1 (binomial-type-UU-Fin n m A B) =
+  binomial-type (type-UU-Fin n A) (type-UU-Fin m B)
+pr2 (binomial-type-UU-Fin n m A B) =
+  has-cardinality-binomial-type n m
+    ( has-cardinality-type-UU-Fin n A)
+    ( has-cardinality-type-UU-Fin m B)
 
 has-finite-cardinality-binomial-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →

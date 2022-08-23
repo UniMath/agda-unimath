@@ -95,7 +95,7 @@ module _
       ( λ I B e →
         (i : type-unordered-tuple n A) →
         element-unordered-tuple n A i ≃ B (map-equiv e i))
-      ( is-contr-total-equiv-UU-Fin n (type-unordered-tuple-UU-Fin n A))
+      ( is-contr-total-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n A))
       ( pair (type-unordered-tuple-UU-Fin n A) id-equiv)
       ( is-contr-total-equiv-fam (element-unordered-tuple n A))
 

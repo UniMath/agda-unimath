@@ -91,8 +91,8 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level;
-    has-cardinality-type-UU-Fin-Level; set-UU-Fin-Level)
+  ( has-cardinality; UU-Fin; type-UU-Fin;
+    has-cardinality-type-UU-Fin; set-UU-Fin)
 open import univalent-combinatorics.lists using
   ( cons; list; fold-list; map-list; nil; length-list; concat-list;
     length-concat-list)
@@ -419,18 +419,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (n : ℕ) (X : UU-Fin-Level l1 n)
+  {l1 l2 : Level} (n : ℕ) (X : UU-Fin l1 n)
   where
 
   is-generated-transposition-symmetric-Fin-Level :
     is-generating-subset-Group
-      ( symmetric-Group (set-UU-Fin-Level n X))
+      ( symmetric-Group (set-UU-Fin n X))
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f =
     apply-universal-property-trunc-Prop
-      ( has-cardinality-type-UU-Fin-Level n X)
+      ( has-cardinality-type-UU-Fin n X)
       ( subset-subgroup-subset-Group
-        ( symmetric-Group (set-UU-Fin-Level n X))
+        ( symmetric-Group (set-UU-Fin n X))
         ( is-transposition-permutation-Prop)
         ( f))
       ( λ h →
@@ -438,14 +438,14 @@ module _
           ( pair
             ( map-list
               ( λ x → pair (inr star) (pair (transposition x) (unit-trunc-Prop (pair x refl))))
-              ( list-transpositions-permutation-count (type-UU-Fin-Level n X) (pair n h) f))
-            ( ( lemma (list-transpositions-permutation-count (type-UU-Fin-Level n X) (pair n h) f)) ∙
-              ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin-Level n X) (pair n h) f)))))
+              ( list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f))
+            ( ( lemma (list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f)) ∙
+              ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin n X) (pair n h) f)))))
     where
-    lemma : (l : list (2-Element-Decidable-Subtype l2 (type-UU-Fin-Level n X))) →
+    lemma : (l : list (2-Element-Decidable-Subtype l2 (type-UU-Fin n X))) →
       Id
         ( ev-formal-combination-subset-Group
-          ( symmetric-Group (set-UU-Fin-Level n X))
+          ( symmetric-Group (set-UU-Fin n X))
           ( is-transposition-permutation-Prop)
           ( map-list
             ( λ x →
@@ -460,11 +460,11 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n) 
+  {l : Level} (n : ℕ) (X : UU-Fin l n) 
   where
 
   module _
-    (f : (type-UU-Fin-Level n X) ≃ (type-UU-Fin-Level n X))
+    (f : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
     where
     
     parity-transposition-permutation : UU (lsuc l)
@@ -473,15 +473,15 @@ module _
         type-trunc-Prop
           (Σ
             ( list
-              ( Σ ((type-UU-Fin-Level n X) → decidable-Prop l)
-                ( λ P → has-cardinality 2 (Σ (type-UU-Fin-Level n X) (λ x → type-decidable-Prop (P x))))))
+              ( Σ ((type-UU-Fin n X) → decidable-Prop l)
+                ( λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x))))))
             ( λ li → Id k (mod-two-ℕ (length-list li)) × Id f (permutation-list-transpositions li))))
 
     abstract
       is-contr-parity-transposition-permutation : is-contr parity-transposition-permutation
       is-contr-parity-transposition-permutation =
         apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin-Level n X)
+          ( has-cardinality-type-UU-Fin n X)
           ( is-trunc-Prop neg-two-𝕋 parity-transposition-permutation)
           ( λ h →
             pair
@@ -491,39 +491,39 @@ module _
                   ( pair (list-transposition-f h)
                     ( pair refl
                       ( inv
-                        ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin-Level n X) (pair n h) f)))))))
+                        ( eq-htpy-equiv (retr-permutation-list-transpositions-count (type-UU-Fin n X) (pair n h) f)))))))
               ( λ (pair k u) →
                 eq-pair-Σ
                   ( apply-universal-property-trunc-Prop u
                     ( Id-Prop (Fin-Set 2) (mod-two-ℕ (length-list (list-transposition-f h))) k)
                     ( λ (pair li (pair q r)) →
                       is-injective-iterate-involution (mod-two-ℕ (length-list (list-transposition-f h))) k
-                        ( sign-permutation-orbit n (pair (type-UU-Fin-Level n X) (unit-trunc-Prop h)) id-equiv)
+                        ( sign-permutation-orbit n (pair (type-UU-Fin n X) (unit-trunc-Prop h)) id-equiv)
                         ( inv
                           ( iterate-involution (succ-Fin 2) (is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2))
                             (length-list (list-transposition-f h))
-                            (sign-permutation-orbit n (pair (type-UU-Fin-Level n X) (unit-trunc-Prop h)) id-equiv)) ∙
-                          ( sign-list-transpositions-count (type-UU-Fin-Level n X) (pair n h) (list-transposition-f h) ∙
+                            (sign-permutation-orbit n (pair (type-UU-Fin n X) (unit-trunc-Prop h)) id-equiv)) ∙
+                          ( sign-list-transpositions-count (type-UU-Fin n X) (pair n h) (list-transposition-f h) ∙
                             ( ap
-                              ( sign-permutation-orbit n (pair (type-UU-Fin-Level n X) (unit-trunc-Prop h)))
+                              ( sign-permutation-orbit n (pair (type-UU-Fin n X) (unit-trunc-Prop h)))
                               { x = permutation-list-transpositions (list-transposition-f h)}
                               { y = permutation-list-transpositions li}
                               ( (eq-htpy-equiv (retr-permutation-list-transpositions-count
-                                (type-UU-Fin-Level n X) (pair n h) f)) ∙ r) ∙
-                              ( inv (sign-list-transpositions-count (type-UU-Fin-Level n X) (pair n h) li) ∙
+                                (type-UU-Fin n X) (pair n h) f)) ∙ r) ∙
+                              ( inv (sign-list-transpositions-count (type-UU-Fin n X) (pair n h) li) ∙
                                 ( (iterate-involution (succ-Fin 2) (is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2)) (length-list li)
-                                  ( sign-permutation-orbit n (pair (type-UU-Fin-Level n X) (unit-trunc-Prop h)) id-equiv)) ∙
+                                  ( sign-permutation-orbit n (pair (type-UU-Fin n X) (unit-trunc-Prop h)) id-equiv)) ∙
                                   ( ap
                                     ( λ k → iterate (nat-Fin 2 k) (succ-Fin 2)
-                                      ( sign-permutation-orbit n (pair (type-UU-Fin-Level n X) (unit-trunc-Prop h)) id-equiv))
+                                      ( sign-permutation-orbit n (pair (type-UU-Fin n X) (unit-trunc-Prop h)) id-equiv))
                                     ( inv q)))))))))
                   ( eq-is-prop is-prop-type-trunc-Prop)))
         where
-        list-transposition-f : (h : Fin n ≃ (type-UU-Fin-Level n X)) →
+        list-transposition-f : (h : Fin n ≃ (type-UU-Fin n X)) →
           list
-            (Σ (type-UU-Fin-Level n X → decidable-Prop l)
-            (λ P → has-cardinality 2 (Σ (type-UU-Fin-Level n X) (λ x → type-decidable-Prop (P x)))))
-        list-transposition-f h = list-transpositions-permutation-count (type-UU-Fin-Level n X) (pair n h) f
+            (Σ (type-UU-Fin n X → decidable-Prop l)
+            (λ P → has-cardinality 2 (Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+        list-transposition-f h = list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f
         is-injective-iterate-involution : (k k' x : Fin 2) →
           Id (iterate (nat-Fin 2 k) (succ-Fin 2) x) (iterate (nat-Fin 2 k') (succ-Fin 2) x) → Id k k'
         is-injective-iterate-involution (inl (inr star)) (inl (inr star)) x p = refl

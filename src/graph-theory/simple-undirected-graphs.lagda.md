@@ -18,7 +18,7 @@ open import graph-theory.undirected-graphs using
   ( Undirected-Graph; unordered-pair-vertices-Undirected-Graph;
     edge-Undirected-Graph; element-unordered-pair-vertices-Undirected-Graph)
 
-open import univalent-combinatorics.finite-types using (Fin-UU-Fin)
+open import univalent-combinatorics.finite-types using (Fin-UU-Fin')
 ```
 
 ## Idea
@@ -59,5 +59,5 @@ Simple-Undirected-Graph l1 l2 =
     ( λ V →
       Σ ( unordered-pair V → UU-Prop l2)
         ( λ E →
-          (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin 2) (λ y → x))))))
+          (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin' 2) (λ y → x))))))
 ```

@@ -28,8 +28,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; has-cardinality; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin-Level; UU-Fin; type-UU-Fin-Level; type-UU-Fin;
-    has-cardinality-type-UU-Fin-Level; has-cardinality-type-UU-Fin)
+    UU-Fin; type-UU-Fin; has-cardinality-type-UU-Fin)
 open import univalent-combinatorics.standard-finite-types using (is-set-Fin)
 ```
 

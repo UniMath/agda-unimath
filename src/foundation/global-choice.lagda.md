@@ -19,7 +19,7 @@ open import foundation.propositional-truncations using
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import univalent-combinatorics.2-element-types using
-  ( no-section-type-UU-Fin-Level-two-ℕ)
+  ( no-section-type-UU-Fin-two-ℕ)
 open import univalent-combinatorics.standard-finite-types using
   ( zero-Fin)
 ```
@@ -44,9 +44,9 @@ Global-Choice l = (A : UU l) → ε-operator-Hilbert A
 ```agda
 abstract
   no-global-choice :
-    {l : Level} → ¬ ((X : UU l) → type-trunc-Prop X → X)
+    {l : Level} → ¬ (Global-Choice l)
   no-global-choice f =
-    no-section-type-UU-Fin-Level-two-ℕ
+    no-section-type-UU-Fin-two-ℕ
       ( λ X →
         f (pr1 X) (map-trunc-Prop (λ e → map-equiv e (zero-Fin 1)) (pr2 X)))
 ```

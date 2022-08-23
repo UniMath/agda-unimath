@@ -29,28 +29,28 @@ The type of unlabeled `F`-structures of order `n` of a species `F` is the type o
 unlabeled-structure-species :
   {l1 l2 : Level} (F : species l1 l2) → ℕ → UU (lsuc l1 ⊔ l2)
 unlabeled-structure-species {l1} {l2} F n =
-  Σ (UU-Fin-Level l1 n) (λ X → F (finite-type-UU-Fin-Level n X))
+  Σ (UU-Fin l1 n) (λ X → F (finite-type-UU-Fin n X))
 
 module _
   {l1 l2 : Level} (F : species l1 l2) {k : ℕ}
   (X : unlabeled-structure-species F k)
   where
 
-  type-of-cardinality-unlabeled-structure-species : UU-Fin-Level l1 k
+  type-of-cardinality-unlabeled-structure-species : UU-Fin l1 k
   type-of-cardinality-unlabeled-structure-species = pr1 X
 
   type-unlabeled-structure-species : UU l1
   type-unlabeled-structure-species =
-    type-UU-Fin-Level k type-of-cardinality-unlabeled-structure-species
+    type-UU-Fin k type-of-cardinality-unlabeled-structure-species
 
   has-cardinality-type-unlabeled-structure-species :
     has-cardinality k type-unlabeled-structure-species
   has-cardinality-type-unlabeled-structure-species =
-    has-cardinality-type-UU-Fin-Level k type-of-cardinality-unlabeled-structure-species
+    has-cardinality-type-UU-Fin k type-of-cardinality-unlabeled-structure-species
 
   finite-type-unlabeled-structure-species : 𝔽 l1
   finite-type-unlabeled-structure-species =
-    finite-type-UU-Fin-Level k type-of-cardinality-unlabeled-structure-species
+    finite-type-UU-Fin k type-of-cardinality-unlabeled-structure-species
 
   structure-unlabeled-structure-species :
     F finite-type-unlabeled-structure-species

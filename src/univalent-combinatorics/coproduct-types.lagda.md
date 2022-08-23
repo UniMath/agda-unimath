@@ -38,10 +38,10 @@ open import univalent-combinatorics.counting-decidable-subtypes using
 open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin-Level; UU-Fin; number-of-elements-is-finite;
+    UU-Fin; number-of-elements-is-finite;
     number-of-elements-has-finite-cardinality;
     all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
-    has-cardinality-type-UU-Fin-Level; mere-equiv-has-finite-cardinality)
+    has-cardinality-type-UU-Fin; mere-equiv-has-finite-cardinality)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -168,11 +168,11 @@ abstract
   is-finite-right-summand =
     map-trunc-Prop count-right-summand
 
-coprod-UU-Fin-Level :
-  {l1 l2 : Level} (k l : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l2 l →
-  UU-Fin-Level (l1 ⊔ l2) (add-ℕ k l)
-pr1 (coprod-UU-Fin-Level {l1} {l2} k l (pair X H) (pair Y K)) = X + Y
-pr2 (coprod-UU-Fin-Level {l1} {l2} k l (pair X H) (pair Y K)) =
+coprod-UU-Fin :
+  {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
+  UU-Fin (l1 ⊔ l2) (add-ℕ k l)
+pr1 (coprod-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) = X + Y
+pr2 (coprod-UU-Fin {l1} {l2} k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
     ( mere-equiv-Prop (Fin (add-ℕ k l)) (X + Y))
     ( λ e1 →
@@ -181,10 +181,6 @@ pr2 (coprod-UU-Fin-Level {l1} {l2} k l (pair X H) (pair Y K)) =
         ( λ e2 →
           unit-trunc-Prop
             ( equiv-coprod e1 e2 ∘e inv-equiv (coprod-Fin k l))))
-
-coprod-UU-Fin :
-  (k l : ℕ) → UU-Fin k → UU-Fin l → UU-Fin (add-ℕ k l)
-coprod-UU-Fin k l X Y = coprod-UU-Fin-Level k l X Y
 
 coprod-eq-is-finite :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (P : is-finite X) (Q : is-finite Y) →
@@ -199,11 +195,11 @@ coprod-eq-is-finite {X = X} {Y = Y} P Q =
         ( add-ℕ
           ( number-of-elements-is-finite P)
           ( number-of-elements-is-finite Q))
-        ( has-cardinality-type-UU-Fin-Level
+        ( has-cardinality-type-UU-Fin
           ( add-ℕ
             ( number-of-elements-is-finite P)
             ( number-of-elements-is-finite Q))
-          ( coprod-UU-Fin-Level
+          ( coprod-UU-Fin
             ( number-of-elements-is-finite P)
             ( number-of-elements-is-finite Q)
             ( pair X

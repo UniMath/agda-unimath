@@ -120,8 +120,7 @@ open import univalent-combinatorics.finite-types using
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
     is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
     is-0-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
-    is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
-    is-0-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
+    is-finite-has-finite-cardinality; is-decidable-type-trunc-Prop-is-finite;
     is-set-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
@@ -396,7 +395,7 @@ has-finite-connected-components-is-0-connected C =
   is-finite-is-contr C
 
 is-π-finite-UU-Fin :
-  (k n : ℕ) → is-π-finite k (UU-Fin n)
+  {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin l n)
 is-π-finite-UU-Fin zero-ℕ n =
   has-finite-connected-components-is-0-connected
     ( is-0-connected-UU-Fin n)
@@ -404,21 +403,6 @@ pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) = is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-π-finite-equiv k
     ( equiv-equiv-eq-UU-Fin n x y)
-    ( is-π-finite-is-finite k
-      ( is-finite-≃
-        ( is-finite-has-finite-cardinality (pair n (pr2 x)))
-        ( is-finite-has-finite-cardinality (pair n (pr2 y)))))
-
-is-π-finite-UU-Fin-Level :
-  {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin-Level l n)
-is-π-finite-UU-Fin-Level {l} zero-ℕ n =
-  has-finite-connected-components-is-0-connected
-    ( is-0-connected-UU-Fin-Level n)
-pr1 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) =
-  is-π-finite-UU-Fin-Level zero-ℕ n
-pr2 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) x y =
-  is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin-Level n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))

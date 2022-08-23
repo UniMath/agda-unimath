@@ -67,7 +67,7 @@ open import univalent-combinatorics.2-element-types using
 open import univalent-combinatorics.equality-finite-types using
   ( has-decidable-equality-is-finite)
 open import univalent-combinatorics.finite-types using
-  (Fin-UU-Fin; is-finite-type-UU-Fin-Level)
+  (Fin-UU-Fin; is-finite-type-UU-Fin)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin)
 ```
@@ -142,7 +142,7 @@ all-elements-equal-type-commutative-xor-Prop :
 all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
   cases-is-prop-type-commutative-xor-Prop
     ( has-decidable-equality-is-finite
-      ( is-finite-type-UU-Fin-Level 2 X)
+      ( is-finite-type-UU-Fin 2 X)
       ( pr1 x)
       ( pr1 y))
   where

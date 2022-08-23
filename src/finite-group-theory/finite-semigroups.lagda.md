@@ -95,8 +95,8 @@ module _
 ```agda
 Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order' l n =
-  Σ ( UU-Fin-Level l n)
-    ( λ X → has-associative-mul (type-UU-Fin-Level n X))
+  Σ ( UU-Fin l n)
+    ( λ X → has-associative-mul (type-UU-Fin n X))
 
 Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order l n =
@@ -130,11 +130,11 @@ is-π-finite-Semigroup-of-Order' :
   {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order' l n)
 is-π-finite-Semigroup-of-Order' k n =
   is-π-finite-Σ k
-    ( is-π-finite-UU-Fin-Level (succ-ℕ k) n)
+    ( is-π-finite-UU-Fin (succ-ℕ k) n)
     ( λ x →
       is-π-finite-is-finite k
         ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin-Level n x)))
+          ( is-finite-type-UU-Fin n x)))
 
 is-π-finite-Semigroup-of-Order :
   {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order l n)
@@ -144,7 +144,7 @@ is-π-finite-Semigroup-of-Order {l} k n =
   where
   e : Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
   e = ( equiv-Σ
-        ( has-associative-mul ∘ type-UU-Fin-Level n)
+        ( has-associative-mul ∘ type-UU-Fin n)
         ( ( right-unit-law-Σ-is-contr
             ( λ X →
               is-proof-irrelevant-is-prop
