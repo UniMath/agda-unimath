@@ -14,6 +14,8 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers
 
 open import elementary-number-theory.integers
 open import elementary-number-theory.addition-integers
@@ -27,6 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.negation
@@ -371,18 +374,44 @@ Since `is-distance-between-multiples-ℕ x y z` is decidable, we can prove Bezou
 
 ```agda
 pos-distance-between-multiples : (x y z : ℕ) → UU lzero
-pos-distance-between-multiples x y z = is-nonzero-ℕ (add-ℕ x y) → (is-nonzero-ℕ z) × (is-distance-between-multiples-ℕ x y z)   
-  
-minimal-pos-distance-between-multiples : (x y : ℕ) → minimal-element-ℕ (pos-distance-between-multiples x y)
-minimal-pos-distance-between-multiples zero-ℕ zero-ℕ = {! !}
-minimal-pos-distance-between-multiples zero-ℕ (succ-ℕ y) = {! !}
-minimal-pos-distance-between-multiples (succ-ℕ x) zero-ℕ = {! !}
-minimal-pos-distance-between-multiples (succ-ℕ x) (succ-ℕ y) = {! !}
--- well-ordering-principle-ℕ 
---  (pos-distance-between-multiples x y)
---  (λ z → is-decidable-prod (is-decidable-neg (is-decidable-is-zero-ℕ z)) (is-decidable-is-distance-between-multiples-ℕ x y z)) 
---  (pair x ? )
+pos-distance-between-multiples x y z = is-nonzero-ℕ (add-ℕ x y) → 
+  (is-nonzero-ℕ z) × (is-distance-between-multiples-ℕ x y z)   
 
-  
+is-inhabited-pos-distance-between-multiples : (x y : ℕ) → 
+  Σ ℕ (pos-distance-between-multiples x y)
+is-inhabited-pos-distance-between-multiples zero-ℕ zero-ℕ = 
+  pair zero-ℕ (λ H → ex-falso (H refl))
+is-inhabited-pos-distance-between-multiples zero-ℕ (succ-ℕ y) = 
+  pair (succ-ℕ y) (λ H → pair' (is-nonzero-succ-ℕ y) 
+    (pair zero-ℕ (pair 1 (ap succ-ℕ (left-unit-law-add-ℕ y)))))
+is-inhabited-pos-distance-between-multiples (succ-ℕ x) y = pair (succ-ℕ x)
+  (λ H → pair' (is-nonzero-succ-ℕ x) 
+    (pair 1 (pair zero-ℕ (ap succ-ℕ (left-unit-law-add-ℕ x)))))
 
+minimal-pos-distance-between-multiples : (x y : ℕ) → 
+  minimal-element-ℕ (pos-distance-between-multiples x y)
+minimal-pos-distance-between-multiples x y = well-ordering-principle-ℕ 
+  (pos-distance-between-multiples x y)
+  (λ z → is-decidable-function-type 
+    (is-decidable-neg (is-decidable-is-zero-ℕ (add-ℕ x y))) 
+    (is-decidable-prod (is-decidable-neg (is-decidable-is-zero-ℕ z)) 
+      (is-decidable-is-distance-between-multiples-ℕ x y z))) 
+  (is-inhabited-pos-distance-between-multiples x y)
+
+minimal-positive-distance : (x y : ℕ) → ℕ
+minimal-positive-distance x y = pr1 (minimal-pos-distance-between-multiples x y)
+
+{- minimal-positive-distance-nonzero : (x y : ℕ) → (is-nonzero-ℕ (minimal-positive-distance (succ-ℕ x) y))
+minimal-positive-distance-nonzero x y = pr1 ((pr1 (pr2 (minimal-pos-distance-between-multiples (succ-ℕ x) y))) (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y)))) 
+
+minimal-positive-distance-divides-ℕ : (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x
+minimal-positive-distance-divides-ℕ zero-ℕ y = pair zero-ℕ (left-zero-law-mul-ℕ (minimal-positive-distance zero-ℕ y))
+minimal-positive-distance-divides-ℕ (succ-ℕ x) y = {! !}
+  where
+  r : ℕ
+  r = remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
+
+  bound : le-ℕ r (minimal-positive-distance (succ-ℕ x) y)
+  bound = strict-upper-bound-remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x) (minimal-positive-distance-nonzero x y) 
+-}
 ```
