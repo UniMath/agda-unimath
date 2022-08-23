@@ -8,7 +8,7 @@ title: Divisibility of integers
 module elementary-number-theory.divisibility-integers where
 
 open import elementary-number-theory.absolute-value-integers using
-  ( abs-ℤ; int-abs-ℤ)
+  ( abs-ℤ; int-abs-ℤ; int-abs-is-nonnegative-ℤ)
 open import elementary-number-theory.addition-integers using (add-ℤ; ap-add-ℤ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-eq-ℕ)
@@ -135,11 +135,6 @@ div-int-div-ℕ :
   {x y : ℕ} → div-ℕ x y → div-ℤ (int-ℕ x) (int-ℕ y)
 pr1 (div-int-div-ℕ {x} {y} (pair d p)) = int-ℕ d
 pr2 (div-int-div-ℕ {x} {y} (pair d p)) = mul-int-ℕ d x ∙ ap int-ℕ p
-
-int-abs-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → int-abs-ℤ x ＝ x
-int-abs-is-nonnegative-ℤ (inr (inl star)) star = refl
-int-abs-is-nonnegative-ℤ (inr (inr x)) star = refl
 
 div-div-int-ℕ :
   {x y : ℕ} → div-ℤ (int-ℕ x) (int-ℕ y) → div-ℕ x y
