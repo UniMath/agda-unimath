@@ -15,7 +15,7 @@ open import elementary-number-theory.inequality-natural-numbers using
   (_≤-ℕ_; refl-leq-ℕ; preserves-leq-succ-ℕ; succ-leq-ℕ;
     concatenate-eq-leq-eq-ℕ; transitive-leq-ℕ)
 open import elementary-number-theory.integers using
-  ( ℤ; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ)
+  ( ℤ; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ; is-nonnegative-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ)
 
@@ -45,6 +45,10 @@ abs-neg-ℤ : (x : ℤ) → abs-ℤ (neg-ℤ x) ＝ abs-ℤ x
 abs-neg-ℤ (inl x) = refl
 abs-neg-ℤ (inr (inl star)) = refl
 abs-neg-ℤ (inr (inr x)) = refl
+
+int-abs-is-nonnegative-ℤ : (x : ℤ) → is-nonnegative-ℤ x → int-abs-ℤ x ＝ x
+int-abs-is-nonnegative-ℤ (inr (inl star)) h = refl
+int-abs-is-nonnegative-ℤ (inr (inr x)) h = refl
 
 eq-abs-ℤ : (x : ℤ) → is-zero-ℕ (abs-ℤ x) → is-zero-ℤ x
 eq-abs-ℤ (inr (inl star)) p = refl

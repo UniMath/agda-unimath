@@ -12,12 +12,16 @@ open import elementary-number-theory.divisibility-integers using
 open import elementary-number-theory.divisibility-standard-finite-types using
   ( refl-div-Fin; trans-div-Fin)
 open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; mul-ℤ-Mod)
+  ( ℤ-Mod; mul-ℤ-Mod; is-decidable-div-ℤ; mul-ℤ-Mod')
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.absolute-value-integers
 
+open import foundation.decidable-types
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (_＝_)
 open import foundation.universe-levels using (UU; lzero)
+
+open import univalent-combinatorics.fibers-of-maps
 ```
 
 ## Idea
@@ -49,4 +53,14 @@ trans-div-ℤ-Mod :
   div-ℤ-Mod k x y → div-ℤ-Mod k y z → div-ℤ-Mod k x z
 trans-div-ℤ-Mod {zero-ℕ} = trans-div-ℤ
 trans-div-ℤ-Mod {succ-ℕ k} = trans-div-Fin (succ-ℕ k)
+```
+
+### The divisibility relation is decidable
+
+```agda
+is-decidable-div-ℤ-Mod : (k : ℕ) (x y : ℤ-Mod k) →
+  is-decidable (div-ℤ-Mod k x y)
+is-decidable-div-ℤ-Mod zero-ℕ x y = is-decidable-div-ℤ x y  
+is-decidable-div-ℤ-Mod (succ-ℕ k) x y = is-decidable-fib-Fin 
+  {succ-ℕ k} {succ-ℕ k} (mul-ℤ-Mod' (succ-ℕ k) x) y
 ```
