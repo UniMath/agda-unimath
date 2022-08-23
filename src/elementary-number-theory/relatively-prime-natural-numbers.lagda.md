@@ -3,8 +3,6 @@ title: Relatively prime natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module elementary-number-theory.relatively-prime-natural-numbers where
 
 open import elementary-number-theory.equality-natural-numbers using

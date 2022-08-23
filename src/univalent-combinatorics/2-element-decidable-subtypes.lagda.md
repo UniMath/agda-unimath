@@ -3,8 +3,6 @@ title: 2-element decidable subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.2-element-decidable-subtypes where
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)

@@ -3,8 +3,6 @@ title: Wild monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module structured-types.wild-monoids where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

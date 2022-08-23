@@ -1,8 +1,6 @@
 # Localizations of rings
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module ring-theory.localizations-rings where
 
 open import foundation.contractible-maps

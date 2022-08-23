@@ -3,8 +3,6 @@ title: π-finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.pi-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)

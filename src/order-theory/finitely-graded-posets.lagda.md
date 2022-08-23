@@ -1,7 +1,7 @@
 # Finitely graded posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module order-theory.finitely-graded-posets where
 

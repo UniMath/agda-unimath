@@ -3,8 +3,6 @@ title: Decidable subtypes of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.decidable-subtypes where
 
 open import foundation.decidable-subtypes public
@@ -78,6 +76,7 @@ has-decidable-equality-type-decidable-subtype-is-finite P H =
 ### The number of elements of a decidable subtype of a finite type is smaller than the number of elements of the ambient type
 
 ```agda
+{-
 module _
   {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X)
   where
@@ -88,3 +87,4 @@ module _
       ( number-of-elements-is-finite (is-finite-type-decidable-subtype P H))
       ( number-of-elements-is-finite H)
   leq-number-of-elements-type-decidable-subtype H = {!!}
+-}
