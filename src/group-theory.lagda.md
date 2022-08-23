@@ -26,6 +26,7 @@ open import group-theory.congruence-relations-monoids public
 open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
+open import group-theory.decidable-subgroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
 open import group-theory.e8-lattice public
@@ -98,6 +99,7 @@ open import group-theory.submonoids public
 open import group-theory.subsemigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
+open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
 open import group-theory.symmetric-higher-groups public
 open import group-theory.torsors public

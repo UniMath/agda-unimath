@@ -42,8 +42,8 @@ open import group-theory.equivalences-group-actions using
     is-contr-total-htpy-equiv-Abstract-Group-Action;
     comp-equiv-Abstract-Group-Action; inv-equiv-Abstract-Group-Action)
 open import group-theory.groups using
-  ( Group; type-Group; unit-Group; mul-Group; right-unit-law-Group;
-    equiv-mul-Group'; associative-mul-Group; left-unit-law-Group; is-set-type-Group)
+  ( Group; type-Group; unit-Group; mul-Group; right-unit-law-mul-Group;
+    equiv-mul-Group'; associative-mul-Group; left-unit-law-mul-Group; is-set-type-Group)
 open import group-theory.higher-groups using (∞-Group)
 open import group-theory.homomorphisms-groups using (type-hom-Group)
 open import group-theory.isomorphisms-groups using
@@ -505,7 +505,7 @@ module _
            ( f)))
   preserves-mul-Eq-equiv-Torsor-Abstract-Group (pair e H) (pair f K) =
     ( ap ( map-equiv f)
-         ( inv (right-unit-law-Group G (map-equiv e (unit-Group G))))) ∙
+         ( inv (right-unit-law-mul-Group G (map-equiv e (unit-Group G))))) ∙
     ( K (map-equiv e (unit-Group G)) (unit-Group G))
  
 
@@ -521,7 +521,7 @@ module _
     ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) ∘
       equiv-Eq-Torsor-Abstract-Group) ~
     ( id)
-  issec-equiv-Eq-Torsor-Abstract-Group u = left-unit-law-Group G u
+  issec-equiv-Eq-Torsor-Abstract-Group u = left-unit-law-mul-Group G u
 
   isretr-equiv-Eq-Torsor-Abstract-Group :
     ( equiv-Eq-Torsor-Abstract-Group ∘
@@ -536,7 +536,7 @@ module _
       ( e)
       ( λ g →
         ( inv (pr2 e g (unit-Group G))) ∙
-        ( ap (map-equiv (pr1 e)) (right-unit-law-Group G g)))
+        ( ap (map-equiv (pr1 e)) (right-unit-law-mul-Group G g)))
   
   abstract
     is-equiv-Eq-equiv-Torsor-Abstract-Group :

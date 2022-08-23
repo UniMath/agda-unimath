@@ -26,7 +26,7 @@ An **n-alkyne** is a hydrocarbon equipped with a choice of $n$ carbons, each of 
 ## Definition
 
 ```agda
-n-alkyne : hydrocarbon → ℕ → UU (lsuc lzero)
+n-alkyne : {l1 l2 : Level} → hydrocarbon l1 l2 → ℕ → UU (lsuc lzero ⊔ l1 ⊔ l2)
 n-alkyne H n =
   Σ (UU-Fin n) λ carbons →
     Σ (type-UU-Fin n carbons ↪ vertex-hydrocarbon H) λ embed-carbons →

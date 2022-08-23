@@ -150,7 +150,7 @@ abstract
           ( is-finite-Prop (X + Y))
           ( is-finite-count ∘ (count-coprod e)))
 
-coprod-𝔽 : 𝔽 → 𝔽 → 𝔽
+coprod-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
 pr1 (coprod-𝔽 X Y) = (type-𝔽 X) + (type-𝔽 Y)
 pr2 (coprod-𝔽 X Y) = is-finite-coprod (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
 

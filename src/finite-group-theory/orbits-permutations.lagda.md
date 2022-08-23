@@ -134,10 +134,10 @@ The orbit of a point `x` for a permutation `f` is the set of point obtained by i
 
 ```agda
 module _
-  (X : 𝔽) (e : type-𝔽 X ≃ type-𝔽 X)
+  {l : Level} (X : 𝔽 l) (e : type-𝔽 X ≃ type-𝔽 X)
   where
   
-  iso-iterative-groupoid-automorphism-𝔽 : (x y : type-𝔽 X) → UU lzero
+  iso-iterative-groupoid-automorphism-𝔽 : (x y : type-𝔽 X) → UU l
   iso-iterative-groupoid-automorphism-𝔽 x y =
     Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
 

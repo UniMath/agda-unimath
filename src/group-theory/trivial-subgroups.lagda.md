@@ -42,7 +42,7 @@ module _
   pr1 trivial-Subgroup x = is-unit-group-Prop G x
   pr1 (pr2 trivial-Subgroup) = refl
   pr1 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) .(unit-Group G) refl refl =
-    left-unit-law-Group G (unit-Group G)
+    left-unit-law-mul-Group G (unit-Group G)
   pr2 (pr2 (pr2 trivial-Subgroup)) .(unit-Group G) refl =
     inv-unit-Group G
 ```

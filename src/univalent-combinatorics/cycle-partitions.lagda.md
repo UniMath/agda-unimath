@@ -25,24 +25,25 @@ A cycle partition of a finite type `A` is a finite family of cyclic finite types
 ## Definition
 
 ```agda
-cyclic-partition-𝔽 : 𝔽 → UU (lsuc lzero)
-cyclic-partition-𝔽 X =
-  Σ 𝔽
+cyclic-partition-𝔽 :
+  {l : Level} (l2 l3 : Level) → 𝔽 l → UU (l ⊔ lsuc l2 ⊔ lsuc l3)
+cyclic-partition-𝔽 l2 l3 X =
+  Σ ( 𝔽 l2)
     ( λ Y →
-      Σ ( type-𝔽 Y → Σ ℕ (λ n → Cyclic-Type lzero (succ-ℕ n)))
+      Σ ( type-𝔽 Y → Σ ℕ (λ n → Cyclic-Type l3 (succ-ℕ n)))
         ( λ C →
           type-𝔽 X ≃
           Σ ( type-𝔽 Y)
             ( λ y → type-Cyclic-Type (succ-ℕ (pr1 (C y))) (pr2 (C y)))))
 
 module _
-  (X : 𝔽) (C : cyclic-partition-𝔽 X)
+  {l1 l2 l3 : Level} (X : 𝔽 l1) (C : cyclic-partition-𝔽 l2 l3 X)
   where
 
-  finite-indexing-type-cyclic-partition-𝔽 : 𝔽
+  finite-indexing-type-cyclic-partition-𝔽 : 𝔽 l2
   finite-indexing-type-cyclic-partition-𝔽 = pr1 C
 
-  indexing-type-cyclic-partition-𝔽 : UU lzero
+  indexing-type-cyclic-partition-𝔽 : UU l2
   indexing-type-cyclic-partition-𝔽 =
     type-𝔽 finite-indexing-type-cyclic-partition-𝔽
 
@@ -52,12 +53,12 @@ module _
 
   cycle-cyclic-partition-𝔽 :
     (y : indexing-type-cyclic-partition-𝔽) →
-    Cyclic-Type lzero (order-cycle-cyclic-partition-𝔽 y)
+    Cyclic-Type l3 (order-cycle-cyclic-partition-𝔽 y)
   cycle-cyclic-partition-𝔽 y =
     pr2 (pr1 (pr2 C) y)
 
   type-cycle-cyclic-partition-𝔽 :
-    indexing-type-cyclic-partition-𝔽 → UU lzero
+    indexing-type-cyclic-partition-𝔽 → UU l3
   type-cycle-cyclic-partition-𝔽 y =
     type-Cyclic-Type
       ( order-cycle-cyclic-partition-𝔽 y)

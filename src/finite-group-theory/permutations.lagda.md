@@ -1,4 +1,6 @@
-# Permutations
+---
+title: Permutations
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}

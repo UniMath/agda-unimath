@@ -9,19 +9,16 @@ module univalent-combinatorics.decidable-subtypes where
 
 open import foundation.decidable-subtypes public
 
-open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.decidable-propositions using
-  ( prop-decidable-Prop; is-decidable-type-decidable-Prop;
-    is-finite-decidable-Prop; is-finite-is-decidable-Prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-equality
+open import foundation.decidable-propositions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-Σ)
+open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types using
-  ( is-finite; number-of-elements-is-finite; 𝔽)
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
 
@@ -36,8 +33,18 @@ is-finite-decidable-subtype-is-finite :
 is-finite-decidable-subtype-is-finite H =
   is-finite-function-type H is-finite-decidable-Prop
 
-decidable-subtype-𝔽 : 𝔽 → 𝔽
-decidable-subtype-𝔽 X = {!!} 
+subtype-𝔽 :
+  {l1 : Level} (l2 : Level) → 𝔽 l1 → 𝔽 (l1 ⊔ lsuc l2)
+pr1 (subtype-𝔽 l2 X) = decidable-subtype l2 (type-𝔽 X)
+pr2 (subtype-𝔽 l2 X) =
+  is-finite-decidable-subtype-is-finite (is-finite-type-𝔽 X)
+
+has-decidable-equality-subtype-𝔽 :
+  {l1 l2 : Level} (X : 𝔽 l1) →
+  has-decidable-equality (decidable-subtype l2 (type-𝔽 X))
+has-decidable-equality-subtype-𝔽 {l1} {l2} X =
+  has-decidable-equality-is-finite
+    ( is-finite-decidable-subtype-is-finite (is-finite-type-𝔽 X))
 ```
 
 ### Decidable subtypes of finite types are finite

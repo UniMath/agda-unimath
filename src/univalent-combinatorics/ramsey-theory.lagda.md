@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.propositions using (UU-Prop; type-Prop)
 open import foundation.unit-type using (unit-Prop)
-open import foundation.universe-levels using (Level; UU; lzero; lsuc)
+open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types using
   ( 𝔽; type-𝔽; has-cardinality)
@@ -25,13 +25,14 @@ coloring k X = X → Fin k
 full-subset : {l : Level} (X : UU l) → X → UU-Prop lzero
 full-subset X x = unit-Prop
 
-subset-of-size : (k : ℕ) → 𝔽 → UU (lsuc lzero)
+subset-of-size : {l : Level} (k : ℕ) → 𝔽 l → UU (lsuc lzero ⊔ l)
 subset-of-size k X =
   Σ ( type-𝔽 X → UU-Prop lzero)
     ( λ P → has-cardinality k (Σ (type-𝔽 X) (λ x → type-Prop (P x))))
 
-is-ramsey-set : {k : ℕ} (q : Fin k → ℕ) (r : ℕ) (A : 𝔽) → UU (lsuc lzero)
-is-ramsey-set {k} q r A =
+is-ramsey-set :
+  {l : Level} {k : ℕ} (q : Fin k → ℕ) (r : ℕ) (A : 𝔽 l) → UU (lsuc lzero ⊔ l)
+is-ramsey-set {l} {k} q r A =
   (c : coloring k (subset-of-size r A)) →
   Σ ( Fin k)
     ( λ i →

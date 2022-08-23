@@ -250,7 +250,7 @@ module _
   is-1-type-transitive-action-Concrete-Group :
     is-1-type (transitive-action-Concrete-Group l2 G)
   is-1-type-transitive-action-Concrete-Group =
-    is-1-type-subtype
+    is-1-type-type-subtype
       ( is-transitive-action-Concrete-Group-Prop G)
       ( is-1-type-action-Concrete-Group G)
 

@@ -209,11 +209,12 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Submonoid l2 M)
   where
 
-  Eq-Submonoid : Submonoid l2 M → UU (l1 ⊔ l2)
-  Eq-Submonoid K = Eq-subtype (subset-Submonoid M N) (subset-Submonoid M K)
+  has-same-elements-Submonoid : Submonoid l2 M → UU (l1 ⊔ l2)
+  has-same-elements-Submonoid K =
+    has-same-elements-subtype (subset-Submonoid M N) (subset-Submonoid M K)
 
   extensionality-Submonoid :
-    (K : Submonoid l2 M) → (N ＝ K) ≃ Eq-Submonoid K
+    (K : Submonoid l2 M) → (N ＝ K) ≃ has-same-elements-Submonoid K
   extensionality-Submonoid =
     extensionality-type-subtype
       ( is-submonoid-subset-Monoid-Prop M)

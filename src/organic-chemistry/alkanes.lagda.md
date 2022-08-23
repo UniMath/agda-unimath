@@ -20,6 +20,6 @@ An **alkane** is a hydrocarbon that only has saturated carbons, i.e., it does no
 ## Definition
 
 ```agda
-is-alkane-hydrocarbon : hydrocarbon → UU
+is-alkane-hydrocarbon : {l1 l2 : Level} → hydrocarbon l1 l2 → UU (l1 ⊔ l2)
 is-alkane-hydrocarbon H = ∀ c → is-saturated-carbon-hydrocarbon H c
 ```

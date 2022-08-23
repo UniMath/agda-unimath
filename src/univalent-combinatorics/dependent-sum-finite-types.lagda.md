@@ -69,7 +69,7 @@ abstract
           ( is-finite-Prop (Σ X Y))
           ( is-finite-count ∘ (count-Σ e)))
 
-Σ-𝔽 : (X : 𝔽) (Y : type-𝔽 X → 𝔽) → 𝔽
+Σ-𝔽 : {l1 l2 : Level} (X : 𝔽 l1) (Y : type-𝔽 X → 𝔽 l2) → 𝔽 (l1 ⊔ l2)
 pr1 (Σ-𝔽 X Y) = Σ (type-𝔽 X) (λ x → type-𝔽 (Y x))
 pr2 (Σ-𝔽 X Y) =
   is-finite-Σ

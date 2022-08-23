@@ -9,6 +9,7 @@ module graph-theory.complete-bipartite-graphs where
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import graph-theory.finite-graphs
@@ -24,7 +25,8 @@ open import univalent-combinatorics.finite-types
 ## Definition
 
 ```agda
-complete-bipartite-Undirected-Graph-𝔽 : 𝔽 → 𝔽 → Undirected-Graph-𝔽
+complete-bipartite-Undirected-Graph-𝔽 :
+  {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → Undirected-Graph-𝔽 (l1 ⊔ l2) (l1 ⊔ l2)
 pr1 (complete-bipartite-Undirected-Graph-𝔽 X Y) = coprod-𝔽 X Y
 pr2 (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
   prod-𝔽 ( Σ-𝔽 X

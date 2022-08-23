@@ -385,7 +385,7 @@ is-π-finite-is-finite k {A} H =
     ( is-π-finite-Prop k A)
     ( is-π-finite-count k)
 
-π-finite-𝔽 : (k : ℕ) → 𝔽 → π-Finite lzero k
+π-finite-𝔽 : {l : Level} (k : ℕ) → 𝔽 l → π-Finite l k
 pr1 (π-finite-𝔽 k A) = type-𝔽 A
 pr2 (π-finite-𝔽 k A) = is-π-finite-is-finite k (is-finite-type-𝔽 A)
 
@@ -542,8 +542,8 @@ pr2 (is-π-finite-Π (succ-ℕ k) H K) f g =
     ( is-π-finite-Π k H (λ a → pr2 (K a) (f a) (g a)))
 
 π-Finite-Π :
-  {l : Level} (k : ℕ) (A : 𝔽) (B : type-𝔽 A → π-Finite l k) →
-  π-Finite l k
+  {l1 l2 : Level} (k : ℕ) (A : 𝔽 l1) (B : type-𝔽 A → π-Finite l2 k) →
+  π-Finite (l1 ⊔ l2) k
 pr1 (π-Finite-Π k A B) =
   (x : type-𝔽 A) → (type-π-Finite k (B x))
 pr2 (π-Finite-Π k A B) =

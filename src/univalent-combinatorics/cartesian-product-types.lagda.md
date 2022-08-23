@@ -154,7 +154,7 @@ abstract
           ( is-finite-Prop (X × Y))
           ( is-finite-count ∘ (count-prod e)))
 
-prod-𝔽 : 𝔽 → 𝔽 → 𝔽
+prod-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
 pr1 (prod-𝔽 X Y) = (type-𝔽 X) × (type-𝔽 Y)
 pr2 (prod-𝔽 X Y) = is-finite-prod (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
 

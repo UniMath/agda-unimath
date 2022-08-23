@@ -24,9 +24,9 @@ open import foundation.universe-levels using (Level; UU; lsuc)
 open import group-theory.groups using
   ( Group; type-Group; mul-Group; set-Group; is-set-type-Group;
     associative-mul-Group; has-associative-mul-Group; semigroup-Group; is-group;
-    is-group-Group; is-unital-Group; unit-Group; left-unit-law-Group;
-    right-unit-law-Group; inv-Group; left-inverse-law-Group;
-    right-inverse-law-Group; is-group'; has-inverses-Group;
+    is-group-Group; is-unital-Group; unit-Group; left-unit-law-mul-Group;
+    right-unit-law-mul-Group; inv-Group; left-inverse-law-mul-Group;
+    right-inverse-law-mul-Group; is-group'; has-inverses-Group;
     distributive-inv-mul-Group; mul-Group'; is-equiv-mul-Group;
     is-equiv-mul-Group'; is-binary-equiv-mul-Group; transpose-eq-mul-Group;
     transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
@@ -126,12 +126,12 @@ is-zero-Ab A x = Id x (zero-Ab A)
 left-unit-law-add-Ab :
   {l : Level} (A : Ab l) → (x : type-Ab A) →
   Id (add-Ab A (zero-Ab A) x) x
-left-unit-law-add-Ab A = left-unit-law-Group (group-Ab A)
+left-unit-law-add-Ab A = left-unit-law-mul-Group (group-Ab A)
 
 right-unit-law-add-Ab :
   {l : Level} (A : Ab l) → (x : type-Ab A) →
   Id (add-Ab A x (zero-Ab A)) x
-right-unit-law-add-Ab A = right-unit-law-Group (group-Ab A)
+right-unit-law-add-Ab A = right-unit-law-mul-Group (group-Ab A)
 
 has-negatives-Ab :
   {l : Level} (A : Ab l) → is-group' (semigroup-Ab A) (has-zero-Ab A)
@@ -144,12 +144,12 @@ neg-Ab A = inv-Group (group-Ab A)
 left-inverse-law-add-Ab :
   {l : Level} (A : Ab l) (x : type-Ab A) →
   Id (add-Ab A (neg-Ab A x) x) (zero-Ab A)
-left-inverse-law-add-Ab A = left-inverse-law-Group (group-Ab A)
+left-inverse-law-add-Ab A = left-inverse-law-mul-Group (group-Ab A)
 
 right-inverse-law-add-Ab :
   {l : Level} (A : Ab l) (x : type-Ab A) →
   Id (add-Ab A x (neg-Ab A x)) (zero-Ab A)
-right-inverse-law-add-Ab A = right-inverse-law-Group (group-Ab A)
+right-inverse-law-add-Ab A = right-inverse-law-mul-Group (group-Ab A)
 
 commutative-add-Ab :
   {l : Level} (A : Ab l) (x y : type-Ab A) →

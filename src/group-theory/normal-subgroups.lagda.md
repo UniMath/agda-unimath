@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.embeddings
 open import foundation.fibers-of-maps
 open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -125,6 +126,12 @@ module _
   is-prop-is-in-Normal-Subgroup =
     is-prop-is-in-Subgroup G subgroup-Normal-Subgroup
 
+  is-in-normal-subgroup-inclusion-Normal-Subgroup :
+    (x : type-Normal-Subgroup) →
+    is-in-Normal-Subgroup (inclusion-Normal-Subgroup x)
+  is-in-normal-subgroup-inclusion-Normal-Subgroup =
+    is-in-subgroup-inclusion-Subgroup G subgroup-Normal-Subgroup
+
   is-subgroup-Normal-Subgroup :
     is-subgroup-subset-Group G subset-Normal-Subgroup
   is-subgroup-Normal-Subgroup =
@@ -181,18 +188,25 @@ module _
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
   where
 
-  Eq-Normal-Subgroup : Normal-Subgroup l2 G → UU (l1 ⊔ l2)
-  Eq-Normal-Subgroup K =
-    Eq-Subgroup G (subgroup-Normal-Subgroup G N) (subgroup-Normal-Subgroup G K)
+  has-same-elements-Normal-Subgroup : {l3 : Level} → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-Normal-Subgroup K =
+    has-same-elements-Subgroup G
+      ( subgroup-Normal-Subgroup G N)
+      ( subgroup-Normal-Subgroup G K)
 
   extensionality-Normal-Subgroup :
-    (K : Normal-Subgroup l2 G) → (N ＝ K) ≃ Eq-Normal-Subgroup K
+    (K : Normal-Subgroup l2 G) → (N ＝ K) ≃ has-same-elements-Normal-Subgroup K
   extensionality-Normal-Subgroup =
     extensionality-type-subtype
       ( is-normal-subgroup-Prop G)
       ( is-normal-subgroup-Normal-Subgroup G N)
       ( λ x → pair id id)
       ( extensionality-Subgroup G (subgroup-Normal-Subgroup G N))
+
+  eq-has-same-elements-Normal-Subgroup :
+    (K : Normal-Subgroup l2 G) → has-same-elements-Normal-Subgroup K → N ＝ K
+  eq-has-same-elements-Normal-Subgroup K =
+    map-inv-equiv (extensionality-Normal-Subgroup K)
 ```
 
 ### Normal subgroups are in 1-1 correspondence with congruence relations on groups
@@ -299,7 +313,7 @@ module _
     is-closed-under-mul-subset-Group G subset-congruence-Group
   is-closed-under-mul-subset-congruence-Group x y H K =
     concatenate-eq-sim-congruence-Group G R
-      ( inv (left-unit-law-Group G (unit-Group G)))
+      ( inv (left-unit-law-mul-Group G (unit-Group G)))
       ( mul-congruence-Group G R H K)
 
   is-closed-under-inv-subset-congruence-Group :
@@ -327,4 +341,38 @@ module _
   normal-subgroup-congruence-Group : Normal-Subgroup l2 G
   pr1 normal-subgroup-congruence-Group = subgroup-congruence-Group
   pr2 normal-subgroup-congruence-Group = is-normal-subgroup-congruence-Group
+```
+
+#### The normal subgroup obtained from the congruence relation of a normal subgroup `N` is `N` itself
+
+```agda
+has-same-elements-normal-subgroup-congruence-Normal-Subgroup :
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G) →
+  has-same-elements-Normal-Subgroup G
+    ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
+    ( N)
+pr1 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N
+  .(mul-Group G
+    ( unit-Group G)
+    ( inclusion-Subgroup G (subgroup-Normal-Subgroup G N) u)))
+  ( u , refl) =
+  tr
+    ( is-in-Normal-Subgroup G N)
+    ( inv (left-unit-law-mul-Group G (inclusion-Normal-Subgroup G N u)))
+    ( is-in-normal-subgroup-inclusion-Normal-Subgroup G N u)
+pr1 (pr1 (pr2 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x) H)) =
+  x
+pr2 (pr1 (pr2 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x) H)) =
+  H
+pr2 (pr2 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x) H) =
+  left-unit-law-mul-Group G x
+
+isretr-normal-subgroup-congruence-Normal-Subgroup :
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup (l1 ⊔ l2) G) →
+  normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N) ＝ N
+isretr-normal-subgroup-congruence-Normal-Subgroup G N =
+  eq-has-same-elements-Normal-Subgroup G
+    ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
+    ( N)
+    ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N)
 ```

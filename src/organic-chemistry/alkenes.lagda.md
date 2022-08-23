@@ -26,7 +26,7 @@ An **n-alkene** is a hydrocarbon equipped with a choice of $n$ carbons, each of 
 ## Definition
 
 ```agda
-n-alkene : hydrocarbon → ℕ → UU (lsuc lzero)
+n-alkene : {l1 l2 : Level} → hydrocarbon l1 l2 → ℕ → UU (lsuc lzero ⊔ l1 ⊔ l2)
 n-alkene H n =
   Σ (UU-Fin n) λ carbons →
     Σ ( type-UU-Fin n carbons ↪ vertex-hydrocarbon H)
