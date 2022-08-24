@@ -61,6 +61,12 @@ module _
           is-finite-is-decidable-Prop
             ( prop-decidable-Prop (P x))
             ( is-decidable-type-decidable-Prop (P x)))
+
+type-decidable-subtype-𝔽 :
+  {l1 l2 : Level} (X : 𝔽 l1) → decidable-subtype l2 (type-𝔽 X) → 𝔽 (l1 ⊔ l2)
+pr1 (type-decidable-subtype-𝔽 X P) = type-decidable-subtype P
+pr2 (type-decidable-subtype-𝔽 X P) =
+  is-finite-type-decidable-subtype P (is-finite-type-𝔽 X)
 ```
 
 ### The underlying type of a decidable subtype has decidable equality

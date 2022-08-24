@@ -63,18 +63,18 @@ A finite group is a group of which the underlying type is finite.
 Group-𝔽 :
   (l : Level) → UU (lsuc l)
 Group-𝔽 l =
-  Σ (Finite-Semigroup l) (λ G → is-group (semigroup-Finite-Semigroup G))
+  Σ (Semigroup-𝔽 l) (λ G → is-group (semigroup-Semigroup-𝔽 G))
 
 module _
   {l : Level} (G : Group-𝔽 l)
   where
 
-  finite-semigroup-Group-𝔽 : Finite-Semigroup l
+  finite-semigroup-Group-𝔽 : Semigroup-𝔽 l
   finite-semigroup-Group-𝔽 = pr1 G
 
   semigroup-Group-𝔽 : Semigroup l
   semigroup-Group-𝔽 =
-    semigroup-Finite-Semigroup finite-semigroup-Group-𝔽
+    semigroup-Semigroup-𝔽 finite-semigroup-Group-𝔽
   
   is-group-Group-𝔽 : is-group semigroup-Group-𝔽
   is-group-Group-𝔽 = pr2 G
@@ -85,7 +85,7 @@ module _
 
   finite-type-Group-𝔽 : 𝔽 l
   finite-type-Group-𝔽 =
-    finite-type-Finite-Semigroup finite-semigroup-Group-𝔽
+    finite-type-Semigroup-𝔽 finite-semigroup-Group-𝔽
 
   type-Group-𝔽 : UU l
   type-Group-𝔽 = type-Group group-Group-𝔽

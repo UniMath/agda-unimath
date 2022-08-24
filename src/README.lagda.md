@@ -826,12 +826,6 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.wedges-of-pointed-types
 ```
 
-## Tutorials
-
-```agda
-open import tutorials.basic-agda
-```
-
 ## Type theories
 
 ```agda

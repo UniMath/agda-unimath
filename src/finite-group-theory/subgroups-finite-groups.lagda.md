@@ -6,13 +6,18 @@ title: Subgroups of finite groups
 module finite-group-theory.subgroups-finite-groups where
 
 open import finite-group-theory.finite-groups
+open import finite-group-theory.finite-semigroups
 
+open import foundation.embeddings
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.decidable-subgroups
 open import group-theory.subgroups
+
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea
@@ -132,168 +137,145 @@ module _
 Subgroup-𝔽 :
   (l : Level) {l1 : Level} (G : Group-𝔽 l1) → UU (lsuc l ⊔ l1)
 Subgroup-𝔽 l G = Decidable-Subgroup l (group-Group-𝔽 G)
-    
--- Decidable-Subgroup :
---   (l : Level) {l1 : Level} (G : Group-𝔽 l1) → UU ((lsuc l) ⊔ l1)
--- Decidable-Subgroup l G =
---   type-subtype (is-subgroup-decidable-subset-group-Prop {l2 = l} G)
 
--- module _
---   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Decidable-Subgroup l2 G)
---   where
-
---   decidable-subset-Decidable-Subgroup : decidable-subset-Group-𝔽 l2 G
---   decidable-subset-Decidable-Subgroup =
---     inclusion-subtype (is-subgroup-decidable-subset-group-Prop G) H
-
---   subset-Decidable-Subgroup : subset-Group-𝔽 l2 G
---   subset-Decidable-Subgroup =
---     subtype-decidable-subtype decidable-subset-Decidable-Subgroup
-
---   is-subgroup-subset-Decidable-Subgroup :
---     is-subgroup-subset-Group-𝔽 G subset-Decidable-Subgroup
---   is-subgroup-subset-Decidable-Subgroup = pr2 H
-
---   subgroup-Decidable-Subgroup : Subgroup l2 G
---   pr1 subgroup-Decidable-Subgroup = subset-Decidable-Subgroup
---   pr2 subgroup-Decidable-Subgroup = is-subgroup-subset-Decidable-Subgroup
-
---   type-Decidable-Subgroup : UU (l1 ⊔ l2)
---   type-Decidable-Subgroup =
---     type-Subgroup G subgroup-Decidable-Subgroup
-
---   inclusion-Decidable-Subgroup : type-Decidable-Subgroup → type-Group-𝔽 G
---   inclusion-Decidable-Subgroup =
---     inclusion-Subgroup G subgroup-Decidable-Subgroup
-
---   is-emb-inclusion-Decidable-Subgroup : is-emb inclusion-Decidable-Subgroup
---   is-emb-inclusion-Decidable-Subgroup =
---     is-emb-inclusion-Subgroup G subgroup-Decidable-Subgroup
-
---   emb-inclusion-Decidable-Subgroup : type-Decidable-Subgroup ↪ type-Group-𝔽 G
---   emb-inclusion-Decidable-Subgroup =
---     emb-inclusion-Subgroup G subgroup-Decidable-Subgroup
-
---   is-in-Decidable-Subgroup : type-Group-𝔽 G → UU l2
---   is-in-Decidable-Subgroup =
---     is-in-Subgroup G subgroup-Decidable-Subgroup
-
---   is-in-subgroup-inclusion-Decidable-Subgroup :
---     (x : type-Decidable-Subgroup) →
---     is-in-Decidable-Subgroup (inclusion-Decidable-Subgroup x)
---   is-in-subgroup-inclusion-Decidable-Subgroup =
---     is-in-subgroup-inclusion-Subgroup G subgroup-Decidable-Subgroup
-
---   is-prop-is-in-Decidable-Subgroup :
---     (x : type-Group-𝔽 G) → is-prop (is-in-Decidable-Subgroup x)
---   is-prop-is-in-Decidable-Subgroup =
---     is-prop-is-in-Subgroup G subgroup-Decidable-Subgroup
-
---   is-subgroup-Decidable-Subgroup :
---     is-subgroup-decidable-subset-Group-𝔽 G decidable-subset-Decidable-Subgroup
---   is-subgroup-Decidable-Subgroup =
---     is-subgroup-Subgroup G subgroup-Decidable-Subgroup
-
---   contains-unit-Decidable-Subgroup :
---     contains-unit-decidable-subset-Group-𝔽 G decidable-subset-Decidable-Subgroup
---   contains-unit-Decidable-Subgroup =
---     contains-unit-Subgroup G subgroup-Decidable-Subgroup
-
---   is-closed-under-mul-Decidable-Subgroup :
---     is-closed-under-mul-decidable-subset-Group-𝔽 G
---       decidable-subset-Decidable-Subgroup
---   is-closed-under-mul-Decidable-Subgroup =
---     is-closed-under-mul-Subgroup G subgroup-Decidable-Subgroup
-
---   is-closed-under-inv-Decidable-Subgroup :
---     is-closed-under-inv-decidable-subset-Group-𝔽 G
---       decidable-subset-Decidable-Subgroup
---   is-closed-under-inv-Decidable-Subgroup =
---     is-closed-under-inv-Subgroup G subgroup-Decidable-Subgroup
-
--- is-emb-decidable-subset-Decidable-Subgroup :
---   {l1 l2 : Level} (G : Group-𝔽 l1) →
---     is-emb (decidable-subset-Decidable-Subgroup {l2 = l2} G)
--- is-emb-decidable-subset-Decidable-Subgroup G =
---   is-emb-inclusion-subtype (is-subgroup-decidable-subset-group-Prop G)
--- ```
-
--- ### The underlying group of a decidable subgroup
-
--- ```agda
--- module _
---   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Decidable-Subgroup l2 G)
---   where
+module _
+  {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
+  where
   
---   type-group-Decidable-Subgroup :  UU (l1 ⊔ l2)
---   type-group-Decidable-Subgroup =
---     type-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  decidable-subset-Subgroup-𝔽 : decidable-subset-Group l2 (group-Group-𝔽 G)
+  decidable-subset-Subgroup-𝔽 =
+    decidable-subset-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   map-inclusion-group-Decidable-Subgroup :
---     type-group-Decidable-Subgroup → type-Group-𝔽 G
---   map-inclusion-group-Decidable-Subgroup =
---     map-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  subset-Subgroup-𝔽 : subset-Group l2 (group-Group-𝔽 G)
+  subset-Subgroup-𝔽 = subset-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   is-emb-inclusion-group-Decidable-Subgroup :
---     is-emb map-inclusion-group-Decidable-Subgroup
---   is-emb-inclusion-group-Decidable-Subgroup =
---     is-emb-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-subgroup-subset-Subgroup-𝔽 :
+    is-subgroup-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+  is-subgroup-subset-Subgroup-𝔽 =
+    is-subgroup-subset-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   eq-decidable-subgroup-eq-group :
---     {x y : type-group-Decidable-Subgroup} →
---     ( map-inclusion-group-Decidable-Subgroup x ＝
---       map-inclusion-group-Decidable-Subgroup y) →
---     x ＝ y
---   eq-decidable-subgroup-eq-group =
---     eq-subgroup-eq-group G (subgroup-Decidable-Subgroup G H)
+  subgroup-Subgroup-𝔽 : Subgroup l2 (group-Group-𝔽 G)
+  subgroup-Subgroup-𝔽 = subgroup-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   set-group-Decidable-Subgroup : UU-Set (l1 ⊔ l2)
---   set-group-Decidable-Subgroup =
---     set-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  type-Subgroup-𝔽 : UU (l1 ⊔ l2)
+  type-Subgroup-𝔽 = type-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   mul-Decidable-Subgroup :
---     (x y : type-group-Decidable-Subgroup) → type-group-Decidable-Subgroup
---   mul-Decidable-Subgroup = mul-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-finite-type-Subgroup-𝔽 : is-finite type-Subgroup-𝔽
+  is-finite-type-Subgroup-𝔽 = ?
+  
+  inclusion-Subgroup-𝔽 : type-Subgroup-𝔽 → type-Group-𝔽 G
+  inclusion-Subgroup-𝔽 = inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   associative-mul-Decidable-Subgroup :
---     (x y z : type-group-Decidable-Subgroup) →
---     Id (mul-Decidable-Subgroup (mul-Decidable-Subgroup x y) z)
---        (mul-Decidable-Subgroup x (mul-Decidable-Subgroup y z))
---   associative-mul-Decidable-Subgroup =
---     associative-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-emb-inclusion-Subgroup-𝔽 : is-emb inclusion-Subgroup-𝔽
+  is-emb-inclusion-Subgroup-𝔽 =
+    is-emb-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   unit-Decidable-Subgroup : type-group-Decidable-Subgroup
---   unit-Decidable-Subgroup = unit-Subgroup G (subgroup-Decidable-Subgroup G H)
+  emb-inclusion-Subgroup-𝔽 : type-Subgroup-𝔽 ↪ type-Group-𝔽 G
+  emb-inclusion-Subgroup-𝔽 =
+    emb-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   left-unit-law-mul-Decidable-Subgroup :
---     (x : type-group-Decidable-Subgroup) →
---     Id (mul-Decidable-Subgroup unit-Decidable-Subgroup x) x
---   left-unit-law-mul-Decidable-Subgroup =
---     left-unit-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-in-Subgroup-𝔽 : type-Group-𝔽 G → UU l2
+  is-in-Subgroup-𝔽 = is-in-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   right-unit-law-mul-Decidable-Subgroup :
---     (x : type-group-Decidable-Subgroup) →
---     Id (mul-Decidable-Subgroup x unit-Decidable-Subgroup) x
---   right-unit-law-mul-Decidable-Subgroup =
---     right-unit-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-in-subgroup-inclusion-Subgroup-𝔽 :
+    (x : type-Subgroup-𝔽) → is-in-Subgroup-𝔽 (inclusion-Subgroup-𝔽 x)
+  is-in-subgroup-inclusion-Subgroup-𝔽 =
+    is-in-subgroup-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   inv-Decidable-Subgroup :
---     type-group-Decidable-Subgroup → type-group-Decidable-Subgroup
---   inv-Decidable-Subgroup = inv-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-prop-is-in-Subgroup-𝔽 :
+    (x : type-Group-𝔽 G) → is-prop (is-in-Subgroup-𝔽 x)
+  is-prop-is-in-Subgroup-𝔽 =
+    is-prop-is-in-Decidable-Subgroup (group-Group-𝔽 G) H
+    
+  contains-unit-Subgroup-𝔽 :
+    contains-unit-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+  contains-unit-Subgroup-𝔽 =
+    contains-unit-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   left-inverse-law-mul-Decidable-Subgroup :
---     ( x : type-group-Decidable-Subgroup) →
---     Id ( mul-Decidable-Subgroup (inv-Decidable-Subgroup x) x)
---        ( unit-Decidable-Subgroup)
---   left-inverse-law-mul-Decidable-Subgroup =
---     left-inverse-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-closed-under-mul-Subgroup-𝔽 :
+    is-closed-under-mul-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+  is-closed-under-mul-Subgroup-𝔽 =
+    is-closed-under-mul-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   right-inverse-law-mul-Decidable-Subgroup :
---     (x : type-group-Decidable-Subgroup) →
---     Id ( mul-Decidable-Subgroup x (inv-Decidable-Subgroup x))
---        ( unit-Decidable-Subgroup)
---   right-inverse-law-mul-Decidable-Subgroup =
---     right-inverse-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-closed-under-inv-Subgroup-𝔽 :
+    is-closed-under-inv-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+  is-closed-under-inv-Subgroup-𝔽 =
+    is-closed-under-inv-Decidable-Subgroup (group-Group-𝔽 G) H
+
+is-emb-decidable-subset-Subgroup-𝔽 :
+  {l1 l2 : Level} (G : Group-𝔽 l1) →
+  is-emb (decidable-subset-Subgroup-𝔽 {l2 = l2} G)
+is-emb-decidable-subset-Subgroup-𝔽 G =
+  is-emb-decidable-subset-Decidable-Subgroup (group-Group-𝔽 G)
+```
+
+### The underlying group of a decidable subgroup
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
+  where
+
+  type-group-Subgroup-𝔽 : UU (l1 ⊔ l2)
+  type-group-Subgroup-𝔽 = type-Subgroup-𝔽 G H
+
+  map-inclusion-group-Subgroup-𝔽 :
+    type-group-Subgroup-𝔽 → type-Group-𝔽 G
+  map-inclusion-group-Subgroup-𝔽 = inclusion-Subgroup-𝔽 G H
+
+  is-emb-inclusion-group-Subgroup-𝔽 :
+    is-emb map-inclusion-group-Subgroup-𝔽
+  is-emb-inclusion-group-Subgroup-𝔽 = is-emb-inclusion-Subgroup-𝔽 G H
+
+  eq-subgroup-eq-Group-𝔽 :
+    {x y : type-Subgroup-𝔽 G H} →
+    ( inclusion-Subgroup-𝔽 G H x ＝ inclusion-Subgroup-𝔽 G H y) → x ＝ y
+  eq-subgroup-eq-Group-𝔽 =
+    eq-decidable-subgroup-eq-group (group-Group-𝔽 G) H
+
+  set-group-Subgroup-𝔽 : UU-Set (l1 ⊔ l2)
+  set-group-Subgroup-𝔽 = set-group-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  mul-Subgroup-𝔽 : (x y : type-Subgroup-𝔽 G H) → type-Subgroup-𝔽 G H
+  mul-Subgroup-𝔽 = mul-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  associative-mul-Subgroup-𝔽 :
+    (x y z : type-Subgroup-𝔽 G H) →
+    mul-Subgroup-𝔽 (mul-Subgroup-𝔽 x y) z ＝
+    mul-Subgroup-𝔽 x (mul-Subgroup-𝔽 y z)
+  associative-mul-Subgroup-𝔽 =
+    associative-mul-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  unit-Subgroup-𝔽 : type-Subgroup-𝔽 G H
+  unit-Subgroup-𝔽 = unit-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  left-unit-law-mul-Subgroup-𝔽 :
+    (x : type-Subgroup-𝔽 G H) → mul-Subgroup-𝔽 unit-Subgroup-𝔽 x ＝ x
+  left-unit-law-mul-Subgroup-𝔽 =
+    left-unit-law-mul-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  right-unit-law-mul-Subgroup-𝔽 :
+    (x : type-Subgroup-𝔽 G H) → mul-Subgroup-𝔽 x unit-Subgroup-𝔽 ＝ x
+  right-unit-law-mul-Subgroup-𝔽 =
+    right-unit-law-mul-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  inv-Subgroup-𝔽 : type-Subgroup-𝔽 G H → type-Subgroup-𝔽 G H
+  inv-Subgroup-𝔽 = inv-Decidable-Subgroup (group-Group-𝔽 G) H
+  
+  left-inverse-law-mul-Subgroup-𝔽 :
+    ( x : type-Subgroup-𝔽 G H) →
+    mul-Subgroup-𝔽 (inv-Subgroup-𝔽 x) x ＝ unit-Subgroup-𝔽
+  left-inverse-law-mul-Subgroup-𝔽 =
+    left-inverse-law-mul-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  right-inverse-law-mul-Subgroup-𝔽 :
+    (x : type-Subgroup-𝔽 G H) →
+    mul-Subgroup-𝔽 x (inv-Subgroup-𝔽 x) ＝ unit-Subgroup-𝔽
+  right-inverse-law-mul-Subgroup-𝔽 =
+    right-inverse-law-mul-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  semigroup-Subgroup-𝔽 : Semigroup-𝔽 (l1 ⊔ l2)
+  semigroup-Subgroup-𝔽 = {!!}
 
 --   semigroup-Decidable-Subgroup : Semigroup (l1 ⊔ l2)
 --   semigroup-Decidable-Subgroup =
