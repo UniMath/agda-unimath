@@ -8,15 +8,23 @@ module finite-group-theory.subgroups-finite-groups where
 open import finite-group-theory.finite-groups
 open import finite-group-theory.finite-semigroups
 
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equivalence-relations
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.decidable-subgroups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.semigroups
 open import group-theory.subgroups
 
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
 ```
 
@@ -161,7 +169,12 @@ module _
   type-Subgroup-𝔽 = type-Decidable-Subgroup (group-Group-𝔽 G) H
 
   is-finite-type-Subgroup-𝔽 : is-finite type-Subgroup-𝔽
-  is-finite-type-Subgroup-𝔽 = ?
+  is-finite-type-Subgroup-𝔽 =
+    is-finite-type-subset-𝔽 (finite-type-Group-𝔽 G) decidable-subset-Subgroup-𝔽
+
+  finite-type-Subgroup-𝔽 : 𝔽 (l1 ⊔ l2)
+  finite-type-Subgroup-𝔽 =
+    finite-type-subset-𝔽 (finite-type-Group-𝔽 G) decidable-subset-Subgroup-𝔽
   
   inclusion-Subgroup-𝔽 : type-Subgroup-𝔽 → type-Group-𝔽 G
   inclusion-Subgroup-𝔽 = inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
@@ -274,162 +287,166 @@ module _
   right-inverse-law-mul-Subgroup-𝔽 =
     right-inverse-law-mul-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  semigroup-Subgroup-𝔽 : Semigroup-𝔽 (l1 ⊔ l2)
-  semigroup-Subgroup-𝔽 = {!!}
+  finite-semigroup-Subgroup-𝔽 : Semigroup-𝔽 (l1 ⊔ l2)
+  pr1 finite-semigroup-Subgroup-𝔽 = finite-type-Subgroup-𝔽 G H
+  pr1 (pr2 finite-semigroup-Subgroup-𝔽) = mul-Subgroup-𝔽
+  pr2 (pr2 finite-semigroup-Subgroup-𝔽) = associative-mul-Subgroup-𝔽
 
---   semigroup-Decidable-Subgroup : Semigroup (l1 ⊔ l2)
---   semigroup-Decidable-Subgroup =
---     semigroup-Subgroup G (subgroup-Decidable-Subgroup G H)
+  finite-group-Subgroup-𝔽 : Group-𝔽 (l1 ⊔ l2)
+  pr1 finite-group-Subgroup-𝔽 = finite-semigroup-Subgroup-𝔽
+  pr1 (pr1 (pr2 finite-group-Subgroup-𝔽)) = unit-Subgroup-𝔽
+  pr1 (pr2 (pr1 (pr2 finite-group-Subgroup-𝔽))) = left-unit-law-mul-Subgroup-𝔽
+  pr2 (pr2 (pr1 (pr2 finite-group-Subgroup-𝔽))) = right-unit-law-mul-Subgroup-𝔽
+  pr1 (pr2 (pr2 finite-group-Subgroup-𝔽)) = inv-Subgroup-𝔽
+  pr1 (pr2 (pr2 (pr2 finite-group-Subgroup-𝔽))) =
+    left-inverse-law-mul-Subgroup-𝔽
+  pr2 (pr2 (pr2 (pr2 finite-group-Subgroup-𝔽))) =
+    right-inverse-law-mul-Subgroup-𝔽
 
---   group-Decidable-Subgroup : Group-𝔽 (l1 ⊔ l2)
---   group-Decidable-Subgroup = group-Subgroup G (subgroup-Decidable-Subgroup G H)
--- ```
+semigroup-Subgroup-𝔽 :
+  {l1 l2 : Level} (G : Group-𝔽 l1) → Subgroup-𝔽 l2 G → Semigroup (l1 ⊔ l2)
+semigroup-Subgroup-𝔽 G H =
+  semigroup-Semigroup-𝔽 (finite-semigroup-Subgroup-𝔽 G H)
 
--- ### The inclusion of the underlying group of a subgroup into the ambient group
+group-Subgroup-𝔽 :
+  {l1 l2 : Level} (G : Group-𝔽 l1) → Subgroup-𝔽 l2 G → Group (l1 ⊔ l2)
+group-Subgroup-𝔽 G H = group-Group-𝔽 (finite-group-Subgroup-𝔽 G H)
+```
 
--- ```agda
--- module _
---   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Decidable-Subgroup l2 G)
---   where
+### The inclusion homomorphism of the underlying finite group of a finite subgroup into the ambient group
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
+  where
+
+  preserves-mul-inclusion-group-Subgroup-𝔽 :
+    preserves-mul-Group
+      ( group-Subgroup-𝔽 G H)
+      ( group-Group-𝔽 G)
+      ( inclusion-Subgroup-𝔽 G H)
+  preserves-mul-inclusion-group-Subgroup-𝔽 =
+    preserves-mul-inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  preserves-unit-inclusion-group-Subgroup-𝔽 :
+    preserves-unit-Group
+      ( group-Subgroup-𝔽 G H)
+      ( group-Group-𝔽 G)
+      ( inclusion-Subgroup-𝔽 G H)
+  preserves-unit-inclusion-group-Subgroup-𝔽 =
+    preserves-unit-inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  preserves-inverses-inclusion-group-Subgroup-𝔽 :
+    preserves-inverses-Group
+      ( group-Subgroup-𝔽 G H)
+      ( group-Group-𝔽 G)
+      ( inclusion-Subgroup-𝔽 G H)
+  preserves-inverses-inclusion-group-Subgroup-𝔽 =
+    preserves-inverses-inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  inclusion-group-Subgroup-𝔽 :
+    type-hom-Group (group-Subgroup-𝔽 G H) (group-Group-𝔽 G)
+  inclusion-group-Subgroup-𝔽 =
+    inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+```
+
+## Properties
+
+### Extensionality of the type of all subgroups
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
+  where
+
+  has-same-elements-Subgroup-𝔽 :
+    {l3 : Level} → Subgroup-𝔽 l3 G → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-Subgroup-𝔽 =
+    has-same-elements-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  extensionality-Subgroup-𝔽 :
+    (K : Subgroup-𝔽 l2 G) → (H ＝ K) ≃ has-same-elements-Subgroup-𝔽 K
+  extensionality-Subgroup-𝔽 =
+    extensionality-Decidable-Subgroup (group-Group-𝔽 G) H
+```
+
+### Every finite subgroup induces two equivalence relations
+
+#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
+  where
+
+  right-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU (l1 ⊔ l2)
+  right-sim-Subgroup-𝔽 = right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  is-prop-right-sim-Subgroup-𝔽 :
+    (x y : type-Group-𝔽 G) → is-prop (right-sim-Subgroup-𝔽 x y)
+  is-prop-right-sim-Subgroup-𝔽 =
+    is-prop-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  prop-right-eq-rel-Subgroup-𝔽 :
+    (x y : type-Group-𝔽 G) → UU-Prop (l1 ⊔ l2)
+  prop-right-eq-rel-Subgroup-𝔽 =
+    prop-right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  refl-right-sim-Subgroup-𝔽 :
+    is-reflexive-Rel-Prop prop-right-eq-rel-Subgroup-𝔽
+  refl-right-sim-Subgroup-𝔽 =
+    refl-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  symm-right-sim-Subgroup-𝔽 :
+    is-symmetric-Rel-Prop prop-right-eq-rel-Subgroup-𝔽
+  symm-right-sim-Subgroup-𝔽 =
+    symm-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  trans-right-sim-Subgroup-𝔽 :
+    is-transitive-Rel-Prop prop-right-eq-rel-Subgroup-𝔽
+  trans-right-sim-Subgroup-𝔽 =
+    trans-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+
+  right-eq-rel-Subgroup-𝔽 : Eq-Rel (l1 ⊔ l2) (type-Group-𝔽 G)
+  right-eq-rel-Subgroup-𝔽 =
+    right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
+```
+
+#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group-𝔽 l1) (H : Subgroup-𝔽 l2 G)
+  where
   
---   preserves-mul-inclusion-group-Decidable-Subgroup :
---     preserves-mul-Group-𝔽
---       ( group-Decidable-Subgroup G H)
---       ( G)
---       ( map-inclusion-group-Decidable-Subgroup G H)
---   preserves-mul-inclusion-group-Decidable-Subgroup =
---     preserves-mul-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  left-sim-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU (l1 ⊔ l2)
+  left-sim-Subgroup-𝔽 = left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   preserves-unit-inclusion-group-Decidable-Subgroup :
---     preserves-unit-Group-𝔽
---       ( group-Decidable-Subgroup G H)
---       ( G)
---       ( map-inclusion-group-Decidable-Subgroup G H)
---   preserves-unit-inclusion-group-Decidable-Subgroup =
---     preserves-unit-inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
+  is-prop-left-sim-Subgroup-𝔽 :
+    (x y : type-Group-𝔽 G) → is-prop (left-sim-Subgroup-𝔽 x y)
+  is-prop-left-sim-Subgroup-𝔽 =
+    is-prop-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   preserves-inverses-inclusion-group-Decidable-Subgroup :
---     preserves-inverses-Group-𝔽
---       ( group-Decidable-Subgroup G H)
---       ( G)
---       ( map-inclusion-group-Decidable-Subgroup G H)
---   preserves-inverses-inclusion-group-Decidable-Subgroup =
---     preserves-inverses-inclusion-group-Subgroup G
---       ( subgroup-Decidable-Subgroup G H)
+  prop-left-eq-rel-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU-Prop (l1 ⊔ l2)
+  prop-left-eq-rel-Subgroup-𝔽 =
+    prop-left-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 
---   inclusion-group-Decidable-Subgroup :
---     type-hom-Group-𝔽 (group-Decidable-Subgroup G H) G
---   inclusion-group-Decidable-Subgroup =
---     inclusion-group-Subgroup G (subgroup-Decidable-Subgroup G H)
--- ```
+  refl-left-sim-Subgroup-𝔽 :
+    is-reflexive-Rel-Prop prop-left-eq-rel-Subgroup-𝔽
+  refl-left-sim-Subgroup-𝔽 =
+    refl-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
--- ## Properties
+  symm-left-sim-Subgroup-𝔽 :
+    is-symmetric-Rel-Prop prop-left-eq-rel-Subgroup-𝔽
+  symm-left-sim-Subgroup-𝔽 =
+    symm-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
--- ### Extensionality of the type of all subgroups
+  trans-left-sim-Subgroup-𝔽 :
+    is-transitive-Rel-Prop prop-left-eq-rel-Subgroup-𝔽
+  trans-left-sim-Subgroup-𝔽 =
+    trans-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
--- ```agda
--- module _
---   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Decidable-Subgroup l2 G)
---   where
-
---   has-same-elements-Decidable-Subgroup :
---     {l3 : Level} → Decidable-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
---   has-same-elements-Decidable-Subgroup K =
---     has-same-elements-decidable-subtype
---       ( decidable-subset-Decidable-Subgroup G H)
---       ( decidable-subset-Decidable-Subgroup G K)
-
---   extensionality-Decidable-Subgroup :
---     (K : Decidable-Subgroup l2 G) →
---     (H ＝ K) ≃ has-same-elements-Decidable-Subgroup K
---   extensionality-Decidable-Subgroup =
---     extensionality-type-subtype
---       ( is-subgroup-decidable-subset-group-Prop G)
---       ( is-subgroup-Decidable-Subgroup G H)
---       ( λ x → pair id id)
---       ( extensionality-decidable-subtype
---         ( decidable-subset-Decidable-Subgroup G H))
--- ```
-
--- ### Every subgroup induces two equivalence relations
-
--- #### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`.
-
--- ```agda
--- module _
---   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Decidable-Subgroup l2 G)
---   where
-  
---   right-sim-Decidable-Subgroup : (x y : type-Group-𝔽 G) → UU (l1 ⊔ l2)
---   right-sim-Decidable-Subgroup =
---     right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   is-prop-right-sim-Decidable-Subgroup :
---     (x y : type-Group-𝔽 G) → is-prop (right-sim-Decidable-Subgroup x y)
---   is-prop-right-sim-Decidable-Subgroup =
---     is-prop-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   prop-right-eq-rel-Decidable-Subgroup :
---     (x y : type-Group-𝔽 G) → UU-Prop (l1 ⊔ l2)
---   prop-right-eq-rel-Decidable-Subgroup =
---     prop-right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   refl-right-sim-Decidable-Subgroup :
---     is-reflexive-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
---   refl-right-sim-Decidable-Subgroup =
---     refl-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   symm-right-sim-Decidable-Subgroup :
---     is-symmetric-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
---   symm-right-sim-Decidable-Subgroup =
---     symm-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   trans-right-sim-Decidable-Subgroup :
---     is-transitive-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
---   trans-right-sim-Decidable-Subgroup =
---     trans-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   right-eq-rel-Decidable-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group-𝔽 G)
---   right-eq-rel-Decidable-Subgroup =
---     right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
--- ```
-
--- #### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`.
-
--- ```agda
--- module _
---   {l1 l2 : Level} (G : Group-𝔽 l1) (H : Decidable-Subgroup l2 G)
---   where
-  
---   left-sim-Decidable-Subgroup : (x y : type-Group-𝔽 G) → UU (l1 ⊔ l2)
---   left-sim-Decidable-Subgroup =
---     left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   is-prop-left-sim-Decidable-Subgroup :
---     (x y : type-Group-𝔽 G) → is-prop (left-sim-Decidable-Subgroup x y)
---   is-prop-left-sim-Decidable-Subgroup =
---     is-prop-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   prop-left-eq-rel-Decidable-Subgroup : (x y : type-Group-𝔽 G) → UU-Prop (l1 ⊔ l2)
---   prop-left-eq-rel-Decidable-Subgroup =
---     prop-left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   refl-left-sim-Decidable-Subgroup :
---     is-reflexive-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
---   refl-left-sim-Decidable-Subgroup =
---     refl-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   symm-left-sim-Decidable-Subgroup :
---     is-symmetric-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
---   symm-left-sim-Decidable-Subgroup =
---     symm-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   trans-left-sim-Decidable-Subgroup :
---     is-transitive-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
---   trans-left-sim-Decidable-Subgroup =
---     trans-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
-
---   left-eq-rel-Decidable-Subgroup : Eq-Rel (l1 ⊔ l2) (type-Group-𝔽 G)
---   left-eq-rel-Decidable-Subgroup =
---     left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
--- ```
+  left-eq-rel-Subgroup-𝔽 : Eq-Rel (l1 ⊔ l2) (type-Group-𝔽 G)
+  left-eq-rel-Subgroup-𝔽 =
+    left-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
+```
