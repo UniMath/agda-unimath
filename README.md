@@ -38,7 +38,7 @@ In the `agda-unimath` library we use two notations for the identity type. The id
 - Type the full width equals sign `＝` in the translations field.
 - Click the `Apply and save` button.
 
-After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`.
+After completing these steps, you can type `\=` in order to obtain the full width equals sign `＝`. While you're at it, you can also add the key sequence `yo` to obtain the Japanese symbol `ょ` for the Yoneda embedding.
 
 ### After the setup
 
