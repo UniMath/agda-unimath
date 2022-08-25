@@ -3,8 +3,6 @@ title: Cycle index series of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.cycle-index-series-species where
 
 open import elementary-number-theory.natural-numbers
@@ -32,6 +30,7 @@ total-type-family-of-cyclic-types :
 total-type-family-of-cyclic-types X C =
   Σ (type-𝔽 X) (λ x → type-Cyclic-Type (pr1 (C x)) (pr2 (C x)))
 
+{-
 permutation-family-of-cyclic-types :
   {l1 l2 : Level} (X : 𝔽 l1) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l2)) →
   Aut (total-type-family-of-cyclic-types X C)
@@ -43,4 +42,5 @@ cycle-index-series-species :
   UU {!!}
 cycle-index-series-species F X C =
   Σ {!F (total-type-family-of-cyclic-types X C)!} {!!}
+  -}
 ```

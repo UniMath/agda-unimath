@@ -3,7 +3,7 @@ title: Dependent type theories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas --guardedness #-}
+{-# OPTIONS --guardedness #-}
 
 module type-theories.dependent-type-theories where
 

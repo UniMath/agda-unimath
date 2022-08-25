@@ -3,8 +3,6 @@ title: Euler's totient function
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module elementary-number-theory.eulers-totient-function where
 
 open import elementary-number-theory.natural-numbers using (ℕ)

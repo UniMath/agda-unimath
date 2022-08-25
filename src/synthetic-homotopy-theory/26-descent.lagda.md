@@ -3,8 +3,6 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --allow-unsolved-metas --exact-split #-}
-
 module synthetic-homotopy-theory.26-descent where
 
 open import foundation.commuting-squares

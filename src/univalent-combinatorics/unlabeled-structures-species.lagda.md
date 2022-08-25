@@ -3,8 +3,6 @@ title: Unlabeled structures of a species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.unlabeled-structures-species where
 
 open import elementary-number-theory.natural-numbers

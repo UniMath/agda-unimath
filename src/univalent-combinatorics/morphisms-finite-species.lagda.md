@@ -3,8 +3,6 @@ title: Morphisms of finite species
 ---
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas --without-K --exact-split #-}
-
 module univalent-combinatorics.morphisms-finite-species where
 
 open import foundation.contractible-types

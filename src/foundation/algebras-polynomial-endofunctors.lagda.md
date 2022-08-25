@@ -3,7 +3,7 @@ title: Algebras for polynomial endofunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.algebras-polynomial-endofunctors where
 

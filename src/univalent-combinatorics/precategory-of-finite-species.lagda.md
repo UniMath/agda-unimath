@@ -1,6 +1,8 @@
-```agda
-{-# OPTIONS --allow-unsolved-metas --without-K --exact-split #-}
+---
+title: The precategory of finite species
+---
 
+```agda
 module univalent-combinatorics.precategory-of-finite-species where
 
 open import category-theory.large-precategories using

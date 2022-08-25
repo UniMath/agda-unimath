@@ -3,8 +3,6 @@ title: Composition of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.composition-species where
 
 open import foundation.cartesian-product-types
@@ -60,9 +58,11 @@ analytic-unit-species X = is-contr (type-𝔽 X)
 ### Unit laws for analytic composition of species
 
 ```agda
+{-
 left-unit-law-comp-species :
   {l1 l2 : Level} (F : species l1 l2) →
   equiv-species (analytic-comp-species analytic-unit-species F) F
 left-unit-law-comp-species F X =
   {!!}
+-}
 ```

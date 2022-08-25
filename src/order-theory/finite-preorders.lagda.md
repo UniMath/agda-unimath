@@ -1,7 +1,7 @@
 # Finite preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module order-theory.finite-preorders where
 

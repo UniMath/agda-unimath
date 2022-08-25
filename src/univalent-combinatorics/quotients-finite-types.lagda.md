@@ -38,7 +38,7 @@ module _
   is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽' =
     is-finite-im
       ( is-finite-type-𝔽 X)
-      ( has-decidable-equality-subtype-𝔽 X)
+      ( has-decidable-equality-Subset-𝔽 X)
 
   quotient-𝔽 : 𝔽 (l1 ⊔ lsuc l2)
   pr1 quotient-𝔽 = equivalence-class-Decidable-Equivalence-Relation-𝔽

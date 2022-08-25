@@ -3,8 +3,6 @@ title: Finite graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module graph-theory.finite-graphs where
 
 open import elementary-number-theory.natural-numbers
