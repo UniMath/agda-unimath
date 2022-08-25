@@ -19,7 +19,6 @@ open import foundation.functoriality-dependent-function-types using
     is-trunc-map-is-trunc-map-map-Π')
 open import foundation.homotopies using (htpy-right-whisk)
 open import foundation.identity-types using (ap; refl)
-open import foundation.truncation-levels using (𝕋; neg-two-𝕋)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (Level; UU)
 
@@ -29,6 +28,7 @@ open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; map-inv-is-equiv; issec-map-inv-is-equiv;
     isretr-map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
 open import foundation-core.truncated-maps using (is-trunc-map)
+open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
 ```
 
 ## Properties

@@ -361,6 +361,7 @@ open import foundation.sequences
 open import foundation.set-presented-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.sigma-decompositions
 open import foundation.singleton-induction
 open import foundation.slice
 open import foundation.small-maps

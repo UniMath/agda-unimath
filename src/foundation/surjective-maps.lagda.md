@@ -7,9 +7,7 @@ title: Surjective maps
 
 module foundation.surjective-maps where
 
-open import foundation.sets using
-  ( UU-Set; type-Set; is-set; is-set-type-Set; emb-type-Set)
-
+open import foundation.connected-maps
 open import foundation.constant-maps using (const)
 open import foundation.contractible-maps using
   ( is-equiv-is-contr-map)
@@ -23,7 +21,7 @@ open import foundation.equivalences using
     map-inv-equiv; id-equiv)
 open import foundation.fibers-of-maps using
   ( fib; is-equiv-map-reduce-Π-fib; reduce-Π-fib)
-open import foundation.functions using (_∘_; id)
+open import foundation.functions using (_∘_; id; precomp-Π)
 open import foundation.functoriality-dependent-function-types using
   ( is-equiv-map-Π; equiv-map-Π)
 open import foundation.functoriality-dependent-pair-types using (map-Σ)
@@ -41,6 +39,8 @@ open import foundation.propositions using
   ( UU-Prop; type-Prop; is-proof-irrelevant-is-prop; Π-Prop; is-prop;
     is-prop-type-Prop)
 open import foundation.sections using (sec)
+open import foundation.sets using
+  ( UU-Set; type-Set; is-set; is-set-type-Set; emb-type-Set)
 open import foundation.slice using
   ( hom-slice; map-hom-slice; equiv-hom-slice-fiberwise-hom;
     equiv-fiberwise-hom-hom-slice)
@@ -48,8 +48,12 @@ open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.truncated-types
-open import foundation.truncation-levels
+open import foundation.truncated-maps
+open import foundation.truncated-types using
+  ( Truncated-Type; type-Truncated-Type; is-trunc-type-Truncated-Type;
+    emb-type-Truncated-Type; is-trunc)
+open import foundation.truncation-levels using
+  (𝕋; zero-𝕋; neg-one-𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universal-property-propositional-truncation using
   ( dependent-universal-property-propositional-truncation)
@@ -583,4 +587,31 @@ eq-equiv-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f g : Surjection-Into-Set l2 A) →
   equiv-Surjection-Into-Set f g → f ＝ g
 eq-equiv-Surjection-Into-Set = eq-equiv-Surjection-Into-Truncated-Type
+```
+
+### Surjective maps are -1-connected
+
+```agda
+is-neg-one-connected-map-is-surjective :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-surjective f → is-connected-map neg-one-𝕋 f
+is-neg-one-connected-map-is-surjective H b =
+  is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
+```
+
+### Precomposing functions into a family of (k+1)-types by a surjective map is a k-truncated map
+
+```agda
+is-trunc-map-precomp-Π-is-surjective :
+  {l1 l2 l3 : Level} (k : 𝕋) →
+  {A : UU l1} {B : UU l2} {f : A → B} → is-surjective f →
+  (P : B → Truncated-Type l3 (succ-𝕋 k)) →
+  is-trunc-map k (precomp-Π f (λ b → type-Truncated-Type (P b)))
+is-trunc-map-precomp-Π-is-surjective k H =
+  is-trunc-map-precomp-Π-is-connected-map
+    ( neg-one-𝕋)
+    ( succ-𝕋 k)
+    ( k)
+    ( refl)
+    ( is-neg-one-connected-map-is-surjective H)
 ```
