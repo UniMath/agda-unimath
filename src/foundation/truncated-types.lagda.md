@@ -10,6 +10,7 @@ module foundation.truncated-types where
 open import foundation-core.truncated-types public
 
 open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets
@@ -49,4 +50,11 @@ Truncated-Type-Truncated-Type :
   (l : Level) (k : 𝕋) → Truncated-Type (lsuc l) (succ-𝕋 k)
 pr1 (Truncated-Type-Truncated-Type l k) = Truncated-Type l k
 pr2 (Truncated-Type-Truncated-Type l k) = is-trunc-Truncated-Type k
+```
+
+### The embedding of the subuniverse of truncated types into the universe
+
+```agda
+emb-type-Truncated-Type : (l : Level) (k : 𝕋) → Truncated-Type l k ↪ UU l
+emb-type-Truncated-Type l k = emb-subtype (is-trunc-Prop k)
 ```
