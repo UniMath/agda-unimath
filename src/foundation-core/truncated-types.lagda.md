@@ -43,6 +43,10 @@ The truncatedness of a type is a measure of the complexity of its identity types
 is-trunc : {i : Level} (k : 𝕋) → UU i → UU i
 is-trunc neg-two-𝕋 A = is-contr A
 is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (x ＝ y)
+
+is-trunc-eq :
+  {l : Level} {k k' : 𝕋} {A : UU l} → k ＝ k' → is-trunc k A → is-trunc k' A
+is-trunc-eq refl H = H
 ```
 
 ### The universe of truncated types

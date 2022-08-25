@@ -10,6 +10,7 @@ module foundation-core.functoriality-dependent-function-types where
 open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.coherently-invertible-maps
+open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -74,6 +75,23 @@ equiv-map-Π :
   (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
 pr1 (equiv-map-Π e) = map-Π (λ i → map-equiv (e i))
 pr2 (equiv-map-Π e) = is-equiv-map-Π _ (λ i → is-equiv-map-equiv (e i))
+```
+
+### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fib f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
+
+This condition simplifies, for example, the proof that connected maps satisfy a dependent universal property.
+
+```agda
+is-equiv-precomp-Π-fiber-condition :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3} →
+  ((b : B) → is-equiv (λ (c : C b) → const (fib f b) (C b) c)) →
+  is-equiv (precomp-Π f C)
+is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
+  is-equiv-comp'
+    ( map-reduce-Π-fib f (λ b u → C b))
+    ( map-Π (λ b u t → u))
+    ( is-equiv-map-Π (λ b u t → u) H)
+    ( is-equiv-map-reduce-Π-fib f (λ b u → C b))
 ```
 
 ### If `f` is coherently invertible, then precomposing by `f` is an equivalence
