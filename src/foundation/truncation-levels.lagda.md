@@ -42,12 +42,9 @@ add-𝕋 neg-two-𝕋 neg-two-𝕋 = neg-two-𝕋
 add-𝕋 neg-two-𝕋 (succ-𝕋 neg-two-𝕋) = neg-two-𝕋
 add-𝕋 neg-two-𝕋 (succ-𝕋 (succ-𝕋 l)) = l
 add-𝕋 (succ-𝕋 neg-two-𝕋) neg-two-𝕋 = neg-two-𝕋
+add-𝕋 (succ-𝕋 neg-two-𝕋) (succ-𝕋 l) = l
 add-𝕋 (succ-𝕋 (succ-𝕋 k)) neg-two-𝕋 = k
-add-𝕋 (succ-𝕋 neg-two-𝕋) (succ-𝕋 neg-two-𝕋) = neg-two-𝕋
-add-𝕋 (succ-𝕋 neg-two-𝕋) (succ-𝕋 (succ-𝕋 l)) = succ-𝕋 l
-add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 neg-two-𝕋) = succ-𝕋 k
-add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 (succ-𝕋 l)) =
-  succ-𝕋 (succ-𝕋 (add-𝕋 (succ-𝕋 k) (succ-𝕋 l)))
+add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 l) = succ-𝕋 (add-𝕋 (succ-𝕋 k) (succ-𝕋 l))
 ```
 
 ## Properties
@@ -64,8 +61,8 @@ left-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) = refl
 right-unit-law-add-𝕋 : (k : 𝕋) → add-𝕋 k zero-𝕋 ＝ k
 right-unit-law-add-𝕋 neg-two-𝕋 = refl
 right-unit-law-add-𝕋 (succ-𝕋 neg-two-𝕋) = refl
-right-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)) = refl
-right-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) = refl
+right-unit-law-add-𝕋 (succ-𝕋 (succ-𝕋 k)) =
+  ap succ-𝕋 (right-unit-law-add-𝕋 (succ-𝕋 k))
 ```
 
 ### Successor laws for addition of truncation levels
@@ -76,29 +73,14 @@ left-successor-law-add-𝕋 :
   add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 n))) k ＝
   succ-𝕋 (add-𝕋 (succ-𝕋 (succ-𝕋 n)) k)
 left-successor-law-add-𝕋 n neg-two-𝕋 = refl
-left-successor-law-add-𝕋 n (succ-𝕋 neg-two-𝕋) = refl
-left-successor-law-add-𝕋 neg-two-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)) = refl
-left-successor-law-add-𝕋 neg-two-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋))) = refl
-left-successor-law-add-𝕋 neg-two-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k)))) = refl
-left-successor-law-add-𝕋 (succ-𝕋 n) (succ-𝕋 (succ-𝕋 k)) =
-  ap (succ-𝕋 ∘ succ-𝕋) (left-successor-law-add-𝕋 n (succ-𝕋 k))
+left-successor-law-add-𝕋 n (succ-𝕋 k) = refl
 
 right-successor-law-add-𝕋 :
   (k n : 𝕋) →
   add-𝕋 k (succ-𝕋 (succ-𝕋 (succ-𝕋 n))) ＝
   succ-𝕋 (add-𝕋 k (succ-𝕋 (succ-𝕋 n)))
-right-successor-law-add-𝕋 neg-two-𝕋 neg-two-𝕋 = refl
-right-successor-law-add-𝕋 (succ-𝕋 neg-two-𝕋) neg-two-𝕋 = refl
-right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)) neg-two-𝕋 = refl
-right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋))) neg-two-𝕋 = refl
-right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k)))) neg-two-𝕋 = refl
-right-successor-law-add-𝕋 neg-two-𝕋 (succ-𝕋 n) = refl
-right-successor-law-add-𝕋 (succ-𝕋 neg-two-𝕋) (succ-𝕋 n) = refl
-right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)) (succ-𝕋 n) = refl
-right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋))) (succ-𝕋 n) =
-  ap (succ-𝕋 ∘ succ-𝕋) (right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)) n)
-right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k)))) (succ-𝕋 n) =
-  ap
-    ( succ-𝕋 ∘ succ-𝕋)
-    ( right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) n)
+right-successor-law-add-𝕋 neg-two-𝕋 n = refl
+right-successor-law-add-𝕋 (succ-𝕋 neg-two-𝕋) n = refl
+right-successor-law-add-𝕋 (succ-𝕋 (succ-𝕋 k)) n =
+  ap succ-𝕋 (right-successor-law-add-𝕋 (succ-𝕋 k) n)
 ```
