@@ -48,6 +48,8 @@ open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universal-property-propositional-truncation using
   ( dependent-universal-property-propositional-truncation)
@@ -95,73 +97,122 @@ module _
 ### The type of all surjective maps out of a type
 
 ```agda
-Surjective-Map : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-Surjective-Map l2 A = Σ (UU l2) (λ X → A ↠ X)
+Surjection : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+Surjection l2 A = Σ (UU l2) (λ X → A ↠ X)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (f : Surjective-Map l2 A)
+  {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)
   where
 
-  type-Surjective-Map : UU l2
-  type-Surjective-Map = pr1 f
+  type-Surjection : UU l2
+  type-Surjection = pr1 f
 
-  surjection-Surjective-Map : A ↠ type-Surjective-Map
-  surjection-Surjective-Map = pr2 f
+  surjection-Surjection : A ↠ type-Surjection
+  surjection-Surjection = pr2 f
 
-  map-Surjective-Map : A → type-Surjective-Map
-  map-Surjective-Map = map-surjection surjection-Surjective-Map
+  map-Surjection : A → type-Surjection
+  map-Surjection = map-surjection surjection-Surjection
 
-  is-surjective-map-Surjective-Map : is-surjective map-Surjective-Map
-  is-surjective-map-Surjective-Map =
-    is-surjective-map-surjection surjection-Surjective-Map
+  is-surjective-map-Surjection : is-surjective map-Surjection
+  is-surjective-map-Surjection =
+    is-surjective-map-surjection surjection-Surjection
+```
+
+### The type of all surjective maps into `k`-truncated types
+
+```agda
+Surjection-Into-Truncated-Type :
+  {l1 : Level} (l2 : Level) (k : 𝕋) → UU l1 → UU (l1 ⊔ lsuc l2)
+Surjection-Into-Truncated-Type l2 k A =
+  Σ (Truncated-Type l2 k) (λ X → A ↠ type-Truncated-Type X)
+
+emb-inclusion-Surjection-Into-Truncated-Type :
+  {l1 : Level} (l2 : Level) (k : 𝕋) (A : UU l1) →
+  Surjection-Into-Truncated-Type l2 k A ↪ Surjection l2 A
+emb-inclusion-Surjection-Into-Truncated-Type l2 k A =
+  emb-Σ (λ X → A ↠ X) (emb-type-Truncated-Type l2 k) (λ X → id-emb)
+
+inclusion-Surjection-Into-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} →
+  Surjection-Into-Truncated-Type l2 k A → Surjection l2 A
+inclusion-Surjection-Into-Truncated-Type {l1} {l2} {k} {A} =
+  map-emb (emb-inclusion-Surjection-Into-Truncated-Type l2 k A)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (f : Surjection-Into-Truncated-Type l2 k A)
+  where
+
+  truncated-type-Surjection-Into-Truncated-Type : Truncated-Type l2 k
+  truncated-type-Surjection-Into-Truncated-Type = pr1 f
+
+  type-Surjection-Into-Truncated-Type : UU l2
+  type-Surjection-Into-Truncated-Type =
+    type-Truncated-Type truncated-type-Surjection-Into-Truncated-Type
+
+  is-trunc-type-Surjection-Into-Truncated-Type :
+    is-trunc k type-Surjection-Into-Truncated-Type
+  is-trunc-type-Surjection-Into-Truncated-Type =
+    is-trunc-type-Truncated-Type
+      truncated-type-Surjection-Into-Truncated-Type
+
+  surjection-Surjection-Into-Truncated-Type :
+    A ↠ type-Surjection-Into-Truncated-Type
+  surjection-Surjection-Into-Truncated-Type = pr2 f
+
+  map-Surjection-Into-Truncated-Type :
+    A → type-Surjection-Into-Truncated-Type
+  map-Surjection-Into-Truncated-Type =
+    map-surjection surjection-Surjection-Into-Truncated-Type
+
+  is-inclusion-Surjection-Into-Truncated-Type :
+    is-surjective map-Surjection-Into-Truncated-Type
+  is-inclusion-Surjection-Into-Truncated-Type =
+    is-surjective-map-surjection surjection-Surjection-Into-Truncated-Type
 ```
 
 ### The type of all surjective maps into sets
 
 ```agda
-Surjective-Map-Into-Set :
+Surjection-Into-Set :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-Surjective-Map-Into-Set l2 A = Σ (UU-Set l2) (λ X → A ↠ type-Set X)
+Surjection-Into-Set l2 A = Surjection-Into-Truncated-Type l2 zero-𝕋 A
 
-emb-surjective-map-Surjective-Map-Into-Set :
+emb-inclusion-Surjection-Into-Set :
   {l1 : Level} (l2 : Level) (A : UU l1) →
-  Surjective-Map-Into-Set l2 A ↪ Surjective-Map l2 A
-emb-surjective-map-Surjective-Map-Into-Set l2 A =
-  emb-Σ (λ X → A ↠ X) (emb-type-Set l2) (λ X → id-emb)
+  Surjection-Into-Set l2 A ↪ Surjection l2 A
+emb-inclusion-Surjection-Into-Set l2 A =
+  emb-inclusion-Surjection-Into-Truncated-Type l2 zero-𝕋 A
 
-surjective-map-Surjective-Map-Into-Set :
+inclusion-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} →
-  Surjective-Map-Into-Set l2 A → Surjective-Map l2 A
-surjective-map-Surjective-Map-Into-Set {l1} {l2} {A} =
-  map-emb (emb-surjective-map-Surjective-Map-Into-Set l2 A)
+  Surjection-Into-Set l2 A → Surjection l2 A
+inclusion-Surjection-Into-Set {l1} {l2} {A} =
+  inclusion-Surjection-Into-Truncated-Type
 
 module _
-  {l1 l2 : Level} {A : UU l1} (f : Surjective-Map-Into-Set l2 A)
+  {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set l2 A)
   where
 
-  set-Surjective-Map-Into-Set : UU-Set l2
-  set-Surjective-Map-Into-Set = pr1 f
+  set-Surjection-Into-Set : UU-Set l2
+  set-Surjection-Into-Set = truncated-type-Surjection-Into-Truncated-Type f
 
-  type-Surjective-Map-Into-Set : UU l2
-  type-Surjective-Map-Into-Set = type-Set set-Surjective-Map-Into-Set
+  type-Surjection-Into-Set : UU l2
+  type-Surjection-Into-Set = type-Surjection-Into-Truncated-Type f
 
-  is-set-type-Surjective-Map-Into-Set :
-    is-set type-Surjective-Map-Into-Set
-  is-set-type-Surjective-Map-Into-Set =
-    is-set-type-Set set-Surjective-Map-Into-Set
+  is-set-type-Surjection-Into-Set : is-set type-Surjection-Into-Set
+  is-set-type-Surjection-Into-Set =
+    is-trunc-type-Surjection-Into-Truncated-Type f
 
-  surjection-Surjective-Map-Into-Set :
-    A ↠ type-Surjective-Map-Into-Set
-  surjection-Surjective-Map-Into-Set = pr2 f
+  surjection-Surjection-Into-Set : A ↠ type-Surjection-Into-Set
+  surjection-Surjection-Into-Set = surjection-Surjection-Into-Truncated-Type f
 
-  map-Surjective-Map-Into-Set : A → type-Surjective-Map-Into-Set
-  map-Surjective-Map-Into-Set =
-    map-surjection surjection-Surjective-Map-Into-Set
+  map-Surjection-Into-Set : A → type-Surjection-Into-Set
+  map-Surjection-Into-Set = map-Surjection-Into-Truncated-Type f
 
-  is-surjective-map-Surjective-Map-Into-Set :
-    is-surjective map-Surjective-Map-Into-Set
-  is-surjective-map-Surjective-Map-Into-Set =
-    is-surjective-map-surjection surjection-Surjective-Map-Into-Set
+  is-inclusion-Surjection-Into-Set : is-surjective map-Surjection-Into-Set
+  is-inclusion-Surjection-Into-Set =
+    is-inclusion-Surjection-Into-Truncated-Type f
 ```
 
 ## Properties
@@ -401,95 +452,135 @@ module _
     map-inv-equiv (extensionality-surjection g)
 ```
 
-### Characterization of the identity type of `Surjective-Map l2 A`
+### Characterization of the identity type of `Surjection l2 A`
 
 ```agda
-equiv-Surjective-Map :
+equiv-Surjection :
   {l1 l2 l3 : Level} {A : UU l1} →
-  Surjective-Map l2 A → Surjective-Map l3 A → UU (l1 ⊔ l2 ⊔ l3)
-equiv-Surjective-Map f g =
-  Σ ( type-Surjective-Map f ≃ type-Surjective-Map g)
-    ( λ e → (map-equiv e ∘ map-Surjective-Map f) ~ map-Surjective-Map g)
+  Surjection l2 A → Surjection l3 A → UU (l1 ⊔ l2 ⊔ l3)
+equiv-Surjection f g =
+  Σ ( type-Surjection f ≃ type-Surjection g)
+    ( λ e → (map-equiv e ∘ map-Surjection f) ~ map-Surjection g)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (f : Surjective-Map l2 A)
+  {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)
   where
 
-  id-equiv-Surjective-Map : equiv-Surjective-Map f f
-  pr1 id-equiv-Surjective-Map = id-equiv
-  pr2 id-equiv-Surjective-Map = refl-htpy
+  id-equiv-Surjection : equiv-Surjection f f
+  pr1 id-equiv-Surjection = id-equiv
+  pr2 id-equiv-Surjection = refl-htpy
 
-  is-contr-total-equiv-Surjective-Map :
-    is-contr (Σ (Surjective-Map l2 A) (equiv-Surjective-Map f))
-  is-contr-total-equiv-Surjective-Map =
+  is-contr-total-equiv-Surjection :
+    is-contr (Σ (Surjection l2 A) (equiv-Surjection f))
+  is-contr-total-equiv-Surjection =
     is-contr-total-Eq-structure
-      ( λ Y g e → (map-equiv e ∘ map-Surjective-Map f) ~ map-surjection g)
-      ( is-contr-total-equiv (type-Surjective-Map f))
-      ( pair (type-Surjective-Map f) id-equiv)
-      ( is-contr-total-htpy-surjection (surjection-Surjective-Map f))
+      ( λ Y g e → (map-equiv e ∘ map-Surjection f) ~ map-surjection g)
+      ( is-contr-total-equiv (type-Surjection f))
+      ( pair (type-Surjection f) id-equiv)
+      ( is-contr-total-htpy-surjection (surjection-Surjection f))
 
-  equiv-eq-Surjective-Map :
-    (g : Surjective-Map l2 A) → (f ＝ g) → equiv-Surjective-Map f g
-  equiv-eq-Surjective-Map .f refl = id-equiv-Surjective-Map
+  equiv-eq-Surjection :
+    (g : Surjection l2 A) → (f ＝ g) → equiv-Surjection f g
+  equiv-eq-Surjection .f refl = id-equiv-Surjection
 
-  is-equiv-equiv-eq-Surjective-Map :
-    (g : Surjective-Map l2 A) → is-equiv (equiv-eq-Surjective-Map g)
-  is-equiv-equiv-eq-Surjective-Map =
+  is-equiv-equiv-eq-Surjection :
+    (g : Surjection l2 A) → is-equiv (equiv-eq-Surjection g)
+  is-equiv-equiv-eq-Surjection =
     fundamental-theorem-id
-      is-contr-total-equiv-Surjective-Map
-      equiv-eq-Surjective-Map
+      is-contr-total-equiv-Surjection
+      equiv-eq-Surjection
 
-  extensionality-Surjective-Map :
-    (g : Surjective-Map l2 A) → (f ＝ g) ≃ equiv-Surjective-Map f g
-  pr1 (extensionality-Surjective-Map g) = equiv-eq-Surjective-Map g
-  pr2 (extensionality-Surjective-Map g) = is-equiv-equiv-eq-Surjective-Map g
+  extensionality-Surjection :
+    (g : Surjection l2 A) → (f ＝ g) ≃ equiv-Surjection f g
+  pr1 (extensionality-Surjection g) = equiv-eq-Surjection g
+  pr2 (extensionality-Surjection g) = is-equiv-equiv-eq-Surjection g
 
-  eq-equiv-Surjective-Map :
-    (g : Surjective-Map l2 A) → equiv-Surjective-Map f g → f ＝ g
-  eq-equiv-Surjective-Map g = map-inv-equiv (extensionality-Surjective-Map g)
+  eq-equiv-Surjection :
+    (g : Surjection l2 A) → equiv-Surjection f g → f ＝ g
+  eq-equiv-Surjection g = map-inv-equiv (extensionality-Surjection g)
 ```
 
-### Characterization of the identity type of `Surjective-Map-Into-Set l2 A`
+### Characterization of the identity type of `Surjection-Into-Truncated-Type l2 k A`
 
 ```agda
-equiv-Surjective-Map-Into-Set :
-  {l1 l2 l3 : Level} {A : UU l1} → Surjective-Map-Into-Set l2 A →
-  Surjective-Map-Into-Set l3 A → UU (l1 ⊔ l2 ⊔ l3)
-equiv-Surjective-Map-Into-Set f g =
-  equiv-Surjective-Map
-    ( surjective-map-Surjective-Map-Into-Set f)
-    ( surjective-map-Surjective-Map-Into-Set g)
+equiv-Surjection-Into-Truncated-Type :
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} →
+  Surjection-Into-Truncated-Type l2 k A →
+  Surjection-Into-Truncated-Type l3 k A → UU (l1 ⊔ l2 ⊔ l3)
+equiv-Surjection-Into-Truncated-Type f g =
+  equiv-Surjection
+    ( inclusion-Surjection-Into-Truncated-Type f)
+    ( inclusion-Surjection-Into-Truncated-Type g)
 
-id-equiv-Surjective-Map-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (f : Surjective-Map-Into-Set l2 A) →
-  equiv-Surjective-Map-Into-Set f f
-id-equiv-Surjective-Map-Into-Set f =
-  id-equiv-Surjective-Map (surjective-map-Surjective-Map-Into-Set f)
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (f : Surjection-Into-Truncated-Type l2 k A)
+  where
 
-extensionality-Surjective-Map-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (f g : Surjective-Map-Into-Set l2 A) →
-  (f ＝ g) ≃ equiv-Surjective-Map-Into-Set f g
-extensionality-Surjective-Map-Into-Set {l1} {l2} {A} f g =
-  ( extensionality-Surjective-Map
-    ( surjective-map-Surjective-Map-Into-Set f)
-    ( surjective-map-Surjective-Map-Into-Set g)) ∘e
-  ( equiv-ap-emb (emb-surjective-map-Surjective-Map-Into-Set l2 A))
+  id-equiv-Surjection-Into-Truncated-Type :
+    equiv-Surjection-Into-Truncated-Type f f
+  id-equiv-Surjection-Into-Truncated-Type =
+    id-equiv-Surjection (inclusion-Surjection-Into-Truncated-Type f)
 
-equiv-eq-Surjective-Map-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (f g : Surjective-Map-Into-Set l2 A) →
-  (f ＝ g) → equiv-Surjective-Map-Into-Set f g
-equiv-eq-Surjective-Map-Into-Set f g =
-  map-equiv (extensionality-Surjective-Map-Into-Set f g)
+  extensionality-Surjection-Into-Truncated-Type :
+    (g : Surjection-Into-Truncated-Type l2 k A) →
+    (f ＝ g) ≃ equiv-Surjection-Into-Truncated-Type f g
+  extensionality-Surjection-Into-Truncated-Type g =
+    ( extensionality-Surjection
+      ( inclusion-Surjection-Into-Truncated-Type f)
+      ( inclusion-Surjection-Into-Truncated-Type g)) ∘e
+    ( equiv-ap-emb (emb-inclusion-Surjection-Into-Truncated-Type l2 k A))
 
-refl-equiv-eq-Surjective-Map-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (f : Surjective-Map-Into-Set l2 A) →
-  equiv-eq-Surjective-Map-Into-Set f f refl ＝
-  id-equiv-Surjective-Map-Into-Set f
-refl-equiv-eq-Surjective-Map-Into-Set f = refl
+  equiv-eq-Surjection-Into-Truncated-Type :
+    (g : Surjection-Into-Truncated-Type l2 k A) →
+    (f ＝ g) → equiv-Surjection-Into-Truncated-Type f g
+  equiv-eq-Surjection-Into-Truncated-Type g =
+    map-equiv (extensionality-Surjection-Into-Truncated-Type g)
 
-eq-equiv-Surjective-Map-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (f g : Surjective-Map-Into-Set l2 A) →
-  equiv-Surjective-Map-Into-Set f g → f ＝ g
-eq-equiv-Surjective-Map-Into-Set f g =
-  map-inv-equiv (extensionality-Surjective-Map-Into-Set f g)
+  refl-equiv-eq-Surjection-Into-Truncated-Type :
+    equiv-eq-Surjection-Into-Truncated-Type f refl ＝
+    id-equiv-Surjection-Into-Truncated-Type
+  refl-equiv-eq-Surjection-Into-Truncated-Type = refl
+
+  eq-equiv-Surjection-Into-Truncated-Type :
+    (g : Surjection-Into-Truncated-Type l2 k A) →
+    equiv-Surjection-Into-Truncated-Type f g → f ＝ g
+  eq-equiv-Surjection-Into-Truncated-Type g =
+    map-inv-equiv (extensionality-Surjection-Into-Truncated-Type g)
+```
+
+### Characterization of the identity type of `Surjection-Into-Set l2 A`
+
+```agda
+equiv-Surjection-Into-Set :
+  {l1 l2 l3 : Level} {A : UU l1} → Surjection-Into-Set l2 A →
+  Surjection-Into-Set l3 A → UU (l1 ⊔ l2 ⊔ l3)
+equiv-Surjection-Into-Set = equiv-Surjection-Into-Truncated-Type
+
+id-equiv-Surjection-Into-Set :
+  {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set l2 A) →
+  equiv-Surjection-Into-Set f f
+id-equiv-Surjection-Into-Set = id-equiv-Surjection-Into-Truncated-Type
+
+extensionality-Surjection-Into-Set :
+  {l1 l2 : Level} {A : UU l1} (f g : Surjection-Into-Set l2 A) →
+  (f ＝ g) ≃ equiv-Surjection-Into-Set f g
+extensionality-Surjection-Into-Set =
+  extensionality-Surjection-Into-Truncated-Type
+
+equiv-eq-Surjection-Into-Set :
+  {l1 l2 : Level} {A : UU l1} (f g : Surjection-Into-Set l2 A) →
+  (f ＝ g) → equiv-Surjection-Into-Set f g
+equiv-eq-Surjection-Into-Set = equiv-eq-Surjection-Into-Truncated-Type
+
+refl-equiv-eq-Surjection-Into-Set :
+  {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set l2 A) →
+  equiv-eq-Surjection-Into-Set f f refl ＝
+  id-equiv-Surjection-Into-Set f
+refl-equiv-eq-Surjection-Into-Set = refl-equiv-eq-Surjection-Into-Truncated-Type
+
+eq-equiv-Surjection-Into-Set :
+  {l1 l2 : Level} {A : UU l1} (f g : Surjection-Into-Set l2 A) →
+  equiv-Surjection-Into-Set f g → f ＝ g
+eq-equiv-Surjection-Into-Set = eq-equiv-Surjection-Into-Truncated-Type
 ```
