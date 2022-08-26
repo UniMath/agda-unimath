@@ -15,6 +15,7 @@ open import foundation.2-types public
 open import foundation.algebras-polynomial-endofunctors public
 open import foundation.apartness-relations public
 open import foundation.automorphisms public
+open import foundation.axiom-l public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
 open import foundation.binary-embeddings public
