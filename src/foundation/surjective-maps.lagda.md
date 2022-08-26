@@ -415,6 +415,33 @@ module _
       is-surjective-left-factor (g ∘ h) g h refl-htpy
 ```
 
+### Surjective maps are -1-connected
+
+```agda
+is-neg-one-connected-map-is-surjective :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-surjective f → is-connected-map neg-one-𝕋 f
+is-neg-one-connected-map-is-surjective H b =
+  is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
+```
+
+### Precomposing functions into a family of (k+1)-types by a surjective map is a k-truncated map
+
+```agda
+is-trunc-map-precomp-Π-is-surjective :
+  {l1 l2 l3 : Level} (k : 𝕋) →
+  {A : UU l1} {B : UU l2} {f : A → B} → is-surjective f →
+  (P : B → Truncated-Type l3 (succ-𝕋 k)) →
+  is-trunc-map k (precomp-Π f (λ b → type-Truncated-Type (P b)))
+is-trunc-map-precomp-Π-is-surjective k H =
+  is-trunc-map-precomp-Π-is-connected-map
+    ( neg-one-𝕋)
+    ( succ-𝕋 k)
+    ( k)
+    ( refl)
+    ( is-neg-one-connected-map-is-surjective H)
+```
+
 ### Characterization of the identity type of `A ↠ B`
 
 ```agda
@@ -553,6 +580,8 @@ module _
     map-inv-equiv (extensionality-Surjection-Into-Truncated-Type g)
 ```
 
+### The type `Surjection-Into-Truncated-Type l2 (succ-𝕋 k) A` is `k`-truncated
+
 ### Characterization of the identity type of `Surjection-Into-Set l2 A`
 
 ```agda
@@ -587,31 +616,4 @@ eq-equiv-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f g : Surjection-Into-Set l2 A) →
   equiv-Surjection-Into-Set f g → f ＝ g
 eq-equiv-Surjection-Into-Set = eq-equiv-Surjection-Into-Truncated-Type
-```
-
-### Surjective maps are -1-connected
-
-```agda
-is-neg-one-connected-map-is-surjective :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-surjective f → is-connected-map neg-one-𝕋 f
-is-neg-one-connected-map-is-surjective H b =
-  is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
-```
-
-### Precomposing functions into a family of (k+1)-types by a surjective map is a k-truncated map
-
-```agda
-is-trunc-map-precomp-Π-is-surjective :
-  {l1 l2 l3 : Level} (k : 𝕋) →
-  {A : UU l1} {B : UU l2} {f : A → B} → is-surjective f →
-  (P : B → Truncated-Type l3 (succ-𝕋 k)) →
-  is-trunc-map k (precomp-Π f (λ b → type-Truncated-Type (P b)))
-is-trunc-map-precomp-Π-is-surjective k H =
-  is-trunc-map-precomp-Π-is-connected-map
-    ( neg-one-𝕋)
-    ( succ-𝕋 k)
-    ( k)
-    ( refl)
-    ( is-neg-one-connected-map-is-surjective H)
 ```
