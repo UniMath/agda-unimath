@@ -24,7 +24,7 @@ open import foundation-core.equivalences using
 open import foundation-core.function-extensionality using (htpy-eq; funext)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (_＝_; refl; left-inv; ap; tr)
-open import foundation-core.propositions using (is-prop)
+open import foundation-core.propositions using (is-prop; Π-Prop)
 open import foundation-core.retractions using (_retract-of_; retract-eq)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)

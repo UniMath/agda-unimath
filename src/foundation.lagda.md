@@ -62,6 +62,7 @@ open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
+open import foundation.discrete-reflexive-relations public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-powersets public
@@ -158,6 +159,7 @@ open import foundation.pullbacks public
 open import foundation.ranks-of-elements-w-types public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
+open import foundation.reflexive-relations public
 open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
