@@ -29,7 +29,7 @@ open import group-theory.groups using
 
 A commutator gives an indication of the extent to which a group multiplication fails to be commutative.
 
-The commutator of two elements, g and h, of a group G, is the element `[g, h] = ghg⁻¹h⁻¹`.
+The commutator of two elements, g and h, of a group G, is the element `[g, h] = g∙hg⁻¹h⁻¹`.
 
 https://en.wikipedia.org/wiki/Commutator#Group_theory
 
@@ -40,25 +40,10 @@ https://en.wikipedia.org/wiki/Commutator#Group_theory
 module _
   {l : Level} (G : Group l)
   where
-  private
-    -- TODO: Use named parameterized modules to simulate records
-    -- instead of using this private section
-    -- or try to follow the style conventions of the rest of the library,
-    -- hopfully finding a way to do it without being super verbose
-    GT = type-Group G
-    _*_ = mul-Group G
-    infixl 30 _*_
-    _⁻¹ = inv-Group G
-    infix 40 _⁻¹
-    unit = unit-Group G
 
-  commutator-Group : GT → GT → GT
-  commutator-Group x y = x * y * x ⁻¹ * y ⁻¹
-  -- commutator-Group : type-Group G → type-Group G → type-Group G
-  -- commutator-Group x y = mul-Group G (mul-Group G (mul-Group G x y) (inv-Group G x)) (inv-Group G y)
-
-  private
-    [_,_] = commutator-Group
+  commutator-Group : type-Group G → type-Group G → type-Group G
+  commutator-Group x y = mul-Group G (mul-Group G (mul-Group G x y) (inv-Group G x)) (inv-Group G y)
+  -- commutator-Group x y = x * y * x ⁻¹ * y ⁻¹
 
 ```
 
@@ -68,9 +53,19 @@ module _
 
 ```agda
 
-  commutor-is-unit-when-commutes : (x y : GT) → (x * y ＝ y * x) → [ x , y ] ＝ unit
+  private
+    -- Shorter names to make proofs less verbose
+    _*_ = mul-Group G
+    infixl 30 _*_
+    _⁻¹ = inv-Group G
+    infix 40 _⁻¹
+    unit = unit-Group G
+
+    -- [_,_] = commutator-Group
+
+  commutor-is-unit-when-commutes : ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group x y ＝ unit-Group G
   commutor-is-unit-when-commutes x y commutes =
-    [ x , y ]             ＝ by refl to
+    commutator-Group x y  ＝ by refl to
     (x * y) * x ⁻¹ * y ⁻¹ ＝ by ap (λ z → (z * (x ⁻¹)) * (y ⁻¹)) commutes to
     (y * x) * x ⁻¹ * y ⁻¹ ＝ by ap (_* (y ⁻¹)) (associative-mul-Group G y x (x ⁻¹)) to
     y * (x * x ⁻¹) * y ⁻¹ ＝ by ap (λ z → (y * z) * (y ⁻¹)) (right-inverse-law-mul-Group G x) to
@@ -78,7 +73,7 @@ module _
     y * y ⁻¹              ＝ by right-inverse-law-mul-Group G y to
     unit                  ∎
 
-  commutes-when-commutor-is-unit : (x y : GT) → ([ x , y ] ＝ unit) → x * y ＝ y * x
+  commutes-when-commutor-is-unit : ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
   commutes-when-commutor-is-unit x y comm-unit =
     x * y                         ＝ by inv (right-unit-law-mul-Group G (x * y)) to
     x * y * unit                  ＝ by ap (λ z → (x * y) * z) (inv (left-inverse-law-mul-Group G x)) to
@@ -88,7 +83,7 @@ module _
                                            (inv (left-inverse-law-mul-Group G y)) to
     x * y * x ⁻¹ * (y ⁻¹ * y) * x ＝ by ap (_* x) (inv (associative-mul-Group G (x * y * x ⁻¹) (y ⁻¹) y)) to
     x * y * x ⁻¹ * y ⁻¹ * y * x   ＝ by refl to
-    [ x , y ] * y * x             ＝ by ap (λ z → z * y * x) comm-unit to
+    commutator-Group x y * y * x  ＝ by ap (λ z → z * y * x) comm-unit to
     unit * y * x                  ＝ by ap (_* x) (left-unit-law-mul-Group G y) to
     y * x                         ∎
 ```
