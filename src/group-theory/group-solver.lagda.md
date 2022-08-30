@@ -135,19 +135,23 @@ module _
     simplifyGS (inner n) = cons (pure-SE n) nil
 
     data GroupEquality : GroupSyntax n → GroupSyntax n → UU where
+      -- equivalence relation
       refl-GE : ∀ {x} → GroupEquality x x
       sym-GE : ∀ {x} {y} → GroupEquality x y → GroupEquality y x
       _∙GE_ : ∀ {x} {y} {z} → GroupEquality x y → GroupEquality y z → GroupEquality x z
 
+      -- Variations on ap
       ap-gMul : ∀ {x} {y} {z} {w} → GroupEquality x y → GroupEquality z w → GroupEquality (gMul x z) (gMul y w)
       ap-gInv : ∀ {x} {y} → GroupEquality x y → GroupEquality (gInv x) (gInv y)
 
+      -- Group laws
       assoc-GE : ∀ x y z → GroupEquality (gMul (gMul x y) z) (gMul x (gMul y z))
       l-unit : ∀ x → GroupEquality (gMul gUnit x) x
       r-unit : ∀ x → GroupEquality (gMul x gUnit) x
       l-inv : ∀ x → GroupEquality (gMul (gInv x) x) gUnit
       r-inv : ∀ x → GroupEquality (gMul x (gInv x)) gUnit
 
+      -- Theorems that are provable from the others
       inv-unit-GE : GroupEquality (gInv gUnit) gUnit
       inv-inv-GE : ∀ x → GroupEquality (gInv (gInv x)) x
       distr-inv-mul-GE : ∀ x y → GroupEquality (gInv (gMul x y)) (gMul (gInv y) (gInv x))
@@ -194,14 +198,14 @@ module _
     ... | inl refl =
       assoc-GE' _ _ _ ∙GE
       ap-gMul-l val ∙GE
-      sym-GE (assoc-GE' _ _ _) ∙GE
+      assoc-GE _ _ _ ∙GE
       ap-gMul-r (r-inv _) ∙GE r-unit _
     ... | inr neq = assoc-GE' _ _ _ ∙GE ap-gMul val refl-GE
     concat-simplify-valid (cons xi@(pure-SE x) a) b | yab@(cons (inv-SE y) ab) | val with finEq x y
     ... | inl refl =
       assoc-GE' _ _ _ ∙GE
       ap-gMul-l val ∙GE
-      sym-GE (assoc-GE' _ _ _) ∙GE
+      assoc-GE _ _ _ ∙GE
       ap-gMul-r (l-inv _) ∙GE r-unit _
     ... | inr neq = assoc-GE' _ _ _ ∙GE ap-gMul-l val
     concat-simplify-valid (cons xi@(pure-SE x) a) b | yab@(cons (pure-SE y) ab) | val =
