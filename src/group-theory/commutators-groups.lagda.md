@@ -20,6 +20,8 @@ open import group-theory.groups using
   ; left-inverse-law-mul-Group
   ; right-unit-law-mul-Group
   ; left-unit-law-mul-Group
+  ; distributive-inv-mul-Group
+  ; inv-inv-Group
   )
 
 ```
@@ -54,7 +56,7 @@ module _
 ```agda
 
   private
-    -- Shorter names to make proofs less verbose
+    -- Shorter names to make the proofs less verbose
     _*_ = mul-Group G
     infixl 30 _*_
     _⁻¹ = inv-Group G
@@ -63,7 +65,8 @@ module _
 
     -- [_,_] = commutator-Group
 
-  commutor-is-unit-when-commutes : ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group x y ＝ unit-Group G
+  commutor-is-unit-when-commutes :
+    ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group x y ＝ unit-Group G
   commutor-is-unit-when-commutes x y commutes =
     commutator-Group x y  ＝ by refl to
     (x * y) * x ⁻¹ * y ⁻¹ ＝ by ap (λ z → (z * (x ⁻¹)) * (y ⁻¹)) commutes to
@@ -73,7 +76,8 @@ module _
     y * y ⁻¹              ＝ by right-inverse-law-mul-Group G y to
     unit                  ∎
 
-  commutes-when-commutor-is-unit : ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
+  commutes-when-commutor-is-unit :
+    ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
   commutes-when-commutor-is-unit x y comm-unit =
     x * y                         ＝ by inv (right-unit-law-mul-Group G (x * y)) to
     x * y * unit                  ＝ by ap (λ z → (x * y) * z) (inv (left-inverse-law-mul-Group G x)) to
@@ -86,4 +90,17 @@ module _
     commutator-Group x y * y * x  ＝ by ap (λ z → z * y * x) comm-unit to
     unit * y * x                  ＝ by ap (_* x) (left-unit-law-mul-Group G y) to
     y * x                         ∎
+
+  inv-Commutator-law : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+  inv-Commutator-law x y =
+    inv-Group G (commutator-Group x y) ＝ by refl to
+    (x * y * x ⁻¹ * y ⁻¹) ⁻¹           ＝ by distributive-inv-mul-Group G (x * y * x ⁻¹) (y ⁻¹) to
+    y ⁻¹ ⁻¹ * (x * y * x ⁻¹) ⁻¹        ＝ by ap (_* ((x * y * x ⁻¹) ⁻¹)) (inv-inv-Group G y) to
+    y * (x * y * x ⁻¹) ⁻¹              ＝ by ap (y *_) (distributive-inv-mul-Group G (x * y) (x ⁻¹)) to
+    y * (x ⁻¹ ⁻¹ * (x * y) ⁻¹)         ＝ by inv (associative-mul-Group G y ((x ⁻¹) ⁻¹) ((x * y) ⁻¹)) to
+    y * x ⁻¹ ⁻¹ * (x * y) ⁻¹           ＝ by ap (λ z → (y * z) * ((x * y) ⁻¹)) (inv-inv-Group G x) to
+    y * x * (x * y) ⁻¹                 ＝ by ap ((y * x) *_) (distributive-inv-mul-Group G x y) to
+    y * x * (y ⁻¹ * x ⁻¹)              ＝ by inv (associative-mul-Group G (y * x) (y ⁻¹) (x ⁻¹)) to
+    y * x * y ⁻¹ * x ⁻¹                ＝ by refl to
+    commutator-Group y x               ∎
 ```
