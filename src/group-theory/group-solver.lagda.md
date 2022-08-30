@@ -273,6 +273,11 @@ module _
     simplifyValid (inner _) = sym-GE (l-unit _)
     -- simplifyValid (inner _) = refl-GE
 
+    simplifyExpression :
+      ∀ (g : GroupSyntax n) (env : Env n (type-Group G)) →
+      unQuoteGS g env ＝ unQuoteGS (unquoteSimple (simplifyGS g)) env
+    simplifyExpression g env = useGroupEquality env (simplifyValid g)
+
   private
     _*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
     _*'_ = gMul
@@ -284,6 +289,9 @@ module _
     infixl 20 _*'_
     ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (gUnit *' y *' x *' gInv y *' gInv x)
     ex1 = simplifyValid _
+
+    ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (unit * y * x * y ⁻¹ * x ⁻¹)
+    ex2 x' y' = simplifyExpression (gInv (x *' y *' gInv x *' gInv y)) (x' ∷ y' ∷ empty-vec)
 
     _ : UU
     -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
