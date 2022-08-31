@@ -251,7 +251,8 @@ module _
       : ∀ {x y : GroupSyntax n} (env : Env n (type-Group G))
       → GroupEquality x y → unQuoteGS x env ＝ unQuoteGS y env
     useGroupEquality env refl-GE = refl
-    useGroupEquality env (x ∷GE xs) = useGroupEqualityElem env x ∙ useGroupEquality env xs
+    useGroupEquality env (x ∷GE refl-GE) = useGroupEqualityElem env x
+    useGroupEquality env (x ∷GE xs@(_ ∷GE _)) = useGroupEqualityElem env x ∙ useGroupEquality env xs
 
     assoc-GE' : ∀ x y z → GroupEquality (gMul x (gMul y z)) (gMul (gMul x y) z)
     assoc-GE' x y z = sym-GE (assoc-GE x y z)
