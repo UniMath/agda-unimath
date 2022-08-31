@@ -13,12 +13,14 @@ open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
+open import foundation.equational-reasoning
 open import foundation.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; is-emb-is-equiv)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; ap-binary; inv; _∙_; ap; refl)
+open import foundation.identity-types using
+  ( Id; ap-binary; inv; _∙_; ap; refl; _＝_)
 open import foundation.injective-maps using
   ( is-injective; is-injective-is-equiv)
 open import foundation.propositions using
@@ -80,7 +82,11 @@ is-group G =
 Group :
   (l : Level) → UU (lsuc l)
 Group l = Σ (Semigroup l) is-group
+```
 
+### The underlying structure of a group
+
+```agda
 module _
   {l : Level} (G : Group l)
   where
@@ -110,6 +116,9 @@ module _
   
   mul-Group' : type-Group → type-Group → type-Group
   mul-Group' x y = mul-Group y x
+
+  commute-Group : type-Group → type-Group → UU l
+  commute-Group x y = mul-Group x y ＝ mul-Group y x
   
   associative-mul-Group :
     (x y z : type-Group) →
@@ -170,16 +179,23 @@ module _
   inv-unit-Group =
     ( inv (left-unit-law-mul-Group (inv-Group unit-Group))) ∙
       ( right-inverse-law-mul-Group unit-Group)
+```
+
+### Multiplication by `x` from the left is an equivalence
+
+```agda
+  left-div-Group : type-Group → type-Group → type-Group
+  left-div-Group x y = mul-Group (inv-Group x) y
 
   issec-mul-inv-Group :
-    (x : type-Group) → (mul-Group x ∘ mul-Group (inv-Group x)) ~ id
+    (x : type-Group) → (mul-Group x ∘ left-div-Group x) ~ id
   issec-mul-inv-Group x y =
     ( inv (associative-mul-Group _ _ _)) ∙
     ( ( ap (mul-Group' y) (right-inverse-law-mul-Group x)) ∙
       ( left-unit-law-mul-Group y))
 
   isretr-mul-inv-Group :
-    (x : type-Group) → (mul-Group (inv-Group x) ∘ mul-Group x) ~ id
+    (x : type-Group) → (left-div-Group x ∘ mul-Group x) ~ id
   isretr-mul-inv-Group x y =
     ( inv (associative-mul-Group _ _ _)) ∙
     ( ( ap (mul-Group' y) (left-inverse-law-mul-Group x)) ∙
@@ -188,23 +204,30 @@ module _
   is-equiv-mul-Group : (x : type-Group) → is-equiv (mul-Group x)
   is-equiv-mul-Group x =
     is-equiv-has-inverse
-      ( mul-Group (inv-Group x))
+      ( left-div-Group x)
       ( issec-mul-inv-Group x)
       ( isretr-mul-inv-Group x)
   
   equiv-mul-Group : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group x) = mul-Group x
   pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
+```
+
+### Multiplication by `x` from the right is an equivalence
+
+```agda
+  right-div-Group : type-Group → type-Group → type-Group
+  right-div-Group y x = mul-Group x (inv-Group y)
 
   issec-mul-inv-Group' :
-    (x : type-Group) → (mul-Group' x ∘ mul-Group' (inv-Group x)) ~ id
+    (x : type-Group) → (mul-Group' x ∘ right-div-Group x) ~ id
   issec-mul-inv-Group' x y =
     ( associative-mul-Group _ _ _) ∙
     ( ( ap (mul-Group y) (left-inverse-law-mul-Group x)) ∙
       ( right-unit-law-mul-Group y))
 
   isretr-mul-inv-Group' :
-    (x : type-Group) → (mul-Group' (inv-Group x) ∘ mul-Group' x) ~ id
+    (x : type-Group) → (right-div-Group x ∘ mul-Group' x) ~ id
   isretr-mul-inv-Group' x y =
     ( associative-mul-Group _ _ _) ∙
     ( ( ap (mul-Group y) (right-inverse-law-mul-Group x)) ∙
@@ -213,14 +236,18 @@ module _
   is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
-      ( mul-Group' (inv-Group x))
+      ( right-div-Group x)
       ( issec-mul-inv-Group' x)
       ( isretr-mul-inv-Group' x)
   
   equiv-mul-Group' : (x : type-Group) → type-Group ≃ type-Group
   pr1 (equiv-mul-Group' x) = mul-Group' x
   pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
+```
 
+### Multiplication is a binary equivalence and a binary embedding
+
+```agda
   is-binary-equiv-mul-Group : is-binary-equiv mul-Group
   pr1 is-binary-equiv-mul-Group = is-equiv-mul-Group'
   pr2 is-binary-equiv-mul-Group = is-equiv-mul-Group
@@ -240,7 +267,11 @@ module _
 
   is-injective-mul-Group' : (x : type-Group) → is-injective (mul-Group' x)
   is-injective-mul-Group' x = is-injective-is-equiv (is-equiv-mul-Group' x)
+```
 
+### Transposition laws for equalities in groups
+
+```agda
   transpose-eq-mul-Group :
     {x y z : type-Group} →
     Id (mul-Group x y) z → Id x (mul-Group z (inv-Group y))
@@ -256,7 +287,11 @@ module _
     ( ( inv (left-unit-law-mul-Group y)) ∙
       ( ap (mul-Group' y) (inv (left-inverse-law-mul-Group x)))) ∙
     ( associative-mul-Group (inv-Group x) x y)
+```
 
+### Distributivity of inverses over multiplication
+
+```agda
   distributive-inv-mul-Group :
     (x y : type-Group) →
     Id (inv-Group (mul-Group x y)) (mul-Group (inv-Group y) (inv-Group x))
@@ -266,7 +301,11 @@ module _
           ( ( associative-mul-Group (inv-Group (mul-Group x y)) x y) ∙
             ( left-inverse-law-mul-Group (mul-Group x y)))) ∙
         ( left-unit-law-mul-Group (inv-Group y)))
-        
+```
+
+### Inverting elements of a group is an involution
+
+```agda
   inv-inv-Group :
     (x : type-Group) → Id (inv-Group (inv-Group x)) x
   inv-inv-Group x =
@@ -296,12 +335,13 @@ abstract
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
-        ( λ x →                                             -- ix
-          ( inv (left-unit-G (i x))) ∙                      -- = 1·(ix)
-          ( ( ap (λ y → μ y (i x)) (inv (left-inv-i' x))) ∙ -- = (i'x·x)·(ix)
-            ( ( assoc-G (i' x) x (i x)) ∙                   -- = (i'x)·(x·ix)
-              ( ( ap (μ (i' x)) (right-inv-i x)) ∙          -- = (i'x)·1
-                ( right-unit-G (i' x)))))))                 -- = i'x
+        ( λ x →
+          equational-reasoning
+          i x ＝ μ e (i x)            by ( inv (left-unit-G (i x)) 
+              ＝ μ (μ (i' x) x) (i x) by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
+              ＝ μ (i' x) (μ x (i x)) by assoc-G (i' x) x (i x)
+              ＝ μ (i' x) e           by ap (μ (i' x)) (right-inv-i x)
+              ＝ i' x                 by right-unit-G (i' x))))
 
 abstract
   is-prop-is-group :
