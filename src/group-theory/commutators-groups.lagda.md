@@ -62,7 +62,7 @@ We first introduce some shorter names to make the proofs less verbose
 
 ### Demonstration of the group solver
 
-{-
+```agda
   private
     _*_ = mul-Group G
     infixl 30 _*_
@@ -75,23 +75,32 @@ We first introduce some shorter names to make the proofs less verbose
     _*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
     _*'_ = gMul
     infixl 20 _*'_
+  gCommutator : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
+  gCommutator x y = x *' y *' gInv (y *' x)
+
   inv-Commutator-law' : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
-  inv-Commutator-law' x y = simplifyExpr G ? ?
-  -- simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (x *' y *' gInv x *' gInv y))
+  inv-Commutator-law' x y =
+    (commutator-Group x y) ⁻¹  ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (gCommutator x y)) to
+    y * x * y ⁻¹ * x ⁻¹        ＝ by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gCommutator y x)) to
+    commutator-Group y x       ∎
+
+  inv-Commutator-law'' : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+  inv-Commutator-law'' x y =
+    simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (gCommutator x y)) ∙
+      inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gCommutator y x))
 
   commutes-when-commutor-is-unit' :
     ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
   commutes-when-commutor-is-unit' x y comm-unit =
-    x * y                         ＝ by inv (simplifyExpr G (x ∷ (y ∷ empty-vec)) (λ x y → (x *' y *' gInv x *' gInv y *' y *' x))) to
-    x * y * x ⁻¹ * y ⁻¹ * y * x   ＝ by ap (λ z → z * y * x) comm-unit to
-    unit * y * x                  ＝ by simplifyExpr G (x ∷ (y ∷ empty-vec)) (λ x y → (gUnit *' y *' x)) to
+    x * y                         ＝ by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gCommutator x y *' y *' x))) to
+    commutator-Group x y * y * x  ＝ by ap (λ z → z * y * x) comm-unit to
+    unit * y * x                  ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gUnit *' y *' x)) to
     y * x                         ∎
 
   commutor-is-unit-when-commutes' :
     ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group x y ＝ unit-Group G
   commutor-is-unit-when-commutes' x y commutes =
-    x * y * x ⁻¹ * y ⁻¹ ＝ by ap (λ z → z * x ⁻¹ * y ⁻¹) commutes to
-    y * x * x ⁻¹ * y ⁻¹ ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (y *' x *' gInv x *' gInv y)) to
-    unit                  ∎
--}
+    x * y * (y * x) ⁻¹ ＝ by ap (λ z → z * (y * x) ⁻¹) commutes to
+    y * x * (y * x) ⁻¹ ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (y *' x *' gInv (y *' x))) to
+    unit               ∎
 ```
