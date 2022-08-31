@@ -89,9 +89,6 @@ module _ {n : ℕ} where
   unquoteSimple : Simple n → GroupSyntax n
   unquoteSimple nil = gUnit
   unquoteSimple (cons x xs) = unquoteSimpleNonEmpty xs (unquoteSimpleElem x)
-    -- gMul (unquoteSimple xs) (unquoteSimpleElem x)
-  -- unquoteSimple (cons x nil) = unquoteSimpleElem x
-  -- unquoteSimple (cons x xs@(cons _ _)) = gMul (unquoteSimpleElem x) (unquoteSimple xs)
 
   elim-inverses : SimpleElem n → Simple n → Simple n
   elim-inverses x nil = cons x nil
@@ -107,16 +104,6 @@ module _ {n : ℕ} where
   concat-simplify : Simple n → Simple n → Simple n
   concat-simplify nil b = b
   concat-simplify (cons x a) b = elim-inverses x (concat-simplify a b)
-  -- concat-simplify (cons x a) b with concat-simplify a b
-  -- ... | nil = cons x nil
-  -- concat-simplify (cons xi@(inv-SE x) _) _ | yab@(cons (inv-SE y) ab) = cons xi yab
-  -- concat-simplify (cons xi@(inv-SE x) _) _ | yab@(cons (pure-SE y) ab) with finEq x y
-  -- ... | inl eq = ab
-  -- ... | inr neq = cons xi yab
-  -- concat-simplify (cons xi@(pure-SE x) a) b | yab@(cons (inv-SE y) ab) with finEq x y
-  -- ... | inl eq = ab
-  -- ... | inr neq = cons xi yab
-  -- concat-simplify (cons xi@(pure-SE x) a) b | yab@(cons (pure-SE y) ab) = cons xi yab
 
   simplifyGS : GroupSyntax n → Simple n
   simplifyGS gUnit = nil
@@ -217,8 +204,6 @@ module _ {n : ℕ} where
   elim-inverses-valid : ∀ (x : SimpleElem n) (b : Simple n) →
                           GroupEquality (gMul (unquoteSimple b) (unquoteSimpleElem x))
                           (unquoteSimple (elim-inverses x b))
-                        -- GroupEquality (gMul (unquoteSimple b) (unquoteSimple (cons x nil)))
-                        -- (unquoteSimple (concat-simplify (cons x nil) b))
   elim-inverses-valid x nil = l-unit (unquoteSimpleElem x)
   elim-inverses-valid (inv-SE x)  (cons (inv-SE y)  b) = refl-GE
   elim-inverses-valid (inv-SE x)  (cons (pure-SE y) b) with finEq x y
@@ -243,33 +228,6 @@ module _ {n : ℕ} where
                           (unquoteSimple (concat-simplify u w))
   concat-simplify-valid nil b = r-unit (unquoteSimple b)
   concat-simplify-valid (cons x a) b = concat-simplify-nonempty-valid x a b
-  -- concat-simplify-valid (cons x a) b with concat-simplify a b | concat-simplify-valid a b
-  -- -- ... | ab | val = {!!}
-  -- concat-simplify-valid (cons x nil) b | ab | val = {!!}
-  -- concat-simplify-valid (cons x (cons y a)) b | ab | val = {!!}
-
-  -- ... | nil | val = assoc-GE' _ _ _ ∙GE ap-gMul-l val
-  -- concat-simplify-valid (cons xi@(inv-SE x) _) _ | yab@(cons (inv-SE y) ab) | val =
-  --   {!!} -- assoc-GE' _ _ _ ∙GE ap-gMul-l val
-  -- concat-simplify-valid (cons xi@(inv-SE x) _) _ | yab@(cons (pure-SE y) ab) | val with finEq x y
-  -- ... | inl refl =
-  --   {!!}
-  --   -- assoc-GE' _ _ _ ∙GE
-  --   -- ap-gMul-l val ∙GE
-  --   -- assoc-GE _ _ _ ∙GE
-  --   -- ap-gMul-r (r-inv _) ∙GE r-unit _
-  -- ... | inr neq = {!!} -- assoc-GE' _ _ _ ∙GE ap-gMul val refl-GE
-  -- concat-simplify-valid (cons xi@(pure-SE x) a) b | yab@(cons (inv-SE y) ab) | val with finEq x y
-  -- ... | inl refl =
-  --   {!!}
-  --   -- assoc-GE' _ _ _ ∙GE
-  --   -- ap-gMul-l val ∙GE
-  --   -- assoc-GE _ _ _ ∙GE
-  --   -- ap-gMul-r (l-inv _) ∙GE r-unit _
-  -- ... | inr neq = {!!} -- assoc-GE' _ _ _ ∙GE ap-gMul-l val
-  -- concat-simplify-valid (cons xi@(pure-SE x) a) b | yab@(cons (pure-SE y) ab) | val =
-  --   {!!}
-  --   -- assoc-GE' _ _ _ ∙GE ap-gMul-l val
 
   inv-single-valid : ∀ w → GroupEquality
     (gInv (unquoteSimpleElem w))
@@ -277,30 +235,6 @@ module _ {n : ℕ} where
   inv-single-valid (inv-SE x) = inv-inv-GE (inner x)
   inv-single-valid (pure-SE x) = refl-GE
 
-
-  -- inv-simplify-valid : ∀ (w : list (SimpleElem n)) →
-  --                     GroupEquality (gInv (unquoteSimple w))
-  --                     (unquoteSimple (map-list inv-SE' (reverse-list w)))
-  -- inv-simplify-valid nil = inv-unit-GE
-  -- inv-simplify-valid (cons x xs) = {!!}
-  -- inv-simplify-valid (cons x xs) = _∙GE_
-  --   (distr-inv-mul-GE (unquoteSimpleElem x) (unquoteSimple xs))
-  --   (_∙GE_ (ap-gMul (inv-simplify-valid xs) (inv-single-valid x))
-  --     {!gmul-concat!})
-
-  -- inv-simplify-valid (cons x nil) = inv-single-valid x
-  -- inv-simplify-valid (cons x ws@(cons y ys)) = {!IH!}
-  --   where
-  --     IH : GroupEquality (gInv (unquoteSimple ws))
-  --            (unquoteSimple (map-list inv-SE' (reverse-list ws)))
-  --     IH = inv-simplify-valid ws
-  --     Goal : GroupEquality
-  --       (gInv (gMul (unquoteSimpleElem x) (unquoteSimple (cons y ys))))
-  --       (unquoteSimple
-  --       (map-list inv-SE'
-  --         (concat-list (concat-list (reverse-list ys) (in-list y))
-  --         (in-list x))))
-  --     Goal = {!!}
 
   gMul-concat-nonempty : ∀ (w : GroupSyntax n) (as b : Simple n) →
                         GroupEquality (gMul (unquoteSimple b) (unquoteSimpleNonEmpty as w))
@@ -318,8 +252,6 @@ module _ {n : ℕ} where
                 (concat-list xs ys))
   gMul-concat' nil bs = r-unit _
   gMul-concat' (cons x as) b = gMul-concat-nonempty (unquoteSimpleElem x) as b
-    -- assoc-GE' _ _ _ ∙GE ap-gMul (gMul-concat' as b) refl-GE
-
 
   gMul-concat-1 : ∀ (xs : Simple n)
                   (x : SimpleElem n) →
@@ -327,9 +259,6 @@ module _ {n : ℕ} where
                 (unquoteSimple
                 (concat-list xs (cons x nil)))
   gMul-concat-1 xs a = gMul-concat' xs (cons a nil)
-  -- gMul-concat-1 xs a = ap-gMul-l (sym-GE (l-unit _)) ∙GE gMul-concat' xs (cons a nil)
-  -- gMul-concat nil a = _∙GE_ (l-unit _) (sym-GE (r-unit _))
-  -- gMul-concat (cons x as) a = {!!}
 
   inv-simplify-valid'-nonempty : ∀ (x : SimpleElem n) (xs : list (SimpleElem n)) →
                                 GroupEquality (gInv (unquoteSimple (cons x xs)))
@@ -346,9 +275,6 @@ module _ {n : ℕ} where
   inv-simplify-valid' nil = inv-unit-GE
   inv-simplify-valid' (cons x xs) =
     inv-simplify-valid'-nonempty x xs
-    -- distr-inv-mul-GE (unquoteSimple xs) (unquoteSimpleElem x) ∙GE
-    -- ap-gMul (inv-single-valid x) (inv-simplify-valid' xs) ∙GE
-    -- gMul-concat-1 (reverse-list (map-list inv-SE' xs)) (inv-SE' x)
 
   simplifyValid : ∀ (g : GroupSyntax n) → GroupEquality g (unquoteSimple (simplifyGS g))
   simplifyValid gUnit = refl-GE
@@ -357,7 +283,6 @@ module _ {n : ℕ} where
     (concat-simplify-valid (simplifyGS b) (simplifyGS a))
   simplifyValid (gInv g) = ap-gInv (simplifyValid g) ∙GE inv-simplify-valid' (simplifyGS g)
   simplifyValid (inner _) = refl-GE
-  -- simplifyValid (inner _) = refl-GE
 
   Env : ∀ {l} → ℕ → UU l → UU l
   Env n A = vec A n
@@ -383,9 +308,7 @@ module _ {n : ℕ} where
 
     useGroupEqualityElem : ∀ {x y : GroupSyntax n} (env : Env n (type-Group G))
                           → GroupEqualityElem x y → unQuoteGS x env ＝ unQuoteGS y env
-    -- useGroupEqualityElem env (xrefl-GE) = refl
     useGroupEqualityElem env (xsym-GE ge) = inv (useGroupEqualityElem env ge)
-    -- useGroupEqualityElem env (x_∙GE_ ge ge') = useGroupEquality env ge ∙ useGroupEquality env ge'
     useGroupEqualityElem env (xap-gMul-l {z = z} ge') = ap (_* unQuoteGS z env) (useGroupEqualityElem env ge')
     useGroupEqualityElem env (xap-gMul-r {x = x} ge') = ap (unQuoteGS x env *_) (useGroupEqualityElem env ge')
     -- useGroupEqualityElem env (xap-gMul {y = y} {z = z} ge ge') =
@@ -431,8 +354,7 @@ module _ {n : ℕ} where
       ∀ (env : Env n (type-Group G)) (g : n-args n (GroupSyntax n) (GroupSyntax n)) →
       unQuoteGS (apply-n-args n g) env ＝ unQuoteGS (unquoteSimple (simplifyGS (apply-n-args n g))) env
     simplifyExpr env g = simplifyExpression (apply-n-args n g) env
-    -- empty-env : Env zero-ℕ (type-Group G)
-    -- empty-env = empty-vec
+
     open import linear-algebra.vectors using (_∷_ ; empty-vec) public
 
 ```
