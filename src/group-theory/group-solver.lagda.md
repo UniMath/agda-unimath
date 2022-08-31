@@ -417,6 +417,29 @@ module _
       unQuoteGS g env ＝ unQuoteGS (unquoteSimple (simplifyGS g)) env
     simplifyExpression g env = useGroupEquality env (simplifyValid g)
 
+    -- Variadic functions
+    n-args : (n : ℕ) (A B : UU) → UU
+    n-args zero-ℕ A B = B
+    n-args (succ-ℕ n) A B = A → n-args n A B
+    map-n-args : ∀ {A A' B : UU} (n : ℕ) → (A' → A) → n-args n A B → n-args n A' B
+    map-n-args zero-ℕ f v = v
+    map-n-args (succ-ℕ n) f v = λ x → map-n-args n f (v (f x))
+    apply-n-args-fin : ∀ {B : UU} (n : ℕ) → n-args n (Fin n) B → B
+    apply-n-args-fin zero-ℕ f = f
+    apply-n-args-fin (succ-ℕ n) f = apply-n-args-fin n (map-n-args n succ-Fin (f zero-Fin))
+    apply-n-args : ∀ {B : UU} (n : ℕ) → n-args n (GroupSyntax n) B → B
+    apply-n-args n f = apply-n-args-fin n (map-n-args n inner f)
+
+    -- A variation of simplifyExpression which takes a function from the free variables to expr
+    simplifyExpr :
+      ∀ (env : Env n (type-Group G)) (g : n-args n (GroupSyntax n) (GroupSyntax n)) →
+      unQuoteGS (apply-n-args n g) env ＝ unQuoteGS (unquoteSimple (simplifyGS (apply-n-args n g))) env
+    simplifyExpr env g = simplifyExpression (apply-n-args n g) env
+    -- empty-env : Env zero-ℕ (type-Group G)
+    -- empty-env = empty-vec
+    open import linear-algebra.vectors using (_∷_ ; empty-vec) public
+
+```
   private
     _*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
     _*'_ = gMul
@@ -436,8 +459,12 @@ module _
     -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
     _ = {!ex1!}
 
+    ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
+    ex3 x' y' = {!simplifyExpression (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
+
     _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
     _ = {!simplifyValid (gInv x *' x *' y)!}
     -- _ = {!simplifyValid (gUnit *' gUnit)!}
     -- _ = {!simplifyValid (x *' gUnit)!}
+
 ```
