@@ -217,17 +217,17 @@ module _
 
 ```agda
   right-div-Group : type-Group → type-Group → type-Group
-  right-div-Group y x = mul-Group x (inv-Group y)
+  right-div-Group x y = mul-Group x (inv-Group y)
 
   issec-mul-inv-Group' :
-    (x : type-Group) → (mul-Group' x ∘ right-div-Group x) ~ id
+    (x : type-Group) → (mul-Group' x ∘ (λ y → right-div-Group y x)) ~ id
   issec-mul-inv-Group' x y =
     ( associative-mul-Group _ _ _) ∙
     ( ( ap (mul-Group y) (left-inverse-law-mul-Group x)) ∙
       ( right-unit-law-mul-Group y))
 
   isretr-mul-inv-Group' :
-    (x : type-Group) → (right-div-Group x ∘ mul-Group' x) ~ id
+    (x : type-Group) → ((λ y → right-div-Group y x) ∘ mul-Group' x) ~ id
   isretr-mul-inv-Group' x y =
     ( associative-mul-Group _ _ _) ∙
     ( ( ap (mul-Group y) (right-inverse-law-mul-Group x)) ∙
@@ -236,7 +236,7 @@ module _
   is-equiv-mul-Group' : (x : type-Group) → is-equiv (mul-Group' x)
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
-      ( right-div-Group x)
+      ( λ y → right-div-Group y x)
       ( issec-mul-inv-Group' x)
       ( isretr-mul-inv-Group' x)
   
@@ -274,11 +274,17 @@ module _
 ```agda
   transpose-eq-mul-Group :
     {x y z : type-Group} →
-    Id (mul-Group x y) z → Id x (mul-Group z (inv-Group y))
+    (mul-Group x y ＝ z) → (x ＝ mul-Group z (inv-Group y))
   transpose-eq-mul-Group {x} {y} {z} refl =
     ( ( inv (right-unit-law-mul-Group x)) ∙
       ( ap (mul-Group x) (inv (right-inverse-law-mul-Group y)))) ∙
     ( inv (associative-mul-Group x y (inv-Group y)))
+
+  inv-transpose-eq-mul-Group :
+    {x y z : type-Group} →
+    (x ＝ mul-Group z (inv-Group y)) → (mul-Group x y ＝ z)
+  inv-transpose-eq-mul-Group {._} {y} {z} refl =
+    issec-mul-inv-Group' y z
 
   transpose-eq-mul-Group' :
     {x y z : type-Group} →
@@ -287,6 +293,12 @@ module _
     ( ( inv (left-unit-law-mul-Group y)) ∙
       ( ap (mul-Group' y) (inv (left-inverse-law-mul-Group x)))) ∙
     ( associative-mul-Group (inv-Group x) x y)
+
+  inv-transpose-eq-mul-Group' :
+    {x y z : type-Group} →
+    (mul-Group x y ＝ z) → (y ＝ mul-Group (inv-Group x) z)
+  inv-transpose-eq-mul-Group' {x} {y} {._} refl =
+    inv (isretr-mul-inv-Group x y)
 ```
 
 ### Distributivity of inverses over multiplication
@@ -313,6 +325,59 @@ module _
       ( inv-Group x)
       ( ( right-inverse-law-mul-Group (inv-Group x)) ∙
         ( inv (left-inverse-law-mul-Group x)))
+```
+
+### Two elements `x` and `y` are equal iff `x⁻¹y=1`
+
+```agda
+  eq-is-unit-left-div-Group :
+    {x y : type-Group} → is-unit-Group (left-div-Group x y) → x ＝ y
+  eq-is-unit-left-div-Group {x} {y} H =
+    inv
+      ( ( ( inv-transpose-eq-mul-Group' H) ∙
+          ( right-unit-law-mul-Group (inv-Group (inv-Group x)))) ∙
+        ( inv-inv-Group x))
+
+  is-unit-left-div-eq-Group :
+    {x y : type-Group} → x ＝ y → is-unit-Group (left-div-Group x y)
+  is-unit-left-div-eq-Group refl = left-inverse-law-mul-Group _
+```
+
+### Two eleemnts `x` and `y` are equal iff `xy⁻¹=1`
+
+```agda
+  eq-is-unit-right-div-Group :
+    {x y : type-Group} → is-unit-Group (right-div-Group x y) → x ＝ y
+  eq-is-unit-right-div-Group H =
+    inv (inv-transpose-eq-mul-Group (inv H)) ∙ left-unit-law-mul-Group _
+
+  is-unit-right-div-eq-Group :
+    {x y : type-Group} → x ＝ y → is-unit-Group (right-div-Group x y)
+  is-unit-right-div-eq-Group refl = right-inverse-law-mul-Group _
+```
+
+### The inverse of `x⁻¹y` is `y⁻¹x`
+
+```agda
+  inv-left-div-Group :
+    (x y : type-Group) → inv-Group (left-div-Group x y) ＝ left-div-Group y x
+  inv-left-div-Group x y =
+    equational-reasoning
+      inv-Group (left-div-Group x y)
+        ＝ left-div-Group y (inv-Group (inv-Group x))    by ( distributive-inv-mul-Group (inv-Group x) y
+        ＝ left-div-Group y x                            by ap (left-div-Group y) (inv-inv-Group x))
+```
+
+### The inverse of `xy⁻¹` is `yx⁻¹`
+
+```agda
+  inv-right-div-Group :
+    (x y : type-Group) → inv-Group (right-div-Group x y) ＝ right-div-Group y x
+  inv-right-div-Group x y =
+    equational-reasoning
+      inv-Group (right-div-Group x y)
+        ＝ right-div-Group (inv-Group (inv-Group y)) x   by ( distributive-inv-mul-Group x (inv-Group y)
+        ＝ right-div-Group y x                           by ap (mul-Group' (inv-Group x)) (inv-inv-Group y))
 ```
 
 ## Properties

@@ -14,19 +14,7 @@ open import foundation.identity-types using
 open import foundation.sets using (UU-Set; is-set; Id-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
-open import group-theory.groups using
-  ( Group; type-Group; mul-Group; set-Group; is-set-type-Group
-  ; inv-Group ; unit-Group ; associative-mul-Group
-  ; right-inverse-law-mul-Group
-  ; left-inverse-law-mul-Group
-  ; right-unit-law-mul-Group
-  ; left-unit-law-mul-Group
-  ; is-unit-Group
-  ; commute-Group
-  ; distributive-inv-mul-Group
-  ; mul-Group'
-  ; inv-inv-Group
-  )
+open import group-theory.groups
 
 ```
 
@@ -46,8 +34,7 @@ module _
   where
 
   commutator-Group : type-Group G → type-Group G → type-Group G
-  commutator-Group x y =
-    mul-Group G (mul-Group G (mul-Group G x y) (inv-Group G x)) (inv-Group G y)
+  commutator-Group x y = right-div-Group G (mul-Group G x y) (mul-Group G y x)
 ```
 
 ## Properties
@@ -57,6 +44,25 @@ module _
 We first introduce some shorter names to make the proofs less verbose
 
 ```agda
+  is-unit-commutator-commute-Group :
+    (x y : type-Group G) →
+    commute-Group G x y → is-unit-Group G (commutator-Group x y)
+  is-unit-commutator-commute-Group x y commutes =
+    is-unit-right-div-eq-Group G commutes
+
+  commute-is-unit-commutator-Group :
+    (x y : type-Group G) →
+    is-unit-Group G (commutator-Group x y) → commute-Group G x y
+  commute-is-unit-commutator-Group x y comm-unit =
+    eq-is-unit-right-div-Group G comm-unit
+
+  inv-commutator-Group : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+  inv-commutator-Group x y = inv-right-div-Group G (mul-Group G x y) (mul-Group G y x)
+```
+
+### Demonstration of the group solver
+
+{-
   private
     _*_ = mul-Group G
     infixl 30 _*_
@@ -64,53 +70,14 @@ We first introduce some shorter names to make the proofs less verbose
     infix 40 _⁻¹
     unit = unit-Group G
 
-  is-unit-commutator-commute-Group :
-    (x y : type-Group G) →
-    commute-Group G x y → is-unit-Group G (commutator-Group x y)
-  is-unit-commutator-commute-Group x y commutes =
-    equational-reasoning
-      commutator-Group x y
-        ＝ (x * y) * (x ⁻¹ * y ⁻¹) by ( associative-mul-Group G (x * y) (x ⁻¹) (y ⁻¹)
-        ＝ (x * y) * ((y * x) ⁻¹)  by ap (mul-Group G (x * y)) (inv (distributive-inv-mul-Group G y x))
-        ＝ (y * x) * ((y * x) ⁻¹)  by ap (mul-Group' G ((y * x) ⁻¹)) commutes
-        ＝ unit-Group G            by right-inverse-law-mul-Group G (y * x))
-
-  commute-is-unit-commutator-Group :
-    (x y : type-Group G) →
-    is-unit-Group G (commutator-Group x y) → commute-Group G x y
-  commute-is-unit-commutator-Group x y comm-unit =
-    x * y                         ＝ by inv (right-unit-law-mul-Group G (x * y)) to
-    x * y * unit                  ＝ by ap (λ z → (x * y) * z) (inv (left-inverse-law-mul-Group G x)) to
-    x * y * (x ⁻¹ * x)            ＝ by inv (associative-mul-Group G (x * y) (x ⁻¹) x) to
-    x * y * x ⁻¹ * x              ＝ by ap (_* x) (inv (right-unit-law-mul-Group G (x * y * x ⁻¹))) to
-    x * y * x ⁻¹ * unit * x       ＝ by ap (λ z → x * y * x ⁻¹ * z * x)
-                                           (inv (left-inverse-law-mul-Group G y)) to
-    x * y * x ⁻¹ * (y ⁻¹ * y) * x ＝ by ap (_* x) (inv (associative-mul-Group G (x * y * x ⁻¹) (y ⁻¹) y)) to
-    x * y * x ⁻¹ * y ⁻¹ * y * x   ＝ by refl to
-    commutator-Group x y * y * x  ＝ by ap (λ z → z * y * x) comm-unit to
-    unit * y * x                  ＝ by ap (_* x) (left-unit-law-mul-Group G y) to
-    y * x                         ∎
-
-  inv-Commutator-law : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
-  inv-Commutator-law x y =
-    inv-Group G (commutator-Group x y) ＝ by refl to
-    (x * y * x ⁻¹ * y ⁻¹) ⁻¹           ＝ by distributive-inv-mul-Group G (x * y * x ⁻¹) (y ⁻¹) to
-    y ⁻¹ ⁻¹ * (x * y * x ⁻¹) ⁻¹        ＝ by ap (_* ((x * y * x ⁻¹) ⁻¹)) (inv-inv-Group G y) to
-    y * (x * y * x ⁻¹) ⁻¹              ＝ by ap (y *_) (distributive-inv-mul-Group G (x * y) (x ⁻¹)) to
-    y * (x ⁻¹ ⁻¹ * (x * y) ⁻¹)         ＝ by inv (associative-mul-Group G y ((x ⁻¹) ⁻¹) ((x * y) ⁻¹)) to
-    y * x ⁻¹ ⁻¹ * (x * y) ⁻¹           ＝ by ap (λ z → (y * z) * ((x * y) ⁻¹)) (inv-inv-Group G x) to
-    y * x * (x * y) ⁻¹                 ＝ by ap ((y * x) *_) (distributive-inv-mul-Group G x y) to
-    y * x * (y ⁻¹ * x ⁻¹)              ＝ by inv (associative-mul-Group G (y * x) (y ⁻¹) (x ⁻¹)) to
-    y * x * y ⁻¹ * x ⁻¹                ＝ by refl to
-    commutator-Group y x               ∎
-
   open import group-theory.group-solver
   private
     _*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
     _*'_ = gMul
     infixl 20 _*'_
   inv-Commutator-law' : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
-  inv-Commutator-law' x y = simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (x *' y *' gInv x *' gInv y))
+  inv-Commutator-law' x y = simplifyExpr G ? ?
+  -- simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (x *' y *' gInv x *' gInv y))
 
   commutes-when-commutor-is-unit' :
     ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
@@ -126,5 +93,5 @@ We first introduce some shorter names to make the proofs less verbose
     x * y * x ⁻¹ * y ⁻¹ ＝ by ap (λ z → z * x ⁻¹ * y ⁻¹) commutes to
     y * x * x ⁻¹ * y ⁻¹ ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (y *' x *' gInv x *' gInv y)) to
     unit                  ∎
-
+-}
 ```
