@@ -151,54 +151,107 @@ module _
     -- simplifyGS (gInv a) = map-list inv-SE' (reverse-list (simplifyGS a))
     simplifyGS (inner n) = cons (pure-SE n) nil
 
-    data GroupEquality : GroupSyntax n → GroupSyntax n → UU where
+    data GroupEqualityElem : GroupSyntax n → GroupSyntax n → UU where
       -- equivalence relation
-      refl-GE : ∀ {x} → GroupEquality x x
-      sym-GE : ∀ {x} {y} → GroupEquality x y → GroupEquality y x
-      _∙GE_ : ∀ {x} {y} {z} → GroupEquality x y → GroupEquality y z → GroupEquality x z
+      xsym-GE : ∀ {x} {y} → GroupEqualityElem x y → GroupEqualityElem y x
 
       -- Variations on ap
-      ap-gMul : ∀ {x} {y} {z} {w} → GroupEquality x y → GroupEquality z w → GroupEquality (gMul x z) (gMul y w)
+      -- xap-gMul : ∀ {x} {y} {z} {w} → GroupEqualityElem x y → GroupEqualityElem z w → GroupEqualityElem (gMul x z) (gMul y w)
+      xap-gMul-l : ∀ {x} {y} {z} → GroupEqualityElem x y → GroupEqualityElem (gMul x z) (gMul y z)
+      xap-gMul-r : ∀ {x} {y} {z} → GroupEqualityElem y z → GroupEqualityElem (gMul x y) (gMul x z)
+      xap-gInv : ∀ {x} {y} → GroupEqualityElem x y → GroupEqualityElem (gInv x) (gInv y)
+
+      -- Group laws
+      xassoc-GE : ∀ x y z → GroupEqualityElem (gMul (gMul x y) z) (gMul x (gMul y z))
+      xl-unit : ∀ x → GroupEqualityElem (gMul gUnit x) x
+      xr-unit : ∀ x → GroupEqualityElem (gMul x gUnit) x
+      xl-inv : ∀ x → GroupEqualityElem (gMul (gInv x) x) gUnit
+      xr-inv : ∀ x → GroupEqualityElem (gMul x (gInv x)) gUnit
+
+      -- Theorems that are provable from the others
+      xinv-unit-GE : GroupEqualityElem (gInv gUnit) gUnit
+      xinv-inv-GE : ∀ x → GroupEqualityElem (gInv (gInv x)) x
+      xdistr-inv-mul-GE : ∀ x y → GroupEqualityElem (gInv (gMul x y)) (gMul (gInv y) (gInv x))
+    data GroupEquality : GroupSyntax n → GroupSyntax n → UU where
+      refl-GE : ∀ {x} → GroupEquality x x
+      _∷GE_ : ∀ {x} {y} {z} → GroupEqualityElem x y → GroupEquality y z → GroupEquality x z
+
+    infixr 5 _∷GE_
+
+    module _ where
+      -- equivalence relation
+      singleton-GE : ∀ {x y} → GroupEqualityElem x y → GroupEquality x y
+      singleton-GE x = x ∷GE refl-GE
+
+      _∙GE_ : ∀ {x} {y} {z} → GroupEquality x y → GroupEquality y z → GroupEquality x z
+      refl-GE ∙GE b = b
+      (x ∷GE a) ∙GE b = x ∷GE (a ∙GE b)
+      infixr 20 _∙GE_
+
+      sym-GE : ∀ {x} {y} → GroupEquality x y → GroupEquality y x
+      sym-GE refl-GE = refl-GE
+      sym-GE (a ∷GE as) = sym-GE as ∙GE singleton-GE (xsym-GE a)
+
+      -- Variations on ap
       ap-gInv : ∀ {x} {y} → GroupEquality x y → GroupEquality (gInv x) (gInv y)
+      ap-gInv refl-GE = refl-GE
+      ap-gInv (a ∷GE as) = xap-gInv a ∷GE ap-gInv as
+      ap-gMul-l : ∀ {x} {y} {z} → GroupEquality x y → GroupEquality (gMul x z) (gMul y z)
+      ap-gMul-l refl-GE = refl-GE
+      ap-gMul-l (x ∷GE xs) = xap-gMul-l x ∷GE ap-gMul-l xs
+      ap-gMul-r : ∀ {x} {y} {z} → GroupEquality y z → GroupEquality (gMul x y) (gMul x z)
+      ap-gMul-r refl-GE = refl-GE
+      ap-gMul-r (x ∷GE xs) = xap-gMul-r x ∷GE ap-gMul-r xs
+      ap-gMul : ∀ {x} {y} {z} {w} → GroupEquality x y → GroupEquality z w → GroupEquality (gMul x z) (gMul y w)
+      ap-gMul p q = ap-gMul-l p ∙GE ap-gMul-r q
 
       -- Group laws
       assoc-GE : ∀ x y z → GroupEquality (gMul (gMul x y) z) (gMul x (gMul y z))
+      assoc-GE x y z = singleton-GE (xassoc-GE x y z)
       l-unit : ∀ x → GroupEquality (gMul gUnit x) x
+      l-unit x = singleton-GE (xl-unit x)
       r-unit : ∀ x → GroupEquality (gMul x gUnit) x
+      r-unit x = singleton-GE (xr-unit x)
       l-inv : ∀ x → GroupEquality (gMul (gInv x) x) gUnit
+      l-inv x = singleton-GE (xl-inv x)
       r-inv : ∀ x → GroupEquality (gMul x (gInv x)) gUnit
+      r-inv x = singleton-GE (xr-inv x)
 
       -- Theorems that are provable from the others
       inv-unit-GE : GroupEquality (gInv gUnit) gUnit
+      inv-unit-GE = singleton-GE (xinv-unit-GE)
       inv-inv-GE : ∀ x → GroupEquality (gInv (gInv x)) x
+      inv-inv-GE x = singleton-GE (xinv-inv-GE x)
       distr-inv-mul-GE : ∀ x y → GroupEquality (gInv (gMul x y)) (gMul (gInv y) (gInv x))
+      distr-inv-mul-GE x y = singleton-GE (xdistr-inv-mul-GE x y)
 
-    infixr 20 _∙GE_
 
-    ap-gMul-l : ∀ {x} {y} {z} → GroupEquality x y → GroupEquality (gMul x z) (gMul y z)
-    ap-gMul-l z = ap-gMul z refl-GE
-    ap-gMul-r : ∀ {x} {y} {z} → GroupEquality y z → GroupEquality (gMul x y) (gMul x z)
-    ap-gMul-r z = ap-gMul refl-GE z
+
+    useGroupEqualityElem : ∀ {x y : GroupSyntax n} (env : Env n (type-Group G))
+                         → GroupEqualityElem x y → unQuoteGS x env ＝ unQuoteGS y env
+    -- useGroupEqualityElem env (xrefl-GE) = refl
+    useGroupEqualityElem env (xsym-GE ge) = inv (useGroupEqualityElem env ge)
+    -- useGroupEqualityElem env (x_∙GE_ ge ge') = useGroupEquality env ge ∙ useGroupEquality env ge'
+    useGroupEqualityElem env (xap-gMul-l {z = z} ge') = ap (_* unQuoteGS z env) (useGroupEqualityElem env ge')
+    useGroupEqualityElem env (xap-gMul-r {x = x} ge') = ap (unQuoteGS x env *_) (useGroupEqualityElem env ge')
+    -- useGroupEqualityElem env (xap-gMul {y = y} {z = z} ge ge') =
+    --                              ap (_* (unQuoteGS z env)) (useGroupEqualityElem env ge)
+    --                              ∙ ap (unQuoteGS y env *_) (useGroupEqualityElem env ge')
+    useGroupEqualityElem env (xap-gInv ge) = ap (inv-Group G) (useGroupEqualityElem env ge)
+    useGroupEqualityElem env (xassoc-GE x y z) = associative-mul-Group G _ _ _
+    useGroupEqualityElem env (xl-unit _) = left-unit-law-mul-Group G _
+    useGroupEqualityElem env (xr-unit _) = right-unit-law-mul-Group G _
+    useGroupEqualityElem env (xl-inv x) = left-inverse-law-mul-Group G _
+    useGroupEqualityElem env (xr-inv x) = right-inverse-law-mul-Group G _
+    useGroupEqualityElem env xinv-unit-GE = inv-unit-Group G
+    useGroupEqualityElem env (xinv-inv-GE x) = inv-inv-Group G (unQuoteGS x env)
+    useGroupEqualityElem env (xdistr-inv-mul-GE x y) = distributive-inv-mul-Group G (unQuoteGS x env) (unQuoteGS y env)
 
     useGroupEquality
       : ∀ {x y : GroupSyntax n} (env : Env n (type-Group G))
       → GroupEquality x y → unQuoteGS x env ＝ unQuoteGS y env
-    useGroupEquality env (refl-GE) = refl
-    useGroupEquality env (sym-GE ge) = inv (useGroupEquality env ge)
-    useGroupEquality env (_∙GE_ ge ge') = useGroupEquality env ge ∙ useGroupEquality env ge'
-    -- useGroupEquality env (ap-gMul {y = y} refl-GE ge') = ap (unQuoteGS y env *_) (useGroupEquality env ge')
-    useGroupEquality env (ap-gMul {y = y} {z = z} ge ge') =
-      ap (_* (unQuoteGS z env)) (useGroupEquality env ge)
-      ∙ ap (unQuoteGS y env *_) (useGroupEquality env ge')
-    useGroupEquality env (ap-gInv ge) = ap (inv-Group G) (useGroupEquality env ge)
-    useGroupEquality env (assoc-GE x y z) = associative-mul-Group G _ _ _
-    useGroupEquality env (l-unit _) = left-unit-law-mul-Group G _
-    useGroupEquality env (r-unit _) = right-unit-law-mul-Group G _
-    useGroupEquality env (l-inv x) = left-inverse-law-mul-Group G _
-    useGroupEquality env (r-inv x) = right-inverse-law-mul-Group G _
-    useGroupEquality env inv-unit-GE = inv-unit-Group G
-    useGroupEquality env (inv-inv-GE x) = inv-inv-Group G (unQuoteGS x env)
-    useGroupEquality env (distr-inv-mul-GE x y) = distributive-inv-mul-Group G (unQuoteGS x env) (unQuoteGS y env)
+    useGroupEquality env refl-GE = refl
+    useGroupEquality env (x ∷GE xs) = useGroupEqualityElem env x ∙ useGroupEquality env xs
 
     assoc-GE' : ∀ x y z → GroupEquality (gMul x (gMul y z)) (gMul (gMul x y) z)
     assoc-GE' x y z = sym-GE (assoc-GE x y z)
@@ -380,10 +433,10 @@ module _
 
     _ : UU
     -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
-    _ = {!!}
+    _ = {!ex1!}
 
     _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
-    _ = {!simplifyValid (gUnit *' x)!}
+    _ = {!simplifyValid (gInv x *' x *' y)!}
     -- _ = {!simplifyValid (gUnit *' gUnit)!}
     -- _ = {!simplifyValid (x *' gUnit)!}
 ```
