@@ -554,6 +554,7 @@ open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
 open import group-theory.centers-groups
 open import group-theory.commutative-monoids
+open import group-theory.commutators-groups
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.congruence-relations-groups

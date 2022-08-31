@@ -57,17 +57,33 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 ### Equational reasoning for identifications
 
 ```agda
-infix 1 _∎
-infixr 0 step-equational-reasoning
+module _
+  {l : Level} {X : UU l}
+  where
 
-step-equational-reasoning :
-  {l : Level} {X : UU l} (x : X) {y z : X} → y ＝ z → x ＝ y → x ＝ z
-step-equational-reasoning _ q p = p ∙ q
+  infix 1 _∎
+  infixr 0 step-equational-reasoning
+  infixl 1 first-step-equational-reasoning
+  infixr 0 middle-step-equational-reasoning
 
-_∎ : {l : Level} {X : UU l} (x : X) → x ＝ x
-x ∎ = refl
+  first-step-equational-reasoning :
+    (x y : X) {z : X} → x ＝ z → x ＝ z
+  first-step-equational-reasoning x y p = p
 
-syntax step-equational-reasoning x q p = x ＝ by p to q
+  middle-step-equational-reasoning :
+    {x y : X} → (x ＝ y) → (u : X) {v : X} → (y ＝ v) → (x ＝ v)
+  middle-step-equational-reasoning p z q = p ∙ q
+
+  step-equational-reasoning :
+    (x : X) {y z : X} → y ＝ z → x ＝ y → x ＝ z
+  step-equational-reasoning _ q p = p ∙ q
+
+  _∎ : (x : X) → x ＝ x
+  x ∎ = refl
+
+  syntax step-equational-reasoning x q p = x ＝ by p to q
+  syntax first-step-equational-reasoning x y p = equational-reasoning x ＝ y by p
+  syntax middle-step-equational-reasoning p z q = p ＝ z by q
 ```
 
 ### Equational reasoning for equivalences
