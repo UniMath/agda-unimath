@@ -103,4 +103,28 @@ module _
     y * x * (y ⁻¹ * x ⁻¹)              ＝ by inv (associative-mul-Group G (y * x) (y ⁻¹) (x ⁻¹)) to
     y * x * y ⁻¹ * x ⁻¹                ＝ by refl to
     commutator-Group y x               ∎
+
+  open import group-theory.group-solver
+  private
+    _*'_ : ∀ {n} → GroupSyntax G n → GroupSyntax G n → GroupSyntax G n
+    _*'_ = gMul
+    infixl 20 _*'_
+  inv-Commutator-law' : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+  inv-Commutator-law' x y = simplifyExpr G (x ∷ (y ∷ empty-vec)) (λ x y → gInv (x *' y *' gInv x *' gInv y))
+
+  commutes-when-commutor-is-unit' :
+    ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
+  commutes-when-commutor-is-unit' x y comm-unit =
+    x * y                         ＝ by inv (simplifyExpr G (x ∷ (y ∷ empty-vec)) (λ x y → (x *' y *' gInv x *' gInv y *' y *' x))) to
+    x * y * x ⁻¹ * y ⁻¹ * y * x   ＝ by ap (λ z → z * y * x) comm-unit to
+    unit * y * x                  ＝ by simplifyExpr G (x ∷ (y ∷ empty-vec)) (λ x y → (gUnit *' y *' x)) to
+    y * x                         ∎
+
+  commutor-is-unit-when-commutes' :
+    ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group x y ＝ unit-Group G
+  commutor-is-unit-when-commutes' x y commutes =
+    x * y * x ⁻¹ * y ⁻¹ ＝ by ap (λ z → z * x ⁻¹ * y ⁻¹) commutes to
+    y * x * x ⁻¹ * y ⁻¹ ＝ by simplifyExpr G (x ∷ (y ∷ empty-vec)) (λ x y → (y *' x *' gInv x *' gInv y)) to
+    unit                  ∎
+
 ```
