@@ -580,6 +580,7 @@ open import group-theory.free-higher-group-actions
 open import group-theory.full-subgroups
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
+open import group-theory.group-solver
 open import group-theory.groups
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
