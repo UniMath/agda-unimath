@@ -4,6 +4,8 @@ title: Equational reasoning
 
 Tom de Jong, 27 May 2022.
 Elisabeth Bonnevier, 31 May 2022.
+Egbert Rijke, 31 August 2022.
+Szumie Xie, 31 August 2022.
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
