@@ -14,6 +14,7 @@ open import foundation.identity-types using
 open import foundation.sets using (UU-Set; is-set; Id-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
+open import group-theory.group-solver
 open import group-theory.groups
 
 ```
@@ -22,7 +23,7 @@ open import group-theory.groups
 
 A commutator gives an indication of the extent to which a group multiplication fails to be commutative.
 
-The commutator of two elements, g and h, of a group G, is the element `[g, h] = g∙hg⁻¹h⁻¹`.
+The commutator of two elements, g and h, of a group G, is the element `[g, h] = (gh)(hg)⁻¹`.
 
 https://en.wikipedia.org/wiki/Commutator#Group_theory
 
@@ -41,28 +42,40 @@ module _
 
 ### The commutator of x and y is unit if and only x and y commutes
 
-We first introduce some shorter names to make the proofs less verbose
-
 ```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
   is-unit-commutator-commute-Group :
     (x y : type-Group G) →
-    commute-Group G x y → is-unit-Group G (commutator-Group x y)
-  is-unit-commutator-commute-Group x y commutes =
-    is-unit-right-div-eq-Group G commutes
+    commute-Group G x y → is-unit-Group G (commutator-Group G x y)
+  is-unit-commutator-commute-Group x y H =
+    is-unit-right-div-eq-Group G H
 
   commute-is-unit-commutator-Group :
     (x y : type-Group G) →
-    is-unit-Group G (commutator-Group x y) → commute-Group G x y
-  commute-is-unit-commutator-Group x y comm-unit =
-    eq-is-unit-right-div-Group G comm-unit
+    is-unit-Group G (commutator-Group G x y) → commute-Group G x y
+  commute-is-unit-commutator-Group x y H =
+    eq-is-unit-right-div-Group G H
+```
 
-  inv-commutator-Group : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+### The inverse of the `[x,y]` is `[y,x]`
+
+```agda
+  inv-commutator-Group : ∀ x y → inv-Group G (commutator-Group G x y) ＝ commutator-Group G y x
   inv-commutator-Group x y = inv-right-div-Group G (mul-Group G x y) (mul-Group G y x)
 ```
 
 ### Demonstration of the group solver
 
+We first introduce some shorter names to make the proofs less verbose
+
 ```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
   private
     _*_ = mul-Group G
     infixl 30 _*_
@@ -70,37 +83,37 @@ We first introduce some shorter names to make the proofs less verbose
     infix 40 _⁻¹
     unit = unit-Group G
 
-  open import group-theory.group-solver
-  private
     _*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
     _*'_ = gMul
     infixl 20 _*'_
+
   gCommutator : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n
   gCommutator x y = x *' y *' gInv (y *' x)
 
-  inv-Commutator-law' : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+  inv-Commutator-law' : ∀ x y → inv-Group G (commutator-Group G x y) ＝ commutator-Group G y x
   inv-Commutator-law' x y =
-    (commutator-Group x y) ⁻¹  ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (gCommutator x y)) to
-    y * x * y ⁻¹ * x ⁻¹        ＝ by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gCommutator y x)) to
-    commutator-Group y x       ∎
+    equational-reasoning
+      ( commutator-Group G x y) ⁻¹
+        ＝ y * x * y ⁻¹ * x ⁻¹       by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (gCommutator x y))
+        ＝ commutator-Group G y x    by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gCommutator y x))
 
-  inv-Commutator-law'' : ∀ x y → inv-Group G (commutator-Group x y) ＝ commutator-Group y x
+  inv-Commutator-law'' : ∀ x y → inv-Group G (commutator-Group G x y) ＝ commutator-Group G y x
   inv-Commutator-law'' x y =
     simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (gCommutator x y)) ∙
       inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gCommutator y x))
 
   commutes-when-commutor-is-unit' :
-    ∀ x y → (commutator-Group x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
+    ∀ x y → (commutator-Group G x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
   commutes-when-commutor-is-unit' x y comm-unit =
-    x * y                         ＝ by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gCommutator x y *' y *' x))) to
-    commutator-Group x y * y * x  ＝ by ap (λ z → z * y * x) comm-unit to
-    unit * y * x                  ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gUnit *' y *' x)) to
-    y * x                         ∎
+    equational-reasoning
+      x * y ＝ commutator-Group G x y * y * x    by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gCommutator x y *' y *' x)))
+            ＝ unit * y * x                      by ap (λ z → z * y * x) comm-unit
+            ＝ y * x                             by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gUnit *' y *' x))
 
   commutor-is-unit-when-commutes' :
-    ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group x y ＝ unit-Group G
+    ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group G x y ＝ unit-Group G
   commutor-is-unit-when-commutes' x y commutes =
-    x * y * (y * x) ⁻¹ ＝ by ap (λ z → z * (y * x) ⁻¹) commutes to
-    y * x * (y * x) ⁻¹ ＝ by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (y *' x *' gInv (y *' x))) to
-    unit               ∎
+    equational-reasoning
+      x * y * (y * x) ⁻¹ ＝ y * x * (y * x) ⁻¹    by ap (λ z → z * (y * x) ⁻¹) commutes
+                         ＝ unit                  by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (y *' x *' gInv (y *' x)))
 ```

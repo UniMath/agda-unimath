@@ -364,8 +364,8 @@ module _
   inv-left-div-Group x y =
     equational-reasoning
       inv-Group (left-div-Group x y)
-        ＝ left-div-Group y (inv-Group (inv-Group x))    by ( distributive-inv-mul-Group (inv-Group x) y
-        ＝ left-div-Group y x                            by ap (left-div-Group y) (inv-inv-Group x))
+        ＝ left-div-Group y (inv-Group (inv-Group x))    by distributive-inv-mul-Group (inv-Group x) y
+        ＝ left-div-Group y x                            by ap (left-div-Group y) (inv-inv-Group x)
 ```
 
 ### The inverse of `xy⁻¹` is `yx⁻¹`
@@ -376,8 +376,8 @@ module _
   inv-right-div-Group x y =
     equational-reasoning
       inv-Group (right-div-Group x y)
-        ＝ right-div-Group (inv-Group (inv-Group y)) x   by ( distributive-inv-mul-Group x (inv-Group y)
-        ＝ right-div-Group y x                           by ap (mul-Group' (inv-Group x)) (inv-inv-Group y))
+        ＝ right-div-Group (inv-Group (inv-Group y)) x   by distributive-inv-mul-Group x (inv-Group y)
+        ＝ right-div-Group y x                           by ap (mul-Group' (inv-Group x)) (inv-inv-Group y)
 ```
 
 ## Properties
@@ -402,11 +402,11 @@ abstract
       ( eq-htpy
         ( λ x →
           equational-reasoning
-          i x ＝ μ e (i x)            by ( inv (left-unit-G (i x)) 
+          i x ＝ μ e (i x)            by inv (left-unit-G (i x)) 
               ＝ μ (μ (i' x) x) (i x) by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
               ＝ μ (i' x) (μ x (i x)) by assoc-G (i' x) x (i x)
               ＝ μ (i' x) e           by ap (μ (i' x)) (right-inv-i x)
-              ＝ i' x                 by right-unit-G (i' x))))
+              ＝ i' x                 by right-unit-G (i' x)))
 
 abstract
   is-prop-is-group :
