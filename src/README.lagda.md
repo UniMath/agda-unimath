@@ -309,6 +309,7 @@ open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
 open import foundation.inequality-w-types
+open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -337,6 +338,7 @@ open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.partial-elements
+open import foundation.partitions
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors

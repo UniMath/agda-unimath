@@ -16,7 +16,6 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
@@ -35,6 +34,8 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
+
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea

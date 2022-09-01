@@ -9,12 +9,12 @@ module foundation.reflecting-maps-equivalence-relations where
 
 open import foundation.effective-maps-equivalence-relations using
   ( is-surjective-and-effective)
-open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation.homotopies using
   ( _~_; refl-htpy; is-contr-total-htpy)
 
 open import foundation-core.contractible-types using (is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation-core.equivalences using
   ( map-inv-equiv; is-equiv; _≃_; map-inv-is-equiv)
 open import foundation-core.fundamental-theorem-of-identity-types using

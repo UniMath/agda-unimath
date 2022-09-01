@@ -69,6 +69,10 @@ module _
   has-same-elements-subtype : {l3 : Level} → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-subtype Q = (x : A) → P x ⇔ Q x
 
+  refl-has-same-elements-subtype : has-same-elements-subtype P
+  pr1 (refl-has-same-elements-subtype x) = id
+  pr2 (refl-has-same-elements-subtype x) = id
+
   extensionality-subtype :
     (Q : subtype l2 A) → (P ＝ Q) ≃ has-same-elements-subtype Q
   extensionality-subtype =
