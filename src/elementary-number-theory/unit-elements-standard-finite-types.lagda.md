@@ -35,6 +35,8 @@ A unit element in a standard finite type is a divisor of one
 
 ## Definition
 
+### Units in the standard finite types
+
 ```agda
 is-unit-Fin : (k : ℕ) → Fin k → UU lzero
 is-unit-Fin (succ-ℕ k) x = div-Fin (succ-ℕ k) x (one-Fin k)

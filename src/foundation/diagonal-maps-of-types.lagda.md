@@ -7,99 +7,27 @@ title: Diagonal maps of types
 
 module foundation.diagonal-maps-of-types where
 
-open import foundation.0-maps using (is-0-map)
-open import foundation.1-types using
-  ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-maps using (is-contr-map)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equivalences using
-  ( is-equiv; issec-map-inv-is-equiv; is-equiv-has-inverse)
-open import foundation.faithful-maps using
-  ( is-faithful; is-0-map-is-faithful; is-faithful-is-0-map; faithful-map)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation.propositional-maps using
-  ( is-prop-map; is-prop-map-is-emb; is-emb-is-prop-map)
-open import foundation.propositions using
-  ( is-prop; is-prop-all-elements-equal)
-open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
-open import foundation.truncated-maps using (is-trunc-map)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-is-equiv'; is-trunc-is-equiv)
-open import foundation.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU)
-```
+open import foundation-core.diagonal-maps-of-types public
 
-## Idea
-
-The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the diagonal into `A × A`.
-
-## Definition
-
-```agda
-module _
-  {l : Level} (A : UU l)
-  where
-
-  diagonal : A → A × A
-  pr1 (diagonal x) = x
-  pr2 (diagonal x) = x
+open import foundation-core.0-maps
+open import foundation-core.1-types
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.faithful-maps
+open import foundation-core.fibers-of-maps
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Properties
-
-### If the diagonal of `A` is an equivalence, then `A` is a proposition.
-
-```agda
-module _
-  {l : Level} (A : UU l)
-  where
-
-  abstract
-    is-prop-is-equiv-diagonal : is-equiv (diagonal A) → is-prop A
-    is-prop-is-equiv-diagonal is-equiv-d =
-      is-prop-all-elements-equal
-        ( λ x y →
-          ( inv (ap pr1 (issec-map-inv-is-equiv is-equiv-d (pair x y)))) ∙
-          ( ap pr2 (issec-map-inv-is-equiv is-equiv-d (pair x y))))
-```
-
-### The fibers of the diagonal map
-
-```agda
-module _
-  {l : Level} (A : UU l)
-  where
-
-  eq-fib-diagonal : (t : A × A) → fib (diagonal A) t → pr1 t ＝ pr2 t
-  eq-fib-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
-  
-  fib-diagonal-eq : (t : A × A) → pr1 t ＝ pr2 t → fib (diagonal A) t
-  pr1 (fib-diagonal-eq (pair x y) β) = x
-  pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
-  
-  issec-fib-diagonal-eq :
-    (t : A × A) → ((eq-fib-diagonal t) ∘ (fib-diagonal-eq t)) ~ id
-  issec-fib-diagonal-eq (pair x .x) refl = refl
-  
-  isretr-fib-diagonal-eq :
-    (t : A × A) → ((fib-diagonal-eq t) ∘ (eq-fib-diagonal t)) ~ id
-  isretr-fib-diagonal-eq .(pair z z) (pair z refl) = refl
-  
-  abstract
-    is-equiv-eq-fib-diagonal : (t : A × A) → is-equiv (eq-fib-diagonal t)
-    is-equiv-eq-fib-diagonal t =
-      is-equiv-has-inverse
-        ( fib-diagonal-eq t)
-        ( issec-fib-diagonal-eq t)
-        ( isretr-fib-diagonal-eq t)
-```
 
 ### A type is (k+1)-truncated if and only if the diagonal is k-truncated
 

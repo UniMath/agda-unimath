@@ -144,8 +144,7 @@ abstract
 is-equiv-iso-eq-Ab :
   { l1 : Level} (A B : Ab l1) → is-equiv (iso-eq-Ab A B)
 is-equiv-iso-eq-Ab A =
-  fundamental-theorem-id A
-    ( id-iso-Ab A)
+  fundamental-theorem-id
     ( is-contr-total-iso-Ab A)
     ( iso-eq-Ab A)
 

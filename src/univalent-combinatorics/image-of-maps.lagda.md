@@ -16,7 +16,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.fibers-of-maps using (equiv-total-fib; fib)
 open import foundation.propositional-truncations using (trunc-Prop)
 open import foundation.subtypes using
-  ( extensionality-type-subtype)
+  ( extensionality-type-subtype')
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.universe-levels using (Level; UU)
 
@@ -53,6 +53,6 @@ abstract
       ( is-surjective-map-unit-im f)
       ( λ x y →
         is-decidable-equiv
-          ( extensionality-type-subtype (λ u → trunc-Prop (fib f u)) x y)
+          ( extensionality-type-subtype' (λ u → trunc-Prop (fib f u)) x y)
           ( d (pr1 x) (pr1 y)))
 ```

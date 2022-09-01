@@ -3,7 +3,7 @@ title: Algebras for polynomial endofunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module foundation.algebras-polynomial-endofunctors where
 
@@ -178,8 +178,7 @@ module _
     (g : hom-algebra-polynomial-endofunctor X Y) →
     is-equiv (htpy-eq-hom-algebra-polynomial-endofunctor g)
   is-equiv-htpy-eq-hom-algebra-polynomial-endofunctor =
-    fundamental-theorem-id f
-      ( refl-htpy-hom-algebra-polynomial-endofunctor)
+    fundamental-theorem-id
       ( is-contr-total-htpy-hom-algebra-polynomial-endofunctor)
       ( htpy-eq-hom-algebra-polynomial-endofunctor)
 

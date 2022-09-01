@@ -32,7 +32,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
     type-Prop; prod-Prop; is-prop-type-Prop; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-subtype; type-subtype)
+open import foundation.subtypes using (eq-type-subtype; type-subtype)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; Level)
 ```
@@ -57,7 +57,7 @@ module _
       all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
     all-elements-equal-minimal-element-ℕ
       (pair x (pair p l)) (pair y (pair q k)) =
-      eq-subtype
+      eq-type-subtype
         ( λ n →
           prod-Prop
             ( pair _ (is-prop-type-Prop (P n)))
@@ -86,11 +86,7 @@ is-minimal-element-succ-ℕ
   leq-zero-ℕ n
 is-minimal-element-succ-ℕ
   P d (succ-ℕ m) pm is-lower-bound-m neg-p0 (succ-ℕ n) psuccn =
-  is-minimal-element-succ-ℕ (λ x → P (succ-ℕ x)) (λ x → d (succ-ℕ x)) m pm
-    ( λ m → is-lower-bound-m (succ-ℕ m))
-    ( is-lower-bound-m zero-ℕ)
-    ( n)
-    ( psuccn)
+  is-lower-bound-m n psuccn
 
 well-ordering-principle-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P)
@@ -156,7 +152,7 @@ is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
       ( pair m p))
 ```
 
-### Global choice
+### The ε-operator for decidable subtypes of ℕ
 
 ```agda
 ε-operator-decidable-subtype-ℕ :

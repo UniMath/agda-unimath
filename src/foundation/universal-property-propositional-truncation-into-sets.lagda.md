@@ -22,7 +22,7 @@ open import foundation.propositions using
   ( eq-is-prop; all-elements-equal; is-prop-all-elements-equal; is-prop;
     UU-Prop; eq-is-prop')
 open import foundation.sets using (UU-Set; type-Set; Id-Prop)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.weakly-constant-maps using
   ( is-weakly-constant-map; is-weakly-constant-map-Prop)
@@ -64,7 +64,7 @@ abstract
     is-weakly-constant-map f →
     all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fib f b)))
   all-elements-equal-image-is-weakly-constant-map B f H (pair x s) (pair y t) =
-    eq-subtype
+    eq-type-subtype
       ( λ b → trunc-Prop (fib f b))
       ( apply-universal-property-trunc-Prop s
         ( Id-Prop B x y)
@@ -129,7 +129,7 @@ abstract
     ( ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B) ∘
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
   issec-map-universal-property-set-quotient-trunc-Prop B (pair f H) =
-    eq-subtype
+    eq-type-subtype
       ( is-weakly-constant-map-Prop B)
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 

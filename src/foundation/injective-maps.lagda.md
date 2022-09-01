@@ -7,8 +7,10 @@ title: Injective maps
 
 module foundation.injective-maps where
 
+open import foundation-core.contractible-types using (is-contr; eq-is-contr)
 open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
+open import foundation-core.empty-types using (is-empty; ex-falso)
 open import foundation-core.equivalences using
   ( is-equiv; isretr-map-inv-is-equiv; map-inv-is-equiv; _≃_; map-equiv;
     map-inv-equiv; is-equiv-map-inv-equiv; is-equiv-has-inverse)
@@ -184,4 +186,22 @@ module _
   is-injective-Prop : is-set A → (A → B) → UU-Prop (l1 ⊔ l2)
   pr1 (is-injective-Prop H f) = is-injective f
   pr2 (is-injective-Prop H f) = is-prop-is-injective H f
+```
+
+### Any map out of a contractible type is injective
+
+```agda
+is-injective-is-contr :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-contr A → is-injective f
+is-injective-is-contr f H p = eq-is-contr H
+```
+
+### Any map out of an empty type is injective
+
+```agda
+is-injective-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-empty A → is-injective f
+is-injective-is-empty f H {x} = ex-falso (H x)
 ```

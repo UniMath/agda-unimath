@@ -83,8 +83,7 @@ module _
     (h k : structure-preserving-map-ℕ) →
     is-equiv (htpy-eq-structure-preserving-map-ℕ {h} {k})
   is-equiv-htpy-eq-structure-preserving-map-ℕ h =
-    fundamental-theorem-id h
-      ( refl-htpy-structure-preserving-map-ℕ h)
+    fundamental-theorem-id
       ( is-contr-total-htpy-structure-preserving-map-ℕ h)
       ( λ k → htpy-eq-structure-preserving-map-ℕ {h} {k})
 

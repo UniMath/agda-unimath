@@ -9,33 +9,34 @@ module foundation.embeddings where
 
 open import foundation-core.embeddings public
 
+open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.cones-pullbacks using (cone)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.functions using (_∘_)
+open import foundation-core.functoriality-dependent-pair-types using
+  ( tot; map-Σ-map-base; map-Σ)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id-sec)
 open import foundation-core.homotopies using
   ( _~_; nat-htpy; inv-htpy; refl-htpy)
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
+open import foundation-core.pullbacks using (is-pullback)
 open import foundation-core.sections using (sec)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
-open import foundation.cartesian-product-types using (_×_)
 open import foundation.equivalences using
   ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
     is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
     issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-property-is-equiv)
-open import foundation.functoriality-dependent-pair-types using
-  ( tot; map-Σ-map-base; map-Σ)
 open import foundation.identity-types using
   ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
 open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
-open import foundation.pullbacks using (is-pullback)
 open import foundation.truncated-maps using
   ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback;
-    is-prop-map-tot; is-prop-map-map-Σ-map-base; is-prop-map-map-Σ)
+    is-prop-map-tot; is-prop-map-map-Σ-map-base; is-prop-map-map-Σ;
+    is-trunc-is-pullback')
 ```
 
 ## Properties
@@ -264,4 +265,11 @@ module _
     is-emb-is-pullback pb is-emb-g =
       is-emb-is-prop-map
         ( is-trunc-is-pullback neg-one-𝕋 f g c pb (is-prop-map-is-emb is-emb-g))
+
+  abstract
+    is-emb-is-pullback' : is-pullback f g c → is-emb f → is-emb (pr1 (pr2 c))
+    is-emb-is-pullback' pb is-emb-f =
+      is-emb-is-prop-map
+        ( is-trunc-is-pullback' neg-one-𝕋 f g c pb
+          ( is-prop-map-is-emb is-emb-f))
 ```

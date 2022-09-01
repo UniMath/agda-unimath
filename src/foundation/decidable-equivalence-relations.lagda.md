@@ -236,7 +236,7 @@ module _
       center-total-subtype-equivalence-class-Decidable-Equivalence-Relation ＝ t
     contraction-total-subtype-equivalence-class-Decidable-Equivalence-Relation
       ( pair (pair P p) H) =
-      eq-subtype
+      eq-type-subtype
         ( λ Q → subtype-equivalence-class-Decidable-Equivalence-Relation R Q a)
         ( apply-universal-property-trunc-Prop
           ( p)
@@ -248,7 +248,7 @@ module _
       where
         α : fib (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
         α (pair x refl) =
-          eq-subtype
+          eq-type-subtype
             ( λ z →
               trunc-Prop
                 ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
@@ -288,8 +288,6 @@ module _
       is-equiv (related-eq-quotient-Decidable-Equivalence-Relation q)
     is-equiv-related-eq-quotient-Decidable-Equivalence-Relation =
       fundamental-theorem-id
-        ( class-Decidable-Equivalence-Relation R a)
-        ( refl-Decidable-Equivalence-Relation R)
         ( is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation)
         ( related-eq-quotient-Decidable-Equivalence-Relation)
 

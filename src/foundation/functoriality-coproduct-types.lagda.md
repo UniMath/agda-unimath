@@ -13,7 +13,9 @@ open import foundation.coproduct-types using
   ( _+_; inl; inr; is-injective-inl; neq-inr-inl)
 open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
 open import foundation.equality-coproduct-types using
-  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr)
+  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr;
+    map-compute-eq-coprod-inl-inl; is-empty-eq-coprod-inr-inl;
+    is-empty-eq-coprod-inl-inr; map-compute-eq-coprod-inr-inr)
 open import foundation.equivalences using
   ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
     map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_;
@@ -97,6 +99,78 @@ module _
   htpy-map-coprod : (map-coprod f g) ~ (map-coprod f' g')
   htpy-map-coprod (inl x) = ap inl (H x)
   htpy-map-coprod (inr y) = ap inr (K y)
+```
+
+### The fibers of `map-coprod`
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  (f : A' → A) (g : B' → B)
+  where
+
+  fib-map-coprod-inl-fib : (x : A) → fib f x → fib (map-coprod f g) (inl x)
+  pr1 (fib-map-coprod-inl-fib x (pair a' p)) = inl a'
+  pr2 (fib-map-coprod-inl-fib x (pair a' p)) = ap inl p
+
+  fib-fib-map-coprod-inl : (x : A) → fib (map-coprod f g) (inl x) → fib f x
+  fib-fib-map-coprod-inl x (pair (inl a') p) =
+    pair a' (map-compute-eq-coprod-inl-inl (f a') x p)
+  fib-fib-map-coprod-inl x (pair (inr b') p) =
+    ex-falso (is-empty-eq-coprod-inr-inl (g b') x p)
+
+  abstract
+    issec-fib-fib-map-coprod-inl :
+      (x : A) → (fib-map-coprod-inl-fib x ∘ fib-fib-map-coprod-inl x) ~ id
+    issec-fib-fib-map-coprod-inl .(f a') (pair (inl a') refl) = refl
+    issec-fib-fib-map-coprod-inl x (pair (inr b') p) =
+      ex-falso (is-empty-eq-coprod-inr-inl (g b') x p)
+
+  abstract
+    isretr-fib-fib-map-coprod-inl :
+      (x : A) → (fib-fib-map-coprod-inl x ∘ fib-map-coprod-inl-fib x) ~ id
+    isretr-fib-fib-map-coprod-inl .(f a') (pair a' refl) = refl
+
+  abstract
+    is-equiv-fib-map-coprod-inl-fib :
+      (x : A) → is-equiv (fib-map-coprod-inl-fib x)
+    is-equiv-fib-map-coprod-inl-fib x =
+      is-equiv-has-inverse
+        ( fib-fib-map-coprod-inl x)
+        ( issec-fib-fib-map-coprod-inl x)
+        ( isretr-fib-fib-map-coprod-inl x)
+
+  fib-map-coprod-inr-fib : (y : B) → fib g y → fib (map-coprod f g) (inr y)
+  pr1 (fib-map-coprod-inr-fib y (pair b' p)) = inr b'
+  pr2 (fib-map-coprod-inr-fib y (pair b' p)) = ap inr p
+  
+  fib-fib-map-coprod-inr : (y : B) → fib (map-coprod f g) (inr y) → fib g y
+  fib-fib-map-coprod-inr y (pair (inl a') p) =
+    ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
+  pr1 (fib-fib-map-coprod-inr y (pair (inr b') p)) = b'
+  pr2 (fib-fib-map-coprod-inr y (pair (inr b') p)) =
+    map-compute-eq-coprod-inr-inr (g b') y p
+
+  abstract
+    issec-fib-fib-map-coprod-inr :
+      (y : B) → (fib-map-coprod-inr-fib y ∘ fib-fib-map-coprod-inr y) ~ id
+    issec-fib-fib-map-coprod-inr .(g b') (pair (inr b') refl) = refl
+    issec-fib-fib-map-coprod-inr y (pair (inl a') p) =
+      ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
+
+  abstract
+    isretr-fib-fib-map-coprod-inr :
+      (y : B) → (fib-fib-map-coprod-inr y ∘ fib-map-coprod-inr-fib y) ~ id
+    isretr-fib-fib-map-coprod-inr .(g b') (pair b' refl) = refl
+
+  abstract
+    is-equiv-fib-map-coprod-inr-fib :
+      (y : B) → is-equiv (fib-map-coprod-inr-fib y)
+    is-equiv-fib-map-coprod-inr-fib y =
+      is-equiv-has-inverse
+        ( fib-fib-map-coprod-inr y)
+        ( issec-fib-fib-map-coprod-inr y)
+        ( isretr-fib-fib-map-coprod-inr y)
 ```
 
 ### Functoriality of coproducts preserves equivalences

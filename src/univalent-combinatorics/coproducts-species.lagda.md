@@ -31,7 +31,8 @@ The coproduct of two species `F` and `G` is the pointwise coproduct.
 
 ```agda
 coprod-species :
-  {l1 l2 : Level} (F : species l1) (G : species l2) (X : 𝔽) → UU (l1 ⊔ l2)
+  {l1 l2 l3 : Level} (F : species l1 l2) (G : species l1 l3) →
+  species l1 (l2 ⊔ l3)
 coprod-species F G X = F X + G X
 ```
 
@@ -41,7 +42,8 @@ Proof of (hom-species (species-coprod F G) H) ≃ ((hom-species F H) × (hom-spe
 
 ```agda
 equiv-universal-property-coproduct-species :
- {l1 l2 l3 : Level} (F : species l1) (G : species l2) (H : species l3) →
+ {l1 l2 l3 l4 : Level}
+ (F : species l1 l2) (G : species l1 l3) (H : species l1 l4) →
  hom-species (coprod-species F G) H ≃ ((hom-species F H) × (hom-species G H))
 equiv-universal-property-coproduct-species F G H =
   ( distributive-Π-Σ) ∘e

@@ -11,20 +11,24 @@ open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-contr-total-htpy-equiv; htpy-equiv; is-equiv;
-    map-inv-is-equiv; id-equiv)
+    map-inv-is-equiv; id-equiv; _∘e_)
 open import foundation.functoriality-dependent-function-types using
   ( equiv-map-Π)
+open import foundation.functions using (id)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (Id; tr; equiv-concat; refl)
+open import foundation.homotopies using (refl-htpy; _~_)
+open import foundation.identity-types using
+  ( Id; tr; equiv-concat; refl; _＝_; equiv-tr; ap)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.unordered-pairs using
-  ( map-equiv-unordered-pair; equiv-unordered-pair; htpy-unordered-pair)
+  ( map-equiv-unordered-pair; equiv-unordered-pair; htpy-unordered-pair;
+    standard-unordered-pair; equiv-standard-unordered-pair;
+    id-equiv-standard-unordered-pair)
 
 open import graph-theory.morphisms-undirected-graphs using
   ( hom-Undirected-Graph; htpy-hom-Undirected-Graph;
@@ -81,6 +85,15 @@ module _
   unordered-pair-vertices-equiv-Undirected-Graph f =
     map-equiv-unordered-pair (equiv-vertex-equiv-Undirected-Graph f)
 
+  standard-unordered-pair-vertices-equiv-Undirected-Graph :
+    (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
+    unordered-pair-vertices-equiv-Undirected-Graph e (standard-unordered-pair x y) ＝
+    standard-unordered-pair
+      ( vertex-equiv-Undirected-Graph e x)
+      ( vertex-equiv-Undirected-Graph e y)
+  standard-unordered-pair-vertices-equiv-Undirected-Graph e =
+    equiv-standard-unordered-pair (equiv-vertex-equiv-Undirected-Graph e)
+
   equiv-edge-equiv-Undirected-Graph :
     (f : equiv-Undirected-Graph)
     (p : unordered-pair-vertices-Undirected-Graph G) →
@@ -98,6 +111,29 @@ module _
   edge-equiv-Undirected-Graph f p =
     map-equiv (equiv-edge-equiv-Undirected-Graph f p)
 
+  equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph :
+    (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
+    edge-Undirected-Graph G (standard-unordered-pair x y) ≃
+    edge-Undirected-Graph H
+      ( standard-unordered-pair
+        ( vertex-equiv-Undirected-Graph e x)
+        ( vertex-equiv-Undirected-Graph e y))
+  equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
+    ( equiv-tr
+      ( edge-Undirected-Graph H)
+      ( standard-unordered-pair-vertices-equiv-Undirected-Graph e x y)) ∘e
+    ( equiv-edge-equiv-Undirected-Graph e (standard-unordered-pair x y))
+
+  edge-standard-unordered-pair-vertices-equiv-Undirected-Graph :
+    (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
+    edge-Undirected-Graph G (standard-unordered-pair x y) →
+    edge-Undirected-Graph H
+      ( standard-unordered-pair
+        ( vertex-equiv-Undirected-Graph e x)
+        ( vertex-equiv-Undirected-Graph e y))
+  edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
+    map-equiv (equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y)
+
   hom-equiv-Undirected-Graph :
     equiv-Undirected-Graph → hom-Undirected-Graph G H
   pr1 (hom-equiv-Undirected-Graph f) = vertex-equiv-Undirected-Graph f
@@ -114,6 +150,14 @@ module _
   id-equiv-Undirected-Graph : equiv-Undirected-Graph G G
   pr1 id-equiv-Undirected-Graph = id-equiv
   pr2 id-equiv-Undirected-Graph p = id-equiv
+
+  edge-standard-unordered-pair-vertices-id-equiv-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) →
+    ( edge-standard-unordered-pair-vertices-equiv-Undirected-Graph G G
+      ( id-equiv-Undirected-Graph) x y) ~
+    ( id)
+  edge-standard-unordered-pair-vertices-id-equiv-Undirected-Graph x y e =
+    ap (λ t → tr (edge-Undirected-Graph G) t e) (id-equiv-standard-unordered-pair x y)
 ```
 
 ## Properties
@@ -189,8 +233,7 @@ module _
     (f g : equiv-Undirected-Graph G H) →
     is-equiv (htpy-eq-equiv-Undirected-Graph f g)
   is-equiv-htpy-eq-equiv-Undirected-Graph f =
-    fundamental-theorem-id f
-      ( refl-htpy-equiv-Undirected-Graph f)
+    fundamental-theorem-id
       ( is-contr-total-htpy-equiv-Undirected-Graph f)
       ( htpy-eq-equiv-Undirected-Graph f)
 
@@ -236,8 +279,7 @@ module _
   is-equiv-equiv-eq-Undirected-Graph :
     (H : Undirected-Graph l1 l2) → is-equiv (equiv-eq-Undirected-Graph H)
   is-equiv-equiv-eq-Undirected-Graph =
-    fundamental-theorem-id G
-      ( id-equiv-Undirected-Graph G)
+    fundamental-theorem-id
       ( is-contr-total-equiv-Undirected-Graph)
       ( equiv-eq-Undirected-Graph)
 

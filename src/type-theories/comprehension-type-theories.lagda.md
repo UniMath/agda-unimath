@@ -3,7 +3,7 @@ title: Comprehension of fibered type theories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas --guardedness #-}
+{-# OPTIONS --guardedness #-}
 
 module type-theories.comprehension-type-theories where
 
@@ -22,6 +22,7 @@ Given a fibered type theory `S` over `T`, we can form the comprehension type the
 ## Definition
 
 ```agda
+{-
 record comprehension
   {l1 l2 l3 l4 : Level} {A : type-theory l1 l2}
   {B : fibered.fibered-type-theory l3 l4 A} : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -31,4 +32,5 @@ record comprehension
     type : {!!}
     element : {!!}
     slice : {!!}
+-}
 ```

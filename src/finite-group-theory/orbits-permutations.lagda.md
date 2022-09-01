@@ -110,8 +110,8 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-type-UU-Fin-Level; UU-Fin-Level; type-UU-Fin-Level;
-    has-cardinality-type-UU-Fin-Level; number-of-elements-is-finite;
+  ( is-finite; is-finite-type-UU-Fin; UU-Fin; type-UU-Fin;
+    has-cardinality-type-UU-Fin; number-of-elements-is-finite;
     number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
     has-finite-cardinality-count; all-elements-equal-has-finite-cardinality;
     has-cardinality; 𝔽; type-𝔽)
@@ -134,10 +134,10 @@ The orbit of a point `x` for a permutation `f` is the set of point obtained by i
 
 ```agda
 module _
-  (X : 𝔽) (e : type-𝔽 X ≃ type-𝔽 X)
+  {l : Level} (X : 𝔽 l) (e : type-𝔽 X ≃ type-𝔽 X)
   where
   
-  iso-iterative-groupoid-automorphism-𝔽 : (x y : type-𝔽 X) → UU lzero
+  iso-iterative-groupoid-automorphism-𝔽 : (x y : type-𝔽 X) → UU l
   iso-iterative-groupoid-automorphism-𝔽 x y =
     Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
 
@@ -455,10 +455,10 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n) (f : Aut (type-UU-Fin-Level n X)) 
+  {l : Level} (n : ℕ) (X : UU-Fin l n) (f : Aut (type-UU-Fin n X)) 
   where
 
-  same-orbits-permutation : Eq-Rel l (type-UU-Fin-Level n X)
+  same-orbits-permutation : Eq-Rel l (type-UU-Fin n X)
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
   pr1 (pr2 same-orbits-permutation) = unit-trunc-Prop (pair 0 refl)
@@ -468,7 +468,7 @@ module _
       ( pr1 same-orbits-permutation b a)
       ( λ (pair k p) →
         apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin-Level n X)
+          ( has-cardinality-type-UU-Fin n X)
           ( pr1 same-orbits-permutation b a)
           ( λ h →
             unit-trunc-Prop
@@ -480,18 +480,18 @@ module _
                         ( λ x → iterate x (map-equiv f) a)
                         ( pr2 (lemma h k))) ∙
                       ( mult-has-finite-orbits-permutation
-                        ( type-UU-Fin-Level n X)
+                        ( type-UU-Fin n X)
                         ( pair n h)
                         ( f)
                         ( a)
                         ( k))))))))
     where
     has-finite-orbits-permutation-a :
-      (h : Fin n ≃ type-UU-Fin-Level n X) →
+      (h : Fin n ≃ type-UU-Fin n X) →
       Σ ℕ (λ l → (is-nonzero-ℕ l) × Id (iterate l (map-equiv f) a) a)
     has-finite-orbits-permutation-a h =
-      has-finite-orbits-permutation (type-UU-Fin-Level n X) (pair n h) f a
-    lemma : (h : Fin n ≃ type-UU-Fin-Level n X) (k : ℕ) →
+      has-finite-orbits-permutation (type-UU-Fin n X) (pair n h) f a
+    lemma : (h : Fin n ≃ type-UU-Fin n X) (k : ℕ) →
       Σ ( ℕ)
         ( λ j →
           Id (add-ℕ j k) (mul-ℕ k (pr1 (has-finite-orbits-permutation-a h))))
@@ -520,11 +520,11 @@ module _
 
   abstract
     is-decidable-same-orbits-permutation :
-      ( a b : type-UU-Fin-Level n X) →
+      ( a b : type-UU-Fin n X) →
       is-decidable (sim-Eq-Rel same-orbits-permutation a b) 
     is-decidable-same-orbits-permutation a b =
       apply-universal-property-trunc-Prop
-        ( has-cardinality-type-UU-Fin-Level n X)
+        ( has-cardinality-type-UU-Fin n X)
         ( is-decidable-Prop (prop-Eq-Rel same-orbits-permutation a b))
         ( λ h →
           is-decidable-trunc-Prop-is-merely-decidable
@@ -544,7 +544,7 @@ module _
                   ( λ m p → p)))))
       where
       is-decidable-iterate-is-decidable-bounded :
-        ( h : Fin n ≃ type-UU-Fin-Level n X) (a b : type-UU-Fin-Level n X) →
+        ( h : Fin n ≃ type-UU-Fin n X) (a b : type-UU-Fin n X) →
         is-decidable
           ( Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
         is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
@@ -566,12 +566,12 @@ module _
                          ( pr1
                            ( pr2
                              ( has-finite-orbits-permutation
-                               ( type-UU-Fin-Level n X)
+                               ( type-UU-Fin n X)
                                ( pair n h)
                                ( f)
                                ( a)))))
                        ( leq-has-finite-orbits-permutation-number-elements
-                         ( type-UU-Fin-Level n X)
+                         ( type-UU-Fin n X)
                          ( pair n h)
                          ( f)
                          ( a))))
@@ -581,7 +581,7 @@ module _
                          ( map-equiv f))
                        ( inv
                          ( mult-has-finite-orbits-permutation
-                           ( type-UU-Fin-Level n X)
+                           ( type-UU-Fin n X)
                            ( pair n h)
                            ( f)
                            ( a)
@@ -605,7 +605,7 @@ module _
         m : ℕ
         m = pr1
             ( has-finite-orbits-permutation
-              ( type-UU-Fin-Level n X)
+              ( type-UU-Fin n X)
               ( pair n h)
               ( f)
               ( a))
@@ -613,7 +613,7 @@ module _
   abstract
     is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation :
       (T : equivalence-class same-orbits-permutation) →
-      (a : type-UU-Fin-Level n X) →
+      (a : type-UU-Fin n X) →
       is-decidable (is-in-subtype-equivalence-class same-orbits-permutation T a)
     is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation T a =
       is-decidable-is-in-subtype-equivalence-class-is-decidable
@@ -627,10 +627,10 @@ module _
       is-finite (equivalence-class same-orbits-permutation)
     has-finite-number-orbits-permutation =
       is-finite-codomain
-        ( is-finite-type-UU-Fin-Level n X)
+        ( is-finite-type-UU-Fin n X)
         ( is-surjective-class same-orbits-permutation)
         ( apply-universal-property-trunc-Prop
-          ( has-cardinality-type-UU-Fin-Level n X)
+          ( has-cardinality-type-UU-Fin n X)
           ( pair
             ( has-decidable-equality
               ( equivalence-class same-orbits-permutation))
@@ -648,7 +648,7 @@ module _
       where
       cases-decidable-equality :
         (T1 T2 : equivalence-class same-orbits-permutation)
-        (t1 : type-UU-Fin-Level n X) →
+        (t1 : type-UU-Fin n X) →
         Id T1 (class same-orbits-permutation t1) →
         is-decidable
           ( is-in-subtype-equivalence-class same-orbits-permutation T2 t1) →

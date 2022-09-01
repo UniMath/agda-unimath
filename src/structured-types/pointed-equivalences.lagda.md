@@ -1,4 +1,6 @@
-# Pointed equivalences
+---
+title: Pointed equivalences
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -14,7 +16,7 @@ open import foundation.equivalences using
   ( is-equiv; is-contr-sec-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
     _∘e_; is-emb-is-equiv; is-contr-retr-is-equiv; isretr-map-inv-is-equiv;
     is-equiv-comp'; _≃_; is-property-is-equiv; map-equiv; id-equiv;
-    map-inv-equiv; is-equiv-has-inverse)
+    map-inv-equiv; is-equiv-has-inverse; is-equiv-map-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_; id)
@@ -40,7 +42,8 @@ open import structured-types.pointed-homotopies using
     right-whisker-htpy-pointed-map)
 open import structured-types.pointed-maps using
   ( _→*_; comp-pointed-map; id-pointed-map; map-pointed-map;
-    preserves-point-pointed-map; precomp-pointed-map)
+    preserves-point-pointed-map; precomp-pointed-map;
+    preserves-point-comp-pointed-map)
 open import structured-types.pointed-types using
   ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
 ```
@@ -49,7 +52,78 @@ open import structured-types.pointed-types using
 
 A pointed equivalence is an equivalence in the category of pointed spaces. Equivalently, a pointed equivalence is a pointed map of which the underlying function is an equivalence.
 
-## Definition
+## Definitions
+
+### Pointed equivalences
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
+
+  is-equiv-pointed-map : (A →* B) → UU (l1 ⊔ l2)
+  is-equiv-pointed-map f = is-equiv (map-pointed-map A B f)
+
+_≃*_ :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → UU (l1 ⊔ l2)
+A ≃* B =
+  Σ ( type-Pointed-Type A ≃ type-Pointed-Type B)
+    ( λ e → Id (map-equiv e (pt-Pointed-Type A)) (pt-Pointed-Type B))
+
+compute-pointed-equiv :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  (A ≃* B) ≃ Σ (A →* B) (is-equiv-pointed-map A B)
+compute-pointed-equiv A B = equiv-right-swap-Σ
+
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (e : A ≃* B)
+  where
+
+  equiv-pointed-equiv : type-Pointed-Type A ≃ type-Pointed-Type B
+  equiv-pointed-equiv = pr1 e
+
+  map-equiv-pointed-equiv : type-Pointed-Type A → type-Pointed-Type B
+  map-equiv-pointed-equiv = map-equiv equiv-pointed-equiv
+
+  is-equiv-map-equiv-pointed-equiv : is-equiv map-equiv-pointed-equiv
+  is-equiv-map-equiv-pointed-equiv = is-equiv-map-equiv equiv-pointed-equiv
+
+  preserves-point-equiv-pointed-equiv :
+    Id (map-equiv-pointed-equiv (pt-Pointed-Type A)) (pt-Pointed-Type B)
+  preserves-point-equiv-pointed-equiv = pr2 e
+
+  pointed-map-pointed-equiv : A →* B
+  pr1 pointed-map-pointed-equiv = map-equiv-pointed-equiv
+  pr2 pointed-map-pointed-equiv = preserves-point-equiv-pointed-equiv
+
+  is-equiv-pointed-map-pointed-equiv :
+    is-equiv-pointed-map A B pointed-map-pointed-equiv
+  is-equiv-pointed-map-pointed-equiv = is-equiv-map-equiv-pointed-equiv
+```
+
+### The identity pointed equivalence
+
+```agda
+id-pointed-equiv : {l : Level} (A : Pointed-Type l) → A ≃* A
+pr1 (id-pointed-equiv A) = id-equiv
+pr2 (id-pointed-equiv A) = refl
+```
+
+### Composition of pointed equivalences
+
+```agda
+comp-pointed-equiv :
+  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  (C : Pointed-Type l3) → (B ≃* C) → (A ≃* B) → (A ≃* C)
+pr1 (comp-pointed-equiv A B C f e) =
+  equiv-pointed-equiv B C f ∘e equiv-pointed-equiv A B e
+pr2 (comp-pointed-equiv A B C f e) =
+  preserves-point-comp-pointed-map A B C
+    ( pointed-map-pointed-equiv B C f)
+    ( pointed-map-pointed-equiv A B e)
+```
+
+### Pointed isomorphisms
 
 ```agda
 module _
@@ -74,12 +148,39 @@ module _
 
   is-iso-pointed-map : UU (l1 ⊔ l2)
   is-iso-pointed-map = sec-pointed-map × retr-pointed-map
+```
 
-  is-equiv-pointed-map : UU (l1 ⊔ l2)
-  is-equiv-pointed-map = is-equiv (map-pointed-map A B f)
+## Properties
+
+### Extensionality of the universe of pointed types
+
+```agda
+module _
+  {l1 : Level} (A : Pointed-Type l1)
+  where
+  
+  extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
+  extensionality-Pointed-Type =
+    extensionality-Σ
+      ( λ b e → Id (map-equiv e (pt-Pointed-Type A)) b)
+      ( id-equiv)
+      ( refl)
+      ( λ B → equiv-univalence)
+      ( λ a → id-equiv)
+
+  eq-pointed-equiv : (B : Pointed-Type l1) → A ≃* B → Id A B
+  eq-pointed-equiv B = map-inv-equiv (extensionality-Pointed-Type B)
+```
+
+### Being a pointed equivalence is equivalent to being a pointed isomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
+  where
 
   is-contr-sec-is-equiv-pointed-map :
-    is-equiv-pointed-map → is-contr sec-pointed-map
+    is-equiv-pointed-map A B f → is-contr (sec-pointed-map A B f)
   is-contr-sec-is-equiv-pointed-map H =
     is-contr-total-Eq-structure
       ( λ g p (G : (map-pointed-map A B f ∘ g) ~ id) →
@@ -118,7 +219,7 @@ module _
             ( inv (preserves-point-pointed-map A B f)))))
 
   is-contr-retr-is-equiv-pointed-map :
-    is-equiv-pointed-map → is-contr retr-pointed-map
+    is-equiv-pointed-map A B f → is-contr (retr-pointed-map A B f)
   is-contr-retr-is-equiv-pointed-map H =
     is-contr-total-Eq-structure
       ( λ g p (G : (g ∘ map-pointed-map A B f) ~ id) →
@@ -160,92 +261,43 @@ module _
           ( isretr-map-inv-is-equiv H (pt-Pointed-Type A))))
 
   is-contr-is-iso-is-equiv-pointed-map :
-    is-equiv-pointed-map → is-contr is-iso-pointed-map
+    is-equiv-pointed-map A B f → is-contr (is-iso-pointed-map A B f)
   is-contr-is-iso-is-equiv-pointed-map H =
     is-contr-prod
       ( is-contr-sec-is-equiv-pointed-map H)
       ( is-contr-retr-is-equiv-pointed-map H)
 
   is-iso-is-equiv-pointed-map :
-    is-equiv-pointed-map → is-iso-pointed-map
+    is-equiv-pointed-map A B f → is-iso-pointed-map A B f
   is-iso-is-equiv-pointed-map H =
     center (is-contr-is-iso-is-equiv-pointed-map H)
 
   is-equiv-is-iso-pointed-map :
-    is-iso-pointed-map → is-equiv-pointed-map
-  is-equiv-is-iso-pointed-map H =
-    pair
-      ( pair
-        ( pr1 (pr1 (pr1 H)))
-        ( pr1 (pr2 (pr1 H))))
-      ( pair
-        ( pr1 (pr1 (pr2 H)))
-        ( pr1 (pr2 (pr2 H))))
+    is-iso-pointed-map A B f → is-equiv-pointed-map A B f
+  pr1 (pr1 (is-equiv-is-iso-pointed-map H)) = pr1 (pr1 (pr1 H))
+  pr2 (pr1 (is-equiv-is-iso-pointed-map H)) = pr1 (pr2 (pr1 H))
+  pr1 (pr2 (is-equiv-is-iso-pointed-map H)) = pr1 (pr1 (pr2 H))
+  pr2 (pr2 (is-equiv-is-iso-pointed-map H)) = pr1 (pr2 (pr2 H))
 
-  is-prop-is-iso-pointed-map : is-prop is-iso-pointed-map
+  is-prop-is-iso-pointed-map : is-prop (is-iso-pointed-map A B f)
   is-prop-is-iso-pointed-map =
     is-prop-is-proof-irrelevant
       ( λ H →
         is-contr-is-iso-is-equiv-pointed-map (is-equiv-is-iso-pointed-map H))
 
-  equiv-is-iso-is-equiv-pointed-map : is-equiv-pointed-map ≃ is-iso-pointed-map
-  equiv-is-iso-is-equiv-pointed-map =
-    pair
-      ( is-iso-is-equiv-pointed-map)
-      ( is-equiv-is-prop
-        ( is-property-is-equiv (map-pointed-map A B f))
-        ( is-prop-is-iso-pointed-map)
-        ( is-equiv-is-iso-pointed-map))
+  equiv-is-iso-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f ≃ (is-iso-pointed-map A B f)
+  pr1 equiv-is-iso-is-equiv-pointed-map = is-iso-is-equiv-pointed-map
+  pr2 equiv-is-iso-is-equiv-pointed-map =
+    is-equiv-is-prop
+      ( is-property-is-equiv (map-pointed-map A B f))
+      ( is-prop-is-iso-pointed-map)
+      ( is-equiv-is-iso-pointed-map)
+```
 
-_≃*_ :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → UU (l1 ⊔ l2)
-A ≃* B =
-  Σ ( type-Pointed-Type A ≃ type-Pointed-Type B)
-    ( λ e → Id (map-equiv e (pt-Pointed-Type A)) (pt-Pointed-Type B))
+### Precomposing by pointed equivalences is a pointed equivalence
 
-compute-pointed-equiv :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  (A ≃* B) ≃ Σ (A →* B) (is-equiv-pointed-map A B)
-compute-pointed-equiv A B = equiv-right-swap-Σ
-
-module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (e : A ≃* B)
-  where
-
-  equiv-pointed-equiv : type-Pointed-Type A ≃ type-Pointed-Type B
-  equiv-pointed-equiv = pr1 e
-
-  map-equiv-pointed-equiv : type-Pointed-Type A → type-Pointed-Type B
-  map-equiv-pointed-equiv = map-equiv equiv-pointed-equiv
-
-  preserves-point-equiv-pointed-equiv :
-    Id (map-equiv-pointed-equiv (pt-Pointed-Type A)) (pt-Pointed-Type B)
-  preserves-point-equiv-pointed-equiv = pr2 e
-
-  pointed-map-pointed-equiv : A →* B
-  pointed-map-pointed-equiv =
-    pair map-equiv-pointed-equiv preserves-point-equiv-pointed-equiv
-
--- We characterize the identity type of the universe of pointed types
-
-module _
-  {l1 : Level} (A : Pointed-Type l1)
-  where
-  
-  extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
-  extensionality-Pointed-Type =
-    extensionality-Σ
-      ( λ b e → Id (map-equiv e (pt-Pointed-Type A)) b)
-      ( id-equiv)
-      ( refl)
-      ( λ B → equiv-univalence)
-      ( λ a → id-equiv)
-
-  eq-pointed-equiv : (B : Pointed-Type l1) → A ≃* B → Id A B
-  eq-pointed-equiv B = map-inv-equiv (extensionality-Pointed-Type B)
-
--- Precomposing by pointed equivalences
-
+```agda
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
   where
@@ -361,8 +413,21 @@ module _
     H : htpy-pointed-map A A (comp-pointed-map A B A h f) id-pointed-map
     H = pr2 (pr2 I)
 
--- Postcomposing by pointed equivalences
+equiv-precomp-pointed-map :
+  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  (C : Pointed-Type l3) → (A ≃* B) → (B →* C) ≃ (A →* C)
+pr1 (equiv-precomp-pointed-map A B C f) g =
+  comp-pointed-map A B C g (pointed-map-pointed-equiv A B f)
+pr2 (equiv-precomp-pointed-map A B C f) =
+  is-equiv-precomp-is-equiv-pointed-map A B
+    ( pointed-map-pointed-equiv A B f)
+    ( is-equiv-map-equiv-pointed-equiv A B f)
+    ( C)
+```
 
+### Postcomposing by pointed equivalences is a pointed equivalence
+
+```agda
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →* B)
   where

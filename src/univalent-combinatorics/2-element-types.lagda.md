@@ -76,10 +76,9 @@ open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; Fin-UU-Fin-Level; UU-Fin; type-UU-Fin;
-    Fin-UU-Fin; has-cardinality; has-cardinality-Prop; equiv-UU-Fin-Level;
-    is-finite; 𝔽; is-finite-has-cardinality; set-UU-Fin-Level;
-    is-set-has-cardinality)
+  ( UU-Fin; type-UU-Fin; Fin-UU-Fin; Fin-UU-Fin'; has-cardinality;
+    has-cardinality-Prop; equiv-UU-Fin; is-finite; 𝔽; is-finite-has-cardinality;
+    set-UU-Fin; is-set-has-cardinality)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; equiv-succ-Fin; one-Fin; raise-Fin; equiv-raise-Fin;
     is-not-contractible-Fin; succ-Fin; is-contr-Fin-one-ℕ)
@@ -108,7 +107,7 @@ is-prop-has-two-elements {l} {X} = is-prop-type-Prop (has-two-elements-Prop X)
 
 ```agda
 2-Element-Type : (l : Level) → UU (lsuc l)
-2-Element-Type l = UU-Fin-Level l 2
+2-Element-Type l = UU-Fin l 2
 
 type-2-Element-Type : {l : Level} → 2-Element-Type l → UU l
 type-2-Element-Type = pr1
@@ -122,7 +121,7 @@ is-finite-type-2-Element-Type :
 is-finite-type-2-Element-Type X =
   is-finite-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
 
-finite-type-2-Element-Type : 2-Element-Type lzero → 𝔽
+finite-type-2-Element-Type : {l : Level} → 2-Element-Type l → 𝔽 l
 pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
 pr2 (finite-type-2-Element-Type X) = is-finite-type-2-Element-Type X
 ```
@@ -179,7 +178,7 @@ pr2 (set-2-Element-Type X) = is-set-type-2-Element-Type X
 ```agda
 equiv-2-Element-Type :
   {l1 l2 : Level} → 2-Element-Type l1 → 2-Element-Type l2 → UU (l1 ⊔ l2)
-equiv-2-Element-Type X Y = equiv-UU-Fin-Level 2 X Y
+equiv-2-Element-Type X Y = equiv-UU-Fin 2 X Y
 
 id-equiv-2-Element-Type :
   {l1 : Level} (X : 2-Element-Type l1) → equiv-2-Element-Type X X
@@ -365,89 +364,50 @@ module _
 
 ```agda
 abstract
-  is-contr-total-UU-Fin-Level-two-ℕ :
-    {l : Level} → is-contr (Σ (UU-Fin-Level l 2) (type-UU-Fin-Level 2))
-  is-contr-total-UU-Fin-Level-two-ℕ {l} =
+  is-contr-total-UU-Fin-two-ℕ :
+    {l : Level} → is-contr (Σ (UU-Fin l 2) (type-UU-Fin 2))
+  is-contr-total-UU-Fin-two-ℕ {l} =
     is-contr-equiv'
-      ( Σ ( UU-Fin-Level l 2)
-          ( λ X → raise-Fin l 2 ≃ type-UU-Fin-Level 2 X))
+      ( Σ ( UU-Fin l 2)
+          ( λ X → raise-Fin l 2 ≃ type-UU-Fin 2 X))
       ( equiv-tot
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
           ( equiv-precomp-equiv (equiv-raise-Fin l 2) (pr1 X))))
       ( is-contr-total-equiv-subuniverse
         ( mere-equiv-Prop (Fin 2))
-        ( Fin-UU-Fin-Level l 2))
-```
-
-#### The type of pointed 2-element types of universe level `lzero` is contractible
-
-```agda
-abstract
-  is-contr-total-UU-Fin-two-ℕ :
-    is-contr (Σ (UU-Fin 2) (λ X → type-UU-Fin 2 X))
-  is-contr-total-UU-Fin-two-ℕ = is-contr-total-UU-Fin-Level-two-ℕ
+        ( Fin-UU-Fin l 2))
 ```
 
 #### Completing the characterization of the identity type of the type of 2-element types of arbitrary universe level
 
 ```agda
-point-eq-UU-Fin-Level-two-ℕ :
-  {l : Level} {X : UU-Fin-Level l 2} →
-  Fin-UU-Fin-Level l 2 ＝ X → type-UU-Fin-Level 2 X
-point-eq-UU-Fin-Level-two-ℕ refl = map-raise (zero-Fin 1)
-
-abstract
-  is-equiv-point-eq-UU-Fin-Level-two-ℕ :
-    {l : Level} (X : UU-Fin-Level l 2) →
-    is-equiv (point-eq-UU-Fin-Level-two-ℕ {l} {X})
-  is-equiv-point-eq-UU-Fin-Level-two-ℕ {l} =
-    fundamental-theorem-id
-      ( Fin-UU-Fin-Level l 2)
-      ( map-raise (zero-Fin 1))
-      ( is-contr-total-UU-Fin-Level-two-ℕ)
-      ( λ X → point-eq-UU-Fin-Level-two-ℕ {l} {X})
-
-equiv-point-eq-UU-Fin-Level-two-ℕ :
-  {l : Level} {X : UU-Fin-Level l 2} →
-  (Fin-UU-Fin-Level l 2 ＝ X) ≃ type-UU-Fin-Level 2 X
-pr1 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
-  point-eq-UU-Fin-Level-two-ℕ
-pr2 (equiv-point-eq-UU-Fin-Level-two-ℕ {l} {X}) =
-  is-equiv-point-eq-UU-Fin-Level-two-ℕ X
-
-eq-point-UU-Fin-Level-two-ℕ :
-  {l : Level} {X : UU-Fin-Level l 2} →
-  type-UU-Fin-Level 2 X → Fin-UU-Fin-Level l 2 ＝ X
-eq-point-UU-Fin-Level-two-ℕ =
-  map-inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ
-```
-
-#### Completing the characterization of the identity type of the type of 2-element types of universe level `lzero`
-
-```agda
 point-eq-UU-Fin-two-ℕ :
-  {X : UU-Fin 2} → Fin-UU-Fin 2 ＝ X → type-UU-Fin 2 X
-point-eq-UU-Fin-two-ℕ refl = zero-Fin 1
+  {l : Level} {X : UU-Fin l 2} →
+  Fin-UU-Fin l 2 ＝ X → type-UU-Fin 2 X
+point-eq-UU-Fin-two-ℕ refl = map-raise (zero-Fin 1)
 
 abstract
   is-equiv-point-eq-UU-Fin-two-ℕ :
-    (X : UU-Fin 2) → is-equiv (point-eq-UU-Fin-two-ℕ {X})
-  is-equiv-point-eq-UU-Fin-two-ℕ =
+    {l : Level} (X : UU-Fin l 2) →
+    is-equiv (point-eq-UU-Fin-two-ℕ {l} {X})
+  is-equiv-point-eq-UU-Fin-two-ℕ {l} =
     fundamental-theorem-id
-      ( Fin-UU-Fin 2)
-      ( zero-Fin 1)
       ( is-contr-total-UU-Fin-two-ℕ)
-      ( λ X → point-eq-UU-Fin-two-ℕ {X})
+      ( λ X → point-eq-UU-Fin-two-ℕ {l} {X})
 
 equiv-point-eq-UU-Fin-two-ℕ :
-  {X : UU-Fin 2} → (Fin-UU-Fin 2 ＝ X) ≃ type-UU-Fin 2 X
-pr1 (equiv-point-eq-UU-Fin-two-ℕ {X}) = point-eq-UU-Fin-two-ℕ
-pr2 (equiv-point-eq-UU-Fin-two-ℕ {X}) = is-equiv-point-eq-UU-Fin-two-ℕ X
+  {l : Level} {X : UU-Fin l 2} →
+  (Fin-UU-Fin l 2 ＝ X) ≃ type-UU-Fin 2 X
+pr1 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
+  point-eq-UU-Fin-two-ℕ
+pr2 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
+  is-equiv-point-eq-UU-Fin-two-ℕ X
 
 eq-point-UU-Fin-two-ℕ :
-  {X : UU-Fin 2} → type-UU-Fin 2 X → Fin-UU-Fin 2 ＝ X
-eq-point-UU-Fin-two-ℕ {X} =
+  {l : Level} {X : UU-Fin l 2} →
+  type-UU-Fin 2 X → Fin-UU-Fin l 2 ＝ X
+eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
 
@@ -527,38 +487,32 @@ module _
 
 ```agda
 abstract
-  no-section-type-UU-Fin-Level-two-ℕ :
-    {l : Level} → ¬ ((X : UU-Fin-Level l 2) → type-UU-Fin-Level 2 X)
-  no-section-type-UU-Fin-Level-two-ℕ {l} f =
+  no-section-type-UU-Fin-two-ℕ :
+    {l : Level} → ¬ ((X : UU-Fin l 2) → type-UU-Fin 2 X)
+  no-section-type-UU-Fin-two-ℕ {l} f =
     is-not-contractible-Fin 2
       ( Eq-eq-ℕ)
       ( is-contr-equiv
-        ( Fin-UU-Fin-Level l 2 ＝ Fin-UU-Fin-Level l 2)
-        ( ( inv-equiv equiv-point-eq-UU-Fin-Level-two-ℕ) ∘e
+        ( Fin-UU-Fin l 2 ＝ Fin-UU-Fin l 2)
+        ( ( inv-equiv equiv-point-eq-UU-Fin-two-ℕ) ∘e
           ( equiv-raise-Fin l 2))
         ( is-prop-is-contr
           ( pair
-            ( Fin-UU-Fin-Level l 2)
-            ( λ X → eq-point-UU-Fin-Level-two-ℕ (f X)))
-          ( Fin-UU-Fin-Level l 2)
-          ( Fin-UU-Fin-Level l 2)))
-
-abstract
-  no-section-type-UU-Fin-two-ℕ :
-    ¬ ((X : UU-Fin 2) → type-UU-Fin 2 X)
-  no-section-type-UU-Fin-two-ℕ f =
-    no-section-type-UU-Fin-Level-two-ℕ f
+            ( Fin-UU-Fin l 2)
+            ( λ X → eq-point-UU-Fin-two-ℕ (f X)))
+          ( Fin-UU-Fin l 2)
+          ( Fin-UU-Fin l 2)))
 ```
 
 ### There is no decidability procedure that proves that an arbitrary 2-element type is decidable
 
 ```agda
 abstract
-  is-not-decidable-type-UU-Fin-Level-two-ℕ :
+  is-not-decidable-type-UU-Fin-two-ℕ :
     {l : Level} →
-    ¬ ((X : UU-Fin-Level l 2) → is-decidable (type-UU-Fin-Level 2 X))
-  is-not-decidable-type-UU-Fin-Level-two-ℕ {l} d =
-    no-section-type-UU-Fin-Level-two-ℕ
+    ¬ ((X : UU-Fin l 2) → is-decidable (type-UU-Fin 2 X))
+  is-not-decidable-type-UU-Fin-two-ℕ {l} d =
+    no-section-type-UU-Fin-two-ℕ
       ( λ X →
         map-right-unit-law-coprod-is-empty
           ( pr1 X)
@@ -609,7 +563,7 @@ module _
   is-involution-aut-2-element-type e x =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
-      ( Id-Prop (set-UU-Fin-Level 2 X) (map-equiv (e ∘e e) x) x)
+      ( Id-Prop (set-UU-Fin 2 X) (map-equiv (e ∘e e) x) x)
       ( λ h →
         ( ap (map-equiv (e ∘e e)) (inv (issec-map-inv-equiv h x))) ∙
         ( ( ap (map-equiv e) (inv (issec-map-inv-equiv h _))) ∙
@@ -665,16 +619,16 @@ module _
   compute-map-equiv-point-2-Element-Type' x = refl
 
 compute-swap-Fin-two-ℕ :
-  map-swap-2-Element-Type (Fin-UU-Fin 2) ~ succ-Fin 2
+  map-swap-2-Element-Type (Fin-UU-Fin' 2) ~ succ-Fin 2
 compute-swap-Fin-two-ℕ (inl (inr star)) =
   compute-swap-2-Element-Type
-    ( Fin-UU-Fin 2)
+    ( Fin-UU-Fin' 2)
     ( zero-Fin 1)
     ( one-Fin 1)
     ( neq-inl-inr)
 compute-swap-Fin-two-ℕ (inr star) =
   compute-swap-2-Element-Type
-    ( Fin-UU-Fin 2)
+    ( Fin-UU-Fin' 2)
     ( one-Fin 1)
     ( zero-Fin 1)
     ( neq-inr-inl)

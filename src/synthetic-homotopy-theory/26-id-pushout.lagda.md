@@ -3,8 +3,6 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module synthetic-homotopy-theory.26-id-pushout where
 
 open import foundation.cartesian-product-types
@@ -24,10 +22,12 @@ open import foundation.structure-identity-principle
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.23-pullbacks
 open import synthetic-homotopy-theory.24-pushouts
-open import synthetic-homotopy-theory.25-cubical-diagrams
 open import synthetic-homotopy-theory.26-descent
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
+
 
 -- Section 19.1 Characterizing families of maps over pushouts
 
@@ -117,8 +117,7 @@ module hom-Fam-pushout
   is-equiv-htpy-hom-Fam-pushout-eq :
     ( h k : hom-Fam-pushout) → is-equiv (htpy-hom-Fam-pushout-eq h k)
   is-equiv-htpy-hom-Fam-pushout-eq h =
-    fundamental-theorem-id h
-      ( reflexive-htpy-hom-Fam-pushout h)
+    fundamental-theorem-id
       ( is-contr-total-htpy-hom-Fam-pushout h)
       ( htpy-hom-Fam-pushout-eq h)
 

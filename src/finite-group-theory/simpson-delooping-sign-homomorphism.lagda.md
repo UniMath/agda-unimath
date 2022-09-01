@@ -56,10 +56,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n)
+  {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
 
-  sign-comp-Eq-Rel : Eq-Rel lzero (Fin n ≃ type-UU-Fin-Level n X)
+  sign-comp-Eq-Rel : Eq-Rel lzero (Fin n ≃ type-UU-Fin n X)
   pr1 sign-comp-Eq-Rel f g =
     Id-Prop (Fin-Set 2) (zero-Fin 1) (sign-homomorphism-Fin-two n X (f ∘e inv-equiv g))
   pr1 (pr2 sign-comp-Eq-Rel) {f} =
@@ -542,14 +542,14 @@ module _
     sec-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
 
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n) (ineq : leq-ℕ 2 n)
+  {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
   
-  equiv-Fin-2-quotient-sign-comp-equiv-Fin-n : (h : Fin n ≃ type-UU-Fin-Level n X) →
+  equiv-Fin-2-quotient-sign-comp-equiv-Fin-n : (h : Fin n ≃ type-UU-Fin n X) →
     ( Fin 2 ≃ quotient-sign-comp n X)
   equiv-Fin-2-quotient-sign-comp-equiv-Fin-n h =
     tr
-      ( λ e → Fin 2 ≃ quotient-sign-comp n (pair (type-UU-Fin-Level n X) e))
+      ( λ e → Fin 2 ≃ quotient-sign-comp n (pair (type-UU-Fin n X) e))
       ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
       ( equiv-Fin-2-quotient-sign-comp-count (pair n h) ineq)
     
@@ -559,7 +559,7 @@ module _
     mere-equiv-Fin-2-quotient-sign-comp =
       map-trunc-Prop
         ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n)
-        ( has-cardinality-type-UU-Fin-Level n X)
+        ( has-cardinality-type-UU-Fin n X)
 
 module _
   { l : Level}

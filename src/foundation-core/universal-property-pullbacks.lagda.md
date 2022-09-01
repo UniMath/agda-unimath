@@ -8,11 +8,16 @@ title: The universal property of pullbacks
 module foundation-core.universal-property-pullbacks where
 
 open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 
@@ -30,6 +35,8 @@ module _
   universal-property-pullback =
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
 ```
+
+### Properties
 
 ### 3-for-2 property of pullbacks
 
@@ -94,4 +101,25 @@ module _
         ( triangle-cone-cone D)
         ( up' D)
         ( is-equiv-postcomp-is-equiv h is-equiv-h D)
+```
+
+### Uniqueness of maps obtained via the universal property of pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
+  where
+
+  abstract
+    uniqueness-universal-property-pullback :
+      ({l : Level} → universal-property-pullback l f g c) →
+      {l5 : Level} (C' : UU l5) (c' : cone f g C') →
+      is-contr (Σ (C' → C) (λ h → htpy-cone f g (cone-map f g c h) c'))
+    uniqueness-universal-property-pullback up C' c' =
+      is-contr-equiv'
+        ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
+        ( equiv-tot
+          ( λ h → extensionality-cone f g (cone-map f g c h) c'))
+        ( is-contr-map-is-equiv (up C')  c')
 ```

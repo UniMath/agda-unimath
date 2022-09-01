@@ -7,17 +7,14 @@ title: The group of integers
 
 module elementary-number-theory.group-of-integers where
 
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ; associative-add-ℤ; left-unit-law-add-ℤ; right-unit-law-add-ℤ;
-    left-inverse-law-add-ℤ; right-inverse-law-add-ℤ)
-open import elementary-number-theory.equality-integers using (ℤ-Set)
-open import elementary-number-theory.integers using (zero-ℤ; neg-ℤ)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.integers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (lzero)
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.groups
+open import group-theory.semigroups
 ```
 
 ## Idea

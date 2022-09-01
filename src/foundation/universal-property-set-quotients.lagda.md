@@ -68,7 +68,7 @@ open import foundation.sets using
     is-set-function-type)
 open import foundation.small-types using (is-small; is-small-Prop)
 open import foundation.subtypes using
-  ( eq-subtype; equiv-ap-inclusion-subtype)
+  ( eq-type-subtype; equiv-ap-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; dependent-universal-property-surj-is-surjective)
 open import foundation.univalence using (equiv-eq)
@@ -454,7 +454,7 @@ module _
       contraction-total-P :
         (u : Σ (type-Set B) (λ b → type-Prop (P b))) → center-total-P ＝ u
       contraction-total-P (pair b p) =
-        eq-subtype P
+        eq-type-subtype P
           ( apply-universal-property-trunc-Prop
             ( is-surjective-is-set-quotient R B q H Q b)
             ( Id-Prop B (q x) b)
@@ -468,7 +468,7 @@ module _
       β : (b : type-Set B) → q x ＝ b → type-Prop (P b)
       β .(q x) refl = point-P
       γ : (b : type-Set B) → is-equiv (β b)
-      γ = fundamental-theorem-id (q x) point-P is-contr-total-P β
+      γ = fundamental-theorem-id is-contr-total-P β
       δ : (b : type-Set B) → (q x ＝ b) ≃ type-Prop (P b)
       δ b = pair (β b) (γ b)
 
@@ -507,7 +507,7 @@ module _
       all-elements-equal-total-P :
         (b : type-Set B) → all-elements-equal (Σ (type-Set X) (P b))
       all-elements-equal-total-P b x y =
-        eq-subtype
+        eq-type-subtype
           ( P-Prop b)
           ( apply-universal-property-trunc-Prop
             ( pr2 x)
@@ -567,7 +567,7 @@ module _
               ( pr1 f)))
           ( pair
             ( λ b → pr1 (α E X f b))
-            ( eq-subtype
+            ( eq-type-subtype
               ( reflects-Eq-Rel-Prop R X)
               ( eq-htpy (λ a → ap pr1 (β E X f a))))))
 

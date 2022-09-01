@@ -94,10 +94,13 @@ pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-�
 has-unique-proper-divisor-is-prime-ℕ :
   (n : ℕ) → is-prime-ℕ n → has-unique-proper-divisor-ℕ n
 has-unique-proper-divisor-is-prime-ℕ n H =
-  fundamental-theorem-id' 1
-    ( pr2 (H 1) refl)
+  fundamental-theorem-id'
     ( λ x p → pr2 (H x) (inv p))
-    ( λ x → is-equiv-is-prop (is-set-ℕ 1 x) (is-prop-is-proper-divisor-ℕ n x) (λ p → inv (pr1 (H x) p)))
+    ( λ x →
+      is-equiv-is-prop
+        ( is-set-ℕ 1 x)
+        ( is-prop-is-proper-divisor-ℕ n x)
+        ( λ p → inv (pr1 (H x) p)))
 
 is-prime-has-unique-proper-divisor-ℕ :
   (n : ℕ) → has-unique-proper-divisor-ℕ n → is-prime-ℕ n

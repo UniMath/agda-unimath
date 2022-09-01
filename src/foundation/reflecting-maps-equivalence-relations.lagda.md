@@ -7,23 +7,25 @@ title: Reflecting maps for equivalence relations
 
 module foundation.reflecting-maps-equivalence-relations where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.effective-maps-equivalence-relations using
   ( is-surjective-and-effective)
 open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
-open import foundation.equivalences using
+open import foundation.homotopies using
+  ( _~_; refl-htpy; is-contr-total-htpy)
+
+open import foundation-core.contractible-types using (is-contr)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
   ( map-inv-equiv; is-equiv; _≃_; map-inv-is-equiv)
-open import foundation.fundamental-theorem-of-identity-types using
+open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.propositions using
+open import foundation-core.identity-types using (_＝_; refl)
+open import foundation-core.propositions using
   ( is-prop; is-prop-Π'; is-prop-function-type; UU-Prop)
-open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
-open import foundation.subtype-identity-principle using
+open import foundation-core.sets using (UU-Set; type-Set; is-set-type-Set)
+open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
 ## Idea
@@ -133,8 +135,7 @@ module _
       (g : reflecting-map-Eq-Rel R (type-Set B)) →
       is-equiv (htpy-eq-reflecting-map-Eq-Rel g)
     is-equiv-htpy-eq-reflecting-map-Eq-Rel =
-      fundamental-theorem-id f
-        refl-htpy-reflecting-map-Eq-Rel
+      fundamental-theorem-id
         is-contr-total-htpy-reflecting-map-Eq-Rel
         htpy-eq-reflecting-map-Eq-Rel
 

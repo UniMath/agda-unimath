@@ -1,4 +1,6 @@
-# Groups of order 2
+---
+title: Groups of order 2
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
@@ -126,8 +128,7 @@ module _
   is-equiv-iso-eq-Group-of-Order-2 :
     (H : Group-of-Order-2 l) → is-equiv (iso-eq-Group-of-Order-2 H)
   is-equiv-iso-eq-Group-of-Order-2 =
-    fundamental-theorem-id G
-      ( id-iso-Group (group-Group-of-Order-2 G))
+    fundamental-theorem-id
       ( is-contr-total-iso-Group-of-Order-2)
       ( iso-eq-Group-of-Order-2)
 

@@ -1,4 +1,6 @@
-# Category theory
+---
+title: Category theory
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -15,6 +17,7 @@ open import category-theory.functors-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
 open import category-theory.homotopies-natural-transformations-large-precategories public
+open import category-theory.initial-objects-precategories public
 open import category-theory.isomorphisms-categories public
 open import category-theory.isomorphisms-large-precategories public
 open import category-theory.isomorphisms-precategories public
@@ -29,4 +32,5 @@ open import category-theory.natural-transformations-large-precategories public
 open import category-theory.natural-transformations-precategories public
 open import category-theory.precategories public
 open import category-theory.slice-precategories public
+open import category-theory.terminal-objects-precategories public
 ```

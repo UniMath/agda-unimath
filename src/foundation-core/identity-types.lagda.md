@@ -246,6 +246,22 @@ tr-ap :
   (f : A → C) (g : (x : A) → B x → D (f x)) {x y : A} (p : x ＝ y) (z : B x) →
   (tr D (ap f p) (g x z)) ＝ (g y (tr B p z))
 tr-ap f g refl z = refl
+
+preserves-tr :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i) {i j : I} (p : i ＝ j) (x : A i) →
+  f j (tr A p x) ＝ tr B p (f i x)
+preserves-tr f refl x = refl
+
+tr-id-right :
+  {l1 : Level} {A : UU l1} {a b c : A} (q : Id b c) (p : Id a b) →
+  Id (tr (λ y → Id a y) q p) (p ∙ q)
+tr-id-right refl refl = refl
+
+tr-const :
+  {i j : Level} {A : UU i} {B : UU j} {x y : A} (p : Id x y) (b : B) →
+  Id (tr (λ (a : A) → B) p b) b
+tr-const refl b = refl
 ```
 
 ### The Mac Lane pentagon for identity types
@@ -319,4 +335,9 @@ apd :
   {i j : Level} {A : UU i} {B : A → UU j} (f : (x : A) → B x) {x y : A}
   (p : x ＝ y) → (tr B p (f x)) ＝ (f y)
 apd f refl = refl
+
+apd-const :
+  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
+  (p : Id x y) → Id (apd f p) ((tr-const p (f x)) ∙ (ap f p))
+apd-const f refl = refl
 ```

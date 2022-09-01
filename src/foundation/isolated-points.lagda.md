@@ -37,7 +37,7 @@ open import foundation.propositions using
     is-prop-is-inhabited; is-prop-Π; eq-is-prop)
 open import foundation.sets using (is-set)
 open import foundation.subtypes using
-  ( eq-subtype; is-emb-inclusion-subtype; equiv-ap-inclusion-subtype)
+  ( eq-type-subtype; is-emb-inclusion-subtype; equiv-ap-inclusion-subtype)
 open import foundation.type-arithmetic-unit-type using
   ( left-unit-law-prod)
 open import foundation.unit-type using (unit; is-prop-unit; star)
@@ -148,7 +148,7 @@ module _
       (d : is-isolated a) (t : Σ A (Eq-isolated-point d)) →
       center-total-Eq-isolated-point d ＝ t
     contraction-total-Eq-isolated-point d (pair x e) =
-      eq-subtype
+      eq-type-subtype
         ( Eq-isolated-point-Prop d)
         ( cases-contraction-total-Eq-isolated-point d x (d x) e)
 
@@ -162,8 +162,7 @@ module _
     is-equiv-Eq-eq-isolated-point :
       (d : is-isolated a) (x : A) → is-equiv (Eq-eq-isolated-point d {x})
     is-equiv-Eq-eq-isolated-point d =
-      fundamental-theorem-id a
-        ( refl-Eq-isolated-point d)
+      fundamental-theorem-id 
         ( is-contr-total-Eq-isolated-point d)
         ( λ x → Eq-eq-isolated-point d {x})
 
@@ -183,8 +182,7 @@ module _
   abstract
     is-emb-const-is-isolated : is-isolated a → is-emb (const unit A a)
     is-emb-const-is-isolated d star =
-      fundamental-theorem-id star
-        refl
+      fundamental-theorem-id
         ( is-contr-equiv
           ( a ＝ a)
           ( left-unit-law-prod)

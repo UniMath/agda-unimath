@@ -27,8 +27,8 @@ open import foundation.subuniverses using
     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
 open import foundation.truncated-types using
   ( is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
-    is-trunc-function-type; is-trunc-equiv-is-trunc; is-trunc-UU-Trunc;
-    is-trunc-is-emb; is-trunc-emb)
+    is-trunc-function-type; is-trunc-equiv-is-trunc; is-trunc-Truncated-Type;
+    is-trunc-is-emb; is-trunc-emb; emb-type-Truncated-Type)
 ```
 
 ## Properties
@@ -38,7 +38,7 @@ open import foundation.truncated-types using
 ```
 abstract
   is-1-type-UU-Set : {l : Level}  → is-1-type (UU-Set l)
-  is-1-type-UU-Set = is-trunc-UU-Trunc zero-𝕋
+  is-1-type-UU-Set = is-trunc-Truncated-Type zero-𝕋
 ```
 
 ### Any contractible type is a set
@@ -90,6 +90,13 @@ abstract
 is-set-Prop : {l : Level} → UU l → UU-Prop l
 pr1 (is-set-Prop A) = is-set A
 pr2 (is-set-Prop A) = is-prop-is-set A
+```
+
+### The inclusion of sets into the universe is an embedding
+
+```agda
+emb-type-Set : (l : Level) → UU-Set l ↪ UU l
+emb-type-Set l = emb-type-Truncated-Type l zero-𝕋
 ```
 
 ### Products of families of sets are sets
@@ -181,11 +188,9 @@ module _
   equiv-Set : UU-Set (l1 ⊔ l2)
   pr1 equiv-Set = type-equiv-Set
   pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
-
-aut-Set :
-  {l : Level} (X : UU-Set l) → UU-Set l
-aut-Set X = equiv-Set X X
 ```
+
+### Extensionality of sets
 
 ```agda
 module _

@@ -45,7 +45,7 @@ abstract
     is-finite A → is-finite B → is-finite (A → B)
   is-finite-function-type f g = is-finite-Π f (λ x → g)
 
-_→-𝔽_ : 𝔽 → 𝔽 → 𝔽
+_→-𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
 pr1 (A →-𝔽 B) = type-𝔽 A → type-𝔽 B
 pr2 (A →-𝔽 B) =
   is-finite-function-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
@@ -74,7 +74,7 @@ abstract
               is-finite-Π f
                 ( λ x → is-finite-eq (has-decidable-equality-is-finite f)))))
 
-_≃-𝔽_ : 𝔽 → 𝔽 → 𝔽
+_≃-𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
 pr1 (A ≃-𝔽 B) = type-𝔽 A ≃ type-𝔽 B
 pr2 (A ≃-𝔽 B) = is-finite-≃ (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
 ```
@@ -82,6 +82,6 @@ pr2 (A ≃-𝔽 B) = is-finite-≃ (is-finite-type-𝔽 A) (is-finite-type-𝔽 
 ### The type of automorphisms on a finite type is finite
 
 ```agda
-Aut-𝔽 : 𝔽 → 𝔽
+Aut-𝔽 : {l : Level} → 𝔽 l → 𝔽 l
 Aut-𝔽 A = A ≃-𝔽 A
 ```

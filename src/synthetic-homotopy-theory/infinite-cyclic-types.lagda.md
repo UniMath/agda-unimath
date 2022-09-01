@@ -1,15 +1,12 @@
 # Infinite cyclic types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
 open import elementary-number-theory.addition-integers using
   ( equiv-add-ℤ; add-ℤ; right-successor-law-add-ℤ; left-inverse-law-add-ℤ)
 open import elementary-number-theory.integers using
-  ( ℤ; succ-ℤ; zero-ℤ; ℤ-Pointed-Type-With-Aut; neg-ℤ; ℤ-Endo;
-    is-initial-ℤ-Pointed-Type-With-Aut)
+  ( ℤ; succ-ℤ; zero-ℤ; neg-ℤ; ℤ-Endo)
 open import elementary-number-theory.natural-numbers using (zero-ℕ)
 
 open import foundation.contractible-maps using (is-equiv-is-contr-map)
@@ -35,6 +32,9 @@ open import foundation.type-arithmetic-dependent-pair-types using
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
+open import structured-types.initial-pointed-type-equipped-with-automorphism
+  using
+  ( ℤ-Pointed-Type-With-Aut; is-initial-ℤ-Pointed-Type-With-Aut)
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.pointed-types using (Pointed-Type)

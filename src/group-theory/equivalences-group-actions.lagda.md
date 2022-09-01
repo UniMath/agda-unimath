@@ -170,8 +170,7 @@ module _
     (f : equiv-Abstract-Group-Action G X Y) →
     is-equiv (htpy-eq-equiv-Abstract-Group-Action f)
   is-equiv-htpy-eq-equiv-Abstract-Group-Action =
-    fundamental-theorem-id e
-      refl-htpy-equiv-Abstract-Group-Action
+    fundamental-theorem-id
       is-contr-total-htpy-equiv-Abstract-Group-Action
       htpy-eq-equiv-Abstract-Group-Action
 
@@ -275,8 +274,7 @@ module _
       (Y : Abstract-Group-Action G l2) →
       is-equiv (equiv-eq-Abstract-Group-Action Y)
     is-equiv-equiv-eq-Abstract-Group-Action =
-      fundamental-theorem-id X
-        id-equiv-Abstract-Group-Action
+      fundamental-theorem-id
         is-contr-total-equiv-Abstract-Group-Action
         equiv-eq-Abstract-Group-Action
 

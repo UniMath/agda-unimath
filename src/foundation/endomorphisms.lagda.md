@@ -7,6 +7,8 @@ title: endomorphisms
 
 module foundation.endomorphisms where
 
+open import foundation-core.endomorphisms public
+
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (refl)
@@ -31,20 +33,6 @@ An endomorphism on a type `A` is a map `A → A`.
 ### Endomorphisms
 
 ```agda
-endo : {l : Level} → UU l → UU l
-endo A = A → A
-
-is-set-endo : {l : Level} {A : UU l} → is-set A → is-set (endo A)
-is-set-endo H = is-set-function-type H
-
-endo-Set : {l : Level} → UU-Set l → UU-Set l
-pr1 (endo-Set A) = endo (type-Set A)
-pr2 (endo-Set A) = is-set-endo (is-set-type-Set A)
-
-endo-Pointed-Type : {l : Level} → UU l → Pointed-Type l
-pr1 (endo-Pointed-Type X) = X → X
-pr2 (endo-Pointed-Type X) = id
-
 endo-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
 pr1 (pr1 (endo-Wild-Monoid X)) = endo-Pointed-Type X
 pr1 (pr2 (pr1 (endo-Wild-Monoid X))) g f = g ∘ f

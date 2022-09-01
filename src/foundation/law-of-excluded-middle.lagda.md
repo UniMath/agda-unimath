@@ -15,7 +15,7 @@ open import foundation.propositions using (UU-Prop; type-Prop; is-prop-type-Prop
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import univalent-combinatorics.2-element-types using
-  ( is-not-decidable-type-UU-Fin-Level-two-ℕ)
+  ( is-not-decidable-type-UU-Fin-two-ℕ)
 ```
 
 ## Idea
@@ -48,5 +48,5 @@ abstract
   no-global-decidability :
     {l : Level} → ¬ ((X : UU l) → is-decidable X)
   no-global-decidability {l} d =
-    is-not-decidable-type-UU-Fin-Level-two-ℕ (λ X → d (pr1 X))
+    is-not-decidable-type-UU-Fin-two-ℕ (λ X → d (pr1 X))
 ```

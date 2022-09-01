@@ -28,7 +28,7 @@ An alcohol is a hydrocarbon with at least one `-OH` group. The type of alcohols 
 ```agda
 alcohol : UU (lsuc lzero)
 alcohol =
-  Σ ( hydrocarbon)
+  Σ ( hydrocarbon lzero lzero)
     ( λ X →
       Σ ( (c : vertex-hydrocarbon X) →
           decidable-subtype lzero (electron-carbon-atom-hydrocarbon X c))

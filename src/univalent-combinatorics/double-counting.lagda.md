@@ -3,8 +3,6 @@ title: Double counting
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.double-counting where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

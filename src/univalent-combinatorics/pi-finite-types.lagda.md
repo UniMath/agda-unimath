@@ -3,16 +3,14 @@ title: π-finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.pi-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
+open import foundation.0-connected-types using
+  ( is-0-connected; mere-eq-is-0-connected; is-surjective-fiber-inclusion;
+    is-inhabited-is-0-connected)
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.connected-types using
-  ( is-path-connected; mere-eq-is-path-connected; is-surjective-fiber-inclusion;
-    is-inhabited-is-path-connected)
 open import foundation.constant-maps using (const)
 open import foundation.contractible-types using
   ( is-contr; is-prop-is-contr; center; is-contr-equiv'; is-contr-Prop)
@@ -119,9 +117,8 @@ open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; number-of-elements-is-finite; mere-equiv-is-finite;
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
     is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
-    is-path-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
-    is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
-    is-path-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
+    is-0-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
+    is-finite-has-finite-cardinality; is-decidable-type-trunc-Prop-is-finite;
     is-set-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
@@ -385,40 +382,25 @@ is-π-finite-is-finite k {A} H =
     ( is-π-finite-Prop k A)
     ( is-π-finite-count k)
 
-π-finite-𝔽 : (k : ℕ) → 𝔽 → π-Finite lzero k
+π-finite-𝔽 : {l : Level} (k : ℕ) → 𝔽 l → π-Finite l k
 pr1 (π-finite-𝔽 k A) = type-𝔽 A
 pr2 (π-finite-𝔽 k A) = is-π-finite-is-finite k (is-finite-type-𝔽 A)
 
-has-finite-connected-components-is-path-connected :
+has-finite-connected-components-is-0-connected :
   {l : Level} {A : UU l} →
-  is-path-connected A → has-finite-connected-components A
-has-finite-connected-components-is-path-connected C =
+  is-0-connected A → has-finite-connected-components A
+has-finite-connected-components-is-0-connected C =
   is-finite-is-contr C
 
 is-π-finite-UU-Fin :
-  (k n : ℕ) → is-π-finite k (UU-Fin n)
+  {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin l n)
 is-π-finite-UU-Fin zero-ℕ n =
-  has-finite-connected-components-is-path-connected
-    ( is-path-connected-UU-Fin n)
+  has-finite-connected-components-is-0-connected
+    ( is-0-connected-UU-Fin n)
 pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) = is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-π-finite-equiv k
     ( equiv-equiv-eq-UU-Fin n x y)
-    ( is-π-finite-is-finite k
-      ( is-finite-≃
-        ( is-finite-has-finite-cardinality (pair n (pr2 x)))
-        ( is-finite-has-finite-cardinality (pair n (pr2 y)))))
-
-is-π-finite-UU-Fin-Level :
-  {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin-Level l n)
-is-π-finite-UU-Fin-Level {l} zero-ℕ n =
-  has-finite-connected-components-is-path-connected
-    ( is-path-connected-UU-Fin-Level n)
-pr1 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) =
-  is-π-finite-UU-Fin-Level zero-ℕ n
-pr2 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) x y =
-  is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin-Level n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -542,8 +524,8 @@ pr2 (is-π-finite-Π (succ-ℕ k) H K) f g =
     ( is-π-finite-Π k H (λ a → pr2 (K a) (f a) (g a)))
 
 π-Finite-Π :
-  {l : Level} (k : ℕ) (A : 𝔽) (B : type-𝔽 A → π-Finite l k) →
-  π-Finite l k
+  {l1 l2 : Level} (k : ℕ) (A : 𝔽 l1) (B : type-𝔽 A → π-Finite l2 k) →
+  π-Finite (l1 ⊔ l2) k
 pr1 (π-Finite-Π k A B) =
   (x : type-𝔽 A) → (type-π-Finite k (B x))
 pr2 (π-Finite-Π k A B) =
@@ -564,14 +546,14 @@ is-locally-finite-Σ {B = B} H K (pair x y) (pair x' y') =
 
 -- Proposition 1.7
 
-has-finite-connected-components-Σ-is-path-connected :
+has-finite-connected-components-Σ-is-0-connected :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-path-connected A → is-π-finite 1 A →
+  is-0-connected A → is-π-finite 1 A →
   ((x : A) → has-finite-connected-components (B x)) →
   has-finite-connected-components (Σ A B)
-has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
+has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
   apply-universal-property-trunc-Prop
-    ( is-inhabited-is-path-connected C)
+    ( is-inhabited-is-0-connected C)
     ( is-π-finite-Prop zero-ℕ (Σ A B))
     ( α)
     
@@ -612,7 +594,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
             ( pair x y)
             ( pair x' y'))
           ( apply-universal-property-trunc-Prop
-            ( mere-eq-is-path-connected C a x)
+            ( mere-eq-is-0-connected C a x)
             ( is-decidable-Prop
               ( mere-eq-Prop (pair x y) (pair x' y')))
               ( δ))
@@ -621,7 +603,7 @@ has-finite-connected-components-Σ-is-path-connected {A = A} {B} C H K =
         δ : Id a x → is-decidable (mere-eq (pair x y) (pair x' y'))
         δ refl =
           apply-universal-property-trunc-Prop
-            ( mere-eq-is-path-connected C a x')
+            ( mere-eq-is-0-connected C a x')
             ( is-decidable-Prop
               ( mere-eq-Prop (pair a y) (pair x' y')))
             ( ε)
@@ -760,8 +742,8 @@ module _
       is-surjective-map-is-coprod-codomain
       is-emb-map-is-coprod-codomain
 
-is-path-connected-unit : is-path-connected unit
-is-path-connected-unit =
+is-0-connected-unit : is-0-connected unit
+is-0-connected-unit =
   is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
 
 is-contr-im :
@@ -775,12 +757,12 @@ pr2 (is-contr-im B {f} a H) (pair x u) =
     ( λ { (pair a' refl) →
           eq-Eq-im f (map-unit-im f a) (map-unit-im f a') (inv (H a'))})
 
-is-path-connected-im :
+is-0-connected-im :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-path-connected A → is-path-connected (im f)
-is-path-connected-im {l1} {l2} {A} {B} f C =
+  is-0-connected A → is-0-connected (im f)
+is-0-connected-im {l1} {l2} {A} {B} f C =
   apply-universal-property-trunc-Prop
-    ( is-inhabited-is-path-connected C)
+    ( is-inhabited-is-0-connected C)
     ( is-contr-Prop _)
     ( λ a →
       is-contr-equiv'
@@ -798,17 +780,17 @@ is-path-connected-im {l1} {l2} {A} {B} f C =
                   ( map-trunc-Set f (unit-trunc-Set a))))
             ( λ a' →
               apply-universal-property-trunc-Prop
-                ( mere-eq-is-path-connected C a' a)
+                ( mere-eq-is-0-connected C a' a)
                 ( Id-Prop
                   ( trunc-Set B)
                   ( map-trunc-Set f (unit-trunc-Set a'))
                   ( map-trunc-Set f (unit-trunc-Set a)))
                 ( λ {refl → refl})))))
 
-is-path-connected-im-unit :
-  {l1 : Level} {A : UU l1} (f : unit → A) → is-path-connected (im f)
-is-path-connected-im-unit f =
-  is-path-connected-im f is-path-connected-unit
+is-0-connected-im-unit :
+  {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
+is-0-connected-im-unit f =
+  is-0-connected-im f is-0-connected-unit
 
 has-finite-connected-components-Σ' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
@@ -848,11 +830,11 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
                         ( λ u → trunc-Prop _)))))
                 ( H (pr1 x) (pr1 y)))
             ( λ x → K (pr1 x)))
-          ( has-finite-connected-components-Σ-is-path-connected
-            ( is-path-connected-im (f ∘ inr) is-path-connected-unit)
+          ( has-finite-connected-components-Σ-is-0-connected
+            ( is-0-connected-im (f ∘ inr) is-0-connected-unit)
             ( pair
               ( is-finite-is-contr
-                ( is-path-connected-im (f ∘ inr) is-path-connected-unit))
+                ( is-0-connected-im (f ∘ inr) is-0-connected-unit))
               ( λ x y →
                 is-π-finite-equiv zero-ℕ
                   ( equiv-Eq-eq-im (f ∘ inr) x y)

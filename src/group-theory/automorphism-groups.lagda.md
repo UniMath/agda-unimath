@@ -8,7 +8,7 @@ title: Automorphism groups
 module group-theory.automorphism-groups where
 
 open import foundation.connected-components using
-  (connected-component; is-path-connected-connected-component; is-trunc-connected-component)
+  (connected-component; is-0-connected-connected-component; is-trunc-connected-component)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (refl)
 open import foundation.propositional-truncations using (unit-trunc-Prop)
@@ -34,7 +34,7 @@ module _
   ∞-Automorphism-Group : ∞-Group l
   pr1 (pr1 ∞-Automorphism-Group) = connected-component A a
   pr2 (pr1 ∞-Automorphism-Group) = pair a (unit-trunc-Prop refl)
-  pr2 ∞-Automorphism-Group = is-path-connected-connected-component A a
+  pr2 ∞-Automorphism-Group = is-0-connected-connected-component A a
 
   Automorphism-Group : is-trunc one-𝕋 A → Concrete-Group l
   pr1 (Automorphism-Group H) = ∞-Automorphism-Group

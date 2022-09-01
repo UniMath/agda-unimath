@@ -3,8 +3,6 @@ title: Standard finite trees
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.standard-finite-trees where
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ; is-zero-ℕ)

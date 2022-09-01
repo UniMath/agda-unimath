@@ -40,7 +40,7 @@ open import foundation.reflecting-maps-equivalence-relations using
 open import foundation.sets using
   ( is-set; is-set-function-type; UU-Set; Id-Prop)
 open import foundation.slice using (hom-slice)
-open import foundation.subtypes using (eq-subtype; subtype)
+open import foundation.subtypes using (eq-type-subtype; subtype)
 open import foundation.surjective-maps using
   ( is-surjective)
 open import foundation.universal-property-image using
@@ -128,7 +128,7 @@ module _
           ( λ P → is-in-subtype-equivalence-class R P a)) →
       center-total-subtype-equivalence-class ＝ t
     contraction-total-subtype-equivalence-class (pair (pair P p) H) =
-      eq-subtype
+      eq-type-subtype
         ( λ Q → subtype-equivalence-class R Q a)
         ( apply-universal-property-trunc-Prop
           ( p)
@@ -140,7 +140,7 @@ module _
       where
       α : fib (pr1 R) P → class R a ＝ pair P p
       α (pair x refl) =
-        eq-subtype
+        eq-type-subtype
           ( λ z → trunc-Prop (fib (prop-Eq-Rel R) z))
           ( eq-htpy
             ( λ y →
@@ -168,8 +168,6 @@ module _
       (q : equivalence-class R) → is-equiv (related-eq-quotient q)
     is-equiv-related-eq-quotient =
       fundamental-theorem-id
-        ( class R a)
-        ( refl-Eq-Rel R)
         ( is-contr-total-subtype-equivalence-class)
         ( related-eq-quotient)
 

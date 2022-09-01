@@ -95,7 +95,7 @@ module _
       ( λ I B e →
         (i : type-unordered-tuple n A) →
         element-unordered-tuple n A i ≃ B (map-equiv e i))
-      ( is-contr-total-equiv-UU-Fin n (type-unordered-tuple-UU-Fin n A))
+      ( is-contr-total-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n A))
       ( pair (type-unordered-tuple-UU-Fin n A) id-equiv)
       ( is-contr-total-equiv-fam (element-unordered-tuple n A))
 
@@ -103,8 +103,7 @@ module _
     (B : unordered-tuple-types l n) →
     is-equiv (equiv-eq-unordered-tuple-types B)
   is-equiv-equiv-eq-unordered-tuple-types =
-    fundamental-theorem-id A
-      id-equiv-unordered-tuple-types
+    fundamental-theorem-id
       is-contr-total-equiv-unordered-tuple-types
       equiv-eq-unordered-tuple-types
 

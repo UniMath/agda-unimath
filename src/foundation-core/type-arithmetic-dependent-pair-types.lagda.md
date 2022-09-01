@@ -233,18 +233,18 @@ module _
   map-interchange-Σ-Σ :
     Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))) →
     Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
-  pr1 (pr1 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = a
-  pr2 (pr1 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = c
-  pr1 (pr2 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = b
-  pr2 (pr2 (map-interchange-Σ-Σ (pair (pair a b) (pair c d)))) = d
+  pr1 (pr1 (map-interchange-Σ-Σ t)) = pr1 (pr1 t)
+  pr2 (pr1 (map-interchange-Σ-Σ t)) = pr1 (pr2 t)
+  pr1 (pr2 (map-interchange-Σ-Σ t)) = pr2 (pr1 t)
+  pr2 (pr2 (map-interchange-Σ-Σ t)) = pr2 (pr2 t)
 
   map-inv-interchange-Σ-Σ :
     Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) →
     Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
-  pr1 (pr1 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = a
-  pr2 (pr1 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = b
-  pr1 (pr2 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = c
-  pr2 (pr2 (map-inv-interchange-Σ-Σ (pair (pair a c) (pair b d)))) = d
+  pr1 (pr1 (map-inv-interchange-Σ-Σ t)) = pr1 (pr1 t)
+  pr2 (pr1 (map-inv-interchange-Σ-Σ t)) = pr1 (pr2 t)
+  pr1 (pr2 (map-inv-interchange-Σ-Σ t)) = pr2 (pr1 t)
+  pr2 (pr2 (map-inv-interchange-Σ-Σ t)) = pr2 (pr2 t)
   
   issec-map-inv-interchange-Σ-Σ :
     ( map-interchange-Σ-Σ ∘ map-inv-interchange-Σ-Σ) ~ id

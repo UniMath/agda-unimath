@@ -1,58 +1,102 @@
-# Finite semigroups
+---
+title: Finite semigroups
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module finite-group-theory.finite-semigroups where
 
-open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; _∘e_; id-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.mere-equivalences using (mere-equiv)
-open import foundation.propositions using (is-proof-irrelevant-is-prop)
-open import foundation.set-truncations using (type-trunc-Set)
-open import foundation.sets using (is-prop-is-set; UU-Set; type-Set)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( right-unit-law-Σ-is-contr; equiv-right-swap-Σ)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositions
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( has-associative-mul; Semigroup; type-Semigroup; has-associative-mul-Set)
+open import group-theory.semigroups
 
-open import univalent-combinatorics.dependent-function-types using
-  ( is-finite-Π)
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-Σ)
-open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; is-finite; is-finite-type-UU-Fin-Level;
-    is-finite-has-cardinality; is-set-is-finite)
-open import univalent-combinatorics.function-types using
-  ( is-finite-function-type)
-open import univalent-combinatorics.pi-finite-types using
-  ( is-π-finite; is-π-finite-Σ; is-π-finite-UU-Fin-Level; is-π-finite-is-finite;
-    is-π-finite-equiv; number-of-connected-components;
-    mere-equiv-number-of-connected-components)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
+open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
 
 Finite semigroups are semigroups of which the underlying type is finite.
 
-## Definition
+## Definitions
+
+### Finite semigroups
+
+```agda
+Semigroup-𝔽 : (l : Level) → UU (lsuc l)
+Semigroup-𝔽 l =
+  Σ (𝔽 l) (λ X → has-associative-mul (type-𝔽 X))
+
+module _
+  {l : Level} (G : Semigroup-𝔽 l)
+  where
+
+  finite-type-Semigroup-𝔽 : 𝔽 l
+  finite-type-Semigroup-𝔽 = pr1 G
+
+  set-Semigroup-𝔽 : UU-Set l
+  set-Semigroup-𝔽 = set-𝔽 finite-type-Semigroup-𝔽
+
+  type-Semigroup-𝔽 : UU l
+  type-Semigroup-𝔽 = type-𝔽 finite-type-Semigroup-𝔽
+
+  is-finite-type-Semigroup-𝔽 : is-finite type-Semigroup-𝔽
+  is-finite-type-Semigroup-𝔽 =
+    is-finite-type-𝔽 finite-type-Semigroup-𝔽
+
+  is-set-type-Semigroup-𝔽 : is-set type-Semigroup-𝔽
+  is-set-type-Semigroup-𝔽 =
+    is-set-type-𝔽 finite-type-Semigroup-𝔽
+
+  has-associative-mul-Semigroup-𝔽 :
+    has-associative-mul type-Semigroup-𝔽
+  has-associative-mul-Semigroup-𝔽 = pr2 G
+
+  semigroup-Semigroup-𝔽 : Semigroup l
+  pr1 semigroup-Semigroup-𝔽 = set-Semigroup-𝔽
+  pr2 semigroup-Semigroup-𝔽 = has-associative-mul-Semigroup-𝔽
+
+  mul-Semigroup-𝔽 :
+    type-Semigroup-𝔽 → type-Semigroup-𝔽 → type-Semigroup-𝔽
+  mul-Semigroup-𝔽 = mul-Semigroup semigroup-Semigroup-𝔽
+
+  mul-Semigroup-𝔽' :
+    type-Semigroup-𝔽 → type-Semigroup-𝔽 → type-Semigroup-𝔽
+  mul-Semigroup-𝔽' = mul-Semigroup' semigroup-Semigroup-𝔽
+
+  associative-mul-Semigroup-𝔽 :
+    (x y z : type-Semigroup-𝔽) →
+    ( mul-Semigroup-𝔽 (mul-Semigroup-𝔽 x y) z) ＝
+    ( mul-Semigroup-𝔽 x (mul-Semigroup-𝔽 y z))
+  associative-mul-Semigroup-𝔽 =
+    associative-mul-Semigroup semigroup-Semigroup-𝔽
+```
 
 ### Semigroups of order n
 
 ```agda
 Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order' l n =
-  Σ ( UU-Fin-Level l n)
-    ( λ X → has-associative-mul (type-UU-Fin-Level n X))
+  Σ ( UU-Fin l n)
+    ( λ X → has-associative-mul (type-UU-Fin n X))
 
 Semigroup-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Semigroup-of-Order l n =
@@ -86,11 +130,11 @@ is-π-finite-Semigroup-of-Order' :
   {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order' l n)
 is-π-finite-Semigroup-of-Order' k n =
   is-π-finite-Σ k
-    ( is-π-finite-UU-Fin-Level (succ-ℕ k) n)
+    ( is-π-finite-UU-Fin (succ-ℕ k) n)
     ( λ x →
       is-π-finite-is-finite k
         ( is-finite-has-associative-mul
-          ( is-finite-type-UU-Fin-Level n x)))
+          ( is-finite-type-UU-Fin n x)))
 
 is-π-finite-Semigroup-of-Order :
   {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order l n)
@@ -100,7 +144,7 @@ is-π-finite-Semigroup-of-Order {l} k n =
   where
   e : Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
   e = ( equiv-Σ
-        ( has-associative-mul ∘ type-UU-Fin-Level n)
+        ( has-associative-mul ∘ type-UU-Fin n)
         ( ( right-unit-law-Σ-is-contr
             ( λ X →
               is-proof-irrelevant-is-prop

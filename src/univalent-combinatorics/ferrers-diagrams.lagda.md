@@ -68,33 +68,34 @@ module _
 ### Finite Ferrers diagrams of finite types
 
 ```agda
-ferrers-diagram-𝔽 : (A : 𝔽) → UU (lsuc lzero)
-ferrers-diagram-𝔽 A =
-  Σ ( 𝔽)
+ferrers-diagram-𝔽 : {l1 : Level} (l2 l3 : Level) →
+  (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+ferrers-diagram-𝔽 {l} l2 l3 A =
+  Σ ( 𝔽 l2)
     ( λ X →
-      Σ ( type-𝔽 X → 𝔽)
+      Σ ( type-𝔽 X → 𝔽 l3)
         ( λ Y →
           ((x : type-𝔽 X) → type-trunc-Prop (type-𝔽 (Y x))) ×
           mere-equiv (type-𝔽 A) (Σ (type-𝔽 X) (λ x → type-𝔽 (Y x)))))
 
 module _
-  (A : 𝔽) (D : ferrers-diagram-𝔽 A)
+  {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
   where
   
-  row-ferrers-diagram-𝔽 : 𝔽
+  row-ferrers-diagram-𝔽 : 𝔽 l2
   row-ferrers-diagram-𝔽 = pr1 D
 
-  type-row-ferrers-diagram-𝔽 : UU lzero
+  type-row-ferrers-diagram-𝔽 : UU l2
   type-row-ferrers-diagram-𝔽 = type-𝔽 row-ferrers-diagram-𝔽
 
   is-finite-type-row-ferrers-diagram-𝔽 : is-finite type-row-ferrers-diagram-𝔽
   is-finite-type-row-ferrers-diagram-𝔽 =
     is-finite-type-𝔽 row-ferrers-diagram-𝔽
 
-  dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → 𝔽
+  dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → 𝔽 l3
   dot-ferrers-diagram-𝔽 = pr1 (pr2 D)
 
-  type-dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → UU lzero
+  type-dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → UU l3
   type-dot-ferrers-diagram-𝔽 x = type-𝔽 (dot-ferrers-diagram-𝔽 x)
 
   is-finite-type-dot-ferrers-diagram-𝔽 :
@@ -113,7 +114,7 @@ module _
       ( Σ (type-row-ferrers-diagram-𝔽) (type-dot-ferrers-diagram-𝔽))
   mere-equiv-ferrers-diagram-𝔽 = pr2 (pr2 (pr2 D))
 
-  ferrers-diagram-ferrers-diagram-𝔽 : ferrers-diagram lzero lzero (type-𝔽 A)
+  ferrers-diagram-ferrers-diagram-𝔽 : ferrers-diagram l2 l3 (type-𝔽 A)
   pr1 ferrers-diagram-ferrers-diagram-𝔽 = type-row-ferrers-diagram-𝔽
   pr1 (pr2 ferrers-diagram-ferrers-diagram-𝔽) = type-dot-ferrers-diagram-𝔽
   pr1 (pr2 (pr2 ferrers-diagram-ferrers-diagram-𝔽)) =
@@ -169,8 +170,7 @@ module _
   is-equiv-equiv-eq-ferrers-diagram :
     (E : ferrers-diagram l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram E)
   is-equiv-equiv-eq-ferrers-diagram =
-    fundamental-theorem-id D
-      id-equiv-ferrers-diagram
+    fundamental-theorem-id
       is-contr-total-equiv-ferrers-diagram
       equiv-eq-ferrers-diagram
 
@@ -184,10 +184,11 @@ module _
 
 ```agda
 module _
-  (A : 𝔽) (D : ferrers-diagram-𝔽 A)
+  {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
   where
 
-  equiv-ferrers-diagram-𝔽 : ferrers-diagram-𝔽 A → UU lzero
+  equiv-ferrers-diagram-𝔽 :
+    {l4 l5 : Level} → ferrers-diagram-𝔽 l4 l5 A → UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
   equiv-ferrers-diagram-𝔽 E =
     equiv-ferrers-diagram
       ( ferrers-diagram-ferrers-diagram-𝔽 A D)
@@ -198,11 +199,11 @@ module _
     id-equiv-ferrers-diagram (ferrers-diagram-ferrers-diagram-𝔽 A D)
 
   equiv-eq-ferrers-diagram-𝔽 :
-    (E : ferrers-diagram-𝔽 A) → Id D E → equiv-ferrers-diagram-𝔽 E
+    (E : ferrers-diagram-𝔽 l2 l3 A) → Id D E → equiv-ferrers-diagram-𝔽 E
   equiv-eq-ferrers-diagram-𝔽 .D refl = id-equiv-ferrers-diagram-𝔽
 
   is-contr-total-equiv-ferrers-diagram-𝔽 :
-    is-contr (Σ (ferrers-diagram-𝔽 A) (equiv-ferrers-diagram-𝔽))
+    is-contr (Σ (ferrers-diagram-𝔽 l2 l3 A) (equiv-ferrers-diagram-𝔽))
   is-contr-total-equiv-ferrers-diagram-𝔽 =
     is-contr-total-Eq-structure
       ( λ X Y e →
@@ -236,15 +237,14 @@ module _
           ( mere-equiv-ferrers-diagram-𝔽 A D)))
 
   is-equiv-equiv-eq-ferrers-diagram-𝔽 :
-    (E : ferrers-diagram-𝔽 A) → is-equiv (equiv-eq-ferrers-diagram-𝔽 E)
+    (E : ferrers-diagram-𝔽 l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram-𝔽 E)
   is-equiv-equiv-eq-ferrers-diagram-𝔽 =
-    fundamental-theorem-id D
-      id-equiv-ferrers-diagram-𝔽
+    fundamental-theorem-id
       is-contr-total-equiv-ferrers-diagram-𝔽
       equiv-eq-ferrers-diagram-𝔽
 
   eq-equiv-ferrers-diagram-𝔽 :
-    (E : ferrers-diagram-𝔽 A) → equiv-ferrers-diagram-𝔽 E → Id D E
+    (E : ferrers-diagram-𝔽 l2 l3 A) → equiv-ferrers-diagram-𝔽 E → Id D E
   eq-equiv-ferrers-diagram-𝔽 E =
     map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram-𝔽 E)
 ```

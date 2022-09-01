@@ -7,8 +7,8 @@ title: Subgroups of concrete groups
 
 module group-theory.subgroups-concrete-groups where
 
+open import foundation.0-connected-types
 open import foundation.0-maps
-open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
@@ -111,7 +111,7 @@ module _
     shape-subgroup-Concrete-Group
 
   is-connected-classifying-type-subgroup-Concrete-Group :
-    is-path-connected classifying-type-subgroup-Concrete-Group
+    is-0-connected classifying-type-subgroup-Concrete-Group
   is-connected-classifying-type-subgroup-Concrete-Group =
     is-transitive-action-subgroup-Concrete-Group
 
@@ -177,18 +177,32 @@ module _
 
 ## Properties
 
+### The type of subgroups of a group is a set
+
 ```agda
+subtype-preserves-unit-coset-equiv-action-Concrete-Group :
+  {l1 l2 l3 : Level} (G : Concrete-Group l1) (X : subgroup-Concrete-Group l2 G)
+  (Y : subgroup-Concrete-Group l3 G) →
+  subtype l3
+    ( equiv-action-Concrete-Group G
+      ( action-subgroup-Concrete-Group G X)
+      ( action-subgroup-Concrete-Group G Y))
+subtype-preserves-unit-coset-equiv-action-Concrete-Group G X Y e =
+  Id-Prop
+    ( coset-subgroup-Concrete-Group G Y)
+    ( map-equiv-action-Concrete-Group G
+      ( action-subgroup-Concrete-Group G X)
+      ( action-subgroup-Concrete-Group G Y)
+      ( e)
+      ( unit-coset-subgroup-Concrete-Group G X))
+    ( unit-coset-subgroup-Concrete-Group G Y)
+
 equiv-subgroup-Concrete-Group :
   {l1 l2 l3 : Level} (G : Concrete-Group l1) → subgroup-Concrete-Group l2 G →
   subgroup-Concrete-Group l3 G → UU (l1 ⊔ l2 ⊔ l3)
 equiv-subgroup-Concrete-Group G X Y =
-  Σ ( equiv-action-Concrete-Group G
-      ( action-subgroup-Concrete-Group G X)
-      ( action-subgroup-Concrete-Group G Y))
-    ( λ e →
-      ( map-equiv
-        ( e (shape-Concrete-Group G)) (unit-coset-subgroup-Concrete-Group G X)) ＝
-      ( unit-coset-subgroup-Concrete-Group G Y))
+  type-subtype
+    ( subtype-preserves-unit-coset-equiv-action-Concrete-Group G X Y)
   
 extensionality-subgroup-Concrete-Group :
   {l1 l2 : Level} (G : Concrete-Group l1) (X Y : subgroup-Concrete-Group l2 G) →
@@ -215,13 +229,14 @@ is-set-subgroup-Concrete-Group G X Y =
     ( λ e f →
       is-proof-irrelevant-is-prop
         ( is-set-type-subtype
-          ( P)
+          ( subtype-preserves-unit-coset-equiv-action-Concrete-Group G X Y)
           ( is-set-equiv-action-Concrete-Group G
             ( action-subgroup-Concrete-Group G X)
             ( action-subgroup-Concrete-Group G Y))
           ( e)
           ( f))
-        ( eq-subtype P
+        ( eq-type-subtype
+          ( subtype-preserves-unit-coset-equiv-action-Concrete-Group G X Y)
           ( eq-htpy-equiv-action-Concrete-Group G
             ( action-subgroup-Concrete-Group G X)
             ( action-subgroup-Concrete-Group G Y)
@@ -235,19 +250,4 @@ is-set-subgroup-Concrete-Group G X Y =
               ( intro-∃
                 ( unit-coset-subgroup-Concrete-Group G X)
                 ( pr2 e ∙ inv (pr2 f)))))))
-  where
-  P :
-    subtype _
-      ( equiv-action-Concrete-Group G
-        ( action-subgroup-Concrete-Group G X)
-        ( action-subgroup-Concrete-Group G Y))
-  P h =
-    Id-Prop
-      ( coset-subgroup-Concrete-Group G Y)
-      ( map-equiv-action-Concrete-Group G
-        ( action-subgroup-Concrete-Group G X)
-        ( action-subgroup-Concrete-Group G Y)
-        ( h)
-        ( unit-coset-subgroup-Concrete-Group G X))
-      ( unit-coset-subgroup-Concrete-Group G Y)
 ```

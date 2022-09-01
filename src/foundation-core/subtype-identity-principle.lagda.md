@@ -74,10 +74,8 @@ module _
       ((x : A) → is-equiv (f x)) → (z : Σ A P) → is-equiv (h z)
     subtype-identity-principle {f} h H =
       fundamental-theorem-id
-        ( pair a p)
-        ( refl-A)
         ( is-contr-total-Eq-subtype
-          ( fundamental-theorem-id' a refl-A f H)
+          ( fundamental-theorem-id' f H)
           ( is-prop-P)
           ( a)
           ( refl-A)
@@ -89,21 +87,21 @@ module _
   {a : A} (p : type-Prop (P a)) (refl-A : Eq-A a)
   where
 
-  map-extensionality-subtype :
+  map-extensionality-type-subtype :
     (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
     (z : Σ A (type-Prop ∘ P)) → (pair a p) ＝ z → Eq-A (pr1 z)
-  map-extensionality-subtype f .(pair a p) refl = refl-A
+  map-extensionality-type-subtype f .(pair a p) refl = refl-A
 
-  extensionality-subtype :
+  extensionality-type-subtype :
     (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
     (z : Σ A (type-Prop ∘ P)) → (pair a p ＝ z) ≃ Eq-A (pr1 z)
-  pr1 (extensionality-subtype f z) = map-extensionality-subtype f z
-  pr2 (extensionality-subtype f z) =
+  pr1 (extensionality-type-subtype f z) = map-extensionality-type-subtype f z
+  pr2 (extensionality-type-subtype f z) =
     subtype-identity-principle
       ( λ x → is-prop-type-Prop (P x))
       ( p)
       ( refl-A)
-      ( map-extensionality-subtype f)
+      ( map-extensionality-type-subtype f)
       ( λ x → is-equiv-map-equiv (f x))
       ( z)
 ```

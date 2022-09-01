@@ -73,20 +73,21 @@ is-contr-total-equiv-cube :
   (k : ℕ) (X : cube k) → is-contr (Σ (cube k) (equiv-cube k X))
 is-contr-total-equiv-cube k X =
   is-contr-total-Eq-structure
-    ( λ D (A : type-UU-Fin k D → UU-Fin 2)
+    ( λ D (A : type-UU-Fin k D → UU-Fin lzero 2)
           (e : equiv-UU-Fin k (dim-cube-UU-Fin k X) D) →
           (i : dim-cube k X) → axis-cube k X i ≃ pr1 (A (map-equiv e i)))
-    ( is-contr-total-equiv-UU-Fin k (dim-cube-UU-Fin k X))
-    ( pair (dim-cube-UU-Fin k X) (id-equiv-UU-Fin k (dim-cube-UU-Fin k X)))
+    ( is-contr-total-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X))
+    ( pair
+      ( dim-cube-UU-Fin k X)
+      ( id-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X)))
     ( is-contr-total-Eq-Π
-      ( λ i (A : UU-Fin 2) → equiv-UU-Fin 2 (axis-cube-UU-2 k X i) A)
-      ( λ i → is-contr-total-equiv-UU-Fin 2 (axis-cube-UU-2 k X i)))
+      ( λ i (A : UU-Fin lzero 2) → equiv-UU-Fin 2 (axis-cube-UU-2 k X i) A)
+      ( λ i → is-contr-total-equiv-UU-Fin {k = 2} (axis-cube-UU-2 k X i)))
 
 is-equiv-equiv-eq-cube :
   (k : ℕ) (X Y : cube k) → is-equiv (equiv-eq-cube k {X} {Y})
 is-equiv-equiv-eq-cube k X =
-  fundamental-theorem-id X
-    ( id-equiv-cube k X)
+  fundamental-theorem-id
     ( is-contr-total-equiv-cube k X)
     ( λ Y → equiv-eq-cube k {X = X} {Y})
 
@@ -136,8 +137,7 @@ is-equiv-htpy-eq-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) →
   is-equiv (htpy-eq-equiv-cube k X Y e f)
 is-equiv-htpy-eq-equiv-cube k X Y e =
-  fundamental-theorem-id e
-    ( refl-htpy-equiv-cube k X Y e)
+  fundamental-theorem-id
     ( is-contr-total-htpy-equiv-cube k X Y e)
     ( htpy-eq-equiv-cube k X Y e)
 

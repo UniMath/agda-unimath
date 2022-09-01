@@ -201,8 +201,7 @@ is-equiv-htpy-eq-hom-Ring :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f g : type-hom-Ring R1 R2) →
   is-equiv (htpy-eq-hom-Ring R1 R2 f g)
 is-equiv-htpy-eq-hom-Ring R1 R2 f =
-  fundamental-theorem-id f
-    ( reflexive-htpy-hom-Ring R1 R2 f)
+  fundamental-theorem-id
     ( is-contr-total-htpy-hom-Ring R1 R2 f)
     ( htpy-eq-hom-Ring R1 R2 f)
 

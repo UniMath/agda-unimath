@@ -9,6 +9,7 @@ module graph-theory.complete-multipartite-graphs where
 
 open import foundation.dependent-pair-types
 open import foundation.unordered-pairs
+open import foundation.universe-levels
 
 open import graph-theory.finite-graphs
 
@@ -25,7 +26,9 @@ open import univalent-combinatorics.function-types
 A complete multipartite graph consists of a finite list of sets `V1,…,Vn`, and for each unordered pair of distinct elements `i,j≤n` and each `x : Vi` and `y : Vj` an edge between `x` and `y`.
 
 ```agda
-complete-multipartite-Undirected-Graph-𝔽 : (X : 𝔽) (Y : type-𝔽 X → 𝔽) → Undirected-Graph-𝔽
+complete-multipartite-Undirected-Graph-𝔽 :
+  {l1 l2 : Level} (X : 𝔽 l1) (Y : type-𝔽 X → 𝔽 l2) →
+  Undirected-Graph-𝔽 (l1 ⊔ l2) l1
 pr1 (complete-multipartite-Undirected-Graph-𝔽 X Y) = Σ-𝔽 X Y
 pr2 (complete-multipartite-Undirected-Graph-𝔽 X Y) p =
   ( Π-𝔽 ( finite-type-2-Element-Type (pr1 p))

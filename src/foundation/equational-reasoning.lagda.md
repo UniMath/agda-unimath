@@ -4,6 +4,8 @@ title: Equational reasoning
 
 Tom de Jong, 27 May 2022.
 Elisabeth Bonnevier, 31 May 2022.
+Egbert Rijke, 31 August 2022.
+Szumie Xie, 31 August 2022.
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,18 +26,17 @@ Often it's convenient to reason by chains of (in)equalities or equivalences,
 i.e., to write a proof in the following form:
 
 ```md
-X ≃⟨ equiv-1 ⟩
-A ≃⟨ equiv-2 ⟩
-B ≃⟨ equiv-3 ⟩
-Y ∎
+X ≃ A by equiv-1
+  ≃ B by equiv-2
+  ≃ C by equiv-3
 ```
 
 or
 ```md
-x ≤⟨ ineq-1 ⟩
-a ≤⟨ ineq-2 ⟩
-b ≤⟨ ineq-3 ⟩
-c ∎
+x ≤ X by ineq-1 to
+a ≤ X by ineq-2 to
+b ≤ X by ineq-3 to
+c ∎ X
 ```
 
 where `equiv-x` and `ineq-x` are proofs of respectively the equivalences or
@@ -57,48 +58,42 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 ### Equational reasoning for identifications
 
 ```agda
-infix 1 _∎
-infixr 0 step-equational-reasoning step-equational-reasoning˘
+module _
+  {l : Level} {X : UU l}
+  where
 
-step-equational-reasoning :
-  {l : Level} {X : UU l} (x : X) {y z : X} → y ＝ z → x ＝ y → x ＝ z
-step-equational-reasoning _ q p = p ∙ q
+  infixl 1 equational-reasoning_
+  infixl 0 step-equational-reasoning
 
-step-equational-reasoning˘ :
-  {l : Level} {X : UU l} (x : X) {y z : X} → y ＝ z → y ＝ x → x ＝ z
-step-equational-reasoning˘ _ q p = inv p ∙ q
+  equational-reasoning_ : (x : X) → x ＝ x
+  equational-reasoning x = refl
 
-_∎ : {l : Level} {X : UU l} (x : X) → x ＝ x
-x ∎ = refl
+  step-equational-reasoning :
+    {x y : X} → (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
+  step-equational-reasoning p z q = p ∙ q
 
-syntax step-equational-reasoning x q p = x =⟨ p ⟩ q
-syntax step-equational-reasoning˘ x q p = x =˘⟨ p ⟩ q
+  syntax step-equational-reasoning p z q = p ＝ z by q
 ```
 
 ### Equational reasoning for equivalences
 
 ```agda
-infix 1 _∎e
-infixr 0 step-equivalence-reasoning step-equivalence-reasoning˘
+infixl 1 equivalence-reasoning_
+infixl 0 step-equivalence-reasoning
+
+equivalence-reasoning_ : {l1 : Level} (X : UU l1) → X ≃ X
+equivalence-reasoning X = id-equiv
 
 step-equivalence-reasoning :
-  {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3} →
-  Y ≃ Z → X ≃ Y → X ≃ Z
-step-equivalence-reasoning _ g f = g ∘e f
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
+step-equivalence-reasoning e Z f = f ∘e e
 
-step-equivalence-reasoning˘ :
-  {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3} →
-  Y ≃ Z → Y ≃ X → X ≃ Z
-step-equivalence-reasoning˘ _ g f = g ∘e inv-equiv f
-
-_∎e : {l : Level} (X : UU l) → X ≃ X
-X ∎e = id-equiv
-
-syntax step-equivalence-reasoning X g f = X ≃⟨ f ⟩ g
-syntax step-equivalence-reasoning˘ X g f = X ≃˘⟨ f ⟩ g
+syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 ```
 
 ### Equational reasoning for preorders
+
+Note: In an equational reasoning argument, the preorder is always specified at the last step. So do we really need to specify it at each of the earlier steps?
 
 ```agda
 private
@@ -108,7 +103,7 @@ private
     leq-Preorder X x y → leq-Preorder X y z → leq-Preorder X x z
   transitivity X x {y} {z} u v = transitive-leq-Preorder X x y z v u
 
-syntax transitivity X x u v = x ≤[ X ]⟨ u ⟩ v
+syntax transitivity X x u v = x ≤ X by u to v
 infixr 0 transitivity
 
 private
@@ -117,16 +112,16 @@ private
     leq-Preorder X x x
   reflexivity = refl-leq-Preorder
 
-syntax reflexivity X x = x ∎[ X ]
+syntax reflexivity X x = x ∎ X
 infix 1 reflexivity
 ```
 
 For a preorder `X` we thus write the chains as follows
 
 ```md
-x ≤[ X ]⟨ ineq-1 ⟩
-y ≤[ X ]⟨ ineq-2 ⟩
-z ∎[ X ]
+x ≤ X by ineq-1 to
+y ≤ X by ineq-2 to
+z ∎ X
 ```
 
 ## References

@@ -12,6 +12,8 @@ open import elementary-number-theory.equality-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-set-ℕ; ℕ-Set)
 
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.1-types using (is-1-type; UU-1-Type)
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
@@ -19,8 +21,6 @@ open import foundation.connected-components-universes using
     is-contr-total-equiv-component-UU-Level; is-contr-total-equiv-component-UU;
     is-equiv-equiv-eq-component-UU-Level; is-equiv-equiv-eq-component-UU;
     eq-equiv-component-UU-Level; eq-equiv-component-UU)
-open import foundation.connected-types using
-  ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
   ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv';
     is-contr-total-path)
@@ -58,7 +58,7 @@ open import foundation.propositions using
 open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using
   ( is-set; is-set-Prop; Id-Prop; is-set-equiv; is-set-equiv-is-set; UU-Set)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.subuniverses using
   ( extensionality-subuniverse; extensionality-fam-subuniverse)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -112,28 +112,15 @@ abstract
 ### The type of all finite types of a universe level
 
 ```agda
-𝔽-Level : (l : Level) → UU (lsuc l)
-𝔽-Level l = Σ (UU l) is-finite
+𝔽 : (l : Level) → UU (lsuc l)
+𝔽 l = Σ (UU l) is-finite
 
-type-𝔽-Level : {l : Level} → 𝔽-Level l → UU l
-type-𝔽-Level X = pr1 X
+type-𝔽 : {l : Level} → 𝔽 l → UU l
+type-𝔽 X = pr1 X
 
-is-finite-type-𝔽-Level :
-  {l : Level} (X : 𝔽-Level l) → is-finite (type-𝔽-Level X)
-is-finite-type-𝔽-Level X = pr2 X
-```
-
-### The type of all finite types of universe level `lzero`
-
-```agda
-𝔽 : UU (lsuc lzero)
-𝔽 = 𝔽-Level lzero
-
-type-𝔽 : 𝔽 → UU lzero
-type-𝔽 = type-𝔽-Level
-
-is-finite-type-𝔽 : (X : 𝔽) → is-finite (type-𝔽 X)
-is-finite-type-𝔽 = is-finite-type-𝔽-Level
+is-finite-type-𝔽 :
+  {l : Level} (X : 𝔽 l) → is-finite (type-𝔽 X)
+is-finite-type-𝔽 X = pr2 X
 ```
 
 ### Types with cardinality `k`
@@ -151,31 +138,16 @@ has-cardinality k X = mere-equiv (Fin k) X
 ### The type of all types of cardinality k of a given universe leve l
 
 ```agda
-UU-Fin-Level : (l : Level) → ℕ → UU (lsuc l)
-UU-Fin-Level l k = Σ (UU l) (mere-equiv (Fin k))
+UU-Fin : (l : Level) → ℕ → UU (lsuc l)
+UU-Fin l k = Σ (UU l) (mere-equiv (Fin k))
 
-type-UU-Fin-Level : {l : Level} (k : ℕ) → UU-Fin-Level l k → UU l
-type-UU-Fin-Level k X = pr1 X
-
-abstract
-  has-cardinality-type-UU-Fin-Level :
-    {l : Level} (k : ℕ) (X : UU-Fin-Level l k) →
-    mere-equiv (Fin k) (type-UU-Fin-Level k X)
-  has-cardinality-type-UU-Fin-Level k X = pr2 X
-```
-
-### The type of all types of cardinality k of univerese level `lzero`
-
-```agda
-UU-Fin : ℕ → UU (lsuc lzero)
-UU-Fin k = UU-Fin-Level lzero k
-
-type-UU-Fin : (k : ℕ) → UU-Fin k → UU lzero
+type-UU-Fin : {l : Level} (k : ℕ) → UU-Fin l k → UU l
 type-UU-Fin k X = pr1 X
 
 abstract
   has-cardinality-type-UU-Fin :
-    (k : ℕ) (X : UU-Fin k) → has-cardinality k (type-UU-Fin k X)
+    {l : Level} (k : ℕ) (X : UU-Fin l k) →
+    mere-equiv (Fin k) (type-UU-Fin k X)
   has-cardinality-type-UU-Fin k X = pr2 X
 ```
 
@@ -247,11 +219,11 @@ abstract
   is-finite-empty : is-finite empty
   is-finite-empty = is-finite-count count-empty
 
-empty-𝔽 : 𝔽
+empty-𝔽 : 𝔽 lzero
 pr1 empty-𝔽 = empty
 pr2 empty-𝔽 = is-finite-empty
 
-empty-UU-Fin : UU-Fin zero-ℕ
+empty-UU-Fin : UU-Fin lzero zero-ℕ
 pr1 empty-UU-Fin = empty
 pr2 empty-UU-Fin = unit-trunc-Prop id-equiv
 ```
@@ -290,11 +262,11 @@ abstract
   is-finite-unit : is-finite unit
   is-finite-unit = is-finite-count count-unit
 
-unit-𝔽 : 𝔽
+unit-𝔽 : 𝔽 lzero
 pr1 unit-𝔽 = unit
 pr2 unit-𝔽 = is-finite-unit
 
-unit-UU-Fin : UU-Fin 1
+unit-UU-Fin : UU-Fin lzero 1
 pr1 unit-UU-Fin = unit
 pr2 unit-UU-Fin = unit-trunc-Prop (left-unit-law-coprod unit)
 ```
@@ -321,39 +293,38 @@ abstract
   is-finite-Fin : (k : ℕ) → is-finite (Fin k)
   is-finite-Fin k = is-finite-count (count-Fin k)
 
-Fin-𝔽 : ℕ → 𝔽
+Fin-𝔽 : ℕ → 𝔽 lzero
 pr1 (Fin-𝔽 k) = Fin k
 pr2 (Fin-𝔽 k) = is-finite-Fin k
-
-Fin-UU-Fin : (k : ℕ) → UU-Fin k
-pr1 (Fin-UU-Fin k) = Fin k
-pr2 (Fin-UU-Fin k) = unit-trunc-Prop id-equiv
 
 has-cardinality-raise-Fin :
   {l : Level} (k : ℕ) → has-cardinality k (raise-Fin l k)
 has-cardinality-raise-Fin {l} k = unit-trunc-Prop (equiv-raise-Fin l k)
 
-Fin-UU-Fin-Level : (l : Level) (k : ℕ) → UU-Fin-Level l k
-pr1 (Fin-UU-Fin-Level l k) = raise-Fin l k
-pr2 (Fin-UU-Fin-Level l k) = has-cardinality-raise-Fin k
+Fin-UU-Fin : (l : Level) (k : ℕ) → UU-Fin l k
+pr1 (Fin-UU-Fin l k) = raise-Fin l k
+pr2 (Fin-UU-Fin l k) = has-cardinality-raise-Fin k
+
+Fin-UU-Fin' : (k : ℕ) → UU-Fin lzero k
+pr1 (Fin-UU-Fin' k) = Fin k
+pr2 (Fin-UU-Fin' k) = unit-trunc-Prop id-equiv
 ```
 
 ### Every type of cardinality `k` is finite
 
 ```agda
 abstract
-  is-finite-type-UU-Fin-Level :
-    {l : Level} (k : ℕ) (X : UU-Fin-Level l k) →
-    is-finite (type-UU-Fin-Level k X)
-  is-finite-type-UU-Fin-Level k X =
+  is-finite-type-UU-Fin :
+    {l : Level} (k : ℕ) (X : UU-Fin l k) →
+    is-finite (type-UU-Fin k X)
+  is-finite-type-UU-Fin k X =
     is-finite-mere-equiv
-      ( has-cardinality-type-UU-Fin-Level k X)
+      ( has-cardinality-type-UU-Fin k X)
       ( is-finite-Fin k)
 
-abstract
-  is-finite-type-UU-Fin :
-    (k : ℕ) (X : UU-Fin k) → is-finite (type-UU-Fin k X)
-  is-finite-type-UU-Fin k X = is-finite-type-UU-Fin-Level k X
+finite-type-UU-Fin : {l : Level} (k : ℕ) → UU-Fin l k → 𝔽 l
+pr1 (finite-type-UU-Fin k X) = type-UU-Fin k X
+pr2 (finite-type-UU-Fin k X) = is-finite-type-UU-Fin k X
 ```
 
 ### Having a finite cardinality is a proposition
@@ -363,7 +334,7 @@ abstract
   all-elements-equal-has-finite-cardinality :
     {l1 : Level} {X : UU l1} → all-elements-equal (has-finite-cardinality X)
   all-elements-equal-has-finite-cardinality {l1} {X} (pair k K) (pair l L) =
-    eq-subtype
+    eq-type-subtype
       ( λ k → mere-equiv-Prop (Fin k) X)
       ( apply-universal-property-trunc-Prop K
         ( pair (Id k l) (is-set-ℕ k l))
@@ -447,10 +418,8 @@ module _
   has-cardinality-is-finite H =
     pr2 (has-finite-cardinality-is-finite H)
 
-finite-type-UU-Fin : (k : ℕ) → UU-Fin k → 𝔽
-pr1 (finite-type-UU-Fin k X) = type-UU-Fin k X
-pr2 (finite-type-UU-Fin k X) =
-  is-finite-has-cardinality k (has-cardinality-type-UU-Fin k X)
+number-of-elements-𝔽 : {l : Level} → 𝔽 l → ℕ
+number-of-elements-𝔽 X = number-of-elements-is-finite (is-finite-type-𝔽 X)
 ```
 
 ### If a type has cardinality `k` and cardinality `l`, then `k = l`.
@@ -479,7 +448,10 @@ abstract
       ( is-set-Prop X)
       ( λ e → is-set-count e)
 
-set-𝔽 : 𝔽 → UU-Set lzero
+is-set-type-𝔽 : {l : Level} (X : 𝔽 l) → is-set (type-𝔽 X)
+is-set-type-𝔽 X = is-set-is-finite (is-finite-type-𝔽 X)
+
+set-𝔽 : {l : Level} → 𝔽 l → UU-Set l
 pr1 (set-𝔽 X) = type-𝔽 X
 pr2 (set-𝔽 X) = is-set-is-finite (is-finite-type-𝔽 X)
 ```
@@ -491,21 +463,14 @@ is-set-has-cardinality :
   {l1 : Level} {X : UU l1} (k : ℕ) → has-cardinality k X → is-set X
 is-set-has-cardinality k H = is-set-mere-equiv' H (is-set-Fin k)
 
-is-set-type-UU-Fin-Level :
-  {l : Level} (k : ℕ) (X : UU-Fin-Level l k) → is-set (type-UU-Fin-Level k X)
-is-set-type-UU-Fin-Level k X =
-  is-set-has-cardinality k (has-cardinality-type-UU-Fin-Level k X)
-
-set-UU-Fin-Level : {l1 : Level} (k : ℕ) → UU-Fin-Level l1 k → UU-Set l1
-pr1 (set-UU-Fin-Level k X) = type-UU-Fin-Level k X
-pr2 (set-UU-Fin-Level k X) = is-set-type-UU-Fin-Level k X
-
 is-set-type-UU-Fin :
-  (k : ℕ) (X : UU-Fin k) → is-set (type-UU-Fin k X)
-is-set-type-UU-Fin = is-set-type-UU-Fin-Level
+  {l : Level} (k : ℕ) (X : UU-Fin l k) → is-set (type-UU-Fin k X)
+is-set-type-UU-Fin k X =
+  is-set-has-cardinality k (has-cardinality-type-UU-Fin k X)
 
-set-UU-Fin : (k : ℕ) → UU-Fin k → UU-Set lzero
-set-UU-Fin = set-UU-Fin-Level
+set-UU-Fin : {l1 : Level} (k : ℕ) → UU-Fin l1 k → UU-Set l1
+pr1 (set-UU-Fin k X) = type-UU-Fin k X
+pr2 (set-UU-Fin k X) = is-set-type-UU-Fin k X
 ```
 
 ### A finite type is empty if and only if it has 0 elements
@@ -560,12 +525,12 @@ is-decidable-is-contr-is-finite H =
 ### The type of all pairs consisting of a natural number `k` and a type of cardinality `k` is equivalent to the type of all finite types
 
 ```agda
-map-compute-total-UU-Fin : Σ ℕ UU-Fin → 𝔽
+map-compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) → 𝔽 l
 pr1 (map-compute-total-UU-Fin (pair k (pair X e))) = X
 pr2 (map-compute-total-UU-Fin (pair k (pair X e))) =
   is-finite-has-finite-cardinality (pair k e)
 
-compute-total-UU-Fin : Σ ℕ UU-Fin ≃ 𝔽
+compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) ≃ 𝔽 l
 compute-total-UU-Fin =
   ( equiv-tot
     ( λ X →
@@ -608,7 +573,7 @@ abstract
     {l1 : Level} {A : UU l1} → is-finite A → is-finite (type-trunc-Prop A)
   is-finite-type-trunc-Prop = map-trunc-Prop count-type-trunc-Prop
 
-trunc-Prop-𝔽 : 𝔽 → 𝔽
+trunc-Prop-𝔽 : {l : Level} → 𝔽 l → 𝔽 l
 pr1 (trunc-Prop-𝔽 A) = type-trunc-Prop (type-𝔽 A)
 pr2 (trunc-Prop-𝔽 A) = is-finite-type-trunc-Prop (is-finite-type-𝔽 A)
 ```
@@ -616,173 +581,120 @@ pr2 (trunc-Prop-𝔽 A) = is-finite-type-trunc-Prop (is-finite-type-𝔽 A)
 ### We characterize the identity type of 𝔽
 
 ```agda
-equiv-𝔽 : 𝔽 → 𝔽 → UU lzero
+equiv-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → UU (l1 ⊔ l2)
 equiv-𝔽 X Y = type-𝔽 X ≃ type-𝔽 Y
 
-id-equiv-𝔽 : (X : 𝔽) → equiv-𝔽 X X
+id-equiv-𝔽 : {l : Level} → (X : 𝔽 l) → equiv-𝔽 X X
 id-equiv-𝔽 X = id-equiv
 
-extensionality-𝔽 : (X Y : 𝔽) → Id X Y ≃ equiv-𝔽 X Y
+extensionality-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y ≃ equiv-𝔽 X Y
 extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
 
-is-contr-total-equiv-𝔽 : (X : 𝔽) → is-contr (Σ 𝔽 (equiv-𝔽 X))
-is-contr-total-equiv-𝔽 X =
+is-contr-total-equiv-𝔽 :
+  {l : Level} → (X : 𝔽 l) → is-contr (Σ (𝔽 l) (equiv-𝔽 X))
+is-contr-total-equiv-𝔽 {l} X =
   is-contr-equiv'
-    ( Σ 𝔽 (Id X))
+    ( Σ (𝔽 l) (Id X))
     ( equiv-tot (extensionality-𝔽 X))
     ( is-contr-total-path X)
 
-equiv-eq-𝔽 : (X Y : 𝔽) → Id X Y → equiv-𝔽 X Y
+equiv-eq-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y → equiv-𝔽 X Y
 equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)
 
-eq-equiv-𝔽 : (X Y : 𝔽) → equiv-𝔽 X Y → Id X Y
+eq-equiv-𝔽 : {l : Level} → (X Y : 𝔽 l) → equiv-𝔽 X Y → Id X Y
 eq-equiv-𝔽 X Y = map-inv-equiv (extensionality-𝔽 X Y)
 ```
 
 ### We characterize the identity type of families of finite types
 
 ```agda
-equiv-fam-𝔽 : {l : Level} {X : UU l} (Y Z : X → 𝔽) → UU l
+equiv-fam-𝔽 : {l1 l2 : Level} {X : UU l1} (Y Z : X → 𝔽 l2) → UU (l1 ⊔ l2)
 equiv-fam-𝔽 Y Z = equiv-fam (type-𝔽 ∘ Y) (type-𝔽 ∘ Z)
 
-id-equiv-fam-𝔽 : {l : Level} {X : UU l} → (Y : X → 𝔽) → equiv-fam-𝔽 Y Y
+id-equiv-fam-𝔽 : {l1 l2 : Level} {X : UU l1} → (Y : X → 𝔽 l2) → equiv-fam-𝔽 Y Y
 id-equiv-fam-𝔽 Y x = id-equiv
 
 extensionality-fam-𝔽 :
-  {l : Level} {X : UU l} (Y Z : X → 𝔽) → Id Y Z ≃ equiv-fam-𝔽 Y Z
+  {l1 l2 : Level} {X : UU l1} (Y Z : X → 𝔽 l2) → Id Y Z ≃ equiv-fam-𝔽 Y Z
 extensionality-fam-𝔽 = extensionality-fam-subuniverse is-finite-Prop
-```
-
-### We characterize the identity type of `UU-Fin-Level`
-
-```agda
-equiv-UU-Fin-Level :
-  {l1 l2 : Level} (k : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l2 k → UU (l1 ⊔ l2)
-equiv-UU-Fin-Level k X Y = type-UU-Fin-Level k X ≃ type-UU-Fin-Level k Y
-
-id-equiv-UU-Fin-Level :
-  {l : Level} {k : ℕ} (X : UU-Fin-Level l k) → equiv-UU-Fin-Level k X X
-id-equiv-UU-Fin-Level X = id-equiv-component-UU-Level X
-
-equiv-eq-UU-Fin-Level :
-  {l : Level} (k : ℕ) {X Y : UU-Fin-Level l k} → Id X Y → equiv-UU-Fin-Level k X Y
-equiv-eq-UU-Fin-Level k p = equiv-eq-component-UU-Level p
-
-abstract
-  is-contr-total-equiv-UU-Fin-Level :
-    {l : Level} {k : ℕ} (X : UU-Fin-Level l k) →
-    is-contr (Σ (UU-Fin-Level l k) (equiv-UU-Fin-Level k X))
-  is-contr-total-equiv-UU-Fin-Level {l} {k} X =
-    is-contr-total-equiv-component-UU-Level X
-
-abstract
-  is-equiv-equiv-eq-UU-Fin-Level :
-    {l : Level} (k : ℕ) (X Y : UU-Fin-Level l k) →
-    is-equiv (equiv-eq-UU-Fin-Level k {X = X} {Y})
-  is-equiv-equiv-eq-UU-Fin-Level k X =
-    is-equiv-equiv-eq-component-UU-Level X
-
-eq-equiv-UU-Fin-Level :
-  {l : Level} (k : ℕ) (X Y : UU-Fin-Level l k) →
-  equiv-UU-Fin-Level k X Y → Id X Y
-eq-equiv-UU-Fin-Level k X Y =
-  eq-equiv-component-UU-Level X Y
-
-equiv-equiv-eq-UU-Fin-Level :
-  {l : Level} (k : ℕ) (X Y : UU-Fin-Level l k) →
-  Id X Y ≃ equiv-UU-Fin-Level k X Y
-pr1 (equiv-equiv-eq-UU-Fin-Level k X Y) = equiv-eq-UU-Fin-Level k
-pr2 (equiv-equiv-eq-UU-Fin-Level k X Y) = is-equiv-equiv-eq-UU-Fin-Level k X Y
-```
-
-### The type `UU-Fin-Level l k` is a 1-type
-
-```agda
-is-1-type-UU-Fin-Level : {l : Level} (k : ℕ) → is-1-type (UU-Fin-Level l k)
-is-1-type-UU-Fin-Level k X Y =
-  is-set-equiv
-    ( equiv-UU-Fin-Level k X Y)
-    ( equiv-equiv-eq-UU-Fin-Level k X Y)
-    ( is-set-equiv-is-set
-      ( is-set-type-UU-Fin-Level k X)
-      ( is-set-type-UU-Fin-Level k Y))
-
-UU-Fin-Level-1-Type : (l : Level) (k : ℕ) → UU-1-Type (lsuc l)
-pr1 (UU-Fin-Level-1-Type l k) = UU-Fin-Level l k
-pr2 (UU-Fin-Level-1-Type l k) = is-1-type-UU-Fin-Level k
-```
-
-### The type `UU-Fin k` is a 1-type
-
-```agda
-is-1-type-UU-Fin : (k : ℕ) → is-1-type (UU-Fin k)
-is-1-type-UU-Fin = is-1-type-UU-Fin-Level
-
-UU-Fin-1-Type : ℕ → UU-1-Type (lsuc lzero)
-UU-Fin-1-Type = UU-Fin-Level-1-Type lzero
 ```
 
 ### We characterize the identity type of `UU-Fin`
 
 ```agda
-equiv-UU-Fin : (k : ℕ) (X Y : UU-Fin k) → UU lzero
-equiv-UU-Fin k X Y = equiv-component-UU X Y
+equiv-UU-Fin :
+  {l1 l2 : Level} (k : ℕ) → UU-Fin l1 k → UU-Fin l2 k → UU (l1 ⊔ l2)
+equiv-UU-Fin k X Y = type-UU-Fin k X ≃ type-UU-Fin k Y
 
 id-equiv-UU-Fin :
-  (k : ℕ) (X : UU-Fin k) → equiv-UU-Fin k X X
-id-equiv-UU-Fin k X = id-equiv-component-UU X
+  {l : Level} {k : ℕ} (X : UU-Fin l k) → equiv-UU-Fin k X X
+id-equiv-UU-Fin X = id-equiv-component-UU-Level X
 
 equiv-eq-UU-Fin :
-  (k : ℕ) {X Y : UU-Fin k} → Id X Y → equiv-UU-Fin k X Y
-equiv-eq-UU-Fin k p = equiv-eq-component-UU p
+  {l : Level} (k : ℕ) {X Y : UU-Fin l k} → Id X Y → equiv-UU-Fin k X Y
+equiv-eq-UU-Fin k p = equiv-eq-component-UU-Level p
 
 abstract
   is-contr-total-equiv-UU-Fin :
-    (k : ℕ) (X : UU-Fin k) → is-contr (Σ (UU-Fin k) (equiv-UU-Fin k X))
-  is-contr-total-equiv-UU-Fin k X =
-    is-contr-total-equiv-component-UU X
+    {l : Level} {k : ℕ} (X : UU-Fin l k) →
+    is-contr (Σ (UU-Fin l k) (equiv-UU-Fin k X))
+  is-contr-total-equiv-UU-Fin {l} {k} X =
+    is-contr-total-equiv-component-UU-Level X
 
 abstract
   is-equiv-equiv-eq-UU-Fin :
-    (k : ℕ) (X Y : UU-Fin k) → is-equiv (equiv-eq-UU-Fin k {X = X} {Y})
+    {l : Level} (k : ℕ) (X Y : UU-Fin l k) →
+    is-equiv (equiv-eq-UU-Fin k {X = X} {Y})
   is-equiv-equiv-eq-UU-Fin k X =
-    is-equiv-equiv-eq-component-UU X
+    is-equiv-equiv-eq-component-UU-Level X
 
 eq-equiv-UU-Fin :
-  (k : ℕ) (X Y : UU-Fin k) → equiv-UU-Fin k X Y → Id X Y
-eq-equiv-UU-Fin k X Y = eq-equiv-component-UU X Y
+  {l : Level} (k : ℕ) (X Y : UU-Fin l k) →
+  equiv-UU-Fin k X Y → Id X Y
+eq-equiv-UU-Fin k X Y =
+  eq-equiv-component-UU-Level X Y
 
 equiv-equiv-eq-UU-Fin :
-  (k : ℕ) (X Y : UU-Fin k) → Id X Y ≃ equiv-UU-Fin k X Y
+  {l : Level} (k : ℕ) (X Y : UU-Fin l k) →
+  Id X Y ≃ equiv-UU-Fin k X Y
 pr1 (equiv-equiv-eq-UU-Fin k X Y) = equiv-eq-UU-Fin k
 pr2 (equiv-equiv-eq-UU-Fin k X Y) = is-equiv-equiv-eq-UU-Fin k X Y
 ```
 
-### The types `UU-Fin-Level` and `UU-Fin` are connected
+### The type `UU-Fin l k` is a 1-type
+
+```agda
+is-1-type-UU-Fin : {l : Level} (k : ℕ) → is-1-type (UU-Fin l k)
+is-1-type-UU-Fin k X Y =
+  is-set-equiv
+    ( equiv-UU-Fin k X Y)
+    ( equiv-equiv-eq-UU-Fin k X Y)
+    ( is-set-equiv-is-set
+      ( is-set-type-UU-Fin k X)
+      ( is-set-type-UU-Fin k Y))
+
+UU-Fin-1-Type : (l : Level) (k : ℕ) → UU-1-Type (lsuc l)
+pr1 (UU-Fin-1-Type l k) = UU-Fin l k
+pr2 (UU-Fin-1-Type l k) = is-1-type-UU-Fin k
+```
+
+### The type `UU-Fin` is connected
 
 ```agda
 abstract
-  is-path-connected-UU-Fin-Level :
-    {l : Level} (n : ℕ) → is-path-connected (UU-Fin-Level l n)
-  is-path-connected-UU-Fin-Level {l} n =
-    is-path-connected-mere-eq
-      ( Fin-UU-Fin-Level l n)
+  is-0-connected-UU-Fin :
+    {l : Level} (n : ℕ) → is-0-connected (UU-Fin l n)
+  is-0-connected-UU-Fin {l} n =
+    is-0-connected-mere-eq
+      ( Fin-UU-Fin l n)
       ( λ A →
         map-trunc-Prop
-          ( ( eq-equiv-UU-Fin-Level n (Fin-UU-Fin-Level l n) A) ∘
+          ( ( eq-equiv-UU-Fin n (Fin-UU-Fin l n) A) ∘
             ( map-equiv
               ( equiv-precomp-equiv
                 ( inv-equiv (equiv-raise l (Fin n)))
-                ( type-UU-Fin-Level n A))))
+                ( type-UU-Fin n A))))
           ( pr2 A))
-
-abstract
-  is-path-connected-UU-Fin :
-    (n : ℕ) → is-path-connected (UU-Fin n)
-  is-path-connected-UU-Fin n =
-    is-path-connected-mere-eq
-      ( Fin-UU-Fin n)
-      ( λ A → map-trunc-Prop (eq-equiv-UU-Fin n (Fin-UU-Fin n) A) (pr2 A))
 ```
 
 ```agda

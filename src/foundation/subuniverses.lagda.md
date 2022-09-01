@@ -10,6 +10,7 @@ module foundation.subuniverses where
 open import foundation-core.contractible-types using
   ( is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.equivalences using
   ( _≃_; id-equiv; is-equiv; map-inv-is-equiv)
 open import foundation-core.fundamental-theorem-of-identity-types using
@@ -17,22 +18,25 @@ open import foundation-core.fundamental-theorem-of-identity-types using
 open import foundation-core.identity-types using (_＝_; tr; inv; refl; ap)
 open import foundation-core.propositions using
   ( is-prop; type-Prop; is-prop-type-Prop; UU-Prop)
-open import foundation-core.sets using (is-set; UU-Set)
 open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation-core.subtypes using
-  ( is-subtype; subtype; is-emb-inclusion-subtype)
+  ( is-subtype; subtype; is-emb-inclusion-subtype; type-subtype;
+    is-in-subtype; inclusion-subtype; emb-subtype)
 open import foundation-core.univalence using
   ( eq-equiv; is-contr-total-equiv; equiv-eq)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import foundation.equality-dependent-function-types
-open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
 ```
 
 ## Idea
 
 Subuniverses are subtypes of the universe.
+
+## Definitions
+
+### Subuniverses
 
 ```agda
 is-subuniverse :
@@ -43,13 +47,46 @@ subuniverse :
   (l1 l2 : Level) → UU ((lsuc l1) ⊔ (lsuc l2))
 subuniverse l1 l2 = subtype l2 (UU l1)
 
-abstract
-  is-subtype-subuniverse :
-    {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
-    is-prop (type-Prop (P X))
-  is-subtype-subuniverse P X = is-prop-type-Prop (P X)
+is-subtype-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) (X : UU l1) →
+  is-prop (type-Prop (P X))
+is-subtype-subuniverse P X = is-prop-type-Prop (P X)
 
-{- By univalence, subuniverses are closed under equivalences. -}
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  where
+
+  total-subuniverse : UU ((lsuc l1) ⊔ l2)
+  total-subuniverse = type-subtype P
+
+  is-in-subuniverse : UU l1 → UU l2
+  is-in-subuniverse = is-in-subtype P
+
+  inclusion-subuniverse : total-subuniverse → UU l1
+  inclusion-subuniverse = inclusion-subtype P
+
+  is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
+  is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
+
+  emb-inclusion-subuniverse : total-subuniverse ↪ UU l1
+  emb-inclusion-subuniverse = emb-subtype P
+```
+
+### Global subuniverses
+
+```agda
+is-global-subuniverse :
+  (α : Level → Level) (P : (l : Level) → subuniverse l (α l)) →
+  (l1 l2 : Level) → UU _
+is-global-subuniverse α P l1 l2 =
+  (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
+```
+
+## Properties
+
+### Subuniverses are closed under equivalences
+
+```agda
 in-subuniverse-equiv :
   {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P X → P Y
 in-subuniverse-equiv P e = tr P (eq-equiv _ _ e)
@@ -57,68 +94,51 @@ in-subuniverse-equiv P e = tr P (eq-equiv _ _ e)
 in-subuniverse-equiv' :
   {l1 l2 : Level} (P : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → P Y → P X
 in-subuniverse-equiv' P e = tr P (inv (eq-equiv _ _ e))
+```
 
-total-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) → UU ((lsuc l1) ⊔ l2)
-total-subuniverse {l1} P = Σ (UU l1) (λ X → type-Prop (P X))
+### Characterization of the identity type of subuniverses
 
-{- We also introduce the notion of 'global subuniverse'. The handling of 
-   universe levels is a bit more complicated here, since (l : Level) → A l are 
-   kinds but not types. -}
-   
-is-global-subuniverse :
-  (α : Level → Level) (P : (l : Level) → subuniverse l (α l)) →
-  (l1 l2 : Level) → UU _
-is-global-subuniverse α P l1 l2 =
-  (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  where
+  
+  equiv-subuniverse : (X Y : total-subuniverse P) → UU l1
+  equiv-subuniverse X Y = (pr1 X) ≃ (pr1 Y)
 
-{- Next we characterize the identity type of a subuniverse. -}
+  equiv-eq-subuniverse :
+    (s t : total-subuniverse P) → s ＝ t → equiv-subuniverse s t
+  equiv-eq-subuniverse (pair X p) .(pair X p) refl = id-equiv
 
-equiv-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) →
-  (X Y : total-subuniverse P) → UU l1
-equiv-subuniverse P X Y = (pr1 X) ≃ (pr1 Y)
+  abstract
+    is-contr-total-equiv-subuniverse :
+      (s : total-subuniverse P) →
+      is-contr (Σ (total-subuniverse P) (λ t → equiv-subuniverse s t))
+    is-contr-total-equiv-subuniverse (pair X p) =
+      is-contr-total-Eq-subtype
+        ( is-contr-total-equiv X)
+        ( is-subtype-subuniverse P)
+        ( X)
+        ( id-equiv)
+        ( p)
 
-equiv-eq-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) →
-  (s t : total-subuniverse P) → s ＝ t → equiv-subuniverse P s t
-equiv-eq-subuniverse P (pair X p) .(pair X p) refl = id-equiv
+  abstract
+    is-equiv-equiv-eq-subuniverse :
+      (s t : total-subuniverse P) → is-equiv (equiv-eq-subuniverse s t)
+    is-equiv-equiv-eq-subuniverse (pair X p) =
+      fundamental-theorem-id
+        ( is-contr-total-equiv-subuniverse (pair X p))
+        ( equiv-eq-subuniverse (pair X p))
 
-abstract
-  is-contr-total-equiv-subuniverse :
-    {l1 l2 : Level} (P : subuniverse l1 l2)
-    (s : total-subuniverse P) →
-    is-contr (Σ (total-subuniverse P) (λ t → equiv-subuniverse P s t))
-  is-contr-total-equiv-subuniverse P (pair X p) =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv X)
-      ( is-subtype-subuniverse P)
-      ( X)
-      ( id-equiv)
-      ( p)
+  extensionality-subuniverse :
+    (s t : total-subuniverse P) → (s ＝ t) ≃ equiv-subuniverse s t
+  pr1 (extensionality-subuniverse s t) = equiv-eq-subuniverse s t
+  pr2 (extensionality-subuniverse s t) = is-equiv-equiv-eq-subuniverse s t
 
-abstract
-  is-equiv-equiv-eq-subuniverse :
-    {l1 l2 : Level} (P : subuniverse l1 l2)
-    (s t : total-subuniverse P) → is-equiv (equiv-eq-subuniverse P s t)
-  is-equiv-equiv-eq-subuniverse P (pair X p) =
-    fundamental-theorem-id
-      ( pair X p)
-      ( id-equiv)
-      ( is-contr-total-equiv-subuniverse P (pair X p))
-      ( equiv-eq-subuniverse P (pair X p))
-
-extensionality-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (s t : total-subuniverse P) →
-  (s ＝ t) ≃ equiv-subuniverse P s t
-pr1 (extensionality-subuniverse P s t) = equiv-eq-subuniverse P s t
-pr2 (extensionality-subuniverse P s t) = is-equiv-equiv-eq-subuniverse P s t
-
-eq-equiv-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) →
-  {s t : total-subuniverse P} → equiv-subuniverse P s t → s ＝ t
-eq-equiv-subuniverse P {s} {t} =
-  map-inv-is-equiv (is-equiv-equiv-eq-subuniverse P s t)
+  eq-equiv-subuniverse :
+    {s t : total-subuniverse P} → equiv-subuniverse s t → s ＝ t
+  eq-equiv-subuniverse {s} {t} =
+    map-inv-is-equiv (is-equiv-equiv-eq-subuniverse s t)
 ```
 
 ### Equivalences of families of types in a subuniverse
@@ -156,8 +176,7 @@ module _
   is-equiv-equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → is-equiv (equiv-eq-fam-subuniverse Y Z)
   is-equiv-equiv-eq-fam-subuniverse Y =
-    fundamental-theorem-id Y
-      ( id-equiv-fam-subuniverse Y)
+    fundamental-theorem-id 
       ( is-contr-total-equiv-fam-subuniverse Y)
       ( equiv-eq-fam-subuniverse Y)
 

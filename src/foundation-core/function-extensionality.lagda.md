@@ -73,6 +73,8 @@ module _
   pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
 ```
 
+### Naturality of `htpy-eq`
+
 ```agda
 square-htpy-eq :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) →
@@ -80,4 +82,13 @@ square-htpy-eq :
   ( (λ (p : (y : B) → g y ＝ h y) (x : A) → p (f x)) ∘ htpy-eq) ~
   ( htpy-eq ∘ (ap (precomp f C)))
 square-htpy-eq f g .g refl = refl
+```
+
+### The action on paths of an evaluation map
+
+```agda
+ap-ev :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (a : A) → {f g : A → B} →
+  (p : f ＝ g) → (ap (λ h → h a) p) ＝ htpy-eq p a
+ap-ev a refl = refl
 ```

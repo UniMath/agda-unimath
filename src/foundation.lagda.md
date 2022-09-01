@@ -7,12 +7,17 @@ title: Foundation
 
 module foundation where
 
+open import foundation.0-connected-types public
+open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
 open import foundation.algebras-polynomial-endofunctors public
+open import foundation.apartness-relations public
 open import foundation.automorphisms public
+open import foundation.axiom-l public
 open import foundation.axiom-of-choice public
+open import foundation.bands public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -26,17 +31,20 @@ open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
 open import foundation.commutative-operations public
+open import foundation.commuting-cubes public
 open import foundation.commuting-squares public
 open import foundation.complements public
 open import foundation.conjunction public
-open import foundation.connected-types public
 open import foundation.connected-components-universes public
 open import foundation.connected-components public
+open import foundation.connected-maps public
+open import foundation.connected-types public
 open import foundation.constant-maps public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
 open import foundation.coproduct-types public
 open import foundation.coslice public
+open import foundation.cospans public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
@@ -49,7 +57,12 @@ open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-pair-types public
+open import foundation.descent-coproduct-types public
+open import foundation.descent-dependent-pair-types public
+open import foundation.descent-empty-types public
 open import foundation.diagonal-maps-of-types public
+open import foundation.diagonals-of-maps public
+open import foundation.discrete-reflexive-relations public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-powersets public
@@ -76,12 +89,14 @@ open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
+open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
@@ -89,6 +104,7 @@ open import foundation.functoriality-set-truncation
 open import foundation.functoriality-w-types public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
+open import foundation.hexagons-of-identifications public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.identity-systems public
@@ -111,6 +127,8 @@ open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
+open import foundation.lesser-limited-principle-of-omniscience public
+open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.lower-types-w-types public
@@ -118,9 +136,11 @@ open import foundation.maybe public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-cospans public
 open import foundation.multisets public
+open import foundation.multisubsets public
 open import foundation.negation public
-open import foundation.non-contractible-types public
+open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.path-algebra public
@@ -139,6 +159,7 @@ open import foundation.pullbacks public
 open import foundation.ranks-of-elements-w-types public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
+open import foundation.reflexive-relations public
 open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
@@ -146,6 +167,7 @@ open import foundation.sections public
 open import foundation.set-presented-types public
 open import foundation.set-truncations public
 open import foundation.sets public
+open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
 open import foundation.slice public
 open import foundation.small-maps public
@@ -163,14 +185,18 @@ open import foundation.surjective-maps public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
+open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncations public
+open import foundation.type-arithmetic-booleans public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
+open import foundation.type-arithmetic-dependent-function-types public
 open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-theoretic-principle-of-choice public
+open import foundation.union public
 open import foundation.unique-existence public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-set-quotients public
@@ -203,5 +229,6 @@ open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
 open import foundation.w-types public
 open import foundation.weak-function-extensionality public
+open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public
 ```

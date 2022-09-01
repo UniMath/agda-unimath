@@ -3,8 +3,6 @@ title: Composition of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.composition-species where
 
 open import foundation.cartesian-product-types
@@ -38,9 +36,10 @@ Using the formula for composition of analytic endofunctors, we obtain a way to c
 
 ```agda
 analytic-comp-species :
-  {l1 l2 : Level} → species l1 → species l2 → species (lsuc lzero ⊔ l1 ⊔ l2)
-analytic-comp-species S T X =
-  Σ ( partition-𝔽 X)
+  {l1 l2 l3 : Level} → species l1 l2 → species l1 l3 →
+  species l1 (lsuc l1 ⊔ l2 ⊔ l3)
+analytic-comp-species {l1} {l2} {l3} S T X =
+  Σ ( partition-𝔽 l1 l1 X)
     ( λ P →
       ( T (finite-indexing-type-partition-𝔽 X P)) ×
       ( (y : indexing-type-partition-𝔽 X P) →
@@ -50,7 +49,7 @@ analytic-comp-species S T X =
 ### The analytic unit for composition of species
 
 ```agda
-analytic-unit-species : species lzero
+analytic-unit-species : {l1 : Level} → species l1 l1
 analytic-unit-species X = is-contr (type-𝔽 X)
 ```
 
@@ -59,9 +58,11 @@ analytic-unit-species X = is-contr (type-𝔽 X)
 ### Unit laws for analytic composition of species
 
 ```agda
+{-
 left-unit-law-comp-species :
-  {l : Level} (F : species l) →
+  {l1 l2 : Level} (F : species l1 l2) →
   equiv-species (analytic-comp-species analytic-unit-species F) F
 left-unit-law-comp-species F X =
   {!!}
+-}
 ```

@@ -3,7 +3,7 @@ title: Reflexive graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module graph-theory.reflexive-graphs where
 

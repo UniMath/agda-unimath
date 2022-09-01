@@ -1,4 +1,6 @@
-# Polytopes
+---
+title: Polytopes
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

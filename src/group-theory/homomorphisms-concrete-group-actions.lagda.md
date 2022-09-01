@@ -7,7 +7,7 @@ title: Morphisms of concrete group actions
 
 module group-theory.homomorphisms-concrete-group-actions where
 
-open import foundation.connected-types
+open import foundation.0-connected-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -78,9 +78,9 @@ module _
     (g : hom-action-Concrete-Group G X Y) →
     (f ＝ g) ≃ htpy-hom-action-Concrete-Group g
   extensionality-hom-action-Concrete-Group g =
-    ( equiv-dependent-universal-property-is-path-connected
+    ( equiv-dependent-universal-property-is-0-connected
       ( shape-Concrete-Group G)
-      ( is-path-connected-classifying-type-Concrete-Group G)
+      ( is-0-connected-classifying-type-Concrete-Group G)
       ( λ u →
         Π-Prop
           ( type-Set (X u))

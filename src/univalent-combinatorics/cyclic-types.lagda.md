@@ -3,8 +3,6 @@ title: Cyclic types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.cyclic-types where
 
 open import elementary-number-theory.addition-integers using
@@ -24,11 +22,11 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
   using (left-unit-law-add-Fin)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.commuting-squares using
   ( coherence-square; coherence-square-comp-horizontal;
     coherence-square-inv-horizontal)
-open import foundation.connected-types using
-  ( is-path-connected; is-path-connected-mere-eq)
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π)
 open import foundation.coproduct-types using (inl; inr)
@@ -214,8 +212,7 @@ module _
   is-equiv-equiv-eq-Cyclic-Type :
     (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
   is-equiv-equiv-eq-Cyclic-Type =
-    fundamental-theorem-id X
-      ( id-equiv-Cyclic-Type k X)
+    fundamental-theorem-id
       ( is-contr-total-equiv-Cyclic-Type k X)
       ( equiv-eq-Cyclic-Type k X)
 
@@ -278,8 +275,7 @@ module _
   is-equiv-htpy-eq-equiv-Cyclic-Type :
     (e f : equiv-Cyclic-Type k X Y) → is-equiv (htpy-eq-equiv-Cyclic-Type e f)
   is-equiv-htpy-eq-equiv-Cyclic-Type e =
-    fundamental-theorem-id e
-      ( refl-htpy-equiv-Cyclic-Type e)
+    fundamental-theorem-id
       ( is-contr-total-htpy-equiv-Cyclic-Type e)
       ( htpy-eq-equiv-Cyclic-Type e)
 
@@ -376,10 +372,10 @@ mere-eq-Cyclic-Type k X Y =
               ( comp-equiv-Cyclic-Type k X (ℤ-Mod-Cyclic-Type k) Y f
                 ( inv-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X e)))))
 
-is-path-connected-Cyclic-Type :
-  (k : ℕ) → is-path-connected (Cyclic-Type lzero k)
-is-path-connected-Cyclic-Type k =
-  is-path-connected-mere-eq
+is-0-connected-Cyclic-Type :
+  (k : ℕ) → is-0-connected (Cyclic-Type lzero k)
+is-0-connected-Cyclic-Type k =
+  is-0-connected-mere-eq
     ( ℤ-Mod-Cyclic-Type k)
     ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
 

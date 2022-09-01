@@ -17,6 +17,10 @@ open import foundation.universe-levels
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.24-pushouts
+open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
+
 ```
 
 ## Idea

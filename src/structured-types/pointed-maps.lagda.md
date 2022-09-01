@@ -1,4 +1,6 @@
-# Pointed maps
+---
+title: Pointed maps
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -8,7 +10,7 @@ module structured-types.pointed-maps where
 open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (Id; refl; tr; inv; apd; _∙_; ap)
+open import foundation.identity-types using (_＝_; refl; tr; inv; apd; _∙_; ap)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import structured-types.pointed-dependent-functions using
@@ -22,6 +24,10 @@ open import structured-types.pointed-types using
 ## Idea
 
 A pointed map from a pointed type `A` to a pointed type `B` is a base point preserving function from `A` to `B`.
+
+## Definitions
+
+### Pointed maps
 
 ```agda
 module _
@@ -49,9 +55,13 @@ module _
 
   preserves-point-pointed-map :
     (f : A →* B) →
-    Id (map-pointed-map f (pt-Pointed-Type A)) (pt-Pointed-Type B)
+    map-pointed-map f (pt-Pointed-Type A) ＝ pt-Pointed-Type B
   preserves-point-pointed-map f = pr2 f
+```
 
+### Precomposing pointed pointed maps
+
+```agda
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   (C : Pointed-Fam l3 B) (f : A →* B)
@@ -79,22 +89,39 @@ module _
             ( fam-Pointed-Fam B C)
             ( inv (preserves-point-pointed-map A B f)))
           ( preserves-point-function-pointed-Π B C g)))
+```
 
+### Composing pointed maps
+
+```agda
 module _
   {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   (C : Pointed-Type l3)
   where
 
-  precomp-pointed-map : A →* B → B →* C → A →* C
-  precomp-pointed-map f g =
-    pair
-      ( map-pointed-map B C g ∘ map-pointed-map A B f)
-      ( ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
-        ( preserves-point-pointed-map B C g))
+  map-comp-pointed-map :
+    B →* C → A →* B → (type-Pointed-Type A) → (type-Pointed-Type C)
+  map-comp-pointed-map g f =
+    map-pointed-map B C g ∘ map-pointed-map A B f
+
+  preserves-point-comp-pointed-map :
+    (g : B →* C) (f : A →* B) →
+    (map-comp-pointed-map g f (pt-Pointed-Type A)) ＝ pt-Pointed-Type C
+  preserves-point-comp-pointed-map g f =
+    ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
+    ( preserves-point-pointed-map B C g)
 
   comp-pointed-map : B →* C → A →* B → A →* C
-  comp-pointed-map g f = precomp-pointed-map f g
+  pr1 (comp-pointed-map g f) = map-comp-pointed-map g f
+  pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
+  precomp-pointed-map : A →* B → B →* C → A →* C
+  precomp-pointed-map f g = comp-pointed-map g f
+```
+
+### The identity pointed map
+
+```agda
 module _
   {l1 : Level} {A : Pointed-Type l1}
   where

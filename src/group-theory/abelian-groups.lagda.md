@@ -12,7 +12,7 @@ open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using (Id; ap-binary; _∙_; inv)
+open import foundation.identity-types using (Id; _＝_; ap-binary; _∙_; inv)
 open import foundation.injective-maps using (is-injective)
 open import foundation.interchange-law using
   (interchange-law-commutative-and-associative)
@@ -24,15 +24,15 @@ open import foundation.universe-levels using (Level; UU; lsuc)
 open import group-theory.groups using
   ( Group; type-Group; mul-Group; set-Group; is-set-type-Group;
     associative-mul-Group; has-associative-mul-Group; semigroup-Group; is-group;
-    is-group-Group; is-unital-Group; unit-Group; left-unit-law-Group;
-    right-unit-law-Group; inv-Group; left-inverse-law-Group;
-    right-inverse-law-Group; is-group'; has-inverses-Group;
+    is-group-Group; is-unital-Group; unit-Group; left-unit-law-mul-Group;
+    right-unit-law-mul-Group; inv-Group; left-inverse-law-mul-Group;
+    right-inverse-law-mul-Group; is-group'; has-inverses-Group;
     distributive-inv-mul-Group; mul-Group'; is-equiv-mul-Group;
     is-equiv-mul-Group'; is-binary-equiv-mul-Group; transpose-eq-mul-Group;
     transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
     is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
     is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
-    preserves-concat-mul-list-Group)
+    preserves-concat-mul-list-Group; inv-inv-Group; inv-unit-Group)
 open import group-theory.monoids using (is-unital-Semigroup)
 open import group-theory.semigroups using
   ( has-associative-mul-Set; Semigroup)
@@ -126,12 +126,12 @@ is-zero-Ab A x = Id x (zero-Ab A)
 left-unit-law-add-Ab :
   {l : Level} (A : Ab l) → (x : type-Ab A) →
   Id (add-Ab A (zero-Ab A) x) x
-left-unit-law-add-Ab A = left-unit-law-Group (group-Ab A)
+left-unit-law-add-Ab A = left-unit-law-mul-Group (group-Ab A)
 
 right-unit-law-add-Ab :
   {l : Level} (A : Ab l) → (x : type-Ab A) →
   Id (add-Ab A x (zero-Ab A)) x
-right-unit-law-add-Ab A = right-unit-law-Group (group-Ab A)
+right-unit-law-add-Ab A = right-unit-law-mul-Group (group-Ab A)
 
 has-negatives-Ab :
   {l : Level} (A : Ab l) → is-group' (semigroup-Ab A) (has-zero-Ab A)
@@ -144,12 +144,12 @@ neg-Ab A = inv-Group (group-Ab A)
 left-inverse-law-add-Ab :
   {l : Level} (A : Ab l) (x : type-Ab A) →
   Id (add-Ab A (neg-Ab A x) x) (zero-Ab A)
-left-inverse-law-add-Ab A = left-inverse-law-Group (group-Ab A)
+left-inverse-law-add-Ab A = left-inverse-law-mul-Group (group-Ab A)
 
 right-inverse-law-add-Ab :
   {l : Level} (A : Ab l) (x : type-Ab A) →
   Id (add-Ab A x (neg-Ab A x)) (zero-Ab A)
-right-inverse-law-add-Ab A = right-inverse-law-Group (group-Ab A)
+right-inverse-law-add-Ab A = right-inverse-law-mul-Group (group-Ab A)
 
 commutative-add-Ab :
   {l : Level} (A : Ab l) (x y : type-Ab A) →
@@ -172,6 +172,13 @@ distributive-neg-add-Ab :
 distributive-neg-add-Ab A x y =
   ( distributive-inv-mul-Group (group-Ab A) x y) ∙
   ( commutative-add-Ab A (neg-Ab A y) (neg-Ab A x))
+
+neg-neg-Ab :
+  {l : Level} (A : Ab l) (x : type-Ab A) → neg-Ab A (neg-Ab A x) ＝ x
+neg-neg-Ab A = inv-inv-Group (group-Ab A)
+
+neg-zero-Ab : {l : Level} (A : Ab l) → neg-Ab A (zero-Ab A) ＝ zero-Ab A
+neg-zero-Ab A = inv-unit-Group (group-Ab A)
 ```
 
 ### Addition on an abelian group is a binary equivalence

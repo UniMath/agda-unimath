@@ -113,8 +113,7 @@ module _
     is-equiv-htpy-eq-hom-Semigroup :
       (f g : type-hom-Semigroup) → is-equiv (htpy-eq-hom-Semigroup f g)
     is-equiv-htpy-eq-hom-Semigroup f =
-      fundamental-theorem-id f
-        ( refl-htpy-hom-Semigroup f)
+      fundamental-theorem-id 
         ( is-contr-total-htpy-hom-Semigroup f)
         ( htpy-eq-hom-Semigroup f)
 

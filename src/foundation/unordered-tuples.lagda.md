@@ -39,13 +39,13 @@ An unordered n-tuple of elements of a type `A` consists of an n-element set `X` 
 ```agda
 unordered-tuple :
   {l : Level} (n : ℕ) (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-tuple n A = Σ (UU-Fin n) (λ X → type-UU-Fin n X → A)
+unordered-tuple n A = Σ (UU-Fin lzero n) (λ X → type-UU-Fin n X → A)
 
 module _
   {l : Level} (n : ℕ) {A : UU l} (t : unordered-tuple n A)
   where
 
-  type-unordered-tuple-UU-Fin : UU-Fin n
+  type-unordered-tuple-UU-Fin : UU-Fin lzero n
   type-unordered-tuple-UU-Fin = pr1 t
 
   type-unordered-tuple : UU lzero
@@ -77,7 +77,7 @@ module _
   (i : type-unordered-tuple (succ-ℕ n) t)
   where
 
-  type-complement-point-unordered-tuple-UU-Fin : UU-Fin n
+  type-complement-point-unordered-tuple-UU-Fin : UU-Fin lzero n
   type-complement-point-unordered-tuple-UU-Fin =
     complement-point-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
@@ -107,7 +107,7 @@ module _
 ```agda
 standard-unordered-tuple :
   {l : Level} (n : ℕ) {A : UU l} (f : Fin n → A) → unordered-tuple n A
-pr1 (standard-unordered-tuple n f) = Fin-UU-Fin n
+pr1 (standard-unordered-tuple n f) = Fin-UU-Fin' n
 pr2 (standard-unordered-tuple n f) = f
 ```
 
@@ -142,15 +142,14 @@ module _
   is-contr-total-Eq-unordered-tuple x =
     is-contr-total-Eq-structure
       ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin n (type-unordered-tuple-UU-Fin n x))
+      ( is-contr-total-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
       ( pair (type-unordered-tuple-UU-Fin n x) id-equiv)
       ( is-contr-total-htpy (element-unordered-tuple n x))
 
   is-equiv-Eq-eq-unordered-tuple :
     (x y : unordered-tuple n A) → is-equiv (Eq-eq-unordered-tuple x y)
   is-equiv-Eq-eq-unordered-tuple x =
-    fundamental-theorem-id x
-      ( refl-Eq-unordered-tuple x)
+    fundamental-theorem-id
       ( is-contr-total-Eq-unordered-tuple x)
       ( Eq-eq-unordered-tuple x)
 

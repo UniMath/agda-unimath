@@ -49,6 +49,8 @@ open import foundation.unit-type using
   ( is-contr-unit; raise-unit-Prop; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero)
 
+open import univalent-combinatorics.counting using
+  ( count; count-is-empty; count-is-contr)
 open import univalent-combinatorics.finite-types
 ```
 
@@ -231,6 +233,18 @@ abstract
     equiv-raise l2 bool ∘e equiv-bool-decidable-Prop
 ```
 
+### Decidable propositions have a count
+
+```agda
+count-is-decidable-Prop :
+    {l : Level} (P : UU-Prop l) →
+    is-decidable (type-Prop P) → count (type-Prop P)
+count-is-decidable-Prop P (inl x) =
+  count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) x)
+count-is-decidable-Prop P (inr x) =
+  count-is-empty x
+```
+
 ### Decidable propositions are finite
 
 ```agda
@@ -238,10 +252,7 @@ abstract
   is-finite-is-decidable-Prop :
     {l : Level} (P : UU-Prop l) →
     is-decidable (type-Prop P) → is-finite (type-Prop P)
-  is-finite-is-decidable-Prop P (inl x) =
-    is-finite-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) x)
-  is-finite-is-decidable-Prop P (inr x) =
-    is-finite-is-empty x
+  is-finite-is-decidable-Prop P x = is-finite-count (count-is-decidable-Prop P x)
 ```
 
 ### The type of decidable propositions of any universe level is finite
@@ -251,7 +262,7 @@ is-finite-decidable-Prop : {l : Level} → is-finite (decidable-Prop l)
 is-finite-decidable-Prop {l} =
   is-finite-equiv' equiv-bool-decidable-Prop is-finite-bool
 
-decidable-Prop-𝔽-Level : (l : Level) → 𝔽-Level (lsuc l)
-pr1 (decidable-Prop-𝔽-Level l) = decidable-Prop l
-pr2 (decidable-Prop-𝔽-Level l) = is-finite-decidable-Prop
+decidable-Prop-𝔽 : (l : Level) → 𝔽 (lsuc l)
+pr1 (decidable-Prop-𝔽 l) = decidable-Prop l
+pr2 (decidable-Prop-𝔽 l) = is-finite-decidable-Prop
 ```

@@ -29,7 +29,7 @@ open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (eq-subtype; equiv-type-subtype)
+open import foundation.subtypes using (eq-type-subtype; equiv-type-subtype)
 open import foundation.type-arithmetic-cartesian-product-types using
   ( commutative-prod)
 open import foundation.type-arithmetic-dependent-pair-types using
@@ -119,7 +119,7 @@ all-elements-equal-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   all-elements-equal (is-iso-hom-Ring R1 R2 f)
 all-elements-equal-is-iso-hom-Ring R1 R2 f inv-f inv-f' =
-  eq-subtype
+  eq-type-subtype
     ( λ g →
       prod-Prop
         ( Id-Prop
@@ -431,8 +431,7 @@ abstract
 is-equiv-iso-eq-Ring :
   { l : Level} (R S : Ring l) → is-equiv (iso-eq-Ring R S)
 is-equiv-iso-eq-Ring R =
-  fundamental-theorem-id R
-    ( id-iso-Ring R)
+  fundamental-theorem-id
     ( is-contr-total-iso-Ring R)
     ( iso-eq-Ring R)
     

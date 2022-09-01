@@ -28,8 +28,7 @@ open import group-theory.precategory-of-groups using (Group-Large-Precat)
 ```agda
 is-category-Group : is-category-Large-Precat Group-Large-Precat
 is-category-Group G =
-  fundamental-theorem-id G
-    ( id-iso-Group G)
+  fundamental-theorem-id
     ( is-contr-total-iso-Group G)
     ( iso-eq-Group G)
 

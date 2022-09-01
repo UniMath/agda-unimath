@@ -31,14 +31,14 @@ open import group-theory.group-actions using
     preserves-unit-mul-Abstract-Group-Action;
     transpose-eq-mul-Abstract-Group-Action; preserves-mul-Abstract-Group-Action)
 open import group-theory.groups using
-  ( Group; set-Group; mul-Group; unit-Group; mul-Group'; left-unit-law-Group;
+  ( Group; set-Group; mul-Group; unit-Group; mul-Group'; left-unit-law-mul-Group;
     inv-Group; transpose-eq-mul-Group'; associative-mul-Group; type-Group)
 open import group-theory.homomorphisms-group-actions using
   ( type-hom-Abstract-Group-Action; id-hom-Abstract-Group-Action;
     comp-hom-Abstract-Group-Action)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; comp-hom-Group; map-hom-Group; preserves-unit-hom-Group;
-    preserves-inverses-hom-Group; preserves-mul-hom-Group)
+    preserves-inv-hom-Group; preserves-mul-hom-Group)
 open import group-theory.symmetric-groups using (symmetric-Group)
 ```
 
@@ -155,7 +155,7 @@ module _
       ( unit-Group G)
       ( pair
         ( ( ap (mul-Group' H h) (preserves-unit-hom-Group G H f)) ∙
-          ( left-unit-law-Group H h))
+          ( left-unit-law-mul-Group H h))
         ( preserves-unit-mul-Abstract-Group-Action G X x))
   pr1
     ( pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
@@ -171,7 +171,7 @@ module _
               ( pair
                 ( ( ap
                     ( mul-Group' H h')
-                    ( preserves-inverses-hom-Group G H f g)) ∙
+                    ( preserves-inv-hom-Group G H f g)) ∙
                   ( inv (transpose-eq-mul-Group' H p)))
                 ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
   pr2 (pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))

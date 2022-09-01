@@ -24,7 +24,7 @@ open import foundation-core.equivalences using
 open import foundation-core.function-extensionality using (htpy-eq; funext)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (_＝_; refl; left-inv; ap; tr)
-open import foundation-core.propositions using (is-prop)
+open import foundation-core.propositions using (is-prop; Π-Prop)
 open import foundation-core.retractions using (_retract-of_; retract-eq)
 open import foundation-core.truncation-levels using
   ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
@@ -43,6 +43,10 @@ The truncatedness of a type is a measure of the complexity of its identity types
 is-trunc : {i : Level} (k : 𝕋) → UU i → UU i
 is-trunc neg-two-𝕋 A = is-contr A
 is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (x ＝ y)
+
+is-trunc-eq :
+  {l : Level} {k k' : 𝕋} {A : UU l} → k ＝ k' → is-trunc k A → is-trunc k' A
+is-trunc-eq refl H = H
 ```
 
 ### The universe of truncated types
@@ -58,10 +62,9 @@ module _
   type-Truncated-Type : Truncated-Type l k → UU l
   type-Truncated-Type = pr1
 
-  abstract
-    is-trunc-type-Truncated-Type :
-      (A : Truncated-Type l k) → is-trunc k (type-Truncated-Type A)
-    is-trunc-type-Truncated-Type = pr2
+  is-trunc-type-Truncated-Type :
+    (A : Truncated-Type l k) → is-trunc k (type-Truncated-Type A)
+  is-trunc-type-Truncated-Type = pr2
 ```
 
 ## Properties
@@ -220,6 +223,15 @@ abstract
   is-trunc-prod k is-trunc-A is-trunc-B =
     is-trunc-Σ is-trunc-A (λ x → is-trunc-B)
 
+prod-Truncated-Type :
+  {l1 l2 : Level} (k : 𝕋) →
+  Truncated-Type l1 k → Truncated-Type l2 k → Truncated-Type (l1 ⊔ l2) k
+pr1 (prod-Truncated-Type k A B) = type-Truncated-Type A × type-Truncated-Type B
+pr2 (prod-Truncated-Type k A B) =
+  is-trunc-prod k
+    ( is-trunc-type-Truncated-Type A)
+    ( is-trunc-type-Truncated-Type B)
+
 is-trunc-prod' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   (B → is-trunc (succ-𝕋 k) A) → (A → is-trunc (succ-𝕋 k) B) →
@@ -319,6 +331,13 @@ abstract
   is-trunc-function-type k {A} {B} is-trunc-B =
     is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
 
+function-type-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
+pr1 (function-type-Truncated-Type A B) = A → type-Truncated-Type B
+pr2 (function-type-Truncated-Type A B) =
+  is-trunc-function-type _ (is-trunc-type-Truncated-Type B)
+
 type-hom-Truncated-Type :
   (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
   (B : Truncated-Type l2 k) → UU (l1 ⊔ l2)
@@ -378,4 +397,24 @@ module _
               ( is-trunc-function-type k H)
               ( λ h →
                 is-trunc-Π k (λ x → is-trunc-Id H (h (f x)) x))))
+
+type-equiv-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
+  UU (l1 ⊔ l2)
+type-equiv-Truncated-Type A B =
+  type-Truncated-Type A ≃ type-Truncated-Type B
+
+is-trunc-type-equiv-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
+  is-trunc k (type-equiv-Truncated-Type A B)
+is-trunc-type-equiv-Truncated-Type A B =
+  is-trunc-equiv-is-trunc _
+    ( is-trunc-type-Truncated-Type A)
+    ( is-trunc-type-Truncated-Type B)
+
+equiv-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
+pr1 (equiv-Truncated-Type A B) = type-equiv-Truncated-Type A B
+pr2 (equiv-Truncated-Type A B) = is-trunc-type-equiv-Truncated-Type A B
 ```

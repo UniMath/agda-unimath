@@ -7,7 +7,8 @@ title: Connected components of types
 
 module foundation.connected-components where
 
-open import foundation.connected-types using (is-path-connected; is-path-connected-mere-eq)
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.identity-types using (_＝_; refl; inv)
@@ -18,6 +19,10 @@ open import foundation.propositions using (is-trunc-is-prop)
 open import foundation.truncated-types using (is-trunc; is-trunc-Σ)
 open import foundation.truncation-levels using (𝕋; succ-𝕋)
 open import foundation.universe-levels using (UU; Level)
+
+open import group-theory.higher-groups using (∞-Group)
+
+open import structured-types.pointed-types using (Pointed-Type)
 ```
 
 ## Idea
@@ -35,6 +40,14 @@ module _
   connected-component =
     Σ A (λ x → type-trunc-Prop (x ＝ a))
 
+  point-connected-component : connected-component
+  pr1 point-connected-component = a
+  pr2 point-connected-component = unit-trunc-Prop refl
+
+  connected-component-Pointed-Type : Pointed-Type l
+  pr1 connected-component-Pointed-Type = connected-component
+  pr2 connected-component-Pointed-Type = point-connected-component
+
   value-connected-component :
     connected-component → A
   value-connected-component X = pr1 X
@@ -47,15 +60,15 @@ module _
 
 ## Properties
 
-### Connected components are path-connected
+### Connected components are 0-connected
 
 ```agda
 abstract
-  is-path-connected-connected-component :
+  is-0-connected-connected-component :
     {l : Level} (A : UU l) (a : A) →
-    is-path-connected (connected-component A a)
-  is-path-connected-connected-component A a =
-    is-path-connected-mere-eq
+    is-0-connected (connected-component A a)
+  is-0-connected-connected-component A a =
+    is-0-connected-mere-eq
       ( pair a (unit-trunc-Prop refl))
       ( λ (pair x p) →
         apply-universal-property-trunc-Prop
@@ -66,6 +79,11 @@ abstract
               ( eq-pair-Σ
                 ( inv p')
                 ( all-elements-equal-type-trunc-Prop _ p))))
+
+connected-component-∞-Group :
+  {l : Level} (A : UU l) (a : A) → ∞-Group l
+pr1 (connected-component-∞-Group A a) = connected-component-Pointed-Type A a
+pr2 (connected-component-∞-Group A a) = is-0-connected-connected-component A a
 ```
 
 ### If `A` is (k+1)-truncated, then the connected component of `a` in `A` is (k+1)-truncated.

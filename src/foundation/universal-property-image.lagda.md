@@ -41,7 +41,7 @@ open import foundation.slice using
     is-equiv-hom-slice-emb; equiv-slice; hom-equiv-slice;
     equiv-hom-slice-fiberwise-hom; equiv-fiberwise-hom-hom-slice)
 open import foundation.subtypes using
-  ( type-subtype; is-emb-inclusion-subtype; eq-subtype)
+  ( type-subtype; is-emb-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; equiv-dependent-universal-property-surj-is-surjective)
 open import foundation.type-arithmetic-dependent-pair-types using

@@ -10,6 +10,7 @@ module foundation-core.fibers-of-maps where
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; is-fiberwise-equiv; is-equiv-comp)
+open import foundation-core.function-extensionality
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using
@@ -37,7 +38,9 @@ module _
 
 ## Properties
 
-### We immediately characterize the identity type in the fiber of a map
+### Characterization of the identity types of the fibers of a map
+
+#### The case of `fib`
 
 ```agda
 module _
@@ -47,8 +50,6 @@ module _
   Eq-fib : fib f b → fib f b → UU (l1 ⊔ l2)
   Eq-fib s t = Σ (pr1 s ＝ pr1 t) (λ α → ((ap f α) ∙ (pr2 t)) ＝ (pr2 s))
 
-  {- Proposition 10.3.3 -}
-  
   refl-Eq-fib : (s : fib f b) → Eq-fib s s
   pr1 (refl-Eq-fib s) = refl
   pr2 (refl-Eq-fib s) = refl
@@ -56,27 +57,27 @@ module _
   Eq-eq-fib : {s t : fib f b} → s ＝ t → Eq-fib s t
   Eq-eq-fib {s} refl = refl-Eq-fib s
 
-  eq-Eq-fib' : {s t : fib f b} → Eq-fib s t → s ＝ t
-  eq-Eq-fib' {pair x p} {pair .x .p} (pair refl refl) = refl
+  eq-Eq-fib-uncurry : {s t : fib f b} → Eq-fib s t → s ＝ t
+  eq-Eq-fib-uncurry {pair x p} {pair .x .p} (pair refl refl) = refl
 
   eq-Eq-fib :
     {s t : fib f b} (α : pr1 s ＝ pr1 t) →
     ((ap f α) ∙ (pr2 t)) ＝ pr2 s → s ＝ t
-  eq-Eq-fib α β = eq-Eq-fib' (pair α β)
+  eq-Eq-fib α β = eq-Eq-fib-uncurry (pair α β)
 
   issec-eq-Eq-fib :
-    {s t : fib f b} → (Eq-eq-fib {s} {t} ∘ eq-Eq-fib' {s} {t}) ~ id
+    {s t : fib f b} → (Eq-eq-fib {s} {t} ∘ eq-Eq-fib-uncurry {s} {t}) ~ id
   issec-eq-Eq-fib {pair x p} {pair .x .p} (pair refl refl) = refl
 
   isretr-eq-Eq-fib :
-    {s t : fib f b} → (eq-Eq-fib' {s} {t} ∘ Eq-eq-fib {s} {t}) ~ id
+    {s t : fib f b} → (eq-Eq-fib-uncurry {s} {t} ∘ Eq-eq-fib {s} {t}) ~ id
   isretr-eq-Eq-fib {pair x p} {.(pair x p)} refl = refl
 
   abstract
     is-equiv-Eq-eq-fib : {s t : fib f b} → is-equiv (Eq-eq-fib {s} {t})
     is-equiv-Eq-eq-fib {s} {t} =
       is-equiv-has-inverse
-        eq-Eq-fib'
+        eq-Eq-fib-uncurry
         issec-eq-Eq-fib
         isretr-eq-Eq-fib
 
@@ -86,7 +87,7 @@ module _
 
   abstract
     is-equiv-eq-Eq-fib :
-      {s t : fib f b} → is-equiv (eq-Eq-fib' {s} {t})
+      {s t : fib f b} → is-equiv (eq-Eq-fib-uncurry {s} {t})
     is-equiv-eq-Eq-fib {s} {t} =
       is-equiv-has-inverse
         Eq-eq-fib
@@ -94,8 +95,99 @@ module _
         issec-eq-Eq-fib
 
   equiv-eq-Eq-fib : {s t : fib f b} → Eq-fib s t ≃ (s ＝ t)
-  pr1 (equiv-eq-Eq-fib {s} {t}) = eq-Eq-fib'
+  pr1 (equiv-eq-Eq-fib {s} {t}) = eq-Eq-fib-uncurry
   pr2 (equiv-eq-Eq-fib {s} {t}) = is-equiv-eq-Eq-fib
+```
+
+#### The case of `fib'`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
+  where
+
+  Eq-fib' : fib' f b → fib' f b → UU (l1 ⊔ l2)
+  Eq-fib' s t = Σ (pr1 s ＝ pr1 t) (λ α → (pr2 t ＝ ((pr2 s) ∙ (ap f α))))
+
+  refl-Eq-fib' : (s : fib' f b) → Eq-fib' s s
+  pr1 (refl-Eq-fib' s) = refl
+  pr2 (refl-Eq-fib' s) = inv right-unit
+
+  Eq-eq-fib' : {s t : fib' f b} → s ＝ t → Eq-fib' s t
+  Eq-eq-fib' {s} refl = refl-Eq-fib' s
+
+  eq-Eq-fib-uncurry' : {s t : fib' f b} → Eq-fib' s t → s ＝ t
+  eq-Eq-fib-uncurry' {pair x p} {pair .x .(p ∙ refl)} (pair refl refl) =
+    ap (pair x) (inv right-unit)
+
+  eq-Eq-fib' :
+    {s t : fib' f b} (α : pr1 s ＝ pr1 t) →
+    (pr2 t) ＝ ((pr2 s) ∙ (ap f α)) → s ＝ t
+  eq-Eq-fib' α β = eq-Eq-fib-uncurry' (pair α β)
+
+  issec-eq-Eq-fib' :
+    {s t : fib' f b} → (Eq-eq-fib' {s} {t} ∘ eq-Eq-fib-uncurry' {s} {t}) ~ id
+  issec-eq-Eq-fib' {pair x refl} {pair .x .refl} (pair refl refl) = refl
+
+  isretr-eq-Eq-fib' :
+    {s t : fib' f b} → (eq-Eq-fib-uncurry' {s} {t} ∘ Eq-eq-fib' {s} {t}) ~ id
+  isretr-eq-Eq-fib' {pair x refl} {.(pair x refl)} refl = refl
+
+  abstract
+    is-equiv-Eq-eq-fib' : {s t : fib' f b} → is-equiv (Eq-eq-fib' {s} {t})
+    is-equiv-Eq-eq-fib' {s} {t} =
+      is-equiv-has-inverse
+        eq-Eq-fib-uncurry'
+        issec-eq-Eq-fib'
+        isretr-eq-Eq-fib'
+
+  equiv-Eq-eq-fib' : {s t : fib' f b} → (s ＝ t) ≃ Eq-fib' s t
+  pr1 (equiv-Eq-eq-fib' {s} {t}) = Eq-eq-fib'
+  pr2 (equiv-Eq-eq-fib' {s} {t}) = is-equiv-Eq-eq-fib'
+
+  abstract
+    is-equiv-eq-Eq-fib' :
+      {s t : fib' f b} → is-equiv (eq-Eq-fib-uncurry' {s} {t})
+    is-equiv-eq-Eq-fib' {s} {t} =
+      is-equiv-has-inverse
+        Eq-eq-fib'
+        isretr-eq-Eq-fib'
+        issec-eq-Eq-fib'
+
+  equiv-eq-Eq-fib' : {s t : fib' f b} → Eq-fib' s t ≃ (s ＝ t)
+  pr1 (equiv-eq-Eq-fib' {s} {t}) = eq-Eq-fib-uncurry'
+  pr2 (equiv-eq-Eq-fib' {s} {t}) = is-equiv-eq-Eq-fib'
+```
+
+### `fib f y` and `fib' f y` are equivalent
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
+  where
+  
+  map-equiv-fib : fib f y → fib' f y
+  map-equiv-fib (pair x refl) = pair x refl
+
+  map-inv-equiv-fib : fib' f y → fib f y
+  map-inv-equiv-fib (pair x refl) = pair x refl
+
+  issec-map-inv-equiv-fib : (map-equiv-fib ∘ map-inv-equiv-fib) ~ id
+  issec-map-inv-equiv-fib (pair x refl) = refl
+
+  isretr-map-inv-equiv-fib : (map-inv-equiv-fib ∘ map-equiv-fib) ~ id
+  isretr-map-inv-equiv-fib (pair x refl) = refl
+
+  is-equiv-map-equiv-fib : is-equiv map-equiv-fib
+  is-equiv-map-equiv-fib =
+    is-equiv-has-inverse
+      map-inv-equiv-fib
+      issec-map-inv-equiv-fib
+      isretr-map-inv-equiv-fib
+
+  equiv-fib : fib f y ≃ fib' f y
+  pr1 equiv-fib = map-equiv-fib
+  pr2 equiv-fib = is-equiv-map-equiv-fib
 ```
 
 ### Computing the fibers of a projection map
@@ -193,49 +285,107 @@ module _
 ### Fibers of compositions
 
 ```agda
-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) → fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
-pr1 (pr1 (map-fib-comp g h x (pair a p))) = h a
-pr2 (pr1 (map-fib-comp g h x (pair a p))) = p
-pr1 (pr2 (map-fib-comp g h x (pair a p))) = a
-pr2 (pr2 (map-fib-comp g h x (pair a p))) = refl
+pr1 (pr1 (map-compute-fib-comp g h x (pair a p))) = h a
+pr2 (pr1 (map-compute-fib-comp g h x (pair a p))) = p
+pr1 (pr2 (map-compute-fib-comp g h x (pair a p))) = a
+pr2 (pr2 (map-compute-fib-comp g h x (pair a p))) = refl
 
-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) → Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
-pr1 (inv-map-fib-comp g h c t) = pr1 (pr2 t)
-pr2 (inv-map-fib-comp g h c t) = (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
+pr1 (inv-map-compute-fib-comp g h c t) = pr1 (pr2 t)
+pr2 (inv-map-compute-fib-comp g h c t) = (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
 
-issec-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+issec-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) →
   (x : X) →
-  ((map-fib-comp g h x) ∘ (inv-map-fib-comp g h x)) ~ id
-issec-inv-map-fib-comp g h x
+  ((map-compute-fib-comp g h x) ∘ (inv-map-compute-fib-comp g h x)) ~ id
+issec-inv-map-compute-fib-comp g h x
   (pair (pair .(h a) refl) (pair a refl)) = refl
 
-isretr-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+isretr-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-  ((inv-map-fib-comp g h x) ∘ (map-fib-comp g h x)) ~ id
-isretr-inv-map-fib-comp g h .(g (h a)) (pair a refl) = refl
+  ((inv-map-compute-fib-comp g h x) ∘ (map-compute-fib-comp g h x)) ~ id
+isretr-inv-map-compute-fib-comp g h .(g (h a)) (pair a refl) = refl
 
 abstract
-  is-equiv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  is-equiv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
     {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-    is-equiv (map-fib-comp g h x)
-  is-equiv-map-fib-comp g h x =
+    is-equiv (map-compute-fib-comp g h x)
+  is-equiv-map-compute-fib-comp g h x =
     is-equiv-has-inverse
-      ( inv-map-fib-comp g h x)
-      ( issec-inv-map-fib-comp g h x)
-      ( isretr-inv-map-fib-comp g h x)
+      ( inv-map-compute-fib-comp g h x)
+      ( issec-inv-map-compute-fib-comp g h x)
+      ( isretr-inv-map-compute-fib-comp g h x)
 
 abstract
-  is-equiv-inv-map-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  is-equiv-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
     {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-    is-equiv (inv-map-fib-comp g h x)
-  is-equiv-inv-map-fib-comp g h x =
+    is-equiv (inv-map-compute-fib-comp g h x)
+  is-equiv-inv-map-compute-fib-comp g h x =
     is-equiv-has-inverse
-      ( map-fib-comp g h x)
-      ( isretr-inv-map-fib-comp g h x)
-      ( issec-inv-map-fib-comp g h x)
+      ( map-compute-fib-comp g h x)
+      ( isretr-inv-map-compute-fib-comp g h x)
+      ( issec-inv-map-compute-fib-comp g h x)
+```
+
+### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.
+
+```agda
+map-reduce-Π-fib :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : (y : B) (z : fib f y) → UU l3) →
+  ((y : B) (z : fib f y) → C y z) → ((x : A) → C (f x) (pair x refl))
+map-reduce-Π-fib f C h x = h (f x) (pair x refl)
+
+inv-map-reduce-Π-fib :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : (y : B) (z : fib f y) → UU l3) →
+  ((x : A) → C (f x) (pair x refl)) → ((y : B) (z : fib f y) → C y z)
+inv-map-reduce-Π-fib f C h .(f x) (pair x refl) = h x
+
+issec-inv-map-reduce-Π-fib :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : (y : B) (z : fib f y) → UU l3) →
+  ((map-reduce-Π-fib f C) ∘ (inv-map-reduce-Π-fib f C)) ~ id
+issec-inv-map-reduce-Π-fib f C h = refl
+
+isretr-inv-map-reduce-Π-fib' :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : (y : B) (z : fib f y) → UU l3) →
+  (h : (y : B) (z : fib f y) → C y z) (y : B) →
+  (inv-map-reduce-Π-fib f C ((map-reduce-Π-fib f C) h) y) ~ (h y)
+isretr-inv-map-reduce-Π-fib' f C h .(f z) (pair z refl) = refl
+
+isretr-inv-map-reduce-Π-fib :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : (y : B) (z : fib f y) → UU l3) →
+  ((inv-map-reduce-Π-fib f C) ∘ (map-reduce-Π-fib f C)) ~ id
+isretr-inv-map-reduce-Π-fib f C h =
+  eq-htpy (λ y → eq-htpy (isretr-inv-map-reduce-Π-fib' f C h y))
+
+is-equiv-map-reduce-Π-fib :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  (C : (y : B) (z : fib f y) → UU l3) →
+  is-equiv (map-reduce-Π-fib f C)
+is-equiv-map-reduce-Π-fib f C =
+  is-equiv-has-inverse
+    ( inv-map-reduce-Π-fib f C)
+    ( issec-inv-map-reduce-Π-fib f C)
+    ( isretr-inv-map-reduce-Π-fib f C)
+
+reduce-Π-fib' :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  (C : (y : B) (z : fib f y) → UU l3) →
+  ((y : B) (z : fib f y) → C y z) ≃ ((x : A) → C (f x) (pair x refl))
+pr1 (reduce-Π-fib' f C) = map-reduce-Π-fib f C
+pr2 (reduce-Π-fib' f C) = is-equiv-map-reduce-Π-fib f C
+
+reduce-Π-fib :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  (C : B → UU l3) → ((y : B) → fib f y → C y) ≃ ((x : A) → C (f x))
+reduce-Π-fib f C = reduce-Π-fib' f (λ y z → C y)
 ```

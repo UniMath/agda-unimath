@@ -1,8 +1,6 @@
 # Polygons
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module graph-theory.polygons where
 
 open import elementary-number-theory.modular-arithmetic using
@@ -124,9 +122,11 @@ module _
       ( mere-equiv-vertex-Polygon)
       ( has-decidable-equality-ℤ-Mod k)
 
+{-
   is-prop-edge-Polygon :
     (p : unordered-pair-vertices-Polygon) → is-prop (edge-Polygon p)
   is-prop-edge-Polygon p = {!!}
+-}
 ```
 
 ## Properties
@@ -142,6 +142,7 @@ is-set-vertex-standard-polygon-Undirected-Graph k = is-set-ℤ-Mod k
 ### Every edge is between distinct points
 
 ```agda
+{-
 module _
   (k : ℕ) (p : unordered-pair-vertices-standard-polygon-Undirected-Graph k)
   where
@@ -158,11 +159,13 @@ module _
     is-prop (edge-standard-polygon-Undirected-Graph k p)
   is-prop-edge-standard-polygon-Undirected-Graph =
     {!!}
+-}
 ```
 
 ### Every polygon is a simple graph
 
 ```agda
+{-
 is-simple-standard-polygon-Undirected-Graph :
   (k : ℕ) → is-not-one-ℕ k →
   is-simple-Undirected-Graph (standard-polygon-Undirected-Graph k)
@@ -171,4 +174,5 @@ pr1 (is-simple-standard-polygon-Undirected-Graph k H) p (pair x (pair y α)) =
     {!!}
     {!!}
 pr2 (is-simple-standard-polygon-Undirected-Graph k H) p = {!!}
+-}
 ```

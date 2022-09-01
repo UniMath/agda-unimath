@@ -16,7 +16,7 @@ open import foundation.propositions using
     is-prop-all-elements-equal)
 open import foundation.sets using
   ( UU-Set; type-Set; Id-Prop; is-set; is-set-type-Set)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
 
@@ -141,7 +141,7 @@ module _
       ( pair μ assoc-μ)
       ( pair e (pair left-unit-law-e right-unit-law-e))
       ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
-      eq-subtype
+      eq-type-subtype
         ( λ x →
           prod-Prop
             ( Π-Prop' A

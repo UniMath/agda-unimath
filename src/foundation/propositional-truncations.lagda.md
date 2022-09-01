@@ -18,11 +18,10 @@ open import foundation.identity-types using (_＝_; tr; ap; _∙_)
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; UU-Prop; type-Prop;
     eq-is-prop; is-prop-type-Prop; is-prop-Π; type-hom-Prop; is-equiv-is-prop;
-    type-equiv-Prop; prod-Prop; is-prop-prod; eq-is-prop')
-open import foundation-core.truncation-levels using (neg-one-𝕋)
+    type-equiv-Prop; prod-Prop; is-prop-prod; eq-is-prop'; is-trunc-is-prop)
 open import foundation.truncations using
   ( type-trunc; unit-trunc; is-trunc-type-trunc; trunc;
-    apply-dependent-universal-property-trunc;
+    function-dependent-universal-property-trunc;
     equiv-unit-trunc)
 open import foundation.universal-property-propositional-truncation using
   ( is-propositional-truncation; is-propositional-truncation-extension-property;
@@ -34,6 +33,11 @@ open import foundation.universal-property-propositional-truncation using
     is-uniquely-unique-propositional-truncation;
     is-propositional-truncation-prod)
 open import foundation.universe-levels using (Level; UU)
+
+open import foundation-core.sets using (UU-Set)
+open import foundation-core.truncated-types using
+  ( is-trunc; Truncated-Type)
+open import foundation-core.truncation-levels using (𝕋; neg-one-𝕋; succ-𝕋)
 ```
 
 ## Idea
@@ -88,7 +92,7 @@ ind-trunc-Prop' :
        tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
   (x : type-trunc-Prop A) → P x
 ind-trunc-Prop' P f H =
-  apply-dependent-universal-property-trunc
+  function-dependent-universal-property-trunc
     ( λ x → pair (P x) (is-prop-condition-ind-trunc-Prop' H x))
     ( f)
 ```
@@ -158,6 +162,22 @@ abstract
     (A → type-Prop P) → type-Prop P
   apply-universal-property-trunc-Prop t P f =
     map-universal-property-trunc-Prop P f t
+```
+
+### The propositional truncation of a type is `k+1`-truncated
+
+```agda
+is-trunc-trunc-Prop :
+  {l : Level} (k : 𝕋) {A : UU l} → is-trunc (succ-𝕋 k) (type-trunc-Prop A)
+is-trunc-trunc-Prop k = is-trunc-is-prop k is-prop-type-trunc-Prop
+
+truncated-type-trunc-Prop :
+  {l : Level} (k : 𝕋) → UU l → Truncated-Type l (succ-𝕋 k)
+pr1 (truncated-type-trunc-Prop k A) = type-trunc-Prop A
+pr2 (truncated-type-trunc-Prop k A) = is-trunc-trunc-Prop k
+
+set-trunc-Prop : {l : Level} → UU l → UU-Set l
+set-trunc-Prop = truncated-type-trunc-Prop neg-one-𝕋
 ```
 
 ### A proposition is equivalent to its propositional truncation

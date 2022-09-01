@@ -1,39 +1,63 @@
-# Paths in undirected graphs
+---
+title: Paths in undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.paths-undirected-graphs where
 
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
-open import foundation.unordered-pairs using
-  ( unordered-pair; type-unordered-pair; element-unordered-pair;
-    other-element-unordered-pair)
+open import elementary-number-theory.natural-numbers
 
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph)
+open import foundation.dependent-pair-types
+open import foundation.injective-maps
+open import foundation.universe-levels
+
+open import graph-theory.undirected-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 ## Idea
 
-A path in an undirected graph consists of a list of edges that connect the starting point with the end point
+A path in an undirected graph G is a walk `w` in G such that the inclusion of the type of vertices on `w` into the vertices of `G` is an injective function. Note that we don't expect this function to be an embedding, since the type of vertices on `w` is equivalent to `Fin (n + 1)` where `n` is the length of the walk, whereas the type of vertices of `G` does not need to be a set.
+
+## Definition
 
 ```agda
--- TODO: I would rather use the notion of a walk, as a path is often a walk without repeated vertices.
-
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  data
-    path-Undirected-Graph (x : vertex-Undirected-Graph G) :
-      vertex-Undirected-Graph G → UU (l1 ⊔ l2 ⊔ lsuc lzero)
-      where
-      refl-path-Undirected-Graph : path-Undirected-Graph x x
-      cons-path-Undirected-Graph :
-        (p : unordered-pair (vertex-Undirected-Graph G)) →
-        (e : edge-Undirected-Graph G p) →
-        {y : type-unordered-pair p} →
-        path-Undirected-Graph x (element-unordered-pair p y) →
-        path-Undirected-Graph x (other-element-unordered-pair p y)
+  is-path-walk-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y → UU l1
+  is-path-walk-Undirected-Graph w =
+    is-injective (vertex-vertex-on-walk-Undirected-Graph G w)
+
+  path-Undirected-Graph :
+    (x y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
+  path-Undirected-Graph x y =
+    Σ (walk-Undirected-Graph G x y) is-path-walk-Undirected-Graph
+
+  walk-path-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} →
+    path-Undirected-Graph x y → walk-Undirected-Graph G x y
+  walk-path-Undirected-Graph p = pr1 p
+
+  length-path-Undirected-Graph :
+    {x y : vertex-Undirected-Graph G} →
+    path-Undirected-Graph x y → ℕ
+  length-path-Undirected-Graph p =
+    length-walk-Undirected-Graph G (walk-path-Undirected-Graph p)
+```
+
+## Properties
+
+### The constant walk is a path
+
+```agda
+is-path-refl-walk-Undirected-Graph :
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G) →
+  is-path-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x})
+is-path-refl-walk-Undirected-Graph G x =
+  is-injective-is-contr
+    ( vertex-vertex-on-walk-Undirected-Graph G refl-walk-Undirected-Graph)
+    ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
 ```

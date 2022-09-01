@@ -11,6 +11,7 @@ open import foundation-core.functoriality-dependent-function-types public
 
 open import foundation-core.homotopies using (_~_; _·l_; _·r_)
 
+open import foundation.commuting-squares
 open import foundation.constant-maps using (const)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
@@ -20,7 +21,8 @@ open import foundation.equivalences using
     map-inv-is-equiv; is-equiv-map-inv-is-equiv;
     id-equiv; equiv-ap; htpy-equiv; refl-htpy-equiv; ind-htpy-equiv;
     comp-htpy-equiv)
-open import foundation.function-extensionality using (eq-htpy; equiv-eq-htpy)
+open import foundation.function-extensionality using
+  ( eq-htpy; equiv-eq-htpy; htpy-eq; funext)
 open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)
 open import foundation.identity-types using
   ( _＝_; tr; ap; _∙_; tr-ap; is-equiv-tr; refl)
@@ -39,11 +41,14 @@ open import foundation-core.embeddings using
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-tot; equiv-Σ)
+open import foundation-core.homotopies using (eq-value)
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
+open import foundation-core.truncated-maps using
+  ( is-trunc-map; is-trunc-map-is-trunc-map-ap;
+    is-trunc-map-top-is-trunc-map-bottom-is-equiv)
 open import foundation-core.truncation-levels using
   (𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
-open import foundation-core.truncated-maps using (is-trunc-map)
 ```
 
 ## Idea
@@ -286,4 +291,36 @@ automorphism-Π :
   ( (a : A) → B a) ≃ ((a : A) → B a)
 pr1 (automorphism-Π e f) = map-automorphism-Π e f
 pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
+```
+
+### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
+
+```agda
+coherence-square-ap-precomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
+  (g h : (b : B) → C b) →
+  coherence-square
+    ( ap (precomp-Π f C) {g} {h})
+    ( htpy-eq)
+    ( htpy-eq)
+    ( precomp-Π f (eq-value g h))
+coherence-square-ap-precomp-Π f g .g refl = refl
+
+is-trunc-map-succ-precomp-Π :
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  {C : B → UU l3} →
+  ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
+  is-trunc-map (succ-𝕋 k) (precomp-Π f C)
+is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
+  is-trunc-map-is-trunc-map-ap k (precomp-Π f C)
+    ( λ g h →
+      is-trunc-map-top-is-trunc-map-bottom-is-equiv k
+        ( ap (precomp-Π f C))
+        ( htpy-eq)
+        ( htpy-eq)
+        ( precomp-Π f (eq-value g h))
+        ( coherence-square-ap-precomp-Π f g h)
+        ( funext g h)
+        ( funext (g ∘ f) (h ∘ f))
+        ( H g h))
 ```

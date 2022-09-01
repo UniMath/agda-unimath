@@ -1,4 +1,6 @@
-# Transpositions
+---
+title: Transpositions
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

@@ -9,9 +9,11 @@ module foundation.universal-property-identity-types where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_)
+  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_)
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using (_＝_; refl; ind-Id)
+open import foundation.functoriality-dependent-function-types using
+  ( equiv-map-Π; equiv-precomp-Π)
+open import foundation.identity-types using (_＝_; refl; ind-Id; equiv-inv)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -46,4 +48,10 @@ equiv-ev-refl :
   ((x : A) (p : a ＝ x) → B x p) ≃ (B a refl)
 pr1 (equiv-ev-refl a) = ev-refl a
 pr2 (equiv-ev-refl a) = is-equiv-ev-refl a
+
+equiv-ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
+  ((x : A) (p : x ＝ a) → B x p) ≃ B a refl
+equiv-ev-refl' a {B} =
+  equiv-ev-refl a ∘e equiv-map-Π (λ x → equiv-precomp-Π (equiv-inv a x) (B x))
 ```

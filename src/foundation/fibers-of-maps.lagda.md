@@ -41,63 +41,7 @@ open import foundation.unit-type using (unit; star)
 
 ## Properties
 
-### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.
-
-```agda
-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((y : B) (z : fib f y) → C y z) → ((x : A) → C (f x) (pair x refl))
-map-reduce-Π-fib f C h x = h (f x) (pair x refl)
-
-inv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((x : A) → C (f x) (pair x refl)) → ((y : B) (z : fib f y) → C y z)
-inv-map-reduce-Π-fib f C h .(f x) (pair x refl) = h x
-
-issec-inv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((map-reduce-Π-fib f C) ∘ (inv-map-reduce-Π-fib f C)) ~ id
-issec-inv-map-reduce-Π-fib f C h = refl
-
-isretr-inv-map-reduce-Π-fib' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  (h : (y : B) (z : fib f y) → C y z) (y : B) →
-  (inv-map-reduce-Π-fib f C ((map-reduce-Π-fib f C) h) y) ~ (h y)
-isretr-inv-map-reduce-Π-fib' f C h .(f z) (pair z refl) = refl
-
-isretr-inv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((inv-map-reduce-Π-fib f C) ∘ (map-reduce-Π-fib f C)) ~ id
-isretr-inv-map-reduce-Π-fib f C h =
-  eq-htpy (λ y → eq-htpy (isretr-inv-map-reduce-Π-fib' f C h y))
-
-is-equiv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (C : (y : B) (z : fib f y) → UU l3) →
-  is-equiv (map-reduce-Π-fib f C)
-is-equiv-map-reduce-Π-fib f C =
-  is-equiv-has-inverse
-    ( inv-map-reduce-Π-fib f C)
-    ( issec-inv-map-reduce-Π-fib f C)
-    ( isretr-inv-map-reduce-Π-fib f C)
-
-reduce-Π-fib' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((y : B) (z : fib f y) → C y z) ≃ ((x : A) → C (f x) (pair x refl))
-pr1 (reduce-Π-fib' f C) = map-reduce-Π-fib f C
-pr2 (reduce-Π-fib' f C) = is-equiv-map-reduce-Π-fib f C
-
-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (C : B → UU l3) → ((y : B) → fib f y → C y) ≃ ((x : A) → C (f x))
-reduce-Π-fib f C = reduce-Π-fib' f (λ y z → C y)
-```
+### The fibers of a composition
 
 ```agda
 fib-comp :

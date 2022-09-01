@@ -3,8 +3,6 @@ title: 2-element subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.2-element-subtypes where
 
 open import foundation.automorphisms using (Aut)

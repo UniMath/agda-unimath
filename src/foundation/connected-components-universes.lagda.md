@@ -7,8 +7,8 @@ title: Connected components of universes
 
 module foundation.connected-components-universes where
 
-open import foundation.connected-types using
-  ( is-path-connected; is-path-connected-mere-eq)
+open import foundation.0-connected-types using
+  ( is-0-connected; is-0-connected-mere-eq)
 open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
@@ -112,8 +112,7 @@ abstract
     {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
     is-equiv (equiv-eq-component-UU-Level {X = X} {Y})
   is-equiv-equiv-eq-component-UU-Level X =
-    fundamental-theorem-id X
-      ( id-equiv-component-UU-Level X)
+    fundamental-theorem-id
       ( is-contr-total-equiv-component-UU-Level X)
       ( λ Y → equiv-eq-component-UU-Level {X = X} {Y})
 
@@ -181,14 +180,14 @@ abstract
     is-contr-component-UU-Level-empty lzero
 ```
 
-### The connected components of universes are path connected
+### The connected components of universes are 0 connected
 
 ```agda
 abstract
-  is-path-connected-component-UU :
-    {l : Level} (X : UU l) → is-path-connected (component-UU X)
-  is-path-connected-component-UU X =
-    is-path-connected-mere-eq
+  is-0-connected-component-UU :
+    {l : Level} (X : UU l) → is-0-connected (component-UU X)
+  is-0-connected-component-UU X =
+    is-0-connected-mere-eq
       ( pair X (refl-mere-equiv X))
       ( λ Y →
         map-trunc-Prop

@@ -24,14 +24,15 @@ map from 𝔽 to a universe.
 ### Species
 
 ```agda
-species : (l : Level) → UU (lsuc l)
-species l = 𝔽 → UU l
+species : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+species l1 l2 = 𝔽 l1 → UU l2
 ```
 
 ### Transport in species
 
 ```agda
 tr-species :
-  {l : Level} (F : species l) (X Y : 𝔽) → type-𝔽 X ≃ type-𝔽 Y → F X → F Y
+  {l1 l2 : Level} (F : species l1 l2) (X Y : 𝔽 l1) →
+  type-𝔽 X ≃ type-𝔽 Y → F X → F Y
 tr-species F X Y e = tr F (eq-equiv-𝔽 X Y e)
 ```
