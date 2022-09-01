@@ -20,7 +20,6 @@ open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equivalences using
   ( _≃_; is-equiv; map-equiv; is-equiv-has-inverse; map-inv-equiv; right-inverse-law-equiv;
     left-inverse-law-equiv; is-property-is-equiv; htpy-equiv; id-equiv; map-inv-is-equiv; is-emb-is-equiv)
-open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (_＝_; refl; inv; tr; ap; _∙_)
@@ -36,6 +35,8 @@ open import foundation.universal-property-set-quotients using
   ( is-set-quotient; universal-property-set-quotient-is-set-quotient;
     is-effective-is-set-quotient)
 open import foundation.universe-levels using (Level; UU)
+
+open import foundation-core.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
 
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```

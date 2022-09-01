@@ -187,7 +187,7 @@ abstract
   add-neg-one-right-ℤ x = inv (is-add-neg-one-pred-ℤ' x)
 ```
 
-### Additiion is associative
+### Addition is associative
 
 ```agda
 abstract

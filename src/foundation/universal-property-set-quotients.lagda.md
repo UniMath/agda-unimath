@@ -24,8 +24,6 @@ open import foundation.equivalence-classes using
     is-effective-class; equivalence-class-Set;
     quotient-reflecting-map-equivalence-class;
     is-surjective-and-effective-class)
-open import foundation.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse; is-equiv-comp;
     is-equiv-precomp-is-equiv; is-equiv-left-factor; map-equiv;
@@ -75,6 +73,9 @@ open import foundation.univalence using (equiv-eq)
 open import foundation.universal-property-image using
   ( is-image; is-surjective-is-image; is-image-is-surjective)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import foundation-core.equivalence-relations using
+  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
 ```
 
 ## Idea

@@ -93,6 +93,7 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.bezouts-lemma
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.bounded-sums-arithmetic-functions
 open import elementary-number-theory.catalan-numbers
@@ -309,6 +310,7 @@ open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
 open import foundation.inequality-w-types
+open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -337,6 +339,7 @@ open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.partial-elements
+open import foundation.partitions
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors

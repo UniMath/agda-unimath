@@ -7,7 +7,6 @@ title: Mere equality
 
 module foundation.mere-equality where
 
-open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
   ( map-trunc-Prop)
 open import foundation.propositional-truncations using
@@ -17,6 +16,7 @@ open import foundation.reflecting-maps-equivalence-relations using
   ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalence-relations using (Eq-Rel)
 open import foundation-core.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation-core.propositions using (UU-Prop; is-prop)
 open import foundation-core.sets using

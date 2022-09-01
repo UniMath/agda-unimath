@@ -14,9 +14,6 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.effective-maps-equivalence-relations using
   ( is-effective; is-surjective-and-effective)
-open import foundation.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel;
-    equiv-symm-Eq-Rel)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; _∘e_; map-equiv; map-inv-equiv)
@@ -46,6 +43,10 @@ open import foundation.surjective-maps using
 open import foundation.universal-property-image using
   ( is-image; is-image-im)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+
+open import foundation-core.equivalence-relations using
+  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel;
+    equiv-symm-Eq-Rel)
 ```
 
 ## Idea
