@@ -93,6 +93,7 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.bezouts-lemma
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.bounded-sums-arithmetic-functions
 open import elementary-number-theory.catalan-numbers
