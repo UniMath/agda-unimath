@@ -57,7 +57,7 @@ module _
 
   equiv-symm-congruence-Semigroup :
     (x y : type-Semigroup G) → sim-congruence-Semigroup x y ≃ sim-congruence-Semigroup y x
-  equiv-symm-congruence-Semigroup = equiv-symm-Eq-Rel eq-rel-congruence-Semigroup
+  equiv-symm-congruence-Semigroup x y = equiv-symm-Eq-Rel eq-rel-congruence-Semigroup
 
   trans-congruence-Semigroup : is-transitive-Rel-Prop prop-congruence-Semigroup
   trans-congruence-Semigroup = trans-Eq-Rel eq-rel-congruence-Semigroup

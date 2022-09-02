@@ -19,7 +19,7 @@ open import foundation.embeddings using (_↪_; map-emb; equiv-ap-emb; is-emb)
 open import foundation.epimorphisms-with-respect-to-sets using
   ( is-epimorphism-is-surjective-Set)
 open import foundation.equivalence-classes using
-  ( equivalence-class; class;
+  ( equivalence-class; class; emb-equivalence-class;
     apply-effectiveness-class';
     is-effective-class; equivalence-class-Set;
     quotient-reflecting-map-equivalence-class;
@@ -221,10 +221,10 @@ module _
       is-effective R q
     is-effective-is-image i T H x y =
       ( is-effective-class R x y) ∘e
-      ( ( inv-equiv (equiv-ap-emb (emb-im (prop-Eq-Rel R)))) ∘e
+      ( ( inv-equiv (equiv-ap-emb (emb-equivalence-class R))) ∘e
         ( ( inv-equiv (convert-eq-values T x y)) ∘e
           ( equiv-ap-emb i)))
-
+    
   abstract
     is-surjective-and-effective-is-image :
       (i : type-Set B ↪ (A → UU-Prop l2)) → 

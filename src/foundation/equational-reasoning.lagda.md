@@ -13,7 +13,10 @@ Szumie Xie, 31 August 2022.
 module foundation.equational-reasoning where
 
 open import foundation.identity-types using (_＝_; refl; _∙_; inv)
+open import foundation.dependent-pair-types using (pair)
 open import foundation.equivalences using (_≃_; _∘e_; id-equiv; inv-equiv)
+open import foundation.functions using (id)
+open import foundation.logical-equivalences using (_↔_; _∘iff_)
 open import foundation.universe-levels using (Level; UU)
 open import order-theory.preorders using
   ( Preorder; element-Preorder; leq-Preorder; transitive-leq-Preorder;
@@ -85,10 +88,28 @@ equivalence-reasoning_ : {l1 : Level} (X : UU l1) → X ≃ X
 equivalence-reasoning X = id-equiv
 
 step-equivalence-reasoning :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
 step-equivalence-reasoning e Z f = f ∘e e
 
 syntax step-equivalence-reasoning e Z f = e ≃ Z by f
+```
+
+### Equational reasoning for logical equivalences
+
+```agda
+infixl 1 logical-equivalence-reasoning_
+infixl 0 step-logical-equivalence-reasoning
+
+logical-equivalence-reasoning_ : {l1 : Level} (X : UU l1) → X ↔ X
+logical-equivalence-reasoning X = pair id id
+
+step-logical-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ↔ Y) → (Z : UU l3) → (Y ↔ Z) → (X ↔ Z)
+step-logical-equivalence-reasoning e Z f = f ∘iff e
+
+syntax step-logical-equivalence-reasoning e Z f = e ↔ Z by f
 ```
 
 ### Equational reasoning for preorders
