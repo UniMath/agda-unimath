@@ -17,7 +17,7 @@ open import foundation.effective-maps-equivalence-relations using
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; _∘e_; map-equiv; map-inv-equiv)
-open import foundation.existential-quantification using (∃)
+open import foundation.existential-quantification using (∃; ∃-Prop)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)
@@ -37,7 +37,8 @@ open import foundation.reflecting-maps-equivalence-relations using
 open import foundation.sets using
   ( is-set; is-set-function-type; UU-Set; Id-Prop)
 open import foundation.slice using (hom-slice)
-open import foundation.subtypes using (eq-type-subtype; subtype)
+open import foundation.subtypes using
+  ( eq-type-subtype; subtype; has-same-elements-subtype)
 open import foundation.surjective-maps using
   ( is-surjective)
 open import foundation.universal-property-image using
@@ -60,8 +61,12 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  is-equivalence-class : subtype l2 A → UU (l1 ⊔ lsuc l2)
-  is-equivalence-class P = ∃ A (λ x → (type-Prop ∘ P) ＝ sim-Eq-Rel R x)
+  is-equivalence-class-Prop : subtype l2 A → UU-Prop (l1 ⊔ l2)
+  is-equivalence-class-Prop P =
+    ∃-Prop A (λ x → has-same-elements-subtype P (prop-Eq-Rel R x))
+
+  is-equivalence-class : subtype l2 A → UU (l1 ⊔ l2)
+  is-equivalence-class P = type-Prop (is-equivalence-class-Prop P)
 
   equivalence-class : UU (l1 ⊔ lsuc l2)
   equivalence-class = im (prop-Eq-Rel R)

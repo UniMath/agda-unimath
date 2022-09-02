@@ -29,6 +29,16 @@ Logical equivalences between two types `A` and `B` consist of a map `A → B` an
 ```agda
 _↔_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↔ B = (A → B) × (B → A)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : A ↔ B)
+  where
+
+  forward-implication : A → B
+  forward-implication = pr1 H
+
+  backward-implication : B → A
+  backward-implication = pr2 H
 ```
 
 ### Logical equivalences between propositions
