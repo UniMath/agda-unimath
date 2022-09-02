@@ -13,7 +13,7 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.equivalence-classes using
-  ( equivalence-class; class;
+  ( equivalence-class; class; eq-class-equivalence-class;
     apply-effectiveness-class';
     is-effective-class)
 open import foundation.equivalences using (_∘e_; is-equiv; _≃_)
@@ -22,6 +22,7 @@ open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.identity-types using (_∙_; ap; refl)
+open import foundation.logical-equivalences using (backward-implication)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; trunc-Prop; unit-trunc-Prop;
     is-prop-type-trunc-Prop)
@@ -32,7 +33,7 @@ open import foundation.type-arithmetic-dependent-pair-types using (assoc-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import foundation-core.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel)
+  ( Eq-Rel; sim-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel)
 ```
 
 ## Idea
@@ -67,15 +68,17 @@ module _
       apply-universal-property-trunc-Prop K
         ( trunc-Prop
           ( fib (class-representatives H) (pair Q K)))
-        ( λ { (pair a refl) →
-              unit-trunc-Prop
-                ( pair
-                  ( pair (pr1 (center (H a))) (pr1 (pr2 (center (H a)))))
-                  ( ( apply-effectiveness-class' R
-                      ( symm-Eq-Rel R (pr2 (pr2 (center (H a)))))) ∙
-                    ( ap
-                      ( pair (prop-Eq-Rel R a))
-                      ( eq-is-prop is-prop-type-trunc-Prop))))})
+        ( λ (pair a φ) →
+          unit-trunc-Prop
+            ( pair
+              ( pair (pr1 (center (H a))) (pr1 (pr2 (center (H a)))))
+              ( ( apply-effectiveness-class' R
+                  ( symm-Eq-Rel R (pr2 (pr2 (center (H a)))))) ∙
+                ( eq-class-equivalence-class R
+                  ( pair Q K)
+                  ( backward-implication
+                    ( φ a)
+                    ( refl-Eq-Rel R))))))
 
   abstract
     is-emb-class-representatives :
