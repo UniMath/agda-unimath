@@ -22,6 +22,6 @@ When we think of a species as the coefficients of a formal power series, the der
 
 ```agda
 derivative-species :
-  {l : Level} → species l → species l
+  {l1 l2 : Level} → species l1 l2 → species l1 l2
 derivative-species F X = F (coprod-𝔽 X unit-𝔽)
 ```

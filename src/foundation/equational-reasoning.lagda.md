@@ -4,6 +4,8 @@ title: Equational reasoning
 
 Tom de Jong, 27 May 2022.
 Elisabeth Bonnevier, 31 May 2022.
+Egbert Rijke, 31 August 2022.
+Szumie Xie, 31 August 2022.
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -24,10 +26,9 @@ Often it's convenient to reason by chains of (in)equalities or equivalences,
 i.e., to write a proof in the following form:
 
 ```md
-X ≃ by equiv-1 to
-A ≃ by equiv-2 to
-B ≃ by equiv-3 to
-Y ∎e
+X ≃ A by equiv-1
+  ≃ B by equiv-2
+  ≃ C by equiv-3
 ```
 
 or
@@ -57,34 +58,37 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 ### Equational reasoning for identifications
 
 ```agda
-infix 1 _∎
-infixr 0 step-equational-reasoning
+module _
+  {l : Level} {X : UU l}
+  where
 
-step-equational-reasoning :
-  {l : Level} {X : UU l} (x : X) {y z : X} → y ＝ z → x ＝ y → x ＝ z
-step-equational-reasoning _ q p = p ∙ q
+  infixl 1 equational-reasoning_
+  infixl 0 step-equational-reasoning
 
-_∎ : {l : Level} {X : UU l} (x : X) → x ＝ x
-x ∎ = refl
+  equational-reasoning_ : (x : X) → x ＝ x
+  equational-reasoning x = refl
 
-syntax step-equational-reasoning x q p = x ＝ by p to q
+  step-equational-reasoning :
+    {x y : X} → (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
+  step-equational-reasoning p z q = p ∙ q
+
+  syntax step-equational-reasoning p z q = p ＝ z by q
 ```
 
 ### Equational reasoning for equivalences
 
 ```agda
-infix 1 _∎e
-infixr 0 step-equivalence-reasoning
+infixl 1 equivalence-reasoning_
+infixl 0 step-equivalence-reasoning
+
+equivalence-reasoning_ : {l1 : Level} (X : UU l1) → X ≃ X
+equivalence-reasoning X = id-equiv
 
 step-equivalence-reasoning :
-  {l1 l2 l3 : Level} (X : UU l1) {Y : UU l2 } {Z : UU l3} →
-  Y ≃ Z → X ≃ Y → X ≃ Z
-step-equivalence-reasoning _ g f = g ∘e f
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
+step-equivalence-reasoning e Z f = f ∘e e
 
-_∎e : {l : Level} (X : UU l) → X ≃ X
-X ∎e = id-equiv
-
-syntax step-equivalence-reasoning X g f = X ≃ by f to g
+syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 ```
 
 ### Equational reasoning for preorders

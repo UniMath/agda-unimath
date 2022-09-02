@@ -7,6 +7,8 @@ title: Complete undirected graphs
 
 module graph-theory.complete-undirected-graphs where
 
+open import foundation.universe-levels
+
 open import graph-theory.complete-multipartite-graphs
 open import graph-theory.finite-graphs
 
@@ -22,6 +24,6 @@ There are many ways of presenting complete undirected graphs. For example, the t
 ## Definition
 
 ```agda
-complete-Undirected-Graph-𝔽 : 𝔽 → Undirected-Graph-𝔽
+complete-Undirected-Graph-𝔽 : {l : Level} → 𝔽 l → Undirected-Graph-𝔽 l l
 complete-Undirected-Graph-𝔽 X = complete-multipartite-Undirected-Graph-𝔽 X (λ x → unit-𝔽)
 ```

@@ -14,7 +14,7 @@ open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; UU-Prop;
     prod-Prop; Π-Prop)
 open import foundation.sets using (UU-Set; is-set; type-Set; Id-Prop)
-open import foundation.subtypes using (eq-subtype)
+open import foundation.subtypes using (eq-type-subtype)
 open import foundation.unital-binary-operations using (is-unital)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
@@ -92,7 +92,7 @@ abstract
   all-elements-equal-is-unital-Semigroup (pair X (pair μ assoc-μ))
     (pair e (pair left-unit-e right-unit-e))
     (pair e' (pair left-unit-e' right-unit-e')) =
-    eq-subtype
+    eq-type-subtype
       ( λ e →
         prod-Prop
           ( Π-Prop (type-Set X) (λ y → Id-Prop X (μ e y) y))

@@ -87,8 +87,8 @@ open import univalent-combinatorics.counting using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin; two-distinct-elements-leq-2-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; type-UU-Fin-Level; has-cardinality;
-    has-cardinality-type-UU-Fin-Level; set-UU-Fin-Level)
+  ( UU-Fin; type-UU-Fin; has-cardinality;
+    has-cardinality-type-UU-Fin; set-UU-Fin)
 open import univalent-combinatorics.lists using
   ( list; cons; nil; concat-list; length-list; length-concat-list; reverse-list; in-list)
 open import univalent-combinatorics.standard-finite-types using
@@ -105,20 +105,20 @@ The sign of a permutation is defined as the parity of the length of the decompos
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n) 
+  {l : Level} (n : ℕ) (X : UU-Fin l n) 
   where
 
-  sign-homomorphism-Fin-two : Aut (type-UU-Fin-Level n X) → Fin 2
+  sign-homomorphism-Fin-two : Aut (type-UU-Fin n X) → Fin 2
   sign-homomorphism-Fin-two f =
     pr1 (center (is-contr-parity-transposition-permutation n X f))
 
   preserves-add-sign-homomorphism-Fin-two :
-    (f g : (type-UU-Fin-Level n X) ≃ (type-UU-Fin-Level n X)) →
+    (f g : (type-UU-Fin n X) ≃ (type-UU-Fin n X)) →
     Id ( sign-homomorphism-Fin-two (f ∘e g))
        ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
   preserves-add-sign-homomorphism-Fin-two f g =
     apply-universal-property-trunc-Prop
-      ( has-cardinality-type-UU-Fin-Level n X)
+      ( has-cardinality-type-UU-Fin n X)
       ( Id-Prop
         ( Fin-Set 2)
         ( sign-homomorphism-Fin-two (f ∘e g))
@@ -157,7 +157,7 @@ module _
                           ( inv
                             ( eq-htpy-equiv
                               ( retr-permutation-list-transpositions-count
-                                ( type-UU-Fin-Level n X)
+                                ( type-UU-Fin n X)
                                 ( pair n h)
                                 ( f)))))))}
                 { y = center (is-contr-parity-transposition-permutation n X f)}
@@ -176,7 +176,7 @@ module _
                           ( inv
                             ( eq-htpy-equiv
                               ( retr-permutation-list-transpositions-count
-                                ( type-UU-Fin-Level n X)
+                                ( type-UU-Fin n X)
                                 ( pair n h)
                                 ( g)))))))}
                 { y = center (is-contr-parity-transposition-permutation n X g)}
@@ -184,25 +184,25 @@ module _
                   ( is-contr-parity-transposition-permutation n X g)))))))
     where
     list-trans :
-      ( f' : (type-UU-Fin-Level n X) ≃ (type-UU-Fin-Level n X))
-      ( h : Fin n ≃ type-UU-Fin-Level n X) →
+      ( f' : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
+      ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin-Level n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin-Level n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
     list-trans f' h =
-      list-transpositions-permutation-count (type-UU-Fin-Level n X) (pair n h) f'
+      list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f'
     list-comp-f-g :
-      ( h : Fin n ≃ type-UU-Fin-Level n X) →
+      ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin-Level n X) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n X) → decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin-Level n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
-      ( h : Fin n ≃ type-UU-Fin-Level n X) →
+      ( h : Fin n ≃ type-UU-Fin n X) →
       Id ( f ∘e g)
          ( permutation-list-transpositions
            ( list-comp-f-g h))
@@ -211,7 +211,7 @@ module _
         ( λ x →
           ( inv
             ( retr-permutation-list-transpositions-count
-              ( type-UU-Fin-Level n X)
+              ( type-UU-Fin n X)
               ( pair n h)
               ( f)
               ( map-equiv g x))) ∙
@@ -221,7 +221,7 @@ module _
                 ( list-trans f h)))
             ( inv
               ( retr-permutation-list-transpositions-count
-                ( type-UU-Fin-Level n X)
+                ( type-UU-Fin n X)
                 ( pair n h)
                 ( g)
                 ( x))))) ∙
@@ -234,10 +234,10 @@ module _
 
 ```agda
 module _
-  {l : Level} (n : ℕ) (X : UU-Fin-Level l n)
+  {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
 
-  map-sign-homomorphism : Aut (type-UU-Fin-Level n X) → Aut (Fin 2)
+  map-sign-homomorphism : Aut (type-UU-Fin n X) → Aut (Fin 2)
   map-sign-homomorphism f =
     aut-point-Fin-two-ℕ (sign-homomorphism-Fin-two n X f)
 
@@ -253,16 +253,16 @@ module _
   
   sign-homomorphism :
     type-hom-Group
-      ( symmetric-Group (set-UU-Fin-Level n X))
+      ( symmetric-Group (set-UU-Fin n X))
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism
   pr2 sign-homomorphism = preserves-comp-map-sign-homomorphism
 
   eq-sign-homomorphism-transposition :
-    ( Y : 2-Element-Decidable-Subtype l (type-UU-Fin-Level n X)) →
+    ( Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
     Id
       ( map-hom-Group
-        ( symmetric-Group (set-UU-Fin-Level n X))
+        ( symmetric-Group (set-UU-Fin n X))
         ( symmetric-Group (Fin-Set 2))
         ( sign-homomorphism)
         ( transposition Y))

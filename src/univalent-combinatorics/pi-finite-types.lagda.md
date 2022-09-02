@@ -3,8 +3,6 @@ title: π-finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.pi-finite-types where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
@@ -120,8 +118,7 @@ open import univalent-combinatorics.finite-types using
     is-finite-equiv'; is-finite-is-contr; is-finite-equiv; is-finite-empty;
     is-finite-is-empty; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽; UU-Fin;
     is-0-connected-UU-Fin; equiv-equiv-eq-UU-Fin; 
-    is-finite-has-finite-cardinality; UU-Fin-Level; equiv-equiv-eq-UU-Fin-Level;
-    is-0-connected-UU-Fin-Level; is-decidable-type-trunc-Prop-is-finite;
+    is-finite-has-finite-cardinality; is-decidable-type-trunc-Prop-is-finite;
     is-set-is-finite)
 open import univalent-combinatorics.finitely-presented-types using
   ( has-presentation-of-cardinality-has-cardinality-components)
@@ -385,7 +382,7 @@ is-π-finite-is-finite k {A} H =
     ( is-π-finite-Prop k A)
     ( is-π-finite-count k)
 
-π-finite-𝔽 : (k : ℕ) → 𝔽 → π-Finite lzero k
+π-finite-𝔽 : {l : Level} (k : ℕ) → 𝔽 l → π-Finite l k
 pr1 (π-finite-𝔽 k A) = type-𝔽 A
 pr2 (π-finite-𝔽 k A) = is-π-finite-is-finite k (is-finite-type-𝔽 A)
 
@@ -396,7 +393,7 @@ has-finite-connected-components-is-0-connected C =
   is-finite-is-contr C
 
 is-π-finite-UU-Fin :
-  (k n : ℕ) → is-π-finite k (UU-Fin n)
+  {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin l n)
 is-π-finite-UU-Fin zero-ℕ n =
   has-finite-connected-components-is-0-connected
     ( is-0-connected-UU-Fin n)
@@ -404,21 +401,6 @@ pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) = is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-π-finite-equiv k
     ( equiv-equiv-eq-UU-Fin n x y)
-    ( is-π-finite-is-finite k
-      ( is-finite-≃
-        ( is-finite-has-finite-cardinality (pair n (pr2 x)))
-        ( is-finite-has-finite-cardinality (pair n (pr2 y)))))
-
-is-π-finite-UU-Fin-Level :
-  {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin-Level l n)
-is-π-finite-UU-Fin-Level {l} zero-ℕ n =
-  has-finite-connected-components-is-0-connected
-    ( is-0-connected-UU-Fin-Level n)
-pr1 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) =
-  is-π-finite-UU-Fin-Level zero-ℕ n
-pr2 (is-π-finite-UU-Fin-Level {l} (succ-ℕ k) n) x y =
-  is-π-finite-equiv k
-    ( equiv-equiv-eq-UU-Fin-Level n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
         ( is-finite-has-finite-cardinality (pair n (pr2 x)))
@@ -542,8 +524,8 @@ pr2 (is-π-finite-Π (succ-ℕ k) H K) f g =
     ( is-π-finite-Π k H (λ a → pr2 (K a) (f a) (g a)))
 
 π-Finite-Π :
-  {l : Level} (k : ℕ) (A : 𝔽) (B : type-𝔽 A → π-Finite l k) →
-  π-Finite l k
+  {l1 l2 : Level} (k : ℕ) (A : 𝔽 l1) (B : type-𝔽 A → π-Finite l2 k) →
+  π-Finite (l1 ⊔ l2) k
 pr1 (π-Finite-Π k A B) =
   (x : type-𝔽 A) → (type-π-Finite k (B x))
 pr2 (π-Finite-Π k A B) =

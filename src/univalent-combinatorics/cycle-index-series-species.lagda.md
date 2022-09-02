@@ -3,8 +3,6 @@ title: Cycle index series of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.cycle-index-series-species where
 
 open import elementary-number-theory.natural-numbers
@@ -27,19 +25,22 @@ The cycle index series of a species `F` is a type family indexed by finite famil
 
 ```agda
 total-type-family-of-cyclic-types :
-  {l : Level} (X : 𝔽) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l)) → UU l
+  {l1 l2 : Level} (X : 𝔽 l1) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l2)) →
+  UU (l1 ⊔ l2)
 total-type-family-of-cyclic-types X C =
   Σ (type-𝔽 X) (λ x → type-Cyclic-Type (pr1 (C x)) (pr2 (C x)))
 
+{-
 permutation-family-of-cyclic-types :
-  {l : Level} (X : 𝔽) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l)) →
+  {l1 l2 : Level} (X : 𝔽 l1) (C : type-𝔽 X → Σ ℕ (Cyclic-Type l2)) →
   Aut (total-type-family-of-cyclic-types X C)
 permutation-family-of-cyclic-types X C = {!!}
 
 cycle-index-series-species :
-  {l : Level} (F : species l) (X : 𝔽) →
-  (type-𝔽 X → Σ ℕ (Cyclic-Type lzero ∘ succ-ℕ)) →
+  {l1 l2 : Level} (F : species l1 l2) (X : 𝔽 l1) →
+  (type-𝔽 X → Σ ℕ (Cyclic-Type {!!} ∘ succ-ℕ)) →
   UU {!!}
 cycle-index-series-species F X C =
   Σ {!F (total-type-family-of-cyclic-types X C)!} {!!}
+  -}
 ```

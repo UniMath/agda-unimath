@@ -18,7 +18,7 @@ open import foundation.universe-levels using (Level)
 open import group-theory.embeddings-groups using (emb-Group)
 open import group-theory.groups using
   ( Group; type-Group; set-Group; equiv-mul-Group; associative-mul-Group;
-    right-unit-law-Group; unit-Group; is-set-type-Group)
+    right-unit-law-mul-Group; unit-Group; is-set-type-Group)
 open import group-theory.homomorphisms-groups using
   ( preserves-mul-Group; type-hom-Group)
 open import group-theory.symmetric-groups using (symmetric-Group)
@@ -44,9 +44,9 @@ module _
 
   is-injective-map-Cayleys-theorem : is-injective map-Cayleys-theorem
   is-injective-map-Cayleys-theorem {x} {y} p =
-    ( inv (right-unit-law-Group G x)) ∙
+    ( inv (right-unit-law-mul-Group G x)) ∙
     ( ( htpy-eq-equiv p (unit-Group G)) ∙
-      ( right-unit-law-Group G y))
+      ( right-unit-law-mul-Group G y))
 
   is-emb-map-Cayleys-theorem : is-emb map-Cayleys-theorem
   is-emb-map-Cayleys-theorem =

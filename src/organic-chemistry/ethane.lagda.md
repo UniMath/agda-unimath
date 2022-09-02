@@ -51,7 +51,7 @@ module _
   (t : tetrahedron-in-3-space) (v : vertex-tetrahedron-in-3-space t)
   where
 
-  vertex-ethane-𝔽 : 𝔽
+  vertex-ethane-𝔽 : 𝔽 lzero
   vertex-ethane-𝔽 = Fin-𝔽 2
 
   vertex-ethane : UU lzero
@@ -134,11 +134,11 @@ module _
             ( is-decidable-edge-ethane-eq-Fin-two p
               ( inv (eq-equiv (Fin 2) (type-unordered-pair p) e))))
 
-  edge-ethane-𝔽 : unordered-pair vertex-ethane → 𝔽
+  edge-ethane-𝔽 : unordered-pair vertex-ethane → 𝔽 lzero
   pr1 (edge-ethane-𝔽 p) = edge-ethane p
   pr2 (edge-ethane-𝔽 p) = is-finite-edge-ethane p
 
-  finite-graph-ethane : Undirected-Graph-𝔽
+  finite-graph-ethane : Undirected-Graph-𝔽 lzero lzero
   pr1 finite-graph-ethane = vertex-ethane-𝔽
   pr2 finite-graph-ethane = edge-ethane-𝔽
 
@@ -222,7 +222,7 @@ module _
      (inr star) (inr star) =
      star
 
-  ethane : hydrocarbon
+  ethane : hydrocarbon lzero lzero
   pr1 ethane = finite-graph-ethane
   pr1 (pr2 ethane) c = t
   pr1 (pr2 (pr2 ethane)) = emb-bonding-ethane
@@ -254,7 +254,7 @@ module _
             ( zero-Fin 1)
             ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin 2)
+          ( Fin-UU-Fin' 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))
@@ -274,7 +274,7 @@ module _
             ( one-Fin 1)
             ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
         ( compute-swap-2-Element-Type
-          ( Fin-UU-Fin 2)
+          ( Fin-UU-Fin' 2)
           ( zero-Fin 1)
           ( one-Fin 1)
           ( neq-inl-inr))

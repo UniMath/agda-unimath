@@ -63,7 +63,7 @@ module _
               ( pair uy p))
             ( λ q →
               unit-trunc-Prop
-                ( eq-subtype
+                ( eq-type-subtype
                   ( mere-eq-Prop (pair (shape-Concrete-Group G) x))
                   ( q)))))
 

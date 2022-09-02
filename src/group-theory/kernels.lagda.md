@@ -50,7 +50,7 @@ module _
   is-closed-under-mul-subtype-kernel-hom-Group x y p q =
     ( preserves-mul-hom-Group G H f x y) ∙
     ( ( ap (λ (x , y) → mul-Group H x y) (eq-pair p q)) ∙
-      ( left-unit-law-Group H _))
+      ( left-unit-law-mul-Group H _))
 
   is-closed-under-inv-subtype-kernel-hom-Group :
     is-closed-under-inv-subset-Group G subtype-kernel-hom-Group
@@ -100,11 +100,11 @@ module _
         ( mul-Group' H (map-hom-Group G H f (inv-Group G g)))
         ( ( preserves-mul-hom-Group G H f g (pr1 h)) ∙
           ( ( ap (mul-Group H (map-hom-Group G H f g)) (pr2 h)) ∙
-            ( right-unit-law-Group H (map-hom-Group G H f g))))) ∙
+            ( right-unit-law-mul-Group H (map-hom-Group G H f g))))) ∙
       ( ( ap
           ( mul-Group H (map-hom-Group G H f g))
           ( preserves-inv-hom-Group G H f g)) ∙
-        ( right-inverse-law-Group H (map-hom-Group G H f g))))
+        ( right-inverse-law-mul-Group H (map-hom-Group G H f g))))
 
   kernel-hom-Group : Normal-Subgroup l2 G
   pr1 kernel-hom-Group = subgroup-kernel-hom-Group G H f

@@ -3,8 +3,6 @@ title: Morphisms of coherent H-spaces
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module structured-types.morphisms-coherent-h-spaces where
 
 open import foundation.dependent-pair-types
@@ -212,6 +210,7 @@ preserves-mul-htpy :
 preserves-mul-htpy {A = A} μA μB μf μg H =
   (a b : A) → Id (μf a b ∙ ap-binary μB (H a) (H b)) (H (μA a b) ∙ μg a b)
 
+{-
 preserves-left-unit-law-mul-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (μA : A → A → A) {eA : A} (lA : (a : A) → Id (μA eA a) a)
@@ -223,4 +222,5 @@ preserves-left-unit-law-mul-htpy :
   {H : f ~ g} (μH : preserves-mul-htpy μA μB μf μg H) (pH : Id pf (H eA ∙ pg)) →
   UU (l1 ⊔ l2)
 preserves-left-unit-law-mul-htpy μA lA μB lB μf lf μg lg μH pH = {!!}
+-}
 ```

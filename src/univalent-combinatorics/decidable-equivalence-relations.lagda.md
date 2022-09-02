@@ -24,25 +24,26 @@ A decidable equivalence relation on a finite type is an equivalence relation `R`
 ## Definition
 
 ```agda
-Decidable-Equivalence-Relation-𝔽 : (X : 𝔽) → UU (lsuc lzero)
-Decidable-Equivalence-Relation-𝔽 X =
-  Decidable-Equivalence-Relation lzero (type-𝔽 X)
+Decidable-Equivalence-Relation-𝔽 :
+  {l1 : Level} (l2 : Level) (X : 𝔽 l1) → UU (l1 ⊔ lsuc l2)
+Decidable-Equivalence-Relation-𝔽 l2 X =
+  Decidable-Equivalence-Relation l2 (type-𝔽 X)
 
 module _
-  (X : 𝔽) (R : Decidable-Equivalence-Relation-𝔽 X)
+  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-Equivalence-Relation-𝔽 l2 X)
   where
 
   decidable-relation-Decidable-Equivalence-Relation-𝔽 :
-    Decidable-Relation lzero (type-𝔽 X)
+    Decidable-Relation l2 (type-𝔽 X)
   decidable-relation-Decidable-Equivalence-Relation-𝔽 =
     decidable-relation-Decidable-Equivalence-Relation R
 
   relation-Decidable-Equivalence-Relation-𝔽 :
-    type-𝔽 X → type-𝔽 X → UU-Prop lzero
+    type-𝔽 X → type-𝔽 X → UU-Prop l2
   relation-Decidable-Equivalence-Relation-𝔽 =
     relation-Decidable-Equivalence-Relation R
 
-  sim-Decidable-Equivalence-Relation-𝔽 : type-𝔽 X → type-𝔽 X → UU lzero
+  sim-Decidable-Equivalence-Relation-𝔽 : type-𝔽 X → type-𝔽 X → UU l2
   sim-Decidable-Equivalence-Relation-𝔽 =
     sim-Decidable-Equivalence-Relation R
 
@@ -62,7 +63,7 @@ module _
     is-equivalence-relation-Decidable-Equivalence-Relation R
 
   equivalence-relation-Decidable-Equivalence-Relation-𝔽 :
-    Eq-Rel lzero (type-𝔽 X)
+    Eq-Rel l2 (type-𝔽 X)
   equivalence-relation-Decidable-Equivalence-Relation-𝔽 =
     equivalence-relation-Decidable-Equivalence-Relation R
 

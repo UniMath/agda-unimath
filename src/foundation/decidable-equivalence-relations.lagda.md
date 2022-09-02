@@ -16,7 +16,6 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
@@ -35,6 +34,8 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
+
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea
@@ -236,7 +237,7 @@ module _
       center-total-subtype-equivalence-class-Decidable-Equivalence-Relation ＝ t
     contraction-total-subtype-equivalence-class-Decidable-Equivalence-Relation
       ( pair (pair P p) H) =
-      eq-subtype
+      eq-type-subtype
         ( λ Q → subtype-equivalence-class-Decidable-Equivalence-Relation R Q a)
         ( apply-universal-property-trunc-Prop
           ( p)
@@ -248,7 +249,7 @@ module _
       where
         α : fib (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
         α (pair x refl) =
-          eq-subtype
+          eq-type-subtype
             ( λ z →
               trunc-Prop
                 ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))

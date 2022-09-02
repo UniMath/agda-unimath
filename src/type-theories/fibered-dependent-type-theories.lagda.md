@@ -3,7 +3,7 @@ title: Fibered dependent type theories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --guardedness --allow-unsolved-metas #-}
+{-# OPTIONS --guardedness #-}
 
 module type-theories.fibered-dependent-type-theories where
 
@@ -636,6 +636,7 @@ module fibered where
               (type-theory.S!W A) (type-theory.δid A) δ S!W
       Sδ! : fibered-substitution-by-generic-element (type-theory.Sδ! A) S δ
 
+{-
   total-type-theory :
     {l1 l2 l3 l4 : Level} {A : type-theory l1 l2}
     (B : fibered-type-theory l3 l4 A) → type-theory (l1 ⊔ l3) (l2 ⊔ l4)
@@ -653,6 +654,7 @@ module fibered where
   type-theory.S!W (total-type-theory {A = A} B) = {!!}
   type-theory.δid (total-type-theory {A = A} B) = {!!}
   type-theory.Sδ! (total-type-theory {A = A} B) = {!!}
+-}
 
 {-
   slice-fibered-type-theory

@@ -26,13 +26,14 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 open import group-theory.category-of-semigroups using
   ( extensionality-Semigroup)
 open import group-theory.equivalences-semigroups using
-  ( equiv-Semigroup)
+  ( equiv-Semigroup; is-equiv-hom-Semigroup)
 open import group-theory.groups using
   ( Group; semigroup-Group; is-group-Prop)
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group)
 open import group-theory.isomorphisms-semigroups using
-  ( equiv-iso-equiv-Semigroup)
+  ( equiv-iso-equiv-Semigroup; is-iso-is-equiv-hom-Semigroup;
+    is-equiv-is-iso-hom-Semigroup)
 open import group-theory.precategory-of-groups using (Group-Large-Precat)
 ```
 
@@ -61,8 +62,22 @@ module _
   hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
   hom-inv-iso-Group = hom-inv-iso-Large-Precat Group-Large-Precat G H
 
+  is-equiv-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
+  is-equiv-hom-Group =
+    is-equiv-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
   equiv-Group : UU (l1 ⊔ l2)
   equiv-Group = equiv-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  is-iso-is-equiv-hom-Group :
+    (f : type-hom-Group G H) → is-equiv-hom-Group f → is-iso-hom-Group f
+  is-iso-is-equiv-hom-Group =
+    is-iso-is-equiv-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+
+  is-equiv-is-iso-hom-Group :
+    (f : type-hom-Group G H) → is-iso-hom-Group f → is-equiv-hom-Group f
+  is-equiv-is-iso-hom-Group =
+    is-equiv-is-iso-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   equiv-iso-equiv-Group : equiv-Group ≃ type-iso-Group
   equiv-iso-equiv-Group =

@@ -59,7 +59,7 @@ Main-Class-Latin-Hypercube l1 l2 n =
 ```agda
 Main-Class-Latin-Hypercube-of-Order : (n m : ℕ) → UU (lsuc lzero)
 Main-Class-Latin-Hypercube-of-Order n m =
-  Σ ( unordered-tuple (succ-ℕ n) (UU-Fin m))
+  Σ ( unordered-tuple (succ-ℕ n) (UU-Fin lzero m))
     ( λ A →
       Σ ( product-unordered-tuple-types (succ-ℕ n)
           ( map-unordered-tuple (succ-ℕ n) (type-UU-Fin m) A) →

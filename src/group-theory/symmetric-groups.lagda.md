@@ -7,6 +7,7 @@ title: Symmetric groups
 
 module group-theory.symmetric-groups where
 
+open import foundation.automorphisms
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using
   (eq-pair-Σ; pair-eq-Σ; comp-eq-pair-Σ; comp-pair-eq-Σ; issec-pair-eq-Σ; isretr-pair-eq-Σ)
@@ -24,7 +25,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using (eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Set; equiv-raise)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set; is-set-type-Set; aut-Set; is-prop-is-set;
+  ( UU-Set; type-Set; is-set; is-set-type-Set; is-prop-is-set;
     is-1-type-UU-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.univalence using
@@ -45,7 +46,7 @@ open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
 
 ```agda
 set-symmetric-Group : {l : Level} (X : UU-Set l) → UU-Set l
-set-symmetric-Group X = aut-Set X
+set-symmetric-Group X = Aut-Set X
 
 type-symmetric-Group : {l : Level} (X : UU-Set l) → UU l
 type-symmetric-Group X = type-Set (set-symmetric-Group X)
@@ -55,7 +56,7 @@ is-set-type-symmetric-Group :
 is-set-type-symmetric-Group X = is-set-type-Set (set-symmetric-Group X)
 
 has-associative-mul-aut-Set :
-  {l : Level} (X : UU-Set l) → has-associative-mul-Set (aut-Set X)
+  {l : Level} (X : UU-Set l) → has-associative-mul-Set (Aut-Set X)
 pr1 (has-associative-mul-aut-Set X) f e = f ∘e e
 pr2 (has-associative-mul-aut-Set X) e f g = associative-comp-equiv g f e
 
@@ -161,8 +162,10 @@ module _
     type-iso-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 iso-symmetric-group-equiv-Set = hom-symmetric-group-equiv-Set
   pr1 (pr2 iso-symmetric-group-equiv-Set) = hom-inv-symmetric-group-equiv-Set
-  pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) = is-sec-hom-inv-symmetric-group-equiv-Set
-  pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) = is-retr-hom-inv-symmetric-group-equiv-Set
+  pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
+    is-sec-hom-inv-symmetric-group-equiv-Set
+  pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
+    is-retr-hom-inv-symmetric-group-equiv-Set
 
 ```
 
@@ -172,7 +175,7 @@ module _
 module _
   {l1 l2 : Level} (X : UU-Set l1)
   where
-  
+
   hom-symmetric-group-abstract-automorphism-group-Set :
     type-hom-Group
       ( symmetric-Group X)

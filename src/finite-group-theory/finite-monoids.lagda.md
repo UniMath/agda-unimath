@@ -1,4 +1,6 @@
-# Finite monoids
+---
+title: Finite monoids
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}

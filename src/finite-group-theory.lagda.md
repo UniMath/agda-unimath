@@ -22,6 +22,7 @@ open import finite-group-theory.orbits-permutations public
 open import finite-group-theory.permutations public
 open import finite-group-theory.sign-homomorphism public
 open import finite-group-theory.simpson-delooping-sign-homomorphism public
+open import finite-group-theory.subgroups-finite-groups public
 open import finite-group-theory.tetrahedra-in-3-space public
 open import finite-group-theory.transpositions public
 ```

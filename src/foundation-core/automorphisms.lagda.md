@@ -21,7 +21,8 @@ open import foundation.homotopies using
   ( _~_; refl-htpy; is-contr-total-htpy; equiv-concat-htpy; right-unit-htpy)
 open import foundation.identity-types using (_＝_; _∙_; ap; refl; right-unit)
 open import foundation.sets using
-  ( is-set; is-set-equiv-is-set; UU-Set; type-Set; is-set-type-Set)
+  ( is-set; is-set-equiv-is-set; UU-Set; type-Set; is-set-type-Set;
+    equiv-Set)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)

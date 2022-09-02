@@ -12,7 +12,7 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 
 ## Joining the project
 
-Great, you want to contribute something! The best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
+Great, you want to contribute something! The best way to start is to find us in our chat channels on the [Univalent Agda discord](https://discord.gg/Zp2e8hYsuX), which is a discord servers shared between the 1Lab, cubical Agda, and agda-unimath. We have a vibing community there, and you're more than welcome to join us just to hang out.
 
 Once you've decided what you want to contribute, the best way to proceed is to make your own fork of the library. Within your fork, make a separate branch in which you will be making your contributions. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
@@ -93,6 +93,7 @@ open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.bezouts-lemma
 open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.bounded-sums-arithmetic-functions
 open import elementary-number-theory.catalan-numbers
@@ -188,6 +189,7 @@ open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.simpson-delooping-sign-homomorphism
+open import finite-group-theory.subgroups-finite-groups
 open import finite-group-theory.tetrahedra-in-3-space
 open import finite-group-theory.transpositions
 ```
@@ -204,6 +206,7 @@ open import foundation.2-types
 open import foundation.algebras-polynomial-endofunctors
 open import foundation.apartness-relations
 open import foundation.automorphisms
+open import foundation.axiom-l
 open import foundation.axiom-of-choice
 open import foundation.bands
 open import foundation.binary-embeddings
@@ -251,6 +254,7 @@ open import foundation.descent-dependent-pair-types
 open import foundation.descent-empty-types
 open import foundation.diagonal-maps-of-types
 open import foundation.diagonals-of-maps
+open import foundation.discrete-reflexive-relations
 open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.double-powersets
@@ -278,6 +282,7 @@ open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
+open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
@@ -305,6 +310,7 @@ open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
 open import foundation.induction-w-types
 open import foundation.inequality-w-types
+open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -333,6 +339,7 @@ open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.partial-elements
+open import foundation.partitions
 open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
@@ -349,6 +356,7 @@ open import foundation.pullbacks
 open import foundation.raising-universe-levels
 open import foundation.ranks-of-elements-w-types
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.reflexive-relations
 open import foundation.repetitions-sequences
 open import foundation.repetitions
 open import foundation.replacement
@@ -359,6 +367,7 @@ open import foundation.sequences
 open import foundation.set-presented-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.sigma-decompositions
 open import foundation.singleton-induction
 open import foundation.slice
 open import foundation.small-maps
@@ -548,10 +557,15 @@ open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
 open import group-theory.centers-groups
 open import group-theory.commutative-monoids
+open import group-theory.commutators-groups
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
+open import group-theory.congruence-relations-groups
+open import group-theory.congruence-relations-monoids
+open import group-theory.congruence-relations-semigroups
 open import group-theory.conjugation
 open import group-theory.contravariant-pushforward-concrete-group-actions
+open import group-theory.decidable-subgroups
 open import group-theory.dihedral-group-construction
 open import group-theory.dihedral-groups
 open import group-theory.e8-lattice
@@ -566,8 +580,10 @@ open import group-theory.fixed-points-higher-group-actions
 open import group-theory.free-concrete-group-actions
 open import group-theory.free-groups-with-one-generator
 open import group-theory.free-higher-group-actions
+open import group-theory.full-subgroups
 open import group-theory.furstenberg-groups
 open import group-theory.group-actions
+open import group-theory.group-solver
 open import group-theory.groups
 open import group-theory.higher-group-actions
 open import group-theory.higher-groups
@@ -624,11 +640,13 @@ open import group-theory.submonoids
 open import group-theory.subsemigroups
 open import group-theory.substitution-functor-concrete-group-actions
 open import group-theory.substitution-functor-group-actions
+open import group-theory.symmetric-concrete-groups
 open import group-theory.symmetric-groups
 open import group-theory.symmetric-higher-groups
 open import group-theory.torsors
 open import group-theory.transitive-concrete-group-actions
 open import group-theory.transitive-group-actions
+open import group-theory.trivial-subgroups
 open import group-theory.unordered-tuples-of-elements-commutative-monoids
 ```
 
@@ -815,12 +833,6 @@ open import synthetic-homotopy-theory.universal-cover-circle
 open import synthetic-homotopy-theory.universal-property-circle
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.wedges-of-pointed-types
-```
-
-## Tutorials
-
-```agda
-open import tutorials.basic-agda
 ```
 
 ## Type theories

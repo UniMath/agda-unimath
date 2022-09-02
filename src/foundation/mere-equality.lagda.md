@@ -7,19 +7,20 @@ title: Mere equality
 
 module foundation.mere-equality where
 
-open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
   ( map-trunc-Prop)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 open import foundation.propositional-truncations using
   ( trunc-Prop; type-trunc-Prop; unit-trunc-Prop;
     apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop)
+open import foundation.reflecting-maps-equivalence-relations using
+  ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalence-relations using (Eq-Rel)
 open import foundation-core.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation-core.propositions using (UU-Prop; is-prop)
-open import foundation-core.sets using (UU-Set; type-Set; Id-Prop)
+open import foundation-core.sets using
+  ( UU-Set; type-Set; Id-Prop; is-set; is-set-prop-in-id)
 open import foundation-core.universe-levels using (Level; UU)
 ```
 
@@ -104,4 +105,16 @@ module _
   reflecting-map-mere-eq : reflecting-map-Eq-Rel (mere-eq-Eq-Rel A) (type-Set X)
   pr1 reflecting-map-mere-eq = f
   pr2 reflecting-map-mere-eq = reflects-mere-eq
+```
+
+### If mere equality maps into the identity type of `A`, then `A` is a set
+
+```agda
+is-set-mere-eq-in-id :
+  {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
+is-set-mere-eq-in-id =
+  is-set-prop-in-id
+    ( mere-eq)
+    ( is-prop-mere-eq)
+    ( λ x → refl-mere-eq)
 ```

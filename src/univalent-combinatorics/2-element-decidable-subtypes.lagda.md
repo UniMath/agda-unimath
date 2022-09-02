@@ -3,8 +3,6 @@ title: 2-element decidable subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.2-element-decidable-subtypes where
 
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
@@ -59,7 +57,7 @@ open import foundation.propositions using
   ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
     is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (subtype; eq-subtype; equiv-subtype-equiv)
+open import foundation.subtypes using (subtype; eq-type-subtype; equiv-subtype-equiv)
 open import foundation.type-arithmetic-coproduct-types using
   ( map-commutative-coprod; is-equiv-map-commutative-coprod)
 open import foundation.univalence using (eq-equiv)
@@ -80,10 +78,10 @@ open import univalent-combinatorics.decidable-subtypes using
   ( is-finite-type-decidable-subtype)
 open import univalent-combinatorics.dependent-function-types using (is-finite-Π)
 open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin-Level; type-UU-Fin-Level;
+  ( has-cardinality; UU-Fin; type-UU-Fin;
     has-cardinality-type-UU-Fin; is-finite;
     equiv-has-cardinality-id-number-of-elements-is-finite;
-    number-of-elements-is-finite; is-finite-type-UU-Fin-Level; is-finite-equiv;
+    number-of-elements-is-finite; is-finite-type-UU-Fin; is-finite-equiv;
     is-finite-Fin)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin)
@@ -339,32 +337,32 @@ module _
     compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
 
 module _
-  {l1 l2 : Level} (n : ℕ) (X : UU-Fin-Level l1 n)
+  {l1 l2 : Level} (n : ℕ) (X : UU-Fin l1 n)
   where
 
   is-finite-2-Element-Decidable-Subtype :
-    is-finite (2-Element-Decidable-Subtype l2 (type-UU-Fin-Level n X))
+    is-finite (2-Element-Decidable-Subtype l2 (type-UU-Fin n X))
   is-finite-2-Element-Decidable-Subtype =
     is-finite-type-decidable-subtype
       (λ P →
         pair
           ( has-cardinality 2
-            ( Σ (type-UU-Fin-Level n X) (λ x → type-decidable-Prop (P x))))
+            ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x))))
           ( pair
             ( is-prop-type-trunc-Prop)
             ( is-decidable-equiv
               ( equiv-has-cardinality-id-number-of-elements-is-finite
-                ( Σ (type-UU-Fin-Level n X) (λ x → type-decidable-Prop (P x)))
+                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))
                 ( is-finite-type-decidable-subtype P
-                  ( is-finite-type-UU-Fin-Level n X))
+                  ( is-finite-type-UU-Fin n X))
                 ( 2))
               ( has-decidable-equality-ℕ
                 ( number-of-elements-is-finite
                   ( is-finite-type-decidable-subtype P
-                    ( is-finite-type-UU-Fin-Level n X)))
+                    ( is-finite-type-UU-Fin n X)))
                 ( 2)))))
       ( is-finite-Π
-        ( is-finite-type-UU-Fin-Level n X)
+        ( is-finite-type-UU-Fin n X)
         ( λ x →
           is-finite-equiv
             ( inv-equiv equiv-bool-decidable-Prop ∘e equiv-bool-Fin-two-ℕ)
@@ -468,7 +466,7 @@ module _
       has-no-fixed-points-swap-2-Element-Type
         ( 2-element-type-2-Element-Decidable-Subtype P)
         { element-subtype-2-element-decidable-subtype-Fin}
-        ( eq-subtype
+        ( eq-type-subtype
           ( subtype-2-Element-Decidable-Subtype P)
           ( inv p))
 ```

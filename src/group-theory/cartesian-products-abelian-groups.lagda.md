@@ -65,19 +65,19 @@ module _
 
   left-unit-law-add-prod-Ab :
     (x : type-prod-Ab) → Id (add-prod-Ab zero-prod-Ab x) x
-  left-unit-law-add-prod-Ab = left-unit-law-Group group-prod-Ab
+  left-unit-law-add-prod-Ab = left-unit-law-mul-Group group-prod-Ab
 
   right-unit-law-add-prod-Ab :
     (x : type-prod-Ab) → Id (add-prod-Ab x zero-prod-Ab) x
-  right-unit-law-add-prod-Ab = right-unit-law-Group group-prod-Ab
+  right-unit-law-add-prod-Ab = right-unit-law-mul-Group group-prod-Ab
 
   left-inverse-law-add-prod-Ab :
     (x : type-prod-Ab) → Id (add-prod-Ab (neg-prod-Ab x) x) zero-prod-Ab
-  left-inverse-law-add-prod-Ab = left-inverse-law-Group group-prod-Ab
+  left-inverse-law-add-prod-Ab = left-inverse-law-mul-Group group-prod-Ab
 
   right-inverse-law-add-prod-Ab :
     (x : type-prod-Ab) → Id (add-prod-Ab x (neg-prod-Ab x)) zero-prod-Ab
-  right-inverse-law-add-prod-Ab = right-inverse-law-Group group-prod-Ab
+  right-inverse-law-add-prod-Ab = right-inverse-law-mul-Group group-prod-Ab
 
   commutative-add-prod-Ab :
     (x y : type-prod-Ab) → Id (add-prod-Ab x y) (add-prod-Ab y x)

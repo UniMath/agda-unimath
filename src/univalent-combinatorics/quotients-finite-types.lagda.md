@@ -3,15 +3,15 @@ title: Quotients of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.quotients-finite-types where
 
+open import foundation.dependent-pair-types
 open import foundation.decidable-propositions
 open import foundation.equivalence-classes
 open import foundation.universe-levels
 
 open import univalent-combinatorics.decidable-equivalence-relations
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.image-of-maps
@@ -26,22 +26,21 @@ The quotient of a finite type by a decidable equivalence relation is again a fin
 
 ```agda
 module _
-  (X : 𝔽) (R : Decidable-Equivalence-Relation-𝔽 X)
+  {l1 l2 : Level} (X : 𝔽 l1) (R : Decidable-Equivalence-Relation-𝔽 l2 X)
   where
 
-  equivalence-class-Decidable-Equivalence-Relation-𝔽 : UU (lsuc lzero)
+  equivalence-class-Decidable-Equivalence-Relation-𝔽 : UU (l1 ⊔ lsuc l2)
   equivalence-class-Decidable-Equivalence-Relation-𝔽 =
-    equivalence-class
-      ( equivalence-relation-Decidable-Equivalence-Relation-𝔽 X R)
+    im (decidable-relation-Decidable-Equivalence-Relation-𝔽 X R)
 
   is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽' :
     is-finite equivalence-class-Decidable-Equivalence-Relation-𝔽
   is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽' =
     is-finite-im
       ( is-finite-type-𝔽 X)
-      ( has-decidable-equality-is-finite
-        ( {!is-finite-decidable-subtype!}))
+      ( has-decidable-equality-Subset-𝔽 X)
 
-  quotient-𝔽 : 𝔽
-  quotient-𝔽 = {!!}
+  quotient-𝔽 : 𝔽 (l1 ⊔ lsuc l2)
+  pr1 quotient-𝔽 = equivalence-class-Decidable-Equivalence-Relation-𝔽
+  pr2 quotient-𝔽 = is-finite-equivalence-class-Decidable-Equivalence-Relation-𝔽'
 ```

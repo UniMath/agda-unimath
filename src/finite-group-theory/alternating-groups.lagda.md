@@ -14,7 +14,7 @@ open import finite-group-theory.sign-homomorphism
 
 open import elementary-number-theory.natural-numbers using (ℕ)
 open import univalent-combinatorics.standard-finite-types using (Fin-Set)
-open import univalent-combinatorics.finite-types using (UU-Fin-Level; set-UU-Fin-Level)
+open import univalent-combinatorics.finite-types using (UU-Fin; set-UU-Fin)
 ```
 
 ## Idea
@@ -24,10 +24,10 @@ The alternating group on a finite set `X` is the group of even permutations of `
 ## Definition
 
 ```agda
-module _ {l} (n : ℕ) (X : UU-Fin-Level l n) where
+module _ {l} (n : ℕ) (X : UU-Fin l n) where
   alternating-Group : Group l
   alternating-Group = group-kernel-hom-Group
-    ( symmetric-Group (set-UU-Fin-Level n X))
+    ( symmetric-Group (set-UU-Fin n X))
     ( symmetric-Group (Fin-Set 2))
     ( sign-homomorphism n X)
 ```

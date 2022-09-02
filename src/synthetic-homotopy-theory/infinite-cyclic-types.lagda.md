@@ -1,8 +1,6 @@
 # Infinite cyclic types
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
 open import elementary-number-theory.addition-integers using

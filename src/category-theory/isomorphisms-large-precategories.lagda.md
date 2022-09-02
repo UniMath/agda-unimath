@@ -20,7 +20,7 @@ open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.propositions using
   ( prod-Prop; is-prop; is-prop-all-elements-equal; UU-Prop)
 open import foundation.sets using (Id-Prop; is-set; UU-Set)
-open import foundation.subtypes using (eq-subtype; is-set-type-subtype)
+open import foundation.subtypes using (eq-type-subtype; is-set-type-subtype)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -139,7 +139,7 @@ module _
     (H K : is-iso-Large-Precat C f) → H ＝ K
   all-elements-equal-is-iso-Large-Precat f
     (pair g (pair p q)) (pair g' (pair p' q')) =
-    eq-subtype
+    eq-type-subtype
       ( λ g →
         prod-Prop
           ( Id-Prop

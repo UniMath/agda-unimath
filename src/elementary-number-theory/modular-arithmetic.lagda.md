@@ -7,6 +7,7 @@ title: Modular arithmetic
 
 module elementary-number-theory.modular-arithmetic where
 
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers using
   ( add-ℤ; ap-add-ℤ; is-injective-add-ℤ; is-injective-add-ℤ'; associative-add-ℤ;
     commutative-add-ℤ; left-unit-law-add-ℤ; right-unit-law-add-ℤ;
@@ -23,13 +24,13 @@ open import elementary-number-theory.congruence-integers using
 open import elementary-number-theory.congruence-natural-numbers using
   ( refl-cong-ℕ; congruence-mul-ℕ; eq-cong-nat-Fin)
 open import elementary-number-theory.divisibility-integers using
-  ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ)
+  ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ; div-neg-ℤ; neg-div-ℤ; div-div-int-abs-ℤ; div-int-abs-div-ℤ)
 open import elementary-number-theory.equality-integers using
   ( has-decidable-equality-ℤ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
-    is-equiv-pred-ℤ; is-equiv-neg-ℤ; is-set-ℤ)
+    is-equiv-pred-ℤ; is-equiv-neg-ℤ; is-set-ℤ; is-nonnegative-succ-ℤ; is-nonnegative-eq-ℤ; decide-is-nonnegative-ℤ; neg-neg-ℤ)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; left-zero-law-mul-ℤ;
@@ -41,15 +42,19 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-nonzero-ℕ)
 
+open import elementary-number-theory.inequality-integers
+
 open import univalent-combinatorics.standard-finite-types using (is-zero-Fin)
 
 open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-types using (is-decidable; is-decidable-iff)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
+open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
+open import foundation.functions using (_∘_)
 open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary)
+  ( _＝_; refl; _∙_; inv; ap; ap-binary; tr)
 open import foundation.injective-maps using
   ( is-injective; is-injective-id; is-injective-comp')
 open import foundation.negation using (¬; map-neg)
@@ -128,7 +133,7 @@ abstract
   is-finite-ℤ-Mod {zero-ℕ} H = ex-falso (H refl)
   is-finite-ℤ-Mod {succ-ℕ k} H = is-finite-Fin (succ-ℕ k)
 
-ℤ-Mod-𝔽 : (k : ℕ) → is-nonzero-ℕ k → 𝔽
+ℤ-Mod-𝔽 : (k : ℕ) → is-nonzero-ℕ k → 𝔽 lzero
 pr1 (ℤ-Mod-𝔽 k H) = ℤ-Mod k
 pr2 (ℤ-Mod-𝔽 k H) = is-finite-ℤ-Mod H
 ```
@@ -148,6 +153,17 @@ is-injective-int-ℤ-Mod (succ-ℕ k) =
 is-zero-int-zero-ℤ-Mod : (k : ℕ) → is-zero-ℤ (int-ℤ-Mod k (zero-ℤ-Mod k))
 is-zero-int-zero-ℤ-Mod (zero-ℕ) = refl
 is-zero-int-zero-ℤ-Mod (succ-ℕ k) = ap int-ℕ (is-zero-nat-zero-Fin {k})
+
+int-ℤ-Mod-bounded : (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) 
+  → leq-ℤ (int-ℤ-Mod (succ-ℕ  k) x) (int-ℕ (succ-ℕ k))  
+int-ℤ-Mod-bounded zero-ℕ (inr x) = star 
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ 
+  (add-ℤ (inr (inr k)) 
+  (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ 
+  (add-ℤ (inr (inr k)) (inl k)) 
+  (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
+
 ```
 
 ## The successor and predecessor functions on the integers modulo k
@@ -760,3 +776,20 @@ has-no-fixed-points-succ-Fin :
 has-no-fixed-points-succ-Fin {succ-ℕ k} x =
   has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
 ```
+
+### Divisibility is decidable
+
+```agda 
+is-decidable-div-ℤ : (d x : ℤ) → is-decidable (div-ℤ d x)
+is-decidable-div-ℤ d x = 
+  is-decidable-iff
+    ( div-div-int-abs-ℤ ∘ div-is-zero-mod-ℤ (abs-ℤ d) x)
+    ( is-zero-mod-div-ℤ (abs-ℤ d) x ∘ div-int-abs-div-ℤ)
+    ( has-decidable-equality-ℤ-Mod
+      ( abs-ℤ d)
+      ( mod-ℤ (abs-ℤ d) x)
+      ( zero-ℤ-Mod (abs-ℤ d)))
+
+   
+```
+

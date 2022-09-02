@@ -3,8 +3,6 @@ title: The universal property of lists with respect to wild monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module structured-types.universal-property-lists-wild-monoids where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
