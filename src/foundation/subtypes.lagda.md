@@ -9,6 +9,10 @@ module foundation.subtypes where
 
 open import foundation-core.subtypes public
 
+open import foundation.equality-dependent-function-types using
+  ( is-contr-total-Eq-Π)
+
+open import foundation-core.contractible-types using (is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pr1; pr2; pair)
 open import foundation-core.embeddings using (_↪_; map-emb)
 open import foundation-core.equivalences using
@@ -72,6 +76,13 @@ module _
   refl-has-same-elements-subtype : has-same-elements-subtype P
   pr1 (refl-has-same-elements-subtype x) = id
   pr2 (refl-has-same-elements-subtype x) = id
+
+  is-contr-total-has-same-elements-subtype :
+    is-contr (Σ (subtype l2 A) has-same-elements-subtype)
+  is-contr-total-has-same-elements-subtype =
+    is-contr-total-Eq-Π
+      ( λ x Q → P x ⇔ Q)
+      ( λ x → is-contr-total-iff (P x))
 
   extensionality-subtype :
     (Q : subtype l2 A) → (P ＝ Q) ≃ has-same-elements-subtype Q

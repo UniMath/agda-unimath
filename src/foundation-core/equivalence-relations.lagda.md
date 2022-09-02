@@ -9,12 +9,15 @@ module foundation-core.equivalence-relations where
 
 open import foundation.binary-relations using
   ( Rel-Prop; is-reflexive-Rel-Prop; is-symmetric-Rel-Prop;
-    is-transitive-Rel-Prop; type-Rel-Prop; is-prop-type-Rel-Prop)
+    is-transitive-Rel-Prop; type-Rel-Prop; is-prop-type-Rel-Prop;
+    is-prop-is-reflexive-Rel-Prop; is-prop-is-symmetric-Rel-Prop;
+    is-prop-is-transitive-Rel-Prop)
 
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_)
-open import foundation-core.propositions using (is-prop; equiv-prop)
+open import foundation-core.propositions using
+  ( is-prop; equiv-prop; is-prop-prod; UU-Prop)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
@@ -48,6 +51,21 @@ abstract
     {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) (x y : A) →
     is-prop (sim-Eq-Rel R x y)
   is-prop-sim-Eq-Rel R = is-prop-type-Rel-Prop (prop-Eq-Rel R)
+
+is-prop-is-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
+  is-prop (is-equivalence-relation R)
+is-prop-is-equivalence-relation R =
+  is-prop-prod
+    ( is-prop-is-reflexive-Rel-Prop R)
+    ( is-prop-prod
+      ( is-prop-is-symmetric-Rel-Prop R)
+      ( is-prop-is-transitive-Rel-Prop R))
+
+is-equivalence-relation-Prop :
+  {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU-Prop (l1 ⊔ l2)
+pr1 (is-equivalence-relation-Prop R) = is-equivalence-relation R
+pr2 (is-equivalence-relation-Prop R) = is-prop-is-equivalence-relation R
 
 is-equivalence-relation-prop-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) →

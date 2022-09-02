@@ -6,6 +6,8 @@ title: Inhabited subtypes
 module foundation.inhabited-subtypes where
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
@@ -71,4 +73,52 @@ module _
     is-in-inhabited-subtype (inclusion-inhabited-subtype x)
   is-in-inhabited-subtype-inclusion-inhabited-subtype =
     is-in-subtype-inclusion-subtype subtype-inhabited-subtype
+```
+
+## Properties
+
+### Characterization of equality of inhabited subtypes
+
+```agda
+has-same-elements-inhabited-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  inhabited-subtype l2 A → inhabited-subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
+has-same-elements-inhabited-subtype P Q =
+  has-same-elements-subtype
+    ( subtype-inhabited-subtype P)
+    ( subtype-inhabited-subtype Q)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : inhabited-subtype l2 A)
+  where
+  
+  refl-has-same-elements-inhabited-subtype :
+    has-same-elements-inhabited-subtype P P
+  pr1 (refl-has-same-elements-inhabited-subtype x) = id
+  pr2 (refl-has-same-elements-inhabited-subtype x) = id
+
+  extensionality-inhabited-subtype :
+    (Q : inhabited-subtype l2 A) → (P ＝ Q) ≃
+    has-same-elements-inhabited-subtype P Q
+  extensionality-inhabited-subtype Q =
+    ( extensionality-subtype
+      ( subtype-inhabited-subtype P)
+      ( subtype-inhabited-subtype Q)) ∘e
+    ( extensionality-type-subtype' is-inhabited-subtype-Prop P Q)
+
+  has-same-elements-eq-inhabited-subtype :
+    (Q : inhabited-subtype l2 A) →
+    (P ＝ Q) → has-same-elements-inhabited-subtype P Q
+  has-same-elements-eq-inhabited-subtype Q =
+    map-equiv (extensionality-inhabited-subtype Q)
+
+  eq-has-same-elements-inhabited-subtype :
+    (Q : inhabited-subtype l2 A) →
+    has-same-elements-inhabited-subtype P Q → P ＝ Q
+  eq-has-same-elements-inhabited-subtype Q =
+    map-inv-equiv (extensionality-inhabited-subtype Q)
+
+  refl-extensionality-inhabited-subtype :
+    map-equiv (extensionality-inhabited-subtype P) refl ＝ (λ x → pair id id)
+  refl-extensionality-inhabited-subtype = refl
 ```
