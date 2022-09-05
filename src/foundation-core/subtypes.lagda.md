@@ -10,15 +10,17 @@ module foundation-core.subtypes where
 open import foundation-core.1-types using (is-1-type)
 open import foundation-core.contractible-types using
   ( is-contr; is-contr-equiv; is-contr-total-path)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
+open import foundation-core.embeddings using
+  ( is-emb; _↪_; map-emb; is-emb-map-emb)
 open import foundation-core.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; id-equiv; map-inv-equiv; map-equiv;
     isretr-map-inv-is-equiv)
 open import foundation-core.fibers-of-maps using (equiv-fib-pr1)
 open import foundation-core.functions using (_∘_)
 open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-Σ; map-Σ; is-equiv-map-Σ)
+  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-Σ; map-Σ; is-equiv-map-Σ;
+    equiv-tot)
 open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation-core.identity-types using (_＝_; refl; ap; tr)
@@ -132,6 +134,25 @@ module _
     (s ＝ t) ≃ (inclusion-subtype B s ＝ inclusion-subtype B t)
   pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
+```
+
+### Restriction of an embedding to an embedding into a subtype
+
+```
+module _
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  where
+
+  emb-into-subtype : {l3 : Level} {X : UU l3}
+                   → (f : X ↪ A)
+                   → ((x : X) → is-in-subtype B (map-emb f x))
+                   → X ↪ type-subtype B
+  pr1 (emb-into-subtype f p) x = (map-emb f x , p x)
+  pr2 (emb-into-subtype f p) =
+    is-emb-is-prop-map
+      ( λ (a , b) → is-prop-equiv
+        ( equiv-tot (λ x → extensionality-type-subtype B (map-emb f x , p x) (a , b)))
+        ( is-prop-map-is-emb (is-emb-map-emb f) a))
 ```
 
 ### If the projection map of a type family is an embedding, then the type family is a subtype
