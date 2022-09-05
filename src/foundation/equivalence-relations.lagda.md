@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -87,57 +88,32 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  is-equivalence-class-inhabited-subtype-Eq-Rel : subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
-  is-equivalence-class-inhabited-subtype-Eq-Rel Q =
-    is-equivalence-class-Prop R (subtype-inhabited-subtype Q)
-
-  abstract
-    is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel :
-      is-partition is-equivalence-class-inhabited-subtype-Eq-Rel
-    pr1 (pr1 (pr1 (is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x))) =
-      prop-Eq-Rel R x
-    pr2 (pr1 (pr1 (is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x))) =
-      unit-trunc-Prop (pair x (refl-Eq-Rel R))
-    pr1 (pr2 (pr1 (is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x))) =
-      unit-trunc-Prop
-        ( pair x (refl-has-same-elements-subtype (prop-Eq-Rel R x)))
-    pr2 (pr2 (pr1 (is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x))) =
-      refl-Eq-Rel R
-    pr2 (is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x) Q =
-      eq-type-subtype
-        ( λ U →
-          prod-Prop
-            ( is-equivalence-class-inhabited-subtype-Eq-Rel U)
-            ( subtype-inhabited-subtype U x))
-        ( eq-type-subtype
-          ( λ U → trunc-Prop (type-subtype U))
-          ( eq-has-same-elements-subtype
-            ( prop-Eq-Rel R x)
-            ( subtype-inhabited-subtype (pr1 Q))
-            ( λ y →
-              pair
-                ( λ r →
-                  apply-universal-property-trunc-Prop
-                    ( pr1 (pr2 Q))
-                    ( subtype-inhabited-subtype (pr1 Q) y)
-                    ( λ { (z , H) →
-                          backward-implication
-                            ( H y)
-                            ( trans-Eq-Rel R
-                              ( forward-implication (H x) (pr2 (pr2 Q))) r)}))
-                ( λ q →
-                  apply-universal-property-trunc-Prop
-                    ( pr1 (pr2 Q))
-                    ( prop-Eq-Rel R x y)
-                    ( λ { (z , H) →
-                          trans-Eq-Rel R
-                            ( symm-Eq-Rel R
-                              ( forward-implication (H x) (pr2 (pr2 Q))))
-                            ( forward-implication (H y) q)})))))
+  is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel :
+    is-partition (is-equivalence-class-inhabited-subtype-Eq-Rel R)
+  is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x =
+    is-contr-equiv
+      ( Σ ( Σ ( equivalence-class R)
+              ( λ C → is-in-equivalence-class R C x))
+          ( λ t → is-inhabited-subtype (subtype-equivalence-class R (pr1 t))))
+      ( ( equiv-Σ
+          ( λ t → is-inhabited-subtype (subtype-equivalence-class R (pr1 t)))
+          ( inv-assoc-Σ
+            ( subtype l2 A)
+            ( is-equivalence-class R)
+            ( λ C → is-in-equivalence-class R C x))
+          ( λ t → id-equiv)) ∘e
+        ( equiv-right-swap-Σ))
+      ( is-contr-Σ
+        ( is-contr-total-is-in-equivalence-class R x)
+        ( center-total-is-in-equivalence-class R x)
+        ( is-proof-irrelevant-is-prop
+          ( is-prop-type-trunc-Prop)
+          ( is-inhabited-subtype-equivalence-class R (class R x))))
 
   partition-Eq-Rel : partition l2 (l1 ⊔ l2) A
-  pr1 partition-Eq-Rel = is-equivalence-class-inhabited-subtype-Eq-Rel
-  pr2 partition-Eq-Rel = is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel
+  pr1 partition-Eq-Rel = is-equivalence-class-inhabited-subtype-Eq-Rel R
+  pr2 partition-Eq-Rel =
+    is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel
 ```
 
 #### The equivalence relation obtained from a partition
@@ -225,3 +201,41 @@ module _
   pr1 (pr2 (pr2 eq-rel-partition)) = symm-sim-partition
   pr2 (pr2 (pr2 eq-rel-partition)) = trans-sim-partition
 ```
+
+### The equivalence relation obtained from the partition induced by an equivalence relation `R` is `R` itself
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  relates-same-elements-eq-rel-partition-Eq-Rel :
+    relates-same-elements-Eq-Rel (eq-rel-partition (partition-Eq-Rel R)) R
+  pr1
+    ( relates-same-elements-eq-rel-partition-Eq-Rel x y)
+    ( ((C , I) , H) , p , q) =
+    apply-universal-property-trunc-Prop
+      ( H)
+      ( prop-Eq-Rel R x y)
+      ( λ (z , K) →
+        trans-Eq-Rel R
+          ( symm-Eq-Rel R (forward-implication (K x) p))
+          ( forward-implication (K y) q))
+  pr1 (pr1 (pr2 (relates-same-elements-eq-rel-partition-Eq-Rel x y) r)) =
+    inhabited-subtype-Eq-Rel R x
+  pr2 (pr1 (pr2 (relates-same-elements-eq-rel-partition-Eq-Rel x y) r)) =
+    unit-trunc-Prop
+      ( x , refl-has-same-elements-equivalence-class R (class R x))
+  pr1 (pr2 (pr2 (relates-same-elements-eq-rel-partition-Eq-Rel x y) r)) =
+    refl-Eq-Rel R
+  pr2 (pr2 (pr2 (relates-same-elements-eq-rel-partition-Eq-Rel x y) r)) = r
+
+{-
+issec-eq-rel-partition-Eq-Rel :
+  {l1 l2 : Level} {A : UU (l1 ⊔ lsuc l2)} (R : Eq-Rel ? A) →
+  eq-rel-partition (partition-Eq-Rel R) ＝ R
+issec-eq-rel-partition-Eq-Rel R = ?
+-}
+```
+
+

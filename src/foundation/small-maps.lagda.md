@@ -39,7 +39,7 @@ abstract
     (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-small l A → is-small l B → (b : B) → is-small l (fib f b)
   is-small-fib l f H K b =
-    is-small-Σ l H (λ a → is-locally-small-is-small l K (f a) b)
+    is-small-Σ H (λ a → is-locally-small-is-small l K (f a) b)
 ```
 
 ### Being a small map is a property

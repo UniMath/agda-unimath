@@ -12,12 +12,11 @@ open import foundation.embeddings using (id-emb)
 open import foundation.homotopies using (refl-htpy)
 open import foundation.images using (im)
 open import foundation.locally-small-types using (is-locally-small)
-open import foundation.small-types using (is-small; is-small-equiv')
 open import foundation.surjective-maps using (is-surjective)
-open import foundation.uniqueness-image using (equiv-equiv-slice-uniqueness-im)
-open import foundation.universal-property-image using
-  ( is-image-is-surjective)
 open import foundation.universe-levels using (Level; UUω; UU)
+
+open import foundation-core.small-types using
+  ( is-small; is-small-equiv'; is-small')
 ```
 
 ## Idea
@@ -31,22 +30,11 @@ Replacement : (l : Level) → UUω
 Replacement l =
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   is-small l A → is-locally-small l B → is-small l (im f)
-```
 
-## Properties
+postulate replacement : {l : Level} → Replacement l
 
-### If `f` is a surjective map from a small type into a locally small type, then Replacement implies that the codomain is small.
-
-```agda
-is-small-codomain-by-replacement :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  Replacement l3 → is-surjective f → is-small l3 A → is-locally-small l3 B →
-  is-small l3 B
-is-small-codomain-by-replacement {f = f} R H K L =
-  is-small-equiv' _
-    ( im f)
-    ( equiv-equiv-slice-uniqueness-im f id-emb
-      ( pair f refl-htpy)
-      ( is-image-is-surjective f id-emb (pair f refl-htpy) H))
-    ( R f K L)
+replacement-UU :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-locally-small l1 B → is-small l1 (im f)
+replacement-UU {l1} {l2} {A} f = replacement f is-small'
 ```
