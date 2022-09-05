@@ -74,7 +74,7 @@ is-small-comprehension-𝕍 :
   is-small-𝕍 l (comprehension-𝕍 X P)
 is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
   pair
-    ( is-small-Σ l (pair X e) K)
+    ( is-small-Σ (pair X e) K)
     ( λ t → H (pr1 t))
 ```
 
@@ -85,11 +85,11 @@ is-small-eq-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
   is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ＝ Y)
 is-small-eq-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (pair (pair Y f) K) =
-  is-small-equiv l
+  is-small-equiv
     ( Eq-𝕎 (tree-𝕎 A α) (tree-𝕎 B β))
     ( equiv-Eq-𝕎-eq (tree-𝕎 A α) (tree-𝕎 B β))
-    ( is-small-Σ l
-      ( is-small-equiv l
+    ( is-small-Σ
+      ( is-small-equiv
         ( A ≃ B)
         ( equiv-univalence)
         ( pair
@@ -99,10 +99,10 @@ is-small-eq-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (p
   where
   σ : (x : A ＝ B) → is-small l ((z : A) → Eq-𝕎 (α z) (β (tr id x z)))
   σ refl =
-    is-small-Π l
+    is-small-Π
       ( pair X e)
       ( λ x →
-        is-small-equiv l
+        is-small-equiv
           ( α x ＝ β x)
           ( inv-equiv (equiv-Eq-𝕎-eq (α x) (β x)))
           ( is-small-eq-𝕍 l (H x) (K x)))
@@ -115,7 +115,7 @@ is-small-∈-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
   is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ∈-𝕍 Y)
 is-small-∈-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} H (pair (pair Y f) K) =
-  is-small-Σ l
+  is-small-Σ
     ( pair Y f)
     ( λ b → is-small-eq-𝕍 l (K b) H)
 
@@ -123,7 +123,7 @@ is-small-∉-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
   is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ∉-𝕍 Y)
 is-small-∉-𝕍 l {l1} {X} {Y} H K =
-  is-small-Π l
+  is-small-Π
     ( is-small-∈-𝕍 l {l1} {X} {Y} H K)
     ( λ x → pair (raise-empty l) (equiv-raise-empty l))
 ```

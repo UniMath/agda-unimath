@@ -162,6 +162,24 @@ abstract
     (A → type-Prop P) → type-Prop P
   apply-universal-property-trunc-Prop t P f =
     map-universal-property-trunc-Prop P f t
+
+abstract
+  apply-twice-universal-property-trunc-Prop :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (u : type-trunc-Prop A)
+    (v : type-trunc-Prop B) (P : UU-Prop l3) →
+    (A → B → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop u v P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-universal-property-trunc-Prop v P (f x))
+
+abstract
+  apply-three-times-universal-property-trunc-Prop :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+    (u : type-trunc-Prop A) (v : type-trunc-Prop B) (w : type-trunc-Prop C) →
+    (P : UU-Prop l4) → (A → B → C → type-Prop P) → type-Prop P
+  apply-three-times-universal-property-trunc-Prop u v w P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-twice-universal-property-trunc-Prop v w P (f x))
 ```
 
 ### The propositional truncation of a type is `k+1`-truncated

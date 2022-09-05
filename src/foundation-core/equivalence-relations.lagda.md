@@ -12,7 +12,9 @@ open import foundation.binary-relations using
     is-transitive-Rel-Prop; type-Rel-Prop; is-prop-type-Rel-Prop;
     is-prop-is-reflexive-Rel-Prop; is-prop-is-symmetric-Rel-Prop;
     is-prop-is-transitive-Rel-Prop)
+open import foundation.inhabited-subtypes using (inhabited-subtype)
 open import foundation.logical-equivalences using (_↔_; equiv-iff')
+open import foundation.propositional-truncations 
 
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -87,6 +89,11 @@ trans-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) →
   is-transitive-Rel-Prop (prop-Eq-Rel R)
 trans-Eq-Rel R = pr2 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
+
+inhabited-subtype-Eq-Rel :
+  {l1 l2 : Level} {A : UU l1} → Eq-Rel l2 A → A → inhabited-subtype l2 A
+pr1 (inhabited-subtype-Eq-Rel R x) = prop-Eq-Rel R x
+pr2 (inhabited-subtype-Eq-Rel R x) = unit-trunc-Prop (pair x (refl-Eq-Rel R))
 ```
 
 ## Properties

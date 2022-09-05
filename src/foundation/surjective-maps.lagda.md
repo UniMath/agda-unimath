@@ -18,7 +18,7 @@ open import foundation.embeddings using
   ( _↪_; map-emb; is-emb; emb-Σ; id-emb; equiv-ap-emb)
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; is-equiv-comp'; _≃_; map-equiv; _∘e_; inv-equiv;
-    map-inv-equiv; id-equiv)
+    map-inv-equiv; id-equiv; is-equiv-map-equiv)
 open import foundation.fibers-of-maps using
   ( fib; is-equiv-map-reduce-Π-fib; reduce-Π-fib)
 open import foundation.functions using (_∘_; id; precomp-Π)
@@ -234,11 +234,15 @@ abstract
 ### Any equivalence is surjective
 
 ```agda
-abstract
-  is-surjective-is-equiv :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-equiv f → is-surjective f
-  is-surjective-is-equiv H = is-surjective-has-section (pr1 H)
+is-surjective-is-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-equiv f → is-surjective f
+is-surjective-is-equiv H = is-surjective-has-section (pr1 H)
+
+is-surjective-map-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+  is-surjective (map-equiv e)
+is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
 ```
 
 ### The dependent universal property of surjective maps
@@ -383,6 +387,26 @@ module _
       {h : A → B} → is-surjective g → is-surjective h → is-surjective (g ∘ h)
     is-surjective-comp' {h} =
       is-surjective-comp (g ∘ h) g h refl-htpy
+```
+
+### The composite of a surjective map with an equivalence is surjective
+
+```agda
+is-surjective-comp-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} 
+  (e : B ≃ C) → {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
+is-surjective-comp-equiv e =
+  is-surjective-comp' (is-surjective-map-equiv e)
+```
+
+### The precomposite of a surjective map with an equivalence is surjective
+
+```agda
+is-surjective-precomp-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : B → C} →
+  is-surjective f → (e : A ≃ B) → is-surjective (f ∘ map-equiv e)
+is-surjective-precomp-equiv H e =
+  is-surjective-comp' H (is-surjective-map-equiv e)
 ```
 
 ### If a composite is surjective, then so is its left factor
