@@ -234,8 +234,6 @@ pr2 (precomp-equiv-2-Element-Subtype e (pair P H)) =
         ( P ∘ (map-inv-equiv e))
         ( λ x →
           iff-equiv
-            ( P x)
-            ( P (map-inv-equiv e (map-equiv e x)))
             ( tr
               ( λ g → (type-Prop (P x)) ≃ (type-Prop (P (map-equiv g x))))
               ( inv (left-inverse-law-equiv e))

@@ -866,10 +866,6 @@ module _
           ( pair x
             ( λ y →
               iff-equiv
-                ( T1 y)
-                ( prop-Eq-Rel
-                  ( same-orbits-permutation-count
-                    ( composition-transposition-a-b g)) x y)
                 ( ( conserves-other-orbits-transposition g x y
                     ( nq ∘ backward-implication (Q a))
                     ( nr ∘ backward-implication (Q b))) ∘e
