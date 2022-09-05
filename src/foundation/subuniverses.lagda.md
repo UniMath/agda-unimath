@@ -56,19 +56,19 @@ module _
   {l1 l2 : Level} (P : subuniverse l1 l2)
   where
 
-  total-subuniverse : UU ((lsuc l1) ⊔ l2)
-  total-subuniverse = type-subtype P
+  type-subuniverse : UU ((lsuc l1) ⊔ l2)
+  type-subuniverse = type-subtype P
 
   is-in-subuniverse : UU l1 → UU l2
   is-in-subuniverse = is-in-subtype P
 
-  inclusion-subuniverse : total-subuniverse → UU l1
+  inclusion-subuniverse : type-subuniverse → UU l1
   inclusion-subuniverse = inclusion-subtype P
 
   is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
   is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
 
-  emb-inclusion-subuniverse : total-subuniverse ↪ UU l1
+  emb-inclusion-subuniverse : type-subuniverse ↪ UU l1
   emb-inclusion-subuniverse = emb-subtype P
 ```
 
@@ -103,17 +103,17 @@ module _
   {l1 l2 : Level} (P : subuniverse l1 l2)
   where
   
-  equiv-subuniverse : (X Y : total-subuniverse P) → UU l1
+  equiv-subuniverse : (X Y : type-subuniverse P) → UU l1
   equiv-subuniverse X Y = (pr1 X) ≃ (pr1 Y)
 
   equiv-eq-subuniverse :
-    (s t : total-subuniverse P) → s ＝ t → equiv-subuniverse s t
+    (s t : type-subuniverse P) → s ＝ t → equiv-subuniverse s t
   equiv-eq-subuniverse (pair X p) .(pair X p) refl = id-equiv
 
   abstract
     is-contr-total-equiv-subuniverse :
-      (s : total-subuniverse P) →
-      is-contr (Σ (total-subuniverse P) (λ t → equiv-subuniverse s t))
+      (s : type-subuniverse P) →
+      is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse s t))
     is-contr-total-equiv-subuniverse (pair X p) =
       is-contr-total-Eq-subtype
         ( is-contr-total-equiv X)
@@ -124,19 +124,19 @@ module _
 
   abstract
     is-equiv-equiv-eq-subuniverse :
-      (s t : total-subuniverse P) → is-equiv (equiv-eq-subuniverse s t)
+      (s t : type-subuniverse P) → is-equiv (equiv-eq-subuniverse s t)
     is-equiv-equiv-eq-subuniverse (pair X p) =
       fundamental-theorem-id
         ( is-contr-total-equiv-subuniverse (pair X p))
         ( equiv-eq-subuniverse (pair X p))
 
   extensionality-subuniverse :
-    (s t : total-subuniverse P) → (s ＝ t) ≃ equiv-subuniverse s t
+    (s t : type-subuniverse P) → (s ＝ t) ≃ equiv-subuniverse s t
   pr1 (extensionality-subuniverse s t) = equiv-eq-subuniverse s t
   pr2 (extensionality-subuniverse s t) = is-equiv-equiv-eq-subuniverse s t
 
   eq-equiv-subuniverse :
-    {s t : total-subuniverse P} → equiv-subuniverse s t → s ＝ t
+    {s t : type-subuniverse P} → equiv-subuniverse s t → s ＝ t
   eq-equiv-subuniverse {s} {t} =
     map-inv-is-equiv (is-equiv-equiv-eq-subuniverse s t)
 ```
@@ -147,7 +147,7 @@ module _
 fam-subuniverse :
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) (X : UU l3) →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-fam-subuniverse P X = X → total-subuniverse P
+fam-subuniverse P X = X → type-subuniverse P
 
 module _
   {l1 l2 l3 : Level} (P : subuniverse l1 l2) {X : UU l3}

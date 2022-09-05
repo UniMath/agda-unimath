@@ -98,7 +98,7 @@ module _
     type-Prop P ≃ type-Prop Q
   equiv-iff f g = equiv-iff' (pair f g)
 
-  iff-equiv : (type-Prop P ≃ type-Prop Q) → (P ⇔ Q)
-  pr1 (iff-equiv e) = map-equiv e
-  pr2 (iff-equiv e) = map-inv-equiv e
+iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
+pr1 (iff-equiv e) = map-equiv e
+pr2 (iff-equiv e) = map-inv-equiv e
 ```

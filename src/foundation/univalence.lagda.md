@@ -3,8 +3,6 @@ title: The univalence axiom
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.univalence where
 
 open import foundation-core.univalence public
@@ -73,6 +71,8 @@ eq-equiv-fam :
   {l1 l2 : Level} {A : UU l1} {B C : A → UU l2} → equiv-fam B C → B ＝ C
 eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```
+
+## Properties
 
 ```agda
 comp-equiv-eq : {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
