@@ -8,10 +8,12 @@ title: Monomorphisms
 module foundation.monomorphisms where
 
 open import foundation.embeddings using (is-emb-Prop; is-emb)
-open import foundation.functions using (postcomp)
+open import foundation.functions using (postcomp; _∘_)
 open import foundation.functoriality-function-types using
   ( is-trunc-map-postcomp-is-trunc-map;
     is-trunc-map-is-trunc-map-postcomp)
+open import foundation.identity-types using (_＝_)
+open import foundation.injective-maps using (is-injective-is-emb)
 open import foundation.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.propositions using
@@ -41,6 +43,21 @@ module _ {l1 l2 : Level} (l3 : Level)
 ```
 
 ## Properties
+
+If `f : A → B` is a monomorphism then for any `g h : X → A` such that `f ∘ g = f ∘ h`, it is the case that `g = h`.
+
+```agda
+module _ {l1 l2 : Level} (l3 : Level)
+  {A : UU l1} {B : UU l2} (f : A → B) where
+
+  is-injective-postcomp-is-mono : is-mono l3 f
+                                → {X : UU l3}
+                                → (g h : X → A)
+                                → (f ∘ g) ＝ (f ∘ h)
+                                → g ＝ h
+  is-injective-postcomp-is-mono p {X} g h = is-injective-is-emb (p X)
+```
+
 A function is a monomorphism if and only if it is an embedding.
 
 ```agda
