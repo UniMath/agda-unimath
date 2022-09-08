@@ -74,7 +74,7 @@ module _
 
   equiv-symm-congruence-Group :
     (x y : type-Group G) → sim-congruence-Group x y ≃ sim-congruence-Group y x
-  equiv-symm-congruence-Group = equiv-symm-Eq-Rel eq-rel-congruence-Group
+  equiv-symm-congruence-Group x y = equiv-symm-Eq-Rel eq-rel-congruence-Group
 
   trans-congruence-Group : is-transitive-Rel-Prop prop-congruence-Group
   trans-congruence-Group = trans-Eq-Rel eq-rel-congruence-Group

@@ -20,13 +20,12 @@ open import foundation.identity-types using (_＝_; refl; equiv-concat')
 open import foundation.locally-small-types using (is-locally-small-UU)
 open import foundation.multisets using (𝕍; comprehension-𝕍; _∉-𝕍_; _∈-𝕍_)
 open import foundation.negation using (¬; no-fixed-points-neg)
-open import foundation.replacement using
-  ( Replacement; is-small-codomain-by-replacement)
 open import foundation.small-multisets using
   ( is-small-𝕍; is-small-multiset-𝕍; is-small-comprehension-𝕍;
     is-small-∉-𝕍; resize-𝕍; is-small-resize-𝕍; equiv-elementhood-resize-𝕍;
     resize-resize-𝕍; eq-resize-𝕍)
-open import foundation.small-types using (is-small; is-small-lsuc)
+open import foundation.small-types using
+  ( is-small; is-small-lsuc; is-small-is-surjective; is-small')
 open import foundation.small-universes using (is-small-universe)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.type-arithmetic-cartesian-product-types using
@@ -154,10 +153,10 @@ paradox-Russell {l} H =
 
 ```agda
 no-surjection-onto-universe :
-  {l : Level} → Replacement l → {A : UU l} (f : A → UU l) → ¬ (is-surjective f)
-no-surjection-onto-universe R {A} f H =
+  {l : Level} {A : UU l} (f : A → UU l) → ¬ (is-surjective f)
+no-surjection-onto-universe f H =
   paradox-Russell
-    ( is-small-codomain-by-replacement R H
-      ( pair A id-equiv)
+    ( is-small-is-surjective H
+      ( is-small')
       ( is-locally-small-UU))
 ```

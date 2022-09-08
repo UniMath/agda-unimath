@@ -57,7 +57,7 @@ module _
 
   equiv-symm-congruence-Monoid :
     (x y : type-Monoid M) → sim-congruence-Monoid x y ≃ sim-congruence-Monoid y x
-  equiv-symm-congruence-Monoid = equiv-symm-Eq-Rel eq-rel-congruence-Monoid
+  equiv-symm-congruence-Monoid x y = equiv-symm-Eq-Rel eq-rel-congruence-Monoid
 
   trans-congruence-Monoid : is-transitive-Rel-Prop prop-congruence-Monoid
   trans-congruence-Monoid = trans-Eq-Rel eq-rel-congruence-Monoid
