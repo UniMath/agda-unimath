@@ -481,6 +481,11 @@ leq-le-succ-ℕ :
 leq-le-succ-ℕ {zero-ℕ} {y} H = star
 leq-le-succ-ℕ {succ-ℕ x} {succ-ℕ y} H = leq-le-succ-ℕ {x} {y} H
 
+leq-succ-le-ℕ : 
+  (x y : ℕ) → le-ℕ x y → leq-ℕ (succ-ℕ x) y
+leq-succ-le-ℕ zero-ℕ (succ-ℕ y) H = star
+leq-succ-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-succ-le-ℕ x y H
+
 concatenate-leq-le-ℕ :
   {x y z : ℕ} → x ≤-ℕ y → le-ℕ y z → le-ℕ x z
 concatenate-leq-le-ℕ {zero-ℕ} {zero-ℕ} {succ-ℕ z} H K = star
