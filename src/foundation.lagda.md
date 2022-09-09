@@ -167,6 +167,7 @@ open import foundation.retractions public
 open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.set-presented-types public
+open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.sigma-decompositions public

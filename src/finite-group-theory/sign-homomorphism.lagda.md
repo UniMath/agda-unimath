@@ -36,8 +36,8 @@ open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using (pair-eq-Σ; eq-pair-Σ)
 open import foundation.equivalence-classes using
   ( equivalence-class; equivalence-class-Set; class;
-    is-in-subtype-equivalence-class; is-decidable-is-in-subtype-equivalence-class-is-decidable;
-    eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class)
+    is-in-equivalence-class;
+    eq-effective-quotient'; is-prop-is-in-equivalence-class)
 open import foundation.equivalences using
   ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
     right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;

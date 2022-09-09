@@ -31,7 +31,7 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
 open import foundation.subuniverses using
-  ( total-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
+  ( type-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
     eq-equiv-subuniverse)
 ```
 
@@ -49,7 +49,7 @@ pr2 (is-contr-Prop A) = is-property-is-contr
 
 ```agda
 UU-Contr : (l : Level) → UU (lsuc l)
-UU-Contr l = total-subuniverse is-contr-Prop
+UU-Contr l = type-subuniverse is-contr-Prop
 
 type-UU-Contr : {l : Level} → UU-Contr l → UU l
 type-UU-Contr A = pr1 A
