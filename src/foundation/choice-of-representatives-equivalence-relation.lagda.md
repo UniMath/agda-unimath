@@ -16,8 +16,6 @@ open import foundation.equivalence-classes using
   ( equivalence-class; class;
     apply-effectiveness-class';
     is-effective-class)
-open import foundation.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel)
 open import foundation.equivalences using (_∘e_; is-equiv; _≃_)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
@@ -32,6 +30,9 @@ open import foundation.surjective-maps using
   ( is-surjective; is-equiv-is-emb-is-surjective)
 open import foundation.type-arithmetic-dependent-pair-types using (assoc-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
+
+open import foundation-core.equivalence-relations using
+  ( Eq-Rel; sim-Eq-Rel; symm-Eq-Rel; prop-Eq-Rel)
 ```
 
 ## Idea

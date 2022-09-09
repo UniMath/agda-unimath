@@ -24,8 +24,6 @@ open import foundation.equivalence-classes using
     is-effective-class; equivalence-class-Set;
     quotient-reflecting-map-equivalence-class;
     is-surjective-and-effective-class)
-open import foundation.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse; is-equiv-comp;
     is-equiv-precomp-is-equiv; is-equiv-left-factor; map-equiv;
@@ -68,13 +66,16 @@ open import foundation.sets using
     is-set-function-type)
 open import foundation.small-types using (is-small; is-small-Prop)
 open import foundation.subtypes using
-  ( eq-subtype; equiv-ap-inclusion-subtype)
+  ( eq-type-subtype; equiv-ap-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; dependent-universal-property-surj-is-surjective)
 open import foundation.univalence using (equiv-eq)
 open import foundation.universal-property-image using
   ( is-image; is-surjective-is-image; is-image-is-surjective)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+
+open import foundation-core.equivalence-relations using
+  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
 ```
 
 ## Idea
@@ -454,7 +455,7 @@ module _
       contraction-total-P :
         (u : Σ (type-Set B) (λ b → type-Prop (P b))) → center-total-P ＝ u
       contraction-total-P (pair b p) =
-        eq-subtype P
+        eq-type-subtype P
           ( apply-universal-property-trunc-Prop
             ( is-surjective-is-set-quotient R B q H Q b)
             ( Id-Prop B (q x) b)
@@ -507,7 +508,7 @@ module _
       all-elements-equal-total-P :
         (b : type-Set B) → all-elements-equal (Σ (type-Set X) (P b))
       all-elements-equal-total-P b x y =
-        eq-subtype
+        eq-type-subtype
           ( P-Prop b)
           ( apply-universal-property-trunc-Prop
             ( pr2 x)
@@ -567,7 +568,7 @@ module _
               ( pr1 f)))
           ( pair
             ( λ b → pr1 (α E X f b))
-            ( eq-subtype
+            ( eq-type-subtype
               ( reflects-Eq-Rel-Prop R X)
               ( eq-htpy (λ a → ap pr1 (β E X f a))))))
 

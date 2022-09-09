@@ -15,7 +15,7 @@ open import foundation.embeddings using (_↪_)
 open import foundation.equivalences using
   ( map-equiv; is-equiv; _≃_; map-inv-is-equiv; isretr-map-inv-is-equiv;
     id-equiv; is-equiv-map-equiv; issec-map-inv-is-equiv)
-open import foundation.existential-quantification using (∃)
+open import foundation.existential-quantification using (∃-Prop)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-function-types using (equiv-postcomp)
@@ -43,7 +43,7 @@ open import univalent-combinatorics.2-element-types using
 open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin; Fin-UU-Fin; equiv-UU-Fin; id-equiv-UU-Fin;
+  ( UU-Fin; Fin-UU-Fin'; equiv-UU-Fin; id-equiv-UU-Fin;
     is-contr-total-equiv-UU-Fin; type-UU-Fin)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; equiv-succ-Fin; is-set-Fin)
@@ -102,10 +102,20 @@ module _
 ### The predicate of being in an unodered pair
 
 ```agda
+is-in-unordered-pair-Prop :
+  {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU-Prop l
+is-in-unordered-pair-Prop p a =
+  ∃-Prop (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
+
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l
-is-in-unordered-pair p a =
-  ∃ (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
+is-in-unordered-pair p a = type-Prop (is-in-unordered-pair-Prop p a)
+
+is-prop-is-in-unordered-pair :
+  {l : Level} {A : UU l} (p : unordered-pair A) (a : A) →
+  is-prop (is-in-unordered-pair p a)
+is-prop-is-in-unordered-pair p a =
+  is-prop-type-Prop (is-in-unordered-pair-Prop p a)
 ```
 
 ### The condition of being a self-pairing
@@ -132,7 +142,7 @@ module _
   element-standard-unordered-pair x y (inr star) = y
 
   standard-unordered-pair : A → A → unordered-pair A
-  pr1 (standard-unordered-pair x y) = Fin-UU-Fin 2
+  pr1 (standard-unordered-pair x y) = Fin-UU-Fin' 2
   pr2 (standard-unordered-pair x y) = element-standard-unordered-pair x y
 ```
 
@@ -151,7 +161,7 @@ module _
       ( λ e → (element-unordered-pair p) ~ (element-unordered-pair q ∘ map-equiv e))
 
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
-  pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin 2 X
+  pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin {k = 2} X
   pr2 (refl-Eq-unordered-pair (pair X p)) = refl-htpy
 
   Eq-eq-unordered-pair :
@@ -164,8 +174,8 @@ module _
   is-contr-total-Eq-unordered-pair (pair X p) =
     is-contr-total-Eq-structure
       ( λ Y q e → p ~ (q ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin 2 X)
-      ( pair X (id-equiv-UU-Fin 2 X))
+      ( is-contr-total-equiv-UU-Fin {k = 2} X)
+      ( pair X (id-equiv-UU-Fin {k = 2} X))
       ( is-contr-total-htpy p)
 
   is-equiv-Eq-eq-unordered-pair :
@@ -341,5 +351,5 @@ id-equiv-standard-unordered-pair x y =
 
 unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-distinct-pair A = Σ (UU-Fin 2) (λ X → pr1 X ↪ A)
+unordered-distinct-pair A = Σ (UU-Fin lzero 2) (λ X → pr1 X ↪ A)
 ```

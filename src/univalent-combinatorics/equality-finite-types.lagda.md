@@ -28,8 +28,7 @@ open import univalent-combinatorics.equality-standard-finite-types using
   ( has-decidable-equality-Fin)
 open import univalent-combinatorics.finite-types using
   ( is-finite; has-cardinality; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin-Level; UU-Fin; type-UU-Fin-Level; type-UU-Fin;
-    has-cardinality-type-UU-Fin-Level; has-cardinality-type-UU-Fin)
+    UU-Fin; type-UU-Fin; has-cardinality-type-UU-Fin)
 open import univalent-combinatorics.standard-finite-types using (is-set-Fin)
 ```
 
@@ -74,7 +73,7 @@ abstract
     has-decidable-equality X → {x y : X} → is-finite (Id x y)
   is-finite-eq d {x} {y} = is-finite-count (count-eq d x y)
 
-Id-𝔽 : (X : 𝔽) (x y : type-𝔽 X) → 𝔽
+Id-𝔽 : {l : Level} → (X : 𝔽 l) (x y : type-𝔽 X) → 𝔽 l
 pr1 (Id-𝔽 X x y) = Id x y
 pr2 (Id-𝔽 X x y) =
   is-finite-eq (has-decidable-equality-is-finite (is-finite-type-𝔽 X))

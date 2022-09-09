@@ -14,16 +14,13 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.universe-levels using (Level)
 
 open import univalent-combinatorics.coproduct-types using
-  ( coprod-UU-Fin-Level)
+  ( coprod-UU-Fin)
 open import univalent-combinatorics.finite-types using
-  ( UU-Fin-Level; UU-Fin; unit-UU-Fin)
+  ( UU-Fin; unit-UU-Fin)
 ```
 
 ```agda
-add-free-point-UU-Fin-Level :
-  {l1 : Level} (k : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l1 (succ-ℕ k)
-add-free-point-UU-Fin-Level k X = coprod-UU-Fin-Level k 1 X unit-UU-Fin
-
-add-free-point-UU-Fin : (k : ℕ) → UU-Fin k → UU-Fin (succ-ℕ k)
-add-free-point-UU-Fin k X = add-free-point-UU-Fin-Level k X
+add-free-point-UU-Fin :
+  {l1 : Level} (k : ℕ) → UU-Fin l1 k → UU-Fin l1 (succ-ℕ k)
+add-free-point-UU-Fin k X = coprod-UU-Fin k 1 X unit-UU-Fin
 ```

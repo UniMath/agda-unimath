@@ -3,8 +3,6 @@ title: Finitely π-presented types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module univalent-combinatorics.presented-pi-finite-types where
 ```
 

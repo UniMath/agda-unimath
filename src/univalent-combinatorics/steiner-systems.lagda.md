@@ -28,7 +28,7 @@ A Steiner system of type `(t,k,n) : ℕ³` consists of an `n`-element type `X` e
 ```agda
 Steiner-System : ℕ → ℕ → ℕ → UU (lsuc lzero)
 Steiner-System t k n =
-  Σ ( UU-Fin n)
+  Σ ( UU-Fin lzero n)
     ( λ X →
       Σ ( decidable-subtype lzero
           ( Σ ( decidable-subtype lzero (type-UU-Fin n X))

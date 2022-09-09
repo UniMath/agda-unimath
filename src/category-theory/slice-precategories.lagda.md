@@ -15,7 +15,7 @@ open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.sets using
   ( UU-Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
 open import foundation.subtypes using
-  ( extensionality-type-subtype)
+  ( extensionality-type-subtype')
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -61,7 +61,7 @@ module _
     {A B : obj-slice-Precat} (f g : type-hom-slice-Precat A B) →
     (f ＝ g) ≃ Eq-hom-slice-Precat f g
   extensionality-hom-slice-Precat {A} {B} =
-    extensionality-type-subtype
+    extensionality-type-subtype'
       ( λ h →
         Id-Prop (hom-Precat C (pr1 A) X) (pr2 A) (comp-hom-Precat C (pr2 B) h))
 

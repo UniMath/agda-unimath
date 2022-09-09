@@ -1,4 +1,6 @@
-# The abstract quaternion group of order 8
+---
+title: The abstract quaternion group of order 8
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
@@ -923,13 +925,13 @@ count-Q8 = pair 8 equiv-count-Q8
 is-finite-Q8 : is-finite Q8
 is-finite-Q8 = unit-trunc-Prop count-Q8
 
-Q8-𝔽 : 𝔽
+Q8-𝔽 : 𝔽 lzero
 Q8-𝔽 = pair Q8 is-finite-Q8
 
 has-cardinality-eight-Q8 : has-cardinality 8 Q8
 has-cardinality-eight-Q8 = unit-trunc-Prop equiv-count-Q8
 
-Q8-UU-Fin-8 : UU-Fin 8
+Q8-UU-Fin-8 : UU-Fin lzero 8
 Q8-UU-Fin-8 = pair Q8 has-cardinality-eight-Q8
 
 has-finite-cardinality-Q8 : has-finite-cardinality Q8

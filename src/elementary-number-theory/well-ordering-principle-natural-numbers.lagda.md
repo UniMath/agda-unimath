@@ -32,7 +32,7 @@ open import foundation.propositional-truncations using
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
     type-Prop; prod-Prop; is-prop-type-Prop; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-subtype; type-subtype)
+open import foundation.subtypes using (eq-type-subtype; type-subtype)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; Level)
 ```
@@ -57,7 +57,7 @@ module _
       all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
     all-elements-equal-minimal-element-ℕ
       (pair x (pair p l)) (pair y (pair q k)) =
-      eq-subtype
+      eq-type-subtype
         ( λ n →
           prod-Prop
             ( pair _ (is-prop-type-Prop (P n)))

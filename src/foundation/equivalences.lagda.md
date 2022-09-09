@@ -58,7 +58,7 @@ open import foundation.identity-types using
     left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
     ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
 open import foundation.subtype-identity-principle using
-  ( extensionality-subtype)
+  ( extensionality-type-subtype)
 open import foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
 
@@ -339,7 +339,7 @@ module _
 
   extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
   extensionality-equiv f =
-    extensionality-subtype
+    extensionality-type-subtype
       ( is-equiv-Prop)
       ( pr2 f)
       ( refl-htpy {f = pr1 f})

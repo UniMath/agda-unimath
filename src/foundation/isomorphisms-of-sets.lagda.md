@@ -21,7 +21,7 @@ open import foundation.propositions using
 open import foundation.sets using
   ( UU-Set; type-hom-Set; type-Set; is-set-type-Set; Id-Prop; hom-Set;
     type-equiv-Set)
-open import foundation.subtypes using (eq-subtype; equiv-type-subtype)
+open import foundation.subtypes using (eq-type-subtype; equiv-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -53,7 +53,7 @@ module _
     ( is-proof-irrelevant-is-iso-Set f
       ( pair g (pair p q)))
       ( pair g' (pair p' q')) =
-    eq-subtype
+    eq-type-subtype
       ( λ h →
         prod-Prop
           ( Id-Prop (hom-Set B B) (f ∘ h) id)

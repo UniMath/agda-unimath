@@ -29,8 +29,9 @@ An equivalence of species from `F` to `G` is a pointwise equivalence.
 
 ```agda
 equiv-species :
-  {l1 l2 : Level} → species l1 → species l2 → UU (lsuc lzero ⊔ l1 ⊔ l2)
-equiv-species F G = (X : 𝔽) → F X ≃ G X
+  {l1 l2 l3 : Level} → species l1 l2 → species l1 l3 →
+  UU (lsuc l1 ⊔ l2 ⊔ l3)
+equiv-species {l1} F G = (X : 𝔽 l1) → F X ≃ G X
 ```
 
 ## Properties
@@ -39,7 +40,8 @@ equiv-species F G = (X : 𝔽) → F X ≃ G X
 
 ```agda
 extensionality-species :
-  {l : Level} → (F G : species l) → (Id F G) ≃ (equiv-species F G)  
+  {l1 l2 : Level} (F : species l1 l2) (G : species l1 l2) →
+  (Id F G) ≃ (equiv-species F G)  
 extensionality-species = extensionality-fam
 ```
  

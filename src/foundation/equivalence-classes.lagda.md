@@ -14,13 +14,10 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.effective-maps-equivalence-relations using
   ( is-effective; is-surjective-and-effective)
-open import foundation.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel;
-    equiv-symm-Eq-Rel)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-inv-is-equiv; _∘e_; map-equiv; map-inv-equiv)
-open import foundation.existential-quantification using (∃)
+open import foundation.existential-quantification using (∃; ∃-Prop)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)
@@ -40,12 +37,17 @@ open import foundation.reflecting-maps-equivalence-relations using
 open import foundation.sets using
   ( is-set; is-set-function-type; UU-Set; Id-Prop)
 open import foundation.slice using (hom-slice)
-open import foundation.subtypes using (eq-subtype; subtype)
+open import foundation.subtypes using
+  ( eq-type-subtype; subtype; has-same-elements-subtype)
 open import foundation.surjective-maps using
   ( is-surjective)
 open import foundation.universal-property-image using
   ( is-image; is-image-im)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+
+open import foundation-core.equivalence-relations using
+  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel;
+    equiv-symm-Eq-Rel)
 ```
 
 ## Idea
@@ -59,8 +61,12 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  is-equivalence-class : subtype l2 A → UU (l1 ⊔ lsuc l2)
-  is-equivalence-class P = ∃ A (λ x → (type-Prop ∘ P) ＝ sim-Eq-Rel R x)
+  is-equivalence-class-Prop : subtype l2 A → UU-Prop (l1 ⊔ l2)
+  is-equivalence-class-Prop P =
+    ∃-Prop A (λ x → has-same-elements-subtype P (prop-Eq-Rel R x))
+
+  is-equivalence-class : subtype l2 A → UU (l1 ⊔ l2)
+  is-equivalence-class P = type-Prop (is-equivalence-class-Prop P)
 
   equivalence-class : UU (l1 ⊔ lsuc l2)
   equivalence-class = im (prop-Eq-Rel R)
@@ -128,7 +134,7 @@ module _
           ( λ P → is-in-subtype-equivalence-class R P a)) →
       center-total-subtype-equivalence-class ＝ t
     contraction-total-subtype-equivalence-class (pair (pair P p) H) =
-      eq-subtype
+      eq-type-subtype
         ( λ Q → subtype-equivalence-class R Q a)
         ( apply-universal-property-trunc-Prop
           ( p)
@@ -140,7 +146,7 @@ module _
       where
       α : fib (pr1 R) P → class R a ＝ pair P p
       α (pair x refl) =
-        eq-subtype
+        eq-type-subtype
           ( λ z → trunc-Prop (fib (prop-Eq-Rel R) z))
           ( eq-htpy
             ( λ y →

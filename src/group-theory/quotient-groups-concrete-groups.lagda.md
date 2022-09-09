@@ -82,7 +82,7 @@ module _
     (u v : classifying-type-quotient-Concrete-Group) →
     (u ＝ v) ≃ equiv-transitive-action-Concrete-Group G (pr1 u) (pr1 v)
   extensionality-classifying-type-quotient-Concrete-Group u =
-    extensionality-subtype
+    extensionality-type-subtype
       ( λ (X : transitive-action-Concrete-Group l2 G) →
         mere-equiv-action-Concrete-Group-Prop G
           ( action-normal-subgroup-Concrete-Group G N)
@@ -104,12 +104,12 @@ module _
             ( pair u p))
           ( λ e →
             unit-trunc-Prop
-              ( eq-subtype
+              ( eq-type-subtype
                 ( λ X →
                   mere-equiv-action-Concrete-Group-Prop G
                     ( action-normal-subgroup-Concrete-Group G N)
                     ( action-transitive-action-Concrete-Group G X))
-                ( eq-subtype
+                ( eq-type-subtype
                   ( is-transitive-action-Concrete-Group-Prop G)
                   ( eq-equiv-action-Concrete-Group G
                     ( action-normal-subgroup-Concrete-Group G N)
@@ -119,7 +119,7 @@ module _
   is-1-type-classifying-type-quotient-Concrete-Group :
     is-1-type classifying-type-quotient-Concrete-Group
   is-1-type-classifying-type-quotient-Concrete-Group =
-    is-1-type-subtype
+    is-1-type-type-subtype
       ( λ X →
         mere-equiv-action-Concrete-Group-Prop G
           ( action-normal-subgroup-Concrete-Group G N)

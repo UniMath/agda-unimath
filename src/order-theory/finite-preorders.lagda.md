@@ -1,7 +1,7 @@
 # Finite preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module order-theory.finite-preorders where
 
@@ -77,11 +77,11 @@ module _
     (x y : element-Preorder X) → is-decidable (leq-Preorder X x y)
   is-decidable-leq-is-finite-Preorder H = pr2 H
 
-Finite-Preorder : (l : Level) → UU (lsuc l)
-Finite-Preorder l =
-  Σ ( 𝔽)
+Finite-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Finite-Preorder l1 l2 =
+  Σ ( 𝔽 l1)
     ( λ X →
-      Σ ( (x y : type-𝔽 X) → decidable-Prop l)
+      Σ ( (x y : type-𝔽 X) → decidable-Prop l2)
         ( λ R →
           ( (x : type-𝔽 X) → type-decidable-Prop (R x x)) ×
           ( (x y z : type-𝔽 X) →
@@ -89,7 +89,8 @@ Finite-Preorder l =
             type-decidable-Prop (R x z))))
 
 finite-preorder-is-finite-Preorder :
-  {l : Level} (X : Preorder lzero l) → is-finite-Preorder X → Finite-Preorder l
+  {l1 l2 : Level} (X : Preorder l1 l2) → is-finite-Preorder X →
+  Finite-Preorder l1 l2
 pr1 (pr1 (finite-preorder-is-finite-Preorder X H)) = element-Preorder X
 pr2 (pr1 (finite-preorder-is-finite-Preorder X H)) = pr1 H
 pr1 (pr1 (pr2 (finite-preorder-is-finite-Preorder X H)) x y) =
@@ -104,13 +105,13 @@ pr2 (pr2 (pr2 (finite-preorder-is-finite-Preorder X H))) =
   transitive-leq-Preorder X
 
 module _
-  {l : Level} (X : Finite-Preorder l)
+  {l1 l2 : Level} (X : Finite-Preorder l1 l2)
   where
 
-  element-Finite-Preorder-𝔽 : 𝔽
+  element-Finite-Preorder-𝔽 : 𝔽 l1
   element-Finite-Preorder-𝔽 = pr1 X
 
-  element-Finite-Preorder : UU lzero
+  element-Finite-Preorder : UU l1
   element-Finite-Preorder = type-𝔽 element-Finite-Preorder-𝔽
 
   is-finite-element-Finite-Preorder : is-finite element-Finite-Preorder
@@ -136,10 +137,10 @@ module _
     has-decidable-equality-is-finite is-finite-element-Finite-Preorder
 
   leq-finite-preorder-decidable-Prop :
-    (x y : element-Finite-Preorder) → decidable-Prop l
+    (x y : element-Finite-Preorder) → decidable-Prop l2
   leq-finite-preorder-decidable-Prop = pr1 (pr2 X)
 
-  leq-Finite-Preorder : (x y : element-Finite-Preorder) → UU l
+  leq-Finite-Preorder : (x y : element-Finite-Preorder) → UU l2
   leq-Finite-Preorder x y =
     type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
 
@@ -161,7 +162,7 @@ module _
     is-prop-type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
 
   leq-Finite-preorder-Prop :
-    (x y : element-Finite-Preorder) → UU-Prop l
+    (x y : element-Finite-Preorder) → UU-Prop l2
   pr1 (leq-Finite-preorder-Prop x y) = leq-Finite-Preorder x y
   pr2 (leq-Finite-preorder-Prop x y) = is-prop-leq-Finite-Preorder x y
 
@@ -174,7 +175,7 @@ module _
     leq-Finite-Preorder y z → leq-Finite-Preorder x y → leq-Finite-Preorder x z
   transitive-leq-Finite-Preorder = pr2 (pr2 (pr2 X))
 
-  preorder-Finite-Preorder : Preorder lzero l
+  preorder-Finite-Preorder : Preorder l1 l2
   pr1 preorder-Finite-Preorder = element-Finite-Preorder
   pr1 (pr2 preorder-Finite-Preorder) = leq-Finite-preorder-Prop
   pr1 (pr2 (pr2 preorder-Finite-Preorder)) = refl-leq-Finite-Preorder
@@ -191,11 +192,11 @@ module _
 ```agda
 
 module _
-  {l1 l2 : Level} (X : Finite-Preorder l1)
-  (S : element-Finite-Preorder X → decidable-Prop l2)
+  {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
+  (S : element-Finite-Preorder X → decidable-Prop l3)
   where
 
-  element-finite-sub-Preorder : UU l2
+  element-finite-sub-Preorder : UU (l1 ⊔ l3)
   element-finite-sub-Preorder =
     element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 
@@ -209,16 +210,16 @@ module _
     eq-element-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 
   leq-finite-sub-Preorder-decidable-Prop :
-    (x y : element-finite-sub-Preorder) → decidable-Prop l1
+    (x y : element-finite-sub-Preorder) → decidable-Prop l2
   leq-finite-sub-Preorder-decidable-Prop x y =
     leq-finite-preorder-decidable-Prop X (pr1 x) (pr1 y)
 
   leq-finite-sub-preorder-Prop :
-    (x y : element-finite-sub-Preorder) → UU-Prop l1
+    (x y : element-finite-sub-Preorder) → UU-Prop l2
   leq-finite-sub-preorder-Prop =
     leq-decidable-sub-preorder-Prop (preorder-Finite-Preorder X) S
 
-  leq-finite-sub-Preorder : (x y : element-finite-sub-Preorder) → UU l1
+  leq-finite-sub-Preorder : (x y : element-finite-sub-Preorder) → UU l2
   leq-finite-sub-Preorder =
     leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 
@@ -241,15 +242,15 @@ module _
     transitive-leq-decidable-sub-Preorder (preorder-Finite-Preorder X) S
 
 module _
-  {l : Level} (X : Finite-Preorder l)
-  (S : element-Finite-Preorder X → decidable-Prop lzero)
+  {l1 l2 l3 : Level} (X : Finite-Preorder l1 l2)
+  (S : element-Finite-Preorder X → decidable-Prop l3)
   where
 
-  element-finite-sub-Preorder-𝔽 : 𝔽
+  element-finite-sub-Preorder-𝔽 : 𝔽 (l1 ⊔ l3)
   pr1 element-finite-sub-Preorder-𝔽 = element-finite-sub-Preorder X S
   pr2 element-finite-sub-Preorder-𝔽 = is-finite-element-finite-sub-Preorder X S
   
-  finite-sub-Preorder : Finite-Preorder l
+  finite-sub-Preorder : Finite-Preorder (l1 ⊔ l3) l2
   pr1 finite-sub-Preorder = element-finite-sub-Preorder-𝔽
   pr1 (pr2 finite-sub-Preorder) = leq-finite-sub-Preorder-decidable-Prop X S
   pr1 (pr2 (pr2 finite-sub-Preorder)) = refl-leq-finite-sub-Preorder X S

@@ -29,7 +29,7 @@ open import foundation.unordered-pairs using
 
 open import univalent-combinatorics.2-element-types using
   ( decide-value-equiv-Fin-two-ℕ; equiv-ev-zero-htpy-equiv-Fin-two-ℕ)
-open import univalent-combinatorics.finite-types using (Fin-UU-Fin)
+open import univalent-combinatorics.finite-types using (Fin-UU-Fin')
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; one-Fin; equiv-succ-Fin)
 ```
@@ -128,13 +128,13 @@ module _
         is-weakly-constant-on-equivalences-is-commutative f H (Fin 2) p e e'
           ( map-equiv-coprod
             ( inv-equiv
-              ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin 2) e e'))
+              ( equiv-ev-zero-htpy-equiv-Fin-two-ℕ (Fin-UU-Fin' 2) e e'))
             ( inv-equiv (equiv-ev-zero-htpy-equiv-Fin-two-ℕ
-              ( Fin-UU-Fin 2)
+              ( Fin-UU-Fin' 2)
               ( e)
               ( e' ∘e equiv-succ-Fin 2)))
             ( decide-value-equiv-Fin-two-ℕ
-              ( Fin-UU-Fin 2)
+              ( Fin-UU-Fin' 2)
               ( e')
               ( map-equiv e (zero-Fin 1)))))
       ( id-equiv)

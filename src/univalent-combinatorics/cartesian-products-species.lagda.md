@@ -28,7 +28,8 @@ The cartesian product of two species `F` and `G` is their pointwise cartesian pr
 
 ```agda
 prod-species :
-  {l1 l2 : Level} (F : species l1) (G : species l2) (X : 𝔽) → UU (l1 ⊔ l2)
+  {l1 l2 l3 : Level} (F : species l1 l2) (G : species l1 l3) →
+  species l1 (l2 ⊔ l3)
 prod-species F G X = (F X) × (G X)
 ```
 
@@ -38,7 +39,8 @@ prod-species F G X = (F X) × (G X)
 
 ```agda 
 equiv-universal-property-exponents-species :
-  {l1 l2 l3 : Level} (F : species l1) (G : species l2) (H : species l3) →
+  {l1 l2 l3 l4 : Level}
+  (F : species l1 l2) (G : species l1 l3) (H : species l1 l4) →
   hom-species (prod-species F G) H ≃ hom-species F (function-species G H)
 equiv-universal-property-exponents-species F G H =
   equiv-map-Π (λ X → equiv-ev-pair)

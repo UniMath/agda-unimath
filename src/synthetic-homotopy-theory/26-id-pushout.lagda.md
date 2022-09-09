@@ -3,8 +3,6 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module synthetic-homotopy-theory.26-id-pushout where
 
 open import foundation.cartesian-product-types

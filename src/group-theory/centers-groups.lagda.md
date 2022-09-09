@@ -34,8 +34,8 @@ module _
 
   contains-unit-center-Group : contains-unit-subset-Group G subtype-center-Group
   contains-unit-center-Group h =
-    ( left-unit-law-Group G h) ∙
-    ( inv (right-unit-law-Group G h))
+    ( left-unit-law-mul-Group G h) ∙
+    ( inv (right-unit-law-mul-Group G h))
 
   is-closed-under-mul-center-Group :
     is-closed-under-mul-subset-Group G subtype-center-Group

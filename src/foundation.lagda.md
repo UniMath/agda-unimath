@@ -15,6 +15,7 @@ open import foundation.2-types public
 open import foundation.algebras-polynomial-endofunctors public
 open import foundation.apartness-relations public
 open import foundation.automorphisms public
+open import foundation.axiom-l public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
 open import foundation.binary-embeddings public
@@ -61,6 +62,7 @@ open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
+open import foundation.discrete-reflexive-relations public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-powersets public
@@ -87,6 +89,7 @@ open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
@@ -113,6 +116,7 @@ open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.induction-w-types public
 open import foundation.inequality-w-types public
+open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
@@ -137,9 +141,10 @@ open import foundation.morphisms-cospans public
 open import foundation.multisets public
 open import foundation.multisubsets public
 open import foundation.negation public
-open import foundation.non-contractible-types public
+open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
+open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
@@ -156,6 +161,7 @@ open import foundation.pullbacks public
 open import foundation.ranks-of-elements-w-types public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
+open import foundation.reflexive-relations public
 open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
@@ -163,6 +169,7 @@ open import foundation.sections public
 open import foundation.set-presented-types public
 open import foundation.set-truncations public
 open import foundation.sets public
+open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
 open import foundation.slice public
 open import foundation.small-maps public

@@ -1,8 +1,6 @@
 # Localizations of rings
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module ring-theory.localizations-rings where
 
 open import foundation.contractible-maps
@@ -126,7 +124,7 @@ unique-extension-universal-property-localization-Ring R S T x f H up-f h K =
     ( fib (precomp-universal-property-localization-Ring R S T x f H) (pair h K))
     ( equiv-tot ( λ g →
       ( equiv-htpy-eq-hom-Ring R T (comp-hom-Ring R S T g f) h) ∘e
-      ( extensionality-type-subtype
+      ( extensionality-type-subtype'
         ( inverts-element-hom-ring-Prop R T x)
         ( precomp-universal-property-localization-Ring R S T x f H g)
         ( pair h K))))

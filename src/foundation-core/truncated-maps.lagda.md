@@ -7,10 +7,14 @@ title: Truncated maps
 
 module foundation-core.truncated-maps where
 
-open import foundation-core.contractible-maps using (is-contr-map)
+open import foundation-core.commuting-squares
+open import foundation-core.contractible-maps using
+  ( is-contr-map; is-contr-map-is-equiv)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation-core.equivalences using (is-equiv-id)
+open import foundation-core.equality-fibers-of-maps using
+  ( equiv-fib-ap-eq-fib; eq-fib-fib-ap; is-equiv-eq-fib-fib-ap)
+open import foundation-core.equivalences using (is-equiv-id; is-equiv)
 open import foundation-core.fibers-of-maps using
   ( fib; equiv-fib-pr1; inv-equiv-fib-pr1; map-compute-fib-comp; is-equiv-map-compute-fib-comp)
 open import foundation-core.functions using (id; _∘_)
@@ -18,23 +22,20 @@ open import foundation-core.functoriality-dependent-pair-types using
   ( tot; compute-fib-tot; inv-compute-fib-tot; fib-triangle;
     is-fiberwise-equiv-is-equiv-triangle; map-Σ-map-base;
     equiv-fib-map-Σ-map-base-fib; map-Σ; triangle-map-Σ)
-open import foundation-core.homotopies using (_~_; inv-htpy)
+open import foundation-core.homotopies using (_~_; inv-htpy; refl-htpy)
 open import foundation-core.identity-types using (_＝_; refl; ap; _∙_; inv)
 open import foundation-core.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map; is-prop-map)
+open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.sets using
   ( is-set; is-set-equiv; UU-Set; type-Set; is-set-type-Set)
-open import foundation-core.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
-
-open import foundation-core.equality-fibers-of-maps using
-  ( equiv-fib-ap-eq-fib; eq-fib-fib-ap; is-equiv-eq-fib-fib-ap)
-open import foundation-core.propositions using (is-prop; UU-Prop)
 open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-succ-is-trunc; is-trunc-equiv; Truncated-Type;
     is-trunc-is-equiv'; is-trunc-Σ; is-trunc-Id; is-trunc-equiv';
     is-trunc-is-equiv)
+open import foundation-core.truncation-levels using
+  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
+open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
 ## Idea
@@ -75,9 +76,30 @@ module _
 abstract
   is-trunc-map-succ-is-trunc-map :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
-    (f : A → B) → is-trunc-map k f → is-trunc-map (succ-𝕋 k) f
-  is-trunc-map-succ-is-trunc-map k f is-trunc-f b =
+    {f : A → B} → is-trunc-map k f → is-trunc-map (succ-𝕋 k) f
+  is-trunc-map-succ-is-trunc-map k is-trunc-f b =
     is-trunc-succ-is-trunc k (is-trunc-f b)
+```
+
+### Any contractible map is k-truncated
+
+```agda
+is-trunc-map-is-contr-map :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-contr-map f → is-trunc-map k f
+is-trunc-map-is-contr-map neg-two-𝕋 H = H
+is-trunc-map-is-contr-map (succ-𝕋 k) H =
+  is-trunc-map-succ-is-trunc-map k (is-trunc-map-is-contr-map k H)
+```
+
+### Any equivalence is k-truncated
+
+```agda
+is-trunc-map-is-equiv :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-equiv f → is-trunc-map k f
+is-trunc-map-is-equiv k H =
+  is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
 ```
 
 ### A map is (k+1)-truncated if and only if its action on identifications is k-truncated
@@ -244,6 +266,24 @@ module _
 
   is-prop-map-right-factor : is-prop-map g → is-prop-map f → is-prop-map h
   is-prop-map-right-factor = is-trunc-map-right-factor neg-one-𝕋 f g h H
+```
+
+### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (i : C → D)
+  (H : coherence-square f g h i)
+  where
+
+  is-trunc-map-top-is-trunc-map-bottom-is-equiv :
+    is-equiv g → is-equiv h → is-trunc-map k i → is-trunc-map k f
+  is-trunc-map-top-is-trunc-map-bottom-is-equiv K L M =
+    is-trunc-map-right-factor k (i ∘ g) h f H
+      ( is-trunc-map-is-equiv k L)
+      ( is-trunc-map-comp k (i ∘ g) i g refl-htpy M
+        ( is-trunc-map-is-equiv k K))
 ```
 
 ### The map on total spaces induced by a family of truncated maps is truncated

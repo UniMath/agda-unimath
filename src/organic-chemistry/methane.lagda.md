@@ -18,6 +18,7 @@ open import foundation.empty-types using (ex-falso ; is-prop-empty)
 open import foundation.identity-types using (inv)
 open import foundation.dependent-pair-types using (_,_ ; pr2)
 open import foundation.propositional-truncations using (unit-trunc-Prop)
+open import foundation.universe-levels
 
 open import graph-theory.walks-undirected-graphs using (refl-walk-Undirected-Graph)
 
@@ -32,7 +33,7 @@ open import univalent-combinatorics.finite-types using (unit-𝔽 ; empty-𝔽 ;
 ```agda
 module _ (t : tetrahedron-in-3-space) where
 
-  methane : hydrocarbon
+  methane : hydrocarbon lzero lzero
   methane = (unit-𝔽 , (λ x → empty-𝔽))
           , (λ c → t)
           , (λ c → (λ e → ex-falso (pr2 e)) , λ e _ → ex-falso (pr2 e))

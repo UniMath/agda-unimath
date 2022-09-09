@@ -19,10 +19,15 @@ open import group-theory.category-of-semigroups public
 open import group-theory.cayleys-theorem public
 open import group-theory.centers-groups public
 open import group-theory.commutative-monoids public
+open import group-theory.commutators-groups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
+open import group-theory.congruence-relations-groups public
+open import group-theory.congruence-relations-monoids public
+open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
+open import group-theory.decidable-subgroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
 open import group-theory.e8-lattice public
@@ -34,9 +39,12 @@ open import group-theory.equivalences-higher-groups public
 open import group-theory.equivalences-semigroups public
 open import group-theory.fixed-points-higher-group-actions public
 open import group-theory.free-concrete-group-actions public
+open import group-theory.free-groups-with-one-generator public
 open import group-theory.free-higher-group-actions public
+open import group-theory.full-subgroups public
 open import group-theory.furstenberg-groups public
 open import group-theory.group-actions public
+open import group-theory.group-solver public
 open import group-theory.groups public
 open import group-theory.higher-group-actions public
 open import group-theory.higher-groups public
@@ -71,6 +79,7 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-higher-group-actions public
 open import group-theory.orbits-monoid-actions public
+open import group-theory.orders-of-elements-groups public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public
@@ -88,11 +97,16 @@ open import group-theory.subgroups-abelian-groups public
 open import group-theory.subgroups-concrete-groups public
 open import group-theory.subgroups-generated-by-subsets-groups public
 open import group-theory.subgroups-higher-groups public
+open import group-theory.submonoids public
+open import group-theory.subsemigroups public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
+open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
 open import group-theory.symmetric-higher-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public
+open import group-theory.trivial-subgroups public
+open import group-theory.unordered-tuples-of-elements-commutative-monoids public
 ```

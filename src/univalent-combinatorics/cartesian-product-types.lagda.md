@@ -52,7 +52,7 @@ open import univalent-combinatorics.decidable-propositions using
 open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin-Level; UU-Fin)
+    UU-Fin)
 open import univalent-combinatorics.standard-finite-types using (Fin)
 ```
 
@@ -154,7 +154,7 @@ abstract
           ( is-finite-Prop (X × Y))
           ( is-finite-count ∘ (count-prod e)))
 
-prod-𝔽 : 𝔽 → 𝔽 → 𝔽
+prod-𝔽 : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
 pr1 (prod-𝔽 X Y) = (type-𝔽 X) × (type-𝔽 Y)
 pr2 (prod-𝔽 X Y) = is-finite-prod (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y)
 
@@ -172,11 +172,11 @@ abstract
   is-finite-right-factor f x =
     map-trunc-Prop (λ e → count-right-factor e x) f
 
-prod-UU-Fin-Level :
-  {l1 l2 : Level} (k l : ℕ) → UU-Fin-Level l1 k → UU-Fin-Level l2 l →
-  UU-Fin-Level (l1 ⊔ l2) (mul-ℕ k l)
-pr1 (prod-UU-Fin-Level k l (pair X H) (pair Y K)) = X × Y
-pr2 (prod-UU-Fin-Level k l (pair X H) (pair Y K)) =
+prod-UU-Fin :
+  {l1 l2 : Level} (k l : ℕ) → UU-Fin l1 k → UU-Fin l2 l →
+  UU-Fin (l1 ⊔ l2) (mul-ℕ k l)
+pr1 (prod-UU-Fin k l (pair X H) (pair Y K)) = X × Y
+pr2 (prod-UU-Fin k l (pair X H) (pair Y K)) =
   apply-universal-property-trunc-Prop H
     ( mere-equiv-Prop (Fin (mul-ℕ k l)) (X × Y))
     ( λ e1 →
@@ -184,8 +184,4 @@ pr2 (prod-UU-Fin-Level k l (pair X H) (pair Y K)) =
         ( mere-equiv-Prop (Fin (mul-ℕ k l)) (X × Y))
         ( λ e2 →
           unit-trunc-Prop (equiv-prod e1 e2 ∘e inv-equiv (prod-Fin k l))))
-
-prod-UU-Fin :
-  (k l : ℕ) → UU-Fin k → UU-Fin l → UU-Fin (mul-ℕ k l)
-prod-UU-Fin k l = prod-UU-Fin-Level k l
 ```

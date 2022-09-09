@@ -28,6 +28,7 @@ The exponent of two species `F` and `G` is the pointwise exponent
 ### Exponents of species
 
 ```agda
-function-species : {l1 l2 : Level} → species l1 → species l2 → 𝔽 → UU (l1 ⊔ l2)
+function-species :
+  {l1 l2 l3 : Level} → species l1 l2 → species l1 l3 → 𝔽 l1 → UU (l2 ⊔ l3)
 function-species F G X = F X → G X
 ```

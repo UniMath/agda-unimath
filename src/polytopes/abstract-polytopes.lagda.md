@@ -1,7 +1,7 @@
 # Abstract polytopes
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --without-K --exact-split #-}
 
 module polytopes.abstract-polytopes where
 

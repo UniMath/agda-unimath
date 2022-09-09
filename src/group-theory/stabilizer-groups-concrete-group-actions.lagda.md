@@ -39,7 +39,7 @@ module _
   action-stabilizer-action-Concrete-Group :
     type-action-Concrete-Group G X → action-Concrete-Group (l1 ⊔ l2) G
   action-stabilizer-action-Concrete-Group x u =
-    subset-Set
+    set-subset
       ( X u)
       ( λ y → mere-eq-Prop (pair (shape-Concrete-Group G) x) (pair u y))
 
@@ -63,7 +63,7 @@ module _
               ( pair uy p))
             ( λ q →
               unit-trunc-Prop
-                ( eq-subtype
+                ( eq-type-subtype
                   ( mere-eq-Prop (pair (shape-Concrete-Group G) x))
                   ( q)))))
 

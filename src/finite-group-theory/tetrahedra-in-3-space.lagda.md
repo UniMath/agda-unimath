@@ -27,7 +27,7 @@ Note that any rotation of a tetrahedron in 3-space induces a rotation on the set
 ```agda
 tetrahedron-in-3-space : UU (lsuc lzero)
 tetrahedron-in-3-space =
-  Σ ( UU-Fin 4)
+  Σ ( UU-Fin lzero 4)
     ( λ X →
       cyclic-structure 3
         ( Σ ( 2-Element-Decidable-Subtype lzero

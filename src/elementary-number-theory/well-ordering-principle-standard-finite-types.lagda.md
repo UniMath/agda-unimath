@@ -48,7 +48,7 @@ open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
     prod-Prop; is-prop-all-elements-equal; type-Prop)
 open import foundation.subtypes using
-  ( subtype; eq-subtype; type-subtype; is-in-subtype)
+  ( subtype; eq-type-subtype; type-subtype; is-in-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
 open import foundation.type-arithmetic-empty-type using
@@ -140,7 +140,7 @@ abstract
     all-elements-equal (minimal-element-Fin k (is-in-subtype P))
   all-elements-equal-minimal-element-Fin k P
     (pair x (pair p l)) (pair y (pair q m)) =
-    eq-subtype
+    eq-type-subtype
       ( λ t → prod-Prop (P t) (is-lower-bound-fin-Prop k (is-in-subtype P) t))
       ( antisymmetric-leq-Fin k x y (l y q) (m x p))
 

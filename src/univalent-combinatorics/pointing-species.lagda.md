@@ -21,6 +21,6 @@ A pointing of a species `F` is the species `F*` given by `F* X := X × (F X)`. I
 ## Definition
 
 ```agda
-pointing-species : {l : Level} → species l → species l
+pointing-species : {l1 l2 : Level} → species l1 l2 → species l1 (l1 ⊔ l2)
 pointing-species F X = type-𝔽 X × F X
 ```

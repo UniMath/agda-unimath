@@ -12,7 +12,6 @@ open import foundation.contractible-maps using
 open import foundation.contractible-types using
   ( is-contr; is-contr-equiv'; is-contr-equiv; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-precomp-is-equiv; is-equiv-id; _≃_; map-equiv;
     is-equiv-map-equiv; is-equiv-equiv; is-equiv-comp; is-equiv-right-factor)
@@ -36,6 +35,8 @@ open import foundation.type-theoretic-principle-of-choice using
 open import foundation.universal-property-set-quotients using
   ( is-set-quotient; precomp-Set-Quotient)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+
+open import foundation-core.equivalence-relations using (Eq-Rel)
 ```
 
 ## Idea

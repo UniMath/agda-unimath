@@ -35,7 +35,7 @@ open import foundation.slice using
     comp-hom-slice; hom-equiv-slice)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (is-emb-inclusion-subtype; eq-subtype)
+open import foundation.subtypes using (is-emb-inclusion-subtype; eq-type-subtype)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.truncated-types using (is-trunc; is-trunc-emb)
 open import foundation.truncation-levels using
@@ -157,7 +157,7 @@ abstract
     where
     α : fib f y → type-Prop (trunc-Prop (fib (map-unit-im f) (pair y z)))
     α (pair x p) =
-      unit-trunc-Prop (pair x (eq-subtype (λ z → trunc-Prop (fib f z)) p))
+      unit-trunc-Prop (pair x (eq-type-subtype (λ z → trunc-Prop (fib f z)) p))
 ```
 
 ### The image of a map into a truncated type is truncated

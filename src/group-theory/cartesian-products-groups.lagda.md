@@ -74,13 +74,13 @@ module _
     (x : type-prod-Group) →
     Id (mul-prod-Group (inv-prod-Group x) x) unit-prod-Group
   left-inverse-law-prod-Group (pair x y) =
-    eq-pair (left-inverse-law-Group G x) (left-inverse-law-Group H y)
+    eq-pair (left-inverse-law-mul-Group G x) (left-inverse-law-mul-Group H y)
 
   right-inverse-law-prod-Group :
     (x : type-prod-Group) →
     Id (mul-prod-Group x (inv-prod-Group x)) unit-prod-Group
   right-inverse-law-prod-Group (pair x y) =
-    eq-pair (right-inverse-law-Group G x) (right-inverse-law-Group H y)
+    eq-pair (right-inverse-law-mul-Group G x) (right-inverse-law-mul-Group H y)
 
   prod-Group : Group (l1 ⊔ l2)
   pr1 prod-Group = semigroup-prod-Group

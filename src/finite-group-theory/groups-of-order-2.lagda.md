@@ -1,4 +1,6 @@
-# Groups of order 2
+---
+title: Groups of order 2
+---
 
 ```agda
 {-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}

@@ -50,23 +50,23 @@ Note that the last description is subtly different from the notion of unlabeled 
 ### Partitions
 
 ```agda
-partition-𝔽 : 𝔽 → UU (lsuc lzero)
-partition-𝔽 X =
-  Σ ( 𝔽)
+partition-𝔽 : {l1 : Level} (l2 l3 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+partition-𝔽 l2 l3 X =
+  Σ ( 𝔽 l2)
     ( λ Y →
-      Σ ( type-𝔽 Y → 𝔽)
+      Σ ( type-𝔽 Y → 𝔽 l3)
         ( λ Z →
           ( (y : type-𝔽 Y) → type-trunc-Prop (type-𝔽 (Z y))) ×
           ( equiv-𝔽 X (Σ-𝔽 Y Z))))
 
 module _
-  (X : 𝔽) (P : partition-𝔽 X)
+  {l1 l2 l3 : Level} (X : 𝔽 l1) (P : partition-𝔽 l2 l3 X)
   where
 
-  finite-indexing-type-partition-𝔽 : 𝔽
+  finite-indexing-type-partition-𝔽 : 𝔽 l2
   finite-indexing-type-partition-𝔽 = pr1 P
 
-  indexing-type-partition-𝔽 : UU lzero
+  indexing-type-partition-𝔽 : UU l2
   indexing-type-partition-𝔽 = type-𝔽 finite-indexing-type-partition-𝔽
 
   is-finite-indexing-type-partition-𝔽 : is-finite indexing-type-partition-𝔽
@@ -77,10 +77,10 @@ module _
   number-of-elements-indexing-type-partition-𝔽 =
     number-of-elements-is-finite is-finite-indexing-type-partition-𝔽
 
-  finite-block-partition-𝔽 : indexing-type-partition-𝔽 → 𝔽
+  finite-block-partition-𝔽 : indexing-type-partition-𝔽 → 𝔽 l3
   finite-block-partition-𝔽 = pr1 (pr2 P)
 
-  block-partition-𝔽 : indexing-type-partition-𝔽 → UU lzero
+  block-partition-𝔽 : indexing-type-partition-𝔽 → UU l3
   block-partition-𝔽 i = type-𝔽 (finite-block-partition-𝔽 i)
 
   is-finite-block-partition-𝔽 :
@@ -103,14 +103,14 @@ module _
     type-𝔽 X → Σ indexing-type-partition-𝔽 block-partition-𝔽
   map-conversion-partition-𝔽 = map-equiv conversion-partition-𝔽
 
-  rel-partition-𝔽-Prop : type-𝔽 X → type-𝔽 X → UU-Prop lzero
+  rel-partition-𝔽-Prop : type-𝔽 X → type-𝔽 X → UU-Prop l2
   rel-partition-𝔽-Prop x y =
     Id-Prop
       ( set-𝔽 finite-indexing-type-partition-𝔽)
       ( pr1 (map-conversion-partition-𝔽 x))
       ( pr1 (map-conversion-partition-𝔽 y))
 
-  rel-partition-𝔽 : type-𝔽 X → type-𝔽 X → UU lzero
+  rel-partition-𝔽 : type-𝔽 X → type-𝔽 X → UU l2
   rel-partition-𝔽 x y = type-Prop (rel-partition-𝔽-Prop x y)
 
   is-prop-rel-partition-𝔽 : (x y : type-𝔽 X) → is-prop (rel-partition-𝔽 x y)
@@ -128,7 +128,7 @@ module _
     rel-partition-𝔽 x y → rel-partition-𝔽 y z → rel-partition-𝔽 x z
   transitive-rel-partition-𝔽 x y z r s = r ∙ s
 
-  eq-rel-partition-𝔽 : Eq-Rel lzero (type-𝔽 X)
+  eq-rel-partition-𝔽 : Eq-Rel l2 (type-𝔽 X)
   pr1 eq-rel-partition-𝔽 = rel-partition-𝔽-Prop
   pr1 (pr2 eq-rel-partition-𝔽) {x} = refl-rel-partition-𝔽 x
   pr1 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} = symmetric-rel-partition-𝔽 x y
@@ -140,7 +140,8 @@ module _
 
 ```agda
 equiv-partition-𝔽 :
-  (X : 𝔽) → partition-𝔽 X → partition-𝔽 X → UU lzero
+  {l1 l2 l3 l4 l5 : Level} (X : 𝔽 l1) →
+  partition-𝔽 l2 l3 X → partition-𝔽 l4 l5 X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
 equiv-partition-𝔽 X P Q =
   Σ ( indexing-type-partition-𝔽 X P ≃ indexing-type-partition-𝔽 X Q)
     ( λ e →
@@ -153,13 +154,15 @@ equiv-partition-𝔽 X P Q =
             ( conversion-partition-𝔽 X Q)))
 
 id-equiv-partition-𝔽 :
-  (X : 𝔽) (P : partition-𝔽 X) → equiv-partition-𝔽 X P P
+  {l1 l2 l3 : Level} (X : 𝔽 l1)
+  (P : partition-𝔽 l2 l3 X) → equiv-partition-𝔽 X P P
 pr1 (id-equiv-partition-𝔽 X P) = id-equiv
 pr1 (pr2 (id-equiv-partition-𝔽 X P)) i = id-equiv
 pr2 (pr2 (id-equiv-partition-𝔽 X P)) = refl-htpy
 
 extensionality-partition-𝔽 :
-  (X : 𝔽) (P Q : partition-𝔽 X) → Id P Q ≃ equiv-partition-𝔽 X P Q
+  {l1 l2 l3 : Level} (X : 𝔽 l1) (P Q : partition-𝔽 l2 l3 X) →
+  Id P Q ≃ equiv-partition-𝔽 X P Q
 extensionality-partition-𝔽 X P =
   extensionality-Σ
     ( λ {Y} Zf e →
