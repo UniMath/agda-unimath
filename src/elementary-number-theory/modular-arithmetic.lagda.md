@@ -26,7 +26,8 @@ open import elementary-number-theory.congruence-natural-numbers using
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; is-zero-div-zero-ℤ; refl-div-ℤ; is-one-is-unit-int-ℕ; div-neg-ℤ; neg-div-ℤ; div-div-int-abs-ℤ; div-int-abs-div-ℤ)
 open import elementary-number-theory.equality-integers using
-  ( has-decidable-equality-ℤ)
+  ( has-decidable-equality-ℤ; ℤ-Discrete-Type)
+open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; neg-one-ℤ; one-ℤ; int-ℕ; is-injective-int-ℕ; is-zero-ℤ; succ-ℤ;
     pred-ℤ; issec-pred-ℤ; isretr-pred-ℤ; neg-ℤ; succ-int-ℕ; is-equiv-succ-ℤ;
@@ -42,14 +43,11 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-nonzero-ℕ)
 
-open import elementary-number-theory.inequality-integers
-
-open import univalent-combinatorics.standard-finite-types using (is-zero-Fin)
-
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using (is-decidable; is-decidable-iff)
 open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.discrete-types using (Discrete-Type)
 open import foundation.empty-types using (empty; ex-falso)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.functions using (_∘_)
@@ -65,13 +63,13 @@ open import foundation.universe-levels using (UU; lzero)
 open import structured-types.types-equipped-with-endomorphisms using (Endo)
 
 open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
+  ( has-decidable-equality-Fin; Fin-Discrete-Type)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Fin; 𝔽)
 open import univalent-combinatorics.standard-finite-types using
   ( Fin; zero-Fin; neg-one-Fin; one-Fin; nat-Fin; is-injective-nat-Fin;
     is-zero-nat-zero-Fin; succ-Fin; pred-Fin; issec-pred-Fin; isretr-pred-Fin;
-    is-equiv-succ-Fin; is-equiv-pred-Fin; is-set-Fin)
+    is-equiv-succ-Fin; is-equiv-pred-Fin; is-set-Fin; is-zero-Fin)
 ```
 
 Some modular arithmetic was already defined in `modular-arithmetic-standard-finite-types`. Here we package those results together in a more convenient package that also allows congruence modulo 0.
@@ -104,12 +102,20 @@ one-ℤ-Mod zero-ℕ = one-ℤ
 one-ℤ-Mod (succ-ℕ k) = one-Fin k
 ```
 
-## The integers modulo k have decidable equality
+### The integers modulo k have decidable equality
 
 ```agda
 has-decidable-equality-ℤ-Mod : (k : ℕ) → has-decidable-equality (ℤ-Mod k)
 has-decidable-equality-ℤ-Mod zero-ℕ = has-decidable-equality-ℤ
 has-decidable-equality-ℤ-Mod (succ-ℕ k) = has-decidable-equality-Fin (succ-ℕ k)
+```
+
+### The integers modulo k are a discrete type
+
+```agda
+ℤ-Mod-Discrete-Type : (k : ℕ) → Discrete-Type lzero
+ℤ-Mod-Discrete-Type zero-ℕ = ℤ-Discrete-Type
+ℤ-Mod-Discrete-Type (succ-ℕ k) = Fin-Discrete-Type (succ-ℕ k)
 ```
 
 ### The integers modulo k form a set

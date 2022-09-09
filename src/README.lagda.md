@@ -255,6 +255,7 @@ open import foundation.descent-empty-types
 open import foundation.diagonal-maps-of-types
 open import foundation.diagonals-of-maps
 open import foundation.discrete-reflexive-relations
+open import foundation.discrete-types
 open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.double-powersets
@@ -314,7 +315,7 @@ open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.intersection
+open import foundation.intersections-subtypes
 open import foundation.involutions
 open import foundation.isolated-points
 open import foundation.isomorphisms-of-sets
@@ -335,6 +336,9 @@ open import foundation.monomorphisms
 open import foundation.morphisms-cospans
 open import foundation.multisets
 open import foundation.multisubsets
+open import foundation.multivariable-correspondences
+open import foundation.multivariable-decidable-relations
+open import foundation.multivariable-relations
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.pairs-of-distinct-elements
@@ -375,6 +379,7 @@ open import foundation.small-multisets
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.split-surjective-maps
+open import foundation.standard-apartness-relations
 open import foundation.structure-identity-principle
 open import foundation.structure
 open import foundation.subterminal-types
@@ -397,7 +402,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.union
+open import foundation.unions-subtypes
 open import foundation.unique-existence
 open import foundation.uniqueness-image
 open import foundation.uniqueness-set-quotients

@@ -5,7 +5,7 @@ title: Intersection of subtypes
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.intersection where
+module foundation.intersections-subtypes where
 
 open import foundation.conjunction using (conj-Prop; conj-decidable-Prop)
 open import foundation.decidable-subtypes using (decidable-subtype)

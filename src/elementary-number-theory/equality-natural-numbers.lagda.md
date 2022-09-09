@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers using
     is-not-one-ℕ; Eq-ℕ; eq-Eq-ℕ; Eq-eq-ℕ; is-set-ℕ; refl-Eq-ℕ; ℕ-Set)
 
 open import foundation-core.decidable-propositions using (decidable-Prop)
+open import foundation-core.discrete-types using (Discrete-Type)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)
