@@ -19,6 +19,7 @@ open import finite-group-theory.transpositions
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-equivalence-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -225,7 +226,7 @@ module _
   inv-Fin-2-quotient-sign-comp-count :
     ( T : quotient-sign-comp (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))) →
     is-decidable
-      ( is-in-subtype-equivalence-class
+      ( is-in-equivalence-class
         ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
         ( equiv-count eX)) →
@@ -251,7 +252,7 @@ module _
     is-equiv-has-inverse
       (λ T →
         inv-Fin-2-quotient-sign-comp-count T
-          ( is-decidable-is-in-subtype-equivalence-class-is-decidable
+          ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
             ( λ a b →
               has-decidable-equality-Fin 2
@@ -263,7 +264,7 @@ module _
             ( equiv-count eX)))
       ( λ T →
         retr-Fin-2-quotient-sign-comp-count T
-          ( is-decidable-is-in-subtype-equivalence-class-is-decidable
+          ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -277,7 +278,7 @@ module _
             ( equiv-count eX)))
       ( λ k →
         sec-Fin-2-quotient-sign-comp-count k
-          ( is-decidable-is-in-subtype-equivalence-class-is-decidable
+          ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -294,7 +295,7 @@ module _
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX)))) →
-      ¬ ( is-in-subtype-equivalence-class
+      ¬ ( is-in-equivalence-class
         ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
         ( equiv-count eX)) →
@@ -311,7 +312,7 @@ module _
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX)))
           ( f ∘e inv-equiv (equiv-count eX))) →
-      is-in-subtype-equivalence-class
+      is-in-equivalence-class
         ( sign-comp-Eq-Rel
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -327,7 +328,7 @@ module _
         ( NP
           ( tr
             ( λ x →
-              is-in-subtype-equivalence-class
+              is-in-equivalence-class
                 ( sign-comp-Eq-Rel
                   ( number-of-elements-count eX)
                   ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -338,7 +339,7 @@ module _
     cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inr star) q =
       tr
         ( λ x →
-          is-in-subtype-equivalence-class
+          is-in-equivalence-class
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -415,7 +416,7 @@ module _
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX)))) →
       ( H : is-decidable
-        (is-in-subtype-equivalence-class
+        (is-in-equivalence-class
           ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
           ( T)
           ( equiv-count eX))) →
@@ -441,7 +442,7 @@ module _
         ( apply-universal-property-trunc-Prop
           ( pr2 T)
           ( pair
-            ( is-in-subtype-equivalence-class
+            ( is-in-equivalence-class
               ( sign-comp-Eq-Rel
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -452,7 +453,7 @@ module _
                     ( has-decidable-equality-Fin
                       ( number-of-elements-count eX))
                       ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
-            ( is-prop-is-in-subtype-equivalence-class
+            ( is-prop-is-in-equivalence-class
               ( sign-comp-Eq-Rel
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -464,20 +465,23 @@ module _
                       ( number-of-elements-count eX))
                       ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))
           ( λ (pair t p) →
-            cases-retr-Fin-2-quotient-sign-comp-count
-              ( T)
-              ( NP)
-              ( t)
-              ( eq-pair-Σ
-                ( p)
-                ( all-elements-equal-type-trunc-Prop _ (pr2 T)))
-              ( sign-homomorphism-Fin-two (number-of-elements-count eX)
+            cases-retr-Fin-2-quotient-sign-comp-count T NP t
+              ( inv
+                ( eq-has-same-elements-equivalence-class
+                  ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
+                  ( T)
+                  ( class
+                    ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
+                    ( t))
+                  ( p)))
+              ( sign-homomorphism-Fin-two
+                ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX)))
                 ( t ∘e inv-equiv (equiv-count eX)))
               ( refl)))
     sec-Fin-2-quotient-sign-comp-count : (k : Fin 2) →
       ( D : is-decidable
-        ( is-in-subtype-equivalence-class
+        ( is-in-equivalence-class
           ( sign-comp-Eq-Rel
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))))

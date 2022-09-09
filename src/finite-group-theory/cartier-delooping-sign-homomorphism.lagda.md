@@ -40,9 +40,7 @@ open import foundation.equality-dependent-pair-types using
   ( pair-eq-Σ; eq-pair-Σ; issec-pair-eq-Σ; comp-eq-pair-Σ; ap-pair-eq-Σ; inv-eq-pair-Σ)
 open import foundation.equivalence-classes using
   ( equivalence-class; equivalence-class-Set; class;
-    is-in-subtype-equivalence-class;
-    is-decidable-is-in-subtype-equivalence-class-is-decidable;
-    eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class;
+    eq-effective-quotient';
     quotient-reflecting-map-equivalence-class)
 open import foundation.equivalences using
   ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv;

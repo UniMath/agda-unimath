@@ -8,6 +8,7 @@ title: Decidable equivalence relations
 module foundation.decidable-equivalence-relations where
 
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-relations
 open import foundation.decidable-subtypes
@@ -16,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalence-classes
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
@@ -24,6 +26,7 @@ open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
+open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -415,4 +418,26 @@ module _
               ( eq-pair-Σ (inv T) (all-elements-equal-type-trunc-Prop _ _))
               ( p))
             q))
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  is-decidable-is-in-equivalence-class-is-decidable :
+    ((a b : A) → is-decidable (sim-Eq-Rel R a b)) →
+    (T : equivalence-class R) →
+    (a : A) →
+    is-decidable (is-in-equivalence-class R T a)
+  is-decidable-is-in-equivalence-class-is-decidable F T a =
+    apply-universal-property-trunc-Prop
+      ( pr2 T)
+      ( is-decidable-Prop
+        ( subtype-equivalence-class R T a))
+      ( λ (pair t P) →
+        is-decidable-iff
+          ( backward-implication (P a))
+          ( forward-implication (P a))
+          ( F t a))
 ```

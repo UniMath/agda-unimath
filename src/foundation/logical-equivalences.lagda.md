@@ -54,7 +54,7 @@ abstract
     is-equiv-is-prop
       ( is-prop-iff P Q)
       ( is-prop-type-equiv-Prop P Q)
-      ( iff-equiv P Q)
+      ( iff-equiv)
 
 equiv-equiv-iff :
   {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →

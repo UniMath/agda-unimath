@@ -3,8 +3,6 @@ title: The univalence axiom implies function extensionality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.univalence-implies-function-extensionality where
 
 open import foundation-core.contractible-maps using (is-contr-map-is-equiv)
@@ -20,7 +18,8 @@ open import foundation-core.type-arithmetic-dependent-pair-types using
   ( equiv-pr1)
 open import foundation-core.universe-levels using (Level; UU)
 
-open import foundation.equivalence-induction using (ind-equiv)
+open import foundation.equivalence-induction using
+  ( ind-equiv; is-equiv-postcomp-univalence)
 open import foundation.function-extensionality using (htpy-eq; FUNEXT)
 open import foundation.weak-function-extensionality using
   ( WEAK-FUNEXT; FUNEXT-WEAK-FUNEXT)
@@ -34,15 +33,6 @@ The univalence axiom implies function extensionality
 ## Theorem
 
 ```agda
-abstract
-  is-equiv-postcomp-univalence :
-    {l1 l2 : Level} {X Y : UU l1} (A : UU l2) (e : X ≃ Y) →
-    is-equiv (postcomp A (map-equiv e))
-  is-equiv-postcomp-univalence {X = X} A =
-    ind-equiv X (λ Y e → is-equiv (postcomp A (map-equiv e))) is-equiv-id
-
--- Theorem 17.2.2
-
 abstract
   weak-funext-univalence :
     {l : Level} {A : UU l} {B : A → UU l} → WEAK-FUNEXT A B

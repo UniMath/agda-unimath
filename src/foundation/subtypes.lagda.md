@@ -25,12 +25,14 @@ open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (tr; _＝_; refl)
 open import foundation-core.logical-equivalences using (_⇔_)
 open import foundation-core.propositions using
-  ( UU-Prop; type-Prop; is-equiv-is-prop)
+  ( UU-Prop; type-Prop; is-equiv-is-prop; is-prop-equiv; is-prop-Π)
+open import foundation-core.sets using (is-set; UU-Set)
 open import foundation-core.truncation-levels using (𝕋; zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import foundation.equality-dependent-function-types
 open import foundation.injective-maps using (is-injective; is-injective-is-emb)
+open import foundation.logical-equivalences using (is-prop-iff-Prop)
 open import foundation.propositional-extensionality
 ```
 
@@ -102,4 +104,19 @@ module _
   refl-extensionality-subtype :
     map-equiv (extensionality-subtype P) refl ＝ (λ x → pair id id)
   refl-extensionality-subtype = refl
+```
+
+### The type of all subtypes of a type is a set
+
+```agda
+is-set-subtype :
+  {l1 l2 : Level} {A : UU l1} → is-set (subtype l2 A)
+is-set-subtype {l1} {l2} {A} P Q =
+  is-prop-equiv
+    ( extensionality-subtype P Q)
+    ( is-prop-Π (λ x → is-prop-iff-Prop (P x) (Q x)))
+
+subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → UU-Set (l1 ⊔ lsuc l2)
+pr1 (subtype-Set {l1} l2 A) = subtype l2 A
+pr2 (subtype-Set {l1} l2 A) = is-set-subtype
 ```
