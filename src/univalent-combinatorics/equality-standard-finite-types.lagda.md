@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation-core.decidable-propositions using (decidable-Prop)
+open import foundation-core.discrete-types using (Discrete-Type)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (_+_; inl; inr; is-prop-coprod; neq-inr-inl)
@@ -89,6 +90,10 @@ is-decidable-is-one-Fin :
   {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin k x)
 is-decidable-is-one-Fin {succ-ℕ k} x =
   has-decidable-equality-Fin (succ-ℕ k) x (one-Fin k)
+
+Fin-Discrete-Type : ℕ → Discrete-Type lzero
+pr1 (Fin-Discrete-Type k) = Fin k
+pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
 ```
 
 ### Being zero or being one is a proposition

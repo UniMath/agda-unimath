@@ -75,7 +75,8 @@ open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; inv; ap; ap-binary; _∙_; tr)
 open import foundation.injective-maps using
   ( is-injective; is-prop-is-injective; is-injective-map-equiv)
-open import foundation.intersection using (intersection-decidable-subtype)
+open import foundation.intersections-subtypes using
+  ( intersection-decidable-subtype)
 open import foundation.involutions using (own-inverse-is-involution)
 open import foundation.logical-equivalences using (_↔_; equiv-iff)
 open import foundation.mere-equivalences using (transitive-mere-equiv; mere-equiv)
@@ -224,7 +225,6 @@ module _
         np (r ∙
           inv
             ( dn-elim-is-decidable
-              ( Id (d2 Y) (d3 Y))
               ( has-decidable-equality-is-finite
                 ( is-finite-type-decidable-subtype
                   ( pr1 Y)
@@ -236,7 +236,6 @@ module _
         nq
           ( ( inv
               ( dn-elim-is-decidable
-                ( Id (d1 Y) (d2 Y))
                 ( has-decidable-equality-is-finite
                   ( is-finite-type-decidable-subtype
                     ( pr1 Y)

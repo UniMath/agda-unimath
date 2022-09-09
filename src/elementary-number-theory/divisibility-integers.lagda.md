@@ -340,7 +340,6 @@ is-zero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ x → is-zero-ℤ y
 is-zero-sim-unit-ℤ {x} {y} H p =
   dn-elim-is-decidable
-    ( is-zero-ℤ y)
     ( has-decidable-equality-ℤ y zero-ℤ)
     ( λ g → g (inv (β g) ∙ (ap (mul-ℤ (u g)) p ∙ right-zero-law-mul-ℤ (u g))))
   where

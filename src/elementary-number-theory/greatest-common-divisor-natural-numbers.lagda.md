@@ -175,7 +175,6 @@ is-zero-add-is-zero-gcd-ℕ :
   (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (add-ℕ a b)
 is-zero-add-is-zero-gcd-ℕ a b H =
   dn-elim-is-decidable
-    ( is-zero-ℕ (add-ℕ a b))
     ( is-decidable-is-zero-ℕ (add-ℕ a b))
     ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 
