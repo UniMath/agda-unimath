@@ -78,22 +78,3 @@ module _
       ( disj-Prop (rel-Apartness-Relation x z) (rel-Apartness-Relation y z))
   cotransitive-Apartness-Relation = pr2 (pr2 (pr2 R))
 ```
-
-### Tight apartness relations
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (R : A → A → UU-Prop l2)
-  where
-
-  is-tight : UU (l1 ⊔ l2)
-  is-tight = (x y : A) → ¬ (type-Prop (R x y)) → x ＝ y
-
-  is-tight-apartness-relation : UU (l1 ⊔ l2)
-  is-tight-apartness-relation =
-    is-apartness-relation R × is-tight
-
-Tight-Apartness-Relation : {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
-Tight-Apartness-Relation l2 A =
-  Σ (A → A → UU-Prop l2) is-tight-apartness-relation
-```

@@ -182,9 +182,9 @@ is-decidable-equiv' e = is-decidable-equiv (inv-equiv e)
 
 ```agda
 dn-elim-is-decidable :
-  {l : Level} (P : UU l) → is-decidable P → (¬¬ P → P)
-dn-elim-is-decidable P (inl x) p = x
-dn-elim-is-decidable P (inr x) p = ex-falso (p x)
+  {l : Level} {P : UU l} → is-decidable P → (¬¬ P → P)
+dn-elim-is-decidable (inl x) p = x
+dn-elim-is-decidable (inr x) p = ex-falso (p x)
 ```
 
 ### The double negation of `is-decidable` is always provable

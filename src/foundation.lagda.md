@@ -63,6 +63,7 @@ open import foundation.descent-empty-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonals-of-maps public
 open import foundation.discrete-reflexive-relations public
+open import foundation.discrete-types public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-powersets public
@@ -120,6 +121,7 @@ open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
+open import foundation.intersections-subtypes public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
@@ -140,6 +142,9 @@ open import foundation.monomorphisms public
 open import foundation.morphisms-cospans public
 open import foundation.multisets public
 open import foundation.multisubsets public
+open import foundation.multivariable-correspondences public
+open import foundation.multivariable-decidable-relations public
+open import foundation.multivariable-relations public
 open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public
@@ -178,6 +183,7 @@ open import foundation.small-multisets public
 open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
+open import foundation.standard-apartness-relations public
 open import foundation.structure-identity-principle public
 open import foundation.structure public
 open import foundation.subterminal-types public
@@ -199,7 +205,7 @@ open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-theoretic-principle-of-choice public
-open import foundation.union public
+open import foundation.unions-subtypes public
 open import foundation.unique-existence public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-set-quotients public

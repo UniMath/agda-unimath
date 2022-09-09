@@ -81,6 +81,8 @@ module _
   antisymmetric-⊆ P Q H K = eq-htpy (λ x → eq-iff (H x) (K x))
 ```
 
+### The powerset preorder and poset
+
 ```agda
 module _
   {l1 : Level} (A : UU l1)
