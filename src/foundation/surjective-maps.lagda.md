@@ -169,9 +169,9 @@ module _
   map-Surjection-Into-Truncated-Type =
     map-surjection surjection-Surjection-Into-Truncated-Type
 
-  is-inclusion-Surjection-Into-Truncated-Type :
+  is-surjective-Surjection-Into-Truncated-Type :
     is-surjective map-Surjection-Into-Truncated-Type
-  is-inclusion-Surjection-Into-Truncated-Type =
+  is-surjective-Surjection-Into-Truncated-Type =
     is-surjective-map-surjection surjection-Surjection-Into-Truncated-Type
 ```
 
@@ -214,9 +214,9 @@ module _
   map-Surjection-Into-Set : A → type-Surjection-Into-Set
   map-Surjection-Into-Set = map-Surjection-Into-Truncated-Type f
 
-  is-inclusion-Surjection-Into-Set : is-surjective map-Surjection-Into-Set
-  is-inclusion-Surjection-Into-Set =
-    is-inclusion-Surjection-Into-Truncated-Type f
+  is-surjective-Surjection-Into-Set : is-surjective map-Surjection-Into-Set
+  is-surjective-Surjection-Into-Set =
+    is-surjective-Surjection-Into-Truncated-Type f
 ```
 
 ## Properties

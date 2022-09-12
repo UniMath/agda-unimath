@@ -10,7 +10,6 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
 open import foundation.equational-reasoning
 open import foundation.equivalence-classes
-open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
@@ -26,6 +25,8 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+
+open import foundation-core.equivalence-relations
 ```
 
 ## Definitions
@@ -73,6 +74,10 @@ module _
   is-surjective-quotient-map : is-surjective quotient-map
   is-surjective-quotient-map =
     is-surjective-comp-equiv compute-set-quotient (is-surjective-class R)
+
+  surjection-quotient-map : A ↠ set-quotient
+  pr1 surjection-quotient-map = quotient-map
+  pr2 surjection-quotient-map = is-surjective-quotient-map
 
   emb-subtype-set-quotient : set-quotient ↪ subtype l2 A
   emb-subtype-set-quotient =

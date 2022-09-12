@@ -59,8 +59,7 @@ open import foundation.decidable-propositions using
   ( decidable-Prop; type-decidable-Prop; is-decidable-Prop;
     is-decidable-trunc-Prop-is-merely-decidable; is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod;
-    is-decidable-prod; is-decidable-neg)
+  ( is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
 open import foundation.embeddings using (is-emb)

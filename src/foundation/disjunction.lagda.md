@@ -10,7 +10,9 @@ module foundation.disjunction where
 open import foundation.conjunction using (conj-Prop)
 open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-propositions using
-  (decidable-Prop; prop-decidable-Prop; type-decidable-Prop; is-decidable-type-decidable-Prop; is-decidable-trunc-Prop-is-merely-decidable)
+  ( decidable-Prop; prop-decidable-Prop; type-decidable-Prop;
+    is-decidable-type-decidable-Prop;
+    is-decidable-trunc-Prop-is-merely-decidable)
 open import foundation.decidable-types using
   (is-decidable-coprod)
 open import foundation.dependent-pair-types using (pr1; pr2; pair)
