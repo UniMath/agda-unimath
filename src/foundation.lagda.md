@@ -179,6 +179,7 @@ open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
+open import foundation.singleton-subtypes public
 open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-multisets public

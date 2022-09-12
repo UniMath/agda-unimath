@@ -23,9 +23,10 @@ open import foundation-core.functoriality-dependent-pair-types using
   ( equiv-Σ; map-Σ; is-equiv-map-Σ)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (tr; _＝_; refl)
-open import foundation-core.logical-equivalences using (_⇔_)
+open import foundation-core.logical-equivalences using (_⇔_; iff-Prop)
 open import foundation-core.propositions using
-  ( UU-Prop; type-Prop; is-equiv-is-prop; is-prop-equiv; is-prop-Π)
+  ( UU-Prop; type-Prop; is-equiv-is-prop; is-prop-equiv; is-prop-Π;
+    Π-Prop)
 open import foundation-core.sets using (is-set; UU-Set)
 open import foundation-core.truncation-levels using (𝕋; zero-𝕋)
 open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
@@ -72,8 +73,13 @@ module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
+  has-same-elements-subtype-Prop :
+    {l3 : Level} → subtype l3 A → UU-Prop (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-subtype-Prop Q =
+    Π-Prop A (λ x → iff-Prop (P x) (Q x))
+
   has-same-elements-subtype : {l3 : Level} → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
-  has-same-elements-subtype Q = (x : A) → P x ⇔ Q x
+  has-same-elements-subtype Q = type-Prop (has-same-elements-subtype-Prop Q)
 
   refl-has-same-elements-subtype : has-same-elements-subtype P
   pr1 (refl-has-same-elements-subtype x) = id

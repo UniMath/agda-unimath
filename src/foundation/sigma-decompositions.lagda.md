@@ -125,6 +125,11 @@ module _
       cotype-Set-Indexed-Σ-Decomposition
   map-matching-correspondence-Set-Indexed-Σ-Decomposition =
     map-equiv matching-correspondence-Set-Indexed-Σ-Decomposition
+
+  index-Set-Indexed-Σ-Decomposition :
+    A → indexing-type-Set-Indexed-Σ-Decomposition
+  index-Set-Indexed-Σ-Decomposition a =
+    pr1 (map-matching-correspondence-Set-Indexed-Σ-Decomposition a)
 ```
 
 ## Properties
