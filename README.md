@@ -6,6 +6,12 @@ The `agda-unimath` library is a new formalisation project for univalent mathemat
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
+## Links
+
+1. [Agda-Unimath webpage](https://unimath.github.io/agda-unimath/)
+2. [Discord](https://discord.gg/Zp2e8hYsuX)
+3. [Twitch](https://www.twitch.tv/agdaunimath)
+
 ## Getting started
 
 Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
@@ -46,7 +52,7 @@ With Agda installed and emacs correctly set up, you can start using the library.
 
 ## Joining the project and contributing
 
-If you would like to contribute something to the `agda-unimath` library, the best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
+If you would like to contribute something to the `agda-unimath` library, the best way to start is to find us in our chat channels on the [Univalent Agda discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
 
 Once you've decided what you want to contribute, we recommend that you make your own fork of the library. Within your fork, make a separate branch in which you will be making your contribution. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
