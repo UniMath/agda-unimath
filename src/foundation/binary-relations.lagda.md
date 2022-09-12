@@ -13,6 +13,7 @@ open import foundation.subtypes using
   ( has-same-elements-subtype; refl-has-same-elements-subtype;
     is-contr-total-has-same-elements-subtype)
 
+open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.contractible-types using (is-contr)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
@@ -38,6 +39,10 @@ A binary relation on a type `A` is a family of types `R x y` depending on two va
 ```agda
 Rel : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Rel l A = A → A → UU l
+
+tot-Rel : {l1 l : Level} {A : UU l1}
+        → Rel l A → UU (l1 ⊔ l)
+tot-Rel {A = A} R = Σ (A × A) λ (pair a a') → R a a'
 ```
 
 ### Relations valued in propositions
@@ -56,6 +61,10 @@ abstract
     {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
     (x y : A) → is-prop (type-Rel-Prop R x y)
   is-prop-type-Rel-Prop R x y = pr2 (R x y)
+
+tot-Rel-Prop : {l : Level} {l1 : Level} {A : UU l1}
+             → Rel-Prop l A → UU (l ⊔ l1)
+tot-Rel-Prop {A = A} R = Σ (A × A) λ (pair a a') → type-Rel-Prop R a a'
 ```
 
 ## Specifications of properties of binary relations
