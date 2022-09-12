@@ -27,6 +27,7 @@ open import foundation.logical-equivalences
 open import foundation.partitions
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sigma-decompositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
@@ -393,3 +394,23 @@ pr1 equiv-eq-rel-partition = eq-rel-partition
 pr2 equiv-eq-rel-partition = is-equiv-eq-rel-partition
 ```
 
+### Equivalence relations are equivalent to set-indexed Σ-decompositions
+
+#### The Σ-decomposition obtained from an equivalence relation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+  
+  set-indexed-Σ-decomposition-Eq-Rel :
+    Set-Indexed-Σ-Decomposition (l1 ⊔ l2) (l1 ⊔ l2) A
+  pr1 set-indexed-Σ-decomposition-Eq-Rel =
+    block-partition-Set (partition-Eq-Rel R)
+  pr1 (pr2 set-indexed-Σ-decomposition-Eq-Rel) B =
+    inhabited-type-inhabited-subtype
+      ( inhabited-subtype-block-partition (partition-Eq-Rel R) B)
+  pr2 (pr2 set-indexed-Σ-decomposition-Eq-Rel) =
+    inv-equiv (compute-total-block-partition (partition-Eq-Rel R))
+  
+```
