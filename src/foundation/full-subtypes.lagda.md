@@ -6,6 +6,7 @@ title: Full subtypes of types
 module foundation.full-subtypes where
 
 open import foundation.contractible-maps
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -27,6 +28,15 @@ The full subtype of a type contains every element. We define a full subtype at e
 ```agda
 is-full-subtype : {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU (l1 ⊔ l2)
 is-full-subtype {A = A} P = (x : A) → is-in-subtype P x
+```
+
+### Full decidable subtypes
+
+```agda
+is-full-decidable-subtype :
+  {l1 l2 : Level} {A : UU l1} → decidable-subtype l2 A → UU (l1 ⊔ l2)
+is-full-decidable-subtype P =
+  is-full-subtype (subtype-decidable-subtype P)
 ```
 
 ### The full subtype at a universe level

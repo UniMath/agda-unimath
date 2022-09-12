@@ -41,14 +41,16 @@ open import foundation.decidable-equality using
 open import foundation.decidable-equivalence-relations using
   ( is-decidable-is-in-equivalence-class-is-decidable)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop; is-prop-type-decidable-Prop;
-    type-decidable-Prop; equiv-bool-decidable-Prop; prop-decidable-Prop)
+  ( decidable-Prop; is-decidable-type-decidable-Prop;
+    is-prop-type-decidable-Prop; is-prop-is-decidable; 
+    type-decidable-Prop; equiv-bool-decidable-Prop; prop-decidable-Prop;
+    is-decidable-Prop)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype)
+    is-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
-    dn-elim-is-decidable; is-decidable-Prop; is-prop-is-decidable)
+    dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; ex-falso; equiv-is-empty; empty-Prop)

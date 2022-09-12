@@ -12,8 +12,8 @@ open import foundation.decidable-equality using (has-decidable-equality)
 open import foundation.decidable-propositions using
   ( decidable-Prop; type-decidable-Prop; is-decidable-prop;
     is-decidable-prop-type-decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop)
-open import foundation.decidable-types using (is-decidable-Prop; is-decidable)
+    is-prop-type-decidable-Prop; is-decidable-Prop)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.mere-equivalences using (mere-equiv)

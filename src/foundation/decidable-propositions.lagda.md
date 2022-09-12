@@ -16,11 +16,13 @@ open import foundation.contractible-types using (equiv-is-contr; eq-is-contr)
 open import foundation.coproduct-types using
   ( _+_; inl; inr)
 open import foundation.decidable-types using
-  ( is-decidable; is-prop-is-decidable)
+  ( is-decidable; is-decidable-neg; is-merely-decidable;
+    is-merely-decidable-Prop)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_; is-emb-tot; equiv-ap-emb)
 open import foundation.empty-types using
-  ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso)
+  ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso;
+    empty-Prop)
 open import foundation.equivalences using
   ( _≃_; _∘e_; map-equiv; equiv-ap; is-equiv; is-equiv-has-inverse; inv-equiv; map-inv-equiv;
     right-inverse-law-equiv)
@@ -30,10 +32,13 @@ open import foundation.functoriality-dependent-pair-types using (tot)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (_＝_; ap; refl; inv; tr)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
-open import foundation.negation using (¬)
+open import foundation.negation using (¬; is-prop-neg)
 open import foundation.propositional-extensionality using
   ( is-contr-total-true-Prop; is-contr-total-false-Prop;
     propositional-extensionality)
+open import foundation.propositional-truncations using
+  ( type-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
+    map-universal-property-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using
   ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
     is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
@@ -74,6 +79,42 @@ abstract
           ( is-prop-is-decidable (pr1 H)))
 ```
 
+### Decidability of a propositional truncation
+
+```agda
+abstract
+  is-prop-is-decidable-trunc-Prop :
+    {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
+  is-prop-is-decidable-trunc-Prop A =
+    is-prop-is-decidable is-prop-type-trunc-Prop
+    
+is-decidable-trunc-Prop : {l : Level} → UU l → UU-Prop l
+pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
+pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A
+
+is-decidable-trunc-Prop-is-merely-decidable :
+  {l : Level} (A : UU l) →
+  is-merely-decidable A → is-decidable (type-trunc-Prop A)
+is-decidable-trunc-Prop-is-merely-decidable A =
+  map-universal-property-trunc-Prop
+    ( is-decidable-trunc-Prop A)
+    ( f)
+  where
+  f : is-decidable A → type-Prop (is-decidable-trunc-Prop A)
+  f (inl a) = inl (unit-trunc-Prop a)
+  f (inr f) = inr (map-universal-property-trunc-Prop empty-Prop f)
+
+is-merely-decidable-is-decidable-trunc-Prop :
+  {l : Level} (A : UU l) →
+  is-decidable (type-trunc-Prop A) → is-merely-decidable A
+is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
+   apply-universal-property-trunc-Prop x
+     ( is-merely-decidable-Prop A)
+     ( unit-trunc-Prop ∘ inl)
+is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
+  unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
+```
+
 ### The forgetful map from decidable propositions to propositions is an embedding
 
 ```agda
@@ -89,6 +130,8 @@ emb-prop-decidable-Prop :
 pr1 emb-prop-decidable-Prop = prop-decidable-Prop
 pr2 emb-prop-decidable-Prop = is-emb-prop-decidable-Prop
 ```
+
+### The type of decidable propositions in universe level `l` is equivalent to the type of booleans
 
 ```agda
 module _
@@ -265,4 +308,15 @@ is-finite-decidable-Prop {l} =
 decidable-Prop-𝔽 : (l : Level) → 𝔽 (lsuc l)
 pr1 (decidable-Prop-𝔽 l) = decidable-Prop l
 pr2 (decidable-Prop-𝔽 l) = is-finite-decidable-Prop
+```
+
+### The negation of a decidable proposition is a decidable proposition
+
+```agda
+neg-decidable-Prop :
+  {l : Level} → decidable-Prop l → decidable-Prop l
+pr1 (neg-decidable-Prop P) = ¬ (type-decidable-Prop P)
+pr1 (pr2 (neg-decidable-Prop P)) = is-prop-neg
+pr2 (pr2 (neg-decidable-Prop P)) =
+  is-decidable-neg (is-decidable-type-decidable-Prop P)
 ```

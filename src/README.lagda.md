@@ -225,6 +225,7 @@ open import foundation.commutative-operations
 open import foundation.commuting-cubes
 open import foundation.commuting-squares
 open import foundation.complements
+open import foundation.complements-subtypes
 open import foundation.cones-pullbacks
 open import foundation.conjunction
 open import foundation.connected-components-universes
@@ -351,6 +352,7 @@ open import foundation.powersets
 open import foundation.principle-of-omniscience
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
+open import foundation.proper-subtypes
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-resizing

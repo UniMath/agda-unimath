@@ -14,9 +14,11 @@ open import foundation.decidable-embeddings using (_↪d_)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
 open import foundation.decidable-maps using (is-decidable-map)
+open import foundation.decidable-propositions using
+  ( is-prop-is-decidable)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-equiv; is-decidable-equiv';
-    is-prop-is-decidable; is-decidable-prod; is-decidable-unit)
+    is-decidable-prod; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; is-emb-comp')
 open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
@@ -60,6 +62,16 @@ is-isolated {l1} {X} a = (x : X) → is-decidable (a ＝ x)
 isolated-point :
   {l1 : Level} (X : UU l1) → UU l1
 isolated-point X = Σ X is-isolated
+
+module _
+  {l : Level} {X : UU l} (x : isolated-point X)
+  where
+
+  point-isolated-point : X
+  point-isolated-point = pr1 x
+
+  is-isolated-isolated-point : is-isolated point-isolated-point
+  is-isolated-isolated-point = pr2 x
 ```
 
 ### Complements of isolated points
@@ -68,7 +80,7 @@ isolated-point X = Σ X is-isolated
 complement-isolated-point :
   {l1 : Level} (X : UU l1) → isolated-point X → UU l1
 complement-isolated-point X x =
-  Σ X (λ y → ¬ (pr1 x ＝ y))
+  Σ X (λ y → ¬ (point-isolated-point x ＝ y))
 ```
 
 ## Properties

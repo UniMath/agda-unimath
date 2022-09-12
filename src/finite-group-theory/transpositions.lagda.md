@@ -19,9 +19,9 @@ open import foundation.coproduct-types using
     coprod-Prop)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
+open import foundation.decidable-propositions using (is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-empty; is-prop-is-decidable;
-    is-decidable-raise)
+  ( is-decidable; is-decidable-coprod; is-decidable-empty; is-decidable-raise)
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop; prop-decidable-Prop)

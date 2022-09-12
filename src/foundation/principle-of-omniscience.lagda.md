@@ -8,7 +8,7 @@ title: The principle of omniscience
 module foundation.principle-of-omniscience where
 
 open import foundation.decidable-subtypes
-open import foundation.decidable-types
+open import foundation.decidable-propositions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels

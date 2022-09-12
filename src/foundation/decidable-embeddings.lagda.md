@@ -13,10 +13,11 @@ open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using (center; is-contr)
 open import foundation.decidable-maps using (is-decidable-map)
 open import foundation.decidable-propositions using
-  ( is-decidable-prop; is-prop-is-decidable-prop; decidable-Prop)
+  ( is-decidable-prop; is-prop-is-decidable-prop; decidable-Prop;
+    is-prop-is-decidable)
 open import foundation.decidable-subtypes using (decidable-subtype)
 open import foundation.decidable-types using
-  ( is-prop-is-decidable; is-decidable; is-decidable-equiv)
+  ( is-decidable; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb; _↪_; is-emb-id; is-prop-is-emb; is-emb-comp'; is-emb-htpy)

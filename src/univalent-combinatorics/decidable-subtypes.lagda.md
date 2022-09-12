@@ -43,7 +43,7 @@ module _
 
   is-decidable-subset-𝔽 : is-decidable-subtype subtype-subset-𝔽
   is-decidable-subset-𝔽 =
-    is-decidable-subtype-subtype-decidable-subtype P
+    is-decidable-subtype-decidable-subtype P
 
   is-in-subset-𝔽 : type-𝔽 X → UU l2
   is-in-subset-𝔽 = is-in-decidable-subtype P

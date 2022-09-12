@@ -14,7 +14,8 @@ open import foundation.decidable-propositions using
   ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop;
     type-decidable-Prop; is-prop-type-decidable-Prop;
     equiv-universes-decidable-Prop; iff-universes-decidable-Prop;
-    is-set-decidable-Prop; extensionality-decidable-Prop)
+    is-set-decidable-Prop; extensionality-decidable-Prop;
+    is-decidable-Prop)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-unit; is-decidable-empty)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -30,7 +31,7 @@ open import foundation.identity-types using (inv; tr; _＝_; refl)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.propositions using
-  ( type-Prop; is-prop; UU-Prop; is-prop-type-Prop)
+  ( type-Prop; is-prop; UU-Prop; is-prop-type-Prop; Π-Prop)
 open import foundation.sets using
   ( is-set; is-set-function-type; UU-Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using
@@ -54,8 +55,18 @@ A decidable subtype of a type consists of a family of decidable propositions ove
 ### Decidable subtypes
 
 ```agda
+is-decidable-subtype-Prop :
+  {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU-Prop (l1 ⊔ l2)
+is-decidable-subtype-Prop {A = A} P =
+  Π-Prop A (λ a → is-decidable-Prop (P a))
+
 is-decidable-subtype : {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU (l1 ⊔ l2)
-is-decidable-subtype {A = A} P = (a : A) → is-decidable (type-Prop (P a))
+is-decidable-subtype P = type-Prop (is-decidable-subtype-Prop P)
+
+is-prop-is-decidable-subtype :
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A) →
+  is-prop (is-decidable-subtype P)
+is-prop-is-decidable-subtype P = is-prop-type-Prop (is-decidable-subtype-Prop P)
 
 decidable-subtype : {l1 : Level} (l : Level) (X : UU l1) → UU (l1 ⊔ lsuc l)
 decidable-subtype l X = X → decidable-Prop l
@@ -71,9 +82,9 @@ module _
   subtype-decidable-subtype : subtype l2 A
   subtype-decidable-subtype a = prop-decidable-Prop (P a)
 
-  is-decidable-subtype-subtype-decidable-subtype :
+  is-decidable-subtype-decidable-subtype :
     is-decidable-subtype subtype-decidable-subtype
-  is-decidable-subtype-subtype-decidable-subtype a =
+  is-decidable-subtype-decidable-subtype a =
     is-decidable-type-decidable-Prop (P a)
 
   is-in-decidable-subtype : A → UU l2

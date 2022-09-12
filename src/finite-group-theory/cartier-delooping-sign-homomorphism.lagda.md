@@ -31,9 +31,9 @@ open import foundation.commuting-squares using (coherence-square)
 open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using (inl; inr; neq-inr-inl)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop)
+  ( decidable-Prop; type-decidable-Prop; is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-prop-is-decidable)
+  ( is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using

@@ -23,7 +23,7 @@ The union of two subtypes `A` and `B` is the subtype that contains the elements 
 
 ```agda
 module _
-  {l l1 l2 : Level} (X : UU l)
+  {l l1 l2 : Level} {X : UU l}
   where
 
   union-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X

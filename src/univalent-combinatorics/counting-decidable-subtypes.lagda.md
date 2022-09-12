@@ -17,8 +17,10 @@ open import foundation.decidable-embeddings using
   ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
+open import foundation.decidable-propositions using
+  ( is-decidable-Prop)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-Prop)
+  ( is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using (map-equiv; _≃_; id-equiv)
@@ -65,7 +67,7 @@ count-decidable-subtype' P zero-ℕ e =
   count-is-empty
     ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl ∘ pr1)
 count-decidable-subtype' P (succ-ℕ k) e
-  with is-decidable-subtype-subtype-decidable-subtype P (map-equiv e (inr star))
+  with is-decidable-subtype-decidable-subtype P (map-equiv e (inr star))
 ... | inl p =
   count-equiv
     ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))

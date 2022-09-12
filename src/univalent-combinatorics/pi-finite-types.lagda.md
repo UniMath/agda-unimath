@@ -18,9 +18,9 @@ open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
 open import foundation.decidable-propositions using
-  ( is-finite-is-decidable-Prop)
+  ( is-finite-is-decidable-Prop; is-decidable-Prop)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-Prop; is-decidable-equiv'; is-decidable-equiv)
+  ( is-decidable; is-decidable-equiv'; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb; is-emb-right-factor; is-emb-comp'; equiv-ap-emb)

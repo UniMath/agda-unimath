@@ -16,8 +16,7 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-embeddings using
   ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
 open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; is-in-decidable-subtype;
-    is-decidable-subtype-subtype-decidable-subtype)
+  ( decidable-subtype; type-decidable-subtype; is-in-decidable-subtype)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)

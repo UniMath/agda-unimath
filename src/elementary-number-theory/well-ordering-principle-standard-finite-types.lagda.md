@@ -23,7 +23,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; is-in-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype-subtype-decidable-subtype; type-decidable-subtype)
+    is-decidable-subtype-decidable-subtype; type-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -201,7 +201,7 @@ well-ordering-principle-∃-Fin k P H =
   apply-universal-property-trunc-Prop H
     ( minimal-element-Fin-Prop k (subtype-decidable-subtype P))
     ( well-ordering-principle-Σ-Fin k
-      ( is-decidable-subtype-subtype-decidable-subtype P))
+      ( is-decidable-subtype-decidable-subtype P))
 ```
 
 ### Hilbert's epsilon operator for decidable subtypes of standard finite types
@@ -229,7 +229,7 @@ well-ordering-principle-∃-Fin k P H =
   Q n = subtype-decidable-subtype P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
   is-decidable-Q n =
-    is-decidable-subtype-subtype-decidable-subtype P (mod-succ-ℕ k n)
+    is-decidable-subtype-decidable-subtype P (mod-succ-ℕ k n)
   ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
   ε-operator-total-Q =
     ε-operator-decidable-subtype-ℕ Q is-decidable-Q

@@ -39,6 +39,9 @@ module _
   is-antireflexive : UU (l1 ⊔ l2)
   is-antireflexive = (a : A) → ¬ (type-Prop (R a a))
 
+  is-consistent : UU (l1 ⊔ l2)
+  is-consistent = (a b : A) → (a ＝ b) → ¬ (type-Prop (R a b))
+
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive =
     (a b c : A) → type-hom-Prop (R a b) (disj-Prop (R a c) (R b c))
@@ -60,21 +63,68 @@ module _
   rel-Apartness-Relation : A → A → UU-Prop l2
   rel-Apartness-Relation = pr1 R
 
-  type-rel-Apartness-Relation : A → A → UU l2
-  type-rel-Apartness-Relation x y = type-Prop (rel-Apartness-Relation x y)
+  apart-Apartness-Relation : A → A → UU l2
+  apart-Apartness-Relation x y = type-Prop (rel-Apartness-Relation x y)
 
-  antirefl-Apartness-Relation : (x : A) → ¬ (type-rel-Apartness-Relation x x)
+  antirefl-Apartness-Relation : is-antireflexive rel-Apartness-Relation
   antirefl-Apartness-Relation = pr1 (pr2 R)
 
-  symmetric-Apartness-Relation :
-    (x y : A) →
-    type-rel-Apartness-Relation x y → type-rel-Apartness-Relation y x
+  consistent-Apartness-Relation : is-consistent rel-Apartness-Relation
+  consistent-Apartness-Relation x .x refl =
+    antirefl-Apartness-Relation x
+
+  symmetric-Apartness-Relation : is-symmetric apart-Apartness-Relation
   symmetric-Apartness-Relation = pr1 (pr2 (pr2 R))
 
-  cotransitive-Apartness-Relation :
-    (x y z : A) →
-    type-hom-Prop
-      ( rel-Apartness-Relation x y)
-      ( disj-Prop (rel-Apartness-Relation x z) (rel-Apartness-Relation y z))
+  cotransitive-Apartness-Relation : is-cotransitive rel-Apartness-Relation
   cotransitive-Apartness-Relation = pr2 (pr2 (pr2 R))
+```
+
+### Types equipped with apartness relation
+
+```agda
+Type-With-Apartness :
+  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Type-With-Apartness l1 l2 =
+  Σ (UU l1) (λ A → Apartness-Relation l2 A)
+
+module _
+  {l1 l2 : Level} (A : Type-With-Apartness l1 l2)
+  where
+
+  type-Type-With-Apartness : UU l1
+  type-Type-With-Apartness = pr1 A
+
+  apartness-relation-Type-With-Apartness :
+    Apartness-Relation l2 type-Type-With-Apartness
+  apartness-relation-Type-With-Apartness = pr2 A
+
+  rel-apart-Type-With-Apartness : Rel-Prop l2 type-Type-With-Apartness
+  rel-apart-Type-With-Apartness =
+    rel-Apartness-Relation apartness-relation-Type-With-Apartness
+
+  apart-Type-With-Apartness :
+    (x y : type-Type-With-Apartness) → UU l2
+  apart-Type-With-Apartness =
+    apart-Apartness-Relation apartness-relation-Type-With-Apartness
+
+  antirefl-apart-Type-With-Apartness :
+    is-antireflexive rel-apart-Type-With-Apartness
+  antirefl-apart-Type-With-Apartness =
+    antirefl-Apartness-Relation apartness-relation-Type-With-Apartness
+
+  consistent-apart-Type-With-Apartness :
+    is-consistent rel-apart-Type-With-Apartness
+  consistent-apart-Type-With-Apartness =
+    consistent-Apartness-Relation apartness-relation-Type-With-Apartness
+
+  symmetric-apart-Type-With-Apartness :
+    is-symmetric apart-Type-With-Apartness
+  symmetric-apart-Type-With-Apartness =
+    symmetric-Apartness-Relation apartness-relation-Type-With-Apartness
+
+  cotransitive-apart-Type-With-Apartness :
+    is-cotransitive rel-apart-Type-With-Apartness
+  cotransitive-apart-Type-With-Apartness =
+    cotransitive-Apartness-Relation apartness-relation-Type-With-Apartness
 ```
