@@ -121,6 +121,10 @@ module _
   is-emb-fiber-inclusion H x =
     is-emb-is-prop-map (is-prop-map-fiber-inclusion x H)
 
+  emb-fiber-inclusion : is-set A → (x : A) → B x ↪ Σ A B
+  pr1 (emb-fiber-inclusion H x) = fiber-inclusion B x
+  pr2 (emb-fiber-inclusion H x) = is-emb-fiber-inclusion H x
+
   is-faithful-fiber-inclusion :
     is-1-type A → (x : A) → is-faithful (fiber-inclusion B x)
   is-faithful-fiber-inclusion H x =

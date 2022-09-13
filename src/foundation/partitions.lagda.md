@@ -3,8 +3,6 @@ title: Partitions
 ---
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.partitions where
 
 open import foundation.cartesian-product-types
@@ -15,6 +13,7 @@ open import foundation.embeddings
 open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
@@ -330,6 +329,12 @@ We will now introduce the type of blocks of a partition, and show that the type 
     (a : A) → is-in-block-partition (class-partition a) a
   is-in-block-class-partition a =
     pr2 (center-block-containing-element-partition a)
+
+  compute-base-type-partition : Σ block-partition type-block-partition ≃ A
+  compute-base-type-partition =
+    ( right-unit-law-Σ-is-contr
+      ( λ x → is-contr-block-containing-element-partition x)) ∘e
+    ( equiv-left-swap-Σ)
 ```
 
 ## Properties
@@ -464,6 +469,24 @@ module _
   pr2 block-partition-Set = is-set-block-partition
 ```
 
+### The inclusion of a block into the base type of a partition is an embedding
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (P : partition l2 l3 A)
+  where
+
+  emb-inclusion-block-partition :
+    (B : block-partition P) → type-block-partition P B ↪ A
+  emb-inclusion-block-partition B =
+    comp-emb
+      ( emb-equiv (compute-base-type-partition P))
+      ( emb-fiber-inclusion
+        ( type-block-partition P)
+        ( is-set-block-partition P)
+        ( B))
+```
+
 ### Two blocks of a partition are equal if they share a common element
 
 ```agda
@@ -550,9 +573,7 @@ module _
       ( λ i →
         (x : A) →
         ( is-in-inhabited-subtype Q x) ≃
-        ( ( pr1
-            ( map-matching-correspondence-Set-Indexed-Σ-Decomposition D x)) ＝
-          ( i)))
+        ( index-Set-Indexed-Σ-Decomposition D x ＝ i))
 
   is-prop-is-block-partition-Set-Indexed-Σ-Decomposition :
     {l4 : Level} (Q : inhabited-subtype l4 A) →
@@ -653,7 +674,21 @@ module _
         ( set-indexed-Σ-decomposition-partition P))
       ( Q) →
     is-block-partition P Q
-  is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q H = {!!}
+  is-block-is-block-partition-set-indexed-Σ-decomposition-partition Q (i , H) =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-subtype-inhabited-subtype Q)
+      ( subtype-partition P Q)
+      ( λ (a , q) →
+        {!!})
+
+{-
+i : X
+H : (x : A) → Q x ≃ (pr1 (inv-equiv (compute-total-block-partition P) x) ＝ i)
+a : A
+q : Q a
+
+H a q : pr1 (inv-equiv (compute-total-block-partition P) a) ＝ i
+-}
 
   is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
     ( Q : inhabited-subtype (l1 ⊔ l2) A) →
@@ -662,7 +697,8 @@ module _
       ( partition-Set-Indexed-Σ-Decomposition
         ( set-indexed-Σ-decomposition-partition P))
       ( Q)
-  is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H = {!!}
+  is-block-partition-set-indexed-Σ-decomposition-is-block-partition Q H =
+    {!!}
 
   has-same-blocks-partition-set-indexed-Σ-decomposition-partition :
     has-same-blocks-partition
