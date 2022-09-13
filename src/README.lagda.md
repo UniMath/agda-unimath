@@ -286,6 +286,7 @@ open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.full-subtypes
 open import foundation.function-extensionality
+open import foundation.functional-correspondences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
