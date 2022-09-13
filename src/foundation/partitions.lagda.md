@@ -688,6 +688,8 @@ a : A
 q : Q a
 
 H a q : pr1 (inv-equiv (compute-total-block-partition P) a) ＝ i
+
+H' : (B : block)
 -}
 
   is-block-partition-set-indexed-Σ-decomposition-is-block-partition :
