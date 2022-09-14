@@ -40,9 +40,9 @@ A binary relation on a type `A` is a family of types `R x y` depending on two va
 Rel : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Rel l A = A → A → UU l
 
-tot-Rel : {l1 l : Level} {A : UU l1}
+total-space-Rel : {l1 l : Level} {A : UU l1}
         → Rel l A → UU (l1 ⊔ l)
-tot-Rel {A = A} R = Σ (A × A) λ (pair a a') → R a a'
+total-space-Rel {A = A} R = Σ (A × A) λ (pair a a') → R a a'
 ```
 
 ### Relations valued in propositions
@@ -62,9 +62,9 @@ abstract
     (x y : A) → is-prop (type-Rel-Prop R x y)
   is-prop-type-Rel-Prop R x y = pr2 (R x y)
 
-tot-Rel-Prop : {l : Level} {l1 : Level} {A : UU l1}
+total-space-Rel-Prop : {l : Level} {l1 : Level} {A : UU l1}
              → Rel-Prop l A → UU (l ⊔ l1)
-tot-Rel-Prop {A = A} R = Σ (A × A) λ (pair a a') → type-Rel-Prop R a a'
+total-space-Rel-Prop {A = A} R = Σ (A × A) λ (pair a a') → type-Rel-Prop R a a'
 ```
 
 ## Specifications of properties of binary relations
