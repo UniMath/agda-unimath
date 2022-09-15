@@ -113,6 +113,7 @@ open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.images public
+open import foundation.images-subtypes
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.indexed-w-types public
@@ -156,6 +157,7 @@ open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
+open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
@@ -178,6 +180,7 @@ open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
+open import foundation.shifting-sequences public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public
@@ -188,6 +191,7 @@ open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.strongly-extensional-maps public
 open import foundation.structure-identity-principle public
 open import foundation.structure public
 open import foundation.subterminal-types public
@@ -240,6 +244,7 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
+open import foundation.w-type-of-propositions public
 open import foundation.w-types public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public

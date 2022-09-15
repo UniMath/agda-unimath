@@ -11,13 +11,16 @@ open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
 open import foundation-core.decidable-propositions using (decidable-Prop)
-open import foundation-core.discrete-types using (Discrete-Type)
 
+open import foundation.apartness-relations
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (_+_; inl; inr; is-prop-coprod; neq-inr-inl)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-empty; is-decidable-unit)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)
+open import foundation.discrete-types using
+  ( Discrete-Type; type-with-apartness-Discrete-Type;
+    type-with-tight-apartness-Discrete-Type)
 open import foundation.empty-types using (empty; is-set-empty)
 open import foundation.equality-coproduct-types using
   ( is-set-coprod)
@@ -30,6 +33,7 @@ open import foundation.raising-universe-levels using (raise-Set)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
 open import foundation.sets using (is-set; UU-Set)
+open import foundation.tight-apartness-relations
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (Level; UU; lzero)
 
@@ -76,6 +80,10 @@ has-decidable-equality-Fin :
 has-decidable-equality-Fin k x y =
   map-coprod (eq-Eq-Fin k) (map-neg (Eq-Fin-eq k)) (is-decidable-Eq-Fin k x y)
 
+Fin-Discrete-Type : ℕ → Discrete-Type lzero
+pr1 (Fin-Discrete-Type k) = Fin k
+pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
+
 is-decidable-is-zero-Fin :
   {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin k x)
 is-decidable-is-zero-Fin {succ-ℕ k} x =
@@ -90,10 +98,6 @@ is-decidable-is-one-Fin :
   {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin k x)
 is-decidable-is-one-Fin {succ-ℕ k} x =
   has-decidable-equality-Fin (succ-ℕ k) x (one-Fin k)
-
-Fin-Discrete-Type : ℕ → Discrete-Type lzero
-pr1 (Fin-Discrete-Type k) = Fin k
-pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
 ```
 
 ### Being zero or being one is a proposition
@@ -150,4 +154,16 @@ two-distinct-elements-leq-2-Fin : (n : ℕ) → leq-ℕ 2 n →
 pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) = inr star
 pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = inl (inr star)
 pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = neq-inr-inl
+```
+
+### The standard finite type with a (tight) apartness relation
+
+```agda
+Fin-Type-With-Apartness : (k : ℕ) → Type-With-Apartness lzero lzero
+Fin-Type-With-Apartness k =
+  type-with-apartness-Discrete-Type (Fin-Discrete-Type k)
+
+Fin-Type-With-Tight-Apartness : (k : ℕ) → Type-With-Tight-Apartness lzero lzero
+Fin-Type-With-Tight-Apartness k =
+  type-with-tight-apartness-Discrete-Type (Fin-Discrete-Type k)
 ```

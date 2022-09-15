@@ -35,7 +35,9 @@ open import foundation.slice using
     comp-hom-slice; hom-equiv-slice)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (is-emb-inclusion-subtype; eq-type-subtype)
+open import foundation.subtypes using
+  ( is-emb-inclusion-subtype; eq-type-subtype; subtype; type-subtype;
+    inclusion-subtype)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.truncated-types using (is-trunc; is-trunc-emb)
 open import foundation.truncation-levels using
@@ -53,12 +55,15 @@ The image of a map is a type that satisfies the universal property of the image 
 module _
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   where
+
+  subtype-im : subtype (l1 ⊔ l2) X
+  subtype-im x = trunc-Prop (fib f x)
     
   im : UU (l1 ⊔ l2)
-  im = Σ X (λ x → type-trunc-Prop (fib f x))
+  im = type-subtype subtype-im
 
   inclusion-im : im → X
-  inclusion-im = pr1
+  inclusion-im = inclusion-subtype subtype-im
 
   map-unit-im : A → im
   pr1 (map-unit-im a) = f a

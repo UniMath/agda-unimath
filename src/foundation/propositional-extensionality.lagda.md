@@ -8,7 +8,8 @@ title: Propositional extensionality
 module foundation.propositional-extensionality where
 
 open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; equiv-universal-property-contr; is-contr-Π)
+  ( is-contr; is-contr-equiv; equiv-universal-property-contr; is-contr-Π;
+    is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( raise-empty-Prop; empty; raise-empty; is-empty-raise-empty)
@@ -21,7 +22,7 @@ open import foundation.functoriality-function-types using
 open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl)
+open import foundation.identity-types using (_＝_; refl; equiv-tr)
 open import foundation.logical-equivalences using
   ( _⇔_; equiv-equiv-iff; iff-eq; is-prop-logical-equivalence)
 open import foundation.negation using (neg-Prop)
@@ -37,6 +38,7 @@ open import foundation.type-arithmetic-cartesian-product-types using
 open import foundation.unit-type using
   ( raise-unit-Prop; raise-star; is-contr-raise-unit; is-prop-raise-unit)
 open import foundation.univalence using (is-contr-total-equiv)
+open import foundation.univalent-type-families using (is-univalent)
 open import foundation.universal-property-empty-type using
   ( universal-property-empty-is-empty)
 open import foundation.universe-levels using (Level; lsuc)
@@ -97,6 +99,15 @@ module _
   equiv-eq-Prop :
     {P Q : UU-Prop l1} → P ＝ Q → type-Prop P ≃ type-Prop Q
   equiv-eq-Prop {P} refl = id-equiv
+
+  is-contr-total-equiv-Prop :
+    (P : UU-Prop l1) →
+    is-contr (Σ (UU-Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
+  is-contr-total-equiv-Prop P =
+    is-contr-equiv'
+      ( Σ (UU-Prop l1) (λ Q → P ⇔ Q))
+      ( equiv-tot (equiv-equiv-iff P))
+      ( is-contr-total-iff P)
 ```
 
 ### The type of propositions is a set
@@ -111,6 +122,16 @@ is-set-UU-Prop {l} P Q =
 UU-Prop-Set : (l : Level) → UU-Set (lsuc l)
 pr1 (UU-Prop-Set l) = UU-Prop l
 pr2 (UU-Prop-Set l) = is-set-UU-Prop
+```
+
+### The canonical type family over `UU-Prop` is univalent
+
+```agda
+is-univalent-type-Prop : {l : Level} → is-univalent (type-Prop {l})
+is-univalent-type-Prop {l} P =
+  fundamental-theorem-id
+    ( is-contr-total-equiv-Prop P)
+    ( λ Q → equiv-tr type-Prop)
 ```
 
 ### The type of true propositions is contractible

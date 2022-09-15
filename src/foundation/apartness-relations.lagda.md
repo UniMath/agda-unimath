@@ -9,10 +9,14 @@ module foundation.apartness-relations where
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -127,4 +131,87 @@ module _
     is-cotransitive rel-apart-Type-With-Apartness
   cotransitive-apart-Type-With-Apartness =
     cotransitive-Apartness-Relation apartness-relation-Type-With-Apartness
+```
+
+### Apartness on the type of functions into a type with an apartness relation
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : UU l1) (Y : Type-With-Apartness l2 l3)
+  where
+  
+  rel-apart-function-into-Type-With-Apartness :
+    Rel-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
+  rel-apart-function-into-Type-With-Apartness f g =
+    ∃-Prop X (λ x → apart-Type-With-Apartness Y (f x) (g x))
+
+  apart-function-into-Type-With-Apartness :
+    Rel (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
+  apart-function-into-Type-With-Apartness f g =
+    type-Prop (rel-apart-function-into-Type-With-Apartness f g)
+
+  is-prop-apart-function-into-Type-With-Apartness :
+    (f g : X → type-Type-With-Apartness Y) →
+    is-prop (apart-function-into-Type-With-Apartness f g)
+  is-prop-apart-function-into-Type-With-Apartness f g =
+    is-prop-type-Prop (rel-apart-function-into-Type-With-Apartness f g)
+```
+
+## Properties
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : UU l1) (Y : Type-With-Apartness l2 l3)
+  where
+
+  is-antireflexive-apart-function-into-Type-With-Apartness :
+    is-antireflexive (rel-apart-function-into-Type-With-Apartness X Y)
+  is-antireflexive-apart-function-into-Type-With-Apartness f H =
+    apply-universal-property-trunc-Prop H
+      ( empty-Prop)
+      ( λ (x , a) → antirefl-apart-Type-With-Apartness Y (f x) a)
+
+  is-symmetric-apart-function-into-Type-With-Apartness :
+    is-symmetric (apart-function-into-Type-With-Apartness X Y)
+  is-symmetric-apart-function-into-Type-With-Apartness f g H =
+    apply-universal-property-trunc-Prop H
+      ( rel-apart-function-into-Type-With-Apartness X Y g f)
+      ( λ (x , a) →
+        unit-trunc-Prop
+          ( x , symmetric-apart-Type-With-Apartness Y (f x) (g x) a))
+
+  is-cotransitive-apart-function-into-Type-With-Apartness :
+    is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
+  is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
+    apply-universal-property-trunc-Prop H
+      ( disj-Prop
+        ( rel-apart-function-into-Type-With-Apartness X Y f h)
+        ( rel-apart-function-into-Type-With-Apartness X Y g h))
+      ( λ (x , a) →
+        apply-universal-property-trunc-Prop
+         ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
+         ( disj-Prop
+           ( rel-apart-function-into-Type-With-Apartness X Y f h)
+           ( rel-apart-function-into-Type-With-Apartness X Y g h))
+         ( λ { (inl b) →
+               inl-disj-Prop
+                 ( rel-apart-function-into-Type-With-Apartness X Y f h)
+                 ( rel-apart-function-into-Type-With-Apartness X Y g h)
+                 ( unit-trunc-Prop (x , b)) ;
+               (inr b) →
+               inr-disj-Prop
+                 ( rel-apart-function-into-Type-With-Apartness X Y f h)
+                 ( rel-apart-function-into-Type-With-Apartness X Y g h)
+                 ( unit-trunc-Prop (x , b))}))
+
+  exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
+  pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y
+  pr1 (pr2 exp-Type-With-Apartness) =
+    rel-apart-function-into-Type-With-Apartness X Y
+  pr1 (pr2 (pr2 exp-Type-With-Apartness)) =
+    is-antireflexive-apart-function-into-Type-With-Apartness
+  pr1 (pr2 (pr2 (pr2 exp-Type-With-Apartness))) =
+    is-symmetric-apart-function-into-Type-With-Apartness
+  pr2 (pr2 (pr2 (pr2 exp-Type-With-Apartness))) =
+    is-cotransitive-apart-function-into-Type-With-Apartness
 ```

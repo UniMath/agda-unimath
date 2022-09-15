@@ -65,56 +65,6 @@ A decidable proposition is a proposition that has a decidable underlying type.
 
 ## Properties
 
-### Being a decidable proposition is a property
-
-```agda
-abstract
-  is-prop-is-decidable-prop :
-    {l : Level} (X : UU l) → is-prop (is-decidable-prop X)
-  is-prop-is-decidable-prop X =
-    is-prop-is-inhabited
-      ( λ H →
-        is-prop-prod
-          ( is-prop-is-prop X)
-          ( is-prop-is-decidable (pr1 H)))
-```
-
-### Decidability of a propositional truncation
-
-```agda
-abstract
-  is-prop-is-decidable-trunc-Prop :
-    {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
-  is-prop-is-decidable-trunc-Prop A =
-    is-prop-is-decidable is-prop-type-trunc-Prop
-    
-is-decidable-trunc-Prop : {l : Level} → UU l → UU-Prop l
-pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
-pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A
-
-is-decidable-trunc-Prop-is-merely-decidable :
-  {l : Level} (A : UU l) →
-  is-merely-decidable A → is-decidable (type-trunc-Prop A)
-is-decidable-trunc-Prop-is-merely-decidable A =
-  map-universal-property-trunc-Prop
-    ( is-decidable-trunc-Prop A)
-    ( f)
-  where
-  f : is-decidable A → type-Prop (is-decidable-trunc-Prop A)
-  f (inl a) = inl (unit-trunc-Prop a)
-  f (inr f) = inr (map-universal-property-trunc-Prop empty-Prop f)
-
-is-merely-decidable-is-decidable-trunc-Prop :
-  {l : Level} (A : UU l) →
-  is-decidable (type-trunc-Prop A) → is-merely-decidable A
-is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
-   apply-universal-property-trunc-Prop x
-     ( is-merely-decidable-Prop A)
-     ( unit-trunc-Prop ∘ inl)
-is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
-  unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
-```
-
 ### The forgetful map from decidable propositions to propositions is an embedding
 
 ```agda

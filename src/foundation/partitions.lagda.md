@@ -3,6 +3,8 @@ title: Partitions
 ---
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module foundation.partitions where
 
 open import foundation.cartesian-product-types

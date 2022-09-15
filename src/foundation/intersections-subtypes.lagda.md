@@ -53,6 +53,6 @@ module _
   where
 
   intersection-fam-subtype :
-    {I : UU l2} (P : I → subtype l2 X) → subtype l2 X
+    {I : UU l2} (P : I → subtype l3 X) → subtype (l2 ⊔ l3) X
   intersection-fam-subtype {I} P x = Π-Prop I (λ i → P i x)
 ```

@@ -11,8 +11,10 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.mere-embeddings
+open import foundation.mere-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -27,6 +29,8 @@ The cardinality of a set is its isomorphism class. We take isomorphism classes o
 
 ## Definition
 
+### Cardinalities
+
 ```agda
 cardinal-Set : (l : Level) → UU-Set (lsuc l)
 cardinal-Set l = trunc-Set (UU-Set l)
@@ -36,7 +40,11 @@ cardinal l = type-Set (cardinal-Set l)
 
 cardinality : {l : Level} → UU-Set l → cardinal l
 cardinality A = unit-trunc-Set A
+```
 
+### Inequality of cardinalities
+
+```agda
 leq-cardinality-Prop' :
   {l1 l2 : Level} → UU-Set l1 → cardinal l2 → UU-Prop (l1 ⊔ l2)
 leq-cardinality-Prop' {l1} {l2} X =
@@ -90,4 +98,17 @@ refl-≤-cardinality {l} =
   apply-dependent-universal-property-trunc-Set'
     ( λ X → set-Prop (leq-cardinality-Prop X X))
     ( λ A → unit-leq-cardinality A A (refl-mere-emb (type-Set A)))
+```
+
+## Properties
+
+### Given two sets `X` and `Y`, the type `# X ＝ # Y` is equivalent to the type of mere equivalences from `X` to `Y`.
+
+```agda
+is-effective-cardinality :
+  {l : Level} (X Y : UU-Set l) →
+  (cardinality X ＝ cardinality Y) ≃ mere-equiv (type-Set X) (type-Set Y)
+is-effective-cardinality X Y =
+  ( equiv-trunc-Prop (extensionality-Set X Y)) ∘e
+  ( is-effective-unit-trunc-Set (UU-Set _) X Y)
 ```
