@@ -12,6 +12,17 @@ The library is built in Agda 2.6.2. It can be compiled by running `make check` f
 2. [Discord](https://discord.gg/Zp2e8hYsuX)
 3. [Twitch](https://www.twitch.tv/agdaunimath)
 
+## Citing the `agda-unimath` library
+
+```
+@misc{Agda-UniMath,
+  author =     {Egbert Rijke and Elisabeth Bonnevier and Jonathan Prieto-Cubides and others},
+  title =     {Univalent mathematics in {Agda}},
+  url =         {https://github.com/UniMath/agda-unimath/},
+  howpublished = {\url{https://unimath.github.io/agda-unimath/}}
+}
+```
+
 ## Getting started
 
 Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
