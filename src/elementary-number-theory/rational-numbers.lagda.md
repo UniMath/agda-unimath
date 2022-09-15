@@ -50,8 +50,8 @@ is-reduced-fraction-ℤ x =
 ### Inclusion of the integers
 
 ```agda
-in-int : ℤ → ℚ
-in-int x = pair (pair x (pair one-ℤ star)) {!is-one-is-gcd-one-ℕ ?!}
+-- in-int : ℤ → ℚ
+-- in-int x =
 ```
 
 ```agda
