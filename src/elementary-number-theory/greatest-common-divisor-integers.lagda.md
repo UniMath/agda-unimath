@@ -8,7 +8,7 @@ title: The greatest common divisor of integers
 module elementary-number-theory.greatest-common-divisor-integers where
 
 open import elementary-number-theory.absolute-value-integers using
-  ( abs-ℤ; int-abs-ℤ; is-nonzero-abs-ℤ)
+  ( abs-ℤ; int-abs-ℤ; is-nonzero-abs-ℤ; abs-int-ℕ; eq-abs-ℤ)
 open import elementary-number-theory.addition-natural-numbers using
   ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
 open import elementary-number-theory.divisibility-integers using
@@ -18,7 +18,7 @@ open import elementary-number-theory.divisibility-integers using
 open import
   elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
-    is-commutative-gcd-ℕ; is-zero-gcd-zero-zero-ℕ)
+    is-commutative-gcd-ℕ; is-zero-gcd-zero-zero-ℕ; is-zero-add-is-zero-gcd-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
     is-positive-ℤ; is-positive-int-ℕ; is-zero-ℤ)
@@ -30,7 +30,7 @@ open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (_＝_; ap; refl)
+open import foundation.identity-types using (_＝_; ap; refl; _∙_; inv)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -204,6 +204,30 @@ is-zero-gcd-ℤ :
   (a b : ℤ) → is-zero-ℤ a → is-zero-ℤ b → is-zero-ℤ (gcd-ℤ a b)
 is-zero-gcd-ℤ zero-ℤ zero-ℤ refl refl =
   ap int-ℕ is-zero-gcd-zero-zero-ℕ
+
+is-zero-left-is-zero-gcd-ℤ :
+  (a b : ℤ) → is-zero-ℤ (gcd-ℤ a b) → is-zero-ℤ a
+is-zero-left-is-zero-gcd-ℤ a b H =
+  eq-abs-ℤ a
+    ( is-zero-left-is-zero-add-ℕ
+      ( abs-ℤ a)
+      ( abs-ℤ b)
+        ( is-zero-add-is-zero-gcd-ℕ
+          ( abs-ℤ a)
+          ( abs-ℤ b)
+          ( inv (abs-int-ℕ (gcd-ℕ (abs-ℤ a) (abs-ℤ b))) ∙ ap abs-ℤ H)))
+
+is-zero-right-is-zero-gcd-ℤ :
+  (a b : ℤ) → is-zero-ℤ (gcd-ℤ a b) → is-zero-ℤ b
+is-zero-right-is-zero-gcd-ℤ a b H =
+  eq-abs-ℤ b
+    ( is-zero-right-is-zero-add-ℕ
+      ( abs-ℤ a)
+      ( abs-ℤ b)
+        ( is-zero-add-is-zero-gcd-ℕ
+          ( abs-ℤ a)
+          ( abs-ℤ b)
+          ( inv (abs-int-ℕ (gcd-ℕ (abs-ℤ a) (abs-ℤ b))) ∙ ap abs-ℤ H)))
 
 is-commutative-gcd-ℤ : (x y : ℤ) → gcd-ℤ x y ＝ gcd-ℤ y x
 is-commutative-gcd-ℤ x y =
