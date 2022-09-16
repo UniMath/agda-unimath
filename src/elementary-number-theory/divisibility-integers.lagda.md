@@ -23,7 +23,8 @@ open import elementary-number-theory.multiplication-integers using
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
     left-negative-law-mul-ℤ; mul-int-ℕ; is-nonnegative-left-factor-mul-ℤ;
     compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ;
-    is-emb-mul-ℤ'; right-negative-law-mul-ℤ; left-neg-unit-law-mul-ℤ)
+    is-emb-mul-ℤ'; right-negative-law-mul-ℤ; left-neg-unit-law-mul-ℤ;
+    is-plus-or-minus-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
   
@@ -126,12 +127,13 @@ pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ 
 ```agda
 neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
 pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
-pr2 (neg-div-ℤ x y (pair d p)) = equational-reasoning
-  mul-ℤ (neg-ℤ d) (neg-ℤ x)
-  ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))   by left-negative-law-mul-ℤ d (neg-ℤ x)
-  ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
-  ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
-  ＝ y                           by p
+pr2 (neg-div-ℤ x y (pair d p)) =
+  equational-reasoning
+    mul-ℤ (neg-ℤ d) (neg-ℤ x)
+    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))   by left-negative-law-mul-ℤ d (neg-ℤ x)
+    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
+    ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
+    ＝ y                           by p
 ```
 
 ### Comparison of divisibility on ℕ and on ℤ
@@ -503,8 +505,8 @@ div-div-int-abs-ℤ {x} {y} =
 ### If we have that `sim-unit-ℤ x y`, then they must differ only by sign
 
 ```agda
-sim-unit-ℤ-sign : {x y : ℤ} → sim-unit-ℤ x y → (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y)
-sim-unit-ℤ-sign {x} {y} H =
+is-plus-or-minus-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → is-plus-or-minus-ℤ x y
+is-plus-or-minus-sim-unit-ℤ {x} {y} H =
   ind-coprod
     ( λ t → (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y))
     ( λ p → inl (p ∙ inv (is-zero-sim-unit-ℤ H p)))
@@ -533,7 +535,7 @@ sim-unit-ℤ-sign {x} {y} H =
 then they are the same
 
 ```agda
--- is-nonnegative-sim-unit-id :
+-- eq-sim-unit-is-nonnegative-ℤ :
 --   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
--- is-nonnegative-sim-unit-id {a} {b} H H' K =
+-- eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
 ```
