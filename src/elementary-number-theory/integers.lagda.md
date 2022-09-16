@@ -78,12 +78,6 @@ is-zero-ℤ x = (x ＝ zero-ℤ)
 
 is-nonzero-ℤ : ℤ → UU lzero
 is-nonzero-ℤ k = ¬ (is-zero-ℤ k)
-
-decide-is-zero-ℤ :
-  (x : ℤ) → (is-zero-ℤ x) + (is-nonzero-ℤ x)
-decide-is-zero-ℤ (inl x) = inr λ ()
-decide-is-zero-ℤ (inr (inl star)) = inl refl
-decide-is-zero-ℤ (inr (inr x)) = inr λ ()
 ```
 
 ### Inclusion of the positive integers

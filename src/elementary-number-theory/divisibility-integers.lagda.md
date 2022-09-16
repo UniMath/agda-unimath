@@ -17,7 +17,7 @@ open import elementary-number-theory.equality-integers using
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; one-ℤ; is-zero-ℤ; neg-ℤ; int-ℕ; is-nonnegative-ℤ; is-one-ℤ;
     is-injective-int-ℕ; is-nonnegative-eq-ℤ; is-nonnegative-int-ℕ; is-neg-one-ℤ;
-    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ; decide-is-zero-ℤ;
+    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ;
     is-zero-is-nonnegative-neg-is-nonnegative-ℤ )
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
@@ -526,7 +526,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H =
       ( is-one-or-neg-one-is-unit-ℤ
         (int-unit-ℤ (pr1 (presim-x-y p)))
         (is-unit-int-unit-ℤ (pr1 (presim-x-y p))) ))
-    ( decide-is-zero-ℤ x)
+    ( is-decidable-is-zero-ℤ x)
   where
     presim-x-y : (p : is-nonzero-ℤ x) → presim-unit-ℤ x y
     presim-x-y p = H (λ - → p (pr1 -))
@@ -555,7 +555,7 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
             a
             H
             (tr is-nonnegative-ℤ (inv p) H'))))
-      ( decide-is-zero-ℤ a )
+      ( is-decidable-is-zero-ℤ a )
       )
     ( is-plus-or-minus-sim-unit-ℤ K )
 ```
