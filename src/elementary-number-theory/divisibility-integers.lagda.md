@@ -115,6 +115,15 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
   ( ap-add-ℤ p q)
 ```
 
+### If `x` divides `y` then `x` divides any multiple of `y`
+
+```agda
+div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ x (mul-ℤ k y)
+div-mul-ℤ k x y H =
+  trans-div-ℤ x y (mul-ℤ k y) H (pair k refl)
+```
+
 ### If `x` divides `y` then it divides `-y`
 
 ```agda
@@ -136,6 +145,21 @@ pr2 (neg-div-ℤ x y (pair d p)) =
     ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
     ＝ y                           by p
 ```
+
+### Multiplication by a nonzero number reflects divisibility
+
+```agda
+reflects-div-mul-ℤ :
+  (k x y : ℤ) → is-nonzero-ℤ k → div-ℤ (mul-ℤ k x) (mul-ℤ k y) → div-ℤ x y
+pr1 (reflects-div-mul-ℤ k x y H (pair q p)) = q
+pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
+  is-injective-mul-ℤ k H
+    ( ( inv (associative-mul-ℤ k q x)) ∙
+      ( ( ap (mul-ℤ' x) (commutative-mul-ℤ k q)) ∙
+        ( ( associative-mul-ℤ q k x) ∙
+          ( p))))
+```
+
 
 ### Comparison of divisibility on ℕ and on ℤ
 

@@ -301,6 +301,13 @@ is-positive-ℤ (inr (inr x)) = unit
 positive-ℤ : UU lzero
 positive-ℤ = Σ ℤ is-positive-ℤ
 
+int-positive-ℤ : positive-ℤ → ℤ
+int-positive-ℤ = pr1
+
+is-positive-int-positive-ℤ :
+  (x : positive-ℤ) → is-positive-ℤ (int-positive-ℤ x)
+is-positive-int-positive-ℤ = pr2
+
 is-nonnegative-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ x
 is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
 
