@@ -17,7 +17,8 @@ open import elementary-number-theory.equality-integers using
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; one-ℤ; is-zero-ℤ; neg-ℤ; int-ℕ; is-nonnegative-ℤ; is-one-ℤ;
     is-injective-int-ℕ; is-nonnegative-eq-ℤ; is-nonnegative-int-ℕ; is-neg-one-ℤ;
-    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ; decide-is-zero-ℤ )
+    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ; decide-is-zero-ℤ;
+    is-zero-is-nonnegative-neg-is-nonnegative-ℤ )
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
@@ -35,7 +36,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equational-reasoning
-open import foundation.functions using (_∘_)
+open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.negation using (¬)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
@@ -535,7 +536,26 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H =
 then they are the same
 
 ```agda
--- eq-sim-unit-is-nonnegative-ℤ :
---   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
--- eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
+eq-sim-unit-is-nonnegative-ℤ :
+  {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K = 
+  ind-coprod
+    ( λ t → a ＝ b)
+    id
+    ( λ p → ind-coprod
+      ( λ t → a ＝ b)
+      ( λ q → equational-reasoning
+        a ＝ zero-ℤ   by q
+          ＝ neg-ℤ a  by inv (ap neg-ℤ q)
+          ＝ b        by p
+        )
+      ( λ q → ex-falso
+        ( q
+          ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
+            a
+            H
+            (tr is-nonnegative-ℤ (inv p) H'))))
+      ( decide-is-zero-ℤ a )
+      )
+    ( is-plus-or-minus-sim-unit-ℤ K )
 ```
