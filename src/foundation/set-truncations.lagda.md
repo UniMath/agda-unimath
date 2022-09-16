@@ -194,56 +194,9 @@ module _
     (A → type-Set B) → type-Set B
   apply-universal-property-trunc-Set' t B f =
     map-universal-property-trunc-Set B f t
-
-{-
-module _
-  where
-
-  universal-property-𝕊¹ :
-    {l : Level} → universal-property-circle l free-loop-𝕊¹
-  universal-property-𝕊¹ =
-    universal-property-dependent-universal-property-circle
-      free-loop-𝕊¹
-      dependent-universal-property-𝕊¹
-
-  uniqueness-universal-property-𝕊¹ :
-    {l : Level} {X : UU l} (α : free-loop X) →
-    is-contr
-      ( Σ ( 𝕊¹ → X)
-          ( λ h → Eq-free-loop (ev-free-loop free-loop-𝕊¹ X h) α))
-  uniqueness-universal-property-𝕊¹ {l} {X} =
-    uniqueness-universal-property-circle free-loop-𝕊¹ universal-property-𝕊¹ X
-
-  module _
-    {l : Level} {X : UU l} (x : X) (α : Id x x)
-    where
-
-    Map-𝕊¹ : UU l
-    Map-𝕊¹ =
-      Σ ( 𝕊¹ → X)
-        ( λ h → Eq-free-loop (ev-free-loop free-loop-𝕊¹ X h) (pair x α))
-
-    apply-universal-property-𝕊¹ : Map-𝕊¹
-    apply-universal-property-𝕊¹ =
-      center (uniqueness-universal-property-𝕊¹ (pair x α))
-      
-    map-apply-universal-property-𝕊¹ : 𝕊¹ → X
-    map-apply-universal-property-𝕊¹ =
-      pr1 apply-universal-property-𝕊¹
-
-    base-universal-property-𝕊¹ :
-      Id (map-apply-universal-property-𝕊¹ base-𝕊¹) x
-    base-universal-property-𝕊¹ =
-      pr1 (pr2 apply-universal-property-𝕊¹)
-
-    loop-universal-property-𝕊¹ :
-      Id ( ap map-apply-universal-property-𝕊¹ loop-𝕊¹ ∙
-           base-universal-property-𝕊¹)
-         ( base-universal-property-𝕊¹ ∙ α)
-    loop-universal-property-𝕊¹ =
-      pr2 (pr2 apply-universal-property-𝕊¹)
--}
 ```
+
+### The set truncation of `X` is the set quotient by the mere equality relation
 
 ```agda
 reflecting-map-mere-eq-unit-trunc-Set :

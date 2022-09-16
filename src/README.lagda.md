@@ -307,6 +307,7 @@ open import foundation.identity-systems
 open import foundation.identity-truncated-types
 open import foundation.identity-types
 open import foundation.images
+open import foundation.images-subtypes
 open import foundation.impredicative-encodings
 open import foundation.impredicative-universes
 open import foundation.indexed-w-types
@@ -350,6 +351,7 @@ open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.powersets
+open import foundation.preimages-of-subtypes
 open import foundation.principle-of-omniscience
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
@@ -374,6 +376,7 @@ open import foundation.sequences
 open import foundation.set-presented-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.shifting-sequences
 open import foundation.sigma-decompositions
 open import foundation.singleton-induction
 open import foundation.singleton-subtypes
@@ -384,6 +387,7 @@ open import foundation.small-types
 open import foundation.small-universes
 open import foundation.split-surjective-maps
 open import foundation.standard-apartness-relations
+open import foundation.strongly-extensional-maps
 open import foundation.structure-identity-principle
 open import foundation.structure
 open import foundation.subterminal-types
@@ -439,6 +443,7 @@ open import foundation.unordered-pairs-of-types
 open import foundation.unordered-pairs
 open import foundation.unordered-tuples-of-types
 open import foundation.unordered-tuples
+open import foundation.w-type-of-propositions
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weak-limited-principle-of-omniscience
@@ -774,6 +779,7 @@ open import set-theory.baire-space
 open import set-theory.cantor-space
 open import set-theory.cardinalities
 open import set-theory.countable-sets
+open import set-theory.infinite-sets
 open import set-theory.uncountable-sets
 ```
 

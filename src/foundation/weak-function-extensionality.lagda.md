@@ -10,7 +10,8 @@ module foundation.weak-function-extensionality where
 open import foundation.1-types using
   ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation.contractible-types using
-  ( is-contr; center; contraction; is-contr-retract-of; is-contr-total-path)
+  ( is-contr; center; contraction; is-contr-retract-of; is-contr-total-path;
+    is-prop-is-contr)
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
@@ -30,7 +31,8 @@ open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.negation using (¬)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; UU-Prop; type-Prop; is-prop-type-Prop; eq-is-prop)
+  ( is-prop; is-prop-equiv; UU-Prop; type-Prop; is-prop-type-Prop; eq-is-prop;
+    is-proof-irrelevant-is-prop)
 open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using (is-subtype)
 open import foundation.truncated-types using
@@ -47,11 +49,22 @@ Weak function extensionality is the principle that any dependent product of cont
 
 ## Definition
 
+### Weak function extensionality
+
 ```agda
 WEAK-FUNEXT :
   {i j : Level} (A : UU i) (B : A → UU j) → UU (i ⊔ j)
 WEAK-FUNEXT A B =
   ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
+```
+
+### Weaker function extensionality
+
+```agda
+WEAKER-FUNEXT :
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
+WEAKER-FUNEXT A B =
+  ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
 ```
 
 ## Properties
@@ -129,4 +142,16 @@ pr1 (converse-weak-funext d (pair x H) i) = x i
 pr2 (converse-weak-funext d (pair x H) i) y =
   ( htpy-eq (H (function-converse-weak-funext d (pair x H) i y)) i) ∙
   ( eq-function-converse-weak-funext d (pair x H) i y)
+```
+
+### Weaker function extensionality implies weak function extensionality
+
+```agda
+weak-funext-weaker-funext :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  WEAKER-FUNEXT A B → WEAK-FUNEXT A B
+weak-funext-weaker-funext H C =
+  is-proof-irrelevant-is-prop
+    ( H (λ x → is-prop-is-contr (C x)))
+    ( λ x → center (C x))
 ```
