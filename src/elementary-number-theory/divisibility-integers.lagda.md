@@ -54,6 +54,18 @@ An integer `d` divides an integer `x` if there is an integer `k` such that `mul-
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
 div-ℤ d x = Σ ℤ (λ k → mul-ℤ k d ＝ x)
+
+quotient-div-ℤ : (x y : ℤ) → div-ℤ x y → ℤ
+quotient-div-ℤ x y H = pr1 H
+
+eq-quotient-div-ℤ :
+  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ (quotient-div-ℤ x y H) x ＝ y
+eq-quotient-div-ℤ x y H = pr2 H
+
+eq-quotient-div-ℤ' :
+  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ x (quotient-div-ℤ x y H) ＝ y
+eq-quotient-div-ℤ' x y H =
+  commutative-mul-ℤ x (quotient-div-ℤ x y H) ∙ eq-quotient-div-ℤ x y H
 ```
 
 ## Properties
@@ -146,6 +158,19 @@ pr2 (neg-div-ℤ x y (pair d p)) =
     ＝ y                           by p
 ```
 
+### Multiplication preserves divisibility
+
+```agda
+preserves-div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ (mul-ℤ k x) (mul-ℤ k y)
+pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
+pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
+  ( inv (associative-mul-ℤ q k x)) ∙
+    ( ( ap (mul-ℤ' x) (commutative-mul-ℤ q k)) ∙
+      ( ( associative-mul-ℤ k q x) ∙
+        ( ap (mul-ℤ k) p)))
+```
+
 ### Multiplication by a nonzero number reflects divisibility
 
 ```agda
@@ -160,6 +185,26 @@ pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
           ( p))))
 ```
 
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+
+```agda
+div-quotient-div-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) → is-nonzero-ℤ d →
+  div-ℤ (mul-ℤ d x) y → div-ℤ x (quotient-div-ℤ d y H)
+div-quotient-div-div-ℤ x y d H f K =
+  reflects-div-mul-ℤ d x
+    ( quotient-div-ℤ d y H)
+    ( f)
+    ( tr (div-ℤ (mul-ℤ d x)) (inv (eq-quotient-div-ℤ' d y H)) K)
+
+div-div-quotient-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) →
+  div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (mul-ℤ d x) y
+div-div-quotient-div-ℤ x y d H K =
+  tr ( div-ℤ (mul-ℤ d x))
+     ( eq-quotient-div-ℤ' d y H)
+     ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
+```
 
 ### Comparison of divisibility on ℕ and on ℤ
 
