@@ -14,7 +14,7 @@ open import elementary-number-theory.fractions using
 open import elementary-number-theory.greatest-common-divisor-integers using
   ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ)
 open import elementary-number-theory.integers using
-  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ)
+  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; one-ℤ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ)
 open import elementary-number-theory.relatively-prime-integers using
@@ -22,6 +22,7 @@ open import elementary-number-theory.relatively-prime-integers using
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (_＝_; inv)
+open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -29,14 +30,31 @@ open import foundation.universe-levels using (UU; lzero)
 
 The type of rational numbers is the quotient of the type of fractions, by the equivalence relation given by `(n/m) ~ (n'/m') := Id (mul-ℤ n m') (mul-ℤ n' m)`.
 
+## Definitions
+
+### Reduced Fraction
+
 ```agda
 is-reduced-fraction-ℤ : fraction-ℤ → UU lzero
 is-reduced-fraction-ℤ x =
   is-relative-prime-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
+```
 
+### The type of rationals
+
+```agda
 ℚ : UU lzero
 ℚ = Σ fraction-ℤ is-reduced-fraction-ℤ
+```
 
+### Inclusion of the integers
+
+```agda
+-- in-int : ℤ → ℚ
+-- in-int x =
+```
+
+```agda
 reduce-numerator-fraction-ℤ :
   (x : fraction-ℤ) →
   div-ℤ
