@@ -18,18 +18,19 @@ open import elementary-number-theory.divisibility-integers using
 open import
   elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
-    is-commutative-gcd-ℕ)
+    is-commutative-gcd-ℕ; is-zero-gcd-zero-zero-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
-    is-positive-ℤ; is-positive-int-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; is-zero-ℕ)
+    is-positive-ℤ; is-positive-int-ℕ; is-zero-ℤ)
+open import elementary-number-theory.natural-numbers using
+  ( ℕ; is-zero-ℕ; zero-ℕ)
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (_＝_; ap)
+open import foundation.identity-types using (_＝_; ap; refl)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -198,6 +199,11 @@ is-positive-gcd-ℤ :
   is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-ℤ x y (inl H) = is-positive-gcd-is-positive-left-ℤ x y H
 is-positive-gcd-ℤ x y (inr H) = is-positive-gcd-is-positive-right-ℤ x y H
+
+is-zero-gcd-ℤ :
+  (a b : ℤ) → is-zero-ℤ a → is-zero-ℤ b → is-zero-ℤ (gcd-ℤ a b)
+is-zero-gcd-ℤ zero-ℤ zero-ℤ refl refl =
+  ap int-ℕ is-zero-gcd-zero-zero-ℕ
 
 is-commutative-gcd-ℤ : (x y : ℤ) → gcd-ℤ x y ＝ gcd-ℤ y x
 is-commutative-gcd-ℤ x y =
