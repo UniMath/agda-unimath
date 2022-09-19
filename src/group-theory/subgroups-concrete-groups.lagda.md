@@ -65,7 +65,7 @@ module _
     action-transitive-action-Concrete-Group G
       transitive-action-subgroup-Concrete-Group
 
-  coset-subgroup-Concrete-Group : UU-Set l2
+  coset-subgroup-Concrete-Group : Set l2
   coset-subgroup-Concrete-Group =
     action-subgroup-Concrete-Group (shape-Concrete-Group G)
 

@@ -56,7 +56,7 @@ open import foundation.identity-types using
 open import foundation.injective-maps using
   ( is-injective; is-injective-id; is-injective-comp')
 open import foundation.negation using (¬; map-neg)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 
@@ -126,7 +126,7 @@ abstract
   is-set-ℤ-Mod zero-ℕ = is-set-ℤ
   is-set-ℤ-Mod (succ-ℕ k) = is-set-Fin (succ-ℕ k)
 
-ℤ-Mod-Set : (k : ℕ) → UU-Set lzero
+ℤ-Mod-Set : (k : ℕ) → Set lzero
 pr1 (ℤ-Mod-Set k) = ℤ-Mod k
 pr2 (ℤ-Mod-Set k) = is-set-ℤ-Mod k
 ```

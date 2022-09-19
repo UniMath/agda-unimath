@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb)
 open import foundation.identity-types using (Id)
 open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
 open import group-theory.abelian-groups using
@@ -160,7 +160,7 @@ module _
     Id x y
   eq-subgroup-ab-eq-ab = eq-subgroup-eq-group (group-Ab A) B
 
-  set-ab-Subgroup-Ab : UU-Set (l1 ⊔ l2)
+  set-ab-Subgroup-Ab : Set (l1 ⊔ l2)
   set-ab-Subgroup-Ab = set-group-Subgroup (group-Ab A) B
 
   zero-ab-Subgroup-Ab : type-ab-Subgroup-Ab

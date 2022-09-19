@@ -118,7 +118,7 @@ module _
       ( is-prop-htpy-hom-orbit-Monoid-Action f g)
 
   hom-orbit-monoid-action-Set :
-    (x y : type-Monoid-Action M X) → UU-Set (l1 ⊔ l2)
+    (x y : type-Monoid-Action M X) → Set (l1 ⊔ l2)
   pr1 (hom-orbit-monoid-action-Set x y) = hom-orbit-Monoid-Action x y
   pr2 (hom-orbit-monoid-action-Set x y) = is-set-hom-orbit-Monoid-Action
 

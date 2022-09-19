@@ -37,29 +37,29 @@ A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 
 ### First definition of countable types
 
 ```agda
-is-countable-Prop : {l : Level} → UU-Set l → UU-Prop l
+is-countable-Prop : {l : Level} → Set l → Prop l
 is-countable-Prop X = ∃-Prop (ℕ → Maybe (type-Set X)) is-surjective
 
-is-countable : {l : Level} → UU-Set l → UU l
+is-countable : {l : Level} → Set l → UU l
 is-countable X = type-Prop (is-countable-Prop X)
 
-is-prop-is-countable : {l : Level} (X : UU-Set l) → is-prop (is-countable X)
+is-prop-is-countable : {l : Level} (X : Set l) → is-prop (is-countable X)
 is-prop-is-countable X = is-prop-type-Prop (is-countable-Prop X)
 ```
 
 ### Second definition of countable types
 
 ```agda
-is-countable-Prop' : {l : Level} → UU-Set l → UU-Prop (lsuc lzero ⊔ l)
+is-countable-Prop' : {l : Level} → Set l → Prop (lsuc lzero ⊔ l)
 is-countable-Prop' X =
   ∃-Prop
     ( decidable-subtype lzero ℕ)
     ( λ P → type-decidable-subtype P ↠ type-Set X)
 
-is-countable' : {l : Level} → UU-Set l → UU (lsuc lzero ⊔ l)
+is-countable' : {l : Level} → Set l → UU (lsuc lzero ⊔ l)
 is-countable' X = type-Prop (is-countable-Prop' X)
 
-is-prop-is-countable' : {l : Level} (X : UU-Set l) → is-prop (is-countable' X)
+is-prop-is-countable' : {l : Level} (X : Set l) → is-prop (is-countable' X)
 is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 ```
 
@@ -69,7 +69,7 @@ is-prop-is-countable' X = is-prop-type-Prop (is-countable-Prop' X)
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
 {-

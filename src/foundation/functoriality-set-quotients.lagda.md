@@ -29,7 +29,7 @@ open import foundation.propositions using (eq-is-prop; is-prop-Π)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel; map-reflecting-map-Eq-Rel;
     reflects-map-reflecting-map-Eq-Rel)
-open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
+open import foundation.sets using (Set; type-Set; is-set-type-Set)
 open import foundation.unit-type using (star)
 open import foundation.universal-property-set-quotients using
   ( is-set-quotient; universal-property-set-quotient-is-set-quotient;
@@ -51,9 +51,9 @@ Set quotients act functorially on types equipped with equivalence relations.
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
   {B : UU l4} (S : Eq-Rel l5 B)
-  (B/S : UU-Set l6) (g : reflecting-map-Eq-Rel S (type-Set B/S))
+  (B/S : Set l6) (g : reflecting-map-Eq-Rel S (type-Set B/S))
   where
 
   unique-map-is-set-quotient :
@@ -100,9 +100,9 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
   {B : UU l4} (S : Eq-Rel l5 B)
-  (B/S : UU-Set l6) (g : reflecting-map-Eq-Rel S (type-Set B/S))
+  (B/S : Set l6) (g : reflecting-map-Eq-Rel S (type-Set B/S))
   where
 
   unique-equiv-is-set-quotient :
@@ -276,7 +276,7 @@ module _
 module _
   {l1 l2 l3 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
   where
 
   id-map-is-set-quotient : 
@@ -314,7 +314,7 @@ module _
 module _
   {l1 l2 l3 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
   (Uf : {l : Level} → is-set-quotient l R A/R f)
   (eA : type-Set A/R ≃ Fin 2) (h : A → A)
   (H : {x y : A} →

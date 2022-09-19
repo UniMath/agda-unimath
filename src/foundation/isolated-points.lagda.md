@@ -35,7 +35,7 @@ open import foundation.injective-maps using (is-emb-is-injective)
 open import foundation.maybe using (Maybe; maybe-structure)
 open import foundation.negation using (¬; equiv-neg)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; UU-Prop;
+  ( is-prop; is-prop-equiv; is-proof-irrelevant-is-prop; Prop;
     is-prop-is-inhabited; is-prop-Π; eq-is-prop)
 open import foundation.sets using (is-set)
 open import foundation.subtypes using
@@ -123,7 +123,7 @@ module _
     is-prop-Eq-isolated-point d x =
       is-prop-cases-Eq-isolated-point d x (d x)
 
-  Eq-isolated-point-Prop : is-isolated a → A → UU-Prop lzero
+  Eq-isolated-point-Prop : is-isolated a → A → Prop lzero
   pr1 (Eq-isolated-point-Prop d x) = Eq-isolated-point d x
   pr2 (Eq-isolated-point-Prop d x) = is-prop-Eq-isolated-point d x
 
@@ -215,7 +215,7 @@ is-prop-is-isolated a =
       is-prop-Π (λ x → is-prop-is-decidable (is-prop-eq-isolated-point a H x)))
 
 is-isolated-Prop :
-  {l1 : Level} {A : UU l1} (a : A) → UU-Prop l1
+  {l1 : Level} {A : UU l1} (a : A) → Prop l1
 pr1 (is-isolated-Prop a) = is-isolated a
 pr2 (is-isolated-Prop a) = is-prop-is-isolated a
 

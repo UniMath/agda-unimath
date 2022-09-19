@@ -57,7 +57,7 @@ module _
   vertex-ethane : UU lzero
   vertex-ethane = type-𝔽 vertex-ethane-𝔽
 
-  edge-ethane-Prop : unordered-pair vertex-ethane → UU-Prop lzero
+  edge-ethane-Prop : unordered-pair vertex-ethane → Prop lzero
   edge-ethane-Prop p =
     prod-Prop
       ( is-in-unordered-pair-Prop p (zero-Fin 1))
@@ -71,7 +71,7 @@ module _
       (p : unordered-pair vertex-ethane) → is-prop (edge-ethane p)
     is-prop-edge-ethane p = is-prop-type-Prop (edge-ethane-Prop p)
 
-  standard-edge-ethane-Prop : (c c' : vertex-ethane) → UU-Prop lzero
+  standard-edge-ethane-Prop : (c c' : vertex-ethane) → Prop lzero
   standard-edge-ethane-Prop c c' =
     edge-ethane-Prop (standard-unordered-pair c c')
 

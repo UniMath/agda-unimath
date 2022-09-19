@@ -31,21 +31,21 @@ A Kuratowsky finite type is a set `X` for which there exists a surjection into `
 ## Definition
 
 ```agda
-is-kuratowsky-finite-set-Prop : {l : Level} → UU-Set l → UU-Prop l
+is-kuratowsky-finite-set-Prop : {l : Level} → Set l → Prop l
 is-kuratowsky-finite-set-Prop X =
   ∃-Prop ℕ (λ n → Fin n ↠ type-Set X)
 
-is-kuratowsky-finite-set : {l : Level} → UU-Set l → UU l
+is-kuratowsky-finite-set : {l : Level} → Set l → UU l
 is-kuratowsky-finite-set X = type-Prop (is-kuratowsky-finite-set-Prop X)
 
 𝔽-Kuratowsky : (l : Level) → UU (lsuc l)
-𝔽-Kuratowsky l = Σ (UU-Set l) is-kuratowsky-finite-set
+𝔽-Kuratowsky l = Σ (Set l) is-kuratowsky-finite-set
 
 module _
   {l : Level} (X : 𝔽-Kuratowsky l)
   where
 
-  set-𝔽-Kuratowsky : UU-Set l
+  set-𝔽-Kuratowsky : Set l
   set-𝔽-Kuratowsky = pr1 X
 
   type-𝔽-Kuratowsky : UU l

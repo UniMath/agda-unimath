@@ -20,9 +20,9 @@ The symmetric concrete group of a set `X` is the connected component of the univ
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
   symmetric-Concrete-Group : Concrete-Group (lsuc l)
-  symmetric-Concrete-Group = Automorphism-Group (UU-Set l) X is-1-type-UU-Set
+  symmetric-Concrete-Group = Automorphism-Group (Set l) X is-1-type-Set
 ```

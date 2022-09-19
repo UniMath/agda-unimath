@@ -24,7 +24,7 @@ open import foundation.functoriality-dependent-function-types using
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (_＝_; refl)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; type-hom-Prop; is-equiv-is-prop;
+  ( Prop; type-Prop; is-prop-type-Prop; type-hom-Prop; is-equiv-is-prop;
     is-prop-Π; type-equiv-Prop; Σ-Prop; is-prop-function-type; prod-Prop;
     is-prop-type-hom-Prop)
 open import foundation.subtype-identity-principle using
@@ -52,16 +52,16 @@ A map `f : A → P` into a proposition `P` is said to satisfy the universal prop
 
 ```agda
 precomp-Prop :
-  { l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) →
-  (A → type-Prop P) → (Q : UU-Prop l3) →
+  { l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) →
+  (A → type-Prop P) → (Q : Prop l3) →
   (type-hom-Prop P Q) → (A → type-Prop Q)
 precomp-Prop P f Q g = g ∘ f
 
 is-propositional-truncation :
-  ( l : Level) {l1 l2 : Level} {A : UU l1} (P : UU-Prop l2) →
+  ( l : Level) {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
   ( A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
 is-propositional-truncation l P f =
-  (Q : UU-Prop l) → is-equiv (precomp-Prop P f Q)
+  (Q : Prop l) → is-equiv (precomp-Prop P f Q)
 ```
 
 ### The universal property of the propositional truncation
@@ -69,9 +69,9 @@ is-propositional-truncation l P f =
 ```agda
 universal-property-propositional-truncation :
   ( l : Level) {l1 l2 : Level} {A : UU l1}
-  (P : UU-Prop l2) (f : A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
+  (P : Prop l2) (f : A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-propositional-truncation l {A = A} P f =
-  (Q : UU-Prop l) (g : A → type-Prop Q) →
+  (Q : Prop l) (g : A → type-Prop Q) →
   is-contr (Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ~  g))
 ```
 
@@ -81,10 +81,10 @@ This is a simplified form of the universal properties, that works because we're 
 
 ```agda
 extension-property-propositional-truncation :
-  ( l : Level) {l1 l2 : Level} {A : UU l1} (P : UU-Prop l2) →
+  ( l : Level) {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
   ( A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
 extension-property-propositional-truncation l {A = A} P f =
-  (Q : UU-Prop l) → (A → type-Prop Q) → (type-hom-Prop P Q)
+  (Q : Prop l) → (A → type-Prop Q) → (type-hom-Prop P Q)
 ```
 
 ### The dependent universal property of the propositional truncation
@@ -92,9 +92,9 @@ extension-property-propositional-truncation l {A = A} P f =
 ```agda
 dependent-universal-property-propositional-truncation :
   ( l : Level) {l1 l2 : Level} {A : UU l1}
-  ( P : UU-Prop l2) (f : A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
+  ( P : Prop l2) (f : A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
 dependent-universal-property-propositional-truncation l {l1} {l2} {A} P f =
-  ( Q : type-Prop P → UU-Prop l) → is-equiv (precomp-Π f (type-Prop ∘ Q))
+  ( Q : type-Prop P → Prop l) → is-equiv (precomp-Π f (type-Prop ∘ Q))
 ```
 
 ## Properties
@@ -105,7 +105,7 @@ dependent-universal-property-propositional-truncation l {l1} {l2} {A} P f =
 abstract
   universal-property-is-propositional-truncation :
     (l : Level) {l1 l2 : Level} {A : UU l1}
-    (P : UU-Prop l2) (f : A → type-Prop P) →
+    (P : Prop l2) (f : A → type-Prop P) →
     is-propositional-truncation l P f →
     universal-property-propositional-truncation l P f
   universal-property-is-propositional-truncation l P f is-ptr-f Q g =
@@ -116,18 +116,18 @@ abstract
 
 abstract
   map-is-propositional-truncation :
-    {l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) (f : A → type-Prop P) →
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     ({l : Level} → is-propositional-truncation l P f) →
-    (Q : UU-Prop l3) (g : A → type-Prop Q) → type-hom-Prop P Q
+    (Q : Prop l3) (g : A → type-Prop Q) → type-hom-Prop P Q
   map-is-propositional-truncation P f is-ptr-f Q g =
     pr1
       ( center
         ( universal-property-is-propositional-truncation _ P f is-ptr-f Q g))
 
   htpy-is-propositional-truncation :
-    {l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) (f : A → type-Prop P) →
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     (is-ptr-f : {l : Level} → is-propositional-truncation l P f) →
-    (Q : UU-Prop l3) (g : A → type-Prop Q) →
+    (Q : Prop l3) (g : A → type-Prop Q) →
     ((map-is-propositional-truncation P f is-ptr-f Q g) ∘ f) ~ g
   htpy-is-propositional-truncation P f is-ptr-f Q g =
     pr2
@@ -137,7 +137,7 @@ abstract
 abstract
   is-propositional-truncation-universal-property :
     (l : Level) {l1 l2 : Level} {A : UU l1}
-    (P : UU-Prop l2) (f : A → type-Prop P) →
+    (P : Prop l2) (f : A → type-Prop P) →
     universal-property-propositional-truncation l P f →
     is-propositional-truncation l P f
   is-propositional-truncation-universal-property l P f up-f Q =
@@ -153,7 +153,7 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-extension-property :
-    { l1 l2 : Level} {A : UU l1} (P : UU-Prop l2)
+    { l1 l2 : Level} {A : UU l1} (P : Prop l2)
     ( f : A → type-Prop P) →
     ( {l : Level} → extension-property-propositional-truncation l P f) →
     ( {l : Level} → is-propositional-truncation l P f)
@@ -169,7 +169,7 @@ abstract
 ```agda
 abstract
   is-equiv-is-ptruncation-is-ptruncation :
-    {l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) (P' : UU-Prop l3)
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3)
     (f : A → type-Prop P) (f' : A → type-Prop P')
     (h : type-hom-Prop P P') (H : (h ∘ f) ~ f') →
     ({l : Level} → is-propositional-truncation l P f) →
@@ -183,7 +183,7 @@ abstract
 
 abstract
   is-ptruncation-is-ptruncation-is-equiv :
-    {l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) (P' : UU-Prop l3)
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3)
     (f : A → type-Prop P) (f' : A → type-Prop P') (h : type-hom-Prop P P') →
     is-equiv h → ({l : Level} → is-propositional-truncation l P f) →
     ({l : Level} → is-propositional-truncation l P' f')
@@ -195,7 +195,7 @@ abstract
 
 abstract
   is-ptruncation-is-equiv-is-ptruncation :
-    {l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) (P' : UU-Prop l3)
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3)
     (f : A → type-Prop P) (f' : A → type-Prop P') (h : type-hom-Prop P P') →
     ({l : Level} → is-propositional-truncation l P' f') → is-equiv h →
     ({l : Level} → is-propositional-truncation l P f)
@@ -205,7 +205,7 @@ abstract
 
 abstract
   is-uniquely-unique-propositional-truncation :
-    {l1 l2 l3 : Level} {A : UU l1} (P : UU-Prop l2) (P' : UU-Prop l3)
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3)
     (f : A → type-Prop P) (f' : A → type-Prop P') →
     ({l : Level} → is-propositional-truncation l P f) →
     ({l : Level} → is-propositional-truncation l P' f') →
@@ -228,7 +228,7 @@ abstract
 ```agda
 abstract
   dependent-universal-property-is-propositional-truncation :
-    { l1 l2 : Level} {A : UU l1} (P : UU-Prop l2) (f : A → type-Prop P) →
+    { l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     ( {l : Level} → is-propositional-truncation l P f) →
     ( {l : Level} → dependent-universal-property-propositional-truncation l P f)
   dependent-universal-property-is-propositional-truncation
@@ -256,7 +256,7 @@ abstract
       
 abstract
   is-propositional-truncation-dependent-universal-property :
-    { l1 l2 : Level} {A : UU l1} (P : UU-Prop l2) (f : A → type-Prop P) →
+    { l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     ( {l : Level} →
       dependent-universal-property-propositional-truncation l P f) →
     ( {l : Level} → is-propositional-truncation l P f)
@@ -269,7 +269,7 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-has-section :
-    {l l1 l2 : Level} {A : UU l1} (P : UU-Prop l2) (f : A → type-Prop P) →
+    {l l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     (g : type-Prop P → A) → is-propositional-truncation l P f
   is-propositional-truncation-has-section {A = A} P f g Q =
     is-equiv-is-prop
@@ -297,7 +297,7 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-is-equiv :
-    {l l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+    {l l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
     {f : type-hom-Prop P Q} →
     is-equiv f → is-propositional-truncation l Q f
   is-propositional-truncation-is-equiv P Q {f} is-equiv-f R =
@@ -305,7 +305,7 @@ abstract
 
 abstract
   is-propositional-truncation-map-equiv :
-    { l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+    { l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
     (e : type-equiv-Prop P Q) →
     ( l : Level) → is-propositional-truncation l Q (map-equiv e)
   is-propositional-truncation-map-equiv P Q e l R =
@@ -313,7 +313,7 @@ abstract
 
 abstract
   is-equiv-is-propositional-truncation :
-    {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) {f : type-hom-Prop P Q} →
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) {f : type-hom-Prop P Q} →
     ({l : Level} → is-propositional-truncation l Q f) → is-equiv f
   is-equiv-is-propositional-truncation P Q {f} H =
     is-equiv-is-equiv-precomp-Prop P Q f H
@@ -324,7 +324,7 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-id :
-    { l1 : Level} (P : UU-Prop l1) →
+    { l1 : Level} (P : Prop l1) →
     ( l : Level) → is-propositional-truncation l P id
   is-propositional-truncation-id P l Q = is-equiv-id
 ```
@@ -335,8 +335,8 @@ abstract
 abstract
   is-propositional-truncation-prod :
     {l1 l2 l3 l4 : Level}
-    {A : UU l1} (P : UU-Prop l2) (f : A → type-Prop P)
-    {A' : UU l3} (P' : UU-Prop l4) (f' : A' → type-Prop P') →
+    {A : UU l1} (P : Prop l2) (f : A → type-Prop P)
+    {A' : UU l3} (P' : Prop l4) (f' : A' → type-Prop P') →
     ({l : Level} → is-propositional-truncation l P f) →
     ({l : Level} → is-propositional-truncation l P' f') →
     {l : Level} → is-propositional-truncation l (prod-Prop P P') (map-prod f f')

@@ -566,6 +566,7 @@ open import group-theory.cartesian-products-abelian-groups
 open import group-theory.cartesian-products-groups
 open import group-theory.cartesian-products-monoids
 open import group-theory.cartesian-products-semigroups
+open import group-theory.category-of-concrete-groups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
@@ -603,6 +604,7 @@ open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-concrete-group-actions
+open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
@@ -619,6 +621,7 @@ open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.loop-groups-sets
 open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-concrete-groups
 open import group-theory.mere-equivalences-concrete-group-actions
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions

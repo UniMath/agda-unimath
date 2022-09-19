@@ -21,7 +21,7 @@ open import group-theory.orbits-concrete-group-actions
 ```agda
 is-free-action-Concrete-Group-Prop :
   {l1 l2 : Level} (G : Concrete-Group l1) → action-Concrete-Group l2 G →
-  UU-Prop (l1 ⊔ l2)
+  Prop (l1 ⊔ l2)
 is-free-action-Concrete-Group-Prop G X =
   is-set-Prop (orbit-action-Concrete-Group G X)
 

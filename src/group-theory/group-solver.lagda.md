@@ -9,7 +9,7 @@ module group-theory.group-solver where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; _＝_; ap-binary; inv; _∙_; ap; refl)
-open import foundation.sets using (UU-Set; is-set; Id-Prop)
+open import foundation.sets using (Set; is-set; Id-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.groups using

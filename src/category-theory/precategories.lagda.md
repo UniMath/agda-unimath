@@ -15,7 +15,7 @@ open import foundation.propositions using
   ( all-elements-equal; prod-Prop; Π-Prop; Π-Prop'; is-prop;
     is-prop-all-elements-equal)
 open import foundation.sets using
-  ( UU-Set; type-Set; Id-Prop; is-set; is-set-type-Set)
+  ( Set; type-Set; Id-Prop; is-set; is-set-type-Set)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
@@ -35,7 +35,7 @@ The reason this is called a *pre*category and not a category in Homotopy Type Th
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (hom : A → A → UU-Set l2)
+  {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
   where
   
   associative-composition-structure-Set : UU (l1 ⊔ l2)
@@ -61,7 +61,7 @@ Precat :
 Precat l1 l2 =
   Σ ( UU l1)
     ( λ A →
-      Σ ( A → A → UU-Set l2)
+      Σ ( A → A → Set l2)
         ( λ hom →
           Σ ( associative-composition-structure-Set hom)
             ( is-unital-composition-structure-Set hom)))
@@ -73,7 +73,7 @@ module _
   obj-Precat : UU l1
   obj-Precat = pr1 C
   
-  hom-Precat : (x y : obj-Precat) → UU-Set l2
+  hom-Precat : (x y : obj-Precat) → Set l2
   hom-Precat = pr1 (pr2 C)
 
   type-hom-Precat : (x y : obj-Precat) → UU l2
@@ -130,7 +130,7 @@ Suppose `e e' : (x : A) → hom x x` are both right and left units with regard t
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (hom : A → A → UU-Set l2)
+  {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
   where
 
   abstract

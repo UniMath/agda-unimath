@@ -330,7 +330,7 @@ slice-UU-emb l A = Σ (UU l) (λ X → X ↪ A)
 
 equiv-Fib-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
-  slice-UU-emb (l1 ⊔ l) A ≃ (A → UU-Prop (l1 ⊔ l))
+  slice-UU-emb (l1 ⊔ l) A ≃ (A → Prop (l1 ⊔ l))
 equiv-Fib-Prop l A =
   ( equiv-Fib-structure l is-prop A) ∘e
   ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))

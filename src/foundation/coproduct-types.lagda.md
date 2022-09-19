@@ -20,7 +20,7 @@ open import foundation.negation using (¬)
 open import foundation.noncontractible-types using (is-not-contractible)
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; eq-is-prop';
-    UU-Prop; type-Prop; is-prop-type-Prop)
+    Prop; type-Prop; is-prop-type-Prop)
 open import foundation.unit-type using (star; unit-Prop)
 open import foundation.universe-levels using (Level; lzero; _⊔_; UU)
 ```
@@ -53,7 +53,7 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
   
-  is-left-Prop : X + Y → UU-Prop lzero
+  is-left-Prop : X + Y → Prop lzero
   is-left-Prop (inl x) = unit-Prop
   is-left-Prop (inr x) = empty-Prop
 
@@ -63,7 +63,7 @@ module _
   is-prop-is-left : (x : X + Y) → is-prop (is-left x)
   is-prop-is-left x = is-prop-type-Prop (is-left-Prop x)
 
-  is-right-Prop : X + Y → UU-Prop lzero
+  is-right-Prop : X + Y → Prop lzero
   is-right-Prop (inl x) = empty-Prop
   is-right-Prop (inr x) = unit-Prop
 
@@ -203,8 +203,8 @@ module _
           ( eq-is-prop' is-prop-Q))
 
 coprod-Prop :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
-  (type-Prop P → ¬ (type-Prop Q)) → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+  (type-Prop P → ¬ (type-Prop Q)) → Prop (l1 ⊔ l2)
 pr1 (coprod-Prop P Q H) = type-Prop P + type-Prop Q
 pr2 (coprod-Prop P Q H) =
   is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)

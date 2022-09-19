@@ -36,7 +36,7 @@ module _
   is-set-type-Discrete-Type =
     is-set-has-decidable-equality has-decidable-equality-type-Discrete-Type
 
-  set-Discrete-Type : UU-Set l
+  set-Discrete-Type : Set l
   pr1 set-Discrete-Type = type-Discrete-Type
   pr2 set-Discrete-Type = is-set-type-Discrete-Type
 ```

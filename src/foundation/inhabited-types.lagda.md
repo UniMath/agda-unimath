@@ -29,7 +29,7 @@ Inhabited types are types equipped with an element of its propositional truncati
 ### Inhabited types
 
 ```agda
-is-inhabited-Prop : {l : Level} → UU l → UU-Prop l
+is-inhabited-Prop : {l : Level} → UU l → Prop l
 is-inhabited-Prop X = trunc-Prop X
 
 is-inhabited : {l : Level} → UU l → UU l

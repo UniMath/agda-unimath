@@ -9,7 +9,7 @@ module foundation.dubuc-penon-compact-types where
 
 open import foundation.disjunction using (disj-Prop; type-disj-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; function-Prop; type-Prop)
+  ( Prop; Π-Prop; function-Prop; type-Prop)
 open import foundation.subtypes using (subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
@@ -22,10 +22,10 @@ A type is said to be Dubuc-Penon compact if for every proposition `P` and every 
 
 ```agda
 is-dubuc-penon-compact-Prop :
-  {l : Level} (l1 l2 : Level) → UU l → UU-Prop (l ⊔ lsuc l1 ⊔ lsuc l2)
+  {l : Level} (l1 l2 : Level) → UU l → Prop (l ⊔ lsuc l1 ⊔ lsuc l2)
 is-dubuc-penon-compact-Prop l1 l2 X =
   Π-Prop
-    ( UU-Prop l1)
+    ( Prop l1)
     ( λ P →
       Π-Prop
         ( subtype l2 X)

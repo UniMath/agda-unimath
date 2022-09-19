@@ -7,7 +7,7 @@ module order-theory.largest-elements-preorders where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.preorders using
@@ -21,7 +21,7 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-largest-element-preorder-Prop : element-Preorder X → UU-Prop (l1 ⊔ l2)
+  is-largest-element-preorder-Prop : element-Preorder X → Prop (l1 ⊔ l2)
   is-largest-element-preorder-Prop x =
     Π-Prop (element-Preorder X) (λ y → leq-preorder-Prop X y x)
 

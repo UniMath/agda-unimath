@@ -19,7 +19,7 @@ open import foundation.embeddings using (is-emb-Prop)
 open import foundation.equivalences using (is-equiv-has-inverse)
 open import foundation.identity-types using (_∙_; ap; inv)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; eq-is-prop)
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; eq-is-prop)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -35,7 +35,7 @@ module _ {α : Level → Level} {β : Level → Level → Level}
   (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
   (f : type-hom-Large-Precat C X Y) where
 
-  is-epi-Large-Precat-Prop : UU-Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
+  is-epi-Large-Precat-Prop : Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
   is-epi-Large-Precat-Prop =
     Π-Prop
       ( obj-Large-Precat C l3)

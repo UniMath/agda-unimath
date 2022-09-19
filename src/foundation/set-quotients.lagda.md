@@ -108,7 +108,7 @@ module _
     is-prop-is-in-equivalence-class R (equivalence-class-set-quotient x)
 
   is-in-equivalence-class-set-quotient-Prop :
-    (x : set-quotient) → (A → UU-Prop l2)
+    (x : set-quotient) → (A → Prop l2)
   is-in-equivalence-class-set-quotient-Prop x =
     is-in-equivalence-class-Prop R (equivalence-class-set-quotient x)
 
@@ -119,7 +119,7 @@ module _
       ( compute-set-quotient)
       ( is-set-equivalence-class R)
 
-  quotient-Set : UU-Set (l1 ⊔ l2)
+  quotient-Set : Set (l1 ⊔ l2)
   pr1 quotient-Set = set-quotient
   pr2 quotient-Set = is-set-set-quotient
 

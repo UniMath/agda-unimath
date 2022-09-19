@@ -27,8 +27,8 @@ open import foundation.identity-types using (Id; tr; inv)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (UU-Set; is-set; Id-Prop)
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.sets using (Set; is-set; Id-Prop)
 open import foundation.unit-type using (raise-unit-Prop; unit; star)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
@@ -84,7 +84,7 @@ Next, we assert the diamond condition for abstract polytopes.
 
 diamond-condition-finitely-graded-poset-Prop :
   {l1 l2 : Level} {k : ℕ} (X : Finitely-Graded-Poset l1 l2 k) →
-  UU-Prop (l1 ⊔ l2)
+  Prop (l1 ⊔ l2)
 diamond-condition-finitely-graded-poset-Prop {k = zero-ℕ} X = raise-unit-Prop _
 diamond-condition-finitely-graded-poset-Prop {k = succ-ℕ k} X =
   Π-Prop
@@ -170,7 +170,7 @@ module _
     (i : Fin (succ-ℕ k))
     where
 
-    face-prepolytope-Set : UU-Set l1
+    face-prepolytope-Set : Set l1
     face-prepolytope-Set =
       face-finitely-graded-poset-Set finitely-graded-poset-Prepolytope i
 
@@ -187,7 +187,7 @@ module _
     (z : face-Prepolytope (succ-Fin (succ-ℕ k) (inl-Fin k i)))
     where
 
-    adjancent-prepolytope-Prop : UU-Prop l2
+    adjancent-prepolytope-Prop : Prop l2
     adjancent-prepolytope-Prop =
       adjacent-finitely-graded-poset-Prop
         ( finitely-graded-poset-Prepolytope)
@@ -207,7 +207,7 @@ module _
         ( y)
         ( z)
 
-  element-prepolytope-Set : UU-Set l1
+  element-prepolytope-Set : Set l1
   element-prepolytope-Set =
     element-finitely-graded-poset-Set finitely-graded-poset-Prepolytope
 
@@ -312,7 +312,7 @@ module _
     (x y : element-Prepolytope)
     where
 
-    leq-prepolytope-Prop : UU-Prop (l1 ⊔ l2)
+    leq-prepolytope-Prop : Prop (l1 ⊔ l2)
     leq-prepolytope-Prop =
       leq-finitely-graded-poset-Prop finitely-graded-poset-Prepolytope x y
 
@@ -354,7 +354,7 @@ module _
 
   subtype-flag-Prepolytope :
     {l : Level} (F : flag-Prepolytope l) →
-    {i : Fin (succ-ℕ k)} → face-Prepolytope i → UU-Prop l
+    {i : Fin (succ-ℕ k)} → face-Prepolytope i → Prop l
   subtype-flag-Prepolytope =
     subtype-maximal-chain-Finitely-Graded-Poset
       finitely-graded-poset-Prepolytope
@@ -429,7 +429,7 @@ module _
   is-on-path-face-prepolytope-Prop :
     {i1 i2 : Fin (succ-ℕ k)} {x : face-Prepolytope i1} {y : face-Prepolytope i2}
     (p : path-faces-Prepolytope x y) →
-    {i3 : Fin (succ-ℕ k)} → face-Prepolytope i3 → UU-Prop l1
+    {i3 : Fin (succ-ℕ k)} → face-Prepolytope i3 → Prop l1
   is-on-path-face-prepolytope-Prop
     {x = x} refl-path-faces-Finitely-Graded-Poset z =
     Id-Prop
@@ -474,7 +474,7 @@ module _
   {l1 l2 : Level} (l : Level) {k : ℕ} (X : Prepolytope l1 l2 k)
   where
 
-  condition-P2-prepolytope-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l)
+  condition-P2-prepolytope-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l)
   condition-P2-prepolytope-Prop =
     Π-Prop
       ( flag-Prepolytope X l)

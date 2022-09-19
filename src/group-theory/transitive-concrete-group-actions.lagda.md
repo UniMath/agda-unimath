@@ -33,7 +33,7 @@ open import group-theory.orbits-concrete-group-actions
 ```agda
 is-transitive-action-Concrete-Group-Prop :
   {l1 l2 : Level} (G : Concrete-Group l1) → action-Concrete-Group l2 G →
-  UU-Prop (l1 ⊔ l2)
+  Prop (l1 ⊔ l2)
 is-transitive-action-Concrete-Group-Prop G X =
   is-0-connected-Prop (orbit-action-Concrete-Group G X)
 
@@ -68,7 +68,7 @@ module _
       action-transitive-action-Concrete-Group
   is-transitive-transitive-action-Concrete-Group = pr2 X
 
-  set-transitive-action-Concrete-Group : UU-Set l2
+  set-transitive-action-Concrete-Group : Set l2
   set-transitive-action-Concrete-Group =
     set-action-Concrete-Group G action-transitive-action-Concrete-Group
 
@@ -203,7 +203,7 @@ module _
       ( e)
       ( f)
 
-  htpy-equiv-transitive-action-Concrete-Group-Prop : UU-Prop (l2 ⊔ l3)
+  htpy-equiv-transitive-action-Concrete-Group-Prop : Prop (l2 ⊔ l3)
   htpy-equiv-transitive-action-Concrete-Group-Prop =
     htpy-equiv-action-Concrete-Group-Prop G
       ( action-transitive-action-Concrete-Group G X)
@@ -254,7 +254,7 @@ module _
       ( is-transitive-action-Concrete-Group-Prop G)
       ( is-1-type-action-Concrete-Group G)
 
-  transitive-action-Concrete-Group-1-Type : UU-1-Type (l1 ⊔ lsuc l2)
+  transitive-action-Concrete-Group-1-Type : 1-Type (l1 ⊔ lsuc l2)
   pr1 transitive-action-Concrete-Group-1-Type =
     transitive-action-Concrete-Group l2 G
   pr2 transitive-action-Concrete-Group-1-Type =

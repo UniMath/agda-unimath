@@ -15,7 +15,7 @@ open import foundation-core.fundamental-theorem-of-identity-types using
 open import foundation-core.identity-types using
   ( _＝_; refl; inv; _∙_; ind-Id)
 open import foundation-core.propositions using
-  ( is-prop; UU-Prop; all-elements-equal; is-prop-all-elements-equal;
+  ( is-prop; Prop; all-elements-equal; is-prop-all-elements-equal;
     is-proof-irrelevant-is-prop; eq-is-prop; is-prop-is-equiv')
 open import foundation-core.truncated-types using
   ( is-trunc-succ-is-trunc; truncated-type-succ-Truncated-Type;
@@ -36,12 +36,12 @@ is-set :
   {i : Level} → UU i → UU i
 is-set A = (x y : A) → is-prop (x ＝ y)
 
-UU-Set :
+Set :
   (i : Level) → UU (lsuc i)
-UU-Set i = Σ (UU i) is-set
+Set i = Σ (UU i) is-set
 
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
   type-Set : UU l
@@ -51,7 +51,7 @@ module _
     is-set-type-Set : is-set type-Set
     is-set-type-Set = pr2 X
 
-  Id-Prop : (x y : type-Set) → UU-Prop l
+  Id-Prop : (x y : type-Set) → Prop l
   pr1 (Id-Prop x y) = (x ＝ y)
   pr2 (Id-Prop x y) = is-set-type-Set x y
 ```
@@ -117,7 +117,7 @@ abstract
   is-set-is-prop = is-trunc-succ-is-trunc neg-one-𝕋
 
 set-Prop :
-  {l : Level} → UU-Prop l → UU-Set l
+  {l : Level} → Prop l → Set l
 set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 ```
 

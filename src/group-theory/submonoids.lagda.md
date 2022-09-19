@@ -50,7 +50,7 @@ module _
   is-set-type-subset-Monoid =
     is-set-type-subtype P (is-set-type-Monoid M)
 
-  set-subset-Monoid : UU-Set (l1 ⊔ l2)
+  set-subset-Monoid : Set (l1 ⊔ l2)
   set-subset-Monoid = set-subset (set-Monoid M) P
 
   inclusion-subset-Monoid : type-subset-Monoid → type-Monoid M
@@ -73,7 +73,7 @@ module _
 ```agda
 is-submonoid-subset-Monoid-Prop :
   {l1 l2 : Level} (M : Monoid l1) (P : subset-Monoid l2 M) →
-  UU-Prop (l1 ⊔ l2)
+  Prop (l1 ⊔ l2)
 is-submonoid-subset-Monoid-Prop M P =
   prod-Prop
     ( P (unit-Monoid M))
@@ -120,7 +120,7 @@ module _
   is-set-type-Submonoid =
     is-set-type-subset-Monoid M subset-Submonoid
 
-  set-Submonoid : UU-Set (l1 ⊔ l2)
+  set-Submonoid : Set (l1 ⊔ l2)
   set-Submonoid =
     set-subset-Monoid M subset-Submonoid
 

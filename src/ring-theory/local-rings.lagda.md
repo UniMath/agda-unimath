@@ -26,7 +26,7 @@ A local ring is a ring such that whenever a sum of elements is invertible, then 
 ## Definition
 
 ```agda
-is-local-ring-Prop : {l : Level} (R : Ring l) → UU-Prop l
+is-local-ring-Prop : {l : Level} (R : Ring l) → Prop l
 is-local-ring-Prop R =
   Π-Prop
     ( type-Ring R)
@@ -56,7 +56,7 @@ module _
   ring-Local-Ring : Ring l
   ring-Local-Ring = pr1 R
 
-  set-Local-Ring : UU-Set l
+  set-Local-Ring : Set l
   set-Local-Ring = set-Ring ring-Local-Ring
 
   type-Local-Ring : UU l

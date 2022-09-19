@@ -9,7 +9,7 @@ module foundation.fiber-inclusions where
 
 open import foundation.0-maps using (is-0-map)
 open import foundation.1-types using
-  ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
+  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation.cones-pullbacks using (cone)
 open import foundation.contractible-maps using
   ( is-contr-map; is-contr-map-is-equiv)
@@ -31,7 +31,7 @@ open import foundation.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map)
 open import foundation.propositions using (is-prop)
 open import foundation.pullbacks using (is-pullback; gap)
-open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
 open import foundation.truncated-maps using (is-trunc-map)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-equiv'; is-trunc-equiv)
@@ -131,13 +131,13 @@ module _
     is-faithful-is-0-map (is-0-map-fiber-inclusion x H)
 
 fiber-inclusion-emb :
-  {l1 l2 : Level} (A : UU-Set l1) (B : type-Set A → UU l2) →
+  {l1 l2 : Level} (A : Set l1) (B : type-Set A → UU l2) →
   (x : type-Set A) → B x ↪ Σ (type-Set A) B
 pr1 (fiber-inclusion-emb A B x) = fiber-inclusion B x
 pr2 (fiber-inclusion-emb A B x) = is-emb-fiber-inclusion B (is-set-type-Set A) x
 
 fiber-inclusion-faithful-map :
-  {l1 l2 : Level} (A : UU-1-Type l1) (B : type-1-Type A → UU l2) →
+  {l1 l2 : Level} (A : 1-Type l1) (B : type-1-Type A → UU l2) →
   (x : type-1-Type A) → faithful-map (B x) (Σ (type-1-Type A) B)
 pr1 (fiber-inclusion-faithful-map A B x) = fiber-inclusion B x
 pr2 (fiber-inclusion-faithful-map A B x) =

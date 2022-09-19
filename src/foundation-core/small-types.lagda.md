@@ -27,7 +27,7 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; is-prop-is-proof-irrelevant; UU-Prop)
+  ( is-prop; is-prop-is-proof-irrelevant; Prop)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( equiv-left-swap-Σ)
@@ -105,7 +105,7 @@ is-prop-is-small l A =
         ( is-contr-total-equiv (pr1 Xe)))
 
 is-small-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) → UU-Prop (lsuc l ⊔ l1)
+  (l : Level) {l1 : Level} (A : UU l1) → Prop (lsuc l ⊔ l1)
 pr1 (is-small-Prop l A) = is-small l A
 pr2 (is-small-Prop l A) = is-prop-is-small l A
 ```

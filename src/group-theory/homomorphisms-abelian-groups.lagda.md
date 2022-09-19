@@ -14,7 +14,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv)
 open import foundation.functions using (id)
 open import foundation.identity-types using (Id)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.abelian-groups using
@@ -47,7 +47,7 @@ module _
   preserves-add-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
   preserves-add-Ab = preserves-mul-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 
-  hom-Ab : UU-Set (l1 ⊔ l2)
+  hom-Ab : Set (l1 ⊔ l2)
   hom-Ab = hom-Group (group-Ab A) (group-Ab B)
 
   type-hom-Ab : UU (l1 ⊔ l2)

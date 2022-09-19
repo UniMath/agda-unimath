@@ -19,7 +19,7 @@ open import foundation.identity-types using (_＝_; ap; inv; _∙_)
 open import foundation.propositions using
   ( is-proof-irrelevant; prod-Prop; is-prop; is-prop-is-proof-irrelevant)
 open import foundation.sets using
-  ( UU-Set; type-hom-Set; type-Set; is-set-type-Set; Id-Prop; hom-Set;
+  ( Set; type-hom-Set; type-Set; is-set-type-Set; Id-Prop; hom-Set;
     type-equiv-Set)
 open import foundation.subtypes using (eq-type-subtype; equiv-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -31,7 +31,7 @@ Since equality of elements in a set is a proposition, isomorphisms of sets are e
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
   where
 
   is-iso-Set : (f : type-hom-Set A B) → UU (l1 ⊔ l2)

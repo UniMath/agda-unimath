@@ -26,9 +26,9 @@ open import foundation-core.homotopies using (_~_; inv-htpy; refl-htpy)
 open import foundation-core.identity-types using (_＝_; refl; ap; _∙_; inv)
 open import foundation-core.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map; is-prop-map)
-open import foundation-core.propositions using (is-prop; UU-Prop)
+open import foundation-core.propositions using (is-prop; Prop)
 open import foundation-core.sets using
-  ( is-set; is-set-equiv; UU-Set; type-Set; is-set-type-Set)
+  ( is-set; is-set-equiv; Set; type-Set; is-set-type-Set)
 open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-succ-is-trunc; is-trunc-equiv; Truncated-Type;
     is-trunc-is-equiv'; is-trunc-Σ; is-trunc-Id; is-trunc-equiv';

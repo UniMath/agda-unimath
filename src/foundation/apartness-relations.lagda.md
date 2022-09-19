@@ -37,7 +37,7 @@ The idea of an apartness relation `R` is that `R a b` holds if you can positivel
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : A → A → UU-Prop l2)
+  {l1 l2 : Level} {A : UU l1} (R : A → A → Prop l2)
   where
 
   is-antireflexive : UU (l1 ⊔ l2)
@@ -58,13 +58,13 @@ module _
 
 Apartness-Relation : {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
 Apartness-Relation l2 A =
-  Σ (A → A → UU-Prop l2) is-apartness-relation
+  Σ (A → A → Prop l2) is-apartness-relation
 
 module _
   {l1 l2 : Level} {A : UU l1} (R : Apartness-Relation l2 A)
   where
 
-  rel-Apartness-Relation : A → A → UU-Prop l2
+  rel-Apartness-Relation : A → A → Prop l2
   rel-Apartness-Relation = pr1 R
 
   apart-Apartness-Relation : A → A → UU l2

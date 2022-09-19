@@ -26,7 +26,7 @@ A singleton subtype of a type `X` is a subtype `P` of `X` of which the underlyin
 
 ```agda
 is-singleton-subtype-Prop :
-  {l1 l2 : Level} {X : UU l1} → subtype l2 X → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {X : UU l1} → subtype l2 X → Prop (l1 ⊔ l2)
 is-singleton-subtype-Prop P = is-contr-Prop (type-subtype P)
 
 is-singleton-subtype :
@@ -58,16 +58,16 @@ module _
 
 ```agda
 subtype-standard-singleton-subtype :
-  {l : Level} (X : UU-Set l) → type-Set X → subtype l (type-Set X)
+  {l : Level} (X : Set l) → type-Set X → subtype l (type-Set X)
 subtype-standard-singleton-subtype X x y = Id-Prop X x y
 
 standard-singleton-subtype :
-  {l : Level} (X : UU-Set l) → type-Set X → singleton-subtype l (type-Set X)
+  {l : Level} (X : Set l) → type-Set X → singleton-subtype l (type-Set X)
 pr1 (standard-singleton-subtype X x) = subtype-standard-singleton-subtype X x
 pr2 (standard-singleton-subtype X x) = is-contr-total-path x
 
 inhabited-subtype-standard-singleton-subtype :
-  {l : Level} (X : UU-Set l) → type-Set X → inhabited-subtype l (type-Set X)
+  {l : Level} (X : Set l) → type-Set X → inhabited-subtype l (type-Set X)
 pr1 (inhabited-subtype-standard-singleton-subtype X x) =
   subtype-standard-singleton-subtype X x
 pr2 (inhabited-subtype-standard-singleton-subtype X x) =

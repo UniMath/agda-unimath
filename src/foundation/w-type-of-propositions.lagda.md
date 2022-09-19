@@ -25,7 +25,7 @@ The W-type of the type of propositions is defined using the type of propositions
 
 ```agda
 𝕎-Prop : (l : Level) → UU (lsuc l)
-𝕎-Prop l = 𝕎 (UU-Prop l) type-Prop
+𝕎-Prop l = 𝕎 (Prop l) type-Prop
 
 zero-𝕎-Prop : {l : Level} → 𝕎-Prop l
 zero-𝕎-Prop {l} = constant-𝕎 (raise-empty-Prop l) is-empty-raise-empty
@@ -47,7 +47,7 @@ standard-subfinite-type (tree-𝕎 P α) =
 ### 𝕎-Prop is extensional
 
 ```agda
-is-extensional-𝕎-Prop : {l : Level} → is-extensional-𝕎 (UU-Prop l) type-Prop
+is-extensional-𝕎-Prop : {l : Level} → is-extensional-𝕎 (Prop l) type-Prop
 is-extensional-𝕎-Prop = is-extensional-is-univalent-𝕎 is-univalent-type-Prop
 ```
 
@@ -55,5 +55,5 @@ is-extensional-𝕎-Prop = is-extensional-is-univalent-𝕎 is-univalent-type-Pr
 
 ```agda
 is-set-𝕎-Prop : {l : Level} → is-set (𝕎-Prop l)
-is-set-𝕎-Prop = is-set-𝕎 is-set-UU-Prop
+is-set-𝕎-Prop = is-set-𝕎 is-set-Prop
 ```

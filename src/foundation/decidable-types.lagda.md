@@ -21,7 +21,7 @@ open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
 open import foundation.negation using (¬; map-neg; is-prop-neg)
 open import foundation.retractions using (_retract-of_)
 open import foundation.propositions using
-  ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop;
     is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
@@ -61,7 +61,7 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 
 ```agda
 is-merely-decidable-Prop :
-  {l : Level} → UU l → UU-Prop l
+  {l : Level} → UU l → Prop l
 is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
@@ -228,7 +228,7 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-prop-neg)
 
-is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
 pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
 ```

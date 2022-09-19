@@ -106,7 +106,7 @@ module _
   quotient-sign-comp : UU (lsuc lzero ⊔ l)
   quotient-sign-comp = equivalence-class sign-comp-Eq-Rel
 
-  quotient-sign-comp-Set : UU-Set (lsuc lzero ⊔ l)
+  quotient-sign-comp-Set : Set (lsuc lzero ⊔ l)
   quotient-sign-comp-Set = equivalence-class-Set sign-comp-Eq-Rel
 
 module _
@@ -571,14 +571,14 @@ module _
   map-simpson-delooping-sign : (n : ℕ) →
     classifying-type-Concrete-Group
       ( Automorphism-Group
-        ( UU-Set l)
+        ( Set l)
         ( raise-Set l (Fin-Set n))
-        ( is-1-type-UU-Set)) →
+        ( is-1-type-Set)) →
     classifying-type-Concrete-Group
       ( Automorphism-Group
-        ( UU-Set (lsuc lzero ⊔ l))
+        ( Set (lsuc lzero ⊔ l))
         ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-1-type-UU-Set))
+        ( is-1-type-Set))
   pr1 (map-simpson-delooping-sign zero-ℕ X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
   pr2 (map-simpson-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
   pr1 (map-simpson-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
@@ -607,11 +607,11 @@ module _
 
   simpson-delooping-sign : (n : ℕ) →
     hom-Concrete-Group
-      ( Automorphism-Group (UU-Set l) (raise-Set l (Fin-Set n)) is-1-type-UU-Set)
+      ( Automorphism-Group (Set l) (raise-Set l (Fin-Set n)) is-1-type-Set)
       ( Automorphism-Group
-        ( UU-Set (lsuc lzero ⊔ l))
+        ( Set (lsuc lzero ⊔ l))
         ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-1-type-UU-Set))
+        ( is-1-type-Set))
   pr1 (simpson-delooping-sign n) = map-simpson-delooping-sign n
   pr2 (simpson-delooping-sign zero-ℕ) = refl
   pr2 (simpson-delooping-sign (succ-ℕ zero-ℕ)) = refl

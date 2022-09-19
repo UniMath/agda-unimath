@@ -20,7 +20,7 @@ open import foundation-core.truncated-types using
 open import foundation-core.truncation-levels using (𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
-open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
+open import foundation.propositions using (is-prop; is-prop-Π; Prop)
 ```
 
 ## Properties
@@ -35,7 +35,7 @@ module _
   is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
   is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fib f x))
 
-  is-trunc-map-Prop : (k : 𝕋) → (A → B) → UU-Prop (l1 ⊔ l2)
+  is-trunc-map-Prop : (k : 𝕋) → (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-trunc-map-Prop k f) = is-trunc-map k f
   pr2 (is-trunc-map-Prop k f) = is-prop-is-trunc-map k f
 ```

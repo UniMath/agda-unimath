@@ -19,7 +19,7 @@ open import foundation.decidable-types using (is-decidable)
 open import foundation.equivalences using (map-equiv)
 open import foundation.identity-types using (Id; refl)
 open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; is-proof-irrelevant-is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU)
 
 open import univalent-combinatorics.counting using
@@ -45,7 +45,7 @@ count-is-decidable-is-prop H (inl x) =
 count-is-decidable-is-prop H (inr f) = count-is-empty f
 
 count-decidable-Prop :
-  {l1 : Level} (P : UU-Prop l1) →
+  {l1 : Level} (P : Prop l1) →
   is-decidable (type-Prop P) → count (type-Prop P)
 count-decidable-Prop P (inl p) =
   count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) p)

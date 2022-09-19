@@ -40,7 +40,7 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
     map-universal-property-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
+  ( is-prop; Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
     is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.sets using (is-set; is-set-equiv)
@@ -76,7 +76,7 @@ is-emb-prop-decidable-Prop =
         ( λ H → pair (is-decidable X) (is-prop-is-decidable H)))
 
 emb-prop-decidable-Prop :
-  {l : Level} → decidable-Prop l ↪ UU-Prop l
+  {l : Level} → decidable-Prop l ↪ Prop l
 pr1 emb-prop-decidable-Prop = prop-decidable-Prop
 pr2 emb-prop-decidable-Prop = is-emb-prop-decidable-Prop
 ```
@@ -90,20 +90,20 @@ module _
   
   split-decidable-Prop :
     decidable-Prop l ≃
-    ((Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q))))
+    ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
   split-decidable-Prop =
-    ( left-distributive-Σ-coprod (UU-Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
+    ( left-distributive-Σ-coprod (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
     ( inv-assoc-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
 
   map-equiv-bool-decidable-Prop' :
-    (Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q))) →
+    (Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))) →
     bool
   map-equiv-bool-decidable-Prop' (inl x) = true
   map-equiv-bool-decidable-Prop' (inr x) = false
 
   map-inv-equiv-bool-decidable-Prop' :
     bool →
-    (Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q)))
+    (Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))
   map-inv-equiv-bool-decidable-Prop' true =
     inl (pair (raise-unit-Prop l) raise-star)
   map-inv-equiv-bool-decidable-Prop' false =
@@ -130,7 +130,7 @@ module _
       isretr-map-inv-equiv-bool-decidable-Prop'
 
   equiv-bool-decidable-Prop' :
-    ((Σ (UU-Prop l) type-Prop) + (Σ (UU-Prop l) (λ Q → ¬ (type-Prop Q)))) ≃
+    ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))) ≃
     bool
   pr1 equiv-bool-decidable-Prop' = map-equiv-bool-decidable-Prop'
   pr2 equiv-bool-decidable-Prop' = is-equiv-map-equiv-bool-decidable-Prop'
@@ -230,7 +230,7 @@ abstract
 
 ```agda
 count-is-decidable-Prop :
-    {l : Level} (P : UU-Prop l) →
+    {l : Level} (P : Prop l) →
     is-decidable (type-Prop P) → count (type-Prop P)
 count-is-decidable-Prop P (inl x) =
   count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) x)
@@ -243,7 +243,7 @@ count-is-decidable-Prop P (inr x) =
 ```agda
 abstract
   is-finite-is-decidable-Prop :
-    {l : Level} (P : UU-Prop l) →
+    {l : Level} (P : Prop l) →
     is-decidable (type-Prop P) → is-finite (type-Prop P)
   is-finite-is-decidable-Prop P x = is-finite-count (count-is-decidable-Prop P x)
 ```

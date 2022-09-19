@@ -18,7 +18,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.mere-equivalences using (mere-equiv)
 open import foundation.propositions using
-  ( UU-Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (is-set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 
@@ -51,7 +51,7 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-finite-preorder-Prop : UU-Prop (l1 ⊔ l2)
+  is-finite-preorder-Prop : Prop (l1 ⊔ l2)
   is-finite-preorder-Prop =
     prod-Prop
       ( is-finite-Prop (element-Preorder X))
@@ -162,7 +162,7 @@ module _
     is-prop-type-decidable-Prop (leq-finite-preorder-decidable-Prop x y)
 
   leq-Finite-preorder-Prop :
-    (x y : element-Finite-Preorder) → UU-Prop l2
+    (x y : element-Finite-Preorder) → Prop l2
   pr1 (leq-Finite-preorder-Prop x y) = leq-Finite-Preorder x y
   pr2 (leq-Finite-preorder-Prop x y) = is-prop-leq-Finite-Preorder x y
 
@@ -215,7 +215,7 @@ module _
     leq-finite-preorder-decidable-Prop X (pr1 x) (pr1 y)
 
   leq-finite-sub-preorder-Prop :
-    (x y : element-finite-sub-Preorder) → UU-Prop l2
+    (x y : element-finite-sub-Preorder) → Prop l2
   leq-finite-sub-preorder-Prop =
     leq-decidable-sub-preorder-Prop (preorder-Finite-Preorder X) S
 

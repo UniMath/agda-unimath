@@ -5,7 +5,7 @@
 
 module order-theory.total-posets where
 
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.posets using  (Poset; element-Poset; preorder-Poset)
@@ -21,7 +21,7 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  incident-poset-Prop : (x y : element-Poset X) → UU-Prop l2
+  incident-poset-Prop : (x y : element-Poset X) → Prop l2
   incident-poset-Prop = incident-preorder-Prop (preorder-Poset X)
 
   incident-Poset : (x y : element-Poset X) → UU l2
@@ -31,7 +31,7 @@ module _
     (x y : element-Poset X) → is-prop (incident-Poset x y)
   is-prop-incident-Poset = is-prop-incident-Preorder (preorder-Poset X)
 
-  is-total-poset-Prop : UU-Prop (l1 ⊔ l2)
+  is-total-poset-Prop : Prop (l1 ⊔ l2)
   is-total-poset-Prop = is-total-preorder-Prop (preorder-Poset X)
 
   is-total-Poset : UU (l1 ⊔ l2)

@@ -20,14 +20,14 @@ open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap; _＝_)
 open import foundation.powersets using (_⊆_)
-open import foundation.propositional-extensionality using (is-set-UU-Prop)
+open import foundation.propositional-extensionality using (is-set-Prop)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
     is-prop-function-type; is-prop-prod; is-prop-is-equiv; Π-Prop; hom-Prop;
     prod-Prop; eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Prop; map-raise)
-open import foundation.sets using (is-set; is-set-function-type; UU-Set)
+open import foundation.sets using (is-set; is-set-function-type; Set)
 open import foundation.subtype-identity-principle using
   ( extensionality-type-subtype)
 open import foundation.subtypes using
@@ -64,7 +64,7 @@ subset-Group l G = subtype l (type-Group G)
 is-set-subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
 is-set-subset-Group l G =
-  is-set-function-type is-set-UU-Prop
+  is-set-function-type is-set-Prop
 ```
 
 ### Subgroups
@@ -74,7 +74,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G)
   where
   
-  contains-unit-subset-group-Prop : UU-Prop l2
+  contains-unit-subset-group-Prop : Prop l2
   contains-unit-subset-group-Prop = P (unit-Group G)
   
   contains-unit-subset-Group : UU l2
@@ -84,7 +84,7 @@ module _
   is-prop-contains-unit-subset-Group =
     is-prop-type-Prop contains-unit-subset-group-Prop
 
-  is-closed-under-mul-subset-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-closed-under-mul-subset-group-Prop : Prop (l1 ⊔ l2)
   is-closed-under-mul-subset-group-Prop =
     Π-Prop
       ( type-Group G)
@@ -102,7 +102,7 @@ module _
   is-prop-is-closed-under-mul-subset-Group =
     is-prop-type-Prop is-closed-under-mul-subset-group-Prop
 
-  is-closed-under-inv-subset-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-closed-under-inv-subset-group-Prop : Prop (l1 ⊔ l2)
   is-closed-under-inv-subset-group-Prop =
     Π-Prop
       ( type-Group G)
@@ -117,7 +117,7 @@ module _
   is-prop-is-closed-under-inv-subset-Group =
     is-prop-type-Prop is-closed-under-inv-subset-group-Prop
 
-  is-subgroup-subset-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-subgroup-subset-group-Prop : Prop (l1 ⊔ l2)
   is-subgroup-subset-group-Prop =
     prod-Prop
       ( contains-unit-subset-group-Prop)
@@ -211,7 +211,7 @@ module _
   eq-subgroup-eq-group {x} {y} =
     map-inv-is-equiv (is-emb-inclusion-group-Subgroup x y)
 
-  set-group-Subgroup : UU-Set (l1 ⊔ l2)
+  set-group-Subgroup : Set (l1 ⊔ l2)
   pr1 set-group-Subgroup = type-group-Subgroup
   pr2 set-group-Subgroup =
     is-set-type-subtype (subset-Subgroup G H) (is-set-type-Group G)
@@ -354,7 +354,7 @@ module _
         ( is-emb-mul-Group G x)
         ( is-emb-inclusion-Subgroup G H))
 
-  prop-right-eq-rel-Subgroup : (x y : type-Group G) → UU-Prop (l1 ⊔ l2)
+  prop-right-eq-rel-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
   pr1 (prop-right-eq-rel-Subgroup x y) = right-sim-Subgroup x y
   pr2 (prop-right-eq-rel-Subgroup x y) =
     is-prop-right-sim-Subgroup x y
@@ -411,7 +411,7 @@ module _
         ( is-emb-mul-Group' G x)
         ( is-emb-inclusion-Subgroup G H))
 
-  prop-left-eq-rel-Subgroup : (x y : type-Group G) → UU-Prop (l1 ⊔ l2)
+  prop-left-eq-rel-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
   pr1 (prop-left-eq-rel-Subgroup x y) = left-sim-Subgroup x y
   pr2 (prop-left-eq-rel-Subgroup x y) =
     is-prop-left-sim-Subgroup x y

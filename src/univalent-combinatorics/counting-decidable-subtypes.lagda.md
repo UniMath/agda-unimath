@@ -34,7 +34,7 @@ open import foundation.propositional-maps using (is-prop-map-emb)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; is-proof-irrelevant-is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation.subtypes using (subtype; type-subtype)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)

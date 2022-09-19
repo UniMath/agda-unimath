@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (refl)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set; is-set-function-type; is-set-type-Set)
+  ( Set; type-Set; is-set; is-set-function-type; is-set-type-Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU)
 
@@ -45,12 +45,12 @@ pr1 (pr2 (pr2 (pr2 (endo-Wild-Monoid X)))) g f = refl
 pr1 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid X))))) g f = refl
 pr2 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid X))))) = star
 
-endo-Semigroup : {l : Level} → UU-Set l → Semigroup l
+endo-Semigroup : {l : Level} → Set l → Semigroup l
 pr1 (endo-Semigroup X) = endo-Set X
 pr1 (pr2 (endo-Semigroup X)) g f = g ∘ f
 pr2 (pr2 (endo-Semigroup X)) h g f = refl
 
-endo-Monoid : {l : Level} → UU-Set l → Monoid l
+endo-Monoid : {l : Level} → Set l → Monoid l
 pr1 (endo-Monoid X) = endo-Semigroup X
 pr1 (pr2 (endo-Monoid X)) = id
 pr1 (pr2 (pr2 (endo-Monoid X))) f = refl

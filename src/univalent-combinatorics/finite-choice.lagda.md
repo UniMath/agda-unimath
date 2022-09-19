@@ -40,7 +40,7 @@ open import foundation.propositional-maps using (fib-emb-Prop)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; unit-trunc-Prop; map-inv-distributive-trunc-prod-Prop;
     apply-universal-property-trunc-Prop; trunc-Prop)
-open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.propositions using (Prop; type-Prop)
 open import foundation.sets using (is-set)
 open import foundation.subtypes using (type-subtype)
 open import foundation.unit-type using (unit; star)

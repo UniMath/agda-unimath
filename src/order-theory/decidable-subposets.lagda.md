@@ -9,7 +9,7 @@ open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-subtypes using (subtype-decidable-subtype)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.posets using (Poset; element-Poset)
@@ -38,7 +38,7 @@ module _
     eq-element-sub-Poset X (subtype-decidable-subtype S)
 
   leq-decidable-sub-poset-Prop :
-    (x y : element-decidable-sub-Poset) → UU-Prop l2
+    (x y : element-decidable-sub-Poset) → Prop l2
   leq-decidable-sub-poset-Prop =
     leq-sub-poset-Prop X (subtype-decidable-subtype S)
 

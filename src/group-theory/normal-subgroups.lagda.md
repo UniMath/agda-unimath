@@ -35,7 +35,7 @@ A normal subgroup of `G` is a subgroup `H` of `G` which is closed under conjugat
 
 ```agda
 is-normal-subgroup-Prop :
-  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) → Prop (l1 ⊔ l2)
 is-normal-subgroup-Prop G H =
   Π-Prop
     ( type-Group G)
@@ -227,7 +227,7 @@ module _
   is-prop-sim-congruence-Normal-Subgroup =
     is-prop-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  prop-congruence-Normal-Subgroup : (x y : type-Group G) → UU-Prop (l1 ⊔ l2)
+  prop-congruence-Normal-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
   prop-congruence-Normal-Subgroup =
     prop-right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
 

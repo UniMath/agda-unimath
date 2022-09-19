@@ -8,7 +8,7 @@ title: Subsets of rings
 module ring-theory.subsets-rings where
 
 open import foundation.dependent-pair-types
-open import foundation.propositional-extensionality using (is-set-UU-Prop)
+open import foundation.propositional-extensionality using (is-set-Prop)
 open import foundation.sets using (is-set; is-set-function-type)
 open import foundation.subtypes using (subtype; type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
@@ -30,7 +30,7 @@ subset-Ring l R = subtype l (type-Ring R)
 is-set-subset-Ring :
   (l : Level) {l1 : Level} (R : Ring l1) → is-set (subset-Ring l R)
 is-set-subset-Ring l R =
-  is-set-function-type is-set-UU-Prop
+  is-set-function-type is-set-Prop
 
 module _
   {l1 l2 : Level} (R : Ring l1) (S : subset-Ring l2 R)

@@ -25,7 +25,7 @@ open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
 open import foundation.identity-types using (_＝_; refl; inv; ap; tr)
 open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.propositions using (is-prop; Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 
@@ -150,7 +150,7 @@ is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
 is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
 is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
 
-leq-ℕ-Prop : ℕ → ℕ → UU-Prop lzero
+leq-ℕ-Prop : ℕ → ℕ → Prop lzero
 pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
 pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
 ```

@@ -95,7 +95,7 @@ module _
 
   is-constant-trail-Undirected-Graph-Prop :
     {x y : vertex-Undirected-Graph G} →
-    trail-Undirected-Graph x y → UU-Prop lzero
+    trail-Undirected-Graph x y → Prop lzero
   is-constant-trail-Undirected-Graph-Prop t =
     is-constant-walk-Undirected-Graph-Prop G (walk-trail-Undirected-Graph t)
 

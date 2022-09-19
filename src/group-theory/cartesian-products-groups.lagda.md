@@ -37,7 +37,7 @@ module _
   semigroup-prod-Group : Semigroup (l1 ⊔ l2)
   semigroup-prod-Group = semigroup-Monoid monoid-prod-Group
 
-  set-prod-Group : UU-Set (l1 ⊔ l2)
+  set-prod-Group : Set (l1 ⊔ l2)
   set-prod-Group = set-Semigroup semigroup-prod-Group
 
   type-prod-Group : UU (l1 ⊔ l2)

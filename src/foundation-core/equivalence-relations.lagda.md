@@ -20,7 +20,7 @@ open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_)
 open import foundation-core.propositions using
-  ( is-prop; equiv-prop; is-prop-prod; UU-Prop)
+  ( is-prop; equiv-prop; is-prop-prod; Prop)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 ```
 
@@ -66,7 +66,7 @@ is-prop-is-equivalence-relation R =
       ( is-prop-is-transitive-Rel-Prop R))
 
 is-equivalence-relation-Prop :
-  {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → Prop (l1 ⊔ l2)
 pr1 (is-equivalence-relation-Prop R) = is-equivalence-relation R
 pr2 (is-equivalence-relation-Prop R) = is-prop-is-equivalence-relation R
 

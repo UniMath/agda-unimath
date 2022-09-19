@@ -33,7 +33,7 @@ open import foundation.noncontractible-types using
   ( is-not-contractible; is-not-contractible-empty)
 open import foundation.raising-universe-levels using
   ( raise; equiv-raise; map-raise; raise-Set)
-open import foundation.sets using (UU-Set; type-Set; is-set-type-Set; is-set)
+open import foundation.sets using (Set; type-Set; is-set-type-Set; is-set)
 open import foundation.unit-type using (unit; star; is-contr-unit; unit-Set)
 open import foundation.universe-levels using (Level; UU; lzero)
 
@@ -49,7 +49,7 @@ The standard finite types are defined inductively by `Fin 0 := empty` and `Fin (
 ### The standard finite types in universe level zero.
 
 ```agda
-Fin-Set : ℕ → UU-Set lzero
+Fin-Set : ℕ → Set lzero
 Fin-Set zero-ℕ = empty-Set
 Fin-Set (succ-ℕ n) = coprod-Set (Fin-Set n) unit-Set
 
@@ -99,7 +99,7 @@ equiv-raise-Fin l k = equiv-raise l (Fin k)
 map-raise-Fin : (l : Level) (k : ℕ) → Fin k → raise-Fin l k
 map-raise-Fin l k = map-raise
 
-raise-Fin-Set : (l : Level) (k : ℕ) → UU-Set l
+raise-Fin-Set : (l : Level) (k : ℕ) → Set l
 raise-Fin-Set l k = raise-Set l (Fin-Set k)
 ```
 

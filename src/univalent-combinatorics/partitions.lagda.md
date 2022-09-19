@@ -103,7 +103,7 @@ module _
     type-𝔽 X → Σ indexing-type-partition-𝔽 block-partition-𝔽
   map-conversion-partition-𝔽 = map-equiv conversion-partition-𝔽
 
-  rel-partition-𝔽-Prop : type-𝔽 X → type-𝔽 X → UU-Prop l2
+  rel-partition-𝔽-Prop : type-𝔽 X → type-𝔽 X → Prop l2
   rel-partition-𝔽-Prop x y =
     Id-Prop
       ( set-𝔽 finite-indexing-type-partition-𝔽)

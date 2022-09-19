@@ -29,7 +29,7 @@ module _
   {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
   where
   
-  is-prime-ideal-commutative-ring-Prop : UU-Prop (l1 ⊔ l2)
+  is-prime-ideal-commutative-ring-Prop : Prop (l1 ⊔ l2)
   is-prime-ideal-commutative-ring-Prop =
     Π-Prop
       ( type-Commutative-Ring R)

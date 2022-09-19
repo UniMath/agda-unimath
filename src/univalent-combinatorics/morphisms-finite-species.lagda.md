@@ -146,7 +146,7 @@ is-set-type-hom-finite-species F G f g =
      
 hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →
-  UU-Set (lsuc l1 ⊔ l2 ⊔ l3)
+  Set (lsuc l1 ⊔ l2 ⊔ l3)
 pr1 (hom-finite-species F G) = type-hom-finite-species F G
 pr2 (hom-finite-species F G) = is-set-type-hom-finite-species F G
 ```

@@ -8,7 +8,7 @@ module graph-theory.mere-equivalences-undirected-graphs where
 open import foundation.propositional-truncations using
   ( trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  (UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  (Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 
 open import graph-theory.equivalences-undirected-graphs using
@@ -29,7 +29,7 @@ module _
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
-  mere-equiv-Undirected-Graph-Prop : UU-Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  mere-equiv-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   mere-equiv-Undirected-Graph-Prop = trunc-Prop (equiv-Undirected-Graph G H)
 
   mere-equiv-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)

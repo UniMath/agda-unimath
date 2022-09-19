@@ -25,7 +25,7 @@ A relation `R` is said to be tight if for every `x y : A` we have `¬ (R x y) �
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : A → A → UU-Prop l2)
+  {l1 l2 : Level} {A : UU l1} (R : A → A → Prop l2)
   where
 
   is-tight : UU (l1 ⊔ l2)

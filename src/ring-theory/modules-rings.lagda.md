@@ -57,7 +57,7 @@ module _
   ab-left-module-Ring : Ab l2
   ab-left-module-Ring = pr1 M
 
-  set-left-module-Ring : UU-Set l2
+  set-left-module-Ring : Set l2
   set-left-module-Ring = set-Ab ab-left-module-Ring
 
   type-left-module-Ring : UU l2
@@ -298,7 +298,7 @@ module _
   ab-right-module-Ring : Ab l2
   ab-right-module-Ring = pr1 M
 
-  set-right-module-Ring : UU-Set l2
+  set-right-module-Ring : Set l2
   set-right-module-Ring = set-Ab ab-right-module-Ring
 
   type-right-module-Ring : UU l2

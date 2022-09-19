@@ -23,7 +23,7 @@ A reflexive relation `R` on a type `A` is said to be discrete if for every `x : 
 
 ```agda
 is-discrete-Reflexive-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} (R : Reflexive-Relation l2 A) → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} (R : Reflexive-Relation l2 A) → Prop (l1 ⊔ l2)
 is-discrete-Reflexive-Relation-Prop {A = A} R =
   Π-Prop A (λ x → is-contr-Prop (Σ A (rel-Reflexive-Relation R x)))
 

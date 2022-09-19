@@ -25,8 +25,8 @@ open import foundation.injective-maps using
   ( is-injective; is-injective-is-equiv)
 open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;
-    is-prop-Σ; UU-Prop)
-open import foundation.sets using (UU-Set; is-set; type-Set; Id-Prop)
+    is-prop-Σ; Prop)
+open import foundation.sets using (Set; is-set; type-Set; Id-Prop)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
@@ -94,7 +94,7 @@ module _
   semigroup-Group : Semigroup l
   semigroup-Group = pr1 G
   
-  set-Group : UU-Set l
+  set-Group : Set l
   set-Group = pr1 semigroup-Group
   
   type-Group : UU l
@@ -144,7 +144,7 @@ module _
   is-prop-is-unit-Group : (x : type-Group) → is-prop (is-unit-Group x)
   is-prop-is-unit-Group x = is-set-type-Group x unit-Group
 
-  is-unit-group-Prop : type-Group → UU-Prop l
+  is-unit-group-Prop : type-Group → Prop l
   pr1 (is-unit-group-Prop x) = is-unit-Group x
   pr2 (is-unit-group-Prop x) = is-prop-is-unit-Group x
 
@@ -417,7 +417,7 @@ abstract
       ( λ e →
         is-prop-all-elements-equal (all-elements-equal-is-group G e))
 
-is-group-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
+is-group-Prop : {l : Level} (G : Semigroup l) → Prop l
 pr1 (is-group-Prop G) = is-group G
 pr2 (is-group-Prop G) = is-prop-is-group G
 ```

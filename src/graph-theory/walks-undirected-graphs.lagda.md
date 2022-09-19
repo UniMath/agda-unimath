@@ -445,7 +445,7 @@ module _
 
   is-constant-walk-Undirected-Graph-Prop :
     {y : vertex-Undirected-Graph G} →
-    walk-Undirected-Graph G x y → UU-Prop lzero
+    walk-Undirected-Graph G x y → Prop lzero
   is-constant-walk-Undirected-Graph-Prop w =
     is-zero-ℕ-Prop (length-walk-Undirected-Graph G w)
 

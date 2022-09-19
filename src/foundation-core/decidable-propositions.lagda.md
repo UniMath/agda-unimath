@@ -43,7 +43,7 @@ is-prop-is-decidable is-prop-A =
   is-prop-coprod intro-dn is-prop-A is-prop-neg
 
 is-decidable-Prop :
-  {l : Level} → UU-Prop l → UU-Prop l
+  {l : Level} → Prop l → Prop l
 pr1 (is-decidable-Prop P) = is-decidable (type-Prop P)
 pr2 (is-decidable-Prop P) = is-prop-is-decidable (is-prop-type-Prop P)
 
@@ -57,7 +57,7 @@ is-prop-is-decidable-prop X =
         ( is-prop-is-decidable (pr1 H)))
 
 is-decidable-prop-Prop :
-  {l : Level} (A : UU l) → UU-Prop l
+  {l : Level} (A : UU l) → Prop l
 pr1 (is-decidable-prop-Prop A) = is-decidable-prop A
 pr2 (is-decidable-prop-Prop A) = is-prop-is-decidable-prop A
 ```
@@ -73,7 +73,7 @@ module _
   {l : Level} (P : decidable-Prop l)
   where
 
-  prop-decidable-Prop : UU-Prop l
+  prop-decidable-Prop : Prop l
   prop-decidable-Prop = tot (λ x → pr1) P
 
   type-decidable-Prop : UU l
@@ -89,7 +89,7 @@ module _
   is-decidable-prop-type-decidable-Prop : is-decidable-prop type-decidable-Prop
   is-decidable-prop-type-decidable-Prop = pr2 P
 
-  is-decidable-prop-decidable-Prop : UU-Prop l
+  is-decidable-prop-decidable-Prop : Prop l
   pr1 is-decidable-prop-decidable-Prop = is-decidable type-decidable-Prop
   pr2 is-decidable-prop-decidable-Prop =
     is-prop-is-decidable is-prop-type-decidable-Prop
@@ -128,7 +128,7 @@ abstract
   is-prop-is-decidable-trunc-Prop A =
     is-prop-is-decidable is-prop-type-trunc-Prop
     
-is-decidable-trunc-Prop : {l : Level} → UU l → UU-Prop l
+is-decidable-trunc-Prop : {l : Level} → UU l → Prop l
 pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
 pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A
 

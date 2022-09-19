@@ -47,7 +47,7 @@ module _
 
   leq-large-poset-Prop :
     {l1 l2 : Level} → type-Large-Poset l1 → type-Large-Poset l2 →
-    UU-Prop (β l1 l2)
+    Prop (β l1 l2)
   leq-large-poset-Prop = leq-large-preorder-Prop (large-preorder-Large-Poset X)
 
   leq-Large-Poset :

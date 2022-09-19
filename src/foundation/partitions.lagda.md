@@ -55,7 +55,7 @@ is contractible. In other words, it is a collection `P` of inhabited subtypes of
 ```agda
 is-partition-Prop :
   {l1 l2 l3 : Level} {A : UU l1} (P : subtype l3 (inhabited-subtype l2 A)) →
-  UU-Prop (l1 ⊔ lsuc l2 ⊔ l3)
+  Prop (l1 ⊔ lsuc l2 ⊔ l3)
 is-partition-Prop {l1} {l2} {l3} {A} P =
   Π-Prop A
     ( λ x →
@@ -380,7 +380,7 @@ module _
   where
 
   has-same-elements-block-partition-Prop :
-    block-partition P → UU-Prop (l1 ⊔ l2)
+    block-partition P → Prop (l1 ⊔ l2)
   has-same-elements-block-partition-Prop C =
     has-same-elements-inhabited-subtype-Prop
       ( inhabited-subtype-block-partition P B)
@@ -466,7 +466,7 @@ module _
       ( extensionality-block-partition P B C)
       ( is-prop-has-same-elements-block-partition P B C)
 
-  block-partition-Set : UU-Set (l1 ⊔ l2)
+  block-partition-Set : Set (l1 ⊔ l2)
   pr1 block-partition-Set = block-partition P
   pr2 block-partition-Set = is-set-block-partition
 ```
@@ -498,7 +498,7 @@ module _
   where
 
   share-common-element-block-partition-Prop :
-    (C : block-partition P) → UU-Prop (l1 ⊔ l2)
+    (C : block-partition P) → Prop (l1 ⊔ l2)
   share-common-element-block-partition-Prop C =
     ∃-Prop A
       ( λ a →

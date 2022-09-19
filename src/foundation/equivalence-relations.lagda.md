@@ -435,7 +435,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X)
+  {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : A → type-Set X)
   where
   
   rel-map-into-set : Rel-Prop l2 A

@@ -37,14 +37,14 @@ open import foundation.locally-small-types
 open import foundation.logical-equivalences using
   ( backward-implication; iff-equiv; equiv-iff'; inv-iff; forward-implication)
 open import foundation.propositional-extensionality using
-  ( eq-iff; is-set-UU-Prop)
+  ( eq-iff; is-set-Prop)
 open import foundation.propositional-truncations
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel)
 open import foundation.sets using
-  ( is-set; is-set-function-type; UU-Set; Id-Prop)
+  ( is-set; is-set-function-type; Set; Id-Prop)
 open import foundation.slice using (hom-slice)
 open import foundation.small-types using
   ( is-small; is-small-is-surjective; is-small-lmax; is-small-equiv;
@@ -81,7 +81,7 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  is-equivalence-class-Prop : subtype l2 A → UU-Prop (l1 ⊔ l2)
+  is-equivalence-class-Prop : subtype l2 A → Prop (l1 ⊔ l2)
   is-equivalence-class-Prop P =
     ∃-Prop A (λ x → has-same-elements-subtype P (prop-Eq-Rel R x))
 
@@ -152,7 +152,7 @@ module _
     is-prop-is-in-equivalence-class P x =
       is-prop-type-Prop (subtype-equivalence-class P x)
 
-  is-in-equivalence-class-Prop : equivalence-class → (A → UU-Prop l2)
+  is-in-equivalence-class-Prop : equivalence-class → (A → Prop l2)
   pr1 (is-in-equivalence-class-Prop P x) = is-in-equivalence-class P x
   pr2 (is-in-equivalence-class-Prop P x) = is-prop-is-in-equivalence-class P x
 
@@ -161,7 +161,7 @@ module _
     is-set-equivalence-class =
       is-set-type-subtype is-equivalence-class-Prop is-set-subtype
 
-  equivalence-class-Set : UU-Set (l1 ⊔ lsuc l2)
+  equivalence-class-Set : Set (l1 ⊔ lsuc l2)
   pr1 equivalence-class-Set = equivalence-class
   pr2 equivalence-class-Set = is-set-equivalence-class
 
@@ -264,7 +264,7 @@ module _
   where
 
   share-common-element-equivalence-class-Prop :
-    (C D : equivalence-class R) → UU-Prop (l1 ⊔ l2)
+    (C D : equivalence-class R) → Prop (l1 ⊔ l2)
   share-common-element-equivalence-class-Prop C D =
     ∃-Prop A
       ( λ x → is-in-equivalence-class R C x × is-in-equivalence-class R D x)

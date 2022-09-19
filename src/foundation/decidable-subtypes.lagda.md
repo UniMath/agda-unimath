@@ -31,9 +31,9 @@ open import foundation.identity-types using (inv; tr; _＝_; refl)
 open import foundation.injective-maps using (is-injective)
 open import foundation.logical-equivalences using (_↔_; _⇔_)
 open import foundation.propositions using
-  ( type-Prop; is-prop; UU-Prop; is-prop-type-Prop; Π-Prop)
+  ( type-Prop; is-prop; Prop; is-prop-type-Prop; Π-Prop)
 open import foundation.sets using
-  ( is-set; is-set-function-type; UU-Set; type-Set; is-set-type-Set)
+  ( is-set; is-set-function-type; Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using
   ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
     emb-subtype; is-injective-inclusion-subtype; is-in-subtype;
@@ -56,7 +56,7 @@ A decidable subtype of a type consists of a family of decidable propositions ove
 
 ```agda
 is-decidable-subtype-Prop :
-  {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} → subtype l2 A → Prop (l1 ⊔ l2)
 is-decidable-subtype-Prop {A = A} P =
   Π-Prop A (λ a → is-decidable-Prop (P a))
 
@@ -219,13 +219,13 @@ module _
       is-1-type-type-subtype (subtype-decidable-subtype P)
 
 prop-decidable-subprop :
-  {l1 l2 : Level} (A : UU-Prop l1) (P : decidable-subtype l2 (type-Prop A)) →
-  UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Prop l1) (P : decidable-subtype l2 (type-Prop A)) →
+  Prop (l1 ⊔ l2)
 prop-decidable-subprop A P = prop-subprop A (subtype-decidable-subtype P)
 
 set-decidable-subset :
-  {l1 l2 : Level} (A : UU-Set l1) (P : decidable-subtype l2 (type-Set A)) →
-  UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (P : decidable-subtype l2 (type-Set A)) →
+  Set (l1 ⊔ l2)
 set-decidable-subset A P = set-subset A (subtype-decidable-subtype P)
 ```
 

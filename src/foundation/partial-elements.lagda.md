@@ -19,10 +19,10 @@ A partial element of `X` consists of a proposition `P` and a map `P → X`. We s
 
 ```agda
 partial-element : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-partial-element l2 X = Σ (UU-Prop l2) (λ P → type-Prop P → X)
+partial-element l2 X = Σ (Prop l2) (λ P → type-Prop P → X)
 
 is-defined-partial-element-Prop :
-  {l1 l2 : Level} {X : UU l1} (x : partial-element l2 X) → UU-Prop l2
+  {l1 l2 : Level} {X : UU l1} (x : partial-element l2 X) → Prop l2
 is-defined-partial-element-Prop x = pr1 x
 
 is-defined-partial-element :

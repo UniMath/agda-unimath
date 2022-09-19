@@ -9,7 +9,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
-open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.propositions using (Prop; type-Prop)
 open import foundation.unit-type using (unit-Prop)
 open import foundation.universe-levels
 
@@ -20,12 +20,12 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 coloring : {l : Level} (k : ℕ) → UU l → UU l
 coloring k X = X → Fin k
 
-full-subset : {l : Level} (X : UU l) → X → UU-Prop lzero
+full-subset : {l : Level} (X : UU l) → X → Prop lzero
 full-subset X x = unit-Prop
 
 subset-of-size : {l : Level} (k : ℕ) → 𝔽 l → UU (lsuc lzero ⊔ l)
 subset-of-size k X =
-  Σ ( type-𝔽 X → UU-Prop lzero)
+  Σ ( type-𝔽 X → Prop lzero)
     ( λ P → has-cardinality k (Σ (type-𝔽 X) (λ x → type-Prop (P x))))
 
 is-ramsey-set :

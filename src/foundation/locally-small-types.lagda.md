@@ -15,7 +15,7 @@ open import foundation.function-extensionality using (equiv-funext)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (_＝_; tr)
 open import foundation.inhabited-subtypes
-open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
+open import foundation.propositions using (is-prop; is-prop-Π; Prop)
 open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.truncated-types
@@ -69,7 +69,7 @@ is-prop-is-locally-small l A =
   is-prop-Π (λ x → is-prop-Π (λ y → is-prop-is-small l (x ＝ y)))
 
 is-locally-small-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) → UU-Prop (lsuc l ⊔ l1)
+  (l : Level) {l1 : Level} (A : UU l1) → Prop (lsuc l ⊔ l1)
 pr1 (is-locally-small-Prop l A) = is-locally-small l A
 pr2 (is-locally-small-Prop l A) = is-prop-is-locally-small l A
 ```
@@ -203,7 +203,7 @@ is-locally-small-Truncated-Type k =
 
 ```agda
 is-locally-small-UU-Prop :
-  {l : Level} → is-locally-small l (UU-Prop l)
+  {l : Level} → is-locally-small l (Prop l)
 is-locally-small-UU-Prop = is-locally-small-Truncated-Type neg-one-𝕋
 ```
 

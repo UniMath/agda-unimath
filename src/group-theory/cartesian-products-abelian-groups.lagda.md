@@ -40,7 +40,7 @@ module _
   semigroup-prod-Ab : Semigroup (l1 ⊔ l2)
   semigroup-prod-Ab = semigroup-Group group-prod-Ab
 
-  set-prod-Ab : UU-Set (l1 ⊔ l2)
+  set-prod-Ab : Set (l1 ⊔ l2)
   set-prod-Ab = set-Group group-prod-Ab
 
   type-prod-Ab : UU (l1 ⊔ l2)

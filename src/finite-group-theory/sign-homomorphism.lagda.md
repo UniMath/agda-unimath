@@ -57,7 +57,7 @@ open import foundation.propositional-truncations using
     all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Set; equiv-raise; raise)
-open import foundation.sets using (Id-Prop; UU-Set; type-Set; is-prop-is-set)
+open import foundation.sets using (Id-Prop; Set; type-Set; is-prop-is-set)
 open import foundation.unit-type using (star)
 open import foundation.univalence using (equiv-eq; eq-equiv)
 open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)

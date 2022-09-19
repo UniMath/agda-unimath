@@ -54,7 +54,7 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
     unit-trunc-Prop; trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
+  ( Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
     is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (subtype; eq-type-subtype; equiv-subtype-equiv)

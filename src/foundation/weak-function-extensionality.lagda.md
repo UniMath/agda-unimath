@@ -8,7 +8,7 @@ title: Weak function extensionality
 module foundation.weak-function-extensionality where
 
 open import foundation.1-types using
-  ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
+  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation.contractible-types using
   ( is-contr; center; contraction; is-contr-retract-of; is-contr-total-path;
     is-prop-is-contr)
@@ -31,9 +31,9 @@ open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.negation using (¬)
 open import foundation.propositions using
-  ( is-prop; is-prop-equiv; UU-Prop; type-Prop; is-prop-type-Prop; eq-is-prop;
+  ( is-prop; is-prop-equiv; Prop; type-Prop; is-prop-type-Prop; eq-is-prop;
     is-proof-irrelevant-is-prop)
-open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using (is-subtype)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-is-equiv; Truncated-Type; type-Truncated-Type;

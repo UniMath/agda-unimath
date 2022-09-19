@@ -18,7 +18,7 @@ open import foundation.propositional-truncations using
   ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
     apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (is-set)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-Prop; is-trunc-equiv; is-trunc-equiv')
@@ -35,7 +35,7 @@ Two types `X` and `Y` are said to be merely equivalent, if there exists an equiv
 
 ```agda
 mere-equiv-Prop :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
 mere-equiv-Prop X Y = trunc-Prop (X ≃ Y)
 
 mere-equiv :

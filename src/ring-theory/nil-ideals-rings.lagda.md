@@ -28,7 +28,7 @@ module _
   {l1 l2 : Level} (R : Ring l1) (I : left-ideal-Ring l2 R)
   where
   
-  is-nil-left-ideal-ring-Prop : UU-Prop (l1 ⊔ l2)
+  is-nil-left-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-nil-left-ideal-ring-Prop =
     Π-Prop
       ( type-left-ideal-Ring R I)
@@ -50,7 +50,7 @@ module _
   {l1 l2 : Level} (R : Ring l1) (I : right-ideal-Ring l2 R)
   where
   
-  is-nil-right-ideal-ring-Prop : UU-Prop (l1 ⊔ l2)
+  is-nil-right-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-nil-right-ideal-ring-Prop =
     Π-Prop
       ( type-right-ideal-Ring R I)
@@ -72,7 +72,7 @@ module _
   {l1 l2 : Level} (R : Ring l1) (I : two-sided-ideal-Ring l2 R)
   where
   
-  is-nil-two-sided-ideal-ring-Prop : UU-Prop (l1 ⊔ l2)
+  is-nil-two-sided-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-nil-two-sided-ideal-ring-Prop =
     Π-Prop
       ( type-two-sided-ideal-Ring R I)

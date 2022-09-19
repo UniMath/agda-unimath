@@ -87,8 +87,8 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
     trunc-Prop; type-trunc-Prop; all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
-open import foundation.sets using (Id-Prop; UU-Set)
+  ( Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
+open import foundation.sets using (Id-Prop; Set)
 open import foundation.subtypes using (subtype)
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type using (star)
@@ -481,7 +481,7 @@ module _
   quotient-sign : UU (lsuc l)
   quotient-sign = equivalence-class even-difference-orientation-Complete-Undirected-Graph
   
-  quotient-sign-Set : UU-Set (lsuc l)
+  quotient-sign-Set : Set (lsuc l)
   quotient-sign-Set = equivalence-class-Set even-difference-orientation-Complete-Undirected-Graph
 
 module _

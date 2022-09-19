@@ -17,8 +17,8 @@ open import foundation.injective-maps using (is-injective)
 open import foundation.interchange-law using
   (interchange-law-commutative-and-associative)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π; Π-Prop; UU-Prop; type-Prop; is-prop-type-Prop)
-open import foundation.sets using (UU-Set; is-set; Id-Prop)
+  ( is-prop; is-prop-Π; Π-Prop; Prop; type-Prop; is-prop-type-Prop)
+open import foundation.sets using (Set; is-set; Id-Prop)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.groups using
@@ -47,7 +47,7 @@ Abelian groups are groups of which the group operation is commutative
 ## Definition
 
 ```agda
-is-abelian-group-Prop : {l : Level} → Group l → UU-Prop l
+is-abelian-group-Prop : {l : Level} → Group l → Prop l
 is-abelian-group-Prop G =
   Π-Prop
     ( type-Group G)
@@ -71,7 +71,7 @@ group-Ab :
 group-Ab A = pr1 A
 
 set-Ab :
-  {l : Level} (A : Ab l) → UU-Set l
+  {l : Level} (A : Ab l) → Set l
 set-Ab A = set-Group (group-Ab A)
 
 type-Ab :

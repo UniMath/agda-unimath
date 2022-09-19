@@ -29,7 +29,7 @@ module _
   {l1 l2 : Level} {X : UU l1} (R : Decidable-Relation l2 X)
   where
 
-  relation-Decidable-Relation : X → X → UU-Prop l2
+  relation-Decidable-Relation : X → X → Prop l2
   relation-Decidable-Relation x y = prop-decidable-Prop (R x y)
 
   type-Decidable-Relation : X → X → UU l2

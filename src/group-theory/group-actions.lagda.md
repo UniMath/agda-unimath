@@ -14,7 +14,7 @@ open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (id)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; ap; inv; _∙_; refl)
-open import foundation.sets using (UU-Set; type-Set; is-set; is-set-type-Set)
+open import foundation.sets using (Set; type-Set; is-set; is-set-type-Set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.groups using
@@ -39,13 +39,13 @@ module _
 
   Abstract-Group-Action : (l : Level) → UU (l1 ⊔ lsuc l)
   Abstract-Group-Action l =
-    Σ (UU-Set l) (λ X → type-hom-Group G (symmetric-Group X))
+    Σ (Set l) (λ X → type-hom-Group G (symmetric-Group X))
 
 module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
 
-  set-Abstract-Group-Action : UU-Set l2
+  set-Abstract-Group-Action : Set l2
   set-Abstract-Group-Action = pr1 X
 
   type-Abstract-Group-Action : UU l2

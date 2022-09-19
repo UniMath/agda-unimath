@@ -40,7 +40,7 @@ module _
   is-prop-inverts-element-hom-Ring =
     is-prop-is-invertible-element-Ring R2 (map-hom-Ring R1 R2 f x)
 
-  inverts-element-hom-ring-Prop : UU-Prop l2
+  inverts-element-hom-ring-Prop : Prop l2
   pr1 inverts-element-hom-ring-Prop = inverts-element-hom-Ring
   pr2 inverts-element-hom-ring-Prop = is-prop-inverts-element-hom-Ring
 

@@ -32,7 +32,7 @@ open import foundation.propositions using (is-prop; is-proof-irrelevant-is-prop)
 open import foundation.raising-universe-levels using (raise-Set)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.tight-apartness-relations
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (Level; UU; lzero)

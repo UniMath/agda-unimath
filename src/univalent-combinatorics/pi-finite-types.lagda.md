@@ -62,13 +62,13 @@ open import foundation.maybe using (Maybe)
 open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
 open import foundation.mere-equivalences using (mere-equiv)
 open import foundation.propositional-extensionality using
-  ( UU-Prop-Set)
+  ( Prop-Set)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; trunc-Prop; type-trunc-Prop;
     unit-trunc-Prop; is-prop-type-trunc-Prop;
     apply-dependent-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop;
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop;
     type-hom-Prop; function-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
@@ -79,7 +79,7 @@ open import foundation.set-truncations using
     equiv-unit-trunc-unit-Set; is-empty-is-empty-trunc-Set;
     is-surjective-unit-trunc-Set)
 open import foundation.sets using
-  ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; UU-Set; type-Set)
+  ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; Set; type-Set)
 open import foundation.subtypes using (is-emb-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; is-equiv-is-emb-is-surjective; is-surjective-comp')
@@ -138,7 +138,7 @@ A type is `π_n`-finite if it has finitely many connected components and all of 
 
 ```agda
 is-locally-finite-Prop :
-  {l : Level} → UU l → UU-Prop l
+  {l : Level} → UU l → Prop l
 is-locally-finite-Prop A =
   Π-Prop A (λ x → Π-Prop A (λ y → is-finite-Prop (Id x y)))
 
@@ -153,7 +153,7 @@ is-prop-is-locally-finite A = is-prop-type-Prop (is-locally-finite-Prop A)
 ### Truncated π-finite types
 
 ```agda
-is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → UU-Prop l
+is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-truncated-π-finite-Prop zero-ℕ X = is-finite-Prop X
 is-truncated-π-finite-Prop (succ-ℕ k) X =
   prod-Prop
@@ -169,7 +169,7 @@ is-truncated-π-finite k A =
 ### Types with finitely many connected components
 
 ```agda
-has-finite-connected-components-Prop : {l : Level} → UU l → UU-Prop l
+has-finite-connected-components-Prop : {l : Level} → UU l → Prop l
 has-finite-connected-components-Prop A =
   is-finite-Prop (type-trunc-Set A)
 
@@ -193,7 +193,7 @@ mere-equiv-number-of-connected-components H =
 ### π-finite types
 
 ```agda
-is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → UU-Prop l
+is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
   prod-Prop ( is-π-finite-Prop zero-ℕ X)
@@ -680,15 +680,15 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             
             where
             ℙ : is-contr
-                ( Σ ( type-hom-Set (trunc-Set (Id a a)) (UU-Prop-Set _))
+                ( Σ ( type-hom-Set (trunc-Set (Id a a)) (Prop-Set _))
                     ( λ h →
                       ( λ a₁ → h (unit-trunc-Set a₁)) ~
                       ( λ ω₁ → trunc-Prop (Id (tr B ω₁ y) y'))))
             ℙ = universal-property-trunc-Set
                 ( Id a a)
-                ( UU-Prop-Set _)
+                ( Prop-Set _)
                 ( λ ω → trunc-Prop (Id (tr B ω y) y'))
-            P : type-trunc-Set (Id a a) → UU-Prop _
+            P : type-trunc-Set (Id a a) → Prop _
             P = pr1 (center ℙ)
             compute-P :
               ( ω : Id a a) →
@@ -808,7 +808,7 @@ is-0-connected-unit =
   is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
 
 is-contr-im :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) {f : A → type-Set B}
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
   (a : A) (H : f ~ const A (type-Set B) (f a)) → is-contr (im f)
 pr1 (is-contr-im B {f} a H) = map-unit-im f a
 pr2 (is-contr-im B {f} a H) (pair x u) =

@@ -74,8 +74,8 @@ open import foundation.reflecting-maps-equivalence-relations using
 open import foundation.raising-universe-levels using
   ( raise-Set; equiv-raise; raise)
 open import foundation.sets using
-  ( is-set; Id-Prop; UU-Set; type-Set; is-set-type-Set; is-prop-is-set;
-    is-set-equiv; is-1-type-UU-Set)
+  ( is-set; Id-Prop; Set; type-Set; is-set-type-Set; is-prop-is-set;
+    is-set-equiv; is-1-type-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.unit-type using (star)
 open import foundation.univalence using
@@ -214,7 +214,7 @@ module _
     pr1 (raise-UU-Fin-Fin n) = raise l (Fin n)
     pr2 (raise-UU-Fin-Fin n) = unit-trunc-Prop (equiv-raise l (Fin n))
 
-    raise-Fin-Set : (n : ℕ) → UU-Set l
+    raise-Fin-Set : (n : ℕ) → Set l
     raise-Fin-Set n = raise-Set l (Fin-Set n)
 
     orientation-loop-Fin : (n : ℕ) →
@@ -246,7 +246,7 @@ module _
     map-orientation-loop-Fin n p =
       map-equiv (orientation-loop-Fin n p)
 
-    quotient-sign-set-Fin : (n : ℕ) → UU-Set (lsuc l)
+    quotient-sign-set-Fin : (n : ℕ) → Set (lsuc l)
     quotient-sign-set-Fin n =
       quotient-sign-Set n (raise-UU-Fin-Fin n)
 

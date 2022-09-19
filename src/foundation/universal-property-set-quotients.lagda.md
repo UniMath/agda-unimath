@@ -47,12 +47,12 @@ open import foundation.injective-maps using
   ( is-injective-is-equiv; is-emb-is-injective; is-injective-is-emb)
 open import foundation.locally-small-types using (is-locally-small)
 open import foundation.propositional-extensionality using
-  ( eq-equiv-Prop; is-set-UU-Prop; eq-iff; UU-Prop-Set)
+  ( eq-equiv-Prop; is-set-Prop; eq-iff; Prop-Set)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π'; is-prop-function-type; UU-Prop; type-Prop;
+  ( is-prop; is-prop-Π'; is-prop-function-type; Prop; type-Prop;
     is-prop-equiv'; is-prop-type-Prop; all-elements-equal;
     is-prop-all-elements-equal; is-proof-irrelevant-is-prop; is-prop-equiv)
 open import foundation.reflecting-maps-equivalence-relations using
@@ -62,7 +62,7 @@ open import foundation.reflecting-maps-equivalence-relations using
     reflecting-map-Eq-Rel-is-surjective-and-effective; is-prop-reflects-Eq-Rel;
     reflects-Eq-Rel-Prop)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set; is-set-type-Set; type-hom-Set; Id-Prop;
+  ( Set; type-Set; is-set; is-set-type-Set; type-hom-Set; Id-Prop;
     is-set-function-type)
 open import foundation.small-types using (is-small; is-small-Prop)
 open import foundation.subtypes using
@@ -88,12 +88,12 @@ The universal property of set quotients characterizes maps out of set quotients.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
   precomp-Set-Quotient :
-    {l : Level} (X : UU-Set l) →
+    {l : Level} (X : Set l) →
     (type-hom-Set B X) → reflecting-map-Eq-Rel R (type-Set X)
   pr1 (precomp-Set-Quotient X g) = g ∘ (map-reflecting-map-Eq-Rel R f)
   pr2 (precomp-Set-Quotient X g) r =
@@ -101,19 +101,19 @@ module _
 
 is-set-quotient :
   (l : Level) {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set B)) →
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B)) →
   UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3)
 is-set-quotient l R B f =
-  (X : UU-Set l) → is-equiv (precomp-Set-Quotient R B f X)
+  (X : Set l) → is-equiv (precomp-Set-Quotient R B f X)
 
 module _
-  (l : Level) {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  (l : Level) {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
   universal-property-set-quotient : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
   universal-property-set-quotient =
-    (X : UU-Set l) (g : reflecting-map-Eq-Rel R (type-Set X)) →
+    (X : Set l) (g : reflecting-map-Eq-Rel R (type-Set X)) →
     is-contr
       ( Σ ( type-hom-Set B X)
           ( λ h →
@@ -127,7 +127,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
@@ -143,7 +143,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
@@ -163,14 +163,14 @@ module _
 
   map-universal-property-set-quotient-is-set-quotient :
     {l4 : Level} (Uf : {l : Level} → is-set-quotient l R B f)
-    (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
+    (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
     type-Set B → type-Set C
   map-universal-property-set-quotient-is-set-quotient Uf C g =
     pr1 (center (universal-property-set-quotient-is-set-quotient Uf C g))
   
   triangle-universal-property-set-quotient-is-set-quotient :
     {l4 : Level} (Uf : {l : Level} → is-set-quotient l R B f)
-    (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
+    (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
     ( ( map-universal-property-set-quotient-is-set-quotient Uf C g) ∘
       ( map-reflecting-map-Eq-Rel R f)) ~
     ( map-reflecting-map-Eq-Rel R g)
@@ -182,7 +182,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 
@@ -209,13 +209,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (q : A → type-Set B)
   where
 
   abstract
     is-effective-is-image :
-      (i : type-Set B ↪ (A → UU-Prop l2)) →
+      (i : type-Set B ↪ (A → Prop l2)) →
       (T : (prop-Eq-Rel R) ~ ((map-emb i) ∘ q)) →
       ({l : Level} → is-image l (prop-Eq-Rel R) i (pair q T)) →
       is-effective R q
@@ -227,7 +227,7 @@ module _
     
   abstract
     is-surjective-and-effective-is-image :
-      (i : type-Set B ↪ (A → UU-Prop l2)) → 
+      (i : type-Set B ↪ (A → Prop l2)) → 
       (T : (prop-Eq-Rel R) ~ ((map-emb i) ∘ q)) →
       ({l : Level} → is-image l (prop-Eq-Rel R) i (pair q T)) →
       is-surjective-and-effective R q
@@ -254,20 +254,20 @@ module _
       pr2 (α (pair a refl) (pair b refl)) = pr2 e a b
 
   large-map-emb-is-surjective-and-effective :
-    is-surjective-and-effective R q → type-Set B → A → UU-Prop l3
+    is-surjective-and-effective R q → type-Set B → A → Prop l3
   large-map-emb-is-surjective-and-effective H b a = Id-Prop B b (q a)
 
   abstract
     small-map-emb-is-surjective-and-effective :
       is-surjective-and-effective R q → type-Set B → A →
-      Σ (UU-Prop l3) (λ P → is-small l2 (type-Prop P))
+      Σ (Prop l3) (λ P → is-small l2 (type-Prop P))
     small-map-emb-is-surjective-and-effective H b a =
       pair 
         ( large-map-emb-is-surjective-and-effective H b a)
         ( is-locally-small-is-surjective-and-effective H b (q a))
   
     map-emb-is-surjective-and-effective :
-      is-surjective-and-effective R q → type-Set B → A → UU-Prop l2
+      is-surjective-and-effective R q → type-Set B → A → Prop l2
     map-emb-is-surjective-and-effective H b a =
       pair
         ( pr1 (pr2 (small-map-emb-is-surjective-and-effective H b a)))
@@ -298,7 +298,7 @@ module _
       is-emb (map-emb-is-surjective-and-effective H)
     is-emb-map-emb-is-surjective-and-effective H =
       is-emb-is-injective
-        ( is-set-function-type is-set-UU-Prop)
+        ( is-set-function-type is-set-Prop)
         ( λ {x} {y} p →
           apply-universal-property-trunc-Prop
             ( pr1 H y)
@@ -322,7 +322,7 @@ module _
 
   emb-is-surjective-and-effective :
     (H : is-surjective-and-effective R q) →
-    type-Set B ↪ (A → UU-Prop l2)
+    type-Set B ↪ (A → Prop l2)
   emb-is-surjective-and-effective H =
     pair ( map-emb-is-surjective-and-effective H)
          ( is-emb-map-emb-is-surjective-and-effective H)
@@ -333,7 +333,7 @@ module _
       is-emb (large-map-emb-is-surjective-and-effective e)
     is-emb-large-map-emb-is-surjective-and-effective e =
       is-emb-is-injective
-        ( is-set-function-type is-set-UU-Prop)
+        ( is-set-function-type is-set-Prop)
         ( λ {x} {y} p →
           apply-universal-property-trunc-Prop
             ( pr1 e y)
@@ -347,7 +347,7 @@ module _
       α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
   
   large-emb-is-surjective-and-effective :
-    is-surjective-and-effective R q → type-Set B ↪ (A → UU-Prop l3)
+    is-surjective-and-effective R q → type-Set B ↪ (A → Prop l3)
   large-emb-is-surjective-and-effective e =
     pair ( large-map-emb-is-surjective-and-effective e)
          ( is-emb-large-map-emb-is-surjective-and-effective e)
@@ -372,7 +372,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (q : A → type-Set B)
   where
 
@@ -419,7 +419,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (q : A → type-Set B)
   where
 
@@ -431,22 +431,22 @@ module _
     is-effective-is-set-quotient H Q x y =
       inv-equiv (compute-P y) ∘e δ (q y)
       where
-      α : Σ (A → UU-Prop l2) (reflects-Eq-Rel R)
+      α : Σ (A → Prop l2) (reflects-Eq-Rel R)
       α = pair
             ( prop-Eq-Rel R x)
             ( λ r →
               eq-iff
                 ( λ s → trans-Eq-Rel R s r)
                 ( λ s → trans-Eq-Rel R s (symm-Eq-Rel R r)))
-      P : type-Set B → UU-Prop l2
-      P = map-inv-is-equiv (Q (UU-Prop-Set l2)) α
+      P : type-Set B → Prop l2
+      P = map-inv-is-equiv (Q (Prop-Set l2)) α
       compute-P : (a : A) → sim-Eq-Rel R x a ≃ type-Prop (P (q a))
       compute-P a =
         equiv-eq
           ( ap pr1
             ( htpy-eq
               ( ap pr1
-                ( inv (issec-map-inv-is-equiv (Q (UU-Prop-Set l2)) α)))
+                ( inv (issec-map-inv-is-equiv (Q (Prop-Set l2)) α)))
               ( a)))
       point-P : type-Prop (P (q x))
       point-P = map-equiv (compute-P x) (refl-Eq-Rel R)
@@ -488,17 +488,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (q : A → type-Set B)
   where
 
   private
     module _
       (E : is-surjective-and-effective R q)
-      {l : Level} (X : UU-Set l) (f : reflecting-map-Eq-Rel R (type-Set X))
+      {l : Level} (X : Set l) (f : reflecting-map-Eq-Rel R (type-Set X))
       where
       
-      P-Prop : (b : type-Set B) (x : type-Set X) → UU-Prop (l1 ⊔ l3 ⊔ l)
+      P-Prop : (b : type-Set B) (x : type-Set X) → Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
         ∃-Prop A (λ a → (map-reflecting-map-Eq-Rel R f a ＝ x) × (q a ＝ b))
 
@@ -614,13 +614,13 @@ module _
       ( universal-property-equivalence-class)
 
   map-universal-property-equivalence-class :
-    {l4 : Level} (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
+    {l4 : Level} (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
     equivalence-class R → type-Set C
   map-universal-property-equivalence-class C g =
     pr1 (center (universal-property-equivalence-class C g))
   
   triangle-universal-property-equivalence-class :
-    {l4 : Level} (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
+    {l4 : Level} (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C)) →
     ( ( map-universal-property-equivalence-class C g) ∘
       ( class R)) ~
     ( map-reflecting-map-Eq-Rel R g)

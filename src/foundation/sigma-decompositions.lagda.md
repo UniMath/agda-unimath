@@ -81,7 +81,7 @@ module _
 Set-Indexed-Σ-Decomposition :
   {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Set-Indexed-Σ-Decomposition l2 l3 A =
-  Σ ( UU-Set l2)
+  Σ ( Set l2)
     ( λ X →
       Σ ( Fam-Inhabited-Types l3 (type-Set X))
         ( λ Y → A ≃ total-Fam-Inhabited-Types Y))
@@ -90,7 +90,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} (D : Set-Indexed-Σ-Decomposition l2 l3 A)
   where
 
-  indexing-set-Set-Indexed-Σ-Decomposition : UU-Set l2
+  indexing-set-Set-Indexed-Σ-Decomposition : Set l2
   indexing-set-Set-Indexed-Σ-Decomposition = pr1 D
 
   indexing-type-Set-Indexed-Σ-Decomposition : UU l2

@@ -36,7 +36,7 @@ open import foundation.polynomial-endofunctors
 open import foundation.propositional-maps using
   ( is-prop-map-is-emb; equiv-is-prop-map-is-emb)
 open import foundation.propositions using
-  ( equiv-prop; is-prop-Π; is-prop; is-prop-is-equiv; UU-Prop)
+  ( equiv-prop; is-prop-Π; is-prop; is-prop-is-equiv; Prop)
 open import foundation.structure using
   ( hom-structure; fam-structure; structure-map)
 open import foundation.structure-identity-principle using

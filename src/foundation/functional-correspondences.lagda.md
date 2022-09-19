@@ -28,7 +28,7 @@ A functional dependent correspondence is a dependent binary correspondence `C : 
 ```agda
 is-functional-correspondence-Prop :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (a : A) → B a → UU l3) →
-  UU-Prop (l1 ⊔ l2 ⊔ l3)
+  Prop (l1 ⊔ l2 ⊔ l3)
 is-functional-correspondence-Prop {A = A} {B} C =
   Π-Prop A (λ x → is-contr-Prop (Σ (B x) (C x)))
 
