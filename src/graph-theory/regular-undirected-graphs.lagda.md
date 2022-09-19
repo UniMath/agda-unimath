@@ -7,7 +7,7 @@ module graph-theory.regular-undirected-graphs where
 
 open import foundation.mere-equivalences using (mere-equiv-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import graph-theory.neighbors-undirected-graphs using
@@ -25,7 +25,7 @@ A regular undirected graph is a graph of which each vertex has the same number o
 ```agda
 is-regular-undirected-graph-Prop :
   {l1 l2 l3 : Level} (X : UU l1)
-  (G : Undirected-Graph l2 l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
+  (G : Undirected-Graph l2 l3) → Prop (l1 ⊔ l2 ⊔ l3)
 is-regular-undirected-graph-Prop X G =
   Π-Prop
     ( vertex-Undirected-Graph G)

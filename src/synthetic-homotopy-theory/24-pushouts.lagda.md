@@ -54,7 +54,7 @@ is-equiv-cofiber-point {l} {B} b =
 -- Exercise 16.2
 
 -- ev-disjunction :
---   {l1 l2 l3 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) (R : UU-Prop l3) →
+--   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
 --   ((type-Prop P) * (type-Prop Q) → (type-Prop R)) →
 --   (type-Prop P → type-Prop R) × (type-Prop Q → type-Prop R)
 -- ev-disjunction P Q R f =
@@ -63,10 +63,10 @@ is-equiv-cofiber-point {l} {B} b =
 --     ( f ∘ (inr-join (type-Prop P) (type-Prop Q)))
 
 -- comparison-ev-disjunction :
---   {l1 l2 l3 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) (R : UU-Prop l3) →
+--   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
 --   cocone-join (type-Prop P) (type-Prop Q) (type-Prop R)
 
 -- universal-property-disjunction-join-prop :
---   {l1 l2 l3 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) (R : UU-Prop l3) →
+--   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3) →
 --   is-equiv (ev-disjunction P Q R)
 ```

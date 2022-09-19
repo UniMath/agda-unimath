@@ -24,5 +24,5 @@ We say that there is propositional resizing for propositions of universe levels 
 propositional-resizing : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 propositional-resizing l1 l2 =
   Σ ( Σ (UU l1) (subtype l1))
-    ( λ Ω → ( P : UU-Prop l2) → Σ (pr1 Ω) (λ u → type-equiv-Prop (pr2 Ω u) P))
+    ( λ Ω → ( P : Prop l2) → Σ (pr1 Ω) (λ u → type-equiv-Prop (pr2 Ω u) P))
 ```

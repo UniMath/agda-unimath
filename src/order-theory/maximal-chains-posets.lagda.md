@@ -5,7 +5,7 @@
 
 module order-theory.maximal-chains-posets where
 
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.chains-posets using (chain-Poset)
@@ -26,7 +26,7 @@ module _
   where
   
   is-maximal-chain-poset-Prop :
-    {l3 : Level} → chain-Poset l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+    {l3 : Level} → chain-Poset l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-poset-Prop =
     is-maximal-chain-preorder-Prop (preorder-Poset X)
 

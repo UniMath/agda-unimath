@@ -39,7 +39,7 @@ module _
     decidable-relation-Decidable-Equivalence-Relation R
 
   relation-Decidable-Equivalence-Relation-𝔽 :
-    type-𝔽 X → type-𝔽 X → UU-Prop l2
+    type-𝔽 X → type-𝔽 X → Prop l2
   relation-Decidable-Equivalence-Relation-𝔽 =
     relation-Decidable-Equivalence-Relation R
 

@@ -16,7 +16,7 @@ open import foundation.decidable-propositions using
   ( is-decidable-prop)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.propositions using (is-prop; Prop)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
@@ -39,7 +39,7 @@ relatively-prime-ℕ x y = is-one-ℕ (gcd-ℕ x y)
 is-prop-relatively-prime-ℕ : (x y : ℕ) → is-prop (relatively-prime-ℕ x y)
 is-prop-relatively-prime-ℕ x y = is-set-ℕ (gcd-ℕ x y) 1
 
-relatively-prime-ℕ-Prop : ℕ → ℕ → UU-Prop lzero
+relatively-prime-ℕ-Prop : ℕ → ℕ → Prop lzero
 pr1 (relatively-prime-ℕ-Prop x y) = relatively-prime-ℕ x y
 pr2 (relatively-prime-ℕ-Prop x y) = is-prop-relatively-prime-ℕ x y
 ```

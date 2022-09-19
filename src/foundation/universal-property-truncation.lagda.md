@@ -163,7 +163,7 @@ abstract
     map-inv-equiv (is-effective-unit-trunc-Set A x y)
 
 emb-trunc-Set :
-  {l1 : Level} (A : UU l1) → type-trunc-Set A ↪ (A → UU-Prop l1)
+  {l1 : Level} (A : UU l1) → type-trunc-Set A ↪ (A → Prop l1)
 emb-trunc-Set A =
   emb-is-surjective-and-effective
     ( mere-eq-Eq-Rel A)
@@ -200,7 +200,7 @@ abstract
 -- Uniqueness of trunc-Set
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set B (trunc-Set A)} (H : (h ∘ f) ~ unit-trunc-Set)
   where
 
@@ -231,7 +231,7 @@ module _
         ( Eh)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set (trunc-Set A) B} (H : (h ∘ unit-trunc-Set) ~ f)
   where
 
@@ -263,13 +263,13 @@ module _
 
 abstract
   is-equiv-unit-trunc-Set :
-    {l : Level} (A : UU-Set l) → is-equiv (unit-trunc-Set {A = type-Set A})
+    {l : Level} (A : Set l) → is-equiv (unit-trunc-Set {A = type-Set A})
   is-equiv-unit-trunc-Set A =
     is-equiv-is-set-truncation' A id refl-htpy
       ( is-set-truncation-id (is-set-type-Set A))
 
 equiv-unit-trunc-Set :
-  {l : Level} (A : UU-Set l) → type-Set A ≃ type-trunc-Set (type-Set A)
+  {l : Level} (A : Set l) → type-Set A ≃ type-trunc-Set (type-Set A)
 equiv-unit-trunc-Set A =
   pair unit-trunc-Set (is-equiv-unit-trunc-Set A)
 
@@ -308,7 +308,7 @@ abstract
       ( H)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (Sf : {l : Level} → is-set-truncation l B f)
   where
 
@@ -336,7 +336,7 @@ module _
     pr2 (center uniqueness-trunc-Set)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (Sf : {l : Level} → is-set-truncation l B f)
   where
 

@@ -9,8 +9,8 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (is-set; UU-Set)
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+open import foundation.sets using (is-set; Set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.semigroups using
@@ -38,7 +38,7 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-meet-semilattice-poset-Prop : UU-Prop (l1 ⊔ l2)
+  is-meet-semilattice-poset-Prop : Prop (l1 ⊔ l2)
   is-meet-semilattice-poset-Prop =
     Π-Prop
       ( element-Poset P)
@@ -68,7 +68,7 @@ module _
   element-Meet-Semilattice : UU l1
   element-Meet-Semilattice = element-Poset poset-Meet-Semilattice
 
-  leq-meet-semilattice-Prop : (x y : element-Meet-Semilattice) → UU-Prop l2
+  leq-meet-semilattice-Prop : (x y : element-Meet-Semilattice) → Prop l2
   leq-meet-semilattice-Prop = leq-poset-Prop poset-Meet-Semilattice
 
   leq-Meet-Semilattice : (x y : element-Meet-Semilattice) → UU l2
@@ -97,7 +97,7 @@ module _
   is-set-element-Meet-Semilattice : is-set element-Meet-Semilattice
   is-set-element-Meet-Semilattice = is-set-element-Poset poset-Meet-Semilattice
 
-  element-meet-semilattice-Set : UU-Set l1
+  element-meet-semilattice-Set : Set l1
   element-meet-semilattice-Set = element-poset-Set poset-Meet-Semilattice
 
   is-meet-semilattice-Meet-Semilattice :

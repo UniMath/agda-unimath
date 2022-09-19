@@ -52,7 +52,7 @@ module _
   ring-Integral-Domain : Ring l
   ring-Integral-Domain = ring-Commutative-Ring commutative-ring-Integral-Domain
 
-  set-Integral-Domain : UU-Set l
+  set-Integral-Domain : Set l
   set-Integral-Domain = set-Ring ring-Integral-Domain
 
   type-Integral-Domain : UU l

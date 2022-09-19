@@ -17,7 +17,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (refl; inv; _∙_; ap)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -50,7 +50,7 @@ is-nonzero-denominator-fraction-ℤ x =
     ( denominator-fraction-ℤ x)
     ( is-positive-denominator-fraction-ℤ x)
 
-sim-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → UU-Prop lzero
+sim-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 sim-fraction-ℤ-Prop x y =
   Id-Prop ℤ-Set
     (mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ y))

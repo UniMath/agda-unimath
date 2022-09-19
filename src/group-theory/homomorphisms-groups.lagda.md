@@ -12,7 +12,7 @@ open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.identity-types using (Id; _＝_; inv; _∙_; ap)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import group-theory.groups using
@@ -135,7 +135,7 @@ module _
   is-set-type-hom-Group =
     is-set-type-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  hom-Group : UU-Set (l1 ⊔ l2)
+  hom-Group : Set (l1 ⊔ l2)
   pr1 hom-Group = type-hom-Group G H
   pr2 hom-Group = is-set-type-hom-Group
 ```

@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-inv-equiv)
 open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.sets using
-  ( UU-Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
+  ( Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
 open import foundation.subtypes using
   ( extensionality-type-subtype')
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -35,7 +35,7 @@ module _
   obj-slice-Precat : UU (l1 ⊔ l2)
   obj-slice-Precat = Σ (obj-Precat C) (λ A → type-hom-Precat C A X)
 
-  hom-slice-Precat : obj-slice-Precat → obj-slice-Precat → UU-Set l2
+  hom-slice-Precat : obj-slice-Precat → obj-slice-Precat → Set l2
   hom-slice-Precat (pair A f) (pair B g) =
     Σ-Set
       ( hom-Precat C A B)

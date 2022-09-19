@@ -24,7 +24,7 @@ An inhabited subtype of a type `A` is a subtype `P` of `A` such that the underly
 
 ```agda
 is-inhabited-subtype-Prop :
-  {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} → subtype l2 A → Prop (l1 ⊔ l2)
 is-inhabited-subtype-Prop P = is-inhabited-Prop (type-subtype P)
 
 is-inhabited-subtype :
@@ -85,7 +85,7 @@ module _
 ```agda
 has-same-elements-inhabited-subtype-Prop :
   {l1 l2 l3 : Level} {A : UU l1} →
-  inhabited-subtype l2 A → inhabited-subtype l3 A → UU-Prop (l1 ⊔ l2 ⊔ l3)
+  inhabited-subtype l2 A → inhabited-subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
 has-same-elements-inhabited-subtype-Prop P Q =
   has-same-elements-subtype-Prop
     ( subtype-inhabited-subtype P)

@@ -19,12 +19,12 @@ open import foundation.identity-types using (inv; ap; _∙_; _＝_; refl)
 open import foundation.injective-maps using
   ( is-emb-is-injective; is-injective-is-emb)
 open import foundation.propositional-extensionality using
-  ( eq-iff; UU-Prop-Set)
+  ( eq-iff; Prop-Set)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using (UU-Prop)
+open import foundation.propositions using (Prop)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set-type-Set; is-set-function-type; Id-Prop;
+  ( Set; type-Set; is-set-type-Set; is-set-function-type; Id-Prop;
     precomp-Set)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.unit-type using (raise-unit-Prop; raise-star)
@@ -43,7 +43,7 @@ is-epimorphism-Set :
   {l1 l2 : Level} (l : Level) {A : UU l1} {B : UU l2}
   (f : A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
 is-epimorphism-Set l f =
-  (C : UU-Set l) → is-emb (precomp-Set f C)
+  (C : Set l) → is-emb (precomp-Set f C)
 ```
 
 ## Properties
@@ -82,7 +82,7 @@ abstract
         ( ap ( pr1)
              ( htpy-eq
                ( is-injective-is-emb
-                 ( H (UU-Prop-Set (l1 ⊔ l2)))
+                 ( H (Prop-Set (l1 ⊔ l2)))
                  { g}
                  { h}
                  ( eq-htpy
@@ -93,8 +93,8 @@ abstract
                ( b))))
       ( raise-star)
     where
-    g : B → UU-Prop (l1 ⊔ l2)
+    g : B → Prop (l1 ⊔ l2)
     g y = raise-unit-Prop (l1 ⊔ l2)
-    h : B → UU-Prop (l1 ⊔ l2)
+    h : B → Prop (l1 ⊔ l2)
     h y = ∃-Prop A (λ x → f x ＝ y)
 ```

@@ -23,7 +23,7 @@ open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (_＝_; ap)
 open import foundation-core.propositional-maps using
   ( is-prop-map-is-emb; is-emb-is-prop-map)
-open import foundation-core.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation-core.sets using (is-set; Set; type-Set; is-set-type-Set)
 open import foundation-core.truncated-maps using
   ( is-trunc-map-is-trunc-map-ap; is-trunc-map-ap-is-trunc-map)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
@@ -131,7 +131,7 @@ module _
     is-faithful-pr1 H = is-faithful-is-0-map (is-0-map-pr1 H)
 
   pr1-faithful-map :
-    (B : A → UU-Set l2) → faithful-map (Σ A (λ x → type-Set (B x))) A
+    (B : A → Set l2) → faithful-map (Σ A (λ x → type-Set (B x))) A
   pr1 (pr1-faithful-map B) = pr1
   pr2 (pr1-faithful-map B) = is-faithful-pr1 (λ x → is-set-type-Set (B x))
 ```

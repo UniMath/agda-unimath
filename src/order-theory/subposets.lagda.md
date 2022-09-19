@@ -7,7 +7,7 @@ module order-theory.subposets where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.posets using
@@ -28,7 +28,7 @@ open import order-theory.subpreorders using
 ```agda
 
 module _
-  {l1 l2 l3 : Level} (X : Poset l1 l2) (S : element-Poset X → UU-Prop l3)
+  {l1 l2 l3 : Level} (X : Poset l1 l2) (S : element-Poset X → Prop l3)
   where
 
   element-sub-Poset : UU (l1 ⊔ l3)
@@ -38,7 +38,7 @@ module _
     (x y : element-sub-Poset) → Id (pr1 x) (pr1 y) → Id x y
   eq-element-sub-Poset = eq-element-sub-Preorder (preorder-Poset X) S
 
-  leq-sub-poset-Prop : (x y : element-sub-Poset) → UU-Prop l2
+  leq-sub-poset-Prop : (x y : element-sub-Poset) → Prop l2
   leq-sub-poset-Prop = leq-sub-preorder-Prop (preorder-Poset X) S
 
   leq-sub-Poset : (x y : element-sub-Poset) → UU l2
@@ -78,11 +78,11 @@ module _
   where
 
   module _
-    {l3 l4 : Level} (S : element-Poset X → UU-Prop l3)
-    (T : element-Poset X → UU-Prop l4)
+    {l3 l4 : Level} (S : element-Poset X → Prop l3)
+    (T : element-Poset X → Prop l4)
     where
     
-    inclusion-sub-poset-Prop : UU-Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-sub-poset-Prop : Prop (l1 ⊔ l3 ⊔ l4)
     inclusion-sub-poset-Prop =
       inclusion-sub-preorder-Prop (preorder-Poset X) S T
 
@@ -94,21 +94,21 @@ module _
       is-prop-inclusion-sub-Preorder (preorder-Poset X) S T
 
   refl-inclusion-sub-Poset :
-    {l3 : Level} (S : element-Poset X → UU-Prop l3) →
+    {l3 : Level} (S : element-Poset X → Prop l3) →
     inclusion-sub-Poset S S
   refl-inclusion-sub-Poset = refl-inclusion-sub-Preorder (preorder-Poset X)
 
   transitive-inclusion-sub-Poset :
-    {l3 l4 l5 : Level} (S : element-Poset X → UU-Prop l3)
-    (T : element-Poset X → UU-Prop l4)
-    (U : element-Poset X → UU-Prop l5) →
+    {l3 l4 l5 : Level} (S : element-Poset X → Prop l3)
+    (T : element-Poset X → Prop l4)
+    (U : element-Poset X → Prop l5) →
     inclusion-sub-Poset T U → inclusion-sub-Poset S T →
     inclusion-sub-Poset S U
   transitive-inclusion-sub-Poset =
     transitive-inclusion-sub-Preorder (preorder-Poset X) 
 
   sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
-  pr1 (sub-poset-Preorder l) = element-Poset X → UU-Prop l
+  pr1 (sub-poset-Preorder l) = element-Poset X → Prop l
   pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-poset-Prop
   pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-sub-Poset
   pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-sub-Poset

@@ -9,7 +9,8 @@ module structured-types.pointed-equivalences where
 
 open import foundation.contractible-maps using (is-contr-map-is-equiv)
 open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-prod; center; eq-is-contr)
+  ( is-contr; is-contr-equiv; is-contr-prod; center; eq-is-contr;
+    is-contr-total-path)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
@@ -24,14 +25,14 @@ open import foundation.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
   ( Id; refl; ap; inv; _∙_; equiv-con-inv; equiv-inv; equiv-concat'; right-unit;
-    is-equiv-concat; is-equiv-concat')
+    is-equiv-concat; is-equiv-concat'; _＝_)
 open import foundation.propositions using
   ( is-prop; is-prop-is-proof-irrelevant; is-equiv-is-prop)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure; extensionality-Σ)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( equiv-right-swap-Σ)
-open import foundation.univalence using (equiv-univalence)
+open import foundation.univalence using (equiv-univalence; is-contr-total-equiv)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import structured-types.pointed-homotopies using
@@ -158,6 +159,15 @@ module _
 module _
   {l1 : Level} (A : Pointed-Type l1)
   where
+
+  is-contr-total-equiv-Pointed-Type :
+    is-contr (Σ (Pointed-Type l1) (λ B → A ≃* B))
+  is-contr-total-equiv-Pointed-Type =
+    is-contr-total-Eq-structure
+      ( λ X x e → map-equiv e (pt-Pointed-Type A) ＝ x)
+      ( is-contr-total-equiv (type-Pointed-Type A))
+      ( pair (type-Pointed-Type A) id-equiv)
+      ( is-contr-total-path (pt-Pointed-Type A))
   
   extensionality-Pointed-Type : (B : Pointed-Type l1) → Id A B ≃ (A ≃* B)
   extensionality-Pointed-Type =

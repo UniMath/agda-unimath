@@ -14,7 +14,7 @@ open import elementary-number-theory.natural-numbers using
 
 open import foundation.0-connected-types using
   ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.1-types using (is-1-type; UU-1-Type)
+open import foundation.1-types using (is-1-type; 1-Type)
 open import foundation.connected-components-universes using
   ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
     id-equiv-component-UU; equiv-eq-component-UU-Level; equiv-eq-component-UU;
@@ -52,12 +52,12 @@ open import foundation.propositional-truncations using
     apply-universal-property-trunc-Prop; type-trunc-Prop; ind-trunc-Prop;
     is-prop-type-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
     all-elements-equal; is-prop-all-elements-equal; eq-is-prop; eq-is-prop';
     equiv-prop; is-equiv-is-prop)
 open import foundation.raising-universe-levels using (equiv-raise)
 open import foundation.sets using
-  ( is-set; is-set-Prop; Id-Prop; is-set-equiv; is-set-equiv-is-set; UU-Set)
+  ( is-set; is-set-Prop; Id-Prop; is-set-equiv; is-set-equiv-is-set; Set)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.subuniverses using
   ( extensionality-subuniverse; extensionality-fam-subuniverse)
@@ -91,7 +91,7 @@ A type is finite if it is merely equivalent to a standard finite type.
 
 ```agda
 is-finite-Prop :
-  {l : Level} → UU l → UU-Prop l
+  {l : Level} → UU l → Prop l
 is-finite-Prop X = trunc-Prop (count X)
 
 is-finite :
@@ -127,7 +127,7 @@ is-finite-type-𝔽 X = pr2 X
 
 ```agda
 has-cardinality-Prop :
-  {l : Level} → ℕ → UU l → UU-Prop l
+  {l : Level} → ℕ → UU l → Prop l
 has-cardinality-Prop k X = mere-equiv-Prop (Fin k) X
 
 has-cardinality :
@@ -350,7 +350,7 @@ abstract
     is-prop-all-elements-equal all-elements-equal-has-finite-cardinality
 
 has-finite-cardinality-Prop :
-  {l1 : Level} (X : UU l1) → UU-Prop l1
+  {l1 : Level} (X : UU l1) → Prop l1
 pr1 (has-finite-cardinality-Prop X) = has-finite-cardinality X
 pr2 (has-finite-cardinality-Prop X) = is-prop-has-finite-cardinality
 ```
@@ -451,7 +451,7 @@ abstract
 is-set-type-𝔽 : {l : Level} (X : 𝔽 l) → is-set (type-𝔽 X)
 is-set-type-𝔽 X = is-set-is-finite (is-finite-type-𝔽 X)
 
-set-𝔽 : {l : Level} → 𝔽 l → UU-Set l
+set-𝔽 : {l : Level} → 𝔽 l → Set l
 pr1 (set-𝔽 X) = type-𝔽 X
 pr2 (set-𝔽 X) = is-set-is-finite (is-finite-type-𝔽 X)
 ```
@@ -468,7 +468,7 @@ is-set-type-UU-Fin :
 is-set-type-UU-Fin k X =
   is-set-has-cardinality k (has-cardinality-type-UU-Fin k X)
 
-set-UU-Fin : {l1 : Level} (k : ℕ) → UU-Fin l1 k → UU-Set l1
+set-UU-Fin : {l1 : Level} (k : ℕ) → UU-Fin l1 k → Set l1
 pr1 (set-UU-Fin k X) = type-UU-Fin k X
 pr2 (set-UU-Fin k X) = is-set-type-UU-Fin k X
 ```
@@ -673,7 +673,7 @@ is-1-type-UU-Fin k X Y =
       ( is-set-type-UU-Fin k X)
       ( is-set-type-UU-Fin k Y))
 
-UU-Fin-1-Type : (l : Level) (k : ℕ) → UU-1-Type (lsuc l)
+UU-Fin-1-Type : (l : Level) (k : ℕ) → 1-Type (lsuc l)
 pr1 (UU-Fin-1-Type l k) = UU-Fin l k
 pr2 (UU-Fin-1-Type l k) = is-1-type-UU-Fin k
 ```

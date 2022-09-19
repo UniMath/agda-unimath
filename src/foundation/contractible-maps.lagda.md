@@ -15,7 +15,7 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.equivalences using (_≃_; is-equiv; is-equiv-Prop)
 open import foundation.logical-equivalences using (equiv-iff)
-open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.propositions using (is-prop; Prop)
 open import foundation.truncated-maps using (is-prop-is-trunc-map)
 ```
 
@@ -31,7 +31,7 @@ module _
   is-prop-is-contr-map : (f : A → B) → is-prop (is-contr-map f)
   is-prop-is-contr-map f = is-prop-is-trunc-map neg-two-𝕋 f
 
-  is-contr-map-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  is-contr-map-Prop : (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-contr-map-Prop f) = is-contr-map f
   pr2 (is-contr-map-Prop f) = is-prop-is-contr-map f
 ```

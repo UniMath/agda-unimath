@@ -12,9 +12,9 @@ open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
 
 open import foundation.coproduct-types using (inl; inr)
+open import foundation.decidable-propositions using (is-decidable-Prop)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-Prop;
-    elim-trunc-Prop-is-decidable)
+  ( is-decidable; is-decidable-iff; elim-trunc-Prop-is-decidable)
 open import foundation.empty-types using (ind-empty)
 open import foundation.equivalences using (id-equiv)
 open import foundation.functions using (map-Π)

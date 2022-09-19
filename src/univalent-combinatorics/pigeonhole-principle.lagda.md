@@ -36,7 +36,7 @@ open import foundation.pairs-of-distinct-elements using
     snd-pair-of-distinct-elements; distinction-pair-of-distinct-elements)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using (UU-Prop; is-prop-type-Prop)
+open import foundation.propositions using (Prop; is-prop-type-Prop)
 open import foundation.repetitions using
   ( repetition; map-equiv-repetition; is-repetition-pair-of-distinct-elements;
     is-repetition-pair-of-distinct-elements-repetition)
@@ -323,7 +323,7 @@ module _
                 ( leq-emb-count eA eB f)
                 ( compute-number-of-elements-is-finite eB K)))
       where
-      P : UU-Prop lzero
+      P : Prop lzero
       P = leq-ℕ-Prop
             ( number-of-elements-is-finite H)
             ( number-of-elements-is-finite K)

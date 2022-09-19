@@ -11,7 +11,7 @@ open import Agda.Primitive using (Setω)
 open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (_＝_; refl; ap-binary)
 open import foundation.sets using
-  ( UU-Set; type-Set; hom-Set; is-set; is-set-type-Set)
+  ( Set; type-Set; hom-Set; is-set; is-set-type-Set)
 open import foundation.universe-levels using
   ( UU; Level; lsuc; _⊔_)
 ```
@@ -30,7 +30,7 @@ record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Se
       (l : Level) → UU (α l)
     hom-Large-Precat :
       {l1 l2 : Level} → obj-Large-Precat l1 → obj-Large-Precat l2 →
-      UU-Set (β l1 l2)
+      Set (β l1 l2)
     comp-hom-Large-Precat :
       {l1 l2 l3 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
       {Z : obj-Large-Precat l3} →
@@ -96,7 +96,7 @@ The sets and functions, of all universes, form a precategory.
 
 ```agda
 Set-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
-obj-Large-Precat Set-Large-Precat = UU-Set
+obj-Large-Precat Set-Large-Precat = Set
 hom-Large-Precat Set-Large-Precat = hom-Set
 comp-hom-Large-Precat Set-Large-Precat g f = g ∘ f
 id-hom-Large-Precat Set-Large-Precat = id

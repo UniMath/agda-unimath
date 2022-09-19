@@ -9,7 +9,7 @@ module univalent-combinatorics.complements-isolated-points where
 
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
 open import foundation.equivalences using (inv-equiv; _∘e_; _≃_; map-equiv)
 open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
 open import foundation.functions using (_∘_; id)
@@ -55,10 +55,10 @@ pr2 (isolated-point-UU-Fin k X x) =
 type-complement-point-UU-Fin :
   {l1 : Level} (k : ℕ) →
   Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) → UU l1
-type-complement-point-UU-Fin k X =
+type-complement-point-UU-Fin k (X , x) =
   complement-isolated-point
-    ( pr1 (pr1 X))
-    ( isolated-point-UU-Fin k (pr1 X) (pr2 X))
+    ( type-UU-Fin (succ-ℕ k) X)
+    ( isolated-point-UU-Fin k X x)
 
 equiv-maybe-structure-point-UU-Fin :
   {l : Level} (k : ℕ) (X : UU-Fin l (succ-ℕ k)) →

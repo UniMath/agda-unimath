@@ -30,7 +30,7 @@ subgroup-action-∞-Group :
   {l1 : Level} (l2 : Level) (G : ∞-Group l1) →
   classifying-type-∞-Group G → UU (l1 ⊔ lsuc l2)
 subgroup-action-∞-Group l2 G u =
-  Σ ( classifying-type-∞-Group G → UU-Set l2)
+  Σ ( classifying-type-∞-Group G → Set l2)
     ( λ X →
       ( type-Set (X u)) ×
       ( is-0-connected (Σ (classifying-type-∞-Group G) (type-Set ∘ X))))
@@ -44,7 +44,7 @@ module _
   where
 
   set-action-subgroup-∞-Group :
-    classifying-type-∞-Group G → UU-Set l2
+    classifying-type-∞-Group G → Set l2
   set-action-subgroup-∞-Group = pr1 H
 
   action-subgroup-∞-Group : classifying-type-∞-Group G → UU l2

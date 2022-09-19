@@ -28,7 +28,7 @@ module _
   {l1 l2 : Level} (G : ∞-Group l1) (X : action-∞-Group l2 G)
   where
   
-  is-free-action-∞-Group-Prop : UU-Prop (l1 ⊔ l2)
+  is-free-action-∞-Group-Prop : Prop (l1 ⊔ l2)
   is-free-action-∞-Group-Prop = is-set-Prop (orbit-action-∞-Group G X)
 
   is-free-action-∞-Group : UU (l1 ⊔ l2)

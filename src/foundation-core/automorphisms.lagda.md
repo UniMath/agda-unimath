@@ -21,7 +21,7 @@ open import foundation.homotopies using
   ( _~_; refl-htpy; is-contr-total-htpy; equiv-concat-htpy; right-unit-htpy)
 open import foundation.identity-types using (_＝_; _∙_; ap; refl; right-unit)
 open import foundation.sets using
-  ( is-set; is-set-equiv-is-set; UU-Set; type-Set; is-set-type-Set;
+  ( is-set; is-set-equiv-is-set; Set; type-Set; is-set-type-Set;
     equiv-Set)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
@@ -45,7 +45,7 @@ Aut Y = Y ≃ Y
 is-set-Aut : {l : Level} {A : UU l} → is-set A → is-set (Aut A)
 is-set-Aut H = is-set-equiv-is-set H H
 
-Aut-Set : {l : Level} → UU-Set l → UU-Set l
+Aut-Set : {l : Level} → Set l → Set l
 pr1 (Aut-Set A) = Aut (type-Set A)
 pr2 (Aut-Set A) = is-set-Aut (is-set-type-Set A)
 

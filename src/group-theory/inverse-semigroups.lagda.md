@@ -11,7 +11,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
-open import foundation.sets using (UU-Set; is-set)
+open import foundation.sets using (Set; is-set)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import group-theory.semigroups using
@@ -46,7 +46,7 @@ module _
   semigroup-Inverse-Semigroup : Semigroup l
   semigroup-Inverse-Semigroup = pr1 S
 
-  set-Inverse-Semigroup : UU-Set l
+  set-Inverse-Semigroup : Set l
   set-Inverse-Semigroup = set-Semigroup semigroup-Inverse-Semigroup
 
   type-Inverse-Semigroup : UU l

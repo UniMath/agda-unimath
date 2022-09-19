@@ -30,11 +30,11 @@ open import foundation.coproduct-types using
     neq-inl-inr)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-empty; is-prop-is-decidable)
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop; type-decidable-Prop)
+    is-prop-type-decidable-Prop; type-decidable-Prop; is-prop-is-decidable)
+open import foundation.decidable-types using
+  ( is-decidable; is-decidable-coprod; is-decidable-empty)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)

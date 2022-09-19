@@ -16,8 +16,7 @@ open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-embeddings using
   ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
 open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; is-in-decidable-subtype;
-    is-decidable-subtype-subtype-decidable-subtype)
+  ( decidable-subtype; type-decidable-subtype; is-in-decidable-subtype)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
@@ -41,7 +40,7 @@ open import foundation.propositional-maps using (fib-emb-Prop)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; unit-trunc-Prop; map-inv-distributive-trunc-prod-Prop;
     apply-universal-property-trunc-Prop; trunc-Prop)
-open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.propositions using (Prop; type-Prop)
 open import foundation.sets using (is-set)
 open import foundation.subtypes using (type-subtype)
 open import foundation.unit-type using (unit; star)

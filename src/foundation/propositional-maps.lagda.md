@@ -11,7 +11,7 @@ open import foundation-core.propositional-maps public
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (_≃_)
-open import foundation-core.propositions using (is-prop; UU-Prop)
+open import foundation-core.propositions using (is-prop; Prop)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
@@ -32,7 +32,7 @@ module _
   is-prop-is-prop-map : (f : A → B) → is-prop (is-prop-map f)
   is-prop-is-prop-map f = is-prop-is-trunc-map neg-one-𝕋 f
 
-  is-prop-map-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  is-prop-map-Prop : (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-prop-map-Prop f) = is-prop-map f
   pr2 (is-prop-map-Prop f) = is-prop-is-prop-map f
 ```

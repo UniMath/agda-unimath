@@ -31,7 +31,7 @@ open import foundation.propositional-truncations using
   ( unit-trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
   ( type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (UU-Set; type-Set; is-set-type-Set)
+open import foundation.sets using (Set; type-Set; is-set-type-Set)
 open import foundation.subtypes using
   ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
     is-injective-inclusion-subtype; equiv-subtype-equiv)
@@ -112,7 +112,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l) {x y : type-Set X} (np : ¬ (x ＝ y))
+  {l : Level} (X : Set l) {x y : type-Set X} (np : ¬ (x ＝ y))
   where
 
   type-prop-standard-2-Element-Subtype : type-Set X → UU l

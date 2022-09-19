@@ -30,7 +30,7 @@ open import foundation.mere-equivalences using
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.sets using (is-set)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
@@ -103,7 +103,7 @@ module _
 
 ```agda
 is-in-unordered-pair-Prop :
-  {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU-Prop l
+  {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → Prop l
 is-in-unordered-pair-Prop p a =
   ∃-Prop (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
 
@@ -224,7 +224,7 @@ module _
   {l1 : Level} {A : UU l1}
   where
   
-  mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → UU-Prop l1
+  mere-Eq-unordered-pair-Prop : (p q : unordered-pair A) → Prop l1
   mere-Eq-unordered-pair-Prop p q = trunc-Prop (Eq-unordered-pair p q)
 
   mere-Eq-unordered-pair : (p q : unordered-pair A) → UU l1

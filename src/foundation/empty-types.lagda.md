@@ -12,7 +12,7 @@ open import foundation-core.empty-types public
 open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
-open import foundation-core.sets using (is-set; UU-Set)
+open import foundation-core.sets using (is-set; Set)
 open import foundation-core.truncated-types using
   ( is-trunc; Truncated-Type)
 open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
@@ -24,7 +24,7 @@ open import foundation.equivalences using
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; UU-Prop; is-trunc-is-prop; is-prop-function-type; is-prop-equiv')
+  ( is-prop; Prop; is-trunc-is-prop; is-prop-function-type; is-prop-equiv')
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 ```
 
@@ -68,11 +68,11 @@ raise-ex-falso-emb l =
 is-prop-is-empty : {l : Level} {A : UU l} → is-prop (is-empty A)
 is-prop-is-empty = is-prop-function-type is-prop-empty
 
-is-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+is-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-empty-Prop A) = is-empty A
 pr2 (is-empty-Prop A) = is-prop-is-empty
 
-is-nonempty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+is-nonempty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-nonempty-Prop A) = is-nonempty A
 pr2 (is-nonempty-Prop A) = is-prop-is-empty
 ```
@@ -110,7 +110,7 @@ abstract
       ( is-prop-empty)
 
 raise-empty-Prop :
-  (l1 : Level) → UU-Prop l1
+  (l1 : Level) → Prop l1
 pr1 (raise-empty-Prop l1) = raise-empty l1
 pr2 (raise-empty-Prop l1) = is-prop-raise-empty
 

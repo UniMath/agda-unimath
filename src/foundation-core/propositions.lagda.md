@@ -37,19 +37,19 @@ is-prop :
   {i : Level} (A : UU i) → UU i
 is-prop A = (x y : A) → is-contr (x ＝ y)
 
-UU-Prop :
+Prop :
   (l : Level) → UU (lsuc l)
-UU-Prop l = Σ (UU l) is-prop
+Prop l = Σ (UU l) is-prop
 
 module _
   {l : Level}
   where
 
-  type-Prop : UU-Prop l → UU l
+  type-Prop : Prop l → UU l
   type-Prop P = pr1 P
 
   abstract
-    is-prop-type-Prop : (P : UU-Prop l) → is-prop (type-Prop P)
+    is-prop-type-Prop : (P : Prop l) → is-prop (type-Prop P)
     is-prop-type-Prop P = pr2 P
 ```
 
@@ -192,8 +192,8 @@ abstract
         ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
 
 Σ-Prop :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : type-Prop P → UU-Prop l2) →
-  UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) →
+  Prop (l1 ⊔ l2)
 pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
 pr2 (Σ-Prop P Q) =
   is-prop-Σ
@@ -210,7 +210,7 @@ abstract
     is-prop A → is-prop B → is-prop (A × B)
   is-prop-prod H K = is-prop-Σ H (λ x → K)
 
-prod-Prop : {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+prod-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (prod-Prop P Q) = type-Prop P × type-Prop Q
 pr2 (prod-Prop P Q) = is-prop-prod (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```
@@ -227,16 +227,16 @@ abstract
       ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
 
 type-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
 type-Π-Prop A P = (x : A) → type-Prop (P x)
 
 is-prop-type-Π-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → is-prop (type-Π-Prop A P)
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (type-Π-Prop A P)
 is-prop-type-Π-Prop A P = is-prop-Π (λ x → is-prop-type-Prop (P x))
 
 Π-Prop :
   {l1 l2 : Level} (A : UU l1) →
-  (A → UU-Prop l2) → UU-Prop (l1 ⊔ l2)
+  (A → Prop l2) → Prop (l1 ⊔ l2)
 pr1 (Π-Prop A P) = type-Π-Prop A P
 pr2 (Π-Prop A P) = is-prop-type-Π-Prop A P
 ```
@@ -259,14 +259,14 @@ abstract
       ( is-prop-Π H)
 
 type-Π-Prop' :
-  {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
 type-Π-Prop' A P = {x : A} → type-Prop (P x)
 
 is-prop-type-Π-Prop' :
-  {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → is-prop (type-Π-Prop' A P)
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (type-Π-Prop' A P)
 is-prop-type-Π-Prop' A P = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 
-Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → UU-Prop l2) → UU-Prop (l1 ⊔ l2)
+Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
 pr1 (Π-Prop' A P) = {x : A} → type-Prop (P x)
 pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 ```
@@ -281,40 +281,40 @@ abstract
   is-prop-function-type H = is-prop-Π (λ x → H)
 
 type-function-Prop :
-  {l1 l2 : Level} → UU l1 → UU-Prop l2 → UU (l1 ⊔ l2)
+  {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)
 type-function-Prop A P = A → type-Prop P
 
 is-prop-type-function-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : UU-Prop l2) →
+  {l1 l2 : Level} (A : UU l1) (P : Prop l2) →
   is-prop (type-function-Prop A P)
 is-prop-type-function-Prop A P =
   is-prop-function-type (is-prop-type-Prop P)
 
 function-Prop :
-  {l1 l2 : Level} → UU l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} → UU l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (function-Prop A P) = type-function-Prop A P
 pr2 (function-Prop A P) = is-prop-type-function-Prop A P
 
 type-hom-Prop :
-  { l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → UU (l1 ⊔ l2)
+  { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
 type-hom-Prop P Q = type-function-Prop (type-Prop P) Q
 
 is-prop-type-hom-Prop :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (type-hom-Prop P Q)
 is-prop-type-hom-Prop P Q = is-prop-type-function-Prop (type-Prop P) Q
 
 hom-Prop :
-  { l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+  { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
 pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
 
 implication-Prop :
-  {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 implication-Prop P Q = hom-Prop P Q
 
 type-implication-Prop :
-  {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU (l1 ⊔ l2)
+  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-implication-Prop P Q = type-hom-Prop P Q
 ```
 
@@ -339,18 +339,18 @@ module _
             ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
 
 type-equiv-Prop :
-  { l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → UU (l1 ⊔ l2)
+  { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
 type-equiv-Prop P Q = (type-Prop P) ≃ (type-Prop Q)
 
 abstract
   is-prop-type-equiv-Prop :
-    {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
     is-prop (type-equiv-Prop P Q)
   is-prop-type-equiv-Prop P Q =
     is-prop-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
 
 equiv-Prop :
-  { l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+  { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (equiv-Prop P Q) = type-equiv-Prop P Q
 pr2 (equiv-Prop P Q) = is-prop-type-equiv-Prop P Q
 ```
@@ -379,7 +379,7 @@ abstract
     {l : Level} (A : UU l) → is-prop (is-prop A)
   is-prop-is-prop A = is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-contr))
 
-is-prop-Prop : {l : Level} (A : UU l) → UU-Prop l
+is-prop-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```

@@ -20,8 +20,8 @@ open import foundation.propositional-truncations using
     ind-trunc-Prop)
 open import foundation.propositions using
   ( eq-is-prop; all-elements-equal; is-prop-all-elements-equal; is-prop;
-    UU-Prop; eq-is-prop')
-open import foundation.sets using (UU-Set; type-Set; Id-Prop)
+    Prop; eq-is-prop')
+open import foundation.sets using (Set; type-Set; Id-Prop)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.weakly-constant-maps using
@@ -45,7 +45,7 @@ is-weakly-constant-map-precomp-unit-trunc-Prop g x y =
      ( eq-is-prop (is-prop-type-trunc-Prop))
 
 precomp-universal-property-set-quotient-trunc-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
   (type-trunc-Prop A → type-Set B) → Σ (A → type-Set B) is-weakly-constant-map
 pr1 (precomp-universal-property-set-quotient-trunc-Prop B g) =
   g ∘ unit-trunc-Prop
@@ -60,7 +60,7 @@ pr2 (precomp-universal-property-set-quotient-trunc-Prop B g) =
 ```agda
 abstract
   all-elements-equal-image-is-weakly-constant-map :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     is-weakly-constant-map f →
     all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fib f b)))
   all-elements-equal-image-is-weakly-constant-map B f H (pair x s) (pair y t) =
@@ -75,7 +75,7 @@ abstract
 
 abstract
   is-prop-image-is-weakly-constant-map :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     is-weakly-constant-map f →
     is-prop (Σ (type-Set B) (λ b → type-trunc-Prop (fib f b)))
   is-prop-image-is-weakly-constant-map B f H =
@@ -83,8 +83,8 @@ abstract
       ( all-elements-equal-image-is-weakly-constant-map B f H)
 
 image-weakly-constant-map-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
-  is-weakly-constant-map f → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+  is-weakly-constant-map f → Prop (l1 ⊔ l2)
 pr1 (image-weakly-constant-map-Prop B f H) =
   Σ (type-Set B) (λ b → type-trunc-Prop (fib f b))
 pr2 (image-weakly-constant-map-Prop B f H) =
@@ -95,7 +95,7 @@ pr2 (image-weakly-constant-map-Prop B f H) =
 
 ```agda
 map-universal-property-set-quotient-trunc-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
   is-weakly-constant-map f → type-trunc-Prop A → type-Set B
 map-universal-property-set-quotient-trunc-Prop B f H =
   ( pr1) ∘
@@ -104,14 +104,14 @@ map-universal-property-set-quotient-trunc-Prop B f H =
     ( λ a → pair (f a) (unit-trunc-Prop (pair a refl))))
 
 map-universal-property-set-quotient-trunc-Prop' :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
   Σ (A → type-Set B) is-weakly-constant-map → type-trunc-Prop A → type-Set B
 map-universal-property-set-quotient-trunc-Prop' B (pair f H) =
   map-universal-property-set-quotient-trunc-Prop B f H
 
 abstract
   htpy-universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B) →
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     (H : is-weakly-constant-map f) →
     ( map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop) ~ f
   htpy-universal-property-set-quotient-trunc-Prop B f H a =
@@ -125,7 +125,7 @@ abstract
         ( pair (f a) (unit-trunc-Prop (pair a refl))))
   
   issec-map-universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     ( ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B) ∘
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
   issec-map-universal-property-set-quotient-trunc-Prop B (pair f H) =
@@ -134,7 +134,7 @@ abstract
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 
   isretr-map-universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     ( ( map-universal-property-set-quotient-trunc-Prop' B) ∘
       ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B)) ~ id
   isretr-map-universal-property-set-quotient-trunc-Prop B g =
@@ -153,7 +153,7 @@ abstract
             ( x)))
   
   universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B)
   universal-property-set-quotient-trunc-Prop {A = A} B =
     is-equiv-has-inverse

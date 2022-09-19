@@ -34,6 +34,7 @@ open import foundation.commutative-operations public
 open import foundation.commuting-cubes public
 open import foundation.commuting-squares public
 open import foundation.complements public
+open import foundation.complements-subtypes public
 open import foundation.conjunction public
 open import foundation.connected-components-universes public
 open import foundation.connected-components public
@@ -92,6 +93,7 @@ open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
+open import foundation.functional-correspondences public
 open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
@@ -111,6 +113,7 @@ open import foundation.homotopies public
 open import foundation.identity-systems public
 open import foundation.identity-types public
 open import foundation.images public
+open import foundation.images-subtypes
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.indexed-w-types public
@@ -154,9 +157,11 @@ open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
+open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
+open import foundation.proper-subtypes public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
@@ -175,8 +180,10 @@ open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
+open import foundation.shifting-sequences public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
+open import foundation.singleton-subtypes public
 open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-multisets public
@@ -184,6 +191,7 @@ open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.strongly-extensional-maps public
 open import foundation.structure-identity-principle public
 open import foundation.structure public
 open import foundation.subterminal-types public
@@ -236,6 +244,7 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
+open import foundation.w-type-of-propositions public
 open import foundation.w-types public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public

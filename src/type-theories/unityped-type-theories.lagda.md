@@ -39,7 +39,7 @@ module unityped where
     where
     coinductive
     field
-      element : UU-Set l
+      element : Set l
       slice   : system-Set l
   
   record hom-system

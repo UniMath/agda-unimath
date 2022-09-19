@@ -26,7 +26,7 @@ module _
   {l1 l2 : Level} (R : Ring l1) (I : two-sided-ideal-Ring l2 R)
   where
   
-  is-radical-two-sided-ideal-ring-Prop : UU-Prop (l1 ⊔ l2)
+  is-radical-two-sided-ideal-ring-Prop : Prop (l1 ⊔ l2)
   is-radical-two-sided-ideal-ring-Prop =
     Π-Prop
       ( type-two-sided-ideal-Ring R I)

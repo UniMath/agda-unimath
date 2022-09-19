@@ -20,5 +20,5 @@ A universe `U` is impredicative if the type of propositions in `U` is `U`-small.
 
 ```agda
 is-impredicative-UU : (l : Level) → UU (lsuc l)
-is-impredicative-UU l = is-small l (UU-Prop l)
+is-impredicative-UU l = is-small l (Prop l)
 ```

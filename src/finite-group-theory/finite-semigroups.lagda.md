@@ -52,7 +52,7 @@ module _
   finite-type-Semigroup-𝔽 : 𝔽 l
   finite-type-Semigroup-𝔽 = pr1 G
 
-  set-Semigroup-𝔽 : UU-Set l
+  set-Semigroup-𝔽 : Set l
   set-Semigroup-𝔽 = set-𝔽 finite-type-Semigroup-𝔽
 
   type-Semigroup-𝔽 : UU l
@@ -154,7 +154,7 @@ is-π-finite-Semigroup-of-Order {l} k n =
           ( equiv-right-swap-Σ))
         ( λ X → id-equiv)) ∘e
       ( equiv-right-swap-Σ
-        { A = UU-Set l}
+        { A = Set l}
         { B = has-associative-mul-Set}
         { C = mere-equiv (Fin n) ∘ type-Set})
 ```

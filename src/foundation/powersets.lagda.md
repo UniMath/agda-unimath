@@ -36,7 +36,7 @@ module _
   where
 
   inclusion-rel-subtype-Prop :
-    {l2 l3 : Level} → subtype l2 A → subtype l3 A → UU-Prop (l1 ⊔ l2 ⊔ l3)
+    {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
   inclusion-rel-subtype-Prop P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
   

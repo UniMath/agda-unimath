@@ -17,9 +17,9 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
 open import foundation.propositions using
-  ( is-proof-irrelevant; prod-Prop; is-prop; UU-Prop;
+  ( is-proof-irrelevant; prod-Prop; is-prop; Prop;
     is-prop-is-proof-irrelevant)
-open import foundation.sets using (Id-Prop; is-set; UU-Set)
+open import foundation.sets using (Id-Prop; is-set; Set)
 open import foundation.subtypes using
   ( eq-type-subtype; type-subtype; is-set-type-subtype; inclusion-subtype;
     is-in-subtype-inclusion-subtype)
@@ -81,7 +81,7 @@ module _
       is-prop-is-proof-irrelevant (is-proof-irrelevant-is-iso-Precat f)
 
   is-iso-precat-Prop :
-    {x y : obj-Precat C} (f : type-hom-Precat C x y) → UU-Prop l2
+    {x y : obj-Precat C} (f : type-hom-Precat C x y) → Prop l2
   pr1 (is-iso-precat-Prop f) = is-iso-Precat f
   pr2 (is-iso-precat-Prop f) = is-prop-is-iso-Precat f
 ```
@@ -192,7 +192,7 @@ module _
       ( is-set-type-hom-Precat C x y)
       
 
-  iso-Precat-Set : (x y : obj-Precat C) → UU-Set l2
+  iso-Precat-Set : (x y : obj-Precat C) → Set l2
   pr1 (iso-Precat-Set x y) = iso-Precat C x y
   pr2 (iso-Precat-Set x y) = is-set-iso-Precat x y
 ```

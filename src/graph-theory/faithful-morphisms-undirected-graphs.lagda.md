@@ -38,7 +38,7 @@ module _
   where
 
   is-faithful-hom-undirected-graph-Prop :
-    hom-Undirected-Graph G H → UU-Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l4)
+    hom-Undirected-Graph G H → Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l4)
   is-faithful-hom-undirected-graph-Prop f =
     Π-Prop
       ( unordered-pair-vertices-Undirected-Graph G)

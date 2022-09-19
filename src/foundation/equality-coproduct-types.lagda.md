@@ -28,7 +28,7 @@ open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; _＝_; refl; ap; ap-comp; inv)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.truncated-types using (is-trunc; is-trunc-equiv)
 open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -323,7 +323,7 @@ abstract
   is-set-coprod = is-trunc-coprod neg-two-𝕋
 
 coprod-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (B : Set l2) → Set (l1 ⊔ l2)
 pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = A + B
 pr2 (coprod-Set (pair A is-set-A) (pair B is-set-B)) =
   is-set-coprod is-set-A is-set-B

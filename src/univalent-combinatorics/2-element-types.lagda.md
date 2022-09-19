@@ -58,9 +58,9 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop; trunc-Prop;
     unit-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation.raising-universe-levels using (map-raise)
-open import foundation.sets using (is-set; UU-Set; Id-Prop)
+open import foundation.sets using (is-set; Set; Id-Prop)
 open import foundation.subuniverses using (is-contr-total-equiv-subuniverse)
 open import foundation.type-arithmetic-coproduct-types using
   ( right-distributive-Σ-coprod)
@@ -93,7 +93,7 @@ open import univalent-combinatorics.standard-finite-types using
 ### The condition that a type has two elements
 
 ```agda
-has-two-elements-Prop : {l : Level} → UU l → UU-Prop l
+has-two-elements-Prop : {l : Level} → UU l → Prop l
 has-two-elements-Prop X = has-cardinality-Prop 2 X
 
 has-two-elements : {l : Level} → UU l → UU l
@@ -168,7 +168,7 @@ is-set-type-2-Element-Type X =
   is-set-has-cardinality 2 (has-two-elements-type-2-Element-Type X)
 
 set-2-Element-Type :
-  {l : Level} → 2-Element-Type l → UU-Set l
+  {l : Level} → 2-Element-Type l → Set l
 pr1 (set-2-Element-Type X) = type-2-Element-Type X
 pr2 (set-2-Element-Type X) = is-set-type-2-Element-Type X
 ```

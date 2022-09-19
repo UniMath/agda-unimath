@@ -13,7 +13,7 @@ open import category-theory.precategories using
   ( Precat; obj-Precat; id-hom-Precat; hom-Precat; type-hom-Precat;
     is-set-type-hom-Precat; comp-hom-Precat; assoc-comp-hom-Precat;
     left-unit-law-comp-hom-Precat; right-unit-law-comp-hom-Precat)
-open import foundation.1-types using (is-1-type; UU-1-Type)
+open import foundation.1-types using (is-1-type; 1-Type)
 open import foundation.contractible-types using (is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pr1; pr2)
 open import foundation.equivalences using (is-equiv-Prop)
@@ -25,9 +25,9 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.identity-types using (_＝_; refl)
 open import foundation.isomorphisms-of-sets using
   ( iso-Set; equiv-iso-equiv-Set)
-open import foundation.propositions using (UU-Prop; Π-Prop; type-Prop)
+open import foundation.propositions using (Prop; Π-Prop; type-Prop)
 open import foundation.sets using
-  ( UU-Set; is-set; is-set-is-equiv; hom-Set; type-equiv-Set;
+  ( Set; is-set; is-set-is-equiv; hom-Set; type-equiv-Set;
     is-contr-total-equiv-Set)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
@@ -43,7 +43,7 @@ module _
   {l1 l2 : Level} (C : Precat l1 l2)
   where
 
-  is-category-Precat-Prop : UU-Prop (l1 ⊔ l2)
+  is-category-Precat-Prop : Prop (l1 ⊔ l2)
   is-category-Precat-Prop =
     Π-Prop (obj-Precat C)
       ( λ x →
@@ -65,7 +65,7 @@ module _
   obj-Cat : UU l1
   obj-Cat = obj-Precat precat-Cat
 
-  hom-Cat : obj-Cat → obj-Cat → UU-Set l2
+  hom-Cat : obj-Cat → obj-Cat → Set l2
   hom-Cat = hom-Precat precat-Cat
 
   type-hom-Cat : obj-Cat → obj-Cat → UU l2
@@ -106,7 +106,7 @@ The precategory of sets and functions in a given universe is a category.
 
 ```agda
 Set-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Set-Precat l) = UU-Set l
+pr1 (Set-Precat l) = Set l
 pr1 (pr2 (Set-Precat l)) = hom-Set
 pr1 (pr1 (pr2 (pr2 (Set-Precat l)))) g f = g ∘ f
 pr2 (pr1 (pr2 (pr2 (Set-Precat l)))) h g f = refl
@@ -114,17 +114,17 @@ pr1 (pr2 (pr2 (pr2 (Set-Precat l)))) x = id
 pr1 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 
-id-iso-Set : {l : Level} {x : UU-Set l} → iso-Set x x
+id-iso-Set : {l : Level} {x : Set l} → iso-Set x x
 id-iso-Set {l} {x} = id-iso-Precat (Set-Precat l) {x}
 
-iso-eq-Set : {l : Level} (x y : UU-Set l) → x ＝ y → iso-Set x y
+iso-eq-Set : {l : Level} (x y : Set l) → x ＝ y → iso-Set x y
 iso-eq-Set {l} = iso-eq-Precat (Set-Precat l)
 
 is-category-Set-Precat : (l : Level) → is-category-Precat (Set-Precat l)
 is-category-Set-Precat l x =
   fundamental-theorem-id 
     ( is-contr-equiv'
-      ( Σ (UU-Set l) (type-equiv-Set x))
+      ( Σ (Set l) (type-equiv-Set x))
       ( equiv-tot (equiv-iso-equiv-Set x))
       ( is-contr-total-equiv-Set x))
     ( iso-eq-Set x)
@@ -153,7 +153,7 @@ module _
       ( is-category-Cat C x y)
       ( is-set-iso-Precat (precat-Cat C) x y)
 
-  obj-Cat-1-Type : UU-1-Type l1
+  obj-Cat-1-Type : 1-Type l1
   pr1 obj-Cat-1-Type = obj-Cat C
   pr2 obj-Cat-1-Type = is-1-type-obj-Cat
 ```

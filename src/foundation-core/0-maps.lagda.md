@@ -14,7 +14,7 @@ open import foundation-core.functoriality-dependent-pair-types using
   (tot; map-Σ-map-base; map-Σ)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.sets using
-  ( is-set; is-set-equiv; UU-Set; type-Set; is-set-type-Set)
+  ( is-set; is-set-equiv; Set; type-Set; is-set-type-Set)
 open import foundation-core.truncated-maps using
   ( is-trunc-map-htpy; is-trunc-map-comp; is-trunc-map-right-factor;
     is-trunc-map-tot; is-trunc-map-map-Σ-map-base; is-trunc-map-map-Σ)
@@ -61,7 +61,7 @@ module _
       is-set-equiv (B x) (equiv-fib-pr1 B x) (H x)
                                                   
   pr1-0-map :
-    (B : A → UU-Set l2) → 0-map (Σ A (λ x → type-Set (B x))) A
+    (B : A → Set l2) → 0-map (Σ A (λ x → type-Set (B x))) A
   pr1 (pr1-0-map B) = pr1
   pr2 (pr1-0-map B) = is-0-map-pr1 (λ x → is-set-type-Set (B x))
 ```

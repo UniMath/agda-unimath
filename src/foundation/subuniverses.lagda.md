@@ -17,7 +17,7 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation-core.identity-types using (_＝_; tr; inv; refl; ap)
 open import foundation-core.propositions using
-  ( is-prop; type-Prop; is-prop-type-Prop; UU-Prop)
+  ( is-prop; type-Prop; is-prop-type-Prop; Prop)
 open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation-core.subtypes using

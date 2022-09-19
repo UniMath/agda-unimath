@@ -21,7 +21,7 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation-core.identity-types using (_＝_; refl)
 open import foundation-core.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-Π';
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-Π';
     is-prop-function-type)
 open import foundation-core.univalence using (is-contr-total-equiv)
 open import foundation-core.universe-levels using (UU; Level; _⊔_; lsuc)
@@ -45,7 +45,7 @@ Rel l A = A → A → UU l
 ```agda
 Rel-Prop :
   (l : Level) {l1 : Level} (A : UU l1) → UU ((lsuc l) ⊔ l1)
-Rel-Prop l A = A → (A → UU-Prop l)
+Rel-Prop l A = A → (A → Prop l)
 
 type-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) → A → A → UU l2

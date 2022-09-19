@@ -20,7 +20,7 @@ open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl)
 open import foundation.negation using (¬)
 open import foundation.propositional-truncations using (unit-trunc-Prop)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.unit-type using (unit; star)
 open import foundation.universe-levels using (UU; lzero)
 
@@ -846,7 +846,7 @@ has-decidable-equality-Q8 x y =
 is-set-Q8 : is-set Q8
 is-set-Q8 = is-set-has-decidable-equality has-decidable-equality-Q8
 
-Q8-Set : UU-Set lzero
+Q8-Set : Set lzero
 Q8-Set = pair Q8 is-set-Q8
 
 Q8-Semigroup : Semigroup lzero

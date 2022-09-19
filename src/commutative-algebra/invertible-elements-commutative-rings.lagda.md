@@ -40,7 +40,7 @@ module _
     has-two-sided-inverse-Ring (ring-Commutative-Ring R)
 
   is-invertible-element-commutative-ring-Prop :
-    type-Commutative-Ring R → UU-Prop l
+    type-Commutative-Ring R → Prop l
   is-invertible-element-commutative-ring-Prop =
     is-invertible-element-ring-Prop (ring-Commutative-Ring R)
 
