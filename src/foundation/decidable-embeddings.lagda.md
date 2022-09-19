@@ -41,11 +41,11 @@ open import foundation.propositional-maps using
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-is-inhabited; is-prop-prod;
     is-proof-irrelevant-is-prop; equiv-prop)
-open import foundation.slice using (equiv-Fib-structure)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr)
+open import foundation.type-duality using (equiv-Fib-structure)
 open import foundation.type-theoretic-principle-of-choice using
   ( inv-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)

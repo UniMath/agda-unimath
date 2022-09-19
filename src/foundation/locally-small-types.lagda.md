@@ -78,10 +78,10 @@ pr2 (is-locally-small-Prop l A) = is-prop-is-locally-small l A
 
 ```agda
 is-locally-small-is-small :
-  (l : Level) {l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
-pr1 (is-locally-small-is-small l (pair X e) x y) =
+  {l l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
+pr1 (is-locally-small-is-small (pair X e) x y) =
   map-equiv e x ＝ map-equiv e y
-pr2 (is-locally-small-is-small l (pair X e) x y) = equiv-ap e x y
+pr2 (is-locally-small-is-small (pair X e) x y) = equiv-ap e x y
 ```
 
 ### Any proposition is locally small
