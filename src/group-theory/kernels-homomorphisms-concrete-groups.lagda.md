@@ -3,7 +3,7 @@ title: Kernels of homomorphisms of concrete groups
 ---
 
 ```agda
-module group-theory.kernels-homomorphism-concrete-groups where
+module group-theory.kernels-homomorphisms-concrete-groups where
 
 open import foundation.universe-levels
 
@@ -17,13 +17,13 @@ The kernel of a concrete group homomorphsim `Bf : BG →* BH` is the connected c
 
 ## Definition
 
-```agda
-module _
-  {l1 l2 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
-  (f : hom-Concrete-Groups G H)
-  where
+-- ```agda
+-- module _
+--   {l1 l2 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
+--   (f : hom-Concrete-Group G H)
+--   where
   
-  concrete-group-kernel-hom-Concrete-Group : Concrete-Group (l1 ⊔ l2)
-  concrete-group-kernel-hom-Concrete-Group = ?
+--   concrete-group-kernel-hom-Concrete-Group : Concrete-Group (l1 ⊔ l2)
+--   concrete-group-kernel-hom-Concrete-Group = {!!}
   
-```
+-- ```

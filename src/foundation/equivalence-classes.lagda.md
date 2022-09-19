@@ -37,7 +37,7 @@ open import foundation.locally-small-types
 open import foundation.logical-equivalences using
   ( backward-implication; iff-equiv; equiv-iff'; inv-iff; forward-implication)
 open import foundation.propositional-extensionality using
-  ( eq-iff; is-set-Prop)
+  ( eq-iff)
 open import foundation.propositional-truncations
 open import foundation.propositions using
   ( Prop; type-Prop; is-prop; is-prop-type-Prop)

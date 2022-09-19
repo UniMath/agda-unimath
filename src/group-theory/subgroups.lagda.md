@@ -20,7 +20,7 @@ open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (id; _∘_)
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap; _＝_)
 open import foundation.powersets using (_⊆_)
-open import foundation.propositional-extensionality using (is-set-Prop)
+open import foundation.propositional-extensionality using (is-set-UU-Prop)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.propositions using
   ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
@@ -64,7 +64,7 @@ subset-Group l G = subtype l (type-Group G)
 is-set-subset-Group :
   (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
 is-set-subset-Group l G =
-  is-set-function-type is-set-Prop
+  is-set-function-type is-set-UU-Prop
 ```
 
 ### Subgroups

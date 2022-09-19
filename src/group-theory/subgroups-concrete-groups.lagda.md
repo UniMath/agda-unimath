@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
+open import group-theory.homomorphisms-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.transitive-concrete-group-actions
 

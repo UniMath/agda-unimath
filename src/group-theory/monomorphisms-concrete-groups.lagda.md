@@ -13,7 +13,9 @@ open import foundation.propositions using
   ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 open import group-theory.concrete-groups using
-  ( Concrete-Group; hom-Concrete-Group; comp-hom-Concrete-Group)
+  ( Concrete-Group)
+open import group-theory.homomorphisms-concrete-groups using
+  ( hom-Concrete-Group; comp-hom-Concrete-Group)
 ```
 
 ## Idea

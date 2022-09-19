@@ -24,5 +24,5 @@ module _
   where
 
   symmetric-Concrete-Group : Concrete-Group (lsuc l)
-  symmetric-Concrete-Group = Automorphism-Group (Set l) X is-1-type-Set
+  symmetric-Concrete-Group = Automorphism-Group (Set-1-Type l) X
 ```

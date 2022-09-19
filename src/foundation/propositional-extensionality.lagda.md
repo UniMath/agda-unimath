@@ -113,15 +113,15 @@ module _
 ### The type of propositions is a set
 
 ```agda
-is-set-Prop : {l : Level} → is-set (Prop l)
-is-set-Prop {l} P Q =
+is-set-UU-Prop : {l : Level} → is-set (Prop l)
+is-set-UU-Prop {l} P Q =
   is-prop-equiv
     ( propositional-extensionality P Q)
     ( is-prop-logical-equivalence P Q)
 
 Prop-Set : (l : Level) → Set (lsuc l)
 pr1 (Prop-Set l) = Prop l
-pr2 (Prop-Set l) = is-set-Prop
+pr2 (Prop-Set l) = is-set-UU-Prop
 ```
 
 ### The canonical type family over `Prop` is univalent

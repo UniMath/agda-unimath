@@ -55,5 +55,5 @@ is-extensional-𝕎-Prop = is-extensional-is-univalent-𝕎 is-univalent-type-Pr
 
 ```agda
 is-set-𝕎-Prop : {l : Level} → is-set (𝕎-Prop l)
-is-set-𝕎-Prop = is-set-𝕎 is-set-Prop
+is-set-𝕎-Prop = is-set-𝕎 is-set-UU-Prop
 ```
