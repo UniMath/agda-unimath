@@ -91,6 +91,7 @@ open import group-theory.concrete-groups using
     map-hom-Concrete-Group)
 open import group-theory.groups using
   ( set-Group; type-Group; mul-Group; semigroup-Group)
+open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-generated-subgroups using
   ( restriction-generating-subset-Group;
     eq-map-restriction-generating-subset-Group)

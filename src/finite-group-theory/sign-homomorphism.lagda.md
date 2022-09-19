@@ -64,9 +64,7 @@ open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
 open import group-theory.concrete-groups using
-  ( hom-Concrete-Group; classifying-type-Concrete-Group;
-    abstract-group-Concrete-Group; hom-group-hom-Concrete-Group;
-    map-hom-Concrete-Group)
+  ( classifying-type-Concrete-Group; abstract-group-Concrete-Group)
 open import group-theory.groups using (set-Group)
 open import group-theory.homomorphisms-generated-subgroups using
   ( restriction-generating-subset-Group)

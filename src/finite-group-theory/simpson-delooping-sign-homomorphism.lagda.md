@@ -43,6 +43,7 @@ open import foundation.universe-levels
 
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
+open import group-theory.homomorphisms-concrete-groups
 
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.counting
@@ -570,15 +571,11 @@ module _
   
   map-simpson-delooping-sign : (n : ℕ) →
     classifying-type-Concrete-Group
-      ( Automorphism-Group
-        ( Set l)
-        ( raise-Set l (Fin-Set n))
-        ( is-1-type-Set)) →
+      ( Automorphism-Group (Set-1-Type l) (raise-Set l (Fin-Set n))) →
     classifying-type-Concrete-Group
       ( Automorphism-Group
-        ( Set (lsuc lzero ⊔ l))
-        ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-1-type-Set))
+        ( Set-1-Type (lsuc lzero ⊔ l))
+        ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)))
   pr1 (map-simpson-delooping-sign zero-ℕ X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
   pr2 (map-simpson-delooping-sign zero-ℕ X) = unit-trunc-Prop refl
   pr1 (map-simpson-delooping-sign (succ-ℕ zero-ℕ) X) = raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)
@@ -607,11 +604,10 @@ module _
 
   simpson-delooping-sign : (n : ℕ) →
     hom-Concrete-Group
-      ( Automorphism-Group (Set l) (raise-Set l (Fin-Set n)) is-1-type-Set)
+      ( Automorphism-Group (Set-1-Type l) (raise-Set l (Fin-Set n)))
       ( Automorphism-Group
-        ( Set (lsuc lzero ⊔ l))
-        ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2))
-        ( is-1-type-Set))
+        ( Set-1-Type (lsuc lzero ⊔ l))
+        ( raise-Set (lsuc lzero ⊔ l) (Fin-Set 2)))
   pr1 (simpson-delooping-sign n) = map-simpson-delooping-sign n
   pr2 (simpson-delooping-sign zero-ℕ) = refl
   pr2 (simpson-delooping-sign (succ-ℕ zero-ℕ)) = refl
