@@ -8,44 +8,32 @@ title: Symmetric groups
 module group-theory.symmetric-groups where
 
 open import foundation.automorphisms
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using
-  (eq-pair-Σ; pair-eq-Σ; comp-eq-pair-Σ; comp-pair-eq-Σ; issec-pair-eq-Σ; isretr-pair-eq-Σ)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; associative-comp-equiv; id-equiv; left-unit-law-equiv; inv-equiv;
-    right-unit-law-equiv; left-inverse-law-equiv; right-inverse-law-equiv;
-    distributive-inv-comp-equiv; inv-inv-equiv; map-equiv; eq-htpy-equiv)
-open import foundation.functions using (id)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using
-  (Id; refl; _∙_; ap; inv; ap-binary; tr)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using (eq-is-prop)
-open import foundation.raising-universe-levels using (raise-Set; equiv-raise)
-open import foundation.sets using
-  ( Set; type-Set; is-set; is-set-type-Set; is-prop-is-set;
-    is-1-type-Set; Set-1-Type)
-open import foundation.subtypes using (eq-type-subtype)
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.subuniverses
-open import foundation.truncated-types using (is-trunc-Id)
-open import foundation.univalence using
-  ( equiv-eq; eq-equiv; comp-eq-equiv; comp-equiv-eq; equiv-univalence)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.truncated-types
+open import foundation.univalence
+open import foundation.universe-levels
 
-open import group-theory.automorphism-groups using
-  ( Automorphism-Group)
-open import group-theory.concrete-groups using
-  ( abstract-group-Concrete-Group; type-Concrete-Group)
-open import group-theory.groups using (is-group'; Group; semigroup-Group)
-open import group-theory.homomorphisms-groups using
-  ( id-hom-Group; type-hom-Group; comp-hom-Group;
-    preserves-mul-Group)
-open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using (type-iso-Group)
-open import group-theory.monoids using (is-unital-Semigroup)
-open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
+open import group-theory.automorphism-groups
+open import group-theory.concrete-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.monoids
+open import group-theory.opposite-groups
+open import group-theory.semigroups
 ```
 
 ## Definitions
@@ -179,328 +167,385 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Set l1)
+  {l1 : Level} (A : Set l1)
   where
 
-  map-compute-abstract-automorphism-group-Set :
-    type-symmetric-Group X →
-    type-Concrete-Group
-      ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))
-  map-compute-abstract-automorphism-group-Set x =
-    eq-pair-Σ
-      ( eq-pair-Σ
-        ( eq-equiv
-          ( type-Set (raise-Set l2 X))
-          ( type-Set (raise-Set l2 X))
-          ( equiv-raise l2 (type-Set X) ∘e
-            ( (inv-equiv x) ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-        ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-      ( eq-is-prop is-prop-type-trunc-Prop)
+  equiv-compute-Automorphism-Group-Set :
+    type-Concrete-Group (Automorphism-Group-Set A) ≃ type-symmetric-Group A
+  equiv-compute-Automorphism-Group-Set =
+    extensionality-classifying-type-Automorphism-Group-Set A
+      ( shape-Automorphism-Group-Set A)
+      ( shape-Automorphism-Group-Set A)
 
-  preserves-mul-map-compute-abstract-automorphism-group-Set :
+  map-compute-Automorphism-Group-Set :
+    type-Concrete-Group (Automorphism-Group-Set A) → type-symmetric-Group A
+  map-compute-Automorphism-Group-Set =
+    equiv-eq-classifying-type-Automorphism-Group-Set A
+      ( shape-Automorphism-Group-Set A)
+      ( shape-Automorphism-Group-Set A)
+
+  preserves-mul-compute-Automorphism-Group-Set :
     preserves-mul-Group
-      ( symmetric-Group X)
-      ( abstract-group-Concrete-Group
-        ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-      ( map-compute-abstract-automorphism-group-Set)
-  preserves-mul-map-compute-abstract-automorphism-group-Set x y =
-    ( ap
-      ( λ P → eq-pair-Σ P (eq-is-prop is-prop-type-trunc-Prop))
-      ( ap
-        ( λ Q → eq-pair-Σ Q (eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-        ( ( ap
-          ( eq-equiv (type-Set (raise-Set l2 X)) (type-Set (raise-Set l2 X)))
-          ( ( ap
-            ( λ e → equiv-raise l2 (type-Set X) ∘e (e ∘e inv-equiv (equiv-raise l2 (type-Set X))))
-            ( distributive-inv-comp-equiv y x ∙
-              (eq-htpy-equiv refl-htpy ∙
-                ( ap
-                  ( λ e → inv-equiv y ∘e (e ∘e inv-equiv x))
-                  ( inv (left-inverse-law-equiv (equiv-raise l2 (type-Set X)))))))) ∙
-            ( eq-htpy-equiv refl-htpy))) ∙
-          ( inv
-            ( comp-eq-equiv
-              ( type-Set (raise-Set l2 X))
-              ( type-Set (raise-Set l2 X))
-              ( type-Set (raise-Set l2 X))
-              ( equiv-raise l2 (type-Set X) ∘e (inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X))))
-              ( equiv-raise l2 (type-Set X) ∘e (inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X))))))) ∙
-        ( ( ap
-          ( λ w →
-            eq-pair-Σ
-              ( ( eq-equiv
-                ( type-Set (raise-Set l2 X))
-                ( type-Set (raise-Set l2 X))
-                ( equiv-raise l2 (type-Set X) ∘e (inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X))))) ∙
-                ( eq-equiv
-                  ( type-Set (raise-Set l2 X))
-                  ( type-Set (raise-Set l2 X))
-                  ( equiv-raise l2 (type-Set X) ∘e
-                    ( inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X))))))
-              ( w))
-          ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set (raise-Set l2 X)) _ _)))) ∙
-          ( inv
-            ( comp-eq-pair-Σ
-              ( pr2 (raise-Set l2 X))
-              ( pr2 (raise-Set l2 X))
-              ( pr2 (raise-Set l2 X))
-              ( eq-equiv
-                ( type-Set (raise-Set l2 X))
-                ( type-Set (raise-Set l2 X))
-                ( equiv-raise l2 (type-Set X) ∘e
-                  ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-              ( eq-equiv
-                ( type-Set (raise-Set l2 X))
-                ( type-Set (raise-Set l2 X))
-                ( equiv-raise l2 (type-Set X) ∘e
-                  ( inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-              ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))
-              ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))))))) ∙
-      ( ap
-        ( λ w →
-          eq-pair-Σ
-            ( ( eq-pair-Σ
-              ( eq-equiv
-                ( type-Set (raise-Set l2 X))
-                ( type-Set (raise-Set l2 X))
-                ( equiv-raise l2 (type-Set X) ∘e
-                  ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-              ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))) ∙
-               eq-pair-Σ
-                ( eq-equiv
-                  (type-Set (raise-Set l2 X))
-                  (type-Set (raise-Set l2 X))
-                  ( equiv-raise l2 (type-Set X) ∘e
-                    (inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-                ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-            ( w))
-        ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ (unit-trunc-Prop refl)))) ∙
-         inv
-          ( comp-eq-pair-Σ
-            ( unit-trunc-Prop refl)
-            ( unit-trunc-Prop refl)
-            ( unit-trunc-Prop refl)
-            ( eq-pair-Σ
-              ( eq-equiv
-                ( type-Set (raise-Set l2 X))
-                ( type-Set (raise-Set l2 X))
-                ( equiv-raise l2 (type-Set X) ∘e
-                  (inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-              ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-            ( eq-pair-Σ
-              ( eq-equiv
-                ( type-Set (raise-Set l2 X))
-                ( type-Set (raise-Set l2 X))
-                ( equiv-raise l2 (type-Set X) ∘e
-                  (inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-              ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-            ( eq-is-prop is-prop-type-trunc-Prop)
-            ( eq-is-prop is-prop-type-trunc-Prop)))
-    
-  hom-symmetric-group-abstract-automorphism-group-Set :
-    type-hom-Group
-      ( symmetric-Group X)
-      ( abstract-group-Concrete-Group
-        ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-  pr1 hom-symmetric-group-abstract-automorphism-group-Set =
-    map-compute-abstract-automorphism-group-Set 
-  pr2 hom-symmetric-group-abstract-automorphism-group-Set =
-    preserves-mul-map-compute-abstract-automorphism-group-Set
-    
-  hom-inv-symmetric-group-abstract-automorphism-group-Set :
-    type-hom-Group
-      ( abstract-group-Concrete-Group
-        ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-      ( symmetric-Group X)
-  pr1 hom-inv-symmetric-group-abstract-automorphism-group-Set x =
-    inv-equiv
-      ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-        ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
-  pr2 hom-inv-symmetric-group-abstract-automorphism-group-Set x y = 
-    ( ap
-      ( inv-equiv)
-      { y =
-        ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-          ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e equiv-raise l2 (type-Set X))) ∘e
-          ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-            ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))}
-      ( ( ap
-        ( λ e → inv-equiv (equiv-raise l2 (type-Set X)) ∘e (e ∘e equiv-raise l2 (type-Set X)))
-        ( ( ap
-          ( equiv-eq)
-          ( ( ap (λ p → pr1 (pair-eq-Σ p)) (inv (comp-pair-eq-Σ x y))) ∙
-            ( inv (comp-pair-eq-Σ (pr1 (pair-eq-Σ x)) (pr1 (pair-eq-Σ y)))))) ∙
-          ( ( inv
-            ( comp-equiv-eq
-              ( pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x))))
-              ( pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))))) ∙
-            ( ( eq-htpy-equiv refl-htpy) ∙
-              ( ap
-                ( λ e →
-                  equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e
-                    (e ∘e equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x))))))
-                ( inv (right-inverse-law-equiv (equiv-raise l2 (type-Set X))))))))) ∙
-        ( eq-htpy-equiv refl-htpy))) ∙
-      ( distributive-inv-comp-equiv
-        ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-          ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
-        ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-          ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e equiv-raise l2 (type-Set X))))
+      ( op-abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( symmetric-Group A)
+      ( map-compute-Automorphism-Group-Set)
+  preserves-mul-compute-Automorphism-Group-Set =
+    preserves-mul-equiv-eq-classifying-type-Automorphism-Group-Set A
+      ( shape-Automorphism-Group-Set A)
+      ( shape-Automorphism-Group-Set A)
+      ( shape-Automorphism-Group-Set A)
 
-  is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set :
-    Id
-      ( comp-hom-Group
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-        ( symmetric-Group X)
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-        ( hom-symmetric-group-abstract-automorphism-group-Set)
-        ( hom-inv-symmetric-group-abstract-automorphism-group-Set))
-      ( id-hom-Group
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))))
-  is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set = 
-    eq-pair-Σ
-      ( eq-htpy
-        ( λ x →
-          ( ap
-            ( λ w →
-              eq-pair-Σ
-                ( w)
-                ( eq-is-prop is-prop-type-trunc-Prop))
-            ( ( ap
-              (λ w →
-                eq-pair-Σ w (eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-              ( ( ap
-                ( eq-equiv (type-Set (raise-Set l2 X)) (type-Set (raise-Set l2 X)))
-                ( ( ap
-                  ( λ e → equiv-raise l2 (type-Set X) ∘e (e ∘e inv-equiv (equiv-raise l2 (type-Set X))))
-                  ( inv-inv-equiv
-                    ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-                      (equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X))))) ∙
-                  ( ( eq-htpy-equiv refl-htpy) ∙
-                    ( ( ap
-                      ( λ e →
-                        e ∘e
-                          ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e
-                            ( equiv-raise l2 (type-Set X) ∘e
-                              inv-equiv (equiv-raise l2 (type-Set X)))))
-                      ( right-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
-                      ( ( ap
-                        ( λ e → id-equiv ∘e (equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e e))
-                        ( right-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
-                        ( eq-htpy-equiv refl-htpy)))))) ∙
-                ( ap
-                  ( λ e → map-equiv e (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))))
-                  ( left-inverse-law-equiv equiv-univalence)))) ∙
-              ( ( ap
-                ( eq-pair-Σ (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))))
-                { y = pr2 (pair-eq-Σ (pr1 (pair-eq-Σ x)))}
-                ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set (raise-Set l2 X)) _ _)))) ∙
-                ( issec-pair-eq-Σ (raise-Set l2 X) (raise-Set l2 X) (pr1 (pair-eq-Σ x))))) ∙
-            ( ( ap
-              ( eq-pair-Σ (pr1 (pair-eq-Σ x)))
-              { y = pr2 (pair-eq-Σ x)}
-              ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
-              ( issec-pair-eq-Σ
-                ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
-                ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
-                ( x))))))
-      ( eq-is-prop
-        ( is-prop-preserves-mul-Semigroup
-          ( semigroup-Group
-            ( abstract-group-Concrete-Group
-              ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))))
-          ( semigroup-Group
-            ( abstract-group-Concrete-Group
-              ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))))
-          ( id)))
+  equiv-group-compute-Automorphism-Group-Set :
+    equiv-Group
+      ( op-abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( symmetric-Group A)
+  pr1 equiv-group-compute-Automorphism-Group-Set =
+    equiv-compute-Automorphism-Group-Set
+  pr2 equiv-group-compute-Automorphism-Group-Set =
+    preserves-mul-compute-Automorphism-Group-Set
 
-  is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set :
-    Id
-      ( comp-hom-Group
-        ( symmetric-Group X)
-        ( abstract-group-Concrete-Group
-          ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-        ( symmetric-Group X)
-        ( hom-inv-symmetric-group-abstract-automorphism-group-Set)
-        ( hom-symmetric-group-abstract-automorphism-group-Set))
-      ( id-hom-Group (symmetric-Group X))
-  is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set = 
-    eq-pair-Σ
-      ( eq-htpy
-        ( λ x →
-          ( ap
-            ( inv-equiv)
-            { y = inv-equiv x}
-            ( ( ap
-              ( λ e →
-                ( inv-equiv (equiv-raise l2 (type-Set X))) ∘e
-                  ( e ∘e equiv-raise l2 (type-Set X)))
-              ( ( ap
-                ( equiv-eq)
-                ( ap
-                  ( λ w → pr1 (pair-eq-Σ w))
-                  ( ap pr1
-                    ( isretr-pair-eq-Σ
-                      ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
-                      ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
-                      ( pair
-                        ( eq-pair-Σ
-                          ( eq-equiv
-                            ( type-Set (raise-Set l2 X))
-                            ( type-Set (raise-Set l2 X))
-                            ( equiv-raise l2 (type-Set X) ∘e
-                              ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-                          ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
-                        ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
-                    ( ap pr1
-                      ( isretr-pair-eq-Σ (raise-Set l2 X) (raise-Set l2 X)
-                        ( pair
-                          ( eq-equiv
-                            ( type-Set (raise-Set l2 X))
-                            ( type-Set (raise-Set l2 X))
-                            ( equiv-raise l2 (type-Set X) ∘e
-                              ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-                          ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))))))) ∙
-                ( ap
-                  ( λ e →
-                    map-equiv
-                      ( e)
-                      ( equiv-raise l2 (type-Set X) ∘e
-                        ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
-                  ( right-inverse-law-equiv equiv-univalence)))) ∙
-              ( eq-htpy-equiv refl-htpy ∙
-                ( ( ap
-                  ( λ e →
-                    e ∘e
-                      (inv-equiv x ∘e
-                        (inv-equiv (equiv-raise l2 (type-Set X)) ∘e
-                          equiv-raise l2 (type-Set X))))
-                   ( left-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
-                   ( ( ap
-                     ( λ e → id-equiv ∘e (inv-equiv x ∘e e))
-                     ( left-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
-                     ( eq-htpy-equiv refl-htpy)))))) ∙
-            ( inv-inv-equiv x)))
-      ( eq-is-prop
-        ( is-prop-preserves-mul-Semigroup
-          ( semigroup-Group (symmetric-Group X))
-          ( semigroup-Group (symmetric-Group X))
-          ( id)))
-
-  iso-symmetric-group-abstract-automorphism-group-Set :
+  compute-Automorphism-Group-Set' :
     type-iso-Group
-      ( symmetric-Group X)
-      ( abstract-group-Concrete-Group
-        ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
-  pr1 iso-symmetric-group-abstract-automorphism-group-Set =
-    hom-symmetric-group-abstract-automorphism-group-Set
-  pr1 (pr2 iso-symmetric-group-abstract-automorphism-group-Set) =
-    hom-inv-symmetric-group-abstract-automorphism-group-Set
-  pr1 (pr2 (pr2 iso-symmetric-group-abstract-automorphism-group-Set)) =
-    is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set
-  pr2 (pr2 (pr2 iso-symmetric-group-abstract-automorphism-group-Set)) =
-    is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set
-```
+      ( op-abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( symmetric-Group A)
+  compute-Automorphism-Group-Set' =
+    iso-equiv-Group
+      ( op-abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( symmetric-Group A)
+      ( equiv-group-compute-Automorphism-Group-Set)
+
+  compute-Automorphism-Group-Set :
+    type-iso-Group
+      ( abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( symmetric-Group A)
+  compute-Automorphism-Group-Set =
+    comp-iso-Group
+      ( abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( op-abstract-group-Concrete-Group (Automorphism-Group-Set A))
+      ( symmetric-Group A)
+      ( compute-Automorphism-Group-Set')
+      ( iso-inv-Group
+        ( abstract-group-Concrete-Group (Automorphism-Group-Set A)))
+
+--   map-compute-abstract-automorphism-group-Set :
+--     type-symmetric-Group X →
+--     type-Concrete-Group
+--       ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))
+--   map-compute-abstract-automorphism-group-Set x =
+--     eq-pair-Σ
+--       ( eq-pair-Σ
+--         ( eq-equiv
+--           ( type-Set (raise-Set l2 X))
+--           ( type-Set (raise-Set l2 X))
+--           ( equiv-raise l2 (type-Set X) ∘e
+--             ( (inv-equiv x) ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--         ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--       ( eq-is-prop is-prop-type-trunc-Prop)
+
+--   preserves-mul-map-compute-abstract-automorphism-group-Set :
+--     preserves-mul-Group
+--       ( symmetric-Group X)
+--       ( abstract-group-Concrete-Group
+--         ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--       ( map-compute-abstract-automorphism-group-Set)
+--   preserves-mul-map-compute-abstract-automorphism-group-Set x y =
+--     ( ap
+--       ( λ P → eq-pair-Σ P (eq-is-prop is-prop-type-trunc-Prop))
+--       ( ap
+--         ( λ Q → eq-pair-Σ Q (eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--         ( ( ap
+--           ( eq-equiv (type-Set (raise-Set l2 X)) (type-Set (raise-Set l2 X)))
+--           ( ( ap
+--             ( λ e → equiv-raise l2 (type-Set X) ∘e (e ∘e inv-equiv (equiv-raise l2 (type-Set X))))
+--             ( distributive-inv-comp-equiv y x ∙
+--               (eq-htpy-equiv refl-htpy ∙
+--                 ( ap
+--                   ( λ e → inv-equiv y ∘e (e ∘e inv-equiv x))
+--                   ( inv (left-inverse-law-equiv (equiv-raise l2 (type-Set X)))))))) ∙
+--             ( eq-htpy-equiv refl-htpy))) ∙
+--           ( inv
+--             ( comp-eq-equiv
+--               ( type-Set (raise-Set l2 X))
+--               ( type-Set (raise-Set l2 X))
+--               ( type-Set (raise-Set l2 X))
+--               ( equiv-raise l2 (type-Set X) ∘e (inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X))))
+--               ( equiv-raise l2 (type-Set X) ∘e (inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X))))))) ∙
+--         ( ( ap
+--           ( λ w →
+--             eq-pair-Σ
+--               ( ( eq-equiv
+--                 ( type-Set (raise-Set l2 X))
+--                 ( type-Set (raise-Set l2 X))
+--                 ( equiv-raise l2 (type-Set X) ∘e (inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X))))) ∙
+--                 ( eq-equiv
+--                   ( type-Set (raise-Set l2 X))
+--                   ( type-Set (raise-Set l2 X))
+--                   ( equiv-raise l2 (type-Set X) ∘e
+--                     ( inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X))))))
+--               ( w))
+--           ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set (raise-Set l2 X)) _ _)))) ∙
+--           ( inv
+--             ( comp-eq-pair-Σ
+--               ( pr2 (raise-Set l2 X))
+--               ( pr2 (raise-Set l2 X))
+--               ( pr2 (raise-Set l2 X))
+--               ( eq-equiv
+--                 ( type-Set (raise-Set l2 X))
+--                 ( type-Set (raise-Set l2 X))
+--                 ( equiv-raise l2 (type-Set X) ∘e
+--                   ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--               ( eq-equiv
+--                 ( type-Set (raise-Set l2 X))
+--                 ( type-Set (raise-Set l2 X))
+--                 ( equiv-raise l2 (type-Set X) ∘e
+--                   ( inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))
+--               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))))))) ∙
+--       ( ap
+--         ( λ w →
+--           eq-pair-Σ
+--             ( ( eq-pair-Σ
+--               ( eq-equiv
+--                 ( type-Set (raise-Set l2 X))
+--                 ( type-Set (raise-Set l2 X))
+--                 ( equiv-raise l2 (type-Set X) ∘e
+--                   ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))) ∙
+--                eq-pair-Σ
+--                 ( eq-equiv
+--                   (type-Set (raise-Set l2 X))
+--                   (type-Set (raise-Set l2 X))
+--                   ( equiv-raise l2 (type-Set X) ∘e
+--                     (inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--                 ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--             ( w))
+--         ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ (unit-trunc-Prop refl)))) ∙
+--          inv
+--           ( comp-eq-pair-Σ
+--             ( unit-trunc-Prop refl)
+--             ( unit-trunc-Prop refl)
+--             ( unit-trunc-Prop refl)
+--             ( eq-pair-Σ
+--               ( eq-equiv
+--                 ( type-Set (raise-Set l2 X))
+--                 ( type-Set (raise-Set l2 X))
+--                 ( equiv-raise l2 (type-Set X) ∘e
+--                   (inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--             ( eq-pair-Σ
+--               ( eq-equiv
+--                 ( type-Set (raise-Set l2 X))
+--                 ( type-Set (raise-Set l2 X))
+--                 ( equiv-raise l2 (type-Set X) ∘e
+--                   (inv-equiv y ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--               ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--             ( eq-is-prop is-prop-type-trunc-Prop)
+--             ( eq-is-prop is-prop-type-trunc-Prop)))
+    
+--   hom-symmetric-group-abstract-automorphism-group-Set :
+--     type-hom-Group
+--       ( symmetric-Group X)
+--       ( abstract-group-Concrete-Group
+--         ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--   pr1 hom-symmetric-group-abstract-automorphism-group-Set =
+--     map-compute-abstract-automorphism-group-Set 
+--   pr2 hom-symmetric-group-abstract-automorphism-group-Set =
+--     preserves-mul-map-compute-abstract-automorphism-group-Set
+    
+--   hom-inv-symmetric-group-abstract-automorphism-group-Set :
+--     type-hom-Group
+--       ( abstract-group-Concrete-Group
+--         ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--       ( symmetric-Group X)
+--   pr1 hom-inv-symmetric-group-abstract-automorphism-group-Set x =
+--     inv-equiv
+--       ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--         ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
+--   pr2 hom-inv-symmetric-group-abstract-automorphism-group-Set x y = 
+--     ( ap
+--       ( inv-equiv)
+--       { y =
+--         ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e equiv-raise l2 (type-Set X))) ∘e
+--           ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--             ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))}
+--       ( ( ap
+--         ( λ e → inv-equiv (equiv-raise l2 (type-Set X)) ∘e (e ∘e equiv-raise l2 (type-Set X)))
+--         ( ( ap
+--           ( equiv-eq)
+--           ( ( ap (λ p → pr1 (pair-eq-Σ p)) (inv (comp-pair-eq-Σ x y))) ∙
+--             ( inv (comp-pair-eq-Σ (pr1 (pair-eq-Σ x)) (pr1 (pair-eq-Σ y)))))) ∙
+--           ( ( inv
+--             ( comp-equiv-eq
+--               ( pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x))))
+--               ( pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))))) ∙
+--             ( ( eq-htpy-equiv refl-htpy) ∙
+--               ( ap
+--                 ( λ e →
+--                   equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e
+--                     (e ∘e equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x))))))
+--                 ( inv (right-inverse-law-equiv (equiv-raise l2 (type-Set X))))))))) ∙
+--         ( eq-htpy-equiv refl-htpy))) ∙
+--       ( distributive-inv-comp-equiv
+--         ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X)))
+--         ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ y)))) ∘e equiv-raise l2 (type-Set X))))
+
+--   is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set :
+--     Id
+--       ( comp-hom-Group
+--         ( abstract-group-Concrete-Group
+--           ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--         ( symmetric-Group X)
+--         ( abstract-group-Concrete-Group
+--           ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--         ( hom-symmetric-group-abstract-automorphism-group-Set)
+--         ( hom-inv-symmetric-group-abstract-automorphism-group-Set))
+--       ( id-hom-Group
+--         ( abstract-group-Concrete-Group
+--           ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))))
+--   is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set = 
+--     eq-pair-Σ
+--       ( eq-htpy
+--         ( λ x →
+--           ( ap
+--             ( λ w →
+--               eq-pair-Σ
+--                 ( w)
+--                 ( eq-is-prop is-prop-type-trunc-Prop))
+--             ( ( ap
+--               (λ w →
+--                 eq-pair-Σ w (eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--               ( ( ap
+--                 ( eq-equiv (type-Set (raise-Set l2 X)) (type-Set (raise-Set l2 X)))
+--                 ( ( ap
+--                   ( λ e → equiv-raise l2 (type-Set X) ∘e (e ∘e inv-equiv (equiv-raise l2 (type-Set X))))
+--                   ( inv-inv-equiv
+--                     ( inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--                       (equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e equiv-raise l2 (type-Set X))))) ∙
+--                   ( ( eq-htpy-equiv refl-htpy) ∙
+--                     ( ( ap
+--                       ( λ e →
+--                         e ∘e
+--                           ( equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e
+--                             ( equiv-raise l2 (type-Set X) ∘e
+--                               inv-equiv (equiv-raise l2 (type-Set X)))))
+--                       ( right-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
+--                       ( ( ap
+--                         ( λ e → id-equiv ∘e (equiv-eq (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))) ∘e e))
+--                         ( right-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
+--                         ( eq-htpy-equiv refl-htpy)))))) ∙
+--                 ( ap
+--                   ( λ e → map-equiv e (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))))
+--                   ( left-inverse-law-equiv equiv-univalence)))) ∙
+--               ( ( ap
+--                 ( eq-pair-Σ (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ x)))))
+--                 { y = pr2 (pair-eq-Σ (pr1 (pair-eq-Σ x)))}
+--                 ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set (raise-Set l2 X)) _ _)))) ∙
+--                 ( issec-pair-eq-Σ (raise-Set l2 X) (raise-Set l2 X) (pr1 (pair-eq-Σ x))))) ∙
+--             ( ( ap
+--               ( eq-pair-Σ (pr1 (pair-eq-Σ x)))
+--               { y = pr2 (pair-eq-Σ x)}
+--               ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+--               ( issec-pair-eq-Σ
+--                 ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
+--                 ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
+--                 ( x))))))
+--       ( eq-is-prop
+--         ( is-prop-preserves-mul-Semigroup
+--           ( semigroup-Group
+--             ( abstract-group-Concrete-Group
+--               ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))))
+--           ( semigroup-Group
+--             ( abstract-group-Concrete-Group
+--               ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X))))
+--           ( id)))
+
+--   is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set :
+--     Id
+--       ( comp-hom-Group
+--         ( symmetric-Group X)
+--         ( abstract-group-Concrete-Group
+--           ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--         ( symmetric-Group X)
+--         ( hom-inv-symmetric-group-abstract-automorphism-group-Set)
+--         ( hom-symmetric-group-abstract-automorphism-group-Set))
+--       ( id-hom-Group (symmetric-Group X))
+--   is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set = 
+--     eq-pair-Σ
+--       ( eq-htpy
+--         ( λ x →
+--           ( ap
+--             ( inv-equiv)
+--             { y = inv-equiv x}
+--             ( ( ap
+--               ( λ e →
+--                 ( inv-equiv (equiv-raise l2 (type-Set X))) ∘e
+--                   ( e ∘e equiv-raise l2 (type-Set X)))
+--               ( ( ap
+--                 ( equiv-eq)
+--                 ( ap
+--                   ( λ w → pr1 (pair-eq-Σ w))
+--                   ( ap pr1
+--                     ( isretr-pair-eq-Σ
+--                       ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
+--                       ( pair (raise-Set l2 X) (unit-trunc-Prop refl))
+--                       ( pair
+--                         ( eq-pair-Σ
+--                           ( eq-equiv
+--                             ( type-Set (raise-Set l2 X))
+--                             ( type-Set (raise-Set l2 X))
+--                             ( equiv-raise l2 (type-Set X) ∘e
+--                               ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--                           ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X)))))
+--                         ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
+--                     ( ap pr1
+--                       ( isretr-pair-eq-Σ (raise-Set l2 X) (raise-Set l2 X)
+--                         ( pair
+--                           ( eq-equiv
+--                             ( type-Set (raise-Set l2 X))
+--                             ( type-Set (raise-Set l2 X))
+--                             ( equiv-raise l2 (type-Set X) ∘e
+--                               ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--                           ( eq-is-prop (is-prop-is-set (type-Set (raise-Set l2 X))))))))) ∙
+--                 ( ap
+--                   ( λ e →
+--                     map-equiv
+--                       ( e)
+--                       ( equiv-raise l2 (type-Set X) ∘e
+--                         ( inv-equiv x ∘e inv-equiv (equiv-raise l2 (type-Set X)))))
+--                   ( right-inverse-law-equiv equiv-univalence)))) ∙
+--               ( eq-htpy-equiv refl-htpy ∙
+--                 ( ( ap
+--                   ( λ e →
+--                     e ∘e
+--                       (inv-equiv x ∘e
+--                         (inv-equiv (equiv-raise l2 (type-Set X)) ∘e
+--                           equiv-raise l2 (type-Set X))))
+--                    ( left-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
+--                    ( ( ap
+--                      ( λ e → id-equiv ∘e (inv-equiv x ∘e e))
+--                      ( left-inverse-law-equiv (equiv-raise l2 (type-Set X)))) ∙
+--                      ( eq-htpy-equiv refl-htpy)))))) ∙
+--             ( inv-inv-equiv x)))
+--       ( eq-is-prop
+--         ( is-prop-preserves-mul-Semigroup
+--           ( semigroup-Group (symmetric-Group X))
+--           ( semigroup-Group (symmetric-Group X))
+--           ( id)))
+
+--   iso-symmetric-group-abstract-automorphism-group-Set :
+--     type-iso-Group
+--       ( symmetric-Group X)
+--       ( abstract-group-Concrete-Group
+--         ( Automorphism-Group (Set-1-Type (l1 ⊔ l2)) (raise-Set l2 X)))
+--   pr1 iso-symmetric-group-abstract-automorphism-group-Set =
+--     hom-symmetric-group-abstract-automorphism-group-Set
+--   pr1 (pr2 iso-symmetric-group-abstract-automorphism-group-Set) =
+--     hom-inv-symmetric-group-abstract-automorphism-group-Set
+--   pr1 (pr2 (pr2 iso-symmetric-group-abstract-automorphism-group-Set)) =
+--     is-sec-hom-inv-symmetric-group-abstract-automorphism-group-Set
+--   pr2 (pr2 (pr2 iso-symmetric-group-abstract-automorphism-group-Set)) =
+--     is-retr-hom-inv-symmetric-group-abstract-automorphism-group-Set
+-- ```
