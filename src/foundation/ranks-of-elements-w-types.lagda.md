@@ -21,7 +21,7 @@ open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( unit-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; prod-Prop)
+  ( Prop; Π-Prop; type-Prop; prod-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 open import foundation.w-types using (𝕎; tree-𝕎; constant-𝕎; is-constant-𝕎)
 ```
@@ -39,14 +39,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  _≼-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → UU-Prop (l1 ⊔ l2)
+  _≼-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → Prop (l1 ⊔ l2)
   (tree-𝕎 x α) ≼-𝕎-Prop (tree-𝕎 y β) =
     Π-Prop (B x) (λ b → exists-Prop (B y) (λ c → (α b) ≼-𝕎-Prop (β c)))
 
   _≼-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ≼-𝕎 y = type-Prop (x ≼-𝕎-Prop y)
 
-  _≈-𝕎-Prop_ : (x y : 𝕎 A B) → UU-Prop (l1 ⊔ l2)
+  _≈-𝕎-Prop_ : (x y : 𝕎 A B) → Prop (l1 ⊔ l2)
   x ≈-𝕎-Prop y = prod-Prop (x ≼-𝕎-Prop y) (y ≼-𝕎-Prop x)
 
   _≈-𝕎_ : (x y : 𝕎 A B) → UU (l1 ⊔ l2)
@@ -66,14 +66,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  _≺-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → UU-Prop (l1 ⊔ l2)
+  _≺-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → Prop (l1 ⊔ l2)
   x ≺-𝕎-Prop y =
     exists-Prop (Σ (𝕎 A B) (λ w → w ∈-𝕎 y)) (λ t → x ≼-𝕎-Prop (pr1 t))
 
   _≺-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ≺-𝕎 y = type-Prop (x ≺-𝕎-Prop y)
 
-  in-lower-set-≺-𝕎-Prop : (x y : 𝕎 A B) → UU-Prop (l1 ⊔ l2)
+  in-lower-set-≺-𝕎-Prop : (x y : 𝕎 A B) → Prop (l1 ⊔ l2)
   in-lower-set-≺-𝕎-Prop x y = y ≺-𝕎-Prop x
 
   in-lower-set-≺-𝕎 : (x y : 𝕎 A B) → UU (l1 ⊔ l2)
@@ -90,7 +90,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  _strong-≼-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → UU-Prop (l1 ⊔ l2)
+  _strong-≼-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → Prop (l1 ⊔ l2)
   x strong-≼-𝕎-Prop y =
     Π-Prop
       ( 𝕎 A B)

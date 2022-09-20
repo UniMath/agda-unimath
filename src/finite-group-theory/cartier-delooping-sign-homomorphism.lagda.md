@@ -31,9 +31,9 @@ open import foundation.commuting-squares using (coherence-square)
 open import foundation.contractible-types using (is-contr; center; eq-is-contr)
 open import foundation.coproduct-types using (inl; inr; neq-inr-inl)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop)
+  ( decidable-Prop; type-decidable-Prop; is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-prop-is-decidable)
+  ( is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using
@@ -74,8 +74,8 @@ open import foundation.reflecting-maps-equivalence-relations using
 open import foundation.raising-universe-levels using
   ( raise-Set; equiv-raise; raise)
 open import foundation.sets using
-  ( is-set; Id-Prop; UU-Set; type-Set; is-set-type-Set; is-prop-is-set;
-    is-set-equiv; is-1-type-UU-Set)
+  ( is-set; Id-Prop; Set; type-Set; is-set-type-Set; is-prop-is-set;
+    is-set-equiv; is-1-type-Set)
 open import foundation.truncated-types using (is-trunc-Id)
 open import foundation.unit-type using (star)
 open import foundation.univalence using
@@ -86,11 +86,10 @@ open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
 open import group-theory.concrete-groups using
-  ( hom-Concrete-Group; classifying-type-Concrete-Group;
-    abstract-group-Concrete-Group; hom-group-hom-Concrete-Group;
-    map-hom-Concrete-Group)
+  ( classifying-type-Concrete-Group; abstract-group-Concrete-Group)
 open import group-theory.groups using
   ( set-Group; type-Group; mul-Group; semigroup-Group)
+open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-generated-subgroups using
   ( restriction-generating-subset-Group;
     eq-map-restriction-generating-subset-Group)
@@ -214,7 +213,7 @@ module _
     pr1 (raise-UU-Fin-Fin n) = raise l (Fin n)
     pr2 (raise-UU-Fin-Fin n) = unit-trunc-Prop (equiv-raise l (Fin n))
 
-    raise-Fin-Set : (n : ℕ) → UU-Set l
+    raise-Fin-Set : (n : ℕ) → Set l
     raise-Fin-Set n = raise-Set l (Fin-Set n)
 
     orientation-loop-Fin : (n : ℕ) →
@@ -246,7 +245,7 @@ module _
     map-orientation-loop-Fin n p =
       map-equiv (orientation-loop-Fin n p)
 
-    quotient-sign-set-Fin : (n : ℕ) → UU-Set (lsuc l)
+    quotient-sign-set-Fin : (n : ℕ) → Set (lsuc l)
     quotient-sign-set-Fin n =
       quotient-sign-Set n (raise-UU-Fin-Fin n)
 

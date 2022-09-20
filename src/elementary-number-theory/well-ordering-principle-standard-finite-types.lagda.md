@@ -23,7 +23,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.coproduct-types using (inl; inr; ind-coprod)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; is-in-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype-subtype-decidable-subtype; type-decidable-subtype)
+    is-decidable-subtype-decidable-subtype; type-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-iff)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -45,7 +45,7 @@ open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
+  ( is-prop; is-prop-Π; is-prop-function-type; Prop; all-elements-equal;
     prod-Prop; is-prop-all-elements-equal; type-Prop)
 open import foundation.subtypes using
   ( subtype; eq-type-subtype; type-subtype; is-in-subtype)
@@ -125,7 +125,7 @@ abstract
     is-prop-Π (λ y → is-prop-function-type (is-prop-leq-Fin k x y))
 
   is-lower-bound-fin-Prop :
-    {l : Level} (k : ℕ) (P : Fin k → UU l) (x : Fin k) → UU-Prop l
+    {l : Level} (k : ℕ) (P : Fin k → UU l) (x : Fin k) → Prop l
   pr1 (is-lower-bound-fin-Prop k P x) = is-lower-bound-Fin k P x
   pr2 (is-lower-bound-fin-Prop k P x) = is-prop-is-lower-bound-Fin k x
 
@@ -152,7 +152,7 @@ abstract
     is-prop-all-elements-equal (all-elements-equal-minimal-element-Fin k P)
 
 minimal-element-Fin-Prop :
-  {l : Level} (k : ℕ) (P : subtype l (Fin k)) → UU-Prop l
+  {l : Level} (k : ℕ) (P : subtype l (Fin k)) → Prop l
 pr1 (minimal-element-Fin-Prop k P) = minimal-element-Fin k (is-in-subtype P)
 pr2 (minimal-element-Fin-Prop k P) = is-prop-minimal-element-Fin k P
 
@@ -201,7 +201,7 @@ well-ordering-principle-∃-Fin k P H =
   apply-universal-property-trunc-Prop H
     ( minimal-element-Fin-Prop k (subtype-decidable-subtype P))
     ( well-ordering-principle-Σ-Fin k
-      ( is-decidable-subtype-subtype-decidable-subtype P))
+      ( is-decidable-subtype-decidable-subtype P))
 ```
 
 ### Hilbert's epsilon operator for decidable subtypes of standard finite types
@@ -225,11 +225,11 @@ well-ordering-principle-∃-Fin k P H =
           ( λ x → tr (is-in-decidable-subtype P) (inv (issec-nat-Fin k x))))
         ( t)))
   where
-  Q : ℕ → UU-Prop l
+  Q : ℕ → Prop l
   Q n = subtype-decidable-subtype P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
   is-decidable-Q n =
-    is-decidable-subtype-subtype-decidable-subtype P (mod-succ-ℕ k n)
+    is-decidable-subtype-decidable-subtype P (mod-succ-ℕ k n)
   ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
   ε-operator-total-Q =
     ε-operator-decidable-subtype-ℕ Q is-decidable-Q

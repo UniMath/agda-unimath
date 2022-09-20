@@ -8,7 +8,7 @@ module order-theory.least-upper-bounds-posets where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
+  ( Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
     is-prop-all-elements-equal; prod-Prop; Π-Prop; function-Prop)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -31,7 +31,7 @@ module _
   where
 
   is-binary-upper-bound-poset-Prop :
-    (x y z : element-Poset P) → UU-Prop l2
+    (x y z : element-Poset P) → Prop l2
   is-binary-upper-bound-poset-Prop x y z =
     prod-Prop (leq-poset-Prop P x z) (leq-poset-Prop P y z)
 
@@ -46,7 +46,7 @@ module _
     is-prop-type-Prop (is-binary-upper-bound-poset-Prop x y z)
 
   is-least-binary-upper-bound-poset-Prop :
-    (x y z : element-Poset P) → UU-Prop (l1 ⊔ l2)
+    (x y z : element-Poset P) → Prop (l1 ⊔ l2)
   is-least-binary-upper-bound-poset-Prop x y z =
     prod-Prop
       ( is-binary-upper-bound-poset-Prop x y z)
@@ -90,7 +90,7 @@ module _
       ( all-elements-equal-has-least-binary-upper-bound-Poset x y)
 
   has-least-binary-upper-bound-poset-Prop :
-    (x y : element-Poset P) → UU-Prop (l1 ⊔ l2)
+    (x y : element-Poset P) → Prop (l1 ⊔ l2)
   pr1 (has-least-binary-upper-bound-poset-Prop x y) =
     has-least-binary-upper-bound-Poset x y
   pr2 (has-least-binary-upper-bound-poset-Prop x y) =
@@ -106,7 +106,7 @@ module _
 
   is-upper-bound-family-poset-Prop :
     {l : Level} {I : UU l} → (I → element-Poset P) → element-Poset P →
-    UU-Prop (l2 ⊔ l)
+    Prop (l2 ⊔ l)
   is-upper-bound-family-poset-Prop {l} {I} f z =
     Π-Prop I (λ i → leq-poset-Prop P (f i) z)
 
@@ -124,7 +124,7 @@ module _
 
   is-least-upper-bound-family-poset-Prop :
     {l : Level} {I : UU l} (f : I → element-Poset P) (z : element-Poset P) →
-    UU-Prop (l1 ⊔ l2 ⊔ l)
+    Prop (l1 ⊔ l2 ⊔ l)
   is-least-upper-bound-family-poset-Prop f z =
     prod-Prop
       ( is-upper-bound-family-poset-Prop f z)
@@ -171,7 +171,7 @@ module _
       ( all-elements-equal-has-least-upper-bound-family-Poset f)
 
   has-least-upper-bound-family-poset-Prop :
-    {l : Level} {I : UU l} (f : I → element-Poset P) → UU-Prop (l1 ⊔ l2 ⊔ l)
+    {l : Level} {I : UU l} (f : I → element-Poset P) → Prop (l1 ⊔ l2 ⊔ l)
   pr1 (has-least-upper-bound-family-poset-Prop f) =
     has-least-upper-bound-family-Poset f
   pr2 (has-least-upper-bound-family-poset-Prop f) =

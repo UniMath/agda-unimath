@@ -20,7 +20,7 @@ open import foundation.injective-maps using (is-injective-is-equiv)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel; eq-htpy-reflecting-map-Eq-Rel;
     map-reflecting-map-Eq-Rel)
-open import foundation.sets using (UU-Set; type-Set; type-hom-Set)
+open import foundation.sets using (Set; type-Set; type-hom-Set)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.universal-property-set-quotients using
@@ -45,9 +45,9 @@ The universal property of set quotients implies that set quotients are uniquely 
 ```agda
 precomp-comp-Set-Quotient :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
-  (C : UU-Set l4) (g : type-hom-Set B C)
-  (D : UU-Set l5) (h : type-hom-Set C D) →
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
+  (C : Set l4) (g : type-hom-Set B C)
+  (D : Set l5) (h : type-hom-Set C D) →
   ( precomp-Set-Quotient R B f D (h ∘ g)) ＝
   ( precomp-Set-Quotient R C (precomp-Set-Quotient R B f C g) D h)
 precomp-comp-Set-Quotient R B f C g D h =
@@ -58,8 +58,8 @@ precomp-comp-Set-Quotient R B f C g D h =
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
-  (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
+  (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
   {h : type-Set B → type-Set C}
   (H : (h ∘ map-reflecting-map-Eq-Rel R f) ~ map-reflecting-map-Eq-Rel R g)
   where
@@ -145,9 +145,9 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : UU-Set l3) (f : reflecting-map-Eq-Rel R (type-Set B)) 
+  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B)) 
   (Uf : {l : Level} → is-set-quotient l R B f)
-  (C : UU-Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
+  (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
   (Ug : {l : Level} → is-set-quotient l R C g)
   where
 

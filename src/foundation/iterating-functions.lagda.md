@@ -30,7 +30,7 @@ open import foundation.homotopies using (_~_; refl-htpy; _·l_)
 open import foundation.identity-types using
   ( _＝_; refl; _∙_; inv; ap; right-unit; ap-comp)
 open import foundation.involutions using (is-involution)
-open import foundation.sets using (UU-Set; type-Set)
+open import foundation.sets using (Set; type-Set)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (Level; UU)
 
@@ -139,7 +139,7 @@ module _
       ( inv (htpy-eq (iterate-succ-ℕ k (iterate l) f) x)))
       
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
   
   iterative-Monoid-Action : Monoid-Action l ℕ*-Monoid

@@ -34,6 +34,8 @@ is-not-contractible X = ¬ (is-contr X)
 
 ### A positive formulation of being noncontractible
 
+Noncontractibility is a more positive way to prove that a type is not contractible. When `A` is noncontractible in the following sense, then it is apart from the unit type.
+
 ```agda
 is-noncontractible' : {l : Level} (A : UU l) → ℕ → UU l
 is-noncontractible' A zero-ℕ = is-empty A

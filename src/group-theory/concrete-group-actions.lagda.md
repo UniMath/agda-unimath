@@ -31,13 +31,13 @@ module _
   where
   
   action-Concrete-Group : UU (l1 ⊔ lsuc l2)
-  action-Concrete-Group = classifying-type-Concrete-Group G → UU-Set l2
+  action-Concrete-Group = classifying-type-Concrete-Group G → Set l2
 
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
 
-  set-action-Concrete-Group : UU-Set l2
+  set-action-Concrete-Group : Set l2
   set-action-Concrete-Group = X (shape-Concrete-Group G)
 
   type-action-Concrete-Group : UU l2

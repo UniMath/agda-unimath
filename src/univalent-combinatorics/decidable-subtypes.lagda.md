@@ -43,7 +43,7 @@ module _
 
   is-decidable-subset-𝔽 : is-decidable-subtype subtype-subset-𝔽
   is-decidable-subset-𝔽 =
-    is-decidable-subtype-subtype-decidable-subtype P
+    is-decidable-subtype-decidable-subtype P
 
   is-in-subset-𝔽 : type-𝔽 X → UU l2
   is-in-subset-𝔽 = is-in-decidable-subtype P
@@ -154,7 +154,7 @@ is-set-type-subset-𝔽 :
 is-set-type-subset-𝔽 X P = is-set-type-decidable-subtype P (is-set-type-𝔽 X)
 
 set-subset-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (X : 𝔽 l1) (P : subset-𝔽 l2 X) → Set (l1 ⊔ l2)
 set-subset-𝔽 X P = set-decidable-subset (set-𝔽 X) P
 ```
 

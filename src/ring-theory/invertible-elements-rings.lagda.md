@@ -11,7 +11,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation.universe-levels using (Level; UU)
 
 open import group-theory.invertible-elements-monoids
@@ -43,7 +43,7 @@ module _
   has-two-sided-inverse-Ring x =
     ( has-left-inverse-Ring x) × (has-right-inverse-Ring x)
 
-  is-invertible-element-ring-Prop : type-Ring R → UU-Prop l
+  is-invertible-element-ring-Prop : type-Ring R → Prop l
   is-invertible-element-ring-Prop =
     is-invertible-element-monoid-Prop (multiplicative-monoid-Ring R)
     

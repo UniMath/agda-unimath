@@ -12,13 +12,13 @@ open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
 open import foundation-core.functions using (_∘_; id)
-open import foundation-core.sets using (is-set; UU-Set)
+open import foundation-core.sets using (is-set; Set)
 open import foundation-core.truncated-types using
   ( is-trunc; Truncated-Type)
 open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
 open import foundation-core.universe-levels using (Level; UU; lzero)
 
-open import foundation.propositions using (is-prop; UU-Prop; is-trunc-is-prop)
+open import foundation.propositions using (is-prop; Prop; is-trunc-is-prop)
 ```
 
 ## Idea
@@ -93,7 +93,7 @@ abstract
   is-prop-empty : is-prop empty
   is-prop-empty ()
 
-empty-Prop : UU-Prop lzero
+empty-Prop : Prop lzero
 pr1 empty-Prop = empty
 pr2 empty-Prop = is-prop-empty
 ```
@@ -104,7 +104,7 @@ pr2 empty-Prop = is-prop-empty
 is-set-empty : is-set empty
 is-set-empty ()
 
-empty-Set : UU-Set lzero
+empty-Set : Set lzero
 pr1 empty-Set = empty
 pr2 empty-Set = is-set-empty
 ```

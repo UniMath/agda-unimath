@@ -32,13 +32,13 @@ open import foundation-core.homotopies using (_~_; refl-htpy; _∙h_; _·r_)
 open import foundation-core.path-split-maps using
   ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
 open import foundation-core.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation-core.pullbacks using
   ( is-pullback; is-pullback-is-fiberwise-equiv-map-fib-cone;
     is-pullback-swap-cone')
 open import foundation-core.retractions using (retr)
 open import foundation-core.sections using (sec)
-open import foundation-core.sets using (UU-Set; type-Set; is-set)
+open import foundation-core.sets using (Set; type-Set; is-set)
 open import foundation-core.subtypes using
   ( is-emb-inclusion-subtype; equiv-subtype-equiv)
 open import foundation-core.truncated-types using
@@ -237,17 +237,17 @@ module _
 
 ```agda
 is-equiv-is-equiv-precomp-Prop :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   (f : type-Prop P → type-Prop Q) →
-  ({l : Level} (R : UU-Prop l) → is-equiv (precomp f (type-Prop R))) →
+  ({l : Level} (R : Prop l) → is-equiv (precomp f (type-Prop R))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Prop P Q f H =
   is-equiv-is-equiv-precomp-subuniverse id (λ l → is-prop) P Q f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
   (f : type-Set A → type-Set B) →
-  ({l : Level} (C : UU-Set l) → is-equiv (precomp f (type-Set C))) →
+  ({l : Level} (C : Set l) → is-equiv (precomp f (type-Set C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Set A B f H =
   is-equiv-is-equiv-precomp-subuniverse id (λ l → is-set) A B f (λ l → H {l})
@@ -313,7 +313,7 @@ module _
     is-property-is-equiv f H =
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
-  is-equiv-Prop : (f : A → B) → UU-Prop (l1 ⊔ l2)
+  is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
   pr1 (is-equiv-Prop f) = is-equiv f
   pr2 (is-equiv-Prop f) = is-property-is-equiv f
 

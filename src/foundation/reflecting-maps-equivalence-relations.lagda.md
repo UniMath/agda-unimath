@@ -21,8 +21,8 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation-core.identity-types using (_＝_; refl)
 open import foundation-core.propositions using
-  ( is-prop; is-prop-Π'; is-prop-function-type; UU-Prop)
-open import foundation-core.sets using (UU-Set; type-Set; is-set-type-Set)
+  ( is-prop; is-prop-Π'; is-prop-function-type; Prop)
+open import foundation-core.sets using (Set; type-Set; is-set-type-Set)
 open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
@@ -58,7 +58,7 @@ module _
 
   abstract
     is-prop-reflects-Eq-Rel :
-      {l3 : Level} (B : UU-Set l3) (f : A → type-Set B) →
+      {l3 : Level} (B : Set l3) (f : A → type-Set B) →
       is-prop (reflects-Eq-Rel f)
     is-prop-reflects-Eq-Rel B f =
       is-prop-Π'
@@ -68,7 +68,7 @@ module _
               is-prop-function-type (is-set-type-Set B (f x) (f y))))
 
   reflects-Eq-Rel-Prop :
-    {l3 : Level} (B : UU-Set l3) (f : A → type-Set B) → UU-Prop (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (B : Set l3) (f : A → type-Set B) → Prop (l1 ⊔ l2 ⊔ l3)
   pr1 (reflects-Eq-Rel-Prop B f) = reflects-Eq-Rel f
   pr2 (reflects-Eq-Rel-Prop B f) = is-prop-reflects-Eq-Rel B f
 ```
@@ -79,7 +79,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (q : A → type-Set B)
   where
 
@@ -99,7 +99,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : UU-Set l3)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Rel l2 A) (B : Set l3)
   (f : reflecting-map-Eq-Rel R (type-Set B))
   where
 

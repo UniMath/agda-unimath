@@ -15,7 +15,7 @@ open import category-theory.isomorphisms-precategories using
     id-iso-Precat; iso-eq-Precat)
 open import foundation.identity-types using (_＝_)
 open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.universe-levels using (UU; Level)
 ```
 
@@ -83,6 +83,6 @@ module _
   is-set-iso-Cat : (x y : obj-Cat C) → is-set (iso-Cat C x y)
   is-set-iso-Cat = is-set-iso-Precat (precat-Cat C)
 
-  iso-Cat-Set : (x y : obj-Cat C) → UU-Set l2
+  iso-Cat-Set : (x y : obj-Cat C) → Set l2
   iso-Cat-Set = iso-Precat-Set (precat-Cat C)
 ```

@@ -15,7 +15,7 @@ open import foundation.functoriality-function-types using
 open import foundation.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; is-prop; type-Prop; is-prop-type-Prop)
+  ( Prop; Π-Prop; is-prop; type-Prop; is-prop-type-Prop)
 open import foundation.truncation-levels using (neg-one-𝕋)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
@@ -30,7 +30,7 @@ A function `f : A → B` is a monomorphism if whenever we have two functions `g 
 module _ {l1 l2 : Level} (l3 : Level)
   {A : UU l1} {B : UU l2} (f : A → B) where
 
-  is-mono-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-mono-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Prop = Π-Prop (UU l3) λ X → is-emb-Prop (postcomp X f)
 
   is-mono : UU (l1 ⊔ l2 ⊔ lsuc l3)

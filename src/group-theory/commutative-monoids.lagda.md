@@ -41,7 +41,7 @@ module _
   semigroup-Commutative-Monoid : Semigroup l
   semigroup-Commutative-Monoid = semigroup-Monoid monoid-Commutative-Monoid
 
-  set-Commutative-Monoid : UU-Set l
+  set-Commutative-Monoid : Set l
   set-Commutative-Monoid = set-Monoid monoid-Commutative-Monoid
 
   type-Commutative-Monoid : UU l

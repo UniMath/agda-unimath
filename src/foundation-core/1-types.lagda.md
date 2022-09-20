@@ -10,8 +10,8 @@ module foundation-core.1-types where
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; UU-Prop)
-open import foundation-core.sets using (UU-Set)
+open import foundation-core.propositions using (is-prop; Prop)
+open import foundation-core.sets using (Set)
 open import foundation-core.truncated-types using
   ( is-trunc; truncated-type-succ-Truncated-Type; is-trunc-is-equiv;
     is-trunc-equiv; is-trunc-is-equiv'; is-trunc-equiv')
@@ -27,15 +27,15 @@ A 1-type is a type that is 1-truncated.
 is-1-type : {l : Level} → UU l → UU l
 is-1-type = is-trunc one-𝕋
 
-UU-1-Type : (l : Level) → UU (lsuc l)
-UU-1-Type l = Σ (UU l) is-1-type
+1-Type : (l : Level) → UU (lsuc l)
+1-Type l = Σ (UU l) is-1-type
 
-type-1-Type : {l : Level} → UU-1-Type l → UU l
+type-1-Type : {l : Level} → 1-Type l → UU l
 type-1-Type = pr1
 
 abstract
   is-1-type-type-1-Type :
-    {l : Level} (A : UU-1-Type l) → is-1-type (type-1-Type A)
+    {l : Level} (A : 1-Type l) → is-1-type (type-1-Type A)
   is-1-type-type-1-Type = pr2
 ```
 
@@ -44,7 +44,7 @@ abstract
 ### The identity type of a 1-type takes values in sets
 
 ```agda
-Id-Set : {l : Level} (X : UU-1-Type l) (x y : type-1-Type X) → UU-Set l
+Id-Set : {l : Level} (X : 1-Type l) (x y : type-1-Type X) → Set l
 pr1 (Id-Set X x y) = (x ＝ y)
 pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
 ```
@@ -53,7 +53,7 @@ pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
 
 ```agda
 1-type-Set :
-  {l : Level} → UU-Set l → UU-1-Type l
+  {l : Level} → Set l → 1-Type l
 1-type-Set A = truncated-type-succ-Truncated-Type zero-𝕋 A
 ```
 

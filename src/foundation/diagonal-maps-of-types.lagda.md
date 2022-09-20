@@ -101,12 +101,12 @@ module _
       is-faithful-is-0-map (is-0-map-diagonal-is-1-type H)
 
 diagonal-emb :
-  {l : Level} (A : UU-Set l) → (type-Set A) ↪ ((type-Set A) × (type-Set A))
+  {l : Level} (A : Set l) → (type-Set A) ↪ ((type-Set A) × (type-Set A))
 pr1 (diagonal-emb A) = diagonal (type-Set A)
 pr2 (diagonal-emb A) = is-emb-diagonal-is-set (is-set-type-Set A)
 
 diagonal-faithful-map :
-  {l : Level} (A : UU-1-Type l) →
+  {l : Level} (A : 1-Type l) →
   faithful-map (type-1-Type A) (type-1-Type A × type-1-Type A)
 pr1 (diagonal-faithful-map A) = diagonal (type-1-Type A)
 pr2 (diagonal-faithful-map A) =

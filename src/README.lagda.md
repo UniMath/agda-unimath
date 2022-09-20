@@ -225,6 +225,7 @@ open import foundation.commutative-operations
 open import foundation.commuting-cubes
 open import foundation.commuting-squares
 open import foundation.complements
+open import foundation.complements-subtypes
 open import foundation.cones-pullbacks
 open import foundation.conjunction
 open import foundation.connected-components-universes
@@ -285,6 +286,7 @@ open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.full-subtypes
 open import foundation.function-extensionality
+open import foundation.functional-correspondences
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -305,6 +307,7 @@ open import foundation.identity-systems
 open import foundation.identity-truncated-types
 open import foundation.identity-types
 open import foundation.images
+open import foundation.images-subtypes
 open import foundation.impredicative-encodings
 open import foundation.impredicative-universes
 open import foundation.indexed-w-types
@@ -348,9 +351,11 @@ open import foundation.path-algebra
 open import foundation.path-split-maps
 open import foundation.polynomial-endofunctors
 open import foundation.powersets
+open import foundation.preimages-of-subtypes
 open import foundation.principle-of-omniscience
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
+open import foundation.proper-subtypes
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
 open import foundation.propositional-resizing
@@ -371,8 +376,10 @@ open import foundation.sequences
 open import foundation.set-presented-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.shifting-sequences
 open import foundation.sigma-decompositions
 open import foundation.singleton-induction
+open import foundation.singleton-subtypes
 open import foundation.slice
 open import foundation.small-maps
 open import foundation.small-multisets
@@ -380,6 +387,7 @@ open import foundation.small-types
 open import foundation.small-universes
 open import foundation.split-surjective-maps
 open import foundation.standard-apartness-relations
+open import foundation.strongly-extensional-maps
 open import foundation.structure-identity-principle
 open import foundation.structure
 open import foundation.subterminal-types
@@ -435,6 +443,7 @@ open import foundation.unordered-pairs-of-types
 open import foundation.unordered-pairs
 open import foundation.unordered-tuples-of-types
 open import foundation.unordered-tuples
+open import foundation.w-type-of-propositions
 open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weak-limited-principle-of-omniscience
@@ -557,6 +566,7 @@ open import group-theory.cartesian-products-abelian-groups
 open import group-theory.cartesian-products-groups
 open import group-theory.cartesian-products-monoids
 open import group-theory.cartesian-products-semigroups
+open import group-theory.category-of-concrete-groups
 open import group-theory.category-of-groups
 open import group-theory.category-of-semigroups
 open import group-theory.cayleys-theorem
@@ -594,6 +604,7 @@ open import group-theory.higher-group-actions
 open import group-theory.higher-groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-concrete-group-actions
+open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-generated-subgroups
 open import group-theory.homomorphisms-group-actions
 open import group-theory.homomorphisms-groups
@@ -610,6 +621,7 @@ open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
 open import group-theory.loop-groups-sets
 open import group-theory.kernels
+open import group-theory.kernels-homomorphisms-concrete-groups
 open import group-theory.mere-equivalences-concrete-group-actions
 open import group-theory.mere-equivalences-group-actions
 open import group-theory.monoid-actions
@@ -770,6 +782,7 @@ open import set-theory.baire-space
 open import set-theory.cantor-space
 open import set-theory.cardinalities
 open import set-theory.countable-sets
+open import set-theory.infinite-sets
 open import set-theory.uncountable-sets
 ```
 

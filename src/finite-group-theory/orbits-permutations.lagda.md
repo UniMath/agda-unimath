@@ -56,11 +56,10 @@ open import foundation.decidable-equivalence-relations using
   ( is-decidable-is-in-equivalence-class-is-decidable)
 open import foundation.decidable-maps using (is-decidable-map)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop)
+  ( decidable-Prop; type-decidable-Prop; is-decidable-Prop;
+    is-decidable-trunc-Prop-is-merely-decidable; is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-Prop;
-    is-decidable-trunc-Prop-is-merely-decidable; is-decidable-coprod;
-    is-decidable-prod; is-decidable-neg; is-prop-is-decidable)
+  ( is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
 open import foundation.embeddings using (is-emb)
@@ -89,7 +88,7 @@ open import foundation.propositional-truncations using
     trunc-Prop; unit-trunc-Prop; all-elements-equal-type-trunc-Prop;
     type-trunc-Prop; universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
+  ( Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
     is-prop; is-prop-Σ)
 open import foundation.repetitions using (repetition)
 open import foundation.sets using (Id-Prop)
@@ -994,7 +993,7 @@ module _
 
   coprod-sim-Eq-Rel-a-b-Prop : (g : X ≃ X) →
     (P : (sim-Eq-Rel (same-orbits-permutation (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g) a b)) →
-    (x : X) → UU-Prop l1
+    (x : X) → Prop l1
   coprod-sim-Eq-Rel-a-b-Prop g P x =
     coprod-Prop
       ( prop-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a)

@@ -66,7 +66,7 @@ module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (P : decidable-subset-Group-𝔽 l2 G)
   where
 
-  contains-unit-decidable-subset-finite-group-Prop : UU-Prop l2
+  contains-unit-decidable-subset-finite-group-Prop : Prop l2
   contains-unit-decidable-subset-finite-group-Prop =
     contains-unit-decidable-subset-group-Prop
       ( group-Group-𝔽 G)
@@ -85,7 +85,7 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-mul-decidable-subset-finite-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-closed-under-mul-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
   is-closed-under-mul-decidable-subset-finite-group-Prop =
     is-closed-under-mul-decidable-subset-group-Prop
       ( group-Group-𝔽 G)
@@ -104,7 +104,7 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-inv-decidable-subset-finite-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-closed-under-inv-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
   is-closed-under-inv-decidable-subset-finite-group-Prop =
     is-closed-under-inv-decidable-subset-group-Prop
       ( group-Group-𝔽 G)
@@ -123,7 +123,7 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-subgroup-decidable-subset-finite-group-Prop : UU-Prop (l1 ⊔ l2)
+  is-subgroup-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
   is-subgroup-decidable-subset-finite-group-Prop =
     is-subgroup-decidable-subset-group-Prop
       ( group-Group-𝔽 G)
@@ -246,7 +246,7 @@ module _
   eq-subgroup-eq-Group-𝔽 =
     eq-decidable-subgroup-eq-group (group-Group-𝔽 G) H
 
-  set-group-Subgroup-𝔽 : UU-Set (l1 ⊔ l2)
+  set-group-Subgroup-𝔽 : Set (l1 ⊔ l2)
   set-group-Subgroup-𝔽 = set-group-Decidable-Subgroup (group-Group-𝔽 G) H
 
   mul-Subgroup-𝔽 : (x y : type-Subgroup-𝔽 G H) → type-Subgroup-𝔽 G H
@@ -388,7 +388,7 @@ module _
     is-prop-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
   prop-right-eq-rel-Subgroup-𝔽 :
-    (x y : type-Group-𝔽 G) → UU-Prop (l1 ⊔ l2)
+    (x y : type-Group-𝔽 G) → Prop (l1 ⊔ l2)
   prop-right-eq-rel-Subgroup-𝔽 =
     prop-right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 
@@ -427,7 +427,7 @@ module _
   is-prop-left-sim-Subgroup-𝔽 =
     is-prop-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  prop-left-eq-rel-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → UU-Prop (l1 ⊔ l2)
+  prop-left-eq-rel-Subgroup-𝔽 : (x y : type-Group-𝔽 G) → Prop (l1 ⊔ l2)
   prop-left-eq-rel-Subgroup-𝔽 =
     prop-left-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 

@@ -16,9 +16,9 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
 open import foundation.identity-types using (Id; refl; ap; _∙_)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-is-equiv;
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-is-equiv;
     is-prop-Π)
-open import foundation.sets using (Id-Prop; is-set; UU-Set)
+open import foundation.sets using (Id-Prop; is-set; Set)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -47,7 +47,7 @@ module _
   where
   
   preserves-mul-semigroup-Prop :
-    (type-Semigroup G → type-Semigroup H) → UU-Prop (l1 ⊔ l2)
+    (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-semigroup-Prop f =
     Π-Prop
       ( type-Semigroup G)
@@ -132,7 +132,7 @@ module _
             ( map-hom-Semigroup f x)
             ( map-hom-Semigroup g x)))
 
-  hom-Semigroup : UU-Set (l1 ⊔ l2)
+  hom-Semigroup : Set (l1 ⊔ l2)
   pr1 hom-Semigroup = type-hom-Semigroup
   pr2 hom-Semigroup = is-set-type-hom-Semigroup
 

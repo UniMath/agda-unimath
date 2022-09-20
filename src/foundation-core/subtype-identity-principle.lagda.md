@@ -18,7 +18,7 @@ open import foundation-core.fundamental-theorem-of-identity-types using
 open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using (_＝_; refl)
 open import foundation-core.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; is-proof-irrelevant-is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation-core.type-arithmetic-dependent-pair-types using
   ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
@@ -83,7 +83,7 @@ module _
         ( h)
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (P : A → UU-Prop l2) {Eq-A : A → UU l3}
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) {Eq-A : A → UU l3}
   {a : A} (p : type-Prop (P a)) (refl-A : Eq-A a)
   where
 

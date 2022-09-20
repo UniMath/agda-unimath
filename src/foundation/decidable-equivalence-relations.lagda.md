@@ -64,7 +64,7 @@ module _
     Decidable-Relation l2 X
   decidable-relation-Decidable-Equivalence-Relation = pr1 R
 
-  relation-Decidable-Equivalence-Relation : X → X → UU-Prop l2
+  relation-Decidable-Equivalence-Relation : X → X → Prop l2
   relation-Decidable-Equivalence-Relation =
     relation-Decidable-Relation
       decidable-relation-Decidable-Equivalence-Relation
@@ -183,7 +183,7 @@ module _
       ( decidable-relation-Decidable-Equivalence-Relation R)
       ( is-set-decidable-subtype)
 
-  equivalence-class-Decidable-Equivalence-Relation-Set : UU-Set (l1 ⊔ lsuc l2)
+  equivalence-class-Decidable-Equivalence-Relation-Set : Set (l1 ⊔ lsuc l2)
   pr1 equivalence-class-Decidable-Equivalence-Relation-Set =
     equivalence-class-Decidable-Equivalence-Relation
   pr2 equivalence-class-Decidable-Equivalence-Relation-Set =

@@ -13,7 +13,7 @@ open import elementary-number-theory.natural-numbers using (ℕ)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop)
+  ( is-prop; is-prop-Π; is-prop-function-type; Prop)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -44,7 +44,7 @@ module _
     is-prop-is-lower-bound-ℕ x =
       is-prop-Π (λ y → is-prop-function-type (is-prop-leq-ℕ x y))
 
-  is-lower-bound-ℕ-Prop : (x : ℕ) → UU-Prop l1
+  is-lower-bound-ℕ-Prop : (x : ℕ) → Prop l1
   pr1 (is-lower-bound-ℕ-Prop x) = is-lower-bound-ℕ P x
   pr2 (is-lower-bound-ℕ-Prop x) = is-prop-is-lower-bound-ℕ x
 ```

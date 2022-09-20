@@ -9,8 +9,8 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; refl)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-prod)
-open import foundation.sets using (is-set; UU-Set; is-set-prop-in-id)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-prod)
+open import foundation.sets using (is-set; Set; is-set-prop-in-id)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.preorders using (Preorder)
@@ -27,7 +27,7 @@ Poset : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Poset l1 l2 =
   Σ ( UU l1)
     ( λ X →
-      Σ ( X → X → UU-Prop l2)
+      Σ ( X → X → Prop l2)
         ( λ R →
           ( ( (x : X) → type-Prop (R x x)) ×
             ( (x y z : X) →
@@ -41,7 +41,7 @@ module _
   element-Poset : UU l1
   element-Poset = pr1 X
 
-  leq-poset-Prop : (x y : element-Poset) → UU-Prop l2
+  leq-poset-Prop : (x y : element-Poset) → Prop l2
   leq-poset-Prop = pr1 (pr2 X)
 
   leq-Poset : (x y : element-Poset) →  UU l2
@@ -75,7 +75,7 @@ module _
       ( λ x → pair (refl-leq-Poset x) (refl-leq-Poset x))
       ( λ {x y (pair H K) → antisymmetric-leq-Poset x y H K})
 
-  element-poset-Set : UU-Set l1
+  element-poset-Set : Set l1
   pr1 element-poset-Set = element-Poset
   pr2 element-poset-Set = is-set-element-Poset
 ```

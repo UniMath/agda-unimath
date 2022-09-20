@@ -19,9 +19,9 @@ open import foundation.coproduct-types using
     coprod-Prop)
 open import foundation.decidable-equality using
   ( has-decidable-equality; is-set-has-decidable-equality)
+open import foundation.decidable-propositions using (is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-empty; is-prop-is-decidable;
-    is-decidable-raise)
+  ( is-decidable; is-decidable-coprod; is-decidable-empty; is-decidable-raise)
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop; prop-decidable-Prop)
@@ -53,7 +53,7 @@ open import foundation.pairs-of-distinct-elements using
   ( pair-of-distinct-elements; fst-pair-of-distinct-elements;
     snd-pair-of-distinct-elements; distinction-pair-of-distinct-elements)
 open import foundation.propositions using
-  ( eq-is-prop; is-prop-is-prop; is-prop-all-elements-equal; UU-Prop; type-Prop;
+  ( eq-is-prop; is-prop-is-prop; is-prop-all-elements-equal; Prop; type-Prop;
     is-prop-type-Prop; is-prop)
 open import foundation.propositional-extensionality using (eq-iff)
 open import foundation.propositional-truncations using
@@ -193,7 +193,7 @@ module _
   {l1 l2 : Level} {X : UU l1}
   where
 
-  is-transposition-permutation-Prop : X ≃ X → UU-Prop (l1 ⊔ lsuc l2)
+  is-transposition-permutation-Prop : X ≃ X → Prop (l1 ⊔ lsuc l2)
   is-transposition-permutation-Prop f = trunc-Prop (fib (transposition {l2 = l2}) f)
 
   is-transposition-permutation : X ≃ X → UU (l1 ⊔ lsuc l2)

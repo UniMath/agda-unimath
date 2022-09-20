@@ -8,19 +8,23 @@ title: 0-Connected types
 module foundation.0-connected-types where
 
 open import foundation.contractible-types using
-  ( is-contr-Prop; center; eq-is-contr; is-contr-equiv)
+  ( is-contr-Prop; center; eq-is-contr; is-contr-equiv;
+    universal-property-contr-is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv; inv-equiv)
 open import foundation.fiber-inclusions using (fiber-inclusion)
 open import foundation.fibers-of-maps using (fib)
+open import foundation.functions using (ev-pt; precomp)
 open import foundation.functoriality-set-truncation using (equiv-trunc-Set)
+open import foundation.homotopies using (refl-htpy)
 open import foundation.identity-types using (ap; refl)
 open import foundation.inhabited-types using (is-inhabited)
 open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
     apply-universal-property-trunc-Prop)
-open import foundation.propositions using (UU-Prop; is-prop; type-Prop)
+open import foundation.propositions using
+  ( Prop; is-prop; type-Prop; is-prop-type-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; apply-universal-property-trunc-Set'; unit-trunc-Set;
     apply-effectiveness-unit-trunc-Set; trunc-Set;
@@ -28,8 +32,13 @@ open import foundation.set-truncations using
     apply-effectiveness-unit-trunc-Set')
 open import foundation.sets using (set-Prop; Id-Prop)
 open import foundation.surjective-maps using
-  ( is-surjective; equiv-dependent-universal-property-surj-is-surjective)
-open import foundation.unit-type using (star; unit; pt)
+  ( is-surjective; equiv-dependent-universal-property-surj-is-surjective;
+    is-trunc-map-precomp-Π-is-surjective)
+open import foundation.truncated-maps using
+  ( is-trunc-map; is-trunc-map-comp; is-trunc-map-is-equiv)
+open import foundation.truncated-types using (is-trunc)
+open import foundation.truncation-levels using (𝕋; succ-𝕋)
+open import foundation.unit-type using (star; unit; pt; is-contr-unit)
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 open import foundation.universe-levels using (Level; UU)
@@ -40,11 +49,14 @@ open import foundation.universe-levels using (Level; UU)
 A type is said to be connected if its type of connected components, i.e., its set truncation, is contractible.
 
 ```agda
-is-0-connected-Prop : {l : Level} → UU l → UU-Prop l
+is-0-connected-Prop : {l : Level} → UU l → Prop l
 is-0-connected-Prop A = is-contr-Prop (type-trunc-Set A)
 
 is-0-connected : {l : Level} → UU l → UU l
 is-0-connected A = type-Prop (is-0-connected-Prop A)
+
+is-prop-is-0-connected : {l : Level} (A : UU l) → is-prop (is-0-connected A)
+is-prop-is-0-connected A = is-prop-type-Prop (is-0-connected-Prop A)
 
 abstract
   is-inhabited-is-0-connected :
@@ -92,9 +104,25 @@ is-surjective-pt-is-0-connected a H x =
     ( trunc-Prop (fib (pt a) x))
     ( λ {refl → unit-trunc-Prop (pair star refl)})
 
+is-trunc-map-ev-pt-is-connected :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
+  is-0-connected A → is-trunc (succ-𝕋 k) B →
+  is-trunc-map k (ev-pt a (λ _ → B))
+is-trunc-map-ev-pt-is-connected k {A} {B} a H K =
+  is-trunc-map-comp k
+    ( ev-pt a (λ _ → B))
+    ( ev-pt star (λ _ → B))
+    ( precomp (pt a) B)
+    ( refl-htpy)
+    ( is-trunc-map-is-equiv k
+      ( universal-property-contr-is-contr star is-contr-unit B))
+    ( is-trunc-map-precomp-Π-is-surjective k
+      ( is-surjective-pt-is-0-connected a H)
+      ( λ _ → pair B K))
+
 equiv-dependent-universal-property-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
-  ( {l : Level} (P : A → UU-Prop l) →
+  ( {l : Level} (P : A → Prop l) →
     ((x : A) → type-Prop (P x)) ≃ type-Prop (P a))
 equiv-dependent-universal-property-is-0-connected a H P =
   ( equiv-universal-property-unit (type-Prop (P a))) ∘e
@@ -105,7 +133,7 @@ equiv-dependent-universal-property-is-0-connected a H P =
 
 apply-dependent-universal-property-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
-  {l : Level} (P : A → UU-Prop l) → type-Prop (P a) → (x : A) → type-Prop (P x)
+  {l : Level} (P : A → Prop l) → type-Prop (P a) → (x : A) → type-Prop (P x)
 apply-dependent-universal-property-is-0-connected a H P =
   map-inv-equiv (equiv-dependent-universal-property-is-0-connected a H P)
 

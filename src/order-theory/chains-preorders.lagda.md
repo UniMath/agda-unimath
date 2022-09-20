@@ -7,7 +7,7 @@ module order-theory.chains-preorders where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.subtypes using (type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
@@ -25,15 +25,15 @@ module _
   where
 
   is-chain-sub-preorder-Prop :
-    {l3 : Level} (S : element-Preorder X → UU-Prop l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (S : element-Preorder X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
   is-chain-sub-preorder-Prop S = is-total-preorder-Prop (sub-Preorder X S)
 
   is-chain-sub-Preorder :
-    {l3 : Level} (S : element-Preorder X → UU-Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (S : element-Preorder X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
   is-chain-sub-Preorder S = type-Prop (is-chain-sub-preorder-Prop S)
 
   is-prop-is-chain-sub-Preorder :
-    {l3 : Level} (S : element-Preorder X → UU-Prop l3) →
+    {l3 : Level} (S : element-Preorder X → Prop l3) →
     is-prop (is-chain-sub-Preorder S)
   is-prop-is-chain-sub-Preorder S =
     is-prop-type-Prop (is-chain-sub-preorder-Prop S)
@@ -41,13 +41,13 @@ module _
 chain-Preorder :
   {l1 l2 : Level} (l : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
 chain-Preorder l X =
-  Σ (element-Preorder X → UU-Prop l) (is-chain-sub-Preorder X)
+  Σ (element-Preorder X → Prop l) (is-chain-sub-Preorder X)
 
 module _
   {l1 l2 l3 : Level} (X : Preorder l1 l2) (C : chain-Preorder l3 X)
   where
 
-  sub-preorder-chain-Preorder : element-Preorder X → UU-Prop l3
+  sub-preorder-chain-Preorder : element-Preorder X → Prop l3
   sub-preorder-chain-Preorder = pr1 C
 
   element-chain-Preorder : UU (l1 ⊔ l3)
@@ -59,7 +59,7 @@ module _
   
   inclusion-chain-preorder-Prop :
     {l3 l4 : Level} → chain-Preorder l3 X → chain-Preorder l4 X →
-    UU-Prop (l1 ⊔ l3 ⊔ l4)
+    Prop (l1 ⊔ l3 ⊔ l4)
   inclusion-chain-preorder-Prop C D =
     inclusion-sub-preorder-Prop X
       ( sub-preorder-chain-Preorder X C)

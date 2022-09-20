@@ -100,7 +100,7 @@ module _
   is-set-type-Group-𝔽 : is-set type-Group-𝔽
   is-set-type-Group-𝔽 = is-set-type-Group group-Group-𝔽
 
-  set-Group-𝔽 : UU-Set l
+  set-Group-𝔽 : Set l
   set-Group-𝔽 = set-Group group-Group-𝔽
 
   has-associative-mul-Group-𝔽 : has-associative-mul type-Group-𝔽
@@ -152,7 +152,7 @@ module _
   pr2 (is-decidable-prop-is-unit-Group-𝔽 x) =
     is-decidable-is-unit-Group-𝔽 x
 
-  is-unit-finite-group-Prop : type-Group-𝔽 → UU-Prop l
+  is-unit-finite-group-Prop : type-Group-𝔽 → Prop l
   is-unit-finite-group-Prop = is-unit-group-Prop group-Group-𝔽
 
   is-unit-finite-group-decidable-Prop : type-Group-𝔽 → decidable-Prop l

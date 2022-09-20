@@ -9,7 +9,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb-Prop)
 open import foundation.negation using (¬)
 open import foundation.propositions using
-  ( UU-Prop; prod-Prop; Π-Prop; function-Prop; is-prop-Prop; type-Prop;
+  ( Prop; prod-Prop; Π-Prop; function-Prop; is-prop-Prop; type-Prop;
     is-prop-type-Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
 open import foundation.unordered-pairs using (unordered-pair)
@@ -32,7 +32,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  is-simple-Undirected-Graph-Prop : UU-Prop (lsuc lzero ⊔ l1 ⊔ l2)
+  is-simple-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
   is-simple-Undirected-Graph-Prop =
     prod-Prop
       ( Π-Prop
@@ -57,7 +57,7 @@ Simple-Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Simple-Undirected-Graph l1 l2 =
   Σ ( UU l1)
     ( λ V →
-      Σ ( unordered-pair V → UU-Prop l2)
+      Σ ( unordered-pair V → Prop l2)
         ( λ E →
           (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin' 2) (λ y → x))))))
 ```

@@ -23,7 +23,7 @@ A type is said to be **`k`-connected** if its `k`-truncation is contractible.
 ## Definition
 
 ```agda
-is-connected-Prop : {l : Level} (k : 𝕋) → UU l → UU-Prop l
+is-connected-Prop : {l : Level} (k : 𝕋) → UU l → Prop l
 is-connected-Prop k A = is-contr-Prop (type-trunc k A)
 
 is-connected : {l : Level} (k : 𝕋) → UU l → UU l

@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import group-theory.concrete-group-actions
 open import group-theory.concrete-groups
 open import group-theory.equivalences-concrete-group-actions
+open import group-theory.homomorphisms-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.transitive-concrete-group-actions
 
@@ -65,7 +66,7 @@ module _
     action-transitive-action-Concrete-Group G
       transitive-action-subgroup-Concrete-Group
 
-  coset-subgroup-Concrete-Group : UU-Set l2
+  coset-subgroup-Concrete-Group : Set l2
   coset-subgroup-Concrete-Group =
     action-subgroup-Concrete-Group (shape-Concrete-Group G)
 

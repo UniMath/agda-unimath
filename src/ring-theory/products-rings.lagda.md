@@ -32,7 +32,7 @@ module _
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2)
   where
 
-  set-prod-Ring : UU-Set (l1 ⊔ l2)
+  set-prod-Ring : Set (l1 ⊔ l2)
   set-prod-Ring = prod-Set (set-Ring R1) (set-Ring R2)
 
   type-prod-Ring : UU (l1 ⊔ l2)

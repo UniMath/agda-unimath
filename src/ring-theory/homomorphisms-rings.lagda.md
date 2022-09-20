@@ -16,8 +16,8 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using (_~_; refl-htpy)
 open import foundation.identity-types using (Id; refl; ap; _∙_)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-prod; UU-Prop)
-open import foundation.sets using (is-set; UU-Set)
+  ( is-prop; is-prop-Π; is-prop-prod; Prop)
+open import foundation.sets using (is-set; Set)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.subtypes using (is-trunc-type-subtype)
@@ -100,7 +100,7 @@ is-prop-is-ring-homomorphism-hom-Ab R1 R2 f =
 
 is-ring-homomorphism-hom-ab-Prop :
   {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  (f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) → UU-Prop (l1 ⊔ l2)
+  (f : type-hom-Ab (ab-Ring R1) (ab-Ring R2)) → Prop (l1 ⊔ l2)
 pr1 (is-ring-homomorphism-hom-ab-Prop R1 R2 f) =
   is-ring-homomorphism-hom-Ab R1 R2 f
 pr2 (is-ring-homomorphism-hom-ab-Prop R1 R2 f) =
@@ -228,7 +228,7 @@ is-set-type-hom-Ring R1 R2 =
     ( is-set-hom-Ab (ab-Ring R1) (ab-Ring R2))
 
 hom-Ring :
-  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → Set (l1 ⊔ l2)
 pr1 (hom-Ring R1 R2) = type-hom-Ring R1 R2
 pr2 (hom-Ring R1 R2) = is-set-type-hom-Ring R1 R2
 

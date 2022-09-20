@@ -57,16 +57,14 @@ open import foundation.propositional-truncations using
     all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Set; equiv-raise; raise)
-open import foundation.sets using (Id-Prop; UU-Set; type-Set; is-prop-is-set)
+open import foundation.sets using (Id-Prop; Set; type-Set; is-prop-is-set)
 open import foundation.unit-type using (star)
 open import foundation.univalence using (equiv-eq; eq-equiv)
 open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
 open import group-theory.concrete-groups using
-  ( hom-Concrete-Group; classifying-type-Concrete-Group;
-    abstract-group-Concrete-Group; hom-group-hom-Concrete-Group;
-    map-hom-Concrete-Group)
+  ( classifying-type-Concrete-Group; abstract-group-Concrete-Group)
 open import group-theory.groups using (set-Group)
 open import group-theory.homomorphisms-generated-subgroups using
   ( restriction-generating-subset-Group)

@@ -25,7 +25,7 @@ open import foundation.identity-types using
   ( _＝_; refl; _∙_; inv; ap; left-inv; inv-con; right-unit; concat; assoc)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
-open import foundation.sets using (UU-Set; is-set; type-Set; is-set-type-Set)
+open import foundation.sets using (Set; is-set; type-Set; is-set-type-Set)
 open import foundation.unit-type using (unit; star; is-set-unit)
 open import foundation.universe-levels using (UU; Level; lzero)
 
@@ -78,6 +78,12 @@ is-zero-ℤ x = (x ＝ zero-ℤ)
 
 is-nonzero-ℤ : ℤ → UU lzero
 is-nonzero-ℤ k = ¬ (is-zero-ℤ k)
+
+decide-is-zero-ℤ :
+  (x : ℤ) → (is-zero-ℤ x) + (is-nonzero-ℤ x)
+decide-is-zero-ℤ (inl x) = inr λ ()
+decide-is-zero-ℤ (inr (inl star)) = inl refl
+decide-is-zero-ℤ (inr (inr x)) = inr λ ()
 ```
 
 ### Inclusion of the positive integers
@@ -163,7 +169,7 @@ neg-ℤ (inr (inr x)) = inl x
 is-set-ℤ : is-set ℤ
 is-set-ℤ = is-set-coprod is-set-ℕ (is-set-coprod is-set-unit is-set-ℕ)
 
-ℤ-Set : UU-Set lzero
+ℤ-Set : Set lzero
 pr1 ℤ-Set = ℤ
 pr2 ℤ-Set = is-set-ℤ
 ```

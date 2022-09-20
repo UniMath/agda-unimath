@@ -23,9 +23,9 @@ open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
 open import foundation.propositional-truncations using
   ( unit-trunc-Prop; apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-equiv; is-prop-Π)
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-equiv; is-prop-Π)
 open import foundation.sets using
-  ( UU-Set; type-Set; is-set-type-Set; is-set; is-set-equiv)
+  ( Set; type-Set; is-set-type-Set; is-set; is-set-equiv)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
@@ -58,7 +58,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (X : Abstract-Group-Action G l2)
   where
 
-  is-torsor-Abstract-Group-Prop : UU-Prop (l1 ⊔ l2)
+  is-torsor-Abstract-Group-Prop : Prop (l1 ⊔ l2)
   is-torsor-Abstract-Group-Prop =
     mere-equiv-Abstract-Group-Action-Prop G
       ( principal-Abstract-Group-Action G)
@@ -85,7 +85,7 @@ module _
   action-Torsor-Abstract-Group = pr1
 
   set-Torsor-Abstract-Group :
-    {l : Level} → Torsor-Abstract-Group l → UU-Set l
+    {l : Level} → Torsor-Abstract-Group l → Set l
   set-Torsor-Abstract-Group X =
     set-Abstract-Group-Action G (action-Torsor-Abstract-Group X)
 

@@ -18,7 +18,7 @@ open import order-theory.large-preorders
 ## Definition
 
 ```agda
-mere-emb-Prop : {l1 l2 : Level} → UU l1 → UU l2 → UU-Prop (l1 ⊔ l2)
+mere-emb-Prop : {l1 l2 : Level} → UU l1 → UU l2 → Prop (l1 ⊔ l2)
 mere-emb-Prop X Y = trunc-Prop (X ↪ Y)
 
 mere-emb : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)

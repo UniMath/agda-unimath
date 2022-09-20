@@ -15,7 +15,7 @@ open import foundation-core.functions using (_∘_)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 
 open import foundation-core.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-prod; is-equiv-is-prop;
+  ( Prop; type-Prop; is-prop; is-prop-prod; is-equiv-is-prop;
     is-prop-function-type; is-prop-type-Prop)
 ```
 
@@ -46,11 +46,11 @@ module _
 
 ```agda
 _⇔_ :
-  {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU (l1 ⊔ l2)
+  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 P ⇔ Q = type-Prop P ↔ type-Prop Q
 
 is-prop-iff-Prop :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (P ⇔ Q)
 is-prop-iff-Prop P Q =
   is-prop-prod
@@ -58,7 +58,7 @@ is-prop-iff-Prop P Q =
     ( is-prop-function-type (is-prop-type-Prop P))
 
 iff-Prop :
-  {l1 l2 : Level} → UU-Prop l1 → UU-Prop l2 → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (iff-Prop P Q) = P ⇔ Q
 pr2 (iff-Prop P Q) = is-prop-iff-Prop P Q
 ```
@@ -86,7 +86,7 @@ pr2 (inv-iff (f , g)) = f
 
 ```agda
 module _
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
   
   equiv-iff' : (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)

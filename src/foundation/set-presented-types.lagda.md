@@ -10,9 +10,9 @@ module foundation.set-presented-types where
 open import foundation.equivalences using (is-equiv)
 open import foundation.existential-quantification using (∃-Prop)
 open import foundation.functions using (_∘_)
-open import foundation.propositions using (UU-Prop)
+open import foundation.propositions using (Prop)
 open import foundation.set-truncations using (unit-trunc-Set)
-open import foundation.sets using (UU-Set; type-Set)
+open import foundation.sets using (Set; type-Set)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
 
@@ -22,7 +22,7 @@ A type `A` is said to be set presented if there exists a map `f : X → A` from 
 
 ```agda
 has-set-presentation-Prop :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU l2) → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (B : UU l2) → Prop (l1 ⊔ l2)
 has-set-presentation-Prop A B =
   ∃-Prop (type-Set A → B) (λ f → is-equiv (unit-trunc-Set ∘ f))
 ```

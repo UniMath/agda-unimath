@@ -6,6 +6,8 @@
 module structured-types.pointed-dependent-functions where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.fibers-of-maps using (fib)
+open import foundation.functions using (ev-pt)
 open import foundation.identity-types using (Id)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
@@ -26,8 +28,7 @@ module _
 
   pointed-Π : UU (l1 ⊔ l2)
   pointed-Π =
-    Σ ( (x : type-Pointed-Type A) → fam-Pointed-Fam A B x)
-      ( λ f → Id (f (pt-Pointed-Type A)) (pt-Pointed-Fam A B))
+    fib (ev-pt (pt-Pointed-Type A) (fam-Pointed-Fam A B)) (pt-Pointed-Fam A B)
 
   function-pointed-Π :
     pointed-Π → (x : type-Pointed-Type A) → fam-Pointed-Fam A B x

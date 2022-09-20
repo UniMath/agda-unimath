@@ -9,9 +9,10 @@ module foundation.symmetric-difference where
 
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.decidable-propositions using
-  ( type-decidable-Prop; is-decidable-type-decidable-Prop; is-prop-type-decidable-Prop)
+  ( type-decidable-Prop; is-decidable-type-decidable-Prop;
+    is-prop-type-decidable-Prop; is-prop-is-decidable)
 open import foundation.decidable-subtypes using (decidable-subtype; type-decidable-subtype)
-open import foundation.decidable-types using (is-decidable; is-prop-is-decidable)
+open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (_≃_; is-equiv-has-inverse)
 open import foundation.functions using (_∘_)

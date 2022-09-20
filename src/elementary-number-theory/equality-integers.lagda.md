@@ -34,7 +34,7 @@ open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop; eq-is-prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.unit-type using (unit; star; is-set-unit; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```

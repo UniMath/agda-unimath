@@ -35,7 +35,7 @@ module _
   where
 
   preserves-order-preorder-Prop :
-    (element-Preorder P → element-Preorder Q) → UU-Prop (l1 ⊔ l2 ⊔ l4)
+    (element-Preorder P → element-Preorder Q) → Prop (l1 ⊔ l2 ⊔ l4)
   preserves-order-preorder-Prop f =
     Π-Prop
       ( element-Preorder P)

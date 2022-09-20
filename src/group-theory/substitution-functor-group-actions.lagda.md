@@ -21,7 +21,7 @@ open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.sets using
-  ( UU-Set; prod-Set; type-Set; is-set; is-set-type-Set)
+  ( Set; prod-Set; type-Set; is-set; is-set-type-Set)
 open import foundation.universe-levels using (Level; _⊔_; UU; lsuc)
 
 open import group-theory.precategory-of-group-actions using
@@ -119,7 +119,7 @@ module _
   where
 
   preset-obj-left-adjoint-subst-Abstract-Group-Action :
-    {l3 : Level} → Abstract-Group-Action G l3 → UU-Set (l2 ⊔ l3)
+    {l3 : Level} → Abstract-Group-Action G l3 → Set (l2 ⊔ l3)
   preset-obj-left-adjoint-subst-Abstract-Group-Action X =
     prod-Set (set-Group H) (set-Abstract-Group-Action G X)
 
@@ -205,7 +205,7 @@ module _
   
   set-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} → Abstract-Group-Action G l3 →
-    UU-Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+    Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   set-left-adjoint-subst-Abstract-Group-Action X =
     equivalence-class-Set (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
 

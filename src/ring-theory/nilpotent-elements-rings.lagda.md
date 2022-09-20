@@ -26,7 +26,7 @@ A nilpotent element in a ring is an element `x` for which there is a natural num
 
 ```agda
 is-nilpotent-element-ring-Prop :
-  {l : Level} (R : Ring l) → type-Ring R → UU-Prop l
+  {l : Level} (R : Ring l) → type-Ring R → Prop l
 is-nilpotent-element-ring-Prop R x = ∃-Prop ℕ (λ n → Id (power-Ring R n x) (zero-Ring R))
 
 is-nilpotent-element-Ring : {l : Level} (R : Ring l) → type-Ring R → UU l

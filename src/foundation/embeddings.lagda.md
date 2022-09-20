@@ -32,7 +32,7 @@ open import foundation.equivalences using
     issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-property-is-equiv)
 open import foundation.identity-types using
   ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
-open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
+open import foundation.propositions using (is-prop; is-prop-Π; Prop)
 open import foundation.truncated-maps using
   ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback;
     is-prop-map-tot; is-prop-map-map-Σ-map-base; is-prop-map-map-Σ;
@@ -52,7 +52,7 @@ module _
   is-prop-is-emb f =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv (ap f)))
 
-  is-emb-Prop : (A → B) → UU-Prop (l1 ⊔ l2)
+  is-emb-Prop : (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-emb-Prop f) = is-emb f
   pr2 (is-emb-Prop f) = is-prop-is-emb f
 ```

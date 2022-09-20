@@ -11,7 +11,7 @@ open import category-theory.epimorphisms-large-precategories using
   ( is-epi-Large-Precat-Prop; is-epi-iso-Large-Precat)
 
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import group-theory.groups using (Group)
@@ -32,7 +32,7 @@ module _
   (H : Group l2) (f : type-hom-Group G H)
   where
 
-  is-epi-Group-Prop : UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-epi-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-epi-Group-Prop =
     is-epi-Large-Precat-Prop Group-Large-Precat l3 G H f
 

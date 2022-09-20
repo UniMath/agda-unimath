@@ -30,7 +30,7 @@ open import foundation.negation using (¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop; all-elements-equal;
+  ( is-prop; is-prop-Π; is-prop-function-type; Prop; all-elements-equal;
     type-Prop; prod-Prop; is-prop-type-Prop; is-prop-all-elements-equal)
 open import foundation.subtypes using (eq-type-subtype; type-subtype)
 open import foundation.unit-type using (star)
@@ -49,7 +49,7 @@ minimal-element-ℕ :
 minimal-element-ℕ P = Σ ℕ (λ n → (P n) × (is-lower-bound-ℕ P n))
 
 module _
-  {l1 : Level} (P : ℕ → UU-Prop l1)
+  {l1 : Level} (P : ℕ → Prop l1)
   where
 
   abstract
@@ -70,7 +70,7 @@ module _
     is-prop-minimal-element-ℕ =
       is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
 
-  minimal-element-ℕ-Prop : UU-Prop l1
+  minimal-element-ℕ-Prop : Prop l1
   pr1 minimal-element-ℕ-Prop = minimal-element-ℕ (λ n → type-Prop (P n))
   pr2 minimal-element-ℕ-Prop = is-prop-minimal-element-ℕ
 
@@ -156,7 +156,7 @@ is-zero-well-ordering-principle-ℕ P d (pair (succ-ℕ m) p) =
 
 ```agda
 ε-operator-decidable-subtype-ℕ :
-  {l1 : Level} (P : ℕ → UU-Prop l1)
+  {l1 : Level} (P : ℕ → Prop l1)
   (d : (x : ℕ) → is-decidable (type-Prop (P x))) →
   ε-operator-Hilbert (type-subtype P)
 ε-operator-decidable-subtype-ℕ {l1} P d t =

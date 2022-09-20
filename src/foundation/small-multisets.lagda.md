@@ -20,7 +20,7 @@ open import foundation.identity-types using
   ( _＝_; tr; refl; ap; _∙_; equiv-concat)
 open import foundation.multisets using (𝕍; comprehension-𝕍; _∈-𝕍_; _∉-𝕍_)
 open import foundation.propositions using
-  ( UU-Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
+  ( Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
 open import foundation.raising-universe-levels using (raise; equiv-raise)
 open import foundation.small-types using
   ( is-small-Prop; is-small; is-small-Σ; is-small-Π; is-small-equiv)
@@ -42,7 +42,7 @@ A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe 
 ### Small multisets
 
 ```agda
-is-small-𝕍-Prop : (l : Level) {l1 : Level} → 𝕍 l1 → UU-Prop (l1 ⊔ lsuc l)
+is-small-𝕍-Prop : (l : Level) {l1 : Level} → 𝕍 l1 → Prop (l1 ⊔ lsuc l)
 is-small-𝕍-Prop l (tree-𝕎 A α) =
   prod-Prop (is-small-Prop l A) (Π-Prop A (λ x → is-small-𝕍-Prop l (α x)))
 

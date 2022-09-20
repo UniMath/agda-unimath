@@ -23,7 +23,7 @@ Nontrivial rings are rings in which `0 ≠ 1`.
 ## Definition
 
 ```agda
-is-nontrivial-ring-Prop : {l : Level} → Ring l → UU-Prop l
+is-nontrivial-ring-Prop : {l : Level} → Ring l → Prop l
 is-nontrivial-ring-Prop R =
   neg-Prop (Id-Prop (set-Ring R) (zero-Ring R) (one-Ring R))
 

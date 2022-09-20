@@ -5,12 +5,15 @@ title: Inhabited subtypes
 ```agda
 module foundation.inhabited-subtypes where
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -21,7 +24,7 @@ An inhabited subtype of a type `A` is a subtype `P` of `A` such that the underly
 
 ```agda
 is-inhabited-subtype-Prop :
-  {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} → subtype l2 A → Prop (l1 ⊔ l2)
 is-inhabited-subtype-Prop P = is-inhabited-Prop (type-subtype P)
 
 is-inhabited-subtype :
@@ -80,13 +83,26 @@ module _
 ### Characterization of equality of inhabited subtypes
 
 ```agda
+has-same-elements-inhabited-subtype-Prop :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  inhabited-subtype l2 A → inhabited-subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+has-same-elements-inhabited-subtype-Prop P Q =
+  has-same-elements-subtype-Prop
+    ( subtype-inhabited-subtype P)
+    ( subtype-inhabited-subtype Q)
+    
 has-same-elements-inhabited-subtype :
   {l1 l2 l3 : Level} {A : UU l1} →
   inhabited-subtype l2 A → inhabited-subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
 has-same-elements-inhabited-subtype P Q =
-  has-same-elements-subtype
-    ( subtype-inhabited-subtype P)
-    ( subtype-inhabited-subtype Q)
+  type-Prop (has-same-elements-inhabited-subtype-Prop P Q)
+
+is-prop-has-same-elements-inhabited-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  (P : inhabited-subtype l2 A) (Q : inhabited-subtype l3 A) →
+  is-prop (has-same-elements-inhabited-subtype P Q)
+is-prop-has-same-elements-inhabited-subtype P Q =
+  is-prop-type-Prop (has-same-elements-inhabited-subtype-Prop P Q)
 
 module _
   {l1 l2 : Level} {A : UU l1} (P : inhabited-subtype l2 A)
@@ -96,6 +112,18 @@ module _
     has-same-elements-inhabited-subtype P P
   pr1 (refl-has-same-elements-inhabited-subtype x) = id
   pr2 (refl-has-same-elements-inhabited-subtype x) = id
+
+  is-contr-total-has-same-elements-inhabited-subtype :
+    is-contr
+      ( Σ (inhabited-subtype l2 A) (has-same-elements-inhabited-subtype P))
+  is-contr-total-has-same-elements-inhabited-subtype =
+    is-contr-total-Eq-subtype
+      ( is-contr-total-has-same-elements-subtype
+        ( subtype-inhabited-subtype P))
+      ( λ Q → is-prop-type-trunc-Prop)
+      ( subtype-inhabited-subtype P)
+      ( refl-has-same-elements-inhabited-subtype)
+      ( is-inhabited-subtype-inhabited-subtype P)
 
   extensionality-inhabited-subtype :
     (Q : inhabited-subtype l2 A) → (P ＝ Q) ≃

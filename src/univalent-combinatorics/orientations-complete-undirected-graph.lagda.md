@@ -41,14 +41,16 @@ open import foundation.decidable-equality using
 open import foundation.decidable-equivalence-relations using
   ( is-decidable-is-in-equivalence-class-is-decidable)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop; is-prop-type-decidable-Prop;
-    type-decidable-Prop; equiv-bool-decidable-Prop; prop-decidable-Prop)
+  ( decidable-Prop; is-decidable-type-decidable-Prop;
+    is-prop-type-decidable-Prop; is-prop-is-decidable; 
+    type-decidable-Prop; equiv-bool-decidable-Prop; prop-decidable-Prop;
+    is-decidable-Prop)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype)
+    is-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
-    dn-elim-is-decidable; is-decidable-Prop; is-prop-is-decidable)
+    dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( empty; ex-falso; equiv-is-empty; empty-Prop)
@@ -85,8 +87,8 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
     trunc-Prop; type-trunc-Prop; all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
-open import foundation.sets using (Id-Prop; UU-Set)
+  ( Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop)
+open import foundation.sets using (Id-Prop; Set)
 open import foundation.subtypes using (subtype)
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type using (star)
@@ -479,7 +481,7 @@ module _
   quotient-sign : UU (lsuc l)
   quotient-sign = equivalence-class even-difference-orientation-Complete-Undirected-Graph
   
-  quotient-sign-Set : UU-Set (lsuc l)
+  quotient-sign-Set : Set (lsuc l)
   quotient-sign-Set = equivalence-class-Set even-difference-orientation-Complete-Undirected-Graph
 
 module _

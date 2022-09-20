@@ -31,7 +31,7 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
 open import foundation.raising-universe-levels using (map-raise; map-inv-raise)
-open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-prod; is-trunc-equiv)
 open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
@@ -196,7 +196,7 @@ is-set-list :
   {l : Level} {A : UU l} → is-set A → is-set (list A)
 is-set-list = is-trunc-list neg-two-𝕋
 
-list-Set : {l : Level} → UU-Set l → UU-Set l
+list-Set : {l : Level} → Set l → Set l
 list-Set A = pair (list (type-Set A)) (is-set-list (is-set-type-Set A))
 
 has-decidable-equality-list :
@@ -292,7 +292,7 @@ right-unit-law-concat-list nil = refl
 right-unit-law-concat-list (cons a x) =
   ap (cons a) (right-unit-law-concat-list x)
 
-list-Monoid : {l : Level} (X : UU-Set l) → Monoid l
+list-Monoid : {l : Level} (X : Set l) → Monoid l
 list-Monoid X =
   pair
     ( pair (list-Set X) (pair concat-list assoc-concat-list))

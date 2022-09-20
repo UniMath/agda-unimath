@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (_＝_)
 open import foundation.negation using (¬)
 open import foundation.propositions using (is-prop; is-prop-Π)
-open import foundation.sets using (UU-Set; type-Set; is-set; is-set-type-Set)
+open import foundation.sets using (Set; type-Set; is-set; is-set-type-Set)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
 open import ring-theory.rings using
@@ -55,7 +55,7 @@ module _
   ring-Commutative-Ring : Ring l
   ring-Commutative-Ring = pr1 R
 
-  set-Commutative-Ring : UU-Set l
+  set-Commutative-Ring : Set l
   set-Commutative-Ring = set-Ring ring-Commutative-Ring
 
   type-Commutative-Ring : UU l

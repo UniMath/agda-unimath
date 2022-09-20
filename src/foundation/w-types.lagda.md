@@ -32,13 +32,14 @@ open import foundation.polynomial-endofunctors using
     htpy-polynomial-endofunctor; coh-refl-htpy-polynomial-endofunctor)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop)
+open import foundation.sets using (is-set)
 open import foundation.truncated-types using
   ( is-trunc; is-trunc-is-equiv; is-trunc-Σ; is-trunc-Π; is-trunc-is-equiv')
 open import foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
-open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
+open import foundation-core.truncation-levels using (𝕋; succ-𝕋; neg-one-𝕋)
 ```
 
 ## Idea
@@ -166,6 +167,9 @@ module _
             ( Eq-𝕎-eq (α z) (β (tr B p z)))
             ( is-equiv-Eq-𝕎-eq (α z) (β (tr B p z)))
             ( is-trunc-𝕎 k is-trunc-A (α z) (β (tr B p z))))))
+
+  is-set-𝕎 : is-set A → is-set (𝕎 A B)
+  is-set-𝕎 = is-trunc-𝕎 neg-one-𝕋
 ```
 
 ### W-types are algebras for polynomial endofunctors

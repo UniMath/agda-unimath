@@ -69,10 +69,20 @@ module _
   pr2 (pr2 (pr2 apartness-relation-Discrete-Type)) =
     cotransitive-apart-Discrete-Type
 
+  type-with-apartness-Discrete-Type : Type-With-Apartness l l
+  pr1 type-with-apartness-Discrete-Type = type-Discrete-Type X
+  pr2 type-with-apartness-Discrete-Type = apartness-relation-Discrete-Type
+
   tight-apartness-relation-Discrete-Type :
     Tight-Apartness-Relation l (type-Discrete-Type X)
   pr1 tight-apartness-relation-Discrete-Type =
     apartness-relation-Discrete-Type
   pr2 tight-apartness-relation-Discrete-Type =
+    is-tight-apart-Discrete-Type
+
+  type-with-tight-apartness-Discrete-Type : Type-With-Tight-Apartness l l
+  pr1 type-with-tight-apartness-Discrete-Type =
+    type-with-apartness-Discrete-Type
+  pr2 type-with-tight-apartness-Discrete-Type =
     is-tight-apart-Discrete-Type
 ```

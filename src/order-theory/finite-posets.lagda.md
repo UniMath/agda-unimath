@@ -6,7 +6,7 @@
 module order-theory.finite-posets where
 
 open import foundation.decidable-types using (is-decidable)
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.finite-preorders using
@@ -27,7 +27,7 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-finite-poset-Prop : UU-Prop (l1 ⊔ l2)
+  is-finite-poset-Prop : Prop (l1 ⊔ l2)
   is-finite-poset-Prop = is-finite-preorder-Prop (preorder-Poset X)
 
   is-finite-Poset : UU (l1 ⊔ l2)

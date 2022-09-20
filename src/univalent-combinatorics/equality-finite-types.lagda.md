@@ -17,7 +17,7 @@ open import foundation.identity-types using (Id)
 open import foundation.mere-equivalences using (is-set-mere-equiv')
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
-open import foundation.sets using (is-set; is-set-Prop; UU-Set)
+open import foundation.sets using (is-set; is-set-Prop; Set)
 open import foundation.universe-levels using (Level; UU; _⊔_; lzero)
 
 open import univalent-combinatorics.counting using

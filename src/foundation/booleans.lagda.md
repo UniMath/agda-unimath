@@ -17,7 +17,7 @@ open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (_＝_; refl; inv)
 open import foundation-core.negation using (¬)
 open import foundation-core.propositions using (is-prop)
-open import foundation-core.sets using (is-set; UU-Set; is-set-prop-in-id)
+open import foundation-core.sets using (is-set; Set; is-set-prop-in-id)
 open import foundation-core.universe-levels using (Level; lzero; UU)
 
 open import foundation.coproduct-types using (inl; inr)
@@ -133,7 +133,7 @@ abstract
       ( refl-Eq-bool)
       ( λ x y → eq-Eq-bool)
 
-bool-Set : UU-Set lzero
+bool-Set : Set lzero
 pr1 bool-Set = bool
 pr2 bool-Set = is-set-bool
 ```

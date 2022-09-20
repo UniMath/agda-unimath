@@ -17,7 +17,7 @@ open import structured-types.pointed-types
 ## Definition
 
 ```agda
-is-contr-pointed-type-Prop : {l : Level} → Pointed-Type l → UU-Prop l
+is-contr-pointed-type-Prop : {l : Level} → Pointed-Type l → Prop l
 is-contr-pointed-type-Prop A = is-contr-Prop (type-Pointed-Type A)
 
 is-contr-Pointed-Type : {l : Level} → Pointed-Type l → UU l

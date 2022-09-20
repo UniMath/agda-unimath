@@ -18,7 +18,7 @@ open import foundation.fundamental-theorem-of-identity-types using
 open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
 open import foundation.identity-types using (Id; refl)
 open import foundation.propositions using (is-prop-Π; is-prop-equiv)
-open import foundation.sets using (type-Set; is-set-type-Set; is-set; UU-Set)
+open import foundation.sets using (type-Set; is-set-type-Set; is-set; Set)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -192,7 +192,7 @@ module _
             ( map-hom-Abstract-Group-Action G X Y f x)
             ( map-hom-Abstract-Group-Action G X Y g x)))
 
-  hom-Abstract-Group-Action : UU-Set (l1 ⊔ l2 ⊔ l3)
+  hom-Abstract-Group-Action : Set (l1 ⊔ l2 ⊔ l3)
   pr1 hom-Abstract-Group-Action = type-hom-Abstract-Group-Action G X Y
   pr2 hom-Abstract-Group-Action = is-set-type-hom-Abstract-Group-Action
 ```

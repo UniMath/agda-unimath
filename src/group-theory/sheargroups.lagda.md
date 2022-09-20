@@ -10,7 +10,7 @@ module group-theory.sheargroups where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ)
 open import foundation.identity-types using (Id)
-open import foundation.sets using (UU-Set; type-Set)
+open import foundation.sets using (Set; type-Set)
 open import foundation.universe-levels using (Level; UU; lsuc)
 ```
 
@@ -19,7 +19,7 @@ open import foundation.universe-levels using (Level; UU; lsuc)
 ```agda
 Sheargroup : (l : Level) → UU (lsuc l)
 Sheargroup l =
-  Σ ( UU-Set l)
+  Σ ( Set l)
     ( λ X →
       Σ ( type-Set X)
         ( λ e →
