@@ -40,4 +40,5 @@ open import category-theory.pullbacks-precategories public
 open import category-theory.sieves-categories public
 open import category-theory.slice-precategories public
 open import category-theory.terminal-objects-precategories public
+open import category-theory.initial-objects-precategories public
 ```
