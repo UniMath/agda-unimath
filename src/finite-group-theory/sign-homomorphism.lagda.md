@@ -73,7 +73,7 @@ open import group-theory.homomorphisms-groups using
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 open import group-theory.isomorphisms-groups using (hom-iso-Group; hom-inv-iso-Group)
 open import group-theory.symmetric-groups using
-  ( symmetric-Group; iso-symmetric-group-abstract-automorphism-group-Set)
+  ( symmetric-Group)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; standard-2-Element-Decidable-Subtype)

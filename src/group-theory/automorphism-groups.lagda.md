@@ -24,6 +24,7 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
+open import group-theory.equivalences-concrete-groups
 open import group-theory.equivalences-higher-groups
 open import group-theory.higher-groups
 
@@ -93,24 +94,6 @@ module _
 
   ∞-group-Automorphism-Group : ∞-Group l
   ∞-group-Automorphism-Group = ∞-group-Concrete-Group Automorphism-Group
-```
-
-### Automorphism groups of sets
-
-```agda
-module _
-  {l : Level} (A : Set l)
-  where
-
-  classifying-type-Automorphism-Group-Set : UU (lsuc l)
-  classifying-type-Automorphism-Group-Set =
-    classifying-type-Automorphism-Group (Set-1-Type l) A
-
-  shape-Automorphism-Group-Set : classifying-type-Automorphism-Group-Set
-  shape-Automorphism-Group-Set = shape-Automorphism-Group (Set-1-Type l) A
-  
-  Automorphism-Group-Set : Concrete-Group (lsuc l)
-  Automorphism-Group-Set = Automorphism-Group (Set-1-Type l) A
 ```
 
 ## Properties
@@ -228,57 +211,6 @@ module _
     map-inv-equiv (extensionality-classifying-type-Automorphism-Group X Y)
 ```
 
-### Characterizing equality of the classifying type of the automorphism group of a set
-
-```agda
-module _
-  {l : Level} (A : Set l)
-  where
-
-  equiv-classifying-type-Automorphism-Group-Set :
-    (X Y : classifying-type-Automorphism-Group-Set A) → UU l
-  equiv-classifying-type-Automorphism-Group-Set X Y =
-    type-equiv-Set (pr1 X) (pr1 Y)
-
-  type-Automorphism-Group-Set : UU l
-  type-Automorphism-Group-Set =
-    equiv-classifying-type-Automorphism-Group-Set
-      ( shape-Automorphism-Group-Set A)
-      ( shape-Automorphism-Group-Set A)
-
-  extensionality-classifying-type-Automorphism-Group-Set :
-    (X Y : classifying-type-Automorphism-Group-Set A) →
-    (X ＝ Y) ≃ equiv-classifying-type-Automorphism-Group-Set X Y
-  extensionality-classifying-type-Automorphism-Group-Set X =
-    extensionality-type-subtype
-      ( λ Y → mere-eq-Prop Y A)
-      ( pr2 X)
-      ( id-equiv)
-      ( extensionality-Set (pr1 X))
-
-  equiv-eq-classifying-type-Automorphism-Group-Set :
-    (X Y : classifying-type-Automorphism-Group-Set A) →
-    (X ＝ Y) → equiv-classifying-type-Automorphism-Group-Set X Y
-  equiv-eq-classifying-type-Automorphism-Group-Set X Y =
-    map-equiv (extensionality-classifying-type-Automorphism-Group-Set X Y)
-
-  refl-equiv-eq-classifying-type-Automorphism-Group-Set :
-    (X : classifying-type-Automorphism-Group-Set A) →
-    equiv-eq-classifying-type-Automorphism-Group-Set X X refl ＝ id-equiv
-  refl-equiv-eq-classifying-type-Automorphism-Group-Set X = refl
-
-  preserves-mul-equiv-eq-classifying-type-Automorphism-Group-Set :
-    (X Y Z : classifying-type-Automorphism-Group-Set A)
-    (q : Y ＝ Z) (p : X ＝ Y) →
-    equiv-eq-classifying-type-Automorphism-Group-Set X Z (p ∙ q) ＝
-    ( ( equiv-eq-classifying-type-Automorphism-Group-Set Y Z q) ∘e
-      ( equiv-eq-classifying-type-Automorphism-Group-Set X Y p))
-  preserves-mul-equiv-eq-classifying-type-Automorphism-Group-Set X .X Z q refl =
-    inv
-      ( right-unit-law-equiv
-        ( equiv-eq-classifying-type-Automorphism-Group-Set X Z q))
-```
-
 ### Equal elements have equivalent automorphism ∞-groups
 
 ```agda
@@ -302,6 +234,7 @@ module _
 
   equiv-eq-Automorphism-Group :
     {x y : type-1-Type A} (p : x ＝ y) →
-    equiv-Concrete-Group ? ?
-  equiv-eq-Automorphism-Group p = ?
+    equiv-Concrete-Group (Automorphism-Group A x) (Automorphism-Group A y)
+  equiv-eq-Automorphism-Group refl =
+    id-equiv-Concrete-Group (Automorphism-Group A _)
 ```
