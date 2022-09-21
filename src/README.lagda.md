@@ -794,6 +794,7 @@ open import set-theory.uncountable-sets
 
 ```agda
 open import structured-types
+open import structured-types.central-h-spaces
 open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
