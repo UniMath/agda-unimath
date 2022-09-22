@@ -8,6 +8,7 @@ title: Identity types
 module foundation-core.identity-types where
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.functions using (_∘_; id)
 open import foundation-core.universe-levels using (UU; Level)
 ```
 
@@ -146,12 +147,12 @@ ap f refl = refl
 
 ```agda
 ap-id :
-  {i : Level} {A : UU i} {x y : A} (p : x ＝ y) → (ap (λ x → x) p) ＝ p
+  {i : Level} {A : UU i} {x y : A} (p : x ＝ y) → (ap id p) ＝ p
 ap-id refl = refl
 
 ap-comp :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k} (g : B → C)
-  (f : A → B) {x y : A} (p : x ＝ y) → (ap (λ x → g (f x)) p) ＝ (ap g (ap f p))
+  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ (ap g (ap f p))
 ap-comp g f refl = refl
 ```
 

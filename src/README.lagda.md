@@ -179,6 +179,7 @@ open import elementary-number-theory.well-ordering-principle-standard-finite-typ
 ```agda
 open import finite-group-theory
 open import finite-group-theory.abstract-quaternion-group
+open import finite-group-theory.alternating-concrete-groups
 open import finite-group-theory.alternating-groups
 open import finite-group-theory.cartier-delooping-sign-homomorphism
 open import finite-group-theory.concrete-quaternion-group
@@ -649,6 +650,7 @@ open import group-theory.principal-group-actions
 open import group-theory.principal-torsors-concrete-groups
 open import group-theory.products-of-tuples-of-elements-commutative-monoids
 open import group-theory.quotient-groups-concrete-groups
+open import group-theory.representations-monoids
 open import group-theory.semigroups
 open import group-theory.sheargroups
 open import group-theory.shriek-concrete-group-actions
@@ -801,6 +803,7 @@ open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.faithful-pointed-maps
+open import structured-types.fibers-of-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 open import structured-types.magmas

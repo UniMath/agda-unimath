@@ -345,6 +345,33 @@ module _
   isretr-eq-iso-Cat :
     {x y : obj-Cat C} (p : x ＝ y) → eq-iso-Cat (iso-eq-Cat C p) ＝ p
   isretr-eq-iso-Cat {x} {y} = isretr-map-inv-equiv (extensionality-obj-Cat x y)
+
+  preserves-comp-eq-iso-Cat :
+    {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    eq-iso-Cat (comp-iso-Cat C g f) ＝ (eq-iso-Cat f ∙ eq-iso-Cat g)
+  preserves-comp-eq-iso-Cat g f =
+    equational-reasoning
+      eq-iso-Cat (comp-iso-Cat C g f)
+      ＝ eq-iso-Cat
+          ( comp-iso-Cat C
+            ( iso-eq-Cat C (eq-iso-Cat g))
+            ( iso-eq-Cat C (eq-iso-Cat f)))
+        by
+        ap eq-iso-Cat
+          ( ap-binary
+            ( comp-iso-Cat C)
+            ( inv (issec-eq-iso-Cat g))
+            ( inv (issec-eq-iso-Cat f)))
+      ＝ eq-iso-Cat (iso-eq-Cat C (eq-iso-Cat f ∙ eq-iso-Cat g))
+        by
+        ap eq-iso-Cat
+          ( inv
+            ( preserves-concat-iso-eq-Cat C
+              ( eq-iso-Cat f)
+              ( eq-iso-Cat g)))
+      ＝ eq-iso-Cat f ∙ eq-iso-Cat g
+        by
+        isretr-eq-iso-Cat (eq-iso-Cat f ∙ eq-iso-Cat g)
 ```
 
 ### The type of isomorphisms forms a set
