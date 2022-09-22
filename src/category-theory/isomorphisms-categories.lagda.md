@@ -273,7 +273,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : iso-Cat C x y)
+  {l1 l2 : Level} (C : Cat l1 l2)
   where
 
   -- left-unit-law-comp-iso-Cat
@@ -308,16 +308,15 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
   
-  iso-eq-Cat : (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
-  iso-eq-Cat = iso-eq-Precat (precat-Cat C)
+  iso-eq-Cat : {x y : obj-Cat C} → x ＝ y → iso-Cat C x y
+  iso-eq-Cat {x} {y} = iso-eq-Precat (precat-Cat C) x y
 
-{-
   preserves-concat-iso-eq-Cat :
     {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
-    iso-eq-Cat x z (p ∙ q) ＝
-    comp-iso-Cat C (iso-eq-Cat y z q) (iso-eq-Cat x y p)
-  preserves-concat-iso-eq-Cat refl q = {!!}
-  -}
+    iso-eq-Cat (p ∙ q) ＝
+    comp-iso-Cat C (iso-eq-Cat q) (iso-eq-Cat p)
+  preserves-concat-iso-eq-Cat refl q =
+    inv (right-unit-law-comp-iso-Cat C (iso-eq-Cat q))
 ```
 
 ## Properties
@@ -331,12 +330,21 @@ module _
   
   extensionality-obj-Cat :
     (x y : obj-Cat C) → (x ＝ y) ≃ iso-Cat C x y
-  pr1 (extensionality-obj-Cat x y) = iso-eq-Cat C x y
+  pr1 (extensionality-obj-Cat x y) = iso-eq-Cat C
   pr2 (extensionality-obj-Cat x y) = is-category-Cat C x y
 
   eq-iso-Cat :
-    (x y : obj-Cat C) → iso-Cat C x y → x ＝ y
-  eq-iso-Cat x y = map-inv-equiv (extensionality-obj-Cat x y)
+    {x y : obj-Cat C} → iso-Cat C x y → x ＝ y
+  eq-iso-Cat {x} {y} = map-inv-equiv (extensionality-obj-Cat x y)
+
+  issec-eq-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
+    iso-eq-Cat C (eq-iso-Cat f) ＝ f
+  issec-eq-iso-Cat {x} {y} = issec-map-inv-equiv (extensionality-obj-Cat x y)
+
+  isretr-eq-iso-Cat :
+    {x y : obj-Cat C} (p : x ＝ y) → eq-iso-Cat (iso-eq-Cat C p) ＝ p
+  isretr-eq-iso-Cat {x} {y} = isretr-map-inv-equiv (extensionality-obj-Cat x y)
 ```
 
 ### The type of isomorphisms forms a set
