@@ -46,6 +46,7 @@ open import category-theory.equivalences-precategories
 open import category-theory.functors-categories
 open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
+open import category-theory.groupoids
 open import category-theory.homotopies-natural-transformations-large-precategories
 open import category-theory.initial-objects-precategories
 open import category-theory.isomorphisms-categories
@@ -61,6 +62,7 @@ open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.pregroupoids
 open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```
@@ -588,6 +590,7 @@ open import group-theory.embeddings-groups
 open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.epimorphisms-groups
 open import group-theory.equivalences-concrete-group-actions
+open import group-theory.equivalences-concrete-groups
 open import group-theory.equivalences-group-actions
 open import group-theory.equivalences-higher-groups
 open import group-theory.equivalences-semigroups
@@ -616,6 +619,7 @@ open import group-theory.integers-higher-group
 open import group-theory.inverse-semigroups
 open import group-theory.invertible-elements-monoids
 open import group-theory.isomorphisms-abelian-groups
+open import group-theory.isomorphisms-concrete-groups
 open import group-theory.isomorphisms-group-actions
 open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups
@@ -630,12 +634,14 @@ open import group-theory.monomorphisms-concrete-groups
 open import group-theory.monomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.normal-subgroups-concrete-groups
+open import group-theory.opposite-groups
 open import group-theory.orbit-stabilizer-theorem-concrete-groups
 open import group-theory.orbits-concrete-group-actions
 open import group-theory.orbits-group-actions
 open import group-theory.orbits-higher-group-actions
 open import group-theory.orbits-monoid-actions
 open import group-theory.orders-of-elements-groups
+open import group-theory.precategory-of-concrete-groups
 open import group-theory.precategory-of-group-actions
 open import group-theory.precategory-of-groups
 open import group-theory.precategory-of-semigroups
@@ -790,6 +796,7 @@ open import set-theory.uncountable-sets
 
 ```agda
 open import structured-types
+open import structured-types.central-h-spaces
 open import structured-types.coherent-h-spaces
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms

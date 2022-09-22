@@ -7,25 +7,16 @@ title: Homomorphisms of groups
 
 module group-theory.homomorphisms-groups where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.identity-types using (Id; _＝_; inv; _∙_; ap)
-open import foundation.sets using (is-set; Set)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.groups using
-  ( Group; type-Group; semigroup-Group; unit-Group; left-unit-law-mul-Group;
-    mul-Group; left-inverse-law-mul-Group; associative-mul-Group; inv-Group;
-    right-unit-law-mul-Group; right-inverse-law-mul-Group)
-open import group-theory.homomorphisms-semigroups using
-  ( preserves-mul-Semigroup; type-hom-Semigroup; htpy-hom-Semigroup;
-    refl-htpy-hom-Semigroup; htpy-eq-hom-Semigroup;
-    is-contr-total-htpy-hom-Semigroup; is-equiv-htpy-eq-hom-Semigroup;
-    eq-htpy-hom-Semigroup; is-set-type-hom-Semigroup; id-hom-Semigroup;
-    comp-hom-Semigroup; associative-comp-hom-Semigroup;
-    left-unit-law-comp-hom-Semigroup; right-unit-law-comp-hom-Semigroup)
+open import group-theory.groups
+open import group-theory.homomorphisms-semigroups
 ```
 
 ## Idea
@@ -42,6 +33,10 @@ module _
   preserves-mul-Group : (type-Group G → type-Group H) → UU (l1 ⊔ l2)
   preserves-mul-Group f =
     preserves-mul-Semigroup (semigroup-Group G) (semigroup-Group H) f
+
+  preserves-mul-Group' : (type-Group G → type-Group H) → UU (l1 ⊔ l2)
+  preserves-mul-Group' f =
+    preserves-mul-Semigroup' (semigroup-Group G) (semigroup-Group H) f
 
   type-hom-Group : UU (l1 ⊔ l2)
   type-hom-Group =

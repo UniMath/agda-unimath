@@ -9,6 +9,7 @@ module structured-types where
 ```
 
 ```agda
+open import structured-types.central-h-spaces public
 open import structured-types.coherent-h-spaces public
 open import structured-types.contractible-pointed-types public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public

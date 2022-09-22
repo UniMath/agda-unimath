@@ -7,29 +7,21 @@ title: Categories
 
 module category-theory.categories where
 
-open import category-theory.isomorphisms-precategories using
-  ( iso-Precat; id-iso-Precat; iso-eq-Precat; is-set-iso-Precat)
-open import category-theory.precategories using
-  ( Precat; obj-Precat; id-hom-Precat; hom-Precat; type-hom-Precat;
-    is-set-type-hom-Precat; comp-hom-Precat; assoc-comp-hom-Precat;
-    left-unit-law-comp-hom-Precat; right-unit-law-comp-hom-Precat)
-open import foundation.1-types using (is-1-type; 1-Type)
-open import foundation.contractible-types using (is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pr1; pr2)
-open import foundation.equivalences using (is-equiv-Prop)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.isomorphisms-of-sets using
-  ( iso-Set; equiv-iso-equiv-Set)
-open import foundation.propositions using (Prop; Π-Prop; type-Prop)
-open import foundation.sets using
-  ( Set; is-set; is-set-is-equiv; hom-Set; type-equiv-Set;
-    is-contr-total-equiv-Set)
-open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import category-theory.isomorphisms-precategories
+open import category-theory.precategories
+
+open import foundation.1-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.isomorphisms-of-sets
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -45,7 +37,8 @@ module _
 
   is-category-Precat-Prop : Prop (l1 ⊔ l2)
   is-category-Precat-Prop =
-    Π-Prop (obj-Precat C)
+    Π-Prop
+      ( obj-Precat C)
       ( λ x →
         Π-Prop (obj-Precat C) (λ y → is-equiv-Prop (iso-eq-Precat C x y)))
 

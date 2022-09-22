@@ -23,6 +23,7 @@ open import foundation.identity-types using
   ( Id; ap-binary; inv; _∙_; ap; refl; _＝_)
 open import foundation.injective-maps using
   ( is-injective; is-injective-is-equiv)
+open import foundation.involutions
 open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;
     is-prop-Σ; Prop)
@@ -325,6 +326,17 @@ module _
       ( inv-Group x)
       ( ( right-inverse-law-mul-Group (inv-Group x)) ∙
         ( inv (left-inverse-law-mul-Group x)))
+```
+
+### Inverting elements of a group is an equivalence
+
+```agda
+  is-equiv-inv-Group : is-equiv inv-Group
+  is-equiv-inv-Group = is-equiv-is-involution inv-inv-Group
+
+  equiv-equiv-inv-Group : type-Group ≃ type-Group
+  pr1 equiv-equiv-inv-Group = inv-Group
+  pr2 equiv-equiv-inv-Group = is-equiv-inv-Group
 ```
 
 ### Two elements `x` and `y` are equal iff `x⁻¹y=1`

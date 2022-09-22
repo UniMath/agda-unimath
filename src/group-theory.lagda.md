@@ -35,6 +35,7 @@ open import group-theory.e8-lattice public
 open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
 open import group-theory.equivalences-concrete-group-actions public
+open import group-theory.equivalences-concrete-groups public
 open import group-theory.equivalences-group-actions public
 open import group-theory.equivalences-higher-groups public
 open import group-theory.equivalences-semigroups public
@@ -62,6 +63,7 @@ open import group-theory.integers-higher-group public
 open import group-theory.inverse-semigroups public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
+open import group-theory.isomorphisms-concrete-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-semigroups public
@@ -76,6 +78,7 @@ open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.normal-subgroups public
 open import group-theory.normal-subgroups-concrete-groups public
+open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orbits-concrete-group-actions public
@@ -83,6 +86,7 @@ open import group-theory.orbits-group-actions public
 open import group-theory.orbits-higher-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.precategory-of-concrete-groups public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
 open import group-theory.precategory-of-semigroups public

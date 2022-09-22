@@ -115,9 +115,8 @@ open import group-theory.subgroups using (group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using
   ( is-generating-subset-Group; subgroup-subset-Group)
 open import group-theory.symmetric-groups using
-  ( symmetric-Group; iso-symmetric-group-abstract-automorphism-group-Set;
-    hom-symmetric-group-equiv-Set; hom-inv-symmetric-group-equiv-Set;
-    iso-symmetric-group-equiv-Set)
+  ( symmetric-Group; hom-symmetric-group-equiv-Set;
+    hom-inv-symmetric-group-equiv-Set; iso-symmetric-group-equiv-Set)
 
 open import synthetic-homotopy-theory.loop-spaces
 
