@@ -213,11 +213,11 @@ is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = ( λ q → ex-falso
                  ( associative-mul-ℤ neg-one-ℤ ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
               ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) ∙ q)))
             ( is-positive-gcd-ℤ
-              reduced-numerator
-              reduced-denominator
+              ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+              ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
               ( inr
                 ( is-positive-denominator-fraction-ℤ
-                  reduced-fraction))))) 
+                  (reduce-fraction-ℤ x)))))) 
 {-
   -- Induction on whether alpha is 0
   ind-coprod
