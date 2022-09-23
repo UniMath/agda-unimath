@@ -17,7 +17,8 @@ open import elementary-number-theory.equality-integers using
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; one-ℤ; is-zero-ℤ; neg-ℤ; int-ℕ; is-nonnegative-ℤ; is-one-ℤ;
     is-injective-int-ℕ; is-nonnegative-eq-ℤ; is-nonnegative-int-ℕ; is-neg-one-ℤ;
-    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ; decide-is-zero-ℤ )
+    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ;
+    is-zero-is-nonnegative-neg-is-nonnegative-ℤ )
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
@@ -35,7 +36,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equational-reasoning
-open import foundation.functions using (_∘_)
+open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.negation using (¬)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
@@ -53,6 +54,18 @@ An integer `d` divides an integer `x` if there is an integer `k` such that `mul-
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
 div-ℤ d x = Σ ℤ (λ k → mul-ℤ k d ＝ x)
+
+quotient-div-ℤ : (x y : ℤ) → div-ℤ x y → ℤ
+quotient-div-ℤ x y H = pr1 H
+
+eq-quotient-div-ℤ :
+  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ (quotient-div-ℤ x y H) x ＝ y
+eq-quotient-div-ℤ x y H = pr2 H
+
+eq-quotient-div-ℤ' :
+  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ x (quotient-div-ℤ x y H) ＝ y
+eq-quotient-div-ℤ' x y H =
+  commutative-mul-ℤ x (quotient-div-ℤ x y H) ∙ eq-quotient-div-ℤ x y H
 ```
 
 ## Properties
@@ -114,6 +127,15 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
   ( ap-add-ℤ p q)
 ```
 
+### If `x` divides `y` then `x` divides any multiple of `y`
+
+```agda
+div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ x (mul-ℤ k y)
+div-mul-ℤ k x y H =
+  trans-div-ℤ x y (mul-ℤ k y) H (pair k refl)
+```
+
 ### If `x` divides `y` then it divides `-y`
 
 ```agda
@@ -134,6 +156,54 @@ pr2 (neg-div-ℤ x y (pair d p)) =
     ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
     ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
     ＝ y                           by p
+```
+
+### Multiplication preserves divisibility
+
+```agda
+preserves-div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ (mul-ℤ k x) (mul-ℤ k y)
+pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
+pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
+  ( inv (associative-mul-ℤ q k x)) ∙
+    ( ( ap (mul-ℤ' x) (commutative-mul-ℤ q k)) ∙
+      ( ( associative-mul-ℤ k q x) ∙
+        ( ap (mul-ℤ k) p)))
+```
+
+### Multiplication by a nonzero number reflects divisibility
+
+```agda
+reflects-div-mul-ℤ :
+  (k x y : ℤ) → is-nonzero-ℤ k → div-ℤ (mul-ℤ k x) (mul-ℤ k y) → div-ℤ x y
+pr1 (reflects-div-mul-ℤ k x y H (pair q p)) = q
+pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
+  is-injective-mul-ℤ k H
+    ( ( inv (associative-mul-ℤ k q x)) ∙
+      ( ( ap (mul-ℤ' x) (commutative-mul-ℤ k q)) ∙
+        ( ( associative-mul-ℤ q k x) ∙
+          ( p))))
+```
+
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+
+```agda
+div-quotient-div-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) → is-nonzero-ℤ d →
+  div-ℤ (mul-ℤ d x) y → div-ℤ x (quotient-div-ℤ d y H)
+div-quotient-div-div-ℤ x y d H f K =
+  reflects-div-mul-ℤ d x
+    ( quotient-div-ℤ d y H)
+    ( f)
+    ( tr (div-ℤ (mul-ℤ d x)) (inv (eq-quotient-div-ℤ' d y H)) K)
+
+div-div-quotient-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) →
+  div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (mul-ℤ d x) y
+div-div-quotient-div-ℤ x y d H K =
+  tr ( div-ℤ (mul-ℤ d x))
+     ( eq-quotient-div-ℤ' d y H)
+     ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
 
 ### Comparison of divisibility on ℕ and on ℤ
@@ -525,7 +595,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H =
       ( is-one-or-neg-one-is-unit-ℤ
         (int-unit-ℤ (pr1 (presim-x-y p)))
         (is-unit-int-unit-ℤ (pr1 (presim-x-y p))) ))
-    ( decide-is-zero-ℤ x)
+    ( is-decidable-is-zero-ℤ x)
   where
     presim-x-y : (p : is-nonzero-ℤ x) → presim-unit-ℤ x y
     presim-x-y p = H (λ - → p (pr1 -))
@@ -535,7 +605,26 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H =
 then they are the same
 
 ```agda
--- eq-sim-unit-is-nonnegative-ℤ :
---   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
--- eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
+eq-sim-unit-is-nonnegative-ℤ :
+  {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K = 
+  ind-coprod
+    ( λ t → a ＝ b)
+    id
+    ( λ p → ind-coprod
+      ( λ t → a ＝ b)
+      ( λ q → equational-reasoning
+        a ＝ zero-ℤ   by q
+          ＝ neg-ℤ a  by inv (ap neg-ℤ q)
+          ＝ b        by p
+        )
+      ( λ q → ex-falso
+        ( q
+          ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
+            a
+            H
+            (tr is-nonnegative-ℤ (inv p) H'))))
+      ( is-decidable-is-zero-ℤ a )
+      )
+    ( is-plus-or-minus-sim-unit-ℤ K )
 ```

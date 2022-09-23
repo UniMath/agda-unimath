@@ -7,21 +7,32 @@ title: The rational numbers
 
 module elementary-number-theory.rational-numbers where
 
-open import elementary-number-theory.divisibility-integers using (div-ℤ)
+open import elementary-number-theory.divisibility-integers using
+  ( div-ℤ; antisymmetric-div-ℤ; is-plus-or-minus-sim-unit-ℤ;
+    div-div-quotient-div-ℤ)
+open import elementary-number-theory.equality-integers using
+  ( is-decidable-is-one-ℤ; is-decidable-is-zero-ℤ)
 open import elementary-number-theory.fractions using
   ( fraction-ℤ; numerator-fraction-ℤ; denominator-fraction-ℤ;
     is-positive-denominator-fraction-ℤ)
 open import elementary-number-theory.greatest-common-divisor-integers using
-  ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ)
+  ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ;
+    is-zero-right-is-zero-gcd-ℤ; is-positive-gcd-ℤ; div-gcd-is-common-divisor-ℤ)
 open import elementary-number-theory.integers using
-  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; one-ℤ)
+  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
+    is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ)
 open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-positive-left-factor-mul-ℤ)
+  ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
+    commutative-mul-ℤ)
 open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ)
 
+open import foundation.coproduct-types using (ind-coprod; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; inv)
+open import foundation.empty-types using (ex-falso)
+open import foundation.functions using (id)
+open import foundation.identity-types using (_＝_; inv; tr; refl; ap; _∙_)
+open import foundation.negation using (¬)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -115,9 +126,91 @@ reduce-fraction-ℤ x =
       ( int-reduce-denominator-fraction-ℤ x)
       ( is-positive-int-reduce-denominator-fraction-ℤ x))
 
-{-
 is-reduced-reduce-fraction-ℤ :
   (x : fraction-ℤ) → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
-is-reduced-reduce-fraction-ℤ x = {!!}
--}
+is-reduced-reduce-fraction-ℤ x =
+  -- Induction on whether alpha is 0
+  ind-coprod
+    ( λ t → is-reduced-fraction-ℤ reduced-fraction)
+    -- If it's 0, then we get a contradiction since the denominator is positive
+    ( λ p → ex-falso
+      (tr is-positive-ℤ
+        ( is-zero-right-is-zero-gcd-ℤ reduced-numerator reduced-denominator p)
+        ( is-positive-denominator-fraction-ℤ reduced-fraction)))
+    -- If it's not 0, we do cases on whether alpha * d is plus or minus d
+    ( λ p →
+      ind-coprod
+        ( λ t → is-reduced-fraction-ℤ reduced-fraction)
+        -- If alpha * d = d, then d is 1
+        ( is-injective-mul-ℤ' d
+           ( λ r →
+             tr is-positive-ℤ r
+               ( is-positive-gcd-is-positive-right-ℤ
+                 ( numerator-fraction-ℤ x)
+                 ( denominator-fraction-ℤ x)
+                 ( is-positive-denominator-fraction-ℤ x))))
+        -- If - (alpha * d) = d, then d is alpha is -1, a contradiction,
+        -- since the gcd should be positive
+        ( λ q → ex-falso
+          ( tr is-positive-ℤ {y = neg-ℤ one-ℤ}
+            (inv (neg-neg-ℤ alpha) ∙
+             ap neg-ℤ
+               ( is-injective-mul-ℤ' d
+                 ( λ r →
+                   tr is-positive-ℤ r
+                     ( is-positive-gcd-is-positive-right-ℤ
+                       ( numerator-fraction-ℤ x)
+                       ( denominator-fraction-ℤ x)
+                       ( is-positive-denominator-fraction-ℤ x)))
+                 ( associative-mul-ℤ neg-one-ℤ alpha d ∙ q)))
+            ( is-positive-gcd-ℤ
+              reduced-numerator
+              reduced-denominator
+              ( inr
+                ( is-positive-denominator-fraction-ℤ
+                  reduced-fraction)))))
+        -- (alpha * d) is plus or minus d
+        ( is-plus-or-minus-sim-unit-ℤ
+            ( antisymmetric-div-ℤ
+              (mul-ℤ alpha d)
+              d
+              ( div-gcd-is-common-divisor-ℤ
+                ( numerator-fraction-ℤ x)
+                ( denominator-fraction-ℤ x)
+                ( mul-ℤ alpha d)
+                ( pair
+                  -- alpha * d divides the numerator of x
+                  ( tr ( λ - → div-ℤ - (numerator-fraction-ℤ x))
+                       ( commutative-mul-ℤ d alpha)
+                       ( div-div-quotient-div-ℤ
+                         alpha
+                         (numerator-fraction-ℤ x)
+                         d
+                         ( pr1 ( is-common-divisor-gcd-ℤ
+                               ( numerator-fraction-ℤ x)
+                               ( denominator-fraction-ℤ x)))
+                         ( pr1 ( is-common-divisor-gcd-ℤ
+                                 reduced-numerator
+                                 reduced-denominator))))
+                  -- alpha * d divides the denominator of x
+                  ( tr ( λ - → div-ℤ - (denominator-fraction-ℤ x))
+                       ( commutative-mul-ℤ d alpha)
+                       ( div-div-quotient-div-ℤ
+                         alpha
+                         (denominator-fraction-ℤ x)
+                         d
+                         ( pr2 ( is-common-divisor-gcd-ℤ
+                               ( numerator-fraction-ℤ x)
+                               ( denominator-fraction-ℤ x)))
+                         ( pr2 ( is-common-divisor-gcd-ℤ
+                                 reduced-numerator
+                                 reduced-denominator))))))
+              (pair alpha refl))))
+    ( is-decidable-is-zero-ℤ alpha)
+  where
+    reduced-fraction = reduce-fraction-ℤ x
+    reduced-numerator = numerator-fraction-ℤ reduced-fraction
+    reduced-denominator = denominator-fraction-ℤ reduced-fraction
+    d = gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)
+    alpha = gcd-ℤ reduced-numerator reduced-denominator
 ```
