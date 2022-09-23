@@ -7,24 +7,25 @@ title: Fractions
 
 module elementary-number-theory.fractions where
 
-open import elementary-number-theory.integers using
-  ( ℤ; positive-ℤ; is-positive-ℤ; is-nonzero-ℤ; is-nonzero-is-positive-ℤ;
-    ℤ-Set)
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; mul-ℤ')
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (refl; inv; _∙_; ap)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (Id-Prop)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea
 
 The type of fractions is the type of pairs `n/m` consisting of an integer `n` and a positive integer `m`. The type of rational numbers is a retract of the type of fractions.
+
+## Definition
+
+### The type of fractions of integers
 
 ```agda
 fraction-ℤ : UU lzero
@@ -49,7 +50,11 @@ is-nonzero-denominator-fraction-ℤ x =
   is-nonzero-is-positive-ℤ
     ( denominator-fraction-ℤ x)
     ( is-positive-denominator-fraction-ℤ x)
+```
 
+### Similarity of fractions of integers
+
+```agda
 sim-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
 sim-fraction-ℤ-Prop x y =
   Id-Prop ℤ-Set
@@ -118,4 +123,27 @@ trans-sim-fraction-ℤ {x} {y} {z} r s =
                             ( numerator-fraction-ℤ z)
                             ( denominator-fraction-ℤ x)
                             ( denominator-fraction-ℤ y)))))))))))))
+```
+
+## Properties
+
+### The greatest common divisor of the numerator and a denominator of a fraction is always a positive integer
+
+```agda
+is-positive-gcd-numerator-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-positive-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+is-positive-gcd-numerator-denominator-fraction-ℤ x =
+  is-positive-gcd-is-positive-right-ℤ
+    ( numerator-fraction-ℤ x)
+    ( denominator-fraction-ℤ x)
+    ( is-positive-denominator-fraction-ℤ x)
+
+is-nonzero-gcd-numerator-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-nonzero-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
+  is-nonzero-is-positive-ℤ
+    ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+    ( is-positive-gcd-numerator-denominator-fraction-ℤ x)
 ```

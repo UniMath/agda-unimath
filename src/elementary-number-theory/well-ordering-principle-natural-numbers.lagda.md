@@ -52,23 +52,21 @@ module _
   {l1 : Level} (P : ℕ → Prop l1)
   where
 
-  abstract
-    all-elements-equal-minimal-element-ℕ :
-      all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
-    all-elements-equal-minimal-element-ℕ
-      (pair x (pair p l)) (pair y (pair q k)) =
-      eq-type-subtype
-        ( λ n →
-          prod-Prop
-            ( pair _ (is-prop-type-Prop (P n)))
-            ( is-lower-bound-ℕ-Prop n))
-        ( antisymmetric-leq-ℕ x y (l y q) (k x p))
+  all-elements-equal-minimal-element-ℕ :
+    all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
+  all-elements-equal-minimal-element-ℕ
+    (pair x (pair p l)) (pair y (pair q k)) =
+    eq-type-subtype
+      ( λ n →
+        prod-Prop
+          ( pair _ (is-prop-type-Prop (P n)))
+          ( is-lower-bound-ℕ-Prop n))
+      ( antisymmetric-leq-ℕ x y (l y q) (k x p))
 
-  abstract
-    is-prop-minimal-element-ℕ :
-      is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
-    is-prop-minimal-element-ℕ =
-      is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
+  is-prop-minimal-element-ℕ :
+    is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
+  is-prop-minimal-element-ℕ =
+    is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
 
   minimal-element-ℕ-Prop : Prop l1
   pr1 minimal-element-ℕ-Prop = minimal-element-ℕ (λ n → type-Prop (P n))

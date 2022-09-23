@@ -20,7 +20,7 @@ open import elementary-number-theory.greatest-common-divisor-integers using
     is-zero-right-is-zero-gcd-ℤ; is-positive-gcd-ℤ; div-gcd-is-common-divisor-ℤ)
 open import elementary-number-theory.integers using
   ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
-    is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ)
+    is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ; is-nonzero-ℤ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
     commutative-mul-ℤ)
@@ -119,13 +119,16 @@ is-positive-int-reduce-denominator-fraction-ℤ x =
       ( is-positive-denominator-fraction-ℤ x))
 
 reduce-fraction-ℤ : fraction-ℤ → fraction-ℤ
-reduce-fraction-ℤ x =
-  pair
-    ( int-reduce-numerator-fraction-ℤ x)
-    ( pair
-      ( int-reduce-denominator-fraction-ℤ x)
-      ( is-positive-int-reduce-denominator-fraction-ℤ x))
+pr1 (reduce-fraction-ℤ x) = int-reduce-numerator-fraction-ℤ x
+pr1 (pr2 (reduce-fraction-ℤ x)) = int-reduce-denominator-fraction-ℤ x
+pr2 (pr2 (reduce-fraction-ℤ x)) =
+  is-positive-int-reduce-denominator-fraction-ℤ x
 
+is-reduced-reduce-fraction-ℤ :
+  (x : fraction-ℤ) → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
+is-reduced-reduce-fraction-ℤ x = {!!}
+
+{-
 is-reduced-reduce-fraction-ℤ :
   (x : fraction-ℤ) → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
 is-reduced-reduce-fraction-ℤ x with 
@@ -198,7 +201,11 @@ is-reduced-reduce-fraction-ℤ x | inr nz | inl pos = ( is-injective-mul-ℤ'
                  ( numerator-fraction-ℤ x)
                  ( denominator-fraction-ℤ x)
                  ( is-positive-denominator-fraction-ℤ x)))) pos
-is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = (ex-falso
+is-reduced-reduce-fraction-ℤ x | inr nz | inr neg =
+  ex-falso
+    {!!}
+{-
+  (ex-falso
           ( tr is-positive-ℤ {y = neg-ℤ one-ℤ}
             (inv (neg-neg-ℤ ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
               ( denominator-fraction-ℤ (reduce-fraction-ℤ x)))) ∙
@@ -218,13 +225,21 @@ is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = (ex-falso
               ( inr
                 ( is-positive-denominator-fraction-ℤ
                   (reduce-fraction-ℤ x)))))) 
-    ( is-decidable-is-zero-ℤ alpha) 
-  where
-    reduced-fraction = reduce-fraction-ℤ x
-    reduced-numerator = numerator-fraction-ℤ reduced-fraction
-    reduced-denominator = denominator-fraction-ℤ reduced-fraction
-    d = ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-    alpha = ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
-              ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) 
+    ( is-decidable-is-zero-ℤ alpha)
 -}
+  where
+    reduced-fraction : fraction-ℤ
+    reduced-fraction = reduce-fraction-ℤ x
+    reduced-numerator : ℤ
+    reduced-numerator = numerator-fraction-ℤ reduced-fraction
+    reduced-denominator : ℤ
+    reduced-denominator = denominator-fraction-ℤ reduced-fraction
+    d : ℤ
+    d = ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+    alpha : ℤ
+    alpha =
+      gcd-ℤ
+        ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
+        ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
+        -}
 ```

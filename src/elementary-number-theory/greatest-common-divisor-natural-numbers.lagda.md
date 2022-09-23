@@ -14,7 +14,8 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
     div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
-    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ; is-one-div-one-ℕ)
+    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ; is-one-div-one-ℕ;
+    quotient-div-ℕ; div-quotient-div-div-quotient-div-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ)
 open import elementary-number-theory.euclidean-division-natural-numbers using
@@ -217,7 +218,7 @@ is-zero-add-is-zero-gcd-ℕ a b H =
     ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
 
-### If at least one of `a` and `b` is nonzero, then their gcd is nonzer
+### If at least one of `a` and `b` is nonzero, then their gcd is nonzero
 
 ```agda
 is-nonzero-gcd-ℕ :
@@ -389,3 +390,23 @@ is-one-is-gcd-one-ℕ' {a} {x} H =
 is-one-gcd-one-ℕ' : (a : ℕ) → is-one-ℕ (gcd-ℕ a 1)
 is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
 ```
+
+### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`.
+
+```agda
+is-common-divisor-quotients-div-quotient :
+  {a b d e n : ℕ} → is-nonzero-ℕ e → (H : is-common-divisor-ℕ a b d)
+  (K : div-ℕ e d) → div-ℕ n (quotient-div-ℕ e d K) →
+  is-common-divisor-ℕ
+    ( quotient-div-ℕ e a (transitive-div-ℕ e d a K (pr1 H)))
+    ( quotient-div-ℕ e b (transitive-div-ℕ e d b K (pr2 H)))
+    ( n)
+pr1 (is-common-divisor-quotients-div-quotient {a} {b} {d} {e} {n} nz H K L) =
+  div-quotient-div-div-quotient-div-ℕ a d e n nz (pr1 H) K L
+pr2 (is-common-divisor-quotients-div-quotient {a} {b} {d} {e} {n} nz H K L) =
+  div-quotient-div-div-quotient-div-ℕ b d e n nz (pr2 H) K L
+```
+
+### The greatest common divisor of `a/d` and `b/d` is `gcd(a,b)/d`
+
+### The greatest common divisor of `a/gcd(a,b)` and `b/gcd(a,b)` is `1`
