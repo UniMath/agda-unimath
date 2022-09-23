@@ -218,13 +218,5 @@ is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = (ex-falso
               ( inr
                 ( is-positive-denominator-fraction-ℤ
                   (reduce-fraction-ℤ x)))))) 
-    ( is-decidable-is-zero-ℤ alpha) 
-  where
-    reduced-fraction = reduce-fraction-ℤ x
-    reduced-numerator = numerator-fraction-ℤ reduced-fraction
-    reduced-denominator = denominator-fraction-ℤ reduced-fraction
-    d = ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-    alpha = ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
-              ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) 
--}
+
 ```
