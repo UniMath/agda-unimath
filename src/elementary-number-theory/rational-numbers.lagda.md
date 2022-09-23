@@ -197,8 +197,8 @@ is-reduced-reduce-fraction-ℤ x | inr nz | inl pos = ( is-injective-mul-ℤ'
                ( is-positive-gcd-is-positive-right-ℤ
                  ( numerator-fraction-ℤ x)
                  ( denominator-fraction-ℤ x)
-                 ( is-positive-denominator-fraction-ℤ x))))
-is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = ( λ q → ex-falso
+                 ( is-positive-denominator-fraction-ℤ x)))) pos
+is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = (ex-falso
           ( tr is-positive-ℤ {y = neg-ℤ one-ℤ}
             (inv (neg-neg-ℤ ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
               ( denominator-fraction-ℤ (reduce-fraction-ℤ x)))) ∙
@@ -211,7 +211,7 @@ is-reduced-reduce-fraction-ℤ x | inr nz | inr neg = ( λ q → ex-falso
                        ( denominator-fraction-ℤ x)
                        ( is-positive-denominator-fraction-ℤ x)))
                  ( associative-mul-ℤ neg-one-ℤ ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x)) 
-              ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) ∙ q)))
+              ( denominator-fraction-ℤ (reduce-fraction-ℤ x))) ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)) ∙ neg)))
             ( is-positive-gcd-ℤ
               ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
               ( denominator-fraction-ℤ (reduce-fraction-ℤ x))
