@@ -576,29 +576,21 @@ div-div-int-abs-ℤ {x} {y} =
 
 ```agda
 is-plus-or-minus-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → is-plus-or-minus-ℤ x y
-is-plus-or-minus-sim-unit-ℤ {x} {y} H =
-  ind-coprod
-    ( λ t → (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y))
-    ( λ p → inl (p ∙ inv (is-zero-sim-unit-ℤ H p)))
-    ( λ p → ind-coprod
-      ( λ t → (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y))
-      ( λ q → inl (equational-reasoning
+is-plus-or-minus-sim-unit-ℤ {x} {y} H with ( is-decidable-is-zero-ℤ x)
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z = inl (z ∙ inv (is-zero-sim-unit-ℤ H z))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz with ( is-one-or-neg-one-is-unit-ℤ
+        (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -)))))
+        (is-unit-int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) ) 
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos = inl (equational-reasoning
          x  ＝ mul-ℤ one-ℤ x                             by (inv (left-unit-law-mul-ℤ x))
-            ＝ mul-ℤ (int-unit-ℤ (pr1 (presim-x-y p))) x by inv (ap (λ - → mul-ℤ - x) q)
-            ＝ y                                         by pr2 (presim-x-y p)))
-      ( λ q → inr (equational-reasoning
+            ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by inv (ap (λ - → mul-ℤ - x) pos)
+            ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr neg = inr (equational-reasoning
          neg-ℤ x
-         ＝ mul-ℤ (int-unit-ℤ (pr1 (presim-x-y p))) x by tr (λ - → neg-ℤ x ＝ mul-ℤ - x)
-                                                           (inv q)
+         ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by tr (λ - → neg-ℤ x ＝ mul-ℤ - x)
+                                                           (inv neg)
                                                            (left-neg-unit-law-mul-ℤ x)
-         ＝ y                                         by pr2 (presim-x-y p)))
-      ( is-one-or-neg-one-is-unit-ℤ
-        (int-unit-ℤ (pr1 (presim-x-y p)))
-        (is-unit-int-unit-ℤ (pr1 (presim-x-y p))) ))
-    ( is-decidable-is-zero-ℤ x)
-  where
-    presim-x-y : (p : is-nonzero-ℤ x) → presim-unit-ℤ x y
-    presim-x-y p = H (λ - → p (pr1 -))
+         ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
 ```
 
 ### If we have that `sim-unit-ℤ x y` and both `x` and `y` have the same sign,
@@ -607,24 +599,16 @@ then they are the same
 ```agda
 eq-sim-unit-is-nonnegative-ℤ :
   {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
-eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K = 
-  ind-coprod
-    ( λ t → a ＝ b)
-    id
-    ( λ p → ind-coprod
-      ( λ t → a ＝ b)
-      ( λ q → equational-reasoning
-        a ＝ zero-ℤ   by q
-          ＝ neg-ℤ a  by inv (ap neg-ℤ q)
-          ＝ b        by p
-        )
-      ( λ q → ex-falso
-        ( q
-          ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
-            a
-            H
-            (tr is-nonnegative-ℤ (inv p) H'))))
-      ( is-decidable-is-zero-ℤ a )
-      )
-    ( is-plus-or-minus-sim-unit-ℤ K )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with
+  ( is-plus-or-minus-sim-unit-ℤ K )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg with ( is-decidable-is-zero-ℤ a )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z = 
+  equational-reasoning
+    a ＝ zero-ℤ   by z
+      ＝ neg-ℤ a  by inv (ap neg-ℤ z)
+      ＝ b        by neg 
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz = 
+  ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
+   a H (tr is-nonnegative-ℤ (inv neg) H')))
 ```
