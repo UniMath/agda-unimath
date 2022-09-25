@@ -158,10 +158,21 @@ pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
     ( symm-sim-unit-ℤ (sim-unit-abs-ℤ k))
     ( refl-sim-unit-ℤ (gcd-ℤ x y)))
 
+```
+
+### The gcd of `x` and `y` divides both `x` and `y`
+
+```agda
 is-common-divisor-gcd-ℤ :
   (x y : ℤ) → is-common-divisor-ℤ x y (gcd-ℤ x y)
 is-common-divisor-gcd-ℤ x y =
   pr2 (pr2 (is-gcd-gcd-ℤ x y) (gcd-ℤ x y)) (refl-div-ℤ (gcd-ℤ x y))
+
+div-ℤ-gcd-left : (x y : ℤ) → div-ℤ (gcd-ℤ x y) x
+div-ℤ-gcd-left x y = pr1 (is-common-divisor-gcd-ℤ x y)
+
+div-ℤ-gcd-right : (x y : ℤ) → div-ℤ (gcd-ℤ x y) y
+div-ℤ-gcd-right x y = pr2 (is-common-divisor-gcd-ℤ x y)
 
 div-gcd-is-common-divisor-ℤ :
   (x y k : ℤ) → is-common-divisor-ℤ x y k → div-ℤ k (gcd-ℤ x y)
