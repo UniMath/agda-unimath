@@ -300,7 +300,20 @@ module _
 ```
 
 #### Associatitivity
--- assoc-comp-iso-Cat
+```agda
+  assoc-comp-iso-Cat :
+    {x y z w : obj-Cat C}
+    (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    comp-iso-Cat C (comp-iso-Cat C h g) f ＝ comp-iso-Cat C h (comp-iso-Cat C g f)
+  assoc-comp-iso-Cat h g f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C (comp-iso-Cat C h g) f)
+      ( comp-iso-Cat C h (comp-iso-Cat C g f))
+      ( assoc-comp-hom-Cat C
+        ( hom-iso-Cat C h)
+        ( hom-iso-Cat C g)
+        ( hom-iso-Cat C f))
+```
 
 #### Left inverse law
 -- left-inverse-law-comp-iso-Cat
