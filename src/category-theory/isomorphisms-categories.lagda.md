@@ -58,6 +58,16 @@ module _
     {x y : obj-Cat C} (f : iso-Cat x y) →
     comp-hom-Cat C (hom-inv-iso-Cat f) (hom-iso-Cat f) ＝ id-hom-Cat C
   isretr-hom-inv-iso-Cat f = pr2 (pr2 (is-iso-hom-iso-Cat f))
+
+  inv-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → iso-Cat y x
+  inv-iso-Cat f =
+    pair
+      ( hom-inv-iso-Cat f)
+      ( pair
+        ( hom-iso-Cat f)
+        ( pair
+          ( isretr-hom-inv-iso-Cat f)
+          ( issec-hom-inv-iso-Cat f)))
 ```
 
 ## Examples
@@ -316,10 +326,26 @@ module _
 ```
 
 #### Left inverse law
--- left-inverse-law-comp-iso-Cat
+```agda
+  left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
+  left-inverse-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C (inv-iso-Cat C f) f)
+      ( id-iso-Cat C)
+      ( isretr-hom-inv-iso-Cat C f)
+```
 
 #### Right inverse law
--- right-inverse-law-comp-iso-Cat
+```agda
+  right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
+  right-inverse-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C f (inv-iso-Cat C f))
+      ( id-iso-Cat C)
+      ( issec-hom-inv-iso-Cat C f)
+```
 
 ### Equalities give rise to isomorphisms
 
