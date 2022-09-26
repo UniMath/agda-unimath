@@ -170,7 +170,7 @@ module _
             ( is-functional-functional-correspondence
               ( functional-correspondence-function f)
               ( x))
-          ( f x , refl)))
+            ( f x , refl)))
 
   module _
     {l3 : Level} (C : functional-correspondence l3 A B)
