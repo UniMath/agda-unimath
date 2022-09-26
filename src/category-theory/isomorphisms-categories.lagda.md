@@ -276,7 +276,14 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : iso-Cat C x y)
   where
 
-  -- left-unit-law-comp-iso-Cat
+  left-unit-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C (id-iso-Cat C) f ＝ f
+  left-unit-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      (comp-iso-Cat C (id-iso-Cat C) f)
+      ( f)
+      ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
 ```
 
 #### Right unit law
