@@ -357,13 +357,12 @@ module _
   iso-eq-Cat : (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
   iso-eq-Cat = iso-eq-Precat (precat-Cat C)
 
-{-
   preserves-concat-iso-eq-Cat :
     {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
     iso-eq-Cat x z (p ∙ q) ＝
     comp-iso-Cat C (iso-eq-Cat y z q) (iso-eq-Cat x y p)
-  preserves-concat-iso-eq-Cat refl q = {!!}
-  -}
+  preserves-concat-iso-eq-Cat {x} {.x} {y} refl q =
+    inv (right-unit-law-comp-iso-Cat C {x} {y} (iso-eq-Cat x y q))
 ```
 
 ## Properties
