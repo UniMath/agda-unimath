@@ -283,7 +283,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : iso-Cat C x y)
+  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C}
   where
 
   left-unit-law-comp-iso-Cat :
