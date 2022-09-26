@@ -14,7 +14,7 @@ open import elementary-number-theory.addition-natural-numbers using
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
     symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;
-    sim-unit-abs-ℤ; refl-div-ℤ; is-zero-div-ℤ-is-zero-ℤ)
+    sim-unit-abs-ℤ; refl-div-ℤ; is-zero-is-zero-div-ℤ)
 open import
   elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
@@ -219,12 +219,12 @@ is-zero-gcd-ℤ zero-ℤ zero-ℤ refl refl =
 is-zero-left-is-zero-gcd-ℤ :
   (a b : ℤ) → is-zero-ℤ (gcd-ℤ a b) → is-zero-ℤ a
 is-zero-left-is-zero-gcd-ℤ a b =
-  is-zero-div-ℤ-is-zero-ℤ a (gcd-ℤ a b) (div-ℤ-gcd-left a b)
+  is-zero-is-zero-div-ℤ a (gcd-ℤ a b) (div-ℤ-gcd-left a b)
 
 is-zero-right-is-zero-gcd-ℤ :
   (a b : ℤ) → is-zero-ℤ (gcd-ℤ a b) → is-zero-ℤ b
 is-zero-right-is-zero-gcd-ℤ a b =
-  is-zero-div-ℤ-is-zero-ℤ b (gcd-ℤ a b) (div-ℤ-gcd-right a b)
+  is-zero-is-zero-div-ℤ b (gcd-ℤ a b) (div-ℤ-gcd-right a b)
 
 is-commutative-gcd-ℤ : (x y : ℤ) → gcd-ℤ x y ＝ gcd-ℤ y x
 is-commutative-gcd-ℤ x y =
