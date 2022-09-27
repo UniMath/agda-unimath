@@ -145,7 +145,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   functional-correspondence-function :
     ((x : A) → B x) → functional-correspondence l2 A B
   pr1 (functional-correspondence-function f) x y = f x ＝ y
@@ -166,16 +166,11 @@ module _
     eq-htpy
       ( λ x →
         ap pr1
-          ( eq-is-contr
+          ( contraction
             ( is-functional-functional-correspondence
               ( functional-correspondence-function f)
               ( x))
-            { ( pair
-                ( function-functional-correspondence
-                  ( functional-correspondence-function f)
-                  ( x))
-                ( pr2 (center (is-contr-total-path (f x)))))}
-            { ( f x , refl)}))
+            ( f x , refl)))
 
   module _
     {l3 : Level} (C : functional-correspondence l3 A B)
@@ -196,7 +191,7 @@ module _
       fundamental-theorem-id
         ( is-functional-functional-correspondence C x)
         ( map-issec-function-functional-correspondence x)
-    
+
     equiv-issec-function-functional-correspondence :
       equiv-functional-correspondence
         ( functional-correspondence-function

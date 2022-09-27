@@ -214,15 +214,27 @@ is-nonzero-right-factor-mul-ℕ x .zero-ℕ H refl = H (right-zero-law-mul-ℕ x
 
 -- We conclude that y = 1 if (x+1)y = x+1
 
-is-one-is-right-unit-mul-ℕ :
+is-one-is-right-unit-mul-ℕ' :
   (x y : ℕ) → mul-ℕ (succ-ℕ x) y ＝ succ-ℕ x → is-one-ℕ y
-is-one-is-right-unit-mul-ℕ x y p =
+is-one-is-right-unit-mul-ℕ' x y p =
   is-injective-mul-succ-ℕ x (p ∙ inv (right-unit-law-mul-ℕ (succ-ℕ x)))
 
-is-one-is-left-unit-mul-ℕ :
+is-one-is-right-unit-mul-ℕ :
+  (x y : ℕ) → is-nonzero-ℕ x → mul-ℕ x y ＝ x → is-one-ℕ y
+is-one-is-right-unit-mul-ℕ zero-ℕ y nz = ex-falso (nz refl)
+is-one-is-right-unit-mul-ℕ (succ-ℕ x) y nz =
+  is-one-is-right-unit-mul-ℕ' x y
+
+is-one-is-left-unit-mul-ℕ' :
   (x y : ℕ) → mul-ℕ x (succ-ℕ y) ＝ succ-ℕ y → is-one-ℕ x
-is-one-is-left-unit-mul-ℕ x y p =
+is-one-is-left-unit-mul-ℕ' x y p =
   is-injective-mul-succ-ℕ' y (p ∙ inv (left-unit-law-mul-ℕ (succ-ℕ y)))
+
+is-one-is-left-unit-mul-ℕ :
+  (x y : ℕ) → is-nonzero-ℕ y → mul-ℕ x y ＝ y → is-one-ℕ x
+is-one-is-left-unit-mul-ℕ x zero-ℕ nz = ex-falso (nz refl)
+is-one-is-left-unit-mul-ℕ x (succ-ℕ y) nz =
+  is-one-is-left-unit-mul-ℕ' x y
 
 is-one-right-is-one-mul-ℕ :
   (x y : ℕ) → is-one-ℕ (mul-ℕ x y) → is-one-ℕ y

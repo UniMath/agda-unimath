@@ -5,51 +5,29 @@ title: The greatest common divisor of natural numbers
 ```agda
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
-open import elementary-number-theory.decidable-types using
-  ( is-decidable-bounded-Π-ℕ)
-open import elementary-number-theory.distance-natural-numbers using
-  ( dist-ℕ; right-unit-law-dist-ℕ)
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
-    div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
-    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ; is-one-div-one-ℕ;
-    quotient-div-ℕ; div-quotient-div-div-quotient-div-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-zero-ℕ)
-open import elementary-number-theory.euclidean-division-natural-numbers using
-  ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
-    eq-quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ;
-    strict-upper-bound-remainder-euclidean-division-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
-    contradiction-le-ℕ)
-open import elementary-number-theory.lower-bounds-natural-numbers using
-  ( is-lower-bound-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( is-decidable-div-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ;
-    is-zero-ℕ; is-one-ℕ)
-open import
-  elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( minimal-element-ℕ; well-ordering-principle-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.decidable-types
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
-    is-decidable-neg; dn-elim-is-decidable)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation.logical-equivalences using (_↔_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equational-reasoning
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -235,8 +213,8 @@ is-successor-gcd-ℕ a b ne =
 
 ```agda
 div-gcd-is-common-divisor-ℕ :
-  (a b x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x (gcd-ℕ a b)
-div-gcd-is-common-divisor-ℕ a b x H with
+  {a b x : ℕ} → is-common-divisor-ℕ a b x → div-ℕ x (gcd-ℕ a b)
+div-gcd-is-common-divisor-ℕ {a} {b} {x} H with
   is-decidable-is-zero-ℕ (add-ℕ a b)
 ... | inl p = concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-gcd-ℕ a b p))
 ... | inr np = pr2 (is-multiple-of-gcd-gcd-ℕ a b np) x H
@@ -274,7 +252,7 @@ is-divisor-left-div-gcd-ℕ a b x d with
                  ( λ x H →
                    div-right-summand-ℕ x (mul-ℕ q (gcd-ℕ a b)) r
                      ( div-mul-ℕ q x (gcd-ℕ a b)
-                       ( div-gcd-is-common-divisor-ℕ a b x H))
+                       ( div-gcd-is-common-divisor-ℕ H))
                      ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
         ( right-unit-law-dist-ℕ a)))
   where
@@ -299,7 +277,7 @@ is-divisor-right-div-gcd-ℕ a b x d with
                  ( λ x H →
                    div-right-summand-ℕ x (mul-ℕ q (gcd-ℕ a b)) r
                      ( div-mul-ℕ q x (gcd-ℕ a b)
-                       ( div-gcd-is-common-divisor-ℕ a b x H))
+                       ( div-gcd-is-common-divisor-ℕ H))
                      ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
         ( right-unit-law-dist-ℕ b)))
   where
@@ -322,13 +300,19 @@ pr2 (is-common-divisor-div-gcd-ℕ a b x d) = is-divisor-right-div-gcd-ℕ a b x
 is-common-divisor-gcd-ℕ : (a b : ℕ) → is-common-divisor-ℕ a b (gcd-ℕ a b)
 is-common-divisor-gcd-ℕ a b =
   is-common-divisor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+
+div-left-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) a
+div-left-gcd-ℕ a b = pr1 (is-common-divisor-gcd-ℕ a b)
+
+div-right-gcd-ℕ : (a b : ℕ) → div-ℕ (gcd-ℕ a b) b
+div-right-gcd-ℕ a b = pr2 (is-common-divisor-gcd-ℕ a b)
 ```
 
 ### The gcd of `a` and `b` is a greatest common divisor
 
 ```agda
 is-gcd-gcd-ℕ : (a b : ℕ) → is-gcd-ℕ a b (gcd-ℕ a b)
-pr1 (is-gcd-gcd-ℕ a b x) = div-gcd-is-common-divisor-ℕ a b x
+pr1 (is-gcd-gcd-ℕ a b x) = div-gcd-is-common-divisor-ℕ
 pr2 (is-gcd-gcd-ℕ a b x) = is-common-divisor-div-gcd-ℕ a b x
 ```
 
@@ -394,19 +378,90 @@ is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
 ### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`.
 
 ```agda
-is-common-divisor-quotients-div-quotient :
+is-common-divisor-quotients-div-quotient-ℕ :
   {a b d e n : ℕ} → is-nonzero-ℕ e → (H : is-common-divisor-ℕ a b d)
   (K : div-ℕ e d) → div-ℕ n (quotient-div-ℕ e d K) →
+  (M : is-common-divisor-ℕ a b e) → 
   is-common-divisor-ℕ
-    ( quotient-div-ℕ e a (transitive-div-ℕ e d a K (pr1 H)))
-    ( quotient-div-ℕ e b (transitive-div-ℕ e d b K (pr2 H)))
+    ( quotient-div-ℕ e a (pr1 M))
+    ( quotient-div-ℕ e b (pr2 M))
     ( n)
-pr1 (is-common-divisor-quotients-div-quotient {a} {b} {d} {e} {n} nz H K L) =
-  div-quotient-div-div-quotient-div-ℕ a d e n nz (pr1 H) K L
-pr2 (is-common-divisor-quotients-div-quotient {a} {b} {d} {e} {n} nz H K L) =
-  div-quotient-div-div-quotient-div-ℕ b d e n nz (pr2 H) K L
+pr1 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
+  div-quotient-div-div-quotient-div-ℕ nz (pr1 H) K (pr1 M) L
+pr2 (is-common-divisor-quotients-div-quotient-ℕ nz H K L M) =
+  div-quotient-div-div-quotient-div-ℕ nz (pr2 H) K (pr2 M) L
+
+simplify-is-common-divisor-quotient-div-ℕ :
+  {a b d x : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
+  is-common-divisor-ℕ
+    ( quotient-div-ℕ d a (pr1 H))
+    ( quotient-div-ℕ d b (pr2 H))
+    ( x) ↔
+  is-common-divisor-ℕ a b (mul-ℕ x d)
+pr1 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  forward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
+pr2 (pr1 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  forward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
+pr1 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  backward-implication (simplify-div-quotient-div-ℕ nz (pr1 H)) (pr1 K)
+pr2 (pr2 (simplify-is-common-divisor-quotient-div-ℕ nz H) K) =
+  backward-implication (simplify-div-quotient-div-ℕ nz (pr2 H)) (pr2 K)
 ```
 
 ### The greatest common divisor of `a/d` and `b/d` is `gcd(a,b)/d`
 
+```agda
+is-gcd-quotient-div-gcd-ℕ :
+  {a b d : ℕ} → is-nonzero-ℕ d → (H : is-common-divisor-ℕ a b d) →
+  is-gcd-ℕ
+    ( quotient-div-ℕ d a (pr1 H))
+    ( quotient-div-ℕ d b (pr2 H))
+    ( quotient-div-ℕ d
+      ( gcd-ℕ a b)
+      ( div-gcd-is-common-divisor-ℕ H))
+is-gcd-quotient-div-gcd-ℕ {a} {b} {d} nz H x =
+  logical-equivalence-reasoning
+    is-common-divisor-ℕ
+      ( quotient-div-ℕ d a (pr1 H))
+      ( quotient-div-ℕ d b (pr2 H))
+      ( x)
+    ↔ is-common-divisor-ℕ a b (mul-ℕ x d)
+      by simplify-is-common-divisor-quotient-div-ℕ nz H
+    ↔ div-ℕ (mul-ℕ x d) (gcd-ℕ a b)
+      by is-gcd-gcd-ℕ a b (mul-ℕ x d)
+    ↔ div-ℕ x (quotient-div-ℕ d (gcd-ℕ a b) (div-gcd-is-common-divisor-ℕ H))
+      by
+      inv-iff (simplify-div-quotient-div-ℕ nz (div-gcd-is-common-divisor-ℕ H))
+```
+
 ### The greatest common divisor of `a/gcd(a,b)` and `b/gcd(a,b)` is `1`
+
+```agda
+is-one-gcd-quotient-div-gcd-ℕ :
+  (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) →
+  is-one-ℕ
+    ( gcd-ℕ
+      ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-gcd-ℕ a b))
+      ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-gcd-ℕ a b)))
+is-one-gcd-quotient-div-gcd-ℕ a b nz =
+  ( uniqueness-is-gcd-ℕ
+    ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-gcd-ℕ a b))
+    ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-gcd-ℕ a b))
+    ( gcd-ℕ
+      ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-gcd-ℕ a b))
+      ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-gcd-ℕ a b)))
+    ( quotient-div-ℕ
+      ( gcd-ℕ a b)
+      ( gcd-ℕ a b)
+      ( div-gcd-is-common-divisor-ℕ (is-common-divisor-gcd-ℕ a b)))
+    ( is-gcd-gcd-ℕ
+      ( quotient-div-ℕ (gcd-ℕ a b) a (div-left-gcd-ℕ a b))
+      ( quotient-div-ℕ (gcd-ℕ a b) b (div-right-gcd-ℕ a b)))
+    ( is-gcd-quotient-div-gcd-ℕ
+      ( is-nonzero-gcd-ℕ a b nz)
+      ( is-common-divisor-gcd-ℕ a b ))) ∙
+  ( is-idempotent-quotient-div-ℕ
+    ( gcd-ℕ a b)
+    ( is-nonzero-gcd-ℕ a b nz)
+    ( div-gcd-is-common-divisor-ℕ (is-common-divisor-gcd-ℕ a b)))
+```

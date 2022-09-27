@@ -7,35 +7,24 @@ title: Divisibility of natural numbers
 
 module elementary-number-theory.divisibility-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; ap-add-ℕ; is-injective-add-ℕ'; commutative-add-ℕ)
-open import elementary-number-theory.distance-natural-numbers using
-  ( dist-ℕ; is-additive-right-inverse-dist-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-zero-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; leq-leq-mul-ℕ'; concatenate-eq-leq-eq-ℕ; leq-add-ℕ'; le-ℕ;
-    contradiction-le-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ')
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; mul-ℕ'; commutative-mul-ℕ; right-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
-    right-distributive-mul-add-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ;
-    is-one-right-is-one-mul-ℕ; is-one-is-left-unit-mul-ℕ; associative-mul-ℕ;
-    is-injective-mul-ℕ; is-emb-mul-ℕ'; is-nonzero-left-factor-mul-ℕ;
-    is-injective-mul-ℕ')
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
-    is-successor-is-nonzero-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equational-reasoning
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; tr; ap)
-open import foundation.negation using (¬)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.propositions using (is-prop)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 # Divisibility on the natural numbers
@@ -172,7 +161,7 @@ antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
   ( ( ap ( mul-ℕ' (succ-ℕ x))
          ( inv
            ( is-one-right-is-one-mul-ℕ l k
-             ( is-one-is-left-unit-mul-ℕ (mul-ℕ l k) x
+             ( is-one-is-left-unit-mul-ℕ' (mul-ℕ l k) x
                ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
                  ( ap (mul-ℕ l) p ∙ q)))))) ∙
     ( p))
@@ -184,30 +173,60 @@ pr2 (transitive-div-ℕ x y z (pair k p) (pair l q)) =
   associative-mul-ℕ l k x ∙ (ap (mul-ℕ l) p ∙ q)
 ```
 
+### `a/a ＝ 1`
+
+```agda
+is-idempotent-quotient-div-ℕ :
+  (a : ℕ) → is-nonzero-ℕ a → (H : div-ℕ a a) → is-one-ℕ (quotient-div-ℕ a a H)
+is-idempotent-quotient-div-ℕ a nz (u , p) = is-one-is-left-unit-mul-ℕ u a nz p
+```
+
 ### If `b` divides `a` and `c` divides `b` and `c` is nonzero, then `a/b · b/c ＝ a/c`
 
 ```agda
 simplify-mul-quotient-div-ℕ :
-  {a b c : ℕ}  → is-nonzero-ℕ c → (H : div-ℕ b a) (K : div-ℕ c b) → 
+  {a b c : ℕ}  → is-nonzero-ℕ c →
+  (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) → 
   ( mul-ℕ (quotient-div-ℕ b a H) (quotient-div-ℕ c b K)) ＝
-  ( quotient-div-ℕ c a (transitive-div-ℕ c b a K H))
-simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K =
+  ( quotient-div-ℕ c a L)
+simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
   is-injective-mul-ℕ' c nz
     ( equational-reasoning
       mul-ℕ (mul-ℕ a/b b/c) c 
       ＝ mul-ℕ a/b (mul-ℕ b/c c) by associative-mul-ℕ a/b b/c c
       ＝ mul-ℕ a/b b             by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
       ＝ a                       by eq-quotient-div-ℕ b a H
-      ＝ mul-ℕ a/c c             by inv
-                                      ( eq-quotient-div-ℕ c a
-                                        ( transitive-div-ℕ c b a K H)))
+      ＝ mul-ℕ a/c c             by inv (eq-quotient-div-ℕ c a L))
   where
   a/b : ℕ
   a/b = quotient-div-ℕ b a H
   b/c : ℕ
   b/c = quotient-div-ℕ c b K
   a/c : ℕ
-  a/c = quotient-div-ℕ c a (transitive-div-ℕ c b a K H)
+  a/c = quotient-div-ℕ c a L
+```
+
+### If `d | a` and `d` is nonzero, then `x | a/d` if and only if `xd | a`
+
+```agda
+simplify-div-quotient-div-ℕ :
+  {a d x : ℕ} → is-nonzero-ℕ d → (H : div-ℕ d a) →
+  (div-ℕ x (quotient-div-ℕ d a H)) ↔ (div-ℕ (mul-ℕ x d) a)
+pr1 (pr1 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
+pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
+  equational-reasoning
+    mul-ℕ u (mul-ℕ x d)
+    ＝ mul-ℕ (mul-ℕ u x) d                 by inv (associative-mul-ℕ u x d)
+    ＝ mul-ℕ (quotient-div-ℕ d a H) d      by ap (mul-ℕ' d) p
+    ＝ a                                   by eq-quotient-div-ℕ d a H
+pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
+pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
+  is-injective-mul-ℕ' d nz
+    ( equational-reasoning
+        mul-ℕ (mul-ℕ u x) d
+        ＝ mul-ℕ u (mul-ℕ x d)             by associative-mul-ℕ u x d
+        ＝ a                               by p
+        ＝ mul-ℕ (quotient-div-ℕ d a H) d  by inv (eq-quotient-div-ℕ d a H))
 ```
 
 ### If `x` divides `y` then `x` divides any multiple of `y`
@@ -276,18 +295,19 @@ div-div-quotient-div-ℕ x y d H K =
 
 ```agda
 div-quotient-div-div-quotient-div-ℕ :
-  (a b c d : ℕ) → is-nonzero-ℕ c → (H : div-ℕ b a) (K : div-ℕ c b) →
-  div-ℕ d (quotient-div-ℕ c b K) →
-  div-ℕ d (quotient-div-ℕ c a (transitive-div-ℕ c b a K H))
-div-quotient-div-div-quotient-div-ℕ a b c d nz H K L =
+  {a b c d : ℕ} → is-nonzero-ℕ c → (H : div-ℕ b a)
+  (K : div-ℕ c b) (L : div-ℕ c a) →
+  div-ℕ d (quotient-div-ℕ c b K) → 
+  div-ℕ d (quotient-div-ℕ c a L)
+div-quotient-div-div-quotient-div-ℕ {a} {b} {c} {d} nz H K L M =
   tr
     ( div-ℕ d)
-    ( simplify-mul-quotient-div-ℕ nz H K)
+    ( simplify-mul-quotient-div-ℕ nz H K L)
     ( div-mul-ℕ
       ( quotient-div-ℕ b a H)
       ( d)
       ( quotient-div-ℕ c b K)
-      ( L))
+      ( M))
 ```
 
 ### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
