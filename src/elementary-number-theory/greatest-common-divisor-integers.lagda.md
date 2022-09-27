@@ -14,7 +14,7 @@ open import elementary-number-theory.addition-natural-numbers using
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
     symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;
-    sim-unit-abs-ℤ; refl-div-ℤ)
+    sim-unit-abs-ℤ; refl-div-ℤ; is-zero-is-zero-div-ℤ)
 open import
   elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
@@ -158,10 +158,21 @@ pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
     ( symm-sim-unit-ℤ (sim-unit-abs-ℤ k))
     ( refl-sim-unit-ℤ (gcd-ℤ x y)))
 
+```
+
+### The gcd of `x` and `y` divides both `x` and `y`
+
+```agda
 is-common-divisor-gcd-ℤ :
   (x y : ℤ) → is-common-divisor-ℤ x y (gcd-ℤ x y)
 is-common-divisor-gcd-ℤ x y =
   pr2 (pr2 (is-gcd-gcd-ℤ x y) (gcd-ℤ x y)) (refl-div-ℤ (gcd-ℤ x y))
+
+div-ℤ-gcd-left : (x y : ℤ) → div-ℤ (gcd-ℤ x y) x
+div-ℤ-gcd-left x y = pr1 (is-common-divisor-gcd-ℤ x y)
+
+div-ℤ-gcd-right : (x y : ℤ) → div-ℤ (gcd-ℤ x y) y
+div-ℤ-gcd-right x y = pr2 (is-common-divisor-gcd-ℤ x y)
 
 div-gcd-is-common-divisor-ℤ :
   (x y k : ℤ) → is-common-divisor-ℤ x y k → div-ℤ k (gcd-ℤ x y)
@@ -207,27 +218,13 @@ is-zero-gcd-ℤ zero-ℤ zero-ℤ refl refl =
 
 is-zero-left-is-zero-gcd-ℤ :
   (a b : ℤ) → is-zero-ℤ (gcd-ℤ a b) → is-zero-ℤ a
-is-zero-left-is-zero-gcd-ℤ a b H =
-  eq-abs-ℤ a
-    ( is-zero-left-is-zero-add-ℕ
-      ( abs-ℤ a)
-      ( abs-ℤ b)
-        ( is-zero-add-is-zero-gcd-ℕ
-          ( abs-ℤ a)
-          ( abs-ℤ b)
-          ( inv (abs-int-ℕ (gcd-ℕ (abs-ℤ a) (abs-ℤ b))) ∙ ap abs-ℤ H)))
+is-zero-left-is-zero-gcd-ℤ a b =
+  is-zero-is-zero-div-ℤ a (gcd-ℤ a b) (div-ℤ-gcd-left a b)
 
 is-zero-right-is-zero-gcd-ℤ :
   (a b : ℤ) → is-zero-ℤ (gcd-ℤ a b) → is-zero-ℤ b
-is-zero-right-is-zero-gcd-ℤ a b H =
-  eq-abs-ℤ b
-    ( is-zero-right-is-zero-add-ℕ
-      ( abs-ℤ a)
-      ( abs-ℤ b)
-        ( is-zero-add-is-zero-gcd-ℕ
-          ( abs-ℤ a)
-          ( abs-ℤ b)
-          ( inv (abs-int-ℕ (gcd-ℕ (abs-ℤ a) (abs-ℤ b))) ∙ ap abs-ℤ H)))
+is-zero-right-is-zero-gcd-ℤ a b =
+  is-zero-is-zero-div-ℤ b (gcd-ℤ a b) (div-ℤ-gcd-right a b)
 
 is-commutative-gcd-ℤ : (x y : ℤ) → gcd-ℤ x y ＝ gcd-ℤ y x
 is-commutative-gcd-ℤ x y =
