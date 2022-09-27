@@ -58,6 +58,16 @@ module _
     {x y : obj-Cat C} (f : iso-Cat x y) →
     comp-hom-Cat C (hom-inv-iso-Cat f) (hom-iso-Cat f) ＝ id-hom-Cat C
   isretr-hom-inv-iso-Cat f = pr2 (pr2 (is-iso-hom-iso-Cat f))
+
+  inv-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → iso-Cat y x
+  inv-iso-Cat f =
+    pair
+      ( hom-inv-iso-Cat f)
+      ( pair
+        ( hom-iso-Cat f)
+        ( pair
+          ( isretr-hom-inv-iso-Cat f)
+          ( issec-hom-inv-iso-Cat f)))
 ```
 
 ## Examples
@@ -273,10 +283,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : iso-Cat C x y)
+  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C}
   where
 
-  -- left-unit-law-comp-iso-Cat
+  left-unit-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C (id-iso-Cat C) f ＝ f
+  left-unit-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      (comp-iso-Cat C (id-iso-Cat C) f)
+      ( f)
+      ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
 ```
 
 #### Right unit law
@@ -293,13 +310,42 @@ module _
 ```
 
 #### Associatitivity
--- assoc-comp-iso-Cat
+```agda
+  assoc-comp-iso-Cat :
+    {x y z w : obj-Cat C}
+    (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    comp-iso-Cat C (comp-iso-Cat C h g) f ＝ comp-iso-Cat C h (comp-iso-Cat C g f)
+  assoc-comp-iso-Cat h g f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C (comp-iso-Cat C h g) f)
+      ( comp-iso-Cat C h (comp-iso-Cat C g f))
+      ( assoc-comp-hom-Cat C
+        ( hom-iso-Cat C h)
+        ( hom-iso-Cat C g)
+        ( hom-iso-Cat C f))
+```
 
 #### Left inverse law
--- left-inverse-law-comp-iso-Cat
+```agda
+  left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
+  left-inverse-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C (inv-iso-Cat C f) f)
+      ( id-iso-Cat C)
+      ( isretr-hom-inv-iso-Cat C f)
+```
 
 #### Right inverse law
--- right-inverse-law-comp-iso-Cat
+```agda
+  right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
+  right-inverse-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C f (inv-iso-Cat C f))
+      ( id-iso-Cat C)
+      ( issec-hom-inv-iso-Cat C f)
+```
 
 ### Equalities give rise to isomorphisms
 
@@ -311,13 +357,12 @@ module _
   iso-eq-Cat : (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
   iso-eq-Cat = iso-eq-Precat (precat-Cat C)
 
-{-
   preserves-concat-iso-eq-Cat :
     {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
     iso-eq-Cat x z (p ∙ q) ＝
     comp-iso-Cat C (iso-eq-Cat y z q) (iso-eq-Cat x y p)
-  preserves-concat-iso-eq-Cat refl q = {!!}
-  -}
+  preserves-concat-iso-eq-Cat {x} {.x} {y} refl q =
+    inv (right-unit-law-comp-iso-Cat C {x} {y} (iso-eq-Cat x y q))
 ```
 
 ## Properties
