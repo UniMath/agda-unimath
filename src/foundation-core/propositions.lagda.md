@@ -116,11 +116,11 @@ module _
 
   abstract
     is-prop-is-proof-irrelevant : is-proof-irrelevant A → is-prop A
-    is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y
+    is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y 
 
   abstract
     eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
-    eq-is-proof-irrelevant H = eq-is-prop' (is-prop-is-proof-irrelevant H)
+    eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant 
 ```
 
 ### A map between propositions is an equivalence if there is a map in the reverse direction
