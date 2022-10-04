@@ -83,6 +83,7 @@ open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.isomorphisms-commutative-rings
 open import commutative-algebra.local-commutative-rings
 open import commutative-algebra.maximal-ideals-commutative-rings
+open import commutative-algebra.nilradical-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 open import commutative-algebra.zariski-topology
 ```
