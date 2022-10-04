@@ -24,7 +24,7 @@ open import order-theory.join-semilattices
 ## Idea
 A join complete semilattice is a poset in which every family of elements has a least upperbound.
 For full generality we will consider 3 different universe levels: one for the underlying type, one for
-order relation and one for the indexing type.
+the order relation and one for the indexing type.
 
 ## Definitions
 
@@ -35,24 +35,27 @@ module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2) 
   where
   
-  is-join-complete-semilattice-poset-Prop : UU l3 → Prop (l1 ⊔ l2 ⊔ l3)
-  is-join-complete-semilattice-poset-Prop I =
+  is-join-complete-semilattice-poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3) 
+  is-join-complete-semilattice-poset-Prop =
     Π-Prop
-      ( I → element-Poset P )
-        ( λ f → has-least-upper-bound-family-poset-Prop P f)
+      (UU l3)
+      (λ I →
+        Π-Prop
+          ( I → element-Poset P )
+          ( λ f → has-least-upper-bound-family-poset-Prop P f))
 
-  is-join-complete-semilattice-Poset : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
-  is-join-complete-semilattice-Poset I = type-Prop (is-join-complete-semilattice-poset-Prop I)
+  is-join-complete-semilattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  is-join-complete-semilattice-Poset = type-Prop is-join-complete-semilattice-poset-Prop
 
-  is-prop-is-join-complete-semilattice-Poset : (I : UU l3) → is-prop (is-join-complete-semilattice-Poset I) 
-  is-prop-is-join-complete-semilattice-Poset I = is-prop-type-Prop (is-join-complete-semilattice-poset-Prop I)
+  is-prop-is-join-complete-semilattice-Poset : is-prop is-join-complete-semilattice-Poset  
+  is-prop-is-join-complete-semilattice-Poset = is-prop-type-Prop is-join-complete-semilattice-poset-Prop 
 
 Join-Complete-Semilattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Join-Complete-Semilattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → ((I : UU l3) → is-join-complete-semilattice-Poset l3 P I))
+Join-Complete-Semilattice l1 l2 l3 = Σ (Poset l1 l2) (λ P → is-join-complete-semilattice-Poset l3 P)
 
 ```
 
-We now develop the tools that allow us to work with the parts of a join complete semilattice.
+We now develop the tools that allow us to work with the components of a join complete semilattice.
 
 ```agda
 
@@ -99,7 +102,7 @@ module _
   element-join-complete-semilattice-Set = element-poset-Set poset-Join-Complete-Semilattice
 
   is-join-complete-semilattice-Join-Complete-Semilattice :
-    (I : UU l3) → is-join-complete-semilattice-Poset l3 poset-Join-Complete-Semilattice I 
+    is-join-complete-semilattice-Poset l3 poset-Join-Complete-Semilattice 
   is-join-complete-semilattice-Join-Complete-Semilattice = pr2 A
 
   join-complete-semilattice-Join-Complete-Semilattice : Join-Complete-Semilattice l1 l2 l3
@@ -116,5 +119,5 @@ module _
       (join-Join-Complete-Semilattice I f)
   is-least-upper-bound-family-join-Join-Complete-Semilattice I f = pr2 (is-join-complete-semilattice-Join-Complete-Semilattice I f)
 
-
 ```
+
