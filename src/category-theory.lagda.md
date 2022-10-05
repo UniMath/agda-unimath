@@ -14,6 +14,7 @@ open import category-theory.endomorphisms-of-objects-categories public
 open import category-theory.equivalences-categories public
 open import category-theory.equivalences-large-precategories public
 open import category-theory.equivalences-precategories public
+open import category-theory.exponential-objects-precategories public
 open import category-theory.functors-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
