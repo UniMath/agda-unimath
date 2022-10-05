@@ -14,7 +14,6 @@ open import category-theory.products-precategories using
   ( has-all-binary-products; object-product-span;
     product-of-morphisms)
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
--- open import foundation.cartesian-product-types using (_×_)
 open import foundation-core.identity-types using (_＝_; ap)
 open import foundation.unique-existence using (∃!)
 open import foundation.universe-levels using (UU; Level; _⊔_)
