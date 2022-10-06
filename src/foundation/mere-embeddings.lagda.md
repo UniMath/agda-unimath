@@ -61,10 +61,10 @@ trans-leq-Large-Preorder mere-emb-Large-Preorder X Y Z = transitive-mere-emb
 ### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them. 
 
 ```agda
-anti-symmetric-mere-emb :
+antisymmetric-mere-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   (LEM (l1 ⊔ l2)) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
-anti-symmetric-mere-emb lem f g =
+antisymmetric-mere-emb lem f g =
   apply-universal-property-trunc-Prop f
    (mere-equiv-Prop _ _)
    λ f' →
