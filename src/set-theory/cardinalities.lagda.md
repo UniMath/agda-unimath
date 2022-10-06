@@ -184,7 +184,7 @@ antisymmetric-≤-cardinality {l1} X Y lem =
             (Id-Prop (cardinal-Set l1) (cardinality a) v))))
     (λ b a<b b<a →
       map-inv-equiv (is-effective-cardinality a b)
-        (anti-symmetric-mere-emb lem
+        (antisymmetric-mere-emb lem
         (inv-unit-leq-cardinality _ _ a<b)
         (inv-unit-leq-cardinality _ _ b<a)))
     Y)
