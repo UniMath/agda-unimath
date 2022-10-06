@@ -108,7 +108,7 @@ refl-≤-cardinality {l} =
 
 transitive-≤-cardinality :
   {l1 l2 l3 : Level} (X : cardinal l1) (Y : cardinal l2) (Z : cardinal l3) →
-  (X ≤-cardinality Y → Y ≤-cardinality Z → X ≤-cardinality Z)
+  X ≤-cardinality Y → Y ≤-cardinality Z → X ≤-cardinality Z
 transitive-≤-cardinality {l1} {l2} {l3} X Y Z =
   apply-dependent-universal-property-trunc-Set'
   (λ u →
@@ -158,13 +158,13 @@ is-effective-cardinality X Y =
   ( is-effective-unit-trunc-Set (Set _) X Y)
 ```
 
-### Using this and assuming excluded middle , we can show `≤-cardinality` is a partial order by showing that it is anti-symmetric.
+### Using this and assuming excluded middle , we can show `≤-cardinality` is a partial order by showing that it is antisymmetric.
 
 ```agda
-anti-symmetric-≤-cardinality :
+antisymmetric-≤-cardinality :
   {l1 : Level} (X Y : cardinal l1) → (LEM l1) → 
   X ≤-cardinality Y → Y ≤-cardinality X → X ＝ Y
-anti-symmetric-≤-cardinality {l1} X Y lem =
+antisymmetric-≤-cardinality {l1} X Y lem =
   apply-dependent-universal-property-trunc-Set'
   (λ u →
     set-Prop
