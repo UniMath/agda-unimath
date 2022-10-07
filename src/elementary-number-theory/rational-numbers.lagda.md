@@ -272,7 +272,7 @@ in-fraction-ℤ : fraction-ℤ → ℚ
 in-fraction-ℤ x = pair (reduce-fraction-ℤ x) (is-reduced-reduce-fraction-ℤ x)
 ```
 
-### The type of integers is a set
+### The type of rationals is a set
 
 ```agda
 is-set-ℚ : is-set ℚ
