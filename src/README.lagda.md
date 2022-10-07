@@ -708,6 +708,7 @@ open import order-theory.finitely-graded-posets
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.ideals-preorders
 open import order-theory.interval-subposets
+open import order-theory.join-complete-semilattice
 open import order-theory.join-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
