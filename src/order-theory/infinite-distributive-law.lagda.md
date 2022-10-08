@@ -1,16 +1,13 @@
-# Title: Infinite-distributive-law 
+# Title: Infinite distributive law 
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
 
 module order-theory.infinite-distributive-law where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
-    is-prop-all-elements-equal; prod-Prop; Π-Prop; function-Prop)
-open import foundation.subtypes using (eq-type-subtype)
+open import foundation.cartesian-product-types 
+open import foundation.dependent-pair-types 
+open import foundation.propositions 
+open import foundation.subtypes 
 open import foundation.universe-levels
 open import foundation.identity-types
 open import foundation.sets
@@ -103,8 +100,8 @@ module _
 
 ```agda
 
-Infinite-Distributive-Law : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Infinite-Distributive-Law l1 l2 l3 =
+infinite-distributive-law : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+infinite-distributive-law l1 l2 l3 =
   (A : Meet-Semilattice-and-Join-Complete-Semilattice l1 l2 l3)
   (a : element-Meet-Semilattice-and-Join-Complete-Semilattice A) → (I : UU l3) →
   (b : I → element-Meet-Semilattice-and-Join-Complete-Semilattice A) →
@@ -114,5 +111,7 @@ Infinite-Distributive-Law l1 l2 l3 =
 {- this notation is note easy on the eye, but recall, in more familiar notation the identity expressed here is:
                                 a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
 -}
+
+{- Show that the identity is a prop -}
 
 ```
