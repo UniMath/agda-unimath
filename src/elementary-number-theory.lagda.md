@@ -10,6 +10,7 @@ module elementary-number-theory where
 open import elementary-number-theory.absolute-value-integers public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
+open import elementary-number-theory.addition-rationals public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.bezouts-lemma public
 open import elementary-number-theory.binomial-coefficients public
