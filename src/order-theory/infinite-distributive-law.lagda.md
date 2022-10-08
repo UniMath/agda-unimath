@@ -63,9 +63,37 @@ module _
   element-Meet-Semilattice-and-Join-Complete-Semilattice =
     element-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
-  {- I should fill this in later with all the things...
-  right now I want to get to the meet and join operations
-  so I can state the infinite distributive law. -}
+  leq-meet-semilattice-and-join-complete-semilattice-Prop : (x y : element-Join-Complete-Semilattice) → Prop l2
+  leq-meet-semilattice-and-join-complete-semilattice-Prop = leq-poset-Prop poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  leq-Meet-Semilattice-and-Join-Complete-Semilattice : (x y : element-Join-Complete-Semilattice) → UU l2
+  leq-Meet-Semilattice-and-Join-Complete-Semilattice = leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  is-prop-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
+    (x y : element-Join-Complete-Semilattice) → is-prop (leq-Join-Complete-Semilattice x y)
+  is-prop-leq-Meet-Semilattice-and-Join-Complete-Semilattice = is-prop-leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  refl-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
+    (x : element-Join-Complete-Semilattice) → leq-Join-Complete-Semilattice x x
+  refl-leq-Meet-Semilattice-and-Join-Complete-Semilattice = refl-leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  antisymmetric-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
+    (x y : element-Meet-Semilattice-and-Join-Complete-Semilattice) →
+    leq-Meet-Semilattice-and-Join-Complete-Semilattice x y → leq-Meet-Semilattice-and-Join-Complete-Semilattice y x → x ＝ y
+  antisymmetric-leq-Meet-Semilattice-and-Join-Complete-Semilattice =
+    antisymmetric-leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  transitive-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
+    (x y z : element-Meet-Semilattice-and-Join-Complete-Semilattice) →
+    leq-Meet-Semilattice-and-Join-Complete-Semilattice y z → leq-Meet-Semilattice-and-Join-Complete-Semilattice x y →
+    leq-Meet-Semilattice-and-Join-Complete-Semilattice x z
+  transitive-leq-Meet-Semilattice-and-Join-Complete-Semilattice = transitive-leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  is-set-element-Meet-Semilattice-and-Join-Complete-Semilattice : is-set element-Meet-Semilattice-and-Join-Complete-Semilattice
+  is-set-element-Meet-Semilattice-and-Join-Complete-Semilattice = is-set-element-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
+
+  element-meet-semilattice-and-join-complete-semilattice-Set : Set l1
+  element-meet-semilattice-and-join-complete-semilattice-Set = element-poset-Set poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
   is-meet-semilattice-Meet-Semilattice-and-Join-Complete-Semilattice :
     is-meet-semilattice-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
