@@ -63,18 +63,18 @@ module _
   element-Meet-Semilattice-and-Join-Complete-Semilattice =
     element-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
-  leq-meet-semilattice-and-join-complete-semilattice-Prop : (x y : element-Join-Complete-Semilattice) → Prop l2
+  leq-meet-semilattice-and-join-complete-semilattice-Prop : (x y : element-Meet-Semilattice-and-Join-Complete-Semilattice) → Prop l2
   leq-meet-semilattice-and-join-complete-semilattice-Prop = leq-poset-Prop poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
-  leq-Meet-Semilattice-and-Join-Complete-Semilattice : (x y : element-Join-Complete-Semilattice) → UU l2
+  leq-Meet-Semilattice-and-Join-Complete-Semilattice : (x y : element-Meet-Semilattice-and-Join-Complete-Semilattice) → UU l2
   leq-Meet-Semilattice-and-Join-Complete-Semilattice = leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
   is-prop-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
-    (x y : element-Join-Complete-Semilattice) → is-prop (leq-Join-Complete-Semilattice x y)
+    (x y : element-Meet-Semilattice-and-Join-Complete-Semilattice) → is-prop (leq-Meet-Semilattice-and-Join-Complete-Semilattice x y)
   is-prop-leq-Meet-Semilattice-and-Join-Complete-Semilattice = is-prop-leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
   refl-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
-    (x : element-Join-Complete-Semilattice) → leq-Join-Complete-Semilattice x x
+    (x : element-Meet-Semilattice-and-Join-Complete-Semilattice) → leq-Meet-Semilattice-and-Join-Complete-Semilattice x x
   refl-leq-Meet-Semilattice-and-Join-Complete-Semilattice = refl-leq-Poset poset-Meet-Semilattice-and-Join-Complete-Semilattice
 
   antisymmetric-leq-Meet-Semilattice-and-Join-Complete-Semilattice :
