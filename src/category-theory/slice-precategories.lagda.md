@@ -8,10 +8,16 @@ title: Slice precategories
 module category-theory.slice-precategories where
 
 open import category-theory.precategories
+open import category-theory.terminal-objects-precategories
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.contractible-types using
+  ( is-contr-equiv; is-contr-total-path)
+open import foundation.dependent-pair-types using (Σ; _,_; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-inv-equiv)
-open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-tot)
+open import foundation.identity-types using
+  ( _＝_; refl; inv; _∙_; ap; equiv-concat')
 open import foundation.sets using
   ( Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
 open import foundation.subtypes using
@@ -147,6 +153,25 @@ module _
   pr2 (pr1 (pr2 (pr2 slice-Precat))) = assoc-comp-hom-slice-Precat
   pr1 (pr2 (pr2 (pr2 slice-Precat))) = id-hom-slice-Precat
   pr1 (pr2 (pr2 (pr2 (pr2 slice-Precat)))) = left-unit-law-comp-hom-slice-Precat
-  pr2 (pr2 (pr2 (pr2 (pr2 slice-Precat)))) =
-    right-unit-law-comp-hom-slice-Precat
+  pr2 (pr2 (pr2 (pr2 (pr2 slice-Precat)))) = right-unit-law-comp-hom-slice-Precat
+```
+
+## Properties
+
+### The slice precategory always has a terminal object
+
+The terminal object in the slice (pre-)category `C/X` is the identity morphism `id : hom X X`.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precat l1 l2) (X : obj-Precat C)
+  where
+
+  terminal-object-slice-Precat : terminal-object (slice-Precat C X)
+  pr1 terminal-object-slice-Precat = (X , id-hom-Precat C)
+  pr2 terminal-object-slice-Precat (A , f) =
+    is-contr-equiv
+      ( Σ (type-hom-Precat C A X) (λ g → f ＝ g))
+      ( equiv-tot (λ g → equiv-concat' f (left-unit-law-comp-hom-Precat C g)))
+      ( is-contr-total-path f)
 ```
