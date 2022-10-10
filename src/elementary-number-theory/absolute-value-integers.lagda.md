@@ -153,7 +153,9 @@ neg-right-abs-ℤ-mul-ℤ x y = equational-reasoning
 neg-both-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) (neg-ℤ y))
 neg-both-abs-ℤ-mul-ℤ x y = (neg-right-abs-ℤ-mul-ℤ x y) ∙ (neg-left-abs-ℤ-mul-ℤ x (neg-ℤ y))
 
-int-ℕ-abs-ℤ-mult-positive-ints : (x y : ℕ) → int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
+int-ℕ-abs-ℤ-mult-positive-ints : (x y : ℕ) →
+  int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
+  ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
 int-ℕ-abs-ℤ-mult-positive-ints x y = equational-reasoning  
   int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
     ＝ mul-ℤ (inr (inr x)) (inr (inr y)) 
