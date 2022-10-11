@@ -567,18 +567,18 @@ module _
   
   map-simpson-delooping-sign : (n : ℕ) →
     classifying-type-Concrete-Group
-      ( UU-Fin-Level-Group l n) →
+      ( UU-Fin-Group l n) →
     classifying-type-Concrete-Group
-      ( UU-Fin-Level-Group (lsuc lzero ⊔ l) 2)
-  map-simpson-delooping-sign zero-ℕ X = Fin-UU-Fin-Level (lsuc lzero ⊔ l) 2
-  map-simpson-delooping-sign (succ-ℕ zero-ℕ) X = Fin-UU-Fin-Level (lsuc lzero ⊔ l) 2
+      ( UU-Fin-Group (lsuc lzero ⊔ l) 2)
+  map-simpson-delooping-sign zero-ℕ X = Fin-UU-Fin (lsuc lzero ⊔ l) 2
+  map-simpson-delooping-sign (succ-ℕ zero-ℕ) X = Fin-UU-Fin (lsuc lzero ⊔ l) 2
   pr1 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
     quotient-sign-comp (succ-ℕ (succ-ℕ n)) X 
   pr2 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
     mere-equiv-Fin-2-quotient-sign-comp (succ-ℕ (succ-ℕ n)) X star
 
   simpson-delooping-sign : (n : ℕ) →
-    hom-Concrete-Group (UU-Fin-Level-Group l n) (UU-Fin-Level-Group (lsuc lzero ⊔ l) 2)
+    hom-Concrete-Group (UU-Fin-Group l n) (UU-Fin-Group (lsuc lzero ⊔ l) 2)
   pr1 (simpson-delooping-sign n) = map-simpson-delooping-sign n
   pr2 (simpson-delooping-sign zero-ℕ) = refl
   pr2 (simpson-delooping-sign (succ-ℕ zero-ℕ)) = refl
@@ -588,13 +588,13 @@ module _
         ( pr1
           ( map-simpson-delooping-sign
             ( succ-ℕ (succ-ℕ n))
-            ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))))
+            ( Fin-UU-Fin l (succ-ℕ (succ-ℕ n)))))
         ( raise (lsuc lzero ⊔ l) (Fin 2))
         ( ( equiv-raise (lsuc lzero ⊔ l) (Fin 2)) ∘e
           ( inv-equiv
             ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n
               ( succ-ℕ (succ-ℕ n))
-              ( Fin-UU-Fin-Level l (succ-ℕ (succ-ℕ n)))
+              ( Fin-UU-Fin l (succ-ℕ (succ-ℕ n)))
               ( star)
               ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
       ( eq-is-prop is-prop-type-trunc-Prop)
