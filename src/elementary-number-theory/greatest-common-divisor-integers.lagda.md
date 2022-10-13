@@ -15,18 +15,18 @@ open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
     symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;
     sim-unit-abs-ℤ; refl-div-ℤ; is-zero-is-zero-div-ℤ;
-    is-one-or-neg-one-is-unit-ℤ)
+    is-one-or-neg-one-is-unit-ℤ; antisymmetric-div-ℤ; div-zero-ℤ)
 open import
   elementary-number-theory.greatest-common-divisor-natural-numbers using
   ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
     is-commutative-gcd-ℕ; is-zero-gcd-zero-zero-ℕ; is-zero-add-is-zero-gcd-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
-    is-positive-ℤ; is-positive-int-ℕ; is-zero-ℤ; is-one-ℤ; one-ℤ)
+    is-positive-ℤ; is-positive-int-ℕ; is-zero-ℤ; is-one-ℤ; one-ℤ; zero-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; is-zero-ℕ; zero-ℕ)
 
-open import foundation.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_; pair')
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
@@ -264,3 +264,23 @@ is-one-is-gcd-one-ℤ' {a} {x} H with
 is-one-gcd-one-ℤ' : (a : ℤ) → is-one-ℤ (gcd-ℤ a one-ℤ)
 is-one-gcd-one-ℤ' a = is-one-is-gcd-one-ℤ' (is-gcd-gcd-ℤ a one-ℤ)
 ```
+
+### `gcd-ℤ 0 b ＝ b` up to a unit
+
+```agda
+is-id-is-gcd-zero-ℤ : {b x : ℤ} → gcd-ℤ zero-ℤ b ＝ x → sim-unit-ℤ x b 
+is-id-is-gcd-zero-ℤ {b} {x} H = antisymmetric-div-ℤ x b
+  (pr2 (is-common-divisor-is-gcd-ℤ zero-ℤ b x    
+    (tr (λ t → is-gcd-ℤ zero-ℤ b t) H (
+      is-gcd-gcd-ℤ zero-ℤ b))))                       
+  (tr (λ t → div-ℤ b t) H                                                    
+    (div-gcd-is-common-divisor-ℤ zero-ℤ b b                                       
+      (pair' (div-zero-ℤ b) (refl-div-ℤ b))))
+
+```
+
+### `gcd-ℤ a 0 ＝ a` up to a unit  
+```agda 
+is-id-is-gcd-zero-ℤ' : {a x : ℤ} → gcd-ℤ a zero-ℤ ＝ x → sim-unit-ℤ x a 
+is-id-is-gcd-zero-ℤ' {a} {x} H = is-id-is-gcd-zero-ℤ {a} {x} 
+  ((is-commutative-gcd-ℤ zero-ℤ a) ∙ H)
