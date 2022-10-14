@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.integers
@@ -1928,3 +1929,44 @@ bezouts-lemma-ℤ (inr (inr x)) (inr (inl star)) = pair one-ℤ (pair one-ℤ eq
     ＝ gcd-ℤ (inr (inr x)) zero-ℤ by inv (is-id-is-gcd-zero-ℤ' {inr (inr x)} {gcd-ℤ (inr (inr x)) zero-ℤ} refl)
 bezouts-lemma-ℤ (inr (inr x)) (inr (inr y)) = bezouts-lemma-pos-ints (inr (inr x)) (inr (inr y)) star star 
 ```
+
+Now that Bezout's Lemma has been established, we establish a few corollaries of Bezout. 
+
+### If `x | y z` and `gcd-Z x y ＝ 1`, then `x | z`. 
+```agda
+div-right-factor-coprime-ℤ : (x y z : ℤ) → (div-ℤ x (mul-ℤ y z)) → (gcd-ℤ x y ＝ one-ℤ) → div-ℤ x z
+div-right-factor-coprime-ℤ x y z H K = pair (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) eqn 
+  where
+  bezout-triple : Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+  bezout-triple = bezouts-lemma-ℤ x y
+  s : ℤ
+  s = pr1 bezout-triple
+  t : ℤ
+  t = pr1 (pr2 bezout-triple)
+  bezout-eqn : add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y
+  bezout-eqn = pr2 (pr2 bezout-triple)
+  k : ℤ
+  k = pr1 H
+  div-yz : mul-ℤ k x ＝ mul-ℤ y z
+  div-yz = pr2 H 
+  eqn : mul-ℤ (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) x ＝ z
+  eqn = equational-reasoning 
+    mul-ℤ (add-ℤ (mul-ℤ s z) (mul-ℤ t k)) x
+    ＝ add-ℤ (mul-ℤ (mul-ℤ s z) x) (mul-ℤ (mul-ℤ t k) x) by right-distributive-mul-add-ℤ (mul-ℤ s z) (mul-ℤ t k) x
+    ＝ add-ℤ (mul-ℤ (mul-ℤ s x) z) (mul-ℤ (mul-ℤ t k) x) by ap (λ M → add-ℤ M (mul-ℤ (mul-ℤ t k) x))
+      (equational-reasoning
+        mul-ℤ (mul-ℤ s z) x
+        ＝ mul-ℤ s (mul-ℤ z x) by associative-mul-ℤ s z x
+        ＝ mul-ℤ s (mul-ℤ x z) by ap (λ P → mul-ℤ s P) (commutative-mul-ℤ z x)
+        ＝ mul-ℤ (mul-ℤ s x) z by inv (associative-mul-ℤ s x z))
+    ＝ add-ℤ (mul-ℤ (mul-ℤ s x) z) (mul-ℤ (mul-ℤ t y) z) by ap (λ M → add-ℤ (mul-ℤ (mul-ℤ s x) z) M) 
+    (equational-reasoning
+      mul-ℤ (mul-ℤ t k) x
+      ＝ mul-ℤ t (mul-ℤ k x) by associative-mul-ℤ t k x
+      ＝ mul-ℤ t (mul-ℤ y z) by ap (λ P → mul-ℤ t P) div-yz
+      ＝ mul-ℤ (mul-ℤ t y) z by inv (associative-mul-ℤ t y z)) 
+    ＝ mul-ℤ (add-ℤ (mul-ℤ s x) (mul-ℤ t y)) z by inv (right-distributive-mul-add-ℤ (mul-ℤ s x) (mul-ℤ t y) z)
+    ＝ mul-ℤ one-ℤ z by ap (λ M → mul-ℤ M z) (bezout-eqn ∙ K)
+    ＝ z by left-unit-law-mul-ℤ z
+```
+
