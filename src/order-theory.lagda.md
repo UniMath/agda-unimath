@@ -19,7 +19,7 @@ open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public
 open import order-theory.frames public
 open import order-theory.greatest-lower-bounds-posets public
-open import order-theory.homomorphisims-frames public
+open import order-theory.homomorphisms-frames public
 open import order-theory.ideals-preorders public
 open import order-theory.infinite-distributive-law public
 open import order-theory.interval-subposets public
