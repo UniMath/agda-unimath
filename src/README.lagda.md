@@ -705,6 +705,7 @@ open import order-theory.distributive-lattices
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.frames
 open import order-theory.greatest-lower-bounds-posets
 open import order-theory.ideals-preorders
 open import order-theory.infinite-distributive-law
