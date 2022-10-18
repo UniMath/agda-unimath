@@ -30,7 +30,7 @@ open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+  ( mul-ℕ; left-unit-law-mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ;
     is-zero-ℕ; is-one-ℕ)
@@ -38,7 +38,7 @@ open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ)
 
-open import foundation.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types using (_×_; pair')
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
@@ -46,7 +46,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
+open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -388,4 +388,25 @@ is-one-is-gcd-one-ℕ' {a} {x} H =
 
 is-one-gcd-one-ℕ' : (a : ℕ) → is-one-ℕ (gcd-ℕ a 1)
 is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
+```
+
+### `gcd-ℕ 0 b ＝ b`
+
+```agda
+is-id-is-gcd-zero-ℕ : {b x : ℕ} → gcd-ℕ 0 b ＝ x → x ＝ b
+is-id-is-gcd-zero-ℕ {b} {x} H = antisymmetric-div-ℕ x b 
+  (pr2 (is-common-divisor-is-gcd-ℕ 0 b x 
+    (tr (λ t → is-gcd-ℕ 0 b t) H (is-gcd-gcd-ℕ 0 b)))) 
+  (tr (λ t → div-ℕ b t) H 
+    (div-gcd-is-common-divisor-ℕ 0 b b 
+      (pair' (div-zero-ℕ b) (refl-div-ℕ b))))
+```
+
+### `gcd-ℕ a 0 ＝ a`
+
+```agda
+is-id-is-gcd-zero-ℕ' : {a x : ℕ} → gcd-ℕ a 0 ＝ x → x ＝ a
+is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x} 
+  ((is-commutative-gcd-ℕ 0 a) ∙ H)
+
 ```
