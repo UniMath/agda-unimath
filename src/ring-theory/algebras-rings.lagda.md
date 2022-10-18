@@ -181,13 +181,18 @@ module _
     (r : type-Ring R) (x : type-Nonunital-Left-Algebra-Ring) →
     action-Nonunital-Left-Algebra-Ring (neg-Ring R r) x ＝
     neg-Nonunital-Left-Algebra-Ring (action-Nonunital-Left-Algebra-Ring r x)
-  left-negative-law-action-Nonunital-Left-Algebra-Ring
+  left-negative-law-action-Nonunital-Left-Algebra-Ring =
+    left-negative-law-mul-left-module-Ring R
+      left-module-Nonunital-Left-Algebra-Ring
+
+  right-negative-law-action-Nonunital-Left-Algebra-Ring :
+    (r : type-Ring R) (x : type-Nonunital-Left-Algebra-Ring) →
+    action-Nonunital-Left-Algebra-Ring r (neg-Nonunital-Left-Algebra-Ring x) ＝
+    neg-Nonunital-Left-Algebra-Ring (action-Nonunital-Left-Algebra-Ring r x)
+  right-negative-law-action-Nonunital-Left-Algebra-Ring =
+    right-negative-law-mul-left-module-Ring R
+      left-module-Nonunital-Left-Algebra-Ring
 ```
 
 ### Unital algebras over a ring
 
-```agda
-is-unital-Nonunital-Left-Algebra-Ring :
-  {l1 l2 : Level} (R : Ring l1) (A : Nonunital-Left-Algebra-Ring l2 R) → UU {!!}
-is-unital-Nonunital-Left-Algebra-Ring R A = {!!}
-```
