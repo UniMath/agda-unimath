@@ -25,7 +25,8 @@ open import elementary-number-theory.greatest-common-divisor-integers using
     is-one-gcd-one-ℤ'; is-commutative-gcd-ℤ)
 open import elementary-number-theory.integers using
   ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
-    is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ; one-positive-ℤ; is-set-ℤ; is-nonnegative-is-positive-ℤ)
+    is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ; one-positive-ℤ; is-set-ℤ;
+    is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
     commutative-mul-ℤ; is-injective-mul-ℤ)
@@ -36,14 +37,15 @@ open import elementary-number-theory.relatively-prime-integers using
 open import foundation.coproduct-types using (ind-coprod; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
-open import foundation.equality-dependent-pair-types
+open import foundation.equality-dependent-pair-types using (eq-pair-Σ')
+open import foundation.equality-cartesian-product-types using (eq-pair')
 open import foundation.equational-reasoning
 open import foundation.functions using (id)
 open import foundation.identity-types using (_＝_; inv; tr; refl; ap; _∙_)
 open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop)
+open import foundation.propositions using (is-prop; eq-is-prop)
 open import foundation.sets using
-  (Set; is-set; is-set-Σ; is-set-is-prop)
+  ( Set; is-set; is-set-Σ; is-set-is-prop)
 open import foundation.unit-type using (star)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -439,18 +441,20 @@ unique-denominator-reduce-fraction-ℤ x y H =
     (is-nonnegative-is-positive-ℤ (is-positive-int-reduce-denominator-fraction-ℤ y))
     (sim-unique-denominator-reduce-fraction-ℤ x y H)
 
-{- 
 unique-reduce-fraction-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → reduce-fraction-ℤ x ＝ reduce-fraction-ℤ y
-unique-reduce-fraction-ℤ x y H = eq-pair-Σ' (pair 
-  (unique-numerator-reduce-fraction-ℤ x y H) 
-  (eq-pair-Σ' (pair 
-    ? 
-    ?)))
+unique-reduce-fraction-ℤ x y H =
+  eq-pair' (pair
+    (unique-numerator-reduce-fraction-ℤ x y H)
+    (eq-pair-Σ' (pair
+      (unique-denominator-reduce-fraction-ℤ x y H)
+      (eq-is-prop (is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 
 eq-ℚ-sim-fractions-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → in-fraction-ℤ x ＝ in-fraction-ℤ y
-eq-ℚ-sim-fractions-ℤ x y H = eq-pair-Σ' (pair (unique-reduce-fraction-ℤ x y H) ?)
--}
-
+eq-ℚ-sim-fractions-ℤ x y H =
+  eq-pair-Σ'
+    ( pair
+      ( unique-reduce-fraction-ℤ x y H)
+      ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
 ```
 
 ### The type of rationals is a set
