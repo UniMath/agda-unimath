@@ -65,6 +65,7 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
 open import category-theory.products-precategories
+open import category-theory.pullbacks-precategories
 open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```

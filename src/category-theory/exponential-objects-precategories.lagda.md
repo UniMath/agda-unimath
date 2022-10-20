@@ -34,13 +34,21 @@ We say that `C` has all exponentials if there is a choice of an exponential for 
 ```agda
 module _ {l1 l2 : Level} (C : Precat l1 l2) (p : has-all-binary-products C) where
 
+  is-exponential :
+    (x y e : obj-Precat C) →
+    type-hom-Precat C (object-product-span C p e x) y →
+    UU (l1 ⊔ l2)
+  is-exponential x y e ev =
+    (z : obj-Precat C)
+    (f : type-hom-Precat C (object-product-span C p z x) y) →
+    ∃! (type-hom-Precat C z e) λ g →
+       comp-hom-Precat C ev (product-of-morphisms C p g (id-hom-Precat C)) ＝ f
+
   exponential : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   exponential x y =
     Σ (obj-Precat C) (λ e →
     Σ (type-hom-Precat C (object-product-span C p e x) y) λ ev →
-      (z : obj-Precat C) (f : type-hom-Precat C (object-product-span C p z x) y) →
-        ∃! (type-hom-Precat C z e) λ g →
-           comp-hom-Precat C ev (product-of-morphisms C p g (id-hom-Precat C)) ＝ f)
+      is-exponential x y e ev)
 
   has-all-exponentials : UU (l1 ⊔ l2)
   has-all-exponentials = (x y : obj-Precat C) → exponential x y
@@ -56,32 +64,28 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
   eval-exponential : type-hom-Precat C (object-product-span C p object-exponential x) y
   eval-exponential = pr1 (pr2 (t x y))
 
-  morphism-into-exponential :
-    {z : obj-Precat C} →
-    type-hom-Precat C (object-product-span C p z x) y →
-    type-hom-Precat C z object-exponential
-  morphism-into-exponential {z} f = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
+  module _ (z : obj-Precat C)
+    (f : type-hom-Precat C (object-product-span C p z x) y) where
 
-  morphism-into-exponential-comm :
-    {z : obj-Precat C} →
-    (f : type-hom-Precat C (object-product-span C p z x) y)
-    → comp-hom-Precat C
-        eval-exponential
-        (product-of-morphisms C p
-          (morphism-into-exponential f)
-          (id-hom-Precat C))
-    ＝ f
-  morphism-into-exponential-comm {z} f = pr2 (pr1 (pr2 (pr2 (t x y)) z f))
+    morphism-into-exponential : type-hom-Precat C z object-exponential
+    morphism-into-exponential = pr1 (pr1 (pr2 (pr2 (t x y)) z f))
 
-  is-unique-morphism-into-exponential :
-    {z : obj-Precat C} →
-    (f : type-hom-Precat C (object-product-span C p z x) y)
-    (g : type-hom-Precat C z object-exponential)
-    → comp-hom-Precat C
-        eval-exponential
-        (product-of-morphisms C p g (id-hom-Precat C))
+    morphism-into-exponential-comm :
+      comp-hom-Precat C
+          eval-exponential
+          (product-of-morphisms C p
+            (morphism-into-exponential)
+            (id-hom-Precat C))
       ＝ f
-    → morphism-into-exponential f ＝ g
-  is-unique-morphism-into-exponential {z} f g q =
-    ap pr1 (pr2 (pr2 (pr2 (t x y)) z f) (g , q))
+    morphism-into-exponential-comm = pr2 (pr1 (pr2 (pr2 (t x y)) z f))
+
+    is-unique-morphism-into-exponential :
+      (g : type-hom-Precat C z object-exponential)
+      → comp-hom-Precat C
+          eval-exponential
+          (product-of-morphisms C p g (id-hom-Precat C))
+        ＝ f
+      → morphism-into-exponential ＝ g
+    is-unique-morphism-into-exponential g q =
+      ap pr1 (pr2 (pr2 (pr2 (t x y)) z f) (g , q))
 ```
