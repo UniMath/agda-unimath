@@ -11,7 +11,10 @@ open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat )
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
 open import foundation.cartesian-product-types using (_×_)
-open import foundation-core.identity-types using (_＝_; ap)
+open import foundation.contractible-types using (is-property-is-contr)
+open import foundation.identity-types using (_＝_; ap)
+open import foundation.propositions using
+  ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop)
 open import foundation.unique-existence using (∃!)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
@@ -116,4 +119,25 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
       morphism-into-pullback ＝ h'
     is-unique-morphism-into-pullback h' α₁ α₂ =
       ap pr1 (pr2 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α) (h' , α₁ , α₂))
+
+module _ {l1 l2 : Level} (C : Precat l1 l2)
+  (x y z : obj-Precat C)
+  (f : type-hom-Precat C y x)
+  (g : type-hom-Precat C z x)
+  (w : obj-Precat C)
+  (p₁ : type-hom-Precat C w y)
+  (p₂ : type-hom-Precat C w z)
+  (α : comp-hom-Precat C f p₁ ＝ comp-hom-Precat C g p₂) where
+
+  is-prop-is-pullback : is-prop (is-pullback C x y z f g w p₁ p₂ α)
+  is-prop-is-pullback =
+    is-prop-Π (λ w' →
+      is-prop-Π (λ p₁' →
+        is-prop-Π (λ p₂' →
+          is-prop-function-type
+            is-property-is-contr)))
+
+  is-pullback-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 is-pullback-Prop = is-pullback C x y z f g w p₁ p₂ α
+  pr2 is-pullback-Prop = is-prop-is-pullback
 ```

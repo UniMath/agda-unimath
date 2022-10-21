@@ -11,7 +11,9 @@ open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat )
 open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
 open import foundation.cartesian-product-types using (_×_)
-open import foundation-core.identity-types using (_＝_; ap)
+open import foundation.contractible-types using (is-property-is-contr)
+open import foundation.identity-types using (_＝_; ap)
+open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
 open import foundation.unique-existence using (∃!)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
@@ -45,53 +47,69 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
         (comp-hom-Precat C proj₁ h ＝ f)
         × (comp-hom-Precat C proj₂ h ＝ g))
 
-  product-span : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
-  product-span x y =
+  product : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
+  product x y =
     Σ (obj-Precat C) λ p →
     Σ (type-hom-Precat C p x) λ proj₁ →
     Σ (type-hom-Precat C p y) λ proj₂ →
       is-product x y p proj₁ proj₂
 
   has-all-binary-products : UU (l1 ⊔ l2)
-  has-all-binary-products = (x y : obj-Precat C) → product-span x y
+  has-all-binary-products = (x y : obj-Precat C) → product x y
 
 
 module _ {l1 l2 : Level} (C : Precat l1 l2)
   (t : has-all-binary-products C) where
 
-  object-product-span : obj-Precat C → obj-Precat C → obj-Precat C
-  object-product-span x y = pr1 (t x y)
+  object-product : obj-Precat C → obj-Precat C → obj-Precat C
+  object-product x y = pr1 (t x y)
 
-  proj₁-product-span : (x y : obj-Precat C) → type-hom-Precat C (object-product-span x y) x
-  proj₁-product-span x y = pr1 (pr2 (t x y))
+  proj₁-product : (x y : obj-Precat C) → type-hom-Precat C (object-product x y) x
+  proj₁-product x y = pr1 (pr2 (t x y))
 
-  proj₂-product-span : (x y : obj-Precat C) → type-hom-Precat C (object-product-span x y) y
-  proj₂-product-span x y = pr1 (pr2 (pr2 (t x y)))
+  proj₂-product : (x y : obj-Precat C) → type-hom-Precat C (object-product x y) y
+  proj₂-product x y = pr1 (pr2 (pr2 (t x y)))
 
   module _ (x y z : obj-Precat C)
     (f : type-hom-Precat C z x)
     (g : type-hom-Precat C z y) where
 
-    morphism-into-product-span : type-hom-Precat C z (object-product-span x y)
-    morphism-into-product-span = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
+    morphism-into-product : type-hom-Precat C z (object-product x y)
+    morphism-into-product = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
-    morphism-into-product-span-comm-proj₁ :
-      comp-hom-Precat C (proj₁-product-span x y) morphism-into-product-span ＝ f
-    morphism-into-product-span-comm-proj₁ =
+    morphism-into-product-comm-proj₁ :
+      comp-hom-Precat C (proj₁-product x y) morphism-into-product ＝ f
+    morphism-into-product-comm-proj₁ =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    morphism-into-product-span-comm-proj₂ :
-      comp-hom-Precat C (proj₂-product-span x y) morphism-into-product-span ＝ g
-    morphism-into-product-span-comm-proj₂ =
+    morphism-into-product-comm-proj₂ :
+      comp-hom-Precat C (proj₂-product x y) morphism-into-product ＝ g
+    morphism-into-product-comm-proj₂ =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
-    is-unique-morphism-into-product-span :
-      (h : type-hom-Precat C z (object-product-span x y)) →
-      comp-hom-Precat C (proj₁-product-span x y) h ＝ f →
-      comp-hom-Precat C (proj₂-product-span x y) h ＝ g →
-      morphism-into-product-span ＝ h
-    is-unique-morphism-into-product-span h comm1 comm2 =
+    is-unique-morphism-into-product :
+      (h : type-hom-Precat C z (object-product x y)) →
+      comp-hom-Precat C (proj₁-product x y) h ＝ f →
+      comp-hom-Precat C (proj₂-product x y) h ＝ g →
+      morphism-into-product ＝ h
+    is-unique-morphism-into-product h comm1 comm2 =
       ap pr1 ((pr2 (pr2 (pr2 (pr2 (t x y))) z f g)) (h , (comm1 , comm2)))
+
+module _ {l1 l2 : Level} (C : Precat l1 l2)
+  (x y p : obj-Precat C)
+  (proj₁ : type-hom-Precat C p x)
+  (proj₂ : type-hom-Precat C p y) where
+
+  is-prop-is-product : is-prop (is-product C x y p proj₁ proj₂)
+  is-prop-is-product =
+    is-prop-Π (λ z →
+      is-prop-Π (λ f →
+        is-prop-Π (λ g →
+          is-property-is-contr)))
+
+  is-product-Prop : UU-Prop (l1 ⊔ l2)
+  pr1 is-product-Prop = is-product C x y p proj₁ proj₂
+  pr2 is-product-Prop = is-prop-is-product
 ```
 
 ## Properties
@@ -109,10 +127,10 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
 
   product-of-morphisms :
     type-hom-Precat C
-      (object-product-span C t x₁ x₂)
-      (object-product-span C t y₁ y₂)
+      (object-product C t x₁ x₂)
+      (object-product C t y₁ y₂)
   product-of-morphisms =
-    morphism-into-product-span C t _ _ _
-      (comp-hom-Precat C f (proj₁-product-span C t x₁ x₂))
-      (comp-hom-Precat C g (proj₂-product-span C t x₁ x₂))
+    morphism-into-product C t _ _ _
+      (comp-hom-Precat C f (proj₁-product C t x₁ x₂))
+      (comp-hom-Precat C g (proj₂-product C t x₁ x₂))
 ```
