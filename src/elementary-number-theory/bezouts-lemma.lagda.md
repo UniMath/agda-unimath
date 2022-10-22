@@ -5,43 +5,44 @@ title: Bezout's lemma
 ```agda
 module elementary-number-theory.bezouts-lemma where
 
+open import elementary-number-theory.absolute-value-integers using 
+ ( abs-ℤ; abs-int-ℕ; abs-neg-ℤ; int-abs-is-nonnegative-ℤ; is-nonzero-abs-ℤ; multiplicative-abs-ℤ)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-integers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.distance-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-modular-arithmetic
-open import elementary-number-theory.difference-integers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.modular-arithmetic
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
-open import elementary-number-theory.lower-bounds-natural-numbers
-open import elementary-number-theory.integers
-open import elementary-number-theory.inequality-integers
-open import elementary-number-theory.addition-integers
-open import elementary-number-theory.multiplication-integers 
-open import elementary-number-theory.congruence-integers
-open import elementary-number-theory.distance-integers
-open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.inequality-integers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-integers 
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
-open import univalent-combinatorics.standard-finite-types
-
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equational-reasoning
 open import foundation.identity-types
-open import foundation.universe-levels
 open import foundation.negation
-open import foundation.coproduct-types
-open import foundation.cartesian-product-types
 open import foundation.unit-type
+open import foundation.universe-levels
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -61,16 +62,20 @@ is-distance-between-multiples-ℕ : ℕ → ℕ → ℕ → UU lzero
 is-distance-between-multiples-ℕ x y z =
   Σ ℕ (λ k → Σ ℕ (λ l → dist-ℕ (mul-ℕ k x) (mul-ℕ l y) ＝ z))
 
-is-distance-between-multiples-x-coeff-ℕ : {x y z : ℕ} → is-distance-between-multiples-ℕ x y z → ℕ
-is-distance-between-multiples-x-coeff-ℕ dist = pr1 dist
+is-distance-between-multiples-fst-coeff-ℕ : {x y z : ℕ} → is-distance-between-multiples-ℕ x y z → ℕ
+is-distance-between-multiples-fst-coeff-ℕ dist = pr1 dist
 
-is-distance-between-multiples-y-coeff-ℕ : {x y z : ℕ} → is-distance-between-multiples-ℕ x y z → ℕ
-is-distance-between-multiples-y-coeff-ℕ dist = pr1 (pr2 dist)
+is-distance-between-multiples-snd-coeff-ℕ : {x y z : ℕ} → is-distance-between-multiples-ℕ x y z → ℕ
+is-distance-between-multiples-snd-coeff-ℕ dist = pr1 (pr2 dist)
 
-is-distance-between-multiples-eqn-ℕ : {x y z : ℕ} → (d : is-distance-between-multiples-ℕ x y z) → dist-ℕ (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ d) x) (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ d) y) ＝ z
+is-distance-between-multiples-eqn-ℕ : {x y z : ℕ} 
+  → (d : is-distance-between-multiples-ℕ x y z) 
+  → dist-ℕ ( mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ d) x) 
+    ( mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ d) y) ＝ z
 is-distance-between-multiples-eqn-ℕ dist = pr2 (pr2 dist)
 
-is-distance-between-multiples-sym-ℕ : (x y z : ℕ) → is-distance-between-multiples-ℕ x y z → is-distance-between-multiples-ℕ y x z
+is-distance-between-multiples-sym-ℕ : (x y z : ℕ)
+  → is-distance-between-multiples-ℕ x y z → is-distance-between-multiples-ℕ y x z
 is-distance-between-multiples-sym-ℕ x y z (pair k (pair l eqn)) = 
   pair l (pair k (symmetric-dist-ℕ (mul-ℕ l y) (mul-ℕ k x) ∙ eqn))
 ```
@@ -82,93 +87,134 @@ is-distance-between-multiples-sym-ℕ x y z (pair k (pair l eqn)) =
 If `z = dist-ℕ (kx, ly)` for some `k` and `l`, then it follows that `ly ≡ ±z mod x`. It follows that `±ly ≡ z mod x`, and therefore that `[y] | [z]` in `ℤ-Mod x`
 
 ```agda
+int-is-distance-between-multiples-ℕ : 
+  (x y z : ℕ) → (d : is-distance-between-multiples-ℕ x y z)
+  → (H : leq-ℕ 
+    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ d) x) 
+    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ d) y))
+  → add-ℤ (int-ℕ z)  
+    (mul-ℤ 
+      (int-ℕ (is-distance-between-multiples-fst-coeff-ℕ d))
+      (int-ℕ x))
+    ＝ mul-ℤ 
+      (int-ℕ (is-distance-between-multiples-snd-coeff-ℕ d)) 
+      (int-ℕ y)
+int-is-distance-between-multiples-ℕ x y z (k , l , p) H =
+  equational-reasoning
+    add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x))
+    ＝ add-ℤ (int-ℕ z) (int-ℕ (mul-ℕ k x))
+      by ap (λ p → add-ℤ (int-ℕ z) p) (mul-int-ℕ k x) 
+    ＝ int-ℕ (add-ℕ z (mul-ℕ k x)) 
+      by add-int-ℕ z (mul-ℕ k x) 
+    ＝ int-ℕ (mul-ℕ l y) 
+      by ap (int-ℕ) 
+        (rewrite-left-dist-add-ℕ z (mul-ℕ k x) (mul-ℕ l y) H (inv p))
+    ＝ mul-ℤ (int-ℕ l) (int-ℕ y)
+      by inv (mul-int-ℕ l y)
+
 div-mod-is-distance-between-multiples-ℕ :
   (x y z : ℕ) →
   is-distance-between-multiples-ℕ x y z → div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)
 div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) 
   with decide-leq-ℕ (mul-ℕ k x) (mul-ℕ l y)
-... | inl kxly = (mod-ℕ x l , inv (path))
-  where   
-  add-dist : int-ℕ (add-ℕ z (mul-ℕ k x)) ＝ int-ℕ (mul-ℕ l y)
-  add-dist = ap (int-ℕ) 
-    ( rewrite-left-dist-add-ℕ z (mul-ℕ k x) (mul-ℕ l y) kxly (inv p))
-
-  unfold-mods : mod-ℤ x (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x))) ＝ 
-    mod-ℤ x (mul-ℤ (int-ℕ l) (int-ℕ y))
-  unfold-mods = ap (mod-ℤ x) 
-    ( ap (λ p → add-ℤ (int-ℕ z) p) (mul-int-ℕ k x) 
-    ∙ ( add-int-ℕ z (mul-ℕ k x) 
-    ∙ ( add-dist 
-    ∙ ( inv (mul-int-ℕ l y)))))
-
-  path : mod-ℕ x z ＝ mul-ℤ-Mod x (mod-ℕ x l) (mod-ℕ x y)
-  path = inv (mod-int-ℕ x z) 
-    ∙ ( ap (mod-ℤ x) (inv (right-unit-law-add-ℤ (int-ℕ z)))
-    ∙ ( preserves-add-mod-ℤ x (int-ℕ z) zero-ℤ 
-    ∙ ( ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x p)) 
-      (inv (right-zero-law-mul-ℤ (int-ℕ k))) 
-    ∙ ( ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p) 
-      (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ)
-    ∙ ( ap (λ p → 
-        add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p))
-      (mod-zero-ℤ x)   
-    ∙ ( ap (λ p → 
-         add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p)) 
-      (inv (mod-refl-ℕ x))  
-    ∙ ( ap (λ p → 
-         add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p)) 
-      (inv (mod-int-ℕ x x))  
-    ∙ ( ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
-      (inv (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x))) 
-    ∙ ( inv (preserves-add-mod-ℤ x (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x))) 
-    ∙ ( unfold-mods
-    ∙ ( preserves-mul-mod-ℤ x (int-ℕ l) (int-ℕ y) 
-    ∙ ( ap (λ p → mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) p) (mod-int-ℕ x y) 
-    ∙ ( ap (λ p → mul-ℤ-Mod x p (mod-ℕ x y)) (mod-int-ℕ x l) )))))))))))))  
-... | inr lykx = (mod-ℤ x (neg-ℤ (int-ℕ l)) , inv path)
-  where
-  add-dist : int-ℕ (add-ℕ (mul-ℕ l y) z) ＝ int-ℕ (mul-ℕ k x)
-  add-dist = ap (int-ℕ) 
-    ( rewrite-right-dist-add-ℕ (mul-ℕ l y) z (mul-ℕ k x) lykx 
-    (inv p ∙ symmetric-dist-ℕ (mul-ℕ k x) (mul-ℕ l y)) )
-
-  unfold-ints : add-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)) (int-ℕ z) ＝ 
-    mul-ℤ (int-ℕ k) (int-ℕ x)
-  unfold-ints = ap (λ p → add-ℤ p (int-ℕ z)) (mul-int-ℕ l y) 
-    ∙ ( add-int-ℕ (mul-ℕ l y) z 
-    ∙ ( add-dist 
-    ∙ ( inv (mul-int-ℕ k x))))
-
-  rearrange : mod-ℤ x (int-ℕ z) ＝ 
-    mod-ℤ x ( add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) 
-      (mul-ℤ (int-ℕ k) (int-ℕ x)))
-  rearrange = ap (mod-ℤ x) 
-    (inv (isretr-add-neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)) (int-ℕ z))
-    ∙ ( ap (add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))) unfold-ints 
-    ∙ ( ap (λ p → add-ℤ p (mul-ℤ (int-ℕ k) (int-ℕ x))) 
-      (inv (left-negative-law-mul-ℤ (int-ℕ l) (int-ℕ y))))))
-  
-  path : mod-ℕ x z ＝ mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℕ x y)
-  path = inv (mod-int-ℕ x z) 
-    ∙ ( rearrange 
-    ∙ ( preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) 
-      (mul-ℤ (int-ℕ k) (int-ℕ x)) 
-    ∙ ( ap (λ p → add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p) 
-      (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x)) 
-    ∙ ( ap (λ p → add-ℤ-Mod x 
-            (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) 
-            (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p)) 
+... | inl kxly = (mod-ℕ x l , 
+  (equational-reasoning
+    mul-ℤ-Mod x (mod-ℕ x l) (mod-ℕ x y)
+    ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℕ x y) 
+      by inv (ap (λ p → mul-ℤ-Mod x p (mod-ℕ x y)) (mod-int-ℕ x l))
+    ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℤ x (int-ℕ y))
+      by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) p) (mod-int-ℕ x y))
+    ＝ mod-ℤ x (mul-ℤ (int-ℕ l) (int-ℕ y)) 
+      by inv (preserves-mul-mod-ℤ x (int-ℕ l) (int-ℕ y)) 
+    ＝ mod-ℤ x (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x)))
+      by inv (ap (mod-ℤ x) 
+        (int-is-distance-between-multiples-ℕ x y z (k , l , p) kxly))
+    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) 
+      (mod-ℤ x (mul-ℤ (int-ℕ k) (int-ℕ x)))
+      by preserves-add-mod-ℤ x (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x)) 
+    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
+      (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x (int-ℕ x)))
+      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
+        (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x))
+    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
+      (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x zero-ℤ))
+      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) 
+        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p)) 
         (mod-int-ℕ x x ∙ (mod-refl-ℕ x ∙ inv (mod-zero-ℤ x))) 
-    ∙ ( ap (λ p → add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p)
-      (inv (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ)) 
-    ∙ ( ap (λ p → add-ℤ-Mod x 
-             (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) (mod-ℤ x p)) 
-      (right-zero-law-mul-ℤ (int-ℕ k)) 
-    ∙ ( inv (preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) (zero-ℤ)) 
-    ∙ ( ap (mod-ℤ x) (right-unit-law-add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
-    ∙ ( preserves-mul-mod-ℤ x (neg-ℤ (int-ℕ l)) (int-ℕ y) 
-    ∙ ( ap (λ p → mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) p) 
-      (mod-int-ℕ x y)))))))))))
+    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
+      (mod-ℤ x (mul-ℤ (int-ℕ k) zero-ℤ)) 
+      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
+        (inv (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ))
+    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x zero-ℤ)
+      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x p))
+        (right-zero-law-mul-ℤ (int-ℕ k))
+    ＝ mod-ℤ x (add-ℤ (int-ℕ z) zero-ℤ)
+      by inv (preserves-add-mod-ℤ x (int-ℕ z) zero-ℤ)
+    ＝ mod-ℤ x (int-ℕ z)
+      by ap (mod-ℤ x) (right-unit-law-add-ℤ (int-ℕ z))
+    ＝ mod-ℕ x z by mod-int-ℕ x z
+  ))
+... | inr lykx = (mod-ℤ x (neg-ℤ (int-ℕ l)) , 
+  (equational-reasoning
+    mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℕ x y)
+    ＝ mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℤ x (int-ℕ y)) 
+      by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) p) 
+        (mod-int-ℕ x y)) 
+    ＝ mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
+      by inv (preserves-mul-mod-ℤ x (neg-ℤ (int-ℕ l)) (int-ℕ y))
+    ＝ mod-ℤ x (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) zero-ℤ)
+      by ap (mod-ℤ x) 
+        (inv (right-unit-law-add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))))
+    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mod-ℤ x zero-ℤ)
+      by preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) (zero-ℤ)
+    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mod-ℤ x (mul-ℤ (int-ℕ k) zero-ℤ))
+      by ap (λ p → add-ℤ-Mod x 
+        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) (mod-ℤ x p))
+        (inv (right-zero-law-mul-ℤ (int-ℕ k)))
+    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x zero-ℤ))
+      by ap (λ p → add-ℤ-Mod x 
+        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p)
+        (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ)
+    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x (int-ℕ x)))
+      by ap (λ p → add-ℤ-Mod x
+        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p))
+        (mod-zero-ℤ x ∙ (inv (mod-refl-ℕ x) ∙ inv (mod-int-ℕ x x)))
+    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mod-ℤ x (mul-ℤ (int-ℕ k) (int-ℕ x)))
+      by ap (λ p → add-ℤ-Mod x 
+        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p) 
+        (inv (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x)))
+    ＝ mod-ℤ x (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
+        (mul-ℤ (int-ℕ k) (int-ℕ x)))
+      by inv (preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
+        (mul-ℤ (int-ℕ k) (int-ℕ x)))
+    ＝ mod-ℤ x (int-ℕ z)
+      by ap (mod-ℤ x) (equational-reasoning
+        add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) 
+          (mul-ℤ (int-ℕ k) (int-ℕ x))
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))) 
+          (mul-ℤ (int-ℕ k) (int-ℕ x))
+        by ap (λ p → add-ℤ p (mul-ℤ (int-ℕ k) (int-ℕ x)))
+          (left-negative-law-mul-ℤ (int-ℕ l) (int-ℕ y))
+        ＝ add-ℤ (mul-ℤ (int-ℕ k) (int-ℕ x)) 
+           (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))
+        by commutative-add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))) 
+          (mul-ℤ (int-ℕ k) (int-ℕ x))
+        ＝ add-ℤ (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ l) (int-ℕ y))) 
+          (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))
+        by ap (λ p → add-ℤ p (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))))
+          (inv (int-is-distance-between-multiples-ℕ y x z 
+            (is-distance-between-multiples-sym-ℕ x y z (k , l , p)) 
+            lykx))
+        ＝ int-ℕ z
+        by isretr-add-neg-ℤ' (mul-ℤ (int-ℕ l) (int-ℕ y)) (int-ℕ z))
+     ＝ mod-ℕ x z by mod-int-ℕ x z))
+
 ```
 
 ### If `[y] | [z]` in `ℤ-Mod x`, then `z = dist-ℕ (kx, ly)` for some `k` and `l`
@@ -1627,51 +1673,51 @@ minimal-positive-distance-div-snd x y = concatenate-eq-div-ℕ (minimal-positive
 minimal-positive-distance-div-gcd-ℕ : (x y : ℕ) → div-ℕ (minimal-positive-distance x y) (gcd-ℕ x y)
 minimal-positive-distance-div-gcd-ℕ x y = div-gcd-is-common-divisor-ℕ x y (minimal-positive-distance x y) (pair' (minimal-positive-distance-div-fst x y) (minimal-positive-distance-div-snd x y)) 
 
-gcd-ℕ-div-x-mults : (x y z : ℕ) → (d : is-distance-between-multiples-ℕ x y z) → div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ d) x)
+gcd-ℕ-div-x-mults : (x y z : ℕ) → (d : is-distance-between-multiples-ℕ x y z) → div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ d) x)
 gcd-ℕ-div-x-mults x y z d = div-mul-ℕ 
-  (is-distance-between-multiples-x-coeff-ℕ d) 
+  (is-distance-between-multiples-fst-coeff-ℕ d) 
   (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
 
-gcd-ℕ-div-y-mults : (x y z : ℕ) → (d : is-distance-between-multiples-ℕ x y z) → div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ d) y)
+gcd-ℕ-div-y-mults : (x y z : ℕ) → (d : is-distance-between-multiples-ℕ x y z) → div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ d) y)
 gcd-ℕ-div-y-mults x y z d = div-mul-ℕ 
-  (is-distance-between-multiples-y-coeff-ℕ d) 
+  (is-distance-between-multiples-snd-coeff-ℕ d) 
   (gcd-ℕ x y) y (pr2 (is-common-divisor-gcd-ℕ x y))
 
 gcd-ℕ-div-dist-between-mult : (x y z : ℕ) → is-distance-between-multiples-ℕ x y z → div-ℕ (gcd-ℕ x y) z 
 gcd-ℕ-div-dist-between-mult x y z dist
-  with decide-leq-ℕ (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y)
+  with decide-leq-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
 ... | inl sxty = div-right-summand-ℕ (gcd-ℕ x y)
-  (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x)
+  (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
   z
   (gcd-ℕ-div-x-mults x y z dist)
   (concatenate-div-eq-ℕ (gcd-ℕ-div-y-mults x y z dist) (inv rewrite-dist))
   where
-  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x) z ＝ mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y 
+  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) z ＝ mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y 
   rewrite-dist = rewrite-right-dist-add-ℕ  
-    (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x)
+    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
     z
-    (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y)
+    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
     sxty
     (inv (is-distance-between-multiples-eqn-ℕ dist))
 
 ... | inr tysx = div-right-summand-ℕ (gcd-ℕ x y)
-  (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y)
+  (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
   z
   (gcd-ℕ-div-y-mults x y z dist)
   (concatenate-div-eq-ℕ (gcd-ℕ-div-x-mults x y z dist) (inv rewrite-dist)) 
   where
-  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y) z ＝ mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x 
+  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y) z ＝ mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x 
   rewrite-dist = rewrite-right-dist-add-ℕ  
-    (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y)
+    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
     z
-    (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x)
+    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
     tysx
     (inv (is-distance-between-multiples-eqn-ℕ dist) 
-      ∙ symmetric-dist-ℕ (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-y-coeff-ℕ dist) y))
+      ∙ symmetric-dist-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y))
 
-  div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-x-coeff-ℕ dist) x)
+  div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
   div-gcd-x = div-mul-ℕ 
-    (is-distance-between-multiples-x-coeff-ℕ dist) 
+    (is-distance-between-multiples-fst-coeff-ℕ dist) 
     (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
 
 gcd-ℕ-div-minimal-positive-distance : (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → div-ℕ (gcd-ℕ x y) (minimal-positive-distance x y)
