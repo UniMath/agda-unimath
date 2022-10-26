@@ -21,9 +21,10 @@ open import foundation-core.function-extensionality using
 open import foundation-core.functions using (id)
 open import foundation-core.functoriality-dependent-pair-types using (tot)
 open import foundation-core.identity-types using (_＝_; left-inv; refl; ap)
-open import foundation-core.propositions using (Prop; equiv-prop)
+open import foundation-core.propositions using (Prop; equiv-prop; is-prop)
 open import foundation-core.singleton-induction using
   ( ind-singleton-is-contr; comp-singleton-is-contr)
+open import foundation-core.subtypes using (eq-subtype)
 open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-succ-is-trunc)
 open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
@@ -119,6 +120,20 @@ module _
     is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
     is-trunc-is-contr (succ-𝕋 k) is-contr-A =
       is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
+```
+
+### Contractibility of Σ-types where the dependent type is a proposition
+
+```agda
+module _ {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) where
+
+  is-contr-Σ-is-prop :
+    ((x : A) → is-prop (B x)) → ((x : A) → B x → a ＝ x) → is-contr (Σ A B)
+  pr1 (is-contr-Σ-is-prop p f) = pair a b
+  pr2 (is-contr-Σ-is-prop p f) (pair x y) =
+    eq-subtype
+      ( λ x' → pair (B x') (p x'))
+      ( f x y)
 ```
 
 ### Equivalent characterizations of contractible types
