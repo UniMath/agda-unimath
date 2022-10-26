@@ -12,8 +12,9 @@ open import category-theory.products-precategories
 open import category-theory.pullbacks-precategories
 open import category-theory.terminal-objects-precategories
 
+open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using
-  ( is-contr-equiv; is-contr-total-path)
+  ( is-contr-equiv; is-contr-total-path; is-contr-Σ-is-prop)
 open import foundation.dependent-pair-types using (Σ; _,_; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equational-reasoning
@@ -25,7 +26,8 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using
   ( _＝_; refl; inv; _∙_; ap; equiv-concat')
-open import foundation.propositions using (prod-Prop; equiv-prop)
+open import foundation.propositions using
+  ( prod-Prop; equiv-prop; is-prop; is-prop-prod)
 open import foundation.sets using
   ( Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
 open import foundation.subtypes using
@@ -204,46 +206,72 @@ module _
     map-is-pullback-is-product-slice-Precat :
       is-pullback C A X Y f g W p₁ p₂ α →
       is-product (slice-Precat C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂)
-    pr1 (pr1 (pr1 (map-is-pullback-is-product-slice-Precat ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂)))) =
-      pr1 (pr1 (ϕ Z h₁ h₂ β₂))
-    pr2 (pr1 (pr1 (map-is-pullback-is-product-slice-Precat ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂)))) =
-      ap (comp-hom-Precat C f) (inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))) ∙
-      (inv (assoc-comp-hom-Precat C f p₁ _) ∙
-      ap (λ k → comp-hom-Precat C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂)))) (inv α₁))
-    pr1 (pr2 (pr1 (map-is-pullback-is-product-slice-Precat ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂)))) =
-      eq-subtype (λ h' → Id-Prop (hom-Precat C Z A) _ _) (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
-    pr2 (pr2 (pr1 (map-is-pullback-is-product-slice-Precat ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂)))) =
-      eq-subtype (λ h' → Id-Prop (hom-Precat C Z A) _ _) (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
-    pr2 (map-is-pullback-is-product-slice-Precat ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂)) ((k , γ) , γ₁ , γ₂) =
-      eq-subtype
-        (λ _ → prod-Prop (Id-Prop (hom-slice-Precat C A _ _) _ _) (Id-Prop (hom-slice-Precat C A _ _) _ _))
-        (eq-subtype
-          (λ _ → Id-Prop (hom-Precat C Z A) _ _)
-          (ap pr1 (pr2 (ϕ Z h₁ h₂ β₂) (k , (ap pr1 γ₁ , ap pr1 γ₂)))))
+    map-is-pullback-is-product-slice-Precat ϕ (Z , .(comp-hom-Precat C f h₁)) (h₁ , refl) (h₂ , β₂) =
+      is-contr-Σ-is-prop c d q σ
+      where
+        c : type-hom-Precat (slice-Precat C A) (Z , comp-hom-Precat C f h₁) (W , p)
+        pr1 c = pr1 (pr1 (ϕ Z h₁ h₂ β₂))
+        pr2 c =
+          ap (comp-hom-Precat C f) (inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))) ∙
+          (inv (assoc-comp-hom-Precat C f p₁ _) ∙
+          ap (λ k → comp-hom-Precat C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂)))) (inv α₁))
+
+        d : (comp-hom-Precat (slice-Precat C A) (p₁ , α₁) c ＝ (h₁ , refl)) ×
+            (comp-hom-Precat (slice-Precat C A) (p₂ , α₂) c ＝ (h₂ , β₂))
+        pr1 d = eq-hom-slice-Precat C A _ _ (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
+        pr2 d = eq-hom-slice-Precat C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
+
+        q : ∀ k →
+          is-prop
+            ( (comp-hom-Precat (slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
+            ( (comp-hom-Precat (slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂))))
+        q k =
+          is-prop-prod
+            ( is-set-type-Set (hom-slice-Precat C A _ _) _ _)
+            ( is-set-type-Set (hom-slice-Precat C A _ _) _ _)
+
+        σ : ∀ k →
+          ( comp-hom-Precat (slice-Precat C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
+          ( comp-hom-Precat (slice-Precat C A) (p₂ , α₂) k ＝ (h₂ , β₂)) →
+          c ＝ k
+        σ (k , γ) (γ₁ , γ₂) =
+          eq-hom-slice-Precat C A _ _
+            ( ap pr1 (pr2 (ϕ Z h₁ h₂ β₂) (k , (ap pr1 γ₁ , ap pr1 γ₂))))
 
     map-inv-is-pullback-is-product-slice-Precat :
       is-product (slice-Precat C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂) →
       is-pullback C A X Y f g W p₁ p₂ α
-    pr1 (pr1 (map-inv-is-pullback-is-product-slice-Precat ψ W' p₁' p₂' α')) =
-      pr1 (pr1 (pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))))
-    pr1 (pr2 (pr1 (map-inv-is-pullback-is-product-slice-Precat ψ W' p₁' p₂' α'))) =
-      ap pr1 (pr1 (pr2 (pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
-    pr2 (pr2 (pr1 (map-inv-is-pullback-is-product-slice-Precat ψ W' p₁' p₂' α'))) =
-      ap pr1 (pr2 (pr2 (pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
-    pr2 (map-inv-is-pullback-is-product-slice-Precat ψ W' p₁' p₂' α') (k , γ₁ , γ₂) =
-      eq-subtype
-        (λ _ → prod-Prop (Id-Prop (hom-Precat C W' X) _ _) (Id-Prop (hom-Precat C W' Y) _ _))
-        (ap (pr1 ∘ pr1)
-            (pr2 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))
-                 ((k , (ap (comp-hom-Precat C f) (inv γ₁) ∙
-                       (inv (assoc-comp-hom-Precat C f p₁ k) ∙
-                       ap (λ l → comp-hom-Precat C l k) (inv α₁)))) ,
-                  eq-subtype
-                    (λ _ → Id-Prop (hom-Precat C _ _) _ _)
-                    γ₁ ,
-                  eq-subtype
-                    (λ _ → Id-Prop (hom-Precat C _ _) _ _)
-                    γ₂)))
+    map-inv-is-pullback-is-product-slice-Precat ψ W' p₁' p₂' α' =
+      is-contr-Σ-is-prop k γ q σ
+      where
+        k : type-hom-Precat C W' W
+        k = pr1 (pr1 (pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))))
+
+        γ : (comp-hom-Precat C p₁ k ＝ p₁') × (comp-hom-Precat C p₂ k ＝ p₂')
+        pr1 γ = ap pr1 (pr1 (pr2 (pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
+        pr2 γ = ap pr1 (pr2 (pr2 (pr1 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α')))))
+
+        q : ∀ k' →
+          is-prop
+            (( comp-hom-Precat C p₁ k' ＝ p₁') ×
+            ( comp-hom-Precat C p₂ k' ＝ p₂'))
+        q k' =
+          is-prop-prod
+            ( is-set-type-Set (hom-Precat C _ _) _ _)
+            ( is-set-type-Set (hom-Precat C _ _) _ _)
+
+        σ : (k' : type-hom-Precat C W' W) →
+            (γ' : (comp-hom-Precat C p₁ k' ＝ p₁') × (comp-hom-Precat C p₂ k' ＝ p₂')) →
+            k ＝ k'
+        σ k' (γ₁ , γ₂) =
+          ap (pr1 ∘ pr1)
+             (pr2 (ψ (W' , comp-hom-Precat C f p₁') (p₁' , refl) (p₂' , α'))
+                  (( k' ,
+                   ( ap (comp-hom-Precat C f) (inv γ₁) ∙
+                       (inv (assoc-comp-hom-Precat C f p₁ k') ∙
+                       ap (λ l → comp-hom-Precat C l k') (inv α₁)))) ,
+                   ( eq-hom-slice-Precat C A _ _ γ₁) ,
+                   ( eq-hom-slice-Precat C A _ _ γ₂)))
 
     equiv-is-pullback-is-product-slice-Precat :
       is-pullback C A X Y f g W p₁ p₂ α ≃
