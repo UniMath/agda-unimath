@@ -197,6 +197,7 @@ module _
     inv (right-unit-law-comp-hom-Groupoid G (id-hom-Groupoid G))
   pr2 (pr2 (pr2 functor-equiv-groupoid-1-type-Groupoid)) x = refl
 
+{-
   functor-inv-equiv-groupoid-1-type-Groupoid :
     functor-Cat
       ( cat-Groupoid G)
@@ -222,6 +223,7 @@ module _
       ( cat-Groupoid G)
   pr1 equiv-groupoid-1-type-Groupoid = functor-equiv-groupoid-1-type-Groupoid
   pr2 equiv-groupoid-1-type-Groupoid = {!!}
+  -}
 ```
 
 #### The 1-type obtained from the groupoid induced by a 1-type `X` is `X` itself
