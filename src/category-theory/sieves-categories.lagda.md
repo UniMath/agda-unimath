@@ -46,5 +46,14 @@ module _
                       ( λ g →
                         S Z X
                           (comp-hom-Cat C (inclusion-subtype (S Y X) f) g))))))
-  
+
+  is-sieve-Cat :
+    {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
+    UU (l1 ⊔ l2 ⊔ l3)
+  is-sieve-Cat S = type-Prop (is-sieve-cat-Prop S)
+
+  is-prop-is-sieve-Cat :
+    {l3 : Level} (S : (X Y : obj-Cat C) → subtype l3 (type-hom-Cat C X Y)) →
+    is-prop (is-sieve-Cat S)
+  is-prop-is-sieve-Cat S = is-prop-type-Prop (is-sieve-cat-Prop S)
 ```
