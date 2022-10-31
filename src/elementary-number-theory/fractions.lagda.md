@@ -13,7 +13,8 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; mul-ℤ')
 
-open import foundation.cartesian-product-types using (_×_)
+open import foundation.equivalence-relations
+open import foundation.cartesian-product-types using (_×_; pair')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (refl; inv; _∙_; ap)
 open import foundation.propositions using
@@ -92,12 +93,12 @@ is-prop-sim-fraction-ℤ x y = is-prop-type-Prop (sim-fraction-ℤ-Prop x y)
 refl-sim-fraction-ℤ : (x : fraction-ℤ) → sim-fraction-ℤ x x
 refl-sim-fraction-ℤ x = refl
 
-symm-sim-fraction-ℤ : {x y : fraction-ℤ} → sim-fraction-ℤ x y → sim-fraction-ℤ y x
-symm-sim-fraction-ℤ r = inv r
+symm-sim-fraction-ℤ : (x y : fraction-ℤ) → sim-fraction-ℤ x y → sim-fraction-ℤ y x
+symm-sim-fraction-ℤ x y r = inv r
 
 trans-sim-fraction-ℤ :
-  {x y z : fraction-ℤ} → sim-fraction-ℤ x y → sim-fraction-ℤ y z → sim-fraction-ℤ x z
-trans-sim-fraction-ℤ {x} {y} {z} r s =
+  (x y z : fraction-ℤ) → sim-fraction-ℤ x y → sim-fraction-ℤ y z → sim-fraction-ℤ x z
+trans-sim-fraction-ℤ x y z r s =
   is-injective-mul-ℤ'
     ( denominator-fraction-ℤ y)
     ( is-nonzero-denominator-fraction-ℤ y)
@@ -145,4 +146,11 @@ trans-sim-fraction-ℤ {x} {y} {z} r s =
                             ( numerator-fraction-ℤ z)
                             ( denominator-fraction-ℤ x)
                             ( denominator-fraction-ℤ y)))))))))))))
+
+eq-rel-sim-fraction-ℤ : Eq-Rel lzero fraction-ℤ
+eq-rel-sim-fraction-ℤ = pair (sim-fraction-ℤ-Prop) 
+  ( pair' (λ {x} → refl-sim-fraction-ℤ x) 
+    ( pair' (λ {x y} → symm-sim-fraction-ℤ x y) 
+      (λ {x y z} → trans-sim-fraction-ℤ x y z))) 
+
 ```

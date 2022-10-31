@@ -47,7 +47,7 @@ module _
 
 Meet-Sup-Lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Meet-Sup-Lattice l1 l2 l3 =
-  Σ (Poset l1 l2) (λ P → is-meet-sup-lattice-Poset l3 P)
+  Σ (Poset l1 l2) (is-meet-sup-lattice-Poset l3)
 
 ```
 
@@ -127,22 +127,23 @@ module _
 
 ```
 
+## Characterize the identity type.
+
 ## We now state the infinite distributive law
 
 ```agda
 
-infinite-distributive-law-meet-sup-lattice : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-infinite-distributive-law-meet-sup-lattice l1 l2 l3 =
-  (A : Meet-Sup-Lattice l1 l2 l3)
-  (a : element-Meet-Sup-Lattice A) → (I : UU l3) →
+distributive-law-meet-sup-lattice : (l1 l2 l3 : Level) → (Meet-Sup-Lattice l1 l2 l3) → UU (l1 ⊔ lsuc l3)
+distributive-law-meet-sup-lattice l1 l2 l3 A =
+  (a : element-Meet-Sup-Lattice A) → {I : UU l3} →
   (b : I → element-Meet-Sup-Lattice A) →
   (meet-Meet-Sup-Lattice A a (sup-Meet-Sup-Lattice A I b) ＝
   sup-Meet-Sup-Lattice A I (λ i → (meet-Meet-Sup-Lattice A a (b i))))
 
-{- this notation is not easy on the eye, but recall, in more familiar notation the identity expressed here is:
-                                a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
--}
-
-{- Show that the identity is a prop -}
-
 ```
+
+This notation is not easy on the eye, but recall, in more familiar notation the identity expressed here is:
+                                a ∧ (‌‌‌⋁ᵢ bᵢ) ＝ ⋁ᵢ (a ∧ bᵢ)
+
+
+Show that the identity is a prop. 

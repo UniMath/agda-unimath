@@ -33,6 +33,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso)
+open import foundation.equational-reasoning
 open import foundation.functions using (_∘_)
 open import foundation.identity-types using
   ( _＝_; refl; _∙_; inv; ap; ap-binary)
@@ -329,6 +330,16 @@ is-mul-neg-one-neg-ℤ x = refl
 is-mul-neg-one-neg-ℤ' : (x : ℤ) → neg-ℤ x ＝ mul-ℤ x neg-one-ℤ
 is-mul-neg-one-neg-ℤ' x =
   is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
+
+double-negative-law-mul-ℤ : (k l : ℤ) → mul-ℤ (neg-ℤ k) (neg-ℤ l) ＝ mul-ℤ k l
+double-negative-law-mul-ℤ k l = equational-reasoning
+  mul-ℤ (neg-ℤ k) (neg-ℤ l)
+  ＝ neg-ℤ (mul-ℤ k (neg-ℤ l))
+    by left-negative-law-mul-ℤ k (neg-ℤ l)
+  ＝ neg-ℤ (neg-ℤ (mul-ℤ k l))
+    by ap neg-ℤ (right-negative-law-mul-ℤ k l)
+  ＝ mul-ℤ k l
+    by neg-neg-ℤ (mul-ℤ k l)
 ```
 
 ### Positivity of multiplication

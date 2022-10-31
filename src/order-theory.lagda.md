@@ -17,8 +17,11 @@ open import order-theory.distributive-lattices public
 open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public
+open import order-theory.frames public
 open import order-theory.greatest-lower-bounds-posets public
+open import order-theory.homomorphisms-frames public
 open import order-theory.ideals-preorders public
+open import order-theory.infinite-distributive-law public
 open import order-theory.interval-subposets public
 open import order-theory.large-posets public
 open import order-theory.large-preorders public
@@ -36,6 +39,7 @@ open import order-theory.order-preserving-maps-preorders public
 open import order-theory.planar-binary-trees public
 open import order-theory.posets public
 open import order-theory.preorders public
+open import order-theory.sup-lattices public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.total-posets public
