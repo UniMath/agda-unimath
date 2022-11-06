@@ -3,7 +3,6 @@ title: Alternating groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
 module finite-group-theory.alternating-groups where
 
 open import group-theory.symmetric-groups

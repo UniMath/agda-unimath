@@ -40,7 +40,7 @@ Type-theoretically, the saturation condition on a carbon atom (fix one and call 
   double-bond-on-hydrocarbon c = Σ (vertex-hydrocarbon H) λ c' →
     has-cardinality 2 (edge-hydrocarbon H (standard-unordered-pair c c'))
 
-  has-double-bond-hydrocarbon : vertex-hydrocarbon H → UU-Prop (l1 ⊔ l2)
+  has-double-bond-hydrocarbon : vertex-hydrocarbon H → Prop (l1 ⊔ l2)
   has-double-bond-hydrocarbon c = trunc-Prop (double-bond-on-hydrocarbon c)
 
   has-triple-bond-hydrocarbon : vertex-hydrocarbon H → UU (l1 ⊔ l2)

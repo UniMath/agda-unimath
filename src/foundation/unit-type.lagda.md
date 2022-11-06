@@ -14,8 +14,8 @@ open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
 open import foundation-core.equivalences using (is-equiv; _≃_)
 open import foundation-core.identity-types using (refl)
 open import foundation-core.propositions using
-  ( is-prop; UU-Prop; is-prop-equiv')
-open import foundation-core.sets using (is-set; UU-Set)
+  ( is-prop; Prop; is-prop-equiv')
+open import foundation-core.sets using (is-set; Set)
 open import foundation-core.truncated-types using (is-trunc-succ-is-trunc)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; lzero; UU)
@@ -120,7 +120,7 @@ abstract
   is-prop-unit : is-prop unit
   is-prop-unit = is-prop-is-contr is-contr-unit
 
-unit-Prop : UU-Prop lzero
+unit-Prop : Prop lzero
 pr1 unit-Prop = unit
 pr2 unit-Prop = is-prop-unit
 ```
@@ -132,7 +132,7 @@ abstract
   is-set-unit : is-set unit
   is-set-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-unit
 
-unit-Set : UU-Set lzero
+unit-Set : Set lzero
 pr1 unit-Set = unit
 pr2 unit-Set = is-set-unit
 ```
@@ -151,7 +151,7 @@ abstract
     is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
 
 raise-unit-Prop :
-  (l1 : Level) → UU-Prop l1
+  (l1 : Level) → Prop l1
 pr1 (raise-unit-Prop l1) = raise-unit l1
 pr2 (raise-unit-Prop l1) = is-prop-raise-unit
 ```

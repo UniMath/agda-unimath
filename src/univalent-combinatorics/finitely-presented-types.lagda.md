@@ -15,7 +15,7 @@ open import foundation.functions using (_∘_)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
+  ( Prop; type-Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
 open import foundation.set-presented-types using (has-set-presentation-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
@@ -41,7 +41,7 @@ A type is said to be finitely presented if it is presented by a standard finite 
 
 ```agda
 has-presentation-of-cardinality-Prop :
-  {l1 : Level} (k : ℕ) (A : UU l1) → UU-Prop l1
+  {l1 : Level} (k : ℕ) (A : UU l1) → Prop l1
 has-presentation-of-cardinality-Prop k A =
   has-set-presentation-Prop (Fin-Set k) A
 
@@ -111,7 +111,7 @@ is-prop-is-finitely-presented :
 is-prop-is-finitely-presented =
   is-prop-all-elements-equal all-elements-equal-is-finitely-presented
 
-is-finitely-presented-Prop : {l : Level} (A : UU l) → UU-Prop l
+is-finitely-presented-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-finitely-presented-Prop A) = is-finitely-presented A
 pr2 (is-finitely-presented-Prop A) = is-prop-is-finitely-presented
 ```

@@ -43,6 +43,7 @@ open import foundation.interchange-law using
 open import foundation.type-arithmetic-empty-type using
   ( map-left-unit-law-coprod-is-empty)
 open import foundation.unit-type using (star)
+open import foundation.universe-levels using (UU; lzero)
 ```
 
 ## Idea
@@ -85,6 +86,13 @@ explicit-mul-ℤ (inr (inr x)) (inr (inr y)) = int-ℕ (mul-ℕ (succ-ℕ x) (su
 
 explicit-mul-ℤ' : ℤ → ℤ → ℤ
 explicit-mul-ℤ' x y = explicit-mul-ℤ y x
+```
+
+### A definition of being equal up to sign
+
+```agda
+is-plus-or-minus-ℤ : ℤ → ℤ → UU lzero
+is-plus-or-minus-ℤ x y = (x ＝ y) + (mul-ℤ neg-one-ℤ x ＝ y)
 ```
 
 ## Properties

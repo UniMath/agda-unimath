@@ -11,7 +11,7 @@ open import foundation-core.constant-maps public
 
 open import foundation-core.0-maps using (is-0-map)
 open import foundation-core.1-types using
-  ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
+  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation-core.contractible-maps using
   ( is-contr-map; is-equiv-is-contr-map; is-contr-map-is-equiv)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -24,9 +24,9 @@ open import foundation-core.identity-types using (_＝_)
 open import foundation-core.propositional-maps using
   ( is-prop-map; is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.propositions using
-  ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation-core.sets using
-  ( is-set; UU-Set; type-Set; is-set-type-Set)
+  ( is-set; Set; type-Set; is-set-type-Set)
 open import foundation-core.truncated-maps using (is-trunc-map)
 open import foundation-core.truncated-types using
   ( is-trunc; is-trunc-equiv; is-trunc-equiv')
@@ -135,17 +135,17 @@ module _
       is-1-type-is-0-map-const (λ x → is-0-map-is-faithful (H x))
 
 const-equiv :
-  {l : Level} (A : UU-Prop l) (x : type-Prop A) → unit ≃ type-Prop A
+  {l : Level} (A : Prop l) (x : type-Prop A) → unit ≃ type-Prop A
 pr1 (const-equiv A x) = const unit (type-Prop A) x
 pr2 (const-equiv A x) = is-equiv-const-is-prop (is-prop-type-Prop A) x
 
 const-emb :
-  {l : Level} (A : UU-Set l) (x : type-Set A) → unit ↪ type-Set A
+  {l : Level} (A : Set l) (x : type-Set A) → unit ↪ type-Set A
 pr1 (const-emb A x) = const unit (type-Set A) x
 pr2 (const-emb A x) = is-emb-const-is-set (is-set-type-Set A) x
 
 const-faithful-map :
-  {l : Level} (A : UU-1-Type l) (x : type-1-Type A) →
+  {l : Level} (A : 1-Type l) (x : type-1-Type A) →
   faithful-map unit (type-1-Type A)
 pr1 (const-faithful-map A x) = const unit (type-1-Type A) x
 pr2 (const-faithful-map A x) =

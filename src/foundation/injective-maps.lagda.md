@@ -22,7 +22,7 @@ open import foundation-core.sets using (is-set; is-set-prop-in-id)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 
 open import foundation.propositions using
-  ( is-prop; is-equiv-is-prop; is-prop-Π'; is-prop-function-type; UU-Prop)
+  ( is-prop; is-equiv-is-prop; is-prop-Π'; is-prop-function-type; Prop)
 
 ```
 
@@ -183,7 +183,7 @@ module _
         is-prop-Π'
           ( λ y → is-prop-function-type (H x y)))
 
-  is-injective-Prop : is-set A → (A → B) → UU-Prop (l1 ⊔ l2)
+  is-injective-Prop : is-set A → (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-injective-Prop H f) = is-injective f
   pr2 (is-injective-Prop H f) = is-prop-is-injective H f
 ```

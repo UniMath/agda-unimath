@@ -165,7 +165,7 @@ module _
   length-trail-Tree = length-trail-Undirected-Graph undirected-graph-Tree
 
   is-constant-walk-Tree-Prop :
-    {x y : node-Tree} → walk-Tree x y → UU-Prop lzero
+    {x y : node-Tree} → walk-Tree x y → Prop lzero
   is-constant-walk-Tree-Prop =
     is-constant-walk-Undirected-Graph-Prop undirected-graph-Tree
 
@@ -180,7 +180,7 @@ module _
     is-decidable-is-constant-walk-Undirected-Graph undirected-graph-Tree
 
   is-constant-trail-Tree-Prop :
-    {x y : node-Tree} → trail-Tree x y → UU-Prop lzero
+    {x y : node-Tree} → trail-Tree x y → Prop lzero
   is-constant-trail-Tree-Prop =
     is-constant-trail-Undirected-Graph-Prop undirected-graph-Tree
 
@@ -289,7 +289,7 @@ module _
             ( standard-walk-Tree T x y)
             ( is-constant-standard-trail-mere-eq-Tree T H)))
 
-  node-Tree-Set : UU-Set l1
+  node-Tree-Set : Set l1
   pr1 node-Tree-Set = node-Tree T
   pr2 node-Tree-Set = is-set-node-Tree
 ```

@@ -21,7 +21,7 @@ open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
 open import foundation.negation using (¬; map-neg; is-prop-neg)
 open import foundation.retractions using (_retract-of_)
 open import foundation.propositions using
-  ( is-prop; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; Prop; type-Prop; is-prop-type-Prop)
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop;
     is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
@@ -61,7 +61,7 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 
 ```agda
 is-merely-decidable-Prop :
-  {l : Level} → UU l → UU-Prop l
+  {l : Level} → UU l → Prop l
 is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
@@ -182,9 +182,9 @@ is-decidable-equiv' e = is-decidable-equiv (inv-equiv e)
 
 ```agda
 dn-elim-is-decidable :
-  {l : Level} (P : UU l) → is-decidable P → (¬¬ P → P)
-dn-elim-is-decidable P (inl x) p = x
-dn-elim-is-decidable P (inr x) p = ex-falso (p x)
+  {l : Level} {P : UU l} → is-decidable P → (¬¬ P → P)
+dn-elim-is-decidable (inl x) p = x
+dn-elim-is-decidable (inr x) p = ex-falso (p x)
 ```
 
 ### The double negation of `is-decidable` is always provable
@@ -228,56 +228,9 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-prop-neg)
 
-is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → UU-Prop l1
+is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
 pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
-
-abstract
-  is-prop-is-decidable :
-    {l : Level} {A : UU l} → is-prop A → is-prop (is-decidable A)
-  is-prop-is-decidable is-prop-A =
-    is-prop-coprod intro-dn is-prop-A is-prop-neg
-
-is-decidable-Prop :
-  {l : Level} → UU-Prop l → UU-Prop l
-pr1 (is-decidable-Prop P) = is-decidable (type-Prop P)
-pr2 (is-decidable-Prop P) = is-prop-is-decidable (is-prop-type-Prop P)
-```
-
-### Decidability of a propositional truncation
-
-```agda
-abstract
-  is-prop-is-decidable-trunc-Prop :
-    {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
-  is-prop-is-decidable-trunc-Prop A =
-    is-prop-is-decidable is-prop-type-trunc-Prop
-    
-is-decidable-trunc-Prop : {l : Level} → UU l → UU-Prop l
-pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
-pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A
-
-is-decidable-trunc-Prop-is-merely-decidable :
-  {l : Level} (A : UU l) →
-  is-merely-decidable A → is-decidable (type-trunc-Prop A)
-is-decidable-trunc-Prop-is-merely-decidable A =
-  map-universal-property-trunc-Prop
-    ( is-decidable-trunc-Prop A)
-    ( f)
-  where
-  f : is-decidable A → type-Prop (is-decidable-trunc-Prop A)
-  f (inl a) = inl (unit-trunc-Prop a)
-  f (inr f) = inr (map-universal-property-trunc-Prop empty-Prop f)
-
-is-merely-decidable-is-decidable-trunc-Prop :
-  {l : Level} (A : UU l) →
-  is-decidable (type-trunc-Prop A) → is-merely-decidable A
-is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
-   apply-universal-property-trunc-Prop x
-     ( is-merely-decidable-Prop A)
-     ( unit-trunc-Prop ∘ inl)
-is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
-  unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
 ```
 
 ### Any inhabited type is a fixed point for `is-decidable`

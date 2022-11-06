@@ -52,7 +52,7 @@ open import foundation.propositional-extensionality using
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( is-proof-irrelevant-is-prop; UU-Prop; type-Prop)
+  ( is-proof-irrelevant-is-prop; Prop; type-Prop)
 open import foundation.raising-universe-levels using (map-inv-raise)
 open import foundation.type-arithmetic-cartesian-product-types using
   ( commutative-prod)
@@ -287,8 +287,8 @@ abstract
                     ( is-contr-total-false-Prop)
                     ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
               ( right-distributive-Σ-coprod
-                ( Σ (UU-Prop _) type-Prop)
-                ( Σ (UU-Prop _) (¬ ∘ type-Prop))
+                ( Σ (Prop _) type-Prop)
+                ( Σ (Prop _) (¬ ∘ type-Prop))
                 ( ind-coprod _
                   ( λ Q →
                     mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))

@@ -11,7 +11,7 @@ open import Agda.Primitive using (Setω)
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation.universe-levels using
   ( Level; UU; _⊔_; lsuc)
 
@@ -33,7 +33,7 @@ record
     type-Large-Preorder : (l : Level) → UU (α l)
     leq-large-preorder-Prop :
       {l1 l2 : Level} →
-      type-Large-Preorder l1 → type-Large-Preorder l2 → UU-Prop (β l1 l2)
+      type-Large-Preorder l1 → type-Large-Preorder l2 → Prop (β l1 l2)
     refl-leq-Large-Preorder :
       {l1 : Level} (x : type-Large-Preorder l1) →
       type-Prop (leq-large-preorder-Prop x x)

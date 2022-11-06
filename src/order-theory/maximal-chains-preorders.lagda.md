@@ -7,7 +7,7 @@ module order-theory.maximal-chains-preorders where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.chains-preorders using
@@ -24,7 +24,7 @@ module _
   where
   
   is-maximal-chain-preorder-Prop :
-    {l3 : Level} → chain-Preorder l3 X → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+    {l3 : Level} → chain-Preorder l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-preorder-Prop {l3} C =
     Π-Prop (chain-Preorder l3 X) (inclusion-chain-preorder-Prop X C)
 

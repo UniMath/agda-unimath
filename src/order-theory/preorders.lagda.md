@@ -8,7 +8,7 @@ module order-theory.preorders where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 ```
 
@@ -23,7 +23,7 @@ Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Preorder l1 l2 =
   Σ ( UU l1)
     ( λ X →
-      Σ ( X → X → UU-Prop l2)
+      Σ ( X → X → Prop l2)
         ( λ R →
           ( (x : X) → type-Prop (R x x)) ×
           ( (x y z : X) →
@@ -36,7 +36,7 @@ module _
   element-Preorder : UU l1
   element-Preorder = pr1 X
 
-  leq-preorder-Prop : (x y : element-Preorder) → UU-Prop l2
+  leq-preorder-Prop : (x y : element-Preorder) → Prop l2
   leq-preorder-Prop = pr1 (pr2 X)
 
   leq-Preorder : (x y : element-Preorder) → UU l2

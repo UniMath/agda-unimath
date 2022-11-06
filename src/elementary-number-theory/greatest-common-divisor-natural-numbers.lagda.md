@@ -3,8 +3,6 @@ title: The greatest common divisor of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers using
@@ -16,7 +14,7 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
     div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
-    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ)
+    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ; is-one-div-one-ℕ)
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ)
 open import elementary-number-theory.euclidean-division-natural-numbers using
@@ -35,7 +33,7 @@ open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ;
-    is-zero-ℕ)
+    is-zero-ℕ; is-one-ℕ)
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ)
@@ -53,49 +51,79 @@ open import foundation.logical-equivalences using (_↔_)
 open import foundation.universe-levels using (UU; lzero)
 ```
 
-# The greatest common divisor of two natural numbers
+## Idea
+
+The greatest common divisor of two natural numbers `x` and `y` is a number `gcd x y` such that any natural number `d : ℕ` is a common divisor of `x` and `y` if and only if it is a divisor of `gcd x y`.
+
+## Definition
+
+### Common divisors
 
 ```agda
 is-common-divisor-ℕ : (a b x : ℕ) → UU lzero
 is-common-divisor-ℕ a b x = (div-ℕ x a) × (div-ℕ x b)
+```
 
+### Greatest common divisors
+
+```agda
+is-gcd-ℕ : (a b d : ℕ) → UU lzero
+is-gcd-ℕ a b d = (x : ℕ) → (is-common-divisor-ℕ a b x) ↔ (div-ℕ x d)
+```
+
+### The predicate of being a multiple of the greatest common divisor
+
+```agda
+is-multiple-of-gcd-ℕ : (a b n : ℕ) → UU lzero
+is-multiple-of-gcd-ℕ a b n =
+  is-nonzero-ℕ (add-ℕ a b) →
+  (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)
+```
+
+## Properties
+
+### Reflexivity for common divisors
+
+```agda
 refl-is-common-divisor-ℕ :
   (x : ℕ) → is-common-divisor-ℕ x x x
 pr1 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
 pr2 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
+```
 
+### Being a common divisor is decidable
+
+```agda
 is-decidable-is-common-divisor-ℕ :
   (a b : ℕ) → is-decidable-fam (is-common-divisor-ℕ a b)
 is-decidable-is-common-divisor-ℕ a b x =
   is-decidable-prod
     ( is-decidable-div-ℕ x a)
     ( is-decidable-div-ℕ x b)
+```
 
-is-gcd-ℕ : (a b d : ℕ) → UU lzero
-is-gcd-ℕ a b d = (x : ℕ) → (is-common-divisor-ℕ a b x) ↔ (div-ℕ x d)
+### Any greatest common divisor is a common divisor
 
+```agda
 is-common-divisor-is-gcd-ℕ :
   (a b d : ℕ) → is-gcd-ℕ a b d → is-common-divisor-ℕ a b d
 is-common-divisor-is-gcd-ℕ a b d H = pr2 (H d) (refl-div-ℕ d)
+```
 
-{- Proposition 8.4.2 -}
+### Uniqueness of greatest common divisors
 
+```agda
 uniqueness-is-gcd-ℕ :
   (a b d d' : ℕ) → is-gcd-ℕ a b d → is-gcd-ℕ a b d' → d ＝ d'
 uniqueness-is-gcd-ℕ a b d d' H H' =
   antisymmetric-div-ℕ d d'
     ( pr1 (H' d) (is-common-divisor-is-gcd-ℕ a b d H))
     ( pr1 (H d') (is-common-divisor-is-gcd-ℕ a b d' H'))
+```
 
-{- Definition 8.4.3 -}
+### If `d` is a common divisor of `a` and `b`, and `a + b ≠ 0`, then `d ≤ a + b`
 
-is-multiple-of-gcd-ℕ : (a b n : ℕ) → UU lzero
-is-multiple-of-gcd-ℕ a b n =
-  is-nonzero-ℕ (add-ℕ a b) →
-  (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)
-
-{- Proposition 8.4.4 -}
-
+```agda
 leq-sum-is-common-divisor-ℕ' :
   (a b d : ℕ) →
   is-successor-ℕ (add-ℕ a b) → is-common-divisor-ℕ a b d → leq-ℕ d (add-ℕ a b)
@@ -111,7 +139,11 @@ leq-sum-is-common-divisor-ℕ :
   is-nonzero-ℕ (add-ℕ a b) → is-common-divisor-ℕ a b d → leq-ℕ d (add-ℕ a b)
 leq-sum-is-common-divisor-ℕ a b d H =
   leq-sum-is-common-divisor-ℕ' a b d (is-successor-is-nonzero-ℕ H)
+```
 
+### Being a multiple of the greatest common divisor is decidable
+
+```agda
 is-decidable-is-multiple-of-gcd-ℕ :
   (a b : ℕ) → is-decidable-fam (is-multiple-of-gcd-ℕ a b)
 is-decidable-is-multiple-of-gcd-ℕ a b n =
@@ -127,15 +159,19 @@ is-decidable-is-multiple-of-gcd-ℕ a b n =
           ( λ x → is-decidable-div-ℕ x n)
           ( add-ℕ a b)
           ( λ x → leq-sum-is-common-divisor-ℕ a b x np)))
+```
 
-{- Lemma 8.4.5 -}
+### The sum of `a` and `b` is a multiple of the greatest common divisor of `a` and `b`
 
+```agda
 sum-is-multiple-of-gcd-ℕ : (a b : ℕ) → is-multiple-of-gcd-ℕ a b (add-ℕ a b)
 pr1 (sum-is-multiple-of-gcd-ℕ a b np) = np
 pr2 (sum-is-multiple-of-gcd-ℕ a b np) x H = div-add-ℕ x a b (pr1 H) (pr2 H)
+```
 
-{- Definition 8.4.6 The greatest common divisor -}
+### The greatest common divisor exists
 
+```agda
 abstract
   GCD-ℕ : (a b : ℕ) → minimal-element-ℕ (is-multiple-of-gcd-ℕ a b)
   GCD-ℕ a b =
@@ -153,9 +189,11 @@ is-multiple-of-gcd-gcd-ℕ a b = pr1 (pr2 (GCD-ℕ a b))
 is-lower-bound-gcd-ℕ :
   (a b : ℕ) → is-lower-bound-ℕ (is-multiple-of-gcd-ℕ a b) (gcd-ℕ a b)
 is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
+```
 
-{- Lemma 8.4.7 -}
+### `a + b = 0` if and only if `gcd a b = 0`
 
+```agda
 is-zero-gcd-ℕ :
   (a b : ℕ) → is-zero-ℕ (add-ℕ a b) → is-zero-ℕ (gcd-ℕ a b)
 is-zero-gcd-ℕ a b p =
@@ -175,10 +213,13 @@ is-zero-add-is-zero-gcd-ℕ :
   (a b : ℕ) → is-zero-ℕ (gcd-ℕ a b) → is-zero-ℕ (add-ℕ a b)
 is-zero-add-is-zero-gcd-ℕ a b H =
   dn-elim-is-decidable
-    ( is-zero-ℕ (add-ℕ a b))
     ( is-decidable-is-zero-ℕ (add-ℕ a b))
     ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
+```
 
+### If at least one of `a` and `b` is nonzero, then their gcd is nonzer
+
+```agda
 is-nonzero-gcd-ℕ :
   (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) → is-nonzero-ℕ (gcd-ℕ a b)
 is-nonzero-gcd-ℕ a b ne = pr1 (is-multiple-of-gcd-gcd-ℕ a b ne)
@@ -187,18 +228,22 @@ is-successor-gcd-ℕ :
   (a b : ℕ) → is-nonzero-ℕ (add-ℕ a b) → is-successor-ℕ (gcd-ℕ a b)
 is-successor-gcd-ℕ a b ne =
   is-successor-is-nonzero-ℕ (is-nonzero-gcd-ℕ a b ne)
+```
 
-{- Theorem 8.4.8 -}
+### Any common divisor is also a divisor of the greatest common divisor
 
--- any common divisor is also a divisor of the gcd
+```agda
 div-gcd-is-common-divisor-ℕ :
   (a b x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x (gcd-ℕ a b)
 div-gcd-is-common-divisor-ℕ a b x H with
   is-decidable-is-zero-ℕ (add-ℕ a b)
 ... | inl p = concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-gcd-ℕ a b p))
 ... | inr np = pr2 (is-multiple-of-gcd-gcd-ℕ a b np) x H
+```
 
--- if every common divisor divides a number r < gcd a b, then r = 0.
+### If every common divisor divides a number r < gcd a b, then r = 0.
+
+```agda
 is-zero-is-common-divisor-le-gcd-ℕ :
   (a b r : ℕ) → le-ℕ r (gcd-ℕ a b) →
   ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x r) → is-zero-ℕ r
@@ -208,8 +253,11 @@ is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
   ex-falso
     ( contradiction-le-ℕ r (gcd-ℕ a b) l
       ( is-lower-bound-gcd-ℕ a b r (λ np → pair x d)))
+```
 
--- any divisor of gcd a b also divides a
+### Any divisor of `gcd a b` is a common divisor of `a` and `b`
+
+```agda
 is-divisor-left-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x a
 is-divisor-left-div-gcd-ℕ a b x d with
@@ -236,7 +284,6 @@ is-divisor-left-div-gcd-ℕ a b x d with
        ( is-nonzero-gcd-ℕ a b np)
   β = eq-euclidean-division-ℕ (gcd-ℕ a b) a
 
--- any divisor of gcd a b also divides b
 is-divisor-right-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → div-ℕ x b
 is-divisor-right-div-gcd-ℕ a b x d with
@@ -262,24 +309,31 @@ is-divisor-right-div-gcd-ℕ a b x d with
        ( is-nonzero-gcd-ℕ a b np)
   β = eq-euclidean-division-ℕ (gcd-ℕ a b) b
 
--- any divisor of gcd a b is a common divisor
 is-common-divisor-div-gcd-ℕ :
   (a b x : ℕ) → div-ℕ x (gcd-ℕ a b) → is-common-divisor-ℕ a b x
 pr1 (is-common-divisor-div-gcd-ℕ a b x d) = is-divisor-left-div-gcd-ℕ a b x d
 pr2 (is-common-divisor-div-gcd-ℕ a b x d) = is-divisor-right-div-gcd-ℕ a b x d
+```
 
--- gcd a b is itself a common divisor
+### The gcd of `a` and `b` is a common divisor
+
+```agda
 is-common-divisor-gcd-ℕ : (a b : ℕ) → is-common-divisor-ℕ a b (gcd-ℕ a b)
 is-common-divisor-gcd-ℕ a b =
   is-common-divisor-div-gcd-ℕ a b (gcd-ℕ a b) (refl-div-ℕ (gcd-ℕ a b))
+```
 
--- gcd a b is the greatest common divisor
+### The gcd of `a` and `b` is a greatest common divisor
+
+```agda
 is-gcd-gcd-ℕ : (a b : ℕ) → is-gcd-ℕ a b (gcd-ℕ a b)
 pr1 (is-gcd-gcd-ℕ a b x) = div-gcd-is-common-divisor-ℕ a b x
 pr2 (is-gcd-gcd-ℕ a b x) = is-common-divisor-div-gcd-ℕ a b x
+```
 
--- We show that gcd-ℕ is commutative
+### The gcd is commutative
 
+```agda
 is-commutative-gcd-ℕ : (a b : ℕ) → gcd-ℕ a b ＝ gcd-ℕ b a
 is-commutative-gcd-ℕ a b =
   antisymmetric-div-ℕ
@@ -292,6 +346,8 @@ is-commutative-gcd-ℕ a b =
   pr1 (σ (pair x y)) = y
   pr2 (σ (pair x y)) = x
 ```
+
+### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`. 
 
 ```agda
 preserves-is-common-divisor-mul-ℕ :
@@ -310,4 +366,26 @@ reflects-is-common-divisor-mul-ℕ k a b d H =
   map-prod
     ( reflects-div-mul-ℕ k d a H)
     ( reflects-div-mul-ℕ k d b H)
+```
+
+### `gcd-ℕ 1 b ＝ 1`
+
+```agda
+is-one-is-gcd-one-ℕ : {b x : ℕ} → is-gcd-ℕ 1 b x → is-one-ℕ x
+is-one-is-gcd-one-ℕ {b} {x} H =
+  is-one-div-one-ℕ x (pr1 (is-common-divisor-is-gcd-ℕ 1 b x H))
+
+is-one-gcd-one-ℕ : (b : ℕ) → is-one-ℕ (gcd-ℕ 1 b)
+is-one-gcd-one-ℕ b = is-one-is-gcd-one-ℕ (is-gcd-gcd-ℕ 1 b)
+```
+
+### `gcd-ℕ a 1 ＝ 1`
+
+```agda
+is-one-is-gcd-one-ℕ' : {a x : ℕ} → is-gcd-ℕ a 1 x → is-one-ℕ x
+is-one-is-gcd-one-ℕ' {a} {x} H =
+  is-one-div-one-ℕ x (pr2 (is-common-divisor-is-gcd-ℕ a 1 x H))
+
+is-one-gcd-one-ℕ' : (a : ℕ) → is-one-ℕ (gcd-ℕ a 1)
+is-one-gcd-one-ℕ' a = is-one-is-gcd-one-ℕ' (is-gcd-gcd-ℕ a 1)
 ```

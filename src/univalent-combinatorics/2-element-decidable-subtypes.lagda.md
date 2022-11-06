@@ -20,17 +20,17 @@ open import foundation.decidable-equality using
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop; equiv-bool-decidable-Prop;
-    prop-decidable-Prop)
+    prop-decidable-Prop; is-prop-is-decidable)
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype; is-decidable-subtype-subtype-decidable-subtype;
+    is-decidable-subtype; is-decidable-subtype-decidable-subtype;
     is-in-decidable-subtype; is-prop-is-in-decidable-subtype;
     inclusion-decidable-subtype; is-emb-inclusion-decidable-subtype;
     is-injective-inclusion-decidable-subtype; equiv-universes-decidable-subtype;
     iff-universes-decidable-subtype)
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
-    dn-elim-is-decidable; is-prop-is-decidable)
+    dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.embeddings using (is-emb)
@@ -54,7 +54,7 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
     unit-trunc-Prop; trunc-Prop; type-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
+  ( Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
     is-prop-is-prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (subtype; eq-type-subtype; equiv-subtype-equiv)
@@ -115,7 +115,7 @@ module _
   is-decidable-subtype-subtype-2-Element-Decidable-Subtype :
     is-decidable-subtype subtype-2-Element-Decidable-Subtype
   is-decidable-subtype-subtype-2-Element-Decidable-Subtype =
-    is-decidable-subtype-subtype-decidable-subtype
+    is-decidable-subtype-decidable-subtype
       decidable-subtype-2-Element-Decidable-Subtype
 
   is-in-2-Element-Decidable-Subtype : X → UU l2
@@ -388,8 +388,6 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
         ( subtype-decidable-subtype (P ∘ (map-inv-equiv e)))
          λ x →
           iff-equiv
-            ( prop-decidable-Prop (P x))
-            ( prop-decidable-Prop (P (map-inv-equiv e (map-equiv e x))))
             ( tr
               ( λ g →
                 ( type-decidable-Prop (P x)) ≃

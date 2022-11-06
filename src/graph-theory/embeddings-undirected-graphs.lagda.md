@@ -37,7 +37,7 @@ module _
   where
 
   is-emb-hom-undirected-graph-Prop :
-    hom-Undirected-Graph G H → UU-Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    hom-Undirected-Graph G H → Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-emb-hom-undirected-graph-Prop f =
     prod-Prop
       ( is-emb-Prop (vertex-hom-Undirected-Graph G H f))

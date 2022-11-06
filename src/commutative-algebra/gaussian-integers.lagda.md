@@ -10,14 +10,19 @@ module commutative-algebra.gaussian-integers where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equational-reasoning
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -47,7 +52,8 @@ Eq-ℤ[i] : ℤ[i] → ℤ[i] → UU lzero
 Eq-ℤ[i] x y = (Id (pr1 x) (pr1 y)) × (Id (pr2 x) (pr2 y))
 
 refl-Eq-ℤ[i] : (x : ℤ[i]) → Eq-ℤ[i] x x
-refl-Eq-ℤ[i] x = pair refl refl
+pr1 (refl-Eq-ℤ[i] x) = refl
+pr2 (refl-Eq-ℤ[i] x) = refl
 
 Eq-eq-ℤ[i] : {x y : ℤ[i]} → Id x y → Eq-ℤ[i] x y
 Eq-eq-ℤ[i] {x} refl = refl-Eq-ℤ[i] x
@@ -63,42 +69,48 @@ eq-Eq-ℤ[i] {pair a b} {pair .a .b} refl refl = refl
 
 ```agda
 zero-ℤ[i] : ℤ[i]
-zero-ℤ[i] = pair zero-ℤ zero-ℤ
+pr1 zero-ℤ[i] = zero-ℤ
+pr2 zero-ℤ[i] = zero-ℤ
 ```
 
 ### The Gaussian integer one
 
 ```agda
 one-ℤ[i] : ℤ[i]
-one-ℤ[i] = pair one-ℤ zero-ℤ
+pr1 one-ℤ[i] = one-ℤ
+pr2 one-ℤ[i] = zero-ℤ
 ```
 
 ### The inclusion of the integers into the Gaussian integers
 
 ```agda
 gaussian-int-ℤ : ℤ → ℤ[i]
-gaussian-int-ℤ x = pair x zero-ℤ
+pr1 (gaussian-int-ℤ x) = x
+pr2 (gaussian-int-ℤ x) = zero-ℤ
 ```
 
 ### The Gaussian integer `i`
 
 ```agda
 i-ℤ[i] : ℤ[i]
-i-ℤ[i] = pair zero-ℤ one-ℤ
+pr1 i-ℤ[i] = zero-ℤ
+pr2 i-ℤ[i] = one-ℤ
 ```
 
 ### The Gaussian integer `-i`.
 
 ```agda
 neg-i-ℤ[i] : ℤ[i]
-neg-i-ℤ[i] = pair zero-ℤ neg-one-ℤ
+pr1 neg-i-ℤ[i] = zero-ℤ
+pr2 neg-i-ℤ[i] = neg-one-ℤ
 ```
 
 ### Addition of Gaussian integers
 
 ```agda
 add-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
-add-ℤ[i] (pair a b) (pair a' b') = pair (add-ℤ a a') (add-ℤ b b')
+pr1 (add-ℤ[i] (a , b) (a' , b')) = a +ℤ a'
+pr2 (add-ℤ[i] (a , b) (a' , b')) = b +ℤ b'
 
 ap-add-ℤ[i] :
   {x x' y y' : ℤ[i]} → Id x x' → Id y y' → Id (add-ℤ[i] x y) (add-ℤ[i] x' y')
@@ -109,17 +121,16 @@ ap-add-ℤ[i] p q = ap-binary add-ℤ[i] p q
 
 ```agda
 neg-ℤ[i] : ℤ[i] → ℤ[i]
-neg-ℤ[i] (pair a b) = pair (neg-ℤ a) (neg-ℤ b)
+pr1 (neg-ℤ[i] (a , b)) = neg-ℤ a
+pr2 (neg-ℤ[i] (a , b)) = neg-ℤ b
 ```
 
 ### Multiplication of Gaussian integers
 
 ```agda
 mul-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
-mul-ℤ[i] (pair a b) (pair a' b') =
-  pair
-    ( add-ℤ (mul-ℤ a a') (mul-ℤ neg-one-ℤ (mul-ℤ b b')))
-    ( add-ℤ (mul-ℤ a b') (mul-ℤ a' b))
+pr1 (mul-ℤ[i] (a , b) (a' , b')) = diff-ℤ (mul-ℤ a a') (mul-ℤ b b')
+pr2 (mul-ℤ[i] (a , b) (a' , b')) = mul-ℤ a b' +ℤ mul-ℤ a' b
 
 ap-mul-ℤ[i] :
   {x x' y y' : ℤ[i]} → Id x x' → Id y y' → Id (mul-ℤ[i] x y) (mul-ℤ[i] x' y')
@@ -130,7 +141,8 @@ ap-mul-ℤ[i] p q = ap-binary mul-ℤ[i] p q
 
 ```agda
 conjugate-ℤ[i] : ℤ[i] → ℤ[i]
-conjugate-ℤ[i] (pair a b) = pair a (neg-ℤ b)
+pr1 (conjugate-ℤ[i] (a , b)) = a
+pr2 (conjugate-ℤ[i] (a , b)) = neg-ℤ b
 ```
 
 ### The Gaussian integers form a commutative ring

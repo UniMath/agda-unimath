@@ -29,7 +29,7 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  set-dihedral-group-Ab : UU-Set l
+  set-dihedral-group-Ab : Set l
   set-dihedral-group-Ab = coprod-Set (set-Ab A) (set-Ab A)
 
   type-dihedral-group-Ab : UU l

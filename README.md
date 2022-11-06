@@ -6,6 +6,23 @@ The `agda-unimath` library is a new formalisation project for univalent mathemat
 
 The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
 
+## Links
+
+1. [Agda-Unimath webpage](https://unimath.github.io/agda-unimath/)
+2. [Discord](https://discord.gg/Zp2e8hYsuX)
+3. [Twitch](https://www.twitch.tv/agdaunimath)
+
+## Citing the `agda-unimath` library
+
+```
+@misc{Agda-UniMath,
+  author =     {Egbert Rijke and Elisabeth Bonnevier and Jonathan Prieto-Cubides and others},
+  title =     {Univalent mathematics in {Agda}},
+  url =         {https://github.com/UniMath/agda-unimath/},
+  howpublished = {\url{https://unimath.github.io/agda-unimath/}}
+}
+```
+
 ## Getting started
 
 Before you can use the `agda-unimath` library, you should have Agda installed on your machine, and an editor that is compatible with Agda. We recommend `emacs`, but Agda also works with `VSCode`.
@@ -46,7 +63,7 @@ With Agda installed and emacs correctly set up, you can start using the library.
 
 ## Joining the project and contributing
 
-If you would like to contribute something to the `agda-unimath` library, the best way to start is to find us in our chat channels on the [agda-unimath discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
+If you would like to contribute something to the `agda-unimath` library, the best way to start is to find us in our chat channels on the [Univalent Agda discord](https://discord.gg/Zp2e8hYsuX). We have a vibing community there, and you're more than welcome to join us just to hang out.
 
 Once you've decided what you want to contribute, we recommend that you make your own fork of the library. Within your fork, make a separate branch in which you will be making your contribution. Now you're ready to start your project! When you've completed your formalization you can proceed by making a pull request. Then we will review your contributions, and merge it when it is ready for the `agda-unimath` library.
 
@@ -61,6 +78,25 @@ Jonathan Prieto-Cubides
 Egbert Rijke
 
 ## Design of the library
+
+### Postulates in the library
+
+The `agda-unimath` library is a library of formalized in basic agda. Throughout our library we assume the `--without-K` and `--exact-split` flags of Agda. Furthermore, we assume some postulates.
+1. We make full use of Agda's `data` types for introducing inductive types.
+2. We make full use of Agda's universe levels, including `ω`. However, it should be noted that most of the type constructors only define types of universe levels below `ω`, so a lot of the theory developed in this library does not apply to universe level `ω` and beyond.
+3. The **function extensionality axiom** is postulated in [foundation-core.function-extensionality](https://unimath.github.io/agda-unimath/foundation-core.function-extensionality.html).
+4. The **univalence axiom** is postulated in [foundation-core.univalence](https://unimath.github.io/agda-unimath/foundation-core.univalence.html).
+5. The type theoretic **replacement axiom** is postulated in [foundation.replacement](https://unimath.github.io/agda-unimath/foundation.replacement.html)
+6. The **truncation operations** are postulated in [foundation.truncations](https://unimath.github.io/agda-unimath/foundation.truncations.html)
+7. The **interval** is postulated in [synthetic-homotopy-theory.interval-type](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.interval-type.html)
+8. The **circle** is postulated in [synthetic-homotopy-theory.circle](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.circle.html)
+9. **Pushouts** are postulated in [synthetic-homotopy-theory.pushouts](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
+
+Note that there is some redundancy in the postulates we assume. For example, the [univalence axiom implies function extensionality](https://unimath.github.io/agda-unimath/foundation.univalence-implies-function-extensionality.html), but we still assume function extensionality separately. Furthermore, The interval type is contractible, so there is no need at all to postulate it. The circle can be constructed as the type of `ℤ`-torsors, and the replacement axiom can be used to prove there is a circle in `UU lzero`. Finally, the replacement axiom can be proven by the join construction, which only uses pushouts.
+
+We also note that the higher inductive types in the `agda-unimath` library only have computation rules up to identification.
+
+With these postulates, the `agda-unimath` library is a library for constructive univalent mathematics. Mathematics for which the law of excluded middle or the axiom of choice is necessary is not yet developed in `agda-unimath`. However, we are also open to a development of classical mathematics within `agda-unimath`, and we do also welcome contributions in that direction.
 
 ### Structure of the library
 

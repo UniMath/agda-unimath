@@ -18,9 +18,9 @@ open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-equality using
   ( has-decidable-equality)
 open import foundation.decidable-propositions using
-  ( is-finite-is-decidable-Prop)
+  ( is-finite-is-decidable-Prop; is-decidable-Prop)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-Prop; is-decidable-equiv'; is-decidable-equiv)
+  ( is-decidable; is-decidable-equiv'; is-decidable-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( is-emb; is-emb-right-factor; is-emb-comp'; equiv-ap-emb)
@@ -62,13 +62,13 @@ open import foundation.maybe using (Maybe)
 open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
 open import foundation.mere-equivalences using (mere-equiv)
 open import foundation.propositional-extensionality using
-  ( UU-Prop-Set)
+  ( Prop-Set)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; trunc-Prop; type-trunc-Prop;
     unit-trunc-Prop; is-prop-type-trunc-Prop;
     apply-dependent-universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop;
+  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; prod-Prop;
     type-hom-Prop; function-Prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-empty-Set; is-empty-trunc-Set;
@@ -79,7 +79,7 @@ open import foundation.set-truncations using
     equiv-unit-trunc-unit-Set; is-empty-is-empty-trunc-Set;
     is-surjective-unit-trunc-Set)
 open import foundation.sets using
-  ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; UU-Set; type-Set)
+  ( is-set; type-hom-Set; set-Prop; hom-Set; Id-Prop; Set; type-Set)
 open import foundation.subtypes using (is-emb-inclusion-subtype)
 open import foundation.surjective-maps using
   ( is-surjective; is-equiv-is-emb-is-surjective; is-surjective-comp')
@@ -132,16 +132,13 @@ open import univalent-combinatorics.standard-finite-types using (Fin)
 
 A type is `π_n`-finite if it has finitely many connected components and all of its homotopy groups up to level `n` at all base points are finite.
 
+## Definition
+
+### Locally finite types
+
 ```agda
-
--- Section 1. π-Finiteness
-
--- Definition 1.3
-
--- We introduce locally finite types
-
 is-locally-finite-Prop :
-  {l : Level} → UU l → UU-Prop l
+  {l : Level} → UU l → Prop l
 is-locally-finite-Prop A =
   Π-Prop A (λ x → Π-Prop A (λ y → is-finite-Prop (Id x y)))
 
@@ -151,10 +148,12 @@ is-locally-finite A = type-Prop (is-locally-finite-Prop A)
 is-prop-is-locally-finite :
   {l : Level} (A : UU l) → is-prop (is-locally-finite A)
 is-prop-is-locally-finite A = is-prop-type-Prop (is-locally-finite-Prop A)
+```
 
--- We introduce truncated π-finite types
+### Truncated π-finite types
 
-is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → UU-Prop l
+```agda
+is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-truncated-π-finite-Prop zero-ℕ X = is-finite-Prop X
 is-truncated-π-finite-Prop (succ-ℕ k) X =
   prod-Prop
@@ -165,10 +164,12 @@ is-truncated-π-finite-Prop (succ-ℕ k) X =
 is-truncated-π-finite : {l : Level} (k : ℕ) → UU l → UU l
 is-truncated-π-finite k A =
   type-Prop (is-truncated-π-finite-Prop k A)
+```
 
--- We introduce π-finite types
+### Types with finitely many connected components
 
-has-finite-connected-components-Prop : {l : Level} → UU l → UU-Prop l
+```agda
+has-finite-connected-components-Prop : {l : Level} → UU l → Prop l
 has-finite-connected-components-Prop A =
   is-finite-Prop (type-trunc-Set A)
 
@@ -187,8 +188,12 @@ mere-equiv-number-of-connected-components :
     ( type-trunc-Set X)
 mere-equiv-number-of-connected-components H =
   mere-equiv-is-finite H
+```
 
-is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → UU-Prop l
+### π-finite types
+
+```agda
+is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
   prod-Prop ( is-π-finite-Prop zero-ℕ X)
@@ -214,11 +219,13 @@ is-π-finite-type-π-Finite :
   {l : Level} (k : ℕ) (A : π-Finite l k) →
   is-π-finite k (type-π-Finite {l} k A)
 is-π-finite-type-π-Finite k = pr2
+```
 
--- Basic properties of locally finite types
+## Properties
 
--- locally finite types are closed under equivalences
+### Locally finite types are closed under equivalences
 
+```agda
 is-locally-finite-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
   is-locally-finite B → is-locally-finite A
@@ -229,21 +236,27 @@ is-locally-finite-equiv' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
   is-locally-finite A → is-locally-finite B
 is-locally-finite-equiv' e = is-locally-finite-equiv (inv-equiv e)
+```
 
--- types with decidable equality are locally finite
+### types with decidable equality are locally finite
 
+```agda
 is-locally-finite-has-decidable-equality :
   {l1 : Level} {A : UU l1} → has-decidable-equality A → is-locally-finite A
 is-locally-finite-has-decidable-equality d x y = is-finite-eq d
+```
 
--- any proposition is locally finite
+### Any proposition is locally finite
 
+```agda
 is-locally-finite-is-prop :
   {l1 : Level} {A : UU l1} → is-prop A → is-locally-finite A
 is-locally-finite-is-prop H x y = is-finite-is-contr (H x y)
+```
 
--- any contractible type is locally finite
+### Any contractible type is locally finite
 
+```agda
 is-locally-finite-is-contr :
   {l1 : Level} {A : UU l1} → is-contr A → is-locally-finite A
 is-locally-finite-is-contr H =
@@ -251,18 +264,22 @@ is-locally-finite-is-contr H =
 
 is-locally-finite-unit : is-locally-finite unit
 is-locally-finite-unit = is-locally-finite-is-contr is-contr-unit
+```
 
--- any empty type is locally finite
+### Any empty type is locally finite
 
+```agda
 is-locally-finite-is-empty :
   {l1 : Level} {A : UU l1} → is-empty A → is-locally-finite A
 is-locally-finite-is-empty H = is-locally-finite-is-prop (λ x → ex-falso (H x))
 
 is-locally-finite-empty : is-locally-finite empty
 is-locally-finite-empty = is-locally-finite-is-empty id
+```
 
--- Basic properties of π-finiteness
+### π-finite types are closed under equivalences
 
+```agda
 is-π-finite-equiv :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} (e : A ≃ B) →
   is-π-finite k B → is-π-finite k A
@@ -278,7 +295,11 @@ is-π-finite-equiv' :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} (e : A ≃ B) →
   is-π-finite k A → is-π-finite k B
 is-π-finite-equiv' k e = is-π-finite-equiv k (inv-equiv e)
+```
 
+### The empty type is π-finite
+
+```agda
 is-π-finite-empty : (k : ℕ) → is-π-finite k empty
 is-π-finite-empty zero-ℕ =
   is-finite-equiv equiv-unit-trunc-empty-Set is-finite-empty
@@ -288,14 +309,22 @@ pr2 (is-π-finite-empty (succ-ℕ k)) = ind-empty
 empty-π-Finite : (k : ℕ) → π-Finite lzero k
 pr1 (empty-π-Finite k) = empty
 pr2 (empty-π-Finite k) = is-π-finite-empty k
+```
 
+### Any empty type is π-finite
+
+```agda
 is-π-finite-is-empty :
   {l : Level} (k : ℕ) {A : UU l} → is-empty A → is-π-finite k A
 is-π-finite-is-empty zero-ℕ f =
   is-finite-is-empty (is-empty-trunc-Set f)
 pr1 (is-π-finite-is-empty (succ-ℕ k) f) = is-π-finite-is-empty zero-ℕ f
 pr2 (is-π-finite-is-empty (succ-ℕ k) f) a = ex-falso (f a)
+```
 
+### Any contractible type is π-finite
+
+```agda
 is-π-finite-is-contr :
   {l : Level} (k : ℕ) {A : UU l} → is-contr A → is-π-finite k A
 is-π-finite-is-contr zero-ℕ H =
@@ -303,7 +332,11 @@ is-π-finite-is-contr zero-ℕ H =
 pr1 (is-π-finite-is-contr (succ-ℕ k) H) = is-π-finite-is-contr zero-ℕ H
 pr2 (is-π-finite-is-contr (succ-ℕ k) H) x y =
   is-π-finite-is-contr k ( is-prop-is-contr H x y)
+```
 
+### The unit type is π-finite
+
+```agda
 is-π-finite-unit :
   (k : ℕ) → is-π-finite k unit
 is-π-finite-unit k = is-π-finite-is-contr k is-contr-unit
@@ -311,7 +344,11 @@ is-π-finite-unit k = is-π-finite-is-contr k is-contr-unit
 unit-π-Finite : (k : ℕ) → π-Finite lzero k
 pr1 (unit-π-Finite k) = unit
 pr2 (unit-π-Finite k) = is-π-finite-unit k
+```
 
+### Coproducts of π-finite types are π-finite
+
+```agda
 is-π-finite-coprod :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : UU l2} →
   is-π-finite k A → is-π-finite k B →
@@ -347,7 +384,11 @@ pr2 (coprod-π-Finite k A B) =
   is-π-finite-coprod k
     ( is-π-finite-type-π-Finite k A)
     ( is-π-finite-type-π-Finite k B)
+```
 
+### `Maybe A` of any π-finite type `A` is π-finite
+
+```agda
 Maybe-π-Finite :
   {l : Level} (k : ℕ) → π-Finite  l k → π-Finite l k
 Maybe-π-Finite k A =
@@ -358,7 +399,11 @@ is-π-finite-Maybe :
   is-π-finite k A → is-π-finite k (Maybe A)
 is-π-finite-Maybe k H =
   is-π-finite-coprod k H (is-π-finite-unit k)
+```
 
+### Any stanadard finite type is π-finite
+
+```agda
 is-π-finite-Fin :
   (k n : ℕ) → is-π-finite k (Fin n)
 is-π-finite-Fin k zero-ℕ =
@@ -369,12 +414,20 @@ is-π-finite-Fin k (succ-ℕ n) =
 Fin-π-Finite : (k : ℕ) (n : ℕ) → π-Finite lzero k
 pr1 (Fin-π-Finite k n) = Fin n
 pr2 (Fin-π-Finite k n) = is-π-finite-Fin k n
+```
 
+### Any type equipped with a counting is π-finite
+
+```agda
 is-π-finite-count :
   {l : Level} (k : ℕ) {A : UU l} → count A → is-π-finite k A
 is-π-finite-count k (pair n e) =
   is-π-finite-equiv' k e (is-π-finite-Fin k n)
+```
 
+### Any finite type is π-finite
+
+```agda
 is-π-finite-is-finite :
   {l : Level} (k : ℕ) {A : UU l} → is-finite A → is-π-finite k A
 is-π-finite-is-finite k {A} H =
@@ -385,13 +438,21 @@ is-π-finite-is-finite k {A} H =
 π-finite-𝔽 : {l : Level} (k : ℕ) → 𝔽 l → π-Finite l k
 pr1 (π-finite-𝔽 k A) = type-𝔽 A
 pr2 (π-finite-𝔽 k A) = is-π-finite-is-finite k (is-finite-type-𝔽 A)
+```
 
+### Any 0-connected type has finitely many connected components
+
+```agda
 has-finite-connected-components-is-0-connected :
   {l : Level} {A : UU l} →
   is-0-connected A → has-finite-connected-components A
 has-finite-connected-components-is-0-connected C =
   is-finite-is-contr C
+```
 
+### The type of all `n`-element types in `UU l` is π-finite
+
+```agda
 is-π-finite-UU-Fin :
   {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin l n)
 is-π-finite-UU-Fin zero-ℕ n =
@@ -619,15 +680,15 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             
             where
             ℙ : is-contr
-                ( Σ ( type-hom-Set (trunc-Set (Id a a)) (UU-Prop-Set _))
+                ( Σ ( type-hom-Set (trunc-Set (Id a a)) (Prop-Set _))
                     ( λ h →
                       ( λ a₁ → h (unit-trunc-Set a₁)) ~
                       ( λ ω₁ → trunc-Prop (Id (tr B ω₁ y) y'))))
             ℙ = universal-property-trunc-Set
                 ( Id a a)
-                ( UU-Prop-Set _)
+                ( Prop-Set _)
                 ( λ ω → trunc-Prop (Id (tr B ω y) y'))
-            P : type-trunc-Set (Id a a) → UU-Prop _
+            P : type-trunc-Set (Id a a) → Prop _
             P = pr1 (center ℙ)
             compute-P :
               ( ω : Id a a) →
@@ -747,7 +808,7 @@ is-0-connected-unit =
   is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
 
 is-contr-im :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) {f : A → type-Set B}
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
   (a : A) (H : f ~ const A (type-Set B) (f a)) → is-contr (im f)
 pr1 (is-contr-im B {f} a H) = map-unit-im f a
 pr2 (is-contr-im B {f} a H) (pair x u) =

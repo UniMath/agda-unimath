@@ -16,7 +16,7 @@ open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-equiv-coprod)
 open import foundation.identity-types using (_＝_; ap-binary; ap; _∙_)
 open import foundation.mere-equivalences using (refl-mere-equiv)
-open import foundation.sets using (UU-Set; type-Set)
+open import foundation.sets using (Set; type-Set)
 open import
   foundation.universal-property-propositional-truncation-into-sets using
   ( map-universal-property-set-quotient-trunc-Prop;
@@ -81,7 +81,7 @@ is-commutative-commutative-operation f x y =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2)
   where
 
   is-weakly-constant-on-equivalences-is-commutative :

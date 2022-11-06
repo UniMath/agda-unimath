@@ -26,7 +26,7 @@ module _
   {l1 l2 : Level} (L : Lattice l1 l2)
   where
 
-  is-distributive-lattice-Prop : UU-Prop l1
+  is-distributive-lattice-Prop : Prop l1
   is-distributive-lattice-Prop =
     Π-Prop
       ( element-Lattice L)

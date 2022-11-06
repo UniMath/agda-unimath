@@ -16,7 +16,7 @@ open import foundation.negation using (¬; map-neg; neg-Prop')
 open import foundation.propositional-truncations using
   ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop)
+  ( Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (Level; UU)
 ```
 
@@ -49,11 +49,11 @@ map-dn f = map-neg (map-neg f)
 
 ```agda
 dn-Prop' :
-  {l : Level} (A : UU l) → UU-Prop l
+  {l : Level} (A : UU l) → Prop l
 dn-Prop' A = neg-Prop' (¬ A)
 
 dn-Prop :
-  {l : Level} (P : UU-Prop l) → UU-Prop l
+  {l : Level} (P : Prop l) → Prop l
 dn-Prop P = dn-Prop' (type-Prop P)
 ```
 

@@ -7,7 +7,6 @@ title: Mere equality
 
 module foundation.mere-equality where
 
-open import foundation.equivalence-relations using (Eq-Rel)
 open import foundation.functoriality-propositional-truncation using
   ( map-trunc-Prop)
 open import foundation.propositional-truncations using
@@ -17,10 +16,11 @@ open import foundation.reflecting-maps-equivalence-relations using
   ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalence-relations using (Eq-Rel)
 open import foundation-core.identity-types using (_＝_; refl; inv; _∙_; ap)
-open import foundation-core.propositions using (UU-Prop; is-prop)
+open import foundation-core.propositions using (Prop; is-prop)
 open import foundation-core.sets using
-  ( UU-Set; type-Set; Id-Prop; is-set; is-set-prop-in-id)
+  ( Set; type-Set; Id-Prop; is-set; is-set-prop-in-id)
 open import foundation-core.universe-levels using (Level; UU)
 ```
 
@@ -35,7 +35,7 @@ module _
   {l : Level} {A : UU l}
   where
   
-  mere-eq-Prop : A → A → UU-Prop l
+  mere-eq-Prop : A → A → Prop l
   mere-eq-Prop x y = trunc-Prop (x ＝ y)
   
   mere-eq : A → A → UU l
@@ -93,7 +93,7 @@ pr2 (pr2 (pr2 (mere-eq-Eq-Rel A))) = trans-mere-eq
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (X : UU-Set l2) (f : A → type-Set X)
+  {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : A → type-Set X)
   where
   
   reflects-mere-eq : reflects-Eq-Rel (mere-eq-Eq-Rel A) f

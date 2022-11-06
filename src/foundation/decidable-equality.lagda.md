@@ -24,7 +24,7 @@ open import foundation.identity-types using (_＝_; refl; ap; tr)
 open import foundation.injective-maps using (is-prop-map-is-injective)
 open import foundation.negation using (is-prop-neg)
 open import foundation.propositions using
-  ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop; UU-Prop;
+  ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop; Prop;
     is-prop-is-inhabited; is-prop-Π)
 open import foundation.retractions using (_retract-of_; retract-eq)
 open import foundation.sections using (map-section; is-injective-map-section)
@@ -232,7 +232,7 @@ abstract
             ( is-prop-neg))))
             
 has-decidable-equality-Prop :
-  {l1 : Level} (X : UU l1) → UU-Prop l1
+  {l1 : Level} (X : UU l1) → Prop l1
 pr1 (has-decidable-equality-Prop X) = has-decidable-equality X
 pr2 (has-decidable-equality-Prop X) = is-prop-has-decidable-equality
 ```

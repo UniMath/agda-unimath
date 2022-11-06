@@ -5,7 +5,7 @@ title: Intersection of subtypes
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.intersection where
+module foundation.intersections-subtypes where
 
 open import foundation.conjunction using (conj-Prop; conj-decidable-Prop)
 open import foundation.decidable-subtypes using (decidable-subtype)
@@ -53,6 +53,6 @@ module _
   where
 
   intersection-fam-subtype :
-    {I : UU l2} (P : I → subtype l2 X) → subtype l2 X
+    {I : UU l2} (P : I → subtype l3 X) → subtype (l2 ⊔ l3) X
   intersection-fam-subtype {I} P x = Π-Prop I (λ i → P i x)
 ```

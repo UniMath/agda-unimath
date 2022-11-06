@@ -33,7 +33,7 @@ open import foundation.unit-type using (is-set-unit; unit; star)
 open import foundation.universal-property-maybe using (ind-Maybe)
 open import foundation.universe-levels using (Level; UU)
 open import foundation.sets using
-  ( Id-Prop; UU-Set; type-Set; is-set-type-Set)
+  ( Id-Prop; Set; type-Set; is-set-type-Set)
 
 open import foundation-core.equality-dependent-pair-types using
   ( eq-pair-Σ; pair-eq-Σ)
@@ -383,7 +383,7 @@ pr2 (equiv-equiv-Maybe e) = is-equiv-map-equiv-equiv-Maybe e
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l) 
+  {l : Level} (X : Set l) 
   where
   
   extend-equiv-Maybe :

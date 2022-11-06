@@ -8,7 +8,7 @@ title: The image of a map
 module foundation.images where
 
 open import foundation.1-types using
-  ( is-1-type; UU-1-Type; type-1-Type; is-1-type-type-1-Type)
+  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
 open import foundation.contractible-types using
   ( is-contr; is-contr-total-path; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -29,13 +29,15 @@ open import foundation.propositional-truncations using
     map-universal-property-trunc-Prop; trunc-Prop;
     apply-universal-property-trunc-Prop)
 open import foundation.propositions using (is-prop; type-Prop)
-open import foundation.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
 open import foundation.slice using
   ( hom-slice; map-hom-slice; triangle-hom-slice; equiv-slice; htpy-hom-slice;
     comp-hom-slice; hom-equiv-slice)
 open import foundation.subtype-identity-principle using
   ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (is-emb-inclusion-subtype; eq-type-subtype)
+open import foundation.subtypes using
+  ( is-emb-inclusion-subtype; eq-type-subtype; subtype; type-subtype;
+    inclusion-subtype)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.truncated-types using (is-trunc; is-trunc-emb)
 open import foundation.truncation-levels using
@@ -53,12 +55,15 @@ The image of a map is a type that satisfies the universal property of the image 
 module _
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   where
+
+  subtype-im : subtype (l1 ⊔ l2) X
+  subtype-im x = trunc-Prop (fib f x)
     
   im : UU (l1 ⊔ l2)
-  im = Σ X (λ x → type-trunc-Prop (fib f x))
+  im = type-subtype subtype-im
 
   inclusion-im : im → X
-  inclusion-im = pr1
+  inclusion-im = inclusion-subtype subtype-im
 
   map-unit-im : A → im
   pr1 (map-unit-im a) = f a
@@ -190,8 +195,8 @@ abstract
   is-set-im = is-trunc-im neg-one-𝕋
 
 im-Set :
-  {l1 l2 : Level} {A : UU l2} (X : UU-Set l1) (f : A → type-Set X) →
-  UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l2} (X : Set l1) (f : A → type-Set X) →
+  Set (l1 ⊔ l2)
 pr1 (im-Set X f) = im f
 pr2 (im-Set X f) = is-set-im f (is-set-type-Set X)
 ```
@@ -206,8 +211,8 @@ abstract
   is-1-type-im = is-trunc-im zero-𝕋
 
 im-1-Type :
-  {l1 l2 : Level} {A : UU l2} (X : UU-1-Type l1)
-  (f : A → type-1-Type X) → UU-1-Type (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l2} (X : 1-Type l1)
+  (f : A → type-1-Type X) → 1-Type (l1 ⊔ l2)
 pr1 (im-1-Type X f) = im f
 pr2 (im-1-Type X f) = is-1-type-im f (is-1-type-type-1-Type X)
 ```

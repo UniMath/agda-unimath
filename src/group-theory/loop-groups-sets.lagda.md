@@ -23,7 +23,8 @@ open import foundation.identity-types using
 open import foundation.propositional-truncations using (is-prop-type-trunc-Prop; unit-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.sets using
-  ( UU-Set; is-set; type-Set; is-set-type-Set; is-prop-is-set; is-1-type-UU-Set)
+  ( Set; is-set; type-Set; is-set-type-Set; is-prop-is-set; is-1-type-Set;
+    Set-1-Type)
 open import foundation.truncated-types using (is-trunc-is-emb; is-trunc-Id)
 open import foundation.truncation-levels using (zero-𝕋; neg-one-𝕋)
 open import foundation.univalence using
@@ -47,7 +48,7 @@ open import group-theory.symmetric-groups using (symmetric-Group; iso-symmetric-
 ## Definitions
 ```agda
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
   type-loop-Set : UU (lsuc l)
@@ -57,7 +58,7 @@ module _
   is-set-type-loop-Set =
     is-trunc-id-is-trunc zero-𝕋 (is-set-type-Set X) (is-set-type-Set X)
 
-  set-loop-Set : UU-Set (lsuc l)
+  set-loop-Set : Set (lsuc l)
   pr1 set-loop-Set = type-loop-Set
   pr2 set-loop-Set = is-set-type-loop-Set
 
@@ -96,11 +97,11 @@ module _
   {l : Level}
   where
 
-  map-hom-symmetric-group-loop-group-Set : (X Y : UU-Set l) →
+  map-hom-symmetric-group-loop-group-Set : (X Y : Set l) →
     Id (type-Set X) (type-Set Y) → (type-Set Y) ≃ (type-Set X)
   map-hom-symmetric-group-loop-group-Set X Y p = equiv-eq (inv p)
 
-  map-hom-inv-symmetric-group-loop-group-Set : (X Y : UU-Set l) →
+  map-hom-inv-symmetric-group-loop-group-Set : (X Y : Set l) →
     (type-Set X) ≃ (type-Set Y) → Id (type-Set Y) (type-Set X)
   map-hom-inv-symmetric-group-loop-group-Set X Y f =
     inv (eq-equiv (type-Set X) (type-Set Y) f)
@@ -116,7 +117,7 @@ module _
       ( left-unit-law-equiv (inv-equiv id-equiv))
 
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
   hom-symmetric-group-loop-group-Set :
@@ -191,14 +192,14 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
   hom-abstract-automorphism-group-loop-group-Set :
     type-hom-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
+        ( Automorphism-Group (Set-1-Type l) X))
   pr1 hom-abstract-automorphism-group-loop-group-Set p =
     eq-pair-Σ
       ( eq-pair-Σ
@@ -240,7 +241,7 @@ module _
   hom-inv-abstract-automorphism-group-loop-group-Set :
     type-hom-Group
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
+        ( Automorphism-Group (Set-1-Type l) X))
       ( loop-group-Set X)
   pr1 hom-inv-abstract-automorphism-group-loop-group-Set p =
     pr1 (pair-eq-Σ (pr1 (pair-eq-Σ p)))
@@ -254,15 +255,15 @@ module _
     Id
       ( comp-hom-Group
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
+          ( Automorphism-Group (Set-1-Type l) X))
         ( loop-group-Set X)
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
+          ( Automorphism-Group (Set-1-Type l) X))
         ( hom-abstract-automorphism-group-loop-group-Set)
         ( hom-inv-abstract-automorphism-group-loop-group-Set))
       ( id-hom-Group
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set)))
+          ( Automorphism-Group (Set-1-Type l) X)))
   is-sec-hom-inv-abstract-automorphism-group-loop-group-Set =
     eq-pair-Σ
       ( eq-htpy
@@ -285,10 +286,10 @@ module _
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group
             ( abstract-group-Concrete-Group
-              ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set)))
+              ( Automorphism-Group (Set-1-Type l) X)))
           ( semigroup-Group
             ( abstract-group-Concrete-Group
-              ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set)))
+              ( Automorphism-Group (Set-1-Type l) X)))
           ( id)))
 
   is-retr-hom-inv-abstract-automorphism-group-loop-group-Set :
@@ -296,7 +297,7 @@ module _
       ( comp-hom-Group
         ( loop-group-Set X)
         ( abstract-group-Concrete-Group
-          ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
+          ( Automorphism-Group (Set-1-Type l) X))
         ( loop-group-Set X)
         ( hom-inv-abstract-automorphism-group-loop-group-Set)
         ( hom-abstract-automorphism-group-loop-group-Set))
@@ -328,7 +329,7 @@ module _
     type-iso-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
-        ( Automorphism-Group (UU-Set l) X is-1-type-UU-Set))
+        ( Automorphism-Group (Set-1-Type l) X))
   pr1 iso-abstract-automorphism-group-loop-group-Set = hom-abstract-automorphism-group-loop-group-Set
   pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) = hom-inv-abstract-automorphism-group-loop-group-Set
   pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) = is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
@@ -339,7 +340,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (X : UU-Set l1) (Y : UU-Set l2) (e : type-Set X ≃ type-Set Y)
+  {l1 l2 : Level} (X : Set l1) (Y : Set l2) (e : type-Set X ≃ type-Set Y)
   where
 
   iso-loop-group-equiv-Set :

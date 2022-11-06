@@ -49,7 +49,7 @@ module _
   is-set-type-subset-Semigroup =
     is-set-type-subtype P (is-set-type-Semigroup G)
 
-  set-subset-Semigroup : UU-Set (l1 ⊔ l2)
+  set-subset-Semigroup : Set (l1 ⊔ l2)
   set-subset-Semigroup = set-subset (set-Semigroup G) P
 
   inclusion-subset-Semigroup : type-subset-Semigroup → type-Semigroup G
@@ -72,7 +72,7 @@ module _
 ```agda
 is-subsemigroup-subset-Semigroup-Prop :
   {l1 l2 : Level} (G : Semigroup l1) (P : subset-Semigroup l2 G) →
-  UU-Prop (l1 ⊔ l2)
+  Prop (l1 ⊔ l2)
 is-subsemigroup-subset-Semigroup-Prop G P =
   Π-Prop
     ( type-Semigroup G)
@@ -118,7 +118,7 @@ module _
   is-set-type-Subsemigroup =
     is-set-type-subset-Semigroup G subset-Subsemigroup
 
-  set-Subsemigroup : UU-Set (l1 ⊔ l2)
+  set-Subsemigroup : Set (l1 ⊔ l2)
   set-Subsemigroup =
     set-subset-Semigroup G subset-Subsemigroup
 

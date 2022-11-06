@@ -92,8 +92,8 @@ module _
 -- Uniqueness of set truncations
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
-  (C : UU-Set l3) (g : A → type-Set C) {h : type-hom-Set B C}
+  {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
+  (C : Set l3) (g : A → type-Set C) {h : type-hom-Set B C}
   (H : (h ∘ f) ~ g)
   where
 
@@ -146,8 +146,8 @@ module _
           ( is-set-quotient-is-set-truncation B f Sf))
 
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
-  (C : UU-Set l3) (g : A → type-Set C)
+  {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
+  (C : Set l3) (g : A → type-Set C)
   (Sf : {l : Level} → is-set-truncation l B f)
   (Sg : {l : Level} → is-set-truncation l C g)
   where

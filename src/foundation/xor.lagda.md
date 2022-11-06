@@ -38,7 +38,7 @@ open import foundation.negation using (¬; neg-Prop; is-prop-neg)
 open import foundation.propositional-extensionality using
   ( eq-equiv-Prop; eq-iff)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Prop;
+  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Prop;
     is-prop-all-elements-equal; eq-is-prop; is-prop-prod; is-prop-is-prop;
     all-elements-equal; type-hom-Prop)
 open import foundation.propositional-truncations using
@@ -93,10 +93,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  xor-Prop : UU-Prop (l1 ⊔ l2)
+  xor-Prop : Prop (l1 ⊔ l2)
   xor-Prop = 
     coprod-Prop
       ( conj-Prop P (neg-Prop Q))
@@ -127,17 +127,17 @@ commutative-xor p = Σ (type-unordered-pair p) (predicate-commutative-xor p)
 
 ```agda
 predicate-commutative-xor-Prop :
-  {l : Level} (p : unordered-pair (UU-Prop l)) →
+  {l : Level} (p : unordered-pair (Prop l)) →
   type-unordered-pair p → UU l
 predicate-commutative-xor-Prop p =
   predicate-commutative-xor (map-unordered-pair type-Prop p)
 
 type-commutative-xor-Prop :
-  {l : Level} → commutative-operation (UU-Prop l) (UU l)
+  {l : Level} → commutative-operation (Prop l) (UU l)
 type-commutative-xor-Prop p = commutative-xor (map-unordered-pair type-Prop p)
 
 all-elements-equal-type-commutative-xor-Prop :
-  {l : Level} (p : unordered-pair (UU-Prop l)) →
+  {l : Level} (p : unordered-pair (Prop l)) →
   all-elements-equal (type-commutative-xor-Prop p)
 all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
   cases-is-prop-type-commutative-xor-Prop
@@ -161,14 +161,14 @@ all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
         ( pr1 (pr2 y)))
         
 is-prop-type-commutative-xor-Prop :
-  {l : Level} (p : unordered-pair (UU-Prop l)) →
+  {l : Level} (p : unordered-pair (Prop l)) →
   is-prop (type-commutative-xor-Prop p)
 is-prop-type-commutative-xor-Prop p =
   is-prop-all-elements-equal
     ( all-elements-equal-type-commutative-xor-Prop p)
 
 commutative-xor-Prop :
-  {l : Level} → commutative-operation (UU-Prop l) (UU-Prop l)
+  {l : Level} → commutative-operation (Prop l) (Prop l)
 pr1 (commutative-xor-Prop E) = type-commutative-xor-Prop E 
 pr2 (commutative-xor-Prop E) = is-prop-type-commutative-xor-Prop E
 ```
@@ -177,10 +177,10 @@ pr2 (commutative-xor-Prop E) = is-prop-type-commutative-xor-Prop E
 
 ```agda
 module _
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  xor-Prop' : UU-Prop (l1 ⊔ l2)
+  xor-Prop' : Prop (l1 ⊔ l2)
   xor-Prop' = is-contr-Prop (type-Prop P + type-Prop Q)
 
   type-xor-Prop' : UU (l1 ⊔ l2)
@@ -193,7 +193,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
   map-equiv-xor-Prop : type-xor-Prop' P Q → type-xor-Prop P Q
@@ -355,7 +355,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (P Q : UU-Prop l)
+  {l : Level} (P Q : Prop l)
   where
   
   xor-commutative-xor-Prop :
@@ -403,7 +403,7 @@ module _
       ( np)
 
 eq-commmutative-xor-xor :
-  {l : Level} (P Q : UU-Prop l) →
+  {l : Level} (P Q : Prop l) →
   commutative-xor-Prop (standard-unordered-pair P Q) ＝ xor-Prop P Q
 eq-commmutative-xor-xor P Q =
   eq-iff (xor-commutative-xor-Prop P Q) (commutative-xor-xor-Prop P Q)

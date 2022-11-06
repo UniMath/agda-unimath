@@ -9,16 +9,16 @@ module foundation.sets where
 
 open import foundation-core.sets public
 
-open import foundation-core.1-types using (is-1-type)
+open import foundation-core.1-types using (is-1-type; 1-Type)
 open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.equivalences using (_≃_; is-equiv)
 open import foundation-core.functions using (precomp)
 open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; UU-Prop)
+open import foundation-core.propositions using (is-prop; Prop)
 open import foundation-core.truncation-levels using (zero-𝕋; neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import foundation.contractible-types using
   ( is-contr; is-trunc-is-contr)
@@ -36,9 +36,12 @@ open import foundation.truncated-types using
 ### The type of all sets in a universe is a 1-type
 
 ```
-abstract
-  is-1-type-UU-Set : {l : Level}  → is-1-type (UU-Set l)
-  is-1-type-UU-Set = is-trunc-Truncated-Type zero-𝕋
+is-1-type-Set : {l : Level}  → is-1-type (Set l)
+is-1-type-Set = is-trunc-Truncated-Type zero-𝕋
+
+Set-1-Type : (l : Level) → 1-Type (lsuc l)
+pr1 (Set-1-Type l) = Set l
+pr2 (Set-1-Type l) = is-1-type-Set
 ```
 
 ### Any contractible type is a set
@@ -60,7 +63,7 @@ abstract
   is-set-Σ = is-trunc-Σ {k = zero-𝕋}
 
 Σ-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : pr1 A → UU-Set l2) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (B : pr1 A → Set l2) → Set (l1 ⊔ l2)
 pr1 (Σ-Set A B) = Σ (type-Set A) (λ x → (type-Set (B x)))
 pr2 (Σ-Set A B) = is-set-Σ (is-set-type-Set A) (λ x → is-set-type-Set (B x))
 ```
@@ -75,7 +78,7 @@ abstract
   is-set-prod = is-trunc-prod zero-𝕋
   
 prod-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (B : Set l2) → Set (l1 ⊔ l2)
 prod-Set A B = Σ-Set A (λ x → B)
 ```
 
@@ -87,7 +90,7 @@ abstract
     {l : Level} (A : UU l) → is-prop (is-set A)
   is-prop-is-set = is-prop-is-trunc zero-𝕋
 
-is-set-Prop : {l : Level} → UU l → UU-Prop l
+is-set-Prop : {l : Level} → UU l → Prop l
 pr1 (is-set-Prop A) = is-set A
 pr2 (is-set-Prop A) = is-prop-is-set A
 ```
@@ -95,7 +98,7 @@ pr2 (is-set-Prop A) = is-prop-is-set A
 ### The inclusion of sets into the universe is an embedding
 
 ```agda
-emb-type-Set : (l : Level) → UU-Set l ↪ UU l
+emb-type-Set : (l : Level) → Set l ↪ UU l
 emb-type-Set l = emb-type-Truncated-Type l zero-𝕋
 ```
 
@@ -109,32 +112,32 @@ abstract
   is-set-Π = is-trunc-Π zero-𝕋
 
 type-Π-Set' :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU-Set l2) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (A : UU l1) (B : A → Set l2) → UU (l1 ⊔ l2)
 type-Π-Set' A B = (x : A) → type-Set (B x)
 
 is-set-type-Π-Set' :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU-Set l2) → is-set (type-Π-Set' A B)
+  {l1 l2 : Level} (A : UU l1) (B : A → Set l2) → is-set (type-Π-Set' A B)
 is-set-type-Π-Set' A B =
   is-set-Π (λ x → is-set-type-Set (B x))
 
 Π-Set' :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU-Set l2) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : UU l1) (B : A → Set l2) → Set (l1 ⊔ l2)
 pr1 (Π-Set' A B) = type-Π-Set' A B
 pr2 (Π-Set' A B) = is-set-type-Π-Set' A B
 
 type-Π-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : type-Set A → UU-Set l2) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (B : type-Set A → Set l2) → UU (l1 ⊔ l2)
 type-Π-Set A B = type-Π-Set' (type-Set A) B
 
 is-set-type-Π-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : type-Set A → UU-Set l2) →
+  {l1 l2 : Level} (A : Set l1) (B : type-Set A → Set l2) →
   is-set (type-Π-Set A B)
 is-set-type-Π-Set A B =
   is-set-type-Π-Set' (type-Set A) B
 
 Π-Set :
-  {l1 l2 : Level} (A : UU-Set l1) →
-  (type-Set A → UU-Set l2) → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) →
+  (type-Set A → Set l2) → Set (l1 ⊔ l2)
 pr1 (Π-Set A B) = type-Π-Set A B
 pr2 (Π-Set A B) = is-set-type-Π-Set A B
 ```
@@ -149,21 +152,21 @@ abstract
   is-set-function-type = is-trunc-function-type zero-𝕋
 
 type-hom-Set :
-  {l1 l2 : Level} → UU-Set l1 → UU-Set l2 → UU (l1 ⊔ l2)
+  {l1 l2 : Level} → Set l1 → Set l2 → UU (l1 ⊔ l2)
 type-hom-Set A B = type-Set A → type-Set B
 
 is-set-type-hom-Set :
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2) →
+  {l1 l2 : Level} (A : Set l1) (B : Set l2) →
   is-set (type-hom-Set A B)
 is-set-type-hom-Set A B = is-set-function-type (is-set-type-Set B)
 
 hom-Set :
-  {l1 l2 : Level} → UU-Set l1 → UU-Set l2 → UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} → Set l1 → Set l2 → Set (l1 ⊔ l2)
 pr1 (hom-Set A B) = type-hom-Set A B
 pr2 (hom-Set A B) = is-set-type-hom-Set A B
 
 precomp-Set :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU-Set l3) →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →
   (B → type-Set C) → (A → type-Set C)
 precomp-Set f C = precomp f (type-Set C)
 ```
@@ -179,13 +182,13 @@ module _
   is-set-equiv-is-set = is-trunc-equiv-is-trunc zero-𝕋
 
 module _
-  {l1 l2 : Level} (A : UU-Set l1) (B : UU-Set l2)
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
   where
   
   type-equiv-Set : UU (l1 ⊔ l2)
   type-equiv-Set = type-Set A ≃ type-Set B
 
-  equiv-Set : UU-Set (l1 ⊔ l2)
+  equiv-Set : Set (l1 ⊔ l2)
   pr1 equiv-Set = type-equiv-Set
   pr2 equiv-Set = is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 ```
@@ -194,25 +197,25 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
-  equiv-eq-Set : (Y : UU-Set l) → X ＝ Y → type-equiv-Set X Y
+  equiv-eq-Set : (Y : Set l) → X ＝ Y → type-equiv-Set X Y
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
   
   abstract
-    is-contr-total-equiv-Set : is-contr (Σ (UU-Set l) (type-equiv-Set X))
+    is-contr-total-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
     is-contr-total-equiv-Set =
       is-contr-total-equiv-subuniverse is-set-Prop X
 
   abstract
-    is-equiv-equiv-eq-Set : (Y : UU-Set l) → is-equiv (equiv-eq-Set Y)
+    is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)
     is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
 
-  eq-equiv-Set : (Y : UU-Set l) → type-equiv-Set X Y → X ＝ Y
+  eq-equiv-Set : (Y : Set l) → type-equiv-Set X Y → X ＝ Y
   eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
 
-  extensionality-Set : (Y : UU-Set l) → (X ＝ Y) ≃ type-equiv-Set X Y
+  extensionality-Set : (Y : Set l) → (X ＝ Y) ≃ type-equiv-Set X Y
   pr1 (extensionality-Set Y) = equiv-eq-Set Y
   pr2 (extensionality-Set Y) = is-equiv-equiv-eq-Set Y
 ```

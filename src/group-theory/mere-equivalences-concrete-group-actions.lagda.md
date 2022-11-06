@@ -22,7 +22,7 @@ open import group-theory.equivalences-concrete-group-actions
 mere-equiv-action-Concrete-Group-Prop :
   {l1 l2 l3 : Level} (G : Concrete-Group l1) →
   action-Concrete-Group l2 G → action-Concrete-Group l3 G →
-  UU-Prop (l1 ⊔ l2 ⊔ l3)
+  Prop (l1 ⊔ l2 ⊔ l3)
 mere-equiv-action-Concrete-Group-Prop G X Y =
   trunc-Prop (equiv-action-Concrete-Group G X Y)
 

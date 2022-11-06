@@ -11,9 +11,9 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; inv; _∙_)
 open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; UU-Prop;
+  ( all-elements-equal; is-prop-all-elements-equal; is-prop; Prop;
     prod-Prop; Π-Prop)
-open import foundation.sets using (UU-Set; is-set; type-Set; Id-Prop)
+open import foundation.sets using (Set; is-set; type-Set; Id-Prop)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.unital-binary-operations using (is-unital)
 open import foundation.universe-levels using (Level; UU; lsuc)
@@ -45,7 +45,7 @@ semigroup-Monoid M = pr1 M
 type-Monoid : {l : Level} (M : Monoid l) → UU l
 type-Monoid M = type-Semigroup (semigroup-Monoid M)
 
-set-Monoid : {l : Level} (M : Monoid l) → UU-Set l
+set-Monoid : {l : Level} (M : Monoid l) → Set l
 set-Monoid M = set-Semigroup (semigroup-Monoid M)
 
 is-set-type-Monoid :
@@ -105,7 +105,7 @@ abstract
   is-prop-is-unital-Semigroup G =
     is-prop-all-elements-equal (all-elements-equal-is-unital-Semigroup G)
 
-is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → UU-Prop l
+is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → Prop l
 pr1 (is-unital-Semigroup-Prop G) = is-unital-Semigroup G
 pr2 (is-unital-Semigroup-Prop G) = is-prop-is-unital-Semigroup G
 ```

@@ -7,7 +7,7 @@ module order-theory.total-preorders where
 
 open import foundation.disjunction using (disj-Prop)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.preorders using
@@ -21,7 +21,7 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  incident-preorder-Prop : (x y : element-Preorder X) → UU-Prop l2
+  incident-preorder-Prop : (x y : element-Preorder X) → Prop l2
   incident-preorder-Prop x y =
     disj-Prop (leq-preorder-Prop X x y) (leq-preorder-Prop X y x)
 
@@ -32,7 +32,7 @@ module _
     (x y : element-Preorder X) → is-prop (incident-Preorder x y)
   is-prop-incident-Preorder x y = is-prop-type-Prop (incident-preorder-Prop x y)
 
-  is-total-preorder-Prop : UU-Prop (l1 ⊔ l2)
+  is-total-preorder-Prop : Prop (l1 ⊔ l2)
   is-total-preorder-Prop =
     Π-Prop
       ( element-Preorder X)

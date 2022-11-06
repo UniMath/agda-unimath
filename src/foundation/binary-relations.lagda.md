@@ -7,10 +7,24 @@ title: Binary relations
 
 module foundation.binary-relations where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import foundation.equality-dependent-function-types using
+  ( is-contr-total-Eq-Π)
+open import foundation.subtypes using
+  ( has-same-elements-subtype; refl-has-same-elements-subtype;
+    is-contr-total-has-same-elements-subtype)
+
+open import foundation-core.contractible-types using (is-contr)
+open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.equivalences using
+  ( _≃_; id-equiv; map-inv-equiv; is-equiv)
+open import foundation-core.fundamental-theorem-of-identity-types using
+  ( fundamental-theorem-id)
+open import foundation-core.identity-types using (_＝_; refl)
+open import foundation-core.propositions using
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-Π';
+    is-prop-function-type)
+open import foundation-core.univalence using (is-contr-total-equiv)
+open import foundation-core.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
 
 ## Idea
@@ -31,7 +45,7 @@ Rel l A = A → A → UU l
 ```agda
 Rel-Prop :
   (l : Level) {l1 : Level} (A : UU l1) → UU ((lsuc l) ⊔ l1)
-Rel-Prop l A = A → (A → UU-Prop l)
+Rel-Prop l A = A → (A → Prop l)
 
 type-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) → A → A → UU l2
@@ -55,21 +69,133 @@ is-symmetric {A = A} R = (x y : A) → R x y → R y x
 
 is-transitive : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
 is-transitive {A = A} R = (x y z : A) → R x y → R y z → R x z
-```
 
-```agda
 is-reflexive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
 is-reflexive-Rel-Prop {A = A} R =
   {x : A} → type-Rel-Prop R x x
+
+is-prop-is-reflexive-Rel-Prop :
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
+  is-prop (is-reflexive-Rel-Prop R)
+is-prop-is-reflexive-Rel-Prop R =
+  is-prop-Π' (λ x → is-prop-type-Rel-Prop R x x)
 
 is-symmetric-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
 is-symmetric-Rel-Prop {A = A} R =
   {x y : A} → type-Rel-Prop R x y → type-Rel-Prop R y x
 
+is-prop-is-symmetric-Rel-Prop :
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
+  is-prop (is-symmetric-Rel-Prop R)
+is-prop-is-symmetric-Rel-Prop R =
+  is-prop-Π'
+    ( λ x →
+      is-prop-Π' (λ y → is-prop-function-type (is-prop-type-Rel-Prop R y x)))
+
 is-transitive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
 is-transitive-Rel-Prop {A = A} R =
   {x y z : A} → type-Rel-Prop R x y → type-Rel-Prop R y z → type-Rel-Prop R x z
+
+is-prop-is-transitive-Rel-Prop :
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
+  is-prop (is-transitive-Rel-Prop R)
+is-prop-is-transitive-Rel-Prop R =
+  is-prop-Π'
+    ( λ x →
+      is-prop-Π'
+        ( λ y →
+          is-prop-Π'
+            ( λ z →
+              is-prop-function-type
+                ( is-prop-function-type (is-prop-type-Rel-Prop R x z)))))
+```
+
+## Properties
+
+### Characterization of equality of binary relations
+
+```agda
+equiv-Rel :
+  {l1 l2 l3 : Level} {A : UU l1} → Rel l2 A → Rel l3 A → UU (l1 ⊔ l2 ⊔ l3)
+equiv-Rel {A = A} R S = (x y : A) → R x y ≃ S x y
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Rel l2 A)
+  where
+
+  id-equiv-Rel : equiv-Rel R R
+  id-equiv-Rel x y = id-equiv
+
+  is-contr-total-equiv-Rel :
+    is-contr (Σ (Rel l2 A) (equiv-Rel R))
+  is-contr-total-equiv-Rel =
+    is-contr-total-Eq-Π
+      ( λ x P → (y : A) → R x y ≃ P y)
+      ( λ x →
+        is-contr-total-Eq-Π
+          ( λ y P → R x y ≃ P)
+          ( λ y → is-contr-total-equiv (R x y)))
+
+  equiv-eq-Rel : (S : Rel l2 A) → (R ＝ S) → equiv-Rel R S
+  equiv-eq-Rel .R refl = id-equiv-Rel
+
+  is-equiv-equiv-eq-Rel : (S : Rel l2 A) → is-equiv (equiv-eq-Rel S)
+  is-equiv-equiv-eq-Rel =
+    fundamental-theorem-id is-contr-total-equiv-Rel equiv-eq-Rel
+
+  extensionality-Rel : (S : Rel l2 A) → (R ＝ S) ≃ equiv-Rel R S
+  pr1 (extensionality-Rel S) = equiv-eq-Rel S
+  pr2 (extensionality-Rel S) = is-equiv-equiv-eq-Rel S
+
+  eq-equiv-Rel : (S : Rel l2 A) → equiv-Rel R S → (R ＝ S)
+  eq-equiv-Rel S = map-inv-equiv (extensionality-Rel S)
+```
+
+### Characterization of equality of prop-valued binary relations
+
+```agda
+relates-same-elements-Rel-Prop :
+  {l1 l2 l3 : Level} {A : UU l1} (R : Rel-Prop l2 A) (S : Rel-Prop l3 A) →
+  UU (l1 ⊔ l2 ⊔ l3)
+relates-same-elements-Rel-Prop {A = A} R S =
+  (x : A) → has-same-elements-subtype (R x) (S x)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A)
+  where
+
+  refl-relates-same-elements-Rel-Prop : relates-same-elements-Rel-Prop R R
+  refl-relates-same-elements-Rel-Prop x = refl-has-same-elements-subtype (R x)
+
+  is-contr-total-relates-same-elements-Rel-Prop :
+    is-contr (Σ (Rel-Prop l2 A) (relates-same-elements-Rel-Prop R))
+  is-contr-total-relates-same-elements-Rel-Prop =
+    is-contr-total-Eq-Π
+      ( λ x P → has-same-elements-subtype (R x) P)
+      ( λ x → is-contr-total-has-same-elements-subtype (R x))
+
+  relates-same-elements-eq-Rel-Prop :
+    (S : Rel-Prop l2 A) → (R ＝ S) → relates-same-elements-Rel-Prop R S
+  relates-same-elements-eq-Rel-Prop .R refl =
+    refl-relates-same-elements-Rel-Prop
+
+  is-equiv-relates-same-elements-eq-Rel-Prop :
+    (S : Rel-Prop l2 A) → is-equiv (relates-same-elements-eq-Rel-Prop S)
+  is-equiv-relates-same-elements-eq-Rel-Prop =
+    fundamental-theorem-id
+      is-contr-total-relates-same-elements-Rel-Prop
+      relates-same-elements-eq-Rel-Prop
+
+  extensionality-Rel-Prop :
+    (S : Rel-Prop l2 A) → (R ＝ S) ≃ relates-same-elements-Rel-Prop R S
+  pr1 (extensionality-Rel-Prop S) = relates-same-elements-eq-Rel-Prop S
+  pr2 (extensionality-Rel-Prop S) = is-equiv-relates-same-elements-eq-Rel-Prop S
+
+  eq-relates-same-elements-Rel-Prop :
+    (S : Rel-Prop l2 A) → relates-same-elements-Rel-Prop R S → (R ＝ S)
+  eq-relates-same-elements-Rel-Prop S =
+    map-inv-equiv (extensionality-Rel-Prop S)
 ```

@@ -21,7 +21,7 @@ open import foundation-core.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id; fundamental-theorem-id')
 open import foundation-core.identity-types using ( refl; ap; inv)
 open import foundation-core.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; is-prop-is-proof-irrelevant; UU-Prop)
+  ( is-prop; is-proof-irrelevant-is-prop; is-prop-is-proof-irrelevant; Prop)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -81,7 +81,7 @@ module _
     is-prop-map-emb : (f : B ↪ A) → is-prop-map (map-emb f)
     is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
 
-  fib-emb-Prop : A ↪ B → B → UU-Prop (l1 ⊔ l2)
+  fib-emb-Prop : A ↪ B → B → Prop (l1 ⊔ l2)
   pr1 (fib-emb-Prop f y) = fib (map-emb f) y
   pr2 (fib-emb-Prop f y) = is-prop-map-is-emb (is-emb-map-emb f) y
 ```

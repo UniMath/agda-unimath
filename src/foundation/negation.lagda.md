@@ -15,7 +15,7 @@ open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equivalences using (_≃_; map-inv-equiv; map-equiv)
 open import foundation.logical-equivalences using (_⇔_; _↔_; equiv-iff')
 open import foundation.propositions using
-  ( is-prop; is-prop-function-type; UU-Prop; type-Prop; is-prop-type-Prop)
+  ( is-prop; is-prop-function-type; Prop; type-Prop; is-prop-type-Prop)
 open import foundation.universe-levels using (UU; Level)
 ```
 
@@ -31,11 +31,11 @@ The Curry-Howard interpretation of negation in type theory is the interpretation
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg {A = A} = is-prop-function-type is-prop-empty
 
-neg-Prop' : {l1 : Level} → UU l1 → UU-Prop l1
+neg-Prop' : {l1 : Level} → UU l1 → Prop l1
 pr1 (neg-Prop' A) = ¬ A
 pr2 (neg-Prop' A) = is-prop-neg
 
-neg-Prop : {l1 : Level} → UU-Prop l1 → UU-Prop l1
+neg-Prop : {l1 : Level} → Prop l1 → Prop l1
 neg-Prop P = neg-Prop' (type-Prop P)
 ```
 
@@ -71,6 +71,6 @@ no-fixed-points-neg A (pair f g) =
 ```agda
 abstract
   no-fixed-points-neg-Prop :
-    {l1 : Level} (P : UU-Prop l1) → ¬ (P ⇔ neg-Prop P)
+    {l1 : Level} (P : Prop l1) → ¬ (P ⇔ neg-Prop P)
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
 ```

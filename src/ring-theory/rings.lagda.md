@@ -16,8 +16,8 @@ open import foundation.equivalences using (is-equiv)
 open import foundation.identity-types using (Id; ap-binary; _∙_; inv; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
-open import foundation.propositions using (UU-Prop)
-open import foundation.sets using (UU-Set; is-set; Id-Prop)
+open import foundation.propositions using (Prop)
+open import foundation.sets using (Set; is-set; Id-Prop)
 open import foundation.unital-binary-operations using (is-unital)
 open import foundation.universe-levels using (Level; UU; lsuc)
 
@@ -71,7 +71,7 @@ module _
   group-Ring : Group l
   group-Ring = group-Ab ab-Ring
 
-  set-Ring : UU-Set l
+  set-Ring : Set l
   set-Ring = set-Ab ab-Ring
 
   type-Ring : UU l
@@ -161,7 +161,7 @@ module _
   is-nonzero-Ring : type-Ring R → UU l
   is-nonzero-Ring x = ¬ (is-zero-Ring x)
 
-  is-zero-ring-Prop : type-Ring R → UU-Prop l
+  is-zero-ring-Prop : type-Ring R → Prop l
   is-zero-ring-Prop x = Id-Prop (set-Ring R) x zero-Ring
 
   left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x

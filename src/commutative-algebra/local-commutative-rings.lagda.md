@@ -31,7 +31,7 @@ A local ring is a ring such that whenever a sum of elements is invertible, then 
 
 ```agda
 is-local-commutative-ring-Prop :
-  {l : Level} (R : Commutative-Ring l) → UU-Prop l
+  {l : Level} (R : Commutative-Ring l) → Prop l
 is-local-commutative-ring-Prop R = is-local-ring-Prop (ring-Commutative-Ring R)
 
 is-local-Commutative-Ring : {l : Level} → Commutative-Ring l → UU l
@@ -56,7 +56,7 @@ module _
   ring-Local-Commutative-Ring =
     ring-Commutative-Ring commutative-ring-Local-Commutative-Ring
 
-  set-Local-Commutative-Ring : UU-Set l
+  set-Local-Commutative-Ring : Set l
   set-Local-Commutative-Ring = set-Ring ring-Local-Commutative-Ring
 
   type-Local-Commutative-Ring : UU l

@@ -17,23 +17,26 @@ open import elementary-number-theory.equality-integers using
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; one-ℤ; is-zero-ℤ; neg-ℤ; int-ℕ; is-nonnegative-ℤ; is-one-ℤ;
     is-injective-int-ℕ; is-nonnegative-eq-ℤ; is-nonnegative-int-ℕ; is-neg-one-ℤ;
-    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ)
+    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ;
+    is-zero-is-nonnegative-neg-is-nonnegative-ℤ )
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
     left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
     left-negative-law-mul-ℤ; mul-int-ℕ; is-nonnegative-left-factor-mul-ℤ;
     compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ;
-    is-emb-mul-ℤ'; right-negative-law-mul-ℤ)
+    is-emb-mul-ℤ'; right-negative-law-mul-ℤ; left-neg-unit-law-mul-ℤ;
+    is-plus-or-minus-ℤ)
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
   
 open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (_+_; inl; inr)
+open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
 open import foundation.decidable-types using
   ( is-decidable; dn-elim-is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (_∘_)
+open import foundation.equational-reasoning
+open import foundation.functions using (_∘_; id)
 open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
 open import foundation.negation using (¬)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
@@ -51,6 +54,18 @@ An integer `d` divides an integer `x` if there is an integer `k` such that `mul-
 ```agda
 div-ℤ : ℤ → ℤ → UU lzero
 div-ℤ d x = Σ ℤ (λ k → mul-ℤ k d ＝ x)
+
+quotient-div-ℤ : (x y : ℤ) → div-ℤ x y → ℤ
+quotient-div-ℤ x y H = pr1 H
+
+eq-quotient-div-ℤ :
+  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ (quotient-div-ℤ x y H) x ＝ y
+eq-quotient-div-ℤ x y H = pr2 H
+
+eq-quotient-div-ℤ' :
+  (x y : ℤ) (H : div-ℤ x y) → mul-ℤ x (quotient-div-ℤ x y H) ＝ y
+eq-quotient-div-ℤ' x y H =
+  commutative-mul-ℤ x (quotient-div-ℤ x y H) ∙ eq-quotient-div-ℤ x y H
 ```
 
 ## Properties
@@ -101,6 +116,12 @@ is-zero-div-zero-ℤ :
   (x : ℤ) → div-ℤ zero-ℤ x → is-zero-ℤ x
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 ```
+### If `k` divides `x` and `k` is 0 then `x` is 0
+
+```agda
+is-zero-is-zero-div-ℤ : (x k : ℤ) → div-ℤ k x → is-zero-ℤ k → is-zero-ℤ x
+is-zero-is-zero-div-ℤ x .zero-ℤ k-div-x refl = is-zero-div-zero-ℤ x k-div-x
+```
 
 ### If `x` divides both `y` and `z`, then it divides `y + z`
 
@@ -110,6 +131,15 @@ pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = add-ℤ d e
 pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e x) ∙
   ( ap-add-ℤ p q)
+```
+
+### If `x` divides `y` then `x` divides any multiple of `y`
+
+```agda
+div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ x (mul-ℤ k y)
+div-mul-ℤ k x y H =
+  trans-div-ℤ x y (mul-ℤ k y) H (pair k refl)
 ```
 
 ### If `x` divides `y` then it divides `-y`
@@ -125,7 +155,61 @@ pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ 
 ```agda
 neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
 pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
-pr2 (neg-div-ℤ x y (pair d p)) = (left-negative-law-mul-ℤ d (neg-ℤ x) ∙ (ap neg-ℤ (right-negative-law-mul-ℤ d x) ∙ (neg-neg-ℤ (mul-ℤ d x) ∙ p)))
+pr2 (neg-div-ℤ x y (pair d p)) =
+  equational-reasoning
+    mul-ℤ (neg-ℤ d) (neg-ℤ x)
+    ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))   by left-negative-law-mul-ℤ d (neg-ℤ x)
+    ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
+    ＝ (mul-ℤ d x)                 by neg-neg-ℤ (mul-ℤ d x)
+    ＝ y                           by p
+```
+
+### Multiplication preserves divisibility
+
+```agda
+preserves-div-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ (mul-ℤ k x) (mul-ℤ k y)
+pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
+pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
+  ( inv (associative-mul-ℤ q k x)) ∙
+    ( ( ap (mul-ℤ' x) (commutative-mul-ℤ q k)) ∙
+      ( ( associative-mul-ℤ k q x) ∙
+        ( ap (mul-ℤ k) p)))
+```
+
+### Multiplication by a nonzero number reflects divisibility
+
+```agda
+reflects-div-mul-ℤ :
+  (k x y : ℤ) → is-nonzero-ℤ k → div-ℤ (mul-ℤ k x) (mul-ℤ k y) → div-ℤ x y
+pr1 (reflects-div-mul-ℤ k x y H (pair q p)) = q
+pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
+  is-injective-mul-ℤ k H
+    ( ( inv (associative-mul-ℤ k q x)) ∙
+      ( ( ap (mul-ℤ' x) (commutative-mul-ℤ k q)) ∙
+        ( ( associative-mul-ℤ q k x) ∙
+          ( p))))
+```
+
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+
+```agda
+div-quotient-div-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) → is-nonzero-ℤ d →
+  div-ℤ (mul-ℤ d x) y → div-ℤ x (quotient-div-ℤ d y H)
+div-quotient-div-div-ℤ x y d H f K =
+  reflects-div-mul-ℤ d x
+    ( quotient-div-ℤ d y H)
+    ( f)
+    ( tr (div-ℤ (mul-ℤ d x)) (inv (eq-quotient-div-ℤ' d y H)) K)
+
+div-div-quotient-div-ℤ :
+  (x y d : ℤ) (H : div-ℤ d y) →
+  div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (mul-ℤ d x) y
+div-div-quotient-div-ℤ x y d H K =
+  tr ( div-ℤ (mul-ℤ d x))
+     ( eq-quotient-div-ℤ' d y H)
+     ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
 
 ### Comparison of divisibility on ℕ and on ℤ
@@ -178,9 +262,11 @@ div-is-unit-ℤ :
 pr1 (div-is-unit-ℤ x y (pair d p)) = mul-ℤ y d
 pr2 (div-is-unit-ℤ x y (pair d p)) =
   associative-mul-ℤ y d x ∙ (ap (mul-ℤ y) p ∙ right-unit-law-mul-ℤ y)
+```
 
--- An integer is a unit if and only if it is 1 or -1.
+### An integer is a unit if and only if it is `1` or `-1`.
 
+```agda
 is-one-or-neg-one-ℤ : ℤ → UU lzero
 is-one-or-neg-one-ℤ x = (is-one-ℤ x) + (is-neg-one-ℤ x)
 
@@ -243,7 +329,11 @@ is-one-or-neg-one-is-unit-ℤ
   ex-falso
     ( Eq-eq-ℤ
       ( inv p ∙ compute-mul-ℤ (inr (inr (succ-ℕ d))) (inr (inr (succ-ℕ x)))))
+```
 
+### Units are idempotent
+
+```agda
 idempotent-is-unit-ℤ : {x : ℤ} → is-unit-ℤ x → mul-ℤ x x ＝ one-ℤ
 idempotent-is-unit-ℤ {x} H =
   f (is-one-or-neg-one-is-unit-ℤ x H)
@@ -257,9 +347,11 @@ abstract
   is-one-is-unit-int-ℕ x H with is-one-or-neg-one-is-unit-ℤ (int-ℕ x) H
   ... | inl p = is-injective-int-ℕ p
   ... | inr p = ex-falso (tr is-nonnegative-ℤ p (is-nonnegative-int-ℕ x))
+```
 
--- The product xy is a unit if and only if both x and y are units
+### The product `xy` is a unit if and only if both `x` and `y` are units
 
+```agda
 is-unit-mul-ℤ :
   (x y : ℤ) → is-unit-ℤ x → is-unit-ℤ y → is-unit-ℤ (mul-ℤ x y)
 pr1 (is-unit-mul-ℤ x y (pair d p) (pair e q)) = mul-ℤ e d
@@ -286,9 +378,11 @@ is-unit-right-factor-ℤ :
 is-unit-right-factor-ℤ x y (pair d p) =
   is-unit-left-factor-mul-ℤ y x
     ( pair d (ap (mul-ℤ d) (commutative-mul-ℤ y x) ∙ p))
+```
 
--- We introduce the equivalence relation ux = y, where u is a unit
+### We introduce the equivalence relation `ux = y`, where `u` is a unit
 
+```
 {- The relation presim-unit-ℤ would be an equivalence relation, except it is not
    valued in the propositions. Indeed presim-unit-ℤ zero-ℤ zero-ℤ is not a
    proposition. -}
@@ -300,9 +394,11 @@ presim-unit-ℤ x y = Σ unit-ℤ (λ u → mul-ℤ (pr1 u) x ＝ y)
    proposition when both x and y are zero. -}
 sim-unit-ℤ : ℤ → ℤ → UU lzero
 sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
+```
 
--- The relations presim-unit-ℤ and sim-unit-ℤ are logially equivalent
+### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are logically equivalent
 
+```agda
 sim-unit-presim-unit-ℤ :
   {x y : ℤ} → presim-unit-ℤ x y → sim-unit-ℤ x y
 sim-unit-presim-unit-ℤ {x} {y} H f = H
@@ -320,9 +416,11 @@ presim-unit-sim-unit-ℤ {inr (inr x)} {inr (inl star)} H =
   H (λ t → Eq-eq-ℤ (pr1 t))
 presim-unit-sim-unit-ℤ {inr (inr x)} {inr (inr y)} H =
   H (λ t → Eq-eq-ℤ (pr1 t))
+```
 
--- The relations presim-unit-ℤ and sim-unit-ℤ relate zero-ℤ only to itself
+### The relations `presim-unit-ℤ` and `sim-unit-ℤ` relate `zero-ℤ` only to itself
 
+```agda
 is-nonzero-presim-unit-ℤ :
   {x y : ℤ} → presim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
 is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
@@ -340,7 +438,6 @@ is-zero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ x → is-zero-ℤ y
 is-zero-sim-unit-ℤ {x} {y} H p =
   dn-elim-is-decidable
-    ( is-zero-ℤ y)
     ( has-decidable-equality-ℤ y zero-ℤ)
     ( λ g → g (inv (β g) ∙ (ap (mul-ℤ (u g)) p ∙ right-zero-law-mul-ℤ (u g))))
   where
@@ -352,9 +449,11 @@ is-zero-sim-unit-ℤ {x} {y} H p =
   v g = pr1 (pr2 (pr1 (K g)))
   β : (g : is-nonzero-ℤ y) → mul-ℤ (u g) x ＝ y
   β g = pr2 (K g)
+```
 
--- The relations presim-unit-ℤ and sim-unit-ℤ are equivalence relations
+### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are equivalence relations
 
+```agda
 refl-presim-unit-ℤ : (x : ℤ) → presim-unit-ℤ x x
 pr1 (refl-presim-unit-ℤ x) = one-unit-ℤ
 pr2 (refl-presim-unit-ℤ x) = left-unit-law-mul-ℤ x
@@ -411,9 +510,11 @@ trans-sim-unit-ℤ x y z H K f =
   trans-presim-unit-ℤ x y z
     ( H (λ {(pair p q) → f (pair p (is-zero-sim-unit-ℤ K q))}))
     ( K (λ {(pair p q) → f (pair (is-zero-sim-unit-ℤ' H p) q)}))
+```
 
--- We show that sim-unit-ℤ x y holds if and only if x|y and y|x
+### We show that `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`
 
+```agda
 antisymmetric-div-ℤ :
   (x y : ℤ) → div-ℤ x y → div-ℤ y x → sim-unit-ℤ x y
 antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
@@ -430,9 +531,11 @@ antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
           ( ( ap (mul-ℤ e) p) ∙
             ( q ∙ inv (right-unit-law-mul-ℤ x)))))
   pr2 (f (inr g)) = p
+```
 
--- We show that sim-unit-ℤ |x| x holds
+### We show that `sim-unit-ℤ |x| x` holds
 
+```agda
 sim-unit-abs-ℤ : (x : ℤ) → sim-unit-ℤ (int-abs-ℤ x) x
 pr1 (sim-unit-abs-ℤ (inl x) f) = neg-one-unit-ℤ
 pr2 (sim-unit-abs-ℤ (inl x) f) = refl
@@ -473,4 +576,45 @@ div-div-int-abs-ℤ :
   {x y : ℤ} → div-ℤ (int-abs-ℤ x) y → div-ℤ x y
 div-div-int-abs-ℤ {x} {y} =
   div-sim-unit-ℤ (sim-unit-abs-ℤ x) (refl-sim-unit-ℤ y)
+```
+
+### If we have that `sim-unit-ℤ x y`, then they must differ only by sign
+
+```agda
+is-plus-or-minus-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → is-plus-or-minus-ℤ x y
+is-plus-or-minus-sim-unit-ℤ {x} {y} H with ( is-decidable-is-zero-ℤ x)
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z = inl (z ∙ inv (is-zero-sim-unit-ℤ H z))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz with ( is-one-or-neg-one-is-unit-ℤ
+        (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -)))))
+        (is-unit-int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) ) 
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos = inl (equational-reasoning
+         x  ＝ mul-ℤ one-ℤ x                             by (inv (left-unit-law-mul-ℤ x))
+            ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by inv (ap (λ - → mul-ℤ - x) pos)
+            ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr neg = inr (equational-reasoning
+         neg-ℤ x
+         ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by tr (λ - → neg-ℤ x ＝ mul-ℤ - x)
+                                                           (inv neg)
+                                                           (left-neg-unit-law-mul-ℤ x)
+         ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
+```
+
+### If we have that `sim-unit-ℤ x y` and both `x` and `y` have the same sign,
+then they are the same
+
+```agda
+eq-sim-unit-is-nonnegative-ℤ :
+  {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with
+  ( is-plus-or-minus-sim-unit-ℤ K )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg with ( is-decidable-is-zero-ℤ a )
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z = 
+  equational-reasoning
+    a ＝ zero-ℤ   by z
+      ＝ neg-ℤ a  by inv (ap neg-ℤ z)
+      ＝ b        by neg 
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz = 
+  ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
+   a H (tr is-nonnegative-ℤ (inv neg) H')))
 ```

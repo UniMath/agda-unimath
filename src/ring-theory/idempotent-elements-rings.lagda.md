@@ -26,7 +26,7 @@ module _
   {l : Level} (R : Ring l) (x : type-Ring R)
   where
   
-  is-idempotent-element-ring-Prop : UU-Prop l
+  is-idempotent-element-ring-Prop : Prop l
   is-idempotent-element-ring-Prop = Id-Prop (set-Ring R) (mul-Ring R x x) x
 
   is-idempotent-element-Ring : UU l

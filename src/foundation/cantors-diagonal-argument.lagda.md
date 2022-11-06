@@ -15,7 +15,7 @@ open import foundation.logical-equivalences using (iff-eq)
 open import foundation.negation using (neg-Prop; no-fixed-points-neg-Prop; ¬)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using (UU-Prop)
+open import foundation.propositions using (Prop)
 open import foundation.surjective-maps using (is-surjective)
 open import foundation.universe-levels using (Level; UU)
 ```
@@ -28,18 +28,18 @@ Cantor's diagonal argument is used to show that there is no surjective map from 
 
 ```agda
 map-cantor :
-  {l1 l2 : Level} (X : UU l1) (f : X → (X → UU-Prop l2)) → (X → UU-Prop l2)
+  {l1 l2 : Level} (X : UU l1) (f : X → (X → Prop l2)) → (X → Prop l2)
 map-cantor X f x = neg-Prop (f x x)
 
 abstract
   not-in-image-map-cantor :
-    {l1 l2 : Level} (X : UU l1) (f : X → (X → UU-Prop l2)) →
+    {l1 l2 : Level} (X : UU l1) (f : X → (X → Prop l2)) →
     ( t : fib f (map-cantor X f)) → empty
   not-in-image-map-cantor X f (pair x α) =
     no-fixed-points-neg-Prop (f x x) (iff-eq (htpy-eq α x))
 
 abstract
-  cantor : {l1 l2 : Level} (X : UU l1) (f : X → (X → UU-Prop l2)) →
+  cantor : {l1 l2 : Level} (X : UU l1) (f : X → (X → Prop l2)) →
     ¬ (is-surjective f)
   cantor X f H =
     ( apply-universal-property-trunc-Prop

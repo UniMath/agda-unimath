@@ -21,7 +21,7 @@ open import order-theory.posets
 
 ```agda
 is-directed-complete-poset-Prop :
-  {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2) → UU-Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2) → Prop (l1 ⊔ l2 ⊔ lsuc l3)
 is-directed-complete-poset-Prop l3 P =
   Π-Prop
     ( Inhabited-Type l3)

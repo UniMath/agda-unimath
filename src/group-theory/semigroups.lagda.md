@@ -9,7 +9,7 @@ module group-theory.semigroups where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
-open import foundation.sets using (UU-Set; type-Set; is-set-type-Set; is-set)
+open import foundation.sets using (Set; type-Set; is-set-type-Set; is-set)
 open import foundation.universe-levels using (Level; UU; lsuc)
 ```
 
@@ -25,19 +25,19 @@ has-associative-mul X =
   Σ (X → X → X) (λ μ → (x y z : X) → Id (μ (μ x y) z) (μ x (μ y z)))
 
 has-associative-mul-Set :
-  {l : Level} (X : UU-Set l) → UU l
+  {l : Level} (X : Set l) → UU l
 has-associative-mul-Set X =
   has-associative-mul (type-Set X)
 
 Semigroup :
   (l : Level) → UU (lsuc l)
-Semigroup l = Σ (UU-Set l) has-associative-mul-Set
+Semigroup l = Σ (Set l) has-associative-mul-Set
 
 module _
   {l : Level} (G : Semigroup l)
   where
 
-  set-Semigroup : UU-Set l
+  set-Semigroup : Set l
   set-Semigroup = pr1 G
 
   type-Semigroup : UU l

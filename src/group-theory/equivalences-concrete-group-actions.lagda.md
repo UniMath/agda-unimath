@@ -145,7 +145,7 @@ module _
       ( hom-equiv-action-Concrete-Group G X Y f)
 
   htpy-equiv-action-Concrete-Group-Prop :
-    (e f : equiv-action-Concrete-Group G X Y) → UU-Prop (l2 ⊔ l3)
+    (e f : equiv-action-Concrete-Group G X Y) → Prop (l2 ⊔ l3)
   pr1 (htpy-equiv-action-Concrete-Group-Prop e f) =
     htpy-equiv-action-Concrete-Group G X Y e f
   pr2 (htpy-equiv-action-Concrete-Group-Prop e f) =

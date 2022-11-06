@@ -34,11 +34,11 @@ open import foundation.homotopies using (_~_; refl-htpy; inv-htpy)
 open import foundation.identity-types using (_＝_)
 open import foundation.mere-equality using
   ( mere-eq-Eq-Rel; reflects-mere-eq; mere-eq; mere-eq-Prop)
-open import foundation.propositions using (UU-Prop)
+open import foundation.propositions using (Prop)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel)
 open import foundation.sets using
-  ( is-set; type-Set; UU-Set; precomp-Set; type-hom-Set; is-set-type-Set;
+  ( is-set; type-Set; Set; precomp-Set; type-hom-Set; is-set-type-Set;
     is-set-is-contr; type-equiv-Set; prod-Set; Π-Set')
 open import foundation.slice using
   ( hom-slice)
@@ -89,7 +89,7 @@ type-trunc-Set = type-trunc zero-𝕋
 is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
 is-set-type-trunc-Set = is-trunc-type-trunc
 
-trunc-Set : {l : Level} → UU l → UU-Set l
+trunc-Set : {l : Level} → UU l → Set l
 trunc-Set = trunc zero-𝕋
 
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
@@ -112,7 +112,7 @@ dependent-universal-property-trunc-Set :
 dependent-universal-property-trunc-Set = dependent-universal-property-trunc
 
 equiv-dependent-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → UU-Set l2) →
+  {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → Set l2) →
   ((x : type-trunc-Set A) → type-Set (B x)) ≃
   ((a : A) → type-Set (B (unit-trunc-Set a)))
 equiv-dependent-universal-property-trunc-Set = equiv-dependent-universal-property-trunc
@@ -122,28 +122,28 @@ module _
   where
 
   Π-trunc-Set :
-    {l2 : Level} (B : type-trunc-Set A → UU-Set l2)
+    {l2 : Level} (B : type-trunc-Set A → Set l2)
     (f : (a : A) → type-Set (B (unit-trunc-Set a))) → UU (l1 ⊔ l2)
   Π-trunc-Set B f =
     Σ ( (x : type-trunc-Set A) → type-Set (B x))
       ( λ g → (g ∘ unit-trunc-Set) ~ f)
 
   function-dependent-universal-property-trunc-Set :
-    {l2 : Level} (B : type-trunc-Set A → UU-Set l2) →
+    {l2 : Level} (B : type-trunc-Set A → Set l2) →
     ((x : A) → type-Set (B (unit-trunc-Set x))) →
     (x : type-trunc-Set A) → type-Set (B x)
   function-dependent-universal-property-trunc-Set B f =
     function-dependent-universal-property-trunc B f
 
   compute-dependent-universal-property-trunc-Set :
-    {l2 : Level} (B : type-trunc-Set A → UU-Set l2) →
+    {l2 : Level} (B : type-trunc-Set A → Set l2) →
     (f : (x : A) → type-Set (B (unit-trunc-Set x))) →
     (function-dependent-universal-property-trunc-Set B f ∘ unit-trunc-Set) ~ f
   compute-dependent-universal-property-trunc-Set B f =
     htpy-dependent-universal-property-trunc B f
 
   apply-dependent-universal-property-trunc-Set' :
-    {l2 : Level} (B : type-trunc-Set A → UU-Set l2) →
+    {l2 : Level} (B : type-trunc-Set A → Set l2) →
     ((x : A) → type-Set (B (unit-trunc-Set x))) →
     (x : type-trunc-Set A) → type-Set (B x)
   apply-dependent-universal-property-trunc-Set' B =
@@ -160,22 +160,22 @@ universal-property-trunc-Set : {l1 l2 : Level} (A : UU l1) →
 universal-property-trunc-Set A = universal-property-trunc zero-𝕋 A
 
 equiv-universal-property-trunc-Set :
-  {l1 l2 : Level} (A : UU l1) (B : UU-Set l2) →
+  {l1 l2 : Level} (A : UU l1) (B : Set l2) →
   (type-trunc-Set A → type-Set B) ≃ (A → type-Set B)
 equiv-universal-property-trunc-Set = equiv-universal-property-trunc
 
 apply-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (t : type-trunc-Set A) (B : UU-Set l2) →
+  {l1 l2 : Level} {A : UU l1} (t : type-trunc-Set A) (B : Set l2) →
   (A → type-Set B) → type-Set B
 apply-universal-property-trunc-Set t B f = map-universal-property-trunc B f t
 
 map-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
   (A → type-Set B) → type-hom-Set (trunc-Set A) B
 map-universal-property-trunc-Set = map-universal-property-trunc
 
 triangle-universal-property-trunc-Set :
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) →
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
   (f : A → type-Set B) →
   (map-universal-property-trunc-Set B f ∘ unit-trunc-Set) ~ f
 triangle-universal-property-trunc-Set = triangle-universal-property-trunc
@@ -185,65 +185,18 @@ module _
   where
 
   Map-trunc-Set :
-    {l2 : Level} (B : UU-Set l2) (f : A → type-Set B) → UU (l1 ⊔ l2)
+    {l2 : Level} (B : Set l2) (f : A → type-Set B) → UU (l1 ⊔ l2)
   Map-trunc-Set B f =
     Σ (type-trunc-Set A → type-Set B) (λ g → (g ∘ unit-trunc-Set) ~ f)
 
   apply-universal-property-trunc-Set' :
-    {l2 : Level} (t : type-trunc-Set A) (B : UU-Set l2) →
+    {l2 : Level} (t : type-trunc-Set A) (B : Set l2) →
     (A → type-Set B) → type-Set B
   apply-universal-property-trunc-Set' t B f =
     map-universal-property-trunc-Set B f t
-
-{-
-module _
-  where
-
-  universal-property-𝕊¹ :
-    {l : Level} → universal-property-circle l free-loop-𝕊¹
-  universal-property-𝕊¹ =
-    universal-property-dependent-universal-property-circle
-      free-loop-𝕊¹
-      dependent-universal-property-𝕊¹
-
-  uniqueness-universal-property-𝕊¹ :
-    {l : Level} {X : UU l} (α : free-loop X) →
-    is-contr
-      ( Σ ( 𝕊¹ → X)
-          ( λ h → Eq-free-loop (ev-free-loop free-loop-𝕊¹ X h) α))
-  uniqueness-universal-property-𝕊¹ {l} {X} =
-    uniqueness-universal-property-circle free-loop-𝕊¹ universal-property-𝕊¹ X
-
-  module _
-    {l : Level} {X : UU l} (x : X) (α : Id x x)
-    where
-
-    Map-𝕊¹ : UU l
-    Map-𝕊¹ =
-      Σ ( 𝕊¹ → X)
-        ( λ h → Eq-free-loop (ev-free-loop free-loop-𝕊¹ X h) (pair x α))
-
-    apply-universal-property-𝕊¹ : Map-𝕊¹
-    apply-universal-property-𝕊¹ =
-      center (uniqueness-universal-property-𝕊¹ (pair x α))
-      
-    map-apply-universal-property-𝕊¹ : 𝕊¹ → X
-    map-apply-universal-property-𝕊¹ =
-      pr1 apply-universal-property-𝕊¹
-
-    base-universal-property-𝕊¹ :
-      Id (map-apply-universal-property-𝕊¹ base-𝕊¹) x
-    base-universal-property-𝕊¹ =
-      pr1 (pr2 apply-universal-property-𝕊¹)
-
-    loop-universal-property-𝕊¹ :
-      Id ( ap map-apply-universal-property-𝕊¹ loop-𝕊¹ ∙
-           base-universal-property-𝕊¹)
-         ( base-universal-property-𝕊¹ ∙ α)
-    loop-universal-property-𝕊¹ =
-      pr2 (pr2 apply-universal-property-𝕊¹)
--}
 ```
+
+### The set truncation of `X` is the set quotient by the mere equality relation
 
 ```agda
 reflecting-map-mere-eq-unit-trunc-Set :
@@ -305,7 +258,7 @@ abstract
     map-inv-equiv (is-effective-unit-trunc-Set A x y)
 
 emb-trunc-Set :
-  {l1 : Level} (A : UU l1) → type-trunc-Set A ↪ (A → UU-Prop l1)
+  {l1 : Level} (A : UU l1) → type-trunc-Set A ↪ (A → Prop l1)
 emb-trunc-Set A =
   emb-is-surjective-and-effective
     ( mere-eq-Eq-Rel A)
@@ -342,7 +295,7 @@ abstract
 -- Uniqueness of trunc-Set
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set B (trunc-Set A)} (H : (h ∘ f) ~ unit-trunc-Set)
   where
 
@@ -373,7 +326,7 @@ module _
         ( Eh)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set (trunc-Set A) B} (H : (h ∘ unit-trunc-Set) ~ f)
   where
 
@@ -404,11 +357,11 @@ module _
         ( λ {l} → is-set-truncation-trunc-Set A)
 
 is-equiv-unit-trunc-Set :
-  {l : Level} (A : UU-Set l) → is-equiv (unit-trunc-Set {A = type-Set A})
+  {l : Level} (A : Set l) → is-equiv (unit-trunc-Set {A = type-Set A})
 is-equiv-unit-trunc-Set = is-equiv-unit-trunc
 
 equiv-unit-trunc-Set :
-  {l : Level} (A : UU-Set l) → type-Set A ≃ type-trunc-Set (type-Set A)
+  {l : Level} (A : Set l) → type-Set A ≃ type-trunc-Set (type-Set A)
 equiv-unit-trunc-Set = equiv-unit-trunc
 
 equiv-unit-trunc-empty-Set : empty ≃ type-trunc-Set empty
@@ -437,7 +390,7 @@ abstract
       ( H)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (Sf : {l : Level} → is-set-truncation l B f)
   where
 
@@ -465,7 +418,7 @@ module _
     pr2 (center uniqueness-trunc-Set)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (Sf : {l : Level} → is-set-truncation l B f)
   where
 

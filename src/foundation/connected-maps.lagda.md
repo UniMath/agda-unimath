@@ -41,7 +41,7 @@ A map is said to be **`k`-connected** if its fibers are `k`-connected types.
 
 ```agda
 is-connected-map-Prop :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
 is-connected-map-Prop k {B = B} f =
   Π-Prop B (λ b → is-connected-Prop k (fib f b))
 

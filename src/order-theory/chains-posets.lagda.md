@@ -5,7 +5,7 @@
 
 module order-theory.chains-posets where
 
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.chains-preorders using
@@ -24,15 +24,15 @@ module _
   where
 
   is-chain-sub-poset-Prop :
-    {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU-Prop (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (S : element-Poset X → Prop l3) → Prop (l1 ⊔ l2 ⊔ l3)
   is-chain-sub-poset-Prop = is-chain-sub-preorder-Prop (preorder-Poset X)
 
   is-chain-sub-Poset :
-    {l3 : Level} (S : element-Poset X → UU-Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
+    {l3 : Level} (S : element-Poset X → Prop l3) → UU (l1 ⊔ l2 ⊔ l3)
   is-chain-sub-Poset = is-chain-sub-Preorder (preorder-Poset X)
 
   is-prop-is-chain-sub-Poset :
-    {l3 : Level} (S : element-Poset X → UU-Prop l3) →
+    {l3 : Level} (S : element-Poset X → Prop l3) →
     is-prop (is-chain-sub-Poset S)
   is-prop-is-chain-sub-Poset = is-prop-is-chain-sub-Preorder (preorder-Poset X)
 
@@ -44,7 +44,7 @@ module _
   {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
   where
 
-  sub-preorder-chain-Poset : element-Poset X → UU-Prop l3
+  sub-preorder-chain-Poset : element-Poset X → Prop l3
   sub-preorder-chain-Poset =
     sub-preorder-chain-Preorder (preorder-Poset X) C
 
@@ -57,7 +57,7 @@ module _
   
   inclusion-chain-poset-Prop :
     {l3 l4 : Level} → chain-Poset l3 X → chain-Poset l4 X →
-    UU-Prop (l1 ⊔ l3 ⊔ l4)
+    Prop (l1 ⊔ l3 ⊔ l4)
   inclusion-chain-poset-Prop = inclusion-chain-preorder-Prop (preorder-Poset X)
 
   inclusion-chain-Poset :

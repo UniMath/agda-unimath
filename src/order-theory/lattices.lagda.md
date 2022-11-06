@@ -28,7 +28,7 @@ A lattice is a poset in which every pair of elements has a meet (a greatest lowe
 
 ```agda
 is-lattice-poset-Prop :
-  {l1 l2 : Level} (P : Poset l1 l2) → UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
 is-lattice-poset-Prop P =
   prod-Prop
     ( is-meet-semilattice-poset-Prop P)
@@ -54,7 +54,7 @@ module _
   element-Lattice : UU l1
   element-Lattice = element-Poset poset-Lattice
 
-  leq-lattice-Prop : (x y : element-Lattice) → UU-Prop l2
+  leq-lattice-Prop : (x y : element-Lattice) → Prop l2
   leq-lattice-Prop = leq-poset-Prop poset-Lattice
 
   leq-Lattice : (x y : element-Lattice) → UU l2
@@ -78,7 +78,7 @@ module _
   is-set-element-Lattice : is-set element-Lattice
   is-set-element-Lattice = is-set-element-Poset poset-Lattice
 
-  element-lattice-Set : UU-Set l1
+  element-lattice-Set : Set l1
   element-lattice-Set = element-poset-Set poset-Lattice
 
   is-lattice-poset-Lattice : is-lattice-Poset poset-Lattice

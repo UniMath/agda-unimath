@@ -7,25 +7,19 @@ title: Homomorphisms of semigroups
 
 module group-theory.homomorphisms-semigroups where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; map-inv-is-equiv)
-open import foundation.functions using (id; _∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (Id; refl; ap; _∙_)
-open import foundation.propositions using
-  ( UU-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-is-equiv;
-    is-prop-Π)
-open import foundation.sets using (Id-Prop; is-set; UU-Set)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; set-Semigroup; mul-Semigroup;
-    is-set-type-Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea
@@ -47,7 +41,7 @@ module _
   where
   
   preserves-mul-semigroup-Prop :
-    (type-Semigroup G → type-Semigroup H) → UU-Prop (l1 ⊔ l2)
+    (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
   preserves-mul-semigroup-Prop f =
     Π-Prop
       ( type-Semigroup G)
@@ -60,17 +54,41 @@ module _
               ( f (mul-Semigroup G x y))
               ( mul-Semigroup H (f x) (f y))))
 
+  preserves-mul-semigroup-Prop' :
+    (type-Semigroup G → type-Semigroup H) → Prop (l1 ⊔ l2)
+  preserves-mul-semigroup-Prop' f =
+    Π-Prop
+      ( type-Semigroup G)
+      ( λ x →
+        Π-Prop
+          ( type-Semigroup G)
+          ( λ y →
+            Id-Prop
+              ( set-Semigroup H)
+              ( f (mul-Semigroup' G x y))
+              ( mul-Semigroup H (f x) (f y))))
+              
   preserves-mul-Semigroup :
     (type-Semigroup G → type-Semigroup H) → UU (l1 ⊔ l2)
   preserves-mul-Semigroup f =
     type-Prop (preserves-mul-semigroup-Prop f)
 
-  abstract
-    is-prop-preserves-mul-Semigroup :
-      ( f : type-Semigroup G → type-Semigroup H) →
-      is-prop (preserves-mul-Semigroup f)
-    is-prop-preserves-mul-Semigroup f =
-      is-prop-type-Prop (preserves-mul-semigroup-Prop f)
+  preserves-mul-Semigroup' :
+    (type-Semigroup G → type-Semigroup H) → UU (l1 ⊔ l2)
+  preserves-mul-Semigroup' f =
+    type-Prop (preserves-mul-semigroup-Prop' f)
+
+  is-prop-preserves-mul-Semigroup :
+    (f : type-Semigroup G → type-Semigroup H) →
+    is-prop (preserves-mul-Semigroup f)
+  is-prop-preserves-mul-Semigroup f =
+    is-prop-type-Prop (preserves-mul-semigroup-Prop f)
+
+  is-prop-preserves-mul-Semigroup' :
+    (f : type-Semigroup G → type-Semigroup H) →
+    is-prop (preserves-mul-Semigroup' f)
+  is-prop-preserves-mul-Semigroup' f =
+    is-prop-type-Prop (preserves-mul-semigroup-Prop' f)
 
   type-hom-Semigroup : UU (l1 ⊔ l2)
   type-hom-Semigroup =
@@ -132,7 +150,7 @@ module _
             ( map-hom-Semigroup f x)
             ( map-hom-Semigroup g x)))
 
-  hom-Semigroup : UU-Set (l1 ⊔ l2)
+  hom-Semigroup : Set (l1 ⊔ l2)
   pr1 hom-Semigroup = type-hom-Semigroup
   pr2 hom-Semigroup = is-set-type-hom-Semigroup
 

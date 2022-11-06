@@ -16,7 +16,7 @@ open import foundation-core.identity-types using (_＝_; refl)
 open import foundation-core.universe-levels using (Level; UU)
 
 open import foundation.propositions using
-  ( UU-Prop; is-prop; is-prop-prod; is-prop-function-type; is-prop-type-Prop;
+  ( Prop; is-prop; is-prop-prod; is-prop-function-type; is-prop-type-Prop;
     is-equiv-is-prop; is-prop-type-equiv-Prop; type-Prop)
 ```
 
@@ -26,7 +26,7 @@ open import foundation.propositions using
 
 ```agda
 iff-eq :
-  {l1 : Level} {P Q : UU-Prop l1} → P ＝ Q → P ⇔ Q
+  {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
 ```
@@ -36,7 +36,7 @@ pr2 (iff-eq refl) = id
 ```agda
 abstract
   is-prop-iff :
-    {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → is-prop (P ⇔ Q)
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → is-prop (P ⇔ Q)
   is-prop-iff P Q =
     is-prop-prod
       ( is-prop-function-type (is-prop-type-Prop Q))
@@ -48,16 +48,16 @@ abstract
 ```agda
 abstract
   is-equiv-equiv-iff :
-    {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
     is-equiv (equiv-iff' P Q)
   is-equiv-equiv-iff P Q =
     is-equiv-is-prop
       ( is-prop-iff P Q)
       ( is-prop-type-equiv-Prop P Q)
-      ( iff-equiv P Q)
+      ( iff-equiv)
 
 equiv-equiv-iff :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) →
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   (P ⇔ Q) ≃ (type-Prop P ≃ type-Prop Q)
 pr1 (equiv-equiv-iff P Q) = equiv-iff' P Q
 pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
@@ -67,7 +67,7 @@ pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
 
 ```agda
 is-prop-logical-equivalence :
-  {l1 l2 : Level} (P : UU-Prop l1) (Q : UU-Prop l2) → is-prop (P ⇔ Q)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → is-prop (P ⇔ Q)
 is-prop-logical-equivalence P Q =
   is-prop-prod
     ( is-prop-function-type (is-prop-type-Prop Q))

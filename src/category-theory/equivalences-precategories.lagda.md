@@ -36,7 +36,9 @@ module _ {l1 l2 l3 l4}
       ( λ G →
         ( nat-iso-Precat C C
           ( comp-functor-Precat C D C G F)
-          ( id-functor-Precat C)) ×
+          ( id-functor-Precat C))) ×
+    Σ ( functor-Precat D C)
+      ( λ G → 
         ( nat-iso-Precat D D
           ( comp-functor-Precat D C D F G)
           ( id-functor-Precat D)))

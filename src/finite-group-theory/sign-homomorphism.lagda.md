@@ -36,8 +36,8 @@ open import foundation.embeddings using (equiv-ap-emb; map-emb)
 open import foundation.equality-dependent-pair-types using (pair-eq-Σ; eq-pair-Σ)
 open import foundation.equivalence-classes using
   ( equivalence-class; equivalence-class-Set; class;
-    is-in-subtype-equivalence-class; is-decidable-is-in-subtype-equivalence-class-is-decidable;
-    eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class)
+    is-in-equivalence-class;
+    eq-effective-quotient'; is-prop-is-in-equivalence-class)
 open import foundation.equivalences using
   ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
     right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
@@ -57,16 +57,14 @@ open import foundation.propositional-truncations using
     all-elements-equal-type-trunc-Prop)
 open import foundation.propositions using (eq-is-prop)
 open import foundation.raising-universe-levels using (raise-Set; equiv-raise; raise)
-open import foundation.sets using (Id-Prop; UU-Set; type-Set; is-prop-is-set)
+open import foundation.sets using (Id-Prop; Set; type-Set; is-prop-is-set)
 open import foundation.unit-type using (star)
 open import foundation.univalence using (equiv-eq; eq-equiv)
 open import foundation.universe-levels using (Level; lzero; lsuc; UU; _⊔_)
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
 open import group-theory.concrete-groups using
-  ( hom-Concrete-Group; classifying-type-Concrete-Group;
-    abstract-group-Concrete-Group; hom-group-hom-Concrete-Group;
-    map-hom-Concrete-Group)
+  ( classifying-type-Concrete-Group; abstract-group-Concrete-Group)
 open import group-theory.groups using (set-Group)
 open import group-theory.homomorphisms-generated-subgroups using
   ( restriction-generating-subset-Group)
@@ -75,7 +73,7 @@ open import group-theory.homomorphisms-groups using
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 open import group-theory.isomorphisms-groups using (hom-iso-Group; hom-inv-iso-Group)
 open import group-theory.symmetric-groups using
-  ( symmetric-Group; iso-symmetric-group-abstract-automorphism-group-Set)
+  ( symmetric-Group)
 
 open import univalent-combinatorics.2-element-decidable-subtypes using
   ( 2-Element-Decidable-Subtype; standard-2-Element-Decidable-Subtype)

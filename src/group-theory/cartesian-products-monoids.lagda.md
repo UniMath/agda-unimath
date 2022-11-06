@@ -33,7 +33,7 @@ module _
   semigroup-prod-Monoid =
     prod-Semigroup (semigroup-Monoid M) (semigroup-Monoid N)
 
-  set-prod-Monoid : UU-Set (l1 ⊔ l2)
+  set-prod-Monoid : Set (l1 ⊔ l2)
   set-prod-Monoid = set-Semigroup semigroup-prod-Monoid
 
   type-prod-Monoid : UU (l1 ⊔ l2)

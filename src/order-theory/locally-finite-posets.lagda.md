@@ -8,7 +8,7 @@ module order-theory.locally-finite-posets where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
+  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
 open import order-theory.finite-posets using (is-finite-poset-Prop)
@@ -27,7 +27,7 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
   
-  is-locally-finite-poset-Prop : UU-Prop (l1 ⊔ l2)
+  is-locally-finite-poset-Prop : Prop (l1 ⊔ l2)
   is-locally-finite-poset-Prop =
     Π-Prop
       ( element-Poset X)

@@ -18,8 +18,11 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.commuting-squares
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-equivalence-relations
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -28,24 +31,37 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
+open import foundation.functoriality-set-quotients
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.involutions
+open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-concrete-groups
+open import group-theory.homomorphisms-groups
+open import group-theory.loop-groups-sets
+open import group-theory.symmetric-groups
 
 open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.lists
@@ -103,10 +119,19 @@ module _
               ( ( inv (associative-comp-equiv (inv-equiv h) g (inv-equiv g))) ∙
                 ( ( ap (λ h' → h' ∘e inv-equiv h) (left-inverse-law-equiv g)) ∙
                   ( left-unit-law-equiv (inv-equiv h))))))))
+
+  is-decidable-sign-comp-Eq-Rel : (f g : Fin n ≃ type-UU-Fin n X) →
+    is-decidable (sim-Eq-Rel sign-comp-Eq-Rel f g)
+  is-decidable-sign-comp-Eq-Rel f g =
+    has-decidable-equality-is-finite
+      ( is-finite-Fin 2)
+      ( zero-Fin 1)
+      ( sign-homomorphism-Fin-two n X (f ∘e inv-equiv g))
+
   quotient-sign-comp : UU (lsuc lzero ⊔ l)
   quotient-sign-comp = equivalence-class sign-comp-Eq-Rel
 
-  quotient-sign-comp-Set : UU-Set (lsuc lzero ⊔ l)
+  quotient-sign-comp-Set : Set (lsuc lzero ⊔ l)
   quotient-sign-comp-Set = equivalence-class-Set sign-comp-Eq-Rel
 
 module _
@@ -117,116 +142,89 @@ module _
     lemma :
       Id
         ( inr star)
-        ( pr1
-          ( center
-            ( is-contr-parity-transposition-permutation
-              ( number-of-elements-count eX)
-              ( pair X (unit-trunc-Prop (equiv-count eX)))
-              ( equiv-count eX ∘e
-                inv-equiv
-                  (equiv-count eX ∘e
-                    transposition
-                      ( standard-2-Element-Decidable-Subtype
-                        ( has-decidable-equality-Fin (number-of-elements-count eX))
-                          ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))))
+        ( sign-homomorphism-Fin-two
+          ( number-of-elements-count eX)
+          ( X , unit-trunc-Prop (equiv-count eX))
+          ( equiv-count eX ∘e
+            inv-equiv
+              (equiv-count eX ∘e
+                transposition
+                  ( standard-2-Element-Decidable-Subtype
+                    ( has-decidable-equality-Fin (number-of-elements-count eX))
+                    ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))
     lemma =
-      ap pr1
-        { x =
-          pair
-            ( inr star)
-            ( unit-trunc-Prop
-              ( pair
-                ( in-list
-                  ( transposition-conjugation-equiv
-                    ( Fin (number-of-elements-count eX))
-                    ( X)
-                    ( equiv-count eX)
-                    ( standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-Fin (number-of-elements-count eX))
-                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
-                ( pair
-                  ( refl)
-                  ( ( ap
-                    ( λ e → equiv-count eX ∘e e)
-                    ( distributive-inv-comp-equiv
-                      ( transposition
-                        ( standard-2-Element-Decidable-Subtype
-                          ( has-decidable-equality-Fin (number-of-elements-count eX))
-                          ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
-                      ( equiv-count eX))) ∙
-                      ( ( ap
-                        ( λ e → equiv-count eX ∘e (e ∘e inv-equiv (equiv-count eX)))
-                        ( ( own-inverse-is-involution
-                          ( is-involution-map-transposition
-                            ( standard-2-Element-Decidable-Subtype
-                              ( has-decidable-equality-Fin (number-of-elements-count eX))
-                              ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
-                          ( inv
-                            ( right-unit-law-equiv
-                              ( transposition
-                                ( standard-2-Element-Decidable-Subtype
-                                  ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))) ∙
-                          ( ( ap
-                            ( λ h → equiv-count eX ∘e (h ∘e inv-equiv (equiv-count eX)))
-                            ( ( right-unit-law-equiv
-                              ( transposition
-                                ( standard-2-Element-Decidable-Subtype
-                                  ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
-                              ( inv
-                                ( right-unit-law-equiv
-                                  ( transposition
-                                    ( standard-2-Element-Decidable-Subtype
-                                      ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))) ∙
-                            ( inv
-                              ( associative-comp-equiv
-                                ( inv-equiv (equiv-count eX))
-                                ( permutation-list-transpositions
-                                  ( in-list
-                                    ( standard-2-Element-Decidable-Subtype
-                                      ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
-                                ( equiv-count eX)) ∙
-                              ( inv
-                                ( eq-htpy-equiv
-                                  ( correct-transposition-conjugation-equiv-list
-                                    ( Fin (number-of-elements-count eX))
-                                    ( X)
-                                    ( equiv-count eX)
-                                    ( in-list
-                                      ( standard-2-Element-Decidable-Subtype
-                                        ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))))))))))}
-        { y =
-          center
-            ( is-contr-parity-transposition-permutation
-              ( number-of-elements-count eX)
-              ( pair X (unit-trunc-Prop (equiv-count eX)))
-              ( equiv-count eX ∘e
-                inv-equiv
-                  ( equiv-count eX ∘e
-                    transposition
-                      ( standard-2-Element-Decidable-Subtype
-                        ( has-decidable-equality-Fin (number-of-elements-count eX))
-                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))}
-        ( eq-is-contr
-          ( is-contr-parity-transposition-permutation
+      ( inv
+        ( eq-sign-homomorphism-Fin-two-transposition
+          ( number-of-elements-count eX)
+          ( Fin (number-of-elements-count eX) , (unit-trunc-Prop id-equiv))
+          ( standard-2-Element-Decidable-Subtype
+            ( has-decidable-equality-Fin (number-of-elements-count eX))
+            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
+        ( ( inv
+          ( preserves-conjugation-sign-homomorphism-Fin-two
             ( number-of-elements-count eX)
-            ( pair X (unit-trunc-Prop (equiv-count eX)))
-            ( equiv-count eX ∘e
-              inv-equiv
-                ( equiv-count eX ∘e
-                  transposition
+            ( Fin (pr1 eX) , unit-trunc-Prop id-equiv)
+            ( X , (unit-trunc-Prop (equiv-count eX)))
+            ( transposition
+              ( standard-2-Element-Decidable-Subtype
+                ( has-decidable-equality-Fin (pr1 eX))
+                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (pr1 eX) ineq)))))
+            ( equiv-count eX))) ∙
+          ( ap
+            ( λ h →
+              sign-homomorphism-Fin-two
+                ( number-of-elements-count eX)
+                ( X , unit-trunc-Prop (equiv-count eX))
+                ( equiv-count eX ∘e h))
+            ( ( ap (λ h → h ∘e inv-equiv (equiv-count eX))
+              ( inv
+                ( own-inverse-is-involution
+                  ( is-involution-map-transposition
                     ( standard-2-Element-Decidable-Subtype
                       ( has-decidable-equality-Fin (number-of-elements-count eX))
-                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))
+                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (pr1 eX) ineq)))))))) ∙
+              ( inv
+                ( distributive-inv-comp-equiv
+                  ( transposition
+                    ( standard-2-Element-Decidable-Subtype
+                      ( has-decidable-equality-Fin (number-of-elements-count eX))
+                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+                  ( equiv-count eX))))))
+
+  not-sign-comp-transposition-count :
+    (Y : 2-Element-Decidable-Subtype l X) →
+    ¬ ( sim-Eq-Rel
+      ( sign-comp-Eq-Rel
+        ( number-of-elements-count eX)
+        ( pair X (unit-trunc-Prop (equiv-count eX))))
+      ( transposition Y ∘e equiv-count eX)
+      ( transposition Y ∘e (transposition Y ∘e equiv-count eX)))
+  not-sign-comp-transposition-count Y P =
+    neq-inl-inr
+      ( P ∙
+        ( ( ap
+          ( sign-homomorphism-Fin-two
+            ( number-of-elements-count eX)
+            ( X , unit-trunc-Prop (equiv-count eX)))
+          ( ( ap
+            ( λ h → ((transposition Y ∘e equiv-count eX) ∘e h))
+            ( distributive-inv-comp-equiv
+              ( transposition Y ∘e equiv-count eX)
+              ( transposition Y))) ∙
+            ( ( compose-equiv-compose-inv-equiv
+              ( transposition Y ∘e equiv-count eX)
+              ( inv-equiv (transposition Y))) ∙
+              ( own-inverse-is-involution
+                ( is-involution-map-transposition Y))))) ∙
+          ( eq-sign-homomorphism-Fin-two-transposition
+            ( number-of-elements-count eX)
+            ( X , unit-trunc-Prop (equiv-count eX))
+            ( Y))))
 
   inv-Fin-2-quotient-sign-comp-count :
     ( T : quotient-sign-comp (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))) →
     is-decidable
-      ( is-in-subtype-equivalence-class
+      ( is-in-equivalence-class
         ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
         ( equiv-count eX)) →
@@ -252,7 +250,7 @@ module _
     is-equiv-has-inverse
       (λ T →
         inv-Fin-2-quotient-sign-comp-count T
-          ( is-decidable-is-in-subtype-equivalence-class-is-decidable
+          ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
             ( λ a b →
               has-decidable-equality-Fin 2
@@ -264,7 +262,7 @@ module _
             ( equiv-count eX)))
       ( λ T →
         retr-Fin-2-quotient-sign-comp-count T
-          ( is-decidable-is-in-subtype-equivalence-class-is-decidable
+          ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -278,7 +276,7 @@ module _
             ( equiv-count eX)))
       ( λ k →
         sec-Fin-2-quotient-sign-comp-count k
-          ( is-decidable-is-in-subtype-equivalence-class-is-decidable
+          ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -295,7 +293,7 @@ module _
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX)))) →
-      ¬ ( is-in-subtype-equivalence-class
+      ¬ ( is-in-equivalence-class
         ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
         ( equiv-count eX)) →
@@ -312,7 +310,7 @@ module _
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX)))
           ( f ∘e inv-equiv (equiv-count eX))) →
-      is-in-subtype-equivalence-class
+      is-in-equivalence-class
         ( sign-comp-Eq-Rel
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -328,7 +326,7 @@ module _
         ( NP
           ( tr
             ( λ x →
-              is-in-subtype-equivalence-class
+              is-in-equivalence-class
                 ( sign-comp-Eq-Rel
                   ( number-of-elements-count eX)
                   ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -339,7 +337,7 @@ module _
     cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inr star) q =
       tr
         ( λ x →
-          is-in-subtype-equivalence-class
+          is-in-equivalence-class
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -416,7 +414,7 @@ module _
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX)))) →
       ( H : is-decidable
-        (is-in-subtype-equivalence-class
+        (is-in-equivalence-class
           ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
           ( T)
           ( equiv-count eX))) →
@@ -442,7 +440,7 @@ module _
         ( apply-universal-property-trunc-Prop
           ( pr2 T)
           ( pair
-            ( is-in-subtype-equivalence-class
+            ( is-in-equivalence-class
               ( sign-comp-Eq-Rel
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -453,7 +451,7 @@ module _
                     ( has-decidable-equality-Fin
                       ( number-of-elements-count eX))
                       ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
-            ( is-prop-is-in-subtype-equivalence-class
+            ( is-prop-is-in-equivalence-class
               ( sign-comp-Eq-Rel
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -465,20 +463,23 @@ module _
                       ( number-of-elements-count eX))
                       ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))
           ( λ (pair t p) →
-            cases-retr-Fin-2-quotient-sign-comp-count
-              ( T)
-              ( NP)
-              ( t)
-              ( eq-pair-Σ
-                ( p)
-                ( all-elements-equal-type-trunc-Prop _ (pr2 T)))
-              ( sign-homomorphism-Fin-two (number-of-elements-count eX)
+            cases-retr-Fin-2-quotient-sign-comp-count T NP t
+              ( inv
+                ( eq-has-same-elements-equivalence-class
+                  ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
+                  ( T)
+                  ( class
+                    ( sign-comp-Eq-Rel (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))))
+                    ( t))
+                  ( p)))
+              ( sign-homomorphism-Fin-two
+                ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX)))
                 ( t ∘e inv-equiv (equiv-count eX)))
               ( refl)))
     sec-Fin-2-quotient-sign-comp-count : (k : Fin 2) →
       ( D : is-decidable
-        ( is-in-subtype-equivalence-class
+        ( is-in-equivalence-class
           ( sign-comp-Eq-Rel
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))))
@@ -545,20 +546,20 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
   where
   
-  equiv-Fin-2-quotient-sign-comp-equiv-Fin-n : (h : Fin n ≃ type-UU-Fin n X) →
+  equiv-fin-2-quotient-sign-comp-equiv-Fin : (h : Fin n ≃ type-UU-Fin n X) →
     ( Fin 2 ≃ quotient-sign-comp n X)
-  equiv-Fin-2-quotient-sign-comp-equiv-Fin-n h =
+  equiv-fin-2-quotient-sign-comp-equiv-Fin h =
     tr
       ( λ e → Fin 2 ≃ quotient-sign-comp n (pair (type-UU-Fin n X) e))
       ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
       ( equiv-Fin-2-quotient-sign-comp-count (pair n h) ineq)
     
   abstract
-    mere-equiv-Fin-2-quotient-sign-comp :
+    mere-equiv-fin-2-quotient-sign-comp :
       mere-equiv (Fin 2) (quotient-sign-comp n X)
-    mere-equiv-Fin-2-quotient-sign-comp =
+    mere-equiv-fin-2-quotient-sign-comp =
       map-trunc-Prop
-        ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n)
+        ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
         ( has-cardinality-type-UU-Fin n X)
 
 module _
@@ -575,7 +576,7 @@ module _
   pr1 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
     quotient-sign-comp (succ-ℕ (succ-ℕ n)) X 
   pr2 (map-simpson-delooping-sign (succ-ℕ (succ-ℕ n)) X) =
-    mere-equiv-Fin-2-quotient-sign-comp (succ-ℕ (succ-ℕ n)) X star
+    mere-equiv-fin-2-quotient-sign-comp (succ-ℕ (succ-ℕ n)) X star
 
   simpson-delooping-sign : (n : ℕ) →
     hom-Concrete-Group (UU-Fin-Group l n) (UU-Fin-Group (lsuc lzero ⊔ l) 2)
@@ -592,10 +593,703 @@ module _
         ( raise (lsuc lzero ⊔ l) (Fin 2))
         ( ( equiv-raise (lsuc lzero ⊔ l) (Fin 2)) ∘e
           ( inv-equiv
-            ( equiv-Fin-2-quotient-sign-comp-equiv-Fin-n
+            ( equiv-fin-2-quotient-sign-comp-equiv-Fin
               ( succ-ℕ (succ-ℕ n))
               ( Fin-UU-Fin l (succ-ℕ (succ-ℕ n)))
               ( star)
               ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
       ( eq-is-prop is-prop-type-trunc-Prop)
+```
+
+```agda
+module _
+  {l : Level} (n : ℕ)
+  where
+
+  map-simpson-comp-equiv : (X X' : UU-Fin l n) →
+    (type-UU-Fin n X ≃ type-UU-Fin n X') → (Fin n ≃ type-UU-Fin n X) →
+    (Fin n ≃ type-UU-Fin n X')
+  map-simpson-comp-equiv X X' e f = e ∘e f
+
+  simpson-comp-equiv : (X X' : UU-Fin l n) →
+    (type-UU-Fin n X ≃ type-UU-Fin n X') →
+    (Fin n ≃ type-UU-Fin n X) ≃ (Fin n ≃ type-UU-Fin n X')
+  pr1 (simpson-comp-equiv X X' e) = map-simpson-comp-equiv X X' e
+  pr2 (simpson-comp-equiv X X' e) =
+    is-equiv-has-inverse
+      ( map-simpson-comp-equiv X' X (inv-equiv e))
+      ( λ f →
+        ( inv (associative-comp-equiv f (inv-equiv e) e)) ∙
+          ( ap (λ h → h ∘e f) (right-inverse-law-equiv e) ∙ left-unit-law-equiv f))
+      ( λ f →
+        ( inv (associative-comp-equiv f e (inv-equiv e))) ∙
+          ( ap (λ h → h ∘e f) (left-inverse-law-equiv e) ∙ left-unit-law-equiv f))
+
+  abstract
+    preserves-id-equiv-simpson-comp-equiv : (X : UU-Fin l n) →
+      Id (simpson-comp-equiv X X id-equiv) id-equiv
+    preserves-id-equiv-simpson-comp-equiv X =
+      eq-htpy-equiv (λ f → left-unit-law-equiv f)
+
+    preserves-comp-simpson-comp-equiv :
+      ( X Y Z : UU-Fin l n) (e : type-UU-Fin n X ≃ type-UU-Fin n Y) →
+      ( f : type-UU-Fin n Y ≃ type-UU-Fin n Z) →
+      Id
+        ( simpson-comp-equiv X Z (f ∘e e))
+        ( ( simpson-comp-equiv Y Z f) ∘e ( simpson-comp-equiv X Y e))
+    preserves-comp-simpson-comp-equiv X Y Z e f =
+      eq-htpy-equiv
+        ( λ h → associative-comp-equiv h e f)
+
+  private
+    lemma-sign-comp :
+      (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
+      (f f' : (Fin n ≃ type-UU-Fin n X)) →
+      Id
+        ( sign-homomorphism-Fin-two n X (f ∘e inv-equiv f'))
+        ( sign-homomorphism-Fin-two n X'
+          ( ( map-simpson-comp-equiv X X' e f) ∘e
+            ( inv-equiv (map-simpson-comp-equiv X X' e f'))))
+    lemma-sign-comp X X' e f f' = 
+      inv
+        ( preserves-conjugation-sign-homomorphism-Fin-two n X X'
+          ( f ∘e inv-equiv f')
+          ( e)) ∙
+        ( ap
+          ( sign-homomorphism-Fin-two n X')
+          ( ( ap
+            ( λ h → e ∘e h)
+            ( ( associative-comp-equiv ( inv-equiv e) (inv-equiv f') f) ∙
+              ( ap (λ h → f ∘e h) (inv (distributive-inv-comp-equiv f' e)))) ∙
+            ( inv
+              ( associative-comp-equiv
+                ( inv-equiv (map-simpson-comp-equiv X X' e f'))
+                ( f)
+                ( e))))))
+
+  preserves-sign-comp-simpson-comp-equiv :
+    (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
+    (f f' : (Fin n ≃ type-UU-Fin n X)) →
+    ( sim-Eq-Rel (sign-comp-Eq-Rel n X) f f' ↔
+      sim-Eq-Rel
+        ( sign-comp-Eq-Rel n X')
+        ( map-simpson-comp-equiv X X' e f)
+        ( map-simpson-comp-equiv X X' e f'))
+  pr1 (preserves-sign-comp-simpson-comp-equiv X X' e f f') P =
+    P ∙ lemma-sign-comp X X' e f f'
+  pr2 (preserves-sign-comp-simpson-comp-equiv X X' e f f') P =
+    P ∙ inv (lemma-sign-comp X X' e f f')
+```
+
+```agda
+module _
+  {l : Level}
+  where
+
+  private
+    raise-UU-Fin-Fin : (n : ℕ) → UU-Fin l n
+    pr1 (raise-UU-Fin-Fin n) = raise l (Fin n)
+    pr2 (raise-UU-Fin-Fin n) = unit-trunc-Prop (equiv-raise l (Fin n))
+
+    simpson-comp-loop-Fin : (n : ℕ) →
+      type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n)))) →
+      ( ( Fin (succ-ℕ (succ-ℕ n)) ≃
+          ( type-UU-Fin (succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))) ≃
+        ( Fin (succ-ℕ (succ-ℕ n)) ≃
+          ( type-UU-Fin (succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))))
+    simpson-comp-loop-Fin n p =
+      simpson-comp-equiv
+        ( succ-ℕ (succ-ℕ n))
+        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+        ( map-hom-symmetric-group-loop-group-Set
+          ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+          ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+          ( p))
+
+    map-simpson-comp-loop-Fin : (n : ℕ) →
+      type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n)))) →
+      ( Fin (succ-ℕ (succ-ℕ n)) ≃
+        ( type-UU-Fin (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))) →
+      ( Fin (succ-ℕ (succ-ℕ n)) ≃
+        ( type-UU-Fin (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
+    map-simpson-comp-loop-Fin n p =
+      map-equiv (simpson-comp-loop-Fin n p)
+
+    quotient-sign-comp-set-Fin : (n : ℕ) → Set (lsuc lzero ⊔ l)
+    quotient-sign-comp-set-Fin n =
+      quotient-sign-comp-Set n (raise-UU-Fin-Fin n)
+
+    quotient-map-sign-comp-Fin : (n : ℕ) →
+      ( Fin n ≃ type-UU-Fin n (raise-UU-Fin-Fin n)) →
+      ( type-Set (quotient-sign-comp-set-Fin n))
+    quotient-map-sign-comp-Fin n =
+      class
+        ( sign-comp-Eq-Rel n (raise-UU-Fin-Fin n))
+
+    quotient-reflecting-map-sign-comp-Fin : (n : ℕ) →
+      reflecting-map-Eq-Rel
+        ( sign-comp-Eq-Rel n (raise-UU-Fin-Fin n))
+        ( type-Set (quotient-sign-comp-set-Fin n))
+    quotient-reflecting-map-sign-comp-Fin n =
+      quotient-reflecting-map-equivalence-class
+        ( sign-comp-Eq-Rel n (raise-UU-Fin-Fin n))
+
+    sign-comp-aut-succ-succ-Fin : (n : ℕ) →
+      type-Group (symmetric-Group (raise-Fin-Set l (succ-ℕ (succ-ℕ n)))) →
+      ( Fin (succ-ℕ (succ-ℕ n)) ≃
+        ( type-UU-Fin (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
+    sign-comp-aut-succ-succ-Fin n h =
+      h ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))
+
+  map-simpson-delooping-sign-loop : (n : ℕ) (X Y : UU l) →
+    (eX : mere-equiv (Fin (succ-ℕ (succ-ℕ n))) X) →
+    (eY : mere-equiv (Fin (succ-ℕ (succ-ℕ n))) Y) →
+    Id X Y →
+    Id
+      ( quotient-sign-comp (succ-ℕ (succ-ℕ n)) (pair X eX))
+      ( quotient-sign-comp (succ-ℕ (succ-ℕ n)) (pair Y eY))
+  map-simpson-delooping-sign-loop n X Y eX eY p =
+    ap (quotient-sign-comp (succ-ℕ (succ-ℕ n))) (eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))
+
+  private
+    map-simpson-delooping-sign-loop-Fin : (n : ℕ) →
+      type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n)))) →
+      type-Group (loop-group-Set (quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n))))
+    map-simpson-delooping-sign-loop-Fin n =
+      map-simpson-delooping-sign-loop n
+        ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+        ( raise l (Fin (succ-ℕ (succ-ℕ n))))
+        ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+        ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+
+  simpson-delooping-sign-loop : (n : ℕ) →
+    type-hom-Group
+      ( loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
+      ( loop-group-Set (quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n))))
+  pr1 (simpson-delooping-sign-loop n) = map-simpson-delooping-sign-loop-Fin n
+  pr2 (simpson-delooping-sign-loop n) p q =
+    ( ap
+      ( ap (quotient-sign-comp (succ-ℕ (succ-ℕ n))))
+      ( ( ap
+        ( λ w → eq-pair-Σ (p ∙ q) w)
+        ( eq-is-prop
+          ( is-trunc-Id
+            ( is-prop-type-trunc-Prop _ (unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))) ∙
+        ( inv
+          ( comp-eq-pair-Σ
+            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+            ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+            ( p)
+            ( q)
+            ( eq-is-prop is-prop-type-trunc-Prop)
+            ( eq-is-prop is-prop-type-trunc-Prop))))) ∙
+      ( ap-concat
+        ( quotient-sign-comp (succ-ℕ (succ-ℕ n)))
+        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))
+        ( eq-pair-Σ q (eq-is-prop is-prop-type-trunc-Prop)))
+
+  abstract
+    coherence-square-map-simpson-delooping-sign-loop-Set : (n : ℕ) →
+      ( X Y : UU l) ( eX : mere-equiv (Fin (succ-ℕ (succ-ℕ n))) X) →
+      ( eY : mere-equiv (Fin (succ-ℕ (succ-ℕ n))) Y) →
+      ( p : Id X Y) →
+      ( Id (tr (λ v → mere-equiv (Fin (succ-ℕ (succ-ℕ n))) v) p eX) eY) →
+      ( sX : is-set X) ( sY : is-set Y) →
+      coherence-square
+        ( map-simpson-comp-equiv
+          ( succ-ℕ (succ-ℕ n))
+          ( pair Y eY)
+          ( pair X eX)
+          ( map-hom-symmetric-group-loop-group-Set
+            ( pair X sX)
+            ( pair Y sY)
+            ( p)))
+        ( class
+          ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n)) (pair Y eY)))
+        ( class
+          ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n)) (pair X eX)))
+        ( map-equiv
+          ( map-hom-symmetric-group-loop-group-Set
+            ( quotient-sign-comp-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
+            ( quotient-sign-comp-Set (succ-ℕ (succ-ℕ n)) (pair Y eY))
+            ( map-simpson-delooping-sign-loop n X Y eX eY p)))
+    coherence-square-map-simpson-delooping-sign-loop-Set n X .X eX .eX refl refl sX sY x =
+      ( ap
+        ( λ w →
+          map-equiv
+            ( map-hom-symmetric-group-loop-group-Set
+              ( quotient-sign-comp-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
+              ( quotient-sign-comp-Set (succ-ℕ (succ-ℕ n)) (pair X eX))
+              ( w))
+            ( class
+              ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n)) (pair X eX))
+              ( x)))
+        ( ap
+          ( λ w → ap (quotient-sign-comp (succ-ℕ (succ-ℕ n))) (eq-pair-Σ refl w))
+          { x = eq-is-prop is-prop-type-trunc-Prop}
+          ( eq-is-prop
+            ( is-trunc-Id
+              ( is-prop-type-trunc-Prop
+                ( tr (mere-equiv (Fin (succ-ℕ (succ-ℕ n)))) refl eX)
+                ( eX)))))) ∙
+        ap
+          ( class
+            ( sign-comp-Eq-Rel
+              ( succ-ℕ (succ-ℕ n))
+              ( pair X (tr (mere-equiv (Fin (succ-ℕ (succ-ℕ n)))) refl eX))))
+          ( inv
+            ( htpy-eq-equiv
+              ( preserves-id-equiv-simpson-comp-equiv (succ-ℕ (succ-ℕ n)) (pair X eX))
+              ( x)))
+
+  coherence-square-map-simpson-delooping-sign-loop-Fin : (n : ℕ) 
+    ( p : type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))) →
+    coherence-square
+      ( map-simpson-comp-loop-Fin n p)
+      ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+      ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+      ( map-equiv
+        ( map-hom-symmetric-group-loop-group-Set
+          ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+          ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+          ( map-simpson-delooping-sign-loop-Fin n p)))
+  coherence-square-map-simpson-delooping-sign-loop-Fin n p =
+    coherence-square-map-simpson-delooping-sign-loop-Set n
+      ( raise l (Fin (succ-ℕ (succ-ℕ n)))) 
+      ( raise l (Fin (succ-ℕ (succ-ℕ n)))) 
+      ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+      ( unit-trunc-Prop (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+      ( p)
+      ( eq-is-prop is-prop-type-trunc-Prop)
+      ( is-set-type-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
+      ( is-set-type-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))
+
+  private
+    is-contr-equiv-simpson-comp : (n : ℕ) →
+      ( p : type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))) →
+      is-contr
+        ( Σ
+          ( type-Group
+            ( symmetric-Group (quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))))
+          ( λ h' →
+            coherence-square
+              ( map-simpson-comp-loop-Fin n p)
+              ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+              ( map-reflecting-map-Eq-Rel
+                ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+                  ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+                (quotient-reflecting-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))))
+              ( map-equiv h')))
+    is-contr-equiv-simpson-comp n p =
+      unique-equiv-is-set-quotient
+        ( sign-comp-Eq-Rel
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+        ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+        ( quotient-reflecting-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+        ( sign-comp-Eq-Rel
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+        ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+        ( quotient-reflecting-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+        ( is-set-quotient-equivalence-class
+          ( sign-comp-Eq-Rel
+            ( succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
+        ( is-set-quotient-equivalence-class
+          ( sign-comp-Eq-Rel
+            ( succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
+        ( simpson-comp-loop-Fin n p)
+        ( λ {x} {y} →
+          preserves-sign-comp-simpson-comp-equiv
+            ( succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( p))
+            ( x)
+            ( y))
+
+  abstract
+    eq-simpson-delooping-sign-loop-equiv-is-set-quotient : (n : ℕ) →
+      ( p : type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))) →
+      Id 
+        ( map-hom-symmetric-group-loop-group-Set
+          ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+          ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+          ( map-simpson-delooping-sign-loop-Fin n p))
+        ( pr1 (center (is-contr-equiv-simpson-comp n p)))
+    eq-simpson-delooping-sign-loop-equiv-is-set-quotient n p =
+      ap pr1
+        { x =
+          pair
+            ( map-hom-symmetric-group-loop-group-Set
+              ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( map-simpson-delooping-sign-loop-Fin n p))
+            ( coherence-square-map-simpson-delooping-sign-loop-Fin n p)}
+        { y = center (is-contr-equiv-simpson-comp n p)}
+        ( eq-is-contr (is-contr-equiv-simpson-comp n p))
+
+  cases-map-simpson-aut-Fin : (n : ℕ) →
+    ( h : type-Group (symmetric-Group (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))) →
+    ( is-decidable
+      ( sim-Eq-Rel
+        ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+        ( sign-comp-aut-succ-succ-Fin n h)
+        ( map-simpson-comp-equiv (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( h)
+          ( sign-comp-aut-succ-succ-Fin n h)))) →
+    type-Group
+      ( symmetric-Group (quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n))))
+  cases-map-simpson-aut-Fin n h (inl D) = id-equiv
+  cases-map-simpson-aut-Fin n h (inr ND) =
+    ( equiv-fin-2-quotient-sign-comp-equiv-Fin (succ-ℕ (succ-ℕ n))
+      ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+      ( star)
+      ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))) ∘e
+      ( ( equiv-succ-Fin 2) ∘e
+        ( inv-equiv
+          ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+            ( succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( star)
+            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))))
+
+  map-simpson-aut-Fin : (n : ℕ) →
+    type-Group (symmetric-Group (raise-Fin-Set l (succ-ℕ (succ-ℕ n)))) → 
+    type-Group
+      ( symmetric-Group (quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n))))
+  map-simpson-aut-Fin n h =
+    cases-map-simpson-aut-Fin n h
+      ( is-decidable-sign-comp-Eq-Rel
+        ( succ-ℕ (succ-ℕ n))
+        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+        ( sign-comp-aut-succ-succ-Fin n h)
+        ( map-simpson-comp-equiv (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( h)
+          ( sign-comp-aut-succ-succ-Fin n h)))
+
+  eq-map-simpson-aut-fin-transposition : (n : ℕ) →
+    ( Y : 2-Element-Decidable-Subtype l (raise l (Fin (succ-ℕ (succ-ℕ n))))) →
+    Id
+      ( map-simpson-aut-Fin n (transposition Y))
+      ( ( equiv-fin-2-quotient-sign-comp-equiv-Fin (succ-ℕ (succ-ℕ n))
+        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+        ( star)
+        ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))) ∘e
+        ( ( equiv-succ-Fin 2) ∘e
+          ( inv-equiv
+            ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+              ( succ-ℕ (succ-ℕ n))
+              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+              ( star)
+              ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))))
+  eq-map-simpson-aut-fin-transposition n Y =
+    ap
+      ( cases-map-simpson-aut-Fin n (transposition Y))
+      { x =
+        is-decidable-sign-comp-Eq-Rel
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( sign-comp-aut-succ-succ-Fin n (transposition Y))
+          ( map-simpson-comp-equiv (succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( transposition Y)
+            ( sign-comp-aut-succ-succ-Fin n (transposition Y)))}
+      { y =
+        inr
+          ( not-sign-comp-transposition-count
+            ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+            ( star)
+            ( Y))}
+      ( eq-is-prop
+        ( is-prop-is-decidable
+          ( is-prop-sim-Eq-Rel
+            ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+            ( sign-comp-aut-succ-succ-Fin n (transposition Y))
+            ( map-simpson-comp-equiv (succ-ℕ (succ-ℕ n))
+              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+              ( transposition Y)
+              ( sign-comp-aut-succ-succ-Fin n (transposition Y))))))
+
+  cases-eq-map-simpson-aut-Fin : (n : ℕ) →
+    ( p : type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))) →
+    ( D : is-decidable
+      ( sim-Eq-Rel
+        ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+        ( sign-comp-aut-succ-succ-Fin n
+          ( map-hom-symmetric-group-loop-group-Set
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( p)))
+        ( map-simpson-comp-loop-Fin n p
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( p)))))) →
+    ( k k' : Fin 2) →
+    Id
+      ( map-inv-equiv
+        ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( star)
+          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+        ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( p)))))
+      ( k) →
+    Id
+      ( map-inv-equiv
+        ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( star)
+          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+        ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+          ( map-simpson-comp-loop-Fin n p
+            ( sign-comp-aut-succ-succ-Fin n
+              ( map-hom-symmetric-group-loop-group-Set
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( p))))))
+      ( k') →
+    Id
+      ( map-equiv
+        ( cases-map-simpson-aut-Fin n
+          ( map-hom-symmetric-group-loop-group-Set
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( p))
+          ( D))
+        ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( p)))))
+      ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+        ( map-simpson-comp-loop-Fin n p
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( p)))))
+  cases-eq-map-simpson-aut-Fin n p (inl D) k k' q r =
+    reflects-map-reflecting-map-Eq-Rel
+      ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+      ( quotient-reflecting-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+      ( D)
+  cases-eq-map-simpson-aut-Fin n p (inr ND) (inl (inr star)) (inl (inr star)) q r =
+    ex-falso
+      ( ND
+        ( map-equiv
+          ( is-effective-is-set-quotient
+            ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+            ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+            ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+            ( reflects-map-reflecting-map-Eq-Rel
+              ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+              ( quotient-reflecting-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))))
+            ( is-set-quotient-equivalence-class
+              ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
+            ( sign-comp-aut-succ-succ-Fin n
+              ( map-hom-symmetric-group-loop-group-Set
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( p)))
+            ( map-simpson-comp-loop-Fin n p
+              ( sign-comp-aut-succ-succ-Fin n
+                ( map-hom-symmetric-group-loop-group-Set
+                  ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                  ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                  ( p)))))
+          ( is-injective-map-equiv
+            ( inv-equiv
+              ( equiv-fin-2-quotient-sign-comp-equiv-Fin (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                ( star)
+                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+            ( q ∙ inv r))))
+  cases-eq-map-simpson-aut-Fin n p (inr ND) (inl (inr star)) (inr star) q r =
+    ( ap
+      ( map-equiv
+        ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( star)
+          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+      ( ( ap
+        ( map-equiv (equiv-succ-Fin 2))
+        ( q)) ∙
+        ( inv r))) ∙
+       ap
+        ( λ e →
+          map-equiv e
+            ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+              ( map-simpson-comp-loop-Fin n p
+                ( sign-comp-aut-succ-succ-Fin n
+                  ( map-hom-symmetric-group-loop-group-Set
+                    ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                    ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                    ( p))))))
+        ( right-inverse-law-equiv
+          ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+            ( succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( star)
+            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+  cases-eq-map-simpson-aut-Fin n p (inr ND) (inr star) (inl (inr star)) q r =
+    ( ap
+      ( map-equiv
+        ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( star)
+          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+      ( ( ap
+        ( map-equiv (equiv-succ-Fin 2))
+        ( q)) ∙
+        ( inv r))) ∙
+       ap
+        ( λ e →
+          map-equiv e
+            ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+              ( map-simpson-comp-loop-Fin n p
+                ( sign-comp-aut-succ-succ-Fin n
+                  ( map-hom-symmetric-group-loop-group-Set
+                    ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                    ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                    ( p))))))
+        ( right-inverse-law-equiv
+          ( equiv-fin-2-quotient-sign-comp-equiv-Fin
+            ( succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( star)
+            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+  cases-eq-map-simpson-aut-Fin n p (inr ND) (inr star) (inr star) q r =
+    ex-falso
+      ( ND
+        ( map-equiv
+          ( is-effective-is-set-quotient
+            ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+              ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+            ( quotient-sign-comp-set-Fin (succ-ℕ (succ-ℕ n)))
+            ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n)))
+            ( reflects-map-reflecting-map-Eq-Rel
+              ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
+              ( quotient-reflecting-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))))
+            ( is-set-quotient-equivalence-class
+              ( sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
+            ( sign-comp-aut-succ-succ-Fin n
+              ( map-hom-symmetric-group-loop-group-Set
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( p)))
+            ( map-simpson-comp-loop-Fin n p
+              ( sign-comp-aut-succ-succ-Fin n
+                ( map-hom-symmetric-group-loop-group-Set
+                  ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                  ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                  ( p)))))
+          ( is-injective-map-equiv
+            ( inv-equiv
+              ( equiv-fin-2-quotient-sign-comp-equiv-Fin (succ-ℕ (succ-ℕ n))
+                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                ( star)
+                ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+            ( q ∙ inv r))))
+
+  eq-map-simpson-aut-Fin : (n : ℕ) →
+    ( p : type-Group (loop-group-Set (raise-Fin-Set l (succ-ℕ (succ-ℕ n))))) →
+    Id
+      ( map-equiv
+        ( map-simpson-aut-Fin n
+          ( map-hom-symmetric-group-loop-group-Set
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( p)))
+        ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l(succ-ℕ (succ-ℕ n)))
+              ( p)))))
+      ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+        ( map-simpson-comp-loop-Fin n p
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+              ( p)))))
+  eq-map-simpson-aut-Fin n p =
+     cases-eq-map-simpson-aut-Fin n p
+      ( is-decidable-sign-comp-Eq-Rel (succ-ℕ (succ-ℕ n))
+        ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+        ( sign-comp-aut-succ-succ-Fin n
+          ( map-hom-symmetric-group-loop-group-Set
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( p)))
+        ( map-simpson-comp-loop-Fin n p
+          ( sign-comp-aut-succ-succ-Fin n
+            ( map-hom-symmetric-group-loop-group-Set
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+            ( p)))))
+        ( map-inv-equiv
+          ( equiv-fin-2-quotient-sign-comp-equiv-Fin (succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( star)
+            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+            ( sign-comp-aut-succ-succ-Fin n
+              ( map-hom-symmetric-group-loop-group-Set
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                ( p)))))
+        ( map-inv-equiv
+          ( equiv-fin-2-quotient-sign-comp-equiv-Fin (succ-ℕ (succ-ℕ n))
+            ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+            ( star)
+            ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( quotient-map-sign-comp-Fin (succ-ℕ (succ-ℕ n))
+            ( map-simpson-comp-loop-Fin n p
+              ( sign-comp-aut-succ-succ-Fin n
+                ( map-hom-symmetric-group-loop-group-Set
+                  ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                  ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
+                  ( p))))))
+        ( refl)
+        ( refl)
 ```

@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers using
     is-not-one-ℕ; Eq-ℕ; eq-Eq-ℕ; Eq-eq-ℕ; is-set-ℕ; refl-Eq-ℕ; ℕ-Set)
 
 open import foundation-core.decidable-propositions using (decidable-Prop)
+open import foundation-core.discrete-types using (Discrete-Type)
 
 open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (inl; inr)
@@ -28,7 +29,7 @@ open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; is-set-prop-in-id; UU-Set)
+open import foundation.sets using (is-set; is-set-prop-in-id; Set)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```

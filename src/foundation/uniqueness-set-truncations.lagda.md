@@ -14,7 +14,7 @@ open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
 open import foundation.mere-equality using
   ( mere-eq-Eq-Rel; reflecting-map-mere-eq)
-open import foundation.sets using (UU-Set; type-Set; type-hom-Set)
+open import foundation.sets using (Set; type-Set; type-hom-Set)
 open import foundation.uniqueness-set-quotients using
   ( is-equiv-is-set-quotient-is-set-quotient;
     is-set-quotient-is-equiv-is-set-quotient;
@@ -36,8 +36,8 @@ The universal property of set truncation implies that set truncations are unique
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
-  (C : UU-Set l3) (g : A → type-Set C) {h : type-hom-Set B C}
+  {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
+  (C : Set l3) (g : A → type-Set C) {h : type-hom-Set B C}
   (H : (h ∘ f) ~ g)
   where
 
@@ -94,8 +94,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (B : UU-Set l2) (f : A → type-Set B)
-  (C : UU-Set l3) (g : A → type-Set C)
+  {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
+  (C : Set l3) (g : A → type-Set C)
   (Sf : {l : Level} → is-set-truncation l B f)
   (Sg : {l : Level} → is-set-truncation l C g)
   where

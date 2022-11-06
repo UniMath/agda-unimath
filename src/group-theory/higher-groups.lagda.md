@@ -14,7 +14,7 @@ open import foundation.dependent-pair-types using (Σ; pr1; pr2)
 open import foundation.equivalences using (_≃_; map-inv-equiv)
 open import foundation.identity-types using (Id; refl)
 open import foundation.mere-equality using (mere-eq)
-open import foundation.propositions using (UU-Prop; type-Prop)
+open import foundation.propositions using (Prop; type-Prop)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 
 open import structured-types.pointed-homotopies using
@@ -72,7 +72,7 @@ module _
       is-0-connected-classifying-type-∞-Group
 
   elim-prop-classifying-type-∞-Group :
-    {l2 : Level} (P : classifying-type-∞-Group → UU-Prop l2) →
+    {l2 : Level} (P : classifying-type-∞-Group → Prop l2) →
     type-Prop (P shape-∞-Group) →
     ((X : classifying-type-∞-Group) → type-Prop (P X))
   elim-prop-classifying-type-∞-Group =

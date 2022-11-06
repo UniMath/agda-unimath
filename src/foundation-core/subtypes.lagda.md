@@ -26,9 +26,9 @@ open import foundation-core.logical-equivalences using (_↔_; equiv-iff'; _⇔_
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.propositions using
-  ( is-prop; UU-Prop; is-proof-irrelevant-is-prop; is-prop-equiv;
+  ( is-prop; Prop; is-proof-irrelevant-is-prop; is-prop-equiv;
     is-prop-equiv'; type-Prop; is-prop-type-Prop; is-equiv-is-prop)
-open import foundation-core.sets using (is-set; UU-Set; type-Set; is-set-type-Set)
+open import foundation-core.sets using (is-set; Set; type-Set; is-set-type-Set)
 open import foundation-core.subtype-identity-principle using
   ( is-contr-total-Eq-subtype; extensionality-type-subtype)
 open import foundation-core.truncated-types using (is-trunc; is-trunc-is-emb)
@@ -57,7 +57,7 @@ module _
   is-property = is-subtype
 
 subtype : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
-subtype l A = A → UU-Prop l
+subtype l A = A → Prop l
 
 module _
   {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
@@ -175,15 +175,15 @@ module _
     is-set-type-subtype = is-trunc-type-subtype neg-one-𝕋 P
 
 prop-subprop :
-  {l1 l2 : Level} (A : UU-Prop l1) (P : subtype l2 (type-Prop A)) →
-  UU-Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Prop l1) (P : subtype l2 (type-Prop A)) →
+  Prop (l1 ⊔ l2)
 pr1 (prop-subprop A P) = type-subtype P
 pr2 (prop-subprop A P) =
   is-prop-type-subtype P (is-prop-type-Prop A)
 
 set-subset :
-  {l1 l2 : Level} (A : UU-Set l1) (P : subtype l2 (type-Set A)) →
-  UU-Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (P : subtype l2 (type-Set A)) →
+  Set (l1 ⊔ l2)
 pr1 (set-subset A P) = type-subtype P
 pr2 (set-subset A P) =
   is-set-type-subtype P (is-set-type-Set A)
@@ -210,7 +210,7 @@ pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
 equiv-subtype-equiv :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} (e : A ≃ B)
-  (C : A → UU-Prop l3) (D : B → UU-Prop l4) →
+  (C : A → Prop l3) (D : B → Prop l4) →
   ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
   type-subtype C ≃ type-subtype D
 equiv-subtype-equiv e C D H =

@@ -28,7 +28,7 @@ endo A = A → A
 is-set-endo : {l : Level} {A : UU l} → is-set A → is-set (endo A)
 is-set-endo H = is-set-function-type H
 
-endo-Set : {l : Level} → UU-Set l → UU-Set l
+endo-Set : {l : Level} → Set l → Set l
 pr1 (endo-Set A) = endo (type-Set A)
 pr2 (endo-Set A) = is-set-endo (is-set-type-Set A)
 

@@ -7,16 +7,19 @@ title: Isomorphisms in categories
 
 module category-theory.isomorphisms-categories where
 
-open import category-theory.categories using
-  ( Cat; obj-Cat; type-hom-Cat; precat-Cat; id-hom-Cat)
-open import category-theory.isomorphisms-precategories using
-  ( is-iso-Precat; iso-Precat; is-prop-is-iso-Precat;
-    is-set-iso-Precat; iso-Precat-Set; is-iso-id-hom-Precat;
-    id-iso-Precat; iso-eq-Precat)
-open import foundation.identity-types using (_＝_)
-open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; UU-Set)
-open import foundation.universe-levels using (UU; Level)
+open import category-theory.categories
+open import category-theory.isomorphisms-precategories
+
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equational-reasoning
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -35,6 +38,36 @@ module _
 
   iso-Cat : (x y : obj-Cat C) → UU l2
   iso-Cat = iso-Precat (precat-Cat C)
+
+  hom-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → type-hom-Cat C x y
+  hom-iso-Cat f = pr1 f
+
+  is-iso-hom-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat x y) → is-iso-Cat (hom-iso-Cat f)
+  is-iso-hom-iso-Cat f = pr2 f
+
+  hom-inv-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → type-hom-Cat C y x
+  hom-inv-iso-Cat f = pr1 (is-iso-hom-iso-Cat f)
+
+  issec-hom-inv-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat x y) →
+    comp-hom-Cat C (hom-iso-Cat f) (hom-inv-iso-Cat f) ＝ id-hom-Cat C
+  issec-hom-inv-iso-Cat f = pr1 (pr2 (is-iso-hom-iso-Cat f))
+
+  isretr-hom-inv-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat x y) →
+    comp-hom-Cat C (hom-inv-iso-Cat f) (hom-iso-Cat f) ＝ id-hom-Cat C
+  isretr-hom-inv-iso-Cat f = pr2 (pr2 (is-iso-hom-iso-Cat f))
+
+  inv-iso-Cat : {x y : obj-Cat C} → iso-Cat x y → iso-Cat y x
+  inv-iso-Cat f =
+    pair
+      ( hom-inv-iso-Cat f)
+      ( pair
+        ( hom-iso-Cat f)
+        ( pair
+          ( isretr-hom-inv-iso-Cat f)
+          ( issec-hom-inv-iso-Cat f)))
 ```
 
 ## Examples
@@ -53,13 +86,140 @@ module _
   id-iso-Cat = id-iso-Precat (precat-Cat C)
 ```
 
-### Equalities give rise to isomorphisms
+### Compositions of isomorphisms are isomorphisms
 
 ```agda
-iso-eq-Cat :
-  {l1 l2 : Level} (C : Cat l1 l2) →
-  (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
-iso-eq-Cat C = iso-eq-Precat (precat-Cat C)
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+
+  hom-comp-iso-Cat :
+    {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → type-hom-Cat C x z
+  hom-comp-iso-Cat g f = comp-hom-Cat C (hom-iso-Cat C g) (hom-iso-Cat C f)
+
+  hom-inv-comp-iso-Cat :
+    {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → type-hom-Cat C z x
+  hom-inv-comp-iso-Cat g f =
+    comp-hom-Cat C (hom-inv-iso-Cat C f) (hom-inv-iso-Cat C g)
+
+  issec-hom-inv-comp-iso-Cat :
+    {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
+    ＝ id-hom-Cat C
+  issec-hom-inv-comp-iso-Cat g f =
+    equational-reasoning
+      comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
+          ( hom-iso-Cat C g)
+          ( comp-hom-Cat C
+            ( hom-iso-Cat C f)
+            ( hom-inv-comp-iso-Cat g f))
+        by
+        assoc-comp-hom-Cat C
+          ( hom-iso-Cat C g)
+          ( hom-iso-Cat C f)
+          ( hom-inv-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
+          ( hom-iso-Cat C g)
+          ( comp-hom-Cat C
+            ( comp-hom-Cat C
+              ( hom-iso-Cat C f)
+              ( hom-inv-iso-Cat C f))
+            ( hom-inv-iso-Cat C g))
+        by
+        ap
+          ( comp-hom-Cat C (hom-iso-Cat C g))
+          ( inv
+            ( assoc-comp-hom-Cat C
+              ( hom-iso-Cat C f)
+              ( hom-inv-iso-Cat C f)
+              ( hom-inv-iso-Cat C g)))
+      ＝ comp-hom-Cat C
+          ( hom-iso-Cat C g)
+          ( comp-hom-Cat C
+            ( id-hom-Cat C)
+            ( hom-inv-iso-Cat C g))
+        by
+        ap
+          ( comp-hom-Cat C (hom-iso-Cat C g))
+          ( ap
+            ( λ h → comp-hom-Cat C h (hom-inv-iso-Cat C g))
+            ( issec-hom-inv-iso-Cat C f))
+      ＝ comp-hom-Cat C (hom-iso-Cat C g) (hom-inv-iso-Cat C g)
+        by
+        ap
+          ( comp-hom-Cat C (hom-iso-Cat C g))
+          ( left-unit-law-comp-hom-Cat C (hom-inv-iso-Cat C g))
+      ＝ id-hom-Cat C
+        by
+        issec-hom-inv-iso-Cat C g
+
+  isretr-hom-inv-comp-iso-Cat :
+    {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    ( comp-hom-Cat C (hom-inv-comp-iso-Cat g f) (hom-comp-iso-Cat g f)) ＝
+    ( id-hom-Cat C)
+  isretr-hom-inv-comp-iso-Cat g f =
+    equational-reasoning
+      comp-hom-Cat C (hom-inv-comp-iso-Cat g f) (hom-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
+          ( hom-inv-iso-Cat C f)
+          ( comp-hom-Cat C
+            ( hom-inv-iso-Cat C g)
+            ( hom-comp-iso-Cat g f))
+        by
+        assoc-comp-hom-Cat C
+          ( hom-inv-iso-Cat C f)
+          ( hom-inv-iso-Cat C g)
+          ( hom-comp-iso-Cat g f)
+      ＝ comp-hom-Cat C
+          ( hom-inv-iso-Cat C f)
+          ( comp-hom-Cat C
+            ( comp-hom-Cat C
+              ( hom-inv-iso-Cat C g)
+              ( hom-iso-Cat C g))
+            ( hom-iso-Cat C f))
+        by
+        ap
+          ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+          ( inv
+            ( assoc-comp-hom-Cat C
+              ( hom-inv-iso-Cat C g)
+              ( hom-iso-Cat C g)
+              ( hom-iso-Cat C f)))
+      ＝ comp-hom-Cat C
+          ( hom-inv-iso-Cat C f)
+          ( comp-hom-Cat C
+            ( id-hom-Cat C)
+            ( hom-iso-Cat C f))
+        by
+        ap
+          ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+          ( ap
+            ( λ h → comp-hom-Cat C h (hom-iso-Cat C f))
+            ( isretr-hom-inv-iso-Cat C g))
+      ＝ comp-hom-Cat C (hom-inv-iso-Cat C f) (hom-iso-Cat C f)
+        by
+        ap
+          ( comp-hom-Cat C (hom-inv-iso-Cat C f))
+          ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
+      ＝ id-hom-Cat C
+        by
+        isretr-hom-inv-iso-Cat C f
+
+  is-iso-hom-comp-iso-Cat :
+    {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    is-iso-Cat C (hom-comp-iso-Cat g f)
+  pr1 (is-iso-hom-comp-iso-Cat g f) =
+    hom-inv-comp-iso-Cat g f
+  pr1 (pr2 (is-iso-hom-comp-iso-Cat g f)) =
+    issec-hom-inv-comp-iso-Cat g f
+  pr2 (pr2 (is-iso-hom-comp-iso-Cat g f)) =
+    isretr-hom-inv-comp-iso-Cat g f
+
+  comp-iso-Cat :
+    {x y z : obj-Cat C} → iso-Cat C y z → iso-Cat C x y → iso-Cat C x z
+  pr1 (comp-iso-Cat g f) = hom-comp-iso-Cat g f
+  pr2 (comp-iso-Cat g f) = is-iso-hom-comp-iso-Cat g f
 ```
 
 ## Properties
@@ -73,6 +233,157 @@ is-prop-is-iso-Cat :
 is-prop-is-iso-Cat C = is-prop-is-iso-Precat (precat-Cat C)
 ```
 
+### Characterizing equality of isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : iso-Cat C x y)
+  where
+  
+  Eq-iso-Cat : iso-Cat C x y → UU l2
+  Eq-iso-Cat g = hom-iso-Cat C f ＝ hom-iso-Cat C g
+
+  refl-Eq-iso-Cat : Eq-iso-Cat f
+  refl-Eq-iso-Cat = refl
+
+  is-contr-total-Eq-iso-Cat :
+    is-contr (Σ (iso-Cat C x y) Eq-iso-Cat)
+  is-contr-total-Eq-iso-Cat =
+    is-contr-total-Eq-subtype
+      ( is-contr-total-path (hom-iso-Cat C f))
+      ( is-prop-is-iso-Cat C)
+      ( hom-iso-Cat C f)
+      ( refl)
+      ( is-iso-hom-iso-Cat C f)
+
+  Eq-eq-iso-Cat :
+    (g : iso-Cat C x y) → (f ＝ g) → Eq-iso-Cat g
+  Eq-eq-iso-Cat .f refl = refl-Eq-iso-Cat
+
+  is-equiv-Eq-eq-iso-Cat :
+    (g : iso-Cat C x y) → is-equiv (Eq-eq-iso-Cat g)
+  is-equiv-Eq-eq-iso-Cat =
+    fundamental-theorem-id
+      is-contr-total-Eq-iso-Cat
+      Eq-eq-iso-Cat
+
+  extensionality-iso-Cat :
+    (g : iso-Cat C x y) → (f ＝ g) ≃ Eq-iso-Cat g
+  pr1 (extensionality-iso-Cat g) = Eq-eq-iso-Cat g
+  pr2 (extensionality-iso-Cat g) = is-equiv-Eq-eq-iso-Cat g
+
+  eq-Eq-iso-Cat :
+    (g : iso-Cat C x y) → Eq-iso-Cat g → (f ＝ g)
+  eq-Eq-iso-Cat g = map-inv-equiv (extensionality-iso-Cat g)
+```
+
+### Groupoid laws for composition of isomorphisms in a category
+
+#### Left unit law
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C}
+  where
+
+  left-unit-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C (id-iso-Cat C) f ＝ f
+  left-unit-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      (comp-iso-Cat C (id-iso-Cat C) f)
+      ( f)
+      ( left-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
+```
+
+#### Right unit law
+
+```agda
+  right-unit-law-comp-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C f (id-iso-Cat C) ＝ f
+  right-unit-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C f (id-iso-Cat C))
+      ( f)
+      ( right-unit-law-comp-hom-Cat C (hom-iso-Cat C f))
+```
+
+#### Associatitivity
+```agda
+  assoc-comp-iso-Cat :
+    {x y z w : obj-Cat C}
+    (h : iso-Cat C z w) (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    comp-iso-Cat C (comp-iso-Cat C h g) f ＝ comp-iso-Cat C h (comp-iso-Cat C g f)
+  assoc-comp-iso-Cat h g f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C (comp-iso-Cat C h g) f)
+      ( comp-iso-Cat C h (comp-iso-Cat C g f))
+      ( assoc-comp-hom-Cat C
+        ( hom-iso-Cat C h)
+        ( hom-iso-Cat C g)
+        ( hom-iso-Cat C f))
+```
+
+#### Left inverse law
+```agda
+  left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
+  left-inverse-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C (inv-iso-Cat C f) f)
+      ( id-iso-Cat C)
+      ( isretr-hom-inv-iso-Cat C f)
+```
+
+#### Right inverse law
+```agda
+  right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
+    comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
+  right-inverse-law-comp-iso-Cat f =
+    eq-Eq-iso-Cat C
+      ( comp-iso-Cat C f (inv-iso-Cat C f))
+      ( id-iso-Cat C)
+      ( issec-hom-inv-iso-Cat C f)
+```
+
+### Equalities give rise to isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+  
+  iso-eq-Cat : (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
+  iso-eq-Cat = iso-eq-Precat (precat-Cat C)
+
+  preserves-concat-iso-eq-Cat :
+    {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
+    iso-eq-Cat x z (p ∙ q) ＝
+    comp-iso-Cat C (iso-eq-Cat y z q) (iso-eq-Cat x y p)
+  preserves-concat-iso-eq-Cat {x} {.x} {y} refl q =
+    inv (right-unit-law-comp-iso-Cat C {x} {y} (iso-eq-Cat x y q))
+```
+
+## Properties
+
+### Extensionality of the type of objects in a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+  
+  extensionality-obj-Cat :
+    (x y : obj-Cat C) → (x ＝ y) ≃ iso-Cat C x y
+  pr1 (extensionality-obj-Cat x y) = iso-eq-Cat C x y
+  pr2 (extensionality-obj-Cat x y) = is-category-Cat C x y
+
+  eq-iso-Cat :
+    (x y : obj-Cat C) → iso-Cat C x y → x ＝ y
+  eq-iso-Cat x y = map-inv-equiv (extensionality-obj-Cat x y)
+```
+
 ### The type of isomorphisms forms a set
 
 ```agda
@@ -83,6 +394,6 @@ module _
   is-set-iso-Cat : (x y : obj-Cat C) → is-set (iso-Cat C x y)
   is-set-iso-Cat = is-set-iso-Precat (precat-Cat C)
 
-  iso-Cat-Set : (x y : obj-Cat C) → UU-Set l2
+  iso-Cat-Set : (x y : obj-Cat C) → Set l2
   iso-Cat-Set = iso-Precat-Set (precat-Cat C)
 ```

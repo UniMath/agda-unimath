@@ -9,7 +9,7 @@ open import foundation.decidable-propositions using (decidable-Prop)
 open import foundation.decidable-subtypes using (subtype-decidable-subtype)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id)
-open import foundation.propositions using (UU-Prop; is-prop)
+open import foundation.propositions using (Prop; is-prop)
 open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import order-theory.preorders using
@@ -42,7 +42,7 @@ module _
     eq-element-sub-Preorder X (subtype-decidable-subtype S)
 
   leq-decidable-sub-preorder-Prop :
-    (x y : element-decidable-sub-Preorder) → UU-Prop l2
+    (x y : element-decidable-sub-Preorder) → Prop l2
   leq-decidable-sub-preorder-Prop =
     leq-sub-preorder-Prop X (subtype-decidable-subtype S)
 

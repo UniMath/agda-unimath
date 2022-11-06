@@ -21,7 +21,7 @@ open import foundation-core.function-extensionality using
 open import foundation-core.functions using (id)
 open import foundation-core.functoriality-dependent-pair-types using (tot)
 open import foundation-core.identity-types using (_＝_; left-inv; refl; ap)
-open import foundation-core.propositions using (UU-Prop; equiv-prop)
+open import foundation-core.propositions using (Prop; equiv-prop)
 open import foundation-core.singleton-induction using
   ( ind-singleton-is-contr; comp-singleton-is-contr)
 open import foundation-core.truncated-types using
@@ -31,7 +31,7 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
 open import foundation.subuniverses using
-  ( total-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
+  ( type-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
     eq-equiv-subuniverse)
 ```
 
@@ -40,7 +40,7 @@ open import foundation.subuniverses using
 ### The proposition of being contractible
 
 ```agda
-is-contr-Prop : {l : Level} → UU l → UU-Prop l
+is-contr-Prop : {l : Level} → UU l → Prop l
 pr1 (is-contr-Prop A) = is-contr A
 pr2 (is-contr-Prop A) = is-property-is-contr
 ```
@@ -49,7 +49,7 @@ pr2 (is-contr-Prop A) = is-property-is-contr
 
 ```agda
 UU-Contr : (l : Level) → UU (lsuc l)
-UU-Contr l = total-subuniverse is-contr-Prop
+UU-Contr l = type-subuniverse is-contr-Prop
 
 type-UU-Contr : {l : Level} → UU-Contr l → UU l
 type-UU-Contr A = pr1 A

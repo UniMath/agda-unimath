@@ -12,7 +12,7 @@ open import foundation.contractible-types using (is-contr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.identity-types using (Id; inv; _∙_; ap)
 open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; UU-Prop)
+  ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Prop)
 open import foundation.sets using (Id-Prop)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU)
@@ -98,7 +98,7 @@ module _
   is-prop-is-invertible-element-Monoid x =
     is-prop-all-elements-equal (all-elements-equal-is-invertible-element-Monoid x)
 
-  is-invertible-element-monoid-Prop : type-Monoid M → UU-Prop l
+  is-invertible-element-monoid-Prop : type-Monoid M → Prop l
   pr1 (is-invertible-element-monoid-Prop x) = is-invertible-element-Monoid M x
   pr2 (is-invertible-element-monoid-Prop x) =
     is-prop-is-invertible-element-Monoid x

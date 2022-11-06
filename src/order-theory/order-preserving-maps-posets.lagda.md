@@ -36,7 +36,7 @@ module _
   where
 
   preserves-order-poset-Prop :
-    (element-Poset P → element-Poset Q) → UU-Prop (l1 ⊔ l2 ⊔ l4)
+    (element-Poset P → element-Poset Q) → Prop (l1 ⊔ l2 ⊔ l4)
   preserves-order-poset-Prop =
     preserves-order-preorder-Prop (preorder-Poset P) (preorder-Poset Q)
 

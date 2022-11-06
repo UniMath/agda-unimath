@@ -8,7 +8,7 @@ module order-theory.greatest-lower-bounds-posets where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
+  ( Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
     is-prop-all-elements-equal; prod-Prop; Π-Prop; function-Prop)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -31,7 +31,7 @@ module _
   where
 
   is-binary-lower-bound-poset-Prop :
-    (x y z : element-Poset P) → UU-Prop l2
+    (x y z : element-Poset P) → Prop l2
   is-binary-lower-bound-poset-Prop x y z =
     prod-Prop (leq-poset-Prop P z x) (leq-poset-Prop P z y)
 
@@ -45,7 +45,7 @@ module _
     is-prop-type-Prop (is-binary-lower-bound-poset-Prop x y z)
 
   is-greatest-binary-lower-bound-poset-Prop :
-    (x y z : element-Poset P) → UU-Prop (l1 ⊔ l2)
+    (x y z : element-Poset P) → Prop (l1 ⊔ l2)
   is-greatest-binary-lower-bound-poset-Prop x y z =
     prod-Prop
       ( is-binary-lower-bound-poset-Prop x y z)
@@ -91,7 +91,7 @@ module _
       ( all-elements-equal-has-greatest-binary-lower-bound-Poset x y)
 
   has-greatest-binary-lower-bound-poset-Prop :
-    (x y : element-Poset P) → UU-Prop (l1 ⊔ l2)
+    (x y : element-Poset P) → Prop (l1 ⊔ l2)
   pr1 (has-greatest-binary-lower-bound-poset-Prop x y) =
     has-greatest-binary-lower-bound-Poset x y
   pr2 (has-greatest-binary-lower-bound-poset-Prop x y) =

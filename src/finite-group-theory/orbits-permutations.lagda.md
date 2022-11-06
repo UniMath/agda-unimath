@@ -52,24 +52,20 @@ open import foundation.coproduct-types using
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-equiv;
     is-prop-has-decidable-equality; has-decidable-equality-Σ)
+open import foundation.decidable-equivalence-relations using
+  ( is-decidable-is-in-equivalence-class-is-decidable)
 open import foundation.decidable-maps using (is-decidable-map)
 open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop)
+  ( decidable-Prop; type-decidable-Prop; is-decidable-Prop;
+    is-decidable-trunc-Prop-is-merely-decidable; is-prop-is-decidable)
 open import foundation.decidable-types using
-  ( is-decidable; is-decidable-Prop;
-    is-decidable-trunc-Prop-is-merely-decidable; is-decidable-coprod;
-    is-decidable-prod; is-decidable-neg; is-prop-is-decidable)
+  ( is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.double-negation using (¬¬)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using (ex-falso; empty-Prop)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalence-classes using
-  ( equivalence-class; equivalence-class-Set; class; is-surjective-class;
-    is-in-subtype-equivalence-class; related-eq-quotient;
-    is-equiv-related-eq-quotient; transitive-is-in-subtype-equivalence-class;
-    eq-effective-quotient'; is-prop-is-in-subtype-equivalence-class;
-    is-decidable-is-in-subtype-equivalence-class-is-decidable)
+open import foundation.equivalence-classes
 open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; sim-Eq-Rel; refl-Eq-Rel; symm-Eq-Rel; trans-Eq-Rel)
 open import foundation.equivalences using
@@ -80,17 +76,19 @@ open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-coprod)
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.iterating-functions using
   ( iterate; iterate-add-ℕ)
+open import foundation.logical-equivalences
 open import foundation.negation using (¬; reductio-ad-absurdum)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
     trunc-Prop; unit-trunc-Prop; all-elements-equal-type-trunc-Prop;
     type-trunc-Prop; universal-property-trunc-Prop)
 open import foundation.propositions using
-  ( UU-Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
+  ( Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
     is-prop; is-prop-Σ)
 open import foundation.repetitions using (repetition)
 open import foundation.sets using (Id-Prop)
@@ -611,12 +609,12 @@ module _
               ( a))
 
   abstract
-    is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation :
+    is-decidable-is-in-equivalence-class-same-orbits-permutation :
       (T : equivalence-class same-orbits-permutation) →
       (a : type-UU-Fin n X) →
-      is-decidable (is-in-subtype-equivalence-class same-orbits-permutation T a)
-    is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation T a =
-      is-decidable-is-in-subtype-equivalence-class-is-decidable
+      is-decidable (is-in-equivalence-class same-orbits-permutation T a)
+    is-decidable-is-in-equivalence-class-same-orbits-permutation T a =
+      is-decidable-is-in-equivalence-class-is-decidable
         ( same-orbits-permutation)
         ( is-decidable-same-orbits-permutation)
         ( T)
@@ -642,8 +640,14 @@ module _
             ( Id-Prop (equivalence-class-Set same-orbits-permutation) T1 T2))
           ( λ (pair t1 p1) →
             cases-decidable-equality T1 T2 t1
-              ( eq-pair-Σ (inv p1) (all-elements-equal-type-trunc-Prop _ _))
-              ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+              ( eq-pair-Σ
+                ( ap
+                  ( subtype-equivalence-class
+                    same-orbits-permutation)
+                  ( eq-has-same-elements-equivalence-class
+                    same-orbits-permutation T1 (class same-orbits-permutation t1) p1))
+                ( all-elements-equal-type-trunc-Prop _ _))
+              ( is-decidable-is-in-equivalence-class-same-orbits-permutation
                 T2 t1))))
       where
       cases-decidable-equality :
@@ -651,17 +655,17 @@ module _
         (t1 : type-UU-Fin n X) →
         Id T1 (class same-orbits-permutation t1) →
         is-decidable
-          ( is-in-subtype-equivalence-class same-orbits-permutation T2 t1) →
+          ( is-in-equivalence-class same-orbits-permutation T2 t1) →
         is-decidable (Id T1 T2)
       cases-decidable-equality T1 T2 t1 p1 (inl p) =
         inl
           ( ( p1) ∙
             ( map-inv-is-equiv
-              ( is-equiv-related-eq-quotient same-orbits-permutation t1 T2) p))
+              ( is-equiv-is-in-equivalence-class-eq-equivalence-class same-orbits-permutation t1 T2) p))
       cases-decidable-equality T1 T2 t1 p1 (inr np) =
         inr
           ( λ p →
-            np (related-eq-quotient same-orbits-permutation t1 T2 (inv p1 ∙ p)))
+            np (is-in-equivalence-class-eq-equivalence-class same-orbits-permutation t1 T2 (inv p1 ∙ p)))
 
   number-of-orbits-permutation : ℕ
   number-of-orbits-permutation =
@@ -846,49 +850,28 @@ module _
 
   conserves-other-orbits-transposition-quotient : (g : X ≃ X) →
     (T : equivalence-class (same-orbits-permutation-count g)) →
-    ¬ (is-in-subtype-equivalence-class (same-orbits-permutation-count g) T a) →
-    ¬ (is-in-subtype-equivalence-class (same-orbits-permutation-count g) T b) →
+    ¬ (is-in-equivalence-class (same-orbits-permutation-count g) T a) →
+    ¬ (is-in-equivalence-class (same-orbits-permutation-count g) T b) →
     equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
   pr1 (conserves-other-orbits-transposition-quotient g T nq nr) = pr1 T
-  pr2 (conserves-other-orbits-transposition-quotient g T nq nr) =
+  pr2 (conserves-other-orbits-transposition-quotient g (pair T1 T2) nq nr) =
     apply-universal-property-trunc-Prop
-      ( pr2 T)
-      ( trunc-Prop
-        ( fib
-          ( prop-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)))
-          ( pr1 T)))
+      ( T2)
+      ( is-equivalence-class-Prop
+        ( same-orbits-permutation-count (composition-transposition-a-b g))
+        ( T1) )
       ( λ (pair x Q) →
         unit-trunc-Prop
           ( pair x
-            ( eq-htpy
-              ( λ y → eq-pair-Σ
-                ( eq-equiv
-                  ( sim-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x y)
-                  ( sim-Eq-Rel (same-orbits-permutation-count g) x y)
-                  ( inv-equiv
-                    ( conserves-other-orbits-transposition g x y
-                      ( λ S → nq
-                        ( tr (λ w → is-in-subtype-equivalence-class (same-orbits-permutation-count g) w a)
-                          ( eq-pair-Σ Q
-                            ( all-elements-equal-type-trunc-Prop
-                              ( tr
-                                ( λ z → type-trunc-Prop (fib (prop-Eq-Rel (same-orbits-permutation-count g)) z))
-                                ( Q)
-                                ( unit-trunc-Prop (pair x refl)))
-                              ( pr2 T)))
-                            ( S)))
-                      ( λ S → nr
-                        ( tr (λ w → is-in-subtype-equivalence-class (same-orbits-permutation-count g) w b)
-                          ( eq-pair-Σ Q
-                            ( all-elements-equal-type-trunc-Prop
-                              ( tr
-                                ( λ z → type-trunc-Prop (fib (prop-Eq-Rel (same-orbits-permutation-count g)) z))
-                                ( Q)
-                                ( unit-trunc-Prop (pair x refl)))
-                              ( pr2 T)))
-                            ( S))))))
-                ( eq-is-prop (is-prop-is-prop (type-trunc-Prop (Σ ℕ (λ k1 → Id (iterate k1 (map-equiv g) x) y)))))) ∙
-              ( Q))))
+            ( λ y →
+              iff-equiv
+                ( ( conserves-other-orbits-transposition g x y
+                    ( nq ∘ backward-implication (Q a))
+                    ( nr ∘ backward-implication (Q b))) ∘e
+                  ( equiv-iff'
+                    ( T1 y)
+                    ( prop-Eq-Rel (same-orbits-permutation-count g) x y)
+                    ( Q y))))))
 
   abstract
     not-same-orbits-transposition-same-orbits : (g : X ≃ X) →
@@ -1010,7 +993,7 @@ module _
 
   coprod-sim-Eq-Rel-a-b-Prop : (g : X ≃ X) →
     (P : (sim-Eq-Rel (same-orbits-permutation (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g) a b)) →
-    (x : X) → UU-Prop l1
+    (x : X) → Prop l1
   coprod-sim-Eq-Rel-a-b-Prop g P x =
     coprod-Prop
       ( prop-Eq-Rel (same-orbits-permutation-count (composition-transposition-a-b g)) x a)
@@ -1165,73 +1148,79 @@ module _
       h'-inl : ( k : Fin (number-of-elements-count h)) →
         ( T : equivalence-class (same-orbits-permutation-count g)) → 
         Id (map-equiv-count h k) T →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count g) T a) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count g) T b) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count g) T a) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count g) T b) →
         equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
       h'-inl k T p (inl q) r =
         class (same-orbits-permutation-count (composition-transposition-a-b g)) a
       h'-inl k T p (inr nq) (inl r) = ex-falso (nq
-        ( transitive-is-in-subtype-equivalence-class (same-orbits-permutation-count g) T b a r
+        ( transitive-is-in-equivalence-class (same-orbits-permutation-count g) T b a r
         ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
       h'-inl k T p (inr nq) (inr nr) = conserves-other-orbits-transposition-quotient g T nq nr
       h' : Fin (succ-ℕ (number-of-elements-count h)) →
         equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
+        
       h' (inl k) = h'-inl k (map-equiv-count h k) refl 
-        ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+        ( is-decidable-is-in-equivalence-class-same-orbits-permutation
           (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g (map-equiv-count h k) a)
-        ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+        ( is-decidable-is-in-equivalence-class-same-orbits-permutation
           (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g (map-equiv-count h k) b)
       h' (inr k) = class (same-orbits-permutation-count (composition-transposition-a-b g)) b
+      
       cases-inv-h' : (T : equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b) →
         Fin (succ-ℕ (number-of-elements-count h)) 
       cases-inv-h' T (inl Q) R =
         inl
           ( map-inv-equiv-count h (class (same-orbits-permutation-count g) a))
       cases-inv-h' T (inr NQ) (inl R) = inr star
-      cases-inv-h' T (inr NQ) (inr NR) = inl
-        ( map-inv-equiv-count h
-          ( pair
-            ( pr1 T)
-            ( tr
-              ( λ f → type-trunc-Prop (fib (prop-Eq-Rel (same-orbits-permutation-count f)) (pr1 T)))
-              { x = composition-transposition-a-b (composition-transposition-a-b g)} {y = g}
-              ( eq-htpy-equiv (composition-transposition-a-b-involution g))
-              ( pr2 (conserves-other-orbits-transposition-quotient (composition-transposition-a-b g) T NQ NR)))))
+      cases-inv-h' T (inr NQ) (inr NR) =
+        inl
+          ( map-inv-equiv-count h
+            ( pair
+              ( pr1 T)
+              ( tr
+                ( λ f → is-equivalence-class (same-orbits-permutation-count f) (pr1 T))
+                { x = composition-transposition-a-b (composition-transposition-a-b g)}
+                { y = g}
+                ( eq-htpy-equiv (composition-transposition-a-b-involution g))
+                ( pr2 (conserves-other-orbits-transposition-quotient (composition-transposition-a-b g) T NQ NR)))))
+              
       inv-h' : (T : equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))) →
         Fin (succ-ℕ (number-of-elements-count h)) 
       inv-h' T =
         cases-inv-h' T
-          ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+          ( is-decidable-is-in-equivalence-class-same-orbits-permutation
             (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
             (composition-transposition-a-b g) T a)
-          ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+          ( is-decidable-is-in-equivalence-class-same-orbits-permutation
             (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
             (composition-transposition-a-b g) T b)
       H-conserves : (T : equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))) →
-        ( NQ : ¬ (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a)) →
-        ( NR : ¬ (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b)) →
-        type-trunc-Prop (fib (prop-Eq-Rel (same-orbits-permutation-count g)) (pr1 T))
+        ( NQ : ¬ (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a)) →
+        ( NR : ¬ (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b)) →
+        is-equivalence-class (same-orbits-permutation-count g) (pr1 T)
       H-conserves T NQ NR =
         tr
-          ( λ f → type-trunc-Prop (fib (prop-Eq-Rel (same-orbits-permutation-count f)) (pr1 T)))
+          ( λ f → is-equivalence-class (same-orbits-permutation-count f) (pr1 T))
           { x = composition-transposition-a-b (composition-transposition-a-b g)} {y = g}
           ( eq-htpy-equiv (composition-transposition-a-b-involution g))
           ( pr2 (conserves-other-orbits-transposition-quotient (composition-transposition-a-b g) T NQ NR))
+
       retr-h'-inr-inr : (T : equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))) →
-        ( NQ : ¬ (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a)) →
-        ( NR : ¬ (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b)) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count g)
+        ( NQ : ¬ (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a)) →
+        ( NR : ¬ (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b)) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count g)
           (pair (pr1 T) (H-conserves T NQ NR)) a) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count g)
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count g)
           (pair (pr1 T) (H-conserves T NQ NR)) b) →
         Id
           ( h' (inl (map-inv-equiv-count h
             ( pair
               ( pr1 T)
               ( tr
-                ( λ f → type-trunc-Prop (fib (prop-Eq-Rel (same-orbits-permutation-count f)) (pr1 T)))
+                ( λ f → is-equivalence-class (same-orbits-permutation-count f) (pr1 T))
                 { x = composition-transposition-a-b (composition-transposition-a-b g)} {y = g}
                 ( eq-htpy-equiv (composition-transposition-a-b-involution g))
                 ( pr2 (conserves-other-orbits-transposition-quotient (composition-transposition-a-b g) T NQ NR)))))))
@@ -1245,10 +1234,10 @@ module _
               ( map-inv-equiv-count h (pair (pr1 T) (H-conserves T NQ NR)))
               ( map-equiv (pr1 w) (pair (pr1 T) (H-conserves T NQ NR)))
               ( pr2 w)
-              ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+              ( is-decidable-is-in-equivalence-class-same-orbits-permutation
                   ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
                   ( map-equiv (pr1 w) (pair (pr1 T) (H-conserves T NQ NR))) a)
-              ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+              ( is-decidable-is-in-equivalence-class-same-orbits-permutation
                   ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
                   ( map-equiv (pr1 w) (pair (pr1 T) (H-conserves T NQ NR))) b))
           { x = pair ((equiv-count h) ∘e (inv-equiv-count h)) refl}
@@ -1270,14 +1259,14 @@ module _
                 ( pair (pr1 T) (H-conserves T NQ NR))
                 ( ap ( λ f → map-equiv f (pair (pr1 T) (H-conserves T NQ NR))) ( right-inverse-law-equiv (equiv-count h)))
                 ( w)
-                ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+                ( is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
                   (pair X (unit-trunc-Prop (equiv-count eX))) g (pair (pr1 T) (H-conserves T NQ NR)) b))
-            { x = is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+            { x = is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
               (pair X (unit-trunc-Prop (equiv-count eX))) g (pair (pr1 T) (H-conserves T NQ NR)) a}
             { y = inr NQ'}
             ( eq-is-prop
               ( is-prop-is-decidable
-                ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count g)
+                ( is-prop-is-in-equivalence-class (same-orbits-permutation-count g)
                   ( pair (pr1 T) (H-conserves T NQ NR)) a))) ∙
             ( (ap
               ( λ w →
@@ -1287,42 +1276,42 @@ module _
                   ( ap ( λ f → map-equiv f (pair (pr1 T) (H-conserves T NQ NR))) ( right-inverse-law-equiv (equiv-count h)))
                   ( inr NQ')
                   ( w))
-              { x = is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+              { x = is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
                 (pair X (unit-trunc-Prop (equiv-count eX))) g (pair (pr1 T) (H-conserves T NQ NR)) b}
               { y = inr NR'}
               ( eq-is-prop
                 ( is-prop-is-decidable
-                  ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count g)
+                  ( is-prop-is-in-equivalence-class (same-orbits-permutation-count g)
                     (pair (pr1 T) (H-conserves T NQ NR)) b))) ∙
               ( eq-pair-Σ refl ( eq-is-prop is-prop-type-trunc-Prop)))))
       retr-h' : (T : equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a) →
-        is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a) →
+        is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b) →
         Id (h' (inv-h' T)) T
       retr-h' T (inl Q) R =
         tr
           (λ w → Id (h' (cases-inv-h' T w
-            ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            ( is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T b)))
             ( T))
           {x = inl Q}
-          {y = (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+          {y = (is-decidable-is-in-equivalence-class-same-orbits-permutation
             ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
             ( composition-transposition-a-b g) T a)}
           ( eq-is-prop
             ( is-prop-is-decidable
-              ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a)))
+              ( is-prop-is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a)))
           ( ap
             ( λ w →
               h'-inl
                 ( map-inv-equiv-count h (class (same-orbits-permutation-count g) a))
                 ( map-equiv (pr1 w) (class (same-orbits-permutation-count g) a))
                 (pr2 w)
-                ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+                ( is-decidable-is-in-equivalence-class-same-orbits-permutation
                     ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
                     ( map-equiv (pr1 w) (class (same-orbits-permutation-count g) a)) a)
-                ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+                ( is-decidable-is-in-equivalence-class-same-orbits-permutation
                     ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
                     ( map-equiv (pr1 w) (class (same-orbits-permutation-count g) a)) b))
             { x = pair ((equiv-count h) ∘e (inv-equiv-count h)) refl}
@@ -1350,18 +1339,18 @@ module _
                     ( λ f → map-equiv f (class (same-orbits-permutation-count g) a))
                     ( right-inverse-law-equiv (equiv-count h)))
                   ( w)
-                  ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+                  ( is-decidable-is-in-equivalence-class-same-orbits-permutation
                       ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
                       (class (same-orbits-permutation-count g) a) b))
-              { x = is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+              { x = is-decidable-is-in-equivalence-class-same-orbits-permutation
                 ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
                 ( map-equiv id-equiv (class (same-orbits-permutation-count g) a)) a}
               { y =
                 inl
-                  ( related-eq-quotient (same-orbits-permutation-count g) a
+                  ( is-in-equivalence-class-eq-equivalence-class (same-orbits-permutation-count g) a
                     ( class (same-orbits-permutation-count g) a) refl)}
               ( eq-is-prop ( is-prop-is-decidable
-                ( is-prop-is-in-subtype-equivalence-class ( same-orbits-permutation-count g)
+                ( is-prop-is-in-equivalence-class ( same-orbits-permutation-count g)
                 ( class (same-orbits-permutation-count g) a) a)))) ∙
               ( eq-effective-quotient' (same-orbits-permutation-count (composition-transposition-a-b g)) a T Q)))
       retr-h' T (inr NQ) (inl R) =
@@ -1369,47 +1358,47 @@ module _
           (λ w → Id (h' (cases-inv-h' T (pr1 w) (pr2 w))) T)
           {x = pair (inr NQ) (inl R)}
           {y = pair
-            (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            (is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T a)
-            (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            (is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T b)}
           ( eq-is-prop
             ( is-prop-Σ (is-prop-is-decidable
-              ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a))
+              ( is-prop-is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a))
               ( λ _ → is-prop-is-decidable
-                ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b))))
+                ( is-prop-is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b))))
           ( eq-effective-quotient' (same-orbits-permutation-count (composition-transposition-a-b g)) b T R)
       retr-h' T (inr NQ) (inr NR) =
         tr
           (λ w → Id (h' (cases-inv-h' T (pr1 w) (pr2 w))) T)
           {x = pair (inr NQ) (inr NR)}
           {y = pair
-            (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            (is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T a)
-            (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            (is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T b)}
           ( eq-is-prop
             ( is-prop-Σ (is-prop-is-decidable
-              ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a))
+              ( is-prop-is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T a))
               ( λ _ → is-prop-is-decidable
-                ( is-prop-is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b))))
+                ( is-prop-is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g)) T b))))
           ( retr-h'-inr-inr T NQ NR
-            ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            ( is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
               ( pair (pr1 T) (H-conserves T NQ NR)) a)
-            ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            ( is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) g
               ( pair (pr1 T) (H-conserves T NQ NR)) b))
       sec-h'-inl : (k : Fin (number-of-elements-count h)) →
-        ( Q : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count g) (map-equiv-count h k) a)) →
-        ( R : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count g) (map-equiv-count h k) b)) →
-        ( Q' : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
+        ( Q : is-decidable (is-in-equivalence-class (same-orbits-permutation-count g) (map-equiv-count h k) a)) →
+        ( R : is-decidable (is-in-equivalence-class (same-orbits-permutation-count g) (map-equiv-count h k) b)) →
+        ( Q' : is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
           (h'-inl k (map-equiv-count h k) refl Q R) a)) →
-        ( R' : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
+        ( R' : is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
           (h'-inl k (map-equiv-count h k) refl Q R) b)) →
         Id (cases-inv-h' (h'-inl k (map-equiv-count h k) refl Q R) Q' R') (inl k)
       sec-h'-inl k (inl Q) R (inl Q') R' =
@@ -1420,7 +1409,7 @@ module _
               ( eq-effective-quotient' (same-orbits-permutation-count g) a (map-equiv-count h k) Q)))
       sec-h'-inl k (inl Q) R (inr NQ') R' = ex-falso
         ( NQ'
-          ( related-eq-quotient
+          ( is-in-equivalence-class-eq-equivalence-class
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( a)
             ( class
@@ -1428,7 +1417,7 @@ module _
               ( a))
             ( refl)))
       sec-h'-inl k (inr NQ) (inl R) Q' R' = ex-falso (NQ
-        ( transitive-is-in-subtype-equivalence-class (same-orbits-permutation-count g) (map-equiv-count h k) b a R
+        ( transitive-is-in-equivalence-class (same-orbits-permutation-count g) (map-equiv-count h k) b a R
         ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
       sec-h'-inl k (inr NQ) (inr NR) (inl Q') R' = ex-falso (NQ Q')
       sec-h'-inl k (inr NQ) (inr NR) (inr NQ') (inl R') = ex-falso (NR R')
@@ -1440,9 +1429,9 @@ module _
               ( eq-is-prop is-prop-type-trunc-Prop))) ∙
             ap (λ f → map-equiv f k) (left-inverse-law-equiv (equiv-count h)))
       sec-h'-inr :
-        ( Q : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
+        ( Q : is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
           ( class (same-orbits-permutation-count (composition-transposition-a-b g)) b) a)) →
-        ( R : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
+        ( R : is-decidable (is-in-equivalence-class (same-orbits-permutation-count (composition-transposition-a-b g))
           ( class (same-orbits-permutation-count (composition-transposition-a-b g)) b) b)) →
         Id (cases-inv-h' (class (same-orbits-permutation-count (composition-transposition-a-b g)) b) Q R)
           ( inr star)
@@ -1453,7 +1442,7 @@ module _
       sec-h'-inr (inr Q) (inr NR) =
         ex-falso
           ( NR
-            ( related-eq-quotient
+            ( is-in-equivalence-class-eq-equivalence-class
               ( same-orbits-permutation-count (composition-transposition-a-b g))
               ( b)
               ( class
@@ -1464,27 +1453,27 @@ module _
         Id (inv-h' (h' k)) k 
       sec-h' (inl k) =
         sec-h'-inl k Q R
-          ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+          ( is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))) (composition-transposition-a-b g)
             ( h'-inl k (map-equiv-count h k) refl Q R) a)
-          ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+          ( is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX))) (composition-transposition-a-b g)
             ( h'-inl k (map-equiv-count h k) refl Q R) b)
         where
-        Q : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation (number-of-elements-count eX)
+        Q : is-decidable (is-in-equivalence-class (same-orbits-permutation (number-of-elements-count eX)
           (pair X (unit-trunc-Prop (equiv-count eX))) g) (map-equiv-count h k) a)
-        Q = (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+        Q = (is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))) g (map-equiv-count h k) a)
-        R : is-decidable (is-in-subtype-equivalence-class (same-orbits-permutation (number-of-elements-count eX)
+        R : is-decidable (is-in-equivalence-class (same-orbits-permutation (number-of-elements-count eX)
           (pair X (unit-trunc-Prop (equiv-count eX))) g) (map-equiv-count h k) b)
-        R = (is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
+        R = (is-decidable-is-in-equivalence-class-same-orbits-permutation (number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))) g (map-equiv-count h k) b)
       sec-h' (inr star) =
         sec-h'-inr
-        ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+        ( is-decidable-is-in-equivalence-class-same-orbits-permutation
           ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) (composition-transposition-a-b g)
           ( class (same-orbits-permutation-count (composition-transposition-a-b g)) b) a)
-        ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+        ( is-decidable-is-in-equivalence-class-same-orbits-permutation
           ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX))) (composition-transposition-a-b g)
           ( class (same-orbits-permutation-count (composition-transposition-a-b g)) b) b)
 
@@ -1510,10 +1499,10 @@ module _
         ( is-equiv-has-inverse
           ( inv-h' g P h)
           ( λ T → retr-h' g P h T
-            ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            ( is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T a)
-            ( is-decidable-is-in-subtype-equivalence-class-same-orbits-permutation
+            ( is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))
               ( composition-transposition-a-b g) T b))
           ( sec-h' g P h)))

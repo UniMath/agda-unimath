@@ -25,7 +25,7 @@ open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle using (LEM)
 open import foundation.negation using (¬; is-prop-neg)
 open import foundation.propositions using
-  (is-prop; eq-is-prop'; is-prop-Π; is-prop-Σ; UU-Prop)
+  (is-prop; eq-is-prop'; is-prop-Π; is-prop-Σ; Prop)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -66,7 +66,7 @@ module _
      is-prop-Π (λ a₀ → (is-prop-Π λ n →
         is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
 
-  is-perfect-image-Prop : A → UU-Prop (l1 ⊔ l2)
+  is-perfect-image-Prop : A → Prop (l1 ⊔ l2)
   pr1 (is-perfect-image-Prop a) = is-perfect-image f g a
   pr2 (is-perfect-image-Prop a) = is-prop-is-perfect-image-is-emb a
 
@@ -236,5 +236,5 @@ module _
           (λ s → is-prop-neg {A = is-perfect-image f g (pr1 s)})
 
       v : Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      v = dn-elim-is-decidable _ (lem (pair _ iv)) iii
+      v = dn-elim-is-decidable (lem (pair _ iv)) iii
 ```

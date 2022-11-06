@@ -50,7 +50,7 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
     apply-universal-property-trunc-Prop)
 open import foundation.sets using
-  ( is-set; is-set-Prop; is-set-equiv'; is-set-equiv; UU-Set)
+  ( is-set; is-set-Prop; is-set-equiv'; is-set-equiv; Set)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
 open import foundation.subtype-identity-principle using
@@ -121,7 +121,7 @@ module _
           ( equiv-equiv-Endo (ℤ-Mod-Endo k) endo-Cyclic-Type e)
           ( is-set-ℤ-Mod k))
 
-  set-Cyclic-Type : UU-Set l
+  set-Cyclic-Type : Set l
   pr1 set-Cyclic-Type = type-Cyclic-Type
   pr2 set-Cyclic-Type = is-set-type-Cyclic-Type
 ```

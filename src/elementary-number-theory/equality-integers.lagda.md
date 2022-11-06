@@ -21,6 +21,7 @@ open import foundation.decidable-equality using
     has-decidable-equality-coprod)
 open import foundation.decidable-types using (is-decidable)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.discrete-types using (Discrete-Type)
 open import foundation.empty-types using (empty; is-prop-empty)
 open import foundation.equality-coproduct-types using
   ( is-set-coprod)
@@ -33,7 +34,7 @@ open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.propositions using (is-prop; eq-is-prop)
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; UU-Set)
+open import foundation.sets using (is-set; Set)
 open import foundation.unit-type using (unit; star; is-set-unit; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 ```
@@ -92,6 +93,10 @@ is-decidable-is-one-ℤ x = has-decidable-equality-ℤ x one-ℤ
 is-decidable-is-neg-one-ℤ :
   (x : ℤ) → is-decidable (is-neg-one-ℤ x)
 is-decidable-is-neg-one-ℤ x = has-decidable-equality-ℤ x neg-one-ℤ
+
+ℤ-Discrete-Type : Discrete-Type lzero
+pr1 ℤ-Discrete-Type = ℤ
+pr2 ℤ-Discrete-Type = has-decidable-equality-ℤ
 ```
 
 ### The type of integers is its own set truncation

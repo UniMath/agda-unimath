@@ -18,7 +18,8 @@ open import foundation.decidable-subtypes using
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
 open import foundation.equivalences using (inv-equiv)
 open import foundation.identity-types using (Id; _∙_; refl; ap; tr; inv)
-open import foundation.intersection using (intersection-decidable-subtype)
+open import foundation.intersections-subtypes using
+  ( intersection-decidable-subtype)
 open import foundation.mere-equivalences using (transitive-mere-equiv)
 open import foundation.propositional-truncations using (unit-trunc-Prop)
 open import foundation.subtypes using (subtype)

@@ -7,7 +7,7 @@ module order-theory.least-elements-posets where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.propositions using
-  ( UU-Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
+  ( Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 
@@ -25,7 +25,7 @@ module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  is-least-element-poset-Prop : element-Poset X → UU-Prop (l1 ⊔ l2)
+  is-least-element-poset-Prop : element-Poset X → Prop (l1 ⊔ l2)
   is-least-element-poset-Prop =
     is-least-element-preorder-Prop (preorder-Poset X)
 
@@ -51,7 +51,7 @@ module _
   is-prop-least-element-Poset =
     is-prop-all-elements-equal all-elements-equal-least-element-Poset
 
-  has-least-element-poset-Prop : UU-Prop (l1 ⊔ l2)
+  has-least-element-poset-Prop : Prop (l1 ⊔ l2)
   pr1 has-least-element-poset-Prop = least-element-Poset
   pr2 has-least-element-poset-Prop = is-prop-least-element-Poset
 ```

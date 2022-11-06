@@ -16,7 +16,7 @@ open import foundation.functoriality-cartesian-product-types using (map-prod)
 open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (_＝_; tr; ap; _∙_)
 open import foundation.propositions using
-  ( all-elements-equal; is-prop; is-prop-all-elements-equal; UU-Prop; type-Prop;
+  ( all-elements-equal; is-prop; is-prop-all-elements-equal; Prop; type-Prop;
     eq-is-prop; is-prop-type-Prop; is-prop-Π; type-hom-Prop; is-equiv-is-prop;
     type-equiv-Prop; prod-Prop; is-prop-prod; eq-is-prop'; is-trunc-is-prop)
 open import foundation.truncations using
@@ -34,7 +34,7 @@ open import foundation.universal-property-propositional-truncation using
     is-propositional-truncation-prod)
 open import foundation.universe-levels using (Level; UU)
 
-open import foundation-core.sets using (UU-Set)
+open import foundation-core.sets using (Set)
 open import foundation-core.truncated-types using
   ( is-trunc; Truncated-Type)
 open import foundation-core.truncation-levels using (𝕋; neg-one-𝕋; succ-𝕋)
@@ -59,7 +59,7 @@ is-prop-type-trunc-Prop = is-trunc-type-trunc
 all-elements-equal-type-trunc-Prop : {l : Level} {A : UU l} → all-elements-equal (type-trunc-Prop A)
 all-elements-equal-type-trunc-Prop {l} {A} = eq-is-prop' (is-prop-type-trunc-Prop {l} {A})
 
-trunc-Prop : {l : Level} → UU l → UU-Prop l
+trunc-Prop : {l : Level} → UU l → Prop l
 trunc-Prop = trunc neg-one-𝕋
 ```
 
@@ -102,7 +102,7 @@ ind-trunc-Prop' P f H =
 ```agda
 abstract
   ind-trunc-Prop :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → UU-Prop l) →
+    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
     ((x : A) → type-Prop (P (unit-trunc-Prop x))) →
     (( y : type-trunc-Prop A) → type-Prop (P y))
   ind-trunc-Prop P f =
@@ -110,7 +110,7 @@ abstract
       ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y))) 
 
   comp-trunc-Prop :
-    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → UU-Prop l) →
+    {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →
     ((precomp-Π unit-trunc-Prop (type-Prop ∘ P)) ∘ ind-trunc-Prop P) ~ id
   comp-trunc-Prop P h =
     eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
@@ -146,7 +146,7 @@ abstract
 
 abstract
   map-universal-property-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (P : UU-Prop l2) →
+    {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
     (A → type-Prop P) → type-hom-Prop (trunc-Prop A) P
   map-universal-property-trunc-Prop {A = A} P f =
     map-is-propositional-truncation
@@ -158,10 +158,28 @@ abstract
 
 abstract
   apply-universal-property-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (t : type-trunc-Prop A) (P : UU-Prop l2) →
+    {l1 l2 : Level} {A : UU l1} (t : type-trunc-Prop A) (P : Prop l2) →
     (A → type-Prop P) → type-Prop P
   apply-universal-property-trunc-Prop t P f =
     map-universal-property-trunc-Prop P f t
+
+abstract
+  apply-twice-universal-property-trunc-Prop :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (u : type-trunc-Prop A)
+    (v : type-trunc-Prop B) (P : Prop l3) →
+    (A → B → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop u v P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-universal-property-trunc-Prop v P (f x))
+
+abstract
+  apply-three-times-universal-property-trunc-Prop :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+    (u : type-trunc-Prop A) (v : type-trunc-Prop B) (w : type-trunc-Prop C) →
+    (P : Prop l4) → (A → B → C → type-Prop P) → type-Prop P
+  apply-three-times-universal-property-trunc-Prop u v w P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-twice-universal-property-trunc-Prop v w P (f x))
 ```
 
 ### The propositional truncation of a type is `k+1`-truncated
@@ -176,7 +194,7 @@ truncated-type-trunc-Prop :
 pr1 (truncated-type-trunc-Prop k A) = type-trunc-Prop A
 pr2 (truncated-type-trunc-Prop k A) = is-trunc-trunc-Prop k
 
-set-trunc-Prop : {l : Level} → UU l → UU-Set l
+set-trunc-Prop : {l : Level} → UU l → Set l
 set-trunc-Prop = truncated-type-trunc-Prop neg-one-𝕋
 ```
 
@@ -184,7 +202,7 @@ set-trunc-Prop = truncated-type-trunc-Prop neg-one-𝕋
 
 ```agda
 module _
-  {l : Level} (A : UU-Prop l)
+  {l : Level} (A : Prop l)
   where
 
   equiv-unit-trunc-Prop : type-Prop A ≃ type-trunc-Prop (type-Prop A)
@@ -248,7 +266,7 @@ abstract
       ( is-propositional-truncation-trunc-Prop A)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (P : type-trunc-Prop A → UU-Prop l2)
+  {l1 l2 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l2)
   where
   
   equiv-dependent-universal-property-trunc-Prop :

@@ -9,14 +9,15 @@ module elementary-number-theory.inequality-integers where
 
 open import elementary-number-theory.addition-integers using
   ( right-inverse-law-add-ℤ; is-nonnegative-add-ℤ; add-ℤ;
-    left-successor-law-add-ℤ)
+    left-successor-law-add-ℤ; right-unit-law-add-ℤ)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; distributive-neg-diff-ℤ; triangle-diff-ℤ;
-    right-translation-diff-ℤ; left-translation-diff-ℤ)
+    right-translation-diff-ℤ; left-translation-diff-ℤ; diff-succ-ℤ)
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
-    is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ)
+    is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ; int-ℕ; is-nonnegative-int-ℕ; succ-int-ℕ)
 open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.empty-types using (empty)
 open import foundation.functions using (id)
@@ -124,4 +125,15 @@ reflects-order-add-ℤ :
   {x y z : ℤ} → leq-ℤ (add-ℤ z x) (add-ℤ z y) → leq-ℤ x y
 reflects-order-add-ℤ {x} {y} {z} =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
+```
+
+### Inclusion of ℕ into ℤ preserves order
+```agda
+leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
+leq-int-ℕ zero-ℕ y H = tr (is-nonnegative-ℤ) (inv (right-unit-law-add-ℤ (int-ℕ y))) (is-nonnegative-int-ℕ y)
+leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ) 
+  (inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x))
+    ∙ (ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) 
+    ∙ ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
+  (leq-int-ℕ x y H)
 ```

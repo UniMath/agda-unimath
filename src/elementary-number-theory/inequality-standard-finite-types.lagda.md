@@ -17,7 +17,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.propositions using (is-prop; UU-Prop)
+open import foundation.propositions using (is-prop; Prop)
 open import foundation.unit-type using (unit; star; is-prop-unit)
 open import foundation.universe-levels using (UU; lzero)
 
@@ -44,7 +44,7 @@ abstract
   is-prop-leq-Fin (succ-ℕ k) (inr star) (inl y) = is-prop-empty
   is-prop-leq-Fin (succ-ℕ k) (inr star) (inr star) = is-prop-unit
 
-leq-fin-Prop : (k : ℕ) → Fin k → Fin k → UU-Prop lzero
+leq-fin-Prop : (k : ℕ) → Fin k → Fin k → Prop lzero
 pr1 (leq-fin-Prop k x y) = leq-Fin k x y
 pr2 (leq-fin-Prop k x y) = is-prop-leq-Fin k x y
 
