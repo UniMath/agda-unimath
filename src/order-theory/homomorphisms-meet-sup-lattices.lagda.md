@@ -52,15 +52,15 @@ module _
     preserves-order-Poset (poset-Meet-Sup-Lattice A) (poset-Meet-Sup-Lattice B) (map-hom-Meet-Sup-Lattice H)
   preserves-order-Meet-Sup-Lattice = pr1 ∘ pr2
 
-  preserves-meet-sup-Meet-Sup-Lattice : (H : hom-Meet-Sup-Lattice) → preserves-meets-sups (map-hom-Meet-Sup-Lattice H)
-  preserves-meet-sup-Meet-Sup-Lattice = pr2 ∘ pr2
+  preserves-meets-sups-Meet-Sup-Lattice : (H : hom-Meet-Sup-Lattice) → preserves-meets-sups (map-hom-Meet-Sup-Lattice H)
+  preserves-meets-sups-Meet-Sup-Lattice = pr2 ∘ pr2
 
-  preserves-meet-Meet-Sup-Lattice : (H : hom-Meet-Sup-Lattice) →
+  preserves-meets-Meet-Sup-Lattice : (H : hom-Meet-Sup-Lattice) →
     preserves-meets (meet-semilattice-Meet-Sup-Lattice A) (meet-semilattice-Meet-Sup-Lattice B) (map-hom-Meet-Sup-Lattice H)
-  preserves-meet-Meet-Sup-Lattice H = pr1 (preserves-meet-sup-Meet-Sup-Lattice H)
+  preserves-meets-Meet-Sup-Lattice = pr1 ∘ preserves-meets-sups-Meet-Sup-Lattice
 
-  preserves-sup-Meet-Sup-Lattice : (H : hom-Meet-Sup-Lattice) →
+  preserves-sups-Meet-Sup-Lattice : (H : hom-Meet-Sup-Lattice) →
     preserves-sups (sup-lattice-Meet-Sup-Lattice A) (sup-lattice-Meet-Sup-Lattice B) (map-hom-Meet-Sup-Lattice H)
-  preserves-sup-Meet-Sup-Lattice H = ?
+  preserves-sups-Meet-Sup-Lattice = pr2 ∘ preserves-meets-sups-Meet-Sup-Lattice
 
 ```
