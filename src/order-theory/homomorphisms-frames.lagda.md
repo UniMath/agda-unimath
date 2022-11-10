@@ -44,7 +44,7 @@ module _
   map-hom-Frame : hom-Frame → element-Frame A → element-Frame B
   map-hom-Frame = pr1
 
-  preserves-order-hom-Frame : (H : hom-Frame) →  preserves-order-Poset (poset-Frame A) (poset-Frame B) (map-hom-Frame H)
+  preserves-order-hom-Frame : (H : hom-Frame) → preserves-order-Poset (poset-Frame A) (poset-Frame B) (map-hom-Frame H)
   preserves-order-hom-Frame = pr1 ∘ pr2
 
   preserves-meets-sups-hom-Frame : (H : hom-Frame) → preserves-meets-sups (meet-sup-lattice-Frame A) (meet-sup-lattice-Frame B) (map-hom-Frame H)

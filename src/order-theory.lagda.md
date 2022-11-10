@@ -20,6 +20,9 @@ open import order-theory.finitely-graded-posets public
 open import order-theory.frames public
 open import order-theory.greatest-lower-bounds-posets public
 open import order-theory.homomorphisms-frames public
+open import order-theory.homomorphisms-meet-semilattices public
+open import order-theory.homomorphisms-meet-sup-lattices public
+open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
 open import order-theory.infinite-distributive-law public
 open import order-theory.interval-subposets public
