@@ -34,9 +34,7 @@ open import foundation.decidable-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-inv-equiv;
-    map-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv)
+open import foundation.equivalences
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
@@ -375,24 +373,24 @@ module _
 ```agda
 precomp-equiv-2-Element-Decidable-Subtype :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → X ≃ Y →
-    2-Element-Decidable-Subtype l3 X → 2-Element-Decidable-Subtype l3 Y
+    2-Element-Decidable-Subtype l3 Y → 2-Element-Decidable-Subtype l3 X
 pr1 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
-  P ∘ (map-inv-equiv e)
+  P ∘ (map-equiv e)
 pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
   transitive-mere-equiv
     ( H)
     ( unit-trunc-Prop
       ( equiv-subtype-equiv
-        ( e)
+        ( inv-equiv e)
         ( subtype-decidable-subtype P)
-        ( subtype-decidable-subtype (P ∘ (map-inv-equiv e)))
+        ( subtype-decidable-subtype (P ∘ (map-equiv e)))
          λ x →
           iff-equiv
             ( tr
               ( λ g →
                 ( type-decidable-Prop (P x)) ≃
                 ( type-decidable-Prop (P (map-equiv g x))))
-              ( inv (left-inverse-law-equiv e))
+              ( inv (right-inverse-law-equiv e))
               ( id-equiv))))
 
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype : 
@@ -400,15 +398,13 @@ preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
   ( f : Y ≃ Z) →
   Id
     ( precomp-equiv-2-Element-Decidable-Subtype {l3 = l4} (f ∘e e))
-    ( ( precomp-equiv-2-Element-Decidable-Subtype f) ∘
-      ( precomp-equiv-2-Element-Decidable-Subtype e))
+    ( ( precomp-equiv-2-Element-Decidable-Subtype e) ∘
+      ( precomp-equiv-2-Element-Decidable-Subtype f))
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f =
   eq-htpy
     ( λ (pair P H) →
       eq-pair-Σ
-        ( ap
-          ( λ g → P ∘ map-equiv g)
-          ( distributive-inv-comp-equiv e f))
+        ( refl)
         ( eq-is-prop is-prop-type-trunc-Prop))
 ```
   
