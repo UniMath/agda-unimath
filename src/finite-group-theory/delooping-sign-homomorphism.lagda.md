@@ -1724,7 +1724,65 @@ module _
                   ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
                   ( iso-loop-group-fin-UU-Fin-Group l1 (succ-ℕ (succ-ℕ n)))))))))
 
-  eq-quotient-delooping-sign-homomorphism : {l' : Level} (n : ℕ) →
+  symmetric-abstract-UU-fin-group-quotient-hom : (n : ℕ) →
+    type-hom-Group
+      ( symmetric-Group (Fin-Set 2))
+      ( abstract-group-Concrete-Group
+        ( UU-Fin-Group l4 2))
+  symmetric-abstract-UU-fin-group-quotient-hom n =
+    comp-hom-Group
+      ( symmetric-Group (Fin-Set 2))
+      ( symmetric-Group
+        ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
+      ( abstract-group-Concrete-Group
+        ( UU-Fin-Group l4 2))
+      ( comp-hom-Group
+        ( symmetric-Group
+          ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
+        ( loop-group-Set
+          ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
+        ( abstract-group-Concrete-Group
+          ( UU-Fin-Group l4 2))
+        ( hom-iso-Group
+          ( loop-group-Set
+            ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
+          ( abstract-group-Concrete-Group
+            ( UU-Fin-Group l4 2))
+          ( comp-iso-Group
+            ( loop-group-Set
+              ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
+            ( loop-group-Set
+              ( raise-Set l4 (Fin-Set 2)))
+            ( abstract-group-Concrete-Group
+              ( UU-Fin-Group l4 2))
+            ( inv-iso-Group
+              ( abstract-group-Concrete-Group
+                ( UU-Fin-Group l4 2))
+              ( loop-group-Set
+                ( raise-Set l4 (Fin-Set 2)))
+              ( iso-loop-group-fin-UU-Fin-Group l4 2))
+            ( iso-loop-group-equiv-Set
+              ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
+              ( raise-Set l4 (Fin-Set 2))
+              ( ( equiv-raise l4 (Fin 2)) ∘e
+                ( inv-equiv
+                  ( equiv-D/R-fin-2-equiv
+                    ( succ-ℕ (succ-ℕ n))
+                    ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+                    ( star)
+                    ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))))
+        ( hom-inv-symmetric-group-loop-group-Set
+          ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
+      ( hom-symmetric-group-equiv-Set
+        ( Fin-Set 2)
+        ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
+        ( equiv-D/R-fin-2-equiv
+          ( succ-ℕ (succ-ℕ n))
+          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
+          ( star)
+          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
+
+  eq-quotient-delooping-sign-homomorphism : (n : ℕ) →
     Id
       ( comp-hom-Group
         ( symmetric-Group (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
@@ -1741,15 +1799,11 @@ module _
             ( UU-Fin-Group l1 (succ-ℕ (succ-ℕ n)))
             ( UU-Fin-Group l4 2)
             ( quotient-delooping-sign (succ-ℕ (succ-ℕ n))))
-          ( hom-iso-Group
-            ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+          ( hom-inv-iso-Group
             ( abstract-group-Concrete-Group
               ( UU-Fin-Group l1 (succ-ℕ (succ-ℕ n))))
-            ( inv-iso-Group
-              ( abstract-group-Concrete-Group
-                ( UU-Fin-Group l1 (succ-ℕ (succ-ℕ n))))
-              ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
-              ( iso-loop-group-fin-UU-Fin-Group l1 (succ-ℕ (succ-ℕ n))))))
+            ( loop-group-Set (raise-Fin-Set l1 (succ-ℕ (succ-ℕ n))))
+            ( iso-loop-group-fin-UU-Fin-Group l1 (succ-ℕ (succ-ℕ n)))))
         ( hom-inv-symmetric-group-loop-group-Set
           ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))))
       ( comp-hom-Group
@@ -1762,57 +1816,7 @@ module _
           ( symmetric-Group (Fin-Set 2))
           ( abstract-group-Concrete-Group
             ( UU-Fin-Group l4 2))
-          ( comp-hom-Group
-            ( symmetric-Group (Fin-Set 2))
-            ( symmetric-Group
-              ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
-            ( abstract-group-Concrete-Group
-              ( UU-Fin-Group l4 2))
-            ( comp-hom-Group
-              ( symmetric-Group
-                ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
-              ( loop-group-Set
-                ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
-              ( abstract-group-Concrete-Group
-                ( UU-Fin-Group l4 2))
-              ( hom-iso-Group
-                ( loop-group-Set
-                  ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
-                ( abstract-group-Concrete-Group
-                  ( UU-Fin-Group l4 2))
-                ( comp-iso-Group
-                  ( loop-group-Set
-                    ( quotient-set-Fin (succ-ℕ (succ-ℕ n))))
-                  ( loop-group-Set
-                    ( raise-Set l4 (Fin-Set 2)))
-                  ( abstract-group-Concrete-Group
-                    ( UU-Fin-Group l4 2))
-                  ( inv-iso-Group
-                    ( abstract-group-Concrete-Group
-                      ( UU-Fin-Group l4 2))
-                    ( loop-group-Set
-                      ( raise-Set l4 (Fin-Set 2)))
-                    ( iso-loop-group-fin-UU-Fin-Group l4 2))
-                  ( iso-loop-group-equiv-Set
-                    ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
-                    ( raise-Set l4 (Fin-Set 2))
-                    ( ( equiv-raise l4 (Fin 2)) ∘e
-                      ( inv-equiv
-                        ( equiv-D/R-fin-2-equiv
-                          ( succ-ℕ (succ-ℕ n))
-                          ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
-                          ( star)
-                          ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))))))
-              ( hom-inv-symmetric-group-loop-group-Set
-                ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))))
-            ( hom-symmetric-group-equiv-Set
-              ( Fin-Set 2)
-              ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
-              ( equiv-D/R-fin-2-equiv
-                ( succ-ℕ (succ-ℕ n))
-                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))
-                ( star)
-                ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n)))))))
+          ( symmetric-abstract-UU-fin-group-quotient-hom n)
           ( sign-homomorphism
             ( succ-ℕ (succ-ℕ n))
             ( pair (Fin (succ-ℕ (succ-ℕ n))) (unit-trunc-Prop id-equiv))))
@@ -1820,7 +1824,7 @@ module _
           ( Fin-Set (succ-ℕ (succ-ℕ n)))
           ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
           ( equiv-raise l1 (Fin (succ-ℕ (succ-ℕ n))))))
-  eq-quotient-delooping-sign-homomorphism {l'} n =
+  eq-quotient-delooping-sign-homomorphism n =
     ( ap
       ( λ f →
         comp-hom-Group
