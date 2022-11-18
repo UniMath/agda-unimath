@@ -84,9 +84,15 @@ module _
     is-meet-semilattice-Poset poset-Frame
   is-meet-semilattice-Frame = is-meet-semilattice-Meet-Sup-Lattice (pr1 A)
 
+  meet-semilattice-Frame : Meet-Semilattice l1 l2
+  meet-semilattice-Frame = ( poset-Frame , is-meet-semilattice-Frame )
+
   is-sup-lattice-Frame :
     is-sup-lattice-Poset l3 poset-Frame
   is-sup-lattice-Frame = is-sup-lattice-Meet-Sup-Lattice (pr1 A)
+
+  sup-lattice-Frame : Sup-Lattice l1 l2 l3
+  sup-lattice-Frame = ( poset-Frame , is-sup-lattice-Frame )
 
   meet-sup-lattice-Frame :
     Meet-Sup-Lattice l1 l2 l3
