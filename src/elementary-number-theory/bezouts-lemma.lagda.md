@@ -1100,10 +1100,22 @@ remainder-min-dist-succ-x-not-is-nonzero x y nonzero = contradiction-le-ℕ
 
 
 remainder-min-dist-succ-x-is-zero : (x y : ℕ) → is-zero-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-remainder-min-dist-succ-x-is-zero x y with is-decidable-is-zero-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-... | inl z = z
-... | inr nz = ex-falso (remainder-min-dist-succ-x-not-is-nonzero x y nz) 
-
+remainder-min-dist-succ-x-is-zero x y = 
+  is-zero-case-split 
+    (is-decidable-is-zero-ℕ 
+      (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
+  where
+  is-zero-case-split : 
+    (is-zero-ℕ (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
+     + is-nonzero-ℕ (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
+    → is-zero-ℕ (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
+  is-zero-case-split (inl z) = z 
+  is-zero-case-split (inr nz) = ex-falso 
+    (remainder-min-dist-succ-x-not-is-nonzero x y nz) 
 
 minimal-positive-distance-div-fst : (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x
 minimal-positive-distance-div-fst zero-ℕ y = pair zero-ℕ (left-zero-law-mul-ℕ (minimal-positive-distance zero-ℕ y))
@@ -1136,41 +1148,42 @@ gcd-ℕ-div-y-mults x y z d = div-mul-ℕ
   (gcd-ℕ x y) y (pr2 (is-common-divisor-gcd-ℕ x y))
 
 gcd-ℕ-div-dist-between-mult : (x y z : ℕ) → is-distance-between-multiples-ℕ x y z → div-ℕ (gcd-ℕ x y) z 
-gcd-ℕ-div-dist-between-mult x y z dist
-  with decide-leq-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-... | inl sxty = div-right-summand-ℕ (gcd-ℕ x y)
-  (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-  z
-  (gcd-ℕ-div-x-mults x y z dist)
-  (concatenate-div-eq-ℕ (gcd-ℕ-div-y-mults x y z dist) (inv rewrite-dist))
-  where
-  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) z ＝ mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y 
-  rewrite-dist = rewrite-right-dist-add-ℕ  
-    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-    z
-    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-    sxty
-    (inv (is-distance-between-multiples-eqn-ℕ dist))
+gcd-ℕ-div-dist-between-mult x y z dist = 
+  sx-ty-case-split (decide-leq-ℕ (mul-ℕ s x) (mul-ℕ t y))
+  where 
+  s : ℕ 
+  s = is-distance-between-multiples-fst-coeff-ℕ dist
+  
+  t : ℕ 
+  t = is-distance-between-multiples-snd-coeff-ℕ dist
+  
+  sx-ty-case-split : 
+    (leq-ℕ (mul-ℕ s x) (mul-ℕ t y) 
+    + leq-ℕ (mul-ℕ t y) (mul-ℕ s x))
+    → div-ℕ (gcd-ℕ x y) z
+  sx-ty-case-split (inl sxty) = 
+    div-right-summand-ℕ (gcd-ℕ x y) (mul-ℕ s x) z
+      (gcd-ℕ-div-x-mults x y z dist)
+      (concatenate-div-eq-ℕ (gcd-ℕ-div-y-mults x y z dist) 
+        (inv rewrite-dist))
+    where
+    rewrite-dist : add-ℕ (mul-ℕ s x) z ＝ mul-ℕ t y 
+    rewrite-dist = rewrite-right-dist-add-ℕ  
+      (mul-ℕ s x) z (mul-ℕ t y) sxty
+      (inv (is-distance-between-multiples-eqn-ℕ dist))
+  
+  sx-ty-case-split (inr tysx) =  
+    div-right-summand-ℕ (gcd-ℕ x y) (mul-ℕ t y) z
+      (gcd-ℕ-div-y-mults x y z dist)
+      (concatenate-div-eq-ℕ (gcd-ℕ-div-x-mults x y z dist) (inv rewrite-dist)) 
+    where
+    rewrite-dist : add-ℕ (mul-ℕ t y) z ＝ mul-ℕ s x 
+    rewrite-dist = rewrite-right-dist-add-ℕ (mul-ℕ t y) z (mul-ℕ s x) tysx
+      (inv (is-distance-between-multiples-eqn-ℕ dist) 
+        ∙ symmetric-dist-ℕ (mul-ℕ s x) (mul-ℕ t y))
 
-... | inr tysx = div-right-summand-ℕ (gcd-ℕ x y)
-  (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-  z
-  (gcd-ℕ-div-y-mults x y z dist)
-  (concatenate-div-eq-ℕ (gcd-ℕ-div-x-mults x y z dist) (inv rewrite-dist)) 
-  where
-  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y) z ＝ mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x 
-  rewrite-dist = rewrite-right-dist-add-ℕ  
-    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-    z
-    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-    tysx
-    (inv (is-distance-between-multiples-eqn-ℕ dist) 
-      ∙ symmetric-dist-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y))
-
-  div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-  div-gcd-x = div-mul-ℕ 
-    (is-distance-between-multiples-fst-coeff-ℕ dist) 
-    (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
+    div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ s x)
+    div-gcd-x = div-mul-ℕ s (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
 
 gcd-ℕ-div-minimal-positive-distance : (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → div-ℕ (gcd-ℕ x y) (minimal-positive-distance x y)
 gcd-ℕ-div-minimal-positive-distance x y H = gcd-ℕ-div-dist-between-mult x y (minimal-positive-distance x y) (minimal-positive-distance-is-distance x y H)  
@@ -1252,78 +1265,47 @@ bezouts-lemma-refactor-hypotheses x y H K = (equational-reasoning
     (is-nonnegative-int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P)) 
     (is-nonnegative-is-positive-ℤ K)
 
--- refactor H, maybe just make x and y both positive? 
 bezouts-lemma-pos-ints : (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
-bezouts-lemma-pos-ints x y H K with 
-  (decide-is-nonnegative-ℤ {diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)})
-... | inl pos = pair 
-    (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))
-    (pair (neg-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) 
-    (inv eqn))
+bezouts-lemma-pos-ints x y H K =
+  sx-ty-nonneg-case-split 
+    (decide-is-nonnegative-ℤ {diff-ℤ (mul-ℤ s x) (mul-ℤ t y)}) 
   where
-  eqn : gcd-ℤ x y ＝ 
-    (add-ℤ 
-        (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) y))
-  eqn = equational-reasoning
-    gcd-ℤ x y
-    ＝ int-ℕ (abs-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-    by (ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K))
-    ＝ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)) 
-    by int-abs-is-nonnegative-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)) pos
-    ＝ (add-ℤ 
-        (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) y)) 
-    by (ap (λ M → add-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) M) 
-      (inv (left-negative-law-mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-... | inr neg = pair (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))))
-  (pair (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) 
-  (inv eqn))
-  where 
-  eqn : gcd-ℤ x y ＝
-    (add-ℤ 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x) 
-        (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))
-  eqn = equational-reasoning
-    gcd-ℤ x y
-    ＝ int-ℕ (abs-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-    by (ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K))
-    ＝ int-ℕ (abs-ℤ (neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))))
-    by (ap (λ M → int-ℕ M) (inv (abs-neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))))
-    ＝ (neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) 
-    by int-abs-is-nonnegative-ℤ (neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) neg
-    ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x))
-    (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) 
-    by (distributive-neg-add-ℤ 
-      (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x)
-      (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x)
-    (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) 
-    by (ap (λ M → add-ℤ M (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))) 
-      (inv (left-negative-law-mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x))) 
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x)
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y) 
-    by (ap (λ M → add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x) M)
-      (neg-neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-
+  s : ℤ
+  s = int-ℕ (minimal-positive-distance-x-coeff 
+    (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))
+  t : ℤ 
+  t = int-ℕ (minimal-positive-distance-y-coeff 
+    (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)) 
+  
+  sx-ty-nonneg-case-split : 
+    (is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))
+    + is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
+    → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+  sx-ty-nonneg-case-split (inl pos) = (s , (neg-ℤ t) , 
+    inv (equational-reasoning
+      gcd-ℤ x y
+      ＝ int-ℕ (abs-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)))
+      by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
+      ＝ diff-ℤ (mul-ℤ s x) (mul-ℤ t y) 
+      by int-abs-is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) pos
+      ＝ add-ℤ (mul-ℤ s x) (mul-ℤ (neg-ℤ t) y) 
+      by ap (λ M → add-ℤ (mul-ℤ s x) M) (inv (left-negative-law-mul-ℤ t y))))
+  sx-ty-nonneg-case-split (inr neg) = ((neg-ℤ s) , t ,
+    inv (equational-reasoning
+      gcd-ℤ x y
+      ＝ int-ℕ (abs-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)))
+      by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
+      ＝ int-ℕ (abs-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
+      by ap (λ M → int-ℕ M) (inv (abs-neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
+      ＝ neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) 
+      by int-abs-is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))) neg
+      ＝ add-ℤ (neg-ℤ (mul-ℤ s x)) (neg-ℤ (neg-ℤ (mul-ℤ t y))) 
+      by distributive-neg-add-ℤ (mul-ℤ s x) (neg-ℤ (mul-ℤ t y))
+      ＝ add-ℤ (mul-ℤ (neg-ℤ s) x) (neg-ℤ (neg-ℤ (mul-ℤ t y))) 
+      by ap (λ M → add-ℤ M (neg-ℤ (neg-ℤ (mul-ℤ t y)))) 
+        (inv (left-negative-law-mul-ℤ s x)) 
+      ＝ add-ℤ (mul-ℤ (neg-ℤ s) x) (mul-ℤ t y) 
+      by ap (λ M → add-ℤ (mul-ℤ (neg-ℤ s) x) M) (neg-neg-ℤ (mul-ℤ t y)))) 
 
 bezouts-lemma-ℤ : (x y : ℤ) → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
 bezouts-lemma-ℤ (inl x) (inl y) = pair (neg-ℤ s) (pair (neg-ℤ t) eqn)
