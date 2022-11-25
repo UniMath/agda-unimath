@@ -350,43 +350,62 @@ sim-unique-numerator-reduce-fraction-ℤ x y H = antisymmetric-div-ℤ
     div-red-y-num red-y-coprime 
 
 unique-numerator-reduce-fraction-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
-unique-numerator-reduce-fraction-ℤ x y H with 
-  (is-decidable-is-zero-ℤ (int-reduce-numerator-fraction-ℤ x))
-unique-numerator-reduce-fraction-ℤ x y H | inl z = z ∙ inv (is-zero-sim-unit-ℤ 
-  (sim-unique-numerator-reduce-fraction-ℤ x y H) z)
-unique-numerator-reduce-fraction-ℤ x y H | inr nz
-  with (is-plus-or-minus-sim-unit-ℤ (sim-unique-numerator-reduce-fraction-ℤ x y H))
-unique-numerator-reduce-fraction-ℤ x y H | inr nz | inl pos = pos
-unique-numerator-reduce-fraction-ℤ x y H | inr nz | inr neg = 
-  ex-falso (Eq-eq-ℤ contra)
-  where 
-  lem : (w : ℤ) → is-positive-ℤ w → Σ ℕ (λ n → w ＝ inr (inr n))
-  lem (inr (inr n)) H = pair n refl
-  reduced-eqn : 
-    mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y) 
-    ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))  
-  reduced-eqn = equational-reasoning
-    mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
-    ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x) 
-      by reduce-preserves-sim-ℤ x y H
-    ＝ mul-ℤ (mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ)
-      (int-reduce-denominator-fraction-ℤ x)
-      by ap (λ K → mul-ℤ K (int-reduce-denominator-fraction-ℤ x)) (inv neg ∙ commutative-mul-ℤ neg-one-ℤ (int-reduce-numerator-fraction-ℤ x)) 
-    ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)) 
-      by associative-mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)
-  x-nat : ℕ
-  x-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x)) 
-  y-nat : ℕ
-  y-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)) 
-  contra : inr (inr y-nat) ＝ neg-ℤ (inr (inr x-nat))
-  contra = equational-reasoning
-    inr (inr y-nat)
-    ＝ (int-reduce-denominator-fraction-ℤ y)
-      by inv (pr2 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)))
-    ＝ neg-ℤ (int-reduce-denominator-fraction-ℤ x)
-      by is-injective-mul-ℤ (int-reduce-numerator-fraction-ℤ x) nz reduced-eqn
-    ＝ neg-ℤ (inr (inr x-nat))
-      by ap neg-ℤ (pr2 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x)))
+unique-numerator-reduce-fraction-ℤ x y H = 
+  is-zero-num-case-split 
+    (is-decidable-is-zero-ℤ (int-reduce-numerator-fraction-ℤ x))
+  where
+  is-zero-num-case-split : 
+    (is-zero-ℤ (int-reduce-numerator-fraction-ℤ x)
+    + ¬ (is-zero-ℤ (int-reduce-numerator-fraction-ℤ x)))
+    → int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
+
+  is-zero-num-case-split (inl z) =
+    z ∙ inv (is-zero-sim-unit-ℤ 
+      (sim-unique-numerator-reduce-fraction-ℤ x y H) z)
+
+  is-zero-num-case-split (inr nz) = 
+    is-plus-or-minus-case-split
+      (is-plus-or-minus-sim-unit-ℤ (sim-unique-numerator-reduce-fraction-ℤ x y H))
+    where 
+    is-plus-or-minus-case-split : 
+      is-plus-or-minus-ℤ (int-reduce-numerator-fraction-ℤ x) 
+        (int-reduce-numerator-fraction-ℤ y)
+      → int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
+    is-plus-or-minus-case-split (inl pos) = pos
+    is-plus-or-minus-case-split (inr neg) = ex-falso (Eq-eq-ℤ contra)
+      where 
+      lem : (w : ℤ) → is-positive-ℤ w → Σ ℕ (λ n → w ＝ inr (inr n))
+      lem (inr (inr n)) H = pair n refl
+      
+      reduced-eqn : 
+        mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y) 
+        ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))  
+      reduced-eqn = equational-reasoning
+        mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
+        ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x) 
+        by reduce-preserves-sim-ℤ x y H
+        ＝ mul-ℤ (mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ)
+          (int-reduce-denominator-fraction-ℤ x)
+        by ap (λ K → mul-ℤ K (int-reduce-denominator-fraction-ℤ x)) (inv neg ∙ commutative-mul-ℤ neg-one-ℤ (int-reduce-numerator-fraction-ℤ x)) 
+        ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)) 
+          by associative-mul-ℤ (int-reduce-numerator-fraction-ℤ x) neg-one-ℤ (int-reduce-denominator-fraction-ℤ x)
+      
+      x-nat : ℕ
+      x-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x)) 
+      
+      y-nat : ℕ
+      y-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)) 
+  
+      contra : inr (inr y-nat) ＝ neg-ℤ (inr (inr x-nat))
+      contra = equational-reasoning
+        inr (inr y-nat)
+        ＝ (int-reduce-denominator-fraction-ℤ y)
+        by inv (pr2 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)))
+        ＝ neg-ℤ (int-reduce-denominator-fraction-ℤ x)
+        by is-injective-mul-ℤ (int-reduce-numerator-fraction-ℤ x) nz reduced-eqn
+        ＝ neg-ℤ (inr (inr x-nat))
+        by ap neg-ℤ (pr2 (lem (int-reduce-denominator-fraction-ℤ x) (is-positive-int-reduce-denominator-fraction-ℤ x)))
+ 
 
 sim-unique-denominator-reduce-fraction-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → sim-unit-ℤ (int-reduce-denominator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
 sim-unique-denominator-reduce-fraction-ℤ x y H = antisymmetric-div-ℤ
