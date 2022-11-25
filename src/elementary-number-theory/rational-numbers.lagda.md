@@ -7,6 +7,8 @@ title: The rational numbers
 
 module elementary-number-theory.rational-numbers where
 
+open import elementary-number-theory.absolute-value-integers using
+  ( abs-ℤ; abs-neg-ℤ)
 open import elementary-number-theory.bezouts-lemma using
   ( div-right-factor-coprime-ℤ)
 open import elementary-number-theory.divisibility-integers using
@@ -23,10 +25,12 @@ open import elementary-number-theory.greatest-common-divisor-integers using
   ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ;
     is-zero-right-is-zero-gcd-ℤ; is-positive-gcd-ℤ; div-gcd-is-common-divisor-ℤ;
     is-one-gcd-one-ℤ'; is-commutative-gcd-ℤ)
+open import elementary-number-theory.greatest-common-divisor-natural-numbers using 
+  ( gcd-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
     is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ; one-positive-ℤ; is-set-ℤ;
-    is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ)
+    is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ; int-ℕ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
     commutative-mul-ℤ; is-injective-mul-ℤ; is-plus-or-minus-ℤ; right-unit-law-mul-ℤ)
@@ -514,3 +518,11 @@ pr2 ℚ-Set = is-set-ℚ
 
 ```
 
+### Negation of rationals 
+
+```agda
+neg-ℚ : ℚ → ℚ
+neg-ℚ ((n , d , pos) , red) = ((neg-ℤ n , d , pos) , 
+  ap (λ H → int-ℕ (gcd-ℕ H (abs-ℤ d))) (abs-neg-ℤ n) ∙ red)
+
+```
