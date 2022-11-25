@@ -10,6 +10,7 @@ module elementary-number-theory.natural-numbers where
 open import foundation-core.empty-types using (ex-falso)
 
 open import foundation.contractible-types using (eq-is-contr)
+open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; is-prop-empty)
 open import foundation.equivalences using
@@ -189,4 +190,34 @@ is-prop-is-one-ℕ n = is-set-ℕ n 1
 is-one-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-one-ℕ-Prop n) = is-one-ℕ n
 pr2 (is-one-ℕ-Prop n) = is-prop-is-one-ℕ n
+```
+
+### The natural numbers is a fixpoint to the functor `X ↦ 1 + X`
+
+```agda
+map-equiv-ℕ : ℕ → unit + ℕ
+map-equiv-ℕ zero-ℕ = inl star
+map-equiv-ℕ (succ-ℕ n) = inr n
+
+map-inv-equiv-ℕ : unit + ℕ → ℕ
+map-inv-equiv-ℕ (inl x) = zero-ℕ
+map-inv-equiv-ℕ (inr n) = succ-ℕ n
+
+isretr-map-inv-equiv-ℕ :
+  ( map-inv-equiv-ℕ ∘ map-equiv-ℕ) ~ id
+isretr-map-inv-equiv-ℕ zero-ℕ = refl
+isretr-map-inv-equiv-ℕ (succ-ℕ n) = refl
+
+issec-map-inv-equiv-ℕ :
+  ( map-equiv-ℕ ∘ map-inv-equiv-ℕ) ~ id
+issec-map-inv-equiv-ℕ (inl star) = refl
+issec-map-inv-equiv-ℕ (inr n) = refl
+
+equiv-ℕ : ℕ ≃ (unit + ℕ)
+pr1 equiv-ℕ = map-equiv-ℕ
+pr2 equiv-ℕ =
+  is-equiv-has-inverse
+    map-inv-equiv-ℕ
+    issec-map-inv-equiv-ℕ
+    isretr-map-inv-equiv-ℕ
 ```
