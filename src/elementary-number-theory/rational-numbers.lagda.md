@@ -29,13 +29,13 @@ open import elementary-number-theory.integers using
     is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
-    commutative-mul-ℤ; is-injective-mul-ℤ; is-plus-or-minus-ℤ)
+    commutative-mul-ℤ; is-injective-mul-ℤ; is-plus-or-minus-ℤ; right-unit-law-mul-ℤ)
 open import elementary-number-theory.natural-numbers using (ℕ)
 open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ; is-prop-is-relative-prime-ℤ)
 
 open import foundation.coproduct-types using (_+_; ind-coprod; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; _,_; pr1; pr2)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ')
 open import foundation.equality-cartesian-product-types using (eq-pair')
@@ -467,6 +467,36 @@ eq-ℚ-sim-fractions-ℤ x y H =
     ( pair
       ( unique-reduce-fraction-ℤ x y H)
       ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+
+reduce-is-reduced-fraction-ℤ-id : (x : fraction-ℤ) → (H : is-reduced-fraction-ℤ x) → reduce-fraction-ℤ x ＝ x
+reduce-is-reduced-fraction-ℤ-id (m , n , npos) H = 
+  eq-pair' (pair 
+    (equational-reasoning 
+      int-reduce-numerator-fraction-ℤ (m , n , npos)
+      ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ (m , n , npos)) one-ℤ
+      by inv (right-unit-law-mul-ℤ 
+        (int-reduce-numerator-fraction-ℤ (m , n , npos)))
+      ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ (m , n , npos)) (gcd-ℤ m n)
+      by ap (λ p → mul-ℤ (int-reduce-numerator-fraction-ℤ (m , n , npos)) p)
+        (inv H)
+      ＝ m by eq-reduce-numerator-fraction-ℤ (m , n , npos)) 
+    (eq-pair-Σ' (pair 
+      (equational-reasoning 
+        int-reduce-denominator-fraction-ℤ (m , n , npos)
+        ＝ mul-ℤ (int-reduce-denominator-fraction-ℤ (m , n , npos)) one-ℤ
+        by inv (right-unit-law-mul-ℤ 
+          (int-reduce-denominator-fraction-ℤ (m , n , npos)))
+        ＝ mul-ℤ (int-reduce-denominator-fraction-ℤ (m , n , npos)) (gcd-ℤ m n)
+        by ap (λ p → mul-ℤ (int-reduce-denominator-fraction-ℤ (m , n , npos)) p)
+          (inv H)
+        ＝ n by eq-reduce-denominator-fraction-ℤ (m , n , npos)) 
+      (eq-is-prop (is-prop-is-positive-ℤ n)))))
+
+
+in-fraction-ℤ-inv : (q : ℚ) → in-fraction-ℤ (pr1 q) ＝ q
+in-fraction-ℤ-inv (frac , red) = eq-pair-Σ' 
+  (pair (reduce-is-reduced-fraction-ℤ-id frac red) 
+    (eq-is-prop (is-prop-is-reduced-fraction-ℤ frac))) 
 ```
 
 ### The type of rationals is a set
@@ -481,5 +511,6 @@ is-set-ℚ =
 ℚ-Set : Set lzero
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
+
 ```
 
