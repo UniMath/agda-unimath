@@ -9,7 +9,7 @@ module elementary-number-theory.addition-rationals where
 
 open import elementary-number-theory.addition-integers using
   ( add-ℤ; left-unit-law-add-ℤ; right-unit-law-add-ℤ; commutative-add-ℤ; left-inverse-law-add-ℤ; associative-add-ℤ)
-open import elementary-number-theory.fractions using ( fraction-ℤ; numerator-fraction-ℤ; denominator-fraction-ℤ)
+open import elementary-number-theory.fractions using ( fraction-ℤ; numerator-fraction-ℤ; denominator-fraction-ℤ; is-positive-denominator-fraction-ℤ)
 open import elementary-number-theory.greatest-common-divisor-integers using ( gcd-ℤ; is-positive-gcd-is-positive-right-ℤ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-mul-ℤ; left-zero-law-mul-ℤ; associative-mul-ℤ;
@@ -24,13 +24,16 @@ open import elementary-number-theory.rational-numbers using
     int-reduce-numerator-fraction-ℤ; int-reduce-denominator-fraction-ℤ;
     eq-reduce-numerator-fraction-ℤ; eq-reduce-denominator-fraction-ℤ)
 
+open import foundation.binary-equivalences using (is-binary-equiv)
 open import foundation.cartesian-product-types using (pair')
 open import foundation.dependent-pair-types using (pair; _,_; pr1; pr2)
 open import foundation.equality-cartesian-product-types using (eq-pair')
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
 open import foundation.equational-reasoning
+open import foundation.equivalences using (is-equiv; _≃_)
 open import foundation.identity-types using
   (_＝_; refl; _∙_; inv; ap; ap-binary)
+open import foundation.interchange-law using (interchange-law; interchange-law-commutative-and-associative)
 open import foundation.propositions using (eq-is-prop)
 
 open import structured-types.pointed-types-equipped-with-automorphisms
@@ -324,4 +327,110 @@ abstract
     commutative-add-ℚ k (neg-ℚ k) ∙ left-inverse-law-add-ℚ k
 ```
 
+### Interchange law for addition
 
+```agda
+{-
+interchange-law-add-add-ℚ : interchange-law add-ℚ add-ℚ
+interchange-law-add-add-ℚ =
+  interchange-law-commutative-and-associative
+    add-ℚ
+    commutative-add-ℚ
+    associative-add-ℚ
+-}
+```
+
+### Addition by x is a binary equivalence
+
+```agda
+{- issec-add-neg-ℚ :
+  (x y : ℚ) → x +ℚ (neg-ℚ x +ℚ y) ＝ y
+issec-add-neg-ℚ x y =
+  equational-reasoning
+    x +ℚ (neg-ℚ x +ℚ y) 
+    ＝ (x +ℚ neg-ℚ x) +ℚ y   
+    by inv (associative-add-ℚ x (neg-ℚ x) y)
+    ＝ zero-ℚ +ℚ y                    
+    by ap (add-ℚ' y) (right-inverse-law-add-ℚ x)
+    ＝ y
+    by left-unit-law-add-ℚ y 
+
+isretr-add-neg-ℚ :
+  (x y : ℚ) → add-ℚ (neg-ℚ x) (add-ℚ x y) ＝ y
+isretr-add-neg-ℚ x y =
+  equational-reasoning
+    neg-ℚ x +ℚ (x +ℚ y) ＝ (neg-ℚ x +ℚ x) +ℚ y   by inv (associative-add-ℚ (neg-ℚ x) x y)
+                        ＝ y                     by ap (add-ℚ' y) (left-inverse-law-add-ℚ x)
+
+abstract
+  is-equiv-add-ℚ : (x : ℚ) → is-equiv (add-ℚ x)
+  pr1 (pr1 (is-equiv-add-ℚ x)) = add-ℚ (neg-ℚ x)
+  pr2 (pr1 (is-equiv-add-ℚ x)) = issec-add-neg-ℚ x
+  pr1 (pr2 (is-equiv-add-ℚ x)) = add-ℚ (neg-ℚ x)
+  pr2 (pr2 (is-equiv-add-ℚ x)) = isretr-add-neg-ℚ x
+
+equiv-add-ℚ : ℚ → (ℚ ≃ ℚ)
+pr1 (equiv-add-ℚ x) = add-ℚ x
+pr2 (equiv-add-ℚ x) = is-equiv-add-ℚ x
+
+issec-add-neg-ℚ' :
+  (x y : ℚ) → (y +ℚ neg-ℚ x) +ℚ x ＝ y
+issec-add-neg-ℚ' x y =
+  equational-reasoning
+    (y +ℚ neg-ℚ x) +ℚ x ＝ y +ℚ (neg-ℚ x +ℚ x)   by associative-add-ℚ y (neg-ℚ x) x
+                        ＝ y +ℚ zero-ℚ           by ap (add-ℚ y) (left-inverse-law-add-ℚ x)
+                        ＝ y                     by right-unit-law-add-ℚ y
+
+isretr-add-neg-ℚ' :
+  (x y : ℚ) → (y +ℚ x) +ℚ neg-ℚ x ＝ y
+isretr-add-neg-ℚ' x y =
+  equational-reasoning
+    (y +ℚ x) +ℚ neg-ℚ x ＝ y +ℚ (x +ℚ neg-ℚ x)   by associative-add-ℚ y x (neg-ℚ x)
+                        ＝ y +ℚ zero-ℚ           by ap (add-ℚ y) (right-inverse-law-add-ℚ x)
+                        ＝ y                     by right-unit-law-add-ℚ y
+
+abstract
+  is-equiv-add-ℚ' : (y : ℚ) → is-equiv (add-ℚ' y)
+  pr1 (pr1 (is-equiv-add-ℚ' y)) = add-ℚ' (neg-ℚ y)
+  pr2 (pr1 (is-equiv-add-ℚ' y)) = issec-add-neg-ℚ' y
+  pr1 (pr2 (is-equiv-add-ℚ' y)) = add-ℚ' (neg-ℚ y)
+  pr2 (pr2 (is-equiv-add-ℚ' y)) = isretr-add-neg-ℚ' y
+
+equiv-add-ℚ' : ℚ → (ℚ ≃ ℚ)
+pr1 (equiv-add-ℚ' y) = add-ℚ' y
+pr2 (equiv-add-ℚ' y) = is-equiv-add-ℚ' y
+
+is-binary-equiv-add-ℚ : is-binary-equiv add-ℚ
+pr1 is-binary-equiv-add-ℚ = is-equiv-add-ℚ'
+pr2 is-binary-equiv-add-ℚ = is-equiv-add-ℚ
+-}
+```
+
+### Distributivity of negatives over addition
+```agda
+{-
+abstract
+  distributive-neg-add-ℚ :
+    (k l : ℚ) → neg-ℚ (k +ℚ l) ＝ neg-ℚ k +ℚ neg-ℚ l
+  distributive-neg-add-ℚ 
+    ((k1 , k2 , kpos) , kred) ((l1 , l2 , lpos) , lred) =
+    inv (in-fraction-ℤ-inv (neg-ℚ 
+      (((k1 , k2 , kpos) , kred) +ℚ ((l1 , l2 , lpos) , lred)))) ∙
+    (eq-ℚ-sim-fractions-ℤ 
+      ?  
+      (pre-add-ℚ 
+        (neg-ℚ ((k1 , k2 , kpos) , kred)) 
+        (neg-ℚ ((l1 , l2 , lpos) , lred)))
+      ?)
+    where 
+    pos-sum : fraction-ℤ
+    pos-sum = pre-add-ℚ ((k1 , k2 , kpos) , kred) ((l1 , l2 , lpos) , lred)
+    pos-sum-num : ℤ
+    pos-sum-num = numerator-fraction-ℤ pos-sum
+    pos-sum-denom : ℤ
+    pos-sum-denom = denominator-fraction-ℤ pos-sum
+    pos-sum-denom-pos : is-positive-ℤ pos-sum-denom
+    pos-sum-denom-pos = is-positive-denominator-fraction-ℤ pos-sum
+-}
+
+```
