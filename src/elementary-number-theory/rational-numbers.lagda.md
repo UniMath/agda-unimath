@@ -524,5 +524,15 @@ pr2 ℚ-Set = is-set-ℚ
 neg-ℚ : ℚ → ℚ
 neg-ℚ ((n , d , pos) , red) = ((neg-ℤ n , d , pos) , 
   ap (λ H → int-ℕ (gcd-ℕ H (abs-ℤ d))) (abs-neg-ℤ n) ∙ red)
+```
+
+### Negation is an involution
+
+```agda
+neg-neg-ℚ : (k : ℚ) → neg-ℚ (neg-ℚ k) ＝ k
+neg-neg-ℚ ((n , d , pos) , red) = 
+  eq-pair-Σ' 
+    (eq-pair' (pair (neg-neg-ℤ n) refl) , 
+    (eq-is-prop (is-prop-is-reduced-fraction-ℤ (n , d , pos))))
 
 ```
