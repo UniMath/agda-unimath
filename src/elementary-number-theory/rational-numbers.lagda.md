@@ -8,7 +8,7 @@ title: The rational numbers
 module elementary-number-theory.rational-numbers where
 
 open import elementary-number-theory.absolute-value-integers using
-  ( abs-ℤ; abs-neg-ℤ)
+  ( abs-ℤ; abs-neg-ℤ; is-nonzero-abs-ℤ')
 open import elementary-number-theory.bezouts-lemma using
   ( div-right-factor-coprime-ℤ)
 open import elementary-number-theory.divisibility-integers using
@@ -28,13 +28,13 @@ open import elementary-number-theory.greatest-common-divisor-integers using
 open import elementary-number-theory.greatest-common-divisor-natural-numbers using 
   ( gcd-ℕ)
 open import elementary-number-theory.integers using
-  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
+  ( ℤ; is-positive-ℤ; is-nonnegative-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
     is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ; one-positive-ℤ; is-set-ℤ;
-    is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ; int-ℕ)
+    is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ; int-ℕ; is-positive-int-ℕ; decide-is-nonnegative-ℤ)
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
     commutative-mul-ℤ; is-injective-mul-ℤ; is-plus-or-minus-ℤ; right-unit-law-mul-ℤ)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ)
 open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ; is-prop-is-relative-prime-ℤ)
 
@@ -536,3 +536,25 @@ neg-neg-ℚ ((n , d , pos) , red) =
     (eq-is-prop (is-prop-is-reduced-fraction-ℤ (n , d , pos))))
 
 ```
+
+### Reciprocals of rationals
+
+```agda
+recip-ℚ : ℚ → ℚ
+recip-ℚ ((inl n , d , pos) , red) = ((neg-ℤ d , inr (inr n) , star ) , 
+  (equational-reasoning
+    gcd-ℤ (neg-ℤ d) (inr (inr n)) 
+    ＝ gcd-ℤ (inr (inr n)) (neg-ℤ d) 
+    by is-commutative-gcd-ℤ (neg-ℤ d) (inr (inr n))
+    ＝ gcd-ℤ (inl n) d 
+    by ap (λ H → int-ℕ (gcd-ℕ (succ-ℕ n) H)) (abs-neg-ℤ d)
+    ＝ one-ℤ by red))
+recip-ℚ ((inr (inl star) , d , pos) , red) = zero-ℚ
+recip-ℚ ((inr (inr n) , d , pos) , red) = (( d , inr (inr n) , star ) , 
+  (equational-reasoning
+    gcd-ℤ d (inr (inr n)) 
+    ＝ gcd-ℤ (inr (inr n)) d by is-commutative-gcd-ℤ d (inr (inr n))
+    ＝ one-ℤ by red)) 
+
+```
+
