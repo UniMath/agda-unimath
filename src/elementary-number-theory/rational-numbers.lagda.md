@@ -8,7 +8,7 @@ title: The rational numbers
 module elementary-number-theory.rational-numbers where
 
 open import elementary-number-theory.absolute-value-integers using
-  ( abs-ℤ; abs-neg-ℤ; is-nonzero-abs-ℤ')
+  ( abs-ℤ; abs-neg-ℤ)
 open import elementary-number-theory.bezouts-lemma using
   ( div-right-factor-coprime-ℤ)
 open import elementary-number-theory.divisibility-integers using
@@ -558,3 +558,8 @@ recip-ℚ ((inr (inr n) , d , pos) , red) = (( d , inr (inr n) , star ) ,
 
 ```
 
+### Reciprocation is an involution
+```agda
+-- recip-recip-ℚ → (k : ℚ) → recip-ℚ (recip-ℚ k) ＝ ℚ
+
+```
