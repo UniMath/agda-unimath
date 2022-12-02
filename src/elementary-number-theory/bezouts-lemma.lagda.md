@@ -115,105 +115,109 @@ int-is-distance-between-multiples-ℕ x y z (k , l , p) H =
 div-mod-is-distance-between-multiples-ℕ :
   (x y z : ℕ) →
   is-distance-between-multiples-ℕ x y z → div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)
-div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) 
-  with decide-leq-ℕ (mul-ℕ k x) (mul-ℕ l y)
-... | inl kxly = (mod-ℕ x l , 
-  (equational-reasoning
-    mul-ℤ-Mod x (mod-ℕ x l) (mod-ℕ x y)
-    ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℕ x y) 
-      by inv (ap (λ p → mul-ℤ-Mod x p (mod-ℕ x y)) (mod-int-ℕ x l))
-    ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℤ x (int-ℕ y))
-      by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) p) (mod-int-ℕ x y))
-    ＝ mod-ℤ x (mul-ℤ (int-ℕ l) (int-ℕ y)) 
-      by inv (preserves-mul-mod-ℤ x (int-ℕ l) (int-ℕ y)) 
-    ＝ mod-ℤ x (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x)))
-      by inv (ap (mod-ℤ x) 
-        (int-is-distance-between-multiples-ℕ x y z (k , l , p) kxly))
-    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) 
-      (mod-ℤ x (mul-ℤ (int-ℕ k) (int-ℕ x)))
-      by preserves-add-mod-ℤ x (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x)) 
-    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
-      (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x (int-ℕ x)))
-      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
-        (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x))
-    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
-      (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x zero-ℤ))
-      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) 
-        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p)) 
-        (mod-int-ℕ x x ∙ (mod-refl-ℕ x ∙ inv (mod-zero-ℤ x))) 
-    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
-      (mod-ℤ x (mul-ℤ (int-ℕ k) zero-ℤ)) 
-      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
-        (inv (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ))
-    ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x zero-ℤ)
-      by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x p))
-        (right-zero-law-mul-ℤ (int-ℕ k))
-    ＝ mod-ℤ x (add-ℤ (int-ℕ z) zero-ℤ)
-      by inv (preserves-add-mod-ℤ x (int-ℕ z) zero-ℤ)
-    ＝ mod-ℤ x (int-ℕ z)
-      by ap (mod-ℤ x) (right-unit-law-add-ℤ (int-ℕ z))
-    ＝ mod-ℕ x z by mod-int-ℕ x z
-  ))
-... | inr lykx = (mod-ℤ x (neg-ℤ (int-ℕ l)) , 
-  (equational-reasoning
-    mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℕ x y)
-    ＝ mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℤ x (int-ℕ y)) 
-      by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) p) 
-        (mod-int-ℕ x y)) 
-    ＝ mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
-      by inv (preserves-mul-mod-ℤ x (neg-ℤ (int-ℕ l)) (int-ℕ y))
-    ＝ mod-ℤ x (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) zero-ℤ)
-      by ap (mod-ℤ x) 
-        (inv (right-unit-law-add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))))
-    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
-        (mod-ℤ x zero-ℤ)
-      by preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) (zero-ℤ)
-    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
-        (mod-ℤ x (mul-ℤ (int-ℕ k) zero-ℤ))
-      by ap (λ p → add-ℤ-Mod x 
-        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) (mod-ℤ x p))
-        (inv (right-zero-law-mul-ℤ (int-ℕ k)))
-    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
-        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x zero-ℤ))
-      by ap (λ p → add-ℤ-Mod x 
-        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p)
-        (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ)
-    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
-        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x (int-ℕ x)))
-      by ap (λ p → add-ℤ-Mod x
-        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
-        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p))
-        (mod-zero-ℤ x ∙ (inv (mod-refl-ℕ x) ∙ inv (mod-int-ℕ x x)))
-    ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+div-mod-is-distance-between-multiples-ℕ x y z (k , l , p) = 
+  kxly-case-split (decide-leq-ℕ (mul-ℕ k x) (mul-ℕ l y))
+  where
+    kxly-case-split : 
+      (leq-ℕ (mul-ℕ k x) (mul-ℕ l y) + leq-ℕ (mul-ℕ l y) (mul-ℕ k x))
+      → div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)
+    kxly-case-split (inl kxly) = (mod-ℕ x l , 
+      (equational-reasoning
+      mul-ℤ-Mod x (mod-ℕ x l) (mod-ℕ x y)
+      ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℕ x y) 
+        by inv (ap (λ p → mul-ℤ-Mod x p (mod-ℕ x y)) (mod-int-ℕ x l))
+      ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) (mod-ℤ x (int-ℕ y))
+        by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (int-ℕ l)) p) (mod-int-ℕ x y))
+      ＝ mod-ℤ x (mul-ℤ (int-ℕ l) (int-ℕ y)) 
+        by inv (preserves-mul-mod-ℤ x (int-ℕ l) (int-ℕ y)) 
+      ＝ mod-ℤ x (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x)))
+        by inv (ap (mod-ℤ x) 
+          (int-is-distance-between-multiples-ℕ x y z (k , l , p) kxly))
+      ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) 
         (mod-ℤ x (mul-ℤ (int-ℕ k) (int-ℕ x)))
-      by ap (λ p → add-ℤ-Mod x 
-        (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p) 
-        (inv (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x)))
-    ＝ mod-ℤ x (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
-        (mul-ℤ (int-ℕ k) (int-ℕ x)))
-      by inv (preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
-        (mul-ℤ (int-ℕ k) (int-ℕ x)))
-    ＝ mod-ℤ x (int-ℕ z)
-      by ap (mod-ℤ x) (equational-reasoning
-        add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) 
-          (mul-ℤ (int-ℕ k) (int-ℕ x))
-        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))) 
-          (mul-ℤ (int-ℕ k) (int-ℕ x))
-        by ap (λ p → add-ℤ p (mul-ℤ (int-ℕ k) (int-ℕ x)))
-          (left-negative-law-mul-ℤ (int-ℕ l) (int-ℕ y))
-        ＝ add-ℤ (mul-ℤ (int-ℕ k) (int-ℕ x)) 
-           (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))
-        by commutative-add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))) 
-          (mul-ℤ (int-ℕ k) (int-ℕ x))
-        ＝ add-ℤ (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ l) (int-ℕ y))) 
-          (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))
-        by ap (λ p → add-ℤ p (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))))
-          (inv (int-is-distance-between-multiples-ℕ y x z 
-            (is-distance-between-multiples-sym-ℕ x y z (k , l , p)) 
-            lykx))
-        ＝ int-ℕ z
-        by isretr-add-neg-ℤ' (mul-ℤ (int-ℕ l) (int-ℕ y)) (int-ℕ z))
-     ＝ mod-ℕ x z by mod-int-ℕ x z))
+        by preserves-add-mod-ℤ x (int-ℕ z) (mul-ℤ (int-ℕ k) (int-ℕ x)) 
+      ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
+        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x (int-ℕ x)))
+        by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
+          (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x))
+      ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
+        (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x zero-ℤ))
+        by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) 
+          (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p)) 
+          (mod-int-ℕ x x ∙ (mod-refl-ℕ x ∙ inv (mod-zero-ℤ x))) 
+      ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z))
+        (mod-ℤ x (mul-ℤ (int-ℕ k) zero-ℤ)) 
+        by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) p)
+          (inv (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ))
+      ＝ add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x zero-ℤ)
+        by ap (λ p → add-ℤ-Mod x (mod-ℤ x (int-ℕ z)) (mod-ℤ x p))
+          (right-zero-law-mul-ℤ (int-ℕ k))
+      ＝ mod-ℤ x (add-ℤ (int-ℕ z) zero-ℤ)
+        by inv (preserves-add-mod-ℤ x (int-ℕ z) zero-ℤ)
+      ＝ mod-ℤ x (int-ℕ z)
+        by ap (mod-ℤ x) (right-unit-law-add-ℤ (int-ℕ z))
+      ＝ mod-ℕ x z by mod-int-ℕ x z
+     ))
+    kxly-case-split (inr lykx) = (mod-ℤ x (neg-ℤ (int-ℕ l)) , 
+      (equational-reasoning
+      mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℕ x y)
+      ＝ mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) (mod-ℤ x (int-ℕ y)) 
+        by inv (ap (λ p → mul-ℤ-Mod x (mod-ℤ x (neg-ℤ (int-ℕ l))) p) 
+          (mod-int-ℕ x y)) 
+      ＝ mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
+        by inv (preserves-mul-mod-ℤ x (neg-ℤ (int-ℕ l)) (int-ℕ y))
+      ＝ mod-ℤ x (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) zero-ℤ)
+        by ap (mod-ℤ x) 
+          (inv (right-unit-law-add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))))
+      ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+          (mod-ℤ x zero-ℤ)
+        by preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) (zero-ℤ)
+      ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+          (mod-ℤ x (mul-ℤ (int-ℕ k) zero-ℤ))
+        by ap (λ p → add-ℤ-Mod x 
+          (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) (mod-ℤ x p))
+          (inv (right-zero-law-mul-ℤ (int-ℕ k)))
+      ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+          (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x zero-ℤ))
+        by ap (λ p → add-ℤ-Mod x 
+          (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p)
+          (preserves-mul-mod-ℤ x (int-ℕ k) zero-ℤ)
+      ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+          (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) (mod-ℤ x (int-ℕ x)))
+        by ap (λ p → add-ℤ-Mod x
+          (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+          (mul-ℤ-Mod x (mod-ℤ x (int-ℕ k)) p))
+          (mod-zero-ℤ x ∙ (inv (mod-refl-ℕ x) ∙ inv (mod-int-ℕ x x)))
+      ＝ add-ℤ-Mod x (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)))
+        (mod-ℤ x (mul-ℤ (int-ℕ k) (int-ℕ x)))
+        by ap (λ p → add-ℤ-Mod x 
+          (mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))) p) 
+          (inv (preserves-mul-mod-ℤ x (int-ℕ k) (int-ℕ x)))
+      ＝ mod-ℤ x (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
+          (mul-ℤ (int-ℕ k) (int-ℕ x)))
+        by inv (preserves-add-mod-ℤ x (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y))
+          (mul-ℤ (int-ℕ k) (int-ℕ x)))
+      ＝ mod-ℤ x (int-ℕ z)
+        by ap (mod-ℤ x) (equational-reasoning
+          add-ℤ (mul-ℤ (neg-ℤ (int-ℕ l)) (int-ℕ y)) 
+            (mul-ℤ (int-ℕ k) (int-ℕ x))
+          ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))) 
+            (mul-ℤ (int-ℕ k) (int-ℕ x))
+          by ap (λ p → add-ℤ p (mul-ℤ (int-ℕ k) (int-ℕ x)))
+            (left-negative-law-mul-ℤ (int-ℕ l) (int-ℕ y))
+          ＝ add-ℤ (mul-ℤ (int-ℕ k) (int-ℕ x)) 
+             (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))
+          by commutative-add-ℤ (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))) 
+            (mul-ℤ (int-ℕ k) (int-ℕ x))
+          ＝ add-ℤ (add-ℤ (int-ℕ z) (mul-ℤ (int-ℕ l) (int-ℕ y))) 
+            (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y)))
+          by ap (λ p → add-ℤ p (neg-ℤ (mul-ℤ (int-ℕ l) (int-ℕ y))))
+            (inv (int-is-distance-between-multiples-ℕ y x z 
+              (is-distance-between-multiples-sym-ℕ x y z (k , l , p)) 
+              lykx))
+          ＝ int-ℕ z
+          by isretr-add-neg-ℤ' (mul-ℤ (int-ℕ l) (int-ℕ y)) (int-ℕ z))
+       ＝ mod-ℕ x z by mod-int-ℕ x z))
 
 ```
 
@@ -221,206 +225,308 @@ div-mod-is-distance-between-multiples-ℕ x y z (k , l , p)
 If `x = 0`, then we can simply argue in `ℤ`. Otherwise, if `[y] | [z]` in `ℤ-Mod x`, there exists some equivalence class `u` in `ℤ-Mod x` such that `[u] [y] ≡ [z]` as a congruence mod `x`. This `u` can always be chosen such that `x > u ≥ 0`. Therefore, there exists some integer `a ≥ 0` such that `ax = uy - z`, or `ax = z - uy`. In the first case, we can extract the distance condition we desire. In the other case, we have that `ax + uy = z`. This can be written as `(a + y)x + (u - x)y = z`, so that the second term is non-positive. Then, in this case, we again can extract the distance condition we desire.     
 
 ```agda
+cong-div-mod-ℤ : (x y z : ℕ) → (q : div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))
+  → cong-ℤ (int-ℕ x)   
+    (mul-ℤ (int-ℤ-Mod x (pr1 q)) (int-ℕ y)) (int-ℕ z)
+cong-div-mod-ℤ x y z (u , p) = cong-eq-mod-ℤ x 
+  (mul-ℤ (int-ℤ-Mod x u) (int-ℕ y)) (int-ℕ z)
+  (equational-reasoning 
+    mod-ℤ x (mul-ℤ (int-ℤ-Mod x u) (int-ℕ y))
+    ＝ mul-ℤ-Mod x (mod-ℤ x (int-ℤ-Mod x u)) (mod-ℤ x (int-ℕ y))
+      by preserves-mul-mod-ℤ x (int-ℤ-Mod x u) (int-ℕ y) 
+    ＝ mul-ℤ-Mod x u (mod-ℤ x (int-ℕ y))
+      by ap (λ p → mul-ℤ-Mod x p (mod-ℤ x (int-ℕ y))) (issec-int-ℤ-Mod x u)
+    ＝ mul-ℤ-Mod x u (mod-ℕ x y)
+      by ap (λ p → mul-ℤ-Mod x u p) (mod-int-ℕ x y)
+    ＝ mod-ℕ x z by p 
+    ＝ mod-ℤ x (int-ℕ z) by inv (mod-int-ℕ x z)) 
+
 is-distance-between-multiples-div-mod-ℕ :
   (x y z : ℕ) →
   div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z) → is-distance-between-multiples-ℕ x y z
-is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p)
-  with (decide-is-nonnegative-ℤ {u}) in eq
-... | inl nonneg = (zero-ℕ , abs-ℤ u , 
-  is-injective-int-ℕ (inv (mul-int-ℕ (abs-ℤ u) y) 
-    ∙ (ap (λ p → mul-ℤ p (int-ℕ y)) (int-abs-is-nonnegative-ℤ u nonneg) ∙ p)))
-... | inr neg = (zero-ℕ , zero-ℕ , path)
-  where 
-  path : zero-ℕ ＝ z 
-  path = is-injective-int-ℕ (inv 
-    (is-zero-is-nonnegative-neg-is-nonnegative-ℤ (int-ℕ z) (is-nonnegative-int-ℕ z) 
-      (tr is-nonnegative-ℤ 
-        (left-negative-law-mul-ℤ u (int-ℕ y) ∙ ap (neg-ℤ) p) 
-        (is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))) 
-  
-is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p)
-  with (decide-is-nonnegative-ℤ 
-        {add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (neg-ℤ (int-ℕ z))})
-... | inl uy-z = (abs-ℤ a , nat-Fin (succ-ℕ x) u , lem3)
+is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) = 
+  u-nonneg-case-split (decide-is-nonnegative-ℤ {u})
   where
-  lem : cong-ℤ (int-ℕ (succ-ℕ x)) 
-    (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (int-ℕ z)
-  lem = cong-eq-mod-ℤ (succ-ℕ x) 
-    (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (int-ℕ z) 
-    ( preserves-mul-mod-ℤ (succ-ℕ x) (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y) 
-    ∙ ( ap (λ p → mul-ℤ-Mod (succ-ℕ x) p (mod-ℤ (succ-ℕ x) (int-ℕ y))) 
-      (issec-int-ℤ-Mod (succ-ℕ x) u) 
-    ∙ ( ap (λ p → mul-ℤ-Mod (succ-ℕ x) u p) (mod-int-ℕ (succ-ℕ x) y) 
-    ∙ ( p 
-    ∙ ( inv (mod-int-ℕ (succ-ℕ x) z))))))
+  u-nonneg-case-split : 
+    (is-nonnegative-ℤ u + is-nonnegative-ℤ (neg-ℤ u))
+    → is-distance-between-multiples-ℕ zero-ℕ y z
+  u-nonneg-case-split (inl nonneg) = (zero-ℕ , abs-ℤ u , 
+    is-injective-int-ℕ 
+      (inv (mul-int-ℕ (abs-ℤ u) y) 
+        ∙ (ap (λ H → mul-ℤ H (int-ℕ y)) 
+          (int-abs-is-nonnegative-ℤ u nonneg) ∙ p)))
+  u-nonneg-case-split (inr neg) = (zero-ℕ , zero-ℕ ,
+    is-injective-int-ℕ 
+      (inv 
+        (is-zero-is-nonnegative-neg-is-nonnegative-ℤ 
+          (int-ℕ z) (is-nonnegative-int-ℕ z) 
+          (tr is-nonnegative-ℤ 
+            (left-negative-law-mul-ℤ u (int-ℕ y) ∙ ap (neg-ℤ) p) 
+            (is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))))
 
-  a : ℤ
-  a = pr1 lem
+is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
+  uy-z-case-split (decide-is-nonnegative-ℤ 
+    {add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (neg-ℤ (int-ℕ z))})
+  where
+  a : ℤ 
+  a = pr1 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))
 
-  path : mul-ℤ a (int-ℕ (succ-ℕ x)) ＝ add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) 
-    (int-ℕ y)) (neg-ℤ (int-ℕ z)) 
-  path = pr2 lem
-
-  lem2 : add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+  a-eqn-pos : add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
     (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x)))) ＝ int-ℕ z 
-  lem2 = commutative-add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-    (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x)))) 
-    ∙ ( ap (λ p → add-ℤ p (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) 
-      (inv (left-negative-law-mul-ℤ a (int-ℕ (succ-ℕ x)))) 
-    ∙ ( ap (λ p → add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) p) 
-      (inv (issec-add-neg-ℤ' (int-ℕ z) 
-      (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))) 
-    ∙ ( inv (associative-add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+  a-eqn-pos = (equational-reasoning 
+    add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+      (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))))
+    ＝ add-ℤ (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))))
+      (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+      by commutative-add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+        (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))))
+    ＝ add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x)))
+      (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+      by ap (λ p → add-ℤ p (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) 
+        (inv (left-negative-law-mul-ℤ a (int-ℕ (succ-ℕ x)))) 
+    ＝ add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x)))
+        (add-ℤ 
+          (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (neg-ℤ (int-ℕ z))) (int-ℕ z)) 
+      by ap (λ p → add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) p) 
+        (inv (issec-add-neg-ℤ' (int-ℕ z) 
+        (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))))
+    ＝ add-ℤ 
+         (add-ℤ 
+           (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x)))
+           (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (neg-ℤ (int-ℕ z))))
+       (int-ℕ z)
+      by inv (associative-add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
       (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (neg-ℤ (int-ℕ z))) 
       (int-ℕ z))
-    ∙ ( ap (λ p → add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) p)
-             (int-ℕ z)) 
-      (inv path) 
-    ∙ ( ap (λ p → add-ℤ (add-ℤ p (mul-ℤ a (int-ℕ (succ-ℕ x)))) (int-ℕ z)) 
-      (left-negative-law-mul-ℤ a (int-ℕ (succ-ℕ x))) 
-    ∙ ( ap (λ p → add-ℤ p (int-ℕ z)) 
-      (left-inverse-law-add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x)))) 
-    ∙ ( left-unit-law-add-ℤ (int-ℕ z)))))))) 
+    ＝ add-ℤ (add-ℤ 
+        (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+        (mul-ℤ a (int-ℕ (succ-ℕ x)))) (int-ℕ z)
+      by ap (λ p → add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) p)
+        (int-ℕ z)) (inv (pr2 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p))))
+    ＝ add-ℤ (add-ℤ 
+        (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x)))) 
+        (mul-ℤ a (int-ℕ (succ-ℕ x)))) (int-ℕ z)
+      by ap (λ p → add-ℤ (add-ℤ p (mul-ℤ a (int-ℕ (succ-ℕ x)))) (int-ℕ z)) 
+        (left-negative-law-mul-ℤ a (int-ℕ (succ-ℕ x))) 
+    ＝ add-ℤ zero-ℤ (int-ℕ z)
+      by ap (λ p → add-ℤ p (int-ℕ z)) 
+        (left-inverse-law-add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))))
+    ＝ int-ℕ z by left-unit-law-add-ℤ (int-ℕ z))  
 
-  a-factor-int-ℕ : int-ℕ (abs-ℤ a) ＝ a
-  a-factor-int-ℕ = int-abs-is-nonnegative-ℤ a 
-    (is-nonnegative-left-factor-mul-ℤ (tr is-nonnegative-ℤ (inv path) uy-z) 
-    (is-nonnegative-int-ℕ (succ-ℕ x))) 
-
-  lem3 : dist-ℕ (mul-ℕ (abs-ℤ a) (succ-ℕ x)) 
-    (mul-ℕ (nat-Fin (succ-ℕ x) u) y)  ＝ z 
-  lem3 = symmetric-dist-ℕ (mul-ℕ (abs-ℤ a) (succ-ℕ x)) 
-    (mul-ℕ (nat-Fin (succ-ℕ x) u) y) 
-    ∙ ( inv (dist-int-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y)
-      (mul-ℕ (abs-ℤ a)  (succ-ℕ x))) 
-    ∙ ( ap (λ p → dist-ℤ (int-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y)) p) 
-      (inv (mul-int-ℕ (abs-ℤ a) (succ-ℕ x)))  
-    ∙ ( ap (λ p → dist-ℤ p (mul-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ (succ-ℕ x)))) 
-      (inv (mul-int-ℕ (nat-Fin (succ-ℕ x) u) y)) 
-    ∙ ( ap (λ p → dist-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-             (mul-ℤ p  (int-ℕ (succ-ℕ x))))
-      a-factor-int-ℕ  
-    ∙ ( ap (abs-ℤ) lem2 ∙ abs-int-ℕ z)))))
-
-... | inr z-uy = (add-ℕ (abs-ℤ a) y , 
-  abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) , lem3)
-  where
-  lem : cong-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ z) 
-    (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
-  lem = symmetric-cong-ℤ (int-ℕ (succ-ℕ x)) 
-    ( mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (int-ℕ z) 
-    ( cong-eq-mod-ℤ (succ-ℕ x) (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-      (int-ℕ z) 
-    ( preserves-mul-mod-ℤ (succ-ℕ x) (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y) 
-    ∙ ( ap (λ p → mul-ℤ-Mod (succ-ℕ x) p (mod-ℤ (succ-ℕ x) (int-ℕ y))) 
-      (issec-int-ℤ-Mod (succ-ℕ x) u) 
-    ∙ ( ap (λ p → mul-ℤ-Mod (succ-ℕ x) u p) (mod-int-ℕ (succ-ℕ x) y) 
-    ∙ ( p 
-    ∙ ( inv (mod-int-ℕ (succ-ℕ x) z)))))))
-
-  a : ℤ
-  a = pr1 lem
-
-  path : mul-ℤ a (int-ℕ (succ-ℕ x)) ＝ add-ℤ (int-ℕ z) 
-    (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))   
-  path = pr2 lem
-
-  lem2 : add-ℤ (mul-ℤ (add-ℤ a (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
-    (neg-ℤ (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
-      (int-ℕ y))) ＝ int-ℕ z
-  lem2 = ap (λ p → add-ℤ (mul-ℤ (add-ℤ a (int-ℕ y)) (int-ℕ (succ-ℕ x))) p) 
-    (inv (left-negative-law-mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
-      (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y)))
-    ∙ ( ap (λ p → add-ℤ (mul-ℤ (add-ℤ a (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
-             (mul-ℤ p (int-ℕ y))) 
-      (ap (neg-ℤ) (commutative-add-ℤ (int-ℕ (succ-ℕ x)) 
-        (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) 
-    ∙ ( ap (λ p → neg-ℤ (add-ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)) p)) 
-      (inv (neg-neg-ℤ (int-ℕ (succ-ℕ x)))) 
-    ∙ ( ap (neg-ℤ) (inv (distributive-neg-add-ℤ (int-ℤ-Mod (succ-ℕ x) u) 
-      (neg-ℤ (int-ℕ (succ-ℕ x)))))
-    ∙ ( neg-neg-ℤ (add-ℤ (int-ℤ-Mod (succ-ℕ x) u) (neg-ℤ (int-ℕ (succ-ℕ x)))))))) 
-    ∙ ( ap (λ p → add-ℤ (mul-ℤ (add-ℤ a (int-ℕ y)) (int-ℕ (succ-ℕ x))) p) 
+  a-extra-eqn-neg : 
+    add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (neg-ℤ (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+        (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y)))
+    ＝ add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+    (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))))
+  a-extra-eqn-neg = equational-reasoning
+    add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (neg-ℤ (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+        (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))) 
+    ＝ add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (mul-ℤ (neg-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+        (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) (int-ℕ y)) 
+    by ap (λ p → add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) 
+      (int-ℕ (succ-ℕ x))) p) 
+      (inv (left-negative-law-mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+        (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y)))
+    ＝ add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (mul-ℤ (add-ℤ (int-ℤ-Mod (succ-ℕ x) u) (neg-ℤ (int-ℕ (succ-ℕ x))))
+        (int-ℕ y)) 
+    by ap (λ p → add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) 
+        (int-ℕ (succ-ℕ x))) (mul-ℤ p (int-ℕ y))) 
+      (equational-reasoning
+        neg-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
+        ＝ neg-ℤ (add-ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)) (int-ℕ (succ-ℕ x)))
+        by ap (neg-ℤ) (commutative-add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
+        ＝ add-ℤ (neg-ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
+          (neg-ℤ (int-ℕ (succ-ℕ x)))
+        by distributive-neg-add-ℤ (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)) 
+          (int-ℕ (succ-ℕ x))
+        ＝ add-ℤ (int-ℤ-Mod (succ-ℕ x) u) (neg-ℤ (int-ℕ (succ-ℕ x)))
+        by ap (λ p → (add-ℤ p (neg-ℤ (int-ℕ (succ-ℕ x))))) 
+          (neg-neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
+    ＝ add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+        (mul-ℤ (neg-ℤ (int-ℕ (succ-ℕ x))) (int-ℕ y)))
+    by ap (λ p → add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) p) 
       (right-distributive-mul-add-ℤ (int-ℤ-Mod (succ-ℕ x) u) 
         (neg-ℤ (int-ℕ (succ-ℕ x))) (int-ℕ y) ) 
-    ∙ ( ap (λ p → add-ℤ (mul-ℤ (add-ℤ a (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
-             (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) p)) 
-      (left-negative-law-mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)) 
-    ∙ ( ap (λ p → add-ℤ p (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-             (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))))) 
-      (right-distributive-mul-add-ℤ a (int-ℕ y) (int-ℕ (succ-ℕ x))) 
-    ∙ ( ap (λ p → add-ℤ (add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) p) 
-             (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-             (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))))  
-      (commutative-mul-ℤ  (int-ℕ y) (int-ℕ (succ-ℕ x))) 
-    ∙ ( associative-add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) 
-      (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)) 
-      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+    ＝ add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
         (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))))
-    ∙ ( ap (λ p → add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) p) 
-      (commutative-add-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)) 
-        (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-          (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))))  
-    ∙ ( ap (λ p → add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) p) 
-      (associative-add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-        (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))) 
-        (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))
-    ∙ ( inv (associative-add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) 
-        (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-        (add-ℤ (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))) 
-          (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))) 
-    ∙ ( ap (λ p → add-ℤ (add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) 
-             (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) p) 
-      (left-inverse-law-add-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))
-    ∙ ( right-unit-law-add-ℤ (add-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x))) 
+    by ap (λ p → add-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) p)) 
+      (left-negative-law-mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))  
+    ＝ add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+         (mul-ℤ (int-ℕ y) (int-ℕ (succ-ℕ x)))) 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+        (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))))
+    by ap (λ p → add-ℤ p (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+      (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))))) 
+      (right-distributive-mul-add-ℤ (neg-ℤ a) (int-ℕ y) (int-ℕ (succ-ℕ x)))
+    ＝ add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+         (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))) 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+        (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))))
+    by ap (λ p → add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) p) 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+      (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))))  
+      (commutative-mul-ℤ  (int-ℕ y) (int-ℕ (succ-ℕ x)))
+    ＝ add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+       (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))
+      (add-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))
+        (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))))  
+    by interchange-law-add-add-ℤ 
+      (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x)))
+      (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y))
+      (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+      (neg-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))
+    ＝ add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+       (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) zero-ℤ
+    by ap (λ p → add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+      (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) p) 
+      (right-inverse-law-add-ℤ (mul-ℤ (int-ℕ (succ-ℕ x)) (int-ℕ y)))
+    ＝ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+       (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))
+    by right-unit-law-add-ℤ (add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
       (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) 
-    ∙ ( ap (λ p → add-ℤ p (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) path 
-    ∙ issec-add-neg-ℤ' (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-      (int-ℕ z)))))))))))))
+    ＝ add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+      (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x)))
+    by commutative-add-ℤ (mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))) 
+      (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+    ＝ add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))
+      (neg-ℤ (mul-ℤ a (int-ℕ (succ-ℕ x)))) 
+    by ap (λ p → add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) p)      
+      (left-negative-law-mul-ℤ a (int-ℕ (succ-ℕ x))) 
 
-  a-factor-int-ℕ : int-ℕ (abs-ℤ a) ＝ a
-  a-factor-int-ℕ = int-abs-is-nonnegative-ℤ a (is-nonnegative-left-factor-mul-ℤ 
-    (tr is-nonnegative-ℤ 
-    (distributive-neg-add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
-      (neg-ℤ (int-ℕ z)) 
-      ∙ ( ap (λ p → add-ℤ (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) p)
-        (neg-neg-ℤ (int-ℕ z))  
-      ∙ ( commutative-add-ℤ (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))
-        (int-ℕ z)  
-      ∙ inv path))) 
-    (z-uy)) (is-nonnegative-int-ℕ (succ-ℕ x))) 
+  uy-z-case-split : 
+    (is-nonnegative-ℤ 
+      (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (neg-ℤ (int-ℕ z)))
+    + is-nonnegative-ℤ 
+      (neg-ℤ (add-ℤ 
+        (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+        (neg-ℤ (int-ℕ z)))))
+    → is-distance-between-multiples-ℕ (succ-ℕ x) y z 
+  uy-z-case-split (inl uy-z) = (abs-ℤ a , nat-Fin (succ-ℕ x) u , 
+    (equational-reasoning
+      dist-ℕ (mul-ℕ (abs-ℤ a) (succ-ℕ x)) (mul-ℕ (nat-Fin (succ-ℕ x) u) y)
+      ＝ dist-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y) (mul-ℕ (abs-ℤ a) (succ-ℕ x)) 
+        by symmetric-dist-ℕ (mul-ℕ (abs-ℤ a) (succ-ℕ x)) 
+          (mul-ℕ (nat-Fin (succ-ℕ x) u) y) 
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y)) 
+        (int-ℕ (mul-ℕ (abs-ℤ a) (succ-ℕ x))) 
+        by inv (dist-int-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y)
+          (mul-ℕ (abs-ℤ a)  (succ-ℕ x)))
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y)) 
+        (mul-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ (succ-ℕ x))) 
+        by ap (λ p → dist-ℤ (int-ℕ (mul-ℕ (nat-Fin (succ-ℕ x) u) y)) p)
+          (inv (mul-int-ℕ (abs-ℤ a) (succ-ℕ x))) 
+      ＝ dist-ℤ (mul-ℤ (int-ℕ (nat-Fin (succ-ℕ x) u)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ (succ-ℕ x))) 
+        by ap (λ p → dist-ℤ p (mul-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ (succ-ℕ x)))) 
+          (inv (mul-int-ℕ (nat-Fin (succ-ℕ x) u) y)) 
+      ＝ dist-ℤ (mul-ℤ (int-ℕ (nat-Fin (succ-ℕ x) u)) (int-ℕ y))
+        (mul-ℤ a (int-ℕ (succ-ℕ x))) 
+        by ap (λ p → dist-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+          (mul-ℤ p (int-ℕ (succ-ℕ x))))
+          (int-abs-is-nonnegative-ℤ a a-is-nonnegative-ℤ)
+      ＝ abs-ℤ (int-ℕ z) by ap (abs-ℤ) a-eqn-pos 
+      ＝ z by abs-int-ℕ z))
+    where 
+    a-is-nonnegative-ℤ : is-nonnegative-ℤ a
+    a-is-nonnegative-ℤ = 
+      (is-nonnegative-left-factor-mul-ℤ 
+        (tr is-nonnegative-ℤ 
+          (inv (pr2 (cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))) uy-z) 
+          (is-nonnegative-int-ℕ (succ-ℕ x)))
 
-  x-u-factor-int-ℕ : 
-    int-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) 
-    ＝ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))   
-  x-u-factor-int-ℕ = int-abs-is-nonnegative-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
-    (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u)
-
-  lem3 : dist-ℕ (mul-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)) 
-    (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
-      (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y) ＝ z
-  lem3 = inv (dist-int-ℕ (mul-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)) 
-    (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
-      (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)) 
-    ∙ ( ap (λ p → dist-ℤ p (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
-             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))) 
-      (inv (mul-int-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x))) 
-    ∙ ( ap (λ p → dist-ℤ (mul-ℤ p (int-ℕ (succ-ℕ x))) 
+  uy-z-case-split (inr z-uy) = (add-ℕ (abs-ℤ a) y , 
+    abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) , 
+      (equational-reasoning
+        dist-ℕ (mul-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)) 
+          (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)
+        ＝ dist-ℤ (int-ℕ (mul-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)))
+          (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)) 
+        by inv (dist-int-ℕ (mul-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)) 
+          (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)) 
+        ＝ dist-ℤ (mul-ℤ (int-ℕ (add-ℕ (abs-ℤ a) y)) (int-ℕ (succ-ℕ x)))
+          (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)) 
+        by ap (λ p → dist-ℤ p (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))) 
+          (inv (mul-int-ℕ (add-ℕ (abs-ℤ a) y) (succ-ℕ x)))
+        ＝ dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+          (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)) 
+        by ap (λ p → dist-ℤ (mul-ℤ p (int-ℕ (succ-ℕ x))) 
              (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
                (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))) 
-      (inv (add-int-ℕ (abs-ℤ a) y)) 
-    ∙ ( ap (λ p → dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) 
+          (inv (add-int-ℕ (abs-ℤ a) y))
+        ＝ dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+          (mul-ℤ (int-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+          (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))))) (int-ℕ y)) 
+        by ap (λ p → dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) 
              (int-ℕ (succ-ℕ x))) p) 
-      (inv (mul-int-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
-        (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)) 
-    ∙ ( ap (λ p → dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) 
+          (inv (mul-int-ℕ (abs-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
+        ＝ dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+          (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y)) 
+        by ap (λ p → dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ a)) (int-ℕ y)) 
              (int-ℕ (succ-ℕ x))) (mul-ℤ p (int-ℕ y))) 
-      (x-u-factor-int-ℕ)
-    ∙ ( ap (λ p → dist-ℤ (mul-ℤ (add-ℤ p (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+          (int-abs-is-nonnegative-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u))
+        ＝ dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (abs-ℤ (neg-ℤ a))) (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+          (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y)) 
+        by ap (λ p → dist-ℤ (mul-ℤ (add-ℤ (int-ℕ p) (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
              (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
-                (int-ℕ y)) ) a-factor-int-ℕ 
-    ∙ ( ap (abs-ℤ) lem2 ∙ abs-int-ℕ z))))))
-
+                (int-ℕ y))) 
+          (inv (abs-neg-ℤ a)) 
+        ＝ dist-ℤ (mul-ℤ (add-ℤ (neg-ℤ a) (int-ℕ y)) (int-ℕ (succ-ℕ x)))
+          (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) 
+            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y)) 
+        by ap (λ p → dist-ℤ (mul-ℤ (add-ℤ p (int-ℕ y)) (int-ℕ (succ-ℕ x))) 
+          (mul-ℤ (add-ℤ (int-ℕ (succ-ℕ x)) (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))
+            (int-ℕ y))) 
+          (int-abs-is-nonnegative-ℤ (neg-ℤ a) neg-a-is-nonnegative-ℤ)
+        ＝ abs-ℤ (int-ℕ z) 
+        by ap abs-ℤ (a-extra-eqn-neg ∙ a-eqn-pos)
+        ＝ z by abs-int-ℕ z))
+    where
+    neg-a-is-nonnegative-ℤ : is-nonnegative-ℤ (neg-ℤ a)
+    neg-a-is-nonnegative-ℤ = (is-nonnegative-left-factor-mul-ℤ 
+      (tr is-nonnegative-ℤ 
+      (equational-reasoning
+        neg-ℤ (add-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+          (neg-ℤ (int-ℕ z)))
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) 
+          (neg-ℤ (neg-ℤ (int-ℕ z)))
+        by (distributive-neg-add-ℤ 
+          (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) 
+          (neg-ℤ (int-ℕ z))) 
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) 
+          (int-ℕ z)
+        by ap (λ p → add-ℤ 
+          (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y))) p)
+          (neg-neg-ℤ (int-ℕ z))  
+        ＝ add-ℤ (int-ℕ z) 
+          (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))
+        by commutative-add-ℤ 
+          (neg-ℤ (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)))
+          (int-ℕ z) 
+        ＝ mul-ℤ (neg-ℤ a) (int-ℕ (succ-ℕ x))
+        by inv (pr2 
+          (symmetric-cong-ℤ (int-ℕ (succ-ℕ x)) 
+            (mul-ℤ (int-ℤ-Mod (succ-ℕ x) u) (int-ℕ y)) (int-ℕ z) 
+            (cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
+        z-uy) (is-nonnegative-int-ℕ (succ-ℕ x))) 
+   
 ```
 
 ### The type `is-distance-between-multiples-ℕ x y z` is decidable
@@ -428,10 +534,20 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p)
 ```agda
 is-decidable-is-distance-between-multiples-ℕ :
   (x y z : ℕ) → is-decidable (is-distance-between-multiples-ℕ x y z)
-is-decidable-is-distance-between-multiples-ℕ x y z
-  with (is-decidable-div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))
-... | inl div-Mod = inl (is-distance-between-multiples-div-mod-ℕ x y z div-Mod)
-... | inr neg-div-Mod = inr (λ dist → neg-div-Mod (div-mod-is-distance-between-multiples-ℕ x y z dist)) 
+is-decidable-is-distance-between-multiples-ℕ x y z = 
+  decidable-div-ℤ-case-split 
+    (is-decidable-div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))
+  where
+  decidable-div-ℤ-case-split : 
+    (div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z) 
+      + ¬(div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z)))
+    → is-decidable (is-distance-between-multiples-ℕ x y z)
+  decidable-div-ℤ-case-split (inl div-Mod) =
+     inl (is-distance-between-multiples-div-mod-ℕ x y z div-Mod)
+  decidable-div-ℤ-case-split (inr neg-div-Mod) = 
+    inr (λ dist → neg-div-Mod 
+      (div-mod-is-distance-between-multiples-ℕ x y z dist)) 
+
 ```
 
 ## Theorem
@@ -536,1102 +652,437 @@ remainder-min-dist-succ-x-le-min-dist x y = strict-upper-bound-remainder-euclide
 remainder-min-dist-succ-x-is-distance : (x y : ℕ) → 
   (is-distance-between-multiples-ℕ (succ-ℕ x) y 
     (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-remainder-min-dist-succ-x-is-distance x y with decide-leq-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)) (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y)
-... | inl sxty = pair (add-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1)
-         (pair (mul-ℕ  
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y)) (inv dist-eqn))
+remainder-min-dist-succ-x-is-distance x y = 
+  sx-ty-case-split (decide-leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y)) 
   where
-  add-dist-eqn : int-ℕ (minimal-positive-distance (succ-ℕ x) y) ＝ 
-    add-ℤ
-      (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-      ((mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))))
-  add-dist-eqn = (((inv (isretr-add-neg-ℤ' (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))) (int-ℕ (minimal-positive-distance (succ-ℕ x) y)) )
-    ∙ (ap (λ H → add-ℤ H (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))))) 
-      (add-int-ℕ (minimal-positive-distance (succ-ℕ x) y) (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))
-      ∙ ap int-ℕ (rewrite-left-dist-add-ℕ (minimal-positive-distance (succ-ℕ x) y) (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)) (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) sxty (inv (minimal-positive-distance-succ-eqn x y))))))
-      ∙ ap (λ H → add-ℤ H (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))))) (inv (mul-int-ℕ (minimal-positive-distance-succ-y-coeff x y) y)))
-      ∙ ap (λ H → add-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) (neg-ℤ H)) (inv (mul-int-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))))
-      ∙ ap (λ H → add-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) H) (inv (left-negative-law-mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))))
+  d : ℕ 
+  d = minimal-positive-distance (succ-ℕ x) y
 
-  isolate-rem-eqn : int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) ＝ 
-    add-ℤ 
-      (neg-ℤ (mul-ℤ 
-        (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-        (add-ℤ
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-      (int-ℕ (succ-ℕ x))
-  isolate-rem-eqn = 
-    equational-reasoning
-      (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-      ＝ add-ℤ
-      (neg-ℤ (mul-ℤ 
-        (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-        (add-ℤ
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) ))) 
-      (add-ℤ  
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-            (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-            (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )) 
-       (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))) 
-         by (inv (isretr-add-neg-ℤ
-           (mul-ℤ 
-             (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-             (add-ℤ
-               (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))))) (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))))
-        ＝ add-ℤ
-        (neg-ℤ (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) ))) 
-        (add-ℤ  
-          (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-            (int-ℕ (minimal-positive-distance (succ-ℕ x) y))  ) 
-          (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))) 
-          by (ap (λ H → add-ℤ
-          (neg-ℤ (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-            (add-ℤ
-              (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-              (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) ))) 
-          (add-ℤ  
-            (mul-ℤ 
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-              H) 
-            (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))))) 
-            (inv add-dist-eqn))
-        ＝ add-ℤ 
-        (neg-ℤ (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-             (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-             (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-        (int-ℕ (succ-ℕ x))
-          by (ap (λ H → add-ℤ 
-            (neg-ℤ (mul-ℤ 
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-            (add-ℤ
-               (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) ))) H) (minimal-positive-distance-div-succ-x-eqn x y)) 
+  s : ℕ 
+  s = minimal-positive-distance-succ-x-coeff x y
 
-
-  rearrange-arith-eqn : add-ℤ 
-    (neg-ℤ (mul-ℤ 
-      (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-      (add-ℤ
-        (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-      (int-ℕ (succ-ℕ x)) ＝ 
-    add-ℤ
-      (mul-ℤ (add-ℤ 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) 
-         one-ℤ) 
-        (int-ℕ (succ-ℕ x)))
-      (neg-ℤ (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y)))
-  rearrange-arith-eqn = 
-    equational-reasoning
-      add-ℤ 
-        (neg-ℤ (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-            (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-            (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-      (int-ℕ (succ-ℕ x))
-      ＝ add-ℤ 
-           (neg-ℤ (add-ℤ 
-             (mul-ℤ 
-               (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-               (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)))
-             (mul-ℤ 
-               (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-            (int-ℕ (succ-ℕ x))
-           by (ap (λ H → add-ℤ (neg-ℤ H) (int-ℕ (succ-ℕ x)))
-             (left-distributive-mul-add-ℤ (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-               (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y)) 
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x)))))
-       ＝ add-ℤ 
-            (neg-ℤ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))
-             (mul-ℤ 
-               (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-             (int-ℕ (succ-ℕ x))
-            by (ap (λ H → add-ℤ (neg-ℤ (add-ℤ H 
-              (mul-ℤ 
-                (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) )))
-              (int-ℕ (succ-ℕ x)))
-              (inv (associative-mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))
-                  (int-ℕ y))))
-          ＝ add-ℤ 
-            (neg-ℤ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))
-              (neg-ℤ (mul-ℤ 
-                ((mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y))))) 
-              (int-ℕ (succ-ℕ x)))) ))
-             (int-ℕ (succ-ℕ x))
-            by (ap (λ H → add-ℤ (neg-ℤ (add-ℤ
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))
-              H ))
-              (int-ℕ (succ-ℕ x)))
-              ((inv (associative-mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (neg-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                  (int-ℕ (succ-ℕ x))) 
-               ∙ ap (λ H → mul-ℤ H (int-ℕ (succ-ℕ x))) 
-                 (right-negative-law-mul-ℤ 
-                   (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                   (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-               ∙ left-negative-law-mul-ℤ 
-                  (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x)) ))
-          ＝ add-ℤ 
-             (add-ℤ 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y)))
-              (neg-ℤ (neg-ℤ (mul-ℤ 
-                ((mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y))))) 
-              (int-ℕ (succ-ℕ x))))) )
-             (int-ℕ (succ-ℕ x)) 
-            by (ap (λ H → add-ℤ H (int-ℕ (succ-ℕ x))) 
-              (distributive-neg-add-ℤ
-                (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))
-                (neg-ℤ (mul-ℤ 
-                ((mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y))))) 
-              (int-ℕ (succ-ℕ x))))  ))  
-           ＝ add-ℤ 
-             (add-ℤ 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y)))
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x))) )
-             (int-ℕ (succ-ℕ x)) 
-               by (ap (λ H → add-ℤ (add-ℤ (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))) H) (int-ℕ (succ-ℕ x)))
-                  (neg-neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x)))))
-            ＝ add-ℤ 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y)))
-              (add-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x))) 
-             (int-ℕ (succ-ℕ x))) 
-            by (associative-add-ℤ
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y)))
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x)))
-              (int-ℕ (succ-ℕ x)))
-            ＝ add-ℤ 
-              (add-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x))) 
-             (int-ℕ (succ-ℕ x)))
-               (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))) 
-            by (commutative-add-ℤ 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y)))
-              (add-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x))) 
-             (int-ℕ (succ-ℕ x))))
-             ＝ add-ℤ 
-              (mul-ℤ (add-ℤ (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) 
-             one-ℤ ) (int-ℕ (succ-ℕ x)) )
-               (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))) 
-            by (ap (λ H → add-ℤ H (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-                (int-ℕ y))) ) 
-                 (ap (λ H → add-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  ((int-ℕ (minimal-positive-distance-succ-x-coeff x y)))) 
-              (int-ℕ (succ-ℕ x))) H) (left-unit-law-mul-ℤ (int-ℕ (succ-ℕ x)) ) 
-                  ∙ inv (right-distributive-mul-add-ℤ (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) one-ℤ (int-ℕ (succ-ℕ x)) )  ))
-
-  dist-eqn : remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x) ＝ 
-    dist-ℕ
-      (mul-ℕ (add-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x))
-      (mul-ℕ
-        (mul-ℕ  
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y)) y)
-  dist-eqn = equational-reasoning
-    remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
-    ＝ abs-ℤ (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-      by (inv (abs-int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))))
-    ＝ dist-ℤ
-      (mul-ℤ (add-ℤ 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) 
-         one-ℤ) 
-        (int-ℕ (succ-ℕ x)))
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      by (ap (abs-ℤ) (isolate-rem-eqn ∙ rearrange-arith-eqn))
-    ＝ dist-ℤ
-      (mul-ℤ (add-ℤ 
-        (int-ℕ (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y))) 
-         (int-ℕ 1)) 
-        (int-ℕ (succ-ℕ x)))
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      by (ap (λ H → dist-ℤ
-      (mul-ℤ (add-ℤ H (int-ℕ 1)) 
-        (int-ℕ (succ-ℕ x)))
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y)))
-        (mul-int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance-succ-x-coeff x y))) 
-    ＝ dist-ℤ
-      (mul-ℤ (int-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1)) 
-        (int-ℕ (succ-ℕ x)))
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      by (ap (λ H → dist-ℤ
-      (mul-ℤ H (int-ℕ (succ-ℕ x)))
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))) (add-int-ℕ (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1)) 
-    ＝ dist-ℤ
-      (int-ℕ (mul-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x)))
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      by (ap (λ H → dist-ℤ H
-      (mul-ℤ
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y)))
-        (mul-int-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) (succ-ℕ x)))
-    ＝ dist-ℤ
-      (int-ℕ (mul-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x)))
-      (mul-ℤ
-        (int-ℕ (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      by (ap (λ H → dist-ℤ
-      (int-ℕ (mul-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x)))
-      (mul-ℤ H (int-ℕ y))) 
-      (mul-int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance-succ-y-coeff x y))) 
-    ＝ dist-ℤ
-      (int-ℕ (mul-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x)))
-      (int-ℕ (mul-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y)) y))
-      by (ap (λ H → dist-ℤ
-      (int-ℕ (mul-ℕ (add-ℕ
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x))) H) 
-      (mul-int-ℕ (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y)) y)) 
-    ＝ dist-ℕ
-      (mul-ℕ (add-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x))
-      (mul-ℕ
-        (mul-ℕ  
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y)) y)
-      by dist-int-ℕ (mul-ℕ (add-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-x-coeff x y)) 1) 
-        (succ-ℕ x)) (mul-ℕ
-        (mul-ℕ  
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-          (minimal-positive-distance-succ-y-coeff x y)) y)
-
-... | inr tysx = pair (abs-ℤ 
-      (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)))
-      (pair (mul-ℕ 
-      (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-      (minimal-positive-distance-succ-y-coeff x y)) (inv (dist-eqn)))
-  where
-  rewrite-dist : add-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) (minimal-positive-distance (succ-ℕ x) y) ＝ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)) 
-  rewrite-dist = rewrite-right-dist-add-ℕ 
-    (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) 
-    (minimal-positive-distance (succ-ℕ x) y)
-    (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))
-    tysx
-    ((inv (minimal-positive-distance-succ-eqn x y))
-      ∙ symmetric-dist-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)) (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y))
-
-  quotient-min-dist-succ-x-nonzero : is-nonzero-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-  quotient-min-dist-succ-x-nonzero iszero = contradiction-le-ℕ (succ-ℕ x) (minimal-positive-distance (succ-ℕ x) y) le-x-d leq-d-x
-    where
-    x-r-equality : succ-ℕ x ＝ remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
-    x-r-equality = equational-reasoning
-      succ-ℕ x
-      ＝ add-ℕ (mul-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance (succ-ℕ x) y)) (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-        by (inv (eq-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-      ＝ add-ℕ (mul-ℕ 0 (minimal-positive-distance (succ-ℕ x) y)) (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-        by (ap (λ H → add-ℕ (mul-ℕ H (minimal-positive-distance (succ-ℕ x) y)) (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) iszero)
-      ＝ add-ℕ 0 (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-        by (ap (λ H → add-ℕ H (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) (left-zero-law-mul-ℕ (minimal-positive-distance (succ-ℕ x) y)))
-      ＝ remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
-        by (left-unit-law-add-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-
-    le-x-d : le-ℕ (succ-ℕ x) (minimal-positive-distance (succ-ℕ x) y)
-    le-x-d = tr (λ n → le-ℕ n (minimal-positive-distance (succ-ℕ x) y))
-      (inv (x-r-equality)) 
-      (remainder-min-dist-succ-x-le-min-dist x y)
-    
-    x-pos-dist : pos-distance-between-multiples (succ-ℕ x) y (succ-ℕ x)
-    x-pos-dist H = pair' (is-nonzero-succ-ℕ x) (pair 1 (pair 0 (ap succ-ℕ (left-unit-law-add-ℕ x))))
-
-    leq-d-x : leq-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
-    leq-d-x = minimal-positive-distance-is-minimal (succ-ℕ x) y (succ-ℕ x) 
-      x-pos-dist
+  t : ℕ 
+  t = minimal-positive-distance-succ-y-coeff x y
  
-  min-dist-succ-x-coeff-nonzero : is-nonzero-ℕ (minimal-positive-distance-succ-x-coeff x y)
-  min-dist-succ-x-coeff-nonzero iszero = minimal-positive-distance-nonzero (succ-ℕ x) y (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y))) d-is-zero
+  q : ℕ 
+  q = quotient-euclidean-division-ℕ d (succ-ℕ x)
+
+  r : ℕ 
+  r = remainder-euclidean-division-ℕ d (succ-ℕ x) 
+
+  dist-sx-ty-eq-d : dist-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y) ＝ d
+  dist-sx-ty-eq-d = minimal-positive-distance-succ-eqn x y
+
+  sx-ty-case-split : 
+    (leq-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y) 
+      + leq-ℕ (mul-ℕ t y) (mul-ℕ s (succ-ℕ x)))
+    → (is-distance-between-multiples-ℕ (succ-ℕ x) y r)
+  sx-ty-case-split (inl sxty) = (add-ℕ (mul-ℕ q s) 1 , mul-ℕ q t , inv (dist-eqn))
     where
-    zero-addition : add-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) (minimal-positive-distance (succ-ℕ x) y) ＝ 0
-    zero-addition = equational-reasoning
-      add-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) (minimal-positive-distance (succ-ℕ x) y) 
-      ＝ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))
-        by rewrite-dist
-      ＝ (mul-ℕ zero-ℕ (succ-ℕ x))
-        by (ap (λ H → mul-ℕ H (succ-ℕ x)) iszero)
-      ＝ zero-ℕ
-      by (left-zero-law-mul-ℕ (succ-ℕ x))
+    add-dist-eqn : int-ℕ d ＝ add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+      (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+    add-dist-eqn = equational-reasoning
+      int-ℕ d
+      ＝ add-ℤ (add-ℤ (int-ℕ d) (int-ℕ (mul-ℕ s (succ-ℕ x))))
+        (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x))))
+      by inv (isretr-add-neg-ℤ' (int-ℕ (mul-ℕ s (succ-ℕ x))) (int-ℕ d))
+      ＝ add-ℤ (int-ℕ (add-ℕ d (mul-ℕ s (succ-ℕ x))))
+        (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x))))
+      by ap (λ H → add-ℤ H (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x))))) 
+       (add-int-ℕ d (mul-ℕ s (succ-ℕ x)))
+      ＝ add-ℤ (int-ℕ (mul-ℕ t y)) (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x))))
+      by ap (λ H → add-ℤ (int-ℕ H) (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x)))))
+        (rewrite-left-dist-add-ℕ d (mul-ℕ s (succ-ℕ x)) 
+          (mul-ℕ t y) sxty (inv (dist-sx-ty-eq-d)))
+      ＝ add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+        (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x))))
+      by ap (λ H → add-ℤ H (neg-ℤ (int-ℕ (mul-ℕ s (succ-ℕ x))))) 
+        (inv (mul-int-ℕ t y))
+      ＝ add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+        (neg-ℤ (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))
+      by ap (λ H → add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) (neg-ℤ H)) 
+        (inv (mul-int-ℕ s (succ-ℕ x))) 
+      ＝ add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+        (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+      by ap (λ H → add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) H) 
+        (inv (left-negative-law-mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))) 
+      
+    isolate-rem-eqn : int-ℕ r ＝ 
+      add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+        (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+        (int-ℕ (succ-ℕ x))
+    isolate-rem-eqn = equational-reasoning
+        int-ℕ r
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+             (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) 
+          (add-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+              (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))) 
+          (int-ℕ r)) 
+         by inv (isretr-add-neg-ℤ 
+           (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+           (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))) 
+           (int-ℕ r))
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+             (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) 
+          (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ d)) (int-ℕ r)) 
+        by ap (λ H → add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+          (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) 
+          (add-ℤ (mul-ℤ (int-ℕ q) H) (int-ℕ r))) 
+          (inv add-dist-eqn)
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+               (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+          (int-ℕ (succ-ℕ x))
+        by ap (λ H → add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+          (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) H) 
+          (minimal-positive-distance-div-succ-x-eqn x y) 
+ 
+    rearrange-arith-eqn : 
+      add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+        (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x)) 
+      ＝ add-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) one-ℤ) 
+          (int-ℕ (succ-ℕ x)))
+        (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+    rearrange-arith-eqn = equational-reasoning
+        add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+          (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
+        ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (mul-ℤ (int-ℕ t) (int-ℕ y)))
+          (mul-ℤ (int-ℕ q) (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+            (int-ℕ (succ-ℕ x))
+        by (ap (λ H → add-ℤ (neg-ℤ H) (int-ℕ (succ-ℕ x)))
+          (left-distributive-mul-add-ℤ (int-ℕ q) (mul-ℤ (int-ℕ t) (int-ℕ y)) 
+            (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+        ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+          (mul-ℤ (int-ℕ q) (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+            (int-ℕ (succ-ℕ x))
+        by (ap (λ H → add-ℤ (neg-ℤ (add-ℤ H (mul-ℤ (int-ℕ q) 
+          (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x)))
+            (inv (associative-mul-ℤ (int-ℕ q) (int-ℕ t) (int-ℕ y))))
+        ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+          (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))) 
+            (int-ℕ (succ-ℕ x))
+        by ap (λ H → add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) H))
+          (int-ℕ (succ-ℕ x)))
+          (equational-reasoning
+            (mul-ℤ (int-ℕ q) (mul-ℤ (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x))))
+            ＝ mul-ℤ (mul-ℤ (int-ℕ q) (neg-ℤ (int-ℕ s))) (int-ℕ (succ-ℕ x))
+            by inv (associative-mul-ℤ (int-ℕ q) (neg-ℤ (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+            ＝ mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))) (int-ℕ (succ-ℕ x))
+            by ap (λ H → mul-ℤ H (int-ℕ (succ-ℕ x))) 
+              (right-negative-law-mul-ℤ (int-ℕ q) (int-ℕ s))
+            ＝ neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))) 
+            by left-negative-law-mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+        ＝ add-ℤ (add-ℤ (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+           (neg-ℤ (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))))))
+             (int-ℕ (succ-ℕ x)) 
+        by ap (λ H → add-ℤ H (int-ℕ (succ-ℕ x))) 
+          (distributive-neg-add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+            (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))))  )  
+        ＝ add-ℤ (add-ℤ (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+           (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))))
+             (int-ℕ (succ-ℕ x)) 
+        by ap (λ H → add-ℤ (add-ℤ (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t))
+             (int-ℕ y))) H) (int-ℕ (succ-ℕ x)))
+          (neg-neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) ((int-ℕ s))) (int-ℕ (succ-ℕ x))))
+        ＝ add-ℤ (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+           (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))) 
+             (int-ℕ (succ-ℕ x))) 
+        by associative-add-ℤ 
+          (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+          (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))
+          (int-ℕ (succ-ℕ x))
+        ＝ add-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))) 
+          (int-ℕ (succ-ℕ x)))
+          (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))) 
+        by commutative-add-ℤ 
+          (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+          (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))) 
+          (int-ℕ (succ-ℕ x)))
+        ＝ add-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) one-ℤ) (int-ℕ (succ-ℕ x)))
+           (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))) 
+        by ap (λ H → add-ℤ H (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))) 
+          (ap (λ H → add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) ((int-ℕ s))) 
+            (int-ℕ (succ-ℕ x))) H) 
+            (left-unit-law-mul-ℤ (int-ℕ (succ-ℕ x))) 
+          ∙ inv (right-distributive-mul-add-ℤ (mul-ℤ (int-ℕ q)
+            (int-ℕ s)) one-ℤ (int-ℕ (succ-ℕ x))))
 
-    d-is-zero : is-zero-ℕ (minimal-positive-distance (succ-ℕ x) y)
-    d-is-zero = is-zero-right-is-zero-add-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) (minimal-positive-distance (succ-ℕ x) y) (zero-addition)
 
-  coeff-nonnegative : leq-ℤ one-ℤ (mul-ℤ 
-    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-    (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-  coeff-nonnegative = tr (λ z → leq-ℤ one-ℤ z) 
-    (inv (mul-int-ℕ 
-      (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-      (minimal-positive-distance-succ-x-coeff x y)))
-    (leq-int-ℕ 1 
-      (mul-ℕ 
-        (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-        (minimal-positive-distance-succ-x-coeff x y))
-      (leq-succ-le-ℕ 0 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-x-coeff x y))
-        (le-is-nonzero-ℕ
-          (mul-ℕ 
-            (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-            (minimal-positive-distance-succ-x-coeff x y))
-          (is-nonzero-mul-ℕ
-            (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-            (minimal-positive-distance-succ-x-coeff x y)
-            quotient-min-dist-succ-x-nonzero
+    dist-eqn : r ＝ dist-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))
+      (mul-ℕ (mul-ℕ q t) y)
+    dist-eqn = equational-reasoning r
+      ＝ abs-ℤ (int-ℕ r) by (inv (abs-int-ℕ r))
+      ＝ dist-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) one-ℤ) 
+          (int-ℕ (succ-ℕ x)))
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+      by (ap (abs-ℤ) (isolate-rem-eqn ∙ rearrange-arith-eqn))
+      ＝ dist-ℤ (mul-ℤ (add-ℤ (int-ℕ (mul-ℕ q s)) (int-ℕ 1)) (int-ℕ (succ-ℕ x)))
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+      by ap (λ H → dist-ℤ (mul-ℤ (add-ℤ H (int-ℕ 1)) (int-ℕ (succ-ℕ x)))
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+        (mul-int-ℕ q s) 
+      ＝ dist-ℤ (mul-ℤ (int-ℕ (add-ℕ (mul-ℕ q s) 1)) (int-ℕ (succ-ℕ x)))
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+      by ap (λ H → dist-ℤ (mul-ℤ H (int-ℕ (succ-ℕ x)))
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+        (add-int-ℕ (mul-ℕ q s) 1) 
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x)))
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+      by ap (λ H → dist-ℤ H (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)))
+        (mul-int-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x)))
+        (mul-ℤ (int-ℕ (mul-ℕ q t)) (int-ℕ y))
+      by ap (λ H → dist-ℤ (int-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x)))
+        (mul-ℤ H (int-ℕ y))) 
+        (mul-int-ℕ q t) 
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x)))
+        (int-ℕ (mul-ℕ (mul-ℕ q t) y))
+      by ap (λ H → dist-ℤ (int-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))) H) 
+        (mul-int-ℕ (mul-ℕ q t) y) 
+      ＝ dist-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x))
+        (mul-ℕ (mul-ℕ q t) y)
+      by dist-int-ℕ (mul-ℕ (add-ℕ (mul-ℕ q s) 1) (succ-ℕ x)) 
+        (mul-ℕ (mul-ℕ q t) y)
+  
+  sx-ty-case-split (inr tysx) = 
+    (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)) , 
+      (mul-ℕ q t) , inv (dist-eqn))
+    where
+    rewrite-dist : add-ℕ (mul-ℕ t y) d ＝ (mul-ℕ s (succ-ℕ x)) 
+    rewrite-dist = 
+      rewrite-right-dist-add-ℕ (mul-ℕ t y) d (mul-ℕ s (succ-ℕ x)) tysx
+        (inv (dist-sx-ty-eq-d) ∙ symmetric-dist-ℕ (mul-ℕ s (succ-ℕ x)) (mul-ℕ t y))
+
+    quotient-min-dist-succ-x-nonzero : is-nonzero-ℕ q
+    quotient-min-dist-succ-x-nonzero iszero = contradiction-le-ℕ (succ-ℕ x) d le-x-d leq-d-x
+      where
+      x-r-equality : succ-ℕ x ＝ r
+      x-r-equality = equational-reasoning succ-ℕ x
+        ＝ add-ℕ (mul-ℕ q d) r by (inv (eq-euclidean-division-ℕ d (succ-ℕ x)))
+        ＝ add-ℕ (mul-ℕ 0 d) r by (ap (λ H → add-ℕ (mul-ℕ H d) r) iszero)
+        ＝ add-ℕ 0 r by (ap (λ H → add-ℕ H r) (left-zero-law-mul-ℕ d))
+        ＝ r by (left-unit-law-add-ℕ r) 
+
+      le-x-d : le-ℕ (succ-ℕ x) d
+      le-x-d = tr (λ n → le-ℕ n d) (inv (x-r-equality)) (remainder-min-dist-succ-x-le-min-dist x y)
+    
+      x-pos-dist : pos-distance-between-multiples (succ-ℕ x) y (succ-ℕ x)
+      x-pos-dist H = pair' (is-nonzero-succ-ℕ x) (pair 1 (pair 0 (ap succ-ℕ (left-unit-law-add-ℕ x))))
+
+      leq-d-x : leq-ℕ d (succ-ℕ x)
+      leq-d-x = minimal-positive-distance-is-minimal (succ-ℕ x) y (succ-ℕ x) x-pos-dist
+
+    min-dist-succ-x-coeff-nonzero : is-nonzero-ℕ s
+    min-dist-succ-x-coeff-nonzero iszero = minimal-positive-distance-nonzero (succ-ℕ x) y (tr (is-nonzero-ℕ) (inv (left-successor-law-add-ℕ x y)) (is-nonzero-succ-ℕ (add-ℕ x y))) d-is-zero
+      where
+      zero-addition : add-ℕ (mul-ℕ t y) d ＝ 0
+      zero-addition = equational-reasoning
+        add-ℕ (mul-ℕ t y) d 
+        ＝ (mul-ℕ s (succ-ℕ x))
+          by rewrite-dist
+        ＝ (mul-ℕ zero-ℕ (succ-ℕ x))
+          by (ap (λ H → mul-ℕ H (succ-ℕ x)) iszero)
+        ＝ zero-ℕ
+        by (left-zero-law-mul-ℕ (succ-ℕ x))
+
+      d-is-zero : is-zero-ℕ d
+      d-is-zero = is-zero-right-is-zero-add-ℕ (mul-ℕ t y) d (zero-addition)
+
+    coeff-nonnegative : leq-ℤ one-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))
+    coeff-nonnegative = tr (λ z → leq-ℤ one-ℤ z) 
+      (inv (mul-int-ℕ q s)) (leq-int-ℕ 1 (mul-ℕ q s) 
+        (leq-succ-le-ℕ 0 (mul-ℕ q s) (le-is-nonzero-ℕ (mul-ℕ q s)
+          (is-nonzero-mul-ℕ q s quotient-min-dist-succ-x-nonzero
             min-dist-succ-x-coeff-nonzero))))
 
-  add-dist-eqn : int-ℕ (minimal-positive-distance (succ-ℕ x) y) 
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x)))
-  add-dist-eqn = equational-reasoning
-    int-ℕ (minimal-positive-distance (succ-ℕ x) y)
-    ＝ add-ℤ (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y))) (add-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y)) (int-ℕ (minimal-positive-distance (succ-ℕ x) y))) 
-      by (inv (isretr-add-neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y)) (int-ℕ (minimal-positive-distance (succ-ℕ x) y))))
-    ＝ add-ℤ (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y))) (int-ℕ (add-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) (minimal-positive-distance (succ-ℕ x) y)))
-      by (ap (λ H → add-ℤ (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y))) H) (add-int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y) (minimal-positive-distance (succ-ℕ x) y)))
-    ＝ add-ℤ (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y))) (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))) 
-      by (ap (λ H → add-ℤ (neg-ℤ (int-ℕ (mul-ℕ (minimal-positive-distance-succ-y-coeff x y) y))) (int-ℕ H)) rewrite-dist) 
-    ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y))) (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))) 
-      by (ap (λ H → add-ℤ (neg-ℤ H) (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)))) (inv (mul-int-ℕ (minimal-positive-distance-succ-y-coeff x y) y)))
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x))) 
-      by (ap (λ H → add-ℤ H (int-ℕ (mul-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)))) (inv (left-negative-law-mul-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)) (int-ℕ y))))
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) 
-      by (ap (λ H → add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) H) (inv (mul-int-ℕ (minimal-positive-distance-succ-x-coeff x y) (succ-ℕ x)))) 
 
-  isolate-rem-eqn : int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) ＝ 
-    add-ℤ 
-      (neg-ℤ (mul-ℤ 
-        (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-        (add-ℤ
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) )))
+    add-dist-eqn : int-ℕ d 
+      ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))
+    add-dist-eqn = equational-reasoning int-ℕ d
+      ＝ add-ℤ (neg-ℤ (int-ℕ (mul-ℕ t y))) (add-ℤ (int-ℕ (mul-ℕ t y)) (int-ℕ d)) 
+      by inv (isretr-add-neg-ℤ (int-ℕ (mul-ℕ t y)) (int-ℕ d))
+      ＝ add-ℤ (neg-ℤ (int-ℕ (mul-ℕ t y))) (int-ℕ (add-ℕ (mul-ℕ t y) d))
+      by ap (λ H → add-ℤ (neg-ℤ (int-ℕ (mul-ℕ t y))) H) (add-int-ℕ (mul-ℕ t y) d)
+      ＝ add-ℤ (neg-ℤ (int-ℕ (mul-ℕ t y))) (int-ℕ (mul-ℕ s (succ-ℕ x))) 
+      by ap (λ H → add-ℤ (neg-ℤ (int-ℕ (mul-ℕ t y))) (int-ℕ H)) rewrite-dist
+      ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ t) (int-ℕ y))) (int-ℕ (mul-ℕ s (succ-ℕ x))) 
+      by ap (λ H → add-ℤ (neg-ℤ H) (int-ℕ (mul-ℕ s (succ-ℕ x)))) (inv (mul-int-ℕ t y))
+      ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) (int-ℕ (mul-ℕ s (succ-ℕ x))) 
+      by ap (λ H → add-ℤ H (int-ℕ (mul-ℕ s (succ-ℕ x)))) (inv (left-negative-law-mul-ℤ (int-ℕ t) (int-ℕ y)))
+      ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))) 
+      by ap (λ H → add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) H) (inv (mul-int-ℕ s (succ-ℕ x))) 
+
+    isolate-rem-eqn : int-ℕ r ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) 
+      (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))))
       (int-ℕ (succ-ℕ x))
-  isolate-rem-eqn = 
-    equational-reasoning
-      (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-      ＝ add-ℤ
-      (neg-ℤ (mul-ℤ 
-        (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-        (add-ℤ
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-           (mul-ℤ ((int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (int-ℕ (succ-ℕ x))) ))) 
-      (add-ℤ  
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-            (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-            (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) )) 
-       (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))) 
-         by (inv (isretr-add-neg-ℤ
-           (mul-ℤ 
-             (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-             (add-ℤ
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-               (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))))) (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))))
-        ＝ add-ℤ
-        (neg-ℤ (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) ))) 
-        (add-ℤ  
-          (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-            (int-ℕ (minimal-positive-distance (succ-ℕ x) y))  ) 
-          (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))) 
-          by (ap (λ H → add-ℤ
-          (neg-ℤ (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-            (add-ℤ
-              (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-              (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) ))) 
-          (add-ℤ  
-            (mul-ℤ 
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-              H) 
-            (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))))) 
-            (inv add-dist-eqn))
-        ＝ add-ℤ
-        (neg-ℤ (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (add-ℤ
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) ))) 
+    isolate-rem-eqn = equational-reasoning int-ℕ r
+      ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ ((int-ℕ s)) (int-ℕ (succ-ℕ x)))))) 
+        (add-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+          (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))) (int-ℕ r)) 
+      by inv (isretr-add-neg-ℤ (mul-ℤ (int-ℕ q) 
+        (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))) (int-ℕ r))
+      ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+         (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) 
+         (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ d)) (int-ℕ r)) 
+      by ap (λ H → add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) 
+        (add-ℤ (mul-ℤ (int-ℕ q) H) (int-ℕ r))) 
+        (inv add-dist-eqn)
+      ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+         (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
+      by ap (λ H → add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) H) (minimal-positive-distance-div-succ-x-eqn x y)
+
+    rearrange-arith : 
+      add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
+      ＝ add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+        (neg-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
+          (int-ℕ (succ-ℕ x))))
+    rearrange-arith = equational-reasoning
+      add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (add-ℤ (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))
+      ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y))) 
+         (mul-ℤ (int-ℕ q) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))))
         (int-ℕ (succ-ℕ x))
-          by (ap (λ H → add-ℤ 
-            (neg-ℤ (mul-ℤ 
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-            (add-ℤ
-               (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-               (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) ))) H) (minimal-positive-distance-div-succ-x-eqn x y))
-
-  rearrange-arith : 
-    add-ℤ 
-      (neg-ℤ (mul-ℤ 
-        (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-        (add-ℤ
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) )))
-      (int-ℕ (succ-ℕ x))
-    ＝ add-ℤ
-      (mul-ℤ 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      (neg-ℤ (mul-ℤ
-        (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))
-        (int-ℕ (succ-ℕ x))))
-  rearrange-arith = equational-reasoning
-    add-ℤ 
-      (neg-ℤ (mul-ℤ 
-        (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-        (add-ℤ
-           (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y)) 
-           (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))) )))
-      (int-ℕ (succ-ℕ x))
-    ＝ (add-ℤ 
-      (neg-ℤ (add-ℤ 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-          (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y))) 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x)))))))
-      (int-ℕ (succ-ℕ x))
-      by (ap (λ H → add-ℤ (neg-ℤ H) (int-ℕ (succ-ℕ x)))
-        (left-distributive-mul-add-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) (int-ℕ y))
-          (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x)))))
-     ＝ (add-ℤ 
-      (neg-ℤ (add-ℤ 
-        (mul-ℤ 
-          (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-            (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-          (int-ℕ y)) 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))))))
-         (int-ℕ (succ-ℕ x)))
-       by (ap (λ H → (add-ℤ 
-        (neg-ℤ (add-ℤ H 
-          (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-            (mul-ℤ (int-ℕ (minimal-positive-distance-succ-x-coeff x y)) (int-ℕ (succ-ℕ x))))))
-        (int-ℕ (succ-ℕ x))))
-         (inv (associative-mul-ℤ 
-           (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-           (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))
-           (int-ℕ y))))
-      ＝ (add-ℤ 
-      (neg-ℤ (add-ℤ 
-        (mul-ℤ 
-          (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-            (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-          (int-ℕ y)) 
-        (mul-ℤ 
-          (mul-ℤ 
-            (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-            (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-          (int-ℕ (succ-ℕ x)))))
-         (int-ℕ (succ-ℕ x)))
-         by (ap (λ H → (add-ℤ 
-          (neg-ℤ (add-ℤ 
-            (mul-ℤ 
-              (mul-ℤ 
-                (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                (neg-ℤ (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-              (int-ℕ y)) H))
+      by ap (λ H → add-ℤ (neg-ℤ H) (int-ℕ (succ-ℕ x)))
+         (left-distributive-mul-add-ℤ (int-ℕ q) 
+           (mul-ℤ (neg-ℤ (int-ℕ t)) (int-ℕ y)) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))
+      ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (neg-ℤ (int-ℕ t))) (int-ℕ y)) 
+        (mul-ℤ (int-ℕ q) (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x))))))
+         (int-ℕ (succ-ℕ x))
+       by ap (λ H → (add-ℤ (neg-ℤ (add-ℤ H (mul-ℤ (int-ℕ q)
+          (mul-ℤ (int-ℕ s) (int-ℕ (succ-ℕ x)))))) (int-ℕ (succ-ℕ x))))
+         (inv (associative-mul-ℤ (int-ℕ q) (neg-ℤ (int-ℕ t)) (int-ℕ y)))
+      ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (neg-ℤ (int-ℕ t))) (int-ℕ y)) 
+        (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+         (int-ℕ (succ-ℕ x))
+       by ap (λ H → (add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (neg-ℤ (int-ℕ t))) (int-ℕ y)) H))
          (int-ℕ (succ-ℕ x))))
-           (inv (associative-mul-ℤ 
-           (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-           (int-ℕ (minimal-positive-distance-succ-x-coeff x y))
-           (int-ℕ (succ-ℕ x)))))  
-        ＝ (add-ℤ 
-        (neg-ℤ (add-ℤ 
-          (mul-ℤ 
-            (neg-ℤ (mul-ℤ 
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-              (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-            (int-ℕ y)) 
-          (mul-ℤ 
-            (mul-ℤ 
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-              (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-            (int-ℕ (succ-ℕ x)))))
-           (int-ℕ (succ-ℕ x)))
-           by (ap (λ H → (add-ℤ 
-          (neg-ℤ (add-ℤ 
-            (mul-ℤ H (int-ℕ y)) 
-            (mul-ℤ 
-              (mul-ℤ 
-                (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-              (int-ℕ (succ-ℕ x)))))
-             (int-ℕ (succ-ℕ x)))) 
-            (right-negative-law-mul-ℤ 
-             (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-             (int-ℕ (minimal-positive-distance-succ-y-coeff x y))))
-         ＝ (add-ℤ 
-          (add-ℤ 
-            (neg-ℤ (mul-ℤ 
-              (neg-ℤ (mul-ℤ 
-                (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-              (int-ℕ y))) 
-            (neg-ℤ (mul-ℤ 
-              (mul-ℤ 
-                (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-              (int-ℕ (succ-ℕ x)))))
+         (inv (associative-mul-ℤ (int-ℕ q) (int-ℕ s) (int-ℕ (succ-ℕ x))))  
+      ＝ add-ℤ (neg-ℤ (add-ℤ (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t))) (int-ℕ y)) 
+         (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+         (int-ℕ (succ-ℕ x))
+       by ap (λ H → (add-ℤ (neg-ℤ (add-ℤ (mul-ℤ H (int-ℕ y)) (mul-ℤ 
+         (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x))))) (int-ℕ (succ-ℕ x)))) 
+         (right-negative-law-mul-ℤ (int-ℕ q) (int-ℕ t))
+       ＝ add-ℤ (add-ℤ (neg-ℤ (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t))) (int-ℕ y))) 
+          (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+          (int-ℕ (succ-ℕ x))
+        by ap (λ H → add-ℤ H (int-ℕ (succ-ℕ x))) 
+          (distributive-neg-add-ℤ 
+            (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t))) (int-ℕ y)) 
+            (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))
+            (int-ℕ (succ-ℕ x))))
+        ＝ add-ℤ (add-ℤ (mul-ℤ (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)))) (int-ℕ y)) 
+           (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+           (int-ℕ (succ-ℕ x))
+        by ap (λ H → (add-ℤ (add-ℤ H (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+           (int-ℕ (succ-ℕ x)))) 
+           (inv (left-negative-law-mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t))) (int-ℕ y)))
+        ＝ add-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+             (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+             (int-ℕ (succ-ℕ x))
+        by ap (λ H → (add-ℤ (add-ℤ (mul-ℤ H (int-ℕ y)) 
+          (neg-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (int-ℕ (succ-ℕ x)))))
+            (int-ℕ (succ-ℕ x)))) 
+          (neg-neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t))) 
+        ＝ add-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+             (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))) (int-ℕ (succ-ℕ x))))
+           (int-ℕ (succ-ℕ x))
+        by ap (λ H → (add-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) H)
+          (int-ℕ (succ-ℕ x)))) 
+          (inv (left-negative-law-mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))
+            (int-ℕ (succ-ℕ x))))
+        ＝ add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+           (add-ℤ (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))) (int-ℕ (succ-ℕ x)))
              (int-ℕ (succ-ℕ x)))
-            by (ap (λ H → add-ℤ H (int-ℕ (succ-ℕ x))) 
-              (distributive-neg-add-ℤ
-                (mul-ℤ 
-                  (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-                  (int-ℕ y)) 
-                (mul-ℤ 
-                  (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                  (int-ℕ (succ-ℕ x)))))
-          ＝ (add-ℤ 
-            (add-ℤ 
-              (mul-ℤ 
-                (neg-ℤ (neg-ℤ (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))))) 
-                (int-ℕ y)) 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                (int-ℕ (succ-ℕ x)))))
-               (int-ℕ (succ-ℕ x)))
-             by (ap (λ H → (add-ℤ 
-            (add-ℤ H 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                (int-ℕ (succ-ℕ x)))))
-               (int-ℕ (succ-ℕ x)))) 
-             (inv (left-negative-law-mul-ℤ 
-               (neg-ℤ (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y)))) 
-               (int-ℕ y))))
-          ＝ (add-ℤ 
-            (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                (int-ℕ (succ-ℕ x)))))
-               (int-ℕ (succ-ℕ x)))
-              by (ap (λ H → (add-ℤ 
-            (add-ℤ 
-              (mul-ℤ H (int-ℕ y)) 
-              (neg-ℤ (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                (int-ℕ (succ-ℕ x)))))
-               (int-ℕ (succ-ℕ x)))) 
-             (neg-neg-ℤ (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))))) 
-           ＝ (add-ℤ 
-            (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (mul-ℤ 
-                (neg-ℤ (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-                (int-ℕ (succ-ℕ x))))
-               (int-ℕ (succ-ℕ x)))
-              by (ap (λ H → (add-ℤ 
-            (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) H)
-               (int-ℕ (succ-ℕ x)))) 
-               (inv (left-negative-law-mul-ℤ 
-                  (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-                 (int-ℕ (succ-ℕ x)))))
-            ＝ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (add-ℤ 
-                (mul-ℤ 
-                  (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-                  (int-ℕ (succ-ℕ x)))
-               (int-ℕ (succ-ℕ x))))
-              by (associative-add-ℤ 
-                (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y))
-                (mul-ℤ 
-                  (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-                  (int-ℕ (succ-ℕ x)))
-                (int-ℕ (succ-ℕ x)))
-             ＝ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (add-ℤ 
-                (mul-ℤ 
-                  (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-                  (int-ℕ (succ-ℕ x)))
-               (mul-ℤ (neg-ℤ (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x)))))
-               by (ap (λ H → (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (add-ℤ 
-                (mul-ℤ 
-                  (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-                  (int-ℕ (succ-ℕ x)))
-               (mul-ℤ H (int-ℕ (succ-ℕ x)))))) 
-               (inv (neg-neg-ℤ one-ℤ)))
-             ＝ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (mul-ℤ 
-                (add-ℤ  
-                  (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-               (neg-ℤ (neg-ℤ one-ℤ))) (int-ℕ (succ-ℕ x))))
-               by (ap (λ H → (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) H))
-               (inv (right-distributive-mul-add-ℤ
-                 (neg-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))))
-                  (neg-ℤ (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x)))))
-              ＝ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (mul-ℤ 
-                (neg-ℤ (add-ℤ  
-                  (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-               (neg-ℤ one-ℤ))) (int-ℕ (succ-ℕ x))))
-                by (ap (λ H → (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (mul-ℤ H (int-ℕ (succ-ℕ x)))))
-              (inv (distributive-neg-add-ℤ (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) 
-                   (neg-ℤ one-ℤ))))
-              ＝ (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) 
-              (neg-ℤ (mul-ℤ 
-                (add-ℤ  
-                  (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-               (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x)))))
-                by (ap (λ H → (add-ℤ 
-              (mul-ℤ 
-                (mul-ℤ 
-                  (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                  (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-                (int-ℕ y)) H)) 
-                (left-negative-law-mul-ℤ (add-ℤ  
-                  (mul-ℤ 
-                    (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                    (int-ℕ (minimal-positive-distance-succ-x-coeff x y)))
-               (neg-ℤ one-ℤ))
-               (int-ℕ (succ-ℕ x))))  
+        by associative-add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+          (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))) (int-ℕ (succ-ℕ x)))
+          (int-ℕ (succ-ℕ x))
+        ＝ add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+           (add-ℤ (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))) (int-ℕ (succ-ℕ x)))
+             (mul-ℤ (neg-ℤ (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x))))
+        by ap (λ H → (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+             (add-ℤ (mul-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))) (int-ℕ (succ-ℕ x)))
+             (mul-ℤ H (int-ℕ (succ-ℕ x)))))) 
+           (inv (neg-neg-ℤ one-ℤ))
+        ＝ add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+           (mul-ℤ (add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)))
+             (neg-ℤ (neg-ℤ one-ℤ))) (int-ℕ (succ-ℕ x)))
+        by ap (λ H → (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) H))
+          (inv (right-distributive-mul-add-ℤ (neg-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)))
+          (neg-ℤ (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x))))
+        ＝ add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+           (mul-ℤ (neg-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))
+             (neg-ℤ one-ℤ))) (int-ℕ (succ-ℕ x)))
+        by ap (λ H → (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+             (mul-ℤ H (int-ℕ (succ-ℕ x)))))
+             (inv (distributive-neg-add-ℤ 
+               (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)))
+        ＝ add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) 
+           (neg-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s))
+             (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x))))
+        by ap (λ H → (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y)) H)) 
+          (left-negative-law-mul-ℤ 
+            (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
+            (int-ℕ (succ-ℕ x)))  
 
-  dist-eqn : remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
-    ＝ dist-ℕ
-    (mul-ℕ (abs-ℤ 
-      (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))) (succ-ℕ x))
-    (mul-ℕ (mul-ℕ 
-      (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-      (minimal-positive-distance-succ-y-coeff x y)) y)
-  dist-eqn = equational-reasoning
-    remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)
-    ＝ abs-ℤ (int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))) 
-      by (inv (abs-int-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))))
-    ＝ abs-ℤ (add-ℤ
-      (mul-ℤ 
-        (mul-ℤ 
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-      (neg-ℤ (mul-ℤ
-        (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))
-        (int-ℕ (succ-ℕ x)))))
-       by (ap abs-ℤ (isolate-rem-eqn ∙ rearrange-arith))
-    ＝ (dist-ℤ
-      (mul-ℤ 
-        (int-ℕ (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y))) 
-        (int-ℕ y))
-       (mul-ℤ
-        (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))
-        (int-ℕ (succ-ℕ x)))) 
-       by (ap (λ H → (dist-ℤ
-      (mul-ℤ H (int-ℕ y))
-       (mul-ℤ
-        (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))
-        (int-ℕ (succ-ℕ x))))) 
-         (mul-int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) (minimal-positive-distance-succ-y-coeff x y)))  
-      ＝ (dist-ℤ
-      (int-ℕ (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y))
-       (mul-ℤ
-        (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))
-        (int-ℕ (succ-ℕ x))))
-        by (ap (λ H → (dist-ℤ H (mul-ℤ
-        (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))
-        (int-ℕ (succ-ℕ x))))) 
-          (mul-int-ℕ (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y))
-      ＝ (dist-ℤ
-      (int-ℕ (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y))
-       (mul-ℤ
-        (int-ℕ (abs-ℤ (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))))
-        (int-ℕ (succ-ℕ x))))
-        by (ap (λ H → (dist-ℤ
-      (int-ℕ (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y))
-       (mul-ℤ H (int-ℕ (succ-ℕ x)))))
+    dist-eqn : r ＝ dist-ℕ 
+      (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))) (succ-ℕ x))
+      (mul-ℕ (mul-ℕ q t) y)
+    dist-eqn = equational-reasoning r 
+      ＝ abs-ℤ (int-ℕ r) by (inv (abs-int-ℕ r))
+      ＝ abs-ℤ (add-ℤ (mul-ℤ (mul-ℤ (int-ℕ q) (int-ℕ t)) (int-ℕ y))
+          (neg-ℤ (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
+          (int-ℕ (succ-ℕ x)))))
+      by (ap abs-ℤ (isolate-rem-eqn ∙ rearrange-arith))
+      ＝ dist-ℤ (mul-ℤ (int-ℕ (mul-ℕ q t)) (int-ℕ y))
+        (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
+          (int-ℕ (succ-ℕ x)))
+      by ap (λ H → (dist-ℤ (mul-ℤ H (int-ℕ y)) 
+        (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
+          (int-ℕ (succ-ℕ x))))) 
+          (mul-int-ℕ q t)  
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (mul-ℕ q t) y))
+         (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))
+         (int-ℕ (succ-ℕ x)))
+      by ap (λ H → (dist-ℤ H 
+        (mul-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)) (int-ℕ (succ-ℕ x))))) 
+        (mul-int-ℕ (mul-ℕ q t) y)
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (mul-ℕ q t) y))
+         (mul-ℤ (int-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ))))
+         (int-ℕ (succ-ℕ x)))
+      by ap (λ H → (dist-ℤ (int-ℕ (mul-ℕ (mul-ℕ q t) y))
+          (mul-ℤ H (int-ℕ (succ-ℕ x)))))
           (inv (int-abs-is-nonnegative-ℤ 
-            (add-ℤ (mul-ℤ
-              (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-              (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)) coeff-nonnegative)))
-      ＝ (dist-ℤ
-      (int-ℕ (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y))
-       (int-ℕ (mul-ℕ
-        (abs-ℤ (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)))
-        (succ-ℕ x))))
-        by (ap (λ H → (dist-ℤ
-      (int-ℕ (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y)) H))
-        (mul-int-ℕ (abs-ℤ (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ))) (succ-ℕ x))) 
-      ＝ (dist-ℕ
-      (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y)
-       (mul-ℕ
-        (abs-ℤ (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)))
-        (succ-ℕ x))) 
-         by (dist-int-ℕ 
-           (mul-ℕ 
-             (mul-ℕ 
-               (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-               (minimal-positive-distance-succ-y-coeff x y)) y)
-             (mul-ℕ
-               (abs-ℤ (add-ℤ (mul-ℤ
-                 (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-                 (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)))
-               (succ-ℕ x)))
-       ＝ (dist-ℕ 
-       (mul-ℕ
-        (abs-ℤ (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)))
-        (succ-ℕ x))
-       (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y)) 
-         by (symmetric-dist-ℕ
-           (mul-ℕ 
-        (mul-ℕ 
-          (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-          (minimal-positive-distance-succ-y-coeff x y)) y)
-           (mul-ℕ
-        (abs-ℤ (add-ℤ (mul-ℤ
-          (int-ℕ (quotient-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
-          (int-ℕ (minimal-positive-distance-succ-x-coeff x y))) (neg-ℤ one-ℤ)))
-        (succ-ℕ x))) 
+          (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)) 
+          coeff-nonnegative))
+      ＝ dist-ℤ (int-ℕ (mul-ℕ (mul-ℕ q t) y))
+         (int-ℕ (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)))
+         (succ-ℕ x)))
+      by ap (λ H → (dist-ℤ (int-ℕ (mul-ℕ (mul-ℕ q t) y)) H))
+         (mul-int-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q)
+           (int-ℕ s)) (neg-ℤ one-ℤ))) (succ-ℕ x))
+      ＝ dist-ℕ (mul-ℕ (mul-ℕ q t) y)
+         (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)))
+           (succ-ℕ x)) 
+      by dist-int-ℕ 
+        (mul-ℕ (mul-ℕ q t) y)
+        (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)))
+          (succ-ℕ x))
+      ＝ dist-ℕ 
+        (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q) (int-ℕ s)) (neg-ℤ one-ℤ)))
+          (succ-ℕ x))
+          (mul-ℕ (mul-ℕ q t) y) 
+      by symmetric-dist-ℕ
+         (mul-ℕ (mul-ℕ q t) y)
+         (mul-ℕ (abs-ℤ (add-ℤ (mul-ℤ (int-ℕ q)
+           (int-ℕ s)) (neg-ℤ one-ℤ)))
+         (succ-ℕ x)) 
+
 
 remainder-min-dist-succ-x-not-is-nonzero : (x y : ℕ) → ¬ (is-nonzero-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
 remainder-min-dist-succ-x-not-is-nonzero x y nonzero = contradiction-le-ℕ
@@ -1647,11 +1098,24 @@ remainder-min-dist-succ-x-not-is-nonzero x y nonzero = contradiction-le-ℕ
     (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
     rem-pos-dist
 
-remainder-min-dist-succ-x-is-zero : (x y : ℕ) → is-zero-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
-remainder-min-dist-succ-x-is-zero x y with is-decidable-is-zero-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
-... | inl z = z
-... | inr nz = ex-falso (remainder-min-dist-succ-x-not-is-nonzero x y nz) 
 
+remainder-min-dist-succ-x-is-zero : (x y : ℕ) → is-zero-ℕ (remainder-euclidean-division-ℕ (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)) 
+remainder-min-dist-succ-x-is-zero x y = 
+  is-zero-case-split 
+    (is-decidable-is-zero-ℕ 
+      (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
+  where
+  is-zero-case-split : 
+    (is-zero-ℕ (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
+     + is-nonzero-ℕ (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x)))
+    → is-zero-ℕ (remainder-euclidean-division-ℕ 
+        (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
+  is-zero-case-split (inl z) = z 
+  is-zero-case-split (inr nz) = ex-falso 
+    (remainder-min-dist-succ-x-not-is-nonzero x y nz) 
 
 minimal-positive-distance-div-fst : (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x
 minimal-positive-distance-div-fst zero-ℕ y = pair zero-ℕ (left-zero-law-mul-ℕ (minimal-positive-distance zero-ℕ y))
@@ -1684,41 +1148,42 @@ gcd-ℕ-div-y-mults x y z d = div-mul-ℕ
   (gcd-ℕ x y) y (pr2 (is-common-divisor-gcd-ℕ x y))
 
 gcd-ℕ-div-dist-between-mult : (x y z : ℕ) → is-distance-between-multiples-ℕ x y z → div-ℕ (gcd-ℕ x y) z 
-gcd-ℕ-div-dist-between-mult x y z dist
-  with decide-leq-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-... | inl sxty = div-right-summand-ℕ (gcd-ℕ x y)
-  (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-  z
-  (gcd-ℕ-div-x-mults x y z dist)
-  (concatenate-div-eq-ℕ (gcd-ℕ-div-y-mults x y z dist) (inv rewrite-dist))
-  where
-  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) z ＝ mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y 
-  rewrite-dist = rewrite-right-dist-add-ℕ  
-    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-    z
-    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-    sxty
-    (inv (is-distance-between-multiples-eqn-ℕ dist))
+gcd-ℕ-div-dist-between-mult x y z dist = 
+  sx-ty-case-split (decide-leq-ℕ (mul-ℕ s x) (mul-ℕ t y))
+  where 
+  s : ℕ 
+  s = is-distance-between-multiples-fst-coeff-ℕ dist
+  
+  t : ℕ 
+  t = is-distance-between-multiples-snd-coeff-ℕ dist
+  
+  sx-ty-case-split : 
+    (leq-ℕ (mul-ℕ s x) (mul-ℕ t y) 
+    + leq-ℕ (mul-ℕ t y) (mul-ℕ s x))
+    → div-ℕ (gcd-ℕ x y) z
+  sx-ty-case-split (inl sxty) = 
+    div-right-summand-ℕ (gcd-ℕ x y) (mul-ℕ s x) z
+      (gcd-ℕ-div-x-mults x y z dist)
+      (concatenate-div-eq-ℕ (gcd-ℕ-div-y-mults x y z dist) 
+        (inv rewrite-dist))
+    where
+    rewrite-dist : add-ℕ (mul-ℕ s x) z ＝ mul-ℕ t y 
+    rewrite-dist = rewrite-right-dist-add-ℕ  
+      (mul-ℕ s x) z (mul-ℕ t y) sxty
+      (inv (is-distance-between-multiples-eqn-ℕ dist))
+  
+  sx-ty-case-split (inr tysx) =  
+    div-right-summand-ℕ (gcd-ℕ x y) (mul-ℕ t y) z
+      (gcd-ℕ-div-y-mults x y z dist)
+      (concatenate-div-eq-ℕ (gcd-ℕ-div-x-mults x y z dist) (inv rewrite-dist)) 
+    where
+    rewrite-dist : add-ℕ (mul-ℕ t y) z ＝ mul-ℕ s x 
+    rewrite-dist = rewrite-right-dist-add-ℕ (mul-ℕ t y) z (mul-ℕ s x) tysx
+      (inv (is-distance-between-multiples-eqn-ℕ dist) 
+        ∙ symmetric-dist-ℕ (mul-ℕ s x) (mul-ℕ t y))
 
-... | inr tysx = div-right-summand-ℕ (gcd-ℕ x y)
-  (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-  z
-  (gcd-ℕ-div-y-mults x y z dist)
-  (concatenate-div-eq-ℕ (gcd-ℕ-div-x-mults x y z dist) (inv rewrite-dist)) 
-  where
-  rewrite-dist : add-ℕ (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y) z ＝ mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x 
-  rewrite-dist = rewrite-right-dist-add-ℕ  
-    (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y)
-    z
-    (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-    tysx
-    (inv (is-distance-between-multiples-eqn-ℕ dist) 
-      ∙ symmetric-dist-ℕ (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x) (mul-ℕ (is-distance-between-multiples-snd-coeff-ℕ dist) y))
-
-  div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ (is-distance-between-multiples-fst-coeff-ℕ dist) x)
-  div-gcd-x = div-mul-ℕ 
-    (is-distance-between-multiples-fst-coeff-ℕ dist) 
-    (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
+    div-gcd-x : div-ℕ (gcd-ℕ x y) (mul-ℕ s x)
+    div-gcd-x = div-mul-ℕ s (gcd-ℕ x y) x (pr1 (is-common-divisor-gcd-ℕ x y))
 
 gcd-ℕ-div-minimal-positive-distance : (x y : ℕ) → is-nonzero-ℕ (add-ℕ x y) → div-ℕ (gcd-ℕ x y) (minimal-positive-distance x y)
 gcd-ℕ-div-minimal-positive-distance x y H = gcd-ℕ-div-dist-between-mult x y (minimal-positive-distance x y) (minimal-positive-distance-is-distance x y H)  
@@ -1800,78 +1265,47 @@ bezouts-lemma-refactor-hypotheses x y H K = (equational-reasoning
     (is-nonnegative-int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P)) 
     (is-nonnegative-is-positive-ℤ K)
 
--- refactor H, maybe just make x and y both positive? 
 bezouts-lemma-pos-ints : (x y : ℤ) → (H : is-positive-ℤ x) → (K : is-positive-ℤ y) → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
-bezouts-lemma-pos-ints x y H K with 
-  (decide-is-nonnegative-ℤ {diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)})
-... | inl pos = pair 
-    (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))
-    (pair (neg-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) 
-    (inv eqn))
+bezouts-lemma-pos-ints x y H K =
+  sx-ty-nonneg-case-split 
+    (decide-is-nonnegative-ℤ {diff-ℤ (mul-ℤ s x) (mul-ℤ t y)}) 
   where
-  eqn : gcd-ℤ x y ＝ 
-    (add-ℤ 
-        (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) y))
-  eqn = equational-reasoning
-    gcd-ℤ x y
-    ＝ int-ℕ (abs-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-    by (ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K))
-    ＝ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)) 
-    by int-abs-is-nonnegative-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)) pos
-    ＝ (add-ℤ 
-        (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) y)) 
-    by (ap (λ M → add-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) M) 
-      (inv (left-negative-law-mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-... | inr neg = pair (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))))
-  (pair (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) 
-  (inv eqn))
-  where 
-  eqn : gcd-ℤ x y ＝
-    (add-ℤ 
-        (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x) 
-        (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))
-  eqn = equational-reasoning
-    gcd-ℤ x y
-    ＝ int-ℕ (abs-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-    by (ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K))
-    ＝ int-ℕ (abs-ℤ (neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))))
-    by (ap (λ M → int-ℕ M) (inv (abs-neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))))
-    ＝ (neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) 
-    by int-abs-is-nonnegative-ℤ (neg-ℤ (diff-ℤ 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x) 
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) neg
-    ＝ add-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x))
-    (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) 
-    by (distributive-neg-add-ℤ 
-      (mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x)
-      (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x)
-    (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y))) 
-    by (ap (λ M → add-ℤ M (neg-ℤ (neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))) 
-      (inv (left-negative-law-mul-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) x))) 
-    ＝ add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x)
-    (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y) 
-    by (ap (λ M → add-ℤ (mul-ℤ (neg-ℤ (int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)))) x) M)
-      (neg-neg-ℤ (mul-ℤ (int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))) y)))
-
+  s : ℤ
+  s = int-ℕ (minimal-positive-distance-x-coeff 
+    (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))
+  t : ℤ 
+  t = int-ℕ (minimal-positive-distance-y-coeff 
+    (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K)) 
+  
+  sx-ty-nonneg-case-split : 
+    (is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))
+    + is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
+    → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
+  sx-ty-nonneg-case-split (inl pos) = (s , (neg-ℤ t) , 
+    inv (equational-reasoning
+      gcd-ℤ x y
+      ＝ int-ℕ (abs-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)))
+      by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
+      ＝ diff-ℤ (mul-ℤ s x) (mul-ℤ t y) 
+      by int-abs-is-nonnegative-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) pos
+      ＝ add-ℤ (mul-ℤ s x) (mul-ℤ (neg-ℤ t) y) 
+      by ap (λ M → add-ℤ (mul-ℤ s x) M) (inv (left-negative-law-mul-ℤ t y))))
+  sx-ty-nonneg-case-split (inr neg) = ((neg-ℤ s) , t ,
+    inv (equational-reasoning
+      gcd-ℤ x y
+      ＝ int-ℕ (abs-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)))
+      by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
+      ＝ int-ℕ (abs-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
+      by ap (λ M → int-ℕ M) (inv (abs-neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))))
+      ＝ neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y)) 
+      by int-abs-is-nonnegative-ℤ (neg-ℤ (diff-ℤ (mul-ℤ s x) (mul-ℤ t y))) neg
+      ＝ add-ℤ (neg-ℤ (mul-ℤ s x)) (neg-ℤ (neg-ℤ (mul-ℤ t y))) 
+      by distributive-neg-add-ℤ (mul-ℤ s x) (neg-ℤ (mul-ℤ t y))
+      ＝ add-ℤ (mul-ℤ (neg-ℤ s) x) (neg-ℤ (neg-ℤ (mul-ℤ t y))) 
+      by ap (λ M → add-ℤ M (neg-ℤ (neg-ℤ (mul-ℤ t y)))) 
+        (inv (left-negative-law-mul-ℤ s x)) 
+      ＝ add-ℤ (mul-ℤ (neg-ℤ s) x) (mul-ℤ t y) 
+      by ap (λ M → add-ℤ (mul-ℤ (neg-ℤ s) x) M) (neg-neg-ℤ (mul-ℤ t y)))) 
 
 bezouts-lemma-ℤ : (x y : ℤ) → Σ ℤ (λ s → Σ ℤ (λ t → add-ℤ (mul-ℤ s x) (mul-ℤ t y) ＝ gcd-ℤ x y))
 bezouts-lemma-ℤ (inl x) (inl y) = pair (neg-ℤ s) (pair (neg-ℤ t) eqn)
