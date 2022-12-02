@@ -10,6 +10,7 @@ open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-
 open import foundation.coproduct-types using (inl; inr)
 open import foundation.identity-types using (Id; refl; ap-binary)
 open import foundation.unit-type using (star)
+open import foundation.dependent-pair-types using (_,_)
 open import foundation.universe-levels using (Level; UU)
 
 open import linear-algebra.constant-vectors using (constant-vec)
@@ -17,10 +18,10 @@ open import linear-algebra.functoriality-vectors using
   ( map-binary-vec; htpy-vec; map-vec)
 open import linear-algebra.scalar-multiplication-vectors using (scalar-mul-vec)
 open import linear-algebra.vectors using
-  ( vec; empty-vec; _∷_; head-vec; tail-vec)
+  ( vec; empty-vec; _∷_; head-vec; tail-vec; vec-Set)
 
 open import ring-theory.rings using
-  ( Ring; type-Ring; add-Ring; zero-Ring; left-unit-law-add-Ring;
+  ( Ring; type-Ring; set-Ring; add-Ring; zero-Ring; left-unit-law-add-Ring;
     right-unit-law-add-Ring; neg-Ring; associative-add-Ring;
     left-inverse-law-add-Ring; right-inverse-law-add-Ring; mul-Ring;
     associative-mul-Ring; one-Ring; left-unit-law-mul-Ring;
@@ -69,8 +70,25 @@ module _
   {l : Level} (R : Ring l)
   where
 
+  open import group-theory.semigroups using (Semigroup)
+  open import group-theory.monoids using (Monoid)
+  open import group-theory.commutative-monoids using (Commutative-Monoid)
+
   add-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n → vec-Ring R n
   add-vec-Ring = map-binary-vec (add-Ring R)
+
+  associative-add-vec-Ring :
+    {n : ℕ} (v1 v2 v3 : vec-Ring R n) →
+    Id ( add-vec-Ring (add-vec-Ring v1 v2) v3)
+       ( add-vec-Ring v1 (add-vec-Ring v2 v3))
+  associative-add-vec-Ring empty-vec empty-vec empty-vec = refl
+  associative-add-vec-Ring (x ∷ v1) (y ∷ v2) (z ∷ v3) =
+    ap-binary _∷_
+      ( associative-add-Ring R x y z)
+      ( associative-add-vec-Ring v1 v2 v3)
+
+  vec-Ring-Semigroup : ℕ → Semigroup l
+  vec-Ring-Semigroup n = vec-Set (set-Ring R) n , add-vec-Ring , associative-add-vec-Ring
 
   left-unit-law-add-vec-Ring :
     {n : ℕ} (v : vec-Ring R n) → Id (add-vec-Ring (zero-vec-Ring R) v) v
@@ -88,15 +106,8 @@ module _
       ( right-unit-law-add-Ring R x)
       ( right-unit-law-add-vec-Ring v)
 
-  associative-add-vec-Ring :
-    {n : ℕ} (v1 v2 v3 : vec-Ring R n) →
-    Id ( add-vec-Ring (add-vec-Ring v1 v2) v3)
-       ( add-vec-Ring v1 (add-vec-Ring v2 v3))
-  associative-add-vec-Ring empty-vec empty-vec empty-vec = refl
-  associative-add-vec-Ring (x ∷ v1) (y ∷ v2) (z ∷ v3) =
-    ap-binary _∷_
-      ( associative-add-Ring R x y z)
-      ( associative-add-vec-Ring v1 v2 v3)
+  vec-Ring-Monoid : ℕ → Monoid l
+  vec-Ring-Monoid n = vec-Ring-Semigroup n , zero-vec-Ring R , left-unit-law-add-vec-Ring , right-unit-law-add-vec-Ring
 
   commutative-add-vec-Ring :
     {n : ℕ} (v w : vec-Ring R n) → Id (add-vec-Ring v w) (add-vec-Ring w v)
@@ -105,6 +116,9 @@ module _
     ap-binary _∷_
       ( commutative-add-Ring R x y)
       ( commutative-add-vec-Ring v w)
+
+  vec-Ring-Commutative-Monoid : ℕ → Commutative-Monoid l
+  vec-Ring-Commutative-Monoid n = vec-Ring-Monoid n , commutative-add-vec-Ring
 ```
 
 ### The negative of a vector on a ring
@@ -113,6 +127,9 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
+
+  open import group-theory.groups using (Group)
+  open import group-theory.abelian-groups using (Ab)
 
   neg-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n
   neg-vec-Ring = map-vec (neg-Ring R)
@@ -134,6 +151,14 @@ module _
     ap-binary _∷_
       ( right-inverse-law-add-Ring R x)
       ( right-inverse-law-add-vec-Ring v)
+
+  vec-Ring-Group : ℕ → Group l
+  vec-Ring-Group n = vec-Ring-Semigroup R n ,
+    (zero-vec-Ring R , left-unit-law-add-vec-Ring R , right-unit-law-add-vec-Ring R) ,
+    (neg-vec-Ring , left-inverse-law-add-vec-Ring , right-inverse-law-add-vec-Ring)
+
+  vec-Ring-Ab : ℕ → Ab l
+  vec-Ring-Ab n = vec-Ring-Group n , commutative-add-vec-Ring R
 ```
 
 ### Scalar multiplication of vectors on rings
@@ -142,6 +167,12 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
+
+  open import group-theory.abelian-groups using (Ab)
+  open import group-theory.homomorphisms-abelian-groups using (type-hom-Ab; map-hom-Ab; eq-htpy-hom-Ab)
+  open import group-theory.endomorphism-rings-abelian-groups using (endomorphism-ring-Ab)
+  open import ring-theory.homomorphisms-rings using (type-hom-Ring)
+  open import ring-theory.modules-rings using (left-module-Ring)
 
   scalar-mul-vec-Ring : {n : ℕ} (r : type-Ring R) → vec-Ring R n → vec-Ring R n
   scalar-mul-vec-Ring r empty-vec = empty-vec
@@ -182,6 +213,30 @@ module _
     ap-binary _∷_
       ( right-distributive-mul-add-Ring R r s x)
       ( right-distributive-scalar-mul-add-vec-Ring r s v)
+```
+
+Scalar multiplication defines an `Ab`-endomorphism of `vec-Ring`s, and this mapping is a ring homomorphism `R → End(vec R n)`
+
+```agda
+  scalar-mul-vec-Ring-endomorphism : (n : ℕ) (r : type-Ring R) → type-hom-Ab (vec-Ring-Ab R n) (vec-Ring-Ab R n)
+  scalar-mul-vec-Ring-endomorphism n r = 
+    scalar-mul-vec-Ring r ,
+    left-distributive-scalar-mul-add-vec-Ring r
+
+  scalar-mul-hom-Ring : (n : ℕ) → type-hom-Ring R (endomorphism-ring-Ab (vec-Ring-Ab R n))
+  scalar-mul-hom-Ring n = (scalar-mul-vec-Ring-endomorphism n , 
+    (λ k1 k2 → hom-extensional (right-distributive-scalar-mul-add-vec-Ring k1 k2))), 
+    (λ k1 k2 → hom-extensional (associative-scalar-mul-vec-Ring k1 k2)) ,
+    hom-extensional (unit-law-scalar-mul-vec-Ring)
+      where
+        V = vec-Ring-Ab R n
+        hom-extensional : {f g : type-hom-Ab V V}
+            → ((v : vec-Ring R n) → Id (map-hom-Ab V V f v) (map-hom-Ab V V g v))
+            → Id f g
+        hom-extensional = eq-htpy-hom-Ab V V
+
+  vec-left-module-Ring : (n : ℕ) → left-module-Ring l R
+  vec-left-module-Ring n = vec-Ring-Ab R n , scalar-mul-hom-Ring n
 ```
 
 ## Properties
