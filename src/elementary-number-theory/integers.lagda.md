@@ -14,7 +14,8 @@ open import foundation.contractible-types using (is-contr)
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-types using (empty; ex-falso)
+open import foundation.empty-types using
+  ( empty; ex-falso; is-set-empty; is-prop-empty)
 open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-emb-is-equiv; map-eq-transpose-equiv';
@@ -25,8 +26,10 @@ open import foundation.identity-types using
   ( _＝_; refl; _∙_; inv; ap; left-inv; inv-con; right-unit; concat; assoc)
 open import foundation.injective-maps using (is-injective)
 open import foundation.negation using (¬)
-open import foundation.sets using (Set; is-set; type-Set; is-set-type-Set)
-open import foundation.unit-type using (unit; star; is-set-unit)
+open import foundation.propositions using (is-prop)
+open import foundation.sets using
+  (Set; is-set; type-Set; is-set-type-Set; is-set-Σ)
+open import foundation.unit-type using (unit; star; is-prop-unit; is-set-unit)
 open import foundation.universe-levels using (UU; Level; lzero)
 
 open import structured-types.types-equipped-with-endomorphisms using (Endo)
@@ -298,11 +301,34 @@ is-positive-ℤ (inl x) = empty
 is-positive-ℤ (inr (inl x)) = empty
 is-positive-ℤ (inr (inr x)) = unit
 
+is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
+is-prop-is-positive-ℤ (inl x) = is-prop-empty
+is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
+is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
+
+is-set-is-positive-ℤ : (x : ℤ) → is-set (is-positive-ℤ x)
+is-set-is-positive-ℤ (inl x) = is-set-empty
+is-set-is-positive-ℤ (inr (inl x)) = is-set-empty
+is-set-is-positive-ℤ (inr (inr x)) = is-set-unit
+
+is-positive-ℤ-Set : ℤ → Set lzero
+is-positive-ℤ-Set z = pair (is-positive-ℤ z) (is-set-is-positive-ℤ z)
+
 positive-ℤ : UU lzero
 positive-ℤ = Σ ℤ is-positive-ℤ
 
+is-set-positive-ℤ : is-set positive-ℤ
+is-set-positive-ℤ = is-set-Σ is-set-ℤ is-set-is-positive-ℤ
+
+positive-ℤ-Set : Set lzero
+pr1 positive-ℤ-Set = positive-ℤ
+pr2 positive-ℤ-Set = is-set-positive-ℤ
+
 int-positive-ℤ : positive-ℤ → ℤ
 int-positive-ℤ = pr1
+
+-- arst : (x y : positive-ℤ) → (int-positive-ℤ x ＝ int-positive-ℤ y) → x ＝ y
+-- arst (pair (inr (inr x)) is-pos-x) y p = _ -- {!ex-falso is-pos-x!}
 
 is-positive-int-positive-ℤ :
   (x : positive-ℤ) → is-positive-ℤ (int-positive-ℤ x)

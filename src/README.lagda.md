@@ -705,10 +705,15 @@ open import order-theory.distributive-lattices
 open import order-theory.finite-posets
 open import order-theory.finite-preorders
 open import order-theory.finitely-graded-posets
+open import order-theory.frames
 open import order-theory.greatest-lower-bounds-posets
+open import order-theory.homomorphisms-frames
+open import order-theory.homomorphisms-meet-semilattices 
+open import order-theory.homomorphisms-meet-sup-lattices 
+open import order-theory.homomorphisms-sup-lattices 
 open import order-theory.ideals-preorders
+open import order-theory.infinite-distributive-law
 open import order-theory.interval-subposets
-open import order-theory.join-complete-semilattice
 open import order-theory.join-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
@@ -730,6 +735,7 @@ open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.subposets
 open import order-theory.subpreorders
+open import order-theory.sup-lattices
 open import order-theory.total-posets
 open import order-theory.total-preorders
 ```
