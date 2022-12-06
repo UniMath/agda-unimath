@@ -53,6 +53,29 @@ module _
   left-zero-law-prod : (empty × X) ≃ empty
   pr1 left-zero-law-prod = pr1
   pr2 left-zero-law-prod = is-equiv-pr1-prod-empty
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (is-empty-A : is-empty A)
+  where
+  inv-pr1-prod-is-empty : A → A × B
+  inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
+
+  issec-inv-pr1-prod-is-empty : (pr1 ∘ inv-pr1-prod-is-empty) ~ id
+  issec-inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
+
+  isretr-inv-pr1-prod-is-empty : (inv-pr1-prod-is-empty ∘ pr1) ~ id
+  isretr-inv-pr1-prod-is-empty (pair a b) = ex-falso (is-empty-A a)
+
+  is-equiv-pr1-prod-is-empty : is-equiv (pr1 {A = A} {B = λ a → B})
+  is-equiv-pr1-prod-is-empty =
+    is-equiv-has-inverse
+      inv-pr1-prod-is-empty
+      issec-inv-pr1-prod-is-empty
+      isretr-inv-pr1-prod-is-empty
+  
+  left-zero-law-prod-is-empty : (A × B) ≃ A
+  pr1 left-zero-law-prod-is-empty = pr1
+  pr2 left-zero-law-prod-is-empty = is-equiv-pr1-prod-is-empty
 ```
 
 ### Right zero law for cartesian products
@@ -81,6 +104,29 @@ module _
   right-zero-law-prod : (X × empty) ≃ empty
   pr1 right-zero-law-prod = pr2
   pr2 right-zero-law-prod = is-equiv-pr2-prod-empty
+
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (is-empty-B : is-empty B)
+  where
+  inv-pr2-prod-is-empty : B → A × B
+  inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
+
+  issec-inv-pr2-prod-is-empty : (pr2 ∘ inv-pr2-prod-is-empty) ~ id
+  issec-inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
+
+  isretr-inv-pr2-prod-is-empty : (inv-pr2-prod-is-empty ∘ pr2) ~ id
+  isretr-inv-pr2-prod-is-empty (pair a b) = ex-falso (is-empty-B b)
+
+  is-equiv-pr2-prod-is-empty : is-equiv (pr2 {A = A} {B = λ a → B})
+  is-equiv-pr2-prod-is-empty =
+    is-equiv-has-inverse
+      inv-pr2-prod-is-empty
+      issec-inv-pr2-prod-is-empty
+      isretr-inv-pr2-prod-is-empty
+  
+  right-zero-law-prod-is-empty : (A × B) ≃ B
+  pr1 right-zero-law-prod-is-empty = pr2
+  pr2 right-zero-law-prod-is-empty = is-equiv-pr2-prod-is-empty
 ```
 
 ### Right absorption law for dependent pair types and for cartesian products
