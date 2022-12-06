@@ -221,7 +221,7 @@ right-zero-law-join-is-contr A B is-contr-B =
     ( is-contr-B)
 ```
 
-### Join of propositions is proposition
+### The join of propositions is a proposition
 
 ```agda
 module _
