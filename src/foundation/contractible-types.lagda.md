@@ -48,48 +48,48 @@ pr2 (is-contr-Prop A) = is-property-is-contr
 ### The subuniverse of contractible types
 
 ```agda
-UU-Contr : (l : Level) → UU (lsuc l)
-UU-Contr l = type-subuniverse is-contr-Prop
+Contr : (l : Level) → UU (lsuc l)
+Contr l = type-subuniverse is-contr-Prop
 
-type-UU-Contr : {l : Level} → UU-Contr l → UU l
-type-UU-Contr A = pr1 A
-
-abstract
-  is-contr-type-UU-Contr :
-    {l : Level} (A : UU-Contr l) → is-contr (type-UU-Contr A)
-  is-contr-type-UU-Contr A = pr2 A
-
-equiv-UU-Contr :
-  {l1 l2 : Level} (X : UU-Contr l1) (Y : UU-Contr l2) → UU (l1 ⊔ l2)
-equiv-UU-Contr X Y = type-UU-Contr X ≃ type-UU-Contr Y
-
-equiv-eq-UU-Contr :
-  {l1 : Level} (X Y : UU-Contr l1) → (X ＝ Y) → equiv-UU-Contr X Y
-equiv-eq-UU-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
+type-Contr : {l : Level} → Contr l → UU l
+type-Contr A = pr1 A
 
 abstract
-  is-equiv-equiv-eq-UU-Contr :
-    {l1 : Level} (X Y : UU-Contr l1) → is-equiv (equiv-eq-UU-Contr X Y)
-  is-equiv-equiv-eq-UU-Contr X Y =
+  is-contr-type-Contr :
+    {l : Level} (A : Contr l) → is-contr (type-Contr A)
+  is-contr-type-Contr A = pr2 A
+
+equiv-Contr :
+  {l1 l2 : Level} (X : Contr l1) (Y : Contr l2) → UU (l1 ⊔ l2)
+equiv-Contr X Y = type-Contr X ≃ type-Contr Y
+
+equiv-eq-Contr :
+  {l1 : Level} (X Y : Contr l1) → (X ＝ Y) → equiv-Contr X Y
+equiv-eq-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
+
+abstract
+  is-equiv-equiv-eq-Contr :
+    {l1 : Level} (X Y : Contr l1) → is-equiv (equiv-eq-Contr X Y)
+  is-equiv-equiv-eq-Contr X Y =
     is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
 
-eq-equiv-UU-Contr :
-  {l1 : Level} {X Y : UU-Contr l1} → equiv-UU-Contr X Y → (X ＝ Y)
-eq-equiv-UU-Contr = eq-equiv-subuniverse is-contr-Prop
+eq-equiv-Contr :
+  {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → (X ＝ Y)
+eq-equiv-Contr = eq-equiv-subuniverse is-contr-Prop
 
 abstract
-  center-UU-contr : (l : Level) → UU-Contr l
-  center-UU-contr l = pair (raise-unit l) is-contr-raise-unit
+  center-Contr : (l : Level) → Contr l
+  center-Contr l = pair (raise-unit l) is-contr-raise-unit
   
-  contraction-UU-contr :
-    {l : Level} (A : UU-Contr l) → center-UU-contr l ＝ A
-  contraction-UU-contr A =
-    eq-equiv-UU-Contr
-      ( equiv-is-contr is-contr-raise-unit (is-contr-type-UU-Contr A))
+  contraction-Contr :
+    {l : Level} (A : Contr l) → center-Contr l ＝ A
+  contraction-Contr A =
+    eq-equiv-Contr
+      ( equiv-is-contr is-contr-raise-unit (is-contr-type-Contr A))
 
 abstract
-  is-contr-UU-Contr : (l : Level) → is-contr (UU-Contr l)
-  is-contr-UU-Contr l = pair (center-UU-contr l) contraction-UU-contr
+  is-contr-Contr : (l : Level) → is-contr (Contr l)
+  is-contr-Contr l = pair (center-Contr l) contraction-Contr
 ```
 
 ## Properties
