@@ -10,7 +10,7 @@ module foundation.coproduct-types where
 open import foundation.contractible-types using
   ( is-contr; eq-is-contr; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso; empty-Prop)
+open import foundation-core.empty-types using (ex-falso; empty-Prop)
 open import foundation.equivalences using (_≃_; is-equiv-has-inverse)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using (_~_)
