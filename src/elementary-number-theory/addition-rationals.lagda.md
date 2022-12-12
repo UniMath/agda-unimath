@@ -111,7 +111,7 @@ abstract
 
 ### Associativity of addition
 ```agda 
-abstract
+module _ where abstract
   associative-add-ℚ : (k l m : ℚ) → ((k +ℚ l) +ℚ m) ＝ (k +ℚ (l +ℚ m))
   associative-add-ℚ ((k1 , k2 , kpos) , kred) ((l1 , l2 , lpos) , lred)
     ((m1 , m2 , mpos) , mred) = 
@@ -123,7 +123,7 @@ abstract
         ((k1 , k2 , kpos) , kred) 
         (((l1 , l2 , lpos) , lred) +ℚ ((m1 , m2 , mpos) , mred))) 
       (is-injective-mul-ℤ' (mul-ℤ l-gcd r-gcd) nz-factor eqn) 
-    where
+    where abstract
     left : fraction-ℤ
     left = pre-add-ℚ ((k1 , k2 , kpos) , kred) ((l1 , l2 , lpos) , lred)
     l-gcd : ℤ
@@ -333,91 +333,93 @@ abstract
 ### Interchange law for addition
 
 ```agda
-interchange-law-add-add-ℚ : interchange-law add-ℚ add-ℚ
-interchange-law-add-add-ℚ =
-  interchange-law-commutative-and-associative
-    add-ℚ
-    commutative-add-ℚ
-    associative-add-ℚ
+abstract
+  interchange-law-add-add-ℚ : interchange-law add-ℚ add-ℚ
+  interchange-law-add-add-ℚ =
+    interchange-law-commutative-and-associative
+      add-ℚ
+      commutative-add-ℚ
+      associative-add-ℚ
 
 ```
 
 ### Addition by x is a binary equivalence
 
 ```agda
-issec-add-neg-ℚ :
-  (x y : ℚ) → x +ℚ (neg-ℚ x +ℚ y) ＝ y
-issec-add-neg-ℚ x y =
-  equational-reasoning
-    x +ℚ (neg-ℚ x +ℚ y) 
-    ＝ (x +ℚ neg-ℚ x) +ℚ y   
-    by inv (associative-add-ℚ x (neg-ℚ x) y)
-    ＝ zero-ℚ +ℚ y                    
-    by ap (add-ℚ' y) (right-inverse-law-add-ℚ x)
-    ＝ y
-    by left-unit-law-add-ℚ y 
-
-isretr-add-neg-ℚ :
-  (x y : ℚ) → add-ℚ (neg-ℚ x) (add-ℚ x y) ＝ y
-isretr-add-neg-ℚ x y =
-  equational-reasoning
-    neg-ℚ x +ℚ (x +ℚ y) 
-    ＝ (neg-ℚ x +ℚ x) +ℚ y   
-    by inv (associative-add-ℚ (neg-ℚ x) x y)
-    ＝ zero-ℚ +ℚ y
-    by ap (add-ℚ' y) (left-inverse-law-add-ℚ x)
-    ＝ y 
-    by left-unit-law-add-ℚ y
-
 abstract
+  issec-add-neg-ℚ :
+    (x y : ℚ) → x +ℚ (neg-ℚ x +ℚ y) ＝ y
+  issec-add-neg-ℚ x y =
+    equational-reasoning
+      x +ℚ (neg-ℚ x +ℚ y) 
+      ＝ (x +ℚ neg-ℚ x) +ℚ y   
+      by inv (associative-add-ℚ x (neg-ℚ x) y)
+      ＝ zero-ℚ +ℚ y                    
+      by ap (add-ℚ' y) (right-inverse-law-add-ℚ x)
+      ＝ y
+      by left-unit-law-add-ℚ y 
+
+  isretr-add-neg-ℚ :
+    (x y : ℚ) → add-ℚ (neg-ℚ x) (add-ℚ x y) ＝ y
+  isretr-add-neg-ℚ x y =
+    equational-reasoning
+      neg-ℚ x +ℚ (x +ℚ y) 
+      ＝ (neg-ℚ x +ℚ x) +ℚ y   
+      by inv (associative-add-ℚ (neg-ℚ x) x y)
+      ＝ zero-ℚ +ℚ y
+      by ap (add-ℚ' y) (left-inverse-law-add-ℚ x)
+      ＝ y 
+      by left-unit-law-add-ℚ y
+
+
   is-equiv-add-ℚ : (x : ℚ) → is-equiv (add-ℚ x)
   pr1 (pr1 (is-equiv-add-ℚ x)) = add-ℚ (neg-ℚ x)
   pr2 (pr1 (is-equiv-add-ℚ x)) = issec-add-neg-ℚ x
   pr1 (pr2 (is-equiv-add-ℚ x)) = add-ℚ (neg-ℚ x)
   pr2 (pr2 (is-equiv-add-ℚ x)) = isretr-add-neg-ℚ x
 
-equiv-add-ℚ : ℚ → (ℚ ≃ ℚ)
-pr1 (equiv-add-ℚ x) = add-ℚ x
-pr2 (equiv-add-ℚ x) = is-equiv-add-ℚ x
+  equiv-add-ℚ : ℚ → (ℚ ≃ ℚ)
+  pr1 (equiv-add-ℚ x) = add-ℚ x
+  pr2 (equiv-add-ℚ x) = is-equiv-add-ℚ x
 
-issec-add-neg-ℚ' :
-  (x y : ℚ) → (y +ℚ neg-ℚ x) +ℚ x ＝ y
-issec-add-neg-ℚ' x y =
-  equational-reasoning
-    (y +ℚ neg-ℚ x) +ℚ x 
-    ＝ y +ℚ (neg-ℚ x +ℚ x)  
-    by associative-add-ℚ y (neg-ℚ x) x
-    ＝ y +ℚ zero-ℚ      
-    by ap (add-ℚ y) (left-inverse-law-add-ℚ x)
-    ＝ y 
-    by right-unit-law-add-ℚ y
+  issec-add-neg-ℚ' :
+    (x y : ℚ) → (y +ℚ neg-ℚ x) +ℚ x ＝ y
+  issec-add-neg-ℚ' x y =
+    equational-reasoning
+      (y +ℚ neg-ℚ x) +ℚ x 
+      ＝ y +ℚ (neg-ℚ x +ℚ x)  
+      by associative-add-ℚ y (neg-ℚ x) x
+      ＝ y +ℚ zero-ℚ      
+      by ap (add-ℚ y) (left-inverse-law-add-ℚ x)
+      ＝ y 
+      by right-unit-law-add-ℚ y
 
-isretr-add-neg-ℚ' :
-  (x y : ℚ) → (y +ℚ x) +ℚ neg-ℚ x ＝ y
-isretr-add-neg-ℚ' x y =
-  equational-reasoning
-    (y +ℚ x) +ℚ neg-ℚ x
-    ＝ y +ℚ (x +ℚ neg-ℚ x)   
-    by associative-add-ℚ y x (neg-ℚ x)
-    ＝ y +ℚ zero-ℚ
-    by ap (add-ℚ y) (right-inverse-law-add-ℚ x)
-    ＝ y
-    by right-unit-law-add-ℚ y
+  isretr-add-neg-ℚ' :
+    (x y : ℚ) → (y +ℚ x) +ℚ neg-ℚ x ＝ y
+  isretr-add-neg-ℚ' x y =
+    equational-reasoning
+      (y +ℚ x) +ℚ neg-ℚ x
+      ＝ y +ℚ (x +ℚ neg-ℚ x)   
+      by associative-add-ℚ y x (neg-ℚ x)
+      ＝ y +ℚ zero-ℚ
+      by ap (add-ℚ y) (right-inverse-law-add-ℚ x)
+      ＝ y
+      by right-unit-law-add-ℚ y
 
-abstract
+
   is-equiv-add-ℚ' : (y : ℚ) → is-equiv (add-ℚ' y)
   pr1 (pr1 (is-equiv-add-ℚ' y)) = add-ℚ' (neg-ℚ y)
   pr2 (pr1 (is-equiv-add-ℚ' y)) = issec-add-neg-ℚ' y
   pr1 (pr2 (is-equiv-add-ℚ' y)) = add-ℚ' (neg-ℚ y)
   pr2 (pr2 (is-equiv-add-ℚ' y)) = isretr-add-neg-ℚ' y
 
-equiv-add-ℚ' : ℚ → (ℚ ≃ ℚ)
-pr1 (equiv-add-ℚ' y) = add-ℚ' y
-pr2 (equiv-add-ℚ' y) = is-equiv-add-ℚ' y
+  equiv-add-ℚ' : ℚ → (ℚ ≃ ℚ)
+  pr1 (equiv-add-ℚ' y) = add-ℚ' y
+  pr2 (equiv-add-ℚ' y) = is-equiv-add-ℚ' y
 
-is-binary-equiv-add-ℚ : is-binary-equiv add-ℚ
-pr1 is-binary-equiv-add-ℚ = is-equiv-add-ℚ'
-pr2 is-binary-equiv-add-ℚ = is-equiv-add-ℚ
+  is-binary-equiv-add-ℚ : is-binary-equiv add-ℚ
+  pr1 is-binary-equiv-add-ℚ = is-equiv-add-ℚ'
+  pr2 is-binary-equiv-add-ℚ = is-equiv-add-ℚ
 
 ```
 
@@ -437,7 +439,7 @@ abstract
           (is-injective-mul-ℤ' sum-gcd sum-gcd-nz eqn)) 
       (eq-is-prop (is-prop-is-reduced-fraction-ℤ (pr1 ((neg-ℚ k) +ℚ (neg-ℚ l)))))) 
 
-    where
+    where abstract
     k : ℚ 
     k = ((k1 , k2 , kpos) , kred)
     l : ℚ
