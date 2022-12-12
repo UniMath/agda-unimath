@@ -501,5 +501,5 @@ abstract
         ＝ mul-ℤ (mul-ℤ (add-ℤ (mul-ℤ (neg-ℤ k1) l2) (mul-ℤ (neg-ℤ l1) k2)) sum-denom) sum-gcd
         by inv (associative-mul-ℤ (add-ℤ (mul-ℤ (neg-ℤ k1) l2) (mul-ℤ (neg-ℤ l1) k2)) sum-denom sum-gcd))
 
-
+-- this is a fake thing
 ```
