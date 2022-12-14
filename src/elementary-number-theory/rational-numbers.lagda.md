@@ -465,13 +465,12 @@ unique-reduce-fraction-ℤ x y H =
       (unique-denominator-reduce-fraction-ℤ x y H)
       (eq-is-prop (is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 
-abstract
-  eq-ℚ-sim-fractions-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → in-fraction-ℤ x ＝ in-fraction-ℤ y
-  eq-ℚ-sim-fractions-ℤ x y H =
-    eq-pair-Σ'
-      ( pair
-        ( unique-reduce-fraction-ℤ x y H)
-        ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
+eq-ℚ-sim-fractions-ℤ : (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) → in-fraction-ℤ x ＝ in-fraction-ℤ y
+eq-ℚ-sim-fractions-ℤ x y H =
+  eq-pair-Σ'
+    ( pair
+      ( unique-reduce-fraction-ℤ x y H)
+      ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ y))))
 
 reduce-is-reduced-fraction-ℤ-id : (x : fraction-ℤ) → (H : is-reduced-fraction-ℤ x) → reduce-fraction-ℤ x ＝ x
 reduce-is-reduced-fraction-ℤ-id (m , n , npos) H = 
