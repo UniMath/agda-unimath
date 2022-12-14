@@ -10,16 +10,20 @@ module foundation.functoriality-coproduct-types where
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-contr; is-contr-equiv)
 open import foundation.coproduct-types using
-  ( _+_; inl; inr; is-injective-inl; neq-inr-inl)
+  ( _+_; inl; inr; is-injective-inl; neq-inr-inl; is-left; is-right; ind-coprod;
+    is-prop-is-left; is-prop-is-right; equiv-left-summand; equiv-right-summand;
+    isretr-map-inv-equiv-left-summand; isretr-map-inv-equiv-right-summand)
 open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
+open import foundation.equality-cartesian-product-types using (eq-pair)
 open import foundation.equality-coproduct-types using
   ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr;
     map-compute-eq-coprod-inl-inl; is-empty-eq-coprod-inr-inl;
     is-empty-eq-coprod-inl-inr; map-compute-eq-coprod-inr-inr)
+open import foundation.equational-reasoning
 open import foundation.equivalences using
   ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
     map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_;
-    is-equiv-map-equiv)
+    is-equiv-map-equiv; isretr-map-inv-equiv; eq-htpy-equiv)
 open import foundation.empty-types using (ex-falso)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (equiv-funext)
@@ -27,14 +31,17 @@ open import foundation.functions using (id; _∘_)
 open import foundation.functoriality-cartesian-product-types using (equiv-prod)
 open import foundation.functoriality-dependent-function-types using
   ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.functoriality-dependent-pair-types using
+  ( equiv-tot; equiv-Σ)
 open import foundation.homotopies using
   ( _~_; inv-htpy; _∙h_; is-contr-total-htpy'; refl-htpy)
-open import foundation.identity-types using (_＝_; inv; refl; ap; _∙_)
+open import foundation.identity-types using (_＝_; inv; refl; ap; _∙_; tr)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.negation using (¬)
+open import foundation.propositions using (eq-is-prop)
 open import foundation.structure-identity-principle using
   ( is-contr-total-Eq-structure)
+open import foundation.unit-type using (star)
 open import foundation.universal-property-coproduct-types using
   ( equiv-dependent-universal-property-coprod)
 open import foundation.universe-levels using (Level; UU)
@@ -401,4 +408,100 @@ module _
     commutative-square-inl-retr-equiv-coprod x (inr y) q =
       ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
   pr2 (retr-equiv-coprod f g p) (inr x) = p x
+```
+
+### Equivalences between mutually exclusive coproducts
+
+If `P → ¬ Q'` and `P' → ¬ Q` then `(P + Q ≃ P' + Q') ≃ ((P ≃ P') × (Q ≃ Q'))`.
+
+```agda
+module _ {i j k l : Level}
+  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
+  (¬PQ' : P → ¬ Q') where
+
+  left-to-left : (e : (P + Q) ≃ (P' + Q'))
+               → (u : P + Q)
+               → is-left u
+               → is-left (map-equiv e u)
+  left-to-left e (inl p) _ =
+    ind-coprod is-left (λ _ → star) (λ q' → ¬PQ' p q') (map-equiv e (inl p))
+  left-to-left e (inr q) ()
+
+module _ {i j k l : Level}
+  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
+  (¬P'Q : P' → ¬ Q) where
+
+  right-to-right : (e : (P + Q) ≃ (P' + Q'))
+                 → (u : P + Q)
+                 → is-right u
+                 → is-right (map-equiv e u)
+  right-to-right e (inl p) ()
+  right-to-right e (inr q) _ =
+    ind-coprod is-right (λ p' → ¬P'Q p' q) (λ _ → star) (map-equiv e (inr q))
+
+module _ {i j k l : Level}
+  {P : UU i} {Q : UU j} {P' : UU k} {Q' : UU l}
+  (¬PQ' : P → ¬ Q') (¬P'Q : P' → ¬ Q) where
+
+  equiv-left-to-left : (e : (P + Q) ≃ (P' + Q'))
+                     → (u : P + Q)
+                     → is-left u ≃ is-left (map-equiv e u)
+  pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
+  pr2 (equiv-left-to-left e u) =
+    is-equiv-has-inverse
+      (tr is-left (isretr-map-inv-equiv e u) ∘
+       left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
+      (λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
+      (λ _ → eq-is-prop (is-prop-is-left u))
+
+  equiv-right-to-right : (e : (P + Q) ≃ (P' + Q'))
+                       → (u : P + Q)
+                       → is-right u ≃ is-right (map-equiv e u)
+  pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
+  pr2 (equiv-right-to-right e u) =
+    is-equiv-has-inverse
+      (tr is-right (isretr-map-inv-equiv e u) ∘
+       right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
+      (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
+      (λ _ → eq-is-prop (is-prop-is-right u))
+
+  map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q')
+                                → (P ≃ P') × (Q ≃ Q')
+  pr1 (map-mutually-exclusive-coprod e) =
+    P                   ≃ by inv-equiv equiv-left-summand to
+    Σ (P + Q) is-left   ≃ by equiv-Σ _ e (equiv-left-to-left e) to
+    Σ (P' + Q') is-left ≃ by equiv-left-summand to
+    P'                  ∎e
+  pr2 (map-mutually-exclusive-coprod e) =
+    Q                    ≃ by inv-equiv (equiv-right-summand) to
+    Σ (P + Q) is-right   ≃ by equiv-Σ _ e (equiv-right-to-right e) to
+    Σ (P' + Q') is-right ≃ by equiv-right-summand to
+    Q'                   ∎e
+
+  map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q')
+                                    → (P + Q) ≃ (P' + Q')
+  map-inv-mutually-exclusive-coprod (pair e₁ e₂) = equiv-coprod e₁ e₂
+
+  isretr-map-inv-mutually-exclusive-coprod :
+    (map-mutually-exclusive-coprod ∘ map-inv-mutually-exclusive-coprod) ~ id
+  isretr-map-inv-mutually-exclusive-coprod (pair e₁ e₂) =
+    eq-pair
+      (eq-htpy-equiv refl-htpy)
+      (eq-htpy-equiv refl-htpy)
+
+  issec-map-inv-mutually-exclusive-coprod :
+    (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
+  issec-map-inv-mutually-exclusive-coprod e =
+    eq-htpy-equiv (
+      λ { (inl p) → ap pr1 (isretr-map-inv-equiv-left-summand (pair (map-equiv e (inl p)) (left-to-left ¬PQ' e (inl p) star)));
+          (inr q) → ap pr1 (isretr-map-inv-equiv-right-summand (pair (map-equiv e (inr q)) (right-to-right ¬P'Q e (inr q) star))) })
+
+  equiv-mutually-exclusive-coprod : ((P + Q) ≃ (P' + Q'))
+                                  ≃ ((P ≃ P') × (Q ≃ Q'))
+  pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
+  pr2 equiv-mutually-exclusive-coprod =
+    is-equiv-has-inverse
+      map-inv-mutually-exclusive-coprod
+      isretr-map-inv-mutually-exclusive-coprod
+      issec-map-inv-mutually-exclusive-coprod
 ```
