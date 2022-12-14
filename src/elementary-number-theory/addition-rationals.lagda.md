@@ -20,7 +20,7 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.rational-numbers using
   ( ℚ; zero-ℚ; in-fraction-ℤ; is-reduced-fraction-ℤ; reduce-fraction-ℤ;
     is-prop-is-reduced-fraction-ℤ; eq-ℚ-sim-fractions-ℤ; 
-    unique-reduce-fraction-ℤ; in-fraction-ℤ-inv; neg-ℚ; 
+    in-fraction-ℤ-inv; neg-ℚ; 
     int-reduce-numerator-fraction-ℤ; int-reduce-denominator-fraction-ℤ;
     eq-reduce-numerator-fraction-ℤ; eq-reduce-denominator-fraction-ℤ)
 
@@ -57,12 +57,14 @@ add-ℚ q q' = in-fraction-ℤ (pre-add-ℚ q q')
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
 
+ 
 infix 30 _+ℚ_
 _+ℚ_ = add-ℚ
 
-ap-add-ℚ :
-  {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → add-ℚ x y ＝ add-ℚ x' y'
-ap-add-ℚ p q = ap-binary add-ℚ p q
+abstract
+  ap-add-ℚ :
+    {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → add-ℚ x y ＝ add-ℚ x' y'
+  ap-add-ℚ p q = ap-binary add-ℚ p q
 ```
 
 ## Properties
@@ -73,9 +75,7 @@ ap-add-ℚ p q = ap-binary add-ℚ p q
 abstract
   left-unit-law-add-ℚ : (k : ℚ) → zero-ℚ +ℚ k ＝ k
   left-unit-law-add-ℚ ((k1 , k2 , kpos) , kred) = 
-    eq-pair-Σ' 
-      (pair 
-      (unique-reduce-fraction-ℤ 
+    eq-ℚ-sim-fractions-ℤ 
         (pre-add-ℚ zero-ℚ ((k1 , k2 , kpos) , kred))
         (k1 , k2 , kpos) 
         (equational-reasoning
@@ -86,8 +86,7 @@ abstract
         ＝ mul-ℤ (mul-ℤ k1 one-ℤ) k2
         by ap (λ H → mul-ℤ H k2) (left-unit-law-add-ℤ (mul-ℤ k1 one-ℤ))
         ＝ mul-ℤ k1 (mul-ℤ one-ℤ k2)
-        by associative-mul-ℤ k1 one-ℤ k2) ) 
-      (eq-is-prop (is-prop-is-reduced-fraction-ℤ (reduce-fraction-ℤ (k1 , k2 , kpos)))))
+        by associative-mul-ℤ k1 one-ℤ k2) 
     ∙ in-fraction-ℤ-inv ((k1 , k2 , kpos) , kred)
     
   right-unit-law-add-ℚ : (k : ℚ) → k +ℚ zero-ℚ ＝ k
@@ -110,7 +109,7 @@ abstract
 ```
 
 ### Associativity of addition
-```agda 
+```agda  
 module _ where abstract
   associative-add-ℚ : (k l m : ℚ) → ((k +ℚ l) +ℚ m) ＝ (k +ℚ (l +ℚ m))
   associative-add-ℚ ((k1 , k2 , kpos) , kred) ((l1 , l2 , lpos) , lred)
@@ -278,6 +277,7 @@ module _ where abstract
         (mul-ℤ l-denom m2)) (mul-ℤ l-gcd r-gcd)
       by ap (λ H → mul-ℤ (mul-ℤ (add-ℤ (mul-ℤ k1 r-denom) (mul-ℤ r-num k2))
         (mul-ℤ l-denom m2)) H) (commutative-mul-ℤ r-gcd l-gcd)  
+
 ```
 
 ### Commutativity of addition
@@ -302,6 +302,7 @@ abstract
 
 ### Inverse laws for addition
 ```agda
+
 abstract
   left-inverse-law-add-ℚ : 
     (k : ℚ) → (neg-ℚ k) +ℚ k ＝ zero-ℚ
@@ -328,11 +329,17 @@ abstract
     (k : ℚ) → k +ℚ (neg-ℚ k) ＝ zero-ℚ
   right-inverse-law-add-ℚ k = 
     commutative-add-ℚ k (neg-ℚ k) ∙ left-inverse-law-add-ℚ k
+
+{-
+test : ℤ
+test = ?
+-}
 ```
 
 ### Interchange law for addition
 
 ```agda
+{-
 abstract
   interchange-law-add-add-ℚ : interchange-law add-ℚ add-ℚ
   interchange-law-add-add-ℚ =
@@ -340,13 +347,14 @@ abstract
       add-ℚ
       commutative-add-ℚ
       associative-add-ℚ
-
+-}
 ```
 
 ### Addition by x is a binary equivalence
 
 ```agda
-abstract
+{-
+module _ where abstract
   issec-add-neg-ℚ :
     (x y : ℚ) → x +ℚ (neg-ℚ x +ℚ y) ＝ y
   issec-add-neg-ℚ x y =
@@ -420,52 +428,57 @@ abstract
   is-binary-equiv-add-ℚ : is-binary-equiv add-ℚ
   pr1 is-binary-equiv-add-ℚ = is-equiv-add-ℚ'
   pr2 is-binary-equiv-add-ℚ = is-equiv-add-ℚ
-
+-}
 ```
 
 ### Distributivity of negatives over addition
 ```agda
-abstract
+{-
+module _ where abstract
   distributive-neg-add-ℚ :
     (k l : ℚ) → neg-ℚ (k +ℚ l) ＝ neg-ℚ k +ℚ neg-ℚ l
   distributive-neg-add-ℚ ((k1 , k2 , kpos) , kred) 
-    ((l1 , l2 , lpos) , lred) =
+    ((l1 , l2 , lpos) , lred) = 
       inv (in-fraction-ℤ-inv (neg-ℚ (k +ℚ l)))
-      ∙ eq-pair-Σ'
-        (pair 
-          (unique-reduce-fraction-ℤ 
-          (neg-ℤ sum-num , sum-denom , sum-denom-pos)
-          (pre-add-ℚ (neg-ℚ k) (neg-ℚ l)) 
-          (is-injective-mul-ℤ' sum-gcd sum-gcd-nz eqn)) 
-      (eq-is-prop (is-prop-is-reduced-fraction-ℤ (pr1 ((neg-ℚ k) +ℚ (neg-ℚ l)))))) 
+      ∙ eq-ℚ-sim-fractions-ℤ 
+        (neg-ℤ sum-num , sum-denom , sum-denom-pos)
+        (pre-add-ℚ (neg-ℚ k) (neg-ℚ l)) 
+        (is-injective-mul-ℤ' sum-gcd sum-gcd-nz eqn) 
 
     where abstract
     k : ℚ 
     k = ((k1 , k2 , kpos) , kred)
     l : ℚ
     l = ((l1 , l2 , lpos) , lred)
+
     sum : fraction-ℤ
     sum = pre-add-ℚ k l
-    sum-gcd : ℤ
-    sum-gcd = gcd-ℤ (numerator-fraction-ℤ (sum)) (denominator-fraction-ℤ (sum))
     sum-num : ℤ
-    sum-num = numerator-fraction-ℤ (reduce-fraction-ℤ (sum))
+    sum-num = numerator-fraction-ℤ (reduce-fraction-ℤ sum)
+
     sum-num-eqn : mul-ℤ sum-num sum-gcd ＝ add-ℤ (mul-ℤ k1 l2) (mul-ℤ l1 k2) 
     sum-num-eqn = eq-reduce-numerator-fraction-ℤ sum 
+
     sum-denom : ℤ
-    sum-denom = denominator-fraction-ℤ (reduce-fraction-ℤ (sum)) 
+    sum-denom = denominator-fraction-ℤ (reduce-fraction-ℤ sum)
+
     sum-denom-eqn : mul-ℤ sum-denom sum-gcd ＝ mul-ℤ k2 l2
     sum-denom-eqn = eq-reduce-denominator-fraction-ℤ sum
+
     sum-denom-pos : is-positive-ℤ sum-denom 
-    sum-denom-pos = is-positive-denominator-fraction-ℤ (reduce-fraction-ℤ (sum))
+    sum-denom-pos = is-positive-denominator-fraction-ℤ (reduce-fraction-ℤ sum)
     sum-d-pos : is-positive-ℤ (denominator-fraction-ℤ sum)
     sum-d-pos = is-positive-denominator-fraction-ℤ sum 
+
+    sum-gcd : ℤ
+    sum-gcd = gcd-ℤ (numerator-fraction-ℤ sum) (denominator-fraction-ℤ sum)
     sum-gcd-nz : is-nonzero-ℤ sum-gcd
     sum-gcd-nz =
       is-nonzero-is-positive-ℤ sum-gcd
         (is-positive-gcd-is-positive-right-ℤ 
           (numerator-fraction-ℤ sum) (denominator-fraction-ℤ sum)
           sum-d-pos)
+
     eqn : mul-ℤ (mul-ℤ (neg-ℤ (sum-num)) (mul-ℤ k2 l2)) sum-gcd
      ＝ mul-ℤ (mul-ℤ (add-ℤ (mul-ℤ (neg-ℤ k1) l2) (mul-ℤ (neg-ℤ l1) k2))
        sum-denom) sum-gcd
@@ -502,6 +515,6 @@ abstract
           (add-ℤ (mul-ℤ (neg-ℤ k1) l2) (mul-ℤ (neg-ℤ l1) k2))  
         ＝ mul-ℤ (mul-ℤ (add-ℤ (mul-ℤ (neg-ℤ k1) l2) (mul-ℤ (neg-ℤ l1) k2)) sum-denom) sum-gcd
         by inv (associative-mul-ℤ (add-ℤ (mul-ℤ (neg-ℤ k1) l2) (mul-ℤ (neg-ℤ l1) k2)) sum-denom sum-gcd))
+-}
 
--- this is a fake thing
 ```
