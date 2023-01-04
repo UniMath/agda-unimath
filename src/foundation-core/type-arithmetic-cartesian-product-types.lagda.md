@@ -11,7 +11,7 @@ open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.contractible-types using (is-contr; center)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
+  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; is-equiv-comp')
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (refl)
@@ -90,17 +90,29 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-B : is-contr B)
   where
 
-  right-unit-law-prod-is-contr : is-contr B → (A × B) ≃ A
-  right-unit-law-prod-is-contr H = right-unit-law-Σ-is-contr (λ a → H)
+  right-unit-law-prod-is-contr : (A × B) ≃ A
+  right-unit-law-prod-is-contr = right-unit-law-Σ-is-contr (λ a → is-contr-B)
 
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (C : is-contr A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-A : is-contr A)
   where
-  
+
   left-unit-law-prod-is-contr : (A × B) ≃ B
   left-unit-law-prod-is-contr =
-    left-unit-law-Σ-is-contr C (center C)
+    left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
+
+  is-equiv-pr2-prod-is-contr : is-equiv (pr2 {B = λ a → B})
+  is-equiv-pr2-prod-is-contr =
+    is-equiv-comp'
+      ( pr1)
+      ( map-commutative-prod)
+      ( is-equiv-map-commutative-prod)
+      ( is-equiv-pr1-is-contr λ b → is-contr-A)
+
+  equiv-pr2-prod-is-contr : (A × B) ≃ B
+  pr1 equiv-pr2-prod-is-contr = pr2
+  pr2 equiv-pr2-prod-is-contr = is-equiv-pr2-prod-is-contr
 ```
