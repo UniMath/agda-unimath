@@ -94,6 +94,16 @@ module _
     type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
   comp-hom-Precat' f g = comp-hom-Precat g f
 
+  precomp-hom-Precat :
+    {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
+    type-hom-Precat y z → type-hom-Precat x z
+  precomp-hom-Precat f z g = comp-hom-Precat g f
+
+  postcomp-hom-Precat :
+    {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
+    type-hom-Precat z x → type-hom-Precat z y
+  postcomp-hom-Precat f z = comp-hom-Precat f
+
   assoc-comp-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
