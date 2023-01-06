@@ -60,11 +60,11 @@ A coherence path for transporting over a cartesian product, in case it is useful
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A} {b0 b1 : B}
   where
-
+{- This line of code causes in error in agda versions 2.6.2 and 2.6.3
   coh-tr-eq-pair : (C : A × B → UU l3) (p : a0 ＝ a1) (q : b0 ＝ b1) (u : C (a0 , b0)) →
     (tr-eq-pair C p q u) ＝ ((ap (λ x → tr C x u) expand-pair-outer)  ∙ (tr-concat (eq-pair p refl) (eq-pair refl q) u ∙ (
     (ap (tr C (eq-pair refl q)) (right-unit-law-tr-eq-pair C p u)) ∙ (left-unit-law-tr-eq-pair C q (tr (λ x → C (x , b0)) p u) ))))
-  coh-tr-eq-pair C refl refl u = refl
+  coh-tr-eq-pair C refl refl u = refl -}
 ```
 
 Now for dependent pairs. First, transporting through a family of dependent pairs.
