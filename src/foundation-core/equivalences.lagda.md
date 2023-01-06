@@ -195,6 +195,26 @@ module _
   pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
 
+### The above properties applied to a family of equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3} (e : (x : A) → (B x) ≃ (C x))
+  where
+
+  map-equiv-fam : {x : A} → B x → C x
+  map-equiv-fam {x} b = map-equiv (e x) b
+  
+  map-inv-equiv-fam : {x : A} → C x → B x
+  map-inv-equiv-fam {x} c = map-inv-equiv (e x) c
+
+  issec-map-inv-equiv-fam : (x : A) → (map-equiv-fam ∘ map-inv-equiv-fam) ~ id
+  issec-map-inv-equiv-fam x = issec-map-inv-equiv (e x)
+
+  isretr-map-inv-equiv-fam : (x : A) → (map-inv-equiv-fam ∘ map-equiv-fam) ~ id
+  isretr-map-inv-equiv-fam x = isretr-map-inv-equiv (e x)
+```
+
 ### The 3-for-2 property of equivalences
 
 #### Composites of equivalences are equivalences
