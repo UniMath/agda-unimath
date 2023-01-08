@@ -1,8 +1,8 @@
 ---
-title: dependent-paths
+title: Dependent paths
 ---
-description: some of the path algebra of dependent paths
-
+description: We define the groupoidal operators on dependent paths, define the cohrences paths,
+and then prove the operators are equivalences.
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
@@ -16,115 +16,113 @@ open import foundation.homotopies
 open import foundation.universe-levels
 ```
 
-Define concatination and inverses of dependent paths
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A} {p01 : a0 ＝ a1} {p12 : a1 ＝ a2} {B : A → UU l2} {b0 : B a0} {b1 : B a1} {b2 : B a2}
-  (q01 : path-over B p01 b0 b1) (q12 : path-over B p12 b1 b2)
+  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A} (B : A → UU l2) {b0 : B a0} {b1 : B a1} {b2 : B a2}
+   (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) (q12 : path-over B p12 b1 b2)
   where
 
   d-concat : path-over B (p01 ∙ p12) b0 b2
-  d-concat = (tr-concat p01 p12 b0) ∙ ((ap (tr B p12) q01) ∙ (q12))
+  d-concat =   (tr-concat {B = B} p01 p12 b0)  ∙ ((ap (tr B p12) q01) ∙ (q12)) 
 
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p01 : a0 ＝ a1} {B : A → UU l2} {b0 : B a0} {b1 : B a1}
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (p01 : a0 ＝ a1) {b0 : B a0} {b1 : B a1}
   (q01 : path-over B p01 b0 b1)
   where
   
   d-inv : path-over B (inv p01) b1 b0
-  d-inv = (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat (p01) (inv p01) b0)) ∙ (
-    ap (λ t → tr B t b0) (right-inv p01)))
+  d-inv =  (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
+    ap (λ t → tr B t b0) (right-inv p01))) 
 ```
 
 Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws. Though, due to the dependent nature, the naive identities are not well typed. So these identities involve transporting.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {B : A → UU l2} {b0 : B a0} {b1  : B a1}
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) {b0 : B a0} {b1  : B a1}
   where
 
   d-assoc :
-    {a2 a3 : A} {b2 : B a2} {b3 : B a3} {p01 : a0 ＝ a1} {p12 : a1 ＝ a2} {p23 : a2 ＝ a3}
-    (q01 : path-over B p01 b0 b1) (q12 : path-over B p12 b1 b2) (q23 : path-over B p23 b2 b3) →
-    (tr (λ t → path-over B t b0 b3) (assoc p01 p12 p23) (d-concat (d-concat q01 q12) q23)) ＝ (
-    d-concat q01 (d-concat q12 q23))
-  d-assoc {p01 = refl} {p12 = refl} {p23 = refl} q01 q12 q23 = refl
+    {a2 a3 : A} {b2 : B a2} {b3 : B a3} (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2)
+    (q12 : path-over B p12 b1 b2) (p23 : a2 ＝ a3) (q23 : path-over B p23 b2 b3) →
+    (tr (λ t → path-over B t b0 b3) (assoc p01 p12 p23) (d-concat B (p01 ∙ p12) (
+    d-concat B p01 q01 p12 q12) p23 q23)) ＝ d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23)
+  d-assoc refl refl p12 q12 p23 q23 = refl
+{-
+  d-assoc' :    {a2 a3 : A} {b2 : B a2} {b3 : B a3} (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2)
+    (q12 : path-over B p12 b1 b2) (p23 : a2 ＝ a3) (q23 : path-over B p23 b2 b3) →
+    (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23) ＝ (
+    tr (λ t → path-over B t b0 b3) (inv (assoc p01 p12 p23)) (
+    d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23)))
+  d-assoc' refl refl p12 q12 p23 q23 = refl -}
 
-  d-right-unit : {p : a0 ＝ a1} (q : path-over B p b0 b1) →
-    (tr (λ t → path-over B t b0 b1) (right-unit) (d-concat q (refl-path-over B a1 b1))) ＝ q
-  d-right-unit {refl} q = refl
+  d-right-unit :
+    (p : a0 ＝ a1) (q : path-over B p b0 b1) → (tr (λ t → path-over B t b0 b1) (right-unit) (
+    d-concat B p q refl (refl-path-over B a1 b1))) ＝ q
+  d-right-unit refl refl = refl
+{-
+  d-right-unit' :
+     (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+     (d-concat B p q refl (refl-path-over B a1 b1)) ＝  -}
 
-  d-left-unit : {p : a0 ＝ a1} (q : path-over B p b0 b1) →
-    (tr (λ t → path-over B t b0 b1) (left-unit) (d-concat (refl-path-over B a0 b0) q)) ＝ q
-  d-left-unit {refl} q = refl
+  d-left-unit : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+    (tr (λ t → path-over B t b0 b1) (left-unit) (d-concat B refl (refl-path-over B a0 b0) p q)) ＝ q
+  d-left-unit refl refl = refl
 
-  d-right-inv : {p : a0 ＝ a1} (q : path-over B p b0 b1) →
-    (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat q (d-inv q))) ＝ (
+  d-right-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+    (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat B p q (inv p) (d-inv B p q))) ＝ (
      refl-path-over B a0 b0)
-  d-right-inv {refl} q = refl
+  d-right-inv refl refl = refl
 
-  d-left-inv :  {p : a0 ＝ a1} (q : path-over B p b0 b1) →
-    (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat q (d-inv q))) ＝ (
+  d-left-inv :  (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+    (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat B p q (inv p) (d-inv B p q))) ＝ (
      refl-path-over B a0 b0)
-  d-left-inv {refl} q = refl
+  d-left-inv refl refl = refl
 
-  d-inv-d-inv : {p : a0 ＝ a1} (q : path-over B p b0 b1) →
-    (tr (λ t → path-over B t b0 b1) (inv-inv p) (d-inv (d-inv q))) ＝ q
-  d-inv-d-inv {refl} q = refl
+  d-inv-d-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
+    (tr (λ t → path-over B t b0 b1) (inv-inv p) (d-inv B (inv p) (d-inv B p q))) ＝ q
+  d-inv-d-inv refl refl = refl
 
-module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A} {B : A → UU l2} {b0 : B a0} {b1  : B a1} {b2 : B a2}
-  where
-  
   distributive-d-inv-d-concat :
-    {p01 : a0 ＝ a1} {p12 : a1 ＝ a2} (q01 : path-over B p01 b0 b1) (q12 : path-over B p12 b1 b2) →
+    {a2 : A} {b2 : B a2} (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) (q12 : path-over B p12 b1 b2) →
     (tr (λ t → path-over B t b2 b0) (distributive-inv-concat p01 p12) (
-     (d-inv (d-concat q01 q12)))) ＝ (d-concat (d-inv q12) (d-inv q01))
-  distributive-d-inv-d-concat {refl} {refl} q01 q12 = refl
+    (d-inv B (p01 ∙ p12) (d-concat B p01 q01 p12 q12)))) ＝ (
+    d-concat B (inv p12) (d-inv B p12 q12) (inv p01) (d-inv B p01 q01))
+  distributive-d-inv-d-concat refl refl refl refl = refl
 ```
 
 The operations on dependent paths are equivalences
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A} {p01 : a0 ＝ a1} {p12 : a1 ＝ a2} {B : A → UU l2} {b0 : B a0} {b1 : B a1} {b2 : B a2}
+  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A} {B : A → UU l2} {b0 : B a0} {b1 : B a1} {b2 : B a2}
   where
-  
-  equiv-left-d-concat : (q01 : path-over B p01 b0 b1) →
+
+{-
+  tr-lemma' : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2)
+    (q02 : path-over (p01 ∙ p12) b0 b2) →
+    ( (d-concat B p01 q01 p12) ∘ (inv-left-d-concat p01 q01) -}
+
+  inv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
+    (path-over B (p01 ∙ p12) b0 b2) → (path-over B p12  b1 b2)
+  inv-left-d-concat p01 q01 p12 = (tr (λ t' → path-over B t' b1 b2) ((inv (assoc (inv p01) p01 p12)) ∙ (
+    ap (λ t → t ∙ p12) (left-inv p01)))) ∘ (d-concat B (inv p01) (d-inv B p01 q01) (p01 ∙ p12))
+
+  issec-inv-left-d-concat' : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
+      ((λ z → d-concat B p01 q01 p12 z) ∘ (inv-left-d-concat p01 q01 p12)) ~ id
+  issec-inv-left-d-concat' refl refl refl refl = refl
+
+  isretr-inv-left-d-concat' : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
+    ((inv-left-d-concat p01 q01 p12) ∘ (λ z → d-concat B p01 q01 p12 z)) ~ id
+  isretr-inv-left-d-concat' refl refl refl refl = refl
+
+  is-equiv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
+    is-equiv (λ (t : path-over B p12 b1 b2) → d-concat B p01 q01 p12 t)
+  is-equiv-left-d-concat p01 q01 p12 =  is-equiv-has-inverse ((inv-left-d-concat p01 q01 p12))  (
+    issec-inv-left-d-concat' p01 q01 p12) (isretr-inv-left-d-concat' p01 q01 p12)
+
+  equiv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
     (path-over B p12 b1 b2) ≃ (path-over B (p01 ∙ p12) b0 b2)
-  equiv-left-d-concat q01 = (λ t → (d-concat q01 t)) ,
-    is-equiv-has-inverse (λ t → (d-concat (d-inv q01) t)) α β where
-
-      α : ((λ z → d-concat q01 z) ∘ (λ t → d-concat (d-inv q01) t)) ~ id
-      α x = (inv (d-assoc q01 (d-inv q01) x)) ∙ (ap ((λ t → d-concat t x)) ((d-right-inv q01)))
-
-      β : ((λ z → d-concat q01 z) ∘ (λ t → d-concat (d-inv q01) t)) ~ id
-      β x = (inv (d-assoc (d-inv q01) q01 x)) ∙ (ap (λ t → d-concat t x) (d-left-inv q01))
-
-  equiv-right-d-concat : (q12 : path-over B p12 b1 b2) →
-    (path-over B p01 b0 b1) ≃ (path-over B (p01 ∙ p12) b0 b2)
-  equiv-right-d-concat q12 = (λ t → d-concat t q12) ,
-    (is-equiv-has-inverse ((λ t → d-concat t (d-inv q12))) α β) where
-
-      α : ((λ z → d-concat z q12) ∘ (λ t → d-concat t (d-inv q12))) ~ id
-      α x = (inv (d-assoc x (d-inv q12) q12)) ∙ (ap (λ t → (d-concat x t)) (d-left-inv q12))
-
-      β : ((λ t → d-concat t (d-inv q12)) ∘ (λ z → d-concat z q12)) ~ id
-      β x = (inv (d-assoc x q12 (d-inv q12))) ∙ (ap (λ t → (d-concat x t)) (d-right-inv q12))
-
-module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p01 : a0 ＝ a1} {B : A → UU l2} {b0 : B a0} {b1 : B a1}
-  where
-
-  equiv-d-inv : (path-over B p01 b0 b1) ≃ (path-over B (inv p01) b1 b0)
-  equiv-d-inv = d-inv , (is-equiv-has-inverse (
-    (tr (λ t → path-over B t b0 b1) (inv-inv p01) ∘ d-inv)) (α p01) (β p01) ) where
-
-      α : (p' : a0 ＝ a1) → ((λ z → d-inv z) ∘ (tr (λ t → path-over B t b0 b1) (inv-inv p') ∘ d-inv)) ~ id
-      α refl x = d-inv-d-inv x
-
-      β : (p' : a0 ＝ a1) → ((λ z → d-inv z) ∘ (tr (λ t → path-over B t b0 b1) (inv-inv p') ∘ d-inv)) ~ id
-      β refl x = d-inv-d-inv x
-```
-
+  equiv-left-d-concat p01 q01 p12 = (λ t → (d-concat B p01 q01 p12 t)) , (
+    is-equiv-left-d-concat p01 q01 p12)
