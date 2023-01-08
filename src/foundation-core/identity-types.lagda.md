@@ -142,7 +142,7 @@ ap :
 ap f refl = refl
 ```
 
-### The action on paths of functions
+### Laws for `ap`
 
 ```agda
 ap-id :
@@ -153,6 +153,21 @@ ap-comp :
   {i j k : Level} {A : UU i} {B : UU j} {C : UU k} (g : B → C)
   (f : A → B) {x y : A} (p : x ＝ y) → (ap (λ x → g (f x)) p) ＝ (ap g (ap f p))
 ap-comp g f refl = refl
+
+ap-refl :
+  {i j : Level} {A : UU i} {B : UU j} (f : A → B) (x : A) →
+  (ap f (refl {x = x})) ＝ refl
+ap-refl f x = refl
+
+ap-concat :
+  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
+  (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
+ap-concat f refl q = refl
+
+ap-inv :
+  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
+  (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))
+ap-inv f refl = refl
 ```
 
 ### Transposing inverses
@@ -215,7 +230,7 @@ refl-path-over :
 refl-path-over B x y = refl
 ```
 
-### laws for transport
+### Lifting equality to the total space
 
 ```agda
 module _
@@ -225,10 +240,18 @@ module _
   lift :
     {x y : A} (p : x ＝ y) (b : B x) → (pair x b) ＝ (pair y (tr B p b))
   lift refl b = refl
+```
+
+### laws for transport
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
   tr-concat :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y z : A} (p : x ＝ y)
-    (q : y ＝ z) (b : B x) → (tr B (p ∙ q) b) ＝ (tr B q (tr B p b))
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) (b : B x) →
+    tr B (p ∙ q) b ＝ tr B q (tr B p b)
   tr-concat refl q b = refl
 
   eq-transpose-tr :
@@ -253,10 +276,15 @@ preserves-tr :
   f j (tr A p x) ＝ tr B p (f i x)
 preserves-tr f refl x = refl
 
-tr-id-right :
+tr-Id-left :
+  {l1 : Level} {A : UU l1} {a b c : A} (q : Id b c) (p : Id b a) →
+  Id (tr (λ y → Id y a) q p) ((inv q) ∙ p)
+tr-Id-left refl p  = refl
+
+tr-Id-right :
   {l1 : Level} {A : UU l1} {a b c : A} (q : Id b c) (p : Id a b) →
   Id (tr (λ y → Id a y) q p) (p ∙ q)
-tr-id-right refl refl = refl
+tr-Id-right refl refl = refl
 
 tr-const :
   {i j : Level} {A : UU i} {B : UU j} {x y : A} (p : Id x y) (b : B) →
@@ -311,21 +339,6 @@ right-unit-ap-binary :
   {x x' : A} (p : x ＝ x') {y : B} →
   (ap-binary f p refl) ＝ (ap (λ z → f z y) p)
 right-unit-ap-binary f refl = refl
-
-ap-refl :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) (x : A) →
-  (ap f (refl {_} {_} {x})) ＝ refl
-ap-refl f x = refl
-
-ap-concat :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
-ap-concat f refl q = refl
-
-ap-inv :
-  {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
-  (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))
-ap-inv f refl = refl
 ```
 
 ### Action on identifications of dependent functions
