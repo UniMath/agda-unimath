@@ -10,10 +10,10 @@ module foundation.dependent-paths where
 
 open import foundation.identity-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
-open import foundation.universe-levels
+open import foundation.equivalences using (map-inv-equiv; map-equiv)
+open import foundation.functions using (_∘_)
+open import foundation.homotopies using (_~_)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 <<<<<<< HEAD
