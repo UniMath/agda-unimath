@@ -489,16 +489,16 @@ module _
   where
 
   map-orientation-complete-undirected-graph-equiv : (X X' : UU-Fin l n) →
-    (type-UU-Fin n X ≃ type-UU-Fin n X') → orientation-Complete-Undirected-Graph n X' →
-    orientation-Complete-Undirected-Graph n X
+    (type-UU-Fin n X ≃ type-UU-Fin n X') → orientation-Complete-Undirected-Graph n X →
+    orientation-Complete-Undirected-Graph n X'
   pr1 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
-    map-inv-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
+    map-equiv e (pr1 (d (precomp-equiv-2-Element-Decidable-Subtype e Y)))
   pr2 (map-orientation-complete-undirected-graph-equiv X X' e d Y) =
     pr2 (d (precomp-equiv-2-Element-Decidable-Subtype e Y))
 
   orientation-complete-undirected-graph-equiv : (X X' : UU-Fin l n) →
     (type-UU-Fin n X ≃ type-UU-Fin n X') →
-    orientation-Complete-Undirected-Graph n X' ≃ orientation-Complete-Undirected-Graph n X
+    orientation-Complete-Undirected-Graph n X ≃ orientation-Complete-Undirected-Graph n X'
   pr1 (orientation-complete-undirected-graph-equiv X X' e) =
     map-orientation-complete-undirected-graph-equiv X X' e
   pr2 (orientation-complete-undirected-graph-equiv X X' e) =
@@ -508,27 +508,27 @@ module _
         eq-htpy
           ( λ Y →
             eq-pair-Σ
-              ( ( ap
-                ( λ Y' → (map-inv-equiv e ∘ (map-inv-equiv (inv-equiv e))) (pr1 (d Y')))
+              (( ( ap
+                ( λ Y' → (map-equiv e ∘ (map-equiv (inv-equiv e))) (pr1 (d Y')))
                 ( eq-pair-Σ
                   ( ap
                     ( λ h → pr1 Y ∘ map-equiv h)
-                    ( right-inverse-law-equiv (inv-equiv e)) )
+                    ( left-inverse-law-equiv (inv-equiv e)))
                   ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-                ( ap (λ h → map-equiv h (pr1 (d Y))) (right-inverse-law-equiv (inv-equiv e))))
+                ( ap (λ h → map-equiv h (pr1 (d Y))) (left-inverse-law-equiv (inv-equiv e)))))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
       ( λ d →
         eq-htpy
           ( λ Y →
             eq-pair-Σ
               ( ( ap
-                ( λ Y' → (map-inv-equiv (inv-equiv e) ∘ map-inv-equiv e) (pr1 (d Y')))
+                ( λ Y' → (map-equiv (inv-equiv e) ∘ map-equiv e) (pr1 (d Y')))
                 ( eq-pair-Σ
                   ( ap
                     ( λ h → pr1 Y ∘ map-equiv h)
-                    ( left-inverse-law-equiv (inv-equiv e)) )
+                    ( right-inverse-law-equiv (inv-equiv e)) )
                   ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-                ( ap (λ h → map-equiv h (pr1 (d Y))) (left-inverse-law-equiv (inv-equiv e))))
+                ( ap (λ h → map-equiv h (pr1 (d Y))) (right-inverse-law-equiv (inv-equiv e))))
               ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (id d Y)))))))
 
   abstract
@@ -549,83 +549,74 @@ module _
       ( f : type-UU-Fin n Y ≃ type-UU-Fin n Z) →
       Id
         ( orientation-complete-undirected-graph-equiv X Z (f ∘e e))
-        ( ( orientation-complete-undirected-graph-equiv X Y e) ∘e
-          ( orientation-complete-undirected-graph-equiv Y Z f))
+        ( ( orientation-complete-undirected-graph-equiv Y Z f) ∘e
+          ( orientation-complete-undirected-graph-equiv X Y e))
     preserves-comp-orientation-complete-undirected-graph-equiv X Y Z e f =
       eq-htpy-equiv
         ( λ d →
           eq-htpy
             ( λ S →
               eq-pair-Σ
-                ( ( ap
-                  ( λ S' → map-inv-equiv (f ∘e e) (pr1 (d S')))
+                ( ap
+                  ( λ S' → map-equiv (f ∘e e) (pr1 (d S')))
                   ( htpy-eq
                     ( preserves-comp-precomp-equiv-2-Element-Decidable-Subtype e f)
-                    ( S))) ∙
-                  ( ap
-                    ( λ g →
-                      map-equiv
-                        ( g)
-                        ( pr1
-                          ( d
-                            ( ( precomp-equiv-2-Element-Decidable-Subtype f ∘
-                              precomp-equiv-2-Element-Decidable-Subtype e)
-                            ( S)))))
-                    ( distributive-inv-comp-equiv e f)))
+                    ( S)))
                 ( eq-is-prop
                   ( is-prop-type-decidable-Prop
                     ( pr1 S
                       ( pr1
                         ( map-equiv
-                          ( orientation-complete-undirected-graph-equiv X Y e ∘e
-                            orientation-complete-undirected-graph-equiv Y Z f)
+                          ( orientation-complete-undirected-graph-equiv Y Z f ∘e
+                            orientation-complete-undirected-graph-equiv X Y e)
                           ( d)
                           ( S))))))))
 
     preserves-even-difference-orientation-complete-undirected-graph-equiv :
       (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-      ( d d' : orientation-Complete-Undirected-Graph n X') →
-      ( sim-Eq-Rel (even-difference-orientation-Complete-Undirected-Graph n X') d d' ↔
+      ( d d' : orientation-Complete-Undirected-Graph n X) →
+      ( sim-Eq-Rel (even-difference-orientation-Complete-Undirected-Graph n X) d d' ↔
         sim-Eq-Rel
-          ( even-difference-orientation-Complete-Undirected-Graph n X)
+          ( even-difference-orientation-Complete-Undirected-Graph n X')
           ( map-orientation-complete-undirected-graph-equiv X X' e d)
           ( map-orientation-complete-undirected-graph-equiv X X' e d'))
     pr1 (preserves-even-difference-orientation-complete-undirected-graph-equiv X X' e d d') P =
       ( P) ∙
-        ( ap
+         ap
           ( mod-two-ℕ ∘ number-of-elements-has-finite-cardinality)
           ( all-elements-equal-has-finite-cardinality
-            ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference n X' d d'))
+            ( has-finite-cardinality-is-finite (is-finite-subtype-pointwise-difference n X d d'))
             ( pair
               ( number-of-elements-is-finite
-                ( is-finite-subtype-pointwise-difference n X
+                ( is-finite-subtype-pointwise-difference n X'
                   ( map-orientation-complete-undirected-graph-equiv X X' e d)
                   ( map-orientation-complete-undirected-graph-equiv X X' e d')))
               ( map-trunc-Prop
                 ( λ h → equiv-subtype-pointwise-difference-equiv ∘e h)
                 ( pr2
                   ( has-finite-cardinality-is-finite
-                    ( is-finite-subtype-pointwise-difference n X
+                    ( is-finite-subtype-pointwise-difference n X'
                       ( map-orientation-complete-undirected-graph-equiv X X' e d)
-                      ( map-orientation-complete-undirected-graph-equiv X X' e d'))))))))
+                      ( map-orientation-complete-undirected-graph-equiv X X' e d')))))))
       where
       equiv-subtype-pointwise-difference-equiv :
-        Σ (2-Element-Decidable-Subtype l (type-UU-Fin n X))
-          ( λ Y →
-            type-decidable-Prop
-              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
-                ( map-orientation-complete-undirected-graph-equiv X X' e d)
-                ( map-orientation-complete-undirected-graph-equiv X X' e d')
-                ( Y))) ≃
         Σ (2-Element-Decidable-Subtype l (type-UU-Fin n X'))
           ( λ Y →
             type-decidable-Prop
-              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))
-      pr1 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) = precomp-equiv-2-Element-Decidable-Subtype e Y
+              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X'
+                ( map-orientation-complete-undirected-graph-equiv X X' e d)
+                ( map-orientation-complete-undirected-graph-equiv X X' e d')
+                ( Y))) ≃
+        Σ (2-Element-Decidable-Subtype l (type-UU-Fin n X))
+          ( λ Y →
+            type-decidable-Prop
+              ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X d d' Y))
+      pr1 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) =
+        precomp-equiv-2-Element-Decidable-Subtype e Y
       pr2 (pr1 equiv-subtype-pointwise-difference-equiv (pair Y NQ)) p =
         NQ
           ( eq-pair-Σ
-            ( ap (map-inv-equiv e) (pr1 (pair-eq-Σ p)))
+            ( ap (map-equiv e) (pr1 (pair-eq-Σ p)))
             ( eq-is-prop
               ( is-prop-type-decidable-Prop
                 ( pr1 Y (pr1 (map-orientation-complete-undirected-graph-equiv X X' e d' Y))))))
@@ -642,25 +633,17 @@ module _
                       ( eq-pair-Σ
                         ( ap
                           ( λ h → pr1 Y ∘ (map-equiv h))
-                          ( inv (right-inverse-law-equiv e)))
+                          ( inv (left-inverse-law-equiv e)))
                         ( eq-is-prop is-prop-type-trunc-Prop))) ∙
-                      ( ( is-injective-map-equiv (inv-equiv e) (pr1 (pair-eq-Σ p))) ∙
+                      ( ( is-injective-map-equiv e (pr1 (pair-eq-Σ p))) ∙
                         ( ap
                           ( λ Y' → pr1 (d' Y'))
                           ( eq-pair-Σ
                             ( ap
                               ( λ h → pr1 Y ∘ map-equiv h)
-                              ( right-inverse-law-equiv e))
+                              ( left-inverse-law-equiv e))
                             ( eq-is-prop is-prop-type-trunc-Prop)))))
                     ( eq-is-prop (is-prop-type-decidable-Prop (pr1 Y (pr1 (d' Y))))))))
-          ( λ (pair Y NQ) →
-            eq-pair-Σ
-              ( eq-pair-Σ
-                ( ap (λ h → pr1 Y ∘ map-equiv h) (right-inverse-law-equiv e))
-                ( eq-is-prop is-prop-type-trunc-Prop))
-              ( eq-is-prop
-                ( is-prop-type-decidable-Prop
-                  ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X' d d' Y))))
           ( λ (pair Y NQ) →
             eq-pair-Σ
               ( eq-pair-Σ
@@ -668,7 +651,15 @@ module _
                 ( eq-is-prop is-prop-type-trunc-Prop))
               ( eq-is-prop
                 ( is-prop-type-decidable-Prop
-                  ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X
+                  ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X d d' Y))))
+          ( λ (pair Y NQ) →
+            eq-pair-Σ
+              ( eq-pair-Σ
+                ( ap (λ h → pr1 Y ∘ map-equiv h) (right-inverse-law-equiv e))
+                ( eq-is-prop is-prop-type-trunc-Prop))
+              ( eq-is-prop
+                ( is-prop-type-decidable-Prop
+                  ( 2-Element-Decidable-Subtype-subtype-pointwise-difference n X'
                     ( map-orientation-complete-undirected-graph-equiv X X' e d)
                     ( map-orientation-complete-undirected-graph-equiv X X' e d')
                     ( Y)))))
@@ -676,16 +667,16 @@ module _
       tr
         ( λ g →
           sim-Eq-Rel
-            ( even-difference-orientation-Complete-Undirected-Graph n X')
+            ( even-difference-orientation-Complete-Undirected-Graph n X)
             ( map-equiv g d)
             ( map-equiv g d'))
         { x =
           orientation-complete-undirected-graph-equiv X' X (inv-equiv e) ∘e
           orientation-complete-undirected-graph-equiv X X' e}
         { y = id-equiv}
-        ( inv (preserves-comp-orientation-complete-undirected-graph-equiv X' X X' (inv-equiv e) e) ∙
-          ( ( ap (orientation-complete-undirected-graph-equiv X' X') (right-inverse-law-equiv e)) ∙
-            ( preserves-id-equiv-orientation-complete-undirected-graph-equiv X')))
+        ( ( inv (preserves-comp-orientation-complete-undirected-graph-equiv X X' X e (inv-equiv e))) ∙
+          ( ( ap (orientation-complete-undirected-graph-equiv X X) (left-inverse-law-equiv e)) ∙
+            ( preserves-id-equiv-orientation-complete-undirected-graph-equiv X)))
         ( pr1
           ( preserves-even-difference-orientation-complete-undirected-graph-equiv
             ( X')
@@ -3302,12 +3293,4 @@ module _
       ( λ e → Fin 2 ≃ quotient-sign n (pair (type-UU-Fin n X) e))
       ( all-elements-equal-type-trunc-Prop (unit-trunc-Prop (equiv-count (pair n h))) (pr2 X))
       ( equiv-fin-2-quotient-sign-count (pair n h) ineq)
-    
-  abstract
-    mere-equiv-fin-2-quotient-sign :
-      mere-equiv (Fin 2) (quotient-sign n X)
-    mere-equiv-fin-2-quotient-sign =
-      map-trunc-Prop
-        ( equiv-fin-2-quotient-sign-equiv-Fin)
-        ( has-cardinality-type-UU-Fin n X)
 ```

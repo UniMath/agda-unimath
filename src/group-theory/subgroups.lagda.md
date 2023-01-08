@@ -18,7 +18,7 @@ open import foundation.equivalences using (map-inv-is-equiv; _≃_)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap; _＝_)
+open import foundation.identity-types
 open import foundation.powersets using (_⊆_)
 open import foundation.propositional-extensionality using (is-set-UU-Prop)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
@@ -37,19 +37,11 @@ open import foundation.subtypes using
 open import foundation.unit-type using (unit-Prop; star; raise-star)
 open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
 
-open import group-theory.groups using
-  ( Group; type-Group; unit-Group; mul-Group; inv-Group; is-set-type-Group;
-    associative-mul-Group; left-unit-law-mul-Group; right-unit-law-mul-Group;
-    left-inverse-law-mul-Group; right-inverse-law-mul-Group; is-unit-group-Prop;
-    inv-unit-Group; semigroup-Group; is-emb-mul-Group; transpose-eq-mul-Group;
-    mul-Group'; is-emb-mul-Group'; transpose-eq-mul-Group')
-open import group-theory.homomorphisms-groups using
-  ( preserves-mul-Group; type-hom-Group; preserves-unit-Group;
-    preserves-inverses-Group)
-open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
-open import group-theory.isomorphisms-groups using
-  ( type-iso-Group; comp-iso-Group)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.isomorphisms-groups
+open import group-theory.semigroups
 ```
 
 ## Definitions
@@ -339,6 +331,46 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
+
+  right-sim-Subgroup' : (x y : type-Group G) → UU l2
+  right-sim-Subgroup' x y = is-in-Subgroup G H (left-div-Group G x y)
+
+  is-prop-right-sim-Subgroup' :
+    (x y : type-Group G) → is-prop (right-sim-Subgroup' x y)
+  is-prop-right-sim-Subgroup' x y =
+    is-prop-is-in-Subgroup G H (mul-Group G (inv-Group G x) y)
+
+  prop-right-eq-rel-Subgroup' : (x y : type-Group G) → Prop l2
+  pr1 (prop-right-eq-rel-Subgroup' x y) = right-sim-Subgroup' x y
+  pr2 (prop-right-eq-rel-Subgroup' x y) = is-prop-right-sim-Subgroup' x y
+
+  refl-right-sim-Subgroup' : (x : type-Group G) → right-sim-Subgroup' x x
+  refl-right-sim-Subgroup' x =
+    tr
+      ( is-in-Subgroup G H)
+      ( inv (left-inverse-law-mul-Group G x))
+      ( contains-unit-Subgroup G H)
+
+  symmetric-right-sim-Subgroup' :
+    (x y : type-Group G) → right-sim-Subgroup' x y → right-sim-Subgroup' y x
+  symmetric-right-sim-Subgroup' x y p =
+    tr
+      ( is-in-Subgroup G H)
+      ( inv-left-div-Group G x y)
+      ( is-closed-under-inv-Subgroup G H (mul-Group G (inv-Group G x) y) p)
+
+  transitive-right-sim-Subgroup' :
+    (x y z : type-Group G) → right-sim-Subgroup' x y →
+    right-sim-Subgroup' y z → right-sim-Subgroup' x z
+  transitive-right-sim-Subgroup' x y z p q =
+    tr
+      ( is-in-Subgroup G H)
+      ( mul-left-div-Group G x y z)
+      ( is-closed-under-mul-Subgroup G H
+        ( left-div-Group G x y)
+        ( left-div-Group G y z)
+        ( p)
+        ( q))
   
   right-sim-Subgroup : (x y : type-Group G) → UU (l1 ⊔ l2)
   right-sim-Subgroup x y =
@@ -356,8 +388,7 @@ module _
 
   prop-right-eq-rel-Subgroup : (x y : type-Group G) → Prop (l1 ⊔ l2)
   pr1 (prop-right-eq-rel-Subgroup x y) = right-sim-Subgroup x y
-  pr2 (prop-right-eq-rel-Subgroup x y) =
-    is-prop-right-sim-Subgroup x y
+  pr2 (prop-right-eq-rel-Subgroup x y) = is-prop-right-sim-Subgroup x y
 
   refl-right-sim-Subgroup :
     is-reflexive-Rel-Prop prop-right-eq-rel-Subgroup

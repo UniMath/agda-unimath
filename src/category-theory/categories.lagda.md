@@ -67,7 +67,8 @@ module _
   is-set-type-hom-Cat : (x y : obj-Cat) → is-set (type-hom-Cat x y)
   is-set-type-hom-Cat = is-set-type-hom-Precat precat-Cat
 
-  comp-hom-Cat : {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
+  comp-hom-Cat :
+    {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
   comp-hom-Cat = comp-hom-Precat precat-Cat
 
   assoc-comp-hom-Cat :

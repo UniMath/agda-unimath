@@ -314,6 +314,13 @@ length-concat-list (cons a x) y =
   ( ap succ-ℕ (length-concat-list x y)) ∙
   ( inv (left-successor-law-add-ℕ (length-list x) (length-list y)))
 
+length-functor-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (l : list A) →
+  Id (length-list (map-list f l)) (length-list l)
+length-functor-list f nil = refl
+length-functor-list f (cons x l) =
+  ap succ-ℕ (length-functor-list f l)
+
 {- We now prove the properties of flattening. -}
 
 flatten-unit-list :

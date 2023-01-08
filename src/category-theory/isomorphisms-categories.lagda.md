@@ -70,6 +70,32 @@ module _
           ( issec-hom-inv-iso-Cat f)))
 ```
 
+### Precomposing by isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+
+  precomp-iso-Cat :
+    {x y z : obj-Cat C} →
+    iso-Cat C x y → type-hom-Cat C y z → type-hom-Cat C x z
+  precomp-iso-Cat f g = comp-hom-Cat C g (hom-iso-Cat C f)
+```
+
+### Postcomposing by isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+
+  postcomp-iso-Cat :
+    {x y z : obj-Cat C} →
+    iso-Cat C y z → type-hom-Cat C x y → type-hom-Cat C x z
+  postcomp-iso-Cat f g = comp-hom-Cat C (hom-iso-Cat C f) g
+```
+
 ## Examples
 
 ### The identity morphisms are isomorphisms
@@ -326,6 +352,7 @@ module _
 ```
 
 #### Left inverse law
+
 ```agda
   left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
@@ -337,6 +364,7 @@ module _
 ```
 
 #### Right inverse law
+
 ```agda
   right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
@@ -432,4 +460,19 @@ module _
 
   iso-Cat-Set : (x y : obj-Cat C) → Set l2
   iso-Cat-Set = iso-Precat-Set (precat-Cat C)
+```
+
+### A morphism is an isomorphism if and only if precomposing by it is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : type-hom-Cat C x y)
+  where
+
+{-
+  is-equiv-precomp-is-iso-hom-Cat :
+    (H : is-iso-Cat C f) →
+    (z : obj-Cat C) → is-equiv (precomp-iso-Cat C {z = z} (pair f H))
+  is-equiv-precomp-is-iso-hom-Cat H z = {!!}
+  -}
 ```

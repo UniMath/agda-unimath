@@ -44,7 +44,7 @@ open import foundation.function-extensionality using (htpy-eq; eq-htpy)
 open import foundation.functoriality-coproduct-types using
   ( id-map-coprod; map-coprod)
 open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; comp-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr)
+open import foundation.identity-types using (Id; refl; inv; _∙_; ap; tr; ap-binary)
 open import foundation.involutions using (is-involution; is-equiv-is-involution)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.logical-equivalences using (equiv-iff)
@@ -1051,4 +1051,14 @@ module _
       ( λ x →
         cases-eq-equiv-universes-transposition P x
           ( is-decidable-type-decidable-Prop (pr1 P x)))
+
+  eq-equiv-universes-transposition-list : 
+    ( li : list (2-Element-Decidable-Subtype l X)) →
+    Id
+      ( permutation-list-transpositions li)
+      ( permutation-list-transpositions
+        ( map-list (map-equiv (equiv-universes-2-Element-Decidable-Subtype X l l')) li))
+  eq-equiv-universes-transposition-list nil = refl
+  eq-equiv-universes-transposition-list (cons P li) =
+    ap-binary _∘e_ (eq-equiv-universes-transposition P) (eq-equiv-universes-transposition-list li)
 ```
