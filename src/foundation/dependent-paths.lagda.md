@@ -1,23 +1,19 @@
 ---
 title: Dependent paths
 ---
-description: We characterize dependent paths in the family of depedent paths;
-define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
+description: We define the groupoidal operators on dependent paths, define the cohrences paths,
+and then prove the operators are equivalences.
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
 module foundation.dependent-paths where
 
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functions
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.retractions
-open import foundation.sections
-open import foundation.transport
-open import foundation.universe-levels
+open import foundation.dependent-pair-types
+open import foundation.equivalences using (map-inv-equiv; map-equiv)
+open import foundation.functions using (_∘_)
+open import foundation.homotopies using (_~_)
+open import foundation.universe-levels using (Level; UU)
 ```
 
 <<<<<<< HEAD
