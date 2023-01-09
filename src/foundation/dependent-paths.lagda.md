@@ -16,6 +16,7 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.retractions
 open import foundation.sections
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -36,7 +37,7 @@ coh-tr²-tr-tr :
   (B : A → UU l2) {b0 : B a0} {b1 : B a1} (α : p0 ＝ p1)
   (q01 : path-over B p0 b0 b1) → 
   (tr (λ t → path-over B t b0 b1) α q01) ＝ (inv (tr² B α b0) ∙ q01)
-coh-tr²-tr-tr B refl q01 = refl
+coh-tr²-tr-tr B {b0 = b0} {b1 = b1} α q01 = inv (tr-ap {D = (λ x → x ＝ b1)} (λ t → tr B t b0) (λ x → id) α q01) ∙ tr-Id-left (tr² B α b0) q01
 
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
