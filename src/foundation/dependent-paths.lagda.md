@@ -1,8 +1,8 @@
 ---
 title: Dependent paths
 ---
-description: We define the groupoidal operators on dependent paths, define the cohrences paths,
-and then prove the operators are equivalences.
+description: We characterize dependent paths in the family of depedent paths;
+define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
@@ -10,13 +10,16 @@ module foundation.dependent-paths where
 
 open import foundation.identity-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences using (map-inv-equiv; map-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.equational-reasoning
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.retractions
+open import foundation.sections
+open import foundation.universe-levels
 ```
 
-Useful later:
+We characterize dependent paths in the family λ t → path-over B t b0 b1
 
 ```agda
 module _
@@ -49,7 +52,59 @@ module _
   tr-path-over-path-over² z = coh-tr²-tr-tr B α q0 ∙ (
     (map-inv-equiv (equiv-inv-con (inv (tr² B α b0)) q0 q1)
     (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (tr² B α b0))))))
+
+  path-over²-tr-path-over :
+    ((tr (λ t → path-over B t b0 b1) α q0) ＝ q1) → (path-over²)
+  path-over²-tr-path-over z =
+    (map-equiv (equiv-inv-con (inv (tr² B α b0)) q0 q1) ((inv (coh-tr²-tr-tr B α q0)) ∙ z)) ∙
+    ap (λ t → t ∙ q1) (inv-inv (tr² B α b0))
+
+{- Could simplify ensuing proof enormously by rewriting map and inverse as compositions of known equivalences and then applying 2-of-3. Too bad I thought of this only after writing everything out...oops -}
+
+  issec-path-over²-tr-path-over :
+    ((λ z → tr-path-over-path-over² z) ∘ path-over²-tr-path-over) ~ id
+  issec-path-over²-tr-path-over z =
+    (ap (λ x → coh-tr²-tr-tr B α q0 ∙ pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)) x)
+    (assoc (inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 (inv (coh-tr²-tr-tr B α q0) ∙ z)) (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
+    (inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))))) ∙
+    ((ap (λ x → coh-tr²-tr-tr B α q0 ∙ pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+    (inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 (inv (coh-tr²-tr-tr B α q0) ∙ z) ∙ x ))
+    (right-inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
+    ((ap (λ x → coh-tr²-tr-tr B α q0 ∙ pr1 (pr1 (is-equiv-inv-con
+    (inv (ap (λ t → tr B t b0) α)) q0 q1)) x) right-unit) ∙
+    ((ap (λ x → coh-tr²-tr-tr B α q0 ∙ x) ( isretr-map-inv-equiv
+    (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1) (inv (coh-tr²-tr-tr B α q0) ∙ z) )) ∙
+    (inv (assoc (coh-tr²-tr-tr B α q0) (inv (coh-tr²-tr-tr B α q0)) z) ∙
+    (ap (λ t → t ∙ z) (right-inv (coh-tr²-tr-tr B α q0)))))))
+
+  isretr-path-over²-tr-path-over :
+    (path-over²-tr-path-over ∘ (λ z → tr-path-over-path-over² z)) ~ id
+  isretr-path-over²-tr-path-over z =
+    (ap (λ x → inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 x ∙
+    ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
+    (inv (assoc (inv (coh-tr²-tr-tr B α q0)) (coh-tr²-tr-tr B α q0)
+    (pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))))) ) ∙
+    (ap (λ x → inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1
+    (x ∙ pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
+    ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))) (left-inv (coh-tr²-tr-tr B α q0)) ∙
+    (ap (λ x → x ∙ ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
+    (issec-map-inv-equiv (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
+    (assoc z (inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))
+    (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))) ∙
+    (ap (λ t → z ∙ t) (left-inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))) ∙ right-unit))))
+
+  is-equiv-tr-path-over-path-over² :
+    is-equiv tr-path-over-path-over²
+  is-equiv-tr-path-over-path-over² =
+    is-equiv-has-inverse path-over²-tr-path-over
+    issec-path-over²-tr-path-over isretr-path-over²-tr-path-over
+    
 ```
+
+Definition: Groupoidal operators on dependent paths.
 
 ```agda
 module _
