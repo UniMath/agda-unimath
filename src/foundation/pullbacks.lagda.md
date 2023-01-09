@@ -42,7 +42,7 @@ open import foundation.homotopies using
 open import foundation.identity-types using
   ( Id; _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv; concat';
     concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr;
-    ap-comp; tr-id-right)
+    ap-comp; tr-Id-right)
 open import foundation.structure-identity-principle using (extensionality-Σ)
 open import foundation.type-theoretic-principle-of-choice using
   ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
@@ -1037,7 +1037,7 @@ cone-ap' :
 pr1 (cone-ap' f g (pair p (pair q  H)) c1 c2) = ap p
 pr1 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) γ =
-  ( tr-id-right (H c2) (ap f (ap p γ))) ∙
+  ( tr-Id-right (H c2) (ap f (ap p γ))) ∙
   ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
     ( ( inv (nat-htpy H γ)) ∙
       ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ))))
@@ -1058,7 +1058,7 @@ is-pullback-cone-ap :
     ( cone-ap f g c c1 c2)
 is-pullback-cone-ap f g (pair p (pair q H)) is-pb-c c1 c2 =
   is-pullback-htpy'
-    ( λ α → tr-id-right (H c2) (ap f α))
+    ( λ α → tr-Id-right (H c2) (ap f α))
     ( refl-htpy)
     ( cone-ap' f g (pair p (pair q H)) c1 c2)
     { c' = cone-ap f g (pair p (pair q H)) c1 c2}

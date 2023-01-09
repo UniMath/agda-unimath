@@ -11,6 +11,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.equational-reasoning
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
 open import foundation.functions
@@ -22,7 +23,9 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.normal-subgroups
 open import group-theory.subgroups-abelian-groups
+open import group-theory.subgroups
 
 open import ring-theory.rings
 open import ring-theory.subsets-rings
@@ -233,8 +236,33 @@ module _
   is-closed-under-mul-left-two-sided-ideal-Ring =
     pr1 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Ring)
 
+  is-closed-under-neg-two-sided-ideal-Ring :
+    {x : type-Ring R} → is-in-two-sided-ideal-Ring x →
+    is-in-two-sided-ideal-Ring (neg-Ring R x)
+  is-closed-under-neg-two-sided-ideal-Ring H =
+    pr2 (pr2 is-additive-subgroup-subset-two-sided-ideal-Ring) _ H
+
   is-closed-under-mul-right-two-sided-ideal-Ring :
     is-closed-under-mul-right-subset-Ring R subset-two-sided-ideal-Ring
   is-closed-under-mul-right-two-sided-ideal-Ring =
     pr2 (pr2 is-two-sided-ideal-subset-two-sided-ideal-Ring)
+
+  subgroup-two-sided-ideal-Ring : Subgroup l2 (group-Ring R)
+  pr1 subgroup-two-sided-ideal-Ring = subset-two-sided-ideal-Ring
+  pr1 (pr2 subgroup-two-sided-ideal-Ring) = contains-zero-two-sided-ideal-Ring
+  pr1 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x y = is-closed-under-add-two-sided-ideal-Ring
+  pr2 (pr2 (pr2 subgroup-two-sided-ideal-Ring)) x = is-closed-under-neg-two-sided-ideal-Ring
+
+  normal-subgroup-two-sided-ideal-Ring : Normal-Subgroup l2 (group-Ring R)
+  pr1 normal-subgroup-two-sided-ideal-Ring = subgroup-two-sided-ideal-Ring
+  pr2 normal-subgroup-two-sided-ideal-Ring x (y , H) =
+    tr
+      ( is-in-two-sided-ideal-Ring)
+      ( equational-reasoning
+        y
+        ＝ add-Ring R y (zero-Ring R)                 by inv (right-unit-law-add-Ring R y)
+        ＝ add-Ring R y (add-Ring R x (neg-Ring R x)) by inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))
+        ＝ add-Ring R (add-Ring R y x) (neg-Ring R x) by inv (associative-add-Ring R y x (neg-Ring R x))
+        ＝ add-Ring R (add-Ring R x y) (neg-Ring R x) by ap (add-Ring' R (neg-Ring R x)) (commutative-add-Ring R y x))
+      ( H)
 ```
