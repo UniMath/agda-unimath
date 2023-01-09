@@ -8,9 +8,7 @@ define the groupoidal operators on dependent paths; define the cohrences paths: 
 
 module foundation.dependent-paths where
 
-open import foundation.commuting-squares
 open import foundation.dependent-pair-types
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.function-extensionality
