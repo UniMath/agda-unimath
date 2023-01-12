@@ -15,7 +15,6 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -201,13 +200,9 @@ module _
   
   up-suspension :
     {l : Level} → universal-property-suspension l X  (suspension X) (N-susp , S-susp , merid-susp)
-  up-suspension Z = tr (λ f → is-equiv f)
-    (map-inv-is-equiv (funext (map-equiv ( (comparison-suspension-cocone X Z) ∘e
-    (equiv-up-pushout (const X unit star) (const X unit star) Z)))
-    (ev-suspension (N-susp , S-susp , merid-susp) Z))
-    (triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z))
-    (pr2 ( (comparison-suspension-cocone X Z) ∘e
-    (equiv-up-pushout (const X unit star) (const X unit star) Z)))
+  up-suspension Z = htpy-preserve-is-equiv ((pr2 ( (comparison-suspension-cocone X Z) ∘e
+    (equiv-up-pushout (const X unit star) (const X unit star) Z))))
+    ((triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z)) 
 
   equiv-up-suspensions :
     {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-cocone X Z)
