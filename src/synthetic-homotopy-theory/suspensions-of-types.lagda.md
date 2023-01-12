@@ -15,6 +15,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -189,4 +190,22 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
       ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
       ( up-pushout (const X unit star) (const X unit star)))
     ( is-contr-unit)
+```
+
+### The suspension of X has the universal proprety of suspensions
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1)
+  where
+  
+  up-suspension :
+    universal-property-suspension l1 X  (suspension X) (N-susp , S-susp , merid-susp)
+  up-suspension Z = tr (λ f → is-equiv f)
+    (map-inv-is-equiv (funext (map-equiv ( (comparison-suspension-cocone X Z) ∘e
+    (equiv-up-pushout (const X unit star) (const X unit star) Z)))
+    (ev-suspension (N-susp , S-susp , merid-susp) Z))
+    (triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z))
+    (pr2 ( (comparison-suspension-cocone X Z) ∘e
+    (equiv-up-pushout (const X unit star) (const X unit star) Z)))
 ```
