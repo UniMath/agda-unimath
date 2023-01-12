@@ -190,3 +190,21 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
       ( up-pushout (const X unit star) (const X unit star)))
     ( is-contr-unit)
 ```
+
+### The suspension of X has the universal proprety of suspensions
+
+```agda
+module _
+  {l1 : Level} (X : UU l1)
+  where
+  
+  up-suspension :
+    {l : Level} → universal-property-suspension l X  (suspension X) (N-susp , S-susp , merid-susp)
+  up-suspension Z = htpy-preserve-is-equiv ((pr2 ( (comparison-suspension-cocone X Z) ∘e
+    (equiv-up-pushout (const X unit star) (const X unit star) Z))))
+    ((triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z)) 
+
+  equiv-up-suspensions :
+    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-cocone X Z)
+  equiv-up-suspensions Z = (ev-suspension (N-susp , S-susp , merid-susp) Z) , up-suspension Z
+```
