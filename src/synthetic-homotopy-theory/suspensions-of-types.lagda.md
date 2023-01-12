@@ -196,11 +196,11 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
 
 ```agda
 module _
-  {l1 l2 : Level} (X : UU l1)
+  {l1 : Level} (X : UU l1)
   where
   
   up-suspension :
-    universal-property-suspension l1 X  (suspension X) (N-susp , S-susp , merid-susp)
+    {l : Level} → universal-property-suspension l X  (suspension X) (N-susp , S-susp , merid-susp)
   up-suspension Z = tr (λ f → is-equiv f)
     (map-inv-is-equiv (funext (map-equiv ( (comparison-suspension-cocone X Z) ∘e
     (equiv-up-pushout (const X unit star) (const X unit star) Z)))
@@ -208,4 +208,8 @@ module _
     (triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z))
     (pr2 ( (comparison-suspension-cocone X Z) ∘e
     (equiv-up-pushout (const X unit star) (const X unit star) Z)))
+
+  equiv-up-suspensions :
+    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-cocone X Z)
+  equiv-up-suspensions Z = (ev-suspension (N-susp , S-susp , merid-susp) Z) , up-suspension Z
 ```
