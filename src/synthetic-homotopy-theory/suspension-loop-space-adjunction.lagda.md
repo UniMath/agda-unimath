@@ -28,28 +28,25 @@ module _
   {l1 : Level} (X : UU l1) (x0 : X)
   where
 
-  base-susp : suspension X
-  base-susp = N-susp
-
-  shift : (type-Ω (suspension X , base-susp)) → (base-susp ＝ S-susp)
+  shift : (type-Ω (suspension X , N-susp)) → (N-susp ＝ S-susp)
   shift l = l ∙ (merid-susp x0)
 
-  shift* : (Ω (suspension X , base-susp)) →* ((base-susp ＝ S-susp) , (merid-susp x0))
+  shift* : (Ω (suspension X , N-susp)) →* ((N-susp ＝ S-susp) , (merid-susp x0))
   shift* = shift , refl
 
-  unshift : (base-susp ＝ S-susp) → (type-Ω (suspension X , base-susp))
+  unshift : (N-susp ＝ S-susp) → (type-Ω (suspension X , N-susp))
   unshift p = p ∙ inv (merid-susp x0)
 
-  unshift* : ((base-susp ＝ S-susp) , (merid-susp x0)) →* (Ω (suspension X , base-susp))
+  unshift* : ((N-susp ＝ S-susp) , (merid-susp x0)) →* (Ω (suspension X , N-susp))
   unshift* = unshift , right-inv (merid-susp x0)
 
   is-equiv-shift : is-equiv shift
-  is-equiv-shift = is-equiv-concat' base-susp (merid-susp x0)
+  is-equiv-shift = is-equiv-concat' N-susp (merid-susp x0)
 
-  merid-susp* : (X , x0) →* ((base-susp ＝ S-susp) , (merid-susp x0))
+  merid-susp* : (X , x0) →* ((N-susp ＝ S-susp) , (merid-susp x0))
   merid-susp* = merid-susp , refl
 
-  unit-susp-loop-adj : (X , x0) →* Ω (suspension X , base-susp)
+  unit-susp-loop-adj : (X , x0) →* Ω (suspension X , N-susp)
   unit-susp-loop-adj = comp-pointed-map _ _ _ unshift* merid-susp*
 
   counit-susp-loop-adj : ((suspension (type-Ω (X , x0))) , N-susp) →* (X , x0)
