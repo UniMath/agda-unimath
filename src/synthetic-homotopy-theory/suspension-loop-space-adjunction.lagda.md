@@ -7,7 +7,7 @@ module synthetic-homotopy-theory.suspension-loop-space-adjunction where
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions using (_∘_)
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels using (Level; UU)
 
@@ -46,9 +46,15 @@ module _
   merid-susp* : (X , x0) →* ((N-susp ＝ S-susp) , (merid-susp x0))
   merid-susp* = merid-susp , refl
 
-  unit-susp-loop-adj : (X , x0) →* Ω (suspension X , N-susp)
-  unit-susp-loop-adj = comp-pointed-map _ _ _ unshift* merid-susp*
+  unit-susp-loop-adj* : (X , x0) →* Ω (suspension X , N-susp)
+  unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
 
-  counit-susp-loop-adj : ((suspension (type-Ω (X , x0))) , N-susp) →* (X , x0)
-  counit-susp-loop-adj = comp-pointed-map _ _ _ {!up-pushout!} {!!}
+  unit-susp-loop-adj : X → type-Ω (suspension X , N-susp)
+  unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*
+
+  counit-susp-loop-adj : (suspension (type-Ω (X , x0))) → X
+  counit-susp-loop-adj =  map-inv-is-equiv (up-suspension (type-Ω (X , x0)) X) (x0 , x0 , id)
+
+  counit-susp-loop-adj* : ((suspension (type-Ω (X , x0))) , N-susp) →* (X , x0)
+  counit-susp-loop-adj* = counit-susp-loop-adj , {!!}
 ```
