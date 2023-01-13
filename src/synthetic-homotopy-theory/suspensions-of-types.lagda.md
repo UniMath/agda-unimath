@@ -19,6 +19,7 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
@@ -131,8 +132,9 @@ suspension-cocone-htpy {X = X} c c' = Σ ((suspension-cocone-N c) ＝ (suspensio
 
 suspension-cocone-eq-suspension-cocone-htpy : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
   {c c' : suspension-cocone X Z} → (suspension-cocone-htpy c c') → (c ＝ c')
-suspension-cocone-eq-suspension-cocone-htpy H = eq-pair-Σ (pr1 H) {!eq-pair-Σ!}
-
+suspension-cocone-eq-suspension-cocone-htpy {X = X} {c = c} {c' = c'} H = eq-pair-Σ (pr1 H) (tr-Σ (λ z1 → λ z2 → X → Id z1 z2) (pr1 H) (pr2 c) ∙ (eq-pair-Σ (tr-const (pr1 H) (pr1 (pr2 c)) ∙ (pr1 (pr2 H))) {!tr-function-type (λ z2 → X) (λ z2 → Id (pr1 c') z2) (tr-const (pr1 H) (pr1 (pr2 c)) ∙ pr1 (pr2 H)) (pr2 (pr2 c'))!}))
+{- (tr-const (pr1 H) (pr1 (pr2 c)) ∙ pr1 (pr2 H))
+      (tr (ind-Σ (λ z1 z2 → X → Id z1 z2)) (eq-pair-Σ (pr1 H) refl) -}
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (susp-str-Y : suspension-structure X Y) →
