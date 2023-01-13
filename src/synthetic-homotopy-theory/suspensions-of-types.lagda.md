@@ -13,6 +13,7 @@ open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -81,6 +82,10 @@ merid-susp :
   {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
 merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
 
+susp-struct :
+  {l : Level} (X : UU l) → suspension-structure X (suspension X)
+susp-struct X = (N-susp , S-susp , merid-susp)
+
 sphere : ℕ → UU lzero
 sphere zero-ℕ = bool
 sphere (succ-ℕ n) = suspension (sphere n)
@@ -102,6 +107,31 @@ S-sphere (succ-ℕ n) = S-susp
 suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) → UU _
 suspension-cocone X Z = Σ Z (λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
+
+suspension-cocone-N :
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-cocone X Z) → Z
+suspension-cocone-N c = pr1 c
+
+suspension-cocone-S :
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-cocone X Z) → Z
+suspension-cocone-S c = pr1 (pr2 c)
+
+suspension-cocone-merid :
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-cocone X Z) →
+  (x : X) → ((suspension-cocone-N c) ＝ (suspension-cocone-S c))
+suspension-cocone-merid c = pr2 (pr2 c)
+
+{- Characterization of equalities in the above type -}
+
+suspension-cocone-htpy : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
+  (c c' : suspension-cocone X Z) → UU (l1 ⊔ l2)
+suspension-cocone-htpy {X = X} c c' = Σ ((suspension-cocone-N c) ＝ (suspension-cocone-N c'))
+  (λ p → Σ ((suspension-cocone-S c) ＝ (suspension-cocone-S c'))
+  (λ q → (x : X) → (((inv p) ∙ (suspension-cocone-merid c x)) ∙ q) ＝ (suspension-cocone-merid c' x)))
+
+suspension-cocone-eq-suspension-cocone-htpy : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
+  {c c' : suspension-cocone X Z} → (suspension-cocone-htpy c c') → (c ＝ c')
+suspension-cocone-eq-suspension-cocone-htpy H = eq-pair-Σ (pr1 H) {!eq-pair-Σ!}
 
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
@@ -204,7 +234,23 @@ module _
     (equiv-up-pushout (const X unit star) (const X unit star) Z))))
     ((triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z)) 
 
-  equiv-up-suspensions :
+  equiv-up-suspension :
     {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-cocone X Z)
-  equiv-up-suspensions Z = (ev-suspension (N-susp , S-susp , merid-susp) Z) , up-suspension Z
+  equiv-up-suspension Z = (ev-suspension (N-susp , S-susp , merid-susp) Z) , up-suspension Z  
+
+  map-inv-up-suspension : {l : Level} (Z : UU l) →
+    (suspension-cocone X Z) → ((suspension X) → Z)
+  map-inv-up-suspension Z = map-inv-equiv (equiv-up-suspension Z)
+
+  issec-map-inv-up-suspension : {l : Level} (Z : UU l) →
+    ((ev-suspension (susp-struct X) Z) ∘ (map-inv-up-suspension Z)) ~ id
+  issec-map-inv-up-suspension Z = issec-map-inv-is-equiv (up-suspension Z)
+
+  isretr-map-inv-up-suspension : {l : Level} (Z : UU l) →
+    ((map-inv-up-suspension Z) ∘ (ev-suspension (susp-struct X) Z)) ~ id
+  isretr-map-inv-up-suspension Z = isretr-map-inv-is-equiv (up-suspension Z)
+
+  up-suspension-N-susp : {l : Level} (Z : UU l) (c : suspension-cocone X Z) →
+    (map-inv-up-suspension Z c N-susp) ＝ pr1 c 
+  up-suspension-N-susp Z c = {!ap (pr1) (((issec-map-inv-up-suspension Z) c))!}
 ```
