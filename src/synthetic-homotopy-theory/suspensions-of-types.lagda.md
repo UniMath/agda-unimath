@@ -16,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -130,11 +131,36 @@ suspension-cocone-htpy {X = X} c c' = Σ ((suspension-cocone-N c) ＝ (suspensio
   (λ p → Σ ((suspension-cocone-S c) ＝ (suspension-cocone-S c'))
   (λ q → (x : X) → (((inv p) ∙ (suspension-cocone-merid c x)) ∙ q) ＝ (suspension-cocone-merid c' x)))
 
+suspension-cocone-eq-suspension-cocone-htpy' : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
+  {c c' : suspension-cocone X Z} →(p : (suspension-cocone-N c) ＝ (suspension-cocone-N c')) (q : (suspension-cocone-S c) ＝
+  (suspension-cocone-S c')) (H : (x : X) → (((inv p) ∙ (suspension-cocone-merid c x)) ∙ q) ＝ (suspension-cocone-merid c' x))  → (c ＝ c')
+suspension-cocone-eq-suspension-cocone-htpy' {X = X} {c = .(suspension-cocone-N c') , pair .(suspension-cocone-S c') pr3} {c' = c'} refl refl H =
+  eq-pair-Σ refl (eq-pair-Σ refl ((map-inv-is-equiv (funext pr3 (λ x → pr3 x ∙ refl)) λ x → inv right-unit) ∙
+  map-inv-is-equiv (funext (λ x → suspension-cocone-merid (suspension-cocone-N c' ,
+  suspension-cocone-S c' , pr3) x ∙ refl) (suspension-cocone-merid c')) H))
+
 suspension-cocone-eq-suspension-cocone-htpy : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
   {c c' : suspension-cocone X Z} → (suspension-cocone-htpy c c') → (c ＝ c')
 suspension-cocone-eq-suspension-cocone-htpy {X = X} {c = c} {c' = c'} H = eq-pair-Σ (pr1 H) (tr-Σ (λ z1 → λ z2 → X → Id z1 z2) (pr1 H) (pr2 c) ∙ (eq-pair-Σ (tr-const (pr1 H) (pr1 (pr2 c)) ∙ (pr1 (pr2 H))) {!tr-function-type (λ z2 → X) (λ z2 → Id (pr1 c') z2) (tr-const (pr1 H) (pr1 (pr2 c)) ∙ pr1 (pr2 H)) (pr2 (pr2 c'))!}))
+
 {- (tr-const (pr1 H) (pr1 (pr2 c)) ∙ pr1 (pr2 H))
       (tr (ind-Σ (λ z1 z2 → X → Id z1 z2)) (eq-pair-Σ (pr1 H) refl) -}
+
+suspension-cocone-htpy-suspension-cocone-eq : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
+  {c c' : suspension-cocone X Z} → (c ＝ c') → (suspension-cocone-htpy c c')
+suspension-cocone-htpy-suspension-cocone-eq {X = X} {c = c} p = (ap pr1 p) , ((ap (pr1 ∘ pr2) p) , λ x → (((assoc (inv (ap pr1 p)) (pr2 (pr2 c) x) (ap (pr1 ∘ pr2) p) ∙ (inv (tr-fx＝gy pr1 (pr1 ∘ pr2) p p ((pr2 ∘ pr2) c x)))) ∙ {!!}) ∙
+                                                                                                            inv
+                                                                                                            (ap (λ z → tr (λ t → Id (pr1 t) (pr1 (pr2 t))) p ((pr2 ∘ pr2) c z))
+                                                                                                             (tr-const (inv p) x))) ∙
+                                                                                                           htpy-eq
+                                                                                                           (inv
+                                                                                                            (tr-function-type (λ t → X) (λ t → Id (pr1 t) (pr1 (pr2 t))) p
+                                                                                                             ((pr2 ∘ pr2) c))
+                                                                                                            ∙ apd (pr2 ∘ pr2) p)
+                                                                                                           x)
+{-
+ !}
+ -}
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (susp-str-Y : suspension-structure X Y) →
