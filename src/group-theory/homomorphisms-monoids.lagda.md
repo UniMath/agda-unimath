@@ -7,13 +7,12 @@ title: Homomorphisms of monoids
 
 module group-theory.homomorphisms-monoids where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups using
-  ( type-hom-Semigroup; map-hom-Semigroup; id-hom-Semigroup)
-open import group-theory.monoids using (Monoid; semigroup-Monoid; unit-Monoid)
+open import group-theory.homomorphisms-semigroups
+open import group-theory.monoids
 ```
 
 ## Idea
@@ -41,6 +40,36 @@ hom-Monoid :
 hom-Monoid M1 M2 =
   Σ ( type-hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2))
     ( preserves-unit-hom-Semigroup M1 M2)
+
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
+  where
+
+  hom-semigroup-hom-Monoid :
+    type-hom-Semigroup (semigroup-Monoid M) (semigroup-Monoid N)
+  hom-semigroup-hom-Monoid = pr1 f
+
+  map-hom-Monoid : type-Monoid M → type-Monoid N
+  map-hom-Monoid =
+    map-hom-Semigroup
+      ( semigroup-Monoid M)
+      ( semigroup-Monoid N)
+      ( hom-semigroup-hom-Monoid)
+
+  preserves-mul-hom-Monoid :
+    preserves-mul-Semigroup
+      ( semigroup-Monoid M)
+      ( semigroup-Monoid N)
+      ( map-hom-Monoid)
+  preserves-mul-hom-Monoid =
+    preserves-mul-hom-Semigroup
+      ( semigroup-Monoid M)
+      ( semigroup-Monoid N)
+      ( hom-semigroup-hom-Monoid)
+
+  preserves-unit-hom-Monoid :
+    preserves-unit-hom-Semigroup M N hom-semigroup-hom-Monoid
+  preserves-unit-hom-Monoid = pr2 f
 ```
 
 ### The identity homomorphism of monoids

@@ -91,3 +91,5 @@ module _
       ( right-unit-law-equiv
         ( equiv-eq-classifying-type-symmetric-Concrete-Group X Z q))
 ```
+
+### Equivalent sets have isomorphic symmetric concrete groups
