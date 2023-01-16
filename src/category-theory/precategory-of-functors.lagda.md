@@ -5,7 +5,7 @@ title: The precategory of functors and natural transformations between two fixed
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module category-theory.functor-precategories where
+module category-theory.precategory-of-functors where
 
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-precategories
