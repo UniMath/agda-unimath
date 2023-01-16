@@ -30,8 +30,8 @@ module _
   {l : Level} (X : UU-Set l)
   where
 
-  discrete-Precat : Precat _ _
-  discrete-Precat = type-Set X , disc-Hom , comp-struct , id-struct
+  Discrete-Precat : Precat _ _
+  Discrete-Precat = type-Set X , disc-Hom , comp-struct , id-struct
     where
       disc-Hom : type-Set X → type-Set X → UU-Set l
       disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y )
