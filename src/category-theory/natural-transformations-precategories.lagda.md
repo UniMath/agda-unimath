@@ -21,6 +21,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -57,7 +58,7 @@ module _
         type-hom-Precat D
           ( obj-functor-Precat C D F x)
           ( obj-functor-Precat C D G x))
-      ( is-nat-trans-Precat)
+      is-nat-trans-Precat
 
   components-nat-trans-Precat :
     nat-trans-Precat → (x : obj-Precat C) →
@@ -151,6 +152,15 @@ components-nat-trans-Precat-is-emb :
   ( F G : functor-Precat C D) →
   is-emb (components-nat-trans-Precat C D F G)
 components-nat-trans-Precat-is-emb C D F G = is-emb-inclusion-subtype (λ α → is-nat-trans-Precat-Prop C D F G α)
+
+nat-trans-Precat-Set :
+  {l1 l2 l3 l4 : Level}(C : Precat l1 l2)(D : Precat l3 l4)(F G : functor-Precat C D) →
+  UU-Set (l1 ⊔ l2 ⊔ l4)
+nat-trans-Precat-Set C D F G =
+  nat-trans-Precat C D F G ,
+  is-set-Σ
+    (is-set-Π λ x → is-set-type-hom-Precat D (obj-functor-Precat C D F x) (obj-functor-Precat C D G x))
+    λ α → pr2 (set-Prop (is-nat-trans-Precat-Prop C D F G α))
 ```
 
 ### Category laws for natural transformations
