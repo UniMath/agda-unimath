@@ -19,8 +19,9 @@ open import foundation.equivalences using
     issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
     isretr-map-inv-equiv; is-equiv-comp'; issec-map-inv-is-equiv;
     map-inv-is-equiv; is-equiv-map-inv-is-equiv;
-    id-equiv; equiv-ap; htpy-equiv; refl-htpy-equiv; ind-htpy-equiv;
+    id-equiv; equiv-ap; ind-htpy-equiv;
     comp-htpy-equiv)
+open import foundation.equivalence-extensionality using (htpy-equiv; refl-htpy-equiv)
 open import foundation.function-extensionality using
   ( eq-htpy; equiv-eq-htpy; htpy-eq; funext)
 open import foundation.functions using (map-Π; map-Π'; _∘_; precomp-Π; id)

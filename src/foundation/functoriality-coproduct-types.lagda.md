@@ -21,9 +21,10 @@ open import foundation.equality-coproduct-types using
     is-empty-eq-coprod-inl-inr; map-compute-eq-coprod-inr-inr)
 open import foundation.equational-reasoning
 open import foundation.equivalences using
-  ( htpy-equiv; inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
+  ( inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
     map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_;
-    is-equiv-map-equiv; isretr-map-inv-equiv; eq-htpy-equiv)
+    is-equiv-map-equiv; isretr-map-inv-equiv)
+open import foundation.equivalence-extensionality using (htpy-equiv; eq-htpy-equiv)
 open import foundation.empty-types using (ex-falso)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (equiv-funext)

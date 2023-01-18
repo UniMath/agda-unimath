@@ -30,14 +30,16 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
 open import foundation.empty-types using (ex-falso; empty-Prop; empty)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; htpy-equiv; eq-htpy-equiv; is-equiv;
+  ( _≃_; map-equiv; id-equiv; is-equiv;
     is-equiv-has-inverse; is-equiv-Prop; is-equiv-left-factor';
     equiv-postcomp-equiv; is-equiv-comp; is-equiv-map-equiv;
     is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv;
     left-inverse-law-equiv; left-unit-law-equiv; right-inverse-law-equiv;
-    is-emb-is-equiv; htpy-eq-equiv; right-unit-law-equiv; equiv-precomp;
-    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv;
-    extensionality-equiv; is-contr-total-htpy-equiv)
+    is-emb-is-equiv; right-unit-law-equiv; equiv-precomp;
+    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv)
+open import foundation.equivalence-extensionality using
+  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv; extensionality-equiv;
+    is-contr-total-htpy-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using

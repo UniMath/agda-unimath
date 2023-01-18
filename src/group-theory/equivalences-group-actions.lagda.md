@@ -14,8 +14,10 @@ open import foundation.contractible-types using (is-contr; is-contr-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv; id-equiv;
-    is-property-is-equiv; map-inv-is-equiv; inv-equiv; _∘e_; htpy-equiv;
-    extensionality-equiv; isretr-map-inv-equiv; issec-map-inv-equiv)
+    is-property-is-equiv; map-inv-is-equiv; inv-equiv; _∘e_;
+    isretr-map-inv-equiv; issec-map-inv-equiv)
+open import foundation.equivalence-extensionality using
+  ( htpy-equiv;  extensionality-equiv)
 open import foundation.functoriality-dependent-function-types using
   ( equiv-map-Π)
 open import foundation.functoriality-dependent-pair-types using
