@@ -213,6 +213,7 @@ open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-theoretic-principle-of-choice public
+open import foundation.underlying-graphs-of-elements-w-types public
 open import foundation.unions-subtypes public
 open import foundation.unique-existence public
 open import foundation.uniqueness-image public
