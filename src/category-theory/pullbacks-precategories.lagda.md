@@ -14,7 +14,7 @@ open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-property-is-contr)
 open import foundation.identity-types using (_＝_; ap)
 open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-function-type; UU-Prop)
+  ( is-prop; is-prop-Π; is-prop-function-type; Prop)
 open import foundation.unique-existence using (∃!)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
@@ -137,7 +137,7 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
           is-prop-function-type
             is-property-is-contr)))
 
-  is-pullback-Prop : UU-Prop (l1 ⊔ l2)
+  is-pullback-Prop : Prop (l1 ⊔ l2)
   pr1 is-pullback-Prop = is-pullback C x y z f g w p₁ p₂ α
   pr2 is-pullback-Prop = is-prop-is-pullback
 ```

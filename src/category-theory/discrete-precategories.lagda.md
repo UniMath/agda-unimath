@@ -27,13 +27,13 @@ no-nonidentity morphisms.
 ```agda
 
 module _
-  {l : Level} (X : UU-Set l)
+  {l : Level} (X : Set l)
   where
 
   Discrete-Precat : Precat _ _
   Discrete-Precat = type-Set X , disc-Hom , comp-struct , id-struct
     where
-      disc-Hom : type-Set X → type-Set X → UU-Set l
+      disc-Hom : type-Set X → type-Set X → Set l
       disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y )
 
       comp-struct : associative-composition-structure-Set disc-Hom

@@ -31,7 +31,7 @@ open import foundation.propositions using
 open import foundation.sets using
   ( Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
 open import foundation.subtypes using
-  ( extensionality-type-subtype; eq-subtype)
+  ( extensionality-type-subtype'; eq-type-subtype)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( inv-left-unit-law-Σ-is-contr; assoc-Σ)
 open import foundation.universe-levels using (Level; UU; _⊔_)
@@ -79,7 +79,7 @@ module _
     {A B : obj-Slice-Precat} (f g : type-hom-Slice-Precat A B) →
     (f ＝ g) ≃ Eq-hom-Slice-Precat f g
   extensionality-hom-Slice-Precat {A} {B} =
-    extensionality-type-subtype
+    extensionality-type-subtype'
       ( λ h →
         Id-Prop (hom-Precat C (pr1 A) X) (pr2 A) (comp-hom-Precat C (pr2 B) h))
 
@@ -309,7 +309,7 @@ module _
       ( refl)
       ( eq-pair-Σ
          ( refl)
-         ( eq-subtype
+         ( eq-type-subtype
              (λ _ → is-product-Prop (Slice-Precat C A) (X , f) (Y , g) _ _ _)
              ( refl)))
 
@@ -322,7 +322,7 @@ module _
           ( refl)
           ( eq-pair-Σ
               ( refl)
-              ( eq-subtype
+              ( eq-type-subtype
                   (λ _ → is-pullback-Prop C A X Y f g _ _ _ α)
                   ( refl))))
 

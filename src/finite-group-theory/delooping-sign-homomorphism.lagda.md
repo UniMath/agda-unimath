@@ -26,6 +26,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality

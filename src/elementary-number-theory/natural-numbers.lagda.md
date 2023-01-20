@@ -7,10 +7,10 @@ title: The type of natural numbers
 
 module elementary-number-theory.natural-numbers where
 
+open import foundation-core.coproduct-types using (_+_; inl; inr)
 open import foundation-core.empty-types using (ex-falso)
 
 open import foundation.contractible-types using (eq-is-contr)
-open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using (empty; is-prop-empty)
 open import foundation.equivalences using

@@ -7,6 +7,8 @@ title: Coproduct types
 
 module foundation.coproduct-types where
 
+open import foundation-core.coproduct-types public
+
 open import foundation.contractible-types using
   ( is-contr; eq-is-contr; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
@@ -23,27 +25,6 @@ open import foundation.propositions using
     Prop; type-Prop; is-prop-type-Prop)
 open import foundation.unit-type using (star; unit-Prop)
 open import foundation.universe-levels using (Level; lzero; _⊔_; UU)
-```
-
-## Idea
-
-The coproduct of two types `A` and `B` can be thought of as the disjoint union of `A` and `B`. 
-
-## Definition
-
-### Coproducts
-
-```agda
-data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)  where
-  inl : A → A + B
-  inr : B → A + B
-  
-ind-coprod :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3) →
-  ((x : A) → C (inl x)) → ((y : B) → C (inr y)) →
-  (t : A + B) → C t
-ind-coprod C f g (inl x) = f x
-ind-coprod C f g (inr x) = g x
 ```
 
 ### The predicates of being in the left and in the right summand

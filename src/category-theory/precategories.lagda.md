@@ -140,7 +140,7 @@ The precategory of sets and functions in a given universe.
 
 ```agda
 Set-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Set-Precat l) = UU-Set l
+pr1 (Set-Precat l) = Set l
 pr1 (pr2 (Set-Precat l)) = hom-Set
 pr1 (pr1 (pr2 (pr2 (Set-Precat l)))) g f = g ∘ f
 pr2 (pr1 (pr2 (pr2 (Set-Precat l)))) h g f = refl

@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (is-property-is-contr)
 open import foundation.identity-types using (_＝_; ap)
-open import foundation.propositions using (is-prop; is-prop-Π; UU-Prop)
+open import foundation.propositions using (is-prop; is-prop-Π; Prop)
 open import foundation.unique-existence using (∃!)
 open import foundation.universe-levels using (UU; Level; _⊔_)
 ```
@@ -107,7 +107,7 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
         is-prop-Π (λ g →
           is-property-is-contr)))
 
-  is-product-Prop : UU-Prop (l1 ⊔ l2)
+  is-product-Prop : Prop (l1 ⊔ l2)
   pr1 is-product-Prop = is-product C x y p proj₁ proj₂
   pr2 is-product-Prop = is-prop-is-product
 ```

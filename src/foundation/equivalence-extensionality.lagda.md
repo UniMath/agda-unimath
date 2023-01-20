@@ -38,13 +38,13 @@ module _
 
   extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
   extensionality-equiv f =
-    extensionality-subtype
+    extensionality-type-subtype
       ( is-equiv-Prop)
       ( pr2 f)
       ( refl-htpy {f = pr1 f})
       ( λ g → equiv-funext)
     where
-      is-equiv-Prop : (f : A → B) → UU-Prop (l1 ⊔ l2)
+      is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
       pr1 (is-equiv-Prop f) = is-equiv f
       pr2 (is-equiv-Prop f) H =
         is-prop-is-contr
