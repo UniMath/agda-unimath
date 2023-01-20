@@ -47,7 +47,7 @@ open import foundation.injective-maps using
   ( is-injective-is-equiv; is-emb-is-injective; is-injective-is-emb)
 open import foundation.locally-small-types using (is-locally-small)
 open import foundation.propositional-extensionality using
-  ( eq-equiv-Prop; is-set-UU-Prop; eq-iff; Prop-Set)
+  ( eq-equiv-Prop; is-set-type-Prop; eq-iff; Prop-Set)
 open import foundation.propositional-maps using (is-prop-map-is-emb)
 open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; type-trunc-Prop; unit-trunc-Prop)
@@ -298,7 +298,7 @@ module _
       is-emb (map-emb-is-surjective-and-effective H)
     is-emb-map-emb-is-surjective-and-effective H =
       is-emb-is-injective
-        ( is-set-function-type is-set-UU-Prop)
+        ( is-set-function-type is-set-type-Prop)
         ( λ {x} {y} p →
           apply-universal-property-trunc-Prop
             ( pr1 H y)
@@ -333,7 +333,7 @@ module _
       is-emb (large-map-emb-is-surjective-and-effective e)
     is-emb-large-map-emb-is-surjective-and-effective e =
       is-emb-is-injective
-        ( is-set-function-type is-set-UU-Prop)
+        ( is-set-function-type is-set-type-Prop)
         ( λ {x} {y} p →
           apply-universal-property-trunc-Prop
             ( pr1 e y)

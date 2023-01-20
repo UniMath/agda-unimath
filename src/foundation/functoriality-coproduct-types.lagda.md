@@ -19,7 +19,6 @@ open import foundation.equality-coproduct-types using
   ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr;
     map-compute-eq-coprod-inl-inl; is-empty-eq-coprod-inr-inl;
     is-empty-eq-coprod-inl-inr; map-compute-eq-coprod-inr-inr)
-open import foundation.equational-reasoning
 open import foundation.equivalences using
   ( inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
     map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_;
@@ -469,15 +468,13 @@ module _ {i j k l : Level}
   map-mutually-exclusive-coprod : (P + Q) ≃ (P' + Q')
                                 → (P ≃ P') × (Q ≃ Q')
   pr1 (map-mutually-exclusive-coprod e) =
-    P                   ≃ by inv-equiv equiv-left-summand to
-    Σ (P + Q) is-left   ≃ by equiv-Σ _ e (equiv-left-to-left e) to
-    Σ (P' + Q') is-left ≃ by equiv-left-summand to
-    P'                  ∎e
+    equiv-left-summand ∘e
+    ( equiv-Σ _ e (equiv-left-to-left e) ∘e
+      inv-equiv equiv-left-summand)
   pr2 (map-mutually-exclusive-coprod e) =
-    Q                    ≃ by inv-equiv (equiv-right-summand) to
-    Σ (P + Q) is-right   ≃ by equiv-Σ _ e (equiv-right-to-right e) to
-    Σ (P' + Q') is-right ≃ by equiv-right-summand to
-    Q'                   ∎e
+    equiv-right-summand ∘e
+    ( equiv-Σ _ e (equiv-right-to-right e) ∘e
+      inv-equiv (equiv-right-summand))
 
   map-inv-mutually-exclusive-coprod : (P ≃ P') × (Q ≃ Q')
                                     → (P + Q) ≃ (P' + Q')

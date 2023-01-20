@@ -9,7 +9,6 @@ module foundation.propositional-truncations where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.contractible-types using (eq-is-contr; center)
-open import foundation.coproduct-types using (_+_; ind-coprod; inl)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using (is-equiv; _≃_; map-inv-equiv)
 open import foundation.functions using (_∘_; precomp-Π; id)
@@ -35,6 +34,7 @@ open import foundation.universal-property-propositional-truncation using
     is-propositional-truncation-prod)
 open import foundation.universe-levels using (Level; UU)
 
+open import foundation-core.coproduct-types using (_+_; ind-coprod; inl)
 open import foundation-core.sets using (Set)
 open import foundation-core.truncated-types using
   ( is-trunc; Truncated-Type)

@@ -151,7 +151,7 @@ module _
   pr2 (emb-into-subtype f p) =
     is-emb-is-prop-map
       ( λ (a , b) → is-prop-equiv
-        ( equiv-tot (λ x → extensionality-type-subtype B (map-emb f x , p x) (a , b)))
+        ( equiv-tot (λ x → extensionality-type-subtype' B (map-emb f x , p x) (a , b)))
         ( is-prop-map-is-emb (is-emb-map-emb f) a))
 ```
 
