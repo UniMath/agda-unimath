@@ -32,6 +32,20 @@ module _
 
   edge-Graph : vertex-Graph → vertex-Graph → UU l2
   edge-Graph = pr2 G
+
+  total-edge-Graph : UU (l1 ⊔ l2)
+  total-edge-Graph = Σ vertex-Graph (λ x → Σ vertex-Graph (edge-Graph x))
+
+  source-total-edge-Graph : total-edge-Graph → vertex-Graph
+  source-total-edge-Graph = pr1
+
+  target-total-edge-Graph : total-edge-Graph → vertex-Graph
+  target-total-edge-Graph e = pr1 (pr2 e)
+
+  edge-total-edge-Graph :
+    (e : total-edge-Graph) →
+    edge-Graph (source-total-edge-Graph e) (target-total-edge-Graph e)
+  edge-total-edge-Graph e = pr2 (pr2 e)
 ```
 
 ### Alternative definition
