@@ -16,8 +16,10 @@ open import foundation.equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.fibers-of-maps
+open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -74,6 +76,26 @@ module _
 ```
 
 ## Properties
+
+### To be a root is decidable
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-root-node-graph-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) → UU (l1 ⊔ l2)
+  is-root-node-graph-element-𝕎 w x = root-𝕎 ＝ x
+
+  is-decidable-is-root-node-graph-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    is-decidable (is-root-node-graph-element-𝕎 w x)
+  is-decidable-is-root-node-graph-element-𝕎 w root-𝕎 = inl refl
+  is-decidable-is-root-node-graph-element-𝕎 w
+    ( node-inclusion-graph-element-𝕎 H y) =
+    inr (λ ())
+```
 
 ### Characterization of equality of the type of nodes of the underlying graph of an element of `𝕎 A B`
 
@@ -162,37 +184,90 @@ module _
     map-inv-equiv (extensionality-node-graph-element-𝕎 w x y)
 ```
 
-### The map `node-inclusion-graph-element-𝕎 H` is an embedding
+### The type of nodes of the underlying graph of an element of a W-type is a coproduct
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  contraction-fib-node-inclusion-graph-element-𝕎 :
-    {u v : 𝕎 A B} (H : u ∈-𝕎 v) (x : node-graph-element-𝕎 v) →
-    (y z : fib (node-inclusion-graph-element-𝕎 H) x) → y ＝ z
-  contraction-fib-node-inclusion-graph-element-𝕎 H x (y , p) (z , q) = {!!}
+  node-graph-element-𝕎' : 𝕎 A B → UU (l1 ⊔ l2)
+  node-graph-element-𝕎' (tree-𝕎 x α) =
+    Σ (B x) (λ y → node-graph-element-𝕎' (α y)) + unit
 
-  is-proof-irrelevant-fib-node-inclusion-graph-element-𝕎 :
-    {u v : 𝕎 A B} (H : u ∈-𝕎 v) (x : node-graph-element-𝕎 v) →
-    is-proof-irrelevant
-      ( fib (node-inclusion-graph-element-𝕎 H) x)
-  is-proof-irrelevant-fib-node-inclusion-graph-element-𝕎 H x (y , p) =
-    {!!}
+  map-compute-node-graph-element-𝕎 :
+    (w : 𝕎 A B) → node-graph-element-𝕎 w → node-graph-element-𝕎' w
+  map-compute-node-graph-element-𝕎 (tree-𝕎 x α) root-𝕎 = inr star
+  map-compute-node-graph-element-𝕎
+    ( tree-𝕎 x α)
+    ( node-inclusion-graph-element-𝕎 (y , refl) n) =
+    inl (pair y (map-compute-node-graph-element-𝕎 (α y) n))
 
-  is-prop-map-node-inclusion-graph-element-𝕎 :
-    {u v : 𝕎 A B} (H : u ∈-𝕎 v) →
-    is-prop-map (node-inclusion-graph-element-𝕎 {u = u} {v} H)
-  is-prop-map-node-inclusion-graph-element-𝕎 {u} {v} H x =
-    is-prop-is-proof-irrelevant
-      ( λ { (y , refl) → {!!}})
+  map-inv-compute-node-graph-element-𝕎 :
+    (w : 𝕎 A B) → node-graph-element-𝕎' w → node-graph-element-𝕎 w
+  map-inv-compute-node-graph-element-𝕎 (tree-𝕎 x α) (inl (y , n)) =
+    node-inclusion-graph-element-𝕎
+      ( pair y refl)
+      ( map-inv-compute-node-graph-element-𝕎 (α y) n)
+  map-inv-compute-node-graph-element-𝕎 (tree-𝕎 x α) (inr star) = root-𝕎
 
-  is-emb-node-inclusion-graph-element-𝕎 :
-    {u v : 𝕎 A B} (H : u ∈-𝕎 v) →
-    is-emb (node-inclusion-graph-element-𝕎 {u = u} {v} H)
-  is-emb-node-inclusion-graph-element-𝕎 H = {!!}
+  issec-map-inv-compute-node-graph-element-𝕎 :
+    (w : 𝕎 A B) →
+    ( map-compute-node-graph-element-𝕎 w ∘
+      map-inv-compute-node-graph-element-𝕎 w) ~ id
+  issec-map-inv-compute-node-graph-element-𝕎 (tree-𝕎 x α) (inl (y , n)) =
+    ap
+      ( inl)
+      ( eq-pair-Σ refl (issec-map-inv-compute-node-graph-element-𝕎 (α y) n))
+  issec-map-inv-compute-node-graph-element-𝕎 (tree-𝕎 x α) (inr star) = refl
+
+  isretr-map-inv-compute-node-graph-element-𝕎 :
+    (w : 𝕎 A B) →
+    ( map-inv-compute-node-graph-element-𝕎 w ∘
+      map-compute-node-graph-element-𝕎 w) ~ id
+  isretr-map-inv-compute-node-graph-element-𝕎 (tree-𝕎 x α) root-𝕎 = refl
+  isretr-map-inv-compute-node-graph-element-𝕎
+    ( tree-𝕎 x α)
+    ( node-inclusion-graph-element-𝕎 (y , refl) n) =
+    ap
+      ( node-inclusion-graph-element-𝕎 (y , refl))
+      ( isretr-map-inv-compute-node-graph-element-𝕎 (α y) n)
+
+  is-equiv-map-compute-node-graph-element-𝕎 :
+    (w : 𝕎 A B) → is-equiv (map-compute-node-graph-element-𝕎 w)
+  is-equiv-map-compute-node-graph-element-𝕎 w =
+    is-equiv-has-inverse
+      ( map-inv-compute-node-graph-element-𝕎 w)
+      ( issec-map-inv-compute-node-graph-element-𝕎 w)
+      ( isretr-map-inv-compute-node-graph-element-𝕎 w)
+
+  compute-node-graph-element-𝕎 :
+    (w : 𝕎 A B) → node-graph-element-𝕎 w ≃ node-graph-element-𝕎' w
+  pr1 (compute-node-graph-element-𝕎 w) = map-compute-node-graph-element-𝕎 w
+  pr2 (compute-node-graph-element-𝕎 w) =
+    is-equiv-map-compute-node-graph-element-𝕎 w
 ```
+
+### The node-inclusion on the coproduct representation of the type of nodes
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  node-inclusion-graph-element-𝕎' :
+    (v : 𝕎 A B) (y : B (symbol-𝕎 v)) →
+    node-graph-element-𝕎' (component-𝕎 v y) → node-graph-element-𝕎' v
+  node-inclusion-graph-element-𝕎' (tree-𝕎 x α) y n = inl (pair y n)
+```
+
+Note that it seems unreasonable to expect that `node-inclusion-graph-element-𝕎'` is an embedding. The total space `Σ (y : B x), node-graph-element-𝕎' (α y)` embeds into `node-graph-element-𝕎' (tree-𝕎 x α)`, and this implies that the node inclusion has the same truncation level as the fiber inclusions
+
+```md
+  node-graph-element-𝕎' (α b) → Σ (y : B x), node-graph-element-𝕎' (α y)
+```
+
+In other words, the fiber is `Ω (B , b)`.
 
 ### For any `u ∈-𝕎 v` in `𝕎 A B` we have a graph inclusion from the underlying graph of `u` to the underlying graph of `v`
 
@@ -308,24 +383,4 @@ module _
   is-directed-tree-graph-element-𝕎 :
     (w : 𝕎 A B) → is-directed-tree-Graph (graph-element-𝕎 w) root-𝕎
   is-directed-tree-graph-element-𝕎 w x = {!!}
-```
-
-### To be a root is decidable
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  is-root-node-graph-element-𝕎 :
-    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) → UU (l1 ⊔ l2)
-  is-root-node-graph-element-𝕎 w x = root-𝕎 ＝ x
-
-  is-decidable-is-root-node-graph-element-𝕎 :
-    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
-    is-decidable (is-root-node-graph-element-𝕎 w x)
-  is-decidable-is-root-node-graph-element-𝕎 w root-𝕎 = inl refl
-  is-decidable-is-root-node-graph-element-𝕎 w
-    ( node-inclusion-graph-element-𝕎 H y) =
-    inr (λ ())
 ```
