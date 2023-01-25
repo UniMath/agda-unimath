@@ -11,7 +11,7 @@ open import foundation-core.negation public
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
+open import foundation-core.empty-types using (empty; is-prop-empty; ex-falso)
 open import foundation.equivalences using (_≃_; map-inv-equiv; map-equiv)
 open import foundation.logical-equivalences using (_⇔_; _↔_; equiv-iff')
 open import foundation.propositions using

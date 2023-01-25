@@ -69,9 +69,11 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-relations using
   ( Eq-Rel; prop-Eq-Rel; sim-Eq-Rel; refl-Eq-Rel; symm-Eq-Rel; trans-Eq-Rel)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; htpy-equiv; map-equiv; inv-equiv; map-inv-is-equiv;
-    is-equiv-has-inverse; eq-htpy-equiv; left-inverse-law-equiv;
-    right-inverse-law-equiv; map-inv-equiv; id-equiv; htpy-eq-equiv)
+  ( _≃_; _∘e_; map-equiv; inv-equiv; map-inv-is-equiv;
+    is-equiv-has-inverse; left-inverse-law-equiv;
+    right-inverse-law-equiv; map-inv-equiv; id-equiv)
+open import foundation.equivalence-extensionality using
+  ( htpy-equiv; eq-htpy-equiv; htpy-eq-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions using (_∘_)

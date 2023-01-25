@@ -13,9 +13,11 @@ open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.empty-types using (ex-falso)
 open import foundation.equality-coproduct-types using (is-set-coprod)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; map-inv-equiv;
+  ( _≃_; _∘e_; map-equiv; inv-equiv; map-inv-equiv;
     issec-map-inv-equiv; isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse;
-    htpy-eq-equiv; htpy-equiv; id-equiv)
+    id-equiv)
+open import foundation.equivalence-extensionality using
+  ( htpy-equiv; eq-htpy-equiv; htpy-eq-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using
   ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)

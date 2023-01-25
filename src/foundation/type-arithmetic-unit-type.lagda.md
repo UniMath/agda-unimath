@@ -16,6 +16,7 @@ open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (refl)
 open import foundation-core.universe-levels using (Level; UU)
 
+open import foundation.function-extensionality using (eq-htpy)
 open import foundation.unit-type using (unit; star)
 ```
 
@@ -143,4 +144,48 @@ module _
   right-unit-law-prod : (A × unit) ≃ A
   pr1 right-unit-law-prod = map-right-unit-law-prod
   pr2 right-unit-law-prod = is-equiv-map-right-unit-law-prod
+```
+
+### Left unit law for dependent function types
+
+```agda
+module _
+  {l : Level} (A : unit → UU l)
+  where
+
+  map-left-unit-law-Π : ((t : unit) → A t) → A star
+  map-left-unit-law-Π f = f star
+
+  map-inv-left-unit-law-Π : A star → ((t : unit) → A t)
+  map-inv-left-unit-law-Π a star = a
+
+  issec-map-inv-left-unit-law-Π :
+    ( map-left-unit-law-Π ∘ map-inv-left-unit-law-Π) ~ id
+  issec-map-inv-left-unit-law-Π a = refl
+
+  isretr-map-inv-left-unit-law-Π :
+    ( map-inv-left-unit-law-Π ∘ map-left-unit-law-Π) ~ id
+  isretr-map-inv-left-unit-law-Π f = eq-htpy (λ { star → refl })
+
+  is-equiv-map-left-unit-law-Π : is-equiv map-left-unit-law-Π
+  is-equiv-map-left-unit-law-Π =
+    is-equiv-has-inverse
+      map-inv-left-unit-law-Π
+      issec-map-inv-left-unit-law-Π
+      isretr-map-inv-left-unit-law-Π
+
+  left-unit-law-Π : ((t : unit) → A t) ≃ A star
+  pr1 left-unit-law-Π = map-left-unit-law-Π
+  pr2 left-unit-law-Π = is-equiv-map-left-unit-law-Π
+
+  is-equiv-map-inv-left-unit-law-Π : is-equiv map-inv-left-unit-law-Π
+  is-equiv-map-inv-left-unit-law-Π =
+    is-equiv-has-inverse
+      map-left-unit-law-Π
+      isretr-map-inv-left-unit-law-Π
+      issec-map-inv-left-unit-law-Π
+
+  inv-left-unit-law-Π : A star ≃ ((t : unit) → A t)
+  pr1 inv-left-unit-law-Π = map-inv-left-unit-law-Π
+  pr2 inv-left-unit-law-Π = is-equiv-map-inv-left-unit-law-Π
 ```
