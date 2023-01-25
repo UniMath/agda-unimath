@@ -21,6 +21,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.unit-type
@@ -304,6 +305,24 @@ module _
     ( is-contr-edge-to-root-graph-element-𝕎 H)
     ( edge-to-root-graph-element-𝕎 .H) =
     refl
+```
+
+### The graph inclusion is injective on edges
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-injective-edge-inclusion-graph-element-𝕎 :
+    {u v : 𝕎 A B} (H : u ∈-𝕎 v) {x y : node-graph-element-𝕎 u} →
+    is-injective (edge-inclusion-graph-element-𝕎 {u = u} {v} H {x} {y})
+  is-injective-edge-inclusion-graph-element-𝕎 (y , refl)
+    { .(node-inclusion-graph-element-𝕎 H root-𝕎)}
+    { .root-𝕎}
+    { edge-to-root-graph-element-𝕎 {z} H} p =
+    eq-is-contr (is-contr-edge-to-root-graph-element-𝕎 H)
+  is-injective-edge-inclusion-graph-element-𝕎 {.(component-𝕎 v y)} {v} (y , refl) {.(node-inclusion-graph-element-𝕎 H _)} {.(node-inclusion-graph-element-𝕎 H _)} {edge-inclusion-graph-element-𝕎 H e} {f} p = {!!}
 ```
 
 ### The type of edges from any node to the root is a proposition
