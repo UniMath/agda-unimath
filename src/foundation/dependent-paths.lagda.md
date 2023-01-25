@@ -3,6 +3,7 @@ title: Dependent paths
 ---
 description: We characterize dependent paths in the family of depedent paths;
 define the groupoidal operators on dependent paths; define the cohrences paths: prove the operators are equivalences.
+
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
@@ -149,8 +150,7 @@ module _
   where
   
   d-inv : path-over B (inv p01) b1 b0
-  d-inv =  (inv (ap (tr B (inv p01)) q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (
-    ap (λ t → tr B t b0) (right-inv p01))) 
+  d-inv =  (ap (tr B (inv p01)) (inv q01)) ∙ ((inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙ (tr² B (right-inv p01) b0))
 ```
 
 Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws.
@@ -205,7 +205,15 @@ module _
   d-right-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (right-inv p) (d-concat B p q (inv p) (d-inv B p q))
     (refl-path-over B a0 b0)
-  d-right-inv refl refl = refl
+  d-right-inv p q  = ap (λ t → tr-concat p (inv p) b0 ∙ t)
+    (inv (assoc  (ap (tr B (inv p)) q) (ap (tr B (inv p)) (inv q))
+    (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p)))) ∙
+    ((ap (λ t₁ → tr-concat p (inv p) b0 ∙ (t₁ ∙ (inv (tr-concat p (inv p) b0) ∙
+    ap (λ t → tr B t b0) (right-inv p)))) (inv (ap-concat (tr B (inv p)) q (inv q)))) ∙
+    (ap (λ t₁ → (tr-concat p (inv p) b0 ∙ (ap (tr B (inv p)) (t₁) ∙
+    (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p))))) (right-inv q) ∙
+    ((inv (assoc (tr-concat p (inv p) b0) (inv (tr-concat p (inv p) b0))
+    (ap (λ t → tr B t b0) (right-inv p)))) ∙ ((ap (λ t₁ → t₁ ∙ ap (λ t → tr B t b0) (right-inv p)) (right-inv (tr-concat p (inv p) b0))) ∙ (inv right-unit)))))
 
   d-right-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat B p q (inv p) (d-inv B p q))) ＝ (
@@ -215,7 +223,10 @@ module _
 
   d-left-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (left-inv p) (d-concat B (inv p) (d-inv B p q) p q) (refl-path-over B a1 b1)
-  d-left-inv refl refl = refl
+  d-left-inv p q  = {!!}
+  
+{- tr-concat (inv p) p b1 ∙ (ap (tr B p) (ap (tr B (inv p)) (inv q) ∙ (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p))) ∙ q)
+(ap (tr B (inv p)) (inv q) ∙ (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p))) ∙ q) -}
 
   d-left-inv' :  (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b1 b1) (left-inv p) (d-concat B (inv p) (d-inv B p q) p q)) ＝ (
