@@ -78,6 +78,15 @@ module _
   syntax step-equational-reasoning p z q = p ＝ z by q
 ```
 
+For equalities we thus write the chains as follows
+
+```md
+equational-reasoning
+  x ＝ y by eq-1
+    ＝ z by eq-2
+    ＝ v by eq-3
+```
+
 ### Equational reasoning for equivalences
 
 ```agda
@@ -95,6 +104,15 @@ step-equivalence-reasoning e Z f = f ∘e e
 syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 ```
 
+For equivalences we thus write the chains as follows
+
+```md
+equivalence-reasoning
+  X ≃ Y by equiv-1
+    ≃ Z by equiv-2
+    ≃ V by equiv-3
+```
+
 ### Equational reasoning for logical equivalences
 
 ```agda
@@ -110,6 +128,15 @@ step-logical-equivalence-reasoning :
 step-logical-equivalence-reasoning e Z f = f ∘iff e
 
 syntax step-logical-equivalence-reasoning e Z f = e ↔ Z by f
+```
+
+For logical equivalences we thus write the chains as follows
+
+```md
+logical-equivalence-reasoning
+  X ↔ Y by equiv-1
+    ↔ Z by equiv-2
+    ↔ V by equiv-3
 ```
 
 ### Equational reasoning for preorders

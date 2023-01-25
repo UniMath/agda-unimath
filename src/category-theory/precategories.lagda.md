@@ -9,13 +9,14 @@ module category-theory.precategories where
 
 open import foundation.cartesian-product-types using (_×_)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using (_＝_; inv; _∙_)
+open import foundation.identity-types using (_＝_; inv; _∙_; refl)
 open import foundation.propositions using
   ( all-elements-equal; prod-Prop; Π-Prop; Π-Prop'; is-prop;
     is-prop-all-elements-equal)
 open import foundation.sets using
-  ( Set; type-Set; Id-Prop; is-set; is-set-type-Set)
+  ( Set; type-Set; Id-Prop; is-set; is-set-type-Set; hom-Set)
 open import foundation.subtypes using (eq-type-subtype)
 open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
 ```
@@ -94,6 +95,16 @@ module _
     type-hom-Precat x y → type-hom-Precat y z → type-hom-Precat x z
   comp-hom-Precat' f g = comp-hom-Precat g f
 
+  precomp-hom-Precat :
+    {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
+    type-hom-Precat y z → type-hom-Precat x z
+  precomp-hom-Precat f z g = comp-hom-Precat g f
+
+  postcomp-hom-Precat :
+    {x y : obj-Precat} (f : type-hom-Precat x y) (z : obj-Precat) →
+    type-hom-Precat z x → type-hom-Precat z y
+  postcomp-hom-Precat f z = comp-hom-Precat f
+
   assoc-comp-hom-Precat :
     {x y z w : obj-Precat} (h : type-hom-Precat z w) (g : type-hom-Precat y z)
     (f : type-hom-Precat x y) →
@@ -119,6 +130,23 @@ module _
     {x y : obj-Precat} (f : type-hom-Precat x y) →
     comp-hom-Precat f id-hom-Precat ＝ f
   right-unit-law-comp-hom-Precat = pr2 (pr2 is-unital-Precat)
+```
+
+## Examples
+
+### The category of sets and functions
+
+The precategory of sets and functions in a given universe.
+
+```agda
+Set-Precat : (l : Level) → Precat (lsuc l) l
+pr1 (Set-Precat l) = Set l
+pr1 (pr2 (Set-Precat l)) = hom-Set
+pr1 (pr1 (pr2 (pr2 (Set-Precat l)))) g f = g ∘ f
+pr2 (pr1 (pr2 (pr2 (Set-Precat l)))) h g f = refl
+pr1 (pr2 (pr2 (pr2 (Set-Precat l)))) x = id
+pr1 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
+pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
 ```
 
 ## Properties

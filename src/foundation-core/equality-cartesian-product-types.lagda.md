@@ -7,14 +7,13 @@ title: Equality of cartesian product types
 
 module foundation-core.equality-cartesian-product-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; refl; ap; _∙_)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -84,6 +83,24 @@ module _
 ```
 
 ## Properties
+
+### Commuting triangles for `eq-pair`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} 
+  where
+
+  triangle-eq-pair :
+    {a0 a1 : A} {b0 b1 : B} (p : a0 ＝ a1) (q : b0 ＝ b1) →
+    eq-pair p q ＝ ((eq-pair p refl) ∙ (eq-pair refl q))
+  triangle-eq-pair refl refl = refl
+
+  triangle-eq-pair' :
+    {a0 a1 : A} {b0 b1 : B} (p : a0 ＝ a1) (q : b0 ＝ b1) →
+    eq-pair p q ＝ ((eq-pair refl q) ∙ (eq-pair p refl))
+  triangle-eq-pair' refl refl = refl
+```
 
 ### `eq-pair` preserves concatenation
 

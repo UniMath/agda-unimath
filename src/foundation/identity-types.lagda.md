@@ -10,12 +10,15 @@ module foundation.identity-types where
 open import foundation-core.identity-types public
 
 open import foundation.binary-equivalences using (is-binary-equiv)
+open import foundation.equivalence-extensionality using (eq-htpy-equiv)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (UU; Level)
 
 open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp')
+  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp';
+    map-equiv)
 open import foundation-core.functions using (_∘_; id)
+open import foundation-core.function-extensionality using (eq-htpy)
 open import foundation-core.homotopies using (_~_; nat-htpy)
 ```
 
@@ -64,7 +67,17 @@ module _
     {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
-  
+
+  equiv-concat-equiv : {x x' : A}
+                     → ((y : A) → (x ＝ y) ≃ (x' ＝ y))
+                     ≃ (x' ＝ x)
+  pr1 (equiv-concat-equiv {x}) e = map-equiv (e x) refl
+  pr2 equiv-concat-equiv =
+    is-equiv-has-inverse
+      equiv-concat
+      (λ { refl → refl })
+      (λ e → eq-htpy (λ y → eq-htpy-equiv (λ { refl → right-unit })))
+
   inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
   inv-concat' x q = concat' x (inv q)
 

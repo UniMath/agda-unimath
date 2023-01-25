@@ -70,6 +70,32 @@ module _
           ( issec-hom-inv-iso-Cat f)))
 ```
 
+### Precomposing by isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+
+  precomp-iso-Cat :
+    {x y z : obj-Cat C} →
+    iso-Cat C x y → type-hom-Cat C y z → type-hom-Cat C x z
+  precomp-iso-Cat f g = comp-hom-Cat C g (hom-iso-Cat C f)
+```
+
+### Postcomposing by isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2)
+  where
+
+  postcomp-iso-Cat :
+    {x y z : obj-Cat C} →
+    iso-Cat C y z → type-hom-Cat C x y → type-hom-Cat C x z
+  postcomp-iso-Cat f g = comp-hom-Cat C (hom-iso-Cat C f) g
+```
+
 ## Examples
 
 ### The identity morphisms are isomorphisms
@@ -283,7 +309,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C}
+  {l1 l2 : Level} (C : Cat l1 l2)
   where
 
   left-unit-law-comp-iso-Cat :
@@ -326,6 +352,7 @@ module _
 ```
 
 #### Left inverse law
+
 ```agda
   left-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C (inv-iso-Cat C f) f ＝ id-iso-Cat C
@@ -337,6 +364,7 @@ module _
 ```
 
 #### Right inverse law
+
 ```agda
   right-inverse-law-comp-iso-Cat : {x y : obj-Cat C} (f : iso-Cat C x y) →
     comp-iso-Cat C f (inv-iso-Cat C f) ＝ id-iso-Cat C
@@ -354,15 +382,15 @@ module _
   {l1 l2 : Level} (C : Cat l1 l2)
   where
   
-  iso-eq-Cat : (x y : obj-Cat C) → x ＝ y → iso-Cat C x y
-  iso-eq-Cat = iso-eq-Precat (precat-Cat C)
+  iso-eq-Cat : {x y : obj-Cat C} → x ＝ y → iso-Cat C x y
+  iso-eq-Cat {x} {y} = iso-eq-Precat (precat-Cat C) x y
 
   preserves-concat-iso-eq-Cat :
     {x y z : obj-Cat C} (p : x ＝ y) (q : y ＝ z) →
-    iso-eq-Cat x z (p ∙ q) ＝
-    comp-iso-Cat C (iso-eq-Cat y z q) (iso-eq-Cat x y p)
-  preserves-concat-iso-eq-Cat {x} {.x} {y} refl q =
-    inv (right-unit-law-comp-iso-Cat C {x} {y} (iso-eq-Cat x y q))
+    iso-eq-Cat (p ∙ q) ＝
+    comp-iso-Cat C (iso-eq-Cat q) (iso-eq-Cat p)
+  preserves-concat-iso-eq-Cat refl q =
+    inv (right-unit-law-comp-iso-Cat C (iso-eq-Cat q))
 ```
 
 ## Properties
@@ -376,12 +404,48 @@ module _
   
   extensionality-obj-Cat :
     (x y : obj-Cat C) → (x ＝ y) ≃ iso-Cat C x y
-  pr1 (extensionality-obj-Cat x y) = iso-eq-Cat C x y
+  pr1 (extensionality-obj-Cat x y) = iso-eq-Cat C
   pr2 (extensionality-obj-Cat x y) = is-category-Cat C x y
 
   eq-iso-Cat :
-    (x y : obj-Cat C) → iso-Cat C x y → x ＝ y
-  eq-iso-Cat x y = map-inv-equiv (extensionality-obj-Cat x y)
+    {x y : obj-Cat C} → iso-Cat C x y → x ＝ y
+  eq-iso-Cat {x} {y} = map-inv-equiv (extensionality-obj-Cat x y)
+
+  issec-eq-iso-Cat :
+    {x y : obj-Cat C} (f : iso-Cat C x y) →
+    iso-eq-Cat C (eq-iso-Cat f) ＝ f
+  issec-eq-iso-Cat {x} {y} = issec-map-inv-equiv (extensionality-obj-Cat x y)
+
+  isretr-eq-iso-Cat :
+    {x y : obj-Cat C} (p : x ＝ y) → eq-iso-Cat (iso-eq-Cat C p) ＝ p
+  isretr-eq-iso-Cat {x} {y} = isretr-map-inv-equiv (extensionality-obj-Cat x y)
+
+  preserves-comp-eq-iso-Cat :
+    {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
+    eq-iso-Cat (comp-iso-Cat C g f) ＝ (eq-iso-Cat f ∙ eq-iso-Cat g)
+  preserves-comp-eq-iso-Cat g f =
+    equational-reasoning
+      eq-iso-Cat (comp-iso-Cat C g f)
+      ＝ eq-iso-Cat
+          ( comp-iso-Cat C
+            ( iso-eq-Cat C (eq-iso-Cat g))
+            ( iso-eq-Cat C (eq-iso-Cat f)))
+        by
+        ap eq-iso-Cat
+          ( ap-binary
+            ( comp-iso-Cat C)
+            ( inv (issec-eq-iso-Cat g))
+            ( inv (issec-eq-iso-Cat f)))
+      ＝ eq-iso-Cat (iso-eq-Cat C (eq-iso-Cat f ∙ eq-iso-Cat g))
+        by
+        ap eq-iso-Cat
+          ( inv
+            ( preserves-concat-iso-eq-Cat C
+              ( eq-iso-Cat f)
+              ( eq-iso-Cat g)))
+      ＝ eq-iso-Cat f ∙ eq-iso-Cat g
+        by
+        isretr-eq-iso-Cat (eq-iso-Cat f ∙ eq-iso-Cat g)
 ```
 
 ### The type of isomorphisms forms a set
@@ -396,4 +460,19 @@ module _
 
   iso-Cat-Set : (x y : obj-Cat C) → Set l2
   iso-Cat-Set = iso-Precat-Set (precat-Cat C)
+```
+
+### A morphism is an isomorphism if and only if precomposing by it is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} (C : Cat l1 l2) {x y : obj-Cat C} (f : type-hom-Cat C x y)
+  where
+
+{-
+  is-equiv-precomp-is-iso-hom-Cat :
+    (H : is-iso-Cat C f) →
+    (z : obj-Cat C) → is-equiv (precomp-iso-Cat C {z = z} (pair f H))
+  is-equiv-precomp-is-iso-hom-Cat H z = {!!}
+  -}
 ```

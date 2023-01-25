@@ -17,6 +17,7 @@ open import foundation.automorphisms using (Aut)
 open import foundation.connected-components-universes using
   ( is-contr-total-equiv-component-UU-Level; equiv-eq-component-UU-Level;
     is-equiv-equiv-eq-component-UU-Level)
+open import foundation.constant-maps
 open import foundation.contractible-maps using
   ( is-contr-map-is-equiv)
 open import foundation.contractible-types using
@@ -25,18 +26,20 @@ open import foundation.contractible-types using
 open import foundation.coproduct-types using
   ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
 open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
 open import foundation.double-negation using (dn-Prop'; intro-dn)
 open import foundation.empty-types using (ex-falso; empty-Prop; empty)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; htpy-equiv; eq-htpy-equiv; is-equiv;
+  ( _≃_; map-equiv; id-equiv; is-equiv;
     is-equiv-has-inverse; is-equiv-Prop; is-equiv-left-factor';
     equiv-postcomp-equiv; is-equiv-comp; is-equiv-map-equiv;
     is-equiv-comp-equiv; _∘e_; equiv-precomp-equiv; map-inv-equiv; inv-equiv;
     left-inverse-law-equiv; left-unit-law-equiv; right-inverse-law-equiv;
-    is-emb-is-equiv; htpy-eq-equiv; right-unit-law-equiv; equiv-precomp;
-    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv;
-    extensionality-equiv; is-contr-total-htpy-equiv)
+    is-emb-is-equiv; right-unit-law-equiv; equiv-precomp;
+    isretr-map-inv-equiv; issec-map-inv-equiv; equiv-ap; map-inv-is-equiv)
+open import foundation.equivalence-extensionality using
+  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv; extensionality-equiv;
+    is-contr-total-htpy-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
 open import foundation.functoriality-dependent-pair-types using
@@ -50,6 +53,7 @@ open import foundation.identity-types using
   ( _＝_; refl; inv; _∙_; ap; tr; equiv-inv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 open import foundation.involutions using (is-involution-aut)
+open import foundation.logical-equivalences
 open import foundation.mere-equivalences using
   ( is-set-mere-equiv; mere-equiv; mere-equiv-Prop; symmetric-mere-equiv;
     transitive-mere-equiv)
@@ -75,6 +79,7 @@ open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
 
 open import univalent-combinatorics.equality-standard-finite-types using
   ( Eq-Fin-eq)
+open import univalent-combinatorics.equivalences
 open import univalent-combinatorics.finite-types using
   ( UU-Fin; type-UU-Fin; Fin-UU-Fin; Fin-UU-Fin'; has-cardinality;
     has-cardinality-Prop; equiv-UU-Fin; is-finite; 𝔽; is-finite-has-cardinality;
@@ -813,7 +818,8 @@ module _
   {l : Level} (X : 2-Element-Type l)
   where
 
-  contradiction-3-distinct-element-2-Element-Type : (x y z : type-2-Element-Type X) →
+  contradiction-3-distinct-element-2-Element-Type :
+    (x y z : type-2-Element-Type X) →
     ¬ (x ＝ y) → ¬ (y ＝ z) → ¬ (x ＝ z) → empty
   contradiction-3-distinct-element-2-Element-Type x y z np nq nr =
     apply-universal-property-trunc-Prop
@@ -844,3 +850,55 @@ module _
       (inr refl) (inl refl) (inr refl) = nr refl
     cases-contradiction-3-distinct-element-2-Element-Type e
       (inr refl) (inr refl) c3 = np refl
+```
+
+### For any map between 2-element types, being an equivalence is decidable
+
+```agda
+module _
+  {l1 l2 : Level} (X : 2-Element-Type l1) (Y : 2-Element-Type l2)
+  where
+  
+  is-decidable-is-equiv-2-Element-Type :
+    (f : type-2-Element-Type X → type-2-Element-Type Y) →
+    is-decidable (is-equiv f)
+  is-decidable-is-equiv-2-Element-Type f =
+    is-decidable-is-equiv-is-finite f
+      ( is-finite-type-2-Element-Type X)
+      ( is-finite-type-2-Element-Type Y)
+```
+
+### A map between 2-element types is an equivalence if and only if its image is the full subtype of the codomain
+
+```agda
+
+```
+
+### A map between 2-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
+
+### Any map between 2-element types that is not an equivalence is constant
+
+```agda
+{-
+  is-constant-is-not-equiv-2-Element-Type :
+    (f : type-2-Element-Type X → type-2-Element-Type Y) →
+    ¬ (is-equiv f) →
+    Σ (type-2-Element-Type Y) (λ y → f ~ const _ _ y)
+  pr1 (is-constant-is-not-equiv-2-Element-Type f H) = {!!}
+  pr2 (is-constant-is-not-equiv-2-Element-Type f H) = {!!}
+  -}
+```
+
+### Any map between 2-element types is either an equivalence or it is constant
+
+### Coinhabited 2-element types are equivalent
+
+```agda
+{-
+equiv-iff-2-Element-Type :
+  {l1 l2 : Level} (X : 2-Element-Type l1) (Y : 2-Element-Type l2) →
+  (type-2-Element-Type X ↔ type-2-Element-Type Y) →
+  (equiv-2-Element-Type X Y)
+equiv-iff-2-Element-Type X Y (f , g) = {!is-decidable-is-equiv-is-finite!}
+-}
+```

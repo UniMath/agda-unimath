@@ -10,7 +10,8 @@ module foundation.commutative-operations where
 open import foundation.coproduct-types using (_+_; inl; inr)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( map-equiv; _≃_; htpy-equiv; _∘e_; inv-equiv; id-equiv)
+  ( map-equiv; _≃_; _∘e_; inv-equiv; id-equiv)
+open import foundation.equivalence-extensionality using (htpy-equiv)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-coproduct-types using (map-equiv-coprod)

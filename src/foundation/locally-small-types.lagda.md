@@ -202,9 +202,9 @@ is-locally-small-Truncated-Type k =
 ### The type of propositions is locally small
 
 ```agda
-is-locally-small-UU-Prop :
+is-locally-small-type-Prop :
   {l : Level} → is-locally-small l (Prop l)
-is-locally-small-UU-Prop = is-locally-small-Truncated-Type neg-one-𝕋
+is-locally-small-type-Prop = is-locally-small-Truncated-Type neg-one-𝕋
 ```
 
 ### The type of subtypes of a small type is locally small
@@ -214,7 +214,7 @@ is-locally-small-subtype :
   {l1 l2 l3 : Level} {A : UU l1} →
   is-small l2 A → is-locally-small (l2 ⊔ l3) (subtype l3 A)
 is-locally-small-subtype H =
-  is-locally-small-Π H (λ a → is-locally-small-UU-Prop)
+  is-locally-small-Π H (λ a → is-locally-small-type-Prop)
 ```
 
 ### The type of inhabited subtypes of a small type is locally small

@@ -30,6 +30,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -87,48 +88,50 @@ module _
 
   sign-comp-Eq-Rel : Eq-Rel lzero (Fin n ≃ type-UU-Fin n X)
   pr1 sign-comp-Eq-Rel f g =
-    Id-Prop (Fin-Set 2) (zero-Fin 1) (sign-homomorphism-Fin-two n X (f ∘e inv-equiv g))
+    Id-Prop (Fin-Set 2) (zero-Fin 1) (sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
   pr1 (pr2 sign-comp-Eq-Rel) {f} =
     ap pr1
-      { x = pair (zero-Fin 1) (unit-trunc-Prop (pair nil (pair refl (right-inverse-law-equiv f))))}
-      { y = center (is-contr-parity-transposition-permutation n X (f ∘e inv-equiv f))}
-      ( eq-is-contr (is-contr-parity-transposition-permutation n X (f ∘e inv-equiv f)))
+      { x = pair (zero-Fin 1) (unit-trunc-Prop (pair nil (pair refl (left-inverse-law-equiv f))))}
+      { y = center (is-contr-parity-transposition-permutation n (Fin-UU-Fin' n) (inv-equiv f ∘e f))}
+      ( eq-is-contr (is-contr-parity-transposition-permutation n (Fin-UU-Fin' n) (inv-equiv f ∘e f)))
   pr1 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} P =
     ap pr1
-      { x = pair (zero-Fin 1) (unit-trunc-Prop (pair nil (pair refl (left-inverse-law-equiv (f ∘e inv-equiv g)))))}
-      { y = center (is-contr-parity-transposition-permutation n X (inv-equiv (f ∘e inv-equiv g) ∘e (f ∘e inv-equiv g)))}
+      { x = pair (zero-Fin 1) (unit-trunc-Prop (pair nil (pair refl (left-inverse-law-equiv (inv-equiv f ∘e g)))))}
+      { y =
+        center
+          (is-contr-parity-transposition-permutation n (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g) ∘e (inv-equiv f ∘e g)))}
       ( eq-is-contr
-        ( is-contr-parity-transposition-permutation n X
-          ( inv-equiv (f ∘e inv-equiv g) ∘e (f ∘e inv-equiv g)))) ∙
-      ( ( preserves-add-sign-homomorphism-Fin-two n X (inv-equiv (f ∘e inv-equiv g)) (f ∘e inv-equiv g)) ∙
+        ( is-contr-parity-transposition-permutation n (Fin-UU-Fin' n)
+          ( inv-equiv (inv-equiv f ∘e g) ∘e (inv-equiv f ∘e g)))) ∙
+      ( ( preserves-add-sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)) (inv-equiv f ∘e g)) ∙
         ( ( ap
-          ( add-Fin 2 (sign-homomorphism-Fin-two n X (inv-equiv (f ∘e inv-equiv g))))
+          ( add-Fin 2 (sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))))
           ( inv P)) ∙
           ( ( ap
             ( λ k →
-              mod-two-ℕ (add-ℕ (nat-Fin 2 (sign-homomorphism-Fin-two n X (inv-equiv (f ∘e inv-equiv g)))) k))
+              mod-two-ℕ (add-ℕ (nat-Fin 2 (sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) k))
             ( is-zero-nat-zero-Fin {k = 1})) ∙
-            ( ( issec-nat-Fin 1 (sign-homomorphism-Fin-two n X (inv-equiv (f ∘e inv-equiv g)))) ∙
+            ( ( issec-nat-Fin 1 (sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) ∙
               ( ap
-                ( sign-homomorphism-Fin-two n X)
-                ( ( distributive-inv-comp-equiv (inv-equiv g) f) ∙
-                  ap (λ h → h ∘e inv-equiv f) (inv-inv-equiv g)))))))
+                ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
+                ( ( distributive-inv-comp-equiv g (inv-equiv f)) ∙
+                   ap (λ h → inv-equiv g ∘e h) (inv-inv-equiv f)))))))
   pr2 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} {h} P Q =
     ( ap mod-two-ℕ
       ( ( ap (add-ℕ zero-ℕ) (inv (is-zero-nat-zero-Fin {k = 1}) ∙ ap (nat-Fin 2) Q)) ∙
         ( ap
-          ( λ k → add-ℕ k (nat-Fin 2 (sign-homomorphism-Fin-two n X (g ∘e inv-equiv h))))
+          ( λ k → add-ℕ k (nat-Fin 2 (sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv g ∘e h))))
           ( inv (is-zero-nat-zero-Fin {k = 1}) ∙ ap (nat-Fin 2) P)))) ∙
       ( ( inv
-        ( preserves-add-sign-homomorphism-Fin-two n X (f ∘e inv-equiv g) (g ∘e inv-equiv h))) ∙
+        ( preserves-add-sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g) (inv-equiv g ∘e h))) ∙
         ( ap
-          ( sign-homomorphism-Fin-two n X)
-          ( ( associative-comp-equiv (g ∘e inv-equiv h) (inv-equiv g) f) ∙
+          ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
+          ( ( associative-comp-equiv (inv-equiv g ∘e h) g (inv-equiv f)) ∙
             ( ap
-              ( λ h' → f ∘e h')
-              ( ( inv (associative-comp-equiv (inv-equiv h) g (inv-equiv g))) ∙
-                ( ( ap (λ h' → h' ∘e inv-equiv h) (left-inverse-law-equiv g)) ∙
-                  ( left-unit-law-equiv (inv-equiv h))))))))
+              ( λ h' → inv-equiv f ∘e h')
+              ( ( inv (associative-comp-equiv h (inv-equiv g) g)) ∙
+                ( ( ap (λ h' → h' ∘e h) (right-inverse-law-equiv g)) ∙
+                  ( left-unit-law-equiv h)))))))
 
   is-decidable-sign-comp-Eq-Rel : (f g : Fin n ≃ type-UU-Fin n X) →
     is-decidable (sim-Eq-Rel sign-comp-Eq-Rel f g)
@@ -136,7 +139,7 @@ module _
     has-decidable-equality-is-finite
       ( is-finite-Fin 2)
       ( zero-Fin 1)
-      ( sign-homomorphism-Fin-two n X (f ∘e inv-equiv g))
+      ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
 
   quotient-sign-comp : UU (lsuc lzero ⊔ l)
   quotient-sign-comp = equivalence-class sign-comp-Eq-Rel
@@ -154,52 +157,46 @@ module _
         ( inr star)
         ( sign-homomorphism-Fin-two
           ( number-of-elements-count eX)
-          ( X , unit-trunc-Prop (equiv-count eX))
-          ( equiv-count eX ∘e
-            inv-equiv
-              (equiv-count eX ∘e
-                transposition
-                  ( standard-2-Element-Decidable-Subtype
-                    ( has-decidable-equality-Fin (number-of-elements-count eX))
-                    ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))
+          ( Fin-UU-Fin' (number-of-elements-count eX))
+          ( inv-equiv (equiv-count eX) ∘e
+            ( equiv-count eX ∘e
+              transposition
+                ( standard-2-Element-Decidable-Subtype
+                  ( has-decidable-equality-Fin (number-of-elements-count eX))
+                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))
     lemma =
       ( inv
         ( eq-sign-homomorphism-Fin-two-transposition
           ( number-of-elements-count eX)
-          ( Fin (number-of-elements-count eX) , (unit-trunc-Prop id-equiv))
+          ( Fin-UU-Fin' (number-of-elements-count eX))
           ( standard-2-Element-Decidable-Subtype
             ( has-decidable-equality-Fin (number-of-elements-count eX))
             ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
-        ( ( inv
-          ( preserves-conjugation-sign-homomorphism-Fin-two
+        ( ap
+          ( sign-homomorphism-Fin-two
             ( number-of-elements-count eX)
-            ( Fin (pr1 eX) , unit-trunc-Prop id-equiv)
-            ( X , (unit-trunc-Prop (equiv-count eX)))
-            ( transposition
-              ( standard-2-Element-Decidable-Subtype
-                ( has-decidable-equality-Fin (pr1 eX))
-                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (pr1 eX) ineq)))))
-            ( equiv-count eX))) ∙
-          ( ap
-            ( λ h →
-              sign-homomorphism-Fin-two
-                ( number-of-elements-count eX)
-                ( X , unit-trunc-Prop (equiv-count eX))
-                ( equiv-count eX ∘e h))
-            ( ( ap (λ h → h ∘e inv-equiv (equiv-count eX))
-              ( inv
-                ( own-inverse-is-involution
-                  ( is-involution-map-transposition
-                    ( standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-Fin (number-of-elements-count eX))
-                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (pr1 eX) ineq)))))))) ∙
-              ( inv
-                ( distributive-inv-comp-equiv
+            ( Fin-UU-Fin' (number-of-elements-count eX)))
+            ( ( inv
+              ( left-unit-law-equiv
+                ( transposition
+                  ( standard-2-Element-Decidable-Subtype
+                    ( has-decidable-equality-Fin (number-of-elements-count eX))
+                    ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))) ∙
+              ( ( ap
+                ( λ h →
+                  h ∘e
+                    transposition
+                      (standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-Fin (number-of-elements-count eX))
+                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+                ( inv (left-inverse-law-equiv (equiv-count eX)))) ∙
+                ( associative-comp-equiv
                   ( transposition
                     ( standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-Fin (number-of-elements-count eX))
-                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
-                  ( equiv-count eX))))))
+                      ( has-decidable-equality-Fin (pr1 eX))
+                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (pr1 eX) ineq)))))
+                  ( equiv-count eX)
+                  ( inv-equiv (equiv-count eX))))))
 
   not-sign-comp-transposition-count :
     (Y : 2-Element-Decidable-Subtype l X) →
@@ -213,23 +210,28 @@ module _
     neq-inl-inr
       ( P ∙
         ( ( ap
-          ( sign-homomorphism-Fin-two
-            ( number-of-elements-count eX)
-            ( X , unit-trunc-Prop (equiv-count eX)))
+          ( sign-homomorphism-Fin-two (number-of-elements-count eX) (Fin-UU-Fin' (number-of-elements-count eX)))
           ( ( ap
-            ( λ h → ((transposition Y ∘e equiv-count eX) ∘e h))
-            ( distributive-inv-comp-equiv
-              ( transposition Y ∘e equiv-count eX)
-              ( transposition Y))) ∙
-            ( ( compose-equiv-compose-inv-equiv
-              ( transposition Y ∘e equiv-count eX)
-              ( inv-equiv (transposition Y))) ∙
-              ( own-inverse-is-involution
-                ( is-involution-map-transposition Y))))) ∙
-          ( eq-sign-homomorphism-Fin-two-transposition
+            ( λ h → inv-equiv (transposition Y ∘e equiv-count eX) ∘e h)
+            ( ( inv (associative-comp-equiv (equiv-count eX) (transposition Y) (transposition Y))) ∙
+              ( ap (λ h → h ∘e equiv-count eX) (eq-htpy-equiv (is-involution-map-transposition Y)) ∙
+                ( left-unit-law-equiv (equiv-count eX))))) ∙
+            ( ( ap (λ h → h ∘e equiv-count eX) (distributive-inv-comp-equiv (equiv-count eX) (transposition Y))) ∙
+              ( ( associative-comp-equiv (equiv-count eX) (inv-equiv (transposition Y)) (inv-equiv (equiv-count eX))) ∙
+                ( ( ap
+                  ( λ h → inv-equiv (equiv-count eX) ∘e (h ∘e equiv-count eX))
+                  ( own-inverse-is-involution (is-involution-map-transposition Y))) ∙
+                  ( ap (λ h → inv-equiv (equiv-count eX) ∘e (transposition Y ∘e h)) (inv (inv-inv-equiv (equiv-count eX)))))))) ∙
+          ( ( preserves-conjugation-sign-homomorphism-Fin-two
             ( number-of-elements-count eX)
             ( X , unit-trunc-Prop (equiv-count eX))
-            ( Y))))
+            ( Fin-UU-Fin' (number-of-elements-count eX))
+            ( transposition Y)
+            ( inv-equiv (equiv-count eX))) ∙
+            ( eq-sign-homomorphism-Fin-two-transposition
+              ( number-of-elements-count eX)
+              ( X , unit-trunc-Prop (equiv-count eX))
+              ( Y))))))
 
   inv-Fin-2-quotient-sign-comp-count :
     ( T : quotient-sign-comp (number-of-elements-count eX) (pair X (unit-trunc-Prop (equiv-count eX)))) →
@@ -255,7 +257,7 @@ module _
         transposition
           ( standard-2-Element-Decidable-Subtype
             ( has-decidable-equality-Fin (number-of-elements-count eX))
-            ( pr2 (pr2 ( two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
   pr2 equiv-Fin-2-quotient-sign-comp-count =
     is-equiv-has-inverse
       (λ T →
@@ -267,7 +269,8 @@ module _
                 ( zero-Fin 1)
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( pair X (unit-trunc-Prop (equiv-count eX))) (a ∘e inv-equiv b)))
+                  ( Fin-UU-Fin' (number-of-elements-count eX))
+                  ( inv-equiv a ∘e b)))
             ( T)
             ( equiv-count eX)))
       ( λ T →
@@ -281,7 +284,8 @@ module _
                 ( zero-Fin 1)
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( pair X (unit-trunc-Prop (equiv-count eX))) (a ∘e inv-equiv b)))
+                  ( Fin-UU-Fin' (number-of-elements-count eX))
+                  ( inv-equiv a ∘e b)))
             ( T)
             ( equiv-count eX)))
       ( λ k →
@@ -295,7 +299,8 @@ module _
                 ( zero-Fin 1)
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( pair X (unit-trunc-Prop (equiv-count eX))) (a ∘e inv-equiv b)))
+                  ( Fin-UU-Fin' (number-of-elements-count eX))
+                  ( inv-equiv a ∘e b)))
             ( pr1 equiv-Fin-2-quotient-sign-comp-count k)
             ( equiv-count eX)))
     where
@@ -318,8 +323,8 @@ module _
         ( k)
         ( sign-homomorphism-Fin-two
           ( number-of-elements-count eX)
-          ( pair X (unit-trunc-Prop (equiv-count eX)))
-          ( f ∘e inv-equiv (equiv-count eX))) →
+          ( Fin-UU-Fin' (number-of-elements-count eX))
+          ( inv-equiv f ∘e equiv-count eX)) →
       is-in-equivalence-class
         ( sign-comp-Eq-Rel
           ( number-of-elements-count eX)
@@ -366,59 +371,51 @@ module _
             ( ( inv
               ( preserves-add-sign-homomorphism-Fin-two
                 ( number-of-elements-count eX)
-                ( pair X (unit-trunc-Prop (equiv-count eX)))
-                ( f ∘e inv-equiv (equiv-count eX))
-                ( equiv-count eX ∘e
-                  inv-equiv
-                    ( equiv-count eX ∘e
-                      transposition
-                        ( standard-2-Element-Decidable-Subtype
-                          ( has-decidable-equality-Fin
-                            ( number-of-elements-count eX))
-                            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))) ∙
+                ( Fin-UU-Fin' (number-of-elements-count eX))
+                ( inv-equiv f ∘e equiv-count eX)
+                ( inv-equiv (equiv-count eX) ∘e
+                  ( equiv-count eX ∘e
+                    transposition
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-Fin
+                          ( number-of-elements-count eX))
+                          ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))) ∙
                ap
                 ( sign-homomorphism-Fin-two
                   ( number-of-elements-count eX)
-                  ( pair X (unit-trunc-Prop (equiv-count eX))))
+                  ( Fin-UU-Fin' (number-of-elements-count eX)))
                 ( ( associative-comp-equiv
-                  ( equiv-count eX ∘e
-                    inv-equiv
-                      ( equiv-count eX ∘e
-                        transposition
-                          ( standard-2-Element-Decidable-Subtype
-                            (has-decidable-equality-Fin (number-of-elements-count eX))
-                            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
-                  ( inv-equiv (equiv-count eX))
-                  ( f)) ∙
-                  ( ap
-                    ( λ h → f ∘e h)
+                  ( inv-equiv (equiv-count eX) ∘e
+                    ( equiv-count eX ∘e
+                      transposition
+                        ( standard-2-Element-Decidable-Subtype
+                          ( has-decidable-equality-Fin (number-of-elements-count eX))
+                          ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                  ( equiv-count eX)
+                  ( inv-equiv f)) ∙
+                   ap
+                    ( λ h → inv-equiv f ∘e (equiv-count eX ∘e h))
                     ( inv
                       ( associative-comp-equiv
-                        ( inv-equiv
-                          ( equiv-count eX ∘e
-                            transposition
-                              ( standard-2-Element-Decidable-Subtype
-                                ( has-decidable-equality-Fin (number-of-elements-count eX))
-                              ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                        ( transposition
+                          ( standard-2-Element-Decidable-Subtype
+                            ( has-decidable-equality-Fin (number-of-elements-count eX))
+                            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
                         ( equiv-count eX)
                         ( inv-equiv (equiv-count eX))) ∙
                       ( ( ap
                         ( λ h →
                           h ∘e
-                            inv-equiv
-                              ( equiv-count eX ∘e
-                                transposition
-                                  ( standard-2-Element-Decidable-Subtype
-                                    ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                    (pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
+                            ( transposition
+                              ( standard-2-Element-Decidable-Subtype
+                                ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                (pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))
                         ( left-inverse-law-equiv (equiv-count eX))) ∙
-                        ( left-unit-law-equiv
-                          ( inv-equiv
-                            ( equiv-count eX ∘e
-                              transposition
-                                ( standard-2-Element-Decidable-Subtype
-                                  ( has-decidable-equality-Fin (number-of-elements-count eX))
-                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))))))))
+                          ( left-unit-law-equiv
+                            ( transposition
+                              ( standard-2-Element-Decidable-Subtype
+                                ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))))))))
     retr-Fin-2-quotient-sign-comp-count :
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
@@ -484,8 +481,8 @@ module _
                   ( p)))
               ( sign-homomorphism-Fin-two
                 ( number-of-elements-count eX)
-                ( pair X (unit-trunc-Prop (equiv-count eX)))
-                ( t ∘e inv-equiv (equiv-count eX)))
+                ( Fin-UU-Fin' (number-of-elements-count eX))
+                ( inv-equiv t ∘e equiv-count eX))
               ( refl)))
     sec-Fin-2-quotient-sign-comp-count : (k : Fin 2) →
       ( D : is-decidable
@@ -511,45 +508,70 @@ module _
     sec-Fin-2-quotient-sign-comp-count (inr star) (inl D) =
       ex-falso
         ( neq-inr-inl
-          (lemma ∙
+          ( lemma ∙
             ( inv
               ( D ∙
-                 ap
+                ( ap
                   ( sign-homomorphism-Fin-two
                     ( number-of-elements-count eX)
-                    ( pair X (unit-trunc-Prop (equiv-count eX))))
-                  ( ( associative-comp-equiv
-                    ( inv-equiv (equiv-count eX))
-                    ( transposition
-                      ( standard-2-Element-Decidable-Subtype
-                        ( has-decidable-equality-Fin (number-of-elements-count eX))
-                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
-                    ( equiv-count eX)) ∙
-                    ( ap
-                      ( λ h → equiv-count eX ∘e h)
+                    ( Fin-UU-Fin' (number-of-elements-count eX)))
+                  ( ( ap
+                    ( λ h → h ∘e equiv-count eX)
+                    ( distributive-inv-comp-equiv
+                      ( transposition
+                        ( standard-2-Element-Decidable-Subtype
+                          ( has-decidable-equality-Fin (number-of-elements-count eX))
+                          ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+                      ( equiv-count eX))) ∙
+                    ( ( associative-comp-equiv
+                      ( equiv-count eX)
+                      ( inv-equiv (equiv-count eX))
+                      ( inv-equiv
+                        ( transposition
+                          (standard-2-Element-Decidable-Subtype
+                            ( has-decidable-equality-Fin (number-of-elements-count eX))
+                            ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))) ∙
                       ( ( ap
-                        ( λ h → h ∘e inv-equiv (equiv-count eX))
-                        { x =
-                          transposition
-                            (standard-2-Element-Decidable-Subtype
-                              ( has-decidable-equality-Fin
-                                ( number-of-elements-count eX))
-                                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))}
-                        ( inv
-                          ( own-inverse-is-involution
-                            ( is-involution-map-transposition
-                              ( standard-2-Element-Decidable-Subtype
-                                ( has-decidable-equality-Fin
-                                  ( number-of-elements-count eX))
-                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))))) ∙
-                        ( inv
-                          ( distributive-inv-comp-equiv
+                        ( λ h →
+                          ( inv-equiv
                             ( transposition
                               ( standard-2-Element-Decidable-Subtype
-                                ( has-decidable-equality-Fin
-                                  ( number-of-elements-count eX))
-                                  ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
-                            ( equiv-count eX))))))))))
+                                ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∘e
+                            ( h))
+                        ( left-inverse-law-equiv (equiv-count eX))) ∙
+                        ( ( right-unit-law-equiv
+                          ( inv-equiv
+                            ( transposition
+                              ( standard-2-Element-Decidable-Subtype
+                                ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq))))))) ∙
+                          ( ( own-inverse-is-involution
+                            ( is-involution-map-transposition
+                              ( standard-2-Element-Decidable-Subtype
+                                ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
+                            ( inv
+                              ( left-unit-law-equiv
+                                ( transposition
+                                  ( standard-2-Element-Decidable-Subtype
+                                    ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                    ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))) ∙
+                              ( ( ap
+                                ( λ h →
+                                  h ∘e
+                                    transposition
+                                      ( standard-2-Element-Decidable-Subtype
+                                        ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                        ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+                                ( inv (left-inverse-law-equiv (equiv-count eX)))) ∙
+                                ( associative-comp-equiv
+                                  ( transposition
+                                    ( standard-2-Element-Decidable-Subtype
+                                      ( has-decidable-equality-Fin (number-of-elements-count eX))
+                                      ( pr2 (pr2 (two-distinct-elements-leq-2-Fin (number-of-elements-count eX) ineq)))))
+                                  ( equiv-count eX)
+                                  ( inv-equiv (equiv-count eX)))))))))))))))
     sec-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
 
 module _
@@ -610,26 +632,22 @@ module _
       (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
       (f f' : (Fin n ≃ type-UU-Fin n X)) →
       Id
-        ( sign-homomorphism-Fin-two n X (f ∘e inv-equiv f'))
-        ( sign-homomorphism-Fin-two n X'
-          ( ( map-simpson-comp-equiv X X' e f) ∘e
-            ( inv-equiv (map-simpson-comp-equiv X X' e f'))))
+        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e f'))
+        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n)
+          ( ( inv-equiv ( map-simpson-comp-equiv X X' e f)) ∘e
+            ( map-simpson-comp-equiv X X' e f')))
     lemma-sign-comp X X' e f f' = 
-      inv
-        ( preserves-conjugation-sign-homomorphism-Fin-two n X X'
-          ( f ∘e inv-equiv f')
-          ( e)) ∙
-        ( ap
-          ( sign-homomorphism-Fin-two n X')
-          ( ( ap
-            ( λ h → e ∘e h)
-            ( ( associative-comp-equiv ( inv-equiv e) (inv-equiv f') f) ∙
-              ( ap (λ h → f ∘e h) (inv (distributive-inv-comp-equiv f' e)))) ∙
-            ( inv
-              ( associative-comp-equiv
-                ( inv-equiv (map-simpson-comp-equiv X X' e f'))
-                ( f)
-                ( e))))))
+       ap
+        ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
+        ( ( ap
+          ( λ h → inv-equiv f ∘e h)
+          ( inv (left-unit-law-equiv f') ∙
+            ( ( ap (λ h → h ∘e f') (inv (left-inverse-law-equiv e))) ∙
+              ( associative-comp-equiv f' e (inv-equiv e))))) ∙
+          ( ( inv (associative-comp-equiv (e ∘e f') (inv-equiv e) (inv-equiv f))) ∙
+            ( ap
+              ( λ h → h ∘e map-simpson-comp-equiv X X' e f')
+              ( inv (distributive-inv-comp-equiv f e)))))
 
   preserves-sign-comp-simpson-comp-equiv :
     (X X' : UU-Fin l n) ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →

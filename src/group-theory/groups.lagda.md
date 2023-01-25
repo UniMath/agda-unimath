@@ -392,6 +392,36 @@ module _
         ＝ right-div-Group y x                           by ap (mul-Group' (inv-Group x)) (inv-inv-Group y)
 ```
 
+### The multiple of `x⁻¹y` and `y⁻¹z` is `x⁻¹z`
+
+```agda
+  mul-left-div-Group :
+    (x y z : type-Group) →
+    mul-Group (left-div-Group x y) (left-div-Group y z) ＝ left-div-Group x z
+  mul-left-div-Group x y z =
+    equational-reasoning
+      mul-Group (left-div-Group x y) (left-div-Group y z)
+      ＝ mul-Group (inv-Group x) (mul-Group y (left-div-Group y z))
+        by associative-mul-Group (inv-Group x) y (left-div-Group y z)
+      ＝ left-div-Group x z
+        by ap (mul-Group (inv-Group x)) (issec-mul-inv-Group y z)
+```
+
+### The multiple of `xy⁻¹` and `yz⁻¹` is `xz⁻¹`
+
+```agda
+  mul-right-div-Group :
+    (x y z : type-Group) →
+    mul-Group (right-div-Group x y) (right-div-Group y z) ＝ right-div-Group x z
+  mul-right-div-Group x y z =
+    equational-reasoning
+      mul-Group (right-div-Group x y) (right-div-Group y z)
+      ＝ mul-Group x (mul-Group (inv-Group y) (right-div-Group y z))
+        by associative-mul-Group x (inv-Group y) (right-div-Group y z)
+      ＝ right-div-Group x z
+        by ap (mul-Group x) (isretr-mul-inv-Group y (inv-Group z))
+```
+
 ## Properties
 
 ### For any semigroup, being a group is a property

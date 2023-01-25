@@ -7,23 +7,19 @@ title: Isomorphisms in precategories
 
 module category-theory.isomorphisms-precategories where
 
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat;
-    id-hom-Precat; hom-Precat; right-unit-law-comp-hom-Precat;
-    left-unit-law-comp-hom-Precat; assoc-comp-hom-Precat; comp-hom-Precat';
-    is-set-type-hom-Precat)
+open import category-theory.precategories
     
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
-open import foundation.propositions using
-  ( is-proof-irrelevant; prod-Prop; is-prop; Prop;
-    is-prop-is-proof-irrelevant)
-open import foundation.sets using (Id-Prop; is-set; Set)
-open import foundation.subtypes using
-  ( eq-type-subtype; type-subtype; is-set-type-subtype; inclusion-subtype;
-    is-in-subtype-inclusion-subtype)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equational-reasoning
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -47,6 +43,21 @@ module _
       ( λ g →
         (comp-hom-Precat C f g ＝ id-hom-Precat C) ×
         (comp-hom-Precat C g f ＝ id-hom-Precat C))
+
+  hom-inv-is-iso-Precat :
+    {x y : obj-Precat C} {f : type-hom-Precat C x y} →
+    is-iso-Precat f → type-hom-Precat C y x
+  hom-inv-is-iso-Precat H = pr1 H
+
+  issec-hom-inv-is-iso-Precat :
+    {x y : obj-Precat C} {f : type-hom-Precat C x y} (H : is-iso-Precat f) →
+    (comp-hom-Precat C f (hom-inv-is-iso-Precat H)) ＝ id-hom-Precat C
+  issec-hom-inv-is-iso-Precat H = pr1 (pr2 H)
+
+  isretr-hom-inv-is-iso-Precat :
+    {x y : obj-Precat C} {f : type-hom-Precat C x y} (H : is-iso-Precat f) →
+    (comp-hom-Precat C (hom-inv-is-iso-Precat H) f) ＝ id-hom-Precat C
+  isretr-hom-inv-is-iso-Precat H = pr2 (pr2 H)
 
   abstract
     is-proof-irrelevant-is-iso-Precat :
@@ -195,4 +206,54 @@ module _
   iso-Precat-Set : (x y : obj-Precat C) → Set l2
   pr1 (iso-Precat-Set x y) = iso-Precat C x y
   pr2 (iso-Precat-Set x y) = is-set-iso-Precat x y
+```
+
+### A morphism is an isomorphism if and only if precomposition by it is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precat l1 l2) {x y : obj-Precat C}
+  (f : type-hom-Precat C x y)
+  where
+
+  precomp-hom-inv-is-iso-Precat :
+    (H : is-iso-Precat C f) (z : obj-Precat C) →
+    type-hom-Precat C x z → type-hom-Precat C y z
+  precomp-hom-inv-is-iso-Precat H z =
+    precomp-hom-Precat C (hom-inv-is-iso-Precat C H) z
+
+  issec-precomp-hom-inv-is-iso-Precat :
+    (H : is-iso-Precat C f) (z : obj-Precat C) →
+    ( precomp-hom-Precat C f z ∘ precomp-hom-inv-is-iso-Precat H z) ~ id
+  issec-precomp-hom-inv-is-iso-Precat H z g =
+    equational-reasoning
+      comp-hom-Precat C (comp-hom-Precat C g (hom-inv-is-iso-Precat C H)) f
+      ＝ comp-hom-Precat C g (comp-hom-Precat C (hom-inv-is-iso-Precat C H) f)
+        by assoc-comp-hom-Precat C g (hom-inv-is-iso-Precat C H) f
+      ＝ comp-hom-Precat C g (id-hom-Precat C)
+        by ap (comp-hom-Precat C g) (isretr-hom-inv-is-iso-Precat C H)
+      ＝ g
+        by right-unit-law-comp-hom-Precat C g
+
+  isretr-precomp-hom-inv-is-iso-Precat :
+    (H : is-iso-Precat C f) (z : obj-Precat C) →
+    (precomp-hom-inv-is-iso-Precat H z ∘ precomp-hom-Precat C f z) ~ id
+  isretr-precomp-hom-inv-is-iso-Precat H z g =
+    equational-reasoning
+      comp-hom-Precat C (comp-hom-Precat C g f) (hom-inv-is-iso-Precat C H)
+      ＝ comp-hom-Precat C g (comp-hom-Precat C f (hom-inv-is-iso-Precat C H))
+        by assoc-comp-hom-Precat C g f (hom-inv-is-iso-Precat C H)
+      ＝ comp-hom-Precat C g (id-hom-Precat C)
+        by ap (comp-hom-Precat C g) (issec-hom-inv-is-iso-Precat C H)
+      ＝ g
+        by right-unit-law-comp-hom-Precat C g
+
+  is-equiv-precomp-is-iso-Precat :
+    (H : is-iso-Precat C f) (z : obj-Precat C) →
+    is-equiv (precomp-hom-Precat C f z)
+  is-equiv-precomp-is-iso-Precat H z =
+    is-equiv-has-inverse
+      ( precomp-hom-inv-is-iso-Precat H z)
+      ( issec-precomp-hom-inv-is-iso-Precat H z)
+      ( isretr-precomp-hom-inv-is-iso-Precat H z)
 ```

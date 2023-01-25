@@ -67,7 +67,8 @@ module _
   is-set-type-hom-Cat : (x y : obj-Cat) → is-set (type-hom-Cat x y)
   is-set-type-hom-Cat = is-set-type-hom-Precat precat-Cat
 
-  comp-hom-Cat : {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
+  comp-hom-Cat :
+    {x y z : obj-Cat} → type-hom-Cat y z → type-hom-Cat x y → type-hom-Cat x z
   comp-hom-Cat = comp-hom-Precat precat-Cat
 
   assoc-comp-hom-Cat :
@@ -98,15 +99,6 @@ module _
 The precategory of sets and functions in a given universe is a category.
 
 ```agda
-Set-Precat : (l : Level) → Precat (lsuc l) l
-pr1 (Set-Precat l) = Set l
-pr1 (pr2 (Set-Precat l)) = hom-Set
-pr1 (pr1 (pr2 (pr2 (Set-Precat l)))) g f = g ∘ f
-pr2 (pr1 (pr2 (pr2 (Set-Precat l)))) h g f = refl
-pr1 (pr2 (pr2 (pr2 (Set-Precat l)))) x = id
-pr1 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
-pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precat l))))) f = refl
-
 id-iso-Set : {l : Level} {x : Set l} → iso-Set x x
 id-iso-Set {l} {x} = id-iso-Precat (Set-Precat l) {x}
 

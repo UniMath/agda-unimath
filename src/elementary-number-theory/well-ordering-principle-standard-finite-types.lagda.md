@@ -30,8 +30,9 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.empty-types using
   ( ex-falso; ind-empty; empty-Prop; is-empty-type-trunc-Prop)
 open import foundation.equivalences using
-  ( _∘e_; htpy-eq-equiv; id-equiv; map-equiv; map-inv-equiv;
+  ( _∘e_; id-equiv; map-equiv; map-inv-equiv;
     right-inverse-law-equiv)
+open import foundation.equivalence-extensionality using (htpy-eq-equiv)
 open import foundation.existential-quantification using (∃)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-coproduct-types using (equiv-coprod)
