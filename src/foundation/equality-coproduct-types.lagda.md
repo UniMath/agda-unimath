@@ -3,35 +3,27 @@ title: Equality of coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equality-coproduct-types where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-total-path)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; ind-coprod;
-    is-injective-inl; is-injective-inr; neq-inl-inr; neq-inr-inl)
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.decidable-types using (is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-types using
-  ( empty; is-empty; is-equiv-is-empty'; is-equiv-is-empty; is-trunc-is-empty)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; _∘e_; map-equiv; is-equiv-left-factor)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; _＝_; refl; ap; ap-comp; inv)
-open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
-open import foundation.sets using (is-set; Set)
-open import foundation.truncated-types using (is-trunc; is-trunc-equiv)
-open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.universe-levels
 ```
 
 ## Idea
