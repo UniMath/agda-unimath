@@ -59,7 +59,8 @@ open import foundation.equality-dependent-pair-types using
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; is-equiv-has-inverse; id-equiv; map-equiv; map-inv-equiv;
     left-unit-law-equiv; right-unit-law-equiv; equiv-comp; is-equiv; right-inverse-law-equiv;
-    left-inverse-law-equiv; eq-htpy-equiv; distributive-inv-comp-equiv)
+    left-inverse-law-equiv; distributive-inv-comp-equiv)
+open import foundation.equivalence-extensionality using (eq-htpy-equiv)
 open import foundation.equivalence-classes using
   ( equivalence-class; class; equivalence-class-Set;
     is-in-equivalence-class;

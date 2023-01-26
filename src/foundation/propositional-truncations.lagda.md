@@ -34,6 +34,7 @@ open import foundation.universal-property-propositional-truncation using
     is-propositional-truncation-prod)
 open import foundation.universe-levels using (Level; UU)
 
+open import foundation-core.coproduct-types using (_+_; ind-coprod; inl)
 open import foundation-core.sets using (Set)
 open import foundation-core.truncated-types using
   ( is-trunc; Truncated-Type)
@@ -364,4 +365,45 @@ inv-distributive-trunc-prod-Prop :
 pr1 inv-distributive-trunc-prod-Prop = map-inv-distributive-trunc-prod-Prop
 pr2 inv-distributive-trunc-prod-Prop =
   is-equiv-map-inv-distributive-trunc-prod-Prop
+```
+
+### Propositional truncations of coproducts of types with themselves
+
+```agda
+module _ {l : Level} {A : UU l} where
+  map-trunc-Prop-diagonal-coprod : type-trunc-Prop (A + A) → type-trunc-Prop A
+  map-trunc-Prop-diagonal-coprod =
+    map-universal-property-trunc-Prop
+      ( trunc-Prop A)
+      ( unit-trunc ∘
+        ind-coprod (λ _ → A) id id)
+
+  map-inv-trunc-Prop-diagonal-coprod : type-trunc-Prop A → type-trunc-Prop (A + A)
+  map-inv-trunc-Prop-diagonal-coprod =
+    map-universal-property-trunc-Prop
+      ( trunc-Prop (A + A))
+      ( unit-trunc ∘ (inl ∘ id))
+
+  abstract
+    is-equiv-map-trunc-Prop-diagonal-coprod : is-equiv map-trunc-Prop-diagonal-coprod
+    is-equiv-map-trunc-Prop-diagonal-coprod =
+      is-equiv-is-prop
+        is-prop-type-trunc-Prop
+        is-prop-type-trunc-Prop
+        map-inv-trunc-Prop-diagonal-coprod
+
+    is-equiv-map-inv-trunc-Prop-diagonal-coprod : is-equiv map-inv-trunc-Prop-diagonal-coprod
+    is-equiv-map-inv-trunc-Prop-diagonal-coprod =
+      is-equiv-is-prop
+        is-prop-type-trunc-Prop
+        is-prop-type-trunc-Prop
+        map-trunc-Prop-diagonal-coprod
+
+  equiv-trunc-Prop-diagonal-coprod : (type-trunc-Prop (A + A)) ≃ type-trunc-Prop A
+  pr1 equiv-trunc-Prop-diagonal-coprod = map-trunc-Prop-diagonal-coprod
+  pr2 equiv-trunc-Prop-diagonal-coprod = is-equiv-map-trunc-Prop-diagonal-coprod
+
+  inv-equiv-trunc-Prop-diagonal-coprod : (type-trunc-Prop A) ≃ type-trunc-Prop (A + A)
+  pr1 inv-equiv-trunc-Prop-diagonal-coprod = map-inv-trunc-Prop-diagonal-coprod
+  pr2 inv-equiv-trunc-Prop-diagonal-coprod = is-equiv-map-inv-trunc-Prop-diagonal-coprod
 ```

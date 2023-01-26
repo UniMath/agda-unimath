@@ -29,9 +29,11 @@ open import foundation-core.universe-levels using (Level; UU; _⊔_)
 open import foundation.equivalences using
   ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
     is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
-    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-property-is-equiv)
+    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-property-is-equiv;
+    _≃_; map-equiv; is-equiv-htpy-equiv; inv-equiv; isretr-map-inv-equiv)
 open import foundation.identity-types using
-  ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp)
+  ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp;
+    _＝_; refl; _∙_; inv)
 open import foundation.propositions using (is-prop; is-prop-Π; Prop)
 open import foundation.truncated-maps using
   ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback;
@@ -250,6 +252,26 @@ module _
       ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
     is-emb-sec-ap sec-ap-f x y =
       fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
+```
+
+### If there is an equivalence `(f x = f y) ≃ (x = y)` that sends `refl` to `refl`, then f is an embedding
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-emb-equiv-refl-to-refl :
+      (e : (x y : A) → (f x ＝ f y) ≃ (x ＝ y)) →
+      ((x : A) → map-equiv (e x x) refl ＝ refl) →
+      is-emb f
+    is-emb-equiv-refl-to-refl e p x y =
+      is-equiv-htpy-equiv
+        (inv-equiv (e x y))
+        λ { refl →
+              inv (isretr-map-inv-equiv (e x x) refl) ∙
+              ap (map-equiv (inv-equiv (e x x))) (p x) }
 ```
 
 ### Embeddings are closed under pullback

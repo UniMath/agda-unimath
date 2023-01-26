@@ -10,8 +10,9 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; is-contr-total-htpy-equiv; htpy-equiv; is-equiv;
-    map-inv-is-equiv; id-equiv; _∘e_)
+  ( _≃_; map-equiv; is-equiv; map-inv-is-equiv; id-equiv; _∘e_)
+open import foundation.equivalence-extensionality using
+  ( htpy-equiv; is-contr-total-htpy-equiv)
 open import foundation.functoriality-dependent-function-types using
   ( equiv-map-Π)
 open import foundation.functions using (id)

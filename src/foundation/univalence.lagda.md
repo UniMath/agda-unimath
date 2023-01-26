@@ -21,7 +21,8 @@ open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
   ( _≃_; map-inv-is-equiv; id-equiv; is-equiv; _∘e_;
-    eq-htpy-equiv; map-equiv; right-inverse-law-equiv; inv-equiv)
+    map-equiv; right-inverse-law-equiv; inv-equiv)
+open import foundation.equivalence-extensionality using (eq-htpy-equiv)
 open import foundation.injective-maps using (is-injective-map-equiv)
 ```
 

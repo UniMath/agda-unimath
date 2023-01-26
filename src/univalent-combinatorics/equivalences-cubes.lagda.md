@@ -14,8 +14,9 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_;
-    is-contr-total-htpy-equiv; htpy-equiv)
+  ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_)
+open import foundation.equivalence-extensionality using
+  ( htpy-equiv; is-contr-total-htpy-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)

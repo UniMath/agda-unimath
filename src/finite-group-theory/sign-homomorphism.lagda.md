@@ -35,9 +35,10 @@ open import foundation.equivalence-classes using
     is-in-equivalence-class;
     eq-effective-quotient'; is-prop-is-in-equivalence-class)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
+  ( _≃_; _∘e_; map-equiv; inv-equiv; id-equiv; map-inv-equiv; inv-inv-equiv;
     right-inverse-law-equiv; left-inverse-law-equiv; distributive-inv-comp-equiv; is-equiv-has-inverse;
     right-unit-law-equiv; left-unit-law-equiv)
+open import foundation.equivalence-extensionality using (eq-htpy-equiv)
 open import foundation.equivalence-relations using (Eq-Rel; refl-Eq-Rel)
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functoriality-propositional-truncation using (map-trunc-Prop)
