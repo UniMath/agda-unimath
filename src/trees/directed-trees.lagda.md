@@ -11,7 +11,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
-open import graph-theory.trails-directed-graphs
+open import graph-theory.walks-directed-graphs
 ```
 
 ## Idea
@@ -26,7 +26,7 @@ is-directed-tree-Graph-Prop :
 is-directed-tree-Graph-Prop G r =
   Π-Prop
     ( vertex-Graph G)
-    ( λ x → is-contr-Prop (trail-Graph G x r))
+    ( λ x → is-contr-Prop (walk-Graph G x r))
 
 is-directed-tree-Graph :
   {l1 l2 : Level} (G : Graph l1 l2) (r : vertex-Graph G) → UU (l1 ⊔ l2)
@@ -38,4 +38,24 @@ Directed-Tree l1 l2 =
     ( λ G →
       Σ ( vertex-Graph G)
         ( λ r → is-directed-tree-Graph G r))
+
+module _
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  where
+
+  graph-Directed-Tree : Graph l1 l2
+  graph-Directed-Tree = pr1 T
+
+  node-Directed-Tree : UU l1
+  node-Directed-Tree = vertex-Graph graph-Directed-Tree
+
+  edge-Directed-Tree : (x y : node-Directed-Tree) → UU l2
+  edge-Directed-Tree = edge-Graph graph-Directed-Tree
+
+  root-Directed-Tree : node-Directed-Tree
+  root-Directed-Tree = pr1 (pr2 T)
+
+  is-directed-tree-Directed-Tree :
+    is-directed-tree-Graph graph-Directed-Tree root-Directed-Tree
+  is-directed-tree-Directed-Tree = pr2 (pr2 T)
 ```
