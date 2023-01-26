@@ -3,7 +3,7 @@ title: Directed trees
 ---
 
 ```agda
-module graph-theory.directed-trees where
+module trees.directed-trees where
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

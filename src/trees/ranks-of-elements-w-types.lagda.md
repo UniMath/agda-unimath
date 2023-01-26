@@ -3,27 +3,21 @@ title: Ranks of elements in W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.ranks-of-elements-w-types where
 
-module foundation.ranks-of-elements-w-types where
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
-open import foundation.empty-types using
-  ( empty; empty-Prop; is-empty; ex-falso)
-open import foundation.existential-quantification using
-  ( exists-Prop; exists; intro-exists; ∃; intro-∃)
-open import foundation.identity-types using (tr; inv; refl)
-open import foundation.inequality-w-types using
-  ( _le-𝕎_; le-∈-𝕎; propagate-le-𝕎)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( unit-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; prod-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.w-types using (𝕎; tree-𝕎; constant-𝕎; is-constant-𝕎)
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 ```
 
 ## Idea
