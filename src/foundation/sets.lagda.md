@@ -16,12 +16,14 @@ open import foundation-core.embeddings using (is-emb; _↪_)
 open import foundation-core.equivalences using (_≃_; is-equiv)
 open import foundation-core.functions using (precomp)
 open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; Prop)
+open import foundation-core.propositions using (is-prop; Prop; is-prop-Σ)
 open import foundation-core.truncation-levels using (zero-𝕋; neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
 
 open import foundation.contractible-types using
   ( is-contr; is-trunc-is-contr)
+open import foundation.propositional-maps using
+  ( is-emb-is-prop-map)
 open import foundation.subuniverses using
   ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
@@ -233,4 +235,14 @@ abstract
   is-set-emb :
     {i j : Level} {A : UU i} {B : UU j} (f : A ↪ B) → is-set B → is-set A
   is-set-emb = is-trunc-emb neg-one-𝕋
+```
+
+### Any function from a proposition into a set is an embedding
+
+```agda
+module _ {i j} {A : UU i} {B : UU j} where
+
+  is-emb-is-prop-is-set : is-prop A → is-set B → {f : A → B} → is-emb f
+  is-emb-is-prop-is-set is-prop-A is-set-B {f} =
+    is-emb-is-prop-map (λ b → is-prop-Σ is-prop-A (λ a → is-set-B (f a) b))
 ```

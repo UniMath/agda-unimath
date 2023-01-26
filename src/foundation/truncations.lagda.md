@@ -36,7 +36,8 @@ open import foundation.truncated-types using
     is-trunc-succ-is-trunc; type-equiv-Truncated-Type;
     Truncated-Type-Truncated-Type; extensionality-Truncated-Type;
     Π-Truncated-Type'; truncated-type-succ-Truncated-Type;
-    Id-Truncated-Type; Σ-Truncated-Type; Π-Truncated-Type)
+    Id-Truncated-Type; Σ-Truncated-Type; Π-Truncated-Type;
+    Id-Truncated-Type')
 open import foundation.universal-property-dependent-pair-types
 
 open import foundation-core.truncation-levels
@@ -472,4 +473,108 @@ module _
     map-effectiveness-trunc a (unit-trunc refl) ＝ refl
   refl-effectiveness-trunc =
     isretr-map-inv-equiv (extensionality-trunc (unit-trunc a)) refl
+```
+
+### Truncations of Σ-types
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2}
+  where
+
+  map-trunc-Σ :
+    type-trunc k (Σ A B) → type-trunc k (Σ A (λ x → type-trunc k (B x)))
+  map-trunc-Σ =
+    map-universal-property-trunc
+      ( trunc k (Σ A (λ x → type-trunc k (B x))))
+      ( λ (pair a b) → unit-trunc (pair a (unit-trunc b)))
+
+  map-inv-trunc-Σ :
+    type-trunc k (Σ A (λ x → type-trunc k (B x))) → type-trunc k (Σ A B)
+  map-inv-trunc-Σ =
+    map-universal-property-trunc
+      ( trunc k (Σ A B))
+      ( λ (pair a |b|) →
+        map-universal-property-trunc
+          ( trunc k (Σ A B))
+          ( λ b → unit-trunc (pair a b))
+          ( |b|))
+
+  isretr-map-inv-trunc-Σ :
+    ( map-inv-trunc-Σ ∘ map-trunc-Σ) ~ id
+  isretr-map-inv-trunc-Σ =
+    function-dependent-universal-property-trunc
+      ( λ |ab| →
+        Id-Truncated-Type'
+          ( trunc k (Σ A B))
+          ( map-inv-trunc-Σ (map-trunc-Σ |ab|))
+          ( |ab|))
+      ( λ (pair a b) →
+        ap map-inv-trunc-Σ
+           ( triangle-universal-property-trunc _
+             ( λ (pair a' b') → unit-trunc (pair a' (unit-trunc b')))
+             ( pair a b)) ∙
+        (triangle-universal-property-trunc _
+          ( λ (pair a' |b'|) →
+            map-universal-property-trunc
+              ( trunc k (Σ A B))
+              ( λ b' → unit-trunc (pair a' b'))
+              ( |b'|))
+          ( pair a (unit-trunc b)) ∙
+        triangle-universal-property-trunc _
+          ( λ b' → unit-trunc (pair a b'))
+          ( b)))
+
+  issec-map-inv-trunc-Σ :
+    ( map-trunc-Σ ∘ map-inv-trunc-Σ) ~ id
+  issec-map-inv-trunc-Σ =
+    function-dependent-universal-property-trunc
+      ( λ |a|b|| →
+        Id-Truncated-Type'
+          ( trunc k (Σ A (λ x → type-trunc k (B x))))
+          ( map-trunc-Σ (map-inv-trunc-Σ |a|b||))
+          ( |a|b||))
+      ( λ (pair a |b|) →
+        function-dependent-universal-property-trunc
+          (λ |b'| →
+            Id-Truncated-Type'
+              ( trunc k (Σ A (λ x → type-trunc k (B x))))
+              (map-trunc-Σ (map-inv-trunc-Σ (unit-trunc (pair a |b'|))))
+              (unit-trunc (pair a |b'|)))
+          (λ b →
+            ap map-trunc-Σ
+              (triangle-universal-property-trunc _
+                ( λ (pair a' |b'|) →
+                  map-universal-property-trunc
+                    ( trunc k (Σ A B))
+                    ( λ b' → unit-trunc (pair a' b'))
+                    ( |b'|))
+                ( pair a (unit-trunc b))) ∙
+            (ap map-trunc-Σ
+              (triangle-universal-property-trunc
+                ( trunc k (Σ A B))
+                ( λ b' → unit-trunc (pair a b'))
+                ( b)) ∙
+            triangle-universal-property-trunc _
+              ( λ (pair a' b') → unit-trunc (pair a' (unit-trunc b')))
+              ( pair a b)))
+          ( |b|))
+
+  equiv-trunc-Σ :
+      type-trunc k (Σ A B) ≃ type-trunc k (Σ A (λ x → type-trunc k (B x)))
+  pr1 equiv-trunc-Σ = map-trunc-Σ
+  pr2 equiv-trunc-Σ =
+    is-equiv-has-inverse
+      map-inv-trunc-Σ
+      issec-map-inv-trunc-Σ
+      isretr-map-inv-trunc-Σ
+
+  inv-equiv-trunc-Σ :
+    type-trunc k (Σ A (λ x → type-trunc k (B x))) ≃ type-trunc k (Σ A B)
+  pr1 inv-equiv-trunc-Σ = map-inv-trunc-Σ
+  pr2 inv-equiv-trunc-Σ =
+    is-equiv-has-inverse
+      map-trunc-Σ
+      isretr-map-inv-trunc-Σ
+      issec-map-inv-trunc-Σ
 ```
