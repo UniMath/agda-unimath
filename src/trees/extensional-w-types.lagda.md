@@ -3,40 +3,27 @@ title: Extensional W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.extensional-w-types where
 
-module foundation.extensional-w-types where
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.slice
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalent-type-families
+open import foundation.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using
-  ( _≃_; id-equiv; map-equiv; is-contr-total-htpy-equiv; is-equiv;
-    map-inv-is-equiv; map-inv-equiv; _∘e_; isretr-map-inv-equiv; inv-equiv;
-    is-equiv-Prop)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using
-  ( _＝_; equiv-concat; ap; equiv-tr; refl)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using (Π-Prop)
-open import foundation.slice using (equiv-fam-equiv-equiv-slice)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( right-unit-law-Σ-is-contr; equiv-left-swap-Σ; assoc-Σ)
-open import foundation.univalent-type-families using (is-univalent)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.w-types using
-  ( 𝕎; tree-𝕎; symbol-𝕎; inv-equiv-structure-𝕎-Alg)
+open import trees.elementhood-relation-w-types
+open import trees.w-types
 ```
 
 ## Idea

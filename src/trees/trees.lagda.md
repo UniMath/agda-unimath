@@ -3,7 +3,7 @@ title: Trees
 ---
 
 ```agda
-module graph-theory.trees where
+module trees.trees where
 
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers

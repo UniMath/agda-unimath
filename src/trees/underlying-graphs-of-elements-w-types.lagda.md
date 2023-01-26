@@ -3,14 +3,13 @@ title: The underlying graphs of elements of W-types
 ---
 
 ```agda
-module foundation.underlying-graphs-of-elements-w-types where
+module trees.underlying-graphs-of-elements-w-types where
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.elementhood-relation-w-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.embeddings
@@ -26,13 +25,15 @@ open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.w-types
 
 open import graph-theory.directed-graphs
-open import graph-theory.directed-trees
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.trails-directed-graphs
 open import graph-theory.walks-directed-graphs
+
+open import trees.directed-trees
+open import trees.elementhood-relation-w-types
+open import trees.w-types
 ```
 
 ## Idea

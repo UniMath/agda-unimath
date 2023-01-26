@@ -70,7 +70,6 @@ open import foundation.double-negation public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
-open import foundation.elementhood-relation-w-types public
 open import foundation.embeddings public
 open import foundation.empty-types public
 open import foundation.epimorphisms-with-respect-to-sets public
@@ -86,7 +85,6 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences public
 open import foundation.existential-quantification public
-open import foundation.extensional-w-types public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-maps public
@@ -104,7 +102,6 @@ open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation
-open import foundation.functoriality-w-types public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.hexagons-of-identifications public
@@ -116,10 +113,7 @@ open import foundation.images public
 open import foundation.images-subtypes
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
-open import foundation.indexed-w-types public
 open import foundation.induction-principle-propositional-truncation public
-open import foundation.induction-w-types public
-open import foundation.inequality-w-types public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
@@ -137,13 +131,11 @@ open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
-open import foundation.lower-types-w-types public
 open import foundation.maybe public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-cospans public
-open import foundation.multisets public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
@@ -168,7 +160,6 @@ open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullbacks public
-open import foundation.ranks-of-elements-w-types public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
@@ -186,7 +177,6 @@ open import foundation.singleton-induction public
 open import foundation.singleton-subtypes public
 open import foundation.slice public
 open import foundation.small-maps public
-open import foundation.small-multisets public
 open import foundation.small-types public
 open import foundation.small-universes public
 open import foundation.split-surjective-maps public
@@ -213,7 +203,6 @@ open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-theoretic-principle-of-choice public
-open import foundation.underlying-graphs-of-elements-w-types public
 open import foundation.unions-subtypes public
 open import foundation.unique-existence public
 open import foundation.uniqueness-image public
@@ -245,8 +234,6 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
-open import foundation.w-type-of-propositions public
-open import foundation.w-types public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public

@@ -266,7 +266,6 @@ open import foundation.double-negation
 open import foundation.double-powersets
 open import foundation.dubuc-penon-compact-types
 open import foundation.effective-maps-equivalence-relations
-open import foundation.elementhood-relation-w-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.endomorphisms
@@ -283,7 +282,6 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.extensional-w-types
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-maps
@@ -301,7 +299,6 @@ open import foundation.functoriality-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
 open import foundation.functoriality-set-truncation
-open import foundation.functoriality-w-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.global-choice
 open import foundation.hexagons-of-identifications
@@ -314,10 +311,7 @@ open import foundation.images
 open import foundation.images-subtypes
 open import foundation.impredicative-encodings
 open import foundation.impredicative-universes
-open import foundation.indexed-w-types
 open import foundation.induction-principle-propositional-truncation
-open import foundation.induction-w-types
-open import foundation.inequality-w-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.injective-maps
@@ -335,13 +329,11 @@ open import foundation.lesser-limited-principle-of-omniscience
 open import foundation.limited-principle-of-omniscience
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
-open import foundation.lower-types-w-types
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.mere-equivalences
 open import foundation.monomorphisms
 open import foundation.morphisms-cospans
-open import foundation.multisets
 open import foundation.multisubsets
 open import foundation.multivariable-correspondences
 open import foundation.multivariable-decidable-relations
@@ -367,7 +359,6 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.raising-universe-levels
-open import foundation.ranks-of-elements-w-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.reflexive-relations
 open import foundation.repetitions-sequences
@@ -386,7 +377,6 @@ open import foundation.singleton-induction
 open import foundation.singleton-subtypes
 open import foundation.slice
 open import foundation.small-maps
-open import foundation.small-multisets
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.split-surjective-maps
@@ -425,7 +415,6 @@ open import foundation.unital-binary-operations
 open import foundation.univalence-implies-function-extensionality
 open import foundation.univalence
 open import foundation.univalent-type-families
-open import foundation.universal-multiset
 open import foundation.universal-property-booleans
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
@@ -447,8 +436,6 @@ open import foundation.unordered-pairs-of-types
 open import foundation.unordered-pairs
 open import foundation.unordered-tuples-of-types
 open import foundation.unordered-tuples
-open import foundation.w-type-of-propositions
-open import foundation.w-types
 open import foundation.weak-function-extensionality
 open import foundation.weak-limited-principle-of-omniscience
 open import foundation.weakly-constant-maps
@@ -545,13 +532,10 @@ open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
-open import graph-theory.rooted-quasitrees
-open import graph-theory.rooted-trees
 open import graph-theory.simple-undirected-graphs
 open import graph-theory.stereoisomerism-enriched-undirected-graphs
 open import graph-theory.totally-faithful-morphisms-undirected-graphs
 open import graph-theory.trails-undirected-graphs
-open import graph-theory.trees
 open import graph-theory.undirected-graph-structures-on-standard-finite-sets
 open import graph-theory.undirected-graphs
 open import graph-theory.vertex-covers
@@ -869,6 +853,31 @@ open import synthetic-homotopy-theory.universal-cover-circle
 open import synthetic-homotopy-theory.universal-property-circle
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.wedges-of-pointed-types
+```
+
+## Trees
+
+```agda
+open import trees
+open import trees.directed-trees
+open import trees.elementhood-relation-w-types
+open import trees.extensional-w-types
+open import trees.functoriality-w-types
+open import trees.indexed-w-types
+open import trees.induction-w-types
+open import trees.inequality-w-types
+open import trees.lower-types-w-types
+open import trees.multisets
+open import trees.ranks-of-elements-w-types
+open import trees.rooted-quasitrees
+open import trees.rooted-trees
+open import trees.small-multisets
+open import trees.trees
+open import trees.underlying-graphs-of-elements-w-types
+open import trees.universal-multiset
+open import trees.w-type-of-natural-numbers
+open import trees.w-type-of-propositions
+open import trees.w-types
 ```
 
 ## Type theories

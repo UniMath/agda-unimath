@@ -3,7 +3,7 @@ title: Rooted trees
 ---
 
 ```agda
-module graph-theory.rooted-trees where
+module trees.rooted-trees where
 
 open import elementary-number-theory.natural-numbers
 
@@ -14,8 +14,9 @@ open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import graph-theory.trails-undirected-graphs
-open import graph-theory.trees
 open import graph-theory.undirected-graphs
+
+open import trees.trees
 ```
 
 ## Idea

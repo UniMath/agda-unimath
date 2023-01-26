@@ -3,16 +3,15 @@ title: Multisets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.multisets where
 
-module foundation.multisets where
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
-open import foundation.empty-types using (is-empty)
-open import foundation.functions using (_∘_)
-open import foundation.universe-levels using (Level; UU; lsuc)
-open import foundation.w-types using (𝕎; symbol-𝕎; tree-𝕎; component-𝕎)
+open import trees.elementhood-relation-w-types
+open import trees.w-types
 ```
 
 ## Idea

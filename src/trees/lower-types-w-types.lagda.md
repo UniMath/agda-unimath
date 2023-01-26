@@ -3,17 +3,15 @@ title: Lower types of elements in W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.lower-types-w-types where
 
-module foundation.lower-types-w-types where
-
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.existential-quantification using (intro-∃)
-open import foundation.ranks-of-elements-w-types using (_≼-𝕎_)
-open import foundation.universe-levels using (UU; Level; _⊔_)
-open import foundation.w-types using (𝕎; tree-𝕎)
-
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.propositions
+open import foundation.universe-levels
+
+open import trees.ranks-of-elements-w-types
+open import trees.w-types
 ```
 
 ## Idea
