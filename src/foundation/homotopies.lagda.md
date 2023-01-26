@@ -1,4 +1,4 @@
----
+v---
 title: Homotopies
 ---
 
@@ -21,7 +21,8 @@ open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
 open import foundation-core.sections using (sec)
 open import foundation-core.universe-levels using (UU; Level; _⊔_)
 
-open import foundation.function-extensionality
+open import foundation.function-extensionality using
+  ( equiv-funext; eq-htpy; FUNEXT; htpy-eq; funext)
 open import foundation.identity-systems using
   ( Ind-identity-system; fundamental-theorem-id-IND-identity-system)
 open import foundation.identity-types using
