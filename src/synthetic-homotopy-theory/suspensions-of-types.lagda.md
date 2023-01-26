@@ -124,9 +124,11 @@ suspension-cocone-merid :
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-cocone X Z) →
   (x : X) → ((suspension-cocone-N c) ＝ (suspension-cocone-S c))
 suspension-cocone-merid c = pr2 (pr2 c)
+```
 
-{- Characterization of equalities in the above type -}
+### Characterization of equalities in the type ``suspension-cocone``
 
+```agda
 suspension-cocone-htpy : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
   (c c' : suspension-cocone X Z) → UU (l1 ⊔ l2)
 suspension-cocone-htpy {X = X} c c' =
@@ -259,19 +261,19 @@ module _
   
   up-suspension :
     {l : Level} → universal-property-suspension
-    l X  (suspension X) (N-susp , S-susp , merid-susp)
+    l X  (suspension X) (susp-struct X)
   up-suspension Z =
     htpy-preserve-is-equiv
     ((pr2 ( (comparison-suspension-cocone X Z) ∘e
     (equiv-up-pushout (const X unit star) (const X unit star) Z))))
     ((triangle-ev-suspension
-    {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z)) 
+    {X = X} {Y = suspension X} (susp-struct X) Z)) 
 
   equiv-up-suspension :
     {l : Level} (Z : UU l) →
     ((suspension X) → Z) ≃ (suspension-cocone X Z)
   equiv-up-suspension Z =
-    (ev-suspension (N-susp , S-susp , merid-susp) Z) ,
+    (ev-suspension (susp-struct X) Z) ,
     up-suspension Z  
 
   map-inv-up-suspension : {l : Level} (Z : UU l) →
@@ -281,12 +283,12 @@ module _
 
   issec-map-inv-up-suspension :
     {l : Level} (Z : UU l) →
-    ((ev-suspension (susp-struct X) Z) ∘
+    ((ev-suspension ((susp-struct X)) Z) ∘
     (map-inv-up-suspension Z)) ~ id
   issec-map-inv-up-suspension Z = issec-map-inv-is-equiv (up-suspension Z)
 
   isretr-map-inv-up-suspension : {l : Level} (Z : UU l) →
-    ((map-inv-up-suspension Z) ∘ (ev-suspension (susp-struct X) Z)) ~ id
+    ((map-inv-up-suspension Z) ∘ (ev-suspension ((susp-struct X)) Z)) ~ id
   isretr-map-inv-up-suspension Z = isretr-map-inv-is-equiv (up-suspension Z)
 
   up-suspension-N-susp :
@@ -294,28 +296,28 @@ module _
     (map-inv-up-suspension Z c N-susp) ＝ pr1 c 
   up-suspension-N-susp Z c =
     pr1 (suspension-cocone-htpy-suspension-cocone-eq'
-    (ev-suspension (N-susp , S-susp , merid-susp) Z
+    (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c))
 
   up-suspension-S-susp : {l : Level} (Z : UU l) (c : suspension-cocone X Z) →
     (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
   up-suspension-S-susp Z c = pr1 (pr2 (suspension-cocone-htpy-suspension-cocone-eq'
-    (ev-suspension (N-susp , S-susp , merid-susp) Z
+    (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c)))
 
   up-suspension-merid-susp : {l : Level} (Z : UU l) (c : suspension-cocone X Z) (x : X) →
     (((inv (up-suspension-N-susp Z c) ∙ (ap (map-inv-up-suspension Z c) (merid-susp x))) ∙
     (up-suspension-S-susp Z c)) ＝ (pr2 (pr2 c)) x)
   up-suspension-merid-susp Z c = pr2 (pr2 (suspension-cocone-htpy-suspension-cocone-eq'
-    (ev-suspension (N-susp , S-susp , merid-susp) Z
+    (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c)))
 
   ev-suspension-up-suspension :
     {l : Level} (Z : UU l) (c : suspension-cocone X Z) →
-    (ev-suspension (N-susp , S-susp , merid-susp) Z (map-inv-up-suspension Z c)) ＝ c
+    (ev-suspension (susp-struct X) Z (map-inv-up-suspension Z c)) ＝ c
   ev-suspension-up-suspension Z c =
     suspension-cocone-eq-suspension-cocone-htpy'
-    (ev-suspension (N-susp , S-susp , merid-susp) Z
+    (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((up-suspension-N-susp Z c) ,
     ((up-suspension-S-susp Z c) , (up-suspension-merid-susp Z c)))
 ```
