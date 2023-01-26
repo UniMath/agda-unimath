@@ -875,8 +875,8 @@ open import trees.ranks-of-elements-w-types
 open import trees.rooted-quasitrees
 open import trees.rooted-trees
 open import trees.small-multisets
-open import trees.trees
 open import trees.underlying-graphs-of-elements-w-types
+open import trees.undirected-trees
 open import trees.universal-multiset
 open import trees.w-type-of-natural-numbers
 open import trees.w-type-of-propositions

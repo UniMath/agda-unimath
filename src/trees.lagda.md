@@ -16,10 +16,10 @@ open import trees.lower-types-w-types public
 open import trees.multisets public
 open import trees.ranks-of-elements-w-types public
 open import trees.rooted-quasitrees public
-open import trees.rooted-trees public
+open import trees.rooted-undirected-trees public
 open import trees.small-multisets public
-open import trees.trees public
 open import trees.underlying-graphs-of-elements-w-types public
+open import trees.undirected-trees public
 open import trees.universal-multiset public
 open import trees.w-type-of-natural-numbers public
 open import trees.w-type-of-propositions public
