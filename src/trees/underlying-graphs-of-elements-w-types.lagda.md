@@ -499,13 +499,14 @@ module _
     walk-Graph (graph-element-𝕎 w) x root-𝕎
   walk-to-root-graph-element-𝕎 w root-𝕎 = refl-walk-Graph
   walk-to-root-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 {v} H x) =
-    cons-walk-Graph
-      ( pr2
-        ( center (has-unique-predecessor-node-inclusion-graph-element-𝕎 H x)))
-      ( walk-to-root-graph-element-𝕎 w
-        ( pr1
-          ( center
-            ( has-unique-predecessor-node-inclusion-graph-element-𝕎 H x))))
+    snoc-walk-Graph
+      ( graph-element-𝕎 w)
+      ( walk-hom-Graph
+        ( graph-element-𝕎 v)
+        ( graph-element-𝕎 w)
+        ( inclusion-graph-element-𝕎 H)
+        ( walk-to-root-graph-element-𝕎 v x))
+      ( edge-to-root-graph-element-𝕎 H)
     
   is-directed-tree-graph-element-𝕎 :
     (w : 𝕎 A B) → is-directed-tree-Graph (graph-element-𝕎 w) root-𝕎
@@ -515,4 +516,10 @@ module _
       ( root-𝕎)
       ( has-unique-predecessor-graph-element-𝕎 w)
       ( walk-to-root-graph-element-𝕎 w)
+
+  directed-tree-element-𝕎 :
+    𝕎 A B → Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
+  pr1 (directed-tree-element-𝕎 w) = graph-element-𝕎 w
+  pr1 (pr2 (directed-tree-element-𝕎 w)) = root-𝕎
+  pr2 (pr2 (directed-tree-element-𝕎 w)) = is-directed-tree-graph-element-𝕎 w
 ```

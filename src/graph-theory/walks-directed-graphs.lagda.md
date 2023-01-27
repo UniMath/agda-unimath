@@ -36,6 +36,14 @@ module _
     cons-walk-Graph :
       {x y z : vertex-Graph G} →
       edge-Graph G x y →  walk-Graph y z → walk-Graph x z
+
+  snoc-walk-Graph :
+    {x y z : vertex-Graph G} →
+    walk-Graph x y → edge-Graph G y z → walk-Graph x z
+  snoc-walk-Graph refl-walk-Graph e =
+    cons-walk-Graph e refl-walk-Graph
+  snoc-walk-Graph (cons-walk-Graph f w) e =
+    cons-walk-Graph f (snoc-walk-Graph w e)
 ```
 
 ## Properties
