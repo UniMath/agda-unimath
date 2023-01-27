@@ -374,7 +374,7 @@ module _
   inv-left-div-Group :
     (x y : type-Group) → inv-Group (left-div-Group x y) ＝ left-div-Group y x
   inv-left-div-Group x y =
-    equational-reasoning
+    equality-reasoning
       inv-Group (left-div-Group x y)
         ＝ left-div-Group y (inv-Group (inv-Group x))    by distributive-inv-mul-Group (inv-Group x) y
         ＝ left-div-Group y x                            by ap (left-div-Group y) (inv-inv-Group x)
@@ -386,7 +386,7 @@ module _
   inv-right-div-Group :
     (x y : type-Group) → inv-Group (right-div-Group x y) ＝ right-div-Group y x
   inv-right-div-Group x y =
-    equational-reasoning
+    equality-reasoning
       inv-Group (right-div-Group x y)
         ＝ right-div-Group (inv-Group (inv-Group y)) x   by distributive-inv-mul-Group x (inv-Group y)
         ＝ right-div-Group y x                           by ap (mul-Group' (inv-Group x)) (inv-inv-Group y)
@@ -399,7 +399,7 @@ module _
     (x y z : type-Group) →
     mul-Group (left-div-Group x y) (left-div-Group y z) ＝ left-div-Group x z
   mul-left-div-Group x y z =
-    equational-reasoning
+    equality-reasoning
       mul-Group (left-div-Group x y) (left-div-Group y z)
       ＝ mul-Group (inv-Group x) (mul-Group y (left-div-Group y z))
         by associative-mul-Group (inv-Group x) y (left-div-Group y z)
@@ -414,7 +414,7 @@ module _
     (x y z : type-Group) →
     mul-Group (right-div-Group x y) (right-div-Group y z) ＝ right-div-Group x z
   mul-right-div-Group x y z =
-    equational-reasoning
+    equality-reasoning
       mul-Group (right-div-Group x y) (right-div-Group y z)
       ＝ mul-Group x (mul-Group (inv-Group y) (right-div-Group y z))
         by associative-mul-Group x (inv-Group y) (right-div-Group y z)
@@ -443,7 +443,7 @@ abstract
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
         ( λ x →
-          equational-reasoning
+          equality-reasoning
           i x ＝ μ e (i x)            by inv (left-unit-G (i x)) 
               ＝ μ (μ (i' x) x) (i x) by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
               ＝ μ (i' x) (μ x (i x)) by assoc-G (i' x) x (i x)

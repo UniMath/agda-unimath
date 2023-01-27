@@ -40,7 +40,7 @@ or
 ```md
 x ≤ a by ineq-1 inside X
   ≤ b by ineq-2 inside X
-  ≤ c by ineq-3 inside X
+  ≤ c by ineq-3 inside X∎
 ```
 
 where `equiv-x` and `ineq-x` are proofs of respectively the equivalences or
@@ -56,19 +56,19 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 ### Equational reasoning for identifications
 
 ```agda
-infixl 1 equational-reasoning_
-infixl 0 step-equational-reasoning
+infixl 1 equality-reasoning_
+infixl 0 step-equality-reasoning
 
-equational-reasoning_ :
+equality-reasoning_ :
   {l : Level} {X : UU l} (x : X) → x ＝ x
-equational-reasoning x = refl
+equality-reasoning x = refl
 
-step-equational-reasoning :
+step-equality-reasoning :
   {l : Level} {X : UU l} {x y : X} →
   (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
-step-equational-reasoning p z q = p ∙ q
+step-equality-reasoning p z q = p ∙ q
 
-syntax step-equational-reasoning p z q = p ＝ z by q
+syntax step-equality-reasoning p z q = p ＝ z by q
 ```
 
 For equalities we thus write the chains as follows

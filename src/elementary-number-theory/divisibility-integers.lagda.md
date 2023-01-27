@@ -156,7 +156,7 @@ pr2 (div-neg-ℤ x y (pair d p)) = left-negative-law-mul-ℤ d x ∙ ap neg-ℤ 
 neg-div-ℤ : (x y : ℤ) → div-ℤ x y → div-ℤ (neg-ℤ x) y
 pr1 (neg-div-ℤ x y (pair d p)) = neg-ℤ d
 pr2 (neg-div-ℤ x y (pair d p)) =
-  equational-reasoning
+  equality-reasoning
     mul-ℤ (neg-ℤ d) (neg-ℤ x)
     ＝ neg-ℤ (mul-ℤ d (neg-ℤ x))   by left-negative-law-mul-ℤ d (neg-ℤ x)
     ＝ neg-ℤ (neg-ℤ (mul-ℤ d x))   by ap neg-ℤ (right-negative-law-mul-ℤ d x)
@@ -587,11 +587,11 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z = inl (z ∙ inv (is-zero-sim-un
 is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz with ( is-one-or-neg-one-is-unit-ℤ
         (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -)))))
         (is-unit-int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) ) 
-is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos = inl (equational-reasoning
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos = inl (equality-reasoning
          x  ＝ mul-ℤ one-ℤ x                             by (inv (left-unit-law-mul-ℤ x))
             ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by inv (ap (λ - → mul-ℤ - x) pos)
             ＝ y                                         by pr2 (H (λ - → nz (pr1 -))))
-is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr neg = inr (equational-reasoning
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr neg = inr (equality-reasoning
          neg-ℤ x
          ＝ mul-ℤ (int-unit-ℤ (pr1 (H (λ - → nz (pr1 -))))) x by tr (λ - → neg-ℤ x ＝ mul-ℤ - x)
                                                            (inv neg)
@@ -610,7 +610,7 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K with
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inl pos = pos
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg with ( is-decidable-is-zero-ℤ a )
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z = 
-  equational-reasoning
+  equality-reasoning
     a ＝ zero-ℤ   by z
       ＝ neg-ℤ a  by inv (ap neg-ℤ z)
       ＝ b        by neg 

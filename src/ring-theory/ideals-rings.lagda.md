@@ -258,7 +258,7 @@ module _
   pr2 normal-subgroup-two-sided-ideal-Ring x (y , H) =
     tr
       ( is-in-two-sided-ideal-Ring)
-      ( equational-reasoning
+      ( equality-reasoning
         y
         ＝ add-Ring R y (zero-Ring R)                 by inv (right-unit-law-add-Ring R y)
         ＝ add-Ring R y (add-Ring R x (neg-Ring R x)) by inv (ap (add-Ring R y) (right-inverse-law-add-Ring R x))

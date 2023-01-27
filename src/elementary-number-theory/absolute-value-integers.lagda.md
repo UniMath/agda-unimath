@@ -139,13 +139,13 @@ is-nonzero-abs-ℤ (inr (inr x)) H = is-nonzero-succ-ℕ x
 ### Absolute value is multiplicative
 ```agda
 neg-left-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y)
-neg-left-abs-ℤ-mul-ℤ x y = equational-reasoning
+neg-left-abs-ℤ-mul-ℤ x y = equality-reasoning
   abs-ℤ (mul-ℤ x y)
   ＝ abs-ℤ (neg-ℤ (mul-ℤ x y)) by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
   ＝ abs-ℤ (mul-ℤ (neg-ℤ x) y) by (ap abs-ℤ (inv (left-negative-law-mul-ℤ x y)))
 
 neg-right-abs-ℤ-mul-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ abs-ℤ (mul-ℤ x (neg-ℤ y))
-neg-right-abs-ℤ-mul-ℤ x y = equational-reasoning
+neg-right-abs-ℤ-mul-ℤ x y = equality-reasoning
   abs-ℤ (mul-ℤ x y)
   ＝ abs-ℤ (neg-ℤ (mul-ℤ x y)) by (inv (negative-law-abs-ℤ (mul-ℤ x y)))
   ＝ abs-ℤ (mul-ℤ x (neg-ℤ y)) by (ap abs-ℤ (inv (right-negative-law-mul-ℤ x y)))
@@ -156,7 +156,7 @@ neg-both-abs-ℤ-mul-ℤ x y = (neg-right-abs-ℤ-mul-ℤ x y) ∙ (neg-left-abs
 int-ℕ-abs-ℤ-mult-positive-ints : (x y : ℕ) →
   int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
   ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y))))
-int-ℕ-abs-ℤ-mult-positive-ints x y = equational-reasoning  
+int-ℕ-abs-ℤ-mult-positive-ints x y = equality-reasoning  
   int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
     ＝ mul-ℤ (inr (inr x)) (inr (inr y)) 
       by (int-abs-is-nonnegative-ℤ (mul-ℤ (inr (inr x)) (inr (inr y))) 
@@ -175,18 +175,18 @@ int-ℕ-abs-ℤ-mult-positive-ints x y = equational-reasoning
 
 multiplicative-abs-ℤ : (x y : ℤ) → abs-ℤ (mul-ℤ x y) ＝ mul-ℕ (abs-ℤ x) (abs-ℤ y)
 multiplicative-abs-ℤ (inl x) (inl y) = is-injective-int-ℕ 
-  (equational-reasoning
+  ( equality-reasoning
     int-ℕ (abs-ℤ (mul-ℤ (inl x) (inl y)))
     ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
       by (ap int-ℕ (neg-both-abs-ℤ-mul-ℤ (inl x) (inl y))) 
     ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y)))) 
       by (int-ℕ-abs-ℤ-mult-positive-ints x y))
-multiplicative-abs-ℤ (inl x) (inr (inl star)) = equational-reasoning
+multiplicative-abs-ℤ (inl x) (inr (inl star)) = equality-reasoning
   abs-ℤ (mul-ℤ (inl x) zero-ℤ)
   ＝ zero-ℕ by (ap (abs-ℤ) (right-zero-law-mul-ℤ (inl x)))
   ＝ mul-ℕ (abs-ℤ (inl x)) zero-ℕ by (inv (right-zero-law-mul-ℕ (abs-ℤ (inl x))))
 multiplicative-abs-ℤ (inl x) (inr (inr y)) = is-injective-int-ℕ
-  (equational-reasoning
+  ( equality-reasoning
     int-ℕ (abs-ℤ (mul-ℤ (inl x) (inr (inr y))))
     ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
       by (ap int-ℕ (neg-left-abs-ℤ-mul-ℤ (inl x) (inr (inr y)))) 
@@ -194,13 +194,13 @@ multiplicative-abs-ℤ (inl x) (inr (inr y)) = is-injective-int-ℕ
       by (int-ℕ-abs-ℤ-mult-positive-ints x y))
 multiplicative-abs-ℤ (inr (inl star)) y = refl 
 multiplicative-abs-ℤ (inr (inr x)) (inl y) = is-injective-int-ℕ
-  (equational-reasoning 
+  ( equality-reasoning 
     int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inl y)))
     ＝ int-ℕ (abs-ℤ (mul-ℤ (inr (inr x)) (inr (inr y)))) 
       by (ap int-ℕ (neg-right-abs-ℤ-mul-ℤ (inr (inr x)) (inl y))) 
     ＝ int-ℕ (mul-ℕ (abs-ℤ (inr (inr x))) (abs-ℤ (inr (inr y)))) 
       by (int-ℕ-abs-ℤ-mult-positive-ints x y))
-multiplicative-abs-ℤ (inr (inr x)) (inr (inl star)) = equational-reasoning
+multiplicative-abs-ℤ (inr (inr x)) (inr (inl star)) = equality-reasoning
   abs-ℤ (mul-ℤ (inr (inr x)) zero-ℤ)
   ＝ zero-ℕ by (ap (abs-ℤ) (right-zero-law-mul-ℤ (inr (inr x))))
   ＝ mul-ℕ (abs-ℤ (inr (inr x))) zero-ℕ by (inv (right-zero-law-mul-ℕ (abs-ℤ (inr (inr x)))))

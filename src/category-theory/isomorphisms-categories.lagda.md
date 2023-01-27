@@ -133,7 +133,7 @@ module _
     comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
     ＝ id-hom-Cat C
   issec-hom-inv-comp-iso-Cat g f =
-    equational-reasoning
+    equality-reasoning
       comp-hom-Cat C (hom-comp-iso-Cat g f) (hom-inv-comp-iso-Cat g f)
       ＝ comp-hom-Cat C
           ( hom-iso-Cat C g)
@@ -185,7 +185,7 @@ module _
     ( comp-hom-Cat C (hom-inv-comp-iso-Cat g f) (hom-comp-iso-Cat g f)) ＝
     ( id-hom-Cat C)
   isretr-hom-inv-comp-iso-Cat g f =
-    equational-reasoning
+    equality-reasoning
       comp-hom-Cat C (hom-inv-comp-iso-Cat g f) (hom-comp-iso-Cat g f)
       ＝ comp-hom-Cat C
           ( hom-inv-iso-Cat C f)
@@ -424,7 +424,7 @@ module _
     {x y z : obj-Cat C} (g : iso-Cat C y z) (f : iso-Cat C x y) →
     eq-iso-Cat (comp-iso-Cat C g f) ＝ (eq-iso-Cat f ∙ eq-iso-Cat g)
   preserves-comp-eq-iso-Cat g f =
-    equational-reasoning
+    equality-reasoning
       eq-iso-Cat (comp-iso-Cat C g f)
       ＝ eq-iso-Cat
           ( comp-iso-Cat C

@@ -92,7 +92,7 @@ module _
 
   inv-Commutator-law' : ∀ x y → inv-Group G (commutator-Group G x y) ＝ commutator-Group G y x
   inv-Commutator-law' x y =
-    equational-reasoning
+    equality-reasoning
       ( commutator-Group G x y) ⁻¹
         ＝ y * x * y ⁻¹ * x ⁻¹       by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gInv (gCommutator x y))
         ＝ commutator-Group G y x    by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → gCommutator y x))
@@ -105,7 +105,7 @@ module _
   commutes-when-commutor-is-unit' :
     ∀ x y → (commutator-Group G x y ＝ unit-Group G) → mul-Group G x y ＝ mul-Group G y x
   commutes-when-commutor-is-unit' x y comm-unit =
-    equational-reasoning
+    equality-reasoning
       x * y ＝ commutator-Group G x y * y * x    by inv (simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gCommutator x y *' y *' x)))
             ＝ unit * y * x                      by ap (λ z → z * y * x) comm-unit
             ＝ y * x                             by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (gUnit *' y *' x))
@@ -113,7 +113,7 @@ module _
   commutor-is-unit-when-commutes' :
     ∀ x y → (mul-Group G x y ＝ mul-Group G y x) → commutator-Group G x y ＝ unit-Group G
   commutor-is-unit-when-commutes' x y commutes =
-    equational-reasoning
+    equality-reasoning
       x * y * (y * x) ⁻¹ ＝ y * x * (y * x) ⁻¹    by ap (λ z → z * (y * x) ⁻¹) commutes
                          ＝ unit                  by simplifyExpr G (x ∷ y ∷ empty-vec) (λ x y → (y *' x *' gInv (y *' x)))
 ```

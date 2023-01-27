@@ -85,7 +85,7 @@ module _
   pr1 (comp-nat-trans-Precat F G H β α) =
     λ x → comp-hom-Precat D (components-nat-trans-Precat C D G H β x) (components-nat-trans-Precat C D F G α x)
   pr2 (comp-nat-trans-Precat F G H β α) f =
-    equational-reasoning
+    equality-reasoning
        comp-hom-Precat D (hom-functor-Precat C D H f)
          (comp-hom-Precat D (components-nat-trans-Precat C D G H β _)
           (pr1 α _))

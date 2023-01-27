@@ -266,7 +266,7 @@ is-reduced-reduce-fraction-ℤ x =
 
 
 sim-reduced-fraction-ℤ : (x : fraction-ℤ) → (sim-fraction-ℤ x (reduce-fraction-ℤ x))
-sim-reduced-fraction-ℤ x = equational-reasoning
+sim-reduced-fraction-ℤ x = equality-reasoning
   mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ (reduce-fraction-ℤ x))
   ＝ mul-ℤ (mul-ℤ (numerator-fraction-ℤ (reduce-fraction-ℤ x))
       (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x)))
@@ -380,7 +380,7 @@ unique-numerator-reduce-fraction-ℤ x y H =
       reduced-eqn : 
         mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y) 
         ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ x) (mul-ℤ neg-one-ℤ (int-reduce-denominator-fraction-ℤ x))  
-      reduced-eqn = equational-reasoning
+      reduced-eqn = equality-reasoning
         mul-ℤ (int-reduce-numerator-fraction-ℤ x) (int-reduce-denominator-fraction-ℤ y)
         ＝ mul-ℤ (int-reduce-numerator-fraction-ℤ y) (int-reduce-denominator-fraction-ℤ x) 
         by reduce-preserves-sim-ℤ x y H
@@ -397,7 +397,7 @@ unique-numerator-reduce-fraction-ℤ x y H =
       y-nat = pr1 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)) 
   
       contra : inr (inr y-nat) ＝ neg-ℤ (inr (inr x-nat))
-      contra = equational-reasoning
+      contra = equality-reasoning
         inr (inr y-nat)
         ＝ (int-reduce-denominator-fraction-ℤ y)
         by inv (pr2 (lem (int-reduce-denominator-fraction-ℤ y) (is-positive-int-reduce-denominator-fraction-ℤ y)))

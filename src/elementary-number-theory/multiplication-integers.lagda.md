@@ -332,7 +332,7 @@ is-mul-neg-one-neg-ℤ' x =
   is-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
 
 double-negative-law-mul-ℤ : (k l : ℤ) → mul-ℤ (neg-ℤ k) (neg-ℤ l) ＝ mul-ℤ k l
-double-negative-law-mul-ℤ k l = equational-reasoning
+double-negative-law-mul-ℤ k l = equality-reasoning
   mul-ℤ (neg-ℤ k) (neg-ℤ l)
   ＝ neg-ℤ (mul-ℤ k (neg-ℤ l))
     by left-negative-law-mul-ℤ k (neg-ℤ l)

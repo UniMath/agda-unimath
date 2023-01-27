@@ -226,7 +226,7 @@ module _
     (H : is-iso-Precat C f) (z : obj-Precat C) →
     ( precomp-hom-Precat C f z ∘ precomp-hom-inv-is-iso-Precat H z) ~ id
   issec-precomp-hom-inv-is-iso-Precat H z g =
-    equational-reasoning
+    equality-reasoning
       comp-hom-Precat C (comp-hom-Precat C g (hom-inv-is-iso-Precat C H)) f
       ＝ comp-hom-Precat C g (comp-hom-Precat C (hom-inv-is-iso-Precat C H) f)
         by assoc-comp-hom-Precat C g (hom-inv-is-iso-Precat C H) f
@@ -239,7 +239,7 @@ module _
     (H : is-iso-Precat C f) (z : obj-Precat C) →
     (precomp-hom-inv-is-iso-Precat H z ∘ precomp-hom-Precat C f z) ~ id
   isretr-precomp-hom-inv-is-iso-Precat H z g =
-    equational-reasoning
+    equality-reasoning
       comp-hom-Precat C (comp-hom-Precat C g f) (hom-inv-is-iso-Precat C H)
       ＝ comp-hom-Precat C g (comp-hom-Precat C f (hom-inv-is-iso-Precat C H))
         by assoc-comp-hom-Precat C g f (hom-inv-is-iso-Precat C H)
