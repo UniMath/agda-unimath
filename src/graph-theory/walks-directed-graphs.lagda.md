@@ -49,7 +49,7 @@ module _
 
   walk-Graph' : (x y : vertex-Graph G) → UU (l1 ⊔ l2)
   walk-Graph' x y =
-    (x ＝ y) + Σ (vertex-Graph G) (λ z → edge-Graph G x z × walk-Graph G z y)
+    (y ＝ x) + Σ (vertex-Graph G) (λ z → edge-Graph G x z × walk-Graph G z y)
 
   map-compute-walk-Graph :
     (x y : vertex-Graph G) → walk-Graph G x y → walk-Graph' x y

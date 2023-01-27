@@ -284,16 +284,30 @@ module _
   where
 
   is-contr-left-summand :
+    is-contr (A + B) → A → is-contr A
+  pr1 (is-contr-left-summand H a) = a
+  pr2 (is-contr-left-summand H a) x =
+    is-injective-inl (eq-is-contr H {inl a} {inl x})
+
+  is-contr-left-summand-is-empty :
     is-contr (A + B) → is-empty B → is-contr A
-  pr1 (is-contr-left-summand (inl a , H) K) = a
-  pr2 (is-contr-left-summand (inl a , H) K) x = is-injective-inl (H (inl x))
-  is-contr-left-summand (inr b , H) K = ex-falso (K b)
+  pr1 (is-contr-left-summand-is-empty (inl a , H) K) = a
+  pr2 (is-contr-left-summand-is-empty (inl a , H) K) x =
+    is-injective-inl (H (inl x))
+  is-contr-left-summand-is-empty (inr b , H) K = ex-falso (K b)
 
   is-contr-right-summand :
+    is-contr (A + B) → B → is-contr B
+  pr1 (is-contr-right-summand H b) = b
+  pr2 (is-contr-right-summand H b) x =
+    is-injective-inr (eq-is-contr H {inr b} {inr x})
+
+  is-contr-right-summand-is-empty :
     is-contr (A + B) → is-empty A → is-contr B
-  is-contr-right-summand (inl a , H) K = ex-falso (K a)
-  pr1 (is-contr-right-summand (inr b , H) K) = b
-  pr2 (is-contr-right-summand (inr b , H) K) x = is-injective-inr (H (inr x))
+  is-contr-right-summand-is-empty (inl a , H) K = ex-falso (K a)
+  pr1 (is-contr-right-summand-is-empty (inr b , H) K) = b
+  pr2 (is-contr-right-summand-is-empty (inr b , H) K) x =
+    is-injective-inr (H (inr x))
 
   is-empty-left-summand-is-contr-coprod :
     is-contr (A + B) → B → is-empty A
