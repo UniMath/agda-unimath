@@ -12,12 +12,13 @@ Szumie Xie, 31 August 2022.
 
 module foundation.equational-reasoning where
 
-open import foundation.identity-types using (_＝_; refl; _∙_; inv)
-open import foundation.dependent-pair-types using (pair)
-open import foundation.equivalences using (_≃_; _∘e_; id-equiv; inv-equiv)
-open import foundation.functions using (id)
-open import foundation.logical-equivalences using (_↔_; _∘iff_)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.dependent-pair-types using (pair)
+open import foundation-core.equivalences using (_≃_; _∘e_; id-equiv)
+open import foundation-core.functions using (id)
+open import foundation-core.homotopies using (_~_; refl-htpy; _∙h_)
+open import foundation-core.identity-types using (_＝_; refl; _∙_)
+open import foundation-core.logical-equivalences using (_↔_; _∘iff_)
+open import foundation-core.universe-levels using (Level; UU)
 open import order-theory.preorders using
   ( Preorder; element-Preorder; leq-Preorder; transitive-leq-Preorder;
     refl-leq-Preorder)
@@ -85,6 +86,35 @@ equational-reasoning
   x ＝ y by eq-1
     ＝ z by eq-2
     ＝ v by eq-3
+```
+
+### Equational reasoning for function homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  where
+
+  infixl 1 homotopy-reasoning_
+  infixl 0 step-homotopy-reasoning
+
+  homotopy-reasoning_ : (f : (x : X) → Y x) → f ~ f
+  homotopy-reasoning f = refl-htpy
+
+  step-homotopy-reasoning :
+    {f g : (x : X) → Y x} → (f ~ g) → (h : (x : X) → Y x) → (g ~ h) → (f ~ h)
+  step-homotopy-reasoning p h q = p ∙h q
+
+  syntax step-homotopy-reasoning p h q = p ~ h by q
+```
+
+For function homotopies we thus write the chains as follows
+
+```md
+homotopy-reasoning
+  f ~ g by htpy-1
+    ~ h by htpy-2
+    ~ i by htpy-3
 ```
 
 ### Equational reasoning for equivalences
