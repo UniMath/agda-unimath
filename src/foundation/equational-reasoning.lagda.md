@@ -171,35 +171,32 @@ logical-equivalence-reasoning
 
 ### Equational reasoning for preorders
 
-Note: In an equational reasoning argument, the preorder is always specified at the last step. So do we really need to specify it at each of the earlier steps?
-
 ```agda
-private
-  transitivity :
-    {l1 l2 : Level} (X : Preorder l1 l2)
-    (x : element-Preorder X) {y z : element-Preorder X} →
-    leq-Preorder X x y → leq-Preorder X y z → leq-Preorder X x z
-  transitivity X x {y} {z} u v = transitive-leq-Preorder X x y z v u
+preorder_reasoning_ :
+  {l1 l2 : Level} (X : Preorder l1 l2) (x : element-Preorder X) →
+  leq-Preorder X x x
+preorder_reasoning_ = refl-leq-Preorder
 
-syntax transitivity X x u v = x ≤ X by u to v
-infixr 0 transitivity
+step-preorder-reasoning :
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  {x y : element-Preorder X} → leq-Preorder X x y →
+  (z : element-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
+step-preorder-reasoning X {x} {y} u z v =
+  transitive-leq-Preorder X x y z v u
 
-private
-  reflexivity :
-    {l1 l2 : Level} (X : Preorder l1 l2) (x : element-Preorder X) →
-    leq-Preorder X x x
-  reflexivity = refl-leq-Preorder
+syntax step-preorder-reasoning X u z v = u ≤ z by v inside X
 
-syntax reflexivity X x = x ∎ X
-infix 1 reflexivity
+infixl 1 preorder_reasoning_
+infixl 0 step-preorder-reasoning
 ```
 
 For a preorder `X` we thus write the chains as follows
 
 ```md
-x ≤ X by ineq-1 to
-y ≤ X by ineq-2 to
-z ∎ X
+preorder X reasoning
+  x ≤ y by ineq-1 inside X
+    ≤ z by ineq-2 inside X
+    ≤ v by ineq-3 inside X
 ```
 
 ## References
