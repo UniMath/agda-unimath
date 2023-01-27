@@ -74,7 +74,7 @@ syntax step-equality-reasoning p z q = p ＝ z by q
 For equalities we thus write the chains as follows
 
 ```md
-equational-reasoning
+equality-reasoning
   x ＝ y by eq-1
     ＝ z by eq-2
     ＝ v by eq-3
