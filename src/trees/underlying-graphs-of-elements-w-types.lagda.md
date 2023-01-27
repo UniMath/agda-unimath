@@ -21,8 +21,11 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.isolated-points
+open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -90,13 +93,18 @@ module _
     (w : 𝕎 A B) (x : node-graph-element-𝕎 w) → UU (l1 ⊔ l2)
   is-root-node-graph-element-𝕎 w x = root-𝕎 ＝ x
 
-  is-decidable-is-root-node-graph-element-𝕎 :
-    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
-    is-decidable (is-root-node-graph-element-𝕎 w x)
-  is-decidable-is-root-node-graph-element-𝕎 w root-𝕎 = inl refl
-  is-decidable-is-root-node-graph-element-𝕎 w
+  is-isolated-root-node-graph-element-𝕎 :
+    (w : 𝕎 A B) → is-isolated (root-𝕎 {w = w})
+  is-isolated-root-node-graph-element-𝕎 w root-𝕎 = inl refl
+  is-isolated-root-node-graph-element-𝕎 w
     ( node-inclusion-graph-element-𝕎 H y) =
     inr (λ ())
+
+  is-contr-loop-space-root-graph-element-𝕎 :
+    (w : 𝕎 A B) → is-contr (root-𝕎 {w = w} ＝ root-𝕎)
+  is-contr-loop-space-root-graph-element-𝕎 w =
+    is-contr-loop-space-isolated-point root-𝕎
+      ( is-isolated-root-node-graph-element-𝕎 w)
 ```
 
 ### Characterization of equality of the type of nodes of the underlying graph of an element of `𝕎 A B`
@@ -383,114 +391,128 @@ module _
     edge-inclusion-graph-element-𝕎
       ( b , refl)
       ( map-inv-compute-edge-graph-element-𝕎 (α b) m n e)
+```
 
---   map-inv-compute-edge-graph-element-𝕎 :
---     ( v : 𝕎 A B) (x y : node-graph-element-𝕎' v) →
---     edge-graph-element-𝕎' v x y →
---     edge-graph-element-𝕎 v
---       ( map-inv-compute-node-graph-element-𝕎 v x)
---       ( map-inv-compute-node-graph-element-𝕎 v y)
---   map-inv-compute-edge-graph-element-𝕎
---     (tree-𝕎 a α) (inl (b , m)) (inl (.b , n)) (refl , e) =
---     edge-inclusion-graph-element-𝕎
---       ( b , refl)
---       ( map-inv-compute-edge-graph-element-𝕎 (α b) m n e)
---   map-inv-compute-edge-graph-element-𝕎
---     (tree-𝕎 a α) (inl (b , .(root-𝕎' (α b)))) (inr star) refl =
---     tr
---       ( λ u → edge-graph-element-𝕎 (tree-𝕎 a α) u root-𝕎)
---       ( inv
---         ( isretr-map-inv-compute-node-graph-element-𝕎
---           ( tree-𝕎 a α)
---           ( node-inclusion-graph-element-𝕎 (b , refl) root-𝕎)))
---       ( edge-to-root-graph-element-𝕎 (b , refl))
---   map-inv-compute-edge-graph-element-𝕎
---     (tree-𝕎 a α) (inr star) (inl (c , n)) e =
---     ex-falso (is-empty-raise-empty e)
---   map-inv-compute-edge-graph-element-𝕎 (tree-𝕎 a α) (inr star) (inr star) e =
---     ex-falso (is-empty-raise-empty e)
+### The type of edges from any node to the root is a proposition
 
---   issec-map-inv-compute-edge-graph-element-𝕎 :
---     (v : 𝕎 A B) (x y : node-graph-element-𝕎' v) →
---     ( {!map-compute-edge-graph-element-𝕎 v (map-inv-compute-node-graph-element-𝕎 v x) (map-inv-compute-node-graph-element-𝕎 v y)!} ∘ map-inv-compute-edge-graph-element-𝕎 v x y) ~ id
---   issec-map-inv-compute-edge-graph-element-𝕎 v x y = {!!}
--- ```
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
--- ### The type of edges from any node to the root is a proposition
+  is-proof-irrelevant-edge-to-root-graph-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    is-proof-irrelevant (edge-graph-element-𝕎 w x root-𝕎)
+  is-proof-irrelevant-edge-to-root-graph-element-𝕎 w
+    .(node-inclusion-graph-element-𝕎 H root-𝕎)
+    (edge-to-root-graph-element-𝕎 H) =
+    is-contr-edge-to-root-graph-element-𝕎 H
 
--- ```agda
--- module _
---   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
---   where
+  is-prop-edge-to-root-graph-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    is-prop (edge-graph-element-𝕎 w x root-𝕎)
+  is-prop-edge-to-root-graph-element-𝕎 w x =
+    is-prop-is-proof-irrelevant
+      ( is-proof-irrelevant-edge-to-root-graph-element-𝕎 w x)
+```
 
---   is-proof-irrelevant-edge-to-root-graph-element-𝕎 :
---     (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
---     is-proof-irrelevant (edge-graph-element-𝕎 w x root-𝕎)
---   is-proof-irrelevant-edge-to-root-graph-element-𝕎 w
---     .(node-inclusion-graph-element-𝕎 H root-𝕎)
---     (edge-to-root-graph-element-𝕎 H) =
---     is-contr-edge-to-root-graph-element-𝕎 H
+### The underlying graph of any element of a W-type is a directed tree
 
---   is-prop-edge-to-root-graph-element-𝕎 :
---     (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
---     is-prop (edge-graph-element-𝕎 w x root-𝕎)
---   is-prop-edge-to-root-graph-element-𝕎 w x =
---     is-prop-is-proof-irrelevant
---       ( is-proof-irrelevant-edge-to-root-graph-element-𝕎 w x)
--- ```
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
 
--- -- ### The type of edges between any two nodes is a proposition
+  no-edge-from-root-graph-element-𝕎 :
+    (w : 𝕎 A B) →
+    is-empty (Σ (node-graph-element-𝕎 w) (edge-graph-element-𝕎 w root-𝕎))
+  no-edge-from-root-graph-element-𝕎 w (x , ())
 
--- -- ```agda
--- -- module _
--- --   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
--- --   where
+  is-empty-eq-root-node-inclusion-graph-element-𝕎 :
+    {v w : 𝕎 A B} (H : v ∈-𝕎 w) (x : node-graph-element-𝕎 v) →
+    ¬ (root-𝕎 {w = w} ＝ node-inclusion-graph-element-𝕎 H x)
+  is-empty-eq-root-node-inclusion-graph-element-𝕎 H x ()
 
--- --   is-proof-irrelevant-edge-graph-element-𝕎 :
--- --     (w : 𝕎 A B) (x y : node-graph-element-𝕎 w) →
--- --     is-proof-irrelevant (edge-graph-element-𝕎 w x y)
--- --   is-proof-irrelevant-edge-graph-element-𝕎 w ._ .root-𝕎
--- --     ( edge-to-root-graph-element-𝕎 H) =
--- --     is-contr-edge-to-root-graph-element-𝕎 H
--- --   is-proof-irrelevant-edge-graph-element-𝕎 w ._ ._
--- --     ( edge-inclusion-graph-element-𝕎 H e) =
--- --     {!!}
+  has-unique-predecessor-node-inclusion-graph-element-𝕎 :
+    {v w : 𝕎 A B} (H : v ∈-𝕎 w) (x : node-graph-element-𝕎 v) →
+    is-contr
+      ( Σ ( node-graph-element-𝕎 w)
+          ( edge-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 H x)))
+  pr1 (pr1 (has-unique-predecessor-node-inclusion-graph-element-𝕎 H root-𝕎)) =
+    root-𝕎
+  pr2 (pr1 (has-unique-predecessor-node-inclusion-graph-element-𝕎 H root-𝕎)) =
+    edge-to-root-graph-element-𝕎 H
+  pr2
+    ( has-unique-predecessor-node-inclusion-graph-element-𝕎 H root-𝕎)
+    ( .root-𝕎 , edge-to-root-graph-element-𝕎 .H) =
+    refl
+  pr1
+    ( has-unique-predecessor-node-inclusion-graph-element-𝕎 H
+      ( node-inclusion-graph-element-𝕎 K x)) =
+    map-Σ
+      ( λ y →
+        edge-graph-element-𝕎 _
+          ( node-inclusion-graph-element-𝕎 H
+            ( node-inclusion-graph-element-𝕎 K x))
+          ( y))
+      ( node-inclusion-graph-element-𝕎 H)
+      ( λ y → edge-inclusion-graph-element-𝕎 H)
+      ( center (has-unique-predecessor-node-inclusion-graph-element-𝕎 K x))
+  pr2
+    ( has-unique-predecessor-node-inclusion-graph-element-𝕎 H
+      ( node-inclusion-graph-element-𝕎 K x))
+    ( .(node-inclusion-graph-element-𝕎 H _) ,
+      edge-inclusion-graph-element-𝕎 .H f) =
+    ap
+      ( map-Σ _
+        ( node-inclusion-graph-element-𝕎 H)
+        ( λ y → edge-inclusion-graph-element-𝕎 H))
+      ( eq-is-contr
+        ( has-unique-predecessor-node-inclusion-graph-element-𝕎 K x))
 
--- --   is-prop-edge-graph-element-𝕎 :
--- --     (w : 𝕎 A B) (x y : node-graph-element-𝕎 w) →
--- --     is-prop (edge-graph-element-𝕎 w x y)
--- --   is-prop-edge-graph-element-𝕎 w x y = {!!}
--- -- ```
+  has-unique-predecessor-graph-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    is-contr
+      ((root-𝕎 ＝ x) + Σ (node-graph-element-𝕎 w) (edge-graph-element-𝕎 w x))
+  has-unique-predecessor-graph-element-𝕎 w root-𝕎 =
+    is-contr-equiv
+      ( root-𝕎 ＝ root-𝕎)
+      ( right-unit-law-coprod-is-empty
+        ( root-𝕎 ＝ root-𝕎)
+        ( Σ (node-graph-element-𝕎 w) (edge-graph-element-𝕎 w root-𝕎))
+        ( no-edge-from-root-graph-element-𝕎 w))
+      ( is-contr-loop-space-root-graph-element-𝕎 w)
+  has-unique-predecessor-graph-element-𝕎 w
+    ( node-inclusion-graph-element-𝕎 H x) =
+    is-contr-equiv
+      ( Σ ( node-graph-element-𝕎 w)
+          ( edge-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 H x)))
+      ( left-unit-law-coprod-is-empty
+        ( root-𝕎 ＝ node-inclusion-graph-element-𝕎 H x)
+        ( Σ ( node-graph-element-𝕎 w)
+            ( edge-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 H x)))
+        ( is-empty-eq-root-node-inclusion-graph-element-𝕎 H x))
+      ( has-unique-predecessor-node-inclusion-graph-element-𝕎 H x)
 
--- -- ### The underlying graph of any element of a W-type is a directed tree
-
--- -- ```agda
--- -- module _
--- --   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
--- --   where
-
--- --   walk-to-root-graph-element-𝕎 :
--- --     (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
--- --     walk-Graph (graph-element-𝕎 w) x root-𝕎
--- --   walk-to-root-graph-element-𝕎 w root-𝕎 = refl-walk-Graph
--- --   walk-to-root-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 {v} H x) =
--- --     cons-walk-Graph
--- --       ( walk-hom-Graph
--- --         ( graph-element-𝕎 v)
--- --         ( graph-element-𝕎 w)
--- --         ( inclusion-graph-element-𝕎 H)
--- --         ( walk-to-root-graph-element-𝕎 v x))
--- --       ( edge-to-root-graph-element-𝕎 H)
-
--- --   is-trail-walk-to-root-graph-element-𝕎 :
--- --     (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
--- --     is-trail-walk-Graph
--- --       ( graph-element-𝕎 w)
--- --       ( walk-to-root-graph-element-𝕎 w x)
--- --   is-trail-walk-to-root-graph-element-𝕎 w x {(._ , .root-𝕎 , edge-to-root-graph-element-𝕎 H) , K} {.(node-inclusion-graph-element-𝕎 H root-𝕎 , root-𝕎 , edge-to-root-graph-element-𝕎 H) , K'} refl = {!!}
--- --   is-trail-walk-to-root-graph-element-𝕎 w x {(._ , ._ , edge-inclusion-graph-element-𝕎 H e) , K} {._ , K'} refl = {!!}
-
--- --   is-directed-tree-graph-element-𝕎 :
--- --     (w : 𝕎 A B) → is-directed-tree-Graph (graph-element-𝕎 w) root-𝕎
--- --   is-directed-tree-graph-element-𝕎 w x = {!!}
--- -- ```
+  walk-to-root-graph-element-𝕎 :
+    (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
+    walk-Graph (graph-element-𝕎 w) x root-𝕎
+  walk-to-root-graph-element-𝕎 w root-𝕎 = refl-walk-Graph
+  walk-to-root-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 {v} H x) =
+    cons-walk-Graph
+      ( pr2
+        ( center (has-unique-predecessor-node-inclusion-graph-element-𝕎 H x)))
+      ( walk-to-root-graph-element-𝕎 w
+        ( pr1
+          ( center
+            ( has-unique-predecessor-node-inclusion-graph-element-𝕎 H x))))
+    
+  is-directed-tree-graph-element-𝕎 :
+    (w : 𝕎 A B) → is-directed-tree-Graph (graph-element-𝕎 w) root-𝕎
+  is-directed-tree-graph-element-𝕎 w =
+    is-directed-tree-unique-parent-Graph
+      ( graph-element-𝕎 w)
+      ( root-𝕎)
+      ( has-unique-predecessor-graph-element-𝕎 w)
+      ( walk-to-root-graph-element-𝕎 w)
+```
