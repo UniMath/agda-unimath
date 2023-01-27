@@ -875,6 +875,7 @@ open import trees.ranks-of-elements-w-types
 open import trees.rooted-quasitrees
 open import trees.rooted-undirected-trees
 open import trees.small-multisets
+open import trees.transitive-multisets
 open import trees.underlying-graphs-of-elements-w-types
 open import trees.undirected-trees
 open import trees.universal-multiset
