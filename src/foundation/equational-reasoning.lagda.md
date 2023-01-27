@@ -13,10 +13,10 @@ Szumie Xie, 31 August 2022.
 module foundation.equational-reasoning where
 
 open import foundation-core.dependent-pair-types using (pair)
-open import foundation-core.equivalences using (_≃_; _∘e_; id-equiv; inv-equiv)
+open import foundation-core.equivalences using (_≃_; _∘e_; id-equiv)
 open import foundation-core.functions using (id)
 open import foundation-core.homotopies using (_~_; refl-htpy; _∙h_)
-open import foundation-core.identity-types using (_＝_; refl; _∙_; inv)
+open import foundation-core.identity-types using (_＝_; refl; _∙_)
 open import foundation-core.logical-equivalences using (_↔_; _∘iff_)
 open import foundation-core.universe-levels using (Level; UU)
 open import order-theory.preorders using
