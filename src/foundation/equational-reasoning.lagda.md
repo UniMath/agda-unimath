@@ -36,21 +36,15 @@ X ≃ A by equiv-1
 ```
 
 or
+
 ```md
-x ≤ X by ineq-1 to
-a ≤ X by ineq-2 to
-b ≤ X by ineq-3 to
-c ∎ X
+x ≤ a by ineq-1 inside X
+  ≤ b by ineq-2 inside X
+  ≤ c by ineq-3 inside X
 ```
 
 where `equiv-x` and `ineq-x` are proofs of respectively the equivalences or
-inequalities. The symbol ∎ marks the end of a chain.
-
-Because we will want to have equational reasoning for both identifications and
-equivalences and we can't use the same symbol twice, we use ∎ for
-identifications and ■ for equivalences in the code below.
-
-For inequalities we also need to pass the preorder as an argument.
+inequalities. Note that for inequalities we also need to pass the preorder as an argument.
 
 We write Agda code that allows for such reasoning. The code for equational
 reasoning for equalities and equivalences is based on Martín Escardó's Agda code
