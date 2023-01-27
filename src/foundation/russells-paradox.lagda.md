@@ -3,38 +3,27 @@ title: Russell's paradox
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.russells-paradox where
 
-open import foundation.contractible-types using (is-contr-total-path')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty)
-open import foundation.equivalences using
-  ( _≃_; id-equiv; equiv-precomp; _∘e_; inv-equiv; map-equiv; map-inv-equiv)
-open import foundation.functoriality-cartesian-product-types using
-  ( equiv-prod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation.identity-types using (_＝_; refl; equiv-concat')
-open import foundation.locally-small-types using (is-locally-small-UU)
-open import foundation.multisets using (𝕍; comprehension-𝕍; _∉-𝕍_; _∈-𝕍_)
-open import foundation.negation using (¬; no-fixed-points-neg)
-open import foundation.small-multisets using
-  ( is-small-𝕍; is-small-multiset-𝕍; is-small-comprehension-𝕍;
-    is-small-∉-𝕍; resize-𝕍; is-small-resize-𝕍; equiv-elementhood-resize-𝕍;
-    resize-resize-𝕍; eq-resize-𝕍)
-open import foundation.small-types using
-  ( is-small; is-small-lsuc; is-small-is-surjective; is-small')
-open import foundation.small-universes using (is-small-universe)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr; inv-assoc-Σ; assoc-Σ)
-open import foundation.universal-multiset using
-  ( universal-multiset-𝕍; is-small-universal-multiset-𝕍)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.locally-small-types
+open import foundation.negation
+open import foundation.small-types
+open import foundation.small-universes
+open import foundation.surjective-maps
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
+
+open import trees.multisets
+open import trees.small-multisets
+open import trees.universal-multiset
 ```
 
 ## Idea

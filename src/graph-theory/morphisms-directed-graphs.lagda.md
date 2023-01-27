@@ -50,10 +50,9 @@ module _
     vertex-hom-Graph = pr1 f
 
     edge-hom-Graph :
-      (x y : vertex-Graph G) →
-      (e : edge-Graph G x y) →
+      {x y : vertex-Graph G} (e : edge-Graph G x y) →
       edge-Graph H (vertex-hom-Graph x) (vertex-hom-Graph y)
-    edge-hom-Graph = pr2 f
+    edge-hom-Graph {x} {y} e = pr2 f x y e
 ```
 
 ### Composition of morphisms graphs
@@ -70,7 +69,7 @@ module _
     hom-Graph H K → hom-Graph G H →
     hom-Graph G K
   pr1 (comp-hom-Graph g f) = (vertex-hom-Graph H K g) ∘ (vertex-hom-Graph G H f)
-  pr2 (comp-hom-Graph g f) = λ x y e → (edge-hom-Graph H K g) (α x) (α y) (β x y e)
+  pr2 (comp-hom-Graph g f) = λ x y e → (edge-hom-Graph H K g) (β e)
     where
     α = vertex-hom-Graph G H f
     β = edge-hom-Graph G H f

@@ -3,11 +3,9 @@ title: Indexed W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.indexed-w-types where
 
-module foundation.indexed-w-types where
-
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.universe-levels
 ```
 
 ```agda

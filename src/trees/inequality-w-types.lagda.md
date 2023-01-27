@@ -5,18 +5,18 @@ title: Inequality on W-types
 ```agda
 {-# OPTIONS --without-K --exact-split #-}
 
-module foundation.inequality-w-types where
+module trees.inequality-w-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-w-types using
-  ( _∈-𝕎_; irreflexive-∈-𝕎)
-open import foundation.empty-types using (empty)
-open import foundation.identity-types using (refl)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.w-types using (𝕎; tree-𝕎)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.universe-levels
+
+open import trees.elementhood-relation-w-types
+open import trees.w-types
 ```
 
 ## Idea
