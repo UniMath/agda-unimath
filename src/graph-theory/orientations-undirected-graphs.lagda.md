@@ -1,18 +1,16 @@
-# Orientations of undirected graphs
+---
+title: Orientations of undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.orientations-undirected-graphs where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; unordered-pair-vertices-Undirected-Graph;
-    edge-Undirected-Graph; vertex-Undirected-Graph)
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.finite-types using (type-UU-Fin)
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

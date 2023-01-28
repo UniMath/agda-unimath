@@ -1,15 +1,16 @@
-# Planar binary trees
+---
+title: Planar binary trees
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.planar-binary-trees where
 
-open import foundation.booleans using (bool; false; true)
-open import foundation.empty-types using (empty)
-open import foundation.functions using (id)
-open import foundation.universe-levels using (UU; lzero)
-open import foundation.w-types using (𝕎; constant-𝕎; tree-𝕎)
+open import foundation.booleans
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.universe-levels
+
+open import trees.w-types
 ```
 
 ## Idea

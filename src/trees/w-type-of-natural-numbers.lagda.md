@@ -3,9 +3,7 @@ title: The W-type of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
-module elementary-number-theory.w-type-of-natural-numbers where
+module trees.w-type-of-natural-numbers where
 
 open import elementary-number-theory.natural-numbers
 
@@ -20,7 +18,8 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
-open import foundation.w-types
+
+open import trees.w-types
 ```
 
 ## Definition

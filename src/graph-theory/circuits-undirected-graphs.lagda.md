@@ -3,8 +3,6 @@ title: Circuits in undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.circuits-undirected-graphs where
 
 open import elementary-number-theory.natural-numbers

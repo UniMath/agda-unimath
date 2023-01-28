@@ -3,24 +3,22 @@ title: Induction principles on W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.induction-w-types where
 
-module foundation.induction-w-types where
+open import elementary-number-theory.natural-numbers
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
-open import foundation.equivalences using (_≃_; id-equiv; is-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_)
-open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using (_＝_; ap; refl; tr)
-open import foundation.inequality-w-types using
-  ( _le-𝕎_; le-∈-𝕎; propagate-le-𝕎)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.w-types using (𝕎; component-𝕎; tree-𝕎)
+open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
+open import trees.w-types
 ```
 
 ## Idea

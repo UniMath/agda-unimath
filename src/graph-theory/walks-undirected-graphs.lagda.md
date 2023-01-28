@@ -1,8 +1,8 @@
-# Walks in undirected graphs
+---
+title: Walks in undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.walks-undirected-graphs where
 
 open import elementary-number-theory.equality-natural-numbers

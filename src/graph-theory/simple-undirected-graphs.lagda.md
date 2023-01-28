@@ -1,24 +1,20 @@
-# Simple undirected graphs
+---
+title: Simple undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.simple-undirected-graphs where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb-Prop)
-open import foundation.negation using (¬)
-open import foundation.propositions using
-  ( Prop; prod-Prop; Π-Prop; function-Prop; is-prop-Prop; type-Prop;
-    is-prop-type-Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
-open import foundation.unordered-pairs using (unordered-pair)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.negation
+open import foundation.propositions
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; unordered-pair-vertices-Undirected-Graph;
-    edge-Undirected-Graph; element-unordered-pair-vertices-Undirected-Graph)
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.finite-types using (Fin-UU-Fin')
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

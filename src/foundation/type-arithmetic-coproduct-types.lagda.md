@@ -3,19 +3,19 @@ title: Type arithmetic for coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-coproduct-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (_+_; inl; inr; neq-inl-inr; neq-inr-inl)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -274,4 +274,48 @@ module _
   left-distributive-prod-coprod : (A × (B + C)) ≃ ((A × B) + (A × C))
   left-distributive-prod-coprod =
     left-distributive-Σ-coprod A (λ x → B) (λ x → C)
+```
+
+### If a coproduct is contractible then one summand is contractible and the other is empty
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-contr-left-summand :
+    is-contr (A + B) → A → is-contr A
+  pr1 (is-contr-left-summand H a) = a
+  pr2 (is-contr-left-summand H a) x =
+    is-injective-inl (eq-is-contr H {inl a} {inl x})
+
+  is-contr-left-summand-is-empty :
+    is-contr (A + B) → is-empty B → is-contr A
+  pr1 (is-contr-left-summand-is-empty (inl a , H) K) = a
+  pr2 (is-contr-left-summand-is-empty (inl a , H) K) x =
+    is-injective-inl (H (inl x))
+  is-contr-left-summand-is-empty (inr b , H) K = ex-falso (K b)
+
+  is-contr-right-summand :
+    is-contr (A + B) → B → is-contr B
+  pr1 (is-contr-right-summand H b) = b
+  pr2 (is-contr-right-summand H b) x =
+    is-injective-inr (eq-is-contr H {inr b} {inr x})
+
+  is-contr-right-summand-is-empty :
+    is-contr (A + B) → is-empty A → is-contr B
+  is-contr-right-summand-is-empty (inl a , H) K = ex-falso (K a)
+  pr1 (is-contr-right-summand-is-empty (inr b , H) K) = b
+  pr2 (is-contr-right-summand-is-empty (inr b , H) K) x =
+    is-injective-inr (H (inr x))
+
+  is-empty-left-summand-is-contr-coprod :
+    is-contr (A + B) → B → is-empty A
+  is-empty-left-summand-is-contr-coprod H b a =
+    ex-falso (is-empty-eq-coprod-inl-inr a b (eq-is-contr H))
+
+  is-empty-right-summand-is-contr-coprod :
+    is-contr (A + B) → A → is-empty B
+  is-empty-right-summand-is-contr-coprod H a b =
+    ex-falso (is-empty-eq-coprod-inl-inr a b (eq-is-contr H))
 ```

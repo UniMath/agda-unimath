@@ -191,6 +191,11 @@ module _
         ( equiv-Eq-eq-isolated-point d x)
         ( is-prop-Eq-isolated-point d x)
 
+  is-contr-loop-space-isolated-point :
+    (d : is-isolated a) → is-contr (a ＝ a)
+  is-contr-loop-space-isolated-point d =
+    is-proof-irrelevant-is-prop (is-prop-eq-isolated-point d a) refl
+
   abstract
     is-emb-const-is-isolated : is-isolated a → is-emb (const unit A a)
     is-emb-const-is-isolated d star =
