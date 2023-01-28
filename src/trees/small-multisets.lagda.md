@@ -3,34 +3,24 @@ title: Small multisets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.small-multisets where
 
-module foundation.small-multisets where
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.small-types
+open import foundation.subtypes
+open import foundation.univalence
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (raise-empty; equiv-raise-empty)
-open import foundation.equivalences using
-  ( inv-equiv; _≃_; equiv-precomp-equiv; _∘e_; equiv-postcomp-equiv;
-    map-inv-equiv; isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse;
-    equiv-ap)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( _＝_; tr; refl; ap; _∙_; equiv-concat)
-open import foundation.multisets using (𝕍; comprehension-𝕍; _∈-𝕍_; _∉-𝕍_)
-open import foundation.propositions using
-  ( Prop; prod-Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.raising-universe-levels using (raise; equiv-raise)
-open import foundation.small-types using
-  ( is-small-Prop; is-small; is-small-Σ; is-small-Π; is-small-equiv)
-open import foundation.subtypes using
-  ( eq-type-subtype; extensionality-type-subtype')
-open import foundation.univalence using (equiv-univalence)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
-open import foundation.w-types using
-  ( tree-𝕎; symbol-𝕎; Eq-𝕎; equiv-Eq-𝕎-eq; eq-Eq-𝕎; Eq-𝕎-eq;
-    component-𝕎)
+open import trees.multisets
+open import trees.w-types
 ```
 
 ## Idea

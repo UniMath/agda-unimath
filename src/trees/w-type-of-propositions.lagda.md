@@ -3,18 +3,19 @@ title: The W-type of the type of propositions
 ---
 
 ```agda
-module foundation.w-type-of-propositions where
+module trees.w-type-of-propositions where
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.extensional-w-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.w-types
+
+open import trees.extensional-w-types
+open import trees.w-types
 ```
 
 ## Idea
