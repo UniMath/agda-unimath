@@ -3,8 +3,6 @@ title: Suspensions of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.suspensions-of-types where
 
 open import foundation.booleans
