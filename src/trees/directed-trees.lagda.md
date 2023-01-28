@@ -36,147 +36,166 @@ A directed tree is a directed graph `G` equipped with a rood `r : G` such that f
 ## Definition
 
 ```agda
-is-directed-tree-Graph-Prop :
-  {l1 l2 : Level} (G : Graph l1 l2) (r : vertex-Graph G) → Prop (l1 ⊔ l2)
-is-directed-tree-Graph-Prop G r =
+is-tree-Directed-Graph-Prop :
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
+  Prop (l1 ⊔ l2)
+is-tree-Directed-Graph-Prop G r =
   Π-Prop
-    ( vertex-Graph G)
-    ( λ x → is-contr-Prop (walk-Graph G x r))
+    ( vertex-Directed-Graph G)
+    ( λ x → is-contr-Prop (walk-Directed-Graph G x r))
 
-is-directed-tree-Graph :
-  {l1 l2 : Level} (G : Graph l1 l2) (r : vertex-Graph G) → UU (l1 ⊔ l2)
-is-directed-tree-Graph G r = type-Prop (is-directed-tree-Graph-Prop G r)
+is-tree-Directed-Graph :
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
+  UU (l1 ⊔ l2)
+is-tree-Directed-Graph G r = type-Prop (is-tree-Directed-Graph-Prop G r)
 
 Directed-Tree : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Directed-Tree l1 l2 =
-  Σ ( Graph l1 l2)
+  Σ ( Directed-Graph l1 l2)
     ( λ G →
-      Σ ( vertex-Graph G)
-        ( λ r → is-directed-tree-Graph G r))
+      Σ ( vertex-Directed-Graph G)
+        ( λ r → is-tree-Directed-Graph G r))
 
 module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
 
-  graph-Directed-Tree : Graph l1 l2
+  graph-Directed-Tree : Directed-Graph l1 l2
   graph-Directed-Tree = pr1 T
 
   node-Directed-Tree : UU l1
-  node-Directed-Tree = vertex-Graph graph-Directed-Tree
+  node-Directed-Tree = vertex-Directed-Graph graph-Directed-Tree
 
   edge-Directed-Tree : (x y : node-Directed-Tree) → UU l2
-  edge-Directed-Tree = edge-Graph graph-Directed-Tree
+  edge-Directed-Tree = edge-Directed-Graph graph-Directed-Tree
 
   root-Directed-Tree : node-Directed-Tree
   root-Directed-Tree = pr1 (pr2 T)
 
-  is-directed-tree-Directed-Tree :
-    is-directed-tree-Graph graph-Directed-Tree root-Directed-Tree
-  is-directed-tree-Directed-Tree = pr2 (pr2 T)
+  is-tree-Directed-Tree :
+    is-tree-Directed-Graph graph-Directed-Tree root-Directed-Tree
+  is-tree-Directed-Tree = pr2 (pr2 T)
 ```
 
 ## Properties
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Graph l1 l2) (r : vertex-Graph G)
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G)
   where
 
-  unique-parent-Graph : UU (l1 ⊔ l2)
-  unique-parent-Graph =
-    (x : vertex-Graph G) →
-    is-contr ((r ＝ x) + Σ (vertex-Graph G) (edge-Graph G x))
+  unique-parent-Directed-Graph : UU (l1 ⊔ l2)
+  unique-parent-Directed-Graph =
+    (x : vertex-Directed-Graph G) →
+    is-contr ((r ＝ x) + Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x))
 
-  no-parent-root-unique-parent-Graph :
-    unique-parent-Graph → is-empty (Σ (vertex-Graph G) (edge-Graph G r))
-  no-parent-root-unique-parent-Graph H =
+  no-parent-root-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph →
+    is-empty (Σ (vertex-Directed-Graph G) (edge-Directed-Graph G r))
+  no-parent-root-unique-parent-Directed-Graph H =
     is-empty-right-summand-is-contr-coprod (H r) refl
 
-  is-isolated-root-unique-parent-Graph :
-    unique-parent-Graph → is-isolated r
-  is-isolated-root-unique-parent-Graph H x =
+  is-isolated-root-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph → is-isolated r
+  is-isolated-root-unique-parent-Directed-Graph H x =
     map-coprod id (is-empty-left-summand-is-contr-coprod (H x)) (center (H x))
 
-  is-contr-walk-from-root-unique-parent-Graph :
-    unique-parent-Graph → is-contr (Σ (vertex-Graph G) (λ y → walk-Graph G r y))
-  pr1 (pr1 (is-contr-walk-from-root-unique-parent-Graph H)) = r
-  pr2 (pr1 (is-contr-walk-from-root-unique-parent-Graph H)) = refl-walk-Graph
-  pr2 (is-contr-walk-from-root-unique-parent-Graph H) (y , refl-walk-Graph) =
+  is-contr-walk-from-root-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph →
+    is-contr (Σ (vertex-Directed-Graph G) (λ y → walk-Directed-Graph G r y))
+  pr1 (pr1 (is-contr-walk-from-root-unique-parent-Directed-Graph H)) = r
+  pr2 (pr1 (is-contr-walk-from-root-unique-parent-Directed-Graph H)) =
+    refl-walk-Directed-Graph
+  pr2
+    ( is-contr-walk-from-root-unique-parent-Directed-Graph H)
+    ( y , refl-walk-Directed-Graph) =
     refl
   pr2
-    ( is-contr-walk-from-root-unique-parent-Graph H)
-    ( y , cons-walk-Graph e w) =
-    ex-falso (no-parent-root-unique-parent-Graph H (_ , e))
+    ( is-contr-walk-from-root-unique-parent-Directed-Graph H)
+    ( y , cons-walk-Directed-Graph e w) =
+    ex-falso (no-parent-root-unique-parent-Directed-Graph H (_ , e))
 
-  is-contr-loop-space-root-unique-parent-Graph :
-    unique-parent-Graph → is-contr (r ＝ r)
-  is-contr-loop-space-root-unique-parent-Graph H =
+  is-contr-loop-space-root-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph → is-contr (r ＝ r)
+  is-contr-loop-space-root-unique-parent-Directed-Graph H =
     is-contr-loop-space-isolated-point r
-      ( is-isolated-root-unique-parent-Graph H)
+      ( is-isolated-root-unique-parent-Directed-Graph H)
 
-  is-not-root-has-unique-parent-Graph :
-    (x : vertex-Graph G) →
-    is-contr ((r ＝ x) + Σ (vertex-Graph G) (edge-Graph G x)) →
-    Σ (vertex-Graph G) (edge-Graph G x) → ¬ (r ＝ x)
-  is-not-root-has-unique-parent-Graph x H (y , e) =
+  is-not-root-has-unique-parent-Directed-Graph :
+    (x : vertex-Directed-Graph G) →
+    is-contr
+      ( (r ＝ x) + Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x)) →
+    Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x) → ¬ (r ＝ x)
+  is-not-root-has-unique-parent-Directed-Graph x H (y , e) =
     is-empty-left-summand-is-contr-coprod H (y , e)
 
-  is-proof-irrelevant-parent-has-unique-parent-Graph :
-    (x : vertex-Graph G) →
-    is-contr ((r ＝ x) + Σ (vertex-Graph G) (edge-Graph G x)) →
-    is-proof-irrelevant (Σ (vertex-Graph G) (edge-Graph G x))
-  is-proof-irrelevant-parent-has-unique-parent-Graph x H (y , e) =
+  is-proof-irrelevant-parent-has-unique-parent-Directed-Graph :
+    (x : vertex-Directed-Graph G) →
+    is-contr
+      ( (r ＝ x) + Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x)) →
+    is-proof-irrelevant (Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x))
+  is-proof-irrelevant-parent-has-unique-parent-Directed-Graph x H (y , e) =
     is-contr-right-summand H (y , e)
 
-  is-proof-irrelevant-walk-unique-parent-Graph :
-    unique-parent-Graph → (x : vertex-Graph G) →
-    is-proof-irrelevant (walk-Graph G x r)
-  pr1 (is-proof-irrelevant-walk-unique-parent-Graph H x refl-walk-Graph) =
-    refl-walk-Graph
-  pr2 (is-proof-irrelevant-walk-unique-parent-Graph H x refl-walk-Graph) w =
+  is-proof-irrelevant-walk-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph → (x : vertex-Directed-Graph G) →
+    is-proof-irrelevant (walk-Directed-Graph G x r)
+  pr1
+    ( is-proof-irrelevant-walk-unique-parent-Directed-Graph H x
+        refl-walk-Directed-Graph) =
+    refl-walk-Directed-Graph
+  pr2
+    ( is-proof-irrelevant-walk-unique-parent-Directed-Graph H x
+        refl-walk-Directed-Graph)
+    ( w) =
     ( inv
       ( ap
-        ( λ α → tr (walk-Graph G x) α refl-walk-Graph)
-        ( eq-is-contr (is-contr-loop-space-root-unique-parent-Graph H)))) ∙
+        ( λ α → tr (walk-Directed-Graph G x) α refl-walk-Directed-Graph)
+        ( eq-is-contr
+          ( is-contr-loop-space-root-unique-parent-Directed-Graph H)))) ∙
     ( pr2
       ( pair-eq-Σ
         ( eq-is-contr
-          ( is-contr-walk-from-root-unique-parent-Graph H)
-          {(r , refl-walk-Graph)}
+          ( is-contr-walk-from-root-unique-parent-Directed-Graph H)
+          {(r , refl-walk-Directed-Graph)}
           {(r , w)})))
-  is-proof-irrelevant-walk-unique-parent-Graph H x
-    ( cons-walk-Graph {.x} {y} e w) =
+  is-proof-irrelevant-walk-unique-parent-Directed-Graph H x
+    ( cons-walk-Directed-Graph {.x} {y} e w) =
     is-contr-equiv
-      ( walk-Graph G y r)
+      ( walk-Directed-Graph G y r)
       ( equivalence-reasoning
-          walk-Graph G x r
-          ≃ walk-Graph' G x r
-            by compute-walk-Graph G x r
-          ≃ Σ (vertex-Graph G) (λ y → edge-Graph G x y × walk-Graph G y r)
+          walk-Directed-Graph G x r
+          ≃ walk-Directed-Graph' G x r
+            by compute-walk-Directed-Graph G x r
+          ≃ Σ ( vertex-Directed-Graph G)
+              ( λ y → edge-Directed-Graph G x y × walk-Directed-Graph G y r)
             by
             left-unit-law-coprod-is-empty
               ( r ＝ x)
-              ( Σ (vertex-Graph G) (λ y → edge-Graph G x y × walk-Graph G y r))
-              ( is-not-root-has-unique-parent-Graph x (H x) (y , e))
-          ≃ Σ ( Σ (vertex-Graph G) (edge-Graph G x))
-              ( λ p → walk-Graph G (pr1 p) r)
+              ( Σ ( vertex-Directed-Graph G)
+                  ( λ y →
+                    edge-Directed-Graph G x y × walk-Directed-Graph G y r))
+              ( is-not-root-has-unique-parent-Directed-Graph x (H x) (y , e))
+          ≃ Σ ( Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x))
+              ( λ p → walk-Directed-Graph G (pr1 p) r)
             by
             inv-assoc-Σ
-              ( vertex-Graph G)
-              ( edge-Graph G x)
-              ( λ p → walk-Graph G (pr1 p) r)
-          ≃ walk-Graph G y r
+              ( vertex-Directed-Graph G)
+              ( edge-Directed-Graph G x)
+              ( λ p → walk-Directed-Graph G (pr1 p) r)
+          ≃ walk-Directed-Graph G y r
             by
             left-unit-law-Σ-is-contr
-              ( is-proof-irrelevant-parent-has-unique-parent-Graph x
+              ( is-proof-irrelevant-parent-has-unique-parent-Directed-Graph x
                 ( H x)
                 ( y , e))
               (y , e))
-      ( is-proof-irrelevant-walk-unique-parent-Graph H y w)
+      ( is-proof-irrelevant-walk-unique-parent-Directed-Graph H y w)
 
-  is-directed-tree-unique-parent-Graph :
-    unique-parent-Graph → ((x : vertex-Graph G) → walk-Graph G x r) →
-    is-directed-tree-Graph G r
-  is-directed-tree-unique-parent-Graph H w x =
-    is-proof-irrelevant-walk-unique-parent-Graph H x (w x)
+  is-tree-unique-parent-Directed-Graph :
+    unique-parent-Directed-Graph →
+    ((x : vertex-Directed-Graph G) → walk-Directed-Graph G x r) →
+    is-tree-Directed-Graph G r
+  is-tree-unique-parent-Directed-Graph H w x =
+    is-proof-irrelevant-walk-unique-parent-Directed-Graph H x (w x)
 ```

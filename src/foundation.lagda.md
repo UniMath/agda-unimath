@@ -3,8 +3,6 @@ title: Foundation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation where
 
 open import foundation.0-connected-types public
@@ -23,6 +21,7 @@ open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
 open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-relations public
+open import foundation.binary-transport public
 open import foundation.boolean-reflection public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public

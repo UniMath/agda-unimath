@@ -59,17 +59,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Graph l1 l2)
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
   where
 
   undirected-graph-Graph : Undirected-Graph l1 l2
-  pr1 undirected-graph-Graph = vertex-Graph G
+  pr1 undirected-graph-Graph = vertex-Directed-Graph G
   pr2 undirected-graph-Graph p =
     Σ ( type-unordered-pair p)
       ( λ x →
         Σ ( type-unordered-pair p)
           ( λ y →
-            edge-Graph G
+            edge-Directed-Graph G
               ( element-unordered-pair p x)
               ( element-unordered-pair p y)))
 
@@ -77,7 +77,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  graph-Undirected-Graph : Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
+  graph-Undirected-Graph : Directed-Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
   pr1 graph-Undirected-Graph = vertex-Undirected-Graph G
   pr2 graph-Undirected-Graph x y =
     Σ ( unordered-pair-vertices-Undirected-Graph G)
@@ -85,7 +85,7 @@ module _
         ( mere-Eq-unordered-pair (standard-unordered-pair x y) p) ×
         ( edge-Undirected-Graph G p))
 
-  graph-Undirected-Graph' : Graph l1 l2
+  graph-Undirected-Graph' : Directed-Graph l1 l2
   pr1 graph-Undirected-Graph' = vertex-Undirected-Graph G
   pr2 graph-Undirected-Graph' x y =
     edge-Undirected-Graph G (standard-unordered-pair x y)

@@ -19,21 +19,25 @@ A trail in a directed graph is a walk that goes through each edge at most once.
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Graph l1 l2)
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
   where
   
-  is-trail-walk-Graph :
-    {x y : vertex-Graph G} (w : walk-Graph G x y) → UU (l1 ⊔ l2)
-  is-trail-walk-Graph w = is-injective (total-edge-edge-on-walk-Graph G w)
+  is-trail-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G} → walk-Directed-Graph G x y → UU (l1 ⊔ l2)
+  is-trail-walk-Directed-Graph w =
+    is-injective (total-edge-edge-on-walk-Directed-Graph G w)
 
-  trail-Graph : (x y : vertex-Graph G) → UU (l1 ⊔ l2)
-  trail-Graph x y = Σ (walk-Graph G x y) (is-trail-walk-Graph)
+  trail-Directed-Graph : (x y : vertex-Directed-Graph G) → UU (l1 ⊔ l2)
+  trail-Directed-Graph x y =
+    Σ (walk-Directed-Graph G x y) (is-trail-walk-Directed-Graph)
 
-  walk-trail-Graph : {x y : vertex-Graph G} → trail-Graph x y → walk-Graph G x y
-  walk-trail-Graph = pr1
+  walk-trail-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    trail-Directed-Graph x y → walk-Directed-Graph G x y
+  walk-trail-Directed-Graph = pr1
 
-  is-trail-trail-Graph :
-    {x y : vertex-Graph G} (t : trail-Graph x y) →
-    is-trail-walk-Graph (walk-trail-Graph t)
-  is-trail-trail-Graph = pr2
+  is-trail-trail-Directed-Graph :
+    {x y : vertex-Directed-Graph G} (t : trail-Directed-Graph x y) →
+    is-trail-walk-Directed-Graph (walk-trail-Directed-Graph t)
+  is-trail-trail-Directed-Graph = pr2
 ```

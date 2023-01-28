@@ -75,7 +75,7 @@ module _
         ( node-inclusion-graph-element-𝕎 H x)
         ( node-inclusion-graph-element-𝕎 H y)
 
-  graph-element-𝕎 : 𝕎 A B → Graph (l1 ⊔ l2) (l1 ⊔ l2)
+  graph-element-𝕎 : 𝕎 A B → Directed-Graph (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 (graph-element-𝕎 w) = node-graph-element-𝕎 w
   pr2 (graph-element-𝕎 w) = edge-graph-element-𝕎 w
 ```
@@ -288,7 +288,7 @@ module _
 
   inclusion-graph-element-𝕎 :
     {u v : 𝕎 A B} → u ∈-𝕎 v →
-    hom-Graph (graph-element-𝕎 u) (graph-element-𝕎 v)
+    hom-Directed-Graph (graph-element-𝕎 u) (graph-element-𝕎 v)
   pr1 (inclusion-graph-element-𝕎 {u} {v} H) =
     node-inclusion-graph-element-𝕎 H
   pr2 (inclusion-graph-element-𝕎 {u} {v} H) x y e =
@@ -496,22 +496,22 @@ module _
 
   walk-to-root-graph-element-𝕎 :
     (w : 𝕎 A B) (x : node-graph-element-𝕎 w) →
-    walk-Graph (graph-element-𝕎 w) x root-𝕎
-  walk-to-root-graph-element-𝕎 w root-𝕎 = refl-walk-Graph
+    walk-Directed-Graph (graph-element-𝕎 w) x root-𝕎
+  walk-to-root-graph-element-𝕎 w root-𝕎 = refl-walk-Directed-Graph
   walk-to-root-graph-element-𝕎 w (node-inclusion-graph-element-𝕎 {v} H x) =
-    snoc-walk-Graph
+    snoc-walk-Directed-Graph
       ( graph-element-𝕎 w)
-      ( walk-hom-Graph
+      ( walk-hom-Directed-Graph
         ( graph-element-𝕎 v)
         ( graph-element-𝕎 w)
         ( inclusion-graph-element-𝕎 H)
         ( walk-to-root-graph-element-𝕎 v x))
       ( edge-to-root-graph-element-𝕎 H)
     
-  is-directed-tree-graph-element-𝕎 :
-    (w : 𝕎 A B) → is-directed-tree-Graph (graph-element-𝕎 w) root-𝕎
-  is-directed-tree-graph-element-𝕎 w =
-    is-directed-tree-unique-parent-Graph
+  is-tree-graph-element-𝕎 :
+    (w : 𝕎 A B) → is-tree-Directed-Graph (graph-element-𝕎 w) root-𝕎
+  is-tree-graph-element-𝕎 w =
+    is-tree-unique-parent-Directed-Graph
       ( graph-element-𝕎 w)
       ( root-𝕎)
       ( has-unique-predecessor-graph-element-𝕎 w)
@@ -521,5 +521,5 @@ module _
     𝕎 A B → Directed-Tree (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 (directed-tree-element-𝕎 w) = graph-element-𝕎 w
   pr1 (pr2 (directed-tree-element-𝕎 w)) = root-𝕎
-  pr2 (pr2 (directed-tree-element-𝕎 w)) = is-directed-tree-graph-element-𝕎 w
+  pr2 (pr2 (directed-tree-element-𝕎 w)) = is-tree-graph-element-𝕎 w
 ```
