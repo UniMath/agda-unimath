@@ -28,30 +28,33 @@ is also an embedding. Embeddings of directed graphs correspond to directed subgr
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (G : Graph l1 l2) (H : Graph l3 l4)
+  {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
   where
 
-  is-emb-hom-Graph-Prop : hom-Graph G H → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-emb-hom-Graph-Prop f =
+  is-emb-hom-Directed-Graph-Prop :
+    hom-Directed-Graph G H → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-emb-hom-Directed-Graph-Prop f =
     prod-Prop
-      ( is-emb-Prop (vertex-hom-Graph G H f))
+      ( is-emb-Prop (vertex-hom-Directed-Graph G H f))
       ( Π-Prop
-        ( vertex-Graph G)
+        ( vertex-Directed-Graph G)
         ( λ x →
           Π-Prop
-            ( vertex-Graph G)
-            ( λ y → is-emb-Prop (edge-hom-Graph G H f {x} {y}))))
+            ( vertex-Directed-Graph G)
+            ( λ y → is-emb-Prop (edge-hom-Directed-Graph G H f {x} {y}))))
 
-  is-emb-hom-Graph : hom-Graph G H → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-emb-hom-Graph f = type-Prop (is-emb-hom-Graph-Prop f)
+  is-emb-hom-Directed-Graph : hom-Directed-Graph G H → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-emb-hom-Directed-Graph f = type-Prop (is-emb-hom-Directed-Graph-Prop f)
 
-  emb-Graph : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  emb-Graph = Σ (hom-Graph G H) is-emb-hom-Graph
+  emb-Directed-Graph : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  emb-Directed-Graph = Σ (hom-Directed-Graph G H) is-emb-hom-Directed-Graph
 
-  hom-emb-Graph : emb-Graph → hom-Graph G H
-  hom-emb-Graph = pr1
+  hom-emb-Directed-Graph : emb-Directed-Graph → hom-Directed-Graph G H
+  hom-emb-Directed-Graph = pr1
 
-  is-emb-emb-Graph : (f : emb-Graph) → is-emb-hom-Graph (hom-emb-Graph f)
-  is-emb-emb-Graph = pr2
+  is-emb-emb-Directed-Graph :
+    (f : emb-Directed-Graph) →
+    is-emb-hom-Directed-Graph (hom-emb-Directed-Graph f)
+  is-emb-emb-Directed-Graph = pr2
 ```
 
