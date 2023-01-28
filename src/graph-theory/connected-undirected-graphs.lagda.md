@@ -1,19 +1,16 @@
-# Connected graphs
+---
+title: Connected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.connected-undirected-graphs where
 
-open import foundation.propositional-truncations using (type-trunc-Prop; is-prop-type-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π )
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; vertex-Undirected-Graph)
-open import graph-theory.walks-undirected-graphs using
-  ( walk-Undirected-Graph)
+open import graph-theory.undirected-graphs
+open import graph-theory.walks-undirected-graphs
 ```
 
 ## Idea

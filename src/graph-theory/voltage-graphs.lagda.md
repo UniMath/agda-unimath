@@ -3,8 +3,6 @@ title : Voltage graphs
 --- 
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.voltage-graphs where
 
 open import foundation.dependent-pair-types

@@ -3,8 +3,6 @@ title: Complete undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.complete-undirected-graphs where
 
 open import foundation.universe-levels

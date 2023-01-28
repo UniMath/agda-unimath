@@ -1,8 +1,8 @@
-# Directed graphs
+---
+title: Graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.directed-graphs where
 
 open import foundation.universe-levels

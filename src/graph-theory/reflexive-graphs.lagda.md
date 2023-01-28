@@ -3,8 +3,6 @@ title: Reflexive graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.reflexive-graphs where
 
 open import foundation.coproduct-types
@@ -27,8 +25,6 @@ open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
-
-
 ```
 
 ## Idea

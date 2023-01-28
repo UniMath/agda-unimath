@@ -3,8 +3,6 @@ title: Eulerian circuits in undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.eulerian-circuits-undirected-graphs where
 
 open import elementary-number-theory.natural-numbers
