@@ -109,6 +109,15 @@ homotopy-reasoning
     ~ i by htpy-3
 ```
 
+For equalities we thus write the chains as follows
+
+```md
+equational-reasoning
+  x ＝ y by eq-1
+    ＝ z by eq-2
+    ＝ v by eq-3
+```
+
 ### Equational reasoning for equivalences
 
 ```agda
