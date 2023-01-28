@@ -129,10 +129,9 @@ Too bad I thought of this only after writing everything out...oops -}
   is-equiv-tr-path-over-path-over² =
     is-equiv-has-inverse path-over²-tr-path-over
     issec-path-over²-tr-path-over isretr-path-over²-tr-path-over
-    
 ```
 
-Definition: Groupoidal operators on dependent paths.
+Definitions of the groupoidal operators
 
 ```agda
 module _
