@@ -5,7 +5,6 @@ title: Suspensions of types
 ```agda
 module synthetic-homotopy-theory.suspensions-of-types where
 
-open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -31,15 +30,15 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ```agda
 suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-structure X Y = Σ Y (λ N → Σ Y (λ S → (x : X) → Id N S))
+suspension-structure X Y = Σ Y (λ N → Σ Y (λ S → (x : X) → N ＝ S))
 
-suspension-cocone' :
+suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-cocone' X Y = cocone (const X unit star) (const X unit star) Y
+suspension-cocone X Y = cocone (const X unit star) (const X unit star) Y
 
 cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
-  suspension-structure X Y → suspension-cocone' X Y
+  suspension-structure X Y → suspension-cocone X Y
 cocone-suspension-structure X Y (pair N (pair S merid)) =
   pair
     ( const unit Y N)
@@ -76,6 +75,12 @@ S-susp {X = X} = inr-pushout (const X unit star) (const X unit star) star
 merid-susp :
   {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
 merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
+
+suspension-structure-suspension :
+  {l : Level} (X : UU l) → suspension-structure X (suspension X)
+pr1 (suspension-structure-suspension X) = N-susp
+pr1 (pr2 (suspension-structure-suspension X)) = S-susp
+pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
 ```
 
 ## Properties
@@ -83,14 +88,10 @@ merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
 ### The universal property of the suspension as a pushout
 
 ```agda
-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) → UU _
-suspension-cocone X Z = Σ Z (λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
-
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (susp-str-Y : suspension-structure X Y) →
-  (Z : UU l3) → (Y → Z) → suspension-cocone X Z
+  (Z : UU l3) → (Y → Z) → suspension-structure X Z
 ev-suspension (pair N (pair S merid)) Z h =
   pair (h N) (pair (h S) (h ·l merid))
 
@@ -102,7 +103,7 @@ universal-property-suspension l X Y susp-str-Y =
 
 comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-cocone' X Z ≃ suspension-cocone X Z
+  suspension-cocone X Z ≃ suspension-structure X Z
 comparison-suspension-cocone X Z =
   equiv-Σ
     ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
@@ -115,7 +116,7 @@ comparison-suspension-cocone X Z =
 
 map-comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-cocone' X Z → suspension-cocone X Z
+  suspension-cocone X Z → suspension-structure X Z
 map-comparison-suspension-cocone X Z =
   map-equiv (comparison-suspension-cocone X Z)
 
@@ -183,12 +184,24 @@ module _
   where
   
   up-suspension :
-    {l : Level} → universal-property-suspension l X  (suspension X) (N-susp , S-susp , merid-susp)
-  up-suspension Z = htpy-preserve-is-equiv ((pr2 ( (comparison-suspension-cocone X Z) ∘e
-    (equiv-up-pushout (const X unit star) (const X unit star) Z))))
-    ((triangle-ev-suspension {X = X} {Y = suspension X} (N-susp , S-susp , merid-susp) Z)) 
+    {l : Level} →
+    universal-property-suspension l X
+      ( suspension X)
+      ( suspension-structure-suspension X)
+  up-suspension Z =
+    is-equiv-htpy
+      ( ev-suspension (suspension-structure-suspension X) Z)
+      ( triangle-ev-suspension
+        { X = X}
+        { Y = suspension X}
+        ( suspension-structure-suspension X) Z)
+      ( is-equiv-map-equiv
+        ( ( comparison-suspension-cocone X Z) ∘e
+          ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
 
   equiv-up-suspensions :
-    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-cocone X Z)
-  equiv-up-suspensions Z = (ev-suspension (N-susp , S-susp , merid-susp) Z) , up-suspension Z
+    {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-structure X Z)
+  pr1 (equiv-up-suspensions Z) =
+    ev-suspension (suspension-structure-suspension X) Z
+  pr2 (equiv-up-suspensions Z) = up-suspension Z
 ```
