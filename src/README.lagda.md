@@ -865,6 +865,7 @@ open import synthetic-homotopy-theory.wedges-of-pointed-types
 open import trees
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
+open import trees.enriched-directed-trees
 open import trees.extensional-w-types
 open import trees.functoriality-w-types
 open import trees.indexed-w-types
