@@ -16,7 +16,7 @@ open import foundation.homotopies
 open import foundation.universe-levels
 ```
 
-Useful later:
+We characterize dependent paths in the family λ t → path-over B t b0 b1
 
 ```agda
 module _
@@ -27,14 +27,36 @@ module _
   tr² : (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
   tr² α b0 = ap (λ t → tr B t b0) α
 
-{- Use transport lemmas when they become availible (i.e., when pr is merged) -}
-coh-tr²-tr-tr :
+module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
   (B : A → UU l2) {b0 : B a0} {b1 : B a1} (α : p0 ＝ p1)
-  (q01 : path-over B p0 b0 b1) → 
-  (tr (λ t → path-over B t b0 b1) α q01) ＝ (inv (tr² B α b0) ∙ q01)
-coh-tr²-tr-tr B refl q01 = refl
+  where
+  
+  tr-path-over :
+    (q01 : path-over B p0 b0 b1) → 
+    (tr (λ t → path-over B t b0 b1) α q01) ＝ (inv (tr² B α b0) ∙ q01)
+  tr-path-over q01 = inv (tr-ap {D = (λ x → x ＝ b1)}
+    (λ t → tr B t b0) (λ x → id) α q01) ∙ tr-Id-left (tr² B α b0) q01
 
+  tr-inv-path-over :
+    (q01 : path-over B p1 b0 b1) → 
+    (tr (λ t → path-over B t b0 b1) (inv α) q01) ＝ ((tr² B α b0) ∙ q01)
+  tr-inv-path-over q01 = inv (tr-ap {D = λ x → x ＝ b1}
+    (λ t → tr B t b0) (λ x → id) (inv α) q01) ∙
+    (tr-Id-left (ap (λ t → tr B t b0) (inv α)) q01 ∙
+    (ap (λ t → t ∙ q01) (inv (ap-inv (λ t → tr B t b0) (inv α))) ∙
+    ap (λ x → ap (λ t → tr B t b0) x ∙ q01) (inv-inv α)))
+
+  tr-path-over-eq-inv-tr²-concat :
+    (tr (λ t → path-over B t b0 b1) α) ＝ (λ q → inv (tr² B α b0) ∙ q)
+  tr-path-over-eq-inv-tr²-concat = map-inv-equiv ((htpy-eq) ,
+    (funext (tr (λ t → path-over B t b0 b1) α) (λ q → inv (tr² B α b0) ∙ q))) tr-path-over
+
+  tr-inv-path-over-eq-tr²-concat :
+    (λ q → tr (λ t → path-over B t b0 b1) (inv α) q) ＝ (λ q → (tr² B α b0) ∙ q)
+  tr-inv-path-over-eq-tr²-concat = map-inv-equiv ((htpy-eq) ,
+    (funext (tr (λ t → path-over B t b0 b1) (inv α)) (λ q → (tr² B α b0) ∙ q))) tr-inv-path-over
+  
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
   (B : A → UU l2) (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
@@ -46,10 +68,66 @@ module _
 
   tr-path-over-path-over² :
     (path-over²) → ((tr (λ t → path-over B t b0 b1) α q0) ＝ q1)
-  tr-path-over-path-over² z = coh-tr²-tr-tr B α q0 ∙ (
+  tr-path-over-path-over² z = tr-path-over B α q0 ∙ (
     (map-inv-equiv (equiv-inv-con (inv (tr² B α b0)) q0 q1)
     (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (tr² B α b0))))))
+
+  path-over²-tr-path-over :
+    ((tr (λ t → path-over B t b0 b1) α q0) ＝ q1) → (path-over²)
+  path-over²-tr-path-over z =
+    (map-equiv (equiv-inv-con (inv (tr² B α b0)) q0 q1) ((inv (tr-path-over B α q0)) ∙ z)) ∙
+    ap (λ t → t ∙ q1) (inv-inv (tr² B α b0))
+
+{- Could simplify ensuing proof enormously by rewriting map
+and inverse as compositions of known equivalences and then applying 2-of-3 like lemma
+Too bad I thought of this only after writing everything out...oops -}
+
+  issec-path-over²-tr-path-over :
+    ((λ z → tr-path-over-path-over² z) ∘ path-over²-tr-path-over) ~ id
+  issec-path-over²-tr-path-over z =
+    (ap (λ x → tr-path-over B α q0 ∙
+    pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)) x)
+    (assoc (inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 (inv (tr-path-over B α q0) ∙ z))
+    (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
+    (inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))))) ∙
+    ((ap (λ x → tr-path-over B α q0 ∙
+    pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+    (inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 (inv (tr-path-over B α q0) ∙ z) ∙ x ))
+    (right-inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
+    ((ap (λ x → tr-path-over B α q0 ∙ pr1 (pr1 (is-equiv-inv-con
+    (inv (ap (λ t → tr B t b0) α)) q0 q1)) x) right-unit) ∙
+    ((ap (λ x → tr-path-over B α q0 ∙ x) ( isretr-map-inv-equiv
+    (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1) (inv (tr-path-over B α q0) ∙ z) )) ∙
+    (inv (assoc (tr-path-over B α q0) (inv (tr-path-over B α q0)) z) ∙
+    (ap (λ t → t ∙ z) (right-inv (tr-path-over B α q0)))))))
+
+  isretr-path-over²-tr-path-over :
+    (path-over²-tr-path-over ∘ (λ z → tr-path-over-path-over² z)) ~ id
+  isretr-path-over²-tr-path-over z =
+    (ap (λ x → inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1 x ∙
+    ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
+    (inv (assoc (inv (tr-path-over B α q0)) (tr-path-over B α q0)
+    (pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))))) ) ∙
+    (ap (λ x → inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1
+    (x ∙ pr1 (pr1 (is-equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1))
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
+    ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))) (left-inv (tr-path-over B α q0)) ∙
+    (ap (λ x → x ∙ ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))
+    (issec-map-inv-equiv (equiv-inv-con (inv (ap (λ t → tr B t b0) α)) q0 q1)
+    (z ∙ inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))) ∙
+    (assoc z (inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))))
+    (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α))) ∙
+    (ap (λ t → z ∙ t) (left-inv (ap (λ t → t ∙ q1) (inv-inv (ap (λ t → tr B t b0) α)))) ∙ right-unit))))
+
+  is-equiv-tr-path-over-path-over² :
+    is-equiv tr-path-over-path-over²
+  is-equiv-tr-path-over-path-over² =
+    is-equiv-has-inverse path-over²-tr-path-over
+    issec-path-over²-tr-path-over isretr-path-over²-tr-path-over
 ```
+
+Definitions of the groupoidal operators
 
 ```agda
 module _
@@ -70,7 +148,8 @@ module _
     ap (λ t → tr B t b0) (right-inv p01))) 
 ```
 
-Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws. Though, due to the dependent nature, the naive identities are not well typed. So these identities involve transporting.
+Now we prove these paths satisfy identities analgous to the usual unit, inverse, and associativity laws.
+Though, due to the dependent nature, the naive identities are not well typed. So these identities involve transporting.
 
 ```agda
 module _
@@ -93,9 +172,11 @@ module _
     (tr (λ t → path-over B t b0 b3) (assoc p01 p12 p23) (d-concat B (p01 ∙ p12) (
     d-concat B p01 q01 p12 q12) p23 q23)) ＝
     d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23)
-  d-assoc' p01 q01 p12 q12 p23 q23 = tr-path-over-path-over² B (assoc p01 p12 p23)
-     (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)
-     (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23)) (d-assoc p01 q01 p12 q12 p23 q23)
+  d-assoc' p01 q01 p12 q12 p23 q23 =
+    tr-path-over-path-over² B  (assoc p01 p12 p23)
+    (d-concat B (p01 ∙ p12) (d-concat B p01 q01 p12 q12) p23 q23)
+    (d-concat B p01 q01 (p12 ∙ p23) (d-concat B p12 q12 p23 q23))
+    (d-assoc p01 q01 p12 q12 p23 q23)
 
   d-right-unit : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (right-unit {p = p}) (d-concat B p q refl (refl-path-over B a1 b1)) q
@@ -164,77 +245,3 @@ module _
     (distributive-inv-concat p01 p12) (d-inv B (p01 ∙ p12) (d-concat B p01 q01 p12 q12))
     (d-concat B (inv p12) (d-inv B p12 q12) (inv p01) (d-inv B p01 q01)) (distributive-d-inv-d-concat p01 q01 p12 q12)
 ```
-
-The operations on dependent paths are equivalences
-
-```agda
-
-{-
-module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A} {B : A → UU l2} {b0 : B a0} {b1 : B a1} {b2 : B a2}
-  where
-
-  inv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
-    (path-over B (p01 ∙ p12) b0 b2) → (path-over B p12  b1 b2)
-  inv-left-d-concat p01 q01 p12 = (tr (λ t' → path-over B t' b1 b2) ((inv (assoc (inv p01) p01 p12)) ∙ (
-    ap (λ t → t ∙ p12) (left-inv p01)))) ∘ (d-concat B (inv p01) (d-inv B p01 q01) (p01 ∙ p12))
-
-
-
-  issec-inv-left-d-concat' : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
-    ((λ z → d-concat B p01 q01 p12 z) ∘ (inv-left-d-concat p01 q01 p12)) ~ id
-  issec-inv-left-d-concat' refl refl refl refl = refl
-
-  isretr-inv-left-d-concat' : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
-    ((inv-left-d-concat p01 q01 p12) ∘ (λ z → d-concat B p01 q01 p12 z)) ~ id
-  isretr-inv-left-d-concat' refl refl refl refl = refl
-
-  is-equiv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
-    is-equiv (λ (t : path-over B p12 b1 b2) → d-concat B p01 q01 p12 t)
-  is-equiv-left-d-concat p01 q01 p12 =  is-equiv-has-inverse ((inv-left-d-concat p01 q01 p12))  (
-    issec-inv-left-d-concat' p01 q01 p12) (isretr-inv-left-d-concat' p01 q01 p12)
-
-  equiv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1) (p12 : a1 ＝ a2) →
-    (path-over B p12 b1 b2) ≃ (path-over B (p01 ∙ p12) b0 b2)
-  equiv-left-d-concat p01 q01 p12 = (λ t → (d-concat B p01 q01 p12 t)) , (
-    is-equiv-left-d-concat p01 q01 p12)
-
-  coh-com-sq-d-concat-tr : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1)
-    (p12 : a1 ＝ a2) (q12' : path-over B (inv p01 ∙ (p01 ∙ p12)) b1 b2) →
-    (square-function-htpy (tr (λ t → path-over B t b1 b2) (
-    inv (assoc (inv p01) p01 p12) ∙ (ap (λ t → t ∙ p12) (left-inv p01)))) (d-concat B p01 q01 p12)
-    ((d-concat B p01 q01 (inv p01 ∙ (p01 ∙ p12)))) (tr (λ t → path-over B (p01 ∙ t) b0 b2) (
-    inv (assoc (inv p01) p01 p12) ∙ (ap (λ t → t ∙ p12) (left-inv p01)))) q12')
-  coh-com-sq-d-concat-tr p01 q01 p12 q12' = preserves-tr (
-    λ t → d-concat B p01 q01 t) (inv (assoc (inv p01) p01 p12) ∙ (ap (λ t → t ∙ p12) (left-inv p01))) q12'
-
-
-
-  
-(tr (λ t → path-over B (p01 ∙ t) b0 b2) (  (inv (assoc (inv p01) p01 p12)) ∙ (
-    ap ( _∙ p12) (right-inv p01) ) ))
-    
-    (  ∘ (
-    (inv (assoc (inv p01) p01 p12)) ∙ ( ap ( _∙ p12) (right-inv p01) ) ))) q12') ＝
-    ( ( ∘ (d-concat p01 q01 ( (inv p01) ∙ (p01 ∙ p12) ) )) q12' ) -}
-{- THERE HAS TO BE A BETTER WAY
-  issec-inv-left-d-concat : (p01 : a0 ＝ a1) (q01 : path-over B p01 b0 b1)
-    (p12 : a1 ＝ a2) (q02 : path-over B (p01 ∙ p12) b0 b2) →
-    (((λ z → d-concat B p01 q01 p12 z) ∘
-    (inv-left-d-concat p01 q01 p12)) q02) ＝ q02
-  issec-inv-left-d-concat p01 q01 p12 q02 = coh-com-sq-d-concat-tr
-    p01 q01 p12 (d-concat B (inv p01) (d-inv B p01 q01) ((p01 ∙ p12)) q02) ∙
-    ((ap (λ x → tr (λ t → path-over B (p01 ∙ t) b0 b2)
-    (inv (assoc (inv p01) p01 p12) ∙ ap (λ t → t ∙ p12) (left-inv p01)) x)
-    ( (inv (d-assoc B p01 q01 (inv p01) (d-inv B p01 q01 ) (p01 ∙ p12) q02)) )) ∙ (ap
-    (λ x → tr (λ t → path-over B (p01 ∙ t) b0 b2)
-    (inv (assoc (inv p01) p01 p12) ∙ ap (λ t → t ∙ p12) (left-inv p01))
-    (tr (λ t → path-over B t b0 b2) (assoc p01 (inv p01) (p01 ∙ p12))
-    (d-concat B (p01 ∙ inv p01) x (p01 ∙ p12) q02)))
-    ((eq-transpose-tr' (right-inv p01) (d-right-inv B p01 q01))) ∙ ({!!} ∙ {!!})))
- 
-
-for (inv p0 ∙ (p01 ∙ p12)) ＝ p12, use the path inv (assoc (inv p01) p01 p12) ∙ (ap (λ t → t ∙ p12) (left-inv p01))
- (eq-transpose-tr' {B = (λ t → path-over B t b0 b2)} {!!}
-ap (λ t → p01 ∙ t) (inv (assoc (inv p01) p01 p12) ∙ (ap (λ t → t ∙ p12) (left-inv p01)))
--}
