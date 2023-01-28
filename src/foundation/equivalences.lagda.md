@@ -62,6 +62,7 @@ open import foundation.subtype-identity-principle using
 open import foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
 
+open import foundation.equivalence-extensionality
 open import foundation.truncated-maps
 ```
 
@@ -325,81 +326,6 @@ module _
   emb-map-equiv : (A ≃ B) ↪ (A → B)
   pr1 emb-map-equiv = map-equiv
   pr2 emb-map-equiv = is-emb-map-equiv
-```
-
-### Characterizing the identity type of equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
-  htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
-
-  extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
-  extensionality-equiv f =
-    extensionality-type-subtype
-      ( is-equiv-Prop)
-      ( pr2 f)
-      ( refl-htpy {f = pr1 f})
-      ( λ g → equiv-funext)
-  
-  refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
-  refl-htpy-equiv e = refl-htpy
-
-  abstract
-    is-contr-total-htpy-equiv :
-      (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
-    is-contr-total-htpy-equiv e =
-      fundamental-theorem-id'
-        ( λ f → map-equiv (extensionality-equiv e f))
-        ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
-
-  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → e ＝ e'
-  eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
-
-  htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
-  htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
-
-  isretr-eq-htpy-equiv :
-    {e e' : A ≃ B} (p : e ＝ e') → (eq-htpy-equiv (htpy-eq-equiv p)) ＝ p
-  isretr-eq-htpy-equiv {e} {e'} = isretr-map-inv-equiv (extensionality-equiv e e')
-
-  issec-eq-htpy-equiv :
-    {e e' : A ≃ B} (H : htpy-equiv e e') → (htpy-eq-equiv (eq-htpy-equiv H)) ＝ H
-  issec-eq-htpy-equiv {e} {e'} = issec-map-inv-equiv (extensionality-equiv e e')
-
-  htpy-issec-eq-htpy-equiv :
-    {e e' : A ≃ B} (H : htpy-equiv e e') → htpy-eq-equiv (eq-htpy-equiv {e} {e'} H) ~ H
-  htpy-issec-eq-htpy-equiv H = htpy-eq (issec-eq-htpy-equiv H)
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  preserves-concat-htpy-eq-equiv :
-    {e f g : A ≃ B} (p : e ＝ f) (q : f ＝ g) →
-    htpy-eq-equiv (p ∙ q) ＝ (htpy-eq-equiv p ∙h htpy-eq-equiv q)
-  preserves-concat-htpy-eq-equiv refl q = refl
-
-  preserves-concat-eq-htpy-equiv :
-    {e f g : A ≃ B} (H : htpy-equiv e f) (K : htpy-equiv f g) →
-    ( eq-htpy-equiv {e = e} {e' = g} (H ∙h K)) ＝
-    ( eq-htpy-equiv {e' = f} H ∙ eq-htpy-equiv K)
-  preserves-concat-eq-htpy-equiv H K =
-    ( ap
-      ( eq-htpy-equiv)
-      ( ap-binary
-        ( λ α β → α ∙h β)
-        ( inv (issec-eq-htpy-equiv H))
-        ( inv (issec-eq-htpy-equiv K)))) ∙
-    ( ( ap
-        ( eq-htpy-equiv)
-        ( inv (preserves-concat-htpy-eq-equiv (eq-htpy-equiv H) (eq-htpy-equiv K)))) ∙
-      ( isretr-eq-htpy-equiv (eq-htpy-equiv H ∙ eq-htpy-equiv K)))
 ```
 
 ### Homotopy induction for homotopies between equivalences

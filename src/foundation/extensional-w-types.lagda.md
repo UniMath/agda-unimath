@@ -14,9 +14,10 @@ open import foundation.elementhood-relation-w-types using (_∈-𝕎_)
 open import foundation.equality-dependent-function-types using
   ( is-contr-total-Eq-Π)
 open import foundation.equivalences using
-  ( _≃_; id-equiv; map-equiv; is-contr-total-htpy-equiv; is-equiv;
+  ( _≃_; id-equiv; map-equiv; is-equiv;
     map-inv-is-equiv; map-inv-equiv; _∘e_; isretr-map-inv-equiv; inv-equiv;
     is-equiv-Prop)
+open import foundation.equivalence-extensionality using (is-contr-total-htpy-equiv)
 open import foundation.functions using (_∘_)
 open import foundation.functoriality-dependent-function-types using
   ( equiv-Π)

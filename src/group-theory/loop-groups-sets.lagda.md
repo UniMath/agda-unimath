@@ -10,7 +10,7 @@ module group-theory.loop-groups-sets where
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; map-equiv; inv-equiv; id-equiv; left-inverse-law-equiv; right-inverse-law-equiv;
-    left-unit-law-equiv; eq-htpy-equiv)
+    left-unit-law-equiv)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ; pair-eq-Σ; issec-pair-eq-Σ; isretr-pair-eq-Σ; comp-eq-pair-Σ; comp-pair-eq-Σ)
 open import foundation.functions using (id)

@@ -43,6 +43,7 @@ open import category-theory.epimorphisms-large-precategories
 open import category-theory.equivalences-categories
 open import category-theory.equivalences-large-precategories
 open import category-theory.equivalences-precategories
+open import category-theory.exponential-objects-precategories
 open import category-theory.functors-categories
 open import category-theory.functors-large-precategories
 open import category-theory.functors-precategories
@@ -63,6 +64,8 @@ open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
+open import category-theory.products-precategories
+open import category-theory.pullbacks-precategories
 open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```

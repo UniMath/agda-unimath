@@ -41,12 +41,14 @@ open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
 open import foundation.equality-dependent-pair-types using
   ( eq-pair-Σ; pair-eq-Σ)
 open import foundation.equivalences using
-  ( _≃_; _∘e_; eq-htpy-equiv; htpy-equiv; id-equiv; inv-equiv; is-emb-is-equiv;
+  ( _≃_; _∘e_; id-equiv; inv-equiv; is-emb-is-equiv;
     is-equiv; is-equiv-has-inverse; left-inverse-law-equiv;
-    right-inverse-law-equiv; map-equiv; map-inv-equiv; htpy-eq-equiv)
+    right-inverse-law-equiv; map-equiv; map-inv-equiv)
 open import foundation.equivalences-maybe using
   ( extend-equiv-Maybe; comp-extend-equiv-Maybe;
     computation-inv-extend-equiv-Maybe)
+open import foundation.equivalence-extensionality using
+  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv)
 open import foundation.functions using (_∘_; id)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functoriality-coproduct-types using

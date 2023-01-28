@@ -53,6 +53,11 @@ postulate
     {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
     (f : S → A) (g : S → B) →
     universal-property-pushout l4 f g (cocone-pushout f g)
+
+equiv-up-pushout :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (Z : UU l4) → ((pushout f g) → Z) ≃ (cocone f g Z)
+equiv-up-pushout f g Z = (cocone-map f g (cocone-pushout f g)) , (up-pushout f g Z)
 ```
 
 ## Definitions
