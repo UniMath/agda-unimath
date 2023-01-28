@@ -26,6 +26,7 @@ open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.prespectra public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.spectra public
+open import synthetic-homotopy-theory.spheres public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
