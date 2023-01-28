@@ -195,18 +195,6 @@ module _
   pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
 
-### Homotopies preserve equivances
-
-```agda
-htpy-preserve-is-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
-  is-equiv f → (f ~ g) → is-equiv g
-htpy-preserve-is-equiv t H = is-equiv-has-inverse
-  (map-inv-is-equiv t) ((inv-htpy (htpy-right-whisk H (map-inv-is-equiv t))) ∙h
-  (issec-map-inv-is-equiv t)) ((inv-htpy (htpy-left-whisk (map-inv-is-equiv t) H)) ∙h
-  (isretr-map-inv-is-equiv t))
-```
-
 ### The 3-for-2 property of equivalences
 
 #### Composites of equivalences are equivalences
