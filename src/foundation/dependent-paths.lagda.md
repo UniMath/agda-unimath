@@ -214,7 +214,9 @@ module _
     (ap (λ t₁ → (tr-concat p (inv p) b0 ∙ (ap (tr B (inv p)) (t₁) ∙
     (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p))))) (right-inv q) ∙
     ((inv (assoc (tr-concat p (inv p) b0) (inv (tr-concat p (inv p) b0))
-    (ap (λ t → tr B t b0) (right-inv p)))) ∙ ((ap (λ t₁ → t₁ ∙ ap (λ t → tr B t b0) (right-inv p)) (right-inv (tr-concat p (inv p) b0))) ∙ (inv right-unit)))))
+    (ap (λ t → tr B t b0) (right-inv p)))) ∙
+    ((ap (λ t₁ → t₁ ∙ ap (λ t → tr B t b0) (right-inv p))
+    (right-inv (tr-concat p (inv p) b0))) ∙ (inv right-unit)))))
 
   d-right-inv' : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     (tr (λ t → path-over B t b0 b0) (right-inv p) (d-concat B p q (inv p) (d-inv B p q))) ＝ (
@@ -224,7 +226,7 @@ module _
 
   d-left-inv : (p : a0 ＝ a1) (q : path-over B p b0 b1) →
     path-over² B (left-inv p) (d-concat B (inv p) (d-inv B p q) p q) (refl-path-over B a1 b1)
-  d-left-inv p q  = {!!}
+  d-left-inv refl refl = refl
   
 {- tr-concat (inv p) p b1 ∙ (ap (tr B p) (ap (tr B (inv p)) (inv q) ∙ (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p))) ∙ q)
 (ap (tr B (inv p)) (inv q) ∙ (inv (tr-concat p (inv p) b0) ∙ ap (λ t → tr B t b0) (right-inv p))) ∙ q) -}
