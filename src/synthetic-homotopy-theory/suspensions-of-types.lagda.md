@@ -7,8 +7,6 @@ title: Suspensions of types
 
 module synthetic-homotopy-theory.suspensions-of-types where
 
-open import elementary-number-theory.natural-numbers
-
 open import foundation.booleans
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -80,18 +78,6 @@ S-susp {X = X} = inr-pushout (const X unit star) (const X unit star) star
 merid-susp :
   {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
 merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
-
-sphere : ℕ → UU lzero
-sphere zero-ℕ = bool
-sphere (succ-ℕ n) = suspension (sphere n)
-
-N-sphere : (n : ℕ) → sphere n
-N-sphere zero-ℕ = true
-N-sphere (succ-ℕ n) = N-susp
-
-S-sphere : (n : ℕ) → sphere n
-S-sphere zero-ℕ = false
-S-sphere (succ-ℕ n) = S-susp
 ```
 
 ## Properties
