@@ -177,12 +177,6 @@ issec-suspension-cocone-htpy-suspension-cocone-eq (N , S , h) (N' , S' , h') ref
     ap (λ t → eq-pair-Σ refl (eq-pair-Σ refl t))
     (eq-htpy-refl-htpy h))
 
-isretr-suspension-cocone-htpy-suspension-cocone-eq :
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
-  (c c' : suspension-cocone X Z) →
-  ((suspension-cocone-htpy-suspension-cocone-eq c c') ∘ (suspension-cocone-eq-suspension-cocone-htpy c c')) ~ id
-isretr-suspension-cocone-htpy-suspension-cocone-eq (N , S , h) (N' , S' , h') (refl , refl , H) = {!!}
-
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (susp-str-Y : suspension-structure X Y) →
