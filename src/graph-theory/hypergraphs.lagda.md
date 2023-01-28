@@ -3,8 +3,6 @@ title: Hypergraphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.hypergraphs where
 
 open import elementary-number-theory.natural-numbers

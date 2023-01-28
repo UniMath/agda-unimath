@@ -3,8 +3,6 @@ title: Directed graph structures on standard finite sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.directed-graph-structures-on-standard-finite-sets where
 
 open import elementary-number-theory.natural-numbers

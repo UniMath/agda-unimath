@@ -1,24 +1,20 @@
-# Undirected graphs
+---
+title: Undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.undirected-graphs where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv)
-open import foundation.functions using (id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (equiv-tr; ap; refl; tr)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_; lzero)
-open import foundation.unordered-pairs using
-  ( unordered-pair; map-unordered-pair; type-unordered-pair;
-    element-unordered-pair; mere-Eq-unordered-pair; standard-unordered-pair;
-    Eq-unordered-pair; eq-Eq-unordered-pair'; refl-Eq-unordered-pair;
-    isretr-eq-Eq-unordered-pair)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.directed-graphs using (Graph; vertex-Graph; edge-Graph)
+open import graph-theory.directed-graphs
 ```
 
 ## Idea

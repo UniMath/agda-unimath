@@ -1,19 +1,16 @@
-# Regular undirected graph
+---
+title: Regular undirected graph
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.regular-undirected-graphs where
 
-open import foundation.mere-equivalences using (mere-equiv-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.mere-equivalences
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import graph-theory.neighbors-undirected-graphs using
-  ( neighbor-Undirected-Graph)
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; vertex-Undirected-Graph)
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 ```
 
 ## Idea

@@ -3,8 +3,6 @@ title: Complete multipartite graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.complete-multipartite-graphs where
 
 open import foundation.dependent-pair-types

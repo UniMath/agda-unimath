@@ -3,8 +3,6 @@ title: Complete bipartite graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.complete-bipartite-graphs where
 
 open import foundation.coproduct-types
