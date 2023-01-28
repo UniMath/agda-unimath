@@ -3,8 +3,6 @@ title: Closed walks in undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.closed-walks-undirected-graphs where
 
 open import elementary-number-theory.natural-numbers

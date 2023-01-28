@@ -3,7 +3,7 @@ title: Rooted quasitrees
 ---
 
 ```agda
-module graph-theory.rooted-quasitrees where
+module trees.rooted-quasitrees where
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

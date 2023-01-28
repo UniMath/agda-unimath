@@ -3,43 +3,26 @@ title: W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.w-types where
 
-module foundation.w-types where
+open import foundation.algebras-polynomial-endofunctors
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.polynomial-endofunctors
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
-open import foundation.algebras-polynomial-endofunctors using
-  ( algebra-polynomial-endofunctor-UU; type-algebra-polynomial-endofunctor;
-    structure-algebra-polynomial-endofunctor;
-    hom-algebra-polynomial-endofunctor; map-hom-algebra-polynomial-endofunctor;
-    structure-hom-algebra-polynomial-endofunctor;
-    htpy-hom-algebra-polynomial-endofunctor;
-    eq-htpy-hom-algebra-polynomial-endofunctor)
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (is-empty; ex-falso; empty-Prop)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation.function-extensionality using
-  ( eq-htpy; eq-htpy-refl-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; _·r_; ind-htpy; _∙h_; _·l_)
-open import foundation.identity-types using
-  ( _＝_; refl; tr; ap; _∙_; inv; right-unit; concat; left-inv; assoc)
-open import foundation.polynomial-endofunctors using
-  ( type-polynomial-endofunctor; map-polynomial-endofunctor;
-    htpy-polynomial-endofunctor; coh-refl-htpy-polynomial-endofunctor)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.sets using (is-set)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-is-equiv; is-trunc-Σ; is-trunc-Π; is-trunc-is-equiv')
-open import foundation.type-theoretic-principle-of-choice using
-  ( map-distributive-Π-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-
-open import foundation-core.truncation-levels using (𝕋; succ-𝕋; neg-one-𝕋)
+open import foundation-core.truncation-levels
 ```
 
 ## Idea

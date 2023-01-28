@@ -1,24 +1,20 @@
-# Undirected graphs
+---
+title: Undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.undirected-graphs where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv)
-open import foundation.functions using (id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (equiv-tr; ap; refl; tr)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_; lzero)
-open import foundation.unordered-pairs using
-  ( unordered-pair; map-unordered-pair; type-unordered-pair;
-    element-unordered-pair; mere-Eq-unordered-pair; standard-unordered-pair;
-    Eq-unordered-pair; eq-Eq-unordered-pair'; refl-Eq-unordered-pair;
-    isretr-eq-Eq-unordered-pair)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.directed-graphs using (Graph; vertex-Graph; edge-Graph)
+open import graph-theory.directed-graphs
 ```
 
 ## Idea
@@ -63,17 +59,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Graph l1 l2)
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
   where
 
   undirected-graph-Graph : Undirected-Graph l1 l2
-  pr1 undirected-graph-Graph = vertex-Graph G
+  pr1 undirected-graph-Graph = vertex-Directed-Graph G
   pr2 undirected-graph-Graph p =
     Σ ( type-unordered-pair p)
       ( λ x →
         Σ ( type-unordered-pair p)
           ( λ y →
-            edge-Graph G
+            edge-Directed-Graph G
               ( element-unordered-pair p x)
               ( element-unordered-pair p y)))
 
@@ -81,7 +77,7 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  graph-Undirected-Graph : Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
+  graph-Undirected-Graph : Directed-Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
   pr1 graph-Undirected-Graph = vertex-Undirected-Graph G
   pr2 graph-Undirected-Graph x y =
     Σ ( unordered-pair-vertices-Undirected-Graph G)
@@ -89,7 +85,7 @@ module _
         ( mere-Eq-unordered-pair (standard-unordered-pair x y) p) ×
         ( edge-Undirected-Graph G p))
 
-  graph-Undirected-Graph' : Graph l1 l2
+  graph-Undirected-Graph' : Directed-Graph l1 l2
   pr1 graph-Undirected-Graph' = vertex-Undirected-Graph G
   pr2 graph-Undirected-Graph' x y =
     edge-Undirected-Graph G (standard-unordered-pair x y)

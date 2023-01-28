@@ -3,39 +3,27 @@ title: Functoriality of W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.functoriality-w-types where
 
-module foundation.functoriality-w-types where
+open import foundation.cartesian-product-types
+open import foundation.contractible-maps
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.truncated-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-maps using
-  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation.equivalences using
-  ( _≃_; map-inv-equiv; inv-equiv; _∘e_; id-equiv; map-equiv;
-    issec-map-inv-equiv; is-equiv; is-equiv-map-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-function-types using (equiv-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.identity-types using
-  ( _＝_; equiv-tr; tr; equiv-concat'; ap; inv; equiv-concat)
-open import foundation.propositional-maps using
-  ( is-emb-is-prop-map; is-prop-map-is-emb)
-open import foundation.truncated-maps using (is-trunc-map)
-open import foundation.truncated-types using
-  ( is-trunc-equiv; is-trunc-Σ; is-trunc-Π)
-open import foundation.truncation-levels using (𝕋; neg-two-𝕋; neg-one-𝕋)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ; equiv-left-swap-Σ)
-open import foundation.type-theoretic-principle-of-choice using
-  ( inv-distributive-Π-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.w-types using
-  ( 𝕎; tree-𝕎; equiv-Eq-𝕎-eq; structure-𝕎-Alg; inv-equiv-structure-𝕎-Alg;
-    issec-map-inv-structure-𝕎-Alg)
+open import trees.w-types
 ```
 
 ## Idea

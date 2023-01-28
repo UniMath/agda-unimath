@@ -3,25 +3,20 @@ title: The universal multiset
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+module trees.universal-multiset where
 
-module foundation.universal-multiset where
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.raising-universe-levels
+open import foundation.small-types
+open import foundation.small-universes
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _∘e_; inv-equiv; map-inv-equiv; _≃_; isretr-map-inv-equiv)
-open import foundation.functoriality-w-types using (equiv-𝕎)
-open import foundation.identity-types using (tr; inv)
-open import foundation.multisets using (𝕍)
-open import foundation.raising-universe-levels using
-  ( equiv-raise; map-inv-raise)
-open import foundation.small-multisets using
-  ( resize-𝕍; is-small-multiset-𝕍; is-small-𝕍)
-open import foundation.small-types using
-  ( is-small-lsuc; type-is-small; equiv-is-small)
-open import foundation.small-universes using (is-small-universe)
-open import foundation.universe-levels using (Level; lsuc)
-open import foundation.w-types using (tree-𝕎; 𝕎)
+open import trees.functoriality-w-types
+open import trees.multisets
+open import trees.small-multisets
+open import trees.w-types
 ```
 
 ## Idea

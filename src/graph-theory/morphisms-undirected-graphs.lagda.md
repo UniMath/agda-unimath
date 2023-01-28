@@ -1,32 +1,25 @@
-# Morphisms of undirected graphs
+---
+title: Morphisms of undirected graphs
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.morphisms-undirected-graphs where
 
-open import foundation.contractible-types using (is-contr; is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using (is-equiv; _≃_; map-inv-is-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (Id; tr; ap; equiv-concat; refl)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
-open import foundation.unordered-pairs using
-  ( map-unordered-pair; htpy-unordered-pair; preserves-refl-htpy-unordered-pair)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; vertex-Undirected-Graph; edge-Undirected-Graph;
-    unordered-pair-vertices-Undirected-Graph)
+open import graph-theory.undirected-graphs
 ```
 
 ## Definitions

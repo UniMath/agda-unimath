@@ -3,8 +3,6 @@ title: Embeddings of undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.embeddings-undirected-graphs where
 
 open import foundation.dependent-pair-types

@@ -3,22 +3,17 @@ title: Edge-coloured undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.edge-coloured-undirected-graphs where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
-open import foundation.unordered-pairs using (standard-unordered-pair)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import graph-theory.neighbors-undirected-graphs using
-  ( neighbor-Undirected-Graph)
-open import graph-theory.undirected-graphs using
-  ( Undirected-Graph; unordered-pair-vertices-Undirected-Graph;
-    vertex-Undirected-Graph; edge-Undirected-Graph)
+open import graph-theory.neighbors-undirected-graphs
+open import graph-theory.undirected-graphs
 
-open import univalent-combinatorics.finite-types using (𝔽; type-𝔽)
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

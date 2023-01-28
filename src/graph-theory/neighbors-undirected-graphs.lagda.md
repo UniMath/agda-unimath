@@ -3,8 +3,6 @@ title: Incidence in undirected graphs
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module graph-theory.neighbors-undirected-graphs where
 
 open import foundation.dependent-pair-types
