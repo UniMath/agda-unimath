@@ -26,7 +26,7 @@ open import order-theory.preorders using
 
 ## Idea
 
-Often it's convenient to reason by chains of (in)equalities or equivalences,
+Often it is convenient to reason by chains of (in)equalities or equivalences,
 i.e., to write a proof in the following form:
 
 ```md
@@ -36,21 +36,15 @@ X ≃ A by equiv-1
 ```
 
 or
+
 ```md
-x ≤ X by ineq-1 to
-a ≤ X by ineq-2 to
-b ≤ X by ineq-3 to
-c ∎ X
+x ≤ a by ineq-1 inside X
+  ≤ b by ineq-2 inside X
+  ≤ c by ineq-3 inside X
 ```
 
 where `equiv-x` and `ineq-x` are proofs of respectively the equivalences or
-inequalities. The symbol ∎ marks the end of a chain.
-
-Because we will want to have equational reasoning for both identifications and
-equivalences and we can't use the same symbol twice, we use ∎ for
-identifications and ■ for equivalences in the code below.
-
-For inequalities we also need to pass the preorder as an argument.
+inequalities. Note that for inequalities we also need to pass the preorder as an argument.
 
 We write Agda code that allows for such reasoning. The code for equational
 reasoning for equalities and equivalences is based on Martín Escardó's Agda code
@@ -62,21 +56,19 @@ reasoning for equalities and equivalences is based on Martín Escardó's Agda co
 ### Equational reasoning for identifications
 
 ```agda
-module _
-  {l : Level} {X : UU l}
-  where
+infixl 1 equational-reasoning_
+infixl 0 step-equational-reasoning
 
-  infixl 1 equational-reasoning_
-  infixl 0 step-equational-reasoning
+equational-reasoning_ :
+  {l : Level} {X : UU l} (x : X) → x ＝ x
+equational-reasoning x = refl
 
-  equational-reasoning_ : (x : X) → x ＝ x
-  equational-reasoning x = refl
+step-equational-reasoning :
+  {l : Level} {X : UU l} {x y : X} →
+  (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
+step-equational-reasoning p z q = p ∙ q
 
-  step-equational-reasoning :
-    {x y : X} → (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
-  step-equational-reasoning p z q = p ∙ q
-
-  syntax step-equational-reasoning p z q = p ＝ z by q
+syntax step-equational-reasoning p z q = p ＝ z by q
 ```
 
 For equalities we thus write the chains as follows
@@ -91,21 +83,21 @@ equational-reasoning
 ### Equational reasoning for function homotopies
 
 ```agda
-module _
+infixl 1 homotopy-reasoning_
+infixl 0 step-homotopy-reasoning
+
+homotopy-reasoning_ :
   {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
-  where
+  (f : (x : X) → Y x) → f ~ f
+homotopy-reasoning f = refl-htpy
 
-  infixl 1 homotopy-reasoning_
-  infixl 0 step-homotopy-reasoning
+step-homotopy-reasoning :
+  {l1 l2 : Level} {X : UU l1} {Y : X → UU l2}
+  {f g : (x : X) → Y x} → (f ~ g) →
+  (h : (x : X) → Y x) → (g ~ h) → (f ~ h)
+step-homotopy-reasoning p h q = p ∙h q
 
-  homotopy-reasoning_ : (f : (x : X) → Y x) → f ~ f
-  homotopy-reasoning f = refl-htpy
-
-  step-homotopy-reasoning :
-    {f g : (x : X) → Y x} → (f ~ g) → (h : (x : X) → Y x) → (g ~ h) → (f ~ h)
-  step-homotopy-reasoning p h q = p ∙h q
-
-  syntax step-homotopy-reasoning p h q = p ~ h by q
+syntax step-homotopy-reasoning p h q = p ~ h by q
 ```
 
 For function homotopies we thus write the chains as follows
@@ -123,7 +115,8 @@ homotopy-reasoning
 infixl 1 equivalence-reasoning_
 infixl 0 step-equivalence-reasoning
 
-equivalence-reasoning_ : {l1 : Level} (X : UU l1) → X ≃ X
+equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ≃ X
 equivalence-reasoning X = id-equiv
 
 step-equivalence-reasoning :
@@ -149,7 +142,8 @@ equivalence-reasoning
 infixl 1 logical-equivalence-reasoning_
 infixl 0 step-logical-equivalence-reasoning
 
-logical-equivalence-reasoning_ : {l1 : Level} (X : UU l1) → X ↔ X
+logical-equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ↔ X
 logical-equivalence-reasoning X = pair id id
 
 step-logical-equivalence-reasoning :
@@ -171,35 +165,32 @@ logical-equivalence-reasoning
 
 ### Equational reasoning for preorders
 
-Note: In an equational reasoning argument, the preorder is always specified at the last step. So do we really need to specify it at each of the earlier steps?
-
 ```agda
-private
-  transitivity :
-    {l1 l2 : Level} (X : Preorder l1 l2)
-    (x : element-Preorder X) {y z : element-Preorder X} →
-    leq-Preorder X x y → leq-Preorder X y z → leq-Preorder X x z
-  transitivity X x {y} {z} u v = transitive-leq-Preorder X x y z v u
+infixl 1 preorder_reasoning_
+infixl 0 step-preorder-reasoning
 
-syntax transitivity X x u v = x ≤ X by u to v
-infixr 0 transitivity
+preorder_reasoning_ :
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  (x : element-Preorder X) → leq-Preorder X x x
+preorder_reasoning_ = refl-leq-Preorder
 
-private
-  reflexivity :
-    {l1 l2 : Level} (X : Preorder l1 l2) (x : element-Preorder X) →
-    leq-Preorder X x x
-  reflexivity = refl-leq-Preorder
+step-preorder-reasoning :
+  {l1 l2 : Level} (X : Preorder l1 l2)
+  {x y : element-Preorder X} → leq-Preorder X x y →
+  (z : element-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
+step-preorder-reasoning X {x} {y} u z v =
+  transitive-leq-Preorder X x y z v u
 
-syntax reflexivity X x = x ∎ X
-infix 1 reflexivity
+syntax step-preorder-reasoning X u z v = u ≤ z by v inside X
 ```
 
 For a preorder `X` we thus write the chains as follows
 
 ```md
-x ≤ X by ineq-1 to
-y ≤ X by ineq-2 to
-z ∎ X
+preorder X reasoning
+  x ≤ y by ineq-1 inside X
+    ≤ z by ineq-2 inside X
+    ≤ v by ineq-3 inside X
 ```
 
 ## References
