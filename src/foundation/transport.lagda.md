@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.universal-property-dependent-pair-types
@@ -59,6 +60,16 @@ module _
   right-unit-law-tr-eq-pair C refl u = refl
 ```
 
+#### Computing transport along a path of the form `eq-pair` when both paths are identical
+
+```agda
+tr-eq-pair-diagonal :
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (C : A × A → UU l2)
+  (p : a0 ＝ a1) (u : C (a0 , a0)) → (tr C (eq-pair p p) u) ＝ (tr (λ a → C (a , a)) p u)
+tr-eq-pair-diagonal C refl u = refl
+```
+
+
 ### Transport in a family of dependent pair types
 
 ```agda
@@ -100,11 +111,16 @@ tr-fx＝gy :
   {a0 a1 : A} {b0 b1 : B} (f : A → C) (g : B → C)
   (p : a0 ＝ a1) (q : b0 ＝ b1) (s : f a0 ＝ g b0) → 
   (tr (λ z → (f (pr1 z)) ＝ (g (pr2 z))) (eq-pair p q) s) ＝
-  ((inv (ap f p)) ∙ (s ∙ (ap g q)))
+ (((inv (ap f p)) ∙ s) ∙ (ap g q))
 tr-fx＝gy f g refl refl s = inv right-unit
 
+tr-fx＝gx :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
+  {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) → (tr (λ x → f x ＝ g x) p q) ＝((inv (ap f p) ∙ q) ∙ (ap g p))
+tr-fx＝gx f g p q = inv (tr-eq-pair-diagonal (λ z → f (pr1 z) ＝ g (pr2 z)) p q) ∙ (tr-fx＝gy f g p p q)   
+
 tr-x＝y :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 a2 a3 : A}
+  {l1 : Level} {A : UU l1} {a0 a1 a2 a3 : A}
   (p : a0 ＝ a1) (q : a2 ＝ a3) (s : a0 ＝ a2) → 
   (tr (λ z → (pr1 z) ＝ (pr2 z)) (eq-pair p q) s) ＝ ((inv p) ∙ (s ∙ q))
 tr-x＝y refl refl s = inv right-unit

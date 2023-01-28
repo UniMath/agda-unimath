@@ -139,30 +139,49 @@ suspension-cocone-htpy {X = X} c c' =
 
 {- Define forwards and backwards eqvs without path induction? -}
 
-suspension-cocone-eq-suspension-cocone-htpy' :
+suspension-cocone-eq-suspension-cocone-htpy :
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-cocone X Z) →
   (suspension-cocone-htpy c c') → c ＝ c'
-suspension-cocone-eq-suspension-cocone-htpy'
+suspension-cocone-eq-suspension-cocone-htpy
   (N , S , h) (N' , S' , h') (refl , refl , H) =
   eq-pair-Σ refl (eq-pair-Σ refl
   (eq-htpy (λ x → (inv right-unit) ∙ H x)))
 
-suspension-cocone-htpy-suspension-cocone-eq' :
+merid-htpy-cocone-eq :
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-cocone X Z) →
+  (p : c ＝ c') → (x : X) → ((inv (ap pr1 p) ∙ (suspension-cocone-merid c x)) ∙
+  ap (pr1 ∘ pr2) p) ＝ (suspension-cocone-merid c' x)
+merid-htpy-cocone-eq {X = X} c c' p x = ((inv (tr-fx＝gx (pr1) (pr1 ∘ pr2) p ((pr2 ∘ pr2) c x)) ∙
+  (ap (λ t → tr (λ z → pr1 z ＝ (pr1 ∘ pr2) z) p ((pr2 ∘ pr2) c t))
+  (inv (tr-const (inv p) x)))) ∙
+  inv (htpy-eq (tr-function-type
+  (λ z → X) (λ z → (pr1 z) ＝ ((pr1 ∘ pr2) z))
+  p  ((pr2 ∘ pr2) c)) x)) ∙ (htpy-eq (apd (pr2 ∘ pr2) p) x)
+  
+suspension-cocone-htpy-suspension-cocone-eq :
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-cocone X Z) →
   (c ＝ c') → (suspension-cocone-htpy c c')
-suspension-cocone-htpy-suspension-cocone-eq'
-  c c' refl = refl , (refl , (λ x → right-unit))
+suspension-cocone-htpy-suspension-cocone-eq
+  c c' p = (ap pr1 p) , ((ap (pr1 ∘ pr2) p) , merid-htpy-cocone-eq c c' p)
 
-issec-suspension-cocone-htpy-suspension-cocone-eq' :
+issec-suspension-cocone-htpy-suspension-cocone-eq :
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
   (c c' : suspension-cocone X Z) →
-  ((suspension-cocone-eq-suspension-cocone-htpy' c c') ∘
-  (suspension-cocone-htpy-suspension-cocone-eq' c c')) ~ id
-issec-suspension-cocone-htpy-suspension-cocone-eq'
-  (N , S , h) (N' , S' , h') refl =
-  (ap (λ h → eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy h)))
-  (eq-htpy (λ x → (left-inv right-unit)))) ∙
-  ap (λ p → eq-pair-Σ refl (eq-pair-Σ refl p)) (eq-htpy-refl-htpy h)
+  ((suspension-cocone-eq-suspension-cocone-htpy c c') ∘
+  (suspension-cocone-htpy-suspension-cocone-eq c c')) ~ id
+issec-suspension-cocone-htpy-suspension-cocone-eq (N , S , h) (N' , S' , h') refl =
+    (ap (λ t → eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy t)))
+    (eq-htpy λ x → (ap-binary (_∙_)(refl{x = inv right-unit})
+    ((right-unit ∙ right-unit) ∙ right-unit)) ∙
+    (right-inv (inv right-unit)) ) ∙
+    ap (λ t → eq-pair-Σ refl (eq-pair-Σ refl t))
+    (eq-htpy-refl-htpy h))
+
+isretr-suspension-cocone-htpy-suspension-cocone-eq :
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
+  (c c' : suspension-cocone X Z) →
+  ((suspension-cocone-htpy-suspension-cocone-eq c c') ∘ (suspension-cocone-eq-suspension-cocone-htpy c c')) ~ id
+isretr-suspension-cocone-htpy-suspension-cocone-eq (N , S , h) (N' , S' , h') (refl , refl , H) = {!!}
 
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
@@ -295,20 +314,20 @@ module _
     {l : Level} (Z : UU l) (c : suspension-cocone X Z) →
     (map-inv-up-suspension Z c N-susp) ＝ pr1 c 
   up-suspension-N-susp Z c =
-    pr1 (suspension-cocone-htpy-suspension-cocone-eq'
+    pr1 (suspension-cocone-htpy-suspension-cocone-eq
     (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c))
 
   up-suspension-S-susp : {l : Level} (Z : UU l) (c : suspension-cocone X Z) →
     (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
-  up-suspension-S-susp Z c = pr1 (pr2 (suspension-cocone-htpy-suspension-cocone-eq'
+  up-suspension-S-susp Z c = pr1 (pr2 (suspension-cocone-htpy-suspension-cocone-eq
     (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c)))
 
   up-suspension-merid-susp : {l : Level} (Z : UU l) (c : suspension-cocone X Z) (x : X) →
     (((inv (up-suspension-N-susp Z c) ∙ (ap (map-inv-up-suspension Z c) (merid-susp x))) ∙
     (up-suspension-S-susp Z c)) ＝ (pr2 (pr2 c)) x)
-  up-suspension-merid-susp Z c = pr2 (pr2 (suspension-cocone-htpy-suspension-cocone-eq'
+  up-suspension-merid-susp Z c = pr2 (pr2 (suspension-cocone-htpy-suspension-cocone-eq
     (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c)))
 
@@ -316,7 +335,7 @@ module _
     {l : Level} (Z : UU l) (c : suspension-cocone X Z) →
     (ev-suspension (susp-struct X) Z (map-inv-up-suspension Z c)) ＝ c
   ev-suspension-up-suspension Z c =
-    suspension-cocone-eq-suspension-cocone-htpy'
+    suspension-cocone-eq-suspension-cocone-htpy
     (ev-suspension (susp-struct X) Z
     (map-inv-up-suspension Z c)) c ((up-suspension-N-susp Z c) ,
     ((up-suspension-S-susp Z c) , (up-suspension-merid-susp Z c)))
