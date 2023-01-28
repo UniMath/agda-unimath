@@ -75,6 +75,12 @@ S-susp {X = X} = inr-pushout (const X unit star) (const X unit star) star
 merid-susp :
   {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
 merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
+
+suspension-structure-suspension :
+  {l : Level} (X : UU l) → suspension-structure X (suspension X)
+pr1 (suspension-structure-suspension X) = N-susp
+pr1 (pr2 (suspension-structure-suspension X)) = S-susp
+pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
 ```
 
 ## Properties
@@ -181,20 +187,21 @@ module _
     {l : Level} →
     universal-property-suspension l X
       ( suspension X)
-      ( N-susp , S-susp , merid-susp)
+      ( suspension-structure-suspension X)
   up-suspension Z =
     is-equiv-htpy
-      ( ev-suspension (N-susp , S-susp , merid-susp) Z)
+      ( ev-suspension (suspension-structure-suspension X) Z)
       ( triangle-ev-suspension
         { X = X}
         { Y = suspension X}
-        ( N-susp , S-susp , merid-susp) Z)
+        ( suspension-structure-suspension X) Z)
       ( is-equiv-map-equiv
         ( ( comparison-suspension-cocone X Z) ∘e
           ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
 
   equiv-up-suspensions :
     {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-structure X Z)
-  pr1 (equiv-up-suspensions Z) = ev-suspension (N-susp , S-susp , merid-susp) Z
+  pr1 (equiv-up-suspensions Z) =
+    ev-suspension (suspension-structure-suspension X) Z
   pr2 (equiv-up-suspensions Z) = up-suspension Z
 ```
