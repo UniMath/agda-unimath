@@ -3,21 +3,16 @@ title: Raising universe levels
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.raising-universe-levels where
 
-open import foundation-core.dependent-pair-types using (Σ; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl)
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop-equiv')
-open import foundation-core.sets using
-  ( Set; type-Set; is-set-type-Set; is-set-equiv')
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -50,13 +45,13 @@ module _
       issec-map-inv-raise
       isretr-map-inv-raise
 
-equiv-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
-pr1 (equiv-raise l A) = map-raise
-pr2 (equiv-raise l A) = is-equiv-map-raise
+compute-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
+pr1 (compute-raise l A) = map-raise
+pr2 (compute-raise l A) = is-equiv-map-raise
 
 Raise : (l : Level) {l1 : Level} (A : UU l1) → Σ (UU (l1 ⊔ l)) (λ X → A ≃ X)
 pr1 (Raise l A) = raise l A
-pr2 (Raise l A) = equiv-raise l A
+pr2 (Raise l A) = compute-raise l A
 ```
 
 ### Raising universe levels of propositions
@@ -65,7 +60,7 @@ pr2 (Raise l A) = equiv-raise l A
 raise-Prop : (l : Level) {l1 : Level} → Prop l1 → Prop (l ⊔ l1)
 pr1 (raise-Prop l P) = raise l (type-Prop P)
 pr2 (raise-Prop l P) =
-  is-prop-equiv' (equiv-raise l (type-Prop P)) (is-prop-type-Prop P)
+  is-prop-equiv' (compute-raise l (type-Prop P)) (is-prop-type-Prop P)
 ```
 
 ### Raising universe levels of sets
@@ -74,5 +69,5 @@ pr2 (raise-Prop l P) =
 raise-Set : (l : Level) {l1 : Level} → Set l1 → Set (l ⊔ l1)
 pr1 (raise-Set l A) = raise l (type-Set A)
 pr2 (raise-Set l A) =
-  is-set-equiv' (type-Set A) (equiv-raise l (type-Set A)) (is-set-type-Set A)
+  is-set-equiv' (type-Set A) (compute-raise l (type-Set A)) (is-set-type-Set A)
 ```
