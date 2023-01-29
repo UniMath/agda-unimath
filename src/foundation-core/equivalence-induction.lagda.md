@@ -10,12 +10,12 @@ module foundation-core.equivalence-induction where
 open import foundation-core.contractible-types using (is-contr; contraction)
 open import foundation-core.dependent-pair-types using
   ( Σ; pair; pr1; pr2; ev-pair; ind-Σ)
-open import foundation-core.equivalences using
-  ( _≃_; id-equiv; section-comp; section-comp')
+open import foundation-core.equivalences using (_≃_; id-equiv)
 open import foundation-core.functions using (ev-pt; _∘_; id)
 open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using (refl; inv; _∙_)
-open import foundation-core.sections using (sec)
+open import foundation-core.sections using
+  ( sec; section-comp; section-comp')
 open import foundation-core.singleton-induction using
   ( is-singleton-is-contr; is-contr-is-singleton)
 open import foundation-core.universe-levels using (Level; UU)

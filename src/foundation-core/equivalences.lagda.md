@@ -18,8 +18,8 @@ open import foundation-core.homotopies using
 open import foundation-core.identity-types using
   ( _＝_; refl; inv; _∙_; ap; ap-concat; ap-binary; ap-inv; ap-id; ap-comp;
     inv-con; left-inv)
-open import foundation-core.retractions using (retr)
-open import foundation-core.sections using (sec)
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 ```
 
@@ -205,19 +205,6 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  triangle-section : (S : sec h) → g ~ (f ∘ (pr1 S))
-  triangle-section (pair s issec) = inv-htpy ((H ·r s) ∙h (g ·l issec))
-
-  section-comp : sec h → sec f → sec g
-  pr1 (section-comp sec-h sec-f) = h ∘ (pr1 sec-f)
-  pr2 (section-comp sec-h sec-f) = (inv-htpy (H ·r (pr1 sec-f))) ∙h (pr2 sec-f)
-  
-  section-comp' : sec h → sec g → sec f
-  pr1 (section-comp' sec-h sec-g) = (pr1 sec-h) ∘ (pr1 sec-g)
-  pr2 (section-comp' sec-h sec-g) =
-    ( H ·r ((pr1 sec-h) ∘ (pr1 sec-g))) ∙h
-    ( ( g ·l ((pr2 sec-h) ·r (pr1 sec-g))) ∙h ((pr2 sec-g)))
-
   triangle-retraction : (R : retr g) → h ~ ((pr1 R) ∘ f)
   triangle-retraction (pair r isretr) = inv-htpy ((r ·l H) ∙h (isretr ·r h))
 
@@ -235,7 +222,7 @@ module _
   abstract
     is-equiv-comp : is-equiv h → is-equiv g → is-equiv f
     pr1 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
-      section-comp' sec-h sec-g
+      section-comp' f g h H sec-h sec-g
     pr2 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
       retraction-comp' retr-g retr-h
 

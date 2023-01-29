@@ -16,7 +16,7 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
-    _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
+    _∘e_; id-equiv; map-inv-equiv)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using
