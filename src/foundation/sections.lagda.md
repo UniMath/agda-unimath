@@ -1,5 +1,5 @@
 ---
-title: Sections of type families
+title: Sections
 ---
 
 ```agda
