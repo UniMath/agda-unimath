@@ -117,7 +117,7 @@ module _
   pr2 inv-left-unit-law-prod = is-equiv-map-inv-left-unit-law-prod
 ```
 
-### The right unit law for cartesian products
+### Right unit law for cartesian products
 
 ```agda
   map-right-unit-law-prod : A × unit → A
