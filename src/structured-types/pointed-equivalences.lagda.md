@@ -16,7 +16,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; is-contr-sec-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
     _∘e_; is-emb-is-equiv; is-contr-retr-is-equiv; isretr-map-inv-is-equiv;
-    is-equiv-comp'; _≃_; is-property-is-equiv; map-equiv; id-equiv;
+    is-equiv-comp; _≃_; is-property-is-equiv; map-equiv; id-equiv;
     map-inv-equiv; is-equiv-has-inverse; is-equiv-map-equiv)
 open import foundation.fibers-of-maps using (fib)
 open import foundation.function-extensionality using (htpy-eq)
@@ -253,7 +253,7 @@ module _
           ( isretr-map-inv-is-equiv H (pt-Pointed-Type A)))
         ( equiv-tot (λ p → equiv-inv _ _))
         ( is-contr-map-is-equiv
-          ( is-equiv-comp'
+          ( is-equiv-comp
             ( λ q → q ∙ refl)
             ( λ p →
               ( ap

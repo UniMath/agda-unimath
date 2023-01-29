@@ -29,7 +29,7 @@ open import foundation.contractible-types using
 open import foundation.equivalences using
   ( is-equiv; is-equiv-is-coherently-invertible; is-contr-sec-is-equiv;
     is-emb-is-equiv; is-coherently-invertible-is-equiv; is-property-is-equiv;
-    is-equiv-id; is-equiv-comp)
+    is-equiv-id; is-equiv-comp-htpy)
 open import foundation.identity-types using (Id; ap; equiv-inv; refl)
 open import foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
@@ -115,7 +115,7 @@ abstract
   is-equiv-invertible-id-htpy-id-id :
     {l : Level} (A : UU l) → is-equiv (is-invertible-id-htpy-id-id A)
   is-equiv-invertible-id-htpy-id-id A =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( is-invertible-id-htpy-id-id A)
       ( map-assoc-Σ (A → A) (λ g → (id ∘ g) ~ id) (λ s → ((pr1 s) ∘ id) ~ id))
       ( map-inv-left-unit-law-Σ-is-contr

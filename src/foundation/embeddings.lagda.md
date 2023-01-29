@@ -27,7 +27,7 @@ open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.equivalences using
-  ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
+  ( is-equiv-top-is-equiv-left-square; is-equiv-comp-htpy; is-equiv-right-factor;
     is-equiv; is-emb-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
     is-equiv-map-inv-is-equiv; is-property-is-equiv; _≃_; map-equiv;
     is-equiv-htpy-equiv; inv-equiv; isretr-map-inv-equiv)
@@ -112,7 +112,7 @@ module _
       is-emb h → is-emb f
     is-emb-comp f g h H is-emb-g is-emb-h =
       is-emb-htpy f (g ∘ h) H
-        ( λ x y → is-equiv-comp (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
+        ( λ x y → is-equiv-comp-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
           ( is-emb-h x y)
           ( is-emb-g (h x) (h y)))
 

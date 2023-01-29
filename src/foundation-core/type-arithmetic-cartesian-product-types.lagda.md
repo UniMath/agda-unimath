@@ -11,7 +11,7 @@ open import foundation-core.cartesian-product-types using (_×_)
 open import foundation-core.contractible-types using (is-contr; center)
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; is-equiv-comp')
+  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; is-equiv-comp)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (refl)
@@ -106,7 +106,7 @@ module _
 
   is-equiv-pr2-prod-is-contr : is-equiv (pr2 {B = λ a → B})
   is-equiv-pr2-prod-is-contr =
-    is-equiv-comp'
+    is-equiv-comp
       ( pr1)
       ( map-commutative-prod)
       ( is-equiv-map-commutative-prod)

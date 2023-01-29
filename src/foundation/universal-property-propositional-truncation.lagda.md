@@ -15,7 +15,7 @@ open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; map-equiv; is-property-is-equiv;
     is-equiv-top-is-equiv-bottom-square; is-equiv-precomp-is-equiv;
     is-equiv-map-equiv; is-equiv-is-equiv-precomp-Prop; is-equiv-id;
-    is-equiv-comp')
+    is-equiv-comp)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; precomp-Π; precomp; id)
 open import foundation.functoriality-cartesian-product-types using (map-prod)
@@ -349,7 +349,7 @@ abstract
       ( refl-htpy)
       ( is-equiv-ev-pair)
       ( is-equiv-ev-pair)
-      ( is-equiv-comp'
+      ( is-equiv-comp
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
         ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))

@@ -206,10 +206,10 @@ module _
   where
 
   abstract
-    is-equiv-comp : is-equiv h → is-equiv g → is-equiv f
-    pr1 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
+    is-equiv-comp-htpy : is-equiv h → is-equiv g → is-equiv f
+    pr1 (is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g)) =
       section-comp-htpy f g h H sec-h sec-g
-    pr2 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
+    pr2 (is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g)) =
       retraction-comp-htpy f g h H retr-g retr-h
 
 module _
@@ -217,16 +217,16 @@ module _
   where
 
   abstract
-    is-equiv-comp' :
+    is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    pr1 (is-equiv-comp' g h (pair sec-h retr-h) (pair sec-g retr-g)) =
+    pr1 (is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g)) =
       section-comp g h sec-h sec-g
-    pr2 (is-equiv-comp' g h (pair sec-h retr-h) (pair sec-g retr-g)) =
+    pr2 (is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g)) =
       retraction-comp g h retr-g retr-h
 
   equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
-  pr2 (equiv-comp g h) = is-equiv-comp' (pr1 g) (pr1 h) (pr2 h) (pr2 g)
+  pr2 (equiv-comp g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
   _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
   _∘e_ = equiv-comp
@@ -394,7 +394,7 @@ is-equiv-equiv {f = f} {g} i j H K =
     ( map-equiv j)
     ( f)
     ( is-equiv-map-equiv j)
-    ( is-equiv-comp
+    ( is-equiv-comp-htpy
       ( map-equiv j ∘ f)
       ( g)
       ( map-equiv i)
@@ -410,7 +410,7 @@ is-equiv-equiv' {f = f} {g} i j H K =
   is-equiv-left-factor'
     ( g)
     ( map-equiv i)
-    ( is-equiv-comp
+    ( is-equiv-comp-htpy
       ( g ∘ map-equiv i)
       ( map-equiv j)
       ( f)
@@ -442,31 +442,31 @@ module _
     is-equiv-top-is-equiv-left-square :
       is-equiv i → is-equiv f → is-equiv g → is-equiv h
     is-equiv-top-is-equiv-left-square Ei Ef Eg =
-      is-equiv-right-factor (i ∘ f) g h H Eg (is-equiv-comp' i f Ef Ei)
+      is-equiv-right-factor (i ∘ f) g h H Eg (is-equiv-comp i f Ef Ei)
 
   abstract
     is-equiv-top-is-equiv-bottom-square :
       is-equiv f → is-equiv g → is-equiv i → is-equiv h
     is-equiv-top-is-equiv-bottom-square Ef Eg Ei =
-      is-equiv-right-factor (i ∘ f) g h H Eg (is-equiv-comp' i f Ef Ei)
+      is-equiv-right-factor (i ∘ f) g h H Eg (is-equiv-comp i f Ef Ei)
 
   abstract
     is-equiv-bottom-is-equiv-top-square :
       is-equiv f → is-equiv g → is-equiv h → is-equiv i
     is-equiv-bottom-is-equiv-top-square Ef Eg Eh = 
-      is-equiv-left-factor' i f (is-equiv-comp (i ∘ f) g h H Eh Eg) Ef
+      is-equiv-left-factor' i f (is-equiv-comp-htpy (i ∘ f) g h H Eh Eg) Ef
 
   abstract
     is-equiv-left-is-equiv-right-square :
       is-equiv h → is-equiv i → is-equiv g → is-equiv f
     is-equiv-left-is-equiv-right-square Eh Ei Eg =
-      is-equiv-right-factor' i f Ei (is-equiv-comp (i ∘ f) g h H Eh Eg)
+      is-equiv-right-factor' i f Ei (is-equiv-comp-htpy (i ∘ f) g h H Eh Eg)
 
   abstract
     is-equiv-right-is-equiv-left-square :
       is-equiv h → is-equiv i → is-equiv f → is-equiv g
     is-equiv-right-is-equiv-left-square Eh Ei Ef =
-      is-equiv-left-factor (i ∘ f) g h H (is-equiv-comp' i f Ef Ei) Eh
+      is-equiv-left-factor (i ∘ f) g h H (is-equiv-comp i f Ef Ei) Eh
 ```
 
 ### Equivalences are embeddings

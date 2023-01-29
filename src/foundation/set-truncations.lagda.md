@@ -20,7 +20,7 @@ open import foundation.equality-coproduct-types using
   ( coprod-Set)
 open import foundation.equivalences using
   ( _≃_; is-equiv; map-inv-equiv; map-equiv; is-equiv-right-factor';
-    is-equiv-comp'; is-equiv-htpy-equiv; _∘e_; issec-map-inv-equiv)
+    is-equiv-comp; is-equiv-htpy-equiv; _∘e_; issec-map-inv-equiv)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-cartesian-product-types using
@@ -468,7 +468,7 @@ module _
             ( ev-inl-inr (λ x → type-Set C))
             ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
             ( universal-property-coprod (type-Set C))
-            ( is-equiv-comp'
+            ( is-equiv-comp
               ( map-prod
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))
