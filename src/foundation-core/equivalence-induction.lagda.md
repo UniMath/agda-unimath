@@ -57,8 +57,8 @@ module _
       (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) → IND-EQUIV (λ B e → P (pair B e))
     IND-EQUIV-is-contr-total-equiv c P =
       section-left-factor
-        ( ev-pair)
         ( ev-id (λ X e → P (pair X e)))
+        ( ev-pair)
         ( is-singleton-is-contr
           ( pair A id-equiv)
           ( pair
@@ -79,8 +79,8 @@ module _
         ( Σ (UU l1) (λ X → A ≃ X))
         ( pair A id-equiv)
         ( λ P → section-comp
-          ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
           ( ev-id (λ X e → P (pair X e)))
+          ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
           ( pair ind-Σ refl-htpy)
           ( ind P))
 ```

@@ -163,9 +163,9 @@ module _
 
 ```agda
 isretr-section-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) (sec-f : sec f) →
-  ((section-left-factor-htpy f g h H) ∘ (section-comp-htpy f g h H sec-f)) ~ id
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (sec-h : sec h) →
+  ((section-left-factor-htpy f g h H) ∘ (section-comp-htpy f g h H sec-h)) ~ id
 isretr-section-comp f g h H (pair k K) (pair l L) =
   eq-htpy-sec
     ( ( section-left-factor-htpy f g h H ∘
@@ -185,13 +185,13 @@ isretr-section-comp f g h H (pair k K) (pair l L) =
         ( left-inv-htpy (H ·r (k ∘ l)))))
 
 sec-left-factor-retract-of-sec-composition :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) →
-  sec f → (sec g) retract-of (sec h)
-pr1 (sec-left-factor-retract-of-sec-composition f g h H sec-f) =
-  section-comp-htpy f g h H sec-f
-pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-f)) =
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+  sec h → (sec g) retract-of (sec f)
+pr1 (sec-left-factor-retract-of-sec-composition f g h H sec-h) =
+  section-comp-htpy f g h H sec-h
+pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
   section-left-factor-htpy f g h H
-pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-f)) =
-  isretr-section-comp f g h H sec-f
+pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
+  isretr-section-comp f g h H sec-h
 ```

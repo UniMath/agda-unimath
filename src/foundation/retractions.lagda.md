@@ -88,4 +88,3 @@ abstract
     is-injective f
   is-injective-retr f (pair h H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
 ```
-   
