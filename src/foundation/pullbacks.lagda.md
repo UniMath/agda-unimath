@@ -18,10 +18,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
 open import foundation.descent-equivalences using (descent-is-equiv)
 open import foundation.diagonal-maps-of-types using (diagonal)
 open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( is-equiv-comp; _∘e_; is-equiv; map-inv-is-equiv; _≃_; id-equiv;
-    map-inv-equiv; is-equiv-has-inverse; is-equiv-right-factor;
-    is-equiv-left-factor; is-pullback-is-equiv'; is-pullback-is-equiv)
+open import foundation.equivalences
 open import foundation.function-extensionality using
   ( htpy-eq; issec-eq-htpy; isretr-eq-htpy; funext)
 open import foundation.functions using (_∘_; id; map-Π)
@@ -136,7 +133,7 @@ abstract
     is-pullback f g c
   is-pullback-is-pullback-exponent f g c is-pb-exp =
     is-pullback-universal-property-pullback f g c
-      ( λ T → is-equiv-comp
+      ( λ T → is-equiv-comp-htpy
         ( cone-map f g c)
         ( map-canonical-pullback-exponent f g T)
         ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
@@ -249,10 +246,8 @@ module _
       is-equiv-tot-is-fiberwise-equiv (λ a →
         is-equiv-tot-is-fiberwise-equiv (λ b →
           is-equiv-comp
-            ( (concat' (f a) (inv (Hg b))) ∘ (concat (Hf a) (g' b)))
             ( concat' (f a) (inv (Hg b)))
             ( concat (Hf a) (g' b))
-            ( refl-htpy)
             ( is-equiv-concat (Hf a) (g' b))
             ( is-equiv-concat' (f a) (inv (Hg b)))))
 
@@ -298,7 +293,7 @@ module _
     is-pullback-htpy
       {c = pair p (pair q H)} (pair p' (pair q' H'))
       (pair Hp (pair Hq HH)) is-pb-c' =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( gap f g (triple p q H))
         ( map-equiv-canonical-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
@@ -364,16 +359,12 @@ abstract
     is-equiv-tot-is-fiberwise-equiv
       ( λ K → is-equiv-tot-is-fiberwise-equiv
         ( λ L → is-equiv-comp
-          ( λ M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
-            ( M ∙h
-              ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
           ( concat-htpy
             ( ap-concat-htpy H _ _ right-unit-htpy)
             ( ((f ·l K) ∙h refl-htpy) ∙h H'))
           ( concat-htpy'
             ( H ∙h (g ·l L))
             ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy)))
-          ( refl-htpy)
           ( is-equiv-concat-htpy'
             ( H ∙h (g ·l L))
             ( λ x → ap (λ z → z ∙ H' x) (inv right-unit)))

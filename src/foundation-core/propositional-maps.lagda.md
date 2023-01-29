@@ -12,7 +12,7 @@ open import foundation-core.contractible-types using
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.embeddings using
   ( is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation-core.equivalences using (is-equiv-comp'; _≃_)
+open import foundation-core.equivalences using (is-equiv-comp; _≃_)
 open import foundation-core.fibers-of-maps using (fib; equiv-fib; fib')
 open import foundation-core.functions using (_∘_)
 open import foundation-core.functoriality-dependent-pair-types using

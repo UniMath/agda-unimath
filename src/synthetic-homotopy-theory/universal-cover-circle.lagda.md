@@ -121,7 +121,7 @@ abstract
     ( up-circle : universal-property-circle (lsuc l2) l) →
     is-equiv (ev-fam-circle {l2 = l2} l)
   is-equiv-ev-fam-circle-universal-property-circle {l2 = l2} l up-circle =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( ev-fam-circle l)
       ( comparison-fam-circle l2)
       ( ev-free-loop l (UU l2))
@@ -146,7 +146,7 @@ abstract
       ( tot (λ P → (Eq-Fam-circle-eq Q (ev-fam-circle l P)) ∘ inv))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ P →
-          is-equiv-comp' _ _
+          is-equiv-comp _ _
             ( is-equiv-inv _ _)
             ( is-equiv-Eq-Fam-circle-eq Q (ev-fam-circle l P))))
       ( is-contr-map-is-equiv
@@ -238,7 +238,7 @@ abstract
       ( _)
       ( is-equiv-f x)
       ( λ p₀ →
-        is-equiv-comp'
+        is-equiv-comp
           ( concat
             ( naturality-tr-fiberwise-transformation f l p₀)
             ( f x p₀))

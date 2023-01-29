@@ -25,7 +25,7 @@ open import foundation.equivalence-classes using
     quotient-reflecting-map-equivalence-class;
     is-surjective-and-effective-class)
 open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse; is-equiv-comp;
+  ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse;
     is-equiv-precomp-is-equiv; is-equiv-left-factor; map-equiv;
     is-property-is-equiv; _∘e_; inv-equiv; map-inv-equiv;
     issec-map-inv-is-equiv)

@@ -10,7 +10,7 @@ module foundation.uniqueness-set-quotients where
 open import foundation.contractible-types using (is-contr; center)
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; is-equiv-comp; is-equiv-precomp-is-equiv;
+  ( is-equiv; is-equiv-has-inverse; is-equiv-comp-htpy; is-equiv-precomp-is-equiv;
     is-equiv-left-factor; _≃_; map-equiv; is-property-is-equiv)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using  (_∘_; id; precomp)
@@ -114,7 +114,7 @@ module _
       is-equiv h → ({l : Level} → is-set-quotient l R B f) →
       {l : Level} → is-set-quotient l R C g
     is-set-quotient-is-set-quotient-is-equiv E Uf {l} X =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( precomp-Set-Quotient R C g X)
         ( precomp-Set-Quotient R B f X)
         ( precomp h (type-Set X))
