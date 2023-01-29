@@ -12,7 +12,7 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using (_↪_; map-emb)
 open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; triangle-section; issec-map-inv-is-equiv; _∘e_;
+  ( is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv; _∘e_;
     id-equiv; is-property-is-equiv; is-equiv-map-equiv; _≃_)
 open import foundation.functions using (_∘_; id)
 open import foundation.functoriality-dependent-pair-types using
@@ -20,6 +20,7 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.homotopies using (_~_; _∙h_; _·r_; _·l_)
 open import foundation.images using (inclusion-im; unit-im; emb-im; im)
 open import foundation.propositions using (is-proof-irrelevant-is-prop)
+open import foundation.sections using (triangle-section)
 open import foundation.slice using
   ( hom-slice; map-hom-slice; is-equiv-hom-slice-emb; comp-hom-slice;
     triangle-hom-slice; equiv-slice; htpy-hom-slice; hom-equiv-slice)

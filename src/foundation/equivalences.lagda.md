@@ -464,7 +464,7 @@ equiv-precomp-equiv e C =
     ( is-equiv-Prop)
     ( λ g →
       pair
-        ( is-equiv-comp' g (map-equiv e) (is-equiv-map-equiv e))
+        ( is-equiv-comp g (map-equiv e) (is-equiv-map-equiv e))
         ( λ is-equiv-eg →
           is-equiv-left-factor'
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))

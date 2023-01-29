@@ -201,14 +201,12 @@ abstract
     is-set-truncation l3 B f
   is-set-truncation-is-set-quotient {A = A} B f H X =
     is-equiv-comp
-      ( precomp-Set f X)
       ( pr1)
       ( precomp-Set-Quotient
         ( mere-eq-Eq-Rel A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
-      ( refl-htpy)
       ( H X)
       ( is-equiv-pr1-is-contr
         ( λ h →

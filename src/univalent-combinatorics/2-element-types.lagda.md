@@ -310,11 +310,8 @@ module _
             ( ev-zero-equiv-Fin-two-ℕ)
             ( map-equiv (equiv-postcomp-equiv α (Fin 2)))
             ( is-equiv-comp
-              ( ( ev-zero-equiv-Fin-two-ℕ) ∘
-                ( map-equiv (equiv-postcomp-equiv α (Fin 2))))
               ( map-equiv α)
               ( ev-zero-equiv-Fin-two-ℕ)
-              ( refl-htpy)
               ( is-equiv-ev-zero-aut-Fin-two-ℕ)
               ( is-equiv-map-equiv α))
             ( is-equiv-comp-equiv α (Fin 2)))

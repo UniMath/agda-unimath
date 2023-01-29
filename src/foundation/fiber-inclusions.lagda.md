@@ -161,10 +161,8 @@ module _
       is-pullback (pr1 {B = B}) (pt a) cone-fiber-fam
     is-pullback-cone-fiber-fam =
       is-equiv-comp
-        ( gap (pr1 {B = B}) (pt a) cone-fiber-fam)
         ( gap (pr1 {B = B}) (pt a) (cone-fiber (pr1 {B = B}) a))
         ( map-inv-fib-pr1 B a)
-        ( refl-htpy)
         ( is-equiv-map-inv-fib-pr1 B a)
         ( is-pullback-cone-fiber pr1 a)
 ```

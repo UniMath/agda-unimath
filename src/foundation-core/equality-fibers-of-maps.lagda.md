@@ -11,7 +11,7 @@ open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equality-dependent-pair-types using
   ( pair-eq-Σ; is-equiv-pair-eq-Σ)
 open import foundation-core.equivalences using
-  ( is-fiberwise-equiv; is-equiv-comp; is-equiv; _≃_)
+  ( is-fiberwise-equiv; is-equiv-comp-htpy; is-equiv-comp; is-equiv; _≃_)
 open import foundation-core.fibers-of-maps using (fib)
 open import foundation-core.functions using (_∘_)
 open import foundation-core.functoriality-dependent-pair-types using
@@ -54,10 +54,8 @@ module _
       (s t : fib f b) → is-fiberwise-equiv (fib-ap-eq-fib-fiberwise s t)
     is-fiberwise-equiv-fib-ap-eq-fib-fiberwise (pair x y) (pair .x refl) refl =
       is-equiv-comp
-        ( fib-ap-eq-fib-fiberwise (pair x y) (pair x refl) refl)
         ( inv)
         ( concat right-unit refl)
-        ( refl-htpy)
         ( is-equiv-concat right-unit refl)
         ( is-equiv-inv (y ∙ refl) refl)
 
@@ -76,7 +74,7 @@ module _
   abstract
     is-equiv-fib-ap-eq-fib : (s t : fib f b) → is-equiv (fib-ap-eq-fib s t)
     is-equiv-fib-ap-eq-fib s t =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( fib-ap-eq-fib s t)
         ( tot (fib-ap-eq-fib-fiberwise s t))
         ( pair-eq-Σ {s = s} {t})
@@ -105,10 +103,8 @@ module _
       (q : (f x) ＝ (f y)) → is-equiv (eq-fib-fib-ap q)
     is-equiv-eq-fib-fib-ap q =
       is-equiv-comp
-        ( eq-fib-fib-ap q)
         ( tr (fib (ap f)) right-unit)
         ( fib-ap-eq-fib f (pair x q) (pair y refl))
-        ( refl-htpy)
         ( is-equiv-fib-ap-eq-fib f (pair x q) (pair y refl))
         ( is-equiv-tr (fib (ap f)) right-unit)
 ```

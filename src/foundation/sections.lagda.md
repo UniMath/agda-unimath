@@ -1,5 +1,5 @@
 ---
-title: Sections of type families
+title: Sections
 ---
 
 ```agda
@@ -16,7 +16,7 @@ open import foundation.contractible-types using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
-    _∘e_; id-equiv; map-inv-equiv; section-comp; section-comp')
+    _∘e_; id-equiv; map-inv-equiv)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using
@@ -133,6 +133,8 @@ module _
       ( λ s → id-equiv))
 ```
 
+### Extensionality of sections
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
@@ -160,14 +162,14 @@ module _
 ### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite.
 
 ```agda
-isretr-section-comp :
+isretr-section-comp-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (sec-h : sec h) →
-  ((section-comp f g h H sec-h) ∘ (section-comp' f g h H sec-h)) ~ id
-isretr-section-comp f g h H (pair k K) (pair l L) =
+  ((section-left-factor-htpy f g h H) ∘ (section-comp-htpy f g h H sec-h)) ~ id
+isretr-section-comp-htpy f g h H (pair k K) (pair l L) =
   eq-htpy-sec
-    ( ( section-comp f g h H (pair k K) ∘
-        section-comp' f g h H (pair k K))
+    ( ( section-left-factor-htpy f g h H ∘
+        section-comp-htpy f g h H (pair k K))
       ( pair l L))
     ( pair l L)
     ( K ·r l)
@@ -186,10 +188,10 @@ sec-left-factor-retract-of-sec-composition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
   sec h → (sec g) retract-of (sec f)
-pr1 (sec-left-factor-retract-of-sec-composition {X = X} f g h H sec-h) =
-  section-comp' f g h H sec-h
-pr1 (pr2 (sec-left-factor-retract-of-sec-composition {X = X} f g h H sec-h)) =
-  section-comp f g h H sec-h
-pr2 (pr2 (sec-left-factor-retract-of-sec-composition {X = X} f g h H sec-h)) =
-  isretr-section-comp f g h H sec-h
+pr1 (sec-left-factor-retract-of-sec-composition f g h H sec-h) =
+  section-comp-htpy f g h H sec-h
+pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
+  section-left-factor-htpy f g h H
+pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
+  isretr-section-comp-htpy f g h H sec-h
 ```

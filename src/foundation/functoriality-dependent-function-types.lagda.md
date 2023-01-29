@@ -17,7 +17,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using
   ( _≃_; _∘e_; is-fiberwise-equiv; is-equiv; map-equiv; is-equiv-map-equiv;
     issec-map-inv-equiv; map-inv-equiv; coherence-map-inv-equiv;
-    isretr-map-inv-equiv; is-equiv-comp'; issec-map-inv-is-equiv;
+    isretr-map-inv-equiv; is-equiv-comp; issec-map-inv-is-equiv;
     map-inv-is-equiv; is-equiv-map-inv-is-equiv;
     id-equiv; equiv-ap; ind-htpy-equiv;
     comp-htpy-equiv)
@@ -103,7 +103,7 @@ module _
   abstract
     is-equiv-map-equiv-Π : is-equiv map-equiv-Π
     is-equiv-map-equiv-Π =
-      is-equiv-comp'
+      is-equiv-comp
         ( map-Π (λ a →
           ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
           ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
@@ -113,7 +113,7 @@ module _
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
         ( is-equiv-map-Π _
-          ( λ a → is-equiv-comp'
+          ( λ a → is-equiv-comp
             ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a))
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
             ( is-equiv-map-equiv
@@ -281,7 +281,7 @@ abstract
     ( e : A ≃ A) (f : (a : A) → B a ≃ B (map-equiv e a)) →
     is-equiv (map-automorphism-Π e f)
   is-equiv-map-automorphism-Π {B = B} e f =
-    is-equiv-comp' _ _
+    is-equiv-comp _ _
       ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
       ( is-equiv-map-Π _
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))

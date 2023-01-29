@@ -15,7 +15,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.universe-levels using (UU; Level)
 
 open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp';
+  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp;
     map-equiv)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.function-extensionality using (eq-htpy)
@@ -159,7 +159,7 @@ module _
     is-equiv-con-inv :
       (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (con-inv p q r)
     is-equiv-con-inv p refl r =
-      is-equiv-comp'
+      is-equiv-comp
         ( concat' p (inv right-unit))
         ( concat (inv right-unit) r)
         ( is-equiv-concat (inv right-unit) r)

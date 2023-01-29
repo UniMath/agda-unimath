@@ -10,12 +10,12 @@ module foundation-core.equivalence-induction where
 open import foundation-core.contractible-types using (is-contr; contraction)
 open import foundation-core.dependent-pair-types using
   ( Σ; pair; pr1; pr2; ev-pair; ind-Σ)
-open import foundation-core.equivalences using
-  ( _≃_; id-equiv; section-comp; section-comp')
+open import foundation-core.equivalences using (_≃_; id-equiv)
 open import foundation-core.functions using (ev-pt; _∘_; id)
 open import foundation-core.homotopies using (_~_; refl-htpy)
 open import foundation-core.identity-types using (refl; inv; _∙_)
-open import foundation-core.sections using (sec)
+open import foundation-core.sections using
+  ( sec; section-comp; section-left-factor)
 open import foundation-core.singleton-induction using
   ( is-singleton-is-contr; is-contr-is-singleton)
 open import foundation-core.universe-levels using (Level; UU)
@@ -56,12 +56,9 @@ module _
       {l : Level} →
       (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) → IND-EQUIV (λ B e → P (pair B e))
     IND-EQUIV-is-contr-total-equiv c P =
-      section-comp
-        ( ev-pt (pair A id-equiv) P)
+      section-left-factor
         ( ev-id (λ X e → P (pair X e)))
         ( ev-pair)
-        ( triangle-ev-id P)
-        ( pair ind-Σ refl-htpy)
         ( is-singleton-is-contr
           ( pair A id-equiv)
           ( pair
@@ -81,11 +78,9 @@ module _
       is-contr-is-singleton
         ( Σ (UU l1) (λ X → A ≃ X))
         ( pair A id-equiv)
-        ( λ P → section-comp'
-          ( ev-pt (pair A id-equiv) P)
+        ( λ P → section-comp
           ( ev-id (λ X e → P (pair X e)))
           ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
-          ( triangle-ev-id P)
           ( pair ind-Σ refl-htpy)
           ( ind P))
 ```

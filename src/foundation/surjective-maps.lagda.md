@@ -17,7 +17,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( _↪_; map-emb; is-emb; emb-Σ; id-emb; equiv-ap-emb)
 open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; is-equiv-comp'; _≃_; map-equiv; _∘e_; inv-equiv;
+  ( is-equiv; map-inv-is-equiv; is-equiv-comp; _≃_; map-equiv; _∘e_; inv-equiv;
     map-inv-equiv; id-equiv; is-equiv-map-equiv)
 open import foundation.fibers-of-maps using
   ( fib; is-equiv-map-reduce-Π-fib; reduce-Π-fib)
@@ -280,11 +280,11 @@ abstract
     is-surjective f →
     ({l : Level} → dependent-universal-property-surj l f)
   dependent-universal-property-surj-is-surjective f is-surj-f P =
-    is-equiv-comp'
+    is-equiv-comp
       ( λ h x → h (f x) (pair x refl))
       ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
         ( λ h y → const (type-trunc-Prop (fib f y)) (type-Prop (P y)) (h y)))
-      ( is-equiv-comp'
+      ( is-equiv-comp
         ( λ h y → (h y) ∘ unit-trunc-Prop)
         ( λ h y → const (type-trunc-Prop (fib f y)) (type-Prop (P y)) (h y))
         ( is-equiv-map-Π
