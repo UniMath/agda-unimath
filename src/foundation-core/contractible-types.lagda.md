@@ -251,6 +251,15 @@ abstract
       ( λ x → contraction (H x) (f x))
 ```
 
+### The type of functions into a contractible type is contractible
+
+```agda
+is-contr-function-types :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-contr B → is-contr (A → B)
+is-contr-function-types is-contr-B = is-contr-Π λ _ → is-contr-B
+```
+
 ### The type of equivalences between contractible types is contractible
 
 ```agda
@@ -262,17 +271,17 @@ module _
     is-contr A → is-contr B → is-contr (A ≃ B)
   is-contr-equiv-is-contr (pair a α) (pair b β) =
     is-contr-Σ
-      ( is-contr-Π (λ x → (pair b β)))
+      ( is-contr-function-types (pair b β))
       ( λ x → b)
       ( is-contr-prod
         ( is-contr-Σ
-          ( is-contr-Π (λ y → (pair a α)))
+          ( is-contr-function-types (pair a α))
           ( λ y → a)
-          ( is-contr-Π (λ y → is-prop-is-contr (pair b β) b y)))
+          ( is-contr-Π (is-prop-is-contr (pair b β) b)))
         ( is-contr-Σ
-          ( is-contr-Π (λ x → pair a α))
+          ( is-contr-function-types (pair a α))
           ( λ y → a)
-          ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))))
+          ( is-contr-Π (is-prop-is-contr (pair a α) a))))
 ```
 
 ### Being contractible is a proposition
@@ -288,7 +297,7 @@ module _
       is-contr-Σ
         ( pair a α)
         ( a)
-        ( is-contr-Π (λ x → is-prop-is-contr (pair a α) a x))
+        ( is-contr-Π (is-prop-is-contr (pair a α) a))
 
   abstract
     is-property-is-contr : (H K : is-contr A) → is-contr (H ＝ K)
