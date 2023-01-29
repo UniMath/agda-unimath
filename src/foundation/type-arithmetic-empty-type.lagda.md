@@ -388,7 +388,7 @@ module _
     inv-right-unit-law-coprod-is-empty A empty id
 ```
 
-### Left zero law for Π-types
+### Left zero law for dependent function types
 
 ```agda
 is-contr-Π-empty :
@@ -415,7 +415,7 @@ pr2 (left-zero-law-Π-is-empty A is-empty-X) =
   is-equiv-terminal-map-is-contr (is-contr-Π-is-empty A is-empty-X)
 ```
 
-### Left zero law for function types
+### Left zero law for non-dependent function types
 
 ```agda
 is-contr-function-types-empty :
