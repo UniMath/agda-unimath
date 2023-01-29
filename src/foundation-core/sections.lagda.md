@@ -30,7 +30,7 @@ module _
 
 ## Properties
 
-### If the composite `g ∘ f` admits a section then `g` admits a section
+### If `g ∘ f` admits a section then `g` admits a section
 
 ```agda
 module _
@@ -70,9 +70,6 @@ module _
   pr1 (section-comp-htpy f g h H sec-f sec-g) = pr1 (section-comp f g sec-f sec-g)
   pr2 (section-comp-htpy f g h H sec-f sec-g) =
     (H ·r pr1 (section-comp f g sec-f sec-g)) ∙h (pr2 (section-comp f g sec-f sec-g))
-
-  _∘sec_ : {f : A → B} {g : B → C} → sec g → sec f → sec (g ∘ f)
-  _∘sec_ {f} {g} sec-g sec-f = section-comp f g sec-f sec-g
 
 
   triangle-section' :
