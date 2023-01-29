@@ -54,7 +54,8 @@ module _
 
   unordered-pair-vertices-Enriched-Undirected-Graph : UU (lsuc lzero ⊔ l3)
   unordered-pair-vertices-Enriched-Undirected-Graph =
-    unordered-pair-vertices-Undirected-Graph undirected-graph-Enriched-Undirected-Graph
+    unordered-pair-vertices-Undirected-Graph
+      undirected-graph-Enriched-Undirected-Graph
 
   edge-Enriched-Undirected-Graph :
     unordered-pair-vertices-Enriched-Undirected-Graph → UU l4
