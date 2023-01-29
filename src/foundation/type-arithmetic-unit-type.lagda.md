@@ -8,16 +8,17 @@ title: Type arithmetic with the unit type
 module foundation.type-arithmetic-unit-type where
 
 open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
+  ( is-equiv; _≃_; is-equiv-has-inverse; inv-equiv)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_)
 open import foundation-core.identity-types using (refl)
 open import foundation-core.universe-levels using (Level; UU)
 
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.unit-type using (unit; star)
+open import foundation.unit-type
 ```
 
 ## Idea
@@ -202,4 +203,24 @@ module _
 
   inv-left-unit-law-function-types : A ≃ (unit → A)
   inv-left-unit-law-function-types = inv-left-unit-law-Π (λ _ → A)
+```
+
+### Right zero law for function types
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  is-contr-function-types-unit : is-contr (A → unit)
+  is-contr-function-types-unit = is-contr-function-types is-contr-unit
+
+  right-zero-law-function-types : (A → unit) ≃ unit
+  pr1 right-zero-law-function-types = λ _ → star
+  pr2 right-zero-law-function-types =
+    is-equiv-terminal-map-is-contr is-contr-function-types-unit
+
+  inv-right-zero-law-function-types : unit ≃ (A → unit)
+  inv-right-zero-law-function-types =
+    inv-equiv right-zero-law-function-types
 ```
