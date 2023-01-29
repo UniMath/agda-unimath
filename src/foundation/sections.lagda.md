@@ -133,6 +133,8 @@ module _
       ( λ s → id-equiv))
 ```
 
+### Extensionality of sections
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
@@ -186,10 +188,10 @@ sec-left-factor-retract-of-sec-composition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) →
   sec f → (sec g) retract-of (sec h)
-pr1 (sec-left-factor-retract-of-sec-composition {C = C} f g h H sec-f) =
+pr1 (sec-left-factor-retract-of-sec-composition f g h H sec-f) =
   section-comp-htpy f g h H sec-f
-pr1 (pr2 (sec-left-factor-retract-of-sec-composition {C = C} f g h H sec-f)) =
+pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-f)) =
   section-left-factor-htpy f g h H
-pr2 (pr2 (sec-left-factor-retract-of-sec-composition {C = C} f g h H sec-f)) =
+pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-f)) =
   isretr-section-comp f g h H sec-f
 ```

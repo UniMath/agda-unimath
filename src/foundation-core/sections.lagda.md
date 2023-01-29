@@ -30,7 +30,7 @@ module _
 
 ## Properties
 
-### If `g ∘ f` admits a section then `g` admits a section
+### If `g ∘ f` has a section then `g` has a section
 
 ```agda
 module _
@@ -39,7 +39,8 @@ module _
   
   section-left-factor :
     (f : A → B) (g : B → C) → sec (g ∘ f) → sec g
-  section-left-factor f g sec-gf = f ∘ (pr1 sec-gf) , pr2 sec-gf
+  pr1 (section-left-factor f g sec-gf) = f ∘ (pr1 sec-gf)
+  pr2 (section-left-factor f g sec-gf) = pr2 sec-gf
 
   section-left-factor-htpy' :
     (f : A → B) (g : B → C) (h : A → C) (H' : (g ∘ f) ~ h) →
@@ -63,25 +64,28 @@ module _
     (f : A → B) (g : B → C) → sec f → sec g → sec (g ∘ f)
   pr1 (section-comp f g sec-f sec-g) = pr1 sec-f ∘ pr1 sec-g
   pr2 (section-comp f g sec-f sec-g) =
-    (g ·l (pr2 sec-f ·r (pr1 sec-g))) ∙h pr2 sec-g
+    (g ·l (pr2 sec-f ·r (pr1 sec-g))) ∙h (pr2 sec-g)
 
   section-comp-htpy :
-    (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) → sec f → sec g → sec h
-  pr1 (section-comp-htpy f g h H sec-f sec-g) = pr1 (section-comp f g sec-f sec-g)
+    (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) →
+    sec f → sec g → sec h
+  pr1 (section-comp-htpy f g h H sec-f sec-g) =
+    pr1 (section-comp f g sec-f sec-g)
   pr2 (section-comp-htpy f g h H sec-f sec-g) =
-    (H ·r pr1 (section-comp f g sec-f sec-g)) ∙h (pr2 (section-comp f g sec-f sec-g))
+    (H ·r pr1 (section-comp f g sec-f sec-g)) ∙h
+    (pr2 (section-comp f g sec-f sec-g))
 
 
-  triangle-section' :
-    (h : A → C) (g : B → C) (f : A → B)  (H : h ~ (g ∘ f))
+  inv-triangle-section :
+    (h : A → C) (g : B → C) (f : A → B) (H : h ~ (g ∘ f))
     (sec-f : sec f) → (h ∘ (pr1 sec-f)) ~ g 
-  triangle-section' h g f H sec-f =
+  inv-triangle-section h g f H sec-f =
     (H ·r (pr1 sec-f)) ∙h (g ·l (pr2 sec-f))
 
   triangle-section :
     (h : A → C) (g : B → C) (f : A → B) (H : h ~ (g ∘ f))
     (sec-f : sec f) → g ~ (h ∘ (pr1 sec-f))
   triangle-section h g f H sec-f =
-    inv-htpy (triangle-section' h g f H sec-f)
+    inv-htpy (inv-triangle-section h g f H sec-f)
 ```
  

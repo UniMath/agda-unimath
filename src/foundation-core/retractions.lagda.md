@@ -7,12 +7,12 @@ title: Retractions
 
 module foundation-core.retractions where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.dependent-pair-types
 open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
+open import foundation-core.homotopies
 open import foundation-core.identity-types using
   ( _＝_; inv; _∙_; ap; refl; left-inv)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -82,3 +82,53 @@ retract-eq :
 pr1 (retract-eq (pair i (pair r H)) x y) = ap i
 pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
 ```
+
+### If `g ∘ f` has a retraction then `f` has a retraction
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  retraction-right-factor :
+    (f : A → B) (g : B → C) → retr (g ∘ f) → retr f
+  pr1 (retraction-right-factor f g retr-gf) = pr1 retr-gf ∘ g
+  pr2 (retraction-right-factor f g retr-gf) = pr2 retr-gf
+  
+  retraction-right-factor-htpy :
+    (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) → retr h → retr f
+  pr1 (retraction-right-factor-htpy f g h H retr-h) =
+    pr1 retr-h ∘ g
+  pr2 (retraction-right-factor-htpy f g h H retr-h) = 
+    (inv-htpy ((pr1 retr-h) ·l H)) ∙h (pr2 retr-h)
+```
+
+### Composites of retractions are retractions
+
+```agda
+  retraction-comp : 
+    (f : A → B) (g : B → C) → retr f → retr g → retr (g ∘ f)
+  pr1 (retraction-comp f g retr-f retr-g) = pr1 retr-f ∘ pr1 retr-g
+  pr2 (retraction-comp f g retr-f retr-g) =
+    ((pr1 retr-f) ·l (pr2 retr-g ·r f)) ∙h (pr2 retr-f)
+
+  retraction-comp-htpy : 
+    (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) →
+    retr f → retr g → retr h
+  pr1 (retraction-comp-htpy f g h H retr-f retr-g) =
+    pr1 (retraction-comp f g retr-f retr-g)
+  pr2 (retraction-comp-htpy f g h H retr-f retr-g) =
+    ( pr1 (retraction-comp f g retr-f retr-g) ·l H) ∙h
+    pr2 (retraction-comp f g retr-f retr-g)
+  
+
+  inv-triangle-retraction :
+    (h : A → B) (g : B → C) (f : A → C) (H : f ~ (g ∘ h))
+    (retr-g : retr g) → ((pr1 retr-g) ∘ f) ~ h 
+  inv-triangle-retraction h g f H retr-g = (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
+
+  triangle-retraction :
+    (h : A → B) (g : B → C) (f : A → C) (H : f ~ (g ∘ h))
+    (retr-g : retr g) → h ~ ((pr1 retr-g) ∘ f)
+  triangle-retraction h g f H retr-g = inv-htpy (inv-triangle-retraction h g f H retr-g)
+``` 

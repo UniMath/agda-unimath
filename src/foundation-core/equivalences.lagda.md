@@ -205,26 +205,12 @@ module _
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
-  triangle-retraction : (R : retr g) → h ~ ((pr1 R) ∘ f)
-  triangle-retraction (pair r isretr) = inv-htpy ((r ·l H) ∙h (isretr ·r h))
-
-  retraction-comp : retr g → retr f → retr h
-  pr1 (retraction-comp retr-g retr-f) = (pr1 retr-f) ∘ g
-  pr2 (retraction-comp retr-g retr-f) =
-    (inv-htpy ((pr1 retr-f) ·l H)) ∙h (pr2 retr-f)
-
-  retraction-comp' : retr g → retr h → retr f
-  pr1 (retraction-comp' retr-g retr-h) = (pr1 retr-h) ∘ (pr1 retr-g)
-  pr2 (retraction-comp' retr-g retr-h) =
-    ( ((pr1 retr-h) ∘ (pr1 retr-g)) ·l H) ∙h
-    ( ((pr1 retr-h) ·l ((pr2 retr-g) ·r h)) ∙h (pr2 retr-h))
-
   abstract
     is-equiv-comp : is-equiv h → is-equiv g → is-equiv f
     pr1 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
       section-comp-htpy h g f H sec-h sec-g
     pr2 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
-      retraction-comp' retr-g retr-h
+      retraction-comp-htpy h g f H retr-h retr-g
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -256,16 +242,16 @@ module _
     pr1
       ( is-equiv-left-factor
         ( pair sec-f retr-f)
-        ( pair (pair sh sh-issec) retr-h)) =
+        ( pair (pair sh issec-sh) retr-h)) =
       section-left-factor-htpy h g f H sec-f
     pr2
       ( is-equiv-left-factor
         ( pair sec-f retr-f)
-        ( pair (pair sh sh-issec) retr-h)) =
-      retraction-comp' g f sh
-        ( triangle-section f g h H (pair sh sh-issec))
+        ( pair (pair sh issec-sh) retr-h)) =
+      retraction-comp-htpy sh f g
+        ( triangle-section f g h H (pair sh issec-sh))
+        ( pair h issec-sh)
         ( retr-f)
-        ( pair h sh-issec)
 ```
 
 #### If a composite and its left factor are equivalences, then so is its right factor
@@ -280,17 +266,17 @@ module _
     is-equiv-right-factor : is-equiv g → is-equiv f → is-equiv h
     pr1
       ( is-equiv-right-factor
-        ( pair sec-g (pair rg rg-isretr))
+        ( pair sec-g (pair rg isretr-rg))
         ( pair sec-f retr-f)) =
       section-comp-htpy f rg h
-        ( triangle-retraction f g h H (pair rg rg-isretr))
+        ( triangle-retraction h g f H (pair rg isretr-rg))
         ( sec-f)
-        ( pair g rg-isretr)
+        ( pair g isretr-rg)
     pr2
       ( is-equiv-right-factor
-        ( pair sec-g (pair rg rg-isretr))
+        ( pair sec-g (pair rg isretr-rg))
         ( pair sec-f retr-f)) =
-      retraction-comp f g h H (pair rg rg-isretr) retr-f
+      retraction-right-factor-htpy h g f H retr-f
 ```
 
 ```agda
