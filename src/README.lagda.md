@@ -520,6 +520,7 @@ open import graph-theory.edge-coloured-undirected-graphs
 open import graph-theory.embeddings-undirected-graphs
 open import graph-theory.enriched-undirected-graphs
 open import graph-theory.equivalences-enriched-undirected-graphs
+open import graph-theory.equivalences-directed-graphs
 open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
@@ -865,6 +866,8 @@ open import trees
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
 open import trees.enriched-directed-trees
+open import trees.equivalences-directed-trees
+open import trees.equivalences-enriched-directed-trees
 open import trees.extensional-w-types
 open import trees.functoriality-w-types
 open import trees.indexed-w-types
