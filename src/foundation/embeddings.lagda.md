@@ -22,15 +22,15 @@ open import foundation-core.homotopies using
 open import foundation-core.propositional-maps using
   ( is-emb-is-prop-map; is-prop-map-is-emb)
 open import foundation-core.pullbacks using (is-pullback)
-open import foundation-core.sections using (sec)
+open import foundation-core.sections using (sec; triangle-section)
 open import foundation-core.truncation-levels using (neg-one-𝕋)
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.equivalences using
   ( is-equiv-top-is-equiv-left-square; is-equiv-comp; is-equiv-right-factor;
-    is-equiv; is-emb-is-equiv; map-inv-is-equiv; triangle-section;
-    issec-map-inv-is-equiv; is-equiv-map-inv-is-equiv; is-property-is-equiv;
-    _≃_; map-equiv; is-equiv-htpy-equiv; inv-equiv; isretr-map-inv-equiv)
+    is-equiv; is-emb-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
+    is-equiv-map-inv-is-equiv; is-property-is-equiv; _≃_; map-equiv;
+    is-equiv-htpy-equiv; inv-equiv; isretr-map-inv-equiv)
 open import foundation.identity-types using
   ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp;
     _＝_; refl; _∙_; inv)

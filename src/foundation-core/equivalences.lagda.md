@@ -222,7 +222,7 @@ module _
   abstract
     is-equiv-comp : is-equiv h → is-equiv g → is-equiv f
     pr1 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
-      section-comp' f g h H sec-h sec-g
+      section-comp-htpy h g f H sec-h sec-g
     pr2 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
       retraction-comp' retr-g retr-h
 
@@ -257,7 +257,7 @@ module _
       ( is-equiv-left-factor
         ( pair sec-f retr-f)
         ( pair (pair sh sh-issec) retr-h)) =
-      section-comp f g h H (pair sh sh-issec) sec-f
+      section-left-factor-htpy h g f H sec-f
     pr2
       ( is-equiv-left-factor
         ( pair sec-f retr-f)
@@ -282,7 +282,7 @@ module _
       ( is-equiv-right-factor
         ( pair sec-g (pair rg rg-isretr))
         ( pair sec-f retr-f)) =
-      section-comp' h rg f
+      section-comp-htpy f rg h
         ( triangle-retraction f g h H (pair rg rg-isretr))
         ( sec-f)
         ( pair g rg-isretr)

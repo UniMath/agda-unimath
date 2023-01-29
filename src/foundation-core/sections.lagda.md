@@ -30,25 +30,61 @@ module _
 
 ## Properties
 
-### Composites of sections are sections
+### If the composite `g ∘ f` admits a section then `g` admits a section
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
-
-  triangle-section : (S : sec h) → g ~ (f ∘ (pr1 S))
-  triangle-section (pair s issec) = inv-htpy ((H ·r s) ∙h (g ·l issec))
-
-  section-comp : sec h → sec f → sec g
-  pr1 (section-comp sec-h sec-f) = h ∘ (pr1 sec-f)
-  pr2 (section-comp sec-h sec-f) = (inv-htpy (H ·r (pr1 sec-f))) ∙h (pr2 sec-f)
   
-  section-comp' : sec h → sec g → sec f
-  pr1 (section-comp' sec-h sec-g) = (pr1 sec-h) ∘ (pr1 sec-g)
-  pr2 (section-comp' sec-h sec-g) =
-    ( H ·r ((pr1 sec-h) ∘ (pr1 sec-g))) ∙h
-    ( ( g ·l ((pr2 sec-h) ·r (pr1 sec-g))) ∙h ((pr2 sec-g)))
+  section-left-factor :
+    (f : A → B) (g : B → C) → sec (g ∘ f) → sec g
+  section-left-factor f g sec-gf = f ∘ (pr1 sec-gf) , pr2 sec-gf
+
+  section-left-factor-htpy' :
+    (f : A → B) (g : B → C) (h : A → C) (H' : (g ∘ f) ~ h) →
+    sec h → sec g
+  pr1 (section-left-factor-htpy' f g h H' sec-h) =
+    f ∘ (pr1 sec-h)
+  pr2 (section-left-factor-htpy' f g h H' sec-h) =
+    (H' ·r pr1 sec-h) ∙h (pr2 sec-h)
+
+  section-left-factor-htpy :
+    (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) →
+    sec h → sec g
+  section-left-factor-htpy f g h H sec-h =
+    section-left-factor-htpy' f g h (inv-htpy H) sec-h
+```
+
+### Composites of sections are sections
+
+```agda
+  section-comp :
+    (f : A → B) (g : B → C) → sec f → sec g → sec (g ∘ f)
+  pr1 (section-comp f g sec-f sec-g) = pr1 sec-f ∘ pr1 sec-g
+  pr2 (section-comp f g sec-f sec-g) =
+    (g ·l (pr2 sec-f ·r (pr1 sec-g))) ∙h pr2 sec-g
+
+  section-comp-htpy :
+    (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) → sec f → sec g → sec h
+  pr1 (section-comp-htpy f g h H sec-f sec-g) = pr1 (section-comp f g sec-f sec-g)
+  pr2 (section-comp-htpy f g h H sec-f sec-g) =
+    (H ·r pr1 (section-comp f g sec-f sec-g)) ∙h (pr2 (section-comp f g sec-f sec-g))
+
+  _∘sec_ : {f : A → B} {g : B → C} → sec g → sec f → sec (g ∘ f)
+  _∘sec_ {f} {g} sec-g sec-f = section-comp f g sec-f sec-g
+
+
+  triangle-section' :
+    (h : A → C) (g : B → C) (f : A → B)  (H : h ~ (g ∘ f))
+    (sec-f : sec f) → (h ∘ (pr1 sec-f)) ~ g 
+  triangle-section' h g f H sec-f =
+    (H ·r (pr1 sec-f)) ∙h (g ·l (pr2 sec-f))
+
+  triangle-section :
+    (h : A → C) (g : B → C) (f : A → B) (H : h ~ (g ∘ f))
+    (sec-f : sec f) → g ~ (h ∘ (pr1 sec-f))
+  triangle-section h g f H sec-f =
+    inv-htpy (triangle-section' h g f H sec-f)
 ```
  
