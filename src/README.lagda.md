@@ -851,6 +851,7 @@ open import synthetic-homotopy-theory.multiplication-circle
 open import synthetic-homotopy-theory.prespectra
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.spectra
+open import synthetic-homotopy-theory.spheres
 open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.triple-loop-spaces
 open import synthetic-homotopy-theory.universal-cover-circle
