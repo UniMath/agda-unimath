@@ -328,11 +328,10 @@ module _
   is-equiv-htpy-equiv' e H =
     is-equiv-htpy' (map-equiv e) H (is-equiv-map-equiv e)
 
-  -- Note: This should probably be called `htpy-map-inv-is-equiv`
-  inv-htpy-is-equiv :
+  htpy-map-inv-is-equiv :
     {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
     (map-inv-is-equiv H) ~ (map-inv-is-equiv K)
-  inv-htpy-is-equiv G H K b =
+  htpy-map-inv-is-equiv G H K b =
     ( inv
       ( isretr-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
     ( ap (map-inv-is-equiv K)
