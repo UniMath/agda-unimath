@@ -210,7 +210,7 @@ module _
     pr1 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
       section-comp-htpy h g f H sec-h sec-g
     pr2 (is-equiv-comp (pair sec-h retr-h) (pair sec-g retr-g)) =
-      retraction-comp-htpy h g f H retr-h retr-g
+      retraction-comp-htpy f g h H retr-g retr-h
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -219,7 +219,10 @@ module _
   abstract
     is-equiv-comp' :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    is-equiv-comp' g h = is-equiv-comp (g ∘ h) g h refl-htpy
+    pr1 (is-equiv-comp' g h (pair sec-h retr-h) (pair sec-g retr-g)) =
+      section-comp h g sec-h sec-g
+    pr2 (is-equiv-comp' g h (pair sec-h retr-h) (pair sec-g retr-g)) =
+      retraction-comp g h retr-g retr-h
 
   equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
@@ -248,10 +251,10 @@ module _
       ( is-equiv-left-factor
         ( pair sec-f retr-f)
         ( pair (pair sh issec-sh) retr-h)) =
-      retraction-comp-htpy sh f g
+      retraction-comp-htpy g f sh
         ( triangle-section f g h H (pair sh issec-sh))
-        ( pair h issec-sh)
         ( retr-f)
+        ( pair h issec-sh)
 ```
 
 #### If a composite and its left factor are equivalences, then so is its right factor
@@ -269,14 +272,14 @@ module _
         ( pair sec-g (pair rg isretr-rg))
         ( pair sec-f retr-f)) =
       section-comp-htpy f rg h
-        ( triangle-retraction h g f H (pair rg isretr-rg))
+        ( triangle-retraction f g h H (pair rg isretr-rg))
         ( sec-f)
         ( pair g isretr-rg)
     pr2
       ( is-equiv-right-factor
         ( pair sec-g (pair rg isretr-rg))
         ( pair sec-f retr-f)) =
-      retraction-right-factor-htpy h g f H retr-f
+      retraction-right-factor-htpy f g h H retr-f
 ```
 
 ```agda
@@ -513,3 +516,4 @@ module _
   pr1 (equiv-ap e x y) = ap (map-equiv e)
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 ```
+ 

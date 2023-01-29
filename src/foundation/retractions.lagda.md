@@ -48,13 +48,13 @@ module _
 
 ```agda
 isretr-retraction-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) (retr-g : retr g) →
-  ((retraction-right-factor-htpy f g h H) ∘ (λ retr-f → retraction-comp-htpy f g h H retr-f retr-g)) ~ id
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (retr-g : retr g) →
+  ((retraction-right-factor-htpy f g h H) ∘ (retraction-comp-htpy f g h H retr-g)) ~ id
 isretr-retraction-comp f g h H (pair l L) (pair k K) =
   eq-htpy-retr
     ( ( retraction-right-factor-htpy f g h H
-        ( retraction-comp-htpy f g h H (pair k K) (pair l L)
+        ( retraction-comp-htpy f g h H (pair l L) (pair k K)
           )))
     ( pair k K)
     ( k ·l L)
@@ -62,21 +62,19 @@ isretr-retraction-comp f g h H (pair l L) (pair k K) =
         ( assoc-htpy
           ( inv-htpy ((k ∘ l) ·l H))
           ( (k ∘ l) ·l H)
-          ( (k ·l (L ·r f)) ∙h K))) ∙h
+          ( (k ·l (L ·r h)) ∙h K))) ∙h
       ( ap-concat-htpy'
         ( (inv-htpy ((k ∘ l) ·l H)) ∙h ((k ∘ l) ·l H))
         ( refl-htpy)
-        ( (k ·l (L ·r f)) ∙h K)
+        ( (k ·l (L ·r h)) ∙h K)
         ( left-inv-htpy ((k ∘ l) ·l H))))
-  
-
 
 retr-right-factor-retract-of-retr-left-factor :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (f : A → B) (g : B → C) (h : A → C) (H : h ~ (g ∘ f)) →
-  retr g → (retr f) retract-of (retr h)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+  retr g → (retr h) retract-of (retr f)
 pr1 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g) =
-  λ retr-f → retraction-comp-htpy f g h H retr-f retr-g
+  retraction-comp-htpy f g h H retr-g
 pr1 (pr2 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g)) =
   retraction-right-factor-htpy f g h H
 pr2 (pr2 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g)) =
