@@ -189,3 +189,17 @@ module _
   pr1 inv-left-unit-law-Π = map-inv-left-unit-law-Π
   pr2 inv-left-unit-law-Π = is-equiv-map-inv-left-unit-law-Π
 ```
+
+### Left unit law for non-dependent function types
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  left-unit-law-function-types : (unit → A) ≃ A
+  left-unit-law-function-types = left-unit-law-Π (λ _ → A)
+
+  inv-left-unit-law-function-types : A ≃ (unit → A)
+  inv-left-unit-law-function-types = inv-left-unit-law-Π (λ _ → A)
+```
