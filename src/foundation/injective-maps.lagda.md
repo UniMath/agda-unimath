@@ -13,6 +13,7 @@ open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functions
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -55,9 +56,14 @@ module _
   where
 
   is-injective-right-factor :
-    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
+    {g : B → C} {h : A → B} →
+    is-injective (g ∘ h) → is-injective h
+  is-injective-right-factor {g} is-inj-gh p = is-inj-gh (ap g p)
+
+  is-injective-right-factor-htpy :
+    (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) →
     is-injective f → is-injective h
-  is-injective-right-factor f g h H is-inj-f {x} {x'} p =
+  is-injective-right-factor-htpy f g h H is-inj-f {x} {x'} p =
     is-inj-f {x} {x'} ((H x) ∙ ((ap g p) ∙ (inv (H x'))))
 ```
 
