@@ -45,11 +45,10 @@ open import foundation-core.functoriality-function-types using
 The universal property of pullbacks describes the optimal way to complete a diagram of the form
 
 ```md
-           B
-           |
-           |
-           V
-
+         B
+         |
+         |
+         V
 A -----> X
 ```
 
@@ -57,9 +56,9 @@ to a square
 
 ```md
 C -----> B
-| |
-| |
-V V
+|        |
+|        |
+V        V
 A -----> X
 ```
 
