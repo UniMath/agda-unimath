@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -36,25 +37,34 @@ A directed tree is a directed graph `G` equipped with a rood `r : G` such that f
 ## Definition
 
 ```agda
-is-tree-Directed-Graph-Prop :
+is-tree-Directed-Graph-Prop' :
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
   Prop (l1 ⊔ l2)
-is-tree-Directed-Graph-Prop G r =
+is-tree-Directed-Graph-Prop' G r =
   Π-Prop
     ( vertex-Directed-Graph G)
     ( λ x → is-contr-Prop (walk-Directed-Graph G x r))
 
-is-tree-Directed-Graph :
+is-tree-Directed-Graph' :
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
   UU (l1 ⊔ l2)
-is-tree-Directed-Graph G r = type-Prop (is-tree-Directed-Graph-Prop G r)
+is-tree-Directed-Graph' G r = type-Prop (is-tree-Directed-Graph-Prop' G r)
+
+is-prop-is-tree-Directed-Graph' :
+  {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
+  is-prop (is-tree-Directed-Graph' G r)
+is-prop-is-tree-Directed-Graph' G r =
+  is-prop-type-Prop (is-tree-Directed-Graph-Prop' G r)
+
+is-tree-Directed-Graph :
+  {l1 l2 : Level} → Directed-Graph l1 l2 → UU (l1 ⊔ l2)
+is-tree-Directed-Graph G =
+  Σ ( vertex-Directed-Graph G)
+    ( λ r → is-tree-Directed-Graph' G r)
 
 Directed-Tree : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Directed-Tree l1 l2 =
-  Σ ( Directed-Graph l1 l2)
-    ( λ G →
-      Σ ( vertex-Directed-Graph G)
-        ( λ r → is-tree-Directed-Graph G r))
+  Σ ( Directed-Graph l1 l2) is-tree-Directed-Graph
 
 module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
@@ -69,15 +79,61 @@ module _
   edge-Directed-Tree : (x y : node-Directed-Tree) → UU l2
   edge-Directed-Tree = edge-Directed-Graph graph-Directed-Tree
 
-  root-Directed-Tree : node-Directed-Tree
-  root-Directed-Tree = pr1 (pr2 T)
+  walk-Directed-Tree : (x y : node-Directed-Tree) → UU (l1 ⊔ l2)
+  walk-Directed-Tree = walk-Directed-Graph graph-Directed-Tree
 
-  is-tree-Directed-Tree :
-    is-tree-Directed-Graph graph-Directed-Tree root-Directed-Tree
-  is-tree-Directed-Tree = pr2 (pr2 T)
+  is-tree-Directed-Tree : is-tree-Directed-Graph graph-Directed-Tree
+  is-tree-Directed-Tree = pr2 T
+
+  root-Directed-Tree : node-Directed-Tree
+  root-Directed-Tree = pr1 is-tree-Directed-Tree
+
+  is-tree-Directed-Tree' :
+    is-tree-Directed-Graph' graph-Directed-Tree root-Directed-Tree
+  is-tree-Directed-Tree' = pr2 is-tree-Directed-Tree
+
+  walk-to-root-Directed-Tree :
+    (x : node-Directed-Tree) → walk-Directed-Tree x root-Directed-Tree
+  walk-to-root-Directed-Tree x =
+    center (is-tree-Directed-Tree' x)
 ```
 
 ## Properties
+
+### Being a tree is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  uniqueness-root-is-tree-Directed-Graph :
+    (H K : is-tree-Directed-Graph G) → pr1 H ＝ pr1 K
+  uniqueness-root-is-tree-Directed-Graph (r , H) (s , K) =
+    eq-is-refl-concat-walk-Directed-Graph G
+      ( center (K r))
+      ( center (H s))
+      ( eq-is-contr (H r))
+
+  is-prop-is-tree-Directed-Graph : is-prop (is-tree-Directed-Graph G)
+  is-prop-is-tree-Directed-Graph =
+    is-prop-all-elements-equal
+      ( λ H K →
+        eq-type-subtype
+          ( is-tree-Directed-Graph-Prop' G)
+          ( uniqueness-root-is-tree-Directed-Graph H K))
+
+uniqueness-root-Directed-Tree :
+  {l1 l2 : Level} (T : Directed-Tree l1 l2)
+  (H : is-tree-Directed-Graph (graph-Directed-Tree T)) →
+  root-Directed-Tree T ＝ pr1 H
+uniqueness-root-Directed-Tree T =
+  uniqueness-root-is-tree-Directed-Graph
+    ( graph-Directed-Tree T)
+    ( is-tree-Directed-Tree T)
+```
+
+### Graphs in which vertices have unique parents are trees if for every vertex `x` there is a walk from `x` to the root
 
 ```agda
 module _
@@ -192,10 +248,10 @@ module _
               (y , e))
       ( is-proof-irrelevant-walk-unique-parent-Directed-Graph H y w)
 
-  is-tree-unique-parent-Directed-Graph :
+  is-tree-unique-parent-Directed-Graph' :
     unique-parent-Directed-Graph →
     ((x : vertex-Directed-Graph G) → walk-Directed-Graph G x r) →
-    is-tree-Directed-Graph G r
-  is-tree-unique-parent-Directed-Graph H w x =
+    is-tree-Directed-Graph' G r
+  is-tree-unique-parent-Directed-Graph' H w x =
     is-proof-irrelevant-walk-unique-parent-Directed-Graph H x (w x)
 ```
