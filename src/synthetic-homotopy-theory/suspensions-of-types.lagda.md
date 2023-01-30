@@ -208,7 +208,7 @@ extensionality-suspension-structure :
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
   (c c' : suspension-structure X Z) → 
   (c ＝ c') ≃ (htpy-suspension-structure c c')
-extensionality-suspension-structure {X = X} (N , S , merid) c' =
+extensionality-suspension-structure {X = X} (N , S , merid) =
     extensionality-Σ {Eq-A = λ t → N ＝ t}
     (λ w p → Σ (S ＝ pr1 w)
       (λ q → (x : X) → ((inv p ∙ merid x) ∙ q) ＝ pr2 w x))
@@ -217,7 +217,7 @@ extensionality-suspension-structure {X = X} (N , S , merid) c' =
     (λ t' → extensionality-Σ {Eq-A = λ t → S ＝ t}
       (λ H q → (x : X) → (merid x ∙ q) ＝ H x)
       refl right-unit-htpy (λ x → id-equiv)
-      (λ y → equiv-concat-htpy right-unit-htpy y ∘e equiv-funext) t') c'
+      (λ y → equiv-concat-htpy right-unit-htpy y ∘e equiv-funext) t')
 
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c c' : suspension-structure X Z}
