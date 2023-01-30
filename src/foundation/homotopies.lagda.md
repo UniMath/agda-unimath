@@ -67,7 +67,7 @@ module _
     (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
   ap-concat-htpy' H H' K L x =
     ap (concat' _ (K x)) (L x)
-    
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   {H H' : f ~ g}
@@ -84,7 +84,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
-  
+
   left-whisk-inv-htpy :
     {f f' : A → B} (g : B → C) (H : f ~ f') →
     (g ·l (inv-htpy H)) ~ inv-htpy (g ·l H)
@@ -102,7 +102,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
   where
-  
+
   abstract
     is-contr-total-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
     is-contr-total-htpy =
@@ -165,13 +165,13 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     IND-HTPY {l3 = l3} f
   Ind-htpy f = IND-HTPY-FUNEXT f (funext f)
-  
+
   ind-htpy :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
     (f : (x : A) → B x) (C : (g : (x : A) → B x) → (f ~ g) → UU l3) →
     C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
   ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
-  
+
   comp-htpy :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
     (f : (x : A) → B x) (C : (g : (x : A) → B x) → (f ~ g) → UU l3) →
@@ -286,3 +286,8 @@ equiv-con-inv-htpy :
 pr1 (equiv-con-inv-htpy H K L) = con-inv-htpy H K L
 pr2 (equiv-con-inv-htpy H K L) = is-equiv-con-inv-htpy H K L
 ```
+
+## See also
+
+- We postulate that homotopy is equivalent to identity of functions in
+  [foundation-core.function-extensionality](foundation-core.function-extensionality.html).

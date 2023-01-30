@@ -185,3 +185,8 @@ coh-htpy-id :
 coh-htpy-id H x =
   is-injective-concat' (H x) (nat-htpy-id H (H x))
 ```
+
+## See also
+
+- We postulate that homotopy is equivalent to identity of functions in
+  [foundation-core.function-extensionality](foundation-core.function-extensionality.html).
