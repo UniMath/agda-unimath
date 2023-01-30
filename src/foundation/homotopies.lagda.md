@@ -25,6 +25,8 @@ open import foundation.identity-types
 
 A homotopy of identifications is a pointwise equality between dependent functions. We defined homotopies in [`foundation-core.homotopies`](foundation-core.homotopies.html). In this file, we record some properties of homotopies that require function extensionality, equivalences, or other.
 
+## Properties
+
 ### The total space of homotopies is contractible
 
 ```agda
