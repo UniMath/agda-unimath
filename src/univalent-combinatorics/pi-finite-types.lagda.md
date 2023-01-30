@@ -866,7 +866,7 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
         ( is-surjective-map-unit-im (f ∘ inl))
     is-emb-i : is-emb i
     is-emb-i =
-      is-emb-right-factor
+      is-emb-right-factor-htpy
         ( (unit-trunc-Set ∘ f) ∘ inl)
         ( inclusion-trunc-im-Set (f ∘ inl))
         ( i)
