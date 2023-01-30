@@ -217,32 +217,6 @@ module _
   equiv-con-inv-htpy = pair con-inv-htpy is-equiv-con-inv-htpy
 ```
 
-### Homotopies preserve the laws of the action on identity types
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-  where
-
-  ap-concat-htpy :
-    (H : f ~ g) (K K' : g ~ h) → K ~ K' → (H ∙h K) ~ (H ∙h K')
-  ap-concat-htpy H K K' L x = ap (concat (H x) (h x)) (L x)
-
-  ap-concat-htpy' :
-    (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
-  ap-concat-htpy' H H' K L x =
-    ap (concat' _ (K x)) (L x)
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  {H H' : f ~ g}
-  where
-
-  ap-inv-htpy :
-    H ~ H' → (inv-htpy H) ~ (inv-htpy H')
-  ap-inv-htpy K x = ap inv (K x)
-```
-
 ### Laws for whiskering an inverted homotopy
 
 ```agda
