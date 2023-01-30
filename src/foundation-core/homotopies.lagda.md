@@ -119,6 +119,12 @@ assoc-htpy :
   (H : f ~ g) (K : g ~ h) (L : h ~ k) →
   ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
 assoc-htpy H K L x = assoc (H x) (K x) (L x)
+
+inv-htpy-assoc-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : h ~ k) →
+  (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
+inv-htpy-assoc-htpy H K L = inv-htpy (assoc-htpy H K L)
 ```
 
 ### Unit laws for homotopies

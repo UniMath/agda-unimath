@@ -20,8 +20,8 @@ open import foundation.equivalences using
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_; id)
 open import foundation.homotopies using
-  ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy; assoc-htpy; ap-concat-htpy';
-    left-inv-htpy)
+  ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy; inv-htpy-assoc-htpy;
+    ap-concat-htpy'; left-inv-htpy)
 open import foundation.identity-types using (_＝_; refl; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.structure-identity-principle using
@@ -46,7 +46,7 @@ Any dependent function induces a section of the projection map
 
 ### Sections of the projection map
 
-```agda  
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -173,11 +173,10 @@ isretr-section-comp-htpy f g h H (pair k K) (pair l L) =
       ( pair l L))
     ( pair l L)
     ( K ·r l)
-    ( ( inv-htpy
-        ( assoc-htpy
-          ( inv-htpy (H ·r (k ∘ l)))
-          ( H ·r (k ∘ l))
-          ( (g ·l (K ·r l)) ∙h L))) ∙h
+    ( ( inv-htpy-assoc-htpy
+        ( inv-htpy (H ·r (k ∘ l)))
+        ( H ·r (k ∘ l))
+        ( (g ·l (K ·r l)) ∙h L)) ∙h
       ( ap-concat-htpy'
         ( (inv-htpy (H ·r (k ∘ l))) ∙h (H ·r (k ∘ l)))
         ( refl-htpy)
