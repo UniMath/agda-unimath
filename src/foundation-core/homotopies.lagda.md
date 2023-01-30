@@ -134,6 +134,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   {f g : (x : A) → B x} {H : f ~ g}
   where
+
   left-unit-htpy : (refl-htpy ∙h H) ~ H
   left-unit-htpy x = left-unit
 
@@ -150,15 +151,22 @@ module _
 ### Inverse laws for homotopies
 
 ```agda
-left-inv-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  (H : f ~ g) → ((inv-htpy H) ∙h H) ~ refl-htpy
-left-inv-htpy H x = left-inv (H x)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g : (x : A) → B x} (H : f ~ g)
+  where
 
-right-inv-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  (H : f ~ g) → (H ∙h (inv-htpy H)) ~ refl-htpy
-right-inv-htpy H x = right-inv (H x)
+  left-inv-htpy : ((inv-htpy H) ∙h H) ~ refl-htpy
+  left-inv-htpy = left-inv ∘ H
+
+  inv-htpy-left-inv-htpy : refl-htpy ~ ((inv-htpy H) ∙h H)
+  inv-htpy-left-inv-htpy = inv-htpy left-inv-htpy
+
+  right-inv-htpy : (H ∙h (inv-htpy H)) ~ refl-htpy
+  right-inv-htpy = right-inv ∘ H
+
+  inv-htpy-right-inv-htpy : refl-htpy ~ (H ∙h (inv-htpy H))
+  inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
 
 ### Distributivity of `inv` over `concat` for homotopies
