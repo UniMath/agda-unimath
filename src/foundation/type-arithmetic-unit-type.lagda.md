@@ -209,4 +209,4 @@ module _
 
 - [foundation-core.contractible-types](foundation-core.contractible-types.html)
   That the unit type is the terminal type is a corollary of `is-contr-Π`, and may be
-  considered a right zero law for function types (`(A → unit) ≃ unit`).
+  considered a *right zero law for function types* (`(A → unit) ≃ unit`).
