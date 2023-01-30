@@ -388,54 +388,8 @@ module _
     inv-right-unit-law-coprod-is-empty A empty id
 ```
 
-### Left zero law for dependent function types
+## See also
 
-```agda
-is-contr-Π-empty :
-  {l : Level} (A : empty → UU l) → is-contr ((x : empty) → A x)
-is-contr-Π-empty _ = ind-empty , λ _ → eq-htpy ind-empty
-
-is-contr-Π-is-empty :
-  {l1 l2 : Level} {X : UU l1} (A : X → UU l2) →
-  is-empty X → is-contr ((x : X) → A x)
-is-contr-Π-is-empty A is-empty-X =
-  ind-empty ∘ is-empty-X , λ _ → eq-htpy (ex-falso ∘ is-empty-X)
-
-left-zero-law-Π-empty : 
-  {l : Level} (A : empty → UU l) → ((x : empty) → A x) ≃ unit
-pr1 (left-zero-law-Π-empty A) = λ _ → star
-pr2 (left-zero-law-Π-empty A) =
-  is-equiv-terminal-map-is-contr (is-contr-Π-empty A)
-
-left-zero-law-Π-is-empty : 
-  {l1 l2 : Level} {X : UU l1} (A : X → UU l2) →
-  is-empty X → ((x : X) → A x) ≃ unit
-pr1 (left-zero-law-Π-is-empty A is-empty-X) = λ _ → star
-pr2 (left-zero-law-Π-is-empty A is-empty-X) =
-  is-equiv-terminal-map-is-contr (is-contr-Π-is-empty A is-empty-X)
-```
-
-### Left zero law for non-dependent function types
-
-```agda
-is-contr-function-types-empty :
-  {l : Level} (A : UU l) → is-contr (empty → A)
-is-contr-function-types-empty A = is-contr-Π-empty (λ _ → A)
-
-is-contr-function-types-is-empty :
-  {l1 l2 : Level} {X : UU l1} (A : UU l2) →
-  is-empty X → is-contr (X → A)
-is-contr-function-types-is-empty A is-empty-X =
-  is-contr-Π-is-empty (λ _ → A) is-empty-X
-
-left-zero-law-function-types-empty : 
-  {l : Level} (A : UU l) → (empty → A) ≃ unit
-left-zero-law-function-types-empty A =
-  left-zero-law-Π-empty (λ _ → A)
-
-left-zero-law-function-types-is-empty : 
-  {l1 l2 : Level} {X : UU l1} (A : UU l2) →
-  is-empty X → (X → A) ≃ unit
-left-zero-law-function-types-is-empty A is-empty-X =
-  left-zero-law-Π-is-empty (λ _ → A) is-empty-X
-```
+- [foundation.universal-property-empty-type](foundation.universal-property-empty-type.html)
+  In this file we show that the empty type is the initial type, which may be considered a
+  left zero law for function types (`(empty → A) ≃ unit`).
