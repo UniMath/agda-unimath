@@ -760,12 +760,11 @@ coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
     ( refl-htpy)
     ( λ h →
       ap (ap map-inv-distributive-Π-Σ) (compute-htpy-precompose-total-lifts P f h))) ∙h
-  ( inv-htpy
-    ( ap-concat-htpy'
-      ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
-      ( refl-htpy)
-      ( refl-htpy)
-      ( λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
+  ( ap-concat-htpy'
+    ( refl-htpy)
+    ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
+    ( refl-htpy)
+    ( inv-htpy (λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
 
 abstract
   coherence-inv-htpy-distributive-Π-Σ :

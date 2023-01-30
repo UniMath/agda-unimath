@@ -72,6 +72,5 @@ coherence-htpy-parallel-cone-coherence-cube
               ( (inv-htpy front-right) ·r g')) ∙h
             ( inv-htpy-con-inv-htpy _ (front-right ·r g') _
               ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy c))))) ∙h
-        ( inv-htpy
-          ( ap-concat-htpy (bottom ·r hA) _ _ right-unit-htpy)))))
+        ( ap-concat-htpy (bottom ·r hA) _ _ inv-htpy-right-unit-htpy))))
 ```
