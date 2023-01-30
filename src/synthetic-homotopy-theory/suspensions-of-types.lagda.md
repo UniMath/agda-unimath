@@ -15,6 +15,7 @@ open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.structure-identity-principle
 open import foundation.transport
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -203,46 +204,44 @@ htpy-suspension-structure
   (λ q → (x : X) → (((inv p) ∙ ( merid-suspension-structure c x)) ∙ q)
   ＝ ( merid-suspension-structure c' x)))
 
-suspension-structure-eq-htpy-suspension-structure :
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-structure X Z) →
-  (htpy-suspension-structure
- c c') → c ＝ c'
-suspension-structure-eq-htpy-suspension-structure (N , S , h) (N' , S' , h') (refl , refl , H) =
-  eq-pair-Σ refl (eq-pair-Σ refl
-  (eq-htpy (λ x → (inv right-unit) ∙ H x)))
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (N : Z) (S : Z) (merid : X → N ＝ S)
+  where
+      
+  extensionality-suspension-structure' :
+    (c : suspension-structure X Z) →
+    ((N , S , merid) ＝ c) ≃ (htpy-suspension-structure (N , S , merid) c)
+  extensionality-suspension-structure' (N' , S' , merid') =
+    extensionality-Σ {Eq-A = λ t → N ＝ t}
+    (λ w p → Σ (S ＝ pr1 w)
+      (λ q → (x : X) → ((inv p ∙ merid x) ∙ q) ＝ pr2 w x))
+    refl (refl , (λ x → right-unit))
+    (λ x → (id , is-equiv-id))
+    (λ t' → extensionality-Σ {Eq-A = λ t → S ＝ t}
+      (λ H q → (x : X) → (merid x ∙ q) ＝ H x)
+      refl (λ x → right-unit) (λ x → (id , is-equiv-id))
+      (λ y → equiv-concat-htpy (λ x → right-unit) y ∘e equiv-funext) t')
+    (N' , S' , merid')
 
-merid-htpy-cocone-eq :
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-structure X Z) →
-  (p : c ＝ c') → (x : X) → ((inv (ap pr1 p) ∙ ( merid-suspension-structure c x)) ∙
-  ap (pr1 ∘ pr2) p) ＝ ( merid-suspension-structure c' x)
-merid-htpy-cocone-eq {X = X} c c' p x = ((inv (tr-fx＝gx (pr1) (pr1 ∘ pr2) p ((pr2 ∘ pr2) c x)) ∙
-  (ap (λ t → tr (λ z → pr1 z ＝ (pr1 ∘ pr2) z) p ((pr2 ∘ pr2) c t))
-  (inv (tr-const (inv p) x)))) ∙
-  inv (htpy-eq (tr-function-type
-  (λ z → X) (λ z → (pr1 z) ＝ ((pr1 ∘ pr2) z))
-  p  ((pr2 ∘ pr2) c)) x)) ∙ (htpy-eq (apd (pr2 ∘ pr2) p) x)
-  
-htpy-suspension-structure-suspension-structure-eq :
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-structure X Z) →
-  (c ＝ c') → (htpy-suspension-structure
- c c')
-htpy-suspension-structure-suspension-structure-eq
-  c c' p = (ap pr1 p) , ((ap (pr1 ∘ pr2) p) , merid-htpy-cocone-eq c c' p)
+extensionality-suspension-structure :
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2}
+  (c c' : suspension-structure X Z) → 
+  (c ＝ c') ≃ (htpy-suspension-structure c c')
+extensionality-suspension-structure (N , S , merid) c' =
+  extensionality-suspension-structure' N S merid c'
 
-issec-htpy-suspension-structure-suspension-structure-eq :
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
-  (c c' : suspension-structure X Z) →
-  ((suspension-structure-eq-htpy-suspension-structure
- c c') ∘
-  (htpy-suspension-structure-suspension-structure-eq c c')) ~ id
-issec-htpy-suspension-structure-suspension-structure-eq (N , S , h) (N' , S' , h') refl =
-    (ap (λ t → eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy t)))
-    (eq-htpy λ x → (ap-binary (_∙_)(refl{x = inv right-unit})
-    ((right-unit ∙ right-unit) ∙ right-unit)) ∙
-    (right-inv (inv right-unit)) ) ∙
-    ap (λ t → eq-pair-Σ refl (eq-pair-Σ refl t))
-    (eq-htpy-refl-htpy h))
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c c' : suspension-structure X Z}
+  where
+
+  htpy-eq-suspension-structure : (c ＝ c') → htpy-suspension-structure c c'
+  htpy-eq-suspension-structure = map-equiv (extensionality-suspension-structure c c')
+
+  eq-htpy-suspension-structure : (htpy-suspension-structure c c') → (c ＝ c')
+  eq-htpy-suspension-structure = map-inv-equiv (extensionality-suspension-structure c c')
 ```
+
+
 
 ### The suspension of X has the universal proprety of suspensions
 
@@ -290,30 +289,23 @@ module _
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (map-inv-up-suspension Z c N-susp) ＝ pr1 c 
   up-suspension-N-susp Z c =
-    pr1 (htpy-suspension-structure-suspension-structure-eq
-    (ev-suspension (suspension-structure-suspension X) Z
-    (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c))
+    pr1 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c))
 
   up-suspension-S-susp : {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
-  up-suspension-S-susp Z c = pr1 (pr2 (htpy-suspension-structure-suspension-structure-eq
-    (ev-suspension (suspension-structure-suspension X) Z
-    (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c)))
+  up-suspension-S-susp Z c =
+    pr1 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
 
   up-suspension-merid-susp : {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
     (((inv (up-suspension-N-susp Z c) ∙ (ap (map-inv-up-suspension Z c) (merid-susp x))) ∙
     (up-suspension-S-susp Z c)) ＝ (pr2 (pr2 c)) x)
-  up-suspension-merid-susp Z c = pr2 (pr2 (htpy-suspension-structure-suspension-structure-eq
-    (ev-suspension (suspension-structure-suspension X) Z
-    (map-inv-up-suspension Z c)) c ((issec-map-inv-up-suspension Z) c)))
+  up-suspension-merid-susp Z c =
+    pr2 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
 
   ev-suspension-up-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (ev-suspension (suspension-structure-suspension X) Z (map-inv-up-suspension Z c)) ＝ c
   ev-suspension-up-suspension Z c =
-    suspension-structure-eq-htpy-suspension-structure
-
-    (ev-suspension (suspension-structure-suspension X) Z
-    (map-inv-up-suspension Z c)) c ((up-suspension-N-susp Z c) ,
+    eq-htpy-suspension-structure ((up-suspension-N-susp Z c) ,
     ((up-suspension-S-susp Z c) , (up-suspension-merid-susp Z c)))
 ```
