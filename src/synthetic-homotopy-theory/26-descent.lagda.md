@@ -69,7 +69,7 @@ dependent-universal-property-pushout :
 dependent-universal-property-pushout l f g {X} c =
   (P : X → UU l) → is-equiv (dep-cocone-map f g c P)
 
-{- Remark 18.1.3. We compute the identity type of dep-cocone in order to 
+{- Remark 18.1.3. We compute the identity type of dep-cocone in order to
    express the computation rules of the induction principle for pushouts. -}
 
 coherence-htpy-dep-cocone :
@@ -80,7 +80,7 @@ coherence-htpy-dep-cocone :
   UU (l1 ⊔ l5)
 coherence-htpy-dep-cocone {S = S} f g c P
   h h' K L =
-  (s : S) → 
+  (s : S) →
   Id ( ((pr2 (pr2 h)) s) ∙ (L (g s)))
      ( (ap (tr P (pr2 (pr2 c) s)) (K (f s))) ∙ ((pr2 (pr2 h')) s))
 
@@ -140,7 +140,7 @@ abstract
         ( pair hB refl-htpy)
         ( is-contr-equiv
           ( Σ ((s : S) → Id (tr P (H s) (hA (f s))) (hB (g s))) (λ γ → hS ~ γ))
-          ( equiv-tot (equiv-concat-htpy (inv-htpy right-unit-htpy)))
+          ( equiv-tot (equiv-concat-htpy inv-htpy-right-unit-htpy))
           ( is-contr-total-htpy hS)))
 
 abstract
@@ -281,14 +281,14 @@ dependent-pullback-property-pushout l {S} {A} {B} f g {X}
     ( cone-dependent-pullback-property-pushout f g (pair i (pair j H)) P)
 
 {- Theorem 18.1.4 The following properties are all equivalent:
- 
+
    1. universal-property-pushout
    2. pullback-property-pushout
    3. dependent-pullback-property-pushout
    4. dependent-universal-property-pushout
    5. Ind-pushout
 
-   We have already shown that 1 ↔ 2. Therefore we will first show that 
+   We have already shown that 1 ↔ 2. Therefore we will first show that
    3 ↔ 4 ↔ 5. Finally, we will show that 2 ↔ 3. Here are the precise references
    to the proofs of those parts:
 
@@ -323,7 +323,7 @@ dependent-naturality-square :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f f' : (x : A) → B x)
   {x x' : A} (p : Id x x') {q : Id (f x) (f' x)} {q' : Id (f x') (f' x')} →
   Id ((apd f p) ∙ q') ((ap (tr B p) q) ∙ (apd f' p)) →
-  Id (tr (λ y → Id (f y) (f' y)) p q) q' 
+  Id (tr (λ y → Id (f y) (f' y)) p q) q'
 dependent-naturality-square f f' refl {q} {q'} s =
   inv (s ∙ (right-unit ∙ (ap-id q)))
 
@@ -334,7 +334,7 @@ htpy-eq-dep-cocone-map :
   Id (dep-cocone-map f g c P h) (dep-cocone-map f g c P h') → h ~ h'
 htpy-eq-dep-cocone-map f g c ind-c {P} h h' p =
   ind-pushout f g c ind-c
-    ( λ x → Id (h x) (h' x)) 
+    ( λ x → Id (h x) (h' x))
     ( pair
       ( pr1 (htpy-dep-cocone-eq f g c P p))
       ( pair
@@ -358,7 +358,7 @@ dependent-universal-property-pushout-Ind-pushout f g c ind-c l P =
       ( pr2 (ind-c l P) (dep-cocone-map f g c P h))))
 
 {- Proof of Theorem 18.1.4, (iv) implies (v). -}
-   
+
 Ind-pushout-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
@@ -530,9 +530,9 @@ abstract
   compute-tr-eq-htpy-fam-lifts P h f =
     comp-htpy f
       ( λ g H → TR-EQ-HTPY-FAM-LIFTS P h H)
-      ( tr-eq-htpy-fam-lifts-refl-htpy P h f) 
+      ( tr-eq-htpy-fam-lifts-refl-htpy P h f)
 
-{- One of the basic operations on lifts is precomposition by an ordinary 
+{- One of the basic operations on lifts is precomposition by an ordinary
    function. -}
 
 precompose-lifts :
@@ -541,7 +541,7 @@ precompose-lifts :
   (fam-lifts B P h) → (fam-lifts A P (h ∘ f))
 precompose-lifts P f h h' a = h' (f a)
 
-{- Given two homotopic maps, their precomposition functions have different 
+{- Given two homotopic maps, their precomposition functions have different
    codomains. However, there is a commuting triangle. We obtain this triangle
    by homotopy induction. -}
 
@@ -567,7 +567,7 @@ triangle-precompose-lifts {A = A} P {f} =
   ind-htpy f
     ( λ g H → TRIANGLE-PRECOMPOSE-LIFTS P H)
     ( triangle-precompose-lifts-refl-htpy P f)
-  
+
 compute-triangle-precompose-lifts :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) (f : A → B) →
@@ -614,7 +614,7 @@ coherence-triangle-precompose-lifts-refl-htpy :
   (f : A → B) → COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS P (refl-htpy' f)
 coherence-triangle-precompose-lifts-refl-htpy P f h =
   ( htpy-eq (htpy-eq (compute-triangle-precompose-lifts P f) h)) ∙h
-  ( ( ( inv-htpy right-unit-htpy) ∙h
+  ( ( ( inv-htpy-right-unit-htpy) ∙h
       ( ap-concat-htpy
         ( λ h' → tr-eq-htpy-fam-lifts-refl-htpy P h f (λ a → h' (f a)))
         ( refl-htpy)
@@ -635,7 +635,7 @@ abstract
     ind-htpy f
       ( λ g H → COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS P H)
       ( coherence-triangle-precompose-lifts-refl-htpy P f)
-  
+
   compute-coherence-triangle-precompose-lifts :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
     (f : A → B) →
@@ -645,7 +645,7 @@ abstract
     comp-htpy f
       ( λ g H → COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS P H)
       ( coherence-triangle-precompose-lifts-refl-htpy P f)
-  
+
 total-lifts :
   {l1 l2 l3 : Level} (A : UU l1) {X : UU l2} (P : X → UU l3) →
   UU _
@@ -671,7 +671,7 @@ coherence-square-map-inv-distributive-Π-Σ :
     ( λ h → h ∘ f)
 coherence-square-map-inv-distributive-Π-Σ P f = refl-htpy
 
-{- Our goal is now to produce a homotopy between (precompose-total-lifts P f) 
+{- Our goal is now to produce a homotopy between (precompose-total-lifts P f)
    and (precompose-total-lifts P g) for homotopic maps f and g, and a coherence
    filling a cilinder. -}
 
@@ -775,7 +775,7 @@ abstract
     ind-htpy f
       ( λ g H → COHERENCE-INV-HTPY-DISTRIBUTIVE-Π-Σ P H)
       ( coherence-inv-htpy-distributive-Π-Σ-refl-htpy P f)
-    
+
 cone-family-dependent-pullback-property :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l) →
@@ -821,7 +821,7 @@ is-pullback-cone-family-dependent-pullback-property {S = S} {A} {B} {X}
       ( map-Σ (fam-lifts B P) (precomp j X) (precompose-lifts P j))
       ( map-Σ (fam-lifts S P) (precomp f X) (precompose-lifts P f))
       ( map-Σ (fam-lifts S P) (precomp g X) (precompose-lifts P g))
-      ( map-inv-distributive-Π-Σ) 
+      ( map-inv-distributive-Π-Σ)
       ( map-inv-distributive-Π-Σ)
       ( map-inv-distributive-Π-Σ)
       ( map-inv-distributive-Π-Σ)
@@ -837,7 +837,7 @@ is-pullback-cone-family-dependent-pullback-property {S = S} {A} {B} {X}
       ( is-equiv-map-inv-distributive-Π-Σ)
       ( is-equiv-map-inv-distributive-Π-Σ)
       ( pb-c _ (Σ X P)))
-    
+
 dependent-pullback-property-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →
@@ -899,7 +899,7 @@ coherence-equiv-Fam-pushout {S = S} {f = f} {g} P Q eA eB =
   ( s : S) →
     ( (map-equiv (eB (g s))) ∘ (map-equiv (pr2 (pr2 P) s))) ~
     ( (map-equiv (pr2 (pr2 Q) s)) ∘ (map-equiv (eA (f s))))
-    
+
 equiv-Fam-pushout :
   {l1 l2 l3 l l' : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} →
@@ -1214,8 +1214,8 @@ coherence-cube-flattening-lemma {A = A} {B} {P} {Q} {T} {f = f} {f'} H {g} {g'} 
          ( ap ev-pair
            ( htpy-precomp (htpy-map-Σ Q refl-htpy g (λ a → htpy-eq (K' a))) T h))) ? (λ a → eq-htpy (K a)) h!})
     H g g' K
-  
-  
+
+
 flattening-pushout' :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →

@@ -108,7 +108,7 @@ module _
       ( refl-htpy)
       ( right-unit-htpy)
       ( λ h' → equiv-funext)
-      ( λ H' → equiv-concat-htpy (right-unit-htpy) H' ∘e equiv-funext)
+      ( λ H' → equiv-concat-htpy right-unit-htpy H' ∘e equiv-funext)
 
   eq-htpy-hom-slice :
     (h h' : hom-slice f g) → htpy-hom-slice h h' → h ＝ h'
@@ -360,7 +360,7 @@ module _
     is-equiv-equiv-eq-slice-UU :
       (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
     is-equiv-equiv-eq-slice-UU f =
-      fundamental-theorem-id 
+      fundamental-theorem-id
         ( is-contr-total-equiv-slice' f)
         ( equiv-eq-slice-UU f)
 

@@ -130,15 +130,21 @@ inv-htpy-assoc-htpy H K L = inv-htpy (assoc-htpy H K L)
 ### Unit laws for homotopies
 
 ```agda
-left-unit-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  {H : f ~ g} → (refl-htpy ∙h H) ~ H
-left-unit-htpy x = left-unit
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g : (x : A) → B x} {H : f ~ g}
+  where
+  left-unit-htpy : (refl-htpy ∙h H) ~ H
+  left-unit-htpy x = left-unit
 
-right-unit-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
-  {H : f ~ g} → (H ∙h refl-htpy) ~ H
-right-unit-htpy x = right-unit
+  inv-htpy-left-unit-htpy :  H ~ (refl-htpy ∙h H)
+  inv-htpy-left-unit-htpy = inv-htpy left-unit-htpy
+
+  right-unit-htpy : (H ∙h refl-htpy) ~ H
+  right-unit-htpy x = right-unit
+
+  inv-htpy-right-unit-htpy : H ~ (H ∙h refl-htpy)
+  inv-htpy-right-unit-htpy = inv-htpy right-unit-htpy
 ```
 
 ### Inverse laws for homotopies

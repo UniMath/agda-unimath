@@ -42,7 +42,7 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using
   ( refl-htpy; _~_; is-contr-total-htpy; _·r_; _∙h_; _·l_; inv-htpy;
-    right-unit-htpy; equiv-concat-htpy'; is-contr-total-htpy')
+    equiv-concat-htpy'; is-contr-total-htpy')
 open import foundation.identity-types using
   ( Id; inv; right-unit; _∙_; ap-id; ap; refl)
 open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
@@ -160,7 +160,7 @@ pr2 (Cyclic-Type-Pointed-Type k) = ℤ-Mod-Cyclic-Type k
 module _
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   where
-  
+
   equiv-Cyclic-Type : UU (l1 ⊔ l2)
   equiv-Cyclic-Type = equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y)
 
@@ -189,7 +189,7 @@ module _
 
   id-equiv-Cyclic-Type : equiv-Cyclic-Type k X X
   id-equiv-Cyclic-Type = id-equiv-Endo (endo-Cyclic-Type k X)
-                                                 
+
   equiv-eq-Cyclic-Type :
     (Y : Cyclic-Type l k) → Id X Y → equiv-Cyclic-Type k X Y
   equiv-eq-Cyclic-Type .X refl = id-equiv-Cyclic-Type
@@ -208,7 +208,7 @@ is-contr-total-equiv-Cyclic-Type k X =
 module _
   {l : Level} (k : ℕ) (X : Cyclic-Type l k)
   where
-  
+
   is-equiv-equiv-eq-Cyclic-Type :
     (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
   is-equiv-equiv-eq-Cyclic-Type =
@@ -220,7 +220,7 @@ module _
     (Y : Cyclic-Type l k) → Id X Y ≃ equiv-Cyclic-Type k X Y
   pr1 (extensionality-Cyclic-Type Y) = equiv-eq-Cyclic-Type k X Y
   pr2 (extensionality-Cyclic-Type Y) = is-equiv-equiv-eq-Cyclic-Type Y
-  
+
   eq-equiv-Cyclic-Type :
     (Y : Cyclic-Type l k) → equiv-Cyclic-Type k X Y → Id X Y
   eq-equiv-Cyclic-Type Y = map-inv-is-equiv (is-equiv-equiv-eq-Cyclic-Type Y)
@@ -322,7 +322,7 @@ module _
   {l1 l2 : Level} (k : ℕ) (X : Cyclic-Type l1 k) (Y : Cyclic-Type l2 k)
   (e : equiv-Cyclic-Type k X Y)
   where
-  
+
   left-unit-law-comp-equiv-Cyclic-Type :
     Id (comp-equiv-Cyclic-Type k X Y Y (id-equiv-Cyclic-Type k Y) e) e
   left-unit-law-comp-equiv-Cyclic-Type =

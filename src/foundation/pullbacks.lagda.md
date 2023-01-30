@@ -31,11 +31,7 @@ open import foundation.functoriality-dependent-pair-types using
     is-pullback-family-is-pullback-tot; map-Σ; tot-cone-cone-family)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; right-unit-htpy; _∙h_; _·l_; _·r_; ap-concat-htpy;
-    ap-concat-htpy'; inv-htpy; concat-htpy; concat-htpy';
-    is-equiv-concat-htpy'; is-equiv-concat-htpy; refl-htpy'; ind-htpy;
-    htpy-right-whisk; comp-htpy; assoc-htpy; nat-htpy)
+open import foundation.homotopies
 open import foundation.identity-types using
   ( Id; _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv; concat';
     concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr;
@@ -346,7 +342,7 @@ htpy-parallel-cone-refl-htpy-htpy-cone f g
   tot
     ( λ K → tot
       ( λ L M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
-        ( M ∙h ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
+        ( M ∙h ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy)))
 
 abstract
   is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone :
@@ -364,7 +360,7 @@ abstract
             ( ((f ·l K) ∙h refl-htpy) ∙h H'))
           ( concat-htpy'
             ( H ∙h (g ·l L))
-            ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy)))
+            ( ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy))
           ( is-equiv-concat-htpy'
             ( H ∙h (g ·l L))
             ( λ x → ap (λ z → z ∙ H' x) (inv right-unit)))
@@ -919,7 +915,7 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
               ( h ·l back-left)
               ( (h ·l back-left) ∙h refl-htpy)
               ( (front-left ·r f') ∙h (hD ·l top))
-              ( inv-htpy right-unit-htpy)))))
+              ( inv-htpy-right-unit-htpy)))))
       ( is-pullback-rectangle-is-pullback-top h k hC
         ( pair f (pair g bottom))
         ( pair hA (pair g' back-right))

@@ -21,7 +21,7 @@ open import foundation.functions using (_∘_)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id')
 open import foundation.homotopies using
-  ( _·r_; _~_; _∙h_; htpy-left-whisk; refl-htpy; right-unit-htpy;
+  ( _·r_; _~_; _∙h_; htpy-left-whisk; refl-htpy;
     is-contr-total-htpy; equiv-concat-htpy)
 open import foundation.identity-types using (_＝_; inv; ap; refl)
 open import foundation.propositions using (is-prop; is-prop-Π)
@@ -49,21 +49,21 @@ The universal property of pullbacks describes the optimal way to complete a diag
            |
            |
            V
-  A -----> X
+
+A -----> X
 ```
 
 to a square
 
 ```md
-  C -----> B
-  |        |
-  |        |
-  V        V
-  A -----> X
+C -----> B
+| |
+| |
+V V
+A -----> X
 ```
 
 ## Definitions
-
 
 ## Properties
 
@@ -102,7 +102,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) {C : UU l4}
   where
-  
+
   htpy-cone-map-universal-property-pullback :
     (c : cone f g C) (up : {l : Level} → universal-property-pullback l f g c) →
     {l5 : Level} {C' : UU l5} (c' : cone f g C') →

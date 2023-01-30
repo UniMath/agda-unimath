@@ -133,7 +133,7 @@ reflexive-htpy-cocone-sequence :
 reflexive-htpy-cocone-sequence A c =
   pair
     ( λ n → refl-htpy)
-    ( λ n → inv-htpy right-unit-htpy)
+    ( λ n → inv-htpy-right-unit-htpy)
 
 htpy-cocone-sequence-eq :
   { l1 l2 : Level} (A : Sequence l1) {X : UU l2} →
