@@ -294,4 +294,4 @@ module _
 - We postulate that homotopy is equivalent to identity of functions in
   [foundation-core.function-extensionality](foundation-core.function-extensionality.html).
 - We define an equational reasoning syntax for homotopies in
-  [foundation.equational-reasoning](foundation-core.equational-reasoning.html).
+  [foundation.equational-reasoning](foundation.equational-reasoning.html).

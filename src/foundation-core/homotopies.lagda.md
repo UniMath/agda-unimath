@@ -118,7 +118,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (x : A) → B x}
   (H : f ~ g) (K : g ~ h) (L : h ~ k)
   where
-  
+
   assoc-htpy : ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
   assoc-htpy x = assoc (H x) (K x) (L x)
 
@@ -219,7 +219,7 @@ inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 module _
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
   where
-  
+
   coh-htpy-id : (H ·r f) ~ (f ·l H)
   coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
 
@@ -232,4 +232,4 @@ module _
 - We postulate that homotopy is equivalent to identity of functions in
   [foundation-core.function-extensionality](foundation-core.function-extensionality.html).
 - We define an equational reasoning syntax for homotopies in
-  [foundation.equational-reasoning](foundation-core.equational-reasoning.html).
+  [foundation.equational-reasoning](foundation.equational-reasoning.html).
