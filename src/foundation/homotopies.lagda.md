@@ -209,7 +209,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   abstract
     is-equiv-concat-htpy :
       {f g : (x : A) → B x} (H : f ~ g)
@@ -293,3 +293,5 @@ module _
 
 - We postulate that homotopy is equivalent to identity of functions in
   [foundation-core.function-extensionality](foundation-core.function-extensionality.html).
+- We define an equational reasoning syntax for homotopies in
+  [foundation.equational-reasoning](foundation-core.equational-reasoning.html).
