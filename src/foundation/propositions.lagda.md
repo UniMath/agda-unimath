@@ -22,7 +22,7 @@ open import foundation-core.truncation-levels using
 open import foundation-core.universe-levels using (Level; UU; _⊔_)
 
 open import foundation.contractible-types using
-  ( is-contr; is-trunc-is-contr; eq-is-contr; is-contr-equiv; is-contr-Π;
+  ( is-contr; is-trunc-is-contr; eq-is-contr; is-contr-equiv;
     is-prop-is-contr; is-property-is-contr)
 ```
 
