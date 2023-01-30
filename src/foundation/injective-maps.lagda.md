@@ -7,23 +7,18 @@ title: Injective maps
 
 module foundation.injective-maps where
 
-open import foundation-core.contractible-types using (is-contr; eq-is-contr)
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation-core.empty-types using (is-empty; ex-falso)
-open import foundation-core.equivalences using
-  ( is-equiv; isretr-map-inv-is-equiv; map-inv-is-equiv; _≃_; map-equiv;
-    map-inv-equiv; is-equiv-map-inv-equiv; is-equiv-has-inverse)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation-core.propositional-maps using (is-prop-map; is-prop-map-is-emb)
-open import foundation-core.sections using (sec)
-open import foundation-core.sets using (is-set; is-set-prop-in-id)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
-
-open import foundation.propositions using
-  ( is-prop; is-equiv-is-prop; is-prop-Π'; is-prop-function-type; Prop)
-
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.sections
+open import foundation-core.sets
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -58,7 +53,7 @@ is-injective-id p = p
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
-  
+
   is-injective-right-factor :
     (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
     is-injective f → is-injective h
@@ -72,18 +67,17 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
-  
-  is-injective-comp :
-    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
-    is-injective h → is-injective g → is-injective f
-  is-injective-comp f g h H is-inj-h is-inj-g {x} {x'} p =
-    is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
 
-  is-injective-comp' :
+  is-injective-comp :
     {g : B → C} {h : A → B} →
     is-injective h → is-injective g → is-injective (g ∘ h)
-  is-injective-comp' {g} {h} H G =
-    is-injective-comp (g ∘ h) g h (λ x → refl) H G
+  is-injective-comp is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
+
+  is-injective-comp-htpy :
+    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
+    is-injective h → is-injective g → is-injective f
+  is-injective-comp-htpy f g h H is-inj-h is-inj-g {x} {x'} p =
+    is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
 ```
 
 ### Equivalences are injective
@@ -107,7 +101,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   abstract
     is-injective-map-inv-equiv : (e : A ≃ B) → is-injective (map-inv-equiv e)
     is-injective-map-inv-equiv e =
