@@ -219,8 +219,11 @@ inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 ```agda
 coh-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → (H ·r f) ~ (f ·l H)
-coh-htpy-id H x =
-  is-injective-concat' (H x) (nat-htpy-id H (H x))
+coh-htpy-id H x = is-injective-concat' (H x) (nat-htpy-id H (H x))
+
+inv-htpy-coh-htpy-id :
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → (f ·l H) ~ (H ·r f)
+inv-htpy-coh-htpy-id = inv-htpy ∘ coh-htpy-id
 ```
 
 ## See also
