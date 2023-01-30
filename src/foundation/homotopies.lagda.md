@@ -217,24 +217,6 @@ module _
   equiv-con-inv-htpy = pair con-inv-htpy is-equiv-con-inv-htpy
 ```
 
-### Laws for whiskering an inverted homotopy
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  where
-
-  left-whisk-inv-htpy :
-    {f f' : A → B} (g : B → C) (H : f ~ f') →
-    (g ·l (inv-htpy H)) ~ inv-htpy (g ·l H)
-  left-whisk-inv-htpy g H x = ap-inv g (H x)
-
-  right-whisk-inv-htpy :
-    {g g' : B → C} (H : g ~ g') (f : A → B) →
-    ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
-  right-whisk-inv-htpy H f = refl-htpy
-```
-
 ## See also
 
 - We postulate that homotopy is equivalent to identity of functions in
