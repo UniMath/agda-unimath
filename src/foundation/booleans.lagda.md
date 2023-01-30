@@ -3,28 +3,24 @@ title: The booleans
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.booleans where
 
-open import foundation-core.constant-maps using (const)
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.empty-types using (empty; is-prop-empty)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; refl; inv)
-open import foundation-core.negation using (¬)
-open import foundation-core.propositions using (is-prop)
-open import foundation-core.sets using (is-set; Set; is-set-prop-in-id)
-open import foundation-core.universe-levels using (Level; lzero; UU)
+open import foundation-core.constant-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.negation
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.injective-maps using (is-injective)
-open import foundation.raising-universe-levels using
-  ( raise; equiv-raise; map-raise)
-open import foundation.unit-type using (unit; star; is-prop-unit)
+open import foundation.coproduct-types
+open import foundation.injective-maps
+open import foundation.raising-universe-levels
+open import foundation.unit-type
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -59,8 +55,8 @@ raise-true l = map-raise true
 raise-false : (l : Level) → raise-bool l
 raise-false l = map-raise false
 
-equiv-raise-bool : (l : Level) → bool ≃ raise-bool l
-equiv-raise-bool l = equiv-raise l bool
+compute-raise-bool : (l : Level) → bool ≃ raise-bool l
+compute-raise-bool l = compute-raise l bool
 ```
 
 ### Equality on the booleans

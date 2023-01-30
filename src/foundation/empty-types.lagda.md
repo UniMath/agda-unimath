@@ -3,29 +3,23 @@ title: Empty types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.empty-types where
 
 open import foundation-core.empty-types public
 
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.sets using (is-set; Set)
-open import foundation-core.truncated-types using
-  ( is-trunc; Truncated-Type)
-open import foundation-core.truncation-levels using (𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; lzero; UU)
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.embeddings using (is-emb; _↪_; comp-emb)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; map-inv-equiv; emb-equiv)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; map-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; Prop; is-trunc-is-prop; is-prop-function-type; is-prop-equiv')
-open import foundation.raising-universe-levels using (raise; equiv-raise)
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
 ```
 
 ## Idea
@@ -40,13 +34,13 @@ An empty type is a type with no elements. The (standard) empty type is introduce
 raise-empty : (l : Level) → UU l
 raise-empty l = raise l empty
 
-equiv-raise-empty : (l : Level) → empty ≃ raise-empty l
-equiv-raise-empty l = equiv-raise l empty
+compute-raise-empty : (l : Level) → empty ≃ raise-empty l
+compute-raise-empty l = compute-raise l empty
 
 raise-ex-falso :
   (l1 : Level) {l2 : Level} {A : UU l2} →
   raise-empty l1 → A
-raise-ex-falso l = ex-falso ∘ map-inv-equiv (equiv-raise-empty l)
+raise-ex-falso l = ex-falso ∘ map-inv-equiv (compute-raise-empty l)
 ```
 
 ## Properties
@@ -58,7 +52,7 @@ raise-ex-falso-emb :
   (l1 : Level) {l2 : Level} {A : UU l2} →
   raise-empty l1 ↪ A
 raise-ex-falso-emb l =
-  comp-emb ex-falso-emb (emb-equiv (inv-equiv (equiv-raise-empty l)))
+  comp-emb ex-falso-emb (emb-equiv (inv-equiv (compute-raise-empty l)))
 ```
 
 
@@ -106,7 +100,7 @@ abstract
     {l1 : Level} → is-prop (raise-empty l1)
   is-prop-raise-empty {l1} =
     is-prop-equiv'
-      ( equiv-raise l1 empty)
+      ( compute-raise l1 empty)
       ( is-prop-empty)
 
 raise-empty-Prop :
@@ -117,5 +111,5 @@ pr2 (raise-empty-Prop l1) = is-prop-raise-empty
 abstract
   is-empty-raise-empty :
     {l1 : Level} → is-empty (raise-empty l1)
-  is-empty-raise-empty {l1} = map-inv-equiv (equiv-raise-empty l1)
+  is-empty-raise-empty {l1} = map-inv-equiv (compute-raise-empty l1)
 ```

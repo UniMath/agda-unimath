@@ -3,39 +3,30 @@ title: The standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.standard-finite-types where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; le-ℕ; transitive-le-ℕ; succ-le-ℕ; preserves-leq-succ-ℕ; refl-leq-ℕ;
-    leq-eq-ℕ; concatenate-eq-leq-ℕ; leq-zero-ℕ; neq-le-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-not-one-ℕ; is-set-ℕ)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; eq-is-contr')
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import foundation.contractible-types
 
-open import foundation.coproduct-types using (_+_; inl; inr; neq-inl-inr)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-types using (empty; ex-falso; empty-Set)
-open import foundation.equality-coproduct-types using (is-emb-inl; coprod-Set)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; map-inv-equiv; map-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
-open import foundation.injective-maps using (is-injective; is-emb-is-injective)
-open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
-open import foundation.negation using (¬; map-neg)
-open import foundation.noncontractible-types using
-  ( is-not-contractible; is-not-contractible-empty)
-open import foundation.raising-universe-levels using
-  ( raise; equiv-raise; map-raise; raise-Set)
-open import foundation.sets using (Set; type-Set; is-set-type-Set; is-set)
-open import foundation.unit-type using (unit; star; is-contr-unit; unit-Set)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.equivalences-maybe
+open import foundation.negation
+open import foundation.noncontractible-types
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms
 ```
@@ -93,8 +84,8 @@ is-neg-one-is-not-inl-Fin k (inr star) H = refl
 raise-Fin : (l : Level) (k : ℕ) → UU l
 raise-Fin l k = raise l (Fin k)
 
-equiv-raise-Fin : (l : Level) (k : ℕ) → Fin k ≃ raise-Fin l k
-equiv-raise-Fin l k = equiv-raise l (Fin k)
+compute-raise-Fin : (l : Level) (k : ℕ) → Fin k ≃ raise-Fin l k
+compute-raise-Fin l k = compute-raise l (Fin k)
 
 map-raise-Fin : (l : Level) (k : ℕ) → Fin k → raise-Fin l k
 map-raise-Fin l k = map-raise
