@@ -18,7 +18,7 @@ open import foundation.functoriality-dependent-pair-types using
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 open import foundation.homotopies using
-  ( _~_; refl-htpy; is-contr-total-htpy; equiv-concat-htpy; right-unit-htpy)
+  ( _~_; refl-htpy; is-contr-total-htpy; equiv-concat-htpy)
 open import foundation.identity-types using (_＝_; _∙_; ap; refl; right-unit)
 open import foundation.sets using
   ( is-set; is-set-equiv-is-set; Set; type-Set; is-set-type-Set;

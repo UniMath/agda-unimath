@@ -31,11 +31,7 @@ open import foundation.functoriality-dependent-pair-types using
     is-pullback-family-is-pullback-tot; map-Σ; tot-cone-cone-family)
 open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; right-unit-htpy; _∙h_; _·l_; _·r_; ap-concat-htpy;
-    ap-concat-htpy'; inv-htpy; concat-htpy; concat-htpy';
-    is-equiv-concat-htpy'; is-equiv-concat-htpy; refl-htpy'; ind-htpy;
-    htpy-right-whisk; comp-htpy; assoc-htpy; nat-htpy)
+open import foundation.homotopies
 open import foundation.identity-types using
   ( Id; _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv; concat';
     concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr;
@@ -229,7 +225,7 @@ abstract
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
   where
 
@@ -261,7 +257,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
   where
 
@@ -346,7 +342,7 @@ htpy-parallel-cone-refl-htpy-htpy-cone f g
   tot
     ( λ K → tot
       ( λ L M → ( ap-concat-htpy H _ _ right-unit-htpy) ∙h
-        ( M ∙h ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy))))
+        ( M ∙h ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy)))
 
 abstract
   is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone :
@@ -364,7 +360,7 @@ abstract
             ( ((f ·l K) ∙h refl-htpy) ∙h H'))
           ( concat-htpy'
             ( H ∙h (g ·l L))
-            ( ap-concat-htpy' _ _ H' (inv-htpy right-unit-htpy)))
+            ( ap-concat-htpy' _ _ H' inv-htpy-right-unit-htpy))
           ( is-equiv-concat-htpy'
             ( H ∙h (g ·l L))
             ( λ x → ap (λ z → z ∙ H' x) (inv right-unit)))
@@ -459,7 +455,7 @@ comp-htpy-eq-square-refl-htpy f g c c' =
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
     ( htpy-eq-square f g c c')
-  
+
 abstract
   htpy-parallel-cone-eq' :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
@@ -517,8 +513,8 @@ abstract
       htpy-parallel-cone Hf' Hg c c')
     ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})
     Hf g g' Hg c c' p
-  
-  comp-htpy-parallel-cone-eq : 
+
+  comp-htpy-parallel-cone-eq :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c c' : cone f g C) →
     ( ( htpy-parallel-cone-eq refl-htpy refl-htpy c c') ∘
@@ -560,7 +556,7 @@ abstract
               ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
               ( concat (tr-tr-refl-htpy-cone f g c) c')
               ( inv-htpy (comp-htpy-parallel-cone-eq f g c c'))
-              ( fundamental-theorem-id 
+              ( fundamental-theorem-id
                 ( is-contr-total-htpy-parallel-cone
                   ( refl-htpy' f)
                   ( refl-htpy' g)
@@ -919,7 +915,7 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
               ( h ·l back-left)
               ( (h ·l back-left) ∙h refl-htpy)
               ( (front-left ·r f') ∙h (hD ·l top))
-              ( inv-htpy right-unit-htpy)))))
+              ( inv-htpy-right-unit-htpy)))))
       ( is-pullback-rectangle-is-pullback-top h k hC
         ( pair f (pair g bottom))
         ( pair hA (pair g' back-right))
@@ -930,7 +926,6 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv
 ```
 
 ### In a commuting cube where the maps from back-right to front-left are equivalences, the back-right square is a pullback if and only if the front-left square is a pullback
-
 
 ```agda
 is-pullback-front-left-is-pullback-back-right-cube-is-equiv :
@@ -1011,7 +1006,7 @@ pr1 (cone-ap f g (pair p (pair q  H)) c1 c2) = ap p
 pr1 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap f g (pair p (pair q  H)) c1 c2)) γ =
   ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
-  ( ( inv (nat-htpy H γ)) ∙
+  ( ( inv-nat-htpy H γ) ∙
     ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ)))
 
 cone-ap' :
@@ -1030,9 +1025,9 @@ pr1 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) = ap q
 pr2 (pr2 (cone-ap' f g (pair p (pair q  H)) c1 c2)) γ =
   ( tr-Id-right (H c2) (ap f (ap p γ))) ∙
   ( ( ap (λ t → t ∙ (H c2)) (inv (ap-comp f p γ))) ∙
-    ( ( inv (nat-htpy H γ)) ∙
+    ( ( inv-nat-htpy H γ) ∙
       ( ap (λ t → (H c1) ∙ t) (ap-comp g q γ))))
-      
+
 is-pullback-cone-ap :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
@@ -1078,4 +1073,3 @@ is-pullback-cone-ap f g (pair p (pair q H)) is-pb-c c1 c2 =
           ( is-contr-total-path (p c1))))
       ( c2))
 ```
-

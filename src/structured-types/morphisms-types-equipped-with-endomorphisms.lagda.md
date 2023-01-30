@@ -64,7 +64,7 @@ module _
 
   refl-htpy-hom-Endo : (f : hom-Endo X Y) → htpy-hom-Endo f f
   pr1 (refl-htpy-hom-Endo f) = refl-htpy
-  pr2 (refl-htpy-hom-Endo f) = inv-htpy right-unit-htpy
+  pr2 (refl-htpy-hom-Endo f) = inv-htpy-right-unit-htpy
 
   htpy-eq-hom-Endo : (f g : hom-Endo X Y) → Id f g → htpy-hom-Endo f g
   htpy-eq-hom-Endo f .f refl = refl-htpy-hom-Endo f
@@ -101,4 +101,3 @@ module _
   eq-htpy-hom-Endo : (f g : hom-Endo X Y) → htpy-hom-Endo f g → Id f g
   eq-htpy-hom-Endo f g = map-inv-equiv (extensionality-hom-Endo f g)
 ```
-

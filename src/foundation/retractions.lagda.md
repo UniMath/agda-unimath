@@ -17,8 +17,8 @@ open import foundation.equivalences using (_≃_)
 open import foundation.identity-types using (inv; _∙_; ap)
 open import foundation.injective-maps using (is-injective)
 open import foundation.homotopies using
-  ( _~_; _·l_; inv-htpy; assoc-htpy; _·r_; _∙h_; ap-concat-htpy'; refl-htpy;
-    left-inv-htpy)
+  ( _~_; _·l_; inv-htpy; inv-htpy-assoc-htpy; _·r_; _∙h_; ap-concat-htpy';
+    refl-htpy; left-inv-htpy)
 open import foundation.identity-types using (Id)
 open import foundation.universe-levels using (Level; UU; _⊔_)
 ```
@@ -31,7 +31,7 @@ open import foundation.universe-levels using (Level; UU; _⊔_)
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
-  
+
   htpy-retr : retr f → retr f → UU (l1 ⊔ l2)
   htpy-retr = htpy-hom-coslice
 
@@ -41,7 +41,7 @@ module _
   eq-htpy-retr :
     ( g h : retr f) (H : pr1 g ~ pr1 h) (K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
     Id g h
-  eq-htpy-retr g h = eq-htpy-hom-coslice g h 
+  eq-htpy-retr g h = eq-htpy-hom-coslice g h
 ```
 
 ### If the left factor of a composite has a retraction, then the type of retractions of the right factor is a retract of the type of retractions of the composite.
@@ -58,11 +58,10 @@ isretr-retraction-comp-htpy f g h H (pair l L) (pair k K) =
           )))
     ( pair k K)
     ( k ·l L)
-    ( ( inv-htpy
-        ( assoc-htpy
-          ( inv-htpy ((k ∘ l) ·l H))
-          ( (k ∘ l) ·l H)
-          ( (k ·l (L ·r h)) ∙h K))) ∙h
+    ( ( inv-htpy-assoc-htpy
+        ( inv-htpy ((k ∘ l) ·l H))
+        ( (k ∘ l) ·l H)
+        ( (k ·l (L ·r h)) ∙h K)) ∙h
       ( ap-concat-htpy'
         ( (inv-htpy ((k ∘ l) ·l H)) ∙h ((k ∘ l) ·l H))
         ( refl-htpy)
