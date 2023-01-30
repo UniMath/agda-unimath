@@ -36,7 +36,7 @@ open import foundation.truncated-maps
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   is-prop-is-emb : (f : A → B) → is-prop (is-emb f)
   is-prop-is-emb f =
     is-prop-Π (λ x → is-prop-Π (λ y → is-property-is-equiv (ap f)))
@@ -69,7 +69,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B) (H : f ~ g)
   where
-  
+
   abstract
     is-emb-htpy' : is-emb f → is-emb g
     is-emb-htpy' is-emb-f =
@@ -93,25 +93,23 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  abstract
-    is-emb-comp :
-      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
-      is-emb h → is-emb f
-    is-emb-comp f g h H is-emb-g is-emb-h =
-      is-emb-htpy f (g ∘ h) H
-        ( λ x y → is-equiv-comp-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
-          ( is-emb-h x y)
-          ( is-emb-g (h x) (h y)))
+  is-emb-comp :
+    (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
+  is-emb-comp g h is-emb-g is-emb-h x y =
+    is-equiv-comp-htpy (ap (g ∘ h)) (ap g) (ap h) (ap-comp g h)
+      ( is-emb-h x y)
+      ( is-emb-g (h x) (h y))
 
   abstract
-    is-emb-comp' :
-      (g : B → C) (h : A → B) → is-emb g → is-emb h → is-emb (g ∘ h)
-    is-emb-comp' g h = is-emb-comp (g ∘ h) g h refl-htpy
+    is-emb-comp-htpy :
+      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
+      is-emb h → is-emb f
+    is-emb-comp-htpy f g h H is-emb-g is-emb-h =
+      is-emb-htpy f (g ∘ h) H (is-emb-comp g h is-emb-g is-emb-h)
 
   comp-emb :
     (B ↪ C) → (A ↪ B) → (A ↪ C)
-  pr1 (comp-emb (pair g H) (pair f K)) = g ∘ f
-  pr2 (comp-emb (pair g H) (pair f K)) = is-emb-comp' g f H K
+  comp-emb (pair g H) (pair f K) = pair (g ∘ f) (is-emb-comp g f H K)
 ```
 
 ### The map on total spaces induced by a family of embeddings is an embedding
@@ -206,7 +204,7 @@ module _
       (f : A → C) (g : B → C) (e : A → B) (H : f ~ (g ∘ e)) →
       is-equiv e → is-emb g → is-emb f
     is-emb-triangle-is-equiv f g e H is-equiv-e is-emb-g =
-      is-emb-comp f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
+      is-emb-comp-htpy f g e H is-emb-g (is-emb-is-equiv is-equiv-e)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
@@ -233,7 +231,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   abstract
     is-emb-sec-ap :
       ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
@@ -268,7 +266,7 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
   where
-  
+
   abstract
     is-emb-is-pullback : is-pullback f g c → is-emb g → is-emb (pr1 c)
     is-emb-is-pullback pb is-emb-g =

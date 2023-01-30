@@ -7,48 +7,32 @@ title: Decidable embeddings
 
 module foundation.decidable-embeddings where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr; ind-coprod)
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using (center; is-contr)
-open import foundation.decidable-maps using (is-decidable-map)
-open import foundation.decidable-propositions using
-  ( is-decidable-prop; is-prop-is-decidable-prop; decidable-Prop;
-    is-prop-is-decidable)
-open import foundation.decidable-subtypes using (decidable-subtype)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using
-  ( is-emb; _↪_; is-emb-id; is-prop-is-emb; is-emb-comp'; is-emb-htpy)
-open import foundation.empty-types using (ex-falso; is-emb-ex-falso)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; id-equiv; is-equiv; is-emb-is-equiv; map-inv-is-equiv;
-    equiv-precomp; map-equiv; issec-map-inv-equiv; is-equiv-map-inv-equiv)
-open import foundation.fibers-of-maps using (fib; fib-comp)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-cartesian-product-types using
-  ( equiv-prod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (_＝_; refl; equiv-concat; inv; ap)
-open import foundation.propositional-maps using
-  ( is-prop-map; is-emb-is-prop-map; equiv-is-prop-map-is-emb;
-    is-prop-map-is-emb)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-is-inhabited; is-prop-prod;
-    is-proof-irrelevant-is-prop; equiv-prop)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr)
-open import foundation.type-duality using (equiv-Fib-structure)
-open import foundation.type-theoretic-principle-of-choice using
-  ( inv-distributive-Π-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.decidable-maps
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-duality
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -243,7 +227,7 @@ abstract
     {f : A → B} →
     is-decidable-emb f → is-decidable-emb g → is-decidable-emb (g ∘ f)
   pr1 (is-decidable-emb-comp {g = g} {f} H K) =
-    is-emb-comp' _ _ (pr1 K) (pr1 H)
+    is-emb-comp _ _ (pr1 K) (pr1 H)
   pr2 (is-decidable-emb-comp {g = g} {f} H K) x =
     ind-coprod
       ( λ t → is-decidable (fib (g ∘ f) x))
