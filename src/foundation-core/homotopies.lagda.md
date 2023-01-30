@@ -120,6 +120,27 @@ htpy-right-whisk H f x = H (f x)
 _·r_ = htpy-right-whisk
 ```
 
+### Transposition of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : (H ∙h K) ~ L)
+  where
+
+  inv-con-htpy : K ~ ((inv-htpy H) ∙h L)
+  inv-con-htpy x = inv-con (H x) (K x) (L x) (M x)
+
+  inv-htpy-inv-con-htpy : ((inv-htpy H) ∙h L) ~ K
+  inv-htpy-inv-con-htpy = inv-htpy inv-con-htpy
+
+  con-inv-htpy : H ~ (L ∙h (inv-htpy K))
+  con-inv-htpy x = con-inv (H x) (K x) (L x) (M x)
+
+  inv-htpy-con-inv-htpy : (L ∙h (inv-htpy K)) ~ H
+  inv-htpy-con-inv-htpy = inv-htpy con-inv-htpy
+```
+
 ## Properties
 
 ### Associativity of concatenation of homotopies

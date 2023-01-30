@@ -181,7 +181,7 @@ module _
     pair (concat-htpy' f K) is-equiv-concat-htpy'
 ```
 
-### Transpositions of homotopies
+### Transposing homotopies is an equivalence
 
 ```agda
 module _
@@ -189,32 +189,19 @@ module _
   (H : f ~ g) (K : g ~ h) (L : f ~ h)
   where
 
-  inv-con-htpy : (H ∙h K) ~ L → K ~ ((inv-htpy H) ∙h L)
-  inv-con-htpy M x = inv-con (H x) (K x) (L x) (M x)
-
-  inv-htpy-inv-con-htpy : (H ∙h K) ~ L → ((inv-htpy H) ∙h L) ~ K
-  inv-htpy-inv-con-htpy M = inv-htpy (inv-con-htpy M)
-
-
-  is-equiv-inv-con-htpy : is-equiv inv-con-htpy
+  is-equiv-inv-con-htpy : is-equiv (inv-con-htpy H K L)
   is-equiv-inv-con-htpy =
     is-equiv-map-Π _ (λ x → is-equiv-inv-con (H x) (K x) (L x))
 
   equiv-inv-con-htpy : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
-  equiv-inv-con-htpy = pair inv-con-htpy is-equiv-inv-con-htpy
+  equiv-inv-con-htpy = pair (inv-con-htpy H K L) is-equiv-inv-con-htpy
 
-  con-inv-htpy : (H ∙h K) ~ L → H ~ (L ∙h (inv-htpy K))
-  con-inv-htpy M x = con-inv (H x) (K x) (L x) (M x)
-
-  inv-htpy-con-inv-htpy : (H ∙h K) ~ L → (L ∙h (inv-htpy K)) ~ H
-  inv-htpy-con-inv-htpy M = inv-htpy (con-inv-htpy M)
-
-  is-equiv-con-inv-htpy : is-equiv con-inv-htpy
+  is-equiv-con-inv-htpy : is-equiv (con-inv-htpy H K L)
   is-equiv-con-inv-htpy =
     is-equiv-map-Π _ (λ x → is-equiv-con-inv (H x) (K x) (L x))
 
   equiv-con-inv-htpy : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
-  equiv-con-inv-htpy = pair con-inv-htpy is-equiv-con-inv-htpy
+  equiv-con-inv-htpy = pair (con-inv-htpy H K L) is-equiv-con-inv-htpy
 ```
 
 ## See also
