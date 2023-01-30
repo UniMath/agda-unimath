@@ -509,9 +509,9 @@ module _
       ( edge-to-root-graph-element-𝕎 H)
     
   is-tree-graph-element-𝕎 :
-    (w : 𝕎 A B) → is-tree-Directed-Graph (graph-element-𝕎 w) root-𝕎
+    (w : 𝕎 A B) → is-tree-Directed-Graph' (graph-element-𝕎 w) root-𝕎
   is-tree-graph-element-𝕎 w =
-    is-tree-unique-parent-Directed-Graph
+    is-tree-unique-parent-Directed-Graph'
       ( graph-element-𝕎 w)
       ( root-𝕎)
       ( has-unique-predecessor-graph-element-𝕎 w)

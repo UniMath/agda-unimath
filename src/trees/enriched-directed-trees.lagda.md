@@ -70,12 +70,12 @@ module _
   root-Enriched-Directed-Tree =
     root-Directed-Tree directed-tree-Enriched-Directed-Tree
 
-  is-tree-Enriched-Directed-Tree :
-    is-tree-Directed-Graph
+  is-tree-Enriched-Directed-Tree' :
+    is-tree-Directed-Graph'
       graph-Enriched-Directed-Tree
       root-Enriched-Directed-Tree
-  is-tree-Enriched-Directed-Tree =
-    is-tree-Directed-Tree directed-tree-Enriched-Directed-Tree
+  is-tree-Enriched-Directed-Tree' =
+    is-tree-Directed-Tree' directed-tree-Enriched-Directed-Tree
 
   shape-Enriched-Directed-Tree : node-Enriched-Directed-Tree → A
   shape-Enriched-Directed-Tree = pr1 (pr2 T)
