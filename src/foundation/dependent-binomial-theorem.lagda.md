@@ -3,8 +3,6 @@ title: The dependent binomial theorem for types (Distributivity of dependent fun
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.dependent-binomial-theorem where
 
 open import foundation.cartesian-product-types using (_×_)
@@ -23,7 +21,7 @@ open import foundation.homotopies using (_~_)
 open import foundation.identity-types using (ap; equiv-tr)
 open import foundation.raising-universe-levels using
   ( raise; map-inv-raise; map-raise; isretr-map-inv-raise; issec-map-inv-raise;
-    equiv-raise)
+    compute-raise)
 open import foundation.type-theoretic-principle-of-choice using
   ( distributive-Π-Σ)
 open import foundation.unit-type using (star)
@@ -113,13 +111,13 @@ module _
                 ( λ x →
                   equiv-map-Π
                     ( λ p →
-                      ( inv-equiv (equiv-raise l3 (A x))) ∘e
+                      ( inv-equiv (compute-raise l3 (A x))) ∘e
                       ( equiv-tr (fam-coprod (A x) (B x)) p))))
               ( equiv-map-Π
                 ( λ x →
                   equiv-map-Π
                     ( λ p →
-                      ( inv-equiv (equiv-raise l2 (B x))) ∘e
+                      ( inv-equiv (compute-raise l2 (B x))) ∘e
                       ( equiv-tr (fam-coprod (A x) (B x)) p))))) ∘e
             ( distributive-Π-Σ)) ∘e
           ( equiv-map-Π

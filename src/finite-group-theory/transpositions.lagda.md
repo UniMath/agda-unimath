@@ -62,7 +62,7 @@ open import foundation.propositional-truncations using
   ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
     unit-trunc-Prop; type-trunc-Prop; trunc-Prop)
 open import foundation.raising-universe-levels using
-  ( map-raise; map-inv-raise; raise; equiv-raise)
+  ( map-raise; map-inv-raise; raise; compute-raise)
 open import foundation.sets using (is-set-type-Set; Id-Prop)
 open import foundation.type-arithmetic-empty-type using
   ( inv-right-unit-law-coprod-is-empty; map-right-absorption-prod;
@@ -610,7 +610,7 @@ module _
     is-prop-all-elements-equal
       (λ p1 p2 →
         is-injective-map-equiv
-          ( inv-equiv (equiv-raise l4 (type-decidable-Prop (P (map-inv-equiv e x)))))
+          ( inv-equiv (compute-raise l4 (type-decidable-Prop (P (map-inv-equiv e x)))))
           ( eq-is-prop (is-prop-type-decidable-Prop (P (map-inv-equiv e x)))))
   pr2 (pr2 (pr1 (transposition-conjugation-equiv (pair P H)) x)) =
     is-decidable-raise l4 (type-decidable-Prop (P (map-inv-equiv e x))) (is-decidable-type-decidable-Prop (P (map-inv-equiv e x)))

@@ -75,7 +75,7 @@ open import foundation.propositions using (eq-is-prop)
 open import foundation.reflecting-maps-equivalence-relations using
   ( reflecting-map-Eq-Rel; reflects-map-reflecting-map-Eq-Rel)
 open import foundation.raising-universe-levels using
-  ( raise-Set; equiv-raise; raise)
+  ( raise-Set; compute-raise; raise)
 open import foundation.sets using
   ( is-set; Id-Prop; Set; type-Set; is-set-type-Set; is-prop-is-set;
     is-set-equiv; is-1-type-Set)
@@ -166,11 +166,11 @@ module _
       ( preserves-even-difference-orientation-complete-undirected-graph-equiv)
       ( λ n →
         orientation-aut-count
-          ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
       ( λ n →
         not-even-difference-orientation-aut-transposition-count
-          ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 
   eq-cartier-delooping-sign-homomorphism : (n : ℕ) →
@@ -217,11 +217,11 @@ module _
             ( preserves-even-difference-orientation-complete-undirected-graph-equiv)
             ( λ n →
               orientation-aut-count
-                ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
                 ( star))
             ( λ n →
               not-even-difference-orientation-aut-transposition-count
-                ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
                 ( star))
             ( n))
           ( sign-homomorphism
@@ -230,7 +230,7 @@ module _
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (succ-ℕ (succ-ℕ n)))
           ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
-          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise l (Fin (succ-ℕ (succ-ℕ n))))))
   eq-cartier-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( orientation-Complete-Undirected-Graph)
@@ -242,10 +242,10 @@ module _
       ( preserves-even-difference-orientation-complete-undirected-graph-equiv)
       ( λ n →
         orientation-aut-count
-          ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
       ( λ n →
         not-even-difference-orientation-aut-transposition-count
-          ( pair (succ-ℕ (succ-ℕ n)) (equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( pair (succ-ℕ (succ-ℕ n)) (compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 ```

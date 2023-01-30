@@ -60,6 +60,6 @@ is-small-universal-multiset-𝕍 l {l1} (pair (pair U e) H) =
       pair
         ( pair
           ( type-is-small (H A))
-          ( equiv-is-small (H A) ∘e inv-equiv (equiv-raise (lsuc l1) A)))
+          ( equiv-is-small (H A) ∘e inv-equiv (compute-raise (lsuc l1) A)))
         ( λ x → f (α (map-inv-raise x)))
 ```

@@ -26,7 +26,7 @@ open import foundation.identity-types using (Id; ap; refl; equiv-concat')
 open import foundation.propositional-truncations using (unit-trunc-Prop)
 open import foundation.propositions using (is-proof-irrelevant-is-prop)
 open import foundation.raising-universe-levels using
-  ( raise; map-raise; map-inv-raise; equiv-raise)
+  ( raise; map-raise; map-inv-raise; compute-raise)
 open import foundation.type-arithmetic-dependent-pair-types using
   ( right-unit-law-Σ-is-contr; equiv-right-swap-Σ; assoc-Σ)
 open import foundation.universe-levels using (Level; UU; lsuc; lzero; _⊔_)
@@ -88,7 +88,7 @@ module _
   pr1 (pr1 point-Infinite-Cyclic-Type) = raise l ℤ
   pr2 (pr1 point-Infinite-Cyclic-Type) = (map-raise ∘ succ-ℤ) ∘ map-inv-raise
   pr2 point-Infinite-Cyclic-Type =
-    unit-trunc-Prop (pair (equiv-raise l ℤ) refl-htpy)
+    unit-trunc-Prop (pair (compute-raise l ℤ) refl-htpy)
 
   Infinite-Cyclic-Type-Pointed-Type-Level : Pointed-Type (lsuc l)
   pr1 Infinite-Cyclic-Type-Pointed-Type-Level = Infinite-Cyclic-Type l

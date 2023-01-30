@@ -3,34 +3,24 @@ title: Connected components of universes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.connected-components-universes where
 
-open import foundation.0-connected-types using
-  ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( empty; equiv-is-empty; empty-Prop; raise-empty)
-open import foundation.equivalences using
-  ( _≃_; id-equiv; is-equiv; map-inv-is-equiv; map-inv-equiv)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.mere-equivalences using
-  ( mere-equiv-Prop; mere-equiv; is-prop-mere-equiv; refl-mere-equiv)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.raising-universe-levels using (equiv-raise)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (type-subtype)
-open import foundation.subuniverses using (eq-equiv-subuniverse)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_; lzero)
+open import foundation.0-connected-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functoriality-propositional-truncation
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.subuniverses
+open import foundation.univalence
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -162,12 +152,12 @@ abstract
     (l : Level) → is-contr (component-UU-Level l empty)
   pr1 (pr1 (is-contr-component-UU-Level-empty l)) = raise-empty l
   pr2 (pr1 (is-contr-component-UU-Level-empty l)) =
-    unit-trunc-Prop (equiv-raise l empty)
+    unit-trunc-Prop (compute-raise l empty)
   pr2 (is-contr-component-UU-Level-empty l) X =
     eq-equiv-subuniverse
       ( mere-equiv-Prop empty)
       ( equiv-is-empty
-        ( map-inv-equiv (equiv-raise l empty))
+        ( map-inv-equiv (compute-raise l empty))
         ( λ x →
           apply-universal-property-trunc-Prop
           ( pr2 X)

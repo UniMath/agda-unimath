@@ -71,3 +71,38 @@ pr1 (raise-Set l A) = raise l (type-Set A)
 pr2 (raise-Set l A) =
   is-set-equiv' (type-Set A) (compute-raise l (type-Set A)) (is-set-type-Set A)
 ```
+
+### Raising equivalent types
+
+```agda
+module _
+  {l1 l2 : Level} (l3 l4 : Level) {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+  
+  map-equiv-raise : raise l3 A → raise l4 B
+  map-equiv-raise (map-raise x) = map-raise (map-equiv e x)
+
+  map-inv-equiv-raise : raise l4 B → raise l3 A
+  map-inv-equiv-raise (map-raise y) = map-raise (map-inv-equiv e y)
+
+  issec-map-inv-equiv-raise :
+    ( map-equiv-raise ∘ map-inv-equiv-raise) ~ id
+  issec-map-inv-equiv-raise (map-raise y) =
+    ap map-raise (issec-map-inv-equiv e y)
+
+  isretr-map-inv-equiv-raise :
+    ( map-inv-equiv-raise ∘ map-equiv-raise) ~ id
+  isretr-map-inv-equiv-raise (map-raise x) =
+    ap map-raise (isretr-map-inv-equiv e x)
+
+  is-equiv-map-equiv-raise : is-equiv map-equiv-raise
+  is-equiv-map-equiv-raise =
+    is-equiv-has-inverse
+      map-inv-equiv-raise
+      issec-map-inv-equiv-raise
+      isretr-map-inv-equiv-raise
+
+  equiv-raise : raise l3 A ≃ raise l4 B
+  pr1 equiv-raise = map-equiv-raise
+  pr2 equiv-raise = is-equiv-map-equiv-raise
+```

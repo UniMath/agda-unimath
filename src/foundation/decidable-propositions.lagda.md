@@ -3,59 +3,39 @@ title: Decidable propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-propositions where
 
 open import foundation-core.decidable-propositions public
 
-open import foundation.booleans using
-  ( bool; true; false; is-set-bool; neq-false-true-bool; is-finite-bool)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (equiv-is-contr; eq-is-contr)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-neg; is-merely-decidable;
-    is-merely-decidable-Prop)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_; is-emb-tot; equiv-ap-emb)
-open import foundation.empty-types using
-  ( equiv-is-empty; raise-empty-Prop; is-empty-raise-empty; ex-falso;
-    empty-Prop)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; map-equiv; equiv-ap; is-equiv; is-equiv-has-inverse; inv-equiv; map-inv-equiv;
-    right-inverse-law-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using (tot)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; ap; refl; inv; tr)
-open import foundation.logical-equivalences using (_↔_; _⇔_)
-open import foundation.negation using (¬; is-prop-neg)
-open import foundation.propositional-extensionality using
-  ( is-contr-total-true-Prop; is-contr-total-false-Prop;
-    propositional-extensionality)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; is-prop-type-trunc-Prop; unit-trunc-Prop;
-    map-universal-property-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; Prop; type-Prop; is-prop-type-Prop; is-prop-is-inhabited;
-    is-prop-prod; is-prop-is-prop; is-proof-irrelevant-is-prop)
-open import foundation.raising-universe-levels using (raise; equiv-raise)
-open import foundation.sets using (is-set; is-set-equiv)
-open import foundation.small-types using (is-small)
-open import foundation.subtypes using (is-emb-inclusion-subtype)
-open import foundation.type-arithmetic-coproduct-types using
-  ( left-distributive-Σ-coprod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( inv-assoc-Σ)
-open import foundation.unit-type using
-  ( is-contr-unit; raise-unit-Prop; raise-star)
-open import foundation.universe-levels using (Level; UU; lsuc; lzero)
+open import foundation.booleans
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.small-types
+open import foundation.subtypes
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; count-is-empty; count-is-contr)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 ```
 
@@ -223,7 +203,7 @@ abstract
     (l1 l2 : Level) → is-small l2 (decidable-Prop l1)
   pr1 (is-small-decidable-Prop l1 l2) = raise l2 bool
   pr2 (is-small-decidable-Prop l1 l2) =
-    equiv-raise l2 bool ∘e equiv-bool-decidable-Prop
+    compute-raise l2 bool ∘e equiv-bool-decidable-Prop
 ```
 
 ### Decidable propositions have a count

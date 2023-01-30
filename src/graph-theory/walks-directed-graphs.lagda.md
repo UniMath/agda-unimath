@@ -8,6 +8,7 @@ module graph-theory.walks-directed-graphs where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
+open import foundation.commuting-squares
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -312,41 +313,73 @@ walk-hom-Directed-Graph G H f (cons-walk-Directed-Graph e w) =
 ### The action on walks of length `n` of graph homomorphisms
 
 ```agda
-walk-of-length-hom-Directed-Graph :
+module _
   {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
-  (f : hom-Directed-Graph G H) (n : ℕ) {x y : vertex-Directed-Graph G} →
-  walk-of-length-Directed-Graph G n x y →
-  walk-of-length-Directed-Graph H n
+  (f : hom-Directed-Graph G H)
+  where
+  
+  walk-of-length-hom-Directed-Graph :
+    (n : ℕ) {x y : vertex-Directed-Graph G} →
+    walk-of-length-Directed-Graph G n x y →
+    walk-of-length-Directed-Graph H n
     ( vertex-hom-Directed-Graph G H f x)
     ( vertex-hom-Directed-Graph G H f y)
-walk-of-length-hom-Directed-Graph G H f zero-ℕ {x} {y} (map-raise p) =
-  map-raise (ap (vertex-hom-Directed-Graph G H f) p)
-walk-of-length-hom-Directed-Graph G H f (succ-ℕ n) {x} {y} (z , e , w) =
-  map-Σ
-    ( λ z →
-      ( edge-Directed-Graph H (vertex-hom-Directed-Graph G H f x) z) ×
-      ( walk-of-length-Directed-Graph H n z
-        ( vertex-hom-Directed-Graph G H f y)))
-    ( vertex-hom-Directed-Graph G H f)
-    ( λ z →
-      map-prod
-        ( edge-hom-Directed-Graph G H f)
-        ( walk-of-length-hom-Directed-Graph G H f n))
-    ( z , e , w)
+  walk-of-length-hom-Directed-Graph zero-ℕ {x} {y} (map-raise p) =
+    map-raise (ap (vertex-hom-Directed-Graph G H f) p)
+  walk-of-length-hom-Directed-Graph (succ-ℕ n) =
+    map-Σ
+      ( λ z →
+        ( edge-Directed-Graph H (vertex-hom-Directed-Graph G H f _) z) ×
+        ( walk-of-length-Directed-Graph H n z
+          ( vertex-hom-Directed-Graph G H f _)))
+      ( vertex-hom-Directed-Graph G H f)
+      ( λ z →
+        map-prod
+          ( edge-hom-Directed-Graph G H f)
+          ( walk-of-length-hom-Directed-Graph n))
+
+  square-compute-total-walk-of-length-hom-Directed-Graph :
+    (x y : vertex-Directed-Graph G) →
+    coherence-square
+      ( tot (λ n → walk-of-length-hom-Directed-Graph n {x} {y}))
+      ( map-compute-total-walk-of-length-Directed-Graph G x y)
+      ( map-compute-total-walk-of-length-Directed-Graph H
+        ( vertex-hom-Directed-Graph G H f x)
+        ( vertex-hom-Directed-Graph G H f y))
+      ( walk-hom-Directed-Graph G H f {x} {y})
+  square-compute-total-walk-of-length-hom-Directed-Graph
+    x .x (zero-ℕ , map-raise refl) = refl
+  square-compute-total-walk-of-length-hom-Directed-Graph
+    x y (succ-ℕ n , z , e , w) =
+    ap
+      ( cons-walk-Directed-Graph (edge-hom-Directed-Graph G H f e))
+      ( square-compute-total-walk-of-length-hom-Directed-Graph z y (n , w))
 ```
 
 ### The action on walks of length `n` of equivalences of graphs
 
 ```agda
-equiv-walk-of-length-equiv-hom-Directed-Graph :
+equiv-walk-of-length-equiv-Directed-Graph :
   {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
   (f : equiv-Directed-Graph G H) (n : ℕ) {x y : vertex-Directed-Graph G} →
   walk-of-length-Directed-Graph G n x y ≃
   walk-of-length-Directed-Graph H n
     ( vertex-equiv-Directed-Graph G H f x)
     ( vertex-equiv-Directed-Graph G H f y)
-equiv-walk-of-length-equiv-hom-Directed-Graph G H f zero-ℕ = ?
-equiv-walk-of-length-equiv-hom-Directed-Graph G H f (succ-ℕ n) = ?
+equiv-walk-of-length-equiv-Directed-Graph G H f zero-ℕ =
+  equiv-raise _ _
+    ( equiv-ap (equiv-vertex-equiv-Directed-Graph G H f) _ _)
+equiv-walk-of-length-equiv-Directed-Graph G H f (succ-ℕ n) =
+  equiv-Σ
+    ( λ z →
+      ( edge-Directed-Graph H (vertex-equiv-Directed-Graph G H f _) z) ×
+      ( walk-of-length-Directed-Graph H n z
+        ( vertex-equiv-Directed-Graph G H f _)))
+    ( equiv-vertex-equiv-Directed-Graph G H f)
+    ( λ z →
+      equiv-prod
+        ( equiv-edge-equiv-Directed-Graph G H f _ _)
+        ( equiv-walk-of-length-equiv-Directed-Graph G H f n))
 ```
 
 ### The action of equivalences on walks
@@ -366,42 +399,57 @@ module _
   walk-equiv-Directed-Graph =
     walk-hom-Directed-Graph G H (hom-equiv-Directed-Graph G H e)
 
-  map-inv-equiv-walk-equiv-Directed-Graph' :
-    {x y : vertex-Directed-Graph G} {z : vertex-Directed-Graph H}
-    (p : vertex-equiv-Directed-Graph G H e y ＝ z) →
-    walk-Directed-Graph H
-      ( vertex-equiv-Directed-Graph G H e x)
-      ( z) →
-    walk-Directed-Graph G x y
-  map-inv-equiv-walk-equiv-Directed-Graph' p refl-walk-Directed-Graph =
-    {!refl-walk-Directed-Graph!}
-  map-inv-equiv-walk-equiv-Directed-Graph' p (cons-walk-Directed-Graph x w) = {!!}
+  square-compute-total-walk-of-length-equiv-Directed-Graph :
+    (x y : vertex-Directed-Graph G) →
+    coherence-square
+      ( tot
+        ( λ n →
+          map-equiv
+            ( equiv-walk-of-length-equiv-Directed-Graph G H e n {x} {y})))
+      ( map-compute-total-walk-of-length-Directed-Graph G x y)
+      ( map-compute-total-walk-of-length-Directed-Graph H
+        ( vertex-equiv-Directed-Graph G H e x)
+        ( vertex-equiv-Directed-Graph G H e y))
+      ( walk-equiv-Directed-Graph {x} {y})
+  square-compute-total-walk-of-length-equiv-Directed-Graph
+    x .x (zero-ℕ , map-raise refl) = refl
+  square-compute-total-walk-of-length-equiv-Directed-Graph
+    x y (succ-ℕ n , z , f , w) =
+    ap
+      ( cons-walk-Directed-Graph (edge-equiv-Directed-Graph G H e x z f))
+      ( square-compute-total-walk-of-length-equiv-Directed-Graph z y (n , w))
 
-{-
-  equiv-walk-equiv-Directed-Graph' :
+  is-equiv-walk-equiv-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    is-equiv (walk-equiv-Directed-Graph {x} {y})
+  is-equiv-walk-equiv-Directed-Graph {x} {y} =
+    is-equiv-right-is-equiv-left-square
+      ( map-equiv
+        ( equiv-tot
+        ( λ n → equiv-walk-of-length-equiv-Directed-Graph G H e n {x} {y})))
+      ( walk-equiv-Directed-Graph {x} {y})
+      ( map-compute-total-walk-of-length-Directed-Graph G x y)
+      ( map-compute-total-walk-of-length-Directed-Graph H
+        ( vertex-equiv-Directed-Graph G H e x)
+        ( vertex-equiv-Directed-Graph G H e y))
+      ( inv-htpy
+        ( square-compute-total-walk-of-length-equiv-Directed-Graph x y))
+      ( is-equiv-map-compute-total-walk-of-length-Directed-Graph G x y)
+      ( is-equiv-map-compute-total-walk-of-length-Directed-Graph H
+        ( vertex-equiv-Directed-Graph G H e x)
+        ( vertex-equiv-Directed-Graph G H e y))
+      ( is-equiv-map-equiv
+        ( equiv-tot
+          ( λ n → equiv-walk-of-length-equiv-Directed-Graph G H e n)))
+
+  equiv-walk-equiv-Directed-Graph :
     {x y : vertex-Directed-Graph G} →
     walk-Directed-Graph G x y ≃
     walk-Directed-Graph H
       ( vertex-equiv-Directed-Graph G H e x)
       ( vertex-equiv-Directed-Graph G H e y)
-  equiv-walk-equiv-Directed-Graph' {x} {y} =
-    ( ( inv-equiv (compute-walk-Directed-Graph H
-        ( map-equiv (pr1 e) x)
-        ( map-equiv (pr1 e) y))) ∘e
-      ( α)) ∘e
-    ( compute-walk-Directed-Graph G x y)
-    where
-    α = 
-      equiv-coprod
-      ( equiv-ap (equiv-vertex-equiv-Directed-Graph G H e) y x)
-      ( equiv-Σ
-        ( λ z →
-          ( edge-Directed-Graph H (vertex-equiv-Directed-Graph G H e x) z) ×
-          ( walk-Directed-Graph H z (vertex-equiv-Directed-Graph G H e y)))
-        ( equiv-vertex-equiv-Directed-Graph G H e)
-        ( λ z →
-          equiv-prod
-            ( equiv-edge-equiv-Directed-Graph G H e x z)
-            ( equiv-walk-equiv-Directed-Graph')))
-            -}
+  pr1 (equiv-walk-equiv-Directed-Graph {x} {y}) =
+    walk-equiv-Directed-Graph
+  pr2 (equiv-walk-equiv-Directed-Graph {x} {y}) =
+    is-equiv-walk-equiv-Directed-Graph
 ```
