@@ -7,9 +7,9 @@ title: Identity types
 
 module foundation-core.identity-types where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.universe-levels using (UU; Level)
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

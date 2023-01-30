@@ -9,36 +9,23 @@ module foundation.embeddings where
 
 open import foundation-core.embeddings public
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.cones-pullbacks using (cone)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; map-Σ-map-base; map-Σ)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id-sec)
-open import foundation-core.homotopies using
-  ( _~_; nat-htpy; inv-htpy; refl-htpy)
-open import foundation-core.propositional-maps using
-  ( is-emb-is-prop-map; is-prop-map-is-emb)
-open import foundation-core.pullbacks using (is-pullback)
-open import foundation-core.sections using (sec; triangle-section)
-open import foundation-core.truncation-levels using (neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.cartesian-product-types
+open import foundation-core.cones-pullbacks
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.pullbacks
+open import foundation-core.sections
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.equivalences using
-  ( is-equiv-top-is-equiv-left-square; is-equiv-comp-htpy; is-equiv-right-factor;
-    is-equiv; is-emb-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
-    is-equiv-map-inv-is-equiv; is-property-is-equiv; _≃_; map-equiv;
-    is-equiv-htpy-equiv; inv-equiv; isretr-map-inv-equiv)
-open import foundation.identity-types using
-  ( ap; concat'; concat; is-equiv-concat; is-equiv-concat'; ap-comp;
-    _＝_; refl; _∙_; inv)
-open import foundation.propositions using (is-prop; is-prop-Π; Prop)
-open import foundation.truncated-maps using
-  ( is-trunc-map-is-trunc-domain-codomain; is-trunc-is-pullback;
-    is-prop-map-tot; is-prop-map-map-Σ-map-base; is-prop-map-map-Σ;
-    is-trunc-is-pullback')
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.truncated-maps
 ```
 
 ## Properties
@@ -206,7 +193,7 @@ module _
       (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
       is-emb f → is-emb h
     is-emb-right-factor f g h H is-emb-g is-emb-f x y =
-      is-equiv-right-factor
+      is-equiv-right-factor-htpy
         ( ap (g ∘ h))
         ( ap g)
         ( ap h)

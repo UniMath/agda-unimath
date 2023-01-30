@@ -268,7 +268,7 @@ module _
         ( has-two-elements-type-2-Element-Type X)
         ( is-equiv-Prop (ev-zero-equiv-Fin-two-ℕ))
         ( λ α →
-          is-equiv-left-factor'
+          is-equiv-left-factor
             ( ev-zero-equiv-Fin-two-ℕ)
             ( map-equiv (equiv-postcomp-equiv α (Fin 2)))
             ( is-equiv-comp

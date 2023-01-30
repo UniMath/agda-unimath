@@ -393,7 +393,7 @@ dependent-pullback-property-dependent-universal-property-pushout :
 dependent-pullback-property-dependent-universal-property-pushout
   f g (pair i (pair j H)) I l P =
   let c = (pair i (pair j H)) in
-  is-equiv-right-factor
+  is-equiv-right-factor-htpy
     ( dep-cocone-map f g c P)
     ( tot (λ h → tot λ h' → htpy-eq))
     ( gap

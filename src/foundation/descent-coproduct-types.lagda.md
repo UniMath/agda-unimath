@@ -105,7 +105,7 @@ module _
           ( map-fib-cone (ind-coprod (λ _ → X) f g) i
           ( cone-descent-coprod (triple h f' H) (triple k g' K)))
       α (inl x) =
-        is-equiv-left-factor
+        is-equiv-left-factor-htpy
           ( map-fib-cone f i (triple h f' H) x)
           ( map-fib-cone (ind-coprod _ f g) i
             ( cone-descent-coprod (triple h f' H) (triple k g' K))
@@ -117,18 +117,18 @@ module _
             ( triple h f' H) is-pb-cone-A' x)
           ( is-equiv-fib-map-coprod-inl-fib h k x)
       α (inr y) =
-        is-equiv-left-factor
+        is-equiv-left-factor-htpy
           ( map-fib-cone g i (triple k g' K) y)
           ( map-fib-cone
             ( ind-coprod _ f g) i
             ( cone-descent-coprod (triple h f' H) (triple k g' K))
             ( inr y))
-            ( fib-map-coprod-inr-fib h k y)
-            ( triangle-descent-square-fib-map-coprod-inr-fib
-              h k i f g f' g' H K y)
-            ( is-fiberwise-equiv-map-fib-cone-is-pullback g i
-              ( triple k g' K) is-pb-cone-B' y)
-            ( is-equiv-fib-map-coprod-inr-fib h k y)
+          ( fib-map-coprod-inr-fib h k y)
+          ( triangle-descent-square-fib-map-coprod-inr-fib
+            h k i f g f' g' H K y)
+          ( is-fiberwise-equiv-map-fib-cone-is-pullback g i
+            ( triple k g' K) is-pb-cone-B' y)
+          ( is-equiv-fib-map-coprod-inr-fib h k y)
 
   abstract
     descent-coprod-inl :

@@ -17,7 +17,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 
@@ -66,7 +65,7 @@ module _
       is-equiv h
     is-equiv-up-pullback-up-pullback up up' =
       is-equiv-is-equiv-postcomp h
-        ( λ D → is-equiv-right-factor
+        ( λ D → is-equiv-right-factor-htpy
           ( cone-map f g {C' = D} c')
           ( cone-map f g c)
           ( λ (k : D → C') → h ∘ k)
@@ -94,7 +93,7 @@ module _
       is-equiv h →
       ({l : Level} → universal-property-pullback l f g c)
     up-pullback-is-equiv-up-pullback up' is-equiv-h D =
-      is-equiv-left-factor
+      is-equiv-left-factor-htpy
         ( cone-map f g c')
         ( cone-map f g c)
         ( λ k → h ∘ k)

@@ -51,7 +51,7 @@ module _
         ( h)
         ( cone-descent-Σ)
         ( ind-Σ
-          ( λ i a → is-equiv-left-factor
+          ( λ i a → is-equiv-left-factor-htpy
             ( map-fib-cone (f i) h (c i) a)
             ( map-fib-cone (ind-Σ f) h cone-descent-Σ (pair i a))
             ( map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))

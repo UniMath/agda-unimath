@@ -7,19 +7,15 @@ title: The universal property of coproduct types
 
 module foundation.universal-property-coproduct-types where
 
-open import foundation.cartesian-product-types using (_×_; pair')
-open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
-open import foundation.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.equality-cartesian-product-types using
-  ( eq-pair)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; is-equiv-is-equiv-precomp;
-    is-equiv-right-factor'; is-equiv-comp; is-equiv-precomp-is-equiv)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; precomp)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -73,7 +69,7 @@ module _
     uniqueness-coprod {Y = Y} i j H =
       is-equiv-is-equiv-precomp
         ( ind-coprod _ i j)
-        ( λ l X → is-equiv-right-factor'
+        ( λ l X → is-equiv-right-factor
           ( ev-inl-inr (λ t → X))
           ( precomp (ind-coprod (λ t → Y) i j) X)
           ( universal-property-coprod X)

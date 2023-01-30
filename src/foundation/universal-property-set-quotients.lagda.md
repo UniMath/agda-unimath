@@ -7,72 +7,38 @@ title: The universal property of set quotients
 
 module foundation.universal-property-set-quotients where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-maps using
-  ( is-contr-map-is-equiv; is-equiv-is-contr-map)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; center; is-contr-equiv; eq-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.effective-maps-equivalence-relations using
-  ( is-effective; is-surjective-and-effective)
-open import foundation.embeddings using (_↪_; map-emb; equiv-ap-emb; is-emb)
-open import foundation.epimorphisms-with-respect-to-sets using
-  ( is-epimorphism-is-surjective-Set)
-open import foundation.equivalence-classes using
-  ( equivalence-class; class; emb-equivalence-class;
-    apply-effectiveness-class';
-    is-effective-class; equivalence-class-Set;
-    quotient-reflecting-map-equivalence-class;
-    is-surjective-and-effective-class)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-has-inverse;
-    is-equiv-precomp-is-equiv; is-equiv-left-factor; map-equiv;
-    is-property-is-equiv; _∘e_; inv-equiv; map-inv-equiv;
-    issec-map-inv-is-equiv)
-open import foundation.existential-quantification using (∃-Prop)
-open import foundation.fibers-of-maps using (fib)
+open import foundation.cartesian-product-types
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.effective-maps-equivalence-relations
+open import foundation.embeddings
+open import foundation.epimorphisms-with-respect-to-sets
+open import foundation.equivalence-classes
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality using (htpy-eq; eq-htpy)
-open import foundation.functions using (_∘_; id; precomp)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; is-contr-total-htpy; inv-htpy; _·l_; _∙h_)
-open import foundation.identity-types using
-  ( _＝_; ap; _∙_; inv; refl; convert-eq-values; tr; inv-tr)
-open import foundation.images using
-  ( emb-im; map-unit-im; is-emb-inclusion-im; triangle-unit-im; im; is-set-im;
-    inclusion-im)
-open import foundation.injective-maps using
-  ( is-injective-is-equiv; is-emb-is-injective; is-injective-is-emb)
-open import foundation.locally-small-types using (is-locally-small)
-open import foundation.propositional-extensionality using
-  ( eq-equiv-Prop; is-set-type-Prop; eq-iff; Prop-Set)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; type-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π'; is-prop-function-type; Prop; type-Prop;
-    is-prop-equiv'; is-prop-type-Prop; all-elements-equal;
-    is-prop-all-elements-equal; is-proof-irrelevant-is-prop; is-prop-equiv)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflecting-map-Eq-Rel; map-reflecting-map-Eq-Rel;
-    reflects-map-reflecting-map-Eq-Rel; eq-htpy-reflecting-map-Eq-Rel;
-    extensionality-reflecting-map-Eq-Rel; reflects-Eq-Rel;
-    reflecting-map-Eq-Rel-is-surjective-and-effective; is-prop-reflects-Eq-Rel;
-    reflects-Eq-Rel-Prop)
-open import foundation.sets using
-  ( Set; type-Set; is-set; is-set-type-Set; type-hom-Set; Id-Prop;
-    is-set-function-type)
-open import foundation.small-types using (is-small; is-small-Prop)
-open import foundation.subtypes using
-  ( eq-type-subtype; equiv-ap-inclusion-subtype)
-open import foundation.surjective-maps using
-  ( is-surjective; dependent-universal-property-surj-is-surjective)
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.images
+open import foundation.injective-maps
+open import foundation.locally-small-types
+open import foundation.propositional-extensionality
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.small-types
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.univalence using (equiv-eq)
-open import foundation.universal-property-image using
-  ( is-image; is-surjective-is-image; is-image-is-surjective)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.universal-property-image
+open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations using
   ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)

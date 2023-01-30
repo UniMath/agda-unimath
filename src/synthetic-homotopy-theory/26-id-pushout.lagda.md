@@ -301,7 +301,7 @@ is-universal-id-Fam-pushout' :
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
-  is-equiv-left-factor
+  is-equiv-left-factor-htpy
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
     ( ev-pt-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
