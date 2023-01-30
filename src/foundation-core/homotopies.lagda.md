@@ -7,11 +7,9 @@ title: Homotopies
 
 module foundation-core.homotopies where
 
-open import foundation-core.functions using (id)
-open import foundation-core.identity-types using
-  ( _＝_; refl; _∙_; concat; inv; ap; assoc; left-unit; right-unit; left-inv;
-    right-inv; distributive-inv-concat; is-injective-concat'; ap-id; apd; tr)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -25,19 +23,19 @@ module _
   {l1 l2 : Level} {X : UU l1} {P : X → UU l2} (f g : (x : X) → P x)
   where
 
-  eq-value : X → UU _
+  eq-value : X → UU l2
   eq-value x = (f x ＝ g x)
 
   tr-eq-value :
-    { x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y)→
-    ( ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p))) →
-    ( tr eq-value p q ＝ r)
-  tr-eq-value refl q .((ap id q) ∙ refl) refl = inv (right-unit ∙ (ap-id q))
+    {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
+    ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p)) →
+    tr eq-value p q ＝ r
+  tr-eq-value refl q .(ap id q ∙ refl) refl = inv (right-unit ∙ ap-id q)
 
 tr-eq-value-id-id :
   {l1 : Level} {A : UU l1} →
   {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
-  (p ∙ r) ＝ (q ∙ p) → (tr (eq-value (id {A = A}) (id {A = A})) p q) ＝ r
+  (p ∙ r) ＝ (q ∙ p) → (tr (eq-value id id) p q) ＝ r
 tr-eq-value-id-id refl q r s = inv (s ∙ right-unit)
 ```
 
@@ -45,7 +43,7 @@ tr-eq-value-id-id refl q r s = inv (s ∙ right-unit)
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
   f ~ g = (x : A) → eq-value f g x
 ```
@@ -69,8 +67,8 @@ refl-htpy' f = refl-htpy
 ```agda
 inv-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
-  (f ~ g) → (g ~ f)
-inv-htpy H x = inv (H x)
+  f ~ g → g ~ f
+inv-htpy H = inv ∘ H
 ```
 
 ### Concatenating homotopies
@@ -78,18 +76,18 @@ inv-htpy H x = inv (H x)
 ```agda
 _∙h_ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x} →
-  (f ~ g) → (g ~ h) → (f ~ h)
-_∙h_ H K x = (H x) ∙ (K x)
+  f ~ g → g ~ h → f ~ h
+(H ∙h K) x = (H x) ∙ (K x)
 
 concat-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
-  (f ~ g) → (h : (x : A) → B x) → (g ~ h) → (f ~ h)
+  f ~ g → (h : (x : A) → B x) → g ~ h → f ~ h
 concat-htpy H h K x = concat (H x) (h x) (K x)
 
 concat-htpy' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) {g h : (x : A) → B x} →
-  (g ~ h) → (f ~ g) → (f ~ h)
+  g ~ h → f ~ g → f ~ h
 concat-htpy' f K H = H ∙h K
 ```
 
@@ -97,15 +95,15 @@ concat-htpy' f K H = H ∙h K
 
 ```agda
 htpy-left-whisk :
-  {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
-  (h : B → C) {f g : A → B} → (f ~ g) → ((λ x → h (f x)) ~ (λ x → h (g x)))
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (h : B → C) {f g : A → B} → f ~ g → (h ∘ f) ~ (h ∘ g)
 htpy-left-whisk h H x = ap h (H x)
 
 _·l_ = htpy-left-whisk
 
 htpy-right-whisk :
-  {i j k : Level} {A : UU i} {B : UU j} {C : UU k}
-  {g h : B → C} (H : g ~ h) (f : A → B) → ((λ x → g (f x)) ~ (λ x → h (f x)))
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g h : B → C} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
 htpy-right-whisk H f x = H (f x)
 
 _·r_ = htpy-right-whisk
@@ -117,8 +115,8 @@ _·r_ = htpy-right-whisk
 
 ```agda
 assoc-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g h k : (x : A) → B x} →
-  (H : f ~ g) → (K : g ~ h) → (L : h ~ k) →
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : h ~ k) →
   ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
 assoc-htpy H K L x = assoc (H x) (K x) (L x)
 ```
@@ -127,12 +125,12 @@ assoc-htpy H K L x = assoc (H x) (K x) (L x)
 
 ```agda
 left-unit-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   {H : f ~ g} → (refl-htpy ∙h H) ~ H
 left-unit-htpy x = left-unit
 
 right-unit-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   {H : f ~ g} → (H ∙h refl-htpy) ~ H
 right-unit-htpy x = right-unit
 ```
@@ -141,12 +139,12 @@ right-unit-htpy x = right-unit
 
 ```agda
 left-inv-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   (H : f ~ g) → ((inv-htpy H) ∙h H) ~ refl-htpy
 left-inv-htpy H x = left-inv (H x)
 
 right-inv-htpy :
-  {i j : Level} {A : UU i} {B : A → UU j} {f g : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   (H : f ~ g) → (H ∙h (inv-htpy H)) ~ refl-htpy
 right-inv-htpy H x = right-inv (H x)
 ```
@@ -168,13 +166,13 @@ module _
 
 ```agda
 nat-htpy :
-  {i j : Level} {A : UU i} {B : UU j} {f g : A → B} (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   {x y : A} (p : x ＝ y) →
   ((H x) ∙ (ap g p)) ＝ ((ap f p) ∙ (H y))
 nat-htpy H refl = right-unit
 
 nat-htpy-id :
-  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) →
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
   {x y : A} (p : x ＝ y) → ((H x) ∙ p) ＝ ((ap f p) ∙ (H y))
 nat-htpy-id H refl = right-unit
 ```
@@ -184,6 +182,6 @@ nat-htpy-id H refl = right-unit
 ```agda
 coh-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → (H ·r f) ~ (f ·l H)
-coh-htpy-id {f = f} H x =
+coh-htpy-id H x =
   is-injective-concat' (H x) (nat-htpy-id H (H x))
 ```
