@@ -68,7 +68,7 @@ refl-htpy' f = refl-htpy
 inv-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
   f ~ g → g ~ f
-inv-htpy H = inv ∘ H
+inv-htpy H x = inv (H x)
 ```
 
 ### Concatenating homotopies

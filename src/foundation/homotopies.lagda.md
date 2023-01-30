@@ -14,22 +14,18 @@ open import foundation-core.contractible-types using
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; is-equiv-id)
+open import foundation-core.function-extensionality using
+  ( equiv-funext; eq-htpy; FUNEXT; htpy-eq; funext)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.functoriality-dependent-function-types using
   ( is-equiv-map-Π)
 open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation-core.sections using (sec)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
-
-open import foundation.function-extensionality using
-  ( equiv-funext; eq-htpy; FUNEXT; htpy-eq; funext)
-open import foundation.identity-systems using
+open import foundation-core.identity-systems using
   ( Ind-identity-system; fundamental-theorem-id-IND-identity-system)
-open import foundation.identity-types using
-  ( Id; _＝_; refl; _∙_; concat; inv; assoc; left-unit; right-unit; left-inv;
-    right-inv; ap; inv-con; con-inv; concat'; distributive-inv-concat; ap-inv;
-    ap-id; is-injective-concat'; inv-inv; issec-inv-concat'; isretr-inv-concat';
-    is-equiv-inv-con; is-equiv-con-inv)
+open import foundation-core.sections using (sec)
+open import foundation-core.universe-levels
+
+open import foundation.identity-types
 ```
 
 ## Idea
@@ -66,7 +62,7 @@ module _
   ap-concat-htpy' :
     (H H' : f ~ g) (K : g ~ h) → H ~ H' → (H ∙h K) ~ (H' ∙h K)
   ap-concat-htpy' H H' K L x =
-    ap (concat' _ (K x)) (L x)
+    ap (concat' (f x) (K x)) (L x)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
@@ -125,15 +121,15 @@ module _
 ```agda
 ev-refl-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) (C : (g : (x : A) → B x) → (f ~ g) → UU l3) →
+  (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
   ((g : (x : A) → B x) (H : f ~ g) → C g H) → C f refl-htpy
 ev-refl-htpy f C φ = φ f refl-htpy
 
 IND-HTPY :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) → UU _
+  (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → (f ~ g) → UU l3) → sec (ev-refl-htpy f C)
+  (C : (g : (x : A) → B x) → f ~ g → UU l3) → sec (ev-refl-htpy f C)
 ```
 
 ## Properties
@@ -168,13 +164,13 @@ abstract
 
   ind-htpy :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-    (f : (x : A) → B x) (C : (g : (x : A) → B x) → (f ~ g) → UU l3) →
+    (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
     C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
   ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
 
   comp-htpy :
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-    (f : (x : A) → B x) (C : (g : (x : A) → B x) → (f ~ g) → UU l3) →
+    (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
     (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
   comp-htpy f C = pr2 (Ind-htpy f C)
 ```
@@ -201,7 +197,7 @@ pr2 (equiv-inv-htpy f g) = is-equiv-inv-htpy f g
 abstract
   is-equiv-concat-htpy :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-    {f g : (x : A) → B x} (H : f ~ g) →
+    {f g : (x : A) → B x} (H : f ~ g)
     (h : (x : A) → B x) → is-equiv (concat-htpy H h)
   is-equiv-concat-htpy {A = A} {B = B} {f} =
     ind-htpy f
@@ -218,7 +214,7 @@ pr2 (equiv-concat-htpy H h) = is-equiv-concat-htpy H h
 inv-concat-htpy' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) {g h : (x : A) → B x} →
-  (g ~ h) → (f ~ h) → (f ~ g)
+  g ~ h → f ~ h → f ~ g
 inv-concat-htpy' f K = concat-htpy' f (inv-htpy K)
 
 issec-inv-concat-htpy' :
@@ -258,31 +254,35 @@ pr2 (equiv-concat-htpy' f K) = is-equiv-concat-htpy' f K
 ```agda
 abstract
   is-equiv-inv-con-htpy :
-    { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-    ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+    (H : f ~ g) (K : g ~ h) (L : f ~ h) →
     is-equiv (inv-con-htpy H K L)
   is-equiv-inv-con-htpy H K L =
-    is-equiv-map-Π _ (λ x → is-equiv-inv-con (H x) (K x) (L x))
+    is-equiv-map-Π
+      ( λ x → inv-con (H x) (K x) (L x))
+      ( λ x → is-equiv-inv-con (H x) (K x) (L x))
 
 equiv-inv-con-htpy :
-  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-  ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
-  ( (H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : f ~ h) →
+  ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
 pr1 (equiv-inv-con-htpy H K L) = inv-con-htpy H K L
 pr2 (equiv-inv-con-htpy H K L) = is-equiv-inv-con-htpy H K L
 
 abstract
   is-equiv-con-inv-htpy :
-    { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-    ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+    (H : f ~ g) (K : g ~ h) (L : f ~ h) →
     is-equiv (con-inv-htpy H K L)
   is-equiv-con-inv-htpy H K L =
-    is-equiv-map-Π _ (λ x → is-equiv-con-inv (H x) (K x) (L x))
+    is-equiv-map-Π
+      ( λ x → con-inv (H x) (K x) (L x))
+      ( λ x → is-equiv-con-inv (H x) (K x) (L x))
 
 equiv-con-inv-htpy :
-  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-  ( H : f ~ g) (K : g ~ h) (L : f ~ h) →
-  ( (H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : f ~ h) →
+  ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
 pr1 (equiv-con-inv-htpy H K L) = con-inv-htpy H K L
 pr2 (equiv-con-inv-htpy H K L) = is-equiv-con-inv-htpy H K L
 ```
