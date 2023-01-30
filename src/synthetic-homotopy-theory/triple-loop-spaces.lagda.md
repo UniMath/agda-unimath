@@ -5,7 +5,7 @@
 
 module synthetic-homotopy-theory.triple-loop-spaces where
 
-open import foundation.homotopies using (nat-htpy)
+open import foundation.homotopies using (nat-htpy; inv-nat-htpy)
 open import foundation.identity-types using
   ( Id; refl; ap-binary; left-unit; right-unit; _∙_; inv; ap-id)
 open import foundation.path-algebra using
@@ -30,13 +30,13 @@ open import synthetic-homotopy-theory.iterated-loop-spaces using
 module _
   {l : Level}
   where
-  
+
   Ω³ : Pointed-Type l → Pointed-Type l
   Ω³ A = iterated-loop-space 3 A
-  
+
   type-Ω³ : {A : UU l} (a : A) → UU l
   type-Ω³ a = Id (refl-Ω² {a = a}) (refl-Ω² {a = a})
-  
+
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
 ```
@@ -97,9 +97,9 @@ left-unit-law-z-concat-Ω³ :
 left-unit-law-z-concat-Ω³ α =
   ( left-unit-law-z-concat-Id³ α) ∙
   ( ( inv right-unit) ∙
-    ( ( inv (nat-htpy (λ ω → left-unit-law-horizontal-concat-Id² ω) α)) ∙
+    ( ( inv-nat-htpy (λ ω → left-unit-law-horizontal-concat-Id² ω) α) ∙
       ( ( inv right-unit) ∙
-        ( ( inv (nat-htpy ap-id α)) ∙
+        ( ( inv-nat-htpy ap-id α) ∙
           ( ap-id α)))))
 
 {-
@@ -119,14 +119,13 @@ right-unit-law-z-concat-Ω³ α =
   {!!}
 {-
   ( ( inv right-unit) ∙
-    ( ( inv (nat-htpy (λ ω → right-unit-law-horizontal-concat-Id² ω) α)) ∙
+    ( ( inv-nat-htpy (λ ω → right-unit-law-horizontal-concat-Id² ω) α) ∙
       ( left-unit ∙
         ( ( inv right-unit) ∙
-          ( ( inv
-              ( nat-htpy
+          ( ( inv-nat-htpy
                 ( λ z →
                   ( inv right-unit) ∙
-                  ( ( inv (nat-htpy (λ ω → right-unit) z)) ∙ ( ap-id z))) α)) ∙
+                  ( inv-nat-htpy (λ ω → right-unit) z) ∙ ( ap-id z)) α) ∙
             ( ap-id α))))))
 -}
 -}
@@ -210,7 +209,7 @@ inner-eckmann-hilton-connection-x-z-concat-Ω³ β γ =
 outer-eckmann-hilton-connection-y-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α δ : type-Ω³ a) →
   Id (z-concat-Ω³ α δ) (y-concat-Ω³ α δ)
-outer-eckmann-hilton-connection-y-z-concat-Ω³ α δ = 
+outer-eckmann-hilton-connection-y-z-concat-Ω³ α δ =
   ( k-concat-Id⁴
     ( inv (right-unit-law-y-concat-Ω³ α))
     ( inv (left-unit-law-y-concat-Ω³ δ))) ∙

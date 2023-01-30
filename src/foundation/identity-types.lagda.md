@@ -19,7 +19,7 @@ open import foundation-core.equivalences using
     map-equiv)
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.function-extensionality using (eq-htpy)
-open import foundation-core.homotopies using (_~_; nat-htpy)
+open import foundation-core.homotopies using (_~_)
 ```
 
 ## Idea
@@ -34,7 +34,7 @@ The equality relation on a type is a reflexive relation, with the universal prop
 module _
   {l : Level} {A : UU l}
   where
-  
+
   abstract
     is-equiv-inv : (x y : A) → is-equiv (λ (p : x ＝ y) → inv p)
     is-equiv-inv x y = is-equiv-has-inverse inv inv-inv inv-inv
@@ -97,7 +97,7 @@ module _
         ( inv-concat' x q)
         ( issec-inv-concat' x q)
         ( isretr-inv-concat' x q)
-  
+
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
   pr1 (equiv-concat' x q) = concat' x q
