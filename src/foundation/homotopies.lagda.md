@@ -153,42 +153,32 @@ pr2 (equiv-concat-htpy H h) = is-equiv-concat-htpy H h
 #### Concatenating from the right
 
 ```agda
-concat-inv-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} →
-  (g ~ h) → (f ~ h) → (f ~ g)
-concat-inv-htpy' f K = concat-htpy' f (inv-htpy K)
-
-issec-concat-inv-htpy' :
+module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) {g h : (x : A) → B x}
-  (K : g ~ h) → ((concat-htpy' f K) ∘ (concat-inv-htpy' f K)) ~ id
-issec-concat-inv-htpy' f K L =
-  eq-htpy (λ x → issec-inv-concat' (f x) (K x) (L x))
+  (K : g ~ h)
+  where
 
-isretr-concat-inv-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x}
-  (K : g ~ h) → ((concat-inv-htpy' f K) ∘ (concat-htpy' f K)) ~ id
-isretr-concat-inv-htpy' f K L =
-  eq-htpy (λ x → isretr-inv-concat' (f x) (K x) (L x))
+  issec-concat-inv-htpy' :
+    ((concat-htpy' f K) ∘ (concat-inv-htpy' f K)) ~ id
+  issec-concat-inv-htpy' L =
+    eq-htpy (λ x → issec-inv-concat' (f x) (K x) (L x))
 
-is-equiv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} (K : g ~ h) →
-  is-equiv (concat-htpy' f K)
-is-equiv-concat-htpy' f K =
-  is-equiv-has-inverse
-    ( concat-inv-htpy' f K)
-    ( issec-concat-inv-htpy' f K)
-    ( isretr-concat-inv-htpy' f K)
+  isretr-concat-inv-htpy' :
+    ((concat-inv-htpy' f K) ∘ (concat-htpy' f K)) ~ id
+  isretr-concat-inv-htpy' L =
+    eq-htpy (λ x → isretr-inv-concat' (f x) (K x) (L x))
 
-equiv-concat-htpy' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) {g h : (x : A) → B x} (K : g ~ h) →
-  (f ~ g) ≃ (f ~ h)
-pr1 (equiv-concat-htpy' f K) = concat-htpy' f K
-pr2 (equiv-concat-htpy' f K) = is-equiv-concat-htpy' f K
+  is-equiv-concat-htpy' : is-equiv (concat-htpy' f K)
+  is-equiv-concat-htpy' =
+    is-equiv-has-inverse
+      ( concat-inv-htpy' f K)
+      ( issec-concat-inv-htpy')
+      ( isretr-concat-inv-htpy')
+
+  equiv-concat-htpy' : (f ~ g) ≃ (f ~ h)
+  equiv-concat-htpy' =
+    pair (concat-htpy' f K) is-equiv-concat-htpy'
 ```
 
 ### Transpositions of homotopies

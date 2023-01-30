@@ -89,6 +89,17 @@ concat-htpy' :
   (f : (x : A) → B x) {g h : (x : A) → B x} →
   g ~ h → f ~ g → f ~ h
 concat-htpy' f K H = H ∙h K
+
+concat-inv-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} →
+  f ~ g → (h : (x : A) → B x) → f ~ h → g ~ h
+concat-inv-htpy = concat-htpy ∘ inv-htpy
+
+concat-inv-htpy' :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (f : (x : A) → B x) {g h : (x : A) → B x} →
+  (g ~ h) → (f ~ h) → (f ~ g)
+concat-inv-htpy' f K = concat-htpy' f (inv-htpy K)
 ```
 
 ### Whiskering of homotopies
