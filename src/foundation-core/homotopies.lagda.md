@@ -180,6 +180,11 @@ module _
     (H : f ~ g) (K : g ~ h) →
     (inv-htpy (H ∙h K)) ~ ((inv-htpy K) ∙h (inv-htpy H))
   distributive-inv-concat-htpy H K x = distributive-inv-concat (H x) (K x)
+
+  inv-htpy-distributive-inv-concat-htpy :
+    (H : f ~ g) (K : g ~ h) →
+    ((inv-htpy K) ∙h (inv-htpy H)) ~ (inv-htpy (H ∙h K))
+  inv-htpy-distributive-inv-concat-htpy H K = inv-htpy (distributive-inv-concat-htpy H K)
 ```
 
 ### Naturality of homotopies with respect to identifications
