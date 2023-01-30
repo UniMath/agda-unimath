@@ -114,17 +114,16 @@ _·r_ = htpy-right-whisk
 ### Associativity of concatenation of homotopies
 
 ```agda
-assoc-htpy :
+module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (x : A) → B x}
-  (H : f ~ g) (K : g ~ h) (L : h ~ k) →
-  ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
-assoc-htpy H K L x = assoc (H x) (K x) (L x)
+  (H : f ~ g) (K : g ~ h) (L : h ~ k)
+  where
+  
+  assoc-htpy : ((H ∙h K) ∙h L) ~ (H ∙h (K ∙h L))
+  assoc-htpy x = assoc (H x) (K x) (L x)
 
-inv-htpy-assoc-htpy :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (x : A) → B x}
-  (H : f ~ g) (K : g ~ h) (L : h ~ k) →
-  (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
-inv-htpy-assoc-htpy H K L = inv-htpy (assoc-htpy H K L)
+  inv-htpy-assoc-htpy : (H ∙h (K ∙h L)) ~ ((H ∙h K) ∙h L)
+  inv-htpy-assoc-htpy = inv-htpy assoc-htpy
 ```
 
 ### Unit laws for homotopies
@@ -174,17 +173,17 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h)
   where
 
   distributive-inv-concat-htpy :
-    (H : f ~ g) (K : g ~ h) →
     (inv-htpy (H ∙h K)) ~ ((inv-htpy K) ∙h (inv-htpy H))
-  distributive-inv-concat-htpy H K x = distributive-inv-concat (H x) (K x)
+  distributive-inv-concat-htpy x = distributive-inv-concat (H x) (K x)
 
   inv-htpy-distributive-inv-concat-htpy :
-    (H : f ~ g) (K : g ~ h) →
     ((inv-htpy K) ∙h (inv-htpy H)) ~ (inv-htpy (H ∙h K))
-  inv-htpy-distributive-inv-concat-htpy H K = inv-htpy (distributive-inv-concat-htpy H K)
+  inv-htpy-distributive-inv-concat-htpy =
+    inv-htpy distributive-inv-concat-htpy
 ```
 
 ### Naturality of homotopies with respect to identifications
@@ -217,13 +216,15 @@ inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 ### A coherence for homotopies to the identity function
 
 ```agda
-coh-htpy-id :
-  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → (H ·r f) ~ (f ·l H)
-coh-htpy-id H x = is-injective-concat' (H x) (nat-htpy-id H (H x))
+module _
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
+  where
+  
+  coh-htpy-id : (H ·r f) ~ (f ·l H)
+  coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
 
-inv-htpy-coh-htpy-id :
-  {l : Level} {A : UU l} {f : A → A} (H : f ~ id) → (f ·l H) ~ (H ·r f)
-inv-htpy-coh-htpy-id = inv-htpy ∘ coh-htpy-id
+  inv-htpy-coh-htpy-id : (f ·l H) ~ (H ·r f)
+  inv-htpy-coh-htpy-id = inv-htpy coh-htpy-id
 ```
 
 ## See also
