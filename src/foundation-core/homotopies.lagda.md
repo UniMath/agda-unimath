@@ -141,8 +141,6 @@ module _
   inv-htpy-con-inv-htpy = inv-htpy con-inv-htpy
 ```
 
-## Properties
-
 ### Associativity of concatenation of homotopies
 
 ```agda
