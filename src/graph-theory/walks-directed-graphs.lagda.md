@@ -142,6 +142,22 @@ module _
     is-equiv-map-compute-total-walk-of-length-Directed-Graph x y
 ```
 
+### Concatenation of walks
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  concat-walk-Directed-Graph :
+    {x y z : vertex-Directed-Graph G} →
+    walk-Directed-Graph G x y → walk-Directed-Graph G y z →
+    walk-Directed-Graph G x z
+  concat-walk-Directed-Graph refl-walk-Directed-Graph v = v
+  concat-walk-Directed-Graph (cons-walk-Directed-Graph e u) v =
+    cons-walk-Directed-Graph e (concat-walk-Directed-Graph u v)
+```
+
 ## Properties
 
 ### The type of walks from `x` to `y` is a coproduct
@@ -452,4 +468,45 @@ module _
     walk-equiv-Directed-Graph
   pr2 (equiv-walk-equiv-Directed-Graph {x} {y}) =
     is-equiv-walk-equiv-Directed-Graph
+```
+
+### If `concat-walk-Directed-Graph u v ＝ refl-walk-Directed-Graph` then both `u` and `v` are `refl-walk-Directed-Graph`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  eq-is-refl-concat-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    (u : walk-Directed-Graph G x y) (v : walk-Directed-Graph G y x) →
+    ( concat-walk-Directed-Graph G u v ＝ refl-walk-Directed-Graph) →
+    x ＝ y
+  eq-is-refl-concat-walk-Directed-Graph
+    refl-walk-Directed-Graph .refl-walk-Directed-Graph refl =
+    refl
+
+  is-refl-left-is-refl-concat-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G}
+    (u : walk-Directed-Graph G x y) (v : walk-Directed-Graph G y x) →
+    (p : concat-walk-Directed-Graph G u v ＝ refl-walk-Directed-Graph) →
+    tr
+      ( walk-Directed-Graph G x)
+      ( eq-is-refl-concat-walk-Directed-Graph u v p)
+      ( refl-walk-Directed-Graph) ＝ u
+  is-refl-left-is-refl-concat-walk-Directed-Graph
+    refl-walk-Directed-Graph .refl-walk-Directed-Graph refl =
+    refl
+
+  is-refl-right-is-refl-concat-walk-Directed-Graph :
+    {x y : vertex-Directed-Graph G}
+    (u : walk-Directed-Graph G x y) (v : walk-Directed-Graph G y x) →
+    (p : concat-walk-Directed-Graph G u v ＝ refl-walk-Directed-Graph) →
+    tr
+      ( walk-Directed-Graph G y)
+      ( inv (eq-is-refl-concat-walk-Directed-Graph u v p))
+      ( refl-walk-Directed-Graph) ＝ v
+  is-refl-right-is-refl-concat-walk-Directed-Graph
+    refl-walk-Directed-Graph .refl-walk-Directed-Graph refl =
+    refl
 ```
