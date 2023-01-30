@@ -205,22 +205,8 @@ module _
   inv-left-unit-law-function-types = inv-left-unit-law-Π (λ _ → A)
 ```
 
-### Right zero law for function types
+## See also
 
-```agda
-module _
-  {l : Level} (A : UU l)
-  where
-
-  is-contr-function-types-unit : is-contr (A → unit)
-  is-contr-function-types-unit = is-contr-function-types is-contr-unit
-
-  right-zero-law-function-types : (A → unit) ≃ unit
-  pr1 right-zero-law-function-types = λ _ → star
-  pr2 right-zero-law-function-types =
-    is-equiv-terminal-map-is-contr is-contr-function-types-unit
-
-  inv-right-zero-law-function-types : unit ≃ (A → unit)
-  inv-right-zero-law-function-types =
-    inv-equiv right-zero-law-function-types
-```
+- [foundation-core.contractible-types](foundation-core.contractible-types.html)
+  That the unit type is the terminal type is a corollary of `is-contr-Π`, and may be
+  considered a right zero law for function types (`(A → unit) ≃ unit`).
