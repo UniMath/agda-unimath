@@ -19,6 +19,7 @@ open import graph-theory.embeddings-directed-graphs public
 open import graph-theory.embeddings-undirected-graphs public
 open import graph-theory.enriched-undirected-graphs public
 open import graph-theory.equivalences-enriched-undirected-graphs public
+open import graph-theory.equivalences-directed-graphs public
 open import graph-theory.equivalences-undirected-graphs public
 open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public

@@ -19,7 +19,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ev-pair)
 open import foundation.empty-types using (empty-Set)
 open import foundation.equivalences using
   ( _≃_; map-equiv; is-equiv-precomp-is-equiv; is-equiv-left-factor';
-    is-equiv-comp'; is-equiv-right-factor'; is-equiv-htpy-equiv;
+    is-equiv-comp; is-equiv-right-factor'; is-equiv-htpy-equiv;
     is-equiv-map-equiv; _∘e_; equiv-postcomp-equiv;
     inv-equiv; equiv-precomp-equiv; id-equiv)
 open import foundation.function-extensionality using (equiv-funext; eq-htpy)
@@ -86,7 +86,7 @@ abstract
         is-equiv-left-factor'
           ( precomp (map-Π (λ x → unit-trunc-Set)) (type-Set B))
           ( precomp (ev-Maybe {B = type-trunc-Set ∘ A}) (type-Set B))
-          ( is-equiv-comp'
+          ( is-equiv-comp
             ( precomp ev-Maybe (type-Set B))
             ( precomp
               ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)

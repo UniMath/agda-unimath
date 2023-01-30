@@ -14,7 +14,7 @@ open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.embeddings using
   ( _↪_; map-emb; id-emb; is-emb; is-emb-comp'; is-emb-map-emb)
 open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; triangle-section; issec-map-inv-is-equiv; _∘e_;
+  ( is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv; _∘e_;
     id-equiv; is-property-is-equiv; is-equiv-map-equiv; _≃_; map-equiv;
     inv-equiv)
 open import foundation.fibers-of-maps using (fib; reduce-Π-fib)

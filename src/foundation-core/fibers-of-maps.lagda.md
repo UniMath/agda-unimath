@@ -9,7 +9,7 @@ module foundation-core.fibers-of-maps where
 
 open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; is-fiberwise-equiv; is-equiv-comp)
+  ( is-equiv; is-equiv-has-inverse; _≃_; is-fiberwise-equiv)
 open import foundation-core.function-extensionality
 open import foundation-core.functions using (_∘_; id)
 open import foundation-core.homotopies using (_~_; refl-htpy)

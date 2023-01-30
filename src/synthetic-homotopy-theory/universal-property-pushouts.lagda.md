@@ -157,7 +157,7 @@ module _
     ( up-c : {l : Level} → universal-property-pushout l f g c) →
     {l : Level} → universal-property-pushout l f g d
   up-pushout-up-pushout-is-equiv is-equiv-h up-c Z =
-    is-equiv-comp
+    is-equiv-comp-htpy
       ( cocone-map f g d)
       ( cocone-map f g c)
       ( precomp h Z)
@@ -243,7 +243,7 @@ universal-property-pushout-pullback-property-pushout :
   pullback-property-pushout l f g c → universal-property-pushout l f g c
 universal-property-pushout-pullback-property-pushout
   l f g c pb-c Y =
-  is-equiv-comp
+  is-equiv-comp-htpy
     ( cocone-map f g c)
     ( tot (λ i' → tot (λ j' p → htpy-eq p)))
     ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y))

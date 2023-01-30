@@ -115,7 +115,7 @@ is-small-∉-𝕍 :
 is-small-∉-𝕍 l {l1} {X} {Y} H K =
   is-small-Π
     ( is-small-∈-𝕍 l {l1} {X} {Y} H K)
-    ( λ x → pair (raise-empty l) (equiv-raise-empty l))
+    ( λ x → pair (raise-empty l) (compute-raise-empty l))
 ```
 
 ### The resizing of a small multiset is small

@@ -7,6 +7,9 @@ module trees where
 
 open import trees.directed-trees public
 open import trees.elementhood-relation-w-types public
+open import trees.enriched-directed-trees public
+open import trees.equivalences-directed-trees public
+open import trees.equivalences-enriched-directed-trees public
 open import trees.extensional-w-types public
 open import trees.functoriality-w-types public
 open import trees.indexed-w-types public

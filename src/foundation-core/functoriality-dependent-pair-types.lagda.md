@@ -16,7 +16,7 @@ open import foundation-core.equality-dependent-pair-types using
   ( eq-pair-Σ; eq-pair-Σ')
 open import foundation-core.equivalences using
   ( is-equiv; is-equiv-has-inverse; _≃_; map-equiv; is-equiv-map-equiv;
-    is-equiv-comp; is-equiv-right-factor; is-fiberwise-equiv;
+    is-equiv-comp-htpy; is-equiv-right-factor; is-fiberwise-equiv;
     is-equiv-top-is-equiv-bottom-square; is-equiv-bottom-is-equiv-top-square)
 open import foundation-core.fibers-of-maps using
   ( fib; map-equiv-total-fib; is-equiv-map-equiv-total-fib)
@@ -320,7 +320,7 @@ module _
       (f : A → B) (g : (x : A) → C x → D (f x)) →
       is-equiv f → is-fiberwise-equiv g → is-equiv (map-Σ D f g)
     is-equiv-map-Σ f g is-equiv-f is-fiberwise-equiv-g =
-      is-equiv-comp
+      is-equiv-comp-htpy
         ( map-Σ D f g)
         ( map-Σ-map-base f D)
         ( tot g)

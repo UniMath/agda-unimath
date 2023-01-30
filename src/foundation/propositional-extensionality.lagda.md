@@ -3,45 +3,29 @@ title: Propositional extensionality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.propositional-extensionality where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; equiv-universal-property-contr; is-contr-Π;
-    is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( raise-empty-Prop; empty; raise-empty; is-empty-raise-empty)
-open import foundation.equivalences using
-  ( _≃_; id-equiv; is-equiv; map-inv-is-equiv; map-equiv; map-inv-equiv;
-    inv-equiv; _∘e_)
-open import foundation.functions using (id)
-open import foundation.functoriality-function-types using
-  ( equiv-postcomp)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl; equiv-tr)
-open import foundation.logical-equivalences using
-  ( _⇔_; equiv-equiv-iff; iff-eq; is-prop-logical-equivalence)
-open import foundation.negation using (neg-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-is-prop; is-prop-type-Prop;
-    is-proof-irrelevant-is-prop; is-prop-equiv)
-open import foundation.raising-universe-levels using (equiv-raise)
-open import foundation.sets using (is-set; Set)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( right-unit-law-prod-is-contr; left-unit-law-prod-is-contr)
-open import foundation.unit-type using
-  ( raise-unit-Prop; raise-star; is-contr-raise-unit; is-prop-raise-unit)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.univalent-type-families using (is-univalent)
-open import foundation.universal-property-empty-type using
-  ( universal-property-empty-is-empty)
-open import foundation.universe-levels using (Level; lsuc)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.univalent-type-families
+open import foundation.universal-property-empty-type
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -172,7 +156,7 @@ abstract
         ( λ P →
           inv-equiv
             ( ( inv-equiv
-                ( equiv-postcomp (type-Prop P) (equiv-raise l1 empty))) ∘e
+                ( equiv-postcomp (type-Prop P) (compute-raise l1 empty))) ∘e
               ( left-unit-law-prod-is-contr
                 ( universal-property-empty-is-empty
                   ( raise-empty l1)

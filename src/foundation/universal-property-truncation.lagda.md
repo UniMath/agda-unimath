@@ -492,7 +492,7 @@ module _
             ( ev-inl-inr (λ x → type-Set C))
             ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
             ( universal-property-coprod (type-Set C))
-            ( is-equiv-comp'
+            ( is-equiv-comp
               ( map-prod
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))
@@ -664,7 +664,7 @@ abstract
         is-equiv-left-factor'
           ( precomp (map-Π (λ x → unit-trunc-Set)) (type-Set B))
           ( precomp (ev-Maybe {B = type-trunc-Set ∘ A}) (type-Set B))
-          ( is-equiv-comp'
+          ( is-equiv-comp
             ( precomp ev-Maybe (type-Set B))
             ( precomp
               ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)

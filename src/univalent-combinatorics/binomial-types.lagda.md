@@ -28,7 +28,7 @@ open import foundation.decidable-propositions using
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
 open import foundation.embeddings using (is-emb)
 open import foundation.empty-types using
-  ( empty; raise-empty; equiv-raise-empty; ex-falso; is-empty; empty-Prop;
+  ( empty; raise-empty; compute-raise-empty; ex-falso; is-empty; empty-Prop;
     is-empty-raise-empty; raise-empty-Prop; equiv-is-empty)
 open import foundation.equivalences using
   ( _≃_; equiv-postcomp-equiv; inv-equiv; _∘e_; map-equiv; id-equiv;
@@ -230,7 +230,7 @@ abstract
         ( Fin-UU-Fin l zero-ℕ))
       ( is-contr-equiv
         ( empty ↪d X)
-        ( equiv-precomp-decidable-emb-equiv (equiv-raise-empty l) X)
+        ( equiv-precomp-decidable-emb-equiv (compute-raise-empty l) X)
         ( is-contr-equiv
           ( is-decidable-emb ex-falso)
           ( left-unit-law-Σ-is-contr (universal-property-empty' X) ex-falso)

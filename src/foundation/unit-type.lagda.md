@@ -3,25 +3,20 @@ title: The unit type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unit-type where
 
-open import foundation-core.constant-maps using (const)
-open import foundation-core.contractible-types using
-  ( is-contr; center; contraction; is-prop-is-contr; is-contr-equiv')
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.equivalences using (is-equiv; _≃_)
-open import foundation-core.identity-types using (refl)
-open import foundation-core.propositions using
-  ( is-prop; Prop; is-prop-equiv')
-open import foundation-core.sets using (is-set; Set)
-open import foundation-core.truncated-types using (is-trunc-succ-is-trunc)
-open import foundation-core.truncation-levels using (neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; lzero; UU)
+open import foundation-core.constant-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.raising-universe-levels using
-  ( raise; equiv-raise; map-raise)
+open import foundation.raising-universe-levels
 
 open import structured-types.pointed-types
 ```
@@ -77,8 +72,8 @@ raise-unit l = raise l unit
 raise-star : {l : Level} → raise l unit
 raise-star = map-raise star
 
-equiv-raise-unit : (l : Level) → unit ≃ raise-unit l
-equiv-raise-unit l = equiv-raise l unit
+compute-raise-unit : (l : Level) → unit ≃ raise-unit l
+compute-raise-unit l = compute-raise l unit
 ```
 
 ## Properties
@@ -142,13 +137,13 @@ abstract
   is-contr-raise-unit :
     {l1 : Level} → is-contr (raise-unit l1)
   is-contr-raise-unit {l1} =
-    is-contr-equiv' unit (equiv-raise l1 unit) is-contr-unit
+    is-contr-equiv' unit (compute-raise l1 unit) is-contr-unit
 
 abstract
   is-prop-raise-unit :
     {l1 : Level} → is-prop (raise-unit l1)
   is-prop-raise-unit {l1} =
-    is-prop-equiv' (equiv-raise l1 unit) is-prop-unit
+    is-prop-equiv' (compute-raise l1 unit) is-prop-unit
 
 raise-unit-Prop :
   (l1 : Level) → Prop l1

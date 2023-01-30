@@ -674,7 +674,7 @@ module _
       ( Fin (succ-ℕ (succ-ℕ n)) ≃
         raise l (Fin (succ-ℕ (succ-ℕ n))))
     sign-comp-aut-succ-succ-Fin n h =
-      h ∘e equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))
+      h ∘e compute-raise l (Fin (succ-ℕ (succ-ℕ n)))
 
 module _
   {l : Level}
@@ -694,7 +694,7 @@ module _
       ( sign-comp-aut-succ-succ-Fin)
       ( λ n →
         not-sign-comp-transposition-count
-          ( (succ-ℕ (succ-ℕ n), equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 
   eq-simpson-delooping-sign-homomorphism : (n : ℕ) →
@@ -742,7 +742,7 @@ module _
             ( sign-comp-aut-succ-succ-Fin)
             ( λ n →
               not-sign-comp-transposition-count
-                ( (succ-ℕ (succ-ℕ n), equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+                ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
                 ( star))
             ( n))
           ( sign-homomorphism
@@ -751,7 +751,7 @@ module _
         ( hom-inv-symmetric-group-equiv-Set
           ( Fin-Set (succ-ℕ (succ-ℕ n)))
           ( raise-Fin-Set l (succ-ℕ (succ-ℕ n)))
-          ( equiv-raise l (Fin (succ-ℕ (succ-ℕ n))))))
+          ( compute-raise l (Fin (succ-ℕ (succ-ℕ n))))))
   eq-simpson-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( λ n X → Fin n ≃ type-UU-Fin n X)
@@ -764,7 +764,7 @@ module _
       ( sign-comp-aut-succ-succ-Fin)
       ( λ n →
         not-sign-comp-transposition-count
-          ( (succ-ℕ (succ-ℕ n), equiv-raise l (Fin (succ-ℕ (succ-ℕ n)))))
+          ( (succ-ℕ (succ-ℕ n), compute-raise l (Fin (succ-ℕ (succ-ℕ n)))))
           ( star))
 ```
 

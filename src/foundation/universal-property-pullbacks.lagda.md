@@ -14,7 +14,7 @@ open import foundation.contractible-types using (is-contr; is-contr-equiv')
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
 open import foundation.equivalences using
   ( is-equiv; is-property-is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv;
-    _≃_; is-equiv-right-factor; is-equiv-comp; is-equiv-left-factor; map-equiv;
+    _≃_; is-equiv-right-factor; is-equiv-left-factor; map-equiv;
     id-equiv; _∘e_; map-inv-equiv; is-equiv-map-equiv)
 open import foundation.function-extensionality using (equiv-funext)
 open import foundation.functions using (_∘_)

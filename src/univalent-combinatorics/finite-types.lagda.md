@@ -3,82 +3,42 @@ title: Finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.finite-types where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; is-nonzero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-set-ℕ; ℕ-Set)
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types using
-  ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.1-types using (is-1-type; 1-Type)
-open import foundation.connected-components-universes using
-  ( equiv-component-UU-Level; equiv-component-UU; id-equiv-component-UU-Level;
-    id-equiv-component-UU; equiv-eq-component-UU-Level; equiv-eq-component-UU;
-    is-contr-total-equiv-component-UU-Level; is-contr-total-equiv-component-UU;
-    is-equiv-equiv-eq-component-UU-Level; is-equiv-equiv-eq-component-UU;
-    eq-equiv-component-UU-Level; eq-equiv-component-UU)
-open import foundation.contractible-types using
-  ( is-contr; equiv-is-contr; is-contr-Prop; is-contr-equiv';
-    is-contr-total-path)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-Prop;
-    has-decidable-equality-equiv')
-open import foundation.decidable-types using
-  ( is-decidable; is-inhabited-or-empty; is-inhabited-or-empty-Prop;
-    is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( empty; is-empty; ex-falso; is-empty-Prop; empty-Prop)
-open import foundation.equivalences using
-  ( id-equiv; _≃_; is-equiv; inv-equiv; _∘e_; map-equiv; equiv-precomp-equiv;
-    map-inv-equiv)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.identity-types using
-  ( refl; Id; _∙_; ap; tr; equiv-tr; inv)
-open import foundation.mere-equivalences using
-  ( mere-equiv-Prop; mere-equiv; is-set-mere-equiv')
-open import foundation.propositional-truncations using
-  ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
-    apply-universal-property-trunc-Prop; type-trunc-Prop; ind-trunc-Prop;
-    is-prop-type-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
-    all-elements-equal; is-prop-all-elements-equal; eq-is-prop; eq-is-prop';
-    equiv-prop; is-equiv-is-prop)
-open import foundation.raising-universe-levels using (equiv-raise)
-open import foundation.sets using
-  ( is-set; is-set-Prop; Id-Prop; is-set-equiv; is-set-equiv-is-set; Set)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.subuniverses using
-  ( extensionality-subuniverse; extensionality-fam-subuniverse)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-left-swap-Σ)
-open import foundation.type-arithmetic-empty-type using
-  ( left-unit-law-coprod)
-open import foundation.unit-type using (unit; star; is-contr-unit)
+open import foundation.0-connected-types
+open import foundation.1-types
+open import foundation.connected-components-universes
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.subuniverses
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
 open import foundation.univalence
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc; lzero)
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; count-empty; count-is-empty; count-unit; count-is-contr; count-Fin;
-    count-equiv; is-set-count; equiv-count; number-of-elements-count;
-    is-empty-is-zero-number-of-elements-count; is-inhabited-or-empty-count;
-    count-type-trunc-Prop; inv-equiv-count)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; raise-Fin; equiv-raise-Fin; is-injective-Fin; is-contr-Fin-one-ℕ;
-    is-set-Fin)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
@@ -299,7 +259,7 @@ pr2 (Fin-𝔽 k) = is-finite-Fin k
 
 has-cardinality-raise-Fin :
   {l : Level} (k : ℕ) → has-cardinality k (raise-Fin l k)
-has-cardinality-raise-Fin {l} k = unit-trunc-Prop (equiv-raise-Fin l k)
+has-cardinality-raise-Fin {l} k = unit-trunc-Prop (compute-raise-Fin l k)
 
 Fin-UU-Fin : (l : Level) (k : ℕ) → UU-Fin l k
 pr1 (Fin-UU-Fin l k) = raise-Fin l k
@@ -692,7 +652,7 @@ abstract
           ( ( eq-equiv-UU-Fin n (Fin-UU-Fin l n) A) ∘
             ( map-equiv
               ( equiv-precomp-equiv
-                ( inv-equiv (equiv-raise l (Fin n)))
+                ( inv-equiv (compute-raise l (Fin n)))
                 ( type-UU-Fin n A))))
           ( pr2 A))
 ```

@@ -3,37 +3,26 @@ title: Small types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.small-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
-  ( is-contr; equiv-is-contr; is-contr-equiv')
-open import foundation.coproduct-types using (_+_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv-map-equiv; map-inv-equiv; _∘e_; inv-equiv;
-    isretr-map-inv-equiv; equiv-inv-equiv; equiv-precomp-equiv; id-equiv)
-open import foundation.functoriality-coproduct-types using
-  ( equiv-coprod)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ; equiv-tot)
-open import foundation.identity-types using (equiv-tr; inv)
-open import foundation.mere-equivalences using (mere-equiv)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.mere-equivalences
 open import foundation.logical-equivalences
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; is-prop-is-proof-irrelevant; Prop)
-open import foundation.raising-universe-levels using (raise; equiv-raise)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-left-swap-Σ)
-open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -123,7 +112,7 @@ pr2 is-small' = id-equiv
 ```agda
 is-small-lmax : {l1 : Level} (l2 : Level) (X : UU l1) → is-small (l1 ⊔ l2) X
 pr1 (is-small-lmax l2 X) = raise l2 X
-pr2 (is-small-lmax l2 X) = equiv-raise l2 X
+pr2 (is-small-lmax l2 X) = compute-raise l2 X
 ```
 
 ### Every type of universe level `l` is `UU (lsuc l)`-small
