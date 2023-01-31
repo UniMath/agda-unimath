@@ -7,14 +7,8 @@ title: Natural transformations between functors between large precategories
 
 module category-theory.natural-transformations-large-precategories where
 
-open import category-theory.functors-large-precategories using
-  ( functor-Large-Precat; obj-functor-Large-Precat;
-    hom-functor-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-hom-Large-Precat; id-hom-Large-Precat;
-    left-unit-law-comp-hom-Large-Precat;
-    right-unit-law-comp-hom-Large-Precat)
+open import category-theory.functors-large-precategories
+open import category-theory.large-precategories
     
 open import foundation.identity-types
 open import foundation.universe-levels

@@ -7,8 +7,7 @@ title: Initial objects of a precategory
 
 module category-theory.initial-objects-precategories where
 
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat)
+open import category-theory.precategories
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation-core.identity-types

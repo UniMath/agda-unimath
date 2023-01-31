@@ -7,13 +7,7 @@ title: Isomorphisms in large precategories
 
 module category-theory.isomorphisms-large-precategories where
 
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-hom-Large-Precat; id-hom-Large-Precat;
-    right-unit-law-comp-hom-Large-Precat;
-    associative-comp-hom-Large-Precat; comp-hom-Large-Precat';
-    left-unit-law-comp-hom-Large-Precat; hom-Large-Precat;
-    is-set-type-hom-Large-Precat)
+open import category-theory.large-precategories
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types

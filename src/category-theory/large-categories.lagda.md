@@ -8,10 +8,8 @@ title: Large categories
 module category-theory.large-categories where
 
 open import Agda.Primitive using (Setω)
-open import category-theory.isomorphisms-large-precategories using
-  ( iso-eq-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat)
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.large-precategories
 open import foundation.equivalences
 open import foundation.universe-levels
 ```

@@ -7,15 +7,11 @@ title: Products in precategories
 
 module category-theory.exponential-objects-precategories where
 
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat;
-    id-hom-Precat)
-open import category-theory.products-precategories using
-  ( has-all-binary-products; object-product;
-    product-of-morphisms)
+open import category-theory.precategories
+open import category-theory.products-precategories
 open import foundation.dependent-pair-types
 open import foundation-core.identity-types
-open import foundation.unique-existence using (∃!)
+open import foundation.unique-existence
 open import foundation.universe-levels
 ```
 

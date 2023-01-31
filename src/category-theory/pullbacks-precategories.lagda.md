@@ -7,14 +7,13 @@ title: Pullbacks in precategories
 
 module category-theory.pullbacks-precategories where
 
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat )
+open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.unique-existence using (∃!)
+open import foundation.unique-existence
 open import foundation.universe-levels
 ```
 

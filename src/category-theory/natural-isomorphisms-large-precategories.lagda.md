@@ -7,17 +7,10 @@ title: Natural isomorphisms between functors on large precategories
 
 module category-theory.natural-isomorphisms-large-precategories where
 
-open import category-theory.functors-large-precategories using
-  ( functor-Large-Precat; obj-functor-Large-Precat;
-    hom-functor-Large-Precat)
-open import category-theory.isomorphisms-large-precategories using
-  ( iso-Large-Precat; hom-iso-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat)
-open import category-theory.natural-transformations-large-precategories using
-  ( square-Large-Precat; natural-transformation-Large-Precat;
-    obj-natural-transformation-Large-Precat;
-    coherence-square-natural-transformation-Large-Precat)
+open import category-theory.functors-large-precategories
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.large-precategories
+open import category-theory.natural-transformations-large-precategories
     
 open import foundation.universe-levels
 ```

@@ -7,9 +7,7 @@ title: Functors between precategories
 
 module category-theory.functors-precategories where
 
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat;
-    id-hom-Precat; is-set-type-hom-Precat)
+open import category-theory.precategories
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.functions

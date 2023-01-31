@@ -12,9 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.identity-types
-open import foundation.propositions using
-  ( all-elements-equal; prod-Prop; Π-Prop; Π-Prop'; is-prop;
-    is-prop-all-elements-equal)
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels

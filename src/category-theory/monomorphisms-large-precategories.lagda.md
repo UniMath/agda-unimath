@@ -7,13 +7,8 @@ title: Monomorphisms in large precategories
 
 module category-theory.monomorphisms-large-precategories where
 
-open import category-theory.isomorphisms-large-precategories using
-  ( iso-Large-Precat; hom-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat;
-    hom-inv-iso-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-hom-Large-Precat; left-unit-law-comp-hom-Large-Precat;
-    associative-comp-hom-Large-Precat; is-set-type-hom-Large-Precat)
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.large-precategories
 
 open import foundation.embeddings
 open import foundation.equivalences

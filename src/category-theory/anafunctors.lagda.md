@@ -7,17 +7,10 @@ title: Anafunctors
 
 module category-theory.anafunctors where
 
-open import category-theory.categories using
-  ( Cat; precat-Cat; obj-Cat; type-hom-Cat)
-open import category-theory.functors-precategories using
-  ( functor-Precat; obj-functor-Precat; hom-functor-Precat;
-    respects-id-functor-Precat; respects-comp-functor-Precat)
-open import category-theory.isomorphisms-precategories using
-  ( iso-Precat; hom-iso-Precat; hom-inv-iso-Precat; id-iso-Precat;
-    issec-hom-inv-iso-Precat; isretr-hom-inv-iso-Precat)
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; id-hom-Precat; comp-hom-Precat;
-    comp-hom-Precat'; right-unit-law-comp-hom-Precat; assoc-comp-hom-Precat)
+open import category-theory.categories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-precategories
+open import category-theory.precategories
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

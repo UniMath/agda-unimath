@@ -11,7 +11,7 @@ open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat; hom-Large-Precat; id-hom-Large-Precat;
     comp-hom-Large-Precat; associative-comp-hom-Large-Precat;
     left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
-open import category-theory.precategories using (Precat)
+open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels

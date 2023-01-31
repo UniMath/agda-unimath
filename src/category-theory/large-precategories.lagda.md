@@ -11,8 +11,7 @@ open import Agda.Primitive using (Setω)
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.universe-levels using
-  ( UU; Level; lsuc; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

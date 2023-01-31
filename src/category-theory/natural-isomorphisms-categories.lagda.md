@@ -7,12 +7,10 @@ title: Natural isomorphisms between functors between categories
 
 module category-theory.natural-isomorphisms-categories where
 
-open import category-theory.categories using (Cat; precat-Cat)
-open import category-theory.functors-categories using (functor-Cat)
-open import category-theory.natural-isomorphisms-precategories using
-  ( is-nat-iso-Precat; nat-iso-Precat)
-open import category-theory.natural-transformations-categories using
-  ( nat-trans-Cat)
+open import category-theory.categories
+open import category-theory.functors-categories
+open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-transformations-categories
 
 open import foundation.universe-levels
 ```

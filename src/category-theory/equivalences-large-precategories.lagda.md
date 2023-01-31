@@ -8,13 +8,9 @@ title: Equivalences between large precategories
 module category-theory.equivalences-large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import category-theory.functors-large-precategories using
-  ( functor-Large-Precat; comp-functor-Large-Precat;
-    id-functor-Large-Precat)
-open import category-theory.natural-isomorphisms-large-precategories using
-  ( natural-isomorphism-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat)
+open import category-theory.functors-large-precategories
+open import category-theory.natural-isomorphisms-large-precategories
+open import category-theory.large-precategories
 open import foundation.universe-levels
 ```
 

@@ -7,12 +7,8 @@ title: Functors between categories
 
 module category-theory.functors-categories where
 
-open import category-theory.categories using
-  ( Cat; precat-Cat; obj-Cat; type-hom-Cat; comp-hom-Cat; id-hom-Cat)
-open import category-theory.functors-precategories using
-  ( functor-Precat; respects-comp-functor-Precat;
-    respects-id-functor-Precat; id-functor-Precat;
-    comp-functor-Precat)
+open import category-theory.categories
+open import category-theory.functors-precategories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels

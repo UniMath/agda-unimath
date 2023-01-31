@@ -13,7 +13,7 @@ open import category-theory.terminal-objects-precategories
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unique-existence using (∃!)
+open import foundation.unique-existence
 open import foundation.universe-levels
 ```
 
