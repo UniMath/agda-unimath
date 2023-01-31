@@ -393,6 +393,7 @@ open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.symmetric-difference
+open import foundation.symmetric-identity-types
 open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types

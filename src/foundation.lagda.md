@@ -188,6 +188,8 @@ open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
+open import foundation.symmetric-difference public
+open import foundation.symmetric-identity-types public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
