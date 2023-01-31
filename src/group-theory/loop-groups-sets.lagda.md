@@ -38,7 +38,7 @@ open import group-theory.homomorphisms-groups using
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
 open import group-theory.isomorphisms-groups
 open import group-theory.monoids
-open import group-theory.semigroups using (has-associative-mul-Set; Semigroup)
+open import group-theory.semigroups
 open import group-theory.symmetric-groups using (symmetric-Group; iso-symmetric-group-equiv-Set)
 ```
 

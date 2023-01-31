@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 open import group-theory.monoids using
   ( Monoid; type-Monoid; is-unital-Semigroup; is-unital-Semigroup-Prop)
-open import group-theory.semigroups using (mul-Semigroup)
+open import group-theory.semigroups
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-function-types using

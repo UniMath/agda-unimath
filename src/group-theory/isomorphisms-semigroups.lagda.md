@@ -35,8 +35,7 @@ open import group-theory.homomorphisms-semigroups using
     map-hom-Semigroup; preserves-mul-Semigroup; eq-htpy-hom-Semigroup)
 open import group-theory.precategory-of-semigroups using
   ( Semigroup-Large-Precat)
-open import group-theory.semigroups using
-  ( Semigroup; mul-Semigroup; type-Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

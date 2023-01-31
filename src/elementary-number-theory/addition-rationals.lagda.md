@@ -10,8 +10,7 @@ module elementary-number-theory.addition-rationals where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-mul-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ)
+open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers using
   ( ℚ; zero-ℚ; in-fraction-ℤ; is-prop-is-reduced-fraction-ℤ )
 

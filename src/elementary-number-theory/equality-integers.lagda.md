@@ -8,8 +8,7 @@ title: Equality of integers
 module elementary-number-theory.equality-integers where
 
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ; ℤ-Set)
+open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types

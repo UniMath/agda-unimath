@@ -12,7 +12,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces using (Ω)
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 ```agda

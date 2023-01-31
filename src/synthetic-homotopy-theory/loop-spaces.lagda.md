@@ -7,15 +7,12 @@ module synthetic-homotopy-theory.loop-spaces where
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.identity-types using
-  ( Id; refl; _∙_; inv; assoc; left-unit; right-unit; left-inv; right-inv;
-    is-binary-equiv-concat)
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.coherent-h-spaces
 open import structured-types.magmas
-open import structured-types.pointed-equivalences using
-  ( _≃*_; equiv-pointed-equiv)
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```

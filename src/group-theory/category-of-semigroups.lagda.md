@@ -22,7 +22,7 @@ open import group-theory.isomorphisms-semigroups using
     type-iso-Semigroup)
 open import group-theory.precategory-of-semigroups using
   ( Semigroup-Large-Precat)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

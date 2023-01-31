@@ -7,21 +7,13 @@ module synthetic-homotopy-theory.triple-loop-spaces where
 
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.path-algebra using
-  ( x-concat-Id³; y-concat-Id³; z-concat-Id³;
-    i-concat-Id⁴; j-concat-Id⁴; k-concat-Id⁴; left-unit-law-z-concat-Id³;
-    left-unit-law-horizontal-concat-Id²; interchange-x-y-concat-Id³;
-    interchange-x-z-concat-Id³; interchange-y-z-concat-Id³;
-    right-unit-law-z-concat-Id³)
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.double-loop-spaces using
-  ( refl-Ω²; left-unit-law-horizontal-concat-Ω²;
-    right-unit-law-horizontal-concat-Ω²)
-open import synthetic-homotopy-theory.iterated-loop-spaces using
-  ( iterated-loop-space)
+open import synthetic-homotopy-theory.double-loop-spaces
+open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
 
 ```agda

@@ -18,7 +18,7 @@ open import group-theory.homomorphisms-semigroups using
   ( hom-Semigroup; comp-hom-Semigroup; id-hom-Semigroup;
     associative-comp-hom-Semigroup; left-unit-law-comp-hom-Semigroup;
     right-unit-law-comp-hom-Semigroup)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

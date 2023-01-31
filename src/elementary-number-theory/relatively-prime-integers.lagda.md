@@ -7,8 +7,7 @@ title: Relatively prime integers
 
 module elementary-number-theory.relatively-prime-integers where
 
-open import elementary-number-theory.integers using
-  ( ℤ; is-one-ℤ; is-set-ℤ; one-ℤ)
+open import elementary-number-theory.integers
 open import elementary-number-theory.greatest-common-divisor-integers using
   ( gcd-ℤ)
 

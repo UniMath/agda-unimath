@@ -33,8 +33,7 @@ open import group-theory.groups using
     is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
     preserves-concat-mul-list-Group; inv-inv-Group; inv-unit-Group)
 open import group-theory.monoids using (is-unital-Semigroup)
-open import group-theory.semigroups using
-  ( has-associative-mul-Set; Semigroup)
+open import group-theory.semigroups
 
 open import univalent-combinatorics.lists using (list; concat-list)
 ```

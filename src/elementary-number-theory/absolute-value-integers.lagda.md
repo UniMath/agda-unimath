@@ -14,8 +14,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers using
   (_≤-ℕ_; refl-leq-ℕ; preserves-leq-succ-ℕ; succ-leq-ℕ;
     concatenate-eq-leq-eq-ℕ; transitive-leq-ℕ)
-open import elementary-number-theory.integers using
-  ( ℤ; int-ℕ; neg-ℤ; zero-ℤ; is-zero-ℤ; succ-ℤ; pred-ℤ; is-positive-ℤ; is-nonnegative-ℤ; is-nonnegative-is-positive-ℤ; is-injective-int-ℕ)
+open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers

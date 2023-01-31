@@ -23,7 +23,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.semigroups
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types

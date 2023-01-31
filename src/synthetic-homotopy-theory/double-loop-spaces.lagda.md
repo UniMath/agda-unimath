@@ -6,16 +6,12 @@
 module synthetic-homotopy-theory.double-loop-spaces where
 
 open import foundation.identity-types
-open import foundation.path-algebra using
-  ( vertical-concat-Id²; horizontal-concat-Id²;
-    left-unit-law-horizontal-concat-Id²; right-unit-law-horizontal-concat-Id²;
-    interchange-Id²; z-concat-Id³; y-concat-Id³)
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.iterated-loop-spaces using
-  ( iterated-loop-space)
+open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
 
 ## Definition

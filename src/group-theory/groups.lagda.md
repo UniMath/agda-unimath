@@ -29,8 +29,7 @@ open import foundation.universe-levels
 
 open import group-theory.monoids using
   ( is-unital-Semigroup; Monoid; is-prop-is-unital-Semigroup)
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul)
+open import group-theory.semigroups
 
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms using

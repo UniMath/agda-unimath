@@ -4,16 +4,13 @@
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.integers using
-  ( ℤ; succ-ℤ; zero-ℤ; neg-ℤ; ℤ-Endo)
+open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences using
-  ( is-equiv; _≃_; is-property-is-equiv; is-equiv-htpy; is-equiv-id; _∘e_;
-    map-equiv; equiv-postcomp-equiv; equiv-ap)
+open import foundation.equivalences
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
@@ -28,23 +25,15 @@ open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.initial-pointed-type-equipped-with-automorphism
-  using
-  ( ℤ-Pointed-Type-With-Aut; is-initial-ℤ-Pointed-Type-With-Aut)
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.pointed-types
-open import structured-types.pointed-types-equipped-with-automorphisms using
-  ( hom-Pointed-Type-With-Aut)
+open import structured-types.pointed-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+open import synthetic-homotopy-theory.loop-spaces
 
-open import univalent-combinatorics.cyclic-types using
-  ( Cyclic-Type; ℤ-Mod-Cyclic-Type; Cyclic-Type-Pointed-Type; endo-Cyclic-Type;
-    type-Cyclic-Type; endomorphism-Cyclic-Type; equiv-Cyclic-Type;
-    id-equiv-Cyclic-Type; equiv-eq-Cyclic-Type;
-    is-contr-total-equiv-Cyclic-Type; is-equiv-equiv-eq-Cyclic-Type;
-    extensionality-Cyclic-Type)
+open import univalent-combinatorics.cyclic-types
 ```
 
 ```agda

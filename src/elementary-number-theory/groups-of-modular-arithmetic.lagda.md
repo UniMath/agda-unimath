@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups using (Ab)
 open import group-theory.groups
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

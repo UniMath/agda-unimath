@@ -12,8 +12,7 @@ open import elementary-number-theory.absolute-value-integers using
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; left-zero-law-diff-ℤ; right-zero-law-diff-ℤ; diff-succ-ℤ)
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; int-ℕ; succ-int-ℕ; is-nonnegative-ℤ)
+open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.equational-reasoning

@@ -12,8 +12,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup)
+open import group-theory.semigroups
 
 open import order-theory.least-upper-bounds-posets using
   ( has-least-binary-upper-bound-poset-Prop;

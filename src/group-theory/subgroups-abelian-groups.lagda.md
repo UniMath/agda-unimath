@@ -21,7 +21,7 @@ open import group-theory.embeddings-groups using
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups using
   ( preserves-add-Ab; type-hom-Ab; preserves-zero-Ab; preserves-negatives-Ab)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.semigroups
 open import group-theory.subgroups using
   ( subset-Group; is-set-subset-Group; contains-unit-subset-Group;
     is-prop-contains-unit-subset-Group; is-closed-under-mul-subset-Group;

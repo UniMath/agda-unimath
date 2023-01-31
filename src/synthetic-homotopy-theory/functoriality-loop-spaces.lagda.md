@@ -13,13 +13,10 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
-open import structured-types.pointed-maps using
-  ( _→*_; preserves-point-pointed-map; map-pointed-map)
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.loop-spaces using
-  ( type-Ω; tr-type-Ω; preserves-refl-tr-Ω; Ω; mul-Ω; preserves-mul-tr-Ω; inv-Ω;
-    preserves-inv-tr-Ω; is-equiv-tr-type-Ω)
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 ## Idea

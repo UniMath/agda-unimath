@@ -26,7 +26,7 @@ open import foundation.negation
 open import foundation.universe-levels
 
 open import group-theory.monoids using (Monoid)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Definition

@@ -33,8 +33,7 @@ open import group-theory.abelian-groups using
 open import group-theory.groups
 open import group-theory.monoids using
   ( Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
-open import group-theory.semigroups using
-  ( has-associative-mul-Set; Semigroup)
+open import group-theory.semigroups
 
 open import univalent-combinatorics.lists using (list; concat-list)
 ```

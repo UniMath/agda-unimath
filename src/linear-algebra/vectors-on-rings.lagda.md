@@ -70,7 +70,7 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  open import group-theory.semigroups using (Semigroup)
+  open import group-theory.semigroups
   open import group-theory.monoids using (Monoid)
   open import group-theory.commutative-monoids using (Commutative-Monoid)
 
