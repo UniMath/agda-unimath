@@ -41,7 +41,7 @@ module _
     extensionality-type-subtype
       ( is-equiv-Prop)
       ( pr2 f)
-      ( refl-htpy {f = pr1 f})
+      ( refl-htpy' (pr1 f))
       ( λ g → equiv-funext)
     where
       is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
@@ -62,9 +62,6 @@ module _
                 (( is-equiv-precomp-Π-is-equiv f H) (λ y → A))
                 ( id))))
           ( H)
-  
-  refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
-  refl-htpy-equiv e = refl-htpy
 
   abstract
     is-contr-total-htpy-equiv :
@@ -74,9 +71,17 @@ module _
         ( λ f → map-equiv (extensionality-equiv e f))
         ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
 
+  refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
+  refl-htpy-equiv e = refl-htpy
+
   eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → e ＝ e'
   eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
 
   htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
   htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
+
+  htpy-eq-map-equiv :
+    {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → htpy-equiv e e'
+  htpy-eq-map-equiv = htpy-eq
 ```
+ 

@@ -7,19 +7,17 @@ title: Functoriality of propositional truncations
 
 module foundation.functoriality-propositional-truncation where
 
-open import foundation.contractible-types using
-  ( is-contr; center; contraction)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv; inv-equiv)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy; _·l_; _∙h_; _·r_)
-open import foundation.identity-types using (ap)
-open import foundation.propositional-truncations using
-  ( trunc-Prop; unit-trunc-Prop; universal-property-trunc-Prop; type-trunc-Prop;
-    is-prop-type-trunc-Prop)
-open import foundation.propositions using (type-hom-Prop; is-equiv-is-prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.function-extensionality using (htpy-eq)
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
+
+open import foundation.propositional-truncations
 ```
 
 ## Idea

@@ -627,7 +627,7 @@ module _
           ( ( ap
               ( λ x → ((inv-equiv equiv2 ∘e equiv2) ∘e equiv1) ∘e x)
               ( inv (left-inverse-law-equiv equiv2))) ∙
-          ( ( ( eq-htpy-equiv refl-htpy) ∙
+          ( ( ( eq-eq-map-equiv refl) ∙
               ( ap (λ x → inv-equiv equiv2 ∘e (x ∘e equiv2)) p)) ∙
             ( ( ap
                 ( λ x → inv-equiv equiv2 ∘e x)
@@ -721,11 +721,11 @@ preserves-add-aut-point-Fin-two-ℕ :
   aut-point-Fin-two-ℕ (add-Fin 2 a b) ＝
   ( aut-point-Fin-two-ℕ a ∘e aut-point-Fin-two-ℕ b)
 preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inl (inr star)) =
-  eq-htpy-equiv refl-htpy
+  eq-eq-map-equiv refl
 preserves-add-aut-point-Fin-two-ℕ (inl (inr star)) (inr star) =
-  eq-htpy-equiv refl-htpy
+  eq-eq-map-equiv refl
 preserves-add-aut-point-Fin-two-ℕ (inr star) (inl (inr star)) =
-  eq-htpy-equiv refl-htpy
+  eq-eq-map-equiv refl
 preserves-add-aut-point-Fin-two-ℕ (inr star) (inr star) =
   eq-htpy-equiv (λ x → inv (is-involution-aut-Fin-two-ℕ (equiv-succ-Fin 2) x))
 ```

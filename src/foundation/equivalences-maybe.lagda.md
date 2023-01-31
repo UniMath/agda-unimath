@@ -7,39 +7,26 @@ title: Equivalences on Maybe
 
 module foundation.equivalences-maybe where
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_; map-emb)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equality-coproduct-types using (is-set-coprod)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; map-equiv; inv-equiv; map-inv-equiv;
-    issec-map-inv-equiv; isretr-map-inv-equiv; is-equiv; is-equiv-has-inverse;
-    id-equiv)
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; eq-htpy-equiv; htpy-eq-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-coproduct-types using
-  ( compose-map-coprod; equiv-coprod; retr-equiv-coprod)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (_＝_; _∙_; inv; refl; ap)
-open import foundation.injective-maps using
-  ( is-injective; is-injective-map-equiv; is-injective-emb)
-open import foundation.maybe using
-  ( Maybe; is-exception-Maybe; is-not-exception-Maybe; exception-Maybe;
-    is-not-exception-unit-Maybe; is-value-Maybe; value-is-value-Maybe;
-    is-value-is-not-exception-Maybe; eq-is-value-Maybe;
-    is-decidable-is-exception-Maybe; is-injective-unit-Maybe;
-    is-not-exception-is-value-Maybe; maybe-structure)
-open import foundation.unit-type using (is-set-unit; unit; star)
-open import foundation.universal-property-maybe using (ind-Maybe)
-open import foundation.universe-levels using (Level; UU)
-open import foundation.sets using
-  ( Id-Prop; Set; type-Set; is-set-type-Set)
+open import foundation-core.coproduct-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.empty-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 
-open import foundation-core.equality-dependent-pair-types using
-  ( eq-pair-Σ; pair-eq-Σ)
-open import foundation-core.propositions using (eq-is-prop)
+open import foundation.equality-coproduct-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
+open import foundation.functoriality-coproduct-types
+open import foundation.injective-maps
+open import foundation.maybe
+open import foundation.unit-type
+open import foundation.universal-property-maybe
 ```
 
 ## Idea
@@ -409,7 +396,7 @@ module _
                   ( is-set-coprod (is-set-type-Set X) is-set-unit))
                 ( map-equiv (pr1 f) (inr star))
                 ( inr star))))))
-      ( λ f → eq-htpy-equiv refl-htpy)
+      ( λ f → eq-eq-map-equiv refl)
     where
     p : (f : ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
                  ( λ e → map-equiv e (inr star) ＝ inr star)))

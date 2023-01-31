@@ -9,7 +9,6 @@ module group-theory.group-actions where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
 open import foundation.equivalences using ( _≃_; map-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions using (id)
 open import foundation.homotopies using (_~_)

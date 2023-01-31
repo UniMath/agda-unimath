@@ -82,7 +82,7 @@ abstract
                 ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
                 ( type-Set B))
               ( is-equiv-ev-pair)
-              ( is-equiv-htpy-equiv
+              ( pr2
                 ( ( ( pair
                       ( precomp
                         ( (map-Π (λ x → unit-trunc-Set)))
@@ -100,14 +100,13 @@ abstract
                           ( pr1
                             ( center
                               ( distributive-trunc-Π-Fin-Set k (A ∘ inl)))))
-                        ( Π-Set' (A (inr star)) (λ a → B)))) ∘e
+                        ( Π-Set' (A (inr star)) (λ a → B))))∘e
                     ( equiv-postcomp
                       ( (x : Fin k) → type-trunc-Set (A (inl x)))
                       ( equiv-universal-property-trunc-Set
                         ( A (inr star))
                         ( B)))) ∘e
-                  ( equiv-ev-pair))
-                ( refl-htpy)))
+                  ( equiv-ev-pair))))
             ( is-equiv-precomp-is-equiv
               ( ev-Maybe)
               ( dependent-universal-property-Maybe)

@@ -7,41 +7,30 @@ title: Fiber inclusions
 
 module foundation.fiber-inclusions where
 
-open import foundation.0-maps using (is-0-map)
-open import foundation.1-types using
-  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.cones-pullbacks using (cone)
-open import foundation.contractible-maps using
-  ( is-contr-map; is-contr-map-is-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.equality-dependent-pair-types using
-  ( equiv-pair-eq-Σ)
-open import foundation.equivalences using (_≃_; _∘e_; is-equiv-comp)
-open import foundation.faithful-maps using
-  ( is-faithful; is-faithful-is-0-map; faithful-map)
-open import foundation.fibers-of-maps using
-  ( fib; cone-fiber; map-inv-fib-pr1; is-equiv-map-inv-fib-pr1;
-    is-pullback-cone-fiber)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation.homotopies using (refl-htpy)
-open import foundation.identity-types using (_＝_; is-equiv-tr)
-open import foundation.propositional-maps using
-  ( is-prop-map; is-emb-is-prop-map)
-open import foundation.propositions using (is-prop)
-open import foundation.pullbacks using (is-pullback; gap)
-open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
-open import foundation.truncated-maps using (is-trunc-map)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-equiv'; is-trunc-equiv)
-open import foundation.truncation-levels using
-  ( 𝕋; succ-𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( right-unit-law-Σ-is-contr; equiv-left-swap-Σ)
-open import foundation.unit-type using
-  ( raise-unit; raise-star; pt; terminal-map)
-open import foundation.universe-levels using (Level; UU)
+open import foundation-core.0-maps
+open import foundation-core.1-types
+open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.faithful-maps
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.pullbacks
+open import foundation-core.sets
+open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
+
+open import foundation.fibers-of-maps
+open import foundation.identity-types
+open import foundation.unit-type
 ```
 
 ## Idea

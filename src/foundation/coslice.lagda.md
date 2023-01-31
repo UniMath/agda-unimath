@@ -7,17 +7,15 @@ title: Morphisms in the coslice category of types
 
 module foundation.coslice where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (_≃_; map-inv-equiv)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.homotopies using (_~_; _·r_; _∙h_; refl-htpy)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.retractions using (retr)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
 open import foundation.function-extensionality using (equiv-funext)
-open import foundation.structure-identity-principle using
-  ( extensionality-Σ)
+open import foundation.structure-identity-principle
 ```
 
 ## Idea
@@ -76,3 +74,4 @@ module _
   eq-htpy-hom-coslice h k H K =
     map-inv-equiv (extensionality-hom-coslice h k) (pair H K)
 ```
+ 

@@ -7,44 +7,31 @@ title: Functoriality of coproduct types
 
 module foundation.functoriality-coproduct-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; is-contr-equiv)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; is-injective-inl; neq-inr-inl; is-left; is-right; ind-coprod;
-    is-prop-is-left; is-prop-is-right; equiv-left-summand; equiv-right-summand;
-    isretr-map-inv-equiv-left-summand; isretr-map-inv-equiv-right-summand)
-open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equality-coproduct-types using
-  ( compute-eq-coprod-inl-inl; compute-eq-coprod-inr-inr;
-    map-compute-eq-coprod-inl-inl; is-empty-eq-coprod-inr-inl;
-    is-empty-eq-coprod-inl-inr; map-compute-eq-coprod-inr-inr)
-open import foundation.equivalences using
-  ( inv-equiv; is-equiv; is-equiv-has-inverse; map-equiv; 
-    map-inv-equiv; left-inverse-law-equiv; right-inverse-law-equiv; _≃_; _∘e_;
-    is-equiv-map-equiv; isretr-map-inv-equiv)
-open import foundation.equivalence-extensionality using (htpy-equiv; eq-htpy-equiv)
-open import foundation.empty-types using (ex-falso)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.function-extensionality using (equiv-funext)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-cartesian-product-types using (equiv-prod)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.homotopies using
-  ( _~_; inv-htpy; _∙h_; is-contr-total-htpy'; refl-htpy)
-open import foundation.identity-types using (_＝_; inv; refl; ap; _∙_; tr)
-open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.negation using (¬)
-open import foundation.propositions using (eq-is-prop)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.unit-type using (star)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-dependent-universal-property-coprod)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-coproduct-types
+open import foundation.equivalences
+open import foundation.equivalence-extensionality using
+  ( htpy-equiv; eq-htpy-equiv)
+open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.propositions
+open import foundation.structure-identity-principle
+open import foundation.unit-type
+open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -484,8 +471,8 @@ module _ {i j k l : Level}
     (map-mutually-exclusive-coprod ∘ map-inv-mutually-exclusive-coprod) ~ id
   isretr-map-inv-mutually-exclusive-coprod (pair e₁ e₂) =
     eq-pair
-      (eq-htpy-equiv refl-htpy)
-      (eq-htpy-equiv refl-htpy)
+      (eq-eq-map-equiv refl)
+      (eq-eq-map-equiv refl)
 
   issec-map-inv-mutually-exclusive-coprod :
     (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id

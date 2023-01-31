@@ -7,23 +7,17 @@ module foundation.univalence where
 
 open import foundation-core.univalence public
 
-open import foundation-core.contractible-types using (is-contr; is-contr-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation-core.homotopies using (refl-htpy)
-open import foundation-core.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using
-  ( _≃_; map-inv-is-equiv; id-equiv; is-equiv; _∘e_;
-    map-equiv; right-inverse-law-equiv; inv-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
-open import foundation.injective-maps using (is-injective-map-equiv)
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.injective-maps
 ```
 
 ## Idea
@@ -78,7 +72,7 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```agda
 comp-equiv-eq : {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-comp-equiv-eq refl refl = eq-htpy-equiv refl-htpy
+comp-equiv-eq refl refl = eq-eq-map-equiv refl
 
 comp-eq-equiv : {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
@@ -94,7 +88,7 @@ comp-eq-equiv A B C f g =
 
 commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
-commutativity-inv-equiv-eq A .A refl = eq-htpy-equiv refl-htpy
+commutativity-inv-equiv-eq A .A refl = eq-eq-map-equiv refl
 
 commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
