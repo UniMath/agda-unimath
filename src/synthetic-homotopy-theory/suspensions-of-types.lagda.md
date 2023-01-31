@@ -134,6 +134,54 @@ pr2 (suspension-Pointed-Type X) = N-susp
 
 ## Properties
 
+#### Characterization of equalities in `suspension-structure`
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2}
+  where
+  
+  htpy-suspension-structure :
+    (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
+  htpy-suspension-structure c c' =
+    Σ ( (N-suspension-structure c) ＝ (N-suspension-structure c'))
+      ( λ p →
+        Σ ( ( S-suspension-structure c) ＝ ( S-suspension-structure c'))
+          ( λ q →
+            ( x : X) →
+            ( merid-suspension-structure c x ∙ q) ＝
+            ( p ∙ merid-suspension-structure c' x)))
+
+  extensionality-suspension-structure :
+    (c c' : suspension-structure X Z) → 
+    (c ＝ c') ≃ (htpy-suspension-structure c c')
+  extensionality-suspension-structure (N , S , merid) =
+    extensionality-Σ
+      ( λ y p →
+        Σ (S ＝ pr1 y) (λ q → (x : X) → (merid x ∙ q) ＝ (p ∙ pr2 y x)))
+      ( refl)
+      ( refl , right-unit-htpy)
+      ( λ z → id-equiv)
+      ( extensionality-Σ
+        ( λ H q → (x : X) → (merid x ∙ q) ＝ H x)
+        ( refl)
+        ( right-unit-htpy)
+        ( λ z → id-equiv)
+        ( λ H → equiv-concat-htpy right-unit-htpy H ∘e equiv-funext))
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c c' : suspension-structure X Z}
+  where
+
+  htpy-eq-suspension-structure : (c ＝ c') → htpy-suspension-structure c c'
+  htpy-eq-suspension-structure =
+    map-equiv (extensionality-suspension-structure c c')
+
+  eq-htpy-suspension-structure : htpy-suspension-structure c c' → (c ＝ c')
+  eq-htpy-suspension-structure =
+    map-inv-equiv (extensionality-suspension-structure c c')
+```
+
 ### The universal property of the suspension as a pushout
 
 ```agda
@@ -203,74 +251,6 @@ is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
     ( inv-htpy (triangle-ev-suspension susp-str-Y Z))
     ( up-Y Z)
     ( is-equiv-map-comparison-suspension-cocone X Z)
-```
-
-### The suspension of a contractible type is contractible
-
-```agda
-is-contr-suspension-is-contr :
-  {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
-is-contr-suspension-is-contr {l} {X} is-contr-X =
-  is-contr-is-equiv'
-    ( unit)
-    ( pr1 (pr2 (cocone-pushout (const X unit star) (const X unit star))))
-    ( is-equiv-universal-property-pushout
-      ( const X unit star)
-      ( const X unit star)
-      ( cocone-pushout
-        ( const X unit star)
-        ( const X unit star))
-      ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
-      ( up-pushout (const X unit star) (const X unit star)))
-    ( is-contr-unit)
-```
-
-#### Characterization of equalities in `suspension-structure`
-
-```agda
-module _
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2}
-  where
-  
-  htpy-suspension-structure :
-    (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
-  htpy-suspension-structure c c' =
-    Σ ( (N-suspension-structure c) ＝ (N-suspension-structure c'))
-      ( λ p →
-        Σ ( ( S-suspension-structure c) ＝ ( S-suspension-structure c'))
-          ( λ q →
-            ( x : X) →
-            ( merid-suspension-structure c x ∙ q) ＝
-            ( p ∙ merid-suspension-structure c' x)))
-
-  extensionality-suspension-structure :
-    (c c' : suspension-structure X Z) → 
-    (c ＝ c') ≃ (htpy-suspension-structure c c')
-  extensionality-suspension-structure (N , S , merid) =
-    extensionality-Σ
-      ( λ y p →
-        Σ (S ＝ pr1 y) (λ q → (x : X) → (merid x ∙ q) ＝ (p ∙ pr2 y x)))
-      ( refl)
-      ( refl , right-unit-htpy)
-      ( λ z → id-equiv)
-      ( extensionality-Σ
-        ( λ H q → (x : X) → (merid x ∙ q) ＝ H x)
-        ( refl)
-        ( right-unit-htpy)
-        ( λ z → id-equiv)
-        ( λ H → equiv-concat-htpy right-unit-htpy H ∘e equiv-funext))
-
-module _
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c c' : suspension-structure X Z}
-  where
-
-  htpy-eq-suspension-structure : (c ＝ c') → htpy-suspension-structure c c'
-  htpy-eq-suspension-structure =
-    map-equiv (extensionality-suspension-structure c c')
-
-  eq-htpy-suspension-structure : htpy-suspension-structure c c' → (c ＝ c')
-  eq-htpy-suspension-structure =
-    map-inv-equiv (extensionality-suspension-structure c c')
 ```
 
 ### The suspension of X has the universal property of suspensions
@@ -349,6 +329,26 @@ module _
       ( ( up-suspension-N-susp Z c) ,
         ( ( up-suspension-S-susp Z c) ,
           ( up-suspension-merid-susp Z c)))
+```
+
+### The suspension of a contractible type is contractible
+
+```agda
+is-contr-suspension-is-contr :
+  {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
+is-contr-suspension-is-contr {l} {X} is-contr-X =
+  is-contr-is-equiv'
+    ( unit)
+    ( pr1 (pr2 (cocone-pushout (const X unit star) (const X unit star))))
+    ( is-equiv-universal-property-pushout
+      ( const X unit star)
+      ( const X unit star)
+      ( cocone-pushout
+        ( const X unit star)
+        ( const X unit star))
+      ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
+      ( up-pushout (const X unit star) (const X unit star)))
+    ( is-contr-unit)
 ```
 
 ### Suspension Loop Space Adjunction
