@@ -235,9 +235,7 @@ module _
   eq-htpy-suspension-structure = map-inv-equiv (extensionality-suspension-structure c c')
 ```
 
-
-
-### The suspension of X has the universal proprety of suspensions
+### The suspension of X has the universal property of suspensions
 
 ```agda
 module _
@@ -271,12 +269,13 @@ module _
 
   issec-map-inv-up-suspension :
     {l : Level} (Z : UU l) →
-    ((ev-suspension ((suspension-structure-suspension X)) Z) ∘
-    (map-inv-up-suspension Z)) ~ id
+    ( ( ev-suspension ((suspension-structure-suspension X)) Z) ∘
+      ( map-inv-up-suspension Z)) ~ id
   issec-map-inv-up-suspension Z = issec-map-inv-is-equiv (up-suspension Z)
 
   isretr-map-inv-up-suspension : {l : Level} (Z : UU l) →
-    ((map-inv-up-suspension Z) ∘ (ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
+    ( ( map-inv-up-suspension Z) ∘
+      ( ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
   isretr-map-inv-up-suspension Z = isretr-map-inv-is-equiv (up-suspension Z)
 
   up-suspension-N-susp :
@@ -285,30 +284,39 @@ module _
   up-suspension-N-susp Z c =
     pr1 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c))
 
-  up-suspension-S-susp : {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+  up-suspension-S-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
   up-suspension-S-susp Z c =
     pr1 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
 
-  up-suspension-merid-susp : {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
-    (((inv (up-suspension-N-susp Z c) ∙ (ap (map-inv-up-suspension Z c) (merid-susp x))) ∙
-    (up-suspension-S-susp Z c)) ＝ (pr2 (pr2 c)) x)
+  up-suspension-merid-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
+    ( ( ( inv (up-suspension-N-susp Z c)) ∙
+        ( ap (map-inv-up-suspension Z c) (merid-susp x))) ∙
+      ( up-suspension-S-susp Z c)) ＝
+    ( pr2 (pr2 c)) x
   up-suspension-merid-susp Z c =
     pr2 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
 
   ev-suspension-up-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
-    (ev-suspension (suspension-structure-suspension X) Z (map-inv-up-suspension Z c)) ＝ c
-  ev-suspension-up-suspension Z c =
-    eq-htpy-suspension-structure ((up-suspension-N-susp Z c) ,
-    ((up-suspension-S-susp Z c) , (up-suspension-merid-susp Z c)))
+    ( ev-suspension
+      ( suspension-structure-suspension X)
+      ( Z)
+      ( map-inv-up-suspension Z c)) ＝ c
+  ev-suspension-up-suspension {l} Z c = 
+    eq-htpy-suspension-structure
+      ( ( up-suspension-N-susp Z c) ,
+        ( ( up-suspension-S-susp Z c) ,
+          ( up-suspension-merid-susp Z c)))
 ```
 
-## Suspension Loop Space Adjunction
+### Suspension Loop Space Adjunction
 
 Here we prove the universal property of the suspension of a pointed type: the suspension is left adjoint to the loop space. We do this by constructing an equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is given by λ f → Ω(f) ∘ unit
 
-### Define the unit and co-unit of the adjunction
+#### Define the unit and co-unit of the adjunction
 
 ```agda
 module _
@@ -351,7 +359,7 @@ module _
     counit-susp-loop-adj , up-suspension-N-susp (type-Ω (X , x0)) X ((x0 , x0 , id))
 ```
 
-### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
+#### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
 
 ```agda
 module _
