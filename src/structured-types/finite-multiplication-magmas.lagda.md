@@ -15,7 +15,7 @@ open import foundation.functions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.magmas using (Magma; type-Magma; mul-Magma)
+open import structured-types.magmas
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types

@@ -13,10 +13,8 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-dependent-functions using
-  ( pointed-Π; function-pointed-Π; preserves-point-function-pointed-Π)
-open import structured-types.pointed-families-of-types using
-  ( Pointed-Fam; fam-Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
 open import structured-types.pointed-types
 ```
 

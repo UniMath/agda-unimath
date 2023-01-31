@@ -13,8 +13,7 @@ open import foundation.binary-equivalences
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
-open import structured-types.wild-monoids using
-  ( Wild-Monoid; type-Wild-Monoid; mul-Wild-Monoid; mul-Wild-Monoid')
+open import structured-types.wild-monoids
 ```
 
 ```agda

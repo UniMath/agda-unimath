@@ -11,8 +11,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.pointed-families-of-types using
-  ( Pointed-Fam; fam-Pointed-Fam; pt-Pointed-Fam)
+open import structured-types.pointed-families-of-types
 open import structured-types.pointed-types
 ```
 

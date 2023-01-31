@@ -16,7 +16,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.unit-type
-open import foundation.unital-binary-operations using (is-unital)
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 ```
 
