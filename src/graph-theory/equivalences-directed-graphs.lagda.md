@@ -9,10 +9,12 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
@@ -49,6 +51,21 @@ module _
   vertex-equiv-Directed-Graph :
     vertex-Directed-Graph G → vertex-Directed-Graph H
   vertex-equiv-Directed-Graph = map-equiv equiv-vertex-equiv-Directed-Graph
+
+  inv-vertex-equiv-Directed-Graph :
+    vertex-Directed-Graph H → vertex-Directed-Graph G
+  inv-vertex-equiv-Directed-Graph =
+    map-inv-equiv equiv-vertex-equiv-Directed-Graph
+
+  issec-inv-vertex-equiv-Directed-Graph :
+    ( vertex-equiv-Directed-Graph ∘ inv-vertex-equiv-Directed-Graph) ~ id
+  issec-inv-vertex-equiv-Directed-Graph =
+    issec-map-inv-equiv equiv-vertex-equiv-Directed-Graph
+
+  isretr-inv-vertex-equiv-Directed-Graph :
+    ( inv-vertex-equiv-Directed-Graph ∘ vertex-equiv-Directed-Graph) ~ id
+  isretr-inv-vertex-equiv-Directed-Graph =
+    isretr-map-inv-equiv equiv-vertex-equiv-Directed-Graph
 
   equiv-edge-equiv-Directed-Graph :
     (x y : vertex-Directed-Graph G) →

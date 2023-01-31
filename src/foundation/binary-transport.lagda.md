@@ -5,6 +5,8 @@ title: Binary transport
 ```agda
 module foundation.binary-transport where
 
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -22,9 +24,19 @@ Given a binary relation `B : A → A → UU` and identifications `p : x ＝ x'` 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : A → A → UU l2)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A → B → UU l3)
   where
   
-  binary-tr : {x x' y y' : A} (p : x ＝ x') (q : y ＝ y') → B x y → B x' y'
+  binary-tr :
+    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → C x y → C x' y'
   binary-tr refl refl = id
+
+  is-equiv-binary-tr :
+    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → is-equiv (binary-tr p q)
+  is-equiv-binary-tr refl refl = is-equiv-id
+
+  equiv-binary-tr :
+    {x x' : A} {y y' : B} (p : x ＝ x') (q : y ＝ y') → C x y ≃ C x' y'
+  pr1 (equiv-binary-tr p q) = binary-tr p q
+  pr2 (equiv-binary-tr p q) = is-equiv-binary-tr p q
 ```
