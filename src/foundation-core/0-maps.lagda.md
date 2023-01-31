@@ -7,19 +7,15 @@ title: 0-Maps
 
 module foundation-core.0-maps where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.fibers-of-maps using (fib; equiv-fib-pr1)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  (tot; map-Σ-map-base; map-Σ)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.sets using
-  ( is-set; is-set-equiv; Set; type-Set; is-set-type-Set)
-open import foundation-core.truncated-maps using
-  ( is-trunc-map-htpy; is-trunc-map-comp; is-trunc-map-right-factor;
-    is-trunc-map-tot; is-trunc-map-map-Σ-map-base; is-trunc-map-map-Σ)
-open import foundation-core.truncation-levels using (zero-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.sets
+open import foundation-core.truncated-maps
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Definition
@@ -83,12 +79,19 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
+
+  abstract
+    is-0-map-comp :
+      (g : B → X) (h : A → B) →
+      is-0-map g → is-0-map h → is-0-map (g ∘ h)
+    is-0-map-comp = is-trunc-map-comp zero-𝕋
   
   abstract
-    is-0-map-comp : is-0-map g → is-0-map h → is-0-map f
-    is-0-map-comp = is-trunc-map-comp zero-𝕋 f g h H
+    is-0-map-comp-htpy :
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+      is-0-map g → is-0-map h → is-0-map f
+    is-0-map-comp-htpy = is-trunc-map-comp-htpy zero-𝕋
 ```
 
 ### If a composite is a 0-map, then so is its right factor
