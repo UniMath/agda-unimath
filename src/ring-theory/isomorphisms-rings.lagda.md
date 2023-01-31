@@ -17,9 +17,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions using
-  ( all-elements-equal; is-prop; is-prop-all-elements-equal; prod-Prop;
-    is-prop-Π; is-prop-prod)
+open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
@@ -28,19 +26,10 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups using
-  ( type-hom-Ab; map-hom-Ab; htpy-eq-hom-Ab; id-hom-Ab)
-open import group-theory.isomorphisms-abelian-groups using
-  ( is-iso-hom-Ab; inv-is-iso-hom-Ab; map-inv-is-iso-hom-Ab;
-    is-sec-map-inv-is-iso-hom-Ab; is-retr-map-inv-is-iso-hom-Ab;
-    is-sec-inv-is-iso-hom-Ab; is-retr-inv-is-iso-hom-Ab; iso-Ab; hom-iso-Ab;
-    is-prop-is-iso-hom-Ab; is-contr-total-iso-Ab; id-iso-Ab)
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.isomorphisms-abelian-groups
 
-open import ring-theory.homomorphisms-rings using
-  ( type-hom-Ring; comp-hom-Ring; id-hom-Ring; map-hom-Ring; htpy-eq-hom-Ring;
-    hom-Ring; eq-htpy-hom-Ring; left-unit-law-comp-hom-Ring; hom-ab-hom-Ring;
-    preserves-mul-hom-Ab; preserves-one-hom-Ab; is-ring-homomorphism-hom-Ab;
-    is-ring-homomorphism-hom-Ring)
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 ```
 

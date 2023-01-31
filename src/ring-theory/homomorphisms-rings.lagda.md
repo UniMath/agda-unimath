@@ -21,14 +21,9 @@ open import foundation.subtypes
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups using
-  ( type-hom-Ab; map-hom-Ab; preserves-add-Ab; preserves-add-hom-Ab;
-    is-contr-total-htpy-hom-Ab; is-set-hom-Ab; id-hom-Ab; comp-hom-Ab;
-    eq-htpy-hom-Ab; preserves-zero-Ab; preserves-zero-hom-Ab;
-    preserves-negatives-Ab; preserves-negatives-hom-Ab)
+open import group-theory.homomorphisms-abelian-groups
 
-open import ring-theory.rings using
-  ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; one-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea
