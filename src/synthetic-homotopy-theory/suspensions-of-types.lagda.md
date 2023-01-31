@@ -34,25 +34,35 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Definition
 
-### Suspension of ordinary types
+### Suspension structure
 
 ```agda
-suspension-structure :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-suspension-structure X Y = Σ Y (λ N → Σ Y (λ S → (x : X) → N ＝ S))
+module _
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2)
+  where
+  
+  suspension-structure : UU (l1 ⊔ l2)
+  suspension-structure = Σ Y (λ N → Σ Y (λ S → (x : X) → N ＝ S))
 
-N-suspension-structure :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (suspension-structure X Y) → Y
-N-suspension-structure c = pr1 c
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+  
+  N-suspension-structure : suspension-structure X Y → Y
+  N-suspension-structure c = pr1 c
 
-S-suspension-structure :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (suspension-structure X Y) → Y
-S-suspension-structure c = (pr1 ∘ pr2) c
+  S-suspension-structure : suspension-structure X Y → Y
+  S-suspension-structure c = (pr1 ∘ pr2) c
 
-merid-suspension-structure :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (c : suspension-structure X Y) → X → ((N-suspension-structure c) ＝ ( S-suspension-structure c))
-merid-suspension-structure c = (pr2 ∘ pr2) c
+  merid-suspension-structure :
+    (c : suspension-structure X Y) →
+    X → N-suspension-structure c ＝ S-suspension-structure c
+  merid-suspension-structure c = (pr2 ∘ pr2) c
+```
 
+### Suspension cocones on a type
+
+```agda
 suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
 suspension-cocone X Y = cocone (const X unit star) (const X unit star) Y
@@ -66,7 +76,11 @@ cocone-suspension-structure X Y (pair N (pair S merid)) =
     ( pair
       ( const unit Y S)
       ( merid))
+```
 
+### The universal property of the suspension of a type `X`
+
+```agda
 universal-property-suspension' :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2)
   (susp-str : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
@@ -80,7 +94,11 @@ is-suspension :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 is-suspension l X Y =
   Σ (suspension-structure X Y) (universal-property-suspension' l X Y)
+```
 
+### The suspension of an ordinary type `X`
+
+```agda
 suspension :
   {l : Level} → UU l → UU l
 suspension X = pushout (const X unit star) (const X unit star)
