@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
+open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
@@ -122,6 +123,15 @@ pr1 (pr2 (suspension-structure-suspension X)) = S-susp
 pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
 ```
 
+### The suspension of a pointed type
+
+```agda
+suspension-Pointed-Type :
+  {l : Level} → Pointed-Type l → Pointed-Type l
+pr1 (suspension-Pointed-Type X) = suspension (type-Pointed-Type X)
+pr2 (suspension-Pointed-Type X) = N-susp
+```
+
 ## Properties
 
 ### The universal property of the suspension as a pushout
@@ -218,39 +228,49 @@ is-contr-suspension-is-contr {l} {X} is-contr-X =
 #### Characterization of equalities in `suspension-structure`
 
 ```agda
-htpy-suspension-structure : {l1 l2 : Level} {X : UU l1} {Z : UU l2} 
-  (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
-htpy-suspension-structure
- {X = X} c c' =
-  Σ ((N-suspension-structure c) ＝ (N-suspension-structure c'))
-  (λ p → Σ (( S-suspension-structure c) ＝ ( S-suspension-structure c'))
-  (λ q → (x : X) → (((inv p) ∙ ( merid-suspension-structure c x)) ∙ q)
-  ＝ ( merid-suspension-structure c' x)))
-
-extensionality-suspension-structure :
+module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2}
-  (c c' : suspension-structure X Z) → 
-  (c ＝ c') ≃ (htpy-suspension-structure c c')
-extensionality-suspension-structure {X = X} (N , S , merid) =
-    extensionality-Σ {Eq-A = λ t → N ＝ t}
-    (λ w p → Σ (S ＝ pr1 w)
-      (λ q → (x : X) → ((inv p ∙ merid x) ∙ q) ＝ pr2 w x))
-    refl (refl , right-unit-htpy)
-    (λ x → id-equiv)
-    (λ t' → extensionality-Σ {Eq-A = λ t → S ＝ t}
-      (λ H q → (x : X) → (merid x ∙ q) ＝ H x)
-      refl right-unit-htpy (λ x → id-equiv)
-      (λ y → equiv-concat-htpy right-unit-htpy y ∘e equiv-funext) t')
+  where
+  
+  htpy-suspension-structure :
+    (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
+  htpy-suspension-structure c c' =
+    Σ ( (N-suspension-structure c) ＝ (N-suspension-structure c'))
+      ( λ p →
+        Σ ( ( S-suspension-structure c) ＝ ( S-suspension-structure c'))
+          ( λ q →
+            ( x : X) →
+            ( merid-suspension-structure c x ∙ q) ＝
+            ( p ∙ merid-suspension-structure c' x)))
+
+  extensionality-suspension-structure :
+    (c c' : suspension-structure X Z) → 
+    (c ＝ c') ≃ (htpy-suspension-structure c c')
+  extensionality-suspension-structure (N , S , merid) =
+    extensionality-Σ
+      ( λ y p →
+        Σ (S ＝ pr1 y) (λ q → (x : X) → (merid x ∙ q) ＝ (p ∙ pr2 y x)))
+      ( refl)
+      ( refl , right-unit-htpy)
+      ( λ z → id-equiv)
+      ( extensionality-Σ
+        ( λ H q → (x : X) → (merid x ∙ q) ＝ H x)
+        ( refl)
+        ( right-unit-htpy)
+        ( λ z → id-equiv)
+        ( λ H → equiv-concat-htpy right-unit-htpy H ∘e equiv-funext))
 
 module _
   {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c c' : suspension-structure X Z}
   where
 
   htpy-eq-suspension-structure : (c ＝ c') → htpy-suspension-structure c c'
-  htpy-eq-suspension-structure = map-equiv (extensionality-suspension-structure c c')
+  htpy-eq-suspension-structure =
+    map-equiv (extensionality-suspension-structure c c')
 
-  eq-htpy-suspension-structure : (htpy-suspension-structure c c') → (c ＝ c')
-  eq-htpy-suspension-structure = map-inv-equiv (extensionality-suspension-structure c c')
+  eq-htpy-suspension-structure : htpy-suspension-structure c c' → (c ＝ c')
+  eq-htpy-suspension-structure =
+    map-inv-equiv (extensionality-suspension-structure c c')
 ```
 
 ### The suspension of X has the universal property of suspensions
@@ -278,7 +298,9 @@ module _
 
   equiv-up-suspension :
     {l : Level} (Z : UU l) → ((suspension X) → Z) ≃ (suspension-structure X Z)
-  equiv-up-suspension Z = (ev-suspension (suspension-structure-suspension X) Z) , up-suspension Z
+  pr1 (equiv-up-suspension Z) =
+    ev-suspension (suspension-structure-suspension X) Z
+  pr2 (equiv-up-suspension Z) = up-suspension Z
 
   map-inv-up-suspension : {l : Level} (Z : UU l) →
     (suspension-structure X Z) → ((suspension X) → Z)
@@ -310,10 +332,9 @@ module _
 
   up-suspension-merid-susp :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
-    ( ( ( inv (up-suspension-N-susp Z c)) ∙
-        ( ap (map-inv-up-suspension Z c) (merid-susp x))) ∙
+    ( ( ap (map-inv-up-suspension Z c) (merid-susp x)) ∙
       ( up-suspension-S-susp Z c)) ＝
-    ( pr2 (pr2 c)) x
+    ( ( up-suspension-N-susp Z c) ∙ ( pr2 (pr2 c)) x)
   up-suspension-merid-susp Z c =
     pr2 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
 
