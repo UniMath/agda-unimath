@@ -20,8 +20,8 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import order-theory.posets using (Poset)
-open import order-theory.preorders using (Preorder)
+open import order-theory.posets
+open import order-theory.preorders
 
 open import univalent-combinatorics.standard-finite-types
 ```

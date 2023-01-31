@@ -8,10 +8,8 @@ module order-theory.total-posets where
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.posets using  (Poset; element-Poset; preorder-Poset)
-open import order-theory.total-preorders using
-  ( incident-preorder-Prop; incident-Preorder; is-prop-incident-Preorder;
-    is-total-preorder-Prop; is-total-Preorder; is-prop-is-total-Preorder)
+open import order-theory.posets
+open import order-theory.total-preorders
 ```
 
 ## Definition

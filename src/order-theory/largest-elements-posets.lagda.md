@@ -10,11 +10,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.largest-elements-preorders using
-  ( is-largest-element-preorder-Prop; is-largest-element-Preorder;
-    is-prop-is-largest-element-Preorder; largest-element-Preorder)
-open import order-theory.posets using
-  ( Poset; element-Poset; preorder-Poset; antisymmetric-leq-Poset)
+open import order-theory.largest-elements-preorders
+open import order-theory.posets
 ```
 
 ## Definition

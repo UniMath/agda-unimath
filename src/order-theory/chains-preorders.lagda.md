@@ -10,10 +10,9 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.preorders using (Preorder; element-Preorder)
-open import order-theory.subpreorders using
-  ( sub-Preorder; inclusion-sub-preorder-Prop)
-open import order-theory.total-preorders using (is-total-preorder-Prop)
+open import order-theory.preorders
+open import order-theory.subpreorders
+open import order-theory.total-preorders
 ```
 
 ## Definition

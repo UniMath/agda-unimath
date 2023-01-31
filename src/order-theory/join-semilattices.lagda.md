@@ -14,13 +14,8 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 
-open import order-theory.least-upper-bounds-posets using
-  ( has-least-binary-upper-bound-poset-Prop;
-    is-least-binary-upper-bound-Poset)
-open import order-theory.posets using
-  ( Poset; element-Poset; leq-poset-Prop; leq-Poset; is-prop-leq-Poset;
-    refl-leq-Poset; antisymmetric-leq-Poset; transitive-leq-Poset;
-    is-set-element-Poset; element-poset-Set)
+open import order-theory.least-upper-bounds-posets
+open import order-theory.posets
 ```
 
 ## Idea

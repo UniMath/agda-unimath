@@ -10,9 +10,9 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.finite-posets using (is-finite-poset-Prop)
-open import order-theory.interval-subposets using (interval-sub-Poset)
-open import order-theory.posets using (Poset; element-Poset; leq-Poset)
+open import order-theory.finite-posets
+open import order-theory.interval-subposets
+open import order-theory.posets
 ```
 
 ## Idea

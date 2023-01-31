@@ -9,11 +9,8 @@ open import foundation.decidable-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.finite-preorders using
-  ( is-finite-preorder-Prop; is-finite-Preorder; is-prop-is-finite-Preorder;
-    is-finite-element-is-finite-Preorder; is-decidable-leq-is-finite-Preorder)
-open import order-theory.posets using
-  ( Poset; preorder-Poset; element-Poset; leq-Poset)
+open import order-theory.finite-preorders
+open import order-theory.posets
 
 open import univalent-combinatorics.finite-types
 ```

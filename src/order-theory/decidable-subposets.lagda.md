@@ -12,11 +12,8 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.posets using (Poset; element-Poset)
-open import order-theory.subposets using
-  ( element-sub-Poset; eq-element-sub-Poset; leq-sub-poset-Prop; leq-sub-Poset;
-    is-prop-leq-sub-Poset; refl-leq-sub-Poset; transitive-leq-sub-Poset;
-    sub-Poset)
+open import order-theory.posets
+open import order-theory.subposets
 ```
 
 ## Definition

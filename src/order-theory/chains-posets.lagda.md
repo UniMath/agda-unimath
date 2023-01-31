@@ -8,12 +8,8 @@ module order-theory.chains-posets where
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.chains-preorders using
-  ( is-chain-sub-preorder-Prop; is-chain-sub-Preorder;
-    is-prop-is-chain-sub-Preorder; chain-Preorder; sub-preorder-chain-Preorder;
-    element-chain-Preorder; inclusion-chain-preorder-Prop;
-    inclusion-chain-Preorder; is-prop-inclusion-chain-Preorder)
-open import order-theory.posets using (Poset; element-Poset; preorder-Poset)
+open import order-theory.chains-preorders
+open import order-theory.posets
 ```
 
 ## Definition

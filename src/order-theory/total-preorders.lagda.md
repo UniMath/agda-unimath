@@ -9,8 +9,7 @@ open import foundation.disjunction
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.preorders using
-  ( Preorder; element-Preorder; leq-preorder-Prop)
+open import order-theory.preorders
 ```
 
 ## Definition

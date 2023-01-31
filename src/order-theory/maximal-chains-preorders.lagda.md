@@ -11,7 +11,7 @@ open import foundation.universe-levels
 
 open import order-theory.chains-preorders using
   ( chain-Preorder; inclusion-chain-preorder-Prop; element-chain-Preorder)
-open import order-theory.preorders using (Preorder)
+open import order-theory.preorders
 ```
 
 ## Definition

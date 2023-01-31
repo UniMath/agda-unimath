@@ -9,10 +9,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
-open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop; is-decidable-prop;
-    is-decidable-prop-type-decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop; is-decidable-Prop)
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -21,20 +18,12 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.decidable-subpreorders using
-  ( element-decidable-sub-Preorder; eq-element-decidable-sub-Preorder;
-    leq-decidable-sub-preorder-Prop; leq-decidable-sub-Preorder;
-    is-prop-leq-decidable-sub-Preorder; refl-leq-decidable-sub-Preorder;
-    transitive-leq-decidable-sub-Preorder)
-open import order-theory.preorders using
-  ( Preorder; element-Preorder; leq-preorder-Prop; leq-Preorder;
-    is-prop-leq-Preorder; refl-leq-Preorder; transitive-leq-Preorder)
+open import order-theory.decidable-subpreorders
+open import order-theory.preorders
 
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-types using
-  ( is-finite-Prop; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽;
-    number-of-elements-is-finite; mere-equiv-is-finite; is-set-is-finite)
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

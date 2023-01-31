@@ -11,10 +11,9 @@ open import Agda.Primitive using (Setω)
 
 open import foundation.dependent-pair-types
 open import foundation.propositions
-open import foundation.universe-levels using
-  ( Level; UU; _⊔_; lsuc)
+open import foundation.universe-levels
 
-open import order-theory.preorders using (Preorder)
+open import order-theory.preorders
 ```
 
 ## Idea

@@ -9,8 +9,8 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.posets using (Poset; element-Poset; leq-poset-Prop)
-open import order-theory.subposets using (sub-Poset)
+open import order-theory.posets
+open import order-theory.subposets
 ```
 
 ## Idea
