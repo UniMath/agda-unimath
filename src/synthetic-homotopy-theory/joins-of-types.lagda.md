@@ -16,7 +16,7 @@ open import foundation.equivalences
 open import foundation-core.functions
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.type-arithmetic-cartesian-product-types using (is-equiv-pr2-prod-is-contr)
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types 
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type

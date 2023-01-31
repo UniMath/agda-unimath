@@ -23,7 +23,7 @@ open import group-theory.equivalences-group-actions using
 open import group-theory.group-actions using
   ( Abstract-Group-Action; type-Abstract-Group-Action;
     mul-Abstract-Group-Action)
-open import group-theory.groups using (Group; type-Group)
+open import group-theory.groups
 open import group-theory.homomorphisms-group-actions using
   ( type-hom-Abstract-Group-Action; map-hom-Abstract-Group-Action;
     coherence-square-hom-Abstract-Group-Action;

@@ -8,48 +8,36 @@ title: Finite choice
 module univalent-combinatorics.finite-choice where
 
 open import elementary-number-theory.natural-numbers
-open import
-  elementary-number-theory.well-ordering-principle-standard-finite-types using
-  ( ε-operator-decidable-subtype-Fin)
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
 open import foundation.coproduct-types
-open import foundation.decidable-embeddings using
-  ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
-open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; is-in-decidable-subtype)
+open import foundation.decidable-embeddings
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.fiber-inclusions using (fiber-inclusion-emb)
-open import foundation.fibers-of-maps using
-  ( fib; map-equiv-total-fib; map-inv-equiv-total-fib)
+open import foundation.fiber-inclusions
+open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
-open import foundation.hilberts-epsilon-operators using
-  ( ε-operator-Hilbert; ε-operator-equiv)
+open import foundation.hilberts-epsilon-operators
 open import foundation.identity-types
 open import foundation.propositional-maps
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop; map-inv-distributive-trunc-prod-Prop;
-    apply-universal-property-trunc-Prop; trunc-Prop)
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-unit-type using
-  ( equiv-dependent-universal-property-unit)
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; is-empty-is-zero-number-of-elements-count; equiv-count;
-    map-equiv-count; number-of-elements-count)
-open import univalent-combinatorics.counting-decidable-subtypes using
-  ( count-domain-emb-is-finite-domain-emb)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

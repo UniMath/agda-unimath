@@ -13,8 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; is-contr-total-htpy-equiv)
+open import foundation.equivalence-extensionality
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -22,11 +21,8 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cubes using
-  ( cube; dim-cube; axis-cube; dim-cube-UU-Fin; axis-cube-UU-2; standard-cube)
-open import univalent-combinatorics.finite-types using
-  ( type-UU-Fin; UU-Fin; equiv-UU-Fin; is-contr-total-equiv-UU-Fin;
-    id-equiv-UU-Fin)
+open import univalent-combinatorics.cubes
+open import univalent-combinatorics.finite-types
 ```
 
 ## Definitions

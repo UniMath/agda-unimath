@@ -6,30 +6,17 @@ title: 2-element decidable subtypes
 module univalent-combinatorics.2-element-decidable-subtypes where
 
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.equality-natural-numbers using (has-decidable-equality-ℕ)
-open import
-  elementary-number-theory.well-ordering-principle-standard-finite-types using
-  ( ε-operator-decidable-subtype-Fin)
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
 open import foundation.automorphisms
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
-open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop; type-decidable-Prop; equiv-bool-decidable-Prop;
-    prop-decidable-Prop; is-prop-is-decidable)
-open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype; subtype-decidable-subtype;
-    is-decidable-subtype; is-decidable-subtype-decidable-subtype;
-    is-in-decidable-subtype; is-prop-is-in-decidable-subtype;
-    inclusion-decidable-subtype; is-emb-inclusion-decidable-subtype;
-    is-injective-inclusion-decidable-subtype; equiv-universes-decidable-subtype;
-    iff-universes-decidable-subtype)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-equiv; is-decidable-neg;
-    dn-elim-is-decidable)
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.embeddings
@@ -45,38 +32,19 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.negation
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
-    unit-trunc-Prop; trunc-Prop; type-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; is-prop; type-Prop; is-prop-function-type; eq-is-prop;
-    is-prop-is-prop)
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence using (eq-equiv)
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-subtypes using
-  ( type-prop-standard-2-Element-Subtype;
-    is-prop-type-prop-standard-2-Element-Subtype;
-    subtype-standard-2-Element-Subtype; type-standard-2-Element-Subtype;
-    equiv-type-standard-2-Element-Subtype;
-    has-two-elements-type-standard-2-Element-Subtype)
-open import univalent-combinatorics.2-element-types using
-  ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
-    map-swap-2-Element-Type; compute-swap-2-Element-Type;
-    is-inhabited-2-Element-Type; has-no-fixed-points-swap-2-Element-Type;
-    contradiction-3-distinct-element-2-Element-Type)
-open import univalent-combinatorics.decidable-subtypes using
-  ( is-finite-type-decidable-subtype)
-open import univalent-combinatorics.dependent-function-types using (is-finite-Π)
-open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin; type-UU-Fin;
-    has-cardinality-type-UU-Fin; is-finite;
-    equiv-has-cardinality-id-number-of-elements-is-finite;
-    number-of-elements-is-finite; is-finite-type-UU-Fin; is-finite-equiv;
-    is-finite-Fin)
+open import univalent-combinatorics.2-element-subtypes
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

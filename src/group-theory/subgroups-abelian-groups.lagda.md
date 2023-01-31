@@ -18,7 +18,7 @@ open import group-theory.abelian-groups using
   ( Ab; group-Ab; type-Ab; commutative-add-Ab)
 open import group-theory.embeddings-groups using
   ( emb-Group; emb-Group-Slice; emb-group-slice-Subgroup)
-open import group-theory.groups using (Group)
+open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups using
   ( preserves-add-Ab; type-hom-Ab; preserves-zero-Ab; preserves-negatives-Ab)
 open import group-theory.semigroups using (Semigroup)

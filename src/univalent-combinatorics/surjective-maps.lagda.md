@@ -12,9 +12,8 @@ open import foundation.surjective-maps public
 open import foundation.decidable-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-function-types using
-  ( is-decidable-Π-is-finite)
-open import univalent-combinatorics.fibers-of-maps using (is-finite-fib)
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 ```
 

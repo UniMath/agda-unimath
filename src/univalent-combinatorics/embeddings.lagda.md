@@ -13,9 +13,7 @@ open import foundation.decidable-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.injective-maps using
-  ( is-emb-is-injective; is-injective-is-emb;
-    is-decidable-is-injective-is-finite)
+open import univalent-combinatorics.injective-maps
 ```
 
 ## Idea

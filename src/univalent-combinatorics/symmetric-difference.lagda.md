@@ -8,34 +8,24 @@ module univalent-combinatorics.symmetric-difference where
 open import foundation.symmetric-difference public
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers using
-  (mul-ℕ; left-unit-law-mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.decidable-subtypes using
-  ( decidable-subtype; type-decidable-subtype)
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.intersections-subtypes using
-  ( intersection-decidable-subtype)
+open import foundation.intersections-subtypes
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.universe-levels
 open import foundation.xor
 
-open import univalent-combinatorics.coproduct-types using
-  ( coprod-eq-is-finite; is-finite-coprod)
-open import univalent-combinatorics.decidable-subtypes using
-  ( is-finite-type-decidable-subtype)
-open import univalent-combinatorics.finite-types using
-  ( UU-Fin; type-UU-Fin; has-cardinality-type-UU-Fin;
-    number-of-elements-is-finite; is-finite; is-finite-has-cardinality;
-    number-of-elements-has-finite-cardinality;
-    all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
-    mere-equiv-has-finite-cardinality)
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.decidable-subtypes
+open import univalent-combinatorics.finite-types
 ```
 
 ```agda

@@ -14,8 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-coproduct-types
 open import foundation.identity-types
-open import foundation.injective-maps using
-  ( is-injective; is-injective-is-emb; is-emb-is-injective)
+open import foundation.injective-maps
 open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types

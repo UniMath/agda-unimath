@@ -10,16 +10,13 @@ module univalent-combinatorics.counting-maybe where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
+open import foundation.equivalences-maybe
 open import foundation.identity-types
 open import foundation.maybe
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; count-unit; number-of-elements-count;
-    is-empty-is-zero-number-of-elements-count)
-open import univalent-combinatorics.coproduct-types using
-  ( count-coprod)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.coproduct-types
 ```
 
 ## Idea

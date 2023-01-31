@@ -8,10 +8,8 @@ title: Sums of natural numbers
 module elementary-number-theory.sums-of-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; le-ℕ; preserves-le-succ-ℕ; le-succ-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.constant-maps
@@ -24,8 +22,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

@@ -7,9 +7,7 @@ title: Inequality on types equipped with a counting
 
 module univalent-combinatorics.inequality-types-with-counting where
 
-open import elementary-number-theory.inequality-standard-finite-types using
-  ( leq-Fin; refl-leq-Fin; antisymmetric-leq-Fin; transitive-leq-Fin;
-    concatenate-eq-leq-eq-Fin)
+open import elementary-number-theory.inequality-standard-finite-types
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,9 +15,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; map-inv-equiv-count; number-of-elements-count; map-equiv-count;
-    equiv-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

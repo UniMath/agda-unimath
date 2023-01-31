@@ -7,18 +7,14 @@ title: Unit elements in the standard finite types
 
 module elementary-number-theory.unit-elements-standard-finite-types where
 
-open import elementary-number-theory.congruence-natural-numbers using
-  ( concatenate-eq-cong-ℕ)
-open import elementary-number-theory.distance-natural-numbers using
-  ( right-unit-law-dist-ℕ)
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-standard-finite-types using
   ( div-Fin; refl-div-Fin; trans-div-Fin)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( eq-mod-succ-cong-ℕ; mul-Fin; associative-mul-Fin; mul-Fin';
     right-unit-law-mul-Fin; left-unit-law-mul-Fin; commutative-mul-Fin)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; square-succ-ℕ; commutative-mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types

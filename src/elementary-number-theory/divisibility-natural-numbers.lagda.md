@@ -8,8 +8,7 @@ title: Divisibility of natural numbers
 module elementary-number-theory.divisibility-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.distance-natural-numbers using
-  ( dist-ℕ; is-additive-right-inverse-dist-ℕ)
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; leq-leq-mul-ℕ'; concatenate-eq-leq-eq-ℕ; leq-add-ℕ'; le-ℕ;
     contradiction-le-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ')

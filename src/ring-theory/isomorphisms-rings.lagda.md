@@ -24,8 +24,7 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

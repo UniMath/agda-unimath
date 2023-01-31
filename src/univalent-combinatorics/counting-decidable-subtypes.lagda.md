@@ -13,16 +13,14 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-embeddings using
-  ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
+open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.fibers-of-maps using
-  ( equiv-fib-pr1; equiv-total-fib; fib)
+open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -36,13 +34,8 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; is-empty-is-zero-number-of-elements-count; count-is-contr;
-    count-is-empty; number-of-elements-count; count-equiv; count-equiv';
-    is-zero-number-of-elements-count-is-empty; equiv-count; is-set-count;
-    has-decidable-equality-count)
-open import univalent-combinatorics.decidable-propositions using
-  ( is-decidable-count)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

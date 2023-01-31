@@ -16,12 +16,10 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-empty-type using
-  ( universal-property-empty')
-open import foundation.universal-property-unit-type using
-  ( equiv-universal-property-unit)
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-unit-type
 
-open import univalent-combinatorics.cartesian-product-types using (prod-Fin)
+open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

@@ -8,8 +8,7 @@ module elementary-number-theory.eulers-totient-function where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers using
   ( relatively-prime-ℕ; is-decidable-relatively-prime-ℕ)
-open import elementary-number-theory.sums-of-natural-numbers using
-  ( bounded-sum-ℕ)
+open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-types

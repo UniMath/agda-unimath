@@ -11,10 +11,8 @@ open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-one-ℕ; leq-div-succ-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( right-zero-law-mul-ℕ)
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-not-one-two-ℕ;
     Eq-eq-ℕ; is-set-ℕ)

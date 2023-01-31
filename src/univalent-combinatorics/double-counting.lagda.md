@@ -10,8 +10,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

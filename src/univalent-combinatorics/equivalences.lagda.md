@@ -13,12 +13,9 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.embeddings using
-  ( is-decidable-is-emb-is-finite)
+open import univalent-combinatorics.embeddings
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.surjective-maps using
-  ( is-equiv-is-emb-is-surjective; is-surjective-is-equiv;
-    is-decidable-is-surjective-is-finite)
+open import univalent-combinatorics.surjective-maps
 ```
 
 ## Properties

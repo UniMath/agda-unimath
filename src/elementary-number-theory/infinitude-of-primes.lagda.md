@@ -12,8 +12,7 @@ open import elementary-number-theory.decidable-types using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( is-one-is-divisor-below-ℕ; div-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
     transitive-div-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ; is-decidable-is-zero-ℕ)
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.factorials using
   ( factorial-ℕ; leq-factorial-ℕ; div-factorial-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -22,11 +21,8 @@ open import elementary-number-theory.inequality-natural-numbers using
     contradiction-le-ℕ)
 open import elementary-number-theory.lower-bounds-natural-numbers using
   ( is-lower-bound-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( is-decidable-div-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( right-zero-law-mul-ℕ)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ; is-not-one-ℕ;
     is-successor-is-nonzero-ℕ; Eq-eq-ℕ)

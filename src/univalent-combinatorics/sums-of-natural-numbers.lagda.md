@@ -16,11 +16,9 @@ open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using (count; count-Fin)
-open import univalent-combinatorics.counting-dependent-pair-types using
-  ( count-Σ; number-of-elements-count-Σ)
-open import univalent-combinatorics.double-counting using
-  ( double-counting-equiv)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

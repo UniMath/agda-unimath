@@ -16,9 +16,8 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.isomorphisms-groups using
-  ( id-iso-Group; is-contr-total-iso-Group; iso-eq-Group; type-iso-Group)
+open import group-theory.groups
+open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups using (Group-Large-Precat)
 ```
 

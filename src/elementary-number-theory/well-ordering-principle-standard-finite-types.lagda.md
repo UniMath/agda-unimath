@@ -43,16 +43,14 @@ open import foundation.propositional-truncations
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; Prop; all-elements-equal;
     prod-Prop; is-prop-all-elements-equal; type-Prop)
-open import foundation.subtypes using
-  ( subtype; eq-type-subtype; type-subtype; is-in-subtype)
+open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count; map-equiv-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-pair-types using
   ( is-decidable-Σ-Fin)
 open import univalent-combinatorics.standard-finite-types

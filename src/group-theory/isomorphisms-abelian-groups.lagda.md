@@ -23,8 +23,7 @@ open import group-theory.abelian-groups using
   ( Ab; semigroup-Ab; type-Ab; group-Ab; is-abelian-group-Prop)
 open import group-theory.homomorphisms-abelian-groups using
   ( type-hom-Ab; map-hom-Ab; comp-hom-Ab; id-hom-Ab; htpy-eq-hom-Ab)
-open import group-theory.isomorphisms-groups using
-  ( id-iso-Group; extensionality-Group')
+open import group-theory.isomorphisms-groups
 open import group-theory.isomorphisms-semigroups using
   ( is-iso-hom-Semigroup; is-prop-is-iso-hom-Semigroup)
 ```

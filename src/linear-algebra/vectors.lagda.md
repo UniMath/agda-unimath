@@ -39,7 +39,7 @@ In particular, vectors over a set form a set.
 
 module _ {l : Level} (A : UU l) where
     open import foundation.unit-type
-    open import foundation.raising-universe-levels using (map-raise)
+    open import foundation.raising-universe-levels
     open import foundation.cartesian-product-types
     open import foundation.sets
     open import foundation.equivalences

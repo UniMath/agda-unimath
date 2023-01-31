@@ -26,8 +26,7 @@ open import elementary-number-theory.integers using
     in-pos; pred-neg-ℤ; issec-pred-ℤ; neg-pred-ℤ; neg-neg-ℤ; is-positive-ℤ;
     succ-int-ℕ; is-zero-ℤ; is-nonzero-ℤ; is-positive-eq-ℤ; is-nonnegative-ℤ;
     is-nonnegative-eq-ℤ; is-set-ℤ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  (mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
@@ -36,8 +35,7 @@ open import foundation.empty-types
 open import foundation.equational-reasoning
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.injective-maps using
-  ( is-injective; is-emb-is-injective)
+open import foundation.injective-maps
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.type-arithmetic-empty-type

@@ -7,8 +7,7 @@ title: Equality of integers
 
 module elementary-number-theory.equality-integers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ)
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ; ℤ-Set)
 open import elementary-number-theory.natural-numbers
@@ -29,8 +28,7 @@ open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.set-truncations using
-  ( type-trunc-Set; equiv-unit-trunc-Set)
+open import foundation.set-truncations
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels

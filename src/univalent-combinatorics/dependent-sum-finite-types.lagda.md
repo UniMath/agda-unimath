@@ -7,7 +7,7 @@ title: Dependent sums of finite types
 
 module univalent-combinatorics.dependent-sum-finite-types where
 
-open import foundation.complements using (complement)
+open import foundation.complements
 open import foundation.contractible-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -18,33 +18,22 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; type-trunc-Prop;
-    is-prop-type-trunc-Prop; trunc-Prop)
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ; inv-left-unit-law-Σ-is-contr; right-unit-law-Σ-is-contr;
-    equiv-right-swap-Σ)
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types using
-  ( is-finite-coprod)
-open import univalent-combinatorics.counting using
-  ( count; count-equiv)
-open import univalent-combinatorics.counting-dependent-pair-types using
-  ( count-Σ; count-fiber-count-Σ)
-open import univalent-combinatorics.decidable-propositions using
-  ( count-eq)
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-choice using
-  ( finite-choice; choice-is-finite-Σ-is-finite-fiber)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    is-finite-equiv; is-inhabited-or-empty-is-finite; is-finite-type-trunc-Prop)
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

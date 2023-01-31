@@ -11,7 +11,7 @@ open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ; abs-neg-ℤ)
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; left-zero-law-diff-ℤ; right-zero-law-diff-ℤ; diff-succ-ℤ)
-open import elementary-number-theory.distance-natural-numbers using (dist-ℕ; left-unit-law-dist-ℕ; right-unit-law-dist-ℕ)
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; int-ℕ; succ-int-ℕ; is-nonnegative-ℤ)
 open import elementary-number-theory.natural-numbers

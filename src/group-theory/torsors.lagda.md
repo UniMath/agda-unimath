@@ -41,8 +41,7 @@ open import group-theory.groups using
     equiv-mul-Group'; associative-mul-Group; left-unit-law-mul-Group; is-set-type-Group)
 open import group-theory.higher-groups using (∞-Group)
 open import group-theory.homomorphisms-groups using (type-hom-Group)
-open import group-theory.isomorphisms-groups using
-  ( type-iso-Group; iso-equiv-Group)
+open import group-theory.isomorphisms-groups
 open import group-theory.mere-equivalences-group-actions using
   ( mere-equiv-Abstract-Group-Action-Prop)
 open import group-theory.principal-group-actions using

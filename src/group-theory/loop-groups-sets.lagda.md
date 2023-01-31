@@ -32,7 +32,7 @@ open import foundation.universe-levels
 
 open import group-theory.automorphism-groups using (Automorphism-Group)
 open import group-theory.concrete-groups using (abstract-group-Concrete-Group)
-open import group-theory.groups using (Group; is-group'; semigroup-Group)
+open import group-theory.groups
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; comp-hom-Group; id-hom-Group)
 open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)

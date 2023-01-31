@@ -16,8 +16,7 @@ open import foundation.function-extensionality using
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps using
-  ( is-emb-is-injective; is-injective-is-emb)
+open import foundation.injective-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions

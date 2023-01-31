@@ -5,46 +5,27 @@ title: Cyclic types
 ```agda
 module univalent-combinatorics.cyclic-types where
 
-open import elementary-number-theory.addition-integers using
-  ( left-unit-law-add-ℤ)
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.groups-of-modular-arithmetic using
   ( ℤ-Mod-Group)
-open import elementary-number-theory.integers using (ℤ; succ-ℤ; zero-ℤ)
-open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; succ-ℤ-Mod; is-set-ℤ-Mod; zero-ℤ-Mod; equiv-add-ℤ-Mod';
-    left-successor-law-add-ℤ-Mod; pred-ℤ-Mod; isretr-pred-ℤ-Mod;
-    issec-pred-ℤ-Mod; add-ℤ-Mod; mod-ℤ; add-ℤ-Mod'; mod-neg-one-ℤ;
-    is-add-neg-one-pred-ℤ-Mod; mod-zero-ℤ; preserves-predecessor-mod-ℤ;
-    left-predecessor-law-add-ℤ-Mod; left-unit-law-add-ℤ-Mod; ap-add-ℤ-Mod;
-    mod-one-ℤ; is-add-one-succ-ℤ-Mod; preserves-successor-mod-ℤ;
-    issec-int-ℤ-Mod; int-ℤ-Mod; ℤ-Mod-Endo)
+open import elementary-number-theory.integers
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
-  using (left-unit-law-add-Fin)
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types using
-  ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-comp-horizontal;
-    coherence-square-inv-horizontal)
+open import foundation.0-connected-types
+open import foundation.commuting-squares
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences using
-  ( _≃_; map-equiv; id-equiv; is-equiv; map-inv-is-equiv; _∘e_; inv-equiv;
-    map-inv-equiv; is-property-is-equiv; isretr-map-inv-equiv;
-    issec-map-inv-equiv; is-equiv-Prop; is-equiv-has-inverse)
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies using
-  ( refl-htpy; _~_; is-contr-total-htpy; _·r_; _∙h_; _·l_; inv-htpy;
-    equiv-concat-htpy'; is-contr-total-htpy')
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.mere-equality
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
-    apply-universal-property-trunc-Prop)
+open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
@@ -53,9 +34,8 @@ open import foundation.unit-type
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.isomorphisms-groups using
-  ( type-iso-Group; iso-equiv-Group; equiv-Group)
+open import group-theory.groups
+open import group-theory.isomorphisms-groups
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
@@ -63,9 +43,8 @@ open import structured-types.morphisms-types-equipped-with-endomorphisms
 open import structured-types.pointed-types
 open import structured-types.types-equipped-with-endomorphisms
 
-open import synthetic-homotopy-theory.groups-of-loops-in-1-types using
-  ( loop-space-Group)
-open import synthetic-homotopy-theory.loop-spaces using (type-Ω)
+open import synthetic-homotopy-theory.groups-of-loops-in-1-types
+open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.standard-finite-types
 ```

@@ -17,8 +17,7 @@ open import foundation.universe-levels
 
 open import structured-types.magmas using (Magma; type-Magma; mul-Magma)
 
-open import univalent-combinatorics.counting using
-  ( count; map-equiv-count; number-of-elements-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

@@ -9,10 +9,8 @@ module elementary-number-theory.factorials where
 
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; transitive-div-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; decide-leq-succ-ℕ; leq-zero-ℕ; leq-mul-is-nonzero-ℕ')
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; commutative-mul-ℕ; is-nonzero-mul-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

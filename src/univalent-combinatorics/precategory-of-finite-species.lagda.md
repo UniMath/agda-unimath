@@ -5,19 +5,12 @@ title: The precategory of finite species
 ```agda
 module univalent-combinatorics.precategory-of-finite-species where
 
-open import category-theory.large-precategories using
-    (Large-Precat; obj-Large-Precat; hom-Large-Precat; comp-hom-Large-Precat;
-    id-hom-Large-Precat; associative-comp-hom-Large-Precat;
-    left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
+open import category-theory.large-precategories
 
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-species using (finite-species)
-
-open import univalent-combinatorics.morphisms-finite-species using
-  (hom-finite-species; comp-hom-finite-species; id-hom-finite-species;
-  associative-comp-hom-finite-species; left-unit-law-comp-hom-finite-species;
-  right-unit-law-comp-hom-finite-species)
+open import univalent-combinatorics.finite-species
+open import univalent-combinatorics.morphisms-finite-species
 ```
 
 ### Idea

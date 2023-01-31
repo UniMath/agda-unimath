@@ -8,16 +8,11 @@ title: Euclidean division on the natural numbers
 module elementary-number-theory.euclidean-division-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.congruence-natural-numbers using
-  ( cong-ℕ; refl-cong-ℕ; symm-cong-ℕ)
-open import elementary-number-theory.distance-natural-numbers using
-  ( dist-ℕ; symmetric-dist-ℕ; is-difference-dist-ℕ')
-open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( mod-succ-ℕ; cong-nat-mod-succ-ℕ; leq-nat-mod-succ-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; right-zero-law-mul-ℕ)
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types

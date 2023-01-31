@@ -20,9 +20,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; is-empty-is-zero-number-of-elements-count; count-is-contr;
-    count-is-empty; number-of-elements-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

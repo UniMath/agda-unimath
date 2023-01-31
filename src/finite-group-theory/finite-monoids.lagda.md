@@ -18,7 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.set-truncations using (type-trunc-Set)
+open import foundation.set-truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -26,8 +26,7 @@ open import group-theory.monoids using
   ( Monoid; type-Monoid; is-unital-Semigroup; is-unital-Semigroup-Prop)
 open import group-theory.semigroups using (mul-Semigroup)
 
-open import univalent-combinatorics.counting using
-  ( has-decidable-equality-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.decidable-dependent-function-types using
   ( is-decidable-Π-count)
 open import univalent-combinatorics.decidable-dependent-pair-types using

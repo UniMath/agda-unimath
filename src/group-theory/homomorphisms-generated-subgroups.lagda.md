@@ -35,8 +35,7 @@ open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group; is-set-type-hom-Group; eq-htpy-hom-Group;
     preserves-unit-hom-Group; preserves-mul-hom-Group; preserves-inv-hom-Group;
     comp-hom-Group)
-open import group-theory.isomorphisms-groups using
-  ( inv-iso-Group; hom-iso-Group; hom-inv-iso-Group)
+open import group-theory.isomorphisms-groups
 open import group-theory.subgroups using
   ( subset-Group; group-Subgroup)
 open import group-theory.subgroups-generated-by-subsets-groups using

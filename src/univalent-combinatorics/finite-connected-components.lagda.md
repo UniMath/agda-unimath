@@ -10,7 +10,7 @@ module univalent-combinatorics.finite-connected-components where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.propositions
-open import foundation.set-truncations using (type-trunc-Set)
+open import foundation.set-truncations
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types

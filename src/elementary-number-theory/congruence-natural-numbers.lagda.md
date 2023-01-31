@@ -13,7 +13,7 @@ open import elementary-number-theory.distance-natural-numbers using
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-one-ℕ; concatenate-div-eq-ℕ; div-add-ℕ; div-right-summand-ℕ;
     div-left-summand-ℕ; is-zero-div-ℕ; is-zero-div-zero-ℕ; is-one-div-one-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
     associative-mul-ℕ; commutative-mul-ℕ)

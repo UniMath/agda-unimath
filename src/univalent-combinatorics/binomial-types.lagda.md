@@ -7,32 +7,21 @@ title: The binomial types
 
 module univalent-combinatorics.binomial-types where
 
-open import elementary-number-theory.binomial-coefficients using (_choose-ℕ_)
+open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
-open import foundation.connected-components-universes using
-  ( component-UU-Level; type-component-UU-Level; mere-equiv-component-UU-Level;
-    is-contr-component-UU-Level-empty)
+open import foundation.connected-components-universes
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-embeddings using
-  ( _↪d_; map-decidable-emb; is-emb-map-decidable-emb; is-decidable-emb;
-    equiv-Fib-decidable-Prop; equiv-precomp-decidable-emb-equiv;
-    is-prop-is-decidable-emb; is-decidable-emb-ex-falso)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop; equiv-bool-decidable-Prop;
-    compute-equiv-bool-decidable-Prop; split-decidable-Prop)
+open import foundation.decidable-embeddings
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.empty-types using
-  ( empty; raise-empty; compute-raise-empty; ex-falso; is-empty; empty-Prop;
-    is-empty-raise-empty; raise-empty-Prop; equiv-is-empty)
-open import foundation.equivalences using
-  ( _≃_; equiv-postcomp-equiv; inv-equiv; _∘e_; map-equiv; id-equiv;
-    equiv-precomp; is-equiv-map-equiv; equiv-precomp-equiv)
-open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.equivalences-maybe
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
@@ -46,9 +35,8 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels using (map-inv-raise)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
+open import foundation.raising-universe-levels
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -60,8 +48,7 @@ open import foundation.universal-property-maybe using
   ( equiv-universal-property-Maybe)
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types using
-  ( Fin-add-ℕ)
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.finite-types using
   ( Fin-UU-Fin; has-cardinality; has-cardinality-Prop; UU-Fin;
     type-UU-Fin; has-cardinality-type-UU-Fin; has-finite-cardinality; is-finite;

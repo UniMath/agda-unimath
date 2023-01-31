@@ -7,8 +7,7 @@ title: Upper bounds for type families over the natural numbers
 
 module elementary-number-theory.upper-bounds-natural-numbers where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; le-ℕ; leq-le-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels

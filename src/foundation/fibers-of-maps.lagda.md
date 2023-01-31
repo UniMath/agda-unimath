@@ -21,8 +21,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks using
   ( is-pullback; universal-property-pullback-is-pullback)
-open import foundation-core.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
+open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels

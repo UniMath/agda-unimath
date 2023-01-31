@@ -7,8 +7,7 @@ title: Lower bounds of type families over the natural numbers
 
 module elementary-number-theory.lower-bounds-natural-numbers where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; is-prop-leq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types

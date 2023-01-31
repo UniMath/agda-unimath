@@ -13,7 +13,7 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group)
-open import group-theory.groups using (Group; type-Group)
+open import group-theory.groups
 open import group-theory.subgroups using
   ( Subgroup; group-Subgroup; inclusion-group-Subgroup;
     is-emb-inclusion-group-Subgroup)

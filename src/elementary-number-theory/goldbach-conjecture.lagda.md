@@ -10,7 +10,7 @@ module elementary-number-theory.goldbach-conjecture where
 open import elementary-number-theory.addition-natural-numbers
 open import
   elementary-number-theory.divisibility-natural-numbers using (is-even-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
 

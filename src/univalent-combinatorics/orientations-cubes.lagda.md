@@ -11,17 +11,14 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.iterating-functions using (iterate)
+open import foundation.iterating-functions
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cubes using
-  ( cube; vertex-cube; is-finite-dim-cube; is-finite-axis-cube)
-open import univalent-combinatorics.dependent-sum-finite-types using
-  ( is-finite-Σ)
+open import univalent-combinatorics.cubes
+open import univalent-combinatorics.dependent-sum-finite-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.function-types using
-  ( is-finite-function-type)
+open import univalent-combinatorics.function-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

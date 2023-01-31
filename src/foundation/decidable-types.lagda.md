@@ -22,7 +22,7 @@ open import foundation.propositional-truncations using
   ( type-trunc-Prop; apply-universal-property-trunc-Prop;
     is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
     map-universal-property-trunc-Prop)
-open import foundation.raising-universe-levels using (raise; map-inv-raise; map-raise)
+open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels

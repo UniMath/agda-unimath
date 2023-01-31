@@ -24,8 +24,7 @@ open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.injective-maps using
-  ( is-injective; is-injective-is-emb)
+open import foundation.injective-maps
 open import foundation.interchange-law using
   ( interchange-law; interchange-law-commutative-and-associative)
 open import foundation.unit-type

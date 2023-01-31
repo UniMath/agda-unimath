@@ -7,8 +7,7 @@ title: Retracts of the type of natural numbers
 
 module elementary-number-theory.retracts-of-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ)
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-maps using

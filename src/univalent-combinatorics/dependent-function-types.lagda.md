@@ -16,18 +16,13 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-empty-type using
-  ( dependent-universal-property-empty')
-open import foundation.universal-property-unit-type using
-  ( equiv-dependent-universal-property-unit)
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cartesian-product-types using
-  ( count-prod)
-open import univalent-combinatorics.counting using
-  ( count; count-is-contr; count-equiv'; equiv-count; map-equiv-count;
-    number-of-elements-count)
-open import univalent-combinatorics.finite-choice using (finite-choice)
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-choice
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

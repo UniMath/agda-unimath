@@ -7,8 +7,7 @@ title: Products of natural numbers
 
 module elementary-number-theory.products-of-natural-numbers where
 
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types

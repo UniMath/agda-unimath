@@ -12,11 +12,8 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.complements-isolated-points using
-  ( complement-point-UU-Fin; inclusion-complement-point-UU-Fin)
-open import univalent-combinatorics.finite-types using
-  ( UU-Fin; type-UU-Fin; has-cardinality; has-finite-cardinality; is-finite;
-    is-finite-has-finite-cardinality; is-finite-has-cardinality; Fin-UU-Fin')
+open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.finite-types
 ```
 
 ## Definitions

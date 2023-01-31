@@ -30,7 +30,7 @@ open import group-theory.abelian-groups using
     is-binary-equiv-add-Ab; is-binary-emb-add-Ab; is-emb-add-Ab; is-emb-add-Ab';
     is-injective-add-Ab; is-injective-add-Ab'; is-zero-is-idempotent-Ab;
     add-list-Ab; preserves-concat-add-list-Ab)
-open import group-theory.groups using (Group; is-group; is-group')
+open import group-theory.groups
 open import group-theory.monoids using
   ( Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
 open import group-theory.semigroups using

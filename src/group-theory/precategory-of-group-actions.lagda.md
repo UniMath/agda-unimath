@@ -17,7 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.group-actions using (Abstract-Group-Action)
-open import group-theory.groups using (Group)
+open import group-theory.groups
 open import group-theory.homomorphisms-group-actions using
   ( hom-Abstract-Group-Action; comp-hom-Abstract-Group-Action;
     id-hom-Abstract-Group-Action; associative-comp-hom-Abstract-Group-Action;

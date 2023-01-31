@@ -7,8 +7,7 @@ title: Cartesian products of finite types
 
 module univalent-combinatorics.cartesian-product-types where
 
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
@@ -24,8 +23,7 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -33,17 +31,12 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types using (coprod-Fin)
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count; count-equiv; has-decidable-equality-count)
-open import univalent-combinatorics.counting-dependent-pair-types using
-  ( count-Σ)
-open import univalent-combinatorics.decidable-propositions using
-  ( count-eq)
-open import univalent-combinatorics.double-counting using (double-counting)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin)
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

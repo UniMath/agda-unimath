@@ -14,8 +14,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences using
   ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
     is-fiberwise-equiv; is-property-is-equiv; id-equiv; map-inv-is-equiv)
-open import foundation.fibers-of-maps using
-  ( fib; equiv-fib-pr1; equiv-total-fib; triangle-map-equiv-total-fib)
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality using
   ( equiv-funext; eq-htpy)
 open import foundation.functions

@@ -11,7 +11,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
+open import group-theory.groups
 open import group-theory.semigroups using (Semigroup)
 
 open import structured-types.pointed-types

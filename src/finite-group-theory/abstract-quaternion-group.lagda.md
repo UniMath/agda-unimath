@@ -22,10 +22,10 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
+open import group-theory.groups
 open import group-theory.semigroups using (Semigroup)
 
-open import univalent-combinatorics.counting using (count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

@@ -7,7 +7,7 @@ title: The Twin Prime conjecture
 
 module elementary-number-theory.twin-prime-conjecture where
 
-open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
 

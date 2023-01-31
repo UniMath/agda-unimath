@@ -14,7 +14,7 @@ open import foundation.universe-levels
 open import group-theory.group-actions using
   ( Abstract-Group-Action; type-Abstract-Group-Action;
     mul-Abstract-Group-Action)
-open import group-theory.groups using (Group; type-Group)
+open import group-theory.groups
 ```
 
 ## Idea

@@ -128,7 +128,7 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  open import group-theory.groups using (Group)
+  open import group-theory.groups
   open import group-theory.abelian-groups using (Ab)
 
   neg-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n

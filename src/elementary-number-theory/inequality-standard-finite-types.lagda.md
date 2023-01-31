@@ -7,8 +7,7 @@ title: Inequality on the standard finite types
 
 module elementary-number-theory.inequality-standard-finite-types where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; leq-le-ℕ; refl-leq-ℕ; contradiction-le-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types

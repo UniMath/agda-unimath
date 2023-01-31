@@ -13,9 +13,9 @@ open import category-theory.monomorphisms-large-precategories using
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
+open import group-theory.groups
 open import group-theory.homomorphisms-groups using (type-hom-Group)
-open import group-theory.isomorphisms-groups using (type-iso-Group; hom-iso-Group)
+open import group-theory.isomorphisms-groups
 open import group-theory.precategory-of-groups using (Group-Large-Precat)
 ```
 

@@ -3,8 +3,7 @@
 ```agda
 module synthetic-homotopy-theory.infinite-cyclic-types where
 
-open import elementary-number-theory.addition-integers using
-  ( equiv-add-ℤ; add-ℤ; right-successor-law-add-ℤ; left-inverse-law-add-ℤ)
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers using
   ( ℤ; succ-ℤ; zero-ℤ; neg-ℤ; ℤ-Endo)
 open import elementary-number-theory.natural-numbers
@@ -23,8 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.raising-universe-levels using
-  ( raise; map-raise; map-inv-raise; compute-raise)
+open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

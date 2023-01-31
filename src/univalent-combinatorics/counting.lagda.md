@@ -15,9 +15,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equivalences using
-  ( _≃_; map-equiv; map-inv-equiv; inv-equiv; id-equiv; _∘e_; is-equiv;
-    issec-map-inv-equiv; isretr-map-inv-equiv)
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types

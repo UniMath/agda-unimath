@@ -7,8 +7,7 @@ title: Finitely cyclic maps
 
 module elementary-number-theory.finitely-cyclic-maps where
 
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( add-Fin; mod-succ-ℕ; right-unit-law-add-Fin; right-successor-law-add-Fin;
     neg-Fin; issec-nat-Fin; commutative-add-Fin; associative-add-Fin;
     left-inverse-law-add-Fin)

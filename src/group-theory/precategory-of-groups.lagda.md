@@ -14,7 +14,7 @@ open import category-theory.large-precategories using
 
 open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
+open import group-theory.groups
 open import group-theory.homomorphisms-groups using
   ( hom-Group; comp-hom-Group; id-hom-Group; associative-comp-hom-Group;
     left-unit-law-comp-hom-Group; right-unit-law-comp-hom-Group)

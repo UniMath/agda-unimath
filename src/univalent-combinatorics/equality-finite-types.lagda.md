@@ -9,9 +9,7 @@ module univalent-combinatorics.equality-finite-types where
 
 open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-Prop;
-    has-decidable-equality-equiv')
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equivalences
@@ -19,14 +17,10 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( is-set-count; equiv-count; number-of-elements-count)
-open import univalent-combinatorics.decidable-propositions using
-  ( count-eq)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types using
-  ( is-finite; has-cardinality; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin; type-UU-Fin; has-cardinality-type-UU-Fin)
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

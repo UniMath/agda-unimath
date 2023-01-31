@@ -8,9 +8,7 @@ title: Embeddings between standard finite types
 module univalent-combinatorics.embeddings-standard-finite-types where
 
 open import elementary-number-theory.natural-numbers
-open import
-  elementary-number-theory.repeating-element-standard-finite-type using
-  ( repeat-Fin; is-almost-injective-repeat-Fin)
+open import elementary-number-theory.repeating-element-standard-finite-type
 
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -18,15 +16,12 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.injective-maps using
-  ( is-injective-emb; is-injective-is-emb; is-injective; is-emb-is-injective)
-open import foundation.split-surjective-maps using (is-split-surjective)
+open import foundation.injective-maps
+open import foundation.split-surjective-maps
 open import foundation.unit-type
 
 open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-inl-Fin; is-neg-one-Fin; is-neg-one-is-not-inl-Fin;
-    is-decidable-is-inl-Fin; is-set-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

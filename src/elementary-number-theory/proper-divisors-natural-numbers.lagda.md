@@ -10,15 +10,10 @@ module elementary-number-theory.proper-divisors-natural-numbers where
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-zero-ℕ; leq-div-ℕ; is-prop-div-ℕ; is-zero-div-zero-ℕ;
     is-one-div-one-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( le-ℕ; le-leq-neq-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( is-decidable-div-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( right-unit-law-mul-ℕ)
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
   
 open import foundation.cartesian-product-types

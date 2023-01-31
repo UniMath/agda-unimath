@@ -9,7 +9,7 @@ module elementary-number-theory.divisibility-integers where
 
 open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ; int-abs-ℤ; int-abs-is-nonnegative-ℤ)
-open import elementary-number-theory.addition-integers using (add-ℤ; ap-add-ℤ)
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.divisibility-natural-numbers using
   ( div-ℕ; div-eq-ℕ)
 open import elementary-number-theory.equality-integers using

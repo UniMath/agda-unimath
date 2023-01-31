@@ -26,8 +26,7 @@ open import group-theory.category-of-semigroups using
   ( extensionality-Semigroup)
 open import group-theory.equivalences-semigroups using
   ( equiv-Semigroup; is-equiv-hom-Semigroup)
-open import group-theory.groups using
-  ( Group; semigroup-Group; is-group-Prop)
+open import group-theory.groups
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group)
 open import group-theory.isomorphisms-semigroups using

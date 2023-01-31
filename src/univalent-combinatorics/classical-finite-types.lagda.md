@@ -7,12 +7,9 @@ title: The classical definition of the standard finite types
 
 module univalent-combinatorics.classical-finite-types where
 
-open import elementary-number-theory.congruence-natural-numbers using
-  ( eq-cong-le-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using (le-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( mod-succ-ℕ; issec-nat-Fin; cong-nat-mod-succ-ℕ)
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types

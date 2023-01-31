@@ -7,11 +7,8 @@ title: The Collatz conjecture
 
 module elementary-number-theory.collatz-conjecture where
 
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( is-decidable-div-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

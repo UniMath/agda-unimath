@@ -7,8 +7,7 @@ title: The divisibility relation on the standard finite types
 
 module elementary-number-theory.divisibility-standard-finite-types where
 
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin; left-unit-law-mul-Fin; associative-mul-Fin; left-zero-law-mul-Fin;
     right-unit-law-mul-Fin; right-zero-law-mul-Fin)
 open import elementary-number-theory.natural-numbers

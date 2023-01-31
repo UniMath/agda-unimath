@@ -13,8 +13,7 @@ open import foundation.decidable-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.decidable-dependent-function-types using
-  ( is-decidable-Π-is-finite)
+open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```

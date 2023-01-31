@@ -8,11 +8,9 @@ title: Counting the elements of dependent pair types
 module univalent-combinatorics.counting-dependent-pair-types where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-zero-ℕ; has-decidable-equality-ℕ)
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers using
-  ( sum-Fin-ℕ; sum-count-ℕ)
+open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -32,15 +30,10 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; count-is-empty; is-empty-is-zero-number-of-elements-count;
-    count-equiv; number-of-elements-count; has-decidable-equality-count;
-    count-equiv'; map-equiv-count)
-open import univalent-combinatorics.coproduct-types using
-  ( count-coprod; number-of-elements-count-coprod)
-open import univalent-combinatorics.decidable-propositions using
-  ( count-eq; is-decidable-count)
-open import univalent-combinatorics.double-counting using (double-counting)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
 

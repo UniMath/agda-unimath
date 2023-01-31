@@ -7,14 +7,11 @@ title: Unit similarity on the standard finite types
 
 module elementary-number-theory.unit-similarity-standard-finite-types where
 
-open import elementary-number-theory.congruence-natural-numbers using
-  ( cong-ℕ; scalar-invariant-cong-ℕ; symm-cong-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin; left-unit-law-mul-Fin; associative-mul-Fin; mul-Fin';
     mod-succ-ℕ; cong-eq-mod-succ-ℕ; eq-mod-succ-cong-ℕ; cong-nat-mod-succ-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.unit-elements-standard-finite-types using
   ( unit-Fin; one-unit-Fin; inv-unit-Fin; mul-unit-Fin)

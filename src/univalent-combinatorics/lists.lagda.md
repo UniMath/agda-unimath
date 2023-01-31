@@ -8,14 +8,11 @@ title: Lists
 module univalent-combinatorics.lists where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
-open import foundation.contractible-types using
-  ( eq-is-contr; is-contr; is-contr-equiv'; is-contr-total-path;
-    is-trunc-is-contr)
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -26,16 +23,14 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.raising-universe-levels using (map-raise; map-inv-raise)
+open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.monoids using
-  ( Monoid; type-Monoid; unit-Monoid; mul-Monoid; left-unit-law-mul-Monoid;
-    associative-mul-Monoid)
+open import group-theory.monoids
 ```
 
 ## Idea

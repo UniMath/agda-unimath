@@ -13,16 +13,14 @@ open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.set-presented-types using (has-set-presentation-Prop)
-open import foundation.set-truncations using
-  ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
+open import foundation.set-presented-types
+open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
-open import univalent-combinatorics.finite-connected-components using
-  ( has-cardinality-components; has-cardinality-components-Prop)
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

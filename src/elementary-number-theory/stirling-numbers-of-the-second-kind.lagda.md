@@ -8,8 +8,7 @@ title: Stirling numbers of the second kind
 module elementary-number-theory.stirling-numbers-of-the-second-kind where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 ```
 

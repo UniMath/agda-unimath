@@ -18,8 +18,7 @@ open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps using
-  ( is-injective; is-injective-is-equiv)
+open import foundation.injective-maps
 open import foundation.involutions
 open import foundation.propositions using
   ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;

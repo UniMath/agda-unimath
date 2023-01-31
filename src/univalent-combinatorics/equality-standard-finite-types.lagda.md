@@ -7,7 +7,7 @@ title: Equality in the standard finite types
 
 module univalent-combinatorics.equality-standard-finite-types where
 
-open import elementary-number-theory.inequality-natural-numbers using (leq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation-core.decidable-propositions
@@ -17,9 +17,7 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-types using
-  ( Discrete-Type; type-with-apartness-Discrete-Type;
-    type-with-tight-apartness-Discrete-Type)
+open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
@@ -27,17 +25,14 @@ open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.raising-universe-levels using (raise-Set)
-open import foundation.set-truncations using
-  ( type-trunc-Set; equiv-unit-trunc-Set)
+open import foundation.raising-universe-levels
+open import foundation.set-truncations
 open import foundation.sets
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; is-zero-Fin; one-Fin; is-one-Fin; neg-one-Fin;
-    is-neg-one-Fin; is-zero-or-one-Fin-two-ℕ; is-set-Fin; Fin-Set)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

@@ -9,14 +9,10 @@ open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
-open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop; type-decidable-Prop)
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences using
-  ( _≃_; _∘e_; inv-equiv; map-equiv; map-inv-equiv; id-equiv; left-inverse-law-equiv;
-    right-inverse-law-equiv; is-equiv)
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -28,21 +24,14 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes using
-  ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
-    is-injective-inclusion-subtype; equiv-subtype-equiv)
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.unordered-pairs using
-  ( unordered-pair; type-unordered-pair; element-unordered-pair;
-    has-two-elements-type-unordered-pair)
+open import foundation.unordered-pairs
 
-open import univalent-combinatorics.2-element-types using
-  ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
-    map-swap-2-Element-Type; compute-swap-2-Element-Type;
-    is-inhabited-2-Element-Type)
+open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

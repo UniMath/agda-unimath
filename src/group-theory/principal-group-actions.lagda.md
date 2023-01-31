@@ -12,8 +12,7 @@ open import foundation.equivalence-extensionality using (eq-htpy-equiv)
 open import foundation.universe-levels
 
 open import group-theory.group-actions using (Abstract-Group-Action)
-open import group-theory.groups using
-  ( Group; set-Group; equiv-mul-Group; associative-mul-Group)
+open import group-theory.groups
 ```
 
 ## Idea

@@ -27,7 +27,7 @@ open import linear-algebra.vectors
 open import univalent-combinatorics.lists
 open import foundation.decidable-types
 open import foundation.coproduct-types
-open import group-theory.groups using (inv-unit-Group)
+open import group-theory.groups
 ```
 
 

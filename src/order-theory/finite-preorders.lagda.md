@@ -30,8 +30,7 @@ open import order-theory.preorders using
   ( Preorder; element-Preorder; leq-preorder-Prop; leq-Preorder;
     is-prop-leq-Preorder; refl-leq-Preorder; transitive-leq-Preorder)
 
-open import univalent-combinatorics.decidable-subtypes using
-  ( is-finite-type-decidable-subtype)
+open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types using
   ( is-finite-Prop; is-finite; 𝔽; type-𝔽; is-finite-type-𝔽;

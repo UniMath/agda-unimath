@@ -10,11 +10,8 @@ module univalent-combinatorics.coproduct-types where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; equiv-left-summand; equiv-right-summand; is-left-Prop;
-    is-right-Prop)
-open import foundation.decidable-subtypes using
-  ( is-left-decidable-Prop; is-right-decidable-Prop)
+open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -27,17 +24,10 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count; count-equiv)
-open import univalent-combinatorics.counting-decidable-subtypes using
-  ( count-decidable-subtype)
-open import univalent-combinatorics.double-counting using (double-counting)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    UU-Fin; number-of-elements-is-finite;
-    number-of-elements-has-finite-cardinality;
-    all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
-    has-cardinality-type-UU-Fin; mere-equiv-has-finite-cardinality)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-decidable-subtypes
+open import univalent-combinatorics.double-counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

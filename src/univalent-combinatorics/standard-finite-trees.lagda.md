@@ -6,8 +6,8 @@ title: Standard finite trees
 module univalent-combinatorics.standard-finite-trees where
 
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.sums-of-natural-numbers using (sum-Fin-ℕ)
-open import elementary-number-theory.maximum-natural-numbers using (max-Fin-ℕ)
+open import elementary-number-theory.sums-of-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.empty-types

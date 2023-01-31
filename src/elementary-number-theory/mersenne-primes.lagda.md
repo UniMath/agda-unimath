@@ -8,7 +8,7 @@ title: Mersenne primes
 module elementary-number-theory.mersenne-primes where
 
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.distance-natural-numbers using (dist-ℕ)
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.prime-numbers using (is-prime-ℕ)
 

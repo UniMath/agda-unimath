@@ -7,8 +7,7 @@ title: Addition on the rationals
 
 module elementary-number-theory.addition-rationals where
 
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ)
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-mul-ℤ)
 open import elementary-number-theory.integers using

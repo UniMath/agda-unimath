@@ -10,7 +10,7 @@ module elementary-number-theory.congruence-integers where
 open import elementary-number-theory.addition-integers using
   ( add-ℤ; ap-add-ℤ; right-unit-law-add-ℤ; right-predecessor-law-add-ℤ;
     right-inverse-law-add-ℤ; right-successor-law-add-ℤ; distributive-neg-add-ℤ)
-open import elementary-number-theory.congruence-natural-numbers using (cong-ℕ)
+open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-integers using
   ( diff-ℤ; eq-diff-ℤ; is-zero-diff-ℤ'; distributive-neg-diff-ℤ;
     triangle-diff-ℤ)
