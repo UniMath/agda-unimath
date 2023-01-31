@@ -7,35 +7,27 @@ title: Subgroups
 
 module group-theory.subgroups where
 
-open import foundation.binary-relations using
-  ( is-reflexive-Rel-Prop; is-symmetric-Rel-Prop; is-transitive-Rel-Prop)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation.embeddings using (is-emb; _↪_; is-emb-comp')
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalence-relations using (Eq-Rel)
-open import foundation.equivalences using (map-inv-is-equiv; _≃_)
-open import foundation.fibers-of-maps using (fib)
+open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalence-relations
+open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (id; _∘_)
+open import foundation.functions
 open import foundation.identity-types
-open import foundation.powersets using (_⊆_)
-open import foundation.propositional-extensionality using (is-set-type-Prop)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Π;
-    is-prop-function-type; is-prop-prod; is-prop-is-equiv; Π-Prop; hom-Prop;
-    prod-Prop; eq-is-prop)
-open import foundation.raising-universe-levels using (raise-Prop; map-raise)
-open import foundation.sets using (is-set; is-set-function-type; Set)
-open import foundation.subtype-identity-principle using
-  ( extensionality-type-subtype)
-open import foundation.subtypes using
-  ( subtype; is-emb-inclusion-subtype; type-subtype; inclusion-subtype;
-    is-set-type-subtype; is-prop-is-in-subtype; is-in-subtype; emb-subtype;
-    has-same-elements-subtype; extensionality-subtype)
-open import foundation.unit-type using (unit-Prop; star; raise-star)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.powersets
+open import foundation.propositional-extensionality
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -380,7 +372,7 @@ module _
     (x y : type-Group G) → is-prop (right-sim-Subgroup x y)
   is-prop-right-sim-Subgroup x =
     is-prop-map-is-emb
-      ( is-emb-comp'
+      ( is-emb-comp
         ( mul-Group G x)
         ( inclusion-Subgroup G H)
         ( is-emb-mul-Group G x)
@@ -436,7 +428,7 @@ module _
     (x y : type-Group G) → is-prop (left-sim-Subgroup x y)
   is-prop-left-sim-Subgroup x =
     is-prop-map-is-emb
-      ( is-emb-comp'
+      ( is-emb-comp
         ( mul-Group' G x)
         ( inclusion-Subgroup G H)
         ( is-emb-mul-Group' G x)

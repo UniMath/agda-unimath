@@ -7,27 +7,19 @@ title: Faithful maps
 
 module foundation-core.faithful-maps where
 
-open import foundation-core.0-maps using
-  ( is-0-map;  is-0-map-pr1; is-0-map-htpy; is-0-map-comp;
-    is-0-map-right-factor; is-0-map-tot; is-0-map-map-Σ-map-base;
-    is-0-map-map-Σ)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using
-  ( is-emb; _↪_; map-emb; is-emb-map-emb; id-emb)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv; is-emb-is-equiv)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; map-Σ-map-base; map-Σ)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; ap)
-open import foundation-core.propositional-maps using
-  ( is-prop-map-is-emb; is-emb-is-prop-map)
-open import foundation-core.sets using (is-set; Set; type-Set; is-set-type-Set)
-open import foundation-core.truncated-maps using
-  ( is-trunc-map-is-trunc-map-ap; is-trunc-map-ap-is-trunc-map)
-open import foundation-core.truncation-levels using (neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.0-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
+open import foundation-core.sets
+open import foundation-core.truncated-maps
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -91,7 +83,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   id-faithful-map : faithful-map A A
   id-faithful-map = faithful-map-emb id-emb
 
@@ -154,16 +146,27 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
-  
+
   abstract
-    is-faithful-comp : is-faithful g → is-faithful h → is-faithful f
-    is-faithful-comp K L =
+    is-faithful-comp :
+      (g : B → X) (h : A → B) →
+      is-faithful g → is-faithful h → is-faithful (g ∘ h)
+    is-faithful-comp g h is-faithful-g is-faithful-h =
       is-faithful-is-0-map
-        ( is-0-map-comp f g h H
-          ( is-0-map-is-faithful K)
-          ( is-0-map-is-faithful L))
+        ( is-0-map-comp g h
+          ( is-0-map-is-faithful is-faithful-g)
+          ( is-0-map-is-faithful is-faithful-h))
+
+  abstract
+    is-faithful-comp-htpy :
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+      is-faithful g → is-faithful h → is-faithful f
+    is-faithful-comp-htpy f g h H is-faithful-g is-faithful-h =
+      is-faithful-is-0-map
+        ( is-0-map-comp-htpy f g h H
+          ( is-0-map-is-faithful is-faithful-g)
+          ( is-0-map-is-faithful is-faithful-h))
 ```
 
 ### If a composite is faithful, then its right factor is faithful
@@ -171,15 +174,25 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
-  
-  is-faithful-right-factor : is-faithful g → is-faithful f → is-faithful h
-  is-faithful-right-factor K L =
+
+  is-faithful-right-factor :
+    (g : B → X) (h : A → B) →
+    is-faithful g → is-faithful (g ∘ h) → is-faithful h
+  is-faithful-right-factor g h is-faithful-g is-faithful-gh =
     is-faithful-is-0-map
-      ( is-0-map-right-factor f g h H
-        ( is-0-map-is-faithful K)
-        ( is-0-map-is-faithful L))
+      ( is-0-map-right-factor g h
+        ( is-0-map-is-faithful is-faithful-g)
+        ( is-0-map-is-faithful is-faithful-gh))
+
+  is-faithful-right-factor-htpy :
+    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+    is-faithful g → is-faithful f → is-faithful h
+  is-faithful-right-factor-htpy f g h H is-faithful-g is-faithful-f =
+    is-faithful-is-0-map
+      ( is-0-map-right-factor-htpy f g h H
+        ( is-0-map-is-faithful is-faithful-g)
+        ( is-0-map-is-faithful is-faithful-f))
 ```
 
 ### The map on total spaces induced by a family of truncated maps is truncated
@@ -197,7 +210,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
-  
+
   tot-faithful-map :
     ((x : A) → faithful-map (B x) (C x)) → faithful-map (Σ A B) (Σ A C)
   pr1 (tot-faithful-map f) = tot (λ x → map-faithful-map (f x))
@@ -211,7 +224,7 @@ module _
   module _
     {f : A → B} (C : B → UU l3)
     where
-    
+
     abstract
       is-faithful-map-Σ-map-base :
         is-faithful f → is-faithful (map-Σ-map-base f C)

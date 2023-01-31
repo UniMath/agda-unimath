@@ -258,7 +258,7 @@ module _
     is-emb f → is-emb g → ((a : A) (b : B) → ¬ (f a ＝ g b)) →
     is-emb (ind-coprod (λ x → C) f g)
   is-emb-coprod H K L (inl a) (inl a') =
-    is-equiv-left-factor
+    is-equiv-left-factor-htpy
       ( ap f)
       ( ap (ind-coprod (λ x → C) f g))
       ( ap inl)
@@ -270,7 +270,7 @@ module _
   is-emb-coprod H K L (inr b) (inl a') =
     is-equiv-is-empty (ap (ind-coprod (λ x → C) f g)) (L a' b ∘ inv)
   is-emb-coprod H K L (inr b) (inr b') =
-    is-equiv-left-factor
+    is-equiv-left-factor-htpy
       ( ap g)
       ( ap (ind-coprod (λ x → C) f g))
       ( ap inr)

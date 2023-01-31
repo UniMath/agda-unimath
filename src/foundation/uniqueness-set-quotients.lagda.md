@@ -7,31 +7,21 @@ title: The uniqueness of set quotients
 
 module foundation.uniqueness-set-quotients where
 
-open import foundation.contractible-types using (is-contr; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; is-equiv-comp-htpy; is-equiv-precomp-is-equiv;
-    is-equiv-left-factor; _≃_; map-equiv; is-property-is-equiv)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using  (_∘_; id; precomp)
-open import foundation.homotopies using (_~_; refl-htpy; inv-htpy; _·l_)
-open import foundation.identity-types using (_＝_; _∙_; ap; inv)
-open import foundation.injective-maps using (is-injective-is-equiv)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflecting-map-Eq-Rel; eq-htpy-reflecting-map-Eq-Rel;
-    map-reflecting-map-Eq-Rel)
-open import foundation.sets using (Set; type-Set; type-hom-Set)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.universal-property-set-quotients using
-  ( precomp-Set-Quotient; is-set-quotient; precomp-id-Set-Quotient;
-    universal-property-set-quotient-is-set-quotient;
-    map-universal-property-set-quotient-is-set-quotient;
-    triangle-universal-property-set-quotient-is-set-quotient)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations using
-  ( Eq-Rel)
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea
@@ -131,7 +121,7 @@ module _
       ({l : Level} → is-set-quotient l R C g) → is-equiv h →
       {l : Level} → is-set-quotient l R B f
     is-set-quotient-is-equiv-is-set-quotient Ug E {l} X =
-      is-equiv-left-factor
+      is-equiv-left-factor-htpy
         ( precomp-Set-Quotient R C g X)
         ( precomp-Set-Quotient R B f X)
         ( precomp h (type-Set X))

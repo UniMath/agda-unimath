@@ -229,7 +229,7 @@ We will now introduce the type of blocks of a partition, and show that the type 
   is-emb-inhabited-subtype-block-partition :
     is-emb inhabited-subtype-block-partition
   is-emb-inhabited-subtype-block-partition =
-    is-emb-comp'
+    is-emb-comp
       ( inhabited-subtype-block-partition-Large-Type)
       ( map-inv-compute-block-partition)
       ( is-emb-inhabited-subtype-block-partition-Large-Type)

@@ -7,22 +7,16 @@ title: Type arithmetic for dependent pair types
 
 module foundation-core.type-arithmetic-dependent-pair-types where
 
-open import foundation-core.contractible-maps using
-  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
-open import foundation-core.contractible-types using
-  ( is-contr; is-contr-equiv; center; is-contr-equiv')
-open import foundation-core.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; ind-Σ; triple; triple')
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse;
-    is-equiv-right-factor; is-equiv-id; is-equiv-left-factor)
-open import foundation-core.fibers-of-maps using (equiv-fib-pr1; fib)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (Id; refl; ap)
-open import foundation-core.singleton-induction using
-  ( ind-singleton-is-contr; comp-singleton-is-contr)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.singleton-induction
+open import foundation-core.universe-levels
 ```
 
 ## Idea

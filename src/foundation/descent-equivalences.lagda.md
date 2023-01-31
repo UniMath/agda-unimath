@@ -54,7 +54,7 @@ module _
         ( i)
         ( is-equiv-i)
         ( λ y → is-equiv (map-fib-cone j h c y))
-        ( λ x → is-equiv-left-factor
+        ( λ x → is-equiv-left-factor-htpy
           ( map-fib-cone (j ∘ i) h
             ( cone-comp-horizontal i j h c d) x)
           ( map-fib-cone j h c (i x))

@@ -9,47 +9,28 @@ module foundation.pullbacks where
 
 open import foundation-core.pullbacks public
 
-open import foundation.commuting-cubes
-open import foundation.contractible-types using
-  ( is-contr; is-contr-total-path; is-contr-equiv'; is-contr-is-equiv';
-    is-equiv-is-contr)
-open import foundation.constant-maps using (const)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; triple)
-open import foundation.descent-equivalences using (descent-is-equiv)
-open import foundation.diagonal-maps-of-types using (diagonal)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences
-open import foundation.function-extensionality using
-  ( htpy-eq; issec-eq-htpy; isretr-eq-htpy; funext)
-open import foundation.functions using (_∘_; id; map-Π)
-open import foundation.functoriality-dependent-function-types using
-  ( map-inv-is-equiv-precomp-Π-is-equiv; htpy-map-Π;
-    isretr-map-inv-is-equiv-precomp-Π-is-equiv;
-    issec-map-inv-is-equiv-precomp-Π-is-equiv; is-equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-tot;
-    is-pullback-family-is-pullback-tot; map-Σ; tot-cone-cone-family)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies
-open import foundation.identity-types using
-  ( Id; _＝_; refl; ap; _∙_; inv; right-unit; equiv-concat'; equiv-inv; concat';
-    concat; is-equiv-concat; is-equiv-concat'; assoc; inv-con; con-inv; tr;
-    ap-comp; tr-Id-right)
-open import foundation.structure-identity-principle using (extensionality-Σ)
-open import foundation.type-theoretic-principle-of-choice using
-  ( map-distributive-Π-Σ; mapping-into-Σ; is-equiv-mapping-into-Σ;
-    is-equiv-map-distributive-Π-Σ)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-
-open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.cartesian-product-types
 open import foundation-core.cones-pullbacks
-open import foundation-core.function-extensionality using
-  ( eq-htpy; eq-htpy-refl-htpy)
-open import foundation-core.universal-property-pullbacks using
-  ( universal-property-pullback;
-    is-equiv-up-pullback-up-pullback; up-pullback-up-pullback-is-equiv)
+open import foundation-core.contractible-types
+open import foundation-core.constant-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.diagonal-maps-of-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.function-extensionality
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.universe-levels
+
+open import foundation.commuting-cubes
+open import foundation.descent-equivalences
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
 ```
 
 ## Properties
@@ -110,7 +91,7 @@ abstract
       ( λ (h : T → B) → g ∘ h)
       ( exponent-cone T f g c)
   is-pullback-exponent-is-pullback f g c is-pb-c T =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( cone-map f g c)
       ( map-canonical-pullback-exponent f g T)
       ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
@@ -306,7 +287,7 @@ module _
     is-pullback-htpy'
       (pair p (pair q H)) {pair p' (pair q' H')}
       (pair Hp (pair Hq HH)) is-pb-c =
-      is-equiv-right-factor
+      is-equiv-right-factor-htpy
         ( gap f g (triple p q H))
         ( map-equiv-canonical-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
@@ -551,7 +532,7 @@ abstract
             ( c : cone f g C) (c' : cone f g' C) →
               is-equiv (htpy-parallel-cone-eq refl-htpy Hg c c'))
           ( λ c c' →
-            is-equiv-left-factor
+            is-equiv-left-factor-htpy
               ( htpy-eq-square f g c c')
               ( htpy-parallel-cone-eq refl-htpy refl-htpy c c')
               ( concat (tr-tr-refl-htpy-cone f g c) c')
@@ -680,7 +661,7 @@ abstract
     ((i : I) → is-pullback (f i) (g i) (c i)) →
     is-pullback (map-Π f) (map-Π g) (cone-Π f g c)
   is-pullback-cone-Π f g c is-pb-c =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( map-Π (λ i → gap (f i) (g i) (c i)))
       ( map-canonical-pullback-Π f g)
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))

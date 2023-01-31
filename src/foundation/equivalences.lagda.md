@@ -9,61 +9,35 @@ module foundation.equivalences where
 
 open import foundation-core.equivalences public
 
-open import foundation-core.coherently-invertible-maps using
-  ( is-coherently-invertible)
-open import foundation-core.commuting-squares using (coherence-square)
-open import foundation-core.cones-pullbacks using (cone; swap-cone)
-open import foundation-core.contractible-maps using
-  ( is-contr-map-is-equiv; is-contr-map; is-equiv-is-contr-map)
-open import foundation-core.contractible-types using
-  ( center; eq-is-contr'; is-equiv-is-contr)
-open import foundation-core.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; triple)
-open import foundation-core.embeddings using (is-emb; _↪_)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (_∘_; id; precomp-Π; precomp)
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; equiv-tot; is-equiv-tot-is-fiberwise-equiv)
-open import foundation-core.functoriality-fibers-of-maps using (map-fib-cone)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation-core.homotopies using (_~_; refl-htpy; _∙h_; _·r_)
-open import foundation-core.path-split-maps using
-  ( is-coherently-invertible-is-path-split; is-path-split-is-equiv)
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation-core.pullbacks using
-  ( is-pullback; is-pullback-is-fiberwise-equiv-map-fib-cone;
-    is-pullback-swap-cone')
-open import foundation-core.retractions using (retr)
-open import foundation-core.sections using (sec)
-open import foundation-core.sets using (Set; type-Set; is-set)
-open import foundation-core.subtypes using
-  ( is-emb-inclusion-subtype; equiv-subtype-equiv)
-open import foundation-core.truncated-types using
-  ( Truncated-Type; type-Truncated-Type; is-trunc)
-open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
-open import foundation-core.universal-property-pullbacks
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
-
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-equiv'; is-contr-Π; is-contr-is-equiv';
-    is-contr-prod; is-prop-is-contr)
-open import foundation.function-extensionality using
+open import foundation-core.cones-pullbacks
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality using
   ( htpy-eq; funext; eq-htpy; equiv-funext)
-open import foundation.identity-systems using (Ind-identity-system)
-open import foundation.identity-types using
-  ( _＝_; refl; equiv-inv; ap; equiv-concat'; inv; _∙_; concat'; assoc; concat;
-    left-inv; right-unit; distributive-inv-concat; con-inv; inv-inv; ap-inv;
-    ap-concat; ap-binary; inv-con; ap-comp; ap-id; tr; apd)
-open import foundation.subtype-identity-principle using
-  ( extensionality-type-subtype)
-open import foundation.type-theoretic-principle-of-choice using
-  ( distributive-Π-Σ)
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-fibers-of-maps
+open import foundation-core.homotopies
+open import foundation-core.identity-systems
+open import foundation-core.propositions
+open import foundation-core.pullbacks
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
 open import foundation.equivalence-extensionality
+open import foundation.identity-types
 open import foundation.truncated-maps
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Properties
@@ -466,7 +440,7 @@ equiv-precomp-equiv e C =
       pair
         ( is-equiv-comp g (map-equiv e) (is-equiv-map-equiv e))
         ( λ is-equiv-eg →
-          is-equiv-left-factor'
+          is-equiv-left-factor
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))
 ```
 

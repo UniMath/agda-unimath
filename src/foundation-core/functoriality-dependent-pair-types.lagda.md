@@ -7,23 +7,16 @@ title: Functoriality of dependent pair types
 
 module foundation-core.functoriality-dependent-pair-types where
 
-open import foundation-core.contractible-maps using
-  ( is-equiv-is-contr-map; is-contr-map-is-equiv; is-contr-map)
-open import foundation-core.contractible-types using
-  ( is-contr-is-equiv; is-contr-equiv'; is-contr-is-equiv')
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-dependent-pair-types using
-  ( eq-pair-Σ; eq-pair-Σ')
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; map-equiv; is-equiv-map-equiv;
-    is-equiv-comp-htpy; is-equiv-right-factor; is-fiberwise-equiv;
-    is-equiv-top-is-equiv-bottom-square; is-equiv-bottom-is-equiv-top-square)
-open import foundation-core.fibers-of-maps using
-  ( fib; map-equiv-total-fib; is-equiv-map-equiv-total-fib)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl; inv; tr)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -344,7 +337,7 @@ module _
       is-equiv f → is-equiv (map-Σ D f g) → is-fiberwise-equiv g
     is-fiberwise-equiv-is-equiv-map-Σ f g H K =
       is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-right-factor
+        ( is-equiv-right-factor-htpy
           ( map-Σ D f g)
           ( map-Σ-map-base f D)
           ( tot g)

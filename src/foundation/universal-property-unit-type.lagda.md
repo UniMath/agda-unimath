@@ -7,19 +7,16 @@ title: The universal property of the unit type
 
 module foundation.universal-property-unit-type where
 
-open import foundation-core.homotopies using (refl-htpy)
+open import foundation-core.homotopies
 
-open import foundation.constant-maps using (const)
-open import foundation.contractible-types using
-  ( dependent-universal-property-contr-is-contr; is-contr; is-equiv-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; is-equiv-is-equiv-precomp; is-equiv-right-factor';
-    is-equiv-comp; is-equiv-precomp-is-equiv; is-equiv-is-section)
-open import foundation.functions using (precomp)
-open import foundation.identity-types using (refl)
-open import foundation.unit-type using (unit; star; is-contr-unit; pt)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.constant-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea
@@ -78,7 +75,7 @@ abstract
   is-equiv-pt-universal-property-unit X x H =
     is-equiv-is-equiv-precomp
       ( pt x)
-      ( λ l Y → is-equiv-right-factor'
+      ( λ l Y → is-equiv-right-factor
         ( ev-star' Y)
         ( precomp (pt x) Y)
         ( universal-property-unit Y)

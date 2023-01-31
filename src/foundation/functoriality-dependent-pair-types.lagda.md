@@ -17,9 +17,8 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
-
-open import foundation.type-arithmetic-dependent-pair-types
 ```
 
 ## Properties
@@ -145,7 +144,7 @@ module _
         ( g' (pr1 (pr2 c) x))
         ( c' x))
       ( is-pb-c)
-      ( is-equiv-right-factor
+      ( is-equiv-right-factor-htpy
         ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
         ( map-canonical-pullback-tot-cone-cone-family)
         ( map-Σ _

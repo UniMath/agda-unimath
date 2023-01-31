@@ -7,28 +7,20 @@ title: Truncated types
 
 module foundation-core.truncated-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.contractible-types using
-  ( is-contr; eq-is-contr; is-contr-is-equiv; is-contr-retract-of;
-    is-contr-Σ'; is-contr-left-factor-prod; is-contr-right-factor-prod;
-    is-contr-Π; is-property-is-contr; is-contr-equiv-is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using
-  ( is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation-core.equality-cartesian-product-types using
-  ( Eq-prod; equiv-pair-eq)
-open import foundation-core.equality-dependent-pair-types using
-  ( equiv-pair-eq-Σ)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-inv-is-equiv)
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
 open import foundation-core.function-extensionality using (htpy-eq; funext)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; refl; left-inv; ap; tr)
-open import foundation-core.propositions using (is-prop; Π-Prop)
-open import foundation-core.retractions using (_retract-of_; retract-eq)
-open import foundation-core.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -40,7 +32,7 @@ The truncatedness of a type is a measure of the complexity of its identity types
 ### The condition of truncatedness
 
 ```agda
-is-trunc : {i : Level} (k : 𝕋) → UU i → UU i
+is-trunc : {l : Level} (k : 𝕋) → UU l → UU l
 is-trunc neg-two-𝕋 A = is-contr A
 is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (x ＝ y)
 
@@ -58,7 +50,7 @@ Truncated-Type l k = Σ (UU l) (is-trunc k)
 module _
   {k : 𝕋} {l : Level}
   where
-  
+
   type-Truncated-Type : Truncated-Type l k → UU l
   type-Truncated-Type = pr1
 
@@ -74,7 +66,7 @@ module _
 ```agda
 abstract
   is-trunc-succ-is-trunc :
-    (k : 𝕋) {i : Level} {A : UU i} → is-trunc k A → is-trunc (succ-𝕋 k) A
+    (k : 𝕋) {l : Level} {A : UU l} → is-trunc k A → is-trunc (succ-𝕋 k) A
   pr1 (is-trunc-succ-is-trunc neg-two-𝕋 H x y) = eq-is-contr H
   pr2 (is-trunc-succ-is-trunc neg-two-𝕋 H x .x) refl = left-inv (pr2 H x)
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y = is-trunc-succ-is-trunc k (H x y)
@@ -129,21 +121,21 @@ module _
 ```agda
 abstract
   is-trunc-is-equiv :
-    {i j : Level} (k : 𝕋) {A : UU i} (B : UU j) (f : A → B) → is-equiv f →
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : UU l2) (f : A → B) → is-equiv f →
     is-trunc k B → is-trunc k A
   is-trunc-is-equiv k B f is-equiv-f =
     is-trunc-retract-of (pair f (pr2 is-equiv-f))
 
 abstract
   is-trunc-equiv :
-    {i j : Level} (k : 𝕋) {A : UU i} (B : UU  j) (e : A ≃ B) →
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : UU l2) (e : A ≃ B) →
     is-trunc k B → is-trunc k A
   is-trunc-equiv k B (pair f is-equiv-f) =
     is-trunc-is-equiv k B f is-equiv-f
 
 abstract
   is-trunc-is-equiv' :
-    {i j : Level} (k : 𝕋) (A : UU i) {B : UU j} (f : A → B) →
+    {l1 l2 : Level} (k : 𝕋) (A : UU l1) {B : UU l2} (f : A → B) →
     is-equiv f → is-trunc k A → is-trunc k B
   is-trunc-is-equiv' k A  f is-equiv-f is-trunc-A =
     is-trunc-is-equiv k A
@@ -153,7 +145,7 @@ abstract
 
 abstract
   is-trunc-equiv' :
-    {i j : Level} (k : 𝕋) (A : UU i) {B : UU j} (e : A ≃ B) →
+    {l1 l2 : Level} (k : 𝕋) (A : UU l1) {B : UU l2} (e : A ≃ B) →
     is-trunc k A → is-trunc k B
   is-trunc-equiv' k A (pair f is-equiv-f) =
     is-trunc-is-equiv' k A f is-equiv-f
@@ -164,14 +156,14 @@ abstract
 ```agda
 abstract
   is-trunc-is-emb :
-    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A → B) →
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
     is-emb f → is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-is-emb k f Ef H x y =
     is-trunc-is-equiv k (f x ＝ f y) (ap f {x} {y}) (Ef x y) (H (f x) (f y))
 
 abstract
   is-trunc-emb :
-    {i j : Level} (k : 𝕋) {A : UU i} {B : UU j} (f : A ↪ B) →
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A ↪ B) →
     is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
 ```

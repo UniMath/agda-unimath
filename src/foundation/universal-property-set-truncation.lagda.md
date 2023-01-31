@@ -7,36 +7,25 @@ title: The universal property of set truncations
 
 module foundation.universal-property-set-truncation where
 
-open import foundation.contractible-maps using
-  ( is-equiv-is-contr-map; is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-equiv; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-precomp-is-equiv; is-equiv-id; _≃_; map-equiv;
-    is-equiv-map-equiv; is-equiv-equiv; is-equiv-comp; is-equiv-right-factor)
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (equiv-funext)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; is-fiberwise-equiv-is-equiv-map-Σ)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.mere-equality using
-  ( mere-eq-Eq-Rel; reflecting-map-mere-eq; reflects-mere-eq)
-open import foundation.propositions using (is-proof-irrelevant-is-prop)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( is-prop-reflects-Eq-Rel)
-open import foundation.sets using
-  ( Set; type-Set; precomp-Set; type-hom-Set; is-set; Σ-Set)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( is-equiv-pr1-is-contr)
-open import foundation.type-theoretic-principle-of-choice using
-  ( inv-distributive-Π-Σ)
-open import foundation.universal-property-set-quotients using
-  ( is-set-quotient; precomp-Set-Quotient)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations using (Eq-Rel)
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea
@@ -225,14 +214,12 @@ abstract
     is-set-quotient l3 (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)
   is-set-quotient-is-set-truncation {A = A} B f H X =
     is-equiv-right-factor
-      ( precomp-Set f X)
       ( pr1)
       ( precomp-Set-Quotient
         ( mere-eq-Eq-Rel A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
-      ( refl-htpy)
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop

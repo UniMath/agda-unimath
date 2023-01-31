@@ -144,7 +144,7 @@ module _
   is-equiv-up-pushout-up-pushout up-c up-d =
     is-equiv-is-equiv-precomp h
       ( λ l Z →
-        is-equiv-right-factor
+        is-equiv-right-factor-htpy
           ( cocone-map f g d)
           ( cocone-map f g c)
           ( precomp h Z)
@@ -170,7 +170,7 @@ module _
     is-equiv h →
     {l : Level} → universal-property-pushout l f g c
   up-pushout-is-equiv-up-pushout up-d is-equiv-h Z =
-    is-equiv-left-factor
+    is-equiv-left-factor-htpy
       ( cocone-map f g d)
       ( cocone-map f g c)
       ( precomp h Z)
@@ -227,7 +227,7 @@ pullback-property-pushout-universal-property-pushout :
   universal-property-pushout l f g c → pullback-property-pushout l f g c
 pullback-property-pushout-universal-property-pushout
   l f g c up-c Y =
-  is-equiv-right-factor
+  is-equiv-right-factor-htpy
     ( cocone-map f g c)
     ( tot (λ i' → tot (λ j' p → htpy-eq p)))
     ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y))

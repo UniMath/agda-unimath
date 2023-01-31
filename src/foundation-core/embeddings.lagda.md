@@ -7,13 +7,11 @@ title: Embeddings
 
 module foundation-core.embeddings where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-htpy; is-equiv-id)
-open import foundation-core.functions using (id)
-open import foundation-core.identity-types using
-  ( _＝_; refl; ap; inv; _∙_; ap-id)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea
@@ -52,7 +50,6 @@ module _
 
 ## Examples
 
-
 ### The identity map is an embedding
 
 ```agda
@@ -74,7 +71,7 @@ module _
 module _
   {l : Level} {A : UU l} {l2 : Level} {B : UU l2} {f : A → B}
   where
-  
+
   abstract
     is-emb-is-emb : (A → is-emb f) → is-emb f
     is-emb-is-emb H x y = H x x y

@@ -9,33 +9,22 @@ module foundation.sections where
 
 open import foundation-core.sections public
 
-open import foundation-core.retractions using (_retract-of_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-extensionality using (equiv-funext)
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-total-path'; is-contr-Π)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-right-factor; is-equiv-id; _≃_; is-equiv-left-factor;
-    _∘e_; id-equiv; map-inv-equiv)
-open import foundation.function-extensionality using (equiv-funext)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; _·l_; _∙h_; _·r_; inv-htpy; inv-htpy-assoc-htpy;
-    ap-concat-htpy'; left-inv-htpy)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.structure-identity-principle using
-  ( extensionality-Σ)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( is-equiv-pr1-is-contr; is-contr-is-equiv-pr1; left-unit-law-Σ-is-contr;
-    equiv-right-swap-Σ)
-open import foundation.type-theoretic-principle-of-choice using
-  ( Π-total-fam; inv-distributive-Π-Σ; distributive-Π-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-
-open import foundation-core.fibers-of-maps using (fib; equiv-total-fib)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( equiv-Σ)
+open import foundation.injective-maps
+open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Idea
@@ -74,7 +63,7 @@ module _
   is-equiv-map-section :
     (b : (x : A) → B x) → ((x : A) → is-contr (B x)) → is-equiv (map-section b)
   is-equiv-map-section b C =
-    is-equiv-right-factor
+    is-equiv-right-factor-htpy
       ( id)
       ( pr1)
       ( map-section b)
@@ -90,7 +79,7 @@ module _
     (b : (x : A) → B x) → is-equiv (map-section b) → ((x : A) → is-contr (B x))
   is-contr-fam-is-equiv-map-section b H =
     is-contr-is-equiv-pr1
-      ( is-equiv-left-factor id pr1
+      ( is-equiv-left-factor-htpy id pr1
         ( map-section b)
         ( htpy-map-section b)
         ( is-equiv-id)
@@ -194,3 +183,4 @@ pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
 pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
   isretr-section-comp-htpy f g h H sec-h
 ```
+ 
