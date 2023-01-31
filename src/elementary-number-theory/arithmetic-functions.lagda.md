@@ -11,7 +11,7 @@ open import elementary-number-theory.nonzero-natural-numbers using (nonzero-ℕ)
 
 open import foundation.universe-levels
 
-open import ring-theory.rings using (Ring; type-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

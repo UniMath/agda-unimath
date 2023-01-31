@@ -21,7 +21,7 @@ open import group-theory.homomorphisms-abelian-groups using
   ( type-hom-Ab; hom-Ab; comp-hom-Ab; associative-comp-hom-Ab; id-hom-Ab;
     left-unit-law-comp-hom-Ab; right-unit-law-comp-hom-Ab)
 
-open import ring-theory.rings using (Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

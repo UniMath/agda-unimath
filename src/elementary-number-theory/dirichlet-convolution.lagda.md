@@ -28,8 +28,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; zero-Ring; add-Ring; mul-Ring)
+open import ring-theory.rings
 ```
 
 ## Definition

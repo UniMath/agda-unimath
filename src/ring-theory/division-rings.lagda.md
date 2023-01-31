@@ -12,10 +12,9 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 
-open import ring-theory.invertible-elements-rings using
-  ( is-invertible-element-Ring)
-open import ring-theory.nontrivial-rings using (is-nontrivial-Ring)
-open import ring-theory.rings using (Ring; type-Ring; zero-Ring)
+open import ring-theory.invertible-elements-rings
+open import ring-theory.nontrivial-rings
+open import ring-theory.rings
 ```
 
 ## Idea

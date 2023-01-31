@@ -18,7 +18,7 @@ open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
-open import foundation.unital-binary-operations using (is-unital)
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups using

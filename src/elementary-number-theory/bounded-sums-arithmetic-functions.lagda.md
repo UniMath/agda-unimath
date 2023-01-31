@@ -19,7 +19,7 @@ open import foundation.decidable-types
 open import foundation.functions
 open import foundation.universe-levels
 
-open import ring-theory.rings using (Ring; type-Ring; zero-Ring; add-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

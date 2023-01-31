@@ -15,8 +15,7 @@ open import foundation.universe-levels
 
 open import group-theory.invertible-elements-monoids
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; one-Ring; mul-Ring; multiplicative-monoid-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

@@ -18,8 +18,7 @@ open import linear-algebra.vectors-on-rings using
   ( associative-add-vec-Ring; commutative-add-vec-Ring;
     left-unit-law-add-vec-Ring; right-unit-law-add-vec-Ring)
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; zero-Ring; add-Ring; associative-add-Ring)
+open import ring-theory.rings
 ```
 
 ## Definitions

@@ -14,7 +14,7 @@ open import linear-algebra.matrices-on-rings using (matrix-Ring)
 open import linear-algebra.vectors using (empty-vec; _∷_)
 open import linear-algebra.vectors-on-rings using (vec-Ring)
 
-open import ring-theory.rings using (Ring; type-Ring)
+open import ring-theory.rings
 ```
 
 ## Definition
