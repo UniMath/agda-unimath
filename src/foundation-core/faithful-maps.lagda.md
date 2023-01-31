@@ -83,7 +83,7 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-  
+
   id-faithful-map : faithful-map A A
   id-faithful-map = faithful-map-emb id-emb
 
@@ -157,7 +157,7 @@ module _
         ( is-0-map-comp g h
           ( is-0-map-is-faithful is-faithful-g)
           ( is-0-map-is-faithful is-faithful-h))
-  
+
   abstract
     is-faithful-comp-htpy :
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
@@ -174,15 +174,25 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
-  
-  is-faithful-right-factor : is-faithful g → is-faithful f → is-faithful h
-  is-faithful-right-factor K L =
+
+  is-faithful-right-factor :
+    (g : B → X) (h : A → B) →
+    is-faithful g → is-faithful (g ∘ h) → is-faithful h
+  is-faithful-right-factor g h is-faithful-g is-faithful-gh =
     is-faithful-is-0-map
-      ( is-0-map-right-factor f g h H
-        ( is-0-map-is-faithful K)
-        ( is-0-map-is-faithful L))
+      ( is-0-map-right-factor g h
+        ( is-0-map-is-faithful is-faithful-g)
+        ( is-0-map-is-faithful is-faithful-gh))
+
+  is-faithful-right-factor-htpy :
+    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+    is-faithful g → is-faithful f → is-faithful h
+  is-faithful-right-factor-htpy f g h H is-faithful-g is-faithful-f =
+    is-faithful-is-0-map
+      ( is-0-map-right-factor-htpy f g h H
+        ( is-0-map-is-faithful is-faithful-g)
+        ( is-0-map-is-faithful is-faithful-f))
 ```
 
 ### The map on total spaces induced by a family of truncated maps is truncated
@@ -200,7 +210,7 @@ module _
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
-  
+
   tot-faithful-map :
     ((x : A) → faithful-map (B x) (C x)) → faithful-map (Σ A B) (Σ A C)
   pr1 (tot-faithful-map f) = tot (λ x → map-faithful-map (f x))
@@ -214,7 +224,7 @@ module _
   module _
     {f : A → B} (C : B → UU l3)
     where
-    
+
     abstract
       is-faithful-map-Σ-map-base :
         is-faithful f → is-faithful (map-Σ-map-base f C)
