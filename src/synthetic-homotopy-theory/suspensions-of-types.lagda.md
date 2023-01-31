@@ -17,12 +17,17 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
+open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
+
 open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -297,4 +302,70 @@ module _
   ev-suspension-up-suspension Z c =
     eq-htpy-suspension-structure ((up-suspension-N-susp Z c) ,
     ((up-suspension-S-susp Z c) , (up-suspension-merid-susp Z c)))
+```
+
+## Suspension Loop Space Adjunction
+
+Here we prove the universal property of the suspension of a pointed type: the suspension is left adjoint to the loop space. We do this by constructing an equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is given by λ f → Ω(f) ∘ unit
+
+### Define the unit and co-unit of the adjunction
+
+```agda
+module _
+  {l1 : Level} (X : UU l1) (x0 : X)
+  where
+
+  shift : (type-Ω (suspension X , N-susp)) → (N-susp ＝ S-susp)
+  shift l = l ∙ (merid-susp x0)
+
+  shift* : (Ω (suspension X , N-susp)) →* ((N-susp ＝ S-susp) , (merid-susp x0))
+  shift* = shift , refl
+
+  unshift : (N-susp ＝ S-susp) → (type-Ω (suspension X , N-susp))
+  unshift p = p ∙ inv (merid-susp x0)
+
+  unshift* : ((N-susp ＝ S-susp) , (merid-susp x0)) →* (Ω (suspension X , N-susp))
+  unshift* = unshift , right-inv (merid-susp x0)
+
+  is-equiv-shift : is-equiv shift
+  is-equiv-shift = is-equiv-concat' N-susp (merid-susp x0)
+
+  pointed-equiv-shift : (Ω (suspension X , N-susp)) ≃* ((N-susp ＝ S-susp) , merid-susp x0)
+  pointed-equiv-shift = (shift , is-equiv-shift) , preserves-point-pointed-map _ _ shift*
+
+  merid-susp* : (X , x0) →* ((N-susp ＝ S-susp) , (merid-susp x0))
+  merid-susp* = merid-susp , refl
+
+  unit-susp-loop-adj* : (X , x0) →* Ω (suspension X , N-susp)
+  unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
+
+  unit-susp-loop-adj : X → type-Ω (suspension X , N-susp)
+  unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*
+
+  counit-susp-loop-adj : (suspension (type-Ω (X , x0))) → X
+  counit-susp-loop-adj =
+    map-inv-is-equiv (up-suspension (type-Ω (X , x0)) X) (x0 , x0 , id)
+
+  counit-susp-loop-adj* : ((suspension (type-Ω (X , x0))) , N-susp) →* (X , x0)
+  counit-susp-loop-adj* =
+    counit-susp-loop-adj , up-suspension-N-susp (type-Ω (X , x0)) X ((x0 , x0 , id))
+```
+
+### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (x0 : X) (Y : UU l2) (y0 : Y)
+  where
+
+  equiv-susp-loop-adj : (((suspension X) , N-susp) →* (Y , y0))  ≃ ((X , x0) →* Ω (Y , y0))
+  equiv-susp-loop-adj = (left-unit-law-Σ-is-contr (is-contr-total-path y0) (y0 , refl)) ∘e
+    ((inv-equiv (assoc-Σ Y (λ z → y0 ＝ z) (λ t → Σ (X → y0 ＝ (pr1 t)) (λ f → f x0 ＝ (pr2 t))))) ∘e
+    ((equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
+    (assoc-Σ Y (λ y1 → X → y0 ＝ y1) (λ z → Σ (Id y0 (pr1 z)) (λ x → pr2 z x0 ＝ x)) ∘e
+    (inv-equiv (right-unit-law-Σ-is-contr
+      (λ (z : Σ Y (λ y1 → X → y0 ＝ y1)) → is-contr-total-path  ((pr2 z) x0))) ∘e
+    ((left-unit-law-Σ-is-contr (is-contr-total-path' y0) (y0 , refl)) ∘e
+    (equiv-right-swap-Σ ∘e
+    (equiv-Σ-equiv-base (λ c → (pr1 c) ＝ y0) (equiv-up-suspension X Y))))))))
 ```
