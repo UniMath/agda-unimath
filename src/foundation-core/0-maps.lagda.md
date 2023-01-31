@@ -101,12 +101,12 @@ module _
   is-0-map-right-factor :
     (g : B → X) (h : A → B) →
     is-0-map g → is-0-map (g ∘ h) → is-0-map h
-  is-0-map-right-factor g h = is-trunc-map-right-factor zero-𝕋 g h
+  is-0-map-right-factor = is-trunc-map-right-factor zero-𝕋
 
   is-0-map-right-factor-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
     is-0-map g → is-0-map f → is-0-map h
-  is-0-map-right-factor-htpy f g h H = is-trunc-map-right-factor-htpy zero-𝕋 f g h H
+  is-0-map-right-factor-htpy = is-trunc-map-right-factor-htpy zero-𝕋
 ```
 
 ### A family of 0-maps induces a 0-map on total spaces
