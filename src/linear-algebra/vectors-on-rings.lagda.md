@@ -13,20 +13,12 @@ open import foundation.unit-type
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors using (constant-vec)
-open import linear-algebra.functoriality-vectors using
-  ( map-binary-vec; htpy-vec; map-vec)
-open import linear-algebra.scalar-multiplication-vectors using (scalar-mul-vec)
-open import linear-algebra.vectors using
-  ( vec; empty-vec; _∷_; head-vec; tail-vec; vec-Set)
+open import linear-algebra.constant-vectors
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.scalar-multiplication-vectors
+open import linear-algebra.vectors
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; set-Ring; add-Ring; zero-Ring; left-unit-law-add-Ring;
-    right-unit-law-add-Ring; neg-Ring; associative-add-Ring;
-    left-inverse-law-add-Ring; right-inverse-law-add-Ring; mul-Ring;
-    associative-mul-Ring; one-Ring; left-unit-law-mul-Ring;
-    commutative-add-Ring;
-    left-distributive-mul-add-Ring; right-distributive-mul-add-Ring)
+open import ring-theory.rings
 
 open import univalent-combinatorics.standard-finite-types
 ```

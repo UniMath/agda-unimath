@@ -9,7 +9,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.vectors using (vec; empty-vec; _∷_)
+open import linear-algebra.vectors
 ```
 
 ## Idea

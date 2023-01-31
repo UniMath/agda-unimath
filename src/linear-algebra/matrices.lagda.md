@@ -12,9 +12,8 @@ open import foundation.contractible-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors using (map-vec)
-open import linear-algebra.vectors using
-  ( vec; _∷_; empty-vec; head-vec; tail-vec)
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 ```
 
 ## Idea

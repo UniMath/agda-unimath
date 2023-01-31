@@ -9,8 +9,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.functoriality-vectors using (map-vec)
-open import linear-algebra.vectors using (vec)
+open import linear-algebra.functoriality-vectors
+open import linear-algebra.vectors
 ```
 
 ## Idea

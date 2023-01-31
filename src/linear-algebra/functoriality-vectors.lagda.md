@@ -11,7 +11,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import linear-algebra.vectors using (vec; empty-vec; _∷_)
+open import linear-algebra.vectors
 ```
 
 ## Idea

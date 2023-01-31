@@ -9,10 +9,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
-open import linear-algebra.constant-vectors using (constant-vec)
-open import linear-algebra.matrices-on-rings using (matrix-Ring)
-open import linear-algebra.vectors using (empty-vec; _∷_)
-open import linear-algebra.vectors-on-rings using (vec-Ring)
+open import linear-algebra.constant-vectors
+open import linear-algebra.matrices-on-rings
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-rings
 
 open import ring-theory.rings
 ```
