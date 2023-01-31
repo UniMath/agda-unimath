@@ -13,10 +13,10 @@ open import category-theory.isomorphisms-large-precategories using
     is-sec-hom-inv-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat)
 
 open import foundation.commuting-squares using (coherence-square)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv-has-inverse)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import group-theory.equivalences-group-actions using
   ( equiv-Abstract-Group-Action)

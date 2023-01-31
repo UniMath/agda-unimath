@@ -7,20 +7,15 @@ title: Equality in the fibers of a map
 
 module foundation-core.equality-fibers-of-maps where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-dependent-pair-types using
-  ( pair-eq-Σ; is-equiv-pair-eq-Σ)
-open import foundation-core.equivalences using
-  ( is-fiberwise-equiv; is-equiv-comp-htpy; is-equiv-comp; is-equiv; _≃_)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv)
-open import foundation-core.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using
-  ( _＝_; tr; ap; _∙_; inv; concat; right-unit; right-inv; refl;
-    is-equiv-concat; is-equiv-inv; is-equiv-tr)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

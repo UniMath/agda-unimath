@@ -7,18 +7,17 @@ title: Precategories
 
 module category-theory.precategories where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (_∘_; id)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.identity-types using (_＝_; inv; _∙_; refl)
+open import foundation.identity-types
 open import foundation.propositions using
   ( all-elements-equal; prod-Prop; Π-Prop; Π-Prop'; is-prop;
     is-prop-all-elements-equal)
-open import foundation.sets using
-  ( Set; type-Set; Id-Prop; is-set; is-set-type-Set; hom-Set)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea

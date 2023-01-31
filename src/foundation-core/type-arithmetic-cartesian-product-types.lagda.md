@@ -7,16 +7,15 @@ title: Type arithmetic for cartesian product types
 
 module foundation-core.type-arithmetic-cartesian-product-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.contractible-types using (is-contr; center)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_; is-equiv-comp)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl)
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.universe-levels
 ```
 
 ## Idea

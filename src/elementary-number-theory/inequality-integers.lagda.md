@@ -16,15 +16,15 @@ open import elementary-number-theory.difference-integers using
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
     is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ; int-ℕ; is-nonnegative-int-ℕ; succ-int-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.empty-types using (empty)
-open import foundation.functions using (id)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; tr; ap)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.coproduct-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 # Inequality on the integers

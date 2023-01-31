@@ -7,21 +7,16 @@ title: The subtype identity principle
 
 module foundation-core.subtype-identity-principle where
 
-open import foundation-core.contractible-types using
-  ( is-contr; is-contr-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (_＝_; refl)
-open import foundation-core.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; Prop; type-Prop; is-prop-type-Prop)
-open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

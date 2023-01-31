@@ -7,29 +7,25 @@ title: Coproducts of finite types
 
 module univalent-combinatorics.coproduct-types where
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types using
   ( _+_; inl; inr; equiv-left-summand; equiv-right-summand; is-left-Prop;
     is-right-Prop)
 open import foundation.decidable-subtypes using
   ( is-left-decidable-Prop; is-right-decidable-Prop)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_∘e_; inv-equiv; _≃_; id-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.identity-types using (Id; refl; _∙_; inv; ap)
-open import foundation.mere-equivalences using (mere-equiv-Prop)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.type-arithmetic-coproduct-types using
-  ( inv-assoc-coprod)
-open import foundation.type-arithmetic-empty-type using
-  ( right-unit-law-coprod)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; count-equiv)
@@ -42,7 +38,7 @@ open import univalent-combinatorics.finite-types using
     number-of-elements-has-finite-cardinality;
     all-elements-equal-has-finite-cardinality; has-finite-cardinality-is-finite;
     has-cardinality-type-UU-Fin; mere-equiv-has-finite-cardinality)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

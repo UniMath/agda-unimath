@@ -16,8 +16,8 @@ open import category-theory.large-precategories using
     left-unit-law-comp-hom-Large-Precat;
     right-unit-law-comp-hom-Large-Precat)
     
-open import foundation.identity-types using (_＝_; _∙_; inv)
-open import foundation.universe-levels using (UU; Level; UUω)
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

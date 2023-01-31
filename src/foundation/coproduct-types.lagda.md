@@ -9,22 +9,21 @@ module foundation.coproduct-types where
 
 open import foundation-core.coproduct-types public
 
-open import foundation.contractible-types using
-  ( is-contr; eq-is-contr; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.empty-types using (ex-falso; empty-Prop)
-open import foundation.equivalences using (_≃_; is-equiv-has-inverse)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
 open import foundation.noncontractible-types using (is-not-contractible)
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; eq-is-prop';
     Prop; type-Prop; is-prop-type-Prop)
-open import foundation.unit-type using (star; unit-Prop)
-open import foundation.universe-levels using (Level; lzero; _⊔_; UU)
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ### The predicates of being in the left and in the right summand

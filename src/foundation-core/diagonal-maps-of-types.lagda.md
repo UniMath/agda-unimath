@@ -5,19 +5,17 @@ title: Diagonal maps of types
 ```agda
 module foundation-core.diagonal-maps-of-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.contractible-maps using (is-contr-map)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-cartesian-product-types using (eq-pair)
-open import foundation-core.equivalences using
-  ( is-equiv; issec-map-inv-is-equiv; is-equiv-has-inverse)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (_＝_; refl; _∙_; inv; ap)
-open import foundation-core.propositions using
-  ( is-prop; is-prop-all-elements-equal)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-maps
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

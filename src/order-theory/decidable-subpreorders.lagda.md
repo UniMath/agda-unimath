@@ -5,12 +5,12 @@
 
 module order-theory.decidable-subpreorders where
 
-open import foundation.decidable-propositions using (decidable-Prop)
-open import foundation.decidable-subtypes using (subtype-decidable-subtype)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using (Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import order-theory.preorders using
   ( Preorder; element-Preorder; leq-preorder-Prop)

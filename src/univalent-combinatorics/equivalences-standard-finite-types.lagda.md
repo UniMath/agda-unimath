@@ -7,27 +7,22 @@ title: Equivalences between standard finite types
 
 module univalent-combinatorics.equivalences-standard-finite-types where
 
-open import elementary-number-theory.exponentiation-natural-numbers using
-  ( exp-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
+open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using (equiv-is-contr)
-open import foundation.equivalences using (_≃_; _∘e_; inv-equiv)
-open import foundation.functoriality-cartesian-product-types using
-  ( equiv-prod)
-open import foundation.type-arithmetic-empty-type using
-  ( inv-left-unit-law-coprod)
-open import foundation.unit-type using (unit; star; is-contr-unit)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-universal-property-coprod)
+open import foundation.contractible-types
+open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type using
   ( universal-property-empty')
 open import foundation.universal-property-unit-type using
   ( equiv-universal-property-unit)
 
 open import univalent-combinatorics.cartesian-product-types using (prod-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

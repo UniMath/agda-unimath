@@ -7,30 +7,26 @@ title: The integers
 
 module elementary-number-theory.integers where
 
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-set-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_)
-open import foundation.empty-types using
-  ( empty; ex-falso; is-set-empty; is-prop-empty)
-open import foundation.equality-coproduct-types using (is-set-coprod)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
 open import foundation.equivalences using
   ( is-equiv; _≃_; is-emb-is-equiv; map-eq-transpose-equiv';
     issec-map-inv-equiv; map-equiv; triangle-eq-transpose-equiv')
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; left-inv; inv-con; right-unit; concat; assoc)
-open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop)
-open import foundation.sets using
-  (Set; is-set; type-Set; is-set-type-Set; is-set-Σ)
-open import foundation.unit-type using (unit; star; is-prop-unit; is-set-unit)
-open import foundation.universe-levels using (UU; Level; lzero)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import structured-types.types-equipped-with-endomorphisms using (Endo)
 open import structured-types.pointed-types-equipped-with-automorphisms using

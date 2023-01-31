@@ -13,12 +13,11 @@ open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; decide-leq-succ-ℕ; leq-zero-ℕ; leq-mul-is-nonzero-ℕ')
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; commutative-mul-ℕ; is-nonzero-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ; Eq-eq-ℕ)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (refl)
+open import elementary-number-theory.natural-numbers
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
 ```
 
 # Factorials

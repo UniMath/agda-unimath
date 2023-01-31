@@ -11,11 +11,10 @@ open import commutative-algebra.commutative-rings using
   ( Commutative-Ring; ring-Commutative-Ring; is-prop-is-commutative-Ring;
     commutative-mul-Commutative-Ring)
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
 open import ring-theory.isomorphisms-rings using
   ( iso-Ring; is-contr-total-iso-Ring; id-iso-Ring)

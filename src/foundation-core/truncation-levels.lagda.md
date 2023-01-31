@@ -8,7 +8,7 @@ title: Truncation levels
 
 module foundation-core.truncation-levels where
 
-open import foundation-core.universe-levels using (UU; lzero)
+open import foundation-core.universe-levels
 ```
 
 ## Idea

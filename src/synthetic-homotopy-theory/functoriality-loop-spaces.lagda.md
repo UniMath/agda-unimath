@@ -5,19 +5,17 @@
 
 module synthetic-homotopy-theory.functoriality-loop-spaces where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.faithful-maps
-open import foundation.identity-types using
-  ( Id; refl; ap; ap-concat; _∙_; ap-inv)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
 open import structured-types.pointed-maps using
   ( _→*_; preserves-point-pointed-map; map-pointed-map)
-open import structured-types.pointed-types using
-  ( Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces using
   ( type-Ω; tr-type-Ω; preserves-refl-tr-Ω; Ω; mul-Ω; preserves-mul-tr-Ω; inv-Ω;

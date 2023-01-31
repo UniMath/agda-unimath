@@ -7,11 +7,10 @@ title: Monomorphisms of concrete groups
 
 module group-theory.monomorphisms-concrete-groups where
 
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.embeddings using (is-emb-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.universe-levels using (UU; Level; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.propositions
+open import foundation.universe-levels
 open import group-theory.concrete-groups using
   ( Concrete-Group)
 open import group-theory.homomorphisms-concrete-groups using

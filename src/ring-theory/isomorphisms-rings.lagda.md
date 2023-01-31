@@ -7,34 +7,27 @@ title: Isomorphisms of rings
 
 module ring-theory.isomorphisms-rings where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.equivalences using
-  ( _≃_; inv-equiv; _∘e_; is-equiv; map-inv-is-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; is-contr-total-htpy)
-open import foundation.identity-types using (Id; inv; ap; _∙_; refl)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.propositions using
   ( all-elements-equal; is-prop; is-prop-all-elements-equal; prod-Prop;
     is-prop-Π; is-prop-prod)
-open import foundation.sets using (Id-Prop)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (eq-type-subtype; equiv-type-subtype)
+open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
 open import foundation.type-arithmetic-cartesian-product-types using
   ( commutative-prod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups using
   ( type-hom-Ab; map-hom-Ab; htpy-eq-hom-Ab; id-hom-Ab)

@@ -25,12 +25,12 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; left-negative-law-mul-ℤ; left-zero-law-mul-ℤ;
     right-distributive-mul-add-ℤ)
-open import elementary-number-theory.natural-numbers using (ℕ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.functions using (id)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
-open import foundation.universe-levels using (UU; lzero)
+open import elementary-number-theory.natural-numbers
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 # The congruence relations on the integers

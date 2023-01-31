@@ -7,37 +7,30 @@ title: Counting the elements of dependent pair types
 
 module univalent-combinatorics.counting-dependent-pair-types where
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ')
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.equality-natural-numbers using
   ( is-decidable-is-zero-ℕ; has-decidable-equality-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-successor-is-nonzero-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-Fin-ℕ; sum-count-ℕ)
 
-open import foundation.contractible-types using (is-contr-total-path')
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using
-  ( equiv-pair-eq-Σ)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; inv-equiv; map-equiv; id-equiv)
-open import foundation.fibers-of-maps using (equiv-fib-pr1; fib)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ-equiv-base; equiv-tot)
-open import foundation.identity-types using (refl; Id; _∙_; ap; tr; inv)
-open import foundation.sections using (map-section; equiv-total-fib-map-section)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod; left-distributive-Σ-coprod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr; inv-assoc-Σ)
-open import foundation.type-arithmetic-unit-type using
-  ( left-unit-law-Σ)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.sections
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; count-is-empty; is-empty-is-zero-number-of-elements-count;
@@ -48,7 +41,7 @@ open import univalent-combinatorics.coproduct-types using
 open import univalent-combinatorics.decidable-propositions using
   ( count-eq; is-decidable-count)
 open import univalent-combinatorics.double-counting using (double-counting)
-open import univalent-combinatorics.standard-finite-types using (Fin; zero-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

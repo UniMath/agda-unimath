@@ -5,8 +5,8 @@
 
 module order-theory.total-posets where
 
-open import foundation.propositions using (Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import order-theory.posets using  (Poset; element-Poset; preorder-Poset)
 open import order-theory.total-preorders using

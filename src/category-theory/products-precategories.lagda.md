@@ -9,13 +9,13 @@ module category-theory.products-precategories where
 
 open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat )
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-property-is-contr)
-open import foundation.identity-types using (_＝_; ap)
-open import foundation.propositions using (is-prop; is-prop-Π; Prop)
+open import foundation.dependent-pair-types
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.unique-existence using (∃!)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

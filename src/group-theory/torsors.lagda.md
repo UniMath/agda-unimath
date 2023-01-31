@@ -9,26 +9,21 @@ module group-theory.torsors where
 
 open import foundation.0-connected-types using
   ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences using
   ( _≃_; is-equiv; map-inv-is-equiv; map-equiv; isretr-map-inv-equiv;
     issec-map-inv-equiv; is-equiv-Prop; is-equiv-has-inverse; _∘e_)
-open import foundation.functions using (_∘_; id)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (refl-htpy; _~_)
-open import foundation.identity-types using (Id; _∙_; inv; ap; tr; refl)
-open import foundation.mere-equality using (mere-eq; mere-eq-Prop)
-open import foundation.propositional-truncations using
-  ( unit-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-equiv; is-prop-Π)
-open import foundation.sets using
-  ( Set; type-Set; is-set-type-Set; is-set; is-set-equiv)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
 open import group-theory.group-actions using
   ( Abstract-Group-Action; set-Abstract-Group-Action;

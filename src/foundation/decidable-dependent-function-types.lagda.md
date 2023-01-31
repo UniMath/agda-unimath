@@ -7,18 +7,15 @@ title: Decidability of dependent function types
 
 module foundation.decidable-dependent-function-types where
 
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-equiv; is-decidable-prod; is-decidable-equiv')
-open import foundation.equivalences using (_≃_; map-equiv)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-Π)
-open import foundation.maybe using (Maybe; unit-Maybe; exception-Maybe)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-dependent-universal-property-coprod)
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.maybe
+open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-maybe using
   ( equiv-dependent-universal-property-Maybe)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 ```
 
 ## Idea

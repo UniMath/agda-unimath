@@ -7,19 +7,17 @@ title: The universal property of maybe
 
 module foundation.universal-property-maybe where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (refl)
-open import foundation.maybe using
-  ( Maybe; unit-Maybe; exception-Maybe)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.maybe
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

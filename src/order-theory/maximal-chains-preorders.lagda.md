@@ -5,10 +5,9 @@
 
 module order-theory.maximal-chains-preorders where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import order-theory.chains-preorders using
   ( chain-Preorder; inclusion-chain-preorder-Prop; element-chain-Preorder)

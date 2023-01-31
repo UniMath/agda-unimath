@@ -23,20 +23,18 @@ open import elementary-number-theory.proper-divisors-natural-numbers using
     is-decidable-is-proper-divisor-ℕ; is-prop-is-proper-divisor-ℕ;
     is-proper-divisor-one-is-proper-divisor-ℕ)
     
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; eq-is-contr; center)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-prod; is-decidable-neg; is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (_∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation.identity-types using (refl; inv; _∙_; ap)
-open import foundation.logical-equivalences using (_↔_; iff-equiv)
-open import foundation.propositions using (is-equiv-is-prop)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

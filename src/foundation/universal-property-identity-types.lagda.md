@@ -7,14 +7,12 @@ title: The universal property of identity types
 
 module foundation.universal-property-identity-types where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π; equiv-precomp-Π)
-open import foundation.identity-types using (_＝_; refl; ind-Id; equiv-inv)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

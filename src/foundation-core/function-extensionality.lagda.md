@@ -7,14 +7,12 @@ title: Function extensionality
 
 module foundation-core.function-extensionality where
 
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; issec-map-inv-is-equiv;
-    isretr-map-inv-is-equiv; is-equiv-map-inv-is-equiv)
-open import foundation-core.functions using (_∘_; id; precomp)
-open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (_＝_; refl; ap)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

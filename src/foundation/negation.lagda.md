@@ -9,14 +9,13 @@ module foundation.negation where
 
 open import foundation-core.negation public
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.empty-types using (empty; is-prop-empty; ex-falso)
-open import foundation.equivalences using (_≃_; map-inv-equiv; map-equiv)
-open import foundation.logical-equivalences using (_⇔_; _↔_; equiv-iff')
-open import foundation.propositions using
-  ( is-prop; is-prop-function-type; Prop; type-Prop; is-prop-type-Prop)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation-core.empty-types
+open import foundation.equivalences
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

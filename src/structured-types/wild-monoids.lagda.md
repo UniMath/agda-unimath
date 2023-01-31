@@ -5,10 +5,10 @@ title: Wild monoids
 ```agda
 module structured-types.wild-monoids where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; _∙_; ap)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 
@@ -23,8 +23,7 @@ open import structured-types.morphisms-coherent-h-spaces using
   ( hom-Coherent-H-Space; preserves-unital-mul; preserves-left-unit-law-mul;
     preserves-right-unit-law-mul; preserves-coh-unit-laws-mul)
 open import structured-types.pointed-maps using (_→*_)
-open import structured-types.pointed-types using
-  ( Pointed-Type)
+open import structured-types.pointed-types
 ```
 
 ## Idea

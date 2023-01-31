@@ -5,8 +5,7 @@ title: The greatest common divisor of natural numbers
 ```agda
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types using
   ( is-decidable-bounded-Π-ℕ)
 open import elementary-number-theory.distance-natural-numbers using
@@ -38,17 +37,17 @@ open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ)
 
-open import foundation.cartesian-product-types using (_×_; pair')
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-types using
   ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
     is-decidable-neg; dn-elim-is-decidable)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
-open import foundation.logical-equivalences using (_↔_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.universe-levels
 ```
 
 ## Idea

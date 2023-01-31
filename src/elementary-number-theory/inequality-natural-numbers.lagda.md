@@ -7,8 +7,7 @@ title: Inequality of natural numbers
 
 module elementary-number-theory.inequality-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; commutative-add-ℕ; left-unit-law-add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; commutative-mul-ℕ; right-unit-law-mul-ℕ; right-zero-law-mul-ℕ;
     right-successor-law-mul-ℕ)
@@ -16,18 +15,18 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
     
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (pair; pr1; pr2; Σ)
-open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (_＝_; refl; inv; ap; tr)
-open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop; Prop)
-open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import order-theory.posets
 ```

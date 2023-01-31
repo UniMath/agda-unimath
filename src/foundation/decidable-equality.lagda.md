@@ -7,32 +7,29 @@ title: Decidable equality
 
 module foundation.decidable-equality where
 
-open import foundation.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types using
   ( _+_; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
     neq-inr-inl; is-prop-coprod)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-retract-of; is-decidable-iff; is-decidable-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.double-negation using (intro-dn)
-open import foundation.empty-types using (empty; is-prop-empty; ex-falso)
-open import foundation.equality-dependent-pair-types using
-  ( eq-pair-Σ'; pair-eq-Σ)
-open import foundation.equivalences using (_≃_; map-equiv; inv-equiv; equiv-ap)
-open import foundation.fibers-of-maps using (equiv-fib-pr1; equiv-total-fib)
-open import foundation.identity-types using (_＝_; refl; ap; tr)
-open import foundation.injective-maps using (is-prop-map-is-injective)
-open import foundation.negation using (is-prop-neg)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
 open import foundation.propositions using
   ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop; Prop;
     is-prop-is-inhabited; is-prop-Π)
-open import foundation.retractions using (_retract-of_; retract-eq)
-open import foundation.sections using (map-section; is-injective-map-section)
-open import foundation.sets using (is-set; is-set-prop-in-id)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr)
-open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.retractions
+open import foundation.sections
+open import foundation.sets
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Definition

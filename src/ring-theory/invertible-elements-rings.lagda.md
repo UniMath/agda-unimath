@@ -7,12 +7,11 @@ title: Invertible elements in rings
 
 module ring-theory.invertible-elements-rings where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import group-theory.invertible-elements-monoids
 

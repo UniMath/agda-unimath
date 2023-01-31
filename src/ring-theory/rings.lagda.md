@@ -7,19 +7,19 @@ title: Rings
 
 module ring-theory.rings where
 
-open import foundation.binary-embeddings using (is-binary-emb)
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using (Id; ap-binary; _∙_; inv; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
-open import foundation.propositions using (Prop)
-open import foundation.sets using (Set; is-set; Id-Prop)
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
 open import foundation.unital-binary-operations using (is-unital)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.universe-levels
 
 open import group-theory.abelian-groups using
   ( Ab; set-Ab; type-Ab; add-Ab; group-Ab; is-set-type-Ab;

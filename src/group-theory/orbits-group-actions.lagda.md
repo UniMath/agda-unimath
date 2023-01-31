@@ -7,9 +7,9 @@ title: Orbits of group actions
 
 module group-theory.orbits-group-actions where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import group-theory.group-actions using
   ( Abstract-Group-Action; type-Abstract-Group-Action;

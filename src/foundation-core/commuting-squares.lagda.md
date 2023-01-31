@@ -7,9 +7,9 @@ title: Commuting squares
 
 module foundation-core.commuting-squares where
 
-open import foundation-core.functions using (_∘_)
-open import foundation-core.homotopies using (_~_; _·l_; _·r_; _∙h_)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.universe-levels
 ```
 
 ## Idea

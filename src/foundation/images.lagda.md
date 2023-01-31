@@ -7,42 +7,28 @@ title: The image of a map
 
 module foundation.images where
 
-open import foundation.1-types using
-  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-total-path; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using
-  ( is-emb; _↪_; map-emb)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; is-equiv-map-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; _∙h_; _·r_; _·l_)
-open import foundation.identity-types using (_＝_; refl; inv; _∙_)
-open import foundation.injective-maps using (is-injective; is-injective-is-emb)
-open import foundation.propositional-maps using (fib-emb-Prop)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop;
-    map-universal-property-trunc-Prop; trunc-Prop;
-    apply-universal-property-trunc-Prop)
-open import foundation.propositions using (is-prop; type-Prop)
-open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
-open import foundation.slice using
-  ( hom-slice; map-hom-slice; triangle-hom-slice; equiv-slice; htpy-hom-slice;
-    comp-hom-slice; hom-equiv-slice)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using
-  ( is-emb-inclusion-subtype; eq-type-subtype; subtype; type-subtype;
-    inclusion-subtype)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.truncated-types using (is-trunc; is-trunc-emb)
-open import foundation.truncation-levels using
-  ( 𝕋; succ-𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.1-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.slice
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.universe-levels
 ```
 
 ## Idea

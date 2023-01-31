@@ -16,11 +16,10 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.rational-numbers using
   ( ℚ; zero-ℚ; in-fraction-ℤ; is-prop-is-reduced-fraction-ℤ )
 
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.identity-types using
-  (_＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.propositions using (eq-is-prop)
+open import foundation.identity-types
+open import foundation.propositions
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```

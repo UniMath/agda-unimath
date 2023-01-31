@@ -7,11 +7,10 @@ title: Morphisms of the slice category of types
 
 module foundation.slice where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation.embeddings using (_↪_; map-emb; is-emb-map-emb)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences using
   ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
     is-fiberwise-equiv; is-property-is-equiv; id-equiv; map-inv-is-equiv)
@@ -19,35 +18,28 @@ open import foundation.fibers-of-maps using
   ( fib; equiv-fib-pr1; equiv-total-fib; triangle-map-equiv-total-fib)
 open import foundation.function-extensionality using
   ( equiv-funext; eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types using
   ( equiv-tot; fib-triangle; is-fiberwise-equiv-is-equiv-triangle;
     is-equiv-triangle-is-fiberwise-equiv; equiv-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies using
   ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy; _·r_;
     equiv-concat-htpy)
-open import foundation.identity-types using (_＝_; refl; inv; inv-inv; _∙_)
-open import foundation.injective-maps using (is-injective-emb)
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.polynomial-endofunctors
-open import foundation.propositional-maps using
-  ( is-prop-map-is-emb; equiv-is-prop-map-is-emb)
-open import foundation.propositions using
-  ( equiv-prop; is-prop-Π; is-prop; is-prop-is-equiv; Prop)
+open import foundation.propositional-maps
+open import foundation.propositions
 open import foundation.structure using
   ( hom-structure; fam-structure; structure-map)
-open import foundation.structure-identity-principle using
-  ( extensionality-Σ; is-contr-total-Eq-structure)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( inv-assoc-Σ; equiv-right-swap-Σ)
-open import foundation.type-theoretic-principle-of-choice using
-  ( inv-distributive-Π-Σ)
+open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence using
   ( is-contr-total-equiv; eq-equiv-fam)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.universe-levels
 ```
 
 ## Idea

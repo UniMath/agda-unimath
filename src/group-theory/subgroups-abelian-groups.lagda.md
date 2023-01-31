@@ -7,12 +7,12 @@ title: Subgroups of abelian groups
 
 module group-theory.subgroups-abelian-groups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using (is-prop)
-open import foundation.sets using (is-set; Set)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
 open import group-theory.abelian-groups using
   ( Ab; group-Ab; type-Ab; commutative-add-Ab)

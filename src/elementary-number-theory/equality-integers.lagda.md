@@ -11,32 +11,29 @@ open import elementary-number-theory.equality-natural-numbers using
   ( has-decidable-equality-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; is-zero-ℤ; one-ℤ; is-one-ℤ; neg-one-ℤ; is-neg-one-ℤ; ℤ-Set)
-open import elementary-number-theory.natural-numbers using
-  ( Eq-ℕ; refl-Eq-ℕ; eq-Eq-ℕ; is-set-ℕ; is-prop-Eq-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.decidable-equality using
   ( has-decidable-equality; has-decidable-equality-unit;
     has-decidable-equality-coprod)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.discrete-types using (Discrete-Type)
-open import foundation.empty-types using (empty; is-prop-empty)
-open import foundation.equality-coproduct-types using
-  ( is-set-coprod)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using (_≃_; is-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.propositions using (is-prop; eq-is-prop)
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; Set)
-open import foundation.unit-type using (unit; star; is-set-unit; is-prop-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

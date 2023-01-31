@@ -19,13 +19,12 @@ open import category-theory.precategories using
   ( Precat; obj-Precat; type-hom-Precat; id-hom-Precat; comp-hom-Precat;
     comp-hom-Precat'; right-unit-law-comp-hom-Precat; assoc-comp-hom-Precat)
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.existential-quantification using (∃)
-open import foundation.identity-types using (_＝_; ap; _∙_; inv)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.universe-levels
 ```
 
 ## Idea

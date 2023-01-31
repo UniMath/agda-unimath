@@ -9,12 +9,12 @@ module elementary-number-theory.products-of-natural-numbers where
 
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.unit-type using (star)
+open import foundation.coproduct-types
+open import foundation.unit-type
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ```agda

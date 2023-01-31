@@ -7,22 +7,19 @@ title: Symmetric difference of subtypes
 
 module foundation.symmetric-difference where
 
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.decidable-propositions using
-  ( type-decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop; is-prop-is-decidable)
-open import foundation.decidable-subtypes using (decidable-subtype; type-decidable-subtype)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; is-equiv-has-inverse)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (_＝_; refl; tr)
-open import foundation.intersections-subtypes using
-  ( intersection-decidable-subtype)
-open import foundation.propositions using (eq-is-prop)
-open import foundation.subtypes using (subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.xor using (xor-Prop; xor-decidable-Prop)
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types hiding (inv)
+open import foundation.intersections-subtypes
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+open import foundation.xor
 ```
 
 ## Idea

@@ -7,13 +7,13 @@ title: Set presented types
 
 module foundation.set-presented-types where
 
-open import foundation.equivalences using (is-equiv)
-open import foundation.existential-quantification using (∃-Prop)
-open import foundation.functions using (_∘_)
-open import foundation.propositions using (Prop)
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.functions
+open import foundation.propositions
 open import foundation.set-truncations using (unit-trunc-Set)
-open import foundation.sets using (Set; type-Set)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

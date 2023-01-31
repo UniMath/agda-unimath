@@ -7,27 +7,25 @@ title: Perfect Images
 
 module foundation.perfect-images where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr; ind-coprod)
-open import foundation.decidable-types using
-  (is-decidable; dn-elim-is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.double-negation using (¬¬)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.embeddings
-open import foundation.empty-types using (ex-falso)
-open import foundation.fibers-of-maps using(fib)
-open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (_＝_; refl; inv; ap; _∙_; tr)
-open import foundation.injective-maps using (is-injective; is-injective-is-emb)
+open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle using (LEM)
-open import foundation.negation using (¬; is-prop-neg)
-open import foundation.propositions using
-  (is-prop; eq-is-prop'; is-prop-Π; is-prop-Σ; Prop)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.negation
+open import foundation.propositions
+open import foundation.propositional-maps
+open import foundation.universe-levels
 ```
 
 ## Idea

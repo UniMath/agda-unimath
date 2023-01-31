@@ -9,39 +9,32 @@ module univalent-combinatorics.counting-decidable-subtypes where
 
 open import foundation.decidable-subtypes public
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using (equiv-is-contr; is-contr-Σ)
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.decidable-embeddings using
   ( _↪d_; map-decidable-emb; decidable-subtype-decidable-emb)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-propositions using
-  ( is-decidable-Prop)
-open import foundation.decidable-types using
-  ( is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_; map-emb)
-open import foundation.equivalences using (map-equiv; _≃_; id-equiv)
+open import foundation.decidable-equality
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
 open import foundation.fibers-of-maps using
   ( equiv-fib-pr1; equiv-total-fib; fib)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositional-maps using (is-prop-map-emb)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; Prop; type-Prop; is-prop-type-Prop)
-open import foundation.subtypes using (subtype; type-subtype)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod)
-open import foundation.type-arithmetic-empty-type using
-  ( right-unit-law-coprod-is-empty)
-open import foundation.unit-type using (unit; star; is-contr-unit)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; is-empty-is-zero-number-of-elements-count; count-is-contr;
@@ -50,9 +43,8 @@ open import univalent-combinatorics.counting using
     has-decidable-equality-count)
 open import univalent-combinatorics.decidable-propositions using
   ( is-decidable-count)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-equiv')
-open import univalent-combinatorics.standard-finite-types using (zero-Fin; Fin)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Properties

@@ -7,25 +7,19 @@ title: The universal property of propositional truncations with respect to sets
 
 module foundation.universal-property-propositional-truncation-into-sets where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
+open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (ap; inv; _∙_; refl)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop; is-prop-type-trunc-Prop; trunc-Prop;
-    apply-universal-property-trunc-Prop; map-universal-property-trunc-Prop;
-    ind-trunc-Prop)
-open import foundation.propositions using
-  ( eq-is-prop; all-elements-equal; is-prop-all-elements-equal; is-prop;
-    Prop; eq-is-prop')
-open import foundation.sets using (Set; type-Set; Id-Prop)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.weakly-constant-maps using
-  ( is-weakly-constant-map; is-weakly-constant-map-Prop)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
+open import foundation.weakly-constant-maps
 ```
 
 ## Idea

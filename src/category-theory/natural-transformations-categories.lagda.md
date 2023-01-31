@@ -14,7 +14,7 @@ open import category-theory.functors-categories using
 open import category-theory.natural-transformations-precategories using
   ( is-nat-trans-Precat; nat-trans-Precat; components-nat-trans-Precat)
   
-open import foundation.universe-levels using (UU; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

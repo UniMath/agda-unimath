@@ -11,27 +11,25 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
     is-not-one-ℕ; Eq-ℕ; eq-Eq-ℕ; Eq-eq-ℕ; is-set-ℕ; refl-Eq-ℕ; ℕ-Set)
 
-open import foundation-core.decidable-propositions using (decidable-Prop)
+open import foundation-core.decidable-propositions
 open import foundation-core.discrete-types using (Discrete-Type)
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-neg)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty; is-prop-empty)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (id)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.propositions using (is-prop)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.set-truncations using
   ( type-trunc-Set; equiv-unit-trunc-Set)
-open import foundation.sets using (is-set; is-set-prop-in-id; Set)
-open import foundation.unit-type using (unit; star; is-prop-unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Properties

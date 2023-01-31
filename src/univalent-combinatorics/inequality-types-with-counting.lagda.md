@@ -11,17 +11,16 @@ open import elementary-number-theory.inequality-standard-finite-types using
   ( leq-Fin; refl-leq-Fin; antisymmetric-leq-Fin; transitive-leq-Fin;
     concatenate-eq-leq-eq-Fin)
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( map-inv-equiv; isretr-map-inv-equiv)
-open import foundation.identity-types using (Id; refl; inv)
-open import foundation.injective-maps using (is-injective-map-inv-equiv)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; map-inv-equiv-count; number-of-elements-count; map-equiv-count;
     equiv-count)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

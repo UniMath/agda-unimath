@@ -7,23 +7,20 @@ title: Counting the elements of dependent function types
 
 module univalent-combinatorics.dependent-function-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-precomp-Π)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.unit-type using (star)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-dependent-universal-property-coprod)
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.propositional-truncations
+open import foundation.unit-type
+open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type using
   ( dependent-universal-property-empty')
 open import foundation.universal-property-unit-type using
   ( equiv-dependent-universal-property-unit)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.universe-levels
 
 open import univalent-combinatorics.cartesian-product-types using
   ( count-prod)
@@ -31,9 +28,8 @@ open import univalent-combinatorics.counting using
   ( count; count-is-contr; count-equiv'; equiv-count; map-equiv-count;
     number-of-elements-count)
 open import univalent-combinatorics.finite-choice using (finite-choice)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; 𝔽; type-𝔽; is-finite-type-𝔽)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

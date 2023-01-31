@@ -12,24 +12,23 @@ open import foundation.decidable-dependent-pair-types public
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ; le-ℕ; is-decidable-le-ℕ;
     leq-zero-ℕ; leq-le-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers using
   ( is-upper-bound-ℕ; is-strict-upper-bound-ℕ;
     is-upper-bound-is-strict-upper-bound-ℕ)
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-iff; is-decidable-fam; is-decidable-prod;
     is-decidable-function-type)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty; ex-falso)
-open import foundation.functions using (_∘_; id)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

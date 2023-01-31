@@ -9,12 +9,11 @@ module elementary-number-theory.lower-bounds-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers using
   ( leq-ℕ; is-prop-leq-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-function-type; Prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

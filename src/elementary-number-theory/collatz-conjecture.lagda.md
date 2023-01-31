@@ -12,11 +12,10 @@ open import elementary-number-theory.multiplication-natural-numbers using
 open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( is-decidable-div-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-one-ℕ)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair)
-open import foundation.universe-levels using (UU; lzero)
+open import elementary-number-theory.natural-numbers
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 ```
 
 # We state the collatz conjecture

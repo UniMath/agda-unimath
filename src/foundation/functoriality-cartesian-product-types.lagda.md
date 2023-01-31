@@ -7,16 +7,15 @@ title: Functoriality of cartesian product types
 
 module foundation.functoriality-cartesian-product-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (pair; pr1; pr2)
-open import foundation-core.equality-cartesian-product-types using (eq-pair)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_; inv-htpy; _∙h_)
-open import foundation-core.identity-types using (refl)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

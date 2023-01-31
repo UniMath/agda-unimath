@@ -5,10 +5,10 @@
 
 module linear-algebra.matrices-on-rings where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types using (Id; refl; ap-binary)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import linear-algebra.constant-matrices using (constant-matrix)
 open import linear-algebra.functoriality-matrices using (map-binary-matrix)

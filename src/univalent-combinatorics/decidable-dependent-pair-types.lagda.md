@@ -7,23 +7,22 @@ title: Decidability of dependent pair types
 
 module univalent-combinatorics.decidable-dependent-pair-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.coproduct-types
 open import foundation.decidable-dependent-pair-types using
   ( is-decidable-Σ-equiv)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (_∘_)
-open import foundation.equivalences using (id-equiv)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.equivalences
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; equiv-count; map-equiv-count; number-of-elements-count)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

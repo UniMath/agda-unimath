@@ -11,19 +11,17 @@ open import
   elementary-number-theory.modular-arithmetic-standard-finite-types using
   ( mul-Fin; left-unit-law-mul-Fin; associative-mul-Fin; left-zero-law-mul-Fin;
     right-unit-law-mul-Fin; right-zero-law-mul-Fin)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; _∙_; ap; inv)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import univalent-combinatorics.decidable-dependent-pair-types using
   ( is-decidable-Σ-Fin)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; one-Fin; zero-Fin; is-zero-Fin)
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

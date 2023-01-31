@@ -13,13 +13,13 @@ open import elementary-number-theory.divisibility-standard-finite-types using
   ( refl-div-Fin; trans-div-Fin)
 open import elementary-number-theory.modular-arithmetic using
   ( ℤ-Mod; mul-ℤ-Mod; is-decidable-div-ℤ; mul-ℤ-Mod')
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.absolute-value-integers
 
 open import foundation.decidable-types
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import univalent-combinatorics.fibers-of-maps
 ```

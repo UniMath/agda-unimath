@@ -7,30 +7,27 @@ title: The abstract quaternion group of order 8
 
 module finite-group-theory.abstract-quaternion-group where
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-unit; is-decidable-empty; is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty)
-open import foundation.equivalences using (is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using (unit-trunc-Prop)
-open import foundation.sets using (is-set; Set)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.groups using (Group)
 open import group-theory.semigroups using (Semigroup)
 
 open import univalent-combinatorics.counting using (count)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; 𝔽; has-cardinality; UU-Fin; has-finite-cardinality)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

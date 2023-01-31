@@ -5,15 +5,14 @@ title: Double counting
 ```agda
 module univalent-combinatorics.double-counting where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; inv-equiv; _∘e_; id-equiv)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count)
-open import univalent-combinatorics.standard-finite-types using
-  ( is-injective-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

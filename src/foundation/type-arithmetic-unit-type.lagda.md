@@ -7,15 +7,14 @@ title: Type arithmetic with the unit type
 
 module foundation.type-arithmetic-unit-type where
 
-open import foundation-core.cartesian-product-types using (_×_)
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse; inv-equiv)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (refl)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.unit-type

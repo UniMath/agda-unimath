@@ -5,11 +5,10 @@
 
 module linear-algebra.transposition-matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types using
-  ( Id; refl; ap; _∙_; ap-binary)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import linear-algebra.functoriality-vectors using (map-vec)
 open import linear-algebra.matrices using (matrix)

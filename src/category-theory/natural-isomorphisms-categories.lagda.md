@@ -14,7 +14,7 @@ open import category-theory.natural-isomorphisms-precategories using
 open import category-theory.natural-transformations-categories using
   ( nat-trans-Cat)
 
-open import foundation.universe-levels using (UU; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

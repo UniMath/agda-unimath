@@ -16,16 +16,14 @@ open import elementary-number-theory.inequality-natural-numbers using
     preserves-le-succ-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ; right-successor-law-mul-ℕ; commutative-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ)
+open import elementary-number-theory.natural-numbers
   
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (pair)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary; tr)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Definition

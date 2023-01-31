@@ -7,8 +7,8 @@ title: Negation
 
 module foundation-core.negation where
 
-open import foundation-core.empty-types using (empty)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.empty-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

@@ -8,10 +8,9 @@ title: Large precategories
 module category-theory.large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (_＝_; refl; ap-binary)
-open import foundation.sets using
-  ( Set; type-Set; hom-Set; is-set; is-set-type-Set)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels using
   ( UU; Level; lsuc; _⊔_)
 ```

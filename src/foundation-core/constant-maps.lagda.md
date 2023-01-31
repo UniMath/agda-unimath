@@ -7,7 +7,7 @@ title: Constant maps
 
 module foundation-core.constant-maps where
 
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.universe-levels
 ```
 
 ## Definition

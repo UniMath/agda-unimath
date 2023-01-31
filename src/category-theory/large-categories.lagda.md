@@ -12,8 +12,8 @@ open import category-theory.isomorphisms-large-precategories using
   ( iso-eq-Large-Precat)
 open import category-theory.large-precategories using
   ( Large-Precat; obj-Large-Precat)
-open import foundation.equivalences using (is-equiv)
-open import foundation.universe-levels using (Level)
+open import foundation.equivalences
+open import foundation.universe-levels
 ```
 
 ## Idea

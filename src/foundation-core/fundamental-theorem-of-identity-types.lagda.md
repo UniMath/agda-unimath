@@ -7,23 +7,15 @@ title: The fundamental theorem of identity types
 
 module foundation-core.fundamental-theorem-of-identity-types where
 
-open import foundation-core.contractible-types using
-  ( is-contr; is-equiv-is-contr; is-contr-total-path; is-contr-is-equiv';
-    is-contr-equiv; is-contr-Σ; is-contr-retract-of; eq-is-contr;
-    is-contr-equiv'; is-contr-total-path')
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; is-fiberwise-equiv; is-equiv-sec-is-equiv; _∘e_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-fiberwise-equiv-is-equiv-tot; is-equiv-tot-is-fiberwise-equiv;
-    tot-comp; tot-htpy; tot-id; equiv-tot)
-open import foundation-core.homotopies using (_~_; refl-htpy; inv-htpy; _∙h_)
-open import foundation-core.identity-types using (Id; _＝_; ind-Id; inv; _∙_)
-open import foundation-core.retractions using (retr)
-open import foundation-core.sections using (sec)
-open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( interchange-Σ-Σ)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

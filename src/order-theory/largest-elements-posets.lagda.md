@@ -5,11 +5,10 @@
 
 module order-theory.largest-elements-posets where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 
 open import order-theory.largest-elements-preorders using
   ( is-largest-element-preorder-Prop; is-largest-element-Preorder;

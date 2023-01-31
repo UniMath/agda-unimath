@@ -10,7 +10,7 @@ module commutative-algebra.discrete-fields where
 open import commutative-algebra.commutative-rings using
   ( Commutative-Ring; ring-Commutative-Ring)
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
 open import ring-theory.division-rings using (is-division-Ring)
 ```

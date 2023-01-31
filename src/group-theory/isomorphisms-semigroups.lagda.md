@@ -13,20 +13,19 @@ open import category-theory.isomorphisms-large-precategories using
     is-sec-hom-inv-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat;
     is-prop-is-iso-Large-Precat; id-iso-Large-Precat; iso-eq-Large-Precat)
 
-open import foundation.contractible-types using (is-contr; is-contr-equiv')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences using
   ( is-equiv; map-inv-is-equiv; is-emb-is-equiv; issec-map-inv-is-equiv;
     isretr-map-inv-is-equiv; is-equiv-has-inverse; _≃_;
     is-property-is-equiv; _∘e_)
 open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.identity-types using (Id; _∙_; ap; inv)
-open import foundation.propositions using (is-prop)
-open import foundation.subtypes using (equiv-type-subtype)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-right-swap-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import group-theory.equivalences-semigroups using
   ( preserves-mul-equiv-Semigroup; equiv-Semigroup;

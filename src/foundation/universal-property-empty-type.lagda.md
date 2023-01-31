@@ -7,15 +7,13 @@ title: The universal property of the empty type
 
 module foundation.universal-property-empty-type where
 
-open import foundation-core.contractible-types using
-  ( is-contr; center; is-equiv-is-contr; is-contr-is-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.functions
+open import foundation-core.universe-levels
 
-open import foundation.empty-types using (is-empty; empty; ex-falso; ind-empty)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-is-equiv-precomp; is-equiv-precomp-is-equiv)
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
 ```
 

@@ -7,10 +7,10 @@ title: Semigroups
 
 module group-theory.semigroups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.sets using (Set; type-Set; is-set-type-Set; is-set)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

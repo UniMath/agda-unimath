@@ -10,9 +10,8 @@ module group-theory.monomorphisms-groups where
 open import category-theory.monomorphisms-large-precategories using
   ( is-mono-Large-Precat-Prop; is-mono-iso-Large-Precat)
 
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import group-theory.groups using (Group)
 open import group-theory.homomorphisms-groups using (type-hom-Group)

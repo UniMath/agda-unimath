@@ -7,8 +7,7 @@ title: Divisibility of natural numbers
 
 module elementary-number-theory.divisibility-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; ap-add-ℕ; is-injective-add-ℕ'; commutative-add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers using
   ( dist-ℕ; is-additive-right-inverse-dist-ℕ)
 open import elementary-number-theory.inequality-natural-numbers using
@@ -23,13 +22,13 @@ open import elementary-number-theory.natural-numbers using
   ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
     is-successor-is-nonzero-ℕ)
     
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; tr; ap)
-open import foundation.negation using (¬)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.propositions using (is-prop)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 # Divisibility on the natural numbers

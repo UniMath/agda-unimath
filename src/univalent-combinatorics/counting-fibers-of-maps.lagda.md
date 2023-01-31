@@ -10,9 +10,9 @@ module univalent-combinatorics.counting-fibers-of-maps where
 open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-count-ℕ)
 
-open import foundation.fibers-of-maps using (fib; equiv-total-fib)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.fibers-of-maps
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; count-equiv'; number-of-elements-count)

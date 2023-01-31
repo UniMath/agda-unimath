@@ -7,20 +7,17 @@ title: Isomorphisms of abelian groups
 
 module group-theory.isomorphisms-abelian-groups where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; is-equiv; map-inv-is-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using (is-prop)
-open import foundation.subtypes using (equiv-ap-inclusion-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 
 open import group-theory.abelian-groups using
   ( Ab; semigroup-Ab; type-Ab; group-Ab; is-abelian-group-Prop)

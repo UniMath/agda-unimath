@@ -9,28 +9,25 @@ module foundation.contractible-types where
 
 open import foundation-core.contractible-types public
 
-open import foundation-core.constant-maps using (const)
-open import foundation-core.contractible-maps using
-  ( is-contr-map-is-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation-core.constant-maps
+open import foundation-core.contractible-maps
+open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences using
   ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse;
     map-inv-equiv; isretr-map-inv-equiv; map-equiv; issec-map-inv-equiv)
 open import foundation-core.function-extensionality using
   ( funext; htpy-eq; eq-htpy)
-open import foundation-core.functions using (id)
-open import foundation-core.functoriality-dependent-pair-types using (tot)
-open import foundation-core.identity-types using (_＝_; left-inv; refl; ap)
-open import foundation-core.propositions using (Prop; equiv-prop; is-prop)
-open import foundation-core.singleton-induction using
-  ( ind-singleton-is-contr; comp-singleton-is-contr)
-open import foundation-core.subtypes using (eq-type-subtype)
-open import foundation-core.truncated-types using
-  ( is-trunc; is-trunc-succ-is-trunc)
-open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.singleton-induction
+open import foundation-core.subtypes
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.unit-type using (raise-unit; is-contr-raise-unit)
+open import foundation.unit-type
 open import foundation.subuniverses using
   ( type-subuniverse; equiv-eq-subuniverse; is-equiv-equiv-eq-subuniverse;
     eq-equiv-subuniverse)

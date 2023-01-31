@@ -7,24 +7,24 @@ title: Homomorphisms of generated subgroups
 
 module group-theory.homomorphisms-generated-subgroups where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_; is-emb; map-emb; comp-emb)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using (is-equiv-has-inverse; emb-equiv)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
-open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
-open import foundation.propositions using (eq-is-prop)
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.propositional-truncations using
   ( unit-trunc-Prop; apply-universal-property-trunc-Prop;
     is-prop-type-trunc-Prop)
-open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (type-subtype)
-open import foundation.truncated-types using (is-trunc-Π)
-open import foundation.truncation-levels using (zero-𝕋)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.epimorphisms-groups using (is-epi-iso-Group)
 open import group-theory.full-subgroups
@@ -45,7 +45,7 @@ open import group-theory.subgroups-generated-by-subsets-groups using
 
 open import univalent-combinatorics.lists using
   ( list; nil; cons; in-list; fold-list)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

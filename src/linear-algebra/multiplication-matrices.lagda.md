@@ -5,9 +5,9 @@
 
 module linear-algebra.multiplication-matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
 open import linear-algebra.constant-vectors using (constant-vec)
 open import linear-algebra.matrices-on-rings using (matrix-Ring)

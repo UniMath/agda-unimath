@@ -7,8 +7,7 @@ title: Euclidean division on the natural numbers
 
 module elementary-number-theory.euclidean-division-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; add-ℕ'; left-unit-law-add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers using
   ( cong-ℕ; refl-cong-ℕ; symm-cong-ℕ)
 open import elementary-number-theory.distance-natural-numbers using
@@ -19,15 +18,13 @@ open import
   ( mod-succ-ℕ; cong-nat-mod-succ-ℕ; leq-nat-mod-succ-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; right-zero-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap)
+open import elementary-number-theory.natural-numbers
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.identity-types
 
-open import univalent-combinatorics.standard-finite-types using
-  ( nat-Fin; strict-upper-bound-nat-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

@@ -9,13 +9,13 @@ module group-theory.homomorphisms-abelian-groups where
 
 open import category-theory.large-precategories using (Large-Precat)
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv)
-open import foundation.functions using (id)
-open import foundation.identity-types using (Id)
-open import foundation.sets using (is-set; Set)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 
 open import group-theory.abelian-groups using
   ( Ab; type-Ab; semigroup-Ab; group-Ab; add-Ab; zero-Ab; neg-Ab)

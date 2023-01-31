@@ -15,7 +15,7 @@ open import category-theory.natural-isomorphisms-large-precategories using
   ( natural-isomorphism-Large-Precat)
 open import category-theory.large-precategories using
   ( Large-Precat)
-open import foundation.universe-levels using (Level)
+open import foundation.universe-levels
 ```
 
 ## Idea

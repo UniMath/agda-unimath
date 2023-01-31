@@ -7,17 +7,17 @@ title: Magmas
 
 module structured-types.magmas where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (Id)
-open import foundation.unit-type using (unit; star)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.unital-binary-operations using (is-unital)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.universe-levels
 ```
 
 ## Idea

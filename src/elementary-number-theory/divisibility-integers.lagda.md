@@ -26,23 +26,21 @@ open import elementary-number-theory.multiplication-integers using
     compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ;
     is-emb-mul-ℤ'; right-negative-law-mul-ℤ; left-neg-unit-law-mul-ℤ;
     is-plus-or-minus-ℤ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ)
+open import elementary-number-theory.natural-numbers
   
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
-open import foundation.decidable-types using
-  ( is-decidable; dn-elim-is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equational-reasoning
-open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv; ap; tr)
-open import foundation.negation using (¬)
-open import foundation.propositional-maps using (is-prop-map-is-emb)
-open import foundation.propositions using (is-prop)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-maps
+open import foundation.propositions
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

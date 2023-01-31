@@ -7,37 +7,31 @@ title: Lists
 
 module univalent-combinatorics.lists where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
+open import foundation.cartesian-product-types
 open import foundation.contractible-types using
   ( eq-is-contr; is-contr; is-contr-equiv'; is-contr-total-path;
     is-trunc-is-contr)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.decidable-types using
-  ( is-decidable-iff; is-decidable-prod; is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( raise-empty; ex-falso; is-empty-raise-empty; is-trunc-is-empty)
-open import foundation.equivalences using (is-equiv; is-equiv-has-inverse; _≃_)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.raising-universe-levels using (map-raise; map-inv-raise)
-open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-prod; is-trunc-equiv)
-open import foundation.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
-open import foundation.unit-type using
-  ( raise-unit; raise-star; is-contr-raise-unit; unit; star)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.monoids using
   ( Monoid; type-Monoid; unit-Monoid; mul-Monoid; left-unit-law-mul-Monoid;

@@ -9,21 +9,19 @@ module foundation.sets where
 
 open import foundation-core.sets public
 
-open import foundation-core.1-types using (is-1-type; 1-Type)
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_)
-open import foundation-core.equivalences using (_≃_; is-equiv)
-open import foundation-core.functions using (precomp)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; Prop; is-prop-Σ)
-open import foundation-core.truncation-levels using (zero-𝕋; neg-one-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.1-types
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation.embeddings
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr; is-trunc-is-contr)
-open import foundation.propositional-maps using
-  ( is-emb-is-prop-map)
+open import foundation.contractible-types
+open import foundation.propositional-maps
 open import foundation.subuniverses using
   ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)

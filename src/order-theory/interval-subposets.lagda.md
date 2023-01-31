@@ -5,9 +5,9 @@
 
 module order-theory.interval-subposets where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using (Prop; prod-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 
 open import order-theory.posets using (Poset; element-Poset; leq-poset-Prop)
 open import order-theory.subposets using (sub-Poset)

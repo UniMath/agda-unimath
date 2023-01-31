@@ -15,12 +15,11 @@ open import category-theory.large-precategories using
     comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat;
     associative-comp-hom-Large-Precat; is-set-type-hom-Large-Precat)
 
-open import foundation.embeddings using (is-emb-Prop)
-open import foundation.equivalences using (is-equiv-has-inverse)
-open import foundation.identity-types using (_∙_; ap; inv)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; eq-is-prop)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

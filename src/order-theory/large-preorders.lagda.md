@@ -9,9 +9,8 @@ module order-theory.large-preorders where
 
 open import Agda.Primitive using (Setω)
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
+open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.universe-levels using
   ( Level; UU; _⊔_; lsuc)
 

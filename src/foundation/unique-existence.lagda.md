@@ -7,9 +7,9 @@ title: Unique existence
 
 module foundation.unique-existence where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 ```
 
 ## Idea

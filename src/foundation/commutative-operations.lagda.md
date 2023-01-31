@@ -7,32 +7,24 @@ title: Commutative operations
 
 module foundation.commutative-operations where
 
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( map-equiv; _≃_; _∘e_; inv-equiv; id-equiv)
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.equivalence-extensionality using (htpy-equiv)
 open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-coproduct-types using (map-equiv-coprod)
-open import foundation.identity-types using (_＝_; ap-binary; ap; _∙_)
-open import foundation.mere-equivalences using (refl-mere-equiv)
-open import foundation.sets using (Set; type-Set)
-open import
-  foundation.universal-property-propositional-truncation-into-sets using
-  ( map-universal-property-set-quotient-trunc-Prop;
-    htpy-universal-property-set-quotient-trunc-Prop)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_; lzero)
-open import foundation.unordered-pairs using
-  ( unordered-pair; standard-unordered-pair;
-    is-commutative-standard-unordered-pair)
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.sets
+open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.unit-type
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import univalent-combinatorics.2-element-types using
-  ( decide-value-equiv-Fin-two-ℕ; equiv-ev-zero-htpy-equiv-Fin-two-ℕ)
-open import univalent-combinatorics.finite-types using (Fin-UU-Fin')
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin; equiv-succ-Fin)
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

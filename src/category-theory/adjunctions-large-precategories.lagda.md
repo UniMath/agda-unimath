@@ -23,10 +23,9 @@ open import category-theory.natural-transformations-large-precategories using
     coherence-square-natural-transformation-Large-Precat)
 open import foundation.commuting-squares using
   ( coherence-square; coherence-square-inv-horizontal)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; inv-equiv; map-inv-equiv)
-open import foundation.identity-types using (_＝_; inv; _∙_; ap)
-open import foundation.universe-levels using (Level)
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

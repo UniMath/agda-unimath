@@ -5,17 +5,17 @@ title: Standard finite trees
 ```agda
 module univalent-combinatorics.standard-finite-trees where
 
-open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ; is-zero-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers using (sum-Fin-ℕ)
 open import elementary-number-theory.maximum-natural-numbers using (max-Fin-ℕ)
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.empty-types using (ex-falso; empty)
-open import foundation.identity-types using (Id)
-open import foundation.unit-type using (unit)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

@@ -7,8 +7,8 @@ title: The interchange law
 
 module foundation.interchange-law where
 
-open import foundation.identity-types using (_＝_; _∙_; inv; ap)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

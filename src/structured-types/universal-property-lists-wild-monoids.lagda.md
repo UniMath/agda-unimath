@@ -5,12 +5,12 @@ title: The universal property of lists with respect to wild monoids
 ```agda
 module structured-types.universal-property-lists-wild-monoids where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.dependent-pair-types
 open import foundation.identity-types using
   ( Id; refl; _∙_; ap; inv; ap-concat; ap-comp; ap-id; concat; left-inv;
     concat'; assoc)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups using (preserves-mul)
 

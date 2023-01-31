@@ -7,47 +7,28 @@ title: Truncations
 
 module foundation.truncations where
 
-open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋)
+open import foundation-core.truncation-levels
 
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( center; is-contr; is-contr-equiv'; is-contr-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using
-  ( pair-eq-Σ; eq-pair-Σ)
-open import foundation.equivalences using
-  ( _≃_; is-equiv; map-inv-equiv; is-equiv-has-inverse;
-    inv-equiv; _∘e_; map-equiv; id-equiv; isretr-map-inv-equiv)
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality using (htpy-eq; equiv-funext)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π; map-equiv-Π; equiv-Π; compute-map-equiv-Π)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; _·l_)
-open import foundation.identity-types using
-  ( equiv-inv; _＝_; refl; ap; Id; equiv-concat'; _∙_; inv)
-open import foundation.propositions using (eq-is-prop')
-open import foundation.truncated-types using
-  ( is-trunc; Truncated-Type; type-Truncated-Type;
-    is-trunc-succ-is-trunc; type-equiv-Truncated-Type;
-    Truncated-Type-Truncated-Type; extensionality-Truncated-Type;
-    Π-Truncated-Type'; truncated-type-succ-Truncated-Type;
-    Id-Truncated-Type; Σ-Truncated-Type; Π-Truncated-Type;
-    Id-Truncated-Type')
+open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.truncated-types
 open import foundation.universal-property-dependent-pair-types
 
 open import foundation-core.truncation-levels
-open import foundation-core.universal-property-truncation using
-  ( is-truncation; precomp-Trunc; universal-property-truncation;
-    universal-property-truncation-is-truncation; map-is-truncation;
-    triangle-is-truncation; precomp-Π-Truncated-Type;
-    dependent-universal-property-truncation-is-truncation;
-    dependent-universal-property-truncation)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.universal-property-truncation
+open import foundation-core.universe-levels
 ```
 
 ## Idea

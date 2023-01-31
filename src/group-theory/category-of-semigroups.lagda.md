@@ -11,12 +11,11 @@ open import category-theory.large-categories using
   ( is-category-Large-Precat; Large-Cat; precat-Large-Cat;
     is-category-Large-Cat)
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-inv-is-equiv)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import group-theory.isomorphisms-semigroups using
   ( id-iso-Semigroup; is-contr-total-iso-Semigroup; iso-eq-Semigroup;

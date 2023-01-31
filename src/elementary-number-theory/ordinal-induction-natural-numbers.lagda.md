@@ -9,10 +9,10 @@ module elementary-number-theory.ordinal-induction-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers using
   ( le-ℕ; succ-le-ℕ; contradiction-le-zero-ℕ; transitive-le-ℕ')
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.empty-types using (ex-falso)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.empty-types
+open import foundation.universe-levels
 ```
 
 ## Idea

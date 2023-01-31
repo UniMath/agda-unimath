@@ -9,24 +9,21 @@ module univalent-combinatorics.fibers-of-maps where
 
 open import foundation.fibers-of-maps public
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers using
   ( sum-count-ℕ)
 
-open import foundation.contractible-types using (is-contr-total-path')
+open import foundation.contractible-types
 open import foundation.decidable-types
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using
-  ( equiv-pair-eq-Σ)
-open import foundation.equivalences using (_∘e_)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.identity-types using (Id; refl; tr)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.sections using (map-section)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr; inv-assoc-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sections
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; count-equiv'; number-of-elements-count; count-Fin)
@@ -34,11 +31,9 @@ open import univalent-combinatorics.counting-dependent-pair-types using
   ( count-fiber-count-Σ; sum-number-of-elements-count-fiber-count-Σ)
 open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.double-counting using (double-counting)
-open import univalent-combinatorics.equality-finite-types using
-  ( is-finite-eq; has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; 𝔽; type-𝔽; is-finite-type-𝔽; is-finite-equiv')
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

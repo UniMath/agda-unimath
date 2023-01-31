@@ -7,10 +7,10 @@ title: Division rings
 
 module ring-theory.division-rings where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.identity-types using (Id)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.universe-levels
 
 open import ring-theory.invertible-elements-rings using
   ( is-invertible-element-Ring)

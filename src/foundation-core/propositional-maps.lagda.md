@@ -7,22 +7,17 @@ title: Propositional maps
 
 module foundation-core.propositional-maps where
 
-open import foundation-core.contractible-types using
-  ( is-contr-equiv'; is-contr; is-contr-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using
-  ( is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation-core.equivalences using (is-equiv-comp; _≃_)
-open import foundation-core.fibers-of-maps using (fib; equiv-fib; fib')
-open import foundation-core.functions using (_∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation-core.identity-types using ( refl; ap; inv)
-open import foundation-core.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; is-prop-is-proof-irrelevant; Prop)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

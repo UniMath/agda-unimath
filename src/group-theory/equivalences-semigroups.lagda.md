@@ -7,21 +7,19 @@ title: Equivalences between semigroups
 
 module group-theory.equivalences-semigroups where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; map-equiv; id-equiv; is-equiv)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (id)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using (Π-Prop)
-open import foundation.sets using (Id-Prop; is-prop-is-set)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (eq-type-subtype)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
 open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups using
   ( preserves-mul; preserves-mul-Semigroup; preserves-mul-semigroup-Prop;

@@ -7,18 +7,14 @@ title: Equality on dependent function types
 
 module foundation.equality-dependent-function-types where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation-core.equivalences using
-  ( is-equiv; map-inv-is-equiv; _≃_; map-equiv; is-equiv-map-equiv)
-open import foundation-core.identity-types using (_＝_; tr; refl)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
-open import foundation-core.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-total-path; is-contr-Π)
-open import foundation.type-theoretic-principle-of-choice using
-  ( Π-total-fam; distributive-Π-Σ)
+open import foundation-core.contractible-types
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Idea

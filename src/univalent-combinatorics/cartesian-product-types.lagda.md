@@ -9,38 +9,29 @@ module univalent-combinatorics.cartesian-product-types where
 
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
-  ( equiv-is-contr; is-contr-total-path')
-open import foundation.decidable-equality using
-  ( has-decidable-equality-right-factor)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_∘e_; inv-equiv; _≃_)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-cartesian-product-types using (equiv-prod)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.identity-types using (Id; refl; inv; _∙_)
-open import foundation.mere-equivalences using (mere-equiv-Prop)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.decidable-equality
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
 open import foundation.type-arithmetic-cartesian-product-types using
   ( commutative-prod)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-prod-coprod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ)
-open import foundation.type-arithmetic-empty-type using
-  ( left-absorption-prod)
-open import foundation.type-arithmetic-unit-type using
-  ( left-unit-law-prod; right-unit-law-prod)
-open import foundation.unit-type using (unit; star; is-contr-unit)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.coproduct-types using (coprod-Fin)
 open import univalent-combinatorics.counting using
@@ -53,7 +44,7 @@ open import univalent-combinatorics.double-counting using (double-counting)
 open import univalent-combinatorics.finite-types using
   ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
     UU-Fin)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

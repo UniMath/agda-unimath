@@ -7,16 +7,16 @@ title: The universal property of booleans
 
 module foundation.universal-property-booleans where
 
-open import foundation.booleans using (bool; true; false)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equivalences using (is-equiv; is-equiv-has-inverse)
+open import foundation.booleans
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (refl)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ```agda

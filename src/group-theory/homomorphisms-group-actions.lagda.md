@@ -9,19 +9,17 @@ module group-theory.homomorphisms-group-actions where
 
 open import foundation.commuting-squares using
   ( coherence-square; coherence-square-comp-horizontal)
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_; map-inv-is-equiv)
-open import foundation.functions using (id; _∘_)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using (is-prop-Π; is-prop-equiv)
-open import foundation.sets using (type-Set; is-set-type-Set; is-set; Set)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
 open import group-theory.group-actions using
   ( Abstract-Group-Action; mul-Abstract-Group-Action;

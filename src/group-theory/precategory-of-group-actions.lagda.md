@@ -13,8 +13,8 @@ open import category-theory.large-precategories using
     left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
 open import category-theory.precategories using (Precat)
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (Level; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import group-theory.group-actions using (Abstract-Group-Action)
 open import group-theory.groups using (Group)

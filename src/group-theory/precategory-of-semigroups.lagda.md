@@ -12,7 +12,7 @@ open import category-theory.large-precategories using
     id-hom-Large-Precat; associative-comp-hom-Large-Precat;
     left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
 
-open import foundation.universe-levels using (lsuc; _⊔_)
+open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups using
   ( hom-Semigroup; comp-hom-Semigroup; id-hom-Semigroup;

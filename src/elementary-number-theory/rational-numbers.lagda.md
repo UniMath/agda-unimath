@@ -30,24 +30,23 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
     commutative-mul-ℤ; is-injective-mul-ℤ; is-plus-or-minus-ℤ)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-integers using
   ( is-relative-prime-ℤ; is-prop-is-relative-prime-ℤ)
 
-open import foundation.coproduct-types using (_+_; ind-coprod; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ')
-open import foundation.equality-cartesian-product-types using (eq-pair')
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equational-reasoning
-open import foundation.functions using (id)
-open import foundation.identity-types using (_＝_; inv; tr; refl; ap; _∙_)
-open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop; eq-is-prop)
-open import foundation.sets using
-  ( Set; is-set; is-set-Σ; is-set-is-prop)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

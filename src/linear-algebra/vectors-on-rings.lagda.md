@@ -5,13 +5,13 @@
 
 module linear-algebra.vectors-on-rings where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.identity-types using (Id; refl; ap-binary)
-open import foundation.unit-type using (star)
-open import foundation.dependent-pair-types using (_,_)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.coproduct-types
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import linear-algebra.constant-vectors using (constant-vec)
 open import linear-algebra.functoriality-vectors using
@@ -28,7 +28,7 @@ open import ring-theory.rings using
     commutative-add-Ring;
     left-distributive-mul-add-Ring; right-distributive-mul-add-Ring)
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

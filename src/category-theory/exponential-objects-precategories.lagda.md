@@ -13,10 +13,10 @@ open import category-theory.precategories using
 open import category-theory.products-precategories using
   ( has-all-binary-products; object-product;
     product-of-morphisms)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
-open import foundation-core.identity-types using (_＝_; ap)
+open import foundation.dependent-pair-types
+open import foundation-core.identity-types
 open import foundation.unique-existence using (∃!)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

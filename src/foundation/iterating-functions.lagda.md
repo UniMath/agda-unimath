@@ -7,37 +7,28 @@ title: Iterating functions
 
 module foundation.iterating-functions where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; commutative-add-ℕ; left-unit-law-add-ℕ; right-unit-law-add-ℕ;
-    ℕ-Monoid)
-open import elementary-number-theory.exponentiation-natural-numbers using
-  ( exp-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( mod-two-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; ℕ*-Monoid)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.automorphisms using (Aut)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.endomorphisms using (endo-Set)
-open import foundation.equivalences using
-  ( _∘e_; id-equiv; map-equiv; is-equiv-map-equiv; is-equiv)
+open import foundation.automorphisms
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.endomorphisms
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
-open import foundation.homotopies using (_~_; refl-htpy; _·l_)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; right-unit; ap-comp)
-open import foundation.involutions using (is-involution)
-open import foundation.sets using (Set; type-Set)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.involutions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import group-theory.monoid-actions using (Monoid-Action)
+open import group-theory.monoid-actions
 
-open import univalent-combinatorics.standard-finite-types using
-  ( nat-Fin; Fin; succ-Fin)
+open import univalent-combinatorics.standard-finite-types
 
 open import group-theory.monoids
 open import group-theory.semigroups

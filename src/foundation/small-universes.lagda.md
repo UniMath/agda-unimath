@@ -7,9 +7,9 @@ title: Small universes
 
 module foundation.small-universes where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.small-types using (is-small)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.small-types
+open import foundation.universe-levels
 ```
 
 ## Idea

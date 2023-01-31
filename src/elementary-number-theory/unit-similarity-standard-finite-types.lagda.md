@@ -15,16 +15,15 @@ open import
     mod-succ-ℕ; cong-eq-mod-succ-ℕ; eq-mod-succ-cong-ℕ; cong-nat-mod-succ-ℕ)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.unit-elements-standard-finite-types using
   ( unit-Fin; one-unit-Fin; inv-unit-Fin; mul-unit-Fin)
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_＝_; ap; inv; _∙_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; one-Fin; nat-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

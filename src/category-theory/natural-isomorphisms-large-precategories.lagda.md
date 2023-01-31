@@ -19,7 +19,7 @@ open import category-theory.natural-transformations-large-precategories using
     obj-natural-transformation-Large-Precat;
     coherence-square-natural-transformation-Large-Precat)
     
-open import foundation.universe-levels using (Level; UUω)
+open import foundation.universe-levels
 ```
 
 ## Idea

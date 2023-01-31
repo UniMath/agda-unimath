@@ -14,56 +14,48 @@ open import elementary-number-theory.inequality-standard-finite-types using
     antisymmetric-leq-Fin)
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
   using (mod-succ-ℕ; issec-nat-Fin)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( ε-operator-decidable-subtype-ℕ)
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr; ind-coprod)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-subtypes using
   ( decidable-subtype; is-in-decidable-subtype; subtype-decidable-subtype;
     is-decidable-subtype-decidable-subtype; type-decidable-subtype)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-fam; is-decidable-iff)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( ex-falso; ind-empty; empty-Prop; is-empty-type-trunc-Prop)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences using
   ( _∘e_; id-equiv; map-equiv; map-inv-equiv;
     right-inverse-law-equiv)
 open import foundation.equivalence-extensionality using (htpy-eq-equiv)
-open import foundation.existential-quantification using (∃)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using
-  ( map-Σ; map-Σ-map-base)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop; map-equiv-trunc-Prop)
+open import foundation.existential-quantification
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
-open import foundation.identity-types using (tr; inv)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; type-trunc-Prop)
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; Prop; all-elements-equal;
     prod-Prop; is-prop-all-elements-equal; type-Prop)
 open import foundation.subtypes using
   ( subtype; eq-type-subtype; type-subtype; is-in-subtype)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod)
-open import foundation.type-arithmetic-empty-type using
-  ( right-unit-law-coprod-is-empty)
-open import foundation.type-arithmetic-unit-type using (left-unit-law-Σ)
-open import foundation.unit-type using (unit; star; ind-unit)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.counting using
   ( count; number-of-elements-count; map-equiv-count)
 open import univalent-combinatorics.decidable-dependent-pair-types using
   ( is-decidable-Σ-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; inl-Fin; neg-one-Fin; nat-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

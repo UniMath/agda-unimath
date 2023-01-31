@@ -9,20 +9,20 @@ module foundation.connected-components where
 
 open import foundation.0-connected-types using
   ( is-0-connected; is-0-connected-mere-eq)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.identity-types using (_＝_; refl; inv)
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositional-truncations using
   ( trunc-Prop; type-trunc-Prop; unit-trunc-Prop; apply-universal-property-trunc-Prop;
     all-elements-equal-type-trunc-Prop; is-prop-type-trunc-Prop)
-open import foundation.propositions using (is-trunc-is-prop)
-open import foundation.truncated-types using (is-trunc; is-trunc-Σ)
-open import foundation.truncation-levels using (𝕋; succ-𝕋)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.propositions
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.universe-levels
 
 open import group-theory.higher-groups using (∞-Group)
 
-open import structured-types.pointed-types using (Pointed-Type)
+open import structured-types.pointed-types
 ```
 
 ## Idea

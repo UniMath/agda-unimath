@@ -14,11 +14,10 @@ open import elementary-number-theory.difference-integers using
 open import elementary-number-theory.distance-natural-numbers using (dist-ℕ; left-unit-law-dist-ℕ; right-unit-law-dist-ℕ)
 open import elementary-number-theory.integers using
   ( ℤ; zero-ℤ; int-ℕ; succ-int-ℕ; is-nonnegative-ℤ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.equational-reasoning
-open import foundation.identity-types using
-  (_＝_; refl; _∙_; inv; ap; ap-binary)
+open import foundation.identity-types
 open import foundation.unit-type 
 ```
 

@@ -12,17 +12,15 @@ open import category-theory.functors-large-precategories using
     hom-functor-Large-Precat; preserves-comp-functor-Large-Precat;
     preserves-id-functor-Large-Precat)
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.equivalence-classes using (equivalence-class-Set)
-open import foundation.equivalence-relations using (Eq-Rel)
-open import foundation.existential-quantification using (∃-Prop; intro-∃)
-open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.sets using
-  ( Set; prod-Set; type-Set; is-set; is-set-type-Set)
-open import foundation.universe-levels using (Level; _⊔_; UU; lsuc)
+open import foundation.equivalence-relations
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.universe-levels
 
 open import group-theory.precategory-of-group-actions using
   ( Abstract-Group-Action-Large-Precat)

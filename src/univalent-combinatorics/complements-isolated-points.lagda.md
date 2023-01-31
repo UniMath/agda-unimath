@@ -7,29 +7,27 @@ title: Complements of isolated points of finite types
 
 module univalent-combinatorics.complements-isolated-points where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation.equivalences using (inv-equiv; _∘e_; _≃_; map-equiv)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (Id; refl)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.isolated-points using
   ( isolated-point; complement-isolated-point;
     equiv-maybe-structure-isolated-point; equiv-complement-isolated-point)
-open import foundation.maybe using (Maybe)
-open import foundation.mere-equivalences using (mere-equiv-Prop)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.maybe
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-finite-types using
-  ( has-decidable-equality-has-cardinality)
+open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types using
   ( UU-Fin; type-UU-Fin; equiv-UU-Fin; has-cardinality; has-cardinality-Prop;
     has-cardinality-type-UU-Fin)
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

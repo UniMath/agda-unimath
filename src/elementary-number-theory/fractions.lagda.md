@@ -14,13 +14,12 @@ open import elementary-number-theory.multiplication-integers using
   ( mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; mul-ℤ')
 
 open import foundation.equivalence-relations
-open import foundation.cartesian-product-types using (_×_; pair')
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (refl; inv; _∙_; ap)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (Id-Prop; is-set; is-set-Σ; is-set-Π)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -5,34 +5,27 @@ title: The dependent binomial theorem for types (Distributivity of dependent fun
 ```agda
 module foundation.dependent-binomial-theorem where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (equiv-diagonal-is-contr)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-cartesian-product-types using
-  ( equiv-prod)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.functoriality-dependent-function-types using
-  ( equiv-map-Π)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (ap; equiv-tr)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.raising-universe-levels using
   ( raise; map-inv-raise; map-raise; isretr-map-inv-raise; issec-map-inv-raise;
     compute-raise)
-open import foundation.type-theoretic-principle-of-choice using
-  ( distributive-Π-Σ)
-open import foundation.unit-type using (star)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-universal-property-coprod)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.unit-type
+open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( is-contr-is-zero-or-one-Fin-two-ℕ)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin; is-zero-Fin; is-one-Fin)
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

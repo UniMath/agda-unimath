@@ -7,17 +7,16 @@ title: Involutions
 
 module foundation.involutions where
 
-open import foundation.automorphisms using (Aut)
+open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.equivalences using
-  ( map-equiv; is-equiv; is-equiv-has-inverse; inv-equiv;
-    right-inverse-law-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv; htpy-eq-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (_＝_; refl; _∙_; inv)
-open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.equivalences
+open import foundation.equivalence-extensionality using
+  ( eq-htpy-equiv; htpy-eq-equiv)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.universe-levels
 ```
 
 ## Idea

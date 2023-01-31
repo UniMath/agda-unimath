@@ -12,9 +12,9 @@ open import category-theory.functors-precategories using
 open import category-theory.natural-isomorphisms-precategories using
   ( nat-iso-Precat)
 open import category-theory.precategories using (Precat)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.universe-levels using (UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 ```
 
 ## Idea

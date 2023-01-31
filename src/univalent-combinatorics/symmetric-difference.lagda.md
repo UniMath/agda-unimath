@@ -7,24 +7,24 @@ module univalent-combinatorics.symmetric-difference where
 
 open import foundation.symmetric-difference public
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers using
   (mul-ℕ; left-unit-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (_+_)
+open import foundation.coproduct-types
 open import foundation.decidable-subtypes using
   ( decidable-subtype; type-decidable-subtype)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (inv-equiv)
-open import foundation.identity-types using (Id; _∙_; refl; ap; tr; inv)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.intersections-subtypes using
   ( intersection-decidable-subtype)
-open import foundation.mere-equivalences using (transitive-mere-equiv)
-open import foundation.propositional-truncations using (unit-trunc-Prop)
-open import foundation.subtypes using (subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.xor using (xor-Prop; xor-decidable-Prop)
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.subtypes
+open import foundation.universe-levels
+open import foundation.xor
 
 open import univalent-combinatorics.coproduct-types using
   ( coprod-eq-is-finite; is-finite-coprod)

@@ -7,9 +7,9 @@ title: Embeddings of groups
 
 module group-theory.embeddings-groups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.universe-levels
 
 open import group-theory.homomorphisms-groups using
   ( type-hom-Group; map-hom-Group)

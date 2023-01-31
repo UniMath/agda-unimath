@@ -7,13 +7,13 @@ title: Cayley's theorem
 
 module group-theory.cayleys-theorem where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalence-extensionality using
   ( eq-htpy-equiv; htpy-eq-equiv)
-open import foundation.identity-types using (inv; _∙_)
-open import foundation.injective-maps using (is-injective; is-emb-is-injective)
-open import foundation.universe-levels using (Level)
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.universe-levels
 
 open import group-theory.embeddings-groups using (emb-Group)
 open import group-theory.groups using

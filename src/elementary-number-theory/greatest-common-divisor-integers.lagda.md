@@ -9,8 +9,7 @@ module elementary-number-theory.greatest-common-divisor-integers where
 
 open import elementary-number-theory.absolute-value-integers using
   ( abs-ℤ; int-abs-ℤ; is-nonzero-abs-ℤ; abs-int-ℕ; eq-abs-ℤ)
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; is-zero-left-is-zero-add-ℕ; is-zero-right-is-zero-add-ℕ)
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-integers using
   ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
     symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;
@@ -24,18 +23,17 @@ open import
 open import elementary-number-theory.integers using
   ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
     is-positive-ℤ; is-positive-int-ℕ; is-zero-ℤ; is-one-ℤ; one-ℤ; zero-ℤ; is-nonzero-ℤ; neg-ℤ; neg-neg-ℤ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; is-zero-ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_; pair')
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (pair; Σ; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-cartesian-product-types using (map-prod)
-open import foundation.identity-types using (_＝_; ap; refl; _∙_; inv; tr)
-open import foundation.logical-equivalences using (_↔_)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.universe-levels
 open import foundation.unit-type
 ```
 

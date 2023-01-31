@@ -5,41 +5,36 @@ title: 2-element subtypes
 ```agda
 module univalent-combinatorics.2-element-subtypes where
 
-open import foundation.automorphisms using (Aut)
-open import foundation.contractible-types using
-  ( equiv-is-contr; is-contr-total-path)
-open import foundation.coproduct-types using (_+_; inl; inr; is-prop-coprod)
-open import foundation.decidable-types using (is-decidable)
+open import foundation.automorphisms
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.decidable-propositions using
   ( decidable-Prop; is-decidable-type-decidable-Prop;
     is-prop-type-decidable-Prop; type-decidable-Prop)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; is-emb-is-prop)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences using
   ( _≃_; _∘e_; inv-equiv; map-equiv; map-inv-equiv; id-equiv; left-inverse-law-equiv;
     right-inverse-law-equiv; is-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-dependent-pair-types using
-  ( tot; is-fiberwise-equiv-is-equiv-tot)
-open import foundation.identity-types using (Id; _＝_; _∙_; inv; tr)
-open import foundation.injective-maps using (is-injective)
-open import foundation.logical-equivalences using (iff-equiv)
-open import foundation.mere-equivalences using (transitive-mere-equiv)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( unit-trunc-Prop; type-trunc-Prop)
-open import foundation.propositions using
-  ( type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (Set; type-Set; is-set-type-Set)
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.mere-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
 open import foundation.subtypes using
   ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
     is-injective-inclusion-subtype; equiv-subtype-equiv)
-open import foundation.surjective-maps using (is-surjective)
-open import foundation.type-arithmetic-coproduct-types using
-  ( left-distributive-Σ-coprod)
-open import foundation.unit-type using (star; is-contr-unit)
-open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
+open import foundation.surjective-maps
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.unit-type
+open import foundation.universe-levels
 open import foundation.unordered-pairs using
   ( unordered-pair; type-unordered-pair; element-unordered-pair;
     has-two-elements-type-unordered-pair)
@@ -48,8 +43,7 @@ open import univalent-combinatorics.2-element-types using
   ( has-two-elements; 2-Element-Type; swap-2-Element-Type;
     map-swap-2-Element-Type; compute-swap-2-Element-Type;
     is-inhabited-2-Element-Type)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-contr-Fin-one-ℕ)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

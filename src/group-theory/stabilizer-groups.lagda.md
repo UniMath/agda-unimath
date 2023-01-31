@@ -7,9 +7,9 @@ title: Stabilizer groups
 
 module group-theory.stabilizer-groups where
 
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import group-theory.group-actions using
   ( Abstract-Group-Action; type-Abstract-Group-Action;

@@ -38,19 +38,17 @@ open import elementary-number-theory.proper-divisors-natural-numbers using
 open import
   elementary-number-theory.well-ordering-principle-natural-numbers using
   ( minimal-element-ℕ; well-ordering-principle-ℕ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-prod; is-decidable-function-type)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (id)
-open import foundation.identity-types using (inv; _∙_; refl)
-open import foundation.negation using (¬)
-open import foundation.type-arithmetic-empty-type using
-  ( is-empty-left-factor-is-empty-prod)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

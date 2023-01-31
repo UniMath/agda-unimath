@@ -7,69 +7,43 @@ title: Exclusive disjunction of propositions
 
 module foundation.xor where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.commutative-operations using
-  ( commutative-operation)
-open import foundation.conjunction using (conj-Prop)
-open import foundation.contractible-types using
-  ( is-contr-Prop; is-contr-Π; is-contr-equiv')
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; coprod-Prop; neq-inr-inl; neq-inl-inr)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-prod; is-decidable-neg)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
-open import foundation.embeddings using (equiv-ap-emb)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equality-coproduct-types using
-  ( emb-inl; compute-eq-coprod-inl-inr; emb-inr; compute-eq-coprod-inr-inl;
-    is-empty-eq-coprod-inl-inr; is-empty-eq-coprod-inr-inl)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; inv-equiv; is-equiv; id-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-cartesian-product-types using (equiv-prod)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
+open import foundation.cartesian-product-types
+open import foundation.commutative-operations
+open import foundation.conjunction
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types using (_＝_; tr; inv)
-open import foundation.negation using (¬; neg-Prop; is-prop-neg)
-open import foundation.propositional-extensionality using
-  ( eq-equiv-Prop; eq-iff)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-prop-Prop;
-    is-prop-all-elements-equal; eq-is-prop; is-prop-prod; is-prop-is-prop;
-    all-elements-equal; type-hom-Prop)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod; left-unit-law-prod-is-contr;
-    right-unit-law-prod-is-contr)
-open import foundation.type-arithmetic-coproduct-types using
-  ( right-distributive-Σ-coprod)
-open import foundation.type-arithmetic-empty-type using
-  (left-absorption-Σ; left-unit-law-coprod)
-open import foundation.type-arithmetic-unit-type using (left-unit-law-Σ)
-open import foundation.unit-type using (unit; star)
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositions
+open import foundation.propositional-truncations
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
 open import foundation.univalence using (eq-equiv)
-open import foundation.universal-property-coproduct-types using
-  ( equiv-dependent-universal-property-coprod)
-open import foundation.universe-levels using (Level; UU; _⊔_)
-open import foundation.unordered-pairs using
-  ( unordered-pair; standard-unordered-pair; element-unordered-pair;
-    type-unordered-pair; 2-element-type-unordered-pair;
-    other-element-unordered-pair; map-unordered-pair)
+open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
+open import foundation.unordered-pairs
 
-open import univalent-combinatorics.2-element-types using
-  ( type-2-Element-Type; map-swap-2-Element-Type; compute-swap-2-Element-Type;
-    compute-swap-Fin-two-ℕ)
-open import univalent-combinatorics.equality-finite-types using
-  ( has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-types using
-  (Fin-UU-Fin; is-finite-type-UU-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; one-Fin)
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

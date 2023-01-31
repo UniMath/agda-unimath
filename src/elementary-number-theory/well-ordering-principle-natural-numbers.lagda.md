@@ -12,29 +12,27 @@ open import elementary-number-theory.inequality-natural-numbers using
     is-decidable-le-ℕ; is-prop-leq-ℕ; antisymmetric-leq-ℕ)
 open import elementary-number-theory.lower-bounds-natural-numbers using
   ( is-lower-bound-ℕ; is-lower-bound-ℕ-Prop)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; ind-ℕ; is-zero-ℕ)
+open import elementary-number-theory.natural-numbers
   
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-types using
   ( is-decidable; is-decidable-fam; is-decidable-function-type;
     is-decidable-prod)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty; ex-falso)
-open import foundation.functions using (id; _∘_)
-open import foundation.functoriality-dependent-pair-types using (tot)
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions using
   ( is-prop; is-prop-Π; is-prop-function-type; Prop; all-elements-equal;
     type-Prop; prod-Prop; is-prop-type-Prop; is-prop-all-elements-equal)
-open import foundation.subtypes using (eq-type-subtype; type-subtype)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.subtypes
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -12,8 +12,8 @@ open import elementary-number-theory.integers using
 open import elementary-number-theory.greatest-common-divisor-integers using
   ( gcd-ℤ)
 
-open import foundation.universe-levels using (UU; lzero)
-open import foundation.propositions using (is-prop)
+open import foundation.universe-levels
+open import foundation.propositions
 ```
 
 ## Idea

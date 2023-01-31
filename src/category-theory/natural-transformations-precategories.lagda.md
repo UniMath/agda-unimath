@@ -14,7 +14,7 @@ open import category-theory.precategories using
     is-set-type-hom-Precat; left-unit-law-comp-hom-Precat;
     right-unit-law-comp-hom-Precat; assoc-comp-hom-Precat)
 
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; _,_)
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equational-reasoning
 open import foundation.function-extensionality
@@ -23,7 +23,7 @@ open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

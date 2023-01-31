@@ -17,21 +17,19 @@ open import
   ( div-ℕ-decidable-Prop)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( is-nonzero-left-factor-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-nonzero-one-ℕ; is-nonzero-succ-ℕ)
+open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-natural-numbers using
   ( nonzero-ℕ; succ-nonzero-ℕ; one-nonzero-ℕ; quotient-div-nonzero-ℕ;
     succ-nonzero-ℕ')
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop; is-decidable-type-decidable-Prop)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (refl; inv; _∙_)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.decidable-propositions
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import ring-theory.rings using
   ( Ring; type-Ring; zero-Ring; add-Ring; mul-Ring)

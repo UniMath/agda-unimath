@@ -7,9 +7,9 @@ title: Pointwise addition of morphisms of abelian groups
 
 module group-theory.addition-homomorphisms-abelian-groups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; _∙_; inv; ap; refl)
-open import foundation.universe-levels using (Level)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
 open import group-theory.abelian-groups using
   ( Ab; type-Ab; add-Ab; zero-Ab; neg-Ab; ap-add-Ab; interchange-add-add-Ab;

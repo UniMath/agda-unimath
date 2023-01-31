@@ -7,12 +7,12 @@ title: Intersection of subtypes
 
 module foundation.intersections-subtypes where
 
-open import foundation.conjunction using (conj-Prop; conj-decidable-Prop)
-open import foundation.decidable-subtypes using (decidable-subtype)
+open import foundation.conjunction
+open import foundation.decidable-subtypes
 open import foundation.double-powersets
-open import foundation.propositions using (Π-Prop)
-open import foundation.subtypes using (subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea

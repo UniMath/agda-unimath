@@ -19,14 +19,13 @@ open import
     right-unit-law-mul-Fin; left-unit-law-mul-Fin; commutative-mul-Fin)
 open import elementary-number-theory.multiplication-natural-numbers using
   ( mul-ℕ; square-succ-ℕ; commutative-mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (_∙_; inv; ap)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; one-Fin; neg-one-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
