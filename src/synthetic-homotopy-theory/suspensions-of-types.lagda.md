@@ -359,60 +359,60 @@ Here we prove the universal property of the suspension of a pointed type: the su
 
 ```agda
 module _
-  {l1 : Level} (X : UU l1) (x0 : X)
+  {l1 : Level} (X : Pointed-Type l1)
   where
 
-  shift : (type-Ω (suspension X , N-susp)) → (N-susp ＝ S-susp)
-  shift l = l ∙ (merid-susp x0)
+  shift : (type-Ω (suspension-Pointed-Type X)) → (N-susp ＝ S-susp)
+  shift l = l ∙ (merid-susp (pt-Pointed-Type X))
 
-  shift* : (Ω (suspension X , N-susp)) →* ((N-susp ＝ S-susp) , (merid-susp x0))
+  shift* : (Ω (suspension-Pointed-Type X)) →* ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
   shift* = shift , refl
 
-  unshift : (N-susp ＝ S-susp) → (type-Ω (suspension X , N-susp))
-  unshift p = p ∙ inv (merid-susp x0)
+  unshift : (N-susp ＝ S-susp) → (type-Ω (suspension-Pointed-Type X))
+  unshift p = p ∙ inv (merid-susp (pt-Pointed-Type X))
 
-  unshift* : ((N-susp ＝ S-susp) , (merid-susp x0)) →* (Ω (suspension X , N-susp))
-  unshift* = unshift , right-inv (merid-susp x0)
+  unshift* : ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X))) →* (Ω (suspension-Pointed-Type X))
+  unshift* = unshift , right-inv (merid-susp (pt-Pointed-Type X))
 
   is-equiv-shift : is-equiv shift
-  is-equiv-shift = is-equiv-concat' N-susp (merid-susp x0)
+  is-equiv-shift = is-equiv-concat' N-susp (merid-susp (pt-Pointed-Type X))
 
-  pointed-equiv-shift : (Ω (suspension X , N-susp)) ≃* ((N-susp ＝ S-susp) , merid-susp x0)
+  pointed-equiv-shift : (Ω (suspension-Pointed-Type X)) ≃* ((N-susp ＝ S-susp) , merid-susp (pt-Pointed-Type X))
   pointed-equiv-shift = (shift , is-equiv-shift) , preserves-point-pointed-map _ _ shift*
 
-  merid-susp* : (X , x0) →* ((N-susp ＝ S-susp) , (merid-susp x0))
+  merid-susp* : X →* ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
   merid-susp* = merid-susp , refl
 
-  unit-susp-loop-adj* : (X , x0) →* Ω (suspension X , N-susp)
+  unit-susp-loop-adj* : X →* Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
 
-  unit-susp-loop-adj : X → type-Ω (suspension X , N-susp)
+  unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*
 
-  counit-susp-loop-adj : (suspension (type-Ω (X , x0))) → X
+  counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
   counit-susp-loop-adj =
-    map-inv-is-equiv (up-suspension (type-Ω (X , x0)) X) (x0 , x0 , id)
+    map-inv-is-equiv (up-suspension (type-Ω X) (type-Pointed-Type X)) ((pt-Pointed-Type X) , (pt-Pointed-Type X) , id)
 
-  counit-susp-loop-adj* : ((suspension (type-Ω (X , x0))) , N-susp) →* (X , x0)
+  counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →* X
   counit-susp-loop-adj* =
-    counit-susp-loop-adj , up-suspension-N-susp (type-Ω (X , x0)) X ((x0 , x0 , id))
+    counit-susp-loop-adj , up-suspension-N-susp (type-Ω X) (type-Pointed-Type X) (((pt-Pointed-Type X) , (pt-Pointed-Type X) , id))
 ```
 
 #### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
 
 ```agda
 module _
-  {l1 l2 : Level} (X : UU l1) (x0 : X) (Y : UU l2) (y0 : Y)
+  {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where
 
-  equiv-susp-loop-adj : (((suspension X) , N-susp) →* (Y , y0))  ≃ ((X , x0) →* Ω (Y , y0))
-  equiv-susp-loop-adj = (left-unit-law-Σ-is-contr (is-contr-total-path y0) (y0 , refl)) ∘e
-    ((inv-equiv (assoc-Σ Y (λ z → y0 ＝ z) (λ t → Σ (X → y0 ＝ (pr1 t)) (λ f → f x0 ＝ (pr2 t))))) ∘e
+  equiv-susp-loop-adj : (suspension-Pointed-Type X →* Y)  ≃ (X →* Ω Y)
+  equiv-susp-loop-adj = (left-unit-law-Σ-is-contr (is-contr-total-path (pt-Pointed-Type Y)) ((pt-Pointed-Type Y) , refl)) ∘e
+    ((inv-equiv (assoc-Σ (type-Pointed-Type Y) (λ z → (pt-Pointed-Type Y) ＝ z) (λ t → Σ (type-Pointed-Type X → (pt-Pointed-Type Y) ＝ (pr1 t)) (λ f → f (pt-Pointed-Type X) ＝ (pr2 t))))) ∘e
     ((equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
-    (assoc-Σ Y (λ y1 → X → y0 ＝ y1) (λ z → Σ (Id y0 (pr1 z)) (λ x → pr2 z x0 ＝ x)) ∘e
+    (assoc-Σ (type-Pointed-Type Y) (λ y1 → type-Pointed-Type X → (pt-Pointed-Type Y) ＝ y1) (λ z → Σ (Id (pt-Pointed-Type Y) (pr1 z)) (λ x → pr2 z (pt-Pointed-Type X) ＝ x)) ∘e
     (inv-equiv (right-unit-law-Σ-is-contr
-      (λ (z : Σ Y (λ y1 → X → y0 ＝ y1)) → is-contr-total-path  ((pr2 z) x0))) ∘e
-    ((left-unit-law-Σ-is-contr (is-contr-total-path' y0) (y0 , refl)) ∘e
+      (λ (z : Σ (type-Pointed-Type Y) (λ y1 → type-Pointed-Type X → (pt-Pointed-Type Y) ＝ y1)) → is-contr-total-path  ((pr2 z) (pt-Pointed-Type X)))) ∘e
+    ((left-unit-law-Σ-is-contr (is-contr-total-path' (pt-Pointed-Type Y)) ((pt-Pointed-Type Y) , refl)) ∘e
     (equiv-right-swap-Σ ∘e
-    (equiv-Σ-equiv-base (λ c → (pr1 c) ＝ y0) (equiv-up-suspension X Y))))))))
+    (equiv-Σ-equiv-base (λ c → (pr1 c) ＝ (pt-Pointed-Type Y)) (equiv-up-suspension (type-Pointed-Type X) (type-Pointed-Type Y)))))))))
 ```
