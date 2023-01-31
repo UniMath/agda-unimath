@@ -331,31 +331,11 @@ module _
           ( up-suspension-merid-susp Z c)))
 ```
 
-### The suspension of a contractible type is contractible
-
-```agda
-is-contr-suspension-is-contr :
-  {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
-is-contr-suspension-is-contr {l} {X} is-contr-X =
-  is-contr-is-equiv'
-    ( unit)
-    ( pr1 (pr2 (cocone-pushout (const X unit star) (const X unit star))))
-    ( is-equiv-universal-property-pushout
-      ( const X unit star)
-      ( const X unit star)
-      ( cocone-pushout
-        ( const X unit star)
-        ( const X unit star))
-      ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
-      ( up-pushout (const X unit star) (const X unit star)))
-    ( is-contr-unit)
-```
-
-### Suspension Loop Space Adjunction
+### The suspension-loop space adjunction
 
 Here we prove the universal property of the suspension of a pointed type: the suspension is left adjoint to the loop space. We do this by constructing an equivalence ((suspension A) →* B) ≃ (A →* Ω B) and showing this equivalences is given by λ f → Ω(f) ∘ unit
 
-#### Define the unit and co-unit of the adjunction
+#### The unit and counit of the adjunction
 
 ```agda
 module _
@@ -368,7 +348,8 @@ module _
   shift* :
     Ω (suspension-Pointed-Type X) →*
     ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X)))
-  shift* = shift , refl
+  pr1 shift* = shift
+  pr2 shift* = refl
 
   unshift : (N-susp ＝ S-susp) → (type-Ω (suspension-Pointed-Type X))
   unshift p = p ∙ inv (merid-susp (pt-Pointed-Type X))
@@ -376,7 +357,8 @@ module _
   unshift* :
     ((N-susp ＝ S-susp) , (merid-susp (pt-Pointed-Type X))) →*
     Ω (suspension-Pointed-Type X)
-  unshift* = unshift , right-inv (merid-susp (pt-Pointed-Type X))
+  pr1 unshift* = unshift
+  pr2 unshift* = right-inv (merid-susp (pt-Pointed-Type X))
 
   is-equiv-shift : is-equiv shift
   is-equiv-shift = is-equiv-concat' N-susp (merid-susp (pt-Pointed-Type X))
@@ -458,4 +440,28 @@ module _
                   ( equiv-up-suspension
                     ( type-Pointed-Type X)
                     ( type-Pointed-Type Y)))))))))
+```
+
+#### The equivalence in the suspension-loop space adjunction is pointed
+
+[To do]
+
+### The suspension of a contractible type is contractible
+
+```agda
+is-contr-suspension-is-contr :
+  {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
+is-contr-suspension-is-contr {l} {X} is-contr-X =
+  is-contr-is-equiv'
+    ( unit)
+    ( pr1 (pr2 (cocone-pushout (const X unit star) (const X unit star))))
+    ( is-equiv-universal-property-pushout
+      ( const X unit star)
+      ( const X unit star)
+      ( cocone-pushout
+        ( const X unit star)
+        ( const X unit star))
+      ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
+      ( up-pushout (const X unit star) (const X unit star)))
+    ( is-contr-unit)
 ```
