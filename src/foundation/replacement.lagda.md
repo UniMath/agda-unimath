@@ -15,7 +15,7 @@ open import foundation.locally-small-types
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import foundation-core.small-types
+open import foundation-core.small-types
 ```
 
 ## Idea
