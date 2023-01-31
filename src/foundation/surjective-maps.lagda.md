@@ -386,29 +386,23 @@ is-surjective-precomp-equiv H e =
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
   abstract
-    is-surjective-left-factor :
+    is-surjective-left-factor-htpy :
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-surjective f → is-surjective g
-    is-surjective-left-factor Sf x =
+    is-surjective-left-factor-htpy f g h H is-surj-f x =
       apply-universal-property-trunc-Prop
-        ( Sf x)
+        ( is-surj-f x)
         ( trunc-Prop (fib g x))
         ( λ { (pair a refl) →
-              unit-trunc-Prop (pair (h a) (inv (H a)))})
+          unit-trunc-Prop (pair (h a) (inv (H a)))})
 
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  {g : B → X}
-  where
-
-  abstract
-    is-surjective-left-factor' :
-      (h : A → B) → is-surjective (g ∘ h) → is-surjective g
-    is-surjective-left-factor' h =
-      is-surjective-left-factor (g ∘ h) g h refl-htpy
+  is-surjective-left-factor :
+    {g : B → X} (h : A → B) → is-surjective (g ∘ h) → is-surjective g
+  is-surjective-left-factor {g} h =
+    is-surjective-left-factor-htpy (g ∘ h) g h refl-htpy
 ```
 
 ### Surjective maps are -1-connected
