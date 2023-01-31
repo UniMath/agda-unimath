@@ -7,57 +7,34 @@ title: Surjective maps
 
 module foundation.surjective-maps where
 
+open import foundation-core.constant-maps
+open import foundation-core.contractible-maps
+open import foundation.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.sections
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.truncated-maps
+open import foundation-core.truncation-levels
+open import foundation-core.univalence using
+  ( is-contr-total-equiv)
+open import foundation-core.universe-levels
+
 open import foundation.connected-maps
-open import foundation.constant-maps using (const)
-open import foundation.contractible-maps using
-  ( is-equiv-is-contr-map)
-open import foundation.contractible-types using
-  ( is-equiv-diagonal-is-contr; is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using
-  ( _↪_; map-emb; is-emb; emb-Σ; id-emb; equiv-ap-emb)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; is-equiv-comp; _≃_; map-equiv; _∘e_; inv-equiv;
-    map-inv-equiv; id-equiv; is-equiv-map-equiv)
-open import foundation.fibers-of-maps using
-  ( fib; is-equiv-map-reduce-Π-fib; reduce-Π-fib)
-open import foundation.functions using (_∘_; id; precomp-Π)
-open import foundation.functoriality-dependent-function-types using
-  ( is-equiv-map-Π; equiv-map-Π)
-open import foundation.functoriality-dependent-pair-types using (map-Σ)
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies using (_~_; refl-htpy; is-contr-total-htpy)
-open import foundation.identity-types using (refl; _∙_; inv; equiv-tr; _＝_)
-open import foundation.injective-maps using (is-injective-is-emb)
-open import foundation.propositional-maps using
-  ( is-prop-map-emb; is-prop-map-is-emb; fib-emb-Prop)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; unit-trunc-Prop; trunc-Prop; is-prop-type-trunc-Prop;
-    is-propositional-truncation-trunc-Prop;
-    apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-proof-irrelevant-is-prop; Π-Prop; is-prop;
-    is-prop-type-Prop)
-open import foundation.sections using (sec)
-open import foundation.sets using
-  ( Set; type-Set; is-set; is-set-type-Set; emb-type-Set)
-open import foundation.slice using
-  ( hom-slice; map-hom-slice; equiv-hom-slice-fiberwise-hom;
-    equiv-fiberwise-hom-hom-slice)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.truncated-maps
-open import foundation.truncated-types using
-  ( Truncated-Type; type-Truncated-Type; is-trunc-type-Truncated-Type;
-    emb-type-Truncated-Type; is-trunc)
-open import foundation.truncation-levels using
-  (𝕋; zero-𝕋; neg-one-𝕋; neg-two-𝕋; succ-𝕋)
-open import foundation.univalence using (is-contr-total-equiv)
-open import foundation.universal-property-propositional-truncation using
-  ( dependent-universal-property-propositional-truncation)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.embeddings
+open import foundation.homotopies
+open import foundation.propositional-truncations
+open import foundation.structure-identity-principle
+open import foundation.truncated-types
+open import foundation.universal-property-propositional-truncation
 ```
 
 ## Idea
@@ -73,7 +50,7 @@ is-surjective-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
 is-surjective-Prop {B = B} f =
   Π-Prop B (λ b → trunc-Prop (fib f b))
-    
+
 is-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-surjective f = type-Prop (is-surjective-Prop f)
@@ -360,43 +337,38 @@ abstract
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
   where
 
   abstract
-    is-surjective-comp :
+    is-surjective-comp-htpy :
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-surjective g → is-surjective h → is-surjective f
-    is-surjective-comp Sg Sh x =
+    is-surjective-comp-htpy f g h H is-surj-g is-surj-h x =
       apply-universal-property-trunc-Prop
-        ( Sg x)
+        ( is-surj-g x)
         ( trunc-Prop (fib f x))
         ( λ { (pair b refl) →
-              apply-universal-property-trunc-Prop
-                ( Sh b)
-                ( trunc-Prop (fib f (g b)))
-                ( λ { (pair a refl) →
-                  unit-trunc-Prop (pair a (H a))})})
+          apply-universal-property-trunc-Prop
+            ( is-surj-h b)
+            ( trunc-Prop (fib f (g b)))
+            ( λ { (pair a refl) →
+              unit-trunc-Prop (pair a (H a))})})
 
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  {g : B → X}
-  where
-
-  abstract
-    is-surjective-comp' :
-      {h : A → B} → is-surjective g → is-surjective h → is-surjective (g ∘ h)
-    is-surjective-comp' {h} =
-      is-surjective-comp (g ∘ h) g h refl-htpy
+  is-surjective-comp :
+    {g : B → X} {h : A → B} →
+    is-surjective g → is-surjective h → is-surjective (g ∘ h)
+  is-surjective-comp {g} {h} =
+    is-surjective-comp-htpy (g ∘ h) g h refl-htpy
 ```
 
 ### The composite of a surjective map with an equivalence is surjective
 
 ```agda
 is-surjective-comp-equiv :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} 
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (e : B ≃ C) → {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
 is-surjective-comp-equiv e =
-  is-surjective-comp' (is-surjective-map-equiv e)
+  is-surjective-comp (is-surjective-map-equiv e)
 ```
 
 ### The precomposite of a surjective map with an equivalence is surjective
@@ -406,7 +378,7 @@ is-surjective-precomp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : B → C} →
   is-surjective f → (e : A ≃ B) → is-surjective (f ∘ map-equiv e)
 is-surjective-precomp-equiv H e =
-  is-surjective-comp' H (is-surjective-map-equiv e)
+  is-surjective-comp H (is-surjective-map-equiv e)
 ```
 
 ### If a composite is surjective, then so is its left factor
@@ -472,7 +444,7 @@ is-trunc-map-precomp-Π-is-surjective k H =
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
   where
-  
+
   htpy-surjection : (A ↠ B) → UU (l1 ⊔ l2)
   htpy-surjection g = map-surjection f ~ map-surjection g
 
