@@ -6,8 +6,7 @@ title: Cyclic types
 module univalent-combinatorics.cyclic-types where
 
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.groups-of-modular-arithmetic using
-  ( ℤ-Mod-Group)
+open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types

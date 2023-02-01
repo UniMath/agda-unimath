@@ -19,18 +19,14 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.pullbacks using
-  ( is-pullback; universal-property-pullback-is-pullback)
+open import foundation-core.pullbacks
 open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 
--- open import foundation.pullbacks
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
--- open import foundation.universal-property-pullbacks using
---   ( cone; universal-property-pullback)
 ```
 
 ## Properties

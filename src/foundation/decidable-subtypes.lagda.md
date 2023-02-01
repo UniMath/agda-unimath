@@ -9,12 +9,7 @@ module foundation.decidable-subtypes where
 
 open import foundation.1-types
 open import foundation.coproduct-types
-open import foundation.decidable-propositions using
-  ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop;
-    type-decidable-Prop; is-prop-type-decidable-Prop;
-    equiv-universes-decidable-Prop; iff-universes-decidable-Prop;
-    is-set-decidable-Prop; extensionality-decidable-Prop;
-    is-decidable-Prop)
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -27,12 +22,7 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes using
-  ( subtype; type-subtype; inclusion-subtype; is-emb-inclusion-subtype;
-    emb-subtype; is-injective-inclusion-subtype; is-in-subtype;
-    is-prop-is-in-subtype; is-trunc-type-subtype; is-prop-type-subtype;
-    is-set-type-subtype; prop-subprop; set-subset;
-    has-same-elements-subtype)
+open import foundation.subtypes
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels

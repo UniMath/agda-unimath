@@ -18,6 +18,18 @@ open import linear-algebra.functoriality-vectors
 open import linear-algebra.scalar-multiplication-vectors
 open import linear-algebra.vectors
 
+open import group-theory.abelian-groups
+open import group-theory.commutative-monoids
+open import group-theory.endomorphism-rings-abelian-groups
+open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
+open import group-theory.monoids
+open import group-theory.semigroups
+
+open import ring-theory.homomorphisms-rings
+open import ring-theory.modules-rings
+
+
 open import ring-theory.rings
 
 open import univalent-combinatorics.standard-finite-types
@@ -61,10 +73,6 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-
-  open import group-theory.semigroups
-  open import group-theory.monoids
-  open import group-theory.commutative-monoids using (Commutative-Monoid)
 
   add-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n → vec-Ring R n
   add-vec-Ring = map-binary-vec (add-Ring R)
@@ -120,8 +128,7 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  open import group-theory.groups
-  open import group-theory.abelian-groups using (Ab)
+
 
   neg-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n
   neg-vec-Ring = map-vec (neg-Ring R)
@@ -159,12 +166,6 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-
-  open import group-theory.abelian-groups using (Ab)
-  open import group-theory.homomorphisms-abelian-groups using (type-hom-Ab; map-hom-Ab; eq-htpy-hom-Ab)
-  open import group-theory.endomorphism-rings-abelian-groups using (endomorphism-ring-Ab)
-  open import ring-theory.homomorphisms-rings using (type-hom-Ring)
-  open import ring-theory.modules-rings using (left-module-Ring)
 
   scalar-mul-vec-Ring : {n : ℕ} (r : type-Ring R) → vec-Ring R n → vec-Ring R n
   scalar-mul-vec-Ring r empty-vec = empty-vec

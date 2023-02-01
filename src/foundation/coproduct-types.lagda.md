@@ -18,10 +18,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
-open import foundation.noncontractible-types using (is-not-contractible)
-open import foundation.propositions using
-  ( all-elements-equal; is-prop; is-prop-all-elements-equal; eq-is-prop';
-    Prop; type-Prop; is-prop-type-Prop)
+open import foundation.noncontractible-types
+open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

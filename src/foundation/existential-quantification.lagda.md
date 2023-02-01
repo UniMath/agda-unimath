@@ -10,9 +10,7 @@ module foundation.existential-quantification where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.propositional-truncations
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; type-hom-Prop;
-    is-equiv-is-prop; is-prop-type-hom-Prop; is-prop-Π)
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 

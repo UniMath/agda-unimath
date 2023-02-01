@@ -14,14 +14,11 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
+open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.retractions
 open import foundation.propositions
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop;
-    is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
-    map-universal-property-trunc-Prop)
+open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type

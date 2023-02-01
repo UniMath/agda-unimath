@@ -11,28 +11,21 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
-open import foundation.equivalences using
-  ( is-equiv; _≃_; _∘e_; map-inv-equiv; is-equiv-has-inverse; map-equiv;
-    is-fiberwise-equiv; is-property-is-equiv; id-equiv; map-inv-is-equiv)
+open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality using
   ( equiv-funext; eq-htpy)
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; fib-triangle; is-fiberwise-equiv-is-equiv-triangle;
-    is-equiv-triangle-is-fiberwise-equiv; equiv-Σ)
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies using
-  ( _~_; refl-htpy; _∙h_; _·l_; right-unit-htpy; is-contr-total-htpy; _·r_;
-    equiv-concat-htpy)
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.structure using
-  ( hom-structure; fam-structure; structure-map)
+open import foundation.structure
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice

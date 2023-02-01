@@ -9,14 +9,13 @@ module foundation.constant-maps where
 
 open import foundation-core.constant-maps public
 
-open import foundation-core.0-maps using (is-0-map)
+open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation.embeddings
 open import foundation-core.equivalences
-open import foundation-core.faithful-maps using
-  ( is-faithful; is-faithful-is-0-map; is-0-map-is-faithful; faithful-map)
+open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps

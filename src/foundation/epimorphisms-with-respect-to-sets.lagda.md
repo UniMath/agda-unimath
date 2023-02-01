@@ -20,9 +20,7 @@ open import foundation.injective-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets using
-  ( Set; type-Set; is-set-type-Set; is-set-function-type; Id-Prop;
-    precomp-Set)
+open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.univalence using (equiv-eq)

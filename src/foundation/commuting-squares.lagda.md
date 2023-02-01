@@ -12,9 +12,7 @@ open import foundation-core.commuting-squares public
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
-open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv-map-equiv; map-inv-equiv; map-eq-transpose-equiv';
-    issec-map-inv-equiv; map-eq-transpose-equiv)
+open import foundation.equivalences
 ```
 
 ## Composing and inverting squares horizontally and vertically

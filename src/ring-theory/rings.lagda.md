@@ -21,20 +21,12 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups using
-  ( Ab; set-Ab; type-Ab; add-Ab; group-Ab; is-set-type-Ab;
-    has-associative-add-Ab; associative-add-Ab; semigroup-Ab; is-group-Ab;
-    has-zero-Ab; zero-Ab; left-unit-law-add-Ab; right-unit-law-add-Ab;
-    has-negatives-Ab; neg-Ab; left-inverse-law-add-Ab; right-inverse-law-add-Ab;
-    commutative-add-Ab; add-Ab'; ap-add-Ab; is-equiv-add-Ab; is-equiv-add-Ab';
-    is-binary-equiv-add-Ab; is-binary-emb-add-Ab; is-emb-add-Ab; is-emb-add-Ab';
-    is-injective-add-Ab; is-injective-add-Ab'; is-zero-is-idempotent-Ab;
-    add-list-Ab; preserves-concat-add-list-Ab)
+open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.lists using (list; concat-list)
+open import univalent-combinatorics.lists
 ```
 
 ## Idea

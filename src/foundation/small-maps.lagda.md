@@ -9,10 +9,9 @@ module foundation.small-maps where
 
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
-open import foundation.locally-small-types using (is-locally-small-is-small)
+open import foundation.locally-small-types
 open import foundation.propositions
-open import foundation.small-types using
-  ( is-small; is-small-Σ; is-prop-is-small)
+open import foundation.small-types
 open import foundation.universe-levels
 ```
 

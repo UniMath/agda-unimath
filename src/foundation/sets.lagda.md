@@ -22,13 +22,8 @@ open import foundation-core.universe-levels
 
 open import foundation.contractible-types
 open import foundation.propositional-maps
-open import foundation.subuniverses using
-  ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
-    is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
-open import foundation.truncated-types using
-  ( is-trunc-Σ; is-trunc-prod; is-prop-is-trunc; is-trunc-Π;
-    is-trunc-function-type; is-trunc-equiv-is-trunc; is-trunc-Truncated-Type;
-    is-trunc-is-emb; is-trunc-emb; emb-type-Truncated-Type)
+open import foundation.subuniverses
+open import foundation.truncated-types
 ```
 
 ## Properties

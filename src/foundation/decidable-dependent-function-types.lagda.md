@@ -13,8 +13,7 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.maybe
 open import foundation.universal-property-coproduct-types
-open import foundation.universal-property-maybe using
-  ( equiv-dependent-universal-property-Maybe)
+open import foundation.universal-property-maybe
 open import foundation.universe-levels
 ```
 

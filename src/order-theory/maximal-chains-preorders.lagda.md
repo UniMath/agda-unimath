@@ -9,8 +9,7 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.chains-preorders using
-  ( chain-Preorder; inclusion-chain-preorder-Prop; element-chain-Preorder)
+open import order-theory.chains-preorders
 open import order-theory.preorders
 ```
 

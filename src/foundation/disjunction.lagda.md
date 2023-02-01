@@ -12,16 +12,11 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.propositional-truncations
 
-open import foundation-core.decidable-propositions using
-  ( decidable-Prop; prop-decidable-Prop; type-decidable-Prop;
-    is-decidable-type-decidable-Prop;
-    is-decidable-trunc-Prop-is-merely-decidable)
+open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; type-hom-Prop; hom-Prop;
-    is-equiv-is-prop)
+open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```
 

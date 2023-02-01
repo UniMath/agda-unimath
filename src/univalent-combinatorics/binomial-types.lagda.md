@@ -42,18 +42,12 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.universal-property-empty-type using
-  ( universal-property-empty')
-open import foundation.universal-property-maybe using
-  ( equiv-universal-property-Maybe)
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
 open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.finite-types using
-  ( Fin-UU-Fin; has-cardinality; has-cardinality-Prop; UU-Fin;
-    type-UU-Fin; has-cardinality-type-UU-Fin; has-finite-cardinality; is-finite;
-    is-finite-has-finite-cardinality; has-finite-cardinality-is-finite; 𝔽;
-    type-𝔽; is-finite-type-𝔽; is-finite-equiv)
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 

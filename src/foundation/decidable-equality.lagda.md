@@ -8,9 +8,7 @@ title: Decidable equality
 module foundation.decidable-equality where
 
 open import foundation.cartesian-product-types
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; is-injective-inl; is-injective-inr; neq-inl-inr;
-    neq-inr-inl; is-prop-coprod)
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -21,9 +19,7 @@ open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
-open import foundation.propositions using
-  ( is-prop; eq-is-prop; is-proof-irrelevant-is-prop; Prop;
-    is-prop-is-inhabited; is-prop-Π)
+open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
