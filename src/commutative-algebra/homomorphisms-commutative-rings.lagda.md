@@ -7,12 +7,11 @@ title: Homomorphisms of commutative rings
 
 module commutative-algebra.homomorphisms-commutative-rings where
 
-open import commutative-algebra.commutative-rings using
-  ( Commutative-Ring; ring-Commutative-Ring)
+open import commutative-algebra.commutative-rings
 
 open import foundation.universe-levels
 
-open import ring-theory.homomorphisms-rings using (type-hom-Ring)
+open import ring-theory.homomorphisms-rings
 ```
 
 ## Idea

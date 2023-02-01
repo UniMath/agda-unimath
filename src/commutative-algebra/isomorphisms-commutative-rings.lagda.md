@@ -7,17 +7,14 @@ title: Isomorphisms of commutative rings
 
 module commutative-algebra.isomorphisms-commutative-rings where
 
-open import commutative-algebra.commutative-rings using
-  ( Commutative-Ring; ring-Commutative-Ring; is-prop-is-commutative-Ring;
-    commutative-mul-Commutative-Ring)
+open import commutative-algebra.commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import ring-theory.isomorphisms-rings using
-  ( iso-Ring; is-contr-total-iso-Ring; id-iso-Ring)
+open import ring-theory.isomorphisms-rings
 ```
 
 ## Definition

@@ -14,13 +14,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; mul-Ring; is-set-type-Ring; zero-Ring; add-Ring; neg-Ring;
-    is-zero-Ring; is-nonzero-Ring; set-Ring; associative-add-Ring;
-    left-unit-law-add-Ring; right-unit-law-add-Ring; left-inverse-law-add-Ring;
-    right-inverse-law-add-Ring; commutative-add-Ring; associative-mul-Ring;
-    left-unit-law-mul-Ring; right-unit-law-mul-Ring;
-    left-distributive-mul-add-Ring; right-distributive-mul-add-Ring; one-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea
