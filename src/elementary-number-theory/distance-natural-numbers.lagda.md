@@ -7,13 +7,8 @@ title: The distance between natural numbers
 
 module elementary-number-theory.distance-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; add-ℕ'; ap-add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ;
-    commutative-add-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; _≤-ℕ_; refl-leq-ℕ; concatenate-eq-leq-eq-ℕ; concatenate-leq-eq-ℕ;
-    transitive-leq-ℕ; succ-leq-ℕ; order-three-elements-ℕ; le-ℕ;
-    preserves-le-succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
   

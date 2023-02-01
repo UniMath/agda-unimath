@@ -7,13 +7,9 @@ title: The absolute value function on the integers
 
 module elementary-number-theory.absolute-value-integers where
 
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ; add-neg-one-right-ℤ; right-predecessor-law-add-ℤ;
-    right-unit-law-add-ℤ; add-one-right-ℤ; right-successor-law-add-ℤ)
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers using
-  (_≤-ℕ_; refl-leq-ℕ; preserves-leq-succ-ℕ; succ-leq-ℕ;
-    concatenate-eq-leq-eq-ℕ; transitive-leq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers

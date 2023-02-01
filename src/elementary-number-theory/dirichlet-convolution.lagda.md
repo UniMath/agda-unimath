@@ -7,17 +7,13 @@ title: Dirichlet convolution
 
 module elementary-number-theory.dirichlet-convolution where
 
-open import elementary-number-theory.arithmetic-functions using
-  ( type-arithmetic-functions-Ring)
-open import elementary-number-theory.bounded-sums-arithmetic-functions using
-  ( bounded-sum-arithmetic-function-Ring)
+open import elementary-number-theory.arithmetic-functions
+open import elementary-number-theory.bounded-sums-arithmetic-functions
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers using
-  ( nonzero-ℕ; succ-nonzero-ℕ; one-nonzero-ℕ; quotient-div-nonzero-ℕ;
-    succ-nonzero-ℕ')
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-types

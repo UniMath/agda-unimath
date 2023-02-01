@@ -7,11 +7,9 @@ title: Bounded sums of arithmetic functions
 
 module elementary-number-theory.bounded-sums-arithmetic-functions where
 
-open import elementary-number-theory.arithmetic-functions using
-  ( type-arithmetic-functions-Ring)
+open import elementary-number-theory.arithmetic-functions
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.nonzero-natural-numbers using
-  ( nonzero-ℕ; succ-nonzero-ℕ; one-nonzero-ℕ)
+open import elementary-number-theory.nonzero-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-propositions

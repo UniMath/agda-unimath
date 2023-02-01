@@ -7,25 +7,19 @@ title: Multiplication of natural numbers
 
 module elementary-number-theory.multiplication-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; add-ℕ'; right-unit-law-add-ℕ; associative-add-ℕ;
-    left-successor-law-add-ℕ; commutative-add-ℕ; is-injective-add-ℕ';
-    is-zero-right-is-zero-add-ℕ; neq-add-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-nonzero-ℕ; is-successor-is-nonzero-ℕ;
-    is-injective-succ-ℕ; is-set-ℕ; ℕ-Set)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
     
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.interchange-law using
-  ( interchange-law; interchange-law-commutative-and-associative)
+open import foundation.interchange-law
 open import foundation.negation
 open import foundation.universe-levels
 
-open import group-theory.monoids using (Monoid)
+open import group-theory.monoids
 open import group-theory.semigroups
 ```
 

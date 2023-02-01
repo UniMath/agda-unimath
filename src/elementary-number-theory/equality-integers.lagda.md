@@ -13,12 +13,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-unit;
-    has-decidable-equality-coprod)
+open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-types using (Discrete-Type)
+open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equality-dependent-pair-types

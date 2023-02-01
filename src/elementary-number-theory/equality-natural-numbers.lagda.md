@@ -7,12 +7,10 @@ title: Equality of natural numbers
 
 module elementary-number-theory.equality-natural-numbers where
 
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ; is-one-ℕ; is-one-ℕ';
-    is-not-one-ℕ; Eq-ℕ; eq-Eq-ℕ; Eq-eq-ℕ; is-set-ℕ; refl-Eq-ℕ; ℕ-Set)
+open import elementary-number-theory.natural-numbers
 
 open import foundation-core.decidable-propositions
-open import foundation-core.discrete-types using (Discrete-Type)
+open import foundation-core.discrete-types
 
 open import foundation.contractible-types
 open import foundation.coproduct-types

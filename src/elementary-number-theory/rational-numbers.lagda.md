@@ -7,32 +7,15 @@ title: The rational numbers
 
 module elementary-number-theory.rational-numbers where
 
-open import elementary-number-theory.bezouts-lemma using
-  ( div-right-factor-coprime-ℤ)
-open import elementary-number-theory.divisibility-integers using
-  ( div-ℤ; antisymmetric-div-ℤ; is-plus-or-minus-sim-unit-ℤ;
-    div-div-quotient-div-ℤ; sim-unit-ℤ; is-zero-sim-unit-ℤ; 
-    eq-sim-unit-is-nonnegative-ℤ)
-open import elementary-number-theory.equality-integers using
-  ( is-decidable-is-one-ℤ; is-decidable-is-zero-ℤ; Eq-eq-ℤ)
-open import elementary-number-theory.fractions using
-  ( fraction-ℤ; numerator-fraction-ℤ; denominator-fraction-ℤ;
-    is-positive-denominator-fraction-ℤ; is-set-fraction-ℤ; sim-fraction-ℤ;
-    symm-sim-fraction-ℤ; trans-sim-fraction-ℤ)
-open import elementary-number-theory.greatest-common-divisor-integers using
-  ( gcd-ℤ; is-common-divisor-gcd-ℤ; is-positive-gcd-is-positive-right-ℤ;
-    is-zero-right-is-zero-gcd-ℤ; is-positive-gcd-ℤ; div-gcd-is-common-divisor-ℤ;
-    is-one-gcd-one-ℤ'; is-commutative-gcd-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; is-positive-ℤ; is-positive-eq-ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; neg-ℤ;
-    is-positive-int-positive-ℤ; is-zero-ℤ; neg-neg-ℤ; one-positive-ℤ; is-set-ℤ;
-    is-set-positive-ℤ; is-nonnegative-is-positive-ℤ; is-prop-is-positive-ℤ)
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-positive-left-factor-mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ;
-    commutative-mul-ℤ; is-injective-mul-ℤ; is-plus-or-minus-ℤ)
+open import elementary-number-theory.bezouts-lemma
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.fractions
+open import elementary-number-theory.greatest-common-divisor-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.relatively-prime-integers using
-  ( is-relative-prime-ℤ; is-prop-is-relative-prime-ℤ)
+open import elementary-number-theory.relatively-prime-integers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

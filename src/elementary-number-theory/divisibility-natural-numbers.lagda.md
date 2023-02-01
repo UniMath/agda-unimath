@@ -9,17 +9,9 @@ module elementary-number-theory.divisibility-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; leq-leq-mul-ℕ'; concatenate-eq-leq-eq-ℕ; leq-add-ℕ'; le-ℕ;
-    contradiction-le-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ')
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; mul-ℕ'; commutative-mul-ℕ; right-unit-law-mul-ℕ; left-zero-law-mul-ℕ;
-    right-distributive-mul-add-ℕ; right-zero-law-mul-ℕ; left-unit-law-mul-ℕ;
-    is-one-right-is-one-mul-ℕ; is-one-is-left-unit-mul-ℕ; associative-mul-ℕ;
-    is-injective-mul-ℕ; is-emb-mul-ℕ'; is-nonzero-left-factor-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-one-ℕ; is-nonzero-ℕ;
-    is-successor-is-nonzero-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
     
 open import foundation.dependent-pair-types
 open import foundation.empty-types

@@ -7,25 +7,12 @@ title: Divisibility of integers
 
 module elementary-number-theory.divisibility-integers where
 
-open import elementary-number-theory.absolute-value-integers using
-  ( abs-ℤ; int-abs-ℤ; int-abs-is-nonnegative-ℤ)
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; div-eq-ℕ)
-open import elementary-number-theory.equality-integers using
-  ( Eq-eq-ℤ; has-decidable-equality-ℤ; is-decidable-is-zero-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; one-ℤ; is-zero-ℤ; neg-ℤ; int-ℕ; is-nonnegative-ℤ; is-one-ℤ;
-    is-injective-int-ℕ; is-nonnegative-eq-ℤ; is-nonnegative-int-ℕ; is-neg-one-ℤ;
-    neg-one-ℤ; is-nonzero-ℤ; neg-neg-ℤ;
-    is-zero-is-nonnegative-neg-is-nonnegative-ℤ )
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; mul-ℤ'; left-unit-law-mul-ℤ; associative-mul-ℤ; right-unit-law-mul-ℤ;
-    left-zero-law-mul-ℤ; right-zero-law-mul-ℤ; right-distributive-mul-add-ℤ;
-    left-negative-law-mul-ℤ; mul-int-ℕ; is-nonnegative-left-factor-mul-ℤ;
-    compute-mul-ℤ; commutative-mul-ℤ; is-injective-mul-ℤ'; is-injective-mul-ℤ;
-    is-emb-mul-ℤ'; right-negative-law-mul-ℤ; left-neg-unit-law-mul-ℤ;
-    is-plus-or-minus-ℤ)
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
   
 open import foundation.cartesian-product-types

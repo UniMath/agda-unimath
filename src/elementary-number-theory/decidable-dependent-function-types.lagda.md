@@ -9,12 +9,9 @@ module elementary-number-theory.decidable-dependent-function-types where
 
 open import foundation.decidable-dependent-function-types public
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; leq-zero-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ; leq-le-ℕ; le-ℕ;
-    is-decidable-le-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.upper-bounds-natural-numbers using
-  ( is-upper-bound-ℕ; is-strict-upper-bound-ℕ)
+open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-types

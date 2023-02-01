@@ -7,9 +7,7 @@ title: Proper divisors of natural numbers
 
 module elementary-number-theory.proper-divisors-natural-numbers where
 
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; div-zero-ℕ; leq-div-ℕ; is-prop-div-ℕ; is-zero-div-zero-ℕ;
-    is-one-div-one-ℕ)
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types

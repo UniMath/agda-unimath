@@ -7,17 +7,13 @@ title: The groups ℤ/kℤ
 
 module elementary-number-theory.groups-of-modular-arithmetic where
 
-open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod-Set; add-ℤ-Mod; associative-add-ℤ-Mod; zero-ℤ-Mod; neg-ℤ-Mod;
-    left-unit-law-add-ℤ-Mod; right-unit-law-add-ℤ-Mod;
-    left-inverse-law-add-ℤ-Mod; right-inverse-law-add-ℤ-Mod;
-    commutative-add-ℤ-Mod)
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups using (Ab)
+open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 ```

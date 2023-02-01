@@ -6,37 +6,21 @@ title: The greatest common divisor of natural numbers
 module elementary-number-theory.greatest-common-divisor-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.decidable-types using
-  ( is-decidable-bounded-Π-ℕ)
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; refl-div-ℕ; antisymmetric-div-ℕ; concatenate-div-eq-ℕ; div-add-ℕ;
-    div-zero-ℕ; transitive-div-ℕ; div-right-summand-ℕ; div-mul-ℕ;
-    leq-div-succ-ℕ; preserves-div-mul-ℕ; reflects-div-mul-ℕ; is-one-div-one-ℕ)
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.euclidean-division-natural-numbers using
-  ( remainder-euclidean-division-ℕ; quotient-euclidean-division-ℕ;
-    eq-quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ;
-    strict-upper-bound-remainder-euclidean-division-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; concatenate-leq-eq-ℕ; leq-mul-ℕ'; is-zero-leq-zero-ℕ; le-ℕ;
-    contradiction-le-ℕ)
-open import elementary-number-theory.lower-bounds-natural-numbers using
-  ( is-lower-bound-ℕ)
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ; is-successor-ℕ; is-successor-is-nonzero-ℕ;
-    is-zero-ℕ; is-one-ℕ)
-open import
-  elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( minimal-element-ℕ; well-ordering-principle-ℕ)
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-types using
-  ( is-decidable-fam; is-decidable-prod; is-decidable-function-type';
-    is-decidable-neg; dn-elim-is-decidable)
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types

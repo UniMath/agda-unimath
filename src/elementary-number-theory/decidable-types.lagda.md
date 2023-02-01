@@ -9,19 +9,13 @@ module elementary-number-theory.decidable-types where
 
 open import foundation.decidable-dependent-pair-types public
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; contradiction-leq-ℕ; is-decidable-leq-ℕ; le-ℕ; is-decidable-le-ℕ;
-    leq-zero-ℕ; leq-le-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.upper-bounds-natural-numbers using
-  ( is-upper-bound-ℕ; is-strict-upper-bound-ℕ;
-    is-upper-bound-is-strict-upper-bound-ℕ)
+open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-fam; is-decidable-prod;
-    is-decidable-function-type)
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functions

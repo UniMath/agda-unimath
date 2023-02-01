@@ -7,8 +7,7 @@ title: Nonzero natural numbers
 
 module elementary-number-theory.nonzero-natural-numbers where
 
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; quotient-div-ℕ; is-nonzero-quotient-div-ℕ)
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types

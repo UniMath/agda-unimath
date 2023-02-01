@@ -7,8 +7,7 @@ title: Factorials of natural numbers
 
 module elementary-number-theory.factorials where
 
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; transitive-div-ℕ)
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers

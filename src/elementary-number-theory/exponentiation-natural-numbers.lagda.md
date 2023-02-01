@@ -8,9 +8,7 @@ title: Exponentiation of natural numbers
 module elementary-number-theory.exponentiation-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; right-unit-law-mul-ℕ; mul-ℕ'; associative-mul-ℕ;
-    interchange-law-mul-mul-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types

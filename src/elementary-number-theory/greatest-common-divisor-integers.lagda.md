@@ -7,22 +7,12 @@ title: The greatest common divisor of integers
 
 module elementary-number-theory.greatest-common-divisor-integers where
 
-open import elementary-number-theory.absolute-value-integers using
-  ( abs-ℤ; int-abs-ℤ; is-nonzero-abs-ℤ; abs-int-ℕ; eq-abs-ℤ)
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-integers using
-  ( div-ℤ; div-int-div-ℕ; div-div-int-ℕ; sim-unit-ℤ; div-sim-unit-ℤ;
-    symm-sim-unit-ℤ; refl-sim-unit-ℤ; div-int-abs-div-ℤ; div-div-int-abs-ℤ;
-    sim-unit-abs-ℤ; refl-div-ℤ; is-zero-is-zero-div-ℤ;
-    is-one-or-neg-one-is-unit-ℤ; antisymmetric-div-ℤ; div-zero-ℤ; is-plus-or-minus-sim-unit-ℤ)
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.equality-integers
-open import
-  elementary-number-theory.greatest-common-divisor-natural-numbers using
-  ( is-common-divisor-ℕ; is-gcd-ℕ; gcd-ℕ; is-gcd-gcd-ℕ; is-nonzero-gcd-ℕ;
-    is-commutative-gcd-ℕ; is-zero-gcd-zero-zero-ℕ; is-zero-add-is-zero-gcd-ℕ)
-open import elementary-number-theory.integers using
-  ( ℤ; is-nonnegative-ℤ; int-ℕ; is-nonnegative-int-ℕ; nonnegative-ℤ;
-    is-positive-ℤ; is-positive-int-ℕ; is-zero-ℤ; is-one-ℤ; one-ℤ; zero-ℤ; is-nonzero-ℤ; neg-ℤ; neg-neg-ℤ)
+open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types

@@ -7,9 +7,7 @@ title: The strong induction principle for the natural numbers
 
 module elementary-number-theory.strong-induction-natural-numbers where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( _≤-ℕ_; refl-leq-ℕ; leq-ℕ; cases-leq-succ-ℕ; is-prop-leq-ℕ; neg-succ-leq-ℕ;
-    leq-eq-left-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types

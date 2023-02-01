@@ -7,19 +7,12 @@ title: Prime numbers
 
 module elementary-number-theory.prime-numbers where
 
-open import elementary-number-theory.decidable-types using
-  ( is-decidable-bounded-Π-ℕ)
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-one-ℕ; leq-div-succ-ℕ)
+open import elementary-number-theory.decidable-types
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-not-one-ℕ; is-not-one-two-ℕ;
-    Eq-eq-ℕ; is-set-ℕ)
-open import elementary-number-theory.proper-divisors-natural-numbers using
-  ( is-proper-divisor-ℕ; is-proper-divisor-zero-succ-ℕ;
-    is-decidable-is-proper-divisor-ℕ; is-prop-is-proper-divisor-ℕ;
-    is-proper-divisor-one-is-proper-divisor-ℕ)
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.proper-divisors-natural-numbers
     
 open import foundation.cartesian-product-types
 open import foundation.contractible-types

@@ -8,11 +8,9 @@ title: Addition on the rationals
 module elementary-number-theory.addition-rationals where
 
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-positive-mul-ℤ)
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.rational-numbers using
-  ( ℚ; zero-ℚ; in-fraction-ℤ; is-prop-is-reduced-fraction-ℤ )
+open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equational-reasoning

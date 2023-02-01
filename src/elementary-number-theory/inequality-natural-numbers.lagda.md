@@ -8,12 +8,8 @@ title: Inequality of natural numbers
 module elementary-number-theory.inequality-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; commutative-mul-ℕ; right-unit-law-mul-ℕ; right-zero-law-mul-ℕ;
-    right-successor-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-zero-ℕ; is-zero-ℕ'; is-nonzero-ℕ;
-    is-successor-is-nonzero-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
     
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types

@@ -7,12 +7,9 @@ title: Divisibility in modular arithmetic
 
 module elementary-number-theory.divisibility-modular-arithmetic where
 
-open import elementary-number-theory.divisibility-integers using
-  ( refl-div-ℤ; trans-div-ℤ)
-open import elementary-number-theory.divisibility-standard-finite-types using
-  ( refl-div-Fin; trans-div-Fin)
-open import elementary-number-theory.modular-arithmetic using
-  ( ℤ-Mod; mul-ℤ-Mod; is-decidable-div-ℤ; mul-ℤ-Mod')
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.divisibility-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.absolute-value-integers
 

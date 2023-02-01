@@ -15,9 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
-open import foundation.equivalences using
-  ( is-equiv; _≃_; is-emb-is-equiv; map-eq-transpose-equiv';
-    issec-map-inv-equiv; map-equiv; triangle-eq-transpose-equiv')
+open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
@@ -28,15 +26,8 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.types-equipped-with-endomorphisms using (Endo)
-open import structured-types.pointed-types-equipped-with-automorphisms using
-  ( Pointed-Type-With-Aut; type-Pointed-Type-With-Aut;
-    inv-map-aut-Pointed-Type-With-Aut; pt-Pointed-Type-With-Aut;
-    map-aut-Pointed-Type-With-Aut; issec-inv-map-aut-Pointed-Type-With-Aut;
-    hom-Pointed-Type-With-Aut; map-hom-Pointed-Type-With-Aut;
-    aut-Pointed-Type-With-Aut; preserves-point-map-hom-Pointed-Type-With-Aut;
-    preserves-aut-map-hom-Pointed-Type-With-Aut; htpy-hom-Pointed-Type-With-Aut;
-    eq-htpy-hom-Pointed-Type-With-Aut)
+open import structured-types.types-equipped-with-endomorphisms
+open import structured-types.pointed-types-equipped-with-automorphisms
 
 ```
 

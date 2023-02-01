@@ -7,15 +7,9 @@ title: Inequality of integers
 
 module elementary-number-theory.inequality-integers where
 
-open import elementary-number-theory.addition-integers using
-  ( right-inverse-law-add-ℤ; is-nonnegative-add-ℤ; add-ℤ;
-    left-successor-law-add-ℤ; right-unit-law-add-ℤ)
-open import elementary-number-theory.difference-integers using
-  ( diff-ℤ; eq-diff-ℤ; distributive-neg-diff-ℤ; triangle-diff-ℤ;
-    right-translation-diff-ℤ; left-translation-diff-ℤ; diff-succ-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; is-nonnegative-ℤ; is-zero-is-nonnegative-ℤ;
-    is-nonnegative-eq-ℤ; neg-ℤ; decide-is-nonnegative-ℤ; succ-ℤ; is-positive-ℤ; int-ℕ; is-nonnegative-int-ℕ; succ-int-ℕ)
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-integers
+open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import foundation.coproduct-types

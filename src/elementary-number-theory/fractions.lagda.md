@@ -7,11 +7,8 @@ title: Fractions
 
 module elementary-number-theory.fractions where
 
-open import elementary-number-theory.integers using
-  ( ℤ; positive-ℤ; is-positive-ℤ; is-nonzero-ℤ; is-nonzero-is-positive-ℤ;
-    ℤ-Set; is-set-ℤ; is-set-positive-ℤ)
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-injective-mul-ℤ'; associative-mul-ℤ; commutative-mul-ℤ; mul-ℤ')
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 
 open import foundation.equivalence-relations
 open import foundation.cartesian-product-types

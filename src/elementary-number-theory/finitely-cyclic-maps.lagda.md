@@ -7,10 +7,7 @@ title: Finitely cyclic maps
 
 module elementary-number-theory.finitely-cyclic-maps where
 
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( add-Fin; mod-succ-ℕ; right-unit-law-add-Fin; right-successor-law-add-Fin;
-    neg-Fin; issec-nat-Fin; commutative-add-Fin; associative-add-Fin;
-    left-inverse-law-add-Fin)
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
@@ -18,8 +15,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.iterating-functions using
-  ( iterate; iterate-succ-ℕ; iterate-iterate)
+open import foundation.iterating-functions
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types

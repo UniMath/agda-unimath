@@ -8,11 +8,7 @@ title: Addition on the integers
 module elementary-number-theory.addition-integers where
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; succ-ℤ; pred-ℤ; isretr-pred-ℤ;
-    issec-pred-ℤ; neg-ℤ; pred-neg-ℤ; neg-pred-ℤ; in-pos; in-neg;
-    is-nonnegative-ℤ; is-nonnegative-succ-ℤ; is-positive-ℤ; is-positive-succ-ℤ;
-    is-nonnegative-is-positive-ℤ; int-ℕ; succ-int-ℕ; is-zero-ℤ)
+open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-embeddings
@@ -25,8 +21,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.interchange-law using
-  ( interchange-law; interchange-law-commutative-and-associative)
+open import foundation.interchange-law
 open import foundation.unit-type
 open import foundation.universe-levels
 

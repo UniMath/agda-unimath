@@ -9,11 +9,8 @@ module elementary-number-theory.unit-elements-standard-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.divisibility-standard-finite-types using
-  ( div-Fin; refl-div-Fin; trans-div-Fin)
-open import elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( eq-mod-succ-cong-ℕ; mul-Fin; associative-mul-Fin; mul-Fin';
-    right-unit-law-mul-Fin; left-unit-law-mul-Fin; commutative-mul-Fin)
+open import elementary-number-theory.divisibility-standard-finite-types
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
