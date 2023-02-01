@@ -9,3 +9,41 @@ module foundation.function-extensionality where
 
 open import foundation-core.function-extensionality public
 ```
+
+## Postulate
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+  
+  postulate funext : (f : (x : A) → B x) → FUNEXT f
+
+  equiv-funext : {f g : (x : A) → B x} → (f ＝ g) ≃ (f ~ g)
+  pr1 (equiv-funext {f = f} {g}) = htpy-eq
+  pr2 (equiv-funext {f = f} {g}) = funext f g
+
+  abstract
+    eq-htpy : {f g : (x : A) → B x} → (f ~ g) → f ＝ g
+    eq-htpy = map-inv-is-equiv (funext _ _)
+  
+    issec-eq-htpy :
+      {f g : (x : A) → B x} → (htpy-eq ∘ (eq-htpy {f = f} {g = g})) ~ id
+    issec-eq-htpy = issec-map-inv-is-equiv (funext _ _)
+  
+    isretr-eq-htpy :
+      {f g : (x : A) → B x} → (eq-htpy ∘ (htpy-eq {f = f} {g = g})) ~ id
+    isretr-eq-htpy = isretr-map-inv-is-equiv (funext _ _)
+
+    is-equiv-eq-htpy :
+      (f g : (x : A) → B x) → is-equiv (eq-htpy {f = f} {g = g})
+    is-equiv-eq-htpy f g = is-equiv-map-inv-is-equiv (funext _ _)
+
+    eq-htpy-refl-htpy :
+      (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
+    eq-htpy-refl-htpy f = isretr-eq-htpy refl
+
+  equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
+  pr1 (equiv-eq-htpy {f = f} {g}) = eq-htpy
+  pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
+```
