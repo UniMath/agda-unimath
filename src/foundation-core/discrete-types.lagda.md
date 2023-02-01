@@ -3,8 +3,6 @@ title: Discrete types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.discrete-types where
 
 open import foundation.decidable-equality
