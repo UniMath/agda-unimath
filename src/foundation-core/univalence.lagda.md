@@ -25,10 +25,10 @@ In this file, we define the statement of the axiom. The axiom itself is postulat
 ## Definition
 
 ```agda
-equiv-eq : {i : Level} {A : UU i} {B : UU i} → (A ＝ B) → A ≃ B
+equiv-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A ≃ B
 equiv-eq refl = id-equiv
 
-UNIVALENCE : {i : Level} (A B : UU i) → UU (lsuc i)
+UNIVALENCE : {l : Level} (A B : UU l) → UU (lsuc l)
 UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
 ```
 
@@ -38,8 +38,8 @@ UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
 
 ```agda
 abstract
-  is-contr-total-equiv-UNIVALENCE : {i : Level} (A : UU i) →
-    ((B : UU i) → UNIVALENCE A B) → is-contr (Σ (UU i) (λ X → A ≃ X))
+  is-contr-total-equiv-UNIVALENCE : {l : Level} (A : UU l) →
+    ((B : UU l) → UNIVALENCE A B) → is-contr (Σ (UU l) (λ X → A ≃ X))
   is-contr-total-equiv-UNIVALENCE A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
@@ -48,8 +48,8 @@ abstract
 
 ```agda
 abstract
-  UNIVALENCE-is-contr-total-equiv : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → A ≃ X)) → (B : UU i) → UNIVALENCE A B
+  UNIVALENCE-is-contr-total-equiv : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → A ≃ X)) → (B : UU l) → UNIVALENCE A B
   UNIVALENCE-is-contr-total-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
 ```
@@ -58,6 +58,6 @@ abstract
 
 ```agda
 tr-equiv-eq-ap : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
-  (p : x ＝ y) → (map-equiv (equiv-eq (ap B p))) ~ tr B p
-tr-equiv-eq-ap refl = refl-htpy
+  (p : x ＝ y) → map-equiv (equiv-eq (ap B p)) ＝ tr B p
+tr-equiv-eq-ap refl = refl
 ```

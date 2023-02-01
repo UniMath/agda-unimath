@@ -28,31 +28,31 @@ In this file we postulate the univalence axiom. Its statement is defined in [fou
 ## Postulates
 
 ```agda
-postulate univalence : {i : Level} (A B : UU i) → UNIVALENCE A B
+postulate univalence : {l : Level} (A B : UU l) → UNIVALENCE A B
 ```
 
 ## Definitions
 
 ```agda
-eq-equiv : {i : Level} (A B : UU i) → (A ≃ B) → A ＝ B
+eq-equiv : {l : Level} (A B : UU l) → A ≃ B → A ＝ B
 eq-equiv A B = map-inv-is-equiv (univalence A B)
 
 equiv-univalence :
-  {i : Level} {A B : UU i} → (A ＝ B) ≃ (A ≃ B)
+  {l : Level} {A B : UU l} → (A ＝ B) ≃ (A ≃ B)
 pr1 equiv-univalence = equiv-eq
 pr2 equiv-univalence = univalence _ _
 
 abstract
-  is-contr-total-equiv : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → A ≃ X))
+  is-contr-total-equiv : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → A ≃ X))
   is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
 
 abstract
-  is-contr-total-equiv' : {i : Level} (A : UU i) →
-    is-contr (Σ (UU i) (λ X → X ≃ A))
-  is-contr-total-equiv' {i} A =
+  is-contr-total-equiv' : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → X ≃ A))
+  is-contr-total-equiv' {l} A =
     is-contr-equiv'
-      ( Σ (UU i) (λ X → X ＝ A))
+      ( Σ (UU l) (λ X → X ＝ A))
       ( equiv-tot (λ X → equiv-univalence))
       ( is-contr-total-path' A)
 ```
