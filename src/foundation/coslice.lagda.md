@@ -14,7 +14,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
-open import foundation.function-extensionality using (equiv-funext)
+open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 ```
 

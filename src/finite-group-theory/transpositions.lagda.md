@@ -25,7 +25,7 @@ open import foundation.equivalences-maybe
 open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
 open import foundation.functions
-open import foundation.function-extensionality using (htpy-eq; eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.identity-types

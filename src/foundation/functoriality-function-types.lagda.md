@@ -13,7 +13,6 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.functions
-open import foundation.function-extensionality using (htpy-eq; eq-htpy)
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
+open import foundation-core.function-extensionality
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 ```

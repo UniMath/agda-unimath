@@ -24,7 +24,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using (equiv-funext)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
