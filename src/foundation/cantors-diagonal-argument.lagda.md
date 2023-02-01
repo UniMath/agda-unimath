@@ -10,7 +10,7 @@ module foundation.cantors-diagonal-argument where
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using (htpy-eq)
+open import foundation-core.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations

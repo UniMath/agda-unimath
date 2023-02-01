@@ -9,10 +9,11 @@ module group-theory.isomorphisms-semigroups where
 
 open import category-theory.isomorphisms-large-precategories
 
+open import foundation-core.function-extensionality
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions

@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.sections
-open import foundation.univalence using (is-contr-total-equiv)
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 

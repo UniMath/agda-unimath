@@ -13,7 +13,6 @@ open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
@@ -24,6 +23,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
+open import foundation.function-extensionality
 open import foundation.unit-type
 open import foundation.subuniverses
 ```

@@ -3,7 +3,7 @@ title: Equality of cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --safe #-}
 
 module foundation-core.equality-cartesian-product-types where
 

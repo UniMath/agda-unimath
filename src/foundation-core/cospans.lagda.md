@@ -3,6 +3,8 @@ title: Cospans
 ---
 
 ```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
 module foundation-core.cospans where
 
 open import foundation-core.cartesian-product-types

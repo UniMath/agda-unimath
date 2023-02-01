@@ -10,7 +10,7 @@ module foundation.universal-property-propositional-truncation where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (equiv-funext)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types

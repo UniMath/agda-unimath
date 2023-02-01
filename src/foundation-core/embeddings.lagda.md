@@ -3,7 +3,7 @@ title: Embeddings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
+{-# OPTIONS --without-K --exact-split --safe #-}
 
 module foundation-core.embeddings where
 

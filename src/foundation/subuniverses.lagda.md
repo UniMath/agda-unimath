@@ -9,18 +9,17 @@ module foundation.subuniverses where
 
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
-open import foundation.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtype-identity-principle
 open import foundation-core.subtypes
-open import foundation-core.univalence using
-  ( eq-equiv; is-contr-total-equiv; equiv-eq)
 open import foundation-core.universe-levels
 
+open import foundation.embeddings
 open import foundation.equality-dependent-function-types
+open import foundation.univalence
 ```
 
 ## Idea

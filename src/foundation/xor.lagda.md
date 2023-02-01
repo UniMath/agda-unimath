@@ -35,7 +35,6 @@ open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
-open import foundation.univalence using (eq-equiv)
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs

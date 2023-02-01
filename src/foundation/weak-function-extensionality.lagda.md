@@ -7,6 +7,8 @@ title: Weak function extensionality
 
 module foundation.weak-function-extensionality where
 
+open import foundation-core.function-extensionality
+
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -16,8 +18,6 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality using
-  ( FUNEXT; htpy-eq; funext)
 open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies

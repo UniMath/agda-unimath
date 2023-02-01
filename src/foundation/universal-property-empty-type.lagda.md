@@ -14,7 +14,7 @@ open import foundation-core.universe-levels
 
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 ```
 
 ## Idea

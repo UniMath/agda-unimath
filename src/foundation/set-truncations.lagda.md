@@ -7,6 +7,8 @@ title: Set truncations
 
 module foundation.set-truncations where
 
+open import foundation-core.function-extensionality
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -16,7 +18,6 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types

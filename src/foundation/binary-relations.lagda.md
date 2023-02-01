@@ -7,9 +7,6 @@ title: Binary relations
 
 module foundation.binary-relations where
 
-open import foundation.equality-dependent-function-types
-open import foundation.subtypes
-
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
@@ -17,8 +14,11 @@ open import foundation-core.equivalences
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.univalence using (is-contr-total-equiv)
 open import foundation-core.universe-levels
+
+open import foundation.equality-dependent-function-types
+open import foundation.subtypes
+open import foundation.univalence
 ```
 
 ## Idea
