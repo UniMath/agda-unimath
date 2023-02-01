@@ -1,8 +1,8 @@
-# Pointed families of types
+---
+title: Pointed families of types
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.pointed-families-of-types where
 
 open import foundation.dependent-pair-types

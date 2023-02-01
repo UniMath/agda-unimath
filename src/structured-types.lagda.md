@@ -29,6 +29,7 @@ open import structured-types.pointed-homotopies public
 open import structured-types.pointed-maps public
 open import structured-types.pointed-types public
 open import structured-types.pointed-types-equipped-with-automorphisms public
+open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
 open import structured-types.universal-property-lists-wild-monoids public

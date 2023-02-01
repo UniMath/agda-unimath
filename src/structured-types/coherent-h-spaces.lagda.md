@@ -3,8 +3,6 @@ title: Coherent H-spaces
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.coherent-h-spaces where
 
 open import foundation.dependent-pair-types

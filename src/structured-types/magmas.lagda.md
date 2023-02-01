@@ -3,8 +3,6 @@ title: Magmas
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.magmas where
 
 open import elementary-number-theory.natural-numbers

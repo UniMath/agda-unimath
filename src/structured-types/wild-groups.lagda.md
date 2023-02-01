@@ -3,8 +3,6 @@ title: Wild groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.wild-groups where
 
 open import foundation.cartesian-product-types

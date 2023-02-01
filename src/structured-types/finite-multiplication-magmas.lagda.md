@@ -3,8 +3,6 @@ title: Finite multiplication in magmas
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.finite-multiplication-magmas where
 
 open import elementary-number-theory.natural-numbers

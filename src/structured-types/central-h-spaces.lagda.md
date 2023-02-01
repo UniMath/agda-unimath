@@ -1,5 +1,5 @@
 ---
-title: Evaluative H-spaces
+title: Central H-spaces
 ---
 
 ```agda

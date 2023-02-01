@@ -3,8 +3,6 @@ title: Morphisms of types equipped with endomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.morphisms-types-equipped-with-endomorphisms where
 
 open import foundation.commuting-squares

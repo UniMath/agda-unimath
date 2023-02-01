@@ -3,8 +3,6 @@ title: Equivalences of types equipped with endomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.equivalences-types-equipped-with-endomorphisms where
 
 open import foundation.commuting-squares

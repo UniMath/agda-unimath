@@ -3,8 +3,6 @@ title: Faithful pointed maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.faithful-pointed-maps where
 
 open import foundation.dependent-pair-types
