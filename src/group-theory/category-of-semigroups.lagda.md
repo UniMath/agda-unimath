@@ -7,9 +7,7 @@ title: The category of semigroups
 
 module group-theory.category-of-semigroups where
 
-open import category-theory.large-categories using
-  ( is-category-Large-Precat; Large-Cat; precat-Large-Cat;
-    is-category-Large-Cat)
+open import category-theory.large-categories
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,11 +15,8 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.isomorphisms-semigroups using
-  ( id-iso-Semigroup; is-contr-total-iso-Semigroup; iso-eq-Semigroup;
-    type-iso-Semigroup)
-open import group-theory.precategory-of-semigroups using
-  ( Semigroup-Large-Precat)
+open import group-theory.isomorphisms-semigroups
+open import group-theory.precategory-of-semigroups
 open import group-theory.semigroups
 ```
 

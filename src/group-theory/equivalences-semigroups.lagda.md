@@ -21,12 +21,8 @@ open import foundation.subtypes
 open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups using
-  ( preserves-mul; preserves-mul-Semigroup; preserves-mul-semigroup-Prop;
-    type-hom-Semigroup; map-hom-Semigroup)
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup; has-associative-mul;
-    set-Semigroup; associative-mul-Semigroup; is-set-type-Semigroup)
+open import group-theory.homomorphisms-semigroups
+open import group-theory.semigroups
 ```
 
 ## Idea

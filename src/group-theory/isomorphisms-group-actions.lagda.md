@@ -7,30 +7,19 @@ title: Isomorphisms of group actions
 
 module group-theory.isomorphisms-group-actions where
 
-open import category-theory.isomorphisms-large-precategories using
-  ( is-iso-Large-Precat; iso-Large-Precat; hom-iso-Large-Precat;
-    is-iso-hom-iso-Large-Precat; hom-inv-iso-Large-Precat;
-    is-sec-hom-inv-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat)
+open import category-theory.isomorphisms-large-precategories
 
-open import foundation.commuting-squares using (coherence-square)
+open import foundation.commuting-squares
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.equivalences-group-actions using
-  ( equiv-Abstract-Group-Action)
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; type-Abstract-Group-Action;
-    mul-Abstract-Group-Action)
+open import group-theory.equivalences-group-actions
+open import group-theory.group-actions
 open import group-theory.groups
-open import group-theory.homomorphisms-group-actions using
-  ( type-hom-Abstract-Group-Action; map-hom-Abstract-Group-Action;
-    coherence-square-hom-Abstract-Group-Action;
-    comp-hom-Abstract-Group-Action; id-hom-Abstract-Group-Action;
-    htpy-eq-hom-Abstract-Group-Action)
-open import group-theory.precategory-of-group-actions using
-  ( Abstract-Group-Action-Large-Precat)
+open import group-theory.homomorphisms-group-actions
+open import group-theory.precategory-of-group-actions
 ```
 
 ## Definition

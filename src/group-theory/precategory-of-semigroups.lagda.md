@@ -7,17 +7,11 @@ title: The precategory of semigroups
 
 module group-theory.precategory-of-semigroups where
 
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; hom-Large-Precat; comp-hom-Large-Precat;
-    id-hom-Large-Precat; associative-comp-hom-Large-Precat;
-    left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
+open import category-theory.large-precategories
 
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups using
-  ( hom-Semigroup; comp-hom-Semigroup; id-hom-Semigroup;
-    associative-comp-hom-Semigroup; left-unit-law-comp-hom-Semigroup;
-    right-unit-law-comp-hom-Semigroup)
+open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 ```
 

@@ -63,7 +63,7 @@ module _
   where
 
   open import group-theory.semigroups
-  open import group-theory.monoids using (Monoid)
+  open import group-theory.monoids
   open import group-theory.commutative-monoids using (Commutative-Monoid)
 
   add-vec-Ring : {n : ℕ} → vec-Ring R n → vec-Ring R n → vec-Ring R n

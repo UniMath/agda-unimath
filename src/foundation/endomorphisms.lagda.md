@@ -16,7 +16,7 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.monoids using (Monoid)
+open import group-theory.monoids
 open import group-theory.semigroups
 
 open import structured-types.pointed-types

@@ -7,8 +7,7 @@ title: Homomorphisms of group actions
 
 module group-theory.homomorphisms-group-actions where
 
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-comp-horizontal)
+open import foundation.commuting-squares
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -21,9 +20,7 @@ open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; mul-Abstract-Group-Action;
-    set-Abstract-Group-Action; is-set-type-Abstract-Group-Action)
+open import group-theory.group-actions
 open import group-theory.groups
 ```
 

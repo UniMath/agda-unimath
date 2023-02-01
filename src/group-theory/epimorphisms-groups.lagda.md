@@ -7,16 +7,15 @@ title: Epimorphisms in groups
 
 module group-theory.epimorphisms-groups where
 
-open import category-theory.epimorphisms-large-precategories using
-  ( is-epi-Large-Precat-Prop; is-epi-iso-Large-Precat)
+open import category-theory.epimorphisms-large-precategories
 
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.homomorphisms-groups using (type-hom-Group)
+open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
-open import group-theory.precategory-of-groups using (Group-Large-Precat)
+open import group-theory.precategory-of-groups
 ```
 
 ## Idea

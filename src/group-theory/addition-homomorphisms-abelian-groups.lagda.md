@@ -11,13 +11,8 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups using
-  ( Ab; type-Ab; add-Ab; zero-Ab; neg-Ab; ap-add-Ab; interchange-add-add-Ab;
-    left-unit-law-add-Ab; right-unit-law-add-Ab; distributive-neg-add-Ab;
-    associative-add-Ab; commutative-add-Ab; left-inverse-law-add-Ab;
-    right-inverse-law-add-Ab)
-open import group-theory.homomorphisms-abelian-groups using
-  ( type-hom-Ab; map-hom-Ab; preserves-add-hom-Ab; eq-htpy-hom-Ab; comp-hom-Ab)
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 ```
 
 ## Idea

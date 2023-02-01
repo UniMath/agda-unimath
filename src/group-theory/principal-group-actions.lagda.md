@@ -8,10 +8,10 @@ title: Principal group actions
 module group-theory.principal-group-actions where
 
 open import foundation.dependent-pair-types
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
+open import foundation.equivalence-extensionality
 open import foundation.universe-levels
 
-open import group-theory.group-actions using (Abstract-Group-Action)
+open import group-theory.group-actions
 open import group-theory.groups
 ```
 

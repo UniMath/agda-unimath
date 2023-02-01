@@ -11,9 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; type-Abstract-Group-Action;
-    mul-Abstract-Group-Action)
+open import group-theory.group-actions
 open import group-theory.groups
 ```
 

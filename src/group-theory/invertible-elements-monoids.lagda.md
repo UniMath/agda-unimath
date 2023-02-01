@@ -16,9 +16,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.monoids using
-  ( Monoid; type-Monoid; mul-Monoid; unit-Monoid; set-Monoid;
-    left-unit-law-mul-Monoid; associative-mul-Monoid; right-unit-law-mul-Monoid; mul-Monoid')
+open import group-theory.monoids
 ```
 
 ## Idea

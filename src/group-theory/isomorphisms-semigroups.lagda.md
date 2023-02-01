@@ -7,18 +7,11 @@ title: Isomorphisms of semigroups
 
 module group-theory.isomorphisms-semigroups where
 
-open import category-theory.isomorphisms-large-precategories using
-  ( is-iso-Large-Precat; iso-Large-Precat; hom-iso-Large-Precat;
-    is-iso-hom-iso-Large-Precat; hom-inv-iso-Large-Precat;
-    is-sec-hom-inv-iso-Large-Precat; is-retr-hom-inv-iso-Large-Precat;
-    is-prop-is-iso-Large-Precat; id-iso-Large-Precat; iso-eq-Large-Precat)
+open import category-theory.isomorphisms-large-precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; is-emb-is-equiv; issec-map-inv-is-equiv;
-    isretr-map-inv-is-equiv; is-equiv-has-inverse; _≃_;
-    is-property-is-equiv; _∘e_)
+open import foundation.equivalences
 open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
@@ -27,14 +20,9 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.equivalences-semigroups using
-  ( preserves-mul-equiv-Semigroup; equiv-Semigroup;
-    is-contr-total-equiv-Semigroup; is-equiv-hom-Semigroup)
-open import group-theory.homomorphisms-semigroups using
-  ( type-hom-Semigroup; comp-hom-Semigroup; id-hom-Semigroup;
-    map-hom-Semigroup; preserves-mul-Semigroup; eq-htpy-hom-Semigroup)
-open import group-theory.precategory-of-semigroups using
-  ( Semigroup-Large-Precat)
+open import group-theory.equivalences-semigroups
+open import group-theory.homomorphisms-semigroups
+open import group-theory.precategory-of-semigroups
 open import group-theory.semigroups
 ```
 

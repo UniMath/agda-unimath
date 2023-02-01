@@ -7,7 +7,7 @@ title: Homomorphisms of abelian groups
 
 module group-theory.homomorphisms-abelian-groups where
 
-open import category-theory.large-precategories using (Large-Precat)
+open import category-theory.large-precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,18 +17,9 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups using
-  ( Ab; type-Ab; semigroup-Ab; group-Ab; add-Ab; zero-Ab; neg-Ab)
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; map-hom-Group; preserves-mul-hom-Group; htpy-hom-Group;
-    refl-htpy-hom-Group; htpy-eq-hom-Group; is-contr-total-htpy-hom-Group;
-    is-equiv-htpy-eq-hom-Group; eq-htpy-hom-Group; is-set-type-hom-Group;
-    id-hom-Group; comp-hom-Group; hom-Group; preserves-unit-hom-Group;
-    preserves-inv-hom-Group; preserves-unit-Group)
-open import group-theory.homomorphisms-semigroups using
-  ( preserves-mul-Semigroup; preserves-mul-id-Semigroup;
-    associative-comp-hom-Semigroup; left-unit-law-comp-hom-Semigroup;
-    right-unit-law-comp-hom-Semigroup)
+open import group-theory.abelian-groups
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
 
 open import ring-theory.rings
 ```

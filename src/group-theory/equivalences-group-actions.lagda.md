@@ -7,17 +7,11 @@ title: Equivalences of group actions
 
 module group-theory.equivalences-group-actions where
 
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-inv-horizontal;
-    coherence-square-comp-horizontal)
+open import foundation.commuting-squares
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-equiv; is-equiv-map-equiv; id-equiv;
-    is-property-is-equiv; map-inv-is-equiv; inv-equiv; _∘e_;
-    isretr-map-inv-equiv; issec-map-inv-equiv)
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv;  extensionality-equiv)
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -29,18 +23,11 @@ open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; type-Abstract-Group-Action;
-    mul-Abstract-Group-Action)
+open import group-theory.group-actions
 open import group-theory.groups
-open import group-theory.homomorphisms-group-actions using
-  ( type-hom-Abstract-Group-Action; map-hom-Abstract-Group-Action;
-    htpy-hom-Abstract-Group-Action; refl-htpy-hom-Abstract-Group-Action;
-    is-contr-total-htpy-hom-Abstract-Group-Action)
-open import group-theory.homomorphisms-groups using
-  ( map-hom-Group; type-hom-Group; htpy-hom-Group;
-    is-contr-total-htpy-hom-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 ## Idea

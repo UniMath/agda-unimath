@@ -31,8 +31,7 @@ open import group-theory.abelian-groups using
     is-injective-add-Ab; is-injective-add-Ab'; is-zero-is-idempotent-Ab;
     add-list-Ab; preserves-concat-add-list-Ab)
 open import group-theory.groups
-open import group-theory.monoids using
-  ( Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
+open import group-theory.monoids
 open import group-theory.semigroups
 
 open import univalent-combinatorics.lists using (list; concat-list)

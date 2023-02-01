@@ -8,38 +8,30 @@ title: Concrete automorphism groups on sets
 module group-theory.loop-groups-sets where
 
 open import foundation.dependent-pair-types
-open import foundation.equivalences using
-  ( _≃_; map-equiv; inv-equiv; id-equiv; left-inverse-law-equiv; right-inverse-law-equiv;
-    left-unit-law-equiv)
+open import foundation.equivalences
 open import foundation.equality-dependent-pair-types
 open import foundation.functions
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.homotopies
-open import foundation.identity-truncated-types using (is-trunc-id-is-trunc)
-open import foundation.identity-types using
-  ( Id; refl; _∙_; inv; ap; assoc; left-unit; right-unit; left-inv; right-inv;
-    distributive-inv-concat; inv-inv)
+open import foundation.identity-truncated-types
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.sets using
-  ( Set; is-set; type-Set; is-set-type-Set; is-prop-is-set; is-1-type-Set;
-    Set-1-Type)
+open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.univalence using
-  ( equiv-univalence; equiv-eq; eq-equiv; comp-eq-equiv; comp-equiv-eq)
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups using (Automorphism-Group)
-open import group-theory.concrete-groups using (abstract-group-Concrete-Group)
+open import group-theory.automorphism-groups
+open import group-theory.concrete-groups
 open import group-theory.groups
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; comp-hom-Group; id-hom-Group)
-open import group-theory.homomorphisms-semigroups using (is-prop-preserves-mul-Semigroup)
+open import group-theory.homomorphisms-groups
+open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.monoids
 open import group-theory.semigroups
-open import group-theory.symmetric-groups using (symmetric-Group; iso-symmetric-group-equiv-Set)
+open import group-theory.symmetric-groups
 ```
 
 ## Idea

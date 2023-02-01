@@ -10,17 +10,13 @@ module group-theory.monoids where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; Prop;
-    prod-Prop; Π-Prop)
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.unital-binary-operations using (is-unital)
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup; set-Semigroup;
-    is-set-type-Semigroup; associative-mul-Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

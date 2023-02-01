@@ -12,13 +12,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.groups using
-  ( Group; type-Group; mul-Group; set-Group; is-set-type-Group
-  ; inv-Group ; unit-Group ; associative-mul-Group
-  ; right-inverse-law-mul-Group ; left-inverse-law-mul-Group
-  ; right-unit-law-mul-Group ; left-unit-law-mul-Group
-  ; distributive-inv-mul-Group ; inv-inv-Group
-  )
+open import group-theory.groups
 
 open import elementary-number-theory.natural-numbers
 

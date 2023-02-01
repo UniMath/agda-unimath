@@ -20,23 +20,18 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
-open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Π-Prop;
-    is-prop-Σ; Prop)
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import group-theory.monoids using
-  ( is-unital-Semigroup; Monoid; is-prop-is-unital-Semigroup)
+open import group-theory.monoids
 open import group-theory.semigroups
 
 open import structured-types.pointed-types
-open import structured-types.pointed-types-equipped-with-automorphisms using
-  ( Pointed-Type-With-Aut)
+open import structured-types.pointed-types-equipped-with-automorphisms
 
-open import univalent-combinatorics.lists using
-  ( list; mul-list-Monoid; distributive-mul-list-Monoid; concat-list)
+open import univalent-combinatorics.lists
 ```
 
 ## Idea

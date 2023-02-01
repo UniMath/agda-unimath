@@ -14,9 +14,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; set-Semigroup; type-Semigroup; is-set-type-Semigroup;
-    mul-Semigroup; mul-Semigroup'; associative-mul-Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

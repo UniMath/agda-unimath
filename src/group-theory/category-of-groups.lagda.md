@@ -7,9 +7,7 @@ title: The category of groups
 
 module group-theory.category-of-groups where
 
-open import category-theory.large-categories using
-  ( is-category-Large-Precat; Large-Cat; precat-Large-Cat;
-    is-category-Large-Cat)
+open import category-theory.large-categories
 
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -18,7 +16,7 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.isomorphisms-groups
-open import group-theory.precategory-of-groups using (Group-Large-Precat)
+open import group-theory.precategory-of-groups
 ```
 
 ## Definition

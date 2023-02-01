@@ -16,13 +16,9 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import group-theory.groups using
-  ( Group; type-Group; unit-Group; mul-Group; inv-Group; left-inverse-law-mul-Group;
-    set-Group; equiv-mul-Group; associative-mul-Group)
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; map-hom-Group; preserves-unit-hom-Group;
-    preserves-mul-hom-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 ## Idea
