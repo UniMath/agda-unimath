@@ -3,8 +3,6 @@ title: Wild quasigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.wild-quasigroups where
 
 open import foundation.automorphisms

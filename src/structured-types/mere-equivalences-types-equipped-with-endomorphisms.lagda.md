@@ -3,8 +3,6 @@ title: Mere equivalences of types equipped with endomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.mere-equivalences-types-equipped-with-endomorphisms where
 
 open import foundation.contractible-types

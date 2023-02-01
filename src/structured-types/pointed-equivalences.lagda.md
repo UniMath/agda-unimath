@@ -3,8 +3,6 @@ title: Pointed equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.pointed-equivalences where
 
 open import foundation.contractible-maps using (is-contr-map-is-equiv)

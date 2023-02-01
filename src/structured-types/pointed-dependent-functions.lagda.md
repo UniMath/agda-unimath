@@ -1,8 +1,8 @@
-# Pointed dependent functions
+---
+title: Pointed dependent functions
+---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.pointed-dependent-functions where
 
 open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)

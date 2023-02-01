@@ -3,8 +3,6 @@ title: Types equipped with automorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module structured-types.types-equipped-with-automorphisms where
 ```
 
