@@ -19,7 +19,7 @@ open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.univalence using (equiv-univalence)
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.small-types

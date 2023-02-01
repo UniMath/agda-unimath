@@ -52,7 +52,6 @@ open import foundation.propositions
 open import foundation.repetitions
 open import foundation.sets
 open import foundation.unit-type
-open import foundation.univalence using (eq-equiv)
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 

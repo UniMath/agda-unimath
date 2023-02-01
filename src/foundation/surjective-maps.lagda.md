@@ -24,8 +24,6 @@ open import foundation-core.sets
 open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-open import foundation-core.univalence using
-  ( is-contr-total-equiv)
 open import foundation-core.universe-levels
 
 open import foundation.connected-maps
@@ -34,6 +32,7 @@ open import foundation.homotopies
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
+open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
 ```
 

@@ -7,6 +7,9 @@ title: The universal property of set quotients
 
 module foundation.universal-property-set-quotients where
 
+open import foundation-core.equivalence-relations
+open import foundation-core.univalence
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -36,11 +39,8 @@ open import foundation.sets
 open import foundation.small-types
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.univalence using (equiv-eq)
 open import foundation.universal-property-image
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
 
 ## Idea

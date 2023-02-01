@@ -22,7 +22,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence using (equiv-univalence; is-contr-total-equiv)
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import structured-types.pointed-homotopies

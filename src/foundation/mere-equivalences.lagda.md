@@ -16,7 +16,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.univalence using (eq-equiv)
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 

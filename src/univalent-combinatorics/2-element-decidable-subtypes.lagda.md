@@ -37,7 +37,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-coproduct-types
-open import foundation.univalence using (eq-equiv)
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import univalent-combinatorics.2-element-subtypes

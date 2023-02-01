@@ -49,7 +49,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.univalence using (equiv-eq)
+open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type

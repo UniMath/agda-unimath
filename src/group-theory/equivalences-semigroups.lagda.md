@@ -18,7 +18,7 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
-open import foundation.univalence using (is-contr-total-equiv)
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
