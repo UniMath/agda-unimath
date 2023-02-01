@@ -47,4 +47,20 @@ commutative-mul-symmetric-H-Space :
   {l1 : Level} (A : Pointed-Type l1) (μ : symmetric-H-Space A) →
   commutative-operation (type-Pointed-Type A) (type-Pointed-Type A)
 commutative-mul-symmetric-H-Space A μ (X , f) = pr1 (μ X) f
+
+module _
+  {l1 : Level} (A : Pointed-Type l1) (X : 2-Element-Type lzero)
+  where
+
+  htpy-ℤ/2-action-H-space :
+    (μ μ' : ℤ/2-action-H-Space A X) → UU {!!}
+  htpy-ℤ/2-action-H-space μ μ' =
+    Σ ( (f : type-2-Element-Type X → type-Pointed-Type A) → pr1 μ f ＝ pr1 μ' f)
+      ( λ H →
+        Σ ( ( f : type-2-Element-Type X → type-Pointed-Type A) →
+            ( x : type-2-Element-Type X) →
+            ( p : f x ＝ pt-Pointed-Type A) →
+            pr1 (pr2 μ) f x p ＝ (H f ∙ pr1 (pr2 μ') f x p))
+          ( λ K →
+            Eq-symmetric-Id (X , (λ x → pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl)) {!pr2 (pr2 μ)!} (pr2 (pr2 μ'))))
 ```
