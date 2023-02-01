@@ -295,14 +295,7 @@ module _
 
   eq-equiv-eq-map-equiv :
     {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → e ＝ e'
-  eq-equiv-eq-map-equiv {e} {e'} p =
-    eq-pair-Σ
-      ( p)
-      ( center
-        ( is-property-is-equiv
-          ( map-equiv e')
-          ( tr (is-equiv) p (pr2 e))
-          ( pr2 e')))
+  eq-equiv-eq-map-equiv = eq-type-subtype is-equiv-Prop
 
   abstract
     is-emb-map-equiv :
