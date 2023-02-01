@@ -7,11 +7,12 @@ title: Commutative operations
 
 module foundation.commutative-operations where
 
+open import foundation-core.function-extensionality
+
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
-open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types

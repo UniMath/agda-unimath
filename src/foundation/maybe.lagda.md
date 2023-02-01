@@ -15,7 +15,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types

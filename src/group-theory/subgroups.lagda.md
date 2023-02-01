@@ -15,7 +15,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.powersets

@@ -10,7 +10,7 @@ module foundation.locally-small-types where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (equiv-funext)
+open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-subtypes

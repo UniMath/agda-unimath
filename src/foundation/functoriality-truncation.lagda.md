@@ -7,10 +7,11 @@ title: Functoriality of truncations
 
 module foundation.functoriality-truncation where
 
+open import foundation-core.function-extensionality
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (htpy-eq)
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types

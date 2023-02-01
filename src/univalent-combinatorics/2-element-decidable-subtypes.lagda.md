@@ -22,7 +22,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation

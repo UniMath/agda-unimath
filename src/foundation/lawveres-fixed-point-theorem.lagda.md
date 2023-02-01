@@ -7,9 +7,10 @@ title: Lawvere's fixed point theorem
 
 module foundation.lawveres-fixed-point-theorem where
 
+open import foundation-core.function-extensionality
+
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.function-extensionality using (htpy-eq)
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
