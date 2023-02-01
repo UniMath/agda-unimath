@@ -7,8 +7,8 @@ title: The triangular numbers
 
 module elementary-number-theory.triangular-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
 
 ## Definition

@@ -8,10 +8,9 @@ title: Retractions
 module foundation-core.retractions where
 
 open import foundation-core.dependent-pair-types
-open import foundation-core.functions using (_∘_; id)
+open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.identity-types using
-  ( _＝_; inv; _∙_; ap; refl; left-inv)
+open import foundation-core.identity-types
 open import foundation-core.universe-levels
 ```
 

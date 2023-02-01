@@ -5,24 +5,17 @@
 
 module order-theory.meet-semilattices where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (is-set; Set)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; type-Semigroup; mul-Semigroup)
+open import group-theory.semigroups
 
-open import order-theory.greatest-lower-bounds-posets using
-  ( has-greatest-binary-lower-bound-poset-Prop;
-    is-greatest-binary-lower-bound-Poset)
-open import order-theory.posets using
-  ( Poset; element-Poset; leq-poset-Prop; leq-Poset; is-prop-leq-Poset;
-    refl-leq-Poset; antisymmetric-leq-Poset; transitive-leq-Poset;
-    is-set-element-Poset; element-poset-Set)
+open import order-theory.greatest-lower-bounds-posets
+open import order-theory.posets
 ```
 
 ## Idea

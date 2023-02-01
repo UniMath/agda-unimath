@@ -7,30 +7,22 @@ title: Decidable types
 
 module foundation.decidable-types where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; ind-coprod; is-prop-coprod; is-left; is-right)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.double-negation using (¬¬; intro-dn)
-open import foundation.empty-types using
-  ( empty; ex-falso; is-empty; empty-Prop; is-nonempty-is-inhabited)
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-equiv; map-equiv; inv-equiv)
-open import foundation.functions using (id; _∘_)
-open import foundation.hilberts-epsilon-operators using (ε-operator-Hilbert)
-open import foundation.negation using (¬; map-neg; is-prop-neg)
-open import foundation.retractions using (_retract-of_)
-open import foundation.propositions using
-  ( is-prop; Prop; type-Prop; is-prop-type-Prop)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop;
-    is-prop-type-trunc-Prop; trunc-Prop; unit-trunc-Prop;
-    map-universal-property-trunc-Prop)
-open import foundation.raising-universe-levels using (raise; map-inv-raise; map-raise)
-open import foundation.type-arithmetic-empty-type using
-  ( right-unit-law-coprod-is-empty)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.hilberts-epsilon-operators
+open import foundation.negation
+open import foundation.retractions
+open import foundation.propositions
+open import foundation.propositional-truncations
+open import foundation.raising-universe-levels
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

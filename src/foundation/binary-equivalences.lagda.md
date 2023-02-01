@@ -7,11 +7,11 @@ title: Binary equivalences
 
 module foundation.binary-equivalences where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb)
-open import foundation-core.equivalences using (is-equiv; is-emb-is-equiv)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
 ```
 
 ## Idea

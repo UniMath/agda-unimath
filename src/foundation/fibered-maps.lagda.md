@@ -7,17 +7,16 @@ title: Maps fibered over a map
 
 module foundation.fibered-maps where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse)
-open import foundation.fibers-of-maps using (fib)
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (inv; refl; inv-inv)
-open import foundation.slice using (hom-slice)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.slice
+open import foundation.universe-levels
 ```
 
 ## Idea

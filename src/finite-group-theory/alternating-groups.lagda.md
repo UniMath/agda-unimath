@@ -11,9 +11,9 @@ open import group-theory.groups
 
 open import finite-group-theory.sign-homomorphism
 
-open import elementary-number-theory.natural-numbers using (ℕ)
-open import univalent-combinatorics.standard-finite-types using (Fin-Set)
-open import univalent-combinatorics.finite-types using (UU-Fin; set-UU-Fin)
+open import elementary-number-theory.natural-numbers
+open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

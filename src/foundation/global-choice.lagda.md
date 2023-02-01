@@ -7,21 +7,16 @@ title: Global choice
 
 module foundation.global-choice where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (map-equiv)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.hilberts-epsilon-operators using
-  ( ε-operator-Hilbert)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-propositional-truncation
+open import foundation.hilberts-epsilon-operators
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-types using
-  ( no-section-type-UU-Fin-two-ℕ)
-open import univalent-combinatorics.standard-finite-types using
-  ( zero-Fin)
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

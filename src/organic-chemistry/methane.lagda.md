@@ -11,19 +11,19 @@ open import organic-chemistry.alkanes using (is-alkane-hydrocarbon)
 
 open import finite-group-theory.tetrahedra-in-3-space using (tetrahedron-in-3-space)
 
-open import elementary-number-theory.inequality-natural-numbers using (concatenate-eq-leq-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
 
-open import foundation.unit-type using (star)
-open import foundation.empty-types using (ex-falso ; is-prop-empty)
-open import foundation.identity-types using (inv)
-open import foundation.dependent-pair-types using (_,_ ; pr2)
-open import foundation.propositional-truncations using (unit-trunc-Prop)
+open import foundation.unit-type
+open import foundation.empty-types
+open import foundation.identity-types
+open import foundation.dependent-pair-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import graph-theory.walks-undirected-graphs using (refl-walk-Undirected-Graph)
 
-open import univalent-combinatorics.counting using (count-empty)
-open import univalent-combinatorics.finite-types using (unit-𝔽 ; empty-𝔽 ; compute-number-of-elements-is-finite ; is-finite-empty)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 ```
 ## Idea
 

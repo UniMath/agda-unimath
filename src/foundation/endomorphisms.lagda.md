@@ -9,16 +9,15 @@ module foundation.endomorphisms where
 
 open import foundation-core.endomorphisms public
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (refl)
-open import foundation.sets using
-  ( Set; type-Set; is-set; is-set-function-type; is-set-type-Set)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import group-theory.monoids using (Monoid)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.monoids
+open import group-theory.semigroups
 
 open import structured-types.pointed-types
 open import structured-types.wild-monoids

@@ -9,17 +9,14 @@ module foundation.equality-dependent-pair-types where
 
 open import foundation-core.equality-dependent-pair-types public
 
-open import foundation.identity-types using
-  (_＝_; refl; tr; _∙_; concat; ap; tr-concat; inv; isretr-inv-tr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; is-equiv-has-inverse)
-open import foundation-core.functions using (id; _∘_)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using
-  ( refl; tr; _∙_; concat; ap; tr-concat)
-open import foundation-core.propositions using (is-prop; eq-is-prop)
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
+open import foundation.identity-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 ## Properties

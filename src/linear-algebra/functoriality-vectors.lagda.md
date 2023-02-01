@@ -5,13 +5,13 @@
 
 module linear-algebra.functoriality-vectors where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (refl; ap-binary)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import linear-algebra.vectors using (vec; empty-vec; _∷_)
+open import linear-algebra.vectors
 ```
 
 ## Idea

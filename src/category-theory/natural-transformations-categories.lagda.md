@@ -7,14 +7,11 @@ title: Natural transformations between functors between categories
 
 module category-theory.natural-transformations-categories where
 
-open import category-theory.categories using
-  ( Cat; obj-Cat; type-hom-Cat; precat-Cat)
-open import category-theory.functors-categories using
-  ( functor-Cat; obj-functor-Cat)
-open import category-theory.natural-transformations-precategories using
-  ( is-nat-trans-Precat; nat-trans-Precat; components-nat-trans-Precat)
+open import category-theory.categories
+open import category-theory.functors-categories
+open import category-theory.natural-transformations-precategories
   
-open import foundation.universe-levels using (UU; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

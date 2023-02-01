@@ -7,15 +7,13 @@ title: Identity systems
 
 module foundation-core.identity-systems where
 
-open import foundation-core.contractible-types using
-  ( is-contr; eq-is-contr; eq-is-contr'; is-prop-is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2; fam-Σ)
-open import foundation-core.equivalences using (is-equiv; _≃_)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation-core.identity-types using (tr; ap; refl; _＝_)
-open import foundation-core.sections using (sec)
-open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.sections
+open import foundation-core.universe-levels
 ```
 
 ## Idea

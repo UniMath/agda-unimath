@@ -7,25 +7,21 @@ title: Addition on the natural numbers
 
 module elementary-number-theory.addition-natural-numbers where
 
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-injective-succ-ℕ; is-zero-ℕ; is-nonzero-succ-ℕ;
-    is-set-ℕ; ℕ-Set)
+open import elementary-number-theory.natural-numbers
   
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (id)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.injective-maps using (is-injective; is-emb-is-injective)
-open import foundation.interchange-law using
-  ( interchange-law; interchange-law-commutative-and-associative)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (lzero)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.interchange-law
+open import foundation.negation
+open import foundation.universe-levels
 
-open import group-theory.monoids using (Monoid)
-open import group-theory.semigroups using (Semigroup)
+open import group-theory.monoids
+open import group-theory.semigroups
 ```
 
 ## Definition

@@ -7,25 +7,18 @@ title: Subuniverse
 
 module foundation.subuniverses where
 
-open import foundation-core.contractible-types using
-  ( is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_)
-open import foundation-core.equivalences using
-  ( _≃_; id-equiv; is-equiv; map-inv-is-equiv)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation-core.identity-types using (_＝_; tr; inv; refl; ap)
-open import foundation-core.propositions using
-  ( is-prop; type-Prop; is-prop-type-Prop; Prop)
-open import foundation-core.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation-core.subtypes using
-  ( is-subtype; subtype; is-emb-inclusion-subtype; type-subtype;
-    is-in-subtype; inclusion-subtype; emb-subtype)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation.embeddings
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtype-identity-principle
+open import foundation-core.subtypes
 open import foundation-core.univalence using
   ( eq-equiv; is-contr-total-equiv; equiv-eq)
-open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.universe-levels
 
 open import foundation.equality-dependent-function-types
 ```

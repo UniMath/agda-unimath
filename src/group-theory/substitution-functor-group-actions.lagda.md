@@ -7,39 +7,24 @@ title: The substitution functor of group actions
 
 module group-theory.substitution-functor-group-actions where
 
-open import category-theory.functors-large-precategories using
-  ( functor-Large-Precat; obj-functor-Large-Precat;
-    hom-functor-Large-Precat; preserves-comp-functor-Large-Precat;
-    preserves-id-functor-Large-Precat)
+open import category-theory.functors-large-precategories
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalence-classes using (equivalence-class-Set)
-open import foundation.equivalence-relations using (Eq-Rel)
-open import foundation.existential-quantification using (∃-Prop; intro-∃)
-open import foundation.identity-types using (Id; refl; ap; _∙_; inv)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.sets using
-  ( Set; prod-Set; type-Set; is-set; is-set-type-Set)
-open import foundation.universe-levels using (Level; _⊔_; UU; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalence-classes
+open import foundation.equivalence-relations
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.precategory-of-group-actions using
-  ( Abstract-Group-Action-Large-Precat)
-open import group-theory.group-actions using
-  ( Abstract-Group-Action; set-Abstract-Group-Action; mul-Abstract-Group-Action;
-    preserves-unit-mul-Abstract-Group-Action;
-    transpose-eq-mul-Abstract-Group-Action; preserves-mul-Abstract-Group-Action)
-open import group-theory.groups using
-  ( Group; set-Group; mul-Group; unit-Group; mul-Group'; left-unit-law-mul-Group;
-    inv-Group; transpose-eq-mul-Group'; associative-mul-Group; type-Group)
-open import group-theory.homomorphisms-group-actions using
-  ( type-hom-Abstract-Group-Action; id-hom-Abstract-Group-Action;
-    comp-hom-Abstract-Group-Action)
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; comp-hom-Group; map-hom-Group; preserves-unit-hom-Group;
-    preserves-inv-hom-Group; preserves-mul-hom-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.precategory-of-group-actions
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
+open import group-theory.homomorphisms-groups
+open import group-theory.symmetric-groups
 ```
 
 ## Idea

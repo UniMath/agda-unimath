@@ -5,12 +5,12 @@
 
 module linear-algebra.scalar-multiplication-matrices where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 
-open import linear-algebra.matrices using (matrix)
-open import linear-algebra.scalar-multiplication-vectors using (scalar-mul-vec)
+open import linear-algebra.matrices
+open import linear-algebra.scalar-multiplication-vectors
 ```
 
 ```agda

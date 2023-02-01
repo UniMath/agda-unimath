@@ -7,20 +7,15 @@ title: Addition on the rationals
 
 module elementary-number-theory.addition-rationals where
 
-open import elementary-number-theory.addition-integers using
-  ( add-ℤ)
-open import elementary-number-theory.multiplication-integers using
-  ( mul-ℤ; is-positive-mul-ℤ)
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ)
-open import elementary-number-theory.rational-numbers using
-  ( ℚ; zero-ℚ; in-fraction-ℤ; is-prop-is-reduced-fraction-ℤ )
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.integers
+open import elementary-number-theory.rational-numbers
 
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
+open import foundation.dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.identity-types using
-  (_＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.propositions using (eq-is-prop)
+open import foundation.identity-types
+open import foundation.propositions
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```

@@ -7,25 +7,18 @@ title: Binary relations
 
 module foundation.binary-relations where
 
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
-open import foundation.subtypes using
-  ( has-same-elements-subtype; refl-has-same-elements-subtype;
-    is-contr-total-has-same-elements-subtype)
+open import foundation.equality-dependent-function-types
+open import foundation.subtypes
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.contractible-types using (is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( _≃_; id-equiv; map-inv-equiv; is-equiv)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation-core.identity-types using (_＝_; refl)
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-Π';
-    is-prop-function-type)
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.univalence using (is-contr-total-equiv)
-open import foundation-core.universe-levels using (UU; Level; _⊔_; lsuc)
+open import foundation-core.universe-levels
 ```
 
 ## Idea

@@ -5,13 +5,13 @@ title: Kernels
 ```agda
 module group-theory.kernels where
 
-open import foundation.equality-cartesian-product-types using (eq-pair)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.dependent-pair-types using (_,_; pr1; pr2)
-open import foundation.identity-types using (_＝_; ap; _∙_)
-open import foundation.injective-maps using (is-emb-is-injective')
-open import foundation.propositions using (type-Prop)
-open import foundation.sets using (Id-Prop)
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-dependent-pair-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-groups

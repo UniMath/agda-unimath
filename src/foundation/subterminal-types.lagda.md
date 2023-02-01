@@ -7,17 +7,14 @@ title: Subterminal types
 
 module foundation.subterminal-types where
 
-open import foundation.contractible-types using
-  ( is-equiv-is-contr; is-contr-is-equiv; is-prop-is-contr)
-open import foundation.embeddings using (is-emb; is-emb-is-emb)
-open import foundation.equivalences using (is-emb-is-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using (_＝_; ap)
-open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant; all-elements-equal;
-    is-proof-irrelevant-all-elements-equal; eq-is-prop')
-open import foundation.unit-type using (star; terminal-map; is-contr-unit)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

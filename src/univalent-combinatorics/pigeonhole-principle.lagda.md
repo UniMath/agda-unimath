@@ -7,59 +7,38 @@ title: The pigeonhole principle
 
 module univalent-combinatorics.pigeonhole-principle where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( _≤-ℕ_; refl-leq-ℕ; leq-zero-ℕ; le-ℕ; contradiction-le-ℕ; le-succ-ℕ;
-    contradiction-leq-ℕ; leq-ℕ-Prop; concatenate-eq-leq-eq-ℕ;
-    concatenate-eq-le-eq-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.well-ordering-principle-standard-finite-types using
-  (exists-not-not-forall-Fin; exists-not-not-forall-count)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inr; inl)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.decidable-types using (is-decidable-function-type)
-open import foundation.embeddings using
-  ( _↪_; map-emb; is-emb-map-emb; is-emb; comp-emb)
-open import foundation.empty-types using (ex-falso; empty-Prop)
-open import foundation.equivalences using
-  (emb-equiv; id-equiv; map-equiv; map-inv-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using (tot)
-open import foundation.homotopies using (_·r_)
-open import foundation.identity-types using (inv; Id; ap)
-open import foundation.injective-maps using
-  ( is-injective; is-emb-is-injective; is-injective-map-equiv)
-open import foundation.negation using (¬; map-neg)
-open import foundation.pairs-of-distinct-elements using
-  ( pair-of-distinct-elements; fst-pair-of-distinct-elements;
-    snd-pair-of-distinct-elements; distinction-pair-of-distinct-elements)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop)
-open import foundation.propositions using (Prop; is-prop-type-Prop)
-open import foundation.repetitions using
-  ( repetition; map-equiv-repetition; is-repetition-pair-of-distinct-elements;
-    is-repetition-pair-of-distinct-elements-repetition)
-open import foundation.sets using (Id-Prop)
-open import foundation.unit-type using (unit; star)
-open import foundation.universe-levels using (Level; UU; lzero)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.decidable-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.pairs-of-distinct-elements
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.repetitions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count; inv-equiv-count; equiv-count; is-set-count;
-    map-equiv-count; map-inv-equiv-count; issec-map-inv-equiv-count)
-open import univalent-combinatorics.decidable-propositions using
-  ( count-is-decidable-is-prop)
-open import univalent-combinatorics.decidable-dependent-function-types using
-  ( is-decidable-Π-is-finite; is-decidable-Π-Fin)
-open import univalent-combinatorics.embeddings-standard-finite-types using
-  ( reduce-emb-Fin)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; number-of-elements-is-finite; is-set-is-finite;
-    compute-number-of-elements-is-finite)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; emb-nat-Fin; is-set-Fin)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.embeddings-standard-finite-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

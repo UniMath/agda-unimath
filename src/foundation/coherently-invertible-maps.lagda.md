@@ -9,30 +9,21 @@ module foundation.coherently-invertible-maps where
 
 open import foundation-core.coherently-invertible-maps public
 
-open import foundation-core.contractible-maps using (is-contr-map-is-equiv)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.fibers-of-maps using (fib)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation-core.homotopies using
-  ( _~_; htpy-right-whisk; htpy-left-whisk; refl-htpy)
-open import foundation-core.propositions using
-  ( is-prop; is-prop-is-proof-irrelevant; is-equiv-is-prop)
-open import foundation-core.sections using (sec)
-open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ; map-assoc-Σ; map-inv-left-unit-law-Σ-is-contr;
-    is-equiv-map-inv-left-unit-law-Σ-is-contr; is-equiv-map-assoc-Σ)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.propositions
+open import foundation-core.sections
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr-equiv'; is-contr-Σ; is-contr-Π)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-is-coherently-invertible; is-contr-sec-is-equiv;
-    is-emb-is-equiv; is-coherently-invertible-is-equiv; is-property-is-equiv;
-    is-equiv-id; is-equiv-comp-htpy)
-open import foundation.identity-types using (Id; ap; equiv-inv; refl)
-open import foundation.type-theoretic-principle-of-choice using
-  ( distributive-Π-Σ)
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Properties
@@ -127,3 +118,4 @@ abstract
         ( pair id refl-htpy))
       ( is-equiv-map-assoc-Σ _ _ _)
 ```
+ 

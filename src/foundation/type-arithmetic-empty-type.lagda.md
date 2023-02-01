@@ -7,20 +7,18 @@ title: Type arithmetic with the empty type
 
 module foundation.type-arithmetic-empty-type where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using
-  ( _+_; inl; inr; neq-inr-inl; neq-inl-inr)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; issec-map-inv-is-equiv)
-open import foundation.functions using (_∘_; id)
+open import foundation.equivalences
+open import foundation.functions
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (refl)
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.unit-type
-open import foundation.universe-levels using (Level; UU)
+open import foundation.universe-levels
 ```
 
 ## Idea

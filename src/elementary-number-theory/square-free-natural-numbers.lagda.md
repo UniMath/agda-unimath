@@ -7,12 +7,11 @@ title: Square-free natural numbers
 
 module elementary-number-theory.square-free-natural-numbers where
 
-open import elementary-number-theory.divisibility-natural-numbers using (div-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; is-one-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( square-ℕ)
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.universe-levels
 ```
 
 ## Idea

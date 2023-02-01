@@ -7,18 +7,16 @@ title: Empty types
 
 module foundation-core.empty-types where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.embeddings using (is-emb; _↪_)
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; inv-equiv; _∘e_)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.sets using (is-set; Set)
-open import foundation-core.truncated-types using
-  ( is-trunc; Truncated-Type)
-open import foundation-core.truncation-levels using (𝕋; neg-two-𝕋; succ-𝕋)
-open import foundation-core.universe-levels using (Level; UU; lzero)
+open import foundation-core.dependent-pair-types
+open import foundation.embeddings
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.sets
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.propositions using (is-prop; Prop; is-trunc-is-prop)
+open import foundation.propositions
 ```
 
 ## Idea

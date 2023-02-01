@@ -7,20 +7,17 @@ title: The type theoretic principle of choice
 
 module foundation.type-theoretic-principle-of-choice where
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation-core.equivalences using
-  ( is-equiv; map-inv-equiv; is-equiv-has-inverse; _≃_; map-inv-is-equiv; _∘e_;
-    equiv-ap)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.homotopies using (refl-htpy; _~_)
-open import foundation-core.identity-types using (_＝_; refl; tr)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
 open import foundation.function-extensionality using
   ( eq-htpy; equiv-funext)
-open import foundation.structure-identity-principle using
-  ( extensionality-Σ)
+open import foundation.structure-identity-principle
 ```
 
 ## Idea

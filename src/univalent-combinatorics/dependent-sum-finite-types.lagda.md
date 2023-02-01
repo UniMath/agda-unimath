@@ -7,48 +7,33 @@ title: Dependent sums of finite types
 
 module univalent-combinatorics.dependent-sum-finite-types where
 
-open import foundation.complements using (complement)
-open import foundation.contractible-types using (is-contr-total-path')
-open import foundation.decidable-types using (is-prop-is-inhabited-or-empty)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (is-empty)
-open import foundation.equality-dependent-pair-types using (equiv-eq-pair-Σ)
-open import foundation.equivalences using (_∘e_; inv-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.identity-types using (Id; tr; refl)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; type-trunc-Prop;
-    is-prop-type-trunc-Prop; trunc-Prop)
-open import foundation.propositions using (is-proof-irrelevant-is-prop)
-open import foundation.sections using
-  ( equiv-total-fib-map-section; map-section)
-open import foundation.sets using (is-set)
-open import foundation.subtypes using (is-set-type-subtype)
-open import foundation.type-arithmetic-coproduct-types using
-  ( left-distributive-Σ-coprod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( assoc-Σ; inv-left-unit-law-Σ-is-contr; right-unit-law-Σ-is-contr;
-    equiv-right-swap-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.complements
+open import foundation.contractible-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sections
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types using
-  ( is-finite-coprod)
-open import univalent-combinatorics.counting using
-  ( count; count-equiv)
-open import univalent-combinatorics.counting-dependent-pair-types using
-  ( count-Σ; count-fiber-count-Σ)
-open import univalent-combinatorics.decidable-propositions using
-  ( count-eq)
-open import univalent-combinatorics.equality-finite-types using
-  ( has-decidable-equality-is-finite)
-open import univalent-combinatorics.finite-choice using
-  ( finite-choice; choice-is-finite-Σ-is-finite-fiber)
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-Prop; is-finite-count; 𝔽; type-𝔽; is-finite-type-𝔽;
-    is-finite-equiv; is-inhabited-or-empty-is-finite; is-finite-type-trunc-Prop)
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.counting-dependent-pair-types
+open import univalent-combinatorics.decidable-propositions
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-types
 ```
 
 ## Idea

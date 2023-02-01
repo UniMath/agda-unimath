@@ -12,29 +12,21 @@ open import category-theory.products-precategories
 open import category-theory.pullbacks-precategories
 open import category-theory.terminal-objects-precategories
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using
-  ( is-contr-equiv; is-contr-total-path; is-contr-Σ-is-prop)
-open import foundation.dependent-pair-types using (Σ; _,_; pr1; pr2)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equational-reasoning
-open import foundation.equivalences using
-  ( _≃_; map-inv-equiv; _∘e_; is-equiv-has-inverse)
+open import foundation.equivalences
 open import foundation.functions
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-tot; equiv-Σ)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using
-  ( _＝_; refl; inv; _∙_; ap; equiv-concat')
-open import foundation.propositions using
-  ( prod-Prop; equiv-prop; is-prop; is-prop-prod)
-open import foundation.sets using
-  ( Set; Σ-Set; set-Prop; Id-Prop; type-Set; is-set; is-set-type-Set)
-open import foundation.subtypes using
-  ( extensionality-type-subtype'; eq-type-subtype)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( inv-left-unit-law-Σ-is-contr; assoc-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 ```
 
 ## Idea

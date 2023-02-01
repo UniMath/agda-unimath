@@ -9,14 +9,14 @@ module foundation.contractible-maps where
 
 open import foundation-core.contractible-maps public
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.truncation-levels using (neg-two-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.equivalences using (_≃_; is-equiv; is-equiv-Prop)
-open import foundation.logical-equivalences using (equiv-iff)
-open import foundation.propositions using (is-prop; Prop)
-open import foundation.truncated-maps using (is-prop-is-trunc-map)
+open import foundation.equivalences
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.truncated-maps
 ```
 
 ## Properties

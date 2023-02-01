@@ -5,21 +5,18 @@
 
 module linear-algebra.matrices-on-rings where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types using (Id; refl; ap-binary)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import linear-algebra.constant-matrices using (constant-matrix)
-open import linear-algebra.functoriality-matrices using (map-binary-matrix)
-open import linear-algebra.matrices using (matrix)
-open import linear-algebra.vectors using (empty-vec; _∷_)
-open import linear-algebra.vectors-on-rings using
-  ( associative-add-vec-Ring; commutative-add-vec-Ring;
-    left-unit-law-add-vec-Ring; right-unit-law-add-vec-Ring)
+open import linear-algebra.constant-matrices
+open import linear-algebra.functoriality-matrices
+open import linear-algebra.matrices
+open import linear-algebra.vectors
+open import linear-algebra.vectors-on-rings
 
-open import ring-theory.rings using
-  ( Ring; type-Ring; zero-Ring; add-Ring; associative-add-Ring)
+open import ring-theory.rings
 ```
 
 ## Definitions

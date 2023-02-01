@@ -7,99 +7,44 @@ title: Permutations
 
 module finite-group-theory.permutations where
 
-open import elementary-number-theory.addition-natural-numbers using (add-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; succ-ℕ; zero-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( mod-two-ℕ; add-Fin; mod-succ-add-ℕ)
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 
-open import finite-group-theory.transpositions using
-  ( correct-Fin-succ-Fin-transposition-list; Fin-succ-Fin-transposition;
-    left-computation-standard-transposition; map-transposition;
-    is-fixed-point-standard-transposition; permutation-list-transpositions;
-    right-computation-standard-transposition; transposition; is-transposition-permutation-Prop;
-    is-transposition-permutation; transposition-conjugation-equiv;
-    correct-transposition-conjugation-equiv-list)
-open import finite-group-theory.orbits-permutations using
-  ( sign-list-transpositions-count; sign-permutation-orbit)
+open import finite-group-theory.transpositions
+open import finite-group-theory.orbits-permutations
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; center; eq-is-contr)
-open import foundation.coproduct-types using
-  ( inl; inr; is-injective-inl; is-prop-coprod; neq-inr-inl;
-    neq-inl-inr)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; is-decidable-type-decidable-Prop;
-    is-prop-type-decidable-Prop; type-decidable-Prop; is-prop-is-decidable)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-coprod; is-decidable-empty)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_)
-open import foundation.empty-types using (empty; ex-falso; is-prop-empty)
-open import foundation.equality-dependent-pair-types using
-  ( eq-pair-Σ; pair-eq-Σ)
-open import foundation.equivalences using
-  ( _≃_; _∘e_; id-equiv; inv-equiv; is-emb-is-equiv;
-    is-equiv; is-equiv-has-inverse; left-inverse-law-equiv;
-    right-inverse-law-equiv; map-equiv; map-inv-equiv)
-open import foundation.equivalences-maybe using
-  ( extend-equiv-Maybe; comp-extend-equiv-Maybe;
-    computation-inv-extend-equiv-Maybe)
-open import foundation.equivalence-extensionality using
-  ( eq-htpy-equiv; htpy-equiv; htpy-eq-equiv)
-open import foundation.functions using (_∘_; id)
-open import foundation.function-extensionality using (htpy-eq)
-open import foundation.functoriality-coproduct-types using
-  ( id-map-coprod; map-coprod)
-open import foundation.homotopies using (_~_; comp-htpy; refl-htpy; inv-htpy)
-open import foundation.identity-types using (Id; refl; inv; _∙_; ap)
-open import foundation.involutions using (is-involution; is-equiv-is-involution)
-open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.iterating-functions using (iterate)
-open import foundation.iterating-involutions using (iterate-involution)
-open import foundation.negation using (¬)
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
-    unit-trunc-Prop; type-trunc-Prop; trunc-Prop)
-open import foundation.propositions using (eq-is-prop; is-prop)
-open import foundation.sets using (is-set-type-Set; Id-Prop)
-open import foundation.type-arithmetic-empty-type using
-  ( inv-right-unit-law-coprod-is-empty; map-right-absorption-prod)
-open import foundation.truncated-types using (is-trunc-Prop; is-trunc-Π)
-open import foundation.truncation-levels using (neg-two-𝕋; zero-𝕋)
-open import foundation.unit-type using (star; unit)
-open import foundation.universe-levels using (Level; UU; lzero; _⊔_; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.equivalences-maybe
+open import foundation.equivalence-extensionality
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.iterating-functions
+open import foundation.iterating-involutions
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import group-theory.groups using
-  ( semigroup-Group; Group; type-Group; set-Group; is-set-type-Group; mul-Group; unit-Group)
-open import group-theory.homomorphisms-groups using
-  ( type-hom-Group; map-hom-Group; eq-htpy-hom-Group; is-set-type-hom-Group; preserves-unit-hom-Group;
-    preserves-mul-hom-Group)
-open import group-theory.semigroups using (set-Semigroup; mul-Semigroup)
-open import group-theory.subgroups-generated-by-subsets-groups using
-  ( is-generating-subset-Group; subset-subgroup-subset-Group; ev-formal-combination-subset-Group)
-open import group-theory.symmetric-groups using (symmetric-Group)
+open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.symmetric-groups
 
-open import univalent-combinatorics.2-element-decidable-subtypes using
-  ( standard-2-Element-Decidable-Subtype; 2-Element-Decidable-Subtype)
-open import univalent-combinatorics.2-element-types using
-  ( is-involution-aut-Fin-two-ℕ; ev-zero-aut-Fin-two-ℕ;
-    is-equiv-ev-zero-aut-Fin-two-ℕ; aut-point-Fin-two-ℕ)
-open import univalent-combinatorics.counting using
-  ( count; equiv-count; inv-equiv-count; map-equiv-count; map-inv-equiv-count;
-    number-of-elements-count)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import univalent-combinatorics.finite-types using
-  ( has-cardinality; UU-Fin; type-UU-Fin;
-    has-cardinality-type-UU-Fin; set-UU-Fin)
-open import univalent-combinatorics.lists using
-  ( cons; list; fold-list; map-list; nil; length-list; concat-list;
-    length-concat-list)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; nat-Fin; succ-Fin; equiv-succ-Fin; zero-Fin; Fin-Set)
+open import univalent-combinatorics.2-element-decidable-subtypes
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.lists
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Properties
@@ -535,3 +480,4 @@ module _
         is-injective-iterate-involution (inr star) (inl (inr star)) (inr star) p = ex-falso (neq-inl-inr p)
         is-injective-iterate-involution (inr star) (inr star) x p = refl
 ```
+ 

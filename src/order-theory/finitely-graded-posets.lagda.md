@@ -5,46 +5,32 @@
 
 module order-theory.finitely-graded-posets where
 
-open import elementary-number-theory.inequality-standard-finite-types using
-  ( leq-Fin; refl-leq-Fin; transitive-leq-Fin; leq-succ-Fin;
-    antisymmetric-leq-Fin)
-open import elementary-number-theory.modular-arithmetic using
-  ( has-no-fixed-points-succ-Fin)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-injective-succ-ℕ)
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using ( _↪_; map-emb; is-emb; is-emb-map-emb; tot-emb)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equality-dependent-pair-types using (pair-eq-Σ)
-open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (Id; tr; refl; inv)
-open import foundation.injective-maps using (is-injective; is-injective-is-emb)
-open import foundation.propositional-truncations using
-  ( trunc-Prop; unit-trunc-Prop; apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; is-proof-irrelevant-is-prop;
-    all-elements-equal; is-prop-all-elements-equal; prod-Prop; Π-Prop; hom-Prop)
-open import foundation.sets using
-  ( Set; type-Set; is-set; is-set-type-Set; Σ-Set; Id-Prop; set-Prop)
-open import foundation.subtypes using (eq-type-subtype; emb-subtype)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( map-left-unit-law-Σ-is-contr)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
-open import order-theory.largest-elements-posets using
-  ( is-largest-element-poset-Prop; is-largest-element-Poset;
-    is-prop-is-largest-element-Poset)
-open import order-theory.least-elements-posets using
-  ( is-least-element-poset-Prop; is-least-element-Poset;
-    is-prop-is-least-element-Poset)
-open import order-theory.preorders using (Preorder)
-open import order-theory.posets using (Poset)
-open import order-theory.total-posets using (is-total-poset-Prop)
+open import order-theory.largest-elements-posets
+open import order-theory.least-elements-posets
+open import order-theory.preorders
+open import order-theory.posets
+open import order-theory.total-posets
 
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; inl-Fin; succ-Fin; skip-zero-Fin; zero-Fin; neg-one-Fin; Fin-Set; is-set-Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

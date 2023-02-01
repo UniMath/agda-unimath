@@ -82,7 +82,7 @@ abstract
                 ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
                 ( type-Set B))
               ( is-equiv-ev-pair)
-              ( is-equiv-htpy-equiv
+              ( is-equiv-map-equiv
                 ( ( ( pair
                       ( precomp
                         ( (map-Π (λ x → unit-trunc-Set)))
@@ -106,8 +106,7 @@ abstract
                       ( equiv-universal-property-trunc-Set
                         ( A (inr star))
                         ( B)))) ∘e
-                  ( equiv-ev-pair))
-                ( refl-htpy)))
+                  ( equiv-ev-pair))))
             ( is-equiv-precomp-is-equiv
               ( ev-Maybe)
               ( dependent-universal-property-Maybe)

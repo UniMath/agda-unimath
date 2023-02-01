@@ -7,24 +7,21 @@ title: The strong induction principle for the natural numbers
 
 module elementary-number-theory.strong-induction-natural-numbers where
 
-open import elementary-number-theory.inequality-natural-numbers using
-  ( _≤-ℕ_; refl-leq-ℕ; leq-ℕ; cases-leq-succ-ℕ; is-prop-leq-ℕ; neg-succ-leq-ℕ;
-    leq-eq-left-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-set-ℕ)
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (_+_; inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-coproduct-types using (map-coprod)
-open import foundation.identity-types using (_＝_; refl; ap; _∙_; inv)
-open import foundation.propositions using (eq-is-prop; eq-is-prop')
-open import foundation.sets using (is-set)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

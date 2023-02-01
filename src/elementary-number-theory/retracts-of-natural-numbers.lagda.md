@@ -7,14 +7,12 @@ title: Retracts of the type of natural numbers
 
 module elementary-number-theory.retracts-of-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( has-decidable-equality-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-maps using
-  ( is-decidable-map; is-decidable-map-retr)
-open import foundation.retractions using (retr)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.decidable-maps
+open import foundation.retractions
+open import foundation.universe-levels
 ```
 
 ## Idea

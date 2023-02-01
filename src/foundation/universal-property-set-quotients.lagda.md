@@ -40,8 +40,7 @@ open import foundation.univalence using (equiv-eq)
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel; refl-Eq-Rel)
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea

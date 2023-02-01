@@ -7,11 +7,10 @@ title: Equivalences between categories
 
 module category-theory.equivalences-categories where
 
-open import category-theory.categories using (Cat; precat-Cat)
-open import category-theory.equivalences-precategories using
-  ( is-equiv-functor-Precat; equiv-Precat)
-open import category-theory.functors-categories using (functor-Cat)
-open import foundation.universe-levels using (UU; _⊔_)
+open import category-theory.categories
+open import category-theory.equivalences-precategories
+open import category-theory.functors-categories
+open import foundation.universe-levels
 ```
 
 ## Idea

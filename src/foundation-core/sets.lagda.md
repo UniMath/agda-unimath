@@ -7,22 +7,15 @@ title: Sets
 
 module foundation-core.sets where
 
-open import foundation-core.contractible-types using (contraction)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (is-equiv; _≃_)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id-retr)
-open import foundation-core.identity-types using
-  ( _＝_; refl; inv; _∙_; ind-Id)
-open import foundation-core.propositions using
-  ( is-prop; Prop; all-elements-equal; is-prop-all-elements-equal;
-    is-proof-irrelevant-is-prop; eq-is-prop; is-prop-is-equiv')
-open import foundation-core.truncated-types using
-  ( is-trunc-succ-is-trunc; truncated-type-succ-Truncated-Type;
-    is-trunc-is-equiv; is-trunc-equiv; is-trunc-is-equiv'; is-trunc-equiv')
-open import foundation-core.truncation-levels using
-  ( neg-one-𝕋; zero-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 ```
 
 ## Idea

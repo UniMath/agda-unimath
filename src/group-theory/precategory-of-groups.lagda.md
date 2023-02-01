@@ -7,17 +7,12 @@ title: The precategory of groups
 
 module group-theory.precategory-of-groups where
 
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; hom-Large-Precat; comp-hom-Large-Precat;
-    id-hom-Large-Precat; associative-comp-hom-Large-Precat;
-    left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
+open import category-theory.large-precategories
 
-open import foundation.universe-levels using (lsuc; _⊔_)
+open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.homomorphisms-groups using
-  ( hom-Group; comp-hom-Group; id-hom-Group; associative-comp-hom-Group;
-    left-unit-law-comp-hom-Group; right-unit-law-comp-hom-Group)
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
 ```
 
 ## Definition

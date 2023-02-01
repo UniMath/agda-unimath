@@ -7,36 +7,26 @@ title: Rings
 
 module ring-theory.rings where
 
-open import foundation.binary-embeddings using (is-binary-emb)
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using (Id; ap-binary; _∙_; inv; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.negation using (¬)
-open import foundation.propositions using (Prop)
-open import foundation.sets using (Set; is-set; Id-Prop)
-open import foundation.unital-binary-operations using (is-unital)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unital-binary-operations
+open import foundation.universe-levels
 
-open import group-theory.abelian-groups using
-  ( Ab; set-Ab; type-Ab; add-Ab; group-Ab; is-set-type-Ab;
-    has-associative-add-Ab; associative-add-Ab; semigroup-Ab; is-group-Ab;
-    has-zero-Ab; zero-Ab; left-unit-law-add-Ab; right-unit-law-add-Ab;
-    has-negatives-Ab; neg-Ab; left-inverse-law-add-Ab; right-inverse-law-add-Ab;
-    commutative-add-Ab; add-Ab'; ap-add-Ab; is-equiv-add-Ab; is-equiv-add-Ab';
-    is-binary-equiv-add-Ab; is-binary-emb-add-Ab; is-emb-add-Ab; is-emb-add-Ab';
-    is-injective-add-Ab; is-injective-add-Ab'; is-zero-is-idempotent-Ab;
-    add-list-Ab; preserves-concat-add-list-Ab)
-open import group-theory.groups using (Group; is-group; is-group')
-open import group-theory.monoids using
-  ( Monoid; unit-Monoid; left-unit-law-mul-Monoid; right-unit-law-mul-Monoid)
-open import group-theory.semigroups using
-  ( has-associative-mul-Set; Semigroup)
+open import group-theory.abelian-groups
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import univalent-combinatorics.lists using (list; concat-list)
+open import univalent-combinatorics.lists
 ```
 
 ## Idea

@@ -7,14 +7,12 @@ title: Conjunction of propositions
 
 module foundation.conjunction where
 
-open import foundation.decidable-types using (is-decidable; is-decidable-prod)
-open import foundation.dependent-pair-types using (pr1; pr2; pair)
-open import foundation.propositions using
-  ( prod-Prop; Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions using
-  ( decidable-Prop; prop-decidable-Prop; is-decidable-type-decidable-Prop)
+open import foundation-core.decidable-propositions
 ```
 
 ## Idea

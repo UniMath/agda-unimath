@@ -5,19 +5,15 @@ title: Relatively prime natural numbers
 ```agda
 module elementary-number-theory.relatively-prime-natural-numbers where
 
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ)
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
-  using (gcd-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-set-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.decidable-propositions using
-  ( is-decidable-prop)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using (is-prop; Prop)
-open import foundation.universe-levels using (UU; lzero)
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

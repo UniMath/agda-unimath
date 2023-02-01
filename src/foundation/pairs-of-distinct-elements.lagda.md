@@ -7,25 +7,18 @@ title: Pairs of distinct elements
 
 module foundation.pairs-of-distinct-elements where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; is-contr-total-path)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using
-  ( _↪_; map-emb; equiv-ap-emb; is-emb; is-emb-map-emb; emb-Σ)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv-map-equiv; is-equiv; map-inv-is-equiv;
-    map-inv-equiv; is-equiv-map-inv-equiv; issec-map-inv-equiv;
-    isretr-map-inv-equiv; is-equiv-has-inverse; emb-equiv)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.injective-maps using (is-injective-is-equiv)
-open import foundation.negation using (¬; is-prop-neg; equiv-neg)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negation
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -7,17 +7,14 @@ title: The univalence axiom
 
 module foundation-core.univalence where
 
-open import foundation-core.contractible-types using
-  ( is-contr; is-contr-equiv'; is-contr-total-path')
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using
-  ( _≃_; id-equiv; is-equiv; map-equiv; map-inv-is-equiv)
-open import foundation-core.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id; fundamental-theorem-id')
-open import foundation-core.homotopies using (_~_; refl-htpy)
-open import foundation-core.identity-types using (_＝_; refl; ap; tr)
-open import foundation-core.universe-levels using (Level; UU; lsuc)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

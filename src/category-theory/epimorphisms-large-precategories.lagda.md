@@ -7,20 +7,14 @@ title: Epimorphism in large precategories
 
 module category-theory.epimorphisms-large-precategories where
 
-open import category-theory.isomorphisms-large-precategories using
-  ( iso-Large-Precat; hom-iso-Large-Precat; is-sec-hom-inv-iso-Large-Precat;
-    hom-inv-iso-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat;
-    associative-comp-hom-Large-Precat; is-set-type-hom-Large-Precat)
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.large-precategories
 
-open import foundation.embeddings using (is-emb-Prop)
-open import foundation.equivalences using (is-equiv-has-inverse)
-open import foundation.identity-types using (_∙_; ap; inv)
-open import foundation.propositions using
-  ( Prop; Π-Prop; type-Prop; is-prop; is-prop-type-Prop; eq-is-prop)
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

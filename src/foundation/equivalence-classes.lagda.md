@@ -7,65 +7,41 @@ title: Equivalence classes
 
 module foundation.equivalence-classes where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.effective-maps-equivalence-relations using
-  ( is-effective; is-surjective-and-effective)
-open import foundation.embeddings using (_↪_; map-emb)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.effective-maps-equivalence-relations
+open import foundation.embeddings
 open import foundation.equational-reasoning
-open import foundation.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; _∘e_; map-equiv; map-inv-equiv; inv-equiv)
-open import foundation.existential-quantification using (∃; ∃-Prop)
-open import foundation.fibers-of-maps using (fib)
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-dependent-pair-types using (tot)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.identity-types using (_＝_; refl; tr; inv)
-open import foundation.images using
-  ( im; map-unit-im; emb-im; is-set-im; unit-im; is-surjective-map-unit-im)
-open import foundation.inhabited-subtypes using
-  ( is-inhabited-subtype; is-inhabited-subtype-Prop; inhabited-subtype;
-    subtype-inhabited-subtype)
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
+open import foundation.images
+open import foundation.inhabited-subtypes
 open import foundation.locally-small-types
-open import foundation.logical-equivalences using
-  ( backward-implication; iff-equiv; equiv-iff'; inv-iff; forward-implication)
-open import foundation.propositional-extensionality using
-  ( eq-iff)
+open import foundation.logical-equivalences
+open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflecting-map-Eq-Rel)
-open import foundation.sets using
-  ( is-set; is-set-function-type; Set; Id-Prop)
-open import foundation.slice using (hom-slice)
-open import foundation.small-types using
-  ( is-small; is-small-is-surjective; is-small-lmax; is-small-equiv;
-    is-small-Π; is-small'; is-small-logical-equivalence; Small-Type;
-    small-type-Small-Type)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using
-  ( eq-type-subtype; subtype; has-same-elements-subtype; type-subtype;
-    refl-has-same-elements-subtype; emb-subtype; is-set-type-subtype;
-    is-set-subtype; eq-has-same-elements-subtype;
-    is-contr-total-has-same-elements-subtype;
-    is-in-subtype-inclusion-subtype; inclusion-subtype)
-open import foundation.surjective-maps using ( is-surjective)
-open import foundation.universal-property-image using
-  ( is-image; is-image-im; is-image-is-surjective)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.slice
+open import foundation.small-types
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.universal-property-image
+open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations using
-  ( Eq-Rel; sim-Eq-Rel; prop-Eq-Rel; refl-Eq-Rel; trans-Eq-Rel; symm-Eq-Rel;
-    equiv-symm-Eq-Rel; iff-trans-Eq-Rel)
+open import foundation-core.equivalence-relations
 ```
 
 ## Idea

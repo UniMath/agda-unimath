@@ -5,18 +5,15 @@ title: Pointed maps
 ```agda
 module structured-types.pointed-maps where
 
-open import foundation.constant-maps using (const)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (_＝_; refl; tr; inv; apd; _∙_; ap)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.constant-maps
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.universe-levels
 
-open import structured-types.pointed-dependent-functions using
-  ( pointed-Π; function-pointed-Π; preserves-point-function-pointed-Π)
-open import structured-types.pointed-families-of-types using
-  ( Pointed-Fam; fam-Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
-open import structured-types.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-types
 ```
 
 ## Idea

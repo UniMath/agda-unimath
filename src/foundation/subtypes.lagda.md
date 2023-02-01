@@ -9,31 +9,25 @@ module foundation.subtypes where
 
 open import foundation-core.subtypes public
 
-open import foundation.equality-dependent-function-types using
-  ( is-contr-total-Eq-Π)
+open import foundation.equality-dependent-function-types
 
-open import foundation-core.contractible-types using (is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pr1; pr2; pair)
-open import foundation-core.embeddings using (_↪_; map-emb)
-open import foundation-core.equivalences using
-  ( _≃_; map-equiv; is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv;
-    map-inv-equiv)
-open import foundation-core.functions using (_∘_; id)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( equiv-Σ; map-Σ; is-equiv-map-Σ)
-open import foundation-core.homotopies using (_~_)
-open import foundation-core.identity-types using (tr; _＝_; refl)
-open import foundation-core.logical-equivalences using (_⇔_; iff-Prop)
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-equiv-is-prop; is-prop-equiv; is-prop-Π;
-    Π-Prop)
-open import foundation-core.sets using (is-set; Set)
-open import foundation-core.truncation-levels using (𝕋; zero-𝕋)
-open import foundation-core.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation.embeddings
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
 open import foundation.equality-dependent-function-types
-open import foundation.injective-maps using (is-injective; is-injective-is-emb)
-open import foundation.logical-equivalences using (is-prop-iff-Prop)
+open import foundation.injective-maps
+open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 ```
 

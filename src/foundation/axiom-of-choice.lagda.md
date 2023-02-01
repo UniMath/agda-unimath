@@ -7,9 +7,9 @@ title: The axiom of choice
 
 module foundation.axiom-of-choice where
 
-open import foundation.propositional-truncations using (type-trunc-Prop)
-open import foundation.sets using (Set; type-Set)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

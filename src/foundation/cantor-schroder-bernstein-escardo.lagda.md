@@ -9,23 +9,22 @@ Contributors: Elif Uskuplu, Egbert Rijke
 
 module foundation.cantor-schroder-bernstein-escardo where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr; ind-coprod)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.fibers-of-maps using(fib)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; inv; ap; _∙_)
-open import foundation.injective-maps using (is-injective; is-injective-is-emb)
-open import foundation.law-of-excluded-middle using (LEM)
-open import foundation.negation using (¬)
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.law-of-excluded-middle
+open import foundation.negation
 open import foundation.perfect-images
-open import foundation.split-surjective-maps using
-  (is-split-surjective; is-equiv-is-split-surjective-is-injective)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.split-surjective-maps
+open import foundation.universe-levels
 ```
 
 ## Idea

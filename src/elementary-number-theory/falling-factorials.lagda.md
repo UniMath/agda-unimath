@@ -7,9 +7,8 @@ title: Falling factorials
 
 module elementary-number-theory.falling-factorials where
 
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 ```
 
 ## Idea
