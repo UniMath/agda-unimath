@@ -16,8 +16,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality using
-  ( htpy-eq; funext; eq-htpy; equiv-funext)
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -36,6 +34,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice

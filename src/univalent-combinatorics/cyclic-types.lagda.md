@@ -30,7 +30,6 @@ open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.univalence using (is-contr-total-equiv)
 open import foundation.universe-levels
 
 open import group-theory.groups

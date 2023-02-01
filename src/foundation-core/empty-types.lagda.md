@@ -8,7 +8,7 @@ title: Empty types
 module foundation-core.empty-types where
 
 open import foundation-core.dependent-pair-types
-open import foundation.embeddings
+open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.sets
@@ -123,3 +123,4 @@ abstract
     {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
   is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
 ```
+ 

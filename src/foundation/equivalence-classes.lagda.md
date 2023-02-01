@@ -18,7 +18,7 @@ open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation

@@ -11,18 +11,51 @@ open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.universe-levels
 
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.injective-maps
 ```
 
 ## Idea
 
 The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
+
+In this file we postulate the univalence axiom. Its statement is defined in [foundation-core.univalence](foundation-core.univalence.html).
+
+## Postulates
+
+```agda
+postulate univalence : {l : Level} (A B : UU l) → UNIVALENCE A B
+```
+
+## Definitions
+
+```agda
+eq-equiv : {l : Level} (A B : UU l) → A ≃ B → A ＝ B
+eq-equiv A B = map-inv-is-equiv (univalence A B)
+
+equiv-univalence :
+  {l : Level} {A B : UU l} → (A ＝ B) ≃ (A ≃ B)
+pr1 equiv-univalence = equiv-eq
+pr2 equiv-univalence = univalence _ _
+
+abstract
+  is-contr-total-equiv : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → A ≃ X))
+  is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
+
+abstract
+  is-contr-total-equiv' : {l : Level} (A : UU l) →
+    is-contr (Σ (UU l) (λ X → X ≃ A))
+  is-contr-total-equiv' {l} A =
+    is-contr-equiv'
+      ( Σ (UU l) (λ X → X ＝ A))
+      ( equiv-tot (λ X → equiv-univalence))
+      ( is-contr-total-path' A)
+```
 
 ### Univalence for type families
 

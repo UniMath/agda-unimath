@@ -10,7 +10,7 @@ module group-theory.equivalences-semigroups where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
@@ -18,7 +18,7 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
-open import foundation.univalence using (is-contr-total-equiv)
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups

@@ -38,7 +38,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using (eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -52,7 +52,6 @@ open import foundation.propositions
 open import foundation.repetitions
 open import foundation.sets
 open import foundation.unit-type
-open import foundation.univalence using (eq-equiv)
 open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 

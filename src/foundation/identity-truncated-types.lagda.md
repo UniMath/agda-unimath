@@ -13,7 +13,7 @@ open import foundation-core.universe-levels
 
 open import foundation.identity-types
 open import foundation.truncated-types
-open import foundation.univalence using (equiv-univalence)
+open import foundation.univalence
 
 ```
 

@@ -113,7 +113,7 @@ triangle-comparison-fam-circle l P =
   eq-Eq-Fam-circle
     ( ev-fam-circle l P)
     ( comparison-fam-circle _ (ev-free-loop l (UU _) P))
-    ( pair id-equiv (inv-htpy (tr-equiv-eq-ap (pr2 l))))
+    ( pair id-equiv (htpy-eq (inv (tr-equiv-eq-ap (pr2 l)))))
 
 abstract
   is-equiv-ev-fam-circle-universal-property-circle :

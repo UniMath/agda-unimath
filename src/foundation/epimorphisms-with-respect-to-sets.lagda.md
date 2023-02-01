@@ -7,12 +7,13 @@ title: Epimorphisms with respect to maps into sets
 
 module foundation.epimorphisms-with-respect-to-sets where
 
+open import foundation-core.univalence
+
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.function-extensionality using
-  ( eq-htpy; htpy-eq; funext)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
@@ -23,7 +24,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
-open import foundation.univalence using (equiv-eq)
 open import foundation.universe-levels
 ```
 

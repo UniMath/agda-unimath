@@ -24,7 +24,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using (equiv-funext)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
@@ -49,7 +49,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
-open import foundation.univalence using (equiv-eq)
+open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-unit-type

@@ -18,7 +18,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
 open import foundation.equivalences
-open import foundation.function-extensionality using (eq-htpy; htpy-eq)
+open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.involutions

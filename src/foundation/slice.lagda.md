@@ -13,8 +13,7 @@ open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality using
-  ( equiv-funext; eq-htpy)
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -29,8 +28,7 @@ open import foundation.structure
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence using
-  ( is-contr-total-equiv; eq-equiv-fam)
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 
