@@ -39,6 +39,9 @@ open import category-theory
 open import category-theory.adjunctions-large-precategories
 open import category-theory.anafunctors
 open import category-theory.categories
+open import category-theory.coproducts-precategories
+open import category-theory.discrete-precategories
+open import category-theory.endomorphisms-of-objects-categories
 open import category-theory.epimorphisms-large-precategories
 open import category-theory.equivalences-categories
 open import category-theory.equivalences-large-precategories
@@ -59,13 +62,16 @@ open import category-theory.monomorphisms-large-precategories
 open import category-theory.natural-isomorphisms-categories
 open import category-theory.natural-isomorphisms-large-precategories
 open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-numbers-object-precategories
 open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.precategory-of-functors
 open import category-theory.pregroupoids
 open import category-theory.products-precategories
 open import category-theory.pullbacks-precategories
+open import category-theory.sieves-categories
 open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```
@@ -228,7 +234,6 @@ open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
 open import foundation.coherently-invertible-maps
-open import foundation.commutative-operations
 open import foundation.commuting-cubes
 open import foundation.commuting-squares
 open import foundation.complements
@@ -257,6 +262,7 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
+open import foundation.dependent-paths
 open import foundation.descent-coproduct-types
 open import foundation.descent-dependent-pair-types
 open import foundation.descent-empty-types
@@ -352,6 +358,7 @@ open import foundation.polynomial-endofunctors
 open import foundation.powersets
 open import foundation.preimages-of-subtypes
 open import foundation.principle-of-omniscience
+open import foundation.products-of-tuples-of-types
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
 open import foundation.proper-subtypes
@@ -394,12 +401,14 @@ open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.symmetric-difference
 open import foundation.symmetric-identity-types
+open import foundation.symmetric-operations
 open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.truncations
+open import foundation.tuples-of-types
 open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
@@ -756,6 +765,7 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
+open import ring-theory.algebras-rings
 open import ring-theory.dependent-products-rings
 open import ring-theory.division-rings
 open import ring-theory.homomorphisms-rings
@@ -774,6 +784,7 @@ open import ring-theory.nontrivial-rings
 open import ring-theory.opposite-rings
 open import ring-theory.powers-of-elements-rings
 open import ring-theory.products-rings
+open import ring-theory.quotient-rings
 open import ring-theory.radical-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings

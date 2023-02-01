@@ -29,7 +29,6 @@ open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.coherently-invertible-maps public
-open import foundation.commutative-operations public
 open import foundation.commuting-cubes public
 open import foundation.commuting-squares public
 open import foundation.complements public
@@ -57,6 +56,7 @@ open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-paths public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
@@ -150,6 +150,7 @@ open import foundation.polynomial-endofunctors public
 open import foundation.powersets public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
+open import foundation.products-of-tuples-of-types public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
 open import foundation.proper-subtypes public
@@ -190,12 +191,14 @@ open import foundation.subuniverses public
 open import foundation.surjective-maps public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
+open import foundation.symmetric-operations public
 open import foundation.truncated-equality public
 open import foundation.truncated-maps public
 open import foundation.truncated-types public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
 open import foundation.truncations public
+open import foundation.tuples-of-types public
 open import foundation.type-arithmetic-booleans public
 open import foundation.type-arithmetic-cartesian-product-types public
 open import foundation.type-arithmetic-coproduct-types public
