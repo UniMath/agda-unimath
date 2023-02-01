@@ -396,7 +396,7 @@ module _
                   ( is-set-coprod (is-set-type-Set X) is-set-unit))
                 ( map-equiv (pr1 f) (inr star))
                 ( inr star))))))
-      ( λ f → eq-eq-map-equiv refl)
+      ( λ f → eq-equiv-eq-map-equiv refl)
     where
     p : (f : ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
                  ( λ e → map-equiv e (inr star) ＝ inr star)))

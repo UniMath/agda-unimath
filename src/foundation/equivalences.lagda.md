@@ -293,9 +293,9 @@ module _
   pr1 (is-equiv-Prop f) = is-equiv f
   pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
-  eq-eq-map-equiv :
+  eq-equiv-eq-map-equiv :
     {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → e ＝ e'
-  eq-eq-map-equiv {e} {e'} p =
+  eq-equiv-eq-map-equiv {e} {e'} p =
     eq-pair-Σ
       ( p)
       ( center
@@ -352,17 +352,17 @@ associative-comp-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
   ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
-associative-comp-equiv e f g = eq-eq-map-equiv refl
+associative-comp-equiv e f g = eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
   left-unit-law-equiv : (e : X ≃ Y) → (id-equiv ∘e e) ＝ e
-  left-unit-law-equiv e = eq-eq-map-equiv refl
+  left-unit-law-equiv e = eq-equiv-eq-map-equiv refl
   
   right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
-  right-unit-law-equiv e = eq-eq-map-equiv refl
+  right-unit-law-equiv e = eq-equiv-q-map-equiv refl
   
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
@@ -373,10 +373,10 @@ module _
     eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
   inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
-  inv-inv-equiv e = eq-eq-map-equiv refl
+  inv-inv-equiv e = eq-equiv-eq-map-equiv refl
 
   inv-inv-equiv' : (e : Y ≃ X) → (inv-equiv (inv-equiv e)) ＝ e
-  inv-inv-equiv' e = eq-eq-map-equiv refl
+  inv-inv-equiv' e = eq-equiv-eq-map-equiv refl
 
   is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
   is-equiv-inv-equiv =
@@ -392,7 +392,7 @@ module _
 coh-unit-laws-equiv :
   {l : Level} {X : UU l} →
   left-unit-law-equiv (id-equiv {A = X}) ＝ right-unit-law-equiv (id-equiv {A = X})
-coh-unit-laws-equiv {l} {X} = ap eq-eq-map-equiv refl
+coh-unit-laws-equiv {l} {X} = ap eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}

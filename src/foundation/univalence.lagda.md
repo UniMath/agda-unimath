@@ -72,7 +72,7 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```agda
 comp-equiv-eq : {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-comp-equiv-eq refl refl = eq-eq-map-equiv refl
+comp-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
 
 comp-eq-equiv : {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
@@ -88,7 +88,7 @@ comp-eq-equiv A B C f g =
 
 commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
-commutativity-inv-equiv-eq A .A refl = eq-eq-map-equiv refl
+commutativity-inv-equiv-eq A .A refl = eq-equiv-eq-map-equiv refl
 
 commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)

@@ -471,8 +471,8 @@ module _ {i j k l : Level}
     (map-mutually-exclusive-coprod ∘ map-inv-mutually-exclusive-coprod) ~ id
   isretr-map-inv-mutually-exclusive-coprod (pair e₁ e₂) =
     eq-pair
-      (eq-eq-map-equiv refl)
-      (eq-eq-map-equiv refl)
+      (eq-equiv-eq-map-equiv refl)
+      (eq-equiv-eq-map-equiv refl)
 
   issec-map-inv-mutually-exclusive-coprod :
     (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
