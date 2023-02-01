@@ -82,7 +82,7 @@ abstract
                 ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
                 ( type-Set B))
               ( is-equiv-ev-pair)
-              ( pr2
+              ( is-equiv-map-equiv
                 ( ( ( pair
                       ( precomp
                         ( (map-Π (λ x → unit-trunc-Set)))
