@@ -10,11 +10,11 @@ module category-theory.natural-numbers-object-precategories where
 open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; _,_; pr1; pr2)
-open import foundation.identity-types using (_＝_; ap)
-open import foundation.unique-existence using (∃!)
-open import foundation.universe-levels using (UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.unique-existence
+open import foundation.universe-levels
 ```
 
 ## Idea

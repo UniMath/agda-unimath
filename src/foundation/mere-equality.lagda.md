@@ -7,21 +7,16 @@ title: Mere equality
 
 module foundation.mere-equality where
 
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.propositional-truncations using
-  ( trunc-Prop; type-trunc-Prop; unit-trunc-Prop;
-    apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflects-Eq-Rel; reflecting-map-Eq-Rel)
+open import foundation.functoriality-propositional-truncation
+open import foundation.propositional-truncations
+open import foundation.reflecting-maps-equivalence-relations
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalence-relations using (Eq-Rel)
-open import foundation-core.identity-types using (_＝_; refl; inv; _∙_; ap)
-open import foundation-core.propositions using (Prop; is-prop)
-open import foundation-core.sets using
-  ( Set; type-Set; Id-Prop; is-set; is-set-prop-in-id)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalence-relations
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.universe-levels
 ```
 
 ## Idea

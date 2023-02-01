@@ -7,24 +7,17 @@ title: Disjunction of propositions
 
 module foundation.disjunction where
 
-open import foundation.conjunction using (conj-Prop)
-open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
-open import foundation.decidable-types using
-  (is-decidable-coprod)
-open import foundation.propositional-truncations using
-  ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop)
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.propositional-truncations
 
-open import foundation-core.decidable-propositions using
-  ( decidable-Prop; prop-decidable-Prop; type-decidable-Prop;
-    is-decidable-type-decidable-Prop;
-    is-decidable-trunc-Prop-is-merely-decidable)
-open import foundation-core.dependent-pair-types using (pr1; pr2; pair)
-open import foundation-core.equivalences using (is-equiv)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; type-hom-Prop; hom-Prop;
-    is-equiv-is-prop)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.decidable-propositions
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

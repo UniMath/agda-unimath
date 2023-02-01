@@ -7,31 +7,23 @@ title: Ring homomorphisms
 
 module ring-theory.homomorphisms-rings where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_; map-inv-is-equiv)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (Id; refl; ap; _∙_)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-prod; Prop)
-open import foundation.sets using (is-set; Set)
-open import foundation.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype)
-open import foundation.subtypes using (is-trunc-type-subtype)
-open import foundation.truncation-levels using (𝕋; neg-one-𝕋)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.contractible-types
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtype-identity-principle
+open import foundation.subtypes
+open import foundation.truncation-levels
+open import foundation.universe-levels
 
-open import group-theory.homomorphisms-abelian-groups using
-  ( type-hom-Ab; map-hom-Ab; preserves-add-Ab; preserves-add-hom-Ab;
-    is-contr-total-htpy-hom-Ab; is-set-hom-Ab; id-hom-Ab; comp-hom-Ab;
-    eq-htpy-hom-Ab; preserves-zero-Ab; preserves-zero-hom-Ab;
-    preserves-negatives-Ab; preserves-negatives-hom-Ab)
+open import group-theory.homomorphisms-abelian-groups
 
-open import ring-theory.rings using
-  ( Ring; ab-Ring; type-Ring; mul-Ring; is-set-type-Ring; one-Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

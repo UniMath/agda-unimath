@@ -9,15 +9,13 @@ module foundation.logical-equivalences where
 
 open import foundation-core.logical-equivalences public
 
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (is-equiv; _≃_)
-open import foundation-core.functions using (id)
-open import foundation-core.identity-types using (_＝_; refl)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.universe-levels
 
-open import foundation.propositions using
-  ( Prop; is-prop; is-prop-prod; is-prop-function-type; is-prop-type-Prop;
-    is-equiv-is-prop; is-prop-type-equiv-Prop; type-Prop)
+open import foundation.propositions
 ```
 
 ## Properties

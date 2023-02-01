@@ -7,27 +7,25 @@ title: The type of natural numbers
 
 module elementary-number-theory.natural-numbers where
 
-open import foundation-core.coproduct-types using (_+_; inl; inr)
-open import foundation-core.empty-types using (ex-falso)
+open import foundation-core.coproduct-types
+open import foundation-core.empty-types
 
-open import foundation.contractible-types using (eq-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (empty; is-prop-empty)
-open import foundation.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (id; _∘_)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.logical-equivalences using (_↔_)
-open import foundation.negation using (¬)
-open import foundation.propositions using (is-prop; Prop)
-open import foundation.sets using (is-set; Set; is-set-prop-in-id; Id-Prop)
-open import foundation.unit-type using (star; unit; is-prop-unit)
-open import foundation.universal-property-empty-type using
-  ( universal-property-empty')
-open import foundation.universe-levels using (Level; lzero; UU)
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universal-property-empty-type
+open import foundation.universe-levels
 ```
 
 ## Idea

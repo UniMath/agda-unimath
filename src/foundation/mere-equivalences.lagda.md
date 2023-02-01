@@ -7,24 +7,17 @@ title: Mere equivalences
 
 module foundation.mere-equivalences where
 
-open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-Prop;
-    has-decidable-equality-equiv; has-decidable-equality-equiv')
-open import foundation.equivalences using (_≃_; id-equiv; inv-equiv; _∘e_)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.mere-equality using (mere-eq)
-open import foundation.propositional-truncations using
-  ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop;
-    apply-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (is-set)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-Prop; is-trunc-equiv; is-trunc-equiv')
-open import foundation.truncation-levels using (𝕋; zero-𝕋)
+open import foundation.decidable-equality
+open import foundation.equivalences
+open import foundation.functoriality-propositional-truncation
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.univalence using (eq-equiv)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.universe-levels
 ```
 
 ## Idea

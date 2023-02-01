@@ -18,7 +18,6 @@ open import finite-group-theory.transpositions
 open import foundation.commuting-squares
 open import foundation.contractible-types
 open import foundation.coproduct-types
-open import foundation.decidable-equivalence-relations
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -32,7 +31,6 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
@@ -50,7 +48,6 @@ open import foundation.univalence
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
-open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
@@ -59,19 +56,13 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-open import group-theory.semigroups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 
 open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -1912,7 +1903,7 @@ module _
               ( f))
           ( eq-quotient-delooping-sign-loop-sign-homomorphism {l4 = l4} n)) ∙
           ( eq-pair-Σ
-            ( eq-htpy refl-htpy)
+            ( refl)
             ( eq-is-prop
               ( is-prop-preserves-mul-Semigroup
                 ( semigroup-Group
@@ -1975,3 +1966,4 @@ module _
                       ( raise-Fin-Set l1 (succ-ℕ (succ-ℕ n)))
                       ( compute-raise-Fin l1 (succ-ℕ (succ-ℕ n)))))))))))
 ```
+ 

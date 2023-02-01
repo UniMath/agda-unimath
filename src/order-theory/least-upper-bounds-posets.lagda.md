@@ -5,16 +5,13 @@
 
 module order-theory.least-upper-bounds-posets where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; is-prop; type-Prop; is-prop-type-Prop; all-elements-equal;
-    is-prop-all-elements-equal; prod-Prop; Π-Prop; function-Prop)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import order-theory.posets using
-  ( Poset; element-Poset; leq-poset-Prop; antisymmetric-leq-Poset)
+open import order-theory.posets
 ```
 
 ## Idea

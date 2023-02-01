@@ -7,17 +7,15 @@ title: Monomorphisms in groups
 
 module group-theory.monomorphisms-groups where
 
-open import category-theory.monomorphisms-large-precategories using
-  ( is-mono-Large-Precat-Prop; is-mono-iso-Large-Precat)
+open import category-theory.monomorphisms-large-precategories
 
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import group-theory.groups using (Group)
-open import group-theory.homomorphisms-groups using (type-hom-Group)
-open import group-theory.isomorphisms-groups using (type-iso-Group; hom-iso-Group)
-open import group-theory.precategory-of-groups using (Group-Large-Precat)
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.isomorphisms-groups
+open import group-theory.precategory-of-groups
 ```
 
 ## Idea

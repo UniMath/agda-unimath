@@ -7,13 +7,12 @@ title: Dedekind finite sets
 
 module univalent-combinatorics.dedekind-finite-sets where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using (is-equiv; is-equiv-Prop)
-open import foundation.propositions using
-  (Prop; Π-Prop; function-Prop; type-Prop)
-open import foundation.sets using (Set; type-Set; is-set-type-Set; is-set)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

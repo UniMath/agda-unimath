@@ -7,50 +7,29 @@ title: The infinitude of primes
 
 module elementary-number-theory.infinitude-of-primes where
 
-open import elementary-number-theory.decidable-types using
-  ( is-decidable-bounded-Π-ℕ)
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( is-one-is-divisor-below-ℕ; div-ℕ; is-zero-is-zero-div-ℕ; is-one-div-ℕ;
-    transitive-div-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-one-ℕ; is-decidable-is-zero-ℕ)
-open import elementary-number-theory.factorials using
-  ( factorial-ℕ; leq-factorial-ℕ; div-factorial-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( le-ℕ; is-decidable-le-ℕ; leq-ℕ; is-decidable-leq-ℕ; is-zero-leq-zero-ℕ;
-    concatenate-leq-le-ℕ; le-succ-ℕ; is-nonzero-le-ℕ; neq-le-ℕ; leq-not-le-ℕ;
-    contradiction-le-ℕ)
-open import elementary-number-theory.lower-bounds-natural-numbers using
-  ( is-lower-bound-ℕ)
-open import
-  elementary-number-theory.modular-arithmetic-standard-finite-types using
-  ( is-decidable-div-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( right-zero-law-mul-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-one-ℕ; is-nonzero-succ-ℕ; is-nonzero-ℕ; is-not-one-ℕ;
-    is-successor-is-nonzero-ℕ; Eq-eq-ℕ)
-open import elementary-number-theory.prime-numbers using
-  ( is-one-is-proper-divisor-ℕ; is-prime-ℕ; is-prime-is-prime-easy-ℕ;
-    is-prime-two-ℕ; is-decidable-is-prime-ℕ)
-open import elementary-number-theory.proper-divisors-natural-numbers using
-  ( is-proper-divisor-ℕ; le-is-proper-divisor-ℕ)
-open import
-  elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( minimal-element-ℕ; well-ordering-principle-ℕ)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-prod; is-decidable-function-type)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using (ex-falso)
-open import foundation.functions using (id)
-open import foundation.identity-types using (inv; _∙_; refl)
-open import foundation.negation using (¬)
-open import foundation.type-arithmetic-empty-type using
-  ( is-empty-left-factor-is-empty-prod)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (UU; lzero)
+open import elementary-number-theory.decidable-types
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.factorials
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.proper-divisors-natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.type-arithmetic-empty-type
+open import foundation.unit-type
+open import foundation.universe-levels
 ```
 
 ## Idea

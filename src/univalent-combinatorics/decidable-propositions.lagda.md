@@ -9,23 +9,19 @@ module univalent-combinatorics.decidable-propositions where
 
 open import foundation.decidable-propositions public
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.equivalences using (map-equiv)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using
-  ( is-prop; is-proof-irrelevant-is-prop; Prop; type-Prop; is-prop-type-Prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; is-empty-is-zero-number-of-elements-count; count-is-contr;
-    count-is-empty; number-of-elements-count)
-open import univalent-combinatorics.standard-finite-types using (zero-Fin)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ### Propositions have countings if and only if they are decidable

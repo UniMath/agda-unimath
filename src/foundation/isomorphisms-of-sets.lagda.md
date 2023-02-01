@@ -7,22 +7,16 @@ title: Isomorphisms of sets
 
 module foundation.isomorphisms-of-sets where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv; isretr-map-inv-is-equiv;
-    is-equiv-has-inverse; map-equiv; is-equiv-map-equiv; _≃_;
-    is-property-is-equiv)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (eq-htpy; htpy-eq)
-open import foundation.functions using (_∘_; id)
-open import foundation.identity-types using (_＝_; ap; inv; _∙_)
-open import foundation.propositions using
-  ( is-proof-irrelevant; prod-Prop; is-prop; is-prop-is-proof-irrelevant)
-open import foundation.sets using
-  ( Set; type-hom-Set; type-Set; is-set-type-Set; Id-Prop; hom-Set;
-    type-equiv-Set)
-open import foundation.subtypes using (eq-type-subtype; equiv-type-subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea

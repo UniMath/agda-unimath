@@ -7,30 +7,20 @@ title: Uniqueness of the image of a map
 
 module foundation.uniqueness-image where
 
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_; map-emb)
-open import foundation.equivalences using
-  ( is-equiv; map-inv-is-equiv; issec-map-inv-is-equiv; _∘e_;
-    id-equiv; is-property-is-equiv; is-equiv-map-equiv; _≃_)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ)
-open import foundation.homotopies using (_~_; _∙h_; _·r_; _·l_)
-open import foundation.images using (inclusion-im; unit-im; emb-im; im)
-open import foundation.propositions using (is-proof-irrelevant-is-prop)
-open import foundation.sections using (triangle-section)
-open import foundation.slice using
-  ( hom-slice; map-hom-slice; is-equiv-hom-slice-emb; comp-hom-slice;
-    triangle-hom-slice; equiv-slice; htpy-hom-slice; hom-equiv-slice)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( equiv-right-swap-Σ; left-unit-law-Σ-is-contr)
-open import foundation.universal-property-image using
-  ( is-image; is-image-is-image'; map-hom-slice-universal-property-image;
-    universal-property-image; hom-slice-universal-property-image;
-    is-image-im)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.images
+open import foundation.propositions
+open import foundation.sections
+open import foundation.slice
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universal-property-image
+open import foundation.universe-levels
 ```
 
 ### Uniqueness of the image

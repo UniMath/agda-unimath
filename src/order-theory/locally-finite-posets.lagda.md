@@ -5,15 +5,14 @@
 
 module order-theory.locally-finite-posets where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop; Π-Prop)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
 
-open import order-theory.finite-posets using (is-finite-poset-Prop)
-open import order-theory.interval-subposets using (interval-sub-Poset)
-open import order-theory.posets using (Poset; element-Poset; leq-Poset)
+open import order-theory.finite-posets
+open import order-theory.interval-subposets
+open import order-theory.posets
 ```
 
 ## Idea

@@ -9,17 +9,15 @@ module foundation.identity-types where
 
 open import foundation-core.identity-types public
 
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (UU; Level)
+open import foundation.binary-equivalences
+open import foundation.equivalence-extensionality
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import foundation-core.equivalences using
-  ( is-equiv; is-equiv-has-inverse; _≃_; _∘e_; is-equiv-id; is-equiv-comp;
-    map-equiv)
-open import foundation-core.functions using (_∘_; id)
+open import foundation-core.equivalences
+open import foundation-core.functions
 open import foundation-core.function-extensionality using (eq-htpy)
-open import foundation-core.homotopies using (_~_)
+open import foundation-core.homotopies
 ```
 
 ## Idea

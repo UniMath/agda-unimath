@@ -5,13 +5,12 @@
 
 module linear-algebra.vectors where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.sets using (Set)
-open import foundation.identity-types using
-  ( Id; refl; ap; ap-binary; _∙_; inv)
-open import foundation.dependent-pair-types using (_,_; pr1; pr2)
-open import foundation.universe-levels using (UU ; Level ; lzero)
+open import foundation.sets
+open import foundation.identity-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 ```
 ## Idea
 
@@ -39,14 +38,14 @@ In particular, vectors over a set form a set.
 ```agda
 
 module _ {l : Level} (A : UU l) where
-    open import foundation.unit-type using (raise-unit; star; is-contr-raise-unit)
-    open import foundation.raising-universe-levels using (map-raise)
-    open import foundation.cartesian-product-types using (_×_)
-    open import foundation.sets using (is-set)
-    open import foundation.equivalences using (is-equiv; is-equiv-has-inverse; _≃_)
-    open import foundation.truncated-types using (is-trunc; is-trunc-prod; is-trunc-equiv)
-    open import foundation.truncation-levels using (𝕋; succ-𝕋; neg-two-𝕋)
-    open import foundation.contractible-types using (is-trunc-is-contr)
+    open import foundation.unit-type
+    open import foundation.raising-universe-levels
+    open import foundation.cartesian-product-types
+    open import foundation.sets
+    open import foundation.equivalences
+    open import foundation.truncated-types
+    open import foundation.truncation-levels
+    open import foundation.contractible-types
     
     Eq-vec : (n : ℕ) → vec A n → vec A n → UU l
     Eq-vec zero-ℕ empty-vec empty-vec = raise-unit l

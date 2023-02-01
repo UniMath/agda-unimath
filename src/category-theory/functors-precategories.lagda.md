@@ -7,16 +7,13 @@ title: Functors between precategories
 
 module category-theory.functors-precategories where
 
-open import category-theory.precategories using
-  ( Precat; obj-Precat; type-hom-Precat; comp-hom-Precat;
-    id-hom-Precat; is-set-type-hom-Precat)
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2)
-open import foundation.functions using (id; _∘_)
-open import foundation.identity-types using (_＝_; refl; ap; _∙_)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π; is-prop-Π')
-open import foundation.universe-levels using (UU; Level; _⊔_)
+open import category-theory.precategories
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -7,26 +7,20 @@ title: Impredicative encodings of the logical operations
 
 module foundation.impredicative-encodings where
 
-open import foundation.conjunction using (type-conj-Prop; conj-Prop)
-open import foundation.coproduct-types using (ind-coprod)
-open import foundation.dependent-pair-types using
-  ( Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.disjunction using
-  ( type-disj-Prop; disj-Prop; inl-disj-Prop; inr-disj-Prop)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equivalences using (_≃_)
-open import foundation.existential-quantification using
-  ( exists; exists-Prop)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.logical-equivalences using (equiv-iff)
-open import foundation.negation using (¬; neg-Prop')
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; map-universal-property-trunc-Prop; trunc-Prop;
-    unit-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; function-Prop; type-Prop; type-implication-Prop; hom-Prop)
-open import foundation.sets using (Set; type-Set; is-set-type-Set)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.conjunction
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.negation
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Idea

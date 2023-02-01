@@ -9,18 +9,15 @@ module foundation.retractions where
 
 open import foundation-core.retractions public
 
-open import foundation.coslice using
-  ( htpy-hom-coslice; extensionality-hom-coslice; eq-htpy-hom-coslice)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.functions using (_∘_; id)
-open import foundation.equivalences using (_≃_)
-open import foundation.identity-types using (inv; _∙_; ap)
-open import foundation.injective-maps using (is-injective)
-open import foundation.homotopies using
-  ( _~_; _·l_; inv-htpy; inv-htpy-assoc-htpy; _·r_; _∙h_; ap-concat-htpy';
-    refl-htpy; left-inv-htpy)
-open import foundation.identity-types using (Id)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.coslice
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Properties

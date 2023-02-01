@@ -7,40 +7,31 @@ title: Functoriality of set quotients
 
 module foundation.functoriality-set-quotients where
 
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-comp-horizontal)
-open import foundation.contractible-types using
-  ( is-contr; center; eq-is-contr)
-open import foundation.coproduct-types using
-  ( inl; inr; neq-inl-inr; neq-inr-inl)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.empty-types using (ex-falso)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( _≃_; is-equiv; map-equiv; is-equiv-has-inverse; map-inv-equiv; right-inverse-law-equiv;
-    left-inverse-law-equiv; is-property-is-equiv; id-equiv; map-inv-is-equiv; is-emb-is-equiv)
-open import foundation.equivalence-extensionality using (htpy-equiv)
-open import foundation.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
-open import foundation.functions using (_∘_; id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (_＝_; refl; inv; tr; ap; _∙_)
-open import foundation.injective-maps using (is-injective-map-equiv)
-open import foundation.logical-equivalences using (_↔_)
-open import foundation.propositions using (eq-is-prop; is-prop-Π)
-open import foundation.reflecting-maps-equivalence-relations using
-  ( reflecting-map-Eq-Rel; map-reflecting-map-Eq-Rel;
-    reflects-map-reflecting-map-Eq-Rel)
-open import foundation.sets using (Set; type-Set; is-set-type-Set)
-open import foundation.unit-type using (star)
-open import foundation.universal-property-set-quotients using
-  ( is-set-quotient; universal-property-set-quotient-is-set-quotient;
-    is-effective-is-set-quotient)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.commuting-squares
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
+open import foundation.equivalence-relations
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
+open import foundation.unit-type
+open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
-open import foundation-core.equivalence-relations using (Eq-Rel; sim-Eq-Rel)
+open import foundation-core.equivalence-relations
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

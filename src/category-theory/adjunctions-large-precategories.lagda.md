@@ -8,25 +8,13 @@ title: Adjunctions between large precategories
 module category-theory.adjunctions-large-precategories where
 
 open import Agda.Primitive using (Setω)
-open import category-theory.functors-large-precategories using
-  ( functor-Large-Precat; obj-functor-Large-Precat;
-    hom-functor-Large-Precat; preserves-id-functor-Large-Precat;
-    id-functor-Large-Precat; comp-functor-Large-Precat)
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; type-hom-Large-Precat;
-    comp-hom-Large-Precat; id-hom-Large-Precat; left-unit-law-comp-hom-Large-Precat;
-    comp-hom-Large-Precat'; associative-comp-hom-Large-Precat;
-    right-unit-law-comp-hom-Large-Precat)
-open import category-theory.natural-transformations-large-precategories using
-  ( natural-transformation-Large-Precat;
-    obj-natural-transformation-Large-Precat;
-    coherence-square-natural-transformation-Large-Precat)
-open import foundation.commuting-squares using
-  ( coherence-square; coherence-square-inv-horizontal)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; inv-equiv; map-inv-equiv)
-open import foundation.identity-types using (_＝_; inv; _∙_; ap)
-open import foundation.universe-levels using (Level)
+open import category-theory.functors-large-precategories
+open import category-theory.large-precategories
+open import category-theory.natural-transformations-large-precategories
+open import foundation.commuting-squares
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

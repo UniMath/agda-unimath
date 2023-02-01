@@ -7,15 +7,13 @@ title: Binary embeddings
 
 module foundation.binary-embeddings where
 
-open import foundation.binary-equivalences using
-  ( is-binary-equiv; fix-left; fix-right; is-equiv-fix-left; is-equiv-fix-right)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using (is-equiv-comp-htpy; is-emb-is-equiv)
-open import foundation.identity-types using
-  ( _＝_; ap-binary; concat'; ap; triangle-ap-binary; is-equiv-concat'; concat;
-    is-equiv-concat)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.universe-levels
+
+open import foundation.binary-equivalences
+open import foundation.identity-types
 ```
 
 ## Idea

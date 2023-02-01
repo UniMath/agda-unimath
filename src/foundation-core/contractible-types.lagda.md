@@ -7,18 +7,15 @@ title: Contractible types
 
 module foundation-core.contractible-types where
 
-open import foundation-core.cartesian-product-types using (_×_)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equality-cartesian-product-types using (eq-pair)
-open import foundation-core.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation-core.equivalences using
-  ( is-equiv; map-inv-is-equiv; isretr-map-inv-is-equiv; _≃_;
-    is-equiv-map-inv-is-equiv; is-equiv-has-inverse)
+open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
 open import foundation-core.function-extensionality using (funext)
-open import foundation-core.identity-types using
-  ( _＝_; refl; inv; _∙_; left-inv; ap; eq-transpose-tr)
-open import foundation-core.retractions using (_retract-of_)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.universe-levels
 ```
 
 ## Idea

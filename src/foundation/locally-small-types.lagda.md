@@ -7,25 +7,22 @@ title: Locally small types
 
 module foundation.locally-small-types where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equality-dependent-pair-types using
-  ( Eq-Σ; equiv-pair-eq-Σ)
-open import foundation.equivalences using (map-equiv; equiv-ap; _≃_)
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (equiv-funext)
-open import foundation.homotopies using (_~_)
-open import foundation.identity-types using (_＝_; tr)
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.inhabited-subtypes
-open import foundation.propositions using (is-prop; is-prop-Π; Prop)
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.univalence using (equiv-univalence)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.universe-levels
 
-open import foundation-core.small-types using
-  ( is-small; is-small-is-contr; is-small-equiv; is-small-Π; is-prop-is-small;
-    Small-Type; type-Small-Type; is-small-type-Small-Type; is-small-Σ)
+open import foundation-core.small-types
 ```
 
 ## Idea

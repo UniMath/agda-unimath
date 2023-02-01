@@ -7,79 +7,48 @@ title: The binomial types
 
 module univalent-combinatorics.binomial-types where
 
-open import elementary-number-theory.binomial-coefficients using (_choose-ℕ_)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.binomial-coefficients
+open import elementary-number-theory.natural-numbers
 
-open import foundation.booleans using (bool; true; false)
-open import foundation.connected-components-universes using
-  ( component-UU-Level; type-component-UU-Level; mere-equiv-component-UU-Level;
-    is-contr-component-UU-Level-empty)
-open import foundation.contractible-maps using (is-contr-map-is-equiv)
-open import foundation.contractible-types using
-  ( is-contr; is-contr-equiv; equiv-is-contr)
-open import foundation.coproduct-types using (_+_; inl; inr; ind-coprod)
-open import foundation.decidable-embeddings using
-  ( _↪d_; map-decidable-emb; is-emb-map-decidable-emb; is-decidable-emb;
-    equiv-Fib-decidable-Prop; equiv-precomp-decidable-emb-equiv;
-    is-prop-is-decidable-emb; is-decidable-emb-ex-falso)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop; equiv-bool-decidable-Prop;
-    compute-equiv-bool-decidable-Prop; split-decidable-Prop)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.embeddings using (is-emb)
-open import foundation.empty-types using
-  ( empty; raise-empty; compute-raise-empty; ex-falso; is-empty; empty-Prop;
-    is-empty-raise-empty; raise-empty-Prop; equiv-is-empty)
-open import foundation.equivalences using
-  ( _≃_; equiv-postcomp-equiv; inv-equiv; _∘e_; map-equiv; id-equiv;
-    equiv-precomp; is-equiv-map-equiv; equiv-precomp-equiv)
-open import foundation.equivalences-maybe using (equiv-equiv-Maybe)
-open import foundation.fibers-of-maps using (equiv-total-fib; fib; fib-comp)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-coproduct-types using (equiv-coprod)
-open import foundation.functoriality-function-types using (equiv-postcomp)
-open import foundation.functoriality-dependent-pair-types using
-  ( equiv-Σ; equiv-tot)
-open import foundation.functoriality-propositional-truncation using
-  ( equiv-trunc-Prop; map-trunc-Prop)
-open import foundation.logical-equivalences using (equiv-iff)
-open import foundation.maybe using (Maybe)
-open import foundation.mere-equivalences using
-  ( mere-equiv; mere-equiv-Prop)
-open import foundation.negation using (¬)
-open import foundation.propositional-extensionality using
-  ( is-contr-total-true-Prop; is-contr-total-false-Prop)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using
-  ( is-proof-irrelevant-is-prop; Prop; type-Prop)
-open import foundation.raising-universe-levels using (map-inv-raise)
-open import foundation.type-arithmetic-cartesian-product-types using
-  ( commutative-prod)
-open import foundation.type-arithmetic-coproduct-types using
-  ( left-distributive-Σ-coprod; right-distributive-Σ-coprod)
-open import foundation.type-arithmetic-dependent-pair-types using
-  ( inv-assoc-Σ; assoc-Σ; left-unit-law-Σ-is-contr; right-unit-law-Σ-is-contr)
-open import foundation.type-arithmetic-empty-type using
-  ( right-unit-law-coprod-is-empty)
-open import foundation.type-arithmetic-unit-type using (left-unit-law-Σ)
-open import foundation.unit-type using
-  ( is-contr-raise-unit; is-contr-unit; raise-unit-Prop; raise-star; unit; star)
-open import foundation.universal-property-empty-type using
-  ( universal-property-empty')
-open import foundation.universal-property-maybe using
-  ( equiv-universal-property-Maybe)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.booleans
+open import foundation.connected-components-universes
+open import foundation.contractible-maps
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-embeddings
+open import foundation.decidable-propositions
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.equivalences-maybe
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.logical-equivalences
+open import foundation.maybe
+open import foundation.mere-equivalences
+open import foundation.negation
+open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-arithmetic-empty-type
+open import foundation.type-arithmetic-unit-type
+open import foundation.unit-type
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-maybe
+open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types using
-  ( Fin-add-ℕ)
-open import univalent-combinatorics.finite-types using
-  ( Fin-UU-Fin; has-cardinality; has-cardinality-Prop; UU-Fin;
-    type-UU-Fin; has-cardinality-type-UU-Fin; has-finite-cardinality; is-finite;
-    is-finite-has-finite-cardinality; has-finite-cardinality-is-finite; 𝔽;
-    type-𝔽; is-finite-type-𝔽; is-finite-equiv)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-contr-Fin-one-ℕ)
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

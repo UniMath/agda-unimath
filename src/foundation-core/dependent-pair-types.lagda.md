@@ -7,7 +7,7 @@ title: Dependent pair types
 
 module foundation-core.dependent-pair-types where
 
-open import foundation-core.universe-levels using (UU; Level; _⊔_)
+open import foundation-core.universe-levels
 ```
 
 ## Idea

@@ -7,32 +7,23 @@ title: Addition on the integers
 
 module elementary-number-theory.addition-integers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; left-unit-law-add-ℕ; left-successor-law-add-ℕ)
-open import elementary-number-theory.integers using
-  ( ℤ; zero-ℤ; one-ℤ; neg-one-ℤ; succ-ℤ; pred-ℤ; isretr-pred-ℤ;
-    issec-pred-ℤ; neg-ℤ; pred-neg-ℤ; neg-pred-ℤ; in-pos; in-neg;
-    is-nonnegative-ℤ; is-nonnegative-succ-ℤ; is-positive-ℤ; is-positive-succ-ℤ;
-    is-nonnegative-is-positive-ℤ; int-ℕ; succ-int-ℕ; is-zero-ℤ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.binary-embeddings using
-  ( is-binary-emb; is-binary-emb-is-binary-equiv)
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equational-reasoning
-open import foundation.equivalences using (is-equiv; _≃_; is-emb-is-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using
-  (_＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.injective-maps using
-  ( is-injective; is-injective-is-emb)
-open import foundation.interchange-law using
-  ( interchange-law; interchange-law-commutative-and-associative)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level)
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.interchange-law
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```

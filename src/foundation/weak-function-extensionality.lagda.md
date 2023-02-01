@@ -7,40 +7,28 @@ title: Weak function extensionality
 
 module foundation.weak-function-extensionality where
 
-open import foundation.1-types using
-  ( is-1-type; 1-Type; type-1-Type; is-1-type-type-1-Type)
-open import foundation.contractible-types using
-  ( is-contr; center; contraction; is-contr-retract-of; is-contr-total-path;
-    is-prop-is-contr)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using
-  ( has-decidable-equality; is-set-has-decidable-equality)
-open import foundation.decidable-types using (is-decidable)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.empty-types using
-  ( is-prop-empty; is-empty; ex-falso)
-open import foundation.equality-dependent-pair-types using (eq-pair-Σ)
-open import foundation.equivalences using
-  ( map-inv-is-equiv; _≃_; is-equiv; is-equiv-has-inverse)
+open import foundation.1-types
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using
   ( FUNEXT; htpy-eq; funext)
-open import foundation.functions using (_∘_; id)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using (_~_; refl-htpy)
-open import foundation.identity-types using (_＝_; refl; inv; _∙_; ap)
-open import foundation.negation using (¬)
-open import foundation.propositions using
-  ( is-prop; is-prop-equiv; Prop; type-Prop; is-prop-type-Prop; eq-is-prop;
-    is-proof-irrelevant-is-prop)
-open import foundation.sets using (is-set; Set; type-Set; is-set-type-Set)
-open import foundation.subtypes using (is-subtype)
-open import foundation.truncated-types using
-  ( is-trunc; is-trunc-is-equiv; Truncated-Type; type-Truncated-Type;
-    is-trunc-type-Truncated-Type)
-open import foundation.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; one-𝕋; succ-𝕋)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.universe-levels
 ```
 
 ## Idea

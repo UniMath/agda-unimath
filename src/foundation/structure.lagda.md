@@ -7,13 +7,12 @@ title: Structure
 
 module foundation.structure where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; _∘e_)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functoriality-dependent-pair-types using (equiv-Σ)
-open import foundation.type-theoretic-principle-of-choice using
-  ( inv-distributive-Π-Σ)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functoriality-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -5,15 +5,14 @@
 
 module order-theory.posets where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; refl)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop-type-Prop; is-prop; is-prop-prod)
-open import foundation.sets using (is-set; Set; is-set-prop-in-id)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import order-theory.preorders using (Preorder)
+open import order-theory.preorders
 ```
 
 ## Idea

@@ -7,11 +7,10 @@ title: Dubuc-Penon compact types
 
 module foundation.dubuc-penon-compact-types where
 
-open import foundation.disjunction using (disj-Prop; type-disj-Prop)
-open import foundation.propositions using
-  ( Prop; Π-Prop; function-Prop; type-Prop)
-open import foundation.subtypes using (subtype)
-open import foundation.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation.disjunction
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 ## Idea

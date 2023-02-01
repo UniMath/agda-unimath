@@ -5,30 +5,24 @@ title: Finitely presented types
 ```agda
 module univalent-combinatorics.finitely-presented-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using
-  ( _≃_; map-equiv; is-equiv-htpy-equiv; _∘e_; inv-equiv)
-open import foundation.fibers-of-maps using (fib)
-open import foundation.functions using (_∘_)
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; apply-universal-property-trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; all-elements-equal; is-prop-all-elements-equal)
-open import foundation.set-presented-types using (has-set-presentation-Prop)
-open import foundation.set-truncations using
-  ( type-trunc-Set; unit-trunc-Set; is-surjective-unit-trunc-Set)
-open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fibers-of-maps
+open import foundation.functions
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.set-presented-types
+open import foundation.set-truncations
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-choice using (finite-choice-Fin)
-open import univalent-combinatorics.finite-connected-components using
-  ( has-cardinality-components; has-cardinality-components-Prop)
-open import univalent-combinatorics.finite-types using (eq-cardinality)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-injective-Fin; Fin-Set)
+open import univalent-combinatorics.finite-choice
+open import univalent-combinatorics.finite-connected-components
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

@@ -7,17 +7,15 @@ title: The Collatz bijection
 
 module elementary-number-theory.collatz-bijection where
 
-open import elementary-number-theory.distance-natural-numbers using (dist-ℕ)
-open import elementary-number-theory.euclidean-division-natural-numbers using
-  ( quotient-euclidean-division-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
-open import elementary-number-theory.modular-arithmetic using (ℤ-Mod; mod-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.multiplication-natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.identity-types using (_＝_; refl)
-open import foundation.unit-type using (star)
+open import foundation.coproduct-types
+open import foundation.identity-types
+open import foundation.unit-type
 ```
 
 ## Idea

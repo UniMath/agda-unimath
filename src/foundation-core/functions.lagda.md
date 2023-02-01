@@ -7,7 +7,7 @@ title: Functions
 
 module foundation-core.functions where
 
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.universe-levels
 ```
 
 ## Idea

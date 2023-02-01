@@ -7,21 +7,14 @@ title: The endomorphism rings of abelian groups
 
 module group-theory.endomorphism-rings-abelian-groups where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (Level)
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import group-theory.abelian-groups using (Ab)
-open import group-theory.addition-homomorphisms-abelian-groups using
-  ( add-hom-Ab; zero-hom-Ab; neg-hom-Ab; associative-add-hom-Ab;
-    left-unit-law-add-hom-Ab; right-unit-law-add-hom-Ab;
-    left-inverse-law-add-hom-Ab; right-inverse-law-add-hom-Ab;
-    commutative-add-hom-Ab; left-distributive-comp-add-hom-Ab;
-    right-distributive-comp-add-hom-Ab)
-open import group-theory.homomorphisms-abelian-groups using
-  ( type-hom-Ab; hom-Ab; comp-hom-Ab; associative-comp-hom-Ab; id-hom-Ab;
-    left-unit-law-comp-hom-Ab; right-unit-law-comp-hom-Ab)
+open import group-theory.abelian-groups
+open import group-theory.addition-homomorphisms-abelian-groups
+open import group-theory.homomorphisms-abelian-groups
 
-open import ring-theory.rings using (Ring)
+open import ring-theory.rings
 ```
 
 ## Idea

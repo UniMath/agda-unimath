@@ -7,37 +7,23 @@ title: Abelian groups
 
 module group-theory.abelian-groups where
 
-open import foundation.binary-embeddings using (is-binary-emb)
-open import foundation.binary-equivalences using (is-binary-equiv)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (is-emb)
-open import foundation.equivalences using (is-equiv)
-open import foundation.identity-types using (Id; _＝_; ap-binary; _∙_; inv)
-open import foundation.injective-maps using (is-injective)
-open import foundation.interchange-law using
-  (interchange-law-commutative-and-associative)
-open import foundation.propositions using
-  ( is-prop; is-prop-Π; Π-Prop; Prop; type-Prop; is-prop-type-Prop)
-open import foundation.sets using (Set; is-set; Id-Prop)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.interchange-law
+open import foundation.propositions
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.groups using
-  ( Group; type-Group; mul-Group; set-Group; is-set-type-Group;
-    associative-mul-Group; has-associative-mul-Group; semigroup-Group; is-group;
-    is-group-Group; is-unital-Group; unit-Group; left-unit-law-mul-Group;
-    right-unit-law-mul-Group; inv-Group; left-inverse-law-mul-Group;
-    right-inverse-law-mul-Group; is-group'; has-inverses-Group;
-    distributive-inv-mul-Group; mul-Group'; is-equiv-mul-Group;
-    is-equiv-mul-Group'; is-binary-equiv-mul-Group; transpose-eq-mul-Group;
-    transpose-eq-mul-Group'; is-binary-emb-mul-Group; is-emb-mul-Group;
-    is-emb-mul-Group'; is-injective-mul-Group; is-injective-mul-Group';
-    is-idempotent-Group; is-unit-is-idempotent-Group; mul-list-Group;
-    preserves-concat-mul-list-Group; inv-inv-Group; inv-unit-Group)
-open import group-theory.monoids using (is-unital-Semigroup)
-open import group-theory.semigroups using
-  ( has-associative-mul-Set; Semigroup)
+open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
-open import univalent-combinatorics.lists using (list; concat-list)
+open import univalent-combinatorics.lists
 ```
 
 ## Idea

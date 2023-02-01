@@ -7,11 +7,11 @@ title: Truncated equality
 
 module foundation.truncated-equality where
 
-open import foundation.identity-types using (_＝_)
-open import foundation.truncated-types using (Truncated-Type)
-open import foundation.truncation-levels using (𝕋)
-open import foundation.truncations using (trunc)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.identity-types
+open import foundation.truncated-types
+open import foundation.truncation-levels
+open import foundation.truncations
+open import foundation.universe-levels
 ```
 
 ## Definition

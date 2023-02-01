@@ -14,6 +14,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-extensionality using
   ( htpy-eq; funext; eq-htpy; equiv-funext)
@@ -292,6 +293,10 @@ module _
   pr1 (is-equiv-Prop f) = is-equiv f
   pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
+  eq-equiv-eq-map-equiv :
+    {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → e ＝ e'
+  eq-equiv-eq-map-equiv = eq-type-subtype is-equiv-Prop
+
   abstract
     is-emb-map-equiv :
       is-emb (map-equiv {A = A} {B = B})
@@ -340,17 +345,17 @@ associative-comp-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
   (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
   ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
-associative-comp-equiv e f g = eq-htpy-equiv refl-htpy
+associative-comp-equiv e f g = eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
   left-unit-law-equiv : (e : X ≃ Y) → (id-equiv ∘e e) ＝ e
-  left-unit-law-equiv e = eq-htpy-equiv refl-htpy
+  left-unit-law-equiv e = eq-equiv-eq-map-equiv refl
   
   right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
-  right-unit-law-equiv e = eq-htpy-equiv refl-htpy
+  right-unit-law-equiv e = eq-equiv-eq-map-equiv refl
   
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
@@ -361,10 +366,10 @@ module _
     eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
 
   inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
-  inv-inv-equiv e = eq-htpy-equiv refl-htpy
+  inv-inv-equiv e = eq-equiv-eq-map-equiv refl
 
   inv-inv-equiv' : (e : Y ≃ X) → (inv-equiv (inv-equiv e)) ＝ e
-  inv-inv-equiv' e = eq-htpy-equiv refl-htpy
+  inv-inv-equiv' e = eq-equiv-eq-map-equiv refl
 
   is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
   is-equiv-inv-equiv =
@@ -380,7 +385,7 @@ module _
 coh-unit-laws-equiv :
   {l : Level} {X : UU l} →
   left-unit-law-equiv (id-equiv {A = X}) ＝ right-unit-law-equiv (id-equiv {A = X})
-coh-unit-laws-equiv {l} {X} = ap eq-htpy-equiv refl
+coh-unit-laws-equiv {l} {X} = ap eq-equiv-eq-map-equiv refl
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}

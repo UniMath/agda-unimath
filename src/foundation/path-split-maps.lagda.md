@@ -9,14 +9,11 @@ module foundation.path-split-maps where
 
 open import foundation-core.path-split-maps public
 
-open import foundation-core.propositions using
-  ( is-prop; is-prop-is-proof-irrelevant; is-equiv-is-prop)
-open import foundation-core.universe-levels using (Level; UU)
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 
-open import foundation.contractible-types using
-  ( is-contr-prod; is-contr-Π)
-open import foundation.equivalences using
-  ( is-contr-sec-is-equiv; is-emb-is-equiv; is-equiv; is-property-is-equiv)
+open import foundation.contractible-types
+open import foundation.equivalences
 ```
 
 ## Properties

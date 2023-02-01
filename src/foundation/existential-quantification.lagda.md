@@ -7,14 +7,11 @@ title: Existential quantification
 
 module foundation.existential-quantification where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2; ind-Σ)
-open import foundation.equivalences using (is-equiv)
-open import foundation.propositional-truncations using
-  ( trunc-Prop; unit-trunc-Prop; map-universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop; type-hom-Prop;
-    is-equiv-is-prop; is-prop-type-hom-Prop; is-prop-Π)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.universe-levels
 ```
 
 ## Idea

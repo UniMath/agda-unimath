@@ -7,22 +7,15 @@ title: The precategory of group actions
 
 module group-theory.precategory-of-group-actions where
 
-open import category-theory.large-precategories using
-  ( Large-Precat; obj-Large-Precat; hom-Large-Precat; id-hom-Large-Precat;
-    comp-hom-Large-Precat; associative-comp-hom-Large-Precat;
-    left-unit-law-comp-hom-Large-Precat; right-unit-law-comp-hom-Large-Precat)
-open import category-theory.precategories using (Precat)
+open import category-theory.large-precategories
+open import category-theory.precategories
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (Level; _⊔_; lsuc)
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import group-theory.group-actions using (Abstract-Group-Action)
-open import group-theory.groups using (Group)
-open import group-theory.homomorphisms-group-actions using
-  ( hom-Abstract-Group-Action; comp-hom-Abstract-Group-Action;
-    id-hom-Abstract-Group-Action; associative-comp-hom-Abstract-Group-Action;
-    left-unit-law-comp-hom-Abstract-Group-Action;
-    right-unit-law-comp-hom-Abstract-Group-Action)
+open import group-theory.group-actions
+open import group-theory.groups
+open import group-theory.homomorphisms-group-actions
 ```
 
 ## Definitions

@@ -9,21 +9,17 @@ module foundation.1-types where
 
 open import foundation-core.1-types public
 
-open import foundation-core.contractible-types using (is-contr)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation-core.equivalences using (_≃_; is-equiv)
-open import foundation-core.identity-types using (_＝_)
-open import foundation-core.propositions using (is-prop; Prop)
-open import foundation-core.subtypes using
-  ( subtype; is-subtype; is-trunc-type-subtype; type-subtype)
-open import foundation-core.truncation-levels using (one-𝕋; zero-𝕋)
-open import foundation-core.universe-levels using (Level; UU; _⊔_)
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.subtypes
+open import foundation-core.truncation-levels
+open import foundation-core.universe-levels
 
-open import foundation.subuniverses using
-   ( equiv-eq-subuniverse; is-contr-total-equiv-subuniverse;
-     is-equiv-equiv-eq-subuniverse; eq-equiv-subuniverse)
-open import foundation.truncated-types using
-  ( is-prop-is-trunc; is-trunc-Π; is-trunc-function-type)
+open import foundation.subuniverses
+open import foundation.truncated-types
 ```
 
 ### Being a 1-type is a property

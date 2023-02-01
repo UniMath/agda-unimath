@@ -7,12 +7,11 @@ title : Hilbert's ε-operators
 
 module foundation.hilberts-epsilon-operators where
 
-open import foundation.equivalences using (_≃_; map-equiv; map-inv-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.functoriality-propositional-truncation using
-  ( map-trunc-Prop)
-open import foundation.propositional-truncations using (type-trunc-Prop)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-propositional-truncation
+open import foundation.propositional-truncations
+open import foundation.universe-levels
 ```
 
 ## Idea

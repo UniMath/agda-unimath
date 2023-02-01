@@ -7,51 +7,29 @@ title: Modular arithmetic on the standard finite types
 
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; add-ℕ'; commutative-add-ℕ; associative-add-ℕ)
-open import elementary-number-theory.congruence-natural-numbers using
-  ( cong-ℕ; cong-identification-ℕ; concatenate-eq-cong-ℕ; cong-zero-ℕ';
-    trans-cong-ℕ; concatenate-cong-eq-cong-ℕ; symm-cong-ℕ; eq-cong-nat-Fin;
-    cong-is-zero-nat-zero-Fin; eq-cong-le-ℕ; concatenate-eq-cong-eq-ℕ;
-    refl-cong-ℕ; congruence-mul-ℕ; translation-invariant-cong-ℕ;
-    translation-invariant-cong-ℕ')
-open import elementary-number-theory.distance-natural-numbers using
-  ( dist-ℕ; right-unit-law-dist-ℕ; translation-invariant-dist-ℕ;
-    is-difference-dist-ℕ'; is-one-dist-succ-ℕ)
-open import elementary-number-theory.divisibility-natural-numbers using
-  ( div-ℕ; concatenate-div-eq-ℕ; div-eq-ℕ; is-zero-div-zero-ℕ; is-even-ℕ;
-    is-odd-ℕ; is-prop-div-ℕ)
-open import elementary-number-theory.equality-natural-numbers using
-  ( is-decidable-is-zero-ℕ')
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; concatenate-eq-leq-ℕ; refl-leq-ℕ; transitive-leq-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ; mul-ℕ'; associative-mul-ℕ; commutative-mul-ℕ; left-unit-law-mul-ℕ;
-    left-distributive-mul-add-ℕ)
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; zero-ℕ; succ-ℕ; is-nonzero-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-propositions using (decidable-Prop)
-open import foundation.decidable-types using
-  ( is-decidable; is-decidable-iff; is-decidable-neg)
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (is-equiv; _≃_)
-open import foundation.functions using (_∘_)
-open import foundation.identity-types using
-  ( _＝_; refl; _∙_; inv; ap; ap-binary)
-open import foundation.injective-maps using (is-injective)
-open import foundation.split-surjective-maps using (is-split-surjective)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (lzero)
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.split-surjective-maps
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( is-decidable-is-zero-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; zero-Fin; succ-Fin; nat-Fin; nat-succ-Fin; is-zero-nat-zero-Fin;
-    is-zero-Fin; is-injective-nat-Fin; strict-upper-bound-nat-Fin;
-    upper-bound-nat-Fin; one-Fin; is-one-nat-one-Fin; neg-one-Fin; is-one-Fin;
-    pred-Fin; is-injective-succ-Fin; issec-pred-Fin; leq-nat-succ-Fin)
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 # Modular arithmetic

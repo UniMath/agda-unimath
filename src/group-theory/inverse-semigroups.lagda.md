@@ -7,16 +7,14 @@ title: Inverse semigroups
 
 module group-theory.inverse-semigroups where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr; center)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id)
-open import foundation.sets using (Set; is-set)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.universe-levels
 
-open import group-theory.semigroups using
-  ( Semigroup; set-Semigroup; type-Semigroup; is-set-type-Semigroup;
-    mul-Semigroup; mul-Semigroup'; associative-mul-Semigroup)
+open import group-theory.semigroups
 ```
 
 ## Idea

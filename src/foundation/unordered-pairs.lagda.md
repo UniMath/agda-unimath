@@ -7,46 +7,32 @@ title: Unordered pairs of elements in a type
 
 module foundation.unordered-pairs where
 
-open import foundation.contractible-types using (is-contr)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.decidable-equality using (has-decidable-equality)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.embeddings using (_↪_)
-open import foundation.equivalences using
-  ( map-equiv; is-equiv; _≃_; map-inv-is-equiv; isretr-map-inv-is-equiv;
-    id-equiv; is-equiv-map-equiv; issec-map-inv-is-equiv)
-open import foundation.existential-quantification using (∃-Prop)
+open import foundation.contractible-types
+open import foundation.coproduct-types
+open import foundation.decidable-equality
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality using (eq-htpy)
-open import foundation.functions using (_∘_; id)
-open import foundation.functoriality-function-types using (equiv-postcomp)
-open import foundation.functoriality-dependent-pair-types using (equiv-tot)
-open import foundation.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation.homotopies using
-  ( _~_; refl-htpy; is-contr-total-htpy; _·r_)
-open import foundation.identity-types using (_＝_; refl; _∙_; ap)
-open import foundation.mere-equivalences using
-  ( mere-equiv; is-set-mere-equiv'; has-decidable-equality-mere-equiv')
-open import foundation.propositional-truncations using
-  ( type-trunc-Prop; trunc-Prop; unit-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; type-Prop; is-prop; is-prop-type-Prop)
-open import foundation.sets using (is-set)
-open import foundation.structure-identity-principle using
-  ( is-contr-total-Eq-structure)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU; lzero; lsuc; _⊔_)
+open import foundation.functions
+open import foundation.functoriality-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.mere-equivalences
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-types using
-  ( 2-Element-Type; type-2-Element-Type; map-swap-2-Element-Type;
-    has-two-elements; has-two-elements-type-2-Element-Type)
-open import univalent-combinatorics.equality-standard-finite-types using
-  ( has-decidable-equality-Fin)
-open import univalent-combinatorics.finite-types using
-  ( UU-Fin; Fin-UU-Fin'; equiv-UU-Fin; id-equiv-UU-Fin;
-    is-contr-total-equiv-UU-Fin; type-UU-Fin)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; equiv-succ-Fin; is-set-Fin)
+open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.equality-standard-finite-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

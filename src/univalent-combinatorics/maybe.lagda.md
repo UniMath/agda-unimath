@@ -9,14 +9,12 @@ module univalent-combinatorics.maybe where
 
 open import foundation.maybe public
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels using (Level)
+open import foundation.universe-levels
 
-open import univalent-combinatorics.coproduct-types using
-  ( coprod-UU-Fin)
-open import univalent-combinatorics.finite-types using
-  ( UU-Fin; unit-UU-Fin)
+open import univalent-combinatorics.coproduct-types
+open import univalent-combinatorics.finite-types
 ```
 
 ```agda

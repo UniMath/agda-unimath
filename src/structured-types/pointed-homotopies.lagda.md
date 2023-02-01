@@ -5,25 +5,18 @@
 
 module structured-types.pointed-homotopies where
 
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.equivalences using (_≃_; _∘e_; map-inv-equiv)
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality using (equiv-funext)
-open import foundation.homotopies using (refl-htpy; _∙h_; inv-htpy; _·l_; _·r_)
-open import foundation.identity-types using
-  ( Id; refl; _∙_; inv; right-inv; equiv-con-inv; equiv-inv; ap; concat'; ap-id;
-    right-unit; ap-binary; assoc; concat; left-inv; distributive-inv-concat;
-    inv-inv; ap-concat; ap-inv)
-open import foundation.structure-identity-principle using ( extensionality-Σ)
-open import foundation.universe-levels using (Level; UU; _⊔_)
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
-open import structured-types.pointed-dependent-functions using
-  ( pointed-Π; function-pointed-Π; preserves-point-function-pointed-Π)
-open import structured-types.pointed-families-of-types using
-  ( Pointed-Fam; pt-Pointed-Fam; constant-Pointed-Fam)
-open import structured-types.pointed-maps using
-  (_→*_; comp-pointed-map; id-pointed-map; map-pointed-map)
-open import structured-types.pointed-types using
-  ( Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-dependent-functions
+open import structured-types.pointed-families-of-types
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 ```
 
 ## Idea

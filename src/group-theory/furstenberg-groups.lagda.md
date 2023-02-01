@@ -7,12 +7,12 @@ title: Furstenberg groups
 
 module group-theory.furstenberg-groups where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ)
-open import foundation.identity-types using (Id)
-open import foundation.propositional-truncations using (type-trunc-Prop)
-open import foundation.sets using (Set; type-Set)
-open import foundation.universe-levels using (Level; UU; lsuc)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositional-truncations
+open import foundation.sets
+open import foundation.universe-levels
 ```
 
 ## Definition

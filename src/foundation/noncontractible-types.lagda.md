@@ -7,16 +7,15 @@ title: Non-contractible types
 
 module foundation.noncontractible-types where
 
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types using
-  ( is-contr; center; contraction; is-prop-is-contr)
-open import foundation.dependent-pair-types using (Σ; pair)
-open import foundation.empty-types using (is-empty; empty)
-open import foundation.functions using (id)
-open import foundation.identity-types using (_＝_)
-open import foundation.negation using (¬)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.functions
+open import foundation.identity-types
+open import foundation.negation
+open import foundation.universe-levels
 ```
 
 ## Idea

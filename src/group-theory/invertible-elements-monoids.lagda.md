@@ -7,19 +7,16 @@ title: Invertible elements in monoids
 
 module group-theory.invertible-elements-monoids where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.contractible-types using (is-contr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.identity-types using (Id; inv; _∙_; ap)
-open import foundation.propositions using
-  ( all-elements-equal; is-prop-all-elements-equal; is-prop; prod-Prop; Prop)
-open import foundation.sets using (Id-Prop)
-open import foundation.subtypes using (eq-type-subtype)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.cartesian-product-types
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 
-open import group-theory.monoids using
-  ( Monoid; type-Monoid; mul-Monoid; unit-Monoid; set-Monoid;
-    left-unit-law-mul-Monoid; associative-mul-Monoid; right-unit-law-mul-Monoid; mul-Monoid')
+open import group-theory.monoids
 ```
 
 ## Idea

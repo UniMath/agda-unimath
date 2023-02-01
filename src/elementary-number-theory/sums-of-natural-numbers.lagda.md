@@ -7,29 +7,24 @@ title: Sums of natural numbers
 
 module elementary-number-theory.sums-of-natural-numbers where
 
-open import elementary-number-theory.addition-natural-numbers using
-  ( add-ℕ; ap-add-ℕ; add-ℕ')
-open import elementary-number-theory.inequality-natural-numbers using
-  ( leq-ℕ; le-ℕ; preserves-le-succ-ℕ; le-succ-ℕ)
-open import elementary-number-theory.multiplication-natural-numbers using
-  ( mul-ℕ)
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
-open import foundation.constant-maps using (const)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.equivalences using (map-equiv)
-open import foundation.functions using (_∘_)
-open import foundation.homotopies using (_~_; _·r_)
-open import foundation.identity-types using (_＝_; refl; ap)
-open import foundation.unit-type using (star)
-open import foundation.universe-levels using (Level; UU)
+open import foundation.constant-maps
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.unit-type
+open import foundation.universe-levels
 
-open import univalent-combinatorics.counting using
-  ( count; number-of-elements-count)
-open import univalent-combinatorics.finite-types using (𝔽; type-𝔽)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin)
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

@@ -7,38 +7,25 @@ title: Subtypes
 
 module foundation-core.subtypes where
 
-open import foundation-core.1-types using (is-1-type)
-open import foundation-core.contractible-types using
-  ( is-contr; is-contr-equiv; is-contr-total-path)
-open import foundation-core.dependent-pair-types using (Σ; pair; pr1; pr2; _,_)
-open import foundation-core.embeddings using
-  ( is-emb; _↪_; map-emb; is-emb-map-emb)
-open import foundation-core.equivalences using
-  ( is-equiv; _≃_; map-inv-is-equiv; id-equiv; map-inv-equiv; map-equiv;
-    isretr-map-inv-is-equiv)
-open import foundation-core.fibers-of-maps using (equiv-fib-pr1)
-open import foundation-core.functions using (_∘_)
-open import foundation-core.functoriality-dependent-pair-types using
-  ( tot; is-equiv-tot-is-fiberwise-equiv; equiv-Σ; map-Σ; is-equiv-map-Σ;
-    equiv-tot)
-open import foundation-core.fundamental-theorem-of-identity-types using
-  ( fundamental-theorem-id)
-open import foundation-core.identity-types using (_＝_; refl; ap; tr)
-open import foundation-core.logical-equivalences using (_↔_; equiv-iff'; _⇔_)
-open import foundation-core.propositional-maps using
-  ( is-emb-is-prop-map; is-prop-map-is-emb)
-open import foundation-core.propositions using
-  ( is-prop; Prop; is-proof-irrelevant-is-prop; is-prop-equiv;
-    is-prop-equiv'; type-Prop; is-prop-type-Prop; is-equiv-is-prop)
-open import foundation-core.sets using (is-set; Set; type-Set; is-set-type-Set)
-open import foundation-core.subtype-identity-principle using
-  ( is-contr-total-Eq-subtype; extensionality-type-subtype)
-open import foundation-core.truncated-types using (is-trunc; is-trunc-is-emb)
-open import foundation-core.truncation-levels using
-  ( 𝕋; neg-two-𝕋; neg-one-𝕋; zero-𝕋; succ-𝕋)
-open import foundation-core.type-arithmetic-dependent-pair-types using
-  ( left-unit-law-Σ-is-contr; equiv-right-swap-Σ)
-open import foundation-core.universe-levels using (Level; UU; _⊔_; lsuc)
+open import foundation-core.1-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
+open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtype-identity-principle
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+open import foundation-core.type-arithmetic-dependent-pair-types
+open import foundation-core.universe-levels
 ```
 
 ## Idea

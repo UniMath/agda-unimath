@@ -7,12 +7,11 @@ title: Unital binary operations
 
 module foundation.unital-binary-operations where
 
-open import foundation.cartesian-product-types using (_×_)
-open import foundation.dependent-pair-types using (Σ; pr1; pr2; pair)
-open import foundation.homotopies using (inv-nat-htpy-id; coh-htpy-id)
-open import foundation.identity-types using
-  ( _＝_; inv; _∙_; ap; inv-con; concat')
-open import foundation.universe-levels using (UU; Level)
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 ## Idea

@@ -5,11 +5,10 @@
 
 module structured-types.pointed-families-of-types where
 
-open import foundation.dependent-pair-types using (Σ; pair; pr1; pr2)
-open import foundation.universe-levels using (Level; UU; lsuc; _⊔_)
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
-open import structured-types.pointed-types using
-  ( Pointed-Type; type-Pointed-Type; pt-Pointed-Type)
+open import structured-types.pointed-types
 ```
 
 ## Idea

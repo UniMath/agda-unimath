@@ -8,15 +8,15 @@ title: Maximum on the standard finite types
 module elementary-number-theory.maximum-standard-finite-types where
 
 open import elementary-number-theory.inequality-standard-finite-types
-open import elementary-number-theory.natural-numbers using (ℕ; zero-ℕ; succ-ℕ)
+open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types using (pair; pr1; pr2)
-open import foundation.coproduct-types using (inl; inr)
-open import foundation.unit-type using (star)
+open import foundation.dependent-pair-types
+open import foundation.coproduct-types
+open import foundation.unit-type
 
 open import order-theory.least-upper-bounds-posets
 
-open import univalent-combinatorics.standard-finite-types using (Fin)
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea
