@@ -7,51 +7,26 @@ title: Orbits of permutations
 
 module finite-group-theory.orbits-permutations where
 
-open import finite-group-theory.transpositions using
-  ( transposition; standard-transposition; map-standard-transposition;
-    is-fixed-point-standard-transposition;
-    right-computation-standard-transposition;
-    left-computation-standard-transposition;
-    is-involution-map-transposition; permutation-list-transpositions;
-    two-elements-transposition)
+open import finite-group-theory.transpositions
 
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.decidable-types using
-  ( is-decidable-bounded-Σ-ℕ)
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.euclidean-division-natural-numbers using
-  ( remainder-euclidean-division-ℕ;
-    strict-upper-bound-remainder-euclidean-division-ℕ;
-    quotient-euclidean-division-ℕ; eq-euclidean-division-ℕ)
-open import elementary-number-theory.inequality-natural-numbers using
-  ( contradiction-le-ℕ; concatenate-leq-le-ℕ; concatenate-le-leq-ℕ; le-ℕ;
-    succ-le-ℕ; _≤-ℕ_; is-nonzero-le-ℕ; is-decidable-le-ℕ; is-decidable-leq-ℕ;
-    decide-leq-ℕ; le-leq-neq-ℕ; leq-le-ℕ; leq-le-succ-ℕ; subtraction-leq-ℕ;
-    transitive-leq-ℕ; leq-mul-is-nonzero-ℕ; subtraction-le-ℕ; le-subtraction-ℕ;
-    transitive-le-ℕ; le-succ-ℕ)
-open import elementary-number-theory.lower-bounds-natural-numbers using
-  ( is-lower-bound-ℕ)
+open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers using
-  ( ℕ; succ-ℕ; zero-ℕ; is-nonzero-ℕ; is-nonzero-succ-ℕ; is-successor-ℕ;
-    is-successor-is-nonzero-ℕ; is-zero-ℕ; ℕ-Set)
-open import
-  elementary-number-theory.well-ordering-principle-natural-numbers using
-  ( minimal-element-ℕ; well-ordering-principle-ℕ; minimal-element-ℕ-Prop)
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.decidable-equality using
-  ( has-decidable-equality; has-decidable-equality-equiv;
-    is-prop-has-decidable-equality; has-decidable-equality-Σ)
-open import foundation.decidable-equivalence-relations using
-  ( is-decidable-is-in-equivalence-class-is-decidable)
-open import foundation.decidable-maps using (is-decidable-map)
-open import foundation.decidable-propositions using
-  ( decidable-Prop; type-decidable-Prop; is-decidable-Prop;
-    is-decidable-trunc-Prop-is-merely-decidable; is-prop-is-decidable)
+open import foundation.decidable-equality
+open import foundation.decidable-equivalence-relations
+open import foundation.decidable-maps
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -60,12 +35,8 @@ open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
-open import foundation.equivalences using
-  ( _≃_; _∘e_; map-equiv; inv-equiv; map-inv-is-equiv;
-    is-equiv-has-inverse; left-inverse-law-equiv;
-    right-inverse-law-equiv; map-inv-equiv; id-equiv)
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; eq-htpy-equiv; htpy-eq-equiv)
+open import foundation.equivalences
+open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality using (eq-htpy)
 open import foundation.functions
@@ -73,45 +44,27 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.iterating-functions using
-  ( iterate; iterate-add-ℕ)
+open import foundation.iterating-functions
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.propositional-truncations using
-  ( apply-universal-property-trunc-Prop; is-prop-type-trunc-Prop;
-    trunc-Prop; unit-trunc-Prop; all-elements-equal-type-trunc-Prop;
-    type-trunc-Prop; universal-property-trunc-Prop)
-open import foundation.propositions using
-  ( Prop; eq-is-prop; is-prop-is-prop; is-prop-type-Prop; is-equiv-is-prop;
-    is-prop; is-prop-Σ)
-open import foundation.repetitions using (repetition)
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.repetitions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.univalence using (eq-equiv)
-open import foundation.universal-property-propositional-truncation using
-  ( htpy-is-propositional-truncation)
+open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
-open import univalent-combinatorics.2-element-decidable-subtypes using
-  ( standard-2-Element-Decidable-Subtype)
+open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
-open import univalent-combinatorics.counting using
-  ( count; count-Fin; equiv-count; inv-equiv-count; map-equiv-count;
-    map-inv-equiv-count; number-of-elements-count; has-decidable-equality-count)
+open import univalent-combinatorics.counting
 open import univalent-combinatorics.equality-standard-finite-types
-open import univalent-combinatorics.finite-types using
-  ( is-finite; is-finite-type-UU-Fin; UU-Fin; type-UU-Fin;
-    has-cardinality-type-UU-Fin; number-of-elements-is-finite;
-    number-of-elements-has-finite-cardinality; has-finite-cardinality-is-finite;
-    has-finite-cardinality-count; all-elements-equal-has-finite-cardinality;
-    has-cardinality; 𝔽; type-𝔽)
-open import univalent-combinatorics.image-of-maps using (is-finite-codomain)
-open import univalent-combinatorics.lists using (list; length-list; cons; nil)
-open import univalent-combinatorics.pigeonhole-principle using
-  ( repetition-le-count)
-open import univalent-combinatorics.standard-finite-types using
-  ( Fin; is-injective-nat-Fin; nat-Fin; succ-Fin; upper-bound-nat-Fin;
-    zero-Fin; equiv-succ-Fin)
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.image-of-maps
+open import univalent-combinatorics.lists
+open import univalent-combinatorics.pigeonhole-principle
+open import univalent-combinatorics.standard-finite-types
 ```
 
 ## Idea

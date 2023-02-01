@@ -9,8 +9,7 @@ module finite-group-theory.finite-monoids where
 
 open import elementary-number-theory.natural-numbers
 
-open import finite-group-theory.finite-semigroups using
-  ( Semigroup-of-Order; is-π-finite-Semigroup-of-Order)
+open import finite-group-theory.finite-semigroups
 
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -22,19 +21,14 @@ open import foundation.set-truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import group-theory.monoids using
-  ( Monoid; type-Monoid; is-unital-Semigroup; is-unital-Semigroup-Prop)
+open import group-theory.monoids
 open import group-theory.semigroups
 
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.decidable-dependent-function-types using
-  ( is-decidable-Π-count)
-open import univalent-combinatorics.decidable-dependent-pair-types using
-  ( is-decidable-Σ-count)
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-dependent-pair-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.pi-finite-types using
-  ( is-π-finite; is-π-finite-equiv; is-π-finite-Σ; is-π-finite-is-finite;
-    number-of-connected-components; mere-equiv-number-of-connected-components)
+open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
