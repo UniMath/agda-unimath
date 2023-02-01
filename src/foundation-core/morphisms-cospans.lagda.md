@@ -3,6 +3,8 @@ title: Morphisms of cospans
 ---
 
 ```agda
+{-# OPTIONS --without-K --exact-split --safe #-}
+
 module foundation-core.morphisms-cospans where
 
 open import foundation-core.cartesian-product-types
