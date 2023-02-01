@@ -16,7 +16,6 @@ open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -24,6 +23,8 @@ open import foundation-core.identity-types
 open import foundation-core.path-split-maps
 open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
+
+open import foundation.function-extensionality
 ```
 
 ## Properties
