@@ -1,18 +1,15 @@
 ---
-title: Commutative operations
+title: Symmetric operations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
-module foundation.commutative-operations where
-
-open import foundation-core.function-extensionality
+module foundation.symmetric-operations where
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -36,7 +33,7 @@ Recall that there is a standard unordered pairing operation `{-,-} : A → (A �
   λ f x y → f {x,y} : (unordered-pair A → B) → (A → A → B)
 ```
 
-A binary operation `μ : A → A → B` is (coherently) commutative if it extends to an operation `μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is commutative if there is an operation `μ̃` on the undordered pairs in `A`, such that `μ̃({x,y}) = μ(x,y)` for all `x, y : A`. One can check that if `B` is a set, then `μ` has such an extension if and only if it is commutative in the usual algebraic sense. Thus we simply say that a commutative operation from `A` to `B` is a map from the unordered pairs in `A` into `B`.
+A binary operation `μ : A → A → B` is symmetric if it extends to an operation `μ̃ : unordered-pair A → B` along `{-,-}`. That is, a binary operation `μ` is symmetric if there is an operation `μ̃` on the undordered pairs in `A`, such that `μ̃({x,y}) = μ(x,y)` for all `x, y : A`. Symmetric operations can be understood to be fully coherent commutative operations. One can check that if `B` is a set, then `μ` has such an extension if and only if it is commutative in the usual algebraic sense. 
 
 ## Definition
 

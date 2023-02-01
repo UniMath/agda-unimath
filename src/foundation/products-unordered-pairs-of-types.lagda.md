@@ -3,12 +3,9 @@ title: Products of unordered pairs of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.products-unordered-pairs-of-types where
 
 open import foundation.cartesian-product-types
-open import foundation.commutative-operations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,6 +13,7 @@ open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
+open import foundation.symmetric-operations
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs

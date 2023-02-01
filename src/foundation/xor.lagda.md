@@ -3,12 +3,9 @@ title: Exclusive disjunction of propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.xor where
 
 open import foundation.cartesian-product-types
-open import foundation.commutative-operations
 open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -30,6 +27,7 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.symmetric-operations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
