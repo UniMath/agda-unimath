@@ -100,7 +100,7 @@ abstract
                           ( pr1
                             ( center
                               ( distributive-trunc-Π-Fin-Set k (A ∘ inl)))))
-                        ( Π-Set' (A (inr star)) (λ a → B))))∘e
+                        ( Π-Set' (A (inr star)) (λ a → B)))) ∘e
                     ( equiv-postcomp
                       ( (x : Fin k) → type-trunc-Set (A (inl x)))
                       ( equiv-universal-property-trunc-Set
