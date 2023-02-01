@@ -18,8 +18,7 @@ open import foundation-core.universe-levels
 
 open import foundation.equivalence-induction
 open import foundation-core.function-extensionality
-open import foundation.weak-function-extensionality using
-  ( WEAK-FUNEXT; FUNEXT-WEAK-FUNEXT)
+open import foundation.weak-function-extensionality
 
 ```
 
