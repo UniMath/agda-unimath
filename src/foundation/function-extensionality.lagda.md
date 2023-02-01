@@ -63,7 +63,7 @@ module _
 
  ## See also
  
- - That the univalence axiom implies function extensionality is proven in
-   [foundation.univalence-implies-function-extensionality](foundation.univalence-implies-function-extensionality.html).
+- That the univalence axiom implies function extensionality is proven in
+  [foundation.univalence-implies-function-extensionality](foundation.univalence-implies-function-extensionality.html).
 - Weak function extensionality is defined in
   [foundation.weak-function-extensionality](foundation.weak-function-extensionality.html).
