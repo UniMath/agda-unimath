@@ -7,7 +7,6 @@ title: Function extensionality
 
 module foundation-core.function-extensionality where
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
@@ -52,3 +51,4 @@ ap-ev :
   (p : f ＝ g) → (ap (λ h → h a) p) ＝ htpy-eq p a
 ap-ev a refl = refl
 ```
+ 
