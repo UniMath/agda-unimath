@@ -816,6 +816,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
+open import structured-types.symmetric-h-spaces
 open import structured-types.types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
 open import structured-types.universal-property-lists-wild-monoids
