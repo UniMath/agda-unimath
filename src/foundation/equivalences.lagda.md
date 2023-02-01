@@ -362,7 +362,7 @@ module _
   left-unit-law-equiv e = eq-equiv-eq-map-equiv refl
   
   right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
-  right-unit-law-equiv e = eq-equiv-q-map-equiv refl
+  right-unit-law-equiv e = eq-equiv-eq-map-equiv refl
   
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
