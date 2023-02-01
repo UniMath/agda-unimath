@@ -17,8 +17,7 @@ open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
 open import foundation.equivalence-induction
-open import foundation.function-extensionality using
-  ( htpy-eq; FUNEXT)
+open import foundation-core.function-extensionality
 open import foundation.weak-function-extensionality using
   ( WEAK-FUNEXT; FUNEXT-WEAK-FUNEXT)
 
