@@ -20,7 +20,7 @@ open import foundation.fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.law-of-excluded-middle using (LEM)
+open import foundation.law-of-excluded-middle
 open import foundation.negation
 open import foundation.perfect-images
 open import foundation.split-surjective-maps

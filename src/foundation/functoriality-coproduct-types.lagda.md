@@ -14,8 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; eq-htpy-equiv)
+open import foundation.equivalence-extensionality
 open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality

@@ -26,8 +26,7 @@ open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
 open import foundation.equivalences
-open import foundation.equivalence-extensionality using
-  ( htpy-equiv; refl-htpy-equiv)
+open import foundation.equivalence-extensionality
 open import foundation.identity-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type

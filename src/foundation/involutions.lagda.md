@@ -10,8 +10,7 @@ module foundation.involutions where
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.equivalence-extensionality using
-  ( eq-htpy-equiv; htpy-eq-equiv)
+open import foundation.equivalence-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types

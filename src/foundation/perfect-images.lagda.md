@@ -21,7 +21,7 @@ open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
-open import foundation.law-of-excluded-middle using (LEM)
+open import foundation.law-of-excluded-middle
 open import foundation.negation
 open import foundation.propositions
 open import foundation.propositional-maps

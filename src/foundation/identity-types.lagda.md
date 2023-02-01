@@ -10,7 +10,7 @@ module foundation.identity-types where
 open import foundation-core.identity-types public
 
 open import foundation.binary-equivalences
-open import foundation.equivalence-extensionality using (eq-htpy-equiv)
+open import foundation.equivalence-extensionality
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
