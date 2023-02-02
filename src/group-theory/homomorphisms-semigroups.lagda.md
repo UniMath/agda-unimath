@@ -3,8 +3,6 @@ title: Homomorphisms of semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-semigroups where
 
 open import foundation.contractible-types

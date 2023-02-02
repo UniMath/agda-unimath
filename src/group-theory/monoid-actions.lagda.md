@@ -3,8 +3,6 @@ title: Monoid actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.monoid-actions where
 
 open import foundation.dependent-pair-types

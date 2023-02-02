@@ -3,8 +3,6 @@ title: Isomorphisms of groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.isomorphisms-groups where
 
 open import category-theory.isomorphisms-large-precategories

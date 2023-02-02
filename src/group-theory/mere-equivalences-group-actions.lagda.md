@@ -3,8 +3,6 @@ title: Mere equivalences of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.mere-equivalences-group-actions where
 
 open import foundation.propositional-truncations

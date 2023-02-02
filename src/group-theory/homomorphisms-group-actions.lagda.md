@@ -3,8 +3,6 @@ title: Homomorphisms of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-group-actions where
 
 open import foundation.commuting-squares

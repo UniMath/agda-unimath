@@ -3,8 +3,6 @@ title: The category of semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.category-of-semigroups where
 
 open import category-theory.large-categories

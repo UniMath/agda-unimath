@@ -3,8 +3,6 @@ title: The precategory of groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.precategory-of-groups where
 
 open import category-theory.large-precategories

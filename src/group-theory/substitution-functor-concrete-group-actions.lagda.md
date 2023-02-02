@@ -3,8 +3,6 @@ title: The substitution functor of concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.substitution-functor-concrete-group-actions where
 
 open import foundation.universe-levels

@@ -3,8 +3,6 @@ title: Stabilizers of concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.stabilizer-groups-concrete-group-actions where
 
 open import foundation.0-connected-types

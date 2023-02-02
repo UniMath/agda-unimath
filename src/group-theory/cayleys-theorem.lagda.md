@@ -3,8 +3,6 @@ title: Cayley's theorem
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.cayleys-theorem where
 
 open import foundation.dependent-pair-types

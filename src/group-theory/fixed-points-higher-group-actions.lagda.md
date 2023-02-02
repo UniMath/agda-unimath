@@ -3,8 +3,6 @@ title: Fixed points of higher group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.fixed-points-higher-group-actions where
 
 open import foundation.universe-levels

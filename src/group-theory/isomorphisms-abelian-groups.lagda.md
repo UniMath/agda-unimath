@@ -3,8 +3,6 @@ title: Isomorphisms of abelian groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.isomorphisms-abelian-groups where
 
 open import foundation.contractible-types

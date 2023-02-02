@@ -3,8 +3,6 @@ title: Abstract groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.groups where
 
 open import foundation.binary-embeddings

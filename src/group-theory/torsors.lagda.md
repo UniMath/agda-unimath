@@ -3,8 +3,6 @@ title: Torsors of abstract groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.torsors where
 
 open import foundation.0-connected-types

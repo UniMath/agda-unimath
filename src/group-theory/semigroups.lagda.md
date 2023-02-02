@@ -3,8 +3,6 @@ title: Semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.semigroups where
 
 open import foundation.dependent-pair-types

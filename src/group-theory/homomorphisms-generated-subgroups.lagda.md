@@ -3,8 +3,6 @@ title: Homomorphisms of generated subgroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-generated-subgroups where
 
 open import foundation.cartesian-product-types
