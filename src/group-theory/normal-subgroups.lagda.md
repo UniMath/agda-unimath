@@ -6,6 +6,7 @@ title: Normal subgroups
 module group-theory.normal-subgroups where
 
 open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -345,12 +346,12 @@ module _
 #### The normal subgroup obtained from the congruence relation of a normal subgroup `N` is `N` itself
 
 ```agda
-has-same-elements-normal-subgroup-congruence-Normal-Subgroup :
+has-same-elements-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G) →
   has-same-elements-Normal-Subgroup G
     ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
     ( N)
-pr1 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N
+pr1 (has-same-elements-normal-subgroup-congruence-Group G N
   .( mul-Group G
      ( unit-Group G)
      ( inclusion-Subgroup G (subgroup-Normal-Subgroup G N) u)))
@@ -362,33 +363,111 @@ pr1 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N
 pr1
   ( pr1
     ( pr2
-      ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x)
+      ( has-same-elements-normal-subgroup-congruence-Group G N x)
       ( H))) =
   x
 pr2
   ( pr1
     ( pr2
-      ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x)
+      ( has-same-elements-normal-subgroup-congruence-Group G N x)
       ( H))) =
   H
 pr2
   ( pr2
-    ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x)
+    ( has-same-elements-normal-subgroup-congruence-Group G N x)
     ( H)) =
   left-unit-law-mul-Group G x
 
-isretr-normal-subgroup-congruence-Normal-Subgroup :
+isretr-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup (l1 ⊔ l2) G) →
   normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N) ＝ N
-isretr-normal-subgroup-congruence-Normal-Subgroup G N =
+isretr-normal-subgroup-congruence-Group G N =
   eq-has-same-elements-Normal-Subgroup G
     ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
     ( N)
-    ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N)
+    ( has-same-elements-normal-subgroup-congruence-Group G N)
 ```
 
 #### The congruence relation of the normal subgroup obtained from a congruence relation `R` is `R` itself
 
 ```agda
+relate-same-elements-congruence-normal-subgroup-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
+  relate-same-elements-congruence-Group G
+    ( congruence-Normal-Subgroup G (normal-subgroup-congruence-Group G R))
+    ( R)
+pr1
+  ( relate-same-elements-congruence-normal-subgroup-congruence-Group G R x y)
+  ( (h , r) , p) =
+  binary-tr
+    ( sim-congruence-Group G R)
+    ( right-unit-law-mul-Group G x)
+    ( p)
+    ( left-mul-congruence-Group G R x r)
+pr1
+  ( pr1
+    ( pr2
+      ( relate-same-elements-congruence-normal-subgroup-congruence-Group
+        G R x y)
+      ( H))) =
+  left-div-Group G x y
+pr2
+  ( pr1
+    ( pr2
+      ( relate-same-elements-congruence-normal-subgroup-congruence-Group
+        G R x y)
+      ( H))) =
+  symm-congruence-Group G R (map-sim-left-div-unit-congruence-Group G R H)
+pr2
+  ( pr2
+    ( relate-same-elements-congruence-normal-subgroup-congruence-Group G R x y)
+    ( H)) =
+  issec-mul-inv-Group G x y
 
+issec-normal-subgroup-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group (l1 ⊔ l2) G) →
+  ( congruence-Normal-Subgroup G (normal-subgroup-congruence-Group G R)) ＝ R
+issec-normal-subgroup-congruence-Group G R =
+  eq-relate-same-elements-congruence-Group G
+    ( congruence-Normal-Subgroup G (normal-subgroup-congruence-Group G R))
+    ( R)
+    ( relate-same-elements-congruence-normal-subgroup-congruence-Group G R)
+```
+
+#### The equivalence of normal subgroups and congruence relations
+
+```agda
+is-equiv-congruence-Normal-Subgroup :
+  {l1 l2 : Level} (G : Group l1) →
+  is-equiv (congruence-Normal-Subgroup {l2 = l1 ⊔ l2} G)
+is-equiv-congruence-Normal-Subgroup {l1} {l2} G =
+  is-equiv-has-inverse
+    ( normal-subgroup-congruence-Group G)
+    ( issec-normal-subgroup-congruence-Group {l2 = l2} G)
+    ( isretr-normal-subgroup-congruence-Group {l2 = l2} G)
+
+equiv-congruence-Normal-Subgroup :
+  {l1 l2 : Level} (G : Group l1) →
+  Normal-Subgroup (l1 ⊔ l2) G ≃ congruence-Group (l1 ⊔ l2) G
+pr1 (equiv-congruence-Normal-Subgroup {l1} {l2} G) =
+  congruence-Normal-Subgroup {l1} {l1 ⊔ l2} G
+pr2 (equiv-congruence-Normal-Subgroup {l1} {l2} G) =
+  is-equiv-congruence-Normal-Subgroup {l1} {l2} G
+
+is-equiv-normal-subgroup-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) →
+  is-equiv (normal-subgroup-congruence-Group {l2 = l1 ⊔ l2} G)
+is-equiv-normal-subgroup-congruence-Group {l1} {l2} G =
+  is-equiv-has-inverse
+    ( congruence-Normal-Subgroup G)
+    ( isretr-normal-subgroup-congruence-Group {l2 = l2} G)
+    ( issec-normal-subgroup-congruence-Group {l2 = l2} G)
+
+equiv-normal-subgroup-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) →
+  congruence-Group (l1 ⊔ l2) G ≃ Normal-Subgroup (l1 ⊔ l2) G
+pr1 (equiv-normal-subgroup-congruence-Group {l1} {l2} G) =
+  normal-subgroup-congruence-Group {l1} {l1 ⊔ l2} G
+pr2 (equiv-normal-subgroup-congruence-Group {l1} {l2} G) =
+  is-equiv-normal-subgroup-congruence-Group {l1} {l2} G
 ```
