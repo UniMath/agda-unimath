@@ -6,6 +6,7 @@ title: Congruence relations on groups
 module group-theory.congruence-relations-groups where
 
 open import foundation.binary-relations
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -62,8 +63,8 @@ module _
   concatenate-sim-eq-congruence-Group H refl = H
 
   concatenate-eq-sim-eq-congruence-Group :
-    {x1 x2 y1 y2 : type-Group G} →
-    x1 ＝ x2 → sim-congruence-Group x2 y1 → y1 ＝ y2 → sim-congruence-Group x1 y2
+    {x1 x2 y1 y2 : type-Group G} → x1 ＝ x2 →
+    sim-congruence-Group x2 y1 → y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
   
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
@@ -85,14 +86,12 @@ module _
   left-mul-congruence-Group :
     (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
     sim-congruence-Group (mul-Group G x y) (mul-Group G x z)
-  left-mul-congruence-Group x H =
-    mul-congruence-Group refl-congruence-Group H
+  left-mul-congruence-Group x H = mul-congruence-Group refl-congruence-Group H
 
   right-mul-congruence-Group :
     {x y : type-Group G} → sim-congruence-Group x y → (z : type-Group G) →
     sim-congruence-Group (mul-Group G x z) (mul-Group G y z)
-  right-mul-congruence-Group H z =
-    mul-congruence-Group H refl-congruence-Group
+  right-mul-congruence-Group H z = mul-congruence-Group H refl-congruence-Group
 
   conjugation-congruence-Group :
     (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
@@ -136,7 +135,9 @@ module _
     concatenate-eq-sim-eq-congruence-Group
       ( inv
         ( ( associative-mul-Group G (inv-Group G x) y (inv-Group G y)) ∙
-          ( ( ap (mul-Group G (inv-Group G x)) (right-inverse-law-mul-Group G y)) ∙
+          ( ( ap
+              ( mul-Group G (inv-Group G x))
+              ( right-inverse-law-mul-Group G y)) ∙
             ( right-unit-law-mul-Group G (inv-Group G x)))))
       ( symm-congruence-Group
         ( right-mul-congruence-Group
@@ -145,3 +146,54 @@ module _
       ( ( ap (mul-Group' G (inv-Group G y)) (left-inverse-law-mul-Group G x)) ∙
         ( left-unit-law-mul-Group G (inv-Group G y)))
 ```
+
+## Properties
+
+### Characterizing equality of congruence relations on groups
+
+```agda
+relate-same-elements-congruence-Group :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  congruence-Group l2 G → congruence-Group l3 G → UU (l1 ⊔ l2 ⊔ l3)
+relate-same-elements-congruence-Group G =
+  relate-same-elements-congruence-Semigroup (semigroup-Group G)
+
+refl-relate-same-elements-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
+  relate-same-elements-congruence-Group G R R
+refl-relate-same-elements-congruence-Group G =
+  refl-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+
+is-contr-total-relate-same-elements-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
+  is-contr
+    ( Σ ( congruence-Group l2 G)
+        ( relate-same-elements-congruence-Group G R))
+is-contr-total-relate-same-elements-congruence-Group G =
+  is-contr-total-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+
+relate-same-elements-eq-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  R ＝ S → relate-same-elements-congruence-Group G R S
+relate-same-elements-eq-congruence-Group G =
+  relate-same-elements-eq-congruence-Semigroup (semigroup-Group G)
+
+is-equiv-relate-same-elements-eq-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  is-equiv (relate-same-elements-eq-congruence-Group G R S)
+is-equiv-relate-same-elements-eq-congruence-Group G =
+  is-equiv-relate-same-elements-eq-congruence-Semigroup (semigroup-Group G)
+
+extensionality-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  (R ＝ S) ≃ relate-same-elements-congruence-Group G R S
+extensionality-congruence-Group G =
+  extensionality-congruence-Semigroup (semigroup-Group G)
+
+eq-relate-same-elements-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  relate-same-elements-congruence-Group G R S → R ＝ S
+eq-relate-same-elements-congruence-Group G =
+  eq-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+```
+
