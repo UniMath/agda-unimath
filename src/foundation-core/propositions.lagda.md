@@ -261,7 +261,7 @@ is-prop-type-Π-Prop' :
 is-prop-type-Π-Prop' A P = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 
 Π-Prop' : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-pr1 (Π-Prop' A P) = {x : A} → type-Prop (P x)
+pr1 (Π-Prop' A P) = type-Π-Prop' A P
 pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 ```
 

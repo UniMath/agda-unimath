@@ -257,7 +257,7 @@ module _
     mul-Normal-Subgroup G N (conjugation-Normal-Subgroup' G N y u) v
   pr2
     ( is-congruence-eq-rel-congruence-Normal-Subgroup
-      {x1 = x} {y1 = y} (u , p) (v , q)) =
+      {x} {_} {y} (u , p) (v , q)) =
     ( ( associative-mul-Group G x y
         ( inclusion-Normal-Subgroup G N
           ( mul-Normal-Subgroup G N
