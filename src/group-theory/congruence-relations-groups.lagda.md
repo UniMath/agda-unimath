@@ -6,6 +6,7 @@ title: Congruence relations on groups
 module group-theory.congruence-relations-groups where
 
 open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
@@ -105,20 +106,22 @@ module _
   conjugation-congruence-Group' x H =
     right-mul-congruence-Group (left-mul-congruence-Group (inv-Group G x) H) x
 
-  sim-congruence-Group' : (x y : type-Group G) → UU l2
-  sim-congruence-Group' x y =
-    sim-congruence-Group (mul-Group G x (inv-Group G y)) (unit-Group G)
+  sim-right-div-unit-congruence-Group : (x y : type-Group G) → UU l2
+  sim-right-div-unit-congruence-Group x y =
+    sim-congruence-Group (right-div-Group G x y) (unit-Group G)
 
-  map-sim-congruence-Group' :
-    {x y : type-Group G} → sim-congruence-Group x y → sim-congruence-Group' x y
-  map-sim-congruence-Group' {x} {y} H =
+  map-sim-right-div-unit-congruence-Group :
+    {x y : type-Group G} →
+    sim-congruence-Group x y → sim-right-div-unit-congruence-Group x y
+  map-sim-right-div-unit-congruence-Group {x} {y} H =
     concatenate-sim-eq-congruence-Group
       ( right-mul-congruence-Group H (inv-Group G y))
       ( right-inverse-law-mul-Group G y)
 
-  map-inv-sim-congruence-Group' :
-    {x y : type-Group G} → sim-congruence-Group' x y → sim-congruence-Group x y
-  map-inv-sim-congruence-Group' {x} {y} H =
+  map-inv-sim-right-div-unit-congruence-Group :
+    {x y : type-Group G} →
+    sim-right-div-unit-congruence-Group x y → sim-congruence-Group x y
+  map-inv-sim-right-div-unit-congruence-Group {x} {y} H =
     concatenate-eq-sim-eq-congruence-Group
       ( inv
         ( ( associative-mul-Group G x (inv-Group G y) y) ∙
@@ -126,6 +129,29 @@ module _
             ( right-unit-law-mul-Group G x))))
       ( right-mul-congruence-Group H y)
       ( left-unit-law-mul-Group G y)
+
+  sim-left-div-unit-congruence-Group : (x y : type-Group G) → UU l2
+  sim-left-div-unit-congruence-Group x y =
+    sim-congruence-Group (left-div-Group G x y) (unit-Group G)
+
+  map-sim-left-div-unit-congruence-Group :
+    {x y : type-Group G} →
+    sim-congruence-Group x y → sim-left-div-unit-congruence-Group x y
+  map-sim-left-div-unit-congruence-Group {x} {y} H =
+    symm-congruence-Group
+      ( concatenate-eq-sim-congruence-Group
+        ( inv (left-inverse-law-mul-Group G x))
+        ( left-mul-congruence-Group (inv-Group G x) H))
+
+  map-inv-sim-left-div-unit-congruence-Group :
+    {x y : type-Group G} →
+    sim-left-div-unit-congruence-Group x y → sim-congruence-Group x y
+  map-inv-sim-left-div-unit-congruence-Group {x} {y} H =
+    binary-tr
+      ( sim-congruence-Group)
+      ( right-unit-law-mul-Group G x)
+      ( issec-mul-inv-Group G x y)
+      ( symm-congruence-Group (left-mul-congruence-Group x H))
 
   inv-congruence-Group :
     {x y : type-Group G} →
