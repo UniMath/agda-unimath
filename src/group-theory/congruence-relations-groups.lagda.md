@@ -62,8 +62,8 @@ module _
   concatenate-sim-eq-congruence-Group H refl = H
 
   concatenate-eq-sim-eq-congruence-Group :
-    {x1 x2 y1 y2 : type-Group G} →
-    x1 ＝ x2 → sim-congruence-Group x2 y1 → y1 ＝ y2 → sim-congruence-Group x1 y2
+    {x1 x2 y1 y2 : type-Group G} → x1 ＝ x2 →
+    sim-congruence-Group x2 y1 → y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
   
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
@@ -85,14 +85,12 @@ module _
   left-mul-congruence-Group :
     (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
     sim-congruence-Group (mul-Group G x y) (mul-Group G x z)
-  left-mul-congruence-Group x H =
-    mul-congruence-Group refl-congruence-Group H
+  left-mul-congruence-Group x H = mul-congruence-Group refl-congruence-Group H
 
   right-mul-congruence-Group :
     {x y : type-Group G} → sim-congruence-Group x y → (z : type-Group G) →
     sim-congruence-Group (mul-Group G x z) (mul-Group G y z)
-  right-mul-congruence-Group H z =
-    mul-congruence-Group H refl-congruence-Group
+  right-mul-congruence-Group H z = mul-congruence-Group H refl-congruence-Group
 
   conjugation-congruence-Group :
     (x : type-Group G) {y z : type-Group G} → sim-congruence-Group y z →
@@ -136,7 +134,9 @@ module _
     concatenate-eq-sim-eq-congruence-Group
       ( inv
         ( ( associative-mul-Group G (inv-Group G x) y (inv-Group G y)) ∙
-          ( ( ap (mul-Group G (inv-Group G x)) (right-inverse-law-mul-Group G y)) ∙
+          ( ( ap
+              ( mul-Group G (inv-Group G x))
+              ( right-inverse-law-mul-Group G y)) ∙
             ( right-unit-law-mul-Group G (inv-Group G x)))))
       ( symm-congruence-Group
         ( right-mul-congruence-Group

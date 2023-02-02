@@ -3,8 +3,6 @@ title: Normal subgroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.normal-subgroups where
 
 open import foundation.binary-relations
@@ -188,7 +186,8 @@ module _
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
   where
 
-  has-same-elements-Normal-Subgroup : {l3 : Level} → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-Normal-Subgroup :
+    {l3 : Level} → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Normal-Subgroup K =
     has-same-elements-Subgroup G
       ( subgroup-Normal-Subgroup G N)
@@ -352,19 +351,30 @@ has-same-elements-normal-subgroup-congruence-Normal-Subgroup :
     ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
     ( N)
 pr1 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N
-  .(mul-Group G
-    ( unit-Group G)
-    ( inclusion-Subgroup G (subgroup-Normal-Subgroup G N) u)))
+  .( mul-Group G
+     ( unit-Group G)
+     ( inclusion-Subgroup G (subgroup-Normal-Subgroup G N) u)))
   ( u , refl) =
   tr
     ( is-in-Normal-Subgroup G N)
     ( inv (left-unit-law-mul-Group G (inclusion-Normal-Subgroup G N u)))
     ( is-in-normal-subgroup-inclusion-Normal-Subgroup G N u)
-pr1 (pr1 (pr2 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x) H)) =
+pr1
+  ( pr1
+    ( pr2
+      ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x)
+      ( H))) =
   x
-pr2 (pr1 (pr2 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x) H)) =
+pr2
+  ( pr1
+    ( pr2
+      ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x)
+      ( H))) =
   H
-pr2 (pr2 (has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x) H) =
+pr2
+  ( pr2
+    ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N x)
+    ( H)) =
   left-unit-law-mul-Group G x
 
 isretr-normal-subgroup-congruence-Normal-Subgroup :
@@ -375,4 +385,10 @@ isretr-normal-subgroup-congruence-Normal-Subgroup G N =
     ( normal-subgroup-congruence-Group G (congruence-Normal-Subgroup G N))
     ( N)
     ( has-same-elements-normal-subgroup-congruence-Normal-Subgroup G N)
+```
+
+#### The congruence relation of the normal subgroup obtained from a congruence relation `R` is `R` itself
+
+```agda
+
 ```
