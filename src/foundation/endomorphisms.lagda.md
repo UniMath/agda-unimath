@@ -19,7 +19,6 @@ open import foundation.universe-levels
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import structured-types.pointed-types
 open import structured-types.wild-monoids
 ```
 
@@ -27,31 +26,36 @@ open import structured-types.wild-monoids
 
 An endomorphism on a type `A` is a map `A → A`.
 
-## Definitions
+## Properties
 
-### Endomorphisms
+### Endomorphisms form a monoid
 
 ```agda
 endo-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
-pr1 (pr1 (endo-Wild-Monoid X)) = endo-Pointed-Type X
-pr1 (pr2 (pr1 (endo-Wild-Monoid X))) g f = g ∘ f
-pr1 (pr2 (pr2 (pr1 (endo-Wild-Monoid X)))) f = refl
-pr1 (pr2 (pr2 (pr2 (pr1 (endo-Wild-Monoid X))))) f = refl
-pr2 (pr2 (pr2 (pr2 (pr1 (endo-Wild-Monoid X))))) = refl
-pr1 (pr2 (endo-Wild-Monoid X)) h g f = refl
-pr1 (pr2 (pr2 (endo-Wild-Monoid X))) g f = refl
-pr1 (pr2 (pr2 (pr2 (endo-Wild-Monoid X)))) g f = refl
-pr1 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid X))))) g f = refl
-pr2 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid X))))) = star
+pr1 (pr1 (endo-Wild-Monoid A)) = endo-Pointed-Type A
+pr1 (pr2 (pr1 (endo-Wild-Monoid A))) g f = g ∘ f
+pr1 (pr2 (pr2 (pr1 (endo-Wild-Monoid A)))) f = refl
+pr1 (pr2 (pr2 (pr2 (pr1 (endo-Wild-Monoid A))))) f = refl
+pr2 (pr2 (pr2 (pr2 (pr1 (endo-Wild-Monoid A))))) = refl
+pr1 (pr2 (endo-Wild-Monoid A)) h g f = refl
+pr1 (pr2 (pr2 (endo-Wild-Monoid A))) g f = refl
+pr1 (pr2 (pr2 (pr2 (endo-Wild-Monoid A)))) g f = refl
+pr1 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) g f = refl
+pr2 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) = star
 
 endo-Semigroup : {l : Level} → Set l → Semigroup l
-pr1 (endo-Semigroup X) = endo-Set X
-pr1 (pr2 (endo-Semigroup X)) g f = g ∘ f
-pr2 (pr2 (endo-Semigroup X)) h g f = refl
+pr1 (endo-Semigroup A) = endo-Set A
+pr1 (pr2 (endo-Semigroup A)) g f = g ∘ f
+pr2 (pr2 (endo-Semigroup A)) h g f = refl
 
 endo-Monoid : {l : Level} → Set l → Monoid l
-pr1 (endo-Monoid X) = endo-Semigroup X
-pr1 (pr2 (endo-Monoid X)) = id
-pr1 (pr2 (pr2 (endo-Monoid X))) f = refl
-pr2 (pr2 (pr2 (endo-Monoid X))) f = refl
+pr1 (endo-Monoid A) = endo-Semigroup A
+pr1 (pr2 (endo-Monoid A)) = id
+pr1 (pr2 (pr2 (endo-Monoid A))) f = refl
+pr2 (pr2 (pr2 (endo-Monoid A))) f = refl
 ```
+
+## See also
+
+- For endomorphisms in a category see
+  [category-theory.endomorphisms-of-objects-categories](category-theory.endomorphisms-of-objects-categories.html)
