@@ -57,7 +57,7 @@ If the type `A` is locally 𝒰-small, then there is a map `φ_A : P_𝒰(A) →
 ```agda
 type-polynomial-endofunctor-UU :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-type-polynomial-endofunctor-UU l = slice-UU l
+type-polynomial-endofunctor-UU l = Slice l
 
 map-polynomial-endofunctor-UU :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
@@ -130,7 +130,7 @@ is-emb-map-type-duality
               by inv-equiv (equiv-fam-equiv-equiv-slice f g)
             ≃ ( (X , f) ＝ (Y , g))
               by
-              inv-equiv (extensionality-slice-UU (X , f) (Y , g)) ))
+              inv-equiv (extensionality-Slice (X , f) (Y , g)) ))
       ( is-contr-total-path (X , f)))
     ( λ Y → ap (map-type-duality H))
 
@@ -262,10 +262,10 @@ module _
 ### Type duality formulated using `l1 ⊔ l2`
 
 ```agda
-Fib : {l l1 : Level} (A : UU l1) → slice-UU l A → A → UU (l1 ⊔ l)
+Fib : {l l1 : Level} (A : UU l1) → Slice l A → A → UU (l1 ⊔ l)
 Fib A f = fib (pr2 f)
 
-Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → slice-UU (l1 ⊔ l) A
+Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → Slice (l1 ⊔ l) A
 pr1 (Pr1 A B) = Σ A B
 pr2 (Pr1 A B) = pr1
 
@@ -287,7 +287,7 @@ is-equiv-Fib l2 A =
   is-equiv-has-inverse (Pr1 A) (issec-Pr1 {l2 = l2}) (isretr-Pr1 {l2 = l2})
 
 equiv-Fib :
-  {l1 : Level} (l2 : Level) (A : UU l1) → slice-UU (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
+  {l1 : Level} (l2 : Level) (A : UU l1) → Slice (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
 pr1 (equiv-Fib l2 A) = Fib A
 pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
 
@@ -297,7 +297,7 @@ is-equiv-Pr1 {l1} l2 A =
   is-equiv-has-inverse (Fib A) (isretr-Pr1 {l2 = l2}) (issec-Pr1 {l2 = l2})
 
 equiv-Pr1 :
-  {l1 : Level} (l2 : Level) (A : UU l1) → (A → UU (l1 ⊔ l2)) ≃ slice-UU (l1 ⊔ l2) A
+  {l1 : Level} (l2 : Level) (A : UU l1) → (A → UU (l1 ⊔ l2)) ≃ Slice (l1 ⊔ l2) A
 pr1 (equiv-Pr1 l2 A) = Pr1 A
 pr2 (equiv-Pr1 l2 A) = is-equiv-Pr1 l2 A
 ```
@@ -305,14 +305,14 @@ pr2 (equiv-Pr1 l2 A) = is-equiv-Pr1 l2 A
 ### Structured type duality
 
 ```agda
-slice-UU-structure :
+Slice-structure :
   {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-slice-UU-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
+Slice-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
 
 equiv-Fib-structure :
   {l1 l3 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l3) (B : UU l1) →
-  slice-UU-structure (l1 ⊔ l) P B ≃ fam-structure P B
+  Slice-structure (l1 ⊔ l) P B ≃ fam-structure P B
 equiv-Fib-structure {l1} {l3} l P B =
   ( ( inv-distributive-Π-Σ) ∘e
     ( equiv-Σ
@@ -325,12 +325,12 @@ equiv-Fib-structure {l1} {l3} l P B =
 ### Subtype duality
 
 ```agda
-slice-UU-emb : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-slice-UU-emb l A = Σ (UU l) (λ X → X ↪ A)
+Slice-emb : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+Slice-emb l A = Σ (UU l) (λ X → X ↪ A)
 
 equiv-Fib-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
-  slice-UU-emb (l1 ⊔ l) A ≃ (A → Prop (l1 ⊔ l))
+  Slice-emb (l1 ⊔ l) A ≃ (A → Prop (l1 ⊔ l))
 equiv-Fib-Prop l A =
   ( equiv-Fib-structure l is-prop A) ∘e
   ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))

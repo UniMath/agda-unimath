@@ -40,8 +40,8 @@ The slice of a category over an object X is the category of morphisms into X. A 
 ### The objects of the slice category of types
 
 ```agda
-slice-UU : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
-slice-UU l = type-polynomial-endofunctor (UU l) (λ X → X)
+Slice : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
+Slice l = type-polynomial-endofunctor (UU l) (λ X → X)
 ```
 
 ### The morphisms of the slice category of types
@@ -292,26 +292,26 @@ abstract
                 ( x))))))
 ```
 
-### Characterization of the identity type of `slice-UU l A`
+### Characterization of the identity type of `Slice l A`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1}
   where
 
-  equiv-slice' : (f g : slice-UU l2 A) → UU (l1 ⊔ l2)
+  equiv-slice' : (f g : Slice l2 A) → UU (l1 ⊔ l2)
   equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
 
-  id-equiv-slice-UU : (f : slice-UU l2 A) → equiv-slice' f f
-  pr1 (id-equiv-slice-UU f) = id-equiv
-  pr2 (id-equiv-slice-UU f) = refl-htpy
+  id-equiv-Slice : (f : Slice l2 A) → equiv-slice' f f
+  pr1 (id-equiv-Slice f) = id-equiv
+  pr2 (id-equiv-Slice f) = refl-htpy
 
-  equiv-eq-slice-UU : (f g : slice-UU l2 A) → f ＝ g → equiv-slice' f g
-  equiv-eq-slice-UU f .f refl = id-equiv-slice-UU f
+  equiv-eq-Slice : (f g : Slice l2 A) → f ＝ g → equiv-slice' f g
+  equiv-eq-Slice f .f refl = id-equiv-Slice f
 
   abstract
     is-contr-total-equiv-slice' :
-      (f : slice-UU l2 A) → is-contr (Σ (slice-UU l2 A) (equiv-slice' f))
+      (f : Slice l2 A) → is-contr (Σ (Slice l2 A) (equiv-slice' f))
     is-contr-total-equiv-slice' (pair X f) =
       is-contr-total-Eq-structure
         ( λ Y g e → f ~ (g ∘ map-equiv e))
@@ -320,20 +320,20 @@ module _
         ( is-contr-total-htpy f)
 
   abstract
-    is-equiv-equiv-eq-slice-UU :
-      (f g : slice-UU l2 A) → is-equiv (equiv-eq-slice-UU f g)
-    is-equiv-equiv-eq-slice-UU f =
+    is-equiv-equiv-eq-Slice :
+      (f g : Slice l2 A) → is-equiv (equiv-eq-Slice f g)
+    is-equiv-equiv-eq-Slice f =
       fundamental-theorem-id
         ( is-contr-total-equiv-slice' f)
-        ( equiv-eq-slice-UU f)
+        ( equiv-eq-Slice f)
 
-  extensionality-slice-UU :
-    (f g : slice-UU l2 A) → (f ＝ g) ≃ equiv-slice' f g
-  pr1 (extensionality-slice-UU f g) = equiv-eq-slice-UU f g
-  pr2 (extensionality-slice-UU f g) = is-equiv-equiv-eq-slice-UU f g
+  extensionality-Slice :
+    (f g : Slice l2 A) → (f ＝ g) ≃ equiv-slice' f g
+  pr1 (extensionality-Slice f g) = equiv-eq-Slice f g
+  pr2 (extensionality-Slice f g) = is-equiv-equiv-eq-Slice f g
 
   eq-equiv-slice :
-    (f g : slice-UU l2 A) → equiv-slice' f g → f ＝ g
+    (f g : Slice l2 A) → equiv-slice' f g → f ＝ g
   eq-equiv-slice f g =
-    map-inv-is-equiv (is-equiv-equiv-eq-slice-UU f g)
+    map-inv-is-equiv (is-equiv-equiv-eq-Slice f g)
 ```
