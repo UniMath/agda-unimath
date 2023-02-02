@@ -237,7 +237,7 @@ module _
     map-equiv equiv-fiberwise-equiv-equiv-slice
 
   equiv-fam-equiv-equiv-slice :
-    equiv-slice f g ≃ ((x : X) → fib f x ≃ fib g x)
+    equiv-slice f g ≃ ((x : X) → fib f x ≃ fib g x) -- fam-equiv (fib f) (fib g)
   equiv-fam-equiv-equiv-slice =
     inv-distributive-Π-Σ ∘e equiv-fiberwise-equiv-equiv-slice
 ```
@@ -245,51 +245,51 @@ module _
 ### The type of slice morphisms into an embedding is a proposition
 
 ```agda
-abstract
-  is-prop-hom-slice :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
-    {B : UU l3} (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
-  is-prop-hom-slice {X = X} f i =
-    is-prop-is-equiv
-      ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))
-      ( is-prop-Π
-        ( λ x → is-prop-Π
-          ( λ p → is-prop-map-is-emb (is-emb-map-emb i) x)))
-```
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  where
 
-```agda
-abstract
-  is-equiv-hom-slice-emb :
-    {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-    (f : A ↪ X) (g : B ↪ X) (h : hom-slice (map-emb f) (map-emb g)) →
-    hom-slice (map-emb g) (map-emb f) →
-    is-equiv-hom-slice (map-emb f) (map-emb g) h
-  is-equiv-hom-slice-emb f g h i =
-    is-equiv-has-inverse
-      ( map-hom-slice (map-emb g) (map-emb f) i)
-      ( λ y →
-        is-injective-emb g
-        ( inv
-          ( ( triangle-hom-slice
-              ( map-emb g)
-              ( map-emb f)
-              ( i)
-              ( y)) ∙
-            ( triangle-hom-slice
-              ( map-emb f)
-              ( map-emb g)
-              ( h)
-              ( map-hom-slice (map-emb g) (map-emb f) i y)))))
-      ( λ x →
-        is-injective-emb f
-        ( inv
-          ( ( triangle-hom-slice (map-emb f) (map-emb g) h x) ∙
-            ( triangle-hom-slice (map-emb g) (map-emb f) i
-              ( map-hom-slice
+  abstract
+    is-prop-hom-slice :
+     (f : A → X) (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
+    is-prop-hom-slice f i =
+      is-prop-is-equiv
+        ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))
+        ( is-prop-Π
+          ( λ x → is-prop-Π
+            ( λ p → is-prop-map-is-emb (is-emb-map-emb i) x)))
+
+  abstract
+    is-equiv-hom-slice-emb :
+      (f : A ↪ X) (g : B ↪ X) (h : hom-slice (map-emb f) (map-emb g)) →
+      hom-slice (map-emb g) (map-emb f) →
+      is-equiv-hom-slice (map-emb f) (map-emb g) h
+    is-equiv-hom-slice-emb f g h i =
+      is-equiv-has-inverse
+        ( map-hom-slice (map-emb g) (map-emb f) i)
+        ( λ y →
+          is-injective-emb g
+          ( inv
+            ( ( triangle-hom-slice
+                ( map-emb g)
+                ( map-emb f)
+                ( i)
+                ( y)) ∙
+              ( triangle-hom-slice
                 ( map-emb f)
                 ( map-emb g)
                 ( h)
-                ( x))))))
+                ( map-hom-slice (map-emb g) (map-emb f) i y)))))
+        ( λ x →
+          is-injective-emb f
+          ( inv
+            ( ( triangle-hom-slice (map-emb f) (map-emb g) h x) ∙
+              ( triangle-hom-slice (map-emb g) (map-emb f) i
+                ( map-hom-slice
+                  ( map-emb f)
+                  ( map-emb g)
+                  ( h)
+                  ( x))))))
 ```
 
 ### Characterization of the identity type of `Slice l A`
@@ -303,8 +303,7 @@ module _
   equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
 
   id-equiv-Slice : (f : Slice l2 A) → equiv-slice' f f
-  pr1 (id-equiv-Slice f) = id-equiv
-  pr2 (id-equiv-Slice f) = refl-htpy
+  id-equiv-Slice f = id-equiv , refl-htpy
 
   equiv-eq-Slice : (f g : Slice l2 A) → f ＝ g → equiv-slice' f g
   equiv-eq-Slice f .f refl = id-equiv-Slice f
@@ -329,11 +328,18 @@ module _
 
   extensionality-Slice :
     (f g : Slice l2 A) → (f ＝ g) ≃ equiv-slice' f g
-  pr1 (extensionality-Slice f g) = equiv-eq-Slice f g
-  pr2 (extensionality-Slice f g) = is-equiv-equiv-eq-Slice f g
+  extensionality-Slice f g =
+    (equiv-eq-Slice f g) , (is-equiv-equiv-eq-Slice f g)
 
   eq-equiv-slice :
     (f g : Slice l2 A) → equiv-slice' f g → f ＝ g
   eq-equiv-slice f g =
     map-inv-is-equiv (is-equiv-equiv-eq-Slice f g)
 ```
+
+## See also
+
+- For the formally dual notion see
+  [foundation.coslice](foundation.coslice.html).
+- For slices in the context of category theory see
+  [category-theory.slice-precategories](category-theory.slice-precategories.html).
