@@ -45,7 +45,7 @@ module dependent where
 
   record fibered-system
     {l1 l2 : Level} (l3 l4 : Level) (A : system l1 l2) :
-    UU (l1 ⊔ l2 ⊔ (lsuc l3) ⊔ (lsuc l4))
+    UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
     where
     coinductive
     field

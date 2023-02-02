@@ -87,7 +87,7 @@ coherence-htpy-dep-cocone {S = S} f g c P
 htpy-dep-cocone :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  (s t : dep-cocone f g c P) → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l5)))
+  (s t : dep-cocone f g c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
 htpy-dep-cocone {S = S} f g c P h h' =
   Σ ( (pr1 h) ~ (pr1 h')) (λ K →
     Σ ( (pr1 (pr2 h)) ~ (pr1 (pr2 h')))
@@ -271,7 +271,7 @@ cone-dependent-pullback-property-pushout f g (pair i (pair j H)) P =
 dependent-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ (l4 ⊔ lsuc l))))
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 dependent-pullback-property-pushout l {S} {A} {B} f g {X}
   (pair i (pair j H)) =
   (P : X → UU l) →
@@ -547,7 +547,7 @@ precompose-lifts P f h h' a = h' (f a)
 
 TRIANGLE-PRECOMPOSE-LIFTS :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  ( P : X → UU l4) {f g : A → B} (H : f ~ g) → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  ( P : X → UU l4) {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
     ( (tr (fam-lifts A P) (eq-htpy (h ·l H))) ∘ (precompose-lifts P f h)) ~
@@ -602,7 +602,7 @@ compute-triangle-precompose-lifts' P f h k = eq-htpy-refl-htpy _
 
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
-  {f g : A → B} (H : f ~ g) → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
     ( triangle-precompose-lifts P H h) ~
@@ -678,7 +678,7 @@ coherence-square-map-inv-distributive-Π-Σ P f = refl-htpy
 HTPY-PRECOMPOSE-TOTAL-LIFTS :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) {f g : A → B} (H : f ~ g) →
-  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 HTPY-PRECOMPOSE-TOTAL-LIFTS P {f} {g} H =
   (precompose-total-lifts P f) ~ (precompose-total-lifts P g)
 
@@ -879,7 +879,7 @@ dependent-universal-property-universal-property-pushout f g c up-X =
 
 Fam-pushout :
   {l1 l2 l3 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ lsuc l)))
+  (f : S → A) (g : S → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
 Fam-pushout l {S} {A} {B} f g =
   Σ ( A → UU l)
     ( λ PA → Σ (B → UU l)

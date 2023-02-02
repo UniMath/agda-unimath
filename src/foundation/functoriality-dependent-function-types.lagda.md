@@ -204,7 +204,7 @@ HTPY-map-equiv-Π :
   { l1 l2 l3 l4 : Level}
   { A' : UU l1} (B' : A' → UU l2) {A : UU l3} (B : A → UU l4)
   ( e e' : A' ≃ A) (H : htpy-equiv e e') →
-  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 HTPY-map-equiv-Π {A' = A'} B' {A} B e e' H =
   ( f : (a' : A') → B' a' ≃ B (map-equiv e a')) →
   ( f' : (a' : A') → B' a' ≃ B (map-equiv e' a')) →

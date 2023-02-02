@@ -101,7 +101,7 @@ module _
   is-edge-on-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} (w : walk-Undirected-Graph G x y) →
     (p : unordered-pair-vertices-Undirected-Graph G) →
-    edge-Undirected-Graph G p → UU (lsuc lzero ⊔ (l1 ⊔ l2))
+    edge-Undirected-Graph G p → UU (lsuc lzero ⊔ l1 ⊔ l2)
   is-edge-on-walk-Undirected-Graph w p e =
     is-edge-on-walk-Undirected-Graph' w (pair p e)
 

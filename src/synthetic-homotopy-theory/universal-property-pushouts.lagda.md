@@ -107,7 +107,7 @@ pr2 (pr2 (cone-pullback-property-pushout f g {X} c Y)) =
 pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ (l2 ⊔ (l3 ⊔ (l4 ⊔ lsuc l))))
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 pullback-property-pushout l {S} {A} {B} f g {X} c =
   (Y : UU l) → is-pullback
     ( precomp f Y)

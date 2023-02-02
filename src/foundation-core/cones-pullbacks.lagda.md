@@ -51,7 +51,7 @@ module _
   (f : A → X) (g : B → X)
   where
    
-  cone : {l4 : Level} → UU l4 → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  cone : {l4 : Level} → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   cone C = Σ (C → A) (λ p → Σ (C → B) (λ q → coherence-square q p g f))
 
 module _
@@ -79,7 +79,7 @@ cone-family :
   (PX : X → UU l5) {PA : A → UU l6} {PB : B → UU l7}
   {f : A → X} {g : B → X} →
   (f' : (a : A) → PA a → PX (f a)) (g' : (b : B) → PB b → PX (g b)) →
-  cone f g C → (C → UU l8) → UU (l4 ⊔ (l5 ⊔ (l6 ⊔ (l7 ⊔ l8))))
+  cone f g C → (C → UU l8) → UU (l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8)
 cone-family {C = C} PX {f = f} {g} f' g' c PC =
   (x : C) →
   cone
@@ -106,7 +106,7 @@ module _
     ( coherence-square-cone f g c ∙h (htpy-left-whisk g L)) ~
     ( (htpy-left-whisk f K) ∙h coherence-square-cone f g c')
 
-  htpy-cone : cone f g C → cone f g C → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+  htpy-cone : cone f g C → cone f g C → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-cone c c' =
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f g c')
       ( λ K → Σ (horizontal-map-cone f g c ~ horizontal-map-cone f g c')
@@ -254,7 +254,7 @@ module _
   
   htpy-parallel-cone :
     {l4 : Level} {C : UU l4} →
-    cone f g C → cone f' g' C → UU (l1 ⊔ (l2 ⊔ (l3 ⊔ l4)))
+    cone f g C → cone f' g' C → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-parallel-cone c c' =
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f' g' c')
       ( fam-htpy-parallel-cone c c')
