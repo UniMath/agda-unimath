@@ -3,8 +3,6 @@ title: Group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.group-actions where
 
 open import foundation-core.function-extensionality

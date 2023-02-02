@@ -3,8 +3,6 @@ title: Higher groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.higher-groups where
 
 open import foundation.0-connected-types

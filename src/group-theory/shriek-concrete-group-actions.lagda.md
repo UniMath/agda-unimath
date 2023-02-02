@@ -3,8 +3,6 @@ title: Shriek of concrete group homomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.shriek-concrete-group-actions where
 
 open import foundation.cartesian-product-types

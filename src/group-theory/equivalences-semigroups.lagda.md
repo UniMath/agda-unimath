@@ -3,8 +3,6 @@ title: Equivalences between semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.equivalences-semigroups where
 
 open import foundation.contractible-types

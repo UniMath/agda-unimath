@@ -3,8 +3,6 @@ title: Monomorphisms in groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.monomorphisms-groups where
 
 open import category-theory.monomorphisms-large-precategories

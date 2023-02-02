@@ -3,8 +3,6 @@ title: Free concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.free-concrete-group-actions where
 
 open import foundation.propositions

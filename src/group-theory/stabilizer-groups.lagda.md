@@ -3,8 +3,6 @@ title: Stabilizer groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.stabilizer-groups where
 
 open import foundation.dependent-pair-types

@@ -3,8 +3,6 @@ title: Homomorphisms of higher group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-higher-group-actions where
 
 open import foundation.equality-dependent-function-types

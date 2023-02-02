@@ -3,8 +3,6 @@ title: The precategory of semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.precategory-of-semigroups where
 
 open import category-theory.large-precategories

@@ -3,8 +3,6 @@ title: Contravariant pushforwards of concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.contravariant-pushforward-concrete-group-actions where
 
 open import foundation.identity-types

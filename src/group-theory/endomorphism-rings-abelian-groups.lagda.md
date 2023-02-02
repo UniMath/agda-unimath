@@ -3,8 +3,6 @@ title: The endomorphism rings of abelian groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.endomorphism-rings-abelian-groups where
 
 open import foundation.dependent-pair-types

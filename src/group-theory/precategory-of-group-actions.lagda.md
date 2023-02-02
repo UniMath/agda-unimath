@@ -3,8 +3,6 @@ title: The precategory of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.precategory-of-group-actions where
 
 open import category-theory.large-precategories

@@ -3,8 +3,6 @@ title: Homomorphisms of abelian groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-abelian-groups where
 
 open import category-theory.large-precategories
