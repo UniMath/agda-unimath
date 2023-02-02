@@ -36,6 +36,7 @@ open import graph-theory.walks-directed-graphs
 
 open import trees.directed-trees
 open import trees.elementhood-relation-w-types
+open import trees.inequality-w-types
 open import trees.w-types
 ```
 
@@ -78,6 +79,22 @@ module _
   graph-element-𝕎 : 𝕎 A B → Directed-Graph (l1 ⊔ l2) (l1 ⊔ l2)
   pr1 (graph-element-𝕎 w) = node-graph-element-𝕎 w
   pr2 (graph-element-𝕎 w) = edge-graph-element-𝕎 w
+```
+
+### The external graph of an element of a W-type
+
+```agda
+  node-external-graph-element-𝕎 : 𝕎 A B → UU (l1 ⊔ l2)
+  node-external-graph-element-𝕎 w = Σ (𝕎 A B) (λ u → u ≤-𝕎 w)
+
+  edge-external-graph-element-𝕎 :
+    (w : 𝕎 A B) (x y : node-external-graph-element-𝕎 w) → UU (l1 ⊔ l2)
+  edge-external-graph-element-𝕎 w (x , H) (y , K) =
+    Σ (x ∈-𝕎 y) (λ e → transitive-leq-𝕎 (leq-∈-𝕎 e) K ＝ H)
+
+  external-graph-element-𝕎 : 𝕎 A B → Directed-Graph (l1 ⊔ l2) (l1 ⊔ l2)
+  pr1 (external-graph-element-𝕎 w) = node-external-graph-element-𝕎 w
+  pr2 (external-graph-element-𝕎 w) = edge-external-graph-element-𝕎 w
 ```
 
 ## Properties
@@ -523,3 +540,5 @@ module _
   pr1 (pr2 (directed-tree-element-𝕎 w)) = root-𝕎
   pr2 (pr2 (directed-tree-element-𝕎 w)) = is-tree-graph-element-𝕎 w
 ```
+
+### The external graph of an element of a W-type is equivalent to the underlying graph
