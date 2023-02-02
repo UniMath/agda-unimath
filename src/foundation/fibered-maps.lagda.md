@@ -41,7 +41,7 @@ module _
   where
 
   hom-over-morphism :
-    (i : X → Y) (f : A → X) (g : B → Y) → UU (l1 ⊔ (l2 ⊔ l4))
+    (i : X → Y) (f : A → X) (g : B → Y) → UU (l1 ⊔ l2 ⊔ l4)
   hom-over-morphism i f g = hom-slice (i ∘ f) g
 
   fiberwise-hom-hom-over-morphism :
