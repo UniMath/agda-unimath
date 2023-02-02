@@ -36,8 +36,7 @@ Consider a diagram of the form
        i
 ```
 
-A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square commutes (`(i ∘ f) ~ (g ∘ h)`).
-
+A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the square `(i ∘ f) ~ (g ∘ h)` commutes.
 
 ## Definition
 
@@ -183,7 +182,7 @@ _∙fm_ {i = i} {j} {k} {f} {g} {f'} {g'} I J =
   coherence-square-comp-vertical i f g j f' g' k I J
 ```
 
-### The truncation level of the type of fibered maps is determined by the codomains
+### The truncation level of the type of fibered maps is determined by the codomain
 
 ```agda
 module _
