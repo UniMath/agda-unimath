@@ -6,6 +6,7 @@ title: Congruence relations on groups
 module group-theory.congruence-relations-groups where
 
 open import foundation.binary-relations
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -145,3 +146,54 @@ module _
       ( ( ap (mul-Group' G (inv-Group G y)) (left-inverse-law-mul-Group G x)) ∙
         ( left-unit-law-mul-Group G (inv-Group G y)))
 ```
+
+## Properties
+
+### Characterizing equality of congruence relations on groups
+
+```agda
+relate-same-elements-congruence-Group :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  congruence-Group l2 G → congruence-Group l3 G → UU (l1 ⊔ l2 ⊔ l3)
+relate-same-elements-congruence-Group G =
+  relate-same-elements-congruence-Semigroup (semigroup-Group G)
+
+refl-relate-same-elements-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
+  relate-same-elements-congruence-Group G R R
+refl-relate-same-elements-congruence-Group G =
+  refl-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+
+is-contr-total-relate-same-elements-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
+  is-contr
+    ( Σ ( congruence-Group l2 G)
+        ( relate-same-elements-congruence-Group G R))
+is-contr-total-relate-same-elements-congruence-Group G =
+  is-contr-total-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+
+relate-same-elements-eq-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  R ＝ S → relate-same-elements-congruence-Group G R S
+relate-same-elements-eq-congruence-Group G =
+  relate-same-elements-eq-congruence-Semigroup (semigroup-Group G)
+
+is-equiv-relate-same-elements-eq-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  is-equiv (relate-same-elements-eq-congruence-Group G R S)
+is-equiv-relate-same-elements-eq-congruence-Group G =
+  is-equiv-relate-same-elements-eq-congruence-Semigroup (semigroup-Group G)
+
+extensionality-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  (R ＝ S) ≃ relate-same-elements-congruence-Group G R S
+extensionality-congruence-Group G =
+  extensionality-congruence-Semigroup (semigroup-Group G)
+
+eq-relate-same-elements-congruence-Group :
+  {l1 l2 : Level} (G : Group l1) (R S : congruence-Group l2 G) →
+  relate-same-elements-congruence-Group G R S → R ＝ S
+eq-relate-same-elements-congruence-Group G =
+  eq-relate-same-elements-congruence-Semigroup (semigroup-Group G)
+```
+
