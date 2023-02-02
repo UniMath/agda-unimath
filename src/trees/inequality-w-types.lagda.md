@@ -32,9 +32,9 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  data _le-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
-    le-∈-𝕎 : {y : 𝕎 A B} → x ∈-𝕎 y → x le-𝕎 y
-    propagate-le-𝕎 : {y z : 𝕎 A B} → y ∈-𝕎 z → x le-𝕎 y → x le-𝕎 z
+  data _<-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
+    le-∈-𝕎 : {y : 𝕎 A B} → x ∈-𝕎 y → x <-𝕎 y
+    propagate-le-𝕎 : {y z : 𝕎 A B} → y ∈-𝕎 z → x <-𝕎 y → x <-𝕎 z
 ```
 
 ### Inequality on W-types
@@ -44,9 +44,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  data _leq-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
-    refl-leq-𝕎 : x leq-𝕎 x
-    propagate-leq-𝕎 : {y z : 𝕎 A B} → y ∈-𝕎 z → x leq-𝕎 y → x leq-𝕎 z
+  data _≤-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
+    refl-leq-𝕎 : x ≤-𝕎 x
+    propagate-leq-𝕎 : {y z : 𝕎 A B} → y ∈-𝕎 z → x ≤-𝕎 y → x ≤-𝕎 z
+
+  leq-∈-𝕎 : {x y : 𝕎 A B} → x ∈-𝕎 y → x ≤-𝕎 y
+  leq-∈-𝕎 H = propagate-leq-𝕎 H refl-leq-𝕎
 ```
 
 ### Paths in W-types
@@ -76,7 +79,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  transitive-le-𝕎 : {x y z : 𝕎 A B} → y le-𝕎 z → x le-𝕎 y → x le-𝕎 z
+  transitive-le-𝕎 : {x y z : 𝕎 A B} → y <-𝕎 z → x <-𝕎 y → x <-𝕎 z
   transitive-le-𝕎 {x = x} {y} {z} (le-∈-𝕎 H) K =
     propagate-le-𝕎 H K
   transitive-le-𝕎 {x = x} {y} {z} (propagate-le-𝕎 L H) K =
@@ -91,7 +94,7 @@ module _
   where
 
   irreflexive-le-𝕎 :
-    {x : 𝕎 A B} → ¬ (x le-𝕎 x)
+    {x : 𝕎 A B} → ¬ (x <-𝕎 x)
   irreflexive-le-𝕎 {x = x} (le-∈-𝕎 H) = irreflexive-∈-𝕎 x H
   irreflexive-le-𝕎 {x = tree-𝕎 x α} (propagate-le-𝕎 (pair b refl) H) =
     irreflexive-le-𝕎 {x = α b} (transitive-le-𝕎 H (le-∈-𝕎 (pair b refl)))
@@ -105,6 +108,20 @@ module _
   where
 
   asymmetric-le-𝕎 :
-    {x y : 𝕎 A B} → x le-𝕎 y → y le-𝕎 x → empty
+    {x y : 𝕎 A B} → x <-𝕎 y → y <-𝕎 x → empty
   asymmetric-le-𝕎 H K = irreflexive-le-𝕎 (transitive-le-𝕎 H K)
+```
+
+### Transitivity of ≤-𝕎
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  transitive-leq-𝕎 :
+    {x y z : 𝕎 A B} → x ≤-𝕎 y → y ≤-𝕎 z → x ≤-𝕎 z
+  transitive-leq-𝕎 H refl-leq-𝕎 = H
+  transitive-leq-𝕎 H (propagate-leq-𝕎 e K) =
+    propagate-leq-𝕎 e (transitive-leq-𝕎 H K)
 ```
