@@ -55,9 +55,9 @@ module _
   where
 
   is-injective-right-factor :
-    {g : B → C} {h : A → B} →
+    (g : B → C) (h : A → B) →
     is-injective (g ∘ h) → is-injective h
-  is-injective-right-factor {g} is-inj-gh p = is-inj-gh (ap g p)
+  is-injective-right-factor g h is-inj-gh p = is-inj-gh (ap g p)
 
   is-injective-right-factor-htpy :
     (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) →
@@ -79,7 +79,7 @@ module _
   is-injective-comp is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
 
   is-injective-comp-htpy :
-    (f : A → C) (g : B → C) (h : A → B) (H : (a : A) → f a ＝ g (h a)) →
+    (f : A → C) (g : B → C) (h : A → B) → f ~ g ∘ h →
     is-injective h → is-injective g → is-injective f
   is-injective-comp-htpy f g h H is-inj-h is-inj-g {x} {x'} p =
     is-inj-h (is-inj-g ((inv (H x)) ∙ (p ∙ (H x'))))
