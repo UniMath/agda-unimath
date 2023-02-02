@@ -3,8 +3,6 @@ title: The substitution functor of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.substitution-functor-group-actions where
 
 open import category-theory.functors-large-precategories

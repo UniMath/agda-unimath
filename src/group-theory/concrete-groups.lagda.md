@@ -3,8 +3,6 @@ title: Concrete groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.concrete-groups where
 
 open import foundation.0-connected-types

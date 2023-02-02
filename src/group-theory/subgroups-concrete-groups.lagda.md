@@ -3,8 +3,6 @@ title: Subgroups of concrete groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.subgroups-concrete-groups where
 
 open import foundation.0-connected-types

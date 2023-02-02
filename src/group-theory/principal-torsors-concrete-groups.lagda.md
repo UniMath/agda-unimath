@@ -3,8 +3,6 @@ title: Principal torsors of concrete groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.principal-torsors-concrete-groups where
 
 open import foundation.universe-levels

@@ -3,8 +3,6 @@ title: Cartesian products of semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.cartesian-products-semigroups where
 
 open import foundation.dependent-pair-types

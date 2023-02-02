@@ -3,8 +3,6 @@ title: Normal subgroups of concrete groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.normal-subgroups-concrete-groups where
 
 open import foundation.universe-levels

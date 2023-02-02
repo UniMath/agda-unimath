@@ -3,8 +3,6 @@ title: Monomorphisms of concrete groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.monomorphisms-concrete-groups where
 
 open import foundation.dependent-pair-types

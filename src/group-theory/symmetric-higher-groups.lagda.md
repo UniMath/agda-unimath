@@ -3,8 +3,6 @@ title: Symmetric higher groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.symmetric-higher-groups where
 
 open import foundation.0-connected-types

@@ -3,8 +3,6 @@ title: Embeddings of groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.embeddings-groups where
 
 open import foundation.dependent-pair-types

@@ -3,8 +3,6 @@ title: Concrete automorphism groups on sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.loop-groups-sets where
 
 open import foundation.dependent-pair-types

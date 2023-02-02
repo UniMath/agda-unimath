@@ -3,8 +3,6 @@ title: The precategory of orbits of a monoid action
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.orbits-monoid-actions where
 
 open import category-theory.precategories

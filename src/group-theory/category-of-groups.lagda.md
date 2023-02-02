@@ -3,8 +3,6 @@ title: The category of groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.category-of-groups where
 
 open import category-theory.large-categories

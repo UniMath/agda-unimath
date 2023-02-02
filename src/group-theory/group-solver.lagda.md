@@ -3,8 +3,6 @@ title: Group solver
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.group-solver where
 
 open import foundation.dependent-pair-types

@@ -648,6 +648,7 @@ open import group-theory.precategory-of-semigroups
 open import group-theory.principal-group-actions
 open import group-theory.principal-torsors-concrete-groups
 open import group-theory.products-of-tuples-of-elements-commutative-monoids
+open import group-theory.quotient-groups
 open import group-theory.quotient-groups-concrete-groups
 open import group-theory.representations-monoids
 open import group-theory.semigroups

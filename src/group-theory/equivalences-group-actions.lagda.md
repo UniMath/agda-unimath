@@ -3,8 +3,6 @@ title: Equivalences of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.equivalences-group-actions where
 
 open import foundation.commuting-squares

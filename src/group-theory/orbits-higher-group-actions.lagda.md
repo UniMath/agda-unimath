@@ -3,8 +3,6 @@ title: Orbits of higher group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.orbits-higher-group-actions where
 
 open import foundation.dependent-pair-types
