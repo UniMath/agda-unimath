@@ -14,6 +14,7 @@ open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -148,3 +149,19 @@ module _
       map-inv-is-equiv (is-equiv-htpy-eq-reflecting-map-Eq-Rel g)
 ```
 
+### Composition of reflecting maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B) {C : UU l5}
+  where
+
+  comp-reflecting-map-Eq-Rel :
+    reflecting-map-Eq-Rel S C → (f : A → B) →
+    ({x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (f x) (f y)) →
+    reflecting-map-Eq-Rel R C
+  pr1 (comp-reflecting-map-Eq-Rel g f H) = map-reflecting-map-Eq-Rel S g ∘ f
+  pr2 (comp-reflecting-map-Eq-Rel g f H) {x} {y} r =
+    reflects-map-reflecting-map-Eq-Rel S g (H r)
+```

@@ -3,8 +3,6 @@ title: Functoriality of set quotients
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-set-quotients where
 
 open import foundation.commuting-squares
@@ -24,7 +22,10 @@ open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
 open import foundation.sets
+open import foundation.surjective-maps
+open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
@@ -40,41 +41,43 @@ Set quotients act functorially on types equipped with equivalence relations.
 
 ## Definition
 
+### Maps between types satisfying the universal property of set quotients
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
   {B : UU l4} (S : Eq-Rel l5 B)
-  (B/S : Set l6) (g : reflecting-map-Eq-Rel S (type-Set B/S))
+  (QS : Set l6) (g : reflecting-map-Eq-Rel S (type-Set QS))
   where
 
   unique-map-is-set-quotient :
-    ({l : Level} → is-set-quotient l R A/R f) →
-    ({l : Level} → is-set-quotient l S B/S g) →
+    ({l : Level} → is-set-quotient l R QR f) →
+    ({l : Level} → is-set-quotient l S QS g) →
     (h : A → B) → ({x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (h x) (h y)) →
     is-contr
-      ( Σ ( type-Set A/R → type-Set B/S)
+      ( Σ ( type-Set QR → type-Set QS)
           ( coherence-square h
             ( map-reflecting-map-Eq-Rel R f)
             ( map-reflecting-map-Eq-Rel S g)))
   unique-map-is-set-quotient Uf Ug h Hh =
-    universal-property-set-quotient-is-set-quotient R A/R f Uf B/S
+    universal-property-set-quotient-is-set-quotient R QR f Uf QS
       ( pair
         ( map-reflecting-map-Eq-Rel S g ∘ h)
         ( λ r → reflects-map-reflecting-map-Eq-Rel S g (Hh r)))
 
   map-is-set-quotient :
-    ({l : Level} → is-set-quotient l R A/R f) →
-    ({l : Level} → is-set-quotient l S B/S g) →
+    ({l : Level} → is-set-quotient l R QR f) →
+    ({l : Level} → is-set-quotient l S QS g) →
     (h : A → B) → ({x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (h x) (h y)) →
-    type-Set A/R → type-Set B/S
+    type-Set QR → type-Set QS
   map-is-set-quotient Uf Ug h H =
     pr1 (center (unique-map-is-set-quotient Uf Ug h H))
 
   coherence-square-map-is-set-quotient :
-    (Uf : {l : Level} → is-set-quotient l R A/R f) →
-    (Ug : {l : Level} → is-set-quotient l S B/S g) →
+    (Uf : {l : Level} → is-set-quotient l R QR f) →
+    (Ug : {l : Level} → is-set-quotient l S QS g) →
     (h : A → B)
     (H : {x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (h x) (h y)) →
     coherence-square h
@@ -85,6 +88,67 @@ module _
     pr2 (center (unique-map-is-set-quotient Uf Ug h H))
 ```
 
+### Functoriality of the set quotient
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B)
+  where
+
+  unique-map-set-quotient :
+    (h : A → B) → ({x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (h x) (h y)) →
+    is-contr
+      ( Σ ( set-quotient R → set-quotient S)
+          ( coherence-square h (quotient-map R) (quotient-map S)))
+  unique-map-set-quotient =
+    unique-map-is-set-quotient
+      ( R)
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-set-quotient R)
+      ( is-set-quotient-set-quotient S)
+
+  map-set-quotient :
+    (h : A → B) → ({x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (h x) (h y)) →
+    set-quotient R → set-quotient S
+  map-set-quotient =
+    map-is-set-quotient
+      ( R)
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-set-quotient R)
+      ( is-set-quotient-set-quotient S)
+
+  coherence-square-map-set-quotient :
+    (h : A → B)
+    (H : {x y : A} → sim-Eq-Rel R x y → sim-Eq-Rel S (h x) (h y)) →
+    coherence-square h
+      ( quotient-map R)
+      ( quotient-map S)
+      ( map-set-quotient h H)
+  coherence-square-map-set-quotient =
+    coherence-square-map-is-set-quotient
+      ( R)
+      ( quotient-Set R)
+      ( reflecting-map-quotient-map R)
+      ( S)
+      ( quotient-Set S)
+      ( reflecting-map-quotient-map S)
+      ( is-set-quotient-set-quotient R)
+      ( is-set-quotient-set-quotient S)
+```
+
+### Binary functoriality of types that satisfy the universal property of set quotients
+
+### Binary functoriality of set quotients
+
 ## Properties
 
 ### Functoriality of set quotients preserves equivalences
@@ -93,165 +157,54 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
   {B : UU l4} (S : Eq-Rel l5 B)
-  (B/S : Set l6) (g : reflecting-map-Eq-Rel S (type-Set B/S))
+  (QS : Set l6) (g : reflecting-map-Eq-Rel S (type-Set QS))
   where
 
   unique-equiv-is-set-quotient :
-    ({l : Level} → is-set-quotient l R A/R f) →
-    ({l : Level} → is-set-quotient l S B/S g) →
+    ({l : Level} → is-set-quotient l R QR f) →
+    ({l : Level} → is-set-quotient l S QS g) →
     (h : A ≃ B) →
-    ( {x y : A} → sim-Eq-Rel R x y ↔
-      sim-Eq-Rel S (map-equiv h x) (map-equiv h y)) →
+    ( {x y : A} →
+      sim-Eq-Rel R x y ↔ sim-Eq-Rel S (map-equiv h x) (map-equiv h y)) →
     is-contr
-      ( Σ ( type-Set A/R ≃ type-Set B/S)
+      ( Σ ( type-Set QR ≃ type-Set QS)
           ( λ h' →
             coherence-square
               ( map-equiv h)
               ( map-reflecting-map-Eq-Rel R f)
               ( map-reflecting-map-Eq-Rel S g)
               ( map-equiv h')))
-  pr1 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh))) =
-    map-is-set-quotient R A/R f S B/S g Uf Ug (map-equiv h) (pr1 Hh)
-  pr2 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh))) =
-    is-equiv-has-inverse
-      ( inv-h')
-      ( λ x →
-        ap
-          ( λ c → pr1 c x)
-          { x =
-            pair
-              ( ( pr1 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh)))) ∘
-                ( inv-h'))
-              ( tr
-                ( λ e →
-                  coherence-square
-                    ( map-equiv e)
-                    ( map-reflecting-map-Eq-Rel S g)
-                    ( map-reflecting-map-Eq-Rel S g)
-                    ( ( pr1
-                        ( pr1
-                          ( pr1 (unique-equiv-is-set-quotient Uf Ug h Hh)))) ∘
-                      ( inv-h')))
-                ( right-inverse-law-equiv h)
-                ( coherence-square-comp-horizontal
-                  ( map-inv-equiv h)
-                  ( map-equiv h)
-                  ( map-reflecting-map-Eq-Rel S g)
-                  ( map-reflecting-map-Eq-Rel R f)
-                  ( map-reflecting-map-Eq-Rel S g)
-                  ( inv-h')
-                  ( pr1 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh))))
-                  ( coherence-square-map-is-set-quotient S B/S g R A/R f Ug Uf
-                    ( map-inv-equiv h)
-                    ( λ {x} {y} P →
-                      pr2
-                        ( Hh { x = map-inv-equiv h x} { y = map-inv-equiv h y})
-                        ( tr
-                          ( λ e → sim-Eq-Rel S (map-equiv e x) (map-equiv e y))
-                          ( inv (right-inverse-law-equiv h))
-                          ( P))))
-                  ( coherence-square-map-is-set-quotient R A/R f S B/S g Uf Ug
-                    ( map-equiv h)
-                    ( pr1 Hh))))}
-          { y = pair id refl-htpy}
-          ( eq-is-contr
-            ( unique-map-is-set-quotient S B/S g S B/S g Ug Ug id id)))
-      ( λ x →
-        ap
-          ( λ c → pr1 c x)
-          { x =
-            pair
-              ( ( inv-h') ∘
-                ( pr1 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh)))))
-              ( tr
-                ( λ e →
-                  coherence-square
-                    ( map-equiv e)
-                    ( map-reflecting-map-Eq-Rel R f)
-                    ( map-reflecting-map-Eq-Rel R f)
-                    ( ( inv-h') ∘
-                      ( pr1
-                        ( pr1
-                          ( pr1 (unique-equiv-is-set-quotient Uf Ug h Hh))))))
-                ( left-inverse-law-equiv h)
-                ( coherence-square-comp-horizontal
-                  ( map-equiv h)
-                  ( map-inv-equiv h)
-                  ( map-reflecting-map-Eq-Rel R f)
-                  ( map-reflecting-map-Eq-Rel S g)
-                  ( map-reflecting-map-Eq-Rel R f)
-                  ( pr1 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh))))
-                  ( inv-h')
-                  ( coherence-square-map-is-set-quotient R A/R f S B/S g Uf Ug
-                    ( map-equiv h)
-                    ( pr1 Hh))
-                  ( coherence-square-map-is-set-quotient S B/S g R A/R f Ug Uf
-                    ( map-inv-equiv h)
-                    ( λ {x} {y} P →
-                      pr2
-                        ( Hh { x = map-inv-equiv h x} { y = map-inv-equiv h y})
-                        ( tr
-                          ( λ e → sim-Eq-Rel S (map-equiv e x) (map-equiv e y))
-                          ( inv (right-inverse-law-equiv h))
-                          ( P))))))}
-          { y = pair id refl-htpy}
-          ( eq-is-contr
-            ( unique-map-is-set-quotient R A/R f R A/R f Uf Uf id id)))
-    where
-    inv-h' : type-Set B/S → type-Set A/R
-    inv-h' =
-      map-is-set-quotient S B/S g R A/R f Ug Uf
-        ( map-inv-equiv h)
-        ( λ {x} {y} P →
-          pr2
-            ( Hh { x = map-inv-equiv h x} { y = map-inv-equiv h y})
-            ( tr
-              ( λ e → sim-Eq-Rel S (map-equiv e x) (map-equiv e y))
-              ( inv (right-inverse-law-equiv h))
-              ( P)))
-  pr2 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh)) =
-    coherence-square-map-is-set-quotient R A/R f S B/S g Uf Ug
-      ( map-equiv h)
-      ( pr1 Hh)
-  pr2 (unique-equiv-is-set-quotient Uf Ug h Hh) (pair e CS) =
-    eq-pair-Σ
-      ( eq-pair-Σ
-        ( ap pr1
-          { x =
-            pair
-              ( pr1 (pr1 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh))))
-              ( pr2 (pr1 (unique-equiv-is-set-quotient Uf Ug h Hh)))}
-          { y =
-            pair
-              ( pr1 e)
-              ( CS)}
-          ( eq-is-contr
-            ( unique-map-is-set-quotient R A/R f S B/S g Uf Ug
-              ( map-equiv h)
-              ( pr1 Hh))))
-        ( eq-is-prop (is-property-is-equiv (pr1 e))))
-      ( eq-is-prop
-        ( is-prop-Π
-          ( λ x →
-            is-set-type-Set B/S
-              ( (map-equiv e ∘ map-reflecting-map-Eq-Rel R f) x)
-              ( (map-reflecting-map-Eq-Rel S g ∘ map-equiv h) x))))
+  unique-equiv-is-set-quotient Uf Ug h H =
+    uniqueness-set-quotient R QR f Uf QS
+      ( comp-reflecting-map-Eq-Rel R S g (map-equiv h) (λ {x} {y} r → pr1 H r))
+      ( is-set-quotient-is-surjective-and-effective R QS
+        ( comp-reflecting-map-Eq-Rel R S g (map-equiv h) (λ {x} {y} r → pr1 H r))
+        ( ( is-surjective-comp
+            ( is-surjective-is-set-quotient S QS g Ug)
+            ( is-surjective-is-equiv (is-equiv-map-equiv h))) ,
+          ( λ x y →
+            ( inv-equiv
+              ( equiv-iff'
+                ( prop-Eq-Rel R x y)
+                ( prop-Eq-Rel S (map-equiv h x) (map-equiv h y))
+                ( H {x} {y}))) ∘e
+            ( is-effective-is-set-quotient S QS g Ug (map-equiv h x) (map-equiv h y)))))
 
   equiv-is-set-quotient :
-    ({l : Level} → is-set-quotient l R A/R f) →
-    ({l : Level} → is-set-quotient l S B/S g) →
+    ({l : Level} → is-set-quotient l R QR f) →
+    ({l : Level} → is-set-quotient l S QS g) →
     (h : A ≃ B) →
     ({x y : A} →
       sim-Eq-Rel R x y ↔ sim-Eq-Rel S (map-equiv h x) (map-equiv h y)) →
-    type-Set A/R ≃ type-Set B/S
+    type-Set QR ≃ type-Set QS
   equiv-is-set-quotient Uf Ug h H =
     pr1 (center (unique-equiv-is-set-quotient Uf Ug h H))
 
   coherence-square-equiv-is-set-quotient :
-    (Uf : {l : Level} → is-set-quotient l R A/R f) →
-    (Ug : {l : Level} → is-set-quotient l S B/S g) →
+    (Uf : {l : Level} → is-set-quotient l R QR f) →
+    (Ug : {l : Level} → is-set-quotient l S QS g) →
     (h : A ≃ B) →
     (H : {x y : A} →
       sim-Eq-Rel R x y ↔ sim-Eq-Rel S (map-equiv h x) (map-equiv h y)) →
@@ -269,37 +222,37 @@ module _
 module _
   {l1 l2 l3 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
+  (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
   where
 
   id-map-is-set-quotient : 
-    (Uf : {l : Level} → is-set-quotient l R A/R f) →
-    map-is-set-quotient R A/R f R A/R f Uf Uf id id ~ id
+    (Uf : {l : Level} → is-set-quotient l R QR f) →
+    map-is-set-quotient R QR f R QR f Uf Uf id id ~ id
   id-map-is-set-quotient Uf x =
     ap
       ( λ c → pr1 c x)
       { x =
         center
-          (unique-map-is-set-quotient R A/R f R A/R f Uf Uf id id)}
+          (unique-map-is-set-quotient R QR f R QR f Uf Uf id id)}
       { y = pair id refl-htpy}
       ( eq-is-contr
-        (unique-map-is-set-quotient R A/R f R A/R f Uf Uf id id))
+        (unique-map-is-set-quotient R QR f R QR f Uf Uf id id))
 
   id-equiv-is-set-quotient : 
-    (Uf : {l : Level} → is-set-quotient l R A/R f) →
+    (Uf : {l : Level} → is-set-quotient l R QR f) →
     htpy-equiv
-      ( equiv-is-set-quotient R A/R f R A/R f Uf Uf id-equiv (pair id id))
+      ( equiv-is-set-quotient R QR f R QR f Uf Uf id-equiv (pair id id))
       ( id-equiv)
   id-equiv-is-set-quotient Uf x =
     ap
       ( λ c → map-equiv (pr1 c) x)
       { x =
         center
-          ( unique-equiv-is-set-quotient R A/R f R A/R f Uf Uf id-equiv
+          ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf id-equiv
             ( pair id id))}
       { y = pair id-equiv refl-htpy}
       ( eq-is-contr
-        ( unique-equiv-is-set-quotient R A/R f R A/R f Uf Uf id-equiv
+        ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf id-equiv
           ( pair id id)))
 ```
 
@@ -307,12 +260,12 @@ module _
 module _
   {l1 l2 l3 : Level}
   {A : UU l1} (R : Eq-Rel l2 A)
-  (A/R : Set l3) (f : reflecting-map-Eq-Rel R (type-Set A/R))
-  (Uf : {l : Level} → is-set-quotient l R A/R f)
-  (eA : type-Set A/R ≃ Fin 2) (h : A → A)
+  (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
+  (Uf : {l : Level} → is-set-quotient l R QR f)
+  (eA : type-Set QR ≃ Fin 2) (h : A → A)
   (H : {x y : A} →
     sim-Eq-Rel R x y ↔ sim-Eq-Rel R (h x) (h y))
-  (h' : type-Set A/R → type-Set A/R)
+  (h' : type-Set QR → type-Set QR)
   (x : A)
   (P : h' (map-reflecting-map-Eq-Rel R f x) ＝
        map-reflecting-map-Eq-Rel R f (h x))
@@ -331,12 +284,7 @@ module _
         reflects-map-reflecting-map-Eq-Rel R f
           ( pr1 H
             ( map-equiv
-              ( is-effective-is-set-quotient R A/R
-                ( map-reflecting-map-Eq-Rel R f)
-                ( reflects-map-reflecting-map-Eq-Rel R f)
-                ( Uf)
-                ( x)
-                ( y))
+              ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
                 ( H' ( map-reflecting-map-Eq-Rel R f x)
                      ( map-reflecting-map-Eq-Rel R f y))
@@ -351,12 +299,7 @@ module _
             ( reflects-map-reflecting-map-Eq-Rel R f
               ( pr2 H
                 (map-equiv
-                  ( is-effective-is-set-quotient R A/R
-                    ( map-reflecting-map-Eq-Rel R f)
-                    ( reflects-map-reflecting-map-Eq-Rel R f)
-                    ( Uf)
-                    ( h x)
-                    ( h y))
+                  ( is-effective-is-set-quotient R QR f Uf (h x) (h y))
                   ( inv P ∙ is-injective-map-equiv eA (p ∙ inv r)))))) ∙
             ( q))))
   cases-coherence-square-eq-one-value-emb-is-set-quotient H' y
@@ -375,12 +318,7 @@ module _
             ( reflects-map-reflecting-map-Eq-Rel R f
               ( pr2 H
                 (map-equiv
-                  ( is-effective-is-set-quotient R A/R
-                    ( map-reflecting-map-Eq-Rel R f)
-                    ( reflects-map-reflecting-map-Eq-Rel R f)
-                    ( Uf)
-                    ( h x)
-                    ( h y))
+                  ( is-effective-is-set-quotient R QR f Uf (h x) (h y))
                   ( inv P ∙ is-injective-map-equiv eA (p ∙ inv r)))))) ∙
             ( q))))
   cases-coherence-square-eq-one-value-emb-is-set-quotient H' y
@@ -390,12 +328,7 @@ module _
         reflects-map-reflecting-map-Eq-Rel R f
           ( pr1 H
             ( map-equiv
-              ( is-effective-is-set-quotient R A/R
-                ( map-reflecting-map-Eq-Rel R f)
-                ( reflects-map-reflecting-map-Eq-Rel R f)
-                ( Uf)
-                ( x)
-                ( y))
+              ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
                 ( H' ( map-reflecting-map-Eq-Rel R f x)
                      ( map-reflecting-map-Eq-Rel R f y))
@@ -418,7 +351,7 @@ module _
 
   eq-equiv-eq-one-value-equiv-is-set-quotient :
     (P : is-equiv h) (Q : is-equiv h') →
-    pair h' Q ＝ equiv-is-set-quotient R A/R f R A/R f Uf Uf (pair h P) H
+    pair h' Q ＝ equiv-is-set-quotient R QR f R QR f Uf Uf (pair h P) H
   eq-equiv-eq-one-value-equiv-is-set-quotient P Q =
     ap pr1
       { x =
@@ -428,7 +361,7 @@ module _
             ( is-emb-is-equiv Q))}
       { y =
         center
-          ( unique-equiv-is-set-quotient R A/R f R A/R f Uf Uf (pair h P) H)}
+          ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf (pair h P) H)}
       ( eq-is-contr
-        ( unique-equiv-is-set-quotient R A/R f R A/R f Uf Uf (pair h P) H))
+        ( unique-equiv-is-set-quotient R QR f R QR f Uf Uf (pair h P) H))
 ```
