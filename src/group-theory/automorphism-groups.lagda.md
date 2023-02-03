@@ -3,8 +3,6 @@ title: Automorphism groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.automorphism-groups where
 
 open import foundation.0-connected-types
