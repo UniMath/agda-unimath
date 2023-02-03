@@ -190,18 +190,18 @@ module _
   {C : UU l3} {D : UU l4}
   {X : UU l5} {Y : UU l6}
   {i : A → B} {j : C → D} {k : X → Y}
-  {f : A → C} {g : B → D}
-  {f' : C → X} {g' : D → Y}
   where
 
   is-fibered-map-comp-vertical :
+    {f : A → C} {g : B → D}
+    {f' : C → X} {g' : D → Y} → 
     is-fibered-map f g j i → is-fibered-map f' g' k j →
     is-fibered-map (f' ∘ f) (g' ∘ g) k i
-  is-fibered-map-comp-vertical =
+  is-fibered-map-comp-vertical {f} {g} {f'} {g'} =
     coherence-square-comp-vertical i f g j f' g' k
 ```
 
-### The truncation level of the type of fibered maps is bounded by the truncation level of the codomains
+### The truncation level of the types of fibered maps is bounded by the truncation level of the codomains
 
 ```agda
 module _
