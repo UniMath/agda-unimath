@@ -124,39 +124,37 @@ module _
       ( issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
 
-  abstract
-    is-set-quotient-is-set-quotient-is-equiv :
-      is-equiv h → ({l : Level} → is-set-quotient l R B f) →
-      {l : Level} → is-set-quotient l R C g
-    is-set-quotient-is-set-quotient-is-equiv E Uf {l} X =
-      is-equiv-comp-htpy
-        ( precomp-Set-Quotient R C g X)
-        ( precomp-Set-Quotient R B f X)
-        ( precomp h (type-Set X))
-        ( λ k →
-          eq-htpy-reflecting-map-Eq-Rel R X
-            ( precomp-Set-Quotient R C g X k)
-            ( precomp-Set-Quotient R B f X (k ∘ h))
-            ( inv-htpy (k ·l H)))
-        ( is-equiv-precomp-is-equiv h E (type-Set X))
-        ( Uf X)
+  is-set-quotient-is-set-quotient-is-equiv :
+    is-equiv h → ({l : Level} → is-set-quotient l R B f) →
+    {l : Level} → is-set-quotient l R C g
+  is-set-quotient-is-set-quotient-is-equiv E Uf {l} X =
+    is-equiv-comp-htpy
+      ( precomp-Set-Quotient R C g X)
+      ( precomp-Set-Quotient R B f X)
+      ( precomp h (type-Set X))
+      ( λ k →
+        eq-htpy-reflecting-map-Eq-Rel R X
+          ( precomp-Set-Quotient R C g X k)
+          ( precomp-Set-Quotient R B f X (k ∘ h))
+          ( inv-htpy (k ·l H)))
+      ( is-equiv-precomp-is-equiv h E (type-Set X))
+      ( Uf X)
 
-  abstract
-    is-set-quotient-is-equiv-is-set-quotient :
-      ({l : Level} → is-set-quotient l R C g) → is-equiv h →
-      {l : Level} → is-set-quotient l R B f
-    is-set-quotient-is-equiv-is-set-quotient Ug E {l} X =
-      is-equiv-left-factor-htpy
-        ( precomp-Set-Quotient R C g X)
-        ( precomp-Set-Quotient R B f X)
-        ( precomp h (type-Set X))
-        ( λ k →
-          eq-htpy-reflecting-map-Eq-Rel R X
-            ( precomp-Set-Quotient R C g X k)
-            ( precomp-Set-Quotient R B f X (k ∘ h))
-            ( inv-htpy (k ·l H)))
-        ( Ug X)
-        ( is-equiv-precomp-is-equiv h E (type-Set X))
+  is-set-quotient-is-equiv-is-set-quotient :
+    ({l : Level} → is-set-quotient l R C g) → is-equiv h →
+    {l : Level} → is-set-quotient l R B f
+  is-set-quotient-is-equiv-is-set-quotient Ug E {l} X =
+    is-equiv-left-factor-htpy
+      ( precomp-Set-Quotient R C g X)
+      ( precomp-Set-Quotient R B f X)
+      ( precomp h (type-Set X))
+      ( λ k →
+        eq-htpy-reflecting-map-Eq-Rel R X
+          ( precomp-Set-Quotient R C g X k)
+          ( precomp-Set-Quotient R B f X (k ∘ h))
+          ( inv-htpy (k ·l H)))
+      ( Ug X)
+      ( is-equiv-precomp-is-equiv h E (type-Set X))
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
@@ -166,24 +164,23 @@ module _
   (Ug : {l : Level} → is-set-quotient l R C g)
   where
 
-  abstract
-    uniqueness-set-quotient :
-      is-contr
-        ( Σ ( type-Set B ≃ type-Set C)
-            ( λ e →
-              ( map-equiv e ∘ map-reflecting-map-Eq-Rel R f) ~
-              ( map-reflecting-map-Eq-Rel R g)))
-    uniqueness-set-quotient =
-      is-contr-total-Eq-subtype
-        ( universal-property-set-quotient-is-set-quotient R B f Uf C g)
-        ( is-property-is-equiv)
-        ( map-universal-property-set-quotient-is-set-quotient R B f Uf C g)
-        ( triangle-universal-property-set-quotient-is-set-quotient R B f Uf C g)
-        ( is-equiv-is-set-quotient-is-set-quotient R B f C g
-          ( triangle-universal-property-set-quotient-is-set-quotient
-            R B f Uf C g)
-          ( Uf)
-          ( Ug))
+  uniqueness-set-quotient :
+    is-contr
+      ( Σ ( type-Set B ≃ type-Set C)
+          ( λ e →
+            ( map-equiv e ∘ map-reflecting-map-Eq-Rel R f) ~
+            ( map-reflecting-map-Eq-Rel R g)))
+  uniqueness-set-quotient =
+    is-contr-total-Eq-subtype
+      ( universal-property-set-quotient-is-set-quotient R B f Uf C g)
+      ( is-property-is-equiv)
+      ( map-universal-property-set-quotient-is-set-quotient R B f Uf C g)
+      ( triangle-universal-property-set-quotient-is-set-quotient R B f Uf C g)
+      ( is-equiv-is-set-quotient-is-set-quotient R B f C g
+        ( triangle-universal-property-set-quotient-is-set-quotient
+          R B f Uf C g)
+        ( Uf)
+        ( Ug))
 
   equiv-uniqueness-set-quotient : type-Set B ≃ type-Set C
   equiv-uniqueness-set-quotient =
