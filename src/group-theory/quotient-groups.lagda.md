@@ -150,21 +150,21 @@ module _
   unit-quotient-Group : type-quotient-Group
   unit-quotient-Group = map-quotient-hom-Group (unit-Group G)
 
-  mul-quotient-Group : (x y : type-quotient-Group) → type-quotient-Group
-  mul-quotient-Group =
-    map-inv-is-equiv
-      ( is-set-quotient-set-quotient-Group
-        ( hom-Set set-quotient-Group set-quotient-Group))
-      ( ( λ x →
-          map-inv-is-equiv
-            ( is-set-quotient-set-quotient-Group set-quotient-Group)
-            ( ( λ y → map-quotient-hom-Group (mul-Group G x y)) ,
-              ( λ {y} {z} r →
-                apply-effectiveness-map-quotient-hom-Group'
-                  ( is-congruence-eq-rel-congruence-Normal-Subgroup G H
-                    ( refl-congruence-Normal-Subgroup G H)
-                    ( r))))) ,
-        ( λ {x} {y} r →
-          eq-htpy
-            ( λ z → {!!})))
-```
+--   mul-quotient-Group : (x y : type-quotient-Group) → type-quotient-Group
+--   mul-quotient-Group =
+--     map-inv-is-equiv
+--       ( is-set-quotient-set-quotient-Group
+--         ( hom-Set set-quotient-Group set-quotient-Group))
+--       ( ( λ x →
+--           map-inv-is-equiv
+--             ( is-set-quotient-set-quotient-Group set-quotient-Group)
+--             ( ( λ y → map-quotient-hom-Group (mul-Group G x y)) ,
+--               ( λ {y} {z} r →
+--                 apply-effectiveness-map-quotient-hom-Group'
+--                   ( is-congruence-eq-rel-congruence-Normal-Subgroup G H
+--                     ( refl-congruence-Normal-Subgroup G H)
+--                     ( r))))) ,
+--         ( λ {x} {y} r →
+--           eq-htpy
+--             ( λ z → {!!})))
+-- ```
