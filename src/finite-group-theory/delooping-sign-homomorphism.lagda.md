@@ -590,11 +590,7 @@ module _
             ( R (succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
             ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
-            ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
-            ( reflects-map-reflecting-map-Eq-Rel
-              ( R (succ-ℕ (succ-ℕ n))
-                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
-              ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n))))
+            ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
             ( is-set-quotient-equivalence-class
               ( R (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
@@ -680,11 +676,7 @@ module _
             ( R (succ-ℕ (succ-ℕ n))
               ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
             ( quotient-set-Fin (succ-ℕ (succ-ℕ n)))
-            ( quotient-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
-            ( reflects-map-reflecting-map-Eq-Rel
-              ( R (succ-ℕ (succ-ℕ n))
-                ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n))))
-              ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n))))
+            ( quotient-reflecting-map-quotient-Fin (succ-ℕ (succ-ℕ n)))
             ( is-set-quotient-equivalence-class
               ( R (succ-ℕ (succ-ℕ n))
                 ( raise-UU-Fin-Fin (succ-ℕ (succ-ℕ n)))))
