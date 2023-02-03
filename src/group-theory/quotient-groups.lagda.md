@@ -6,10 +6,17 @@ title: Quotient groups
 module group-theory.quotient-groups where
 
 open import foundation.dependent-pair-types
+open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
+open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
+open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -73,4 +80,91 @@ universal-property-quotient-Group :
   (Q : Group l3) (q : nullifying-hom-Group G Q H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
 universal-property-quotient-Group l G H Q q =
   (K : Group l) → is-equiv (precomp-nullifying-hom-Group G H Q q K)
+```
+
+### The quotient group
+
+#### The quotient map and the underlying set of the quotient group
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Normal-Subgroup l2 G)
+  where
+
+  set-quotient-Group : Set (l1 ⊔ l2)
+  set-quotient-Group = quotient-Set (eq-rel-congruence-Normal-Subgroup G H)
+
+  type-quotient-Group : UU (l1 ⊔ l2)
+  type-quotient-Group = set-quotient (eq-rel-congruence-Normal-Subgroup G H)
+
+  is-set-type-quotient-Group : is-set type-quotient-Group
+  is-set-type-quotient-Group =
+    is-set-set-quotient (eq-rel-congruence-Normal-Subgroup G H)
+
+  map-quotient-hom-Group : type-Group G → type-quotient-Group
+  map-quotient-hom-Group = quotient-map (eq-rel-congruence-Normal-Subgroup G H)
+
+  is-surjective-map-quotient-hom-Group : is-surjective map-quotient-hom-Group
+  is-surjective-map-quotient-hom-Group =
+    is-surjective-quotient-map (eq-rel-congruence-Normal-Subgroup G H)
+
+  is-effective-map-quotient-hom-Group :
+    is-effective (eq-rel-congruence-Normal-Subgroup G H) map-quotient-hom-Group
+  is-effective-map-quotient-hom-Group =
+    is-effective-quotient-map (eq-rel-congruence-Normal-Subgroup G H)
+
+  apply-effectiveness-map-quotient-hom-Group :
+    {x y : type-Group G} →
+    map-quotient-hom-Group x ＝ map-quotient-hom-Group y →
+    sim-congruence-Normal-Subgroup G H x y
+  apply-effectiveness-map-quotient-hom-Group =
+    apply-effectiveness-quotient-map (eq-rel-congruence-Normal-Subgroup G H)
+
+  apply-effectiveness-map-quotient-hom-Group' :
+    {x y : type-Group G} →
+    sim-congruence-Normal-Subgroup G H x y →
+    map-quotient-hom-Group x ＝ map-quotient-hom-Group y
+  apply-effectiveness-map-quotient-hom-Group' =
+    apply-effectiveness-quotient-map' (eq-rel-congruence-Normal-Subgroup G H)
+
+  reflecting-map-quotient-hom-Group :
+    reflecting-map-Eq-Rel
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( type-quotient-Group)
+  reflecting-map-quotient-hom-Group =
+    reflecting-map-quotient-map (eq-rel-congruence-Normal-Subgroup G H)
+
+  is-set-quotient-set-quotient-Group :
+    {l : Level} →
+    is-set-quotient l
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( set-quotient-Group)
+      ( reflecting-map-quotient-hom-Group)
+  is-set-quotient-set-quotient-Group =
+    is-set-quotient-set-quotient (eq-rel-congruence-Normal-Subgroup G H)
+```
+
+#### The group structure on the quotient group
+
+```agda
+  unit-quotient-Group : type-quotient-Group
+  unit-quotient-Group = map-quotient-hom-Group (unit-Group G)
+
+  mul-quotient-Group : (x y : type-quotient-Group) → type-quotient-Group
+  mul-quotient-Group =
+    map-inv-is-equiv
+      ( is-set-quotient-set-quotient-Group
+        ( hom-Set set-quotient-Group set-quotient-Group))
+      ( ( λ x →
+          map-inv-is-equiv
+            ( is-set-quotient-set-quotient-Group set-quotient-Group)
+            ( ( λ y → map-quotient-hom-Group (mul-Group G x y)) ,
+              ( λ {y} {z} r →
+                apply-effectiveness-map-quotient-hom-Group'
+                  ( is-congruence-eq-rel-congruence-Normal-Subgroup G H
+                    ( refl-congruence-Normal-Subgroup G H)
+                    ( r))))) ,
+        ( λ {x} {y} r →
+          eq-htpy
+            ( λ z → {!!})))
 ```

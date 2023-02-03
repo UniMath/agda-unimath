@@ -3,8 +3,6 @@ title: Functoriality of set quotients
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-set-quotients where
 
 open import foundation.commuting-squares
