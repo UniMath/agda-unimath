@@ -194,8 +194,8 @@ abstract
     is-surjective-and-effective-is-set-quotient
       ( mere-eq-Eq-Rel A)
       ( trunc-Set A)
-      ( unit-trunc-Set)
-      ( reflects-mere-eq (trunc-Set A) unit-trunc-Set)
+      ( unit-trunc-Set ,
+        reflects-mere-eq (trunc-Set A) unit-trunc-Set)
       ( λ {l} → is-set-quotient-trunc-Set A)
 
 abstract

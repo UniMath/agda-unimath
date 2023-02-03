@@ -204,7 +204,7 @@ module _
   is-set-quotient-set-quotient =
     is-set-quotient-is-surjective-and-effective R
       ( quotient-Set R)
-      ( quotient-map R)
+      ( reflecting-map-quotient-map R)
       ( is-surjective-and-effective-quotient-map R)
 ```
 
