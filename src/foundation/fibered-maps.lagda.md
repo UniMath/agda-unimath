@@ -49,17 +49,17 @@ module _
     (f : A → X) (g : B → Y) (i : X → Y) (h : A → B) → UU (l1 ⊔ l4)
   is-fibered-map f g i h = (i ∘ f) ~ (g ∘ h)
 
-  hom-over :
+  map-over :
     (f : A → X) (g : B → Y) (i : X → Y) → UU (l1 ⊔ l2 ⊔ l4)
-  hom-over f g i = Σ (A → B) (is-fibered-map f g i)
+  map-over f g i = Σ (A → B) (is-fibered-map f g i)
 
   fibered-map :
     (f : A → X) (g : B → Y) → UU (l1 ⊔ l3 ⊔ l2 ⊔ l4)
-  fibered-map f g = Σ (X → Y) (hom-over f g)
+  fibered-map f g = Σ (X → Y) (map-over f g)
 
-  fiberwise-hom-over :
+  fiberwise-map-over :
     (f : A → X) (g : B → Y) (i : X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  fiberwise-hom-over f g i = (x : X) → fib f x → fib g (i x)
+  fiberwise-map-over f g i = (x : X) → fib f x → fib g (i x)
 ```
 
 ## Properties
@@ -72,84 +72,84 @@ module _
   (f : A → X) (g : B → Y) (i : X → Y)
   where
 
-  fiberwise-hom-over-hom-over :
-    hom-over f g i → fiberwise-hom-over f g i
-  fiberwise-hom-over-hom-over (pair h H) .(f a) (pair a refl) =
+  fiberwise-map-over-map-over :
+    map-over f g i → fiberwise-map-over f g i
+  fiberwise-map-over-map-over (pair h H) .(f a) (pair a refl) =
     pair (h a) (inv (H a))
 
-  hom-over-fiberwise-hom-over :
-    fiberwise-hom-over f g i → hom-over f g i
-  pr1 (hom-over-fiberwise-hom-over α) a = pr1 (α (f a) (pair a refl))
-  pr2 (hom-over-fiberwise-hom-over α) a = inv (pr2 (α (f a) (pair a refl)))
+  map-over-fiberwise-map-over :
+    fiberwise-map-over f g i → map-over f g i
+  pr1 (map-over-fiberwise-map-over α) a = pr1 (α (f a) (pair a refl))
+  pr2 (map-over-fiberwise-map-over α) a = inv (pr2 (α (f a) (pair a refl)))
 
-  issec-hom-over-fiberwise-hom-over-eq-htpy :
-    (α : fiberwise-hom-over f g i) (x : X) →
-    ( fiberwise-hom-over-hom-over
-      ( hom-over-fiberwise-hom-over α) x) ~ (α x)
-  issec-hom-over-fiberwise-hom-over-eq-htpy α .(f a) (pair a refl) =
+  issec-map-over-fiberwise-map-over-eq-htpy :
+    (α : fiberwise-map-over f g i) (x : X) →
+    ( fiberwise-map-over-map-over
+      ( map-over-fiberwise-map-over α) x) ~ (α x)
+  issec-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
     eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
 
-  issec-hom-over-fiberwise-hom-over :
-    ( ( fiberwise-hom-over-hom-over) ∘
-      ( hom-over-fiberwise-hom-over)) ~ id
-  issec-hom-over-fiberwise-hom-over α =
+  issec-map-over-fiberwise-map-over :
+    ( ( fiberwise-map-over-map-over) ∘
+      ( map-over-fiberwise-map-over)) ~ id
+  issec-map-over-fiberwise-map-over α =
     eq-htpy
-      ( eq-htpy ∘ issec-hom-over-fiberwise-hom-over-eq-htpy α)
+      ( eq-htpy ∘ issec-map-over-fiberwise-map-over-eq-htpy α)
 
-  isretr-hom-over-fiberwise-hom-over :
-    ( ( hom-over-fiberwise-hom-over) ∘
-      ( fiberwise-hom-over-hom-over)) ~ id
-  isretr-hom-over-fiberwise-hom-over (pair h H) =
+  isretr-map-over-fiberwise-map-over :
+    ( ( map-over-fiberwise-map-over) ∘
+      ( fiberwise-map-over-map-over)) ~ id
+  isretr-map-over-fiberwise-map-over (pair h H) =
     eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
 
   abstract
-    is-equiv-fiberwise-hom-over-hom-over :
-      is-equiv (fiberwise-hom-over-hom-over)
-    is-equiv-fiberwise-hom-over-hom-over =
+    is-equiv-fiberwise-map-over-map-over :
+      is-equiv (fiberwise-map-over-map-over)
+    is-equiv-fiberwise-map-over-map-over =
       is-equiv-has-inverse
-        ( hom-over-fiberwise-hom-over)
-        ( issec-hom-over-fiberwise-hom-over)
-        ( isretr-hom-over-fiberwise-hom-over)
+        ( map-over-fiberwise-map-over)
+        ( issec-map-over-fiberwise-map-over)
+        ( isretr-map-over-fiberwise-map-over)
 
   abstract
-    is-equiv-hom-over-fiberwise-hom-over :
-      is-equiv (hom-over-fiberwise-hom-over)
-    is-equiv-hom-over-fiberwise-hom-over =
+    is-equiv-map-over-fiberwise-map-over :
+      is-equiv (map-over-fiberwise-map-over)
+    is-equiv-map-over-fiberwise-map-over =
       is-equiv-has-inverse
-        ( fiberwise-hom-over-hom-over)
-        ( isretr-hom-over-fiberwise-hom-over)
-        ( issec-hom-over-fiberwise-hom-over)
+        ( fiberwise-map-over-map-over)
+        ( isretr-map-over-fiberwise-map-over)
+        ( issec-map-over-fiberwise-map-over)
 
-  equiv-fiberwise-hom-over-hom-over :
-    hom-over f g i ≃ fiberwise-hom-over f g i 
-  equiv-fiberwise-hom-over-hom-over = 
+  equiv-fiberwise-map-over-map-over :
+    map-over f g i ≃ fiberwise-map-over f g i 
+  equiv-fiberwise-map-over-map-over = 
     pair
-      ( fiberwise-hom-over-hom-over)
-      ( is-equiv-fiberwise-hom-over-hom-over)
+      ( fiberwise-map-over-map-over)
+      ( is-equiv-fiberwise-map-over-map-over)
 
-  equiv-hom-over-fiberwise-hom-over :
-    fiberwise-hom-over f g i ≃ hom-over f g i
-  equiv-hom-over-fiberwise-hom-over = 
+  equiv-map-over-fiberwise-map-over :
+    fiberwise-map-over f g i ≃ map-over f g i
+  equiv-map-over-fiberwise-map-over = 
     pair
-      ( hom-over-fiberwise-hom-over)
-      ( is-equiv-hom-over-fiberwise-hom-over)
+      ( map-over-fiberwise-map-over)
+      ( is-equiv-map-over-fiberwise-map-over)
 
-  equiv-hom-over-fiberwise-hom :
-    fiberwise-hom (i ∘ f) g ≃ hom-over f g i
-  equiv-hom-over-fiberwise-hom =
+  equiv-map-over-fiberwise-hom :
+    fiberwise-hom (i ∘ f) g ≃ map-over f g i
+  equiv-map-over-fiberwise-hom =
     equiv-hom-slice-fiberwise-hom (i ∘ f) g
 
-  equiv-fiberwise-hom-over-fiberwise-hom : 
-    fiberwise-hom (i ∘ f) g ≃ fiberwise-hom-over f g i
-  equiv-fiberwise-hom-over-fiberwise-hom =
-    (equiv-fiberwise-hom-over-hom-over) ∘e (equiv-hom-over-fiberwise-hom)
+  equiv-fiberwise-map-over-fiberwise-hom : 
+    fiberwise-hom (i ∘ f) g ≃ fiberwise-map-over f g i
+  equiv-fiberwise-map-over-fiberwise-hom =
+    (equiv-fiberwise-map-over-map-over) ∘e (equiv-map-over-fiberwise-hom)
 
-  is-small-fiberwise-hom-over :
-    is-small (l1 ⊔ l2 ⊔ l4) (fiberwise-hom-over f g i)
-  is-small-fiberwise-hom-over =
+  is-small-fiberwise-map-over :
+    is-small (l1 ⊔ l2 ⊔ l4) (fiberwise-map-over f g i)
+  is-small-fiberwise-map-over =
     pair
-      ( hom-over f g i)
-      ( equiv-hom-over-fiberwise-hom-over)
+      ( map-over f g i)
+      ( equiv-map-over-fiberwise-map-over)
 ```
 
 ### Fibered maps compose horizontally
@@ -169,16 +169,16 @@ module _
   is-fibered-map-comp-horizontal {k} {l} {i} {j} =
     coherence-square-comp-horizontal i j f g h k l
 
-  hom-over-comp-horizontal :
+  map-over-comp-horizontal :
     {k : X → Y} {l : Y → Z} →
-    hom-over f g k → hom-over g h l → hom-over f h (l ∘ k)
-  hom-over-comp-horizontal {k} {l} (i , I) (j , J) =
+    map-over f g k → map-over g h l → map-over f h (l ∘ k)
+  map-over-comp-horizontal {k} {l} (i , I) (j , J) =
     j ∘ i , is-fibered-map-comp-horizontal {k} {l} I J
 
   fibered-map-comp-horizontal :
     fibered-map f g → fibered-map g h → fibered-map f h
   fibered-map-comp-horizontal (k , iI) (l , jJ) =
-    l ∘ k , hom-over-comp-horizontal {k} {l} iI jJ
+    l ∘ k , map-over-comp-horizontal {k} {l} iI jJ
 ```
 
 ### Fibered maps compose vertically
@@ -215,10 +215,10 @@ module _
   is-trunc-is-fibered-map k is-trunc-Y f g i h =
     is-trunc-Π k (λ x → is-trunc-Y (i (f x)) (g (h x)))
 
-  is-trunc-hom-over :
+  is-trunc-map-over :
     (k : 𝕋) → is-trunc (succ-𝕋 k) Y → is-trunc k B →
-    (f : A → X) (g : B → Y) (i : X → Y) → is-trunc k (hom-over f g i)
-  is-trunc-hom-over k is-trunc-Y is-trunc-B f g i =
+    (f : A → X) (g : B → Y) (i : X → Y) → is-trunc k (map-over f g i)
+  is-trunc-map-over k is-trunc-Y is-trunc-B f g i =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-B)
       ( is-trunc-is-fibered-map k is-trunc-Y f g i)
@@ -229,7 +229,7 @@ module _
   is-trunc-fibered-map k is-trunc-Y is-trunc-B f g =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-Y)
-      ( is-trunc-hom-over k (is-trunc-succ-is-trunc k is-trunc-Y) is-trunc-B f g)
+      ( is-trunc-map-over k (is-trunc-succ-is-trunc k is-trunc-Y) is-trunc-B f g)
 ```
 
 ### The transpose of a fibered map
@@ -244,17 +244,17 @@ module _
     is-fibered-map f g i h → is-fibered-map h i g f
   transpose-is-fibered-map f g i h = inv-htpy
 
-  transpose-hom-over :
+  transpose-map-over :
     (f : A → X) (g : B → Y) (i : X → Y)
-    ((h , H) : hom-over f g i) → hom-over h i g
-  transpose-hom-over f g i (h , H) =
+    ((h , H) : map-over f g i) → map-over h i g
+  transpose-map-over f g i (h , H) =
     f , transpose-is-fibered-map f g i h H
 
   transpose-fibered-map :
     (f : A → X) (g : B → Y)
     ((i , h , H) : fibered-map f g) → fibered-map h i
   transpose-fibered-map f g (i , hH) =
-    g , transpose-hom-over f g i hH
+    g , transpose-map-over f g i hH
 ```
 
 ## Examples
@@ -268,18 +268,18 @@ module _
   is-fibered-over-self : is-fibered-map id id h h
   is-fibered-over-self = refl-htpy
 
-  hom-over-self : hom-over id id h
-  hom-over-self = pair h is-fibered-over-self
+  map-over-self : map-over id id h
+  map-over-self = pair h is-fibered-over-self
 
   fibered-map-self : fibered-map id id
-  fibered-map-self = pair h hom-over-self
+  fibered-map-self = pair h map-over-self
 
   is-fibered-id : is-fibered-map h h id id
   is-fibered-id = refl-htpy
 
-  hom-over-id : hom-over h h id
-  hom-over-id = pair id is-fibered-id
+  map-over-id : map-over h h id
+  map-over-id = pair id is-fibered-id
 
   fibered-map-id : fibered-map h h
-  fibered-map-id = pair id hom-over-id
+  fibered-map-id = pair id map-over-id
 ```
