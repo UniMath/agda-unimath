@@ -86,21 +86,17 @@ module _
 
   issec-map-over-fiberwise-map-over-eq-htpy :
     (α : fiberwise-map-over f g i) (x : X) →
-    ( fiberwise-map-over-map-over
-      ( map-over-fiberwise-map-over α) x) ~ (α x)
+    ( fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x) ~ (α x)
   issec-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
     eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
 
   issec-map-over-fiberwise-map-over :
-    ( ( fiberwise-map-over-map-over) ∘
-      ( map-over-fiberwise-map-over)) ~ id
+    (fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over) ~ id
   issec-map-over-fiberwise-map-over α =
-    eq-htpy
-      ( eq-htpy ∘ issec-map-over-fiberwise-map-over-eq-htpy α)
+    eq-htpy (eq-htpy ∘ issec-map-over-fiberwise-map-over-eq-htpy α)
 
   isretr-map-over-fiberwise-map-over :
-    ( ( map-over-fiberwise-map-over) ∘
-      ( fiberwise-map-over-map-over)) ~ id
+    (map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over) ~ id
   isretr-map-over-fiberwise-map-over (pair h H) =
     eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
 
@@ -299,3 +295,4 @@ module _
   fibered-map-id : fibered-map h h
   fibered-map-id = pair id map-over-id
 ```
+ 

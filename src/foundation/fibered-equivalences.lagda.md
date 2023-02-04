@@ -10,21 +10,16 @@ open import foundation-core.cones-pullbacks
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.slice
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.universe-levels
 
 open import foundation.embeddings
-open import foundation.equational-reasoning
 open import foundation.equivalences
 open import foundation.fibered-maps
-open import foundation.functoriality-cartesian-product-types
 open import foundation.pullbacks
 ```
 
@@ -97,17 +92,33 @@ module _
   (f : A → X) (g : B → Y) (i : X → Y)
   where
 
+  map-Σ-is-equiv-equiv-over :
+    (equiv-over f g i) → Σ (map-over f g i) (is-equiv ∘ pr1)
+  map-Σ-is-equiv-equiv-over ((h , is-equiv-h) , H) = (h , H) , is-equiv-h
+
+  map-equiv-over-Σ-is-equiv :
+    Σ (map-over f g i) (is-equiv ∘ pr1) → (equiv-over f g i)
+  map-equiv-over-Σ-is-equiv ((h , H) , is-equiv-h) = (h , is-equiv-h) , H
+
+  is-equiv-map-Σ-is-equiv-equiv-over : is-equiv map-Σ-is-equiv-equiv-over
+  is-equiv-map-Σ-is-equiv-equiv-over =
+    is-equiv-has-inverse map-equiv-over-Σ-is-equiv refl-htpy refl-htpy
+
   equiv-Σ-is-equiv-equiv-over :
     (equiv-over f g i) ≃ Σ (map-over f g i) (is-equiv ∘ pr1)
-  equiv-Σ-is-equiv-equiv-over = equivalence-reasoning
-    Σ (A ≃ B) (is-map-over f g i ∘ pr1)
-      ≃ Σ (A → B) (λ h → is-equiv h × is-map-over f g i h)
-        by assoc-Σ (A → B) is-equiv (is-map-over f g i ∘ pr1)
-      ≃ Σ (A → B) (λ h → is-map-over f g i h × is-equiv h)
-        by equiv-tot (λ _ → commutative-prod)
-      ≃ Σ (Σ (A → B) (is-map-over f g i)) (is-equiv ∘ pr1)
-        by inv-assoc-Σ (A → B) (is-map-over f g i) (is-equiv ∘ pr1)
+  equiv-Σ-is-equiv-equiv-over =
+    pair map-Σ-is-equiv-equiv-over is-equiv-map-Σ-is-equiv-equiv-over
   
+  is-equiv-map-equiv-over-Σ-is-equiv : is-equiv map-equiv-over-Σ-is-equiv
+  is-equiv-map-equiv-over-Σ-is-equiv =
+    is-equiv-has-inverse map-Σ-is-equiv-equiv-over refl-htpy refl-htpy
+
+  equiv-equiv-over-Σ-is-equiv :
+    Σ (map-over f g i) (is-equiv ∘ pr1) ≃ (equiv-over f g i)
+  equiv-equiv-over-Σ-is-equiv =
+    pair map-equiv-over-Σ-is-equiv is-equiv-map-equiv-over-Σ-is-equiv
+
+
   emb-map-over-equiv-over : equiv-over f g i ↪ map-over f g i
   emb-map-over-equiv-over =
     comp-emb
@@ -117,6 +128,7 @@ module _
   map-emb-map-over-equiv-over : equiv-over f g i → map-over f g i
   map-emb-map-over-equiv-over = map-emb emb-map-over-equiv-over
 
+
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y)
@@ -124,6 +136,48 @@ module _
 
   is-fibered-equiv-fibered-map : fibered-map f g → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-fibered-equiv-fibered-map (i , h , H) = is-equiv i × is-equiv h
+
+
+  map-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
+    (fibered-equiv f g) → Σ (fibered-map f g) (is-fibered-equiv-fibered-map)
+  map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+    ((i , is-equiv-i) , (h , is-equiv-h) , H) = (i , h , H) , is-equiv-i , is-equiv-h
+
+  map-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
+    (Σ (fibered-map f g) (is-fibered-equiv-fibered-map)) → (fibered-equiv f g)
+  map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+    ((i , h , H) , is-equiv-i , is-equiv-h) = ((i , is-equiv-i) , (h , is-equiv-h), H)
+
+  is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
+    is-equiv (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
+  is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv =
+    is-equiv-has-inverse
+      ( map-fibered-equiv-Σ-is-fibered-equiv-fibered-map)
+      ( refl-htpy)
+      ( refl-htpy)
+
+  equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
+    (fibered-equiv f g) ≃ Σ (fibered-map f g) (is-fibered-equiv-fibered-map)
+  equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv =
+    pair
+      map-Σ-is-fibered-equiv-fibered-map-fibered-equiv 
+      is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+
+  is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
+    is-equiv (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map)
+  is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
+    is-equiv-has-inverse
+      ( map-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
+      ( refl-htpy)
+      ( refl-htpy)
+
+  equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
+    Σ (fibered-map f g) (is-fibered-equiv-fibered-map) ≃ (fibered-equiv f g)
+  equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
+    pair
+      map-fibered-equiv-Σ-is-fibered-equiv-fibered-map 
+      is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+
 
   is-prop-is-fibered-equiv-fibered-map :
     (ihH : fibered-map f g) → is-prop (is-fibered-equiv-fibered-map ihH)
@@ -136,23 +190,6 @@ module _
     pair
       ( is-fibered-equiv-fibered-map ihH)
       ( is-prop-is-fibered-equiv-fibered-map ihH)
-
-  equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
-    (fibered-equiv f g) ≃ Σ (fibered-map f g) (is-fibered-equiv-fibered-map)
-  equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv = equivalence-reasoning
-    Σ (X ≃ Y) (λ (i , _) → Σ (A ≃ B) (λ (h , _) → is-map-over f g i h))
-      ≃ Σ (X ≃ Y) (λ (i , _) → Σ (map-over f g i) (λ (h , _) → is-equiv h))
-        by equiv-tot (λ (i , _) → equiv-Σ-is-equiv-equiv-over f g i)
-      ≃ Σ (Σ (X ≃ Y) (λ (i , _) → map-over f g i)) (λ (_ , h , H) → is-equiv h)
-        by inv-assoc-Σ (X ≃ Y) (λ (i , _) → map-over f g i) (λ (_ , h , H) → is-equiv h)
-      ≃ Σ (Σ (X → Y) (λ i → is-equiv i × map-over f g i)) (λ (i , _ , h , H) → is-equiv h)
-        by equiv-Σ-equiv-base _ (assoc-Σ (X → Y) is-equiv (λ (i , _) → map-over f g i))
-      ≃ Σ (Σ (X → Y) (λ i → map-over f g i × is-equiv i)) (λ (i , (h , H) , _) → is-equiv h)
-        by equiv-Σ-equiv-base _ (equiv-tot (λ _ → commutative-prod))
-      ≃ Σ (Σ ( Σ (X → Y) (map-over f g)) (λ (i , _) → is-equiv i)) (λ ((i , h , H) , _) → is-equiv h)
-        by equiv-Σ-equiv-base _ (inv-assoc-Σ (X → Y) (map-over f g) (λ (i , _) → is-equiv i))
-      ≃ Σ (Σ (X → Y) (map-over f g)) (λ (i , h , H) → is-equiv i × is-equiv h)
-        by assoc-Σ (Σ (X → Y) (map-over f g)) (λ (i , h , H) → is-equiv i) (λ ((i , h , H) , _) → is-equiv h)
 
   emb-fibered-map-fibered-equiv : fibered-equiv f g ↪ fibered-map f g
   emb-fibered-map-fibered-equiv =
@@ -226,6 +263,7 @@ module _
     fibered-equiv f g
   fibered-equiv-is-pullback is-equiv-i pb =
     (i , is-equiv-i) , (h , pr2 (is-fibered-equiv-is-pullback is-equiv-i pb)) , H
+
 is-pullback-fibered-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {Y : UU l4} (f : A → X) (g : B → Y)
