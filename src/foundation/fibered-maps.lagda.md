@@ -66,7 +66,7 @@ module _
 
 ## Properties
 
-### Fibered maps  and fiberwise maps over are equivalent notions
+### Fibered maps and fiberwise maps over are equivalent notions
 
 ```agda
 module _
