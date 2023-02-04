@@ -3,9 +3,9 @@ title: The universal property of the image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-image where
+
+open import foundation-core.slice
 
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -24,7 +24,6 @@ open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sections
-open import foundation.slice
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types

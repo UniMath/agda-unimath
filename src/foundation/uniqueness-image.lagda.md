@@ -3,9 +3,9 @@ title: Uniqueness of the image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.uniqueness-image where
+
+open import foundation-core.slice
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,7 +17,6 @@ open import foundation.homotopies
 open import foundation.images
 open import foundation.propositions
 open import foundation.sections
-open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels

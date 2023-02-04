@@ -16,10 +16,10 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.slice
 open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
-open import foundation.slice
 ```
 
 ## Idea
@@ -64,7 +64,7 @@ module _
 
 ## Properties
 
-### Fibered maps and fiberwise maps over are equivalent
+### Fibered maps  and fiberwise maps over are equivalent notions
 
 ```agda
 module _
@@ -150,6 +150,20 @@ module _
     pair
       ( map-over f g i)
       ( equiv-map-over-fiberwise-map-over)
+```
+
+### Slice maps are equal to fibered maps over
+
+```agda
+eq-map-over-id-hom-slice :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) → hom-slice f g ＝ map-over f g id
+eq-map-over-id-hom-slice f g = refl
+
+eq-map-over-hom-slice :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y) (i : X → Y) → hom-slice (i ∘ f) g ＝ map-over f g i
+eq-map-over-hom-slice f g i = refl
 ```
 
 ### Horizontal composition for fibered maps
