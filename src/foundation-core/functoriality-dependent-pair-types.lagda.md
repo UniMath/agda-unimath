@@ -21,7 +21,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Any map `f : A → B` and any family of maps `g : (a : A) → C a → D (f a)` together induce a map `map-Σ D f g : Σ A C → Σ B D`. Specific instances of this construction are also very useful: if we take `f` to be the identity map, then we see that any family of maps `g : (a : A) → C a → D a induces a map on total spaces `Σ A C → Σ A D`; if we take `g` to be the family of identity maps, then we see that for any family `D` over `B`, any map `f : A → B` induces a map `Σ A (D ∘ f) → Σ B D`.
+Any map `f : A → B` and any family of maps `g : (a : A) → C a → D (f a)` together induce a map `map-Σ D f g : Σ A C → Σ B D`. Specific instances of this construction are also very useful: if we take `f` to be the identity map, then we see that any family of maps `g : (a : A) → C a → D a` induces a map on total spaces `Σ A C → Σ A D`; if we take `g` to be the family of identity maps, then we see that for any family `D` over `B`, any map `f : A → B` induces a map `Σ A (D ∘ f) → Σ B D`.
 
 ## Definitions
 

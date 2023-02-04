@@ -86,6 +86,7 @@ open import foundation.equivalences public
 open import foundation.existential-quantification public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
+open import foundation.fibered-equivalences public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
 open import foundation.full-subtypes public

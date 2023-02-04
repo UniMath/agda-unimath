@@ -6,6 +6,7 @@ title: Maps fibered over a map
 module foundation.fibered-maps where
 
 open import foundation-core.commuting-squares
+open import foundation-core.cones-pullbacks
 open import foundation-core.small-types
 open import foundation-core.truncation-levels
 open import foundation-core.truncated-types
@@ -43,23 +44,24 @@ A fibered map from `f` to `g` over `i` is a map `h : A → B` such that the squa
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y)
   where
 
-  is-map-over :
-    (f : A → X) (g : B → Y) (i : X → Y) (h : A → B) → UU (l1 ⊔ l4)
-  is-map-over f g i h = (i ∘ f) ~ (g ∘ h)
+  is-map-over : (i : X → Y) (h : A → B) → UU (l1 ⊔ l4)
+  is-map-over i h = (i ∘ f) ~ (g ∘ h)
 
-  map-over :
-    (f : A → X) (g : B → Y) (i : X → Y) → UU (l1 ⊔ l2 ⊔ l4)
-  map-over f g i = Σ (A → B) (is-map-over f g i)
+  map-over : (i : X → Y) → UU (l1 ⊔ l2 ⊔ l4)
+  map-over i = Σ (A → B) (is-map-over i)
 
-  fibered-map :
-    (f : A → X) (g : B → Y) → UU (l1 ⊔ l3 ⊔ l2 ⊔ l4)
-  fibered-map f g = Σ (X → Y) (map-over f g)
+  fibered-map : UU (l1 ⊔ l3 ⊔ l2 ⊔ l4)
+  fibered-map = Σ (X → Y) (map-over)
 
-  fiberwise-map-over :
-    (f : A → X) (g : B → Y) (i : X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  fiberwise-map-over f g i = (x : X) → fib f x → fib g (i x)
+  fiberwise-map-over : (i : X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  fiberwise-map-over i = (x : X) → fib f x → fib g (i x)
+
+
+  cone-fibered-map : ((i , h , H) : fibered-map) → cone i g A
+  cone-fibered-map (i , h , H) = f , h , H
 ```
 
 ## Properties
