@@ -3,8 +3,6 @@ title: Type arithmetic for cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.type-arithmetic-cartesian-product-types where
 
 open import foundation-core.cartesian-product-types
@@ -20,7 +18,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation of cartesian products with respect to itself and dependent pair types. The arithmetical laws involving coproduct types are proven in `type-arithmetic-coproduct-types`, and the laws involving the unit type and the empty type are proven in `type-arithmetic-unit-type` and `type-arithmetic-empty-type` respectively.
+We prove laws for the manipulation of cartesian products with respect to itself and dependent pair types.
 
 ## Laws
 
@@ -115,3 +113,23 @@ module _
   pr1 equiv-pr2-prod-is-contr = pr2
   pr2 equiv-pr2-prod-is-contr = is-equiv-pr2-prod-is-contr
 ```
+
+## See also
+
+- Functorial properties of cartesian products are recorded in
+  [foundation.functoriality-cartesian-product-types](foundation.functoriality-cartesian-product-types.html).
+- Equality proofs in cartesian product types are characterized in
+  [foundation.equality-cartesian-product-types](foundation.equality-cartesian-product-types.html).
+- The universal property of cartesian product types is treated in
+  [foundation.universal-property-cartesian-product-types](foundation.universal-property-cartesian-product-types.html).
+
+- Arithmetical laws involving dependent pair types are recorded in
+  [foundation.type-arithmetic-dependent-pair-types](foundation.type-arithmetic-dependent-pair-types.html).
+  - Arithmetical laws involving dependent product types are recorded in
+  [foundation.type-arithmetic-dependent-function-types](foundation.type-arithmetic-dependent-function-types.html).
+- Arithmetical laws involving coproduct types are recorded in
+  [foundation.type-arithmetic-coproduct-types](foundation.type-arithmetic-coproduct-types.html).
+- Arithmetical laws involving the unit type are recorded in
+  [foundation.type-arithmetic-unit-type](foundation.type-arithmetic-unit-type.html).
+- Arithmetical laws involving the empty type are recorded in
+  [foundation.type-arithmetic-empty-type](foundation.type-arithmetic-empty-type.html).

@@ -3,8 +3,6 @@ title: Type arithmetic for dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.type-arithmetic-dependent-pair-types where
 
 open import foundation-core.contractible-maps
@@ -21,16 +19,8 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation dependent pair types with respect to itself. The arithmetical laws involving cartesian product types, coproduct types, the unit type, and the empty type are proven in
-
-```md
-type-arithmetic-cartesian-products
-type-arithmetic-coproducts
-type-arithmetic-unit-type
-type-arithmetic-empty-type
-```
-
-However, we do prove arithmetical laws with respect to contractible types.
+We prove laws for the manipulation dependent pair types with respect to itself
+and arithmetical laws with respect to contractible types.
 
 ## Properties
 
@@ -42,8 +32,7 @@ module _
   where
 
   map-inv-left-unit-law-Σ-is-contr : B a → Σ A B
-  pr1 (map-inv-left-unit-law-Σ-is-contr b) = a
-  pr2 (map-inv-left-unit-law-Σ-is-contr b) = b
+  map-inv-left-unit-law-Σ-is-contr b = pair a b
 
   map-left-unit-law-Σ-is-contr : Σ A B → B a
   map-left-unit-law-Σ-is-contr =
@@ -147,7 +136,6 @@ module _
 
   map-inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) → Σ (Σ A B) C
   map-inv-assoc-Σ (pair x (pair y z)) = triple' x y z
-  -- map-inv-assoc-Σ t = triple' (pr1 t) (pr1 (pr2 t)) (pr2 (pr2 t))
 
   isretr-map-inv-assoc-Σ : (map-inv-assoc-Σ ∘ map-assoc-Σ) ~ id
   isretr-map-inv-assoc-Σ (pair (pair x y) z) = refl
@@ -164,8 +152,7 @@ module _
         isretr-map-inv-assoc-Σ
 
   assoc-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
-  pr1 assoc-Σ = map-assoc-Σ
-  pr2 assoc-Σ = is-equiv-map-assoc-Σ
+  assoc-Σ = pair map-assoc-Σ is-equiv-map-assoc-Σ
 
   inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
   pr1 inv-assoc-Σ = map-inv-assoc-Σ
@@ -271,15 +258,11 @@ module _
   where
 
   map-left-swap-Σ : Σ A (λ x → Σ B (C x)) → Σ B (λ y → Σ A (λ x → C x y))
-  pr1 (map-left-swap-Σ (pair a (pair b c))) = b
-  pr1 (pr2 (map-left-swap-Σ (pair a (pair b c)))) = a
-  pr2 (pr2 (map-left-swap-Σ (pair a (pair b c)))) = c
+  map-left-swap-Σ (pair a (pair b c)) = triple b a c
   
   map-inv-left-swap-Σ :
     Σ B (λ y → Σ A (λ x → C x y)) → Σ A (λ x → Σ B (C x))
-  pr1 (map-inv-left-swap-Σ (pair b (pair a c))) = a
-  pr1 (pr2 (map-inv-left-swap-Σ (pair b (pair a c)))) = b
-  pr2 (pr2 (map-inv-left-swap-Σ (pair b (pair a c)))) = c
+  map-inv-left-swap-Σ (pair b (pair a c)) = triple a b c
   
   isretr-map-inv-left-swap-Σ : (map-inv-left-swap-Σ ∘ map-left-swap-Σ) ~ id
   isretr-map-inv-left-swap-Σ (pair a (pair b c)) = refl
@@ -308,14 +291,10 @@ module _
   where
 
   map-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) → Σ (Σ A C) (B ∘ pr1)
-  pr1 (pr1 (map-right-swap-Σ (pair (pair a b) c))) = a
-  pr2 (pr1 (map-right-swap-Σ (pair (pair a b) c))) = c
-  pr2 (map-right-swap-Σ (pair (pair a b) c)) = b
+  map-right-swap-Σ (pair (pair a b) c) = triple' a c b
 
   map-inv-right-swap-Σ : Σ (Σ A C) (B ∘ pr1) → Σ (Σ A B) (C ∘ pr1)
-  pr1 (pr1 (map-inv-right-swap-Σ (pair (pair a c) b))) = a
-  pr2 (pr1 (map-inv-right-swap-Σ (pair (pair a c) b))) = b
-  pr2 (map-inv-right-swap-Σ (pair (pair a c) b)) = c
+  map-inv-right-swap-Σ (pair (pair a c) b) = triple' a b c
 
   issec-map-inv-right-swap-Σ : (map-right-swap-Σ ∘ map-inv-right-swap-Σ) ~ id
   issec-map-inv-right-swap-Σ (pair (pair x y) z) = refl
@@ -334,3 +313,23 @@ module _
   pr1 equiv-right-swap-Σ = map-right-swap-Σ
   pr2 equiv-right-swap-Σ = is-equiv-map-right-swap-Σ
 ```
+
+## See also
+
+- Functorial properties of dependent pair types are recorded in
+  [foundation.functoriality-dependent-pair-types](foundation.functoriality-dependent-pair-types.html).
+- Equality proofs in dependent pair types are characterized in
+  [foundation.equality-dependent-pair-types](foundation.equality-dependent-pair-types.html).
+- The universal property of dependent pair types is treated in
+  [foundation.universal-property-dependent-pair-types](foundation.universal-property-dependent-pair-types.html).
+
+- Arithmetical laws involving cartesian product types are recorded in
+  [foundation.type-arithmetic-cartesian-product-types](foundation.type-arithmetic-cartesian-product-types.html).
+- Arithmetical laws involving dependent product types are recorded in
+  [foundation.type-arithmetic-dependent-function-types](foundation.type-arithmetic-dependent-function-types.html).
+- Arithmetical laws involving coproduct types are recorded in
+  [foundation.type-arithmetic-coproduct-types](foundation.type-arithmetic-coproduct-types.html).
+- Arithmetical laws involving the unit type are recorded in
+  [foundation.type-arithmetic-unit-type](foundation.type-arithmetic-unit-type.html).
+- Arithmetical laws involving the empty type are recorded in
+  [foundation.type-arithmetic-empty-type](foundation.type-arithmetic-empty-type.html).

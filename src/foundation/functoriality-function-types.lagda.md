@@ -3,8 +3,6 @@ title: Functoriality of function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-function-types where
 
 open import foundation-core.functoriality-function-types public
@@ -48,3 +46,12 @@ is-trunc-map-is-trunc-map-postcomp k {X} {Y} f is-trunc-post-f =
     ( λ {l} {J} α → is-trunc-post-f {l} J)
     ( star)
 ```
+
+## See also
+
+- Functorial properties of dependent function types are recorded in
+  [foundation.functoriality-dependent-function-types](foundation.functoriality-dependent-function-types.html).
+- Arithmetical laws involving dependent function types are recorded in
+  [foundation.type-arithmetic-dependent-function-types](foundation.type-arithmetic-dependent-function-types.html).
+- Equality proofs in dependent function types are characterized in
+  [foundation.equality-dependent-function-types](foundation.equality-dependent-function-types.html).
