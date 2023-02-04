@@ -11,7 +11,6 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equational-reasoning
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
@@ -19,7 +18,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.locally-small-types
 open import foundation.polynomial-endofunctors
 open import foundation.propositional-maps
@@ -32,6 +30,9 @@ open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
+
+open import foundation-core.fibers-of-maps
+open import foundation-core.injective-maps
 ```
 
 ## Idea
@@ -193,7 +194,7 @@ module _
                     ( equiv-is-small
                       ( is-small-Σ H (λ a → is-small' {l} {B a}))))
                   ( pr1 b))
-            by fib-comp pr1 _ a
+            by equiv-compute-fib-comp pr1 _ a
           ≃ fib (pr1 {B = B}) a
             by
             right-unit-law-Σ-is-contr

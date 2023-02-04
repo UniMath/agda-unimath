@@ -14,6 +14,7 @@ open import foundation-core.contractible-types
 open import foundation-core.decidable-propositions
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
+open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
@@ -27,7 +28,6 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -234,14 +234,13 @@ abstract
       ( λ t → is-decidable (fib (g ∘ f) x))
       ( λ u →
         is-decidable-equiv
-          ( fib-comp g f x)
+          ( equiv-compute-fib-comp g f x)
           ( is-decidable-equiv
-          ( left-unit-law-Σ-is-contr
-            ( is-proof-irrelevant-is-prop
-              ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x)
-                ( u))
-                ( u))
-              ( is-decidable-map-is-decidable-emb H (pr1 u))))
+            ( left-unit-law-Σ-is-contr
+              ( is-proof-irrelevant-is-prop
+                ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x) ( u))
+              ( u))
+            ( is-decidable-map-is-decidable-emb H (pr1 u))))
       ( λ α → inr (λ t → α (pair (f (pr1 t)) (pr2 t))))
       ( pr2 K x)
 ```

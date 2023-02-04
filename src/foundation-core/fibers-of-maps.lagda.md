@@ -27,7 +27,7 @@ Given a map `f : A → B` and a point `b : B`, the fiber of `f` at `b` is the pr
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
   where
-  
+
   fib : UU (l1 ⊔ l2)
   fib = Σ A (λ x → f x ＝ b)
 
@@ -164,7 +164,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
   where
-  
+
   map-equiv-fib : fib f y → fib' f y
   map-equiv-fib (pair x refl) = pair x refl
 
@@ -239,7 +239,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   map-equiv-total-fib : (Σ B (fib f)) → A
   map-equiv-total-fib t = pr1 (pr2 t)
 
@@ -284,51 +284,59 @@ module _
 ### Fibers of compositions
 
 ```agda
-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {X : UU l3} (g : B → X) (h : A → B) →
-  (x : X) → fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
-pr1 (pr1 (map-compute-fib-comp g h x (pair a p))) = h a
-pr2 (pr1 (map-compute-fib-comp g h x (pair a p))) = p
-pr1 (pr2 (map-compute-fib-comp g h x (pair a p))) = a
-pr2 (pr2 (map-compute-fib-comp g h x (pair a p))) = refl
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (g : B → X) (h : A → B) (x : X)
+  where
 
-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {X : UU l3} (g : B → X) (h : A → B) →
-  (x : X) → Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
-pr1 (inv-map-compute-fib-comp g h c t) = pr1 (pr2 t)
-pr2 (inv-map-compute-fib-comp g h c t) = (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
+  map-compute-fib-comp :
+    fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
+  map-compute-fib-comp (pair a p) = (h a , p) , a , refl
 
-issec-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {X : UU l3} (g : B → X) (h : A → B) →
-  (x : X) →
-  ((map-compute-fib-comp g h x) ∘ (inv-map-compute-fib-comp g h x)) ~ id
-issec-inv-map-compute-fib-comp g h x
-  (pair (pair .(h a) refl) (pair a refl)) = refl
+  inv-map-compute-fib-comp :
+    Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
+  inv-map-compute-fib-comp t =
+    pr1 (pr2 t) , (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
 
-isretr-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-  ((inv-map-compute-fib-comp g h x) ∘ (map-compute-fib-comp g h x)) ~ id
-isretr-inv-map-compute-fib-comp g h .(g (h a)) (pair a refl) = refl
+  issec-inv-map-compute-fib-comp :
+    (map-compute-fib-comp ∘ inv-map-compute-fib-comp) ~ id
+  issec-inv-map-compute-fib-comp
+    (pair (pair .(h a) refl) (pair a refl)) = refl
 
-abstract
-  is-equiv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-    {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-    is-equiv (map-compute-fib-comp g h x)
-  is-equiv-map-compute-fib-comp g h x =
-    is-equiv-has-inverse
-      ( inv-map-compute-fib-comp g h x)
-      ( issec-inv-map-compute-fib-comp g h x)
-      ( isretr-inv-map-compute-fib-comp g h x)
+  isretr-inv-map-compute-fib-comp :
+    (inv-map-compute-fib-comp ∘ map-compute-fib-comp) ~ id
+  isretr-inv-map-compute-fib-comp (pair a refl) = refl
 
-abstract
-  is-equiv-inv-map-compute-fib-comp : {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-    {X : UU l3} (g : B → X) (h : A → B) (x : X) →
-    is-equiv (inv-map-compute-fib-comp g h x)
-  is-equiv-inv-map-compute-fib-comp g h x =
-    is-equiv-has-inverse
-      ( map-compute-fib-comp g h x)
-      ( isretr-inv-map-compute-fib-comp g h x)
-      ( issec-inv-map-compute-fib-comp g h x)
+  abstract
+    is-equiv-map-compute-fib-comp :
+      is-equiv map-compute-fib-comp
+    is-equiv-map-compute-fib-comp =
+      is-equiv-has-inverse
+        ( inv-map-compute-fib-comp)
+        ( issec-inv-map-compute-fib-comp)
+        ( isretr-inv-map-compute-fib-comp)
+
+  equiv-compute-fib-comp :
+    fib (g ∘ h) x ≃ Σ (fib g x) (λ t → fib h (pr1 t))
+  equiv-compute-fib-comp =
+    map-compute-fib-comp , is-equiv-map-compute-fib-comp
+
+  abstract
+    is-equiv-inv-map-compute-fib-comp :
+      is-equiv inv-map-compute-fib-comp
+    is-equiv-inv-map-compute-fib-comp =
+        is-equiv-has-inverse
+          ( map-compute-fib-comp)
+          ( isretr-inv-map-compute-fib-comp)
+          ( issec-inv-map-compute-fib-comp)
+
+  inv-equiv-compute-fib-comp :
+    Σ (fib g x) (λ t → fib h (pr1 t)) ≃ fib (g ∘ h) x
+  inv-equiv-compute-fib-comp =
+    inv-map-compute-fib-comp , is-equiv-inv-map-compute-fib-comp
+
+
+
 ```
 
 ### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.

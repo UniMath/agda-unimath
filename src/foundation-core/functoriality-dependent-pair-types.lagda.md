@@ -181,7 +181,7 @@ module _
   where
 
   abstract
-    is-equiv-tot-is-fiberwise-equiv : is-fiberwise-equiv f → is-equiv (tot f )
+    is-equiv-tot-is-fiberwise-equiv : is-fiberwise-equiv f → is-equiv (tot f)
     is-equiv-tot-is-fiberwise-equiv H =
       is-equiv-is-contr-map
         ( λ t →
