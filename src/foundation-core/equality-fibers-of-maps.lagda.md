@@ -19,7 +19,7 @@ open import foundation.identity-types
 
 ## Idea
 
-In the file [foundation-core.fibers-of-a-map](foundation-core.fibers-of-a-map.html) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+In the file [foundation-core.fibers-of-maps](foundation-core.fibers-of-maps.html) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
 
 ## Theorem
 
