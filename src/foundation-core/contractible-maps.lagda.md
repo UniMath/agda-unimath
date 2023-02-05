@@ -117,7 +117,7 @@ module _
 
 - For the notion of biinvertible maps see
   [foundation.equivalences](foundation.equivalences.html).
-- For the notion of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
   [foundation.coherently-invertible-maps](foundation.coherently-invertible-maps.html).
 - For the notion of path-split maps see
   [foundation.path-split-maps](foundation.path-split-maps.html).
