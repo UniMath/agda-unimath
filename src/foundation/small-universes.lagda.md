@@ -3,8 +3,6 @@ title: Small universes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.small-universes where
 
 open import foundation.cartesian-product-types

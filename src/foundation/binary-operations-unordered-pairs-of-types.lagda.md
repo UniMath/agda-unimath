@@ -3,8 +3,6 @@ title: Binary operations on unordered pairs of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.binary-operations-unordered-pairs-of-types where
 
 open import foundation.products-unordered-pairs-of-types

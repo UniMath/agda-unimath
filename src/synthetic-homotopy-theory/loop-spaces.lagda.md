@@ -1,8 +1,6 @@
 # Loop spaces
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.loop-spaces where
 
 open import foundation.dependent-pair-types

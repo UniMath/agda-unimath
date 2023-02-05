@@ -3,8 +3,6 @@ title: Arithmetic functions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.arithmetic-functions where
 
 open import elementary-number-theory.nonzero-natural-numbers

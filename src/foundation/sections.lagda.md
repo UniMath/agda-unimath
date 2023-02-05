@@ -3,8 +3,6 @@ title: Sections
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.sections where
 
 open import foundation-core.sections public

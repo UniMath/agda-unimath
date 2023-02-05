@@ -3,8 +3,6 @@ title: Functoriality of coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-coproduct-types where
 
 open import foundation.cartesian-product-types

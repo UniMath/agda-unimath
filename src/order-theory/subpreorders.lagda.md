@@ -1,8 +1,6 @@
 # Subpreorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.subpreorders where
 
 open import foundation.dependent-pair-types

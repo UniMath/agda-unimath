@@ -3,8 +3,6 @@ title: Isomorphisms of commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.isomorphisms-commutative-rings where
 
 open import commutative-algebra.commutative-rings

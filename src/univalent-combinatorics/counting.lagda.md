@@ -3,8 +3,6 @@ title: Counting in type theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting where
 
 open import elementary-number-theory.natural-numbers

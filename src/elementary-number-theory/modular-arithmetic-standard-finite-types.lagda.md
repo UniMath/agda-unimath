@@ -3,8 +3,6 @@ title: Modular arithmetic on the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.modular-arithmetic-standard-finite-types where
 
 open import elementary-number-theory.addition-natural-numbers

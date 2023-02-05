@@ -3,8 +3,6 @@ title: Identity systems
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.identity-systems where
 
 open import foundation-core.contractible-types

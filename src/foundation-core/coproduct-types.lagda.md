@@ -3,7 +3,7 @@ title: Coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.coproduct-types where
 

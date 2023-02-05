@@ -3,8 +3,6 @@ title: Global choice
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.global-choice where
 
 open import foundation.dependent-pair-types

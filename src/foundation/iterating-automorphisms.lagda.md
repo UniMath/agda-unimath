@@ -3,8 +3,6 @@ title: Iterating automorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.iterating-automorphisms where
 
 open import elementary-number-theory.addition-integers

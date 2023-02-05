@@ -3,8 +3,6 @@ title: The triangular numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.triangular-numbers where
 
 open import elementary-number-theory.addition-natural-numbers

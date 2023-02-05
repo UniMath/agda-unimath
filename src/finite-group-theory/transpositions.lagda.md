@@ -3,8 +3,6 @@ title: Transpositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.transpositions where
 
 open import elementary-number-theory.natural-numbers

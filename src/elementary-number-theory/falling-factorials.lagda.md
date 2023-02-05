@@ -3,8 +3,6 @@ title: Falling factorials
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.falling-factorials where
 
 open import elementary-number-theory.multiplication-natural-numbers

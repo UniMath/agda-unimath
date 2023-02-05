@@ -3,8 +3,6 @@ title: Mere embeddings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.mere-embeddings where
 
 open import foundation.cantor-schroder-bernstein-escardo 

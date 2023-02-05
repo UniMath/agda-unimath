@@ -3,8 +3,6 @@ title: The ordinal induction principle for the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.ordinal-induction-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers

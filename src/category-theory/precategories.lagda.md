@@ -3,8 +3,6 @@ title: Precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.precategories where
 
 open import foundation.cartesian-product-types

@@ -3,8 +3,6 @@ title: Functors between precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.functors-precategories where
 
 open import category-theory.precategories

@@ -3,8 +3,6 @@ title: Isomorphisms of sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.isomorphisms-of-sets where
 
 open import foundation.cartesian-product-types

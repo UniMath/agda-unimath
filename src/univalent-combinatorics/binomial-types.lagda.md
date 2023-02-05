@@ -3,8 +3,6 @@ title: The binomial types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.binomial-types where
 
 open import elementary-number-theory.binomial-coefficients

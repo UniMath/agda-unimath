@@ -3,8 +3,6 @@ title: The integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.integers where
 
 open import elementary-number-theory.natural-numbers

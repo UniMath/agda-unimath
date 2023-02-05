@@ -3,8 +3,6 @@ title: Split surjective maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.split-surjective-maps where
 
 open import foundation.injective-maps

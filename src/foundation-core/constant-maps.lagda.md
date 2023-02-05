@@ -3,7 +3,7 @@ title: Constant maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.constant-maps where
 

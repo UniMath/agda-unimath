@@ -5,8 +5,6 @@ title: The multiplication operation on the circle
 Contributors: Egbert Rijke.
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.multiplication-circle where
 
 open import foundation.dependent-pair-types

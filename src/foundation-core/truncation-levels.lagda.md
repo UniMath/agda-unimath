@@ -4,7 +4,7 @@ title: Truncation levels
 
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.truncation-levels where
 

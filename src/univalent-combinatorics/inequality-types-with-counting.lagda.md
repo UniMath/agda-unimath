@@ -3,8 +3,6 @@ title: Inequality on types equipped with a counting
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.inequality-types-with-counting where
 
 open import elementary-number-theory.inequality-standard-finite-types

@@ -3,8 +3,6 @@ title: The pigeonhole principle
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.pigeonhole-principle where
 
 open import elementary-number-theory.inequality-natural-numbers

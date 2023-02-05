@@ -3,8 +3,6 @@ title: Unital binary operations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unital-binary-operations where
 
 open import foundation.cartesian-product-types

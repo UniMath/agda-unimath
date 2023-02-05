@@ -3,8 +3,6 @@ title: Sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.sets where
 
 open import foundation-core.sets public

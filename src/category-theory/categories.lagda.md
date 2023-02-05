@@ -3,8 +3,6 @@ title: Categories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.categories where
 
 open import category-theory.isomorphisms-precategories

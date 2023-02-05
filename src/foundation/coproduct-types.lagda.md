@@ -3,8 +3,6 @@ title: Coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.coproduct-types where
 
 open import foundation-core.coproduct-types public

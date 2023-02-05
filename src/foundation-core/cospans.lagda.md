@@ -3,7 +3,7 @@ title: Cospans
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.cospans where
 

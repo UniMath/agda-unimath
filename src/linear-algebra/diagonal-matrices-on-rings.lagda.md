@@ -1,8 +1,6 @@
 # Diagonal matrices on rings
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.diagonal-matrices-on-rings where
 
 open import elementary-number-theory.natural-numbers

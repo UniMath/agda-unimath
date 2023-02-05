@@ -3,7 +3,7 @@ title: Equality of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.equality-dependent-pair-types where
 

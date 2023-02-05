@@ -3,8 +3,6 @@ title: Natural numbers object in a precategory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.natural-numbers-object-precategories where
 
 open import category-theory.precategories

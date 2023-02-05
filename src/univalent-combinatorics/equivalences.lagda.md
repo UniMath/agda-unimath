@@ -3,8 +3,6 @@ title: Equivalences between finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equivalences where
 
 open import foundation.equivalences public

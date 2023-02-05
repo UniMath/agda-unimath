@@ -3,8 +3,6 @@ title: Invertible elements in rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.invertible-elements-rings where
 
 open import foundation.cartesian-product-types

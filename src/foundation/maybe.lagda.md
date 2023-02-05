@@ -3,7 +3,7 @@ title: The maybe modality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --allow-unsolved-metas #-}
 
 module foundation.maybe where
 

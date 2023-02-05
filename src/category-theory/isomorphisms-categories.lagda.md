@@ -3,8 +3,6 @@ title: Isomorphisms in categories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.isomorphisms-categories where
 
 open import category-theory.categories

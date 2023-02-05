@@ -3,8 +3,6 @@ title: Cartesian products of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.cartesian-product-types where
 
 open import elementary-number-theory.multiplication-natural-numbers

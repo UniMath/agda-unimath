@@ -3,8 +3,6 @@ title: Cycle partitions of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.cycle-partitions where
 
 open import elementary-number-theory.natural-numbers

@@ -3,8 +3,6 @@ title: The Goldbach conjecture
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.goldbach-conjecture where
 
 open import elementary-number-theory.addition-natural-numbers

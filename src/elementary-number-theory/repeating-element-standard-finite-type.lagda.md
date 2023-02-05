@@ -3,8 +3,6 @@ title: Repeating an element in a standard finite type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.repeating-element-standard-finite-type where
 
 open import elementary-number-theory.natural-numbers

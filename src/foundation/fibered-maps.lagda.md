@@ -3,8 +3,6 @@ title: Maps fibered over a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.fibered-maps where
 
 open import foundation.dependent-pair-types

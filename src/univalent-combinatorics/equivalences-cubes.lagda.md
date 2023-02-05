@@ -3,8 +3,6 @@ title: Equivalences of cubes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equivalences-cubes where
 
 open import elementary-number-theory.natural-numbers

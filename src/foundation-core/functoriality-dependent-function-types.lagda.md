@@ -3,8 +3,6 @@ title: Functoriality of dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.functoriality-dependent-function-types where
 
 open import foundation.type-theoretic-principle-of-choice

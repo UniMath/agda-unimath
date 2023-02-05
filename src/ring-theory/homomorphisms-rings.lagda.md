@@ -3,8 +3,6 @@ title: Ring homomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.homomorphisms-rings where
 
 open import foundation.contractible-types

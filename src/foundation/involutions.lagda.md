@@ -3,8 +3,6 @@ title: Involutions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.involutions where
 
 open import foundation.automorphisms

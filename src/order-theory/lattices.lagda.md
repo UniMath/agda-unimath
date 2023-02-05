@@ -3,8 +3,6 @@ title: Lattices
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.lattices where
 
 open import foundation.dependent-pair-types

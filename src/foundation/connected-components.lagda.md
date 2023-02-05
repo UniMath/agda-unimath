@@ -3,8 +3,6 @@ title: Connected components of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.connected-components where
 
 open import foundation.0-connected-types

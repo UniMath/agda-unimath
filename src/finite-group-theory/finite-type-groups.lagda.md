@@ -3,7 +3,7 @@ title: The group of n-element types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
+{-# OPTIONS --experimental-lossy-unification #-}
 
 module finite-group-theory.finite-type-groups where
 

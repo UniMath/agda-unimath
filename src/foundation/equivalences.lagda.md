@@ -3,8 +3,6 @@ title: Equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equivalences where
 
 open import foundation-core.equivalences public

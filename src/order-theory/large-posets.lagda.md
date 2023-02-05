@@ -3,8 +3,6 @@ title: Large Posets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.large-posets where
 
 open import Agda.Primitive using (Setω)

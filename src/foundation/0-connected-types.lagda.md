@@ -3,8 +3,6 @@ title: 0-Connected types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.0-connected-types where
 
 open import foundation.contractible-types

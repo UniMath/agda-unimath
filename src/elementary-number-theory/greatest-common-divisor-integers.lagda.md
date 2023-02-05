@@ -3,8 +3,6 @@ title: The greatest common divisor of integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.greatest-common-divisor-integers where
 
 open import elementary-number-theory.absolute-value-integers

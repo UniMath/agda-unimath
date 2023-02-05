@@ -3,8 +3,6 @@ title: Upper bounds for type families over the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.upper-bounds-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers

@@ -3,8 +3,6 @@ title: Finitely cyclic maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.finitely-cyclic-maps where
 
 open import elementary-number-theory.modular-arithmetic-standard-finite-types

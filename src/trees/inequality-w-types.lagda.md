@@ -3,8 +3,6 @@ title: Inequality on W-types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module trees.inequality-w-types where
 
 open import elementary-number-theory.natural-numbers

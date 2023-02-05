@@ -3,8 +3,6 @@ title: Uniqueness of the image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.uniqueness-image where
 
 open import foundation.contractible-types

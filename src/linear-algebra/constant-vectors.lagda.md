@@ -1,8 +1,6 @@
 # Diagonal vectors
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.constant-vectors where
 
 open import elementary-number-theory.natural-numbers

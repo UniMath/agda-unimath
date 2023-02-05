@@ -1,8 +1,6 @@
 # Multiplication of matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.multiplication-matrices where
 
 open import elementary-number-theory.natural-numbers

@@ -3,8 +3,6 @@ title: Equivalence classes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equivalence-classes where
 
 open import foundation.cartesian-product-types

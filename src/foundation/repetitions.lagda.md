@@ -3,8 +3,6 @@ title: Repetitions of values of maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.repetitions where
 
 open import foundation.commuting-squares

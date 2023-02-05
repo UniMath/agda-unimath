@@ -3,8 +3,6 @@ title: Ferrers diagrams (unlabeled partitions)
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.ferrers-diagrams where
 
 open import elementary-number-theory.natural-numbers

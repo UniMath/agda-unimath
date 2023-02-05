@@ -3,8 +3,6 @@ title: The Twin Prime conjecture
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.twin-prime-conjecture where
 
 open import elementary-number-theory.inequality-natural-numbers

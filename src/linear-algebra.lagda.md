@@ -3,8 +3,6 @@ title: Linear algebra
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra where
 ```
 

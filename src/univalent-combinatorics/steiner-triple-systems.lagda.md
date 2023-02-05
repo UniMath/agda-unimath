@@ -3,8 +3,6 @@ title: Steiner triple systems
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.steiner-triple-systems where
 
 open import elementary-number-theory.natural-numbers

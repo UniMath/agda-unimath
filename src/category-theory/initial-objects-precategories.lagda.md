@@ -3,8 +3,6 @@ title: Initial objects of a precategory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.initial-objects-precategories where
 
 open import category-theory.precategories

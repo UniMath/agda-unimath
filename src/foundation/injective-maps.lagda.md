@@ -3,8 +3,6 @@ title: Injective maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.injective-maps where
 
 open import foundation-core.injective-maps public

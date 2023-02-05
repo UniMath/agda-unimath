@@ -3,8 +3,6 @@ title: Injective maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.embeddings where
 
 open import foundation.embeddings public

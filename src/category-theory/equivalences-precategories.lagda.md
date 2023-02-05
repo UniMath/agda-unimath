@@ -3,8 +3,6 @@ title: Equivalences between precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.equivalences-precategories where
 
 open import category-theory.functors-precategories

@@ -3,8 +3,6 @@ title: Bracelets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.bracelets where
 
 open import elementary-number-theory.natural-numbers

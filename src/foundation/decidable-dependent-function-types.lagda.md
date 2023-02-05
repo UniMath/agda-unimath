@@ -3,8 +3,6 @@ title: Decidability of dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-dependent-function-types where
 
 open import foundation.coproduct-types

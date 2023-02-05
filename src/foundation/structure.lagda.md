@@ -3,8 +3,6 @@ title: Structure
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.structure where
 
 open import foundation.dependent-pair-types

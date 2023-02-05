@@ -3,8 +3,6 @@ title: The infinitude of primes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.infinitude-of-primes where
 
 open import elementary-number-theory.decidable-types

@@ -3,8 +3,6 @@ title: Subsets of rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.subsets-rings where
 
 open import foundation.dependent-pair-types

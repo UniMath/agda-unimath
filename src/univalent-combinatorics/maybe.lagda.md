@@ -3,8 +3,6 @@ title: The maybe modality on finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.maybe where
 
 open import foundation.maybe public

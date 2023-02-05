@@ -3,8 +3,6 @@ title: The law of excluded middle
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.law-of-excluded-middle where
 
 open import foundation.decidable-propositions

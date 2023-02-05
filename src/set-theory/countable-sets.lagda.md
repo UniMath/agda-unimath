@@ -3,8 +3,6 @@ title: Countable sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module set-theory.countable-sets where
 
 open import elementary-number-theory.natural-numbers

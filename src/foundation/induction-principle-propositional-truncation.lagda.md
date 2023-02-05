@@ -3,8 +3,6 @@ title: The induction principle for propositional truncation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.induction-principle-propositional-truncation where
 
 open import foundation.dependent-pair-types

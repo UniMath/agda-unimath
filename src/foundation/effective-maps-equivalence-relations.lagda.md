@@ -3,8 +3,6 @@ title: Effective maps for equivalence relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.effective-maps-equivalence-relations where
 
 open import foundation.surjective-maps

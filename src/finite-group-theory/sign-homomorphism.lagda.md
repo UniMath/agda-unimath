@@ -3,8 +3,6 @@ title: The sign homomorphism
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.sign-homomorphism where
 
 open import elementary-number-theory.modular-arithmetic-standard-finite-types

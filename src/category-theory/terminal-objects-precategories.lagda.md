@@ -3,8 +3,6 @@ title: Terminal object of a precategory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.terminal-objects-precategories where
 
 open import category-theory.precategories

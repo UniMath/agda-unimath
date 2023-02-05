@@ -3,8 +3,6 @@ title: Pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.pullbacks where
 
 open import foundation-core.cartesian-product-types

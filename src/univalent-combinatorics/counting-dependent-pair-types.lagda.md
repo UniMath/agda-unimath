@@ -3,8 +3,6 @@ title: Counting the elements of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting-dependent-pair-types where
 
 open import elementary-number-theory.addition-natural-numbers

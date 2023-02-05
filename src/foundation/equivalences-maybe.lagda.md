@@ -3,8 +3,6 @@ title: Equivalences on Maybe
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equivalences-maybe where
 
 open import foundation-core.coproduct-types

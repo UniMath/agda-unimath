@@ -3,8 +3,6 @@ title: Integral domains
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.integral-domains where
 
 open import commutative-algebra.commutative-rings

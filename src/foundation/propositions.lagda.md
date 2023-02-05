@@ -3,8 +3,6 @@ title: Propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.propositions where
 
 open import foundation-core.propositions public

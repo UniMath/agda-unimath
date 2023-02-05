@@ -3,8 +3,6 @@ title: The concrete quaternion group
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.concrete-quaternion-group where
 
 open import elementary-number-theory.natural-numbers

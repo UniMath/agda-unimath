@@ -3,8 +3,6 @@ title: Addition on the integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.addition-integers where
 
 open import elementary-number-theory.addition-natural-numbers

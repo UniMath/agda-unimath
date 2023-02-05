@@ -1,8 +1,6 @@
 # Chains in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.chains-posets where
 
 open import foundation.propositions

@@ -3,8 +3,6 @@ title: Empty types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.empty-types where
 
 open import foundation-core.dependent-pair-types

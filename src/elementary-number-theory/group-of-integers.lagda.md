@@ -3,8 +3,6 @@ title: The group of integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.group-of-integers where
 
 open import elementary-number-theory.addition-integers

@@ -3,8 +3,6 @@ title: Combinatorial identities of sums of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.sums-of-natural-numbers where
 
 

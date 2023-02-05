@@ -3,8 +3,6 @@ title: Modular arithmetic
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.modular-arithmetic where
 
 open import elementary-number-theory.absolute-value-integers

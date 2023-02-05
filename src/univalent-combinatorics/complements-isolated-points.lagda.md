@@ -3,8 +3,6 @@ title: Complements of isolated points of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.complements-isolated-points where
 
 open import elementary-number-theory.natural-numbers

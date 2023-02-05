@@ -3,8 +3,6 @@ title: Prespectra
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.prespectra where
 
 open import elementary-number-theory.natural-numbers

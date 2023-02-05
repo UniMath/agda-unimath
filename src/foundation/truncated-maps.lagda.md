@@ -3,8 +3,6 @@ title: Truncated maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.truncated-maps where
 
 open import foundation-core.truncated-maps public

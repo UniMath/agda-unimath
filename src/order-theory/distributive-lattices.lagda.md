@@ -3,8 +3,6 @@ title: Distributive Lattices
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.distributive-lattices where
 
 open import foundation.dependent-pair-types

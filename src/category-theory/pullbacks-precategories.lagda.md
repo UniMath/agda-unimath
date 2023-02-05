@@ -3,8 +3,6 @@ title: Pullbacks in precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.pullbacks-precategories where
 
 open import category-theory.precategories

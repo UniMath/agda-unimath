@@ -3,8 +3,6 @@ title: Finiteness of the type of connected components
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.finite-connected-components where
 
 open import elementary-number-theory.natural-numbers

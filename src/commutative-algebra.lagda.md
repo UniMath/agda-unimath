@@ -3,8 +3,6 @@ title: Commutative algebra
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra where
 
 open import commutative-algebra.boolean-rings public

@@ -3,8 +3,6 @@ title: Nontrivial rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.nontrivial-rings where
 
 open import foundation.identity-types

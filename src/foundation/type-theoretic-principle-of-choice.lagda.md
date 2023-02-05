@@ -3,8 +3,6 @@ title: The type theoretic principle of choice
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-theoretic-principle-of-choice where
 
 open import foundation-core.dependent-pair-types

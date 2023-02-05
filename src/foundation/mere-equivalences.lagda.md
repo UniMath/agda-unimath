@@ -3,8 +3,6 @@ title: Mere equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.mere-equivalences where
 
 open import foundation.decidable-equality

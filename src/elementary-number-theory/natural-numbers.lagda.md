@@ -3,8 +3,6 @@ title: The type of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.natural-numbers where
 
 open import foundation-core.coproduct-types

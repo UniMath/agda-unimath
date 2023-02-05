@@ -3,8 +3,6 @@ title: Invertible elements in commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.invertible-elements-commutative-rings where
 
 open import commutative-algebra.commutative-rings

@@ -3,8 +3,6 @@ title: Propositional resizing
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.propositional-resizing where
 
 open import foundation.dependent-pair-types

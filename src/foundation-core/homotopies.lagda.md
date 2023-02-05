@@ -3,7 +3,7 @@ title: Homotopies
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.homotopies where
 

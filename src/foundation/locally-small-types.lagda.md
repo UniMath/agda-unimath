@@ -3,8 +3,6 @@ title: Locally small types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.locally-small-types where
 
 open import foundation.dependent-pair-types

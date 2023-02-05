@@ -3,8 +3,6 @@ title: Propositional maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.propositional-maps where
 
 open import foundation-core.contractible-types

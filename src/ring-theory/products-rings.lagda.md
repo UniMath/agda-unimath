@@ -3,8 +3,6 @@ title: Products of rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.products-rings where
 
 open import foundation.cartesian-product-types
