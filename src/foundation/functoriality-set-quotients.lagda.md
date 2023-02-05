@@ -147,6 +147,15 @@ module _
 
 ### Binary functoriality of types that satisfy the universal property of set quotients
 
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
+  {A : UU l1} (R : Eq-Rel l2 A) (QR : Set l3) 
+  {B : UU l4} (S : Eq-Rel l5 B) (QB : Set l6)
+  {C : UU l7} (T : Eq-Rel l8 C) (QC : Set l9)
+  where
+```
+
 ### Binary functoriality of set quotients
 
 ## Properties
@@ -180,7 +189,9 @@ module _
     uniqueness-set-quotient R QR f Uf QS
       ( comp-reflecting-map-Eq-Rel R S g (map-equiv h) (λ {x} {y} r → pr1 H r))
       ( is-set-quotient-is-surjective-and-effective R QS
-        ( comp-reflecting-map-Eq-Rel R S g (map-equiv h) (λ {x} {y} r → pr1 H r))
+        ( comp-reflecting-map-Eq-Rel R S g
+          ( map-equiv h)
+          ( λ {x} {y} r → pr1 H r))
         ( ( is-surjective-comp
             ( is-surjective-is-set-quotient S QS g Ug)
             ( is-surjective-is-equiv (is-equiv-map-equiv h))) ,
@@ -190,7 +201,9 @@ module _
                 ( prop-Eq-Rel R x y)
                 ( prop-Eq-Rel S (map-equiv h x) (map-equiv h y))
                 ( H {x} {y}))) ∘e
-            ( is-effective-is-set-quotient S QS g Ug (map-equiv h x) (map-equiv h y)))))
+            ( is-effective-is-set-quotient S QS g Ug
+              ( map-equiv h x)
+              ( map-equiv h y)))))
 
   equiv-is-set-quotient :
     ({l : Level} → is-set-quotient l R QR f) →
