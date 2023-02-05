@@ -94,11 +94,15 @@ module _
 
   map-Σ-is-equiv-equiv-over :
     (equiv-over f g i) → Σ (map-over f g i) (is-equiv ∘ pr1)
-  map-Σ-is-equiv-equiv-over ((h , is-equiv-h) , H) = (h , H) , is-equiv-h
+  pr1 (pr1 (map-Σ-is-equiv-equiv-over ((h , is-equiv-h) , H))) = h
+  pr2 (pr1 (map-Σ-is-equiv-equiv-over ((h , is-equiv-h) , H))) = H
+  pr2 (map-Σ-is-equiv-equiv-over ((h , is-equiv-h) , H)) = is-equiv-h
 
   map-equiv-over-Σ-is-equiv :
     Σ (map-over f g i) (is-equiv ∘ pr1) → (equiv-over f g i)
-  map-equiv-over-Σ-is-equiv ((h , H) , is-equiv-h) = (h , is-equiv-h) , H
+  pr1 (pr1 (map-equiv-over-Σ-is-equiv ((h , H) , is-equiv-h))) = h
+  pr2 (pr1 (map-equiv-over-Σ-is-equiv ((h , H) , is-equiv-h))) = is-equiv-h
+  pr2 (map-equiv-over-Σ-is-equiv ((h , H) , is-equiv-h)) = H
 
   is-equiv-map-Σ-is-equiv-equiv-over : is-equiv map-Σ-is-equiv-equiv-over
   is-equiv-map-Σ-is-equiv-equiv-over =
@@ -106,8 +110,8 @@ module _
 
   equiv-Σ-is-equiv-equiv-over :
     (equiv-over f g i) ≃ Σ (map-over f g i) (is-equiv ∘ pr1)
-  equiv-Σ-is-equiv-equiv-over =
-    pair map-Σ-is-equiv-equiv-over is-equiv-map-Σ-is-equiv-equiv-over
+  pr1 equiv-Σ-is-equiv-equiv-over = map-Σ-is-equiv-equiv-over
+  pr2 equiv-Σ-is-equiv-equiv-over = is-equiv-map-Σ-is-equiv-equiv-over
   
   is-equiv-map-equiv-over-Σ-is-equiv : is-equiv map-equiv-over-Σ-is-equiv
   is-equiv-map-equiv-over-Σ-is-equiv =
@@ -115,8 +119,8 @@ module _
 
   equiv-equiv-over-Σ-is-equiv :
     Σ (map-over f g i) (is-equiv ∘ pr1) ≃ (equiv-over f g i)
-  equiv-equiv-over-Σ-is-equiv =
-    pair map-equiv-over-Σ-is-equiv is-equiv-map-equiv-over-Σ-is-equiv
+  pr1 equiv-equiv-over-Σ-is-equiv = map-equiv-over-Σ-is-equiv
+  pr2 equiv-equiv-over-Σ-is-equiv = is-equiv-map-equiv-over-Σ-is-equiv
 
 
   emb-map-over-equiv-over : equiv-over f g i ↪ map-over f g i
@@ -140,13 +144,29 @@ module _
 
   map-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
     (fibered-equiv f g) → Σ (fibered-map f g) (is-fibered-equiv-fibered-map)
-  map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
-    ((i , is-equiv-i) , (h , is-equiv-h) , H) = (i , h , H) , is-equiv-i , is-equiv-h
+  pr1 (pr1 (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+    ((i , is-equiv-i) , (h , is-equiv-h) , H))) = i
+  pr1 (pr2 (pr1 (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+    ((i , is-equiv-i) , (h , is-equiv-h) , H)))) = h
+  pr2 (pr2 (pr1 (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+    ((i , is-equiv-i) , (h , is-equiv-h) , H)))) = H
+  pr1 (pr2 (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+    ((i , is-equiv-i) , (h , is-equiv-h) , H))) = is-equiv-i
+  pr2 (pr2 (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+    ((i , is-equiv-i) , (h , is-equiv-h) , H))) = is-equiv-h
 
   map-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
     (Σ (fibered-map f g) (is-fibered-equiv-fibered-map)) → (fibered-equiv f g)
-  map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
-    ((i , h , H) , is-equiv-i , is-equiv-h) = ((i , is-equiv-i) , (h , is-equiv-h), H)
+  pr1 (pr1 (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+    ((i , h , H) , is-equiv-i , is-equiv-h))) = i
+  pr2 (pr1 (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+    ((i , h , H) , is-equiv-i , is-equiv-h))) = is-equiv-i
+  pr1 (pr1 (pr2 (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+    ((i , h , H) , is-equiv-i , is-equiv-h)))) = h
+  pr2 (pr1 (pr2 (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+    ((i , h , H) , is-equiv-i , is-equiv-h)))) = is-equiv-h
+  pr2 (pr2 (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+    ((i , h , H) , is-equiv-i , is-equiv-h))) = H
 
   is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
     is-equiv (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
@@ -158,10 +178,10 @@ module _
 
   equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
     (fibered-equiv f g) ≃ Σ (fibered-map f g) (is-fibered-equiv-fibered-map)
-  equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv =
-    pair
-      map-Σ-is-fibered-equiv-fibered-map-fibered-equiv 
-      is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+  pr1 equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv =
+    map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
+  pr2 equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv =
+    is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv
 
   is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
     is-equiv (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map)
@@ -173,10 +193,10 @@ module _
 
   equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
     Σ (fibered-map f g) (is-fibered-equiv-fibered-map) ≃ (fibered-equiv f g)
-  equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
-    pair
-      map-fibered-equiv-Σ-is-fibered-equiv-fibered-map 
-      is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+  pr1 equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
+    map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
+  pr2 equiv-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
+    is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map
 
 
   is-prop-is-fibered-equiv-fibered-map :
@@ -186,10 +206,10 @@ module _
 
   is-fibered-equiv-fibered-map-Prop :
     fibered-map f g → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-fibered-equiv-fibered-map-Prop ihH =
-    pair
-      ( is-fibered-equiv-fibered-map ihH)
-      ( is-prop-is-fibered-equiv-fibered-map ihH)
+  pr1 (is-fibered-equiv-fibered-map-Prop ihH) =
+    is-fibered-equiv-fibered-map ihH
+  pr2 (is-fibered-equiv-fibered-map-Prop ihH) =
+    is-prop-is-fibered-equiv-fibered-map ihH
 
   emb-fibered-map-fibered-equiv : fibered-equiv f g ↪ fibered-map f g
   emb-fibered-map-fibered-equiv =
@@ -197,8 +217,68 @@ module _
       ( emb-subtype is-fibered-equiv-fibered-map-Prop)
       ( emb-equiv equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
   
-  map-emb-fibered-map-fibered-equiv : fibered-equiv f g → fibered-map f g
-  map-emb-fibered-map-fibered-equiv = map-emb emb-fibered-map-fibered-equiv
+  map-fibered-map-fibered-equiv : fibered-equiv f g → fibered-map f g
+  map-fibered-map-fibered-equiv = map-emb emb-fibered-map-fibered-equiv
+```
+
+### Fibered equivalences are pullback squares
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {Y : UU l4} (f : A → X) (g : B → Y) (ihH : fibered-map f g)
+  where
+  
+  is-fibered-equiv-is-pullback :
+    is-equiv (pr1 ihH) →
+    is-pullback (pr1 ihH) g (cone-fibered-map f g ihH) →
+    is-fibered-equiv-fibered-map f g ihH
+  pr1 (is-fibered-equiv-is-pullback is-equiv-i pb) = is-equiv-i
+  pr2 (is-fibered-equiv-is-pullback is-equiv-i pb) =
+    is-equiv-is-pullback' (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i pb
+
+  is-pullback-is-fibered-equiv :
+    is-fibered-equiv-fibered-map f g ihH →
+    is-pullback (pr1 ihH) g (cone-fibered-map f g ihH)
+  is-pullback-is-fibered-equiv (is-equiv-i , is-equiv-h) =
+    is-pullback-is-equiv' (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i is-equiv-h
+
+  equiv-is-fibered-equiv-is-pullback :
+    is-equiv (pr1 ihH) →
+    is-pullback (pr1 ihH) g (cone-fibered-map f g ihH) ≃
+    is-fibered-equiv-fibered-map f g ihH
+  equiv-is-fibered-equiv-is-pullback is-equiv-i =
+    equiv-prop
+      ( is-property-is-pullback (pr1 ihH) g (cone-fibered-map f g ihH))
+      ( is-prop-is-fibered-equiv-fibered-map f g ihH)
+      ( is-fibered-equiv-is-pullback is-equiv-i)
+      ( is-pullback-is-fibered-equiv)
+
+  equiv-is-pullback-is-fibered-equiv :
+    is-equiv (pr1 ihH) →
+    is-fibered-equiv-fibered-map f g ihH ≃
+    is-pullback (pr1 ihH) g (cone-fibered-map f g ihH)
+  equiv-is-pullback-is-fibered-equiv is-equiv-i =
+    inv-equiv (equiv-is-fibered-equiv-is-pullback is-equiv-i)
+
+  fibered-equiv-is-pullback : 
+    is-equiv (pr1 ihH) → 
+    is-pullback (pr1 ihH) g (cone-fibered-map f g ihH) →
+    fibered-equiv f g
+  pr1 (pr1 (fibered-equiv-is-pullback is-equiv-i pb)) = pr1 ihH
+  pr2 (pr1 (fibered-equiv-is-pullback is-equiv-i pb)) = is-equiv-i
+  pr1 (pr1 (pr2 (fibered-equiv-is-pullback is-equiv-i pb))) = pr1 (pr2 ihH)
+  pr2 (pr1 (pr2 (fibered-equiv-is-pullback is-equiv-i pb))) =
+    pr2 (is-fibered-equiv-is-pullback is-equiv-i pb)
+  pr2 (pr2 (fibered-equiv-is-pullback is-equiv-i pb)) = pr2 (pr2 ihH)
+
+is-pullback-fibered-equiv :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {Y : UU l4} (f : A → X) (g : B → Y)
+  (e : fibered-equiv f g) →
+  is-pullback (pr1 (pr1 e)) g (cone-fibered-map f g (map-fibered-map-fibered-equiv f g e))
+is-pullback-fibered-equiv f g ((i , is-equiv-i) , (h , is-equiv-h) , H) =
+  is-pullback-is-fibered-equiv f g (i , h , H) (is-equiv-i , is-equiv-h)
 ```
 
 ## Examples
@@ -208,67 +288,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  fibered-equiv-self : A ≃ B → fibered-equiv id id
-  fibered-equiv-self e = e , e , refl-htpy
+  self-fibered-equiv : A ≃ B → fibered-equiv id id
+  pr1 (self-fibered-equiv e) = e
+  pr1 (pr2 (self-fibered-equiv e)) = e
+  pr2 (pr2 (self-fibered-equiv e)) = refl-htpy
 
-  fibered-equiv-id : (f : A → B) → fibered-equiv f f
-  fibered-equiv-id f = id-equiv , id-equiv , refl-htpy
+  id-fibered-equiv : (f : A → B) → fibered-equiv f f
+  pr1 (id-fibered-equiv f) = id-equiv
+  pr1 (pr2 (id-fibered-equiv f)) = id-equiv
+  pr2 (pr2 (id-fibered-equiv f)) = refl-htpy
 
-  fibered-equiv-id-htpy : (f g : A → B) → f ~ g → fibered-equiv f g
-  fibered-equiv-id-htpy f g H = id-equiv , id-equiv , H
-```
-
-### Fibered equivalences are pullback squares
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  {Y : UU l4} (f : A → X) (g : B → Y) ((i , h , H) : fibered-map f g)
-  where
-  
-  is-fibered-equiv-is-pullback :
-    is-equiv i →
-    is-pullback i g (cone-fibered-map f g (i , h , H)) →
-    is-fibered-equiv-fibered-map f g (i , h , H)
-  is-fibered-equiv-is-pullback is-equiv-i pb =
-    is-equiv-i , is-equiv-is-pullback' i g (cone-fibered-map f g (i , h , H)) is-equiv-i pb
-
-  is-pullback-is-fibered-equiv :
-    is-fibered-equiv-fibered-map f g (i , h , H) →
-    is-pullback i g (cone-fibered-map f g (i , h , H))
-  is-pullback-is-fibered-equiv (is-equiv-i , is-equiv-h) =
-    is-pullback-is-equiv' i g (cone-fibered-map f g (i , h , H)) is-equiv-i is-equiv-h
-
-  equiv-is-fibered-equiv-is-pullback :
-    is-equiv i →
-    is-pullback i g (cone-fibered-map f g (i , h , H)) ≃
-    is-fibered-equiv-fibered-map f g (i , h , H)
-  equiv-is-fibered-equiv-is-pullback is-equiv-i =
-    equiv-prop
-      ( is-property-is-pullback i g (cone-fibered-map f g (i , h , H)))
-      ( is-prop-is-fibered-equiv-fibered-map f g (i , h , H))
-      ( is-fibered-equiv-is-pullback is-equiv-i)
-      ( is-pullback-is-fibered-equiv)
-
-  equiv-is-pullback-is-fibered-equiv :
-    is-equiv i →
-    is-fibered-equiv-fibered-map f g (i , h , H) ≃
-    is-pullback i g (cone-fibered-map f g (i , h , H))
-  equiv-is-pullback-is-fibered-equiv is-equiv-i =
-    inv-equiv (equiv-is-fibered-equiv-is-pullback is-equiv-i)
-
-  fibered-equiv-is-pullback : 
-    is-equiv i → 
-    is-pullback i g (cone-fibered-map f g (i , h , H)) →
-    fibered-equiv f g
-  fibered-equiv-is-pullback is-equiv-i pb =
-    (i , is-equiv-i) , (h , pr2 (is-fibered-equiv-is-pullback is-equiv-i pb)) , H
-
-is-pullback-fibered-equiv :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  {Y : UU l4} (f : A → X) (g : B → Y)
-  (((i , _) , (h , _) , H) : fibered-equiv f g) →
-  is-pullback i g (cone-fibered-map f g (i , h , H))
-is-pullback-fibered-equiv f g ((i , is-equiv-i) , (h , is-equiv-h) , H) =
-  is-pullback-is-fibered-equiv f g (i , h , H) (is-equiv-i , is-equiv-h)
+  id-fibered-equiv-htpy : (f g : A → B) → f ~ g → fibered-equiv f g
+  pr1 (id-fibered-equiv-htpy f g H) = id-equiv
+  pr1 (pr2 (id-fibered-equiv-htpy f g H)) = id-equiv
+  pr2 (pr2 (id-fibered-equiv-htpy f g H)) = H
 ```

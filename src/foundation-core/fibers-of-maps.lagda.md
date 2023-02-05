@@ -48,7 +48,8 @@ module _
   Eq-fib s t = Σ (pr1 s ＝ pr1 t) (λ α → ((ap f α) ∙ (pr2 t)) ＝ (pr2 s))
 
   refl-Eq-fib : (s : fib f b) → Eq-fib s s
-  refl-Eq-fib s = refl , refl
+  pr1 (refl-Eq-fib s) = refl
+  pr2 (refl-Eq-fib s) = refl
 
   Eq-eq-fib : {s t : fib f b} → s ＝ t → Eq-fib s t
   Eq-eq-fib {s} refl = refl-Eq-fib s
@@ -78,7 +79,8 @@ module _
         isretr-eq-Eq-fib
 
   equiv-Eq-eq-fib : {s t : fib f b} → (s ＝ t) ≃ Eq-fib s t
-  equiv-Eq-eq-fib = Eq-eq-fib , is-equiv-Eq-eq-fib
+  pr1 equiv-Eq-eq-fib = Eq-eq-fib
+  pr2 equiv-Eq-eq-fib = is-equiv-Eq-eq-fib
 
   abstract
     is-equiv-eq-Eq-fib :
@@ -90,7 +92,8 @@ module _
         issec-eq-Eq-fib
 
   equiv-eq-Eq-fib : {s t : fib f b} → Eq-fib s t ≃ (s ＝ t)
-  equiv-eq-Eq-fib = eq-Eq-fib-uncurry , is-equiv-eq-Eq-fib
+  pr1 equiv-eq-Eq-fib = eq-Eq-fib-uncurry
+  pr2 equiv-eq-Eq-fib = is-equiv-eq-Eq-fib
 ```
 
 #### The case of `fib'`
@@ -104,7 +107,8 @@ module _
   Eq-fib' s t = Σ (pr1 s ＝ pr1 t) (λ α → (pr2 t ＝ ((pr2 s) ∙ (ap f α))))
 
   refl-Eq-fib' : (s : fib' f b) → Eq-fib' s s
-  refl-Eq-fib' s = refl , inv right-unit
+  pr1 (refl-Eq-fib' s) = refl
+  pr2 (refl-Eq-fib' s) = inv right-unit
 
   Eq-eq-fib' : {s t : fib' f b} → s ＝ t → Eq-fib' s t
   Eq-eq-fib' {s} refl = refl-Eq-fib' s
@@ -135,7 +139,8 @@ module _
         isretr-eq-Eq-fib'
 
   equiv-Eq-eq-fib' : {s t : fib' f b} → (s ＝ t) ≃ Eq-fib' s t
-  equiv-Eq-eq-fib' = Eq-eq-fib' , is-equiv-Eq-eq-fib'
+  pr1 equiv-Eq-eq-fib' = Eq-eq-fib'
+  pr2 equiv-Eq-eq-fib' = is-equiv-Eq-eq-fib'
 
   abstract
     is-equiv-eq-Eq-fib' :
@@ -147,7 +152,8 @@ module _
         issec-eq-Eq-fib'
 
   equiv-eq-Eq-fib' : {s t : fib' f b} → Eq-fib' s t ≃ (s ＝ t)
-  equiv-eq-Eq-fib' = eq-Eq-fib-uncurry' , is-equiv-eq-Eq-fib'
+  pr1 equiv-eq-Eq-fib' = eq-Eq-fib-uncurry'
+  pr2 equiv-eq-Eq-fib' = is-equiv-eq-Eq-fib'
 ```
 
 ### `fib f y` and `fib' f y` are equivalent
@@ -158,10 +164,12 @@ module _
   where
 
   map-equiv-fib : fib f y → fib' f y
-  map-equiv-fib (x , refl) = x , refl
+  pr1 (map-equiv-fib (x , refl)) = x
+  pr2 (map-equiv-fib (x , refl)) = refl
 
   map-inv-equiv-fib : fib' f y → fib f y
-  map-inv-equiv-fib (x , refl) = x , refl
+  pr1 (map-inv-equiv-fib (x , refl)) = x
+  pr2 (map-inv-equiv-fib (x , refl)) = refl
 
   issec-map-inv-equiv-fib : (map-equiv-fib ∘ map-inv-equiv-fib) ~ id
   issec-map-inv-equiv-fib (x , refl) = refl
@@ -192,7 +200,9 @@ module _
   map-fib-pr1 ((x , y) , p) = tr B p y
 
   map-inv-fib-pr1 : B a → fib (pr1 {B = B}) a
-  map-inv-fib-pr1 b = (a , b) , refl
+  pr1 (pr1 (map-inv-fib-pr1 b)) = a
+  pr2 (pr1 (map-inv-fib-pr1 b)) = b
+  pr2 (map-inv-fib-pr1 b) = refl
 
   issec-map-inv-fib-pr1 : (map-inv-fib-pr1 ∘ map-fib-pr1) ~ id
   issec-map-inv-fib-pr1 ((.a , y) , refl) = refl
@@ -239,7 +249,9 @@ module _
   triangle-map-equiv-total-fib t = inv (pr2 (pr2 t))
 
   map-inv-equiv-total-fib : A → Σ B (fib f)
-  map-inv-equiv-total-fib x = f x , x , refl
+  pr1 (map-inv-equiv-total-fib x) = f x
+  pr1 (pr2 (map-inv-equiv-total-fib x)) = x
+  pr2 (pr2 (map-inv-equiv-total-fib x)) = refl
 
   isretr-map-inv-equiv-total-fib :
     (map-inv-equiv-total-fib ∘ map-equiv-total-fib) ~ id
@@ -283,7 +295,10 @@ module _
 
   map-compute-fib-comp :
     fib (g ∘ h) x → Σ (fib g x) (λ t → fib h (pr1 t))
-  map-compute-fib-comp (a , p) = (h a , p) , a , refl
+  pr1 (pr1 (map-compute-fib-comp (a , p))) = h a
+  pr2 (pr1 (map-compute-fib-comp (a , p))) = p
+  pr1 (pr2 (map-compute-fib-comp (a , p))) = a
+  pr2 (pr2 (map-compute-fib-comp (a , p))) = refl
 
   inv-map-compute-fib-comp :
     Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
@@ -310,8 +325,8 @@ module _
 
   equiv-compute-fib-comp :
     fib (g ∘ h) x ≃ Σ (fib g x) (λ t → fib h (pr1 t))
-  equiv-compute-fib-comp =
-    map-compute-fib-comp , is-equiv-map-compute-fib-comp
+  pr1 equiv-compute-fib-comp = map-compute-fib-comp
+  pr2 equiv-compute-fib-comp = is-equiv-map-compute-fib-comp
 
   abstract
     is-equiv-inv-map-compute-fib-comp :
@@ -324,64 +339,51 @@ module _
 
   inv-equiv-compute-fib-comp :
     Σ (fib g x) (λ t → fib h (pr1 t)) ≃ fib (g ∘ h) x
-  inv-equiv-compute-fib-comp =
-    inv-map-compute-fib-comp , is-equiv-inv-map-compute-fib-comp
-
-
-
+  pr1 inv-equiv-compute-fib-comp = inv-map-compute-fib-comp
+  pr2 inv-equiv-compute-fib-comp = is-equiv-inv-map-compute-fib-comp
 ```
 
 ### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.
 
 ```agda
-map-reduce-Π-fib :
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((y : B) (z : fib f y) → C y z) → ((x : A) → C (f x) (x , refl))
-map-reduce-Π-fib f C h x = h (f x) (x , refl)
+  (C : (y : B) (z : fib f y) → UU l3)
+  where
 
-inv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((x : A) → C (f x) (x , refl)) → ((y : B) (z : fib f y) → C y z)
-inv-map-reduce-Π-fib f C h .(f x) (x , refl) = h x
+  map-reduce-Π-fib :
+    ((y : B) (z : fib f y) → C y z) → ((x : A) → C (f x) (x , refl))
+  map-reduce-Π-fib h x = h (f x) (x , refl)
 
-issec-inv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((map-reduce-Π-fib f C) ∘ (inv-map-reduce-Π-fib f C)) ~ id
-issec-inv-map-reduce-Π-fib f C h = refl
+  inv-map-reduce-Π-fib :
+    ((x : A) → C (f x) (x , refl)) → ((y : B) (z : fib f y) → C y z)
+  inv-map-reduce-Π-fib h .(f x) (x , refl) = h x
 
-isretr-inv-map-reduce-Π-fib' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  (h : (y : B) (z : fib f y) → C y z) (y : B) →
-  (inv-map-reduce-Π-fib f C ((map-reduce-Π-fib f C) h) y) ~ (h y)
-isretr-inv-map-reduce-Π-fib' f C h .(f z) (z , refl) = refl
+  issec-inv-map-reduce-Π-fib :
+    (map-reduce-Π-fib ∘ inv-map-reduce-Π-fib) ~ id
+  issec-inv-map-reduce-Π-fib h = refl
 
-isretr-inv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((inv-map-reduce-Π-fib f C) ∘ (map-reduce-Π-fib f C)) ~ id
-isretr-inv-map-reduce-Π-fib f C h =
-  eq-htpy (λ y → eq-htpy (isretr-inv-map-reduce-Π-fib' f C h y))
+  isretr-inv-map-reduce-Π-fib' :
+    (h : (y : B) (z : fib f y) → C y z) (y : B) →
+    (inv-map-reduce-Π-fib (map-reduce-Π-fib h) y) ~ (h y)
+  isretr-inv-map-reduce-Π-fib' h .(f z) (z , refl) = refl
 
-is-equiv-map-reduce-Π-fib :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (C : (y : B) (z : fib f y) → UU l3) →
-  is-equiv (map-reduce-Π-fib f C)
-is-equiv-map-reduce-Π-fib f C =
-  is-equiv-has-inverse
-    ( inv-map-reduce-Π-fib f C)
-    ( issec-inv-map-reduce-Π-fib f C)
-    ( isretr-inv-map-reduce-Π-fib f C)
+  isretr-inv-map-reduce-Π-fib :
+    (inv-map-reduce-Π-fib ∘ map-reduce-Π-fib) ~ id
+  isretr-inv-map-reduce-Π-fib h =
+    eq-htpy (eq-htpy ∘ isretr-inv-map-reduce-Π-fib' h)
 
-reduce-Π-fib' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  (C : (y : B) (z : fib f y) → UU l3) →
-  ((y : B) (z : fib f y) → C y z) ≃ ((x : A) → C (f x) (x , refl))
-pr1 (reduce-Π-fib' f C) = map-reduce-Π-fib f C
-pr2 (reduce-Π-fib' f C) = is-equiv-map-reduce-Π-fib f C
+  is-equiv-map-reduce-Π-fib : is-equiv map-reduce-Π-fib
+  is-equiv-map-reduce-Π-fib =
+    is-equiv-has-inverse
+      ( inv-map-reduce-Π-fib)
+      ( issec-inv-map-reduce-Π-fib)
+      ( isretr-inv-map-reduce-Π-fib)
+
+  reduce-Π-fib' :
+    ((y : B) (z : fib f y) → C y z) ≃ ((x : A) → C (f x) (x , refl))
+  pr1 reduce-Π-fib' = map-reduce-Π-fib
+  pr2 reduce-Π-fib' = is-equiv-map-reduce-Π-fib
 
 reduce-Π-fib :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →

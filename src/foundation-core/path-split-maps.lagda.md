@@ -42,20 +42,19 @@ module _
 
   abstract
     is-path-split-is-equiv : is-equiv f → is-path-split f
-    is-path-split-is-equiv is-equiv-f =
-      pair (pr1 is-equiv-f) (λ x y → pr1 (is-emb-is-equiv is-equiv-f x y))
+    pr1 (is-path-split-is-equiv is-equiv-f) = pr1 is-equiv-f
+    pr2 (is-path-split-is-equiv is-equiv-f) x y =
+      pr1 (is-emb-is-equiv is-equiv-f x y)
 
   abstract
     is-coherently-invertible-is-path-split :
       is-path-split f → is-coherently-invertible f
-    is-coherently-invertible-is-path-split (pair (pair g issec-g) sec-ap-f) =
-      ( pair
-        ( g)
-        ( pair
-          ( issec-g)
-          ( pair
-            ( λ x → pr1 (sec-ap-f (g (f x)) x) (issec-g (f x)))
-            ( λ x → inv (pr2 (sec-ap-f (g (f x)) x) (issec-g (f x)))))))
+    pr1 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)) = g
+    pr1 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))) = issec-g
+    pr1 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)))) x =
+      pr1 (sec-ap-f (g (f x)) x) (issec-g (f x))
+    pr2 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)))) x =
+      inv (pr2 (sec-ap-f (g (f x)) x) (issec-g (f x)))
 
   abstract
     is-equiv-is-path-split : is-path-split f → is-equiv f

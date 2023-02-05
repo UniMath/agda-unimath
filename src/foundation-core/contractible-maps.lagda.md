@@ -78,10 +78,10 @@ module _
   abstract
     center-fib-is-coherently-invertible :
       is-coherently-invertible f → (y : B) → fib f y
-    center-fib-is-coherently-invertible H y =
-      pair
-      ( inv-is-coherently-invertible H y)
-      ( issec-inv-is-coherently-invertible H y)
+    pr1 (center-fib-is-coherently-invertible H y) =
+      inv-is-coherently-invertible H y
+    pr2 (center-fib-is-coherently-invertible H y) =
+      issec-inv-is-coherently-invertible H y
 
     contraction-fib-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fib f y) →
@@ -94,10 +94,10 @@ module _
 
   is-contr-map-is-coherently-invertible : 
     is-coherently-invertible f → is-contr-map f
-  is-contr-map-is-coherently-invertible H y =
-    pair
-      ( center-fib-is-coherently-invertible H y)
-      ( contraction-fib-is-coherently-invertible H y)
+  pr1 (is-contr-map-is-coherently-invertible H y) =
+    center-fib-is-coherently-invertible H y
+  pr2 (is-contr-map-is-coherently-invertible H y) =
+    contraction-fib-is-coherently-invertible H y
 ```
 
 ### Any equivalence is a contractible map

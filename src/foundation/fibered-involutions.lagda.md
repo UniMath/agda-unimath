@@ -68,13 +68,29 @@ module _
 
   map-Σ-is-fibered-involution-fibered-map-fibered-involution :
     (fibered-involution f g) → Σ (fibered-map f g) (is-fibered-involution-fibered-map)
-  map-Σ-is-fibered-involution-fibered-map-fibered-involution
-    ((i , is-involution-i) , (h , is-involution-h) , H) = (i , h , H) , is-involution-i , is-involution-h
+  pr1 (pr1 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
+    ((i , is-involution-i) , (h , is-involution-h) , H))) = i
+  pr1 (pr2 (pr1 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
+    ((i , is-involution-i) , (h , is-involution-h) , H)))) = h
+  pr2 (pr2 (pr1 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
+    ((i , is-involution-i) , (h , is-involution-h) , H)))) = H
+  pr1 (pr2 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
+    ((i , is-involution-i) , (h , is-involution-h) , H))) = is-involution-i
+  pr2 (pr2 (map-Σ-is-fibered-involution-fibered-map-fibered-involution
+    ((i , is-involution-i) , (h , is-involution-h) , H))) = is-involution-h
 
   map-fibered-involution-Σ-is-fibered-involution-fibered-map :
     (Σ (fibered-map f g) (is-fibered-involution-fibered-map)) → (fibered-involution f g)
-  map-fibered-involution-Σ-is-fibered-involution-fibered-map
-    ((i , h , H) , is-involution-i , is-involution-h) = ((i , is-involution-i) , (h , is-involution-h), H)
+  pr1 (pr1 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
+    ((i , h , H) , is-involution-i , is-involution-h))) = i
+  pr2 (pr1 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
+    ((i , h , H) , is-involution-i , is-involution-h))) = is-involution-i
+  pr1 (pr1 (pr2 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
+    ((i , h , H) , is-involution-i , is-involution-h)))) = h
+  pr2 (pr1 (pr2 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
+    ((i , h , H) , is-involution-i , is-involution-h)))) = is-involution-h
+  pr2 (pr2 (map-fibered-involution-Σ-is-fibered-involution-fibered-map
+    ((i , h , H) , is-involution-i , is-involution-h))) = H
 
   is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution :
     is-equiv (map-Σ-is-fibered-involution-fibered-map-fibered-involution)
@@ -86,10 +102,10 @@ module _
 
   equiv-Σ-is-fibered-involution-fibered-map-fibered-involution :
     (fibered-involution f g) ≃ Σ (fibered-map f g) (is-fibered-involution-fibered-map)
-  equiv-Σ-is-fibered-involution-fibered-map-fibered-involution =
-    pair
-      map-Σ-is-fibered-involution-fibered-map-fibered-involution 
-      is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution
+  pr1 equiv-Σ-is-fibered-involution-fibered-map-fibered-involution =
+    map-Σ-is-fibered-involution-fibered-map-fibered-involution
+  pr2 equiv-Σ-is-fibered-involution-fibered-map-fibered-involution =
+    is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution
 
   is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map :
     is-equiv (map-fibered-involution-Σ-is-fibered-involution-fibered-map)
@@ -101,8 +117,32 @@ module _
 
   equiv-fibered-involution-Σ-is-fibered-involution-fibered-map :
     Σ (fibered-map f g) (is-fibered-involution-fibered-map) ≃ (fibered-involution f g)
-  equiv-fibered-involution-Σ-is-fibered-involution-fibered-map =
-    pair
-      map-fibered-involution-Σ-is-fibered-involution-fibered-map 
-      is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map
+  pr1 equiv-fibered-involution-Σ-is-fibered-involution-fibered-map =
+    map-fibered-involution-Σ-is-fibered-involution-fibered-map
+  pr2 equiv-fibered-involution-Σ-is-fibered-involution-fibered-map =
+    is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map
+```
+
+## Examples
+
+```agda
+self-fibered-involution :
+  {l1 l2 : Level} {A : UU l1} → involution A → fibered-involution id id
+pr1 (self-fibered-involution e) = e
+pr1 (pr2 (self-fibered-involution e)) = e
+pr2 (pr2 (self-fibered-involution e)) = refl-htpy
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  id-fibered-involution : (f : A → B) → fibered-involution f f
+  pr1 (id-fibered-involution f) = id-involution
+  pr1 (pr2 (id-fibered-involution f)) = id-involution
+  pr2 (pr2 (id-fibered-involution f)) = refl-htpy
+
+  id-fibered-involution-htpy : (f g : A → B) → f ~ g → fibered-involution f g
+  pr1 (id-fibered-involution-htpy f g H) = id-involution
+  pr1 (pr2 (id-fibered-involution-htpy f g H)) = id-involution
+  pr2 (pr2 (id-fibered-involution-htpy f g H)) = H
 ```

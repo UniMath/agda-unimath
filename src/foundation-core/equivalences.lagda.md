@@ -82,10 +82,14 @@ module _
   where
 
   is-equiv-id : is-equiv (id {l} {A})
-  is-equiv-id = pair (pair id refl-htpy) (pair id refl-htpy)
+  pr1 (pr1 is-equiv-id) = id
+  pr2 (pr1 is-equiv-id) = refl-htpy
+  pr1 (pr2 is-equiv-id) = id
+  pr2 (pr2 is-equiv-id) = refl-htpy
   
   id-equiv : A ≃ A
-  id-equiv = pair id is-equiv-id
+  pr1 id-equiv = id
+  pr2 id-equiv = is-equiv-id
 ```
 
 ### A map has an two-sided inverse if and only if it is an equivalence
@@ -96,17 +100,21 @@ module _
   where
 
   is-equiv-has-inverse' : has-inverse f → is-equiv f
-  is-equiv-has-inverse' (pair g (pair H K)) =
-    pair (pair g H) (pair g K)
+  pr1 (pr1 (is-equiv-has-inverse' (pair g (pair H K)))) = g
+  pr2 (pr1 (is-equiv-has-inverse' (pair g (pair H K)))) = H
+  pr1 (pr2 (is-equiv-has-inverse' (pair g (pair H K)))) = g
+  pr2 (pr2 (is-equiv-has-inverse' (pair g (pair H K)))) = K
 
   is-equiv-has-inverse :
     (g : B → A) (H : (f ∘ g) ~ id) (K : (g ∘ f) ~ id) → is-equiv f
   is-equiv-has-inverse g H K =
-    is-equiv-has-inverse' (triple g H K)
+    is-equiv-has-inverse' (pair g (pair H K))
 
   has-inverse-is-equiv : is-equiv f → has-inverse f
-  has-inverse-is-equiv  (pair (pair g G) (pair h H)) =
-    triple g G ((((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H)
+  pr1 (has-inverse-is-equiv  (pair (pair g G) (pair h H))) = g
+  pr1 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) = G
+  pr2 (pr2 (has-inverse-is-equiv (pair (pair g G) (pair h H)))) =
+    (((inv-htpy (H ·r g)) ∙h (h ·l G)) ·r f) ∙h H
 ```
 
 ## Properties
@@ -186,7 +194,8 @@ module _
   is-equiv-map-inv-equiv = is-equiv-map-inv-is-equiv (is-equiv-map-equiv e)
 
   inv-equiv : B ≃ A
-  inv-equiv = pair map-inv-equiv is-equiv-map-inv-equiv
+  pr1 inv-equiv = map-inv-equiv
+  pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
 
 ### The 3-for-2 property of equivalences
@@ -201,10 +210,10 @@ module _
 
   abstract
     is-equiv-comp-htpy : is-equiv h → is-equiv g → is-equiv f
-    is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g) =
-      pair
-      ( section-comp-htpy f g h H sec-h sec-g)
-      ( retraction-comp-htpy f g h H retr-g retr-h)
+    pr1 (is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g)) =
+      section-comp-htpy f g h H sec-h sec-g
+    pr2 (is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g)) =
+      retraction-comp-htpy f g h H retr-g retr-h
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -213,10 +222,10 @@ module _
   abstract
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g) =
-      pair
-        ( section-comp g h sec-h sec-g)
-        ( retraction-comp g h retr-g retr-h)
+    pr1 (is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g)) =
+      section-comp g h sec-h sec-g
+    pr2 (is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g)) =
+      retraction-comp g h retr-g retr-h
 
   equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
@@ -294,10 +303,12 @@ module _
   abstract
     is-equiv-htpy :
       {f : A → B} (g : A → B) → f ~ g → is-equiv g → is-equiv f
-    is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)) =
-      pair
-        ( pair gs ((H ·r gs) ∙h issec))
-        ( pair gr ((gr ·l H) ∙h isretr))
+    pr1 (pr1 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) = gs
+    pr2 (pr1 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) =
+      (H ·r gs) ∙h issec
+    pr1 (pr2 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) = gr
+    pr2 (pr2 (is-equiv-htpy g H (pair (pair gs issec) (pair gr isretr)))) =
+      (gr ·l H) ∙h isretr
 
   is-equiv-htpy-equiv : {f : A → B} (e : A ≃ B) → f ~ map-equiv e → is-equiv f
   is-equiv-htpy-equiv e H = is-equiv-htpy (map-equiv e) H (is-equiv-map-equiv e)
@@ -494,8 +505,8 @@ module _
 
   equiv-ap :
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)
-  equiv-ap e x y =
-    pair (ap (map-equiv e)) (is-emb-is-equiv (is-equiv-map-equiv e) x y)
+  pr1 (equiv-ap e x y) = ap (map-equiv e)
+  pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 ```
 
 ## See also

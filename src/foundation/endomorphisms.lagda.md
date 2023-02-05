@@ -3,8 +3,6 @@ title: endomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.endomorphisms where
 
 open import foundation-core.endomorphisms public
@@ -44,7 +42,7 @@ pr1 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) g f = refl
 pr2 (pr2 (pr2 (pr2 (pr2 (endo-Wild-Monoid A))))) = star
 
 endo-Semigroup : {l : Level} → Set l → Semigroup l
-pr1 (endo-Semigroup A) = endo-Set A
+pr1 (endo-Semigroup A) = endo-Set A 
 pr1 (pr2 (endo-Semigroup A)) g f = g ∘ f
 pr2 (pr2 (endo-Semigroup A)) h g f = refl
 
@@ -58,4 +56,4 @@ pr2 (pr2 (pr2 (endo-Monoid A))) f = refl
 ## See also
 
 - For endomorphisms in a category see
-  [category-theory.endomorphisms-of-objects-categories](category-theory.endomorphisms-of-objects-categories.html)
+  [category-theory.endomorphisms-of-objects-categories](category-theory.endomorphisms-of-objects-categories.html).

@@ -67,8 +67,9 @@ is-equiv-is-involution {f = f} is-involution-f =
 
 equiv-is-involution :
   {l : Level} {A : UU l} {f : A → A} → is-involution f → A ≃ A
-equiv-is-involution {f = f} is-involution-f =
-  f , is-equiv-is-involution is-involution-f
+pr1 (equiv-is-involution {f = f} is-involution-f) = f
+pr2 (equiv-is-involution is-involution-f) =
+  is-equiv-is-involution is-involution-f
 ```
 
 ### If `A` is k-truncated then the type of involutions is k-truncated
@@ -81,8 +82,9 @@ is-trunc-is-involution k is-trunc-A f = is-trunc-Π k λ x → is-trunc-A (f(f x
 
 is-involution-Truncated-Type : {l : Level} {A : UU l} (k : 𝕋) →
   is-trunc (succ-𝕋 k) A → (A → A) → Truncated-Type l k
-is-involution-Truncated-Type k is-trunc-A f =
-  (is-involution f) , (is-trunc-is-involution k is-trunc-A f)
+pr1 (is-involution-Truncated-Type k is-trunc-A f) = is-involution f
+pr2 (is-involution-Truncated-Type k is-trunc-A f) =
+  is-trunc-is-involution k is-trunc-A f
 
 is-trunc-involution : 
   {l : Level} {A : UU l} (k : 𝕋) →
@@ -105,12 +107,13 @@ is-involution-id :
   {l : Level} {A : UU l} → is-involution (id {A = A})
 is-involution-id = refl-htpy
 
-involution-id :
+id-involution :
   {l : Level} {A : UU l} → involution A
-involution-id = id , is-involution-id
+pr1 id-involution = id
+pr2 id-involution = is-involution-id
 
 involution-Pointed-Type :
   {l : Level} (A : UU l) → Pointed-Type l
-involution-Pointed-Type A =
-  involution A , involution-id
+pr1 (involution-Pointed-Type A) = involution A
+pr2 (involution-Pointed-Type A) = id-involution
 ```
