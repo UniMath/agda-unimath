@@ -27,7 +27,7 @@ Jonathan Prieto-Cubides
 Egbert Rijke
 
 ```agda
-{-# OPTIONS --guardedness #-}
+{-# OPTIONS --without-K --exact-split --guardedness #-}
 ```
 
 See the list of all Agda modules [here](everything.html).
