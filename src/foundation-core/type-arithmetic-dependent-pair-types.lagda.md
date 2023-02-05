@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation dependent pair types with respect to itself
+We prove laws for the manipulation of dependent pair types with respect to themselves
 and arithmetical laws with respect to contractible types.
 
 ## Properties
@@ -132,10 +132,14 @@ module _
   where
 
   map-assoc-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
-  map-assoc-Σ (pair (pair x y) z) = triple x y z
+  pr1 (map-assoc-Σ ((x , y) , z)) = x
+  pr1 (pr2 (map-assoc-Σ ((x , y) , z))) = y
+  pr2 (pr2 (map-assoc-Σ ((x , y) , z))) = z
 
   map-inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) → Σ (Σ A B) C
-  map-inv-assoc-Σ (pair x (pair y z)) = triple' x y z
+  pr1 (pr1 (map-inv-assoc-Σ (x , y , z))) = x
+  pr2 (pr1 (map-inv-assoc-Σ (x , y , z))) = y
+  pr2 (map-inv-assoc-Σ (x , y , z)) = z
 
   isretr-map-inv-assoc-Σ : (map-inv-assoc-Σ ∘ map-assoc-Σ) ~ id
   isretr-map-inv-assoc-Σ (pair (pair x y) z) = refl
@@ -171,11 +175,15 @@ module _
   where
   
   map-assoc-Σ' : Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) → Σ A (λ x → Σ (B x) (C x))
-  map-assoc-Σ' (pair (pair x y) z) = triple x y z
+  pr1 (map-assoc-Σ' ((x , y) , z)) = x
+  pr1 (pr2 (map-assoc-Σ' ((x , y) , z))) = y
+  pr2 (pr2 (map-assoc-Σ' ((x , y) , z))) = z
 
   map-inv-assoc-Σ' :
     Σ A (λ x → Σ (B x) (C x)) → Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
-  map-inv-assoc-Σ' (pair x (pair y z)) = triple' x y z
+  pr1 (pr1 (map-inv-assoc-Σ' (x , y , z))) = x
+  pr2 (pr1 (map-inv-assoc-Σ' (x , y , z))) = y
+  pr2 (map-inv-assoc-Σ' (x , y , z)) = z
 
   issec-map-inv-assoc-Σ' : (map-assoc-Σ' ∘ map-inv-assoc-Σ') ~ id
   issec-map-inv-assoc-Σ' (pair x (pair y z)) = refl
@@ -258,11 +266,15 @@ module _
   where
 
   map-left-swap-Σ : Σ A (λ x → Σ B (C x)) → Σ B (λ y → Σ A (λ x → C x y))
-  map-left-swap-Σ (pair a (pair b c)) = triple b a c
+  pr1 (map-left-swap-Σ (a , b , c)) = b
+  pr1 (pr2 (map-left-swap-Σ (a , b , c))) = a
+  pr2 (pr2 (map-left-swap-Σ (a , b , c))) = c
   
   map-inv-left-swap-Σ :
     Σ B (λ y → Σ A (λ x → C x y)) → Σ A (λ x → Σ B (C x))
-  map-inv-left-swap-Σ (pair b (pair a c)) = triple a b c
+  pr1 (map-inv-left-swap-Σ (b , a , c)) = a
+  pr1 (pr2 (map-inv-left-swap-Σ (b , a , c))) = b
+  pr2 (pr2 (map-inv-left-swap-Σ (b , a , c))) = c
   
   isretr-map-inv-left-swap-Σ : (map-inv-left-swap-Σ ∘ map-left-swap-Σ) ~ id
   isretr-map-inv-left-swap-Σ (pair a (pair b c)) = refl
@@ -291,10 +303,14 @@ module _
   where
 
   map-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) → Σ (Σ A C) (B ∘ pr1)
-  map-right-swap-Σ (pair (pair a b) c) = triple' a c b
+  pr1 (pr1 (map-right-swap-Σ ((a , b) , c))) = a
+  pr2 (pr1 (map-right-swap-Σ ((a , b) , c))) = c
+  pr2 (map-right-swap-Σ ((a , b) , c)) = b
 
   map-inv-right-swap-Σ : Σ (Σ A C) (B ∘ pr1) → Σ (Σ A B) (C ∘ pr1)
-  map-inv-right-swap-Σ (pair (pair a c) b) = triple' a b c
+  pr1 (pr1 (map-inv-right-swap-Σ ((a , c) , b))) = a
+  pr2 (pr1 (map-inv-right-swap-Σ ((a , c) , b))) = b
+  pr2 (map-inv-right-swap-Σ ((a , c) , b)) = c
 
   issec-map-inv-right-swap-Σ : (map-right-swap-Σ ∘ map-inv-right-swap-Σ) ~ id
   issec-map-inv-right-swap-Σ (pair (pair x y) z) = refl

@@ -18,7 +18,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation of cartesian products with respect to itself and dependent pair types.
+We prove laws for the manipulation of cartesian products with respect to themselves and dependent pair types.
 
 ## Laws
 

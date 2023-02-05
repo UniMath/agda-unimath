@@ -10,7 +10,7 @@ open import foundation-core.type-arithmetic-dependent-pair-types public
 
 ## Idea
 
-We prove laws for the manipulation dependent pair types with respect to itself and contractible types.
+We prove laws for the manipulation of dependent pair types with respect to themselves and contractible types.
 
 ## See also
 
