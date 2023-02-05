@@ -302,8 +302,9 @@ module _
 
   inv-map-compute-fib-comp :
     Σ (fib g x) (λ t → fib h (pr1 t)) → fib (g ∘ h) x
-  inv-map-compute-fib-comp t =
-    pr1 (pr2 t) , (ap g (pr2 (pr2 t))) ∙ (pr2 (pr1 t))
+  pr1 (inv-map-compute-fib-comp t) = pr1 (pr2 t)
+  pr2 (inv-map-compute-fib-comp t) = 
+    ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
   issec-inv-map-compute-fib-comp :
     (map-compute-fib-comp ∘ inv-map-compute-fib-comp) ~ id
