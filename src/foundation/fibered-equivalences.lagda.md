@@ -49,7 +49,7 @@ module _
   where
 
   equiv-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l4)
-  equiv-over i = Σ (A ≃ B) (is-map-over f g i ∘ map-equiv)
+  equiv-over i = Σ (A ≃ B) (λ h → (i ∘ f) ~ (g ∘ (map-equiv h)))
 
   fibered-equiv : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   fibered-equiv = Σ (X ≃ Y) (equiv-over ∘ map-equiv)

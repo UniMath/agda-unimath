@@ -40,7 +40,7 @@ such that both `i` and `h` are involutions.
 involution-over :
   {l1 l2 l3 : Level} {A : UU l1} {X : UU l2} {Y : UU l3} →
   (A → X) → (A → Y) → (X → Y) → UU (l1 ⊔ l3)
-involution-over {A = A} f g i = Σ (involution A) (is-map-over f g i ∘ map-involution)
+involution-over {A = A} f g i = Σ (involution A) (λ h → (i ∘ f) ~ (g ∘ (map-involution h)))
 
 fibered-involution :
   {l1 l2 : Level} {A : UU l1} {X : UU l2} →
