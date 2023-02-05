@@ -500,3 +500,12 @@ equiv-fiberwise-equiv-fam-equiv :
   fam-equiv B C ≃ fiberwise-equiv B C
 equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
 ```
+
+## See also
+
+- For the notion of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [foundation.coherently-invertible-maps](foundation.coherently-invertible-maps.html).
+- For the notion of maps with contractible fibers see
+  [foundation.contractible-maps](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [foundation.path-split-maps](foundation.path-split-maps.html).

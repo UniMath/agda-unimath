@@ -3,7 +3,7 @@ title: Coherently invertible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.coherently-invertible-maps where
 
@@ -29,7 +29,7 @@ module _
 
   has-inverse : (A → B) → UU (l1 ⊔ l2)
   has-inverse f = Σ (B → A) (λ g → ((f ∘ g) ~ id) × ((g ∘ f) ~ id))
-  
+
   coherence-is-coherently-invertible :
     (f : A → B) (g : B → A) (G : (f ∘ g) ~ id) (H : (g ∘ f) ~ id) → UU (l1 ⊔ l2)
   coherence-is-coherently-invertible f g G H = (G ·r f) ~ (f ·l H)
@@ -51,7 +51,7 @@ module _
   issec-inv-is-coherently-invertible :
     (H : is-coherently-invertible f) → (f ∘ inv-is-coherently-invertible H) ~ id
   issec-inv-is-coherently-invertible H = pr1 (pr2 H)
-  
+
   isretr-inv-is-coherently-invertible :
     (H : is-coherently-invertible f) → (inv-is-coherently-invertible H ∘ f) ~ id
   isretr-inv-is-coherently-invertible H = pr1 (pr2 (pr2 H))
@@ -87,7 +87,7 @@ coh-is-coherently-invertible-id {_} {A} {f} H x =
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
-  
+
   inv-has-inverse : has-inverse f → B → A
   inv-has-inverse H = pr1 H
 
@@ -96,10 +96,10 @@ module _
     issec-inv-has-inverse H y =
       ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
       ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
-  
+
     isretr-inv-has-inverse : (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
     isretr-inv-has-inverse H = pr2 (pr2 H)
-  
+
     coherence-inv-has-inverse :
       (H : has-inverse f) →
       (issec-inv-has-inverse H ·r f) ~ (f ·l isretr-inv-has-inverse H)
@@ -123,10 +123,21 @@ module _
   abstract
     is-coherently-invertible-has-inverse :
       (H : has-inverse f) → is-coherently-invertible f
-    pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
-    pr1 (pr2 (is-coherently-invertible-has-inverse H)) = issec-inv-has-inverse H
-    pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      isretr-inv-has-inverse H
-    pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      coherence-inv-has-inverse H
+    is-coherently-invertible-has-inverse H =
+      ( pair
+        ( inv-has-inverse H)
+        ( pair
+          ( issec-inv-has-inverse H)
+          ( pair
+            ( isretr-inv-has-inverse H)
+            ( coherence-inv-has-inverse H))))
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [foundation.equivalences](foundation.equivalences.html).
+- For the notion of maps with contractible fibers see
+  [foundation.contractible-maps](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [foundation.path-split-maps](foundation.path-split-maps.html).

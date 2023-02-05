@@ -3,8 +3,6 @@ title: Contractible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.contractible-maps where
 
 open import foundation-core.coherently-invertible-maps
@@ -80,10 +78,10 @@ module _
   abstract
     center-fib-is-coherently-invertible :
       is-coherently-invertible f → (y : B) → fib f y
-    pr1 (center-fib-is-coherently-invertible H y) =
-      inv-is-coherently-invertible H y
-    pr2 (center-fib-is-coherently-invertible H y) =
-      issec-inv-is-coherently-invertible H y
+    center-fib-is-coherently-invertible H y =
+      pair
+      ( inv-is-coherently-invertible H y)
+      ( issec-inv-is-coherently-invertible H y)
 
     contraction-fib-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fib f y) →
@@ -96,10 +94,10 @@ module _
 
   is-contr-map-is-coherently-invertible : 
     is-coherently-invertible f → is-contr-map f
-  pr1 (is-contr-map-is-coherently-invertible H y) =
-    center-fib-is-coherently-invertible H y
-  pr2 (is-contr-map-is-coherently-invertible H y) =
-    contraction-fib-is-coherently-invertible H y
+  is-contr-map-is-coherently-invertible H y =
+    pair
+      ( center-fib-is-coherently-invertible H y)
+      ( contraction-fib-is-coherently-invertible H y)
 ```
 
 ### Any equivalence is a contractible map
@@ -114,3 +112,12 @@ module _
     is-contr-map-is-equiv =
       is-contr-map-is-coherently-invertible ∘ is-coherently-invertible-is-equiv
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [foundation.equivalences](foundation.equivalences.html).
+- For the notion of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [foundation.coherently-invertible-maps](foundation.coherently-invertible-maps.html).
+- For the notion of path-split maps see
+  [foundation.path-split-maps](foundation.path-split-maps.html).
