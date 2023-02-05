@@ -63,6 +63,7 @@ open import synthetic-homotopy-theory.loop-spaces
 
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.standard-finite-types
 ```
 
