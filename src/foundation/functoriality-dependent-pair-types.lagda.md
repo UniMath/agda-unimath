@@ -185,3 +185,17 @@ module _
           ( is-pb-c'))
       ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
 ```
+
+## See also
+
+- Arithmetical laws involving dependent pair types are recorded in
+  [foundation.type-arithmetic-dependent-pair-types](foundation.type-arithmetic-dependent-pair-types.html).
+- Equality proofs in dependent pair types are characterized in
+  [foundation.equality-dependent-pair-types](foundation.equality-dependent-pair-types.html).
+- The universal property of dependent pair types is treated in
+  [foundation.universal-property-dependent-pair-types](foundation.universal-property-dependent-pair-types.html).
+
+- Functorial properties of cartesian product types are recorded in
+  [foundation.functoriality-cartesian-product-types](foundation.functoriality-cartesian-product-types.html).
+- Functorial properties of dependent product types are recorded in
+  [foundation.functoriality-dependent-function-types](foundation.functoriality-dependent-function-types.html).

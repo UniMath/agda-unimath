@@ -59,7 +59,7 @@ module _
   pr2 (equiv-eq-htpy {f = f} {g}) = is-equiv-eq-htpy f g
 ```
 
- ## See also
+## See also
  
 - That the univalence axiom implies function extensionality is proven in
   [foundation.univalence-implies-function-extensionality](foundation.univalence-implies-function-extensionality.html).

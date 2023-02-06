@@ -5,13 +5,13 @@ title: Equality on dependent function types
 ```agda
 module foundation.equality-dependent-function-types where
 
+open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation.type-theoretic-principle-of-choice
 ```
 
@@ -66,3 +66,15 @@ module _
   pr1 (extensionality-Π e g) = map-extensionality-Π e g
   pr2 (extensionality-Π e g) = is-equiv-map-extensionality-Π e g
 ```
+
+## See also
+
+- Equality proofs in the fiber of a map are characterized in
+  [foundation.equality-fibers-of-maps](foundation.equality-equality-fibers-of-maps.html).
+- Equality proofs in cartesian product types are characterized in
+  [foundation.equality-cartesian-product-types](foundation.equality-cartesian-product-types.html).
+- Equality proofs in dependent pair types are characterized in
+  [foundation.equality-dependent-pair-types](foundation.equality-dependent-pair-types.html).
+
+- Function extensionality is postulated in
+  [foundation.function-extensionality](foundation.function-extensionality.html).

@@ -34,7 +34,7 @@ is-subuniverse :
 is-subuniverse P = is-subtype P
 
 subuniverse :
-  (l1 l2 : Level) → UU ((lsuc l1) ⊔ (lsuc l2))
+  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 subuniverse l1 l2 = subtype l2 (UU l1)
 
 is-subtype-subuniverse :

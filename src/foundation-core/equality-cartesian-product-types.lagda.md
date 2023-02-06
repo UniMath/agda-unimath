@@ -129,3 +129,12 @@ ap-pr2-eq-pair :
   ap pr2 (eq-pair {s = pair x y} {pair x' y'} p q) ＝ q
 ap-pr2-eq-pair refl refl = refl
 ```
+
+## See also
+
+- Equality proofs in dependent pair types are characterized in
+  [foundation.equality-dependent-pair-types](foundation.equality-dependent-pair-types.html).
+- Equality proofs in dependent product types are characterized in
+  [foundation.equality-dependent-function-types](foundation.equality-dependent-function-types.html).
+- Equality proofs in coproduct types are characterized in
+  [foundation.equality-coproduct-types](foundation.equality-coproduct-types.html).

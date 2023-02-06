@@ -5,6 +5,8 @@ title: The image of a map
 ```agda
 module foundation.images where
 
+open import foundation-core.slice
+
 open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -20,7 +22,6 @@ open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.slice
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
