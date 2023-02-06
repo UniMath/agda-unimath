@@ -6,7 +6,6 @@ title: Set truncations
 module foundation.set-truncations where
 
 open import foundation-core.function-extensionality
-open import foundation-core.slice
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
@@ -29,6 +28,7 @@ open import foundation.mere-equality
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.truncations

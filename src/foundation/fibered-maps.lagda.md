@@ -17,10 +17,10 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.slice
 open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
+open import foundation.slice
 ```
 
 ## Idea
