@@ -21,7 +21,7 @@ open import foundation.universe-levels
 Given a type `A` equipped with an equivalence relation `R` and a type `B` equipped with an equivalence relation `S`, the type `A/R → B/S` is equivalent to the set quotient
 
 ```md
-  (map-Eq-Rel R S) / ~
+  (hom-Eq-Rel R S) / ~
 ```
 
 where `f ~ g := (x : A) → S (f x) (g x)`.
@@ -36,37 +36,37 @@ module _
   {A : UU l1} (R : Eq-Rel l2 A) {B : UU l3} (S : Eq-Rel l4 B)
   where
 
-  rel-map-Eq-Rel : Rel-Prop (l1 ⊔ l4) (map-Eq-Rel R S)
-  rel-map-Eq-Rel f g =
+  rel-hom-Eq-Rel : Rel-Prop (l1 ⊔ l4) (hom-Eq-Rel R S)
+  rel-hom-Eq-Rel f g =
     Π-Prop
       ( A)
-      ( λ x → prop-Eq-Rel S (map-map-Eq-Rel R S f x) (map-map-Eq-Rel R S g x))
+      ( λ x → prop-Eq-Rel S (map-hom-Eq-Rel R S f x) (map-hom-Eq-Rel R S g x))
 
-  sim-map-Eq-Rel : (f g : map-Eq-Rel R S) → UU (l1 ⊔ l4)
-  sim-map-Eq-Rel = type-Rel-Prop (rel-map-Eq-Rel)
+  sim-hom-Eq-Rel : (f g : hom-Eq-Rel R S) → UU (l1 ⊔ l4)
+  sim-hom-Eq-Rel = type-Rel-Prop (rel-hom-Eq-Rel)
 
-  refl-sim-map-Eq-Rel :
-    (f : map-Eq-Rel R S) → sim-map-Eq-Rel f f
-  refl-sim-map-Eq-Rel f x = refl-Eq-Rel S
+  refl-sim-hom-Eq-Rel :
+    (f : hom-Eq-Rel R S) → sim-hom-Eq-Rel f f
+  refl-sim-hom-Eq-Rel f x = refl-Eq-Rel S
 
-  symm-sim-map-Eq-Rel :
-    (f g : map-Eq-Rel R S) → sim-map-Eq-Rel f g → sim-map-Eq-Rel g f
-  symm-sim-map-Eq-Rel f g r x = symm-Eq-Rel S (r x)
+  symm-sim-hom-Eq-Rel :
+    (f g : hom-Eq-Rel R S) → sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g f
+  symm-sim-hom-Eq-Rel f g r x = symm-Eq-Rel S (r x)
 
-  trans-sim-map-Eq-Rel :
-    (f g h : map-Eq-Rel R S) →
-    sim-map-Eq-Rel f g → sim-map-Eq-Rel g h → sim-map-Eq-Rel f h
-  trans-sim-map-Eq-Rel f g h r s x = trans-Eq-Rel S (r x) (s x)
+  trans-sim-hom-Eq-Rel :
+    (f g h : hom-Eq-Rel R S) →
+    sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g h → sim-hom-Eq-Rel f h
+  trans-sim-hom-Eq-Rel f g h r s x = trans-Eq-Rel S (r x) (s x)
 
-  eq-rel-map-Eq-Rel :
-    Eq-Rel (l1 ⊔ l4) (map-Eq-Rel R S)
-  pr1 eq-rel-map-Eq-Rel = rel-map-Eq-Rel
-  pr1 (pr2 eq-rel-map-Eq-Rel) {f} = refl-sim-map-Eq-Rel f
-  pr1 (pr2 (pr2 eq-rel-map-Eq-Rel)) {f} {g} = symm-sim-map-Eq-Rel f g
-  pr2 (pr2 (pr2 eq-rel-map-Eq-Rel)) {f} {g} {h} = trans-sim-map-Eq-Rel f g h
+  eq-rel-hom-Eq-Rel :
+    Eq-Rel (l1 ⊔ l4) (hom-Eq-Rel R S)
+  pr1 eq-rel-hom-Eq-Rel = rel-hom-Eq-Rel
+  pr1 (pr2 eq-rel-hom-Eq-Rel) {f} = refl-sim-hom-Eq-Rel f
+  pr1 (pr2 (pr2 eq-rel-hom-Eq-Rel)) {f} {g} = symm-sim-hom-Eq-Rel f g
+  pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) {f} {g} {h} = trans-sim-hom-Eq-Rel f g h
 ```
 
-### The quotient map of `sim-map-Eq-Rel`
+### The quotient map of `sim-hom-Eq-Rel`
 
 ```agda
 module _
@@ -79,13 +79,13 @@ module _
   (UqS : {l : Level} → is-set-quotient l S QS qS)
   where
 
-  quotient-set-sim-map-Eq-Rel : Set (l3 ⊔ l6)
-  quotient-set-sim-map-Eq-Rel = hom-Set QR QS
+  quotient-set-sim-hom-Eq-Rel : Set (l3 ⊔ l6)
+  quotient-set-sim-hom-Eq-Rel = hom-Set QR QS
 
-  type-quotient-set-sim-map-Eq-Rel : UU (l3 ⊔ l6)
-  type-quotient-set-sim-map-Eq-Rel = type-Set quotient-set-sim-map-Eq-Rel
+  type-quotient-set-sim-hom-Eq-Rel : UU (l3 ⊔ l6)
+  type-quotient-set-sim-hom-Eq-Rel = type-Set quotient-set-sim-hom-Eq-Rel
 
-  quotient-map-sim-map-Eq-Rel :
-    map-Eq-Rel R S → type-quotient-set-sim-map-Eq-Rel
-  quotient-map-sim-map-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
+  quotient-map-sim-hom-Eq-Rel :
+    hom-Eq-Rel R S → type-quotient-set-sim-hom-Eq-Rel
+  quotient-map-sim-hom-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
 ```
