@@ -6,7 +6,6 @@ title: Set quotients
 module foundation.set-quotients where
 
 open import foundation-core.equivalence-relations
-open import foundation.slice
 
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
@@ -21,6 +20,7 @@ open import foundation.inhabited-subtypes
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.slice
 open import foundation.small-types
 open import foundation.subtypes
 open import foundation.surjective-maps

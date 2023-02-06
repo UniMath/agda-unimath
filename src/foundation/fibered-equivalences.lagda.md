@@ -13,7 +13,6 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation.slice
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
 
@@ -21,6 +20,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.pullbacks
+open import foundation.slice
 ```
 
 ## Idea
