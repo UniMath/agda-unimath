@@ -109,7 +109,8 @@ pr2 (comp-hom-slice f g h j i) =
 
 id-hom-slice :
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) → hom-slice f f
-id-hom-slice f = id , refl-htpy
+pr1 (id-hom-slice f) = id
+pr2 (id-hom-slice f) = refl-htpy
 
 is-equiv-hom-slice :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
@@ -164,8 +165,8 @@ module _
         ( isretr-hom-slice-fiberwise-hom)
 
   equiv-fiberwise-hom-hom-slice : hom-slice f g ≃ fiberwise-hom f g
-  equiv-fiberwise-hom-hom-slice =
-    fiberwise-hom-hom-slice , is-equiv-fiberwise-hom-hom-slice
+  pr1 equiv-fiberwise-hom-hom-slice = fiberwise-hom-hom-slice
+  pr2 equiv-fiberwise-hom-hom-slice = is-equiv-fiberwise-hom-hom-slice
 
   abstract
     is-equiv-hom-slice-fiberwise-hom : is-equiv hom-slice-fiberwise-hom
@@ -177,8 +178,8 @@ module _
 
   equiv-hom-slice-fiberwise-hom :
     fiberwise-hom f g ≃ hom-slice f g
-  equiv-hom-slice-fiberwise-hom =
-    hom-slice-fiberwise-hom , is-equiv-hom-slice-fiberwise-hom
+  pr1 equiv-hom-slice-fiberwise-hom = hom-slice-fiberwise-hom
+  pr2 equiv-hom-slice-fiberwise-hom = is-equiv-hom-slice-fiberwise-hom
 ```
 
 ### A morphism in the slice over `X` is an equivalence if and only if the induced map between fibers is a fiberwise equivalence
@@ -193,7 +194,8 @@ module _
 
   hom-equiv-slice :
     (f : A → X) (g : B → X) → equiv-slice f g → hom-slice f g
-  hom-equiv-slice f g e = pr1 (pr1 e) , pr2 e
+  pr1 (hom-equiv-slice f g e) = pr1 (pr1 e)
+  pr2 (hom-equiv-slice f g e) = pr2 e
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
@@ -310,7 +312,8 @@ module _
   equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
 
   id-equiv-Slice : (f : Slice l2 A) → equiv-slice' f f
-  id-equiv-Slice f = id-equiv , refl-htpy
+  pr1 (id-equiv-Slice f) = id-equiv
+  pr2 (id-equiv-Slice f) = refl-htpy
 
   equiv-eq-Slice : (f g : Slice l2 A) → f ＝ g → equiv-slice' f g
   equiv-eq-Slice f .f refl = id-equiv-Slice f
@@ -343,8 +346,9 @@ module _
 
   extensionality-Slice :
     (f g : Slice l2 A) → (f ＝ g) ≃ equiv-slice' f g
-  extensionality-Slice f g =
-    (equiv-eq-Slice f g) , (is-equiv-equiv-eq-Slice f g)
+  pr1 (extensionality-Slice f g) = equiv-eq-Slice f g
+  pr2 (extensionality-Slice f g) = is-equiv-equiv-eq-Slice f g
+    
 
   eq-equiv-slice :
     (f g : Slice l2 A) → equiv-slice' f g → f ＝ g
