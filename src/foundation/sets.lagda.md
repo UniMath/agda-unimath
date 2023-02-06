@@ -118,6 +118,10 @@ is-set-type-Π-Set' A B =
 pr1 (Π-Set' A B) = type-Π-Set' A B
 pr2 (Π-Set' A B) = is-set-type-Π-Set' A B
 
+function-Set :
+  {l1 l2 : Level} (A : UU l1) (B : Set l2) → Set (l1 ⊔ l2)
+function-Set A B = Π-Set' A (λ x → B)
+
 type-Π-Set :
   {l1 l2 : Level} (A : Set l1) (B : type-Set A → Set l2) → UU (l1 ⊔ l2)
 type-Π-Set A B = type-Π-Set' (type-Set A) B

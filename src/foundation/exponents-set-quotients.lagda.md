@@ -8,27 +8,97 @@ module foundation.exponents-set-quotients where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
+open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-set-quotients
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.set-quotients
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 ```
 
 ## Idea
 
-Given a type `A` equipped with an equivalence relation `R` and a type `B` equipped with an equivalence relation `S`, the type `A/R → B/S` is equivalent to the set quotient
+Given a type `A` equipped with an equivalence relation `R` and a type `X`, the set quotient
 
 ```md
-  (hom-Eq-Rel R S) / ~
+  (X → A) / ~
 ```
 
-where `f ~ g := (x : A) → S (f x) (g x)`.
+where `f ~ g := (x : A) → R (f x) (g x)`, embeds into the type `X → A/R`. This embedding for every `X`, `A`, and `R` if and only if the axiom of choice holds.
+
+Consequently, we get embeddings
+
+```md
+  ((hom-Eq-Rel R S) / ~) ↪ ((A/R) → (B/S))
+```
+
+for any two equivalence relations `R` on `A` and `S` on `B`.
 
 ## Definitions
 
-### Equivalence relation on relation preserving maps
+### An equivalence relation on `X → A`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (X : UU l1) {A : UU l2} (R : Eq-Rel l3 A)
+  where
+
+  rel-function-type : Rel-Prop (l1 ⊔ l3) (X → A)
+  rel-function-type f g = Π-Prop X (λ x → prop-Eq-Rel R (f x) (g x))
+
+  sim-function-type : (f g : X → A) → UU (l1 ⊔ l3)
+  sim-function-type = type-Rel-Prop rel-function-type
+
+  refl-sim-function-type : (f : X → A) → sim-function-type f f
+  refl-sim-function-type f x = refl-Eq-Rel R
+
+  symm-sim-function-type :
+    (f g : X → A) → sim-function-type f g → sim-function-type g f
+  symm-sim-function-type f g r x = symm-Eq-Rel R (r x)
+
+  trans-sim-function-type :
+    (f g h : X → A) →
+    sim-function-type f g → sim-function-type g h → sim-function-type f h
+  trans-sim-function-type f g h r s x = trans-Eq-Rel R (r x) (s x)
+
+  eq-rel-function-type : Eq-Rel (l1 ⊔ l3) (X → A)
+  pr1 eq-rel-function-type = rel-function-type
+  pr1 (pr2 eq-rel-function-type) {f} = refl-sim-function-type f
+  pr1 (pr2 (pr2 eq-rel-function-type)) {f} {g} = symm-sim-function-type f g
+  pr2 (pr2 (pr2 eq-rel-function-type)) {f} {g} {h} =
+    trans-sim-function-type f g h
+
+  exponent-reflecting-map-Eq-Rel :
+    {l4 : Level} {B : UU l4} →
+    reflecting-map-Eq-Rel R B →
+    reflecting-map-Eq-Rel eq-rel-function-type (X → B)
+  pr1 (exponent-reflecting-map-Eq-Rel q) =
+    postcomp X (map-reflecting-map-Eq-Rel R q)
+  pr2 (exponent-reflecting-map-Eq-Rel q) {f} {g} H =
+    eq-htpy (λ x → reflects-map-reflecting-map-Eq-Rel R q (H x))
+
+  map-inclusion-is-set-quotient-eq-rel-function-type :
+    {l4 l5 : Level}
+    (Q : Set l4) (q : reflecting-map-Eq-Rel eq-rel-function-type (type-Set Q))
+    (Uq : {l : Level} → is-set-quotient l eq-rel-function-type Q q) →
+    (QR : Set l5) (qR : reflecting-map-Eq-Rel R (type-Set QR))
+    (UqR : {l : Level} → is-set-quotient l R QR qR) →
+    type-Set Q → (X → type-Set QR)
+  map-inclusion-is-set-quotient-eq-rel-function-type Q q Uq QR qR UqR =
+    map-universal-property-set-quotient-is-set-quotient
+      ( eq-rel-function-type)
+      ( Q)
+      ( q)
+      ( Uq)
+      ( function-Set X QR)
+      ( exponent-reflecting-map-Eq-Rel qR)
+```
+
+### An equivalence relation on relation preserving maps
 
 ```agda
 module _
@@ -38,25 +108,30 @@ module _
 
   rel-hom-Eq-Rel : Rel-Prop (l1 ⊔ l4) (hom-Eq-Rel R S)
   rel-hom-Eq-Rel f g =
-    Π-Prop
-      ( A)
-      ( λ x → prop-Eq-Rel S (map-hom-Eq-Rel R S f x) (map-hom-Eq-Rel R S g x))
+    rel-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
 
   sim-hom-Eq-Rel : (f g : hom-Eq-Rel R S) → UU (l1 ⊔ l4)
-  sim-hom-Eq-Rel = type-Rel-Prop (rel-hom-Eq-Rel)
+  sim-hom-Eq-Rel f g =
+    sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
 
   refl-sim-hom-Eq-Rel :
     (f : hom-Eq-Rel R S) → sim-hom-Eq-Rel f f
-  refl-sim-hom-Eq-Rel f x = refl-Eq-Rel S
+  refl-sim-hom-Eq-Rel f =
+    refl-sim-function-type A S (map-hom-Eq-Rel R S f)
 
   symm-sim-hom-Eq-Rel :
     (f g : hom-Eq-Rel R S) → sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g f
-  symm-sim-hom-Eq-Rel f g r x = symm-Eq-Rel S (r x)
+  symm-sim-hom-Eq-Rel f g =
+    symm-sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
 
   trans-sim-hom-Eq-Rel :
     (f g h : hom-Eq-Rel R S) →
     sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g h → sim-hom-Eq-Rel f h
-  trans-sim-hom-Eq-Rel f g h r s x = trans-Eq-Rel S (r x) (s x)
+  trans-sim-hom-Eq-Rel f g h =
+    trans-sim-function-type A S
+      ( map-hom-Eq-Rel R S f)
+      ( map-hom-Eq-Rel R S g)
+      ( map-hom-Eq-Rel R S h)
 
   eq-rel-hom-Eq-Rel :
     Eq-Rel (l1 ⊔ l4) (hom-Eq-Rel R S)
@@ -66,7 +141,7 @@ module _
   pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) {f} {g} {h} = trans-sim-hom-Eq-Rel f g h
 ```
 
-### The quotient map of `sim-hom-Eq-Rel`
+### The natural map of `sim-hom-Eq-Rel`
 
 ```agda
 module _
@@ -79,13 +154,9 @@ module _
   (UqS : {l : Level} → is-set-quotient l S QS qS)
   where
 
-  quotient-set-sim-hom-Eq-Rel : Set (l3 ⊔ l6)
-  quotient-set-sim-hom-Eq-Rel = hom-Set QR QS
+  universal-map-sim-hom-Eq-Rel :
+    hom-Eq-Rel R S → type-hom-Set QR QS
+  universal-map-sim-hom-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
 
-  type-quotient-set-sim-hom-Eq-Rel : UU (l3 ⊔ l6)
-  type-quotient-set-sim-hom-Eq-Rel = type-Set quotient-set-sim-hom-Eq-Rel
 
-  quotient-map-sim-hom-Eq-Rel :
-    hom-Eq-Rel R S → type-quotient-set-sim-hom-Eq-Rel
-  quotient-map-sim-hom-Eq-Rel = map-is-set-quotient R QR qR S QS qS UqR UqS
 ```
