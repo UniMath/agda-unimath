@@ -6,7 +6,7 @@ title: Equivalence classes
 module foundation.equivalence-classes where
 
 open import foundation-core.equivalence-relations
-open import foundation-core.slice
+open import foundation.slice
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types

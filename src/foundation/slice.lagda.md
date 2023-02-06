@@ -5,18 +5,28 @@ title: Morphisms of the slice category of types
 ```agda
 module foundation.slice where
 
-open import foundation-core.slice public
-
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
+open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.fibers-of-maps
 open import foundation-core.functions
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
+open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.polynomial-endofunctors
 open import foundation.structure-identity-principle
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 ```
 
@@ -24,7 +34,287 @@ open import foundation.univalence
 
 The slice of a category over an object X is the category of morphisms into X. A morphism in the slice from `f : A → X` to `g : B → X` consists of a function `h : A → B` such that the triangle `f ~ g ∘ h` commutes. We make these definitions for types.
 
+
+## Definition
+
+### The objects of the slice category of types
+
+```agda
+Slice : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
+Slice l = type-polynomial-endofunctor (UU l) (λ X → X)
+```
+
+### The morphisms of the slice category of types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  hom-slice :
+    (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
+  hom-slice f g = Σ (A → B) (λ h → f ~ (g ∘ h))
+
+  map-hom-slice :
+    (f : A → X) (g : B → X) → hom-slice f g → A → B
+  map-hom-slice f g h = pr1 h
+
+  triangle-hom-slice :
+    (f : A → X) (g : B → X) (h : hom-slice f g) →
+    f ~ (g ∘ (map-hom-slice f g h))
+  triangle-hom-slice f g h = pr2 h
+```
+
 ## Properties
+
+### We characterize the identity type of hom-slice
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  htpy-hom-slice : (h h' : hom-slice f g) → UU (l1 ⊔ l2 ⊔ l3)
+  htpy-hom-slice h h' =
+    Σ ( map-hom-slice f g h ~ map-hom-slice f g h')
+      ( λ K →
+        ( (triangle-hom-slice f g h) ∙h (g ·l K)) ~
+        ( triangle-hom-slice f g h'))
+
+  extensionality-hom-slice :
+    (h h' : hom-slice f g) → (h ＝ h') ≃ htpy-hom-slice h h'
+  extensionality-hom-slice (pair h H) =
+    extensionality-Σ
+      ( λ {h'} H' (K : h ~ h') → (H ∙h (g ·l K)) ~ H')
+      ( refl-htpy)
+      ( right-unit-htpy)
+      ( λ h' → equiv-funext)
+      ( λ H' → equiv-concat-htpy right-unit-htpy H' ∘e equiv-funext)
+
+  eq-htpy-hom-slice :
+    (h h' : hom-slice f g) → htpy-hom-slice h h' → h ＝ h'
+  eq-htpy-hom-slice h h' = map-inv-equiv (extensionality-hom-slice h h')
+```
+
+```agda
+comp-hom-slice :
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (h : C → X) →
+  hom-slice g h → hom-slice f g → hom-slice f h
+pr1 (comp-hom-slice f g h j i) = map-hom-slice g h j ∘ map-hom-slice f g i
+pr2 (comp-hom-slice f g h j i) =
+  ( triangle-hom-slice f g i) ∙h
+  ( (triangle-hom-slice g h j) ·r (map-hom-slice f g i))
+
+id-hom-slice :
+  {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) → hom-slice f f
+id-hom-slice f = id , refl-htpy
+
+is-equiv-hom-slice :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) → hom-slice f g → UU (l2 ⊔ l3)
+is-equiv-hom-slice f g h = is-equiv (map-hom-slice f g h)
+```
+
+### Morphisms in the slice are equivalently described as families of maps between fibers
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  fiberwise-hom : (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
+  fiberwise-hom f g = (x : X) → fib f x → fib g x
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  fiberwise-hom-hom-slice : hom-slice f g → fiberwise-hom f g
+  fiberwise-hom-hom-slice (pair h H) = fib-triangle f g h H
+
+  hom-slice-fiberwise-hom : fiberwise-hom f g → hom-slice f g
+  pr1 (hom-slice-fiberwise-hom α) a = pr1 (α (f a) (pair a refl))
+  pr2 (hom-slice-fiberwise-hom α) a = inv (pr2 (α (f a) (pair a refl)))
+
+  issec-hom-slice-fiberwise-hom-eq-htpy :
+    (α : fiberwise-hom f g) (x : X) →
+    (fiberwise-hom-hom-slice (hom-slice-fiberwise-hom α) x) ~ (α x)
+  issec-hom-slice-fiberwise-hom-eq-htpy α .(f a) (pair a refl) =
+    eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
+
+  issec-hom-slice-fiberwise-hom :
+    (fiberwise-hom-hom-slice ∘ hom-slice-fiberwise-hom) ~ id
+  issec-hom-slice-fiberwise-hom α =
+    eq-htpy (λ x → eq-htpy (issec-hom-slice-fiberwise-hom-eq-htpy α x))
+
+  isretr-hom-slice-fiberwise-hom :
+    (hom-slice-fiberwise-hom ∘ fiberwise-hom-hom-slice) ~ id
+  isretr-hom-slice-fiberwise-hom (pair h H) =
+    eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
+
+  abstract
+    is-equiv-fiberwise-hom-hom-slice : is-equiv (fiberwise-hom-hom-slice)
+    is-equiv-fiberwise-hom-hom-slice =
+      is-equiv-has-inverse
+        ( hom-slice-fiberwise-hom)
+        ( issec-hom-slice-fiberwise-hom)
+        ( isretr-hom-slice-fiberwise-hom)
+
+  equiv-fiberwise-hom-hom-slice : hom-slice f g ≃ fiberwise-hom f g
+  equiv-fiberwise-hom-hom-slice =
+    fiberwise-hom-hom-slice , is-equiv-fiberwise-hom-hom-slice
+
+  abstract
+    is-equiv-hom-slice-fiberwise-hom : is-equiv hom-slice-fiberwise-hom
+    is-equiv-hom-slice-fiberwise-hom =
+      is-equiv-has-inverse
+        ( fiberwise-hom-hom-slice)
+        ( isretr-hom-slice-fiberwise-hom)
+        ( issec-hom-slice-fiberwise-hom)
+
+  equiv-hom-slice-fiberwise-hom :
+    fiberwise-hom f g ≃ hom-slice f g
+  equiv-hom-slice-fiberwise-hom =
+    hom-slice-fiberwise-hom , is-equiv-hom-slice-fiberwise-hom
+```
+
+### A morphism in the slice over `X` is an equivalence if and only if the induced map between fibers is a fiberwise equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  equiv-slice : (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
+  equiv-slice f g = Σ (A ≃ B) (λ e → f ~ (g ∘ map-equiv e))
+
+  hom-equiv-slice :
+    (f : A → X) (g : B → X) → equiv-slice f g → hom-slice f g
+  hom-equiv-slice f g e = pr1 (pr1 e) , pr2 e
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  abstract
+    is-fiberwise-equiv-fiberwise-equiv-equiv-slice :
+      (t : hom-slice f g) → is-equiv (pr1 t) →
+      is-fiberwise-equiv (fiberwise-hom-hom-slice f g t)
+    is-fiberwise-equiv-fiberwise-equiv-equiv-slice (pair h H) =
+      is-fiberwise-equiv-is-equiv-triangle f g h H
+
+  abstract
+    is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice :
+      (t : hom-slice f g) →
+      ((x : X) → is-equiv (fiberwise-hom-hom-slice f g t x)) →
+      is-equiv (pr1 t)
+    is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice
+      (pair h H) =
+      is-equiv-triangle-is-fiberwise-equiv f g h H
+
+  equiv-fiberwise-equiv-equiv-slice :
+    equiv-slice f g ≃ fiberwise-equiv (fib f) (fib g)
+  equiv-fiberwise-equiv-equiv-slice =
+    equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
+    equiv-right-swap-Σ
+    where
+      α : (h : hom-slice f g) →
+          is-equiv (pr1 h) ≃
+          is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+      α h = equiv-prop
+        ( is-property-is-equiv _)
+        ( is-prop-Π (λ _ → is-property-is-equiv _))
+        ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice h)
+        ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice h)
+
+  equiv-equiv-slice-fiberwise-equiv :
+    fiberwise-equiv (fib f) (fib g) ≃ equiv-slice f g
+  equiv-equiv-slice-fiberwise-equiv =
+    inv-equiv equiv-fiberwise-equiv-equiv-slice
+  
+  
+
+  fiberwise-equiv-equiv-slice :
+    equiv-slice f g → fiberwise-equiv (fib f) (fib g)
+  fiberwise-equiv-equiv-slice =
+    map-equiv equiv-fiberwise-equiv-equiv-slice
+
+  equiv-fam-equiv-equiv-slice :
+    equiv-slice f g ≃ ((x : X) → fib f x ≃ fib g x) -- fam-equiv (fib f) (fib g)
+  equiv-fam-equiv-equiv-slice =
+    inv-distributive-Π-Σ ∘e equiv-fiberwise-equiv-equiv-slice
+```
+
+### The type of slice morphisms into an embedding is a proposition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  abstract
+    is-prop-hom-slice :
+     (f : A → X) (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
+    is-prop-hom-slice f i =
+      is-prop-is-equiv
+        ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))
+        ( is-prop-Π
+          ( λ x → is-prop-Π
+            ( λ p → is-prop-map-is-emb (is-emb-map-emb i) x)))
+
+  abstract
+    is-equiv-hom-slice-emb :
+      (f : A ↪ X) (g : B ↪ X) (h : hom-slice (map-emb f) (map-emb g)) →
+      hom-slice (map-emb g) (map-emb f) →
+      is-equiv-hom-slice (map-emb f) (map-emb g) h
+    is-equiv-hom-slice-emb f g h i =
+      is-equiv-has-inverse
+        ( map-hom-slice (map-emb g) (map-emb f) i)
+        ( λ y →
+          is-injective-emb g
+          ( inv
+            ( ( triangle-hom-slice
+                ( map-emb g)
+                ( map-emb f)
+                ( i)
+                ( y)) ∙
+              ( triangle-hom-slice
+                ( map-emb f)
+                ( map-emb g)
+                ( h)
+                ( map-hom-slice (map-emb g) (map-emb f) i y)))))
+        ( λ x →
+          is-injective-emb f
+          ( inv
+            ( ( triangle-hom-slice (map-emb f) (map-emb g) h x) ∙
+              ( triangle-hom-slice (map-emb g) (map-emb f) i
+                ( map-hom-slice
+                  ( map-emb f)
+                  ( map-emb g)
+                  ( h)
+                  ( x))))))
+```
+
+### Characterization of the identity type of `Slice l A`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  equiv-slice' : (f g : Slice l2 A) → UU (l1 ⊔ l2)
+  equiv-slice' f g = equiv-slice (pr2 f) (pr2 g)
+
+  id-equiv-Slice : (f : Slice l2 A) → equiv-slice' f f
+  id-equiv-Slice f = id-equiv , refl-htpy
+
+  equiv-eq-Slice : (f g : Slice l2 A) → f ＝ g → equiv-slice' f g
+  equiv-eq-Slice f .f refl = id-equiv-Slice f
+```
 
 ### Univalence in a slice
 

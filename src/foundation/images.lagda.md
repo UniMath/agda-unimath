@@ -5,7 +5,7 @@ title: The image of a map
 ```agda
 module foundation.images where
 
-open import foundation-core.slice
+open import foundation.slice
 
 open import foundation.1-types
 open import foundation.contractible-types

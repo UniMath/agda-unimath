@@ -6,7 +6,7 @@ title: Decidable equivalence relations
 module foundation.decidable-equivalence-relations where
 
 open import foundation-core.equivalence-relations
-open import foundation-core.slice
+open import foundation.slice
 
 open import foundation.contractible-types
 open import foundation.coproduct-types

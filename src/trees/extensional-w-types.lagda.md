@@ -5,7 +5,7 @@ title: Extensional W-types
 ```agda
 module trees.extensional-w-types where
 
-open import foundation-core.slice
+open import foundation.slice
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

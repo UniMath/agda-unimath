@@ -6,7 +6,7 @@ title: Set truncations
 module foundation.set-truncations where
 
 open import foundation-core.function-extensionality
-open import foundation-core.slice
+open import foundation.slice
 
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
