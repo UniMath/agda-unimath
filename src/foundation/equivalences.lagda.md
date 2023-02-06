@@ -50,7 +50,8 @@ module _
   where
   
   emb-equiv : (A ≃ B) → (A ↪ B)
-  emb-equiv e = map-equiv e , is-emb-is-equiv (is-equiv-map-equiv e)
+  pr1 (emb-equiv e) = map-equiv e
+  pr2 (emb-equiv e) = is-emb-is-equiv (is-equiv-map-equiv e)
 ```
 
 ### Transposing equalities along equivalences
@@ -286,7 +287,8 @@ module _
       is-prop-is-contr (is-contr-is-equiv-is-equiv H) H
 
   is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
-  is-equiv-Prop f = is-equiv f , is-property-is-equiv f
+  pr1 (is-equiv-Prop f) = is-equiv f
+  pr2 (is-equiv-Prop f) = is-property-is-equiv f
 
   eq-equiv-eq-map-equiv :
     {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → e ＝ e'
@@ -298,7 +300,8 @@ module _
     is-emb-map-equiv = is-emb-inclusion-subtype is-equiv-Prop
 
   emb-map-equiv : (A ≃ B) ↪ (A → B)
-  emb-map-equiv = map-equiv , is-emb-map-equiv
+  pr1 emb-map-equiv = map-equiv
+  pr2 emb-map-equiv = is-emb-map-equiv
 ```
 
 ### Homotopy induction for homotopies between equivalences
@@ -373,7 +376,8 @@ module _
       ( inv-inv-equiv)
 
   equiv-inv-equiv : (X ≃ Y) ≃ (Y ≃ X)
-  equiv-inv-equiv = inv-equiv , is-equiv-inv-equiv
+  pr1 equiv-inv-equiv = inv-equiv
+  pr2 equiv-inv-equiv = is-equiv-inv-equiv
 
 coh-unit-laws-equiv :
   {l : Level} {X : UU l} →

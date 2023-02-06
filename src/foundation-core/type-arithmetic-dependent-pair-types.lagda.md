@@ -156,7 +156,8 @@ module _
         isretr-map-inv-assoc-Σ
 
   assoc-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (pair x y)))
-  assoc-Σ = pair map-assoc-Σ is-equiv-map-assoc-Σ
+  pr1 assoc-Σ = map-assoc-Σ
+  pr2 assoc-Σ = is-equiv-map-assoc-Σ
 
   inv-assoc-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
   pr1 inv-assoc-Σ = map-inv-assoc-Σ
