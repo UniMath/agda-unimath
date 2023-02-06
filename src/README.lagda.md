@@ -338,6 +338,7 @@ open import foundation.iterating-involutions
 open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.lesser-limited-principle-of-omniscience
+open import foundation.lifts-of-maps
 open import foundation.limited-principle-of-omniscience
 open import foundation.locally-small-types
 open import foundation.logical-equivalences

@@ -13,8 +13,6 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.retractions
-open import foundation-core.sections
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
@@ -42,27 +40,25 @@ to `P` and `g` restricts along `i` to `f`.
   B - g -> P
 ```
 
-## Definitions
+## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   where
 
   is-extension-of :
-    {l3 : Level} {P : B → UU l3} →
+    {P : B → UU l3} →
     ((x : A) → P (i x)) → ((y : B) → P y) → UU (l1 ⊔ l3)
   is-extension-of f g = f ~ (g ∘ i)
 
-  extensions-of :
-    {l3 : Level} (P : B → UU l3) →
+  extension-of :
+    (P : B → UU l3) →
     ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
-  extensions-of P f = Σ ((y : B) → P y) (is-extension-of f)
+  extension-of P f = Σ ((y : B) → P y) (is-extension-of f)
 
-  extensions : (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  extensions l =
-    Σ ( B → UU l)
-      ( λ P → Σ ((x : A) → P (i x)) (extensions-of P))
+  extensions : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  extensions P = Σ ((x : A) → P (i x)) (extension-of P)
 ```
 
 ## Operations
@@ -147,7 +143,7 @@ h ∙l-ext F = apd h ∘ F
 _∙r-ext_ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : B → UU l3} {X : UU l4}
   {i : A → B} {f : (x : A) → P (i x)} {g : (y : B) → P y} 
-   (F : is-extension-of i f g) (h : X → A) →
+  (F : is-extension-of i f g) (h : X → A) →
   (is-extension-of (i ∘ h) (f ∘ h) g)
 F ∙r-ext h = F ∘ h
 ```
@@ -157,23 +153,33 @@ F ∙r-ext h = F ∘ h
 ### If `P` is `k`-truncated then the type of extensions is `k`-truncated
 
 ```agda
-is-trunc-is-extension-of-over-is-trunc-succ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {P : B → UU l3}
-  (i : A → B) (f : (x : A) → P (i x)) (g : (x : B) → P x)
-  (k : 𝕋) → ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
-  is-trunc k (is-extension-of i f g)
-is-trunc-is-extension-of-over-is-trunc-succ i f g k is-trunc-succ-P =
-  is-trunc-Π k λ x → is-trunc-succ-P x (f x) (g (i x))
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  where
 
-is-trunc-extension-of-over-is-trunc :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {P : B → UU l3} 
-  (i : A → B) (f : (x : A) → P (i x))
-  (k : 𝕋) → ((x : B) → is-trunc k (P x)) → is-trunc k (extensions-of i P f)
-is-trunc-extension-of-over-is-trunc i f k is-trunc-P =
-  is-trunc-Σ
-    ( is-trunc-Π k is-trunc-P)
-    ( λ g → is-trunc-is-extension-of-over-is-trunc-succ i f g k
-      ( is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
+  is-trunc-is-extension :
+    (k : 𝕋) {P : B → UU l3} → ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
+    (f : (x : A) → P (i x)) (g : (x : B) → P x) →
+    is-trunc k (is-extension-of i f g)
+  is-trunc-is-extension k is-trunc-P f g =
+    is-trunc-Π k λ x → is-trunc-P x (f x) (g (i x))
+
+  is-trunc-extension-of :
+    (k : 𝕋) {P : B → UU l3} → ((x : B) → is-trunc k (P x)) →
+    (f : (x : A) → P (i x)) →
+    is-trunc k (extension-of i P f)
+  is-trunc-extension-of k is-trunc-P f =
+    is-trunc-Σ
+      ( is-trunc-Π k is-trunc-P)
+      ( is-trunc-is-extension k (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)) f)
+
+  is-trunc-extensions :
+    (k : 𝕋) (P : B → UU l3) → ((x : B) → is-trunc k (P x)) →
+    is-trunc k (extensions i P)
+  is-trunc-extensions k P is-trunc-P =
+    is-trunc-Σ
+      ( is-trunc-Π k (is-trunc-P ∘ i))
+      (is-trunc-extension-of k is-trunc-P)
 ```
 
 ### Characterizing extensions in terms of the precomposition function
@@ -185,30 +191,30 @@ module _
   where
 
   equiv-fib'-precomp-extension-of :
-    (f : (x : A) → P (i x)) → fib' (precomp-Π i P) f ≃ extensions-of i P f
+    (f : (x : A) → P (i x)) → fib' (precomp-Π i P) f ≃ extension-of i P f
   equiv-fib'-precomp-extension-of f =
     equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
   
   equiv-fib-precomp-extension-of :
-    (f : (x : A) → P (i x)) → fib (precomp-Π i P) f ≃ extensions-of i P f
+    (f : (x : A) → P (i x)) → fib (precomp-Π i P) f ≃ extension-of i P f
   equiv-fib-precomp-extension-of f =
-    (equiv-fib'-precomp-extension-of f) ∘e equiv-fib (precomp-Π i P) f
+    (equiv-fib'-precomp-extension-of f) ∘e (equiv-fib (precomp-Π i P) f)
 
-  equiv-is-contr-extensions-of-is-local-family :
-    is-local-family i P ≃ ((f : (x : A) → P (i x)) → is-contr (extensions-of i P f))
-  equiv-is-contr-extensions-of-is-local-family =
+  equiv-is-contr-extension-of-is-local-family :
+    is-local-family i P ≃ ((f : (x : A) → P (i x)) → is-contr (extension-of i P f))
+  equiv-is-contr-extension-of-is-local-family =
     equiv-map-Π (λ f → equiv-is-contr-equiv (equiv-fib-precomp-extension-of f))
     ∘e equiv-is-contr-map-is-equiv (precomp-Π i P)
 
-  is-contr-extensions-of-is-local-family :
-    is-local-family i P → ((f : (x : A) → P (i x)) → is-contr (extensions-of i P f))
-  is-contr-extensions-of-is-local-family =
-    map-equiv equiv-is-contr-extensions-of-is-local-family
-  
-  is-local-family-is-contr-extensions-of :
-    ((f : (x : A) → P (i x)) → is-contr (extensions-of i P f)) → is-local-family i P
-  is-local-family-is-contr-extensions-of =
-    map-inv-equiv equiv-is-contr-extensions-of-is-local-family
+  is-contr-extension-of-is-local-family :
+    is-local-family i P → ((f : (x : A) → P (i x)) → is-contr (extension-of i P f))
+  is-contr-extension-of-is-local-family =
+    map-equiv equiv-is-contr-extension-of-is-local-family
+
+  is-local-family-is-contr-extension-of :
+    ((f : (x : A) → P (i x)) → is-contr (extension-of i P f)) → is-local-family i P
+  is-local-family-is-contr-extension-of =
+    map-inv-equiv equiv-is-contr-extension-of-is-local-family
 ```
 
 ## Examples
@@ -229,18 +235,4 @@ is-extension-along-self :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B) → is-extension-of f f id
 is-extension-along-self _ = refl-htpy
-```
-
-### Every map with a section is an extension of the identity along its section
-
-```agda
-is-extension-of-id-section :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} (s : sec f) → is-extension-of (pr1 s) id f
-is-extension-of-id-section s = inv-htpy (pr2 s)
-
-is-extension-of-id-retraction :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} (r : retr f) → is-extension-of f id (pr1 r)
-is-extension-of-id-retraction r = inv-htpy (pr2 r)
 ```
