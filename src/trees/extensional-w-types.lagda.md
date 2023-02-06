@@ -5,8 +5,6 @@ title: Extensional W-types
 ```agda
 module trees.extensional-w-types where
 
-open import foundation-core.slice
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -20,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalent-type-families
 open import foundation.universe-levels

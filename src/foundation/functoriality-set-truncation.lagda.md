@@ -6,7 +6,6 @@ title: Functoriality of set truncation
 module foundation.functoriality-set-truncation where
 
 open import foundation-core.function-extensionality
-open import foundation-core.slice
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -24,6 +23,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.truncation-levels
 open import foundation.uniqueness-image
