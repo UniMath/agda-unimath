@@ -48,7 +48,7 @@ module _
   where
 
   is-map-over : (X → Y) → (A → B) → UU (l1 ⊔ l4)
-  is-map-over i h = (i ∘ f) ~ (g ∘ h)
+  is-map-over i h = coherence-square h f g i -- (i ∘ f) ~ (g ∘ h)
 
   map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l4)
   map-over i = Σ (A → B) (is-map-over i)
@@ -61,7 +61,9 @@ module _
 
 
   cone-fibered-map : (ihH : fibered-map) → cone (pr1 ihH) g A
-  cone-fibered-map (i , h , H) = f , h , H
+  pr1 (cone-fibered-map ihH) = f
+  pr1 (pr2 (cone-fibered-map (i , h , H))) = h
+  pr2 (pr2 (cone-fibered-map (i , h , H))) = H
 ```
 
 ## Properties
