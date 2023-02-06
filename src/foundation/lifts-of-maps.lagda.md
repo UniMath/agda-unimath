@@ -77,3 +77,7 @@ module _
         ( is-trunc-A)
         ( is-trunc-succ-is-trunc k is-trunc-B))
 ```
+
+## See also
+
+- [foundation.extensions-of-maps](foundation.extensions-of-maps.html) for the dual notion.

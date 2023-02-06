@@ -236,3 +236,7 @@ is-extension-along-self :
   (f : A → B) → is-extension-of f f id
 is-extension-along-self _ = refl-htpy
 ```
+
+## See also
+
+- [foundation.lifts-of-maps](foundation.lifts-of-maps.html) for the dual notion.
