@@ -362,6 +362,7 @@ open import foundation.principle-of-omniscience
 open import foundation.products-of-tuples-of-types
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
+open import foundation.projective-types
 open import foundation.proper-subtypes
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
