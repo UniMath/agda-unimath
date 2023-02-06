@@ -3,8 +3,6 @@ title: Union of subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unions-subtypes where
 
 open import foundation.disjunction

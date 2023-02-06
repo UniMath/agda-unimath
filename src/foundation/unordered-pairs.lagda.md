@@ -3,8 +3,6 @@ title: Unordered pairs of elements in a type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unordered-pairs where
 
 open import foundation.contractible-types

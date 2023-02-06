@@ -3,7 +3,7 @@ title: Cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.cartesian-product-types where
 

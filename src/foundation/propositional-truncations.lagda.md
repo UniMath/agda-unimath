@@ -3,8 +3,6 @@ title: Propositional truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.propositional-truncations where
 
 open import foundation.cartesian-product-types

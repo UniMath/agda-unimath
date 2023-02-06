@@ -3,8 +3,6 @@ title: Cardinalities of sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module set-theory.cardinalities where
 
 open import foundation.dependent-pair-types

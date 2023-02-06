@@ -3,8 +3,6 @@ title: Category theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory where
 
 open import category-theory.adjunctions-large-precategories public

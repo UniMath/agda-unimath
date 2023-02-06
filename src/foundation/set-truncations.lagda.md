@@ -3,8 +3,6 @@ title: Set truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.set-truncations where
 
 open import foundation-core.function-extensionality

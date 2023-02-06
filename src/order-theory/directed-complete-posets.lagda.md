@@ -3,8 +3,6 @@ title: Directed complete posets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.directed-complete-posets where
 
 open import foundation.inhabited-types

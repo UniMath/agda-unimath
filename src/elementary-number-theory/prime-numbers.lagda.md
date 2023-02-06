@@ -3,8 +3,6 @@ title: Prime numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.prime-numbers where
 
 open import elementary-number-theory.decidable-types

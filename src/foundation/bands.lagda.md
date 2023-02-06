@@ -3,8 +3,6 @@ title: Bands
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.bands where
 
 open import foundation.equivalences

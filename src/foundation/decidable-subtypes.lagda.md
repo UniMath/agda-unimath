@@ -3,8 +3,6 @@ title: Decidable subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-subtypes where
 
 open import foundation.1-types

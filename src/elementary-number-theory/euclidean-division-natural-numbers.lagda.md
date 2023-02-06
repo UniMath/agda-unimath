@@ -3,8 +3,6 @@ title: Euclidean division on the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.euclidean-division-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers

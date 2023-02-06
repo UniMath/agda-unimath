@@ -3,7 +3,7 @@ title: Type theories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --guardedness #-}
+{-# OPTIONS --guardedness #-}
 
 module type-theories where
 

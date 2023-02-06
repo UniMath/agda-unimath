@@ -3,8 +3,6 @@ title: Weakly constant maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.weakly-constant-maps where
 
 open import foundation.dependent-pair-types

@@ -3,8 +3,6 @@ title: Singleton induction
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.singleton-induction where
 
 open import foundation-core.contractible-types

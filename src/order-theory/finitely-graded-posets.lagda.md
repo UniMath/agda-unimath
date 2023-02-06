@@ -1,8 +1,6 @@
 # Finitely graded posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.finitely-graded-posets where
 
 open import elementary-number-theory.inequality-standard-finite-types

@@ -1,8 +1,6 @@
 # Vectors
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.vectors where
 
 open import elementary-number-theory.natural-numbers

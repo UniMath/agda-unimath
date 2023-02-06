@@ -3,8 +3,6 @@ title:
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.maximal-ideals-rings where
 ```
 

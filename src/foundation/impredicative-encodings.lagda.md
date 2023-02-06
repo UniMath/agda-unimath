@@ -3,8 +3,6 @@ title: Impredicative encodings of the logical operations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.impredicative-encodings where
 
 open import foundation.conjunction

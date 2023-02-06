@@ -3,8 +3,6 @@ title: The universal property of propositional truncations with respect to sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-propositional-truncation-into-sets where
 
 open import foundation.dependent-pair-types

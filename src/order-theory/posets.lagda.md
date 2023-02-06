@@ -1,8 +1,6 @@
 # Posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.posets where
 
 open import foundation.cartesian-product-types

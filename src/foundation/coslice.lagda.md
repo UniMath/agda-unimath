@@ -3,8 +3,6 @@ title: Morphisms in the coslice category of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.coslice where
 
 open import foundation-core.dependent-pair-types

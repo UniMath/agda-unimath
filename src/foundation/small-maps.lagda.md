@@ -3,8 +3,6 @@ title: Small maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.small-maps where
 
 open import foundation.dependent-pair-types

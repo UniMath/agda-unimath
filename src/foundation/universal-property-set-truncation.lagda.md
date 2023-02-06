@@ -3,8 +3,6 @@ title: The universal property of set truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-set-truncation where
 
 open import foundation.contractible-maps

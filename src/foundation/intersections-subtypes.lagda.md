@@ -3,8 +3,6 @@ title: Intersection of subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.intersections-subtypes where
 
 open import foundation.conjunction

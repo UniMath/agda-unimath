@@ -3,8 +3,6 @@ title: Retracts of the type of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.retracts-of-natural-numbers where
 
 open import elementary-number-theory.equality-natural-numbers

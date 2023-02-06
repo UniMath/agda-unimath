@@ -3,8 +3,6 @@ title: Sequences of elements in finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.sequences-finite-types where
 
 open import elementary-number-theory.inequality-natural-numbers

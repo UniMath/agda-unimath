@@ -1,8 +1,6 @@
 # Iterated loop spaces
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.iterated-loop-spaces where
 
 open import elementary-number-theory.natural-numbers

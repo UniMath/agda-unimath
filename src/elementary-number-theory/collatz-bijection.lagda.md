@@ -3,8 +3,6 @@ title: The Collatz bijection
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.collatz-bijection where
 
 open import elementary-number-theory.distance-natural-numbers

@@ -3,8 +3,6 @@ title: Pointing of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.pointing-species where
 
 open import foundation.cartesian-product-types

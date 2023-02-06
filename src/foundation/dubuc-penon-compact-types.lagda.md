@@ -3,8 +3,6 @@ title: Dubuc-Penon compact types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.dubuc-penon-compact-types where
 
 open import foundation.disjunction

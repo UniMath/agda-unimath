@@ -3,8 +3,6 @@ title: Nonzero natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.nonzero-natural-numbers where
 
 open import elementary-number-theory.divisibility-natural-numbers

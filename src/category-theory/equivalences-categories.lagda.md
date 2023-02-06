@@ -3,8 +3,6 @@ title: Equivalences between categories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.equivalences-categories where
 
 open import category-theory.categories

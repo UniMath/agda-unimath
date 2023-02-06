@@ -3,8 +3,6 @@ title: Identity types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.identity-types where
 
 open import foundation-core.identity-types public

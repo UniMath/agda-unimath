@@ -3,8 +3,6 @@ title: Sequences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.sequences where
 
 open import elementary-number-theory.natural-numbers

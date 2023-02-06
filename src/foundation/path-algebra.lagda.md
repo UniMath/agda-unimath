@@ -3,8 +3,6 @@ title: Path algebra
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.path-algebra where
 
 open import foundation.binary-embeddings

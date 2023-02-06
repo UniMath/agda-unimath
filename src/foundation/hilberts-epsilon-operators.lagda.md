@@ -3,8 +3,6 @@ title : Hilbert's ε-operators
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.hilberts-epsilon-operators where
 
 open import foundation.equivalences

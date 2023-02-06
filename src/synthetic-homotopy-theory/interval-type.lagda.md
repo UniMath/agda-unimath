@@ -1,8 +1,6 @@
 # The interval
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.interval-type where
 
 open import foundation.contractible-types

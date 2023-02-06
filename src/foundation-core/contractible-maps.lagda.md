@@ -3,8 +3,6 @@ title: Contractible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.contractible-maps where
 
 open import foundation-core.coherently-invertible-maps

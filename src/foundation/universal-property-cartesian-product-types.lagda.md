@@ -3,8 +3,6 @@ title: The universal propert of cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-cartesian-product-types where
 
 open import foundation.cartesian-product-types

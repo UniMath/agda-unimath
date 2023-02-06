@@ -1,8 +1,6 @@
 # Transposition of matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.transposition-matrices where
 
 open import elementary-number-theory.natural-numbers

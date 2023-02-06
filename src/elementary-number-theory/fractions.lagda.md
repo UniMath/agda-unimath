@@ -3,8 +3,6 @@ title: Fractions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.fractions where
 
 open import elementary-number-theory.integers

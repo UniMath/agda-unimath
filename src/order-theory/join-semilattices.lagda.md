@@ -1,8 +1,6 @@
 # Join-semilattices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.join-semilattices where
 
 open import foundation.cartesian-product-types

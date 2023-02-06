@@ -3,8 +3,6 @@ title: Discrete fields
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.discrete-fields where
 
 open import commutative-algebra.commutative-rings

@@ -3,8 +3,6 @@ title: Non-contractible types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.noncontractible-types where
 
 open import elementary-number-theory.natural-numbers

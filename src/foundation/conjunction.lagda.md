@@ -3,8 +3,6 @@ title: Conjunction of propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.conjunction where
 
 open import foundation.decidable-types

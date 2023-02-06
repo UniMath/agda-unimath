@@ -1,8 +1,6 @@
 # Maximal chains in preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.maximal-chains-preorders where
 
 open import foundation.dependent-pair-types

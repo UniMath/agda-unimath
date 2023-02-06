@@ -3,8 +3,6 @@ title: Subterminal types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.subterminal-types where
 
 open import foundation.contractible-types

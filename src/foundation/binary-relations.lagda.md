@@ -3,8 +3,6 @@ title: Binary relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.binary-relations where
 
 open import foundation-core.cartesian-product-types

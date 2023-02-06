@@ -3,8 +3,6 @@ title: Coproducts of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.coproduct-types where
 
 open import elementary-number-theory.addition-natural-numbers

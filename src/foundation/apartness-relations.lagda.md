@@ -3,8 +3,6 @@ title: Apartness relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.apartness-relations where
 
 open import foundation.binary-relations

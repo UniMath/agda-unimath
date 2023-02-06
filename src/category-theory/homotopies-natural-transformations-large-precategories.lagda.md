@@ -3,8 +3,6 @@ title: Homotopies of natural transformations in large precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.homotopies-natural-transformations-large-precategories where
 
 open import Agda.Primitive using (Setω)

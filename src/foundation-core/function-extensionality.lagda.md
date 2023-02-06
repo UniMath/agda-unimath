@@ -3,7 +3,7 @@ title: Function extensionality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.function-extensionality where
 

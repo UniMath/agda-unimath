@@ -3,7 +3,7 @@ title: Morphisms of cospans
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.morphisms-cospans where
 

@@ -5,8 +5,6 @@ title: The Cantor-Schröder-Bernstein-Escardó theorem
 Contributors: Elif Uskuplu, Egbert Rijke
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.cantor-schroder-bernstein-escardo where
 
 open import foundation.cartesian-product-types

@@ -3,8 +3,6 @@ title: Bounded sums of arithmetic functions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.bounded-sums-arithmetic-functions where
 
 open import elementary-number-theory.arithmetic-functions

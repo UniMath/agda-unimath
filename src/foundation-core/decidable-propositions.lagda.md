@@ -3,8 +3,6 @@ title: Decidable propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.decidable-propositions where
 
 open import foundation-core.cartesian-product-types

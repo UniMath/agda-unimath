@@ -3,8 +3,6 @@ title: The universal property of the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.universal-property-natural-numbers where
 
 open import elementary-number-theory.natural-numbers

@@ -3,8 +3,6 @@ title: The universal property of coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-coproduct-types where
 
 open import foundation.cartesian-product-types

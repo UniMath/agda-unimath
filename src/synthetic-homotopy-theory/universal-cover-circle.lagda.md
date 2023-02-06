@@ -3,8 +3,6 @@ title: Formalisation of the Symmetry Book
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.universal-cover-circle where
 
 open import elementary-number-theory.equality-integers

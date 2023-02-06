@@ -3,8 +3,6 @@ title: Disjunction of propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.disjunction where
 
 open import foundation.conjunction

@@ -3,8 +3,6 @@ title: The universal property of propositional truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-propositional-truncation where
 
 open import foundation.contractible-types

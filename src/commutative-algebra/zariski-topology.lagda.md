@@ -3,8 +3,6 @@ title: The Zariski topology on the set of prime ideals in a commutative ring
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.zariski-topology where
 
 open import foundation.dependent-pair-types

@@ -3,7 +3,7 @@ title: Identity types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.identity-types where
 

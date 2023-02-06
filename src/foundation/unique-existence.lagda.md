@@ -3,8 +3,6 @@ title: Unique existence
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unique-existence where
 
 open import foundation.contractible-types

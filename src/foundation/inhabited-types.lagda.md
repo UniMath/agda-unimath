@@ -3,8 +3,6 @@ title: Inhabited types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.inhabited-types where
 
 open import foundation.contractible-types

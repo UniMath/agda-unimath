@@ -3,8 +3,6 @@ title: Counting the elements of decidable subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting-decidable-subtypes where
 
 open import foundation.decidable-subtypes public

@@ -3,8 +3,6 @@ title: The universal property of the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.universal-property-standard-finite-types where
 
 open import elementary-number-theory.natural-numbers

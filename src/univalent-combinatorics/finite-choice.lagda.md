@@ -3,8 +3,6 @@ title: Finite choice
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.finite-choice where
 
 open import elementary-number-theory.natural-numbers

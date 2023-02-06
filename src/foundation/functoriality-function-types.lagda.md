@@ -3,8 +3,6 @@ title: Functoriality of function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-function-types where
 
 open import foundation-core.functoriality-function-types public

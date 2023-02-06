@@ -3,8 +3,6 @@ title: Maximal ideals in commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.maximal-ideals-commutative-rings where
 ```
 

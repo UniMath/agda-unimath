@@ -3,8 +3,6 @@ title: Isomorphisms in precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.isomorphisms-precategories where
 
 open import category-theory.precategories

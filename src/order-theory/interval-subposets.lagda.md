@@ -1,8 +1,6 @@
 # Interval subposets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.interval-subposets where
 
 open import foundation.dependent-pair-types

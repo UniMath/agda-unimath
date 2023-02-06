@@ -3,8 +3,6 @@ title: Double negation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.double-negation where
 
 open import foundation.cartesian-product-types

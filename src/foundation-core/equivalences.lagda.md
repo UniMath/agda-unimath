@@ -3,7 +3,7 @@ title: Equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.equivalences where
 

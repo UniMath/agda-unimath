@@ -3,8 +3,6 @@ title: The image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.images where
 
 open import foundation.1-types

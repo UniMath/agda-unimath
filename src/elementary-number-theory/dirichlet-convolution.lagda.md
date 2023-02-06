@@ -3,8 +3,6 @@ title: Dirichlet convolution
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.dirichlet-convolution where
 
 open import elementary-number-theory.arithmetic-functions

@@ -3,8 +3,6 @@ title: Reflecting maps for equivalence relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.reflecting-maps-equivalence-relations where
 
 open import foundation.effective-maps-equivalence-relations

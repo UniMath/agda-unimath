@@ -3,8 +3,6 @@ title: Unit similarity on the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.unit-similarity-standard-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers

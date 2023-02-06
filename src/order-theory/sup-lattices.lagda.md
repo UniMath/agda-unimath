@@ -1,8 +1,6 @@
 # Sup Lattices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.sup-lattices where
 
 open import foundation.cartesian-product-types 

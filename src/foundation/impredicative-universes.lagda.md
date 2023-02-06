@@ -3,8 +3,6 @@ title: Impredicative universes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.impredicative-universes where
 
 open import foundation.propositions

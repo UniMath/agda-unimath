@@ -3,8 +3,6 @@ title: Decidable dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.decidable-dependent-function-types where
 
 open import foundation.decidable-dependent-function-types public

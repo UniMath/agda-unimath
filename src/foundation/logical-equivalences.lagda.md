@@ -3,8 +3,6 @@ title: Logical equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.logical-equivalences where
 
 open import foundation-core.logical-equivalences public

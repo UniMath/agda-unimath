@@ -3,8 +3,6 @@ title: Functoriality of cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-cartesian-product-types where
 
 open import foundation-core.cartesian-product-types

@@ -3,8 +3,6 @@ title: Truncated equality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.truncated-equality where
 
 open import foundation.identity-types

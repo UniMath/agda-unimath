@@ -3,8 +3,6 @@ title: Weak function extensionality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.weak-function-extensionality where
 
 open import foundation-core.function-extensionality

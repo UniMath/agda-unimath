@@ -3,8 +3,6 @@ title: Type arithmetic with the booleans
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-booleans where
 
 open import foundation.booleans

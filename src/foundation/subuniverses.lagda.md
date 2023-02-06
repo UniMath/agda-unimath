@@ -3,8 +3,6 @@ title: Subuniverse
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.subuniverses where
 
 open import foundation-core.contractible-types

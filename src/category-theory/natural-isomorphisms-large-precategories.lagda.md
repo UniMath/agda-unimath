@@ -3,8 +3,6 @@ title: Natural isomorphisms between functors on large precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.natural-isomorphisms-large-precategories where
 
 open import category-theory.functors-large-precategories

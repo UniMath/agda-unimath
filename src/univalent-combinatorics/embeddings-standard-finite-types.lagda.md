@@ -3,8 +3,6 @@ title: Embeddings between standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.embeddings-standard-finite-types where
 
 open import elementary-number-theory.natural-numbers

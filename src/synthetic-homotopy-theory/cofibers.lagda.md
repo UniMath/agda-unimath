@@ -3,8 +3,6 @@ title: Cofibers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.cofibers where
 
 open import foundation.constant-maps

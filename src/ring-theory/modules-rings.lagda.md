@@ -3,8 +3,6 @@ title: Modules over rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.modules-rings where
 
 open import foundation.dependent-pair-types

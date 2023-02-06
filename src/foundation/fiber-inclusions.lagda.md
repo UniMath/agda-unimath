@@ -3,8 +3,6 @@ title: Fiber inclusions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.fiber-inclusions where
 
 open import foundation-core.0-maps

@@ -3,8 +3,6 @@ title: Contractible types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.contractible-types where
 
 open import foundation-core.cartesian-product-types

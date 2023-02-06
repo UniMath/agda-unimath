@@ -1,8 +1,6 @@
 # Matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.matrices where
 
 open import elementary-number-theory.natural-numbers

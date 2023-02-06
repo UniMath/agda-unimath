@@ -3,8 +3,6 @@ title: Alkanes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.alkanes where
 
 open import foundation.universe-levels

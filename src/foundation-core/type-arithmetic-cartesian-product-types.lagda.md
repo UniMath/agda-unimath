@@ -3,8 +3,6 @@ title: Type arithmetic for cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.type-arithmetic-cartesian-product-types where
 
 open import foundation-core.cartesian-product-types

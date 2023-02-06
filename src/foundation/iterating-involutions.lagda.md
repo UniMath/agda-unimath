@@ -3,8 +3,6 @@ title: Iterating involutions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.iterating-involutions where
 
 open import elementary-number-theory.modular-arithmetic-standard-finite-types

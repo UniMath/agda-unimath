@@ -3,8 +3,6 @@ title: Fibers of maps between finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.fibers-of-maps where
 
 open import foundation.fibers-of-maps public

@@ -3,8 +3,6 @@ title: Counting the elements of the fiber of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting-fibers-of-maps where
 
 open import elementary-number-theory.sums-of-natural-numbers

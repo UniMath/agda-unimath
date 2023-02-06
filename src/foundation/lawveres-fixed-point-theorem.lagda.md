@@ -3,8 +3,6 @@ title: Lawvere's fixed point theorem
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.lawveres-fixed-point-theorem where
 
 open import foundation-core.function-extensionality

@@ -1,8 +1,6 @@
 # Largest elements in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.largest-elements-posets where
 
 open import foundation.dependent-pair-types

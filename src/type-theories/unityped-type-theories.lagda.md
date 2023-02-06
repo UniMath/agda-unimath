@@ -3,7 +3,7 @@ title: Unityped type theories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --guardedness --allow-unsolved-metas #-}
+{-# OPTIONS --guardedness --allow-unsolved-metas #-}
 
 module type-theories.unityped-type-theories where
 

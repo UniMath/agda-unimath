@@ -3,8 +3,6 @@ title: Prime ideals in commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.prime-ideals-commutative-rings where
 
 open import commutative-algebra.commutative-rings

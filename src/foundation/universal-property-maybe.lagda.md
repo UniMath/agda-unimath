@@ -3,8 +3,6 @@ title: The universal property of maybe
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-maybe where
 
 open import foundation.cartesian-product-types

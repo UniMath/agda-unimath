@@ -3,8 +3,6 @@ title: Natural transformations between functors on precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.natural-transformations-precategories where
 
 open import category-theory.functors-precategories

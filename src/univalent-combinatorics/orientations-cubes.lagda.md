@@ -3,8 +3,6 @@ title: Orientations of cubes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.orientations-cubes where
 
 open import elementary-number-theory.natural-numbers

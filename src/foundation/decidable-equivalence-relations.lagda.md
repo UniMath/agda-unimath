@@ -3,8 +3,6 @@ title: Decidable equivalence relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-equivalence-relations where
 
 open import foundation.contractible-types
