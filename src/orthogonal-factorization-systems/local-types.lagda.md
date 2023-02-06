@@ -68,10 +68,10 @@ module _
 ### Locality distributes over Π-types
 
 ```agda
-  distributes-over-Π-is-local-family :
+  map-distributive-Π-is-local-family :
     {l3 l4 : Level} {A : UU l3} (B : A → X → UU l4) →
     ((a : A) → is-local-family (B a)) → is-local-family (λ x → (a : A) → B a x)
-  distributes-over-Π-is-local-family B f-loc =
+  map-distributive-Π-is-local-family B f-loc =
     is-equiv-map-equiv
       ( equiv-swap-Π ∘e
         ( equiv-map-Π (λ a → precomp-Π f (B a) , (f-loc a)) ∘e
