@@ -291,6 +291,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.extensions-of-maps
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-equivalences
