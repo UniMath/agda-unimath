@@ -3,8 +3,6 @@ title: Products in precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.exponential-objects-precategories where
 
 open import category-theory.precategories

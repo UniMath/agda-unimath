@@ -3,8 +3,6 @@ title: Set presented types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.set-presented-types where
 
 open import foundation.equivalences

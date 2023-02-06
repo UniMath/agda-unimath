@@ -3,8 +3,6 @@ title: The distance between integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.distance-integers where
 
 open import elementary-number-theory.absolute-value-integers

@@ -1,8 +1,6 @@
 # Abstract polytopes
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module polytopes.abstract-polytopes where
 
 -- open import order-theory public

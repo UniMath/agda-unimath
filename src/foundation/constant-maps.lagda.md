@@ -3,8 +3,6 @@ title: Constant maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.constant-maps where
 
 open import foundation-core.constant-maps public

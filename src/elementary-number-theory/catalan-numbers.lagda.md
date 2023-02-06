@@ -3,8 +3,6 @@ title: Catalan numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.catalan-numbers where
 
 open import elementary-number-theory.binomial-coefficients

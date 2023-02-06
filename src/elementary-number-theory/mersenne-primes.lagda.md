@@ -3,8 +3,6 @@ title: Mersenne primes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.mersenne-primes where
 
 open import elementary-number-theory.natural-numbers

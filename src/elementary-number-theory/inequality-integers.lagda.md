@@ -3,8 +3,6 @@ title: Inequality of integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.inequality-integers where
 
 open import elementary-number-theory.addition-integers

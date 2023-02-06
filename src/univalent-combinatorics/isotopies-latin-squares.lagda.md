@@ -3,8 +3,6 @@ title: Isotopies of Latin squares
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.isotopies-latin-squares where
 
 open import foundation.dependent-pair-types

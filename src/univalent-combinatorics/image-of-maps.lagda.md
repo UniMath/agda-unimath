@@ -3,8 +3,6 @@ title: The image of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.image-of-maps where
 
 open import foundation.images public

@@ -3,8 +3,6 @@ title: Finite groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.finite-groups where
 
 open import elementary-number-theory.natural-numbers

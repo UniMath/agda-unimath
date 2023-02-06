@@ -3,8 +3,6 @@ title: The difference between integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.difference-integers where
 
 open import elementary-number-theory.addition-integers

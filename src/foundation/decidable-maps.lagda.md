@@ -3,8 +3,6 @@ title: Decidable maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-maps where
 
 open import foundation.decidable-equality

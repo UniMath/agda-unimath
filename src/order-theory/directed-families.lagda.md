@@ -3,8 +3,6 @@ title: Directed families in posets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.directed-families where
 
 open import foundation.cartesian-product-types

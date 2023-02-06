@@ -3,8 +3,6 @@ title: Large preorders
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.large-preorders where
 
 open import Agda.Primitive using (Setω)

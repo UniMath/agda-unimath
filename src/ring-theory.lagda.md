@@ -3,8 +3,6 @@ title: Ring theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory where
 
 open import ring-theory.algebras-rings public

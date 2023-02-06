@@ -3,8 +3,6 @@ title: Decidable equality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-equality where
 
 open import foundation.cartesian-product-types

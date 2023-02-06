@@ -3,8 +3,6 @@ title: The Well-Ordering Principle of the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.well-ordering-principle-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers

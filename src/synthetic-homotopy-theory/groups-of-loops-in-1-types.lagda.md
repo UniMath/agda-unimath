@@ -1,8 +1,6 @@
 # Groups of loops in 1-types
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.groups-of-loops-in-1-types where
 
 open import foundation.1-types

@@ -3,8 +3,6 @@ title: Divisibility of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.divisibility-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers

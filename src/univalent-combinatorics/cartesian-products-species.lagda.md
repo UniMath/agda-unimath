@@ -3,8 +3,6 @@ title: Cartesian products of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.cartesian-products-species where
 
 open import foundation.cartesian-product-types

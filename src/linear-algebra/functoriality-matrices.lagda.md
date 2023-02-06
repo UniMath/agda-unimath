@@ -1,8 +1,6 @@
 # Functoriality of matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.functoriality-matrices where
 
 open import elementary-number-theory.natural-numbers

@@ -3,8 +3,6 @@ title: The univalence axiom
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.univalence where
 
 open import foundation-core.contractible-types

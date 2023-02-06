@@ -3,8 +3,6 @@ title: Iterating functions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.iterating-functions where
 
 open import elementary-number-theory.addition-natural-numbers

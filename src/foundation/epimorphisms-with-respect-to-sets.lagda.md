@@ -3,8 +3,6 @@ title: Epimorphisms with respect to maps into sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.epimorphisms-with-respect-to-sets where
 
 open import foundation-core.univalence

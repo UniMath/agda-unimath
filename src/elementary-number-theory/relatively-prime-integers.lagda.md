@@ -3,8 +3,6 @@ title: Relatively prime integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.relatively-prime-integers where
 
 open import elementary-number-theory.integers

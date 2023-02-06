@@ -3,8 +3,6 @@ title: Isomorphisms of rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.isomorphisms-rings where
 
 open import foundation.cartesian-product-types

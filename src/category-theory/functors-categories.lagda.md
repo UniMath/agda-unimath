@@ -3,8 +3,6 @@ title: Functors between categories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.functors-categories where
 
 open import category-theory.categories

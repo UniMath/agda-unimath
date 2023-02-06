@@ -3,7 +3,7 @@ title: Simple type theories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --guardedness --allow-unsolved-metas #-}
+{-# OPTIONS --guardedness --allow-unsolved-metas #-}
 
 module type-theories.simple-type-theories where
 

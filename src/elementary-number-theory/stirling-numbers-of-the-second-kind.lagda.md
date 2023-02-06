@@ -3,8 +3,6 @@ title: Stirling numbers of the second kind
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.stirling-numbers-of-the-second-kind where
 
 open import elementary-number-theory.addition-natural-numbers

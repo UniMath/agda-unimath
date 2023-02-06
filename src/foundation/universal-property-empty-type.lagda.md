@@ -3,8 +3,6 @@ title: The universal property of the empty type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-empty-type where
 
 open import foundation-core.contractible-types

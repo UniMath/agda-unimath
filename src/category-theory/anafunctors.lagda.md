@@ -3,8 +3,6 @@ title: Anafunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.anafunctors where
 
 open import category-theory.categories

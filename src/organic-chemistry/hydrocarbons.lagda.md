@@ -3,8 +3,6 @@ title: Hydrocarbons
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.hydrocarbons where
 
 open import elementary-number-theory.inequality-natural-numbers

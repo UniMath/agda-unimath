@@ -3,8 +3,6 @@ title: Group theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory where
 
 open import group-theory.abelian-groups public

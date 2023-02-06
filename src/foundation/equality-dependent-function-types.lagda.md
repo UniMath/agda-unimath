@@ -3,8 +3,6 @@ title: Equality on dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equality-dependent-function-types where
 
 open import foundation-core.dependent-pair-types

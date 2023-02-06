@@ -3,8 +3,6 @@ title: Radical ideals in rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.radical-ideals-rings where
 
 open import foundation.propositions

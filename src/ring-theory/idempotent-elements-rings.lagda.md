@@ -3,8 +3,6 @@ title: Idempotent elements in rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.idempotent-elements-rings where
 
 open import foundation.propositions

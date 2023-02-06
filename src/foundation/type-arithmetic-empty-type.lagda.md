@@ -3,8 +3,6 @@ title: Type arithmetic with the empty type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-empty-type where
 
 open import foundation.cartesian-product-types

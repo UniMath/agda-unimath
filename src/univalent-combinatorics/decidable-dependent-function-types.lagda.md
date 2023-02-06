@@ -3,8 +3,6 @@ title: Decidable dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.decidable-dependent-function-types where
 
 open import elementary-number-theory.decidable-dependent-function-types public

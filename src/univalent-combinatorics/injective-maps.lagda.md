@@ -3,8 +3,6 @@ title: Injective maps between finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.injective-maps where
 
 open import foundation.injective-maps public

@@ -1,8 +1,6 @@
 # Totally ordered posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.total-posets where
 
 open import foundation.propositions

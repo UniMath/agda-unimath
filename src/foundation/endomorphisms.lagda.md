@@ -3,8 +3,6 @@ title: endomorphisms
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.endomorphisms where
 
 open import foundation-core.endomorphisms public

@@ -3,8 +3,6 @@ title: 1-Types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.1-types where
 
 open import foundation-core.dependent-pair-types

@@ -3,8 +3,6 @@ title: Skipping elements in standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.skipping-element-standard-finite-types where
 
 open import elementary-number-theory.natural-numbers

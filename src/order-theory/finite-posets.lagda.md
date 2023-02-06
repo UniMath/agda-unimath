@@ -1,8 +1,6 @@
 # Finite posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.finite-posets where
 
 open import foundation.decidable-types

@@ -3,8 +3,6 @@ title: Divisibility in modular arithmetic
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.divisibility-modular-arithmetic where
 
 open import elementary-number-theory.divisibility-integers

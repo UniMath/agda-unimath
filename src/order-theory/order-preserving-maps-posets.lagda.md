@@ -3,8 +3,6 @@ title: Order preserving maps on posets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.order-preserving-maps-posets where
 
 open import foundation.contractible-types

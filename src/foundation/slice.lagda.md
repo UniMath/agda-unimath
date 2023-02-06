@@ -3,8 +3,6 @@ title: Morphisms of the slice category of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.slice where
 
 open import foundation.contractible-types

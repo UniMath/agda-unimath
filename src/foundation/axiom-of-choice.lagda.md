@@ -3,8 +3,6 @@ title: The axiom of choice
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.axiom-of-choice where
 
 open import foundation.propositional-truncations

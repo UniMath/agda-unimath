@@ -4,8 +4,6 @@ title: Truncation levels
 
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.truncation-levels where
 
 open import elementary-number-theory.addition-natural-numbers

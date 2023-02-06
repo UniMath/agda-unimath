@@ -3,8 +3,6 @@ title: Uniqueness of the truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.uniqueness-truncation where
 
 open import foundation.contractible-types

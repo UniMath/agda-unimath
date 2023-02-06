@@ -3,8 +3,6 @@ title: Multisubsets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.multisubsets where
 
 open import elementary-number-theory.natural-numbers

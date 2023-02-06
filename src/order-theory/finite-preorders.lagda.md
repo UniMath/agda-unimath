@@ -1,8 +1,6 @@
 # Finite preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.finite-preorders where
 
 open import elementary-number-theory.natural-numbers

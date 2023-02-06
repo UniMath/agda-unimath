@@ -3,8 +3,6 @@ title: The infinite complex projective space
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.infinite-complex-projective-space where
 
 open import foundation.dependent-pair-types

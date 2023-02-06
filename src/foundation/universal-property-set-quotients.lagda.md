@@ -3,8 +3,6 @@ title: The universal property of set quotients
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-set-quotients where
 
 open import foundation-core.equivalence-relations

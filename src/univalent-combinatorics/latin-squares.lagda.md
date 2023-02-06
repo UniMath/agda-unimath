@@ -3,8 +3,6 @@ title: Latin squares
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.latin-squares where
 
 open import foundation.binary-equivalences

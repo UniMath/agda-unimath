@@ -3,8 +3,6 @@ title: The maybe modality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
-
 module foundation.maybe where
 
 open import foundation.cartesian-product-types

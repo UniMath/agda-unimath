@@ -3,8 +3,6 @@ title: Cubes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.cubes where
 
 open import elementary-number-theory.natural-numbers

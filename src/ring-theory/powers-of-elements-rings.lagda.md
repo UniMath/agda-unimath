@@ -3,8 +3,6 @@ title: Powers of elements in rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.powers-of-elements-rings where
 
 open import elementary-number-theory.natural-numbers

@@ -3,8 +3,6 @@ title: Rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.rings where
 
 open import foundation.binary-embeddings

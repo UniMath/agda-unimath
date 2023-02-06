@@ -1,8 +1,6 @@
 # Decidable subpreorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.decidable-subpreorders where
 
 open import foundation.decidable-propositions

@@ -3,8 +3,6 @@ title: The abstract quaternion group of order 8
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.abstract-quaternion-group where
 
 open import foundation.coproduct-types

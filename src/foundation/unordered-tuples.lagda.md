@@ -3,8 +3,6 @@ title: Unordered n-tuples of elements in a type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.unordered-tuples where
 
 open import elementary-number-theory.natural-numbers

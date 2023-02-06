@@ -3,7 +3,7 @@ title: Permutations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --experimental-lossy-unification #-}
+{-# OPTIONS --experimental-lossy-unification #-}
 
 module finite-group-theory.permutations where
 

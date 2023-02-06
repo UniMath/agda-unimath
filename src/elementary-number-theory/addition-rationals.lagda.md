@@ -3,8 +3,6 @@ title: Addition on the rationals
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.addition-rationals where
 
 open import elementary-number-theory.addition-integers

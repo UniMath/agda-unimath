@@ -3,8 +3,6 @@ title: Polynomial endofunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.polynomial-endofunctors where
 
 open import foundation.contractible-types

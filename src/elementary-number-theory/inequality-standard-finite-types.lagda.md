@@ -3,8 +3,6 @@ title: Inequality on the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.inequality-standard-finite-types where
 
 open import elementary-number-theory.inequality-natural-numbers

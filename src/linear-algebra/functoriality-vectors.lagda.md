@@ -1,8 +1,6 @@
 # Functoriality of the type of vectors
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.functoriality-vectors where
 
 open import elementary-number-theory.natural-numbers

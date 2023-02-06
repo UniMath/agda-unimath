@@ -3,8 +3,6 @@ title: Kuratowsky finite sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.kuratowsky-finite-sets where
 
 open import elementary-number-theory.natural-numbers

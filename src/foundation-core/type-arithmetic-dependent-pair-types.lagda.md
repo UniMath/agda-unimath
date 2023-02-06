@@ -3,8 +3,6 @@ title: Type arithmetic for dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.type-arithmetic-dependent-pair-types where
 
 open import foundation-core.contractible-maps

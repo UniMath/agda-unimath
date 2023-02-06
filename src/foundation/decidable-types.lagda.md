@@ -3,8 +3,6 @@ title: Decidable types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-types where
 
 open import foundation.cartesian-product-types

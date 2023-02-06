@@ -3,8 +3,6 @@ title: Coherently invertible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.coherently-invertible-maps where
 
 open import foundation-core.coherently-invertible-maps public

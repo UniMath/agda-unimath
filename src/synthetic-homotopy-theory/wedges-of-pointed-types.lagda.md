@@ -3,8 +3,6 @@ title: Wedges of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.wedges-of-pointed-types where
 
 open import foundation.cartesian-product-types

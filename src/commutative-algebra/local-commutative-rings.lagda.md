@@ -3,8 +3,6 @@ title: Local commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.local-commutative-rings where
 
 open import commutative-algebra.commutative-rings

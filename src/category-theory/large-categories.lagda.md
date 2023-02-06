@@ -3,8 +3,6 @@ title: Large categories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.large-categories where
 
 open import Agda.Primitive using (Setω)

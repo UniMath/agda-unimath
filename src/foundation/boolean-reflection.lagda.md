@@ -3,8 +3,6 @@ title: Boolean Reflection
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.boolean-reflection where
 
 open import foundation.booleans

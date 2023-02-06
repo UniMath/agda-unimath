@@ -3,8 +3,6 @@ title: Dependent sums of finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.dependent-sum-finite-types where
 
 open import foundation.complements

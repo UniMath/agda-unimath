@@ -3,8 +3,6 @@ title: Embeddings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.embeddings where
 
 open import foundation-core.embeddings public

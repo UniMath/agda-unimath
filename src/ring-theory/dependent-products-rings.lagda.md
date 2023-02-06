@@ -3,8 +3,6 @@ title:
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.dependent-products-rings where
 
 open import foundation.dependent-pair-types

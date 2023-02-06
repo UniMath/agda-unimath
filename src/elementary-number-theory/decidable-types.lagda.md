@@ -3,8 +3,6 @@ title: Decidable types in elementary number theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.decidable-types where
 
 open import foundation.decidable-dependent-pair-types public

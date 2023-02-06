@@ -2,8 +2,6 @@
 title : Methane
 ---
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.methane where
 
 open import organic-chemistry.hydrocarbons using (hydrocarbon)

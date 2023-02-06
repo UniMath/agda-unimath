@@ -3,8 +3,6 @@ title: Decidable equivalence relations on finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.decidable-equivalence-relations where
 
 open import foundation.decidable-equivalence-relations

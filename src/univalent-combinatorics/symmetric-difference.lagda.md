@@ -1,8 +1,6 @@
 # Symmetric difference of finite subtypes
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.symmetric-difference where
 
 open import foundation.symmetric-difference public

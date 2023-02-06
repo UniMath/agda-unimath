@@ -3,8 +3,6 @@ title: Mere equality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.mere-equality where
 
 open import foundation.functoriality-propositional-truncation

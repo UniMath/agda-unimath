@@ -3,8 +3,6 @@ title: Equivalence extensionality
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equivalence-extensionality where
 
 open import foundation-core.contractible-maps
