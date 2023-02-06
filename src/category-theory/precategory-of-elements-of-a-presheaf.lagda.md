@@ -15,9 +15,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import category-theory.functors-precategories
-open import category-theory.precategories
 open import category-theory.opposite-precategory
-
+open import category-theory.precategories
 ```
 
 ## Idea
@@ -65,4 +64,16 @@ module _ {i j k} (C : Precat i j) (F : functor-Precat (op C) (Set-Precat k)) whe
                _
                (hom-functor-Precat (op C) (Set-Precat k) F f _))
       (right-unit-law-comp-hom-Precat C (pr1 f))
+```
+
+### Projection to C is a functor
+
+```agda
+module _ {i j k} (C : Precat i j) (F : functor-Precat (op C) (Set-Precat k)) where
+
+  proj₁-functor-element-Precat : functor-Precat (element-Precat C F) C
+  pr1 proj₁-functor-element-Precat = pr1
+  pr1 (pr2 proj₁-functor-element-Precat) f = pr1 f
+  pr1 (pr2 (pr2 proj₁-functor-element-Precat)) g f = refl
+  pr2 (pr2 (pr2 proj₁-functor-element-Precat)) x = refl
 ```
