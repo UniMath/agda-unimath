@@ -47,8 +47,11 @@ module _
   (f : A → X) (g : B → Y)
   where
 
+  is-map-over : (X → Y) → (A → B) → UU (l1 ⊔ l4)
+  is-map-over i h = (i ∘ f) ~ (g ∘ h)
+
   map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l4)
-  map-over i = Σ (A → B) (λ h → (i ∘ f) ~ (g ∘ h))
+  map-over i = Σ (A → B) (is-map-over i)
 
   fibered-map : UU (l1 ⊔ l3 ⊔ l2 ⊔ l4)
   fibered-map = Σ (X → Y) (map-over)
@@ -171,8 +174,8 @@ module _
 
   is-map-over-comp-horizontal :
     {k : X → Y} {l : Y → Z} {i : A → B} {j : B → C} →
-    (k ∘ f) ~ (g ∘ i) → (l ∘ g) ~ (h ∘ j) →
-    ((l ∘ k) ∘ f) ~ (h ∘ (j ∘ i))
+    is-map-over f g k i → is-map-over g h l j →
+    is-map-over f h (l ∘ k) (j ∘ i)
   is-map-over-comp-horizontal {k} {l} {i} {j} =
     coherence-square-comp-horizontal i j f g h k l
 
@@ -204,8 +207,8 @@ module _
   is-map-over-comp-vertical :
     {f : A → C} {g : B → D}
     {f' : C → X} {g' : D → Y} →
-    (j ∘ f) ~ (g ∘ i) → (k ∘ f') ~ (g' ∘ j) →
-    (k ∘ (f' ∘ f)) ~ ((g' ∘ g) ∘ i) 
+    is-map-over f g j i → is-map-over f' g' k j →
+    is-map-over (f' ∘ f) (g' ∘ g) k i
   is-map-over-comp-vertical {f} {g} {f'} {g'} =
     coherence-square-comp-vertical i f g j f' g' k
 ```
@@ -220,7 +223,7 @@ module _
   is-trunc-is-map-over :
     (k : 𝕋) → is-trunc (succ-𝕋 k) Y →
     (f : A → X) (g : B → Y) (i : X → Y) (h : A → B) →
-    is-trunc k ((i ∘ f) ~ (g ∘ h))
+    is-trunc k (is-map-over f g i h)
   is-trunc-is-map-over k is-trunc-Y f g i h =
     is-trunc-Π k (λ x → is-trunc-Y (i (f x)) (g (h x)))
 
@@ -250,7 +253,7 @@ module _
 
   transpose-is-map-over :
     (f : A → X) (g : B → Y) (i : X → Y) (h : A → B) →
-    ((i ∘ f) ~ (g ∘ h)) → ((g ∘ h) ~ (i ∘ f))
+    is-map-over f g i h → is-map-over h i g f
   transpose-is-map-over f g i h = inv-htpy
 
   transpose-map-over :
@@ -276,7 +279,7 @@ module _
   (h : A → B)
   where
 
-  is-fibered-over-self : (h ∘ id) ~ (id ∘ h)
+  is-fibered-over-self : is-map-over id id h h
   is-fibered-over-self = refl-htpy
 
   self-map-over : map-over id id h
@@ -287,7 +290,7 @@ module _
   pr1 self-fibered-map = h
   pr2 self-fibered-map = self-map-over
 
-  is-map-over-id : (id ∘ h) ~ (h ∘ id)
+  is-map-over-id : is-map-over h h id id
   is-map-over-id = refl-htpy
 
   id-map-over : map-over h h id
