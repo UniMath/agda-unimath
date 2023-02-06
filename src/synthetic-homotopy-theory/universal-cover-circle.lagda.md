@@ -129,7 +129,7 @@ abstract
 
 unique-family-property-circle :
   { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
-  UU (l1 ⊔ (lsuc l2))
+  UU (l1 ⊔ lsuc l2)
 unique-family-property-circle l2 {X} l =
   ( Q : Fam-circle l2) →
     is-contr (Σ (X → UU l2) (λ P → Eq-Fam-circle Q (ev-fam-circle l P)))
@@ -359,7 +359,7 @@ segment-Σ refl f e e' H y = path-total-path-fiber _ _ (H y)
 
 contraction-total-space' :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
-  ( x : A) → {F : UU l3} (e : F ≃ B x) → UU (l1 ⊔ (l2 ⊔ l3))
+  ( x : A) → {F : UU l3} (e : F ≃ B x) → UU (l1 ⊔ l2 ⊔ l3)
 contraction-total-space' c x {F} e =
   ( y : F) → Id c (pair x (map-equiv e y))
 

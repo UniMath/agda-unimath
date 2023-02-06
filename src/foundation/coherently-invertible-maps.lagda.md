@@ -116,4 +116,12 @@ abstract
         ( pair id refl-htpy))
       ( is-equiv-map-assoc-Σ _ _ _)
 ```
- 
+
+## See also
+
+- For the notion of biinvertible maps see
+  [foundation.equivalences](foundation.equivalences.html).
+- For the notion of maps with contractible fibers see
+  [foundation.contractible-maps](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [foundation.path-split-maps](foundation.path-split-maps.html).

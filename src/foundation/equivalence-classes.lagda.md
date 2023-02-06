@@ -5,6 +5,9 @@ title: Equivalence classes
 ```agda
 module foundation.equivalence-classes where
 
+open import foundation-core.equivalence-relations
+open import foundation-core.slice
+
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -31,15 +34,12 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.slice
 open import foundation.small-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
 
 ## Idea

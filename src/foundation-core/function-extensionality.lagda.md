@@ -54,7 +54,7 @@ ap-ev :
 ap-ev a refl = refl
 ```
  
- ## See also
+## See also
 
 - That the univalence axiom implies function extensionality is proven in
   [foundation.univalence-implies-function-extensionality](foundation.univalence-implies-function-extensionality.html).

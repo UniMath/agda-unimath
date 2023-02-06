@@ -335,7 +335,7 @@ equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
               ( ( right-unit-law-Σ-is-contr
                   ( λ u →
                     is-contr-map-is-equiv (is-equiv-map-equiv e) (pr1 u))) ∘e
-                ( fib-comp P (map-equiv e) true))) B) ∘e
+                ( equiv-compute-fib-comp P (map-equiv e) true))) B) ∘e
           ( equiv-precomp-equiv f (fib P true))))
 
 equiv-binomial-type :
