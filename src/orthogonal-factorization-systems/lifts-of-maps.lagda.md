@@ -80,4 +80,4 @@ module _
 
 ## See also
 
-- [foundation.extensions-of-maps](foundation.extensions-of-maps.html) for the dual notion.
+- [`foundation.extensions-of-maps`](foundation.extensions-of-maps.html) for the dual notion.

@@ -239,4 +239,4 @@ is-extension-along-self _ = refl-htpy
 
 ## See also
 
-- [foundation.lifts-of-maps](foundation.lifts-of-maps.html) for the dual notion.
+- [`foundation.lifts-of-maps`](foundation.lifts-of-maps.html) for the dual notion.
