@@ -44,7 +44,7 @@ ev-pt-Pointed-Type A f = f (pt-Pointed-Type A)
 ## See also
 
 - The notion of *nonempty types* is treated in
-  [foundation.empty-types](foundation.empty-types.html).
+  [`foundation.empty-types`](foundation.empty-types.html).
 
 - The notion of *inhabited types* is treated in
-  [foundation.inhabited-types](foundation.inhabited-types.html).
+  [`foundation.inhabited-types`](foundation.inhabited-types.html).

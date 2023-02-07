@@ -386,6 +386,6 @@ module _
 
 ## See also
 
-- In [foundation.universal-property-empty-type](foundation.universal-property-empty-type.html)
+- In [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.html)
   we show that `empty` is the initial type, which can be considered a
   *left zero law for function types* (`(empty → A) ≃ unit`).

@@ -433,5 +433,5 @@ is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 
 ## See also
 
-1. We show in [structured-types.initial-pointed-type-equipped-with-automorphism](structured-types.initial-pointed-type-equipped-with-automorphism.html) that ℤ is the initial pointed type equipped with an automorphism.
-2. The group of integers is constructed in [elementary-number-theory.group-of-integers](elementary-number-theory.group-of-integers.html).
+1. We show in [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.html) that ℤ is the initial pointed type equipped with an automorphism.
+2. The group of integers is constructed in [`elementary-number-theory.group-of-integers`](elementary-number-theory.group-of-integers.html).

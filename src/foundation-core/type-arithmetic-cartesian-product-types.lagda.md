@@ -117,19 +117,19 @@ module _
 ## See also
 
 - Functorial properties of cartesian products are recorded in
-  [foundation.functoriality-cartesian-product-types](foundation.functoriality-cartesian-product-types.html).
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
 - Equality proofs in cartesian product types are characterized in
-  [foundation.equality-cartesian-product-types](foundation.equality-cartesian-product-types.html).
+  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.html).
 - The universal property of cartesian product types is treated in
-  [foundation.universal-property-cartesian-product-types](foundation.universal-property-cartesian-product-types.html).
+  [`foundation.universal-property-cartesian-product-types`](foundation.universal-property-cartesian-product-types.html).
 
 - Arithmetical laws involving dependent pair types are recorded in
-  [foundation.type-arithmetic-dependent-pair-types](foundation.type-arithmetic-dependent-pair-types.html).
+  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.html).
   - Arithmetical laws involving dependent product types are recorded in
-  [foundation.type-arithmetic-dependent-function-types](foundation.type-arithmetic-dependent-function-types.html).
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
 - Arithmetical laws involving coproduct types are recorded in
-  [foundation.type-arithmetic-coproduct-types](foundation.type-arithmetic-coproduct-types.html).
+  [`foundation.type-arithmetic-coproduct-types`](foundation.type-arithmetic-coproduct-types.html).
 - Arithmetical laws involving the unit type are recorded in
-  [foundation.type-arithmetic-unit-type](foundation.type-arithmetic-unit-type.html).
+  [`foundation.type-arithmetic-unit-type`](foundation.type-arithmetic-unit-type.html).
 - Arithmetical laws involving the empty type are recorded in
-  [foundation.type-arithmetic-empty-type](foundation.type-arithmetic-empty-type.html).
+  [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.html).
