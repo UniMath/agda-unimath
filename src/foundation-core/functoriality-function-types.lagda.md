@@ -101,8 +101,8 @@ pr2 (equiv-postcomp A e) =
 ## See also
 
 - Functorial properties of dependent function types are recorded in
-  [foundation.functoriality-dependent-function-types](foundation.functoriality-dependent-function-types.html).
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).
 - Arithmetical laws involving dependent function types are recorded in
-  [foundation.type-arithmetic-dependent-function-types](foundation.type-arithmetic-dependent-function-types.html).
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
 - Equality proofs in dependent function types are characterized in
-  [foundation.equality-dependent-function-types](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).

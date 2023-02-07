@@ -84,6 +84,7 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences public
 open import foundation.existential-quantification public
+open import foundation.exponents-set-quotients public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
@@ -155,6 +156,7 @@ open import foundation.principle-of-omniscience public
 open import foundation.products-of-tuples-of-types public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
+open import foundation.projective-types public
 open import foundation.proper-subtypes public
 open import foundation.propositional-extensionality public
 open import foundation.propositional-maps public

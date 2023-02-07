@@ -66,8 +66,8 @@ module _
 ## See also
 
 - For the notion of biinvertible maps see
-  [foundation.equivalences](foundation.equivalences.html).
+  [`foundation.equivalences`](foundation.equivalences.html).
 - For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
-  [foundation.coherently-invertible-maps](foundation.coherently-invertible-maps.html).
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
 - For the notion of maps with contractible fibers see
-  [foundation.contractible-maps](foundation.contractible-maps.html).
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).

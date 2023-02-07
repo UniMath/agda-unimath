@@ -13,7 +13,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-In [coherent-h-spaces](coherent-h-spaces.html) we saw that the type of coherent H-space structures on a pointed type `A` is equivalently described as the type of pointed sections of the pointed evaluation map `(A → A) →* A`. If the type `A` is connected, then the section maps to the connected component of `(A ≃ A)` at the identity equivalence. An evaluative H-space is a pointed type such that the map `ev_pt : (A ≃ A)_{(id)} → A` is an equivalence.
+In [`structured-types.coherent-h-spaces`](structured-types.coherent-h-spaces.html) we saw that the type of coherent H-space structures on a pointed type `A` is equivalently described as the type of pointed sections of the pointed evaluation map `(A → A) →* A`. If the type `A` is connected, then the section maps to the connected component of `(A ≃ A)` at the identity equivalence. An evaluative H-space is a pointed type such that the map `ev_pt : (A ≃ A)_{(id)} → A` is an equivalence.
 
 
 ## Definition

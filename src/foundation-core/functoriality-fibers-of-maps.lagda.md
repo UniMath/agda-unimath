@@ -113,4 +113,4 @@ module _
 ## See also
 
 - Equality proofs in the fiber of a map are characterized in
-  [foundation.equality-fibers-of-maps](foundation.equality-fibers-of-maps.html).
+  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.html).

@@ -38,24 +38,24 @@ module _
 ## See also
 
 - Functorial properties of dependent function types are recorded in
-  [foundation.functoriality-dependent-function-types](foundation.functoriality-dependent-function-types.html).
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).
 - Equality proofs in dependent function types are characterized in
-  [foundation.equality-dependent-function-types](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
 
 - Arithmetical laws involving cartesian product types are recorded in
-  [foundation.type-arithmetic-cartesian-product-types](foundation.type-arithmetic-cartesian-product-types.html).
+  [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.html).
 - Arithmetical laws involving dependent pair types are recorded in
-  [foundation.type-arithmetic-dependent-pair-types](foundation.type-arithmetic-dependent-pair-types.html).
+  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.html).
 - Arithmetical laws involving coproduct types are recorded in
-  [foundation.type-arithmetic-coproduct-types](foundation.type-arithmetic-coproduct-types.html).
+  [`foundation.type-arithmetic-coproduct-types`](foundation.type-arithmetic-coproduct-types.html).
 - Arithmetical laws involving the unit type are recorded in
-  [foundation.type-arithmetic-unit-type](foundation.type-arithmetic-unit-type.html).
+  [`foundation.type-arithmetic-unit-type`](foundation.type-arithmetic-unit-type.html).
 - Arithmetical laws involving the empty type are recorded in
-  [foundation.type-arithmetic-empty-type](foundation.type-arithmetic-empty-type.html).
+  [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.html).
 
-- In [foundation.universal-property-empty-type](foundation.universal-property-empty-type.html)
+- In [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.html)
   we show that `empty` is the initial type, which can be considered a
   *left zero law for function types* (`(empty → A) ≃ unit`).
 - That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be found in
-  [foundation-core.contractible-types](foundation-core.contractible-types.html).
+  [`foundation-core.contractible-types`](foundation-core.contractible-types.html).
   This can be considered a *right zero law for function types* (`(A → unit) ≃ unit`).
