@@ -291,6 +291,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.exponents-set-quotients
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-equivalences
@@ -363,6 +364,7 @@ open import foundation.principle-of-omniscience
 open import foundation.products-of-tuples-of-types
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
+open import foundation.projective-types
 open import foundation.proper-subtypes
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
@@ -1008,6 +1010,7 @@ open import univalent-combinatorics.quotients-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.sequences-finite-types
+open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.species
 open import univalent-combinatorics.standard-finite-pruned-trees

@@ -85,6 +85,7 @@ open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
 open import univalent-combinatorics.retracts-of-finite-types public
 open import univalent-combinatorics.sequences-finite-types public
+open import univalent-combinatorics.set-quotients-of-index-two public
 open import univalent-combinatorics.skipping-element-standard-finite-types public
 open import univalent-combinatorics.species public
 open import univalent-combinatorics.standard-finite-pruned-trees public
