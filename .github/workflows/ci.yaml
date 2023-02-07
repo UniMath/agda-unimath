@@ -31,7 +31,7 @@ jobs:
     strategy:
       matrix:
         os: [ macOS-latest , ubuntu-latest ]
-        agda: ["v2.6.2"]
+        agda: ["v2.6.3"]
         ghc: ["8.10.7"]
     steps:
       - name: Cancel previous runs
@@ -84,7 +84,7 @@ jobs:
     strategy:
       matrix:
         os: [ macOS-latest , ubuntu-latest ]
-        agda: ["v2.6.2"]
+        agda: ["v2.6.3"]
         ghc: ["8.10.7"]
     steps:
       - uses: actions/cache@v2
@@ -127,7 +127,7 @@ jobs:
     if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     strategy:
       matrix:
-        agda: ["v2.6.2"]
+        agda: ["v2.6.3"]
         ghc: ["8.10.7"]
     steps:
       - name: Checkout the main repository
