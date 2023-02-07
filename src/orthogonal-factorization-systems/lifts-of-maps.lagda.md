@@ -12,7 +12,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels
 
-open import foundation.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-of-maps
 ```
 
 ## Idea
