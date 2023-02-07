@@ -3,7 +3,7 @@ title: Orbits of permutations
 ---
 
 ```agda
-{-# OPTIONS --experimental-lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module finite-group-theory.orbits-permutations where
 

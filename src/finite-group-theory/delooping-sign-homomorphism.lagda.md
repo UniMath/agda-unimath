@@ -3,7 +3,7 @@ title: Deloopings of the sign homomorphism
 ---
 
 ```agda
-{-# OPTIONS --experimental-lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module finite-group-theory.delooping-sign-homomorphism where
 
