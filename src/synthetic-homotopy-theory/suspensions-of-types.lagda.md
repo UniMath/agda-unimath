@@ -180,7 +180,36 @@ module _
   eq-htpy-suspension-structure : htpy-suspension-structure c c' → (c ＝ c')
   eq-htpy-suspension-structure =
     map-inv-equiv (extensionality-suspension-structure c c')
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c : suspension-structure X Z}
+  where
+
+  refl-htpy-suspension-structure :  htpy-suspension-structure c c
+  refl-htpy-suspension-structure = refl , (refl , right-unit-htpy)
+
+  is-refl-refl-htpy-suspension-structure : refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
+  is-refl-refl-htpy-suspension-structure = refl
+
+  ind-htpy-suspension-structure :
+     {l : Level} (P : (c' : suspension-structure X Z) → (htpy-suspension-structure c c') → UU l) → (P c refl-htpy-suspension-structure) → (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') → P c' H 
+  ind-htpy-suspension-structure P t c' H = tr (ind-Σ P) (eq-pair-Σ (eq-htpy-suspension-structure H) {!!}) t
 ```
+
+#### The action of paths of the projections have the expected effect
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-structure X Z) 
+  where
+
+
+  ap-pr1-eq-htpy-suspension-structure :
+    (H : htpy-suspension-structure c c') → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H)
+  ap-pr1-eq-htpy-suspension-structure H = {!!}
+```
+    (p : pr1 c ＝ pr1 c') {q : (pr1 ∘ pr2) c ＝ (pr1 ∘ pr2) c'}
+    {H : (x : X) → ( merid-suspension-structure c x ∙ q ) ＝ ( p ∙ merid-suspension-structure c' x )}
 
 ### The universal property of the suspension as a pushout
 
@@ -329,6 +358,32 @@ module _
       ( ( up-suspension-N-susp Z c) ,
         ( ( up-suspension-S-susp Z c) ,
           ( up-suspension-merid-susp Z c)))
+
+
+testing : 
+    {l1 l2 : Level} (X : Pointed-Type l1) (Z : Pointed-Type l2) →
+    (ev-suspension (suspension-structure-suspension (type-Pointed-Type X)) (type-Pointed-Type Z) (const _ _ (pt-Pointed-Type Z))) ＝ (((pt-Pointed-Type Z) , ((pt-Pointed-Type Z) , ((const (type-Pointed-Type X) (type-Ω Z) refl)))))
+testing X Z = eq-htpy-suspension-structure (refl , (refl , (λ x → ap (λ t → t ∙ refl) ({!!} (pt-Pointed-Type Z) (merid-susp x)))))    
+
+pointed-equiv-up-suspension :
+    {l1 l2 : Level} (X : Pointed-Type l1) (Z : Pointed-Type l2) →
+    [ (suspension-Pointed-Type X) →* Z ] ≃*
+      (Σ (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Z)) (λ c → pr1 c ＝ (pt-Pointed-Type Z)),
+        ((pt-Pointed-Type Z) , ((pt-Pointed-Type Z) , ((const (type-Pointed-Type X) (type-Ω Z) refl)))) , refl)
+pr1 (pointed-equiv-up-suspension X Z) = equiv-Σ (λ c → pr1 c ＝ pt-Pointed-Type Z)
+                                          (equiv-up-suspension (type-Pointed-Type X) (type-Pointed-Type Z)) (λ f → id-equiv)
+pr2 (pointed-equiv-up-suspension X Z) = eq-pair-Σ (eq-htpy-suspension-structure (refl , (refl , (λ x → ap (λ t → t ∙ refl) ({!ap-const!} (pt-Pointed-Type Z) (merid-susp x)))))) (inv (tr-ap pr1  (λ x → id) (eq-htpy-suspension-structure
+       (refl ,
+        refl ,
+        (λ x →
+           ap (λ t → t ∙ refl)
+           ({!!} (pr2 Z) (merid-susp x))))) refl) ∙ ((tr-Id-left (ap pr1
+       (eq-htpy-suspension-structure
+        (refl ,
+         refl ,
+         (λ x →
+            ap (λ t → t ∙ refl)
+            (  {!!}(pr2 Z) (merid-susp x)))))) refl) ∙ {!!}))
 ```
 
 ### The suspension-loop space adjunction
@@ -440,6 +495,9 @@ module _
                   ( equiv-up-suspension
                     ( type-Pointed-Type X)
                     ( type-Pointed-Type Y)))))))))
+
+  pointed-equiv-susp-loop-adj :  [(suspension-Pointed-Type X) →* Y ]  ≃* [ X →* (Ω Y) ]
+  pointed-equiv-susp-loop-adj = {!!}
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed
@@ -458,7 +516,10 @@ module _
   test' = {!map-inv-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (g , g0)!}
 
   test'' : UU (l1 ⊔ l2)
-  test'' = {!map-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (const (suspension X) Y y0 , refl)!}
+  test'' = (x : X) → ((map-pointed-map _ _ (map-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (const (suspension X) Y y0 , refl)) x) ＝ refl)
+
+  test''' : test''
+  test''' x = {!refl!}
 ```
 
 
