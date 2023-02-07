@@ -3,7 +3,7 @@ title: Simpson's delooping of the sign homomorphism
 ---
 
 ```agda
-{-# OPTIONS --experimental-lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module finite-group-theory.simpson-delooping-sign-homomorphism where
 
