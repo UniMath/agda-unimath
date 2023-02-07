@@ -293,6 +293,8 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
+open import foundation.fibered-equivalences
+open import foundation.fibered-involutions
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.full-subtypes
@@ -490,6 +492,7 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-systems
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.logical-equivalences
 open import foundation-core.morphisms-cospans
 open import foundation-core.negation
@@ -753,6 +756,15 @@ open import organic-chemistry.ethane
 open import organic-chemistry.hydrocarbons
 open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons
+```
+
+## Orthogonal factorization systems
+
+```agda
+open import orthogonal-factorization-systems
+open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifts-of-maps
+open import orthogonal-factorization-systems.local-types
 ```
 
 ## Polytopes
