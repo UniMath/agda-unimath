@@ -3,7 +3,7 @@ title: Extensions of maps
 ---
 
 ```agda
-module foundation.extensions-of-maps where
+module orthogonal-factorization-systems.extensions-of-maps where
 
 open import foundation-core.dependent-pair-types
 

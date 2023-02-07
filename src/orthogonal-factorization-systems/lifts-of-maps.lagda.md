@@ -3,7 +3,7 @@ title: Lifts of maps
 ---
 
 ```agda
-module foundation.lifts-of-maps where
+module orthogonal-factorization-systems.lifts-of-maps where
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

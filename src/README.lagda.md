@@ -291,7 +291,6 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.extensions-of-maps
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
 open import foundation.fibered-equivalences
@@ -338,7 +337,6 @@ open import foundation.iterating-involutions
 open import foundation.law-of-excluded-middle
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.lesser-limited-principle-of-omniscience
-open import foundation.lifts-of-maps
 open import foundation.limited-principle-of-omniscience
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
@@ -764,6 +762,8 @@ open import organic-chemistry.saturated-carbons
 
 ```agda
 open import orthogonal-factorization-systems
+open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifts-of-maps
 open import orthogonal-factorization-systems.local-types
 ```
 

@@ -84,7 +84,6 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences public
 open import foundation.existential-quantification public
-open import foundation.extensions-of-maps public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
@@ -130,7 +129,6 @@ open import foundation.iterating-involutions public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
-open import foundation.lifts-of-maps public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
