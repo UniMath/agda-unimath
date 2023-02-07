@@ -444,7 +444,23 @@ module _
 
 #### The equivalence in the suspension-loop space adjunction is pointed
 
-[To do]
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (x0 : X) (Y : UU l2) (y0 : Y)
+  (f : (suspension X) → Y) (f0 : (f N-susp) ＝ y0)
+  (g : X → type-Ω (Y , y0)) (g0 : (g x0) ＝ refl {x = y0})
+  where
+
+  test : UU (l1 ⊔ l2)
+  test = {!map-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (f , f0)!}
+
+  test' : UU (l1 ⊔ l2)
+  test' = {!map-inv-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (g , g0)!}
+
+  test'' : UU (l1 ⊔ l2)
+  test'' = {!map-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (const (suspension X) Y y0 , refl)!}
+```
+
 
 ### The suspension of a contractible type is contractible
 
