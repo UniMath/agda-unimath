@@ -27,7 +27,7 @@ open import orthogonal-factorization-systems.local-types
 
 ## Idea
 
-An extension of a map `f : (x : A) → P x` along a map `i : A → B`
+An _extension_ of a map `f : (x : A) → P x` along a map `i : A → B`
 is a map `g : (y : B) → Q y` such that `Q` restricts along `i`
 to `P` and `g` restricts along `i` to `f`.
 
@@ -57,8 +57,8 @@ module _
     ((x : A) → P (i x)) → UU (l1 ⊔ l2 ⊔ l3)
   extension-of P f = Σ ((y : B) → P y) (is-extension-of f)
 
-  extensions : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  extensions P = Σ ((x : A) → P (i x)) (extension-of P)
+  extension : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  extension P = Σ ((x : A) → P (i x)) (extension-of P)
 ```
 
 ## Operations
@@ -173,10 +173,10 @@ module _
       ( is-trunc-Π k is-trunc-P)
       ( is-trunc-is-extension k (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)) f)
 
-  is-trunc-extensions :
+  is-trunc-extension :
     (k : 𝕋) (P : B → UU l3) → ((x : B) → is-trunc k (P x)) →
-    is-trunc k (extensions i P)
-  is-trunc-extensions k P is-trunc-P =
+    is-trunc k (extension i P)
+  is-trunc-extension k P is-trunc-P =
     is-trunc-Σ
       ( is-trunc-Π k (is-trunc-P ∘ i))
       (is-trunc-extension-of k is-trunc-P)

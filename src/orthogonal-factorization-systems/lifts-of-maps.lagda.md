@@ -17,7 +17,7 @@ open import foundation.extensions-of-maps
 
 ## Idea
 
-A lift of a map `f : X → B` along a map `i : A → B`
+A _lift_ of a map `f : X → B` along a map `i : A → B`
 is a map `g : X → A` such that the composition `i ∘ g` is `f`.
 
 ```md
@@ -42,8 +42,8 @@ module _
   lift-of : {X : UU l3} → (X → B) → UU (l1 ⊔ l2 ⊔ l3)
   lift-of {X = X} f = Σ (X → A) (is-lift-of f)
 
-  lifts : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  lifts X = Σ (X → B) (lift-of)
+  lift : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  lift X = Σ (X → B) (lift-of)
 ```
 
 ### If `P` is `k`-truncated then the type of lifts is `k`-truncated
@@ -67,10 +67,10 @@ module _
       ( is-trunc-function-type k is-trunc-A)
       ( is-trunc-is-lift k is-trunc-B f)
   
-  is-trunc-lifts :
+  is-trunc-lift :
     (k : 𝕋) → is-trunc k A → is-trunc k B →
-    (X : UU l3) → is-trunc k (lifts i X)
-  is-trunc-lifts k is-trunc-A is-trunc-B X =
+    (X : UU l3) → is-trunc k (lift i X)
+  is-trunc-lift k is-trunc-A is-trunc-B X =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-B)
       ( is-trunc-lift-of k
