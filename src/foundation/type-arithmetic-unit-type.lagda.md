@@ -205,5 +205,5 @@ module _
 ## See also
 
 - That `unit` is the terminal type is a corollary of `is-contr-Π`, which may be found in
-  [foundation-core.contractible-types](foundation-core.contractible-types.html).
+  [`foundation-core.contractible-types`](foundation-core.contractible-types.html).
   This can be considered a *right zero law for function types* (`(A → unit) ≃ unit`).

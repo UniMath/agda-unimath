@@ -307,13 +307,13 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
 ## See also
 
 - Arithmetical laws involving dependent function types are recorded in
-  [foundation.type-arithmetic-dependent-function-types](foundation.type-arithmetic-dependent-function-types.html).
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
 - Equality proofs in dependent function types are characterized in
-  [foundation.equality-dependent-function-types](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
 
 - Functorial properties of function types are recorded in
-  [foundation.functoriality-function-types](foundation.functoriality-function-types.html).
+  [`foundation.functoriality-function-types`](foundation.functoriality-function-types.html).
 - Functorial properties of dependent pair types are recorded in
-  [foundation.functoriality-dependent-pair-types](foundation.functoriality-dependent-pair-types.html).
+  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.html).
 - Functorial properties of cartesian product types are recorded in
-  [foundation.functoriality-cartesian-product-types](foundation.functoriality-cartesian-product-types.html).
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
