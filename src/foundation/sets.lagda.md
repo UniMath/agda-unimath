@@ -145,6 +145,15 @@ abstract
     is-set B → is-set (A → B)
   is-set-function-type = is-trunc-function-type zero-𝕋
 
+type-hom-Set' :
+  {l1 l2 : Level} → UU l1 → Set l2 → UU (l1 ⊔ l2)
+type-hom-Set' A B = A → type-Set B
+
+hom-Set' :
+  {l1 l2 : Level} → UU l1 → Set l2 → Set (l1 ⊔ l2)
+pr1 (hom-Set' A B) = type-hom-Set' A B
+pr2 (hom-Set' A B) = is-set-function-type (pr2 B)
+
 type-hom-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → UU (l1 ⊔ l2)
 type-hom-Set A B = type-Set A → type-Set B
