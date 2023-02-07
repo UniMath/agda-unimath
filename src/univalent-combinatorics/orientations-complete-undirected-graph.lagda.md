@@ -3,7 +3,7 @@ title: Orientations of the complete undirected graph
 ---
 
 ```agda
-{-# OPTIONS --experimental-lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module univalent-combinatorics.orientations-complete-undirected-graph where
 

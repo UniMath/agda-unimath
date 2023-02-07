@@ -3,7 +3,7 @@ title: Cartier's delooping of the sign homomorphism
 ---
 
 ```agda
-{-# OPTIONS --experimental-lossy-unification #-}
+{-# OPTIONS --lossy-unification #-}
 
 module finite-group-theory.cartier-delooping-sign-homomorphism where
 
