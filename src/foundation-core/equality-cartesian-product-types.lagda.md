@@ -133,8 +133,8 @@ ap-pr2-eq-pair refl refl = refl
 ## See also
 
 - Equality proofs in dependent pair types are characterized in
-  [foundation.equality-dependent-pair-types](foundation.equality-dependent-pair-types.html).
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
 - Equality proofs in dependent product types are characterized in
-  [foundation.equality-dependent-function-types](foundation.equality-dependent-function-types.html).
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
 - Equality proofs in coproduct types are characterized in
-  [foundation.equality-coproduct-types](foundation.equality-coproduct-types.html).
+  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.html).
