@@ -29,11 +29,12 @@ env:
   AGDAHTMLFLAGS: --only-scope-checking --html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 
 jobs:
-  typecheck-and-docs:
+  typecheck:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ macOS-latest , ubuntu-latest ]
+        agda: [ '2.6.3' ]
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
@@ -42,11 +43,11 @@ jobs:
       - name: Install Agda
         uses: wenkokke/setup-agda@v2.0.0
         with:
-          agda-version: '2.6.3'
+          agda-version: ${{ matrix.agda }}
 
       - uses: actions/cache/restore@v3
-        id: agda-typecheck-cache
-        name: Restore main/_build
+        id: cache-agda-formalisation
+        name: Restore Agda formalisation cache
         with:
           path: main/_build
           key: ${{ runner.os }}-agda-typecheck-cache-
@@ -60,22 +61,30 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: main/_build
-          key: '${{ steps.agda-typecheck-cache.outputs.cache-primary-key }}'
+          key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
 
+  docs:
+    runs-on: ubuntu-latest
+    needs: typecheck
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
       - uses: r-lib/actions/setup-pandoc@v2
-        if: ${{ success() }}
         with:
           pandoc-version: 2.19.2
 
+      - name: Install Agda
+        uses: wenkokke/setup-agda@v2.0.0
+        with:
+          agda-version: ${{ matrix.agda }}
+
       - name: Generate HTML
-        if: ${{ success() }}
         id: gen-html
         run: |
           cd main
           make agda-html
 
       - name: Deploy HTML to github pages
-        if: ${{ success() }} && github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'Linux'
+        if: ${{ success() }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
