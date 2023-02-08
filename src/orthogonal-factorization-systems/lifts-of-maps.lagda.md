@@ -46,6 +46,8 @@ module _
   lift X = Σ (X → B) (lift-of)
 ```
 
+## Properties
+
 ### If `P` is `k`-truncated then the type of lifts is `k`-truncated
 
 ```agda
