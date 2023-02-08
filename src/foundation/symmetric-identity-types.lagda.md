@@ -10,6 +10,8 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -122,4 +124,42 @@ module _
       symmetric-Id (standard-unordered-pair a b) ≃ (a ＝ b)
     pr1 (compute-symmetric-Id) = map-compute-symmetric-Id
     pr2 (compute-symmetric-Id) = is-equiv-map-compute-symmetric-Id
+```
+
+## Properties
+
+### The action of functions on symmetric identity types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  symmetric-ap :
+    (f : A → B) (a : unordered-pair A) →
+    symmetric-Id a → symmetric-Id (map-unordered-pair f a)
+  symmetric-ap f a =
+    map-Σ
+      ( λ b → (x : type-unordered-pair a) → b ＝ f (element-unordered-pair a x))
+      ( f)
+      ( λ x → map-Π (λ i → ap f))
+```
+
+### The action of equivalences on symmetric identity types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+  
+  symmetric-ap-equiv :
+    (e : A ≃ B) (a : unordered-pair A) →
+    symmetric-Id a ≃ symmetric-Id (map-equiv-unordered-pair e a)
+  symmetric-ap-equiv e a =
+    equiv-Σ
+      ( λ b →
+        (x : type-unordered-pair a) →
+        b ＝ map-equiv e (element-unordered-pair a x))
+      ( e)
+      ( λ x → equiv-map-Π (λ i → equiv-ap e x (element-unordered-pair a i)))
 ```
