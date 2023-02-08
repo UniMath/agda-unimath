@@ -44,6 +44,13 @@ jobs:
         with:
           agda-version: '2.6.3'
 
+      - uses: actions/cache/restore@v3
+        id: agda-typecheck-cache
+        name: Restore main/_build
+        with:
+          path: main/_build
+          key: ${{ runner.os }}-agda-typecheck-cache-
+
       - name: Typecheck the whole formalisation
         run: |
           cd main
@@ -66,5 +73,11 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Save Agda build cache
+        uses: actions/cache/save@v3
+        with:
+          path: main/_build
+          key: '${{ steps.agda-typecheck-cache.outputs.cache-primary-key }}'
           publish_dir: main/docs
           enable_jekyll: true
