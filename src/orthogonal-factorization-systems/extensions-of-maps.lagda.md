@@ -175,32 +175,32 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (i : A → B)
   where
 
   is-trunc-is-extension :
-    (k : 𝕋) {P : B → UU l3} → ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
-    (f : (x : A) → P (i x)) (g : (x : B) → P x) →
-    is-trunc k (is-extension i f g)
-  is-trunc-is-extension k is-trunc-P f g =
+    {P : B → UU l3} (f : (x : A) → P (i x)) →
+    ((x : A) → is-trunc (succ-𝕋 k) (P (i x))) →
+    (g : (x : B) → P x) → is-trunc k (is-extension i f g)
+  is-trunc-is-extension f is-trunc-P g =
     is-trunc-Π k λ x → is-trunc-P x (f x) (g (i x))
 
   is-trunc-extension :
-    (k : 𝕋) {P : B → UU l3} → ((x : B) → is-trunc k (P x)) →
-    (f : (x : A) → P (i x)) →
-    is-trunc k (extension i P f)
-  is-trunc-extension k is-trunc-P f =
+    {P : B → UU l3} (f : (x : A) → P (i x)) →
+    ((x : B) → is-trunc k (P x)) → is-trunc k (extension i P f)
+  is-trunc-extension f is-trunc-P =
     is-trunc-Σ
       ( is-trunc-Π k is-trunc-P)
-      ( is-trunc-is-extension k (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)) f)
+      ( is-trunc-is-extension f (is-trunc-succ-is-trunc k ∘ (is-trunc-P ∘ i)))
 
   is-trunc-total-extension :
-    (k : 𝕋) (P : B → UU l3) → ((x : B) → is-trunc k (P x)) →
-    is-trunc k (total-extension i P)
-  is-trunc-total-extension k P is-trunc-P =
-    is-trunc-Σ
-      ( is-trunc-Π k (is-trunc-P ∘ i))
-      (is-trunc-extension k is-trunc-P)
+    {P : B → UU l3} →
+    ((x : B) → is-trunc k (P x)) → is-trunc k (total-extension i P)
+  is-trunc-total-extension {P} is-trunc-P =
+    is-trunc-equiv' k
+      ( (y : B) → P y)
+      ( compute-total-extension i P)
+      ( is-trunc-Π k is-trunc-P)
 ```
 
 ### Characterizing extensions in terms of the precomposition function
