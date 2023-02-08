@@ -8,7 +8,7 @@ HTMLFILES := $(AGDAFILES:.lagda.md=.html)
 
 bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
 
-htmlOpts?=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
+htmlOpts=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 AGDA ?=agda -v$(agdaVerbose)
 TIME ?=time
 
