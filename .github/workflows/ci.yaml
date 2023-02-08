@@ -103,7 +103,7 @@ jobs:
           make agda-html
 
       - name: Deploy HTML to github pages
-        if: ${{ success() }} && github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
