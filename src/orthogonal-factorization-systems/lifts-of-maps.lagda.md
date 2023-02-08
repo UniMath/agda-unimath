@@ -71,32 +71,30 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (i : A → B)
   where
 
   is-trunc-is-lift :
-    (k : 𝕋) → is-trunc (succ-𝕋 k) B →
-    {X : UU l3} (f : X → B) (g : X → A) → is-trunc k (is-lift i f g)
-  is-trunc-is-lift k is-trunc-B f g =
+    {X : UU l3} (f : X → B) →
+    is-trunc (succ-𝕋 k) B → (g : X → A) → is-trunc k (is-lift i f g)
+  is-trunc-is-lift f is-trunc-B g =
     is-trunc-Π k (λ x → is-trunc-B (f x) (i (g x)))
 
   is-trunc-lift :
-    (k : 𝕋) → is-trunc k A → is-trunc (succ-𝕋 k) B →
-    {X : UU l3} (f : X → B) → is-trunc k (lift i f)
-  is-trunc-lift k is-trunc-A is-trunc-B f =
+    {X : UU l3} (f : X → B) →
+    is-trunc k A → is-trunc (succ-𝕋 k) B → is-trunc k (lift i f)
+  is-trunc-lift f is-trunc-A is-trunc-B =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-A)
-      ( is-trunc-is-lift k is-trunc-B f)
+      ( is-trunc-is-lift f is-trunc-B)
   
   is-trunc-total-lift :
-    (k : 𝕋) → is-trunc k A → is-trunc k B →
-    (X : UU l3) → is-trunc k (total-lift i X)
-  is-trunc-total-lift k is-trunc-A is-trunc-B X =
-    is-trunc-Σ
-      ( is-trunc-function-type k is-trunc-B)
-      ( is-trunc-lift k
-        ( is-trunc-A)
-        ( is-trunc-succ-is-trunc k is-trunc-B))
+    (X : UU l3) → is-trunc k A → is-trunc k (total-lift i X)
+  is-trunc-total-lift X is-trunc-A =
+    is-trunc-equiv' k
+      ( X → A)
+      ( compute-total-lift i X)
+      ( is-trunc-function-type k is-trunc-A)
 ```
 
 ## See also
