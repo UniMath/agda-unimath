@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: main
-      - name: Install Agda
+      - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
         with:
           agda-version: ${{ matrix.agda }}
@@ -53,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-            ${{ runner.os }}-check-${{ github.ref }}-
+            
       - name: Typecheck the whole formalisation
         run: |
           cd main
@@ -74,7 +74,7 @@ jobs:
         with:
           pandoc-version: 2.19.2
 
-      - name: Install Agda
+      - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
         with:
           agda-version: ${{ matrix.agda }}
