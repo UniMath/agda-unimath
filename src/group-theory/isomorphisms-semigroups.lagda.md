@@ -3,8 +3,6 @@ title: Isomorphisms of semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.isomorphisms-semigroups where
 
 open import category-theory.isomorphisms-large-precategories

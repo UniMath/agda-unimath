@@ -3,8 +3,6 @@ title: Symmetric groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.symmetric-groups where
 
 open import foundation.automorphisms

@@ -1,8 +1,6 @@
 # Preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.preorders where
 
 open import foundation.cartesian-product-types

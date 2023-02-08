@@ -3,8 +3,6 @@ title: Alcohols
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module organic-chemistry.alcohols where
 
 open import foundation.cartesian-product-types

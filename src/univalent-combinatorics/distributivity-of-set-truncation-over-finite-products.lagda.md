@@ -3,8 +3,6 @@ title: Distributivity of set truncation over finite products
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module
   univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
   where

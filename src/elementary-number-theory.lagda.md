@@ -3,8 +3,6 @@ title: Elementary Number Theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory where
 
 open import elementary-number-theory.absolute-value-integers public

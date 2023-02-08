@@ -1,8 +1,6 @@
 # Least elements in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.least-elements-posets where
 
 open import foundation.dependent-pair-types

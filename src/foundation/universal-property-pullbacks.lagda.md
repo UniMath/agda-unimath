@@ -3,8 +3,6 @@ title: The universal property of pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-pullbacks where
 
 open import foundation-core.universal-property-pullbacks public

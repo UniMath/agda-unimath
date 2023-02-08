@@ -3,8 +3,6 @@ title: Functoriality of propositional truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-propositional-truncation where
 
 open import foundation-core.contractible-types

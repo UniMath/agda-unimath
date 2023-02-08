@@ -3,8 +3,6 @@ title: Dedekind finite sets
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.dedekind-finite-sets where
 
 open import foundation.dependent-pair-types

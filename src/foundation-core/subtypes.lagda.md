@@ -3,8 +3,6 @@ title: Subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.subtypes where
 
 open import foundation-core.1-types

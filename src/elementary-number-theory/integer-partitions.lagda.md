@@ -3,8 +3,6 @@ title: Integer partitions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.integer-partitions where
 
 open import elementary-number-theory.addition-natural-numbers

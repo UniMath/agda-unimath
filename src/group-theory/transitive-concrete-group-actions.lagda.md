@@ -3,8 +3,6 @@ title: Transitive concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.transitive-concrete-group-actions where
 
 open import foundation.0-connected-types

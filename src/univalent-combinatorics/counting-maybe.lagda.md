@@ -3,8 +3,6 @@ title: Counting the elements in Maybe
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.counting-maybe where
 
 open import elementary-number-theory.natural-numbers

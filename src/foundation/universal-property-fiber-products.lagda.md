@@ -3,8 +3,6 @@ title: The universal property of fiber products
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-fiber-products where
 
 open import foundation.cartesian-product-types

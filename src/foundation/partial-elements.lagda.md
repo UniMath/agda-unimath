@@ -3,8 +3,6 @@ title: Partial elements
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.partial-elements where
 
 open import foundation.dependent-pair-types

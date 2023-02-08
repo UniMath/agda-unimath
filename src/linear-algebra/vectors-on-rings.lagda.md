@@ -1,8 +1,6 @@
 # Vectors on rings
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.vectors-on-rings where
 
 open import elementary-number-theory.natural-numbers

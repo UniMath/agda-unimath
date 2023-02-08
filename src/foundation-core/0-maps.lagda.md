@@ -3,8 +3,6 @@ title: 0-Maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.0-maps where
 
 open import foundation-core.dependent-pair-types

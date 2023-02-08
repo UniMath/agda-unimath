@@ -1,8 +1,6 @@
 # Greatest lower bounds in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.greatest-lower-bounds-posets where
 
 open import foundation.cartesian-product-types

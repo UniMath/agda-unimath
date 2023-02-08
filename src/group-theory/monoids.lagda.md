@@ -3,8 +3,6 @@ title: Monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.monoids where
 
 open import foundation.cartesian-product-types

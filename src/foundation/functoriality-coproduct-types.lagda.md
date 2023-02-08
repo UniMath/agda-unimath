@@ -3,34 +3,33 @@ title: Functoriality of coproduct types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-coproduct-types where
 
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
+open import foundation-core.dependent-pair-types
+open import foundation-core.equality-cartesian-product-types
+open import foundation-core.empty-types
+open import foundation-core.fibers-of-maps
+open import foundation-core.functions
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
+open import foundation-core.injective-maps
+open import foundation-core.negation
+open import foundation-core.propositions
+open import foundation-core.universe-levels
+
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.equivalence-extensionality
-open import foundation.empty-types
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negation
-open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
-open import foundation.universe-levels
 ```
 
 ## Idea
@@ -489,3 +488,17 @@ module _ {i j k l : Level}
       isretr-map-inv-mutually-exclusive-coprod
       issec-map-inv-mutually-exclusive-coprod
 ```
+
+## See also
+
+- Arithmetical laws involving coproduct types are recorded in
+  [`foundation.type-arithmetic-coproduct-types`](foundation.type-arithmetic-coproduct-types.html).
+- Equality proofs in coproduct types are characterized in
+  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.html).
+- The universal property of coproducts is treated in
+  [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.html).
+
+- Functorial properties of cartesian product types are recorded in
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
+- Functorial properties of dependent pair types are recorded in
+  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.html).

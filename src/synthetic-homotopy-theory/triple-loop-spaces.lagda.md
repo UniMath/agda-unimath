@@ -1,8 +1,6 @@
 # Triple loop spaces
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.triple-loop-spaces where
 
 open import foundation.homotopies

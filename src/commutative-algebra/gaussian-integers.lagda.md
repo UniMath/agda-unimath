@@ -3,8 +3,6 @@ title: The Gaussian integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.gaussian-integers where
 
 open import commutative-algebra.commutative-rings

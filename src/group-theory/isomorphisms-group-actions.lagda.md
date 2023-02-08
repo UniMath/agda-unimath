@@ -3,8 +3,6 @@ title: Isomorphisms of group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.isomorphisms-group-actions where
 
 open import category-theory.isomorphisms-large-precategories

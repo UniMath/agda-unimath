@@ -3,8 +3,6 @@ title: Slice precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.slice-precategories where
 
 open import category-theory.precategories

@@ -3,8 +3,6 @@ title: Counting the elements of dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.dependent-function-types where
 
 open import elementary-number-theory.natural-numbers

@@ -3,8 +3,6 @@ title: The strong induction principle for the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.strong-induction-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers

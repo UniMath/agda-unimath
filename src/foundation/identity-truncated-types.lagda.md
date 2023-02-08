@@ -3,8 +3,6 @@ title: Identity types of truncated types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.identity-truncated-types where
 
 open import foundation-core.equivalences

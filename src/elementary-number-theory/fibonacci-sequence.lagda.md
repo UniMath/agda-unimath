@@ -3,8 +3,6 @@ title: The Fibonacci sequence
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.fibonacci-sequence where
 
 open import elementary-number-theory.addition-natural-numbers

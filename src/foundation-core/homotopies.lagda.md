@@ -3,7 +3,7 @@ title: Homotopies
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.homotopies where
 
@@ -316,6 +316,6 @@ module _
 ## See also
 
 - We postulate that homotopy is equivalent to identity of functions in
-  [foundation-core.function-extensionality](foundation-core.function-extensionality.html).
+  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.html).
 - We define an equational reasoning syntax for homotopies in
-  [foundation.equational-reasoning](foundation.equational-reasoning.html).
+  [`foundation.equational-reasoning`](foundation.equational-reasoning.html).

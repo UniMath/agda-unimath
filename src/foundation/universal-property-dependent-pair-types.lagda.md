@@ -3,8 +3,6 @@ title: The universal property of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-dependent-pair-types where
 
 open import foundation.dependent-pair-types

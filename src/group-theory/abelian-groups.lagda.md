@@ -3,8 +3,6 @@ title: Abelian groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.abelian-groups where
 
 open import foundation.binary-embeddings

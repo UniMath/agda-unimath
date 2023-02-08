@@ -3,8 +3,6 @@ title: Tetrahedra in 3-dimensional space
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.tetrahedra-in-3-space where
 
 open import foundation.dependent-pair-types

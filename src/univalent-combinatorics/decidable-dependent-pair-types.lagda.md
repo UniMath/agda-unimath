@@ -3,8 +3,6 @@ title: Decidability of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.decidable-dependent-pair-types where
 
 open import elementary-number-theory.natural-numbers

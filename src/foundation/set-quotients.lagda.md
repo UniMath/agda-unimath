@@ -5,6 +5,8 @@ title: Set quotients
 ```agda
 module foundation.set-quotients where
 
+open import foundation-core.equivalence-relations
+
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
@@ -25,8 +27,6 @@ open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
-
-open import foundation-core.equivalence-relations
 ```
 
 ## Definitions
@@ -149,27 +149,26 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
   where
 
-  abstract
-    is-effective-quotient-map : is-effective R (quotient-map R)
-    is-effective-quotient-map x y =
-      equivalence-reasoning
-        ( quotient-map R x ＝ quotient-map R y)
-        ≃ ( equivalence-class-set-quotient R (quotient-map R x) ＝
-            equivalence-class-set-quotient R (quotient-map R y))
-          by equiv-ap-emb (emb-equivalence-class-set-quotient R)
-        ≃ ( class R x ＝ equivalence-class-set-quotient R (quotient-map R y))
-          by
-          ( equiv-concat
-            ( (inv ( isretr-equivalence-class-set-quotient R (class R x))))
-            ( equivalence-class-set-quotient R (quotient-map R y)))
-        ≃ ( class R x ＝ class R y)
-          by
-          ( equiv-concat'
-            ( class R x)
-            ( isretr-equivalence-class-set-quotient R (class R y)))
-        ≃ ( sim-Eq-Rel R x y)
-          by
-          ( is-effective-class R x y)
+  is-effective-quotient-map : is-effective R (quotient-map R)
+  is-effective-quotient-map x y =
+    equivalence-reasoning
+      ( quotient-map R x ＝ quotient-map R y)
+      ≃ ( equivalence-class-set-quotient R (quotient-map R x) ＝
+          equivalence-class-set-quotient R (quotient-map R y))
+        by equiv-ap-emb (emb-equivalence-class-set-quotient R)
+      ≃ ( class R x ＝ equivalence-class-set-quotient R (quotient-map R y))
+        by
+        ( equiv-concat
+          ( (inv ( isretr-equivalence-class-set-quotient R (class R x))))
+          ( equivalence-class-set-quotient R (quotient-map R y)))
+      ≃ ( class R x ＝ class R y)
+        by
+        ( equiv-concat'
+          ( class R x)
+          ( isretr-equivalence-class-set-quotient R (class R y)))
+      ≃ ( sim-Eq-Rel R x y)
+        by
+        ( is-effective-class R x y)
 
   apply-effectiveness-quotient-map :
     {x y : A} → quotient-map R x ＝ quotient-map R y → sim-Eq-Rel R x y
@@ -205,6 +204,23 @@ module _
   is-set-quotient-set-quotient =
     is-set-quotient-is-surjective-and-effective R
       ( quotient-Set R)
-      ( quotient-map R)
+      ( reflecting-map-quotient-map R)
       ( is-surjective-and-effective-quotient-map R)
+```
+
+### Induction into propositions on the set quotient
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  where
+
+  apply-dependent-universal-property-surj-quotient-map :
+    {l : Level} (P : set-quotient R → Prop l) →
+    ((x : A) → type-Prop (P (quotient-map R x))) →
+    ((y : set-quotient R) → type-Prop (P y))
+  apply-dependent-universal-property-surj-quotient-map =
+    apply-dependent-universal-property-surj-is-surjective
+      ( quotient-map R)
+      ( is-surjective-quotient-map R)
 ```

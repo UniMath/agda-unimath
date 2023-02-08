@@ -3,8 +3,6 @@ title: Transport
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.transport where
 
 open import foundation.cartesian-product-types

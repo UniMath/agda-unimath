@@ -3,8 +3,6 @@ title: Contractible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.contractible-maps where
 
 open import foundation-core.contractible-maps public
@@ -59,3 +57,12 @@ module _
       ( is-contr-map-is-equiv)
       ( is-equiv-is-contr-map)
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [`foundation.equivalences`](foundation.equivalences.html).
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
+- For the notion of path-split maps see
+  [`foundation.path-split-maps`](foundation.path-split-maps.html).

@@ -3,8 +3,6 @@ title: The replacement axiom for type theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.replacement where
 
 open import foundation.dependent-pair-types

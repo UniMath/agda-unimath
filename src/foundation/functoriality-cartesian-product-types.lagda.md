@@ -3,8 +3,6 @@ title: Functoriality of cartesian product types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-cartesian-product-types where
 
 open import foundation-core.cartesian-product-types
@@ -185,3 +183,19 @@ module _
   pr1 (compute-fib-map-prod t) = map-compute-fib-map-prod t
   pr2 (compute-fib-map-prod t) = is-equiv-map-compute-fib-map-prod t
 ```
+
+## See also
+
+- Arithmetical laws involving cartesian product types are recorded in
+  [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.html).
+- Equality proofs in cartesian product types are characterized in
+  [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.html).
+- The universal property of cartesian product types is treated in
+  [`foundation.universal-property-cartesian-product-types`](foundation.universal-property-cartesian-product-types.html).
+
+- Functorial properties of dependent pair types are recorded in
+  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.html).
+- Functorial properties of dependent product types are recorded in
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).
+- Functorial properties of coproduct types are recorded in
+  [`foundation.functoriality-coproduct-types`](foundation.functoriality-coproduct-types.html).

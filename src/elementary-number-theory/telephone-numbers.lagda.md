@@ -3,8 +3,6 @@ title: Telephone numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.telephone-numbers where
 
 open import elementary-number-theory.addition-natural-numbers

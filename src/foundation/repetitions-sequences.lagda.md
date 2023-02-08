@@ -3,8 +3,6 @@ title: Repetitions in sequences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.repetitions-sequences where
 
 open import elementary-number-theory.natural-numbers

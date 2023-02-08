@@ -3,8 +3,6 @@ title: Decidability of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-dependent-pair-types where
 
 open import foundation.coproduct-types

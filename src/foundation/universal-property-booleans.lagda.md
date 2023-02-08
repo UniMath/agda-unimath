@@ -3,8 +3,6 @@ title: The universal property of booleans
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-booleans where
 
 open import foundation.booleans

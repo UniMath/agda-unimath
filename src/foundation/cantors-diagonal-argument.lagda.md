@@ -3,8 +3,6 @@ title: Cantor's diagonal argument
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.cantors-diagonal-argument where
 
 open import foundation.dependent-pair-types

@@ -3,8 +3,6 @@ title: Coherently invertible maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.coherently-invertible-maps where
 
 open import foundation-core.coherently-invertible-maps public
@@ -118,4 +116,12 @@ abstract
         ( pair id refl-htpy))
       ( is-equiv-map-assoc-Σ _ _ _)
 ```
- 
+
+## See also
+
+- For the notion of biinvertible maps see
+  [`foundation.equivalences`](foundation.equivalences.html).
+- For the notion of maps with contractible fibers see
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [`foundation.path-split-maps`](foundation.path-split-maps.html).

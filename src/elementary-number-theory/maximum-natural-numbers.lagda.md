@@ -3,8 +3,6 @@ title: Maximum on the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.maximum-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers

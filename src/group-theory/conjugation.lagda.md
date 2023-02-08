@@ -3,8 +3,6 @@ title: Conjugation in groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.conjugation where
 
 open import foundation.dependent-pair-types

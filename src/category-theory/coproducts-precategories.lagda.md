@@ -3,8 +3,6 @@ title: Coproducts in precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.coproducts-precategories where
 
 open import category-theory.precategories
@@ -27,23 +25,24 @@ module _ {l1 l2 : Level} (C : Precat l1 l2) where
 
   is-coproduct :
     (x y p : obj-Precat C) →
-    type-hom-Precat C x p →
-    type-hom-Precat C y p →
-    UU (l1 ⊔ l2)
+    type-hom-Precat C x p → type-hom-Precat C y p → UU (l1 ⊔ l2)
   is-coproduct x y p inj₁ inj₂ =
     (z : obj-Precat C)
     (f : type-hom-Precat C x z) →
     (g : type-hom-Precat C y z) →
-    (∃! (type-hom-Precat C p z) λ h →
-        (comp-hom-Precat C h inj₁ ＝ f)
-        × (comp-hom-Precat C h inj₂ ＝ g))
+    (∃! ( type-hom-Precat C p z)
+        ( λ h →
+          ( comp-hom-Precat C h inj₁ ＝ f) × (comp-hom-Precat C h inj₂ ＝ g)))
 
   coproduct : obj-Precat C → obj-Precat C → UU (l1 ⊔ l2)
   coproduct x y =
-    Σ (obj-Precat C) λ p →
-    Σ (type-hom-Precat C x p) λ inj₁ →
-    Σ (type-hom-Precat C y p) λ inj₂ →
-      is-coproduct x y p inj₁ inj₂
+    Σ ( obj-Precat C)
+      ( λ p →
+        Σ ( type-hom-Precat C x p)
+          ( λ inj₁ →
+            Σ (type-hom-Precat C y p)
+              ( λ inj₂ →
+                  is-coproduct x y p inj₁ inj₂)))
 
   has-all-binary-coproducts : UU (l1 ⊔ l2)
   has-all-binary-coproducts = (x y : obj-Precat C) → coproduct x y
@@ -55,10 +54,12 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
   object-coproduct : obj-Precat C → obj-Precat C → obj-Precat C
   object-coproduct x y = pr1 (t x y)
 
-  inj₁-coproduct : (x y : obj-Precat C) → type-hom-Precat C x (object-coproduct x y)
+  inj₁-coproduct :
+    (x y : obj-Precat C) → type-hom-Precat C x (object-coproduct x y)
   inj₁-coproduct x y = pr1 (pr2 (t x y))
 
-  inj₂-coproduct : (x y : obj-Precat C) → type-hom-Precat C y (object-coproduct x y)
+  inj₂-coproduct :
+    (x y : obj-Precat C) → type-hom-Precat C y (object-coproduct x y)
   inj₂-coproduct x y = pr1 (pr2 (pr2 (t x y)))
 
   module _ (x y z : obj-Precat C)
@@ -68,9 +69,9 @@ module _ {l1 l2 : Level} (C : Precat l1 l2)
     morphism-out-of-coproduct : type-hom-Precat C (object-coproduct x y) z
     morphism-out-of-coproduct = pr1 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g))
 
-    morphism-into-product-comm-proj₁ :
+    morphism-out-of-coproduct-comm-inj₁ :
       comp-hom-Precat C morphism-out-of-coproduct (inj₁-coproduct x y) ＝ f
-    morphism-into-product-comm-proj₁ =
+    morphism-out-of-coproduct-comm-inj₁ =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (t x y))) z f g)))
 
     morphism-out-of-coproduct-comm-inj₂ :

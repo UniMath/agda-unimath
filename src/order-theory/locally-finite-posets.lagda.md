@@ -1,8 +1,6 @@
 # Locally finite posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.locally-finite-posets where
 
 open import foundation.cartesian-product-types

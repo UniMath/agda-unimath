@@ -3,11 +3,7 @@ title: Functoriality of dependent function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.functoriality-dependent-function-types where
-
-open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.constant-maps
@@ -21,10 +17,10 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.path-split-maps
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
 open import foundation.function-extensionality
+open import foundation.type-theoretic-principle-of-choice
 ```
 
 ## Properties
@@ -159,3 +155,17 @@ pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
 pr2 (equiv-precomp-Π e C) =
   is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
 ```
+
+## See also
+
+- Arithmetical laws involving dependent function types are recorded in
+  [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.html).
+- Equality proofs in dependent function types are characterized in
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).
+
+- Functorial properties of function types are recorded in
+  [`foundation.functoriality-function-types`](foundation.functoriality-function-types.html).
+- Functorial properties of dependent pair types are recorded in
+  [`foundation.functoriality-dependent-pair-types`](foundation.functoriality-dependent-pair-types.html).
+- Functorial properties of cartesian product types are recorded in
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).

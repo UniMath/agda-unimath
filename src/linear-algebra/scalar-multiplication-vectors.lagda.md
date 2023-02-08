@@ -1,8 +1,6 @@
 # Scalar multiplication of vectors
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.scalar-multiplication-vectors where
 
 open import elementary-number-theory.natural-numbers

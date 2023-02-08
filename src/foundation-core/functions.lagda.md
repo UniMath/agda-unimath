@@ -3,7 +3,7 @@ title: Functions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.functions where
 

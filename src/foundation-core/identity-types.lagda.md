@@ -3,7 +3,7 @@ title: Identity types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.identity-types where
 
@@ -169,6 +169,11 @@ ap-inv :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
   (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))
 ap-inv f refl = refl
+
+ap-const :
+  {i j : Level} {A : UU i} {B : UU j} (b : B) {x y : A}
+  (p : x ＝ y) → (ap (λ a → b) p) ＝ refl
+ap-const b refl = refl  
 ```
 
 ### Transposing inverses
@@ -238,9 +243,9 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  lift :
+  lift-eq-Σ :
     {x y : A} (p : x ＝ y) (b : B x) → (pair x b) ＝ (pair y (tr B p b))
-  lift refl b = refl
+  lift-eq-Σ refl b = refl
 ```
 
 ### laws for transport

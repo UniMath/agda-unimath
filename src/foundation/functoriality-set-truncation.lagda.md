@@ -3,8 +3,6 @@ title: Functoriality of set truncation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.functoriality-set-truncation where
 
 open import foundation-core.function-extensionality

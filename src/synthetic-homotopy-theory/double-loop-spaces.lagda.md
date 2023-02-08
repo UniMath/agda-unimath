@@ -1,8 +1,6 @@
 # Double loop spaces
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.double-loop-spaces where
 
 open import foundation.identity-types

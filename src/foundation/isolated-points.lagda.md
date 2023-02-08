@@ -3,8 +3,6 @@ title: Isolated points
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.isolated-points where
 
 open import foundation.constant-maps

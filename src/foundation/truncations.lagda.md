@@ -3,8 +3,6 @@ title: Truncations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.truncations where
 
 open import foundation-core.truncation-levels

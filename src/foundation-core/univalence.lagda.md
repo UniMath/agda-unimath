@@ -3,8 +3,6 @@ title: The univalence axiom
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.univalence where
 
 open import foundation-core.contractible-types
@@ -20,7 +18,7 @@ open import foundation-core.universe-levels
 
 The univalence axiom characterizes the identity types of universes. It asserts that the map `Id A B → A ≃ B` is an equivalence.
 
-In this file, we define the statement of the axiom. The axiom itself is postulated in [foundation.univalence](foundation.univalence.html) as `univalence`.
+In this file, we define the statement of the axiom. The axiom itself is postulated in [`foundation.univalence`](foundation.univalence.html) as `univalence`.
 
 ## Definition
 

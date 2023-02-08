@@ -20,8 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-We prove laws for the manipulation of coproduct types with respect to itself, cartesian products, and dependent pair types. The arithmetical laws involving the unit type and the empty type are proven in `type-arithmetic-unit-type` and `type-arithmetic-empty-type` respectively.
-
+We prove laws for the manipulation of coproduct types with respect to themselves, cartesian products, and dependent pair types.
 ## Laws
 
 ### Commutativity of coproducts
@@ -319,3 +318,22 @@ module _
   is-empty-right-summand-is-contr-coprod H a b =
     ex-falso (is-empty-eq-coprod-inl-inr a b (eq-is-contr H))
 ```
+
+## See also
+
+
+- Functorial properties of coproducts are recorded in
+  [`foundation.functoriality-coproduct-types`](foundation.functoriality-coproduct-types.html).
+- Equality proofs in coproduct types are characterized in
+  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.html).
+- The universal property of coproducts is treated in
+  [`foundation.universal-property-coproduct-types`](foundation.universal-property-coproduct-types.html).
+
+- Arithmetical laws involving dependent pair types are recorded in
+  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.html).
+- Arithmetical laws involving cartesian-product types are recorded in
+  [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.html).
+- Arithmetical laws involving the unit type are recorded in
+  [`foundation.type-arithmetic-unit-type`](foundation.type-arithmetic-unit-type.html).
+- Arithmetical laws involving the empty type are recorded in
+  [`foundation.type-arithmetic-empty-type`](foundation.type-arithmetic-empty-type.html).

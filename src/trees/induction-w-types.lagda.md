@@ -80,7 +80,7 @@ module _
   where
 
   □-𝕎 : 𝕎 A B → UU (l1 ⊔ l2 ⊔ l3)
-  □-𝕎 x = (y : 𝕎 A B) → (y le-𝕎 x) → P y
+  □-𝕎 x = (y : 𝕎 A B) → (y <-𝕎 x) → P y
 ```
 
 #### The unit of □-𝕎 takes sections of P to sections of □-𝕎 P
@@ -121,7 +121,7 @@ We first prove an intermediate induction principle with computation rule, where 
 
   □-strong-comp-𝕎 :
     (h : (x : 𝕎 A B) → □-𝕎 P x → P x)
-    (x : 𝕎 A B) (y : 𝕎 A B) (p : y le-𝕎 x) →
+    (x : 𝕎 A B) (y : 𝕎 A B) (p : y <-𝕎 x) →
     □-strong-ind-𝕎 h x y p ＝ h y (□-strong-ind-𝕎 h y)
   □-strong-comp-𝕎 h (tree-𝕎 x α) .(α b) (le-∈-𝕎 (pair b refl)) =
     refl
@@ -150,14 +150,14 @@ strong-comp-𝕎 P h x =
 ```agda
 no-infinite-descent-𝕎 :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  (f : ℕ → 𝕎 A B) → ¬ ((n : ℕ) → (f (succ-ℕ n) le-𝕎 (f n)))
+  (f : ℕ → 𝕎 A B) → ¬ ((n : ℕ) → (f (succ-ℕ n) <-𝕎 (f n)))
 no-infinite-descent-𝕎 {A = A} {B} f =
   strong-ind-𝕎
     ( λ x → (f : ℕ → 𝕎 A B) (p : f zero-ℕ ＝ x) →
-            ¬ ((n : ℕ) → (f (succ-ℕ n)) le-𝕎 (f n)))
+            ¬ ((n : ℕ) → (f (succ-ℕ n)) <-𝕎 (f n)))
     ( λ x IH f p H →
       IH ( f 1)
-         ( tr (λ t → (f 1) le-𝕎 t) p (H zero-ℕ))
+         ( tr (λ t → (f 1) <-𝕎 t) p (H zero-ℕ))
          ( f ∘ succ-ℕ)
          ( refl)
          ( λ n → H (succ-ℕ n)))

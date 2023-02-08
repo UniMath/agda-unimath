@@ -3,8 +3,6 @@ title: Polytopes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module polytopes where
 ```
 

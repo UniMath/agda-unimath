@@ -3,8 +3,6 @@ title: Decidable relations on types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.decidable-relations where
 
 open import foundation.decidable-propositions

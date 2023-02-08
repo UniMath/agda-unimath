@@ -3,8 +3,6 @@ title: The rational numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.rational-numbers where
 
 open import elementary-number-theory.bezouts-lemma

@@ -3,8 +3,6 @@ title : Decidable propositions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.decidable-propositions where
 
 open import foundation.decidable-propositions public

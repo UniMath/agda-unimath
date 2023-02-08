@@ -1,8 +1,6 @@
 # Functoriality of the loop space operation
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.functoriality-loop-spaces where
 
 open import foundation.dependent-pair-types

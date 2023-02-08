@@ -3,8 +3,6 @@ title: Univalent type families
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.univalent-type-families where
 
 open import foundation.equivalences

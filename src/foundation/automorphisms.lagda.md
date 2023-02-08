@@ -3,8 +3,6 @@ title: Automorphisms of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.automorphisms where
 
 open import foundation-core.automorphisms public

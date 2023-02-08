@@ -27,7 +27,7 @@ Jonathan Prieto-Cubides
 Egbert Rijke
 
 ```agda
-{-# OPTIONS --without-K --exact-split --guardedness #-}
+{-# OPTIONS --guardedness #-}
 ```
 
 See the list of all Agda modules [here](everything.html).
@@ -39,6 +39,9 @@ open import category-theory
 open import category-theory.adjunctions-large-precategories
 open import category-theory.anafunctors
 open import category-theory.categories
+open import category-theory.coproducts-precategories
+open import category-theory.discrete-precategories
+open import category-theory.endomorphisms-of-objects-categories
 open import category-theory.epimorphisms-large-precategories
 open import category-theory.equivalences-categories
 open import category-theory.equivalences-large-precategories
@@ -59,13 +62,16 @@ open import category-theory.monomorphisms-large-precategories
 open import category-theory.natural-isomorphisms-categories
 open import category-theory.natural-isomorphisms-large-precategories
 open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-numbers-object-precategories
 open import category-theory.natural-transformations-categories
 open import category-theory.natural-transformations-large-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.precategory-of-functors
 open import category-theory.pregroupoids
 open import category-theory.products-precategories
 open import category-theory.pullbacks-precategories
+open import category-theory.sieves-categories
 open import category-theory.slice-precategories
 open import category-theory.terminal-objects-precategories
 ```
@@ -228,7 +234,6 @@ open import foundation.cantors-diagonal-argument
 open import foundation.cartesian-product-types
 open import foundation.choice-of-representatives-equivalence-relation
 open import foundation.coherently-invertible-maps
-open import foundation.commutative-operations
 open import foundation.commuting-cubes
 open import foundation.commuting-squares
 open import foundation.complements
@@ -257,6 +262,7 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
+open import foundation.dependent-paths
 open import foundation.descent-coproduct-types
 open import foundation.descent-dependent-pair-types
 open import foundation.descent-empty-types
@@ -285,8 +291,11 @@ open import foundation.equivalence-relations
 open import foundation.equivalences-maybe
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.exponents-set-quotients
 open import foundation.faithful-maps
 open import foundation.fiber-inclusions
+open import foundation.fibered-equivalences
+open import foundation.fibered-involutions
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.full-subtypes
@@ -352,8 +361,10 @@ open import foundation.polynomial-endofunctors
 open import foundation.powersets
 open import foundation.preimages-of-subtypes
 open import foundation.principle-of-omniscience
+open import foundation.products-of-tuples-of-types
 open import foundation.products-unordered-pairs-of-types
 open import foundation.products-unordered-tuples-of-types
+open import foundation.projective-types
 open import foundation.proper-subtypes
 open import foundation.propositional-extensionality
 open import foundation.propositional-maps
@@ -394,12 +405,14 @@ open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.symmetric-difference
 open import foundation.symmetric-identity-types
+open import foundation.symmetric-operations
 open import foundation.truncated-equality
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-images-of-maps
 open import foundation.truncation-levels
 open import foundation.truncations
+open import foundation.tuples-of-types
 open import foundation.type-arithmetic-booleans
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
@@ -481,6 +494,7 @@ open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-systems
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.logical-equivalences
 open import foundation-core.morphisms-cospans
 open import foundation-core.negation
@@ -639,6 +653,7 @@ open import group-theory.precategory-of-semigroups
 open import group-theory.principal-group-actions
 open import group-theory.principal-torsors-concrete-groups
 open import group-theory.products-of-tuples-of-elements-commutative-monoids
+open import group-theory.quotient-groups
 open import group-theory.quotient-groups-concrete-groups
 open import group-theory.representations-monoids
 open import group-theory.semigroups
@@ -745,6 +760,15 @@ open import organic-chemistry.methane
 open import organic-chemistry.saturated-carbons
 ```
 
+## Orthogonal factorization systems
+
+```agda
+open import orthogonal-factorization-systems
+open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifts-of-maps
+open import orthogonal-factorization-systems.local-types
+```
+
 ## Polytopes
 
 ```agda
@@ -756,6 +780,7 @@ open import polytopes.abstract-polytopes
 
 ```agda
 open import ring-theory
+open import ring-theory.algebras-rings
 open import ring-theory.dependent-products-rings
 open import ring-theory.division-rings
 open import ring-theory.homomorphisms-rings
@@ -774,6 +799,7 @@ open import ring-theory.nontrivial-rings
 open import ring-theory.opposite-rings
 open import ring-theory.powers-of-elements-rings
 open import ring-theory.products-rings
+open import ring-theory.quotient-rings
 open import ring-theory.radical-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
@@ -984,6 +1010,7 @@ open import univalent-combinatorics.quotients-finite-types
 open import univalent-combinatorics.ramsey-theory
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.sequences-finite-types
+open import univalent-combinatorics.set-quotients-of-index-two
 open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.species
 open import univalent-combinatorics.standard-finite-pruned-trees

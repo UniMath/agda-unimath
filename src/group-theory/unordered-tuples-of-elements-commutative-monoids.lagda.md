@@ -3,8 +3,6 @@ title: Unordered tuples of elements in commutative monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.unordered-tuples-of-elements-commutative-monoids where
 
 open import elementary-number-theory.natural-numbers

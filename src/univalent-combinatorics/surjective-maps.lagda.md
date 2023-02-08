@@ -3,8 +3,6 @@ title: Surjective maps between finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.surjective-maps where
 
 open import foundation.surjective-maps public

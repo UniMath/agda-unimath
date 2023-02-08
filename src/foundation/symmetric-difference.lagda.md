@@ -3,8 +3,6 @@ title: Symmetric difference of subtypes
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.symmetric-difference where
 
 open import foundation.coproduct-types

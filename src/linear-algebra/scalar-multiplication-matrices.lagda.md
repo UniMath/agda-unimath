@@ -1,8 +1,6 @@
 # Scalar multiplication on matrices
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module linear-algebra.scalar-multiplication-matrices where
 
 open import elementary-number-theory.natural-numbers

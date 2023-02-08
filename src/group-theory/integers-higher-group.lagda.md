@@ -3,8 +3,6 @@ title: The higher group of integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.integers-higher-group where
 
 open import foundation.dependent-pair-types

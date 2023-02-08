@@ -3,8 +3,6 @@ title: Minimum on the natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.minimum-natural-numbers where
 
 open import elementary-number-theory.inequality-natural-numbers

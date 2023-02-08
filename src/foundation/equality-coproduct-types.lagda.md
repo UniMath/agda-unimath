@@ -320,3 +320,10 @@ pr1 (coprod-Set (pair A is-set-A) (pair B is-set-B)) = A + B
 pr2 (coprod-Set (pair A is-set-A) (pair B is-set-B)) =
   is-set-coprod is-set-A is-set-B
 ```
+
+## See also
+
+- Equality proofs in coproduct types are characterized in
+  [`foundation.equality-coproduct-types`](foundation.equality-coproduct-types.html).
+- Equality proofs in dependent pair types are characterized in
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).

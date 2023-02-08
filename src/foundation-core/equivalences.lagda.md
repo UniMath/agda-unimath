@@ -3,7 +3,7 @@ title: Equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.equivalences where
 
@@ -20,7 +20,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-An equivalence is a map that has a section and a (separate) retraction. This may look odd: Why not say that an equivalence is a map that has a 2-sided inverse? The reason is that the latter requirement would put nontrivial structure on the map, whereas having the section and retraction separate yields a property. To quickly see this: if `f` is an equivalence, then it has up to homotopy only one section, and it has up to homotopy only one retraction. 
+An equivalence is a map that has a section and a (separate) retraction. This is also called being biinvertible. This may look odd: Why not say that an equivalence is a map that has a 2-sided inverse? The reason is that the latter requirement would put nontrivial structure on the map, whereas having the section and retraction separate yields a property. To quickly see this: if `f` is an equivalence, then it has up to homotopy only one section, and it has up to homotopy only one retraction.
 
 ## Definition
 
@@ -57,11 +57,19 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {l1 l2 l3 : Level} {A : UU l1}
   where
   
-  is-fiberwise-equiv : (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
+  is-fiberwise-equiv :
+    {B : A → UU l2} {C : A → UU l3}
+    (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
   is-fiberwise-equiv f = (x : A) → is-equiv (f x)
+
+  fiberwise-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  fiberwise-equiv B C = Σ ((x : A) → B x → C x) is-fiberwise-equiv
+
+  fam-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  fam-equiv B C = (x : A) → B x ≃ C x
 ```
 
 ## Examples
@@ -500,4 +508,12 @@ module _
   pr1 (equiv-ap e x y) = ap (map-equiv e)
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 ```
- 
+
+## See also
+
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
+- For the notion of maps with contractible fibers see
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [`foundation.path-split-maps`](foundation.path-split-maps.html).

@@ -3,8 +3,6 @@ title: Truncated types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.truncated-types where
 
 open import foundation-core.cartesian-product-types

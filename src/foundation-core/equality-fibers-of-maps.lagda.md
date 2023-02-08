@@ -3,8 +3,6 @@ title: Equality in the fibers of a map
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.equality-fibers-of-maps where
 
 open import foundation-core.dependent-pair-types
@@ -14,13 +12,14 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation.identity-types
 open import foundation-core.universe-levels
+
+open import foundation.identity-types
 ```
 
 ## Idea
 
-In the file `foundation-core.fibers-of-a-map` we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
+In the file [`foundation-core.fibers-of-maps`](foundation-core.fibers-of-maps.html) we already gave one characterization of the identity type of `fib f b`, for an arbitrary map `f : A → B`. Here we give a second characterization, using the fibers of the action on identifications of `f`.
 
 ## Theorem
 
@@ -103,3 +102,10 @@ module _
         ( is-equiv-fib-ap-eq-fib f (pair x q) (pair y refl))
         ( is-equiv-tr (fib (ap f)) right-unit)
 ```
+
+## See also
+
+- Equality proofs in dependent pair types are characterized in
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
+- Equality proofs in dependent function types are characterized in
+  [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.html).

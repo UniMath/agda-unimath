@@ -3,8 +3,6 @@ title: Type arithmetic with the empty type
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-arithmetic-empty-type where
 
 open import foundation.cartesian-product-types
@@ -388,6 +386,6 @@ module _
 
 ## See also
 
-- In [foundation.universal-property-empty-type](foundation.universal-property-empty-type.html)
+- In [`foundation.universal-property-empty-type`](foundation.universal-property-empty-type.html)
   we show that `empty` is the initial type, which can be considered a
   *left zero law for function types* (`(empty → A) ≃ unit`).

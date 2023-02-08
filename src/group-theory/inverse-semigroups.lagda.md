@@ -3,8 +3,6 @@ title: Inverse semigroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.inverse-semigroups where
 
 open import foundation.cartesian-product-types

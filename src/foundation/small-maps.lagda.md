@@ -3,8 +3,6 @@ title: Small maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.small-maps where
 
 open import foundation.dependent-pair-types
@@ -24,7 +22,7 @@ A map is said to be small if its fibers are small.
 ```agda
 is-small-map :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (A → B) → UU (lsuc l ⊔ (l1 ⊔ l2))
+  (A → B) → UU (lsuc l ⊔ l1 ⊔ l2)
 is-small-map l {B = B} f = (b : B) → is-small l (fib f b)
 ```
 

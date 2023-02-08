@@ -3,8 +3,6 @@ title: Sheargroups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.sheargroups where
 
 open import foundation.cartesian-product-types

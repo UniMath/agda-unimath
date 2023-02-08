@@ -3,8 +3,6 @@ title: The Collatz conjecture
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.collatz-conjecture where
 
 open import elementary-number-theory.multiplication-natural-numbers

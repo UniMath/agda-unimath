@@ -3,8 +3,6 @@ title: The universal property of pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.universal-property-pullbacks where
 
 open import foundation-core.cones-pullbacks
@@ -30,7 +28,7 @@ module _
   (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
   where
   
-  universal-property-pullback : UU (l1 ⊔ (l2 ⊔ (l3 ⊔ (l4 ⊔ (lsuc l)))))
+  universal-property-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
   universal-property-pullback =
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
 ```

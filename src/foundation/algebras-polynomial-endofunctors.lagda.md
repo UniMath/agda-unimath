@@ -3,8 +3,6 @@ title: Algebras for polynomial endofunctors
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.algebras-polynomial-endofunctors where
 
 open import foundation-core.contractible-types

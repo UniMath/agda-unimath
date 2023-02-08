@@ -3,8 +3,6 @@ title: Commuting squares
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.commuting-squares where
 
 open import foundation-core.commuting-squares public

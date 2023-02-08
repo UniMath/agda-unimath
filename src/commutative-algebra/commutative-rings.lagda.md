@@ -3,8 +3,6 @@ title: Commutative rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.commutative-rings where
 
 open import foundation.dependent-pair-types

@@ -3,8 +3,6 @@ title: The invariant basis property of rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.invariant-basis-property-rings where
 
 open import elementary-number-theory.natural-numbers

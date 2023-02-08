@@ -3,8 +3,6 @@ title: Exponentiation of natural numbers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.exponentiation-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers

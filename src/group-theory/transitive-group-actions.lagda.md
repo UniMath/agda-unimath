@@ -3,8 +3,6 @@ title: Transitive group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.transitive-group-actions where
 
 open import foundation.existential-quantification

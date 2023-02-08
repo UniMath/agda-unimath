@@ -3,8 +3,6 @@ title: Furstenberg groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.furstenberg-groups where
 
 open import foundation.cartesian-product-types

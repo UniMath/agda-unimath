@@ -3,8 +3,6 @@ title: Subgroups of higher groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.subgroups-higher-groups where
 
 open import foundation.0-connected-types

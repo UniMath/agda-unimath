@@ -3,8 +3,6 @@ title: The type theoretic principle of choice
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.type-theoretic-principle-of-choice where
 
 open import foundation-core.dependent-pair-types
@@ -30,12 +28,12 @@ A dependent function taking values in a dependent pair type is equivalently desc
 ```agda
 Π-total-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (C : (x : A) → B x → UU l3) → UU (l1 ⊔ (l2 ⊔ l3))
+  (C : (x : A) → B x → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
 Π-total-fam {A = A} {B} C = (x : A) → Σ (B x) (C x)
 
 universally-structured-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (C : (x : A) → B x → UU l3) → UU (l1 ⊔ (l2 ⊔ l3))
+  (C : (x : A) → B x → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
 universally-structured-Π {A = A} {B} C =
   Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
 ```
@@ -50,7 +48,7 @@ module _
   where
   
   htpy-universally-structured-Π :
-    (t t' : universally-structured-Π C) → UU (l1 ⊔ (l2 ⊔ l3))
+    (t t' : universally-structured-Π C) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-universally-structured-Π t t' =
     universally-structured-Π
       ( λ (x : A) (p : (pr1 t) x ＝ (pr1 t') x) →
@@ -143,7 +141,7 @@ pr2 inv-distributive-Π-Σ = is-equiv-map-inv-distributive-Π-Σ
 ```agda
 Eq-Π-total-fam :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  (t t' : (a : A) → Σ (B a) (C a)) → UU (l1 ⊔ (l2 ⊔ l3))
+  (t t' : (a : A) → Σ (B a) (C a)) → UU (l1 ⊔ l2 ⊔ l3)
 Eq-Π-total-fam {A = A} C t t' =
   Π-total-fam (λ x (p : pr1 (t x) ＝ pr1 (t' x)) →
     tr (C x) p (pr2 (t x)) ＝ pr2 (t' x))

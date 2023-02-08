@@ -3,7 +3,7 @@ title: Groups of order 2
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --allow-unsolved-metas #-}
+{-# OPTIONS --allow-unsolved-metas #-}
 
 module finite-group-theory.groups-of-order-2 where
 

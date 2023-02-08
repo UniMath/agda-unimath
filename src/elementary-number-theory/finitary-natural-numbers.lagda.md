@@ -3,8 +3,6 @@ title: The natural numbers base k
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.finitary-natural-numbers where
 
 open import elementary-number-theory.addition-natural-numbers

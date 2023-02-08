@@ -3,8 +3,6 @@ title: Epimorphisms in groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.epimorphisms-groups where
 
 open import category-theory.epimorphisms-large-precategories

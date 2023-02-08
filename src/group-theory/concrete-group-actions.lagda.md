@@ -3,8 +3,6 @@ title: Concrete group actions
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.concrete-group-actions where
 
 open import foundation.cartesian-product-types

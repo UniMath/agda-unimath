@@ -3,8 +3,6 @@ title: Complements of type families
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.complements where
 
 open import foundation.dependent-pair-types

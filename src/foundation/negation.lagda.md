@@ -3,8 +3,6 @@ title: Negation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.negation where
 
 open import foundation-core.negation public

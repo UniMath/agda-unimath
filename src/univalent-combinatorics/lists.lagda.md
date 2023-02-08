@@ -3,8 +3,6 @@ title: Lists
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.lists where
 
 open import elementary-number-theory.addition-natural-numbers

@@ -3,8 +3,6 @@ title: Pairs of distinct elements
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.pairs-of-distinct-elements where
 
 open import foundation.cartesian-product-types

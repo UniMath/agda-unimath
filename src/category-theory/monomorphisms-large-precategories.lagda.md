@@ -3,8 +3,6 @@ title: Monomorphisms in large precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.monomorphisms-large-precategories where
 
 open import category-theory.isomorphisms-large-precategories

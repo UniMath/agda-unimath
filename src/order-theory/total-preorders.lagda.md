@@ -1,8 +1,6 @@
 # Total preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.total-preorders where
 
 open import foundation.disjunction

@@ -3,8 +3,6 @@ title: The groups ℤ/kℤ
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module elementary-number-theory.groups-of-modular-arithmetic where
 
 open import elementary-number-theory.modular-arithmetic

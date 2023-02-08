@@ -1,8 +1,6 @@
 # Largest elements in preorders
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.largest-elements-preorders where
 
 open import foundation.dependent-pair-types

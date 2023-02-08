@@ -3,8 +3,6 @@ title: Pullbacks
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.pullbacks where
 
 open import foundation-core.cartesian-product-types
@@ -124,7 +122,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   where
 
-  Eq-canonical-pullback : (t t' : canonical-pullback f g) → UU (l1 ⊔ (l2 ⊔ l3))
+  Eq-canonical-pullback : (t t' : canonical-pullback f g) → UU (l1 ⊔ l2 ⊔ l3)
   Eq-canonical-pullback (pair a bp) t' =
     let b = pr1 bp
         p = pr2 bp

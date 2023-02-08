@@ -3,8 +3,6 @@ title: The classical definition of the standard finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.classical-finite-types where
 
 open import elementary-number-theory.congruence-natural-numbers

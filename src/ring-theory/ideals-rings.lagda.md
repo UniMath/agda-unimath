@@ -3,8 +3,6 @@ title: Ideals in rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.ideals-rings where
 
 open import foundation.cartesian-product-types

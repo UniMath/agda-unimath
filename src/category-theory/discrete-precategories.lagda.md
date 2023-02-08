@@ -3,8 +3,6 @@ title: The discrete precategory introduced by any hSet
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.discrete-precategories where
 
 open import category-theory.functors-precategories

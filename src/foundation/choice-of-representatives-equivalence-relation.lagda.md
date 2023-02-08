@@ -3,8 +3,6 @@ title: Choice of representatives for an equivalence relation
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.choice-of-representatives-equivalence-relation where
 
 open import foundation.cartesian-product-types

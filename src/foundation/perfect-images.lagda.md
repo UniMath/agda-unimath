@@ -3,8 +3,6 @@ title: Perfect Images
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.perfect-images where
 
 open import elementary-number-theory.natural-numbers

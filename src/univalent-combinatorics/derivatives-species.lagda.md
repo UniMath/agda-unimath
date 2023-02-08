@@ -3,8 +3,6 @@ title: Derivatives of species
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.derivatives-species where
 
 open import foundation.universe-levels

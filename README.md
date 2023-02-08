@@ -4,7 +4,7 @@
 
 The `agda-unimath` library is a new formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics have the potential to be useful, and informative resources for mathematicians. Our library is designed to work towards this goal, and we welcome contributions to the library about any topic in mathematics.
 
-The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
+The library is built in Agda 2.6.3. It can be compiled by running `make check` from the main folder of the repository.
 
 ## Links
 
@@ -92,13 +92,13 @@ Egbert Rijke
 The `agda-unimath` library is a library of formalized in basic agda. Throughout our library we assume the `--without-K` and `--exact-split` flags of Agda. Furthermore, we assume some postulates.
 1. We make full use of Agda's `data` types for introducing inductive types.
 2. We make full use of Agda's universe levels, including `ω`. However, it should be noted that most of the type constructors only define types of universe levels below `ω`, so a lot of the theory developed in this library does not apply to universe level `ω` and beyond.
-3. The **function extensionality axiom** is postulated in [foundation-core.function-extensionality](https://unimath.github.io/agda-unimath/foundation-core.function-extensionality.html).
-4. The **univalence axiom** is postulated in [foundation-core.univalence](https://unimath.github.io/agda-unimath/foundation-core.univalence.html).
-5. The type theoretic **replacement axiom** is postulated in [foundation.replacement](https://unimath.github.io/agda-unimath/foundation.replacement.html)
-6. The **truncation operations** are postulated in [foundation.truncations](https://unimath.github.io/agda-unimath/foundation.truncations.html)
-7. The **interval** is postulated in [synthetic-homotopy-theory.interval-type](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.interval-type.html)
-8. The **circle** is postulated in [synthetic-homotopy-theory.circle](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.circle.html)
-9. **Pushouts** are postulated in [synthetic-homotopy-theory.pushouts](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
+3. The **function extensionality axiom** is postulated in [`foundation-core.function-extensionality`](https://unimath.github.io/agda-unimath/foundation-core.function-extensionality.html).
+4. The **univalence axiom** is postulated in [`foundation-core.univalence`](https://unimath.github.io/agda-unimath/foundation-core.univalence.html).
+5. The type theoretic **replacement axiom** is postulated in [`foundation.replacement`](https://unimath.github.io/agda-unimath/foundation.replacement.html)
+6. The **truncation operations** are postulated in [`foundation.truncations`](https://unimath.github.io/agda-unimath/foundation.truncations.html)
+7. The **interval** is postulated in [`synthetic-homotopy-theory.interval-type`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.interval-type.html)
+8. The **circle** is postulated in [`synthetic-homotopy-theory.circle`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.circle.html)
+9. **Pushouts** are postulated in [`synthetic-homotopy-theory.pushouts`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
 
 Note that there is some redundancy in the postulates we assume. For example, the [univalence axiom implies function extensionality](https://unimath.github.io/agda-unimath/foundation.univalence-implies-function-extensionality.html), but we still assume function extensionality separately. Furthermore, The interval type is contractible, so there is no need at all to postulate it. The circle can be constructed as the type of `ℤ`-torsors, and the replacement axiom can be used to prove there is a circle in `UU lzero`. Finally, the replacement axiom can be proven by the join construction, which only uses pushouts.
 

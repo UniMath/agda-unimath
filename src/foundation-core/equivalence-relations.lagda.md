@@ -3,8 +3,6 @@ title: Equivalence relations
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.equivalence-relations where
 
 open import foundation.binary-relations

@@ -3,8 +3,6 @@ title: Nil ideals
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.nil-ideals-rings where
 
 open import foundation.propositions

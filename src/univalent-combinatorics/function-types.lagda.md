@@ -3,8 +3,6 @@ title: Finite function types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.function-types where
 
 open import foundation.dependent-pair-types

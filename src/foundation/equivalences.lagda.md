@@ -3,8 +3,6 @@ title: Equivalences
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.equivalences where
 
 open import foundation-core.equivalences public
@@ -448,7 +446,7 @@ equiv-precomp-equiv e C =
             g (map-equiv e) is-equiv-eg (is-equiv-map-equiv e)))
 ```
 
-### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the span is an equivalence
+### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the cone is an equivalence
 
 ```agda
 module _
@@ -474,25 +472,44 @@ module _
 ```
 
 ```agda
-abstract
-  is-equiv-is-pullback' :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
-    (f : A → X) (g : B → X) (c : cone f g C) →
-    is-equiv f → is-pullback f g c → is-equiv (pr1 (pr2 c))
-  is-equiv-is-pullback' f g c is-equiv-f pb =
-    is-equiv-is-contr-map
-      ( is-trunc-is-pullback' neg-two-𝕋 f g c pb
-        ( is-contr-map-is-equiv is-equiv-f))
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} (f : A → X) (g : B → X) (c : cone f g C)
+  where
 
-abstract
-  is-pullback-is-equiv' :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
-    (f : A → X) (g : B → X) (c : cone f g C) →
-    is-equiv f → is-equiv (pr1 (pr2 c)) → is-pullback f g c
-  is-pullback-is-equiv' f g (pair p (pair q H)) is-equiv-f is-equiv-q =
-    is-pullback-swap-cone' f g (triple p q H)
-      ( is-pullback-is-equiv g f
-        ( swap-cone f g (triple p q H))
-        is-equiv-f
-        is-equiv-q)
+  abstract
+    is-equiv-is-pullback' :
+      is-equiv f → is-pullback f g c → is-equiv (pr1 (pr2 c))
+    is-equiv-is-pullback' is-equiv-f pb =
+      is-equiv-is-contr-map
+        ( is-trunc-is-pullback' neg-two-𝕋 f g c pb
+          ( is-contr-map-is-equiv is-equiv-f))
+
+  abstract
+    is-pullback-is-equiv' :
+      is-equiv f → is-equiv (pr1 (pr2 c)) → is-pullback f g c
+    is-pullback-is-equiv' is-equiv-f is-equiv-q =
+      is-pullback-swap-cone' f g c
+        ( is-pullback-is-equiv g f
+          ( swap-cone f g c)
+          is-equiv-f
+          is-equiv-q)
 ```
+
+### Families of equivalences are equivalent to fiberwise equivalences
+
+```agda
+equiv-fiberwise-equiv-fam-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3) →
+  fam-equiv B C ≃ fiberwise-equiv B C
+equiv-fiberwise-equiv-fam-equiv B C = distributive-Π-Σ
+```
+
+## See also
+
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
+- For the notion of maps with contractible fibers see
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).
+- For the notion of path-split maps see
+  [`foundation.path-split-maps`](foundation.path-split-maps.html).

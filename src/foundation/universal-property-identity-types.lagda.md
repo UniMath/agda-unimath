@@ -3,8 +3,6 @@ title: The universal property of identity types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.universal-property-identity-types where
 
 open import foundation.dependent-pair-types

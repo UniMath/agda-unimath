@@ -3,8 +3,6 @@ title: The Eisenstein integers
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module commutative-algebra.eisenstein-integers where
 
 open import commutative-algebra.commutative-rings

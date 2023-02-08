@@ -3,8 +3,6 @@ title: The orbit-stabilizer theorem for concrete groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.orbit-stabilizer-theorem-concrete-groups where
 
 open import foundation.0-connected-types

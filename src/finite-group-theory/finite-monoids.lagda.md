@@ -3,8 +3,6 @@ title: Finite monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module finite-group-theory.finite-monoids where
 
 open import elementary-number-theory.natural-numbers

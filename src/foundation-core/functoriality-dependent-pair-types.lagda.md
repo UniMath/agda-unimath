@@ -3,8 +3,6 @@ title: Functoriality of dependent pair types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.functoriality-dependent-pair-types where
 
 open import foundation-core.contractible-maps
@@ -21,7 +19,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Any map `f : A → B` and any family of maps `g : (a : A) → C a → D (f a)` together induce a map `map-Σ D f g : Σ A C → Σ B D`. Specific instances of this construction are also very useful: if we take `f` to be the identity map, then we see that any family of maps `g : (a : A) → C a → D a induces a map on total spaces `Σ A C → Σ A D`; if we take `g` to be the family of identity maps, then we see that for any family `D` over `B`, any map `f : A → B` induces a map `Σ A (D ∘ f) → Σ B D`.
+Any map `f : A → B` and any family of maps `g : (a : A) → C a → D (f a)` together induce a map `map-Σ D f g : Σ A C → Σ B D`. Specific instances of this construction are also very useful: if we take `f` to be the identity map, then we see that any family of maps `g : (a : A) → C a → D a` induces a map on total spaces `Σ A C → Σ A D`; if we take `g` to be the family of identity maps, then we see that for any family `D` over `B`, any map `f : A → B` induces a map `Σ A (D ∘ f) → Σ B D`.
 
 ## Definitions
 
@@ -181,7 +179,7 @@ module _
   where
 
   abstract
-    is-equiv-tot-is-fiberwise-equiv : is-fiberwise-equiv f → is-equiv (tot f )
+    is-equiv-tot-is-fiberwise-equiv : is-fiberwise-equiv f → is-equiv (tot f)
     is-equiv-tot-is-fiberwise-equiv H =
       is-equiv-is-contr-map
         ( λ t →
@@ -401,3 +399,17 @@ module _
         ( is-equiv-map-equiv-total-fib g)
         ( is-equiv-tot-is-fiberwise-equiv E)
 ```
+
+## See also
+
+- Arithmetical laws involving dependent pair types are recorded in
+  [`foundation.type-arithmetic-dependent-pair-types`](foundation.type-arithmetic-dependent-pair-types.html).
+- Equality proofs in dependent pair types are characterized in
+  [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.html).
+- The universal property of dependent pair types is treated in
+  [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.html).
+
+- Functorial properties of cartesian product types are recorded in
+  [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.html).
+- Functorial properties of dependent product types are recorded in
+  [`foundation.functoriality-dependent-function-types`](foundation.functoriality-dependent-function-types.html).

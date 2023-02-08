@@ -3,14 +3,11 @@ title: Path-split maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.path-split-maps where
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.dependent-pair-types
-open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.fundamental-theorem-of-identity-types
@@ -42,7 +39,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
-  
+
   abstract
     is-path-split-is-equiv : is-equiv f → is-path-split f
     pr1 (is-path-split-is-equiv is-equiv-f) = pr1 is-equiv-f
@@ -52,29 +49,25 @@ module _
   abstract
     is-coherently-invertible-is-path-split :
       is-path-split f → is-coherently-invertible f
-    pr1
-      ( is-coherently-invertible-is-path-split
-        ( pair (pair g issec-g) sec-ap-f)) = g
-    pr1
-      ( pr2
-        ( is-coherently-invertible-is-path-split
-          ( pair (pair g issec-g) sec-ap-f))) = issec-g
-    pr1
-      ( pr2
-        ( pr2
-          ( is-coherently-invertible-is-path-split
-            ( pair (pair g issec-g) sec-ap-f)))) x =
+    pr1 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)) = g
+    pr1 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))) = issec-g
+    pr1 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)))) x =
       pr1 (sec-ap-f (g (f x)) x) (issec-g (f x))
-    pr2
-      ( pr2
-        ( pr2
-          ( is-coherently-invertible-is-path-split
-            ( pair (pair g issec-g) sec-ap-f)))) x =
+    pr2 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)))) x =
       inv (pr2 (sec-ap-f (g (f x)) x) (issec-g (f x)))
-         
+
   abstract
     is-equiv-is-path-split : is-path-split f → is-equiv f
     is-equiv-is-path-split =
       is-equiv-is-coherently-invertible ∘
       is-coherently-invertible-is-path-split
 ```
+
+## See also
+
+- For the notion of biinvertible maps see
+  [`foundation.equivalences`](foundation.equivalences.html).
+- For the notions of inverses and coherently invertible maps, also known as half-adjoint equivalences, see
+  [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.html).
+- For the notion of maps with contractible fibers see
+  [`foundation.contractible-maps`](foundation.contractible-maps.html).

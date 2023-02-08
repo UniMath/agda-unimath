@@ -3,8 +3,6 @@ title: The structure identity principle
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.structure-identity-principle where
 
 open import foundation-core.contractible-types

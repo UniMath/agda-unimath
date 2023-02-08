@@ -3,8 +3,6 @@ title: The interchange law
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.interchange-law where
 
 open import foundation.identity-types

@@ -3,8 +3,6 @@ title: Faithful maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation-core.faithful-maps where
 
 open import foundation-core.0-maps

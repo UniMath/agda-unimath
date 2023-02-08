@@ -1,8 +1,6 @@
 # Maximal chains in posets
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory.maximal-chains-posets where
 
 open import foundation.propositions

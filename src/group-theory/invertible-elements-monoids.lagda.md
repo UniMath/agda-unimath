@@ -3,8 +3,6 @@ title: Invertible elements in monoids
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.invertible-elements-monoids where
 
 open import foundation.cartesian-product-types

@@ -3,8 +3,6 @@ title: Joins of types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module synthetic-homotopy-theory.joins-of-types where
 
 open import foundation.cartesian-product-types

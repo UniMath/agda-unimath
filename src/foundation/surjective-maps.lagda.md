@@ -3,8 +3,6 @@ title: Surjective maps
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module foundation.surjective-maps where
 
 open import foundation-core.constant-maps

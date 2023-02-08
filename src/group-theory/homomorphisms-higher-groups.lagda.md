@@ -3,8 +3,6 @@ title: Homomorphisms of higher groups
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module group-theory.homomorphisms-higher-groups where
 
 open import foundation.equivalences

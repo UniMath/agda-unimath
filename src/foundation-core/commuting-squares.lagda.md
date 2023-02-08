@@ -3,7 +3,7 @@ title: Commuting squares
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe #-}
+{-# OPTIONS --safe #-}
 
 module foundation-core.commuting-squares where
 

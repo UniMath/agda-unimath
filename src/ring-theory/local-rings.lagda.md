@@ -3,8 +3,6 @@ title: Local rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.local-rings where
 
 open import foundation.cartesian-product-types

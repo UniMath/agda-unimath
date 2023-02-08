@@ -3,8 +3,6 @@ title: Order theory
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module order-theory where
 
 open import order-theory.chains-posets public

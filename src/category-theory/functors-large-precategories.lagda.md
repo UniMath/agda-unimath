@@ -3,8 +3,6 @@ title: Functors between large precategories
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module category-theory.functors-large-precategories where
 
 open import Agda.Primitive using (Setω)

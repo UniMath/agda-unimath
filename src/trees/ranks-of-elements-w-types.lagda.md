@@ -202,7 +202,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  ≼-le-𝕎 : {x y : 𝕎 A B} → (x le-𝕎 y) → (x ≼-𝕎 y)
+  ≼-le-𝕎 : {x y : 𝕎 A B} → (x <-𝕎 y) → (x ≼-𝕎 y)
   ≼-le-𝕎 {x} {y} (le-∈-𝕎 H) = ≼-∈-𝕎 H
   ≼-le-𝕎 {x} {y} (propagate-le-𝕎 {y = y'} K H) =
     transitive-≼-𝕎 {x = x} {y = y'} {y} (≼-le-𝕎 H) (≼-∈-𝕎 K)
@@ -231,7 +231,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  not-≼-le-𝕎 : {x y : 𝕎 A B} → (x le-𝕎 y) → ¬ (y ≼-𝕎 x)
+  not-≼-le-𝕎 : {x y : 𝕎 A B} → (x <-𝕎 y) → ¬ (y ≼-𝕎 x)
   not-≼-le-𝕎 {x} {y} (le-∈-𝕎 H) = not-≼-∈-𝕎 {x = x} {y} H
   not-≼-le-𝕎 {x} {y} (propagate-le-𝕎 {y = y'} H K) L =
     not-≼-∈-𝕎 {x = y'} {y} H (transitive-≼-𝕎 {x = y} {x} {y'} L (≼-le-𝕎 K))

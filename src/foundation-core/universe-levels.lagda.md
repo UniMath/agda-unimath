@@ -3,7 +3,7 @@ title: Universe levels
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split --safe --no-import-sorts #-}
+{-# OPTIONS --safe --no-import-sorts #-}
 
 module foundation-core.universe-levels where
 

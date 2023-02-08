@@ -3,8 +3,6 @@ title: Division rings
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module ring-theory.division-rings where
 
 open import foundation.cartesian-product-types

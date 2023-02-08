@@ -3,8 +3,6 @@ title: Equality in finite types
 ---
 
 ```agda
-{-# OPTIONS --without-K --exact-split #-}
-
 module univalent-combinatorics.equality-finite-types where
 
 open import elementary-number-theory.natural-numbers
