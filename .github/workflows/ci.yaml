@@ -50,8 +50,10 @@ jobs:
         name: Restore Agda formalisation cache
         with:
           path: main/_build
-          key: ${{ runner.os }}-agda-typecheck-cache-hash-${{ hashFiles('main/src/**') }}
-
+          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-check-${{ github.ref }}-
       - name: Typecheck the whole formalisation
         run: |
           cd main
