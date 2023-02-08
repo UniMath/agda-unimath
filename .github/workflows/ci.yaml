@@ -29,7 +29,7 @@ env:
   AGDAHTMLFLAGS: --only-scope-checking --html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 
 jobs:
-  check-ci:
+  typecheck-and-docs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
