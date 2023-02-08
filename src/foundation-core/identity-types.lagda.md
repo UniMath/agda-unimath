@@ -173,7 +173,7 @@ ap-inv f refl = refl
 
 ap-const :
   {i j : Level} {A : UU i} {B : UU j} (b : B) {x y : A}
-  (p : x ＝ y) → (ap (const A B b) p) ＝ (const (x ＝ y) (b ＝ b) refl) p
+  (p : x ＝ y) → (ap (const A B b) p) ＝ refl
 ap-const b refl = refl  
 ```
 
