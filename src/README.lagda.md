@@ -765,6 +765,7 @@ open import organic-chemistry.saturated-carbons
 ```agda
 open import orthogonal-factorization-systems
 open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifting-problems
 open import orthogonal-factorization-systems.lifts-of-maps
 open import orthogonal-factorization-systems.local-types
 ```
