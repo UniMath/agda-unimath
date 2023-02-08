@@ -62,7 +62,7 @@ jobs:
           pandoc-version: 2.19.2
 
       - name: Deploy HTML to github pages
-        if: steps.gen-html.outputs.exit_status == 0
+        if: ${{ success() }} && runner.os == 'Linux'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
