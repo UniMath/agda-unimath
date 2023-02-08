@@ -1,15 +1,15 @@
 
 checkOpts :=--without-K --exact-split --guardedness
 everythingOpts :=$(checkOpts)
-agdaVerbose?=1
+agdaVerbose?=-v1
 # use "$ export agdaVerbose=20" if you want to see all
 AGDAFILES := $(wildcard src/**/*.lagda.md)
 HTMLFILES := $(AGDAFILES:.lagda.md=.html)
 
 bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
 
-htmlOpts=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
-AGDA ?=agda -v$(agdaVerbose)
+AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=docs/Agda.css
+AGDA ?=agda $(agdaVerbose)
 TIME ?=time
 
 .PHONY : agdaFiles
@@ -63,7 +63,7 @@ html: $(HTMLFILES)
 agda-html: src/everything.lagda.md
 	mkdir -p docs
 	rm -rf docs/*.html
-	${AGDA} ${htmlOpts} src/everything.lagda.md
+	${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 	cd docs/; \
 	sh conv.sh; \
 	cp README.html index.html
@@ -74,7 +74,7 @@ watch-html : $(AGDAFILES)
 
 .PHONY : graph
 graph:
-	${AGDA} ${htmlOpts} --dependency-graph=docs/dependency.dot src/README.lagda.md
+	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=docs/dependency.dot src/README.lagda.md
 
 .PHONY : clean
 clean:

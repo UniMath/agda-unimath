@@ -7,6 +7,7 @@ title: Identity types
 
 module foundation-core.identity-types where
 
+open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.universe-levels
@@ -172,7 +173,7 @@ ap-inv f refl = refl
 
 ap-const :
   {i j : Level} {A : UU i} {B : UU j} (b : B) {x y : A}
-  (p : x ＝ y) → (ap (λ a → b) p) ＝ refl
+  (p : x ＝ y) → (ap (const A B b) p) ＝ refl
 ap-const b refl = refl  
 ```
 
