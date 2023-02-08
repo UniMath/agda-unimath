@@ -49,17 +49,17 @@ jobs:
           cd main
           make check
 
+      - uses: r-lib/actions/setup-pandoc@v2
+        if: ${{ success() }}
+        with:
+          pandoc-version: 2.19.2
+
       - name: Generate HTML
         if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         id: gen-html
         run: |
           cd main
           make agda-html
-
-      - uses: r-lib/actions/setup-pandoc@v2
-        if: ${{ success() }}
-        with:
-          pandoc-version: 2.19.2
 
       - name: Deploy HTML to github pages
         if: ${{ success() }} && runner.os == 'Linux'
