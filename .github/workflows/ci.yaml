@@ -57,7 +57,7 @@ jobs:
           make agda-html
 
       - uses: r-lib/actions/setup-pandoc@v2
-        if: ${{ sucess() }}
+        if: ${{ success() }}
         with:
           pandoc-version: 2.19.2
 
