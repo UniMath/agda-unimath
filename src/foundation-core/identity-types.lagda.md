@@ -169,6 +169,11 @@ ap-inv :
   {i j : Level} {A : UU i} {B : UU j} (f : A → B) {x y : A}
   (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))
 ap-inv f refl = refl
+
+ap-const :
+  {i j : Level} {A : UU i} {B : UU j} (b : B) {x y : A}
+  (p : x ＝ y) → (ap (λ a → b) p) ＝ refl
+ap-const b refl = refl  
 ```
 
 ### Transposing inverses
