@@ -7,6 +7,8 @@ module structured-types.symmetric-h-spaces where
 
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.symmetric-identity-types
 open import foundation.symmetric-operations
@@ -52,9 +54,9 @@ module _
   {l1 : Level} (A : Pointed-Type l1) (X : 2-Element-Type lzero)
   where
 
-  htpy-ℤ/2-action-H-space :
-    (μ μ' : ℤ/2-action-H-Space A X) → UU {!!}
-  htpy-ℤ/2-action-H-space μ μ' =
+  htpy-ℤ/2-action-H-Space :
+    (μ μ' : ℤ/2-action-H-Space A X) → UU l1
+  htpy-ℤ/2-action-H-Space μ μ' =
     Σ ( (f : type-2-Element-Type X → type-Pointed-Type A) → pr1 μ f ＝ pr1 μ' f)
       ( λ H →
         Σ ( ( f : type-2-Element-Type X → type-Pointed-Type A) →
@@ -62,5 +64,44 @@ module _
             ( p : f x ＝ pt-Pointed-Type A) →
             pr1 (pr2 μ) f x p ＝ (H f ∙ pr1 (pr2 μ') f x p))
           ( λ K →
-            Eq-symmetric-Id (X , (λ x → pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl)) {!pr2 (pr2 μ)!} (pr2 (pr2 μ'))))
+            Eq-symmetric-Id
+              ( ( X) ,
+                ( λ x →
+                  ( H (const _ _ (pt-Pointed-Type A))) ∙
+                  ( pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl)))
+              ( tr-symmetric-Id
+                ( ( X) ,
+                  ( λ x → pr1 (pr2 μ) (const _ _ (pt-Pointed-Type A)) x refl))
+                ( ( X) ,
+                  ( λ x →
+                    ( H (const _ _ (pt-Pointed-Type A))) ∙
+                    ( pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl)))
+                ( id-equiv)
+                ( λ x → K (const _ _ (pt-Pointed-Type A)) x refl)
+                ( pr2 (pr2 μ)))
+              ( map-equiv-symmetric-Id
+                ( equiv-concat
+                  ( H (const _ _ (pt-Pointed-Type A)))
+                  ( pt-Pointed-Type A))
+                ( ( X) ,
+                  ( λ x → pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl))
+                ( pr2 (pr2 μ')))))
+
+  refl-htpy-ℤ/2-action-H-Space :
+    (μ : ℤ/2-action-H-Space A X) → htpy-ℤ/2-action-H-Space μ μ
+  pr1 (refl-htpy-ℤ/2-action-H-Space (μ , unit-laws-μ , coh-μ)) f = refl
+  pr1 (pr2 (refl-htpy-ℤ/2-action-H-Space (μ , unit-laws-μ , coh-μ))) f x p =
+    refl
+  pr1 (pr2 (pr2 (refl-htpy-ℤ/2-action-H-Space (μ , unit-laws-μ , coh-μ)))) =
+    refl
+  pr2 (pr2 (pr2 (refl-htpy-ℤ/2-action-H-Space (μ , unit-laws-μ , coh-μ)))) x =
+    ( ( compute-pr2-tr-symmetric-Id
+        ( X , ( λ x → unit-laws-μ (const _ _ (pt-Pointed-Type A)) x refl))
+        ( X , ( λ x → unit-laws-μ (const _ _ (pt-Pointed-Type A)) x refl))
+        ( id-equiv)
+        ( λ y → refl)
+        ( λ y → pr2 coh-μ y)
+        ( x)) ∙
+      ( right-unit)) ∙
+    ( inv (ap-id (pr2 coh-μ x)))
 ```
