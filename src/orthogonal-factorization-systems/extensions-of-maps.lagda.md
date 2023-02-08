@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.small-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -169,6 +170,10 @@ module _
   compute-total-extension :
     (P : B → UU l3) → ((y : B) → P y) ≃ total-extension i P
   compute-total-extension P = inv-equiv (inv-compute-total-extension P)
+
+  is-small-total-extension : (P : B → UU l3) → is-small (l2 ⊔ l3) (total-extension i P)
+  pr1 (is-small-total-extension P) = (y : B) → P y
+  pr2 (is-small-total-extension P) = inv-compute-total-extension P
 ```
 
 ### If `P` is `k`-truncated then the type of extensions is `k`-truncated

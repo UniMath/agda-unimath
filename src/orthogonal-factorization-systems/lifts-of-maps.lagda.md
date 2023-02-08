@@ -9,6 +9,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
+open import foundation.small-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -65,6 +66,10 @@ module _
 
   compute-total-lift : (X → A) ≃ total-lift i X
   compute-total-lift = inv-equiv inv-compute-total-lift
+
+  is-small-total-lift : is-small (l1 ⊔ l3) (total-lift i X)
+  pr1 (is-small-total-lift) = X → A
+  pr2 (is-small-total-lift) = inv-compute-total-lift
 ```
 
 ### If `P` is `k`-truncated then the type of lifts is `k`-truncated
