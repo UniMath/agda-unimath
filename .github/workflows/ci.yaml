@@ -50,7 +50,7 @@ jobs:
         name: Restore Agda formalisation cache
         with:
           path: main/_build
-          key: ${{ runner.os }}-agda-typecheck-cache-
+          key: ${{ runner.os }}-agda-typecheck-cache-hash-${{ hashFiles('main/src/**') }}
 
       - name: Typecheck the whole formalisation
         run: |
