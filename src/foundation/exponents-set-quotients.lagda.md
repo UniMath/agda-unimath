@@ -11,6 +11,7 @@ open import foundation.equivalence-relations
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-set-quotients
+open import foundation.homotopies
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
@@ -72,14 +73,24 @@ module _
   pr2 (pr2 (pr2 eq-rel-function-type)) {f} {g} {h} =
     trans-sim-function-type f g h
 
+  map-exponent-reflecting-map-Eq-Rel :
+    {l4 : Level} {B : UU l4} → reflecting-map-Eq-Rel R B → (X → A) → (X → B)
+  map-exponent-reflecting-map-Eq-Rel q =
+    postcomp X (map-reflecting-map-Eq-Rel R q)
+
+  reflects-exponent-reflecting-map-Eq-Rel :
+    {l4 : Level} {B : UU l4} (q : reflecting-map-Eq-Rel R B) →
+    reflects-Eq-Rel eq-rel-function-type (map-exponent-reflecting-map-Eq-Rel q)
+  reflects-exponent-reflecting-map-Eq-Rel q {f} {g} H =
+    eq-htpy (λ x → reflects-map-reflecting-map-Eq-Rel R q (H x))
+    
   exponent-reflecting-map-Eq-Rel :
     {l4 : Level} {B : UU l4} →
     reflecting-map-Eq-Rel R B →
     reflecting-map-Eq-Rel eq-rel-function-type (X → B)
-  pr1 (exponent-reflecting-map-Eq-Rel q) =
-    postcomp X (map-reflecting-map-Eq-Rel R q)
-  pr2 (exponent-reflecting-map-Eq-Rel q) {f} {g} H =
-    eq-htpy (λ x → reflects-map-reflecting-map-Eq-Rel R q (H x))
+  pr1 (exponent-reflecting-map-Eq-Rel q) = map-exponent-reflecting-map-Eq-Rel q
+  pr2 (exponent-reflecting-map-Eq-Rel q) =
+    reflects-exponent-reflecting-map-Eq-Rel q
 
   map-inclusion-is-set-quotient-eq-rel-function-type :
     {l4 l5 : Level}
@@ -96,6 +107,25 @@ module _
       ( Uq)
       ( function-Set X QR)
       ( exponent-reflecting-map-Eq-Rel qR)
+
+  triangle-inclusion-is-set-quotient-eq-rel-function-type :
+    {l4 l5 : Level}
+    (Q : Set l4) (q : reflecting-map-Eq-Rel eq-rel-function-type (type-Set Q))
+    (Uq : {l : Level} → is-set-quotient l eq-rel-function-type Q q) →
+    (QR : Set l5) (qR : reflecting-map-Eq-Rel R (type-Set QR))
+    (UqR : {l : Level} → is-set-quotient l R QR qR) →
+    ( ( map-inclusion-is-set-quotient-eq-rel-function-type Q q Uq QR qR UqR) ∘
+      ( map-reflecting-map-Eq-Rel eq-rel-function-type q)) ~
+    ( map-exponent-reflecting-map-Eq-Rel qR)
+  triangle-inclusion-is-set-quotient-eq-rel-function-type Q q Uq QR qR UqR =
+    triangle-universal-property-set-quotient-is-set-quotient
+      ( eq-rel-function-type)
+      ( Q)
+      ( q)
+      ( Uq)
+      ( function-Set X QR)
+      ( exponent-reflecting-map-Eq-Rel qR)
+
 ```
 
 ### An equivalence relation on relation preserving maps
