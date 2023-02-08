@@ -101,4 +101,4 @@ module _
 
 ## See also
 
-- [`foundation.extensions-of-maps`](foundation.extensions-of-maps.html) for the dual notion.
+- [`orthogonal-factorization-systems.extensions-of-maps`](orthogonal-factorization-systems.extensions-of-maps.html) for the dual notion.
