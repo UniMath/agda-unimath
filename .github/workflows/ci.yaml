@@ -1,174 +1,94 @@
-# CI workflow summary:
-# - build: install haskell and agda, and make them available for other jobs
-#   0. Cancel Previous Runs
-#   1. Branch caching
-#   2. Setup Haskell
-#   3. Add .cabal/bin into PATH
-#   4. Checkout Agda repository
-#   5. Install Agda
-# - check: i) use the cache to get haskell and agda.
-#          ii) see if there some cache for typechecking `main/_build` in the branch build.
-#          iii) if so, it tries to check the agda files.
-#   6. Checkout the main repository
-#   7. Verify the whole formalisation
-# - html
-#   8. Setup Pandoc using setup-pandoc
-#   9. Generate HTML
-#   10. Deploy HTML to github pages
-
-name: CI
+name: Agda-Unimath CI
 on:
+  # To run this workflow manually
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: the repository ref to build
+        required: true
+        default: main
+
   push:
-    branches: [ master , develop ]
+    branches:
+      - master
   pull_request:
     branches:
       - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
 
+# Cancel previous runs of the same branch
+concurrency:
+  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
+  cancel-in-progress: true
+
+env:
+  AGDAHTMLFLAGS: --only-scope-checking --html --html-highlight=code --html-dir=docs --css=docs/Agda.css
 
 jobs:
-  Build:
+  typecheck:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ macOS-latest , ubuntu-latest ]
-        agda: ["v2.6.3"]
-        ghc: ["9.4.4"]
+        agda: [ '2.6.3' ]
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-      - uses: actions/cache@v2
-        name: Caching
-        id: cache-build
-        env:
-          cache-name: cache-haskell-agda
-        with:
-          path: |
-            ~/.cabal
-            dist-newstyle
-            agda
-          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ matrix.agda }}-
-            ${{ runner.os }}-build-
-      - uses: haskell/actions/setup@v1
-        name: Setup Haskell
-        with:
-          ghc-version: ${{ matrix.ghc }}
-
-      - name: Add .cabal/bin into PATH
-        run:
-          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
-        shell: bash
-
-      - uses: actions/checkout@v2
-        name: Checkout Agda repository
-        if: steps.cache-build.outputs.cache-hit != 'true'
-        with:
-          repository: agda/agda
-          path: agda
-          ref: ${{ matrix.agda }}
-
-      - name: Install Agda
-        if: steps.cache-build.outputs.cache-hit != 'true'
-        run: |
-          cd agda
-          touch doc/user-manual.pdf
-          cabal install --overwrite-policy=always --ghc-options='-O2 +RTS -M6G -RTS' -foptimise-heavily
-        shell: bash
-
-  check:
-    needs: build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ macOS-latest , ubuntu-latest ]
-        agda: ["v2.6.3"]
-        ghc: ["9.4.4"]
-    steps:
-      - uses: actions/cache@v2
-        id: cache-build
-        with:
-          path: |
-            ~/.cabal
-            dist-newstyle
-            agda
-          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}
-      - name: Add .cabal/bin into PATH
-        run:
-          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
-        shell: bash
-      - name: Checkout the main repository
-        uses: actions/checkout@v2
+      - name: Checkout our repository
+        uses: actions/checkout@v3
         with:
           path: main
-      - uses: actions/cache@v2
-        if: steps.cache-agda-formalisation.outputs.cache-hit != 'true'
-        env:
-          cache-name: cache-agda-formalisation
+      - name: Setup Agda
+        uses: wenkokke/setup-agda@v2.0.0
+        with:
+          agda-version: ${{ matrix.agda }}
+
+      - uses: actions/cache/restore@v3
+        id: cache-agda-formalisation
+        name: Restore Agda formalisation cache
         with:
           path: main/_build
-          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**') }}
+          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
-            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-            ${{ runner.os }}-check-${{ github.ref }}-
-      - name: Verify the whole formalisation
-        if: steps.cache-agda-formalisation.cache-hit != 'true'
-        id: typecheck
+            
+      - name: Typecheck the whole formalisation
         run: |
           cd main
           make check
 
-  website:
-    needs: check
-    runs-on: macOS-latest
-    if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-    strategy:
-      matrix:
-        agda: ["v2.6.3"]
-        ghc: ["9.4.4"]
-    steps:
-      - name: Checkout the main repository
-        uses: actions/checkout@v2
-        with:
-          path: main
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cabal
-            dist-newstyle
-            agda
-          key: ${{ runner.os }}-build-${{ matrix.agda }}-${{ matrix.ghc }}
-      - name: Add .cabal/bin into PATH
-        run:
-          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
-        shell: bash
-      - uses: actions/cache@v2
+      - name: Save Agda build cache
+        uses: actions/cache/save@v3
         with:
           path: main/_build
-          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ matrix.ghc }}-${{ hashFiles('main/src/**')}}
-      - uses: r-lib/actions/setup-pandoc@v1
+          key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: typecheck
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - uses: r-lib/actions/setup-pandoc@v2
         with:
-          pandoc-version: '3.0'
-      - run: echo "# Test" | pandoc -t html
+          pandoc-version: 2.19.2
+
+      - name: Setup Agda
+        uses: wenkokke/setup-agda@v2.0.0
+        with:
+          agda-version: ${{ matrix.agda }}
 
       - name: Generate HTML
-        id: html
+        id: gen-html
         run: |
           cd main
           make agda-html
 
       - name: Deploy HTML to github pages
-        if: steps.html.outputs.cache-hit != 'true'
+        if: ${{ success() }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: main/docs
           enable_jekyll: true
-
-# References:
-#
-# - fangyi-zhou/setup-agda-action
-# - oisdk/agda-playground/blob/master/.github/workflows/compile.yaml
