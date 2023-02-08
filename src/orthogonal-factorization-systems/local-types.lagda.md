@@ -5,13 +5,19 @@ title: Local types
 ```agda
 module orthogonal-factorization-systems.local-types where
 
+open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.function-extensionality
 open import foundation-core.functions
+open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.universe-levels
+
 
 open import foundation.equivalences
 open import foundation.type-arithmetic-dependent-function-types
@@ -47,7 +53,7 @@ module _
 
 ## Properties
 
-### Being local is a proposition
+### Being local is a property
 
 ```agda
   is-property-is-local-family : {l : Level} (A : X → UU l) → is-prop (is-local-family A)
@@ -84,6 +90,33 @@ module _
   is-equiv-is-local-type : ((l : Level) (A : UU l) → is-local-type A) → is-equiv f
   is-equiv-is-local-type = is-equiv-is-equiv-precomp f
 ```
+
+### If the domain and codomain of ´f´ is ´f´-local then ´f´ is an equivalence
+
+```agda
+  retraction-sec-precomp-domain : sec (precomp f Y) → retr f
+  pr1 (retraction-sec-precomp-domain sec-precomp-Y) = pr1 sec-precomp-Y id
+  pr2 (retraction-sec-precomp-domain sec-precomp-Y) = htpy-eq (pr2 sec-precomp-Y id)
+  section-is-local-domains' : sec (precomp f Y) → is-local-type X → sec f
+  pr1 (section-is-local-domains' sec-precomp-Y is-local-X) = pr1 sec-precomp-Y id
+  pr2 (section-is-local-domains' sec-precomp-Y is-local-X) =
+    htpy-eq
+      ( ap
+        ( pr1)
+        { pair
+          ( f ∘ pr1 (section-is-local-domains' sec-precomp-Y is-local-X))
+          ( ap (postcomp Y f) (pr2 sec-precomp-Y id))}
+        { pair id refl}
+        ( eq-is-contr (is-contr-map-is-equiv is-local-X f)))
+  is-equiv-is-local-domains' : sec (precomp f Y) → is-local-type X → is-equiv f
+  pr1 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
+    section-is-local-domains' sec-precomp-Y is-local-X
+  pr2 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
+    retraction-sec-precomp-domain sec-precomp-Y
+  is-equiv-is-local-domains : is-local-type Y → is-local-type X → is-equiv f
+  is-equiv-is-local-domains is-local-Y = is-equiv-is-local-domains' (pr1 is-local-Y)
+```
+
 
 ## Examples
 
