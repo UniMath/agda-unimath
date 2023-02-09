@@ -51,9 +51,9 @@ module _
 ### Commutative operations
 
 ```agda
-commutative-operation :
+symmetric-operation :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc lzero ⊔ l1 ⊔ l2)
-commutative-operation A B = unordered-pair A → B
+symmetric-operation A B = unordered-pair A → B
 ```
 
 ## Properties
@@ -61,10 +61,10 @@ commutative-operation A B = unordered-pair A → B
 ### The restriction of a commutative operation to the standard unordered pairs is commutative
 
 ```agda
-is-commutative-commutative-operation :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : commutative-operation A B) →
+is-commutative-symmetric-operation :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : symmetric-operation A B) →
   is-commutative (λ x y → f (standard-unordered-pair x y))
-is-commutative-commutative-operation f x y =
+is-commutative-symmetric-operation f x y =
   ap f (is-commutative-standard-unordered-pair x y)
 ```
 
@@ -87,10 +87,10 @@ module _
     ( ap-binary f (ap p (K (zero-Fin 1))) (ap p (K (one-Fin 1)))) ∙
     ( H (p (map-equiv e' (one-Fin 1))) (p (map-equiv e' (zero-Fin 1))))
   
-  commutative-operation-is-commutative :
+  symmetric-operation-is-commutative :
     (f : A → A → type-Set B) → is-commutative f →
-    commutative-operation A (type-Set B)
-  commutative-operation-is-commutative f H (pair (pair X K) p) =
+    symmetric-operation A (type-Set B)
+  symmetric-operation-is-commutative f H (pair (pair X K) p) =
     map-universal-property-set-quotient-trunc-Prop B
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
@@ -107,11 +107,11 @@ module _
               ( map-equiv e (zero-Fin 1)))))
       ( K)
 
-  compute-commutative-operation-is-commutative :
+  compute-symmetric-operation-is-commutative :
     (f : A → A → type-Set B) (H : is-commutative f) (x y : A) →
-    commutative-operation-is-commutative f H (standard-unordered-pair x y) ＝
+    symmetric-operation-is-commutative f H (standard-unordered-pair x y) ＝
     f x y
-  compute-commutative-operation-is-commutative f H x y =
+  compute-symmetric-operation-is-commutative f H x y =
     
     htpy-universal-property-set-quotient-trunc-Prop B
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
