@@ -68,7 +68,7 @@ jobs:
           path: main/_build
           key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
 
-  docs:
+  check-docs-gen:
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -105,21 +105,8 @@ jobs:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
 
-      - name: Generate HTML
+      - name: Generate HTML to check no errors are raised
         id: gen-html
         run: |
           cd main
           make agda-html
-      - name: Setup Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: actions/configure-pages@v3
-        
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        with:
-          path: 'main/docs'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: actions/deploy-pages@v1
