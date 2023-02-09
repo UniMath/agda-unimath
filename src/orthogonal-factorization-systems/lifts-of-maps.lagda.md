@@ -5,10 +5,13 @@ title: Lifts of maps
 ```agda
 module orthogonal-factorization-systems.lifts-of-maps where
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
+open import foundation.propositions
+open import foundation.sets
 open import foundation.small-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -100,6 +103,20 @@ module _
       ( X → A)
       ( compute-total-lift i X)
       ( is-trunc-function-type k is-trunc-A)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  where
+
+  is-contr-is-lift :
+    {X : UU l3} (f : X → B) →
+    is-prop B → (g : X → A) → is-contr (is-lift i f g)
+  is-contr-is-lift f is-prop-B g = is-contr-Π λ x → is-prop-B (f x) ((i ∘ g) x)
+
+  is-prop-is-lift :
+    {X : UU l3} (f : X → B) →
+    is-set B → (g : X → A) → is-prop (is-lift i f g)
+  is-prop-is-lift f is-set-B g = is-prop-Π λ x → is-set-B (f x) ((i ∘ g) x)
 ```
 
 ## See also

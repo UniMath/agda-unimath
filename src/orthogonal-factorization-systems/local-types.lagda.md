@@ -33,7 +33,7 @@ or _`f`-local_, if the precomposition map
 `_∘ f : ((x : X) → A x) → ((y : Y) → A (f y))`
 is an equivalence.
 
-Likewise a type `A` is said to be `f` local if the precomposition map
+Likewise a type `A` is said to be `f`-local if the precomposition map
 `_∘ f : (X → A) → (Y → A)`
 is an equivalence.
 
@@ -69,6 +69,14 @@ module _
   is-local-type-Prop : {l : Level} → UU l → Prop (l1 ⊔ l2 ⊔ l)
   pr1 (is-local-type-Prop A) = is-local-type A
   pr2 (is-local-type-Prop A) = is-property-is-local-type A
+```
+
+### If `P` is an `f`-local family then every fiber of `P` is an `f`-local type
+
+```agda
+  -- is-local-fiber-is-local-family :
+  --   {l : Level} → (P : X → UU l) → is-local-family P → (x : X) → is-local-type (P x)
+  -- is-local-fiber-is-local-family P is-local-P x = {! is-equiv-fam-is-equiv  !}
 ```
 
 ### Locality distributes over Π-types
