@@ -1,0 +1,75 @@
+name: Formalisation website
+on:
+  # To run this workflow manually
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: the repository ref to build
+        required: true
+        default: main
+
+  push:
+    branches:
+      - master
+
+# Cancel previous runs of the same branch
+concurrency:
+  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
+  cancel-in-progress: true
+
+env:
+  AGDAHTMLFLAGS: --html --html-highlight=code --html-dir=docs --css=docs/Agda.css
+  AGDA: agda
+
+jobs:
+  pages:
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        agda: [ '2.6.3' ]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    steps:
+      - name: Checkout our repository
+        uses: actions/checkout@v3
+        with:
+          path: main
+      - uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: '3.0.1'
+
+      - name: Setup Agda
+        uses: wenkokke/setup-agda@v2.0.0
+        with:
+          agda-version: ${{ matrix.agda }}
+
+      - uses: actions/cache/restore@v3
+        id: cache-agda-formalisation
+        name: Restore Agda formalisation cache
+        with:
+          path: main/_build
+          key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+
+      - name: Generate HTML
+        id: gen-html
+        run: |
+          cd main
+          make agda-html
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'main/docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

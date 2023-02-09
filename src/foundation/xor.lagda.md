@@ -82,48 +82,48 @@ module _
     is-prop-type-xor-Prop = is-prop-type-Prop xor-Prop
 ```
 
-### The commutative operation of exclusive disjunction
+### The symmetric operation of exclusive disjunction
 
 ```agda
-predicate-commutative-xor :
+predicate-symmetric-xor :
   {l : Level} (p : unordered-pair (UU l)) → type-unordered-pair p → UU l
-predicate-commutative-xor p x =
+predicate-symmetric-xor p x =
   ( element-unordered-pair p x) × (¬ (other-element-unordered-pair p x))
 
-commutative-xor : {l : Level} → commutative-operation (UU l) (UU l)
-commutative-xor p = Σ (type-unordered-pair p) (predicate-commutative-xor p)
+symmetric-xor : {l : Level} → symmetric-operation (UU l) (UU l)
+symmetric-xor p = Σ (type-unordered-pair p) (predicate-symmetric-xor p)
 ```
 
-### The commutative operation of exclusive disjunction of propositions
+### The symmetric operation of exclusive disjunction of propositions
 
 ```agda
-predicate-commutative-xor-Prop :
+predicate-symmetric-xor-Prop :
   {l : Level} (p : unordered-pair (Prop l)) →
   type-unordered-pair p → UU l
-predicate-commutative-xor-Prop p =
-  predicate-commutative-xor (map-unordered-pair type-Prop p)
+predicate-symmetric-xor-Prop p =
+  predicate-symmetric-xor (map-unordered-pair type-Prop p)
 
-type-commutative-xor-Prop :
-  {l : Level} → commutative-operation (Prop l) (UU l)
-type-commutative-xor-Prop p = commutative-xor (map-unordered-pair type-Prop p)
+type-symmetric-xor-Prop :
+  {l : Level} → symmetric-operation (Prop l) (UU l)
+type-symmetric-xor-Prop p = symmetric-xor (map-unordered-pair type-Prop p)
 
-all-elements-equal-type-commutative-xor-Prop :
+all-elements-equal-type-symmetric-xor-Prop :
   {l : Level} (p : unordered-pair (Prop l)) →
-  all-elements-equal (type-commutative-xor-Prop p)
-all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
-  cases-is-prop-type-commutative-xor-Prop
+  all-elements-equal (type-symmetric-xor-Prop p)
+all-elements-equal-type-symmetric-xor-Prop (pair X P) x y =
+  cases-is-prop-type-symmetric-xor-Prop
     ( has-decidable-equality-is-finite
       ( is-finite-type-UU-Fin 2 X)
       ( pr1 x)
       ( pr1 y))
   where
-  cases-is-prop-type-commutative-xor-Prop :
+  cases-is-prop-type-symmetric-xor-Prop :
     is-decidable (pr1 x ＝ pr1 y) → x ＝ y
-  cases-is-prop-type-commutative-xor-Prop (inl p) =
+  cases-is-prop-type-symmetric-xor-Prop (inl p) =
     eq-pair-Σ
       ( p)
       ( eq-is-prop (is-prop-prod (is-prop-type-Prop (P (pr1 y))) is-prop-neg))
-  cases-is-prop-type-commutative-xor-Prop (inr np) =
+  cases-is-prop-type-symmetric-xor-Prop (inr np) =
     ex-falso
       ( tr
         ( λ z → ¬ (type-Prop (P z)))
@@ -131,17 +131,17 @@ all-elements-equal-type-commutative-xor-Prop (pair X P) x y =
         ( pr2 (pr2 x))
         ( pr1 (pr2 y)))
         
-is-prop-type-commutative-xor-Prop :
+is-prop-type-symmetric-xor-Prop :
   {l : Level} (p : unordered-pair (Prop l)) →
-  is-prop (type-commutative-xor-Prop p)
-is-prop-type-commutative-xor-Prop p =
+  is-prop (type-symmetric-xor-Prop p)
+is-prop-type-symmetric-xor-Prop p =
   is-prop-all-elements-equal
-    ( all-elements-equal-type-commutative-xor-Prop p)
+    ( all-elements-equal-type-symmetric-xor-Prop p)
 
-commutative-xor-Prop :
-  {l : Level} → commutative-operation (Prop l) (Prop l)
-pr1 (commutative-xor-Prop E) = type-commutative-xor-Prop E 
-pr2 (commutative-xor-Prop E) = is-prop-type-commutative-xor-Prop E
+symmetric-xor-Prop :
+  {l : Level} → symmetric-operation (Prop l) (Prop l)
+pr1 (symmetric-xor-Prop E) = type-symmetric-xor-Prop E 
+pr2 (symmetric-xor-Prop E) = is-prop-type-symmetric-xor-Prop E
 ```
 
 ### Second definition of exclusiove disjunction
@@ -206,23 +206,23 @@ module _
       ( λ x → (y : type-Prop P + type-Prop Q) → x ＝ y))
 ```
 
-### The commutative exclusive disjunction at a standard unordered pair
+### The symmetric exclusive disjunction at a standard unordered pair
 
 ```agda
 module _
   {l : Level} {A B : UU l}
   where
   
-  xor-commutative-xor :
-    commutative-xor (standard-unordered-pair A B) → xor A B
-  xor-commutative-xor (pair (inl (inr star)) (pair p nq)) =
+  xor-symmetric-xor :
+    symmetric-xor (standard-unordered-pair A B) → xor A B
+  xor-symmetric-xor (pair (inl (inr star)) (pair p nq)) =
     inl
       ( pair p
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
           ( compute-swap-Fin-two-ℕ (zero-Fin 1))
           ( nq)))
-  xor-commutative-xor (pair (inr star) (pair q np)) =
+  xor-symmetric-xor (pair (inr star) (pair q np)) =
     inr
       ( pair
         ( q)
@@ -231,18 +231,18 @@ module _
           ( compute-swap-Fin-two-ℕ (one-Fin 1))
           ( np)))
 
-  commutative-xor-xor :
-    xor A B → commutative-xor (standard-unordered-pair A B)
-  pr1 (commutative-xor-xor (inl (pair a nb))) = (zero-Fin 1)
-  pr1 (pr2 (commutative-xor-xor (inl (pair a nb)))) = a
-  pr2 (pr2 (commutative-xor-xor (inl (pair a nb)))) =
+  symmetric-xor-xor :
+    xor A B → symmetric-xor (standard-unordered-pair A B)
+  pr1 (symmetric-xor-xor (inl (pair a nb))) = (zero-Fin 1)
+  pr1 (pr2 (symmetric-xor-xor (inl (pair a nb)))) = a
+  pr2 (pr2 (symmetric-xor-xor (inl (pair a nb)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
       ( inv (compute-swap-Fin-two-ℕ (zero-Fin 1)))
       ( nb)
-  pr1 (commutative-xor-xor (inr (pair na b))) = (one-Fin 1)
-  pr1 (pr2 (commutative-xor-xor (inr (pair b na)))) = b
-  pr2 (pr2 (commutative-xor-xor (inr (pair b na)))) =
+  pr1 (symmetric-xor-xor (inr (pair na b))) = (one-Fin 1)
+  pr1 (pr2 (symmetric-xor-xor (inr (pair b na)))) = b
+  pr2 (pr2 (symmetric-xor-xor (inr (pair b na)))) =
     tr
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
       ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
@@ -329,11 +329,11 @@ module _
   {l : Level} (P Q : Prop l)
   where
   
-  xor-commutative-xor-Prop :
+  xor-symmetric-xor-Prop :
     type-hom-Prop
-      ( commutative-xor-Prop (standard-unordered-pair P Q))
+      ( symmetric-xor-Prop (standard-unordered-pair P Q))
       ( xor-Prop P Q)
-  xor-commutative-xor-Prop (pair (inl (inr star)) (pair p nq)) =
+  xor-symmetric-xor-Prop (pair (inl (inr star)) (pair p nq)) =
     inl
       ( pair p
         ( tr
@@ -342,7 +342,7 @@ module _
                 ( element-unordered-pair (standard-unordered-pair P Q) t)))
           ( compute-swap-Fin-two-ℕ (zero-Fin 1))
           ( nq)))
-  xor-commutative-xor-Prop (pair (inr star) (pair q np)) =
+  xor-symmetric-xor-Prop (pair (inr star) (pair q np)) =
     inr
       ( pair q
         ( tr
@@ -352,21 +352,21 @@ module _
           ( compute-swap-Fin-two-ℕ (one-Fin 1))
           ( np)))
 
-  commutative-xor-xor-Prop :
+  symmetric-xor-xor-Prop :
     type-hom-Prop
       ( xor-Prop P Q)
-      ( commutative-xor-Prop (standard-unordered-pair P Q))
-  pr1 (commutative-xor-xor-Prop (inl (pair p nq))) = (zero-Fin 1)
-  pr1 (pr2 (commutative-xor-xor-Prop (inl (pair p nq)))) = p
-  pr2 (pr2 (commutative-xor-xor-Prop (inl (pair p nq)))) =
+      ( symmetric-xor-Prop (standard-unordered-pair P Q))
+  pr1 (symmetric-xor-xor-Prop (inl (pair p nq))) = (zero-Fin 1)
+  pr1 (pr2 (symmetric-xor-xor-Prop (inl (pair p nq)))) = p
+  pr2 (pr2 (symmetric-xor-xor-Prop (inl (pair p nq)))) =
     tr
       ( λ t →
         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
       ( inv (compute-swap-Fin-two-ℕ (zero-Fin 1)))
       ( nq)
-  pr1 (commutative-xor-xor-Prop (inr (pair q np))) = (one-Fin 1)
-  pr1 (pr2 (commutative-xor-xor-Prop (inr (pair q np)))) = q
-  pr2 (pr2 (commutative-xor-xor-Prop (inr (pair q np)))) =
+  pr1 (symmetric-xor-xor-Prop (inr (pair q np))) = (one-Fin 1)
+  pr1 (pr2 (symmetric-xor-xor-Prop (inr (pair q np)))) = q
+  pr2 (pr2 (symmetric-xor-xor-Prop (inr (pair q np)))) =
     tr
       ( λ t →
         ¬ (type-Prop (element-unordered-pair (standard-unordered-pair P Q) t)))
@@ -375,9 +375,9 @@ module _
 
 eq-commmutative-xor-xor :
   {l : Level} (P Q : Prop l) →
-  commutative-xor-Prop (standard-unordered-pair P Q) ＝ xor-Prop P Q
+  symmetric-xor-Prop (standard-unordered-pair P Q) ＝ xor-Prop P Q
 eq-commmutative-xor-xor P Q =
-  eq-iff (xor-commutative-xor-Prop P Q) (commutative-xor-xor-Prop P Q)
+  eq-iff (xor-symmetric-xor-Prop P Q) (symmetric-xor-xor-Prop P Q)
 ```
 
 ### Exclusive disjunction of decidable propositions

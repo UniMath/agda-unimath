@@ -8,7 +8,9 @@ module foundation.symmetric-identity-types where
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -167,6 +169,12 @@ module _
     (e : A ≃ B) (a : unordered-pair A) →
     symmetric-Id a → symmetric-Id (map-equiv-unordered-pair e a)
   map-equiv-symmetric-Id e a = map-equiv (equiv-symmetric-Id e a)
+
+id-equiv-symmetric-Id :
+  {l : Level} {A : UU l} (a : unordered-pair A) →
+  map-equiv-symmetric-Id id-equiv a ~ id
+id-equiv-symmetric-Id a (x , H) =
+  eq-pair-Σ refl (eq-htpy (λ u → ap-id (H u)))
 ```
 
 ### Transport in the symmetric identity type along observational equality of unordered pairs
@@ -199,5 +207,13 @@ module _
     pr2 (tr-symmetric-Id p q e H (a , K)) (map-equiv e x) ＝ (K x ∙ H x)
   compute-pr2-tr-symmetric-Id (X , f) (Y , g) e H {a} =
     compute-map-equiv-Π (λ x → a ＝ g x) e (λ x → equiv-concat' a (H x))
-  
+
+  refl-Eq-unordered-pair-tr-symmetric-Id :
+    (p : unordered-pair A) →
+    tr-symmetric-Id p p id-equiv refl-htpy ~ id
+  refl-Eq-unordered-pair-tr-symmetric-Id p (a , K)=
+    eq-pair-Σ refl
+      ( eq-htpy
+        ( ( compute-pr2-tr-symmetric-Id p p id-equiv refl-htpy K) ∙h
+          ( right-unit-htpy)))
 ```

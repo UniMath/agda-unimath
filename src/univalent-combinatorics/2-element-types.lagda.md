@@ -91,6 +91,12 @@ is-finite-type-2-Element-Type X =
 finite-type-2-Element-Type : {l : Level} → 2-Element-Type l → 𝔽 l
 pr1 (finite-type-2-Element-Type X) = type-2-Element-Type X
 pr2 (finite-type-2-Element-Type X) = is-finite-type-2-Element-Type X
+
+standard-2-Element-Type : (l : Level) → 2-Element-Type l
+standard-2-Element-Type l = Fin-UU-Fin l 2
+
+type-standard-2-Element-Type : (l : Level) → UU l
+type-standard-2-Element-Type l = type-2-Element-Type (standard-2-Element-Type l)
 ```
 
 ## Properties
@@ -340,7 +346,7 @@ abstract
           ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
       ( is-contr-total-equiv-subuniverse
         ( mere-equiv-Prop (Fin 2))
-        ( Fin-UU-Fin l 2))
+        ( standard-2-Element-Type l))
 ```
 
 #### Completing the characterization of the identity type of the type of 2-element types of arbitrary universe level
@@ -348,7 +354,7 @@ abstract
 ```agda
 point-eq-UU-Fin-two-ℕ :
   {l : Level} {X : UU-Fin l 2} →
-  Fin-UU-Fin l 2 ＝ X → type-UU-Fin 2 X
+  standard-2-Element-Type l ＝ X → type-UU-Fin 2 X
 point-eq-UU-Fin-two-ℕ refl = map-raise (zero-Fin 1)
 
 abstract
@@ -362,7 +368,7 @@ abstract
 
 equiv-point-eq-UU-Fin-two-ℕ :
   {l : Level} {X : UU-Fin l 2} →
-  (Fin-UU-Fin l 2 ＝ X) ≃ type-UU-Fin 2 X
+  (standard-2-Element-Type l ＝ X) ≃ type-UU-Fin 2 X
 pr1 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
   point-eq-UU-Fin-two-ℕ
 pr2 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
@@ -370,7 +376,7 @@ pr2 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
 
 eq-point-UU-Fin-two-ℕ :
   {l : Level} {X : UU-Fin l 2} →
-  type-UU-Fin 2 X → Fin-UU-Fin l 2 ＝ X
+  type-UU-Fin 2 X → standard-2-Element-Type l ＝ X
 eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
@@ -457,15 +463,15 @@ abstract
     is-not-contractible-Fin 2
       ( Eq-eq-ℕ)
       ( is-contr-equiv
-        ( Fin-UU-Fin l 2 ＝ Fin-UU-Fin l 2)
+        ( standard-2-Element-Type l ＝ standard-2-Element-Type l)
         ( ( inv-equiv equiv-point-eq-UU-Fin-two-ℕ) ∘e
           ( compute-raise-Fin l 2))
         ( is-prop-is-contr
           ( pair
-            ( Fin-UU-Fin l 2)
+            ( standard-2-Element-Type l)
             ( λ X → eq-point-UU-Fin-two-ℕ (f X)))
-          ( Fin-UU-Fin l 2)
-          ( Fin-UU-Fin l 2)))
+          ( standard-2-Element-Type l)
+          ( standard-2-Element-Type l)))
 ```
 
 ### There is no decidability procedure that proves that an arbitrary 2-element type is decidable

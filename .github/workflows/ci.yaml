@@ -54,6 +54,7 @@ jobs:
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
             
       - name: Typecheck the whole formalisation
         run: |
@@ -62,12 +63,11 @@ jobs:
 
       - name: Save Agda build cache
         uses: actions/cache/save@v3
-        if: ${{ always() }}
         with:
           path: main/_build
           key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
 
-  docs:
+  check-docs-gen:
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -95,17 +95,10 @@ jobs:
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-            
-      - name: Generate HTML
+            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
+
+      - name: Generate HTML to check no errors are raised
         id: gen-html
         run: |
           cd main
           make agda-html
-
-      - name: Deploy HTML to github pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: main/docs
-          enable_jekyll: true
