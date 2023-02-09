@@ -71,14 +71,6 @@ module _
   pr2 (is-local-type-Prop A) = is-property-is-local-type A
 ```
 
-### If `P` is an `f`-local family then every fiber of `P` is an `f`-local type
-
-```agda
-  -- is-local-fiber-is-local-family :
-  --   {l : Level} → (P : X → UU l) → is-local-family P → (x : X) → is-local-type (P x)
-  -- is-local-fiber-is-local-family P is-local-P x = {! is-equiv-fam-is-equiv  !}
-```
-
 ### Locality distributes over Π-types
 
 ```agda
