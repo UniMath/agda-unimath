@@ -823,6 +823,7 @@ open import set-theory.uncountable-sets
 open import structured-types
 open import structured-types.central-h-spaces
 open import structured-types.coherent-h-spaces
+open import structured-types.constant-maps-pointed-types
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.faithful-pointed-maps

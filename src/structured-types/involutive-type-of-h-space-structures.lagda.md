@@ -21,6 +21,7 @@ open import foundation.symmetric-identity-types
 open import foundation.symmetric-operations
 open import foundation.universe-levels
 
+open import structured-types.constant-maps-pointed-types
 open import structured-types.pointed-types
 
 open import univalent-combinatorics.2-element-types
@@ -45,7 +46,10 @@ h-space-Involutive-Type A X =
           ( p : f x ＝ pt-Pointed-Type A) →
           μ f ＝ f (map-swap-2-Element-Type X x))
         ( λ ν →
-          symmetric-Id (X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl))))
+          symmetric-Id
+            ( ( X) ,
+              ( λ x →
+                ν (const-Pointed-Type _ A) x refl))))
 ```
 
 ## Properties
@@ -70,24 +74,24 @@ module _
             Eq-symmetric-Id
               ( ( X) ,
                 ( λ x →
-                  ( H (const _ _ (pt-Pointed-Type A))) ∙
-                  ( pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl)))
+                  ( H (const-Pointed-Type _ A)) ∙
+                  ( pr1 (pr2 μ') (const-Pointed-Type _ A) x refl)))
               ( tr-symmetric-Id
                 ( ( X) ,
-                  ( λ x → pr1 (pr2 μ) (const _ _ (pt-Pointed-Type A)) x refl))
+                  ( λ x → pr1 (pr2 μ) (const-Pointed-Type _ A) x refl))
                 ( ( X) ,
                   ( λ x →
-                    ( H (const _ _ (pt-Pointed-Type A))) ∙
-                    ( pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl)))
+                    ( H (const-Pointed-Type _ A)) ∙
+                    ( pr1 (pr2 μ') (const-Pointed-Type _ A) x refl)))
                 ( id-equiv)
-                ( λ x → K (const _ _ (pt-Pointed-Type A)) x refl)
+                ( λ x → K (const-Pointed-Type _ A) x refl)
                 ( pr2 (pr2 μ)))
               ( map-equiv-symmetric-Id
                 ( equiv-concat
-                  ( H (const _ _ (pt-Pointed-Type A)))
+                  ( H (const-Pointed-Type _ A))
                   ( pt-Pointed-Type A))
                 ( ( X) ,
-                  ( λ x → pr1 (pr2 μ') (const _ _ (pt-Pointed-Type A)) x refl))
+                  ( λ x → pr1 (pr2 μ') (const-Pointed-Type _ A) x refl))
                 ( pr2 (pr2 μ')))))
 
   refl-htpy-h-space-Involutive-Type :
@@ -103,8 +107,8 @@ module _
     ( pr2
       ( pr2 (refl-htpy-h-space-Involutive-Type (μ , unit-laws-μ , coh-μ)))) x =
     ( ( compute-pr2-tr-symmetric-Id
-        ( X , ( λ x → unit-laws-μ (const _ _ (pt-Pointed-Type A)) x refl))
-        ( X , ( λ x → unit-laws-μ (const _ _ (pt-Pointed-Type A)) x refl))
+        ( X , ( λ x → unit-laws-μ (const-Pointed-Type _ A) x refl))
+        ( X , ( λ x → unit-laws-μ (const-Pointed-Type _ A) x refl))
         ( id-equiv)
         ( λ y → refl)
         ( λ y → pr2 coh-μ y)
@@ -123,16 +127,16 @@ module _
       ( is-contr-total-Eq-structure
         ( λ ν' ρ' H →
           Eq-symmetric-Id
-            ( ( X) , (λ x → ν' (const _ _ (pt-Pointed-Type A)) x refl))
+            ( ( X) , (λ x → ν' (const-Pointed-Type _ A) x refl))
             ( tr-symmetric-Id
-              ( X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl))
-              ( X , (λ x → ν' (const _ _ (pt-Pointed-Type A)) x refl))
+              ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
+              ( X , (λ x → ν' (const-Pointed-Type _ A) x refl))
               ( id-equiv)
-              ( λ x → H (const _ _ (pt-Pointed-Type A)) x refl)
+              ( λ x → H (const-Pointed-Type _ A) x refl)
               ( ρ))
             ( map-equiv-symmetric-Id
               ( id-equiv)
-              ( X , (λ x → ν' (const _ _ (pt-Pointed-Type A)) x refl))
+              ( X , (λ x → ν' (const-Pointed-Type _ A) x refl))
               ( ρ')))
         ( is-contr-total-Eq-Π
           ( λ f ν' → (x : type-2-Element-Type X) → ν f x ~ ν' x)
@@ -143,23 +147,23 @@ module _
         ( ν , (λ f x p → refl))
         ( is-contr-equiv
           ( Σ ( symmetric-Id
-                ( X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl)))
+                ( X , (λ x → ν (const-Pointed-Type _ A) x refl)))
               ( Eq-symmetric-Id
-                ( X , λ x → ν (const _ _ (pt-Pointed-Type A)) x refl)
+                ( X , λ x → ν (const-Pointed-Type _ A) x refl)
                 ( ρ)))
           ( equiv-tot
             ( λ α →
               equiv-binary-tr
                 ( Eq-symmetric-Id
-                  ( X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl)))
+                  ( X , (λ x → ν (const-Pointed-Type _ A) x refl)))
                 ( refl-Eq-unordered-pair-tr-symmetric-Id
-                  ( X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl))
+                  ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
                   ( ρ))
                 ( id-equiv-symmetric-Id
-                  ( X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl))
+                  ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
                   ( α))))
           ( is-contr-total-Eq-symmetric-Id
-            ( X , (λ x → ν (const _ _ (pt-Pointed-Type A)) x refl))
+            ( X , (λ x → ν (const-Pointed-Type _ A) x refl))
             ( ρ))))
 
   htpy-eq-h-space-Involutive-Type :
