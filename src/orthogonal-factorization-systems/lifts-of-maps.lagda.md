@@ -10,6 +10,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.small-types
@@ -52,6 +53,101 @@ module _
   total-lift : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-lift X = Σ (X → B) lift
 ```
+
+## Operations
+
+### Vertical composition of lifts
+
+```md
+           A
+          ^|
+        /  i
+      g    |
+    /      v
+  X - f -> B
+    \      |
+      h    j
+       \   |
+         v v
+           C
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
+  {i : A → B} {j : B → C} {f : X → B} {h : X → C} {g : X → A}
+  where
+
+  is-lift-vertical-comp : is-lift i f g → is-lift j h f → is-lift (j ∘ i) h g
+  is-lift-vertical-comp F H x = H x ∙ ap j (F x)
+```
+
+### Horizontal composition of lifts
+
+```md
+  A - f -> B - g -> C
+    \      |      /
+      h    i    j
+        \  |  /
+         v v v
+           X
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  {f : A → B} {g : B → C} {h : A → X} {i : B → X} {j : C → X}
+  where
+
+  is-lift-horizontal-comp :
+    is-lift j i g → is-lift i h f → is-lift j h (g ∘ f)
+  is-lift-horizontal-comp J I x = I x ∙ J (f x)
+```
+
+## Left whiskering of lifts
+
+```md
+           A
+          ^|
+        /  i
+      g    |
+    /      v
+  X - f -> B - h -> S
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {S : UU l4}
+  {i : A → B} {f : X → B} {g : X → A}
+  where
+
+  is-lift-left-whisker : (h : B → S) → is-lift i f g → is-lift (h ∘ i) (h ∘ f) g
+  is-lift-left-whisker h H x = ap h (H x)
+```
+
+
+## Right whiskering of lifts
+
+```md
+                    A
+                   ^|
+                 /  i
+               g    |
+             /      v
+  S - h -> X - f -> B
+```
+
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {S : UU l4}
+  {i : A → B} {f : X → B} {g : X → A}
+  where
+
+  is-lift-right-whisker : is-lift i f g → (h : S → X) → is-lift i (f ∘ h) (g ∘ h)
+  is-lift-right-whisker H h s = H (h s)
+```
+
 
 ## Properties
 
