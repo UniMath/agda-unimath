@@ -117,7 +117,6 @@ module _
   is-equiv-is-local-domains is-local-Y = is-equiv-is-local-domains' (pr1 is-local-Y)
 ```
 
-
 ## Examples
 
 ### All type families are local at equivalences
