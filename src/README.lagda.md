@@ -823,12 +823,14 @@ open import set-theory.uncountable-sets
 open import structured-types
 open import structured-types.central-h-spaces
 open import structured-types.coherent-h-spaces
+open import structured-types.constant-maps-pointed-types
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.faithful-pointed-maps
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.involutive-types
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-coherent-h-spaces
@@ -842,6 +844,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
+open import structured-types.symmetric-elements-involutive-types
 open import structured-types.symmetric-h-spaces
 open import structured-types.types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
