@@ -117,10 +117,10 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  is-lifting-square-diagonal : (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
-  pr1 (pr1 (is-lifting-square-diagonal j)) = refl-htpy
-  pr2 (pr1 (is-lifting-square-diagonal j)) = refl-htpy
-  pr2 (is-lifting-square-diagonal j) = refl-htpy
+  is-lifting-square-spine : (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
+  pr1 (pr1 (is-lifting-square-spine j)) = refl-htpy
+  pr2 (pr1 (is-lifting-square-spine j)) = refl-htpy
+  pr2 (is-lifting-square-spine j) = refl-htpy
 ```
 
 ### Extensions as lifting squares
