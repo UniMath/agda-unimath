@@ -89,9 +89,9 @@ module _
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
   
-  _∘ext_ :
+  is-extension-vertical-comp :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
-  (H ∘ext G) x = G x ∙ H (i x)
+  is-extension-vertical-comp H G x = G x ∙ H (i x)
 ```
 
 ### Horizontal composition of extensions
@@ -106,12 +106,15 @@ module _
 ```
 
 ```agda
-_∙ext_ :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {P : C → UU l4}
   {f : A → B} {g : A → C} {h : (x : A) → P (g x)}
   {i : B → C} {j : (z : C) → P z}
-  (I : is-extension f g i) → is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
-_∙ext_ {P = P} {j = j} I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
+  where
+  
+  is-extension-horizontal-comp :
+    (I : is-extension f g i) → is-extension g h j → is-extension f (λ x → tr P (I x) (h x)) (j ∘ i)
+  is-extension-horizontal-comp I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
 ### Left whiskering of extensions
@@ -126,12 +129,15 @@ _∙ext_ {P = P} {j = j} I J x = ap (tr P (I x)) (J x) ∙ apd j (I x)
 ```
 
 ```agda
-_∙l-ext_ :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {P : C → UU l4}
   {i : A → B} {f : A → C} {g : B → C}
-  (h : (x : C) → P x) (F : is-extension i f g) →
-  (is-extension i (λ x → tr P (F x) (h (f x))) (h ∘ g))
-h ∙l-ext F = apd h ∘ F
+  where
+
+  is-extension-left-whisker :
+    (h : (x : C) → P x) (F : is-extension i f g) →
+    (is-extension i (λ x → tr P (F x) (h (f x))) (h ∘ g))
+  is-extension-left-whisker h F = apd h ∘ F
 ```
 
 ### Right whiskering of extensions
@@ -146,12 +152,15 @@ h ∙l-ext F = apd h ∘ F
 ```
 
 ```agda
-_∙r-ext_ :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {P : B → UU l3} {X : UU l4}
   {i : A → B} {f : (x : A) → P (i x)} {g : (y : B) → P y} 
-  (F : is-extension i f g) (h : X → A) →
-  (is-extension (i ∘ h) (f ∘ h) g)
-F ∙r-ext h = F ∘ h
+  where
+
+  is-extension-right-whisker :
+    (F : is-extension i f g) (h : X → A) →
+    (is-extension (i ∘ h) (f ∘ h) g)
+  is-extension-right-whisker F h = F ∘ h
 ```
 
 ## Properties
