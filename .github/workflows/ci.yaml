@@ -63,7 +63,6 @@ jobs:
 
       - name: Save Agda build cache
         uses: actions/cache/save@v3
-        if: ${{ always() }}
         with:
           path: main/_build
           key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
