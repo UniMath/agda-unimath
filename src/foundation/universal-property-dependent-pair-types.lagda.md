@@ -19,14 +19,13 @@ The universal property of dependent pair types gives us a characterization of ma
 ## Theorem
 
 ```agda
-abstract
-  is-equiv-ev-pair :
-    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
-    is-equiv (ev-pair {C = C})
-  pr1 (pr1 is-equiv-ev-pair) = ind-Σ
-  pr2 (pr1 is-equiv-ev-pair) = refl-htpy
-  pr1 (pr2 is-equiv-ev-pair) = ind-Σ
-  pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
+is-equiv-ev-pair :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  is-equiv (ev-pair {C = C})
+pr1 (pr1 is-equiv-ev-pair) = ind-Σ
+pr2 (pr1 is-equiv-ev-pair) = refl-htpy
+pr1 (pr2 is-equiv-ev-pair) = ind-Σ
+pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
 
 equiv-ev-pair :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
