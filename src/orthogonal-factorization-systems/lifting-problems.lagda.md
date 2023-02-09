@@ -121,7 +121,7 @@ module _
   pr2 (is-lifting-square-spine j) = refl-htpy
 ```
 
-### Extensions as lifting squares
+### Extensions as lifting problems
 
 Extensions can be canonically interpreted as lifting squares where the terminal vertex is the terminal type.
 
@@ -188,7 +188,7 @@ module _
   pr2 equiv-extension-lifting-square = is-equiv-map-extension-lifting-square
 ```
 
-### Lifts as lifting squares
+### Lifts as lifting problems
 
 Lifts can be canonically interpreted as lifting squares where the initial vertex is the initial type.
 
