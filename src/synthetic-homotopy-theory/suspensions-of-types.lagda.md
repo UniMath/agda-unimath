@@ -14,6 +14,7 @@ open import foundation.functions
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport
@@ -191,25 +192,47 @@ module _
   is-refl-refl-htpy-suspension-structure : refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
   is-refl-refl-htpy-suspension-structure = refl
 
+module _
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} {c : suspension-structure X Z}
+  where
+
   ind-htpy-suspension-structure :
-     {l : Level} (P : (c' : suspension-structure X Z) → (htpy-suspension-structure c c') → UU l) → (P c refl-htpy-suspension-structure) → (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') → P c' H 
-  ind-htpy-suspension-structure P t c' H = tr (ind-Σ P) (eq-pair-Σ (eq-htpy-suspension-structure H) {!!}) t
+    {l : Level} (P : (c' : suspension-structure X Z) → (htpy-suspension-structure c c') → UU l) →
+    (P c refl-htpy-suspension-structure) → ((c' : suspension-structure X Z) (H : htpy-suspension-structure c c') → P c' H)
+  ind-htpy-suspension-structure P = pr1 (Ind-identity-system c refl-htpy-suspension-structure
+      (is-contr-equiv (Σ (suspension-structure X Z) (λ c' → c ＝ c'))
+        (inv-equiv (equiv-tot (λ c' → extensionality-suspension-structure c c')))
+        (is-contr-total-path c)) P)
 ```
 
 #### The action of paths of the projections have the expected effect
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c c' : suspension-structure X Z) 
+  {l1 l2 : Level} {X : UU l1} {Z : UU l2} (c : suspension-structure X Z) 
   where
 
-
   ap-pr1-eq-htpy-suspension-structure :
-    (H : htpy-suspension-structure c c') → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H)
-  ap-pr1-eq-htpy-suspension-structure H = {!!}
+    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
+    (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H)
+  ap-pr1-eq-htpy-suspension-structure =
+    ind-htpy-suspension-structure
+      (λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
+      ((ap (λ t → ap pr1 t) (isretr-map-inv-equiv (extensionality-suspension-structure c c) refl)))
+
+  ap-pr1∘pr2-eq-htpy-suspension-structure :
+    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
+    (ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H)) ＝ ((pr1 ∘ pr2) H)
+  ap-pr1∘pr2-eq-htpy-suspension-structure =
+    ind-htpy-suspension-structure
+      (λ c' H → ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
+      (ap (λ t → ap (pr1 ∘ pr2) t) (isretr-map-inv-equiv (extensionality-suspension-structure c c) refl))
+
+  ap-pr2∘pr2-eq-htpy-suspension-structure :
+    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
+    (apd (pr2 ∘ pr2) (eq-htpy-suspension-structure H)) ＝ {!!}
+  ap-pr2∘pr2-eq-htpy-suspension-structure = {!!}
 ```
-    (p : pr1 c ＝ pr1 c') {q : (pr1 ∘ pr2) c ＝ (pr1 ∘ pr2) c'}
-    {H : (x : X) → ( merid-suspension-structure c x ∙ q ) ＝ ( p ∙ merid-suspension-structure c' x )}
 
 ### The universal property of the suspension as a pushout
 
