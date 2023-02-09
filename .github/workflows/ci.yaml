@@ -74,13 +74,6 @@ jobs:
       matrix:
         agda: [ '2.6.3' ]
     needs: typecheck
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
