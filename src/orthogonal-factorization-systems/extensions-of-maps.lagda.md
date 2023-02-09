@@ -17,6 +17,8 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.propositions
+open import foundation.sets
 open import foundation.small-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -206,6 +208,24 @@ module _
       ( (y : B) → P y)
       ( compute-total-extension i P)
       ( is-trunc-Π k is-trunc-P)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  where
+
+  is-contr-is-extension :
+    {P : B → UU l3} (f : (x : A) → P (i x)) →
+    ((x : A) → is-prop (P (i x))) →
+    (g : (x : B) → P x) → is-contr (is-extension i f g)
+  is-contr-is-extension f is-prop-P g =
+    is-contr-Π λ x → is-prop-P x (f x) (g (i x))
+
+  is-prop-is-extension :
+    {P : B → UU l3} (f : (x : A) → P (i x)) →
+    ((x : A) → is-set (P (i x))) →
+    (g : (x : B) → P x) → is-prop (is-extension i f g)
+  is-prop-is-extension f is-set-P g =
+    is-prop-Π λ x → is-set-P x (f x) (g (i x))
 ```
 
 ### Characterizing extensions in terms of the precomposition function
