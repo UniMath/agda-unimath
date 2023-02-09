@@ -54,6 +54,7 @@ jobs:
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
+            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
             
       - name: Typecheck the whole formalisation
         run: |
@@ -102,7 +103,8 @@ jobs:
           key: ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{ hashFiles('main/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-            
+            ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
+
       - name: Generate HTML
         id: gen-html
         run: |
