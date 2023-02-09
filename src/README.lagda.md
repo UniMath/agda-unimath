@@ -540,6 +540,7 @@ open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.geometric-realizations-undirected-graphs
 open import graph-theory.hypergraphs
 open import graph-theory.matchings
 open import graph-theory.mere-equivalences-undirected-graphs
@@ -549,6 +550,7 @@ open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
+open import graph-theory.reflecting-maps-undirected-graphs
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
@@ -831,6 +833,7 @@ open import structured-types.faithful-pointed-maps
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.involutive-type-of-h-space-structures
 open import structured-types.involutive-types
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
