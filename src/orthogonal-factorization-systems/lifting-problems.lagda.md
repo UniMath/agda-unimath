@@ -1,28 +1,24 @@
 ---
-title: Lifts of maps
+title: Lifting problems
 ---
 
 ```agda
 module orthogonal-factorization-systems.lifting-problems where
 
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.commuting-squares
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.homotopies
-open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.universe-levels
-open import foundation.universal-property-empty-type
 open import foundation.unit-type
-
+open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifts-of-maps
@@ -60,8 +56,8 @@ diagram
 
 commutes. This we phrase as `j` being a simultaneous
 extension of `h` along `f` and lift of `i` along `g`,
-satisfying a coherence with the original commutativity
-proof.
+satisfying a higher coherence with the original
+commutativity proof.
 
 ## Definition
 
@@ -97,6 +93,8 @@ module _
 ```
 
 ## Properties
+
+### A diagonal map gives rise to a lifting square
 
 The diagram
 
@@ -146,8 +144,8 @@ module _
   map-lifting-square-extension : extension f (λ _ → B) h → lifting-square h f (λ _ → star) (λ _ → star) refl-htpy
   pr1 (map-lifting-square-extension (j , H)) = j
   pr1 (pr1 (pr2 (map-lifting-square-extension (j , H)))) = H
-  pr2 (pr1 (pr2 (map-lifting-square-extension (j , H)))) = refl-htpy
-  pr2 (pr2 (map-lifting-square-extension (j , H))) _ = eq-is-contr (is-prop-unit star star)
+  pr2 (pr1 (pr2 (map-lifting-square-extension _))) = refl-htpy
+  pr2 (pr2 (map-lifting-square-extension _)) _ = eq-is-contr (is-prop-unit star star)
 
   isretr-map-lifting-square-extension :
     ((map-extension-lifting-square h f (λ _ → star) (λ _ → star) refl-htpy) ∘ map-lifting-square-extension) ~ id
@@ -212,9 +210,9 @@ module _
 
   map-lifting-square-lift : lift g i → lifting-square ex-falso ex-falso g i ind-empty
   pr1 (map-lifting-square-lift (j , H)) = j
-  pr1 (pr1 (pr2 (map-lifting-square-lift (j , H)))) = ind-empty
+  pr1 (pr1 (pr2 (map-lifting-square-lift _))) = ind-empty
   pr2 (pr1 (pr2 (map-lifting-square-lift (j , H)))) = H
-  pr2 (pr2 (map-lifting-square-lift (j , H))) = ind-empty
+  pr2 (pr2 (map-lifting-square-lift _)) = ind-empty
 
   isretr-map-lifting-square-lift :
     ((map-lift-lifting-square ex-falso ex-falso g i ind-empty) ∘ map-lifting-square-lift) ~ id
