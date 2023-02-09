@@ -830,6 +830,7 @@ open import structured-types.faithful-pointed-maps
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.involutive-type-of-h-space-structures
 open import structured-types.involutive-types
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
