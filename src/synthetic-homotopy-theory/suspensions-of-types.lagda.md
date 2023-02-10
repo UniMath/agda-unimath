@@ -487,14 +487,11 @@ module _
                   ( equiv-up-suspension
                     ( type-Pointed-Type X)
                     ( type-Pointed-Type Y)))))))))
-
-  pointed-equiv-susp-loop-adj :  [(suspension-Pointed-Type X) →* Y ]  ≃* [ X →* (Ω Y) ]
-  pointed-equiv-susp-loop-adj = {!!}
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed
 
-[To Do]
+[To do]
 
 ### The suspension of a contractible type is contractible
 
