@@ -105,29 +105,28 @@ tr-function-type B C refl f = refl
 #### This implies implies a charaterization of dependent paths in a family of function types
 
 ```agda
-extensionality-path-over-function-type :
+module _
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (C : A → UU l3)
-  (p : a0 ＝ a1) {f : B a0 → C a0} {g : B a1 → C a1} →
-  (path-over (λ a → B a → C a) p f g) ≃ (((tr C p) ∘ f) ~ (g ∘ (tr B p)))
-extensionality-path-over-function-type {a1 = a1} B C p {f = f} {g = g} =
-  equiv-funext ∘e
-  ((inv-equiv (equiv-concat (eq-htpy (λ a → ap (λ t → tr C p (f t)) (isretr-inv-tr B p a))) (g ∘ (tr B p)))) ∘e
-  ((equiv-ap (equiv-precomp (equiv-tr B p ) (C a1)) (λ x → tr C p (f (tr B (inv p) x))) g) ∘e
-  (inv-equiv (equiv-concat (tr-function-type B C p f) g))))
+  (p : a0 ＝ a1) {f : B a0 → C a0} {g : B a1 → C a1}
+  where
+  
+  compute-path-over-function-type :
+    (((tr C p) ∘ f) ~ (g ∘ (tr B p))) ≃ (path-over (λ a → B a → C a) p f g)
+  compute-path-over-function-type =
+    equiv-concat (tr-function-type B C p f) g ∘e
+    ((equiv-concat' ((tr C p ∘ f) ∘ tr B (inv p)) (eq-htpy (λ a → (ap g (issec-inv-tr B p a))))) ∘e
+    ((equiv-ap (equiv-precomp (equiv-tr B (inv p) ) (C a1)) ((tr C p) ∘ f) (g ∘ (tr B p))) ∘e
+    equiv-eq-htpy))
 
-coh-sq-path-over-function-type :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (C : A → UU l3)
-  (p : a0 ＝ a1) {f : B a0 → C a0} {g : B a1 → C a1} →
-  (path-over (λ a → B a → C a) p f g) → (((tr C p) ∘ f) ~ (g ∘ (tr B p)))
-coh-sq-path-over-function-type B C p =
-  map-equiv (extensionality-path-over-function-type B C p)
+  path-over-function-type-coh-sq : 
+    (((tr C p) ∘ f) ~ (g ∘ (tr B p))) → (path-over (λ a → B a → C a) p f g)
+  path-over-function-type-coh-sq =
+    map-equiv compute-path-over-function-type
 
-path-over-function-type-coh-sq :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (C : A → UU l3)
-  (p : a0 ＝ a1) {f : B a0 → C a0} {g : B a1 → C a1} →
-  (((tr C p) ∘ f) ~ (g ∘ (tr B p))) → (path-over (λ a → B a → C a) p f g)
-path-over-function-type-coh-sq B C p =
-  map-inv-equiv (extensionality-path-over-function-type B C p)
+  coh-sq-path-over-function-type :
+    (path-over (λ a → B a → C a) p f g) → (((tr C p) ∘ f) ~ (g ∘ (tr B p)))
+  coh-sq-path-over-function-type =
+    map-inv-equiv compute-path-over-function-type
 ```
 
 ### Transport in identity types
@@ -156,22 +155,28 @@ tr-fx＝gx f g p q = inv (tr-eq-pair-diagonal (λ z → f (pr1 z) ＝ g (pr2 z))
 #### This implies a characterization of dependent paths in a family of identity types
 
 ```agda
-extensionality-path-over-fx＝gx :
+module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
-  {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
-  ((tr (λ x → f x ＝ g x) p q) ＝ q') ≃ ((q ∙ (ap g p)) ＝ ((ap f p) ∙ q'))
-extensionality-path-over-fx＝gx f g p q q' =
-  equiv-concat' (q ∙ ap g p)  (ap (λ t → t ∙ q') (inv-inv (ap f p))) ∘e
-  ((equiv-inv-con (inv (ap f p)) (q ∙ ap g p) q') ∘e
-  ((equiv-concat (inv (assoc  (inv (ap f p)) q (ap g p))) q') ∘e
-  (equiv-concat (inv (tr-fx＝gx f g p q)) q')))
+  {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1)
+  where
+  
+  compute-path-over-eq-value :
+    ((tr (eq-value f g) p q) ＝ q') ≃ ((q ∙ (ap g p)) ＝ ((ap f p) ∙ q'))
+  compute-path-over-eq-value =
+    equiv-concat' (q ∙ ap g p)  (ap (λ t → t ∙ q') (inv-inv (ap f p))) ∘e
+    ((equiv-inv-con (inv (ap f p)) (q ∙ ap g p) q') ∘e
+    ((equiv-concat (inv (assoc  (inv (ap f p)) q (ap g p))) q') ∘e
+    (equiv-concat (inv (tr-fx＝gx  f g p q)) q')))
 
-nat-sq-path-over-fx＝gx :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
-  {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
-  ((tr (λ x → f x ＝ g x) p q) ＝ q') → ((q ∙ (ap g p)) ＝ ((ap f p) ∙ q'))
-nat-sq-path-over-fx＝gx f g p q q' =
-  map-equiv (extensionality-path-over-fx＝gx f g p q q')
+  nat-sq-path-over-eq-value :
+    ((tr (eq-value f g) p q) ＝ q') → ((q ∙ (ap g p)) ＝ ((ap f p) ∙ q'))
+  nat-sq-path-over-eq-value =
+    map-equiv compute-path-over-eq-value
+
+  path-over-eq-value-nat-sq :
+    ((q ∙ (ap g p)) ＝ ((ap f p) ∙ q')) → ((tr (eq-value f g) p q) ＝ q')
+  path-over-eq-value-nat-sq =
+    map-inv-equiv compute-path-over-eq-value
 ```
 
 ### Transport in the family of loops
