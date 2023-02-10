@@ -8,12 +8,20 @@ module foundation.axiom-of-choice where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-types
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.projective-types
 open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -51,7 +59,27 @@ AC-0 l1 l2 =
 
 ```agda
 is-set-projective-AC-0 :
-  {l1 l2 l3 : Level} → AC-0 l2 (l1 ⊔ l2) → (X : UU l3) → is-set-projective l1 l2 X
+  {l1 l2 l3 : Level} → AC-0 l2 (l1 ⊔ l2) →
+  (X : UU l3) → is-set-projective l1 l2 X
 is-set-projective-AC-0 ac X A B f h =
-  map-trunc-Prop {!!} (ac B (fib f) {!!})
+  map-trunc-Prop
+    ( ( map-Σ
+        ( λ g → ((map-surjection f) ∘ g) ＝ h)
+        ( precomp h A)
+        ( λ s H → eq-htpy (H ·r h))) ∘
+      ( map-compute-sec (map-surjection f)))
+    ( ac B (fib (map-surjection f)) (is-surjective-map-surjection f))
+
+AC-0-is-set-projective :
+  {l1 l2 : Level} →
+  ({l : Level} (X : UU l) → is-set-projective (l1 ⊔ l2) l1 X) →
+  AC-0 l1 l2
+AC-0-is-set-projective H A B K =
+  map-trunc-Prop
+    ( map-equiv (equiv-Π-sec-pr1 {B = B}) ∘ tot (λ g → htpy-eq))
+    ( H ( type-Set A)
+        ( Σ (type-Set A) B)
+        ( A)
+        ( pr1 , (λ a → map-trunc-Prop (map-inv-fib-pr1 B a) (K a)))
+        ( id))
 ```

@@ -42,7 +42,8 @@ The notion of set-projectiveness generalizes to `n`-projectiveness, for `n : ℕ
 is-set-projective :
   {l1 : Level} (l2 l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 is-set-projective l2 l3 X =
-  (A : UU l2) (B : Set l3) (f : A → type-Set B) → is-surjective (postcomp X f)
+  (A : UU l2) (B : Set l3) (f : A ↠ type-Set B) →
+  is-surjective (postcomp X (map-surjection f))
 ```
 
 ### `k`-projective types
