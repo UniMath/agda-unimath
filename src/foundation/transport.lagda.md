@@ -102,7 +102,7 @@ tr-function-type :
 tr-function-type B C refl f = refl
 ```
 
-### Transport in families of identity types
+### Transport in identity types
 
 ```agda
 tr-fx＝gy :
