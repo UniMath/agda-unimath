@@ -227,11 +227,6 @@ module _
     ind-htpy-suspension-structure
       (λ c' H → ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
       (ap (λ t → ap (pr1 ∘ pr2) t) (isretr-map-inv-equiv (extensionality-suspension-structure c c) refl))
-
-  ap-pr2∘pr2-eq-htpy-suspension-structure :
-    (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
-    (apd (pr2 ∘ pr2) (eq-htpy-suspension-structure H)) ＝ {!!}
-  ap-pr2∘pr2-eq-htpy-suspension-structure = {!!}
 ```
 
 ### The universal property of the suspension as a pushout
@@ -381,32 +376,6 @@ module _
       ( ( up-suspension-N-susp Z c) ,
         ( ( up-suspension-S-susp Z c) ,
           ( up-suspension-merid-susp Z c)))
-
-
-testing : 
-    {l1 l2 : Level} (X : Pointed-Type l1) (Z : Pointed-Type l2) →
-    (ev-suspension (suspension-structure-suspension (type-Pointed-Type X)) (type-Pointed-Type Z) (const _ _ (pt-Pointed-Type Z))) ＝ (((pt-Pointed-Type Z) , ((pt-Pointed-Type Z) , ((const (type-Pointed-Type X) (type-Ω Z) refl)))))
-testing X Z = eq-htpy-suspension-structure (refl , (refl , (λ x → ap (λ t → t ∙ refl) ({!!} (pt-Pointed-Type Z) (merid-susp x)))))    
-
-pointed-equiv-up-suspension :
-    {l1 l2 : Level} (X : Pointed-Type l1) (Z : Pointed-Type l2) →
-    [ (suspension-Pointed-Type X) →* Z ] ≃*
-      (Σ (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Z)) (λ c → pr1 c ＝ (pt-Pointed-Type Z)),
-        ((pt-Pointed-Type Z) , ((pt-Pointed-Type Z) , ((const (type-Pointed-Type X) (type-Ω Z) refl)))) , refl)
-pr1 (pointed-equiv-up-suspension X Z) = equiv-Σ (λ c → pr1 c ＝ pt-Pointed-Type Z)
-                                          (equiv-up-suspension (type-Pointed-Type X) (type-Pointed-Type Z)) (λ f → id-equiv)
-pr2 (pointed-equiv-up-suspension X Z) = eq-pair-Σ (eq-htpy-suspension-structure (refl , (refl , (λ x → ap (λ t → t ∙ refl) ({!ap-const!} (pt-Pointed-Type Z) (merid-susp x)))))) (inv (tr-ap pr1  (λ x → id) (eq-htpy-suspension-structure
-       (refl ,
-        refl ,
-        (λ x →
-           ap (λ t → t ∙ refl)
-           ({!!} (pr2 Z) (merid-susp x))))) refl) ∙ ((tr-Id-left (ap pr1
-       (eq-htpy-suspension-structure
-        (refl ,
-         refl ,
-         (λ x →
-            ap (λ t → t ∙ refl)
-            (  {!!}(pr2 Z) (merid-susp x)))))) refl) ∙ {!!}))
 ```
 
 ### The suspension-loop space adjunction
@@ -525,26 +494,7 @@ module _
 
 #### The equivalence in the suspension-loop space adjunction is pointed
 
-```agda
-module _
-  {l1 l2 : Level} (X : UU l1) (x0 : X) (Y : UU l2) (y0 : Y)
-  (f : (suspension X) → Y) (f0 : (f N-susp) ＝ y0)
-  (g : X → type-Ω (Y , y0)) (g0 : (g x0) ＝ refl {x = y0})
-  where
-
-  test : UU (l1 ⊔ l2)
-  test = {!map-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (f , f0)!}
-
-  test' : UU (l1 ⊔ l2)
-  test' = {!map-inv-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (g , g0)!}
-
-  test'' : UU (l1 ⊔ l2)
-  test'' = (x : X) → ((map-pointed-map _ _ (map-equiv (equiv-susp-loop-adj (X , x0) (Y , y0)) (const (suspension X) Y y0 , refl)) x) ＝ refl)
-
-  test''' : test''
-  test''' x = {!refl!}
-```
-
+[To Do]
 
 ### The suspension of a contractible type is contractible
 
