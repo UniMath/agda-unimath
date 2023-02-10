@@ -24,6 +24,7 @@ open import graph-theory.equivalences-undirected-graphs public
 open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
 open import graph-theory.finite-graphs public
+open import graph-theory.geometric-realizations-undirected-graphs public
 open import graph-theory.hypergraphs public
 open import graph-theory.matchings public
 open import graph-theory.mere-equivalences-undirected-graphs public
@@ -33,6 +34,7 @@ open import graph-theory.neighbors-undirected-graphs public
 open import graph-theory.orientations-undirected-graphs public
 open import graph-theory.paths-undirected-graphs public
 open import graph-theory.polygons public
+open import graph-theory.reflecting-maps-undirected-graphs public
 open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public
 open import graph-theory.simple-undirected-graphs public

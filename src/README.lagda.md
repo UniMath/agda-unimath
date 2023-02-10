@@ -4,11 +4,11 @@ title: Univalent mathematics in Agda
 
 Welcome to the website of the `agda-unimath` formalization project.
 
-[![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![pages-build-deployment](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages/pages-build-deployment)
+[![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml) [![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
 
 The `agda-unimath` library is a new formalisation project for univalent mathematics in Agda. Our goal is to formalize an extensive curriculum of mathematics from the univalent point of view. Furthermore, we think libraries of formalized mathematics have the potential to be useful, and informative resources for mathematicians. Our library is designed to work towards this goal, and we welcome contributions to the library about any topic in mathematics.
 
-The library is built in Agda 2.6.2. It can be compiled by running `make check` from the main folder of the repository.
+The library is built in Agda 2.6.3. It can be compiled by running `make check` from the main folder of the repository.
 
 ## Joining the project
 
@@ -540,6 +540,7 @@ open import graph-theory.equivalences-undirected-graphs
 open import graph-theory.eulerian-circuits-undirected-graphs
 open import graph-theory.faithful-morphisms-undirected-graphs
 open import graph-theory.finite-graphs
+open import graph-theory.geometric-realizations-undirected-graphs
 open import graph-theory.hypergraphs
 open import graph-theory.matchings
 open import graph-theory.mere-equivalences-undirected-graphs
@@ -549,6 +550,7 @@ open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.orientations-undirected-graphs
 open import graph-theory.paths-undirected-graphs
 open import graph-theory.polygons
+open import graph-theory.reflecting-maps-undirected-graphs
 open import graph-theory.reflexive-graphs
 open import graph-theory.regular-undirected-graphs
 open import graph-theory.simple-undirected-graphs
@@ -823,12 +825,15 @@ open import set-theory.uncountable-sets
 open import structured-types
 open import structured-types.central-h-spaces
 open import structured-types.coherent-h-spaces
+open import structured-types.constant-maps-pointed-types
 open import structured-types.contractible-pointed-types
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.faithful-pointed-maps
 open import structured-types.fibers-of-pointed-maps
 open import structured-types.finite-multiplication-magmas
 open import structured-types.initial-pointed-type-equipped-with-automorphism
+open import structured-types.involutive-type-of-h-space-structures
+open import structured-types.involutive-types
 open import structured-types.magmas
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
 open import structured-types.morphisms-coherent-h-spaces
@@ -842,6 +847,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
+open import structured-types.symmetric-elements-involutive-types
 open import structured-types.symmetric-h-spaces
 open import structured-types.types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-endomorphisms
