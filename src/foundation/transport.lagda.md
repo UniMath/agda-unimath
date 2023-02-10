@@ -105,7 +105,7 @@ tr-function-type B C refl f = refl
 #### This implies implies a charaterization of dependent paths in a family of function types
 
 ```agda
-{- CLEAN THIS UP with Bonnevier's pr -}
+
 extensionality-path-over-function-type :
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} (B : A → UU l2) (C : A → UU l3)
   (p : a0 ＝ a1) {f : B a0 → C a0} {g : B a1 → C a1} →
@@ -131,7 +131,7 @@ path-over-function-type-coh-sq B C p =
   map-inv-equiv (extensionality-path-over-function-type B C p)
 ```
 
-### Transport in families of equalities
+### Transport in families of identity types
 
 ```agda
 tr-fx＝gy :
@@ -154,7 +154,7 @@ tr-fx＝gx :
 tr-fx＝gx f g p q = inv (tr-eq-pair-diagonal (λ z → f (pr1 z) ＝ g (pr2 z)) p q) ∙ (tr-fx＝gy f g p p q)
 ```
 
-#### This implies a characterization of dependent paths in a family of function types
+#### This implies a characterization of dependent paths in a family of identity types
 
 ```agda
 extensionality-path-over-fx＝gx :
