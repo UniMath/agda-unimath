@@ -241,6 +241,10 @@ Our naming conventions are not to ensure the shortest possible names, and neithe
 * If a symbol is not available, the concept is described in words or abbreviated words. For example, the equality symbol = is not available to the user to assert an equality. Hence, we write Id x y to assert equality, referring to the identity type, and we do not use a new symbol.
 * The readability of the code has a high priority. Therefore we try to avoid subtly different variations of the same symbol.
 
+- The naming scheme for the underlying type of a structured type is `type-"Name of the structured type"`. For example, the underlying type of the set `hom-C X Y` of morphisms from `X` to `Y` in a category `C` is `type-hom-C X Y`.
+- The naming scheme for the underlying map of a structured map is `map-"Name of the structured map"`. For example, the underlying map of an equivalence `e` is `map-e`.
+- Equivalences that are thought of as computing a certain type are called `compute-"Name of what they compute"`. Typically, we want this equivalence to go in the direction from the computed value to the type being computed. This is for practical purposes: the computed value of a type is often simpler and we want to use it to construct elements in the type that is being computed. This use case suggests the direction of the equivalence.
+
 #### Indentation
 
 * The contents of a top-level module should have zero indentation.

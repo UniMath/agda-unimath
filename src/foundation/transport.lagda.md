@@ -115,11 +115,6 @@ tr-x＝y :
   (p : a0 ＝ a1) (q : a2 ＝ a3) (s : a0 ＝ a2) → 
   (tr (λ z → (pr1 z) ＝ (pr2 z)) (eq-pair p q) s) ＝ ((inv p) ∙ (s ∙ q))
 tr-x＝y refl refl s = inv right-unit
-
-tr-fx＝gx :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
-  {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) → (tr (λ x → f x ＝ g x) p q) ＝((inv (ap f p) ∙ q) ∙ (ap g p))
-tr-fx＝gx f g p q = inv (tr-eq-pair-diagonal (λ z → f (pr1 z) ＝ g (pr2 z)) p q) ∙ (tr-fx＝gy f g p p q)
 ```
 
 ### Transport in the family of loops
